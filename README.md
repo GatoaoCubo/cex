@@ -1,9 +1,13 @@
-# CEX - Cerebro Empresarial X
+# CEX — Cerebro Empresarial X
 
-Framework universal de cerebro empresarial com 12 Leverage Points.
-Cada arquivo neste repo e um Record denso, validado, dual-output.
+> Framework universal para organizar conhecimento de AI em 12 Leverage Points.
 
-**Estado**: Wave 5/6 | 12 LPs | 68 tipos | 18 exemplos | 7 templates | 12 generators
+![version](https://img.shields.io/badge/version-v1.0.0-blue)
+![LPs](https://img.shields.io/badge/LPs-12-green)
+![density](https://img.shields.io/badge/density-88.6%25-brightgreen)
+![license](https://img.shields.io/badge/license-MIT-lightgrey)
+
+**Estado**: v1.0.0 COMPLETE | 12 LPs | 68 tipos | 18 exemplos | 7 templates | 12 generators | 3 validators
 
 ---
 
@@ -14,8 +18,9 @@ Cada arquivo neste repo e um Record denso, validado, dual-output.
 | Leverage Points | 12 | P01-P12 todos ativos |
 | Schemas (_schema.yaml) | 12 | 68 tipos de artifact |
 | Generators (_generator.md) | 12 | Instrucoes por LP |
-| Templates | 7 | P01(3)+P02+P03+P04+P05 |
+| Templates | 7 | P01(3)+P02(1)+P03(1)+P04(1)+P05(1) |
 | Examples (golden) | 18 | P01(7)+P02(4)+P03(4)+P04(3) |
+| Validators | 3 | schema + generator + examples |
 | Total MD files | 46 | ~65KB |
 | Density media | 88.6% | Elite:6 High:12 Standard:0 |
 
@@ -26,14 +31,20 @@ Cada arquivo neste repo e um Record denso, validado, dual-output.
     cex/
     ├── _meta/                     # DNA do framework
     │   ├── CODEX.md              # Biblia de meta-construcao (comece aqui)
-    │   ├── DENSITY_REPORT.md     # Analise de densidade dos 18 examples
-    │   ├── GLOSSARY.md           # Termos e definicoes
-    │   ├── GOLDEN_CANDIDATES.md  # Fila de migracao do codexa-core (22 candidatos)
-    │   ├── MANDAMENTOS.md        # Regras imutaveis
+    │   ├── MANDAMENTOS.md        # 10 leis imutaveis
     │   ├── META_TEMPLATE.md      # Template que gera templates
-    │   ├── MIGRATION_MAP.md      # 9916 arquivos classificados por LP
+    │   ├── GLOSSARY.md           # Termos e definicoes
     │   ├── ROADMAP.md            # 6 ondas de desenvolvimento
-    │   └── VALIDATION_REPORT.md  # Resultados do chain test
+    │   ├── MIGRATION_MAP.md      # 9916 arquivos classificados por LP
+    │   ├── GOLDEN_CANDIDATES.md  # 22 candidatos de migracao
+    │   ├── DENSITY_REPORT.md     # Analise dos 18 examples
+    │   └── VALIDATION_REPORT.md  # Chain test pass (ATLAS)
+    ├── _docs/                     # Documentacao tecnica
+    │   └── ARCHITECTURE.md       # ASCII diagrams + LP map + data flow
+    ├── _tools/                    # Validators + CLI
+    │   ├── validate_schema.py    # Valida _schema.yaml files
+    │   ├── validate_generators.py # Valida _generator.md coverage
+    │   └── validate_examples.py  # Valida density + frontmatter
     ├── P01_knowledge/            # O que o agente SABE       (7 ex, 3 tpl)
     ├── P02_model/                # QUEM o agente EH          (4 ex, 1 tpl)
     ├── P03_prompt/               # COMO o agente FALA        (4 ex, 1 tpl)
@@ -45,7 +56,9 @@ Cada arquivo neste repo e um Record denso, validado, dual-output.
     ├── P09_config/               # COMO configura
     ├── P10_memory/               # O que LEMBRA
     ├── P11_feedback/             # COMO melhora
-    └── P12_orchestration/        # COMO coordena
+    ├── P12_orchestration/        # COMO coordena
+    ├── CHANGELOG.md              # Historico de versoes
+    └── CONTRIBUTING.md           # Guia de contribuicao
 
 Cada LP contem: `_schema.yaml` + `_generator.md` + `templates/` + `examples/`
 
@@ -58,7 +71,7 @@ Cada LP contem: `_schema.yaml` + `_generator.md` + `templates/` + `examples/`
     _meta/CODEX.md        # Variaveis, anatomia, naming, density tiers
     _meta/MANDAMENTOS.md  # O que nunca violar
 
-### 2. Escolha o LP certo
+### 2. Escolha o LP e leia o generator
 
 | Voce quer criar... | LP | Tipo |
 |--------------------|----|------|
@@ -71,28 +84,15 @@ Cada LP contem: `_schema.yaml` + `_generator.md` + `templates/` + `examples/`
 | Metrica de avaliacao | P07 | eval_metric |
 | Workflow de orquestracao | P12 | workflow |
 
-### 3. Leia o generator do LP
+### 3. Use o template, valide, contribua
 
-    P01_knowledge/_generator.md   # Passo-a-passo + anti-patterns
-    P02_model/_generator.md       # Estrutura de agent + exemplos
-    P03_prompt/_generator.md      # Tipos de prompt + templates prontos
-    P04_tools/_generator.md       # Skill anatomy + quality gates
+    # Copie o template do LP
+    cp P01_knowledge/templates/tpl_knowledge_card_domain.md meu_artifact.md
 
-### 4. Use o template como base
+    # Edite, preencha frontmatter, densidade >= 0.80
 
-    P01_knowledge/templates/tpl_knowledge_card_domain.md
-    P01_knowledge/templates/tpl_knowledge_card_meta.md
-    P02_model/templates/tpl_agent.md
-    P03_prompt/templates/tpl_prompt_template.md
-    P04_tools/templates/tpl_skill.md
-
-### 5. Regras de validacao
-
-- YAML frontmatter obrigatorio: `id`, `type`, `lp`, `quality`, `tags`, `tldr`
-- Density score >= 0.80 (declare `density_score` no YAML)
-- Naming: `{lp}_{type}_{topic}.md` ex: `p01_kc_ecommerce_br.md`
-- Max 4KB por arquivo (densidade > volume)
-- Prosa em blocos > 3 linhas: converter em bullets
+    # Valide
+    python _tools/validate_examples.py
 
 ---
 
@@ -108,4 +108,26 @@ Cada LP contem: `_schema.yaml` + `_generator.md` + `templates/` + `examples/`
 
 ---
 
-*v1.0.0 | Wave 5/6 | 2026-03-22 | Leia: _meta/CODEX.md*
+## Documentacao
+
+| Doc | Conteudo |
+|-----|---------|
+| [ARCHITECTURE.md](_docs/ARCHITECTURE.md) | ASCII diagrams, LP map, data flow, quality gates |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Como adicionar LPs, tipos, migrar, PR checklist |
+| [CHANGELOG.md](CHANGELOG.md) | Historico de 6 waves + creditos por satellite |
+| [_meta/CODEX.md](_meta/CODEX.md) | DNA completo, variaveis, anatomy, tiers |
+| [_meta/MANDAMENTOS.md](_meta/MANDAMENTOS.md) | 10 leis imutaveis |
+
+---
+
+## License
+
+MIT License — see [LICENSE](LICENSE) or use freely with attribution.
+
+    CEX v1.0.0 | Cerebro Empresarial X
+    Built with CODEXA satellites (STELLA + SHAKA + PYTHA + EDISON + ATLAS)
+    2026-03-22
+
+---
+
+*v1.0.0 | 2026-03-22 | Leia: _meta/CODEX.md*

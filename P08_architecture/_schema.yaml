@@ -10,7 +10,7 @@ types:
     constraints: {max_bytes: 2048}
 
   pattern:
-    description: Pattern reutilizavel (ex: continuous batching)
+    description: "Pattern reutilizavel (ex: continuous batching)"
     naming: p08_pat_{{name}}.md + .yaml
     constraints: {max_bytes: 2048}
 
