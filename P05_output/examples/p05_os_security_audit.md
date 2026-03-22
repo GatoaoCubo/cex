@@ -1,0 +1,87 @@
+---
+id: p05_os_security_audit
+type: output_schema
+lp: P05
+title: "Output Schema: Access Control Audit Report"
+version: 1.0.0
+created: 2026-03-22
+updated: 2026-03-22
+author: EDISON
+format: markdown
+quality: 9.5
+tags: [security, audit, output]
+tldr: "Structured security audit report with findings by severity, remediation roadmap, and OWASP compliance mapping"
+max_bytes: 8192
+density_score: 0.92
+source: codexa-core/records/agents/access_control_auditor/iso_vectorstore/ISO_ATLAS_007_OUTPUT_TEMPLATE.md
+linked_artifacts:
+  agent: p02_ag_access_control_auditor
+  schema: null
+---
+
+# Output Schema: Access Control Audit Report
+
+## Fields
+
+| Field | Type | Required | Example |
+|-------|------|----------|---------|
+| timestamp | string (ISO 8601) | yes | `2026-03-22T14:30:00Z` |
+| framework | string | yes | `FastAPI 0.104` |
+| total_findings | int | yes | `12` |
+| critical_count | int | yes | `2` |
+| high_count | int | yes | `3` |
+| overall_risk | enum(CRITICAL,HIGH,MEDIUM,LOW) | yes | `HIGH` |
+| findings | list[Finding] | yes | see below |
+| route_inventory | object | yes | protected/unprotected/public routes |
+| cwe_summary | list[CWE] | no | `[{id: "CWE-306", count: 2}]` |
+
+## Nested: Finding
+
+| Field | Type | Required | Example |
+|-------|------|----------|---------|
+| id | string | yes | `F001` |
+| severity | enum(CRITICAL,HIGH,MEDIUM,LOW,INFO) | yes | `CRITICAL` |
+| cwe | string | yes | `CWE-306` |
+| title | string | yes | `Missing Authentication on User Deletion` |
+| file | string | yes | `api/routes/users.js:23` |
+| vulnerable_code | string | yes | code snippet |
+| remediation_code | string | yes | fixed code snippet |
+| impact | string | yes | impact description |
+
+## Constraints
+
+- max_bytes: 8192
+- format: markdown (primary) + JSON export
+- encoding: utf-8
+- Findings grouped by severity (CRITICAL > HIGH > MEDIUM > LOW > INFO)
+- Each finding MUST include remediation code, not just description
+
+## Valid Example
+
+```json
+{
+  "metadata": {"timestamp": "2026-03-22T14:30:00Z", "framework": "FastAPI"},
+  "summary": {"total_findings": 3, "by_severity": {"critical": 1, "high": 1, "medium": 1}},
+  "findings": [
+    {"id": "F001", "severity": "CRITICAL", "cwe": "CWE-306",
+     "title": "Missing Auth on DELETE /users/:id",
+     "file": "api/routes/users.js:23",
+     "remediation_code": "app.delete('/users/:id', authenticate, authorize('admin'), handler)"}
+  ]
+}
+```
+
+## Invalid Example
+
+```json
+// FAILS: finding without remediation_code (required field)
+{"id": "F001", "severity": "CRITICAL", "title": "Missing Auth", "description": "needs fix"}
+```
+
+## Error Handling
+
+| Condition | Action | Return |
+|-----------|--------|--------|
+| No routes found in codebase | Warn + empty inventory | `{"findings": [], "warning": "no routes detected"}` |
+| Scan timeout (>240s) | Return partial results | partial report + `"status": "timeout"` |
+| Unrecognized framework | Fallback to generic scan | report with `"confidence": "T3"` |

@@ -1,0 +1,81 @@
+---
+id: p06_is_quality_audit
+type: input_schema
+lp: P06
+title: "Input Schema: Quality Audit Pipeline"
+version: 1.0.0
+created: 2026-03-22
+updated: 2026-03-22
+author: EDISON
+quality: 9.5
+tags: [quality, audit, input, contract]
+tldr: "Validates input parameters for the codebase quality audit pipeline (scope, threshold, scan options)"
+density_score: 0.90
+source: codexa-core/records/core/examples/blueprint_quality_audit.yaml
+linked_artifacts:
+  agent: p02_ag_qa_agent
+  output: p05_os_quality_report
+---
+
+# Input Schema: Quality Audit Pipeline
+
+## Fields
+
+| Field | Type | Required | Default | Constraints | Example |
+|-------|------|----------|---------|-------------|---------|
+| scope | string | yes | none | min_length: 1, must be valid path | `records/agents/` |
+| threshold | float | no | 7.0 | min: 0.0, max: 10.0 | `8.0` |
+| scan_type | enum | no | `full` | one_of: [full, quick, deep] | `full` |
+| exclude_patterns | list[string] | no | `[]` | valid glob patterns | `["*.test.*", "node_modules/"]` |
+| output_format | enum | no | `markdown` | one_of: [markdown, json, both] | `both` |
+
+## Step Contracts
+
+### Step 1: scan_files (code)
+
+| Direction | Field | Type | Source |
+|-----------|-------|------|--------|
+| input | scope | string | blueprint.params.scope |
+| output | file_list | list[string] | scan result |
+| output | file_stats | object | `{total: int, by_ext: {}}` |
+| output | total_lines | int | line count |
+
+### Step 2: analyze_quality (agent: qa-agent)
+
+| Direction | Field | Type | Source |
+|-----------|-------|------|--------|
+| input | files | list[string] | scan_files.file_list |
+| input | stats | object | scan_files.file_stats |
+| output | quality_issues | list[Issue] | analysis result |
+| output | per_file_scores | object | `{path: float}` |
+
+## Validation Rules
+
+1. If scope is empty or null: `"scope is required: provide directory or file path to audit"`
+2. If threshold < 0 or > 10: `"threshold must be between 0.0 and 10.0, got {value}"`
+3. If scope path does not exist: `"scope path not found: {scope}"`
+
+## Valid Input Example
+
+```yaml
+scope: records/agents/scout-agent/
+threshold: 8.0
+scan_type: full
+exclude_patterns: ["*.test.*"]
+output_format: both
+```
+
+## Invalid Input Example
+
+```yaml
+# FAILS: scope is empty string (required, min_length: 1)
+scope: ""
+threshold: 15.0  # FAILS: max is 10.0
+```
+
+## Upstream/Downstream
+
+| Direction | Component | Protocol |
+|-----------|-----------|----------|
+| upstream | STELLA handoff | handoff file (.md) |
+| downstream | qa-agent | blueprint step chain |
