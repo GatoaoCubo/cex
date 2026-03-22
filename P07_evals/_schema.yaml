@@ -1,0 +1,35 @@
+# P07 Evals Schema
+lp: P07
+name: Evals
+description: COMO medir qualidade
+
+types:
+  unit_eval:
+    description: Teste unitario de agente/prompt
+    naming: p07_ue_{{target}}.md + .yaml
+    constraints: {max_bytes: 2048}
+
+  smoke_eval:
+    description: Teste rapido de sanidade (< 30s)
+    naming: p07_se_{{scope}}.md
+    constraints: {max_bytes: 1024}
+
+  e2e_eval:
+    description: Teste end-to-end (pipeline completo)
+    naming: p07_e2e_{{pipeline}}.md + .yaml
+    constraints: {max_bytes: 2048}
+
+  benchmark:
+    description: Medicao de performance (latencia, custo, qualidade)
+    naming: p07_bm_{{metric}}.md + .yaml
+    constraints: {max_bytes: 2048}
+
+  golden_test:
+    description: Caso de teste referencia (quality 9.5+)
+    naming: p07_gt_{{case}}.md + .yaml
+    constraints: {max_bytes: 2048}
+
+  scoring_rubric:
+    description: Criterio de avaliacao (5D, 12LP, custom)
+    naming: p07_sr_{{framework}}.md + .yaml
+    constraints: {max_bytes: 1024}

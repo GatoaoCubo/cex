@@ -1,0 +1,30 @@
+# P11 Feedback Schema
+lp: P11
+name: Feedback
+description: COMO melhora
+
+types:
+  quality_gate:
+    description: Barreira de qualidade (pass/fail com score)
+    naming: p11_qg_{{gate}}.yaml
+    constraints: {max_bytes: 1024}
+
+  bugloop:
+    description: Ciclo de correcao automatica (detect > fix > verify)
+    naming: p11_bl_{{scope}}.md + .yaml
+    constraints: {max_bytes: 2048}
+
+  lifecycle_rule:
+    description: Regra de ciclo de vida (freshness, archive, promote)
+    naming: p11_lc_{{rule}}.yaml
+    constraints: {max_bytes: 512}
+
+  guardrail:
+    description: Restricao de seguranca (safety boundary)
+    naming: p11_gr_{{scope}}.yaml
+    constraints: {max_bytes: 512}
+
+  optimizer:
+    description: Otimizador de processo (metric > action)
+    naming: p11_opt_{{target}}.md + .yaml
+    constraints: {max_bytes: 1024}

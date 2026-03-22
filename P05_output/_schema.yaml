@@ -1,0 +1,25 @@
+# P05 Output Schema
+lp: P05
+name: Output
+description: O que o agente ENTREGA
+
+types:
+  output_schema:
+    description: Formato de saida estruturado
+    naming: p05_os_{{format}}.yaml
+    constraints: {max_bytes: 1024}
+
+  parser:
+    description: Extrator de dados de saida
+    naming: p05_parser_{{target}}.md + .yaml
+    constraints: {max_bytes: 1024}
+
+  formatter:
+    description: Formatador de saida (json, md, yaml)
+    naming: p05_fmt_{{format}}.md
+    constraints: {max_bytes: 512}
+
+  naming_rule:
+    description: Regra de nomenclatura
+    naming: p05_nr_{{scope}}.md
+    constraints: {max_bytes: 512}

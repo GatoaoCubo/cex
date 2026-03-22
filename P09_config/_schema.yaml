@@ -1,0 +1,30 @@
+# P09 Config Schema
+lp: P09
+name: Config
+description: COMO configura
+
+types:
+  env_config:
+    description: Variaveis de ambiente
+    naming: p09_env_{{scope}}.yaml
+    constraints: {max_bytes: 512}
+
+  path_config:
+    description: Caminhos do sistema
+    naming: p09_path_{{scope}}.yaml
+    constraints: {max_bytes: 512}
+
+  permission:
+    description: Regra de permissao (read/write/execute)
+    naming: p09_perm_{{scope}}.yaml
+    constraints: {max_bytes: 512}
+
+  feature_flag:
+    description: Flag de feature (on/off, gradual rollout)
+    naming: p09_ff_{{feature}}.yaml
+    constraints: {max_bytes: 256}
+
+  runtime_rule:
+    description: Regra de runtime (timeouts, retries, limits)
+    naming: p09_rr_{{rule}}.yaml
+    constraints: {max_bytes: 512}

@@ -1,0 +1,35 @@
+# P12 Orchestration Schema
+lp: P12
+name: Orchestration
+description: COMO coordena
+
+types:
+  workflow:
+    description: Fluxo de trabalho (steps sequenciais/paralelos)
+    naming: p12_wf_{{name}}.md + .yaml
+    constraints: {max_bytes: 2048}
+
+  dag:
+    description: Grafo aciclico de dependencias
+    naming: p12_dag_{{pipeline}}.yaml
+    constraints: {max_bytes: 1024}
+
+  spawn_config:
+    description: Configuracao de spawn (solo, grid, continuous)
+    naming: p12_spawn_{{mode}}.yaml
+    constraints: {max_bytes: 1024}
+
+  signal:
+    description: Sinal entre agentes (complete, error, progress)
+    naming: p12_sig_{{event}}.json
+    constraints: {max_bytes: 256}
+
+  handoff:
+    description: Instrucao de handoff (task + context + commit)
+    naming: p12_ho_{{task}}.md
+    constraints: {max_bytes: 2048}
+
+  dispatch_rule:
+    description: Regra de despacho (keyword > satellite)
+    naming: p12_dr_{{scope}}.yaml
+    constraints: {max_bytes: 512}

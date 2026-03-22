@@ -1,0 +1,30 @@
+# P10 Memory Schema
+lp: P10
+name: Memory
+description: O que LEMBRA
+
+types:
+  mental_model:
+    description: Modelo mental persistente (routing, decisoes)
+    naming: p10_mm_{{agent}}.yaml
+    constraints: {max_bytes: 2048}
+
+  brain_index:
+    description: Indice de busca (BM25, FAISS config)
+    naming: p10_bi_{{index}}.yaml
+    constraints: {max_bytes: 1024}
+
+  learning_record:
+    description: Registro de aprendizado (o que deu certo/errado)
+    naming: p10_lr_{{topic}}.md + .yaml
+    constraints: {max_bytes: 2048}
+
+  session_state:
+    description: Estado de sessao (efemero, snapshot)
+    naming: p10_ss_{{session}}.yaml
+    constraints: {max_bytes: 1024}
+
+  axiom:
+    description: Regra fundamental (imutavel, nao negociavel)
+    naming: p10_ax_{{rule}}.md
+    constraints: {max_bytes: 512}

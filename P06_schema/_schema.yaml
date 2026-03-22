@@ -1,0 +1,30 @@
+# P06 Schema (meta)
+lp: P06
+name: Schema
+description: CONTRATOS de validacao
+
+types:
+  input_schema:
+    description: Contrato de entrada
+    naming: p06_is_{{scope}}.yaml
+    constraints: {max_bytes: 1024}
+
+  type_def:
+    description: Definicao de tipo customizado
+    naming: p06_td_{{type}}.yaml
+    constraints: {max_bytes: 512}
+
+  validator:
+    description: Regra de validacao (pre-commit, quality gate)
+    naming: p06_val_{{rule}}.yaml
+    constraints: {max_bytes: 512}
+
+  interface:
+    description: Contrato de integracao entre agentes
+    naming: p06_iface_{{contract}}.yaml
+    constraints: {max_bytes: 1024}
+
+  output_schema:
+    description: Contrato de saida (duplica P05 por design)
+    naming: p06_os_{{scope}}.yaml
+    constraints: {max_bytes: 1024}
