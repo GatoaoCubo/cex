@@ -14,43 +14,67 @@
 - [x] 2.3 P08-P10+P12 SCALE schemas (21 types)
 - [x] 2.4 Total: 12 schemas, 68 types defined
 
-## ONDA 3: GENERATORS + EXAMPLES [EM PROGRESSO]
+## ONDA 3: GENERATORS + EXAMPLES [COMPLETA]
 - [x] 3.1 Generators CORE: P01 + P02 + P03 + P04
 - [x] 3.2 Meta-template v1 (_meta/META_TEMPLATE.md)
-- [x] 3.3 Golden examples: P01 (kc domain), P02 (agent), P03 (prompt)
-- [ ] 3.4 Generators QUALITY+SCALE (P05-P12)
-- [ ] 3.5 Templates com {{vars}} para cada tipo CORE
-- [x] 3.6 Migrar golden do codexa-core (Wave 4.2: 12 examples migrated)
+- [x] 3.3 Golden examples: P01(7) + P02(4) + P03(4) + P04(3) = 18 total
+- [x] 3.4 Generators QUALITY+SCALE: P05 + P06 + P07 + P08 + P09 + P10 + P11 + P12
+- [x] 3.5 Templates CORE: 7 (P01:3 + P02:1 + P03:1 + P04:1 + P05:1)
+- [x] 3.6 Validation chain test pass (_meta/VALIDATION_REPORT.md)
 
-## ONDA 4: MIGRACAO MASSIVA
-- [ ] 638 KC > P01 | 701 HOP > P03 | 570 AGT > P02
-- [ ] 238 FAT/ADW > P12 | 61 BLK dissolvidos
-- [ ] Archive score < 7.0 (~500 files)
+## ONDA 4: GOLDEN MIGRATION [COMPLETA]
+- [x] 4.1 Migration map: 9916 arquivos classificados em LP buckets
+- [x] 4.2 12 golden examples migrados (4 KC + 3 agent + 3 prompt + 2 skill)
+- [x] 4.3 GOLDEN_CANDIDATES.md: 22 candidatos identificados, priority queue definida
+- [ ] 4.4 Mass migration (638 KC | 701 HOP | 570 AGT) — DEFERRED para Wave 6
 
-## ONDA 5: ANTI-FRAGILIDADE
-- [ ] _custom/ + promotion + lifecycle + density validator
+## ONDA 5: ANTI-FRAGILIDADE [EM PROGRESSO]
+- [x] 5.1 Meta-docs v3 (CODEX + ROADMAP + README atualizados com estado real)
+- [x] 5.2 Density report (_meta/DENSITY_REPORT.md com analise dos 18 examples)
+- [ ] 5.3 QUALITY+SCALE templates (P06-P12: 7 templates faltando)
+- [ ] 5.4 _custom/ extensibility + lifecycle validator + promotion script
+- [ ] 5.5 Density validator no pre-commit (rejeita score < 0.80)
 
 ## ONDA 6: PRODUTO
-- [ ] Bootstrap script + York wizard + boot multi-provider + dogfood
+- [ ] 6.1 Bootstrap script (cria LP structure em novo repo)
+- [ ] 6.2 York wizard (onboarding interativo)
+- [ ] 6.3 Mass migration final (638 KC + 701 HOP + 570 AGT)
+- [ ] 6.4 Dogfood: usar CEX para gerar CEX (flywheel)
 
 ---
 
 ## EXAMPLES POR LP
 
-| LP | Examples | Novos (Wave 4.2) | Total |
-|----|----------|-------------------|-------|
-| P01 Knowledge | 7 | +4 (quality_gate, orchestration, coding_skills, cicd) | 7 |
-| P02 Model | 4 | +3 (catalogo_ml, gateway, amazon_ads) | 4 |
-| P03 Prompt | 4 | +3 (satellite_orchestrator, sdk_builder, catalogo_ml) | 4 |
-| P04 Tools | 3 | +2 (voice_pipeline, design_extractor) | 3 |
-| **Total** | **18** | **+12** | **18** |
+| LP | Examples | Templates | Generator | Status |
+|----|----------|-----------|-----------|--------|
+| P01 Knowledge | 7 | 3 | SIM | CORE completo |
+| P02 Model | 4 | 1 | SIM | CORE completo |
+| P03 Prompt | 4 | 1 | SIM | CORE completo |
+| P04 Tools | 3 | 1 | SIM | CORE completo |
+| P05 Output | 0 | 1 | SIM | template only |
+| P06 Schema | 0 | 0 | SIM | generator only |
+| P07 Evals | 0 | 0 | SIM | generator only |
+| P08 Architecture | 0 | 0 | SIM | generator only |
+| P09 Config | 0 | 0 | SIM | generator only |
+| P10 Memory | 0 | 0 | SIM | generator only |
+| P11 Feedback | 0 | 0 | SIM | generator only |
+| P12 Orchestration | 0 | 0 | SIM | generator only |
+| **Total** | **18** | **7** | **12/12** | Wave 5 |
 
-## METRICAS DA SESSAO
-- Repos: codexa-core (22 commits) + CEX (8 commits)
-- Grid: 6 satellites total (3 SHAKA research + 2 PYTHA + 1 EDISON distill + 1 EDISON migrate)
-- Reports: 9 research (133KB) + 3 distillation (42KB) = 175KB
-- Files CEX: 36 arquivos, ~65KB
-- Ondas completas: 2.8 de 6
+## METRICAS ACUMULADAS
+
+| Metrica | Valor |
+|---------|-------|
+| CEX commits | 15 |
+| Total MD files | 46 |
+| Repo size | ~65KB |
+| Schemas | 12 (68 tipos) |
+| Generators | 12/12 |
+| Templates | 7 |
+| Examples | 18 |
+| Density media | 88.6% |
+| Satellites usados | 7 (SHAKA x3 + PYTHA x2 + EDISON x2) |
+| Ondas completas | 4 de 6 |
 
 ---
-*Updated: 2026-03-22 | Next: Wave 3.4 (generators P05-P12)*
+*Updated: 2026-03-22 | Next: Wave 5.3 (QUALITY+SCALE templates P06-P12)*

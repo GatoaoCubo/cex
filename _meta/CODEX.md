@@ -36,7 +36,7 @@ Meta: _meta/ (CODEX, GLOSSARY, MANDAMENTOS, ROADMAP, META_TEMPLATE)
 Campos padrao: max_bytes, quality_min, frontmatter_required, body_structure
 
 ## 6. GENERATORS = _generator.md por LP
-4 generators criados (P01-P04 CORE). Instrucoes passo-a-passo.
+12 generators criados (P01-P12 CORE+QUALITY+SCALE). Instrucoes passo-a-passo.
 Anti-patterns listados. Density tiers documentados.
 
 ## 7. META-TEMPLATE = _meta/META_TEMPLATE.md
@@ -71,5 +71,29 @@ ARCHIVE: quality<7 + age>30d. PROMOTE: used>10x + quality>9
 ## 12. ANTI-FRAGILIDADE
 68 CORE fixos + _custom/ extensivel. Promocao: 10x+quality>8=CORE.
 
+## 13. ESTADO ATUAL (2026-03-22)
+
+| LP | Schema | Generator | Templates | Examples | Completude |
+|----|--------|-----------|-----------|----------|------------|
+| P01 Knowledge | SIM | SIM | 3 | 7 | CORE completo |
+| P02 Model | SIM | SIM | 1 | 4 | CORE completo |
+| P03 Prompt | SIM | SIM | 1 | 4 | CORE completo |
+| P04 Tools | SIM | SIM | 1 | 3 | CORE completo |
+| P05 Output | SIM | SIM | 1 | 0 | template only |
+| P06-P12 | SIM x7 | SIM x7 | 0 | 0 | generator only |
+| **Total** | **12** | **12** | **7** | **18** | Wave 5 |
+
+**Metricas Wave 3+4:**
+- Wave 3: 8 commits, 12 generators criados, 7 templates, 18 examples, chain test pass
+- Wave 4: 2 commits, migration map (9916 arquivos), 12 golden migrados (4KC+3AGT+3PT+2SKL)
+- Density media dos examples: 88.6% (Elite:6 High:12 Standard:0)
+
+**Decisoes Tomadas:**
+- Migration map: 9 categorias (KC, HOP, AGT, SKL, FAT, ADW, BLK, CHK/VAL, OUTROS)
+- Density threshold: >= 0.80 obrigatorio, >= 0.90 = Elite/golden candidate
+- Templates CORE: P01-P04 + P05 = 7 templates (P06-P12 aguardam Wave 5.3)
+- Max file size: 4KB (ajustado de 2KB baseado em dados reais dos examples)
+- Golden promotion: quality >= 9.5 + density >= 0.90 + cross-referenced
+
 ---
-*CODEX v2.0 | Atualizado com destilacao real | 2026-03-22*
+*CODEX v3.0 | Wave 5 | 2026-03-22*
