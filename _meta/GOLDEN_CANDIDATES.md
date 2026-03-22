@@ -3,6 +3,24 @@
 # Criteria: quality >= 9.0, size 1KB-8KB, structured content
 # Format: path | tipo CEX | estimated quality | razao
 
+---
+
+## CEX8 Quality Audit — Top 5 Golden References (2026-03-22)
+
+**Methodology**: Manual content review of all 48 examples. Selected by score=9.5 + density=0.93 (max).
+
+| Rank | File | Score | Density | Why Golden |
+|------|------|:-----:|:-------:|------------|
+| 1 | P07_evals/examples/p07_gt_stripe_pipeline.md | 9.5 | 0.93 | Real PASS/FAIL tables, 4 test suites, regression assertions for CI |
+| 2 | P08_architecture/examples/p08_law_shokunin.md | 9.5 | 0.93 | Foundational quality law with wrong/right pattern pairs |
+| 3 | P10_memory/examples/p10_ax_scout_before_create.md | 9.5 | 0.93 | Decision threshold, violation costs table, bash implementation |
+| 4 | P11_feedback/examples/p11_qg_shokunin_pool.md | 9.5 | 0.93 | Complete gate: checklist + 5D scoring + bypass=never |
+| 5 | P12_orchestration/examples/p12_wf_stella_dispatch.md | 9.5 | 0.93 | 5-phase workflow with I/O per step, durations, rollback |
+
+**Use these as structural templates when creating new examples in their respective LPs.**
+
+---
+
 ## P01 Knowledge Cards
 
 | Path | Tipo CEX | Est. Quality | Razao |
@@ -106,8 +124,19 @@
 5. KC_ATLAS_007 (CI/CD patterns) — P01
 6. records/pool/audits/2026-02-28-meta-evolution/LLM_ARCHITECTURE_REVIEW.md — P08
 
+## Wave 9 Rework Queue (from CEX8 Audit)
+
+| Priority | File | Issue |
+|----------|------|-------|
+| P1 | P03_prompt/examples/p03_pt_action_prompt.md | `## Template Body` EMPTY — fill with actual prompt |
+| P2 | P02_model/examples/p02_agent_pesquisa.md | Architecture EMPTY + no I/O schema |
+| P3 | P11_feedback/examples/p11_lc_cex_lifecycle.md | Add YAML frontmatter |
+| P4 | P11_feedback/examples/p11_qg_cex_quality.md | Add YAML frontmatter |
+| P5 | P01_knowledge/examples/p01_kc_catalogo_proprio_mercado_livre.md | Fill empty `## Flow` section |
+
 ---
 *Search method: find size +1k -5k (KCs), find size +2k -8k (agents/skills), grep quality 9.x*
 *Total candidates: 38 | Migrated: 18 (ml-ads, zero-touch KC + 16 new Wave7.2)*
 *Wave 7.2: 16 examples migrated (2 per LP for P05-P12) — PYTHA 2026-03-22*
-*Next: migrate Priority Queue top 6 (P01+P02+P04 remaining)*
+*CEX8 Audit: 48 examples scored, 15 golden, 4 rejected — PYTHA 2026-03-22*
+*Next: Wave 9 rework of bottom 5 + migrate Priority Queue top 6*
