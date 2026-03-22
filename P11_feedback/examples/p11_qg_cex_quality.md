@@ -1,0 +1,87 @@
+# CEX Quality Gate
+
+## Purpose
+Pre-commit gate para novos artefatos CEX — rejeita antes de entrar no pool.
+
+## Checklist (ALL must pass)
+
+### C1: Naming Compliance
+- [ ] Filename matches `_schema.yaml` naming pattern for its type
+- [ ] Prefix = `{lp_lower}_{type_abbrev}_`
+- [ ] No spaces, uppercase, or special chars (kebab OK for topic)
+- **Auto-check**: `validate_examples.py` type matching
+
+### C2: Size Constraint
+- [ ] File size <= `max_bytes` from schema constraints
+- [ ] If no constraint defined, max 4096 bytes default
+- **Auto-check**: `validate_examples.py` size check
+
+### C3: Density Threshold
+- [ ] Content density >= `density_min` from schema (or 0.7 baseline)
+- [ ] No empty sections, no placeholder text (TBD, TODO, ...)
+- [ ] Each bullet carries actionable data (Specificity Test)
+- **Auto-check**: `validate_examples.py` density estimation
+
+### C4: Schema Compliance
+- [ ] Parent LP has valid `_schema.yaml` (passes `validate_schema.py`)
+- [ ] Type exists in schema types dict
+- [ ] All `frontmatter_required` fields present if applicable
+
+### C5: Generator Alignment
+- [ ] Parent LP has `_generator.md` that covers this type
+- [ ] Example follows generator's PASSO A PASSO structure
+- **Manual check**: review against generator sections
+
+## Auto-Reject Criteria
+
+Immediate rejection if ANY of these:
+- File has no content (0 bytes or only whitespace)
+- Filename doesn't match any schema type naming pattern
+- Size exceeds 2x the `max_bytes` constraint
+- Contains placeholder markers: `TBD`, `TODO`, `FIXME`, `...`, `placeholder`
+- Density below 0.5 (excessive boilerplate)
+- Duplicate `id` of existing example
+
+## Tiered Review
+
+| Score | Tier | Decision | Action |
+|-------|------|----------|--------|
+| < 7.0 | Rejected | REJECT | Do not merge. Author must fix and resubmit |
+| 7.0-7.9 | Learning | REVIEW | Merge with improvement notes. Flag for revisit |
+| 8.0-9.4 | Skilled | ACCEPT | Merge. Eligible for pool and learning memory |
+| >= 9.5 | Golden | ACCEPT+PROMOTE | Merge + copy to `_meta/golden/` + celebrate |
+
+## Scoring Guide
+
+| Dimension | Weight | What to Check |
+|-----------|--------|---------------|
+| Naming | 20% | Schema pattern match, prefix correctness |
+| Size | 10% | Within constraints, not bloated |
+| Density | 30% | Data per line, no filler, specificity |
+| Structure | 20% | Follows body_structure from schema/generator |
+| Actionability | 20% | Reader can act without external docs |
+
+**Formula**: `score = (naming * 0.2) + (size * 0.1) + (density * 0.3) + (structure * 0.2) + (actionability * 0.2)`
+
+Each dimension scored 0-10. Final score = weighted sum.
+
+## Integration
+
+```bash
+# Pre-commit (run all 3 validators)
+cd /path/to/cex
+python _tools/validate_schema.py && \
+python _tools/validate_generators.py && \
+python _tools/validate_examples.py
+
+# Exit code 0 = all pass, 1 = failures found
+```
+
+## Escalation
+
+- 3+ consecutive rejections on same LP -> flag schema/generator for review
+- Golden promotion requires 2 independent validation passes
+- Disputes: author can request manual review with justification
+
+---
+*Quality Gate v1.0 | CEX Anti-Fragility Layer | 2026-03-22*
