@@ -2,33 +2,34 @@
 
 ---
 
-## ONDA 1: DESTILAR [PROXIMO]
-- [ ] 1.1 Selecionar top 50 golden (score >= 9.5) do codexa-core
-- [ ] 1.2 Analisar padroes (o que torna golden bom?)
-- [ ] 1.3 Criar P01/_schema.yaml v0 baseado em dados reais
-- [ ] 1.4 Criar _meta/meta_template.yaml v0
-- [ ] 1.5 Testar: meta-template gera KC que passa no schema
+## ONDA 1: DESTILAR [COMPLETA]
+- [x] 1.1 Selecionar top golden (score >= 9.5) do codexa-core
+- [x] 1.2 Analisar padroes (3 reports: KC + TPL/HOP + AGT/SKL = 42KB)
+- [x] 1.3 Criar P01/_schema.yaml v0 baseado em dados reais
+- [x] 1.4 Criar _meta/meta_template approach (CODEX defines)
+- [x] 1.5 Primeiro golden example (p01_kc_catalogo_proprio_mercado_livre)
 
-## ONDA 2: SCAFFOLD + P01
-- [ ] 2.1 Gerar 6 templates P01 Knowledge (12 files dual)
-- [ ] 2.2 Migrar 50 golden KCs para P01/examples/
-- [ ] 2.3 Melhorar meta-template v1
+## ONDA 2: SCHEMAS COMPLETOS [COMPLETA]
+- [x] 2.1 P01-P04 CORE schemas (27 types)
+- [x] 2.2 P05-P07+P11 QUALITY schemas (20 types)
+- [x] 2.3 P08-P10+P12 SCALE schemas (21 types)
+- [x] 2.4 Total: 12 schemas, 68 types defined
+- [ ] 2.5 Generators para cada LP (P01 done, P02-P12 pending)
 
-## ONDA 3: EXPANDIR (1 LP por iteracao)
-- [ ] P02 Model (7 tpl) > P03 Prompt (5) > P04 Tools (9)
-- [ ] P05-P07+P11 Quality layer
-- [ ] P08-P10+P12 Scale layer
+## ONDA 3: TEMPLATES + EXAMPLES [PROXIMO]
+- [ ] 3.1 Templates com {{vars}} para cada tipo de cada LP
+- [ ] 3.2 Migrar 50 golden KCs para P01/examples/
+- [ ] 3.3 Migrar golden HOPs para P03/examples/
+- [ ] 3.4 Meta-template v1 (gera templates de qualquer tipo)
 
 ## ONDA 4: MIGRACAO MASSIVA
-- [ ] 638 KC > P01 | 701 HOP > P03 | 570 AGT > P02
-- [ ] 238 FAT/ADW > P12 | 61 BLK dissolvidos
-- [ ] Archive score < 7.0 (~500 files)
+- [ ] 638 KC>P01 | 701 HOP>P03 | 570 AGT>P02 | 238 FAT/ADW>P12
 
 ## ONDA 5: ANTI-FRAGILIDADE
-- [ ] _custom/ + promotion + lifecycle + density validator
+- [ ] _custom/ + promotion engine + lifecycle + density validator
 
 ## ONDA 6: PRODUTO
 - [ ] Bootstrap script + York wizard + boot multi-provider + dogfood
 
 ---
-*v1.0 | 2026-03-22*
+*Updated: 2026-03-22 | Ondas 1-2 completas em 1 sessao*
