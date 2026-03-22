@@ -20,7 +20,7 @@
 - [x] 3.3 Golden examples: P01 (kc domain), P02 (agent), P03 (prompt)
 - [ ] 3.4 Generators QUALITY+SCALE (P05-P12)
 - [ ] 3.5 Templates com {{vars}} para cada tipo CORE
-- [ ] 3.6 Migrar mais golden do codexa-core
+- [x] 3.6 Migrar golden do codexa-core (Wave 4.2: 12 examples migrated)
 
 ## ONDA 4: MIGRACAO MASSIVA
 - [ ] 638 KC > P01 | 701 HOP > P03 | 570 AGT > P02
@@ -35,12 +35,22 @@
 
 ---
 
+## EXAMPLES POR LP
+
+| LP | Examples | Novos (Wave 4.2) | Total |
+|----|----------|-------------------|-------|
+| P01 Knowledge | 7 | +4 (quality_gate, orchestration, coding_skills, cicd) | 7 |
+| P02 Model | 4 | +3 (catalogo_ml, gateway, amazon_ads) | 4 |
+| P03 Prompt | 4 | +3 (satellite_orchestrator, sdk_builder, catalogo_ml) | 4 |
+| P04 Tools | 3 | +2 (voice_pipeline, design_extractor) | 3 |
+| **Total** | **18** | **+12** | **18** |
+
 ## METRICAS DA SESSAO
-- Repos: codexa-core (22 commits) + CEX (7 commits)
-- Grid: 6 satellites total (3 SHAKA research + 2 PYTHA + 1 EDISON distill)
+- Repos: codexa-core (22 commits) + CEX (8 commits)
+- Grid: 6 satellites total (3 SHAKA research + 2 PYTHA + 1 EDISON distill + 1 EDISON migrate)
 - Reports: 9 research (133KB) + 3 distillation (42KB) = 175KB
-- Files CEX: 24 arquivos, ~40KB
-- Ondas completas: 2.5 de 6
+- Files CEX: 36 arquivos, ~65KB
+- Ondas completas: 2.8 de 6
 
 ---
 *Updated: 2026-03-22 | Next: Wave 3.4 (generators P05-P12)*
