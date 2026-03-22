@@ -1,0 +1,89 @@
+---
+id: p08_pat_continuous_batching
+type: pattern
+lp: P08
+title: "Pattern: Continuous Batching (Satellite Grid)"
+version: 1.0.0
+created: 2026-03-22
+updated: 2026-03-22
+author: PYTHA
+quality: 9.2
+tags: [pattern, continuous-batching, grid, dispatch, orchestration]
+tldr: "When queue > slots: fill slots immediately as they complete instead of waiting for entire wave — 1.6x speedup on 7+ task missions"
+max_bytes: 2048
+density_score: 0.92
+source: codexa-core/records/skills/continuous_batching/SKILL.md
+linked_artifacts:
+  workflow: p12_wf_stella_dispatch
+  spawn: p12_spawn_grid_continuous
+---
+
+# Pattern: Continuous Batching (Satellite Grid)
+
+## Problem
+
+Static batching (launch N tasks → wait ALL done → launch next wave) causes idle slots when tasks finish at different speeds. In a 3-slot grid with tasks taking 5/10/20 min, slots 1+2 idle for 10+ min waiting for slot 3.
+
+## Solution
+
+Continuous batching: when any slot completes, immediately assign next task from queue. No idle time between tasks per slot.
+
+## Diagram
+
+```
+STATIC (wave):          CONTINUOUS:
+[A][B][C] → wait all   [A][B][C]
+[D][E][F] → wait all    [D]  when A done
+                        [E]      when B done
+                        [F]          when C done
+Total: 2x slowest       Total: ~1.6x speedup (measured)
+```
+
+## Auto-Detection Logic
+
+```
+IF handoffs_count > available_slots:
+    mode = continuous
+ELSE:
+    mode = static (wave)
+```
+
+Trigger: `spawn_grid.ps1` auto-detects — STELLA does not choose manually.
+
+## Measured Performance
+
+| Mission | Tasks | Slots | Mode | Result |
+|---------|-------|-------|------|--------|
+| ISOFIX | 7 batches | 3 | continuous | 1.6x speedup vs static |
+| CBTEST | 8 mixed | 3 | continuous | SHAKA+EDISON+PYTHA confirmed |
+
+## When to Use
+
+| Condition | Use Continuous |
+|-----------|---------------|
+| Tasks > slots | YES (auto) |
+| Tasks independent | YES |
+| Tasks have dependencies (B needs A output) | NO — use wave order |
+| < 4 tasks total | NO — overhead > gain |
+| Sequential pipeline | NO — use ordered static |
+
+## Handoff Naming Convention
+
+```
+{MISSION}_batch_{N}_{SAT}.md
+Example: CEX7_batch_1_pytha.md, CEX7_batch_2_pytha.md
+```
+
+## Signal Protocol
+
+Each batch signals independently:
+```python
+write_signal('pytha', 'complete', 9.0, task='cex7_batch_2')
+# Spawn monitor detects → assigns next batch automatically
+```
+
+## Constraints
+
+- Max 3 concurrent satellites (BSOD at 4 on current hardware)
+- 5s delay between terminal spawns (RAM stability)
+- Git lock: zero contention confirmed at 3 concurrent satellites

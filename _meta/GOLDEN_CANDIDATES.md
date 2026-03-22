@@ -40,21 +40,74 @@
 | records/skills/design-extractor/SKILL.md | P04 skill | 8.0 | design extraction, structured |
 | records/skills/voice_pipeline/SKILL.md | P04 skill | 8.5 | voice pipeline patterns |
 
+## P05 Output
+
+| Path | Tipo CEX | Est. Quality | Status |
+|------|----------|-------------|--------|
+| records/agents/*/iso_vectorstore/ISO_*_OUTPUT_TEMPLATE.md | P05 formatter | 9.0 | MIGRADO: p05_fmt_agent_markdown.md |
+| cex/_meta/MIGRATION_MAP.md + _schema.yaml files | P05 naming_rule | 9.0 | MIGRADO: p05_nr_cex_naming.md |
+
+## P06 Schema
+
+| Path | Tipo CEX | Est. Quality | Status |
+|------|----------|-------------|--------|
+| records/framework/docs/LAWS_v3_PRACTICAL.md (quality tiers) | P06 validator | 9.0 | MIGRADO: p06_val_quality_score.md |
+| .claude/rules/STELLA_RULES.md (COMPOSE phase) | P06 interface | 9.0 | MIGRADO: p06_iface_satellite_handoff.md |
+
+## P07 Evals
+
+| Path | Tipo CEX | Est. Quality | Status |
+|------|----------|-------------|--------|
+| records/framework/docs/LAWS_v3_PRACTICAL.md (LAW 13 Shokunin) | P07 scoring_rubric | 9.2 | MIGRADO: p07_sr_5d_scoring.md |
+| CLAUDE.md (BRAIN SEARCH) + records/core/brain/ | P07 smoke_eval | 9.0 | MIGRADO: p07_se_brain_query.md |
+
 ## P08 Architecture
 
-| Path | Tipo CEX | Est. Quality | Razao |
-|------|----------|-------------|-------|
-| records/pool/audits/2026-02-28-meta-evolution/LLM_ARCHITECTURE_REVIEW.md | P08 architecture | 9.0 | arquitetura LLM completa, tech decisions documentadas |
+| Path | Tipo CEX | Est. Quality | Status |
+|------|----------|-------------|--------|
+| records/pool/audits/2026-02-28-meta-evolution/LLM_ARCHITECTURE_REVIEW.md | P08 architecture | 9.0 | pendente |
+| records/skills/continuous_batching/SKILL.md | P08 pattern | 9.2 | MIGRADO: p08_pat_continuous_batching.md |
+| records/framework/docs/LAWS_v3_PRACTICAL.md (LAW 13) | P08 law | 9.5 | MIGRADO: p08_law_shokunin.md |
 
-## Priority Migration Queue
+## P09 Config
 
-1. KC_ATLAS_010 (quality gates — universal pattern)
-2. KC_EDISON_029 (agent orchestration — core CODEXA pattern)
-3. catalogo_ml_strategy/README.md (domain agent — P02 example)
-4. amazon-ads-agent/SKILL.md (YORK domain skill)
-5. KC_ATLAS_007 (CI/CD patterns — deploy domain)
+| Path | Tipo CEX | Est. Quality | Status |
+|------|----------|-------------|--------|
+| .claude/rules/multi_repo.md + CLAUDE.md KEY PATHS | P09 path_config | 9.0 | MIGRADO: p09_path_codexa_repos.md |
+| .claude/rules/boot-autonomy-flags.md + MEMORY.md | P09 runtime_rule | 9.0 | MIGRADO: p09_rr_satellite_spawn.md |
+
+## P10 Memory
+
+| Path | Tipo CEX | Est. Quality | Status |
+|------|----------|-------------|--------|
+| records/framework/docs/LAWS_v3_PRACTICAL.md (LAW 8) | P10 axiom | 9.5 | MIGRADO: p10_ax_scout_before_create.md |
+| CLAUDE.md (BRAIN SEARCH) + records/core/brain/ | P10 brain_index | 9.0 | MIGRADO: p10_bi_codexa_brain.md |
+
+## P11 Feedback
+
+| Path | Tipo CEX | Est. Quality | Status |
+|------|----------|-------------|--------|
+| .claude/rules/STELLA_RULES.md (NUNCA section) | P11 guardrail | 9.0 | MIGRADO: p11_gr_stella_dispatch.md |
+| records/framework/docs/LAWS_v3_PRACTICAL.md + 5D rubric | P11 optimizer | 9.0 | MIGRADO: p11_opt_pool_density.md |
+
+## P12 Orchestration
+
+| Path | Tipo CEX | Est. Quality | Status |
+|------|----------|-------------|--------|
+| cex/_meta/MIGRATION_MAP.md (PLANO DE EXECUCAO) | P12 dag | 9.0 | MIGRADO: p12_dag_cex_wave_pipeline.md |
+| records/satellites/stella/mental_model.yaml + continuous_batching SKILL | P12 spawn_config | 9.0 | MIGRADO: p12_spawn_grid_continuous.md |
+
+## Priority Migration Queue (Remaining)
+
+1. KC_ATLAS_010 (quality gates — universal pattern) — P01
+2. KC_EDISON_029 (agent orchestration — core CODEXA pattern) — P01
+3. catalogo_ml_strategy/README.md (domain agent) — P02
+4. amazon-ads-agent/SKILL.md (YORK domain skill) — P04
+5. KC_ATLAS_007 (CI/CD patterns) — P01
+6. records/pool/audits/2026-02-28-meta-evolution/LLM_ARCHITECTURE_REVIEW.md — P08
 
 ---
 *Search method: find size +1k -5k (KCs), find size +2k -8k (agents/skills), grep quality 9.x*
-*Total candidates: 22 | Migrated: 2 (ml-ads skill, zero-touch KC)*
-*Next: run /evolve to auto-migrate top 5*
+*Total candidates: 38 | Migrated: 18 (ml-ads, zero-touch KC + 16 new Wave7.2)*
+*Wave 7.2: 16 examples migrated (2 per LP for P05-P12) — PYTHA 2026-03-22*
+*Next: migrate Priority Queue top 6 (P01+P02+P04 remaining)*
