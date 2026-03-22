@@ -1,0 +1,130 @@
+# P01 Knowledge Schema
+# Baseado em destilacao de 7 KCs golden do codexa-core
+# Sources: DISTILL_GOLDEN_KC_PATTERNS.md
+
+lp: P01
+name: Knowledge
+description: O que o agente SABE
+
+types:
+  knowledge_card:
+    description: Fato atomico pesquisavel (densidade > 0.8)
+    naming: p01_kc_{{topic}}.md + .yaml
+    constraints:
+      max_bytes: 4096
+      min_bullets: 3
+      density_min: 0.8
+      quality_min: 7.0
+
+    frontmatter_required:
+      - id            # p01_kc_{{topic}}
+      - type           # knowledge_card
+      - lp             # P01
+      - title          # descriptivo, 5-100 chars
+      - version        # semver
+      - created        # ISO date
+      - updated        # ISO date
+      - author         # satellite name
+      - domain         # area de conhecimento
+      - quality        # 7.0-10.0
+      - tags           # min 2 strings
+      - tldr           # 1 frase densa
+      - when_to_use    # condicoes de uso
+
+    frontmatter_cex:
+      - keywords       # min 3 (head terms, SEO para Brain)
+      - long_tails     # min 2 (perguntas de busca)
+      - axioms         # min 1 (regra fundamental)
+      - linked_artifacts # cross-links tipados {adw, agent, hop}
+      - density_score  # auto-calculado
+
+    body_structure:
+      domain_kc:       # KC de negocio/dominio (template KC_PYTHA_069)
+        - quick_reference  # YAML block com dados chave
+        - conceitos_chave  # bullets atomicos
+        - strategy_phases  # fases numeradas
+        - regras_de_ouro   # axiomas em imperativos
+        - visual_flow      # ASCII diagram
+        - comparativo      # tabela comparativa
+        - artefatos        # links para execucao
+
+      meta_kc:         # KC tecnico/referencia (template KC_PYTHA_358)
+        - executive_summary  # 1-2 frases
+        - spec_table         # dados exatos (precos, APIs, configs)
+        - patterns           # o que funciona (especifico)
+        - anti_patterns      # o que evitar (especifico)
+        - application        # estado atual + oportunidade
+        - references         # URLs + related KCs
+
+    validation:
+      - content_hash nao vazio (auto SHA256)
+      - id == filename stem
+      - quality YAML +/- 1.0 do body
+      - tags = lista de strings (nunca lista-em-string)
+      - cada bullet max 80 chars
+      - secoes com < 3 linhas: expandir ou remover
+
+  rag_source:
+    description: Fonte externa indexavel
+    naming: p01_rs_{{source}}.md + .yaml
+    constraints:
+      max_bytes: 1024
+    frontmatter_required:
+      - id
+      - type
+      - url
+      - domain
+      - last_checked
+
+  glossary_entry:
+    description: Definicao de termo
+    naming: p01_gl_{{term}}.md + .yaml
+    constraints:
+      max_bytes: 512
+      max_definition_lines: 3
+    frontmatter_required:
+      - id
+      - term
+      - definition
+      - synonyms
+
+  context_doc:
+    description: Contexto de dominio
+    naming: p01_ctx_{{topic}}.md + .yaml
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+      - id
+      - type
+      - domain
+      - scope
+
+  embedding_config:
+    description: Configuracao de embedding model
+    naming: p01_emb_{{model}}.yaml
+    constraints:
+      max_bytes: 512
+    frontmatter_required:
+      - id
+      - model_name
+      - dimensions
+      - chunk_size
+
+  few_shot_example:
+    description: Exemplo input/output pra prompt
+    naming: p01_fse_{{topic}}.md + .yaml
+    constraints:
+      max_bytes: 1024
+    frontmatter_required:
+      - id
+      - type
+      - input
+      - output
+      - quality
+
+# EVIDENCE: Destilado de 7 KCs golden (quality 9.5-10.0)
+# KC_PYTHA_069 (density 92%, domain template)
+# KC_PYTHA_358 (density 88%, meta template)
+# KC_EDISON_029 (density 76%, tech reference)
+# Validated: 783 golden, 2214 pool artifacts, 9910 total MD
+# Shokunin iteration 1 | 2026-03-22
