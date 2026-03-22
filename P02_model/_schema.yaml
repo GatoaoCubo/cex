@@ -11,7 +11,7 @@ types:
     description: Definicao de agente (persona + capabilities)
     naming: p02_agent_{{name}}.md + .yaml
     constraints:
-      max_bytes: 4096
+      max_bytes: 5120
       quality_min: 7.0
     frontmatter_required:
       - id

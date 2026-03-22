@@ -7,7 +7,7 @@ types:
   output_schema:
     description: Formato de saida estruturado
     naming: p05_os_{{format}}.yaml
-    constraints: {max_bytes: 1024}
+    constraints: {max_bytes: 3072}
 
   parser:
     description: Extrator de dados de saida

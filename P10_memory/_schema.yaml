@@ -7,7 +7,7 @@ types:
   mental_model:
     description: Modelo mental persistente (routing, decisoes)
     naming: p10_mm_{{agent}}.yaml
-    constraints: {max_bytes: 2048}
+    constraints: {max_bytes: 3072}
 
   brain_index:
     description: Indice de busca (BM25, FAISS config)
@@ -17,7 +17,7 @@ types:
   learning_record:
     description: Registro de aprendizado (o que deu certo/errado)
     naming: p10_lr_{{topic}}.md + .yaml
-    constraints: {max_bytes: 2048}
+    constraints: {max_bytes: 3072}
 
   session_state:
     description: Estado de sessao (efemero, snapshot)

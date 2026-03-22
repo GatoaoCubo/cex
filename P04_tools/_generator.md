@@ -31,5 +31,47 @@ Fonte: testes reais, nao estimativas
 - Metricas inventadas (prefira ausencia a mentira)
 - Fases sem input/output claro
 
+## TIPOS ADICIONAIS
+
+### mcp_server
+QUANDO USAR: Documentar servidor MCP (tools, resources, transport).
+Naming: `p04_mcp_{{server}}.md + .yaml`
+Schema: P04/_schema.yaml > types > mcp_server
+
+### hook
+QUANDO USAR: Definir pre/post processing hook (lifecycle event handler).
+Naming: `p04_hook_{{name}}.md`
+Schema: P04/_schema.yaml > types > hook
+
+### plugin
+QUANDO USAR: Documentar extensao plugavel (modulo opcional carregavel).
+Naming: `p04_plug_{{name}}.md + .yaml`
+Schema: P04/_schema.yaml > types > plugin
+
+### client
+QUANDO USAR: Documentar cliente de API externa (auth, endpoints, rate limits).
+Naming: `p04_client_{{api}}.md + .yaml`
+Schema: P04/_schema.yaml > types > client
+
+### cli_tool
+QUANDO USAR: Documentar ferramenta de linha de comando (flags, usage, examples).
+Naming: `p04_cli_{{tool}}.md`
+Schema: P04/_schema.yaml > types > cli_tool
+
+### scraper
+QUANDO USAR: Documentar extrator de dados web (target, strategy, anti-bot).
+Naming: `p04_scraper_{{target}}.md + .yaml`
+Schema: P04/_schema.yaml > types > scraper
+
+### connector
+QUANDO USAR: Documentar conector de servico externo (auth, endpoints, retry).
+Naming: `p04_conn_{{service}}.md + .yaml`
+Schema: P04/_schema.yaml > types > connector
+
+### daemon
+QUANDO USAR: Documentar processo background (lifecycle, health check, signals).
+Naming: `p04_daemon_{{name}}.md + .yaml`
+Schema: P04/_schema.yaml > types > daemon
+
 ---
 *Generator v1.0 | Evidence: 58 golden skills, 124 total | 2026-03-22*

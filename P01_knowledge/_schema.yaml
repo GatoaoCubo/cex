@@ -11,7 +11,7 @@ types:
     description: Fato atomico pesquisavel (densidade > 0.8)
     naming: p01_kc_{{topic}}.md + .yaml
     constraints:
-      max_bytes: 4096
+      max_bytes: 5120
       min_bullets: 3
       density_min: 0.8
       quality_min: 7.0

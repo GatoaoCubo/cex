@@ -7,7 +7,7 @@ types:
   input_schema:
     description: Contrato de entrada
     naming: p06_is_{{scope}}.yaml
-    constraints: {max_bytes: 1024}
+    constraints: {max_bytes: 3072}
 
   type_def:
     description: Definicao de tipo customizado

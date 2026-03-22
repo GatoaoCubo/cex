@@ -42,7 +42,7 @@ density_score: 0.95
 - PURPOSE: max 2 linhas, especifico (nao generico)
 - INPUT: cada campo com tipo e exemplo
 - STEPS: numerados, cada um com output intermediario
-- VALIDATION: min 3 criterios mensuráveis
+- VALIDATION: min 3 criterios mensuraveis
 
 ## Semantic Bridge
 - Also known as: PromptTemplate, ChatPromptTemplate, SystemMessage

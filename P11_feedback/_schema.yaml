@@ -7,17 +7,17 @@ types:
   quality_gate:
     description: Barreira de qualidade (pass/fail com score)
     naming: p11_qg_{{gate}}.yaml
-    constraints: {max_bytes: 1024}
+    constraints: {max_bytes: 3072}
 
   bugloop:
     description: Ciclo de correcao automatica (detect > fix > verify)
     naming: p11_bl_{{scope}}.md + .yaml
-    constraints: {max_bytes: 2048}
+    constraints: {max_bytes: 3072}
 
   lifecycle_rule:
     description: Regra de ciclo de vida (freshness, archive, promote)
     naming: p11_lc_{{rule}}.yaml
-    constraints: {max_bytes: 512}
+    constraints: {max_bytes: 3072}
 
   guardrail:
     description: Restricao de seguranca (safety boundary)

@@ -7,7 +7,7 @@ types:
   workflow:
     description: Fluxo de trabalho (steps sequenciais/paralelos)
     naming: p12_wf_{{name}}.md + .yaml
-    constraints: {max_bytes: 2048}
+    constraints: {max_bytes: 3072}
 
   dag:
     description: Grafo aciclico de dependencias

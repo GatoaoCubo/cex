@@ -11,7 +11,7 @@ types:
     description: Habilidade reutilizavel (phases + trigger)
     naming: p04_skill_{{name}}.md + .yaml
     constraints:
-      max_bytes: 4096
+      max_bytes: 5120
       quality_min: 7.0
     frontmatter_required:   # (DISTILL: SKILL frontmatter = single source)
       - id

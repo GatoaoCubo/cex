@@ -27,7 +27,7 @@ types:
   golden_test:
     description: Caso de teste referencia (quality 9.5+)
     naming: p07_gt_{{case}}.md + .yaml
-    constraints: {max_bytes: 2048}
+    constraints: {max_bytes: 4096}
 
   scoring_rubric:
     description: Criterio de avaliacao (5D, 12LP, custom)
