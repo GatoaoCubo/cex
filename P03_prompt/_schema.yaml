@@ -52,7 +52,7 @@ types:
     description: Template com {{vars}} para reuso
     naming: p03_pt_{{topic}}.md
     constraints:
-      max_bytes: 5120
+      max_bytes: 8192
     frontmatter_required:
       - id
       - type
