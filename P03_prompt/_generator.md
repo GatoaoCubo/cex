@@ -44,3 +44,16 @@ Secao final com:
 
 ---
 *Generator v1.0 | Evidence: 257 golden HOPs, 108 templates | 2026-03-22*
+## TIPOS ADICIONAIS
+
+### Action Prompt
+Prompt de acao direta (faz X agora). Mais simples que template:
+- Sem variaveis complexas, foco em instrucao unica
+- Naming: p03_ap_{{action}}.md
+- Use when: tarefa imediata, nao reutilizavel
+
+### Instruction
+Instrucao permanente (system prompt, rules file):
+- Define comportamento persistente do agente
+- Naming: p03_inst_{{scope}}.md
+- Use when: configurar persona/regras de longo prazo

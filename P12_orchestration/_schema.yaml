@@ -12,24 +12,24 @@ types:
   dag:
     description: Grafo aciclico de dependencias
     naming: p12_dag_{{pipeline}}.yaml
-    constraints: {max_bytes: 1024}
+    constraints: {max_bytes: 3072}
 
   spawn_config:
     description: Configuracao de spawn (solo, grid, continuous)
     naming: p12_spawn_{{mode}}.yaml
-    constraints: {max_bytes: 1024}
+    constraints: {max_bytes: 3072}
 
   signal:
     description: Sinal entre agentes (complete, error, progress)
     naming: p12_sig_{{event}}.json
-    constraints: {max_bytes: 256}
+    constraints: {max_bytes: 4096}
 
   handoff:
     description: Instrucao de handoff (task + context + commit)
     naming: p12_ho_{{task}}.md
-    constraints: {max_bytes: 2048}
+    constraints: {max_bytes: 4096}
 
   dispatch_rule:
     description: Regra de despacho (keyword > satellite)
     naming: p12_dr_{{scope}}.yaml
-    constraints: {max_bytes: 512}
+    constraints: {max_bytes: 3072}

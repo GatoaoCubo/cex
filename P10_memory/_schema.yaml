@@ -12,7 +12,7 @@ types:
   brain_index:
     description: Indice de busca (BM25, FAISS config)
     naming: p10_bi_{{index}}.yaml
-    constraints: {max_bytes: 1024}
+    constraints: {max_bytes: 3072}
 
   learning_record:
     description: Registro de aprendizado (o que deu certo/errado)
@@ -22,9 +22,9 @@ types:
   session_state:
     description: Estado de sessao (efemero, snapshot)
     naming: p10_ss_{{session}}.yaml
-    constraints: {max_bytes: 1024}
+    constraints: {max_bytes: 3072}
 
   axiom:
     description: Regra fundamental (imutavel, nao negociavel)
     naming: p10_ax_{{rule}}.md
-    constraints: {max_bytes: 512}
+    constraints: {max_bytes: 3072}

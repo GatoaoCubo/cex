@@ -7,17 +7,17 @@ types:
   env_config:
     description: Variaveis de ambiente
     naming: p09_env_{{scope}}.yaml
-    constraints: {max_bytes: 2048}
+    constraints: {max_bytes: 4096}
 
   path_config:
     description: Caminhos do sistema
     naming: p09_path_{{scope}}.yaml
-    constraints: {max_bytes: 512}
+    constraints: {max_bytes: 3072}
 
   permission:
     description: Regra de permissao (read/write/execute)
     naming: p09_perm_{{scope}}.yaml
-    constraints: {max_bytes: 512}
+    constraints: {max_bytes: 3072}
 
   feature_flag:
     description: Flag de feature (on/off, gradual rollout)
@@ -27,4 +27,4 @@ types:
   runtime_rule:
     description: Regra de runtime (timeouts, retries, limits)
     naming: p09_rr_{{rule}}.yaml
-    constraints: {max_bytes: 512}
+    constraints: {max_bytes: 3072}

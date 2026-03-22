@@ -7,19 +7,19 @@ types:
   output_schema:
     description: Formato de saida estruturado
     naming: p05_os_{{format}}.yaml
-    constraints: {max_bytes: 3072}
+    constraints: {max_bytes: 4096}
 
   parser:
     description: Extrator de dados de saida
     naming: p05_parser_{{target}}.md + .yaml
-    constraints: {max_bytes: 1024}
+    constraints: {max_bytes: 4096}
 
   formatter:
     description: Formatador de saida (json, md, yaml)
     naming: p05_fmt_{{format}}.md
-    constraints: {max_bytes: 512}
+    constraints: {max_bytes: 4096}
 
   naming_rule:
     description: Regra de nomenclatura
     naming: p05_nr_{{scope}}.md
-    constraints: {max_bytes: 512}
+    constraints: {max_bytes: 4096}
