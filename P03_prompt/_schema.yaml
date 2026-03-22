@@ -1,0 +1,96 @@
+# P03 Prompt Schema
+# Baseado em: DISTILL_GOLDEN_TPL_HOP_PATTERNS.md
+# Evidence: 257 golden HOPs, variable syntax from 108 templates
+
+lp: P03
+name: Prompt
+description: COMO o agente FALA
+
+variable_syntax:
+  tier1_template: "{{MUSTACHE}}"     # resolved by template engine
+  tier2_authoring: "[BRACKET]"       # resolved by human/agent
+  deprecated: "{single_curly}"       # DO NOT USE
+
+types:
+  system_prompt:
+    description: Prompt de sistema (identidade + regras)
+    naming: p03_sp_{{agent}}.md
+    constraints:
+      max_bytes: 4096
+      quality_min: 7.0
+    frontmatter_required:
+      - id
+      - type
+      - lp
+      - title
+      - target_agent
+      - quality
+    body_structure:
+      - identity       # quem eh
+      - rules          # o que pode/nao pode
+      - output_format  # como formatar resposta
+
+  action_prompt:
+    description: Prompt de acao especifica (task-focused)
+    naming: p03_ap_{{action}}.md
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+      - id
+      - type
+      - action
+      - input_required
+      - output_expected
+    body_structure:
+      - purpose        # 1 linha
+      - input          # YAML block
+      - execution      # passos numerados
+      - output         # formato esperado
+      - validation     # checklist
+
+  prompt_template:
+    description: Template com {{vars}} para reuso
+    naming: p03_pt_{{topic}}.md
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+      - id
+      - type
+      - title
+      - variables      # lista de vars com tipo e descricao
+      - quality
+    body_structure:
+      - purpose
+      - variables_table  # name | type | description | example
+      - template_body    # o template com {{vars}}
+      - quality_gates    # criterios min 3
+      - examples         # input/output pairs min 2
+      - semantic_bridge  # obrigatorio se quality >= 8
+
+  instruction:
+    description: Instrucao operacional (passo-a-passo)
+    naming: p03_ins_{{topic}}.md
+    constraints:
+      max_bytes: 1024
+    frontmatter_required:
+      - id
+      - type
+      - target
+      - steps
+
+  chain:
+    description: Sequencia de prompts (A > B > C)
+    naming: p03_ch_{{pipeline}}.md + .yaml
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+      - id
+      - type
+      - steps
+      - flow
+
+# Golden Formula (DISTILL report):
+# GOLDEN = Specific Frontmatter + Clear Purpose + Typed Variables
+#        + Structured Body + Quality Gates + Examples + Semantic Bridge
+# Semantic Bridge present in 60% of golden templates
+# Shokunin iteration 2 | 2026-03-22

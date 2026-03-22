@@ -1,0 +1,93 @@
+# P04 Tools Schema
+# Baseado em: DISTILL_GOLDEN_AGT_SKL_PATTERNS.md
+# Evidence: 58 golden skills, MCP server patterns
+
+lp: P04
+name: Tools
+description: O que o agente USA
+
+types:
+  skill:
+    description: Habilidade reutilizavel (phases + trigger)
+    naming: p04_skill_{{name}}.md + .yaml
+    constraints:
+      max_bytes: 4096
+      quality_min: 7.0
+    frontmatter_required:   # (DISTILL: SKILL frontmatter = single source)
+      - id
+      - name
+      - description
+      - user_invocable    # boolean
+      - trigger           # como ativar
+      - phases            # lista de fases
+      - when_to_use
+      - when_not_to_use
+      - examples          # 2-3 exemplos de uso
+    body_structure:
+      - purpose
+      - workflow_phases   # numeradas com input/output
+      - anti_patterns
+      - metrics           # OPCIONAL mas valorizado (real data)
+
+  mcp_server:
+    description: Servidor MCP (tools + resources)
+    naming: p04_mcp_{{server}}.md + .yaml
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+      - id
+      - name
+      - transport         # stdio, sse, http
+      - tools_provided
+      - resources_provided
+
+  hook:
+    description: Pre/post processing hook
+    naming: p04_hook_{{name}}.md
+    constraints:
+      max_bytes: 1024
+    frontmatter_required:
+      - id
+      - type              # pre, post, stop
+      - trigger_event
+      - script_path
+
+  plugin:
+    description: Extensao plugavel
+    naming: p04_plug_{{name}}.md + .yaml
+    constraints:
+      max_bytes: 2048
+
+  client:
+    description: Cliente de API
+    naming: p04_client_{{api}}.md + .yaml
+    constraints:
+      max_bytes: 1024
+
+  cli_tool:
+    description: Ferramenta CLI
+    naming: p04_cli_{{tool}}.md
+    constraints:
+      max_bytes: 1024
+
+  scraper:
+    description: Extrator de dados web
+    naming: p04_scraper_{{target}}.md + .yaml
+    constraints:
+      max_bytes: 1024
+
+  connector:
+    description: Conector de servico externo
+    naming: p04_conn_{{service}}.md + .yaml
+    constraints:
+      max_bytes: 1024
+
+  daemon:
+    description: Processo background
+    naming: p04_daemon_{{name}}.md + .yaml
+    constraints:
+      max_bytes: 1024
+
+# Key insight: Skills com metricas reais tem confianca 2x maior
+# Metrics field opcional mas valorizado no ranking de qualidade
+# Shokunin iteration 2 | 2026-03-22

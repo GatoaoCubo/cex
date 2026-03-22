@@ -1,0 +1,121 @@
+# P02 Model Schema
+# Baseado em: DISTILL_GOLDEN_AGT_SKL_PATTERNS.md
+# Evidence: 31 golden agents, 78 golden documents, ISO patterns
+
+lp: P02
+name: Model
+description: QUEM o agente EH
+
+types:
+  agent:
+    description: Definicao de agente (persona + capabilities)
+    naming: p02_agent_{{name}}.md + .yaml
+    constraints:
+      max_bytes: 4096
+      quality_min: 7.0
+    frontmatter_required:
+      - id
+      - type            # agent
+      - lp              # P02
+      - title
+      - version
+      - satellite       # qual satellite opera
+      - domain
+      - quality
+      - tags
+      - tldr
+    body_structure:     # 11 secoes padrao (DISTILL_AGT)
+      - overview
+      - architecture    # ASCII diagram ou tabela
+      - file_structure
+      - when_to_use     # YES/NO tabela
+      - input_output
+      - integration     # upstream + downstream
+      - quality_gates   # 5D ou 12LP
+      - common_issues
+      - invocation
+      - related_agents
+      - footer          # Satellite: {{SAT}} | Quality: {{Q}}
+    iso_vectorstore:
+      min_files: 10     # baseline
+      required:
+        - MANIFEST
+        - QUICK_START
+        - PRIME
+        - INSTRUCTIONS
+        - ARCHITECTURE
+        - OUTPUT_TEMPLATE
+        - EXAMPLES
+        - ERROR_HANDLING
+        - UPLOAD_KIT
+        - SYSTEM_INSTRUCTION
+
+  lens:
+    description: Perspectiva especializada sobre dominio
+    naming: p02_lens_{{perspective}}.md + .yaml
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+      - id
+      - type
+      - perspective
+      - applies_to
+
+  boot_config:
+    description: Configuracao de inicializacao por provider
+    naming: p02_boot_{{provider}}.md
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+      - id
+      - provider        # claude, cursor, windsurf, codex, copilot, pi
+      - identity
+      - constraints
+      - tools
+
+  mental_model:
+    description: Mapa mental do agente (routing, decisoes)
+    naming: p02_mm_{{agent}}.yaml
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+      - id
+      - agent
+      - routing_rules
+      - decision_tree
+
+  model_card:
+    description: Spec do LLM usado (pricing, context, capabilities)
+    naming: p02_mc_{{model}}.md + .yaml
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+      - id
+      - model_name
+      - provider
+      - context_window
+      - pricing
+
+  router:
+    description: Regra de roteamento (task > satellite)
+    naming: p02_rt_{{scope}}.yaml
+    constraints:
+      max_bytes: 1024
+    frontmatter_required:
+      - id
+      - routes
+      - fallback
+
+  fallback_chain:
+    description: Sequencia de fallback (model A > B > C)
+    naming: p02_fb_{{chain}}.yaml
+    constraints:
+      max_bytes: 512
+    frontmatter_required:
+      - id
+      - chain
+      - timeout_per_step
+
+# Evidence: 31 golden agents, 22+ ISO files in mature agents
+# ISO count = maturity: 10=baseline, 17=mature, 22+=golden
+# Shokunin iteration 2 | 2026-03-22
