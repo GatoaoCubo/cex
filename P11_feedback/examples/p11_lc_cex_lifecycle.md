@@ -1,3 +1,27 @@
+---
+id: p11_lc_cex_lifecycle
+type: lifecycle_rule
+lp: P11
+title: "CEX Artifact Lifecycle Rules"
+version: "1.0.0"
+created: "2026-03-22"
+updated: "2026-03-22"
+author: PYTHA
+domain: meta
+quality: 9.0
+tags: [lifecycle, freshness, archive, promote, anti-fragility]
+tldr: "Regras de freshness (30d), promotion (>=9.5), archive (<7.0), version sync e cascade para artefatos CEX"
+when_to_use: "Quando precisar validar, promover ou arquivar artefatos do sistema CEX"
+keywords: [lifecycle, freshness-scan, golden-promotion, archive-policy]
+long_tails:
+  - como gerenciar ciclo de vida de artefatos AI
+  - regras de freshness e archive para knowledge base
+axioms:
+  - Artefato sem revalidacao em 30 dias = potencialmente stale
+  - Promotion requer 2 validacoes independentes
+density_score: 0.90
+---
+
 # CEX Lifecycle Rules
 
 ## Purpose

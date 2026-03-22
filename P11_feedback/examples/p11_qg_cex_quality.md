@@ -1,3 +1,27 @@
+---
+id: p11_qg_cex_quality
+type: quality_gate
+lp: P11
+title: "CEX Pre-Commit Quality Gate"
+version: "1.0.0"
+created: "2026-03-22"
+updated: "2026-03-22"
+author: PYTHA
+domain: meta
+quality: 9.0
+tags: [quality-gate, pre-commit, validation, scoring, anti-fragility]
+tldr: "Gate pre-commit com 5 checks (naming, size, density, schema, generator) + scoring formula + auto-reject criteria"
+when_to_use: "Antes de mergear qualquer novo artefato CEX no pool"
+keywords: [quality-gate, pre-commit-check, scoring-formula, auto-reject]
+long_tails:
+  - como validar qualidade de artefatos antes do merge
+  - formula de scoring para knowledge cards AI
+axioms:
+  - Nenhum artefato entra no pool sem passar pelo gate
+  - Score < 7.0 = rejeicao automatica sem excecao
+density_score: 0.90
+---
+
 # CEX Quality Gate
 
 ## Purpose
