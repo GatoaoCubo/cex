@@ -1,0 +1,64 @@
+---
+id: p01_kc_lp12_orchestration
+type: knowledge_card
+lp: P01
+title: "P12 Orchestration: Como Coordena"
+version: 1.0.0
+created: 2026-03-23
+updated: 2026-03-23
+author: edison
+domain: meta-construction
+quality: 9.0
+tags: [orchestration, workflow, DAG, spawn, signal, handoff]
+tldr: "P12 define 6 tipos de orquestracao (workflow, dag, spawn_config, signal, handoff, dispatch_rule) que coordenam execucao multi-agente — 3 modos: solo, grid static, grid continuous"
+when_to_use: "Quando precisar definir workflows, spawn configs, signals ou handoffs no CEX"
+keywords: [workflow, dag, spawn_config, signal, handoff, dispatch_rule]
+long_tails:
+  - "como funciona o spawn grid continuous no CEX"
+  - "qual a diferenca entre workflow e DAG em P12"
+axioms:
+  - "Todo handoff deve ter commit instruction — trabalho sem commit eh trabalho perdido"
+linked_artifacts:
+  agent: null
+  skill: null
+density_score: 0.88
+---
+
+# P12 Orchestration: Como Coordena
+
+## Executive Summary
+P12 governa coordenacao multi-agente no CEX com 6 tipos de artefato. Workflows definem steps sequenciais/paralelos, DAGs modelam dependencias, spawn configs parametrizam lancamento de satelites (solo/grid/continuous), signals comunicam estado entre agentes, handoffs transferem contexto, e dispatch rules roteiam tasks por keyword.
+
+## Spec Table
+| Campo | Valor | Nota |
+|-------|-------|------|
+| Tipos | 6 | workflow, dag, spawn_config, signal, handoff, dispatch_rule |
+| workflow max_bytes | 3072 | Steps sequenciais/paralelos |
+| signal format | JSON | complete, error, progress |
+| handoff max_bytes | 4096 | Task + context + commit |
+| spawn modes | 3 | solo, grid static, grid continuous |
+| dispatch_rule format | YAML | keyword > satellite routing |
+
+## Patterns
+- Workflow com steps tipados: sequential (A>B>C) ou parallel (A+B+C)
+- DAG para dependencias complexas: task C depende de A e B concluirem
+- Spawn config: solo (1 sat), grid static (<=6 tasks), grid continuous (>6 tasks, auto-refill)
+- Signal protocol: {sat}_complete_{ts}.json com score para STELLA monitorar
+- Handoff com 5 secoes: contexto, seeds, tarefas, scope fence, commit instruction
+- Dispatch rule: keyword match > satellite routing em YAML
+
+## Anti-Patterns
+- Handoff sem commit instruction: trabalho pode se perder
+- Signal sem timestamp: impossivel ordenar eventos
+- Spawn > 3 satelites simultaneos: BSOD risk no Windows
+- DAG com ciclo: deadlock garantido
+- Workflow sem error handling: falha em 1 step mata todo o pipeline
+
+## Application
+No CODEXA, P12 manifesta como spawn_solo.ps1/spawn_grid.ps1, signal_writer.py, e .claude/handoffs/. Este proprio handoff (META3_edison.md) eh uma instancia de P12 handoff. Grid continuous testado com 1.6x speedup em 7 batches.
+
+## References
+- P12_orchestration/_schema.yaml (fonte de verdade)
+- records/framework/powershell/spawn_*.ps1 (spawn implementations)
+- records/core/python/signal_writer.py (signal implementation)
+- .claude/handoffs/ (handoff instances)
