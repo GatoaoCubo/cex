@@ -1,7 +1,8 @@
 
+!_config/README.md
+!_config/gdrive.yaml
 # Google Drive credentials (secrets)
+__pycache__/
+_config/*.credentials
 _config/client_secret.json
 _config/token.json
-_config/*.credentials
-!_config/gdrive.yaml
-!_config/README.md
