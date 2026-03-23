@@ -5,6 +5,19 @@ Format: Wave-based (chronological order).
 
 ---
 
+## [1.1.0] - 2026-03-23
+
+### Versioning System (EDISON)
+- `_meta/VERSION.yaml` — formal version manifest with real counts per LP (12 LPs, 69 types, 21 templates, 48 examples)
+- `_tools/bump_version.py` — version bumper with `--lp` and `--level` args, auto-updates CHANGELOG
+- `_tools/changelog_gen.py` — git log parser, groups commits by LP, generates formatted entries
+- Post-v1.0 additions: ISO package spec, compile/decompile/validate tools, deck system, GDrive integration
+- Pipeline: distill.py (template-as-prompt), audio feedback (Edge TTS), contributor ingestion pipeline
+- Packages: 7 golden agents normalized to ISO Package Spec format
+- ML Algorithm Map: first universal KC (dual: CEX framework + instance pool)
+
+---
+
 ## [1.0.0] - 2026-03-22
 
 ### Wave 6: Product Release (PYTHA + STELLA)
@@ -57,16 +70,16 @@ Format: Wave-based (chronological order).
 | Metric | Value |
 |--------|-------|
 | Leverage Points | 12 (P01-P12) |
-| Artifact Types | 68 |
+| Artifact Types | 69 |
 | Schemas | 12/12 |
 | Generators | 12/12 |
-| Templates | 7 |
-| Examples (golden) | 18 |
+| Templates | 21 |
+| Examples (golden) | 48 |
 | Validators | 3 |
 | Density avg | 88.6% |
 | Elite examples | 6 (density >= 0.90) |
 | Files indexed | 9,916 (migration map) |
-| Total commits | 18+ |
+| Total commits | 30+ |
 | Repo size | ~65KB |
 
 ---
@@ -83,4 +96,4 @@ Format: Wave-based (chronological order).
 
 ---
 
-*CEX v1.0.0 | 2026-03-22 | MIT License*
+*CEX v1.1.0 | 2026-03-23 | MIT License*
