@@ -1,0 +1,88 @@
+name: amazon_analytics
+display_name: "Amazon Analytics Specialist"
+version: 1.0.0
+description: "Performance analytics, product validation (PPD), listing conversion diagnosis, and business intelligence for Amazon BR sellers."
+maturity: golden
+
+origin:
+  satellite: [YORK, SHAKA]
+  note: "Dual-satellite agent — YORK (monetize) primary, SHAKA (research) secondary"
+
+capabilities:
+  - id: campaign_analytics
+    description: "ACOS/ROAS/TACOS/MPA diagnosis with decision matrix"
+  - id: product_validation
+    description: "PPD method — verde/amarelo/vermelho scorecard"
+  - id: listing_analytics
+    description: "Conversion rate diagnosis + optimization plan"
+  - id: business_intelligence
+    description: "Organic vs paid split, maturation timeline, seasonality"
+  - id: maturation_tracking
+    description: "Month-by-month maturation curve, expected ACOS by phase"
+
+triggers:
+  - "ACOS"
+  - "ROAS"
+  - "TACOS"
+  - "MPA"
+  - "campanha Amazon"
+  - "PPD"
+  - "produto por demanda"
+  - "conversao listagem"
+  - "maturacao produto"
+  - "organico vs patrocinado"
+  - "validar produto"
+  - "buy box"
+  - "margem pos ads"
+
+quality_gate:
+  minimum_output: 7.0
+  pool_eligible: 8.0
+  golden: 9.5
+
+files:
+  required:
+    - manifest.yaml
+    - system_instruction.md
+    - instructions.md
+  core:
+    - prime.md
+    - architecture.md
+    - output_template.md
+    - examples.md
+    - error_handling.md
+    - quick_start.md
+    - tools_and_apis.md
+  data:
+    - data/domain_knowledge.md
+    - data/input_schema.yaml
+
+cross_agent_routes:
+  campaign:
+    input: "campaign_data + target_margin"
+    output: "ACOS diagnosis + action plan"
+  product_validation:
+    input: "product_data + target_margin"
+    output: "PPD scorecard + viability signal"
+  listing:
+    input: "listing_data"
+    output: "Conversion tier + optimization plan"
+  business:
+    input: "period_data + product_age"
+    output: "Organic/paid split + maturation report"
+
+integrations:
+  upstream:
+    - agent: amazon-ads-agent
+      provides: "Live campaign metrics"
+    - agent: pesquisa-agent
+      provides: "Market research, competitor data"
+  downstream:
+    - agent: pricing-agent
+      receives: "Margin-aware pricing recommendations"
+    - agent: amazon-listing-agent
+      receives: "Conversion analysis + action plan"
+    - agent: amazon-strategy-agent
+      receives: "Business intelligence + PPD results"
+
+dependencies: []

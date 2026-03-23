@@ -1,0 +1,69 @@
+title: "Execution Plans"
+version: "1.0.0"
+description: "Execution modes for video agent"
+
+execution_modes:
+  full:
+    name: "Full Production Package"
+    description: "Complete 3-output package with validation"
+    total_duration_estimate: "2-4 minutes"
+    outputs: [storyboard, script, visual_prompts, validation]
+    phases:
+      - {id: 1, name: validate_input, duration: "5-10s", inputs: [product_brief, duration, key_benefits, style], outputs: [validated_input]}
+      - {id: 2, name: generate_storyboard, duration: "30-60s", prompt: "storyboarder", inputs: [validated_input], outputs: [OUTPUT_1]}
+      - {id: 3, name: write_script, duration: "30-60s", prompt: "script_writer", inputs: [OUTPUT_1, validated_input], outputs: [OUTPUT_2]}
+      - {id: 4, name: create_prompts, duration: "30-60s", prompt: "visual_prompter", inputs: [OUTPUT_1, validated_input], outputs: [OUTPUT_3]}
+      - {id: 5, name: validate_output, duration: "5-10s", tool: "validator.py", inputs: [OUTPUT_1, OUTPUT_2, OUTPUT_3], outputs: [validation_score]}
+      - {id: 6, name: format_delivery, duration: "5-10s", inputs: [OUTPUT_1, OUTPUT_2, OUTPUT_3, validation_score], outputs: [final_package]}
+
+  quick:
+    name: "Quick Storyboard Only"
+    description: "Fast storyboard without full script/prompts"
+    total_duration_estimate: "40 seconds"
+    outputs: [storyboard]
+
+  script_only:
+    name: "Script from Existing Storyboard"
+    total_duration_estimate: "1 minute"
+    outputs: [script]
+
+  prompts_only:
+    name: "Prompts from Existing Storyboard"
+    total_duration_estimate: "1 minute"
+    outputs: [visual_prompts]
+
+pipeline_integrations:
+  from_pesquisa:
+    mapping:
+      product_name: product_brief
+      product_attributes: key_benefits
+      competitor_patterns: competitor_hooks
+      audience_insights: target_audience
+
+  from_anuncio:
+    mapping:
+      key_benefits: key_benefits
+      pain_points: pain_points
+      messaging_hooks: hook_inspiration
+      target_audience: target_audience
+
+quality_gates:
+  storyboard:
+    shot_count: {15s: [5, 7], 30s: [6, 8], 60s: [8, 10]}
+    hook_timing: {max_seconds: 3}
+    phases_required: [HOOK, BUILD, BENEFIT, PROOF, CTA]
+    cta_position: last_shot
+
+  script:
+    words_per_second: 2.5
+    pause_buffer: 0.5
+
+  prompts:
+    prompt_per_shot: true
+    camera_specified: true
+    style_consistent: true
+
+  overall:
+    minimum_score: 7.0
+    good_score: 8.0
+    excellent_score: 9.0

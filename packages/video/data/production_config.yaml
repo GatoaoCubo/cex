@@ -1,0 +1,92 @@
+title: "Production Configuration"
+version: "1.0.0"
+description: "AI video generator settings and production config"
+
+generators:
+  runway_gen3:
+    name: "Runway Gen-3 Alpha"
+    tier: primary
+    settings:
+      resolution: {vertical: "1080x1920", horizontal: "1920x1080", square: "1080x1080"}
+      duration: {min: 4, max: 16, default: 4, unit: seconds}
+      fps: {options: [24, 30], default: 24}
+      motion_strength:
+        min: 0.1
+        max: 1.0
+        default: 0.7
+        by_style: {energetic: 0.9, calm: 0.5, dramatic: 0.6, minimal: 0.3}
+      guidance_scale: {min: 1, max: 20, default: 12}
+      interpolation: [linear, smooth, film]
+    best_practices:
+      - "Be specific about subject and action"
+      - "Include camera movement explicitly"
+      - "Specify lighting quality"
+      - "Add style modifiers"
+      - "Include quality terms (4K, cinematic)"
+      - "Avoid negative prompts"
+      - "Avoid text rendering requests"
+
+  pika_1_5:
+    name: "Pika 1.5"
+    tier: secondary
+    settings:
+      resolution: {vertical: "1080x1920", horizontal: "1920x1080"}
+      duration: {min: 3, max: 10, default: 3, unit: seconds}
+      fps: {options: [24], default: 24}
+      motion_strength: {min: 0.1, max: 1.0, default: 0.8}
+      guidance_scale: {min: 1, max: 20, default: 15}
+
+  kling:
+    name: "Kling AI"
+    tier: alternative
+    settings:
+      resolution: {vertical: "1080x1920", horizontal: "1920x1080"}
+      duration: {min: 5, max: 120, default: 5, unit: seconds}
+      fps: {options: [24, 30], default: 24}
+      motion_strength: {min: 0.1, max: 1.0, default: 0.7}
+
+tts_services:
+  elevenlabs:
+    name: "ElevenLabs"
+    tier: primary
+    languages: [pt-BR, en-US, es-ES]
+    settings:
+      stability: {min: 0, max: 1, default: 0.5}
+      similarity_boost: {min: 0, max: 1, default: 0.75}
+
+style_profiles:
+  energetic:
+    lighting: "high contrast, vibrant colors, punchy"
+    movement: "dynamic, fast, energetic"
+    modifiers: "vibrant, dynamic, high saturation, bold"
+    motion_strength: 0.9
+    music_tempo: "fast (120+ BPM)"
+  calm:
+    lighting: "soft, warm, diffused, gentle"
+    movement: "slow, smooth, floating"
+    modifiers: "soft lighting, calm, serene, pastel tones"
+    motion_strength: 0.5
+    music_tempo: "slow (60-80 BPM)"
+  dramatic:
+    lighting: "low-key, shadows, moody, chiaroscuro"
+    movement: "slow reveal, suspenseful"
+    modifiers: "cinematic, dramatic lighting, moody, high contrast"
+    motion_strength: 0.6
+    music_tempo: "variable"
+  minimal:
+    lighting: "clean, even, bright"
+    movement: "static or subtle drift"
+    modifiers: "minimalist, clean, modern, neutral tones"
+    motion_strength: 0.3
+    music_tempo: "ambient"
+
+camera_movements:
+  hook: {energetic: "quick zoom in, slam", calm: "slow push in", dramatic: "slow reveal, rack focus", minimal: "static, subtle drift"}
+  build: {problem: "handheld, shaky", context: "tracking", wide: "establishing, slow pan"}
+  benefit: {demo: "tracking, following action", reveal: "orbit, 360 showcase"}
+  proof: {default: "static, text-friendly, subtle push"}
+  cta: {default: "static or slow zoom, clean framing"}
+
+prompt_structure:
+  format: "[SUBJECT] [ACTION], [CAMERA], [LIGHTING], [STYLE], [QUALITY]"
+  quality_modifiers: ["4K resolution", "professional video", "commercial quality", "cinematic", "photorealistic"]
