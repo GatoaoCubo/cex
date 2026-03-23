@@ -1,0 +1,162 @@
+$schema: http://json-schema.org/draft-07/schema#
+title: anuncio_agent Input Schema
+version: 3.5.0
+description: Input validation schema for anuncio_agent
+type: object
+required:
+- product_name
+- category
+properties:
+  source_type:
+    type: string
+    enum:
+    - pesquisa_agent
+    - product_url
+    - product_brief
+    description: Source of the input data
+    default: product_brief
+  product_name:
+    type: string
+    minLength: 3
+    maxLength: 200
+    description: Product name (required)
+  category:
+    type: string
+    minLength: 3
+    maxLength: 100
+    description: Product category path (e.g., 'Suplementos > Proteinas')
+  target_audience:
+    type: object
+    properties:
+      demographics:
+        type: string
+        description: Age, gender, location
+      psychographics:
+        type: string
+        description: Interests, lifestyle, values
+      pain_points:
+        type: array
+        items:
+          type: string
+        description: Main problems/needs
+  price_range:
+    type: object
+    properties:
+      min:
+        type: number
+        minimum: 0
+      max:
+        type: number
+        minimum: 0
+      currency:
+        type: string
+        default: BRL
+  features:
+    type: array
+    items:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+        benefit:
+          type: string
+    description: Product features with benefits
+  head_terms:
+    type: array
+    items:
+      type: string
+    minItems: 1
+    maxItems: 20
+    description: Primary keywords/search terms
+  competitors:
+    type: array
+    items:
+      type: object
+      properties:
+        name:
+          type: string
+        price:
+          type: number
+        strengths:
+          type: array
+          items:
+            type: string
+        weaknesses:
+          type: array
+          items:
+            type: string
+  brand_voice:
+    type: object
+    properties:
+      tone:
+        type: string
+        enum:
+        - professional
+        - friendly
+        - luxurious
+        - casual
+        - technical
+      archetype:
+        type: string
+      prohibited_words:
+        type: array
+        items:
+          type: string
+  marketplace_target:
+    type: string
+    enum:
+    - mercado_livre
+    - shopee
+    - magalu
+    - amazon_br
+    - all
+    default: all
+    description: Target marketplace for optimization
+  certifications:
+    type: array
+    items:
+      type: string
+    description: ANVISA, INMETRO, ISO certifications
+  research_notes:
+    type: string
+    description: Full research notes from pesquisa_agent
+confidence_calculation:
+  formula: weighted_average(field_completeness)
+  weights:
+    product_name: 0.2
+    category: 0.15
+    head_terms: 0.2
+    features: 0.15
+    target_audience: 0.1
+    competitors: 0.1
+    price_range: 0.05
+    brand_voice: 0.05
+  thresholds:
+    generate_full: 0.9
+    generate_with_suggestions: 0.7
+    generate_partial: 0.5
+    request_enrichment: 0.0
+examples:
+- source_type: pesquisa_agent
+  product_name: Whey Protein Isolado 1kg Chocolate
+  category: Suplementos > Proteinas > Whey Protein
+  head_terms:
+  - whey protein
+  - proteina isolada
+  - suplemento
+  - hipertrofia
+  price_range:
+    min: 149
+    max: 199
+    currency: BRL
+  features:
+  - name: Proteina por dose
+    value: 27g
+    benefit: Maximo ganho muscular
+  - name: Sabor
+    value: Chocolate Suico
+    benefit: Sabor premium
+  certifications:
+  - ANVISA

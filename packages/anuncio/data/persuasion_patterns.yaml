@@ -1,0 +1,205 @@
+$schema: http://json-schema.org/draft-07/schema#
+title: Persuasion Patterns - Mental Triggers & Frameworks
+version: 3.5.0
+description: Gatilhos mentais e frameworks de persuasao para copy
+storybrand_framework:
+  name: StoryBrand
+  author: Donald Miller
+  description: 7-part narrative framework for brand messaging
+  sections:
+  - id: 1
+    name: hero
+    portuguese: Heroi
+    description: O cliente e o heroi, nao a marca
+    template: Voce [desejo/necessidade do cliente]...
+    example: Voce quer ganhar massa muscular de forma saudavel...
+  - id: 2
+    name: problem
+    portuguese: Problema
+    description: O vilao/problema que o cliente enfrenta
+    template: Mas [problema/frustracao]...
+    example: Mas encontrar um whey protein de qualidade sem aditivos e desafiador...
+  - id: 3
+    name: guide
+    portuguese: Guia
+    description: A marca como guia experiente
+    template: '[Marca] entende [empatia] e oferece [autoridade]...'
+    example: Nossa marca foi criada por nutricionistas esportivos...
+  - id: 4
+    name: plan
+    portuguese: Plano
+    description: Passos claros para o sucesso
+    template: 'E simples: 1) [passo1], 2) [passo2], 3) [passo3]'
+    example: 'E simples: 1) Escolha seu sabor, 2) Adicione ao carrinho, 3) Receba
+      em casa'
+  - id: 5
+    name: call_to_action
+    portuguese: Chamada para Acao
+    description: CTA direto e claro
+    template: '[Acao especifica] agora para [beneficio imediato]'
+    example: Compre agora e comece sua transformacao hoje
+  - id: 6
+    name: success
+    portuguese: Sucesso
+    description: Visao do sucesso apos a compra
+    template: Imagine [resultado desejado]...
+    example: Imagine ter energia para treinar todos os dias e ver resultados reais...
+  - id: 7
+    name: failure
+    portuguese: Fracasso
+    description: O que acontece se nao agir
+    template: Sem [produto], voce continua [problema]...
+    example: Sem suplementacao adequada, seus treinos podem nao render o esperado...
+mental_triggers:
+  social_proof:
+    portuguese: Prova Social
+    description: Pessoas confiam no que outros confiam
+    patterns:
+    - Mais de [X] clientes satisfeitos
+    - Avaliado com [X] estrelas
+    - '[X] unidades vendidas'
+    - Recomendado por [autoridade]
+    - Escolha de [grupo de pessoas]
+    examples:
+    - Mais de 50.000 clientes satisfeitos
+    - 4.9 estrelas com 2.000+ avaliacoes
+    - Best-seller na categoria
+  scarcity:
+    portuguese: Escassez
+    description: Recursos limitados aumentam valor percebido
+    patterns:
+    - Ultimas [X] unidades
+    - Edicao limitada
+    - Lote exclusivo
+    - Producao artesanal limitada
+    warning: Usar apenas escassez REAL, nao fabricada (CONAR)
+    examples:
+    - Ultimas unidades do lote
+    - Edicao limitada de aniversario
+  authority:
+    portuguese: Autoridade
+    description: Especialistas e certificacoes aumentam confianca
+    patterns:
+    - Desenvolvido por [especialista]
+    - Certificado [orgao]
+    - Aprovado pela [instituicao]
+    - '[X] anos de experiencia'
+    examples:
+    - Desenvolvido por nutricionistas
+    - Certificado ANVISA
+    - 15 anos de experiencia em suplementos
+  reciprocity:
+    portuguese: Reciprocidade
+    description: Dar algo para receber algo em troca
+    patterns:
+    - Brinde exclusivo na compra
+    - E-book gratis incluso
+    - Guia de [tema] de presente
+    - Amostra gratis
+    examples:
+    - Coqueteleira de brinde na primeira compra
+    - E-book de receitas proteicas incluso
+  urgency:
+    portuguese: Urgencia
+    description: Prazo limitado incentiva acao
+    patterns:
+    - Promocao valida ate [data]
+    - Ultimos dias
+    - Aproveite antes que acabe
+    warning: Usar apenas urgencia REAL (CONAR)
+    examples:
+    - Promocao Black Friday - ultimos dias
+    - Preco especial de lancamento
+  specificity:
+    portuguese: Especificidade
+    description: Numeros especificos aumentam credibilidade
+    patterns:
+    - '[X]g de proteina por dose'
+    - '[X]% de absorcao'
+    - Rendimento de [X] doses
+    - '[X] ingredientes ativos'
+    examples:
+    - 27g de proteina isolada por dose
+    - 90% de absorcao em 30 minutos
+    - Rendimento de 33 doses por pote
+  curiosity:
+    portuguese: Curiosidade
+    description: Gap de informacao gera interesse
+    patterns:
+    - Descubra como [beneficio]
+    - O segredo para [resultado]
+    - Por que [grupo] prefere
+    examples:
+    - Descubra como atletas profissionais aceleram resultados
+    - O segredo dos bodybuilders para recuperacao rapida
+  fear_of_loss:
+    portuguese: Medo da Perda
+    description: Perder e mais doloroso que ganhar
+    patterns:
+    - Nao perca [oportunidade]
+    - Evite [problema]
+    - Proteja [algo valioso]
+    examples:
+    - Nao perca ganhos musculares por falta de proteina
+    - Evite catabolismo noturno
+  exclusivity:
+    portuguese: Exclusividade
+    description: Sentir-se especial e unico
+    patterns:
+    - Exclusivo para [grupo]
+    - Acesso VIP
+    - Selecao premium
+    examples:
+    - Formula exclusiva desenvolvida para atletas
+    - Importado direto da fonte
+  guarantee:
+    portuguese: Garantia
+    description: Reduzir risco percebido
+    patterns:
+    - Garantia de [X] dias
+    - Satisfacao garantida
+    - Dinheiro de volta se nao gostar
+    examples:
+    - Garantia de 30 dias - satisfacao ou devolucao
+    - Troca gratis em caso de problema
+aida_framework:
+  name: AIDA
+  description: Attention, Interest, Desire, Action
+  sections:
+    attention:
+      goal: Capturar atencao em 3 segundos
+      techniques:
+      - headline impactante
+      - numero especifico
+      - pergunta provocativa
+    interest:
+      goal: Manter engajamento
+      techniques:
+      - storytelling
+      - dados relevantes
+      - beneficios claros
+    desire:
+      goal: Criar vontade de ter
+      techniques:
+      - prova social
+      - visualizacao do resultado
+      - exclusividade
+    action:
+      goal: Converter em compra
+      techniques:
+      - CTA claro
+      - urgencia
+      - facilidade de compra
+bullet_formulas:
+  benefit_first:
+    pattern: '[BENEFICIO]: [Feature] que [explicacao do valor]'
+    example: 'ENERGIA DURADOURA: Formula de liberacao gradual que mantem sua disposicao
+      por ate 6 horas sem picos de energia'
+  problem_solution:
+    pattern: '[PROBLEMA]? [Produto] resolve com [feature] para [resultado]'
+    example: Cansaco apos treino? Nossa formula de recuperacao muscular reduz dores
+      em ate 50% para voce voltar mais forte
+  number_driven:
+    pattern: '[NUMERO] [unidade] de [feature] para [beneficio mensuravel]'
+    example: 27g de proteina isolada por dose para maximo ganho muscular com apenas
+      120 calorias

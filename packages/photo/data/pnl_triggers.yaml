@@ -1,0 +1,203 @@
+$schema: http://json-schema.org/draft-07/schema#
+title: PNL/Emotional Triggers - photo_agent CONVERSION Framework
+version: 4.1.0
+description: 9-Scene CONVERSION Grid - Emotion-based triggers for maximum sales conversion
+framework: CONVERSION
+philosophy: Fotos que VENDEM, nao apenas mostram
+triggers_by_scene:
+  scene_1_hero_trust:
+    name: Hero Trust
+    primary_emotion: trust
+    conversion_purpose: Primeira impressao confiavel
+    triggers:
+    - professionalism
+    - clarity
+    - credibility
+    visual_elements:
+      background: 'white #FFFFFF = purity, transparency'
+      lighting: high-key softbox = no secrets
+      focus: sharp 85mm f/8 = precision
+      position: centered 85% = confidence
+    psychology: 'Buyer thinks: ''This looks professional and trustworthy'''
+    fidelity_weight: 5
+  scene_2_problem_state:
+    name: Problem State
+    primary_emotion: pain
+    conversion_purpose: EU tenho esse problema
+    triggers:
+    - recognition
+    - frustration
+    - empathy
+    visual_elements:
+      context: realistic environment showing the problem
+      lighting: natural ambient = authenticity
+      mood: slightly uncomfortable, relatable
+      lens: 35-50mm f/2.8-f/4 = documentary feel
+    psychology: 'Buyer thinks: ''Yes! I have this exact problem!'''
+    fidelity_weight: 4
+  scene_3_solution_moment:
+    name: Solution Moment
+    primary_emotion: relief
+    conversion_purpose: Isso FUNCIONA!
+    triggers:
+    - satisfaction
+    - resolution
+    - effectiveness
+    visual_elements:
+      action: product actively solving the problem
+      expression: relief visible on face/context
+      lighting: brighter than scene 2 = hope
+      lens: 50mm f/4-f/5.6 = clarity
+    psychology: 'Buyer thinks: ''This product actually works!'''
+    fidelity_weight: 4
+  scene_4_transformation:
+    name: Transformation
+    primary_emotion: desire
+    conversion_purpose: EU QUERO esse resultado
+    triggers:
+    - aspiration
+    - achievement
+    - improvement
+    visual_elements:
+      context: the AFTER state, dream achieved
+      lighting: warm welcoming light = reward
+      mood: satisfaction, accomplishment
+      lens: 50mm f/2.8-f/4 = intimate
+    psychology: 'Buyer thinks: ''I want to feel like this!'''
+    fidelity_weight: 4
+  scene_5_social_belonging:
+    name: Social Belonging
+    primary_emotion: belonging
+    conversion_purpose: Pessoas como eu usam
+    triggers:
+    - validation
+    - community
+    - social_proof
+    visual_elements:
+      people: real people using product naturally
+      context: group/family/friends setting
+      lighting: natural window light = authenticity
+      lens: 35mm f/2.8-f/4 = environmental
+    psychology: 'Buyer thinks: ''People like me use this product'''
+    fidelity_weight: 3
+  scene_6_benefit_proof:
+    name: Benefit Proof
+    primary_emotion: curiosity
+    conversion_purpose: Posso VER a qualidade
+    triggers:
+    - evidence
+    - quality
+    - transparency
+    visual_elements:
+      detail: macro close-up of KEY FEATURE
+      lighting: ring light = reveal details
+      focus: selective on benefit area
+      lens: 100mm macro f/2.8-f/4 = precision
+    psychology: 'Buyer thinks: ''I can see the quality myself'''
+    fidelity_weight: 4
+  scene_7_emotional_peak:
+    name: Emotional Peak
+    primary_emotion: pleasure
+    conversion_purpose: Vou me SENTIR assim
+    triggers:
+    - joy
+    - satisfaction
+    - happiness
+    visual_elements:
+      expression: genuine smile, pleasure moment
+      lighting: golden warm light = happiness
+      mood: peak enjoyment of product
+      lens: 85mm f/2.8 = portrait, emotion
+    psychology: 'Buyer thinks: ''I will feel this happy!'''
+    fidelity_weight: 3
+  scene_8_lifestyle_dream:
+    name: Lifestyle Dream
+    primary_emotion: aspiration
+    conversion_purpose: Essa e MINHA vida futura
+    triggers:
+    - status
+    - elegance
+    - premium
+    visual_elements:
+      environment: premium aspirational setting
+      lighting: elegant ambient = sophistication
+      context: elevated lifestyle
+      lens: 24-35mm f/4 = environmental luxury
+    psychology: 'Buyer thinks: ''This is who I want to become'''
+    fidelity_weight: 3
+  scene_9_marketplace:
+    name: Marketplace
+    primary_emotion: action
+    conversion_purpose: Pronto para comprar
+    triggers:
+    - trust_closure
+    - compliance
+    - readiness
+    visual_elements:
+      background: 'white #FFFFFF = marketplace standard'
+      lighting: high-key soft-even = professional
+      focus: sharp throughout = nothing hidden
+      lens: 85mm f/8-f/11 = commercial
+    psychology: 'Buyer thinks: ''I''m ready to buy this now'''
+    fidelity_weight: 5
+conversion_journey:
+  description: 9-scene emotional arc from trust to purchase
+  arc:
+  - phase: TRUST
+    scenes:
+    - 1
+    purpose: Establish credibility
+  - phase: PROBLEM
+    scenes:
+    - 2
+    purpose: Create recognition
+  - phase: SOLUTION
+    scenes:
+    - 3
+    - 4
+    purpose: Show transformation
+  - phase: VALIDATION
+    scenes:
+    - 5
+    - 6
+    purpose: Prove quality
+  - phase: EMOTION
+    scenes:
+    - 7
+    - 8
+    purpose: Trigger desire
+  - phase: ACTION
+    scenes:
+    - 9
+    purpose: Close the sale
+color_psychology:
+  white:
+    emotion: purity, trust, cleanliness
+    use: scenes 1, 9 (marketplace compliance)
+  warm_golden:
+    emotion: happiness, success, reward
+    use: scenes 4, 7 (transformation, pleasure)
+  natural:
+    emotion: authenticity, reality, relatability
+    use: scenes 2, 3, 5 (problem, solution, social)
+  premium_ambient:
+    emotion: luxury, aspiration, status
+    use: scene 8 (lifestyle dream)
+fidelity_weights:
+  description: Controls how closely AI follows reference image
+  weight_5_maximum:
+  - scene_1
+  - scene_9
+  weight_4_high:
+  - scene_2
+  - scene_3
+  - scene_4
+  - scene_6
+  weight_3_medium:
+  - scene_5
+  - scene_7
+  - scene_8
+critical_rule:
+  anchor: '{user_image} {seed:[RANDOM]}'
+  position: START of every prompt
+  reason: Without this, AI generators invent product instead of using reference

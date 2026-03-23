@@ -1,0 +1,189 @@
+$schema: http://json-schema.org/draft-07/schema#
+title: Copy Rules - anuncio_agent
+version: 3.5.0
+description: Compliance and copywriting rules for Brazilian marketplaces
+title_rules:
+  char_limits:
+    min: 58
+    max: 60
+    tolerance: 0
+  prohibited_connectors:
+  - e
+  - com
+  - de
+  - para
+  - ou
+  - em
+  - por
+  - 'no'
+  - na
+  - do
+  - da
+  required_structure:
+    keyword_position: first
+    differentiator_required: true
+    quantity_allowed: true
+  prohibited_patterns:
+  - PROMOÇÃO
+  - OFERTA
+  - DESCONTO
+  - GRATIS
+  - FRETE GRÁTIS
+  - MELHOR PREÇO
+  - MAIS BARATO
+  - IMPERDÍVEL
+  quality_checks:
+  - no_repeated_words
+  - no_all_caps_except_acronyms
+  - no_excessive_punctuation
+  - no_emoji
+  - no_special_chars_except_hyphen
+keyword_rules:
+  blocks: 2
+  terms_per_block:
+    min: 115
+    max: 120
+  no_duplicates_between_blocks: true
+  include_variations:
+    singular_plural: true
+    with_without_accent: true
+    synonyms: true
+    common_misspellings: true
+  prohibited_terms:
+  - concorrente
+  - melhor que
+  - original
+  - genuino
+  - legitimo
+bullet_rules:
+  quantity: 10
+  char_limits:
+    min: 250
+    max: 299
+    tolerance: 0
+  structure:
+    format: benefit_first
+    pattern: 'BENEFIT: Feature explanation + value proposition'
+    emoji_allowed: false
+    bullet_symbol: '-'
+  mental_triggers:
+    required_per_listing: 5
+    available:
+    - social_proof
+    - scarcity
+    - authority
+    - reciprocity
+    - urgency
+    - specificity
+    - curiosity
+    - fear_of_loss
+    - exclusivity
+    - guarantee
+description_rules:
+  char_limits:
+    min: 3300
+    max: null
+  structure:
+    framework: storybrand
+    parts: 7
+    mobile_optimized: true
+    paragraph_max_lines: 4
+    line_max_chars: 80
+  formatting:
+    headers_allowed: true
+    bold_allowed: true
+    lists_allowed: true
+    emoji_allowed: false
+    html_allowed: false
+  storybrand_sections:
+  - hero_problem
+  - empathy_statement
+  - authority_proof
+  - plan_steps
+  - call_to_action
+  - success_vision
+  - failure_avoidance
+compliance_rules:
+  anvisa:
+    applies_to:
+    - suplementos
+    - cosmeticos
+    - alimentos
+    - medicamentos
+    prohibited_claims:
+    - cura
+    - trata
+    - previne doenca
+    - emagrece
+    - elimina gordura
+    - resultado garantido
+    - sem efeitos colaterais
+    - 100% natural
+    required_disclaimers:
+      suplementos: Este produto nao substitui uma alimentacao equilibrada.
+      cosmeticos: Resultados podem variar de pessoa para pessoa.
+  inmetro:
+    applies_to:
+    - eletronicos
+    - brinquedos
+    - equipamentos
+    required_info:
+    - selo_inmetro
+    - voltagem
+    - certificacao
+  conar:
+    prohibited:
+    - publicidade_enganosa
+    - comparacao_desleal
+    - claims_sem_prova
+    - preco_mentiroso
+11_criteria_checklist:
+  quality_criteria:
+  - id: Q1
+    name: title_char_count
+    description: Titulos entre 58-60 caracteres
+    weight: 0.15
+  - id: Q2
+    name: title_no_connectors
+    description: Sem conectores proibidos
+    weight: 0.1
+  - id: Q3
+    name: keyword_diversity
+    description: Keywords sem duplicatas entre blocos
+    weight: 0.1
+  - id: Q4
+    name: bullet_char_count
+    description: Bullets entre 250-299 caracteres
+    weight: 0.1
+  - id: Q5
+    name: bullet_benefit_first
+    description: Bullets com beneficio primeiro
+    weight: 0.1
+  - id: Q6
+    name: description_length
+    description: Descricao >= 3300 caracteres
+    weight: 0.1
+  compliance_criteria:
+  - id: C1
+    name: anvisa_compliance
+    description: Sem claims proibidos ANVISA
+    weight: 0.1
+    zero_tolerance: true
+  - id: C2
+    name: inmetro_compliance
+    description: Informacoes INMETRO quando aplicavel
+    weight: 0.05
+    zero_tolerance: true
+  - id: C3
+    name: conar_compliance
+    description: Sem publicidade enganosa
+    weight: 0.1
+    zero_tolerance: true
+  - id: C4
+    name: marketplace_terms
+    description: Sem termos proibidos do marketplace
+    weight: 0.05
+  - id: C5
+    name: source_attribution
+    description: Atribuicao de fonte presente
+    weight: 0.05

@@ -1,0 +1,226 @@
+$schema: http://json-schema.org/draft-07/schema#
+title: Execution Plans - anuncio_agent v4.0.0
+version: 4.0.0
+description: Pre-defined execution plans with Intelligent Fallback System
+model: gpt-5.1
+vector_store_id: vs_692c82d283788191a2d03f8b4b85e511
+workflow_id: wf_693f0b877ed0819090716734e968d1240fd7d1a4ac8e5c29
+workflow_routes:
+- route: 1
+  mode: PESQUISA Only
+  description: Research standalone
+- route: 2
+  mode: ANUNCIO Only
+  description: Copy standalone → anuncio_completo.md
+- route: 3
+  mode: PHOTO Only
+  description: Fotos standalone
+- route: 4
+  mode: FULL PIPELINE
+  description: PESQUISA → ANUNCIO → PHOTO
+intelligent_fallback_system:
+  description: 4-level fallback based on input confidence
+  levels:
+  - confidence_range: '>= 0.80'
+    action: generate_full
+    markers: none
+    description: Full generation with all features
+  - confidence_range: 0.60 - 0.79
+    action: generate_with_suggestions
+    markers: '[VERIFICAR: motivo]'
+    description: Generation with verification markers
+  - confidence_range: 0.40 - 0.59
+    action: generate_partial
+    markers: '[COMPLETAR: motivo]'
+    description: Partial generation with placeholders
+  - confidence_range: < 0.40
+    action: request_enrichment
+    markers: N/A
+    description: Stop workflow, request more information
+plans:
+  FULL:
+    name: Full Listing Generation
+    description: Complete 7-step workflow with QA validation
+    duration_estimate: 10-15 minutes
+    use_cases:
+    - New product listing
+    - High-value products
+    - First listing in category
+    - Client deliverables
+    steps:
+    - step: 1
+      name: parse_input
+      hop: ISO_EDISON_009_MAIN_AGENT.md
+      required: true
+      timeout_ms: 60000
+    - step: 2
+      name: generate_titles
+      hop: ISO_EDISON_010_TITULO_GENERATOR.md
+      required: true
+      timeout_ms: 120000
+    - step: 3
+      name: expand_keywords
+      hop: ISO_EDISON_011_KEYWORDS_EXPANDER.md
+      required: true
+      timeout_ms: 120000
+    - step: 4
+      name: generate_bullets
+      hop: ISO_EDISON_012_BULLET_POINTS.md
+      required: true
+      timeout_ms: 180000
+    - step: 5
+      name: build_description
+      hop: ISO_EDISON_013_DESCRICAO_BUILDER.md
+      required: true
+      timeout_ms: 300000
+    - step: 6
+      name: qa_validation
+      hop: ISO_ATLAS_001_QA_VALIDATION.md
+      required: true
+      timeout_ms: 120000
+      retry_on_fail: true
+      max_retries: 2
+    - step: 7
+      name: assemble_output
+      hop: ISO_EDISON_039_OUTPUT_TEMPLATE.md
+      required: true
+      timeout_ms: 30000
+    quality_threshold: 0.85
+    output_format: SINGLE_CODE_BLOCK
+  QUICK:
+    name: Quick Listing Generation
+    description: Streamlined workflow without QA loop
+    duration_estimate: 3-5 minutes
+    use_cases:
+    - Product variations
+    - Bulk processing
+    - Time-sensitive updates
+    - Draft generation
+    steps:
+    - step: 1
+      name: parse_input
+      hop: ISO_EDISON_009_MAIN_AGENT.md
+      required: true
+      timeout_ms: 30000
+    - step: 2
+      name: generate_titles
+      hop: ISO_EDISON_010_TITULO_GENERATOR.md
+      required: true
+      timeout_ms: 60000
+    - step: 3
+      name: expand_keywords
+      hop: ISO_EDISON_011_KEYWORDS_EXPANDER.md
+      required: true
+      timeout_ms: 60000
+    - step: 4
+      name: generate_bullets
+      hop: ISO_EDISON_012_BULLET_POINTS.md
+      required: true
+      timeout_ms: 90000
+    - step: 5
+      name: build_description
+      hop: ISO_EDISON_013_DESCRICAO_BUILDER.md
+      required: true
+      timeout_ms: 180000
+    - step: 7
+      name: assemble_output
+      hop: ISO_EDISON_039_OUTPUT_TEMPLATE.md
+      required: true
+      timeout_ms: 30000
+    quality_threshold: 0.75
+    output_format: SINGLE_CODE_BLOCK
+  TITLES_ONLY:
+    name: Title Generation Only
+    description: Generate only titles for A/B testing
+    duration_estimate: 1-2 minutes
+    use_cases:
+    - A/B testing titles
+    - Title optimization
+    - Quick title refresh
+    steps:
+    - step: 1
+      name: parse_input
+      hop: ISO_EDISON_009_MAIN_AGENT.md
+      required: true
+      timeout_ms: 30000
+    - step: 2
+      name: generate_titles
+      hop: ISO_EDISON_010_TITULO_GENERATOR.md
+      required: true
+      timeout_ms: 120000
+      output_count: 5
+    quality_threshold: null
+    output_format: TITLES_ONLY
+  KEYWORDS_ONLY:
+    name: Keyword Expansion Only
+    description: Generate only keyword blocks
+    duration_estimate: 1-2 minutes
+    use_cases:
+    - SEO optimization
+    - Backend keywords update
+    - Category expansion
+    steps:
+    - step: 1
+      name: parse_input
+      hop: ISO_EDISON_009_MAIN_AGENT.md
+      required: true
+      timeout_ms: 30000
+    - step: 3
+      name: expand_keywords
+      hop: ISO_EDISON_011_KEYWORDS_EXPANDER.md
+      required: true
+      timeout_ms: 120000
+      blocks: 3
+    quality_threshold: null
+    output_format: KEYWORDS_ONLY
+  DESCRIPTION_ONLY:
+    name: Description Writing Only
+    description: Generate only product description
+    duration_estimate: 3-5 minutes
+    use_cases:
+    - Description rewrite
+    - Content refresh
+    - A+ content
+    steps:
+    - step: 1
+      name: parse_input
+      hop: ISO_EDISON_009_MAIN_AGENT.md
+      required: true
+      timeout_ms: 30000
+    - step: 5
+      name: build_description
+      hop: ISO_EDISON_013_DESCRICAO_BUILDER.md
+      required: true
+      timeout_ms: 300000
+    quality_threshold: null
+    output_format: DESCRIPTION_ONLY
+selection_logic:
+  default_plan: FULL
+  auto_select:
+    conditions:
+    - if: input.mode == 'quick'
+      then: QUICK
+    - if: input.only == 'titles'
+      then: TITLES_ONLY
+    - if: input.only == 'keywords'
+      then: KEYWORDS_ONLY
+    - if: input.only == 'description'
+      then: DESCRIPTION_ONLY
+    - if: input.bulk == true
+      then: QUICK
+scoring_config:
+  5d_weights:
+    titulo: 0.3
+    keywords: 0.25
+    descricao: 0.2
+    bullets: 0.15
+    compliance: 0.1
+  pass_threshold: 0.85
+  dimension_threshold: 0.75
+global_settings:
+  max_total_timeout_ms: 900000
+  retry_on_timeout: true
+  max_global_retries: 1
+  log_all_steps: true
+  save_intermediate_outputs: false
+  output_format: SINGLE_CODE_BLOCK

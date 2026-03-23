@@ -1,0 +1,313 @@
+$schema: http://json-schema.org/draft-07/schema#
+title: Photography Styles - photo_agent v11.0.0
+version: 11.0.0
+description: EMOTION-BASED style presets for CONVERSION framework
+framework: CONVERSION (Emotion > Angle)
+conversion_scenes:
+  hero_trust:
+    scene: 1
+    name: Hero Trust
+    emotional_trigger: Trust + Authority
+    conversion_purpose: Trustworthy first impression
+    background: '#FFFFFF'
+    fidelity: 5
+    characteristics:
+      background: 'pure white #FFFFFF'
+      lighting: high-key softbox, 3-point
+      props: none
+      mood: professional, trustworthy, clean
+    camera:
+      lens: 85mm
+      aperture: f/8-f/11
+      iso: 100
+    psychological_mechanism: Professional seller = trustworthy
+    prompt_focus: Product centered 85%, white background, high-key lighting
+  problem_state:
+    scene: 2
+    name: Problem State
+    emotional_trigger: Pain + Recognition
+    conversion_purpose: I HAVE this problem
+    background: realistic context
+    fidelity: 4
+    characteristics:
+      background: real environment showing problem
+      lighting: natural ambient
+      props: contextual showing frustration
+      mood: relatable pain, inconvenience
+    camera:
+      lens: 35-50mm
+      aperture: f/2.8-f/4
+      iso: 200-400
+    psychological_mechanism: This is MY problem = relevance
+    prompt_focus: Context showing PROBLEM product solves
+    category_examples:
+      pet: Cat scratching furniture, no sun spot
+      kitchen: Warm drink, disorganized counter
+      fitness: Tired person, no energy
+      tech: Tangled cables, dead battery
+  solution_moment:
+    scene: 3
+    name: Solution Moment
+    emotional_trigger: Relief + Satisfaction
+    conversion_purpose: This WORKS!
+    background: active use
+    fidelity: 4
+    characteristics:
+      background: product in action
+      lighting: balanced natural
+      props: minimal, functional
+      mood: relief, satisfaction, working
+    camera:
+      lens: 50mm
+      aperture: f/4-f/5.6
+      iso: 200
+    psychological_mechanism: This WORKS = confidence
+    prompt_focus: Product ACTIVELY SOLVING problem
+    category_examples:
+      pet: Cat using window bed, relaxed
+      kitchen: Perfect drink being served
+      fitness: Using product during exercise
+      tech: Device working, problem solved
+  transformation:
+    scene: 4
+    name: Transformation
+    emotional_trigger: Aspiration + Desire
+    conversion_purpose: I WANT this result
+    background: visible result
+    fidelity: 4
+    characteristics:
+      background: after state environment
+      lighting: warm, welcoming
+      props: success indicators
+      mood: satisfaction, achievement, aspiration
+    camera:
+      lens: 50mm
+      aperture: f/2.8-f/4
+      iso: 200
+    psychological_mechanism: I WANT this result = motivation
+    prompt_focus: AFTER state, dream achieved
+    category_examples:
+      pet: Happy cat sunbathing in window bed
+      kitchen: Satisfied person with perfect coffee
+      fitness: Fit body, high energy
+      tech: Productivity, organization
+  social_belonging:
+    scene: 5
+    name: Social Belonging
+    emotional_trigger: Belonging + Validation
+    conversion_purpose: People like me use this
+    background: social environment
+    fidelity: 3
+    characteristics:
+      background: real social context
+      lighting: natural window light
+      props: group context
+      mood: belonging, togetherness, validation
+    camera:
+      lens: 35mm
+      aperture: f/2.8-f/4
+      iso: 400
+    psychological_mechanism: People like me use it = validation
+    prompt_focus: REAL people using product naturally
+    category_examples:
+      pet: Family admiring cat in bed
+      kitchen: Friends sharing drinks
+      fitness: Workout group together
+      tech: Colleagues using device
+  benefit_proof:
+    scene: 6
+    name: Benefit Proof
+    emotional_trigger: Curiosity + Trust
+    conversion_purpose: I can SEE the quality
+    background: macro feature
+    fidelity: 4
+    characteristics:
+      background: soft, neutral blur
+      lighting: ring light, even
+      props: none, just product detail
+      mood: quality, craftsmanship, proof
+    camera:
+      lens: 100mm macro
+      aperture: f/2.8-f/4
+      iso: 100-200
+    psychological_mechanism: I can SEE quality = conviction
+    prompt_focus: Close-up KEY FEATURE that delivers benefit
+    category_examples:
+      pet: Industrial suction cups grip strength
+      kitchen: Thermal insulation, seal
+      fitness: Reinforced stitching, material
+      tech: Connectors, finish, LEDs
+  emotional_peak:
+    scene: 7
+    name: Emotional Peak
+    emotional_trigger: Pleasure + Joy
+    conversion_purpose: I'll FEEL like this
+    background: happy moment
+    fidelity: 3
+    characteristics:
+      background: warm, joyful context
+      lighting: golden hour warm
+      props: happiness indicators
+      mood: pleasure, joy, genuine smile
+    camera:
+      lens: 85mm
+      aperture: f/2.8
+      iso: 400
+    psychological_mechanism: I'll FEEL like this = emotional anchor
+    prompt_focus: Moment of PLEASURE/JOY using product
+    category_examples:
+      pet: Owner smiling at happy cat
+      kitchen: Pleasure expression drinking perfect coffee
+      fitness: Achievement feeling post-workout
+      tech: Satisfaction solving problem
+  lifestyle_dream:
+    scene: 8
+    name: Lifestyle Dream
+    emotional_trigger: Aspiration + Status
+    conversion_purpose: This is MY future life
+    background: premium environment
+    fidelity: 3
+    characteristics:
+      background: premium/aspirational setting
+      lighting: elegant ambient
+      props: premium lifestyle indicators
+      mood: aspiration, status, elevated
+    camera:
+      lens: 24-35mm
+      aperture: f/4
+      iso: 400
+    psychological_mechanism: This is MY future life = desire
+    prompt_focus: Product in PREMIUM ASPIRATIONAL environment
+    category_examples:
+      pet: Modern apartment with view
+      kitchen: Gourmet kitchen lifestyle
+      fitness: Premium gym environment
+      tech: Elegant home office
+  marketplace:
+    scene: 9
+    name: Marketplace
+    emotional_trigger: Trust + Action
+    conversion_purpose: Ready to buy
+    background: '#FFFFFF'
+    fidelity: 5
+    characteristics:
+      background: 'pure white #FFFFFF'
+      lighting: high-key soft-even
+      props: none
+      mood: clean, professional, trust closure
+    camera:
+      lens: 85mm
+      aperture: f/8-f/11
+      iso: 100
+    psychological_mechanism: Ready to buy = closure
+    prompt_focus: Clean, professional, marketplace compliant
+lighting_setups:
+  high_key_softbox:
+    scenes:
+    - 1
+    - 9
+    purpose: Trust, marketplace compliance
+    equipment: 3-point softbox setup
+    mood: Professional, clean, trustworthy
+  natural_window:
+    scenes:
+    - 2
+    - 3
+    - 5
+    purpose: Realism, authenticity
+    equipment: Large window, reflector
+    mood: Real, relatable, authentic
+  golden_hour_warm:
+    scenes:
+    - 4
+    - 7
+    purpose: Emotion, pleasure
+    equipment: Warm gels, golden light
+    mood: Warm, joyful, aspirational
+  ring_light:
+    scenes:
+    - 6
+    purpose: Detail, proof
+    equipment: Ring light, macro setup
+    mood: Clear, detailed, quality proof
+  elegant_ambient:
+    scenes:
+    - 8
+    purpose: Lifestyle, aspiration
+    equipment: Natural elegant ambient
+    mood: Premium, sophisticated, elevated
+pnl_trigger_mapping:
+  scene_1:
+    primary: Trust
+    secondary: Authority
+    mechanism: Professional = trustworthy
+  scene_2:
+    primary: Pain
+    secondary: Recognition
+    mechanism: MY problem = relevance
+  scene_3:
+    primary: Relief
+    secondary: Solution
+    mechanism: WORKS = confidence
+  scene_4:
+    primary: Aspiration
+    secondary: Desire
+    mechanism: I WANT = motivation
+  scene_5:
+    primary: Belonging
+    secondary: Social Proof
+    mechanism: People like me = validation
+  scene_6:
+    primary: Curiosity
+    secondary: Trust
+    mechanism: I SEE quality = conviction
+  scene_7:
+    primary: Pleasure
+    secondary: Connection
+    mechanism: I'll FEEL = anchor
+  scene_8:
+    primary: Aspiration
+    secondary: Status
+    mechanism: MY future = desire
+  scene_9:
+    primary: Trust
+    secondary: Action
+    mechanism: Ready to buy = closure
+category_style_mapping:
+  pet_products:
+  - social_belonging
+  - emotional_peak
+  - lifestyle_dream
+  kitchen:
+  - solution_moment
+  - transformation
+  - lifestyle_dream
+  electronics:
+  - benefit_proof
+  - problem_state
+  - transformation
+  fashion:
+  - lifestyle_dream
+  - social_belonging
+  - emotional_peak
+  beauty:
+  - transformation
+  - emotional_peak
+  - lifestyle_dream
+  fitness:
+  - transformation
+  - social_belonging
+  - problem_state
+  home_decor:
+  - lifestyle_dream
+  - social_belonging
+  - transformation
+  default:
+  - hero_trust
+  - benefit_proof
+  - marketplace
+deprecated_scenes_v10:
+  flat_lay: REMOVED - aesthetic without conversion purpose
+  packaging: REMOVED - low conversion value
+  technical_view: REPLACED BY benefit_proof - emotion-based
+  scale_reference: REMOVED - informational, not emotional

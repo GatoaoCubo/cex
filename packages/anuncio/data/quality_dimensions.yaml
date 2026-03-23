@@ -1,0 +1,271 @@
+$schema: http://json-schema.org/draft-07/schema#
+title: Quality Dimensions - 5D Scoring Schema v2.0
+version: 4.0.0
+description: 5-dimensional quality scoring for anuncio_agent outputs with NEW WEIGHTS
+model: gpt-5.1
+vector_store_id: vs_692c82d283788191a2d03f8b4b85e511
+dimensions:
+  titulo:
+    id: D1
+    name: Titulo
+    portuguese: Titulo
+    weight: 0.3
+    threshold: 0.75
+    description: Title quality - drives CTR and first impression
+    rationale: Title is the first thing customers see. High weight reflects CTR impact.
+    scoring_rubric:
+      '1.0': 'Perfect: 58-60 chars, ZERO connectors, keyword-first, compelling'
+      '0.8': 'Good: Meets char limits, minor improvements possible'
+      '0.6': 'Adequate: Some issues with structure or keywords'
+      '0.4': 'Poor: Multiple issues (connectors, wrong length)'
+      '0.2': 'Fail: Major violations, needs rewrite'
+    checks:
+    - id: T1.1
+      name: char_count
+      description: Title has 58-60 characters exactly
+      weight: 0.3
+    - id: T1.2
+      name: zero_connectors
+      description: No connectors (e, com, de, para, ou, em, por, no, na, do, da)
+      weight: 0.25
+      zero_tolerance: true
+    - id: T1.3
+      name: keyword_first
+      description: Primary keyword appears in first 3 words
+      weight: 0.2
+    - id: T1.4
+      name: variant_differentiation
+      description: 3 titles have different value propositions
+      weight: 0.15
+    - id: T1.5
+      name: readability
+      description: Title is readable and makes sense
+      weight: 0.1
+  keywords:
+    id: D2
+    name: Keywords
+    portuguese: Keywords
+    weight: 0.25
+    threshold: 0.75
+    description: Keyword quality - drives SEO discovery
+    rationale: Keywords determine if product is found in marketplace search.
+    scoring_rubric:
+      '1.0': 'Excellent: 115-120 terms/block, semantic variations, no duplicates'
+      '0.8': 'Good: Meets term count, mostly natural'
+      '0.6': 'Adequate: Some gaps in coverage or forced terms'
+      '0.4': 'Poor: Wrong term count or duplicates'
+      '0.2': 'Fail: Major issues, needs regeneration'
+    checks:
+    - id: K2.1
+      name: block_count
+      description: Exactly 2 keyword blocks
+      weight: 0.2
+    - id: K2.2
+      name: terms_per_block
+      description: 115-120 terms per block
+      weight: 0.25
+    - id: K2.3
+      name: no_duplicates
+      description: No duplicate terms between blocks
+      weight: 0.2
+    - id: K2.4
+      name: semantic_variations
+      description: Includes singular/plural, accents, synonyms
+      weight: 0.2
+    - id: K2.5
+      name: head_terms_present
+      description: All head terms from input are included
+      weight: 0.15
+  descricao:
+    id: D3
+    name: Descricao
+    portuguese: Descricao
+    weight: 0.2
+    threshold: 0.75
+    description: Description quality - converts after click
+    rationale: Description closes the sale after customer clicks.
+    scoring_rubric:
+      '1.0': 'Perfect: >= 3300 chars, StoryBrand 7-parts, mobile-friendly'
+      '0.8': 'Good: Meets length, good structure'
+      '0.6': 'Adequate: Some sections weak or missing'
+      '0.4': 'Poor: Too short or poor structure'
+      '0.2': 'Fail: Major issues, needs rewrite'
+    checks:
+    - id: D3.1
+      name: char_count
+      description: Description has >= 3300 characters
+      weight: 0.25
+    - id: D3.2
+      name: storybrand_structure
+      description: All 7 StoryBrand sections present
+      weight: 0.25
+    - id: D3.3
+      name: mobile_friendly
+      description: Paragraphs <= 4 lines, scannable
+      weight: 0.2
+    - id: D3.4
+      name: keyword_integration
+      description: Keywords integrated naturally (2-4% density)
+      weight: 0.15
+    - id: D3.5
+      name: cta_present
+      description: Clear call to action present
+      weight: 0.15
+  bullets:
+    id: D4
+    name: Bullets
+    portuguese: Bullets
+    weight: 0.15
+    threshold: 0.75
+    description: Bullet quality - enables scannable decisions
+    rationale: Bullets help customers quickly scan key benefits.
+    scoring_rubric:
+      '1.0': 'Perfect: 10 bullets, 250-299 chars, benefit-first, 5+ triggers'
+      '0.8': 'Good: Meets count and length, good benefits'
+      '0.6': 'Adequate: Some bullets too short/long or feature-focused'
+      '0.4': 'Poor: Wrong count or major structure issues'
+      '0.2': 'Fail: Needs regeneration'
+    checks:
+    - id: B4.1
+      name: bullet_count
+      description: Exactly 10 bullets
+      weight: 0.2
+    - id: B4.2
+      name: char_count
+      description: Each bullet 250-299 characters
+      weight: 0.25
+    - id: B4.3
+      name: benefit_first
+      description: Each bullet leads with benefit, not feature
+      weight: 0.25
+    - id: B4.4
+      name: mental_triggers
+      description: At least 5 different mental triggers used
+      weight: 0.2
+    - id: B4.5
+      name: keyword_integration
+      description: Keywords integrated naturally
+      weight: 0.1
+  compliance:
+    id: D5
+    name: Compliance
+    portuguese: Conformidade
+    weight: 0.1
+    threshold: 0.75
+    description: Regulatory compliance - binary gate
+    rationale: Compliance is non-negotiable. Violations can lead to listing removal.
+    scoring_rubric:
+      '1.0': Full compliance, all 11 checks passed
+      '0.8': Minor suggestions, no violations
+      '0.5': Minor violation found
+      '0.0': Major violation (ZERO TOLERANCE)
+    checks:
+    - id: C5.1
+      name: anvisa_compliance
+      description: No prohibited health claims
+      weight: 0.25
+      zero_tolerance: true
+    - id: C5.2
+      name: inmetro_compliance
+      description: Required safety info present
+      weight: 0.15
+    - id: C5.3
+      name: conar_compliance
+      description: No misleading advertising
+      weight: 0.2
+      zero_tolerance: true
+    - id: C5.4
+      name: char_limits
+      description: All character limits respected
+      weight: 0.15
+    - id: C5.5
+      name: source_attribution
+      description: Source attribution present
+      weight: 0.1
+    - id: C5.6
+      name: no_contradictions
+      description: No contradictory information
+      weight: 0.15
+    prohibited_terms:
+    - cura
+    - trata
+    - previne doenca
+    - emagrece
+    - elimina gordura
+    - resultado garantido
+    - sem efeitos colaterais
+    - 100% natural
+    - milagroso
+    - aprovado pela anvisa
+overall_scoring:
+  formula: weighted_sum(dimension_scores * dimension_weights)
+  pass_threshold: 0.85
+  all_dimensions_threshold: 0.75
+  pass_condition: overall >= 0.85 AND all dimensions >= 0.75
+  statuses:
+    PASS: '>= 0.85 AND all dimensions >= 0.75'
+    WARN: 0.75 - 0.84 OR one dimension < 0.75
+    FAIL: < 0.75 OR compliance violation
+11_compliance_checks:
+- id: C1
+  name: Titulo 58-60 chars
+- id: C2
+  name: ZERO conectores
+- id: C3
+  name: Keywords 115-120/bloco
+- id: C4
+  name: Bullets 250-299 chars
+- id: C5
+  name: Descricao >= 3300
+- id: C6
+  name: Benefit-first
+- id: C7
+  name: Mental triggers (5+)
+- id: C8
+  name: StoryBrand 7-parts
+- id: C9
+  name: Mobile-first format
+- id: C10
+  name: ANVISA compliant
+- id: C11
+  name: Source attribution
+output_schema:
+  type: object
+  properties:
+    dimensions:
+      type: object
+      properties:
+        titulo:
+          type: object
+          properties:
+            score:
+              type: number
+              minimum: 0
+              maximum: 1
+            passed:
+              type: boolean
+            issues:
+              type: array
+              items:
+                type: string
+        keywords:
+          $ref: '#/output_schema/properties/dimensions/properties/titulo'
+        descricao:
+          $ref: '#/output_schema/properties/dimensions/properties/titulo'
+        bullets:
+          $ref: '#/output_schema/properties/dimensions/properties/titulo'
+        compliance:
+          $ref: '#/output_schema/properties/dimensions/properties/titulo'
+    overall_score:
+      type: number
+      minimum: 0
+      maximum: 1
+    passed:
+      type: boolean
+    recommendation:
+      type: string
+      enum:
+      - PROCEED_TO_OUTPUT
+      - RETRY_WITH_FIXES
+      - OUTPUT_WITH_WARNING
+      - BLOCK_OUTPUT

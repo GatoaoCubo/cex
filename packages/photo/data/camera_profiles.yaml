@@ -1,0 +1,245 @@
+$schema: http://json-schema.org/draft-07/schema#
+title: Camera Profiles - photo_agent
+version: 10.1.0
+description: Camera specifications by scene type
+camera_body:
+  default: Canon EOS R5
+  alternatives:
+  - Sony A7R V
+  - Nikon Z8
+  - Fujifilm GFX
+scenes:
+  scene_1_hero:
+    name: Hero/Packshot
+    position: top-left
+    purpose: Main listing thumbnail
+    fidelity_weight: 5
+    camera:
+      lens:
+      - 50mm
+      - 85mm
+      aperture:
+      - f/8
+      - f/11
+      iso:
+      - 100
+      - 200
+      shutter: 1/125
+    lighting:
+      type: high-key
+      setup: 3-point
+      background: '#FFFFFF'
+    composition:
+    - centered
+    - rule-of-thirds
+  scene_2_lifestyle:
+    name: Lifestyle
+    position: top-center
+    purpose: Environmental context
+    fidelity_weight: 4
+    camera:
+      lens:
+      - 50mm
+      - 85mm
+      aperture:
+      - f/2.8
+      - f/4
+      - f/5.6
+      iso:
+      - 200
+      - 400
+      shutter: 1/60
+    lighting:
+      type: natural
+      setup: window light
+      background: environment
+    composition:
+    - environmental
+    - contextual
+    mood: warm
+  scene_3_macro:
+    name: Macro Detail
+    position: top-right
+    purpose: Texture and quality proof
+    fidelity_weight: 4
+    camera:
+      lens:
+      - 85mm
+      - 100mm macro
+      aperture:
+      - f/2.8
+      - f/4
+      iso:
+      - 100
+      - 200
+      shutter: 1/125
+    lighting:
+      type: soft
+      setup: diffused
+      background: neutral blur
+    composition:
+    - detail focus
+    - texture emphasis
+    bokeh: true
+  scene_4_usage:
+    name: Usage Demo
+    position: middle-left
+    purpose: Product in use
+    fidelity_weight: 4
+    camera:
+      lens:
+      - 50mm
+      - 85mm
+      aperture:
+      - f/4
+      - f/5.6
+      - f/8
+      iso:
+      - 200
+      - 400
+      shutter: 1/125
+    lighting:
+      type: balanced
+      setup: natural + fill
+      background: contextual
+    composition:
+    - action
+    - hands interacting
+  scene_5_flatlay:
+    name: Flat Lay
+    position: middle-center
+    purpose: Aesthetic overhead
+    fidelity_weight: 3
+    camera:
+      lens:
+      - 50mm
+      aperture:
+      - f/8
+      - f/11
+      iso:
+      - 100
+      - 200
+      shutter: 1/125
+      angle: 90deg overhead
+    lighting:
+      type: even
+      setup: overhead softbox
+      background:
+      - pastel
+      - wood
+      - neutral
+    composition:
+    - flat lay
+    - with props
+    props_recommended: true
+  scene_6_packaging:
+    name: Packaging/Gift
+    position: middle-right
+    purpose: Gift presentation
+    fidelity_weight: 3
+    camera:
+      lens:
+      - 50mm
+      - 85mm
+      aperture:
+      - f/4
+      - f/5.6
+      - f/8
+      iso:
+      - 100
+      - 200
+      shutter: 1/125
+    lighting:
+      type: soft
+      setup: diffused
+      background: neutral
+    composition:
+    - minimal box
+    - gift ready
+  scene_7_technical:
+    name: Technical View
+    position: bottom-left
+    purpose: Specifications visible
+    fidelity_weight: 4
+    camera:
+      lens:
+      - 50mm
+      aperture:
+      - f/8
+      - f/11
+      - f/16
+      iso:
+      - 100
+      shutter: 1/125
+    lighting:
+      type: even
+      setup: flat lighting
+      background:
+      - white
+      - gray
+    composition:
+    - front-facing
+    - specifications visible
+    deep_focus: true
+  scene_8_scale:
+    name: Scale Reference
+    position: bottom-center
+    purpose: Size context
+    fidelity_weight: 3
+    camera:
+      lens:
+      - 50mm
+      - 85mm
+      aperture:
+      - f/5.6
+      - f/8
+      iso:
+      - 200
+      shutter: 1/125
+    lighting:
+      type: clear
+      setup: balanced
+      background: neutral
+    composition:
+    - with reference object
+    reference_objects:
+    - smartphone
+    - ruler
+    - hand
+    - common object
+  scene_9_marketplace:
+    name: Marketplace Ready
+    position: bottom-right
+    purpose: Platform compliance
+    fidelity_weight: 5
+    camera:
+      lens:
+      - 50mm
+      - 85mm
+      aperture:
+      - f/8
+      - f/11
+      iso:
+      - 100
+      shutter: 1/125
+    lighting:
+      type: high-key
+      setup: soft-even
+      background: '#FFFFFF'
+    composition:
+    - centered
+    - rule-of-thirds
+    compliance:
+    - 8K
+    - no text
+    - no logos
+    - no watermarks
+global_settings:
+  resolution: 8K
+  format: PNG
+  color_space: sRGB
+  aspect_ratio: '1:1'
+  style_lock: photorealistic NOT 3D render NOT illustration NOT CGI
+  watermarks: none
+  text: none
+  logos: none

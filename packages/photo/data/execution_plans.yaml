@@ -1,0 +1,623 @@
+$schema: http://json-schema.org/draft-07/schema#
+title: Execution Plans - photo_agent v11.0.0
+version: 1.0.0
+description: 5 execution modes for AI product photography with conversion framework
+model: gpt-5.1 + gpt-1-image
+philosophy: Emotion > Angle. Every scene drives conversion through psychological triggers.
+workflow_routes:
+- route: 1
+  mode: FULL
+  description: Complete 9-scene grid generation with all emotion triggers
+  duration: ~30 minutes
+  downstream:
+  - video
+  - ads
+- route: 2
+  mode: QUICK
+  description: 'Essential 3-scene pack: hero, lifestyle, detail'
+  duration: ~10 minutes
+  downstream:
+  - ads
+- route: 3
+  mode: HERO_ONLY
+  description: Single hero image prompt for immediate use
+  duration: ~5 minutes
+  downstream:
+  - ads
+  - marketplace
+- route: 4
+  mode: LIFESTYLE_FOCUS
+  description: 5 lifestyle-focused scenes with context and emotion
+  duration: ~20 minutes
+  downstream:
+  - video
+  - ads
+- route: 5
+  mode: DETAIL_FOCUS
+  description: 4 detail/feature close-ups highlighting product benefits
+  duration: ~15 minutes
+  downstream:
+  - ads
+intelligent_fallback_system:
+  description: 3-level fallback based on input completeness for photo quality
+  levels:
+  - confidence_range: '>= 0.80'
+    action: full_generation
+    markers: none
+    description: Complete 9-scene generation with full conversion framework
+    min_attributes: 3
+    min_benefits: 2
+    requires:
+    - product_image
+    - description
+    - target_audience
+  - confidence_range: 0.60 - 0.79
+    action: standard_generation
+    markers: '[VERIFICAR: falta contexto]'
+    description: Standard 6-7 scene generation with inference
+    min_attributes: 2
+    min_benefits: 1
+    requires:
+    - product_image
+    - description
+  - confidence_range: < 0.60
+    action: minimal_generation
+    markers: '[INFERIR: contexto from image analysis]'
+    description: Hero + 2 basic scenes from image analysis alone
+    min_attributes: 1
+    requires:
+    - product_image
+  input_confidence_factors:
+    product_image_quality: 0.35
+    description_completeness: 0.25
+    attribute_specificity: 0.2
+    target_audience_defined: 0.15
+    benefit_clarity: 0.05
+plans:
+  FULL:
+    name: Full 9-Scene Conversion Grid
+    description: Complete 9-scene generation with all conversion triggers + Grid 3x3
+      + 9 individual prompts + generated image
+    duration_estimate: 25-30 minutes
+    use_cases:
+    - Product launch campaign
+    - Marketplace optimization
+    - Full content library generation
+    - Video storyboard foundation
+    - Complete creative asset pack
+    output_count: 3
+    steps:
+    - step: 1
+      name: input_validation
+      description: Validate product image and metadata
+      required: true
+      timeout_ms: 30000
+      validation:
+        required_fields:
+        - product_image
+        optional_fields:
+        - description
+        - target_audience
+        - brand_colors
+        - material
+    - step: 2
+      name: product_analysis
+      description: Extract attributes, benefits, visual characteristics
+      hop: ISO_EDISON_041_PRODUCT_ANALYSIS.md
+      required: true
+      timeout_ms: 60000
+      output:
+        key_attributes: '[3-5]'
+        primary_benefit: string
+        secondary_benefits: '[2-3]'
+        visual_characteristics: '[3-4]'
+        target_emotion: inferred
+      validation:
+        attributes_count:
+        - 3
+        - 5
+        benefits_identified: true
+      on_failure: retry_with_image_analysis
+      max_retries: 1
+    - step: 3
+      name: scene_planning
+      description: Plan 9 scenes with emotion triggers mapped to conversion
+      block: blocks/AGT_LILY_020_SCENE_PLANNING.md
+      required: true
+      timeout_ms: 90000
+      scenes:
+      - Hero Trust (scene 1)
+      - Problem State (scene 2)
+      - Solution Moment (scene 3)
+      - Transformation (scene 4)
+      - Social Belonging (scene 5)
+      - Benefit Proof (scene 6)
+      - Emotional Peak (scene 7)
+      - Lifestyle Dream (scene 8)
+      - Marketplace (scene 9)
+      output:
+        scene_specs: '[9 scenes]'
+        emotion_triggers: '[9 triggers]'
+        camera_profiles: '[9 profiles]'
+        lighting_setups: '[5 setups]'
+      validation:
+        scenes_planned: 9
+        emotion_mappings_complete: true
+      on_failure: use_default_scenes
+      max_retries: 1
+    - step: 4
+      name: prompt_generation_grid
+      description: 'Generate OUTPUT_1: 3x3 Grid prompt with all scenes'
+      hop: ISO_EDISON_054_PROMPT_GENERATOR.md
+      required: true
+      timeout_ms: 120000
+      output:
+        grid_prompt: code_block
+        format: 3x3 layout with {user_image}
+        fidelity_weights: applied
+      validation:
+        contains_user_image: true
+        grid_format_valid: true
+        seed_randomization: true
+      on_failure: retry_generation
+      max_retries: 2
+    - step: 5
+      name: prompt_generation_individual
+      description: 'Generate OUTPUT_2: 9 individual scene prompts'
+      hop: ISO_EDISON_054_PROMPT_GENERATOR.md
+      required: true
+      timeout_ms: 150000
+      output:
+        individual_prompts: '[9 code blocks]'
+        format: separate prompts with {user_image}
+        emotional_language: tailored per scene
+      validation:
+        prompt_count: 9
+        each_has_user_image: true
+        scene_descriptions_present: true
+      on_failure: retry_generation
+      max_retries: 2
+    - step: 6
+      name: brand_alignment
+      description: Ensure visual consistency with brand (if provided)
+      block: blocks/AGT_LILY_018_BRAND_ALIGNMENT.md
+      required: false
+      timeout_ms: 60000
+      output:
+        color_consistency: verified
+        style_notes: applied
+    - step: 7
+      name: image_generation
+      description: 'Generate OUTPUT_3: 3x3 grid image via gpt-1-image (DALL-E 3)'
+      required: true
+      timeout_ms: 180000
+      tool: gpt-1-image
+      input: grid_prompt_from_step_4
+      output:
+        generated_image: 3x3 grid
+        format: PNG/WebP
+        ready_for_download: true
+      validation:
+        image_generated: true
+        grid_layout: 3x3
+        quality_minimum: 7.0
+      on_failure: retry_generation
+      max_retries: 2
+    - step: 8
+      name: quality_validation
+      description: Validate all 3 outputs meet quality threshold
+      required: true
+      timeout_ms: 60000
+      validation:
+        output_1_valid: true
+        output_2_valid: true
+        output_3_generated: true
+        quality_score: '>= 8.0'
+        all_scenes_covered: 9
+      retry_on_fail: true
+      max_retries: 1
+    - step: 9
+      name: output_assembly
+      description: Assemble all 3 outputs in final format
+      required: true
+      timeout_ms: 30000
+      output_format: final_delivery
+      includes:
+      - 'OUTPUT_1: Grid 3x3 prompt'
+      - 'OUTPUT_2: 9 individual prompts'
+      - 'OUTPUT_3: Generated 3x3 image'
+      includes_handoff: true
+    quality_threshold: 0.85
+    output_format: PHOTO_FULL_3OUTPUTS
+    deliverables:
+    - Grid prompt (Gemini-ready)
+    - 9 individual prompts (scene-by-scene)
+    - Generated 3x3 image
+  QUICK:
+    name: Quick 3-Scene Pack
+    description: 'Essential scenes: Hero, Lifestyle, Detail - optimized for fast turnaround'
+    duration_estimate: 8-12 minutes
+    use_cases:
+    - Time-sensitive campaigns
+    - Product variations
+    - Quick ad creative
+    - Marketplace listing fast-track
+    - MVP content validation
+    output_count: 2
+    steps:
+    - step: 1
+      name: input_validation
+      description: Validate product image
+      required: true
+      timeout_ms: 20000
+    - step: 2
+      name: product_analysis
+      description: Quick attribute extraction
+      hop: ISO_EDISON_041_PRODUCT_ANALYSIS.md
+      required: true
+      timeout_ms: 45000
+      output:
+        key_attributes: '[2-3]'
+        primary_benefit: inferred
+        visual_characteristics: '[2]'
+    - step: 3
+      name: quick_scene_selection
+      description: Select 3 essential scenes
+      required: true
+      timeout_ms: 30000
+      scenes:
+      - Hero Trust (marketplace-ready)
+      - Lifestyle (context/emotion)
+      - Benefit Proof (detail/feature)
+    - step: 4
+      name: prompt_generation
+      description: Generate 3 prompts + quick grid
+      hop: ISO_EDISON_054_PROMPT_GENERATOR.md
+      required: true
+      timeout_ms: 90000
+      output:
+        prompts: '[3 code blocks]'
+        grid_prompt: simplified_3x1
+    - step: 5
+      name: output_assembly
+      description: Deliver 3-scene pack
+      required: true
+      timeout_ms: 20000
+      output_format: quick_3_scenes
+    quality_threshold: 0.8
+    output_format: PHOTO_QUICK_3SCENES
+    skipped_phases:
+    - brand_alignment
+    - advanced_scene_planning
+    - image_generation
+    deliverables:
+    - 3 prompts (hero, lifestyle, detail)
+    - Simplified grid layout
+  HERO_ONLY:
+    name: Hero Image Only
+    description: 'Single hero shot: clean, trustworthy, marketplace-ready'
+    duration_estimate: 3-5 minutes
+    use_cases:
+    - Marketplace primary image
+    - Quick social media post
+    - Urgent ad creative
+    - Product preview image
+    - Thumbnail generation
+    output_count: 1
+    steps:
+    - step: 1
+      name: input_validation
+      description: Validate product image
+      required: true
+      timeout_ms: 15000
+    - step: 2
+      name: hero_analysis
+      description: Analyze for hero shot viability
+      required: true
+      timeout_ms: 30000
+      focus: trust, professionalism, marketplace compliance
+    - step: 3
+      name: hero_prompt_generation
+      description: Generate single hero prompt
+      required: true
+      timeout_ms: 45000
+      output:
+        hero_prompt: code_block
+        background: white (#FFFFFF)
+        fidelity: maximum (weight 5)
+        includes: '{user_image} {seed:[RANDOM]}'
+      validation:
+        prompt_valid: true
+        marketplace_compliant: true
+    - step: 4
+      name: output_assembly
+      description: Deliver hero prompt
+      required: true
+      timeout_ms: 10000
+      output_format: hero_only
+    quality_threshold: 0.8
+    output_format: PHOTO_HERO_ONLY
+    deliverables:
+    - Hero prompt (ready for Gemini)
+  LIFESTYLE_FOCUS:
+    name: Lifestyle 5-Scene Pack
+    description: '5 lifestyle-focused scenes: Problem, Solution, Transformation, Social,
+      Emotional'
+    duration_estimate: 18-22 minutes
+    use_cases:
+    - Lifestyle brand campaigns
+    - Emotional storytelling
+    - Social media content series
+    - Video storyboard foundation
+    - Premium product positioning
+    output_count: 2
+    steps:
+    - step: 1
+      name: input_validation
+      description: Validate image + target audience (optional)
+      required: true
+      timeout_ms: 20000
+    - step: 2
+      name: lifestyle_analysis
+      description: Extract lifestyle angle, audience, emotion
+      required: true
+      timeout_ms: 60000
+      focus:
+      - target_audience
+      - pain_points
+      - aspirations
+      - emotional_benefits
+    - step: 3
+      name: lifestyle_scene_planning
+      description: Plan 5 lifestyle scenes with context
+      required: true
+      timeout_ms: 75000
+      scenes:
+      - Problem State (pain recognition)
+      - Solution Moment (active use)
+      - Transformation (visible result)
+      - Social Belonging (community/validation)
+      - Emotional Peak (pleasure moment)
+      output:
+        scene_specs: '[5 scenes with context]'
+        environment_descriptions: '[5]'
+        human_elements: '[optional, if relevant]'
+    - step: 4
+      name: lifestyle_prompt_generation
+      description: Generate 5 lifestyle prompts + simplified grid
+      hop: ISO_EDISON_054_PROMPT_GENERATOR.md
+      required: true
+      timeout_ms: 120000
+      output:
+        prompts: '[5 code blocks]'
+        grid_prompt: 5-scene layout
+        emotional_language: tailored
+    - step: 5
+      name: context_enrichment
+      description: Add environmental and lifestyle context details
+      required: true
+      timeout_ms: 45000
+    - step: 6
+      name: output_assembly
+      description: Deliver lifestyle pack
+      required: true
+      timeout_ms: 15000
+      output_format: lifestyle_5_scenes
+    quality_threshold: 0.82
+    output_format: PHOTO_LIFESTYLE_5SCENES
+    deliverables:
+    - 5 lifestyle prompts (scene-by-scene)
+    - 5-scene grid layout
+  DETAIL_FOCUS:
+    name: Detail & Feature 4-Scene Pack
+    description: 4 close-up detail shots highlighting product features and quality
+      cues
+    duration_estimate: 12-16 minutes
+    use_cases:
+    - Feature highlight campaigns
+    - Product detail selling
+    - Macro photography content
+    - Quality proof content
+    - Feature-focused ads
+    output_count: 2
+    steps:
+    - step: 1
+      name: input_validation
+      description: Validate image + identify detail opportunities
+      required: true
+      timeout_ms: 20000
+    - step: 2
+      name: detail_analysis
+      description: Extract key details, features, quality markers
+      required: true
+      timeout_ms: 60000
+      focus:
+      - texture and material
+      - craftsmanship markers
+      - feature highlights
+      - quality indicators
+      - unique selling points
+      output:
+        key_details: '[4-6]'
+        quality_markers: '[identified]'
+        macro_opportunities: '[mapped]'
+    - step: 3
+      name: detail_scene_planning
+      description: Plan 4 macro/detail scenes
+      required: true
+      timeout_ms: 60000
+      scenes:
+      - Primary Feature Detail (main selling point macro)
+      - Material & Texture (craftsmanship proof)
+      - Secondary Feature (additional benefit)
+      - Quality Proof (detail that proves premium)
+    - step: 4
+      name: detail_prompt_generation
+      description: Generate 4 macro/detail prompts
+      hop: ISO_EDISON_054_PROMPT_GENERATOR.md
+      required: true
+      timeout_ms: 100000
+      output:
+        prompts: '[4 code blocks]'
+        macro_specifications: '[lighting, DOF, scale]'
+        grid_prompt: 4-scene detail layout
+      validation:
+        macro_focus_specified: true
+        lighting_ring_light: for detail
+        scale_reference: when appropriate
+    - step: 5
+      name: quality_detail_validation
+      description: Ensure detail emphasis and quality cues visible
+      required: true
+      timeout_ms: 40000
+    - step: 6
+      name: output_assembly
+      description: Deliver detail pack
+      required: true
+      timeout_ms: 15000
+      output_format: detail_4_scenes
+    quality_threshold: 0.82
+    output_format: PHOTO_DETAIL_4SCENES
+    deliverables:
+    - 4 detail/macro prompts (scene-by-scene)
+    - 4-scene detail grid layout
+selection_logic:
+  default_plan: FULL
+  auto_select:
+    conditions:
+    - if: input.mode == 'quick' || input.urgente == true
+      then: QUICK
+    - if: input.only == 'hero' || input.focus == 'marketplace'
+      then: HERO_ONLY
+    - if: input.focus == 'lifestyle' || input.storytelling == true
+      then: LIFESTYLE_FOCUS
+    - if: input.focus == 'detail' || input.features == true
+      then: DETAIL_FOCUS
+    - if: input.time_limit_minutes <= 5
+      then: HERO_ONLY
+    - if: input.time_limit_minutes <= 10
+      then: QUICK
+    - if: input.time_limit_minutes <= 20
+      then: LIFESTYLE_FOCUS or DETAIL_FOCUS
+scoring_config:
+  5d_weights:
+    emotional_alignment: 0.25
+    visual_fidelity: 0.25
+    conversion_psychology: 0.2
+    brand_consistency: 0.15
+    marketplace_compliance: 0.15
+  dimension_definitions:
+    emotional_alignment:
+      description: How well scenes trigger intended psychological responses
+      threshold: 0.8
+      measurement: emotion_trigger_clarity
+    visual_fidelity:
+      description: Accuracy to product and visual quality
+      threshold: 0.85
+      measurement: fidelity_weight_adherence
+    conversion_psychology:
+      description: Psychological effectiveness for driving sales
+      threshold: 0.8
+      measurement: pnl_trigger_mapping_score
+    brand_consistency:
+      description: Alignment with brand colors, style, values
+      threshold: 0.75
+      measurement: brand_lock_adherence
+    marketplace_compliance:
+      description: Compliance with marketplace requirements (white background scenes
+        1+9)
+      threshold: 0.9
+      measurement: compliance_checklist
+  pass_threshold: 0.8
+  dimension_threshold: 0.75
+  confidence_mapping:
+    0.90-1.00: excellent_conversion_potential
+    0.80-0.89: good_ready_to_deploy
+    0.70-0.79: acceptable_needs_minor_tweaks
+    0.60-0.69: needs_improvement_rework
+    0.00-0.59: insufficient_regenerate
+output_templates:
+  final_delivery:
+    format: markdown with code blocks
+    sections:
+    - 'OUTPUT_1: Grid 3x3 Prompt (Gemini-ready)'
+    - 'OUTPUT_2: 9 Individual Prompts (or scene subset)'
+    - 'OUTPUT_3: Generated 3x3 Image (PNG download link)'
+    - Quality Score (5D assessment)
+    - Handoff Configuration (downstream agents)
+    metadata:
+    - execution_mode
+    - quality_score
+    - duration
+    - timestamp
+    - scenes_generated
+handoff_config:
+  downstream_agents:
+    video:
+      receives:
+      - scene_descriptions
+      - emotional_flow
+      - storyboard_sequence
+      - camera_profiles
+      format: structured_yaml
+    ads:
+      receives:
+      - hero_image_prompt
+      - top_3_scenes_prompts
+      - emotional_triggers
+      - conversion_mapping
+      format: structured_yaml
+    marketplace:
+      receives:
+      - hero_prompt
+      - marketplace_compliant_specs
+      - white_background_specs
+      format: structured_yaml
+  handoff_format: YAML_STRUCTURED
+global_settings:
+  max_total_timeout_ms: 1800000
+  retry_on_timeout: true
+  max_global_retries: 2
+  log_all_steps: true
+  save_intermediate_outputs: true
+  output_format: PHOTO_3OUTPUTS
+  language: PT-BR
+  critical_rules:
+  - ALL prompts MUST start with {user_image} {seed:[RANDOM]}
+  - Scenes 1 and 9 MUST have fidelity weight 5
+  - Scenes 1 and 9 MUST have white background (#FFFFFF)
+  - Include 'brand/style lock' for consistency
+  - Add 'Photorealistic NOT 3D render NOT illustration NOT CGI'
+  - Think EMOTION before ANGLE
+  fidelity_framework:
+    hero_and_marketplace: weight 5 (maximum)
+    lifestyle_scenes: weight 3-4
+    detail_scenes: weight 4
+  compliance_rules:
+    marketplace_primary_image: white background, hero shot
+    seed_randomization: required for variation
+    user_image_anchor: critical for fidelity
+quality_gates:
+  pre_execution:
+    required_fields:
+    - product_image
+    min_input_confidence: 0.4
+  during_execution:
+    step_timeout_action: retry_or_fallback
+    validation_failure_action: regenerate_with_feedback
+  post_execution:
+    min_overall_confidence: 7.5
+    min_quality_score: 7.0
+    outputs_complete: all_required
+    emotional_triggers_verified: true
+    marketplace_compliance: verified
+learning_integration:
+  memory_entity: photo
+  success_threshold: 8.0
+  golden_threshold: 9.5
+  patterns_to_track:
+  - emotion_trigger_effectiveness
+  - fidelity_preservation_accuracy
+  - conversion_psychology_mapping
+  - scene_emotional_clarity
+  - marketplace_compliance_success
