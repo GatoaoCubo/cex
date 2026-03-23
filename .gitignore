@@ -1,0 +1,7 @@
+
+# Google Drive credentials (secrets)
+_config/client_secret.json
+_config/token.json
+_config/*.credentials
+!_config/gdrive.yaml
+!_config/README.md
