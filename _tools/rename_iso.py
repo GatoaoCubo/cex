@@ -1,3 +1,6 @@
+import sys
+if hasattr(sys.stdout, "reconfigure"): sys.stdout.reconfigure(encoding="utf-8")
+if hasattr(sys.stderr, "reconfigure"): sys.stderr.reconfigure(encoding="utf-8")
 """
 rename_iso.py — Convert legacy ISO_{SAT}_{NNN}_{TYPE}.md files to canonical ISO Package names.
 
