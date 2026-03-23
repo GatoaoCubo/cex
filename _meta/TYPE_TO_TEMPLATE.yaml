@@ -1,0 +1,103 @@
+# TYPE_TO_TEMPLATE map — CEX distill.py routing
+# Maps each artifact type to its primary template file (relative to cex root)
+# null = GAP (no template exists yet)
+# Generated: 2026-03-23 | PYTHA[KNOWLEDGE]
+# Usage: distill.py reads this to select template per type
+
+# P01 Knowledge
+knowledge_card: P01_knowledge/templates/tpl_knowledge_card_domain.md
+knowledge_card_meta: P01_knowledge/templates/tpl_knowledge_card_meta.md  # alt: use for meta/technical KCs
+knowledge_card_test: P01_knowledge/templates/tpl_knowledge_card_test.md  # alt: use for test/eval KCs
+rag_source: null           # GAP — priority 6
+glossary_entry: null       # GAP
+context_doc: null          # GAP — priority 6
+embedding_config: null     # GAP
+few_shot_example: null     # GAP
+
+# P02 Model
+agent: P02_model/templates/tpl_agent.md
+lens: null                 # GAP
+boot_config: null          # GAP
+mental_model: null         # GAP (P02) — see P10 for memory-side mental_model
+model_card: null           # GAP — priority 3
+router: null               # GAP
+fallback_chain: null       # GAP
+iso_package: null          # GAP — priority 5
+
+# P03 Prompt
+system_prompt: null        # GAP — priority 1 (CRITICAL)
+action_prompt: null        # GAP — priority 7
+prompt_template: P03_prompt/templates/tpl_prompt_template.md
+instruction: null          # GAP
+chain: null                # GAP
+
+# P04 Tools
+skill: P04_tools/templates/tpl_skill.md
+mcp_server: null           # GAP — priority 2
+hook: null                 # GAP
+plugin: null               # GAP
+client: null               # GAP
+cli_tool: null             # GAP
+scraper: null              # GAP
+connector: null            # GAP
+daemon: null               # GAP
+
+# P05 Output
+output_schema: P05_output/templates/tpl_output_schema.md
+parser: null               # GAP
+formatter: null            # GAP
+naming_rule: null          # GAP
+
+# P06 Schema
+input_schema: P06_schema/templates/tpl_input_schema.md
+type_def: null             # GAP
+validator: P06_schema/templates/tpl_validator.md
+interface: null            # GAP
+output_schema_p06: null    # GAP (note: separate from P05 output_schema)
+
+# P07 Evals
+unit_eval: P07_evals/templates/tpl_unit_eval.md
+smoke_eval: null           # GAP
+e2e_eval: null             # GAP — priority 4
+benchmark: null            # GAP
+golden_test: P07_evals/templates/tpl_golden_test.md
+scoring_rubric: null       # GAP
+
+# P08 Architecture
+satellite_spec: P08_architecture/templates/tpl_satellite_spec.md
+pattern: P08_architecture/templates/tpl_pattern.md
+law: null                  # GAP
+diagram: null              # GAP — priority 10
+component_map: null        # GAP
+
+# P09 Config
+env_config: P09_config/templates/tpl_env_config.md
+path_config: null          # GAP
+permission: null           # GAP
+feature_flag: P09_config/templates/tpl_feature_flag.md
+runtime_rule: null         # GAP
+
+# P10 Memory
+mental_model: P10_memory/templates/tpl_mental_model.md
+brain_index: null          # GAP
+learning_record: P10_memory/templates/tpl_learning_record.md
+session_state: null        # GAP
+axiom: null                # GAP
+
+# P11 Feedback
+quality_gate: P11_feedback/templates/tpl_quality_gate.md
+bugloop: P11_feedback/templates/tpl_bugloop.md
+lifecycle_rule: null       # GAP
+guardrail: null            # GAP
+optimizer: null            # GAP
+
+# P12 Orchestration
+workflow: P12_orchestration/templates/tpl_workflow.md
+dag: null                  # GAP
+spawn_config: null         # GAP
+signal: null               # GAP — priority 8
+handoff: P12_orchestration/templates/tpl_handoff.md
+dispatch_rule: null        # GAP — priority 9
+
+# Summary: 19 mapped / 50 null (GAP)
+# Top priorities to close: system_prompt, mcp_server, model_card, e2e_eval, iso_package
