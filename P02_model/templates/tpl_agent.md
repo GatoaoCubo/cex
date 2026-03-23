@@ -1,81 +1,92 @@
 ---
 # TEMPLATE: Agent (P02 Model)
-# Preencha todas as {{VARIAVEIS}} antes de usar
 # Valide contra P02_model/_schema.yaml (types.agent)
-# Max 4KB | quality_min: 7.0
+# Max 5120 bytes | quality_min: 7.0
+# Use [PLACEHOLDER] concreto. Evite TODO/TBD.
 
-id: p02_agent_{{NAME_SLUG}}
+id: p02_agent_[name_slug]
 type: agent
 lp: P02
-title: {{TITLE_DESCRITIVO}}
+title: [titulo_descritivo]
 version: 1.0.0
-created: {{ISO_DATE}}
-updated: {{ISO_DATE}}
-author: {{SATELLITE_NAME}}
-satellite: {{SATELLITE_QUE_OPERA}}
-domain: {{DOMAIN}}
-quality: {{QUALITY_7_TO_10}}
-tags: [{{TAG1}}, {{TAG2}}, {{TAG3}}]
-tldr: {{ONE_DENSE_SENTENCE_WHAT_IT_DOES}}
-when_to_use: {{CONDICAO_DE_USO}}
-keywords: [{{KEYWORD1}}, {{KEYWORD2}}, {{KEYWORD3}}]
-long_tails:
-  - {{PERGUNTA_1_COMO_USAR}}
-  - {{PERGUNTA_2_QUANDO_USAR}}
-axioms:
-  - {{REGRA_FUNDAMENTAL_IMPERATIVA}}
-density_score: {{0.80_TO_1.00}}
+created: [yyyy-mm-dd]
+updated: [yyyy-mm-dd]
+author: [satellite_name]
+satellite: [satellite_que_opera]
+domain: [domain]
+quality: [7.0_to_10.0]
+tags: [[tag1], [tag2], [tag3]]
+tldr: [uma_frase_densa_do_que_faz]
+when_to_use: [condicao_principal_de_uso]
 ---
 
-# {{TITLE_DESCRITIVO}}
+# [titulo_descritivo]
 
 ## Overview
-<!-- 2-3 frases: o que faz, qual problema resolve, quando nao usar -->
-{{AGENT_NAME}} e o **{{ROLE_EM_NEGRITO}}** do CODEXA. Responsavel por {{RESPONSABILIDADE_PRINCIPAL}}.
+<!-- INSTRUCAO: 2 frases. Identidade, escopo e resultado. Density hint: 180-240 chars. -->
+[nome_do_agente] e o agente de [papel_especifico]. Atua quando [cenario_principal] e entrega [resultado_principal].
 
 ## Architecture
-<!-- ASCII diagram ou tabela de modulos -->
+<!-- INSTRUCAO: fluxograma ASCII ou tabela curta. -->
+```text
+[entrada] -> [modulo_1] -> [modulo_2] -> [saida]
 ```
-{{INPUT}} --> [{{MODULE_1}}] --> [{{MODULE_2}}] --> {{OUTPUT}}
-```
+
+## File Structure
+<!-- INSTRUCAO: mapear pasta/arquivos nucleares; incluir kit ISO quando existir. -->
+- `manifest.yaml`: [papel_no_pacote]
+- `system_instruction.md`: [identidade_e_guardrails]
+- `instructions.md`: [operacao_passo_a_passo]
+- `[arquivo_extra]`: [funcao]
 
 ## When to Use
-
+<!-- INSTRUCAO: tabela YES/NO objetiva. -->
 | Cenario | Usar? |
 |---------|-------|
-| {{CENARIO_SIM_1}} | SIM |
-| {{CENARIO_SIM_2}} | SIM |
-| {{CENARIO_NAO_1}} | NAO > use {{ALTERNATIVA_1}} |
-| {{CENARIO_NAO_2}} | NAO > use {{ALTERNATIVA_2}} |
+| [cenario_sim_1] | SIM |
+| [cenario_sim_2] | SIM |
+| [cenario_nao_1] | NAO -> use [alternativa_1] |
+| [cenario_nao_2] | NAO -> use [alternativa_2] |
 
-## Capabilities
-<!-- Lista de capacidades reais, especificas -->
-- {{CAPABILITY_1}}
-- {{CAPABILITY_2}}
-- {{CAPABILITY_3}}
-
-## Input / Output
-
+## Input Output
+<!-- INSTRUCAO: contrato minimo de entrada e saida. -->
 ```yaml
 input:
-  {{FIELD_1}}: {{TYPE}}  # {{DESCRICAO}}
-  {{FIELD_2}}: {{TYPE}}  # {{DESCRICAO}}
-
+  [campo_1]: [tipo]  # [descricao]
+  [campo_2]: [tipo]  # [descricao]
 output:
-  {{RESULT_1}}: {{TYPE}}  # {{DESCRICAO}}
-  {{RESULT_2}}: {{TYPE}}  # {{DESCRICAO}}
+  [resultado_1]: [tipo]  # [descricao]
+  [resultado_2]: [tipo]  # [descricao]
 ```
 
 ## Integration
-<!-- upstream = quem chama; downstream = quem recebe resultado -->
-- Upstream: {{UPSTREAM_AGENT_OR_USER}}
-- Downstream: {{DOWNSTREAM_AGENT_OR_POOL}}
+<!-- INSTRUCAO: upstream, downstream e dependencias externas. -->
+- Upstream: [quem_chama]
+- Downstream: [quem_recebe]
+- Dependencies: [tool_ou_mcp_1], [tool_ou_mcp_2]
 
 ## Quality Gates
-<!-- Criterios minimos para aceitar output -->
-- {{GATE_1}}: {{THRESHOLD}}
-- {{GATE_2}}: {{THRESHOLD}}
-- Score >= {{MIN_SCORE}} para pool
+<!-- INSTRUCAO: 3-5 gates mensuraveis. -->
+- [gate_1]: [threshold]
+- [gate_2]: [threshold]
+- [gate_3]: [threshold]
 
----
-*Satellite: {{SATELLITE_NAME}} | Quality: {{QUALITY}} | Domain: {{DOMAIN}}*
+## Common Issues
+<!-- INSTRUCAO: falhas reais, nao abstratas. -->
+- [falha_1] -> [mitigacao_1]
+- [falha_2] -> [mitigacao_2]
+
+## Invocation
+<!-- INSTRUCAO: mostrar comando, prompt ou API call. -->
+```text
+[comando_ou_prompt_de_invocacao]
+```
+
+## Related Agents
+<!-- INSTRUCAO: relacoes operacionais, nao apenas nomes. -->
+- [agente_relacionado_1]: [como_interage]
+- [agente_relacionado_2]: [como_interage]
+
+## Footer
+<!-- INSTRUCAO: repetir satelite e score final para leitura rapida. -->
+Satellite: [satellite_name] | Quality: [quality] | Domain: [domain]
