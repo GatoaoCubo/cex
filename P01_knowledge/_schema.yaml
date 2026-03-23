@@ -1,4 +1,5 @@
-# P01 Knowledge Schema
+# P01 Knowledge Schema v2.0
+# v2.0: machine_format per type
 # Baseado em destilacao de 7 KCs golden do codexa-core
 # Sources: DISTILL_GOLDEN_KC_PATTERNS.md
 
@@ -12,6 +13,7 @@ types:
     boundary: "Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao."
     layer: content
     core: true
+    machine_format: yaml
     naming: p01_kc_{{topic}}.md + .yaml
     constraints:
       max_bytes: 5120
@@ -72,6 +74,7 @@ types:
     boundary: "Ponteiro para fonte externa indexavel. NAO eh o conteudo em si, apenas referencia com URL e freshness."
     layer: content
     core: false
+    machine_format: yaml
     naming: p01_rs_{{source}}.md + .yaml
     constraints:
       max_bytes: 1024
@@ -87,6 +90,7 @@ types:
     boundary: "Definicao curta de termo do dominio. NAO eh knowledge_card (sem densidade min) nem context_doc (sem escopo)."
     layer: content
     core: false
+    machine_format: yaml
     naming: p01_gl_{{term}}.md + .yaml
     constraints:
       max_bytes: 512
@@ -102,6 +106,7 @@ types:
     boundary: "Contexto de dominio para hidratar prompts. NAO eh knowledge_card (sem density gate) nem glossary_entry (nao define termo)."
     layer: content
     core: false
+    machine_format: yaml
     naming: p01_ctx_{{topic}}.md + .yaml
     constraints:
       max_bytes: 2048
@@ -116,6 +121,7 @@ types:
     boundary: "Configuracao de modelo de embedding. NAO eh brain_index (P10) que configura o indice, apenas o modelo vetorial."
     layer: spec
     core: false
+    machine_format: yaml
     naming: p01_emb_{{model}}.yaml
     constraints:
       max_bytes: 512
@@ -130,6 +136,7 @@ types:
     boundary: "Par input/output para few-shot learning. NAO eh golden_test (P07) que avalia qualidade, apenas exemplifica formato."
     layer: prompt
     core: true
+    machine_format: yaml
     naming: p01_fse_{{topic}}.md + .yaml
     constraints:
       max_bytes: 1024

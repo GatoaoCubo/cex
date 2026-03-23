@@ -1,4 +1,5 @@
-# P11 Feedback Schema
+# P11 Feedback Schema v2.0
+# v2.0: machine_format per type
 lp: P11
 name: Feedback
 description: COMO melhora
@@ -9,6 +10,7 @@ types:
     boundary: "Barreira de qualidade com score numerico. NAO eh validator (P06, tecnico pass/fail) nem scoring_rubric (P07, define criterios)."
     layer: governance
     core: true
+    machine_format: yaml
     naming: p11_qg_{{gate}}.yaml
     constraints: {max_bytes: 4096}
 
@@ -17,6 +19,7 @@ types:
     boundary: "Ciclo automatico detect>fix>verify. NAO eh unit_eval (P07, teste manual) nem optimizer (melhoria continua, nao correcao)."
     layer: governance
     core: false
+    machine_format: yaml
     naming: p11_bl_{{scope}}.md + .yaml
     constraints: {max_bytes: 4096}
 
@@ -25,6 +28,7 @@ types:
     boundary: "Regra declarativa de ciclo de vida. NAO eh hook (P04, codigo executavel) nem runtime_rule (P09, tecnico)."
     layer: governance
     core: true
+    machine_format: yaml
     naming: p11_lc_{{rule}}.yaml
     constraints: {max_bytes: 4096}
 
@@ -33,6 +37,7 @@ types:
     boundary: "Restricao de seguranca e safety boundary. NAO eh permission (P09, acesso) nem law (P08, operacional)."
     layer: governance
     core: true
+    machine_format: yaml
     naming: p11_gr_{{scope}}.yaml
     constraints: {max_bytes: 4096}
 
@@ -41,5 +46,6 @@ types:
     boundary: "Otimizador de processo metric>action. NAO eh bugloop (correcao pontual) nem benchmark (P07, medicao passiva)."
     layer: governance
     core: false
+    machine_format: yaml
     naming: p11_opt_{{target}}.md + .yaml
     constraints: {max_bytes: 4096}

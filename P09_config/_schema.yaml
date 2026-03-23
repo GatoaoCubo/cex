@@ -1,4 +1,5 @@
-# P09 Config Schema
+# P09 Config Schema v2.0
+# v2.0: machine_format per type
 lp: P09
 name: Config
 description: COMO configura
@@ -9,6 +10,7 @@ types:
     boundary: "Variaveis de ambiente do sistema. NAO eh boot_config (P02, per-provider) nem feature_flag (on/off logico)."
     layer: runtime
     core: true
+    machine_format: yaml
     naming: p09_env_{{scope}}.yaml
     constraints: {max_bytes: 4096}
 
@@ -17,6 +19,7 @@ types:
     boundary: "Caminhos do sistema de arquivos. NAO eh env_config (variaveis genericas) nem permission (controle de acesso)."
     layer: runtime
     core: true
+    machine_format: yaml
     naming: p09_path_{{scope}}.yaml
     constraints: {max_bytes: 3072}
 
@@ -25,6 +28,7 @@ types:
     boundary: "Regra de permissao de acesso. NAO eh guardrail (P11, safety boundary) nem feature_flag (on/off de feature)."
     layer: governance
     core: true
+    machine_format: yaml
     naming: p09_perm_{{scope}}.yaml
     constraints: {max_bytes: 3072}
 
@@ -33,6 +37,7 @@ types:
     boundary: "Flag de feature on/off com rollout gradual. NAO eh permission (acesso) nem env_config (variavel generica)."
     layer: runtime
     core: false
+    machine_format: json
     naming: p09_ff_{{feature}}.yaml
     constraints: {max_bytes: 1536}
 
@@ -41,5 +46,6 @@ types:
     boundary: "Regra de runtime tecnica (timeouts, retries). NAO eh lifecycle_rule (P11, ciclo de vida) nem law (P08, inviolavel)."
     layer: runtime
     core: false
+    machine_format: yaml
     naming: p09_rr_{{rule}}.yaml
     constraints: {max_bytes: 3072}

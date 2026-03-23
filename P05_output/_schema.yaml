@@ -1,4 +1,5 @@
-# P05 Output Schema
+# P05 Output Schema v2.0
+# v2.0: machine_format per type
 lp: P05
 name: Output
 description: O que o agente ENTREGA
@@ -9,6 +10,7 @@ types:
     boundary: "Formato de saida de LLM (como o agente responde). NAO eh output_schema P06 (contrato de dados do artefato)."
     layer: spec
     core: true
+    machine_format: json
     naming: p05_os_{{format}}.yaml
     constraints: {max_bytes: 4096}
 
@@ -17,6 +19,7 @@ types:
     boundary: "Extrator de dados de saida bruta. NAO eh formatter (nao transforma formato) nem validator (P06, nao valida)."
     layer: runtime
     core: false
+    machine_format: yaml
     naming: p05_parser_{{target}}.md + .yaml
     constraints: {max_bytes: 4096}
 
@@ -25,6 +28,7 @@ types:
     boundary: "Transformador de formato de saida. NAO eh parser (nao extrai dados) nem output_schema (nao define contrato)."
     layer: runtime
     core: false
+    machine_format: yaml
     naming: p05_fmt_{{format}}.md
     constraints: {max_bytes: 4096}
 
@@ -33,5 +37,6 @@ types:
     boundary: "Regra de nomenclatura de artefatos. NAO eh validator (P06, valida conteudo) nem type_def (P06, define tipo)."
     layer: governance
     core: false
+    machine_format: yaml
     naming: p05_nr_{{scope}}.md
     constraints: {max_bytes: 4096}

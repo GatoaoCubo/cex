@@ -1,4 +1,5 @@
-# P08 Architecture Schema
+# P08 Architecture Schema v2.0
+# v2.0: machine_format per type
 lp: P08
 name: Architecture
 description: COMO escala
@@ -9,6 +10,7 @@ types:
     boundary: "Especificacao de satelite inteiro (role, model, MCPs). NAO eh agent (P02, agente individual) nem boot_config (P02, por provider)."
     layer: spec
     core: true
+    machine_format: yaml
     naming: p08_sat_{{name}}.md + .yaml
     constraints: {max_bytes: 4096}
 
@@ -17,6 +19,7 @@ types:
     boundary: "Pattern reutilizavel de arquitetura. NAO eh law (inviolavel) nem workflow (P12, sequencia executavel)."
     layer: content
     core: true
+    machine_format: yaml
     naming: p08_pat_{{name}}.md + .yaml
     constraints: {max_bytes: 4096}
 
@@ -25,6 +28,7 @@ types:
     boundary: "Lei operacional inviolavel do sistema. NAO eh instruction (P03, flexivel) nem guardrail (P11, safety-focused)."
     layer: governance
     core: true
+    machine_format: yaml
     naming: p08_law_{{number}}.md
     constraints: {max_bytes: 3072}
 
@@ -33,6 +37,7 @@ types:
     boundary: "Diagrama visual de arquitetura. NAO eh component_map (dados estruturados) nem pattern (sem prescricao)."
     layer: content
     core: false
+    machine_format: yaml
     naming: p08_diag_{{scope}}.md
     constraints: {max_bytes: 4096}
 
@@ -41,5 +46,6 @@ types:
     boundary: "Mapa estruturado de componentes e conexoes. NAO eh diagram (visual) nem satellite_spec (escopo de 1 satelite)."
     layer: spec
     core: false
+    machine_format: yaml
     naming: p08_cmap_{{scope}}.yaml
     constraints: {max_bytes: 3072}

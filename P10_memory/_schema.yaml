@@ -1,4 +1,5 @@
-# P10 Memory Schema
+# P10 Memory Schema v2.0
+# v2.0: machine_format per type
 lp: P10
 name: Memory
 description: O que LEMBRA
@@ -9,6 +10,7 @@ types:
     boundary: "Estado mental variavel por sessao. NAO eh mental_model P02 (identidade fixa do agente, imutavel)."
     layer: runtime
     core: true
+    machine_format: yaml
     naming: p10_mm_{{agent}}.yaml
     constraints: {max_bytes: 3072}
 
@@ -17,6 +19,7 @@ types:
     boundary: "Indice de busca semantica (BM25, FAISS). NAO eh embedding_config (P01, modelo) nem rag_source (P01, fonte)."
     layer: runtime
     core: true
+    machine_format: yaml
     naming: p10_bi_{{index}}.yaml
     constraints: {max_bytes: 3072}
 
@@ -25,6 +28,7 @@ types:
     boundary: "Registro de aprendizado persistente. NAO eh session_state (efemero) nem axiom (imutavel, nao aprende)."
     layer: content
     core: true
+    machine_format: yaml
     naming: p10_lr_{{topic}}.md + .yaml
     constraints: {max_bytes: 3072}
 
@@ -33,6 +37,7 @@ types:
     boundary: "Estado efemero de sessao (snapshot). NAO eh mental_model (persistente) nem learning_record (nao acumula)."
     layer: runtime
     core: false
+    machine_format: yaml
     naming: p10_ss_{{session}}.yaml
     constraints: {max_bytes: 3072}
 
@@ -41,5 +46,6 @@ types:
     boundary: "Regra fundamental imutavel. NAO eh law (P08, operacional ajustavel) nem instruction (P03, flexivel)."
     layer: governance
     core: true
+    machine_format: yaml
     naming: p10_ax_{{rule}}.md
     constraints: {max_bytes: 3072}

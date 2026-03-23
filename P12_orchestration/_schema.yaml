@@ -1,4 +1,5 @@
-# P12 Orchestration Schema
+# P12 Orchestration Schema v2.0
+# v2.0: machine_format per type
 lp: P12
 name: Orchestration
 description: COMO coordena
@@ -9,6 +10,7 @@ types:
     boundary: "Fluxo de agentes+tools sequenciais/paralelos. NAO eh chain (P03, sequencia de prompts) nem dag (grafo de deps sem execucao)."
     layer: runtime
     core: true
+    machine_format: yaml
     naming: p12_wf_{{name}}.md + .yaml
     constraints: {max_bytes: 3072}
 
@@ -17,6 +19,7 @@ types:
     boundary: "Grafo aciclico de dependencias entre tasks. NAO eh workflow (execucao direta) nem component_map (P08, componentes)."
     layer: spec
     core: false
+    machine_format: yaml
     naming: p12_dag_{{pipeline}}.yaml
     constraints: {max_bytes: 3072}
 
@@ -25,6 +28,7 @@ types:
     boundary: "Configuracao de spawn de satelites. NAO eh boot_config (P02, per-provider) nem env_config (P09, variaveis)."
     layer: runtime
     core: true
+    machine_format: yaml
     naming: p12_spawn_{{mode}}.yaml
     constraints: {max_bytes: 3072}
 
@@ -33,6 +37,7 @@ types:
     boundary: "Sinal simples entre agentes (complete, error). NAO eh handoff (instrucao completa) nem interface (P06, contrato)."
     layer: runtime
     core: true
+    machine_format: json
     naming: p12_sig_{{event}}.json
     constraints: {max_bytes: 4096}
 
@@ -41,6 +46,7 @@ types:
     boundary: "Instrucao de handoff com task+context+commit. NAO eh action_prompt (P03, prompt puro) nem signal (evento simples)."
     layer: runtime
     core: true
+    machine_format: yaml
     naming: p12_ho_{{task}}.md
     constraints: {max_bytes: 4096}
 
@@ -49,5 +55,6 @@ types:
     boundary: "Regra de despacho keyword>satellite. NAO eh router (P02, task>model routing) nem workflow (nao executa, apenas roteia)."
     layer: runtime
     core: false
+    machine_format: yaml
     naming: p12_dr_{{scope}}.yaml
     constraints: {max_bytes: 3072}
