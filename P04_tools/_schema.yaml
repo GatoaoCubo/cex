@@ -9,6 +9,9 @@ description: O que o agente USA
 types:
   skill:
     description: Habilidade reutilizavel (phases + trigger)
+    boundary: "Habilidade reutilizavel com fases e trigger. NAO eh agent (P02, identidade completa) nem action_prompt (P03, prompt puro)."
+    layer: runtime
+    core: true
     naming: p04_skill_{{name}}.md + .yaml
     constraints:
       max_bytes: 5120
@@ -31,6 +34,9 @@ types:
 
   mcp_server:
     description: Servidor MCP (tools + resources)
+    boundary: "Servidor MCP que expoe tools e resources. NAO eh connector (integracao simples) nem client (consumidor de API)."
+    layer: runtime
+    core: true
     naming: p04_mcp_{{server}}.md + .yaml
     constraints:
       max_bytes: 2048
@@ -43,6 +49,9 @@ types:
 
   hook:
     description: Pre/post processing hook
+    boundary: "Codigo executavel em evento pre/post. NAO eh lifecycle_rule (P11, regra declarativa) nem daemon (processo persistente)."
+    layer: runtime
+    core: true
     naming: p04_hook_{{name}}.md
     constraints:
       max_bytes: 1024
@@ -54,36 +63,54 @@ types:
 
   plugin:
     description: Extensao plugavel
+    boundary: "Extensao plugavel ao sistema. NAO eh hook (evento especifico) nem skill (sem fases estruturadas)."
+    layer: runtime
+    core: false
     naming: p04_plug_{{name}}.md + .yaml
     constraints:
       max_bytes: 2048
 
   client:
     description: Cliente de API
+    boundary: "Cliente unidirecional de API externa. NAO eh connector (bidirecional) nem mcp_server (provedor, nao consumidor)."
+    layer: runtime
+    core: false
     naming: p04_client_{{api}}.md + .yaml
     constraints:
       max_bytes: 1024
 
   cli_tool:
     description: Ferramenta CLI
+    boundary: "Ferramenta de linha de comando pontual. NAO eh skill (sem fases) nem daemon (nao persiste em background)."
+    layer: runtime
+    core: false
     naming: p04_cli_{{tool}}.md
     constraints:
       max_bytes: 1024
 
   scraper:
     description: Extrator de dados web
+    boundary: "Extrator de dados web. NAO eh client (API estruturada) nem connector (bidirecional, nao extrai)."
+    layer: runtime
+    core: false
     naming: p04_scraper_{{target}}.md + .yaml
     constraints:
       max_bytes: 1024
 
   connector:
     description: Conector de servico externo
+    boundary: "Conector bidirecional de servico externo. NAO eh client (unidirecional) nem mcp_server (nao expoe tools)."
+    layer: runtime
+    core: false
     naming: p04_conn_{{service}}.md + .yaml
     constraints:
       max_bytes: 1024
 
   daemon:
     description: Processo background
+    boundary: "Processo background persistente. NAO eh hook (evento unico) nem cli_tool (execucao pontual e termina)."
+    layer: runtime
+    core: false
     naming: p04_daemon_{{name}}.md + .yaml
     constraints:
       max_bytes: 1024

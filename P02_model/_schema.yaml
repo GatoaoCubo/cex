@@ -9,6 +9,9 @@ description: QUEM o agente EH
 types:
   agent:
     description: Definicao de agente (persona + capabilities)
+    boundary: "Definicao completa de agente (persona + capabilities). NAO eh skill (P04, habilidade executavel) nem system_prompt (P03, como fala)."
+    layer: spec
+    core: true
     naming: p02_agent_{{name}}.md + .yaml
     constraints:
       max_bytes: 5120
@@ -52,6 +55,9 @@ types:
 
   lens:
     description: Perspectiva especializada sobre dominio
+    boundary: "Perspectiva especializada sobre dominio. NAO eh agent (sem capabilities) nem mental_model (sem routing rules)."
+    layer: content
+    core: false
     naming: p02_lens_{{perspective}}.md + .yaml
     constraints:
       max_bytes: 2048
@@ -63,6 +69,9 @@ types:
 
   boot_config:
     description: Configuracao de inicializacao por provider
+    boundary: "Bootstrap por provider (claude, cursor, codex). NAO eh env_config (P09, variaveis genericas) nem spawn_config (P12, satelites)."
+    layer: runtime
+    core: false
     naming: p02_boot_{{provider}}.md
     constraints:
       max_bytes: 2048
@@ -75,6 +84,9 @@ types:
 
   mental_model:
     description: Mapa mental do agente (routing, decisoes)
+    boundary: "Identidade fixa do agente com routing e decisoes. NAO eh mental_model P10 (estado variavel por sessao)."
+    layer: spec
+    core: true
     naming: p02_mm_{{agent}}.yaml
     constraints:
       max_bytes: 2048
@@ -86,6 +98,9 @@ types:
 
   model_card:
     description: Spec do LLM usado (pricing, context, capabilities)
+    boundary: "Spec de LLM (pricing, context window, capabilities). NAO eh agent (P02, quem usa o modelo) nem boot_config (como inicia)."
+    layer: spec
+    core: false
     naming: p02_mc_{{model}}.md + .yaml
     constraints:
       max_bytes: 2048
@@ -98,6 +113,9 @@ types:
 
   router:
     description: Regra de roteamento (task > satellite)
+    boundary: "Roteamento task-to-satellite. NAO eh dispatch_rule (P12, keyword>satellite) nem fallback_chain (modelo>modelo)."
+    layer: runtime
+    core: true
     naming: p02_rt_{{scope}}.yaml
     constraints:
       max_bytes: 1024
@@ -108,6 +126,9 @@ types:
 
   fallback_chain:
     description: Sequencia de fallback (model A > B > C)
+    boundary: "Sequencia de fallback entre modelos LLM. NAO eh chain (P03, sequencia de prompts) nem router (task routing)."
+    layer: runtime
+    core: false
     naming: p02_fb_{{chain}}.yaml
     constraints:
       max_bytes: 512
@@ -118,6 +139,9 @@ types:
 
   iso_package:
     description: Pacote portable de agente AI (ISO format) — self-contained, LLM-agnostic
+    boundary: "Pacote distribuivel de agente em formato ISO. NAO eh agent (spec do agente) — iso_package eh o bundle portable."
+    layer: spec
+    core: true
     naming: agents/{{agent_name}}/manifest.yaml
     constraints:
       max_bytes: 4096

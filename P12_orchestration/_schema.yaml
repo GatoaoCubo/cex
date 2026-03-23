@@ -6,30 +6,48 @@ description: COMO coordena
 types:
   workflow:
     description: Fluxo de trabalho (steps sequenciais/paralelos)
+    boundary: "Fluxo de agentes+tools sequenciais/paralelos. NAO eh chain (P03, sequencia de prompts) nem dag (grafo de deps sem execucao)."
+    layer: runtime
+    core: true
     naming: p12_wf_{{name}}.md + .yaml
     constraints: {max_bytes: 3072}
 
   dag:
     description: Grafo aciclico de dependencias
+    boundary: "Grafo aciclico de dependencias entre tasks. NAO eh workflow (execucao direta) nem component_map (P08, componentes)."
+    layer: spec
+    core: false
     naming: p12_dag_{{pipeline}}.yaml
     constraints: {max_bytes: 3072}
 
   spawn_config:
     description: Configuracao de spawn (solo, grid, continuous)
+    boundary: "Configuracao de spawn de satelites. NAO eh boot_config (P02, per-provider) nem env_config (P09, variaveis)."
+    layer: runtime
+    core: true
     naming: p12_spawn_{{mode}}.yaml
     constraints: {max_bytes: 3072}
 
   signal:
     description: Sinal entre agentes (complete, error, progress)
+    boundary: "Sinal simples entre agentes (complete, error). NAO eh handoff (instrucao completa) nem interface (P06, contrato)."
+    layer: runtime
+    core: true
     naming: p12_sig_{{event}}.json
     constraints: {max_bytes: 4096}
 
   handoff:
     description: Instrucao de handoff (task + context + commit)
+    boundary: "Instrucao de handoff com task+context+commit. NAO eh action_prompt (P03, prompt puro) nem signal (evento simples)."
+    layer: runtime
+    core: true
     naming: p12_ho_{{task}}.md
     constraints: {max_bytes: 4096}
 
   dispatch_rule:
     description: Regra de despacho (keyword > satellite)
+    boundary: "Regra de despacho keyword>satellite. NAO eh router (P02, task>model routing) nem workflow (nao executa, apenas roteia)."
+    layer: runtime
+    core: false
     naming: p12_dr_{{scope}}.yaml
     constraints: {max_bytes: 3072}

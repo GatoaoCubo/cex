@@ -6,25 +6,40 @@ description: CONTRATOS de validacao
 types:
   input_schema:
     description: Contrato de entrada
+    boundary: "Contrato de entrada que define dados requeridos. NAO eh output_schema (saida) nem type_def (definicao abstrata)."
+    layer: spec
+    core: true
     naming: p06_is_{{scope}}.yaml
     constraints: {max_bytes: 3072}
 
   type_def:
     description: Definicao de tipo customizado
+    boundary: "Definicao de tipo customizado no sistema. NAO eh input_schema (contrato de entrada) nem interface (contrato bilateral)."
+    layer: spec
+    core: true
     naming: p06_td_{{type}}.yaml
     constraints: {max_bytes: 3072}
 
   validator:
     description: Regra de validacao (pre-commit, quality gate)
+    boundary: "Regra de validacao tecnica pass/fail. NAO eh quality_gate (P11, score numerico) nem scoring_rubric (P07, criterios)."
+    layer: governance
+    core: true
     naming: p06_val_{{rule}}.yaml
     constraints: {max_bytes: 3072}
 
   interface:
     description: Contrato de integracao entre agentes
+    boundary: "Contrato bilateral de integracao entre agentes. NAO eh input_schema (unilateral) nem signal (P12, evento simples)."
+    layer: spec
+    core: false
     naming: p06_iface_{{contract}}.yaml
     constraints: {max_bytes: 3072}
 
   output_schema:
     description: Contrato de saida (duplica P05 por design)
+    boundary: "Contrato formal de dados do artefato. NAO eh output_schema P05 (formato de resposta LLM, nao contrato)."
+    layer: spec
+    core: false
     naming: p06_os_{{scope}}.yaml
     constraints: {max_bytes: 3072}

@@ -9,6 +9,9 @@ description: O que o agente SABE
 types:
   knowledge_card:
     description: Fato atomico pesquisavel (densidade > 0.8)
+    boundary: "Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao."
+    layer: content
+    core: true
     naming: p01_kc_{{topic}}.md + .yaml
     constraints:
       max_bytes: 5120
@@ -66,6 +69,9 @@ types:
 
   rag_source:
     description: Fonte externa indexavel
+    boundary: "Ponteiro para fonte externa indexavel. NAO eh o conteudo em si, apenas referencia com URL e freshness."
+    layer: content
+    core: false
     naming: p01_rs_{{source}}.md + .yaml
     constraints:
       max_bytes: 1024
@@ -78,6 +84,9 @@ types:
 
   glossary_entry:
     description: Definicao de termo
+    boundary: "Definicao curta de termo do dominio. NAO eh knowledge_card (sem densidade min) nem context_doc (sem escopo)."
+    layer: content
+    core: false
     naming: p01_gl_{{term}}.md + .yaml
     constraints:
       max_bytes: 512
@@ -90,6 +99,9 @@ types:
 
   context_doc:
     description: Contexto de dominio
+    boundary: "Contexto de dominio para hidratar prompts. NAO eh knowledge_card (sem density gate) nem glossary_entry (nao define termo)."
+    layer: content
+    core: false
     naming: p01_ctx_{{topic}}.md + .yaml
     constraints:
       max_bytes: 2048
@@ -101,6 +113,9 @@ types:
 
   embedding_config:
     description: Configuracao de embedding model
+    boundary: "Configuracao de modelo de embedding. NAO eh brain_index (P10) que configura o indice, apenas o modelo vetorial."
+    layer: spec
+    core: false
     naming: p01_emb_{{model}}.yaml
     constraints:
       max_bytes: 512
@@ -112,6 +127,9 @@ types:
 
   few_shot_example:
     description: Exemplo input/output pra prompt
+    boundary: "Par input/output para few-shot learning. NAO eh golden_test (P07) que avalia qualidade, apenas exemplifica formato."
+    layer: prompt
+    core: true
     naming: p01_fse_{{topic}}.md + .yaml
     constraints:
       max_bytes: 1024

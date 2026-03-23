@@ -6,30 +6,48 @@ description: COMO medir qualidade
 types:
   unit_eval:
     description: Teste unitario de agente/prompt
+    boundary: "Teste unitario de agente ou prompt individual. NAO eh smoke_eval (rapido, sem profundidade) nem e2e_eval (pipeline completo)."
+    layer: governance
+    core: true
     naming: p07_ue_{{target}}.md + .yaml
     constraints: {max_bytes: 4096}
 
   smoke_eval:
     description: Teste rapido de sanidade (< 30s)
+    boundary: "Teste rapido de sanidade em <30s. NAO eh unit_eval (profundo) nem benchmark (metricas continuas)."
+    layer: governance
+    core: false
     naming: p07_se_{{scope}}.md
     constraints: {max_bytes: 3072}
 
   e2e_eval:
     description: Teste end-to-end (pipeline completo)
+    boundary: "Teste end-to-end de pipeline completo. NAO eh unit_eval (escopo isolado) nem benchmark (nao mede performance)."
+    layer: governance
+    core: false
     naming: p07_e2e_{{pipeline}}.md + .yaml
     constraints: {max_bytes: 4096}
 
   benchmark:
     description: Medicao de performance (latencia, custo, qualidade)
+    boundary: "Medicao de performance quantitativa. NAO eh eval (nao testa corretude) nem scoring_rubric (nao define criterios)."
+    layer: governance
+    core: false
     naming: p07_bm_{{metric}}.md + .yaml
     constraints: {max_bytes: 4096}
 
   golden_test:
     description: Caso de teste referencia (quality 9.5+)
+    boundary: "Caso de teste referencia quality 9.5+. NAO eh few_shot_example (P01, exemplifica) nem unit_eval (qualquer quality)."
+    layer: governance
+    core: true
     naming: p07_gt_{{case}}.md + .yaml
     constraints: {max_bytes: 4096}
 
   scoring_rubric:
     description: Criterio de avaliacao (5D, 12LP, custom)
+    boundary: "Criterio de avaliacao com framework. NAO eh benchmark (nao mede) nem quality_gate (P11, nao bloqueia)."
+    layer: governance
+    core: true
     naming: p07_sr_{{framework}}.md + .yaml
     constraints: {max_bytes: 3072}

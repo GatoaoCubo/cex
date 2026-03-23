@@ -14,6 +14,9 @@ variable_syntax:
 types:
   system_prompt:
     description: Prompt de sistema (identidade + regras)
+    boundary: "Prompt de sistema que define identidade e regras. NAO eh action_prompt (nao executa tarefa) nem instruction (nao eh atomico)."
+    layer: prompt
+    core: true
     naming: p03_sp_{{agent}}.md
     constraints:
       max_bytes: 4096
@@ -32,6 +35,9 @@ types:
 
   action_prompt:
     description: Prompt de acao especifica (task-focused)
+    boundary: "Prompt completo multi-step para tarefa especifica. NAO eh instruction (atomica, 1 regra) nem system_prompt (identidade, nao acao)."
+    layer: prompt
+    core: true
     naming: p03_ap_{{action}}.md
     constraints:
       max_bytes: 2048
@@ -50,6 +56,9 @@ types:
 
   prompt_template:
     description: Template com {{vars}} para reuso
+    boundary: "Template com {{vars}} para reuso em multiplos contextos. NAO eh action_prompt (fixo, sem vars) nem system_prompt (identidade)."
+    layer: prompt
+    core: true
     naming: p03_pt_{{topic}}.md
     constraints:
       max_bytes: 8192
@@ -69,6 +78,9 @@ types:
 
   instruction:
     description: Instrucao operacional (passo-a-passo)
+    boundary: "Instrucao atomica, 1 regra operacional. NAO eh action_prompt (multi-step completo) nem law (P08, inviolavel)."
+    layer: prompt
+    core: true
     naming: p03_ins_{{topic}}.md
     constraints:
       max_bytes: 1024
@@ -80,6 +92,9 @@ types:
 
   chain:
     description: Sequencia de prompts (A > B > C)
+    boundary: "Sequencia de prompts encadeados. NAO eh workflow (P12, sequencia de agentes+tools) nem dag (P12, grafo de deps)."
+    layer: prompt
+    core: false
     naming: p03_ch_{{pipeline}}.md + .yaml
     constraints:
       max_bytes: 2048

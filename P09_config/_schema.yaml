@@ -6,25 +6,40 @@ description: COMO configura
 types:
   env_config:
     description: Variaveis de ambiente
+    boundary: "Variaveis de ambiente do sistema. NAO eh boot_config (P02, per-provider) nem feature_flag (on/off logico)."
+    layer: runtime
+    core: true
     naming: p09_env_{{scope}}.yaml
     constraints: {max_bytes: 4096}
 
   path_config:
     description: Caminhos do sistema
+    boundary: "Caminhos do sistema de arquivos. NAO eh env_config (variaveis genericas) nem permission (controle de acesso)."
+    layer: runtime
+    core: true
     naming: p09_path_{{scope}}.yaml
     constraints: {max_bytes: 3072}
 
   permission:
     description: Regra de permissao (read/write/execute)
+    boundary: "Regra de permissao de acesso. NAO eh guardrail (P11, safety boundary) nem feature_flag (on/off de feature)."
+    layer: governance
+    core: true
     naming: p09_perm_{{scope}}.yaml
     constraints: {max_bytes: 3072}
 
   feature_flag:
     description: Flag de feature (on/off, gradual rollout)
+    boundary: "Flag de feature on/off com rollout gradual. NAO eh permission (acesso) nem env_config (variavel generica)."
+    layer: runtime
+    core: false
     naming: p09_ff_{{feature}}.yaml
     constraints: {max_bytes: 1536}
 
   runtime_rule:
     description: Regra de runtime (timeouts, retries, limits)
+    boundary: "Regra de runtime tecnica (timeouts, retries). NAO eh lifecycle_rule (P11, ciclo de vida) nem law (P08, inviolavel)."
+    layer: runtime
+    core: false
     naming: p09_rr_{{rule}}.yaml
     constraints: {max_bytes: 3072}

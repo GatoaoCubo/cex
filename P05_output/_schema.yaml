@@ -6,20 +6,32 @@ description: O que o agente ENTREGA
 types:
   output_schema:
     description: Formato de saida estruturado
+    boundary: "Formato de saida de LLM (como o agente responde). NAO eh output_schema P06 (contrato de dados do artefato)."
+    layer: spec
+    core: true
     naming: p05_os_{{format}}.yaml
     constraints: {max_bytes: 4096}
 
   parser:
     description: Extrator de dados de saida
+    boundary: "Extrator de dados de saida bruta. NAO eh formatter (nao transforma formato) nem validator (P06, nao valida)."
+    layer: runtime
+    core: false
     naming: p05_parser_{{target}}.md + .yaml
     constraints: {max_bytes: 4096}
 
   formatter:
     description: Formatador de saida (json, md, yaml)
+    boundary: "Transformador de formato de saida. NAO eh parser (nao extrai dados) nem output_schema (nao define contrato)."
+    layer: runtime
+    core: false
     naming: p05_fmt_{{format}}.md
     constraints: {max_bytes: 4096}
 
   naming_rule:
     description: Regra de nomenclatura
+    boundary: "Regra de nomenclatura de artefatos. NAO eh validator (P06, valida conteudo) nem type_def (P06, define tipo)."
+    layer: governance
+    core: false
     naming: p05_nr_{{scope}}.md
     constraints: {max_bytes: 4096}
