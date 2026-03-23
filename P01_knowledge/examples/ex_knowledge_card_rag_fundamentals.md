@@ -1,0 +1,69 @@
+---
+id: p01_kc_rag_fundamentals
+type: knowledge_card
+lp: P01
+title: RAG Fundamentals - Retrieval-Augmented Generation
+version: 1.0.0
+created: 2026-03-23
+updated: 2026-03-23
+author: EDISON
+domain: knowledge_engineering
+quality: 9.0
+tags: [rag, embeddings, chunking, retrieval, vector_search]
+tldr: RAG combina retrieval (BM25/FAISS) com generation (LLM) para respostas grounded em fontes reais, eliminando hallucination via context injection
+when_to_use: Quando LLM precisa de conhecimento atualizado, domain-specific ou verificavel
+keywords: [retrieval-augmented-generation, semantic-search, chunk-overlap, hybrid-search, context-window]
+long_tails:
+  - Como escolher chunk size ideal para RAG com documentos tecnicos
+  - Qual a diferenca entre BM25 e busca semantica em RAG pipelines
+axioms:
+  - SEMPRE chunk com overlap >= 10% para preservar contexto de fronteira
+  - NUNCA embeddar documentos inteiros - chunking e obrigatorio acima de 512 tokens
+linked_artifacts:
+  workflow: null
+  prompt: null
+density_score: 0.92
+---
+
+# RAG Fundamentals - Retrieval-Augmented Generation
+
+## Quick Reference
+- Chunk size ideal: 256-512 tokens (domain-dependent)
+- Overlap recomendado: 10-20% do chunk size
+- Top-K retrieval: 3-5 chunks por query (mais = noise)
+- Embedding models: nomic-embed-text (local), text-embedding-3-small (API)
+- Latencia tipica: 50-200ms retrieval + LLM generation time
+
+## Conceitos Chave
+- **Chunking**: Fragmentacao de documentos em blocos semanticamente coerentes
+- **Embedding**: Projecao de texto em vetor denso N-dimensional (768-1536d)
+- **Hybrid Search**: Combinacao de BM25 (lexical) + FAISS (semantico) com score fusion
+- **Context Injection**: Insercao dos chunks recuperados no prompt antes da geracao
+- **Grounding**: Ancoragem da resposta LLM em evidencias recuperadas
+
+## Fases
+1. **Ingest**: Documentos -> chunking (recursive/semantic) -> embedding -> vector store
+2. **Retrieve**: Query -> embed query -> similarity search -> rank top-K -> rerank (opcional)
+3. **Augment**: Prompt template + retrieved chunks + user query -> context window
+4. **Generate**: LLM processa contexto augmentado -> resposta grounded
+
+## Regras de Ouro
+1. NUNCA confie em chunk size unico - teste 256/512/1024 e metrize recall
+2. SEMPRE use hybrid search (BM25+semantic) - lexical pega termos exatos que embeddings perdem
+3. SE retrieval score < 0.7 ENTAO fallback para resposta "nao sei" em vez de hallucinar
+4. SEMPRE versione seu index - rebuild ao mudar modelo de embedding
+
+## Flow
+```
+[Docs] --> [Chunker] --> [Embedder] --> [Vector DB]
+                                            |
+[Query] --> [Embed Query] --> [Hybrid Search] --> [Reranker] --> [LLM + Context] --> [Answer]
+```
+
+## Comparativo
+| Abordagem | Vantagem | Desvantagem |
+|-----------|----------|-------------|
+| BM25 only | Rapido, sem GPU, termos exatos | Perde sinonimos e contexto semantico |
+| FAISS only | Captura significado, multilingue | Falha em acronimos e nomes proprios |
+| Hybrid (BM25+FAISS) | Melhor recall, robusto | 2x custo de indexacao, tuning de weights |
+| Fine-tuned LLM | Sem retrieval latency | Caro, desatualiza, hallucina mais |

@@ -1,0 +1,90 @@
+---
+id: p02_agent_web_researcher
+type: agent
+lp: P02
+title: Web Researcher Agent
+version: 1.0.0
+created: 2026-03-23
+updated: 2026-03-23
+author: EDISON
+satellite: SHAKA
+domain: research
+quality: 9.0
+tags: [research, web, scraping, data-extraction, competitive-intelligence]
+tldr: Agente autonomo de pesquisa web que coleta, estrutura e sintetiza dados de multiplas fontes online com verificacao cruzada
+when_to_use: Quando precisar de dados atualizados da web com sintese estruturada
+---
+
+# Web Researcher Agent
+
+## Overview
+web-researcher e o agente de pesquisa web autonoma do CODEXA. Atua quando o usuario precisa de dados atualizados de fontes online e entrega relatorios estruturados com fontes verificadas e confianca por claim.
+
+## Architecture
+```text
+[Query] -> [Query Expander] -> [Multi-Source Search] -> [Scraper Router] -> [Synthesizer] -> [Report]
+                                      |                        |
+                               [WebSearch API]          [Static/Dynamic/API]
+                               [Firecrawl]              [Anti-bot Handler]
+```
+
+## File Structure
+- `manifest.yaml`: Identidade, capabilities, routing keywords
+- `system_instruction.md`: Persona pesquisador + guardrails de verificacao
+- `instructions.md`: Pipeline 5-fase de pesquisa (discover -> collect -> verify -> synthesize -> report)
+- `scraping_strategies.md`: Decision tree para scraper selection (static/dynamic/API/stealth)
+
+## When to Use
+| Cenario | Usar? |
+|---------|-------|
+| Pesquisa de mercado com dados web atuais | SIM |
+| Analise competitiva de precos/produtos | SIM |
+| Coleta de dados estruturados de marketplaces | SIM |
+| Busca em base de dados interna (pool/brain) | NAO -> use retriever-agent |
+| Scraping de alto volume (>1000 paginas) | NAO -> use scraper-stealth-agent |
+
+## Input Output
+```yaml
+input:
+  query: string        # Pergunta ou topico de pesquisa
+  sources: list        # URLs especificas (opcional)
+  depth: enum          # quick|medium|deep
+  max_sources: int     # Limite de fontes (default: 10)
+output:
+  report: markdown     # Relatorio estruturado com findings
+  sources: list        # URLs com confianca score por fonte
+  data: json           # Dados extraidos em formato estruturado
+```
+
+## Integration
+- Upstream: STELLA (dispatch), gateway-agent (routing), usuario direto
+- Downstream: anuncio-agent (dados de produto), pricing-agent (precos competitivos)
+- Dependencies: WebSearch, WebFetch, Firecrawl MCP, Brain MCP
+
+## Quality Gates
+- Minimum 3 fontes independentes por claim factual
+- Confianca score >= 0.7 para inclusao no report
+- Zero URLs quebradas no output final
+- Cross-reference: claims conflitantes marcados explicitamente
+
+## Common Issues
+- Rate limiting em buscas rapidas -> backoff exponencial com jitter (2s base)
+- Sites com anti-bot (Cloudflare) -> escalar para scraper-stealth-agent
+- Dados desatualizados em cache -> forcar freshness check via timestamp validation
+
+## Invocation
+```text
+# Via STELLA dispatch
+/research "analise competitiva de pet toys no Mercado Livre" --depth deep
+
+# Via subagent direto
+Agent(subagent_type="pesquisa-agent", prompt="Pesquisar precos de [produto] em ML, Shopee, Amazon BR")
+```
+
+## Related Agents
+- scraper-marketplace-agent: Extrai dados brutos de marketplaces brasileiros
+- ux-researcher-agent: Analisa reviews e sentiment de produtos
+- seo-agent: Pesquisa keywords e SERP features
+
+## Footer
+Satellite: SHAKA | Quality: 9.0 | Domain: research
