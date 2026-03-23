@@ -1,73 +1,85 @@
-# P03 Prompt Schema
-# Baseado em: DISTILL_GOLDEN_TPL_HOP_PATTERNS.md
-# Evidence: 257 golden HOPs, variable syntax from 108 templates
+# P03 Prompt Schema v2.0
+# Baseado em: 713 artefatos reais (287 HOPs + 316 ISOs + 110 configs/rules)
+# Evidence: Anthropic/OpenAI/Google docs, DSPy, LangChain, Meta-Prompt papers
+# Termos: TODOS padrao industria (zero inventado)
 
 lp: P03
 name: Prompt
-description: COMO o agente FALA
+description: COMO o agente FALA — 9 tipos que cobrem o ciclo completo de prompt engineering
 
 variable_syntax:
   tier1_template: "{{MUSTACHE}}"     # resolved by template engine
   tier2_authoring: "[BRACKET]"       # resolved by human/agent
   deprecated: "{single_curly}"       # DO NOT USE
 
+# === PROMPT STACK (como LLM processa, nessa ordem) ===
+#
+#   1. system_prompt     → identidade (lido PRIMEIRO)
+#   2. few_shot          → exemplos (in-context learning)
+#   3. user_prompt       → tarefa (o que fazer)
+#   4. prompt_template   → molde reusavel (com {{vars}})
+#   5. chain_of_thought  → tecnica de raciocinio
+#   6. react             → raciocinio + tool use
+#   7. chain             → sequencia A>B>C
+#   8. meta_prompt       → prompt que gera prompts
+#   9. router_prompt     → classifica e roteia
+
 types:
+
+  # ============================================================
+  # CORE — todo satelite precisa destes
+  # ============================================================
+
   system_prompt:
-    description: Prompt de sistema (identidade + regras)
-    boundary: "Prompt de sistema que define identidade e regras. NAO eh action_prompt (nao executa tarefa) nem instruction (nao eh atomico)."
+    description: Prompt de sistema que define identidade e regras do agente
+    boundary: "Identidade + regras + formato. Lido PRIMEIRO pelo LLM. NAO eh user_prompt (tarefa) nem prompt_template (molde reusavel)."
     layer: prompt
     core: true
     naming: p03_sp_{{agent}}.md
+    industry_terms: [system message, system instruction, persona prompt]
+    used_by: [OpenAI, Anthropic, Google, LangChain SystemMessagePromptTemplate]
+    codexa_instances: "7 PRIMEs + 316 ISO_SYSTEM_INSTRUCTION + 10 rules files"
     constraints:
       max_bytes: 4096
       quality_min: 7.0
-    frontmatter_required:
-      - id
-      - type
-      - lp
-      - title
-      - target_agent
-      - quality
+    frontmatter_required: [id, type, lp, title, target_agent, quality]
     body_structure:
-      - identity       # quem eh
-      - rules          # o que pode/nao pode
+      - identity       # quem eh (role, domain, capabilities)
+      - rules          # o que pode/nao pode (always/never)
       - output_format  # como formatar resposta
+      - constraints    # limites (tokens, tools, scope)
 
-  action_prompt:
-    description: Prompt de acao especifica (task-focused)
-    boundary: "Prompt completo multi-step para tarefa especifica. NAO eh instruction (atomica, 1 regra) nem system_prompt (identidade, nao acao)."
+  user_prompt:
+    description: Prompt de tarefa que o humano/orquestrador envia ao agente
+    boundary: "Tarefa especifica multi-step. O LLM EXECUTA isso. NAO eh system_prompt (identidade) nem prompt_template (reusavel com vars)."
     layer: prompt
     core: true
-    naming: p03_ap_{{action}}.md
+    naming: p03_up_{{task}}.md
+    industry_terms: [user message, human message, task prompt, instruction prompt]
+    used_by: [OpenAI, Anthropic, Google, LangChain HumanMessagePromptTemplate]
+    codexa_instances: "287 HOPs reais + 14 handoffs"
     constraints:
       max_bytes: 2048
-    frontmatter_required:
-      - id
-      - type
-      - action
-      - input_required
-      - output_expected
+    frontmatter_required: [id, type, action, input_required, output_expected]
     body_structure:
-      - purpose        # 1 linha
-      - input          # YAML block
-      - execution      # passos numerados
+      - purpose        # 1 linha — o que esta tarefa produz
+      - input          # YAML block com campos tipados
+      - execution      # passos numerados com criterios
       - output         # formato esperado
-      - validation     # checklist
+      - validation     # checklist de qualidade
 
   prompt_template:
-    description: Template com {{vars}} para reuso
-    boundary: "Template com {{vars}} para reuso em multiplos contextos. NAO eh action_prompt (fixo, sem vars) nem system_prompt (identidade)."
+    description: Molde reusavel com {{vars}} para gerar prompts em multiplos contextos
+    boundary: "Template com variaveis. NAO eh user_prompt (fixo, sem vars) nem system_prompt (identidade)."
     layer: prompt
     core: true
     naming: p03_pt_{{topic}}.md
+    industry_terms: [prompt template, chat prompt template, jinja template]
+    used_by: [LangChain PromptTemplate, DSPy Signature, Mustache, Jinja2]
+    codexa_instances: "10 meta-templates (TPL_EDISON_009-020)"
     constraints:
       max_bytes: 8192
-    frontmatter_required:
-      - id
-      - type
-      - title
-      - variables      # lista de vars com tipo e descricao
-      - quality
+    frontmatter_required: [id, type, title, variables, quality]
     body_structure:
       - purpose
       - variables_table  # name | type | description | example
@@ -76,36 +88,87 @@ types:
       - examples         # input/output pairs min 2
       - semantic_bridge  # obrigatorio se quality >= 8
 
-  instruction:
-    description: Instrucao operacional (passo-a-passo)
-    boundary: "Instrucao atomica, 1 regra operacional. NAO eh action_prompt (multi-step completo) nem law (P08, inviolavel)."
+  few_shot:
+    description: Exemplos de input/output para in-context learning
+    boundary: "Pares concretos (input→output) que o LLM usa pra aprender o padrao. NAO eh prompt_template (sem vars, sao exemplos fixos) nem knowledge_card (nao eh referencia, eh demonstracao)."
     layer: prompt
     core: true
-    naming: p03_ins_{{topic}}.md
+    naming: p03_fs_{{task}}.md
+    industry_terms: [few-shot examples, in-context learning, demonstrations, exemplars]
+    used_by: [OpenAI, Anthropic, LangChain FewShotPromptTemplate, DSPy BootstrapFewShot]
+    codexa_instances: "1 few_shot_bank.yaml + HOP_EDISON_053 + golden examples"
     constraints:
-      max_bytes: 1024
-    frontmatter_required:
-      - id
-      - type
-      - target
-      - steps
+      max_bytes: 4096
+      min_examples: 2
+      max_examples: 10
+    frontmatter_required: [id, type, task, examples_count]
+    body_structure:
+      - task_description  # o que os exemplos demonstram
+      - examples          # lista de {input, output} concretos
+      - selection_criteria # como escolher quais exemplos usar
 
-  chain:
-    description: Sequencia de prompts (A > B > C)
-    boundary: "Sequencia de prompts encadeados. NAO eh workflow (P12, sequencia de agentes+tools) nem dag (P12, grafo de deps)."
+  # ============================================================
+  # TECHNIQUE — padroes validados por papers e frameworks
+  # ============================================================
+
+  chain_of_thought:
+    description: Prompt que instrui o LLM a raciocinar passo-a-passo antes de responder
+    boundary: "Tecnica de raciocinio explicito. NAO eh chain (sequencia de prompts) nem user_prompt (tarefa direta sem raciocinio)."
     layer: prompt
     core: false
-    naming: p03_ch_{{pipeline}}.md + .yaml
+    naming: p03_cot_{{task}}.md
+    industry_terms: [chain-of-thought, CoT, step-by-step reasoning, extended thinking]
+    used_by: ["Wei et al. 2022", "Google", "Anthropic extended thinking", "DSPy ChainOfThought"]
+    codexa_instances: "KC_EDISON_024 + KC_PYTHA_359 (extended thinking)"
     constraints:
       max_bytes: 2048
-    frontmatter_required:
-      - id
-      - type
-      - steps
-      - flow
+    frontmatter_required: [id, type, reasoning_type]
+    body_structure:
+      - task            # a tarefa que requer raciocinio
+      - reasoning_cue   # "Think step by step" ou equivalente
+      - format          # como estruturar o raciocinio (numbered, tree, free)
+      - answer_extract  # como extrair resposta final do raciocinio
 
-# Golden Formula (DISTILL report):
-# GOLDEN = Specific Frontmatter + Clear Purpose + Typed Variables
-#        + Structured Body + Quality Gates + Examples + Semantic Bridge
-# Semantic Bridge present in 60% of golden templates
-# Shokunin iteration 2 | 2026-03-22
+  react:
+    description: Prompt que interleava raciocinio (Thought) com acoes (Action) e observacoes (Observation)
+    boundary: "Padrao agentico Thought→Action→Observation loop. NAO eh chain_of_thought (so raciocinio, sem tools) nem chain (sequencia fixa, sem loop)."
+    layer: prompt
+    core: false
+    naming: p03_react_{{agent}}.md
+    industry_terms: [ReAct, reasoning and acting, tool-use loop, agentic loop]
+    used_by: ["Yao et al. 2023", "LangChain AgentExecutor", "DSPy dspy.ReAct", "Anthropic tool_use"]
+    codexa_instances: "DSPy KC (ResearchAgent example) + Anthropic tool_use patterns"
+    constraints:
+      max_bytes: 3072
+    frontmatter_required: [id, type, tools_available]
+    body_structure:
+      - objective       # o que o agente deve alcancar
+      - tools           # lista de tools disponiveis com schemas
+      - loop_format     # Thought: → Action: → Observation: → repeat
+      - stop_condition  # quando parar o loop
+      - max_iterations  # limite de seguranca
+
+  chain:
+    description: Sequencia de prompts encadeados onde output de A vira input de B
+    boundary: "Sequencia de PROMPTS (nao agentes). NAO eh workflow (P12, sequencia de agentes+tools) nem dag (P12, grafo com deps)."
+    layer: prompt
+    core: false
+    naming: p03_ch_{{pipeline}}.md
+    industry_terms: [prompt chain, sequential chain, pipeline, LLMChain]
+    used_by: [LangChain SequentialChain, DSPy Module composition]
+    codexa_instances: "~240 ADWs (workflows que sao chains de prompts)"
+    constraints:
+      max_bytes: 2048
+    frontmatter_required: [id, type, steps, flow]
+    body_structure:
+      - purpose         # o que o pipeline produz
+      - steps           # lista ordenada de prompts
+      - data_flow       # como output de N vira input de N+1
+      - error_handling  # o que fazer se um step falha
+
+  # ============================================================
+  # META — prompts que operam sobre outros prompts
+  # ============================================================
+
+  meta_prompt:
+    description: Prompt que gera, melhora ou evolui outros
