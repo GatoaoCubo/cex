@@ -1,0 +1,102 @@
+agent_id: voice_agent
+version: 3.0.0
+name: Voice Interface Agent
+description: Accessibility-first voice interface controller for CODEXA
+category: infrastructure
+domain: voice_io
+status: production
+created: '2025-11-27'
+updated: '2025-11-28'
+architecture: daemon
+ipc_method: file-based
+capabilities:
+  stt:
+    provider: elevenlabs
+    model: scribe_v1
+    vad_enabled: true
+    languages:
+    - pt
+    - en
+    - es
+  tts:
+    providers:
+    - edge-tts
+    - elevenlabs
+    - pyttsx3
+    default_voice: pt-BR-FranciscaNeural
+    fallback_chain:
+    - edge-tts
+    - elevenlabs
+    - pyttsx3
+  session:
+    daemon_mode: true
+    continuous_mode: true
+    single_shot: true
+    state_machine: true
+daemon:
+  script: codexa.app/voice/voice_daemon.py
+  command_file: codexa_voice_command.txt
+  response_file: codexa_voice_response.txt
+  status_file: codexa_voice_status.txt
+  pid_file: codexa_voice_daemon.pid
+mcp_tools:
+- listen
+- speak
+- start_voice_loop
+- listen_and_respond
+commands:
+- /v
+deprecated_commands:
+- /voice
+- /snap
+- /prime-voice
+- /ironman
+files:
+  daemon: codexa.app/voice/voice_daemon.py
+  mcp_server: codexa.app/voice/server.py
+  stt: codexa.app/voice/stt.py
+  tts: codexa.app/voice/tts.py
+  config: codexa.app/voice/config.py
+dependencies:
+  python:
+  - sounddevice
+  - soundfile
+  - numpy
+  - elevenlabs
+  - edge-tts
+  - pyttsx3
+  - python-dotenv
+  env:
+  - ELEVENLABS_API_KEY
+  optional:
+  - ELEVENLABS_VOICE_ID
+  - AUDIO_INPUT_DEVICE
+  - AUDIO_OUTPUT_DEVICE
+  - EDGE_VOICE
+exit_commands:
+- parar
+- sair
+- exit
+- quit
+- stop
+- encerrar
+- tchau
+- pare
+- finalizar
+accessibility:
+  audio_feedback: always
+  response_length: short
+  error_recovery: automatic
+  fallback_levels: 3
+performance:
+  listen_latency_target_ms: 500
+  tts_latency_target_ms: 1000
+  vad_silence_threshold_s: 1.5
+  max_recording_s: 15
+  poll_interval_s: 1
+integration:
+  activation_command: /v
+  parent_system: codexa
+  related_agents:
+  - mentor_agent
+  - codexa_agent

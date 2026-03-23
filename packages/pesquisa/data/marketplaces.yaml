@@ -1,0 +1,716 @@
+$schema: http://json-schema.org/draft-07/schema#
+title: Brazilian Marketplace Specifications - Research
+version: 1.0.0
+description: Complete specifications for 9 Brazilian marketplaces optimized for research
+  queries, competitive analysis, and market intelligence gathering
+last_updated: '2025-12-17'
+marketplaces:
+  mercado_livre:
+    name: Mercado Livre
+    country: BR
+    domain: mercadolivre.com.br
+    market_share: ~28%
+    monthly_visits: ~350M
+    api_available: true
+    api_documentation: https://developers.mercadolivre.com.br
+    search_features:
+      filters:
+      - category
+      - price_range
+      - condition
+      - location
+      - shipping_type
+      - payment_type
+      - seller_reputation
+      - free_shipping
+      - full_integration
+      sort_options:
+      - relevance
+      - price_asc
+      - price_desc
+      - sales_quantity
+      - newest
+      advanced_search: true
+      category_tree_depth: 5
+      autocomplete: true
+    data_points:
+      price: true
+      original_price: true
+      discount_percentage: true
+      sales_count: true
+      sales_velocity: true
+      reviews_count: true
+      review_rating: true
+      seller_reputation: true
+      seller_name: true
+      seller_location: true
+      shipping_type: true
+      shipping_cost: true
+      delivery_time: true
+      stock_quantity: true
+      variations: true
+      catalog_position: true
+      full_badge: true
+      installment_options: true
+    scraping_policy:
+      robots_txt: restrictive
+      api_preferred: true
+      rate_limit_sensitivity: high
+      captcha_frequency: medium
+      recommendation: Use official API for commercial use
+    research_priority: 1
+    best_for:
+    - price_monitoring
+    - competitor_analysis
+    - sales_velocity_tracking
+    - seller_reputation_analysis
+  shopee:
+    name: Shopee
+    country: BR
+    domain: shopee.com.br
+    market_share: ~18%
+    monthly_visits: ~180M
+    api_available: false
+    api_documentation: null
+    search_features:
+      filters:
+      - category
+      - price_range
+      - location
+      - rating
+      - shipping_options
+      - flash_sale
+      - voucher_available
+      - cod_available
+      sort_options:
+      - relevance
+      - latest
+      - top_sales
+      - price_asc
+      - price_desc
+      advanced_search: true
+      category_tree_depth: 4
+      autocomplete: true
+    data_points:
+      price: true
+      original_price: true
+      discount_percentage: true
+      sales_count: true
+      sales_velocity: false
+      reviews_count: true
+      review_rating: true
+      seller_reputation: true
+      seller_name: true
+      seller_location: true
+      shipping_type: true
+      shipping_cost: true
+      delivery_time: true
+      stock_quantity: true
+      variations: true
+      catalog_position: true
+      flash_sale_info: true
+      voucher_info: true
+      live_stream_active: true
+    scraping_policy:
+      robots_txt: restrictive
+      api_preferred: false
+      rate_limit_sensitivity: very_high
+      captcha_frequency: high
+      recommendation: Manual research or approved tools only
+    research_priority: 2
+    best_for:
+    - trend_analysis
+    - flash_sale_monitoring
+    - price_comparison
+    - young_demographic_research
+  amazon_br:
+    name: Amazon Brasil
+    country: BR
+    domain: amazon.com.br
+    market_share: ~15%
+    monthly_visits: ~120M
+    api_available: true
+    api_documentation: https://developer.amazonservices.com.br
+    search_features:
+      filters:
+      - category
+      - price_range
+      - brand
+      - rating
+      - prime_eligible
+      - condition
+      - seller
+      - availability
+      - deals
+      sort_options:
+      - featured
+      - price_asc
+      - price_desc
+      - avg_review
+      - newest
+      advanced_search: true
+      category_tree_depth: 6
+      autocomplete: true
+    data_points:
+      price: true
+      original_price: true
+      discount_percentage: true
+      sales_count: false
+      sales_rank: true
+      reviews_count: true
+      review_rating: true
+      seller_reputation: true
+      seller_name: true
+      seller_location: false
+      shipping_type: true
+      shipping_cost: true
+      delivery_time: true
+      stock_quantity: true
+      variations: true
+      catalog_position: true
+      prime_badge: true
+      fba_badge: true
+      best_seller_badge: true
+      amazon_choice_badge: true
+      asin: true
+      parent_asin: true
+    scraping_policy:
+      robots_txt: very_restrictive
+      api_preferred: true
+      rate_limit_sensitivity: very_high
+      captcha_frequency: very_high
+      recommendation: Use PA-API or SP-API exclusively
+    research_priority: 3
+    best_for:
+    - bsr_tracking
+    - review_analysis
+    - brand_monitoring
+    - keyword_research
+  magalu:
+    name: Magazine Luiza
+    country: BR
+    domain: magazineluiza.com.br
+    market_share: ~12%
+    monthly_visits: ~100M
+    api_available: true
+    api_documentation: https://developer.magazineluiza.com.br
+    search_features:
+      filters:
+      - category
+      - price_range
+      - brand
+      - rating
+      - seller_type
+      - availability
+      - retira_loja
+      - deals
+      sort_options:
+      - relevance
+      - price_asc
+      - price_desc
+      - rating
+      - discount
+      advanced_search: true
+      category_tree_depth: 4
+      autocomplete: true
+    data_points:
+      price: true
+      original_price: true
+      discount_percentage: true
+      sales_count: false
+      sales_velocity: false
+      reviews_count: true
+      review_rating: true
+      seller_reputation: true
+      seller_name: true
+      seller_location: false
+      shipping_type: true
+      shipping_cost: true
+      delivery_time: true
+      stock_quantity: true
+      variations: true
+      catalog_position: true
+      retira_loja_available: true
+      parceiro_magalu: true
+      installment_options: true
+    scraping_policy:
+      robots_txt: moderate
+      api_preferred: true
+      rate_limit_sensitivity: medium
+      captcha_frequency: low
+      recommendation: API for sellers, careful scraping for research
+    research_priority: 4
+    best_for:
+    - omnichannel_analysis
+    - regional_pricing
+    - seller_ecosystem_research
+    - electronics_market
+  americanas:
+    name: Americanas
+    country: BR
+    domain: americanas.com.br
+    market_share: ~8%
+    monthly_visits: ~80M
+    api_available: true
+    api_documentation: https://developers.americanas.com
+    search_features:
+      filters:
+      - category
+      - price_range
+      - brand
+      - rating
+      - seller
+      - condition
+      - availability
+      - deals
+      sort_options:
+      - relevance
+      - price_asc
+      - price_desc
+      - rating
+      - best_sellers
+      advanced_search: true
+      category_tree_depth: 4
+      autocomplete: true
+    data_points:
+      price: true
+      original_price: true
+      discount_percentage: true
+      sales_count: false
+      sales_velocity: false
+      reviews_count: true
+      review_rating: true
+      seller_reputation: true
+      seller_name: true
+      seller_location: false
+      shipping_type: true
+      shipping_cost: true
+      delivery_time: true
+      stock_quantity: true
+      variations: true
+      catalog_position: true
+      ame_cashback: true
+      installment_options: true
+    scraping_policy:
+      robots_txt: moderate
+      api_preferred: true
+      rate_limit_sensitivity: medium
+      captcha_frequency: medium
+      recommendation: Use API for marketplace sellers
+    research_priority: 5
+    best_for:
+    - cashback_analysis
+    - promotional_tracking
+    - multi_category_research
+    - b2w_ecosystem_analysis
+  casas_bahia:
+    name: Casas Bahia
+    country: BR
+    domain: casasbahia.com.br
+    market_share: ~6%
+    monthly_visits: ~50M
+    api_available: true
+    api_documentation: https://developers.viavarejo.com.br
+    search_features:
+      filters:
+      - category
+      - price_range
+      - brand
+      - rating
+      - seller
+      - availability
+      - retira_loja
+      - installments
+      sort_options:
+      - relevance
+      - price_asc
+      - price_desc
+      - rating
+      - discount
+      advanced_search: true
+      category_tree_depth: 4
+      autocomplete: true
+    data_points:
+      price: true
+      original_price: true
+      discount_percentage: true
+      sales_count: false
+      sales_velocity: false
+      reviews_count: true
+      review_rating: true
+      seller_reputation: true
+      seller_name: true
+      seller_location: false
+      shipping_type: true
+      shipping_cost: true
+      delivery_time: true
+      stock_quantity: true
+      variations: true
+      catalog_position: true
+      retira_loja_available: true
+      installment_options: true
+      crediario_available: true
+    scraping_policy:
+      robots_txt: moderate
+      api_preferred: true
+      rate_limit_sensitivity: medium
+      captcha_frequency: low
+      recommendation: Use Via Varejo unified API
+    research_priority: 6
+    best_for:
+    - appliances_market
+    - furniture_research
+    - installment_analysis
+    - class_c_d_consumer_research
+  submarino:
+    name: Submarino
+    country: BR
+    domain: submarino.com.br
+    market_share: ~4%
+    monthly_visits: ~35M
+    api_available: true
+    api_documentation: https://developers.americanas.com
+    search_features:
+      filters:
+      - category
+      - price_range
+      - brand
+      - rating
+      - seller
+      - condition
+      - availability
+      sort_options:
+      - relevance
+      - price_asc
+      - price_desc
+      - rating
+      - discount
+      advanced_search: true
+      category_tree_depth: 4
+      autocomplete: true
+    data_points:
+      price: true
+      original_price: true
+      discount_percentage: true
+      sales_count: false
+      sales_velocity: false
+      reviews_count: true
+      review_rating: true
+      seller_reputation: true
+      seller_name: true
+      seller_location: false
+      shipping_type: true
+      shipping_cost: true
+      delivery_time: true
+      stock_quantity: true
+      variations: true
+      catalog_position: true
+      ame_cashback: true
+      installment_options: true
+    scraping_policy:
+      robots_txt: moderate
+      api_preferred: true
+      rate_limit_sensitivity: medium
+      captcha_frequency: medium
+      recommendation: Same API as Americanas (B2W group)
+    research_priority: 7
+    best_for:
+    - tech_products_research
+    - gaming_market
+    - books_media_analysis
+    - premium_segment_research
+  carrefour:
+    name: Carrefour
+    country: BR
+    domain: carrefour.com.br
+    market_share: ~5%
+    monthly_visits: ~45M
+    api_available: false
+    api_documentation: null
+    search_features:
+      filters:
+      - category
+      - price_range
+      - brand
+      - rating
+      - seller
+      - availability
+      - retira_loja
+      - delivery_type
+      sort_options:
+      - relevance
+      - price_asc
+      - price_desc
+      - rating
+      - discount
+      advanced_search: true
+      category_tree_depth: 4
+      autocomplete: true
+    data_points:
+      price: true
+      original_price: true
+      discount_percentage: true
+      sales_count: false
+      sales_velocity: false
+      reviews_count: true
+      review_rating: true
+      seller_reputation: true
+      seller_name: true
+      seller_location: false
+      shipping_type: true
+      shipping_cost: true
+      delivery_time: true
+      stock_quantity: true
+      variations: true
+      catalog_position: true
+      retira_loja_available: true
+      express_delivery: true
+      club_discount: true
+    scraping_policy:
+      robots_txt: moderate
+      api_preferred: false
+      rate_limit_sensitivity: medium
+      captcha_frequency: low
+      recommendation: Manual research, no public API
+    research_priority: 8
+    best_for:
+    - grocery_market_research
+    - fmcg_analysis
+    - omnichannel_retail
+    - food_beverage_pricing
+  extra:
+    name: Extra
+    country: BR
+    domain: extra.com.br
+    market_share: ~3%
+    monthly_visits: ~25M
+    api_available: false
+    api_documentation: null
+    search_features:
+      filters:
+      - category
+      - price_range
+      - brand
+      - rating
+      - availability
+      - retira_loja
+      sort_options:
+      - relevance
+      - price_asc
+      - price_desc
+      - rating
+      advanced_search: false
+      category_tree_depth: 3
+      autocomplete: true
+    data_points:
+      price: true
+      original_price: true
+      discount_percentage: true
+      sales_count: false
+      sales_velocity: false
+      reviews_count: true
+      review_rating: true
+      seller_reputation: false
+      seller_name: true
+      seller_location: false
+      shipping_type: true
+      shipping_cost: true
+      delivery_time: true
+      stock_quantity: false
+      variations: true
+      catalog_position: true
+      retira_loja_available: true
+      club_extra_discount: true
+    scraping_policy:
+      robots_txt: permissive
+      api_preferred: false
+      rate_limit_sensitivity: low
+      captcha_frequency: low
+      recommendation: Manual research acceptable
+    research_priority: 9
+    best_for:
+    - hypermarket_pricing
+    - grocery_comparison
+    - household_products
+    - regional_availability
+search_strategy:
+  quick_scan:
+    marketplaces:
+    - mercado_livre
+    - shopee
+    description: Fast 2-marketplace scan for quick price checks
+    use_case: Initial product viability assessment
+    estimated_time: 2-5 minutes
+  default_research:
+    marketplaces:
+    - mercado_livre
+    - shopee
+    - amazon_br
+    description: Standard 3-marketplace research covering 60%+ market
+    use_case: Regular competitive analysis and pricing research
+    estimated_time: 10-15 minutes
+  full_coverage:
+    marketplaces:
+    - mercado_livre
+    - shopee
+    - amazon_br
+    - magalu
+    - americanas
+    description: Comprehensive 5-marketplace coverage for thorough analysis
+    use_case: Product launch research, market entry analysis
+    estimated_time: 30-45 minutes
+  complete_scan:
+    marketplaces:
+    - mercado_livre
+    - shopee
+    - amazon_br
+    - magalu
+    - americanas
+    - casas_bahia
+    - submarino
+    - carrefour
+    - extra
+    description: All 9 marketplaces for exhaustive market intelligence
+    use_case: Enterprise research, market reports, investment analysis
+    estimated_time: 60-90 minutes
+  category_specific:
+    electronics:
+    - mercado_livre
+    - amazon_br
+    - magalu
+    - submarino
+    fashion:
+    - mercado_livre
+    - shopee
+    - amazon_br
+    appliances:
+    - mercado_livre
+    - casas_bahia
+    - magalu
+    - americanas
+    grocery:
+    - carrefour
+    - extra
+    - amazon_br
+    home_furniture:
+    - mercado_livre
+    - casas_bahia
+    - magalu
+    - amazon_br
+    tech_gaming:
+    - mercado_livre
+    - amazon_br
+    - submarino
+    - shopee
+    books_media:
+    - amazon_br
+    - submarino
+    - americanas
+rate_limits:
+  global:
+    requests_per_minute: 30
+    concurrent_requests: 3
+    delay_between_requests_ms: 2000
+    max_requests_per_session: 500
+  per_marketplace:
+    mercado_livre:
+      requests_per_minute: 60
+      note: Higher with API authentication
+    shopee:
+      requests_per_minute: 10
+      note: Very aggressive rate limiting
+    amazon_br:
+      requests_per_minute: 1
+      note: Use PA-API with proper throttling
+    magalu:
+      requests_per_minute: 30
+      note: Moderate limits
+    americanas:
+      requests_per_minute: 30
+      note: Moderate limits
+    casas_bahia:
+      requests_per_minute: 30
+      note: Same as Americanas (Via Varejo)
+    submarino:
+      requests_per_minute: 30
+      note: Same as Americanas (B2W)
+    carrefour:
+      requests_per_minute: 20
+      note: Conservative approach recommended
+    extra:
+      requests_per_minute: 20
+      note: Conservative approach recommended
+  backoff_strategy:
+    initial_delay_ms: 1000
+    multiplier: 2
+    max_delay_ms: 60000
+    max_retries: 3
+data_extraction_priority:
+  essential:
+  - price
+  - title
+  - seller_name
+  - shipping_cost
+  - review_rating
+  important:
+  - original_price
+  - discount_percentage
+  - reviews_count
+  - sales_count
+  - stock_quantity
+  supplementary:
+  - seller_reputation
+  - delivery_time
+  - variations
+  - installment_options
+  - badges
+compliance:
+  general_guidelines:
+  - Always check robots.txt before automated access
+  - Respect rate limits and implement proper backoff
+  - Use official APIs when available for commercial use
+  - Do not circumvent anti-bot measures
+  - Store data in compliance with LGPD
+  - Attribute data sources in research outputs
+  lgpd_considerations:
+    seller_data: Public business information, generally permissible
+    price_data: Public information, freely usable
+    review_data: May contain personal data, anonymize when possible
+    retention_period: Delete raw data after analysis completion
+output_formats:
+  price_comparison:
+    fields:
+    - marketplace
+    - price
+    - shipping
+    - total
+    - seller
+    - url
+    sort_by: total_asc
+  competitor_analysis:
+    fields:
+    - marketplace
+    - seller
+    - price
+    - sales
+    - rating
+    - reviews
+    sort_by: sales_desc
+  market_overview:
+    fields:
+    - marketplace
+    - avg_price
+    - min_price
+    - max_price
+    - seller_count
+    - listing_count
+    aggregation: per_marketplace
+integration:
+  pesquisa_agent:
+    default_strategy: default_research
+    auto_expand_on_low_results: true
+    minimum_results_threshold: 10
+    fallback_strategy: full_coverage
+  anuncio_agent:
+    cross_reference: 09_marketplace_specs.json
+    sync_priority_order: true

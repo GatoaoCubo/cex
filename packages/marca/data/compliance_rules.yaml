@@ -1,0 +1,1111 @@
+$schema: http://json-schema.org/draft-07/schema#
+title: Regras de Compliance Brasil
+description: Regras regulatorias brasileiras para comunicacao de marcas e publicidade
+version: 1.0.0
+country: BR
+last_updated: 2025-01
+agent: marca
+regulators:
+  ANVISA:
+    id: ANVISA
+    name: Agencia Nacional de Vigilancia Sanitaria
+    website: https://www.gov.br/anvisa
+    jurisdiction: federal
+    applies_to:
+    - cosmeticos
+    - alimentos
+    - medicamentos
+    - suplementos
+    - saneantes
+    description: Orgao regulador de produtos relacionados a saude
+    rules:
+    - id: ANV001
+      category: claims_saude
+      rule: Proibido usar termos que impliquem cura sem registro de medicamento
+      severity: critical
+      legal_basis: RDC 96/2008
+      examples_forbidden:
+      - cura acne definitivamente
+      - elimina doencas de pele
+      - acaba com a celulite
+      - cura calvicie
+      - tratamento definitivo
+      examples_allowed:
+      - auxilia no tratamento
+      - contribui para a aparencia
+      - ajuda a reduzir a aparencia de
+      - promove sensacao de
+      - auxilia nos cuidados com
+      action_if_violated: Reescrever claim usando linguagem de beneficio cosmetico
+    - id: ANV002
+      category: claims_emagrecimento
+      rule: Proibido prometer resultados de emagrecimento sem comprovacao cientifica
+      severity: critical
+      legal_basis: RDC 27/2010
+      examples_forbidden:
+      - emagreca 10kg em 1 semana
+      - perca peso sem esforco
+      - queima gordura localizada garantida
+      - elimina barriga em 7 dias
+      - resultados garantidos
+      examples_allowed:
+      - pode auxiliar no controle de peso quando associado a dieta equilibrada
+      - contribui para metabolismo saudavel
+      - auxilia em dietas de reducao calorica
+      - fonte de fibras que contribuem para saciedade
+      action_if_violated: Remover promessas absolutas e adicionar ressalvas
+    - id: ANV003
+      category: rotulagem
+      rule: Obrigatorio listar ingredientes na ordem decrescente de concentracao
+      severity: required
+      legal_basis: RDC 07/2015
+      examples_forbidden:
+      - ingredientes naturais selecionados
+      - formula exclusiva
+      - componentes de alta tecnologia
+      examples_allowed:
+      - Aqua, Glycerin, Sodium Laureth Sulfate...
+      - 'Ingredientes: agua, glicerina, lauril sulfato de sodio...'
+      - INCI completo disponivel na embalagem
+      action_if_violated: Incluir lista completa de ingredientes em INCI
+    - id: ANV004
+      category: claims_naturais
+      rule: Termo 'natural' ou 'organico' requer certificacao valida
+      severity: required
+      legal_basis: RDC 44/2012
+      examples_forbidden:
+      - 100% natural (sem certificacao)
+      - produto organico (sem selo)
+      - ingredientes puros da natureza
+      - totalmente natural
+      examples_allowed:
+      - com ingredientes de origem natural
+      - formula com ativos botanicos
+      - Certificado IBD Organico
+      - Selo Ecocert
+      - contém ingredientes naturais certificados
+      action_if_violated: Remover claim ou obter certificacao valida
+    - id: ANV005
+      category: suplementos
+      rule: Suplementos nao podem ter claims de tratamento ou prevencao de doencas
+      severity: critical
+      legal_basis: RDC 243/2018
+      examples_forbidden:
+      - previne cancer
+      - trata diabetes
+      - cura depressao
+      - combate doencas cardiacas
+      - fortalece sistema imunologico contra doencas
+      examples_allowed:
+      - fonte de vitamina C
+      - contribui para o funcionamento do sistema imunologico
+      - auxilia na formacao de colageno
+      - auxilia no metabolismo energetico
+      action_if_violated: Substituir por claims funcionais aprovados pela ANVISA
+    - id: ANV006
+      category: cosmeticos_infantis
+      rule: Cosmeticos infantis tem restricoes adicionais de ingredientes e claims
+      severity: critical
+      legal_basis: RDC 15/2015
+      examples_forbidden:
+      - maquiagem para criancas menores de 3 anos
+      - esmalte permanente infantil
+      - bronzeador para bebes
+      examples_allowed:
+      - formula suave desenvolvida para pele infantil
+      - testado dermatologicamente para criancas
+      - hipoalergenico para pele sensivel
+      action_if_violated: Revisar formulacao e claims conforme faixa etaria
+    - id: ANV007
+      category: claims_hidratacao
+      rule: Claims de hidratacao devem ser substantivos e verificaveis
+      severity: recommended
+      legal_basis: RDC 07/2015
+      examples_forbidden:
+      - hidratacao infinita
+      - pele 500% mais hidratada
+      - hidratacao permanente
+      examples_allowed:
+      - hidratacao por ate 24 horas
+      - mantem a hidratacao natural da pele
+      - auxilia na retencao de umidade
+      - promove sensacao de pele hidratada
+      action_if_violated: Quantificar ou qualificar claim de hidratacao
+  INMETRO:
+    id: INMETRO
+    name: Instituto Nacional de Metrologia, Qualidade e Tecnologia
+    website: https://www.gov.br/inmetro
+    jurisdiction: federal
+    applies_to:
+    - eletronicos
+    - brinquedos
+    - eletrodomesticos
+    - equipamentos
+    - texteis
+    - calcados
+    description: Orgao responsavel por metrologia e certificacao de produtos
+    rules:
+    - id: INM001
+      category: certificacao_obrigatoria
+      rule: Produtos regulamentados devem exibir selo INMETRO
+      severity: critical
+      legal_basis: Portaria INMETRO 563/2016
+      examples_forbidden:
+      - venda de brinquedo sem selo INMETRO
+      - eletrodomestico sem certificacao
+      - equipamento eletrico sem etiqueta de eficiencia
+      examples_allowed:
+      - Produto certificado INMETRO - Registro XXX
+      - Selo INMETRO de conformidade
+      - Atende normas INMETRO/ABNT
+      action_if_violated: Obter certificacao antes de comercializar
+    - id: INM002
+      category: brinquedos
+      rule: Brinquedos devem indicar faixa etaria adequada
+      severity: critical
+      legal_basis: Portaria INMETRO 563/2016
+      examples_forbidden:
+      - brinquedo para todas as idades (com pecas pequenas)
+      - ideal para bebes (sem teste de seguranca)
+      - seguro para criancas (sem especificacao)
+      examples_allowed:
+      - Indicado para criancas acima de 3 anos
+      - Contem pecas pequenas - nao recomendado para menores de 36 meses
+      - 'Faixa etaria: 6 a 10 anos'
+      action_if_violated: Incluir faixa etaria e advertencias obrigatorias
+    - id: INM003
+      category: eficiencia_energetica
+      rule: Eletrodomesticos devem exibir etiqueta de eficiencia energetica
+      severity: required
+      legal_basis: Portaria INMETRO 234/2020
+      examples_forbidden:
+      - super economico (sem classificacao)
+      - baixo consumo (sem etiqueta)
+      - energia eficiente (sem selo)
+      examples_allowed:
+      - Classificacao Energetica A
+      - Selo Procel de Economia de Energia
+      - 'Consumo: XX kWh/mes - Classe B'
+      action_if_violated: Incluir classificacao energetica oficial
+    - id: INM004
+      category: texteis
+      rule: Produtos texteis devem informar composicao correta
+      severity: required
+      legal_basis: Portaria INMETRO 296/2018
+      examples_forbidden:
+      - tecido premium (sem composicao)
+      - material de alta qualidade
+      - 100% natural (sem especificacao)
+      examples_allowed:
+      - 'Composicao: 100% Algodao'
+      - 60% Poliester, 40% Viscose
+      - 'Tecido: 95% Algodao Organico, 5% Elastano'
+      action_if_violated: Especificar composicao percentual exata
+    - id: INM005
+      category: metrologia
+      rule: Produtos pre-medidos devem informar quantidade liquida
+      severity: required
+      legal_basis: Portaria INMETRO 157/2002
+      examples_forbidden:
+      - embalagem economica (sem peso)
+      - tamanho familia
+      - porcao generosa
+      examples_allowed:
+      - 'Conteudo Liquido: 500ml'
+      - 'Peso Liquido: 1kg'
+      - 'Volume: 2L'
+      action_if_violated: Incluir quantidade liquida em unidade padrao
+    - id: INM006
+      category: equipamentos_seguranca
+      rule: EPIs e equipamentos de seguranca requerem certificacao especifica
+      severity: critical
+      legal_basis: Portaria INMETRO 452/2016
+      examples_forbidden:
+      - capacete de seguranca sem CA
+      - oculos de protecao nao certificado
+      - luvas industriais sem laudo
+      examples_allowed:
+      - EPI com Certificado de Aprovacao (CA) n. XXXXX
+      - Atende NR-6 - INMETRO certificado
+      - Produto homologado para uso profissional
+      action_if_violated: Obter CA e certificacao antes de comercializar
+  CONAR:
+    id: CONAR
+    name: Conselho Nacional de Autorregulamentacao Publicitaria
+    website: https://www.conar.org.br
+    jurisdiction: autorregulacao
+    applies_to:
+    - all_advertising
+    - marketing
+    - promocoes
+    description: Orgao de autorregulacao etica da publicidade brasileira
+    rules:
+    - id: CON001
+      category: veracidade
+      rule: Publicidade deve ser verdadeira e comprovavel
+      severity: critical
+      legal_basis: Codigo Brasileiro de Autorregulamentacao Publicitaria - Art. 27
+      examples_forbidden:
+      - o melhor do Brasil (sem pesquisa)
+      - numero 1 em vendas (sem fonte)
+      - preferido por 9 em 10 (sem estudo)
+      - 100% de aprovacao
+      - resultados garantidos em todos os casos
+      examples_allowed:
+      - lider em vendas segundo pesquisa X (fonte, data)
+      - preferido por X% dos entrevistados - Pesquisa Y
+      - mais de 10.000 clientes satisfeitos
+      - alta taxa de satisfacao entre nossos clientes
+      action_if_violated: Remover claim ou adicionar fonte verificavel
+    - id: CON002
+      category: publicidade_infantil
+      rule: Publicidade para criancas tem restricoes especificas
+      severity: critical
+      legal_basis: CBAP - Anexo H
+      examples_forbidden:
+      - peca para seus pais comprarem
+      - todos os seus amigos tem
+      - voce vai ser o mais legal da escola
+      - nao seja o unico sem
+      - imperativos de compra para criancas
+      examples_allowed:
+      - divertido para toda familia
+      - brinquedo educativo
+      - estimula criatividade
+      - para momentos em familia
+      action_if_violated: Remover apelo direto a criancas e imperativos
+    - id: CON003
+      category: comparativa
+      rule: Publicidade comparativa deve ser objetiva e comprovavel
+      severity: required
+      legal_basis: CBAP - Art. 32
+      examples_forbidden:
+      - melhor que a marca X (subjetivo)
+      - concorrencia ultrapassada
+      - deixe os outros para tras
+      - esqueca as marcas antigas
+      examples_allowed:
+      - 30% mais duravel que modelo anterior (teste independente)
+      - consumo 20% menor comparado a media da categoria (INMETRO)
+      - comparacao tecnica documentada
+      action_if_violated: Fundamentar comparacao com dados objetivos
+    - id: CON004
+      category: testemunhais
+      rule: Depoimentos devem ser autenticos e representativos
+      severity: required
+      legal_basis: CBAP - Art. 27 par. 9
+      examples_forbidden:
+      - depoimento inventado
+      - ator sem identificacao como tal
+      - resultado atipico sem ressalva
+      - celebridade que nao usa o produto
+      examples_allowed:
+      - Depoimento real - Maria S., cliente desde 2020
+      - Resultados podem variar de pessoa para pessoa
+      - Imagens ilustrativas com modelos
+      - Publipost identificado como tal
+      action_if_violated: Identificar como publipost ou obter depoimento real
+    - id: CON005
+      category: sustentabilidade
+      rule: Claims ambientais devem ser especificos e verificaveis
+      severity: required
+      legal_basis: CBAP - Anexo U
+      examples_forbidden:
+      - eco-friendly (generico)
+      - amigo do meio ambiente
+      - produto verde
+      - 100% sustentavel
+      - zero impacto ambiental
+      examples_allowed:
+      - embalagem com 30% de material reciclado pos-consumo
+      - carbono neutro - compensado via projeto X
+      - certificacao FSC
+      - producao com energia 100% renovavel (certificado)
+      action_if_violated: Especificar claim ambiental com dados concretos
+    - id: CON006
+      category: promocoes
+      rule: Promocoes devem ter regras claras e acessiveis
+      severity: required
+      legal_basis: CBAP - Art. 36
+      examples_forbidden:
+      - promocao sem regulamento
+      - gratis* (*com asterisco escondido)
+      - 50% OFF em letras grandes, restricoes invisiveis
+      - ate X reais de desconto (condicoes ocultas)
+      examples_allowed:
+      - Regulamento completo em site.com/regulamento
+      - Promocao valida de XX/XX a XX/XX
+      - Desconto de 30% para pagamento a vista
+      - Consulte condicoes no ponto de venda
+      action_if_violated: Disponibilizar regulamento claro e acessivel
+    - id: CON007
+      category: diversidade
+      rule: Publicidade nao deve conter discriminacao ou estereotipos negativos
+      severity: critical
+      legal_basis: CBAP - Art. 20
+      examples_forbidden:
+      - estereotipos de genero limitantes
+      - associacoes raciais negativas
+      - ridicularizacao de grupos
+      - exclusao de diversidade corporal
+      examples_allowed:
+      - representacao diversa e inclusiva
+      - diferentes corpos e etnias
+      - papeis nao estereotipados
+      - linguagem neutra quando apropriado
+      action_if_violated: Revisar representacao para inclusividade
+  WCAG:
+    id: WCAG
+    name: Web Content Accessibility Guidelines
+    website: https://www.w3.org/WAI/standards-guidelines/wcag/
+    jurisdiction: internacional
+    version: 2.1 AA
+    applies_to:
+    - digital_content
+    - websites
+    - apps
+    - marketing_digital
+    description: Diretrizes de acessibilidade para conteudo web
+    rules:
+    - id: WCAG001
+      category: contraste
+      rule: Contraste minimo 4.5:1 para texto normal, 3:1 para texto grande
+      severity: required
+      legal_basis: WCAG 2.1 SC 1.4.3
+      validator: check_contrast_ratio(foreground, background) >= 4.5
+      examples_forbidden:
+      - 'texto cinza claro em fundo branco (#999 em #fff = 2.8:1)'
+      - texto amarelo em fundo branco
+      - texto azul claro em fundo cinza claro
+      examples_allowed:
+      - 'texto preto em fundo branco (#000 em #fff = 21:1)'
+      - 'texto #595959 em fundo #FFFFFF (7:1)'
+      - 'texto branco em fundo #0D9488 (teal escuro)'
+      action_if_violated: Ajustar cores para atingir contraste minimo
+    - id: WCAG002
+      category: texto_alternativo
+      rule: Imagens devem ter texto alternativo descritivo
+      severity: required
+      legal_basis: WCAG 2.1 SC 1.1.1
+      examples_forbidden:
+      - alt="imagem"
+      - alt="foto"
+      - alt="IMG_0234.jpg"
+      - imagem sem atributo alt
+      examples_allowed:
+      - alt="Mulher aplicando creme hidratante no rosto"
+      - alt="Garrafa termica preta de 500ml sobre mesa de madeira"
+      - alt="" (para imagens decorativas)
+      - alt="Grafico mostrando crescimento de 30% nas vendas"
+      action_if_violated: Adicionar descricao significativa no alt
+    - id: WCAG003
+      category: hierarquia_titulos
+      rule: Titulos devem seguir hierarquia logica (h1 > h2 > h3)
+      severity: required
+      legal_basis: WCAG 2.1 SC 1.3.1
+      examples_forbidden:
+      - pular de h1 para h3
+      - multiplos h1 na pagina
+      - usar h2 apenas por estilo visual
+      examples_allowed:
+      - h1 > h2 > h3 em sequencia logica
+      - um unico h1 por pagina
+      - titulos refletem estrutura do conteudo
+      action_if_violated: Reorganizar hierarquia de titulos
+    - id: WCAG004
+      category: cor_informacao
+      rule: Cor nao deve ser unico meio de transmitir informacao
+      severity: required
+      legal_basis: WCAG 2.1 SC 1.4.1
+      examples_forbidden:
+      - campos obrigatorios apenas em vermelho
+      - status apenas por cor (verde=ok, vermelho=erro)
+      - links diferenciados apenas por cor
+      examples_allowed:
+      - campo obrigatorio com asterisco + vermelho
+      - status com icone + cor + texto
+      - links sublinhados + cor diferente
+      action_if_violated: Adicionar indicador alem da cor
+    - id: WCAG005
+      category: tamanho_toque
+      rule: Alvos de toque devem ter minimo 44x44 pixels
+      severity: required
+      legal_basis: WCAG 2.1 SC 2.5.5
+      examples_forbidden:
+      - botao de 20x20 pixels
+      - links muito proximos sem espacamento
+      - icones pequenos como unico alvo de clique
+      examples_allowed:
+      - botoes com minimo 44x44 pixels
+      - espacamento adequado entre elementos clicaveis
+      - area de toque expandida com padding
+      action_if_violated: Aumentar area de toque ou espacamento
+    - id: WCAG006
+      category: foco_visivel
+      rule: Elementos focaveis devem ter indicador de foco visivel
+      severity: required
+      legal_basis: WCAG 2.1 SC 2.4.7
+      examples_forbidden:
+      - 'outline: none sem alternativa'
+      - foco invisivel em botoes
+      - navegacao por teclado sem indicador
+      examples_allowed:
+      - outline visivel em elementos focados
+      - estilo de foco customizado mas visivel
+      - focus-visible para melhor UX
+      action_if_violated: Implementar indicador de foco visivel
+    - id: WCAG007
+      category: movimento
+      rule: Conteudo em movimento deve poder ser pausado
+      severity: recommended
+      legal_basis: WCAG 2.1 SC 2.2.2
+      examples_forbidden:
+      - carrossel automatico sem pausa
+      - animacao continua sem controle
+      - video autoplay sem pausa
+      examples_allowed:
+      - carrossel com botao de pausa
+      - prefers-reduced-motion respeitado
+      - videos com controles visiveis
+      action_if_violated: Adicionar controle de pausa/reproducao
+  LGPD:
+    id: LGPD
+    name: Lei Geral de Protecao de Dados
+    website: https://www.gov.br/anpd
+    jurisdiction: federal
+    legal_basis: Lei 13.709/2018
+    applies_to:
+    - data_collection
+    - marketing
+    - crm
+    - analytics
+    - ecommerce
+    description: Lei brasileira de protecao de dados pessoais
+    rules:
+    - id: LGPD001
+      category: consentimento
+      rule: Coleta de dados requer consentimento livre, informado e inequivoco
+      severity: critical
+      legal_basis: LGPD Art. 7 e Art. 8
+      examples_forbidden:
+      - checkbox pre-marcado para newsletter
+      - consentimento buried em termos longos
+      - coleta sem informar finalidade
+      - opt-out ao inves de opt-in
+      examples_allowed:
+      - 'checkbox desmarcado: ''Aceito receber emails promocionais'''
+      - consentimento separado por finalidade
+      - linguagem clara sobre uso dos dados
+      - 'botao explicito: ''Concordo com a Politica de Privacidade'''
+      action_if_violated: Implementar opt-in explicito com finalidade clara
+    - id: LGPD002
+      category: transparencia
+      rule: Politica de privacidade deve ser clara e acessivel
+      severity: required
+      legal_basis: LGPD Art. 9
+      examples_forbidden:
+      - politica de privacidade em juridiques
+      - termos escondidos no rodape
+      - documento desatualizado
+      - sem informacao sobre DPO/Encarregado
+      examples_allowed:
+      - linguagem simples e clara
+      - link visivel no footer e formularios
+      - ultima atualizacao visivel
+      - contato do Encarregado de Dados
+      action_if_violated: Revisar politica para clareza e acessibilidade
+    - id: LGPD003
+      category: direitos_titular
+      rule: Titular deve poder exercer seus direitos facilmente
+      severity: required
+      legal_basis: LGPD Art. 18
+      examples_forbidden:
+      - processo de descadastro complexo
+      - sem canal para solicitacao de dados
+      - ignorar pedidos de exclusao
+      - exigir justificativa para opt-out
+      examples_allowed:
+      - link de descadastro em todo email
+      - formulario de solicitacao LGPD no site
+      - resposta em ate 15 dias
+      - portal de privacidade do usuario
+      action_if_violated: Implementar canal de exercicio de direitos
+    - id: LGPD004
+      category: minimizacao
+      rule: Coletar apenas dados necessarios para a finalidade
+      severity: required
+      legal_basis: LGPD Art. 6 III
+      examples_forbidden:
+      - pedir CPF para newsletter
+      - formulario com 20 campos obrigatorios
+      - coletar dados 'para uso futuro'
+      - campos opcionais marcados como obrigatorios
+      examples_allowed:
+      - apenas email para newsletter
+      - dados proporcionais ao servico
+      - campos opcionais claramente marcados
+      - justificativa para cada dado coletado
+      action_if_violated: Revisar formularios para minimizacao de dados
+    - id: LGPD005
+      category: compartilhamento
+      rule: Compartilhamento com terceiros requer consentimento especifico
+      severity: critical
+      legal_basis: LGPD Art. 7 par. 5
+      examples_forbidden:
+      - vender lista de emails
+      - compartilhar com parceiros sem aviso
+      - integracao com terceiros sem informar
+      - cookies de terceiros sem consentimento
+      examples_allowed:
+      - consentimento separado para cada parceiro
+      - lista de terceiros na politica de privacidade
+      - banner de cookies com opcoes granulares
+      - opt-in para compartilhamento de marketing
+      action_if_violated: Implementar consentimento especifico para compartilhamento
+    - id: LGPD006
+      category: seguranca
+      rule: Dados devem ser protegidos com medidas tecnicas adequadas
+      severity: critical
+      legal_basis: LGPD Art. 46
+      examples_forbidden:
+      - senhas em texto plano
+      - transmissao sem HTTPS
+      - armazenamento sem criptografia
+      - acesso sem controle de permissoes
+      examples_allowed:
+      - HTTPS em todas as paginas
+      - senhas com hash seguro
+      - criptografia de dados sensiveis
+      - logs de acesso auditaveis
+      action_if_violated: Implementar medidas de seguranca adequadas
+  CDC:
+    id: CDC
+    name: Codigo de Defesa do Consumidor
+    website: https://www.gov.br/mj/pt-br/assuntos/seus-direitos/consumidor
+    jurisdiction: federal
+    legal_basis: Lei 8.078/1990
+    applies_to:
+    - ecommerce
+    - varejo
+    - servicos
+    - all_b2c
+    description: Lei brasileira de protecao ao consumidor
+    rules:
+    - id: CDC001
+      category: informacao
+      rule: Informacoes sobre produto devem ser claras e completas
+      severity: critical
+      legal_basis: CDC Art. 31
+      examples_forbidden:
+      - preco sem informar valor total
+      - omitir taxa de entrega
+      - nao informar prazo de entrega
+      - caracteristicas essenciais ocultas
+      examples_allowed:
+      - preco a vista e parcelado claros
+      - frete calculado antes do checkout
+      - prazo de entrega estimado
+      - todas as especificacoes visiveis
+      action_if_violated: Incluir todas as informacoes obrigatorias
+    - id: CDC002
+      category: arrependimento
+      rule: Compras online tem 7 dias para desistencia sem justificativa
+      severity: critical
+      legal_basis: CDC Art. 49
+      examples_forbidden:
+      - nao aceitar devolucao em 7 dias
+      - cobrar taxa de devolucao no prazo legal
+      - dificultar processo de arrependimento
+      - omitir direito de arrependimento
+      examples_allowed:
+      - politica de devolucao clara com 7 dias
+      - processo simples de arrependimento
+      - reembolso integral incluindo frete
+      - informacao visivel sobre direito
+      action_if_violated: Implementar processo de arrependimento conforme lei
+    - id: CDC003
+      category: publicidade_enganosa
+      rule: Publicidade enganosa ou abusiva e proibida
+      severity: critical
+      legal_basis: CDC Art. 37
+      examples_forbidden:
+      - foto nao representa produto real
+      - omitir informacao essencial
+      - criar expectativa irreal
+      - preco isca inexistente
+      examples_allowed:
+      - fotos fieis ao produto
+      - descricao completa e precisa
+      - expectativas realistas
+      - precos reais e praticados
+      action_if_violated: Alinhar publicidade com realidade do produto
+    - id: CDC004
+      category: garantia
+      rule: Garantia legal de 90 dias para produtos duraveis
+      severity: required
+      legal_basis: CDC Art. 26
+      examples_forbidden:
+      - nao oferecer garantia legal
+      - limitar garantia a menos de 90 dias
+      - dificultar acionamento de garantia
+      - cobrar por garantia legal
+      examples_allowed:
+      - garantia legal de 90 dias informada
+      - garantia contratual adicional clara
+      - processo de garantia documentado
+      - canais de atendimento acessiveis
+      action_if_violated: Informar e respeitar garantia legal
+    - id: CDC005
+      category: atendimento
+      rule: SAC deve ser acessivel e efetivo
+      severity: required
+      legal_basis: Decreto 11.034/2022
+      examples_forbidden:
+      - SAC inacessivel ou inexistente
+      - tempo de espera excessivo
+      - nao resolver reclamacoes
+      - cancelamento mais dificil que compra
+      examples_allowed:
+      - multiplos canais de atendimento
+      - tempo de resposta informado
+      - cancelamento tao facil quanto compra
+      - protocolo de atendimento fornecido
+      action_if_violated: Melhorar acessibilidade e efetividade do SAC
+category_mapping:
+  cosmeticos:
+    primary:
+    - ANVISA
+    - CONAR
+    secondary:
+    - WCAG
+    - LGPD
+    - CDC
+    critical_rules:
+    - ANV001
+    - ANV003
+    - ANV004
+    - CON001
+  alimentos:
+    primary:
+    - ANVISA
+    - INMETRO
+    secondary:
+    - CONAR
+    - WCAG
+    - LGPD
+    - CDC
+    critical_rules:
+    - ANV002
+    - ANV005
+    - INM005
+    - CON001
+  suplementos:
+    primary:
+    - ANVISA
+    secondary:
+    - CONAR
+    - WCAG
+    - LGPD
+    - CDC
+    critical_rules:
+    - ANV002
+    - ANV005
+    - CON001
+  medicamentos:
+    primary:
+    - ANVISA
+    secondary:
+    - CONAR
+    - WCAG
+    - LGPD
+    - CDC
+    critical_rules:
+    - ANV001
+    - ANV005
+    - CON001
+    notes: Requer registro ANVISA para qualquer claim terapeutico
+  eletronicos:
+    primary:
+    - INMETRO
+    secondary:
+    - CONAR
+    - WCAG
+    - LGPD
+    - CDC
+    critical_rules:
+    - INM001
+    - INM003
+    - CON001
+    - CDC001
+  brinquedos:
+    primary:
+    - INMETRO
+    - CONAR
+    secondary:
+    - WCAG
+    - LGPD
+    - CDC
+    critical_rules:
+    - INM001
+    - INM002
+    - CON002
+  eletrodomesticos:
+    primary:
+    - INMETRO
+    secondary:
+    - CONAR
+    - WCAG
+    - LGPD
+    - CDC
+    critical_rules:
+    - INM001
+    - INM003
+    - CDC001
+    - CDC004
+  moda:
+    primary:
+    - INMETRO
+    - CONAR
+    secondary:
+    - WCAG
+    - LGPD
+    - CDC
+    critical_rules:
+    - INM004
+    - CON001
+    - CON007
+  calcados:
+    primary:
+    - INMETRO
+    - CONAR
+    secondary:
+    - WCAG
+    - LGPD
+    - CDC
+    critical_rules:
+    - INM004
+    - CON001
+  casa:
+    primary:
+    - CONAR
+    secondary:
+    - INMETRO
+    - WCAG
+    - LGPD
+    - CDC
+    critical_rules:
+    - CON001
+    - CDC001
+  servicos:
+    primary:
+    - CONAR
+    - CDC
+    secondary:
+    - WCAG
+    - LGPD
+    critical_rules:
+    - CON001
+    - CDC001
+    - CDC005
+    - LGPD001
+  digital:
+    primary:
+    - WCAG
+    - LGPD
+    secondary:
+    - CONAR
+    - CDC
+    critical_rules:
+    - WCAG001
+    - WCAG002
+    - LGPD001
+    - LGPD002
+  infantil:
+    primary:
+    - INMETRO
+    - CONAR
+    - ANVISA
+    secondary:
+    - WCAG
+    - LGPD
+    - CDC
+    critical_rules:
+    - INM002
+    - CON002
+    - ANV006
+    notes: Categoria com maior nivel de restricoes
+validation_checklist:
+- id: CHK001
+  check: Nenhum claim de cura ou tratamento sem registro ANVISA
+  severity: critical
+  applies_to:
+  - cosmeticos
+  - suplementos
+  - alimentos
+  related_rules:
+  - ANV001
+  - ANV005
+- id: CHK002
+  check: Produtos regulamentados tem selo INMETRO visivel
+  severity: critical
+  applies_to:
+  - eletronicos
+  - brinquedos
+  - eletrodomesticos
+  related_rules:
+  - INM001
+- id: CHK003
+  check: Claims quantitativos tem fonte verificavel
+  severity: critical
+  applies_to:
+  - all
+  related_rules:
+  - CON001
+  - CON003
+- id: CHK004
+  check: Publicidade infantil nao contem apelo imperativo
+  severity: critical
+  applies_to:
+  - brinquedos
+  - infantil
+  related_rules:
+  - CON002
+- id: CHK005
+  check: Cores atendem contraste minimo WCAG AA (4.5:1)
+  severity: required
+  applies_to:
+  - digital
+  - all
+  related_rules:
+  - WCAG001
+- id: CHK006
+  check: Coleta de dados tem consentimento opt-in explicito
+  severity: critical
+  applies_to:
+  - digital
+  - ecommerce
+  - servicos
+  related_rules:
+  - LGPD001
+- id: CHK007
+  check: Preco total informado antes do checkout
+  severity: critical
+  applies_to:
+  - ecommerce
+  - all_b2c
+  related_rules:
+  - CDC001
+- id: CHK008
+  check: Politica de devolucao de 7 dias esta visivel
+  severity: critical
+  applies_to:
+  - ecommerce
+  - all_b2c
+  related_rules:
+  - CDC002
+- id: CHK009
+  check: Composicao de texteis esta informada em percentuais
+  severity: required
+  applies_to:
+  - moda
+  - calcados
+  related_rules:
+  - INM004
+- id: CHK010
+  check: Claims ambientais sao especificos e verificaveis
+  severity: required
+  applies_to:
+  - all
+  related_rules:
+  - CON005
+- id: CHK011
+  check: Testemunhais sao identificados como publi quando aplicavel
+  severity: required
+  applies_to:
+  - all
+  related_rules:
+  - CON004
+- id: CHK012
+  check: Imagens tem texto alternativo descritivo
+  severity: required
+  applies_to:
+  - digital
+  related_rules:
+  - WCAG002
+- id: CHK013
+  check: Brinquedos tem faixa etaria indicada
+  severity: critical
+  applies_to:
+  - brinquedos
+  - infantil
+  related_rules:
+  - INM002
+- id: CHK014
+  check: Link de descadastro presente em emails marketing
+  severity: required
+  applies_to:
+  - digital
+  - marketing
+  related_rules:
+  - LGPD003
+- id: CHK015
+  check: Termo 'natural' ou 'organico' tem certificacao
+  severity: required
+  applies_to:
+  - cosmeticos
+  - alimentos
+  related_rules:
+  - ANV004
+- id: CHK016
+  check: Garantia legal de 90 dias informada
+  severity: required
+  applies_to:
+  - eletronicos
+  - eletrodomesticos
+  - all_duraveis
+  related_rules:
+  - CDC004
+- id: CHK017
+  check: Eficiencia energetica com classificacao oficial
+  severity: required
+  applies_to:
+  - eletrodomesticos
+  related_rules:
+  - INM003
+- id: CHK018
+  check: Promocoes tem regulamento acessivel
+  severity: required
+  applies_to:
+  - all
+  related_rules:
+  - CON006
+- id: CHK019
+  check: Representacao visual e diversa e inclusiva
+  severity: recommended
+  applies_to:
+  - all
+  related_rules:
+  - CON007
+- id: CHK020
+  check: HTTPS implementado em todas as paginas
+  severity: critical
+  applies_to:
+  - digital
+  - ecommerce
+  related_rules:
+  - LGPD006
+- id: CHK021
+  check: Formularios coletam apenas dados necessarios
+  severity: required
+  applies_to:
+  - digital
+  - ecommerce
+  related_rules:
+  - LGPD004
+- id: CHK022
+  check: Politica de privacidade clara e acessivel
+  severity: required
+  applies_to:
+  - digital
+  - ecommerce
+  - servicos
+  related_rules:
+  - LGPD002
+- id: CHK023
+  check: Quantidade liquida informada em unidade padrao
+  severity: required
+  applies_to:
+  - alimentos
+  - cosmeticos
+  related_rules:
+  - INM005
+- id: CHK024
+  check: Claims de emagrecimento com ressalvas adequadas
+  severity: critical
+  applies_to:
+  - suplementos
+  - alimentos
+  related_rules:
+  - ANV002
+- id: CHK025
+  check: Publicidade comparativa fundamentada em dados objetivos
+  severity: required
+  applies_to:
+  - all
+  related_rules:
+  - CON003
+severity_definitions:
+  critical:
+    description: Violacao pode resultar em multa, processo ou interdicao
+    action: Bloqueio imediato do conteudo ate correcao
+    review_required: true
+    auto_reject: true
+  required:
+    description: Exigencia legal ou normativa que deve ser cumprida
+    action: Correcao obrigatoria antes de publicacao
+    review_required: true
+    auto_reject: false
+  recommended:
+    description: Boa pratica que melhora qualidade e reduz riscos
+    action: Sugestao de melhoria, nao bloqueante
+    review_required: false
+    auto_reject: false
+validation_workflow:
+  steps:
+  - step: 1
+    name: identify_category
+    description: Identificar categoria do produto para mapear reguladores
+    input: product_category from input_schema
+    output: applicable_regulators[]
+  - step: 2
+    name: check_critical_rules
+    description: Verificar todas as regras criticas da categoria
+    input: applicable_regulators[].rules where severity=critical
+    output: critical_violations[]
+  - step: 3
+    name: check_required_rules
+    description: Verificar regras obrigatorias
+    input: applicable_regulators[].rules where severity=required
+    output: required_violations[]
+  - step: 4
+    name: run_checklist
+    description: Executar checklist de validacao
+    input: validation_checklist where applies_to includes category
+    output: checklist_results[]
+  - step: 5
+    name: generate_report
+    description: Gerar relatorio de compliance
+    input: all violations + checklist_results
+    output: compliance_report
+  pass_conditions:
+    critical: zero violations
+    required: all corrected before publish
+    recommended: optional improvements noted
+integration:
+  quality_dimensions:
+    file: 20_quality_dimensions.json
+    dimension: D4_COMPLIANCE
+    weight: 2.0
+    checks:
+    - D4.1
+    - D4.2
+    - D4.3
+    - D4.4
+    - D4.5
+  input_schema:
+    file: 06_input_schema.json
+    field: product_category
+    mapping: category_mapping
+metadata:
+  created: 2025-01
+  author: CODEXA/PYTHA
+  quality_score: 8.7
+  coverage:
+    regulators: 6
+    rules: 42
+    checks: 25
+    categories: 13
+  update_frequency: quarterly
+  legal_disclaimer: Este documento serve como guia de referencia e nao substitui consultoria
+    juridica especializada. Regulamentacoes podem mudar. Consulte sempre a legislacao
+    vigente e profissionais qualificados.

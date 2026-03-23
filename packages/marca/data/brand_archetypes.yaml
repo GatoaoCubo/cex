@@ -1,0 +1,1737 @@
+title: Arquetipos de Marca Junguianos
+description: 12 arquetipos de marca adaptados para e-commerce brasileiro com guias
+  de tom de voz, identidade visual e combinacoes estrategicas
+version: 1.0.0
+agent: marca
+total_archetypes: 12
+source: Carl Jung + Margaret Mark & Carol Pearson (The Hero and the Outlaw)
+archetypes:
+  innocent:
+    id: innocent
+    name_pt: Inocente
+    name_en: Innocent
+    motto: Livre para ser voce mesmo
+    core_desire: Experimentar o paraiso, felicidade e simplicidade
+    goal: Ser feliz e trazer felicidade aos outros
+    fear: Fazer algo errado e ser punido, corrupcao, complexidade
+    strategy: Fazer as coisas certas, ser otimista, transmitir pureza e simplicidade
+    brand_promise: A vida pode ser simples e boa
+    personality_traits:
+    - Otimista
+    - Puro
+    - Honesto
+    - Romantico
+    - Leal
+    - Simples
+    - Nostalgico
+    shadow_traits:
+    - Ingenuidade excessiva
+    - Negacao de problemas
+    - Dependencia
+    tone_of_voice:
+      formality: 2
+      enthusiasm: 4
+      humor: 3
+      authority: 2
+      warmth: 5
+      description: Tom acolhedor, simples e genuino. Evita jargoes tecnicos. Usa linguagem
+        acessivel e otimista.
+    communication_style:
+      do:
+      - Use linguagem simples e direta
+      - Transmita otimismo genuino
+      - Conte historias de momentos felizes
+      - Valorize tradicao e nostalgia
+      - Celebre pequenas alegrias do cotidiano
+      dont:
+      - Usar ironia ou sarcasmo
+      - Abordar temas polemicos
+      - Fazer promessas complexas
+      - Usar linguagem agressiva de vendas
+      - Focar em medos ou problemas
+    visual_identity:
+      colors:
+        primary:
+        - '#FFFFFF'
+        - '#F5F5DC'
+        - '#87CEEB'
+        secondary:
+        - '#98D8C8'
+        - '#FFD1DC'
+        - '#FFFACD'
+        accent:
+        - '#FFB6C1'
+        - '#90EE90'
+        avoid:
+        - '#000000'
+        - '#8B0000'
+        - '#2F4F4F'
+      color_psychology: Cores claras, pastel e suaves que transmitem pureza, paz e
+        simplicidade
+      typography_style: Sans-serif arredondadas, fontes manuscritas delicadas, alta
+        legibilidade
+      typography_examples:
+      - Quicksand
+      - Nunito
+      - Poppins
+      - Comic Neue
+      imagery_style: Imagens luminosas, natureza, familias felizes, criancas, paisagens
+        bucolicas, luz natural
+      photography_mood: Alto-chave, luz natural, cores suaves, expressoes genuinas
+        de alegria
+      logo_characteristics:
+      - Formas organicas e arredondadas
+      - Simbolos de natureza (folhas, sol, nuvens)
+      - Tipografia amigavel
+      - Espacamento generoso
+    brazilian_examples:
+    - brand: Natura
+      rationale: Comunica beleza natural, sustentabilidade e conexao com a natureza
+        brasileira
+    - brand: Leite Moca
+      rationale: Nostalgia, tradicao familiar, momentos doces e simples da vida
+    - brand: Nestle
+      rationale: Valores familiares, nutricao, tradicao e momentos de partilha
+    - brand: Sadia
+      rationale: Confianca, tradicao, qualidade simples e honesta
+    international_examples:
+    - Coca-Cola
+    - Dove
+    - Innocent Drinks
+    - Aveeno
+    ideal_categories:
+    - Alimentos naturais
+    - Produtos para bebes
+    - Cosmeticos organicos
+    - Produtos artesanais
+    - Bem-estar e saude
+    price_positioning:
+    - Popular
+    - Medio
+    target_audience_profile:
+      demographics: Familias, maes, pessoas que valorizam tradicao
+      psychographics: Buscam simplicidade, autenticidade, conexao emocional
+      values:
+      - Familia
+      - Tradicao
+      - Simplicidade
+      - Honestidade
+    compatible_secondaries:
+    - caregiver
+    - everyman
+    - sage
+    neutral_combinations:
+    - explorer
+    - creator
+    avoid_combinations:
+    - outlaw
+    - jester
+    - ruler
+    combination_rationale:
+      caregiver: Amplifica o cuidado genuino e a protecao
+      everyman: Reforcar acessibilidade e conexao popular
+      avoid_outlaw: Rebeldia contradiz pureza e inocencia
+  explorer:
+    id: explorer
+    name_pt: Explorador
+    name_en: Explorer
+    motto: Nao me cerque
+    core_desire: Liberdade para descobrir a si mesmo atraves da exploracao do mundo
+    goal: Experimentar uma vida melhor, mais autentica e gratificante
+    fear: Ficar preso, conformismo, vazio interior, limitacao
+    strategy: Viajar, buscar novas experiencias, escapar do tedio e da rotina
+    brand_promise: A jornada e a recompensa
+    personality_traits:
+    - Aventureiro
+    - Independente
+    - Ambicioso
+    - Individualista
+    - Pioneiro
+    - Inquieto
+    - Autentico
+    shadow_traits:
+    - Desajuste social
+    - Incapacidade de compromisso
+    - Perfeccionismo paralisante
+    tone_of_voice:
+      formality: 2
+      enthusiasm: 5
+      humor: 3
+      authority: 3
+      warmth: 3
+      description: Tom inspirador, encorajador e empolgante. Vocabulario de descoberta
+        e liberdade.
+    communication_style:
+      do:
+      - Use verbos de acao e movimento
+      - Inspire a busca por novas experiencias
+      - Valorize autenticidade e individualidade
+      - Conte historias de descobertas
+      - Celebre a coragem de explorar
+      dont:
+      - Enfatizar seguranca e conforto
+      - Usar linguagem corporativa rigida
+      - Focar em rotinas e padroes
+      - Limitar possibilidades
+      - Ser excessivamente cauteloso
+    visual_identity:
+      colors:
+        primary:
+        - '#2E8B57'
+        - '#4682B4'
+        - '#D2691E'
+        secondary:
+        - '#8B4513'
+        - '#556B2F'
+        - '#708090'
+        accent:
+        - '#FF8C00'
+        - '#CD853F'
+        avoid:
+        - '#FF69B4'
+        - '#DA70D6'
+        - '#FFB6C1'
+      color_psychology: Tons terrosos, verdes de natureza, azuis de ceu aberto - cores
+        da aventura outdoor
+      typography_style: Sans-serif robustas, fontes condensadas, aspecto de carimbos
+        ou vintage
+      typography_examples:
+      - Oswald
+      - Barlow Condensed
+      - Source Sans Pro
+      - Archivo
+      imagery_style: Paisagens grandiosas, estradas, montanhas, pessoas em movimento,
+        equipamentos outdoor
+      photography_mood: Grande angular, luz dramatica, texturas naturais, perspectivas
+        expansivas
+      logo_characteristics:
+      - Formas geometricas angulares
+      - Simbolos de direcao (setas, bussolas)
+      - Texturas rusticas
+      - Aspecto robusto e duravel
+    brazilian_examples:
+    - brand: Havaianas
+      rationale: Espirito livre brasileiro, versatilidade, presenca global com raizes
+        locais
+    - brand: Latam Airlines
+      rationale: Conectar destinos, descoberta de novos lugares, liberdade de viajar
+    - brand: Track & Field
+      rationale: Estilo de vida ativo, outdoor, esportes e aventura
+    - brand: Decathlon Brasil
+      rationale: Equipamentos para todas as aventuras esportivas e outdoor
+    international_examples:
+    - Jeep
+    - The North Face
+    - Patagonia
+    - GoPro
+    - Red Bull
+    ideal_categories:
+    - Equipamentos outdoor
+    - Turismo e viagens
+    - Esportes de aventura
+    - Vestuario esportivo
+    - Tecnologia portatil
+    price_positioning:
+    - Medio
+    - Premium
+    target_audience_profile:
+      demographics: Jovens adultos 25-45, solteiros ou casais sem filhos
+      psychographics: Buscam experiencias sobre posses, valorizam liberdade e autenticidade
+      values:
+      - Liberdade
+      - Autenticidade
+      - Aventura
+      - Autodescoberta
+    compatible_secondaries:
+    - hero
+    - outlaw
+    - creator
+    neutral_combinations:
+    - sage
+    - magician
+    avoid_combinations:
+    - caregiver
+    - ruler
+    - everyman
+    combination_rationale:
+      hero: Amplifica coragem e superacao de desafios
+      outlaw: Reforcar anticonformismo e quebra de regras
+      avoid_caregiver: Cuidado com outros limita liberdade individual
+  sage:
+    id: sage
+    name_pt: Sabio
+    name_en: Sage
+    motto: A verdade libertara voce
+    core_desire: Encontrar a verdade e compreender o mundo
+    goal: Usar inteligencia e analise para entender o mundo
+    fear: Ser enganado, ignorancia, desinformacao
+    strategy: Buscar informacao, conhecimento e dados para compreender
+    brand_promise: Conhecimento confiavel para decisoes melhores
+    personality_traits:
+    - Inteligente
+    - Analitico
+    - Confiavel
+    - Ponderado
+    - Objetivo
+    - Expertise
+    - Reflexivo
+    shadow_traits:
+    - Arrogancia intelectual
+    - Frieza emocional
+    - Paralisia por analise
+    tone_of_voice:
+      formality: 4
+      enthusiasm: 2
+      humor: 2
+      authority: 5
+      warmth: 2
+      description: Tom informativo, preciso e confiavel. Vocabulario tecnico quando
+        apropriado, sempre com clareza.
+    communication_style:
+      do:
+      - Apresente dados e evidencias
+      - Use fontes confiaveis e cite referencias
+      - Explique conceitos complexos com clareza
+      - Demonstre expertise e profundidade
+      - Oferer analises e insights
+      dont:
+      - Fazer afirmacoes sem embasamento
+      - Usar linguagem excessivamente emocional
+      - Simplificar demais (perda de precisao)
+      - Fazer promessas exageradas
+      - Ignorar contrapontos validos
+    visual_identity:
+      colors:
+        primary:
+        - '#1E3A5F'
+        - '#2C3E50'
+        - '#34495E'
+        secondary:
+        - '#95A5A6'
+        - '#7F8C8D'
+        - '#BDC3C7'
+        accent:
+        - '#3498DB'
+        - '#1ABC9C'
+        avoid:
+        - '#FF1493'
+        - '#FF4500'
+        - '#FFD700'
+      color_psychology: Azuis profundos e cinzas sofisticados que transmitem confianca
+        e seriedade intelectual
+      typography_style: Serifadas classicas para credibilidade, sans-serif limpas
+        para modernidade
+      typography_examples:
+      - Merriweather
+      - Lora
+      - IBM Plex Sans
+      - Source Serif Pro
+      imagery_style: Graficos, dados visualizados, ambientes academicos, bibliotecas,
+        tecnologia, simbolos de conhecimento
+      photography_mood: Iluminacao controlada, composicao equilibrada, ambientes profissionais
+      logo_characteristics:
+      - Formas geometricas precisas
+      - Simbolos de conhecimento (livros, corujas, lampadas)
+      - Tipografia classica e elegante
+      - Design clean e minimalista
+    brazilian_examples:
+    - brand: Estadao
+      rationale: Jornalismo serio, credibilidade, analise profunda de fatos
+    - brand: FGV
+      rationale: Educacao de excelencia, pesquisa, formacao de liderancas
+    - brand: XP Investimentos
+      rationale: Educacao financeira, conhecimento para investir melhor
+    - brand: Abril Educacao
+      rationale: Conhecimento, formacao, conteudo educacional de qualidade
+    international_examples:
+    - Google
+    - BBC
+    - The Economist
+    - TED
+    - Harvard
+    ideal_categories:
+    - Educacao e cursos
+    - Consultoria
+    - Tecnologia B2B
+    - Financas e investimentos
+    - Publicacoes e midia
+    price_positioning:
+    - Premium
+    - Luxury
+    target_audience_profile:
+      demographics: Profissionais 30-55, alta escolaridade, tomadores de decisao
+      psychographics: Valorizam conhecimento, buscam fontes confiaveis, tomam decisoes
+        racionais
+      values:
+      - Conhecimento
+      - Verdade
+      - Analise
+      - Competencia
+    compatible_secondaries:
+    - creator
+    - ruler
+    - innocent
+    neutral_combinations:
+    - caregiver
+    - hero
+    avoid_combinations:
+    - jester
+    - outlaw
+    - lover
+    combination_rationale:
+      creator: Conhecimento aplicado a inovacao
+      ruler: Autoridade baseada em expertise
+      avoid_jester: Humor pode minar credibilidade intelectual
+  hero:
+    id: hero
+    name_pt: Heroi
+    name_en: Hero
+    motto: Onde ha vontade, ha um caminho
+    core_desire: Provar seu valor atraves de acoes corajosas e dificeis
+    goal: Exercer maestria de forma que melhore o mundo
+    fear: Fraqueza, vulnerabilidade, desistir, ser covarde
+    strategy: Ser forte, competente e poderoso quanto possivel
+    brand_promise: Voce pode superar qualquer desafio
+    personality_traits:
+    - Corajoso
+    - Determinado
+    - Forte
+    - Competitivo
+    - Honrado
+    - Disciplinado
+    - Vencedor
+    shadow_traits:
+    - Arrogancia
+    - Necessidade constante de conflito
+    - Incapacidade de delegar
+    tone_of_voice:
+      formality: 3
+      enthusiasm: 5
+      humor: 2
+      authority: 4
+      warmth: 3
+      description: Tom motivacional, empoderador e energico. Linguagem de superacao
+        e conquista.
+    communication_style:
+      do:
+      - Use linguagem de superacao e vitoria
+      - Mostre resultados concretos e tangiveis
+      - Inspire acao e determinacao
+      - Celebre conquistas e esforco
+      - Desafie o cliente a ser melhor
+      dont:
+      - Aceitar mediocridade ou desculpas
+      - Ser condescendente ou paternalista
+      - Focar em limitacoes ou fraquezas
+      - Usar linguagem passiva
+      - Evitar desafios ou conflitos
+    visual_identity:
+      colors:
+        primary:
+        - '#C41E3A'
+        - '#B22222'
+        - '#000000'
+        secondary:
+        - '#FFD700'
+        - '#DAA520'
+        - '#2F4F4F'
+        accent:
+        - '#FF4500'
+        - '#DC143C'
+        avoid:
+        - '#FFB6C1'
+        - '#E6E6FA'
+        - '#F0FFF0'
+      color_psychology: Vermelho poderoso, preto forte, dourado de vitoria - cores
+        de energia e conquista
+      typography_style: Sans-serif bold e impactantes, fontes condensadas atleticas
+      typography_examples:
+      - Montserrat Bold
+      - Anton
+      - Bebas Neue
+      - Oswald Bold
+      imagery_style: Atletas, competicao, superacao fisica, expressoes de determinacao,
+        movimento dinamico
+      photography_mood: Alto contraste, angulos dramaticos, foco em esforco e conquista
+      logo_characteristics:
+      - Formas angulares e dinamicas
+      - Simbolos de forca (escudos, raios, asas)
+      - Tipografia bold e impactante
+      - Movimento implicito no design
+    brazilian_examples:
+    - brand: Nike Brasil
+      rationale: Superacao esportiva, vitoria, desempenho de elite
+    - brand: Athletico Paranaense
+      rationale: Futebol como superacao, raiva competitiva, identidade forte
+    - brand: Growth Supplements
+      rationale: Performance, resultados, superacao nos treinos
+    - brand: Olympikus
+      rationale: Esporte brasileiro, desempenho, conquistas atleticas
+    international_examples:
+    - Nike
+    - Adidas
+    - Under Armour
+    - FedEx
+    - BMW M
+    ideal_categories:
+    - Artigos esportivos
+    - Suplementos fitness
+    - Servicos de coaching
+    - Equipamentos de performance
+    - Automotivo esportivo
+    price_positioning:
+    - Medio
+    - Premium
+    target_audience_profile:
+      demographics: Adultos 18-45, ambos generos, estilo de vida ativo
+      psychographics: Competitivos, orientados a metas, valorizam esforco e resultados
+      values:
+      - Vitoria
+      - Disciplina
+      - Superacao
+      - Excelencia
+    compatible_secondaries:
+    - explorer
+    - ruler
+    - magician
+    neutral_combinations:
+    - creator
+    - sage
+    avoid_combinations:
+    - innocent
+    - caregiver
+    - jester
+    combination_rationale:
+      explorer: Heroi que conquista novos territorios
+      ruler: Lideranca atraves de competencia e vitoria
+      avoid_innocent: Pureza contradiz combatividade heroica
+  outlaw:
+    id: outlaw
+    name_pt: Rebelde
+    name_en: Outlaw
+    motto: Regras foram feitas para serem quebradas
+    core_desire: Revolucao, vinganca ou libertacao
+    goal: Derrubar o que nao esta funcionando
+    fear: Impotencia, irrelevancia, ser comum, conformismo
+    strategy: Romper, destruir ou chocar para criar mudanca
+    brand_promise: Liberdade para ser quem voce realmente e
+    personality_traits:
+    - Rebelde
+    - Disruptivo
+    - Ousado
+    - Libertario
+    - Provocador
+    - Inconformista
+    - Radical
+    shadow_traits:
+    - Autodestruicao
+    - Criminalidade
+    - Negatividade cronica
+    tone_of_voice:
+      formality: 1
+      enthusiasm: 4
+      humor: 4
+      authority: 2
+      warmth: 2
+      description: Tom provocativo, irreverente e desafiador. Linguagem direta, as
+        vezes agressiva.
+    communication_style:
+      do:
+      - Desafie o status quo diretamente
+      - Use linguagem provocativa e ousada
+      - Celebre a diferenca e individualidade
+      - Questione convencoes e padroes
+      - Crie polarizacao (ame ou odeie)
+      dont:
+      - Ser institucional ou corporativo
+      - Pedir permissao ou desculpas
+      - Seguir formulas e padroes de mercado
+      - Ser politicamente correto demais
+      - Agradar a todos
+    visual_identity:
+      colors:
+        primary:
+        - '#000000'
+        - '#1C1C1C'
+        - '#800000'
+        secondary:
+        - '#DC143C'
+        - '#8B0000'
+        - '#696969'
+        accent:
+        - '#FF0000'
+        - '#FF4500'
+        avoid:
+        - '#FFB6C1'
+        - '#E6E6FA'
+        - '#98FB98'
+      color_psychology: Preto dominante, vermelho intenso, tons escuros - cores de
+        rebeliao e poder
+      typography_style: Fontes distorcidas, grunge, stencil, aspecto underground
+      typography_examples:
+      - Impact
+      - Bebas Neue
+      - Permanent Marker
+      - Special Elite
+      imagery_style: Grafite, cultura urbana, tatuagens, motos, rock, expressoes desafiadoras
+      photography_mood: Baixo-chave, texturas urbanas, angulos nao convencionais
+      logo_characteristics:
+      - Formas agressivas e angulares
+      - Simbolos de rebeliao (caveiras, raios, chamas)
+      - Tipografia distorcida ou stencil
+      - Aspecto cru e nao polido
+    brazilian_examples:
+    - brand: Corinthians
+      rationale: Identidade de fiel, rebeldia, time do povo contra o establishment
+    - brand: Diesel Brasil
+      rationale: Moda provocativa, irreverencia, desafio aos padroes
+    - brand: Monster Energy Brasil
+      rationale: Esportes radicais, atitude extrema, anticonformismo
+    - brand: Reserva
+      rationale: Moda masculina com atitude irreverente e questionadora
+    international_examples:
+    - Harley-Davidson
+    - Diesel
+    - Virgin
+    - MTV Classic
+    ideal_categories:
+    - Moda alternativa
+    - Bebidas energeticas
+    - Motocicletas e acessorios
+    - Musica e entretenimento
+    - Esportes radicais
+    price_positioning:
+    - Medio
+    - Premium
+    target_audience_profile:
+      demographics: Jovens 18-35, predominantemente masculino, urbanos
+      psychographics: Anticonformistas, buscam autenticidade, rejeitam mainstream
+      values:
+      - Liberdade
+      - Autenticidade
+      - Rebeldia
+      - Individualismo
+    compatible_secondaries:
+    - explorer
+    - creator
+    - jester
+    neutral_combinations:
+    - hero
+    - magician
+    avoid_combinations:
+    - innocent
+    - caregiver
+    - ruler
+    combination_rationale:
+      explorer: Rebeldia que busca novos caminhos
+      creator: Disruptcao criativa e inovacao radical
+      avoid_innocent: Pureza e inocencia contradizem rebeldia
+  magician:
+    id: magician
+    name_pt: Mago
+    name_en: Magician
+    motto: Eu faco acontecer
+    core_desire: Compreender as leis fundamentais do universo e transforma-las
+    goal: Fazer sonhos se tornarem realidade, transformar
+    fear: Consequencias negativas nao intencionais, charlatanismo
+    strategy: Desenvolver visao e vive-la, criar experiencias transformadoras
+    brand_promise: Transformacao e a concretizacao de sonhos
+    personality_traits:
+    - Visionario
+    - Transformador
+    - Intuitivo
+    - Carismatico
+    - Mistico
+    - Catalico
+    - Inspirador
+    shadow_traits:
+    - Manipulacao
+    - Desconexao com realidade
+    - Charlatanismo
+    tone_of_voice:
+      formality: 3
+      enthusiasm: 4
+      humor: 2
+      authority: 4
+      warmth: 4
+      description: Tom visionario, inspirador e misterioso. Linguagem de transformacao
+        e possibilidades.
+    communication_style:
+      do:
+      - Fale de transformacao e possibilidades
+      - Use metaforas e linguagem evocativa
+      - Crie senso de magia e encantamento
+      - Mostre o antes e depois transformador
+      - Prometa e entregue experiencias unicas
+      dont:
+      - Ser excessivamente racional ou tecnico
+      - Prometer sem poder entregar
+      - Parecer manipulador ou enganoso
+      - Desmistificar demais o processo
+      - Ser mundano ou ordinario
+    visual_identity:
+      colors:
+        primary:
+        - '#4B0082'
+        - '#663399'
+        - '#191970'
+        secondary:
+        - '#C0C0C0'
+        - '#FFD700'
+        - '#000080'
+        accent:
+        - '#9400D3'
+        - '#8A2BE2'
+        avoid:
+        - '#808080'
+        - '#A9A9A9'
+        - '#D3D3D3'
+      color_psychology: Roxos misticos, dourado alquimico, azul profundo - cores de
+        mistero e transformacao
+      typography_style: Fontes elegantes e misteriosas, scripts sofisticados
+      typography_examples:
+      - Cinzel
+      - Playfair Display
+      - Cormorant Garamond
+      - Philosopher
+      imagery_style: Transformacoes visuais, efeitos magicos, tecnologia futurista,
+        cosmos, luz e sombra
+      photography_mood: Iluminacao dramatica, elementos misticos, transicoes visuais
+      logo_characteristics:
+      - Simbolos misticos (estrelas, lua, olhos)
+      - Formas fluidas e transformadoras
+      - Tipografia elegante e misteriosa
+      - Elementos de luz e brilho
+    brazilian_examples:
+    - brand: Apple Brasil
+      rationale: Tecnologia como magia, transformacao atraves de design e inovacao
+    - brand: O Boticario
+      rationale: Transformacao de beleza, experiencias sensoriais, encantamento
+    - brand: Nubank
+      rationale: Transformacao digital do sistema financeiro, magia do simples
+    - brand: iFood
+      rationale: Transformacao da experiencia de alimentacao, conveniencia magica
+    international_examples:
+    - Apple
+    - Disney
+    - Dyson
+    - Tesla
+    - Mastercard
+    ideal_categories:
+    - Tecnologia
+    - Cosmeticos e beleza
+    - Servicos de transformacao
+    - Experiencias e entretenimento
+    - Wellness e bem-estar
+    price_positioning:
+    - Premium
+    - Luxury
+    target_audience_profile:
+      demographics: Adultos 25-50, poder aquisitivo medio-alto, early adopters
+      psychographics: Buscam transformacao, valorizam experiencias unicas, visionarios
+      values:
+      - Transformacao
+      - Inovacao
+      - Experiencia
+      - Magia
+    compatible_secondaries:
+    - creator
+    - sage
+    - hero
+    neutral_combinations:
+    - explorer
+    - lover
+    avoid_combinations:
+    - everyman
+    - jester
+    - outlaw
+    combination_rationale:
+      creator: Visao transformadora aplicada a criacao
+      sage: Conhecimento profundo como base da magia
+      avoid_everyman: Magia e comum sao opostos por natureza
+  everyman:
+    id: everyman
+    name_pt: Cara Comum
+    name_en: Everyman
+    motto: Todos os homens e mulheres sao criados iguais
+    core_desire: Conectar-se com outros, pertencer
+    goal: Pertencer, se encaixar, ser aceito como e
+    fear: Ser deixado de fora, se destacar demais, parecer esnobe
+    strategy: Desenvolver virtudes solidas e comuns, ser autentico e pe-no-chao
+    brand_promise: Somos como voce, entendemos voce
+    personality_traits:
+    - Acessivel
+    - Autentico
+    - Humilde
+    - Solidario
+    - Realista
+    - Trabalhador
+    - Confiavel
+    shadow_traits:
+    - Perda de identidade propria
+    - Populismo vazio
+    - Medo de se destacar
+    tone_of_voice:
+      formality: 2
+      enthusiasm: 3
+      humor: 3
+      authority: 2
+      warmth: 5
+      description: Tom amigavel, acessivel e genuino. Linguagem do dia-a-dia, sem
+        formalismos.
+    communication_style:
+      do:
+      - Use linguagem coloquial e acessivel
+      - Mostre pessoas reais e situacoes do cotidiano
+      - Seja transparente sobre precos e beneficios
+      - Crie senso de comunidade e pertencimento
+      - Valorize o trabalho honesto e a simplicidade
+      dont:
+      - Parecer elitista ou exclusivo
+      - Usar jargoes tecnicos ou sofisticados
+      - Mostrar luxo ou ostentacao
+      - Ser condescendente com o publico
+      - Criar barreiras de acesso
+    visual_identity:
+      colors:
+        primary:
+        - '#4169E1'
+        - '#228B22'
+        - '#CD853F'
+        secondary:
+        - '#F5F5DC'
+        - '#DEB887'
+        - '#8B4513'
+        accent:
+        - '#FF6347'
+        - '#32CD32'
+        avoid:
+        - '#FFD700'
+        - '#4B0082'
+        - '#000000'
+      color_psychology: Cores acessiveis, naturais e calorosas - azul confiavel, verde
+        familiar, tons terrosos
+      typography_style: Sans-serif amigaveis e legiveis, nada extravagante
+      typography_examples:
+      - Open Sans
+      - Roboto
+      - Lato
+      - Ubuntu
+      imagery_style: Pessoas reais, familias, situacoes cotidianas, ambientes domesticos,
+        comunidades
+      photography_mood: Luz natural, expressoes genuinas, cenarios reconheciveis
+      logo_characteristics:
+      - Formas simples e reconheciveis
+      - Tipografia clara e amigavel
+      - Cores acessiveis e calorosas
+      - Design nao pretensioso
+    brazilian_examples:
+    - brand: Casas Bahia
+      rationale: Acesso democratico ao consumo, linguagem popular, familiaridade
+    - brand: Guarana Antarctica
+      rationale: Brasilidade autentica, sabor do povo, acessibilidade
+    - brand: Magazine Luiza
+      rationale: Proximidade com o cliente, acessibilidade, calor humano
+    - brand: Havaianas (linha basica)
+      rationale: Produto democratico, todos usam, sem pretensao
+    international_examples:
+    - IKEA
+    - Target
+    - Budweiser
+    - GAP
+    - Walmart
+    ideal_categories:
+    - Varejo popular
+    - Alimentos e bebidas
+    - Vestuario acessivel
+    - Servicos essenciais
+    - Produtos domesticos
+    price_positioning:
+    - Popular
+    - Medio
+    target_audience_profile:
+      demographics: Familias classe media, todas as idades, Brasil inteiro
+      psychographics: Valorizam custo-beneficio, buscam pertencimento, praticos
+      values:
+      - Igualdade
+      - Comunidade
+      - Autenticidade
+      - Acessibilidade
+    compatible_secondaries:
+    - caregiver
+    - innocent
+    - jester
+    neutral_combinations:
+    - hero
+    - creator
+    avoid_combinations:
+    - ruler
+    - magician
+    - sage
+    combination_rationale:
+      caregiver: Cuidado acessivel e democratico
+      innocent: Simplicidade genuina e valores tradicionais
+      avoid_ruler: Autoridade e elitismo contradizem igualdade
+  lover:
+    id: lover
+    name_pt: Amante
+    name_en: Lover
+    motto: Eu so tenho olhos para voce
+    core_desire: Intimidade, experiencia sensorial e emocional
+    goal: Estar em relacionamento com pessoas, trabalho e experiencias que ama
+    fear: Estar sozinho, ser indesejado, ser rejeitado
+    strategy: Tornar-se atraente fisica e emocionalmente
+    brand_promise: Voce merece ser desejado e amado
+    personality_traits:
+    - Apaixonado
+    - Sensual
+    - Empatetico
+    - Romantico
+    - Comprometido
+    - Intimo
+    - Sedutor
+    shadow_traits:
+    - Obsessao
+    - Ciumes
+    - Superficialidade
+    tone_of_voice:
+      formality: 2
+      enthusiasm: 4
+      humor: 2
+      authority: 2
+      warmth: 5
+      description: Tom sedutor, caloroso e intimo. Linguagem sensorial e emocional.
+    communication_style:
+      do:
+      - Use linguagem sensorial (toque, aroma, sabor)
+      - Crie conexao emocional profunda
+      - Valorize beleza e estetica
+      - Fale de prazer e satisfacao
+      - Crie experiencias memoraveis
+      dont:
+      - Ser frio ou distante
+      - Focar apenas em funcionalidades
+      - Ignorar aspectos sensoriais
+      - Ser excessivamente racional
+      - Parecer superficial ou vulgar
+    visual_identity:
+      colors:
+        primary:
+        - '#8B0000'
+        - '#800020'
+        - '#C71585'
+        secondary:
+        - '#FFD700'
+        - '#FFC0CB'
+        - '#DDA0DD'
+        accent:
+        - '#FF1493'
+        - '#FF69B4'
+        avoid:
+        - '#808080'
+        - '#A9A9A9'
+        - '#2F4F4F'
+      color_psychology: Vermelho paixao, bordos profundos, rosa romantico, dourado
+        luxuoso
+      typography_style: Scripts elegantes, serifadas classicas, fontes com personalidade
+      typography_examples:
+      - Playfair Display
+      - Cormorant
+      - Great Vibes
+      - Dancing Script
+      imagery_style: Casais, momentos intimos, texturas sensuais, close-ups, iluminacao
+        suave
+      photography_mood: Iluminacao quente, foco seletivo, textura e detalhe, intimidade
+      logo_characteristics:
+      - Formas organicas e fluidas
+      - Tipografia elegante e cursiva
+      - Simbolos de amor (coracoes, rosas)
+      - Detalhes refinados
+    brazilian_examples:
+    - brand: Intimus
+      rationale: Intimidade feminina, cuidado sensorial, conexao emocional
+    - brand: Lindt Brasil
+      rationale: Prazer sensorial, indulgencia, experiencia de sabor
+    - brand: Victoria's Secret Brasil
+      rationale: Sensualidade, desejo, feminilidade
+    - brand: Kopenhagen
+      rationale: Prazer gourmet, presente de amor, experiencia sensorial
+    international_examples:
+    - Chanel
+    - Haagen-Dazs
+    - Victoria's Secret
+    - Godiva
+    - Alfa Romeo
+    ideal_categories:
+    - Perfumaria e cosmeticos
+    - Lingerie e moda intima
+    - Chocolates e gourmet
+    - Joias e acessorios
+    - Vinhos e bebidas premium
+    price_positioning:
+    - Premium
+    - Luxury
+    target_audience_profile:
+      demographics: Adultos 25-50, predominantemente feminino, poder aquisitivo medio-alto
+      psychographics: Valorizam experiencias sensoriais, buscam conexao emocional,
+        romanticos
+      values:
+      - Beleza
+      - Prazer
+      - Conexao
+      - Romance
+    compatible_secondaries:
+    - creator
+    - magician
+    - caregiver
+    neutral_combinations:
+    - innocent
+    - explorer
+    avoid_combinations:
+    - sage
+    - ruler
+    - outlaw
+    combination_rationale:
+      creator: Beleza e arte como expressao de amor
+      magician: Experiencias transformadoras e encantadoras
+      avoid_sage: Racionalidade contradiz emocao e paixao
+  jester:
+    id: jester
+    name_pt: Bobo da Corte
+    name_en: Jester
+    motto: Voce so vive uma vez
+    core_desire: Viver no momento com total prazer
+    goal: Se divertir e alegrar o mundo
+    fear: Ser chato, entediante ou causar tedio nos outros
+    strategy: Ser engraado, fazer piadas, brincar
+    brand_promise: A vida e muito curta para ser seria
+    personality_traits:
+    - Divertido
+    - Espontaneo
+    - Irreverente
+    - Alegre
+    - Criativo
+    - Otimista
+    - Travesso
+    shadow_traits:
+    - Irresponsabilidade
+    - Crueldade disfarada de humor
+    - Incapacidade de levar nada a serio
+    tone_of_voice:
+      formality: 1
+      enthusiasm: 5
+      humor: 5
+      authority: 1
+      warmth: 4
+      description: Tom leve, divertido e irreverente. Linguagem cheia de piadas, trocadilhos
+        e surpresas.
+    communication_style:
+      do:
+      - Use humor e piadas relevantes
+      - Surpreenda com o inesperado
+      - Quebre padroes de comunicacao
+      - Celebre a alegria e diversao
+      - Nao se leve muito a serio
+      dont:
+      - Ser ofensivo ou inadequado
+      - Fazer humor sobre temas sensiveis
+      - Ser previsivel ou entediante
+      - Parecer forcado ou artificial
+      - Ser serio demais
+    visual_identity:
+      colors:
+        primary:
+        - '#FF6B35'
+        - '#FFD23F'
+        - '#00D9FF'
+        secondary:
+        - '#FF006E'
+        - '#8338EC'
+        - '#3A86FF'
+        accent:
+        - '#FFBE0B'
+        - '#FB5607'
+        avoid:
+        - '#000000'
+        - '#2F4F4F'
+        - '#696969'
+      color_psychology: Cores vibrantes, contrastantes e energeticas - laranja, amarelo,
+        azul eletrico
+      typography_style: Fontes divertidas, display criativas, elementos playful
+      typography_examples:
+      - Fredoka One
+      - Baloo 2
+      - Bangers
+      - Comic Neue
+      imagery_style: Ilustracoes coloridas, expressoes exageradas, situacoes comicas,
+        pop art
+      photography_mood: Cores saturadas, expressoes divertidas, situacoes inesperadas
+      logo_characteristics:
+      - Formas irregulares e divertidas
+      - Cores vibrantes e contrastantes
+      - Tipografia playful
+      - Elementos de surpresa
+    brazilian_examples:
+    - brand: Fanta
+      rationale: Diversao colorida, juventude, momentos leves
+    - brand: Ponto Frio (pinguim)
+      rationale: Mascote irreverente nas redes sociais, humor brasileiro
+    - brand: Bis
+      rationale: Chocolate divertido, formato brincalhao, campanhas bem-humoradas
+    - brand: Skol
+      rationale: Irreverencia, campanhas criativas, humor brasileiro
+    international_examples:
+    - M&Ms
+    - Fanta
+    - Ben & Jerrys
+    - Old Spice
+    - Pringles
+    ideal_categories:
+    - Snacks e guloseimas
+    - Bebidas nao-alcoolicas
+    - Entretenimento
+    - Jogos e brinquedos
+    - Fast food
+    price_positioning:
+    - Popular
+    - Medio
+    target_audience_profile:
+      demographics: Jovens 13-30, familias com criancas, espirito jovem
+      psychographics: Buscam diversao e leveza, nao se levam muito a serio
+      values:
+      - Diversao
+      - Alegria
+      - Espontaneidade
+      - Leveza
+    compatible_secondaries:
+    - everyman
+    - outlaw
+    - explorer
+    neutral_combinations:
+    - creator
+    - innocent
+    avoid_combinations:
+    - sage
+    - ruler
+    - caregiver
+    combination_rationale:
+      everyman: Humor acessivel e democratico
+      outlaw: Irreverencia que desafia normas
+      avoid_sage: Seriedade intelectual contradiz humor
+  caregiver:
+    id: caregiver
+    name_pt: Cuidador
+    name_en: Caregiver
+    motto: Ame seu proximo como a si mesmo
+    core_desire: Proteger e cuidar dos outros
+    goal: Ajudar os outros, servir
+    fear: Egoismo, ingratidao, abandono
+    strategy: Fazer coisas pelos outros, proteger, cuidar
+    brand_promise: Nos cuidamos de voce
+    personality_traits:
+    - Protetor
+    - Generoso
+    - Compassivo
+    - Altruista
+    - Maternal/Paternal
+    - Solidario
+    - Empatetico
+    shadow_traits:
+    - Martrio
+    - Manipulacao atraves da culpa
+    - Negligencia de si mesmo
+    tone_of_voice:
+      formality: 3
+      enthusiasm: 3
+      humor: 2
+      authority: 3
+      warmth: 5
+      description: Tom acolhedor, protetor e empatetico. Linguagem de cuidado e apoio.
+    communication_style:
+      do:
+      - Demonstre empatia e compreensao
+      - Ofereca ajuda e suporte genuinos
+      - Use linguagem inclusiva e acolhedora
+      - Mostre preocupacao com bem-estar
+      - Destaque beneficios para a familia
+      dont:
+      - Ser frio ou distante
+      - Parecer interesseiro ou egoista
+      - Ignorar necessidades emocionais
+      - Ser paternalista ou condescendente
+      - Fazer promessas que nao pode cumprir
+    visual_identity:
+      colors:
+        primary:
+        - '#4A90A4'
+        - '#5DADE2'
+        - '#2ECC71'
+        secondary:
+        - '#F8F9FA'
+        - '#E8F6F3'
+        - '#FDEDEC'
+        accent:
+        - '#F39C12'
+        - '#E74C3C'
+        avoid:
+        - '#000000'
+        - '#8B0000'
+        - '#4A0000'
+      color_psychology: Azuis tranquilizantes, verdes de saude, tons claros e acolhedores
+      typography_style: Sans-serif suaves e arredondadas, alta legibilidade
+      typography_examples:
+      - Nunito
+      - Quicksand
+      - Varela Round
+      - Cabin
+      imagery_style: Familias, profissionais de saude, momentos de cuidado, maos que
+        ajudam
+      photography_mood: Iluminacao suave, expressoes de carinho, conexao entre pessoas
+      logo_characteristics:
+      - Formas arredondadas e acolhedoras
+      - Simbolos de cuidado (maos, coracoes, folhas)
+      - Tipografia amigavel e clara
+      - Cores suaves e confiaveis
+    brazilian_examples:
+    - brand: Johnson & Johnson Brasil
+      rationale: Cuidado com bebes e familias, protecao, gentileza
+    - brand: Unimed
+      rationale: Saude cooperativa, cuidado medico, bem-estar
+    - brand: Pampers
+      rationale: Cuidado com bebes, protecao, suporte para maes
+    - brand: Huggies
+      rationale: Abraco protetor, cuidado infantil, confianca dos pais
+    international_examples:
+    - Johnson & Johnson
+    - Volvo
+    - Campbell's
+    - Unicef
+    - WWF
+    ideal_categories:
+    - Saude e bem-estar
+    - Produtos para bebes
+    - Seguros e protecao
+    - Alimentos saudaveis
+    - ONGs e terceiro setor
+    price_positioning:
+    - Medio
+    - Premium
+    target_audience_profile:
+      demographics: Maes 25-45, profissionais de saude, cuidadores
+      psychographics: Valorizam seguranca, priorizaam bem-estar familiar, altruistas
+      values:
+      - Protecao
+      - Familia
+      - Saude
+      - Altruismo
+    compatible_secondaries:
+    - innocent
+    - everyman
+    - sage
+    neutral_combinations:
+    - creator
+    - lover
+    avoid_combinations:
+    - outlaw
+    - hero
+    - ruler
+    combination_rationale:
+      innocent: Pureza e cuidado genuino combinados
+      everyman: Cuidado democratico e acessivel
+      avoid_outlaw: Rebeldia contradiz protecao e seguranca
+  creator:
+    id: creator
+    name_pt: Criador
+    name_en: Creator
+    motto: Se pode ser imaginado, pode ser criado
+    core_desire: Criar algo de valor duradouro, expressao
+    goal: Realizar uma visao, criar cultura
+    fear: Visao ou execucao medocres, ser copiado, nao ser original
+    strategy: Desenvolver habilidade e controle artistico, criar
+    brand_promise: Inovacao e originalidade em tudo que fazemos
+    personality_traits:
+    - Criativo
+    - Imaginativo
+    - Artistico
+    - Inovador
+    - Perfeccionista
+    - Expressivo
+    - Visionario
+    shadow_traits:
+    - Perfeccionismo paralisante
+    - Elitismo artistico
+    - Dificuldade em aceitar feedback
+    tone_of_voice:
+      formality: 3
+      enthusiasm: 4
+      humor: 2
+      authority: 3
+      warmth: 3
+      description: Tom inspirador, artistico e inovador. Linguagem que valoriza originalidade
+        e expressao.
+    communication_style:
+      do:
+      - Valorize originalidade e inovacao
+      - Mostre processo criativo e bastidores
+      - Use linguagem artistica e visual
+      - Celebre a criacao e expressao
+      - Destaque diferenciais de design
+      dont:
+      - Parecer generico ou copiado
+      - Focar apenas em preco
+      - Ignorar aspectos esteticos
+      - Ser excessivamente comercial
+      - Comprometer qualidade por volume
+    visual_identity:
+      colors:
+        primary:
+        - '#FF6B00'
+        - '#E65100'
+        - '#8E24AA'
+        secondary:
+        - '#212121'
+        - '#FAFAFA'
+        - '#78909C'
+        accent:
+        - '#00BCD4'
+        - '#FFEB3B'
+        avoid:
+        - '#808080'
+        - '#A9A9A9'
+        - '#696969'
+      color_psychology: Laranjas criativos, roxos artisticos, preto e branco sofisticados
+        - cores de inovacao
+      typography_style: Fontes originais e distintivas, tipografia como elemento de
+        design
+      typography_examples:
+      - Space Grotesk
+      - Outfit
+      - Syne
+      - DM Sans
+      imagery_style: Processo criativo, materiais, maquinas, design inovador, arte
+        abstrata
+      photography_mood: Composicao artistica, foco em detalhes, texturas, luz dramatica
+      logo_characteristics:
+      - Design unico e memoravel
+      - Tipografia customizada
+      - Formas originais
+      - Atencao aos detalhes
+    brazilian_examples:
+    - brand: Melissa
+      rationale: Design brasileiro inovador, colaboracoes artisticas, originalidade
+    - brand: Farm
+      rationale: Estampas autorais, identidade visual forte, criatividade brasileira
+    - brand: Tok&Stok
+      rationale: Design democratico, inovacao em moveis, estilo original
+    - brand: Pantys
+      rationale: Inovacao em produto, design funcional, disruptcao criativa
+    international_examples:
+    - Apple
+    - LEGO
+    - Adobe
+    - Crayola
+    - Pinterest
+    ideal_categories:
+    - Moda autoral
+    - Design e decoracao
+    - Tecnologia e software
+    - Arte e artesanato
+    - Arquitetura e interiores
+    price_positioning:
+    - Medio
+    - Premium
+    - Luxury
+    target_audience_profile:
+      demographics: Criativos 25-45, profissionais de design, formadores de opiniao
+      psychographics: Valorizam originalidade, expressao pessoal, estetica
+      values:
+      - Criatividade
+      - Originalidade
+      - Expressao
+      - Inovacao
+    compatible_secondaries:
+    - magician
+    - sage
+    - outlaw
+    neutral_combinations:
+    - explorer
+    - lover
+    avoid_combinations:
+    - everyman
+    - caregiver
+    - ruler
+    combination_rationale:
+      magician: Criacao como transformacao magica
+      sage: Conhecimento profundo impulsiona criacao
+      avoid_everyman: Originalidade contradiz o comum e ordinario
+  ruler:
+    id: ruler
+    name_pt: Governante
+    name_en: Ruler
+    motto: Poder nao e tudo, e a unica coisa
+    core_desire: Controle, poder e ordem
+    goal: Criar uma familia, empresa ou comunidade prospera e bem-sucedida
+    fear: Caos, ser derrubado, perder controle
+    strategy: Exercer lideranca, demonstrar responsabilidade e competencia
+    brand_promise: Excelencia e lideranca em tudo que fazemos
+    personality_traits:
+    - Lider
+    - Poderoso
+    - Responsavel
+    - Organizado
+    - Autoritativo
+    - Confiante
+    - Bem-sucedido
+    shadow_traits:
+    - Autoritarismo
+    - Rigidez
+    - Paranoia com rivais
+    tone_of_voice:
+      formality: 5
+      enthusiasm: 2
+      humor: 1
+      authority: 5
+      warmth: 2
+      description: Tom autoritativo, confiante e sofisticado. Linguagem de lideranca
+        e excelencia.
+    communication_style:
+      do:
+      - Demonstre lideranca e expertise
+      - Use linguagem sofisticada e precisa
+      - Mostre status e exclusividade
+      - Transmita confianca e seguranca
+      - Destaque tradicao e legado
+      dont:
+      - Parecer inseguro ou indeciso
+      - Usar linguagem casual demais
+      - Fazer promocoes agressivas
+      - Parecer acessivel demais
+      - Comprometer padrao de qualidade
+    visual_identity:
+      colors:
+        primary:
+        - '#1A1A1A'
+        - '#0D1B2A'
+        - '#1B2838'
+        secondary:
+        - '#D4AF37'
+        - '#C9B037'
+        - '#BDB76B'
+        accent:
+        - '#800020'
+        - '#4A0000'
+        avoid:
+        - '#FF69B4'
+        - '#FFD700'
+        - '#FF6B35'
+      color_psychology: Preto poderoso, dourado luxuoso, bordos nobres - cores de
+        autoridade e exclusividade
+      typography_style: Serifadas classicas, fontes de alta classe, espacamento elegante
+      typography_examples:
+      - Didot
+      - Bodoni
+      - Playfair Display
+      - Cinzel
+      imagery_style: Ambientes sofisticados, materiais nobres, pessoas de sucesso,
+        arquitetura imponente
+      photography_mood: Composicao equilibrada, iluminacao controlada, cenarios luxuosos
+      logo_characteristics:
+      - Design classico e atemporal
+      - Simbolos de nobreza (coroas, escudos)
+      - Tipografia elegante e tradicional
+      - Proporcoes perfeitas
+    brazilian_examples:
+    - brand: Itau
+      rationale: Lideranca bancaria, solidez, confianca institucional
+    - brand: Bradesco
+      rationale: Tradicao bancaria brasileira, solidez, lideranca
+    - brand: Fasano
+      rationale: Hotelaria de luxo, exclusividade, excelencia em servico
+    - brand: H.Stern
+      rationale: Joalheria de prestigio, tradicao, sofisticacao brasileira
+    international_examples:
+    - Rolex
+    - Mercedes-Benz
+    - American Express
+    - IBM
+    - Louis Vuitton
+    ideal_categories:
+    - Servicos financeiros
+    - Hotelaria de luxo
+    - Automotivo premium
+    - Joias e relogios
+    - Consultoria empresarial
+    price_positioning:
+    - Premium
+    - Luxury
+    target_audience_profile:
+      demographics: Executivos 35-60, alta renda, tomadores de decisao
+      psychographics: Valorizam status, qualidade, lideranca e exclusividade
+      values:
+      - Poder
+      - Status
+      - Excelencia
+      - Controle
+    compatible_secondaries:
+    - sage
+    - hero
+    - creator
+    neutral_combinations:
+    - magician
+    - caregiver
+    avoid_combinations:
+    - jester
+    - outlaw
+    - everyman
+    combination_rationale:
+      sage: Lideranca baseada em conhecimento
+      hero: Conquista e poder combinados
+      avoid_jester: Humor mina autoridade e seriedade
+combination_matrix:
+  innocent+caregiver:
+    strength: 0.95
+    name_pt: Protetor Puro
+    rationale: Combinacao natural de cuidado genuino com pureza e simplicidade. Ideal
+      para produtos de bebe e saude familiar.
+    example_brands:
+    - Johnson's Baby
+    - Huggies
+  innocent+everyman:
+    strength: 0.9
+    name_pt: Vizinho Confiavel
+    rationale: Simplicidade e autenticidade combinadas. Marcas que todos amam sem
+      pretensao.
+    example_brands:
+    - Guarana Antarctica
+    - Leite Moca
+  explorer+hero:
+    strength: 0.9
+    name_pt: Aventureiro Destemido
+    rationale: Exploracao com coragem e superacao. Ideal para esportes de aventura
+      e outdoor.
+    example_brands:
+    - The North Face
+    - Red Bull
+  explorer+outlaw:
+    strength: 0.85
+    name_pt: Rebelde Sem Destino
+    rationale: Anticonformismo combinado com busca por liberdade. Espirito motociclista.
+    example_brands:
+    - Harley-Davidson
+    - Jeep
+  sage+creator:
+    strength: 0.9
+    name_pt: Inovador Intelectual
+    rationale: Conhecimento profundo aplicado a inovacao. Tecnologia e design baseados
+      em pesquisa.
+    example_brands:
+    - Apple
+    - Dyson
+  sage+ruler:
+    strength: 0.85
+    name_pt: Autoridade Especialista
+    rationale: Lideranca baseada em expertise. Consultorias e instituicoes de elite.
+    example_brands:
+    - McKinsey
+    - Harvard
+  hero+ruler:
+    strength: 0.85
+    name_pt: Lider Vitorioso
+    rationale: Conquista e poder combinados. Marcas que dominam seus mercados.
+    example_brands:
+    - Nike
+    - BMW
+  hero+magician:
+    strength: 0.8
+    name_pt: Transformador Heroico
+    rationale: Superacao atraves de transformacao. Marcas que mudam vidas.
+    example_brands:
+    - Tesla
+    - CrossFit
+  outlaw+creator:
+    strength: 0.85
+    name_pt: Disruptor Criativo
+    rationale: Inovacao que quebra paradigmas. Startups e marcas que desafiam industrias.
+    example_brands:
+    - Virgin
+    - Spotify
+  outlaw+jester:
+    strength: 0.8
+    name_pt: Provocador Divertido
+    rationale: Rebeldia com humor. Marcas irreverentes que nao se levam a serio.
+    example_brands:
+    - Old Spice
+    - Burger King
+  magician+creator:
+    strength: 0.9
+    name_pt: Visionario Artistico
+    rationale: Criacao como transformacao magica. Design que encanta e transforma.
+    example_brands:
+    - Disney
+    - Pixar
+  magician+lover:
+    strength: 0.85
+    name_pt: Encantador Sensorial
+    rationale: Experiencias magicas e sensoriais. Beleza e perfumaria de luxo.
+    example_brands:
+    - Chanel
+    - O Boticario
+  everyman+jester:
+    strength: 0.85
+    name_pt: Amigo Divertido
+    rationale: Acessibilidade com humor. Marcas populares que fazem rir.
+    example_brands:
+    - Skol
+    - M&Ms
+  everyman+caregiver:
+    strength: 0.9
+    name_pt: Vizinho Solidario
+    rationale: Cuidado acessivel e democratico. Varejo que cuida das familias.
+    example_brands:
+    - Magazine Luiza
+    - Casas Bahia
+  lover+creator:
+    strength: 0.85
+    name_pt: Artista Apaixonado
+    rationale: Beleza e arte como expressao de amor. Moda e joalheria autoral.
+    example_brands:
+    - Tiffany
+    - Dior
+  lover+caregiver:
+    strength: 0.8
+    name_pt: Abraco Amoroso
+    rationale: Cuidado com afeto intenso. Produtos para relacionamentos e familia.
+    example_brands:
+    - Hallmark
+    - Pandora
+  caregiver+sage:
+    strength: 0.85
+    name_pt: Mentor Protetor
+    rationale: Conhecimento a servico do cuidado. Saude e educacao.
+    example_brands:
+    - Mayo Clinic
+    - Fleury
+  creator+ruler:
+    strength: 0.75
+    name_pt: Imperador Criativo
+    rationale: Design de elite e exclusivo. Marcas de luxo com forte identidade.
+    example_brands:
+    - Apple
+    - Bang & Olufsen
+  jester+explorer:
+    strength: 0.8
+    name_pt: Aventureiro Brincalhao
+    rationale: Diversao na descoberta. Marcas de viagem e lazer descontraidas.
+    example_brands:
+    - Fanta
+    - Doritos
+  ruler+magician:
+    strength: 0.75
+    name_pt: Soberano Mistico
+    rationale: Poder atraves de transformacao. Tecnologia de ponta e exclusiva.
+    example_brands:
+    - Tesla
+    - SpaceX
+selection_guide:
+  by_category:
+    cosmeticos_organicos:
+    - innocent
+    - caregiver
+    - creator
+    tecnologia:
+    - magician
+    - creator
+    - sage
+    esportes:
+    - hero
+    - explorer
+    - outlaw
+    alimentos_saudaveis:
+    - innocent
+    - caregiver
+    - everyman
+    moda_luxo:
+    - ruler
+    - lover
+    - creator
+    moda_casual:
+    - everyman
+    - explorer
+    - jester
+    financas:
+    - ruler
+    - sage
+    - caregiver
+    entretenimento:
+    - jester
+    - magician
+    - explorer
+    educacao:
+    - sage
+    - caregiver
+    - hero
+    bebidas:
+    - jester
+    - everyman
+    - explorer
+  by_price_tier:
+    Popular (ate R$ 50):
+    - everyman
+    - jester
+    - innocent
+    Medio (R$ 50-100):
+    - hero
+    - explorer
+    - caregiver
+    Premium (R$ 100-300):
+    - creator
+    - magician
+    - sage
+    Luxury (acima R$ 300):
+    - ruler
+    - lover
+    - magician
+  by_target_audience:
+    jovens_18_25:
+    - jester
+    - outlaw
+    - explorer
+    adultos_25_40:
+    - hero
+    - creator
+    - magician
+    familias:
+    - caregiver
+    - innocent
+    - everyman
+    executivos:
+    - ruler
+    - sage
+    - hero
+    criativos:
+    - creator
+    - outlaw
+    - magician
+validation_rules:
+  primary_secondary_compatibility:
+    description: Arquetipo secundario deve estar em 'compatible_secondaries' ou 'neutral_combinations'
+    severity: HIGH
+  avoid_combinations_check:
+    description: Combinacoes em 'avoid_combinations' devem gerar alerta
+    severity: MEDIUM
+  category_alignment:
+    description: Arquetipo deve ser apropriado para a categoria do produto
+    severity: MEDIUM
+  price_tier_alignment:
+    description: Arquetipo deve ser apropriado para o posicionamento de preco
+    severity: LOW
+metadata:
+  created_at: '2025-12-20'
+  author: CODEXA/marca_agent
+  language: pt-BR
+  references:
+  - Jung, C.G. - Arquetipos e o Inconsciente Coletivo
+  - Mark, Margaret & Pearson, Carol - The Hero and the Outlaw
+  - Aaker, Jennifer - Dimensions of Brand Personality
+  quality_score: 8.7
+  validation_status: APPROVED

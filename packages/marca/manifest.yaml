@@ -1,0 +1,41 @@
+id: marca
+version: "2.0.0"
+type: iso_package
+title: "Marca Agent - Brand Strategy"
+description: "32-block brand strategy builder for Brazilian e-commerce. Creates complete brand identity with Jungian archetypes and Brazilian market adaptations."
+domain: "marketing"
+satellite: "LILY"
+quality: 9.5
+
+capabilities:
+  - "32_block_brand_strategy"
+  - "jungian_archetype_selection"
+  - "brand_positioning"
+  - "verbal_identity"
+  - "visual_identity"
+  - "whitelabel_agency_reselling"
+
+target_llms:
+  - claude
+  - gpt4
+  - gemini
+  - llama
+
+min_context: 8192
+tools_required:
+  - file_search
+
+variables:
+  AGENCY_NAME: "Your Agency"
+  DOMAIN: "your-domain"
+
+tags:
+  - branding
+  - strategy
+  - archetypes
+  - brazil
+  - ecommerce
+  - whitelabel
+
+created: "2025-12-20"
+updated: "2026-03-23"

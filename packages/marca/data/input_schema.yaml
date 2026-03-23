@@ -1,0 +1,173 @@
+$schema: http://json-schema.org/draft-07/schema#
+title: MARCA Agent Input Schema
+description: Input validation for brand strategy creation workflow
+type: object
+required:
+- product_name
+- category
+- target_audience
+- price_range
+properties:
+  product_name:
+    type: string
+    description: Name or description of the product/service
+    minLength: 5
+    examples:
+    - Cosmeticos Organicos para Pele Sensivel
+    - Garrafa Termica Premium
+    - Acessorios Tech Minimalistas
+  category:
+    type: string
+    description: E-commerce category (hierarchical)
+    minLength: 3
+    examples:
+    - Beleza > Cosmeticos Naturais
+    - Casa > Utensilios
+    - Eletronicos > Acessorios
+  target_audience:
+    type: string
+    description: Primary audience description (demographics + psychographics)
+    minLength: 10
+    examples:
+    - Mulheres 25-40, conscientes, urbanas
+    - Profissionais tech-savvy, 28-45, urbanos
+    - Maes 30-45, preocupadas com saude familiar
+  price_range:
+    type: string
+    description: Price positioning tier
+    enum:
+    - Popular (ate R$ 50)
+    - Medio (R$ 50-100)
+    - Premium (R$ 100-300)
+    - Luxury (acima R$ 300)
+  competitors:
+    type: array
+    description: Known competitors in the market (optional)
+    items:
+      type: string
+    minItems: 0
+    maxItems: 10
+    examples:
+    - - Natura
+      - Granado
+      - Simple Organic
+    - - Anker
+      - Baseus
+      - Apple
+  inspirations:
+    type: array
+    description: Brands to draw inspiration from (optional)
+    items:
+      type: string
+    minItems: 0
+    maxItems: 5
+    examples:
+    - - Aesop
+      - Glossier
+    - - Apple
+      - Muji
+  product_category:
+    type: string
+    description: Product category for compliance rules
+    enum:
+    - cosmetics
+    - food
+    - supplements
+    - electronics
+    - toys
+    - clothing
+    - home
+    - general
+    default: general
+  output_sections:
+    type: array
+    description: 'Specific sections to generate (default: all)'
+    items:
+      type: string
+      enum:
+      - identity
+      - positioning
+      - voice
+      - visual
+      - narrative
+      - guidelines
+      - validation
+    default:
+    - identity
+    - positioning
+    - voice
+    - visual
+    - narrative
+    - guidelines
+    - validation
+  archetype_preference:
+    type: object
+    description: Optional archetype guidance
+    properties:
+      preferred:
+        type: array
+        items:
+          type: string
+          enum:
+          - innocent
+          - explorer
+          - sage
+          - hero
+          - outlaw
+          - magician
+          - everyman
+          - lover
+          - jester
+          - caregiver
+          - creator
+          - ruler
+      avoid:
+        type: array
+        items:
+          type: string
+          enum:
+          - innocent
+          - explorer
+          - sage
+          - hero
+          - outlaw
+          - magician
+          - everyman
+          - lover
+          - jester
+          - caregiver
+          - creator
+          - ruler
+  language:
+    type: string
+    description: Output language
+    enum:
+    - pt-BR
+    - en-US
+    default: pt-BR
+examples:
+- product_name: Cosmeticos Organicos para Pele Sensivel
+  category: Beleza > Cosmeticos Naturais
+  target_audience: Mulheres 25-40, conscientes, urbanas
+  price_range: Premium (R$ 100-300)
+  competitors:
+  - Natura
+  - Granado
+  - Simple Organic
+  inspirations:
+  - Aesop
+  - Glossier
+  product_category: cosmetics
+- product_name: Garrafa Termica Premium
+  category: Casa > Utensilios
+  target_audience: Profissionais urbanos 25-45, ativos
+  price_range: Premium (R$ 100-300)
+  competitors:
+  - Stanley
+  - Thermos
+  product_category: home
+- product_name: Suplementos Proteicos Veganos
+  category: Saude > Suplementos
+  target_audience: Atletas e fitness enthusiasts, 20-35, veganos
+  price_range: Medio (R$ 50-100)
+  product_category: supplements

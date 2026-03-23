@@ -1,0 +1,260 @@
+$schema: http://json-schema.org/draft-07/schema#
+title: pesquisa_agent Input Schema
+version: 1.0.0
+description: Input validation schema for pesquisa_agent - marketplace research and
+  competitor analysis
+type: object
+required:
+- product_query
+- target_marketplaces
+properties:
+  source_type:
+    type: string
+    enum:
+    - user_query
+    - product_url
+    - competitor_url
+    - category_browse
+    description: Source of research request
+    default: user_query
+  product_query:
+    type: string
+    minLength: 3
+    maxLength: 500
+    description: Product search query or description (required)
+  target_marketplaces:
+    type: array
+    items:
+      type: string
+      enum:
+      - mercado_livre
+      - shopee
+      - magalu
+      - amazon_br
+      - americanas
+      - casas_bahia
+      - submarino
+      - carrefour
+      - extra
+    minItems: 1
+    maxItems: 9
+    default:
+    - mercado_livre
+    - shopee
+    - amazon_br
+    description: Marketplaces to research (required)
+  research_depth:
+    type: string
+    enum:
+    - quick
+    - standard
+    - deep
+    default: standard
+    description: Depth of research analysis
+  competitor_count:
+    type: integer
+    minimum: 3
+    maximum: 10
+    default: 5
+    description: Number of competitors to analyze per marketplace
+  price_range:
+    type: object
+    properties:
+      min:
+        type: number
+        minimum: 0
+        description: Minimum price filter
+      max:
+        type: number
+        minimum: 0
+        description: Maximum price filter
+      currency:
+        type: string
+        default: BRL
+        description: Currency code
+    description: Price range filter for search results
+  category_filter:
+    type: string
+    maxLength: 200
+    description: Category path to filter results (e.g., 'Suplementos > Proteinas')
+  brand_filter:
+    type: object
+    properties:
+      include:
+        type: array
+        items:
+          type: string
+        description: Brands to include in search
+      exclude:
+        type: array
+        items:
+          type: string
+        description: Brands to exclude from search
+    description: Brand filtering options
+  exclude_sellers:
+    type: array
+    items:
+      type: string
+    description: Seller IDs or names to exclude from results
+  sort_by:
+    type: string
+    enum:
+    - relevance
+    - price_asc
+    - price_desc
+    - best_seller
+    - reviews
+    default: relevance
+    description: Sort order for search results
+  condition_filter:
+    type: string
+    enum:
+    - new
+    - used
+    - refurbished
+    - all
+    default: new
+    description: Product condition filter
+  shipping_filter:
+    type: object
+    properties:
+      free_shipping_only:
+        type: boolean
+        default: false
+      full_enabled:
+        type: boolean
+        default: false
+        description: Mercado Livre Full / Prime enabled
+    description: Shipping options filter
+  analysis_focus:
+    type: array
+    items:
+      type: string
+      enum:
+      - pricing_strategy
+      - title_patterns
+      - keyword_density
+      - image_quality
+      - review_sentiment
+      - seller_reputation
+      - shipping_options
+      - stock_levels
+      - promotional_tactics
+    default:
+    - pricing_strategy
+    - title_patterns
+    - keyword_density
+    description: Specific analysis aspects to focus on
+  output_format:
+    type: string
+    enum:
+    - full_report
+    - summary
+    - json_data
+    - anuncio_ready
+    default: full_report
+    description: Desired output format
+  language:
+    type: string
+    enum:
+    - pt-BR
+    - es-ES
+    - en-US
+    default: pt-BR
+    description: Output language
+confidence_calculation:
+  formula: weighted_average(field_completeness)
+  weights:
+    product_query: 0.3
+    target_marketplaces: 0.2
+    category_filter: 0.15
+    price_range: 0.15
+    competitor_count: 0.1
+    research_depth: 0.1
+  thresholds:
+    full_research: 0.8
+    standard_research: 0.6
+    quick_research: 0.4
+    request_clarification: 0.0
+  notes:
+    full_research: All required fields + category + price range = deep analysis
+    standard_research: Required fields + some filters = balanced analysis
+    quick_research: Only required fields = rapid scan
+    request_clarification: Missing required fields = ask user
+examples:
+- _description: Complete research request with all filters
+  source_type: user_query
+  product_query: whey protein isolado 1kg chocolate
+  target_marketplaces:
+  - mercado_livre
+  - shopee
+  - amazon_br
+  research_depth: deep
+  competitor_count: 7
+  price_range:
+    min: 100
+    max: 250
+    currency: BRL
+  category_filter: Suplementos > Proteinas > Whey Protein
+  brand_filter:
+    include:
+    - Growth
+    - Integralmedica
+    - Max Titanium
+    exclude: []
+  analysis_focus:
+  - pricing_strategy
+  - title_patterns
+  - review_sentiment
+  output_format: anuncio_ready
+- _description: Quick marketplace scan
+  source_type: user_query
+  product_query: fone bluetooth esportivo
+  target_marketplaces:
+  - mercado_livre
+  - shopee
+  research_depth: quick
+  competitor_count: 5
+  condition_filter: new
+  shipping_filter:
+    free_shipping_only: true
+  output_format: summary
+- _description: Competitor URL analysis
+  source_type: competitor_url
+  product_query: https://www.mercadolivre.com.br/produto-xyz-MLB123456789
+  target_marketplaces:
+  - mercado_livre
+  research_depth: deep
+  competitor_count: 10
+  analysis_focus:
+  - pricing_strategy
+  - title_patterns
+  - keyword_density
+  - image_quality
+  - review_sentiment
+  - seller_reputation
+  output_format: full_report
+integration:
+  upstream:
+    sources:
+    - user_input
+    - marca_agent
+    - shaka_satellite
+    description: Receives queries from user or brand research
+  downstream:
+    targets:
+    - anuncio_agent
+    - photo_agent
+    - lily_satellite
+    description: Feeds research data to content creation agents
+    handoff_format: anuncio_ready output includes all fields needed by anuncio_agent
+validation_rules:
+  price_range_logic:
+    rule: min <= max when both provided
+    error: price_range.min must be less than or equal to price_range.max
+  url_format:
+    rule: product_query must be valid URL when source_type is product_url or competitor_url
+    pattern: ^https?://(www\.)?(mercadolivre|shopee|amazon|magazineluiza|americanas)\.
+  marketplace_coverage:
+    rule: At least one marketplace must be selected
+    error: target_marketplaces array cannot be empty

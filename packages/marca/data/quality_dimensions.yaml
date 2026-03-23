@@ -1,0 +1,242 @@
+framework: 5D Brand Strategy Framework
+version: 1.0.0
+agent: marca
+total_score_range:
+- 0.0
+- 10.0
+pass_threshold: 7.0
+dimensions:
+  D1_IDENTITY_COHERENCE:
+    id: D1
+    name: Identity Coherence
+    question: Is the brand identity internally consistent?
+    weight: 2.0
+    score_range:
+    - 0.0
+    - 2.0
+    checks:
+    - id: D1.1
+      name: archetype_alignment
+      description: Primary and secondary archetypes are complementary, not contradictory
+      severity_if_missing: HIGH
+    - id: D1.2
+      name: traits_archetype_match
+      description: Personality traits align with selected archetype(s)
+      severity_if_missing: HIGH
+    - id: D1.3
+      name: essence_synthesis
+      description: Brand essence accurately synthesizes identity elements
+      severity_if_missing: MEDIUM
+    - id: D1.4
+      name: name_tagline_harmony
+      description: Brand names and taglines reflect same personality
+      severity_if_missing: MEDIUM
+    critical_condition: Contradictory archetype selection
+  D2_POSITIONING_STRENGTH:
+    id: D2
+    name: Positioning Strength
+    question: Is the positioning differentiated and defensible?
+    weight: 2.0
+    score_range:
+    - 0.0
+    - 2.0
+    checks:
+    - id: D2.1
+      name: uvp_differentiation
+      description: UVP is >= 70% differentiated from competitors
+      severity_if_missing: HIGH
+    - id: D2.2
+      name: segment_specificity
+      description: Target segment has 3 dimensions (demo, psycho, behavioral)
+      severity_if_missing: MEDIUM
+    - id: D2.3
+      name: promise_verifiability
+      description: Brand promise is verifiable by customer
+      severity_if_missing: HIGH
+    - id: D2.4
+      name: ries_trout_format
+      description: Positioning statement follows Ries & Trout formula
+      severity_if_missing: LOW
+    critical_condition: UVP identical to competitor
+  D3_VOICE_CONSISTENCY:
+    id: D3
+    name: Voice Consistency
+    question: Is the tone of voice consistent and actionable?
+    weight: 2.0
+    score_range:
+    - 0.0
+    - 2.0
+    checks:
+    - id: D3.1
+      name: dimensions_positioned
+      description: 4 personality dimensions are clearly positioned (1-5 scale)
+      severity_if_missing: MEDIUM
+    - id: D3.2
+      name: dos_donts_complete
+      description: 5-8 Do's and 5-8 Don'ts with examples
+      severity_if_missing: MEDIUM
+    - id: D3.3
+      name: seed_words_defined
+      description: Minimum 5 proprietary seed words defined
+      severity_if_missing: LOW
+    - id: D3.4
+      name: example_phrases
+      description: 10 context-specific example phrases provided
+      severity_if_missing: MEDIUM
+    - id: D3.5
+      name: voice_archetype_match
+      description: Voice characteristics match archetype personality
+      severity_if_missing: HIGH
+    critical_condition: Voice contradicts archetype
+  D4_COMPLIANCE:
+    id: D4
+    name: Compliance
+    question: Does the brand strategy meet regulatory requirements?
+    weight: 2.0
+    score_range:
+    - 0.0
+    - 2.0
+    checks:
+    - id: D4.1
+      name: anvisa_compliance
+      description: ANVISA rules followed for cosmetics/food/supplements
+      severity_if_missing: CRITICAL
+    - id: D4.2
+      name: inmetro_compliance
+      description: INMETRO certification requirements met for electronics/toys
+      severity_if_missing: CRITICAL
+    - id: D4.3
+      name: conar_compliance
+      description: CONAR advertising ethics guidelines followed
+      severity_if_missing: HIGH
+    - id: D4.4
+      name: cdc_compliance
+      description: Consumer protection (CDC) requirements met
+      severity_if_missing: HIGH
+    - id: D4.5
+      name: wcag_colors
+      description: Color palette meets WCAG AA contrast requirements
+      severity_if_missing: MEDIUM
+    critical_condition: ANVISA or INMETRO violation
+  D5_COMPLETENESS:
+    id: D5
+    name: Completeness
+    question: Are all 32 blocks properly filled?
+    weight: 2.0
+    score_range:
+    - 0.0
+    - 2.0
+    checks:
+    - id: D5.1
+      name: identity_blocks
+      description: Blocks 1-5 (Identity) complete
+      severity_if_missing: HIGH
+    - id: D5.2
+      name: positioning_blocks
+      description: Blocks 6-10 (Positioning) complete
+      severity_if_missing: HIGH
+    - id: D5.3
+      name: voice_blocks
+      description: Blocks 11-15 (Voice) complete
+      severity_if_missing: HIGH
+    - id: D5.4
+      name: visual_blocks
+      description: Blocks 16-19 (Visual) complete
+      severity_if_missing: MEDIUM
+    - id: D5.5
+      name: narrative_blocks
+      description: Blocks 20-24 (Narrative) complete
+      severity_if_missing: MEDIUM
+    - id: D5.6
+      name: guidelines_blocks
+      description: Blocks 25-28 (Guidelines) complete
+      severity_if_missing: MEDIUM
+    - id: D5.7
+      name: validation_blocks
+      description: Blocks 29-32 (Validation) complete
+      severity_if_missing: HIGH
+    - id: D5.8
+      name: tagline_length
+      description: All taglines are 40-60 characters
+      severity_if_missing: MEDIUM
+    critical_condition: Core section missing (Identity, Positioning, Voice)
+scoring:
+  calculation: sum(dimension_scores)
+  dimension_calculation: (checks_passed / total_checks) * weight
+  thresholds:
+    COMPLETE:
+      min: 8.5
+      conditions:
+      - all_blocks_filled
+      - no_critical_issues
+      - compliance_ok
+    APPROVED:
+      min: 7.0
+      conditions:
+      - core_blocks_filled
+      - no_critical_issues
+    NEEDS_REVISION:
+      min: 5.0
+      max: 6.99
+    REJECTED:
+      max: 4.99
+      or:
+      - has_critical_issues
+      - non_compliant
+cross_validation:
+  archetype_voice:
+    description: Archetype traits must align with voice dimensions
+    threshold: 0.8
+    severity: HIGH
+  identity_positioning:
+    description: Brand essence must align with UVP
+    threshold: 0.7
+    severity: HIGH
+  visual_personality:
+    description: Color psychology must match personality traits
+    threshold: 0.75
+    severity: MEDIUM
+  narrative_values:
+    description: Origin story must reflect core values
+    threshold: 0.8
+    severity: MEDIUM
+brand_specific_metrics:
+  consistency_score:
+    description: Overall brand coherence across all sections
+    range:
+    - 0.0
+    - 1.0
+    threshold: 0.85
+    calculation: average(cross_validation_scores)
+  uniqueness_score:
+    description: Differentiation from competitors
+    range:
+    - 0
+    - 10
+    threshold: 8.0
+    factors:
+    - uvp_differentiation
+    - voice_originality
+    - visual_distinctiveness
+profiles:
+  standard:
+    pass_threshold: 7.0
+    consistency_threshold: 0.85
+    uniqueness_threshold: 8.0
+    critical_severity:
+    - CRITICAL
+    - HIGH
+  strict:
+    pass_threshold: 8.5
+    consistency_threshold: 0.9
+    uniqueness_threshold: 9.0
+    critical_severity:
+    - CRITICAL
+    - HIGH
+    - MEDIUM
+  lenient:
+    pass_threshold: 6.0
+    consistency_threshold: 0.75
+    uniqueness_threshold: 7.0
+    critical_severity:
+    - CRITICAL
