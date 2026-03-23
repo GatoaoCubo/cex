@@ -21,6 +21,7 @@ SCOPES = ["https://www.googleapis.com/auth/drive"]
 
 STRUCTURE = {
     "root_name": "CODEXA Conhecimento",
+    "mode": "per_person",  # per_person or per_domain
     "folders": {
         "marketing":    {"satellite": "LILY",   "desc": "Copy, ads, branding"},
         "pesquisa":     {"satellite": "SHAKA",  "desc": "Research, competitors"},
@@ -31,7 +32,6 @@ STRUCTURE = {
         "_templates":   {"satellite": None,      "desc": "Shared templates"},
     }
 }
-
 def get_creds(creds_dir):
     token = creds_dir / "token.json"
     secret = creds_dir / "client_secret.json"
@@ -128,10 +128,20 @@ def save_config(ids, path):
         path.with_suffix(".json").write_text(json.dumps(cfg, indent=2))
     print(f"[OK] Config -> {path}")
 
+
+
+def add_person(service, root_id, name):
+    """Add a contributor person folder with _processados and _rejeitados."""
+    person_id = find_or_create(service, name, root_id)
+    find_or_create(service, "_processados", person_id)
+    find_or_create(service, "_rejeitados", person_id)
+    return person_id
+
 def main():
     p = argparse.ArgumentParser(description="CEX Google Drive Setup")
     p.add_argument("--setup", action="store_true", help="OAuth + create folders")
     p.add_argument("--check", action="store_true", help="Check new files")
+    p.add_argument("--add-person", type=str, help="Add contributor folder (name_role)")
     p.add_argument("--sync", action="store_true", help="Sync to inbox/raw/")
     p.add_argument("--inbox", default="records/inbox/raw")
     p.add_argument("--creds", default="_config")
@@ -151,6 +161,14 @@ def main():
     elif a.sync:
         cfg = json.loads(Path(a.config).read_text()) if a.config.endswith(".json") else __import__("yaml").safe_load(Path(a.config).read_text())
         sync_files(svc, cfg["gdrive"]["folders"], a.inbox)
+    elif a.add_person:
+        if not Path(a.config).exists():
+            print("[ERROR] Run --setup first")
+            sys.exit(1)
+        cfg = yaml.safe_load(Path(a.config).read_text()) if yaml else json.loads(Path(a.config).read_text())
+        root_id = cfg["gdrive"]["root_id"]
+        pid = add_person(svc, root_id, a.add_person)
+        print(f"[OK] Person folder created: {a.add_person} -> {pid}")
     else:
         p.print_help()
 
