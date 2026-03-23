@@ -116,6 +116,48 @@ types:
       - chain
       - timeout_per_step
 
+  iso_package:
+    description: Pacote portable de agente AI (ISO format) — self-contained, LLM-agnostic
+    naming: agents/{{agent_name}}/manifest.yaml
+    constraints:
+      max_bytes: 4096
+    required_files:
+      - manifest.yaml
+      - system_instruction.md
+      - instructions.md
+    recommended_files:
+      - architecture.md
+      - output_template.md
+      - examples.md
+      - error_handling.md
+    optional_files:
+      - quick_start.md
+      - input_schema.yaml
+      - upload_kit.md
+      - upload_kit_whitelabel.md
+    tiers:
+      minimal: 3     # required only
+      standard: 7    # + recommended
+      complete: 10   # + optional
+      whitelabel: 12 # + whitelabel variants
+    quality_gates:
+      system_instruction_max_tokens: 4096
+      min_examples: 2
+      density_min: 0.8
+      score_min: 8.0
+      no_hardcoded_paths: true
+    lp_mapping:
+      manifest.yaml: P02
+      system_instruction.md: P03
+      instructions.md: P03
+      architecture.md: P08
+      output_template.md: P05
+      examples.md: P07
+      error_handling.md: P11
+      quick_start.md: P01
+      input_schema.yaml: P06
+      upload_kit.md: P04
+
 # Evidence: 31 golden agents, 22+ ISO files in mature agents
 # ISO count = maturity: 10=baseline, 17=mature, 22+=golden
 # Shokunin iteration 2 | 2026-03-22
