@@ -1,0 +1,92 @@
+satellite: pytha
+domain: knowledge
+version: "1.0.0"
+description: "Knowledge management, indexing, AI model ops, pattern extraction, and learning agents"
+
+agents:
+  # Primary: core knowledge & indexing domain
+  - name: pattern_extractor
+    role: primary
+    tier: whitelabel
+  - name: knowledge_distiller
+    role: primary
+    tier: whitelabel
+  - name: recursive_refiner
+    role: primary
+    tier: whitelabel
+  - name: prompt_evolution
+    role: primary
+    tier: whitelabel
+  - name: prompt-evolution-agent
+    role: primary
+    tier: whitelabel
+  - name: mentor_humano
+    role: primary
+    tier: whitelabel
+  - name: memory_consolidation
+    role: primary
+    tier: whitelabel
+  - name: knowledge_synthesizer
+    role: primary
+    tier: whitelabel
+  - name: docs_indexer_agent
+    role: primary
+    tier: whitelabel
+  - name: context_optimizer
+    role: primary
+    tier: whitelabel
+  - name: context_manager
+    role: primary
+    tier: whitelabel
+  - name: retriever
+    role: primary
+    tier: complete
+  - name: quantization_agent
+    role: primary
+    tier: complete
+  - name: fine_tuner_agent
+    role: primary
+    tier: complete
+  - name: model_hub_agent
+    role: primary
+    tier: complete
+  - name: embedding_agent
+    role: primary
+    tier: complete
+  - name: dataset_curator_agent
+    role: primary
+    tier: complete
+  - name: mentor_sistemas
+    role: primary
+    tier: whitelabel
+  - name: token_budget_enforcer
+    role: primary
+    tier: whitelabel
+  - name: satellite_dispatcher
+    role: primary
+    tier: whitelabel
+  # Secondary: cross-domain knowledge utilities
+  - name: context_overflow_manager
+    role: secondary
+    tier: complete
+  - name: confidence_scorer
+    role: secondary
+    tier: whitelabel
+  - name: cross_agent_validator
+    role: secondary
+    tier: whitelabel
+  - name: evaluator
+    role: secondary
+    tier: whitelabel
+  - name: codexa
+    role: secondary
+    tier: complete
+  - name: translator
+    role: secondary
+    tier: complete
+  - name: design-extractor
+    role: secondary
+    tier: complete
+
+max_concurrent: 3
+boot_priority: [knowledge_distiller, pattern_extractor, retriever]

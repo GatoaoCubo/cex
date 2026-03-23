@@ -1,0 +1,64 @@
+satellite: york
+domain: commerce
+version: "1.0.0"
+description: "E-commerce, monetization, marketplace, pricing, and fulfillment agents"
+
+agents:
+  # Primary: core commerce & monetization domain
+  - name: amazon-ads
+    role: primary
+    tier: whitelabel
+  - name: amazon-listing-agent
+    role: primary
+    tier: whitelabel
+  - name: amazon-ads-agent
+    role: primary
+    tier: whitelabel
+  - name: inventory-agent
+    role: primary
+    tier: whitelabel
+  - name: pricing
+    role: primary
+    tier: whitelabel
+  - name: payment_integration
+    role: primary
+    tier: whitelabel
+  - name: fulfillment-ml
+    role: primary
+    tier: whitelabel
+  - name: temu_seller
+    role: primary
+    tier: whitelabel
+  - name: mentor-importacao-agent
+    role: primary
+    tier: whitelabel
+  - name: catalogo_ml_strategy
+    role: primary
+    tier: whitelabel
+  - name: calculate_shipping_costs
+    role: primary
+    tier: whitelabel
+  - name: supply_chain_auditor
+    role: primary
+    tier: complete
+  - name: ml-ads
+    role: primary
+    tier: complete
+  - name: curso
+    role: primary
+    tier: whitelabel
+  - name: account-manager-agent
+    role: primary
+    tier: complete
+  - name: ai-clone
+    role: primary
+    tier: complete
+  - name: generated
+    role: primary
+    tier: complete
+  - name: notification_orchestrator
+    role: primary
+    tier: whitelabel
+
+max_concurrent: 3
+boot_priority: [pricing, amazon-ads, inventory-agent]

@@ -1,0 +1,70 @@
+satellite: atlas
+domain: ops
+version: "1.0.0"
+description: "Operations, testing, security, deployment, and infrastructure management agents"
+
+agents:
+  # Primary: core ops, testing & security domain
+  - name: qa
+    role: primary
+    tier: whitelabel
+  - name: evaluation_agent
+    role: primary
+    tier: whitelabel
+  - name: incident_response
+    role: primary
+    tier: whitelabel
+  - name: error_detective
+    role: primary
+    tier: whitelabel
+  - name: security_scanner
+    role: primary
+    tier: whitelabel
+  - name: security_config_auditor
+    role: primary
+    tier: whitelabel
+  - name: scheduler
+    role: primary
+    tier: whitelabel
+  - name: router
+    role: primary
+    tier: whitelabel
+  - name: plan_review_agent
+    role: primary
+    tier: whitelabel
+  - name: monitor
+    role: primary
+    tier: whitelabel
+  - name: debugger
+    role: primary
+    tier: whitelabel
+  - name: code_review_security
+    role: primary
+    tier: whitelabel
+  - name: browser_automation
+    role: primary
+    tier: whitelabel
+  - name: atlas_inbox_planner
+    role: primary
+    tier: whitelabel
+  - name: tester
+    role: primary
+    tier: complete
+  - name: planejador
+    role: primary
+    tier: complete
+  - name: pentest_assistant
+    role: primary
+    tier: complete
+  - name: access_control_auditor
+    role: primary
+    tier: complete
+  - name: ethical_compliance_scanner
+    role: primary
+    tier: complete
+  - name: pre_router
+    role: primary
+    tier: whitelabel
+
+max_concurrent: 3
+boot_priority: [qa, monitor, router]
