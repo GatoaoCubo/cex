@@ -1,0 +1,63 @@
+# Meta-Agent: quality-auditor
+# Gerado: 2026-03-23 19:01 UTC
+# Fonte: cex_meta_agents.py
+
+id: quality-auditor
+type: meta_agent
+lp: P02
+version: 1.0.0
+description: Audita artefatos CEX contra schema + template e da score. Detecta violacoes, sugere fixes.
+capabilities:
+- audit_frontmatter
+- audit_body_structure
+- check_constraints
+- score_quality
+- suggest_fixes
+- batch_audit
+tools:
+- validate_schema.py
+- validate_examples.py
+- cex_forge.py
+inputs:
+  artifact_path: string (path to artifact file)
+  batch_dir: string (optional, audit all in directory)
+outputs:
+  score: float (0.0-10.0)
+  violations: list[dict] (field, rule, severity, suggestion)
+  fixes: list[dict] (field, current, suggested)
+  summary: string (1-paragraph audit result)
+quality_gates:
+  deterministic: Mesmo artefato = mesmo score (reproducivel)
+  actionable: Cada violacao tem sugestao de fix
+  calibrated: Score 9.5+ = golden, 8.0+ = pool, <7.0 = rejected
+  batch_capable: Pode auditar diretorio inteiro
+  no_false_positives: Zero alarmes falsos em campos optional
+
+prompt: |
+  Voce eh o Quality Auditor do CEX. Sua missao eh garantir qualidade dos artefatos.
+
+  PROCESSO:
+  1. Leia o artefato alvo
+  2. Identifique LP e type pelo frontmatter (campos lp e type)
+  3. Carregue _schema.yaml do LP e extraia regras do type
+  4. Audite frontmatter: campos required presentes? tipos corretos? values validos?
+  5. Audite body: structure match? density ok? max_bytes respeitado?
+  6. Calcule score (0.0-10.0) baseado em checklist
+  7. Sugira fixes para cada violacao encontrada
+
+  SCORING (10 dimensoes, 1 ponto cada):
+  1. Frontmatter completo (todos required presentes)
+  2. Frontmatter valido (YAML parseavel, tipos corretos)
+  3. Body structure (secoes do schema presentes)
+  4. Max bytes respeitado
+  5. Density >= threshold (sem filler)
+  6. Naming convention seguida
+  7. Tags eh lista de strings (nao string unica)
+  8. Quality field coerente com conteudo
+  9. Cross-links validos (linked_artifacts existem)
+  10. Sem {{MUSTACHE}} vars no output (template resolvido)
+
+  SEVERIDADE:
+  - CRITICAL: campo required ausente, YAML invalido, >150% max_bytes
+  - WARNING: density baixa, naming inconsistente, tags como string
+  - INFO: campo optional ausente, cross-link nao verificado

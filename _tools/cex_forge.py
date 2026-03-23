@@ -1,0 +1,386 @@
+#!/usr/bin/env python3
+"""
+cex_forge.py — O Forjador Universal CEX
+Gera prompts prontos para LLM que produzem artefatos CEX validos.
+
+Fluxo:
+  1. Le _schema.yaml do LP -> extrai regras (max_bytes, density_min, required fields)
+  2. Le template correspondente (via TYPE_TO_TEMPLATE.yaml)
+  3. Monta PROMPT para LLM: template + schema rules + seed words + context
+  4. Salva o prompt montado em stdout (NAO chama LLM)
+  5. Valida formato do prompt (tem placeholders? respeita max_bytes? frontmatter?)
+
+Uso:
+  python cex_forge.py --lp P01 --type knowledge_card --seeds "RAG,embeddings,chunking" --context "texto sobre RAG"
+  python cex_forge.py --lp P02 --type agent --seeds "scraper,web,data" --context-file research.md
+  python cex_forge.py --list-types              # lista todos os 69 tipos
+  python cex_forge.py --list-types --lp P01     # tipos do LP
+"""
+
+import argparse
+import os
+import sys
+import re
+from pathlib import Path
+
+try:
+    import yaml
+except ImportError:
+    print("ERRO: PyYAML necessario. Instale com: pip install pyyaml", file=sys.stderr)
+    sys.exit(1)
+
+CEX_ROOT = Path(__file__).resolve().parent.parent
+META_DIR = CEX_ROOT / "_meta"
+TYPE_MAP_PATH = META_DIR / "TYPE_TO_TEMPLATE.yaml"
+
+LP_DIRS = {
+    "P01": "P01_knowledge",
+    "P02": "P02_model",
+    "P03": "P03_prompt",
+    "P04": "P04_tools",
+    "P05": "P05_output",
+    "P06": "P06_schema",
+    "P07": "P07_evals",
+    "P08": "P08_architecture",
+    "P09": "P09_config",
+    "P10": "P10_memory",
+    "P11": "P11_feedback",
+    "P12": "P12_orchestration",
+}
+
+
+def load_yaml(path: Path) -> dict:
+    with open(path, "r", encoding="utf-8") as f:
+        return yaml.safe_load(f) or {}
+
+
+def load_schema(lp: str) -> dict:
+    lp_dir = LP_DIRS.get(lp.upper())
+    if not lp_dir:
+        print(f"ERRO: LP '{lp}' nao encontrado. Use P01-P12.", file=sys.stderr)
+        sys.exit(1)
+    schema_path = CEX_ROOT / lp_dir / "_schema.yaml"
+    if not schema_path.exists():
+        print(f"ERRO: Schema nao encontrado: {schema_path}", file=sys.stderr)
+        sys.exit(1)
+    return load_yaml(schema_path)
+
+
+def load_type_map() -> dict:
+    if not TYPE_MAP_PATH.exists():
+        print(f"ERRO: TYPE_TO_TEMPLATE.yaml nao encontrado: {TYPE_MAP_PATH}", file=sys.stderr)
+        sys.exit(1)
+    raw = load_yaml(TYPE_MAP_PATH)
+    # Filter out comment-only keys (yaml loads them as key: None)
+    return {k: v for k, v in raw.items() if not k.startswith("#")}
+
+
+def load_template(template_rel_path: str) -> str | None:
+    if not template_rel_path:
+        return None
+    tpl_path = CEX_ROOT / template_rel_path
+    if not tpl_path.exists():
+        return None
+    with open(tpl_path, "r", encoding="utf-8") as f:
+        return f.read()
+
+
+def extract_type_rules(schema: dict, type_name: str) -> dict:
+    types = schema.get("types", {})
+    if type_name not in types:
+        return {}
+    t = types[type_name]
+    rules = {
+        "description": t.get("description", ""),
+        "naming": t.get("naming", ""),
+    }
+    constraints = t.get("constraints", {})
+    if isinstance(constraints, dict):
+        rules.update(constraints)
+    else:
+        rules["constraints_raw"] = constraints
+
+    rules["frontmatter_required"] = t.get("frontmatter_required", [])
+    rules["frontmatter_cex"] = t.get("frontmatter_cex", [])
+    rules["body_structure"] = t.get("body_structure", [])
+    rules["validation"] = t.get("validation", [])
+    return rules
+
+
+def build_prompt(
+    lp: str,
+    type_name: str,
+    seeds: list[str],
+    context: str,
+    schema: dict,
+    rules: dict,
+    template: str | None,
+) -> str:
+    lp_name = schema.get("name", lp)
+    lp_desc = schema.get("description", "")
+
+    sections = []
+
+    # Header
+    sections.append(f"# CEX FORGE — Gere um artefato `{type_name}` (LP: {lp})")
+    sections.append("")
+
+    # Role
+    sections.append("## Voce eh")
+    sections.append(
+        f"Um gerador de artefatos CEX especializado em `{type_name}` "
+        f"do dominio {lp} ({lp_name}: {lp_desc})."
+    )
+    sections.append(
+        "Seu output deve ser um arquivo Markdown/YAML valido, "
+        "pronto para salvar no repositorio CEX."
+    )
+    sections.append("")
+
+    # Schema rules
+    sections.append("## Regras do Schema")
+    sections.append(f"- **Tipo**: {type_name}")
+    sections.append(f"- **Descricao**: {rules.get('description', 'N/A')}")
+    sections.append(f"- **Naming**: `{rules.get('naming', 'N/A')}`")
+    if rules.get("max_bytes"):
+        sections.append(f"- **Max bytes**: {rules['max_bytes']}")
+    if rules.get("density_min"):
+        sections.append(f"- **Density min**: {rules['density_min']}")
+    if rules.get("quality_min"):
+        sections.append(f"- **Quality min**: {rules['quality_min']}")
+    if rules.get("min_bullets"):
+        sections.append(f"- **Min bullets**: {rules['min_bullets']}")
+    sections.append("")
+
+    # Frontmatter
+    fm_required = rules.get("frontmatter_required", [])
+    fm_cex = rules.get("frontmatter_cex", [])
+    if fm_required or fm_cex:
+        sections.append("## Frontmatter Obrigatorio")
+        sections.append("```yaml")
+        sections.append("---")
+        for field in fm_required:
+            sections.append(f"{field}: # OBRIGATORIO")
+        for field in fm_cex:
+            sections.append(f"{field}: # CEX extended")
+        sections.append("---")
+        sections.append("```")
+        sections.append("")
+
+    # Body structure
+    body = rules.get("body_structure", [])
+    if body:
+        sections.append("## Estrutura do Body")
+        if isinstance(body, dict):
+            for variant, fields in body.items():
+                sections.append(f"### Variante: {variant}")
+                if isinstance(fields, list):
+                    for f in fields:
+                        sections.append(f"  - `{f}`")
+                sections.append("")
+        elif isinstance(body, list):
+            for item in body:
+                sections.append(f"- `{item}`")
+            sections.append("")
+
+    # Validation rules
+    val = rules.get("validation", [])
+    if val:
+        sections.append("## Validacao")
+        for v in val:
+            sections.append(f"- {v}")
+        sections.append("")
+
+    # Template
+    if template:
+        sections.append("## Template de Referencia")
+        sections.append("Use este template como BASE. Preencha TODAS as {{VARIAVEIS}}.")
+        sections.append("")
+        sections.append("```")
+        sections.append(template.strip())
+        sections.append("```")
+        sections.append("")
+    else:
+        sections.append("## Template")
+        sections.append(
+            "NOTA: Nao existe template para este tipo (GAP). "
+            "Crie o artefato seguindo a estrutura do schema acima."
+        )
+        sections.append("")
+
+    # Seeds
+    sections.append("## Seed Words")
+    sections.append(f"Topico principal: **{', '.join(seeds)}**")
+    sections.append("Use estas palavras-chave como base para gerar conteudo relevante e denso.")
+    sections.append("")
+
+    # Context
+    if context.strip():
+        sections.append("## Contexto Fornecido")
+        sections.append(context.strip())
+        sections.append("")
+
+    # Output instructions
+    sections.append("## Instrucoes de Output")
+    sections.append("1. Gere o artefato COMPLETO (frontmatter YAML + body Markdown)")
+    sections.append("2. Preencha TODOS os campos obrigatorios do frontmatter")
+    sections.append("3. NAO deixe {{VARIAVEIS}} sem preencher")
+    sections.append(f"4. Respeite o limite de {rules.get('max_bytes', 'N/A')} bytes")
+    if rules.get("density_min"):
+        sections.append(
+            f"5. Densidade minima: {rules['density_min']} (cada frase deve conter informacao unica)"
+        )
+    sections.append(
+        f"6. Quality target: >= {rules.get('quality_min', 7.0)} "
+        "(sem filler, sem repeticao, sem obviedades)"
+    )
+    sections.append("")
+
+    return "\n".join(sections)
+
+
+def validate_prompt(prompt: str, rules: dict) -> list[str]:
+    warnings = []
+    max_bytes = rules.get("max_bytes")
+
+    # Check prompt has structure
+    if "## " not in prompt:
+        warnings.append("WARN: Prompt sem secoes (## headers)")
+
+    # Check template placeholders were mentioned
+    if "{{" not in prompt and "VARIAVEIS" not in prompt:
+        warnings.append("WARN: Prompt nao menciona placeholders {{MUSTACHE}}")
+
+    # Check frontmatter section exists
+    if "Frontmatter" not in prompt and "frontmatter" not in prompt:
+        warnings.append("WARN: Prompt nao tem secao de frontmatter")
+
+    # Estimate if prompt is reasonable size
+    prompt_bytes = len(prompt.encode("utf-8"))
+    if prompt_bytes > 20000:
+        warnings.append(f"WARN: Prompt muito grande ({prompt_bytes} bytes)")
+
+    if max_bytes and "max_bytes" not in prompt.lower() and str(max_bytes) not in prompt:
+        warnings.append(f"WARN: max_bytes ({max_bytes}) nao mencionado no prompt")
+
+    return warnings
+
+
+def list_all_types(filter_lp: str | None = None) -> list[dict]:
+    type_map = load_type_map()
+    results = []
+    for lp_key, lp_dir in sorted(LP_DIRS.items()):
+        if filter_lp and lp_key.upper() != filter_lp.upper():
+            continue
+        schema = load_schema(lp_key)
+        types = schema.get("types", {})
+        for type_name, type_def in types.items():
+            tpl = type_map.get(type_name)
+            results.append(
+                {
+                    "lp": lp_key,
+                    "type": type_name,
+                    "description": type_def.get("description", ""),
+                    "template": tpl if tpl else "GAP",
+                    "max_bytes": type_def.get("constraints", {}).get("max_bytes", "N/A")
+                    if isinstance(type_def.get("constraints"), dict)
+                    else "N/A",
+                }
+            )
+    return results
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="CEX Forge — Gerador Universal de Prompts para Artefatos CEX",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Exemplos:
+  python cex_forge.py --lp P01 --type knowledge_card --seeds "RAG,embeddings" --context "RAG eh..."
+  python cex_forge.py --lp P02 --type agent --seeds "scraper,web" --context-file notes.md
+  python cex_forge.py --list-types
+  python cex_forge.py --list-types --lp P04
+        """,
+    )
+    parser.add_argument("--lp", help="LP target (P01-P12)")
+    parser.add_argument("--type", dest="type_name", help="Tipo do artefato")
+    parser.add_argument("--seeds", help="Seed words separadas por virgula")
+    parser.add_argument("--context", default="", help="Contexto em texto livre")
+    parser.add_argument("--context-file", help="Arquivo com contexto")
+    parser.add_argument("--list-types", action="store_true", help="Lista todos os tipos")
+    parser.add_argument("--output", help="Arquivo de saida (default: stdout)")
+
+    args = parser.parse_args()
+
+    if args.list_types:
+        types = list_all_types(args.lp)
+        print(f"{'LP':<5} {'Type':<25} {'Template':<8} {'MaxB':<8} Description")
+        print("-" * 90)
+        for t in types:
+            tpl_status = "OK" if t["template"] != "GAP" else "GAP"
+            print(
+                f"{t['lp']:<5} {t['type']:<25} {tpl_status:<8} "
+                f"{str(t['max_bytes']):<8} {t['description']}"
+            )
+        print(
+            f"\nTotal: {len(types)} tipos ({sum(1 for t in types if t['template'] != 'GAP')} com template, {sum(1 for t in types if t['template'] == 'GAP')} GAP)"
+        )
+        return
+
+    if not args.lp or not args.type_name or not args.seeds:
+        parser.error("--lp, --type e --seeds sao obrigatorios (ou use --list-types)")
+
+    # Load context
+    context = args.context
+    if args.context_file:
+        ctx_path = Path(args.context_file)
+        if not ctx_path.exists():
+            print(f"ERRO: Arquivo de contexto nao encontrado: {ctx_path}", file=sys.stderr)
+            sys.exit(1)
+        with open(ctx_path, "r", encoding="utf-8") as f:
+            context = f.read()
+
+    seeds = [s.strip() for s in args.seeds.split(",") if s.strip()]
+
+    # Load schema
+    schema = load_schema(args.lp)
+    rules = extract_type_rules(schema, args.type_name)
+    if not rules:
+        available = list(schema.get("types", {}).keys())
+        print(
+            f"ERRO: Tipo '{args.type_name}' nao encontrado em {args.lp}. "
+            f"Disponiveis: {', '.join(available)}",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
+    # Load template
+    type_map = load_type_map()
+    template_path = type_map.get(args.type_name)
+    template = load_template(template_path) if template_path else None
+
+    # Build prompt
+    prompt = build_prompt(args.lp, args.type_name, seeds, context, schema, rules, template)
+
+    # Validate
+    warnings = validate_prompt(prompt, rules)
+    for w in warnings:
+        print(w, file=sys.stderr)
+
+    # Output
+    if args.output:
+        out_path = Path(args.output)
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(out_path, "w", encoding="utf-8") as f:
+            f.write(prompt)
+        print(f"Prompt salvo em: {out_path}", file=sys.stderr)
+        print(f"Tamanho: {len(prompt.encode('utf-8'))} bytes", file=sys.stderr)
+    else:
+        print(prompt)
+
+    if warnings:
+        print(f"\n--- {len(warnings)} warning(s) ---", file=sys.stderr)
+
+
+if __name__ == "__main__":
+    main()

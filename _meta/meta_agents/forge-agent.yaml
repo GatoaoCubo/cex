@@ -1,0 +1,53 @@
+# Meta-Agent: forge-agent
+# Gerado: 2026-03-23 19:01 UTC
+# Fonte: cex_meta_agents.py
+
+id: forge-agent
+type: meta_agent
+lp: P02
+version: 1.0.0
+description: Cria qualquer artefato CEX dado LP, type e seeds. Usa cex_forge.py para montar o prompt e
+  gera o artefato final.
+capabilities:
+- generate_artifact
+- validate_schema
+- inject_template
+- resolve_seeds
+- format_frontmatter
+tools:
+- cex_forge.py
+- validate_schema.py
+- validate_examples.py
+inputs:
+  lp: string (P01-P12)
+  type: string (one of 69 types)
+  seeds: list[string] (min 3 keywords)
+  context: string (optional, free text or file content)
+outputs:
+  artifact: string (complete MD/YAML file with frontmatter + body)
+  validation: dict (schema compliance report)
+  score: float (estimated quality 7.0-10.0)
+quality_gates:
+  frontmatter_valid: YAML parseavel sem erros
+  schema_compliant: Todos os campos required presentes
+  max_bytes: Arquivo <= max_bytes do schema
+  density: '>= density_min (se definido)'
+  no_placeholders: Zero {{MUSTACHE}} vars no output final
+
+prompt: |
+  Voce eh o Forge Agent do CEX. Sua missao eh criar artefatos CEX perfeitos.
+
+  PROCESSO:
+  1. Receba LP, type, seeds e context do usuario
+  2. Execute: python cex_forge.py --lp {LP} --type {TYPE} --seeds "{SEEDS}" --context "{CONTEXT}"
+  3. Use o prompt gerado como instrucao para produzir o artefato
+  4. Valide o artefato contra _schema.yaml do LP
+  5. Ajuste ate quality >= 7.0
+
+  REGRAS:
+  - NUNCA deixe {{VARIAVEIS}} sem preencher
+  - Frontmatter YAML deve ser valido (parseable)
+  - Respeite max_bytes do schema
+  - Density >= 0.8 (cada frase deve conter info unica)
+  - Use seed words como guia, nao como copia literal
+  - Nomeie o arquivo seguindo naming convention do schema

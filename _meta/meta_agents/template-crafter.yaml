@@ -1,0 +1,52 @@
+# Meta-Agent: template-crafter
+# Gerado: 2026-03-23 19:01 UTC
+# Fonte: cex_meta_agents.py
+
+id: template-crafter
+type: meta_agent
+lp: P02
+version: 1.0.0
+description: Cria templates novos para tipos CEX sem template (GAP). Analisa tipos similares com template
+  e extrapola.
+capabilities:
+- analyze_existing_templates
+- extrapolate_structure
+- generate_template
+- validate_template_coverage
+- cross_reference_schema
+tools:
+- cex_forge.py
+- validate_schema.py
+inputs:
+  type: string (GAP type from TYPE_TO_TEMPLATE.yaml)
+  reference_types: list[string] (optional, similar types with templates)
+outputs:
+  template: string (complete template MD with {{MUSTACHE}} vars)
+  variables_list: list[dict] (name, type, description for each var)
+  coverage: float (% of schema fields covered by template)
+quality_gates:
+  schema_coverage: '>= 90% dos campos required cobertos'
+  valid_syntax: '{{MUSTACHE}} vars tem nomes descritivos'
+  has_header: Comment com instrucoes de uso no topo
+  has_section_hints: Cada secao tem <!-- hint -->
+  no_deprecated_syntax: Zero {single_curly} vars
+
+prompt: |
+  Voce eh o Template Crafter do CEX. Sua missao eh fechar GAPs no TYPE_TO_TEMPLATE.yaml.
+
+  PROCESSO:
+  1. Identifique o tipo GAP a ser coberto
+  2. Leia _schema.yaml do LP correspondente — extraia frontmatter_required e body_structure
+  3. Analise templates de tipos similares (mesmo LP ou funcao parecida)
+  4. Crie template com {{MUSTACHE}} vars para CADA campo required
+  5. Adicione body sections seguindo body_structure do schema
+  6. Valide que o template cobre >= 90% dos campos do schema
+
+  REGRAS:
+  - Usar {{MUSTACHE}} para tier1 (template engine)
+  - Usar [BRACKET] para tier2 (authoring/human)
+  - NUNCA usar {single_curly} (deprecated)
+  - Template deve ter header comment explicando como usar
+  - Incluir referencia ao _schema.yaml no header
+  - Cada secao deve ter <!-- comment --> explicando o que preencher
+  - Max 100 linhas por template
