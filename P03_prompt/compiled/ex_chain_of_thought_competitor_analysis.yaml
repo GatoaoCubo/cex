@@ -1,0 +1,64 @@
+id: p03_cot_competitor_analysis
+type: chain_of_thought
+lp: P03
+title: Chain-of-Thought Competitor Analysis with Metacognitive Stages
+reasoning_type: metacognitive_5stage
+quality: 9.0
+task: >
+  Analisar um concorrente direto no marketplace e recomendar estrategia de diferenciacao.
+  Raciocinar explicitamente por 5 estagios metacognitivos antes de produzir resposta final.
+reasoning_cue: >
+  Antes de responder, passe por EXATAMENTE 5 estagios de raciocinio. Cada estagio deve ser
+  explicito e rotulado. NAO pule estagios. NAO combine estagios.
+stages:
+  - name: UNDERSTAND
+    purpose: Decomponha o problema
+    outputs:
+      - fatos concretos sobre o concorrente
+      - gaps de informacao
+      - goal reformulado do usuario
+      - restricoes (budget, timeline, mercado)
+  - name: PLAN
+    purpose: Defina abordagem
+    outputs:
+      - abordagem escolhida
+      - metricas a analisar
+      - fontes de evidencia
+      - riscos e vieses possiveis
+  - name: MONITOR
+    purpose: Execute com checkpoints
+    outputs:
+      - checkpoint posicionamento (preco, publico, proposta de valor)
+      - checkpoint SWOT resumido
+      - checkpoint gaps exploraveis
+      - confianca parcial (0.0-1.0, se < 0.6 revisitar PLAN)
+  - name: EVALUATE
+    purpose: Valide conclusoes
+    outputs:
+      - conclusao principal (1 frase)
+      - evidencias a favor
+      - evidencias contra
+      - confianca final (0.0-1.0)
+      - vieses identificados
+  - name: REFLECT
+    purpose: Meta-avaliacao
+    outputs:
+      - auto-score do raciocinio (1-10)
+      - melhorias para proxima vez
+      - premissa mais fragil
+format:
+  reasoning_trace: XML tags por estagio (understand, plan, monitor, evaluate, reflect)
+  final_answer:
+    sections:
+      - perfil do concorrente (posicionamento, publico, preco, forcas, fraquezas)
+      - estrategia recomendada (3 acoes com horizonte temporal)
+      - metricas de sucesso (KPIs com metas)
+      - confianca (score + premissa mais fragil)
+answer_extract: >
+  Resposta final deve ser autonoma — legivel sem os estagios de raciocinio.
+  Trace existe para auditoria e debug, nao para consumidor final.
+research_base:
+  - source: KC_EDISON_024
+    finding: Metacognitive 5-stage CoT +26.9% task performance
+  - source: best_practice
+    finding: Separar reasoning de answer_extract previne reasoning leak

@@ -1,0 +1,93 @@
+id: p03_react_web_research
+type: react
+lp: P03
+title: ReAct Web Research Agent with Tool Loop
+tools_available: [search_web, extract_data, calculate]
+quality: 9.0
+objective: >
+  Pesquisar precos e disponibilidade de um produto em multiplas fontes online,
+  consolidando dados de pelo menos 3 fontes concordantes antes de emitir relatorio final.
+tools:
+  - name: search_web
+    description: Search the web for information matching a text query
+    parameters:
+      type: object
+      properties:
+        query:
+          type: string
+          description: Search query in natural language
+        num_results:
+          type: integer
+          default: 5
+          minimum: 1
+          maximum: 10
+          description: Number of results to return
+        region:
+          type: string
+          default: br
+          description: Region code for localized results
+      required: [query]
+    returns:
+      type: array
+      items:
+        type: object
+        properties:
+          title: {type: string}
+          url: {type: string}
+          snippet: {type: string}
+  - name: extract_data
+    description: Extract structured data from a URL using a provided schema
+    parameters:
+      type: object
+      properties:
+        url:
+          type: string
+          description: URL to extract data from
+        schema:
+          type: object
+          description: JSON Schema defining the expected output structure
+        timeout_ms:
+          type: integer
+          default: 10000
+          description: Request timeout in milliseconds
+      required: [url, schema]
+    returns:
+      type: object
+      description: Extracted data matching the provided schema
+  - name: calculate
+    description: Perform mathematical calculations on collected data
+    parameters:
+      type: object
+      properties:
+        expression:
+          type: string
+          description: "Mathematical expression to evaluate (e.g., avg(29.99, 32.50, 27.90))"
+        precision:
+          type: integer
+          default: 2
+          description: Decimal places in result
+      required: [expression]
+    returns:
+      type: object
+      properties:
+        result: {type: number}
+        expression: {type: string}
+loop_format: "Thought -> Action -> Observation -> repeat until stop_condition"
+stop_condition: >
+  Parar quando tiver dados de 3 ou mais fontes concordantes
+  (precos dentro de 10% de variacao entre si) OU quando atingir max_iterations.
+max_iterations: 5
+error_handling:
+  search_no_results: reformular query (adicionar/remover termos)
+  extract_timeout: pular URL, tentar proxima da lista
+  max_iterations_reached: emitir relatorio parcial com disclaimer
+output_format:
+  sections:
+    - sources_table (source, price, availability, url)
+    - analysis (price range, average, best deal, concordance)
+    - recommendation (1-2 frases com acao)
+research_base:
+  - source: Yao et al. 2023
+    finding: ReAct Thought-Action-Observation loop
+  - source: best_practice
+    finding: Stop condition baseada em concordancia, nao quantidade fixa

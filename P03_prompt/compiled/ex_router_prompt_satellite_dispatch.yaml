@@ -1,0 +1,85 @@
+id: p03_rp_satellite_dispatch
+type: router_prompt
+lp: P03
+title: Router Prompt for CODEXA Satellite Task Dispatch
+routes: [SHAKA, LILY, EDISON, PYTHA, ATLAS, YORK]
+fallback: EDISON
+quality: 9.0
+objective: >
+  Classificar tarefa do usuario e rotear para satelite CODEXA mais adequado.
+  Analisa keywords, contexto semantico e tipo de entregavel para determinar
+  satelite correto com score de confianca.
+route_definitions:
+  - name: SHAKA
+    domain: Research
+    model: sonnet
+    keywords: [pesquisar, mercado, concorrente, scrape, analise, benchmark, tendencia, dados, comparar, fornecedor]
+    semantic_signal: usuario quer ENTENDER algo externo
+    deliverable: relatorio de pesquisa, analise comparativa, dados estruturados
+  - name: LILY
+    domain: Marketing
+    model: sonnet
+    keywords: [anuncio, marketing, copy, titulo, vender, campanha, criativo, headline, CTA, post, social media]
+    semantic_signal: usuario quer PERSUADIR ou VENDER
+    deliverable: textos de anuncio, campanhas, copys, titulos otimizados
+  - name: EDISON
+    domain: Build
+    model: opus
+    keywords: [criar, build, codigo, componente, hook, template, implementar, desenvolver, feature, refatorar, fix]
+    semantic_signal: usuario quer CONSTRUIR algo tecnico
+    deliverable: codigo, componentes, templates, configuracoes
+  - name: PYTHA
+    domain: Knowledge
+    model: sonnet
+    keywords: [conhecimento, documentar, indexar, embedding, organizar, catalogar, wiki, knowledge, card]
+    semantic_signal: usuario quer ORGANIZAR ou DOCUMENTAR conhecimento interno
+    deliverable: knowledge cards, documentacao, indices, taxonomias
+  - name: ATLAS
+    domain: Execute
+    model: opus
+    keywords: [executar, testar, debug, validar, deploy, migrar, database, railway, infra, pipeline, CI/CD]
+    semantic_signal: usuario quer RODAR ou OPERAR algo
+    deliverable: deploy realizado, testes executados, migrations aplicadas
+  - name: YORK
+    domain: Monetize
+    model: sonnet
+    keywords: [curso, monetizar, preco, hotmart, funil, landing page, checkout, vender curso, produto digital]
+    semantic_signal: usuario quer MONETIZAR conhecimento
+    deliverable: estrutura de curso, paginas de venda, estrategia de pricing
+classification:
+  step_1_keyword_match: "count matching keywords / total route keywords"
+  step_2_semantic_analysis: "match verbo (0.6 weight) + match objeto (0.4 weight)"
+  step_3_combined: "keyword_score * 0.4 + semantic_score * 0.6"
+  step_4_decision: "argmax(confidence) if >= threshold, else fallback"
+threshold:
+  auto_route: 0.7
+  low_confidence: 0.4
+  fallback_below: 0.4
+fallback_route:
+  name: EDISON
+  reason: builder generico, opus model, capacidade de construcao ampla
+disambiguation_rules:
+  - conflict: SHAKA vs LILY
+    resolution: SHAKA primeiro, LILY depois
+    reason: pesquisa informa o marketing
+  - conflict: EDISON vs ATLAS
+    resolution: EDISON build, ATLAS deploy
+    reason: separar construcao de operacao
+  - conflict: PYTHA vs SHAKA
+    resolution: fonte externa SHAKA, interna PYTHA
+    reason: direcao do conhecimento
+  - conflict: LILY vs YORK
+    resolution: conteudo/copy LILY, produto digital/curso YORK
+    reason: tipo de entregavel
+output_format:
+  sections:
+    - route_decision (task, selected, confidence, reasoning)
+    - score_breakdown (table with keyword, semantic, combined per route)
+    - flags (LOW_CONFIDENCE, DISAMBIGUATION, FALLBACK, none)
+research_base:
+  - source: LangChain RouterChain
+    finding: confidence threshold + fallback pattern
+  - source: best_practice
+    finding: keyword + semantic hybrid more robust than keyword-only
+  - source: STELLA_RULES.md
+    finding: CODEXA satellite routing table

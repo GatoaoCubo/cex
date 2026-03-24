@@ -1,0 +1,76 @@
+id: p03_mp_system_prompt_generator
+type: meta_prompt
+lp: P03
+title: Meta-Prompt for System Prompt Generation
+target_type: system_prompt
+optimization_method: manual_review_and_score
+quality: 9.0
+objective: >
+  Dado nome, dominio e 3 capabilities de um novo agente, gerar system_prompt completo
+  e production-ready seguindo convencoes de formato por provider.
+user_input_fields:
+  - name: agent_name
+    type: string
+    example: inventory-tracker
+  - name: agent_domain
+    type: string
+    example: e-commerce inventory management
+  - name: capabilities
+    type: array
+    count: 3
+    example:
+      - monitor stock levels across warehouses
+      - predict restock needs based on sales velocity
+      - generate purchase orders for suppliers
+generation_rules:
+  provider_formatting:
+    claude: XML tags (identity, rules, output_format, constraints)
+    gpt: Markdown headers
+    gemini: Markdown headers
+  mandatory_sections:
+    - identity (2-3 frases, nome + dominio + missao)
+    - rules (5-8 regras imperativas derivadas das capabilities)
+    - output_format (template com placeholders, parseavel)
+    - constraints (max_tokens, scope fence, limites)
+  token_budget:
+    max: 2048
+    identity: 100
+    rules: 800
+    output_format: 600
+    constraints: 200
+    buffer: 348
+  derivation_logic:
+    capability_0: regras de EXECUCAO
+    capability_1: regras de QUALIDADE
+    capability_2: regras de INTEGRACAO
+quality_criteria:
+  golden_9plus:
+    - identity clara com nome e dominio
+    - 5+ regras com verbo imperativo
+    - output_format com placeholders concretos
+    - constraints com max_tokens e scope fence
+    - zero regras contraditorias
+    - total < 2048 tokens
+  acceptable_7to9:
+    - identity e rules presentes mas genericas
+    - output_format descritivo
+    - constraints vagas
+  reject_below_7:
+    - falta secao obrigatoria
+    - regras contraditorias
+    - output_format em prosa livre
+    - excede 2048 tokens
+iteration_method:
+  steps:
+    - generate system_prompt candidato
+    - self-score contra quality criteria checklist
+    - if score < 9.0 regenerar secao mais fraca
+    - max 3 iterations, entregar melhor versao com score real
+  human_review: score final validado por humano
+research_base:
+  - source: KC_SHAKA_097
+    finding: 3 user fields + AI generates rest
+  - source: Anthropic docs
+    finding: XML tags improve section parsing for Claude
+  - source: best_practice
+    finding: Iteration with self-score converges em ~2 rounds
