@@ -18,6 +18,15 @@ tldr: [estado_atual_da_sessao_em_uma_frase]
 
 # Session State: [session_slug]
 
+## Session IDs
+<!-- INSTRUCAO: dual-ID obrigatorio. content_session_id SEMPRE preenchido. memory_session_id pode ser NULL. -->
+```yaml
+content_session_id: {{STABLE_UUID}}  # Used for ALL DB operations
+memory_session_id: {{SDK_SESSION_ID_OR_NULL}}  # Lazy-captured, for SDK resume only
+compression_status: {{pending|done}}  # Set to "done" after Stop compression
+```
+<!-- INVARIANT: if memory_session_id is NULL, session CANNOT be resumed via SDK. Create new session. -->
+
 ## Snapshot
 <!-- INSTRUCAO: resumir estado atual em 2-3 linhas. -->
 - Goal: [objetivo_ativo]
