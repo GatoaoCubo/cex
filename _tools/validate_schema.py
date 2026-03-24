@@ -1,6 +1,9 @@
 import sys
-if hasattr(sys.stdout, "reconfigure"): sys.stdout.reconfigure(encoding="utf-8")
-if hasattr(sys.stderr, "reconfigure"): sys.stderr.reconfigure(encoding="utf-8")
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8")
 #!/usr/bin/env python3
 """CEX Schema Validator — validates each P*/_schema.yaml for structural integrity."""
 
@@ -69,7 +72,9 @@ def validate_schema(lp_dir: Path) -> tuple[int, int]:
         if "naming" in type_def:
             naming = type_def["naming"]
             lp_lower = data.get("lp", "").lower()
-            if not naming.startswith(lp_lower):
+            # iso_package and similar portable types use external paths (e.g. agents/)
+            is_external_naming = type_name in ("iso_package",) or naming.startswith("agents/")
+            if not naming.startswith(lp_lower) and not is_external_naming:
                 print(
                     f"  FAIL: {lp_name}.{type_name} naming '{naming}'"
                     f" doesn't start with '{lp_lower}'"

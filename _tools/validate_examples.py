@@ -1,6 +1,9 @@
 import sys
-if hasattr(sys.stdout, "reconfigure"): sys.stdout.reconfigure(encoding="utf-8")
-if hasattr(sys.stderr, "reconfigure"): sys.stderr.reconfigure(encoding="utf-8")
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8")
 #!/usr/bin/env python3
 """CEX Example Validator — validates examples against schema naming, size, density."""
 
@@ -24,9 +27,12 @@ def load_schema(lp_dir: Path) -> dict | None:
 
 
 def match_type_for_example(
-    filename: str, schema_types: dict, lp_code: str
+    filename: str,
+    schema_types: dict,
+    lp_code: str,
+    file_path: Path | None = None,
 ) -> tuple[str | None, dict | None]:
-    """Match an example filename to its schema type via naming pattern."""
+    """Match an example filename to its schema type via naming pattern or frontmatter."""
     lp_lower = lp_code.lower()
     for type_name, type_def in schema_types.items():
         naming = type_def.get("naming", "")
@@ -41,6 +47,21 @@ def match_type_for_example(
             simple = re.match(r"(" + re.escape(lp_lower) + r"_[a-z]+_)", naming)
             if simple and filename.startswith(simple.group(1)):
                 return type_name, type_def
+
+    # Fallback: read YAML frontmatter 'type' field from ex_* files
+    if file_path and file_path.name.startswith("ex_"):
+        try:
+            text = file_path.read_text(encoding="utf-8")
+            fm_match = re.match(r"^---\s*\n(.+?)\n---", text, re.DOTALL)
+            if fm_match:
+                fm = yaml.safe_load(fm_match.group(1))
+                if isinstance(fm, dict) and "type" in fm:
+                    fm_type = fm["type"]
+                    if fm_type in schema_types:
+                        return fm_type, schema_types[fm_type]
+        except Exception:
+            pass
+
     return None, None
 
 
@@ -90,7 +111,7 @@ def validate_example(file_path: Path, schema_types: dict, lp_code: str) -> dict:
     result["size_bytes"] = len(content.encode("utf-8"))
 
     # 1. Naming match
-    type_name, type_def = match_type_for_example(file_path.stem, schema_types, lp_code)
+    type_name, type_def = match_type_for_example(file_path.stem, schema_types, lp_code, file_path)
     if type_name:
         result["type_match"] = type_name
         result["passes"] += 1
