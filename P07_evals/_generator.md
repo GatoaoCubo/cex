@@ -42,5 +42,25 @@
 - Standard (70-78%): Input/output documentados sem automacao
 - Low (<65%): REJEITAR — eval sem criterio mensuravel nao eh eval
 
+## Dual Output
+
+Cada artefato Evals tem duas versoes:
+
+| Versao | Formato | Leitor | Onde |
+|--------|---------|--------|------|
+| Humana | .md com frontmatter | Desenvolvedores, revisores | `examples/` e `templates/` |
+| Machine | .yaml otimizado | LLMs, pipelines, validators | `compiled/` |
+
+### Como compilar
+```bash
+python _tools/cex_compile.py P07_evals/examples/p07_eval_exemplo.md
+# -> gera P07_evals/compiled/p07_eval_exemplo.yaml
+```
+
+### O que muda no compilado
+- Remove: headers decorativos, bold/italic, links, navegacao
+- Mantem: identidade, regras, dados estruturados, exemplos
+- Formato: YAML (definido em _schema.yaml → machine_format)
+
 ---
 *Generator v1.0 | Layer: SCALE | 2026-03-22*

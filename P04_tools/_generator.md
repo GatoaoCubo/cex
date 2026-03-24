@@ -73,5 +73,25 @@ QUANDO USAR: Documentar processo background (lifecycle, health check, signals).
 Naming: `p04_daemon_{{name}}.md + .yaml`
 Schema: P04/_schema.yaml > types > daemon
 
+## Dual Output
+
+Cada artefato Tools tem duas versoes:
+
+| Versao | Formato | Leitor | Onde |
+|--------|---------|--------|------|
+| Humana | .md com frontmatter | Desenvolvedores, revisores | `examples/` e `templates/` |
+| Machine | .yaml ou .json (depende do tipo) | LLMs, pipelines, validators | `compiled/` |
+
+### Como compilar
+```bash
+python _tools/cex_compile.py P04_tools/examples/p04_skill_exemplo.md
+# -> gera P04_tools/compiled/p04_skill_exemplo.yaml
+```
+
+### O que muda no compilado
+- Remove: headers decorativos, bold/italic, links, navegacao
+- Mantem: identidade, regras, dados estruturados, exemplos
+- Formato: YAML (skills) / JSON (mcp_server, client, connector) (definido em _schema.yaml → machine_format)
+
 ---
 *Generator v1.0 | Evidence: 58 golden skills, 124 total | 2026-03-22*

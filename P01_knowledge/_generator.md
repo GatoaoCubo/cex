@@ -76,5 +76,25 @@ QUANDO USAR: Criar par input/output para injecao em prompt (few-shot learning).
 Naming: `p01_fse_{{topic}}.md + .yaml`
 Schema: P01/_schema.yaml > types > few_shot_example
 
+## Dual Output
+
+Cada artefato Knowledge Card tem duas versoes:
+
+| Versao | Formato | Leitor | Onde |
+|--------|---------|--------|------|
+| Humana | .md com frontmatter | Desenvolvedores, revisores | `examples/` e `templates/` |
+| Machine | .yaml otimizado | LLMs, pipelines, validators | `compiled/` |
+
+### Como compilar
+```bash
+python _tools/cex_compile.py P01_knowledge/examples/p01_kc_exemplo.md
+# -> gera P01_knowledge/compiled/p01_kc_exemplo.yaml
+```
+
+### O que muda no compilado
+- Remove: headers decorativos, bold/italic, links, navegacao
+- Mantem: identidade, regras, dados estruturados, exemplos
+- Formato: YAML (definido em _schema.yaml → machine_format)
+
 ---
 *Generator v1.0 | Evidence: 7 golden KCs + 783 golden pool | 2026-03-22*

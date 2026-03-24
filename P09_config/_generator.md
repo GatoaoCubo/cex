@@ -55,5 +55,25 @@ Cada config: um dev pode configurar sem perguntar a ninguem?
 - Runtime rule sem unidade (timeout 120... segundos? ms?)
 - Configs duplicadas em multiplos arquivos
 
+## Dual Output
+
+Cada artefato Config tem duas versoes:
+
+| Versao | Formato | Leitor | Onde |
+|--------|---------|--------|------|
+| Humana | .md com frontmatter | Desenvolvedores, revisores | `examples/` e `templates/` |
+| Machine | .yaml ou .json (depende do tipo) | LLMs, pipelines, validators | `compiled/` |
+
+### Como compilar
+```bash
+python _tools/cex_compile.py P09_config/examples/p09_config_exemplo.md
+# -> gera P09_config/compiled/p09_config_exemplo.yaml
+```
+
+### O que muda no compilado
+- Remove: headers decorativos, bold/italic, links, navegacao
+- Mantem: identidade, regras, dados estruturados, exemplos
+- Formato: YAML (default) / JSON (feature_flag) (definido em _schema.yaml → machine_format)
+
 ---
 *Generator v1.0 | Evidence: P01-P08 generators + 5 config types | 2026-03-22*

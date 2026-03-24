@@ -74,5 +74,25 @@ QUANDO USAR: Configurar sequencia de fallback entre modelos (A > B > C).
 Naming: `p02_fb_{{chain}}.yaml`
 Schema: P02/_schema.yaml > types > fallback_chain
 
+## Dual Output
+
+Cada artefato Model tem duas versoes:
+
+| Versao | Formato | Leitor | Onde |
+|--------|---------|--------|------|
+| Humana | .md com frontmatter | Desenvolvedores, revisores | `examples/` e `templates/` |
+| Machine | .yaml otimizado | LLMs, pipelines, validators | `compiled/` |
+
+### Como compilar
+```bash
+python _tools/cex_compile.py P02_model/examples/p02_agent_exemplo.md
+# -> gera P02_model/compiled/p02_agent_exemplo.yaml
+```
+
+### O que muda no compilado
+- Remove: headers decorativos, bold/italic, links, navegacao
+- Mantem: identidade, regras, dados estruturados, exemplos
+- Formato: YAML (definido em _schema.yaml → machine_format)
+
 ---
 *Generator v1.0 | Evidence: 31 golden agents, 2216 agent docs | 2026-03-22*

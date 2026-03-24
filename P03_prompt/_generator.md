@@ -113,5 +113,25 @@ Secao final mapeando equivalentes:
 | meta_prompt | — | — | — | dspy.MIPROv2 |
 | router_prompt | RouterChain | — | — | — |
 
+## Dual Output
+
+Cada artefato Prompt tem duas versoes:
+
+| Versao | Formato | Leitor | Onde |
+|--------|---------|--------|------|
+| Humana | .md com frontmatter | Desenvolvedores, revisores | `examples/` e `templates/` |
+| Machine | .yaml otimizado | LLMs, pipelines, validators | `compiled/` |
+
+### Como compilar
+```bash
+python _tools/cex_compile.py P03_prompt/examples/p03_prompt_exemplo.md
+# -> gera P03_prompt/compiled/p03_prompt_exemplo.yaml
+```
+
+### O que muda no compilado
+- Remove: headers decorativos, bold/italic, links, navegacao
+- Mantem: identidade, regras, dados estruturados, exemplos
+- Formato: YAML (definido em _schema.yaml → machine_format)
+
 ---
 *Generator v2.0 | 9 tipos | 713 artefatos evidence | 2026-03-23*

@@ -64,5 +64,25 @@ Cada orquestracao: um agente consegue executar sem ambiguidade?
 - Handoff sem scope_fence (satelite toca o que nao deve)
 - Dispatch sem fallback (task perdida se sat indisponivel)
 
+## Dual Output
+
+Cada artefato Orchestration tem duas versoes:
+
+| Versao | Formato | Leitor | Onde |
+|--------|---------|--------|------|
+| Humana | .md com frontmatter | Desenvolvedores, revisores | `examples/` e `templates/` |
+| Machine | .yaml ou .json (depende do tipo) | LLMs, pipelines, validators | `compiled/` |
+
+### Como compilar
+```bash
+python _tools/cex_compile.py P12_orchestration/examples/p12_orch_exemplo.md
+# -> gera P12_orchestration/compiled/p12_orch_exemplo.yaml
+```
+
+### O que muda no compilado
+- Remove: headers decorativos, bold/italic, links, navegacao
+- Mantem: identidade, regras, dados estruturados, exemplos
+- Formato: YAML (default) / JSON (signal) (definido em _schema.yaml → machine_format)
+
 ---
 *Generator v1.0 | Evidence: STELLA dispatch + spawn_grid + 7 satellites | 2026-03-22*

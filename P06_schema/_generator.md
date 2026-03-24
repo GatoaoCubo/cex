@@ -40,5 +40,25 @@
 - Standard (70-78%): Lista de campos com tipos basicos
 - Low (<65%): REJEITAR — schema sem validacao nao eh schema
 
+## Dual Output
+
+Cada artefato Schema tem duas versoes:
+
+| Versao | Formato | Leitor | Onde |
+|--------|---------|--------|------|
+| Humana | .md com frontmatter | Desenvolvedores, revisores | `examples/` e `templates/` |
+| Machine | .yaml ou .json (depende do tipo) | LLMs, pipelines, validators | `compiled/` |
+
+### Como compilar
+```bash
+python _tools/cex_compile.py P06_schema/examples/p06_schema_exemplo.md
+# -> gera P06_schema/compiled/p06_schema_exemplo.yaml
+```
+
+### O que muda no compilado
+- Remove: headers decorativos, bold/italic, links, navegacao
+- Mantem: identidade, regras, dados estruturados, exemplos
+- Formato: YAML (type_def) / JSON (input_schema, interface, output_schema) (definido em _schema.yaml → machine_format)
+
 ---
 *Generator v1.0 | Evidence: 5 schema types, contract-driven design | 2026-03-22*

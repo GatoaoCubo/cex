@@ -39,5 +39,25 @@
 - Standard (70-78%): Formato descrito em prosa estruturada
 - Low (<65%): REJEITAR — output sem estrutura clara
 
+## Dual Output
+
+Cada artefato Output tem duas versoes:
+
+| Versao | Formato | Leitor | Onde |
+|--------|---------|--------|------|
+| Humana | .md com frontmatter | Desenvolvedores, revisores | `examples/` e `templates/` |
+| Machine | .yaml otimizado | LLMs, pipelines, validators | `compiled/` |
+
+### Como compilar
+```bash
+python _tools/cex_compile.py P05_output/examples/p05_output_exemplo.md
+# -> gera P05_output/compiled/p05_output_exemplo.yaml
+```
+
+### O que muda no compilado
+- Remove: headers decorativos, bold/italic, links, navegacao
+- Mantem: identidade, regras, dados estruturados, exemplos
+- Formato: YAML (definido em _schema.yaml → machine_format)
+
 ---
 *Generator v1.0 | Evidence: 4 output types, P01-P04 patterns | 2026-03-22*

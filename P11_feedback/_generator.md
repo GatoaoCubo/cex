@@ -56,5 +56,25 @@ Cada feedback: o sistema sabe o que fazer automaticamente?
 - Guardrail sem severidade (tudo parece igual)
 - Optimizer sem current_value (nao se mede progresso)
 
+## Dual Output
+
+Cada artefato Feedback tem duas versoes:
+
+| Versao | Formato | Leitor | Onde |
+|--------|---------|--------|------|
+| Humana | .md com frontmatter | Desenvolvedores, revisores | `examples/` e `templates/` |
+| Machine | .yaml otimizado | LLMs, pipelines, validators | `compiled/` |
+
+### Como compilar
+```bash
+python _tools/cex_compile.py P11_feedback/examples/p11_feedback_exemplo.md
+# -> gera P11_feedback/compiled/p11_feedback_exemplo.yaml
+```
+
+### O que muda no compilado
+- Remove: headers decorativos, bold/italic, links, navegacao
+- Mantem: identidade, regras, dados estruturados, exemplos
+- Formato: YAML (definido em _schema.yaml → machine_format)
+
 ---
 *Generator v1.0 | Evidence: Shokunin gates + bugloop skill + 11 active laws | 2026-03-22*

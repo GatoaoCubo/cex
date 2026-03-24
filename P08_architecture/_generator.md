@@ -41,5 +41,25 @@
 - Standard (70-78%): Documentacao textual com estrutura clara
 - Low (<65%): REJEITAR — arquitetura sem dados concretos eh opiniao
 
+## Dual Output
+
+Cada artefato Architecture tem duas versoes:
+
+| Versao | Formato | Leitor | Onde |
+|--------|---------|--------|------|
+| Humana | .md com frontmatter | Desenvolvedores, revisores | `examples/` e `templates/` |
+| Machine | .yaml otimizado | LLMs, pipelines, validators | `compiled/` |
+
+### Como compilar
+```bash
+python _tools/cex_compile.py P08_architecture/examples/p08_arch_exemplo.md
+# -> gera P08_architecture/compiled/p08_arch_exemplo.yaml
+```
+
+### O que muda no compilado
+- Remove: headers decorativos, bold/italic, links, navegacao
+- Mantem: identidade, regras, dados estruturados, exemplos
+- Formato: YAML (definido em _schema.yaml → machine_format)
+
 ---
 *Generator v1.0 | Layer: SCALE | 2026-03-22*

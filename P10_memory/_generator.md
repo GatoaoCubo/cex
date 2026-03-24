@@ -56,5 +56,25 @@ Cada memoria: alguem vai consultar isso no futuro?
 - Session state persistido alem da sessao (memory leak)
 - Brain index sem rebuild_trigger (indice fica stale)
 
+## Dual Output
+
+Cada artefato Memory tem duas versoes:
+
+| Versao | Formato | Leitor | Onde |
+|--------|---------|--------|------|
+| Humana | .md com frontmatter | Desenvolvedores, revisores | `examples/` e `templates/` |
+| Machine | .yaml otimizado | LLMs, pipelines, validators | `compiled/` |
+
+### Como compilar
+```bash
+python _tools/cex_compile.py P10_memory/examples/p10_memory_exemplo.md
+# -> gera P10_memory/compiled/p10_memory_exemplo.yaml
+```
+
+### O que muda no compilado
+- Remove: headers decorativos, bold/italic, links, navegacao
+- Mantem: identidade, regras, dados estruturados, exemplos
+- Formato: YAML (definido em _schema.yaml → machine_format)
+
 ---
 *Generator v1.0 | Evidence: 7 mental_models + 50 learning_records + brain indexes | 2026-03-22*
