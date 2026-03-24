@@ -22,4 +22,3 @@ tags: [fallback, cascade, cost-optimization]
 
 # Model Fallback Chain
 Complex=opus(30s, 100%) > Medium=sonnet(15s, 25%) > Simple=haiku(5s, 5%).
-Trigger: timeout or error. Never skip tiers. Source: confidence_router.py.

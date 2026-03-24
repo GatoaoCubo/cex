@@ -22,18 +22,18 @@ tags: [router, complexity, local-cloud, scoring]
 
 # Complexity Router
 
-## Scoring (5 factors, 0.0-1.0 each)
+## Scoring (6 factors, 0.0-1.0 each)
 | Factor | Weight | Local-Friendly | Cloud-Required |
 |--------|--------|----------------|----------------|
-| token_count | 0.25 | <1K tokens | >10K tokens |
-| reasoning_depth | 0.30 | Lookup/format | Multi-step logic |
+| token_estimate | 0.20 | <100 tokens | >1K tokens |
+| reasoning_depth | 0.25 | Lookup/format | Multi-step logic |
 | tool_usage | 0.15 | None | 3+ tools |
 | domain_expertise | 0.20 | General | Specialized |
 | output_length | 0.10 | Short | Long-form |
+| multi_step | 0.10 | Single action | Pipeline/workflow |
 
 ## Routes
 - **<0.45 LOCAL**: Simple tasks, Ollama/local LLM
 - **0.45-0.70 HYBRID**: Start local, escalate if needed
 - **>0.70 CLOUD**: Direct to Claude API
 
-Source: `records/core/python/complexity_router.py`

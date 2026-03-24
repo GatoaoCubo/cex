@@ -34,5 +34,5 @@ Each domain concept in ATLAS has an `ira_lens` field — an emotional perspectiv
 
 ## Integration
 - Source: `records/satellites/atlas/mental_model.yaml`
-- Each satellite has its own lens (EDISON=soberba, LILY=inveja, SHAKA=inveja)
+- Each satellite has its own pecado lens (EDISON=soberba, LILY=luxuria, SHAKA=inveja, YORK=avareza, PYTHA=gula)
 - Lenses are identity-level — they don't change per task
