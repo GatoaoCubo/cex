@@ -41,6 +41,8 @@ density_score: {{0.80_TO_1.00}}
 - [ ] {{CHECK_1}}: {{DESCRIPTION}}
 - [ ] {{CHECK_2}}: {{DESCRIPTION}}
 - [ ] {{CHECK_3}}: {{DESCRIPTION}}
+- [ ] Verifier tool set: Read-only (no Write/Edit — independence required)
+- [ ] Stubs check: stubs_count == 0 (existing-but-empty components are bugs, not progress)
 
 ## Scoring
 
@@ -49,6 +51,7 @@ density_score: {{0.80_TO_1.00}}
 | {{DIM_1}} | {{PCT}}% | {{CRITERIA}} |
 | {{DIM_2}} | {{PCT}}% | {{CRITERIA}} |
 | {{DIM_3}} | {{PCT}}% | {{CRITERIA}} |
+| Claims vs Reality | 20% | Compare stated deliverables (SUMMARY.md/commit msg) against grep results in actual code |
 
 ## Bypass
 

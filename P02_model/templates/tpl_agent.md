@@ -13,6 +13,7 @@ created: [yyyy-mm-dd]
 updated: [yyyy-mm-dd]
 author: [satellite_name]
 satellite: [satellite_que_opera]
+role: [planner|plan_checker|verifier|executor|researcher|orchestrator]
 domain: [domain]
 quality: [7.0_to_10.0]
 tags: [[tag1], [tag2], [tag3]]
@@ -65,11 +66,24 @@ output:
 - Downstream: [quem_recebe]
 - Dependencies: [tool_ou_mcp_1], [tool_ou_mcp_2]
 
+## Tool Constraints
+<!-- INSTRUCAO: definir ferramentas permitidas/proibidas por role. -->
+| Role | Allowed | Forbidden |
+|------|---------|-----------|
+| planner | Read, Grep, Glob, WebSearch | Write, Edit, Bash |
+| plan_checker | Read, Grep, Glob | Write, Edit, Bash, WebSearch |
+| verifier | Read, Grep, Glob, Bash (read-only) | Write, Edit |
+| executor | Read, Write, Edit, Bash, Glob, Grep | WebSearch |
+| researcher | Read, Grep, Glob, WebSearch, WebFetch | Write, Edit |
+| orchestrator | Read, Grep, Glob, Task, Agent | Write, Edit, Bash |
+
 ## Quality Gates
 <!-- INSTRUCAO: 3-5 gates mensuraveis. -->
 - [gate_1]: [threshold]
 - [gate_2]: [threshold]
 - [gate_3]: [threshold]
+- Tool compliance: tool set used matches declared role constraints
+- No faz-tudo: agent declares max 2 roles (single-purpose preferred)
 
 ## Common Issues
 <!-- INSTRUCAO: falhas reais, nao abstratas. -->

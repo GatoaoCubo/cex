@@ -84,6 +84,13 @@ VALIDATION:
 - Input: `{{VAR1_NAME}}={{EXAMPLE_VALUE_2}}`
 - Output: `{{EXPECTED_OUTPUT_2}}`
 
+## Verification
+<!-- INSTRUCAO: output DEVE incluir evidencia de verificacao. -->
+- [ ] Output exists at expected path (verified via Read/Glob)
+- [ ] Output matches expected format (schema/structure validated)
+- [ ] No placeholder/TODO markers remain in output
+- [ ] Acceptance criteria from Purpose section satisfied
+
 ## Semantic Bridge
 <!-- Obrigatorio se quality >= 8.0 -->
 - Also known as: {{ALIAS_1}}, {{ALIAS_2}}

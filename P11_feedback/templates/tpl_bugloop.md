@@ -44,6 +44,10 @@ density_score: {{0.80_TO_1.00}}
 ### Phase 2: Analyze
 - Root cause method: {{APPROACH_TO_FIND_CAUSE}}
 - Context needed: {{FILES_LOGS_METRICS}}
+- Anti-patterns (BLOCKED):
+  - "probably X" — no hypothesis without evidence from logs/code
+  - "quick fix for now" — deferred rot; fix root cause or escalate
+  - "just try X" — thrashing without hypothesis; observe first, then hypothesize
 
 ### Phase 3: Fix
 - Strategy: {{PRIMARY_FIX_APPROACH}}
@@ -63,11 +67,13 @@ density_score: {{0.80_TO_1.00}}
 
 | Limit | Value | On Exceed |
 |-------|-------|-----------|
-| Max retries | {{MAX_RETRIES}} | {{ESCALATION_ACTION}} |
+| Max retries | 3 (default) | ESCALATE to architecture review — do NOT attempt fix 4 |
 | Max duration | {{MINUTES}} min | {{TIMEOUT_ACTION}} |
 | Max files touched | {{N}} | {{SCOPE_GUARD}} |
 
+**Iron Law**: >= 3 fix attempts on the same bug = architectural problem, not a fixable bug. Stop fixing, start redesigning.
+
 ## Escalation
 
-- After {{MAX_RETRIES}} failures: {{WHAT_HAPPENS}}
+- After 3 failures: STOP fixing. Write root cause analysis. Escalate to architecture review.
 - Owner: {{WHO_GETS_NOTIFIED}}
