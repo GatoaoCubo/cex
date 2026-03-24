@@ -1,0 +1,32 @@
+{
+  "id": "p04_conn_whatsapp_bridge",
+  "name": "whatsapp_bridge",
+  "description": "Bidirectional WhatsApp connector via whatsapp-web.js — REST send + webhook receive on port 3847",
+  "protocol": "REST+WebSocket",
+  "direction": "bidirectional",
+  "auth": "session",
+  "port": 3847,
+  "lp": "P04",
+  "type": "connector",
+  "version": "3.0.0",
+  "created": "2026-03-24",
+  "updated": "2026-03-24",
+  "author": "edison",
+  "domain": "messaging",
+  "quality": 9.0,
+  "tags": [
+    "connector",
+    "whatsapp",
+    "bridge",
+    "rest",
+    "webhook",
+    "messaging"
+  ],
+  "purpose": "Node.js connector providing bidirectional WhatsApp messaging via whatsapp-web.js with LocalAuth. Exposes REST API for sending and webhook push for receiving. Handles text, audio, images, video, documents, vcard, and stickers.",
+  "architecture": [
+    "Runtime: Node.js with `whatsapp-web.js` + `LocalAuth`",
+    "Auth: QR code pairing (first run), session persistence after",
+    "Port: 3847 (configurable)",
+    "Send: REST API with rate limiting (20 msgs/min sliding window)"
+  ]
+}

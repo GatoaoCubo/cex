@@ -1,0 +1,4 @@
+id: p01_emb_nomic_embed_text
+model_name: nomic-embed-text
+dimensions: 768
+chunk_size: 2048

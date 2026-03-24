@@ -61,4 +61,3 @@ query -> [BM25 keyword search] -> ranked results (fast, ~5ms)
 | No pre-built index | unavailable | error with build instructions |
 
 ## Extension
-New search backends can be added by implementing the query interface: `execute(question, scope, k, codexa_root, use_hybrid)` returning `{chunks, search_strategy, query_time_ms, total_matches}`.

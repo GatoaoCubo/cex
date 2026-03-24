@@ -49,7 +49,7 @@ def match_type_for_example(
                 return type_name, type_def
 
     # Fallback: read YAML frontmatter 'type' field from ex_* files
-    if file_path and file_path.name.startswith("ex_"):
+    if file_path:  # Check frontmatter type for any file
         try:
             text = file_path.read_text(encoding="utf-8")
             fm_match = re.match(r"^---\s*\n(.+?)\n---", text, re.DOTALL)

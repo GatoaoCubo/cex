@@ -31,22 +31,3 @@ python daemon.py status     # Check running status
 python daemon.py run-once   # Single execution (testing)
 ```
 
-## Configuration
-| Setting | Default | Env Var |
-|---------|---------|---------|
-| API URL | http://localhost:8000 | CODEXA_API_URL |
-| API Key | (empty) | CODEXA_API_KEY |
-| Model | claude-sonnet-4-20250514 | ANTHROPIC_API_KEY |
-| Check interval | 60s | - |
-| Max retries | 3 | - |
-
-## Lifecycle
-- **PID file**: `daemon.pid` — prevents duplicate instances
-- **State file**: `daemon_state.json` — persists agent states across restarts
-- **Log file**: `daemon.log` — structured logging with configurable level
-- **Restart policy**: on_failure (auto-restart on crash, not on clean exit)
-
-## Agent States
-`IDLE` -> `RUNNING` -> `COMPLETED` or `FAILED`
-
-Pipeline checks run every 60s. Failed agents retry up to 3x before escalation. Webhook notifications enabled for pipeline events.

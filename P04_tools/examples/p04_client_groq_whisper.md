@@ -34,19 +34,3 @@ Content-Type: multipart/form-data
 ## Request
 ```python
 requests.post(
-    "https://api.groq.com/openai/v1/audio/transcriptions",
-    headers={"Authorization": "Bearer " + GROQ_KEY},
-    files={"file": (filename, file_bytes, "audio/ogg")},
-    data={"model": "whisper-large-v3", "language": "pt"},
-    timeout=30,
-)
-```
-
-## Configuration
-- **Auth**: `GROQ_API_KEY` env var (fallback: reads from `.env` file)
-- **Model**: `whisper-large-v3` (Portuguese language default)
-- **Timeout**: 30 seconds
-- **Formats**: OGG (WhatsApp native), MP3
-
-## Integration
-Used by `records/framework/whatsapp/wa_monitor.py` — polls WhatsApp bridge every 5s, detects audio messages, transcribes via Groq, logs transcript and writes signal file for CODEXA wake-on-message pattern.

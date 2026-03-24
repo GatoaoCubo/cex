@@ -31,24 +31,3 @@ Validates each LP schema for structural integrity.
 - Cross-references between types
 
 ```bash
-python _tools/validate_schema.py          # validate all schemas
-```
-
-## cex_compile.py
-Converts markdown examples (with YAML frontmatter) to compiled artifacts.
-
-**Features:**
-- Parses YAML frontmatter from .md files
-- Handles date/datetime serialization
-- Outputs compiled YAML or JSON
-- Scans all LP directories (P01-P12)
-
-```bash
-python _tools/cex_compile.py              # compile all examples
-python _tools/cex_compile.py --lp P04     # compile single LP
-```
-
-## Output
-- Pass/fail counts per schema
-- Total checks across all LPs
-- Compiled artifacts in machine-readable format

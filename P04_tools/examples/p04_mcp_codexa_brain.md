@@ -55,24 +55,3 @@ Unified navigation combining semantic search + file structure. Returns knowledge
 ```json
 {
   "codexa-brain": {
-    "type": "stdio",
-    "command": "python",
-    "args": ["-m", "codexa_brain.server"],
-    "cwd": "records/core/brain/mcp-codexa-brain/src",
-    "env": {
-      "PYTHONPATH": "records/core/brain/mcp-codexa-brain/src",
-      "CODEXA_ROOT": "."
-    }
-  }
-}
-```
-
-## Metrics
-| Metric | Value |
-|--------|-------|
-| Tools exposed | 5 (prime, query, list, status, smart_context) |
-| Query latency (keyword) | ~50ms |
-| Query latency (hybrid) | ~200ms |
-| Model warmup | ~23s (background, non-blocking) |
-| Cache capacity | 100 entries LRU |
-| Index rebuild | ~20 min (build_indexes_ollama.py) |

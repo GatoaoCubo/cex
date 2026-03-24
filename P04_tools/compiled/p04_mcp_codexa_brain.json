@@ -1,0 +1,48 @@
+{
+  "id": "p04_mcp_codexa_brain",
+  "name": "codexa-brain",
+  "description": "MCP server providing RAG-style retrieval for the CODEXA knowledge base — hybrid search BM25+FAISS with Ollama embeddings",
+  "transport": "stdio",
+  "tools_provided": [
+    "brain_prime",
+    "brain_query",
+    "brain_list",
+    "brain_status",
+    "smart_context"
+  ],
+  "resources_provided": [
+    "pool_index"
+  ],
+  "lp": "P04",
+  "type": "mcp_server",
+  "version": "1.0.0",
+  "created": "2026-03-24",
+  "updated": "2026-03-24",
+  "author": "edison",
+  "domain": "knowledge-retrieval",
+  "quality": 9.0,
+  "tags": [
+    "mcp",
+    "brain",
+    "search",
+    "rag",
+    "bm25",
+    "faiss",
+    "ollama"
+  ],
+  "purpose": "codexa-brain is the central MCP server for CODEXA knowledge retrieval. Reduces context consumption from ~50k tokens to ~400 tokens per prime operation via executive summaries and semantic search.",
+  "architecture": [
+    "Transport: stdio (launched via `python -m codexa_brain.server`)",
+    "Search Strategy: Hybrid — BM25 keyword index + FAISS vector search with `nomic-embed-text` via Ollama",
+    "Fallback: Auto-degrades to keyword-only (~50% accuracy) when Ollama/model unavailable",
+    "Warmup: Background thread pre-loads SentenceTransformer model on boot (~23s saved on first query)",
+    "Cache: LRU query cache (100 entries) with hit rate tracking"
+  ],
+  "tools": "",
+  "brain_prime_entity_depth": "Executive summary of any CODEXA entity. Depths: minimal (~150 tokens), standard (~400), deep (~800).",
+  "brain_query_question_scope_k": "Semantic search across knowledge base. Returns ranked chunks with scores and sources. Pre-built BM25 index required (~50ms fast path).",
+  "brain_list_scope_format": "Lists entities by category (agents, workflows, prompts, all). Format: names or summary.",
+  "brain_status_verbose": "Health check — server status, model loading state, query count, uptime, cache hit rate.",
+  "smart_context_query_agent_include_files_include_knowledge": "Unified navigation combining semantic search + file structure. Returns knowledge matches, domains, and suggested commands.",
+  "configuration": ""
+}

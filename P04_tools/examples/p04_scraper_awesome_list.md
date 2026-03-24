@@ -29,19 +29,3 @@ Scraper agent that mines GitHub awesome-lists for tools, libraries, and resource
 
 ## Trigger Phrases
 - "Find awesome-lists for..."
-- "Crawl GitHub awesome resources about..."
-- "Discover tools/libraries in X domain"
-- "Map curated resources to CODEXA domains"
-
-## Capabilities
-- Discovers awesome-lists by topic via GitHub search
-- Extracts individual entries with descriptions and URLs
-- Classifies entries into quality tiers (starred, recommended, listed)
-- Maps categories to CODEXA satellite domains
-- Respects max_lists and min_stars filters
-
-## Output
-Categorized entries with:
-- Resource name, URL, description
-- Quality tier classification
-- CODEXA domain mapping (SHAKA, EDISON, PYTHA, etc.)

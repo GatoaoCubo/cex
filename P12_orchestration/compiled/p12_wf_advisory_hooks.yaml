@@ -15,67 +15,47 @@ tags:
 - context-injection
 tldr: '5 advisory hook types that inject context without blocking: statusline, context-monitor, workflow-guard, prompt-guard,
   check-update. All exit 0 always.'
-density_score: 0.92
-timeout: 10 min
-source: codexa-core/.claude/hooks/ (advisory hook implementations)
+density_score: 0.93
 overview: '| Property | Value |
 
   |----------|-------|
 
-  | Trigger | Hook events (PreToolUse, PostToolUse, UserPromptSubmit, Stop, Notification) |
+  | Trigger | Hook events (PreToolUse, PostToolUse, UserPromptSubmit, Stop) |
 
-  | Input | stdin JSON from Claude Code hook system |
+  | Input | stdin JSON from hook system |
 
   | Output | additionalContext string injected into conversation |
 
   | Timeout | Per-hook (3-10s); universal timeout-guard wraps all |'
-universal_pattern: "timeout-guard (Ns)\n  → read stdin JSON (hook_name, tool_name, session_id)\n  → compute advisory (satellite\
-  \ state, context %, scope check)\n  → write additionalContext to stdout JSON\n  → exit 0 (ALWAYS — advisory hooks NEVER\
-  \ block)"
-steps: "[Event fires] --> [timeout-guard wraps] --> [compute advisory] --> [inject context]\n                         |  \
-  \                                             |\n                    Kill if >Ns                                   additionalContext"
-hook_1_statusline:
-- 'Event: PostToolUse'
-- 'Purpose: Update terminal status bar with satellite state, progress, token usage'
-- 'Timeout: 3s'
-- 'Output: Status string for display (no additionalContext)'
-- 'Value: LOW (cosmetic) — monitoring convenience'
-- 'Example: `[EDISON] T3/5 | 42% ctx | 3 commits`'
-hook_2_context_monitor:
-- 'Event: PostToolUse (debounced: every 5 tool calls)'
-- 'Purpose: Track context window usage, warn when running low'
-- 'Timeout: 5s'
-- 'Thresholds:'
-- '`>35%` remaining: silent (no output)'
-- '`<=35%` remaining: `[WARN] Context at 32% — consider committing`'
-- '`<=25%` remaining: `[CRITICAL] Context at 18% — commit NOW and signal`'
-- 'Value: HIGH — prevents lost work from context overflow'
-hook_3_workflow_guard:
-- 'Event: PreToolUse'
-- 'Purpose: Validate tool calls against scope fence (SOMENTE/NAO TOQUE paths)'
-- 'Timeout: 3s'
-- 'Output: Warning if tool targets path outside scope fence defined in handoff'
-- 'Value: MEDIUM — prevents accidental out-of-scope modifications'
-- 'Example: `[GUARD] Write targets api/ but scope is P04_tools/ only`'
-hook_4_prompt_guard:
-- 'Event: UserPromptSubmit'
-- 'Purpose: Scan handoff content for injection patterns, validate plan structure'
-- 'Timeout: 5s'
-- 'Output: Warning if suspicious patterns detected in .claude/handoffs/ references'
-- 'Value: MEDIUM — defense against prompt injection in plan files'
-hook_5_check_update:
-- 'Event: Notification (or periodic via cron)'
-- 'Purpose: Check for queued handoffs, config changes, system updates'
-- 'Timeout: 10s'
-- 'Output: Advisory about available work or pending updates'
-- 'Value: LOW — informational only'
+universal_pattern: 'timeout-guard (Ns) → read stdin JSON → compute advisory → inject context → exit 0
+
+
+  Advisory hooks NEVER block execution. Always exit 0.'
+steps: ''
+hook_1_statusline_posttooluse_3s: 'Update terminal status bar: satellite state, progress, token usage. Output: display string,
+  no additionalContext. Value: LOW (cosmetic).'
+hook_2_context_monitor_posttooluse_5s_debounced_every_5_calls: 'Track context window usage, warn when running low.
+
+  - `>35%` remaining: silent
+
+  - `<=35%`: `[WARN] Context at 32% — consider committing`
+
+  - `<=25%`: `[CRITICAL] Context at 18% — commit NOW and signal`
+
+  Value: HIGH — prevents lost work from context overflow.'
+hook_3_workflow_guard_pretooluse_3s: 'Validate tool calls against scope fence (paths in handoff). Output: warning if tool
+  targets path outside scope. Value: MEDIUM.'
+hook_4_prompt_guard_userpromptsubmit_5s: 'Scan handoff content for injection patterns, validate plan structure. Output: warning
+  if suspicious patterns detected. Value: MEDIUM.'
+hook_5_check_update_notification_10s: 'Check for queued handoffs, config changes, system updates. Output: advisory about available
+  work. Value: LOW.'
 error_handling:
-- ALL hooks exit 0 regardless of internal errors (advisory = never block)
-- Errors logged to `.claude/logs/hooks/` with timestamp and hook name
-- If timeout-guard fires, hook process is killed and execution continues silently
-- No hook adds > 200ms to tool call latency (p95 target)
+- ALL hooks exit 0 regardless of internal errors
+- Errors logged to `.claude/logs/hooks/`
+- Timeout-guard kills hung hooks silently
+- No hook adds > 200ms to tool call latency (p95)
 success_criteria:
-- All 5 hooks consistently exit 0 in production
-- Context monitor correctly triggers at <=35% threshold
-- Workflow guard catches 100% of out-of-scope Write/Edit calls
+- All 5 hooks exit 0 consistently in production
+- Context monitor triggers at <=35% threshold
+- Workflow guard catches 100% out-of-scope Write/Edit calls
 - Total hook overhead < 200ms per tool call (p95)
