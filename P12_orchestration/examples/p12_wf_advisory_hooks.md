@@ -10,9 +10,7 @@ author: EDISON
 quality: 9.0
 tags: [hooks, advisory, orchestration, workflow, context-injection]
 tldr: "5 advisory hook types that inject context without blocking: statusline, context-monitor, workflow-guard, prompt-guard, check-update. All exit 0 always."
-density_score: 0.92
-timeout: 10 min
-source: codexa-core/.claude/hooks/ (advisory hook implementations)
+density_score: 0.93
 ---
 
 # Workflow: 5 Advisory Hooks (Context Injection)
@@ -21,77 +19,52 @@ source: codexa-core/.claude/hooks/ (advisory hook implementations)
 
 | Property | Value |
 |----------|-------|
-| Trigger | Hook events (PreToolUse, PostToolUse, UserPromptSubmit, Stop, Notification) |
-| Input | stdin JSON from Claude Code hook system |
+| Trigger | Hook events (PreToolUse, PostToolUse, UserPromptSubmit, Stop) |
+| Input | stdin JSON from hook system |
 | Output | additionalContext string injected into conversation |
 | Timeout | Per-hook (3-10s); universal timeout-guard wraps all |
 
 ## Universal Pattern
 
 ```
-timeout-guard (Ns)
-  → read stdin JSON (hook_name, tool_name, session_id)
-  → compute advisory (satellite state, context %, scope check)
-  → write additionalContext to stdout JSON
-  → exit 0 (ALWAYS — advisory hooks NEVER block)
+timeout-guard (Ns) → read stdin JSON → compute advisory → inject context → exit 0
 ```
+
+Advisory hooks NEVER block execution. Always exit 0.
 
 ## Steps
 
-```
-[Event fires] --> [timeout-guard wraps] --> [compute advisory] --> [inject context]
-                         |                                               |
-                    Kill if >Ns                                   additionalContext
-```
+### Hook 1: Statusline (PostToolUse, 3s)
+Update terminal status bar: satellite state, progress, token usage.
+Output: display string, no additionalContext. Value: LOW (cosmetic).
 
-### Hook 1: Statusline
-- **Event**: PostToolUse
-- **Purpose**: Update terminal status bar with satellite state, progress, token usage
-- **Timeout**: 3s
-- **Output**: Status string for display (no additionalContext)
-- **Value**: LOW (cosmetic) — monitoring convenience
-- **Example**: `[EDISON] T3/5 | 42% ctx | 3 commits`
+### Hook 2: Context Monitor (PostToolUse, 5s, debounced every 5 calls)
+Track context window usage, warn when running low.
+- `>35%` remaining: silent
+- `<=35%`: `[WARN] Context at 32% — consider committing`
+- `<=25%`: `[CRITICAL] Context at 18% — commit NOW and signal`
+Value: HIGH — prevents lost work from context overflow.
 
-### Hook 2: Context Monitor
-- **Event**: PostToolUse (debounced: every 5 tool calls)
-- **Purpose**: Track context window usage, warn when running low
-- **Timeout**: 5s
-- **Thresholds**:
-  - `>35%` remaining: silent (no output)
-  - `<=35%` remaining: `[WARN] Context at 32% — consider committing`
-  - `<=25%` remaining: `[CRITICAL] Context at 18% — commit NOW and signal`
-- **Value**: HIGH — prevents lost work from context overflow
+### Hook 3: Workflow Guard (PreToolUse, 3s)
+Validate tool calls against scope fence (paths in handoff).
+Output: warning if tool targets path outside scope. Value: MEDIUM.
 
-### Hook 3: Workflow Guard
-- **Event**: PreToolUse
-- **Purpose**: Validate tool calls against scope fence (SOMENTE/NAO TOQUE paths)
-- **Timeout**: 3s
-- **Output**: Warning if tool targets path outside scope fence defined in handoff
-- **Value**: MEDIUM — prevents accidental out-of-scope modifications
-- **Example**: `[GUARD] Write targets api/ but scope is P04_tools/ only`
+### Hook 4: Prompt Guard (UserPromptSubmit, 5s)
+Scan handoff content for injection patterns, validate plan structure.
+Output: warning if suspicious patterns detected. Value: MEDIUM.
 
-### Hook 4: Prompt Guard
-- **Event**: UserPromptSubmit
-- **Purpose**: Scan handoff content for injection patterns, validate plan structure
-- **Timeout**: 5s
-- **Output**: Warning if suspicious patterns detected in .claude/handoffs/ references
-- **Value**: MEDIUM — defense against prompt injection in plan files
-
-### Hook 5: Check Update
-- **Event**: Notification (or periodic via cron)
-- **Purpose**: Check for queued handoffs, config changes, system updates
-- **Timeout**: 10s
-- **Output**: Advisory about available work or pending updates
-- **Value**: LOW — informational only
+### Hook 5: Check Update (Notification, 10s)
+Check for queued handoffs, config changes, system updates.
+Output: advisory about available work. Value: LOW.
 
 ## Error Handling
-- ALL hooks exit 0 regardless of internal errors (advisory = never block)
-- Errors logged to `.claude/logs/hooks/` with timestamp and hook name
-- If timeout-guard fires, hook process is killed and execution continues silently
-- No hook adds > 200ms to tool call latency (p95 target)
+- ALL hooks exit 0 regardless of internal errors
+- Errors logged to `.claude/logs/hooks/`
+- Timeout-guard kills hung hooks silently
+- No hook adds > 200ms to tool call latency (p95)
 
 ## Success Criteria
-- All 5 hooks consistently exit 0 in production
-- Context monitor correctly triggers at <=35% threshold
-- Workflow guard catches 100% of out-of-scope Write/Edit calls
+- All 5 hooks exit 0 consistently in production
+- Context monitor triggers at <=35% threshold
+- Workflow guard catches 100% out-of-scope Write/Edit calls
 - Total hook overhead < 200ms per tool call (p95)
