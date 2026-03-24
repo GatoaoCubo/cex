@@ -5,56 +5,41 @@ domain: architecture
 scope: boot_initialization
 ---
 
-# CODEXA Boot Chain
+# Context: CODEXA Boot Chain
 
+## Scope
 Sequencia deterministica de 8 camadas que inicializa qualquer sessao CODEXA, de variavel de ambiente ate execucao de tarefa.
 
-## Boot Layers
-
+## Current State
 ```
-LAYER 0: ENVIRONMENT
-  .env (API keys) + CODEXA_SATELLITE env var
-       |
-LAYER 1: BOOT SCRIPT (boot/{satellite}.cmd)
-  set CLAUDECODE= | set CODEXA_SATELLITE= | claude launch
-       |
-LAYER 2: CLAUDE.MD (auto-loaded)
-  "Check CODEXA_SATELLITE -> read PRIME_{SAT}.md"
-       |
-LAYER 3: RULES (.claude/rules/, 10 files auto-loaded)
-  navigation, encoding, multi_repo, boot-autonomy-flags,
-  STELLA_RULES, satellite-execution, agents-context,
-  satellites-context, codexa-learning
-       |
-LAYER 4: PRIME_{SAT}.md (satellite identity + capabilities)
-       |
-LAYER 5: MENTAL_MODEL.yaml (deep identity + execution history)
-       |
-LAYER 6: HANDOFF (dispatch queue)
-  .claude/handoffs/{satellite}_*.md
-       |
-LAYER 7: EXECUTION
-  Agent loaded -> Skill applied -> Sub-agents spawned -> Output validated
+L0 ENV        .env (API keys) + CODEXA_SATELLITE env var
+L1 BOOT       boot/{sat}.cmd — set CLAUDECODE= | model | MCP config
+L2 CLAUDE.MD  Auto-loaded — "read PRIME_{SAT}.md"
+L3 RULES      .claude/rules/ (10 files: nav, encoding, satellite)
+L4 PRIME      records/satellites/{sat}/PRIME_{SAT}.md (identity)
+L5 MENTAL     records/satellites/{sat}/mental_model.yaml (deep state)
+L6 HANDOFF    .claude/handoffs/{sat}_*.md (dispatch queue)
+L7 EXECUTION  Agent -> Skill -> Sub-agents -> Quality Gate
 ```
 
-## Key Properties
-
-- **Deterministic**: same env = same boot state
-- **Fractal**: each layer references the next
-- **Identity-first**: satellite knows WHO it is before WHAT to do
-- **Fail-safe**: missing layer = graceful fallback (general session)
-
-## Critical Details
+## Operational Context
+- **Deterministic**: same env = same boot state, always
+- **Fractal**: each layer references the next via path pointers
+- **Identity-first**: satellite knows WHO before WHAT
+- **Fail-safe**: missing layer = graceful fallback to general session
 
 | Layer | Token Cost | Mandatory |
 |-------|-----------|-----------|
-| L0 env | 0 | yes |
-| L1 boot script | 0 | yes (satellites) |
+| L0-L1 | 0 | yes (env + script) |
 | L2 CLAUDE.md | ~2K | yes |
 | L3 rules | ~8K | yes (auto-loaded) |
 | L4 PRIME | ~3K | yes (satellites) |
-| L5 mental_model | ~2K | recommended |
+| L5 mental | ~2K | recommended |
 | L6 handoff | ~1K | if dispatched |
-| L7 execution | variable | yes |
+
+## Decision Notes
+- `set CLAUDECODE=` prevents nested Claude detection (critical for isolation)
+- `--strict-mcp-config` ensures only declared MCPs available per satellite
+- Total boot context: ~15K tokens (98% reduction from v3.6 monolithic load)
 
 Source: `records/framework/docs/META_BOOTSTRAP.md`

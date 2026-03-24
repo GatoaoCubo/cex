@@ -1,10 +1,14 @@
 ---
 id: p01_gl_satellite
 term: satellite
-definition: Processo Claude CLI especializado com identidade modelo e MCPs proprios que executa tarefas despachadas pelo orquestrador
+definition: "Processo Claude CLI especializado com identidade, modelo e MCPs proprios"
 synonyms: [worker, executor, specialist]
 ---
 
-# Satellite
+# Glossary: satellite
 
-Unidade autonoma de execucao no CODEXA. Cada satellite tem dominio (Research, Build, Marketing), modelo LLM (opus/sonnet), e MCPs dedicados. STELLA orquestra, satellites executam.
+## Definition
+Unidade autonoma de execucao no CODEXA. Cada satellite tem dominio fixo (Research, Build, Marketing), modelo LLM dedicado (opus ou sonnet), e MCPs exclusivos. STELLA orquestra, satellites executam.
+
+## Usage
+"Spawnar satellite EDISON para build" | "3 satellites em paralelo via grid"

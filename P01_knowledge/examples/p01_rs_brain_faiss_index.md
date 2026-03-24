@@ -6,32 +6,25 @@ domain: knowledge_retrieval
 last_checked: 2026-03-24
 ---
 
-# Brain MCP FAISS Index
+# RAG Source: brain_faiss_index
 
-Hybrid retrieval index combining BM25 lexical search with FAISS semantic vectors.
+## URL
+`records/core/brain/mcp-codexa-brain/src/indexes/` (local FAISS + BM25 indexes)
 
-## Index Specs
+## Domain
+Knowledge retrieval — serves all CODEXA satellites via brain_query MCP tool.
 
+## Last Checked
+2026-03-24. Rebuild: `python build_indexes_ollama.py --scope all` (~20 min).
+
+## Indexing Notes
 | Field | Value |
 |-------|-------|
-| Embedding model | nomic-embed-text (Ollama) |
-| Dimensions | 768 |
-| Chunk size | 2048 tokens |
-| Chunk overlap | 128 tokens |
-| Indexed docs | ~4000 (agents, skills, pool, KCs) |
-| Search method | BM25 + FAISS hybrid (weighted merge) |
+| Model | nomic-embed-text (768d, Ollama) |
+| Chunks | 2048 tokens, 128 overlap |
+| Docs indexed | ~4000 (agents, skills, pool, KCs) |
+| Method | BM25 + FAISS hybrid (0.4/0.6 weight) |
 | Accuracy | ~88% hybrid, ~50% BM25-only fallback |
-| Rebuild time | ~20 min full scope |
+| Index size | ~140MB (gitignored) |
 
-## Scopes Indexed
-
-- `records/agents/*/README.md` - agent overviews
-- `records/skills/*/SKILL.md` - skill definitions
-- `records/pool/**/*.md` - knowledge cards, prompts, workflows
-
-## Usage
-
-```python
-brain_query("agent for SEO marketplace")  # hybrid search
-brain_list(scope="agents", limit=10)      # filtered listing
-```
+Scopes: `agents/*/README.md`, `skills/*/SKILL.md`, `pool/**/*.md`
