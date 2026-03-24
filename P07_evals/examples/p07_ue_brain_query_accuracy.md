@@ -1,0 +1,48 @@
+---
+id: p07_ue_brain_query_accuracy
+type: unit_eval
+lp: P07
+description: "Unit test for brain_query search accuracy across known queries"
+target: brain_query
+version: 1.0.0
+created: 2026-03-24
+author: atlas
+quality: 9.0
+tags: [unit-eval, brain, search, accuracy]
+---
+
+# Unit Eval: brain_query Accuracy
+
+## Target
+brain_query MCP tool — hybrid BM25+FAISS search.
+
+## Test Cases
+| Query | Expected Top Result | Pass Criteria |
+|-------|-------------------|---------------|
+| "agent for SEO" | KC with SEO/marketplace | Top-3 contains match |
+| "how to spawn satellite" | KC_ATLAS_003 or spawn skill | Top-1 score > 0.7 |
+| "quality gate implementation" | KC_ATLAS_010 | Exact match in top-1 |
+| "brand propagation pipeline" | brand_propagation skill | Top-3 contains match |
+| "whatsapp voice pipeline" | voice_pipeline skill | Top-3 contains match |
+
+## Execution
+```bash
+python -c "
+from codexa_brain.vector_search import hybrid_search
+for query, expected in TEST_CASES:
+    results = hybrid_search(query, k=3)
+    assert any(expected in r['source'] for r in results)
+"
+```
+
+## Metrics
+| Metric | Threshold | Current |
+|--------|-----------|---------|
+| Top-1 accuracy | >= 70% | ~72% |
+| Top-3 accuracy | >= 85% | ~88% |
+| Query latency | < 500ms | ~200ms |
+| Fallback rate | < 5% | ~2% |
+
+## Failure Action
+- Top-1 < 70%: Rebuild FAISS index, check embedding model
+- Latency > 500ms: Check Ollama status, model loading
