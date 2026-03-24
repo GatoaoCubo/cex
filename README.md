@@ -2,12 +2,12 @@
 
 > Framework universal para organizar conhecimento de AI em 12 Leverage Points.
 
-![version](https://img.shields.io/badge/version-v1.0.0-blue)
+![version](https://img.shields.io/badge/version-v3.0.0-blue)
 ![LPs](https://img.shields.io/badge/LPs-12-green)
 ![density](https://img.shields.io/badge/density-88.6%25-brightgreen)
 ![license](https://img.shields.io/badge/license-MIT-lightgrey)
 
-**Estado**: v1.0.0 COMPLETE | 12 LPs | 68 tipos | 18 exemplos | 7 templates | 12 generators | 3 validators
+**Estado**: v3.0.0 COMPLETE | 12 LPs | 73 tipos | 48 exemplos | 21 templates | 12 generators | 3 validators | 67+ compiled
 
 ---
 
@@ -21,7 +21,8 @@
 | Templates | 7 | P01(3)+P02(1)+P03(1)+P04(1)+P05(1) |
 | Examples (golden) | 18 | P01(7)+P02(4)+P03(4)+P04(3) |
 | Validators | 3 | schema + generator + examples |
-| Total MD files | 46 | ~65KB |
+| Compiled artifacts | 67+ | All examples have .yaml/.json compiled version |
+| Total files | 113+ | ~80KB |
 | Density media | 88.6% | Elite:6 High:12 Standard:0 |
 
 ---
@@ -35,6 +36,7 @@
     │   ├── META_TEMPLATE.md      # Template que gera templates
     │   ├── GLOSSARY.md           # Termos e definicoes
     │   ├── ROADMAP.md            # 6 ondas de desenvolvimento
+    │   ├── DECISION_MAP.md       # LP -> type -> format routing table
     │   ├── MIGRATION_MAP.md      # 9916 arquivos classificados por LP
     │   ├── GOLDEN_CANDIDATES.md  # 22 candidatos de migracao
     │   ├── DENSITY_REPORT.md     # Analise dos 18 examples
@@ -44,7 +46,9 @@
     ├── _tools/                    # Validators + CLI
     │   ├── validate_schema.py    # Valida _schema.yaml files
     │   ├── validate_generators.py # Valida _generator.md coverage
-    │   └── validate_examples.py  # Valida density + frontmatter
+    │   ├── validate_examples.py  # Valida density + frontmatter
+    │   ├── cex_compile.py        # Compila .md examples para .yaml/.json
+    │   └── validate_compiled.py  # Valida compiled artifacts
     ├── P01_knowledge/            # O que o agente SABE       (7 ex, 3 tpl)
     ├── P02_model/                # QUEM o agente EH          (4 ex, 1 tpl)
     ├── P03_prompt/               # COMO o agente FALA        (4 ex, 1 tpl)
@@ -60,7 +64,7 @@
     ├── CHANGELOG.md              # Historico de versoes
     └── CONTRIBUTING.md           # Guia de contribuicao
 
-Cada LP contem: `_schema.yaml` + `_generator.md` + `templates/` + `examples/`
+Cada LP contem: `_schema.yaml` + `_generator.md` + `templates/` + `examples/` + `compiled/`
 
 ---
 
@@ -96,6 +100,36 @@ Cada LP contem: `_schema.yaml` + `_generator.md` + `templates/` + `examples/`
 
 ---
 
+## Dual Output Architecture
+
+Every CEX artifact has two versions:
+
+| Version | Format | Reader | Location |
+|---------|--------|--------|----------|
+| Human | `.md` with YAML frontmatter | Developers, reviewers | `examples/`, `templates/` |
+| Machine | `.yaml` or `.json` | LLMs, pipelines, validators | `compiled/` |
+
+### Machine Format by LP
+
+| LP | Default Format | JSON exceptions |
+|----|---------------|-----------------|
+| P01-P03 | yaml | - |
+| P04 | yaml | mcp_server, client, connector |
+| P05 | yaml | - |
+| P06 | yaml | input_schema, interface, output_schema |
+| P07-P08 | yaml | - |
+| P09 | yaml | feature_flag |
+| P10-P11 | yaml | - |
+| P12 | yaml | signal |
+
+### Compile
+```bash
+python _tools/cex_compile.py P03_prompt/examples/ex_system_prompt.md
+python _tools/cex_compile.py --all    # compile everything
+```
+
+---
+
 ## Exemplos Destaque
 
 | File | LP | Density | Por que ler |
@@ -124,10 +158,10 @@ Cada LP contem: `_schema.yaml` + `_generator.md` + `templates/` + `examples/`
 
 MIT License — see [LICENSE](LICENSE) or use freely with attribution.
 
-    CEX v1.0.0 | Cerebro Empresarial X
+    CEX v3.0.0 | Cerebro Empresarial X
     Built with CODEXA satellites (STELLA + SHAKA + PYTHA + EDISON + ATLAS)
-    2026-03-22
+    2026-03-23
 
 ---
 
-*v1.0.0 | 2026-03-22 | Leia: _meta/CODEX.md*
+*v3.0.0 | 2026-03-23 | Leia: _meta/CODEX.md*

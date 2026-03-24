@@ -20,6 +20,7 @@ YAML front: id, type, lp, quality, keywords(3+), long_tails(2+), bullets(3+), ax
 MD body: title, summary 1-line, secoes por tipo (ver meta-template)
 Density >= 0.8 obrigatorio. Max 4KB (ajustado de 2KB baseado em dados).
 Prosa > 3 linhas proibida. Bullets com max 80 chars.
+Dual: todo artifact .md tem compiled/ counterpart (.yaml ou .json per machine_format).
 
 ## 3. NAMING
 Pattern: {lp}_{type}_{topic}.{ext}
@@ -32,8 +33,9 @@ Satellites: satellites/{name}/P01-P12 (instances reais)
 Meta: _meta/ (CODEX, GLOSSARY, MANDAMENTOS, ROADMAP, META_TEMPLATE)
 
 ## 5. SCHEMAS = _schema.yaml por LP
-12 schemas criados (68 tipos total). Validado no pre-commit.
+12 schemas criados (73 tipos total). Validado no pre-commit.
 Campos padrao: max_bytes, quality_min, frontmatter_required, body_structure
+Campo obrigatorio v3.0: `machine_format` (yaml|json) — define formato compiled/.
 
 ## 6. GENERATORS = _generator.md por LP
 12 generators criados (P01-P12 CORE+QUALITY+SCALE). Instrucoes passo-a-passo.
@@ -43,8 +45,12 @@ Anti-patterns listados. Density tiers documentados.
 Template que gera templates. Shokunin: evolui durante uso.
 Secoes por tipo documentadas. Regras de geracao definidas.
 
-## 8. DUAL OUTPUT = .md (humano) + .yaml (LLM)
+## 8. DUAL OUTPUT = .md (humano) + .yaml/.json (machine)
 Todo artefato = 2 arquivos. Excecoes: _schema (so yaml), _generator (so md)
+Campo obrigatorio em _schema.yaml: `machine_format` (yaml|json). 73 tipos: 64 yaml, 9 json.
+Regra: todo example DEVE ter versao compilada em compiled/.
+Compile: `python _tools/cex_compile.py --all` gera compiled/ em cada LP.
+Routing: _meta/DECISION_MAP.md (arquivo -> LP -> tipo -> format).
 
 ## 9. LIFECYCLE
 CREATE > INDEX > READ > USE > RESULTS > NEW KC > repeat (flywheel)

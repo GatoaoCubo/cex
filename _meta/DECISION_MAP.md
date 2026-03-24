@@ -97,4 +97,69 @@ When a file could map to multiple types:
 
 ---
 
+## Examples: Before / After Compilation
+
+### Example 1: system_prompt (.md -> .yaml)
+
+**Before** (`P03_prompt/examples/ex_system_prompt.md` frontmatter):
+```yaml
+id: ex_system_prompt
+type: system_prompt
+lp: P03
+machine_format: yaml
+```
+
+**After** (`P03_prompt/compiled/ex_system_prompt.yaml`):
+```yaml
+id: ex_system_prompt
+type: system_prompt
+lp: P03
+content: |
+  You are a gateway agent responsible for routing...
+```
+
+### Example 2: few_shot (.md -> .yaml)
+
+**Before** (`P03_prompt/examples/ex_few_shot.md` frontmatter):
+```yaml
+id: ex_few_shot
+type: few_shot
+lp: P03
+machine_format: yaml
+```
+
+**After** (`P03_prompt/compiled/ex_few_shot.yaml`):
+```yaml
+id: ex_few_shot
+type: few_shot
+lp: P03
+examples:
+  - input: "classify this request"
+    output: "ROUTE: research"
+    rationale: "keyword match: pesquisar"
+```
+
+### Example 3: tool schema (.md -> .json)
+
+**Before** (`P04_tools/examples/ex_mcp_server.md` frontmatter):
+```yaml
+id: ex_mcp_server
+type: mcp_server
+lp: P04
+machine_format: json
+```
+
+**After** (`P04_tools/compiled/ex_mcp_server.json`):
+```json
+{
+  "id": "ex_mcp_server",
+  "type": "mcp_server",
+  "lp": "P04",
+  "server": "firecrawl",
+  "tools": ["scrape", "extract", "crawl"]
+}
+```
+
+---
+
 *Generated 2026-03-23 | CEX v3.0*

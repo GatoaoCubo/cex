@@ -5,6 +5,31 @@ Format: Wave-based (chronological order).
 
 ---
 
+## [3.0.0] - 2026-03-23
+
+### Added
+- Dual output architecture: .md (human) + compiled .yaml/.json (machine)
+- `machine_format` field in all 73 types across 12 LPs (64 yaml, 9 json)
+- `_meta/DECISION_MAP.md`: file category -> LP -> type -> format routing table
+- `_tools/cex_compile.py`: compiles .md examples to machine-optimized format
+- `_tools/validate_compiled.py`: validates compiled artifacts
+- `compiled/` directory in each LP
+- P03 schema completed: meta_prompt + router_prompt types (were missing)
+- source_map field in P03 types: maps existing codexa-core artifacts to CEX types
+
+### Changed
+- All 12 `_schema.yaml` updated to v2.0/v3.0
+- P03 `_schema.yaml` user_prompt body_structure: context-first ordering (research-validated)
+- P03 few_shot max_examples: 10 -> 5 (diminishing returns research)
+
+### Research Basis
+- KC_SHAKA_ANTHROPIC_PROMPT_ENGINEERING (9.0): XML for Claude, caching patterns
+- KC_SHAKA_097_META_PROMPT_ENGINEERING_2025 (8.7): knowledge-first +0.91, MIPRO +13%
+- KC_SHAKA_DSPY_PROGRAMMATIC_PROMPTING (9.0): Signatures, BootstrapFewShot
+- KC_EDISON_024_CHAIN_OF_THOUGHT (9.5): Metacognitive +26.9%
+
+---
+
 ## [1.1.0] - 2026-03-23
 
 ### Versioning System (EDISON)
