@@ -2,84 +2,131 @@ id: p03_rp_satellite_dispatch
 type: router_prompt
 lp: P03
 title: Router Prompt for CODEXA Satellite Task Dispatch
-routes: [SHAKA, LILY, EDISON, PYTHA, ATLAS, YORK]
-fallback: EDISON
+routes: ''
+fallback: EDISON (builder generico) — quando a tarefa nao mapeia claramente para nenhum dominio especializado, EDISON e o
+  satelite mais versatil por usar opus e ter capacidade de construcao ampla.
 quality: 9.0
-objective: >
-  Classificar tarefa do usuario e rotear para satelite CODEXA mais adequado.
-  Analisa keywords, contexto semantico e tipo de entregavel para determinar
-  satelite correto com score de confianca.
-route_definitions:
-  - name: SHAKA
-    domain: Research
-    model: sonnet
-    keywords: [pesquisar, mercado, concorrente, scrape, analise, benchmark, tendencia, dados, comparar, fornecedor]
-    semantic_signal: usuario quer ENTENDER algo externo
-    deliverable: relatorio de pesquisa, analise comparativa, dados estruturados
-  - name: LILY
-    domain: Marketing
-    model: sonnet
-    keywords: [anuncio, marketing, copy, titulo, vender, campanha, criativo, headline, CTA, post, social media]
-    semantic_signal: usuario quer PERSUADIR ou VENDER
-    deliverable: textos de anuncio, campanhas, copys, titulos otimizados
-  - name: EDISON
-    domain: Build
-    model: opus
-    keywords: [criar, build, codigo, componente, hook, template, implementar, desenvolver, feature, refatorar, fix]
-    semantic_signal: usuario quer CONSTRUIR algo tecnico
-    deliverable: codigo, componentes, templates, configuracoes
-  - name: PYTHA
-    domain: Knowledge
-    model: sonnet
-    keywords: [conhecimento, documentar, indexar, embedding, organizar, catalogar, wiki, knowledge, card]
-    semantic_signal: usuario quer ORGANIZAR ou DOCUMENTAR conhecimento interno
-    deliverable: knowledge cards, documentacao, indices, taxonomias
-  - name: ATLAS
-    domain: Execute
-    model: opus
-    keywords: [executar, testar, debug, validar, deploy, migrar, database, railway, infra, pipeline, CI/CD]
-    semantic_signal: usuario quer RODAR ou OPERAR algo
-    deliverable: deploy realizado, testes executados, migrations aplicadas
-  - name: YORK
-    domain: Monetize
-    model: sonnet
-    keywords: [curso, monetizar, preco, hotmart, funil, landing page, checkout, vender curso, produto digital]
-    semantic_signal: usuario quer MONETIZAR conhecimento
-    deliverable: estrutura de curso, paginas de venda, estrategia de pricing
-classification:
-  step_1_keyword_match: "count matching keywords / total route keywords"
-  step_2_semantic_analysis: "match verbo (0.6 weight) + match objeto (0.4 weight)"
-  step_3_combined: "keyword_score * 0.4 + semantic_score * 0.6"
-  step_4_decision: "argmax(confidence) if >= threshold, else fallback"
+objective: Classificar a tarefa do usuario e rotear para o satelite CODEXA mais adequado. O router deve analisar keywords,
+  contexto semantico e tipo de entregavel esperado para determinar o satelite correto com score de confianca. Se confianca
+  < threshold, usar fallback.
+shaka_research: 'Modelo: sonnet | Dominio: Pesquisa e analise de mercado
+
+  Keywords: pesquisar, mercado, concorrente, scrape, analise, benchmark, tendencia, dados, comparar, fornecedor
+
+  Semantic Signals: usuario quer ENTENDER algo externo (mercado, concorrencia, tendencias)
+
+  Entregavel tipico: relatorio de pesquisa, analise comparativa, dados estruturados
+
+  Exemplo: "Pesquisa os top 5 concorrentes de pet shop no Mercado Livre"'
+lily_marketing: 'Modelo: sonnet | Dominio: Marketing e conteudo
+
+  Keywords: anuncio, marketing, copy, titulo, vender, campanha, criativo, headline, CTA, post, social media
+
+  Semantic Signals: usuario quer PERSUADIR ou VENDER (copy, anuncios, conteudo de marketing)
+
+  Entregavel tipico: textos de anuncio, campanhas, copys, titulos otimizados
+
+  Exemplo: "Cria 5 titulos de anuncio para cama box casal com frete gratis"'
+edison_build: 'Modelo: opus | Dominio: Construcao e codigo
+
+  Keywords: criar, build, codigo, componente, hook, template, implementar, desenvolver, feature, refatorar, fix
+
+  Semantic Signals: usuario quer CONSTRUIR algo tecnico (codigo, templates, agents, skills)
+
+  Entregavel tipico: codigo, componentes, templates, configuracoes
+
+  Exemplo: "Implementa um hook de validacao de schema para os agents"'
+pytha_knowledge: 'Modelo: sonnet | Dominio: Conhecimento e documentacao
+
+  Keywords: conhecimento, documentar, indexar, embedding, organizar, catalogar, wiki, knowledge, card
+
+  Semantic Signals: usuario quer ORGANIZAR ou DOCUMENTAR conhecimento interno
+
+  Entregavel tipico: knowledge cards, documentacao, indices, taxonomias
+
+  Exemplo: "Documenta o fluxo de autenticacao JWT da API em uma knowledge card"'
+atlas_execute: 'Modelo: opus | Dominio: Execucao e infraestrutura
+
+  Keywords: executar, testar, debug, validar, deploy, migrar, database, railway, infra, pipeline, CI/CD
+
+  Semantic Signals: usuario quer RODAR ou OPERAR algo (deploy, testes, infra)
+
+  Entregavel tipico: deploy realizado, testes executados, migrations aplicadas
+
+  Exemplo: "Roda os testes de integracao e faz deploy da API no Railway"'
+york_monetize: 'Modelo: sonnet | Dominio: Monetizacao e cursos
+
+  Keywords: curso, monetizar, preco, hotmart, funil, landing page, checkout, vender curso, produto digital
+
+  Semantic Signals: usuario quer MONETIZAR conhecimento (cursos, infoprodutos, pricing)
+
+  Entregavel tipico: estrutura de curso, paginas de venda, estrategia de pricing
+
+  Exemplo: "Monta a estrutura do curso de prompt engineering com 6 modulos"'
+classification_method: ''
+step_1_keyword_match: 'Para cada route, contar keywords presentes na tarefa do usuario.
+
+  keyword_scores = {route: count / total_keywords_in_route para cada route}'
+step_2_semantic_analysis: 'Analisar o VERBO principal e o OBJETO da tarefa:
+
+  - VERBO indica acao (pesquisar=SHAKA, criar=EDISON, vender=LILY, documentar=PYTHA, executar=ATLAS, monetizar=YORK)
+
+  - OBJETO indica dominio (mercado=SHAKA, anuncio=LILY, codigo=EDISON, knowledge=PYTHA, deploy=ATLAS, curso=YORK)
+
+  semantic_score = match_strength(verbo)  0.6 + match_strength(objeto)  0.4'
+step_3_combined_score: confidence = keyword_score  0.4 + semantic_score  0.6
+step_4_decision: "IF max(confidence) >= 0.7:\n    route = argmax(confidence)\nELIF max(confidence) >= 0.4:\n    route = argmax(confidence)\
+  \ + flag \"low_confidence\"\nELSE:\n    route = EDISON (fallback)"
 threshold:
-  auto_route: 0.7
-  low_confidence: 0.4
-  fallback_below: 0.4
-fallback_route:
-  name: EDISON
-  reason: builder generico, opus model, capacidade de construcao ampla
-disambiguation_rules:
-  - conflict: SHAKA vs LILY
-    resolution: SHAKA primeiro, LILY depois
-    reason: pesquisa informa o marketing
-  - conflict: EDISON vs ATLAS
-    resolution: EDISON build, ATLAS deploy
-    reason: separar construcao de operacao
-  - conflict: PYTHA vs SHAKA
-    resolution: fonte externa SHAKA, interna PYTHA
-    reason: direcao do conhecimento
-  - conflict: LILY vs YORK
-    resolution: conteudo/copy LILY, produto digital/curso YORK
-    reason: tipo de entregavel
-output_format:
-  sections:
-    - route_decision (task, selected, confidence, reasoning)
-    - score_breakdown (table with keyword, semantic, combined per route)
-    - flags (LOW_CONFIDENCE, DISAMBIGUATION, FALLBACK, none)
+- 'Auto-route: confidence >= 0.7 (decisao automatica, sem intervencao humana)'
+- 'Low confidence: 0.4 <= confidence < 0.7 (rotear mas sinalizar para revisao)'
+- 'Fallback: confidence < 0.4 (usar EDISON como builder generico)'
+disambiguation_rules: '| Conflito | Resolucao | Razao |
+
+  |----------|-----------|-------|
+
+  | SHAKA vs LILY (pesquisar + marketing) | SHAKA primeiro, LILY depois | Pesquisa informa o marketing |
+
+  | EDISON vs ATLAS (criar + deploy) | EDISON build, ATLAS deploy | Separar construcao de operacao |
+
+  | PYTHA vs SHAKA (documentar + pesquisar) | Se fonte externa: SHAKA. Se interna: PYTHA | Direcao do conhecimento |
+
+  | LILY vs YORK (vender + monetizar) | Se conteudo/copy: LILY. Se produto digital/curso: YORK | Tipo de entregavel |'
+output_format: '## Route Decision
+
+
+  Task: [tarefa original do usuario]
+
+  Selected: [SATELLITE_NAME]
+
+  Confidence: [0.0-1.0]
+
+  Reasoning: [1 frase explicando a decisao]
+
+
+  ### Score Breakdown
+
+  | Route | Keyword | Semantic | Combined |
+
+  |-------|---------|----------|----------|
+
+  | SHAKA | [score] | [score]  | [score]  |
+
+  | LILY  | [score] | [score]  | [score]  |
+
+  | EDISON| [score] | [score]  | [score]  |
+
+  | PYTHA | [score] | [score]  | [score]  |
+
+  | ATLAS | [score] | [score]  | [score]  |
+
+  | YORK  | [score] | [score]  | [score]  |
+
+
+  ### Flags
+
+  - [LOW_CONFIDENCE | DISAMBIGUATION | FALLBACK | none]'
 research_base:
-  - source: LangChain RouterChain
-    finding: confidence threshold + fallback pattern
-  - source: best_practice
-    finding: keyword + semantic hybrid more robust than keyword-only
-  - source: STELLA_RULES.md
-    finding: CODEXA satellite routing table
+- 'Router pattern: confidence threshold + fallback (LangChain RouterChain)'
+- Keyword + semantic hybrid = mais robusto que keyword-only
+- 'CODEXA satellite routing table: STELLA_RULES.md + AGENT_ROUTING_INDEX.md'
