@@ -74,6 +74,26 @@ QUANDO USAR: Configurar sequencia de fallback entre modelos (A > B > C).
 Naming: `p02_fb_{{chain}}.yaml`
 Schema: P02/_schema.yaml > types > fallback_chain
 
+### iso_package
+QUANDO USAR: Empacotar agente completo como bundle portable (self-contained, LLM-agnostic).
+Um ISO Package e a composicao de artefatos de ~8 LPs diferentes montados como um agente completo.
+
+**Componentes** (cada um e um artifact de um LP diferente):
+- MANIFEST (P02 agent) — identidade e capabilities
+- SYSTEM_INSTRUCTION (P03 system_prompt) — como o agente fala
+- INSTRUCTIONS (P03 user_prompt) — tarefas padrao
+- DOMAIN_KNOWLEDGE (P01 knowledge_card) — o que sabe
+- EXAMPLES (P03 few_shot) — exemplos de I/O
+- TOOLS_AND_APIS (P04 skill) — ferramentas disponiveis
+- OUTPUT_TEMPLATE (P05 output_schema) — formato de saida
+- ERROR_HANDLING (P11 guardrail) — o que nunca fazer
+- ARCHITECTURE (P08 component_map) — como se conecta
+- TESTING (P07 smoke_eval) — como validar
+
+**Tiers**: minimal (3 files) | standard (7) | complete (10) | whitelabel (12)
+Naming: `agents/{{agent_name}}/manifest.yaml` (diretorio, nao arquivo unico)
+Schema: P02/_schema.yaml > types > iso_package
+
 ## Dual Output
 
 Cada artefato Model tem duas versoes:
