@@ -1,0 +1,69 @@
+---
+id: p10_ax_lifecycle_hooks
+type: axiom
+lp: P10
+title: "Axiom: Memory Lifecycle Hooks (5-Hook Chain)"
+version: 1.0.0
+created: 2026-03-24
+updated: 2026-03-24
+author: EDISON
+quality: 9.0
+tags: [axiom, hooks, lifecycle, memory, daemon]
+tldr: "5-hook lifecycle chain: Setup > SessionStart > UserPromptSubmit > PostToolUse > Stop. Hooks are thin HTTP clients; daemon owns persistence."
+max_bytes: 3072
+density_score: 0.92
+source: codexa-core/records/core/memory/hooks/ (5 hook implementations)
+linked_artifacts:
+  template: tpl_axiom_lifecycle_hooks
+---
+
+# Axiom: Memory Lifecycle Hooks (5-Hook Chain)
+
+## Statement
+
+> Memory capture follows a strict 5-hook lifecycle. Each hook has a single responsibility and communicates via HTTP to the memory daemon. Hooks are thin clients — all persistence logic lives in the daemon.
+
+## Rule
+
+```
+Setup (gate) → SessionStart (inject) → UserPromptSubmit (init) → PostToolUse (capture) → Stop (compress)
+       |                                                                                        |
+  If fails: skip all                                                              Triggers compression
+```
+
+## Hook Chain
+
+| # | Hook | Responsibility | Timeout | Fires |
+|---|------|---------------|---------|-------|
+| 1 | Setup | Verify daemon health, gate subsequent hooks | 300s | Once per session init |
+| 2 | SessionStart | Inject prior session context into conversation | 60s | Once after Setup succeeds |
+| 3 | UserPromptSubmit | Initialize session record on first prompt | 30s | Every user message |
+| 4 | PostToolUse | Capture observations from tool results | 120s | Every tool completion |
+| 5 | Stop | Trigger compression + summary generation | 120s | Once at session end |
+
+## Exit Code Contract
+
+| Code | Meaning | Effect |
+|------|---------|--------|
+| 0 | Success or graceful skip | Continue normally |
+| 1 | Non-blocking error | Log warning, continue |
+| 2 | Blocking error | Halt hook chain |
+
+## Invariants
+- **Single responsibility**: each hook does ONE thing (no side-channel writes)
+- **HTTP to daemon**: hooks never access DB directly (no SQLite, no file writes)
+- **Fire-and-forget on error**: non-critical hooks (2-4) exit 0 even on failure
+- **Setup gates everything**: if Setup exits non-zero, hooks 2-5 are skipped entirely
+
+## Violations and Costs
+
+| Violation | Cost |
+|-----------|------|
+| Hook writes to DB directly | Lock contention, data corruption, bypasses validation |
+| Skip Setup health check | Silent failures across entire session |
+| PostToolUse triggers compression | N compressions instead of 1, token waste |
+| Hook blocks on error (exit 2) | Conversation halted for non-critical memory capture |
+
+## Trigger
+
+Auto-applies to: all `.claude/hooks/` memory hook implementations. Validated by Setup health check on every session start.
