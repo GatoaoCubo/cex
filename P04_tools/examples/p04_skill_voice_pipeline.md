@@ -103,3 +103,31 @@ Pipeline completo de voz via WhatsApp: Audio recebido > Bridge Node.js (porta 38
 - `voice-agent`: Interface de voz para Claude Code (MCP voice)
 - `tts_engine.py`: TTS engine standalone multi-backend
 - `voice_bridge.py`: Mic voice bridge para uso local (nao WhatsApp)
+
+## Usage
+
+```bash
+/voice-pipeline start               # Boot all 3 components
+/voice-pipeline status              # Health check
+/voice-pipeline stop                # Graceful shutdown
+/voice-pipeline start --component bridge  # Single component
+```
+
+## Input / Output
+
+```yaml
+input:
+  command: enum         # start|stop|status
+  component: enum      # bridge|daemon|monitor|all (default: all)
+
+output:
+  status: object       # {bridge: connected, daemon: running, monitor: active}
+  health_url: string   # localhost:3847/health
+```
+
+## Metrics
+| Metrica | Threshold | Acao |
+|---------|-----------|------|
+| Bridge uptime | > 99% | Restart if disconnected > 60s |
+| STT latency | < 3s (GPU), < 10s (CPU) | Switch model size |
+| TTS generation | < 2s per message | Check edge-tts availability |

@@ -1,57 +1,54 @@
 ---
 id: p04_mcp_codexa_brain
 name: codexa-brain
-description: "MCP server providing RAG-style retrieval for the CODEXA knowledge base — hybrid search BM25+FAISS with Ollama embeddings"
+description: "Hybrid RAG retrieval server — BM25 keyword + FAISS vector search with Ollama embeddings"
 transport: stdio
-tools_provided:
-  - brain_prime
-  - brain_query
-  - brain_list
-  - brain_status
-  - smart_context
-resources_provided:
-  - pool_index
+tools_provided: [brain_query, brain_prime, brain_list, brain_status, smart_context]
+resources_provided: [pool_index]
 lp: P04
 type: mcp_server
 version: 1.0.0
 created: 2026-03-24
-updated: 2026-03-24
 author: edison
 domain: knowledge-retrieval
-quality: 9.0
-tags: [mcp, brain, search, rag, bm25, faiss, ollama]
+quality: 9.5
+tags: [mcp, brain, rag, bm25, faiss, ollama, search]
 ---
 
-# Brain MCP Server — Hybrid Knowledge Retrieval
+# Brain MCP Server
 
-## Purpose
-codexa-brain is the central MCP server for CODEXA knowledge retrieval. Reduces context consumption from ~50k tokens to ~400 tokens per prime operation via executive summaries and semantic search.
+## Name
+- Name: codexa-brain
+- Role: Central knowledge retrieval for all CODEXA satellites
 
-## Architecture
-- **Transport**: stdio (launched via `python -m codexa_brain.server`)
-- **Search Strategy**: Hybrid — BM25 keyword index + FAISS vector search with `nomic-embed-text` via Ollama
-- **Fallback**: Auto-degrades to keyword-only (~50% accuracy) when Ollama/model unavailable
-- **Warmup**: Background thread pre-loads SentenceTransformer model on boot (~23s saved on first query)
-- **Cache**: LRU query cache (100 entries) with hit rate tracking
+## Transport
+- Transport: stdio (via `python -m codexa_brain.server`)
+- Auth: none (local only)
+- Timeout: 30s per query
 
-## Tools
+## Tools Provided
+| Tool | Purpose |
+|------|---------|
+| brain_query(question, scope, k) | Semantic search, returns ranked chunks with scores |
+| brain_prime(entity, depth) | Executive summary at minimal/standard/deep depth |
+| brain_list(scope, format) | List entities by category (agents, workflows, all) |
+| brain_status(verbose) | Health: model state, cache hits, uptime |
+| smart_context(query, agent) | Unified nav: semantic + file structure |
 
-### brain_prime(entity, depth)
-Executive summary of any CODEXA entity. Depths: minimal (~150 tokens), standard (~400), deep (~800).
+## Resources Provided
+| Resource | Shape |
+|----------|-------|
+| pool_index | json (agent/workflow/prompt counts) |
 
-### brain_query(question, scope, k)
-Semantic search across knowledge base. Returns ranked chunks with scores and sources. Pre-built BM25 index required (~50ms fast path).
+## Integration Notes
+- Start: `python -m codexa_brain.server` (cwd: src/)
+- Required env: `CODEXA_ROOT`, `PYTHONPATH`
+- Fallback: Ollama down = BM25 keyword-only (~50% accuracy vs ~88% hybrid)
+- Index rebuild: `python build_indexes_ollama.py --scope all` (~20 min)
+- Model: nomic-embed-text (768d), chunk 2048, overlap 128
 
-### brain_list(scope, format)
-Lists entities by category (agents, workflows, prompts, all). Format: names or summary.
-
-### brain_status(verbose)
-Health check — server status, model loading state, query count, uptime, cache hit rate.
-
-### smart_context(query, agent, include_files, include_knowledge)
-Unified navigation combining semantic search + file structure. Returns knowledge matches, domains, and suggested commands.
-
-## Configuration
-```json
-{
-  "codexa-brain": {
+## Debugging
+1. Check: `curl http://localhost:11434/api/tags` (Ollama running?)
+2. Verify: FAISS index exists in `src/indexes/` (~140MB)
+3. Test: `brain_status(verbose=true)` for cache/model state
+4. Common: "model not found" = run `ollama pull nomic-embed-text`

@@ -1,29 +1,25 @@
 id: p04_scraper_awesome_list
-name: awesome_list_crawler
-description: Web scraper that mines GitHub awesome-lists for curated tools, libraries, and resources with quality tier classification
-target: github_awesome_lists
-output_format: categorized_entries
-lp: P04
 type: scraper
+name: awesome_list_crawler
+lp: P04
 version: 1.0.0
 created: 2026-03-24
-updated: 2026-03-24
 author: edison
-domain: research
 quality: 9.0
 tags:
 - scraper
 - github
 - awesome-list
-- crawler
 - curation
-- resources
-purpose: 'Scraper agent that mines GitHub awesome-lists for tools, libraries, and resources. Only CODEXA agent with quality
-  tier system and domain mapping for curated lists. Satellite: SHAKA (INVEJA ANALITICA).'
-workflow: '1. RECEIVE  --> Topics + optional filters (max_lists, min_stars)
-
-  2. EXECUTE  --> list_discovery -> entry_extraction -> category_mapping
-
-  3. DELIVER  --> Categorized entries mapped to CODEXA domains'
-trigger_phrases:
-- '"Find awesome-lists for..."'
+target:
+- 'Source: GitHub awesome-lists (curated link collections)'
+- 'Data wanted: tool name, URL, description, stars, category'
+- 'Cadence: on_demand (via SHAKA research pipeline)'
+extraction_plan:
+- Discover awesome-lists via GitHub search API (topic + min_stars)
+- Parse README.md (## headers = categories, - links = entries)
+- Enrich with GitHub API metadata (stars, language, last_updated)
+- Classify into CODEXA domains and quality tiers
+output: "items:\n  - name: \"langchain\"\n    url: \"https://github.com/langchain-ai/langchain\"\n    description: \"Building\
+  \ LLM apps\"\n    stars: 82000\n    category: \"frameworks\"\n    codexa_domain: \"build\"\n    tier: \"gold\"\n\nTiers:\
+  \ gold (>10K stars, active), silver (>1K), bronze (<1K or stale)."

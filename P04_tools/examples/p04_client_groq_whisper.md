@@ -1,36 +1,49 @@
 ---
 id: p04_client_groq_whisper
-name: groq_whisper_client
-description: "API client for Groq audio transcription via whisper-large-v3 — used by WhatsApp monitor for voice messages"
+type: client
+name: groq_whisper
 base_url: "https://api.groq.com/openai/v1"
 auth_method: api_key
 endpoints:
-  - path: /audio/transcriptions
-    method: POST
-    content_type: multipart/form-data
+  - method: POST
+    path: /audio/transcriptions
 lp: P04
-type: client
 version: 1.0.0
 created: 2026-03-24
-updated: 2026-03-24
 author: edison
-domain: audio-transcription
 quality: 9.0
-tags: [client, groq, whisper, transcription, audio, whatsapp]
+tags: [client, groq, whisper, transcription, audio]
 ---
 
-# Groq Whisper Client — Audio Transcription
+# Client: Groq Whisper
 
-## Purpose
-Unidirectional API client that sends audio files (OGG/MP3) to Groq's whisper-large-v3 model for transcription. Integrated into the CODEXA WhatsApp Monitor daemon for real-time voice message processing.
+## Connection
+- Base URL: https://api.groq.com/openai/v1
+- Auth: Bearer token (GROQ_API_KEY env var)
+- Timeout: 30s
 
-## Endpoint
+## Operations
+| Method | Endpoint | Purpose |
+|--------|----------|---------|
+| POST | /audio/transcriptions | Transcribe audio to text |
+
+## Contract
+```yaml
+request:
+  file: binary (OGG/MP3/WAV, max 25MB)
+  model: "whisper-large-v3-turbo"
+  language: "pt" (optional)
+response:
+  text: string (transcribed content)
 ```
-POST https://api.groq.com/openai/v1/audio/transcriptions
-Authorization: Bearer $GROQ_API_KEY
-Content-Type: multipart/form-data
-```
 
-## Request
+## Usage
 ```python
-requests.post(
+from groq import Groq
+client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+result = client.audio.transcriptions.create(
+    file=open("audio.ogg", "rb"),
+    model="whisper-large-v3-turbo"
+)
+print(result.text)
+```

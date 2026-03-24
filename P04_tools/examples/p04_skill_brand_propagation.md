@@ -79,3 +79,28 @@ brand_propagation gerencia a **propagacao de identidade de marca** no CODEXA. Gu
 | CSS output size | < 2KB | Custom properties only |
 | Inject context size | ~500 tokens | Dentro do budget de satellite |
 | Supported satellites | 3 | LILY, EDISON, marca-agent |
+
+## Usage
+
+```bash
+/brand edit --file brand-guidelines.md
+/brand sync
+/brand generate --format css
+/brand inject --satellite lily --task "gerar copy para Instagram"
+```
+
+## Input / Output
+
+```yaml
+input:
+  command: enum     # edit|sync|generate|inject
+  file: string      # Path to guidelines (edit phase)
+  satellite: string # Target satellite (inject phase)
+  format: enum      # css|scss|json (generate phase)
+
+output:
+  guidelines: path  # Updated brand-guidelines.md
+  tokens: path      # design-tokens.json (DTCG format)
+  css: path         # design-tokens.css (<2KB)
+  context: string   # Brand prompt block (~500 tokens)
+```

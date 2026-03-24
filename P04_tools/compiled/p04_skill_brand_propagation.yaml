@@ -84,3 +84,14 @@ metrics: '| Metrica | Valor | Nota |
   | Inject context size | ~500 tokens | Dentro do budget de satellite |
 
   | Supported satellites | 3 | LILY, EDISON, marca-agent |'
+usage: '/brand edit --file brand-guidelines.md
+
+  /brand sync
+
+  /brand generate --format css
+
+  /brand inject --satellite lily --task "gerar copy para Instagram"'
+input_output: "input:\n  command: enum     # edit|sync|generate|inject\n  file: string      # Path to guidelines (edit phase)\n\
+  \  satellite: string # Target satellite (inject phase)\n  format: enum      # css|scss|json (generate phase)\n\noutput:\n\
+  \  guidelines: path  # Updated brand-guidelines.md\n  tokens: path      # design-tokens.json (DTCG format)\n  css: path\
+  \         # design-tokens.css (<2KB)\n  context: string   # Brand prompt block (~500 tokens)"

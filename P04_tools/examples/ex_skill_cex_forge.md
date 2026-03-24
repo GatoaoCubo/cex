@@ -79,3 +79,34 @@ cex_forge.py eh a ferramenta central de geracao do CEX. Transforma schema rules 
 | Prompt size medio | 3-5KB | Dentro do budget de context |
 | Validation accuracy | ~95% | 5% de false positives em warnings |
 | Execution time | < 1s | Pure Python, sem I/O externo |
+
+## Usage
+
+```bash
+# Generate KC prompt
+python cex_forge.py --lp P01 --type knowledge_card --seeds "RAG,embedding,search"
+
+# Generate agent prompt with context file
+python cex_forge.py --lp P02 --type agent --seeds "scraper,web" --context-file notes.md
+
+# List available types for a LP
+python cex_forge.py --list-types --lp P04
+```
+
+## Input / Output
+
+```yaml
+input:
+  lp: string        # P01-P12 target LP
+  type: string      # Type within LP (e.g. knowledge_card)
+  seeds: string     # Comma-separated seed words (5-10 optimal)
+  context: string   # Optional context text (<5KB)
+
+output:
+  prompt: string    # Complete LLM-ready prompt (2-8KB)
+  warnings: list    # Validation warnings (0 = clean)
+```
+
+## Cross-References
+- cex_validate (P04.cli_tool): Validates output artifacts
+- brain_query (P04.mcp_server): Provides context for seeds

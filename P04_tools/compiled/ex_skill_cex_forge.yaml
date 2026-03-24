@@ -78,3 +78,22 @@ metrics: '| Metrica | Valor | Nota |
   | Validation accuracy | ~95% | 5% de false positives em warnings |
 
   | Execution time | < 1s | Pure Python, sem I/O externo |'
+usage: '# Generate KC prompt
+
+  python cex_forge.py --lp P01 --type knowledge_card --seeds "RAG,embedding,search"
+
+
+  # Generate agent prompt with context file
+
+  python cex_forge.py --lp P02 --type agent --seeds "scraper,web" --context-file notes.md
+
+
+  # List available types for a LP
+
+  python cex_forge.py --list-types --lp P04'
+input_output: "input:\n  lp: string        # P01-P12 target LP\n  type: string      # Type within LP (e.g. knowledge_card)\n\
+  \  seeds: string     # Comma-separated seed words (5-10 optimal)\n  context: string   # Optional context text (<5KB)\n\n\
+  output:\n  prompt: string    # Complete LLM-ready prompt (2-8KB)\n  warnings: list    # Validation warnings (0 = clean)"
+cross_references:
+- 'cex_validate (P04.cli_tool): Validates output artifacts'
+- 'brain_query (P04.mcp_server): Provides context for seeds'

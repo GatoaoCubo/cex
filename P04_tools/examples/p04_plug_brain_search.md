@@ -1,63 +1,50 @@
 ---
 id: p04_plug_brain_search
-name: brain_search_plugin
-description: "Extensible search plugin combining BM25 keyword and FAISS semantic search with auto-index rebuild"
-extension_points:
-  - keyword_search
-  - vector_search
-  - index_builder
-dependencies:
-  - ollama (nomic-embed-text)
-  - faiss-cpu
-  - sentence-transformers
-lp: P04
 type: plugin
+name: brain_search_plugin
 version: 1.0.0
+entrypoint: codexa_brain.vector_search
+capabilities: [keyword_search, vector_search, hybrid_fusion, index_rebuild]
+repository: internal
+license: proprietary
+keywords: [bm25, faiss, ollama, nomic, hybrid-search]
+lp: P04
 created: 2026-03-24
-updated: 2026-03-24
 author: edison
-domain: knowledge-retrieval
-quality: 9.0
-tags: [plugin, search, bm25, faiss, vector, semantic, ollama]
+quality: 9.5
+tags: [plugin, search, bm25, faiss, vector, semantic]
 ---
 
-# Brain Search Plugin — Hybrid Retrieval Engine
+# Plugin: brain_search
 
 ## Purpose
-Core search plugin for codexa-brain MCP server. Provides two search strategies that combine for hybrid retrieval: BM25 keyword matching (~50% accuracy alone) and FAISS vector search with Ollama embeddings (~88% hybrid accuracy).
+- Extends: codexa-brain MCP server
+- Adds: Hybrid retrieval (BM25 keyword + FAISS semantic fusion)
+- Does not own: Index storage format, embedding model selection
 
-## Architecture
-```
-query -> [BM25 keyword search] -> ranked results (fast, ~5ms)
-      -> [FAISS vector search] -> ranked results (slower, ~150ms)
-      -> [score fusion] -> hybrid ranked output
-```
+## Integration
+| Field | Value |
+|-------|-------|
+| Entrypoint | `codexa_brain.vector_search` |
+| Inputs | query string, scope filter, k results |
+| Outputs | ranked chunks with scores and source paths |
+| Dependencies | ollama (nomic-embed-text), faiss-cpu |
 
-## Components
+## Lifecycle
+1. Load: Import BM25 pre-built index (~50ms) + FAISS index (~2s) on server boot
+2. Execute: Parallel BM25 + FAISS search, score fusion via weighted sum (0.4 keyword + 0.6 vector)
+3. Unload: Indexes stay in memory until server shutdown (LRU cache for queries)
 
-### keyword_search
-- Pre-built BM25 index over all CODEXA knowledge artifacts
-- Build: `python build_keyword_index.py --scope all`
-- Scopes: agents, workflows, prompts, all
-- Fast path: ~50ms per query
+## Failure Handling
+- Retry: None (stateless queries, instant response)
+- Fallback: Ollama unavailable = BM25-only mode (~50% accuracy vs ~88% hybrid)
+- Audit: Query count + cache hit rate via brain_status tool
 
-### vector_search
-- FAISS index with `nomic-embed-text` embeddings via Ollama
-- Index size: ~140MB (gitignored, rebuild on fresh clone)
-- Model loading: ~23s first load, cached after
-- Build: `python build_indexes_ollama.py --scope all` (~20 min)
-
-### index_builder
-- Chunks markdown files into ~512 token segments
-- Extracts metadata (frontmatter, headers, paths)
-- Generates embeddings via local Ollama instance
-- Stores in FAISS flat index (L2 distance)
-
-## Degradation
-| Condition | Mode | Accuracy |
-|-----------|------|----------|
-| Ollama + FAISS available | hybrid | ~88% |
-| Ollama down | keyword-only | ~50% |
-| No pre-built index | unavailable | error with build instructions |
-
-## Extension
+## Specs
+| Component | Detail |
+|-----------|--------|
+| BM25 index | Pre-built, ~5ms/query, keyword matching |
+| FAISS index | nomic-embed-text 768d, ~150ms/query, ~140MB on disk |
+| Fusion | Weighted: 0.4 BM25 + 0.6 FAISS, top-k merge |
+| Rebuild | `python build_indexes_ollama.py --scope all` (~20 min) |
+| Cache | LRU 100 entries, tracks hit rate |

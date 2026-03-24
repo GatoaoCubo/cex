@@ -1,29 +1,30 @@
 ---
 id: p04_hook_pre_commit_qa
-name: pre_commit_quality_gate
-description: "Pre-commit hook that runs 5-dimension quality scoring with escalation on repeated failures"
 type: pre
 trigger_event: pre_commit
 script_path: records/core/python/quality_gate.py
 lp: P04
 version: 1.0.0
 created: 2026-03-24
-updated: 2026-03-24
 author: edison
-domain: quality-assurance
 quality: 9.0
-tags: [hook, pre-commit, quality, scoring, validation]
+tags: [hook, pre-commit, quality, scoring]
 ---
 
-# Pre-Commit Quality Gate Hook
+# Hook: pre_commit_qa
 
-## Purpose
-Validates staged files before commit using 5-dimension weighted scoring. Implements AP4+AP5 from Stripe Agentic Engineering: quality-based stop criteria instead of arbitrary retry counts.
+## Trigger
+- Type: pre
+- Event: pre_commit (git hook)
+- Script: `python records/core/python/quality_gate.py --staged-only`
 
-## Scoring Dimensions (total = 10.0)
-| Dimension | Weight | Checks |
-|-----------|--------|--------|
-| syntax | 3.0 | No syntax errors in staged files |
-| structure | 2.0 | Valid Markdown headers, links |
-| size | 1.5 | Files within limits (warn 50KB, block 100KB) |
-| lint | 2.0 | Clean lint output |
+## Behavior
+1. Collect staged files via `git diff --cached --name-only`
+2. Score each file on 5 dimensions (syntax 3.0, structure 2.0, size 1.5, lint 2.0, completeness 1.5)
+3. Block commit if weighted score < 7.0; warn if < 9.0; pass if >= 9.0
+
+## Safety
+- Fail mode: block (score < 7.0 = exit 2, rollback recommended)
+- Idempotent: yes (read-only analysis, no file mutations)
+- Timeout: 30s
+- Escalation: >=3 consecutive fails triggers architecture review alert
