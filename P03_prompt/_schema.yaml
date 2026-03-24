@@ -95,7 +95,7 @@ types:
     source_map:
       already_is: ["KC_EDISON_024 (CoT patterns)"]
       is_input_for: ["any user_prompt (technique applied on top)"]
-    constraints: {max_bytes: 2048}
+    constraints: {max_bytes: 3072}  # raised: metacognitive 5-stage protocols need ~3KB
     frontmatter_required: [id, type, reasoning_type]
     body_structure: [task, reasoning_cue, format, answer_extract]
 
@@ -112,7 +112,7 @@ types:
     source_map:
       already_is: ["ISO_*_TOOLS_AND_APIS (91)", ".mcp-*.json (10)"]
       receives_input_from: ["P04 skill", "P04 mcp_server"]
-    constraints: {max_bytes: 3072}
+    constraints: {max_bytes: 5120}  # raised: tool schemas in JSON are ~500B each; 3+ tools = 1.5KB+ just for schemas
     frontmatter_required: [id, type, tools_available]
     body_structure: [objective, tools, loop_format, stop_condition, max_iterations]
 
@@ -128,7 +128,7 @@ types:
     source_map:
       already_is: ["ADW_*.md (~240 workflows)"]
       receives_input_from: ["P05 output_schema", "P06 interface"]
-    constraints: {max_bytes: 2048}
+    constraints: {max_bytes: 6144}  # raised: chains with N steps x I/O JSON schemas scale linearly; 4 steps = ~5.5KB
     frontmatter_required: [id, type, steps, flow]
     body_structure: [purpose, steps, data_flow, error_handling]
 
@@ -146,7 +146,7 @@ types:
       already_is: ["HOP_GENESIS/PITER", "_generator.md files (12)"]
       is_input_for: ["all other P03 types"]
       receives_input_from: ["P07 scoring_rubric", "P01 knowledge_card"]
-    constraints: {max_bytes: 3072}
+    constraints: {max_bytes: 7168}  # raised: meta-prompts must include generation rules + complete generated example (~2x target size)
     frontmatter_required: [id, type, target_type, optimization_method]
     body_structure: [objective, generation_rules, quality_criteria, iteration_method]
 
@@ -162,7 +162,7 @@ types:
     source_map:
       already_is: ["STELLA_RULES.md", "AGENT_ROUTING_INDEX.md"]
       receives_input_from: ["P12 dispatch_rule", "P10 learning_record"]
-    constraints: {max_bytes: 2048}
+    constraints: {max_bytes: 6144}  # raised: routers scale with route count; 6 routes x keywords+signals+examples = ~6KB
     frontmatter_required: [id, type, routes, fallback]
     body_structure: [objective, routes, classification, fallback, threshold]
 

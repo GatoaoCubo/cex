@@ -57,4 +57,4 @@ types:
     core: true
     machine_format: yaml
     naming: p07_sr_{{framework}}.md + .yaml
-    constraints: {max_bytes: 3072}
+    constraints: {max_bytes: 5120}  # raised: multi-dimension rubrics need 5 dims x 5 score levels = 25 criteria rows
