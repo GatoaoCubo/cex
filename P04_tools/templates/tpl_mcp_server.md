@@ -42,3 +42,20 @@ resources_provided: [[resource_1], [resource_2]]
 - Start command: [comando_de_boot]
 - Required env: [env_1], [env_2]
 - Fallback: [comportamento_em_falha]
+
+## Debugging
+<!-- INSTRUCAO: passos comuns de debug e falhas frequentes. -->
+
+**Debug Checklist**:
+1. Check logs: `~/.claude/logs/[server_slug].log`
+2. Validate API key / env vars are set
+3. Validate JSON config format (`.mcp.json` or `.mcp-{sat}.json`)
+4. Enable verbose: `DEBUG=1 [start_command]`
+
+**Common Failures**:
+| Symptom | Cause | Fix |
+|---------|-------|-----|
+| Server not found | NVM path not resolved | Use absolute node path: `$(which node)` |
+| Connection refused | Port conflict | `lsof -i :[PORT]` or `netstat -ano \| findstr :[PORT]` |
+| Silent failure | Missing env var | Check `Required env` above, verify with `echo $VAR` |
+| Timeout on start | Heavy init / missing deps | Increase timeout, check `npm ls` for missing packages |

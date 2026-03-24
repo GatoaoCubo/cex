@@ -6,8 +6,13 @@
 id: p04_plug_{{PLUGIN_SLUG}}
 type: plugin
 name: {{PLUGIN_NAME}}
+version: 1.0.0
 entrypoint: {{MODULE_OR_COMMAND}}
 capabilities: [{{CAP_1}}, {{CAP_2}}]
+repository: {{GITHUB_URL}}
+license: MIT
+keywords: [{{KW1}}, {{KW2}}, {{KW3}}]
+author_url: {{AUTHOR_URL}}
 ---
 
 # Plugin: {{PLUGIN_NAME}}

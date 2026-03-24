@@ -21,13 +21,18 @@ types:
     frontmatter_required:   # (DISTILL: SKILL frontmatter = single source)
       - id
       - name
-      - description
+      - description        # TRIGGER CONDITION — when agent should invoke this skill
       - user_invocable    # boolean
       - trigger           # como ativar
       - phases            # lista de fases
       - when_to_use
       - when_not_to_use
       - examples          # 2-3 exemplos de uso
+    frontmatter_optional:
+      - references_dir    # optional: path to references/ dir (create when SKILL.md > 200 lines or table > 10 items)
+      - sub_skills        # optional: list of sub-skill names for master skill routing
+      - platforms         # optional: list, default [claude] (future: cursor, codex, windsurf)
+      - stack_default     # optional: default stack target (e.g. html-tailwind)
     body_structure:
       - purpose
       - workflow_phases   # numeradas com input/output

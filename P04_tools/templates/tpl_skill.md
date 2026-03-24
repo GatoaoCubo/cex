@@ -7,7 +7,7 @@
 
 id: p04_skill_{{NAME_SLUG}}
 name: {{SKILL_KEBAB_NAME}}
-description: {{ONE_LINE_WHAT_IT_DOES}}
+description: {{ONE_LINE_WHAT_IT_DOES}}  # TRIGGER CONDITION — when agent should invoke this skill
 version: 1.0.0
 lp: P04
 type: skill
@@ -30,6 +30,10 @@ examples:
   - {{EXEMPLO_USO_1}}
   - {{EXEMPLO_USO_2}}
 density_score: {{0.80_TO_1.00}}
+references_dir: # optional — create when SKILL.md > 200 lines or table > 10 items
+sub_skills: # optional — [{{SUB_1}}, {{SUB_2}}] for master skill routing
+platforms: [claude] # optional — [claude, cursor, codex, windsurf]
+stack_default: # optional — e.g. html-tailwind
 ---
 
 # {{SKILL_DISPLAY_NAME}}
@@ -90,6 +94,30 @@ output:
 | {{METRICA_1}} | {{THRESHOLD_1}} | {{ACAO_1}} |
 | {{METRICA_2}} | {{THRESHOLD_2}} | {{ACAO_2}} |
 
+## Hard Gates
+<!-- OPCIONAL: condicoes que IMPEDEM execucao. Nao podem ser ignoradas. -->
+<!-- Remova esta secao se nao houver hard gates -->
+<HARD-GATE>
+{{CONDICAO_QUE_IMPEDE_EXECUCAO}}
+</HARD-GATE>
+
+## Integration
+<!-- Grafo de dependencias entre skills -->
+- **requires**: {{SKILL_OU_TOOL_NECESSARIO}}
+- **called_by**: {{AGENT_OU_SKILL_QUE_INVOCA}}
+
+## Sub-skill Routing
+<!-- OPCIONAL: para master skills com sub-comandos. Remova se nao aplicavel. -->
+| Sub-command | File | Description |
+|-------------|------|-------------|
+| {{SUBCMD_1}} | references/{{SUBCMD_1}}.md | {{DESC_1}} |
+| {{SUBCMD_2}} | references/{{SUBCMD_2}}.md | {{DESC_2}} |
+
 ## Cross-References
 - {{AGENT_RELACIONADO}}: {{DESCRICAO_RELACAO}}
 - {{SKILL_RELACIONADA}}: {{DESCRICAO_RELACAO}}
+
+## References
+<!-- OPCIONAL: arquivos de referencia detalhada (loaded on demand) -->
+- `references/{{REF_1}}.md` — {{DESCRICAO}}
+- `references/{{REF_2}}.md` — {{DESCRICAO}}

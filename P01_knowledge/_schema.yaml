@@ -42,6 +42,7 @@ types:
       - axioms         # min 1 (regra fundamental)
       - linked_artifacts # cross-links tipados {adw, agent, hop}
       - density_score  # auto-calculado
+      - data_source    # optional: csv | markdown | web | internal (origin of knowledge)
 
     body_structure:
       domain_kc:       # KC de negocio/dominio (template KC_PYTHA_069)
