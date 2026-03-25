@@ -88,6 +88,6 @@ def acos_targets(margem_pct: float) -> dict:
 ## References
 
 - external: https://advertising.amazon.com/solutions/products/sponsored-products
-- external: https://advertising.amazon.com/library/guides/acos-advertising-cost-of-sales
+- external: https://advertising.amazon.com/library/guides/acos
 - external: https://advertising.amazon.com/
 - deepens: p01_kc_catalogo_proprio_mercado_livre
