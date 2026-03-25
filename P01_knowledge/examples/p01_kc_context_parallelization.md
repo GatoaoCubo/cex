@@ -23,7 +23,7 @@ linked_artifacts:
   primary: p01_kc_claude_agent_sdk_patterns
   related: []
 density_score: null
-data_source: "Claude Agent Framework docs + medicao interna CODEXA"
+data_source: "https://docs.anthropic.com/en/docs/agents-and-tools"
 ---
 
 ## Summary
@@ -62,30 +62,33 @@ Agente unico carrega 10K-100K tokens de contexto irrelevante por tarefa. Arquite
 
 ## Code
 
-<!-- source: records/core/python/adw_executor.py | lang: python | purpose: subagent with narrow context -->
+<!-- source: pattern generico | lang: python | purpose: worker com contexto narrow -->
 ```python
-from records.core.python.adw_executor import create_subagent_prompt
+# Orchestrator: routing only (~500 tokens)
+def orchestrate(task):
+    workers = decompose(task)  # split em subtarefas
+    results = parallel_run(workers)  # cada worker ~2K tokens
+    return aggregate(results)  # merge + quality check
 
-# Worker carrega SO seu FAT ADW (~2K tokens), NAO o contexto full
-prompt = create_subagent_prompt(
-    "records/pool/workflows/fat/FAT_LILY_002_ANUNCIO_COMPLETO.md",
-    {"product_name": "Earbuds"}
-)
-# Resultado: 2K tokens vs 50K do agente completo
+# Worker: contexto narrow, 1 dominio
+def worker_marketing(product):
+    context = load_domain_context("marketing", max_tokens=2000)
+    return llm_call(context + product)  # 2K vs 50K
 ```
 
-<!-- source: CODEXA spawn system | lang: yaml | purpose: metricas reais -->
+<!-- source: benchmark empirico | lang: yaml | purpose: metricas de referencia -->
 ```yaml
-codexa_metrics:
-  spawn_max_parallel: 10
-  fat_adw_size: 1800-2500 tokens
-  measured_reduction: 40-60% vs execucao completa
-  slim_commands: ["/lily-slim", "/shaka-slim"]
-  orchestrator: multi_agent_orchestrator.py
+parallelization_benchmarks:
+  max_parallel_workers: 10
+  worker_context_size: 1000-2500 tokens
+  measured_reduction: 40-80% vs agente unico
+  speed_multiplier: 3-6x (tempo do mais lento, nao soma)
+  sweet_spot: 3-5 workers (alem de 10 = overhead > ganho)
 ```
 
 ## References
 
-- source: CODEXA LAW 11 (Optimized Execution)
-- source: Claude Agent Framework (97% context reduction em producao)
-- related: p01_kc_claude_agent_sdk_patterns
+- external: https://docs.anthropic.com/en/docs/agents-and-tools
+- external: https://arxiv.org/abs/2304.03442 (CoALA framework)
+- deepens: p01_kc_claude_agent_sdk_patterns (handoffs e orquestracao)
+- deepens: /skill context_decomposition (como decompor tarefas — a ser criada)

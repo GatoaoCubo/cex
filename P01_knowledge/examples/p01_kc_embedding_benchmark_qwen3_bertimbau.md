@@ -23,7 +23,7 @@ linked_artifacts:
   primary: null
   related: [p01_kc_rag_fundamentals]
 density_score: null
-data_source: "records/core/python/embedding_benchmark_ptbr.py — 50 queries x 30 docs"
+data_source: "Benchmark proprio: 50 queries x 30 docs, metricas Recall/MRR/NDCG/Latency"
 ---
 
 ## Quick Reference
@@ -68,7 +68,7 @@ decisao: Qwen3 primary + BERTimbau fallback (hybrid)
 
 ## Code
 
-<!-- source: records/core/python/embedding_router.py | lang: python | purpose: hybrid routing -->
+<!-- lang: python | purpose: hybrid embedding routing -->
 ```python
 PT_BR_TRIGGERS = ["anvisa", "inmetro", "conar", "registro", "certificacao"]
 
@@ -80,6 +80,7 @@ def embed_hybrid(texts):
 
 ## References
 
-- source: records/core/python/embedding_benchmark_ptbr.py
-- source: records/core/python/embedding_router.py
-- related: p01_kc_rag_fundamentals
+- external: https://huggingface.co/Alibaba-NLP/gte-Qwen2-7B-instruct
+- external: https://huggingface.co/neuralmind/bert-base-portuguese-cased
+- deepens: p01_kc_rag_fundamentals (arquitetura RAG completa)
+- deepens: /skill embedding_evaluation (como benchmarkar — a ser criada)

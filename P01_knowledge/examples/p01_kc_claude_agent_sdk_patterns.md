@@ -23,7 +23,7 @@ linked_artifacts:
   primary: p01_kc_mcp_tool_infrastructure
   related: [p01_kc_context_parallelization]
 density_score: null
-data_source: "github.com/anthropics/anthropic-cookbook/tree/main/claude_agent_sdk"
+data_source: "https://github.com/anthropics/anthropic-cookbook"
 ---
 
 ## Summary
@@ -60,14 +60,14 @@ Agent SDK: framework para agentes em producao. Agent = instructions + tools + mo
 
 ## Code
 
-<!-- source: anthropic-cookbook/claude_agent_sdk | lang: python | purpose: satellite pattern -->
+<!-- lang: python | purpose: multi-agent handoff pattern -->
 ```python
 stella = Agent(name="stella", instructions="Orchestrate", handoffs=[shaka, edison])
 shaka = Agent(name="shaka", instructions="Research", tools=[web_search, scrape])
 edison = Agent(name="edison", instructions="Build", tools=[write_code, test])
 ```
 
-<!-- source: agent-sdk docs | lang: python | purpose: structured output -->
+<!-- lang: python | purpose: structured output -->
 ```python
 agent = Agent(name="extractor", output_type=ProductData)
 result = agent.run("Extract product info from this listing")
@@ -75,7 +75,7 @@ result = agent.run("Extract product info from this listing")
 ```
 
 
-<!-- source: agent-sdk docs | lang: python | purpose: guardrails -->
+<!-- lang: python | purpose: input guardrail -->
 ```python
 @input_guardrail
 def check_pii(input: str) -> GuardrailResult:
@@ -86,6 +86,8 @@ agent = Agent(name="safe", input_guardrails=[check_pii])
 ```
 ## References
 
-- source: github.com/anthropics/anthropic-cookbook/tree/main/claude_agent_sdk
-- source: platform.claude.com/docs/en/docs/agents-and-tools
-- related: p01_kc_mcp_tool_infrastructure
+- external: https://github.com/anthropics/anthropic-cookbook
+- external: https://docs.anthropic.com/en/docs/agents-and-tools
+- deepens: p01_kc_mcp_tool_infrastructure (tool scaling patterns)
+- deepens: p01_kc_context_parallelization (token reduction via workers)
+- deepens: /skill agent_orchestration (como orquestrar — a ser criada)
