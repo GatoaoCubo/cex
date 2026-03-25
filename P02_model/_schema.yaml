@@ -1,16 +1,15 @@
-# P02 Model Schema v2.0
+# P02 Model Schema v4.0
 # v2.0: machine_format per type
 # Baseado em: DISTILL_GOLDEN_AGT_SKL_PATTERNS.md
 # Evidence: 31 golden agents, 78 golden documents, ISO patterns
-
 lp: P02
 name: Model
 description: QUEM o agente EH
-
 types:
   agent:
     description: Definicao de agente (persona + capabilities)
-    boundary: "Definicao completa de agente (persona + capabilities). NAO eh skill (P04, habilidade executavel) nem system_prompt (P03, como fala)."
+    boundary: Definicao completa de agente (persona + capabilities). NAO eh skill
+      (P04, habilidade executavel) nem system_prompt (P03, como fala).
     layer: spec
     core: true
     machine_format: yaml
@@ -19,45 +18,46 @@ types:
       max_bytes: 5120
       quality_min: 7.0
     frontmatter_required:
-      - id
-      - type            # agent
-      - lp              # P02
-      - title
-      - version
-      - satellite       # qual satellite opera
-      - domain
-      - quality
-      - tags
-      - tldr
-    body_structure:     # 11 secoes padrao (DISTILL_AGT)
-      - overview
-      - architecture    # ASCII diagram ou tabela
-      - file_structure
-      - when_to_use     # YES/NO tabela
-      - input_output
-      - integration     # upstream + downstream
-      - quality_gates   # 5D ou 12LP
-      - common_issues
-      - invocation
-      - related_agents
-      - footer          # Satellite: {{SAT}} | Quality: {{Q}}
+    - id
+    - type
+    - lp
+    - title
+    - version
+    - satellite
+    - domain
+    - quality
+    - tags
+    - tldr
+    body_structure:
+    - overview
+    - architecture
+    - file_structure
+    - when_to_use
+    - input_output
+    - integration
+    - quality_gates
+    - common_issues
+    - invocation
+    - related_agents
+    - footer
     iso_vectorstore:
-      min_files: 10     # baseline
+      min_files: 10
       required:
-        - MANIFEST
-        - QUICK_START
-        - PRIME
-        - INSTRUCTIONS
-        - ARCHITECTURE
-        - OUTPUT_TEMPLATE
-        - EXAMPLES
-        - ERROR_HANDLING
-        - UPLOAD_KIT
-        - SYSTEM_INSTRUCTION
-
+      - MANIFEST
+      - QUICK_START
+      - PRIME
+      - INSTRUCTIONS
+      - ARCHITECTURE
+      - OUTPUT_TEMPLATE
+      - EXAMPLES
+      - ERROR_HANDLING
+      - UPLOAD_KIT
+      - SYSTEM_INSTRUCTION
+    llm_function: BECOME
   lens:
     description: Perspectiva especializada sobre dominio
-    boundary: "Perspectiva especializada sobre dominio. NAO eh agent (sem capabilities) nem mental_model (sem routing rules)."
+    boundary: Perspectiva especializada sobre dominio. NAO eh agent (sem capabilities)
+      nem mental_model (sem routing rules).
     layer: content
     core: false
     machine_format: yaml
@@ -65,14 +65,15 @@ types:
     constraints:
       max_bytes: 2048
     frontmatter_required:
-      - id
-      - type
-      - perspective
-      - applies_to
-
+    - id
+    - type
+    - perspective
+    - applies_to
+    llm_function: INJECT
   boot_config:
     description: Configuracao de inicializacao por provider
-    boundary: "Bootstrap por provider (claude, cursor, codex). NAO eh env_config (P09, variaveis genericas) nem spawn_config (P12, satelites)."
+    boundary: Bootstrap por provider (claude, cursor, codex). NAO eh env_config (P09,
+      variaveis genericas) nem spawn_config (P12, satelites).
     layer: runtime
     core: false
     machine_format: yaml
@@ -80,15 +81,16 @@ types:
     constraints:
       max_bytes: 2048
     frontmatter_required:
-      - id
-      - provider        # claude, cursor, windsurf, codex, copilot, pi
-      - identity
-      - constraints
-      - tools
-
+    - id
+    - provider
+    - identity
+    - constraints
+    - tools
+    llm_function: GOVERN
   mental_model:
     description: Mapa mental do agente (routing, decisoes)
-    boundary: "Identidade fixa do agente com routing e decisoes. NAO eh mental_model P10 (estado variavel por sessao)."
+    boundary: Identidade fixa do agente com routing e decisoes. NAO eh mental_model
+      P10 (estado variavel por sessao).
     layer: spec
     core: true
     machine_format: yaml
@@ -96,14 +98,15 @@ types:
     constraints:
       max_bytes: 2048
     frontmatter_required:
-      - id
-      - agent
-      - routing_rules
-      - decision_tree
-
+    - id
+    - agent
+    - routing_rules
+    - decision_tree
+    llm_function: BECOME
   model_card:
     description: Spec do LLM usado (pricing, context, capabilities)
-    boundary: "Spec de LLM (pricing, context window, capabilities). NAO eh agent (P02, quem usa o modelo) nem boot_config (como inicia)."
+    boundary: Spec de LLM (pricing, context window, capabilities). NAO eh agent (P02,
+      quem usa o modelo) nem boot_config (como inicia).
     layer: spec
     core: false
     machine_format: yaml
@@ -111,15 +114,16 @@ types:
     constraints:
       max_bytes: 2048
     frontmatter_required:
-      - id
-      - model_name
-      - provider
-      - context_window
-      - pricing
-
+    - id
+    - model_name
+    - provider
+    - context_window
+    - pricing
+    llm_function: GOVERN
   router:
     description: Regra de roteamento (task > satellite)
-    boundary: "Roteamento task-to-satellite. NAO eh dispatch_rule (P12, keyword>satellite) nem fallback_chain (modelo>modelo)."
+    boundary: Roteamento task-to-satellite. NAO eh dispatch_rule (P12, keyword>satellite)
+      nem fallback_chain (modelo>modelo).
     layer: runtime
     core: true
     machine_format: yaml
@@ -127,13 +131,14 @@ types:
     constraints:
       max_bytes: 1024
     frontmatter_required:
-      - id
-      - routes
-      - fallback
-
+    - id
+    - routes
+    - fallback
+    llm_function: REASON
   fallback_chain:
     description: Sequencia de fallback (model A > B > C)
-    boundary: "Sequencia de fallback entre modelos LLM. NAO eh chain (P03, sequencia de prompts) nem router (task routing)."
+    boundary: Sequencia de fallback entre modelos LLM. NAO eh chain (P03, sequencia
+      de prompts) nem router (task routing).
     layer: runtime
     core: false
     machine_format: yaml
@@ -141,13 +146,14 @@ types:
     constraints:
       max_bytes: 512
     frontmatter_required:
-      - id
-      - chain
-      - timeout_per_step
-
+    - id
+    - chain
+    - timeout_per_step
+    llm_function: GOVERN
   iso_package:
     description: Pacote portable de agente AI (ISO format) — self-contained, LLM-agnostic
-    boundary: "Pacote distribuivel de agente em formato ISO. NAO eh agent (spec do agente) — iso_package eh o bundle portable."
+    boundary: Pacote distribuivel de agente em formato ISO. NAO eh agent (spec do
+      agente) — iso_package eh o bundle portable.
     layer: spec
     core: true
     machine_format: yaml
@@ -155,24 +161,24 @@ types:
     constraints:
       max_bytes: 4096
     required_files:
-      - manifest.yaml
-      - system_instruction.md
-      - instructions.md
+    - manifest.yaml
+    - system_instruction.md
+    - instructions.md
     recommended_files:
-      - architecture.md
-      - output_template.md
-      - examples.md
-      - error_handling.md
+    - architecture.md
+    - output_template.md
+    - examples.md
+    - error_handling.md
     optional_files:
-      - quick_start.md
-      - input_schema.yaml
-      - upload_kit.md
-      - upload_kit_whitelabel.md
+    - quick_start.md
+    - input_schema.yaml
+    - upload_kit.md
+    - upload_kit_whitelabel.md
     tiers:
-      minimal: 3     # required only
-      standard: 7    # + recommended
-      complete: 10   # + optional
-      whitelabel: 12 # + whitelabel variants
+      minimal: 3
+      standard: 7
+      complete: 10
+      whitelabel: 12
     quality_gates:
       system_instruction_max_tokens: 4096
       min_examples: 2
@@ -190,7 +196,4 @@ types:
       quick_start.md: P01
       input_schema.yaml: P06
       upload_kit.md: P04
-
-# Evidence: 31 golden agents, 22+ ISO files in mature agents
-# ISO count = maturity: 10=baseline, 17=mature, 22+=golden
-# Shokunin iteration 2 | 2026-03-22
+    llm_function: BECOME

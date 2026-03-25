@@ -1,16 +1,15 @@
-# P01 Knowledge Schema v2.0
+# P01 Knowledge Schema v4.0
 # v2.0: machine_format per type
 # Baseado em destilacao de 7 KCs golden do codexa-core
 # Sources: DISTILL_GOLDEN_KC_PATTERNS.md
-
 lp: P01
 name: Knowledge
 description: O que o agente SABE
-
 types:
   knowledge_card:
     description: Fato atomico pesquisavel (densidade > 0.8)
-    boundary: "Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao."
+    boundary: Conhecimento destilado, estatico, versionado. NAO eh instrucao, template,
+      ou configuracao.
     layer: content
     core: true
     machine_format: yaml
@@ -20,59 +19,55 @@ types:
       min_bullets: 3
       density_min: 0.8
       quality_min: 7.0
-
     frontmatter_required:
-      - id            # p01_kc_{{topic}}
-      - type           # knowledge_card
-      - lp             # P01
-      - title          # descriptivo, 5-100 chars
-      - version        # semver
-      - created        # ISO date
-      - updated        # ISO date
-      - author         # satellite name
-      - domain         # area de conhecimento
-      - quality        # 7.0-10.0
-      - tags           # min 2 strings
-      - tldr           # 1 frase densa
-      - when_to_use    # condicoes de uso
-
+    - id
+    - type
+    - lp
+    - title
+    - version
+    - created
+    - updated
+    - author
+    - domain
+    - quality
+    - tags
+    - tldr
+    - when_to_use
     frontmatter_cex:
-      - keywords       # min 3 (head terms, SEO para Brain)
-      - long_tails     # min 2 (perguntas de busca)
-      - axioms         # min 1 (regra fundamental)
-      - linked_artifacts # cross-links tipados {adw, agent, hop}
-      - density_score  # auto-calculado
-      - data_source    # optional: csv | markdown | web | internal (origin of knowledge)
-
+    - keywords
+    - long_tails
+    - axioms
+    - linked_artifacts
+    - density_score
+    - data_source
     body_structure:
-      domain_kc:       # KC de negocio/dominio (template KC_PYTHA_069)
-        - quick_reference  # YAML block com dados chave
-        - conceitos_chave  # bullets atomicos
-        - strategy_phases  # fases numeradas
-        - regras_de_ouro   # axiomas em imperativos
-        - visual_flow      # ASCII diagram
-        - comparativo      # tabela comparativa
-        - artefatos        # links para execucao
-
-      meta_kc:         # KC tecnico/referencia (template KC_PYTHA_358)
-        - executive_summary  # 1-2 frases
-        - spec_table         # dados exatos (precos, APIs, configs)
-        - patterns           # o que funciona (especifico)
-        - anti_patterns      # o que evitar (especifico)
-        - application        # estado atual + oportunidade
-        - references         # URLs + related KCs
-
+      domain_kc:
+      - quick_reference
+      - conceitos_chave
+      - strategy_phases
+      - regras_de_ouro
+      - visual_flow
+      - comparativo
+      - artefatos
+      meta_kc:
+      - executive_summary
+      - spec_table
+      - patterns
+      - anti_patterns
+      - application
+      - references
     validation:
-      - content_hash nao vazio (auto SHA256)
-      - id == filename stem
-      - quality YAML +/- 1.0 do body
-      - tags = lista de strings (nunca lista-em-string)
-      - cada bullet max 80 chars
-      - secoes com < 3 linhas: expandir ou remover
-
+    - content_hash nao vazio (auto SHA256)
+    - id == filename stem
+    - quality YAML +/- 1.0 do body
+    - tags = lista de strings (nunca lista-em-string)
+    - cada bullet max 80 chars
+    - secoes com < 3 linhas: expandir ou remover
+    llm_function: INJECT
   rag_source:
     description: Fonte externa indexavel
-    boundary: "Ponteiro para fonte externa indexavel. NAO eh o conteudo em si, apenas referencia com URL e freshness."
+    boundary: Ponteiro para fonte externa indexavel. NAO eh o conteudo em si, apenas
+      referencia com URL e freshness.
     layer: content
     core: false
     machine_format: yaml
@@ -80,15 +75,16 @@ types:
     constraints:
       max_bytes: 1024
     frontmatter_required:
-      - id
-      - type
-      - url
-      - domain
-      - last_checked
-
+    - id
+    - type
+    - url
+    - domain
+    - last_checked
+    llm_function: INJECT
   glossary_entry:
     description: Definicao de termo
-    boundary: "Definicao curta de termo do dominio. NAO eh knowledge_card (sem densidade min) nem context_doc (sem escopo)."
+    boundary: Definicao curta de termo do dominio. NAO eh knowledge_card (sem densidade
+      min) nem context_doc (sem escopo).
     layer: content
     core: false
     machine_format: yaml
@@ -97,14 +93,15 @@ types:
       max_bytes: 512
       max_definition_lines: 3
     frontmatter_required:
-      - id
-      - term
-      - definition
-      - synonyms
-
+    - id
+    - term
+    - definition
+    - synonyms
+    llm_function: INJECT
   context_doc:
     description: Contexto de dominio
-    boundary: "Contexto de dominio para hidratar prompts. NAO eh knowledge_card (sem density gate) nem glossary_entry (nao define termo)."
+    boundary: Contexto de dominio para hidratar prompts. NAO eh knowledge_card (sem
+      density gate) nem glossary_entry (nao define termo).
     layer: content
     core: false
     machine_format: yaml
@@ -112,14 +109,15 @@ types:
     constraints:
       max_bytes: 2048
     frontmatter_required:
-      - id
-      - type
-      - domain
-      - scope
-
+    - id
+    - type
+    - domain
+    - scope
+    llm_function: INJECT
   embedding_config:
     description: Configuracao de embedding model
-    boundary: "Configuracao de modelo de embedding. NAO eh brain_index (P10) que configura o indice, apenas o modelo vetorial."
+    boundary: Configuracao de modelo de embedding. NAO eh brain_index (P10) que configura
+      o indice, apenas o modelo vetorial.
     layer: spec
     core: false
     machine_format: yaml
@@ -127,14 +125,15 @@ types:
     constraints:
       max_bytes: 512
     frontmatter_required:
-      - id
-      - model_name
-      - dimensions
-      - chunk_size
-
+    - id
+    - model_name
+    - dimensions
+    - chunk_size
+    llm_function: GOVERN
   few_shot_example:
     description: Exemplo input/output pra prompt
-    boundary: "Par input/output para few-shot learning. NAO eh golden_test (P07) que avalia qualidade, apenas exemplifica formato."
+    boundary: Par input/output para few-shot learning. NAO eh golden_test (P07) que
+      avalia qualidade, apenas exemplifica formato.
     layer: prompt
     core: true
     machine_format: yaml
@@ -142,15 +141,9 @@ types:
     constraints:
       max_bytes: 1024
     frontmatter_required:
-      - id
-      - type
-      - input
-      - output
-      - quality
-
-# EVIDENCE: Destilado de 7 KCs golden (quality 9.5-10.0)
-# KC_PYTHA_069 (density 92%, domain template)
-# KC_PYTHA_358 (density 88%, meta template)
-# KC_EDISON_029 (density 76%, tech reference)
-# Validated: 783 golden, 2214 pool artifacts, 9910 total MD
-# Shokunin iteration 1 | 2026-03-22
+    - id
+    - type
+    - input
+    - output
+    - quality
+    llm_function: INJECT

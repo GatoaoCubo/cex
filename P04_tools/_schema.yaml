@@ -1,16 +1,13 @@
-# P04 Tools Schema v2.0
-# v2.0: machine_format per type
-# Baseado em: DISTILL_GOLDEN_AGT_SKL_PATTERNS.md
-# Evidence: 58 golden skills, MCP server patterns
-
+# P04 Tools Schema v4.0
+# v4.0: +component type, llm_function on all types
 lp: P04
 name: Tools
 description: O que o agente USA
-
 types:
   skill:
     description: Habilidade reutilizavel (phases + trigger)
-    boundary: "Habilidade reutilizavel com fases e trigger. NAO eh agent (P02, identidade completa) nem action_prompt (P03, prompt puro)."
+    boundary: Habilidade reutilizavel com fases e trigger. NAO eh agent (P02, identidade
+      completa) nem action_prompt (P03, prompt puro).
     layer: runtime
     core: true
     machine_format: yaml
@@ -18,30 +15,31 @@ types:
     constraints:
       max_bytes: 5120
       quality_min: 7.0
-    frontmatter_required:   # (DISTILL: SKILL frontmatter = single source)
-      - id
-      - name
-      - description        # TRIGGER CONDITION — when agent should invoke this skill
-      - user_invocable    # boolean
-      - trigger           # como ativar
-      - phases            # lista de fases
-      - when_to_use
-      - when_not_to_use
-      - examples          # 2-3 exemplos de uso
+    frontmatter_required:
+    - id
+    - name
+    - description
+    - user_invocable
+    - trigger
+    - phases
+    - when_to_use
+    - when_not_to_use
+    - examples
     frontmatter_optional:
-      - references_dir    # optional: path to references/ dir (create when SKILL.md > 200 lines or table > 10 items)
-      - sub_skills        # optional: list of sub-skill names for master skill routing
-      - platforms         # optional: list, default [claude] (future: cursor, codex, windsurf)
-      - stack_default     # optional: default stack target (e.g. html-tailwind)
+    - references_dir
+    - sub_skills
+    - platforms
+    - stack_default
     body_structure:
-      - purpose
-      - workflow_phases   # numeradas com input/output
-      - anti_patterns
-      - metrics           # OPCIONAL mas valorizado (real data)
-
+    - purpose
+    - workflow_phases
+    - anti_patterns
+    - metrics
+    llm_function: CALL
   mcp_server:
     description: Servidor MCP (tools + resources)
-    boundary: "Servidor MCP que expoe tools e resources. NAO eh connector (integracao simples) nem client (consumidor de API)."
+    boundary: Servidor MCP que expoe tools e resources. NAO eh connector (integracao
+      simples) nem client (consumidor de API).
     layer: runtime
     core: true
     machine_format: json
@@ -49,15 +47,16 @@ types:
     constraints:
       max_bytes: 2048
     frontmatter_required:
-      - id
-      - name
-      - transport         # stdio, sse, http
-      - tools_provided
-      - resources_provided
-
+    - id
+    - name
+    - transport
+    - tools_provided
+    - resources_provided
+    llm_function: CALL
   hook:
     description: Pre/post processing hook
-    boundary: "Codigo executavel em evento pre/post. NAO eh lifecycle_rule (P11, regra declarativa) nem daemon (processo persistente)."
+    boundary: Codigo executavel em evento pre/post. NAO eh lifecycle_rule (P11, regra
+      declarativa) nem daemon (processo persistente).
     layer: runtime
     core: true
     machine_format: yaml
@@ -65,71 +64,85 @@ types:
     constraints:
       max_bytes: 1024
     frontmatter_required:
-      - id
-      - type              # pre, post, stop
-      - trigger_event
-      - script_path
-
+    - id
+    - type
+    - trigger_event
+    - script_path
+    llm_function: GOVERN
   plugin:
     description: Extensao plugavel
-    boundary: "Extensao plugavel ao sistema. NAO eh hook (evento especifico) nem skill (sem fases estruturadas)."
+    boundary: Extensao plugavel ao sistema. NAO eh hook (evento especifico) nem skill
+      (sem fases estruturadas).
     layer: runtime
     core: false
     machine_format: yaml
     naming: p04_plug_{{name}}.md + .yaml
     constraints:
       max_bytes: 2048
-
+    llm_function: CALL
   client:
     description: Cliente de API
-    boundary: "Cliente unidirecional de API externa. NAO eh connector (bidirecional) nem mcp_server (provedor, nao consumidor)."
+    boundary: Cliente unidirecional de API externa. NAO eh connector (bidirecional)
+      nem mcp_server (provedor, nao consumidor).
     layer: runtime
     core: false
     machine_format: json
     naming: p04_client_{{api}}.md + .yaml
     constraints:
       max_bytes: 1024
-
+    llm_function: CALL
   cli_tool:
     description: Ferramenta CLI
-    boundary: "Ferramenta de linha de comando pontual. NAO eh skill (sem fases) nem daemon (nao persiste em background)."
+    boundary: Ferramenta de linha de comando pontual. NAO eh skill (sem fases) nem
+      daemon (nao persiste em background).
     layer: runtime
     core: false
     machine_format: yaml
     naming: p04_cli_{{tool}}.md
     constraints:
       max_bytes: 1024
-
+    llm_function: CALL
   scraper:
     description: Extrator de dados web
-    boundary: "Extrator de dados web. NAO eh client (API estruturada) nem connector (bidirecional, nao extrai)."
+    boundary: Extrator de dados web. NAO eh client (API estruturada) nem connector
+      (bidirecional, nao extrai).
     layer: runtime
     core: false
     machine_format: yaml
     naming: p04_scraper_{{target}}.md + .yaml
     constraints:
       max_bytes: 1024
-
+    llm_function: CALL
   connector:
     description: Conector de servico externo
-    boundary: "Conector bidirecional de servico externo. NAO eh client (unidirecional) nem mcp_server (nao expoe tools)."
+    boundary: Conector bidirecional de servico externo. NAO eh client (unidirecional)
+      nem mcp_server (nao expoe tools).
     layer: runtime
     core: false
     machine_format: json
     naming: p04_conn_{{service}}.md + .yaml
     constraints:
       max_bytes: 1024
-
+    llm_function: CALL
   daemon:
     description: Processo background
-    boundary: "Processo background persistente. NAO eh hook (evento unico) nem cli_tool (execucao pontual e termina)."
+    boundary: Processo background persistente. NAO eh hook (evento unico) nem cli_tool
+      (execucao pontual e termina).
     layer: runtime
     core: false
     machine_format: yaml
     naming: p04_daemon_{{name}}.md + .yaml
     constraints:
       max_bytes: 1024
-
-# Key insight: Skills com metricas reais tem confianca 2x maior
-# Metrics field opcional mas valorizado no ranking de qualidade
-# Shokunin iteration 2 | 2026-03-22
+    llm_function: GOVERN
+  component:
+    description: Unidade atomica composavel de pipeline (input->transform->output)
+    boundary: Bloco composavel de pipeline. NAO eh skill (mais alto nivel, com phases)
+      nem plugin (extensao, nao bloco). Component eh a menor unidade que faz trabalho.
+    layer: runtime
+    core: false
+    machine_format: yaml
+    naming: p04_comp_{{name}}.md
+    constraints:
+      max_bytes: 2048
+    llm_function: CALL

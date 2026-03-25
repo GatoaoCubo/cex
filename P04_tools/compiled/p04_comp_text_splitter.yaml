@@ -1,0 +1,22 @@
+id: p04_comp_text_splitter
+type: component
+lp: P04
+description: Pipeline component that splits documents into chunks for RAG indexing
+version: 1.0.0
+created: 2026-03-25
+author: edison
+quality: 9.0
+tags:
+- component
+- pipeline
+- splitter
+- RAG
+- chunking
+interface: "input: {document: string, metadata: object}\noutput: {chunks: [{text: string, metadata: object, index: int}]}\n\
+  config:\n  chunk_size: 512\n  overlap: 50\n  strategy: sentence  # sentence | token | semantic"
+behavior: Splits input document into overlapping chunks. Preserves sentence boundaries when possible. Attaches source metadata
+  + chunk index to each output.
+composition: '[Document Loader] → [Text Splitter] → [Embedder] → [Vector Store]'
+why_component_not_skill: 'A skill (P04) is a high-level capability with multiple phases and triggers. A component is a single-function
+  building block. It does ONE thing: receive input, transform, produce output. No phases, no triggers, no side effects. Composable
+  into pipelines. The atom of data processing.'
