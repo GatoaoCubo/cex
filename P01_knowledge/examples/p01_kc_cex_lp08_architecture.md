@@ -1,0 +1,110 @@
+---
+id: p01_kc_cex_lp08_architecture
+type: knowledge_card
+lp: P01
+title: "CEX LP08 Architecture — Structure and Scale for LLM Systems"
+version: 1.0.0
+created: 2026-03-25
+updated: 2026-03-25
+author: EDISON
+domain: cex_taxonomy
+quality: null
+tags: [cex, lp08, architecture, patterns, laws, multi-agent, scaling]
+tldr: "P08 define 5 meta-artefatos que governam estrutura: satellite_spec, pattern, law, diagram, component_map"
+when_to_use: "Entender como sistemas LLM escalam via arquitetura formal e meta-artefatos"
+keywords: [architecture, satellite, pattern, law, diagram, component-map]
+long_tails:
+  - "Como escalar sistema multi-agente LLM com arquitetura"
+  - "Qual a diferenca entre pattern e law no CEX"
+axioms:
+  - "SEMPRE ter component_map antes de adicionar componentes"
+  - "NUNCA violar uma law (inviolavel, diferente de instruction)"
+linked_artifacts:
+  primary: p01_kc_cex_lp07_evals
+  related: [p01_kc_cex_lp06_schema]
+density_score: null
+data_source: "https://arxiv.org/abs/2308.08155"
+---
+
+## Quick Reference
+
+topic: P08 Architecture | scope: system structure | criticality: high
+types: 5 | function: BECOME + GOVERN | layer: spec + governance
+
+## Conceitos Chave
+
+- P08 eh sobre ESTRUTURA, nao execucao de tarefas
+- Tipos P08 sao meta-artefatos (descrevem artefatos)
+- satellite_spec define departamento completo com MCPs
+- pattern eh padrao reutilizavel (ex: continuous batching)
+- law eh regra inviolavel do sistema (nao eh instruction)
+- diagram visualiza arquitetura (ASCII ou Mermaid)
+- component_map mapeia conexoes entre componentes
+- Nenhum framework mainstream tem tipos equivalentes
+- Sistemas LLM crescem sem planta — P08 eh a planta
+- satellite_spec max 4096 bytes (spec layer, core: true)
+- pattern usa llm_function INJECT (informa, nao obriga)
+- law usa llm_function CONSTRAIN (obriga, inviolavel)
+- P08 constrange todos os LPs: define o que eh possivel
+- P08 eh informado por P07: metricas revelam gaps
+- P08 evolui com P11: arquitetura adapta ao feedback
+- Funcao dominante: BECOME (define) + GOVERN (governa)
+- MetaGPT e CrewAI nao tem meta-artefatos formais
+
+## Fases
+
+1. Mapear componentes existentes via component_map
+2. Definir laws inviolaveis do sistema (constraints)
+3. Documentar patterns reutilizaveis emergentes
+4. Especificar satellite_specs por dominio funcional
+5. Criar diagrams para comunicacao visual do time
+6. Revisar arquitetura quando evals P07 revelam gaps
+
+## Regras de Ouro
+
+- SEMPRE documentar WHY de cada law (nao so WHAT)
+- NUNCA criar satellite sem satellite_spec formal
+- SEMPRE atualizar component_map ao adicionar componente
+- NUNCA tratar pattern como lei (pattern eh recomendacao)
+- SEMPRE separar diagram (visual) de component_map (dados)
+
+## Comparativo
+
+| Tipo | Rigidez | Escopo | Exemplo |
+|------|---------|--------|---------|
+| law | Inviolavel | Sistema inteiro | "Nunca hardcode brand" |
+| pattern | Recomendado | Reutilizavel | Continuous batching |
+| satellite_spec | Obrigatorio | 1 departamento | SHAKA research spec |
+| diagram | Informativo | Visual | Mermaid do pipeline |
+| component_map | Estrutural | Conexoes | Agent-to-agent graph |
+
+## Flow
+
+```
+[P08: Architecture Layer]
+         |
+    +----+----+----+----+
+    |    |    |    |    |
+  laws  pats  sats diag cmap
+    |    |    |    |    |
+    v    v    v    v    v
+[CONSTRAIN] [INJECT] [BECOME]
+    |          |        |
+    v          v        v
+ governa    informa   define
+    |          |        |
+    +-----+----+--------+
+          |
+          v
+   [sistema operacional]
+          |
+          v
+   [P07 evals feedback loop]
+```
+
+## References
+
+- source: https://arxiv.org/abs/2308.08155
+- source: https://arxiv.org/abs/2303.17760
+- related: p01_kc_cex_lp07_evals
+- related: p01_kc_cex_lp06_schema
