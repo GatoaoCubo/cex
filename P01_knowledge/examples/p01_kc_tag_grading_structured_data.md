@@ -3,65 +3,77 @@ id: p01_kc_tag_grading_structured_data
 type: knowledge_card
 lp: P01
 title: "TAG Grading: Structured Data Extraction em Paginas CSR"
-version: 1.0.0
+version: 2.0.0
 created: 2026-03-25
 updated: 2026-03-25
-author: SHAKA
+author: EDISON
 domain: research
 quality: null
 tags: [tag-grading, structured-data, browser-automation, scraping, csr]
-tldr: "Certificados TAG exigem browser automation: WebFetch pega scripts, mas JSON-LD, metas e grades vivem no DOM renderizado."
-when_to_use: "Extrair dados de paginas de autenticacao ou certificados que renderizam no browser"
+tldr: "Certificados TAG exigem browser: WebFetch retorna scripts, mas JSON-LD e grades so existem no DOM renderizado."
+when_to_use: "Extrair dados de paginas que renderizam certificados via JavaScript"
 keywords: [tag_grading, dynamic_scraping, json_ld, structured_data, playwright]
 long_tails:
   - "Como extrair JSON-LD de pagina CSR com browser automation"
-  - "Quando WebFetch falha em certificados renderizados por JavaScript"
+  - "Quando WebFetch falha em certificados renderizados por JS"
 axioms:
-  - "SEMPRE validar se a pagina e CSR antes de concluir scraping"
-  - "NUNCA assumir ausencia de schema quando o HTML inicial vem incompleto"
+  - "SEMPRE validar se a pagina e CSR antes de fechar scraping"
+  - "NUNCA assumir ausencia de schema se HTML inicial vem vazio"
 linked_artifacts:
   primary: null
   related: [p01_kc_claude_server_tools]
 density_score: null
-data_source: "Analise de pagina TAG Grading T9403163 com tentativa blocked em fetch estatico"
+data_source: "Analise de pagina TAG Grading T9403163 — fetch estatico bloqueado"
 ---
 
 ## Quick Reference
 
-topic: dynamic structured data | scope: TAG Grading certificates | criticality: high
-page alvo: T9403163 | status: blocked em fetch estatico | decisao: usar browser
+topic: structured data extraction | scope: TAG certificates | criticality: high
+page alvo: T9403163 | bloqueio: fetch estatico | decisao: browser automation
 
 ## Conceitos Chave
 
-- WebFetch retornou scripts, nao o certificado completo
-- JSON-LD, OG tags e grades podem surgir so apos render
-- Cert pages com CSR pedem DOM final, nao HTML inicial
-- Browser automation reduz falso negativo de schema
+- WebFetch retornou scripts, sem certificado completo
+- JSON-LD e grades surgem somente apos render JS
+- Paginas CSR pedem DOM final, nao HTML de resposta
+- Browser automation elimina falso negativo de schema
 
 ## Comparativo
 
-| Metodo | Captura metas | Captura grade | Risco |
-|--------|---------------|---------------|-------|
-| Fetch estatico | Baixa | Baixa | Concluir "sem dados" cedo |
-| Browser automation | Alta | Alta | Maior custo por execucao |
-| Inspecao manual | Media | Alta | Nao escala |
+| Metodo | Captura metas | Captura grade | Custo | Escala |
+|--------|---------------|---------------|-------|--------|
+| Fetch estatico | Baixa | Nula | Minimo | Alta |
+| Browser render | Alta | Alta | Medio | Media |
+| Inspecao manual | Media | Alta | Alto (h/h) | Nula |
+| API discovery | Alta | Alta | Minimo | Alta |
+| Network trace | Alta | Media | Baixo | Baixa |
 
-| Sinal | Leitura |
-|------|---------|
-| So scripts no HTML | Provavel CSR |
-| IDs conhecidos sem payload | Dados vem por API/JS |
-| OG/JSON-LD ausentes | Esperar render ou network trace |
+| Sinal no HTML | Diagnostico | Proxima acao |
+|---------------|-------------|--------------|
+| So scripts/analytics | CSR provavel | Usar browser |
+| IDs sem payload | Dados via API/XHR | Network trace |
+| OG/JSON-LD ausentes | Render pendente | Esperar DOM |
+| 200 OK body vazio | SPA puro | Playwright wait |
+| 403 ou captcha | Anti-bot ativo | Headers + proxy |
+
+| Ferramenta | JS render | Setup | Paralelismo |
+|------------|-----------|-------|-------------|
+| Playwright | Sim | Medio | Alto |
+| Puppeteer | Sim | Medio | Alto |
+| Selenium | Sim | Alto | Limitado |
+| curl/httpx | Nao | Minimo | Alto |
+| Firecrawl | Sim | SaaS | Alto |
 
 ## Regras de Ouro
 
-- SEMPRE esperar o DOM final antes de extrair schema
-- SEMPRE inspecionar Network quando o body vier vazio
-- NUNCA marcar pagina como "sem structured data" no 1o fetch
-- SEMPRE salvar screenshot e HTML final para auditoria
+- SEMPRE esperar DOM final antes de extrair schema
+- SEMPRE inspecionar Network se body vier vazio
+- NUNCA marcar pagina como "sem schema" no 1o fetch
+- SEMPRE salvar screenshot e HTML para auditoria
 
 ## Code
 
-<!-- lang: python | purpose: render page before extracting structured data -->
+<!-- lang: python | purpose: render page then extract structured data -->
 ```python
 from playwright.sync_api import sync_playwright
 
@@ -71,7 +83,9 @@ def extract_after_render(url: str) -> dict:
         page.goto(url, wait_until="networkidle")
         return {
             "html": page.content(),
-            "json_ld": page.locator("script[type='application/ld+json']").all_text_contents(),
+            "json_ld": page.locator(
+                "script[type='application/ld+json']"
+            ).all_text_contents(),
             "meta_count": page.locator("meta").count(),
         }
 ```

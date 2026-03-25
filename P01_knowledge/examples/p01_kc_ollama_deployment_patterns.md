@@ -3,14 +3,14 @@ id: p01_kc_ollama_deployment_patterns
 type: knowledge_card
 lp: P01
 title: "Ollama Deployment Patterns para Modelos Locais Customizados"
-version: 1.0.0
+version: 2.0.0
 created: 2026-03-25
 updated: 2026-03-25
-author: SHAKA
+author: EDISON
 domain: execution
 quality: null
 tags: [ollama, deployment, gguf, lora, modelfile, local-llm]
-tldr: "Deploy confiavel em Ollama depende de casar base model e adapter, preservar template e escolher quantizacao pelo trade-off entre memoria e qualidade."
+tldr: "Deploy Ollama depende de casar base e adapter, preservar template e escolher quantizacao entre memoria e qualidade."
 when_to_use: "Empacotar modelo fine-tuned para Ollama ou diagnosticar output ruim em deploy local"
 keywords: [ollama_deployment, modelfile, gguf_import, lora_adapter, quantization]
 long_tails:
@@ -34,44 +34,61 @@ pipeline: export -> convert -> Modelfile -> ollama create -> validate
 ## Conceitos Chave
 
 - Mismatch entre base e adapter gera output erratico
-- Template de chat precisa ser igual ao usado no treino
-- GGUF unico simplifica rollout; base+adapter facilita swap
-- Q4_K_M costuma equilibrar memoria, velocidade e qualidade
+- Template de chat precisa casar com o do treino
+- GGUF unico simplifica; base+adapter facilita swap
+- Q4_K_M equilibra memoria, velocidade e qualidade
 
 ## Comparativo
 
-| Padrao | Estrutura | Vantagem | Risco |
-|--------|-----------|----------|-------|
-| GGUF unico | `FROM ./model.gguf` | build simples | adapter nao troca |
-| Base+adapter | `FROM base` + `ADAPTER` | swap rapido | base precisa casar |
-| Registry HF | `ollama run hf.co/...` | setup minimo | depende de rede |
+| Padrao | Estrutura | Vantagem | Desvantagem |
+|--------|-----------|----------|-------------|
+| GGUF unico | `FROM ./model.gguf` | Build simples | Adapter nao troca |
+| Base+adapter | `FROM base` + `ADAPTER` | Swap rapido | Base precisa casar |
+| Registry HF | `ollama run hf.co/...` | Setup minimo | Depende de rede |
 
-| Quantizacao | Tamanho | Perda | Uso |
-|-------------|---------|-------|-----|
-| Q8_0 | maior | minima | qualidade-first |
-| Q4_K_M | media | baixa | padrao recomendado |
-| Q4_0 | media | moderada | speed-first |
-| Q2_K | menor | alta | hardware extremo |
+| Quantizacao | Reducao | Perda | Caso de uso |
+|-------------|---------|-------|-------------|
+| Q8_0 | ~50% | Minima | Qualidade-first |
+| Q5_K_M | ~62% | Baixa | Balanceado plus |
+| Q4_K_M | ~75% | Baixa | Padrao recomendado |
+| Q4_0 | ~75% | Moderada | Speed-first |
+| Q2_K | ~87% | Alta | Hardware extremo |
+
+| Sintoma | Causa provavel | Correcao |
+|---------|----------------|----------|
+| Output erratico | Base diferente do treino | Usar base exato |
+| Formato errado | Template incorreto | Setar TEMPLATE |
+| Lentidao | Fallback pra CPU | Checar ollama ps |
+| OOM | Context grande demais | Reduzir num_ctx |
+| Adapter ignorado | Path relativo | Usar path absoluto |
+
+| Cenario | Padrao ideal | Quantizacao |
+|---------|-------------|-------------|
+| Prototipo rapido | Registry HF | Q4_K_M |
+| Producao interna | GGUF unico | Q4_K_M ou Q8_0 |
+| Multi-adapter dev | Base+adapter | Q4_K_M |
+| Edge device | GGUF unico | Q2_K |
+| Alta fidelidade | GGUF unico | Q8_0 |
 
 ## Regras de Ouro
 
-- SEMPRE validar `FROM` contra o base exato do fine-tune
-- SEMPRE fixar `num_ctx` e `SYSTEM` no Modelfile de producao
+- SEMPRE validar FROM contra o base exato do fine-tune
+- SEMPRE fixar num_ctx e SYSTEM no Modelfile de prod
 - NUNCA assumir que adapter compensa template incorreto
-- SEMPRE testar latencia e sanidade antes de expor API local
+- SEMPRE testar latencia e sanidade antes de expor API
 
 ## Code
 
-<!-- lang: dockerfile | purpose: stable Ollama packaging with matching base -->
+<!-- lang: dockerfile | purpose: stable Ollama packaging -->
 ```dockerfile
 FROM llama3.2:8b-instruct-q4_K_M
 ADAPTER ./sales-assistant.gguf
 PARAMETER num_ctx 4096
 PARAMETER temperature 0.2
-SYSTEM You answer as a concise e-commerce operations assistant.
+SYSTEM You answer as a concise e-commerce assistant.
 ```
 
-<!-- lang: bash | purpose: build and smoke-test the packaged model -->
+<!-- lang: bash | purpose: build and smoke-test -->
 ```bash
 ollama create codexa-sales -f Modelfile
 ollama run codexa-sales "Resuma riscos de margem em 3 linhas."
