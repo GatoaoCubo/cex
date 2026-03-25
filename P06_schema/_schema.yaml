@@ -1,5 +1,3 @@
-# P06 Schema v4.0
-# v4.0: +grammar type, llm_function on all types
 lp: P06
 name: Schema
 description: CONTRATOS de validacao
@@ -69,7 +67,7 @@ types:
     machine_format: yaml
     naming: p06_bp_{{artifact}}.md
     constraints:
-      max_bytes: 4096
+      max_bytes: 8192
     llm_function: CONSTRAIN
   grammar:
     description: Constraint formal de geracao (BNF, EBNF, regex, FSM)
