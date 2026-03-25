@@ -1,7 +1,3 @@
-# P02 Model Schema v4.0
-# v2.0: machine_format per type
-# Baseado em: DISTILL_GOLDEN_AGT_SKL_PATTERNS.md
-# Evidence: 31 golden agents, 78 golden documents, ISO patterns
 lp: P02
 name: Model
 description: QUEM o agente EH
@@ -197,3 +193,15 @@ types:
       input_schema.yaml: P06
       upload_kit.md: P04
     llm_function: BECOME
+  axiom:
+    boundary: Regra fundamental imutavel. NAO eh law (P08, operacional ajustavel)
+      nem instruction (P03, flexivel).
+    constraints:
+      max_bytes: 3072
+    core: true
+    description: Principio fundamental imutavel — parte da identidade profunda da
+      entidade
+    layer: governance
+    llm_function: BECOME
+    machine_format: yaml
+    naming: p10_ax_{{rule}}.md

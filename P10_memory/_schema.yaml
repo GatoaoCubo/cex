@@ -1,5 +1,3 @@
-# P10 Memory Schema v4.0
-# v3.0: mental_model renamed to runtime_state (disambiguate from P02.mental_model)
 lp: P10
 name: Memory
 description: O que LEMBRA
@@ -48,14 +46,3 @@ types:
     constraints:
       max_bytes: 3072
     llm_function: INJECT
-  axiom:
-    description: Regra fundamental (imutavel, nao negociavel)
-    boundary: Regra fundamental imutavel. NAO eh law (P08, operacional ajustavel)
-      nem instruction (P03, flexivel).
-    layer: governance
-    core: true
-    machine_format: yaml
-    naming: p10_ax_{{rule}}.md
-    constraints:
-      max_bytes: 3072
-    llm_function: CONSTRAIN
