@@ -10,7 +10,7 @@ author: PYTHA
 domain: execution
 quality: null
 tags: [bling, automation, boundary, tiering, human-in-the-loop, erp]
-tldr: "Automacao de produto no Bling fica estavel quando defaults e outputs de pipeline cobrem o Tier 1, estimativas ficam no Tier 2 e dados fiscais ou fisicos irrepetiveis ficam com o usuario."
+tldr: "44 campos Bling em 3 tiers: Tier1 auto via pipeline, Tier2 heuristica com override, Tier3 dados fiscais/fisicos so pelo usuario."
 when_to_use: "Definir o que o pipeline pode preencher sozinho vs o que exige confirmacao humana no Bling"
 keywords: [automation_boundary, human_override, tier1_tier2_tier3, product_onboarding]
 long_tails:
