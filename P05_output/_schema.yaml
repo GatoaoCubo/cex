@@ -1,17 +1,17 @@
-# P05 Output Schema v2.0
-# v2.0: machine_format per type
+# P05 Output Schema v3.0
+# v3.0: output_schema renamed to response_format (disambiguate from P06.validation_schema)
 lp: P05
 name: Output
 description: O que o agente ENTREGA
 
 types:
-  output_schema:
-    description: Formato de saida estruturado
-    boundary: "Formato de saida de LLM (como o agente responde). NAO eh output_schema P06 (contrato de dados do artefato)."
+  response_format:
+    description: Formato de resposta do LLM (como o agente responde)
+    boundary: "Formato de resposta injetado no prompt do LLM. NAO eh validation_schema P06 (contrato pos-geracao aplicado pelo sistema)."
     layer: spec
     core: true
     machine_format: json
-    naming: p05_os_{{format}}.yaml
+    naming: p05_rf_{{format}}.yaml
     constraints: {max_bytes: 4096}
 
   parser:
@@ -25,7 +25,7 @@ types:
 
   formatter:
     description: Formatador de saida (json, md, yaml)
-    boundary: "Transformador de formato de saida. NAO eh parser (nao extrai dados) nem output_schema (nao define contrato)."
+    boundary: "Transformador de formato de saida. NAO eh parser (nao extrai dados) nem response_format (nao define o que o LLM ve)."
     layer: runtime
     core: false
     machine_format: yaml

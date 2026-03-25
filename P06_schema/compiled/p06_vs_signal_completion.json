@@ -1,6 +1,6 @@
 {
-  "id": "p06_os_signal_completion",
-  "type": "output_schema",
+  "id": "p06_vs_signal_completion",
+  "type": "validation_schema",
   "lp": "P06",
   "description": "Output schema for satellite completion signals",
   "format": "json",

@@ -1,5 +1,5 @@
-# P06 Schema (meta) v2.0
-# v2.0: machine_format per type
+# P06 Schema (meta) v3.0
+# v3.0: output_schema renamed to validation_schema (disambiguate from P05.response_format)
 lp: P06
 name: Schema
 description: CONTRATOS de validacao
@@ -7,7 +7,7 @@ description: CONTRATOS de validacao
 types:
   input_schema:
     description: Contrato de entrada
-    boundary: "Contrato de entrada que define dados requeridos. NAO eh output_schema (saida) nem type_def (definicao abstrata)."
+    boundary: "Contrato de entrada que define dados requeridos. NAO eh validation_schema (saida) nem type_def (definicao abstrata)."
     layer: spec
     core: true
     machine_format: json
@@ -41,11 +41,20 @@ types:
     naming: p06_iface_{{contract}}.yaml
     constraints: {max_bytes: 3072}
 
-  output_schema:
-    description: Contrato de saida (duplica P05 por design)
-    boundary: "Contrato formal de dados do artefato. NAO eh output_schema P05 (formato de resposta LLM, nao contrato)."
+  validation_schema:
+    description: Contrato de validacao pos-geracao (o sistema aplica, LLM nao ve)
+    boundary: "Contrato formal aplicado pelo SISTEMA apos geracao. NAO eh response_format P05 (injetado no prompt, LLM ve)."
     layer: spec
     core: false
     machine_format: json
-    naming: p06_os_{{scope}}.yaml
+    naming: p06_vs_{{scope}}.yaml
     constraints: {max_bytes: 3072}
+
+  artifact_blueprint:
+    description: Blueprint para geracao de artefatos (shape com sections, limites, campos)
+    boundary: "Meta-template que define COMO gerar um artefato. NAO eh prompt_template P03 (instrucao ao LLM) nem type_def (definicao abstrata de tipo)."
+    layer: spec
+    core: true
+    machine_format: yaml
+    naming: p06_bp_{{artifact}}.md
+    constraints: {max_bytes: 4096}

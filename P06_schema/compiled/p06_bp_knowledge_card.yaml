@@ -1,0 +1,38 @@
+id: p06_bp_knowledge_card
+type: artifact_blueprint
+lp: P06
+description: Blueprint for generating knowledge_card artifacts — defines shape, sections, limits
+format: yaml
+version: 1.0.0
+created: 2026-03-24
+author: edison
+quality: 9.0
+tags:
+- blueprint
+- knowledge-card
+- artifact-generation
+- meta-template
+purpose: Defines the SHAPE an LLM must fill when generating a knowledge_card (P01). This is injected into the generation prompt
+  as a CONSTRAIN — the LLM sees this and must conform.
+shape_definition: "artifact: knowledge_card\nlp: P01\nmax_bytes: 5120\ndensity_min: 0.8\nmachine_format: yaml\n\nfrontmatter:\n\
+  \  required: [id, type, lp, domain, quality, tags]\n  optional: [source, author, version, created]\n  \nsections:\n  - name:\
+  \ Title\n    format: \"# {descriptive title}\"\n    required: true\n  - name: Body  \n    format: \"Dense paragraphs, no\
+  \ filler. Every sentence carries information.\"\n    required: true\n    min_bytes: 200\n  - name: Key Points\n    format:\
+  \ \"Bullet list of actionable insights\"\n    required: false\n  - name: Sources\n    format: \"Links or references\"\n\
+  \    required: false\n\nconstraints:\n  - \"Density >= 0.8 (information per byte)\"\n  - \"No introductions like 'This document\
+  \ describes...'\"\n  - \"No conclusions like 'In summary...'\"\n  - \"Every sentence must teach something new\"\n  - \"\
+  Prefer tables over paragraphs when comparing\""
+injection_pattern: 'Generate a knowledge_card following this blueprint:
+
+  {blueprint_yaml}
+
+
+  Topic: {{topic}}
+
+  Domain: {{domain}}
+
+  Sources: {{sources}}'
+validation: After generation, validate against P06.validation_schema and P06.validator rules. Blueprint compliance != quality
+  — both gates must pass.
+difference_from_prompt_template: 'A prompt_template (P03) defines HOW TO ASK the LLM. An artifact_blueprint (P06) defines
+  WHAT THE OUTPUT LOOKS LIKE. They work together: prompt_template includes the blueprint as a constraint.'

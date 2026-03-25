@@ -1,17 +1,17 @@
-# P10 Memory Schema v2.0
-# v2.0: machine_format per type
+# P10 Memory Schema v3.0
+# v3.0: mental_model renamed to runtime_state (disambiguate from P02.mental_model)
 lp: P10
 name: Memory
 description: O que LEMBRA
 
 types:
-  mental_model:
-    description: Modelo mental persistente (routing, decisoes)
-    boundary: "Estado mental variavel por sessao. NAO eh mental_model P02 (identidade fixa do agente, imutavel)."
+  runtime_state:
+    description: Estado mental variavel por sessao (routing, decisoes em runtime)
+    boundary: "Estado mental variavel acumulado em runtime. NAO eh mental_model P02 (identidade fixa do agente, imutavel) nem session_state (efemero, snapshot)."
     layer: runtime
     core: true
     machine_format: yaml
-    naming: p10_mm_{{agent}}.yaml
+    naming: p10_rs_{{agent}}.yaml
     constraints: {max_bytes: 3072}
 
   brain_index:
@@ -34,7 +34,7 @@ types:
 
   session_state:
     description: Estado de sessao (efemero, snapshot)
-    boundary: "Estado efemero de sessao (snapshot). NAO eh mental_model (persistente) nem learning_record (nao acumula)."
+    boundary: "Estado efemero de sessao (snapshot). NAO eh runtime_state (persistente entre sessoes) nem learning_record (nao acumula)."
     layer: runtime
     core: false
     machine_format: yaml

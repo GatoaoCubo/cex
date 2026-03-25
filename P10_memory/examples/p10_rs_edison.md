@@ -1,6 +1,6 @@
 ---
-id: p10_mm_edison
-type: mental_model
+id: p10_rs_edison
+type: runtime_state
 lp: P10
 title: "Mental Model: EDISON"
 version: 2.0.0

@@ -1,6 +1,6 @@
 ---
-id: p05_os_security_audit
-type: output_schema
+id: p05_rf_security_audit
+type: response_format
 lp: P05
 title: "Output Schema: Access Control Audit Report"
 version: 1.0.0
