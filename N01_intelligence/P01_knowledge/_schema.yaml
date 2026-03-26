@@ -1,0 +1,8 @@
+# N01/P01_knowledge/_schema.yaml
+# Inherits: ../../P01_knowledge/_schema.yaml
+# Nucleus: Inteligencia & Pesquisa | Role: primary
+inherits: "../../P01_knowledge/_schema.yaml"
+nucleus: N01
+role: primary
+fields_add: {}
+constraints_override: {}

@@ -1,0 +1,8 @@
+# N02/P12_orchestration/_schema.yaml
+# Inherits: ../../P12_orchestration/_schema.yaml
+# Nucleus: Marketing & Comunicacao | Role: secondary
+inherits: "../../P12_orchestration/_schema.yaml"
+nucleus: N02
+role: secondary
+fields_add: {}
+constraints_override: {}

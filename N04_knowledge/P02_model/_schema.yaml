@@ -1,0 +1,8 @@
+# N04/P02_model/_schema.yaml
+# Inherits: ../../P02_model/_schema.yaml
+# Nucleus: Conhecimento & Seguranca | Role: secondary
+inherits: "../../P02_model/_schema.yaml"
+nucleus: N04
+role: secondary
+fields_add: {}
+constraints_override: {}

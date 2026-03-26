@@ -1,0 +1,8 @@
+# N03/P10_memory/_schema.yaml
+# Inherits: ../../P10_memory/_schema.yaml
+# Nucleus: Producao & Engenharia | Role: secondary
+inherits: "../../P10_memory/_schema.yaml"
+nucleus: N03
+role: secondary
+fields_add: {}
+constraints_override: {}

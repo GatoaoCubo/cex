@@ -1,0 +1,8 @@
+# N03/P02_model/_schema.yaml
+# Inherits: ../../P02_model/_schema.yaml
+# Nucleus: Producao & Engenharia | Role: primary
+inherits: "../../P02_model/_schema.yaml"
+nucleus: N03
+role: primary
+fields_add: {}
+constraints_override: {}

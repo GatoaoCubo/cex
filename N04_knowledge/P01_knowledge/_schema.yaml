@@ -1,0 +1,8 @@
+# N04/P01_knowledge/_schema.yaml
+# Inherits: ../../P01_knowledge/_schema.yaml
+# Nucleus: Conhecimento & Seguranca | Role: primary
+inherits: "../../P01_knowledge/_schema.yaml"
+nucleus: N04
+role: primary
+fields_add: {}
+constraints_override: {}

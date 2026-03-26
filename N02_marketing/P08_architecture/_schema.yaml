@@ -1,0 +1,8 @@
+# N02/P08_architecture/_schema.yaml
+# Inherits: ../../P08_architecture/_schema.yaml
+# Nucleus: Marketing & Comunicacao | Role: secondary
+inherits: "../../P08_architecture/_schema.yaml"
+nucleus: N02
+role: secondary
+fields_add: {}
+constraints_override: {}

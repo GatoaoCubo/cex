@@ -1,0 +1,8 @@
+# N03/P07_evals/_schema.yaml
+# Inherits: ../../P07_evals/_schema.yaml
+# Nucleus: Producao & Engenharia | Role: secondary
+inherits: "../../P07_evals/_schema.yaml"
+nucleus: N03
+role: secondary
+fields_add: {}
+constraints_override: {}

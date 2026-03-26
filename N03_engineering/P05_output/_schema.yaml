@@ -1,0 +1,8 @@
+# N03/P05_output/_schema.yaml
+# Inherits: ../../P05_output/_schema.yaml
+# Nucleus: Producao & Engenharia | Role: secondary
+inherits: "../../P05_output/_schema.yaml"
+nucleus: N03
+role: secondary
+fields_add: {}
+constraints_override: {}

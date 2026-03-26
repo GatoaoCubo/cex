@@ -1,0 +1,8 @@
+# N06/P05_output/_schema.yaml
+# Inherits: ../../P05_output/_schema.yaml
+# Nucleus: Comercial & Financeiro | Role: primary
+inherits: "../../P05_output/_schema.yaml"
+nucleus: N06
+role: primary
+fields_add: {}
+constraints_override: {}

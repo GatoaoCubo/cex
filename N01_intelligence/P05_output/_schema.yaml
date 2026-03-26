@@ -1,0 +1,8 @@
+# N01/P05_output/_schema.yaml
+# Inherits: ../../P05_output/_schema.yaml
+# Nucleus: Inteligencia & Pesquisa | Role: secondary
+inherits: "../../P05_output/_schema.yaml"
+nucleus: N01
+role: secondary
+fields_add: {}
+constraints_override: {}

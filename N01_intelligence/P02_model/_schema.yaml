@@ -1,0 +1,8 @@
+# N01/P02_model/_schema.yaml
+# Inherits: ../../P02_model/_schema.yaml
+# Nucleus: Inteligencia & Pesquisa | Role: secondary
+inherits: "../../P02_model/_schema.yaml"
+nucleus: N01
+role: secondary
+fields_add: {}
+constraints_override: {}

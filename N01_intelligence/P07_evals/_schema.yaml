@@ -1,0 +1,8 @@
+# N01/P07_evals/_schema.yaml
+# Inherits: ../../P07_evals/_schema.yaml
+# Nucleus: Inteligencia & Pesquisa | Role: primary
+inherits: "../../P07_evals/_schema.yaml"
+nucleus: N01
+role: primary
+fields_add: {}
+constraints_override: {}

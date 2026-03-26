@@ -1,0 +1,8 @@
+# N02/P01_knowledge/_schema.yaml
+# Inherits: ../../P01_knowledge/_schema.yaml
+# Nucleus: Marketing & Comunicacao | Role: secondary
+inherits: "../../P01_knowledge/_schema.yaml"
+nucleus: N02
+role: secondary
+fields_add: {}
+constraints_override: {}

@@ -1,0 +1,8 @@
+# N07/P03_prompt/_schema.yaml
+# Inherits: ../../P03_prompt/_schema.yaml
+# Nucleus: Administracao & Orquestracao | Role: secondary
+inherits: "../../P03_prompt/_schema.yaml"
+nucleus: N07
+role: secondary
+fields_add: {}
+constraints_override: {}

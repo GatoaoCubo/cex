@@ -1,0 +1,8 @@
+# N06/P03_prompt/_schema.yaml
+# Inherits: ../../P03_prompt/_schema.yaml
+# Nucleus: Comercial & Financeiro | Role: secondary
+inherits: "../../P03_prompt/_schema.yaml"
+nucleus: N06
+role: secondary
+fields_add: {}
+constraints_override: {}

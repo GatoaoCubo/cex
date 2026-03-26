@@ -1,0 +1,8 @@
+# N07/P12_orchestration/_schema.yaml
+# Inherits: ../../P12_orchestration/_schema.yaml
+# Nucleus: Administracao & Orquestracao | Role: primary
+inherits: "../../P12_orchestration/_schema.yaml"
+nucleus: N07
+role: primary
+fields_add: {}
+constraints_override: {}

@@ -1,0 +1,8 @@
+# N06/P12_orchestration/_schema.yaml
+# Inherits: ../../P12_orchestration/_schema.yaml
+# Nucleus: Comercial & Financeiro | Role: secondary
+inherits: "../../P12_orchestration/_schema.yaml"
+nucleus: N06
+role: secondary
+fields_add: {}
+constraints_override: {}

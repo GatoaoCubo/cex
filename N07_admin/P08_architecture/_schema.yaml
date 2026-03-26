@@ -1,0 +1,8 @@
+# N07/P08_architecture/_schema.yaml
+# Inherits: ../../P08_architecture/_schema.yaml
+# Nucleus: Administracao & Orquestracao | Role: primary
+inherits: "../../P08_architecture/_schema.yaml"
+nucleus: N07
+role: primary
+fields_add: {}
+constraints_override: {}

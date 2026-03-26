@@ -1,0 +1,8 @@
+# N07/P02_model/_schema.yaml
+# Inherits: ../../P02_model/_schema.yaml
+# Nucleus: Administracao & Orquestracao | Role: secondary
+inherits: "../../P02_model/_schema.yaml"
+nucleus: N07
+role: secondary
+fields_add: {}
+constraints_override: {}

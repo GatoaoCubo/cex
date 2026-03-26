@@ -1,0 +1,8 @@
+# N05/P11_feedback/_schema.yaml
+# Inherits: ../../P11_feedback/_schema.yaml
+# Nucleus: Operacoes & Automacao | Role: secondary
+inherits: "../../P11_feedback/_schema.yaml"
+nucleus: N05
+role: secondary
+fields_add: {}
+constraints_override: {}
