@@ -2,60 +2,60 @@
 lp: P01
 llm_function: INJECT
 purpose: Standards and domain knowledge for knowledge_card production
-sources: validate_kc.py v2.0 + 63 real examples + _schema.yaml + golden KC analysis
+sources: validate_kc.py v2.0 + _schema.yaml v4.0 + 63 real examples
 ---
 
 # Domain Knowledge: knowledge_card
 
-## Foundational Principle
-Knowledge cards are ATOMIC SEARCHABLE FACTS. One card = one concept.
-Inspired by Zettelkasten (Luhmann), adapted for LLM retrieval pipelines.
-Cards must be self-contained — readable without external context.
+## Foundational Concept
+Knowledge cards are ATOMIC SEARCHABLE FACTS — the smallest unit of knowledge
+in the CEX system. Each card answers ONE question about ONE topic.
+Density > 0.80 means >80% of content is concrete data (no filler, no narrative).
 
-## Core Properties
-| Property | Value | Why |
-|----------|-------|-----|
-| Atomicity | 1 concept per card | Retrieval precision: 1 query = 1 card |
-| Density | >= 0.80 | No filler — every byte carries information |
-| Max size | 5120 bytes | Fits in single LLM context chunk |
-| Min bullets | 3 | Ensures substantive content |
-| Searchability | keywords + long_tails + axioms | Powers BM25 + semantic retrieval |
+## CEX Knowledge Card Principles
+| Principle | Rule | Why |
+|-----------|------|-----|
+| Atomicity | One topic per card | Brain search retrieves whole cards |
+| Density | >= 0.80 ratio of data to prose | LLM context is expensive |
+| Searchability | tldr + keywords + long_tails | Brain hybrid search (BM25 + FAISS) |
+| Versionability | semver, created/updated dates | Knowledge evolves |
+| Linkability | linked_artifacts (adw, agent, hop) | Knowledge connects to action |
 
-## Body Structures (2 variants)
+## Two Body Structures
 
-### domain_kc (subject-matter knowledge)
-Sections: quick_reference, conceitos_chave, strategy_phases, regras_de_ouro, visual_flow, comparativo, artefatos
-Use for: technical topics, methodologies, domain expertise
+### domain_kc (external knowledge)
+For real-world topics: technologies, patterns, APIs, protocols.
+Sections: Quick Reference, Key Concepts, Strategy Phases, Golden Rules, Flow, Comparativo, References.
 
-### meta_kc (system/spec knowledge)
-Sections: executive_summary, spec_table, patterns, anti_patterns, application, references
-Use for: CEX internals, architecture specs, process documentation
+### meta_kc (CEX-internal knowledge)
+For CEX system topics: architecture, patterns, processes.
+Sections: Executive Summary, Spec Table, Patterns, Anti-Patterns, Application, References.
 
-## Quality Tiers (from validate_kc.py)
-| Tier | Score | Meaning |
-|------|-------|---------|
-| GOLDEN | >= 9.5 | Exemplary — reference for other builders |
-| PUBLISH | >= 8.0 | Production-ready for pool |
-| ACCEPTABLE | >= 7.0 | Usable but improvable |
-| NEEDS_WORK | < 7.0 | Requires revision |
-| REJECTED | HARD fail | Cannot publish — fix blockers first |
+## Quality Tiers (validate_kc.py v2.0)
+| Tier | Score | Requirements |
+|------|-------|-------------|
+| GOLDEN | >= 9.5 | All 10 HARD + 95% of 20 SOFT gates |
+| PUBLISH | >= 8.0 | All 10 HARD + 80% SOFT |
+| ACCEPTABLE | >= 7.0 | All 10 HARD + 70% SOFT |
+| NEEDS_WORK | < 7.0 | All HARD pass, SOFT insufficient |
+| REJECTED | — | Any HARD gate fails |
 
-## Density Optimization Techniques
-- Replace prose with tables (3x denser)
-- Replace paragraphs with bullets (2x denser)
-- Use code blocks for flows/diagrams (visual + dense)
-- Cut filler: "it is worth noting" -> delete entire phrase
-- Max 80 chars per bullet — forces concision
+## Density Calculation
+```
+density = (data_lines) / (total_non_empty_lines)
+data_line = bullet, table row, code line, yaml value
+non_data_line = heading, empty prose, transition sentence
+Target: >= 0.80 (ideally 0.85-0.95)
+```
 
-## Retrieval Optimization
-- keywords: 2+ terms that match BM25 lexical search
-- long_tails: 1+ natural-language queries users would type
-- axioms: 1+ actionable rules (SEMPRE/NUNCA format)
-- tags: 3+ categorical labels for filtering
-- tldr: < 160 chars, standalone (no self-reference)
-
-## References
-- CEX _schema.yaml: P01_knowledge/_schema.yaml
-- Validator: _tools/validate_kc.py v2.0
-- Template: P01_knowledge/templates/tpl_knowledge_card.md
-- 63+ real examples: P01_knowledge/examples/
+## Key Differences from model_card
+| Aspect | knowledge_card | model_card |
+|--------|---------------|------------|
+| LP | P01 (Knowledge) | P02 (Model) |
+| Purpose | Atomic fact about any topic | LLM spec (capabilities, cost) |
+| Size limit | 5120 bytes | 4096 bytes (body) |
+| Density gate | >= 0.80 | >= 0.85 |
+| Body structure | 2 variants (domain/meta) | 1 fixed structure |
+| Validator | validate_kc.py (ACTIVE) | validate_artifact.py [PLANNED] |
+| Naming | p01_kc_{topic}.md | p02_mc_{provider}_{slug}.md |
+| quality field | null (never self-score) | null (never self-score) |

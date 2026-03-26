@@ -3,128 +3,136 @@ lp: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of knowledge_card artifacts
 pattern: few-shot learning — LLM reads these before producing
-source: P01_knowledge/examples/ex_knowledge_card_rag_fundamentals.md (real golden)
 ---
 
 # Examples: knowledge-card-builder
 
 ## Golden Example
 
-INPUT: "Destila conhecimento sobre RAG fundamentals"
+INPUT: "Destila conhecimento sobre prompt caching para otimizar custos LLM"
 
 OUTPUT:
 ```yaml
 ---
-id: p01_kc_rag_fundamentals
+id: p01_kc_prompt_caching
 type: knowledge_card
 lp: P01
-title: "RAG Fundamentals - Retrieval-Augmented Generation"
+title: "Prompt Caching Patterns for LLM Cost Optimization"
 version: "1.0.0"
-created: "2026-03-23"
-updated: "2026-03-23"
+created: "2026-03-24"
+updated: "2026-03-24"
 author: "EDISON"
-domain: "knowledge_engineering"
+domain: llm_engineering
 quality: null
-tags: [rag, embeddings, chunking, retrieval, vector_search]
-tldr: "RAG combina retrieval (BM25/FAISS) com generation (LLM) para respostas grounded em fontes reais"
-when_to_use: "Quando LLM precisa de conhecimento atualizado ou verificavel"
-keywords: [retrieval-augmented-generation, semantic-search, hybrid-search]
+tags: [prompt-caching, cost-optimization, latency, anthropic, openai, knowledge]
+tldr: "Prompt caching reutiliza prefixos pre-processados entre chamadas LLM, reduzindo custo em ate 90% e latencia em 85%"
+when_to_use: "Quando sistema LLM repete contexto longo entre chamadas"
+keywords: [prompt-caching, cache-control, context-reuse]
 long_tails:
-  - "Como escolher chunk size ideal para RAG"
-  - "Diferenca entre BM25 e busca semantica em RAG"
+  - Como configurar prompt caching na API da Anthropic
+  - Tamanho minimo de prefixo para ativar cache em LLMs
 axioms:
-  - "SEMPRE chunk com overlap >= 10% para preservar contexto"
-  - "NUNCA embeddar documentos inteiros acima de 512 tokens"
+  - SEMPRE coloque conteudo estatico ANTES do dinamico
+  - NUNCA cache contexto que muda a cada request
 linked_artifacts:
   primary: null
-  related: [p01_emb_nomic_embed_text]
-density_score: 0.92
-data_source: "https://arxiv.org/abs/2005.11401"
+  related: [p01_kc_rag_fundamentals]
+density_score: 0.91
+data_source: "https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching"
 ---
 
-# RAG Fundamentals - Retrieval-Augmented Generation
+# Prompt Caching Patterns for LLM Cost Optimization
 
 ## Quick Reference
 ```yaml
-topic: retrieval-augmented-generation
-scope: LLM knowledge pipelines
-owner: PYTHA
+topic: prompt_caching
+scope: LLM API optimization (Anthropic, OpenAI, Google)
+owner: EDISON
 criticality: high
 ```
 
 ## Key Concepts
-- **Chunking**: fragmentacao de docs em blocos semanticos
-- **Embedding**: projecao de texto em vetor denso N-dimensional
-- **Hybrid Search**: BM25 (lexical) + FAISS (semantico) combinados
-- **Context Injection**: chunks recuperados inseridos no prompt
-- **Grounding**: ancoragem da resposta em evidencias reais
+- **Cache-Control**: Anthropic `cache_control: {type: "ephemeral"}`; TTL 5 min
+- **Prefix Matching**: cache hit when prefix identical byte-a-byte
+- **Minimum Tokens**: Anthropic >= 1024; OpenAI >= 1024 (auto)
+- **Pricing Split**: write 1.25x base, read 0.1x (90% savings on hit)
 
 ## Strategy Phases
-1. **Ingest**: docs -> chunking -> embedding -> vector store
-2. **Retrieve**: query -> embed -> similarity search -> rerank
-3. **Generate**: LLM processa contexto augmentado -> resposta
+1. **Audit**: identify prompts with >50% static content
+2. **Reorder**: static first (system > few-shot > RAG), dynamic last
+3. **Annotate**: add cache breakpoints on last static block
+4. **Monitor**: measure hit rate via response headers
+5. **Tune**: target >= 80% hit rate, adjust granularity
 
 ## Golden Rules
-- NUNCA confie em chunk size unico — teste 256/512/1024
-- SEMPRE use hybrid search (BM25+semantic)
-- SE retrieval score < 0.7 ENTAO fallback "nao sei"
+- ORDENE: static first, dynamic last (always)
+- AGRUPE: few large cacheable blocks > many small ones
+- METRIZE: hit_rate = read / (read + creation + uncached)
+- INVALIDE com cuidado: 1 byte diff = full cache miss
 
 ## Flow
 ```text
-[Docs] -> [Chunker] -> [Embedder] -> [Vector DB]
-[Query] -> [Embed] -> [Search] -> [Rerank] -> [LLM] -> [Answer]
+[Request] -> [Hash Prefix] -> [Cache Lookup]
+                                   |
+                         HIT: 0.1x cost, 85% faster
+                         MISS: 1.25x cost, normal speed
+                                   |
+                             [Generate] -> [Response]
 ```
 
 ## Comparativo
-| Abordagem | Vantagem | Desvantagem |
-|-----------|----------|-------------|
-| BM25 only | Rapido, sem GPU | Perde sinonimos |
-| FAISS only | Captura significado | Falha em acronimos |
-| Hybrid | Melhor recall, robusto | 2x custo indexacao |
+| Provider | Min Tokens | Config | Write | Read | TTL |
+|----------|-----------|--------|-------|------|-----|
+| Anthropic | 1024 | Explicit | 1.25x | 0.1x | 5 min |
+| OpenAI | 1024 | Automatic | 1.0x | 0.5x | 5-60 min |
+| Google | 32768 | Explicit | 1.0x | 0.25x | config |
 
 ## References
-- https://arxiv.org/abs/2005.11401 (Lewis et al. 2020)
+- Source: https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching
+- Related: p01_kc_rag_fundamentals (context reuse patterns)
 ```
 
 WHY THIS IS GOLDEN:
-- quality: null (never self-scored)
-- All 13 required frontmatter fields present
-- tldr < 160 chars, no self-reference
-- keywords (3), long_tails (2), axioms (2) present
-- Bullets under 80 chars
-- 7 body sections with tables + code blocks
-- density_score 0.92 (no filler)
-- id matches p01_kc_ pattern
-- Linked artifact references real CEX artifact
+- quality: null (H05 pass)
+- id matches p01_kc_ pattern (H03 pass)
+- type: knowledge_card (H04 pass)
+- 13 required fields present (H06 pass)
+- tags: list >= 3 (H07 pass)
+- body 200-5120 bytes (H08 pass)
+- No internal paths (H09 pass)
+- author not STELLA (H10 pass)
+- 7 sections >= 3 lines (S06, S08 pass)
+- Bullets <= 80 chars (S10 pass)
+- Tables + code blocks + external URL (S11-S13 pass)
+- linked_artifacts with primary+related (S20 pass)
 
 ## Anti-Example
 
-INPUT: "Cria KC sobre Python"
+INPUT: "Documenta prompt caching"
 
 BAD OUTPUT:
 ```yaml
 ---
-id: python_knowledge
+id: prompt_caching_knowledge
 type: knowledge_card
-title: Python Programming Language
+title: Prompt Caching
+author: STELLA
 quality: 9.0
-tags: "python, programming"
+tags: "caching, llm"
 ---
-Python is a versatile programming language. It was created by Guido van Rossum.
-This document describes the main features of Python.
-In summary, Python is great for many tasks.
+This document describes how prompt caching works.
+In summary, it saves money. As mentioned before, caching is good.
+See records/core/docs/caching.md for details.
 ```
 
 FAILURES:
 1. id: no `p01_kc_` prefix -> H03 FAIL
-2. quality: self-assigned 9.0 -> H05 FAIL
-3. tags: string not list -> H07 FAIL
-4. lp: missing -> H06 FAIL
-5. author: missing -> H06 FAIL
-6. domain: missing -> H06 FAIL
-7. when_to_use: missing -> H06 FAIL
-8. tldr: missing -> H06 FAIL
-9. body: filler ("this document describes", "in summary") -> S09 FAIL
-10. body: self-reference ("this document") -> S02 FAIL
-11. body: no sections, no tables, no code blocks -> S06/S11/S12
-12. topic too broad: "Python" is not atomic -> split needed
+2. lp: missing -> H06 FAIL
+3. author: STELLA -> H10 FAIL
+4. quality: self-assigned 9.0 -> H05 FAIL
+5. tags: string not list -> H07 FAIL
+6. body: <200 bytes -> H08 FAIL
+7. internal path: records/ -> H09 FAIL
+8. filler: "this document", "in summary", "as mentioned" -> S09 FAIL
+9. no sections, no tables, no code -> S06, S11, S12 FAIL
+10. no axioms, no keywords, no long_tails -> S16-S18 FAIL

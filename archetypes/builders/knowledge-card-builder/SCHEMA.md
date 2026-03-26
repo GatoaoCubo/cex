@@ -1,75 +1,77 @@
 ---
 lp: P06
 llm_function: CONSTRAIN
-purpose: Formal schema definition for knowledge_card — SINGLE SOURCE OF TRUTH
+purpose: Formal schema for knowledge_card — SINGLE SOURCE OF TRUTH
 pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
-source: P01_knowledge/_schema.yaml (types.knowledge_card)
+source: P01_knowledge/_schema.yaml v4.0 + validate_kc.py v2.0
 ---
 
 # Schema: knowledge_card
 
-## Frontmatter Fields
+## Frontmatter Fields (Required — 13)
 
-### Required (13 fields)
-| Field | Type | Required | Default | Source |
-|-------|------|----------|---------|--------|
-| id | string (p01_kc_{topic_slug}) | YES | - | CEX naming |
-| type | literal "knowledge_card" | YES | - | CEX |
-| lp | literal "P01" | YES | - | CEX |
-| title | string 5-100 chars | YES | - | CEX |
-| version | semver string (X.Y.Z) | YES | "1.0.0" | CEX |
-| created | date YYYY-MM-DD | YES | - | CEX |
-| updated | date YYYY-MM-DD | YES | - | CEX |
-| author | string (not STELLA) | YES | - | CEX |
-| domain | string | YES | - | CEX |
-| quality | null | YES | null | CEX (never self-score) |
-| tags | list[string], len >= 3 | YES | - | CEX |
-| tldr | string < 160 chars | YES | - | CEX |
-| when_to_use | string | YES | - | CEX |
+| Field | Type | Required | Default | Validator |
+|-------|------|----------|---------|-----------|
+| id | string (p01_kc_{slug}) | YES | — | H02, H03 |
+| type | literal "knowledge_card" | YES | — | H04 |
+| lp | literal "P01" | YES | — | H06 |
+| title | string 5-100 chars | YES | — | H06, S03 |
+| version | semver X.Y.Z | YES | "1.0.0" | H06, S04 |
+| created | date YYYY-MM-DD | YES | — | H06, S05 |
+| updated | date YYYY-MM-DD | YES | — | H06, S05 |
+| author | string (not STELLA) | YES | — | H06, H10 |
+| domain | string | YES | — | H06 |
+| quality | null | YES | null | H05 |
+| tags | list[string], len >= 3 | YES | — | H07 |
+| tldr | string <=160ch, no self-refs | YES | — | S01, S02 |
+| when_to_use | string | YES | — | H06 |
 
-### CEX Extensions (6 fields, recommended)
-| Field | Type | Required | Source |
-|-------|------|----------|--------|
-| keywords | list[string], len >= 2 | REC | CEX (BM25 search) |
-| long_tails | list[string], len >= 1 | REC | CEX (semantic search) |
-| axioms | list[string], len >= 1 | REC | CEX (golden rules) |
-| linked_artifacts | object {primary, related} | REC | CEX (graph) |
-| density_score | float 0.80-1.00 | REC | CEX (quality) |
-| data_source | string (URL or description) | REC | CEX (provenance) |
+## Frontmatter Fields (CEX Extended — 6)
 
-## linked_artifacts Object
+| Field | Type | Required | Validator |
+|-------|------|----------|-----------|
+| keywords | list[string], len >= 2 | REC | S16 |
+| long_tails | list[string], len >= 1 | REC | S17 |
+| axioms | list[string], len >= 1 | REC | S18 |
+| linked_artifacts | object {primary, related} | REC | S14, S20 |
+| density_score | float 0.80-1.00 | REC | — |
+| data_source | URL or artifact ref | REC | S15 |
+
+## ID Pattern
+Regex: `^p01_kc_[a-z][a-z0-9_]+$`
+Rule: id MUST equal filename stem (H02). Underscores only.
+
+## Linked Artifacts Object
 ```yaml
 linked_artifacts:
-  primary: p0X_type_name_or_null    # main related artifact
-  related: [p0X_type_name, ...]     # other related artifacts
+  primary: null            # or artifact_id
+  related: [p01_kc_xxx]   # list of related ids
 ```
+Both `primary` and `related` keys required (S20).
 
 ## Body Structure: domain_kc
-Required sections (in order):
-1. `## Quick Reference` — yaml block: topic, scope, owner, criticality
-2. `## Key Concepts` — 3+ bullets, max 80 chars each
-3. `## Strategy Phases` — 3+ numbered steps with outcomes
-4. `## Golden Rules` — 3+ SEMPRE/NUNCA rules
-5. `## Flow` — code block with visual pipeline
-6. `## Comparativo` — table with Abordagem/Vantagem/Desvantagem
-7. `## References` — URLs or artifact references
+1. `## Quick Reference` — yaml: topic, scope, owner, criticality
+2. `## Key Concepts` — bullets >= 3, concrete examples
+3. `## Strategy Phases` — numbered steps with outcomes
+4. `## Golden Rules` — actionable rules >= 3
+5. `## Flow` — text/ascii diagram
+6. `## Comparativo` — comparison table
+7. `## References` — artifact refs + URLs
 
 ## Body Structure: meta_kc
-Required sections (in order):
-1. `## Executive Summary` — 3+ key facts as bullets
-2. `## Spec Table` — table with Spec/Value/Notes
-3. `## Patterns` — confirmed patterns as bullets
-4. `## Anti-Patterns` — anti-patterns with consequences
-5. `## Application` — numbered steps
-6. `## References` — URLs or artifact references
+1. `## Executive Summary` — dense overview
+2. `## Spec Table` — key-value specs
+3. `## Patterns` — what works
+4. `## Anti-Patterns` — what fails
+5. `## Application` — how to apply
+6. `## References` — artifact refs + URLs
 
-## Constraints (from _schema.yaml)
-- max_bytes: 5120 (total body, excl frontmatter)
+## Constraints
+- max_bytes: 5120 (body, min 200) — H08
 - min_bullets: 3
 - density_min: 0.80
-- quality_min: 7.0 (assigned by evaluator, not self)
-- each bullet max 80 chars
-- sections with < 3 lines: expand or remove
-- id == filename stem
-- tags: list of strings (never list-in-string)
+- bullet_max_chars: 80 — S10
 - naming: p01_kc_{topic_slug}.md
+- no internal paths (records/, .claude/, /home/) — H09
+- no filler phrases — S09
+- no self-references in tldr — S02

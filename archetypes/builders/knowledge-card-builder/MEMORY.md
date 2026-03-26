@@ -9,41 +9,36 @@ pattern: stateless per invocation, but carries accumulated patterns
 
 ## Accumulated Patterns (update after each production)
 
-### Quality Score Distribution (from 63+ real examples)
-| Tier | Count | Common traits |
-|------|-------|---------------|
-| GOLDEN (9.5+) | ~5 | Dense tables, code flows, zero filler |
-| PUBLISH (8.0+) | ~40 | Good structure, minor density gaps |
-| ACCEPTABLE (7.0+) | ~10 | Missing keywords or thin sections |
-| NEEDS_WORK (<7.0) | ~8 | Filler, missing fields, broad topics |
+### Common Mistakes (learned from validation)
+1. Setting quality to a number (must be null — H05 rejects any value)
+2. Using hyphens in id slug (must be underscores: p01_kc_topic_name)
+3. Writing bullets > 80 chars (S10 fails — break into sub-bullets)
+4. Including internal paths like records/ or .claude/ (H09 fails)
+5. Using filler phrases ("this document", "in summary") in body (S09)
+6. Self-referencing in tldr ("this kc describes...") instead of direct fact
+7. Forgetting axioms field (S18 — must be ALWAYS/NEVER actionable rules)
+8. Tags as comma-separated string instead of YAML list (H07 fails)
+9. Body under 200 bytes (H08 — need >= 4 sections with >= 3 lines each)
+10. Author set to STELLA (H10 — STELLA orchestrates, never authors)
 
-### Common Mistakes (learned from production + validate_kc.py)
-1. Setting quality to a number instead of null (H05 instant fail)
-2. Using string tags ("tag1, tag2") instead of list [tag1, tag2]
-3. Bullets exceeding 80 chars — split or rephrase
-4. Sections with < 3 lines flagged as "thin" (S08)
-5. Filler phrases surviving from source material copy-paste
-6. Self-referencing in tldr ("This KC covers..." -> just state the fact)
-7. Topic too broad — "Python" not atomic, "Python GIL mechanics" is
-8. Missing linked_artifacts when related KCs clearly exist
-9. Internal paths leaking into body (records/, .claude/)
-10. Duplicate sentences (Jaccard >= 0.85) from copy-paste sections
+### Template Discrepancy (important)
+The legacy template (tpl_knowledge_card.md) shows `quality: {{QUALITY_8_TO_10}}`.
+validate_kc.py v2.0 enforces `quality: null` (H05). The VALIDATOR is truth.
+Always set quality: null. Scoring is done externally after production.
 
-### Density Boosters (proven techniques)
-| Technique | Density gain | Example |
-|-----------|-------------|---------|
-| Prose -> table | +0.15 | 3 paragraphs -> 1 table |
-| Paragraph -> bullets | +0.10 | 5-line paragraph -> 5 bullets |
-| Add code block | +0.05 | Text flow -> ASCII diagram |
-| Cut filler phrases | +0.08 | "It should be noted that" -> delete |
-| Shorten bullets to 80ch | +0.03 | Forces concision |
+### Density Boosters
+- Replace prose paragraphs with bullet lists
+- Replace descriptions with comparison tables
+- Add code blocks (yaml, text diagrams, command examples)
+- Remove transition sentences ("as we can see", "it is worth noting")
+- Each bullet should contain exactly one fact
 
 ### Production Counter
 | Metric | Value |
 |--------|-------|
-| Cards in examples/ | 63+ |
-| Avg quality | ~8.2 (estimated from validator runs) |
-| Common friction | broad topics, filler from sources |
+| Cards produced | 0 (builder just created) |
+| Avg quality | — |
+| Common friction | density threshold, bullet length |
 
 ## State Between Sessions
 This builder is STATELESS per invocation. Memory is embedded in this file.

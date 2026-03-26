@@ -8,59 +8,55 @@ pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCE
 # Collaboration: knowledge-card-builder
 
 ## My Role in Crews
-I am a SPECIALIST. I answer ONE question: "what is the atomic fact about X?"
-I do not route queries. I do not build agents. I do not write prompts.
-I DISTILL knowledge so other builders and agents can consume it.
+I am a SPECIALIST. I answer ONE question: "what is the essential fact about this topic?"
+I do not decide routing. I do not configure boot. I do not define identity.
+I DISTILL knowledge so other builders and agents have factual context.
 
 ## Crew Compositions
 
 ### Crew: "Research and Document New Domain"
 ```
-  1. SHAKA (research)                  -> raw findings, URLs, data
-  2. knowledge-card-builder (THIS)     -> distill into atomic KCs
-  3. indexer-builder [PLANNED]         -> index KCs into Brain
-  4. quality-gate-builder [PLANNED]    -> validate KC quality
+  1. knowledge-card-builder      -> "destila fatos atomicos do dominio"
+  2. model-card-builder          -> "spec dos LLMs usados no dominio"
+  3. agent-builder [PLANNED]     -> "define agente especialista"
+  4. skill-builder [PLANNED]     -> "define skills do dominio"
 ```
 
-### Crew: "Build Agent Knowledge Base"
+### Crew: "Enrich Existing Agent"
 ```
-  1. knowledge-card-builder (THIS)     -> produce domain KCs
-  2. few-shot-builder [PLANNED]        -> produce examples from KCs
-  3. context-doc-builder [PLANNED]     -> produce context docs
-  4. agent-builder [PLANNED]           -> assemble agent with KCs
+  1. knowledge-card-builder      -> "KCs novos para domain context"
+  2. system-prompt-builder [PLANNED] -> "atualiza prompt com novos KCs"
+  3. quality-gate-builder [PLANNED]  -> "valida agent knowledge coverage"
 ```
 
-### Crew: "Knowledge Maintenance Cycle"
+### Crew: "Build Knowledge Base from Scratch"
 ```
-  1. knowledge-card-builder (THIS)     -> update stale KCs
-  2. validate_kc.py                    -> validate quality gates
-  3. Brain rebuild                     -> re-index updated KCs
+  1. knowledge-card-builder (N instances) -> "1 KC per subtopic"
+  2. iso-package-builder [PLANNED]       -> "empacota KCs em index"
 ```
 
 ## Handoff Protocol
 ### I Receive
-- seeds: topic, domain (minimum)
-- optional: source URLs, raw research, target body structure
-- optional: related KCs to link via linked_artifacts
+- seeds: topic name, domain (minimum)
+- optional: source URLs, related artifacts, target audience
 
 ### I Produce
 - knowledge_card artifact (p01_kc_{topic}.md)
 - committed to: cex/P01_knowledge/examples/p01_kc_{topic}.md
+- validated by: validate_kc.py (score + verdict)
 
 ### I Signal
-- signal: complete (with validator verdict from validate_kc.py)
-- if HARD fail: signal retry with gate failures
-- if score < 8.0: signal needs_improvement with SOFT failures
+- signal: complete (with validator verdict)
+- if REJECTED or NEEDS_WORK: signal retry with failed gates
 
 ## Builders I Depend On
-None. knowledge-card-builder is INDEPENDENT (layer 1 content).
-It consumes raw research but does not depend on other builders.
+None. knowledge-card-builder is INDEPENDENT (content layer).
+It can receive context from research agents but has no builder dependencies.
 
 ## Builders That Depend On Me [PLANNED]
 | Builder | Why |
 |---------|-----|
-| few-shot-builder | Uses KC content to generate examples |
-| context-doc-builder | References KC facts for context hydration |
-| agent-builder | Injects KC knowledge into agent identity |
-| indexer-builder | Indexes KCs into Brain for retrieval |
-| iso-package-builder | Bundles KCs as agent knowledge dependencies |
+| agent-builder | Needs domain KCs for agent knowledge base |
+| system-prompt-builder | Injects KC facts into system prompts |
+| skill-builder | References KC domain knowledge in skills |
+| iso-package-builder | Bundles KCs as deploy dependencies |

@@ -1,108 +1,80 @@
 ---
 lp: P05
 llm_function: PRODUCE
-purpose: Template with {{vars}} that the LLM fills to produce a knowledge_card
+purpose: Template with {{vars}} for knowledge_card production
 pattern: every field here exists in SCHEMA.md — template derives, never invents
 ---
 
-# Output Template: knowledge_card
+# Output Template: knowledge_card (domain_kc)
 
-## domain_kc variant (subject-matter knowledge)
 ```yaml
 ---
 id: p01_kc_{{topic_slug}}
 type: knowledge_card
 lp: P01
-title: "{{Knowledge Card Title}}"
+title: "{{Title 5-100 chars}}"
 version: "1.0.0"
 created: "{{YYYY-MM-DD}}"
 updated: "{{YYYY-MM-DD}}"
 author: "{{satellite_name}}"
-domain: "{{domain_name}}"
+domain: {{domain_name}}
 quality: null
-tags: [{{tag1}}, {{tag2}}, {{tag3}}]
-tldr: "{{one_dense_sentence_under_160_chars}}"
-when_to_use: "{{when_this_card_should_be_retrieved}}"
-keywords: [{{keyword1}}, {{keyword2}}, {{keyword3}}]
+tags: [{{tag1}}, {{tag2}}, {{tag3}}, knowledge]
+tldr: "{{Dense <=160ch, no self-refs}}"
+when_to_use: "{{Retrieval condition}}"
+keywords: [{{kw1}}, {{kw2}}, {{kw3}}]
 long_tails:
-  - "{{natural_language_query_1}}"
-  - "{{natural_language_query_2}}"
+  - {{long tail query 1}}
+  - {{long tail query 2}}
 axioms:
-  - "{{SEMPRE_or_NUNCA_actionable_rule}}"
+  - {{ALWAYS/NEVER actionable rule}}
 linked_artifacts:
-  primary: {{p0X_type_name_OR_null}}
-  related: [{{p0X_type_name_OR_null}}]
+  primary: {{artifact_id_or_null}}
+  related: [{{related_id_or_empty}}]
 density_score: {{0.80_to_1.00}}
-data_source: "{{source_url_or_description}}"
+data_source: "{{source_url_or_artifact_ref}}"
 ---
 
-# {{Knowledge Card Title}}
+# {{Title}}
 
 ## Quick Reference
-```yaml
+` ``yaml
 topic: {{topic_name}}
-scope: {{scope}}
-owner: {{owner}}
+scope: {{scope_description}}
+owner: {{owner_satellite}}
 criticality: {{low|medium|high}}
-```
+` ``
 
 ## Key Concepts
-- {{concept_1_concise_max_80_chars}}
-- {{concept_2_concise_max_80_chars}}
-- {{concept_3_concise_max_80_chars}}
+- **{{Concept 1}}**: {{concrete detail with example}}
+- **{{Concept 2}}**: {{concrete detail with example}}
+- **{{Concept 3}}**: {{concrete detail with example}}
 
 ## Strategy Phases
-1. {{phase_1_with_outcome}}
-2. {{phase_2_with_outcome}}
-3. {{phase_3_with_outcome}}
+1. **{{Phase 1}}**: {{action with measurable outcome}}
+2. **{{Phase 2}}**: {{action with measurable outcome}}
+3. **{{Phase 3}}**: {{action with measurable outcome}}
 
 ## Golden Rules
-- {{SEMPRE_or_NUNCA_rule_1}}
-- {{SEMPRE_or_NUNCA_rule_2}}
-- {{SEMPRE_or_NUNCA_rule_3}}
+- {{RULE 1 — actionable, concrete}}
+- {{RULE 2 — actionable, concrete}}
+- {{RULE 3 — actionable, concrete}}
 
 ## Flow
-```text
-[{{input}}] -> [{{process_1}}] -> [{{process_2}}] -> [{{output}}]
-```
+` ``text
+[{{Input}}] -> [{{Process}}] -> [{{Decide}}] -> [{{Output}}]
+` ``
 
 ## Comparativo
-| Abordagem | Vantagem | Desvantagem |
-|-----------|----------|-------------|
-| {{approach_1}} | {{pro}} | {{con}} |
-| {{approach_2}} | {{pro}} | {{con}} |
+| {{Dimension}} | {{Option A}} | {{Option B}} |
+|---------------|-------------|-------------|
+| {{Row 1}} | {{val}} | {{val}} |
+| {{Row 2}} | {{val}} | {{val}} |
 
 ## References
-- {{source_url_or_artifact_ref}}
+- Related artifact: {{artifact_ref}}
+- Source: {{external_url}}
 ```
 
-## meta_kc variant (system/spec knowledge)
-```yaml
-# Same frontmatter as above, then body:
-
-# {{Knowledge Card Title}}
-
-## Executive Summary
-- {{key_fact_1}}
-- {{key_fact_2}}
-- {{key_fact_3}}
-
-## Spec Table
-| Spec | Value | Notes |
-|------|-------|-------|
-| {{field}} | {{value}} | {{note}} |
-
-## Patterns
-- {{confirmed_pattern_1}}
-- {{confirmed_pattern_2}}
-
-## Anti-Patterns
-- {{anti_pattern_1_with_consequence}}
-
-## Application
-1. {{how_to_apply_step_1}}
-2. {{how_to_apply_step_2}}
-
-## References
-- {{source_url_or_artifact_ref}}
-```
+NOTE: For meta_kc, replace body with:
+Executive Summary, Spec Table, Patterns, Anti-Patterns, Application, References.
