@@ -2,7 +2,7 @@
 id: glossary-entry-builder
 kind: type_builder
 pillar: P01
-parent: p01-chief [PLANNED]
+parent: null
 domain: glossary_entry
 llm_function: BECOME
 version: 1.0.0

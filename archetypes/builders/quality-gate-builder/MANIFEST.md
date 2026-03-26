@@ -2,7 +2,7 @@
 id: quality-gate-builder
 kind: type_builder
 pillar: P11
-parent: p11-chief [PLANNED]
+parent: null
 domain: quality_gate
 llm_function: BECOME
 version: 1.0.0

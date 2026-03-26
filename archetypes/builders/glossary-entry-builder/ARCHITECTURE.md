@@ -46,3 +46,14 @@ Pillar: P01 (Knowledge — what the agent KNOWS)
 Function: INJECT (provide term definitions into context)
 Scale: L0 (content layer — glossary entries are the smallest knowledge unit)
 Glossary entries are the lightest P01 kind — concise definitions for quick reference.
+
+## Dependency Graph
+
+```text
+glossary_entry <--receives-- knowledge_card (P01) — source concepts to define
+glossary_entry --produces_for--> system_prompt (P03) — terminology injection
+glossary_entry --produces_for--> context_doc (P01) — term references
+glossary_entry --independent-- rag_source, few_shot_example, signal
+```
+
+glossary_entry is TERMINOLOGY LAYER — canonical definitions

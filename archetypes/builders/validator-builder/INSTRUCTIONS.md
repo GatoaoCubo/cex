@@ -9,7 +9,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 
 ## Phase 1: DISCOVER
 1. Identify the target: what artifact kind needs this validation rule?
-2. Check brain_query for existing validators on this domain (avoid duplicates)
+2. Check brain_query [IF MCP] for existing validators on this domain (avoid duplicates)
 3. Determine scope: pre-commit, post-generation, or on-demand?
 4. List the specific fields/properties that need checking
 5. Classify severity: does failure block (error), warn (warning), or inform (info)?

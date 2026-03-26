@@ -57,3 +57,15 @@ golden_test (P07)  <-- evaluates the output quality (separate step)
 - max_bytes 1024: keeps context injection cost low
 - quality: null: evaluated externally, not by producer
 - input+output both required: incomplete pair has zero learning value
+
+## Dependency Graph
+
+```text
+few_shot_example <--receives-- knowledge_card (P01) — domain facts to exemplify
+few_shot_example <--receives-- schema (P06) — format constraints
+few_shot_example --produces_for--> system_prompt (P03) — injected as examples
+few_shot_example --produces_for--> action_prompt (P03) — task demonstrations
+few_shot_example --independent-- context_doc, rag_source, glossary_entry
+```
+
+few_shot_example is TEACHING LAYER — shows format by example

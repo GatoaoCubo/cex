@@ -9,7 +9,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 
 ## Phase 1: DISCOVER
 1. Identify the term: what word/phrase needs defining?
-2. Check brain_query for existing glossary entries (avoid duplicates)
+2. Check brain_query [IF MCP] for existing glossary entries (avoid duplicates)
 3. Determine domain context: where is this term used in CEX?
 4. List synonyms and abbreviations
 5. Check if disambiguation is needed (similar terms exist?)

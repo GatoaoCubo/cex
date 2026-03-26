@@ -17,7 +17,7 @@ purpose: Execution protocol for producing a context_doc artifact
 5. Gather constraints: what cannot change? (regulatory, technical, organizational)
 6. List assumptions: what is taken as given without proof?
 7. List dependencies: what other artifacts, systems, or facts does this context reference?
-8. Run `brain_query("context_doc [domain]")` — if existing doc found, update rather than duplicate
+8. Run `brain_query [IF MCP]("context_doc [domain]")` — if existing doc found, update rather than duplicate
 
 ## Phase 2: COMPOSE
 

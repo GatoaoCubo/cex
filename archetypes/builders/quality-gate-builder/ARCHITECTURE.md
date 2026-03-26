@@ -29,3 +29,15 @@ quality_gate --independent-- lifecycle_rule, optimizer
 Pillar: P11 (Feedback)
 Function: GOVERN
 Scale: L0 (governance artifact)
+
+## Dependency Graph
+
+```text
+quality_gate <--receives-- schema (P06) — field constraints to enforce
+quality_gate --produces_for--> validator (P06) — gate references
+quality_gate --produces_for--> golden_test (P07) — test criteria
+quality_gate --produces_for--> lifecycle_rule (P11) — quality thresholds
+quality_gate --independent-- knowledge_card, signal, system_prompt
+```
+
+quality_gate is GOVERNANCE LAYER — defines pass/fail criteria

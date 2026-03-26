@@ -2,7 +2,7 @@
 id: knowledge-card-builder
 kind: type_builder
 pillar: P02
-parent: p02-chief [PLANNED]
+parent: null
 domain: knowledge_card
 llm_function: BECOME
 version: 1.0.0

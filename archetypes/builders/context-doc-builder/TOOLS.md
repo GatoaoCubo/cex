@@ -10,7 +10,7 @@ purpose: Tools and data sources available to context-doc-builder
 
 | Tool | Purpose | When to Use |
 |------|---------|-------------|
-| `brain_query` | Search existing context_docs by domain/scope | Phase 1 — before producing new artifact |
+| `brain_query` [MCP] | Search existing context_docs by domain/scope | Phase 1 — before producing new artifact |
 | `validate_artifact.py --kind context_doc` | Automated gate check | Phase 3 — post-composition [PLANNED] |
 
 ## brain_query Patterns

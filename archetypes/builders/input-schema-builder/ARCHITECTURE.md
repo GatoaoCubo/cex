@@ -46,3 +46,14 @@ Pillar: P06 (Schema — CONTRACTS and validation)
 Function: CONSTRAIN (define input requirements)
 Scale: L0 (spec layer — input_schemas define data contracts before runtime)
 Input_schemas are the unilateral contract kind in P06 — complementing bilateral interfaces.
+
+## Dependency Graph
+
+```text
+input_schema <--receives-- interface (P06) — method signatures to formalize
+input_schema --produces_for--> validator (P06) — validates against input schema
+input_schema --produces_for--> action_prompt (P03) — input format reference
+input_schema --independent-- output_template, glossary_entry, knowledge_card
+```
+
+input_schema is CONTRACT LAYER — defines what goes IN

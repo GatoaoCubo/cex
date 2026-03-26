@@ -2,7 +2,7 @@
 id: input-schema-builder
 kind: type_builder
 pillar: P06
-parent: p06-chief [PLANNED]
+parent: null
 domain: input_schema
 llm_function: BECOME
 version: 1.0.0

@@ -11,7 +11,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 1. Identify the action: what task needs a prompt, expressed as verb phrase
 2. Define input: what data types and formats are provided
 3. Define output: what the result should look like (structure, format)
-4. Analyze existing action_prompts via brain_query (avoid duplicates)
+4. Analyze existing action_prompts via brain_query [IF MCP] (avoid duplicates)
 5. Enumerate edge cases: at least 2 scenarios where things could go wrong
 6. Determine constraints: what the prompt must NOT do
 7. Identify purpose: WHY this action prompt is needed (not just WHAT it does)

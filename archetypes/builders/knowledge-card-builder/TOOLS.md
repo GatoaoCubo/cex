@@ -9,8 +9,8 @@ purpose: Tools and APIs available for knowledge_card production
 ## Production Tools
 | Tool | Purpose | When | Status |
 |------|---------|------|--------|
-| validate_kc.py | Validate KC: 10 HARD + 20 SOFT gates | Phase 3 | ACTIVE |
-| brain_query | Search existing KCs in pool | Phase 1 | ACTIVE |
+| validate_kc.py | Validate KC: 10 HARD + 20 SOFT gates | Phase 3 | CONDITIONAL |
+| brain_query [MCP] | Search existing KCs in pool | Phase 1 | CONDITIONAL |
 | validate_artifact.py | Generic artifact validator | — | [PLANNED] |
 | cex_forge.py | Generate artifact from seeds | Alt compose | [PLANNED] |
 

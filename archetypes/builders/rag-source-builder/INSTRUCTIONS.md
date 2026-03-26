@@ -16,7 +16,7 @@ version: 1.0.0
 1. Extract the URL from user input. If absent, ask for it — no URL, no rag_source.
 2. Validate URL format: must start with https:// or http://, contain a valid domain, no trailing spaces.
 3. Determine the domain: what CEX domain does this source serve? (e.g., llm_providers, benchmarks, tooling).
-4. Run brain_query: `brain_query("rag_source {domain} {url_domain}")` — check for existing entries to avoid duplicates.
+4. Run brain_query [IF MCP]: `brain_query [IF MCP]("rag_source {domain} {url_domain}")` — check for existing entries to avoid duplicates.
 5. Assess reliability: is this official docs? community content? API endpoint? Assign high/medium/low.
 6. Identify format: html, json, api, pdf, or csv.
 7. Generate source_slug: lowercase, underscores, max 30 chars. Example: anthropic_claude_api_docs.

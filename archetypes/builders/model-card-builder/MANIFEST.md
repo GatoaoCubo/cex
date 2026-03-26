@@ -2,7 +2,7 @@
 id: model-card-builder
 kind: type_builder
 pillar: P02
-parent: p02-chief [PLANNED]
+parent: null
 domain: model_card
 llm_function: BECOME
 version: 2.0.0

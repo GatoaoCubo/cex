@@ -10,7 +10,7 @@ purpose: Tools and APIs available for action_prompt production
 
 | Tool | Purpose | When | Status |
 |------|---------|------|--------|
-| brain_query | Search existing action_prompts in pool | Phase 1 (check duplicates) | ACTIVE |
+| brain_query [MCP] | Search existing action_prompts in pool | Phase 1 (check duplicates) | CONDITIONAL |
 | validate_artifact.py | Generic artifact validator | Phase 3 | [PLANNED] |
 | cex_forge.py | Generate artifact from seeds | Alternative compose | [PLANNED] |
 

@@ -9,7 +9,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 
 ## Phase 1: DISCOVER
 1. Identify the target: what agent/operation needs this input contract?
-2. Check brain_query for existing input_schemas on this scope (avoid duplicates)
+2. Check brain_query [IF MCP] for existing input_schemas on this scope (avoid duplicates)
 3. List the fields needed: what data must the caller provide?
 4. For each field, determine type, required/optional, and default
 5. Identify coercion needs: will data arrive in mixed formats?

@@ -12,7 +12,7 @@ purpose: Step-by-step execution protocol for few-shot-example-builder
 2. Determine domain (knowledge_card, validator, rag_source, etc.)
 3. Select difficulty level: easy (canonical), medium (realistic variation), hard (edge case)
 4. Plan edge cases: what boundary condition could break naive implementations?
-5. Check brain_query: `brain_query("few_shot_example [domain]")` — avoid duplicates
+5. Check brain_query [IF MCP]: `brain_query [IF MCP]("few_shot_example [domain]")` — avoid duplicates
 6. Confirm: is this format teaching (few_shot_example) or quality evaluation (golden_test)?
 
 ## Phase 2: COMPOSE

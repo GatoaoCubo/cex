@@ -12,7 +12,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 2. Determine KC kind: domain_kc (external) or meta_kc (CEX-internal)
 3. Gather sources: official docs, APIs, code, established references
 4. Extract key concepts, patterns, rules, comparisons
-5. Check brain_query for existing KCs on same topic (avoid duplicates)
+5. Check brain_query [IF MCP] for existing KCs on same topic (avoid duplicates)
 6. Every data point needs a source — URLs for external, artifact refs for internal
 
 ## Phase 2: COMPOSE

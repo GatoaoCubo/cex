@@ -9,8 +9,8 @@ purpose: Tools and runtime surfaces relevant to signal production
 ## Production Tools
 | Tool | Purpose | When | Status |
 |------|---------|------|--------|
-| `signal_writer.py` | Real emitter pattern for completion signals | Schema alignment | ACTIVE |
-| `spawn_monitor.ps1` | Polls `.claude/signals/` for status changes | Consumer validation | ACTIVE |
+| `signal_writer.py` | Real emitter pattern for completion signals | Schema alignment | CONDITIONAL |
+| `spawn_monitor.ps1` | Polls `.claude/signals/` for status changes | Consumer validation | CONDITIONAL |
 | `validate_artifact.py` | Generic artifact validator | Phase 3 | [PLANNED] |
 
 ## Runtime Interfaces

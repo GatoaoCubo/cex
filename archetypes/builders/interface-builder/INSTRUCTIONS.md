@@ -9,7 +9,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 
 ## Phase 1: DISCOVER
 1. Identify the integration point: which two agents/systems need to communicate?
-2. Check brain_query for existing interfaces on this integration (avoid duplicates)
+2. Check brain_query [IF MCP] for existing interfaces on this integration (avoid duplicates)
 3. List the operations (methods) needed: what can the consumer request?
 4. For each method, determine input and output types
 5. Determine versioning needs: is this a new interface or evolution of existing?

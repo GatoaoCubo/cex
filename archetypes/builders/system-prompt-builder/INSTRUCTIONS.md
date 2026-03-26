@@ -10,7 +10,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 ## Phase 1: RESEARCH
 1. Identify the target agent: name, domain, primary function
 2. Gather domain knowledge: what expertise does the agent need?
-3. Analyze existing system_prompts via brain_query (avoid duplicates)
+3. Analyze existing system_prompts via brain_query [IF MCP] (avoid duplicates)
 4. Identify knowledge boundaries: what the agent KNOWS vs does NOT know
 5. Determine tone: formal/technical/conversational/authoritative
 6. List tools the agent has access to (if any)

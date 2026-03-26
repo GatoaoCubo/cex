@@ -51,3 +51,15 @@ Pillar: P02 (Model — "who the entity IS")
 Function: GOVERN (documents and constrains model selection)
 Scale: L0 (infrastructure artifact, no agent identity)
 The only P02 kind that is purely DESCRIPTIVE (all others are prescriptive).
+
+## Dependency Graph
+
+```text
+model_card <--receives-- (none — can be built independently)
+model_card --produces_for--> agent (P02) — LLM selection and routing
+model_card --produces_for--> system_prompt (P03) — capability constraints
+model_card --produces_for--> boot_config (P02) — model parameters
+model_card --independent-- knowledge_card, signal, validator
+```
+
+model_card is FOUNDATION LAYER — defines LLM capabilities and limits

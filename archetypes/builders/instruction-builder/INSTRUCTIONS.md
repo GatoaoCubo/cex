@@ -10,7 +10,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 ## Phase 1: RESEARCH
 1. Identify the task: what needs to be done, by whom, in what context
 2. Determine prerequisites: what must be true before starting
-3. Analyze existing instructions via brain_query (avoid duplicates)
+3. Analyze existing instructions via brain_query [IF MCP] (avoid duplicates)
 4. Identify dependencies: tools, files, services, permissions needed
 5. Determine idempotency: can this be safely re-run?
 6. Plan rollback: what happens if execution fails midway?

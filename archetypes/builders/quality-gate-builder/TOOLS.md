@@ -9,8 +9,8 @@ purpose: Tools available for quality_gate production
 ## Production Tools
 | Tool | Purpose | When | Status |
 |------|---------|------|--------|
-| brain_query | Search existing quality_gates | Phase 1 (check duplicates) | ACTIVE |
-| validate_kc.py | Reference pattern for HARD/SOFT gates | Design time | ACTIVE |
+| brain_query [MCP] | Search existing quality_gates | Phase 1 (check duplicates) | CONDITIONAL |
+| validate_kc.py | Reference pattern for HARD/SOFT gates | Design time | CONDITIONAL |
 | validate_artifact.py | Validate any artifact kind | Phase 3 | [PLANNED] |
 
 ## Reference Gates (existing)

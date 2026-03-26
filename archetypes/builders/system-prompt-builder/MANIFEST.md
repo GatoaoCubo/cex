@@ -2,7 +2,7 @@
 id: system-prompt-builder
 kind: type_builder
 pillar: P03
-parent: p03-chief [PLANNED]
+parent: null
 domain: system_prompt
 llm_function: BECOME
 version: 1.0.0

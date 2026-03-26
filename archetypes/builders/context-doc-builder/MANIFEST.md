@@ -2,7 +2,7 @@
 id: context-doc-builder
 kind: type_builder
 pillar: P01
-parent: p01-chief [PLANNED]
+parent: null
 domain: context_doc
 llm_function: BECOME
 version: 1.0.0

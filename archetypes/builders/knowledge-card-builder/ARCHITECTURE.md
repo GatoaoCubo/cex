@@ -49,3 +49,15 @@ Pillar: P01 (Knowledge — "what the entity KNOWS")
 Function: INJECT (provides factual context to other LPs)
 Scale: L0 (content artifact, no identity or behavior)
 The primary P01 kind — all other P01 kinds are simpler variants.
+
+## Dependency Graph
+
+```text
+knowledge_card <--receives-- rag_source (P01) — raw source to distill
+knowledge_card --produces_for--> system_prompt (P03) — domain knowledge injection
+knowledge_card --produces_for--> few_shot_example (P01) — facts to exemplify
+knowledge_card --produces_for--> context_doc (P01) — referenced knowledge
+knowledge_card --independent-- signal, validator, interface
+```
+
+knowledge_card is KNOWLEDGE LAYER — atomic searchable facts

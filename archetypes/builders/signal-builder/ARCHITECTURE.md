@@ -50,3 +50,15 @@ Pillar: P12 (Orchestration - "how coordination happens")
 Function: COLLABORATE
 Scale: L0 runtime event
 Smallest collaborative artifact in P12: shorter than handoff, simpler than workflow.
+
+## Dependency Graph
+
+```text
+signal <--receives-- (none — can be built independently)
+signal --produces_for--> workflow (P12) — completion/error events
+signal --produces_for--> spawn_config (P12) — satellite signals
+signal --produces_for--> dispatch_rule (P12) — routing triggers
+signal --independent-- knowledge_card, system_prompt, validator
+```
+
+signal is EVENT LAYER — atomic orchestration messages
