@@ -53,7 +53,7 @@ LEGACY_TYPE_MAP = {
     "README": "quick_start.md",
 }
 
-MANIFEST_REQUIRED_FIELDS = {"id", "version", "type", "title", "description"}
+MANIFEST_REQUIRED_FIELDS = {"id", "version", "kind", "title", "description"}
 
 
 def estimate_tokens(text: str) -> int:

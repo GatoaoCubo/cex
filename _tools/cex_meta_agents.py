@@ -37,8 +37,8 @@ OUTPUT_DIR = CEX_ROOT / "_meta" / "meta_agents"
 META_AGENTS = [
     {
         "id": "forge-agent",
-        "type": "meta_agent",
-        "lp": "P02",
+        "kind": "meta_agent",
+        "pillar": "P02",
         "version": "1.0.0",
         "description": "Cria qualquer artefato CEX dado LP, type e seeds. Usa cex_forge.py para montar o prompt e gera o artefato final.",
         "capabilities": [
@@ -54,8 +54,8 @@ META_AGENTS = [
             "validate_examples.py",
         ],
         "inputs": {
-            "lp": "string (P01-P12)",
-            "type": "string (one of 69 types)",
+            "pillar": "string (P01-P12)",
+            "kind": "string (one of 69 types)",
             "seeds": "list[string] (min 3 keywords)",
             "context": "string (optional, free text or file content)",
         },
@@ -90,8 +90,8 @@ REGRAS:
     },
     {
         "id": "template-crafter",
-        "type": "meta_agent",
-        "lp": "P02",
+        "kind": "meta_agent",
+        "pillar": "P02",
         "version": "1.0.0",
         "description": "Cria templates novos para tipos CEX sem template (GAP). Analisa tipos similares com template e extrapola.",
         "capabilities": [
@@ -106,7 +106,7 @@ REGRAS:
             "validate_schema.py",
         ],
         "inputs": {
-            "type": "string (GAP type from TYPE_TO_TEMPLATE.yaml)",
+            "kind": "string (GAP type from TYPE_TO_TEMPLATE.yaml)",
             "reference_types": "list[string] (optional, similar types with templates)",
         },
         "outputs": {
@@ -142,8 +142,8 @@ REGRAS:
     },
     {
         "id": "schema-evolver",
-        "type": "meta_agent",
-        "lp": "P02",
+        "kind": "meta_agent",
+        "pillar": "P02",
         "version": "1.0.0",
         "description": "Propoe mudancas em _schema.yaml baseado em patterns observados nos examples existentes. Evolucao guiada por dados.",
         "capabilities": [
@@ -158,8 +158,8 @@ REGRAS:
             "validate_examples.py",
         ],
         "inputs": {
-            "lp": "string (P01-P12)",
-            "type": "string (optional, specific type to evolve)",
+            "pillar": "string (P01-P12)",
+            "kind": "string (optional, specific type to evolve)",
             "examples_dir": "string (path to examples/artifacts to analyze)",
         },
         "outputs": {
@@ -195,8 +195,8 @@ REGRAS:
     },
     {
         "id": "quality-auditor",
-        "type": "meta_agent",
-        "lp": "P02",
+        "kind": "meta_agent",
+        "pillar": "P02",
         "version": "1.0.0",
         "description": "Audita artefatos CEX contra schema + template e da score. Detecta violacoes, sugere fixes.",
         "capabilities": [
@@ -259,8 +259,8 @@ SEVERIDADE:
     },
     {
         "id": "seed-harvester",
-        "type": "meta_agent",
-        "lp": "P02",
+        "kind": "meta_agent",
+        "pillar": "P02",
         "version": "1.0.0",
         "description": "Extrai seed words de texto livre e classifica por LP+type. Alimenta o SEED_BANK.yaml com seeds descobertas.",
         "capabilities": [
@@ -372,7 +372,7 @@ def main():
         print(f"{'ID':<20} {'LP':<5} {'Capabilities':<5} Description")
         print("-" * 90)
         for a in META_AGENTS:
-            print(f"{a['id']:<20} {a['lp']:<5} {len(a['capabilities']):<5} {a['description'][:60]}")
+            print(f"{a['id']:<20} {a['pillar']:<5} {len(a['capabilities']):<5} {a['description'][:60]}")
         print(f"\nTotal: {len(META_AGENTS)} meta-agents")
         return
 

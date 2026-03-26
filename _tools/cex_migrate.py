@@ -195,16 +195,16 @@ def migrate_frontmatter(fm: dict, body: str) -> dict:
     new = dict(fm)
 
     # Rename type
-    old_type = str(fm.get("type", "KC"))
-    new["type"] = TYPE_MAP.get(old_type, old_type.lower())
+    old_type = str(fm.get("kind", "KC"))
+    new["kind"] = TYPE_MAP.get(old_type, old_type.lower())
 
     # Add lp
     if "lp" not in new:
-        new["lp"] = TYPE_TO_LP.get(new["type"], "P01")
+        new["pillar"] = TYPE_TO_LP.get(new["kind"], "P01")
 
     # Add llm_function
     if "llm_function" not in new:
-        new["llm_function"] = TYPE_TO_FUNCTION.get(new["type"], "GOVERN")
+        new["llm_function"] = TYPE_TO_FUNCTION.get(new["kind"], "GOVERN")
 
     # Rename quality_score -> quality
     if "quality_score" in new and "quality" not in new:
@@ -248,14 +248,14 @@ def scan_file(path: Path) -> dict:
         return {"path": str(path), "status": "NO_FRONTMATTER", "missing": []}
 
     cex_required = [
-        "id", "type", "lp", "title", "version", "created",
+        "id", "kind", "lp", "title", "version", "created",
         "updated", "author", "domain", "quality", "tags", "tldr", "when_to_use"
     ]
     cex_extended = ["keywords", "long_tails", "axioms", "density_score"]
 
     # Check quality_score alias
     has_quality = "quality" in fm or "quality_score" in fm
-    has_type_cex = fm.get("type", "") not in ("KC",)
+    has_type_cex = fm.get("kind", "") not in ("KC",)
 
     missing_req = [f for f in cex_required if f not in fm and not (f == "quality" and has_quality)]
     missing_ext = [f for f in cex_extended if f not in fm]

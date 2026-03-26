@@ -1090,7 +1090,7 @@ def generate_missing_templates() -> list[tuple[str, str]]:
 def build_coverage_doc() -> str:
     rows = []
     totals = {
-        "types": 0,
+        "kinds": 0,
         "template": 0,
         "example": 0,
         "full": 0,
@@ -1124,7 +1124,7 @@ def build_coverage_doc() -> str:
                 f"- | - | {gap_text} |"
             )
             row_num += 1
-            totals["types"] += 1
+            totals["kinds"] += 1
             totals["template"] += int(has_template)
             totals["example"] += int(has_example)
             lp_template += int(has_template)
@@ -1173,14 +1173,14 @@ def build_coverage_doc() -> str:
 
 | Metric | Count | % |
 |--------|-------|---|
-| Total types | {totals['types']} | 100% |
-| Types with schema | {totals['types']} | 100% |
-| Types with template | {totals['template']} | {totals['template'] / totals['types'] * 100:.1f}% |
-| Types with example | {totals['example']} | {totals['example'] / totals['types'] * 100:.1f}% |
-| Fully covered (schema+template+example) | {totals['full']} | {totals['full'] / totals['types'] * 100:.1f}% |
-| Missing template only | {totals['template_only']} | {totals['template_only'] / totals['types'] * 100:.1f}% |
-| Missing example only | {totals['example_only']} | {totals['example_only'] / totals['types'] * 100:.1f}% |
-| Missing template+example | {totals['template_and_example']} | {totals['template_and_example'] / totals['types'] * 100:.1f}% |
+| Total types | {totals['kinds']} | 100% |
+| Types with schema | {totals['kinds']} | 100% |
+| Types with template | {totals['template']} | {totals['template'] / totals['kinds'] * 100:.1f}% |
+| Types with example | {totals['example']} | {totals['example'] / totals['kinds'] * 100:.1f}% |
+| Fully covered (schema+template+example) | {totals['full']} | {totals['full'] / totals['kinds'] * 100:.1f}% |
+| Missing template only | {totals['template_only']} | {totals['template_only'] / totals['kinds'] * 100:.1f}% |
+| Missing example only | {totals['example_only']} | {totals['example_only'] / totals['kinds'] * 100:.1f}% |
+| Missing template+example | {totals['template_and_example']} | {totals['template_and_example'] / totals['kinds'] * 100:.1f}% |
 
 ### Coverage by LP
 

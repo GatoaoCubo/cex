@@ -89,7 +89,7 @@ def load_template(template_rel_path: str) -> str | None:
 
 
 def extract_type_rules(schema: dict, type_name: str) -> dict:
-    types = schema.get("types", {})
+    types = schema.get("kinds", {})
     if type_name not in types:
         return {}
     t = types[type_name]
@@ -276,13 +276,13 @@ def list_all_types(filter_lp: str | None = None) -> list[dict]:
         if filter_lp and lp_key.upper() != filter_lp.upper():
             continue
         schema = load_schema(lp_key)
-        types = schema.get("types", {})
+        types = schema.get("kinds", {})
         for type_name, type_def in types.items():
             tpl = type_map.get(type_name)
             results.append(
                 {
-                    "lp": lp_key,
-                    "type": type_name,
+                    "pillar": lp_key,
+                    "kind": type_name,
                     "description": type_def.get("description", ""),
                     "template": tpl if tpl else "GAP",
                     "max_bytes": type_def.get("constraints", {}).get("max_bytes", "N/A")
@@ -322,7 +322,7 @@ Exemplos:
         for t in types:
             tpl_status = "OK" if t["template"] != "GAP" else "GAP"
             print(
-                f"{t['lp']:<5} {t['type']:<25} {tpl_status:<8} "
+                f"{t['pillar']:<5} {t['kind']:<25} {tpl_status:<8} "
                 f"{str(t['max_bytes']):<8} {t['description']}"
             )
         print(
@@ -349,7 +349,7 @@ Exemplos:
     schema = load_schema(args.lp)
     rules = extract_type_rules(schema, args.type_name)
     if not rules:
-        available = list(schema.get("types", {}).keys())
+        available = list(schema.get("kinds", {}).keys())
         print(
             f"ERRO: Tipo '{args.type_name}' nao encontrado em {args.lp}. "
             f"Disponiveis: {', '.join(available)}",

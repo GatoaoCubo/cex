@@ -503,7 +503,7 @@ SEED_BANK = {
         "seeds": [
             "format",
             "fields",
-            "types",
+            "kinds",
             "required",
             "optional",
             "validation",
@@ -564,7 +564,7 @@ SEED_BANK = {
         "seeds": [
             "scope",
             "fields",
-            "types",
+            "kinds",
             "required",
             "defaults",
             "validation",
@@ -577,7 +577,7 @@ SEED_BANK = {
     },
     "P06_type_def": {
         "seeds": [
-            "type",
+            "kind",
             "base",
             "constraints",
             "serialization",
@@ -625,7 +625,7 @@ SEED_BANK = {
             "scope",
             "format",
             "fields",
-            "types",
+            "kinds",
             "required",
             "validation",
             "examples",
@@ -1139,7 +1139,7 @@ def validate_coverage(seed_bank: dict) -> tuple[int, int, list[str]]:
         if not schema_path.exists():
             continue
         schema = load_yaml_file(schema_path)
-        for type_name in schema.get("types", {}):
+        for type_name in schema.get("kinds", {}):
             key = f"{lp_key}_{type_name}"
             if key not in seed_bank:
                 missing.append(key)

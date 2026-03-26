@@ -65,7 +65,7 @@ def get_schema_types(lp_path: Path) -> list:
         return []
     with open(schema_path, encoding="utf-8") as f:
         data = yaml.safe_load(f) or {}
-    return list(data.get("types", {}).keys())
+    return list(data.get("kinds", {}).keys())
 
 
 def count_examples(lp_path: Path) -> tuple[int, int]:
@@ -138,10 +138,10 @@ def run():
                                  n_ex, n_gld, gen)
 
         results.append({
-            "lp":           code,
+            "pillar":           code,
             "name":         name,
             "dirname":      dirname,
-            "types":        n_types,
+            "kinds":        n_types,
             "templates_pct": templates_pct,
             "examples_pct": examples_pct,
             "golden_pct":   golden_pct,
@@ -169,7 +169,7 @@ def print_table(results):
     for r in results:
         gen_flag = "YES" if r["generator"] else "NO"
         print(
-            f"{r['lp']:<4} {r['name']:<16} {r['types']:>5} "
+            f"{r['pillar']:<4} {r['name']:<16} {r['kinds']:>5} "
             f"{r['templates_pct']:>5.1f}% {r['examples_pct']:>4.1f}% "
             f"{r['golden_pct']:>5.1f}% {gen_flag:>4} {r['score']:>6.4f}"
         )
@@ -181,12 +181,12 @@ def print_table(results):
     print("RANKING (by score):")
     for i, r in enumerate(results, 1):
         bar = "#" * int(r["score"] * 20)
-        print(f"  #{i:>2}  {r['lp']} {r['name']:<16} {r['score']:.4f}  {bar}")
+        print(f"  #{i:>2}  {r['pillar']} {r['name']:<16} {r['score']:.4f}  {bar}")
 
     print("\nGAP ANALYSIS (bottom 5):")
     for r in results[-5:]:
-        missing_tpl = r["types"] - r["_tpl_covered"]
-        print(f"  {r['lp']} {r['name']:<16} — {missing_tpl} types missing templates, "
+        missing_tpl = r["kinds"] - r["_tpl_covered"]
+        print(f"  {r['pillar']} {r['name']:<16} — {missing_tpl} types missing templates, "
               f"{r['_ex_count']} examples ({r['_gld_count']} golden)")
     print()
 
@@ -218,7 +218,7 @@ def print_md(results):
     for r in results:
         gen_flag = "YES" if r["generator"] else "NO"
         lines.append(
-            f"| {r['lp']} | {r['name']} | {r['types']} | "
+            f"| {r['pillar']} | {r['name']} | {r['kinds']} | "
             f"{r['templates_pct']:.1f}% | {r['examples_pct']:.1f}% | "
             f"{r['golden_pct']:.1f}% | {gen_flag} | **{r['score']:.4f}** |"
         )
@@ -226,21 +226,21 @@ def print_md(results):
     lines.append(f"## Ranking")
     lines.append(f"")
     for i, r in enumerate(results, 1):
-        lines.append(f"{i}. **{r['lp']} {r['name']}** — {r['score']:.4f}")
+        lines.append(f"{i}. **{r['pillar']} {r['name']}** — {r['score']:.4f}")
     lines.append(f"")
     lines.append(f"## Gap Analysis")
     lines.append(f"")
     for r in sorted(results, key=lambda x: x["score"]):
-        missing_tpl = r["types"] - r["_tpl_covered"]
+        missing_tpl = r["kinds"] - r["_tpl_covered"]
         if missing_tpl > 0:
-            lines.append(f"- **{r['lp']} {r['name']}**: {missing_tpl}/{r['types']} types missing templates")
+            lines.append(f"- **{r['pillar']} {r['name']}**: {missing_tpl}/{r['kinds']} types missing templates")
     lines.append(f"")
     lines.append(f"## Priority Recommendations")
     lines.append(f"")
     bottom3 = results[-3:][::-1]
     for i, r in enumerate(bottom3, 1):
-        missing_tpl = r["types"] - r["_tpl_covered"]
-        lines.append(f"{i}. **{r['lp']} {r['name']}** (score {r['score']:.4f}) — "
+        missing_tpl = r["kinds"] - r["_tpl_covered"]
+        lines.append(f"{i}. **{r['pillar']} {r['name']}** (score {r['score']:.4f}) — "
                      f"add {missing_tpl} templates + more examples")
     print("\n".join(lines))
 

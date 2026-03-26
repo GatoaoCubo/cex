@@ -55,10 +55,10 @@ def load_schema(lp_dir: Path) -> dict:
         return {}
     with open(schema_path, "r", encoding="utf-8") as f:
         schema = yaml.safe_load(f)
-    if not schema or "types" not in schema:
+    if not schema or "kinds" not in schema:
         return {}
     result = {}
-    for type_name, type_def in schema["types"].items():
+    for type_name, type_def in schema["kinds"].items():
         if isinstance(type_def, dict) and "machine_format" in type_def:
             result[type_name] = type_def["machine_format"]
     return result
@@ -223,7 +223,7 @@ def compile_md(md_path: Path, schema_formats: dict) -> tuple[dict, str, str]:
     if not fm:
         return {}, "", f"No frontmatter found in {md_path}"
 
-    artifact_type = fm.get("type", "")
+    artifact_type = fm.get("kind", "")
     machine_format = schema_formats.get(artifact_type, "yaml")
 
     # Build compiled output

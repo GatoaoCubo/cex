@@ -63,7 +63,7 @@ def builder_slug(type_name: str) -> str:
 def template_block(template_text: str, fields: list[str]) -> str:
     if template_text:
         return template_text.strip()
-    return yaml.safe_dump({field: f"{{{{{field}}}}}" for field in (fields or ["id", "type", "lp"])}, sort_keys=False, allow_unicode=False).strip()
+    return yaml.safe_dump({field: f"{{{{{field}}}}}" for field in (fields or ["id", "kind", "lp"])}, sort_keys=False, allow_unicode=False).strip()
 
 
 def extract_template_keys(block: str) -> list[str]:
@@ -87,7 +87,7 @@ def main() -> None:
     lp_dir = LP_TO_DIR[args.lp]
     schema_path = repo_root / lp_dir / "_schema.yaml"
     schema = load_yaml(schema_path)
-    type_spec = (schema.get("types") or {}).get(args.artifact_type)
+    type_spec = (schema.get("kinds") or {}).get(args.artifact_type)
     if not type_spec:
         raise SystemExit(f"type `{args.artifact_type}` not found in {schema_path}")
 
@@ -123,8 +123,8 @@ def main() -> None:
         out_dir / "MANIFEST.md",
         dump_frontmatter({
             "id": slug,
-            "type": "type_builder",
-            "lp": "P02",
+            "kind": "type_builder",
+            "pillar": "P02",
             "parent": f"{args.lp.lower()}-chief [PLANNED]",
             "domain": domain,
             "llm_function": "BECOME",
@@ -151,7 +151,7 @@ def main() -> None:
 
     write(
         out_dir / "SYSTEM_PROMPT.md",
-        dump_frontmatter({"lp": "P03", "llm_function": "BECOME", "purpose": f"Persona and operational rules for {slug}"})
+        dump_frontmatter({"pillar": "P03", "llm_function": "BECOME", "purpose": f"Persona and operational rules for {slug}"})
         + f"# System Prompt: {slug}\n\n"
         + f"You are `{slug}`, a CEX specialist for `{args.artifact_type}`.\n"
         + "1. SCHEMA.md is source of truth\n"
@@ -163,7 +163,7 @@ def main() -> None:
 
     write(
         out_dir / "KNOWLEDGE.md",
-        dump_frontmatter({"lp": "P01", "llm_function": "INJECT", "purpose": f"Domain knowledge, seeds, and references for {args.artifact_type}"})
+        dump_frontmatter({"pillar": "P01", "llm_function": "INJECT", "purpose": f"Domain knowledge, seeds, and references for {args.artifact_type}"})
         + f"# Knowledge: {args.artifact_type}\n\n"
         + "## Type Facts\n"
         + f"- LP: `{args.lp}`\n- Layer: `{type_spec.get('layer', 'unknown')}`\n"
@@ -181,7 +181,7 @@ def main() -> None:
 
     write(
         out_dir / "INSTRUCTIONS.md",
-        dump_frontmatter({"lp": "P03", "llm_function": "GUIDE", "purpose": f"Execution steps and anti-patterns for {slug}"})
+        dump_frontmatter({"pillar": "P03", "llm_function": "GUIDE", "purpose": f"Execution steps and anti-patterns for {slug}"})
         + f"# Instructions: {slug}\n\n"
         + "## Build Flow\n"
         + "1. Read SCHEMA.md and lock required fields\n"
@@ -197,7 +197,7 @@ def main() -> None:
 
     write(
         out_dir / "TOOLS.md",
-        dump_frontmatter({"lp": "P04", "llm_function": "ENABLE", "purpose": f"Allowed tools and usage rules for {slug}"})
+        dump_frontmatter({"pillar": "P04", "llm_function": "ENABLE", "purpose": f"Allowed tools and usage rules for {slug}"})
         + f"# Tools: {slug}\n\n"
         + "## Preferred Tooling\n"
         + "- `python _tools/validate_builder.py <builder_dir>`\n"
@@ -211,7 +211,7 @@ def main() -> None:
     output_block = template_block(template_text, fields)
     write(
         out_dir / "OUTPUT_TEMPLATE.md",
-        dump_frontmatter({"lp": "P05", "llm_function": "PRODUCE", "purpose": f"Template with fillable placeholders for {args.artifact_type}"})
+        dump_frontmatter({"pillar": "P05", "llm_function": "PRODUCE", "purpose": f"Template with fillable placeholders for {args.artifact_type}"})
         + f"# Output Template: {args.artifact_type}\n\nNaming pattern: `{naming}`\n\n```yaml\n"
         + output_block
         + "\n```\n\n## Derivation Notes\n- Every field above exists in SCHEMA.md\n- Replace placeholders with concrete values only\n",
@@ -228,7 +228,7 @@ def main() -> None:
     ) or "| id | TODO | YES | - | schema |\n| type | TODO | YES | - | schema |\n| lp | TODO | YES | - | schema |"
     write(
         out_dir / "SCHEMA.md",
-        dump_frontmatter({"lp": "P06", "llm_function": "CONSTRAIN", "purpose": f"Formal schema definition for {args.artifact_type}"})
+        dump_frontmatter({"pillar": "P06", "llm_function": "CONSTRAIN", "purpose": f"Formal schema definition for {args.artifact_type}"})
         + f"# Schema: {args.artifact_type}\n\n## Artifact Identity\n| Field | Value |\n|-------|-------|\n"
         + f"| LP | `{args.lp}` |\n| Type | literal `{args.artifact_type}` |\n"
         + f"| Machine format | `{type_spec.get('machine_format', 'unknown')}` |\n| Naming | `{naming}` |\n"
@@ -244,7 +244,7 @@ def main() -> None:
 
     write(
         out_dir / "EXAMPLES.md",
-        dump_frontmatter({"lp": "P07", "llm_function": "PROVE", "purpose": f"Golden and anti-examples for {args.artifact_type}"})
+        dump_frontmatter({"pillar": "P07", "llm_function": "PROVE", "purpose": f"Golden and anti-examples for {args.artifact_type}"})
         + f"# Examples: {args.artifact_type}\n\n## Golden Example\n"
         + f"- Filename pattern: `{naming}`\n- Required fields present: {', '.join(fields) if fields else 'TODO'}\n"
         + (f"- Context: `{contexts[0]}`\n" if contexts else "")
@@ -254,7 +254,7 @@ def main() -> None:
 
     write(
         out_dir / "ARCHITECTURE.md",
-        dump_frontmatter({"lp": "P08", "llm_function": "MAP", "purpose": f"Work decomposition and flow for {slug}"})
+        dump_frontmatter({"pillar": "P08", "llm_function": "MAP", "purpose": f"Work decomposition and flow for {slug}"})
         + f"# Architecture: {slug}\n\n## Build Graph\n```text\nschema -> output_template -> config -> examples -> quality_gates\n```\n\n"
         + "## Modules\n- `MANIFEST.md`: identity and routing\n- `SCHEMA.md`: contract surface\n"
         + "- `OUTPUT_TEMPLATE.md`: producer contract\n- `QUALITY_GATES.md`: publish threshold\n",
@@ -262,7 +262,7 @@ def main() -> None:
 
     write(
         out_dir / "CONFIG.md",
-        dump_frontmatter({"lp": "P09", "llm_function": "CONSTRAIN", "purpose": f"Naming, paths, and limits for {args.artifact_type}"})
+        dump_frontmatter({"pillar": "P09", "llm_function": "CONSTRAIN", "purpose": f"Naming, paths, and limits for {args.artifact_type}"})
         + f"# Config: {args.artifact_type} Production Rules\n\n## Naming Convention\n"
         + "| Scope | Convention | Example |\n|-------|-----------|---------|\n"
         + f"| Artifact file | `{naming}` | `TODO_example` |\n"
@@ -278,7 +278,7 @@ def main() -> None:
 
     write(
         out_dir / "MEMORY.md",
-        dump_frontmatter({"lp": "P10", "llm_function": "REMEMBER", "purpose": f"Stable heuristics and lessons for {args.artifact_type}"})
+        dump_frontmatter({"pillar": "P10", "llm_function": "REMEMBER", "purpose": f"Stable heuristics and lessons for {args.artifact_type}"})
         + f"# Memory: {args.artifact_type}\n\n## Stable Heuristics\n"
         + "- Start from schema, not prose\n- Prefer exact field coverage over decorative narrative\n"
         + "- Record type-specific ambiguities after first production run\n\n## Known Gaps\n"
@@ -287,7 +287,7 @@ def main() -> None:
 
     write(
         out_dir / "QUALITY_GATES.md",
-        dump_frontmatter({"lp": "P11", "llm_function": "GOVERN", "purpose": f"Hard and soft quality gates for {args.artifact_type}"})
+        dump_frontmatter({"pillar": "P11", "llm_function": "GOVERN", "purpose": f"Hard and soft quality gates for {args.artifact_type}"})
         + f"# Quality Gates: {args.artifact_type}\n\n## HARD Gates\n"
         + "| Gate | Check | Why |\n|------|-------|-----|\n"
         + "| H01 | Required fields parse and exist | contract integrity |\n"
@@ -302,7 +302,7 @@ def main() -> None:
 
     write(
         out_dir / "COLLABORATION.md",
-        dump_frontmatter({"lp": "P12", "llm_function": "COLLABORATE", "purpose": f"Crew role, inputs, outputs, and adjacencies for {args.artifact_type}"})
+        dump_frontmatter({"pillar": "P12", "llm_function": "COLLABORATE", "purpose": f"Crew role, inputs, outputs, and adjacencies for {args.artifact_type}"})
         + f"# Collaboration: {slug}\n\n## My Role in Crews\n"
         + f"I specialize in `{args.artifact_type}` and emit one artifact per request.\n\n## I Receive\n"
         + "- explicit type request\n- seeds or source facts\n- quality target when provided\n\n## I Produce\n"

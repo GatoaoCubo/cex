@@ -119,7 +119,7 @@ def generate_manifest(agent_name: str, files: set[str], tier: str) -> str:
     manifest = {
         "id": agent_name,
         "version": "1.0.0",
-        "type": "iso_package",
+        "kind": "iso_package",
         "title": agent_name.replace("-", " ").replace("_", " ").title(),
         "description": f"ISO Package for {agent_name} agent",
         "domain": "general",

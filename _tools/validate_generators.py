@@ -19,7 +19,7 @@ def load_schema_types(lp_dir: Path) -> list[str]:
     try:
         with open(schema_path, "r", encoding="utf-8") as f:
             data = yaml.safe_load(f)
-        types = data.get("types", {})
+        types = data.get("kinds", {})
         return list(types.keys()) if isinstance(types, dict) else []
     except Exception:
         return []

@@ -20,7 +20,7 @@ INT_PATHS = [r"records/", r"\.claude/", r"/home/"]
 CEX_RE = re.compile(r"p\d{2}_[a-z]+_[a-z_]+")
 SEM_RE = re.compile(r"^\d+\.\d+\.\d+$")
 DAT_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
-REQ = ["id","type","lp","title","version","created","updated",
+REQ = ["id","kind","lp","title","version","created","updated",
     "author","domain","quality","tags","tldr","when_to_use"]
 
 def parse_fm(text):
@@ -77,7 +77,7 @@ def validate_kc(fp):
     kid = fm.get("id", "")
     h = mk("H02_id", HARD, "id==filename"); h.ok = kid == stem; h.detail = f"id={kid!r} f={stem!r}"
     h = mk("H03_fmt", HARD, "id pattern"); h.ok = bool(re.match(r"^p\d{2}_kc_[a-z][a-z0-9_]+$", str(kid))); h.detail = f"{kid!r}"
-    h = mk("H04_type", HARD, "type=kc"); h.ok = fm.get("type") == "knowledge_card"; h.detail = f"{fm.get('type')!r}"
+    h = mk("H04_type", HARD, "type=kc"); h.ok = fm.get("kind") == "knowledge_card"; h.detail = f"{fm.get('kind')!r}"
     h = mk("H05_qual", HARD, "quality=null"); h.ok = fm.get("quality") is None; h.detail = f"{fm.get('quality')!r}"
     h = mk("H06_fields", HARD, "13 required")
     miss = [f for f in REQ if f != "quality" and (fm.get(f) is None or fm.get(f) == "")]

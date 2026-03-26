@@ -50,16 +50,16 @@ def validate_schema(lp_dir: Path) -> tuple[int, int]:
     # Check lp matches directory
     if "lp" in data:
         expected_lp = lp_name.split("_")[0]  # P01, P02, etc.
-        if data["lp"] != expected_lp:
-            print(f"  FAIL: {lp_name} lp='{data['lp']}' != expected '{expected_lp}'")
+        if data["pillar"] != expected_lp:
+            print(f"  FAIL: {lp_name} lp='{data['pillar']}' != expected '{expected_lp}'")
             fails += 1
         else:
             passes += 1
 
     # Check types section
-    types = data.get("types")
+    types = data.get("kinds")
     if not types or not isinstance(types, dict):
-        print(f"  FAIL: {lp_name} missing or empty 'types' section")
+        print(f"  FAIL: {lp_name} missing or empty 'kinds' section")
         return passes, fails + 1
 
     for type_name, type_def in types.items():
@@ -71,7 +71,7 @@ def validate_schema(lp_dir: Path) -> tuple[int, int]:
         # Check naming
         if "naming" in type_def:
             naming = type_def["naming"]
-            lp_lower = data.get("lp", "").lower()
+            lp_lower = data.get("pillar", "").lower()
             # iso_package and similar portable types use external paths (e.g. agents/)
             is_external_naming = type_name in ("iso_package",) or naming.startswith("agents/")
             if not naming.startswith(lp_lower) and not is_external_naming:

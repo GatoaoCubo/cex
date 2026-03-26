@@ -32,10 +32,10 @@ def load_schema_formats(lp_dir: Path) -> dict:
         return {}
     with open(schema_path, "r", encoding="utf-8") as f:
         schema = yaml.safe_load(f)
-    if not schema or "types" not in schema:
+    if not schema or "kinds" not in schema:
         return {}
     result = {}
-    for type_name, type_def in schema["types"].items():
+    for type_name, type_def in schema["kinds"].items():
         if isinstance(type_def, dict) and "machine_format" in type_def:
             result[type_name] = type_def["machine_format"]
     return result
@@ -76,11 +76,11 @@ def validate_compiled_file(
     # 2. Check required fields
     if "id" not in data:
         errors.append("Missing 'id' field")
-    if "type" not in data:
-        errors.append("Missing 'type' field")
+    if "kind" not in data:
+        errors.append("Missing 'kind' field")
 
     # 3. Check machine_format matches extension
-    artifact_type = data.get("type", "")
+    artifact_type = data.get("kind", "")
     expected_format = schema_formats.get(artifact_type, "yaml")
     expected_ext = ".json" if expected_format == "json" else ".yaml"
     if ext != expected_ext:

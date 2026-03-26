@@ -48,15 +48,15 @@ def match_type_for_example(
             if simple and filename.startswith(simple.group(1)):
                 return type_name, type_def
 
-    # Fallback: read YAML frontmatter 'type' field from ex_* files
+    # Fallback: read YAML frontmatter 'kind' field from ex_* files
     if file_path:  # Check frontmatter type for any file
         try:
             text = file_path.read_text(encoding="utf-8")
             fm_match = re.match(r"^---\s*\n(.+?)\n---", text, re.DOTALL)
             if fm_match:
                 fm = yaml.safe_load(fm_match.group(1))
-                if isinstance(fm, dict) and "type" in fm:
-                    fm_type = fm["type"]
+                if isinstance(fm, dict) and "kind" in fm:
+                    fm_type = fm["kind"]
                     if fm_type in schema_types:
                         return fm_type, schema_types[fm_type]
         except Exception:
@@ -181,8 +181,8 @@ def main():
         if not schema:
             continue
 
-        lp_code = schema.get("lp", lp_dir.name.split("_")[0])
-        schema_types = schema.get("types", {})
+        lp_code = schema.get("pillar", lp_dir.name.split("_")[0])
+        schema_types = schema.get("kinds", {})
 
         examples = sorted(examples_dir.glob("*"))
         examples = [e for e in examples if e.is_file()]
