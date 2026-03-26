@@ -38,7 +38,7 @@ r1_freshness_30_day_re_validation:
 - 'Automation: `_tools/validate_examples.py` pode ser agendado via cron/CI'
 r2_promotion_quality_9_5_golden:
 - 'Trigger: example com quality score >= 9.5 confirmado por 2+ validacoes'
-- 'Action: copiar para `meta/golden/` com prefix `GOLDEN`'
+- 'Action: copiar para `archetypes/golden/` com prefix `GOLDEN_`'
 - 'Criteria:'
 - density >= 0.85
 - naming 100% conforme schema

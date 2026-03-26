@@ -59,9 +59,9 @@ output_format: 'Every artifact follows this structure:
 
   id: {type_prefix}_{topic_slug}
 
-  type: {artifact_type}
+  kind: {artifact_type}
 
-  lp: {LP_CODE}
+  pillar: {LP_CODE}
 
   ...
 
