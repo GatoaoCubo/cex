@@ -50,6 +50,7 @@ purpose: Execution protocol for producing a context_doc artifact
    - Is this still a context_doc? (not drifted into KC = no single-atomic-fact structure)
    - Is scope section present and >= 3 lines?
    - Body byte count <= 2048?
-5. If body > 2048 bytes: trim Background section first, then Stakeholders
+5. If body > 2048 bytes: trim Background section first
+6. If still over limit: trim Stakeholders section
 6. Set quality: null in frontmatter (not a score — external gate sets this)
 7. Produce companion .yaml file with identical frontmatter fields
