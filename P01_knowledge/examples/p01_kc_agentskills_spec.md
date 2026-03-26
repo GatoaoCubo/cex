@@ -55,7 +55,7 @@ description: "Use when..." # trigger rule para o agente
 ```
 
 Instalacao por plataforma:
-- Claude Code: plugin marketplace ou copia em `/.claude/`
+- Claude Code: plugin marketplace ou diretorio de comandos do projeto
 - Codex CLI: copiar skills/ para `~/.codex/skills/`
 - OpenCode: clonar repo completo em `~/.opencode/skills/`
 - Universal: `npx skills add <repo-url>`
