@@ -21,11 +21,13 @@ Execute o protocolo `/cex` definido em `.claude/CEX_COMMAND.md`:
 
 | Doc | Path |
 |-----|------|
+| **INDEX** | `INDEX.md` |
 | **Whitepaper** | `_docs/WHITEPAPER_CEX.md` |
 | **Architecture (MOLDE)** | `_docs/ARCHITECTURE.md` |
 | **LLM Pipeline** | `LLM_PIPELINE.md` |
 | **LLM Pipeline (8 funcoes)** | `LLM_PIPELINE.md` |
 | **CODEX** | `archetypes/CODEX.md` |
+| **Doctor** | `python _tools/cex_doctor.py` |
 | **Comando /cex** | `.claude/CEX_COMMAND.md` |
 
 ## REGRAS

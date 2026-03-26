@@ -39,7 +39,7 @@ CEX STATUS — {data}
 MOLDE (Architecture v2.0)
   Nucleos:    7/7  ✅
   LPs:        84/84 ✅
-  Type dirs:  546/546 ✅
+  Kind dirs:  546/546 ✅
   Schemas:    84/84 ✅
 
 BUILDERS (archetypes/builders/)
@@ -57,7 +57,7 @@ CONTEUDO (N01..N07 fill rate)
   N07 admin:         {X}/{Y}
 
 ROOT EXAMPLES (P01..P12)
-  Total: {sum} across 12 LPs
+  Total: {sum} across 12 pillars
 
 ULTIMO COMMIT: {hash} {msg}
 ═══════════════════════════════════
@@ -69,11 +69,12 @@ Sempre aponte pro usuario antes de qualquer trabalho:
 
 | Doc | Path | O que |
 |-----|------|-------|
+| INDEX | `INDEX.md` | Navigation map |
 | Whitepaper | `_docs/WHITEPAPER_CEX.md` | Visao humana do CEX |
 | Architecture | `_docs/ARCHITECTURE.md` | Molde inviolavel (regras) |
 | CODEX | `archetypes/CODEX.md` | Biblia de meta-construcao |
 | Mandamentos | `archetypes/MANDAMENTOS.md` | 10 leis |
-| Taxonomy | `archetypes/TAXONOMY_LAYERS.yaml` | 78 types em 5 camadas |
+| Taxonomy | `archetypes/TAXONOMY_LAYERS.yaml` | 78 kinds em 5 camadas |
 | Variance | `archetypes/VARIANCE_ANALYSIS.md` | Que files sao universais vs especificos |
 | Wave Plan | `archetypes/PHASE3_WAVE_PLAN.md` | Plano de 22 waves |
 | Builder-Builder | `archetypes/builders/_builder-builder/README.md` | Como gerar novos builders |
