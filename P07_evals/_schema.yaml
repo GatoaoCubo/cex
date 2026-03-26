@@ -1,9 +1,9 @@
 # P07 Evals Schema v4.0
-# v2.0: machine_format per type
-lp: P07
+# v2.0: machine_format per kind
+pillar: P07
 name: Evals
 description: COMO medir qualidade
-types:
+kinds:
   unit_eval:
     description: Teste unitario de agente/prompt
     boundary: Teste unitario de agente ou prompt individual. NAO eh smoke_eval (rapido,

@@ -1,7 +1,7 @@
-lp: P02
+pillar: P02
 name: Model
 description: QUEM o agente EH
-types:
+kinds:
   agent:
     description: Definicao de agente (persona + capabilities)
     boundary: Definicao completa de agente (persona + capabilities). NAO eh skill
@@ -15,8 +15,8 @@ types:
       quality_min: 7.0
     frontmatter_required:
     - id
-    - type
-    - lp
+    - kind
+    - pillar
     - title
     - version
     - satellite
@@ -62,7 +62,7 @@ types:
       max_bytes: 2048
     frontmatter_required:
     - id
-    - type
+    - kind
     - perspective
     - applies_to
     llm_function: INJECT

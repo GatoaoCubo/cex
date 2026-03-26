@@ -1,9 +1,9 @@
 # P04 Tools Schema v4.0
 # v4.0: +component type, llm_function on all types
-lp: P04
+pillar: P04
 name: Tools
 description: O que o agente USA
-types:
+kinds:
   skill:
     description: Habilidade reutilizavel (phases + trigger)
     boundary: Habilidade reutilizavel com fases e trigger. NAO eh agent (P02, identidade
@@ -65,7 +65,7 @@ types:
       max_bytes: 1024
     frontmatter_required:
     - id
-    - type
+    - kind
     - trigger_event
     - script_path
     llm_function: GOVERN

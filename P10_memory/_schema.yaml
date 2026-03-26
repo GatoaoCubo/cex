@@ -1,7 +1,7 @@
-lp: P10
+pillar: P10
 name: Memory
 description: O que LEMBRA
-types:
+kinds:
   runtime_state:
     description: Estado mental variavel por sessao (routing, decisoes em runtime)
     boundary: Estado mental variavel acumulado em runtime. NAO eh mental_model P02

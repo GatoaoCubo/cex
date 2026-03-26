@@ -1,9 +1,9 @@
 # P11 Feedback Schema v4.0
-# v2.0: machine_format per type
-lp: P11
+# v2.0: machine_format per kind
+pillar: P11
 name: Feedback
 description: COMO melhora
-types:
+kinds:
   quality_gate:
     description: Barreira de qualidade (pass/fail com score)
     boundary: Barreira de qualidade com score numerico. NAO eh validator (P06, tecnico

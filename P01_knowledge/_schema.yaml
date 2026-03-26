@@ -1,11 +1,11 @@
 # P01 Knowledge Schema v4.0
-# v2.0: machine_format per type
+# v2.0: machine_format per kind
 # Baseado em destilacao de 7 KCs golden do codexa-core
 # Sources: DISTILL_GOLDEN_KC_PATTERNS.md
-lp: P01
+pillar: P01
 name: Knowledge
 description: O que o agente SABE
-types:
+kinds:
   knowledge_card:
     description: Fato atomico pesquisavel (densidade > 0.8)
     boundary: Conhecimento destilado, estatico, versionado. NAO eh instrucao, template,
@@ -21,8 +21,8 @@ types:
       quality_min: 7.0
     frontmatter_required:
     - id
-    - type
-    - lp
+    - kind
+    - pillar
     - title
     - version
     - created
@@ -76,7 +76,7 @@ types:
       max_bytes: 1024
     frontmatter_required:
     - id
-    - type
+    - kind
     - url
     - domain
     - last_checked
@@ -110,7 +110,7 @@ types:
       max_bytes: 2048
     frontmatter_required:
     - id
-    - type
+    - kind
     - domain
     - scope
     llm_function: INJECT
@@ -142,7 +142,7 @@ types:
       max_bytes: 1024
     frontmatter_required:
     - id
-    - type
+    - kind
     - input
     - output
     - quality

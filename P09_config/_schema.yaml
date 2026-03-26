@@ -1,9 +1,9 @@
 # P09 Config Schema v4.0
-# v2.0: machine_format per type
-lp: P09
+# v2.0: machine_format per kind
+pillar: P09
 name: Config
 description: COMO configura
-types:
+kinds:
   env_config:
     description: Variaveis de ambiente
     boundary: Variaveis de ambiente do sistema. NAO eh boot_config (P02, per-provider)

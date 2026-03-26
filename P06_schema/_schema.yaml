@@ -1,7 +1,7 @@
-lp: P06
+pillar: P06
 name: Schema
 description: CONTRATOS de validacao
-types:
+kinds:
   input_schema:
     description: Contrato de entrada
     boundary: Contrato de entrada que define dados requeridos. NAO eh validation_schema

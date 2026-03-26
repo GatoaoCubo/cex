@@ -1,13 +1,13 @@
 # P03 Prompt Schema v4.0
 # v4.0: +planner type, llm_function on all types
-lp: P03
+pillar: P03
 name: Prompt
 description: COMO o agente FALA - 9 tipos de prompt engineering
 variable_syntax:
   tier1_template: '{{MUSTACHE}}'
   tier2_authoring: '[BRACKET]'
   deprecated: '{single_curly}'
-types:
+kinds:
   system_prompt:
     description: Prompt de sistema que define identidade e regras do agente
     boundary: Identidade + regras + formato. Lido PRIMEIRO pelo LLM.
@@ -38,8 +38,8 @@ types:
       quality_min: 7.0
     frontmatter_required:
     - id
-    - type
-    - lp
+    - kind
+    - pillar
     - title
     - target_agent
     - quality
@@ -78,7 +78,7 @@ types:
       max_bytes: 2048
     frontmatter_required:
     - id
-    - type
+    - kind
     - action
     - input_required
     - output_expected
@@ -117,7 +117,7 @@ types:
       max_bytes: 8192
     frontmatter_required:
     - id
-    - type
+    - kind
     - title
     - variables
     - quality
@@ -157,7 +157,7 @@ types:
       max_examples: 5
     frontmatter_required:
     - id
-    - type
+    - kind
     - task
     - examples_count
     body_structure:
@@ -192,7 +192,7 @@ types:
       max_bytes: 3072
     frontmatter_required:
     - id
-    - type
+    - kind
     - reasoning_type
     body_structure:
     - task
@@ -230,7 +230,7 @@ types:
       max_bytes: 5120
     frontmatter_required:
     - id
-    - type
+    - kind
     - tools_available
     body_structure:
     - objective
@@ -264,7 +264,7 @@ types:
       max_bytes: 6144
     frontmatter_required:
     - id
-    - type
+    - kind
     - steps
     - flow
     body_structure:
@@ -303,7 +303,7 @@ types:
       max_bytes: 7168
     frontmatter_required:
     - id
-    - type
+    - kind
     - target_type
     - optimization_method
     body_structure:
@@ -339,7 +339,7 @@ types:
       max_bytes: 6144
     frontmatter_required:
     - id
-    - type
+    - kind
     - routes
     - fallback
     body_structure:

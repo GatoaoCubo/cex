@@ -1,9 +1,9 @@
 # P05 Output Schema v4.0
 # v3.0: output_schema renamed to response_format (disambiguate from P06.validation_schema)
-lp: P05
+pillar: P05
 name: Output
 description: O que o agente ENTREGA
-types:
+kinds:
   response_format:
     description: Formato de resposta do LLM (como o agente responde)
     boundary: Formato de resposta injetado no prompt do LLM. NAO eh validation_schema
