@@ -1,175 +1,148 @@
-# CEX Architecture
+# CEX Architecture v2.0
+## Molde Inviolavel - Estrutura Fractal 7x12x78
 
-**v1.0 | 2026-03-22**
-
----
-
-## 1. Layer Map
-
-```
-+------------------------------------------------------------------+
-|                        CEX FRAMEWORK                            |
-+------------------------------------------------------------------+
-|  CORE Layer (P01-P04)       "What the agent IS and KNOWS"       |
-|    P01 Knowledge     — Facts, domain cards, context docs        |
-|    P02 Model         — Identity, capabilities, routing          |
-|    P03 Prompt        — Instructions, system prompts, HOPs       |
-|    P04 Tools         — Skills, MCPs, connectors, hooks          |
-+------------------------------------------------------------------+
-|  QUALITY Layer (P05-P08)    "How the agent PERFORMS"            |
-|    P05 Output        — Structured responses, output schemas     |
-|    P06 Schema        — Validation contracts, type definitions   |
-|    P07 Evals         — Quality metrics, benchmarks, scorecards  |
-|    P08 Architecture  — System design, scaling patterns          |
-+------------------------------------------------------------------+
-|  SCALE Layer (P09-P12)      "How the agent OPERATES at scale"   |
-|    P09 Config        — Environment, feature flags, secrets      |
-|    P10 Memory        — State, persistence, retrieval indexes    |
-|    P11 Feedback      — Learning loops, corrections, drift logs  |
-|    P12 Orchestration — Workflows, dispatch, multi-agent coord   |
-+------------------------------------------------------------------+
-```
+**Status**: CONSOLIDADO | **Data**: 2026-03-26 | **Quebrar**: PROIBIDO
 
 ---
 
-## 2. Artifact Pipeline
+## 1. Hierarquia de 5 Niveis
 
-Every LP follows the same production chain:
-
-```
-_schema.yaml
-    |  Defines: types (68 total), constraints, frontmatter fields,
-    |           max_bytes, quality_min, density_min
-    v
-_generator.md
-    |  Defines: step-by-step authoring protocol, anti-patterns,
-    |           density rules, type-specific guidance
-    v
-templates/
-    |  Defines: fillable structure with {{MUSTACHE}} and [BRACKET]
-    |           variables — one template per primary type
-    v
-examples/
-       Validated instances: density >= 0.80, quality >= 7.0,
-       dual output (.md + .yaml), id == filename stem
-```
+| Nivel | Pattern | Conteudo | Modificavel |
+|-------|---------|----------|-------------|
+| L0 | `archetypes/builders/{type}-builder/` | 13 ISO files (fabrica) | Somente via review |
+| L1 | `P{NN}_{lp}/` | _schema.yaml + templates/ + examples/ | Versionado, breaking = major |
+| L2 | `N{XX}_{function}/` | NUCLEUS.md | Gerado por scaffold |
+| L3 | `N{XX}/P{NN}_{lp}/` | _schema.yaml (inherits root) | Override: fields_add only |
+| L4 | `N{XX}/P{NN}/{type}/` | examples/ + templates/ + compiled/ | Livre, validado por gates |
 
 ---
 
-## 3. Data Flow: User Input to Indexed Artifact
+## 2. Os 7 Nucleos
 
-```
-User Input
-    |
-    v
-[1] bootstrap.sh
-    |  Creates LP structure: P01-P12/ + archetypes/ + _tools/
-    |  Copies schemas, generators, templates into new repo
-    v
-[2] _generator.md (LP-specific)
-    |  User reads: step-by-step authoring guide for target LP
-    |  Resolves: [BRACKET] decisions (author fills open variables)
-    v
-[3] Template fill
-    |  {{MUSTACHE}} vars resolved by template engine or author
-    |  YAML frontmatter populated: id, type, lp, quality, tags...
-    v
-[4] validate_examples.py
-    |  Checks: schema compliance, density >= 0.80,
-    |          frontmatter completeness, max_bytes, naming
-    v
-[5] Pool / Brain
-       Artifact indexed for semantic retrieval (keywords + embeddings)
-       Available for: agent hydration, template generation, reuse
-```
+| ID | Dir | Funcao | LPs Primarios |
+|----|-----|--------|---------------|
+| N01 | N01_intelligence | Pesquisa | P01, P07 |
+| N02 | N02_marketing | Marketing | P03, P05 |
+| N03 | N03_engineering | Engenharia | P02, P04, P06 |
+| N04 | N04_knowledge | Conhecimento | P01, P10 |
+| N05 | N05_operations | Operacoes | P04, P12 |
+| N06 | N06_commercial | Comercial | P05, P09 |
+| N07 | N07_admin | Administracao | P08, P11, P12 |
+
+**Inviolavel**: nao adicionar/remover nucleos sem revisao de arquitetura.
 
 ---
 
-## 4. LP Map — 12 Leverage Points
+## 3. Os 12 LPs x 78 Types
 
-| LP | Domain | Layer | Primary Type | Schema | Gen | Tpl | Ex |
-|----|--------|-------|-------------|--------|-----|-----|----|
-| P01 | Knowledge | CORE | domain_kc | YES | YES | 3 | 7 |
-| P02 | Model | CORE | agent | YES | YES | 1 | 4 |
-| P03 | Prompt | CORE | prompt_template | YES | YES | 1 | 4 |
-| P04 | Tools | CORE | skill | YES | YES | 1 | 3 |
-| P05 | Output | QUALITY | output_schema | YES | YES | 1 | 0 |
-| P06 | Schema | QUALITY | validation_schema | YES | YES | 0 | 0 |
-| P07 | Evals | QUALITY | eval_metric | YES | YES | 0 | 0 |
-| P08 | Architecture | QUALITY | arch_diagram | YES | YES | 0 | 0 |
-| P09 | Config | SCALE | config_manifest | YES | YES | 0 | 0 |
-| P10 | Memory | SCALE | memory_schema | YES | YES | 0 | 0 |
-| P11 | Feedback | SCALE | feedback_loop | YES | YES | 0 | 0 |
-| P12 | Orchestration | SCALE | workflow | YES | YES | 0 | 0 |
-
-**Totals**: 12 schemas | 12 generators | 7 templates | 18 examples | 68 types
+| LP | Nome | Types |
+|----|------|-------|
+| P01 | Knowledge | knowledge_card, rag_source, glossary_entry, context_doc, embedding_config, few_shot_example (6) |
+| P02 | Model | agent, lens, boot_config, mental_model, model_card, router, fallback_chain, iso_package, axiom (9) |
+| P03 | Prompt | system_prompt, user_prompt, prompt_template, few_shot, chain_of_thought, react, chain, meta_prompt, router_prompt, planner (10) |
+| P04 | Tools | skill, mcp_server, hook, plugin, client, cli_tool, scraper, connector, daemon, component (10) |
+| P05 | Output | response_format, parser, formatter, naming_rule (4) |
+| P06 | Schema | input_schema, type_def, validator, interface, validation_schema, artifact_blueprint, grammar (7) |
+| P07 | Evals | unit_eval, smoke_eval, e2e_eval, benchmark, golden_test, scoring_rubric (6) |
+| P08 | Architecture | satellite_spec, pattern, law, diagram, component_map (5) |
+| P09 | Config | env_config, path_config, permission, feature_flag, runtime_rule (5) |
+| P10 | Memory | runtime_state, brain_index, learning_record, session_state (4) |
+| P11 | Feedback | quality_gate, bugloop, lifecycle_rule, guardrail, optimizer (5) |
+| P12 | Orchestration | workflow, dag, spawn_config, signal, handoff, dispatch_rule, crew (7) |
 
 ---
 
-## 5. Schema → Type Hierarchy
+## 4. Formato Dual (Mandamento #2)
 
-```
-_schema.yaml (per LP)
-    |
-    +-- primary type (1 per LP, has full generator + template)
-    |     ex: P01 -> domain_kc
-    |
-    +-- secondary types (3-8 per LP, schema defined, no generator yet)
-          ex: P01 -> rag_source, glossary_entry, context_doc,
-                     embedding_config, few_shot_example
-```
+| O que | Fonte (.md) | Compiled | Quem sincroniza |
+|-------|-------------|----------|-----------------|
+| Artefatos (78 types) | YAML frontmatter + MD body | `.yaml` ou `.json` | distill.py |
+| Schemas | `.yaml` only | N/A | manual |
+| Builders (13 ISO) | `.md` only | N/A | manual |
+| Meta-docs | `.md` only | N/A | manual |
 
-68 total types:
-- CORE (P01-P04): 27 types
-- QUALITY (P05-P08): 20 types
-- SCALE (P09-P12): 21 types
+**Regra**: todo artefato instance existe em DOIS formatos. O .md eh fonte de autoria. O compiled/ eh output de consumo.
 
 ---
 
-## 6. Dual Output Pattern
-
-Every artifact = 2 files:
+## 5. Heranca de Schema
 
 ```
-p01_kc_ecommerce_br.md      # Human: dense markdown, version-controlled
-p01_kc_ecommerce_br.yaml    # LLM: structured for embedding and retrieval
+P{NN}_*/_schema.yaml              ROOT (fonte de verdade)
+  |
+  +-- N{XX}/P{NN}/_schema.yaml    NUCLEO (herda + especializa)
+       inherits: root
+       fields_add: {}              Campos extras deste nucleo
+       constraints_override: {}    Restricoes especificas
 ```
 
-Exceptions:
-- `_schema.yaml` — YAML only (machine contract)
-- `_generator.md` — MD only (human authoring guide)
+**Regra**: nucleo NUNCA remove campos do root. Somente ADICIONA ou RESTRINGE.
 
 ---
 
-## 7. Meta-Hierarchy
+## 6. Builders (L0)
 
-```
-archetypes/CODEX.md          DNA — all rules, anatomy, tiers (read first)
-archetypes/MANDAMENTOS.md    10 immutable laws (never violate)
-archetypes/META_TEMPLATE.md  Template that generates templates (shokunin)
-archetypes/GLOSSARY.md       Terms: LP, density, dual output, shokunin
-archetypes/ROADMAP.md        6 waves — what was built and what is next
-archetypes/MIGRATION_MAP.md  9,916 files classified into LP buckets
-archetypes/GOLDEN_CANDIDATES.md  22 priority candidates for migration
-archetypes/DENSITY_REPORT.md     18 examples analyzed (density + tier)
-archetypes/VALIDATION_REPORT.md  Chain test results (ATLAS, 2026-03-22)
-```
+13 ISO files por builder:
 
----
+| # | File | LP | Funcao |
+|---|------|----|--------|
+| 1 | MANIFEST.md | P02 | Identidade |
+| 2 | SYSTEM_PROMPT.md | P03 | Persona |
+| 3 | KNOWLEDGE.md | P01 | Domain knowledge |
+| 4 | INSTRUCTIONS.md | P03 | Pipeline 3-fases |
+| 5 | TOOLS.md | P04 | Ferramentas |
+| 6 | OUTPUT_TEMPLATE.md | P05 | Template {{vars}} |
+| 7 | SCHEMA.md | P06 | SOURCE OF TRUTH |
+| 8 | EXAMPLES.md | P07 | Golden + anti |
+| 9 | ARCHITECTURE.md | P08 | Boundary |
+| 10 | CONFIG.md | P09 | Naming, paths |
+| 11 | MEMORY.md | P10 | Patterns |
+| 12 | QUALITY_GATES.md | P11 | HARD/SOFT gates |
+| 13 | COLLABORATION.md | P12 | Crews |
 
-## 8. Quality Gates
-
-| Gate | Rule | Enforced by |
-|------|------|------------|
-| density_score | >= 0.80 | validate_examples.py |
-| quality | >= 7.0 | frontmatter check |
-| max_bytes | 4,096 | _schema.yaml per LP |
-| frontmatter | 13 required fields | validate_schema.py |
-| keywords | >= 3 | validate_examples.py |
-| bullets | >= 3 | validate_examples.py |
-| id == filename | exact match | validate_examples.py |
-| prose limit | max 3 lines continuous | manual + linter |
+Cross-validation obrigatoria antes de commit (ARCHETYPE_BUILDER_CHECKLIST).
 
 ---
 
-*CEX Architecture v1.0 | 2026-03-22*
+## 7. Quality Gates
+
+| Score | Tier | Destino |
+|-------|------|---------|
+| >= 9.5 | Golden | Pool referencia |
+| >= 8.0 | Skilled | Publicado |
+| >= 7.0 | Learning | Experimental |
+| < 7.0 | Rejected | Refazer |
+
+Density minima: 0.8. Max size: per _schema.yaml.
+
+---
+
+## 8. Regras Inviolaveis
+
+1. NUNCA criar artefato fora de N{XX}/P{NN}/{type}/
+2. NUNCA editar schema de nucleo sem inherits do root
+3. NUNCA commitar builder sem CHECKLIST
+4. NUNCA remover campo de schema (deprecate)
+5. NUNCA pular quality gate (min 7.0)
+6. NUNCA criar type fora de P{NN}/_schema.yaml root
+7. SEMPRE dual output pra artefatos
+8. SEMPRE density >= 0.8
+9. SEMPRE builder constroi, humano revisa
+10. SEMPRE path = endereco semantico
+
+---
+
+## 9. Numeros
+
+| Metrica | Quantidade |
+|---------|-----------|
+| Nucleos | 7 |
+| LPs | 12 (x7 = 84) |
+| Types | 78 (x7 = 546 dirs) |
+| Builders | 78 planejados (4 prontos) |
+| ISO files/builder | 13 |
+| Subdirs/type | 3 (examples, templates, compiled) |
+
+---
+
+*Architecture v2.0 -- Molde inviolavel. Estrutura pronta. Preencher.*
