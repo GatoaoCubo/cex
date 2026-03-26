@@ -17,9 +17,9 @@ tldr: 7-wave DAG for migrating 9916 codexa-core MD files into CEX — P01 KCs fi
   infra/P08-P12
 max_bytes: 1024
 density_score: 0.9
-source: codexa-core/C:/Users/PC/Documents/GitHub/cex/_meta/MIGRATION_MAP.md (PLANO DE EXECUCAO)
+source: codexa-core/C:/Users/PC/Documents/GitHub/cex/archetypes/MIGRATION_MAP.md (PLANO DE EXECUCAO)
 linked_artifacts:
-  map: _meta/MIGRATION_MAP.md
+  map: archetypes/MIGRATION_MAP.md
 pipeline: '[W5.1 P01 KCs] ─────────────────────────────────────┐
 
   [W5.2 P03 Prompts] ──────────────────────────────────┤

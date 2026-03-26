@@ -38,7 +38,7 @@ Regras de ciclo de vida para artefatos CEX — garantem freshness, promovem qual
 
 ### R2: Promotion (quality >= 9.5 -> golden)
 - **Trigger**: example com quality score >= 9.5 confirmado por 2+ validacoes
-- **Action**: copiar para `_meta/golden/` com prefix `GOLDEN_`
+- **Action**: copiar para `archetypes/golden/` com prefix `GOLDEN_`
 - **Criteria**:
   - density >= 0.85
   - naming 100% conforme schema
@@ -48,7 +48,7 @@ Regras de ciclo de vida para artefatos CEX — garantem freshness, promovem qual
 
 ### R3: Archive (quality < 7.0 -> archive)
 - **Trigger**: example com quality < 7.0 ou 3+ issues no validator
-- **Action**: mover para `_meta/archive/{lp}/` com timestamp
+- **Action**: mover para `archetypes/archive/{lp}/` com timestamp
 - **Retention**: arquivados por 90 dias, depois deletados
 - **Recovery**: se re-editado e quality >= 7.0, pode voltar ao LP
 
@@ -62,13 +62,13 @@ Regras de ciclo de vida para artefatos CEX — garantem freshness, promovem qual
 - Schema change -> re-validate examples + generator
 - Generator change -> re-validate examples (naming may shift)
 - New example -> validate against schema + size + density
-- Promotion/archive -> update `_meta/` indexes
+- Promotion/archive -> update `archetypes/` indexes
 
 ## Quality Tiers
 
 | Tier | Score | Density | Action |
 |------|-------|---------|--------|
-| Golden | >= 9.5 | >= 0.85 | Promote to `_meta/golden/` |
+| Golden | >= 9.5 | >= 0.85 | Promote to `archetypes/golden/` |
 | Skilled | 8.0-9.4 | >= 0.75 | Active, pool eligible |
 | Learning | 7.0-7.9 | >= 0.65 | Active, needs improvement |
 | Rejected | < 7.0 | any | Archive after 30 days |

@@ -4,7 +4,7 @@ if hasattr(sys.stderr, "reconfigure"): sys.stderr.reconfigure(encoding="utf-8")
 #!/usr/bin/env python3
 """
 cex_meta_agents.py — Definicoes dos Meta-Agentes CEX
-Gera 5 meta-agent definitions (YAML) em _meta/meta_agents/.
+Gera 5 meta-agent definitions (YAML) em archetypes/agents/.
 
 Meta-agents sao agentes especializados em CRIAR artefatos CEX:
   1. forge-agent: cria qualquer artefato dado LP+type+seeds

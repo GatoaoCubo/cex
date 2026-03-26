@@ -45,7 +45,7 @@ phase_2_extract_type_rules:
 - 'Output: Dict com todas as regras do tipo'
 phase_3_load_template:
 - 'Input: Tipo do artefato'
-- 'Action: Consulta `_meta/TYPE_TO_TEMPLATE.yaml` para mapear tipo > template path, le o template .md'
+- 'Action: Consulta `archetypes/TYPE_TO_TEMPLATE.yaml` para mapear tipo > template path, le o template .md'
 - 'Output: String do template com {{MUSTACHE}} vars (ou None se GAP)'
 phase_4_build_prompt:
 - 'Input: Schema + rules + template + seeds + context'

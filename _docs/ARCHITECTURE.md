@@ -63,7 +63,7 @@ User Input
     |
     v
 [1] bootstrap.sh
-    |  Creates LP structure: P01-P12/ + _meta/ + _tools/
+    |  Creates LP structure: P01-P12/ + archetypes/ + _tools/
     |  Copies schemas, generators, templates into new repo
     v
 [2] _generator.md (LP-specific)
@@ -144,15 +144,15 @@ Exceptions:
 ## 7. Meta-Hierarchy
 
 ```
-_meta/CODEX.md          DNA — all rules, anatomy, tiers (read first)
-_meta/MANDAMENTOS.md    10 immutable laws (never violate)
-_meta/META_TEMPLATE.md  Template that generates templates (shokunin)
-_meta/GLOSSARY.md       Terms: LP, density, dual output, shokunin
-_meta/ROADMAP.md        6 waves — what was built and what is next
-_meta/MIGRATION_MAP.md  9,916 files classified into LP buckets
-_meta/GOLDEN_CANDIDATES.md  22 priority candidates for migration
-_meta/DENSITY_REPORT.md     18 examples analyzed (density + tier)
-_meta/VALIDATION_REPORT.md  Chain test results (ATLAS, 2026-03-22)
+archetypes/CODEX.md          DNA — all rules, anatomy, tiers (read first)
+archetypes/MANDAMENTOS.md    10 immutable laws (never violate)
+archetypes/META_TEMPLATE.md  Template that generates templates (shokunin)
+archetypes/GLOSSARY.md       Terms: LP, density, dual output, shokunin
+archetypes/ROADMAP.md        6 waves — what was built and what is next
+archetypes/MIGRATION_MAP.md  9,916 files classified into LP buckets
+archetypes/GOLDEN_CANDIDATES.md  22 priority candidates for migration
+archetypes/DENSITY_REPORT.md     18 examples analyzed (density + tier)
+archetypes/VALIDATION_REPORT.md  Chain test results (ATLAS, 2026-03-22)
 ```
 
 ---

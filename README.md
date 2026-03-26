@@ -30,7 +30,7 @@
 ## Estrutura
 
     cex/
-    ├── _meta/                     # DNA do framework
+    ├── archetypes/                     # DNA do framework
     │   ├── CODEX.md              # Biblia de meta-construcao (comece aqui)
     │   ├── MANDAMENTOS.md        # 10 leis imutaveis
     │   ├── META_TEMPLATE.md      # Template que gera templates
@@ -72,8 +72,8 @@ Cada LP contem: `_schema.yaml` + `_generator.md` + `templates/` + `examples/` + 
 
 ### 1. Entenda o DNA
 
-    _meta/CODEX.md        # Variaveis, anatomia, naming, density tiers
-    _meta/MANDAMENTOS.md  # O que nunca violar
+    archetypes/CODEX.md        # Variaveis, anatomia, naming, density tiers
+    archetypes/MANDAMENTOS.md  # O que nunca violar
 
 ### 2. Escolha o LP e leia o generator
 
@@ -149,8 +149,8 @@ python _tools/cex_compile.py --all    # compile everything
 | [ARCHITECTURE.md](_docs/ARCHITECTURE.md) | ASCII diagrams, LP map, data flow, quality gates |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Como adicionar LPs, tipos, migrar, PR checklist |
 | [CHANGELOG.md](CHANGELOG.md) | Historico de 6 waves + creditos por satellite |
-| [_meta/CODEX.md](_meta/CODEX.md) | DNA completo, variaveis, anatomy, tiers |
-| [_meta/MANDAMENTOS.md](_meta/MANDAMENTOS.md) | 10 leis imutaveis |
+| [archetypes/CODEX.md](archetypes/CODEX.md) | DNA completo, variaveis, anatomy, tiers |
+| [archetypes/MANDAMENTOS.md](archetypes/MANDAMENTOS.md) | 10 leis imutaveis |
 
 ---
 
@@ -164,4 +164,4 @@ MIT License — see [LICENSE](LICENSE) or use freely with attribution.
 
 ---
 
-*v3.0.0 | 2026-03-23 | Leia: _meta/CODEX.md*
+*v3.0.0 | 2026-03-23 | Leia: archetypes/CODEX.md*

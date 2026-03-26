@@ -7,7 +7,7 @@ cex_seed_bank.py — Banco de Seeds por Tipo CEX
 Para cada um dos 69 tipos, gera 10-20 seed words relevantes.
 
 Le TYPE_TO_TEMPLATE.yaml + _schema.yaml de cada LP.
-Gera _meta/SEED_BANK.yaml
+Gera archetypes/SEED_BANK.yaml
 
 Uso:
   python cex_seed_bank.py              # gera SEED_BANK.yaml

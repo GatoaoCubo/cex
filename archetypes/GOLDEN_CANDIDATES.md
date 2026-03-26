@@ -63,7 +63,7 @@
 | Path | Tipo CEX | Est. Quality | Status |
 |------|----------|-------------|--------|
 | records/agents/*/iso_vectorstore/ISO_*_OUTPUT_TEMPLATE.md | P05 formatter | 9.0 | MIGRADO: p05_fmt_agent_markdown.md |
-| cex/_meta/MIGRATION_MAP.md + _schema.yaml files | P05 naming_rule | 9.0 | MIGRADO: p05_nr_cex_naming.md |
+| cex/archetypes/MIGRATION_MAP.md + _schema.yaml files | P05 naming_rule | 9.0 | MIGRADO: p05_nr_cex_naming.md |
 
 ## P06 Schema
 
@@ -112,7 +112,7 @@
 
 | Path | Tipo CEX | Est. Quality | Status |
 |------|----------|-------------|--------|
-| cex/_meta/MIGRATION_MAP.md (PLANO DE EXECUCAO) | P12 dag | 9.0 | MIGRADO: p12_dag_cex_wave_pipeline.md |
+| cex/archetypes/MIGRATION_MAP.md (PLANO DE EXECUCAO) | P12 dag | 9.0 | MIGRADO: p12_dag_cex_wave_pipeline.md |
 | records/satellites/stella/mental_model.yaml + continuous_batching SKILL | P12 spawn_config | 9.0 | MIGRADO: p12_spawn_grid_continuous.md |
 
 ## Priority Migration Queue (Remaining)

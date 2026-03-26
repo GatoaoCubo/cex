@@ -30,7 +30,7 @@ actions: '| Result | Action | Escalation |
 
   |--------|--------|------------|
 
-  | >= 9.5 (Golden) | Pool + `_meta/golden/` + celebrate | Propagate pattern to other satellites |
+  | >= 9.5 (Golden) | Pool + `archetypes/golden/` + celebrate | Propagate pattern to other satellites |
 
   | >= 8.0 (Skilled) | Pool + `remember()` learning record | None |
 

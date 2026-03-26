@@ -74,7 +74,7 @@ META_TEMPLATE --> _schema.yaml + _generator.md --> template.md --> instance.md -
 
 - Schema: P01_knowledge/_schema.yaml
 - Generator: P01_knowledge/_generator.md
-- Meta-Template: _meta/META_TEMPLATE.md
+- Meta-Template: archetypes/META_TEMPLATE.md
 
 ---
 *CEX P01 Domain KC | Quality: 9.0 | Density: 0.88*

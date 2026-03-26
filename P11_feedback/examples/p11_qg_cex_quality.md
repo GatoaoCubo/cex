@@ -73,7 +73,7 @@ Immediate rejection if ANY of these:
 | < 7.0 | Rejected | REJECT | Do not merge. Author must fix and resubmit |
 | 7.0-7.9 | Learning | REVIEW | Merge with improvement notes. Flag for revisit |
 | 8.0-9.4 | Skilled | ACCEPT | Merge. Eligible for pool and learning memory |
-| >= 9.5 | Golden | ACCEPT+PROMOTE | Merge + copy to `_meta/golden/` + celebrate |
+| >= 9.5 | Golden | ACCEPT+PROMOTE | Merge + copy to `archetypes/golden/` + celebrate |
 
 ## Scoring Guide
 

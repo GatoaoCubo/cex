@@ -16,11 +16,11 @@
 
 ## ONDA 3: GENERATORS + EXAMPLES [COMPLETA]
 - [x] 3.1 Generators CORE: P01 + P02 + P03 + P04
-- [x] 3.2 Meta-template v1 (_meta/META_TEMPLATE.md)
+- [x] 3.2 Meta-template v1 (archetypes/META_TEMPLATE.md)
 - [x] 3.3 Golden examples: P01(7) + P02(4) + P03(4) + P04(3) = 18 total
 - [x] 3.4 Generators QUALITY+SCALE: P05 + P06 + P07 + P08 + P09 + P10 + P11 + P12
 - [x] 3.5 Templates CORE: 7 (P01:3 + P02:1 + P03:1 + P04:1 + P05:1)
-- [x] 3.6 Validation chain test pass (_meta/VALIDATION_REPORT.md)
+- [x] 3.6 Validation chain test pass (archetypes/VALIDATION_REPORT.md)
 
 ## ONDA 4: GOLDEN MIGRATION [COMPLETA]
 - [x] 4.1 Migration map: 9916 arquivos classificados em LP buckets
@@ -30,7 +30,7 @@
 
 ## ONDA 5: ANTI-FRAGILIDADE [EM PROGRESSO]
 - [x] 5.1 Meta-docs v3 (CODEX + ROADMAP + README atualizados com estado real)
-- [x] 5.2 Density report (_meta/DENSITY_REPORT.md com analise dos 18 examples)
+- [x] 5.2 Density report (archetypes/DENSITY_REPORT.md com analise dos 18 examples)
 - [ ] 5.3 QUALITY+SCALE templates (P06-P12: 7 templates faltando)
 - [ ] 5.4 _custom/ extensibility + lifecycle validator + promotion script
 - [ ] 5.5 Density validator no pre-commit (rejeita score < 0.80)

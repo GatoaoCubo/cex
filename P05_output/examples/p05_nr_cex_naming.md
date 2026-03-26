@@ -12,7 +12,7 @@ tags: [naming, cex, convention, lp]
 tldr: "CEX file naming: p{LP}_{type}_{descriptor}.{ext} — LP number + 2-letter type code + snake_case descriptor"
 max_bytes: 2048
 density_score: 0.90
-source: codexa-core/C:/Users/PC/Documents/GitHub/cex/_meta/MIGRATION_MAP.md + all _schema.yaml files
+source: codexa-core/C:/Users/PC/Documents/GitHub/cex/archetypes/MIGRATION_MAP.md + all _schema.yaml files
 linked_artifacts: null
 ---
 

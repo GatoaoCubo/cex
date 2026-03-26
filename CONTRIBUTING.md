@@ -7,8 +7,8 @@ Every contribution must pass the quality gate before merging.
 
 ## Quick Start
 
-1. Read `_meta/CODEX.md` (DNA, naming, density rules)
-2. Read `_meta/MANDAMENTOS.md` (10 immutable laws)
+1. Read `archetypes/CODEX.md` (DNA, naming, density rules)
+2. Read `archetypes/MANDAMENTOS.md` (10 immutable laws)
 3. Choose your LP, read its `_generator.md`
 4. Fill a template, validate, submit
 
@@ -52,7 +52,7 @@ If a type exists in `_schema.yaml` but has no generator coverage:
 
 For migrating existing artifacts (e.g., from codexa-core, LangChain, etc.):
 
-1. Check `_meta/MIGRATION_MAP.md` — find the LP bucket for your artifact type
+1. Check `archetypes/MIGRATION_MAP.md` — find the LP bucket for your artifact type
 2. Identify the target LP and type:
    - Knowledge document → P01 (domain_kc or meta_kc)
    - Agent definition → P02 (agent)
@@ -141,7 +141,7 @@ density_score: 0.88
 
 Before submitting a PR, confirm all items:
 
-- [ ] Read `_meta/CODEX.md` and `_meta/MANDAMENTOS.md`
+- [ ] Read `archetypes/CODEX.md` and `archetypes/MANDAMENTOS.md`
 - [ ] Artifact placed in correct LP directory (`P01-P12/`)
 - [ ] Filename follows naming convention (`{lp}_{type}_{topic}.md`)
 - [ ] YAML frontmatter complete (all required fields present)

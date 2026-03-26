@@ -29,7 +29,7 @@ source: codexa-core/CLAUDE.md + records/satellites/edison/mental_model.yaml
 
 | Result | Action | Escalation |
 |--------|--------|------------|
-| >= 9.5 (Golden) | Pool + `_meta/golden/` + celebrate | Propagate pattern to other satellites |
+| >= 9.5 (Golden) | Pool + `archetypes/golden/` + celebrate | Propagate pattern to other satellites |
 | >= 8.0 (Skilled) | Pool + `remember()` learning record | None |
 | >= 7.0 (Learning) | Experimental only | Flag for improvement |
 | < 7.0 (Rejected) | Redo from scratch | Block merge, notify author |

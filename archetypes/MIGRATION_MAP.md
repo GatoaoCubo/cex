@@ -253,7 +253,7 @@ Wave 5.7 (ALL): Archive pass (clean .claude/handoffs/ + low-quality)
 ### Scripts sugeridos
 ```bash
 # Contar por bucket antes de migrar
-find records/pool/knowledge -name "KC_*" -newer _meta/MIGRATION_MAP.md | wc -l
+find records/pool/knowledge -name "KC_*" -newer archetypes/MIGRATION_MAP.md | wc -l
 
 # Verificar quality gate antes de migrate
 grep -l "quality_score: [0-6]" records/pool/knowledge/KC_*.md | wc -l

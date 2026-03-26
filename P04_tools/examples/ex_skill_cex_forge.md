@@ -47,7 +47,7 @@ cex_forge.py eh a ferramenta central de geracao do CEX. Transforma schema rules 
 
 ### Phase 3: Load Template
 - **Input**: Tipo do artefato
-- **Action**: Consulta `_meta/TYPE_TO_TEMPLATE.yaml` para mapear tipo > template path, le o template .md
+- **Action**: Consulta `archetypes/TYPE_TO_TEMPLATE.yaml` para mapear tipo > template path, le o template .md
 - **Output**: String do template com {{MUSTACHE}} vars (ou None se GAP)
 
 ### Phase 4: Build Prompt

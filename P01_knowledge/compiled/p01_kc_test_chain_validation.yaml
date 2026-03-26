@@ -68,7 +68,7 @@ artefatos: '- Schema: P01_knowledge/_schema.yaml
 
   - Generator: P01_knowledge/_generator.md
 
-  - Meta-Template: _meta/META_TEMPLATE.md
+  - Meta-Template: archetypes/META_TEMPLATE.md
 
 
   ---

@@ -204,7 +204,7 @@ def print_json(results):
 
 
 def print_md(results):
-    """Output markdown suitable for _meta/LP_COMPLETENESS.md."""
+    """Output markdown suitable for archetypes/LP_COMPLETENESS.md."""
     lines = []
     lines.append(f"# LP Completeness Report")
     lines.append(f"")

@@ -13,7 +13,7 @@ CEX (Cerebro Empresarial X) is a framework for building structured knowledge bas
 
 ```
 project/
-  _meta/CODEX.md          # Rules and conventions (read first)
+  archetypes/CODEX.md          # Rules and conventions (read first)
   P01_knowledge/           # What the agent KNOWS
   P02_model/               # WHO the agent IS
   P03_prompt/              # HOW the agent SPEAKS

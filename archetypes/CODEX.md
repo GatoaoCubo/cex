@@ -30,7 +30,7 @@ Regras: lowercase, snake_case, ASCII, max 50 chars
 ## 4. PASTAS
 Brain: P01-P12 (cada com _schema.yaml, _generator.md, templates/, examples/)
 Satellites: satellites/{name}/P01-P12 (instances reais)
-Meta: _meta/ (CODEX, GLOSSARY, MANDAMENTOS, ROADMAP, META_TEMPLATE)
+Meta: archetypes/ (CODEX, GLOSSARY, MANDAMENTOS, ROADMAP, META_TEMPLATE)
 
 ## 5. SCHEMAS = _schema.yaml por LP
 12 schemas criados (73 tipos total). Validado no pre-commit.
@@ -41,7 +41,7 @@ Campo obrigatorio v3.0: `machine_format` (yaml|json) — define formato compiled
 12 generators criados (P01-P12 CORE+QUALITY+SCALE). Instrucoes passo-a-passo.
 Anti-patterns listados. Density tiers documentados.
 
-## 7. META-TEMPLATE = _meta/META_TEMPLATE.md
+## 7. META-TEMPLATE = archetypes/META_TEMPLATE.md
 Template que gera templates. Shokunin: evolui durante uso.
 Secoes por tipo documentadas. Regras de geracao definidas.
 
@@ -50,7 +50,7 @@ Todo artefato = 2 arquivos. Excecoes: _schema (so yaml), _generator (so md)
 Campo obrigatorio em _schema.yaml: `machine_format` (yaml|json). 73 tipos: 64 yaml, 9 json.
 Regra: todo example DEVE ter versao compilada em compiled/.
 Compile: `python _tools/cex_compile.py --all` gera compiled/ em cada LP.
-Routing: _meta/DECISION_MAP.md (arquivo -> LP -> tipo -> format).
+Routing: archetypes/DECISION_MAP.md (arquivo -> LP -> tipo -> format).
 
 ## 9. LIFECYCLE
 CREATE > INDEX > READ > USE > RESULTS > NEW KC > repeat (flywheel)

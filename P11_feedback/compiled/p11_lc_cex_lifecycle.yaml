@@ -47,7 +47,7 @@ r2_promotion_quality_9_5_golden:
 - 'Label: adicionar `tier: golden` no frontmatter'
 r3_archive_quality_7_0_archive:
 - 'Trigger: example com quality < 7.0 ou 3+ issues no validator'
-- 'Action: mover para `_meta/archive/{lp}/` com timestamp'
+- 'Action: mover para `archetypes/archive/{lp}/` com timestamp'
 - 'Retention: arquivados por 90 dias, depois deletados'
 - 'Recovery: se re-editado e quality >= 7.0, pode voltar ao LP'
 r4_version_sync_schema_change_re_validate:
@@ -59,12 +59,12 @@ r5_cascade_rules:
 - Schema change -> re-validate examples + generator
 - Generator change -> re-validate examples (naming may shift)
 - New example -> validate against schema + size + density
-- Promotion/archive -> update `_meta/` indexes
+- Promotion/archive -> update `archetypes/` indexes
 quality_tiers: '| Tier | Score | Density | Action |
 
   |------|-------|---------|--------|
 
-  | Golden | >= 9.5 | >= 0.85 | Promote to `_meta/golden/` |
+  | Golden | >= 9.5 | >= 0.85 | Promote to `archetypes/golden/` |
 
   | Skilled | 8.0-9.4 | >= 0.75 | Active, pool eligible |
 

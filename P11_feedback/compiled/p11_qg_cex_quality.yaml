@@ -75,7 +75,7 @@ tiered_review: '| Score | Tier | Decision | Action |
 
   | 8.0-9.4 | Skilled | ACCEPT | Merge. Eligible for pool and learning memory |
 
-  | >= 9.5 | Golden | ACCEPT+PROMOTE | Merge + copy to `_meta/golden/` + celebrate |'
+  | >= 9.5 | Golden | ACCEPT+PROMOTE | Merge + copy to `archetypes/golden/` + celebrate |'
 scoring_guide: '| Dimension | Weight | What to Check |
 
   |-----------|--------|---------------|

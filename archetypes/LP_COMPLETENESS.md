@@ -106,4 +106,4 @@ Score formula: `(templates% * 0.3) + (examples% * 0.4) + (golden% * 0.2) + (gene
 
 ---
 
-*Regenerate: `python _tools/lp_completeness.py --md > _meta/LP_COMPLETENESS.md`*
+*Regenerate: `python _tools/lp_completeness.py --md > archetypes/LP_COMPLETENESS.md`*

@@ -98,7 +98,7 @@ def copy_lp(lp_dir: Path, dest: Path, with_examples: bool) -> dict:
 
 
 def generate_codex(dest: Path, project_name: str, lp_names: list[str]) -> None:
-    """Generate a project-specific CODEX.md in _meta/."""
+    """Generate a project-specific CODEX.md in archetypes/."""
     lp_table = []
     for lp in lp_names:
         code = lp.split("_")[0]
@@ -150,7 +150,7 @@ Regras: lowercase, snake_case, ASCII, max 50 chars
 
 
 def generate_roadmap(dest: Path, project_name: str, lp_names: list[str]) -> None:
-    """Generate a project-specific ROADMAP.md in _meta/."""
+    """Generate a project-specific ROADMAP.md in archetypes/."""
     content = f"""# {project_name} — ROADMAP
 
 ---
@@ -217,7 +217,7 @@ cp P01_knowledge/templates/tpl_knowledge_card_domain.md meu_kc.md
 
 ```
 {project_name}/
-  _meta/           # CODEX + ROADMAP (comece aqui)
+  archetypes/           # CODEX + ROADMAP (comece aqui)
   P*/               # Leverage Points
     _schema.yaml   # Contrato de tipos
     _generator.md  # Instrucoes de geracao
@@ -323,7 +323,7 @@ def main():
     generate_codex(dest, args.name, selected_lps)
     generate_roadmap(dest, args.name, selected_lps)
     generate_readme(dest, args.name, selected_lps, totals)
-    print("  _meta/: CODEX.md + ROADMAP.md generated")
+    print("  archetypes/: CODEX.md + ROADMAP.md generated")
     print("  README.md generated")
 
     # Summary
@@ -332,7 +332,7 @@ def main():
         f"  {totals['total_schemas']} schemas | {totals['total_generators']} generators | "
         f"{totals['total_templates']} templates | {totals['total_examples']} examples"
     )
-    print(f"\nNext: cat {args.name}/_meta/CODEX.md")
+    print(f"\nNext: cat {args.name}/archetypes/CODEX.md")
 
 
 if __name__ == "__main__":

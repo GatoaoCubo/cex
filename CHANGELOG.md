@@ -10,7 +10,7 @@ Format: Wave-based (chronological order).
 ### Added
 - Dual output architecture: .md (human) + compiled .yaml/.json (machine)
 - `machine_format` field in all 73 types across 12 LPs (64 yaml, 9 json)
-- `_meta/DECISION_MAP.md`: file category -> LP -> type -> format routing table
+- `archetypes/DECISION_MAP.md`: file category -> LP -> type -> format routing table
 - `_tools/cex_compile.py`: compiles .md examples to machine-optimized format
 - `_tools/validate_compiled.py`: validates compiled artifacts
 - `compiled/` directory in each LP
@@ -33,7 +33,7 @@ Format: Wave-based (chronological order).
 ## [1.1.0] - 2026-03-23
 
 ### Versioning System (EDISON)
-- `_meta/VERSION.yaml` — formal version manifest with real counts per LP (12 LPs, 69 types, 21 templates, 48 examples)
+- `archetypes/VERSION.yaml` — formal version manifest with real counts per LP (12 LPs, 69 types, 21 templates, 48 examples)
 - `_tools/bump_version.py` — version bumper with `--lp` and `--level` args, auto-updates CHANGELOG
 - `_tools/changelog_gen.py` — git log parser, groups commits by LP, generates formatted entries
 - Post-v1.0 additions: ISO package spec, compile/decompile/validate tools, deck system, GDrive integration
@@ -69,7 +69,7 @@ Format: Wave-based (chronological order).
 - 12 generators (P01-P12): step-by-step authoring + anti-patterns per LP
 - 18 golden examples across P01-P04 (density avg 88.6%, range 0.85-0.95)
 - 7 templates: P01(3) + P02(1) + P03(1) + P04(1) + P05(1)
-- Meta-template v1 (`_meta/META_TEMPLATE.md`) — the template that generates templates
+- Meta-template v1 (`archetypes/META_TEMPLATE.md`) — the template that generates templates
 - Validation chain test PASS: META_TEMPLATE > schema > template > instance pipeline
 - GLOSSARY.md and MANDAMENTOS.md consolidated
 
@@ -86,7 +86,7 @@ Format: Wave-based (chronological order).
 - Pattern extraction: density tiers, naming conventions, frontmatter structure
 - P01/_schema.yaml v0 — first schema derived from real data
 - First golden example: `p01_kc_catalogo_proprio_mercado_livre` (density 0.92)
-- CEX scaffold (`P01-P12/` + `_meta/`) created
+- CEX scaffold (`P01-P12/` + `archetypes/`) created
 
 ---
 

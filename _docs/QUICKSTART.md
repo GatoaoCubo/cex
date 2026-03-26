@@ -124,7 +124,7 @@ Fatores do algoritmo de Buy Box do ML com pesos reais.
 
 - Criar mais artefatos seguindo o mesmo flow
 - Explorar P02 (agents), P03 (prompts), P04 (tools)
-- Ler `_meta/CODEX.md` para regras completas
+- Ler `archetypes/CODEX.md` para regras completas
 - Consultar examples/ para referencia (use `--with-examples`)
 
 ---
