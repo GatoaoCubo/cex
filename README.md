@@ -1,6 +1,6 @@
 # CEX — Cerebro Empresarial X
 
-> Framework universal para organizar conhecimento de AI em 12 Leverage Points.
+> Framework universal para organizar conhecimento de AI em 12 Pillars.
 
 ![version](https://img.shields.io/badge/version-v3.0.0-blue)
 ![LPs](https://img.shields.io/badge/LPs-12-green)
@@ -15,7 +15,7 @@
 
 | Item | Count | Status |
 |------|-------|--------|
-| Leverage Points | 12 | P01-P12 todos ativos |
+| Pillars | 12 | P01-P12 todos ativos |
 | Schemas (_schema.yaml) | 12 | 68 tipos de artifact |
 | Generators (_generator.md) | 12 | Instrucoes por LP |
 | Templates | 7 | P01(3)+P02(1)+P03(1)+P04(1)+P05(1) |

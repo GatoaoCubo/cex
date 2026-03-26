@@ -13,7 +13,7 @@ note: this file IS an instance of what the builder produces
 | H01 | YAML parses |
 | H02 | id starts with p11_qg_ |
 | H03 | id == filename stem |
-| H04 | type == quality_gate |
+| H04 | kind == quality_gate |
 | H05 | lp == P11 |
 | H06 | quality == null |
 | H07 | title is non-empty |

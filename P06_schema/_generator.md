@@ -61,4 +61,4 @@ python _tools/cex_compile.py P06_schema/examples/p06_schema_exemplo.md
 - Formato: YAML (type_def) / JSON (input_schema, interface, output_schema) (definido em _schema.yaml → machine_format)
 
 ---
-*Generator v1.0 | Evidence: 5 schema types, contract-driven design | 2026-03-22*
+*Generator v1.0 | Evidence: 5 schema kinds, contract-driven design | 2026-03-22*

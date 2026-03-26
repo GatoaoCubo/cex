@@ -3,7 +3,7 @@ meta: true
 file_position: 1/13
 pillar: P02
 llm_function: BECOME
-purpose: Meta-template for generating MANIFEST.md of any type-builder
+purpose: Meta-template for generating MANIFEST.md of any kind-builder
 ---
 
 # {{builder_name}}
@@ -12,11 +12,11 @@ purpose: Meta-template for generating MANIFEST.md of any type-builder
 
 <!-- NOTA: {{builder_name}} = kebab-case do tipo. Ex: model-card-builder, signal-builder -->
 <!-- NOTA: {{type_name}} = snake_case do tipo. Ex: model_card, signal, quality_gate -->
-<!-- NOTA: {{lp}} = LP do tipo-alvo (P01-P12). Buscar em TAXONOMY_LAYERS.yaml -->
+<!-- NOTA: {{lp}} = Pillar do tipo-alvo (P01-P12). Buscar em TAXONOMY_LAYERS.yaml -->
 <!-- NOTA: {{lp_chief}} = {lp}-chief. Ex: p02-chief, p01-chief -->
 <!-- NOTA: {{domain}} = geralmente igual a {{type_name}}, mas pode variar -->
 <!-- NOTA: {{type_name_kebab}} = kebab-case do tipo. Ex: model-card, knowledge-card -->
-<!-- NOTA: {{tags}} = [type-builder, {{type_name_kebab}}, {{lp}}, specialist, ...extras] -->
+<!-- NOTA: {{tags}} = [kind-builder, {{type_name_kebab}}, {{lp}}, specialist, ...extras] -->
 
 ```yaml
 ---
@@ -30,13 +30,13 @@ version: 1.0.0
 created: "{{YYYY-MM-DD}}"
 updated: "{{YYYY-MM-DD}}"
 author: {{author}}
-tags: [type-builder, {{type_name_kebab}}, {{lp}}, specialist]
+tags: [kind-builder, {{type_name_kebab}}, {{lp}}, specialist]
 ---
 ```
 
 ## Identity
 Especialista em construir `{{type_name}}` — {{one_line_description}}.
-<!-- NOTA: {{one_line_description}} = extrair de TAXONOMY_LAYERS.yaml types[].description ou _schema.yaml purpose -->
+<!-- NOTA: {{one_line_description}} = extrair de TAXONOMY_LAYERS.yaml kinds[].description ou _schema.yaml purpose -->
 <!-- Acrescente 1-2 frases sobre dominio, ferramentas, e o que produz -->
 
 ## Capabilities
@@ -60,5 +60,5 @@ In a crew, I handle {{ROLE_CAPS}}.
 I answer: "{{one_question_this_builder_answers}}"
 I do NOT handle: {{exclusion_1}}, {{exclusion_2}}, {{exclusion_3}}.
 <!-- NOTA: {{ROLE_CAPS}} = papel em CAPS. Ex: MODEL DOCUMENTATION, KNOWLEDGE DISTILLATION -->
-<!-- NOTA: {{exclusions}} = tipos vizinhos no mesmo LP ou frequentemente confundidos -->
-<!-- Buscar confusoes em TAXONOMY_LAYERS.yaml overlaps e na _schema.yaml do LP -->
+<!-- NOTA: {{exclusions}} = tipos vizinhos no mesmo Pillar ou frequentemente confundidos -->
+<!-- Buscar confusoes em TAXONOMY_LAYERS.yaml overlaps e na _schema.yaml do Pillar -->

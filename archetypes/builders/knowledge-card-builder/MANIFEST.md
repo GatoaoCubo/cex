@@ -9,7 +9,7 @@ version: 1.0.0
 created: 2026-03-26
 updated: 2026-03-26
 author: EDISON
-tags: [type-builder, knowledge-card, P01, specialist]
+tags: [kind-builder, knowledge-card, P01, specialist]
 ---
 
 # knowledge-card-builder

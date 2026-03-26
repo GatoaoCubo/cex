@@ -3,7 +3,7 @@ meta: true
 file_position: 4/13
 pillar: P03
 llm_function: REASON
-purpose: Meta-template for generating INSTRUCTIONS.md of any type-builder
+purpose: Meta-template for generating INSTRUCTIONS.md of any kind-builder
 ---
 
 # Instructions: How to Produce a {{type_name}}

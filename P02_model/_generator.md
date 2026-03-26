@@ -47,38 +47,38 @@ Minimo 10 arquivos. Criar na ordem:
 ### lens
 QUANDO USAR: Definir perspectiva especializada sobre dominio (ex: lens de seguranca, lens de UX).
 Naming: `p02_lens_{{perspective}}.md + .yaml`
-Schema: P02/_schema.yaml > types > lens
+Schema: P02/_schema.yaml > kinds > lens
 
 ### boot_config
 QUANDO USAR: Configurar inicializacao por provider (claude, cursor, codex, copilot).
 Naming: `p02_boot_{{provider}}.md`
-Schema: P02/_schema.yaml > types > boot_config
+Schema: P02/_schema.yaml > kinds > boot_config
 
 ### mental_model
 QUANDO USAR: Mapear routing e decisoes de um agente (decision tree, domain map).
 Naming: `p02_mm_{{agent}}.yaml`
-Schema: P02/_schema.yaml > types > mental_model
+Schema: P02/_schema.yaml > kinds > mental_model
 
 ### model_card
 QUANDO USAR: Documentar spec de LLM (pricing, context window, capabilities).
 Naming: `p02_mc_{{model}}.md + .yaml`
-Schema: P02/_schema.yaml > types > model_card
+Schema: P02/_schema.yaml > kinds > model_card
 
 ### router
 QUANDO USAR: Definir regra de roteamento task > satellite com fallback.
 Naming: `p02_rt_{{scope}}.yaml`
-Schema: P02/_schema.yaml > types > router
+Schema: P02/_schema.yaml > kinds > router
 
 ### fallback_chain
 QUANDO USAR: Configurar sequencia de fallback entre modelos (A > B > C).
 Naming: `p02_fb_{{chain}}.yaml`
-Schema: P02/_schema.yaml > types > fallback_chain
+Schema: P02/_schema.yaml > kinds > fallback_chain
 
 ### iso_package
 QUANDO USAR: Empacotar agente completo como bundle portable (self-contained, LLM-agnostic).
 Um ISO Package e a composicao de artefatos de ~8 LPs diferentes montados como um agente completo.
 
-**Componentes** (cada um e um artifact de um LP diferente):
+**Componentes** (cada um e um artifact de um Pillar diferente):
 - MANIFEST (P02 agent) — identidade e capabilities
 - SYSTEM_INSTRUCTION (P03 system_prompt) — como o agente fala
 - INSTRUCTIONS (P03 user_prompt) — tarefas padrao
@@ -92,7 +92,7 @@ Um ISO Package e a composicao de artefatos de ~8 LPs diferentes montados como um
 
 **Tiers**: minimal (3 files) | standard (7) | complete (10) | whitelabel (12)
 Naming: `agents/{{agent_name}}/manifest.yaml` (diretorio, nao arquivo unico)
-Schema: P02/_schema.yaml > types > iso_package
+Schema: P02/_schema.yaml > kinds > iso_package
 
 ## Dual Output
 

@@ -7,23 +7,23 @@
 
 ## What This Is
 
-A set of 13 meta-files that use `{{variables}}` to generate the 13 files of ANY new type-builder.
-Instead of writing 13 files from scratch for each of the 69 CEX types, an LLM reads these
-meta-templates + the target type's `_schema.yaml` + `SEED_BANK.yaml` and produces a complete builder.
+A set of 13 meta-files that use `{{variables}}` to generate the 13 files of ANY new kind-builder.
+Instead of writing 13 files from scratch for each of the 69 CEX kinds, an LLM reads these
+meta-templates + the target kind's `_schema.yaml` + `SEED_BANK.yaml` and produces a complete builder.
 
 ## How to Instantiate a New Builder
 
 ### Input Required
 1. **Type name**: e.g., `skill`, `workflow`, `agent` (from TAXONOMY_LAYERS.yaml)
-2. **LP**: e.g., P04, P12, P02 (from TAXONOMY_LAYERS.yaml)
-3. **_schema.yaml**: `cex/{LP_dir}/_schema.yaml` (field definitions for the LP)
-4. **SEED_BANK.yaml**: `cex/archetypes/SEED_BANK.yaml` (seeds for the type)
+2. **Pillar**: e.g., P04, P12, P02 (from TAXONOMY_LAYERS.yaml)
+3. **_schema.yaml**: `cex/{LP_dir}/_schema.yaml` (field definitions for the Pillar)
+4. **SEED_BANK.yaml**: `cex/archetypes/SEED_BANK.yaml` (seeds for the kind)
 5. **TAXONOMY_LAYERS.yaml**: `cex/archetypes/TAXONOMY_LAYERS.yaml` (overlaps, layers)
 
 ### Output Produced
 13 files in `archetypes/builders/{type_name}-builder/`:
 
-| # | File | LP | Function | What It Does |
+| # | File | Pillar | Function | What It Does |
 |---|------|----|----------|-------------|
 | 1 | MANIFEST.md | P02 | BECOME | Identity, capabilities, routing, crew role |
 | 2 | SYSTEM_PROMPT.md | P03 | BECOME | Persona, ALWAYS/NEVER rules, boundary |
@@ -31,7 +31,7 @@ meta-templates + the target type's `_schema.yaml` + `SEED_BANK.yaml` and produce
 | 4 | INSTRUCTIONS.md | P03 | REASON | 3-phase pipeline: Research -> Compose -> Validate |
 | 5 | TOOLS.md | P04 | CALL | Available tools, data sources, validation |
 | 6 | OUTPUT_TEMPLATE.md | P05 | PRODUCE | Fillable template with {{vars}} for the artifact |
-| 7 | SCHEMA.md | P06 | CONSTRAIN | SINGLE SOURCE OF TRUTH: fields, types, constraints |
+| 7 | SCHEMA.md | P06 | CONSTRAIN | SINGLE SOURCE OF TRUTH: fields, kinds, constraints |
 | 8 | EXAMPLES.md | P07 | GOVERN | Golden example + anti-example with gate refs |
 | 9 | ARCHITECTURE.md | P08 | CONSTRAIN | Boundary, flow diagram, dependency graph |
 | 10 | CONFIG.md | P09 | CONSTRAIN | Naming, paths, size limits, operational rules |
@@ -42,15 +42,15 @@ meta-templates + the target type's `_schema.yaml` + `SEED_BANK.yaml` and produce
 ### Step-by-Step Process
 
 ```
-1. Choose target type from TAXONOMY_LAYERS.yaml
-2. Read _schema.yaml for the LP (field definitions)
-3. Read SEED_BANK.yaml entry for the type (seed words)
+1. Choose target kind from TAXONOMY_LAYERS.yaml
+2. Read _schema.yaml for the Pillar (field definitions)
+3. Read SEED_BANK.yaml entry for the kind (seed words)
 4. For EACH meta-file (1-13):
    a. Read META_{FILE}.md
    b. Read the <!-- NOTA --> comments for guidance
    c. Replace {{variables}} with concrete values
    d. Remove all <!-- comments --> from output
-   e. Write to archetypes/builders/{type}-builder/{FILE}.md
+   e. Write to archetypes/builders/{kind}-builder/{FILE}.md
 5. Run ARCHETYPE_BUILDER_CHECKLIST.md pre-commit gates
 6. Commit to CEX repo
 ```
@@ -64,7 +64,7 @@ meta-templates + the target type's `_schema.yaml` + `SEED_BANK.yaml` and produce
 | `{{type_name_kebab}}` | Derived (snake->kebab) | `skill`, `workflow`, `signal` |
 | `{{builder_name}}` | `{type_name_kebab}-builder` | `skill-builder` |
 | `{{lp}}` | TAXONOMY_LAYERS.yaml | `P04`, `P12`, `P11` |
-| `{{lp_dir}}` | `{LP}_{layer_name}` | `P04_tools`, `P12_orchestration` |
+| `{{lp_dir}}` | `{Pillar}_{layer_name}` | `P04_tools`, `P12_orchestration` |
 | `{{lp_chief}}` | `{lp_lower}-chief` | `p04-chief` |
 | `{{domain}}` | Usually = type_name | `skill`, `workflow` |
 
@@ -84,7 +84,7 @@ meta-templates + the target type's `_schema.yaml` + `SEED_BANK.yaml` and produce
 ### Content Variables (require research/analysis)
 | Variable | Source | How to Fill |
 |----------|--------|------------|
-| `{{boundary_description}}` | Domain analysis | "what the type IS" in one dense phrase |
+| `{{boundary_description}}` | Domain analysis | "what the kind IS" in one dense phrase |
 | `{{boundary_exclusions}}` | TAXONOMY overlaps | Types commonly confused with this one |
 | `{{body_sections}}` | _schema.yaml + conventions | Required body sections for the artifact |
 | `{{hard_gates}}` | GENERATED from SCHEMA.md | HARD checks derived from required fields |
@@ -143,5 +143,5 @@ Quick checks:
 Validated against model-card-builder v2.0:
 - All 13 file positions mapped 1:1
 - Universal skeleton covers 100% of structural elements
-- Variable slots capture all type-specific content
+- Variable slots capture all kind-specific content
 - Hierarchy preserved: SCHEMA -> TEMPLATE -> CONFIG -> GATES

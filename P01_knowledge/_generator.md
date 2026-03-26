@@ -54,27 +54,27 @@ Cada frase: um dev pode agir sem ler docs externos?
 ### rag_source
 QUANDO USAR: Indexar fonte externa (URL, API doc, paper) para retrieval.
 Naming: `p01_rs_{{source}}.md + .yaml`
-Schema: P01/_schema.yaml > types > rag_source
+Schema: P01/_schema.yaml > kinds > rag_source
 
 ### glossary_entry
 QUANDO USAR: Definir termo tecnico ou de negocio com sinonimos.
 Naming: `p01_gl_{{term}}.md + .yaml`
-Schema: P01/_schema.yaml > types > glossary_entry
+Schema: P01/_schema.yaml > kinds > glossary_entry
 
 ### context_doc
 QUANDO USAR: Prover contexto de dominio para agentes (background, scope).
 Naming: `p01_ctx_{{topic}}.md + .yaml`
-Schema: P01/_schema.yaml > types > context_doc
+Schema: P01/_schema.yaml > kinds > context_doc
 
 ### embedding_config
 QUANDO USAR: Configurar modelo de embedding (dimensoes, chunk size, overlap).
 Naming: `p01_emb_{{model}}.yaml`
-Schema: P01/_schema.yaml > types > embedding_config
+Schema: P01/_schema.yaml > kinds > embedding_config
 
 ### few_shot_example
 QUANDO USAR: Criar par input/output para injecao em prompt (few-shot learning).
 Naming: `p01_fse_{{topic}}.md + .yaml`
-Schema: P01/_schema.yaml > types > few_shot_example
+Schema: P01/_schema.yaml > kinds > few_shot_example
 
 ## Dual Output
 

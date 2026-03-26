@@ -28,7 +28,7 @@ pattern: 3-phase pipeline (research → compose → validate)
 
 ## Phase 3: VALIDATE
 1. Run validate_artifact.py if available [PLANNED], else validate manually against QUALITY_GATES.md
-2. HARD gates (all must pass): id format, type, lp, quality==null, integers, provider enum
+2. HARD gates (all must pass): id format, kind, lp, quality==null, integers, provider enum
 3. SOFT gates: check each against QUALITY_GATES.md table
 4. Cross-check: every SCHEMA field populated? Every Spec row has URL?
 5. Body under 4096 bytes?

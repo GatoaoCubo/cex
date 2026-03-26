@@ -15,10 +15,10 @@ source: validate_kc.py v2.0 (direct code alignment)
 | H01 | YAML frontmatter parses without error | Broken YAML = broken artifact |
 | H02 | id == filename stem | Brain search relies on this |
 | H03 | id matches `^p01_kc_[a-z][a-z0-9_]+$` | Namespace compliance |
-| H04 | type == "knowledge_card" | Type integrity |
+| H04 | kind == "knowledge_card" | Type integrity |
 | H05 | quality == null | Never self-score |
 | H06 | 13 required fields present and non-empty | Completeness |
-| H07 | tags is list (not string) | YAML type safety |
+| H07 | tags is list (not string) | YAML kind safety |
 | H08 | body size 200-5120 bytes | Size bounds |
 | H09 | no internal paths (records/, .claude/, /home/) | Portability |
 | H10 | author != STELLA | STELLA orchestrates, never authors |
@@ -68,5 +68,5 @@ Flags: `--json` (machine), `--summary` (batch overview)
 ## Pre-Production Checklist
 - [ ] Topic identified, not duplicate (brain_query check)
 - [ ] Sources gathered with URLs
-- [ ] KC type chosen (domain_kc or meta_kc)
+- [ ] KC kind chosen (domain_kc or meta_kc)
 - [ ] Body density estimated >= 0.80

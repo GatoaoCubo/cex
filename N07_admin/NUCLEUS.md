@@ -12,8 +12,8 @@ version: "1.0.0"
 ## Funcao
 Strategy, OKRs, cross-nucleus coordination, governance
 
-## LPs Primarios
+## Pillars Primarios
 P08, P11, P12
 
 ## Estrutura
-12 LPs completos, cada um com _schema.yaml (herda root), templates/, examples/, compiled/.
+12 pillars completos, cada um com _schema.yaml (herda root), templates/, examples/, compiled/.

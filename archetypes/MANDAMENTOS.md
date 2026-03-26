@@ -2,7 +2,7 @@
 
 ---
 
-1. TODA informacao = Record denso (max 2KB, ~500 tokens)
+1. TODA informacao = Record denso (max 4KB, ~1000 tokens)
 2. TODO Record = dual output (.md humano + .yaml LLM)
 3. TODO Record = metadata densa (keywords 3+, bullets 3+, axioms 1+)
 4. NUNCA prosa > 3 linhas (force bullets)

@@ -12,7 +12,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 | Field | Type | Required | Default | Source |
 |-------|------|----------|---------|--------|
 | id | string (p02_mc_{provider}_{slug}) | YES | — | CEX naming |
-| type | literal "model_card" | YES | — | CEX |
+| kind | literal "model_card" | YES | — | CEX |
 | lp | literal "P02" | YES | — | CEX |
 | version | semver string | YES | "1.0.0" | CEX |
 | created | date YYYY-MM-DD | YES | — | CEX |

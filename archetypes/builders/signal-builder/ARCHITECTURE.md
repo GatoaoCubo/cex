@@ -46,7 +46,7 @@ signal --independent-- routing policy definition
 ```
 
 ## Fractal Position
-LP: P12 (Orchestration - "how coordination happens")
+Pillar: P12 (Orchestration - "how coordination happens")
 Function: COLLABORATE
 Scale: L0 runtime event
 Smallest collaborative artifact in P12: shorter than handoff, simpler than workflow.

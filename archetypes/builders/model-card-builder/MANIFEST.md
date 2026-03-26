@@ -9,7 +9,7 @@ version: 2.0.0
 created: 2026-03-26
 updated: 2026-03-26
 author: STELLA
-tags: [type-builder, model-card, P02, specialist]
+tags: [kind-builder, model-card, P02, specialist]
 ---
 
 # model-card-builder

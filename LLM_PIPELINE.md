@@ -56,7 +56,7 @@ OUTPUT
 | 7 | **GOVERN** | Avaliar | Quality gates, evals, feedback | quality_gate, benchmark, scoring_rubric | 28% (22 tipos) |
 | 8 | **COLLABORATE** | Coordenar | Sinaliza, delega, proximo agente | crew, signal, handoff | 4% (3 tipos) |
 
-**Total**: 78 tipos distribuidos em 8 funcoes.
+**Total**: 78 kinds distribuidos em 8 funcoes.
 
 ---
 
@@ -72,12 +72,12 @@ OUTPUT
 
 ---
 
-## Relacao com os 12 LPs
+## Relacao com os 12 pillars
 
 As 8 funcoes sao o que o LLM FAZ (pipeline de execucao).
-Os 12 LPs sao como ORGANIZAMOS os artefatos (filesystem).
+Os 12 pillars sao como ORGANIZAMOS os artefatos (filesystem).
 
-| Funcao | LPs que alimentam |
+| Funcao | pillars que alimentam |
 |--------|-------------------|
 | BECOME | P02 Model, P03 Prompt |
 | INJECT | P01 Knowledge, P10 Memory |
@@ -88,7 +88,7 @@ Os 12 LPs sao como ORGANIZAMOS os artefatos (filesystem).
 | GOVERN | P07 Evals, P09 Config, P11 Feedback |
 | COLLABORATE | P12 Orchestration |
 
-Os 12 LPs cobrem os 8 funcoes. Nenhum LP eh orfao.
+Os 12 pillars cobrem os 8 funcoes. Nenhum pillar eh orfao.
 
 ---
 

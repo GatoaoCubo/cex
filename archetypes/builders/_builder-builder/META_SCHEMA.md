@@ -3,12 +3,12 @@ meta: true
 file_position: 7/13
 pillar: P06
 llm_function: CONSTRAIN
-purpose: Meta-template for generating SCHEMA.md of any type-builder
+purpose: Meta-template for generating SCHEMA.md of any kind-builder
 ---
 
 # Schema: {{type_name}}
 <!-- Este meta-file gera o SCHEMA.md de qualquer builder -->
-<!-- INPUT OBRIGATORIO: _schema.yaml do LP-alvo (fonte primaria de campos) -->
+<!-- INPUT OBRIGATORIO: _schema.yaml do Pillar-alvo (fonte primaria de campos) -->
 <!-- REGRA: Este file eh SINGLE SOURCE OF TRUTH. TEMPLATE deriva. CONFIG restringe. -->
 
 ```yaml
@@ -34,8 +34,8 @@ pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string ({{id_pattern}}) | YES | - | {{id_format_description}} |
-| type | literal "{{type_name}}" | YES | - | Type integrity |
-| lp | literal "{{lp}}" | YES | - | LP assignment |
+| kind | literal "{{type_name}}" | YES | - | Type integrity |
+| lp | literal "{{lp}}" | YES | - | Pillar assignment |
 | version | semver string | YES | "1.0.0" | Versionamento |
 | created | date YYYY-MM-DD | YES | - | Creation date |
 | updated | date YYYY-MM-DD | YES | - | Last update |
@@ -72,8 +72,8 @@ pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 
 ```yaml
 {{object_name}}:
-  {{field_1}}: {{type}}
-  {{field_2}}: {{type}}
+  {{field_1}}: {{kind}}
+  {{field_2}}: {{kind}}
 ```
 <!-- NOTA: Incluir regras de preenchimento (ex: "open-weight = null, not 0") -->
 

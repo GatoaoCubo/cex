@@ -36,7 +36,7 @@ source: codexa-core/CLAUDE.md + records/satellites/edison/mental_model.yaml
 
 ## Checklist
 
-- [ ] 12LP validation: all 12 leverage points checked
+- [ ] 12LP validation: all 12 pillars checked
 - [ ] 5D scoring: density, naming, structure, actionability, size all scored
 - [ ] No placeholders: zero TBD/TODO/FIXME markers
 - [ ] Duplicate check: no existing artifact with same `id` in pool

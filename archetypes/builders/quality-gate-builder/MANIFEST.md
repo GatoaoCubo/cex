@@ -9,7 +9,7 @@ version: 1.0.0
 created: 2026-03-26
 updated: 2026-03-26
 author: STELLA
-tags: [type-builder, quality-gate, P11, specialist, governance]
+tags: [kind-builder, quality-gate, P11, specialist, governance]
 ---
 
 # quality-gate-builder

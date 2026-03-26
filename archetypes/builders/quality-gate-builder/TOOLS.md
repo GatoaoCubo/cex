@@ -11,7 +11,7 @@ purpose: Tools available for quality_gate production
 |------|---------|------|--------|
 | brain_query | Search existing quality_gates | Phase 1 (check duplicates) | ACTIVE |
 | validate_kc.py | Reference pattern for HARD/SOFT gates | Design time | ACTIVE |
-| validate_artifact.py | Validate any artifact type | Phase 3 | [PLANNED] |
+| validate_artifact.py | Validate any artifact kind | Phase 3 | [PLANNED] |
 
 ## Reference Gates (existing)
 | Gate | File | Domain |

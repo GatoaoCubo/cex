@@ -26,6 +26,6 @@ quality_gate --independent-- lifecycle_rule, optimizer
 ```
 
 ## Fractal Position
-LP: P11 (Feedback)
+Pillar: P11 (Feedback)
 Function: GOVERN
 Scale: L0 (governance artifact)

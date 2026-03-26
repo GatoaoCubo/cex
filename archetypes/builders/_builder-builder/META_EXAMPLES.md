@@ -3,7 +3,7 @@ meta: true
 file_position: 8/13
 pillar: P07
 llm_function: GOVERN
-purpose: Meta-template for generating EXAMPLES.md of any type-builder
+purpose: Meta-template for generating EXAMPLES.md of any kind-builder
 ---
 
 # Examples: {{builder_name}}
@@ -38,7 +38,7 @@ OUTPUT:
 ```{{machine_format}}
 {{complete_artifact_following_output_template}}
 ```
-<!-- NOTA: {{machine_format}} = yaml (para md types) ou json (para signal) -->
+<!-- NOTA: {{machine_format}} = yaml (para md kinds) ou json (para signal) -->
 <!-- Preencher TODOS os campos do template com valores concretos -->
 <!-- Incluir body completo com todas as secoes obrigatorias -->
 
@@ -47,7 +47,7 @@ WHY THIS IS GOLDEN:
 <!-- Padrao UNIVERSAL observado em todos os 4 builders: -->
 - quality: null ({{hard_gate_quality}} pass)
 - id matches {{id_prefix}} pattern ({{hard_gate_id}} pass)
-- type: {{type_name}} ({{hard_gate_type}} pass)
+- kind: {{type_name}} ({{hard_gate_type}} pass)
 - {{required_fields_count}} required fields present ({{hard_gate_fields}} pass)
 - {{soft_gate_check_1}} ({{soft_gate_id_1}} pass)
 - {{soft_gate_check_2}} ({{soft_gate_id_2}} pass)

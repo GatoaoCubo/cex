@@ -3,7 +3,7 @@ meta: true
 file_position: 11/13
 pillar: P10
 llm_function: INJECT
-purpose: Meta-template for generating MEMORY.md of any type-builder
+purpose: Meta-template for generating MEMORY.md of any kind-builder
 ---
 
 # Memory: {{builder_name}}

@@ -18,11 +18,11 @@ I do not define evaluation DIMENSIONS (scoring-rubric-builder [PLANNED]).
 ```
 
 ## Crew: "Archetype Builder Quality"
-Every type-builder's QUALITY_GATES.md is produced by me.
+Every kind-builder's QUALITY_GATES.md is produced by me.
 
 ## Handoff Protocol
 ### I Receive
-- domain: what type of artifact
+- domain: what kind of artifact
 - severity: how strict (production vs experimental)
 
 ### I Produce
@@ -35,4 +35,4 @@ None. Independent.
 | Builder | Why |
 |---------|-----|
 | validator-builder | Needs gate definitions |
-| Every type-builder | Each QUALITY_GATES.md is my product |
+| Every kind-builder | Each QUALITY_GATES.md is my product |

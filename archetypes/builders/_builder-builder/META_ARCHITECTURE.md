@@ -3,7 +3,7 @@ meta: true
 file_position: 9/13
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Meta-template for generating ARCHITECTURE.md of any type-builder
+purpose: Meta-template for generating ARCHITECTURE.md of any kind-builder
 ---
 
 # Architecture: {{type_name}} in the CEX
@@ -37,7 +37,7 @@ pattern: every builder must know WHERE its output fits and what it CONNECTS to
 | {{confused_type_3}} | {{why_not_3}} | {{correct_lp}} {{correct_type_3}} |
 <!-- NOTA: 3-5 tipos confundidos. Buscar em: -->
 <!-- 1. TAXONOMY_LAYERS.yaml overlaps (pares com severity high/medium) -->
-<!-- 2. Tipos no MESMO LP (compartilham namespace) -->
+<!-- 2. Tipos no MESMO Pillar (compartilham namespace) -->
 <!-- 3. Tipos com nomes similares em OUTROS LPs -->
 <!-- Padrao da frase "Por que NAO": "{confused} VERBO. {type_name} VERBO_DIFERENTE." -->
 
@@ -79,10 +79,10 @@ Regra: "{{decision_question}}" -> {{type_name}}.
 <!-- Buscar dependencias em TAXONOMY_LAYERS.yaml e nos outros builders -->
 
 ## Fractal Position
-LP: {{lp}} ({{lp_description}})
+Pillar: {{lp}} ({{lp_description}})
 Function: {{llm_function_primary}}
 Scale: L0 ({{scale_description}})
 <!-- NOTA: {{lp_description}} = ex: "Model — who the entity IS", "Knowledge — what the entity KNOWS" -->
 <!-- NOTA: {{llm_function_primary}} = funcao principal do tipo (GOVERN, INJECT, COLLABORATE, etc.) -->
 <!-- NOTA: {{scale_description}} = ex: "infrastructure artifact", "content artifact", "runtime event" -->
-<!-- Incluir 1 frase sobre o que torna este tipo unico no LP -->
+<!-- Incluir 1 frase sobre o que torna este tipo unico no Pillar -->

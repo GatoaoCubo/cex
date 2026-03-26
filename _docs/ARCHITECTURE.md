@@ -19,10 +19,10 @@
 
 ## 1.1 Camada Acima: As 8 Funcoes LLM
 
-Os 12 LPs organizam ARTEFATOS (filesystem). As 8 funcoes descrevem o que o LLM FAZ (pipeline).
+Os 12 pillars organizam ARTEFATOS (filesystem). As 8 funcoes descrevem o que o LLM FAZ (pipeline).
 Todo sistema LLM — de prompt a satellite — executa estas funcoes nesta ordem:
 
-| # | Funcao | Verbo | O Que Faz | LPs |
+| # | Funcao | Verbo | O Que Faz | pillars |
 |---|--------|-------|-----------|-----|
 | 1 | BECOME | Ser | Identidade, persona | P02, P03 |
 | 2 | INJECT | Saber | Contexto, knowledge | P01, P10 |
@@ -40,7 +40,7 @@ Todo sistema LLM — de prompt a satellite — executa estas funcoes nesta ordem
 
 ## 2. Os 7 Nucleos
 
-| ID | Dir | Funcao | LPs Primarios |
+| ID | Dir | Funcao | pillars Primarios |
 |----|-----|--------|---------------|
 | N01 | N01_intelligence | Pesquisa | P01, P07 |
 | N02 | N02_marketing | Marketing | P03, P05 |
@@ -54,9 +54,9 @@ Todo sistema LLM — de prompt a satellite — executa estas funcoes nesta ordem
 
 ---
 
-## 3. Os 12 LPs x 78 Types
+## 3. Os 12 pillars x 78 Types
 
-| LP | Nome | Types |
+| pillar | Nome | Types |
 |----|------|-------|
 | P01 | Knowledge | knowledge_card, rag_source, glossary_entry, context_doc, embedding_config, few_shot_example (6) |
 | P02 | Model | agent, lens, boot_config, mental_model, model_card, router, fallback_chain, iso_package, axiom (9) |
@@ -77,7 +77,7 @@ Todo sistema LLM — de prompt a satellite — executa estas funcoes nesta ordem
 
 | O que | Fonte (.md) | Compiled | Quem sincroniza |
 |-------|-------------|----------|-----------------|
-| Artefatos (78 types) | YAML frontmatter + MD body | `.yaml` ou `.json` | distill.py |
+| Artefatos (78 kinds) | YAML frontmatter + MD body | `.yaml` ou `.json` | distill.py |
 | Schemas | `.yaml` only | N/A | manual |
 | Builders (13 ISO) | `.md` only | N/A | manual |
 | Meta-docs | `.md` only | N/A | manual |
@@ -105,7 +105,7 @@ P{NN}_*/_schema.yaml              ROOT (fonte de verdade)
 
 13 ISO files por builder:
 
-| # | File | LP | Funcao |
+| # | File | pillar | Funcao |
 |---|------|----|--------|
 | 1 | MANIFEST.md | P02 | Identidade |
 | 2 | SYSTEM_PROMPT.md | P03 | Persona |
@@ -158,7 +158,7 @@ Density minima: 0.8. Max size: per _schema.yaml.
 | Metrica | Quantidade |
 |---------|-----------|
 | Nucleos | 7 |
-| LPs | 12 (x7 = 84) |
+| pillars | 12 (x7 = 84) |
 | Types | 78 (x7 = 546 dirs) |
 | Builders | 78 planejados (4 prontos) |
 | ISO files/builder | 13 |

@@ -27,7 +27,7 @@ The canonical ISO Package spec uses human-readable filenames. Legacy agents used
 
 ### Conversion Table: OLD → NEW
 
-| OLD (iso_vectorstore/) | NEW (packages/) | LP | Required |
+| OLD (iso_vectorstore/) | NEW (packages/) | pillar | Required |
 |------------------------|-----------------|-----|----------|
 | `ISO_*_MANIFEST.md` | `manifest.yaml` | P02 | YES |
 | `ISO_*_SYSTEM_INSTRUCTION.md` | `system_instruction.md` | P03 | YES |

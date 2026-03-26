@@ -3,7 +3,7 @@ meta: true
 file_position: 13/13
 pillar: P12
 llm_function: COLLABORATE
-purpose: Meta-template for generating COLLABORATION.md of any type-builder
+purpose: Meta-template for generating COLLABORATION.md of any kind-builder
 ---
 
 # Collaboration: {{builder_name}}
@@ -63,7 +63,7 @@ I {{primary_verb}} so {{downstream_consumers}} can {{consumer_benefit}}.
 <!-- - model_card: "model name, provider" -->
 <!-- - KC: "topic name, domain" -->
 <!-- - signal: "emitter satellite, event/status" -->
-<!-- - quality_gate: "domain (what artifact type), severity" -->
+<!-- - quality_gate: "domain (what artifact kind), severity" -->
 
 ### I Produce
 - {{output_artifact}} ({{output_format}})

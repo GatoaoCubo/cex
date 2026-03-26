@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-26
 updated: 2026-03-26
 author: CODEX
-tags: [type-builder, signal, P12, orchestration, specialist]
+tags: [kind-builder, signal, P12, orchestration, specialist]
 ---
 
 # signal-builder

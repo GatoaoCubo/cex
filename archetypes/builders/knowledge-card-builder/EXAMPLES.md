@@ -52,7 +52,7 @@ criticality: high
 ```
 
 ## Key Concepts
-- **Cache-Control**: Anthropic `cache_control: {type: "ephemeral"}`; TTL 5 min
+- **Cache-Control**: Anthropic `cache_control: {kind: "ephemeral"}`; TTL 5 min
 - **Prefix Matching**: cache hit when prefix identical byte-a-byte
 - **Minimum Tokens**: Anthropic >= 1024; OpenAI >= 1024 (auto)
 - **Pricing Split**: write 1.25x base, read 0.1x (90% savings on hit)
@@ -95,7 +95,7 @@ criticality: high
 WHY THIS IS GOLDEN:
 - quality: null (H05 pass)
 - id matches p01_kc_ pattern (H03 pass)
-- type: knowledge_card (H04 pass)
+- kind: knowledge_card (H04 pass)
 - 13 required fields present (H06 pass)
 - tags: list >= 3 (H07 pass)
 - body 200-5120 bytes (H08 pass)

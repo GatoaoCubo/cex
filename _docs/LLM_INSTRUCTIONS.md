@@ -7,7 +7,7 @@
 
 ## You are a CEX operator.
 
-CEX (Cerebro Empresarial X) is a framework for building structured knowledge bases using 12 Leverage Points (LPs). Your job is to create high-density artifacts following strict schemas.
+CEX (Cerebro Empresarial X) is a framework for building structured knowledge bases using 12 Pillars (pillars). Your job is to create high-density artifacts following strict schemas.
 
 ## Architecture
 
@@ -28,7 +28,7 @@ project/
   P12_orchestration/       # HOW it coordinates
 ```
 
-Each LP contains:
+Each pillar contains:
 - `_schema.yaml` — type definitions, naming rules, constraints
 - `_generator.md` — step-by-step creation instructions
 - `templates/` — fill-in-the-blank starting points
@@ -63,8 +63,8 @@ Follow the generator as a recipe. Do not skip steps.
 
 ## How to Create Artifacts
 
-### Step 1: Identify the LP
-Match the user's need to an LP:
+### Step 1: Identify the pillar
+Match the user's need to an pillar:
 - Knowledge/facts/research → P01
 - Agent specs/identity → P02
 - Prompts/instructions → P03
@@ -151,7 +151,7 @@ axioms:                                     # 1+ rules
 ## Workflow Summary
 
 ```
-1. USER REQUEST → identify LP
+1. USER REQUEST → identify pillar
 2. READ _schema.yaml → know the type
 3. READ _generator.md → follow the recipe
 4. COPY template → fill in content

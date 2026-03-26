@@ -3,7 +3,7 @@ meta: true
 file_position: 6/13
 pillar: P05
 llm_function: PRODUCE
-purpose: Meta-template for generating OUTPUT_TEMPLATE.md of any type-builder
+purpose: Meta-template for generating OUTPUT_TEMPLATE.md of any kind-builder
 ---
 
 # Output Template: {{type_name}}
@@ -42,7 +42,7 @@ author: "{{who_produced}}"
 <!-- CAMPOS ESPECIFICOS DO TIPO: -->
 <!-- Copiar cada campo de SCHEMA.md Required/Extended fields -->
 <!-- Usar {{variable}} para valores dinamicos -->
-<!-- Usar literais para valores fixos (type, lp, quality: null) -->
+<!-- Usar literais para valores fixos (kind, lp, quality: null) -->
 {{schema_specific_fields}}
 domain: {{domain_value}}
 quality: null

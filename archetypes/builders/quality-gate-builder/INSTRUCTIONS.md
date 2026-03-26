@@ -8,7 +8,7 @@ pattern: 3-phase pipeline (research → compose → validate)
 # Instructions: How to Produce a quality_gate
 
 ## Phase 1: RESEARCH
-1. Identify the domain: what type of artifact does this gate protect?
+1. Identify the domain: what kind of artifact does this gate protect?
 2. Find existing gates for similar domains (search P11_feedback/examples/)
 3. Determine HARD gates: what failures are UNACCEPTABLE? (block publish)
 4. Determine SOFT gates: what qualities VARY? (contribute to score)
@@ -17,7 +17,7 @@ pattern: 3-phase pipeline (research → compose → validate)
 ## Phase 2: COMPOSE
 1. Read SCHEMA.md — source of truth for all fields
 2. Read OUTPUT_TEMPLATE.md — fill following SCHEMA constraints
-3. Fill frontmatter: id, type, lp, title, version, quality: null
+3. Fill frontmatter: id, kind, lp, title, version, quality: null
 4. Write Definition table: metric, threshold, operator, scope
 5. Write Checklist: concrete checks (HARD gates)
 6. Write Scoring table: dimensions with weights summing to 100%
@@ -26,7 +26,7 @@ pattern: 3-phase pipeline (research → compose → validate)
 
 ## Phase 3: VALIDATE
 1. Check against QUALITY_GATES.md (this builder's own gates)
-2. HARD: id format, type, lp, quality==null, threshold is numeric
+2. HARD: id format, kind, lp, quality==null, threshold is numeric
 3. SOFT: weights sum to 100%, bypass defined, actions concrete
 4. Verify: every check is automatable (no subjective judgment)
 5. If score < 8.0: revise before outputting

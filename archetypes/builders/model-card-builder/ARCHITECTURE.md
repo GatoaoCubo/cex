@@ -34,7 +34,7 @@ Regra: "o que este LLM PODE e quanto CUSTA?" → model_card.
 ```
 
 model_card is INFRASTRUCTURE. Loaded BEFORE any identity.
-4 other P02 types depend on it: boot_config, router, fallback_chain, iso_package.
+4 other P02 kinds depend on it: boot_config, router, fallback_chain, iso_package.
 
 ## Dependency Graph
 
@@ -47,7 +47,7 @@ model_card ──independent── persona, lens, axiom, mental_model
 ```
 
 ## Fractal Position
-LP: P02 (Model — "who the entity IS")
+Pillar: P02 (Model — "who the entity IS")
 Function: GOVERN (documents and constrains model selection)
 Scale: L0 (infrastructure artifact, no agent identity)
-The only P02 type that is purely DESCRIPTIVE (all others are prescriptive).
+The only P02 kind that is purely DESCRIPTIVE (all others are prescriptive).

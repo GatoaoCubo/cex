@@ -3,7 +3,7 @@ meta: true
 file_position: 2/13
 pillar: P03
 llm_function: BECOME
-purpose: Meta-template for generating SYSTEM_PROMPT.md of any type-builder
+purpose: Meta-template for generating SYSTEM_PROMPT.md of any kind-builder
 ---
 
 # System Prompt: {{builder_name}}

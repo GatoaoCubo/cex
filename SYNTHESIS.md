@@ -9,9 +9,9 @@
 
 Every question asked in this session points to ONE answer:
 
-**The 12 LPs are not categories. They are DIMENSIONS of a single entity.**
+**The 12 pillars are not categories. They are DIMENSIONS of a single entity.**
 
-An entity (prompt, agent, satellite, crew, system) is defined by how many of these 12 dimensions it fills. The 8 functions describe WHEN each dimension activates during execution. The 78 types are the VOCABULARY for filling each dimension.
+An entity (prompt, agent, satellite, crew, system) is defined by how many of these 12 dimensions it fills. The 8 functions describe WHEN each dimension activates during execution. The 78 kinds are the VOCABULARY for filling each dimension.
 
 This is not a taxonomy we invented. It is the taxonomy the industry uses implicitly — scattered across 12 frameworks, none of which has the complete picture.
 
@@ -20,7 +20,7 @@ This is not a taxonomy we invented. It is the taxonomy the industry uses implici
 ## What We Found (evidence chain)
 
 ### 1. The industry has ~86 artifact types across 12 frameworks
-CEX covers 91% (70% direct + 21% partial) with 78 types.
+CEX covers 91% (70% direct + 21% partial) with 78 kinds.
 The 9% gap = 4 missing types (crew, grammar, component, planner).
 CEX exceeds industry in governance (P07-P11) — no framework has quality_gate, bugloop, law as primitives.
 
@@ -30,7 +30,7 @@ PLAN absorbed into REASON. REFLECT absorbed into GOVERN.
 Evidence: CoALA paper (Sumers 2023), Wang et al. survey (2023), 12 framework analysis.
 
 ### 3. The satellite is not a new type — it is maturity level L4
-| Level | Entity | LPs filled | What it adds |
+| Level | Entity | pillars filled | What it adds |
 |-------|--------|-----------|--------------|
 | L0 | Prompt | 1/12 | Stateless text |
 | L1 | Chain | 2/12 | Sequencing |
@@ -56,7 +56,7 @@ Same input → different output depending on which satellite processes it.
 - EDISON lens: builder, focuses on code quality and architecture
 - PYTHA lens: knowledge distillation, focuses on density and accuracy
 
-The lens is not decoration. It is a P02.lens artifact that CONSTRAINS how every other LP operates within that satellite. It is the DNA of the satellite.
+The lens is not decoration. It is a P02.lens artifact that CONSTRAINS how every other pillar operates within that satellite. It is the DNA of the satellite.
 
 ### 6. Agent teams are the satellite's workforce
 A satellite doesn't work alone. It commands a DECK of specialized agents:
@@ -67,9 +67,9 @@ A satellite doesn't work alone. It commands a DECK of specialized agents:
 - ATLAS: 37 agents (deploy, test, debug, infra)
 - YORK: 22 agents (pricing, courses, funnels, e-commerce)
 
-Each agent is an L2 entity (3-4 LPs). The satellite elevates them to L4 context by providing the missing LPs (boot, memory, governance, coordination).
+Each agent is an L2 entity (3-4 pillars). The satellite elevates them to L4 context by providing the missing pillars (boot, memory, governance, coordination).
 
-In industry terms: the closest parallel is MetaGPT's "Role + Environment" pattern, or CrewAI's "Agent + Crew + Process". But neither has the lens concept or the full 12-LP instantiation.
+In industry terms: the closest parallel is MetaGPT's "Role + Environment" pattern, or CrewAI's "Agent + Crew + Process". But neither has the lens concept or the full 12-pillar instantiation.
 
 ### 7. Meta-construction is already happening
 CODEXA already implements 5 of 9 meta-construction patterns:
@@ -77,7 +77,7 @@ CODEXA already implements 5 of 9 meta-construction patterns:
 |---------|--------|---------------|
 | Bootstrapping | Active | Pool builds agents that build more pool |
 | Scaffolding | Active | PRIMEs scaffold satellite boot |
-| Fractal architecture | Active | 12 LPs at 3 scales |
+| Fractal architecture | Active | 12 pillars at 3 scales |
 | Constitutional AI | Partial | Laws + guardrails constrain behavior |
 | Self-instruct | Partial | Satellites generate KCs that train satellites |
 | Metacircular | Missing | CEX describes CEX (started with artifact_blueprint) |
@@ -85,8 +85,8 @@ CODEXA already implements 5 of 9 meta-construction patterns:
 | Autopoiesis | Aspirational | System doesn't yet create its own components autonomously |
 | Meta-learning | Aspirational | No cross-session prompt optimization |
 
-### 8. The 4 gaps map to 4 different LPs
-| Gap | LP | Function | Why |
+### 8. The 4 gaps map to 4 different pillars
+| Gap | pillar | Function | Why |
 |-----|-----|----------|-----|
 | crew (multi-agent group) | P12 | COLLABORATE | Coordination protocol defines the group |
 | grammar (BNF/FSM constraint) | P06 | CONSTRAIN | Formal output constraint |
@@ -113,15 +113,15 @@ The 8 functions are not abstract. They ARE the execution lifecycle.
 ## What This Means for CEX
 
 ### The framework is sound
-12 LPs × 8 functions × 78 types covers 91% of industry artifacts.
+12 pillars × 8 functions × 78 kinds covers 91% of industry artifacts.
 Adding 4 types → 82 types → ~96% coverage.
 No framework in the world has this completeness.
 
 ### What to build next
-1. Add `llm_function` field to all 78 types (DONE in this session)
+1. Add `llm_function` field to all 78 kinds (DONE in this session)
 2. Add 4 gap types: crew, grammar, component, planner
 3. Document maturity levels L0-L6 in CEX_ARCHITECTURE.md
-4. Create artifact_blueprint for "satellite kit" (the 12-LP template for bootstrapping a new satellite)
+4. Create artifact_blueprint for "satellite kit" (the 12-pillar template for bootstrapping a new satellite)
 5. Implement metacircular: CEX type that describes CEX itself
 6. DSPy-style prompt optimization for satellite lenses (self-improving)
 

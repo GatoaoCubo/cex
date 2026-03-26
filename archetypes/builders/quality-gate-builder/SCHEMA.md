@@ -11,7 +11,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | Field | Type | Required | Default |
 |-------|------|----------|---------|
 | id | string (p11_qg_{slug}) | YES | — |
-| type | literal "quality_gate" | YES | — |
+| kind | literal "quality_gate" | YES | — |
 | lp | literal "P11" | YES | — |
 | title | string "Gate: {name}" | YES | — |
 | version | semver string | YES | "1.0.0" |

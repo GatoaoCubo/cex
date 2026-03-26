@@ -60,4 +60,4 @@ python _tools/cex_compile.py P05_output/examples/p05_output_exemplo.md
 - Formato: YAML (definido em _schema.yaml → machine_format)
 
 ---
-*Generator v1.0 | Evidence: 4 output types, P01-P04 patterns | 2026-03-22*
+*Generator v1.0 | Evidence: 4 output kinds, P01-P04 patterns | 2026-03-22*

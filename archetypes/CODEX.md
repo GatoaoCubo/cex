@@ -32,12 +32,12 @@ Brain: P01-P12 (cada com _schema.yaml, _generator.md, templates/, examples/)
 Satellites: satellites/{name}/P01-P12 (instances reais)
 Meta: archetypes/ (CODEX, GLOSSARY, MANDAMENTOS, ROADMAP, META_TEMPLATE)
 
-## 5. SCHEMAS = _schema.yaml por LP
-12 schemas criados (73 tipos total). Validado no pre-commit.
+## 5. SCHEMAS = _schema.yaml por pillar
+12 schemas criados (78 kinds total). Validado no pre-commit.
 Campos padrao: max_bytes, quality_min, frontmatter_required, body_structure
 Campo obrigatorio v3.0: `machine_format` (yaml|json) — define formato compiled/.
 
-## 6. GENERATORS = _generator.md por LP
+## 6. GENERATORS = _generator.md por pillar
 12 generators criados (P01-P12 CORE+QUALITY+SCALE). Instrucoes passo-a-passo.
 Anti-patterns listados. Density tiers documentados.
 
@@ -47,10 +47,10 @@ Secoes por tipo documentadas. Regras de geracao definidas.
 
 ## 8. DUAL OUTPUT = .md (humano) + .yaml/.json (machine)
 Todo artefato = 2 arquivos. Excecoes: _schema (so yaml), _generator (so md)
-Campo obrigatorio em _schema.yaml: `machine_format` (yaml|json). 73 tipos: 64 yaml, 9 json.
+Campo obrigatorio em _schema.yaml: `machine_format` (yaml|json). 78 kinds: 64 yaml, 9 json.
 Regra: todo example DEVE ter versao compilada em compiled/.
-Compile: `python _tools/cex_compile.py --all` gera compiled/ em cada LP.
-Routing: archetypes/DECISION_MAP.md (arquivo -> LP -> tipo -> format).
+Compile: `python _tools/cex_compile.py --all` gera compiled/ em cada pillar.
+Routing: archetypes/DECISION_MAP.md (arquivo -> pillar -> tipo -> format).
 
 ## 9. LIFECYCLE
 CREATE > INDEX > READ > USE > RESULTS > NEW KC > repeat (flywheel)
@@ -79,7 +79,7 @@ ARCHIVE: quality<7 + age>30d. PROMOTE: used>10x + quality>9
 
 ## 13. ESTADO FINAL (v1.0.0 — 2026-03-22)
 
-| LP | Schema | Generator | Templates | Examples | Completude |
+| pillar | Schema | Generator | Templates | Examples | Completude |
 |----|--------|-----------|-----------|----------|------------|
 | P01 Knowledge | SIM | SIM | 3 | 7 | CORE completo |
 | P02 Model | SIM | SIM | 1 | 4 | CORE completo |
@@ -91,7 +91,7 @@ ARCHIVE: quality<7 + age>30d. PROMOTE: used>10x + quality>9
 
 **Metricas Acumuladas (6 Waves):**
 - Wave 1: 42KB destilado, P01 schema v0, 1 golden example
-- Wave 2: 12 schemas, 68 tipos, CORE+QUALITY+SCALE layers
+- Wave 2: 12 schemas, 78 kinds, CORE+QUALITY+SCALE layers
 - Wave 3: 12 generators, 7 templates, 18 examples, chain test PASS
 - Wave 4: migration map (9916 arquivos), 12 golden migrados, 22 candidatos
 - Wave 5: density report 88.6%, 3 validators, meta-docs v3
@@ -104,9 +104,9 @@ ARCHIVE: quality<7 + age>30d. PROMOTE: used>10x + quality>9
 | W1 | Max file size = 4KB (nao 2KB) | Dados reais: golden avg ~3KB, 2KB truncava informacao |
 | W1 | Dual output .md + .yaml | .md = leitura humana, .yaml = LLM embedding otimizado |
 | W2 | 12 LPs (nao 8 ou 16) | Cobertura completa sem overlap: P01-P04 CORE = suficiente para 95% dos casos |
-| W2 | 68 tipos fixos + _custom/ extensivel | Estabilidade do schema + flexibilidade para dominios especificos |
+| W2 | 78 kinds fixos + _custom/ extensivel | Estabilidade do schema + flexibilidade para dominios especificos |
 | W3 | Meta-template antes dos templates | Templates derivados de meta = consistencia garantida (DRY) |
-| W3 | Generator APENAS para primary type | Secondary types: schema define, humano interpola. Gera mais tipos, menos overhead |
+| W3 | Generator APENAS para primary type | Secondary kinds: schema define, humano interpola. Gera mais tipos, menos overhead |
 | W4 | Migration map primeiro, migrar depois | Classificar 9916 arquivos antes de migrar evita retrabalo de re-classificacao |
 | W4 | 12 golden primeiro (nao 638) | Qualidade > quantidade. 12 perfeitos ensinam mais que 638 mediocres |
 | W5 | Density >= 0.80 obrigatorio (nao 0.75) | Dados: todos os 18 examples ficaram acima de 0.85. 0.80 = floor real |
@@ -125,7 +125,7 @@ ARCHIVE: quality<7 + age>30d. PROMOTE: used>10x + quality>9
 | 6 | Meta-template = fonte da verdade | W3: toda inconsistencia de template = falta de alinhamento com META_TEMPLATE |
 | 7 | Bullets com 80 chars = scan rapido | W3: density analysis comprovou correlacao bullets-qualidade |
 | 8 | id == filename stem (sempre) | W3: chain test revelou inconsistencias silenciosas sem essa regra |
-| 9 | _custom/ para dominios, CORE fixo | W5: anti-fragilidade = 68 tipos estaveis + extensoes isoladas |
+| 9 | _custom/ para dominios, CORE fixo | W5: anti-fragilidade = 78 kinds estaveis + extensoes isoladas |
 | 10 | Validate early, validate often | W3: chain test antes de escalar evitou propagacao de erros |
 
 ---

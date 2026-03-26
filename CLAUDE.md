@@ -41,9 +41,9 @@ Execute o protocolo `/cex` definido em `.claude/CEX_COMMAND.md`:
 
 ```
 L0: archetypes/builders/     MOLDES (fabricas)
-L1: P01..P12/                SCHEMAS ROOT (78 types)
+L1: P01..P12/                SCHEMAS ROOT (78 kinds)
 L2: N01..N07/                NUCLEOS (7 setores)
-L3: N{XX}/P{NN}/             LP POR NUCLEO (84)
+L3: N{XX}/P{NN}/             pillar POR NUCLEO (84)
 L4: N{XX}/P{NN}/{type}/      INSTANCIAS (546 dirs)
 ```
 

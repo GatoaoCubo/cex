@@ -3,7 +3,7 @@ meta: true
 file_position: 10/13
 pillar: P09
 llm_function: CONSTRAIN
-purpose: Meta-template for generating CONFIG.md of any type-builder
+purpose: Meta-template for generating CONFIG.md of any kind-builder
 ---
 
 # Config: {{type_name}} Production Rules

@@ -1,6 +1,6 @@
 # CEX Ingestion Pipeline Spec
 
-**Version**: 1.0.0 | **LP**: P01 (Knowledge) + P04 (Tools)
+**Version**: 1.0.0 | **Pillar**: P01 (Knowledge) + P04 (Tools)
 
 ## Purpose
 

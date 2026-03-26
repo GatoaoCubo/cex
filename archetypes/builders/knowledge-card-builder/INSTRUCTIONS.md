@@ -9,7 +9,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 
 ## Phase 1: RESEARCH
 1. Identify the topic: what atomic fact needs capturing?
-2. Determine KC type: domain_kc (external) or meta_kc (CEX-internal)
+2. Determine KC kind: domain_kc (external) or meta_kc (CEX-internal)
 3. Gather sources: official docs, APIs, code, established references
 4. Extract key concepts, patterns, rules, comparisons
 5. Check brain_query for existing KCs on same topic (avoid duplicates)
@@ -31,7 +31,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 
 ## Phase 3: VALIDATE
 1. Run: `python _tools/validate_kc.py <file>` (ACTIVE tool — use it!)
-2. HARD gates (all 10 must pass): YAML, id, format, type, quality, fields, tags, size, paths, author
+2. HARD gates (all 10 must pass): YAML, id, format, kind, quality, fields, tags, size, paths, author
 3. SOFT gates (20 checks): see QUALITY_GATES.md
 4. Cross-check: density >= 0.80? No filler? No self-refs in tldr?
 5. If HARD fails: fix immediately, re-run validator

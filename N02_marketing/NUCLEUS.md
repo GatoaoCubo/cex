@@ -12,8 +12,8 @@ version: "1.0.0"
 ## Funcao
 Copy, branding, ads, social media, audience, funnels
 
-## LPs Primarios
+## Pillars Primarios
 P03, P05
 
 ## Estrutura
-12 LPs completos, cada um com _schema.yaml (herda root), templates/, examples/, compiled/.
+12 pillars completos, cada um com _schema.yaml (herda root), templates/, examples/, compiled/.

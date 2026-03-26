@@ -15,8 +15,8 @@ source: validate_kc.py v2.0 architecture + 3-model review findings
 | H01 | YAML frontmatter parses without error | Broken YAML = broken artifact |
 | H02 | id starts with "p02_mc_" | Namespace compliance |
 | H03 | id == filename stem | Brain search relies on this |
-| H04 | type == "model_card" | Type integrity |
-| H05 | lp == "P02" | LP assignment |
+| H04 | kind == "model_card" | Type integrity |
+| H05 | lp == "P02" | Pillar assignment |
 | H06 | quality == null | Never self-score (Mitchell principle) |
 | H07 | model_name is non-empty string | Core identity field |
 | H08 | provider in enum (SCHEMA.md Provider Enum) | Prevents typos |
@@ -56,7 +56,7 @@ REJECT:  < 7.0 or any HARD fail
 ```
 
 ## Automation
-Primary: validate_artifact.py --type model_card [PLANNED]
+Primary: validate_artifact.py --kind model_card [PLANNED]
 Interim: validate manually against this file, checking each gate
 Future: gates expressed as JSON schema for machine parsing
 

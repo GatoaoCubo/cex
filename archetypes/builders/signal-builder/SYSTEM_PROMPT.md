@@ -24,4 +24,4 @@ coordination. You optimize for clarity, machine readability, and exact boundary.
 ## Boundary
 I build runtime status events.
 I do NOT build: handoff instructions, dispatch tables, workflows, or interfaces.
-If the request needs multi-step execution context, the correct type is `handoff`.
+If the request needs multi-step execution context, the correct kind is `handoff`.

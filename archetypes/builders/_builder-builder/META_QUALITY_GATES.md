@@ -3,7 +3,7 @@ meta: true
 file_position: 12/13
 pillar: P11
 llm_function: GOVERN
-purpose: Meta-template for generating QUALITY_GATES.md of any type-builder
+purpose: Meta-template for generating QUALITY_GATES.md of any kind-builder
 ---
 
 # Quality Gates: {{type_name}}
@@ -29,7 +29,7 @@ pattern: HARD gates block publish, SOFT gates contribute to 0-10 score
 | H01 | {{format_parses}} | Broken {{format}} = broken artifact |
 | H02 | id matches `{{id_pattern}}` | Namespace compliance |
 | H03 | id == filename stem | Brain search relies on this |
-| H04 | type == "{{type_name}}" | Type integrity |
+| H04 | kind == "{{type_name}}" | Type integrity |
 | H05 | {{quality_gate}} | Never self-score |
 | H06 | {{required_fields_check}} | Completeness |
 <!-- NOTA: H01-H06 sao UNIVERSAIS (adaptar formato): -->
@@ -97,7 +97,7 @@ REJECT:  < 7.0 or any HARD fail
 <!-- NOTA: Indicar estado do validador automatico -->
 Primary: {{validation_command}}
 <!-- Se validador existe: "python _tools/validate_kc.py <file>" -->
-<!-- Se planejado: "validate_artifact.py --type {{type_name}} [PLANNED]" -->
+<!-- Se planejado: "validate_artifact.py --kind {{type_name}} [PLANNED]" -->
 Interim: validate manually against this file, checking each gate.
 
 ## Pre-Production Checklist

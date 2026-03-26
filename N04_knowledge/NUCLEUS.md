@@ -12,8 +12,8 @@ version: "1.0.0"
 ## Funcao
 Indexacao, RAG, compliance, infosec, documentation
 
-## LPs Primarios
+## Pillars Primarios
 P01, P10
 
 ## Estrutura
-12 LPs completos, cada um com _schema.yaml (herda root), templates/, examples/, compiled/.
+12 pillars completos, cada um com _schema.yaml (herda root), templates/, examples/, compiled/.

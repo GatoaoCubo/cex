@@ -16,9 +16,9 @@ Para todos os 12 LPs:
 python _tools/bootstrap.py --name MeuProjeto
 ```
 
-## Passo 2: Escolher LP + Tipo
+## Passo 2: Escolher Pillar + Tipo
 
-Abra o schema do LP desejado:
+Abra o schema do Pillar desejado:
 ```bash
 cat MeuProjeto/P01_knowledge/_schema.yaml
 ```
@@ -35,7 +35,7 @@ cat MeuProjeto/P01_knowledge/_generator.md
 ```
 
 O generator contem:
-- QUANDO USAR este LP
+- QUANDO USAR este Pillar
 - PASSO A PASSO (10 steps)
 - TESTE DE ESPECIFICIDADE
 - ANTI-PATTERNS a evitar

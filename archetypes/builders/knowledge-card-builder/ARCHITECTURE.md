@@ -45,7 +45,7 @@ knowledge_card --independent-- model_card, boot_config, persona
 ```
 
 ## Fractal Position
-LP: P01 (Knowledge — "what the entity KNOWS")
+Pillar: P01 (Knowledge — "what the entity KNOWS")
 Function: INJECT (provides factual context to other LPs)
 Scale: L0 (content artifact, no identity or behavior)
-The primary P01 type — all other P01 types are simpler variants.
+The primary P01 kind — all other P01 kinds are simpler variants.

@@ -3,7 +3,7 @@ meta: true
 file_position: 5/13
 pillar: P04
 llm_function: CALL
-purpose: Meta-template for generating TOOLS.md of any type-builder
+purpose: Meta-template for generating TOOLS.md of any kind-builder
 ---
 
 # Tools: {{builder_name}}

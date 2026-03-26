@@ -13,7 +13,7 @@ source: P01_knowledge/_schema.yaml v4.0 + validate_kc.py v2.0
 | Field | Type | Required | Default | Validator |
 |-------|------|----------|---------|-----------|
 | id | string (p01_kc_{slug}) | YES | — | H02, H03 |
-| type | literal "knowledge_card" | YES | — | H04 |
+| kind | literal "knowledge_card" | YES | — | H04 |
 | lp | literal "P01" | YES | — | H06 |
 | title | string 5-100 chars | YES | — | H06, S03 |
 | version | semver X.Y.Z | YES | "1.0.0" | H06, S04 |

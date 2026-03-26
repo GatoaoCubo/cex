@@ -44,7 +44,7 @@ Empresas usam IA de forma fragmentada:
 | N06 | Comercial & Financeiro | Gera receita | Vendas, pricing |
 | N07 | Administracao | Coordena tudo | Estrategia, governanca |
 
-### 3.2 Os 12 Pilares (LPs)
+### 3.2 Os 12 Pilares (pillars)
 
 | Grupo | Pilares | Pergunta |
 |-------|---------|----------|
@@ -95,7 +95,7 @@ O `.md` eh a FONTE. O `compiled/` eh o OUTPUT. Sincronizados por `distill.py`.
 
 | Camada | Formato | Motivo |
 |--------|---------|--------|
-| Artefatos (78 types) | `.md` + `compiled/.yaml` (DUAL) | Humano + maquina |
+| Artefatos (78 kinds) | `.md` + `compiled/.yaml` (DUAL) | Humano + maquina |
 | Schemas | `.yaml` only | Definicao formal |
 | Builders (13 ISO) | `.md` only | Instrucoes pra LLM |
 | Meta-docs | `.md` only | Governanca humana |
@@ -108,7 +108,7 @@ O `.md` eh a FONTE. O `compiled/` eh o OUTPUT. Sincronizados por `distill.py`.
 | Nivel | Path | O que |
 |-------|------|-------|
 | L0 | `archetypes/builders/` | Moldes (fabricas que constroem) |
-| L1 | `P01..P12/` | Schemas raiz (definem 78 types) |
+| L1 | `P01..P12/` | Schemas raiz (definem 78 kinds) |
 | L2 | `N01..N07/` | Nucleos (setores da empresa) |
 | L3 | `N{XX}/P{NN}/` | Pilar dentro do nucleo |
 | L4 | `N{XX}/P{NN}/{type}/` | Tipo (onde artefatos vivem) |
@@ -136,7 +136,7 @@ O `.md` eh a FONTE. O `compiled/` eh o OUTPUT. Sincronizados por `distill.py`.
 |-------|------------|
 | CEX | Company Experience X |
 | Nucleo | Setor/departamento (7) |
-| LP | Learning Pillar (12) |
+| pillar | Learning Pillar (12) |
 | Type | Tipo de artefato (78) |
 | Builder | Fabrica de 1 tipo (13 ISO files) |
 | Dual | .md (humano) + compiled/.yaml (maquina) |

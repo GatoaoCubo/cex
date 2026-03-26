@@ -76,4 +76,4 @@ python _tools/cex_compile.py P09_config/examples/p09_config_exemplo.md
 - Formato: YAML (default) / JSON (feature_flag) (definido em _schema.yaml → machine_format)
 
 ---
-*Generator v1.0 | Evidence: P01-P08 generators + 5 config types | 2026-03-22*
+*Generator v1.0 | Evidence: P01-P08 generators + 5 config kinds | 2026-03-22*

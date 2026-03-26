@@ -10,7 +10,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 ## Artifact Identity
 | Field | Value |
 |-------|-------|
-| LP | `P12` |
+| Pillar | `P12` |
 | Type | literal `signal` |
 | Machine format | `json` |
 | Naming | `p12_sig_{event}.json` |

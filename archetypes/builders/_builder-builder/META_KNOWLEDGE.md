@@ -3,7 +3,7 @@ meta: true
 file_position: 3/13
 pillar: P01
 llm_function: INJECT
-purpose: Meta-template for generating KNOWLEDGE.md of any type-builder
+purpose: Meta-template for generating KNOWLEDGE.md of any kind-builder
 ---
 
 # Domain Knowledge: {{type_name}}

@@ -40,7 +40,7 @@ density_score: 0.92
 - [ ] YAML parses without error
 - [ ] id starts with p01_kc_
 - [ ] id == filename stem
-- [ ] type == knowledge_card
+- [ ] kind == knowledge_card
 - [ ] quality == null
 - [ ] body >= 3 bullet points
 - [ ] size <= 5120 bytes

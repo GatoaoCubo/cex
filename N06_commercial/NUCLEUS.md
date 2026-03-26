@@ -12,8 +12,8 @@ version: "1.0.0"
 ## Funcao
 Pricing, sales funnels, e-commerce, financial reports
 
-## LPs Primarios
+## Pillars Primarios
 P05, P09
 
 ## Estrutura
-12 LPs completos, cada um com _schema.yaml (herda root), templates/, examples/, compiled/.
+12 pillars completos, cada um com _schema.yaml (herda root), templates/, examples/, compiled/.

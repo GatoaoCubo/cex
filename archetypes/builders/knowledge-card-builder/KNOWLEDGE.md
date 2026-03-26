@@ -51,7 +51,7 @@ Target: >= 0.80 (ideally 0.85-0.95)
 ## Key Differences from model_card
 | Aspect | knowledge_card | model_card |
 |--------|---------------|------------|
-| LP | P01 (Knowledge) | P02 (Model) |
+| Pillar | P01 (Knowledge) | P02 (Model) |
 | Purpose | Atomic fact about any topic | LLM spec (capabilities, cost) |
 | Size limit | 5120 bytes | 4096 bytes (body) |
 | Density gate | >= 0.80 | >= 0.85 |

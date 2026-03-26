@@ -11,7 +11,7 @@ purpose: Tools and APIs available for model_card production
 |------|---------|------|--------|
 | brain_query | Search existing model_cards in pool | Phase 1 (check duplicates) | ACTIVE |
 | validate_kc.py | Validate KC artifacts (reference pattern) | — | ACTIVE (KC only) |
-| validate_artifact.py | Validate any artifact type via builder gates | Phase 3 | [PLANNED] |
+| validate_artifact.py | Validate any artifact kind via builder gates | Phase 3 | [PLANNED] |
 | cex_forge.py | Generate artifact from seeds | Alternative compose | [PLANNED] |
 
 ## Data Sources (APIs)

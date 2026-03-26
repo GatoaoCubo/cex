@@ -124,11 +124,11 @@ Human-readable guide for using the agent:
 5. **UTF-8 encoding**: all files must be UTF-8
 6. **Markdown format**: all .md files use standard CommonMark
 
-## CEX LP Mapping
+## CEX pillar Mapping
 
 Each ISO file maps to a CEX Liquidity Pool:
 
-| ISO File | CEX LP | Type |
+| ISO File | CEX pillar | Type |
 |----------|:------:|------|
 | manifest.yaml | P02 | agent |
 | system_instruction.md | P03 | system_prompt |
@@ -173,8 +173,8 @@ for portability. The compile/decompile tools handle conversion between formats.
 
 | Tool | Purpose |
 |------|---------|
-| `_tools/compile_iso.py` | Compile CEX LP sources into ISO Package |
-| `_tools/decompile_iso.py` | Decompile existing ISO Package into CEX LPs |
+| `_tools/compile_iso.py` | Compile CEX pillar sources into ISO Package |
+| `_tools/decompile_iso.py` | Decompile existing ISO Package into CEX pillars |
 | `_tools/validate_iso.py` | Validate ISO Package completeness + quality |
 
 ---

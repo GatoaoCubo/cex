@@ -94,7 +94,7 @@ Format: Wave-based (chronological order).
 
 | Metric | Value |
 |--------|-------|
-| Leverage Points | 12 (P01-P12) |
+| Pillars | 12 (P01-P12) |
 | Artifact Types | 69 |
 | Schemas | 12/12 |
 | Generators | 12/12 |
