@@ -1,6 +1,6 @@
 id: p02_rt_complexity_router
-type: router
-lp: P02
+kind: router
+pillar: P02
 routes: '| Score | Target | Use Case |
 
   |-------|--------|----------|

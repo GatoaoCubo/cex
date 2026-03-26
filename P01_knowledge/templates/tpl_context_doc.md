@@ -4,8 +4,8 @@
 # Max 2048 bytes
 
 id: p01_ctx_{{TOPIC_SLUG}}
-type: context_doc
-lp: P01
+kind: context_doc
+pillar: P01
 title: "{{CONTEXT_TITLE}}"
 domain: {{DOMAIN_NAME}}
 scope: {{SYSTEM|CLIENT|WORKFLOW|REPO}}

@@ -1,5 +1,5 @@
 ---
-lp: P08
+pillar: P08
 llm_function: CONSTRAIN
 purpose: Boundary and position of quality_gate in the CEX fractal
 ---

@@ -4,8 +4,8 @@
 # Max 1024 bytes
 
 id: p04_daemon_{{NAME_SLUG}}
-type: daemon
-lp: P04
+kind: daemon
+pillar: P04
 title: "Daemon: {{DAEMON_NAME}}"
 quality: {{QUALITY_7_TO_10}}
 ---

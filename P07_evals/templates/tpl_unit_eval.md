@@ -5,8 +5,8 @@
 # Max 2KB | density_min: 0.80 | quality_min: 8.0
 
 id: p07_ue_{{TARGET_SLUG}}
-type: unit_eval
-lp: P07
+kind: unit_eval
+pillar: P07
 title: "Unit Eval: {{AGENT_OR_PROMPT_NAME}}"
 version: 1.0.0
 created: {{ISO_DATE}}

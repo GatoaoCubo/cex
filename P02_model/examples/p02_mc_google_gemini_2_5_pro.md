@@ -1,7 +1,7 @@
 ---
 id: p02_mc_google_gemini_2_5_pro
-type: model_card
-lp: P02
+kind: model_card
+pillar: P02
 version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"

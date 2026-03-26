@@ -4,8 +4,8 @@
 # Max 1024 bytes
 
 id: p04_cli_{{TOOL_SLUG}}
-type: cli_tool
-lp: P04
+kind: cli_tool
+pillar: P04
 title: "CLI Tool: {{TOOL_NAME}}"
 quality: {{QUALITY_7_TO_10}}
 ---

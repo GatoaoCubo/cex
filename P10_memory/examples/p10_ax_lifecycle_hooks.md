@@ -1,7 +1,7 @@
 ---
 id: p10_ax_lifecycle_hooks
-type: axiom
-lp: P10
+kind: axiom
+pillar: P10
 title: "Axiom: Memory Lifecycle Hooks (5-Hook Chain)"
 version: 1.0.0
 created: 2026-03-24

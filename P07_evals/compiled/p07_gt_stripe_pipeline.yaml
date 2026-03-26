@@ -1,6 +1,6 @@
 id: p07_gt_stripe_pipeline
-type: golden_test
-lp: P07
+kind: golden_test
+pillar: P07
 title: 'Golden Test: Stripe Evolution Pipeline Validation'
 version: 1.0.0
 created: 2026-03-22

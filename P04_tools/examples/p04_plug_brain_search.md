@@ -1,6 +1,6 @@
 ---
 id: p04_plug_brain_search
-type: plugin
+kind: plugin
 name: brain_search_plugin
 version: 1.0.0
 entrypoint: codexa_brain.vector_search
@@ -8,7 +8,7 @@ capabilities: [keyword_search, vector_search, hybrid_fusion, index_rebuild]
 repository: internal
 license: proprietary
 keywords: [bm25, faiss, ollama, nomic, hybrid-search]
-lp: P04
+pillar: P04
 created: 2026-03-24
 author: edison
 quality: 9.5

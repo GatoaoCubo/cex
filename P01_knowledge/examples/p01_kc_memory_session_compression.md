@@ -1,7 +1,7 @@
 ---
 id: p01_kc_memory_session_compression
-type: knowledge_card
-lp: P01
+kind: knowledge_card
+pillar: P01
 title: "Session Compression via Agent SDK for LLM Memory Decay"
 version: 1.0.0
 created: 2026-03-26

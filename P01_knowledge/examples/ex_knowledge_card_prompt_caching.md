@@ -1,7 +1,7 @@
 ---
 id: p01_kc_prompt_caching
-type: knowledge_card
-lp: P01
+kind: knowledge_card
+pillar: P01
 title: Prompt Caching Patterns for LLM Cost Optimization
 version: 1.0.0
 created: 2026-03-24

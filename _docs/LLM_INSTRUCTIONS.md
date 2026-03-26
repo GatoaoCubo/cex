@@ -112,8 +112,8 @@ Exceptions: `_schema.yaml` (YAML only), `_generator.md` (MD only).
 Required fields (minimum):
 ```yaml
 id: p01_kc_topic_name
-type: knowledge_card
-lp: P01
+kind: knowledge_card
+pillar: P01
 title: "Descriptive Title"
 version: "1.0.0"
 created: "2026-03-22"

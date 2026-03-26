@@ -1,7 +1,7 @@
 ---
 id: p12_spawn_grid_continuous
-type: spawn_config
-lp: P12
+kind: spawn_config
+pillar: P12
 title: "Spawn Config: Grid Continuous Mode"
 version: 1.0.0
 created: 2026-03-22

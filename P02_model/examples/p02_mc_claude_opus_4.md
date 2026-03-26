@@ -1,7 +1,7 @@
 ---
 id: p02_mc_claude_opus_4
-type: model_card
-lp: P02
+kind: model_card
+pillar: P02
 model_name: claude-opus-4-0520
 provider: anthropic
 context_window: 200000

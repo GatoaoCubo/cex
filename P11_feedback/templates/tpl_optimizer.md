@@ -4,8 +4,8 @@
 # Max 4096 bytes
 
 id: p11_opt_{{TARGET_SLUG}}
-type: optimizer
-lp: P11
+kind: optimizer
+pillar: P11
 title: "Optimizer: {{TARGET_NAME}}"
 quality: {{QUALITY_8_TO_10}}
 ---

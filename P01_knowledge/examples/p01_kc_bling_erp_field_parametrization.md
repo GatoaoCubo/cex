@@ -1,7 +1,7 @@
 ---
 id: p01_kc_bling_erp_field_parametrization
-type: knowledge_card
-lp: P01
+kind: knowledge_card
+pillar: P01
 title: "Bling ERP: Mapa de Campos do Produto V3"
 version: 2.0.0
 created: 2026-03-25

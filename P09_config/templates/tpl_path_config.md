@@ -4,8 +4,8 @@
 # Max 3072 bytes
 
 id: p09_path_{{SCOPE_SLUG}}
-type: path_config
-lp: P09
+kind: path_config
+pillar: P09
 title: "Path Config: {{SCOPE_NAME}}"
 quality: {{QUALITY_8_TO_10}}
 ---

@@ -1,7 +1,7 @@
 ---
 id: p02_lens_ira_atlas
-type: lens
-lp: P02
+kind: lens
+pillar: P02
 perspective: "ira — anger as execution fuel"
 applies_to: atlas_satellite
 version: 1.0.0

@@ -1,6 +1,6 @@
 id: p11_opt_pool_density
-type: optimizer
-lp: P11
+kind: optimizer
+pillar: P11
 title: 'Optimizer: Pool Density Improvement'
 version: 1.0.0
 created: 2026-03-22

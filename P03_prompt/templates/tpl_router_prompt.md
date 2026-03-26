@@ -4,8 +4,8 @@
 # Max 3072 bytes
 
 id: p03_rp_{{SCOPE_SLUG}}
-type: router_prompt
-lp: P03
+kind: router_prompt
+pillar: P03
 routes: [{{ROUTE_1}}, {{ROUTE_2}}, {{ROUTE_3}}]
 fallback: {{FALLBACK_HANDLER}}
 ---

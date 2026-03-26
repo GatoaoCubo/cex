@@ -1,7 +1,7 @@
 ---
 id: p01_kc_brand_skill
-type: knowledge_card
-lp: P01
+kind: knowledge_card
+pillar: P01
 title: "Brand Skill — Living Brand System from Guidelines to Code"
 version: 1.0.0
 created: 2026-03-26

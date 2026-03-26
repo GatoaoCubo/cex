@@ -4,7 +4,7 @@
 # Max 1024 bytes
 
 id: p04_hook_{{HOOK_SLUG}}
-type: {{pre|post|stop}}
+kind: {{pre|post|stop}}
 trigger_event: {{EVENT_NAME}}
 script_path: {{RELATIVE_SCRIPT_PATH}}
 ---

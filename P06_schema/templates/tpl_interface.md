@@ -5,8 +5,8 @@
 # Max 3072 bytes
 
 id: p06_iface_{{CONTRACT_SLUG}}
-type: interface
-lp: P06
+kind: interface
+pillar: P06
 title: "Interface: {{PRODUCER}} -> {{CONSUMER}}"
 version: 1.0.0
 created: {{ISO_DATE}}

@@ -1,7 +1,7 @@
 ---
 id: p01_kc_cex_type_artifact
-type: knowledge_card
-lp: P01
+kind: knowledge_card
+pillar: P01
 title: "CEX Type Artifacts — 78 Named Units with Contract, Boundary and Schema"
 version: 1.0.0
 created: 2026-03-25

@@ -1,6 +1,6 @@
 id: p12_dag_cex_wave_pipeline
-type: dag
-lp: P12
+kind: dag
+pillar: P12
 title: 'DAG: CEX Wave Migration Pipeline'
 version: 1.0.0
 created: 2026-03-22

@@ -1,6 +1,6 @@
 ---
 id: n06
-type: nucleus
+kind: nucleus
 label: "Comercial & Financeiro"
 function: commercial
 created: 2026-03-26

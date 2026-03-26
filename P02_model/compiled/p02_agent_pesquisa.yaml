@@ -1,6 +1,6 @@
 id: p02_agent_pesquisa
-type: agent
-lp: P02
+kind: agent
+pillar: P02
 title: Agente de Pesquisa de Mercado
 version: 1.0.0
 created: 2026-03-22

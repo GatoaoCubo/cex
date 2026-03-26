@@ -1,7 +1,7 @@
 ---
 id: p07_ue_brain_query_accuracy
-type: unit_eval
-lp: P07
+kind: unit_eval
+pillar: P07
 description: "Unit test for brain_query search accuracy across known queries"
 target: brain_query
 version: 1.0.0

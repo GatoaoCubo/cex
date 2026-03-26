@@ -1,7 +1,7 @@
 ---
 id: p01_kc_cex_lens_concept
-type: knowledge_card
-lp: P01
+kind: knowledge_card
+pillar: P01
 title: "CEX Lens — Cognitive Perspective That Refracts All Input"
 version: 1.0.0
 created: 2026-03-25

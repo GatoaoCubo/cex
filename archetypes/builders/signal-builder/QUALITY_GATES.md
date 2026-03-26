@@ -1,5 +1,5 @@
 ---
-lp: P11
+pillar: P11
 llm_function: GOVERN
 purpose: Automated quality gates for signal validation
 pattern: HARD gates block publish, SOFT gates improve operational quality

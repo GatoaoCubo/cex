@@ -1,5 +1,5 @@
 ---
-lp: P04
+pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for model_card production
 ---

@@ -1,6 +1,6 @@
 id: p03_cot_competitor_analysis
-type: chain_of_thought
-lp: P03
+kind: chain_of_thought
+pillar: P03
 title: Chain-of-Thought Competitor Analysis with Metacognitive Stages
 reasoning_type: metacognitive_5stage
 quality: 9.0

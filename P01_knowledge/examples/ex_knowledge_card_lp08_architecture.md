@@ -1,7 +1,7 @@
 ---
 id: p01_kc_lp08_architecture
-type: knowledge_card
-lp: P01
+kind: knowledge_card
+pillar: P01
 title: "P08 Architecture: Como Escala"
 version: 1.0.0
 created: 2026-03-23

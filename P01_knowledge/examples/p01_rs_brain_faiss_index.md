@@ -1,6 +1,6 @@
 ---
 id: p01_rs_brain_faiss_index
-type: rag_source
+kind: rag_source
 url: records/core/brain/mcp-codexa-brain/src/indexes/
 domain: knowledge_retrieval
 last_checked: 2026-03-24

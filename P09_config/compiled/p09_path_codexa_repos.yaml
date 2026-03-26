@@ -1,6 +1,6 @@
 id: p09_path_codexa_repos
-type: path_config
-lp: P09
+kind: path_config
+pillar: P09
 title: 'Path Config: CODEXA Multi-Repo System'
 version: 1.0.0
 created: 2026-03-22

@@ -1,6 +1,6 @@
 id: p03_fs_product_extraction
-type: few_shot
-lp: P03
+kind: few_shot
+pillar: P03
 title: Few-Shot Product Data Extraction from Marketplace Listings
 task: extract_product_data
 examples_count: 3

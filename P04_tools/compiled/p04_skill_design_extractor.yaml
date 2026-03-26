@@ -2,8 +2,8 @@ id: p04_skill_design_extractor
 name: codexa-design-extractor
 description: Extrair design tokens e Tailwind configs de qualquer website URL
 version: 1.0.0
-lp: P04
-type: skill
+pillar: P04
+kind: skill
 created: 2026-03-22
 updated: 2026-03-22
 author: EDISON

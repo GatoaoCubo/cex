@@ -2,8 +2,8 @@ id: p04_skill_ml_ads
 name: codexa-ml-ads
 description: Mercado Livre Product Ads strategy, ROAS optimization, and campaign management
 version: 1.0.0
-lp: P04
-type: skill
+pillar: P04
+kind: skill
 created: 2026-03-22
 updated: 2026-03-22
 author: PYTHA

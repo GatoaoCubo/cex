@@ -1,6 +1,6 @@
 id: p10_ax_privacy_controls
-type: axiom
-lp: P10
+kind: axiom
+pillar: P10
 title: 'Axiom: Edge-Layer Privacy Controls'
 version: 1.0.0
 created: 2026-03-24

@@ -1,7 +1,7 @@
 ---
 id: p01_kc_context_parallelization
-type: knowledge_card
-lp: P01
+kind: knowledge_card
+pillar: P01
 title: "Context Parallelization — 79% Token Reduction via Specialized Workers"
 version: 2.0.0
 created: 2026-02-06

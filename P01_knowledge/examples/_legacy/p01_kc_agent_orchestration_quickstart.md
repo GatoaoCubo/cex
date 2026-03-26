@@ -1,7 +1,7 @@
 ---
 id: p01_kc_agent_orchestration_quickstart
-type: knowledge_card
-lp: P01
+kind: knowledge_card
+pillar: P01
 title: Claude Agent Orchestration - Multi-Agent Patterns
 version: 1.0.0
 created: 2026-03-22

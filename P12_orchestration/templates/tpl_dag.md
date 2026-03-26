@@ -4,8 +4,8 @@
 # Max 3072 bytes
 
 id: p12_dag_{{PIPELINE_SLUG}}
-type: dag
-lp: P12
+kind: dag
+pillar: P12
 title: "DAG: {{PIPELINE_NAME}}"
 quality: {{QUALITY_8_TO_10}}
 ---

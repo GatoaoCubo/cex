@@ -78,8 +78,8 @@ python MeuProjeto/_tools/validate_schema.py
 ```yaml
 # p01_kc_buybox_ml.yaml
 id: p01_kc_buybox_ml
-type: knowledge_card
-lp: P01
+kind: knowledge_card
+pillar: P01
 title: "Buy Box Algorithm - Mercado Livre"
 version: "1.0.0"
 created: "2026-03-22"

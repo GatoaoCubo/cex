@@ -5,8 +5,8 @@
 # Use [PLACEHOLDER] concreto. Evite TODO/TBD.
 
 id: p02_agent_[name_slug]
-type: agent
-lp: P02
+kind: agent
+pillar: P02
 title: [titulo_descritivo]
 version: 1.0.0
 created: [yyyy-mm-dd]

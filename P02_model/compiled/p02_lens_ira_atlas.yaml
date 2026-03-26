@@ -1,6 +1,6 @@
 id: p02_lens_ira_atlas
-type: lens
-lp: P02
+kind: lens
+pillar: P02
 perspective: Each domain concept in ATLAS has an `ira_lens` — an emotional perspective that transforms abstract knowledge
   into execution fuel. Ira channels impatience with mediocrity into decisive action, not recklessness.
 applies_to: 'ATLAS satellite (execution domain). Other satellites have different pecado lenses: EDISON=soberba, LILY=luxuria,

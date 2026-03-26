@@ -1,7 +1,7 @@
 ---
 id: p06_iface_satellite_handoff
-type: interface
-lp: P06
+kind: interface
+pillar: P06
 title: "Interface: STELLA → Satellite Handoff Contract"
 version: 1.0.0
 created: 2026-03-22

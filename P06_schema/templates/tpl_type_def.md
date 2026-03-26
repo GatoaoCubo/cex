@@ -4,8 +4,8 @@
 # Max 3072 bytes
 
 id: p06_td_{{TYPE_SLUG}}
-type: type_def
-lp: P06
+kind: type_def
+pillar: P06
 title: "Type Def: {{TYPE_NAME}}"
 quality: {{QUALITY_8_TO_10}}
 ---

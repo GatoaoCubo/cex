@@ -4,8 +4,8 @@
 # Max 3072 bytes
 
 id: p07_sr_{{FRAMEWORK_SLUG}}
-type: scoring_rubric
-lp: P07
+kind: scoring_rubric
+pillar: P07
 title: "Scoring Rubric: {{FRAMEWORK_NAME}}"
 quality: {{QUALITY_8_TO_10}}
 ---

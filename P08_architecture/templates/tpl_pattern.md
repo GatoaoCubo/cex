@@ -5,8 +5,8 @@
 # Max 2KB | density_min: 0.80 | quality_min: 8.0
 
 id: p08_pat_{{NAME_SLUG}}
-type: pattern
-lp: P08
+kind: pattern
+pillar: P08
 title: "Pattern: {{PATTERN_NAME}}"
 version: 1.0.0
 created: {{ISO_DATE}}

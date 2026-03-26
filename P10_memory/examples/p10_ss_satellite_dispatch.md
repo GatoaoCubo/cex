@@ -1,7 +1,7 @@
 ---
 id: p10_ss_satellite_dispatch
-type: session_state
-lp: P10
+kind: session_state
+pillar: P10
 description: "Ephemeral session state tracking active satellite dispatches"
 scope: stella_session
 version: 1.0.0

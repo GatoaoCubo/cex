@@ -1,5 +1,5 @@
 ---
-lp: P04
+pillar: P04
 llm_function: CALL
 purpose: Tools available for quality_gate production
 ---

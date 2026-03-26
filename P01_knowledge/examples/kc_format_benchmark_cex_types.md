@@ -1,7 +1,7 @@
 ---
 id: kc_format_benchmark_cex_types
-type: knowledge_card
-lp: P01
+kind: knowledge_card
+pillar: P01
 llm_function: INJECT
 title: "Benchmark de Formatos para Artefatos CEX — MD+YAML vs YAML vs JSON vs XML"
 version: 1.0.0

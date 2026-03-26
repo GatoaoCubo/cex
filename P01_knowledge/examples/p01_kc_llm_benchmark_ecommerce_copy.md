@@ -1,7 +1,7 @@
 ---
 id: p01_kc_llm_benchmark_ecommerce_copy
-type: knowledge_card
-lp: P01
+kind: knowledge_card
+pillar: P01
 title: "LLM Benchmark para Copy de E-Commerce em PT-BR"
 version: 1.0.0
 created: 2026-03-25

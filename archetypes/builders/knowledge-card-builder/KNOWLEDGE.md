@@ -1,5 +1,5 @@
 ---
-lp: P01
+pillar: P01
 llm_function: INJECT
 purpose: Standards and domain knowledge for knowledge_card production
 sources: validate_kc.py v2.0 + _schema.yaml v4.0 + 63 real examples

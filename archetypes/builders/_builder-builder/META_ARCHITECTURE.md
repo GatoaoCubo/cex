@@ -1,7 +1,7 @@
 ---
 meta: true
 file_position: 9/13
-lp: P08
+pillar: P08
 llm_function: CONSTRAIN
 purpose: Meta-template for generating ARCHITECTURE.md of any type-builder
 ---
@@ -12,7 +12,7 @@ purpose: Meta-template for generating ARCHITECTURE.md of any type-builder
 
 ```yaml
 ---
-lp: P08
+pillar: P08
 llm_function: CONSTRAIN
 purpose: Boundary, relationships, and position of {{type_name}} in the CEX fractal
 pattern: every builder must know WHERE its output fits and what it CONNECTS to

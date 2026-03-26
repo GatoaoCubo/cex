@@ -9,8 +9,8 @@ id: p04_skill_{{NAME_SLUG}}
 name: {{SKILL_KEBAB_NAME}}
 description: {{ONE_LINE_WHAT_IT_DOES}}  # TRIGGER CONDITION — when agent should invoke this skill
 version: 1.0.0
-lp: P04
-type: skill
+pillar: P04
+kind: skill
 created: {{ISO_DATE}}
 updated: {{ISO_DATE}}
 author: {{SATELLITE_NAME}}

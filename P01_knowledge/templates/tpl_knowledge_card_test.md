@@ -4,8 +4,8 @@
 
 ---
 id: p01_kc_{{topic}}
-type: knowledge_card
-lp: P01
+kind: knowledge_card
+pillar: P01
 title: "{{title}}"
 version: 1.0.0
 created: {{created_date}}

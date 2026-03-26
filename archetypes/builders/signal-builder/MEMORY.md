@@ -1,5 +1,5 @@
 ---
-lp: P10
+pillar: P10
 llm_function: INJECT
 purpose: What the builder remembers between production sessions
 pattern: stateless per invocation, but carries recurring signal patterns

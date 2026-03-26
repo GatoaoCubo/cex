@@ -4,7 +4,7 @@
 # Max 2048 bytes
 
 id: p02_lens_{{PERSPECTIVE_SLUG}}
-type: lens
+kind: lens
 perspective: {{PERSPECTIVE_NAME}}
 applies_to: [{{AGENT_OR_DOMAIN_1}}, {{AGENT_OR_DOMAIN_2}}]
 ---

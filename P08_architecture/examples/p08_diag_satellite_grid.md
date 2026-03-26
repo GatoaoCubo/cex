@@ -1,7 +1,7 @@
 ---
 id: p08_diag_satellite_grid
-type: diagram
-lp: P08
+kind: diagram
+pillar: P08
 description: "Architecture diagram of STELLA satellite grid dispatch"
 format: ascii
 scope: orchestration

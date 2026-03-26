@@ -1,7 +1,7 @@
 ---
 id: p09_env_firecrawl
-type: env_config
-lp: P09
+kind: env_config
+pillar: P09
 title: "Env: FIRECRAWL_API_KEY"
 version: 1.0.0
 created: 2026-03-22

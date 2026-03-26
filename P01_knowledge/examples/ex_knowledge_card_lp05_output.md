@@ -1,7 +1,7 @@
 ---
 id: p01_kc_lp05_output
-type: knowledge_card
-lp: P01
+kind: knowledge_card
+pillar: P01
 title: "P05 Output: O Que o Agente Entrega"
 version: 1.0.0
 created: 2026-03-23

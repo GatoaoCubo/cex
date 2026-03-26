@@ -1,6 +1,6 @@
 id: p06_bp_knowledge_card
-type: artifact_blueprint
-lp: P06
+kind: artifact_blueprint
+pillar: P06
 description: Blueprint for generating knowledge_card artifacts — defines shape, sections, limits
 format: yaml
 version: 1.0.0

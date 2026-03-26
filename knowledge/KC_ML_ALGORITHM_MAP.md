@@ -1,7 +1,7 @@
 ---
 id: KC_PYTHA_ML_UNIVERSE_MAP
-type: knowledge_card
-lp: P01
+kind: knowledge_card
+pillar: P01
 version: 1.0.0
 quality: 8.7
 source: "gdrive://CODEXA Conhecimento/Mapeando_o_Universo_do_Machine_Learning.pdf"

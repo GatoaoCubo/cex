@@ -6,8 +6,8 @@
 # Sintaxe: {{MUSTACHE}} = template engine | [BRACKET] = humano/agente decide
 
 id: p03_pt_cip_image_brief
-type: prompt_template
-lp: P03
+kind: prompt_template
+pillar: P03
 title: "CIP Image Brief"
 version: 1.0.0
 created: 2026-03-24

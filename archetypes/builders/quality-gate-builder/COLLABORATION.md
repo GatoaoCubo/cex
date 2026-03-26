@@ -1,5 +1,5 @@
 ---
-lp: P12
+pillar: P12
 llm_function: COLLABORATE
 purpose: How quality-gate-builder works in crews
 ---

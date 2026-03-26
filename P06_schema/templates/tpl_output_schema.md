@@ -4,8 +4,8 @@
 # Max 3072 bytes
 
 id: p06_os_{{SCOPE_SLUG}}
-type: output_schema
-lp: P06
+kind: output_schema
+pillar: P06
 title: "Output Schema: {{SCOPE_NAME}}"
 quality: {{QUALITY_8_TO_10}}
 ---

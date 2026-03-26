@@ -1,7 +1,7 @@
 ---
 id: p09_perm_stella_allow_block
-type: permission
-lp: P09
+kind: permission
+pillar: P09
 description: "Permission rules for STELLA orchestrator — what it can and cannot do directly"
 scope: stella
 version: 1.0.0

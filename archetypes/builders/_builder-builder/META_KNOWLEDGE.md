@@ -1,7 +1,7 @@
 ---
 meta: true
 file_position: 3/13
-lp: P01
+pillar: P01
 llm_function: INJECT
 purpose: Meta-template for generating KNOWLEDGE.md of any type-builder
 ---
@@ -13,7 +13,7 @@ purpose: Meta-template for generating KNOWLEDGE.md of any type-builder
 
 ```yaml
 ---
-lp: P01
+pillar: P01
 llm_function: INJECT
 purpose: Standards and domain knowledge for {{type_name}} production
 sources: {{sources_used}}

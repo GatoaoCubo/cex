@@ -1,7 +1,7 @@
 ---
 id: p12_crew_satellite_grid
-type: crew
-lp: P12
+kind: crew
+pillar: P12
 description: "Multi-satellite crew configuration for parallel task execution via spawn_grid"
 version: 1.0.0
 created: 2026-03-25

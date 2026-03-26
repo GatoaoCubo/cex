@@ -1,7 +1,7 @@
 ---
 id: p01_kc_skill_format_universal
-type: knowledge_card
-lp: P01
+kind: knowledge_card
+pillar: P01
 title: "Skill Format Universal — Frontmatter YAML + Markdown para Agentes LLM"
 version: 1.0.0
 created: 2026-03-26

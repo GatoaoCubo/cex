@@ -1,6 +1,6 @@
 id: p08_law_shokunin
-type: law
-lp: P08
+kind: law
+pillar: P08
 title: 'Law 13: Shokunin — Quality Excellence'
 version: 3.0.0
 created: 2026-03-22

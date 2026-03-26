@@ -4,8 +4,8 @@
 # Max 4096 bytes
 
 id: p08_diag_{{SCOPE_SLUG}}
-type: diagram
-lp: P08
+kind: diagram
+pillar: P08
 title: "Diagram: {{SCOPE_NAME}}"
 quality: {{QUALITY_8_TO_10}}
 ---

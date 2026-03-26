@@ -5,8 +5,8 @@
 # Max 4096 bytes
 
 id: p05_parser_{{TARGET_SLUG}}
-type: parser
-lp: P05
+kind: parser
+pillar: P05
 title: "Parser: {{TARGET_NAME}}"
 version: 1.0.0
 created: {{ISO_DATE}}

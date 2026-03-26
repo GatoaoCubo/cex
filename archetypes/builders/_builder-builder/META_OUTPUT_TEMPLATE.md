@@ -1,7 +1,7 @@
 ---
 meta: true
 file_position: 6/13
-lp: P05
+pillar: P05
 llm_function: PRODUCE
 purpose: Meta-template for generating OUTPUT_TEMPLATE.md of any type-builder
 ---
@@ -13,7 +13,7 @@ purpose: Meta-template for generating OUTPUT_TEMPLATE.md of any type-builder
 
 ```yaml
 ---
-lp: P05
+pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} that the LLM fills to produce a {{type_name}}
 pattern: every field here exists in SCHEMA.md — template derives, never invents
@@ -31,8 +31,8 @@ pattern: every field here exists in SCHEMA.md — template derives, never invent
 ```yaml
 ---
 id: {{id_prefix}}_{{slug_var}}
-type: {{type_name}}
-lp: {{lp}}
+kind: {{type_name}}
+pillar: {{lp}}
 <!-- NOTA: {{id_prefix}} = derivar de _schema.yaml naming. Ex: p02_mc, p01_kc, p11_qg -->
 <!-- NOTA: {{slug_var}} = parte variavel do id. Ex: {{provider}}_{{model_slug}}, {{topic_slug}} -->
 version: "1.0.0"

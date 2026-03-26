@@ -1,7 +1,7 @@
 ---
 id: p02_fb_model_cascade
-type: fallback_chain
-lp: P02
+kind: fallback_chain
+pillar: P02
 chain:
   - {model: opus, timeout: 30}
   - {model: sonnet, timeout: 15}

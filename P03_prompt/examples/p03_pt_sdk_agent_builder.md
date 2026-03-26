@@ -1,7 +1,7 @@
 ---
 id: p03_pt_sdk_agent_builder
-type: prompt_template
-lp: P03
+kind: prompt_template
+pillar: P03
 title: SDK Agent Builder - Generate Agent Artifacts from Description
 version: 1.0.0
 created: 2026-03-22

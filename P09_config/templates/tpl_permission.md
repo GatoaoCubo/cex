@@ -4,8 +4,8 @@
 # Max 3072 bytes
 
 id: p09_perm_{{SCOPE_SLUG}}
-type: permission
-lp: P09
+kind: permission
+pillar: P09
 title: "Permission: {{SCOPE_NAME}}"
 quality: {{QUALITY_8_TO_10}}
 ---

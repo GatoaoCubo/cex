@@ -1,7 +1,7 @@
 ---
 id: p08_sat_edison
-type: satellite_spec
-lp: P08
+kind: satellite_spec
+pillar: P08
 title: "Satellite: EDISON"
 version: 1.0.0
 created: 2026-03-22

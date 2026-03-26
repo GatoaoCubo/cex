@@ -4,8 +4,8 @@
 # Max 512 bytes
 
 id: p01_emb_{{MODEL_SLUG}}
-type: embedding_config
-lp: P01
+kind: embedding_config
+pillar: P01
 model_name: {{EMBEDDING_MODEL_NAME}}
 dimensions: {{DIMENSIONS_INT}}
 chunk_size: {{CHUNK_SIZE_INT}}

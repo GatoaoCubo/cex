@@ -1,5 +1,5 @@
 ---
-lp: P07
+pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of quality_gate artifacts
 ---
@@ -14,8 +14,8 @@ OUTPUT:
 ```yaml
 ---
 id: p11_qg_kc_publish
-type: quality_gate
-lp: P11
+kind: quality_gate
+pillar: P11
 title: "Gate: KC Publish"
 version: "1.0.0"
 created: "2026-03-26"
@@ -71,7 +71,7 @@ density_score: 0.92
 ```yaml
 ---
 id: quality_check
-type: quality_gate
+kind: quality_gate
 title: "Make sure it's good"
 quality: 9.0
 ---

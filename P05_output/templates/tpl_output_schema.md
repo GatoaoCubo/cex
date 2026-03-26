@@ -5,8 +5,8 @@
 # Max 1KB | density_min: 0.85 | quality_min: 8.0
 
 id: p05_os_{{FORMAT_SLUG}}
-type: output_schema
-lp: P05
+kind: output_schema
+pillar: P05
 title: "Output Schema: {{AGENT_OR_SKILL_NAME}}"
 version: 1.0.0
 created: {{ISO_DATE}}

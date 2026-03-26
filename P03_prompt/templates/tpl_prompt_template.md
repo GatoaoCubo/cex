@@ -6,8 +6,8 @@
 # Sintaxe: {{MUSTACHE}} = template engine | [BRACKET] = humano/agente decide
 
 id: p03_pt_{{TOPIC_SLUG}}
-type: prompt_template
-lp: P03
+kind: prompt_template
+pillar: P03
 title: {{TITLE_DESCRITIVO}}
 version: 1.0.0
 created: {{ISO_DATE}}

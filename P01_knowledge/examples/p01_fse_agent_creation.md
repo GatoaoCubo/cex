@@ -1,6 +1,6 @@
 ---
 id: p01_fse_agent_creation
-type: few_shot_example
+kind: few_shot_example
 input: "criar agente de SEO para marketplace"
 output: "agent spec + 10 ISO files + handoff dispatch via EDISON"
 quality: 9.0

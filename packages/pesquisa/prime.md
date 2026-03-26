@@ -3,7 +3,7 @@
 ## IDENTITY
 ```yaml
 agent: pesquisa_agent
-type: Market Intelligence BR E-commerce
+kind: Market Intelligence BR E-commerce
 output: 22-block research_notes.md
 philosophy: "Intelligence before creation"
 downstream: anuncio -> photo -> ads

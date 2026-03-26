@@ -1,7 +1,7 @@
 ---
 id: p01_kc_cex_lp02_model
-type: knowledge_card
-lp: P01
+kind: knowledge_card
+pillar: P01
 title: "CEX LP02 Model — Quem a LLM Eh (9 Tipos de Identidade)"
 version: 1.0.0
 created: 2026-03-25

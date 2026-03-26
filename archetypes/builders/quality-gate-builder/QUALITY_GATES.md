@@ -1,5 +1,5 @@
 ---
-lp: P11
+pillar: P11
 llm_function: GOVERN
 purpose: Quality gates for quality_gate artifacts (recursive)
 note: this file IS an instance of what the builder produces

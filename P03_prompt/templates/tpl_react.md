@@ -4,8 +4,8 @@
 # Max 3072 bytes
 
 id: p03_react_{{AGENT_SLUG}}
-type: react
-lp: P03
+kind: react
+pillar: P03
 tools_available: [{{TOOL_1}}, {{TOOL_2}}, {{TOOL_3}}]
 ---
 

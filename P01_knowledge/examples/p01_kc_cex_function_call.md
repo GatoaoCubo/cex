@@ -1,7 +1,7 @@
 ---
 id: p01_kc_cex_function_call
-type: knowledge_card
-lp: P01
+kind: knowledge_card
+pillar: P01
 title: "CEX Function CALL — Tool Invocation Beyond Text Generation"
 version: 1.0.0
 created: 2026-03-25

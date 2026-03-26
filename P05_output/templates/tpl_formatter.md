@@ -5,8 +5,8 @@
 # Max 4096 bytes
 
 id: p05_fmt_{{FORMAT_SLUG}}
-type: formatter
-lp: P05
+kind: formatter
+pillar: P05
 title: "Formatter: {{OUTPUT_NAME}}"
 version: 1.0.0
 created: {{ISO_DATE}}

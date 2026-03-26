@@ -1,7 +1,7 @@
 ---
 id: p01_kc_test_chain_validation
-type: knowledge_card
-lp: P01
+kind: knowledge_card
+pillar: P01
 title: "CEX Chain Validation - Meta-Template to Instance Pipeline"
 version: 1.0.0
 created: 2026-03-22

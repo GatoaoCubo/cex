@@ -1,7 +1,7 @@
 ---
 id: p06_is_quality_audit
-type: input_schema
-lp: P06
+kind: input_schema
+pillar: P06
 title: "Input Schema: Quality Audit Pipeline"
 version: 1.0.0
 created: 2026-03-22

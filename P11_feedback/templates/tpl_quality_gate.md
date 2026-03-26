@@ -5,8 +5,8 @@
 # Max 1024 bytes | density_min: 0.80 | quality_min: 8.0
 
 id: p11_qg_{{GATE_SLUG}}
-type: quality_gate
-lp: P11
+kind: quality_gate
+pillar: P11
 title: "Gate: {{GATE_NAME}}"
 version: 1.0.0
 created: {{ISO_DATE}}

@@ -4,7 +4,7 @@
 # Max 1024 bytes
 
 id: p03_ins_[topic_slug]
-type: instruction
+kind: instruction
 target: [agente_ou_skill_alvo]
 steps: [[passo_1], [passo_2], [passo_3]]
 ---

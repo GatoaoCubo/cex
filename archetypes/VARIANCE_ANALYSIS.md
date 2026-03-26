@@ -43,8 +43,8 @@
 ```yaml
 # Frontmatter
 id: {type}-builder
-type: type_builder
-lp: {LP}
+kind: type_builder
+pillar: {LP}
 parent: {parent_chief} [PLANNED]
 domain: {type}
 llm_function: {BECOME|COLLABORATE|GOVERN}

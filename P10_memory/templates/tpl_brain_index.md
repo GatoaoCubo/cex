@@ -4,8 +4,8 @@
 # Max 3072 bytes
 
 id: p10_bi_{{INDEX_SLUG}}
-type: brain_index
-lp: P10
+kind: brain_index
+pillar: P10
 title: "Brain Index: {{INDEX_NAME}}"
 quality: {{QUALITY_8_TO_10}}
 ---

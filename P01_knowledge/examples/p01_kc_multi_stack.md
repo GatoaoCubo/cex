@@ -1,7 +1,7 @@
 ---
 id: p01_kc_multi_stack
-type: knowledge_card
-lp: P01
+kind: knowledge_card
+pillar: P01
 title: "Multi-Stack Design Knowledge Architecture — 13 Stacks, Zero Duplication"
 version: 1.0.0
 created: 2026-03-26

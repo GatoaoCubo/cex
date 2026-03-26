@@ -1,7 +1,7 @@
 ---
 meta: true
 file_position: 10/13
-lp: P09
+pillar: P09
 llm_function: CONSTRAIN
 purpose: Meta-template for generating CONFIG.md of any type-builder
 ---
@@ -12,7 +12,7 @@ purpose: Meta-template for generating CONFIG.md of any type-builder
 
 ```yaml
 ---
-lp: P09
+pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming conventions, file paths, size limits, operational constraints
 pattern: CONFIG restricts SCHEMA, never contradicts it

@@ -1,5 +1,5 @@
 id: p01_fse_agent_creation
-type: few_shot_example
+kind: few_shot_example
 input: '"criar agente de SEO para marketplace"'
 output: "operation: agent_create\ndomain: SEO\ncontext: marketplace\nsatellite: edison\nresult:\n  agent_name: seo_marketplace\n\
   \  path: records/agents/seo_marketplace/\n  files_created: 10\n  iso_tier: standard"

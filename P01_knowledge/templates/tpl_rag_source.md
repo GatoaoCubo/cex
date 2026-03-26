@@ -4,7 +4,7 @@
 # Max 1024 bytes | usar placeholders concretos
 
 id: p01_rs_[source_slug]
-type: rag_source
+kind: rag_source
 url: [https://fonte.exemplo/pagina]
 domain: [dominio_da_fonte]
 last_checked: [yyyy-mm-dd]

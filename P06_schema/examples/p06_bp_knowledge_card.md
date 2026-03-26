@@ -1,7 +1,7 @@
 ---
 id: p06_bp_knowledge_card
-type: artifact_blueprint
-lp: P06
+kind: artifact_blueprint
+pillar: P06
 llm_function: CONSTRAIN
 title: "Blueprint: knowledge_card — Meta-Template para Producao de KCs"
 version: 2.0.0
@@ -39,8 +39,8 @@ topic_slug: snake_case, sem satellite prefix, descritivo.
 ---
 # REQUIRED (13) — vazio = KC INVALIDO
 id: p01_kc_{{topic_slug}}       # == filename stem
-type: knowledge_card
-lp: P01
+kind: knowledge_card
+pillar: P01
 title: "{{5-100 chars}}"        # BM25 primary signal
 version: "{{semver}}"
 created: "{{YYYY-MM-DD}}"
@@ -161,8 +161,8 @@ title + tldr sao os campos primarios de BM25 ranking.
 ```yaml
 ---
 id: p01_kc_prompt_caching_basics
-type: knowledge_card
-lp: P01
+kind: knowledge_card
+pillar: P01
 title: "Prompt Caching Reduces LLM Cost by 90%"
 version: 1.0.0
 created: 2026-03-25

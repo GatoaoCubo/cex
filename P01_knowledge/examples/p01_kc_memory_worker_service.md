@@ -1,7 +1,7 @@
 ---
 id: p01_kc_memory_worker_service
-type: knowledge_card
-lp: P01
+kind: knowledge_card
+pillar: P01
 title: "Background Worker Service Pattern for LLM Memory Daemons"
 version: 1.0.0
 created: 2026-03-26

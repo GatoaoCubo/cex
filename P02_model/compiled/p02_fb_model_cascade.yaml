@@ -1,6 +1,6 @@
 id: p02_fb_model_cascade
-type: fallback_chain
-lp: P02
+kind: fallback_chain
+pillar: P02
 chain: 'opus > sonnet > haiku. Never skip. Trigger: timeout or error.'
 timeout_per_step: varies
 quality: 9.0

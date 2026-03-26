@@ -1,6 +1,6 @@
 id: p07_sr_5d_scoring
-type: scoring_rubric
-lp: P07
+kind: scoring_rubric
+pillar: P07
 title: 'Scoring Rubric: 5D Quality Framework'
 version: 1.0.0
 created: 2026-03-22

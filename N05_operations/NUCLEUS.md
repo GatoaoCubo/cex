@@ -1,6 +1,6 @@
 ---
 id: n05
-type: nucleus
+kind: nucleus
 label: "Operacoes & Automacao"
 function: operations
 created: 2026-03-26

@@ -1,6 +1,6 @@
 ---
 id: n04
-type: nucleus
+kind: nucleus
 label: "Conhecimento & Seguranca"
 function: knowledge
 created: 2026-03-26

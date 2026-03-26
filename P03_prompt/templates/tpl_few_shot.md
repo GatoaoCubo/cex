@@ -5,8 +5,8 @@
 # Max 4096 bytes
 
 id: p03_fs_{{TASK_SLUG}}
-type: few_shot
-lp: P03
+kind: few_shot
+pillar: P03
 task: {{TASK_DESCRIPTION}}
 examples_count: {{N}}
 ---

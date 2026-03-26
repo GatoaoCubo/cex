@@ -1,13 +1,13 @@
 ---
 id: p04_client_groq_whisper
-type: client
+kind: client
 name: groq_whisper
 base_url: "https://api.groq.com/openai/v1"
 auth_method: api_key
 endpoints:
   - method: POST
     path: /audio/transcriptions
-lp: P04
+pillar: P04
 version: 1.0.0
 created: 2026-03-24
 author: edison

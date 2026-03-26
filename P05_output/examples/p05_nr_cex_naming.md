@@ -1,7 +1,7 @@
 ---
 id: p05_nr_cex_naming
-type: naming_rule
-lp: P05
+kind: naming_rule
+pillar: P05
 title: "Naming Rule: CEX File System"
 version: 1.0.0
 created: 2026-03-22

@@ -5,8 +5,8 @@
 # Max 2048 bytes | density_min: 0.80 | quality_min: 8.0
 
 id: p12_ho_{{TASK_SLUG}}
-type: handoff
-lp: P12
+kind: handoff
+pillar: P12
 title: "Handoff: {{TASK_NAME}}"
 version: 1.0.0
 created: {{ISO_DATE}}

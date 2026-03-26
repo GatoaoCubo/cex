@@ -1,7 +1,7 @@
 ---
 id: p06_bp_model_card
-type: artifact_blueprint
-lp: P06
+kind: artifact_blueprint
+pillar: P06
 llm_function: CONSTRAIN
 title: "Blueprint: model_card — Meta-Template para Producao de Model Cards"
 version: 1.0.0
@@ -54,8 +54,8 @@ Source: ATLAS-CODEX recomenda 4 blocos separados; este frontmatter achata em YAM
 ---
 # CEX IDENTITY (7) — REQUIRED — padrao CEX, mesmo de KC
 id: p02_mc_{{provider}}_{{model_slug}}  # == filename stem
-type: model_card
-lp: P02
+kind: model_card
+pillar: P02
 version: "{{semver}}"
 created: "{{YYYY-MM-DD}}"
 updated: "{{YYYY-MM-DD}}"
@@ -274,8 +274,8 @@ model_card eh dependencia de: boot_config (selecao), router (custo/capacidade), 
 ```yaml
 ---
 id: p02_mc_anthropic_sonnet_4
-type: model_card
-lp: P02
+kind: model_card
+pillar: P02
 version: 1.0.0
 created: 2026-03-26
 updated: 2026-03-26
@@ -367,7 +367,7 @@ model_card NAO EH: boot_config, agent, benchmark.
 ```yaml
 ---
 id: mc_gpt4                    # FAIL: sem prefixo p02_mc_, sem provider
-type: model_card
+kind: model_card
 model_name: GPT-4              # FAIL: nome informal, nao eh id oficial
 provider: OpenAI               # FAIL: deve ser lowercase
 context_window: "128K"         # FAIL: string, nao integer

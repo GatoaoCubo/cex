@@ -1,7 +1,7 @@
 ---
 id: p05_fmt_agent_markdown
-type: formatter
-lp: P05
+kind: formatter
+pillar: P05
 title: "Formatter: Agent Markdown Response"
 version: 1.0.0
 created: 2026-03-22

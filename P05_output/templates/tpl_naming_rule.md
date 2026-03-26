@@ -4,8 +4,8 @@
 # Max 4096 bytes
 
 id: p05_nr_{{SCOPE_SLUG}}
-type: naming_rule
-lp: P05
+kind: naming_rule
+pillar: P05
 title: "Naming Rule: {{SCOPE_NAME}}"
 version: 1.0.0
 created: {{ISO_DATE}}

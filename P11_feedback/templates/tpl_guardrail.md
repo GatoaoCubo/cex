@@ -4,8 +4,8 @@
 # Max 4096 bytes
 
 id: p11_gr_{{SCOPE_SLUG}}
-type: guardrail
-lp: P11
+kind: guardrail
+pillar: P11
 title: "Guardrail: {{SCOPE_NAME}}"
 quality: {{QUALITY_8_TO_10}}
 ---

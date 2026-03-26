@@ -1,5 +1,5 @@
 ---
-lp: P01
+pillar: P01
 llm_function: INJECT
 purpose: Operational knowledge and patterns for signal production
 sources: P12 schema + P12 examples + codexa-core signal_writer.py

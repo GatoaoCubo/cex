@@ -1,5 +1,5 @@
 ---
-lp: P09
+pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for quality_gate production
 pattern: CONFIG restricts SCHEMA, never contradicts

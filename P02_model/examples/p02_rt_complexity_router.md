@@ -1,7 +1,7 @@
 ---
 id: p02_rt_complexity_router
-type: router
-lp: P02
+kind: router
+pillar: P02
 routes:
   - {threshold: 0.45, target: local}
   - {threshold: 0.70, target: hybrid}

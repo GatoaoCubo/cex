@@ -1,7 +1,7 @@
 ---
 id: p03_mp_system_prompt_generator
-type: meta_prompt
-lp: P03
+kind: meta_prompt
+pillar: P03
 title: Meta-Prompt for System Prompt Generation
 target_type: system_prompt
 optimization_method: manual_review_and_score

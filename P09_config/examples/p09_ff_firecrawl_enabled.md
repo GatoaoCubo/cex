@@ -1,7 +1,7 @@
 ---
 id: p09_ff_firecrawl_enabled
-type: feature_flag
-lp: P09
+kind: feature_flag
+pillar: P09
 title: "Flag: FIRECRAWL_ENABLED"
 version: 1.0.0
 created: 2026-03-22

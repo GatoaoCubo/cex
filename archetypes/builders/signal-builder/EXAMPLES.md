@@ -1,5 +1,5 @@
 ---
-lp: P07
+pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of signal artifacts
 pattern: few-shot learning for minimal orchestration events

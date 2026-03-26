@@ -1,7 +1,7 @@
 ---
 id: p07_e2e_cex_forge_pipeline
-type: e2e_eval
-lp: P07
+kind: e2e_eval
+pillar: P07
 description: "End-to-end test of CEX artifact generation pipeline"
 pipeline: forge_validate_compile
 version: 1.0.0

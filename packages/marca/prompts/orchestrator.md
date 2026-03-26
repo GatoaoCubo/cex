@@ -11,7 +11,7 @@
 ```yaml
 workflow: MARCA_STRATEGY_ORCHESTRATOR
 version: 2.0.0
-type: sequential
+kind: sequential
 satellite: LILY
 agent: marca-agent
 phases: 5

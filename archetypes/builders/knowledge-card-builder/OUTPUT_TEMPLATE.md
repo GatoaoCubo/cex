@@ -1,5 +1,5 @@
 ---
-lp: P05
+pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} for knowledge_card production
 pattern: every field here exists in SCHEMA.md — template derives, never invents
@@ -10,8 +10,8 @@ pattern: every field here exists in SCHEMA.md — template derives, never invent
 ```yaml
 ---
 id: p01_kc_{{topic_slug}}
-type: knowledge_card
-lp: P01
+kind: knowledge_card
+pillar: P01
 title: "{{Title 5-100 chars}}"
 version: "1.0.0"
 created: "{{YYYY-MM-DD}}"

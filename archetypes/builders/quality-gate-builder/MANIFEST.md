@@ -1,7 +1,7 @@
 ---
 id: quality-gate-builder
-type: type_builder
-lp: P11
+kind: type_builder
+pillar: P11
 parent: p11-chief [PLANNED]
 domain: quality_gate
 llm_function: BECOME

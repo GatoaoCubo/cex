@@ -5,8 +5,8 @@
 # Max 2048 bytes | density_min: 0.80 | quality_min: 8.0
 
 id: p12_wf_{{NAME_SLUG}}
-type: workflow
-lp: P12
+kind: workflow
+pillar: P12
 title: "Workflow: {{WORKFLOW_NAME}}"
 version: 1.0.0
 created: {{ISO_DATE}}

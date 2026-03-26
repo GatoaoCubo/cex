@@ -1,7 +1,7 @@
 {
   "id": "p05_os_security_audit",
-  "type": "output_schema",
-  "lp": "P05",
+  "kind": "output_schema",
+  "pillar": "P05",
   "title": "Output Schema: Access Control Audit Report",
   "version": "1.0.0",
   "created": "2026-03-22",

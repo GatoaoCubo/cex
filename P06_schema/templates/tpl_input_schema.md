@@ -5,8 +5,8 @@
 # Max 1KB | density_min: 0.85 | quality_min: 8.0
 
 id: p06_is_{{SCOPE_SLUG}}
-type: input_schema
-lp: P06
+kind: input_schema
+pillar: P06
 title: "Input Schema: {{AGENT_OR_SKILL_NAME}}"
 version: 1.0.0
 created: {{ISO_DATE}}

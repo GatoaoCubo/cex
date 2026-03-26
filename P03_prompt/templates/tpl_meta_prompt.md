@@ -4,8 +4,8 @@
 # Max 4096 bytes
 
 id: p03_mp_{{PURPOSE_SLUG}}
-type: meta_prompt
-lp: P03
+kind: meta_prompt
+pillar: P03
 target_prompt_type: {{system_prompt|user_prompt|prompt_template|etc}}
 optimization_goal: {{OBJETIVO}}
 ---

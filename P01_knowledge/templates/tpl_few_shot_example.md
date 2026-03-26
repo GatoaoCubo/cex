@@ -4,8 +4,8 @@
 # Max 1024 bytes
 
 id: p01_fse_{{TOPIC_SLUG}}
-type: few_shot_example
-lp: P01
+kind: few_shot_example
+pillar: P01
 title: "{{EXAMPLE_TITLE}}"
 input: {{INPUT_SUMMARY}}
 output: {{OUTPUT_SUMMARY}}

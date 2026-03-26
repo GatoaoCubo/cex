@@ -1,7 +1,7 @@
 ---
 id: p01_kc_cex_cortex_enterprise
-type: knowledge_card
-lp: P01
+kind: knowledge_card
+pillar: P01
 title: "CEX Cortex Enterprise — Modular LLM Brain with CEO Orchestrator and Satellite Departments"
 version: 1.0.0
 created: 2026-03-25

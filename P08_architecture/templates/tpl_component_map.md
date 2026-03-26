@@ -4,8 +4,8 @@
 # Max 3072 bytes
 
 id: p08_cmap_{{SCOPE_SLUG}}
-type: component_map
-lp: P08
+kind: component_map
+pillar: P08
 title: "Component Map: {{SCOPE_NAME}}"
 quality: {{QUALITY_8_TO_10}}
 ---

@@ -4,8 +4,8 @@
 # Max 3072 bytes
 
 id: p08_law_{{NUMBER}}
-type: law
-lp: P08
+kind: law
+pillar: P08
 title: "LAW {{NUMBER}}: {{LAW_NAME}}"
 quality: {{QUALITY_8_TO_10}}
 ---

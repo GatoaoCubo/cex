@@ -5,8 +5,8 @@
 # Max 2048 bytes | density_min: 0.80 | quality_min: 8.0
 
 id: p11_bl_{{SCOPE_SLUG}}
-type: bugloop
-lp: P11
+kind: bugloop
+pillar: P11
 title: "Bugloop: {{SCOPE_NAME}}"
 version: 1.0.0
 created: {{ISO_DATE}}

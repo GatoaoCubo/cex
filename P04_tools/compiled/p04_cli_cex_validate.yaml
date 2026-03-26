@@ -1,7 +1,7 @@
 id: p04_cli_cex_validate
-type: cli_tool
+kind: cli_tool
 name: cex_validate
-lp: P04
+pillar: P04
 version: 1.0.0
 created: 2026-03-24
 author: edison

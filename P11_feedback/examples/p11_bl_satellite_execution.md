@@ -1,7 +1,7 @@
 ---
 id: p11_bl_satellite_execution
-type: bugloop
-lp: P11
+kind: bugloop
+pillar: P11
 title: "Bugloop: Satellite Execution Resilience"
 version: 1.0.0
 created: 2026-03-22

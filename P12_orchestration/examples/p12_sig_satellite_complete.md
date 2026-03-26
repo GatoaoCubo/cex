@@ -1,7 +1,7 @@
 ---
 id: p12_sig_satellite_complete
-type: signal
-lp: P12
+kind: signal
+pillar: P12
 description: "Completion signal emitted by satellite after task execution"
 event: satellite_complete
 format: json

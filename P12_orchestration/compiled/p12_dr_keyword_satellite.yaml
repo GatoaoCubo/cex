@@ -1,6 +1,6 @@
 id: p12_dr_keyword_satellite
-type: dispatch_rule
-lp: P12
+kind: dispatch_rule
+pillar: P12
 description: Keyword-to-satellite routing rules for STELLA auto-dispatch
 scope: stella_routing
 version: 1.0.0

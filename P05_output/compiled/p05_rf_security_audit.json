@@ -1,7 +1,7 @@
 {
   "id": "p05_rf_security_audit",
-  "type": "response_format",
-  "lp": "P05",
+  "kind": "response_format",
+  "pillar": "P05",
   "title": "Output Schema: Access Control Audit Report",
   "version": "1.0.0",
   "created": "2026-03-22",

@@ -5,8 +5,8 @@
 # Max 512 bytes | density_min: 0.80 | quality_min: 8.0
 
 id: p09_env_{{SCOPE}}
-type: env_config
-lp: P09
+kind: env_config
+pillar: P09
 title: "Env: {{VAR_NAME}}"
 version: 1.0.0
 created: {{ISO_DATE}}

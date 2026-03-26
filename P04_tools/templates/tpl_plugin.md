@@ -4,7 +4,7 @@
 # Max 2048 bytes
 
 id: p04_plug_{{PLUGIN_SLUG}}
-type: plugin
+kind: plugin
 name: {{PLUGIN_NAME}}
 version: 1.0.0
 entrypoint: {{MODULE_OR_COMMAND}}

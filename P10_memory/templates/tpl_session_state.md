@@ -4,8 +4,8 @@
 # Max 3072 bytes
 
 id: p10_ss_[session_slug]
-type: session_state
-lp: P10
+kind: session_state
+pillar: P10
 title: [snapshot_da_sessao]
 version: 1.0.0
 created: [yyyy-mm-dd]

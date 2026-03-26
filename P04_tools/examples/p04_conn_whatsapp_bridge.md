@@ -1,11 +1,11 @@
 ---
 id: p04_conn_whatsapp_bridge
-type: connector
+kind: connector
 name: whatsapp_bridge
 protocol: REST
 direction: bidirectional
 auth: session
-lp: P04
+pillar: P04
 version: 3.0.0
 created: 2026-03-24
 author: edison

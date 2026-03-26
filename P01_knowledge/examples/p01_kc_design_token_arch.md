@@ -1,7 +1,7 @@
 ---
 id: p01_kc_design_token_arch
-type: knowledge_card
-lp: P01
+kind: knowledge_card
+pillar: P01
 title: "Design Token Architecture — Three-Layer System for Scalable Theming"
 version: 1.0.0
 created: 2026-03-26

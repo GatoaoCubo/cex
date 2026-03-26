@@ -5,8 +5,8 @@
 # Max 2KB | density_min: 0.85 | quality_min: 9.5
 
 id: p07_gt_{{CASE_SLUG}}
-type: golden_test
-lp: P07
+kind: golden_test
+pillar: P07
 title: "Golden Test: {{REFERENCE_CASE_NAME}}"
 version: 1.0.0
 created: {{ISO_DATE}}

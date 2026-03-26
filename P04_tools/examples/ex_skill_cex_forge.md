@@ -17,8 +17,8 @@ examples:
   - "python cex_forge.py --lp P01 --type knowledge_card --seeds 'RAG,embeddings' --context 'texto sobre RAG'"
   - "python cex_forge.py --lp P02 --type agent --seeds 'scraper,web' --context-file notes.md"
   - "python cex_forge.py --list-types --lp P04"
-lp: P04
-type: skill
+pillar: P04
+kind: skill
 version: 1.0.0
 created: 2026-03-23
 updated: 2026-03-23

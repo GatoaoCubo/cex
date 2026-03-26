@@ -1,7 +1,7 @@
 ---
 id: p01_kc_memory_privacy_controls
-type: knowledge_card
-lp: P01
+kind: knowledge_card
+pillar: P01
 title: "Edge-Layer Privacy Controls for LLM Agent Memory Systems"
 version: 1.0.0
 created: 2026-03-26

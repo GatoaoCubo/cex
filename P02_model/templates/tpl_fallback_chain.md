@@ -4,7 +4,7 @@
 # Max 512 bytes
 
 id: p02_fb_{{CHAIN_SLUG}}
-type: fallback_chain
+kind: fallback_chain
 chain: [{{STEP_1}}, {{STEP_2}}, {{STEP_3}}]
 timeout_per_step: {{SECONDS_INT}}
 ---

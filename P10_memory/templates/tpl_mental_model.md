@@ -5,8 +5,8 @@
 # Max 2048 bytes | density_min: 0.80 | quality_min: 8.0
 
 id: p10_mm_{{AGENT_SLUG}}
-type: mental_model
-lp: P10
+kind: mental_model
+pillar: P10
 title: "Mental Model: {{AGENT_NAME}}"
 version: 1.0.0
 created: {{ISO_DATE}}

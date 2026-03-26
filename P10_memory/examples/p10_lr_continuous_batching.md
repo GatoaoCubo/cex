@@ -1,7 +1,7 @@
 ---
 id: p10_lr_continuous_batching
-type: learning_record
-lp: P10
+kind: learning_record
+pillar: P10
 title: "Learning: Continuous Batching Performance"
 version: 1.0.0
 created: 2026-03-05

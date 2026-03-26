@@ -1,5 +1,5 @@
 ---
-lp: P05
+pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} that the LLM fills to produce a signal
 pattern: every field here exists in SCHEMA.md; template derives, never invents

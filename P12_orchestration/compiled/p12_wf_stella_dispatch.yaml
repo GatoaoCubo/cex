@@ -1,6 +1,6 @@
 id: p12_wf_stella_dispatch
-type: workflow
-lp: P12
+kind: workflow
+pillar: P12
 title: 'Workflow: STELLA 5-Phase Dispatch'
 version: 1.0.0
 created: 2026-03-22

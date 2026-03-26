@@ -1,7 +1,7 @@
 ---
 id: p03_sp_code_reviewer
-type: system_prompt
-lp: P03
+kind: system_prompt
+pillar: P03
 title: System Prompt do Code Reviewer Agent
 target_agent: code-reviewer
 quality: 9.0

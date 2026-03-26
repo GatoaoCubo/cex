@@ -1,6 +1,6 @@
 id: p03_plan_task_decomposition
-type: planner
-lp: P03
+kind: planner
+pillar: P03
 description: Planner prompt that decomposes complex tasks into executable step sequences
 version: 1.0.0
 created: 2026-03-25

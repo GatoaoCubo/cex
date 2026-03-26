@@ -1,5 +1,5 @@
 ---
-lp: P05
+pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} for quality_gate production
 pattern: derives from SCHEMA.md — no extra fields
@@ -10,8 +10,8 @@ pattern: derives from SCHEMA.md — no extra fields
 ```yaml
 ---
 id: p11_qg_{{gate_slug}}
-type: quality_gate
-lp: P11
+kind: quality_gate
+pillar: P11
 title: "Gate: {{gate_name}}"
 version: "1.0.0"
 created: "{{YYYY-MM-DD}}"

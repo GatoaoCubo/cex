@@ -1,7 +1,7 @@
 ---
 id: p01_kc_cex_lp06_schema
-type: knowledge_card
-lp: P01
+kind: knowledge_card
+pillar: P01
 title: "CEX LP06 Schema — Data Contracts That Constrain LLM Output"
 version: 1.0.0
 created: 2026-03-25

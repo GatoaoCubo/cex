@@ -1,7 +1,7 @@
 ---
 meta: true
 file_position: 13/13
-lp: P12
+pillar: P12
 llm_function: COLLABORATE
 purpose: Meta-template for generating COLLABORATION.md of any type-builder
 ---
@@ -12,7 +12,7 @@ purpose: Meta-template for generating COLLABORATION.md of any type-builder
 
 ```yaml
 ---
-lp: P12
+pillar: P12
 llm_function: COLLABORATE
 purpose: How {{builder_name}} works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES

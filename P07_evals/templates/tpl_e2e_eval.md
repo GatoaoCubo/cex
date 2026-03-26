@@ -4,8 +4,8 @@
 # Max 4096 bytes
 
 id: p07_e2e_[pipeline_slug]
-type: e2e_eval
-lp: P07
+kind: e2e_eval
+pillar: P07
 title: [e2e_eval_do_pipeline]
 version: 1.0.0
 created: [yyyy-mm-dd]

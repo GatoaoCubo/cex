@@ -4,8 +4,8 @@
 # Max 2048 bytes
 
 id: p03_cot_{{TASK_SLUG}}
-type: chain_of_thought
-lp: P03
+kind: chain_of_thought
+pillar: P03
 reasoning_type: {{step_by_step|tree|free}}
 ---
 

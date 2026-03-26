@@ -1,5 +1,5 @@
 ---
-lp: P03
+pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for knowledge_card
 pattern: 3-phase pipeline (research -> compose -> validate)

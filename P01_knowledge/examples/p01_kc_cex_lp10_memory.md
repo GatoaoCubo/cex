@@ -1,7 +1,7 @@
 ---
 id: p01_kc_cex_lp10_memory
-type: knowledge_card
-lp: P01
+kind: knowledge_card
+pillar: P01
 title: "CEX LP10 Memory — Working Memory and State for LLM Agents"
 version: 1.0.0
 created: 2026-03-25

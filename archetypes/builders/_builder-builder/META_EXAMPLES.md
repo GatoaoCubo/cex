@@ -1,7 +1,7 @@
 ---
 meta: true
 file_position: 8/13
-lp: P07
+pillar: P07
 llm_function: GOVERN
 purpose: Meta-template for generating EXAMPLES.md of any type-builder
 ---
@@ -13,7 +13,7 @@ purpose: Meta-template for generating EXAMPLES.md of any type-builder
 
 ```yaml
 ---
-lp: P07
+pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of {{type_name}} artifacts
 pattern: few-shot learning — LLM reads these before producing

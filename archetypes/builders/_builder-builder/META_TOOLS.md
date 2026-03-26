@@ -1,7 +1,7 @@
 ---
 meta: true
 file_position: 5/13
-lp: P04
+pillar: P04
 llm_function: CALL
 purpose: Meta-template for generating TOOLS.md of any type-builder
 ---
@@ -12,7 +12,7 @@ purpose: Meta-template for generating TOOLS.md of any type-builder
 
 ```yaml
 ---
-lp: P04
+pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for {{type_name}} production
 ---

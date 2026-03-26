@@ -1,7 +1,7 @@
 ---
 id: p07_bm_satellite_boot_time
-type: benchmark
-lp: P07
+kind: benchmark
+pillar: P07
 description: "Benchmark for satellite boot times across all providers"
 metric: boot_time_seconds
 version: 1.0.0

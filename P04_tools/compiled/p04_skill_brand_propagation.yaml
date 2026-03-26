@@ -15,8 +15,8 @@ examples:
 - /brand sync
 - /brand generate --format css
 - /brand inject --satellite lily --task 'gerar copy para Instagram'
-lp: P04
-type: skill
+pillar: P04
+kind: skill
 version: 1.0.0
 created: 2026-03-24
 updated: 2026-03-24

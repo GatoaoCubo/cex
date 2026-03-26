@@ -4,8 +4,8 @@
 # Max 1024 bytes
 
 id: p04_client_{{API_SLUG}}
-type: client
-lp: P04
+kind: client
+pillar: P04
 title: "Client: {{API_NAME}}"
 quality: {{QUALITY_7_TO_10}}
 ---

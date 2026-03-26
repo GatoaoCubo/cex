@@ -4,8 +4,8 @@
 # Max 3072 bytes
 
 id: p09_rr_{{RULE_SLUG}}
-type: runtime_rule
-lp: P09
+kind: runtime_rule
+pillar: P09
 title: "Runtime Rule: {{RULE_NAME}}"
 quality: {{QUALITY_8_TO_10}}
 ---

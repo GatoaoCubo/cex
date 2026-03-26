@@ -5,8 +5,8 @@
 # Max 512B | density_min: 0.90 | quality_min: 8.0
 
 id: p06_val_{{RULE_SLUG}}
-type: validator
-lp: P06
+kind: validator
+pillar: P06
 title: "Validator: {{WHAT_IT_VALIDATES}}"
 version: 1.0.0
 created: {{ISO_DATE}}

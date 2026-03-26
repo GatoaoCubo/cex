@@ -1,8 +1,8 @@
 ---
 id: p04_scraper_awesome_list
-type: scraper
+kind: scraper
 name: awesome_list_crawler
-lp: P04
+pillar: P04
 version: 1.0.0
 created: 2026-03-24
 author: edison

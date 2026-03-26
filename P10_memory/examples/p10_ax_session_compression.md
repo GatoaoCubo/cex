@@ -1,7 +1,7 @@
 ---
 id: p10_ax_session_compression
-type: axiom
-lp: P10
+kind: axiom
+pillar: P10
 title: "Axiom: Session Compression (Dual-ID Pattern)"
 version: 1.0.0
 created: 2026-03-24

@@ -1,5 +1,5 @@
 ---
-lp: P03
+pillar: P03
 llm_function: BECOME
 purpose: Persona and operational rules for knowledge-card-builder
 ---

@@ -1,6 +1,6 @@
 id: p08_pat_continuous_batching
-type: pattern
-lp: P08
+kind: pattern
+pillar: P08
 title: 'Pattern: Continuous Batching (Satellite Grid)'
 version: 1.0.0
 created: 2026-03-22

@@ -1,7 +1,7 @@
 ---
 meta: true
 file_position: 11/13
-lp: P10
+pillar: P10
 llm_function: INJECT
 purpose: Meta-template for generating MEMORY.md of any type-builder
 ---
@@ -13,7 +13,7 @@ purpose: Meta-template for generating MEMORY.md of any type-builder
 
 ```yaml
 ---
-lp: P10
+pillar: P10
 llm_function: INJECT
 purpose: What the builder remembers between production sessions
 pattern: stateless per invocation, but carries accumulated patterns

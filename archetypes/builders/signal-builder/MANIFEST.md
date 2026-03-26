@@ -1,7 +1,7 @@
 ---
 id: signal-builder
-type: type_builder
-lp: P12
+kind: type_builder
+pillar: P12
 domain: signal
 llm_function: COLLABORATE
 version: 1.0.0

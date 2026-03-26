@@ -108,8 +108,8 @@ Every artifact must include:
 ```yaml
 ---
 id: p01_kc_topic_name
-type: domain_kc
-lp: P01
+kind: domain_kc
+pillar: P01
 quality: 8.5
 tags: [tag1, tag2, tag3]
 tldr: "One-line summary under 80 chars"

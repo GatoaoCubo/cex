@@ -1,7 +1,7 @@
 ---
 id: p01_kc_cex_llm_function_concept
-type: knowledge_card
-lp: P01
+kind: knowledge_card
+pillar: P01
 title: "CEX LLM Functions — 8 Pipeline Stages from BECOME to COLLABORATE"
 version: 1.0.0
 created: 2026-03-25

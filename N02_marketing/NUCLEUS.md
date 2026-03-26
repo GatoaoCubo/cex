@@ -1,6 +1,6 @@
 ---
 id: n02
-type: nucleus
+kind: nucleus
 label: "Marketing & Comunicacao"
 function: marketing
 created: 2026-03-26

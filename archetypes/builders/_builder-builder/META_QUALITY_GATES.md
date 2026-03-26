@@ -1,7 +1,7 @@
 ---
 meta: true
 file_position: 12/13
-lp: P11
+pillar: P11
 llm_function: GOVERN
 purpose: Meta-template for generating QUALITY_GATES.md of any type-builder
 ---
@@ -13,7 +13,7 @@ purpose: Meta-template for generating QUALITY_GATES.md of any type-builder
 
 ```yaml
 ---
-lp: P11
+pillar: P11
 llm_function: GOVERN
 purpose: Automated quality gates for {{type_name}} validation
 pattern: HARD gates block publish, SOFT gates contribute to 0-10 score

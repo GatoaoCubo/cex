@@ -4,8 +4,8 @@
 # Max 3072 bytes
 
 id: p07_se_{{SCOPE_SLUG}}
-type: smoke_eval
-lp: P07
+kind: smoke_eval
+pillar: P07
 title: "Smoke Eval: {{SCOPE_NAME}}"
 quality: {{QUALITY_8_TO_10}}
 ---

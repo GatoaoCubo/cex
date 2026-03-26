@@ -1,7 +1,7 @@
 ---
 meta: true
 file_position: 1/13
-lp: P02
+pillar: P02
 llm_function: BECOME
 purpose: Meta-template for generating MANIFEST.md of any type-builder
 ---
@@ -21,8 +21,8 @@ purpose: Meta-template for generating MANIFEST.md of any type-builder
 ```yaml
 ---
 id: {{builder_name}}
-type: type_builder
-lp: {{lp}}
+kind: type_builder
+pillar: {{lp}}
 parent: {{lp_chief}} [PLANNED]
 domain: {{type_name}}
 llm_function: BECOME

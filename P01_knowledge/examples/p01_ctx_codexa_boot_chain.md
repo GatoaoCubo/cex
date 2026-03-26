@@ -1,6 +1,6 @@
 ---
 id: p01_ctx_codexa_boot_chain
-type: context_doc
+kind: context_doc
 domain: architecture
 scope: boot_initialization
 ---

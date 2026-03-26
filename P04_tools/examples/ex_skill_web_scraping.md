@@ -3,8 +3,8 @@ id: p04_skill_web_scraping
 name: web-scraping
 description: Pipeline de web scraping com selecao automatica de estrategia (static/dynamic/API/stealth)
 version: 1.0.0
-lp: P04
-type: skill
+pillar: P04
+kind: skill
 created: 2026-03-23
 updated: 2026-03-23
 author: EDISON

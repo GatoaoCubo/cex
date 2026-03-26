@@ -1,7 +1,7 @@
 ---
 id: p01_kc_cicd_pipeline_architecture
-type: knowledge_card
-lp: P01
+kind: knowledge_card
+pillar: P01
 title: CI/CD Pipeline Architecture - Multi-Satellite Systems
 version: 1.0.0
 created: 2026-03-22

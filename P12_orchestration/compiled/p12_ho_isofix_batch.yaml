@@ -1,6 +1,6 @@
 id: p12_ho_isofix_batch
-type: handoff
-lp: P12
+kind: handoff
+pillar: P12
 title: 'Handoff: ISOFIX Batch 1 (Edison)'
 version: 1.0.0
 created: 2026-03-05

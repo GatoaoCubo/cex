@@ -1,7 +1,7 @@
 ---
 id: p03_pt_satellite_orchestrator
-type: prompt_template
-lp: P03
+kind: prompt_template
+pillar: P03
 title: Satellite Orchestrator - Multi-Agent Dispatch Prompt
 version: 1.0.0
 created: 2026-03-22

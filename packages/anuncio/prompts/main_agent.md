@@ -28,7 +28,7 @@ Parse and validate the incoming input, extracting all relevant information for l
 
 ### Source 1: pesquisa_agent Output (PIPELINE)
 ```yaml
-type: research_notes
+kind: research_notes
 format: markdown (22 blocks)
 confidence: 0.95
 fields_expected:
@@ -45,7 +45,7 @@ fields_expected:
 
 ### Source 2: Product URL
 ```yaml
-type: url
+kind: url
 format: https://...
 confidence: 0.80
 scrape_fields:
@@ -58,7 +58,7 @@ scrape_fields:
 
 ### Source 3: Product Brief
 ```yaml
-type: brief
+kind: brief
 format: text
 confidence: 0.65
 extract_fields:

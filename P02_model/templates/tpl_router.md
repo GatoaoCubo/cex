@@ -4,7 +4,7 @@
 # Max 1024 bytes
 
 id: p02_rt_{{SCOPE_SLUG}}
-type: router
+kind: router
 routes:
   - when: {{CONDICAO_1}}
     send_to: {{TARGET_1}}

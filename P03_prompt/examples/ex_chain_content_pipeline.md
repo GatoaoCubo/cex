@@ -1,7 +1,7 @@
 ---
 id: p03_ch_content_pipeline
-type: chain
-lp: P03
+kind: chain
+pillar: P03
 title: Content Pipeline Chain (Research to Publish)
 steps: 4
 flow: research -> draft -> review -> publish

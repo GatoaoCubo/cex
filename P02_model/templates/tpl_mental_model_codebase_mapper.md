@@ -4,8 +4,8 @@
 # Max 2048 bytes | quality_min: 7.0
 
 id: p02_mm_codebase_mapper
-type: mental_model
-lp: P02
+kind: mental_model
+pillar: P02
 title: "Mental Model: Codebase Mapper"
 version: 1.0.0
 created: 2026-03-24

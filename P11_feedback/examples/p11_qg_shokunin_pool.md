@@ -1,7 +1,7 @@
 ---
 id: p11_qg_shokunin_pool
-type: quality_gate
-lp: P11
+kind: quality_gate
+pillar: P11
 title: "Gate: Shokunin Pool Admission"
 version: 1.0.0
 created: 2026-03-22

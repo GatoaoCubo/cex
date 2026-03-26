@@ -1,7 +1,7 @@
 ---
 id: p03_rp_satellite_dispatch
-type: router_prompt
-lp: P03
+kind: router_prompt
+pillar: P03
 title: Router Prompt for CODEXA Satellite Task Dispatch
 routes: [SHAKA, LILY, EDISON, PYTHA, ATLAS, YORK]
 fallback: EDISON

@@ -4,8 +4,8 @@
 # Max 4096 bytes | density_min: 0.8
 
 id: p02_iso_[agent_name]
-type: iso_package
-lp: P02
+kind: iso_package
+pillar: P02
 title: [iso_package_do_agente]
 tldr: [pacote_portavel_do_agente_em_uma_frase]
 ---

@@ -1,7 +1,7 @@
 ---
 id: p01_kc_claude_coding_skills
-type: knowledge_card
-lp: P01
+kind: knowledge_card
+pillar: P01
 title: Claude Coding and Skills Patterns
 version: 1.0.0
 created: 2026-03-22

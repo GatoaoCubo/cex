@@ -5,8 +5,8 @@ description: "Hybrid RAG retrieval server — BM25 keyword + FAISS vector search
 transport: stdio
 tools_provided: [brain_query, brain_prime, brain_list, brain_status, smart_context]
 resources_provided: [pool_index]
-lp: P04
-type: mcp_server
+pillar: P04
+kind: mcp_server
 version: 1.0.0
 created: 2026-03-24
 author: edison

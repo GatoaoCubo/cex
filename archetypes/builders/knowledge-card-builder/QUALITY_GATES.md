@@ -1,5 +1,5 @@
 ---
-lp: P11
+pillar: P11
 llm_function: GOVERN
 purpose: Quality gates for knowledge_card validation
 pattern: HARD gates block publish, SOFT gates contribute to 0-10 score

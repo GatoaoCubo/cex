@@ -1,6 +1,6 @@
 id: p10_rs_edison
-type: runtime_state
-lp: P10
+kind: runtime_state
+pillar: P10
 title: 'Mental Model: EDISON'
 version: 2.0.0
 created: 2025-12-16

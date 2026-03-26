@@ -4,8 +4,8 @@
 # Max 4096 bytes
 
 id: p07_bm_{{METRIC_SLUG}}
-type: benchmark
-lp: P07
+kind: benchmark
+pillar: P07
 title: "Benchmark: {{METRIC_NAME}}"
 quality: {{QUALITY_8_TO_10}}
 ---

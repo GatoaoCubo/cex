@@ -1,5 +1,5 @@
 ---
-lp: P12
+pillar: P12
 llm_function: COLLABORATE
 purpose: How knowledge-card-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES

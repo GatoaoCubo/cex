@@ -3,8 +3,8 @@ id: p04_skill_voice_pipeline
 name: voice-pipeline
 description: Pipeline completo de voz via WhatsApp - boot/shutdown de Bridge + Daemon + Monitor
 version: 1.0.0
-lp: P04
-type: skill
+pillar: P04
+kind: skill
 created: 2026-03-22
 updated: 2026-03-22
 author: ATLAS

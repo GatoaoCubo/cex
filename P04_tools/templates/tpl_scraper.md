@@ -4,8 +4,8 @@
 # Max 1024 bytes
 
 id: p04_scraper_{{TARGET_SLUG}}
-type: scraper
-lp: P04
+kind: scraper
+pillar: P04
 title: "Scraper: {{TARGET_NAME}}"
 quality: {{QUALITY_7_TO_10}}
 ---

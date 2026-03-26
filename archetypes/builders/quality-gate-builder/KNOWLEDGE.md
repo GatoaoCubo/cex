@@ -1,5 +1,5 @@
 ---
-lp: P01
+pillar: P01
 llm_function: INJECT
 purpose: Standards and patterns for quality_gate production
 ---

@@ -4,8 +4,8 @@
 # Max 4096 bytes
 
 id: p12_sig_{{EVENT_SLUG}}
-type: signal
-lp: P12
+kind: signal
+pillar: P12
 title: "Signal: {{EVENT_NAME}}"
 quality: {{QUALITY_8_TO_10}}
 ---

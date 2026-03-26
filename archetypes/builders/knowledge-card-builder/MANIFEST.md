@@ -1,7 +1,7 @@
 ---
 id: knowledge-card-builder
-type: type_builder
-lp: P02
+kind: type_builder
+pillar: P02
 parent: p02-chief [PLANNED]
 domain: knowledge_card
 llm_function: BECOME

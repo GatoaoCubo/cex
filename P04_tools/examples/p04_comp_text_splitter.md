@@ -1,7 +1,7 @@
 ---
 id: p04_comp_text_splitter
-type: component
-lp: P04
+kind: component
+pillar: P04
 description: "Pipeline component that splits documents into chunks for RAG indexing"
 version: 1.0.0
 created: 2026-03-25

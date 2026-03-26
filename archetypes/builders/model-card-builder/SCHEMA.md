@@ -1,5 +1,5 @@
 ---
-lp: P06
+pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema definition for model_card — SINGLE SOURCE OF TRUTH
 pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.

@@ -1,5 +1,5 @@
 id: p01_ctx_codexa_boot_chain
-type: context_doc
+kind: context_doc
 domain: architecture
 scope: Sequencia deterministica de 8 camadas que inicializa qualquer sessao CODEXA, de variavel de ambiente ate execucao de
   tarefa.

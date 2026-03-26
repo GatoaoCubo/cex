@@ -1,6 +1,6 @@
 id: p10_bi_codexa_brain
-type: brain_index
-lp: P10
+kind: brain_index
+pillar: P10
 title: 'Brain Index: CODEXA Knowledge Base'
 version: 1.0.0
 created: 2026-03-22

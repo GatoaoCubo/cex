@@ -1,7 +1,7 @@
 ---
 id: p02_boot_edison_claude
-type: boot_config
-lp: P02
+kind: boot_config
+pillar: P02
 provider: claude
 identity: "EDISON[BUILD]"
 constraints:

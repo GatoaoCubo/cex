@@ -1,8 +1,8 @@
 id: p04_hook_pre_commit_qa
-type: pre
+kind: pre
 trigger_event: pre_commit
 script_path: records/core/python/quality_gate.py
-lp: P04
+pillar: P04
 version: 1.0.0
 created: 2026-03-24
 author: edison

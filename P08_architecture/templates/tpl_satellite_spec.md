@@ -5,8 +5,8 @@
 # Max 2KB | density_min: 0.80 | quality_min: 8.0
 
 id: p08_sat_{{NAME_LOWER}}
-type: satellite_spec
-lp: P08
+kind: satellite_spec
+pillar: P08
 title: "Satellite: {{SAT_NAME_UPPER}}"
 version: 1.0.0
 created: {{ISO_DATE}}

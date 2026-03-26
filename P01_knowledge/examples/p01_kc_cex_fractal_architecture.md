@@ -1,7 +1,7 @@
 ---
 id: p01_kc_cex_fractal_architecture
-type: knowledge_card
-lp: P01
+kind: knowledge_card
+pillar: P01
 title: "CEX Fractal — Same 12 LPs at Every Scale From Prompt to System"
 version: 1.0.0
 created: 2026-03-25

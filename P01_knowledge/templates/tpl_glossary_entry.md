@@ -4,8 +4,8 @@
 # Max 512 bytes
 
 id: p01_gl_{{TERM_SLUG}}
-type: glossary_entry
-lp: P01
+kind: glossary_entry
+pillar: P01
 term: {{TERM}}
 definition: {{SHORT_DEFINITION_IN_1_TO_3_LINES}}
 synonyms: [{{SYNONYM_1}}, {{SYNONYM_2}}]

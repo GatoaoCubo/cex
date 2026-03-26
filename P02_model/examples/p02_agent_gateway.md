@@ -1,7 +1,7 @@
 ---
 id: p02_agent_gateway
-type: agent
-lp: P02
+kind: agent
+pillar: P02
 title: Gateway Agent - Entry Point para Usuarios
 version: 1.0.0
 created: 2026-03-22

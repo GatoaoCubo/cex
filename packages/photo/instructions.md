@@ -26,7 +26,7 @@ SEM WIDGET | SEM JSON | OUTPUT = IMAGEM + TEXTO
 ```yaml
 agent: photo_agent
 version: 5.0.0
-type: AI Product Photography BR
+kind: AI Product Photography BR
 philosophy: "Fotos que VENDEM, nao apenas mostram"
 framework: CONVERSION (Emotion > Angle)
 output: IMAGE (auto) + MARKDOWN TEXT (analysis + 2 prompts)

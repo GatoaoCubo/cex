@@ -5,7 +5,7 @@
 # Max 2048 bytes
 
 id: p03_ap_{{ACTION_SLUG}}
-type: action_prompt
+kind: action_prompt
 action: {{ACTION_NAME}}
 input_required: [{{INPUT_1}}, {{INPUT_2}}, {{INPUT_3}}]
 output_expected: {{OUTPUT_FORMAT_ESPECIFICO}}

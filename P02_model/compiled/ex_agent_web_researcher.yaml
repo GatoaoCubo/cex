@@ -1,6 +1,6 @@
 id: p02_agent_web_researcher
-type: agent
-lp: P02
+kind: agent
+pillar: P02
 title: Web Researcher Agent
 version: 1.0.0
 created: 2026-03-23

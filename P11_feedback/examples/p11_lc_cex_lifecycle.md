@@ -1,7 +1,7 @@
 ---
 id: p11_lc_cex_lifecycle
-type: lifecycle_rule
-lp: P11
+kind: lifecycle_rule
+pillar: P11
 title: "CEX Artifact Lifecycle Rules"
 version: "1.0.0"
 created: "2026-03-22"

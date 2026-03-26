@@ -1,5 +1,5 @@
 ---
-lp: P07
+pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of model_card artifacts
 pattern: few-shot learning — LLM reads these before producing
@@ -15,8 +15,8 @@ OUTPUT:
 ```yaml
 ---
 id: p02_mc_anthropic_sonnet_4
-type: model_card
-lp: P02
+kind: model_card
+pillar: P02
 version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
@@ -118,7 +118,7 @@ BAD OUTPUT:
 ```yaml
 ---
 id: gpt4_card
-type: model_card
+kind: model_card
 model_name: GPT-4
 provider: OpenAI
 context_window: "128K"

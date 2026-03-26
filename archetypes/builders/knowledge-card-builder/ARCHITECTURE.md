@@ -1,5 +1,5 @@
 ---
-lp: P08
+pillar: P08
 llm_function: CONSTRAIN
 purpose: Boundary, relationships, and position of knowledge_card in the CEX
 pattern: every builder must know WHERE its output fits and what it CONNECTS to

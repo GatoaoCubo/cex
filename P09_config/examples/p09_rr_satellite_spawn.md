@@ -1,7 +1,7 @@
 ---
 id: p09_rr_satellite_spawn
-type: runtime_rule
-lp: P09
+kind: runtime_rule
+pillar: P09
 title: "Runtime Rule: Satellite Spawn Constraints"
 version: 1.0.0
 created: 2026-03-22

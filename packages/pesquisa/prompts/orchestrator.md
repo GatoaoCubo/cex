@@ -6,7 +6,7 @@ Sequential 4-HOP pipeline: queries -> search -> competitors -> SEO -> 22-block o
 ## IDENTITY
 ```yaml
 workflow: pesquisa_orchestrator
-type: sequential
+kind: sequential
 satellite: SHAKA
 output: research_notes.md (22 blocks)
 downstream: anuncio -> photo -> ads

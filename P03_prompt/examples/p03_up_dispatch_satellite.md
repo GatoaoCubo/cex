@@ -1,10 +1,10 @@
 ---
 id: p03_up_dispatch_satellite
-type: user_prompt
+kind: user_prompt
 action: dispatch_satellite_task
 input_required: [task_description, satellite_name, quality_target]
 output_expected: "Completion signal + git commit with artifacts"
-lp: P03
+pillar: P03
 version: 1.0.0
 created: 2026-03-24
 author: STELLA

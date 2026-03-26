@@ -5,8 +5,8 @@
 # Max 5120 bytes | density_min: 0.80 | quality_min: 7.0
 
 id: p01_kc_{{TOPIC_SLUG}}
-type: knowledge_card
-lp: P01
+kind: knowledge_card
+pillar: P01
 title: "{{KNOWLEDGE_CARD_TITLE}}"
 version: 1.0.0
 created: {{ISO_DATE}}

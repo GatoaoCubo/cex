@@ -1,6 +1,6 @@
 id: p07_e2e_cex_forge_pipeline
-type: e2e_eval
-lp: P07
+kind: e2e_eval
+pillar: P07
 description: End-to-end test of CEX artifact generation pipeline
 pipeline: "cex_forge.py --lp P01 --type knowledge_card --seeds \"test\"\n  -> generated_example.md\n    -> validate_examples.py\
   \ (frontmatter + size + density)\n      -> cex_compile.py (md -> yaml)\n        -> compiled output"

@@ -4,8 +4,8 @@
 # Max 3072 bytes
 
 id: p10_ax_{{RULE_SLUG}}
-type: axiom
-lp: P10
+kind: axiom
+pillar: P10
 title: "Axiom: Session Compression"
 quality: {{QUALITY_8_TO_10}}
 ---

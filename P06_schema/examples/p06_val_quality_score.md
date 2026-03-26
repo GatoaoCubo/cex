@@ -1,7 +1,7 @@
 ---
 id: p06_val_quality_score
-type: validator
-lp: P06
+kind: validator
+pillar: P06
 title: "Validator: Quality Score Field"
 version: 1.0.0
 created: 2026-03-22

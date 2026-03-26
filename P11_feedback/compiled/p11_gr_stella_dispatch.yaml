@@ -1,6 +1,6 @@
 id: p11_gr_stella_dispatch
-type: guardrail
-lp: P11
+kind: guardrail
+pillar: P11
 title: 'Guardrail: STELLA Dispatch Boundaries'
 version: 1.0.0
 created: 2026-03-22

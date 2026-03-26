@@ -1,6 +1,6 @@
 ---
 id: n01
-type: nucleus
+kind: nucleus
 label: "Inteligencia & Pesquisa"
 function: research
 created: 2026-03-26

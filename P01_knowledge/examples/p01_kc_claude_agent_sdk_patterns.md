@@ -1,7 +1,7 @@
 ---
 id: p01_kc_claude_agent_sdk_patterns
-type: knowledge_card
-lp: P01
+kind: knowledge_card
+pillar: P01
 title: "Claude Agent SDK — Handoffs, Guardrails, Tracing, Structured Output"
 version: 2.0.0
 created: 2026-02-23

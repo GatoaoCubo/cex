@@ -1,5 +1,5 @@
 ---
-lp: P01
+pillar: P01
 llm_function: INJECT
 purpose: Standards and industry knowledge for model_card production
 sources: SHAKA(sonnet) + PYTHA-GEMINI(gemini-2.5-pro) + ATLAS-CODEX(codex) + EDISON(opus)

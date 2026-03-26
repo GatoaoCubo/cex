@@ -1,7 +1,7 @@
 ---
 id: p02_agent_data_validator
-type: agent
-lp: P02
+kind: agent
+pillar: P02
 title: Data Validator Agent
 version: 1.0.0
 created: 2026-03-24

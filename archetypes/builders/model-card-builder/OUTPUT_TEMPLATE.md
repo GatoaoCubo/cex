@@ -1,5 +1,5 @@
 ---
-lp: P05
+pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} that the LLM fills to produce a model_card
 pattern: every field here exists in SCHEMA.md — template derives, never invents
@@ -10,8 +10,8 @@ pattern: every field here exists in SCHEMA.md — template derives, never invent
 ```yaml
 ---
 id: p02_mc_{{provider}}_{{model_slug}}
-type: model_card
-lp: P02
+kind: model_card
+pillar: P02
 version: "1.0.0"
 created: "{{YYYY-MM-DD}}"
 updated: "{{YYYY-MM-DD}}"

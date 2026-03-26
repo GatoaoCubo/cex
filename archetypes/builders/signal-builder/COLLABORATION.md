@@ -1,5 +1,5 @@
 ---
-lp: P12
+pillar: P12
 llm_function: COLLABORATE
 purpose: How signal-builder works with other builders and runtime actors
 pattern: each builder must know its role in a team, what it receives, and what it emits

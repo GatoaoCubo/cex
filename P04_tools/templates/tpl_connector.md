@@ -4,8 +4,8 @@
 # Max 1024 bytes
 
 id: p04_conn_{{SERVICE_SLUG}}
-type: connector
-lp: P04
+kind: connector
+pillar: P04
 title: "Connector: {{SERVICE_NAME}}"
 quality: {{QUALITY_7_TO_10}}
 ---

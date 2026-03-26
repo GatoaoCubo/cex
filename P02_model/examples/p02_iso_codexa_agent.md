@@ -1,7 +1,7 @@
 ---
 id: p02_iso_codexa_agent
-type: iso_package
-lp: P02
+kind: iso_package
+pillar: P02
 agent_name: codexa
 tier: complete
 files_count: 12

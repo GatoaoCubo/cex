@@ -4,8 +4,8 @@
 # Max 1024 bytes | density_min: 0.80 | quality_min: 8.0
 
 id: p11_qg_tdd_compliance
-type: quality_gate
-lp: P11
+kind: quality_gate
+pillar: P11
 title: "Gate: TDD Compliance"
 version: 1.0.0
 created: 2026-03-24

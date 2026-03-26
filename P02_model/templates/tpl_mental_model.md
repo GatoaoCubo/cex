@@ -4,8 +4,8 @@
 # Max 2048 bytes
 
 id: p02_mm_{{MODEL_SLUG}}
-type: mental_model
-lp: P02
+kind: mental_model
+pillar: P02
 title: "{{MENTAL_MODEL_TITLE}}"
 owner: {{SATELLITE_NAME}}
 quality: {{QUALITY_7_TO_10}}

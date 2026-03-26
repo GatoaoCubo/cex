@@ -1,7 +1,7 @@
 ---
 id: p01_kc_agentskills_spec
-type: knowledge_card
-lp: P01
+kind: knowledge_card
+pillar: P01
 title: "AgentSkills.io — Open Standard for Reusable AI Agent Skills"
 version: 1.0.0
 created: 2026-03-26

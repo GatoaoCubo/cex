@@ -1,7 +1,7 @@
 ---
 meta: true
 file_position: 4/13
-lp: P03
+pillar: P03
 llm_function: REASON
 purpose: Meta-template for generating INSTRUCTIONS.md of any type-builder
 ---
@@ -12,7 +12,7 @@ purpose: Meta-template for generating INSTRUCTIONS.md of any type-builder
 
 ```yaml
 ---
-lp: P03
+pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for {{type_name}}
 pattern: 3-phase pipeline (research -> compose -> validate)

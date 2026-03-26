@@ -1,6 +1,6 @@
 id: p02_agent_amazon_ads
-type: agent
-lp: P02
+kind: agent
+pillar: P02
 title: Amazon Ads Agent - Campaign Strategy & Optimization
 version: 1.0.0
 created: 2026-03-22

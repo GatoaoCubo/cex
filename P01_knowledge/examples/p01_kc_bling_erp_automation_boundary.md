@@ -1,7 +1,7 @@
 ---
 id: p01_kc_bling_erp_automation_boundary
-type: knowledge_card
-lp: P01
+kind: knowledge_card
+pillar: P01
 title: "Bling ERP: Fronteira de Automacao para Cadastro de Produto"
 version: 1.0.0
 created: 2026-03-25

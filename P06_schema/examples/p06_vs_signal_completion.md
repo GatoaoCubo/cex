@@ -1,7 +1,7 @@
 ---
 id: p06_vs_signal_completion
-type: validation_schema
-lp: P06
+kind: validation_schema
+pillar: P06
 description: "Output schema for satellite completion signals"
 format: json
 version: 1.0.0

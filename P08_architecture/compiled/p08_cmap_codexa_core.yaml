@@ -1,6 +1,6 @@
 id: p08_cmap_codexa_core
-type: component_map
-lp: P08
+kind: component_map
+pillar: P08
 description: Component map of codexa-core repository
 scope: full_system
 version: 1.0.0

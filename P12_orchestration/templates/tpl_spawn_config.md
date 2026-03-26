@@ -4,8 +4,8 @@
 # Max 3072 bytes
 
 id: p12_spawn_{{MODE_SLUG}}
-type: spawn_config
-lp: P12
+kind: spawn_config
+pillar: P12
 title: "Spawn Config: {{MODE_NAME}}"
 quality: {{QUALITY_8_TO_10}}
 ---

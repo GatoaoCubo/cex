@@ -5,8 +5,8 @@
 # Max 256 bytes | density_min: 0.80 | quality_min: 8.0
 
 id: p09_ff_{{FEATURE_SLUG}}
-type: feature_flag
-lp: P09
+kind: feature_flag
+pillar: P09
 title: "Flag: {{FLAG_NAME}}"
 version: 1.0.0
 created: {{ISO_DATE}}

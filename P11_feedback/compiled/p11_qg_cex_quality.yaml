@@ -1,6 +1,6 @@
 id: p11_qg_cex_quality
-type: quality_gate
-lp: P11
+kind: quality_gate
+pillar: P11
 title: CEX Pre-Commit Quality Gate
 version: 1.0.0
 created: '2026-03-22'

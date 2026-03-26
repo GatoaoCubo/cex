@@ -4,8 +4,8 @@
 # Max 4096 bytes
 
 id: p03_sp_[agent_slug]
-type: system_prompt
-lp: P03
+kind: system_prompt
+pillar: P03
 title: [system_prompt_do_agente]
 target_agent: [agent_name]
 quality: [7.0_to_10.0]

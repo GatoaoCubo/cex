@@ -1,7 +1,7 @@
 ---
 id: p05_parser_brain_query
-type: parser
-lp: P05
+kind: parser
+pillar: P05
 description: "Extracts ranked knowledge chunks from brain_query raw output"
 input_format: json
 output_format: structured_markdown

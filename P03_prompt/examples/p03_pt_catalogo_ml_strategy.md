@@ -1,7 +1,7 @@
 ---
 id: p03_pt_catalogo_ml_strategy
-type: prompt_template
-lp: P03
+kind: prompt_template
+pillar: P03
 title: Catalogo ML Strategy - Prompt Especialista Mercado Livre
 version: 1.0.0
 created: 2026-03-22

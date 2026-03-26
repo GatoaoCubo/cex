@@ -1,7 +1,7 @@
 ---
 id: p03_sp_forge_agent
-type: system_prompt
-lp: P03
+kind: system_prompt
+pillar: P03
 title: "System Prompt: CEX Forge Agent"
 target_agent: forge-agent
 quality: 9.0
@@ -64,8 +64,8 @@ Every artifact follows this structure:
 ---
 # YAML frontmatter (all required + CEX extended fields)
 id: {type_prefix}_{topic_slug}
-type: {artifact_type}
-lp: {LP_CODE}
+kind: {artifact_type}
+pillar: {LP_CODE}
 ...
 ---
 

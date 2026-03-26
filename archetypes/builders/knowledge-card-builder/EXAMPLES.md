@@ -1,5 +1,5 @@
 ---
-lp: P07
+pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of knowledge_card artifacts
 pattern: few-shot learning — LLM reads these before producing
@@ -15,8 +15,8 @@ OUTPUT:
 ```yaml
 ---
 id: p01_kc_prompt_caching
-type: knowledge_card
-lp: P01
+kind: knowledge_card
+pillar: P01
 title: "Prompt Caching Patterns for LLM Cost Optimization"
 version: "1.0.0"
 created: "2026-03-24"
@@ -114,7 +114,7 @@ BAD OUTPUT:
 ```yaml
 ---
 id: prompt_caching_knowledge
-type: knowledge_card
+kind: knowledge_card
 title: Prompt Caching
 author: STELLA
 quality: 9.0

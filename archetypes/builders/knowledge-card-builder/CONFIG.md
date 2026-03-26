@@ -1,5 +1,5 @@
 ---
-lp: P09
+pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming conventions, file paths, size limits, operational constraints
 pattern: CONFIG restricts SCHEMA, never contradicts it

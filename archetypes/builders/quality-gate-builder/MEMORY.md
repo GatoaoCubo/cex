@@ -1,5 +1,5 @@
 ---
-lp: P10
+pillar: P10
 llm_function: INJECT
 purpose: Patterns remembered between production sessions
 ---

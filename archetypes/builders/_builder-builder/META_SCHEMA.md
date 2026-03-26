@@ -1,7 +1,7 @@
 ---
 meta: true
 file_position: 7/13
-lp: P06
+pillar: P06
 llm_function: CONSTRAIN
 purpose: Meta-template for generating SCHEMA.md of any type-builder
 ---
@@ -13,7 +13,7 @@ purpose: Meta-template for generating SCHEMA.md of any type-builder
 
 ```yaml
 ---
-lp: P06
+pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema definition for {{type_name}} — SINGLE SOURCE OF TRUTH
 pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.

@@ -4,7 +4,7 @@
 # Max 2048 bytes
 
 id: p03_ch_{{PIPELINE_SLUG}}
-type: chain
+kind: chain
 steps: [{{STEP_1}}, {{STEP_2}}, {{STEP_3}}]
 flow: {{STEP_1}} > {{STEP_2}} > {{STEP_3}}
 ---

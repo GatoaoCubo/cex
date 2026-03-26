@@ -1,6 +1,6 @@
 ---
 id: n03
-type: nucleus
+kind: nucleus
 label: "Producao & Engenharia"
 function: engineering
 created: 2026-03-26

@@ -1,7 +1,7 @@
 ---
 id: p03_react_web_research
-type: react
-lp: P03
+kind: react
+pillar: P03
 title: ReAct Web Research Agent with Tool Loop
 tools_available: [search_web, extract_data, calculate]
 quality: 9.0

@@ -1,6 +1,6 @@
 ---
 id: n07
-type: nucleus
+kind: nucleus
 label: "Administracao & Orquestracao"
 function: admin
 created: 2026-03-26

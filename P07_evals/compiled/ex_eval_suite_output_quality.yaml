@@ -1,6 +1,6 @@
 id: p07_sr_output_quality_density
-type: scoring_rubric
-lp: P07
+kind: scoring_rubric
+pillar: P07
 title: Output Quality & Density Scoring Rubric
 version: 1.0.0
 created: 2026-03-23

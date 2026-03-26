@@ -1,5 +1,5 @@
 ---
-lp: P06
+pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for quality_gate
 pattern: TEMPLATE derives from this. CONFIG restricts this.

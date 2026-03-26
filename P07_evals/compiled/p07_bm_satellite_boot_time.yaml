@@ -1,6 +1,6 @@
 id: p07_bm_satellite_boot_time
-type: benchmark
-lp: P07
+kind: benchmark
+pillar: P07
 description: Benchmark for satellite boot times across all providers
 metric: Time from `Start-Process` to first Claude API response (seconds).
 version: 1.0.0

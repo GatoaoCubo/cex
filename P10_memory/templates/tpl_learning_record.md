@@ -5,8 +5,8 @@
 # Max 2048 bytes | density_min: 0.80 | quality_min: 8.0
 
 id: p10_lr_{{TOPIC_SLUG}}
-type: learning_record
-lp: P10
+kind: learning_record
+pillar: P10
 title: "Learning: {{TOPIC}}"
 version: 1.0.0
 created: {{ISO_DATE}}

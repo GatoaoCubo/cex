@@ -4,8 +4,8 @@
 # Max 4096 bytes
 
 id: p11_lc_{{RULE_SLUG}}
-type: lifecycle_rule
-lp: P11
+kind: lifecycle_rule
+pillar: P11
 title: "Lifecycle Rule: {{RULE_NAME}}"
 quality: {{QUALITY_8_TO_10}}
 ---
