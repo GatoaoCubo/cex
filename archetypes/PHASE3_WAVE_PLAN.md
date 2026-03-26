@@ -39,49 +39,49 @@
 
 ## Phase 3A: Core 24 (19 remaining)
 
-### Wave 1: P06 Spec + P01 Content [ ]
+### Wave 1: P06 Spec + P01 Content [x]
 | Kind | Tier | Pillar |
 |------|------|--------|
 | interface | MEDIUM | P06 |
 | input_schema | SIMPLE | P06 |
 | glossary_entry | SIMPLE | P01 |
 
-### Wave 2: P01 Content [ ]
+### Wave 2: P01 Content [x]
 | Kind | Tier | Pillar |
 |------|------|--------|
 | context_doc | MEDIUM | P01 |
 | rag_source | SIMPLE | P01 |
 | few_shot_example | SIMPLE | P01 |
 
-### Wave 3: P03 Prompt Start [ ]
+### Wave 3: P03 Prompt Start [x]
 | Kind | Tier | Pillar |
 |------|------|--------|
 | system_prompt | COMPLEX | P03 |
 | instruction | MEDIUM | P03 |
 | action_prompt | COMPLEX | P03 |
 
-### Wave 4: P03+P12 [ ]
+### Wave 4: P03+P12 [x]
 | Kind | Tier | Pillar |
 |------|------|--------|
 | chain | COMPLEX | P03 |
 | spawn_config | SIMPLE | P12 |
 | workflow | COMPLEX | P12 |
 
-### Wave 5: P02+P04 Core Agents [ ]
+### Wave 5: P02+P04 Core Agents [x]
 | Kind | Tier | Pillar |
 |------|------|--------|
 | agent | COMPLEX | P02 |
 | skill | COMPLEX | P04 |
 | mcp_server | MEDIUM | P04 |
 
-### Wave 6: P07+P11 Governance [ ]
+### Wave 6: P07+P11 Governance [x]
 | Kind | Tier | Pillar |
 |------|------|--------|
 | golden_test | MEDIUM | P07 |
 | scoring_rubric | COMPLEX | P07 |
 | guardrail | MEDIUM | P11 |
 
-### Wave 7: P11 Final Core [ ]
+### Wave 7: P11 Final Core [x]
 | Kind | Tier | Pillar |
 |------|------|--------|
 | lifecycle_rule | MEDIUM | P11 |
@@ -92,10 +92,10 @@
 
 ## Phase 3B: Extensions (53 remaining)
 
-### Wave 8: P02 Model [ ]
+### Wave 8: P02 Model [x]
 iso_package (COMPLEX), boot_config (MEDIUM), mental_model (MEDIUM)
 
-### Wave 9: P02+P08 [ ]
+### Wave 9: P02+P08 [x]
 lens (SIMPLE), satellite_spec (COMPLEX), embedding_config (SIMPLE)
 
 ### Wave 10: P02+P10 [ ]
@@ -152,10 +152,10 @@ dispatch_rule (MEDIUM), crew (COMPLEX)
 
 | Phase | Waves | Builders | Status |
 |-------|-------|----------|--------|
-| Done | -- | 5 | COMPLETE |
-| 3A Core | 1-7 | 19 | NOT STARTED |
-| 3B Ext | 8-25 | 53 | NOT STARTED |
-| Total | 25 | 77 | 5/77 (6%) |
+| Done | 0-9 | 30 | COMPLETE |
+| 3A Core | 1-7 | 24 | COMPLETE |
+| 3B Ext | 8-25 | 53 | 6/53 DONE |
+| Total | 25 | 77 | 30/77 (39%) |
 
 **Time**: ~25 waves x 20min build + review overlap = ~9h effective
 
