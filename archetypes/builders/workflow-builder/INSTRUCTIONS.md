@@ -10,7 +10,7 @@ pattern: 3-phase pipeline (plan -> compose -> validate)
 ## Phase 1: PLAN
 1. Identify the mission: what end-to-end outcome is needed?
 2. Decompose into steps with clear agent assignments (which satellite does what)
-3. Analyze existing workflows via brain_query (avoid duplicates)
+3. Analyze existing workflows via brain_query [IF MCP] (avoid duplicates)
 4. Map dependencies: which steps must complete before others start?
 5. Determine execution mode: sequential (safe), parallel (fast), mixed (optimized)
 6. Identify signals needed per step (reference signal-builder conventions)

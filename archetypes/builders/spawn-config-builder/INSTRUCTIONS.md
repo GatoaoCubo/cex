@@ -10,7 +10,7 @@ pattern: 3-phase pipeline (classify -> compose -> validate)
 ## Phase 1: CLASSIFY
 1. Identify the spawn scenario: how many satellites? How many tasks?
 2. Select mode: solo (1 sat, 1 task), grid (N sats, N tasks), continuous (>6 tasks, auto-refill)
-3. Check existing spawn_configs via brain_query (avoid duplicates)
+3. Check existing spawn_configs via brain_query [IF MCP] (avoid duplicates)
 4. Determine satellite-model pairing from STELLA routing table
 5. Identify required MCP servers for the satellite
 

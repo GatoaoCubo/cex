@@ -10,7 +10,7 @@ pattern: 3-phase pipeline (design -> compose -> validate)
 ## Phase 1: DESIGN
 1. Identify the pipeline purpose: what input-to-output transformation?
 2. Decompose into atomic prompt steps (each step = 1 LLM call, 1 purpose)
-3. Analyze existing chains via brain_query (avoid duplicates)
+3. Analyze existing chains via brain_query [IF MCP] (avoid duplicates)
 4. Determine flow type: sequential (A->B->C), branching, parallel, or mixed
 5. Define typed input/output for each step (string, list, JSON, markdown)
 6. Choose error strategy: fail_fast for critical paths, skip for enrichment
