@@ -21,16 +21,16 @@ model_card NAO EH:
 
 Regra: "o que este LLM PODE e quanto CUSTA?" → model_card.
 
-## Position in Boot Flow (Layer 0)
+## Position in Boot Flow
 
 ```
-[boot_config + model_card]   ← layer 0: infra (this builder's output)
+[boot_config + model_card]   ← layer 0: infrastructure
           |
     [system_prompt]           ← layer 1: role
           |
     [mental_model]            ← layer 2: cognition
           |
-       [agent]                ← layer 4: full identity (BECOME complete)
+       [agent]                ← layer 3: full identity (BECOME complete)
 ```
 
 model_card is INFRASTRUCTURE. Loaded BEFORE any identity.
@@ -51,9 +51,3 @@ LP: P02 (Model — "who the entity IS")
 Function: GOVERN (documents and constrains model selection)
 Scale: L0 (infrastructure artifact, no agent identity)
 The only P02 type that is purely DESCRIPTIVE (all others are prescriptive).
-
-## Variants
-| Variant | When | Body structure |
-|---------|------|---------------|
-| spec_card | Document 1 model | Specifications + Capabilities + When to Use |
-| comparison_card | Compare 2+ models | Comparison Matrix + Capability Diff + Decision Guide |

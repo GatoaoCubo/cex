@@ -12,44 +12,33 @@ I am a SPECIALIST. I answer ONE question: "what can this LLM do and how much doe
 I do not decide routing. I do not configure boot. I do not define identity.
 I INFORM other builders so they can make better decisions.
 
-## Crew Compositions (when I participate)
+## Crew Compositions
 
 ### Crew: "Build New Agent from Scratch"
 ```
-STELLA receives: "preciso de um agent pra monitorar precos"
-  1. model-card-builder  → "qual modelo? sonnet: $3/$15, 200K ctx, tool_calling"
-  2. agent-builder       → "define identidade: price-monitor, capabilities..."
-  3. system-prompt-builder → "escreve system prompt com persona + rules"
-  4. skill-builder       → "define skills: scrape, alert, compare"
-  5. quality-gate-builder → "define gates: price accuracy >= 95%"
-  6. iso-package-builder → "empacota tudo em ISO portable"
-```
-My output (model_card) feeds into: agent-builder (limits), boot-config-builder (initialization).
-
-### Crew: "Evaluate Model for Migration"
-```
-  1. model-card-builder  → "documenta modelo candidato"
-  2. model-card-builder  → "documenta modelo atual" (comparison_card variant)
-  3. benchmark-builder   → "define benchmark suite"
-  4. scoring-rubric-builder → "define criterios de comparacao"
+  1. model-card-builder        → "qual modelo? sonnet: $3/$15, 200K ctx"
+  2. agent-builder [PLANNED]   → "define identidade: price-monitor..."
+  3. system-prompt-builder [PLANNED] → "escreve system prompt"
+  4. skill-builder [PLANNED]   → "define skills: scrape, alert"
+  5. quality-gate-builder [PLANNED]  → "define gates: accuracy >= 95%"
+  6. iso-package-builder [PLANNED]   → "empacota tudo"
 ```
 
 ### Crew: "Bootstrap New Satellite"
 ```
-  1. model-card-builder     → "spec do modelo do satellite"
-  2. satellite-spec-builder → "define satellite role, MCPs, domain"
-  3. boot-config-builder    → "configura inicializacao"
-  4. system-prompt-builder  → "escreve PRIME do satellite"
+  1. model-card-builder             → "spec do modelo do satellite"
+  2. satellite-spec-builder [PLANNED] → "define satellite role, MCPs"
+  3. boot-config-builder [PLANNED]  → "configura inicializacao"
+  4. system-prompt-builder [PLANNED] → "escreve PRIME"
 ```
 
 ## Handoff Protocol
 ### I Receive
 - seeds: model name, provider (minimum)
 - optional: use case (informs When to Use table)
-- optional: comparison targets (triggers comparison_card variant)
 
 ### I Produce
-- model_card artifact (spec_card or comparison_card)
+- model_card artifact (spec_card)
 - committed to: cex/P02_model/examples/p02_mc_{provider}_{slug}.md
 
 ### I Signal
@@ -58,9 +47,8 @@ My output (model_card) feeds into: agent-builder (limits), boot-config-builder (
 
 ## Builders I Depend On
 None. model-card-builder is INDEPENDENT (layer 0 infrastructure).
-I can be invoked standalone without any other builder.
 
-## Builders That Depend On Me
+## Builders That Depend On Me [PLANNED]
 | Builder | Why |
 |---------|-----|
 | boot-config-builder | Needs model specs for initialization params |

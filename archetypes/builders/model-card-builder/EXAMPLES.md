@@ -1,13 +1,13 @@
 ---
 lp: P07
 llm_function: GOVERN
-purpose: Golden and anti-examples of model_card artifacts this builder produces
+purpose: Golden and anti-examples of model_card artifacts
 pattern: few-shot learning — LLM reads these before producing
 ---
 
 # Examples: model-card-builder
 
-## Golden Example (spec_card variant)
+## Golden Example
 
 INPUT: "Documenta o Claude Sonnet 4 pra decidir roteamento"
 
@@ -17,16 +17,16 @@ OUTPUT:
 id: p02_mc_anthropic_sonnet_4
 type: model_card
 lp: P02
-version: 1.0.0
-created: 2026-03-26
-updated: 2026-03-26
-author: EDISON
-model_name: claude-sonnet-4-20250514
-provider: anthropic
-model_type: text-generation
-status: active
-release_date: 2025-05-14
-knowledge_cutoff: 2025-04
+version: "1.0.0"
+created: "2026-03-26"
+updated: "2026-03-26"
+author: "EDISON"
+model_name: "claude-sonnet-4-20250514"
+provider: "anthropic"
+model_type: "text-generation"
+status: "active"
+release_date: "2025-05-14"
+knowledge_cutoff: "2025-04"
 context_window: 200000
 max_output: 16000
 modalities:
@@ -53,7 +53,7 @@ pricing:
 domain: model_selection
 quality: null
 tags: [model-card, anthropic, claude-4, sonnet, balanced]
-tldr: "Sonnet 4 — 200K ctx, $3/$15 per 1M, melhor custo-beneficio analise/pesquisa"
+tldr: "Sonnet 4 — anthropic, 200K ctx, $3/$15 per 1M, melhor custo-beneficio analise/pesquisa"
 when_to_use: "Analise e pesquisa onde opus eh overkill e haiku insuficiente"
 keywords: [anthropic, claude-sonnet-4, balanced]
 linked_artifacts:
@@ -69,10 +69,12 @@ model_card NAO EH: boot_config, agent, benchmark.
 ## Specifications
 | Spec | Value | Source |
 |------|-------|--------|
-| Model | claude-sonnet-4-20250514 | Anthropic docs |
-| Context | 200K tokens | Anthropic docs |
-| Max Output | 16K tokens | Anthropic docs |
-| Cutoff | Apr 2025 | Anthropic docs |
+| Model | claude-sonnet-4-20250514 | https://docs.anthropic.com/en/docs/about-claude/models |
+| Context | 200K tokens | https://docs.anthropic.com/en/docs/about-claude/models |
+| Max Output | 16K tokens | https://docs.anthropic.com/en/docs/about-claude/models |
+| Cutoff | Apr 2025 | https://docs.anthropic.com/en/docs/about-claude/models |
+| Pricing (input) | $3.00 per 1M | https://docs.anthropic.com/en/docs/about-claude/pricing |
+| Pricing (output) | $15.00 per 1M | https://docs.anthropic.com/en/docs/about-claude/pricing |
 
 ## Capabilities
 | Capability | Supported | Notes |
@@ -80,18 +82,20 @@ model_card NAO EH: boot_config, agent, benchmark.
 | Tool Calling | true | parallel supported |
 | Structured Output | true | JSON mode |
 | Reasoning | true | budget-controlled |
-| Prompt Caching | true | 0.1x read |
-| Vision | true | image + PDF |
+| Prompt Caching | true | 0.1x read cost |
 | Code Execution | true | sandbox |
 | Web Search | false | — |
+| Fine Tuning | false | — |
 | Batch API | true | 50% discount |
 
 ## When to Use
 | Scenario | Sonnet? | Alternative |
 |----------|---------|-------------|
-| Research, analysis | YES | — |
-| Complex refactoring | NO | opus ($15/$75) |
-| Simple classification | NO | haiku ($0.25/$1.25) |
+| Research + analysis | YES | — |
+| Complex architecture, multi-file refactor | NO | Opus ($15/$75) |
+| Simple classification, formatting | NO | Haiku ($0.25/$1.25) |
+| Vision: PDF/image analysis | YES | — |
+| High-volume batch processing | YES | 50% discount via Batch API |
 
 ## References
 - source: https://docs.anthropic.com/en/docs/about-claude/models
@@ -99,13 +103,12 @@ model_card NAO EH: boot_config, agent, benchmark.
 ```
 
 WHY THIS IS GOLDEN:
-- Every data point has source (Anthropic docs)
-- Capabilities as booleans, never prose
-- Pricing concrete, normalized per_1M_tokens
-- quality: null (never self-scored)
-- Boundary present, concise
-- When to Use has alternatives with pricing justification
-- id == filename stem pattern
+- Every Spec row has Source URL (never `-`)
+- Capabilities: 8 rows, all booleans
+- Pricing: concrete, base tier, per_1M_tokens
+- quality: null
+- When to Use: 5 rows with concrete alternatives and pricing
+- Frontmatter strings quoted consistently
 
 ## Anti-Example
 
@@ -127,13 +130,13 @@ Pricing varies by usage tier. Contact OpenAI for details.
 ```
 
 FAILURES:
-- id: no p02_mc_ prefix, no provider in id
-- provider: uppercase (must be lowercase)
-- context_window: string not integer
-- quality: self-assigned (must be null)
-- tags: string not list
-- lp: missing entirely
-- features: missing (no capability booleans)
-- pricing: "varies" instead of concrete numbers
-- body: filler prose, no Boundary, no tables, no Source column
-- references: none
+1. id: no `p02_mc_` prefix, no provider in id → H02 FAIL
+2. provider: uppercase → H08 FAIL
+3. context_window: string not integer → H09 FAIL
+4. quality: self-assigned 9.5 → H06 FAIL
+5. tags: string not list → S02 FAIL
+6. lp: missing → H05 FAIL
+7. features: missing entirely → S05 FAIL
+8. pricing: "varies" → S03 FAIL
+9. body: filler prose, no Boundary, no tables → S06-S10 FAIL
+10. Specifications: no Source column → S07 FAIL

@@ -2,6 +2,7 @@
 lp: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} that the LLM fills to produce a model_card
+pattern: every field here exists in SCHEMA.md — template derives, never invents
 ---
 
 # Output Template: model_card
@@ -16,11 +17,11 @@ created: "{{YYYY-MM-DD}}"
 updated: "{{YYYY-MM-DD}}"
 author: "{{who_produced}}"
 model_name: "{{official_model_id}}"
-provider: "{{anthropic|openai|google|meta|mistral|cohere|deepseek}}"
-model_type: "{{text-generation|embedding|image-generation|multimodal}}"
+provider: "{{anthropic|openai|google|meta|mistral|cohere|deepseek|alibaba|ai21|other}}"
+model_type: "{{text-generation|embedding|multimodal}}"
 status: "{{active|deprecated|sunset}}"
-release_date: "{{YYYY-MM-DD or null}}"
-knowledge_cutoff: "{{YYYY-MM or null}}"
+release_date: "{{YYYY-MM-DD_or_null}}"
+knowledge_cutoff: "{{YYYY-MM_or_null}}"
 context_window: {{integer}}
 max_output: {{integer}}
 modalities:
@@ -48,11 +49,11 @@ domain: model_selection
 quality: null
 tags: [model-card, {{provider}}, {{model_family}}, {{key_feature}}]
 tldr: "{{model_name}} — {{provider}}, {{context}}K ctx, ${{in}}/${{out}} per 1M, {{highlight}}"
-when_to_use: "{{decision_condition}}"
-keywords: [{{provider}}, {{model_name}}, {{terms}}]
+when_to_use: "{{one_sentence_decision_condition}}"
+keywords: [{{provider}}, {{model_name}}, {{domain_terms}}]
 linked_artifacts:
   primary: null
-  related: [{{other_model_cards}}]
+  related: [{{other_model_cards_or_null}}]
 data_source: "{{provider_docs_url}}"
 ---
 
@@ -64,24 +65,35 @@ model_card NAO EH: boot_config, agent, benchmark.
 | Spec | Value | Source |
 |------|-------|--------|
 | Model | {{official_id}} | {{url}} |
-| Provider | {{provider}} | — |
-| Context Window | {{ctx}}K tokens | {{url}} |
-| Max Output | {{max}}K tokens | {{url}} |
-| Architecture | {{arch}} | {{url}} |
+| Provider | {{provider}} | {{provider_url}} |
+| Context Window | {{ctx}} tokens | {{url}} |
+| Max Output | {{max}} tokens | {{url}} |
 | Knowledge Cutoff | {{cutoff}} | {{url}} |
+| Pricing (input) | ${{in}} per 1M | {{pricing_url}} |
+| Pricing (output) | ${{out}} per 1M | {{pricing_url}} |
 
 ## Capabilities
 | Capability | Supported | Notes |
 |------------|-----------|-------|
-{{for each feature: name | bool | detail}}
+| Tool Calling | {{bool}} | {{detail_or_dash}} |
+| Structured Output | {{bool}} | {{detail_or_dash}} |
+| Reasoning | {{bool}} | {{detail_or_dash}} |
+| Prompt Caching | {{bool}} | {{detail_or_dash}} |
+| Code Execution | {{bool}} | {{detail_or_dash}} |
+| Web Search | {{bool}} | {{detail_or_dash}} |
+| Fine Tuning | {{bool}} | {{detail_or_dash}} |
+| Batch API | {{bool}} | {{detail_or_dash}} |
 
 ## When to Use
 | Scenario | Use This Model? | Why / Alternative |
 |----------|-----------------|-------------------|
-{{>= 3 rows with concrete alternatives}}
+| {{scenario_1}} | {{YES/NO/MAYBE}} | {{reason}} |
+| {{scenario_2}} | {{YES/NO/MAYBE}} | {{reason}} |
+| {{scenario_3}} | {{YES/NO/MAYBE}} | {{reason}} |
+| {{scenario_4}} | {{YES/NO/MAYBE}} | {{reason}} |
+| {{scenario_5}} | {{YES/NO/MAYBE}} | {{reason}} |
 
 ## References
 - source: {{provider_docs_url}}
 - pricing: {{pricing_page_url}}
-- related: {{linked_model_cards}}
 ```

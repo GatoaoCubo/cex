@@ -24,6 +24,12 @@ CEX normalizes, does not invent.
 | Google Model Card Toolkit | Proto-based JSON schema, HTML rendering | Structural validation |
 | OpenAI Model API | Minimal: id, created, owned_by | Baseline fields |
 
+## Regulatory Frameworks
+| Framework | Relevance | CEX alignment |
+|-----------|-----------|---------------|
+| EU AI Act (2024) | Requires transparency docs for high-risk AI systems | model_card satisfies Art. 13 transparency requirements |
+| NIST AI RMF 1.0 | Govern→Map→Measure→Manage lifecycle | model_card covers Map (capabilities) + Govern (constraints) |
+
 ## Universal Fields (8+/10 providers)
 model_name, provider, release_date, context_window, benchmarks, intended_use, architecture, official_url
 
@@ -51,3 +57,5 @@ parameters, safety, limitations, training_data, license, max_output, knowledge_c
 - https://github.com/BerriAI/litellm (model registry)
 - https://github.com/anthropics/anthropic-sdk-python (ModelCapabilities)
 - https://arxiv.org/html/2512.12443 (AI Transparency Atlas)
+- https://artificialintelligenceact.com/ (EU AI Act)
+- https://www.nist.gov/itl/ai-risk-management-framework (NIST AI RMF)
