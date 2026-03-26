@@ -47,6 +47,6 @@ Rule: id MUST equal filename stem.
 - machine_format: yaml
 - id == filename stem
 - mode MUST be one of: solo, grid, continuous
-- flags MUST include --dangerously-skip-permissions and --no-chrome (baseline)
+- flags SHOULD include runtime-required permission and safety flags
 - prompt_strategy: use "handoff" when task description > 200 chars
 - quality: null always
