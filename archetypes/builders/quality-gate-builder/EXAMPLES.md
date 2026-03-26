@@ -1,0 +1,86 @@
+---
+lp: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of quality_gate artifacts
+---
+
+# Examples: quality-gate-builder
+
+## Golden Example
+
+INPUT: "Define gate pra knowledge_cards antes de publicar no pool"
+
+OUTPUT:
+```yaml
+---
+id: p11_qg_kc_publish
+type: quality_gate
+lp: P11
+title: "Gate: KC Publish"
+version: "1.0.0"
+created: "2026-03-26"
+updated: "2026-03-26"
+author: "STELLA"
+domain: "knowledge_card"
+quality: null
+tags: [quality-gate, knowledge-card, pre-publish]
+tldr: "Pre-publish gate for KCs: 10 HARD checks + 5-dimension scoring >= 8.0"
+density_score: 0.92
+---
+
+## Definition
+| Property | Value |
+|----------|-------|
+| Metric | combined_score |
+| Threshold | 8.0 |
+| Operator | >= |
+| Scope | All knowledge_card artifacts before pool merge |
+
+## Checklist (HARD)
+- [ ] YAML parses without error
+- [ ] id starts with p01_kc_
+- [ ] id == filename stem
+- [ ] type == knowledge_card
+- [ ] quality == null
+- [ ] body >= 3 bullet points
+- [ ] size <= 5120 bytes
+
+## Scoring (SOFT)
+| Dimension | Weight | Criteria |
+|-----------|--------|----------|
+| Density | 25% | >= 0.80 |
+| Completeness | 25% | All required fields present |
+| Actionability | 20% | Concrete examples or commands |
+| Boundary | 15% | EH/NAO EH section |
+| References | 15% | >= 1 source URL |
+
+## Actions
+| Result | Action | Escalation |
+|--------|--------|------------|
+| Pass >= 8.0 | Merge to pool | None |
+| Fail < 8.0 | Return with report | Retry required |
+
+## Bypass
+- Conditions: SOFT 7.0-7.9 with architect approval
+- Approver: p01-chief [PLANNED]
+- Audit: bypass in commit message
+```
+
+## Anti-Example
+
+```yaml
+---
+id: quality_check
+type: quality_gate
+title: "Make sure it's good"
+quality: 9.0
+---
+Check that the artifact is high quality. If good enough, approve.
+```
+
+FAILURES:
+1. id: no p11_qg_ prefix
+2. lp: missing
+3. quality: self-scored
+4. "good enough": subjective, not measurable
+5. No Definition table, no scoring, no bypass
