@@ -7,7 +7,7 @@ layers:
   spec:
     description: "Define o que algo eh — estatico, imutavel por run"
     count: 17
-    types:
+    kinds:
       - model_card          # P02 — spec do LLM (pricing, context, capabilities)
       - interface           # P06 — contrato de integracao entre agentes
       - input_schema        # P06 — contrato de entrada
@@ -29,7 +29,7 @@ layers:
   content:
     description: "Conhecimento destilado — criado, versionado"
     count: 8
-    types:
+    kinds:
       - knowledge_card      # P01 — fato atomico pesquisavel
       - rag_source          # P01 — fonte externa indexavel
       - glossary_entry      # P01 — definicao de termo
@@ -42,7 +42,7 @@ layers:
   prompt:
     description: "Instrucoes para LLM — executavel, texto"
     count: 5
-    types:
+    kinds:
       - system_prompt       # P03 — identidade + regras do agente
       - action_prompt       # P03 — prompt de acao task-focused
       - prompt_template     # P03 — template com vars para reuso
@@ -52,7 +52,7 @@ layers:
   runtime:
     description: "Executam em runtime — estado efemero ou persistente"
     count: 29
-    types:
+    kinds:
       - agent               # P02 — entidade executora (persona + capabilities)
       - router              # P02 — regra de roteamento (task→satellite)
       - fallback_chain      # P02 — sequencia de fallback (model A→B→C)
@@ -86,7 +86,7 @@ layers:
   governance:
     description: "Qualidade, seguranca, evolucao — regras de melhoria"
     count: 10
-    types:
+    kinds:
       - unit_eval           # P07 — teste unitario de agente/prompt
       - smoke_eval          # P07 — teste rapido de sanidade (<30s)
       - e2e_eval            # P07 — teste end-to-end (pipeline completo)
@@ -114,13 +114,13 @@ extensions:
   description: "45 tipos — CODEXA-specific ou avancados (validos, opcionais)"
   derivado:
     reason: "Derivado de tipo core — especializacao ou split de responsabilidade"
-    types: [output_schema_P05, type_def, router, fallback_chain, parser, formatter, naming_rule]
+    kinds: [output_schema_P05, type_def, router, fallback_chain, parser, formatter, naming_rule]
   especializacao:
     reason: "Especializacao de eval ou ciclo — util mas nao universal"
-    types: [unit_eval, smoke_eval, e2e_eval, benchmark, bugloop, prompt_template]
+    kinds: [unit_eval, smoke_eval, e2e_eval, benchmark, bugloop, prompt_template]
   interno:
     reason: "CODEXA-specific — util neste sistema, nao universal"
-    types:
+    kinds:
       - iso_package
       - satellite_spec
       - pattern
@@ -142,7 +142,7 @@ extensions:
       - permission
   avancado:
     reason: "Avancado ou tool-specific — requer infraestrutura dedicada"
-    types:
+    kinds:
       - plugin
       - hook
       - client
