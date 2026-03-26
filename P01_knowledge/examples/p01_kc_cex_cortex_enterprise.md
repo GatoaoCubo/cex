@@ -1,0 +1,109 @@
+---
+id: p01_kc_cex_cortex_enterprise
+type: knowledge_card
+lp: P01
+title: "CEX Cortex Enterprise — Modular LLM Brain with CEO Orchestrator and Satellite Departments"
+version: 1.0.0
+created: 2026-03-25
+updated: 2026-03-25
+author: EDISON
+domain: cex_taxonomy
+quality: null
+tags: [cex, cortex-enterprise, orchestrator, ceo-cognitivo, emergent-properties, brain]
+tldr: "Cortex Enterprise eh cerebro empresarial modular: CEO cognitivo (roteia, nunca executa) + N satellites verticalizados + propriedades emergentes"
+when_to_use: "Entender a arquitetura de sistema multi-agente com orquestrador central e departamentos autonomos"
+keywords: [cortex-enterprise, orchestrator, ceo, brain, modular-architecture]
+long_tails:
+  - "Como construir um cerebro empresarial com LLMs e agentes especializados"
+  - "Qual o papel do orquestrador central num sistema multi-agente"
+axioms:
+  - "SEMPRE orquestrador roteia, NUNCA executa"
+  - "NUNCA satellite depende de outro satellite para completar tarefa"
+linked_artifacts:
+  primary: p01_kc_cex_satellite_concept
+  related: [p01_kc_cex_pipeline_execution, p01_kc_cex_function_become]
+density_score: null
+data_source: "https://arxiv.org/abs/2308.00352"
+---
+
+## Summary
+
+Cortex Enterprise eh um cerebro empresarial modular baseado em LLM. Arquitetura: orquestrador central (CEO cognitivo) que roteia mas NUNCA executa + N satellites verticalizados com autonomia total no seu dominio. Cada organizacao instancia seu Cortex[X]. CODEXA eh a implementacao de referencia com 7 satellites e 284 agentes. O sistema exibe 5 propriedades emergentes: bootstrapping, metacircularidade, scaffolding cognitivo, arquitetura fractal e auto-correcao distribuida.
+
+## Spec
+
+| Componente | Funcao | Regra |
+|------------|--------|-------|
+| Orquestrador (STELLA) | CLARIFY-ENRICH-COMPOSE-EXECUTE-MONITOR | Roteia, nunca executa |
+| Satellites (6 exec) | Departamentos verticalizados | 1 dominio = 1 satellite |
+| Agents (284 total) | Funcionarios especializados | ISO files definem execucao |
+| Handoffs | Despacho estruturado | Contexto + seeds + scope fence |
+| Signals | Comunicacao inter-satellite | JSON com status + score |
+| Pool (1957 KCs) | Memoria institucional | Knowledge cards indexadas |
+
+Propriedades emergentes do Cortex instanciado:
+
+| Propriedade | Mecanismo | Referencia |
+|-------------|-----------|------------|
+| Bootstrapping | KCs alimentam agentes que geram KCs melhores | GCC self-hosting (1980s) |
+| Metacircularidade | Agentes descrevem propria execucao via ISO | SICP eval (Abelson 1996) |
+| Scaffolding cognitivo | Handoffs direcionam sem sobrecarregar contexto | Vygotsky ZPD (1978) |
+| Arquitetura fractal | 12 LPs repetem em 4 niveis (prompt-agent-sat-sys) | Mandelbrot (1982) |
+| Auto-correcao distribuida | Review chain 3-tier entre entidades independentes | Reflexion (Shinn 2023) |
+
+Ciclo de dispatch do orquestrador (5 fases):
+
+| Fase | Input | Output |
+|------|-------|--------|
+| CLARIFY | Pedido do usuario | Tabela de tasks por satellite |
+| ENRICH | Keywords por task | Contexto via brain_query |
+| COMPOSE | Tasks + contexto | Handoff .md por satellite |
+| EXECUTE | Handoffs | Satellites em execucao paralela |
+| MONITOR | Signals + git log | Relatorio consolidado |
+
+## Patterns
+
+| Trigger | Action |
+|---------|--------|
+| Tarefa multi-dominio | Orquestrador decompoe em waves por satellite |
+| Conhecimento novo gerado | Agente produz KC, pool indexa, busca melhora |
+| Satellite falha | Sistema detecta (signal), diagnostica (log), adapta (retry/reroute) |
+| Complexidade >= 70% | Ativar review chain 3-tier (implementer-spec-quality) |
+| Novo dominio de negocio | Instanciar satellite com PRIME + mental_model + agentes |
+
+## Anti-Patterns
+
+- Orquestrador executando codigo, pesquisa ou copy (perde visao global)
+- Satellite acessando dominio de outro satellite (viola separacao)
+- Sistema sem pool de conhecimento (sem bootstrapping, sem melhoria)
+- Agentes sem ISO files (sem identidade, execucao inconsistente)
+- Handoffs sem scope fence (satellite toca o que nao deve)
+
+## Code
+
+<!-- lang: python | purpose: cortex orchestrator dispatch -->
+```python
+cortex = CortexEnterprise(
+    orchestrator="stella",
+    satellites=["shaka", "lily", "edison", "pytha", "atlas", "york"],
+    pool=KnowledgePool(count=1957),
+)
+# CLARIFY: decompose user request
+tasks = cortex.clarify(user_input)
+# ENRICH: brain_query per satellite
+for task in tasks:
+    task.context = cortex.enrich(task.satellite, task.keywords)
+# COMPOSE: write structured handoffs
+handoffs = cortex.compose(tasks)
+# EXECUTE: dispatch to satellites
+cortex.dispatch(handoffs)
+# MONITOR: check signals, consolidate
+cortex.monitor(timeout=300)
+```
+
+## References
+
+- source: https://arxiv.org/abs/2308.00352
+- source: https://arxiv.org/abs/2303.17760
+- related: p01_kc_cex_satellite_concept
+- related: p01_kc_cex_pipeline_execution
