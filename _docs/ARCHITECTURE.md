@@ -17,6 +17,27 @@
 
 ---
 
+## 1.1 Camada Acima: As 8 Funcoes LLM
+
+Os 12 LPs organizam ARTEFATOS (filesystem). As 8 funcoes descrevem o que o LLM FAZ (pipeline).
+Todo sistema LLM — de prompt a satellite — executa estas funcoes nesta ordem:
+
+| # | Funcao | Verbo | O Que Faz | LPs |
+|---|--------|-------|-----------|-----|
+| 1 | BECOME | Ser | Identidade, persona | P02, P03 |
+| 2 | INJECT | Saber | Contexto, knowledge | P01, P10 |
+| 3 | REASON | Pensar | CoT, planejamento | P03 |
+| 4 | CALL | Fazer | Tools, APIs, MCPs | P04 |
+| 5 | PRODUCE | Gerar | Output final | P03, P05 |
+| 6 | CONSTRAIN | Restringir | Schemas, validacao | P06, P08 |
+| 7 | GOVERN | Avaliar | Quality gates, evals | P07, P09, P11 |
+| 8 | COLLABORATE | Coordenar | Signals, handoffs | P12 |
+
+**Lei**: funcoes sao PIPELINE (sequencia), nao categorias (pastas).
+**Spec completa**: `LLM_PIPELINE.md` (root do CEX).
+
+---
+
 ## 2. Os 7 Nucleos
 
 | ID | Dir | Funcao | LPs Primarios |

@@ -61,6 +61,27 @@ Cada tipo tem schema + builder + template.
 
 ---
 
+## 3.4 As 8 Funcoes LLM (Camada Acima)
+
+Acima dos tipos e pilares, existe a logica de como LLMs raciocinam.
+Todo sistema de IA — do prompt mais simples ao satellite mais complexo —
+executa 8 funcoes na mesma ordem:
+
+| # | Funcao | Em Portugues | Exemplo |
+|---|--------|-------------|---------|
+| 1 | BECOME | "Quem eu sou?" | Carregar persona do vendedor |
+| 2 | INJECT | "O que eu sei?" | Buscar dados do produto |
+| 3 | REASON | "Como penso sobre isso?" | Planejar a resposta |
+| 4 | CALL | "Que ferramentas uso?" | Consultar estoque via API |
+| 5 | PRODUCE | "O que entrego?" | Gerar a resposta final |
+| 6 | CONSTRAIN | "Esta no formato certo?" | Validar contra template |
+| 7 | GOVERN | "Passou no controle?" | Checar qualidade >= 7.0 |
+| 8 | COLLABORATE | "Quem recebe agora?" | Passar pro proximo agente |
+
+Um ChatGPT simples executa 1-2. Um agente executa 4-5. O CEX executa todas as 8.
+
+---
+
 ## 4. Formato Dual: MD + YAML
 
 O dilema foi resolvido com os DOIS:
