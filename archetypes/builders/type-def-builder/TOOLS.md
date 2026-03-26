@@ -1,0 +1,54 @@
+---
+id: type-def-builder-tools
+kind: tools
+pillar: P04
+llm_function: CALL
+version: 1.0.0
+created: "2026-03-26"
+updated: "2026-03-26"
+author: EDISON
+tags: [tools, type-def, P04, tooling]
+---
+
+## Production Tools
+
+| Tool | Status | Tag | Purpose |
+|---|---|---|---|
+| `brain_query` | CONDITIONAL | [MCP] | Surface existing type_def artifacts, related schemas, domain context |
+| `validate_artifact` | CONDITIONAL | [PLANNED] | Run SCHEMA.md hard gates against produced artifact |
+| `cex_forge` | CONDITIONAL | [PLANNED] | Register type_def into CEX artifact registry |
+| `glob` | ACTIVE | [LOCAL] | Find existing type_def files under `archetypes/` for collision check |
+| `read` | ACTIVE | [LOCAL] | Read sibling type_def artifacts to check inheritance targets |
+
+## Data Sources
+
+| Source | What to Extract |
+|---|---|
+| `P06_schema/_schema.yaml` | max_bytes, naming pattern, llm_function for type_def |
+| `archetypes/builders/*/SCHEMA.md` | Sibling schemas to verify no kind collision |
+| Brain index (via `brain_query`) | Existing type_defs by domain, related constraints |
+| Domain KNOWLEDGE.md files | Base type vocabulary for the target domain |
+
+## brain_query Usage [IF MCP]
+
+```
+brain_query "type_def {type_name}"          # Find existing definitions for this type
+brain_query "base_type constraints {domain}" # Find constraint patterns in domain
+brain_query "composition union {type_name}"  # Find union/intersection patterns
+```
+
+Always run before composing — prevents duplicate type_def creation.
+
+## Interim Validation Checklist
+
+Run these checks before finalizing output (no tool required):
+
+- [ ] `id` matches `^p06_td_[a-z][a-z0-9_]*$`
+- [ ] `kind: type_def` present
+- [ ] `pillar: P06` present
+- [ ] `base_type` is non-null and from controlled vocabulary
+- [ ] `constraints` is a structured object (not free text)
+- [ ] `quality: null` on draft
+- [ ] Artifact byte count <= 3072
+- [ ] At least one example in body
+- [ ] `tldr` is a single sentence

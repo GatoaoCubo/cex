@@ -1,0 +1,86 @@
+---
+id: type-def-builder-config
+kind: config
+pillar: P09
+llm_function: CONSTRAIN
+version: 1.0.0
+created: "2026-03-26"
+updated: "2026-03-26"
+author: EDISON
+tags: [config, type-def, P09, naming, constraints]
+---
+
+## Naming Convention
+
+| Element | Rule | Example |
+|---|---|---|
+| File name | `p06_td_{type_slug}.yaml` | `p06_td_agent_score.yaml` |
+| `id` field | `p06_td_{type_slug}` | `p06_td_agent_score` |
+| `type_slug` | PascalCase → snake_case → lowercase | `AgentScore` → `agent_score` |
+| `type_name` | PascalCase, no spaces | `AgentScore` |
+| Acronyms in slug | Expand or lowercase fully | `HTTPStatus` → `http_status` |
+| Multi-word | Underscore separator | `p06_td_user_profile_id` |
+
+## File Paths
+
+| Context | Path |
+|---|---|
+| Canonical store | `archetypes/spec/type_defs/p06_td_{type_slug}.yaml` |
+| Builder home | `archetypes/builders/type-def-builder/` |
+| Domain subfolder (optional) | `archetypes/spec/type_defs/{domain}/p06_td_{type_slug}.yaml` |
+
+## Size Limits
+
+| Constraint | Value |
+|---|---|
+| `max_bytes` | 3072 |
+| Recommended body prose | <= 200 chars per section |
+| `tldr` max length | 120 chars |
+| `tags` minimum | 2 entries |
+| `examples` minimum | 1 entry |
+
+## Base Type Enum (Controlled Vocabulary)
+
+| Value | Represents |
+|---|---|
+| `string` | UTF-8 text |
+| `integer` | Whole number (no fractional part) |
+| `number` | Floating-point or decimal |
+| `boolean` | `true` / `false` |
+| `array` | Ordered sequence of items |
+| `object` | Key-value map / struct |
+| `enum` | Fixed set of allowed string values |
+| `union` | One of multiple types (anyOf) |
+| `intersection` | All of multiple types (allOf) |
+| `tuple` | Fixed-length ordered sequence with per-position types |
+| `record` | Map with typed keys and typed values |
+
+## Constraint Types
+
+| Constraint Key | Applicable base_types | Value type |
+|---|---|---|
+| `min_length` | string | integer |
+| `max_length` | string | integer |
+| `pattern` | string | regex string |
+| `format` | string | string (uuid, email, uri, date-time, etc.) |
+| `minimum` | integer, number | number |
+| `maximum` | integer, number | number |
+| `exclusive_minimum` | integer, number | number |
+| `exclusive_maximum` | integer, number | number |
+| `precision` | number | integer (decimal places) |
+| `min_items` | array, tuple | integer |
+| `max_items` | array, tuple | integer |
+| `unique_items` | array | boolean |
+| `allowed_values` | enum | array[string] |
+| `required_keys` | object, record | array[string] |
+| `key_type` | record | base_type string |
+| `value_type` | record | base_type string or type_ref |
+
+## Composition Mode Enum
+
+| Value | Semantics |
+|---|---|
+| `union` | Exactly one member type must match |
+| `intersection` | All member types must match simultaneously |
+| `tuple` | Positional — each position has its own type |
+| `discriminated_union` | Union with a shared discriminant field |
