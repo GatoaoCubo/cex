@@ -14,7 +14,7 @@ source: P01_knowledge/_schema.yaml v4.0 + validate_kc.py v2.0
 |-------|------|----------|---------|-----------|
 | id | string (p01_kc_{slug}) | YES | — | H02, H03 |
 | kind | literal "knowledge_card" | YES | — | H04 |
-| lp | literal "P01" | YES | — | H06 |
+| pillar | literal "P01" | YES | — | H06 |
 | title | string 5-100 chars | YES | — | H06, S03 |
 | version | semver X.Y.Z | YES | "1.0.0" | H06, S04 |
 | created | date YYYY-MM-DD | YES | — | H06, S05 |
