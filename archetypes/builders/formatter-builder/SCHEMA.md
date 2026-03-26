@@ -1,0 +1,69 @@
+---
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema — SINGLE SOURCE OF TRUTH for formatter
+pattern: TEMPLATE derives from this. CONFIG restricts this.
+---
+
+# Schema: formatter
+
+## Frontmatter Fields
+
+| Field | Type | Required | Default | Notes |
+|-------|------|----------|---------|-------|
+| id | string (p05_fmt_{slug}) | YES | - | Namespace compliance |
+| kind | literal "formatter" | YES | - | Type integrity |
+| pillar | literal "P05" | YES | - | Pillar assignment |
+| version | semver string | YES | "1.0.0" | Versionamento |
+| created | date YYYY-MM-DD | YES | - | Creation date |
+| updated | date YYYY-MM-DD | YES | - | Last update |
+| author | string | YES | - | Producer identity |
+| target_format | enum [json, yaml, markdown, html, csv, text, xml, table] | YES | - | What the formatter outputs |
+| input_type | enum [structured_data, raw_text, typed_object, mixed] | YES | - | What the formatter accepts |
+| rule_count | integer | YES | - | Must match formatting rules in body |
+| domain | string | YES | - | Domain this formatter serves |
+| quality | null | YES | null | Never self-score |
+| tags | list[string], len >= 3 | YES | - | Must include "formatter" |
+| tldr | string <= 160ch | YES | - | Dense summary |
+| template_engine | enum [mustache, jinja2, handlebars, string_format, custom, none] | REC | "none" | How templates are rendered |
+| pretty_print | boolean | REC | true | Whether output is indented |
+| escaping | enum [html, url, json, xml, shell, none] | REC | "none" | Escape strategy for special chars |
+| encoding | enum [utf8, ascii, latin1] | REC | "utf8" | Output encoding |
+| locale | string | REC | - | Locale for formatting (e.g., pt-BR) |
+| streaming | boolean | REC | false | Whether formatter handles streaming |
+| keywords | list[string] | REC | - | Brain search triggers |
+| density_score | float 0.80-1.00 | OPT | - | Content density |
+
+## Formatting Rule Object
+
+```yaml
+rule:
+  name: string (snake_case identifier)
+  input_field: string (field to format)
+  transform: enum [template, serialize, tabulate, stringify, number_format, date_format, truncate, wrap, custom]
+  pattern: string (the formatting pattern or template)
+  options: object (transform-specific options: indent, separator, max_length)
+```
+
+## ID Pattern
+Regex: `^p05_fmt_[a-z][a-z0-9_]+$`
+Rule: id MUST equal filename stem.
+
+## Body Structure (required sections)
+1. `## Formatting Rules` — rule table: name, input_field, transform, pattern, options
+2. `## Input Specification` — what the formatter expects (structure, types)
+3. `## Output Specification` — what the formatter produces (format, example)
+4. `## Template` — the formatting template (if template-based) or serialization config
+5. `## Edge Cases` — handling of nulls, empty strings, special characters, overflow
+6. `## References` — sources and documentation
+
+## Constraints
+- max_bytes: 4096 (body only)
+- naming: p05_fmt_{slug}.md
+- machine_format: yaml (frontmatter) + markdown (body)
+- id == filename stem
+- quality: null always
+- rule_count MUST match actual rules in Formatting Rules table
+- target_format and input_type MUST be from their respective enums
+- Each formatting rule name MUST be unique
+- At least 1 formatting rule must be present
