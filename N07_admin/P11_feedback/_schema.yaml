@@ -1,8 +1,0 @@
-# N07/P11_feedback/_schema.yaml
-# Inherits: ../../P11_feedback/_schema.yaml
-# Nucleus: Administracao & Orquestracao | Role: primary
-inherits: "../../P11_feedback/_schema.yaml"
-nucleus: N07
-role: primary
-fields_add: {}
-constraints_override: {}

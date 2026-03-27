@@ -1,8 +1,0 @@
-# N05/P12_orchestration/_schema.yaml
-# Inherits: ../../P12_orchestration/_schema.yaml
-# Nucleus: Operacoes & Automacao | Role: primary
-inherits: "../../P12_orchestration/_schema.yaml"
-nucleus: N05
-role: primary
-fields_add: {}
-constraints_override: {}

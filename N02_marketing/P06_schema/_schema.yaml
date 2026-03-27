@@ -1,8 +1,0 @@
-# N02/P06_schema/_schema.yaml
-# Inherits: ../../P06_schema/_schema.yaml
-# Nucleus: Marketing & Comunicacao | Role: secondary
-inherits: "../../P06_schema/_schema.yaml"
-nucleus: N02
-role: secondary
-fields_add: {}
-constraints_override: {}

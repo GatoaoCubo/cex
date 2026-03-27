@@ -1,8 +1,0 @@
-# N02/P03_prompt/_schema.yaml
-# Inherits: ../../P03_prompt/_schema.yaml
-# Nucleus: Marketing & Comunicacao | Role: primary
-inherits: "../../P03_prompt/_schema.yaml"
-nucleus: N02
-role: primary
-fields_add: {}
-constraints_override: {}

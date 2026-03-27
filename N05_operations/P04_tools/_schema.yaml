@@ -1,8 +1,0 @@
-# N05/P04_tools/_schema.yaml
-# Inherits: ../../P04_tools/_schema.yaml
-# Nucleus: Operacoes & Automacao | Role: primary
-inherits: "../../P04_tools/_schema.yaml"
-nucleus: N05
-role: primary
-fields_add: {}
-constraints_override: {}

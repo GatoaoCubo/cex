@@ -1,8 +1,0 @@
-# N01/P08_architecture/_schema.yaml
-# Inherits: ../../P08_architecture/_schema.yaml
-# Nucleus: Inteligencia & Pesquisa | Role: secondary
-inherits: "../../P08_architecture/_schema.yaml"
-nucleus: N01
-role: secondary
-fields_add: {}
-constraints_override: {}

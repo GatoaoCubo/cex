@@ -1,8 +1,0 @@
-# N04/P07_evals/_schema.yaml
-# Inherits: ../../P07_evals/_schema.yaml
-# Nucleus: Conhecimento & Seguranca | Role: secondary
-inherits: "../../P07_evals/_schema.yaml"
-nucleus: N04
-role: secondary
-fields_add: {}
-constraints_override: {}

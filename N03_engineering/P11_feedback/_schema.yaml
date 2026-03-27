@@ -1,8 +1,0 @@
-# N03/P11_feedback/_schema.yaml
-# Inherits: ../../P11_feedback/_schema.yaml
-# Nucleus: Producao & Engenharia | Role: secondary
-inherits: "../../P11_feedback/_schema.yaml"
-nucleus: N03
-role: secondary
-fields_add: {}
-constraints_override: {}

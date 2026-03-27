@@ -1,8 +1,0 @@
-# N07/P09_config/_schema.yaml
-# Inherits: ../../P09_config/_schema.yaml
-# Nucleus: Administracao & Orquestracao | Role: secondary
-inherits: "../../P09_config/_schema.yaml"
-nucleus: N07
-role: secondary
-fields_add: {}
-constraints_override: {}

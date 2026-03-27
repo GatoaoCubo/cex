@@ -1,8 +1,0 @@
-# N06/P02_model/_schema.yaml
-# Inherits: ../../P02_model/_schema.yaml
-# Nucleus: Comercial & Financeiro | Role: secondary
-inherits: "../../P02_model/_schema.yaml"
-nucleus: N06
-role: secondary
-fields_add: {}
-constraints_override: {}

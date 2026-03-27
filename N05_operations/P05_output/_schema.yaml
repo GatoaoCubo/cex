@@ -1,8 +1,0 @@
-# N05/P05_output/_schema.yaml
-# Inherits: ../../P05_output/_schema.yaml
-# Nucleus: Operacoes & Automacao | Role: secondary
-inherits: "../../P05_output/_schema.yaml"
-nucleus: N05
-role: secondary
-fields_add: {}
-constraints_override: {}

@@ -1,8 +1,0 @@
-# N03/P03_prompt/_schema.yaml
-# Inherits: ../../P03_prompt/_schema.yaml
-# Nucleus: Producao & Engenharia | Role: secondary
-inherits: "../../P03_prompt/_schema.yaml"
-nucleus: N03
-role: secondary
-fields_add: {}
-constraints_override: {}

@@ -1,8 +1,0 @@
-# N06/P09_config/_schema.yaml
-# Inherits: ../../P09_config/_schema.yaml
-# Nucleus: Comercial & Financeiro | Role: primary
-inherits: "../../P09_config/_schema.yaml"
-nucleus: N06
-role: primary
-fields_add: {}
-constraints_override: {}

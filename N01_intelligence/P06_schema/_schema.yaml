@@ -1,8 +1,0 @@
-# N01/P06_schema/_schema.yaml
-# Inherits: ../../P06_schema/_schema.yaml
-# Nucleus: Inteligencia & Pesquisa | Role: secondary
-inherits: "../../P06_schema/_schema.yaml"
-nucleus: N01
-role: secondary
-fields_add: {}
-constraints_override: {}
