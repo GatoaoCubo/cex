@@ -1,0 +1,65 @@
+{
+  "collapse-filter": false,
+  "search": "",
+  "showTags": true,
+  "showAttachments": false,
+  "hideUnresolved": true,
+  "showOrphans": false,
+  "collapse-color-groups": false,
+  "colorGroups": [
+    {
+      "query": "file:(bld_system_prompt) OR file:(bld_manifest)",
+      "color": {"a": 1, "rgb": 16729344}
+    },
+    {
+      "query": "file:(bld_knowledge_card) OR file:(bld_examples) OR file:(bld_memory)",
+      "color": {"a": 1, "rgb": 3381759}
+    },
+    {
+      "query": "file:(bld_instruction) OR file:(bld_tools) OR file:(bld_config)",
+      "color": {"a": 1, "rgb": 65280}
+    },
+    {
+      "query": "file:(bld_output_template) OR file:(bld_schema)",
+      "color": {"a": 1, "rgb": 16776960}
+    },
+    {
+      "query": "file:(bld_quality_gate) OR file:(bld_architecture)",
+      "color": {"a": 1, "rgb": 16711935}
+    },
+    {
+      "query": "file:(bld_collaboration)",
+      "color": {"a": 1, "rgb": 65535}
+    },
+    {
+      "query": "path:P01 OR path:P02 OR path:P03 OR path:P04",
+      "color": {"a": 1, "rgb": 3447003}
+    },
+    {
+      "query": "path:P05 OR path:P06 OR path:P07 OR path:P08",
+      "color": {"a": 1, "rgb": 16750848}
+    },
+    {
+      "query": "path:P09 OR path:P10 OR path:P11 OR path:P12",
+      "color": {"a": 1, "rgb": 10027263}
+    },
+    {
+      "query": "file:tpl_",
+      "color": {"a": 1, "rgb": 8421504}
+    },
+    {
+      "query": "file:(CLAUDE) OR file:(README) OR file:(INDEX) OR file:(LLM_PIPELINE) OR file:(CODEX) OR file:(WHITEPAPER)",
+      "color": {"a": 1, "rgb": 16777215}
+    }
+  ],
+  "collapse-display": false,
+  "showArrow": true,
+  "textFadeMultiplier": -2,
+  "nodeSizeMultiplier": 1.2,
+  "lineSizeMultiplier": 1,
+  "collapse-forces": false,
+  "centerStrength": 0.45,
+  "repelStrength": 12,
+  "linkStrength": 1,
+  "linkDistance": 200
+}
