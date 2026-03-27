@@ -2,41 +2,45 @@
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for handoff
-pattern: plan -> compose -> validate
+pattern: 3-phase pipeline (research -> compose -> validate)
 ---
 
 # Instructions: How to Produce a handoff
 
-## Phase 1: PLAN
-1. Identify the satellite that will execute this work
-2. Determine the mission name and scope of delegation
-3. List specific tasks the satellite must perform
-4. Define the scope fence: allowed paths and forbidden paths
-5. Identify dependencies on other handoffs or artifacts
-6. Select autonomy level: full, supervised, or assisted
-7. Set quality target based on task criticality
-8. Run brain_query [IF MCP] for existing handoffs to avoid duplicates
+## Phase 1: RESEARCH
+
+1. Identify the task to delegate — what work needs to be done and what is the concrete deliverable?
+2. Determine the target executor — which satellite or agent will carry out this work?
+3. Define required context — what background does the executor need to understand why this task matters?
+4. Scope the deliverable — what exactly should be produced, to what quality threshold, by when?
+5. Identify scope fence — which file paths and directories are allowed, and which are strictly forbidden?
+6. Determine commit convention — what git add pattern and commit message format should the executor use?
 
 ## Phase 2: COMPOSE
-1. Read SCHEMA.md first
-2. Use OUTPUT_TEMPLATE.md as a direct derivative of SCHEMA.md
+
+1. Read SCHEMA.md — source of truth for all required fields
+2. Read OUTPUT_TEMPLATE.md — use exact template structure
 3. Set filename as `p12_ho_{task_slug}.md`
-4. Fill all required frontmatter fields exactly once
-5. Set quality: null (NEVER self-score)
-6. Write Context section with background and motivation
-7. Write Tasks section with numbered specific actions
-8. Write Scope Fence with SOMENTE and NAO TOQUE paths
-9. Write Commit section with exact git commands
-10. Write Signal section with completion mechanism
-11. Add optional fields only if they are compact and relevant
+4. Fill frontmatter: all required fields, quality: null (never self-score)
+5. Write Context section: background and motivation — why this task exists and what it unblocks
+6. Write Task section: clear deliverable description with acceptance criteria — specific enough for autonomous execution without clarification
+7. Write Seeds section: 5 to 10 domain keywords the executor can use for context retrieval
+8. Write Scope Fence section: allowed paths (SOMENTE) and forbidden paths (NAO TOQUE) as explicit lists
+9. Write Commit Convention section: exact git add pattern and commit message format
+10. Write Signal section: the completion notification mechanism the executor must trigger when done
+11. Check body size — must stay at or below 3072 bytes
 
 ## Phase 3: VALIDATE
-1. Check HARD gates in QUALITY_GATES.md
-2. Verify YAML frontmatter parses correctly
-3. Verify all 5 body sections are present
-4. Cross-check filename matches id pattern `p12_ho_*`
-5. Confirm scope fence has both SOMENTE and NAO TOQUE
-6. Confirm tasks are specific and actionable
-7. Confirm the artifact is not drifting into action_prompt or dispatch_rule scope
-8. Confirm the handoff remains under 4096 bytes
-9. If validation fails, revise in the same pass before output
+
+1. Check QUALITY_GATES.md — run all HARD gates manually
+2. HARD gates:
+   - [ ] id matches `p12_ho_[a-z][a-z0-9_]+`
+   - [ ] kind == `handoff`
+   - [ ] quality == null
+   - [ ] context section present
+   - [ ] task has acceptance criteria
+   - [ ] scope fence has both allowed and forbidden paths
+   - [ ] body <= 3072 bytes
+3. SOFT gates: seeds list has 5+ keywords, commit convention specified, signal mechanism defined
+4. Cross-check: delegation package not execution recipe (that is instruction)? Not a status event (that is signal)? Not a routing policy (that is dispatch_rule)? Task is clear enough for autonomous execution without back-and-forth?
+5. If score < 8.0: revise in the same pass before outputting

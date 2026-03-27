@@ -8,29 +8,32 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 # Instructions: How to Produce a brain_index
 
 ## Phase 1: RESEARCH
-1. Identify the corpus: what content needs to be indexed
-2. Find existing brain_indexes for the same scope (search P10_memory/examples/)
-3. Determine the search pattern: keyword, semantic, or hybrid
-4. Assess corpus size and update frequency requirements
-5. Check brain_query [IF MCP] for duplicate indexes
+1. Identify the content scope (corpus): which files, directories, or artifact types this index covers
+2. Determine the search algorithm: BM25 (keyword-based), FAISS (vector similarity), or hybrid (both combined with weighted scores)
+3. Assess freshness requirements: how often does the corpus change, what staleness is acceptable
+4. Map the ranking strategy: scoring formula, boost factors for recency or authority, tie-breaking rule
+5. Identify filter dimensions: metadata fields (pillar, kind, satellite, tag) that users filter by, and their allowed values
+6. Check for existing brain_index artifacts with overlapping scope to avoid redundant indexes
 
 ## Phase 2: COMPOSE
 1. Read SCHEMA.md — source of truth for all fields
-2. Read OUTPUT_TEMPLATE.md — fill following SCHEMA constraints
-3. Fill frontmatter: all 17 required + 4 recommended fields (quality: null)
-4. Set algorithm to the primary search method
-5. Define BM25 parameters: k1, b, and tokenizer settings
-6. Define FAISS parameters: index type, nprobe, metric
-7. Define hybrid weights: BM25 vs FAISS contribution
-8. Define scope: what content is included in the index
-9. Define filters: pre-search and post-search filters
-10. Define ranking: scoring formula and boost factors
-11. Define rebuild_schedule: when index is refreshed
-12. Define freshness_policy: max staleness tolerance
+2. Read OUTPUT_TEMPLATE.md — template to fill
+3. Fill frontmatter: all required fields (quality: null, never self-score)
+4. Write Algorithm section: selected algorithm name, key parameters (k, threshold, hybrid weights for BM25 vs FAISS)
+5. Write Scope section: include paths, exclude paths, and file type filters that define the corpus boundary
+6. Write Ranking section: scoring formula, boost conditions, and tie-breaking rule
+7. Write Filters section: each metadata dimension with its allowed values
+8. Write Rebuild Schedule section: trigger condition (time-based or event-based), estimated duration, and maximum staleness threshold
+9. Write Health Check section: integrity verification steps to confirm index is valid and current
 
 ## Phase 3: VALIDATE
-1. Check against QUALITY_GATES.md (this builder's own gates)
-2. HARD: id format, kind, pillar, quality==null, algorithm valid
-3. SOFT: BM25 params present, scope defined, rebuild_schedule set
-4. Verify: algorithm matches the content type (text=BM25, vector=FAISS)
-5. If score < 8.0: revise before outputting
+1. Check QUALITY_GATES.md manually
+2. HARD gate: id matches `p10_bi_` pattern
+3. HARD gate: kind == brain_index
+4. HARD gate: quality == null
+5. HARD gate: algorithm is specified (not blank)
+6. HARD gate: scope contains at least one include path
+7. HARD gate: rebuild schedule is defined
+8. Cross-check: does this index scope overlap with any existing brain_index? Overlapping scopes cause inconsistent search results
+9. Cross-check: is this a brain_index (search configuration) and not an embedding_config (embedding model settings) or rag_source (retrieval source definition)?
+10. If score < 8.0: revise before outputting

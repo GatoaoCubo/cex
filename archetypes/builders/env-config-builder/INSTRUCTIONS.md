@@ -8,35 +8,38 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 # Instructions: How to Produce an env_config
 
 ## Phase 1: RESEARCH
-1. Identify the scope: global, satellite name, or service name
-2. List every environment variable the scope needs
-3. Classify each variable: type (string, integer, boolean, url, secret)
-4. Determine which variables are required vs optional (with defaults)
-5. Mark sensitive variables (API keys, tokens, passwords, secrets)
-6. Define validation rule for each variable (regex, range, enum, format)
-7. Check for existing env_config artifacts via brain_query [IF MCP] (avoid duplicates)
-8. Confirm scope slug for id: snake_case, lowercase, no hyphens
+
+1. Identify the scope: global (applies to all services), a named satellite, or a specific service
+2. Catalog all environment variables needed within that scope — include name, current or example value, and purpose
+3. Classify the type of each variable: string, integer, boolean, URL, or secret
+4. Classify the sensitivity of each variable: public (safe to log), internal (omit from logs), or secret (mask in all output)
+5. Determine validation rules per variable: regex pattern for strings, numeric range for integers, allowed values enum for controlled sets
+6. Define default values and whether each variable is required or optional — optional variables must have a usable default
+7. Define override precedence: environment variable wins over config file, which wins over default
+8. Check existing env_configs via brain_query [IF MCP] for the same scope — do not duplicate a config that already covers this service
 
 ## Phase 2: COMPOSE
+
 1. Read SCHEMA.md — source of truth for all fields
-2. Read OUTPUT_TEMPLATE.md — fill {{vars}} following SCHEMA constraints
-3. Fill frontmatter: all required fields (quality: null — never self-score)
-4. Set scope to concrete value (global, satellite name, service name)
-5. Write variables list with exact names matching ## Variable Catalog
-6. Write ## Overview: 1-2 sentences on scope, purpose, consumers
-7. Write ## Variable Catalog: table with name, type, required, default, sensitive, validation
-8. Write ## Override Precedence: env > file > default (or custom order)
-9. Write ## Sensitive Variables: list sensitive vars with masking and storage rules
-10. Verify body <= 4096 bytes
-11. Verify id matches `^p09_env_[a-z][a-z0-9_]+$`
+2. Read OUTPUT_TEMPLATE.md — fill the template following SCHEMA constraints
+3. Fill all required frontmatter fields; set `quality: null` — never self-score
+4. Write **Variable Catalog** section: table with columns name, type, scope, default, required/optional, sensitive flag
+5. Write **Validation Rules** section: per variable — pattern or range, allowed values, error message on failure
+6. Write **Override Precedence** section: explicit ordering (env > file > default) with scope inheritance rules
+7. Write **Secrets Handling** section: masking rules for each secret variable, rotation policy, storage location (vault, platform secrets manager)
+8. Write **Groups** section: logical groupings such as database, API keys, feature toggles, file paths
+9. Confirm body <= 4096 bytes
 
 ## Phase 3: VALIDATE
+
 1. Check QUALITY_GATES.md — verify each HARD gate manually
 2. Confirm YAML frontmatter parses without errors
-3. Confirm variables list matches variable names in ## Variable Catalog (zero drift)
-4. Confirm quality == null
-5. Confirm body has all 4 required sections
-6. Confirm no actual secret values appear anywhere in artifact
-7. Confirm body <= 4096 bytes
-8. Score SOFT gates against QUALITY_GATES.md
-9. Revise if score < 8.0 before outputting
+3. Confirm `id` matches `^p09_ev_[a-z][a-z0-9_]+$`
+4. Confirm at least one variable is defined
+5. Confirm all sensitive variables have masking rules in the Secrets Handling section
+6. Confirm validation rules are present for at least the required variables
+7. Confirm no actual secret values appear anywhere in the artifact — only placeholders or descriptions
+8. Confirm `quality` is null
+9. Confirm body <= 4096 bytes
+10. Cross-check: are these generic runtime variables? If this is a startup script it belongs in `boot_config`. If these are on/off toggles they belong in `feature_flag`. If this is access control it belongs in `permission`. This artifact catalogs variables, it does not toggle features or control access.
+11. If score < 8.0: revise in the same pass before outputting

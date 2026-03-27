@@ -8,25 +8,37 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 # Instructions: How to Produce a golden_test
 
 ## Phase 1: RESEARCH
-1. Identify the target_kind: which artifact type needs a golden reference
-2. Find existing golden_tests for the same target_kind (search P07_evals/examples/)
-3. Locate the QUALITY_GATES.md of the target_kind's builder
-4. Select a candidate artifact scoring >= 9.5 (or craft one from scratch)
-5. Check brain_query [IF MCP] for duplicate golden_tests
+
+1. Identify the target artifact kind to calibrate — which kind needs a 9.5+ reference case?
+2. Find existing 9.5+ quality examples as candidates — locate actual artifacts of that kind scoring at the top of the range
+3. Study the target kind's quality gates — read its QUALITY_GATES.md to understand what makes an artifact excellent vs merely acceptable
+4. Map rationale to specific gate IDs — for each gate, identify what the golden artifact does to satisfy it completely
+5. Determine what distinguishes a 9.5 from an 8.0 — articulate the exact delta, not vague praise
+6. Check existing golden_tests for the same kind — avoid producing a duplicate calibration reference
 
 ## Phase 2: COMPOSE
-1. Read SCHEMA.md — source of truth for all fields
+
+1. Read SCHEMA.md — source of truth for all required fields
 2. Read OUTPUT_TEMPLATE.md — fill following SCHEMA constraints
-3. Fill frontmatter: all 17 required + 5 recommended fields (quality: null)
-4. Set quality_threshold to 9.5 or higher
-5. Write Input Scenario section: the complete request verbatim
-6. Write Golden Output section: the complete artifact with no abbreviation
-7. Write Rationale section: map each quality dimension to gate IDs
-8. Write Evaluation Criteria section: specific checks this golden validates
+3. Fill frontmatter: all required fields, quality: null (never self-score), quality_threshold: 9.5 or higher
+4. Write Input section: the complete input that would produce this golden artifact — verbatim, no abbreviation
+5. Write Expected Output section: the full 9.5+ quality artifact — complete, not summarized
+6. Write Rationale section: per-gate explanation of why this artifact scores 9.5+ — cite gate IDs explicitly
+7. Write Gate Mapping section: table of which quality gates this golden satisfies and how each is met
+8. Write Boundary Notes section: what a near-miss 8.0 version would look like — the specific gaps that drop the score
 
 ## Phase 3: VALIDATE
-1. Check against QUALITY_GATES.md (this builder's own gates)
-2. HARD: id format, kind, pillar, quality==null, quality_threshold >= 9.5
-3. SOFT: rationale maps to gates, output is complete, reviewer assigned
-4. Verify: golden_output passes ALL HARD gates of target_kind's builder
-5. If score < 8.0: revise before outputting
+
+1. Check QUALITY_GATES.md — run all HARD gates for this builder manually
+2. HARD gates:
+   - [ ] id matches `p07_gt_[a-z][a-z0-9_]+`
+   - [ ] kind == `golden_test`
+   - [ ] quality == null
+   - [ ] quality_threshold >= 9.5
+   - [ ] input section is complete
+   - [ ] expected output is present and unabbreviated
+   - [ ] rationale maps to specific gate IDs
+3. SOFT gates: gate mapping table present, boundary notes distinguish 9.5 from 8.0, reviewer assigned
+4. Cross-check: calibration reference not format example (that is few_shot_example)? Not pass/fail assertion (that is unit_eval)? Not performance measurement (that is benchmark)? Rationale is gate-specific not generic praise?
+5. Verify the expected output passes ALL HARD gates of the target kind's own builder before finalizing
+6. If score < 8.0: revise in the same pass before outputting

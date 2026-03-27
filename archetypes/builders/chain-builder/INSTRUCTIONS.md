@@ -2,35 +2,41 @@
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for chain
-pattern: 3-phase pipeline (design -> compose -> validate)
+pattern: 3-phase pipeline (research -> compose -> validate)
 ---
 
 # Instructions: How to Produce a chain
 
-## Phase 1: DESIGN
-1. Identify the pipeline purpose: what input-to-output transformation?
-2. Decompose into atomic prompt steps (each step = 1 LLM call, 1 purpose)
-3. Analyze existing chains via brain_query [IF MCP] (avoid duplicates)
-4. Determine flow type: sequential (A->B->C), branching, parallel, or mixed
-5. Define typed input/output for each step (string, list, JSON, markdown)
-6. Choose error strategy: fail_fast for critical paths, skip for enrichment
-7. Determine context passing: full (all prior output), filtered, or summary
+## Phase 1: RESEARCH
+1. Identify the complex task to decompose: state the input and the final output in concrete terms
+2. List atomic steps: each step must be exactly one LLM call with one purpose — split any step that requires two decisions into two steps
+3. Define data flow between steps: for each connection, specify the exact type (string, list, JSON object, markdown block) of data passed from one step to the next
+4. Determine error handling strategy per step: fail_fast for steps where downstream steps cannot proceed without the output, skip for enrichment steps, retry for transient failures, fallback for steps with an acceptable degraded alternative
+5. Map branching logic: if any step produces a conditional output, define the condition and both paths explicitly
+6. Search for existing chains that perform the same transformation (avoid duplicates)
 
 ## Phase 2: COMPOSE
 1. Read SCHEMA.md — source of truth for all fields
-2. Read OUTPUT_TEMPLATE.md — fill template following SCHEMA constraints
-3. Fill frontmatter: all 19 fields (null OK for optional)
-4. Set quality: null (NEVER self-score)
-5. Write Purpose section: 2-4 sentences on what transformation this chain performs
-6. Write Steps section: numbered steps with Input/Prompt/Output for each
-7. Write Data Flow section: ASCII diagram showing step connections
-8. Write Error Handling section: strategy, failure behavior, retry policy
-9. Verify steps_count matches actual numbered steps in body
-10. Check body <= 6144 bytes
+2. Read OUTPUT_TEMPLATE.md — template to fill
+3. Fill frontmatter: all 19 fields (quality: null, never self-score)
+4. Set quality: null
+5. Write Steps section: for each step, provide name, the prompt reference it uses, input type, and output type — all four fields required per step
+6. Write Data Flow section: connections between steps with typed inputs and outputs shown explicitly
+7. Write Error Handling section: strategy for each step and the global fallback policy
+8. Write Branching section: conditions for each path selection, or state "no branching" if the chain is strictly linear
+9. Write Context Passing section: specify which data accumulates across steps and which resets at each step boundary
+10. Verify steps_count in frontmatter matches the actual number of steps written
+11. Keep body <= 8192 bytes
 
 ## Phase 3: VALIDATE
-1. Check QUALITY_GATES.md manually (no automated validator yet)
-2. HARD gates (all must pass): YAML parses, id matches p03_ch_ pattern, kind == chain, quality == null, required fields present, body has all 4 sections, steps_count matches
-3. SOFT gates: check each against QUALITY_GATES.md
-4. Cross-check: steps have typed I/O? Data flow diagram matches steps? No runtime orchestration leaked?
-5. If score < 8.0: revise in same pass before outputting
+1. Check QUALITY_GATES.md manually
+2. HARD gate: id matches `p03_ch_` pattern
+3. HARD gate: kind == chain
+4. HARD gate: quality == null
+5. HARD gate: every step has input type and output type specified
+6. HARD gate: error handling strategy is specified (at minimum at the global level)
+7. HARD gate: each step represents exactly one LLM call — reject any step that describes multiple calls or includes routing logic
+8. Cross-check: do the steps reference prompts (not workflows)? Chains belong to P03, workflows belong to P12
+9. Cross-check: is there any runtime orchestration logic embedded in the steps? Runtime orchestration is not part of a chain definition
+10. Cross-check: are all data types between steps explicit, not implied?
+11. If score < 8.0: revise before outputting

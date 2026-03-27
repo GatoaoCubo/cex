@@ -8,35 +8,39 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 # Instructions: How to Produce a daemon
 
 ## Phase 1: RESEARCH
-1. Identify the background task and why it must be persistent (not one-shot)
-2. Determine schedule: continuous, cron expression, or fixed interval
-3. Determine restart_policy: always, on_failure, or never
-4. Define signal handling: at minimum SIGTERM graceful shutdown behavior
-5. Identify resource limits: memory ceiling, CPU shares, max file descriptors
-6. Determine health_check strategy: endpoint, heartbeat file, or process check
-7. Check for existing daemon artifacts via brain_query [IF MCP] (avoid duplicates)
+1. Identify what runs persistently in the background and why it cannot be a one-shot process
+2. Determine schedule: continuous loop, cron expression (e.g., `0 * * * *`), or fixed interval (e.g., `30s`)
+3. Define restart policy: always, on-failure, or never — with the justification for the choice
+4. Map signal handling: at minimum SIGTERM (graceful shutdown) and SIGINT; add SIGHUP (config reload) if applicable
+5. Specify resource limits: memory ceiling, CPU shares, and max open file descriptors
+6. Define health check mechanism: HTTP endpoint, heartbeat file, or process liveness check with interval and timeout
+7. Check for existing daemon artifacts to avoid duplicates
 8. Confirm name slug for id: snake_case, lowercase, no hyphens
 
 ## Phase 2: COMPOSE
 1. Read SCHEMA.md — source of truth for all fields
 2. Read OUTPUT_TEMPLATE.md — fill {{vars}} following SCHEMA constraints
 3. Fill frontmatter: all required fields (quality: null — never self-score)
-4. Set restart_policy to one of: always, on_failure, never
-5. Write schedule as concrete value (cron, interval, or "continuous")
-6. Write ## Overview: 1-2 sentences on what, why background, who depends
-7. Write ## Lifecycle: schedule, startup, restart behavior, shutdown procedure
-8. Write ## Signal Handling: table with SIGTERM, SIGINT, SIGHUP, custom
-9. Write ## Monitoring: health check, metrics, alerting, log rotation
-10. Verify body <= 1024 bytes
-11. Verify id matches `^p04_daemon_[a-z][a-z0-9_]+$`
+4. Write Lifecycle section: startup sequence, restart conditions, and graceful shutdown procedure
+5. Write Schedule section: concrete cron expression, interval value, or the word "continuous" — never vague
+6. Write Signal Handling section: table with each signal (SIGTERM, SIGINT, SIGHUP, custom) and its handler behavior
+7. Write Health Check section: mechanism type, check interval, timeout, and expected healthy response
+8. Write Resource Limits section: memory ceiling, CPU shares, max file descriptors
+9. Write Monitoring section: metrics to expose, alerting thresholds, log rotation policy
+10. Write PID Management section: PID file location and stale PID handling procedure
+11. Verify body <= 1024 bytes
+12. Verify id matches `^p04_dm_[a-z][a-z0-9_]+$`
 
 ## Phase 3: VALIDATE
 1. Check QUALITY_GATES.md — verify each HARD gate manually
 2. Confirm YAML frontmatter parses without errors
-3. Confirm schedule is concrete (not vague like "periodically")
-4. Confirm quality == null
-5. Confirm body has all 4 required sections
-6. Confirm signal_handling includes at least SIGTERM
-7. Confirm body <= 1024 bytes
-8. Score SOFT gates against QUALITY_GATES.md
-9. Revise if score < 8.0 before outputting
+3. Confirm id matches `p04_dm_`
+4. Confirm kind == daemon
+5. Confirm restart policy is defined (always, on-failure, or never)
+6. Confirm signal handling specifies at least SIGTERM behavior
+7. Confirm health check is present with interval and expected response
+8. Confirm schedule is concrete (not vague like "periodically")
+9. HARD gates: frontmatter valid, id pattern matches, restart policy defined, signal handling specified, health check present
+10. SOFT gates: graceful shutdown documented, score against QUALITY_GATES.md
+11. Cross-check: persistent background process (not a one-shot cli_tool)? Not event-triggered (hook)? Not invocable on demand (skill)? Graceful shutdown path documented?
+12. Revise if score < 8.0 before outputting

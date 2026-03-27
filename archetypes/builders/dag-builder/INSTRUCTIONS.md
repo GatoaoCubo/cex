@@ -2,38 +2,42 @@
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for dag
-pattern: analyze -> compose -> validate
+pattern: 3-phase pipeline (research -> compose -> validate)
 ---
 
 # Instructions: How to Produce a dag
 
-## Phase 1: ANALYZE
-1. Identify the pipeline or mission that needs dependency modeling
-2. List all tasks (nodes) that make up the pipeline
-3. Assign each node a unique id and descriptive label
-4. Determine dependencies: which tasks must finish before others can start
-5. Check for cycles: if A depends on B and B depends on A, redesign
-6. Identify entry points (no incoming edges) and terminal points (no outgoing edges)
-7. Check brain_query [IF MCP] for existing DAGs to avoid duplicates
+## Phase 1: DISCOVER
+1. Identify the pipeline or mission that requires dependency ordering
+2. List all tasks (nodes) that make up the pipeline — assign each a unique id and descriptive label
+3. Map dependencies between tasks: for each node, list which other nodes must complete before it can start
+4. Verify acyclicity: trace every dependency chain and confirm no node depends on itself directly or transitively
+5. Identify parallelism opportunities: find groups of nodes with no dependency between them (can execute simultaneously)
+6. Assess critical path: trace the longest dependency chain and sum estimated durations
+7. Check existing DAGs for overlapping pipeline scope to avoid duplicates
 
 ## Phase 2: COMPOSE
-1. Read SCHEMA.md first
-2. Use OUTPUT_TEMPLATE.md as a direct derivative of SCHEMA.md
-3. Set filename as `p12_dag_{pipeline_slug}.yaml`
-4. Fill all required fields exactly once
-5. Set quality: null (NEVER self-score)
-6. Write Nodes section with id, label, satellite for each task
-7. Write Edges section with from/to pairs for each dependency
-8. Compute execution_order as topologically sorted waves
-9. Add optional fields only if they are compact and relevant
-10. Omit absent optional fields instead of using placeholders
+1. Read SCHEMA.md — source of truth for all fields
+2. Read OUTPUT_TEMPLATE.md — fill {{vars}} following SCHEMA constraints
+3. Fill frontmatter: all required fields (quality: null — never self-score)
+4. Write Nodes section: for each node list id, label, type, and estimated duration
+5. Write Edges section: for each dependency list source node id, target node id, and dependency type
+6. Write Topological Order section: compute a valid linear execution sequence respecting all edges
+7. Write Parallel Groups section: list groups of nodes that can execute simultaneously in each wave
+8. Write Critical Path section: list the longest dependency chain with each node's duration and total duration
+9. Verify body <= 3072 bytes
+10. Verify id matches `^p12_dag_[a-z][a-z0-9_]+$`
 
 ## Phase 3: VALIDATE
-1. Check HARD gates in QUALITY_GATES.md
-2. Verify YAML parses correctly
-3. Verify the graph is acyclic (no circular dependencies)
-4. Verify every edge references existing node ids
-5. Cross-check filename matches id pattern `p12_dag_*`
-6. Confirm the artifact is static spec and not drifting into workflow scope
-7. Confirm the DAG remains under 3072 bytes
-8. If validation fails, revise in the same pass before output
+1. Check QUALITY_GATES.md — verify each HARD gate manually
+2. Confirm YAML frontmatter parses without errors
+3. Confirm id matches `p12_dag_`
+4. Confirm kind == dag
+5. Confirm graph is acyclic: no node appears as both ancestor and descendant of another node
+6. Confirm every edge target exists as a node id in the Nodes section
+7. Confirm topological order is valid: no node appears before its dependencies
+8. Confirm body <= 3072 bytes
+9. HARD gates: frontmatter valid, id pattern matches, acyclic, all edge targets are valid node ids, topological order valid
+10. SOFT gates: parallel groups identified, critical path computed, score against QUALITY_GATES.md
+11. Cross-check: pure static dependency structure (not a runtime execution record = workflow)? Not a routing policy (dispatch_rule)? Not a visual drawing (diagram)?
+12. Revise if score < 8.0 before outputting

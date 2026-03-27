@@ -1,54 +1,48 @@
 ---
 pillar: P03
 llm_function: REASON
-purpose: Step-by-step execution protocol for few-shot-example-builder
+purpose: Step-by-step production process for few_shot_example
+pattern: 3-phase pipeline (research -> compose -> validate)
 ---
 
-# Instructions: few-shot-example-builder
+# Instructions: How to Produce a few_shot_example
 
-## Phase 1: DESIGN
+## Phase 1: RESEARCH
 
-1. Identify the task/format to exemplify — what artifact kind or prompt pattern are you teaching?
-2. Determine domain (knowledge_card, validator, rag_source, etc.)
-3. Select difficulty level: easy (canonical), medium (realistic variation), hard (edge case)
-4. Plan edge cases: what boundary condition could break naive implementations?
-5. Check brain_query [IF MCP]: `brain_query [IF MCP]("few_shot_example [domain]")` — avoid duplicates
-6. Confirm: is this format teaching (few_shot_example) or quality evaluation (golden_test)?
+1. Identify the target format to exemplify — which artifact kind or output structure are you teaching?
+2. Determine difficulty level: easy (canonical happy path), medium (realistic variation), hard (edge case or boundary input)
+3. Select realistic input data — concrete, specific, the kind of request a real user would send
+4. Craft the expected output matching the exact target format — no abbreviations, no abstractions
+5. Identify edge cases to cover — what unusual input or boundary condition does this example exercise?
+6. Check existing examples for the same format — avoid producing a duplicate that teaches the same lesson
 
 ## Phase 2: COMPOSE
 
-1. Read SCHEMA.md — internalize all required fields and constraints
+1. Read SCHEMA.md — source of truth for all required fields and constraints
 2. Read OUTPUT_TEMPLATE.md — use exact template structure
 3. Fill frontmatter:
-   - id: p01_fse_{topic_slug} (must match filename stem)
-   - kind: few_shot_example
+   - id: `p01_fse_{topic_slug}` (must match filename stem)
+   - kind: `few_shot_example`
    - quality: null (never self-score)
-   - input: realistic task request the user would send
-   - output: ideal response demonstrating the target format
-4. Craft input field: concrete, specific, realistic — not "write something"
-5. Craft output field: complete format demonstration — not abstract description
-6. Write Explanation section: WHY this input/output pair teaches the format
-7. Write Variations section: 2-3 alternative inputs that test different aspects
-8. Write Edge Cases section: boundary inputs and how output handles them
+   - difficulty: easy | medium | hard
+4. Write Input section: realistic data matching the target schema — not "write something", but a fully specified request
+5. Write Output section: correctly formatted result demonstrating the target format without deviation
+6. Write Difficulty section: calibration level with one-line justification
+7. Write Edge Cases section: which unusual inputs this example covers and how
+8. Write Format Notes section: which structural element or rule this example is specifically teaching
+9. Check body size — must stay at or below 1024 bytes
 
 ## Phase 3: VALIDATE
 
-1. Check QUALITY_GATES.md — run all 7 HARD gates manually
-2. HARD gates checklist:
-   - [ ] H01: YAML frontmatter parses without error
-   - [ ] H02: id matches `^p01_fse_[a-z][a-z0-9_]+$`
-   - [ ] H03: id == filename stem (p01_fse_topic.md)
-   - [ ] H04: kind == "few_shot_example"
-   - [ ] H05: quality == null
-   - [ ] H06: input field non-empty string
-   - [ ] H07: output field non-empty string
-3. SOFT gates checklist (score contribution):
-   - [ ] S01: tldr <= 160 chars
-   - [ ] S02: tags list >= 3 items
-   - [ ] S03: Explanation section present
-   - [ ] S04: input is a realistic task request
-   - [ ] S05: output demonstrates format clearly
-   - [ ] S06: body <= 1024 bytes
-   - [ ] S07: no scoring rubric present
-4. Cross-check: is this still a format example? Not becoming evaluation/test?
-5. If any HARD gate fails: fix before publish. If SOFT fails: fix to improve score.
+1. Check QUALITY_GATES.md — run all HARD gates manually before outputting
+2. HARD gates:
+   - [ ] id matches `p01_fse_[a-z][a-z0-9_]+`
+   - [ ] kind == `few_shot_example`
+   - [ ] quality == null
+   - [ ] input field is non-empty
+   - [ ] output field is non-empty
+   - [ ] difficulty is labeled
+   - [ ] body <= 1024 bytes
+3. SOFT gates: tldr <= 160 chars, tags >= 3, Format Notes present, input is realistic, output demonstrates format clearly
+4. Cross-check: teaches FORMAT not evaluates quality (that is golden_test)? Not assertion-based (that is unit_eval)? No `{{vars}}` placeholders (that is prompt_template)?
+5. If score < 8.0: revise in the same pass before outputting

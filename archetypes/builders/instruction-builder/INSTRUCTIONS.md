@@ -8,28 +8,50 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 # Instructions: How to Produce an instruction
 
 ## Phase 1: RESEARCH
-1. Identify the task: what needs to be done, by whom, in what context
-2. Determine prerequisites: what must be true before starting
-3. Analyze existing instructions via brain_query [IF MCP] (avoid duplicates)
-4. Identify dependencies: tools, files, services, permissions needed
-5. Determine idempotency: can this be safely re-run?
-6. Plan rollback: what happens if execution fails midway?
+
+1. Identify the task: state exactly what must happen, who executes it, and in what context
+2. Determine the executor: name the agent or role that will follow this recipe
+3. List prerequisites — each must be verifiable ("Python 3.10+ installed" not "environment ready")
+4. Define the input contract: every variable the executor receives, with type and required/optional status
+5. Define the output contract: what the executor produces and in what format
+6. Assess complexity to choose phase count: 3 phases for simple tasks, 4-5 for multi-stage operations
+7. Check existing instructions via brain_query [IF MCP] for the same task — avoid duplicates
 
 ## Phase 2: COMPOSE
-1. Read SCHEMA.md — source of truth for all fields
-2. Read OUTPUT_TEMPLATE.md — fill template following SCHEMA constraints
-3. Fill frontmatter: all 20 fields (null OK for optional)
-4. Set quality: null (NEVER self-score)
-5. Write Prerequisites section: verifiable conditions, not vague assumptions
-6. Write Steps section: numbered, one action per step, concrete commands/actions
-7. Write Validation section: how to verify each step and final outcome
-8. Write Rollback section: undo procedure (or "N/A — instruction is idempotent")
-9. Verify steps_count matches actual numbered steps in body
-10. Check body <= 4096 bytes
+
+1. Read SCHEMA.md — source of truth for all frontmatter fields and body constraints
+2. Read OUTPUT_TEMPLATE.md — fill the template following SCHEMA constraints exactly
+3. Fill frontmatter: 15 required fields + 7 recommended fields (null is acceptable for recommended)
+4. Set quality: null — never self-score
+5. Write the Context section (15-20% of doc): background, input/output contracts, every $variable defined with type and required/optional status
+6. Write the Phases section (40-50% of doc): 3-5 phases following the Analyze -> Generate -> Validate pattern; each phase is atomic with one primary action; include pseudocode for complex logic
+7. Write the Output Contract section (5-10% of doc): a literal template using {{variable}} placeholders — not a prose description
+8. Write the Validation section (8-12% of doc): quality gates with numeric thresholds, formatted as a checklist
+9. Write the Metacognition section (recommended): a Does / Does NOT block plus chaining notation showing upstream -> THIS -> downstream
+10. Verify phases_count in frontmatter matches the actual number of Phase sections in the body
+11. Verify body is within 8192 bytes
 
 ## Phase 3: VALIDATE
-1. Check QUALITY_GATES.md manually (no automated validator yet)
-2. HARD gates (all must pass): YAML parses, id matches p03_ins_ pattern, kind == instruction, quality == null, required fields present, body has all 4 sections, steps_count matches
-3. SOFT gates: check each against QUALITY_GATES.md
-4. Cross-check: each step has one action? Prerequisites verifiable? No identity/persona leaked?
-5. If score < 8.0: revise in same pass before outputting
+
+1. Check QUALITY_GATES.md — apply each gate manually
+2. HARD gates (all must pass):
+   - YAML frontmatter parses without errors
+   - id matches pattern `p03_ins_[a-z][a-z0-9_]+`
+   - kind == instruction
+   - phases_count matches actual Phase section count in body
+   - prerequisites are verifiable statements, not vague conditions
+   - every $variable is defined with type and required/optional
+   - output uses a literal {{variable}} template, not prose
+   - quality == null
+3. SOFT gates (score each against QUALITY_GATES.md):
+   - each phase contains exactly one primary action
+   - pseudocode present for any complex logic step
+   - Context section is 15-20% of total doc
+   - Phases section is 40-50% of total doc
+   - Metacognition section present with Does / Does NOT block
+4. Cross-check scope boundaries:
+   - operational recipe, not an agent identity document (system_prompt)?
+   - not a one-shot task prompt (action_prompt)?
+   - not an orchestration plan (workflow, P12)?
+   - no persona or identity content leaked into the body?
+5. If score < 8.0: revise in the same pass before outputting

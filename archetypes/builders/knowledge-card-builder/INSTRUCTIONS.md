@@ -8,32 +8,53 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 # Instructions: How to Produce a knowledge_card
 
 ## Phase 1: RESEARCH
-1. Identify the topic: what atomic fact needs capturing?
-2. Determine KC kind: domain_kc (external) or meta_kc (CEX-internal)
-3. Gather sources: official docs, APIs, code, established references
-4. Extract key concepts, patterns, rules, comparisons
-5. Check brain_query [IF MCP] for existing KCs on same topic (avoid duplicates)
-6. Every data point needs a source — URLs for external, artifact refs for internal
+
+1. Identify the topic: what single atomic fact or pattern needs capturing?
+2. Gather sources: official documentation, URLs, code references, or established expert knowledge
+3. Extract key facts — concrete data points (numbers, dates, names, measurements), not opinions or vague claims
+4. Determine the KC type:
+   - domain_kc: external knowledge about a tool, API, protocol, or domain
+   - meta_kc: internal pattern or lesson learned from operating this system
+5. Check existing knowledge_cards via brain_query [IF MCP] for the same topic — avoid duplicates
+6. Assess information density: can you reach >= 0.80 density (tables, code, concrete bullets over filler prose)?
 
 ## Phase 2: COMPOSE
-1. Read SCHEMA.md — source of truth for all fields
-2. Read OUTPUT_TEMPLATE.md — fill template following SCHEMA constraints
-3. Fill frontmatter: 13 required + 6 CEX fields (null OK for optional)
-4. Set quality: null (NEVER self-score — validator H05 enforces this)
-5. Write body using correct structure:
+
+1. Read SCHEMA.md — source of truth for all frontmatter fields and body constraints
+2. Read OUTPUT_TEMPLATE.md — fill the template following SCHEMA constraints exactly
+3. Fill frontmatter: 14 required fields + 5 CEX extended fields (null is acceptable for recommended fields)
+4. Set quality: null — never self-score
+5. Write the body following the structure for the KC type:
    - domain_kc: Quick Reference, Key Concepts, Strategy Phases, Golden Rules, Flow, Comparativo, References
    - meta_kc: Executive Summary, Spec Table, Patterns, Anti-Patterns, Application, References
-6. Ensure >= 4 sections with >= 3 non-empty lines each (validator S06, S08)
-7. Keep bullets <= 80 chars (validator S10)
-8. Include >= 1 external URL in body (validator S13)
-9. Include axioms in frontmatter — actionable rules (validator S18)
-10. Total body: 200-5120 bytes (validator H08)
+6. Prefer high-density formats: tables and code blocks over paragraphs
+7. Keep every bullet at or below 80 characters
+8. Include at least one external URL in the References section
+9. Write axioms in frontmatter as ALWAYS / NEVER / IF-THEN rules — at least one required
+10. Keep body between 200 and 5120 bytes
 
 ## Phase 3: VALIDATE
-1. Run: `python _tools/validate_kc.py <file>` (ACTIVE tool — use it!)
-2. HARD gates (all 10 must pass): YAML, id, format, kind, quality, fields, tags, size, paths, author
-3. SOFT gates (20 checks): see QUALITY_GATES.md
-4. Cross-check: density >= 0.80? No filler? No self-refs in tldr?
-5. If HARD fails: fix immediately, re-run validator
-6. If score < 8.0: expand thin sections, add tables/code, remove filler
-7. Target: PUBLISH (>= 8.0) minimum, GOLDEN (>= 9.5) ideal
+
+1. Run `python _tools/validate_kc.py <file>` if available — this is an active automated tool
+2. HARD gates (all must pass):
+   - YAML frontmatter parses without errors
+   - id matches pattern `p01_kc_[a-z][a-z0-9_]+`
+   - kind == knowledge_card
+   - quality == null
+   - density >= 0.80
+   - at least 3 concrete facts present (numbers, dates, named entities)
+   - body is between 200 and 5120 bytes
+   - no internal paths in body (records/, .claude/, /home/)
+   - no filler sentences ("this document covers", "as mentioned above")
+3. SOFT gates (score each against QUALITY_GATES.md):
+   - tldr contains concrete data, not generic description
+   - axioms are in ALWAYS / NEVER / IF-THEN form
+   - at least 4 sections with at least 3 non-empty lines each
+   - keywords and long_tails present for search
+4. Cross-check scope boundaries:
+   - atomic searchable fact, not a broad domain overview (context_doc)?
+   - not a term definition (glossary_entry)?
+   - not an embedding configuration file?
+   - are the facts concrete (numbers, dates, names) rather than vague claims?
+5. If a HARD gate fails: fix immediately and re-run the validator
+6. If score < 8.0: expand thin sections, replace prose with tables or code blocks, remove filler

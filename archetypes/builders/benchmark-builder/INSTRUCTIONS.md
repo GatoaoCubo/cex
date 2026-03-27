@@ -8,30 +8,34 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 # Instructions: How to Produce a benchmark
 
 ## Phase 1: RESEARCH
-1. Identify the metric: what performance aspect needs measurement?
-2. Define unit and direction (lower_is_better or higher_is_better)
-3. Gather current baseline data (existing measurements, logs, APM tools)
-4. Determine target: SLA requirement, competitor data, or improvement goal
-5. Check brain_query [IF MCP] for existing benchmarks on this metric (avoid duplicates)
-6. Research methodology: appropriate iterations, warmup, statistical tests
-7. Document environment: hardware specs, software versions, config settings
+1. Identify the target system or component being measured
+2. Define metrics: for each metric specify name, unit (ms, req/s, USD, tokens), and direction (lower_is_better or higher_is_better). Include latency percentiles (p50, p95, p99), throughput, cost, and quality score as applicable
+3. Establish baseline: gather current measured values from logs, monitoring, or prior runs — never estimate
+4. Set targets: derive from SLA requirements, competitor data, or explicit improvement goals — must be numeric
+5. Define methodology: number of iterations (minimum 10), warmup runs (minimum 1), statistical significance approach, and percentile calculation method
+6. Document environment spec: hardware (CPU, RAM, disk), OS, runtime versions, config settings — sufficient to reproduce
+7. Search for existing benchmarks covering the same system and metric (avoid duplicates)
 
 ## Phase 2: COMPOSE
 1. Read SCHEMA.md — source of truth for all fields
-2. Read OUTPUT_TEMPLATE.md — fill following SCHEMA constraints
-3. Fill frontmatter: all 22 required fields (quality: null)
-4. Set metric, unit, direction, baseline, target with concrete numbers
-5. Write Benchmark Overview section: what is measured and business impact
-6. Write Methodology section: iterations, warmup, measurement protocol
-7. Write Metrics section: table with all metrics, baselines, targets
-8. Write Environment section: exact hardware/software/config for reproduction
-9. Write Results Template section: percentile table structure
+2. Read OUTPUT_TEMPLATE.md — template to fill
+3. Fill frontmatter: all 22 required fields (quality: null, never self-score)
+4. Write Setup section: environment dependencies, fixtures, and initialization steps
+5. Write Methodology section: iterations count, warmup runs, percentile list, significance threshold, and measurement protocol
+6. Write Metrics section: table with columns for metric name, unit, baseline value, target value, and direction
+7. Write Execution section: exact commands needed to reproduce the benchmark run
+8. Write Results Template section: pre-formatted table structure for recording p50/p95/p99 outcomes
+9. Keep body <= 8192 bytes
 
 ## Phase 3: VALIDATE
-1. Check against QUALITY_GATES.md (this builder's own gates)
-2. HARD: id format, kind, pillar, quality==null, iterations >= 10, warmup >= 1
-3. HARD: percentiles include p50+p95, baseline and target same unit
-4. SOFT: methodology is reproducible, environment is specific
-5. Verify: still measuring PERFORMANCE? Not drifting into correctness (eval)?
-6. Verify: not defining criteria (scoring_rubric)? Not providing examples (golden_test)?
-7. If score < 8.0: revise before outputting
+1. Check QUALITY_GATES.md manually
+2. HARD gate: id matches `p07_bench_` pattern
+3. HARD gate: kind == benchmark
+4. HARD gate: quality == null
+5. HARD gate: each metric has a unit specified
+6. HARD gate: baseline and target are numeric and share the same unit
+7. HARD gate: methodology specifies iterations count
+8. HARD gate: percentiles include at least p50 and p95
+9. Cross-check: is this measuring quantitative performance, not correctness? (correctness belongs in eval artifacts)
+10. Cross-check: is this measuring performance, not defining pass/fail criteria? (criteria belong in scoring rubrics)
+11. If score < 8.0: revise before outputting

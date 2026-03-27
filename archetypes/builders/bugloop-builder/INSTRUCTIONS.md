@@ -8,46 +8,33 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 # Instructions: How to Produce a bugloop
 
 ## Phase 1: RESEARCH
-1. Identify the scope: what system, module, or pipeline does this bugloop monitor?
-2. Identify the failure class: what KNOWN failure signature triggers this loop?
-3. brain_query [IF MCP]: search P11_feedback/examples/ for existing bugloops in same domain
-4. Determine detect.method: is the signal from static analysis, test failure, runtime trace, or log scan?
-5. Determine detect.trigger: when does detection run (on_commit, on_deploy, scheduled, continuous)?
-6. Determine fix.strategy: based on failure class risk (patch_and_retry / rollback_first / isolate_then_fix)
-7. Calibrate confidence: use KNOWLEDGE.md table — do NOT inflate confidence for non-deterministic failures
-8. Determine cycle_count: how many retry cycles before escalation is acceptable for this domain?
-9. Identify escalation.target: who or what system receives the escalation payload?
-10. Determine rollback need: is rollback required given the fix strategy and domain risk?
+1. Identify the target system or test suite this loop monitors
+2. Catalog detection triggers: list concrete failure signatures — specific regex patterns, named test failure strings, or log scan patterns — not vague descriptions
+3. Define fix strategies per failure class: assign auto_fix=true only where confidence >= 0.7, use auto_fix=false for non-deterministic or high-risk failures
+4. Specify verification assertions: what must be true after a fix attempt — at minimum one named assertion with a timeout bound
+5. Determine escalation thresholds: the number of failed fix attempts that triggers escalation, and the target (human role, queue name, or named system)
+6. Map rollback policies: if fix strategy is rollback_first, rollback.enabled must be true — these must be consistent
 
 ## Phase 2: COMPOSE
 1. Read SCHEMA.md — source of truth for all required fields
-2. Read OUTPUT_TEMPLATE.md — fill following SCHEMA field names and types exactly
-3. Set id: p11_bl_{scope_slug} — id MUST equal filename stem
-4. Set kind: bugloop, pillar: P11, quality: null (never self-score)
-5. Fill detect object: method + trigger + pattern (concrete regex or named signature)
-6. Fill fix object: strategy + auto_fix boolean + max_attempts (must be <= cycle_count)
-7. Fill verify object: test_suite path + assertions list (>= 1) + timeout in seconds
-8. Set cycle_count: max iterations before escalation fires
-9. Set auto_fix at root level: MUST match fix.auto_fix exactly
-10. Fill escalation object: threshold (<= cycle_count) + target (named system or role)
-11. Set confidence: calibrated float 0.0-1.0 per KNOWLEDGE.md table
-12. Set test_suite at root level: canonical path or name of verification suite
-13. Fill rollback object: enabled boolean + strategy (git_revert/snapshot_restore/blue_green)
-14. Write ## Detection section: describe triggers, pattern, and signal sources
-15. Write ## Fix Strategy section: describe auto vs manual rationale and strategy choice
-16. Write ## Verification section: describe suite, pass criteria, timeout policy
-17. Write ## Escalation section: describe threshold logic and payload content
-18. Write ## Rollback section: describe trigger conditions and procedure
+2. Read OUTPUT_TEMPLATE.md — template to fill
+3. Fill frontmatter: all required fields (quality: null, never self-score)
+4. Write Detection section: list each trigger with its concrete pattern (regex or named signature) and the signal source (test runner output, log file, static analysis report)
+5. Write Fix Strategy section: max_attempts value, auto_fix flag with rationale tied to confidence level, and the named strategy (patch_and_retry, rollback_first, or isolate_then_fix)
+6. Write Verification section: test suite path or name, list of assertions that must pass, and timeout in seconds
+7. Write Escalation section: threshold (must be <= cycle_count), target name, and payload content sent on escalation
+8. Write Rollback section: enabled flag, strategy name (git_revert, snapshot_restore, or blue_green), and trigger condition
 
 ## Phase 3: VALIDATE
-1. Check against QUALITY_GATES.md — 14 HARD gates must all pass
-2. HARD: id format p11_bl_*, kind==bugloop, pillar==P11, quality==null
-3. HARD: detect has method+trigger+pattern, fix.max_attempts integer 1-10
-4. HARD: cycle_count >= fix.max_attempts, escalation.threshold <= cycle_count
-5. HARD: confidence float 0.0-1.0, auto_fix root == fix.auto_fix
-6. HARD: verify.assertions non-empty, rollback has enabled+strategy
-7. INVARIANT: if auto_fix==true and confidence < 0.7 — REJECT (unsafe)
-8. INVARIANT: if rollback.enabled==false and fix.strategy==rollback_first — REJECT (contradiction)
-9. SOFT: all 5 body sections present, tldr < 160 chars, tags >= 3 with "bugloop"
-10. If any HARD gate fails: fix before outputting
-11. If score < 8.0: revise before outputting
+1. Check QUALITY_GATES.md manually
+2. HARD gate: id matches `p11_bl_` pattern
+3. HARD gate: kind == bugloop
+4. HARD gate: quality == null
+5. HARD gate: detection contains at least one concrete trigger with a pattern (not a description)
+6. HARD gate: max_attempts is defined as an integer between 1 and 10
+7. HARD gate: verification contains at least one assertion
+8. HARD gate: if auto_fix == true, confidence must be >= 0.7 — reject if not
+9. HARD gate: if fix strategy is rollback_first, rollback.enabled must be true — reject contradiction
+10. Cross-check: is this a detect-fix-verify cycle? If it only blocks on pass/fail without attempting fixes, it is a quality_gate not a bugloop
+11. Cross-check: is this driven by failure correction, not metric optimization? Metric-driven improvement is an optimizer artifact
+12. If score < 8.0: revise before outputting

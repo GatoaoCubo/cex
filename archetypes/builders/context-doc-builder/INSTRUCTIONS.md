@@ -1,56 +1,44 @@
 ---
 pillar: P03
 llm_function: REASON
-purpose: Execution protocol for producing a context_doc artifact
+purpose: Step-by-step production process for context_doc
+pattern: 3-phase pipeline (research -> compose -> validate)
 ---
 
-# Instructions: context-doc-builder
+# Instructions: How to Produce a context_doc
 
-## Phase 1: SCOPE
-
-**Goal**: Establish precise domain boundaries before writing a single line.
-
-1. Identify domain label (snake_case, e.g., `ecommerce_imports`, `api_auth_jwt`)
-2. Write scope sentence: "This context covers [X] within [Y] for [Z] audience"
-3. List what is explicitly OUT of scope (1-3 items minimum)
-4. Enumerate stakeholders: who consumes this context_doc? (agent, human, both?)
-5. Gather constraints: what cannot change? (regulatory, technical, organizational)
-6. List assumptions: what is taken as given without proof?
-7. List dependencies: what other artifacts, systems, or facts does this context reference?
-8. Run `brain_query [IF MCP]("context_doc [domain]")` — if existing doc found, update rather than duplicate
+## Phase 1: RESEARCH
+1. Identify the domain to document (snake_case label, e.g., `ecommerce_imports`, `api_auth_jwt`)
+2. Define scope boundaries: write one sentence — "This context covers [X] within [Y] for [Z] audience"
+3. List what is explicitly out of scope (minimum 1-3 items)
+4. Catalog stakeholders and their needs: who consumes this document and for what purpose (agent, human, or both)
+5. Identify constraints: technical, business, or regulatory rules that cannot change
+6. List assumptions: what is taken as given without requiring proof
+7. Identify dependencies on other domains, services, or artifacts
+8. Check existing context_docs for overlapping scope to avoid duplication
 
 ## Phase 2: COMPOSE
-
-**Goal**: Produce the .md file with correct frontmatter and all required body sections.
-
-1. Read SCHEMA.md — internalize all required/recommended fields and constraints
-2. Read OUTPUT_TEMPLATE.md — use as the structural skeleton
-3. Fill frontmatter:
-   - id: `p01_ctx_{{topic_slug}}` (must equal filename stem)
-   - kind: `context_doc` (literal, no variation)
-   - domain: snake_case domain label from Phase 1
-   - scope: scope sentence from Phase 1
-   - quality: null (always — never self-score)
-   - all other required fields from SCHEMA.md
-4. Write `## Scope` section: restate scope, list in-scope and out-of-scope items
-5. Write `## Background` section: domain background, history, rationale (no filler)
-6. Write `## Stakeholders` section: who uses this context and why
-7. Write `## Constraints & Assumptions` section: hard constraints + working assumptions
-8. Write `## Dependencies` section: referenced artifacts, systems, external sources
-9. Write `## References` section: source links, related artifacts, version history
+1. Read SCHEMA.md — source of truth for all fields
+2. Read OUTPUT_TEMPLATE.md — fill {{vars}} following SCHEMA constraints
+3. Fill frontmatter: all required fields, id as `p01_cd_{{topic_slug}}` (quality: null — never self-score)
+4. Write Domain Scope section: restate scope sentence, list included and excluded topics explicitly
+5. Write Stakeholders section: who uses this context and why, one entry per stakeholder type
+6. Write Constraints section: technical, business, and regulatory constraints that bound the domain
+7. Write Assumptions section: working assumptions taken as given, one per line
+8. Write Dependencies section: other domains, services, and artifacts this document references
+9. Write Key Concepts section: 3-5 essential ideas required to understand this domain
+10. Verify body <= 2048 bytes; if over limit, trim Key Concepts first, then Dependencies
 
 ## Phase 3: VALIDATE
-
-**Goal**: Verify artifact passes all gates before marking ready.
-
-1. Open QUALITY_GATES.md
-2. Check all 7 HARD gates sequentially — any HARD fail = reject and fix
-3. Check all 8 SOFT gates — note which pass/fail for scoring estimate
-4. Cross-check boundary drift:
-   - Is this still a context_doc? (not drifted into KC = no single-atomic-fact structure)
-   - Is scope section present and >= 3 lines?
-   - Body byte count <= 2048?
-5. If body > 2048 bytes: trim Background section first
-6. If still over limit: trim Stakeholders section
-6. Set quality: null in frontmatter (not a score — external gate sets this)
-7. Produce companion .yaml file with identical frontmatter fields
+1. Check QUALITY_GATES.md — verify each HARD gate manually
+2. Confirm YAML frontmatter parses without errors
+3. Confirm id matches `p01_cd_`
+4. Confirm kind == context_doc
+5. Confirm scope boundary is defined (Domain Scope section present and at least 3 lines)
+6. Confirm at least 1 stakeholder is listed
+7. Confirm constraints are listed (not empty)
+8. Confirm body <= 2048 bytes
+9. HARD gates: frontmatter valid, id pattern matches, scope defined, stakeholder present, constraints listed
+10. SOFT gates: score against QUALITY_GATES.md
+11. Cross-check: domain context for hydration (not an atomic fact = knowledge_card)? Not a single-term definition (glossary_entry)? Not step-by-step procedural guidance (instruction)?
+12. Revise if score < 8.0 before outputting

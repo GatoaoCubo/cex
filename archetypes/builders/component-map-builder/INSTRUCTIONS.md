@@ -1,49 +1,42 @@
 ---
-id: component-map-builder-instructions
-kind: instructions
-parent: component-map-builder
-version: 1.0.0
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for component_map
+pattern: 3-phase pipeline (research -> compose -> validate)
 ---
 
-# Instructions — component-map-builder
+# Instructions: How to Produce a component_map
 
-## Phase 1: SURVEY
-
-1. Define the scope boundary (what system/subsystem to map)
-2. List all components within scope
-3. Identify the owner of each component
-4. Map connections between components (data_flow, dependency, signal)
-5. brain_query [IF MCP]: search existing maps to avoid duplicates
-6. Determine health/status of each component (active, deprecated, planned)
-7. Identify interfaces at component boundaries
+## Phase 1: DISCOVER
+1. Identify the system scope to inventory (what boundary defines "inside" vs "outside")
+2. List all components within scope (services, modules, databases, queues, external APIs)
+3. Map connections between components: data flow direction, dependency type, and signal type
+4. Determine ownership per component (team, service, or person responsible)
+5. Assess health status indicator for each component: active, deprecated, or planned
+6. Check existing component_maps to avoid overlapping scope
+7. Verify component count and connection count are consistent with scope
 
 ## Phase 2: COMPOSE
-
 1. Read SCHEMA.md — source of truth for all fields
-2. Read OUTPUT_TEMPLATE.md — fill template following SCHEMA constraints
-3. Fill frontmatter: all 15 required + 4 extended fields (null OK for optional)
-4. Set `quality: null` (NEVER self-score)
-5. Write Scope section: what is and isn't included
-6. Write Components table: name, role, owner, status, version
-7. Write Connections table: from, to, type, data, direction
-8. Write Interfaces section: boundary contracts between components
-9. Write Dependencies section: critical path and failure impact
-10. Write Boundaries section: where this map ends and other maps begin
-11. Write References section: sources and related artifacts
+2. Read OUTPUT_TEMPLATE.md — fill {{vars}} following SCHEMA constraints
+3. Fill frontmatter: all 19 required fields (quality: null — never self-score)
+4. Write Components section: for each component list name, type, owner, health status, and description
+5. Write Connections section: for each connection list source, target, protocol, and data type
+6. Write Dependencies section: external services, libraries, and infrastructure the system relies on
+7. Write Data Flows section: named flows with the path each takes through components
+8. Write Boundaries section: explicit statement of what is inside vs outside this map's scope
+9. Verify component_count in frontmatter matches actual rows in Components section
+10. Verify connection_count in frontmatter matches actual rows in Connections section
 
 ## Phase 3: VALIDATE
-
-1. Open QUALITY_GATES.md
-2. Check all 9 HARD gates — any failure = reject and fix
-3. Check all 10 SOFT gates — compute score
-4. Cross-check: is output structured data, not a visual diagram or single-component spec?
-5. Verify component_count matches actual rows in Components table
-6. Verify connection_count matches actual rows in Connections table
-7. Verify no orphan components (every component has >= 1 connection)
-8. If score < 8.0: revise in same pass, do not deliver
-
-## Phase 4: DELIVER
-
-1. Write file to `cex/P08_architecture/examples/p08_cmap_{scope_slug}.yaml`
-2. Confirm filename stem matches `id` field
-3. Report: component_count, connection_count, HARD gates passed, SOFT score
+1. Check QUALITY_GATES.md — verify each HARD gate manually
+2. Confirm YAML frontmatter parses without errors
+3. Confirm id matches `p08_cm_`
+4. Confirm kind == component_map
+5. Confirm components are listed with at least name and owner
+6. Confirm every connection has both source and target
+7. Confirm scope boundary is defined (Boundaries section present)
+8. HARD gates: frontmatter valid, id pattern matches, components listed, connections have source+target, boundary defined
+9. SOFT gates: no orphan components (every component has at least 1 connection), score against QUALITY_GATES.md
+10. Cross-check: structured data inventory (not a visual diagram)? Covers many components (not a single-component satellite_spec)? Describes existing state (not prescribes future patterns)?
+11. Revise if score < 8.0 before outputting

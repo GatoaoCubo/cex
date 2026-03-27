@@ -1,50 +1,40 @@
 ---
-id: diagram-builder-instructions
-kind: instructions
-builder: diagram-builder
-version: 1.0.0
+pillar: P08
+llm_function: REASON
+purpose: Step-by-step production process for diagram
+pattern: 3-phase pipeline (research -> compose -> validate)
 ---
 
-# diagram-builder — INSTRUCTIONS
+# Instructions: How to Produce a diagram
 
 ## Phase 1: DISCOVER
 
-1. Identify the architecture scope to visualize
-2. Determine zoom level: system, subsystem, or component
-3. List components within scope
-4. Map connections between components (data flow, dependencies, signals)
-5. brain_query [IF MCP] for existing diagrams — avoid duplicates
-6. Choose notation: ASCII (portable) or Mermaid (renderable)
-7. Identify layers to represent (infra, runtime, content, governance)
+1. Identify the architecture scope to visualize (what system or subsystem is the subject)
+2. Determine zoom level: system (entire platform), subsystem (one service group), or component (internals of one service)
+3. List every component within that scope (services, stores, queues, gateways, agents)
+4. Map connections between components: data flow direction, dependency edges, signal paths, and relationship labels
+5. Choose notation: ASCII for portability in any viewer, Mermaid for rendered output in Markdown environments
+6. Identify layers present in the scope (infrastructure, runtime, content, governance) and decide which to show
+7. Check existing diagrams at the same scope level to avoid duplicating an artifact that already exists
 
 ## Phase 2: COMPOSE
 
 1. Read SCHEMA.md — source of truth for all fields
-2. Read OUTPUT_TEMPLATE.md — fill template following SCHEMA constraints
-3. Fill frontmatter: all 15 required fields + 4 extended (null OK for optional)
-4. Set quality: null (NEVER self-score)
-5. Write Scope section: what system/subsystem is visualized and its boundaries
-6. Write Components section: labeled boxes/nodes with brief descriptions
-7. Write Connections section: labeled arrows showing relationships
-8. Write Diagram section: the actual ASCII or Mermaid visualization
-9. Write Legend section: explanation of all symbols and arrow types
-10. Write Annotations section: non-obvious design decisions
+2. Read OUTPUT_TEMPLATE.md — fill the template following SCHEMA constraints
+3. Fill frontmatter: all 15 required fields + 4 extended fields (null is acceptable for optional fields)
+4. Set `quality: null` — never assign a numeric score at authoring time
+5. Write **Scope** section: what is visualized, where the boundary is, what is explicitly excluded
+6. Write **Components** section: labeled boxes or nodes, one line of description per component
+7. Write **Connections** section: labeled arrows showing the relationship type and direction
+8. Write **Diagram** section: the actual ASCII art or Mermaid code block — must contain visual characters, not prose
+9. Write **Legend** section: every symbol, box style, and arrow type explained
+10. Write **Annotations** section: non-obvious design decisions that cannot be read from the diagram alone
+11. Verify diagram body contains actual visual characters (pipes, dashes, arrows, Mermaid syntax) not descriptive text
 
 ## Phase 3: VALIDATE
 
-1. Check QUALITY_GATES.md manually (no automated validator)
-2. HARD gates: YAML parses, id pattern `^p08_diag_[a-z][a-z0-9_]+$`, kind literal "diagram", quality null, 15 required fields present, notation specified, diagram contains actual visual
-3. SOFT gates: check each S01-S10 against QUALITY_GATES.md
-4. Cross-check: is it purely visual? Not drifting into component inventory or pattern?
-5. If score < 8.0: revise in same pass before output
-
-## Step Constraints
-
-- Phase 1 Step 5: brain_query only if MCP available — skip gracefully if not
-- Phase 2 Step 4: quality MUST be null — any number fails H05
-- Phase 2 Step 8: diagram must contain actual visual characters, not prose
-- Phase 3 Step 5: never output below 8.0 — revise until gates pass
-
-## Output Location
-
-`cex/P08_architecture/examples/p08_diag_{scope_slug}.md`
+1. Check QUALITY_GATES.md manually — no automated validator
+2. HARD gates: YAML parses, `id` matches `^p08_diag_[a-z][a-z0-9_]+$`, `kind` is the literal string `diagram`, `quality` is null, all 15 required fields present, notation field specified, Diagram section contains actual visual characters
+3. SOFT gates: score each S01–S10 from QUALITY_GATES.md against the artifact
+4. Cross-check: is this purely a visual representation? If it reads as a structured inventory, it belongs in `component_map`. If it prescribes a process, it belongs in a `pattern`. Diagrams show, they do not list or instruct.
+5. If score < 8.0: revise in the same pass before outputting

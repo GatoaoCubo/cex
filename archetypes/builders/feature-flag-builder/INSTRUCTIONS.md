@@ -2,40 +2,44 @@
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for feature_flag
-pattern: 3-phase pipeline (classify -> compose -> validate)
+pattern: 3-phase pipeline (research -> compose -> validate)
 ---
 
 # Instructions: How to Produce a feature_flag
 
-## Phase 1: CLASSIFY
-1. Identify the feature to be flagged
-2. Classify the flag category: release, experiment, ops, or permission
-3. Determine default state (on or off)
-4. Define rollout percentage target (0-100)
-5. Identify targeting strategy (all users, cohort, percentage)
-6. Set expiration date for stale flag cleanup
-7. Check for existing feature_flag artifacts via brain_query [IF MCP] (avoid duplicates)
-8. Confirm feature slug for id: snake_case, lowercase, no hyphens
+## Phase 1: RESEARCH
+
+1. Identify the feature to flag and write a one-sentence description of what it enables or disables
+2. Classify the flag type: release (controls a new feature shipping), experiment (A/B or multivariate test), ops (operational kill switch), or permission (access control by user segment)
+3. Determine the initial state: on or off at the moment of creation
+4. Define the rollout strategy: instant (flip to 100% at once), gradual percentage (increase over a schedule), or cohort-based (specific user segments only)
+5. Identify targeting rules: which user segments, environments, or override conditions see which state
+6. Define kill switch behavior: how to emergency-disable the flag, who is notified, and what the system falls back to
+7. Check existing feature_flags via brain_query [IF MCP] for conflicts — two flags must not control the same code path simultaneously
 
 ## Phase 2: COMPOSE
+
 1. Read SCHEMA.md — source of truth for all fields
-2. Read OUTPUT_TEMPLATE.md — fill {{vars}} following SCHEMA constraints
-3. Fill frontmatter: all required fields (quality: null — never self-score)
-4. Set default_state to concrete value (on or off)
-5. Set rollout_percentage to integer 0-100
-6. Write ## Flag Specification: feature description, current state, kill switch info
-7. Write ## Rollout Strategy: stages with percentages and timeline
-8. Write ## Lifecycle: create, test, ramp, full, retire stages
-9. Verify body <= 1536 bytes
-10. Verify id matches `^p09_ff_[a-z][a-z0-9_]+$`
+2. Read OUTPUT_TEMPLATE.md — fill the template following SCHEMA constraints
+3. Fill all required frontmatter fields; set `quality: null` — never self-score
+4. Write **Flag Definition** section: name, type, description, initial state (on/off)
+5. Write **Rollout Strategy** section: method name, percentage schedule with dates, cohort definition if applicable
+6. Write **Targeting Rules** section: who sees which state — segments, environments, per-user overrides
+7. Write **Kill Switch** section: emergency disable procedure, notification targets, fallback behavior
+8. Write **Defaults** section: value returned when the flag service is unavailable or the flag key is missing
+9. Write **Lifecycle** section: creation date, expected removal date (required — flags without removal dates accumulate as technical debt), and owner
+10. Confirm body <= 1536 bytes
 
 ## Phase 3: VALIDATE
+
 1. Check QUALITY_GATES.md — verify each HARD gate manually
 2. Confirm YAML frontmatter parses without errors
-3. Confirm default_state is "on" or "off" (not other values)
-4. Confirm rollout_percentage is integer 0-100
-5. Confirm quality == null
-6. Confirm body has all 3 required sections
-7. Confirm body <= 1536 bytes
-8. Score SOFT gates against QUALITY_GATES.md
-9. Revise if score < 8.0 before outputting
+3. Confirm `id` matches `^p09_ff_[a-z][a-z0-9_]+$`
+4. Confirm `default_state` is the string "on" or "off" — no other values
+5. Confirm rollout strategy is defined with a concrete method
+6. Confirm kill switch behavior is documented
+7. Confirm Lifecycle section includes a removal date
+8. Confirm `quality` is null
+9. Confirm body <= 1536 bytes
+10. Cross-check: is this an on/off toggle for a specific feature? If it catalogs general runtime variables it belongs in `env_config`. If it controls user access roles it belongs in `permission`. If it specifies file system locations it belongs in `path_config`. Flags toggle discrete behaviors, they do not store configuration values.
+11. If score < 8.0: revise in the same pass before outputting
