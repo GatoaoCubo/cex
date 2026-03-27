@@ -3,58 +3,82 @@ pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for response_format
 pattern: TEMPLATE derives from this. CONFIG restricts this.
+version: 2.0.0
 ---
 
 # Schema: response_format
 
-## Frontmatter Fields
+## Artifact Identity
+| Field | Value |
+|-------|-------|
+| Pillar | `P05` |
+| Type | literal `response_format` |
+| Machine format | `yaml` (frontmatter yaml + md body) |
+| Naming | `p05_rf_{format_slug}.yaml` |
+| Max bytes | 4096 |
 
-### Required
+## Required Fields (12)
+
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
-| id | string (p05_rf_{format_slug}) | YES | — | Namespace compliance |
-| kind | literal "response_format" | YES | — | Type integrity |
+| id | string, matches `^p05_rf_[a-z][a-z0-9_]+$` | YES | — | id == filename stem |
+| kind | literal "response_format" | YES | — | Type discriminator |
 | pillar | literal "P05" | YES | — | Pillar assignment |
-| title | string "Response Format: {name}" | YES | — | Human label |
 | version | semver string | YES | "1.0.0" | Versioning |
 | created | date YYYY-MM-DD | YES | — | Creation date |
-| updated | date YYYY-MM-DD | YES | — | Last update |
+| updated | date YYYY-MM-DD | YES | — | Last update date |
 | author | string | YES | — | Producer identity |
-| target_kind | string | YES | — | Artifact kind that uses this format |
-| format_type | enum: json, yaml, markdown, csv, plaintext | YES | — | Output format |
-| injection_point | enum: system_prompt, user_message | YES | — | Where format is injected |
-| sections | list[string] | YES | — | Ordered output sections |
-| sections_count | integer >= 1 | YES | — | Number of output sections |
+| format_type | enum: json, yaml, markdown, text, structured | YES | — | Output format; compliance: JSON 95% > YAML 90% > tables 88% > lists 85% > prose 70% |
 | domain | string | YES | — | Domain this format covers |
 | quality | null | YES | null | Never self-score |
 | tags | list[string], len >= 3 | YES | — | Must include "response-format" |
 | tldr | string <= 160ch | YES | — | Dense summary |
 
-### Recommended
-| Field | Type | Required | Default | Notes |
-|-------|------|----------|---------|-------|
-| example_output | string | REC | — | Concrete example of expected output |
-| composable | boolean | REC | false | Can combine with other formats |
-| density_score | float 0.80-1.00 | REC | — | Content density |
-| linked_artifacts | object {primary, related} | REC | — | Cross-references |
+## Recommended Fields (4)
+
+| Field | Type | Required | Notes |
+|-------|------|----------|-------|
+| target_kind | string | REC | Artifact kind that uses this format |
+| example_output | string | REC | Concrete example of expected output |
+| variable_syntax | enum: mustache, bracket | REC | tier1={{MUSTACHE}} for primary, tier2=[BRACKET] for secondary |
+| sections | list[string] | REC | Ordered output section names |
 
 ## ID Pattern
-Regex: `^p05_rf_[a-z][a-z0-9_]+$`
+```
+^p05_rf_[a-z][a-z0-9_]+$
+```
 Rule: id MUST equal filename stem.
 
-## Body Structure (required sections)
-1. `## Format Overview` — what output structure this defines and for which task
-2. `## Sections` — ordered list of sections with description and constraints
-3. `## Example Output` — complete example showing expected shape
-4. `## Injection Instructions` — how to inject this format into the prompt
+## Variable Syntax
+
+| Tier | Syntax | Use |
+|------|--------|-----|
+| Primary (required vars) | `{{VARIABLE_NAME}}` | Mustache — always typed in variables table |
+| Secondary (optional vars) | `[VARIABLE_NAME]` | Bracket — clearly marked optional |
+
+Every variable MUST have type + example in the variables table. Untyped variables are forbidden.
+
+## Body Structure (4 sections)
+
+1. `## Format Specification` — what output structure this defines, format_type, compliance notes
+2. `## Variables Table` — all variables with name, type, constraints, required/optional, example
+3. `## Template Body` — the actual template with placeholders showing expected shape
+4. `## Example Output` — complete filled example demonstrating correct output
+
+## Compliance Note
+Format preference hierarchy (by LLM compliance rate):
+`JSON (95%) > YAML (90%) > Markdown tables (88%) > Numbered lists (85%) > Prose (70%)`
+
+Choose format_type based on consumer: machine = json, config = yaml, human = markdown.
 
 ## Constraints
-- max_bytes: 4096 (body only)
-- naming: p05_rf_{format_slug}.yaml
-- machine_format: json
-- id == filename stem
-- sections_count >= 1
-- format_type MUST be one of: json, yaml, markdown, csv, plaintext
-- injection_point MUST be one of: system_prompt, user_message
-- LLM SEES this format — write as clear instructions
-- quality: null always
+
+| Constraint | Value |
+|-----------|-------|
+| max_bytes | 4096 (body only) |
+| naming | p05_rf_{format_slug}.yaml |
+| id == filename stem | enforced |
+| format_type | one of: json, yaml, markdown, text, structured |
+| quality | ALWAYS null |
+| sections | 4-7 per format (consolidate if >7) |
+| variables | every variable typed + exampled |

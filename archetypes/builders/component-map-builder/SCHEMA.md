@@ -2,41 +2,47 @@
 id: component-map-builder-schema
 kind: schema
 parent: component-map-builder
-version: 1.0.0
+version: 2.0.0
 ---
 
 # Schema — component-map-builder
 
 SOURCE OF TRUTH. OUTPUT_TEMPLATE derives from this. CONFIG restricts from this.
 
-## Required Fields (15)
+## Artifact Identity
+| Field | Value |
+|-------|-------|
+| Pillar | `P08` |
+| Type | literal `component_map` |
+| Machine format | `yaml` (frontmatter yaml + md body) |
+| Naming | `p08_cmap_{scope_slug}.yaml` |
+| Max bytes | 4096 |
+
+## Required Fields (11)
 
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
-| id | string | YES | — | Pattern: `^p08_cmap_[a-z][a-z0-9_]+$` (H02, H03) |
-| kind | literal "component_map" | YES | — | Exact string (H04) |
-| pillar | literal "P08" | YES | — | Architecture pillar (H06) |
+| id | string, matches `^p08_cmap_[a-z][a-z0-9_]+$` | YES | — | Namespace compliance |
+| kind | literal "component_map" | YES | — | Type discriminator |
+| pillar | literal "P08" | YES | — | Architecture pillar |
 | version | semver X.Y.Z | YES | "1.0.0" | Quoted string |
-| created | date YYYY-MM-DD | YES | — | Quoted string (H06) |
-| updated | date YYYY-MM-DD | YES | — | Quoted string (H06) |
-| author | string | YES | — | Satellite or human (H06) |
+| created | date YYYY-MM-DD | YES | — | Quoted string |
+| updated | date YYYY-MM-DD | YES | — | Quoted string |
+| author | string | YES | — | Satellite or human |
 | domain | string | YES | — | Architecture domain |
-| quality | null | YES | null | NEVER a number (H05) |
-| tags | list[string], len >= 3 | YES | — | Searchability (H07) |
-| tldr | string <= 160ch | YES | — | Dense summary (S01) |
-| scope | string | YES | — | What is mapped (H08) |
-| component_count | integer >= 2 | YES | — | Must match Components table (H09) |
-| connection_count | integer >= 1 | YES | — | Must match Connections table |
-| components | list[object] | YES | — | Each: {name, role, owner, status} |
+| quality | null | YES | null | NEVER a number |
+| tags | list[string], len >= 3 | YES | — | Searchability |
+| tldr | string <= 160ch | YES | — | Dense summary |
 
-## Extended Fields (4 — REC)
+## Recommended Fields (5)
 
 | Field | Type | Required | Notes |
 |-------|------|----------|-------|
-| connections | list[object] | REC | Each: {from, to, type} |
-| interfaces | list[object] | REC | Each: {boundary, components, contract} |
-| dependencies | list[object] | REC | Each: {component, depends_on, failure_impact} |
-| keywords | list[string] | REC | len >= 2, for brain search (S10) |
+| scope | string | REC | What is mapped — one sentence |
+| component_count | integer >= 2 | REC | Must match Components table |
+| connection_count | integer >= 1 | REC | Must match Connections table |
+| layers_count | integer >= 2 | REC | Number of architectural layers (layered decomposition) |
+| keywords | list[string], len >= 2 | REC | For brain search |
 
 ## ID Pattern
 
@@ -53,7 +59,6 @@ name: string        # component identifier
 role: string        # what it does
 owner: string       # satellite, team, or "system"
 status: enum        # active | deprecated | planned
-version: string     # optional, semver or descriptor
 ```
 
 ## Connection Object Schema
@@ -66,30 +71,37 @@ data: string        # optional, what flows
 direction: enum     # unidirectional | bidirectional
 ```
 
-## Body Structure (7 sections — S07)
+## Dependency Notation
 
-1. `## Scope` — what is and isn't mapped
-2. `## Components` — table: name, role, owner, status, version
-3. `## Connections` — table: from, to, type, data, direction
-4. `## Interfaces` — boundary contracts between components
-5. `## Dependencies` — critical path and failure impact
-6. `## Boundaries` — where map scope ends, what adjacent maps cover
-7. `## References` — sources and related artifacts
+| Notation | Meaning | Example |
+|----------|---------|---------|
+| `A --> B` | Data flow | Parser --> Classifier |
+| `A --depends--> B` | A requires B | Search --depends--> Embeddings |
+| `A --signals--> B` | Event/notification | Worker --signals--> Monitor |
+| `A --produces--> B` | A generates B | Indexer --produces--> VectorIndex |
+| `A <--> B` | Bidirectional | Cache <--> Database |
+
+Per component: document `receives_from` (whom, what data) and `produces_for` (whom, what data).
+
+## Body Structure (4 sections)
+
+1. `## Component Inventory` — table: name, role, owner, status; every component listed
+2. `## Dependency Graph` — typed connections using notation above; ASCII topology diagram
+3. `## Boundary Table` — IS / IS NOT table defining what the map covers and excludes
+4. `## Layer Map` — architectural layers (top-down); which components belong to each layer
 
 ## Constraints
 
 | Constraint | Value |
 |-----------|-------|
-| max_bytes | 3072 |
-| density_min | 0.80 |
+| max_bytes | 4096 (body only) |
 | naming | p08_cmap_{scope_slug}.yaml |
 | component_count | >= 2 |
 | connection_count | >= 1 |
-| connection direction | required per row |
-| component owner | required per row |
-| component status | required per row |
 | orphan components | FORBIDDEN (each must have >= 1 connection) |
+| untyped connections | FORBIDDEN (every arrow must have a type) |
 | quality field | ALWAYS null |
+| scope | definable in one sentence; if not, split the map |
 
 ## Enum Values
 
