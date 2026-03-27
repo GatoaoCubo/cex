@@ -1,47 +1,57 @@
 ---
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Boundary and position of scoring_rubric in the CEX fractal
+purpose: Component map of scoring_rubric — inventory, dependencies, and architectural position
 ---
 
 # Architecture: scoring_rubric in the CEX
 
-## Boundary
-scoring_rubric EH: framework de avaliacao com dimensoes ponderadas, thresholds por tier, e calibracao.
+## Component Inventory
 
-scoring_rubric NAO EH:
-
-| Confusao | Por que NAO | Type correto |
-|----------|-------------|-------------|
-| unit_eval | unit_eval EXECUTA teste. rubric DEFINE criterios. | P07 unit_eval |
-| smoke_eval | smoke_eval verifica sanidade rapida. rubric define framework completo. | P07 smoke_eval |
-| e2e_eval | e2e_eval testa pipeline. rubric define como avaliar. | P07 e2e_eval |
-| benchmark | benchmark mede PERFORMANCE. rubric mede QUALIDADE multi-dimensional. | P07 benchmark |
-| golden_test | golden_test fornece EXEMPLO concreto. rubric fornece CRITERIOS. | P07 golden_test |
-| quality_gate | gate BLOQUEIA publicacao. rubric DEFINE como pontuar. | P11 quality_gate |
-
-Regra: "quais dimensoes e pesos usar para avaliar este tipo?" -> scoring_rubric.
-
-## Position in Evaluation Flow
-
-```text
-scoring_rubric (define criteria) -> golden_test (calibrate with examples) -> unit_eval (run tests) -> quality_gate (enforce pass/fail)
-```
-
-scoring_rubric is CRITERIA LAYER — defines the evaluation framework that all other P07 types use.
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| frontmatter block | Metadata header (id, kind, pillar, domain, target_kind, dimensions_count, etc.) | scoring-rubric-builder | active |
+| dimensions | Named evaluation axes with descriptions and rationale | author | active |
+| weights | Percentage weight per dimension (must sum to 100%) | author | active |
+| scale_definitions | Per-dimension scoring scale with concrete criteria at each level | author | active |
+| tier_thresholds | Score ranges mapped to quality tiers (master, skilled, learning, rejected) | author | active |
+| calibration_refs | Golden test references used to anchor consistent scoring | author | active |
+| automation_status | Which dimensions are automated, semi-automated, or manual | author | active |
 
 ## Dependency Graph
 
-```text
-scoring_rubric --produces_for--> golden_test (P07 uses criteria for rationale)
-scoring_rubric --produces_for--> quality_gate (P11 uses dimensions for SOFT gates)
-scoring_rubric --produces_for--> unit_eval (P07 uses criteria for assertions)
-scoring_rubric <--calibrated_by-- golden_test (P07 provides reference examples)
-scoring_rubric --independent-- signal, handoff, knowledge_card
+```
+domain_knowledge  --produces-->  scoring_rubric  --consumed_by-->  quality_gate
+golden_test       --calibrates-> scoring_rubric  --consumed_by-->  evaluator
+scoring_rubric    --signals-->   calibration_drift
 ```
 
-## Fractal Position
-Pillar: P07 (Evals — how to measure quality)
-Function: GOVERN
-Scale: L0 (governance artifact)
-scoring_rubric is unique in P07 because it defines the evaluation FRAMEWORK — the meta-level that all other eval types reference.
+| From | To | Type | Data |
+|------|----|------|------|
+| knowledge_card (P01) | scoring_rubric | data_flow | domain expertise informing dimension selection |
+| golden_test (P07) | scoring_rubric | data_flow | reference examples for scoring calibration |
+| scoring_rubric | quality_gate (P11) | consumes | gate uses rubric criteria for scoring decisions |
+| scoring_rubric | evaluator | consumes | human or automated evaluator applies the rubric |
+| scoring_rubric | calibration_drift (P12) | signals | emitted when inter-rater agreement drops |
+| benchmark (P07) | scoring_rubric | dependency | benchmarks may inform threshold selection |
+
+## Boundary Table
+
+| scoring_rubric IS | scoring_rubric IS NOT |
+|-------------------|----------------------|
+| An evaluation framework with weighted dimensions and tiers | A reference example of ideal output (golden_test P07) |
+| Defines how quality is measured with concrete criteria | A pass/fail quality barrier (quality_gate P11) |
+| Dimensions sum to 100% weight for balanced scoring | A technical validation rule (validator P06) |
+| Calibrated against golden tests for consistency | A performance measurement (benchmark P07) |
+| Scoped to one artifact kind with kind-specific criteria | A universal evaluation applicable to all kinds |
+| Supports manual, semi-automated, and automated evaluation | An exclusively automated check without human option |
+
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Domain | knowledge_card, benchmark | Supply domain expertise and performance baselines |
+| Framework | frontmatter, dimensions, weights | Define evaluation axes and their relative importance |
+| Criteria | scale_definitions, tier_thresholds | Specify concrete scoring levels and quality tiers |
+| Calibration | calibration_refs, golden_test | Anchor consistent scoring with reference examples |
+| Application | quality_gate, evaluator, automation_status | Apply the rubric in automated or manual evaluation |

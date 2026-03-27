@@ -1,77 +1,57 @@
 ---
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Boundary and position of optimizer in the CEX fractal
+purpose: Component map of optimizer — inventory, dependencies, and architectural position
 ---
 
 # Architecture: optimizer in the CEX
 
-## Boundary
-optimizer EH: ciclo continuo metric>action com thresholds tripartidos (trigger/target/critical),
-baseline documentado, e monitoring. Otimiza processos ao longo do tempo com acoes automatizaveis.
+## Component Inventory
 
-optimizer NAO EH:
-
-| Confusao | Por que NAO | Tipo correto |
-|----------|-------------|--------------|
-| bugloop | bugloop eh ciclo detect-fix-verify para correcao pontual de um artefato. optimizer eh ciclo continuo de melhoria de processo. | P11 bugloop |
-| quality_gate | quality_gate eh barreira pass/fail unica em evento de publicacao. optimizer eh ciclo continuo com thresholds e acoes. | P11 quality_gate |
-| guardrail | guardrail previne DANOS (safety boundary, hard stop). optimizer busca MELHORIA (metric target, soft actions). | P11 guardrail |
-| lifecycle_rule | lifecycle_rule governa ciclo de vida de artefatos (freshness/archive/promote). optimizer governa performance de processos. | P11 lifecycle_rule |
-| benchmark | benchmark MEDE passivamente (P07, define criterios de avaliacao). optimizer AGE com base em medicoes. | P07 benchmark |
-| scoring_rubric | scoring_rubric define HOW to evaluate. optimizer define WHAT action fires at WHAT threshold. | P07 scoring_rubric |
-
-## Fractal Position
-Pillar: P11 (Feedback)
-Function: GOVERN
-Layer: governance
-Scale: L0 (governance artifact)
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| frontmatter block | Metadata header (id, kind, pillar, domain, target_metric, direction, etc.) | optimizer-builder | active |
+| target_metric | The specific metric being optimized with direction (minimize/maximize) | author | active |
+| thresholds | Tripartite levels: trigger (start action), target (goal), critical (escalate) | author | active |
+| actions | Ordered list of optimization actions with type, description, and automation flag | author | active |
+| baseline | Current measured value with conditions and date of measurement | author | active |
+| cost_risk_assessment | Cost of optimization versus benefit, with mitigation plan | author | active |
+| monitoring_config | Dashboard, alert rules, and reporting frequency | author | active |
 
 ## Dependency Graph
+
 ```
-optimizer --reads_metric_from--> validator (P06 implements metric collection)
-optimizer --uses_thresholds_from--> scoring_rubric (P07 defines quality dimensions)
-optimizer --triggers--> bugloop (P11 fires fix cycle when metric signals defect pattern)
-optimizer --independent--> quality_gate (gate is event-driven; optimizer is continuous)
-optimizer --independent--> guardrail (guardrail is hard stop; optimizer is soft improvement)
-optimizer --independent--> lifecycle_rule (lifecycle is age/staleness; optimizer is performance)
-optimizer --produces_history_for--> knowledge_card (improvement.history feeds KC updates)
-optimizer --informs--> signal (optimizer state changes emit signals to P12)
+benchmark       --produces-->  optimizer  --consumed_by-->  scheduler
+quality_gate    --depends-->   optimizer  --signals-->      optimization_event
+optimizer       --produces-->  action_execution
 ```
 
-## Information Flow
-```
-[live metric source]
-        |
-        v
-[optimizer: compare metric to threshold.trigger]
-        |
-   above trigger?
-        |-- YES --> [fire action (automated or manual approval)]
-        |               |
-        |               v
-        |           [measure result]
-        |               |
-        |               v
-        |           [append improvement.history]
-        |
-   below target for N cycles?
-        |-- YES --> [restore conservative config (tune rollback)]
-        |
-   above critical?
-        |-- YES --> [escalate (scale or page on-call, automated=false)]
-```
+| From | To | Type | Data |
+|------|----|------|------|
+| benchmark (P07) | optimizer | data_flow | measured baseline and comparison metrics |
+| optimizer | scheduler | consumes | scheduler triggers optimization actions on threshold breach |
+| optimizer | action_execution | produces | concrete optimization action dispatched for execution |
+| quality_gate (P11) | optimizer | dependency | gate scores may indicate optimization need |
+| optimizer | optimization_event (P12) | signals | emitted when threshold crossed or action taken |
+| monitoring_config | dashboard | data_flow | feeds metrics to observability system |
 
-## Builder Dependencies
-| Dependency | Kind | Why |
-|------------|------|-----|
-| SCHEMA.md | self | field constraints |
-| OUTPUT_TEMPLATE.md | self | production format |
-| QUALITY_GATES.md | self | validation rules |
-| KNOWLEDGE.md | self | threshold patterns, action types |
+## Boundary Table
 
-## Builders That Depend On optimizer-builder
-| Builder | Why |
-|---------|-----|
-| signal-builder | Optimizer state changes emit signals |
-| knowledge-card-builder | Improvement history feeds KC updates |
+| optimizer IS | optimizer IS NOT |
+|--------------|-----------------|
+| A continuous metric-to-action cycle with thresholds | A one-time bug fix cycle (bugloop P11) |
+| Defines trigger/target/critical threshold tiers | A passive measurement without action (benchmark P07) |
+| Produces automated or manual optimization actions | A pass/fail quality barrier (quality_gate P11) |
+| Tracks baseline with measurement conditions | A safety restriction on behavior (guardrail P11) |
+| Monitors results and adjusts over iterations | A static configuration parameter (runtime_rule P09) |
+| Assesses cost/risk tradeoff before acting | An unbounded optimization without constraints |
+
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Measurement | benchmark, baseline | Establish current performance and measurement conditions |
+| Definition | frontmatter, target_metric, thresholds | Specify what to optimize and at what levels |
+| Action | actions, cost_risk_assessment | Define what to do when thresholds are crossed |
+| Execution | scheduler, action_execution | Trigger and carry out optimization actions |
+| Observability | monitoring_config, optimization_event | Track results and report progress |

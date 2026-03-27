@@ -1,43 +1,56 @@
 ---
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Boundary and position of quality_gate in the CEX fractal
+purpose: Component map of quality_gate — inventory, dependencies, and architectural position
 ---
 
 # Architecture: quality_gate in the CEX
 
-## Boundary
-quality_gate EH: barreira de qualidade com score numerico (pass/fail + weighted dimensions).
-quality_gate NAO EH:
+## Component Inventory
 
-| Confusao | Por que NAO | Type correto |
-|----------|-------------|-------------|
-| validator | validator IMPLEMENTA check em codigo. gate DEFINE criterio. | P06 validator |
-| scoring_rubric | rubric define COMO avaliar. gate define SE passa. | P07 scoring_rubric |
-| bugloop | bugloop eh ciclo detect-fix-verify. gate eh barreira unica. | P11 bugloop |
-| guardrail | guardrail previne DANOS. gate garante QUALIDADE. | P11 guardrail |
-
-## Dependency Graph
-```
-quality_gate <--implements-- validator (P06 codes the check)
-quality_gate <--uses_criteria-- scoring_rubric (P07 defines dimensions)
-quality_gate <--triggers-- bugloop (P11 cycles on failure)
-quality_gate --independent-- lifecycle_rule, optimizer
-```
-
-## Fractal Position
-Pillar: P11 (Feedback)
-Function: GOVERN
-Scale: L0 (governance artifact)
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| frontmatter block | Metadata header (id, kind, pillar, domain, target_kind, pass_threshold, etc.) | quality-gate-builder | active |
+| hard_gates | Blocking checks that must pass — artifact rejected on failure | author | active |
+| soft_gates | Score-contributing checks that degrade quality score but do not block | author | active |
+| scoring_formula | Weighted combination of soft gate scores into final quality number | author | active |
+| pass_threshold | Minimum score required to pass the gate | author | active |
+| bypass_policy | Conditions and audit requirements for overriding a failed gate | author | active |
 
 ## Dependency Graph
 
-```text
-quality_gate <--receives-- schema (P06) — field constraints to enforce
-quality_gate --produces_for--> validator (P06) — gate references
-quality_gate --produces_for--> golden_test (P07) — test criteria
-quality_gate --produces_for--> lifecycle_rule (P11) — quality thresholds
-quality_gate --independent-- knowledge_card, signal, system_prompt
+```
+artifact (any)  --evaluated_by-->  quality_gate  --produces-->    pass_fail_result
+scoring_rubric  --depends-->       quality_gate  --signals-->     gate_event
+validator       --depends-->       quality_gate
 ```
 
-quality_gate is GOVERNANCE LAYER — defines pass/fail criteria
+| From | To | Type | Data |
+|------|----|------|------|
+| artifact (any) | quality_gate | data_flow | artifact submitted for quality evaluation |
+| quality_gate | pass_fail_result | produces | boolean pass/fail plus numeric score |
+| scoring_rubric (P07) | quality_gate | dependency | rubric dimensions inform gate criteria |
+| validator (P06) | quality_gate | dependency | validators implement individual hard gate checks |
+| quality_gate | gate_event (P12) | signals | emitted on pass, fail, or bypass |
+| quality_gate | lifecycle_rule (P11) | data_flow | gate scores may trigger lifecycle transitions |
+
+## Boundary Table
+
+| quality_gate IS | quality_gate IS NOT |
+|-----------------|---------------------|
+| A barrier with HARD (block) and SOFT (score) checks | A technical pass/fail validation rule (validator P06) |
+| Produces a numeric quality score from weighted formula | An evaluation criteria framework (scoring_rubric P07) |
+| Applied before artifact is accepted into a pool or promoted | A fix-verify cycle for broken artifacts (bugloop P11) |
+| Includes bypass policy with audit trail | A safety restriction on agent behavior (guardrail P11) |
+| Targets a specific artifact kind with kind-aware criteria | A continuous optimization loop (optimizer P11) |
+| Binary outcome (pass/fail) plus score for ranking | A subjective review without numeric scoring |
+
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Input | artifact, scoring_rubric | Artifact under evaluation and criteria reference |
+| Hard Checks | hard_gates, validator | Blocking checks that must pass |
+| Soft Checks | soft_gates, scoring_formula | Score-contributing checks with weighted combination |
+| Decision | pass_threshold, bypass_policy | Pass/fail determination and override rules |
+| Output | pass_fail_result, gate_event | Result delivered and event signaled downstream |

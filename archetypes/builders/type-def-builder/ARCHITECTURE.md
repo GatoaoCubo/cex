@@ -1,77 +1,57 @@
 ---
-id: type-def-builder-architecture
-kind: architecture
 pillar: P08
 llm_function: CONSTRAIN
-version: 1.0.0
-created: "2026-03-26"
-updated: "2026-03-26"
-author: EDISON
-tags: [architecture, type-def, P08, boundary]
+purpose: Component map of type_def — inventory, dependencies, and architectural position
 ---
 
-## Boundary Description
+# Architecture: type_def in the CEX
 
-`type_def` declares reusable, abstract type vocabulary in the CEX spec layer. It is a named type declaration — not a contract, not a rule, not an executable artifact. It provides the shared type language that other artifacts reference via `$ref` or `type_ref`.
+## Component Inventory
 
-## NAO EH Table (All P06 Siblings)
-
-| Kind | Why NOT type_def |
-|---|---|
-| `input_schema` | Concrete entry contract for a specific operation; references type_defs but is not one |
-| `validator` | Executable pass/fail rule applied at runtime; governs data, does not declare types |
-| `interface` | Bilateral integration contract between two agents; defines handshake, not vocabulary |
-| `validation_schema` | Post-generation output contract; governs artifact quality, not type declarations |
-| `artifact_blueprint` | Structural spec for artifact generation; describes what to build, not what types exist |
-| `grammar` | Formal generative constraint (BNF, EBNF, regex, FSM); governs syntax, not type system |
-
-## Decision Question
-
-> "Am I declaring what this type IS (its shape, constraints, and vocabulary), or am I declaring how something USES it?"
-
-- **Declaring what it IS** → `type_def`
-- **Declaring how a specific operation receives it** → `input_schema`
-- **Declaring pass/fail rules** → `validator`
-- **Declaring agent-to-agent contract** → `interface`
-
-## Position Diagram
-
-```
-CEX Spec Layer (P06)
-├── type_def          ← YOU ARE HERE (vocabulary layer)
-│     └── referenced by →
-├── input_schema      (concrete entry contracts)
-├── validator         (executable rules)
-├── interface         (bilateral contracts)
-├── validation_schema (output contracts)
-├── artifact_blueprint (generation specs)
-└── grammar           (formal constraints)
-```
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| frontmatter block | Metadata header (id, kind, pillar, domain, base_type, nullable, etc.) | type-def-builder | active |
+| base_type | Primitive or composite root type (string, integer, object, array, etc.) | author | active |
+| constraints | Validation constraints (min, max, regex, enum, length, etc.) | author | active |
+| composition_rules | Union, intersection, and discriminated union composition | author | active |
+| generics | Type parameters for polymorphic type definitions | author | active |
+| serialization_spec | Wire format rules (JSON, YAML, Protobuf) with field mappings | author | active |
+| inheritance_chain | Parent type references for type hierarchy | author | active |
 
 ## Dependency Graph
 
 ```
-KNOWLEDGE.md (P01)       --> type-def-builder (informs domain vocabulary)
-SCHEMA.md (P06)          --> type-def-builder (source of truth for fields)
-type_def artifact        --> input_schema builder (referenced as field types)
-type_def artifact        --> validator builder (type assertions reference type_defs)
-type_def artifact        --> grammar builder (terminal symbols may ref type_defs)
-type-def-builder         --> independent of interface, validation_schema, artifact_blueprint
+domain_knowledge  --produces-->  type_def  --consumed_by-->  input_schema
+type_def          --consumed_by-->  validator  --consumed_by-->  grammar
+type_def          --signals-->      type_registration
 ```
 
-Arrow key:
-- `A --> B` means A is consumed by / produces input for B
-- `independent of` means no data flow in either direction
+| From | To | Type | Data |
+|------|----|------|------|
+| knowledge_card (P01) | type_def | data_flow | domain context informing type design |
+| type_def | input_schema (P06) | consumes | input schemas reference type definitions |
+| type_def | validator (P06) | consumes | validators use type constraints for checks |
+| type_def | grammar (P06) | consumes | grammars reference types for parsing rules |
+| type_def | prompt_template (P03) | data_flow | templates reference types for variable constraints |
+| type_def | type_registration (P12) | signals | emitted when a new type is registered in the system |
 
-## Fractal Position
+## Boundary Table
 
-```
-CEX
-└── archetypes
-    └── builders
-        └── type-def-builder        ← this builder
-            └── produces: p06_td_*.yaml
-                └── consumed by: input_schema_builder, validator_builder, grammar_builder
-```
+| type_def IS | type_def IS NOT |
+|-------------|-----------------|
+| A reusable type declaration with base type, constraints, and composition | An input contract for a specific operation (input_schema P06) |
+| Defines vocabulary that other artifacts reference | A validation rule with pass/fail logic (validator P06) |
+| Supports union, intersection, and generics composition | An integration contract between systems (interface P06) |
+| Includes serialization rules for wire formats | A response format instruction for the LLM (response_format P05) |
+| Scoped to the spec layer — no runtime behavior | A parser that extracts data from output (parser P05) |
+| Inheritable via inheritance chains | A naming convention for entities (naming_rule P05) |
 
-type_def sits at the **vocabulary foundation** of the spec layer. It has no upstream artifact dependencies (only domain knowledge) but is downstream-referenced by most other P06 kinds.
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Domain | knowledge_card | Supply domain context for type design |
+| Definition | frontmatter, base_type, constraints | Specify the type identity and validation rules |
+| Composition | composition_rules, generics, inheritance_chain | Define how types combine and extend |
+| Serialization | serialization_spec | Map types to wire formats |
+| Consumers | input_schema, validator, grammar, prompt_template | Artifacts that reference the type definition |

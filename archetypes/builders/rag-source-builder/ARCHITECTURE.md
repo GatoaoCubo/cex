@@ -1,72 +1,56 @@
 ---
 pillar: P08
 llm_function: CONSTRAIN
-version: 1.0.0
+purpose: Component map of rag_source — inventory, dependencies, and architectural position
 ---
 
-# Architecture: rag_source
+# Architecture: rag_source in the CEX
 
-## Boundary Definition
+## Component Inventory
 
-rag_source IS a pointer to an external indexable source.
-rag_source IS NOT:
-- knowledge_card (distilled content — HAS the information)
-- context_doc (domain context — scopes a domain for agents)
-- embedding_config (vector model settings — configures indexing)
-- signal (state event — records what happened)
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| frontmatter block | 5-field required metadata header (id, kind, url, domain, last_checked) | rag-source-builder | active |
+| url_reference | Validated URL pointing to the external data source | author | active |
+| freshness_policy | Re-check schedule and staleness conditions | author | active |
+| reliability_score | Confidence rating of the source (high/medium/low) | author | active |
+| format_type | Data format of the source (html, json, api, pdf, csv) | author | active |
+| domain_tags | Searchable tags linking source to knowledge domains | author | active |
 
-## Kind Comparison
-
-| Kind | Contains | Layer | Purpose |
-|------|----------|-------|---------|
-| rag_source | URL + metadata | content | Point to external source |
-| knowledge_card | Distilled synthesis | content | Store extracted knowledge |
-| context_doc | Domain framing | context | Scope domain for agents |
-| embedding_config | Model + chunking params | config | Configure vector indexing |
-
-## Pipeline Position
+## Dependency Graph
 
 ```
-External World (docs, APIs, papers, datasets)
-        |
-        v
-  rag_source              <- THIS KIND
-  (catalog: URL + freshness metadata)
-        |
-        v
-  brain_index             <- periodic crawl job reads rag_sources
-  (fetch URL, chunk, embed)
-        |
-        v
-  vector store
-  (indexed chunks, searchable)
-        |
-        v
-  retrieval layer
-  (similarity search on query)
-        |
-        v
-  agent context
-  (augmented generation)
+external_source  --tracked_by-->  rag_source  --consumed_by-->  ingestion_pipeline
+rag_source       --produces-->    knowledge_card  --indexed_by--> brain_index
+rag_source       --signals-->     freshness_alert
 ```
 
-## Fractal Position
-- Pillar: P01 (knowledge layer — content tier)
-- llm_function: INJECT (provides context to agents via retrieval)
-- Layer: content ("Conhecimento destilado — criado, versionado")
-- Core 24: YES (content tier, high-value for retrieval pipelines)
+| From | To | Type | Data |
+|------|----|------|------|
+| external_source (web) | rag_source | data_flow | URL and metadata of the authoritative source |
+| rag_source | ingestion_pipeline | consumes | pipeline reads URL to fetch and process content |
+| rag_source | knowledge_card (P01) | produces | distilled content extracted from the source |
+| rag_source | brain_index (P01) | data_flow | source metadata indexed for retrieval |
+| rag_source | freshness_alert (P12) | signals | emitted when source exceeds staleness threshold |
+| embedding_config (P01) | rag_source | dependency | embedding settings for indexing source content |
 
-## Confusion Avoidance
+## Boundary Table
 
-**"Should I put the content here?"** No. Put a pointer here. Put content in knowledge_card.
+| rag_source IS | rag_source IS NOT |
+|---------------|-------------------|
+| A pointer to an external indexable source with URL and freshness | Distilled content from the source (knowledge_card P01) |
+| Lightweight (max 1024 bytes) — metadata only, no body content | A domain context document (context_doc P01) |
+| Tracked for freshness with re-check schedule | An embedding configuration (embedding_config P01) |
+| Rated by reliability (high/medium/low) | A scraper with CSS selectors (scraper P04) |
+| Scoped to one URL per artifact | A search index or vector store |
+| Consumed by ingestion pipelines for content extraction | A static snapshot of content at a point in time |
 
-**"Is this a context_doc?"** Only if it scopes a domain. rag_source scopes a retrieval source.
+## Layer Map
 
-**"What if the URL has structured data?"** Still a pointer. The extracted/parsed content becomes a knowledge_card downstream.
-
-## Dependency Flow
-```
-rag_source --[read by]--> brain_index [PLANNED]
-rag_source --[informs]--> knowledge_card (content distilled from this source)
-rag_source --[tagged with]--> domain (from CEX domain taxonomy)
-```
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Source | external_source, url_reference | Identify the authoritative external data |
+| Metadata | frontmatter, format_type, domain_tags, reliability_score | Classify and rate the source |
+| Freshness | freshness_policy, freshness_alert | Monitor staleness and trigger re-checks |
+| Ingestion | ingestion_pipeline, embedding_config | Fetch, process, and embed source content |
+| Output | knowledge_card, brain_index | Distilled content and search index entries |

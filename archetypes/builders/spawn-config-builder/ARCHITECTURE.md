@@ -1,50 +1,57 @@
 ---
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Boundary, relationships, and position of spawn_config in the CEX fractal
-pattern: every builder must know WHERE its output fits and what it CONNECTS to
+purpose: Component map of spawn_config — inventory, dependencies, and architectural position
 ---
 
 # Architecture: spawn_config in the CEX
 
-## Boundary
-spawn_config EH: configuracao declarativa de como spawnar um satelite — modo, flags, model, timeout, MCP profile. Consumido por PowerShell spawn scripts.
+## Component Inventory
 
-spawn_config NAO EH:
-
-| Confusao | Por que NAO | Type correto |
-|----------|-------------|-------------|
-| boot_config | boot_config eh inicializacao per-provider (temperature, tokens) | P02 boot_config |
-| env_config | env_config sao variaveis de ambiente (API keys, paths) | P09 env_config |
-| handoff | handoff eh instrucao de tarefa com context+commit | P12 handoff |
-| signal | signal eh evento de completion/error emitido por satelite | P12 signal |
-| workflow | workflow eh orquestracao multi-step de agentes | P12 workflow |
-
-Regra: "como spawnar este satelite com quais flags e timeout?" -> spawn_config.
-
-## Position in Dispatch Flow
-
-```text
-dispatch_rule (P12) --> handoff (P12) --> spawn_config (P12) --> PowerShell script
-                                                                      |
-                                                               satellite spawned
-                                                                      |
-                                                               signal (P12)
-```
-
-spawn_config is INFRASTRUCTURE LAYER — bridges orchestration decisions to runtime execution.
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| frontmatter block | 19-field metadata header (id, kind, pillar, domain, mode, satellite, etc.) | spawn-config-builder | active |
+| mode_config | Spawn mode selection: solo, grid, or continuous | author | active |
+| cli_flags | Command-line flags for the spawn process (model, mcp-config, permissions) | author | active |
+| mcp_profile | Path to MCP configuration file for the satellite | author | active |
+| timeout_policy | Maximum execution time and idle timeout for the spawned satellite | author | active |
+| handoff_reference | Path to the handoff file the satellite should read at boot | author | active |
+| satellite_model_pair | Which satellite runs on which LLM model | author | active |
 
 ## Dependency Graph
 
-```text
-spawn_config <--receives-- dispatch_rule (P12) (which satellite to spawn)
-spawn_config <--receives-- handoff (P12) (task reference for prompt)
-spawn_config --consumed_by--> spawn_solo.ps1 / spawn_grid.ps1 (execution)
-spawn_config --independent-- signal, workflow, chain, system_prompt
+```
+orchestrator    --creates-->    spawn_config  --consumed_by-->  spawn_script
+satellite_spec  --informs-->    spawn_config  --produces-->     terminal_process
+spawn_config    --signals-->    spawn_event
 ```
 
-## Fractal Position
-Pillar: P12 (Orchestration — how it COORDINATES)
-Function: GOVERN (defines rules for satellite spawning)
-Scale: L0 (core 24 — every satellite spawn needs configuration)
-spawn_config is the EXECUTION BRIDGE: 3 spawn scripts + 7 satellites depend on it.
+| From | To | Type | Data |
+|------|----|------|------|
+| orchestrator | spawn_config | produces | orchestrator generates config for satellite launch |
+| satellite_spec (P08) | spawn_config | dependency | satellite spec informs model and MCP selection |
+| spawn_config | spawn_script (PowerShell) | consumes | script reads config to launch terminal process |
+| spawn_config | terminal_process | produces | running satellite instance in a terminal |
+| spawn_config | spawn_event (P12) | signals | emitted when satellite is spawned or fails to start |
+| handoff (P12) | spawn_config | dependency | handoff file referenced by spawn for task instructions |
+
+## Boundary Table
+
+| spawn_config IS | spawn_config IS NOT |
+|-----------------|---------------------|
+| A configuration for launching satellites via scripts | A runtime signal between satellites (signal P12) |
+| Specifies mode (solo/grid/continuous), flags, and timeouts | A task routing rule (dispatch_rule P12) |
+| References handoff files and MCP profiles | A multi-step orchestration flow (workflow P12) |
+| Pairs satellites with LLM models | A full satellite specification (satellite_spec P08) |
+| Consumed by PowerShell spawn scripts | An agent identity or persona (agent P02) |
+| Scoped to one launch event or mission | A persistent runtime configuration (runtime_rule P09) |
+
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Source | orchestrator, satellite_spec | Supply launch requirements and satellite specs |
+| Configuration | frontmatter, mode_config, satellite_model_pair | Define what mode and model to use |
+| Parameters | cli_flags, mcp_profile, timeout_policy | Specify technical launch parameters |
+| Task | handoff_reference | Link to the task the satellite should execute |
+| Execution | spawn_script, terminal_process, spawn_event | Launch the satellite and signal the event |

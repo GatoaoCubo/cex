@@ -1,52 +1,57 @@
 ---
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Boundary, relationships, and position of lens in the CEX fractal
-pattern: every builder must know WHERE its output fits and what it CONNECTS to
+purpose: Component map of lens — inventory, dependencies, and architectural position
 ---
 
 # Architecture: lens in the CEX
 
-## Boundary
-lens EH: perspectiva analitica declarativa aplicada como filtro a artefatos CEX.
+## Component Inventory
 
-lens NAO EH:
-
-| Confusao | Por que NAO | Type correto |
-|----------|-------------|-------------|
-| agent (P02) | agent TEM capabilities e tools. lens FILTRA sem executar. | P02 agent |
-| mental_model (P02) | mental_model ROTEIA decisoes. lens INTERPRETA artefatos. | P02 mental_model |
-| model_card (P02) | model_card DESCREVE um LLM. lens APLICA perspectiva a qualquer artefato. | P02 model_card |
-| boot_config (P02) | boot_config INICIALIZA provider. lens NAO configura runtime. | P02 boot_config |
-| router (P02) | router DESPACHA task para satellite. lens NAO roteia. | P02 router |
-| fallback_chain (P02) | fallback_chain DEGRADA entre modelos. lens NAO faz fallback. | P02 fallback_chain |
-| iso_package (P02) | iso_package EMPACOTA agente. lens NAO empacota. | P02 iso_package |
-| axiom (P02) | axiom GOVERNA com regra imutavel. lens FILTRA com perspectiva. | P02 axiom |
-| scoring_rubric (P07) | rubric PONTUA com dimensoes. lens FILTRA sem scoring. | P07 scoring_rubric |
-
-Regra: "por qual perspectiva devo analisar este artefato?" -> lens.
-
-## Position in Analysis Flow
-
-```text
-artifact produced -> [lens] filters/emphasizes -> analyst/agent interprets -> decision
-                          |
-                    perspective: focus + filters + bias
-```
-
-lens is the INTERPRETATION LAYER — shapes how artifacts are read.
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| frontmatter block | 20-field metadata header (id, kind, pillar, domain, focus, bias, etc.) | lens-builder | active |
+| focus_definition | What the lens examines — the specific aspect or dimension | author | active |
+| filters | Criteria that determine which artifacts or data pass through the lens | author | active |
+| bias_declaration | Explicit statement of the perspective inherent bias | author | active |
+| applies_to | List of artifact kinds this lens can be applied to | author | active |
+| interpretation_rules | How filtered data should be read through this perspective | author | active |
+| weight | Relative importance of this perspective when combined with other lenses | author | active |
 
 ## Dependency Graph
 
-```text
-lens <--consumed_by-- agent (P02) — agent applies lens to filter analysis
-lens <--consumed_by-- scoring_rubric (P07) — rubric may use lens as dimension
-lens --receives-- knowledge_card (P01) — domain knowledge informs perspective
-lens --independent-- signal, workflow, validator, boot_config
+```
+knowledge_card  --produces-->  lens  --consumed_by-->  agent
+scoring_rubric  --depends-->   lens  --applied_to-->   artifact
+lens            --signals-->   analysis_result
 ```
 
-## Fractal Position
-Pillar: P02 (Model — who the entity IS)
-Function: INJECT (provide analytical perspective into context)
-Scale: L0 (content layer — lenses are lightweight perspective definitions)
-Lenses are the only P02 content-layer kind — all others are spec or runtime.
+| From | To | Type | Data |
+|------|----|------|------|
+| knowledge_card (P01) | lens | data_flow | domain expertise informing the perspective |
+| lens | agent (P02) | consumes | agent applies lens to filter its analysis |
+| lens | artifact (any) | data_flow | perspective filter applied to target artifacts |
+| lens | analysis_result | produces | filtered interpretation of the examined artifact |
+| scoring_rubric (P07) | lens | dependency | rubric dimensions may align with lens focus areas |
+| mental_model (P02) | lens | dependency | agent mental model selects which lenses to apply |
+
+## Boundary Table
+
+| lens IS | lens IS NOT |
+|---------|-------------|
+| A declared perspective with focus, filters, and bias | An autonomous entity with capabilities (agent P02) |
+| Applied to artifacts to produce filtered interpretations | A routing decision tree (mental_model P02) |
+| Stateless — no memory, no execution, no side effects | A technical specification of an LLM (model_card P02) |
+| Composable — multiple lenses can layer on one artifact | An evaluation framework with scoring (scoring_rubric P07) |
+| Explicit about its own bias and limitations | A hidden or undeclared analytical assumption |
+| Scoped to specific artifact kinds via applies_to | A universal filter applied to everything indiscriminately |
+
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Context | knowledge_card, mental_model | Supply domain expertise and selection criteria for the lens |
+| Definition | frontmatter, focus_definition, bias_declaration | Specify what the lens examines and its declared bias |
+| Filtering | filters, applies_to, weight | Define what passes through and to which artifacts |
+| Application | interpretation_rules | Guide how filtered data is read and understood |
+| Output | analysis_result | Structured interpretation produced by applying the lens |

@@ -1,46 +1,57 @@
 ---
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Boundary and position of runtime_state in the CEX fractal
+purpose: Component map of runtime_state — inventory, dependencies, and architectural position
 ---
 
 # Architecture: runtime_state in the CEX
 
-## Boundary
-runtime_state EH: estado mental variavel que um agente acumula durante runtime — routing decisions, priority shifts, tool preferences.
+## Component Inventory
 
-runtime_state NAO EH:
-
-| Confusao | Por que NAO | Type correto |
-|----------|-------------|-------------|
-| mental_model (P02) | mental_model eh blueprint ESTATICO de design-time. runtime_state eh DINAMICO em runtime. | P02 mental_model |
-| session_state (P10) | session_state eh snapshot EFEMERO (reset a cada sessao). runtime_state ACUMULA entre tasks. | P10 session_state |
-| learning_record (P10) | learning_record eh registro PERSISTENTE entre sessoes. runtime_state vive durante a sessao atual. | P10 learning_record |
-| axiom (P10) | axiom eh regra IMUTAVEL fundamental. runtime_state eh VARIAVEL e adaptavel. | P10 axiom |
-| brain_index (P10) | brain_index eh INDICE de busca (BM25, FAISS). runtime_state eh ESTADO mental de decisao. | P10 brain_index |
-
-Regra: "quais routing rules, priorities, e heuristics este agente usa AGORA em runtime?" -> runtime_state.
-
-## Position in State Flow
-
-```text
-mental_model (design-time blueprint) -> runtime_state (runtime decisions) -> session_state (ephemeral snapshot)
-```
-
-runtime_state is RUNTIME LAYER — accumulates decisions and adaptations during execution.
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| frontmatter block | Metadata header (id, kind, pillar, domain, target_agent, persistence_scope, etc.) | runtime-state-builder | active |
+| routing_rules | Active routing decisions accumulated during runtime | agent | active |
+| decision_history | Log of decisions made with context and outcomes | agent | active |
+| priorities | Current priority ordering that may shift during execution | agent | active |
+| heuristics | Runtime-adapted rules of thumb based on recent experience | agent | active |
+| tool_preferences | Learned tool selection biases from recent success/failure | agent | active |
+| state_transitions | Conditions that trigger state updates during execution | author | active |
 
 ## Dependency Graph
 
-```text
-runtime_state <--initialized_from-- mental_model (P02 provides design-time blueprint)
-runtime_state <--informed_by-- learning_record (P10 provides past learnings)
-runtime_state --persists_to--> session_state (P10 ephemeral snapshot on save)
-runtime_state --queried_by--> brain_index (P10 uses state for search context)
-runtime_state --independent-- knowledge_card, signal, permission
+```
+mental_model    --initializes-->  runtime_state  --consumed_by-->  agent
+session_state   --feeds-->        runtime_state  --produces-->     updated_decisions
+runtime_state   --signals-->      state_update
 ```
 
-## Fractal Position
-Pillar: P10 (Memory — what the system remembers)
-Function: INJECT
-Scale: L1 (runtime artifact)
-runtime_state is unique in P10 because it bridges design-time identity (P02) and ephemeral snapshots (session_state) — it is the LIVE working memory of an agent.
+| From | To | Type | Data |
+|------|----|------|------|
+| mental_model (P02) | runtime_state | data_flow | design-time model provides initial state values |
+| session_state (P10) | runtime_state | data_flow | ephemeral session data feeds runtime updates |
+| runtime_state | agent (P02) | consumes | agent uses current runtime state for decisions |
+| runtime_state | updated_decisions | produces | refined routing and priority decisions |
+| runtime_state | state_update (P12) | signals | emitted when state transitions occur |
+| learning_record (P10) | runtime_state | dependency | past learnings inform initial heuristics |
+
+## Boundary Table
+
+| runtime_state IS | runtime_state IS NOT |
+|------------------|----------------------|
+| A variable mental state accumulated during agent runtime | A design-time cognitive map (mental_model P02) |
+| Contains routing rules, priorities, and heuristics that evolve | An ephemeral snapshot discarded after session (session_state P10) |
+| Persists within or across sessions based on scope | A permanent record of past experience (learning_record P10) |
+| Updated by state transitions triggered at runtime | A static configuration loaded once at boot |
+| Scoped to one agent with specific update conditions | A search index or vector store (brain_index P01) |
+| Reflects current operational intelligence | A historical changelog |
+
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Initialization | mental_model, learning_record | Supply design-time defaults and past learnings |
+| State | frontmatter, routing_rules, priorities, heuristics, tool_preferences | Current runtime values the agent operates with |
+| Transitions | state_transitions, session_state | Define when and how state values update |
+| Decisions | decision_history, updated_decisions | Record and produce routing decisions |
+| Events | state_update | Signal state changes to observers |

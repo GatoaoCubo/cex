@@ -1,63 +1,56 @@
 ---
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Boundary, relationships, and position of skill in the CEX fractal
-pattern: every builder must know WHERE its output fits and what it CONNECTS to
+purpose: Component map of skill — inventory, dependencies, and architectural position
 ---
 
 # Architecture: skill in the CEX
 
-## Boundary
-skill EH: habilidade reutilizavel com fases estruturadas e trigger definido. Executada
-por agente ou usuario, produz output concreto, pode ser composta com outras skills.
-Sem identidade, sem persona — capability pura com lifecycle.
+## Component Inventory
 
-skill NAO EH:
-
-| Confusao | Por que NAO | Tipo correto |
-|----------|-------------|-------------|
-| agent | agent tem identidade/persona completa; skill nao tem "eu" | P02 agent |
-| action_prompt | action_prompt eh prompt puro sem fases; skill tem lifecycle estruturado | P03 action_prompt |
-| component | component eh bloco atomico de pipeline sem fases nomeadas; skill tem lifecycle | P04 component |
-| hook | hook eh handler de evento unico (pre/post); skill tem fases multiplas | P04 hook |
-| mcp_server | mcp_server expoe tools via protocolo MCP; skill eh executada diretamente | P04 mcp_server |
-| plugin | plugin eh extensao plugavel ao sistema; skill eh capability invocavel | P04 plugin |
-| client | client eh consumidor unidirecional de API; skill eh workflow multi-fase | P04 client |
-| cli_tool | cli_tool eh comando pontual sem fases; skill tem lifecycle com validate | P04 cli_tool |
-| scraper | scraper eh extrator de dados web especializado; skill eh capability generica | P04 scraper |
-| connector | connector eh integracao bidirecional de servico; skill nao gerencia conexao | P04 connector |
-| daemon | daemon eh processo persistente em background; skill termina apos execute | P04 daemon |
-
-Regra: "tem fases nomeadas e trigger definido e eh reutilizavel?" -> skill.
-
-## Position in Agent Execution Flow
-
-```text
-agent (P02) --invokes--> skill (P04) --calls--> mcp_server (P04)
-     |                       |                        |
-system_prompt (P03)    phases: discover          tools: brain_query
-                              configure          tools: validate_artifact
-                              execute
-                              validate
-```
-
-skill is the CAPABILITY LAYER — reusable across agents, composable via sub_skills.
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| frontmatter block | Metadata header (id, kind, pillar, domain, trigger, phases_count, etc.) | skill-builder | active |
+| trigger_definition | What activates the skill (slash command, keyword, event, or programmatic call) | author | active |
+| phase_list | Ordered execution phases with input/output per phase | author | active |
+| input_contract | Typed specification of what the skill receives at invocation | author | active |
+| output_contract | Typed specification of what the skill produces on completion | author | active |
+| user_invocable_flag | Whether the skill is triggered by user (slash command) or agent-only | author | active |
 
 ## Dependency Graph
 
-```text
-skill <--receives-- input_schema (P06) (contract for skill inputs)
-skill <--receives-- knowledge_card (P01) (domain knowledge injected at discover phase)
-skill <--uses-- mcp_server (P04) (MCP tools called during execute phase)
-skill <--uses-- component (P04) (atomic blocks composed inside execute phase)
-skill --consumed_by--> agent (P02) (agent invokes skill via trigger)
-skill --consumed_by--> workflow (P12) (workflow orchestrates skill execution)
-skill --produces_for--> signal (P12) (skill emits complete/error signal after validate)
-skill --independent-- system_prompt, action_prompt, hook, daemon
+```
+agent           --invokes-->    skill  --produces-->     skill_output
+trigger_event   --activates-->  skill  --signals-->      completion_signal
+skill           --depends-->    knowledge_card
 ```
 
-## Fractal Position
-Pillar: P04 (Tools — what the agent USES)
-Function: CALL (LLM calls this skill to execute a capability)
-Scale: L1 (core — every non-trivial agent needs reusable skills)
-skill is the MOST NUMEROUS P04 artifact: 118+ skills exist in CODEXA corpus.
+| From | To | Type | Data |
+|------|----|------|------|
+| agent (P02) | skill | consumes | agent invokes skill for reusable capability |
+| trigger_event | skill | data_flow | event or command that activates the skill |
+| skill | skill_output | produces | structured result from phase execution |
+| skill | completion_signal (P12) | signals | emitted when all phases complete |
+| knowledge_card (P01) | skill | dependency | domain knowledge injected into skill phases |
+| action_prompt (P03) | skill | dependency | individual phases may use action prompts |
+
+## Boundary Table
+
+| skill IS | skill IS NOT |
+|----------|--------------|
+| A reusable capability with structured phases and trigger | An agent identity with persona and rules (system_prompt P03) |
+| Triggered by slash command, keyword, event, or API call | A one-time task prompt (action_prompt P03) |
+| Multi-phase with defined input/output per phase | An event interceptor without phases (hook P04) |
+| User-invocable or agent-only based on flag | A protocol server exposing tools (mcp_server P04) |
+| Produces structured output on completion | A pluggable extension with lifecycle hooks (plugin P04) |
+| Scoped to one capability domain | A multi-satellite orchestration (workflow P12) |
+
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Trigger | trigger_definition, user_invocable_flag | Define how and by whom the skill is activated |
+| Contract | frontmatter, input_contract, output_contract | Specify typed I/O for the skill |
+| Execution | phase_list, action_prompt | Ordered phases with per-phase input/output |
+| Context | knowledge_card | Domain knowledge supporting phase execution |
+| Output | skill_output, completion_signal | Deliver result and signal completion |

@@ -1,60 +1,57 @@
 ---
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Boundary, relationships, and position of plugin in the CEX fractal
-pattern: every builder must know WHERE its output fits and what it CONNECTS to
+purpose: Component map of plugin — inventory, dependencies, and architectural position
 ---
 
 # Architecture: plugin in the CEX
 
-## Boundary
-plugin EH: extensao plugavel runtime — modulo com interface contract, API surface, lifecycle
-management, configuracao, e isolamento que estende o sistema sem modificar o core. O plugin
-IMPLEMENTA um contrato e EXPOE metodos que o host pode invocar.
+## Component Inventory
 
-plugin NAO EH:
-
-| Confusao | Por que NAO | Tipo correto |
-|----------|-------------|-------------|
-| hook | hook INTERCEPTA um evento especifico; plugin EXTENDE com API completa | P04 hook |
-| skill | skill tem FASES estruturadas de workflow; plugin tem INTERFACE e API surface | P04 skill |
-| mcp_server | mcp_server implementa PROTOCOLO MCP; plugin implementa interface CUSTOM | P04 mcp_server |
-| daemon | daemon RODA continuamente em background; plugin eh CARREGADO sob demanda | P04 daemon |
-| connector | connector CONECTA a servico externo; plugin EXTENDE sistema interno | P04 connector |
-| client | client CONSOME API externa; plugin PROVEE API interna | P04 client |
-| cli_tool | cli_tool eh INVOCADO pelo user; plugin eh CARREGADO pelo sistema | P04 cli_tool |
-| scraper | scraper COLETA dados da web; plugin EXTENDE sistema interno | P04 scraper |
-| component | component eh BLOCO composavel de pipeline; plugin eh PLUGAVEL no host | P04 component |
-
-Regra: "como adicionar esta capacidade como extensao plugavel ao sistema?" -> plugin.
-
-## Position in Extension Flow
-
-```text
-host system --> plugin registry --> plugin (P04) --> API surface --> consumers
-                    |                    |
-               [discovery]          [lifecycle]
-               [dependency]         on_load -> on_enable -> on_disable -> on_unload
-```
-
-plugin is the EXTENSION LAYER — sits between host system and added capabilities,
-providing modular extensibility through interface contracts and managed lifecycle.
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| frontmatter block | 16-field metadata header (id, kind, pillar, domain, api_surface, etc.) | plugin-builder | active |
+| interface_contract | Methods and signatures the plugin must implement | author | active |
+| api_surface | Public methods and tools the plugin exposes to the host system | author | active |
+| lifecycle_hooks | Load/enable/disable/unload event handlers | author | active |
+| config_schema | Configuration options with defaults and validation rules | author | active |
+| dependency_chain | Other plugins or services this plugin requires | author | active |
+| isolation_level | Sandboxing and resource limits for the plugin runtime | author | active |
 
 ## Dependency Graph
 
-```text
-plugin <--loaded_by-- host system (plugin registry discovers and loads)
-plugin <--configured_by-- config (P09) (runtime configuration)
-plugin <--may_depend_on-- plugin (P04) (other plugins as dependencies)
-plugin --exposes--> api_surface (methods callable by host/other plugins)
-plugin --may_use--> hook (P04) (register hooks during on_load)
-plugin --may_use--> mcp_server (P04) (consume MCP tools)
-plugin --may_emit--> signal (P12) (report plugin lifecycle events)
-plugin --independent-- parser, formatter, knowledge_card, model_card
+```
+host_system     --loads-->      plugin  --exposes-->     api_surface
+config_schema   --configures--> plugin  --signals-->     lifecycle_event
+plugin          --depends-->    dependency_chain
 ```
 
-## Fractal Position
-Pillar: P04 (Tools — WHAT the agent USES)
-Function: EXTEND (add capabilities through pluggable modules)
-Layer: runtime (loaded on demand, managed lifecycle)
-Scale: L1 (application — plugins extend specific system capabilities)
+| From | To | Type | Data |
+|------|----|------|------|
+| host_system | plugin | consumes | host loads plugin via interface contract at startup |
+| plugin | api_surface | produces | public methods and tools available to consumers |
+| config_schema | plugin | data_flow | configuration options injected at load time |
+| plugin | lifecycle_event (P12) | signals | emitted on load, enable, disable, unload transitions |
+| plugin | dependency_chain | dependency | requires other plugins or services to function |
+| hook (P04) | plugin | dependency | plugins may register hooks for event interception |
+
+## Boundary Table
+
+| plugin IS | plugin IS NOT |
+|-----------|---------------|
+| A pluggable extension with defined interface contract | An event interceptor without API surface (hook P04) |
+| Has lifecycle management (load/enable/disable/unload) | A multi-phase reusable capability (skill P04) |
+| Exposes API surface to the host system | A background process running independently (daemon P04) |
+| Configured via schema with validated options | A protocol server exposing tools via MCP (mcp_server P04) |
+| Isolated with defined resource limits | A tightly coupled core component |
+| Hot-reloadable without host restart | A static library compiled into the host |
+
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Contract | frontmatter, interface_contract | Define what the plugin must implement |
+| Configuration | config_schema, dependency_chain | Configure options and declare requirements |
+| Lifecycle | lifecycle_hooks, isolation_level | Manage load/unload and resource boundaries |
+| Interface | api_surface | Expose public methods and tools to consumers |
+| Events | lifecycle_event, hook | Signal state changes and intercept events |

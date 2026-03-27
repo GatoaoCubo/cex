@@ -1,54 +1,57 @@
 ---
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Boundary, relationships, and position of workflow in the CEX fractal
-pattern: every builder must know WHERE its output fits and what it CONNECTS to
+purpose: Component map of workflow — inventory, dependencies, and architectural position
 ---
 
 # Architecture: workflow in the CEX
 
-## Boundary
-workflow EH: orquestracao runtime de agentes+tools+signals em steps sequenciais/paralelos. Define QUEM faz O QUE, em que ORDEM, com quais DEPENDENCIAS.
+## Component Inventory
 
-workflow NAO EH:
-
-| Confusao | Por que NAO | Type correto |
-|----------|-------------|-------------|
-| chain | chain eh sequencia de PROMPTS (texto->texto) sem agentes | P03 chain |
-| dag | dag eh grafo de dependencias sem semantica de execucao | P12 dag |
-| dispatch_rule | dispatch_rule roteia por keyword, nao orquestra | P12 dispatch_rule |
-| handoff | handoff eh instrucao de tarefa unica para 1 satelite | P12 handoff |
-| crew | crew define COMO agentes colaboram (protocolo), workflow define QUANDO | P12 crew |
-
-Regra: "quais agentes rodam em que ordem, com que dependencias e signals?" -> workflow.
-
-## Position in Orchestration Flow
-
-```text
-dispatch_rule (P12) --> handoff (P12) --> spawn_config (P12) --> workflow (P12)
-                                                                      |
-                                                    step_1 [sat_A] --> step_2 [sat_B]
-                                                         |                   |
-                                                    signal (P12)        signal (P12)
-                                                                             |
-                                                                     workflow_complete
-```
-
-workflow is ORCHESTRATION LAYER — the highest-level runtime coordinator.
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| frontmatter block | 20-field metadata header (id, kind, pillar, domain, steps_count, mode, etc.) | workflow-builder | active |
+| step_definitions | Ordered list of steps with agent, task, and dependency declarations | author | active |
+| wave_ordering | Grouping of steps into parallel waves with dependency constraints | author | active |
+| signal_contracts | Expected completion/error signals per step from signal-builder | author | active |
+| spawn_references | Spawn configurations per satellite from spawn-config-builder | author | active |
+| error_recovery | Retry, skip, and rollback strategies for failed steps | author | active |
+| completion_criteria | Conditions that define the workflow as successfully finished | author | active |
 
 ## Dependency Graph
 
-```text
-workflow <--receives-- handoff (P12) (task instructions per step)
-workflow <--receives-- spawn_config (P12) (how to launch each satellite)
-workflow <--receives-- signal (P12) (completion/error events from steps)
-workflow <--receives-- chain (P03) (may embed as prompt substep)
-workflow --consumed_by--> STELLA (orchestrator reads workflow to dispatch)
-workflow --independent-- boot_config, env_config, mental_model
+```
+orchestrator    --executes-->   workflow  --dispatches_to-->  satellite/agent
+signal          --consumed_by-->  workflow  --produces-->     mission_result
+workflow        --depends-->    spawn_config
 ```
 
-## Fractal Position
-Pillar: P12 (Orchestration — how it COORDINATES)
-Function: PRODUCE (creates execution plan for multi-agent missions)
-Scale: L0 (core 24 — every multi-step mission needs a workflow)
-workflow is the TOP-LEVEL orchestration artifact: ~240 ADW files in CODEXA are implicit workflows.
+| From | To | Type | Data |
+|------|----|------|------|
+| orchestrator | workflow | consumes | orchestrator executes workflow steps in order |
+| workflow | satellite/agent (P02) | produces | steps dispatched to satellites for execution |
+| signal (P12) | workflow | data_flow | completion signals advance workflow to next step |
+| spawn_config (P12) | workflow | dependency | satellite launch parameters per step |
+| workflow | mission_result | produces | aggregated output from all workflow steps |
+| workflow | workflow_event (P12) | signals | emitted on step completion, failure, or workflow end |
+
+## Boundary Table
+
+| workflow IS | workflow IS NOT |
+|-------------|-----------------|
+| A multi-step orchestration with agents, waves, and signals | A prompt chaining sequence (chain P03) |
+| Steps execute sequentially, in parallel, or mixed via waves | A dependency graph without execution semantics (dag P12) |
+| References signal-builder for completion contracts | A simple keyword-to-destination mapping (dispatch_rule P12) |
+| References spawn-config-builder for satellite launches | A routing table with confidence thresholds (router P02) |
+| Includes error recovery with retry, skip, and rollback | A one-shot task prompt (action_prompt P03) |
+| Scoped to a mission with defined completion criteria | An open-ended process without end condition |
+
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Planning | frontmatter, step_definitions, wave_ordering | Define steps, agents, and parallel grouping |
+| Launch | spawn_references, spawn_config | Configure how satellites are started per step |
+| Execution | orchestrator, satellite/agent | Run steps and dispatch work to agents |
+| Coordination | signal_contracts, signal | Track progress via completion signals |
+| Completion | error_recovery, completion_criteria, mission_result | Handle failures and determine success |

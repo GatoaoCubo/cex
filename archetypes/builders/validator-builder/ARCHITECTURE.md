@@ -1,50 +1,56 @@
 ---
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Boundary, relationships, and position of validator in the CEX fractal
-pattern: every builder must know WHERE its output fits and what it CONNECTS to
+purpose: Component map of validator — inventory, dependencies, and architectural position
 ---
 
 # Architecture: validator in the CEX
 
-## Boundary
-validator EH: regra de validacao tecnica pass/fail aplicada a artifacts antes de aceitacao.
+## Component Inventory
 
-validator NAO EH:
-
-| Confusao | Por que NAO | Type correto |
-|----------|-------------|-------------|
-| quality_gate (P11) | quality_gate PONTUA com weighted dimensions. validator PASSA ou FALHA. | P11 quality_gate |
-| scoring_rubric (P07) | rubric define CRITERIOS subjetivos. validator checa REGRAS objetivas. | P07 scoring_rubric |
-| input_schema (P06) | input_schema define SHAPE de entrada. validator checa REGRAS sobre dados. | P06 input_schema |
-| validation_schema (P06) | validation_schema eh aplicado PELO SISTEMA silenciosamente. validator eh EXPLICITO. | P06 validation_schema |
-| guardrail (P11) | guardrail limita COMPORTAMENTO. validator checa DADOS. | P11 guardrail |
-
-Regra: "este campo/propriedade esta correto?" -> validator.
-
-## Position in Governance Flow
-
-```text
-artifact produced -> [validator] -> pass? -> quality_gate (P11) -> publish/reject
-                         |
-                     fail? -> error_message -> author fixes -> retry
-```
-
-validator is the FIRST gate. It runs BEFORE quality_gate scoring.
-If validator fails, quality_gate never runs.
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| frontmatter block | 22-field metadata header (id, kind, pillar, domain, target_kind, severity, etc.) | validator-builder | active |
+| conditions | Structured check rules (field, operator, value) that define pass/fail | author | active |
+| severity_level | Classification of violation impact: error, warning, or info | author | active |
+| auto_fix_policy | Whether violations can be automatically repaired and how | author | active |
+| bypass_policy | Conditions under which the validator can be skipped with audit | author | active |
+| audit_trail | Logging requirements for validation runs and bypass events | author | active |
 
 ## Dependency Graph
 
-```text
-validator <--checked_by-- quality_gate (quality_gate validates validators too)
-validator <--used_by-- pre-commit hooks (automation layer)
-validator <--referenced_by-- bugloop (P11, uses validators to detect regressions)
-validator --validates--> all artifact kinds (knowledge_card, model_card, signal, etc.)
-validator --independent-- scoring_rubric, input_schema, dispatch_rule
+```
+artifact (any)  --checked_by-->  validator  --produces-->    pass_fail_result
+quality_gate    --depends-->     validator  --signals-->     validation_event
+validator       --depends-->     type_def
 ```
 
-## Fractal Position
-Pillar: P06 (Schema — CONTRACTS and validation)
-Function: GOVERN (enforce correctness)
-Scale: L0 (governance infrastructure — validators are checked before any artifact ships)
-Validators are the only P06 kind in the governance layer — they bridge schema contracts to runtime enforcement.
+| From | To | Type | Data |
+|------|----|------|------|
+| artifact (any) | validator | data_flow | artifact submitted for validation check |
+| validator | pass_fail_result | produces | boolean pass/fail with severity and message |
+| quality_gate (P11) | validator | dependency | gates compose validators as hard check components |
+| type_def (P06) | validator | dependency | type definitions inform field and constraint checks |
+| validator | validation_event (P12) | signals | emitted on pass, fail, or bypass |
+| law (P08) | validator | dependency | laws may mandate specific validation rules |
+
+## Boundary Table
+
+| validator IS | validator IS NOT |
+|--------------|-----------------|
+| A technical pass/fail check with structured conditions | A multi-dimensional scoring framework (scoring_rubric P07) |
+| Classified by severity (error/warning/info) | A quality barrier with scoring formula (quality_gate P11) |
+| Supports auto_fix for recoverable violations | A post-generation schema contract (validation_schema P06) |
+| Includes bypass policy with audit trail | An input contract for operations (input_schema P06) |
+| Applied to individual rules — atomic checks | A reusable type declaration (type_def P06) |
+| Runs at pre-commit or pre-promotion checkpoints | A response format instruction for the LLM (response_format P05) |
+
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Input | artifact, type_def | Artifact under check and type constraints |
+| Rules | frontmatter, conditions, severity_level | Define what is checked and how severe violations are |
+| Remediation | auto_fix_policy, bypass_policy | Handle violations via fix or approved skip |
+| Audit | audit_trail | Log validation runs and bypass events |
+| Output | pass_fail_result, validation_event, quality_gate | Deliver result and feed into quality gates |

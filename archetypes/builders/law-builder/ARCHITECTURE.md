@@ -1,102 +1,60 @@
 ---
-id: law-builder-architecture
-kind: architecture_doc
 pillar: P08
-parent: law-builder
-version: 1.0.0
-created: "2026-03-26"
-updated: "2026-03-26"
-author: EDISON
-tags: [architecture, law-builder, boundary, dependency, P08]
+llm_function: CONSTRAIN
+purpose: Component map of law — inventory, dependencies, and architectural position
 ---
 
-# law-builder — ARCHITECTURE
+# Architecture: law in the CEX
 
-## Boundary
+## Component Inventory
 
-law EH: regra operacional inviolavel do sistema — define o que DEVE acontecer, com enforcement explicito e consequencias documentadas.
-
-## law NAO EH
-
-| Confusao | Por que NAO | Tipo correto |
-|----------|-------------|-------------|
-| instruction (P03) | instruction GUIA com flexibilidade; violacao gera correcao, nao consequencia. law MANDA sem excecao. | P03 instruction |
-| guardrail (P11) | guardrail RESTRINGE por seguranca (previne dano). law GOVERNA operacoes (garante consistencia). | P11 guardrail |
-| axiom (P10) | axiom AFIRMA verdade abstrata permanente ("verdade existe"). law IMPOE regra operacional concreta. | P10 axiom |
-| lifecycle_rule (P11) | lifecycle_rule GERENCIA transicoes de estado. law GOVERNA comportamento continuo. | P11 lifecycle_rule |
-| pattern (P08) | pattern RECOMENDA solucao reutilizavel. law MANDA obediencia sem opcao. | P08 pattern |
-| diagram (P08) | diagram VISUALIZA estrutura. law CONSTRANGE comportamento. | P08 diagram |
-| component_map (P08) | component_map INVENTARIA partes do sistema. law GOVERNA como partes operam. | P08 component_map |
-| satellite_spec (P08) | satellite_spec DEFINE capacidades de um componente. law GOVERNA o sistema inteiro. | P08 satellite_spec |
-
-Regra de decisao: "que regra operacional DEVE ser seguida sem excecao e tem consequencia documentada?" -> law.
-
-## Position in Governance Flow
-
-```text
-[pattern] proves solution --> [law] codifies mandate --> [guardrail] enforces safety
-                                       |
-                              [quality_gate] validates compliance
-                                       |
-                              [brain_index] --> [system_prompt] --> [agent obeys]
-```
-
-law is GOVERNANCE LAYER. Injected into system behavior as mandatory constraints that all agents internalize.
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| frontmatter block | 19-field metadata header (id, kind, pillar, domain, scope, severity, etc.) | law-builder | active |
+| statement | The inviolable rule expressed as a single declarative sentence | author | active |
+| rationale | Why this law exists — the incident, risk, or principle behind it | author | active |
+| enforcement_mechanism | How the system detects and prevents violations at runtime | author | active |
+| exceptions | Narrow, documented cases where the law may be bypassed with audit | author | active |
+| violations | Catalog of known violation scenarios with severity and response | author | active |
+| history | Changelog of amendments, additions, and scope changes over time | author | active |
+| conflict_resolution | Priority rules when this law conflicts with other laws or instructions | author | active |
 
 ## Dependency Graph
 
-```text
-pattern (P08)        --informed_by--> law
-learning_record (P10) --informed_by--> law
-law                  --enforced_by--> quality_gate (P11)
-law                  --injected_in--> system_prompt (P03)
-law                  --referenced_by--> satellite_spec (P08)
-law                  --referenced_by--> diagram (P08)
-law                  --independent-- component_map (P08)
-law                  --independent-- connector
-law                  --independent-- signal
+```
+knowledge_card  --produces-->  law  --consumed_by-->  agent
+pattern         --produces-->  law  --enforced_by-->  validator
+instruction     --depends-->   law
+guardrail       --depends-->   law  --signals-->      violation_event
 ```
 
-Explanations:
-- `pattern --informed_by--> law`: proven patterns may be elevated to mandatory laws
-- `learning_record --informed_by--> law`: repeated failures documented in learning records prompt new laws
-- `law --enforced_by--> quality_gate`: gates check artifact compliance with laws (e.g., H05 enforces Law 5)
-- `law --injected_in--> system_prompt`: agents internalize laws as behavioral constraints
-- `law --referenced_by--> satellite_spec`: specs list which laws govern each satellite
+| From | To | Type | Data |
+|------|----|------|------|
+| knowledge_card (P01) | law | data_flow | domain context supporting rationale |
+| pattern (P08) | law | data_flow | recurring failure pattern formalized as mandate |
+| law | agent (P02) | dependency | agent must obey law constraints during execution |
+| law | validator (P06) | produces | enforcement rules consumed by pre-commit checks |
+| law | instruction (P03) | dependency | instructions must not contradict active laws |
+| law | guardrail (P11) | dependency | guardrails implement safety subset of laws |
+| law | violation_event (P12) | signals | emitted when enforcement detects a breach |
 
-## Fractal Position
+## Boundary Table
 
-```
-Pillar: P08 (Architecture — how the system SCALES and CONSTRAINS)
-Function: CONSTRAIN (imposes inviolable operational rules on all actors)
-Scale: L0 (governance artifact — system-wide mandatory behavioral constraint)
-Layer: governance
-```
+| law IS | law IS NOT |
+|--------|------------|
+| An inviolable operational mandate with enforcement | A flexible guideline (instruction P03) |
+| Scoped to a specific domain with clear boundaries | An abstract philosophical truth (axiom P10) |
+| Backed by rationale from incidents or principles | A safety restriction without operational mandate (guardrail P11) |
+| Enforced automatically or via audit trail | A reusable solution recommendation (pattern P08) |
+| Amended through formal history with versioning | A visual representation of architecture (diagram P08) |
+| Prioritized via conflict-resolution ordering | A runtime configuration parameter (runtime_rule P09) |
 
-P08 kind hierarchy by function:
-| Kind | Function | Mandates? |
-|------|----------|-----------|
-| law | CONSTRAIN | YES — inviolable |
-| pattern | RECOMMEND | NO — reusable solution |
-| diagram | VISUALIZE | NO — structural representation |
-| component_map | INVENTORY | NO — parts catalog |
-| satellite_spec | DEFINE | NO — component definition |
+## Layer Map
 
-law is the GOVERNANCE kind of P08 — while pattern recommends and diagram visualizes, law mandates.
-
-## Evolution Path
-
-```text
-observed_failure --> learning_record (P10)
-                          |
-                          v
-               pattern (P08) [if solution found]
-                          |
-                          v
-                  law (P08) [if mandate needed]
-                          |
-                          v
-               quality_gate (P11) [enforcement]
-```
-
-Laws typically evolve from: (1) repeated failures documented in learning records, (2) proven patterns that warrant system-wide mandate, or (3) explicit governance decisions from operators.
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Context | knowledge_card, pattern | Supply domain facts and recurring failures that justify the law |
+| Definition | frontmatter, statement, rationale | Specify what the law mandates and why |
+| Enforcement | enforcement_mechanism, violations, conflict_resolution | Define how violations are detected, reported, and prioritized |
+| Governance | exceptions, history | Document approved bypasses and amendment trail |
+| Downstream | agent, validator, guardrail | Consumers that must comply with or implement the law |

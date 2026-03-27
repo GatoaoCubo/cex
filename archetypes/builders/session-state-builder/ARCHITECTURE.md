@@ -1,61 +1,56 @@
 ---
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Boundary, relationships, and position of session_state in the CEX fractal
-pattern: every builder must know where its output fits and what it connects to
+purpose: Component map of session_state — inventory, dependencies, and architectural position
 ---
 
 # Architecture: session_state in the CEX
 
-## Boundary
-`session_state` EH: snapshot efemero de sessao de um agente, capturando estado
-momentaneo de execucao, consumo de recursos, e pontos de recovery.
+## Component Inventory
 
-`session_state` NAO EH:
-
-| Confusao | Por que NAO | Type correto |
-|----------|-------------|--------------|
-| runtime_state | runtime_state persiste entre sessoes e acumula decisoes de routing | P10 runtime_state |
-| learning_record | learning_record acumula aprendizado (padroes, anti-padroes, scores) ao longo do tempo | P10 learning_record |
-| brain_index | brain_index configura indice de busca (BM25, FAISS), nao captura estado de sessao | P10 brain_index |
-| axiom | axiom eh regra fundamental imutavel, nao estado efemero | P10 axiom |
-| mental_model | mental_model define routing/decisoes persistentes de um agente | P10 mental_model |
-
-Regra:
-- "qual o estado desta sessao agora?" -> `session_state`
-- "qual estado persiste entre sessoes?" -> `runtime_state`
-- "o que o agente aprendeu?" -> `learning_record`
-
-## Position in Runtime Flow
-
-```text
-agent boot -> session start -> session_state snapshots -> session end -> learning_record extraction
-```
-
-`session_state` sits during active execution, between boot and learning extraction.
-It is observation, not accumulation.
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| frontmatter block | Metadata header (id, kind, pillar, domain, session_id, agent, timestamp, etc.) | session-state-builder | active |
+| context_snapshot | Current context window contents and token usage | agent | active |
+| checkpoint_data | Resumable state for crash recovery or context overflow | agent | active |
+| active_tasks | List of in-progress tasks with status and progress | agent | active |
+| tool_state | Current tool invocations and pending results | agent | active |
+| token_budget | Remaining token allocation and compression status | agent | active |
 
 ## Dependency Graph
 
-```text
-session_state <--receives-- (none — built independently from current session context)
-session_state --produces_for--> learning_record (P10) — post-session extraction
-session_state --produces_for--> runtime_state (P10) — may update persistent state
-session_state --produces_for--> signal (P12) — status events reference session data
-
-session_state --independent-- brain_index (P10)
-session_state --independent-- axiom (P10)
-session_state --independent-- workflow (P05)
-session_state --independent-- dispatch_rule (P06)
-
-monitors/STELLA --> consumes --> session_state
-recovery_tools  --> consumes --> session_state
+```
+agent           --produces-->   session_state  --consumed_by-->  recovery_system
+session_state   --feeds-->      learning_record  --signals-->    checkpoint_event
+session_state   --consumed_by-->  context_manager
 ```
 
-## Fractal Position
-Pillar: P10 (Memory - "what it remembers")
-Function: INJECT
-Scale: L0 runtime snapshot
-Ephemeral capture artifact in P10: shorter-lived than runtime_state, simpler than learning_record.
+| From | To | Type | Data |
+|------|----|------|------|
+| agent (P02) | session_state | produces | agent dumps current state as ephemeral snapshot |
+| session_state | recovery_system | consumes | checkpoint data used for crash recovery |
+| session_state | learning_record (P10) | data_flow | session data distilled into persistent learning |
+| session_state | context_manager | consumes | context manager reads token budget and usage |
+| session_state | checkpoint_event (P12) | signals | emitted when checkpoint is saved |
+| runtime_state (P10) | session_state | dependency | runtime state provides initial values for session |
 
-session_state is SNAPSHOT LAYER — ephemeral execution state only.
+## Boundary Table
+
+| session_state IS | session_state IS NOT |
+|------------------|----------------------|
+| An ephemeral snapshot of current session context | A persistent record of accumulated experience (learning_record P10) |
+| Discarded when session ends — not cross-session | A variable state that persists across sessions (runtime_state P10) |
+| Contains token usage, active tasks, and checkpoints | A design-time cognitive map (mental_model P02) |
+| Used for crash recovery and context overflow management | A search index or knowledge base (brain_index P01) |
+| Scoped to one session of one agent | A shared state across multiple agents |
+| Lightweight snapshot with minimal overhead | A comprehensive audit log of all actions |
+
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Source | agent, runtime_state | Agent execution produces session data |
+| Snapshot | frontmatter, context_snapshot, token_budget | Capture current context and resource usage |
+| Tasks | active_tasks, tool_state | Track in-progress work and pending tool results |
+| Recovery | checkpoint_data, recovery_system | Enable crash recovery and context overflow handling |
+| Downstream | learning_record, checkpoint_event | Distill persistent learning and signal checkpoints |

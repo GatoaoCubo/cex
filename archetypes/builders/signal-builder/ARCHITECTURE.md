@@ -1,64 +1,55 @@
 ---
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Boundary, relationships, and position of signal in the CEX fractal
-pattern: every builder must know where its output fits and what it connects to
+purpose: Component map of signal — inventory, dependencies, and architectural position
 ---
 
 # Architecture: signal in the CEX
 
-## Boundary
-`signal` EH: evento runtime atomico emitido por um satellite para informar
-status, qualidade e momento.
+## Component Inventory
 
-`signal` NAO EH:
-
-| Confusao | Por que NAO | Type correto |
-|----------|-------------|--------------|
-| handoff | handoff instrui trabalho: contexto, tarefas, scope fence, commit | P12 handoff |
-| dispatch_rule | dispatch_rule decide roteamento futuro | P12 dispatch_rule |
-| workflow | workflow organiza passos e dependencias de execucao | P12 workflow |
-| interface | interface define contrato estavel entre sistemas | P06 validation/schema |
-
-Regra:
-- "o que aconteceu agora?" -> `signal`
-- "o que o agente deve fazer?" -> `handoff`
-- "quem deve receber este tipo de tarefa?" -> `dispatch_rule`
-
-## Position in Runtime Flow
-
-```text
-dispatch_rule -> handoff -> execution -> signal -> monitor/next dispatch
-```
-
-`signal` sits after execution and before supervisory reaction.
-It is feedback, not planning.
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| frontmatter block | Minimal metadata (id, kind, pillar, emitter, status, timestamp) | signal-builder | active |
+| status_field | Signal type: complete, error, or progress | emitter | active |
+| payload | Minimal JSON body with score, message, and optional extensions | emitter | active |
+| emitter_id | Identifier of the satellite or agent that produced the signal | emitter | active |
+| timestamp | ISO 8601 timestamp of emission | system | active |
+| extensions | Optional additional fields without breaking consumer contracts | emitter | active |
 
 ## Dependency Graph
 
-```text
-signal -> consumed_by -> spawn_monitor / supervisors / wave trackers
-signal -> emitted_after -> handoff-driven execution
-signal -> may_trigger -> next dispatch or retry policy
-
-signal --independent-- workflow authoring
-signal --independent-- routing policy definition
+```
+satellite/agent  --emits-->     signal  --consumed_by-->  orchestrator
+signal           --consumed_by-->  monitor  --triggers-->  workflow_step
+signal           --signals-->      downstream_action
 ```
 
-## Fractal Position
-Pillar: P12 (Orchestration - "how coordination happens")
-Function: COLLABORATE
-Scale: L0 runtime event
-Smallest collaborative artifact in P12: shorter than handoff, simpler than workflow.
+| From | To | Type | Data |
+|------|----|------|------|
+| satellite/agent (P02) | signal | produces | emitter creates signal on task completion or error |
+| signal | orchestrator | consumes | orchestrator reads signals to track satellite status |
+| signal | monitor | consumes | monitoring system aggregates signals for dashboards |
+| signal | workflow_step (P12) | data_flow | signal triggers next step in multi-step workflow |
+| signal | downstream_action | signals | cascading action triggered by signal reception |
+| spawn_config (P12) | signal | dependency | spawn config defines expected signal patterns |
 
-## Dependency Graph
+## Boundary Table
 
-```text
-signal <--receives-- (none — can be built independently)
-signal --produces_for--> workflow (P12) — completion/error events
-signal --produces_for--> spawn_config (P12) — satellite signals
-signal --produces_for--> dispatch_rule (P12) — routing triggers
-signal --independent-- knowledge_card, system_prompt, validator
-```
+| signal IS | signal IS NOT |
+|-----------|---------------|
+| An atomic status event between agents (complete, error, progress) | A full instruction set for a task (handoff P12) |
+| Minimal JSON payload with low overhead | A routing policy or dispatch rule (dispatch_rule P12) |
+| Emitted once per event — fire and forget | A persistent state that evolves over time |
+| Consumed by orchestrators and monitors | A multi-step execution flow (workflow P12) |
+| Extensible via optional fields without breaking consumers | A schema-heavy artifact requiring full validation |
+| Timestamped and attributed to a specific emitter | An anonymous or unattributed event |
 
-signal is EVENT LAYER — atomic orchestration messages
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Emission | satellite/agent, emitter_id, timestamp | Identify who emitted the signal and when |
+| Payload | status_field, payload, extensions | Carry the signal data with optional extensions |
+| Consumption | orchestrator, monitor | Read and react to signals |
+| Cascading | workflow_step, downstream_action | Trigger subsequent actions based on signal content |

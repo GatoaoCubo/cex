@@ -1,104 +1,57 @@
 ---
 pillar: P08
 llm_function: CONSTRAIN
-kind: architecture
-domain: naming_rule
-version: 1.0.0
+purpose: Component map of naming_rule — inventory, dependencies, and architectural position
 ---
 
-# Architecture — Naming Rule Builder
+# Architecture: naming_rule in the CEX
 
-## Boundary
+## Component Inventory
 
-A `naming_rule` answers ONE question: **"What string format must the name of this artifact follow?"**
-
-### NAO EH — P05 Siblings (Same Pillar)
-
-| Kind | Answers | Confusion Risk |
-|------|---------|---------------|
-| response_format | How should the LLM format its reply text? | Medium — both are output specs, but response_format governs LLM reply shape, NOT artifact file names |
-| parser | How to extract structured data from LLM output? | Low — parser operates on content, naming_rule operates on name strings |
-| formatter | How to render data into a target format (json/md/yaml)? | Low — formatter transforms content, naming_rule constrains name tokens |
-
-### NAO EH — Commonly Confused (P06)
-
-| Kind | Answers | Why NOT a naming_rule |
-|------|---------|----------------------|
-| validator | Does this artifact's content meet spec? | Validates content correctness, not name format |
-| type_def | What abstract category/type does this artifact belong to? | Defines type semantics, not naming strings |
-
-### Decision Question
-
-> **"Does this artifact define what something should be CALLED (name format)?"**
-> - YES → naming_rule (this builder)
-> - NO, it defines reply shape → response_format
-> - NO, it extracts data → parser
-> - NO, it renders content → formatter
-> - NO, it checks content validity → validator (P06)
-> - NO, it defines abstract type → type_def (P06)
-
-## Position in Naming Flow
-
-```
-Domain Owner defines scope
-        |
-        v
-naming-rule-builder PRODUCES naming_rule
-        |
-        v
-naming_rule artifact stored in pool (p05_nr_{scope}.md)
-        |
-        v
-validator (P06) CONSUMES naming_rule --> checks artifact IDs at runtime
-        |
-        v
-code generators CONSUME naming_rule --> auto-generate compliant names
-        |
-        v
-documentation builders CONSUME naming_rule --> render naming tables
-```
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| frontmatter block | Metadata header (id, kind, pillar, scope, case_style, separator, etc.) | naming-rule-builder | active |
+| pattern_definition | Regex or glob pattern defining valid names for the scope | author | active |
+| prefix_suffix_rules | Required prefixes, suffixes, and their semantic meaning | author | active |
+| case_style | Enforced casing convention (snake_case, kebab-case, PascalCase, etc.) | author | active |
+| separator_config | Allowed separators and their positional constraints | author | active |
+| version_segment | How version information is encoded within the name | author | active |
+| collision_resolution | Strategy for resolving name conflicts within the scope | author | active |
 
 ## Dependency Graph
 
 ```
-domain_owner --> naming-rule-builder
-naming-rule-builder --> SCHEMA.md
-naming-rule-builder --> OUTPUT_TEMPLATE.md
-naming-rule-builder --> KNOWLEDGE.md
-naming_rule artifact --> validator_builder (P06)
-naming_rule artifact --> code_generator
-naming_rule artifact --> documentation_builder
-SCHEMA.md --> OUTPUT_TEMPLATE.md
+scope_owner     --produces-->  naming_rule  --consumed_by-->  validator
+naming_rule     --enforced_by-->  formatter  --produces-->     canonical_name
+naming_rule     --signals-->      naming_violation
 ```
 
-## Fractal Position
+| From | To | Type | Data |
+|------|----|------|------|
+| scope_owner (orchestrator) | naming_rule | data_flow | scope definition and domain constraints |
+| naming_rule | validator (P06) | consumes | validators enforce naming patterns at commit time |
+| naming_rule | formatter (P05) | data_flow | formatters apply naming conventions to output |
+| naming_rule | code_generator | consumes | generators use patterns to produce compliant names |
+| naming_rule | naming_violation | signals | emitted when a name fails pattern validation |
+| type_def (P06) | naming_rule | dependency | type definitions may reference naming conventions |
 
-```
-CEX System
-  └── P05 (Output Layer)
-        ├── response_format-builder   [reply shape]
-        ├── parser-builder            [data extraction]
-        ├── formatter-builder         [content rendering]
-        └── naming-rule-builder       [name convention]  <-- THIS BUILDER
-              └── naming_rule artifacts
-                    └── consumed by P06 validators, code generators, doc builders
-```
+## Boundary Table
 
-## Builder Internal Structure
+| naming_rule IS | naming_rule IS NOT |
+|----------------|-------------------|
+| A formal pattern defining how entities are named within a scope | An abstract type declaration (type_def P06) |
+| Machine-validated via regex or glob patterns | An output formatting specification (formatter P05) |
+| Scoped to a specific artifact domain or file category | A data extraction rule (parser P05) |
+| Includes collision resolution for name conflicts | A validation rule checking content, not names (validator P06) |
+| Prescribes prefix, suffix, case, and separator conventions | A runtime configuration parameter (path_config P09) |
+| Versioning-aware when names embed version segments | A changelog or history document |
 
-```
-naming-rule-builder/
-  MANIFEST.md         P03/BECOME   -- identity + routing
-  SYSTEM_PROMPT.md    P03/BECOME   -- persona + ALWAYS/NEVER
-  KNOWLEDGE.md        P01/INJECT   -- naming standards, CEX patterns
-  INSTRUCTIONS.md     P03/REASON   -- 3-phase execution protocol
-  TOOLS.md            P04/CALL     -- brain_query [CONDITIONAL], file tools
-  OUTPUT_TEMPLATE.md  P05/PRODUCE  -- artifact structure with {{vars}}
-  SCHEMA.md           P06/CONSTRAIN-- field definitions, SOURCE OF TRUTH
-  EXAMPLES.md         P07/GOVERN   -- golden + anti-example
-  ARCHITECTURE.md     P08/CONSTRAIN-- boundary, flow, dependency graph
-  CONFIG.md           P09/CONSTRAIN-- file naming, size limits, enums
-  MEMORY.md           P10/INJECT   -- common mistakes, pattern catalog
-  QUALITY_GATES.md    P11/GOVERN   -- H01-H08 hard gates, S01-S10 soft gates
-  COLLABORATION.md    P12/COLLABORATE-- crew compositions, handoff protocol
-```
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Scope | frontmatter, scope_owner | Define which entities and domains this rule governs |
+| Pattern | pattern_definition, case_style, separator_config | Specify the structural rules for valid names |
+| Segments | prefix_suffix_rules, version_segment | Define semantic segments within the name |
+| Conflict | collision_resolution | Handle duplicate or ambiguous name scenarios |
+| Enforcement | validator, formatter, naming_violation | Downstream systems that check and apply the rule |

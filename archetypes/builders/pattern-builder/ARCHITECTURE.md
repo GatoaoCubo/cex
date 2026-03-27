@@ -1,55 +1,58 @@
 ---
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Boundary, relationships, and position of pattern in the CEX fractal
-pattern: every builder must know WHERE its output fits and what it CONNECTS to
+purpose: Component map of pattern — inventory, dependencies, and architectural position
 ---
 
 # Architecture: pattern in the CEX
 
-## Boundary
-pattern EH: solucao reutilizavel nomeada para um problema recorrente de arquitetura — descreve problem, forces, solution, consequences.
+## Component Inventory
 
-pattern NAO EH:
-
-| Confusao | Por que NAO | Type correto |
-|----------|-------------|-------------|
-| law (P08) | law GOVERNA com regra inviolavel. pattern RECOMENDA solucao. | P08 law |
-| workflow (P12) | workflow EXECUTA sequencia de steps. pattern DESCREVE abordagem. | P12 workflow |
-| diagram (P08) | diagram VISUALIZA arquitetura. pattern EXPLICA solucao. | P08 diagram |
-| component_map (P08) | component_map INVENTARIA conexoes. pattern RESOLVE problemas. | P08 component_map |
-| satellite_spec (P08) | satellite_spec DEFINE um componente. pattern RESOLVE problema recorrente. | P08 satellite_spec |
-| instruction (P03) | instruction DIZ como fazer. pattern EXPLICA por que funciona. | P03 instruction |
-
-Regra: "qual a solucao recorrente nomeada para este problema?" -> pattern.
-
-## Position in Architecture Flow
-
-```text
-[Recurring Problem] -> [pattern] documents solution -> [law] may codify -> [workflow] implements
-                            |
-               [satellite_spec] may reference pattern
-                            |
-               [brain_index] -> [prompt injection] -> [agent applies]
-```
-
-pattern is CONTENT LAYER. Injected into decision-making as architectural knowledge.
-It informs laws, workflows, and satellite specifications with proven solutions.
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| frontmatter block | 21-field metadata header (id, kind, pillar, domain, category, etc.) | pattern-builder | active |
+| problem_statement | The recurring problem this pattern solves, expressed concretely | author | active |
+| solution | The named, reusable solution with structural description | author | active |
+| forces | Competing concerns and tensions that the pattern balances | author | active |
+| consequences | Positive and negative outcomes of applying this pattern | author | active |
+| applicability | Conditions under which this pattern should and should not be used | author | active |
+| related_patterns | Cross-references to complementary and conflicting patterns | author | active |
 
 ## Dependency Graph
 
-```text
-pattern <--informed_by-- learning_record (P10) — patterns emerge from repeated learning
-pattern --produces_for--> law (P08) — proven patterns may become mandatory rules
-pattern --produces_for--> workflow (P12) — workflows implement pattern steps
-pattern --produces_for--> satellite_spec (P08) — specs reference applicable patterns
-pattern <--queried_by-- brain_query (BM25 + FAISS)
-pattern <--injected_in-- system_prompt (P03) via IHP
-pattern --independent-- signal, connector, scoring_rubric
+```
+knowledge_card  --produces-->  pattern  --consumed_by-->  agent
+learning_record --produces-->  pattern  --referenced_by-> law
+pattern         --signals-->   pattern_application
 ```
 
-## Fractal Position
-Pillar: P08 (Architecture — how the system SCALES)
-Function: INJECT (provides reusable solutions to architecture decisions)
-Scale: L0 (content artifact — architectural knowledge distilled into named solutions)
-pattern is the KNOWLEDGE kind of P08 — while law governs and satellite_spec defines, pattern teaches.
+| From | To | Type | Data |
+|------|----|------|------|
+| knowledge_card (P01) | pattern | data_flow | domain facts supporting problem identification |
+| learning_record (P10) | pattern | data_flow | observed successes formalized as reusable solutions |
+| pattern | agent (P02) | consumes | agent applies pattern to solve recurring problems |
+| pattern | law (P08) | data_flow | pattern may be elevated to inviolable mandate |
+| pattern | diagram (P08) | data_flow | pattern structure visualized in architecture diagrams |
+| pattern | related_patterns | dependency | patterns reference each other for composition |
+| pattern | pattern_application | signals | recorded when pattern is successfully applied |
+
+## Boundary Table
+
+| pattern IS | pattern IS NOT |
+|------------|---------------|
+| A named, reusable solution for a recurring architecture problem | An inviolable operational mandate (law P08) |
+| Documents forces, consequences, and applicability | A visual representation of structure (diagram P08) |
+| Recommends — does not mandate — adoption | An inventory of system parts (component_map P08) |
+| Derived from observed successes and documented failures | A specification of a satellite component (satellite_spec P08) |
+| Cross-references related and anti-patterns | A multi-step execution sequence (workflow P12) |
+| Dense (>=0.80 density), max 4KB | A verbose tutorial or guide |
+
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Evidence | knowledge_card, learning_record | Supply domain facts and observed successes |
+| Problem | frontmatter, problem_statement, forces | Define the problem and competing tensions |
+| Solution | solution, consequences, applicability | Describe the reusable solution and when to apply it |
+| Relationships | related_patterns | Map connections to complementary and conflicting patterns |
+| Downstream | agent, law, diagram | Consumers that apply, mandate, or visualize the pattern |

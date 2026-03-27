@@ -1,47 +1,56 @@
 ---
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Boundary and position of unit_eval in the CEX fractal
+purpose: Component map of unit_eval — inventory, dependencies, and architectural position
 ---
 
 # Architecture: unit_eval in the CEX
 
-## Boundary
-unit_eval EH: teste unitario que verifica corretude de agente/prompt individual com assertions mapeadas a gates.
+## Component Inventory
 
-unit_eval NAO EH:
-
-| Confusao | Por que NAO | Type correto |
-|----------|-------------|-------------|
-| smoke_eval | smoke_eval testa sanidade rapida (<30s, sem profundidade). unit_eval testa corretude com assertions. | P07 smoke_eval |
-| e2e_eval | e2e_eval testa pipeline completo (multiplos agentes). unit_eval testa agente isolado. | P07 e2e_eval |
-| benchmark | benchmark mede PERFORMANCE (latencia, custo). unit_eval verifica CORRETUDE. | P07 benchmark |
-| golden_test | golden_test exige quality 9.5+. unit_eval testa a qualquer nivel. | P07 golden_test |
-| scoring_rubric | scoring_rubric define CRITERIOS. unit_eval APLICA criterios via assertions. | P07 scoring_rubric |
-| few_shot_example | few_shot_example ENSINA pattern (P01). unit_eval VERIFICA corretude (P07). | P01 few_shot_example |
-
-Regra: "este agente produz saida correta para esta entrada?" -> unit_eval.
-
-## Position in Evaluation Flow
-
-```text
-scoring_rubric (define criteria) -> golden_test (reference example) -> unit_eval (run tests) -> quality_gate (pass/fail)
-```
-
-unit_eval is the VERIFICATION LAYER — runs assertions against actual agent output.
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| frontmatter block | Metadata header (id, kind, pillar, domain, target, assertion_count, etc.) | unit-eval-builder | active |
+| test_input | Concrete input provided to the target agent or prompt | author | active |
+| expected_output | The correct output that the target should produce | author | active |
+| assertions | Specific conditions that must hold true for the test to pass | author | active |
+| setup_teardown | Pre-test initialization and post-test cleanup procedures | author | active |
+| coverage_mapping | Which capabilities or code paths this test exercises | author | active |
 
 ## Dependency Graph
 
-```text
-unit_eval <--uses_criteria-- scoring_rubric (P07 defines dimensions)
-unit_eval <--uses_reference-- golden_test (P07 provides expected quality)
-unit_eval --produces_for--> quality_gate (P11 uses results for pass/fail)
-unit_eval --produces_for--> benchmark (P07 aggregates test results)
-unit_eval --independent-- signal, handoff, lifecycle_rule
+```
+target_agent    --tested_by-->   unit_eval  --produces-->    test_result
+golden_test     --calibrates-->  unit_eval  --signals-->     eval_event
+unit_eval       --depends-->     quality_gate
 ```
 
-## Fractal Position
-Pillar: P07 (Evals — how to measure quality)
-Function: GOVERN
-Scale: L0 (governance artifact)
-unit_eval is the workhorse of P07 — most frequent eval type, testing individual correctness.
+| From | To | Type | Data |
+|------|----|------|------|
+| target_agent/prompt | unit_eval | data_flow | target under test provides actual output |
+| unit_eval | test_result | produces | pass/fail per assertion with details |
+| golden_test (P07) | unit_eval | dependency | golden tests provide reference for expected output |
+| unit_eval | eval_event (P12) | signals | emitted on test pass or fail |
+| quality_gate (P11) | unit_eval | dependency | gate may require unit eval pass before promotion |
+| scoring_rubric (P07) | unit_eval | dependency | rubric criteria may inform assertion design |
+
+## Boundary Table
+
+| unit_eval IS | unit_eval IS NOT |
+|--------------|-----------------|
+| A test of one agent or prompt in isolation with concrete I/O | A fast sanity check (< 30s) for basic health (smoke_eval P07) |
+| Has explicit input, expected output, and assertions | A full pipeline test across multiple agents (e2e_eval P07) |
+| Includes setup/teardown for test isolation | A reference example of ideal output (golden_test P07) |
+| Maps coverage to specific capabilities or code paths | A performance measurement (benchmark P07) |
+| Produces per-assertion pass/fail results | A weighted score across dimensions (scoring_rubric P07) |
+| Regression-focused: catches breakage in existing behavior | A calibration tool for scoring consistency |
+
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Setup | setup_teardown, golden_test | Initialize test environment and load reference data |
+| Input | frontmatter, test_input | Define test identity and concrete input |
+| Execution | target_agent/prompt | Run the target with test input |
+| Verification | expected_output, assertions, coverage_mapping | Compare actual vs expected and check assertions |
+| Output | test_result, eval_event | Report results and signal downstream |

@@ -1,47 +1,56 @@
 ---
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Boundary and position of smoke_eval in the CEX fractal
+purpose: Component map of smoke_eval — inventory, dependencies, and architectural position
 ---
 
 # Architecture: smoke_eval in the CEX
 
-## Boundary
-smoke_eval EH: teste rapido de sanidade (<30s) que verifica se componentes basicos funcionam antes de prosseguir.
+## Component Inventory
 
-smoke_eval NAO EH:
-
-| Confusao | Por que NAO | Type correto |
-|----------|-------------|-------------|
-| unit_eval | unit_eval testa corretude com profundidade. smoke_eval so verifica sanidade. | P07 unit_eval |
-| e2e_eval | e2e_eval testa pipeline completo. smoke_eval testa componentes isolados rapidamente. | P07 e2e_eval |
-| benchmark | benchmark mede PERFORMANCE (latencia, custo). smoke_eval verifica FUNCIONAMENTO basico. | P07 benchmark |
-| golden_test | golden_test exige quality 9.5+. smoke_eval eh binario (pass/fail). | P07 golden_test |
-| scoring_rubric | scoring_rubric define CRITERIOS. smoke_eval APLICA checks rapidos. | P07 scoring_rubric |
-| quality_gate | quality_gate BLOQUEIA com score (P11). smoke_eval DETECTA falha rapida (P07). | P11 quality_gate |
-
-Regra: "isto funciona minimamente?" -> smoke_eval.
-
-## Position in Evaluation Flow
-
-```text
-smoke_eval (quick sanity) -> unit_eval (deep test) -> e2e_eval (pipeline) -> quality_gate (pass/fail)
-```
-
-smoke_eval is the FIRST LINE OF DEFENSE — catches obvious failures before investing in deeper tests.
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| frontmatter block | Metadata header (id, kind, pillar, domain, target, timeout, etc.) | smoke-eval-builder | active |
+| critical_path | Minimal sequence of operations that must succeed for basic health | author | active |
+| assertions | Fast boolean checks verifying each critical path step | author | active |
+| timeout_limit | Maximum execution time (< 30 seconds) for fast-fail behavior | author | active |
+| health_checks | Component-level liveness and readiness verifications | author | active |
+| failure_action | What happens on smoke failure (block deploy, alert, rollback) | author | active |
 
 ## Dependency Graph
 
-```text
-smoke_eval <--derives_checks-- unit_eval (P07 extracts fast checks from deep tests)
-smoke_eval --gates--> unit_eval (P07 skip deep tests if smoke fails)
-smoke_eval --gates--> e2e_eval (P07 skip pipeline if smoke fails)
-smoke_eval --alerts--> signal (P12 notifies on failure)
-smoke_eval --independent-- golden_test, scoring_rubric, lifecycle_rule
+```
+target_component  --tested_by-->  smoke_eval  --produces-->    pass_fail_result
+smoke_eval        --consumed_by-->  CI_pipeline  --signals-->  smoke_event
+smoke_eval        --depends-->      health_endpoint
 ```
 
-## Fractal Position
-Pillar: P07 (Evals — how to measure quality)
-Function: GOVERN
-Scale: L0 (governance artifact)
-smoke_eval is the fastest eval in P07 — maximum 30 seconds, first to run in any test pipeline.
+| From | To | Type | Data |
+|------|----|------|------|
+| target_component | smoke_eval | data_flow | component under test provides health endpoints |
+| smoke_eval | pass_fail_result | produces | boolean pass/fail with failure details |
+| smoke_eval | CI_pipeline | consumes | pipeline runs smoke eval as pre-deploy gate |
+| smoke_eval | smoke_event (P12) | signals | emitted on pass or fail with timing data |
+| health_endpoint | smoke_eval | dependency | health checks require accessible endpoints |
+| quality_gate (P11) | smoke_eval | dependency | gate may require smoke eval pass before promotion |
+
+## Boundary Table
+
+| smoke_eval IS | smoke_eval IS NOT |
+|---------------|-------------------|
+| A fast sanity check (< 30 seconds) for basic component health | A deep correctness test with full coverage (unit_eval P07) |
+| Tests the critical path — minimal viable functionality | A full pipeline test across multiple components (e2e_eval P07) |
+| Fast-fail: stops on first assertion failure | A performance measurement with benchmarks (benchmark P07) |
+| Run before every deploy as a safety gate | A periodic quality review or calibration |
+| Produces boolean pass/fail with failure details | A scored evaluation with weighted dimensions (scoring_rubric P07) |
+| Scoped to one component or service | A system-wide health assessment |
+
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Target | target_component, health_endpoint | Identify what is being tested and its health interface |
+| Test | frontmatter, critical_path, assertions | Define the minimal checks and their pass criteria |
+| Constraint | timeout_limit | Enforce fast execution for quick feedback |
+| Response | failure_action, pass_fail_result | Define what happens on success or failure |
+| Integration | CI_pipeline, quality_gate, smoke_event | Connect to deploy pipeline and signal results |

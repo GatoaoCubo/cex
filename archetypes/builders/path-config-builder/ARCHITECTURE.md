@@ -1,54 +1,56 @@
 ---
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Boundary, relationships, and position of path_config in the CEX fractal
-pattern: every builder must know WHERE its output fits and what it CONNECTS to
+purpose: Component map of path_config — inventory, dependencies, and architectural position
 ---
 
 # Architecture: path_config in the CEX
 
-## Boundary
-path_config EH: especificacao de caminhos do sistema de arquivos para um scope. Define NOMES
-de paths, tipos (dir/file), plataforma, defaults, hierarquia de diretorios — nunca paths
-absolutos usuario-especificos. Segue XDG Base Directory conventions.
+## Component Inventory
 
-path_config NAO EH:
-
-| Confusao | Por que NAO | Tipo correto |
-|----------|-------------|-------------|
-| env_config | env_config define variaveis genericas; path_config define caminhos de filesystem | P09 env_config |
-| permission | permission controla QUEM acessa; path_config define ONDE ficam arquivos | P09 permission |
-| feature_flag | feature_flag eh toggle on/off logico; path_config eh localizacao fisica | P09 feature_flag |
-| runtime_rule | runtime_rule define comportamento (timeouts); path_config define localizacao | P09 runtime_rule |
-| boot_config | boot_config eh per-provider (model, temp); path_config eh generico | P02 boot_config |
-
-Regra: "quais CAMINHOS de filesystem este scope precisa, em quais plataformas?" -> path_config.
-
-## Position in Config Flow
-
-```text
-path_config (P09) --> boot_config (P02) --> agent (P02) --> runtime
-      |                    |
-  dir_hierarchy       provider_config
-      |
-  platform_resolve
-```
-
-path_config is CONFIGURATION LAYER — defines filesystem structure before runtime starts.
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| frontmatter block | Metadata header (id, kind, pillar, domain, platform, scope, etc.) | path-config-builder | active |
+| path_catalog | Master list of all paths with type, default, and description | author | active |
+| platform_rules | Platform-specific separator and expansion rules (Windows/Linux/Mac) | author | active |
+| resolution_strategy | How relative paths resolve to absolute paths at runtime | author | active |
+| directory_hierarchy | Parent-child relationships between directories | author | active |
+| validation_rules | Checks for path existence, permissions, and platform compliance | author | active |
 
 ## Dependency Graph
 
-```text
-path_config --consumed_by--> boot_config (P02) (boot reads paths for data/config dirs)
-path_config --consumed_by--> daemon (P04) (daemons need log_dir, pid file paths)
-path_config --consumed_by--> spawn_config (P12) (spawn reads work dirs for satellites)
-path_config <--receives-- guardrail (P11) (security rules for path access)
-path_config --independent-- env_config, feature_flag, runtime_rule, permission
+```
+env_config      --produces-->  path_config  --consumed_by-->  agent
+boot_config     --depends-->   path_config  --consumed_by-->  spawn_config
+path_config     --signals-->   path_resolution_error
 ```
 
-## Fractal Position
-Pillar: P09 (Config — HOW the system configures)
-Function: GOVERN (path_config governs where files live and directory structure)
-Layer: runtime (paths resolved at runtime)
-Scale: L0 (per-scope — one path_config per scope, foundational)
-path_config is CORE: system needs defined paths to function.
+| From | To | Type | Data |
+|------|----|------|------|
+| env_config (P09) | path_config | data_flow | environment variables used in path expansion |
+| path_config | agent (P02) | consumes | agent reads paths for file operations |
+| path_config | spawn_config (P12) | consumes | spawn scripts use paths for working directories |
+| boot_config (P02) | path_config | dependency | boot sequence needs paths for initialization |
+| path_config | path_resolution_error (P12) | signals | emitted when a path fails validation |
+| permission (P09) | path_config | dependency | access control may restrict certain paths |
+
+## Boundary Table
+
+| path_config IS | path_config IS NOT |
+|----------------|-------------------|
+| A specification of filesystem paths with platform awareness | A generic environment variable store (env_config P09) |
+| Scoped to a domain with directory hierarchy documented | An access control rule for paths (permission P09) |
+| Platform-aware with Windows/Linux/Mac resolution rules | A feature toggle (feature_flag P09) |
+| Includes validation for existence and permissions | A runtime behavior parameter (runtime_rule P09) |
+| Documents parent-child directory relationships | A naming convention for artifacts (naming_rule P05) |
+| Resolves relative to absolute using defined strategy | A hardcoded absolute path without expansion |
+
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Environment | env_config, platform_rules | Supply variables and platform constraints |
+| Catalog | frontmatter, path_catalog, directory_hierarchy | List all paths with relationships |
+| Resolution | resolution_strategy | Define how paths are expanded and resolved |
+| Validation | validation_rules | Check paths exist and are accessible |
+| Consumers | agent, spawn_config, boot_config | Systems that read and use the configured paths |

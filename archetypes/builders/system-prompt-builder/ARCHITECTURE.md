@@ -1,51 +1,57 @@
 ---
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Boundary, relationships, and position of system_prompt in the CEX fractal
-pattern: every builder must know WHERE its output fits and what it CONNECTS to
+purpose: Component map of system_prompt — inventory, dependencies, and architectural position
 ---
 
 # Architecture: system_prompt in the CEX
 
-## Boundary
-system_prompt EH: identidade persistente do agente — persona, regras ALWAYS/NEVER, formato de saida, e constraints. Lido PRIMEIRO pelo LLM antes de qualquer input do usuario.
+## Component Inventory
 
-system_prompt NAO EH:
-
-| Confusao | Por que NAO | Type correto |
-|----------|-------------|-------------|
-| action_prompt | action_prompt define TAREFA especifica; system_prompt define IDENTIDADE | P03 action_prompt |
-| instruction | instruction eh receita passo-a-passo; system_prompt eh persona | P03 instruction |
-| prompt_template | prompt_template tem {{vars}} para reuso; system_prompt eh fixo por agente | P03 prompt_template |
-| mental_model | mental_model eh blueprint de design-time; system_prompt eh runtime | P02/P10 mental_model |
-| guardrail | guardrail eh restricao de seguranca externa; system_prompt internaliza regras | P11 guardrail |
-
-Regra: "quem este agente EH e como ele RESPONDE?" -> system_prompt.
-
-## Position in Agent Boot Flow
-
-```text
-mental_model (P10) --> knowledge_card (P01) --> system_prompt (P03) --> agent (P02)
-                                                     ^                      |
-                                               guardrail (P11)        action_prompt (P03)
-                                                                           |
-                                                                      execution
-```
-
-system_prompt is IDENTITY LAYER — the bridge between design-time (mental_model) and runtime (agent).
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| frontmatter block | 19-field metadata header (id, kind, pillar, domain, target_agent, etc.) | system-prompt-builder | active |
+| persona_definition | Who the agent is — role, expertise, and behavioral identity | author | active |
+| always_rules | Mandatory behaviors the agent must follow in every interaction | author | active |
+| never_rules | Prohibited behaviors the agent must avoid without exception | author | active |
+| knowledge_boundary | What the agent knows and explicitly does not know | author | active |
+| tone_calibration | Communication style, formality level, and language preferences | author | active |
+| output_format | Default response structure the agent should follow | author | active |
 
 ## Dependency Graph
 
-```text
-system_prompt <--receives-- knowledge_card (P01) (domain knowledge to inject)
-system_prompt <--receives-- mental_model (P10) (routing rules, personality)
-system_prompt <--receives-- guardrail (P11) (safety constraints to internalize)
-system_prompt --consumed_by--> agent (P02) (loads as first message)
-system_prompt --independent-- action_prompt, instruction, prompt_template
+```
+knowledge_card  --produces-->  system_prompt  --consumed_by-->  agent
+mental_model    --depends-->   system_prompt  --constrains-->   action_prompt
+system_prompt   --signals-->   identity_load
 ```
 
-## Fractal Position
-Pillar: P03 (Prompt — how the agent SPEAKS)
-Function: BECOME (LLM assumes this identity)
-Scale: L0 (core infrastructure — every agent needs one)
-system_prompt is the MOST LOADED P03 artifact: 7 PRIMEs + 101 ISO system instructions + 10 Rules files already exist in CODEXA.
+| From | To | Type | Data |
+|------|----|------|------|
+| knowledge_card (P01) | system_prompt | data_flow | domain expertise informing persona and boundaries |
+| system_prompt | agent (P02) | consumes | agent loads system prompt as identity at boot |
+| system_prompt | action_prompt (P03) | dependency | task prompts must operate within identity constraints |
+| system_prompt | mental_model (P02) | dependency | mental model scope constrained by system prompt |
+| system_prompt | identity_load (P12) | signals | emitted when agent loads its identity |
+| response_format (P05) | system_prompt | data_flow | output format injected into system prompt |
+
+## Boundary Table
+
+| system_prompt IS | system_prompt IS NOT |
+|------------------|----------------------|
+| A fixed identity definition with persona and ALWAYS/NEVER rules | A task-specific instruction (action_prompt P03) |
+| Loaded once at agent boot — persistent across interactions | A step-by-step recipe (instruction P03) |
+| Defines who the agent is and how it behaves | A reusable template with {{variable}} slots (prompt_template P03) |
+| Constrains tone, knowledge boundary, and output format | A meta-prompt that generates other prompts |
+| Scoped to one agent with specific domain expertise | A universal prompt applied to all agents |
+| Constitutional — defines what the agent must and must not do | A suggestion or guideline that can be overridden |
+
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Knowledge | knowledge_card, response_format | Supply domain expertise and output structure |
+| Identity | frontmatter, persona_definition, knowledge_boundary | Define who the agent is and what it knows |
+| Rules | always_rules, never_rules | Mandate and prohibit specific behaviors |
+| Style | tone_calibration, output_format | Calibrate communication style and response structure |
+| Consumers | agent, action_prompt, mental_model | Systems that load and operate within the identity |

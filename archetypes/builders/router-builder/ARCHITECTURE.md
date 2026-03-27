@@ -1,56 +1,57 @@
 ---
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Boundary, relationships, and position of router in the CEX fractal
-pattern: every builder must know WHERE its output fits and what it CONNECTS to
+purpose: Component map of router — inventory, dependencies, and architectural position
 ---
 
 # Architecture: router in the CEX
 
-## Boundary
-router EH: logica de decisao de roteamento runtime — route tables com patterns, confidence thresholds,
-fallback routes, e escalation policies. O router DECIDE para onde uma task vai baseado em analise
-do input, nao simplesmente mapeia keywords.
+## Component Inventory
 
-router NAO EH:
-
-| Confusao | Por que NAO | Tipo correto |
-|----------|-------------|-------------|
-| dispatch_rule | dispatch_rule mapeia keyword-satellite sem logica; router ANALISA e DECIDE com confidence | P12 dispatch_rule |
-| workflow | workflow orquestra SEQUENCIA de steps; router decide UM destino | P12 workflow |
-| agent | agent EH a entidade executora; router DIRECIONA para o agent | P02 agent |
-| fallback_chain | fallback_chain define degradacao de MODELO; router define escolha de DESTINO | P02 fallback_chain |
-| mental_model | mental_model eh blueprint de decisoes; router eh regra concreta de roteamento | P02 mental_model |
-| dag | dag define grafo de dependencias; router define ponto unico de decisao | P12 dag |
-
-Regra: "para onde esta task deve ir?" -> router.
-
-## Position in Dispatch Flow
-
-```text
-task_input --> router (P02) --> agent (P02) --> skill (P04) --> output
-                  |                                    ^
-                  v                                    |
-            dispatch_rule (P12) ----fallback--->  fallback_chain (P02)
-            (simple keyword map)              (model degradation)
-```
-
-router is the DECISION LAYER — sits between task input and agent execution,
-applying pattern matching, confidence scoring, and fallback logic.
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| frontmatter block | 14-field metadata header (id, kind, pillar, domain, routes_count, etc.) | router-builder | active |
+| route_table | Ordered list of routes with pattern, destination, and priority | author | active |
+| confidence_thresholds | Minimum confidence levels required for route activation | author | active |
+| fallback_routes | Default destinations when no pattern matches above threshold | author | active |
+| escalation_policy | What happens when routing fails or confidence is too low | author | active |
+| load_balancing | Distribution strategy across destinations when multiple match | author | active |
+| timeout_policy | Maximum time allowed for route resolution before fallback | author | active |
 
 ## Dependency Graph
 
-```text
-router <--receives-- dispatch_rule (P12) (keyword hints for pattern matching)
-router <--receives-- model_card (P02) (model capabilities inform routing)
-router --produces_for--> agent (P02) (selected destination receives task)
-router --produces_for--> workflow (P12) (routing within orchestration)
-router --produces_for--> spawn_config (P12) (satellite selection for spawn)
-router --independent-- knowledge_card, system_prompt, signal
+```
+incoming_task   --routed_by-->   router  --dispatches_to-->  satellite/agent
+mental_model    --configures-->  router  --signals-->        routing_decision
+router          --depends-->     dispatch_rule
 ```
 
-## Fractal Position
-Pillar: P02 (Model — WHO makes decisions)
-Function: DECIDE (routing logic applied at runtime)
-Layer: runtime (executes per-task, stateless decision)
-Scale: L0 (infrastructure — every multi-agent system needs routing)
+| From | To | Type | Data |
+|------|----|------|------|
+| incoming_task | router | data_flow | task description and metadata for pattern matching |
+| mental_model (P02) | router | data_flow | routing rules and decision trees informing route table |
+| router | satellite/agent (P02) | produces | task dispatched to matched destination |
+| router | routing_decision (P12) | signals | emitted with route, confidence, and fallback status |
+| dispatch_rule (P12) | router | dependency | simple keyword mappings referenced by router |
+| router | escalation_policy | data_flow | unmatched tasks escalated per policy |
+
+## Boundary Table
+
+| router IS | router IS NOT |
+|-----------|---------------|
+| A routing logic with route tables, confidence, and fallback | A simple keyword-to-destination mapping (dispatch_rule P12) |
+| Pattern-based matching with priority ordering | A multi-step execution sequence (workflow P12) |
+| Includes fallback routes and escalation for unmatched tasks | An agent identity with capabilities (agent P02) |
+| Configured with confidence thresholds per route | A design-time cognitive map (mental_model P02) |
+| Supports load balancing across multiple destinations | A static configuration of one destination |
+| Produces routing decisions as observable signals | A silent dispatch without audit trail |
+
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Input | incoming_task, mental_model | Supply task data and routing intelligence |
+| Matching | route_table, confidence_thresholds | Pattern matching with confidence evaluation |
+| Resolution | load_balancing, timeout_policy | Resolve ties and enforce time limits |
+| Fallback | fallback_routes, escalation_policy | Handle unmatched or low-confidence tasks |
+| Output | satellite/agent, routing_decision | Dispatch task and signal the routing result |

@@ -1,59 +1,57 @@
 ---
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Boundary, relationships, and position of mcp_server in the CEX fractal
-pattern: every builder must know WHERE its output fits and what it CONNECTS to
+purpose: Component map of mcp_server — inventory, dependencies, and architectural position
 ---
 
 # Architecture: mcp_server in the CEX
 
-## Boundary
-mcp_server EH: servidor MCP que expoe tools e resources para agentes LLM consumirem.
-Implementa o Model Context Protocol (Anthropic) via transport stdio, SSE, ou HTTP.
-Cada tool tem nome + JSON-Schema parameters. Cada resource tem URI template + content-type.
+## Component Inventory
 
-mcp_server NAO EH:
-
-| Confusao | Por que NAO | Tipo correto |
-|----------|-------------|-------------|
-| skill | skill eh habilidade reutilizavel com fases; mcp_server eh servidor de protocolo | P04 skill |
-| connector | connector eh integracao bidirecional de servico; mcp_server expoe via MCP protocol | P04 connector |
-| client | client CONSOME API; mcp_server EXPOE tools (provider, nao consumer) | P04 client |
-| plugin | plugin eh extensao plugavel ao sistema; mcp_server eh servidor de protocolo independente | P04 plugin |
-| cli_tool | cli_tool eh execucao pontual em linha de comando; mcp_server persiste e aceita conexoes | P04 cli_tool |
-| scraper | scraper extrai dados web pontualmente; mcp_server expoe capacidades via protocolo | P04 scraper |
-| daemon | daemon eh processo background sem protocol layer; mcp_server tem protocol MCP | P04 daemon |
-| hook | hook eh gatilho pre/post evento; mcp_server eh servidor persistente de tools | P04 hook |
-| component | component eh bloco composavel de pipeline; mcp_server eh servidor de protocolo | P04 component |
-
-Regra: "quem expoe tools via MCP para agentes consumirem?" -> mcp_server.
-
-## Position in Agent Tool Flow
-
-```text
-knowledge_card (P01) --> agent (P02) --> mcp_server (P04) --> external_service
-                              |                |
-                         skill (P04)    resources_provided
-                              |
-                         connector (P04)
-```
-
-mcp_server is TOOL LAYER — the bridge between agent runtime and external capabilities.
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| frontmatter block | Metadata header (id, kind, pillar, domain, transport, port, etc.) | mcp-server-builder | active |
+| transport_config | Transport selection and configuration (stdio, SSE, HTTP) | author | active |
+| tools_provided | Tool definitions with JSON-Schema parameters exposed to agents | author | active |
+| resources_provided | Resource URI templates with read/subscribe capabilities | author | active |
+| auth_strategy | Authentication and authorization mechanism per transport type | author | active |
+| error_handling | Error response format and recovery behavior | author | active |
+| health_endpoint | Liveness and readiness checks for monitoring | author | active |
 
 ## Dependency Graph
 
-```text
-mcp_server <--receives-- boot_config (P02) (MCP config injected at agent boot)
-mcp_server <--receives-- env_config (P09) (API keys, endpoints, transport config)
-mcp_server <--receives-- guardrail (P11) (rate limits, auth constraints)
-mcp_server --consumed_by--> agent (P02) (agent calls tools via MCP protocol)
-mcp_server --produces_for--> skill (P04) (skills may wrap mcp_server tool calls)
-mcp_server --independent-- connector, client, plugin, daemon
+```
+agent          --consumes-->   mcp_server  --depends-->     transport_layer
+boot_config    --configures--> mcp_server  --produces-->    tool_results
+mcp_server     --signals-->    health_status
 ```
 
-## Fractal Position
-Pillar: P04 (Tools — what the agent USES)
-Function: CALL (agent invokes tools at runtime)
-Layer: runtime (executes during agent session)
-Scale: L1 (infrastructure — shared across agents, not per-task)
-mcp_server is CORE (in core_24): foundational for any agentic system needing external tools.
+| From | To | Type | Data |
+|------|----|------|------|
+| agent (P02) | mcp_server | consumes | agent invokes tools and reads resources via MCP protocol |
+| boot_config (P02) | mcp_server | data_flow | server address, port, and auth config injected at boot |
+| mcp_server | tool_results | produces | structured responses from tool invocations |
+| mcp_server | transport_layer | dependency | requires stdio pipe, SSE stream, or HTTP endpoint |
+| mcp_server | health_status (P12) | signals | periodic health and availability signals |
+| spawn_config (P12) | mcp_server | data_flow | MCP profile path used during satellite spawn |
+
+## Boundary Table
+
+| mcp_server IS | mcp_server IS NOT |
+|---------------|-------------------|
+| A provider exposing tools and resources via MCP protocol | A bidirectional integration adapter (connector P04) |
+| Configured with transport, auth, and endpoint details | A background process without protocol interface (daemon P04) |
+| Consumed by agents at runtime through standardized calls | A reusable multi-phase capability (skill P04) |
+| Defined by tools_provided and resources_provided schemas | An API consumer fetching external data (client P04) |
+| Bound to a specific transport type (stdio/SSE/HTTP) | A pluggable extension with lifecycle hooks (plugin P04) |
+| Stateless per request — no session memory across calls | A persistent state store or database |
+
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Configuration | frontmatter, boot_config, spawn_config | Server identity, connection params, and launch profile |
+| Transport | transport_config, auth_strategy | Protocol selection and authentication mechanism |
+| Interface | tools_provided, resources_provided | Define what the server exposes to consuming agents |
+| Runtime | error_handling, health_endpoint | Error recovery and availability monitoring |
+| Consumers | agent, tool_results | Agents invoke tools and receive structured responses |

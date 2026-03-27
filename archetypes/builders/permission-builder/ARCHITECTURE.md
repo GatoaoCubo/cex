@@ -1,48 +1,57 @@
 ---
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Boundary and position of permission in the CEX fractal
+purpose: Component map of permission — inventory, dependencies, and architectural position
 ---
 
 # Architecture: permission in the CEX
 
-## Boundary
-permission EH: regra de controle de acesso que define quem pode ler/escrever/executar recursos.
+## Component Inventory
 
-permission NAO EH:
-
-| Confusao | Por que NAO | Type correto |
-|----------|-------------|-------------|
-| env_config | env_config define VARIAVEIS de ambiente. permission define ACESSO a recursos. | P09 env_config |
-| path_config | path_config define CAMINHOS do filesystem. permission define quem pode ACESSAR caminhos. | P09 path_config |
-| feature_flag | feature_flag liga/desliga FEATURES. permission controla quem pode ACESSAR. | P09 feature_flag |
-| runtime_rule | runtime_rule define TIMEOUTS e retries. permission define READ/WRITE/EXECUTE. | P09 runtime_rule |
-| guardrail | guardrail previne DANO (safety). permission controla ACESSO (who can do what). | P11 guardrail |
-| law | law define regra OPERACIONAL arquitetural. permission define regra de ACESSO granular. | P08 law |
-
-Regra: "quem pode ler/escrever/executar este recurso?" -> permission.
-
-## Position in Access Flow
-
-```text
-law (operational rule) -> guardrail (safety boundary) -> permission (access control) -> runtime check (enforcement)
-```
-
-permission is ACCESS LAYER — controls who can read/write/execute specific resources.
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| frontmatter block | Metadata header (id, kind, pillar, domain, scope, roles, etc.) | permission-builder | active |
+| access_rules | Read/write/execute controls with allow_list and deny_list | author | active |
+| role_definitions | Named roles with capabilities and inheritance hierarchy | author | active |
+| scope_binding | What resources, artifacts, or paths this permission governs | author | active |
+| precedence_rules | Resolution order when allow and deny rules conflict | author | active |
+| audit_trail | Logging requirements for access attempts and escalations | author | active |
+| escalation_path | Who to contact and what process to follow for access elevation | author | active |
 
 ## Dependency Graph
 
-```text
-permission <--constrained_by-- law (P08 provides operational principles)
-permission <--complemented_by-- guardrail (P11 provides safety boundaries)
-permission --enforced_by--> hook (P04 implements access checks)
-permission --audited_by--> quality_gate (P11 tracks compliance)
-permission --configures--> env_config (P09 may restrict env access)
-permission --independent-- knowledge_card, signal, scoring_rubric
+```
+agent          --governed_by-->  permission  --enforced_by-->  validator
+permission     --consumed_by-->  path_config  --signals-->     access_violation
+guardrail      --depends-->      permission
 ```
 
-## Fractal Position
-Pillar: P09 (Config — how to configure)
-Function: GOVERN
-Scale: L0 (governance artifact)
-permission is unique in P09 because it is in the GOVERNANCE layer (not runtime) — it restricts access rather than configuring behavior.
+| From | To | Type | Data |
+|------|----|------|------|
+| permission | agent (P02) | dependency | agents must comply with access controls |
+| permission | validator (P06) | consumes | validators enforce permission rules at runtime |
+| permission | path_config (P09) | data_flow | paths restricted by permission scope |
+| guardrail (P11) | permission | dependency | safety guardrails may reference permission rules |
+| permission | access_violation (P12) | signals | emitted when unauthorized access is attempted |
+| law (P08) | permission | dependency | laws may mandate specific access controls |
+
+## Boundary Table
+
+| permission IS | permission IS NOT |
+|---------------|-------------------|
+| A read/write/execute access control with roles and scope | A safety boundary on agent behavior (guardrail P11) |
+| Enforced via allow_list and deny_list with precedence | An inviolable operational mandate (law P08) |
+| Role-based with inheritance hierarchy | A pass/fail quality check (quality_gate P11) |
+| Includes audit trail and escalation path | A runtime timeout or retry parameter (runtime_rule P09) |
+| Scoped to specific resources, artifacts, or paths | A feature on/off toggle (feature_flag P09) |
+| Governs who can access what and how | A naming convention for resources (naming_rule P05) |
+
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Identity | role_definitions, escalation_path | Define who has access and elevation procedures |
+| Policy | frontmatter, access_rules, precedence_rules | Specify what access is allowed or denied |
+| Scope | scope_binding, path_config | Define which resources are governed |
+| Enforcement | validator, access_violation | Check access and report violations |
+| Audit | audit_trail | Log access attempts for compliance |

@@ -1,95 +1,56 @@
 ---
-id: arch_prompt_template_builder
-kind: architecture
 pillar: P08
 llm_function: CONSTRAIN
-domain: prompt_template
-version: 1.0.0
-created: "2026-03-26"
-updated: "2026-03-26"
-author: EDISON
-tags: [architecture, prompt-template, P03, boundary, dependency-graph]
+purpose: Component map of prompt_template — inventory, dependencies, and architectural position
 ---
 
-# Architecture — prompt-template-builder
+# Architecture: prompt_template in the CEX
 
-## Boundary: What IS and IS NOT a prompt_template
+## Component Inventory
 
-**Decision question**: "Is this a reusable mold with `{{variables}}` that will be invoked multiple times with different values to produce distinct prompts?"
-
-- YES → `prompt_template`
-- NO → see NAO EH table below
-
-## NAO EH Table — All P03 Siblings
-
-| Kind | Why it is NOT a prompt_template |
-|---|---|
-| `system_prompt` | Defines agent identity and behavioral rules. Fixed text, rarely parameterized. Purpose: BECOME, not PRODUCE. |
-| `user_prompt` | One-time task message from human or orchestrator. No reuse contract. Purpose: single invocation. |
-| `few_shot` | Collection of fixed input/output examples for in-context learning. Examples are static, not variable slots. |
-| `chain_of_thought` | Instructs the LLM to reason step-by-step. Reasoning style directive, not a parameterized mold. |
-| `react` | Interleaves Thought/Action/Observation in a loop pattern. Loop structure, not a template with variable slots. |
-| `chain` | Sequence of prompts where output A feeds input B. Orchestration pattern, not a reusable single-mold. |
-| `meta_prompt` | Generates, improves, or evolves other prompts. Creates templates; it is not itself a template instance. |
-| `router_prompt` | Classifies input and routes to a handler. Decision logic, not a parameterized content mold. |
-| `planner` | Decomposes a task into an executable plan. Planning logic, not a reusable prompt structure. |
-
-## Position in Prompt Flow
-
-```
-[type_def P06] --> [prompt_template P03] --> [rendered_prompt] --> [LLM call]
-                                                    |
-                          [user_prompt P03] --------+
-                          [system_prompt P03] ------+
-```
-
-A `prompt_template` sits between the schema definition (P06) and the actual LLM invocation. It is never sent to the LLM directly — it is rendered first by substituting variable values.
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| frontmatter block | Metadata header (id, kind, pillar, domain, variables, syntax_tier, etc.) | prompt-template-builder | active |
+| variable_declarations | Typed variable slots with names, types, defaults, and descriptions | author | active |
+| template_body | Parameterized text with {{variable}} or [VAR] placeholders | author | active |
+| syntax_tier | Interpolation syntax level (tier-1 Mustache, tier-2 bracket) | author | active |
+| rendering_context | Runtime context required to fill variables (data sources, APIs) | author | active |
+| example_fills | Concrete variable fills demonstrating valid template usage | author | active |
 
 ## Dependency Graph
 
 ```
-P06 type_def
-    --> prompt-template-builder (consumes type definitions for variable schemas)
-        --> p03_pt_* artifacts (produced)
-            --> LangChain PromptTemplate (consumer)
-            --> DSPy Signature (consumer)
-            --> Mustache renderer (consumer)
-            --> Jinja2 pipeline (consumer)
-
-P03 prompt-template-builder
-    --> SCHEMA.md (source of truth)
-        --> OUTPUT_TEMPLATE.md (derives from SCHEMA.md, zero drift)
-            --> p03_pt_* artifacts (derives from OUTPUT_TEMPLATE.md)
-
-P03 prompt-template-builder
-    --> QUALITY_GATES.md (validation)
-        --> H01-H08 HARD gates (blocking)
-        --> S01-S10 SOFT gates (scoring)
-
-P03 prompt-template-builder
-    --> KNOWLEDGE.md (syntax tiers, industry implementations)
-    --> MEMORY.md (anti-patterns, common mistakes)
-    --> EXAMPLES.md (golden reference)
+type_def        --produces-->  prompt_template  --consumed_by-->  renderer
+knowledge_card  --produces-->  prompt_template  --produces-->     filled_prompt
+prompt_template --signals-->   render_error
 ```
 
-## Fractal Position
+| From | To | Type | Data |
+|------|----|------|------|
+| type_def (P06) | prompt_template | data_flow | type definitions for variable constraints |
+| knowledge_card (P01) | prompt_template | data_flow | domain facts injected as variable values |
+| prompt_template | renderer (LangChain/DSPy/Mustache) | consumes | template consumed by rendering engine |
+| prompt_template | filled_prompt | produces | concrete prompt after variable substitution |
+| prompt_template | render_error (P12) | signals | emitted when variable fill fails validation |
+| system_prompt (P03) | prompt_template | dependency | system identity may constrain template scope |
 
-```
-CEX taxonomy
-  └── P03 prompt layer
-        └── prompt_template (THIS)
-              ├── variable_syntax: mustache (tier-1)
-              ├── variable_syntax: bracket (tier-2)
-              └── composable: true/false
-                    └── partial templates (composable=true, embedded in larger molds)
-```
+## Boundary Table
 
-## Key Architectural Invariants
+| prompt_template IS | prompt_template IS NOT |
+|--------------------|------------------------|
+| A reusable mold with {{variable}} slots for multiple invocations | A one-time task instruction (action_prompt P03) |
+| Structure separated from content via parameterization | A fixed system identity definition (system_prompt P03) |
+| Rendered by LangChain, DSPy, Mustache, or Jinja2 engines | A step-by-step recipe without variables (instruction P03) |
+| Variable-typed with defaults and validation constraints | A raw user message without structure |
+| Invoked multiple times with different variable fills | A single-use prompt discarded after execution |
+| Produces filled prompts — not direct LLM responses | A meta-prompt that generates other prompts |
 
-| Invariant | Rule |
-|---|---|
-| Structure/content separation | Template body is structure; variables are content. Never hardcode content values in the template body. |
-| Render-time substitution | Templates are rendered before LLM invocation. The LLM never sees `{{variable}}` syntax. |
-| Idempotency | Same template + same variable values = same rendered output, always. |
-| Schema primacy | SCHEMA.md is the single source of truth. OUTPUT_TEMPLATE.md and all p03_pt_* artifacts derive from it. |
-| Zero undeclared slots | Every `{{var}}` in the body must be declared in the variables list. No implicit slots. |
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Types | type_def | Supply type definitions for variable constraints |
+| Definition | frontmatter, variable_declarations, syntax_tier | Specify template identity and variable slots |
+| Template | template_body, example_fills | The parameterized text and usage examples |
+| Rendering | rendering_context, renderer | Runtime fill and template engine execution |
+| Output | filled_prompt, render_error | Concrete prompt produced or error signaled |
