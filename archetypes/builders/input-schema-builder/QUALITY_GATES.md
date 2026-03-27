@@ -1,58 +1,87 @@
 ---
+id: p11_qg_input_schema
+kind: quality_gate
 pillar: P11
-llm_function: GOVERN
-purpose: Automated quality gates for input_schema validation
-pattern: HARD gates block publish, SOFT gates contribute to 0-10 score
+title: "Gate: Input Schema"
+version: "1.0.0"
+created: "2026-03-27"
+updated: "2026-03-27"
+author: "edison"
+domain: "input_schema — unilateral entry contracts defining required fields, types, and coercion rules"
+quality: null
+tags: [quality-gate, input-schema, contract, fields, validation, coercion]
+tldr: "Gates ensuring input_schema artifacts define complete, typed, unambiguous entry contracts with defaults, coercion rules, and at least one example."
+density_score: 0.89
 ---
 
-# Quality Gates: input_schema
+# Gate: Input Schema
 
-## HARD Gates (block publish if ANY fails)
+## Definition
 
-| Gate | Check | Why |
-|------|-------|-----|
-| H01 | YAML frontmatter parses | Broken YAML = broken artifact |
-| H02 | id matches `^p06_is_[a-z][a-z0-9_]+$` | Namespace compliance |
-| H03 | id == filename stem | Brain search relies on this |
-| H04 | kind == "input_schema" | Type integrity |
-| H05 | quality == null | Never self-score |
-| H06 | 11+ required fields present | Completeness |
-| H07 | fields is list, len >= 1, each has name and type | Field structure |
-| H08 | scope is non-empty string | Must identify target operation |
+| Field     | Value |
+|-----------|-------|
+| metric    | weighted soft score + all hard gates pass |
+| threshold | 7.0 to publish; 8.0 for pool; 9.5 for golden |
+| operator  | AND (all hard) + weighted average (soft) |
+| scope     | any artifact with `kind: input_schema` |
 
-## SOFT Gates (contribute to score)
+---
 
-| Gate | Check | Weight | Score if pass |
-|------|-------|--------|---------------|
-| S01 | tldr <= 160 chars, non-empty | 1.0 | 10 |
-| S02 | tags is list, len >= 3, includes "input-schema" | 0.5 | 10 |
-| S03 | Contract Definition section present and non-empty | 1.0 | 10 |
-| S04 | Fields table present with all columns | 1.0 | 10 |
-| S05 | scope is descriptive (>10 chars) | 0.5 | 10 |
-| S06 | Coercion Rules section present (even if empty) | 0.5 | 10 |
-| S07 | No filler phrases ("this document", "in summary", "basically") | 1.0 | 10 |
-| S08 | Examples section present with at least one payload | 0.5 | 10 |
-| S09 | Required fields have error_message | 0.5 | 10 |
-| S10 | density_score >= 0.80 (if provided) | 0.5 | 10 |
+## HARD Gates
 
-## Scoring Formula
-```text
-hard_pass = all 8 HARD gates pass
-soft_score = sum(gate_score * weight) / sum(weights)
-final = hard_pass ? soft_score : 0
+All must pass. Any failure = immediate reject.
 
-GOLDEN:  >= 9.5 (all HARD + 95% SOFT)
-PUBLISH: >= 8.0 (all HARD + 80% SOFT)
-REVIEW:  >= 7.0 (all HARD + 70% SOFT)
-REJECT:  < 7.0 or any HARD fail
-```
+| ID  | Check | Fail Condition |
+|-----|-------|----------------|
+| H01 | Frontmatter parses as valid YAML | Parse error on any field |
+| H02 | ID matches `^[a-z][a-z0-9_-]+$` | Uppercase, spaces, or leading digit |
+| H03 | ID equals filename stem | `id: create_input` in file `edit_input.md` |
+| H04 | Kind equals literal `input_schema` | Any other kind value |
+| H05 | Quality field is `null` | Any non-null value |
+| H06 | All required fields present | Missing: fields, required, version, or owner |
+| H07 | Every field entry has `type` and `description` | Any field missing type or description |
+| H08 | All fields listed in `required` exist in `fields` | Required list names a field not defined in fields |
 
-## Automation
-Primary: validate_artifact.py --kind input_schema [PLANNED]
-Interim: validate manually against this file, checking each gate.
+---
 
-## Pre-Production Checklist
-- [ ] Target operation/agent identified (what needs this input?)
-- [ ] No existing input_schema for same scope (brain_query checked)
-- [ ] Fields defined with types and required flags
-- [ ] Optional fields have defaults
+## SOFT Scoring
+
+Total weights sum to 100%.
+
+| ID  | Dimension | Weight | 10 pts | 5 pts | 0 pts |
+|-----|-----------|--------|--------|-------|-------|
+| S01 | Type precision | 1.0 | Types use constrained vocabulary (string, integer, float, boolean, list, object, enum) | Types present but use freeform labels | Types missing or `any` used |
+| S02 | Default coverage | 1.0 | All optional fields have explicit `default` values | Most optionals have defaults | No defaults on optional fields |
+| S03 | Coercion rules | 1.0 | Fields that accept coercion list source types and target type explicitly | Coercion mentioned but unspecified | No coercion documentation |
+| S04 | Constraint documentation | 1.0 | Fields with constraints (min, max, pattern, enum values) fully documented | Some constraints documented | Constraints implied but not stated |
+| S05 | Error messages | 0.5 | Per-field error message or error code defined | Generic error messages only | No error documentation |
+| S06 | Examples | 1.0 | At least 2 complete examples (one valid, one invalid input) | One example present | No examples |
+| S07 | Required vs optional clarity | 0.5 | All fields unambiguously classified in `required` list | Mostly clear with minor gaps | Mixed required/optional with no list |
+| S08 | Unilaterality enforced | 1.0 | Schema defines input only; no output fields included | Mostly unilateral; minor output leakage | Bilateral — mixes input and output |
+| S09 | Naming convention | 0.5 | All field names are snake_case | Mostly snake_case with exceptions | camelCase or mixed throughout |
+| S10 | Owner linkage | 0.5 | `owner` field references a specific agent or service | Owner field present but generic | No owner |
+
+**Score = sum(pts * weight) / sum(max_pts * weight) * 10**
+
+---
+
+## Actions
+
+| Score | Tier | Action |
+|-------|------|--------|
+| >= 9.5 | Golden | Publish to pool as golden input contract |
+| >= 8.0 | Skilled | Publish to pool + log pattern |
+| >= 7.0 | Learning | Use but flag for improvement |
+| < 7.0 | Rejected | Return to author with gate report |
+
+---
+
+## Bypass
+
+| Field | Value |
+|-------|-------|
+| Conditions | Rapidly evolving API where field set is not yet stable; schema explicitly marked `draft` |
+| Approver | Owner agent lead |
+| Audit trail | `bypass_reason` + `draft: true` both required in frontmatter |
+| Expiry | Draft status expires after 14 days; must reach H-gate compliance or be deprecated |
+| Never bypass | H01 (YAML parse), H05 (quality null), H07 (every field must have type + description — untyped contracts are unusable) |

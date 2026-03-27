@@ -1,59 +1,78 @@
 ---
+id: p11_qg_boot_config
+kind: quality_gate
 pillar: P11
-llm_function: GOVERN
-purpose: Automated quality gates for boot_config validation
-pattern: HARD gates block publish, SOFT gates contribute to 0-10 score
+title: "Gate: boot_config"
+version: "1.0.0"
+created: "2026-03-27"
+updated: "2026-03-27"
+author: "edison"
+domain: boot_config
+quality: null
+tags: [quality-gate, boot-config, P11, P02, governance, initialization, provider]
+tldr: "Gates for boot_config artifacts — provider-specific agent initialization parameters and constraints."
+density_score: 0.88
 ---
 
-# Quality Gates: boot_config
+# Gate: boot_config
 
-## HARD Gates (block publish if ANY fails)
+## Definition
+
+| Field     | Value                                                  |
+|-----------|--------------------------------------------------------|
+| metric    | provider completeness + constraint rationalization     |
+| threshold | 8.0                                                    |
+| operator  | >=                                                     |
+| scope     | all boot_config artifacts (P02)                        |
+
+## HARD Gates
+
+All must pass. Failure on any = final score 0.
 
 | Gate | Check | Why |
 |------|-------|-----|
-| H01 | YAML frontmatter parses | Broken YAML = broken config |
+| H01 | YAML frontmatter parses valid YAML | Broken YAML = agent fails to boot |
 | H02 | id matches `^p02_boot_[a-z][a-z0-9_]+$` | Namespace compliance |
 | H03 | id == filename stem | Discovery relies on this |
 | H04 | kind == "boot_config" | Type integrity |
 | H05 | quality == null | Never self-score |
-| H06 | 15 required fields present (id, kind, pillar, version, created, updated, author, provider, identity, constraints, tools, domain, quality, tags, tldr) | Completeness |
-| H07 | identity object has name, role, satellite | Identity completeness |
-| H08 | constraints object has max_tokens, context_window, timeout_seconds | Constraints completeness |
-| H09 | tools is non-empty list | Agent needs at least one tool |
+| H06 | All 15 required fields present: id, kind, pillar, version, created, updated, author, provider, identity, constraints, tools, domain, quality, tags, tldr | Completeness |
+| H07 | identity object has name, role, satellite | Identity block completeness |
+| H08 | constraints object has max_tokens, context_window, timeout_seconds | Runtime constraints completeness |
+| H09 | tools is non-empty list | Agent requires at least one tool to function |
 
-## SOFT Gates (contribute to score)
+## SOFT Scoring
 
-| Gate | Check | Weight | Score if pass |
-|------|-------|--------|---------------|
-| S01 | tldr <= 160 chars, non-empty, not filler | 1.0 | 10 |
-| S02 | tags is list, len >= 3, includes "boot-config" | 0.5 | 10 |
-| S03 | model field is set | 0.5 | 10 |
-| S04 | temperature is float 0.0-2.0 | 0.5 | 10 |
-| S05 | flags list present and non-empty | 0.5 | 10 |
-| S06 | mcp_config present when provider supports MCP | 1.0 | 10 |
-| S07 | body has ## Constraints table with rationale | 1.0 | 10 |
-| S08 | body has ## Tools Configuration table | 1.0 | 10 |
-| S09 | density >= 0.80 | 0.5 | 10 |
-| S10 | No filler phrases | 1.0 | 10 |
+| Gate | Check | Weight |
+|------|-------|--------|
+| S01 | tldr <= 160 chars, non-empty, not filler | 1.0 |
+| S02 | tags is list, len >= 3, includes "boot-config" | 0.5 |
+| S03 | model field is set to specific model identifier | 0.5 |
+| S04 | temperature is float 0.0-2.0 | 0.5 |
+| S05 | flags list present and non-empty | 0.5 |
+| S06 | mcp_config present when provider supports MCP | 1.0 |
+| S07 | body has ## Constraints table with per-field rationale | 1.0 |
+| S08 | body has ## Tools Configuration table listing each tool | 1.0 |
+| S09 | density_score >= 0.80 | 0.5 |
+| S10 | No filler phrases or generic descriptions | 1.0 |
 
-## Scoring Formula
-```text
-hard_pass = all 9 HARD gates pass
-soft_score = sum(gate_score * weight) / sum(weights)
-final = hard_pass ? soft_score : 0
+Weights sum: 7.5. Normalize: divide each by 7.5 before scoring.
 
-GOLDEN:  >= 9.5 (all HARD + 95% SOFT)
-PUBLISH: >= 8.0 (all HARD + 80% SOFT)
-REVIEW:  >= 7.0 (all HARD + 70% SOFT)
-REJECT:  < 7.0 or any HARD fail
-```
+## Actions
 
-## Automation
-Primary: validate_artifact.py --kind boot_config [PLANNED]
-Interim: validate manually against this file, checking each gate.
+| Score | Action |
+|-------|--------|
+| >= 9.5 | GOLDEN — pool as reference config for this provider |
+| >= 8.0 | PUBLISH — active boot configuration |
+| >= 7.0 | REVIEW — rationalize constraints or complete tools list |
+| < 7.0  | REJECT — identity block or constraints block incomplete |
 
-## Pre-Production Checklist
-- [ ] Target provider identified with known runtime characteristics
-- [ ] No existing boot_config for this provider (brain_query checked)
-- [ ] Provider documentation accessible for constraints reference
-- [ ] Tools/MCPs confirmed available for target provider
+## Bypass
+
+| Field | Value |
+|-------|-------|
+| conditions | New provider integration requiring immediate bootstrap before full spec |
+| approver | p02-chief |
+| audit_trail | Log in records/audits/ with provider justification and timestamp |
+| expiry | 48h — complete constraints spec required before expiry |
+| never_bypass | H01 (YAML), H05 (quality null) |

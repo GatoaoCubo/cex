@@ -1,57 +1,81 @@
 ---
+id: p11_qg_connector
+kind: quality_gate
 pillar: P11
-llm_function: GOVERN
-purpose: Automated quality gates for connector validation
-pattern: HARD gates block publish, SOFT gates contribute to 0-10 score
+title: "Gate: connector"
+version: "1.0.0"
+created: "2026-03-27"
+updated: "2026-03-27"
+author: "edison"
+domain: "bidirectional service integration — connectors exchanging data with external services via REST, WebSocket, gRPC, or MQTT"
+quality: null
+tags: [quality-gate, connector, P04, bidirectional, integration, data-transform]
+tldr: "Pass/fail gate for connector artifacts: bidirectional flow coverage, transform rules, health check, and protocol selection rationale."
+density_score: 0.92
 ---
 
-# Quality Gates: connector
+# Gate: connector
 
-## HARD Gates (block publish if ANY fails)
+## Definition
 
-| Gate | Check | Why |
-|------|-------|-----|
-| H01 | YAML frontmatter parses | Broken YAML = broken artifact |
-| H02 | id matches `^p04_conn_[a-z][a-z0-9_]+$` | Namespace compliance |
-| H03 | id == filename stem | Brain search relies on this |
-| H04 | kind == "connector" | Type integrity |
-| H05 | quality == null | Never self-score |
-| H06 | Required fields present: id, kind, pillar, version, created, updated, author, name, service, protocol, auth, endpoints, quality, tags, tldr | Completeness |
-| H07 | body has ## Overview, ## Endpoints, ## Data Mapping, ## Health & Errors | Core sections required |
-| H08 | body <= 1024 bytes | Compact connector spec |
+| Field | Value |
+|---|---|
+| metric | connector artifact quality score |
+| threshold | 7.0 (publish >= 8.0, golden >= 9.5) |
+| operator | weighted_sum |
+| scope | all artifacts with `kind: connector` |
 
-## SOFT Gates (contribute to score)
+## HARD Gates
 
-| Gate | Check | Weight | Score if pass |
-|------|-------|--------|---------------|
-| S01 | tldr <= 160 chars, non-empty | 1.0 | 10 |
-| S02 | tags is list, len >= 3, includes "connector" | 0.5 | 10 |
-| S03 | endpoints names match endpoint names in ## Endpoints section (zero drift) | 1.0 | 10 |
-| S04 | Each endpoint has direction annotation (inbound/outbound) | 1.0 | 10 |
-| S05 | auth field present and valid enum value | 0.5 | 10 |
-| S06 | Each endpoint has data shape defined | 1.0 | 10 |
-| S07 | ## Data Mapping has inbound + outbound rules + idempotency | 1.0 | 10 |
-| S08 | health_check field present with concrete strategy | 0.5 | 10 |
-| S09 | description <= 200 chars and non-generic | 0.5 | 10 |
-| S10 | density_score >= 0.80 (no filler phrases) | 0.5 | 10 |
-| S11 | retry and rate_limit fields present | 0.5 | 10 |
-| S12 | protocol field matches integration pattern described in body | 0.5 | 10 |
+All must pass (AND logic). Any single failure = REJECT.
 
-## Scoring Formula
-```text
-hard_pass = all 8 HARD gates pass
-soft_score = sum(gate_score * weight) / sum(weights)
-final = hard_pass ? soft_score : 0
+| ID | Check | Fail Condition |
+|---|---|---|
+| H01 | Frontmatter parses as valid YAML | Parse error on frontmatter block |
+| H02 | ID matches `^[a-z][a-z0-9_-]+$` | ID contains uppercase, spaces, or invalid chars |
+| H03 | ID equals filename stem | `id: my_connector` but file is `other_connector.md` |
+| H04 | Kind equals literal `connector` | `kind: client` or `kind: integration` or any other value |
+| H05 | Quality field is null | `quality: 8.0` or any non-null value |
+| H06 | All required fields present | Missing `service`, `protocol`, or `auth_strategy` |
+| H07 | Both inbound and outbound directions represented | Only inbound or only outbound endpoints defined — that is a client, not a connector |
+| H08 | Protocol is one of: rest, websocket, grpc, mqtt | `protocol: custom` without documented justification |
+| H09 | Health check strategy defined | `health_check` field absent; connector must document liveness verification |
+| H10 | Transform rules defined for at least one endpoint | Connector passes raw data without any mapping — transforms must be explicit |
 
-GOLDEN:  >= 9.5 (all HARD + 95% SOFT)
-PUBLISH: >= 8.0 (all HARD + 80% SOFT)
-REVIEW:  >= 7.0 (all HARD + 70% SOFT)
-REJECT:  < 7.0 or any HARD fail
-```
+## SOFT Scoring
 
-## Pre-Production Checklist
-- [ ] Target service identified with integration pattern (webhook, stream, sync)
-- [ ] All endpoints enumerated with direction (inbound/outbound)
-- [ ] Protocol selected matching service capabilities
-- [ ] No existing connector for this service (brain_query checked)
-- [ ] Data mapping rules documented for both directions
+Weights sum to 100%.
+
+| Dimension | Weight | Criteria |
+|---|---|---|
+| Inbound endpoint completeness | 1.0 | All data the system receives from the external service is documented |
+| Outbound endpoint completeness | 1.0 | All data the system sends to the external service is documented |
+| Transform rule precision | 1.0 | Field mappings specify source field, target field, and transformation logic |
+| Auth strategy depth | 1.0 | Auth scheme covers token lifecycle, rotation, and failure handling |
+| Health check actionability | 0.5 | Health check endpoint and expected response documented; failure action defined |
+| Retry policy | 1.0 | Retry conditions, max attempts, backoff strategy defined per endpoint direction |
+| Rate limit compliance | 0.5 | External service rate limits documented; throttling strategy described |
+| Logging strategy | 0.5 | Which events are logged (connection errors, transform failures, auth events) stated |
+| Protocol justification | 1.0 | Protocol choice justified against alternatives for the declared use case |
+| Failure isolation | 1.0 | Inbound failure does not cascade to outbound; isolation mechanism documented |
+| Boundary clarity | 1.0 | Explicitly not a client (unidirectional) or MCP server — bidirectionality contract stated |
+| Domain specificity | 1.0 | Endpoints, transforms, and protocols specific to the declared external service |
+
+## Actions
+
+| Score | Tier | Action |
+|---|---|---|
+| >= 9.5 | Golden | Publish to pool as golden reference |
+| >= 8.0 | Publish | Publish to pool, add to routing index |
+| >= 7.0 | Review | Flag for improvement before publish |
+| < 7.0 | Reject | Return to author with specific gate failures |
+
+## Bypass
+
+| Field | Value |
+|---|---|
+| conditions | Connector for a third-party service whose webhook schema changes without versioning — inbound schema unstable |
+| approver | Integration owner with written acknowledgment of unstable upstream schema |
+| audit_trail | Bypass reason, external service name, and schema instability report link in frontmatter comment |
+| expiry | 14d — connector must reach >= 7.0 once upstream schema is confirmed stable |
+| never_bypass | H01 (unparseable YAML breaks all tooling), H05 (self-scored gates corrupt quality metrics) |

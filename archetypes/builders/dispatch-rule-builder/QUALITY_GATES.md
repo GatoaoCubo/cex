@@ -1,63 +1,91 @@
 ---
+id: p11_qg_dispatch_rule
+kind: quality_gate
 pillar: P11
-llm_function: GOVERN
-purpose: Automated quality gates for dispatch_rule validation
-pattern: HARD gates block publish, SOFT gates improve routing quality
+title: "Gate: dispatch_rule"
+version: "1.0.0"
+created: "2026-03-27"
+updated: "2026-03-27"
+author: "edison"
+domain: "dispatch_rule — routing rules mapping keywords to satellites with fallback logic"
+quality: null
+tags: [quality-gate, dispatch-rule, routing, keyword-mapping, P11]
+tldr: "Gates for dispatch_rule artifacts: validates keyword coverage, satellite enum, fallback logic, bilingual support, and confidence thresholds."
+density_score: 0.92
 ---
 
-# Quality Gates: dispatch_rule
+# Gate: dispatch_rule
+
+## Definition
+
+| Field     | Value |
+|-----------|-------|
+| metric    | Composite score from SOFT dimensions + all HARD gates pass |
+| threshold | >= 7.0 to publish; >= 9.5 golden |
+| operator  | AND (all HARD) + weighted_sum (SOFT) |
+| scope     | All artifacts where `kind: dispatch_rule` |
+
+---
 
 ## HARD Gates
 
-| Gate | Check | Why |
-|------|-------|-----|
-| H01 | filename matches `p12_dr_{scope}.yaml` | namespace compliance |
-| H02 | frontmatter parses as valid YAML | machine readability |
-| H03 | `id` matches `^p12_dr_[a-z][a-z0-9_]+$` | ID contract |
-| H04 | `kind` is literal `dispatch_rule` | type discriminator |
-| H05 | `pillar` is literal `P12` | pillar anchor |
-| H06 | `quality` is literal `null` | score integrity at authoring time |
-| H07 | `keywords` is a non-empty list | routing requires at least one trigger |
-| H08 | `satellite` is non-empty lowercase slug | dispatch target required |
-| H09 | `model` in (`sonnet`, `opus`, `haiku`, `flash`) | valid model enum |
-| H10 | `priority` is integer 1-10 | priority contract |
-| H11 | `confidence_threshold` is float 0.0-1.0 | threshold contract |
-| H12 | `fallback` differs from `satellite` | fallback must be distinct |
-| H13 | file size <= 3072 bytes | schema constraint |
-| H14 | no runtime status fields (`status`, `timestamp`, `quality_score`) | boundary against signal |
-| H15 | no task/step/scope_fence fields | boundary against handoff |
+All must pass. Any single failure = REJECT regardless of SOFT score.
 
-## SOFT Gates
+| ID  | Check | Failure message |
+|-----|-------|----------------|
+| H01 | Frontmatter parses as valid YAML | "Frontmatter YAML syntax error" |
+| H02 | `id` matches `^p12_dr_[a-z][a-z0-9_]+$` | "ID fails dispatch_rule namespace regex" |
+| H03 | `id` value equals filename stem | "ID does not match filename" |
+| H04 | `kind` equals literal `"dispatch_rule"` | "Kind is not 'dispatch_rule'" |
+| H05 | `quality` field is `null` | "Quality must be null at authoring time" |
+| H06 | All required fields present: id, kind, pillar, domain, satellite, model, priority, keywords, confidence_threshold, fallback, version, created, author, tags | "Missing required field(s)" |
+| H07 | `satellite` value is one of the defined satellite enum (SHAKA, LILY, EDISON, PYTHA, ATLAS, YORK) | "Satellite not in allowed enum" |
+| H08 | `keywords` list is non-empty (>= 3 entries) | "Keyword list must have at least 3 entries" |
+| H09 | `confidence_threshold` is a float between 0.0 and 1.0 | "Confidence threshold out of range [0.0, 1.0]" |
+| H10 | `fallback` is defined and references a valid satellite or literal `human` | "Fallback target undefined or invalid" |
 
-| Gate | Check | Weight | Score if pass |
-|------|-------|--------|---------------|
-| S01 | `scope` slug matches filename scope segment | 1.0 | 10 |
-| S02 | `keywords` contains 3+ distinct terms | 0.5 | 10 |
-| S03 | `tldr` is <= 120 chars and descriptive | 0.5 | 10 |
-| S04 | `tags` includes satellite slug | 0.5 | 10 |
-| S05 | `priority` reflects domain criticality (8+ for core domains) | 0.5 | 10 |
-| S06 | `confidence_threshold` >= 0.6 (avoids noisy routing) | 1.0 | 10 |
-| S07 | `routing_strategy` present and appropriate for keyword count | 0.5 | 10 |
-| S08 | body sections present with rationale commentary | 0.5 | 10 |
-| S09 | `conditions` omitted when no AND-conditions needed | 0.5 | 10 |
-| S10 | keywords include both EN and PT variants for bilingual coverage | 1.0 | 10 |
+---
 
-## Scoring Formula
-```text
-hard_pass = all 15 HARD gates pass
-soft_score = sum(gate_score * weight) / sum(weights)
-final = hard_pass ? soft_score : 0
+## SOFT Scoring
 
-GOLDEN:  >= 9.5
-PUBLISH: >= 8.0
-REVIEW:  >= 7.0
-REJECT:  < 7.0 or any HARD fail
-```
+Dimensions sum to 100%. Score each 0.0-10.0; multiply by weight.
 
-## Pre-Publish Checklist
-- [ ] filename uses `p12_dr_` prefix
-- [ ] `id` matches filename scope
-- [ ] `quality: null` present
-- [ ] `fallback` != `satellite`
-- [ ] no signal, handoff, or workflow drift
-- [ ] keywords bilingual where relevant
+| Dimension | Weight | What to assess |
+|-----------|--------|----------------|
+| Keyword breadth | 1.0 | Keywords cover the full semantic space of the domain scope |
+| Bilingual coverage | 1.0 | Both PT and EN keywords present in keyword list |
+| Priority rationale | 0.5 | Priority level (high/medium/low) explained or evident from domain |
+| Confidence threshold calibration | 1.0 | Threshold value appropriate for domain (not too strict/loose) |
+| Fallback chain quality | 1.0 | Fallback satellite is a logical second-choice for the domain |
+| Scope fence clarity | 1.0 | What the rule does NOT route is explicitly stated |
+| Model selection rationale | 0.5 | Model choice (sonnet/opus) justified by task complexity |
+| Keyword specificity | 1.0 | No overly generic keywords that would cause routing collisions |
+| Trigger phrase examples | 1.0 | 2+ example trigger sentences that would activate this rule |
+| Boundary vs other rules | 0.5 | Non-overlap with adjacent dispatch rules documented |
+| Domain precision | 1.0 | Domain field accurately describes the routing scope |
+| Documentation | 0.5 | tldr captures routing intent in <= 160 characters |
+
+Weight sum: 1.0+1.0+0.5+1.0+1.0+1.0+0.5+1.0+1.0+0.5+1.0+0.5 = 10.0 (100%)
+
+---
+
+## Actions
+
+| Score | Tier | Action |
+|-------|------|--------|
+| >= 9.5 | GOLDEN | Publish to pool as golden exemplar |
+| >= 8.0 | PUBLISH | Publish to pool |
+| >= 7.0 | REVIEW | Flag for human review before publish |
+| < 7.0  | REJECT | Return to author with failure report |
+
+---
+
+## Bypass
+
+| Field | Value |
+|-------|-------|
+| conditions | New satellite being piloted without full keyword corpus established |
+| approver | Routing system owner approval required (written) |
+| audit_trail | Bypass logged to `records/audits/dispatch_rule_bypass_{date}.md` |
+| expiry | 24h; routing rules in active use must be validated quickly |
+| never_bypass | H01 (YAML parse failure), H05 (quality null invariant), H07 (invalid satellite causes routing failure in production) |

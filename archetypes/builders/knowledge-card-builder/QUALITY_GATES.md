@@ -1,72 +1,89 @@
 ---
+id: p11_qg_knowledge_card
+kind: quality_gate
 pillar: P11
-llm_function: GOVERN
-purpose: Quality gates for knowledge_card validation
-pattern: HARD gates block publish, SOFT gates contribute to 0-10 score
-source: validate_kc.py v2.0 (direct code alignment)
+title: "Gate: Knowledge Card"
+version: "1.0.0"
+created: "2026-03-27"
+updated: "2026-03-27"
+author: "edison"
+domain: "knowledge_card — atomic searchable facts with high information density"
+quality: null
+tags: [quality-gate, knowledge-card, density, fact, distillation, searchability]
+tldr: "Gates ensuring knowledge_card artifacts contain concrete atomic facts with density >= 0.8, semantic frontmatter, and file size <= 5KB."
+density_score: 0.94
 ---
 
-# Quality Gates: knowledge_card
+# Gate: Knowledge Card
 
-## HARD Gates (block publish if ANY fails)
+## Definition
 
-| Gate | Check | Why |
-|------|-------|-----|
-| H01 | YAML frontmatter parses without error | Broken YAML = broken artifact |
-| H02 | id == filename stem | Brain search relies on this |
-| H03 | id matches `^p01_kc_[a-z][a-z0-9_]+$` | Namespace compliance |
-| H04 | kind == "knowledge_card" | Type integrity |
-| H05 | quality == null | Never self-score |
-| H06 | 13 required fields present and non-empty | Completeness |
-| H07 | tags is list (not string) | YAML kind safety |
-| H08 | body size 200-5120 bytes | Size bounds |
-| H09 | no internal paths (records/, .claude/, /home/) | Portability |
-| H10 | author != STELLA | STELLA orchestrates, never authors |
+| Field     | Value |
+|-----------|-------|
+| metric    | weighted soft score + all hard gates pass |
+| threshold | 7.0 to publish; 8.0 for pool; 9.5 for golden |
+| operator  | AND (all hard) + weighted average (soft) |
+| scope     | any artifact with `kind: knowledge_card` |
 
-## SOFT Gates (contribute to score, 20 checks)
+---
 
-| Gate | Check | Weight |
-|------|-------|--------|
-| S01 | tldr <= 160 chars, non-empty | 1.0 |
-| S02 | tldr standalone (no "this document/kc" refs) | 1.0 |
-| S03 | title 5-100 chars | 1.0 |
-| S04 | version is semver X.Y.Z | 1.0 |
-| S05 | created/updated are YYYY-MM-DD | 1.0 |
-| S06 | >= 4 sections in body | 1.0 |
-| S07 | largest section >= 30% of body | 1.0 |
-| S08 | no thin sections (< 3 non-empty lines) | 1.0 |
-| S09 | no filler phrases | 1.0 |
-| S10 | all bullets <= 80 chars | 1.0 |
-| S11 | has tables | 1.0 |
-| S12 | has code blocks | 1.0 |
-| S13 | has external URLs (https://) | 1.0 |
-| S14 | references other CEX artifacts (p\d{2}_) | 1.0 |
-| S15 | data_source field present and non-null | 1.0 |
-| S16 | keywords list >= 2 items | 1.0 |
-| S17 | long_tails list >= 1 item | 1.0 |
-| S18 | axioms list >= 1 item | 1.0 |
-| S19 | no duplicate sentences (Jaccard >= 0.85) | 1.0 |
-| S20 | linked_artifacts has primary + related keys | 1.0 |
+## HARD Gates
 
-## Scoring Formula
-```
-hard_pass = all 10 HARD gates pass
-soft_score = (soft_passed / soft_total) * 10
-final = hard_pass ? soft_score : 0
+All must pass. Any failure = immediate reject.
 
-GOLDEN:     >= 9.5  (all HARD + 19/20 SOFT)
-PUBLISH:    >= 8.0  (all HARD + 16/20 SOFT)
-ACCEPTABLE: >= 7.0  (all HARD + 14/20 SOFT)
-NEEDS_WORK: < 7.0   (all HARD pass, SOFT low)
-REJECTED:   any HARD fail
-```
+| ID  | Check | Fail Condition |
+|-----|-------|----------------|
+| H01 | Frontmatter parses as valid YAML | Parse error on any field |
+| H02 | ID matches `^KC_[A-Z0-9_]+$` | Lowercase, missing KC_ prefix, or non-alphanumeric chars |
+| H03 | ID equals filename stem | `id: KC_REDIS_TTL` in file `KC_CACHE_TTL.md` |
+| H04 | Kind equals literal `knowledge_card` | Any other kind value |
+| H05 | Quality field is `null` | Any non-null value |
+| H06 | All 19 required fields present | Missing: domain, tldr, density_score, sources, or card_type |
+| H07 | `density_score` is a float in range [0.0, 1.0] | Outside range or non-numeric value |
+| H08 | `density_score` >= 0.8 | Score below threshold — card too sparse to be useful |
+| H09 | Total file size <= 5120 bytes | Exceeds 5KB limit |
+| H10 | `tldr` is <= 160 characters | tldr exceeds character limit |
 
-## Automation
-Primary: `python _tools/validate_kc.py <file>` (ACTIVE)
-Flags: `--json` (machine), `--summary` (batch overview)
+---
 
-## Pre-Production Checklist
-- [ ] Topic identified, not duplicate (brain_query check)
-- [ ] Sources gathered with URLs
-- [ ] KC kind chosen (domain_kc or meta_kc)
-- [ ] Body density estimated >= 0.80
+## SOFT Scoring
+
+Total weights sum to 100%.
+
+| ID  | Dimension | Weight | 10 pts | 5 pts | 0 pts |
+|-----|-----------|--------|--------|-------|-------|
+| S01 | Factual concreteness | 1.0 | Card contains specific values, numbers, or verifiable facts | Mix of facts and vague statements | Entirely vague or conceptual |
+| S02 | Atomicity | 1.0 | Card covers exactly one concept with no scope creep | Mostly one concept; minor tangents | Multiple unrelated concepts |
+| S03 | Searchability — tags | 1.0 | Tags cover domain, subtopic, and use-case angles (>= 4 distinct tags) | 3 tags | Fewer than 3 tags |
+| S04 | Source attribution | 1.0 | At least one specific source (URL, paper, spec version, date) | Source mentioned but not specific | No sources |
+| S05 | Card type classification | 0.5 | `card_type` is `domain_kc` or `meta_kc` with correct body structure for that type | Type present but body structure mismatches | Type absent |
+| S06 | Density discipline | 1.0 | No padding, no restatements, no filler sentences in body | Minor padding present | More than 20% filler content |
+| S07 | tldr precision | 1.0 | tldr is a standalone searchable sentence capturing the key fact | tldr too vague to retrieve the card | tldr absent or over 160 characters |
+| S08 | Currency | 0.5 | `created` date present; `updated` reflects last substantive revision | Created date only, no updated | No dates |
+| S09 | Cross-references | 0.5 | Related cards or concepts linked in body | Related concepts mentioned but not linked | No cross-references |
+| S10 | Practical applicability | 1.0 | Body answers "when would I use this?" with a concrete scenario | Implicitly applicable but not stated | Pure theory with no application context |
+
+**Score = sum(pts * weight) / sum(max_pts * weight) * 10**
+
+---
+
+## Actions
+
+| Score | Tier | Action |
+|-------|------|--------|
+| >= 9.5 | Golden | Publish to knowledge pool as authoritative reference card |
+| >= 8.0 | Skilled | Publish to pool + log pattern |
+| >= 7.0 | Learning | Use but flag for improvement |
+| < 7.0 | Rejected | Return to author with gate report |
+
+---
+
+## Bypass
+
+| Field | Value |
+|-------|-------|
+| Conditions | Rapidly evolving topic where sources are not yet stabilized (e.g., new library release, breaking API change) |
+| Approver | Domain expert reviewer |
+| Audit trail | `bypass_reason` + `stability: volatile` required in frontmatter |
+| Expiry | 7 days; card must be updated with stable sources or marked deprecated |
+| Never bypass | H01 (YAML parse), H05 (quality null), H08 (density >= 0.8 — sparse cards pollute search results and degrade retrieval quality) |

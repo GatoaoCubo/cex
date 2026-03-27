@@ -1,57 +1,81 @@
 ---
+id: p11_qg_client
+kind: quality_gate
 pillar: P11
-llm_function: GOVERN
-purpose: Automated quality gates for client validation
-pattern: HARD gates block publish, SOFT gates contribute to 0-10 score
+title: "Gate: client"
+version: "1.0.0"
+created: "2026-03-27"
+updated: "2026-03-27"
+author: "edison"
+domain: "API consumer definition — unidirectional clients for REST, GraphQL, or gRPC external services"
+quality: null
+tags: [quality-gate, client, P04, api-consumer, auth-strategy, endpoint-mapping]
+tldr: "Pass/fail gate for client artifacts: endpoint coverage, auth strategy declaration, retry/rate-limit policy, and unidirectional boundary."
+density_score: 0.91
 ---
 
-# Quality Gates: client
+# Gate: client
 
-## HARD Gates (block publish if ANY fails)
+## Definition
 
-| Gate | Check | Why |
-|------|-------|-----|
-| H01 | YAML frontmatter parses | Broken YAML = broken artifact |
-| H02 | id matches `^p04_client_[a-z][a-z0-9_]+$` | Namespace compliance |
-| H03 | id == filename stem | Brain search relies on this |
-| H04 | kind == "client" | Type integrity |
-| H05 | quality == null | Never self-score |
-| H06 | Required fields present: id, kind, pillar, version, created, updated, author, name, api, base_url, auth, endpoints, quality, tags, tldr | Completeness |
-| H07 | body has ## Overview, ## Endpoints, ## Auth & Config, ## Error Handling | Core sections required |
-| H08 | body <= 1024 bytes | Compact client spec |
+| Field | Value |
+|---|---|
+| metric | client artifact quality score |
+| threshold | 7.0 (publish >= 8.0, golden >= 9.5) |
+| operator | weighted_sum |
+| scope | all artifacts with `kind: client` |
 
-## SOFT Gates (contribute to score)
+## HARD Gates
 
-| Gate | Check | Weight | Score if pass |
-|------|-------|--------|---------------|
-| S01 | tldr <= 160 chars, non-empty | 1.0 | 10 |
-| S02 | tags is list, len >= 3, includes "client" | 0.5 | 10 |
-| S03 | endpoints names match endpoint names in ## Endpoints section (zero drift) | 1.0 | 10 |
-| S04 | Each endpoint has: method, path, parameters, return type | 1.0 | 10 |
-| S05 | auth field present and valid enum value | 0.5 | 10 |
-| S06 | base_url is valid URL format | 0.5 | 10 |
-| S07 | No implementation code in body (spec only) | 1.0 | 10 |
-| S08 | error_codes listed and each has retry behavior defined | 0.5 | 10 |
-| S09 | description <= 200 chars and non-generic | 0.5 | 10 |
-| S10 | density_score >= 0.80 (no filler phrases) | 0.5 | 10 |
-| S11 | retry and timeout fields present | 0.5 | 10 |
-| S12 | serialization and pagination fields present | 0.5 | 10 |
+All must pass (AND logic). Any single failure = REJECT.
 
-## Scoring Formula
-```text
-hard_pass = all 8 HARD gates pass
-soft_score = sum(gate_score * weight) / sum(weights)
-final = hard_pass ? soft_score : 0
+| ID | Check | Fail Condition |
+|---|---|---|
+| H01 | Frontmatter parses as valid YAML | Parse error on frontmatter block |
+| H02 | ID matches `^[a-z][a-z0-9_-]+$` | ID contains uppercase, spaces, or invalid chars |
+| H03 | ID equals filename stem | `id: my_client` but file is `other_client.md` |
+| H04 | Kind equals literal `client` | `kind: connector` or `kind: integration` or any other value |
+| H05 | Quality field is null | `quality: 9.0` or any non-null value |
+| H06 | All required fields present | Missing `base_url`, `auth_strategy`, or `endpoints` |
+| H07 | At least one endpoint defined | `endpoints: []` or endpoints field absent |
+| H08 | Auth strategy is one of: api_key, bearer, oauth2, basic, none | `auth_strategy: custom` without documented scheme |
+| H09 | Each endpoint has HTTP method and path | Endpoint missing `method` or `path` field |
+| H10 | Client is unidirectional (consume-only) | Client defines push, webhook receipt, or server-side event emission |
 
-GOLDEN:  >= 9.5 (all HARD + 95% SOFT)
-PUBLISH: >= 8.0 (all HARD + 80% SOFT)
-REVIEW:  >= 7.0 (all HARD + 70% SOFT)
-REJECT:  < 7.0 or any HARD fail
-```
+## SOFT Scoring
 
-## Pre-Production Checklist
-- [ ] Target API identified with base_url
-- [ ] All endpoints enumerated with concrete names
-- [ ] Auth strategy selected matching API requirements
-- [ ] No existing client for this API (brain_query checked)
-- [ ] Error codes documented with retry behavior
+Weights sum to 100%.
+
+| Dimension | Weight | Criteria |
+|---|---|---|
+| Endpoint completeness | 1.0 | All endpoints needed for the declared use case are listed |
+| Return type documentation | 1.0 | Each endpoint declares return type or response schema reference |
+| Parameter documentation | 1.0 | Path params, query params, and request body documented per endpoint |
+| Rate limit handling | 1.0 | Rate limit (requests/sec or requests/day) declared and retry-after strategy described |
+| Retry policy | 1.0 | Retry conditions (which HTTP codes trigger retry), max retries, and backoff defined |
+| Timeout configuration | 0.5 | Connection timeout and read timeout values documented |
+| Pagination pattern | 0.5 | Pagination strategy (cursor, offset, page) documented for list endpoints |
+| Serialization format | 0.5 | Request/response serialization format declared (json, xml, protobuf) |
+| Error response mapping | 1.0 | HTTP error codes mapped to client exception types or error structs |
+| Auth token lifecycle | 0.5 | Token expiry, refresh, and storage strategy documented |
+| Boundary clarity | 1.0 | Explicitly not a connector or MCP server — consume-only contract stated |
+| Domain specificity | 1.0 | Endpoints and parameters specific to the external service being consumed |
+
+## Actions
+
+| Score | Tier | Action |
+|---|---|---|
+| >= 9.5 | Golden | Publish to pool as golden reference |
+| >= 8.0 | Publish | Publish to pool, add to routing index |
+| >= 7.0 | Review | Flag for improvement before publish |
+| < 7.0 | Reject | Return to author with specific gate failures |
+
+## Bypass
+
+| Field | Value |
+|---|---|
+| conditions | Client targeting an unstable third-party API under active change — endpoint schema not yet finalized |
+| approver | Tech lead acknowledgment that API contract is pending stabilization |
+| audit_trail | Bypass reason with target API version and expected stabilization date in frontmatter comment |
+| expiry | 30d — client must reach >= 7.0 once upstream API stabilizes |
+| never_bypass | H01 (unparseable YAML breaks all tooling), H05 (self-scored gates corrupt quality metrics) |

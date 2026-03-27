@@ -1,59 +1,89 @@
 ---
+id: p11_qg_interface
+kind: quality_gate
 pillar: P11
-llm_function: GOVERN
-purpose: Automated quality gates for interface validation
-pattern: HARD gates block publish, SOFT gates contribute to 0-10 score
+title: "Gate: Interface"
+version: "1.0.0"
+created: "2026-03-27"
+updated: "2026-03-27"
+author: "edison"
+domain: "interface — bilateral integration contracts defining methods, I/O schemas, versioning, and compatibility between agents"
+quality: null
+tags: [quality-gate, interface, contract, bilateral, integration, versioning, compatibility]
+tldr: "Gates ensuring interface artifacts define complete bilateral contracts with typed methods, versioning strategy, backward compatibility guarantees, and mock specs."
+density_score: 0.92
 ---
 
-# Quality Gates: interface
+# Gate: Interface
 
-## HARD Gates (block publish if ANY fails)
+## Definition
 
-| Gate | Check | Why |
-|------|-------|-----|
-| H01 | YAML frontmatter parses | Broken YAML = broken artifact |
-| H02 | id matches `^p06_iface_[a-z][a-z0-9_]+$` | Namespace compliance |
-| H03 | id == filename stem | Brain search relies on this |
-| H04 | kind == "interface" | Type integrity |
-| H05 | quality == null | Never self-score |
-| H06 | 13+ required fields present | Completeness |
-| H07 | methods is list, len >= 1, each has name/input/output | Method structure |
-| H08 | backward_compatible is boolean | Type correctness |
-| H09 | provider and consumer both present and non-empty | Bilateral requirement |
+| Field     | Value |
+|-----------|-------|
+| metric    | weighted soft score + all hard gates pass |
+| threshold | 7.0 to publish; 8.0 for pool; 9.5 for golden |
+| operator  | AND (all hard) + weighted average (soft) |
+| scope     | any artifact with `kind: interface` |
 
-## SOFT Gates (contribute to score)
+---
 
-| Gate | Check | Weight | Score if pass |
-|------|-------|--------|---------------|
-| S01 | tldr <= 160 chars, non-empty | 1.0 | 10 |
-| S02 | tags is list, len >= 3, includes "interface" | 0.5 | 10 |
-| S03 | Contract Definition section present and non-empty | 1.0 | 10 |
-| S04 | Methods table present with all columns | 1.0 | 10 |
-| S05 | Each method has description field | 0.5 | 10 |
-| S06 | Versioning section present with backward_compatible note | 0.5 | 10 |
-| S07 | No filler phrases ("this document", "in summary", "basically") | 1.0 | 10 |
-| S08 | Mock Specification section present with example payload | 0.5 | 10 |
-| S09 | deprecation section present (even if null) | 0.5 | 10 |
-| S10 | density_score >= 0.80 (if provided) | 0.5 | 10 |
+## HARD Gates
 
-## Scoring Formula
-```text
-hard_pass = all 9 HARD gates pass
-soft_score = sum(gate_score * weight) / sum(weights)
-final = hard_pass ? soft_score : 0
+All must pass. Any failure = immediate reject.
 
-GOLDEN:  >= 9.5 (all HARD + 95% SOFT)
-PUBLISH: >= 8.0 (all HARD + 80% SOFT)
-REVIEW:  >= 7.0 (all HARD + 70% SOFT)
-REJECT:  < 7.0 or any HARD fail
-```
+| ID  | Check | Fail Condition |
+|-----|-------|----------------|
+| H01 | Frontmatter parses as valid YAML | Parse error on any field |
+| H02 | ID matches `^[a-z][a-z0-9_-]+$` | Uppercase, spaces, or leading digit |
+| H03 | ID equals filename stem | `id: agent_a_b` in file `agent_b_c.md` |
+| H04 | Kind equals literal `interface` | Any other kind value |
+| H05 | Quality field is `null` | Any non-null value |
+| H06 | All required fields present | Missing: methods, provider, consumer, or version |
+| H07 | Every method has both `input` and `output` defined | Any method with only one side defined |
+| H08 | `provider` and `consumer` are distinct identifiers | Same value in both fields |
+| H09 | `version` follows semver (`^\d+\.\d+\.\d+$`) | Non-semver version string |
+| H10 | At least one method defined | Empty or missing methods list |
 
-## Automation
-Primary: validate_artifact.py --kind interface [PLANNED]
-Interim: validate manually against this file, checking each gate.
+---
 
-## Pre-Production Checklist
-- [ ] Integration point identified (which two agents/systems?)
-- [ ] No existing interface for same contract (brain_query checked)
-- [ ] Methods defined with typed input/output
-- [ ] Provider and consumer clearly identified
+## SOFT Scoring
+
+Total weights sum to 100%.
+
+| ID  | Dimension | Weight | 10 pts | 5 pts | 0 pts |
+|-----|-----------|--------|--------|-------|-------|
+| S01 | Type precision | 1.0 | All method inputs and outputs use typed field definitions | Typed but incomplete coverage | Untyped — described in prose only |
+| S02 | Backward compatibility | 1.0 | Compatibility policy stated (breaking vs non-breaking changes defined) | Policy mentioned but vague | No compatibility statement |
+| S03 | Versioning strategy | 1.0 | Version bump rules documented (what triggers major/minor/patch) | Semver used but bump rules absent | No versioning guidance |
+| S04 | Deprecation path | 0.5 | Deprecated methods marked + migration path to replacement provided | Deprecated methods marked, no migration | No deprecation policy |
+| S05 | Error contract | 1.0 | Error responses typed per method (error codes, shapes) | Generic error response defined | No error contract |
+| S06 | Mock specification | 1.0 | Mock inputs and expected outputs for at least 2 methods | One method has mock data | No mock spec |
+| S07 | Bilaterality enforced | 1.0 | Both provider and consumer roles clearly scoped; no unilateral creep | Mostly bilateral with minor leakage | Reads as a unilateral input schema |
+| S08 | Method naming | 0.5 | Method names use verb_noun pattern (e.g., `get_status`, `send_result`) | Names present but inconsistent | Arbitrary names |
+| S09 | Timeout and SLA | 0.5 | Expected response time or SLA documented per method | Overall SLA present, not per-method | None |
+| S10 | Signal distinction | 0.5 | Interface defines synchronous request-response, not fire-and-forget | Mostly clear | Indistinguishable from a signal |
+
+**Score = sum(pts * weight) / sum(max_pts * weight) * 10**
+
+---
+
+## Actions
+
+| Score | Tier | Action |
+|-------|------|--------|
+| >= 9.5 | Golden | Publish to pool as golden integration contract |
+| >= 8.0 | Skilled | Publish to pool + log pattern |
+| >= 7.0 | Learning | Use but flag for improvement |
+| < 7.0 | Rejected | Return to author with gate report |
+
+---
+
+## Bypass
+
+| Field | Value |
+|-------|-------|
+| Conditions | Prototyping integration between two new agents where final method signatures are not yet known |
+| Approver | Both provider and consumer team leads |
+| Audit trail | `bypass_reason` + `stability: experimental` required in frontmatter |
+| Expiry | Experimental status expires after 30 days or first production use, whichever is sooner |
+| Never bypass | H01 (YAML parse), H05 (quality null), H07 (every method needs input + output — half-defined contracts cause integration failures) |

@@ -1,58 +1,91 @@
 ---
+id: p11_qg_daemon
+kind: quality_gate
 pillar: P11
-llm_function: GOVERN
-purpose: Automated quality gates for daemon validation
-pattern: HARD gates block publish, SOFT gates contribute to 0-10 score
+title: "Gate: daemon"
+version: "1.0.0"
+created: "2026-03-27"
+updated: "2026-03-27"
+author: "edison"
+domain: "daemon — persistent background processes with lifecycle management"
+quality: null
+tags: [quality-gate, daemon, background-process, lifecycle, P11]
+tldr: "Gates for daemon artifacts: validates lifecycle completeness, signal handling, health checks, and restart policy correctness."
+density_score: 0.91
 ---
 
-# Quality Gates: daemon
+# Gate: daemon
 
-## HARD Gates (block publish if ANY fails)
+## Definition
 
-| Gate | Check | Why |
-|------|-------|-----|
-| H01 | YAML frontmatter parses | Broken YAML = broken artifact |
-| H02 | id matches `^p04_daemon_[a-z][a-z0-9_]+$` | Namespace compliance |
-| H03 | id == filename stem | Brain search relies on this |
-| H04 | kind == "daemon" | Type integrity |
-| H05 | quality == null | Never self-score |
-| H06 | Required fields present: id, kind, pillar, version, created, updated, author, name, schedule, restart_policy, signal_handling, quality, tags, tldr | Completeness |
-| H07 | body has ## Overview, ## Lifecycle, ## Signal Handling, ## Monitoring | Core sections required |
-| H08 | body <= 1024 bytes | Compact daemon spec |
-| H09 | schedule is concrete: cron expr, interval, or "continuous" (not vague) | Unambiguous lifecycle |
+| Field     | Value |
+|-----------|-------|
+| metric    | Composite score from SOFT dimensions + all HARD gates pass |
+| threshold | >= 7.0 to publish; >= 9.5 golden |
+| operator  | AND (all HARD) + weighted_sum (SOFT) |
+| scope     | All artifacts where `kind: daemon` |
 
-## SOFT Gates (contribute to score)
+---
 
-| Gate | Check | Weight | Score if pass |
-|------|-------|--------|---------------|
-| S01 | tldr <= 160 chars, non-empty | 1.0 | 10 |
-| S02 | tags is list, len >= 3, includes "daemon" | 0.5 | 10 |
-| S03 | restart_policy is valid enum: always, on_failure, never | 1.0 | 10 |
-| S04 | signal_handling includes SIGTERM behavior | 1.0 | 10 |
-| S05 | ## Signal Handling has table with >= 3 signals | 0.5 | 10 |
-| S06 | health_check field present with concrete strategy | 1.0 | 10 |
-| S07 | resource_limits specified (memory, CPU, or fd) | 0.5 | 10 |
-| S08 | monitoring field present with metrics or alerting | 0.5 | 10 |
-| S09 | graceful_shutdown described (not just "exit") | 1.0 | 10 |
-| S10 | density_score >= 0.80 (no filler phrases) | 0.5 | 10 |
-| S11 | description <= 200 chars and non-generic | 0.5 | 10 |
-| S12 | max_restarts defined with window (circuit breaker) | 0.5 | 10 |
+## HARD Gates
 
-## Scoring Formula
-```text
-hard_pass = all 9 HARD gates pass
-soft_score = sum(gate_score * weight) / sum(weights)
-final = hard_pass ? soft_score : 0
+All must pass. Any single failure = REJECT regardless of SOFT score.
 
-GOLDEN:  >= 9.5 (all HARD + 95% SOFT)
-PUBLISH: >= 8.0 (all HARD + 80% SOFT)
-REVIEW:  >= 7.0 (all HARD + 70% SOFT)
-REJECT:  < 7.0 or any HARD fail
-```
+| ID  | Check | Failure message |
+|-----|-------|----------------|
+| H01 | Frontmatter parses as valid YAML | "Frontmatter YAML syntax error" |
+| H02 | `id` matches `^p04_d_[a-z][a-z0-9_]+$` | "ID fails daemon namespace regex" |
+| H03 | `id` value equals filename stem | "ID does not match filename" |
+| H04 | `kind` equals literal `"daemon"` | "Kind is not 'daemon'" |
+| H05 | `quality` field is `null` | "Quality must be null at authoring time" |
+| H06 | All required fields present: id, kind, pillar, domain, schedule, restart_policy, signal_handling, health_check, version, created, author, tags | "Missing required field(s)" |
+| H07 | `restart_policy` is one of: `always`, `on-failure`, `unless-stopped`, `never` | "Invalid restart_policy value" |
+| H08 | `signal_handling` contains at minimum `SIGTERM` entry with defined action | "SIGTERM handler not defined" |
+| H09 | `health_check` includes `endpoint` or `command` plus `interval_seconds` | "Health check definition incomplete" |
+| H10 | `schedule` is valid cron expression or literal `continuous` | "Schedule is not valid cron or 'continuous'" |
 
-## Pre-Production Checklist
-- [ ] Background task identified (not suitable for one-shot cli_tool)
-- [ ] Schedule determined: cron, interval, or continuous
-- [ ] Restart policy selected based on failure tolerance
-- [ ] No existing daemon for this purpose (brain_query checked)
-- [ ] Signal handling defined with at least SIGTERM behavior
+---
+
+## SOFT Scoring
+
+Dimensions sum to 100%. Score each 0.0-10.0; multiply by weight.
+
+| Dimension | Weight | What to assess |
+|-----------|--------|----------------|
+| Lifecycle completeness | 1.0 | start, stop, restart, and graceful shutdown all defined |
+| Signal handling depth | 1.0 | SIGTERM + SIGINT + SIGHUP covered with distinct actions |
+| Health check quality | 1.0 | interval, timeout, failure_threshold, and recovery action defined |
+| Resource limits | 0.5 | CPU and memory limits specified (not just documented) |
+| PID management | 0.5 | PID file path and cleanup on exit defined |
+| Logging config | 1.0 | log level, rotation policy, and output destination specified |
+| Monitoring strategy | 1.0 | metrics exported or alerting conditions documented |
+| Boundary clarity | 0.5 | explicitly not hook/skill/workflow in scope comment |
+| Restart policy rationale | 0.5 | reason for chosen restart_policy explained |
+| Schedule precision | 1.0 | cron expression correct, timezone specified if relevant |
+| Error handling | 1.0 | what happens on crash, max retries, backoff strategy |
+| Documentation | 1.0 | tldr, purpose, and operational runbook link or inline |
+
+Weight sum: 1.0+1.0+1.0+0.5+0.5+1.0+1.0+0.5+0.5+1.0+1.0+1.0 = 10.0 (100%)
+
+---
+
+## Actions
+
+| Score | Tier | Action |
+|-------|------|--------|
+| >= 9.5 | GOLDEN | Publish to pool as golden exemplar |
+| >= 8.0 | PUBLISH | Publish to pool |
+| >= 7.0 | REVIEW | Flag for human review before publish |
+| < 7.0  | REJECT | Return to author with failure report |
+
+---
+
+## Bypass
+
+| Field | Value |
+|-------|-------|
+| conditions | Emergency production incident requiring immediate daemon deploy |
+| approver | Senior architect sign-off required (written record) |
+| audit_trail | Bypass event logged to `records/audits/daemon_bypass_{date}.md` |
+| expiry | 48h; artifact must reach >= 7.0 within expiry or be pulled |
+| never_bypass | H01 (invalid YAML breaks all tooling), H05 (null quality is a system invariant) |

@@ -1,59 +1,79 @@
 ---
+id: p11_qg_action_prompt
+kind: quality_gate
 pillar: P11
-llm_function: GOVERN
-purpose: Automated quality gates for action_prompt validation
-pattern: HARD gates block publish, SOFT gates contribute to 0-10 score
+title: "Gate: action_prompt"
+version: "1.0.0"
+created: "2026-03-27"
+updated: "2026-03-27"
+author: "edison"
+domain: action_prompt
+quality: null
+tags: [quality-gate, action-prompt, P11, P03, governance, task-execution]
+tldr: "Gates for action_prompt artifacts — task-focused prompts with defined input/output contracts."
+density_score: 0.87
 ---
 
-# Quality Gates: action_prompt
+# Gate: action_prompt
 
-## HARD Gates (block publish if ANY fails)
+## Definition
+
+| Field     | Value                                        |
+|-----------|----------------------------------------------|
+| metric    | input/output contract clarity + edge coverage |
+| threshold | 8.0                                          |
+| operator  | >=                                           |
+| scope     | all action_prompt artifacts (P03)            |
+
+## HARD Gates
+
+All must pass. Failure on any = final score 0.
 
 | Gate | Check | Why |
 |------|-------|-----|
-| H01 | YAML frontmatter parses | Broken YAML = broken artifact |
+| H01 | YAML frontmatter parses valid YAML | Broken YAML = broken prompt at runtime |
 | H02 | id matches `^p03_ap_[a-z][a-z0-9_]+$` | Namespace compliance |
 | H03 | id == filename stem | Brain search relies on this |
 | H04 | kind == "action_prompt" | Type integrity |
 | H05 | quality == null | Never self-score |
-| H06 | 21 required fields present | Completeness |
+| H06 | All 21 required fields present | Completeness |
 | H07 | edge_cases has >= 2 entries | Robustness requirement |
-| H08 | body has all 5 required sections | Structure compliance |
+| H08 | body has all 5 required sections: Action, Input, Output, Validation, Edge Cases | Structure compliance |
 
-## SOFT Gates (contribute to score)
+## SOFT Scoring
 
-| Gate | Check | Weight | Score if pass |
-|------|-------|--------|---------------|
-| S01 | tldr <= 160 chars, non-empty | 1.0 | 10 |
-| S02 | tags is list, len >= 3, includes "action_prompt" | 0.5 | 10 |
-| S03 | action is verb phrase (starts with verb) | 1.0 | 10 |
-| S04 | input_required lists specific data items with types | 1.0 | 10 |
-| S05 | output_expected describes verifiable structure | 1.0 | 10 |
-| S06 | purpose explains WHY (not just WHAT) | 0.5 | 10 |
-| S07 | No identity/persona content (boundary check) | 1.0 | 10 |
-| S08 | No detailed recipe with prerequisites (instruction territory) | 1.0 | 10 |
-| S09 | Validation section has verifiable criteria | 0.5 | 10 |
-| S10 | Input section uses table or structured format | 0.5 | 10 |
-| S11 | density_score >= 0.80 | 0.5 | 10 |
-| S12 | No filler phrases ("this document", "in summary") | 1.0 | 10 |
+| Gate | Check | Weight |
+|------|-------|--------|
+| S01 | tldr <= 160 chars, non-empty | 1.0 |
+| S02 | tags is list, len >= 3, includes "action_prompt" | 0.5 |
+| S03 | action field is a verb phrase (starts with verb) | 1.0 |
+| S04 | input_required lists specific data items with types | 1.0 |
+| S05 | output_expected describes verifiable structure | 1.0 |
+| S06 | purpose explains WHY, not just WHAT | 0.5 |
+| S07 | No identity or persona content (not system_prompt territory) | 1.0 |
+| S08 | No step-by-step recipe with prerequisites (not instruction territory) | 1.0 |
+| S09 | Validation section has verifiable, concrete criteria | 0.5 |
+| S10 | Input section uses table or structured format | 0.5 |
+| S11 | density_score >= 0.80 | 0.5 |
+| S12 | No filler phrases ("this document", "in summary", "please note") | 1.0 |
 
-## Scoring Formula
-```text
-hard_pass = all 8 HARD gates pass
-soft_score = sum(gate_score * weight) / sum(weights)
-final = hard_pass ? soft_score : 0
+Weights sum: 9.5. Normalize: divide each by 9.5 before scoring.
 
-GOLDEN:  >= 9.5 (all HARD + 95% SOFT)
-PUBLISH: >= 8.0 (all HARD + 80% SOFT)
-REVIEW:  >= 7.0 (all HARD + 70% SOFT)
-REJECT:  < 7.0 or any HARD fail
-```
+## Actions
 
-## Automation
-Primary: validate_artifact.py --kind action_prompt [PLANNED]
-Interim: validate manually against this file, checking each gate.
+| Score | Action |
+|-------|--------|
+| >= 9.5 | GOLDEN — pool as reference action_prompt |
+| >= 8.0 | PUBLISH — ready for runtime injection |
+| >= 7.0 | REVIEW — tighten I/O contract or add edge cases |
+| < 7.0  | REJECT — rework action definition and output spec |
 
-## Pre-Production Checklist
-- [ ] Task identified with clear input/output contract
-- [ ] No existing action_prompt for this task (brain_query checked)
-- [ ] Edge cases enumerated (>= 2)
+## Bypass
+
+| Field | Value |
+|-------|-------|
+| conditions | Urgent task requiring runtime prompt before full validation cycle |
+| approver | p03-chief |
+| audit_trail | Log in records/audits/ with bypass reason and timestamp |
+| expiry | 48h — must pass all gates before expiry |
+| never_bypass | H01 (YAML), H05 (quality null) |

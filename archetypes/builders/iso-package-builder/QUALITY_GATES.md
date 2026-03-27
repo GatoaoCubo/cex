@@ -1,63 +1,89 @@
 ---
+id: p11_qg_iso_package
+kind: quality_gate
 pillar: P11
-llm_function: GOVERN
-purpose: Automated quality gates for iso_package validation
-pattern: HARD gates block publish, SOFT gates contribute to 0-10 score
+title: "Gate: ISO Package"
+version: "1.0.0"
+created: "2026-03-27"
+updated: "2026-03-27"
+author: "edison"
+domain: "iso_package — portable self-contained agent bundles with tier-validated file inventories"
+quality: null
+tags: [quality-gate, iso-package, packaging, portable, bundle, tier, distribution]
+tldr: "Gates ensuring iso_package artifacts are self-contained, tier-compliant, portability-enforced bundles with valid manifests and correct LP file mappings."
+density_score: 0.93
 ---
 
-# Quality Gates: iso_package
+# Gate: ISO Package
 
-## HARD Gates (block publish if ANY fails)
+## Definition
 
-| Gate | Check | Why |
-|------|-------|-----|
-| H01 | YAML manifest parses | Broken YAML = broken package |
-| H02 | id matches `^p02_iso_[a-z][a-z0-9_]+$` | Namespace compliance |
-| H03 | id prefix matches directory name | Discovery relies on this |
-| H04 | kind == "iso_package" | Type integrity |
-| H05 | quality == null | Never self-score |
-| H06 | 14 required fields present (id, kind, pillar, version, created, updated, author, agent_name, tier, files_count, domain, quality, tags, tldr) | Completeness |
-| H07 | 3 required files exist (manifest.yaml, system_instruction.md, instructions.md) | Minimal tier compliance |
-| H08 | files_count matches actual file count in directory | Inventory integrity |
-| H09 | system_instruction.md <= 4096 tokens | Context window safety |
-| H10 | No hardcoded paths in any file | Portability guarantee |
+| Field     | Value |
+|-----------|-------|
+| metric    | weighted soft score + all hard gates pass |
+| threshold | 7.0 to publish; 8.0 for pool; 9.5 for golden |
+| operator  | AND (all hard) + weighted average (soft) |
+| scope     | any artifact with `kind: iso_package` |
 
-## SOFT Gates (contribute to score)
+---
 
-| Gate | Check | Weight | Score if pass |
-|------|-------|--------|---------------|
-| S01 | tldr <= 160 chars, non-empty, not filler | 1.0 | 10 |
-| S02 | tags is list, len >= 3, includes "iso-package" | 0.5 | 10 |
-| S03 | tier matches actual file count threshold | 1.0 | 10 |
-| S04 | Each file has correct pillar in lp_mapping | 1.0 | 10 |
-| S05 | examples.md has >= 2 examples | 1.0 | 10 |
-| S06 | density >= 0.80 across all files | 1.0 | 10 |
-| S07 | All files <= 4096 bytes | 0.5 | 10 |
-| S08 | lp_mapping present with all included files | 0.5 | 10 |
-| S09 | No filler phrases in any file | 1.0 | 10 |
-| S10 | File Inventory table in manifest lists all files | 0.5 | 10 |
-| S11 | portable == true and no path violations found | 0.5 | 10 |
-| S12 | instructions.md has 3-phase structure (research/compose/validate) | 0.5 | 10 |
+## HARD Gates
 
-## Scoring Formula
-```text
-hard_pass = all 10 HARD gates pass
-soft_score = sum(gate_score * weight) / sum(weights)
-final = hard_pass ? soft_score : 0
+All must pass. Any failure = immediate reject.
 
-GOLDEN:  >= 9.5 (all HARD + 95% SOFT)
-PUBLISH: >= 8.0 (all HARD + 80% SOFT)
-REVIEW:  >= 7.0 (all HARD + 70% SOFT)
-REJECT:  < 7.0 or any HARD fail
-```
+| ID  | Check | Fail Condition |
+|-----|-------|----------------|
+| H01 | `manifest.yaml` parses as valid YAML | Parse error anywhere in manifest |
+| H02 | ID matches `^[a-z][a-z0-9_-]+$` | Uppercase, spaces, or leading digit |
+| H03 | ID equals filename stem or package directory name | ID `weather_agent` in package dir `news_agent/` |
+| H04 | Kind equals literal `iso_package` | Any other kind value |
+| H05 | Quality field is `null` | Any non-null value |
+| H06 | All 14 required manifest fields present | Any required field absent from manifest.yaml |
+| H07 | Tier is one of: `minimal`, `standard`, `complete`, `whitelabel` | Unknown or custom tier value |
+| H08 | File count matches tier (minimal=3, standard=7, complete=10, whitelabel=12) | File count off by any amount |
+| H09 | No hardcoded absolute paths in any bundled file | Any `/home/`, `C:\`, `~`, or machine-specific path found |
+| H10 | `system_instruction.md` is <= 4096 tokens | Token count exceeds limit |
 
-## Automation
-Primary: validate_artifact.py --kind iso_package [PLANNED]
-Interim: validate manually against this file, checking each gate.
+---
 
-## Pre-Production Checklist
-- [ ] Target agent identified with clear domain
-- [ ] No existing iso_package for this agent (brain_query checked)
-- [ ] Tier selected based on deployment needs
-- [ ] Source agent definition available for reference
-- [ ] All required files drafted before packaging
+## SOFT Scoring
+
+Total weights sum to 100%.
+
+| ID  | Dimension | Weight | 10 pts | 5 pts | 0 pts |
+|-----|-----------|--------|--------|-------|-------|
+| S01 | LP mapping accuracy | 1.0 | Every file lists correct pillar-layer mapping in inventory | Most files mapped; some gaps | LP mapping absent |
+| S02 | Self-containment | 1.0 | Package requires no external files to function at stated tier | Minor external deps documented | Undocumented external dependencies |
+| S03 | LLM-agnostic instructions | 1.0 | `system_instruction.md` avoids model-specific syntax or API references | Minor model-specific hints | Instructions tied to one LLM vendor |
+| S04 | Portability enforcement | 1.0 | All internal references use relative paths | Most relative; a few absolute slipped through | Absolute paths in multiple files |
+| S05 | Tier justification | 0.5 | README or manifest explains why this tier was chosen | Tier stated, no rationale | No tier explanation |
+| S06 | File inventory completeness | 1.0 | Every file in the package is listed in manifest inventory | Most listed; fewer than 2 missing | Inventory incomplete or absent |
+| S07 | Token budget discipline | 1.0 | `system_instruction.md` uses 80-100% of 4096-token budget efficiently | 50-79% utilization (underused) | Under 50% or over budget |
+| S08 | Version pinning | 0.5 | Manifest version pinned; changelog entry present | Version present, no changelog | No version |
+| S09 | Whitelabel readiness | 0.5 | If tier=whitelabel: branding slots documented and parameterized | Partial parameterization | Not applicable or missing entirely |
+| S10 | Distribution metadata | 0.5 | `author`, `license`, and `contact` all present in manifest | Partial metadata | None |
+
+**Score = sum(pts * weight) / sum(max_pts * weight) * 10**
+
+---
+
+## Actions
+
+| Score | Tier | Action |
+|-------|------|--------|
+| >= 9.5 | Golden | Publish to distribution pool as golden package template |
+| >= 8.0 | Skilled | Publish to pool + log pattern |
+| >= 7.0 | Learning | Use but flag for improvement |
+| < 7.0 | Rejected | Return to author with gate report |
+
+---
+
+## Bypass
+
+| Field | Value |
+|-------|-------|
+| Conditions | Emergency patch deployment where full tier compliance cannot be verified immediately |
+| Approver | Package owner + distribution lead |
+| Audit trail | `bypass_reason` + `patch: true` required in manifest.yaml |
+| Expiry | 72 hours; package must reach full tier compliance before next distribution |
+| Never bypass | H01 (manifest YAML), H05 (quality null), H09 (hardcoded paths break portability and cannot be safely deployed) |

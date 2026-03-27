@@ -1,59 +1,80 @@
 ---
+id: p11_qg_benchmark
+kind: quality_gate
 pillar: P11
-llm_function: GOVERN
-purpose: Automated quality gates for benchmark validation
-pattern: HARD gates block publish, SOFT gates contribute to 0-10 score
+title: "Gate: benchmark"
+version: "1.0.0"
+created: "2026-03-27"
+updated: "2026-03-27"
+author: "edison"
+domain: benchmark
+quality: null
+tags: [quality-gate, benchmark, P11, P07, governance, performance, measurement]
+tldr: "Gates for benchmark artifacts — quantitative performance measurements with methodology and reproducibility."
+density_score: 0.91
 ---
 
-# Quality Gates: benchmark
+# Gate: benchmark
+
+## Definition
+
+| Field     | Value                                                    |
+|-----------|----------------------------------------------------------|
+| metric    | measurement rigor + reproducibility completeness         |
+| threshold | 8.0                                                      |
+| operator  | >=                                                       |
+| scope     | all benchmark artifacts (P07)                            |
 
 ## HARD Gates
-| Gate | Check |
-|------|-------|
-| H01 | YAML parses |
-| H02 | id starts with p07_bm_ |
-| H03 | id == filename stem |
-| H04 | kind == benchmark |
-| H05 | pillar == P07 |
-| H06 | quality == null |
-| H07 | unit is non-empty string |
-| H08 | iterations >= 10 |
-| H09 | warmup >= 1 |
-| H10 | percentiles includes at least 50 and 95 |
-| H11 | direction in [lower_is_better, higher_is_better] |
-| H12 | baseline and target are numeric, same unit implied |
 
-## SOFT Gates
+All must pass. Failure on any = final score 0.
+
+| Gate | Check | Why |
+|------|-------|-----|
+| H01 | YAML frontmatter parses valid YAML | Broken YAML = benchmark unreachable |
+| H02 | id matches `^p07_bm_[a-z][a-z0-9_]+$` | Namespace compliance |
+| H03 | id == filename stem | Brain search relies on this |
+| H04 | kind == "benchmark" | Type integrity |
+| H05 | quality == null | Never self-score |
+| H06 | All 22 required fields present | Completeness |
+| H07 | unit is non-empty string | Every measurement needs a unit |
+| H08 | iterations >= 10 | Statistical minimum for reliable measurement |
+| H09 | warmup >= 1 | Cold-start bias prevention |
+| H10 | percentiles includes at least p50 and p95 | Tail latency required for realistic assessment |
+
+## SOFT Scoring
+
 | Gate | Check | Weight |
 |------|-------|--------|
 | S01 | tldr <= 160 chars, non-empty | 1.0 |
-| S02 | tags is list, len >= 3 | 0.5 |
-| S03 | Benchmark Overview section present | 1.0 |
-| S04 | Methodology section with iterations, warmup, protocol | 1.0 |
-| S05 | Environment section with hardware, software, config | 1.0 |
-| S06 | Metrics table with baseline and target columns | 1.0 |
-| S07 | No filler prose (no "acceptable", "good performance") | 1.0 |
-| S08 | Results Template with percentile rows | 0.5 |
-| S09 | density >= 0.80 | 1.0 |
+| S02 | tags is list, len >= 3, includes "benchmark" | 0.5 |
+| S03 | direction in [lower_is_better, higher_is_better] — explicit | 1.0 |
+| S04 | baseline and target are numeric, same unit implied | 1.0 |
+| S05 | Benchmark Overview section with metric rationale | 1.0 |
+| S06 | Methodology section covers iterations, warmup, and protocol | 1.0 |
+| S07 | Environment section lists hardware, software, exact versions | 1.0 |
+| S08 | Metrics table has baseline and target columns | 1.0 |
+| S09 | Results Template includes percentile rows (p50, p95, p99) | 0.5 |
+| S10 | No qualitative prose ("good performance", "acceptable latency") | 1.0 |
+| S11 | density_score >= 0.80 | 1.0 |
 
-## Scoring
-```text
-hard_pass = all 12 HARD gates pass
-soft_score = sum(gate_score * weight) / sum(weights)
-final = hard_pass ? soft_score : 0
+Weights sum: 10.0. Normalize: divide each by 10.0 before scoring.
 
-GOLDEN:  >= 9.5 (all HARD + 95% SOFT)
-PUBLISH: >= 8.0 (all HARD + 80% SOFT)
-REVIEW:  >= 7.0 (all HARD + 70% SOFT)
-REJECT:  < 7.0 or any HARD fail
-```
+## Actions
 
-## Automation
-Primary: validate_artifact.py --kind benchmark [PLANNED]
-Interim: validate manually against this file, checking each gate.
+| Score | Action |
+|-------|--------|
+| >= 9.5 | GOLDEN — pool as canonical performance baseline |
+| >= 8.0 | PUBLISH — active performance contract |
+| >= 7.0 | REVIEW — add missing percentiles or environment detail |
+| < 7.0  | REJECT — methodology incomplete or unit undefined |
 
-## Pre-Production Checklist
-- [ ] Metric identified with unit and direction
-- [ ] Baseline measured (not estimated)
-- [ ] Environment documented with exact versions
-- [ ] No existing benchmark for same metric+environment
+## Bypass
+
+| Field | Value |
+|-------|-------|
+| conditions | Production incident requiring immediate performance baseline capture |
+| approver | p07-chief |
+| audit_trail | Log in records/audits/ with incident reference and timestamp |
+| expiry | 48h — full methodology required before expiry |
+| never_bypass | H01 (YAML), H05 (quality null) |

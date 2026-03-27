@@ -1,57 +1,91 @@
 ---
+id: p11_qg_handoff
+kind: quality_gate
 pillar: P11
-llm_function: GOVERN
-purpose: Automated quality gates for handoff validation
-pattern: HARD gates block publish, SOFT gates improve delegation quality
+title: "Gate: Handoff"
+version: "1.0.0"
+created: "2026-03-27"
+updated: "2026-03-27"
+author: "edison"
+domain: "handoff — task delegation packages for satellite execution"
+quality: null
+tags: [quality-gate, handoff, delegation, orchestration, scope-fence]
+tldr: "Gates ensuring handoff artifacts carry complete delegation context: task, scope fence, commit instructions, and size discipline."
+density_score: 0.88
 ---
 
-# Quality Gates: handoff
+# Gate: Handoff
+
+## Definition
+
+| Field     | Value |
+|-----------|-------|
+| metric    | weighted soft score + all hard gates pass |
+| threshold | 7.0 to publish; 8.0 for pool; 9.5 for golden |
+| operator  | AND (all hard) + weighted average (soft) |
+| scope     | any artifact with `kind: handoff` |
+
+---
 
 ## HARD Gates
 
-| Gate | Check | Why |
-|------|-------|-----|
-| H01 | filename matches `p12_ho_{task}.md` | namespace compliance |
-| H02 | frontmatter parses as valid YAML | machine readability |
-| H03 | all required frontmatter fields present: id, kind, lp, version, created, updated, author, satellite, mission, autonomy, quality_target, domain, quality, tags, tldr | completeness |
-| H04 | `kind` is literal `handoff` | type integrity |
-| H05 | `quality` is null | never self-score |
-| H06 | `autonomy` in (`full`, `supervised`, `assisted`) | contract compliance |
-| H07 | payload size <= 4096 bytes | schema constraint |
-| H08 | no prompt fields: no `persona`, no `response_format`, no `temperature` | boundary against action_prompt |
-| H09 | tasks are specific: each step starts with action verb | actionability |
-| H10 | all 5 body sections present: Context, Tasks, Scope Fence, Commit, Signal | structural completeness |
+All must pass. Any failure = immediate reject.
 
-## SOFT Gates
+| ID  | Check | Fail Condition |
+|-----|-------|----------------|
+| H01 | Frontmatter parses as valid YAML | Parse error on any field |
+| H02 | ID matches `^[a-z][a-z0-9_-]+$` | Uppercase, spaces, or leading digit |
+| H03 | ID equals filename stem | `id: deploy_api` in file `setup.md` |
+| H04 | Kind equals literal `handoff` | Any other kind value |
+| H05 | Quality field is `null` | Any non-null value |
+| H06 | All required fields present | Missing: task, context, scope_fence, commit, or signal |
+| H07 | `scope_fence` contains both `allowed` and `prohibited` keys | Missing either key or both empty |
+| H08 | `task` section has at least one numbered step | Narrative blob with no steps |
+| H09 | `commit` section contains a valid git command | Section present but no `git commit` instruction |
+| H10 | Body size <= 4096 bytes | Exceeds limit — handoff too verbose |
 
-| Gate | Check | Weight | Score if pass |
-|------|-------|--------|---------------|
-| S01 | satellite value is lowercase slug | 0.5 | 10 |
-| S02 | scope fence has both SOMENTE and NAO TOQUE | 1.0 | 10 |
-| S03 | optional fields are omitted when unknown | 0.5 | 10 |
-| S04 | tasks have 3-7 steps | 0.5 | 10 |
-| S05 | commit paths match scope fence SOMENTE | 1.0 | 10 |
-| S06 | signal section has concrete mechanism | 1.0 | 10 |
-| S07 | payload stays <= 3072 bytes when feasible | 0.5 | 10 |
-| S08 | context section explains WHY not just WHAT | 0.5 | 10 |
-| S09 | seeds are present and relevant to domain | 0.5 | 10 |
+---
 
-## Scoring Formula
-```text
-hard_pass = all 10 HARD gates pass
-soft_score = sum(gate_score * weight) / sum(weights)
-final = hard_pass ? soft_score : 0
+## SOFT Scoring
 
-GOLDEN:  >= 9.5
-PUBLISH: >= 8.0
-REVIEW:  >= 7.0
-REJECT:  < 7.0 or any HARD fail
-```
+Total weights sum to 100%.
 
-## Pre-Publish Checklist
-- [ ] filename uses `p12_ho_` prefix
-- [ ] required frontmatter fields present
-- [ ] all 5 body sections present
-- [ ] scope fence has SOMENTE + NAO TOQUE
-- [ ] no action_prompt or signal drift
-- [ ] payload under 4096 bytes
+| ID  | Dimension | Weight | 10 pts | 5 pts | 0 pts |
+|-----|-----------|--------|--------|-------|-------|
+| S01 | Task decomposition | 1.0 | Steps are atomic and independently verifiable | Steps exist but some are compound | Single block of instructions |
+| S02 | Context completeness | 1.0 | Background, motivation, and prior state all present | Partial context (2/3) | Context absent |
+| S03 | Scope fence precision | 1.0 | Exact paths listed in both allowed and prohibited | Paths listed for one side only | Vague scope description |
+| S04 | Commit instruction quality | 0.5 | Stage command + message template + signal command present | Only commit message present | No commit guidance |
+| S05 | Signal instruction | 0.5 | Signal call with satellite, status, and score specified | Signal mentioned without params | Signal absent |
+| S06 | Step ordering | 1.0 | Dependencies between steps are explicit | Steps ordered but implicit deps | Steps unordered |
+| S07 | Open variable marking | 0.5 | All decision points marked `[OPEN_VARIABLE]` | Some decision points unmarked | No open variables marked |
+| S08 | Size discipline | 1.0 | Body 1000-3000 bytes (dense, complete) | Body 3001-4096 bytes (verbose) | Body < 500 bytes (too sparse) |
+| S09 | Autonomy framing | 0.5 | Explicit autonomy flag + quality target stated | Quality target stated without autonomy flag | Neither present |
+| S10 | Retry/resilience guidance | 0.5 | Error handling or retry instructions included | Partial guidance | None |
+| S11 | Naming convention | 0.5 | Filename follows `{MISSION}_{sat}.md` pattern | Filename partially correct | Arbitrary filename |
+| S12 | No internal jargon leaked | 0.5 | No framework internals or unexplained acronyms | Minor internal refs | Heavy framework coupling |
+
+**Score = sum(pts * weight) / sum(max_pts * weight) * 10**
+
+---
+
+## Actions
+
+| Score | Tier | Action |
+|-------|------|--------|
+| >= 9.5 | Golden | Publish to pool as golden handoff template |
+| >= 8.0 | Skilled | Publish to pool + log pattern |
+| >= 7.0 | Learning | Use but flag for improvement |
+| < 7.0 | Rejected | Return to author with gate report |
+
+---
+
+## Bypass
+
+| Field | Value |
+|-------|-------|
+| Conditions | Time-critical incident response where full context is not yet known |
+| Approver | Senior orchestrator (human) only |
+| Audit trail | `bypass_reason` field required in frontmatter |
+| Expiry | Bypass valid for single execution only; full handoff required on retry |
+| Never bypass | H01 (YAML parse), H05 (quality null), H07 (scope fence — unbounded execution is unsafe) |

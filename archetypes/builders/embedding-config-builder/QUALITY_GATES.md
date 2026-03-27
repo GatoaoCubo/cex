@@ -1,57 +1,88 @@
 ---
+id: p11_qg_embedding_config
+kind: quality_gate
 pillar: P11
-llm_function: GOVERN
-purpose: Automated quality gates for embedding_config validation
-pattern: HARD gates block publish, SOFT gates contribute to 0-10 score
+title: "Gate: embedding_config"
+version: "1.0.0"
+created: "2026-03-27"
+updated: "2026-03-27"
+author: "edison"
+domain: "embedding_config — vector model configuration for RAG pipelines including dimensions, chunking, and distance metrics"
+quality: null
+tags: [quality-gate, embedding-config, vector, rag, chunking, P11]
+tldr: "Gates for embedding_config artifacts: validates model spec, dimension accuracy, chunk size sanity, distance metric validity, and normalization settings."
+density_score: 0.90
 ---
 
-# Quality Gates: embedding_config
+# Gate: embedding_config
 
-## HARD Gates (block publish if ANY fails)
+## Definition
 
-| Gate | Check | Why |
-|------|-------|-----|
-| H01 | YAML frontmatter parses | Broken YAML = broken artifact |
-| H02 | id matches `^p01_emb_[a-z][a-z0-9_]+$` | Namespace compliance |
-| H03 | id == filename stem | Brain search relies on this |
-| H04 | kind == "embedding_config" | Type integrity |
-| H05 | quality == null | Never self-score |
-| H06 | 13+ required fields present | Completeness |
-| H07 | dimensions is positive integer | Vector space must be numeric |
-| H08 | chunk_size is positive integer | Chunking must be numeric |
+| Field     | Value |
+|-----------|-------|
+| metric    | Composite score from SOFT dimensions + all HARD gates pass |
+| threshold | >= 7.0 to publish; >= 9.5 golden |
+| operator  | AND (all HARD) + weighted_sum (SOFT) |
+| scope     | All artifacts where `kind: embedding_config` |
 
-## SOFT Gates (contribute to score)
+---
 
-| Gate | Check | Weight | Score if pass |
-|------|-------|--------|---------------|
-| S01 | tldr <= 160 chars, non-empty | 1.0 | 10 |
-| S02 | tags is list, len >= 3, includes "embedding" | 0.5 | 10 |
-| S03 | Model section present in body | 1.0 | 10 |
-| S04 | Chunking section with concrete numbers | 1.0 | 10 |
-| S05 | model_name is specific identifier (not vague) | 0.5 | 10 |
-| S06 | Integration section present | 0.5 | 10 |
-| S07 | No filler phrases ("good model", "optimal", "comprehensive") | 1.0 | 10 |
-| S08 | Performance section with latency/cost data | 0.5 | 10 |
+## HARD Gates
 
-## Scoring Formula
-```text
-hard_pass = all 8 HARD gates pass
-soft_score = sum(gate_score * weight) / sum(weights)
-final = hard_pass ? soft_score : 0
+All must pass. Any single failure = REJECT regardless of SOFT score.
 
-GOLDEN:  >= 9.5 (all HARD + 95% SOFT)
-PUBLISH: >= 8.0 (all HARD + 80% SOFT)
-REVIEW:  >= 7.0 (all HARD + 70% SOFT)
-REJECT:  < 7.0 or any HARD fail
-```
+| ID  | Check | Failure message |
+|-----|-------|----------------|
+| H01 | Frontmatter parses as valid YAML | "Frontmatter YAML syntax error" |
+| H02 | `id` matches `^p01_emb_[a-z][a-z0-9_]+$` | "ID fails embedding_config namespace regex" |
+| H03 | `id` value equals filename stem | "ID does not match filename" |
+| H04 | `kind` equals literal `"embedding_config"` | "Kind is not 'embedding_config'" |
+| H05 | `quality` field is `null` | "Quality must be null at authoring time" |
+| H06 | All required fields present: id, kind, pillar, domain, model, provider, dimensions, chunk_size, chunk_overlap, distance_metric, version, created, author, tags | "Missing required field(s)" |
+| H07 | `distance_metric` is one of: `cosine`, `dot_product`, `euclidean` | "Invalid distance_metric value" |
+| H08 | `chunk_overlap` < `chunk_size` (overlap must be less than full chunk) | "chunk_overlap must be less than chunk_size" |
 
-## Automation
-Primary: validate_artifact.py --kind embedding_config [PLANNED]
-Interim: validate manually against this file, checking each gate.
+---
 
-## Pre-Production Checklist
-- [ ] Model identified with provider and specs
-- [ ] Dimensions confirmed from model documentation
-- [ ] Chunk size chosen for use case (retrieval vs summarization)
-- [ ] Distance metric selected (cosine default)
-- [ ] Cost known (null if local/free)
+## SOFT Scoring
+
+Dimensions sum to 100%. Score each 0.0-10.0; multiply by weight.
+
+| Dimension | Weight | What to assess |
+|-----------|--------|----------------|
+| Dimension accuracy | 1.0 | `dimensions` matches documented output size of named model |
+| Chunk size justification | 1.0 | chunk_size choice explained relative to model context window |
+| Overlap rationale | 1.0 | Overlap percentage reasonable for retrieval quality (10-20% typical) |
+| Tokenizer specified | 1.0 | Tokenizer (tiktoken, sentencepiece, etc.) named and version noted |
+| Normalization setting | 1.0 | `normalize` flag specified; rationale given for cosine vs dot_product |
+| Batch size documented | 0.5 | Recommended batch size for indexing performance stated |
+| Provider and cost | 1.0 | Provider (Ollama, OpenAI, etc.) and per-token cost documented |
+| Boundary clarity | 0.5 | Explicitly not brain_index (search index) or rag_source (data source) |
+| Fallback model | 0.5 | Alternative model listed for when primary is unavailable |
+| Performance notes | 1.0 | Latency, throughput, or memory footprint characteristics noted |
+| Documentation | 0.5 | tldr captures model + key parameters in <= 160 characters |
+
+Weight sum: 1.0+1.0+1.0+1.0+1.0+0.5+1.0+0.5+0.5+1.0+0.5 = 9.0 -> normalize to 100%
+
+---
+
+## Actions
+
+| Score | Tier | Action |
+|-------|------|--------|
+| >= 9.5 | GOLDEN | Publish to pool as golden exemplar |
+| >= 8.0 | PUBLISH | Publish to pool |
+| >= 7.0 | REVIEW | Flag for human review before publish |
+| < 7.0  | REJECT | Return to author with failure report |
+
+---
+
+## Bypass
+
+| Field | Value |
+|-------|-------|
+| conditions | Experimental model evaluation where full parameter tuning is ongoing |
+| approver | ML/RAG engineer approval required with written notes |
+| audit_trail | Bypass logged to `records/audits/embedding_config_bypass_{date}.md` |
+| expiry | 72h; config must be finalized before being wired to a production index |
+| never_bypass | H01 (YAML parse failure), H05 (quality null invariant), H08 (overlap >= chunk_size causes indexing corruption) |

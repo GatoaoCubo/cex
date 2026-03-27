@@ -1,57 +1,81 @@
 ---
+id: p11_qg_chain
+kind: quality_gate
 pillar: P11
-llm_function: GOVERN
-purpose: Automated quality gates for chain validation
-pattern: HARD gates block publish, SOFT gates contribute to 0-10 score
+title: "Gate: chain"
+version: "1.0.0"
+created: "2026-03-27"
+updated: "2026-03-27"
+author: "edison"
+domain: "prompt pipeline design — sequential LLM call chains with typed data flow between steps"
+quality: null
+tags: [quality-gate, chain, P03, prompt-pipeline, sequential, data-flow]
+tldr: "Pass/fail gate for chain artifacts: step atomicity, typed data flow, error handling strategy, and pipeline completeness."
+density_score: 0.91
 ---
 
-# Quality Gates: chain
+# Gate: chain
 
-## HARD Gates (block publish if ANY fails)
+## Definition
 
-| Gate | Check | Why |
-|------|-------|-----|
-| H01 | YAML frontmatter parses | Broken YAML = broken artifact |
-| H02 | id matches `^p03_ch_[a-z][a-z0-9_]+$` | Namespace compliance |
-| H03 | id == filename stem | Brain search relies on this |
-| H04 | kind == "chain" | Type integrity |
-| H05 | quality == null | Never self-score |
-| H06 | 19 required fields present | Completeness |
-| H07 | body has ## Steps section with numbered steps | Core content |
-| H08 | steps_count matches actual steps in body | Integrity check |
+| Field | Value |
+|---|---|
+| metric | chain artifact quality score |
+| threshold | 7.0 (publish >= 8.0, golden >= 9.5) |
+| operator | weighted_sum |
+| scope | all artifacts with `kind: chain` |
 
-## SOFT Gates (contribute to score)
+## HARD Gates
 
-| Gate | Check | Weight | Score if pass |
-|------|-------|--------|---------------|
-| S01 | tldr <= 160 chars, non-empty | 1.0 | 10 |
-| S02 | tags is list, len >= 3, includes "chain" | 0.5 | 10 |
-| S03 | Each step has Input/Prompt/Output subsections | 1.0 | 10 |
-| S04 | Data Flow diagram present and matches steps | 1.0 | 10 |
-| S05 | Purpose section explains why chain exists (not generic) | 0.5 | 10 |
-| S06 | Error Handling section present with strategy | 0.5 | 10 |
-| S07 | flow field matches actual step arrangement | 0.5 | 10 |
-| S08 | No runtime orchestration in body (boundary check) | 1.0 | 10 |
-| S09 | density_score >= 0.80 | 0.5 | 10 |
-| S10 | No filler phrases ("this document", "in summary") | 1.0 | 10 |
+All must pass (AND logic). Any single failure = REJECT.
 
-## Scoring Formula
-```text
-hard_pass = all 8 HARD gates pass
-soft_score = sum(gate_score * weight) / sum(weights)
-final = hard_pass ? soft_score : 0
+| ID | Check | Fail Condition |
+|---|---|---|
+| H01 | Frontmatter parses as valid YAML | Parse error on frontmatter block |
+| H02 | ID matches `^[a-z][a-z0-9_-]+$` | ID contains uppercase, spaces, or invalid chars |
+| H03 | ID equals filename stem | `id: my_chain` but file is `other_chain.md` |
+| H04 | Kind equals literal `chain` | `kind: workflow` or `kind: pipeline` or any other value |
+| H05 | Quality field is null | `quality: 8.0` or any non-null value |
+| H06 | All required fields present | Missing `steps`, `input_schema`, or `output_schema` |
+| H07 | Chain has at least two steps | Single-step chain is a prompt, not a chain |
+| H08 | Each step has an explicit output type | Step output typed as `any` or unspecified |
+| H09 | Error handling strategy declared | `error_handling` field absent; must be one of: fail_fast, skip, retry, fallback |
+| H10 | No step references a runtime executor | Step contains orchestration logic (loops, parallelism) — chain is prompts only |
 
-GOLDEN:  >= 9.5 (all HARD + 95% SOFT)
-PUBLISH: >= 8.0 (all HARD + 80% SOFT)
-REVIEW:  >= 7.0 (all HARD + 70% SOFT)
-REJECT:  < 7.0 or any HARD fail
-```
+## SOFT Scoring
 
-## Automation
-Primary: validate_artifact.py --kind chain [PLANNED]
-Interim: validate manually against this file, checking each gate.
+Weights sum to 100%.
 
-## Pre-Production Checklist
-- [ ] Pipeline purpose identified with clear input->output transformation
-- [ ] No existing chain for this pipeline (brain_query checked)
-- [ ] Steps decomposed into atomic LLM calls (not compound tasks)
+| Dimension | Weight | Criteria |
+|---|---|---|
+| Step atomicity | 1.0 | Each step is one LLM call; no compound logic bundled in a single step |
+| Data flow explicitness | 1.0 | Each step declares which prior step's output it consumes |
+| Type coverage | 1.0 | All input/output types are concrete (string, number, list[string], not `any`) |
+| Error handling granularity | 1.0 | Error strategy defined per-step or with justified global default |
+| Context passing efficiency | 0.5 | Passes only required fields to each step, not entire prior context |
+| Step naming clarity | 0.5 | Step names describe the LLM task (extract_entities not step_2) |
+| Branching documentation | 1.0 | Conditional branches have explicit conditions and merge points documented |
+| Prompt boundaries | 1.0 | No step bleeds workflow logic (loops, state management) into prompt text |
+| Input schema completeness | 0.5 | Input schema covers all fields consumed by first step |
+| Output schema alignment | 0.5 | Output schema matches the final step's declared output type |
+| Domain specificity | 1.0 | Step prompts and transforms specific to the declared domain problem |
+| Testability | 1.0 | Each step can be unit-tested with mock input/output independently |
+
+## Actions
+
+| Score | Tier | Action |
+|---|---|---|
+| >= 9.5 | Golden | Publish to pool as golden reference |
+| >= 8.0 | Publish | Publish to pool, add to routing index |
+| >= 7.0 | Review | Flag for improvement before publish |
+| < 7.0 | Reject | Return to author with specific gate failures |
+
+## Bypass
+
+| Field | Value |
+|---|---|
+| conditions | Proof-of-concept chain during active research spike, not intended for production use |
+| approver | Lead author acknowledgment in artifact comment block |
+| audit_trail | Bypass reason and spike ticket ID recorded in frontmatter comment |
+| expiry | 48h — spike chains must either reach >= 7.0 or be deleted |
+| never_bypass | H01 (unparseable YAML breaks all tooling), H05 (self-scored gates corrupt quality metrics) |
