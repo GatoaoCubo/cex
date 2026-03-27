@@ -1,77 +1,74 @@
 ---
-pillar: P01
+pillar: P04
 llm_function: INJECT
-purpose: Standards and domain knowledge for mcp_server production
-sources: MCP Specification (modelcontextprotocol.io), Anthropic MCP docs, real server examples
+purpose: Domain knowledge for mcp_server production — atomic searchable facts
+sources: mcp-server-builder MANIFEST.md + SCHEMA.md v1.0.0
 ---
 
 # Domain Knowledge: mcp_server
 
-## Foundational Concept
-MCP (Model Context Protocol) is an open standard by Anthropic for connecting LLMs to
-external tools and data sources. An mcp_server EXPOSES capabilities (tools + resources)
-that agents consume via a standardized protocol. Servers are providers; agents are consumers.
-Three transports exist: stdio (local subprocess), SSE (server-sent events, remote),
-HTTP (streamable, remote). The protocol is JSON-RPC 2.0 over the chosen transport.
+## Executive Summary
 
-## Transport Comparison
+MCP servers are protocol-compliant providers that expose tools and resources to LLM agents via the Model Context Protocol (JSON-RPC 2.0). Each server declares a transport (stdio/SSE/HTTP), tools with JSON-Schema parameters, and resources with URI templates. They differ from connectors (bidirectional integrations), clients (API consumers), plugins (lifecycle-based extensions), and skills (LLM-level capabilities) by implementing the standardized MCP protocol for agent-to-tool communication.
 
-| Transport | Where | Auth | Use Case |
-|-----------|-------|------|----------|
-| stdio | Local process | none | Dev tools, filesystem, local CLI wrappers |
-| SSE | Remote HTTP | api_key / oauth | Cloud services, shared infra, web APIs |
-| http (streamable) | Remote HTTP | api_key / bearer | High-throughput, streaming results |
+## Spec Table
 
-Rule: stdio = local only; SSE/HTTP = remote; never mix transport with auth mismatch.
+| Property | Value |
+|----------|-------|
+| Pillar | P04 (tools/infrastructure) |
+| Kind | `mcp_server` (exact literal) |
+| ID pattern | `p04_mcp_{slug}` |
+| Protocol | JSON-RPC 2.0 over stdio, SSE, or HTTP |
+| Quality gates | HARD + SOFT (per QUALITY_GATES.md) |
+| Max body | 4096 bytes |
+| Density minimum | >= 0.80 |
+| Quality field | always `null` |
+| Key fields | transport, tools_provided, resources_provided, auth |
 
-## Tool Schema Pattern
-MCP tools follow JSON-Schema for parameters. Each tool has:
-- `name`: snake_case identifier (e.g., `search_documents`)
-- `description`: one sentence, what it does and when to use it
-- `inputSchema`: JSON-Schema object with `properties`, `required`, `type: object`
-- Returns: unstructured text or structured JSON (tool decides)
+## Patterns
 
-## Resource URI Patterns
+| Pattern | Application |
+|---------|-------------|
+| Transport selection | stdio = local subprocess; SSE = remote streaming; HTTP = high-throughput remote |
+| Tool schema | JSON-Schema object: name (snake_case), description (1 sentence), inputSchema |
+| Resource URIs | file://, db://, api://, mem:// — resources are READ-ONLY snapshots |
+| Auth by transport | stdio = none (process trust); SSE/HTTP = api_key or OAuth |
+| Tools vs resources | Tools = ACTIONS (side effects); Resources = READ-ONLY snapshots |
+| Minimal tool surface | Expose only necessary tools; fewer tools = better agent routing |
 
-| Pattern | Example | Content |
-|---------|---------|---------|
-| file://{path} | file:///home/user/doc.txt | File contents |
-| db://{table}/{id} | db://products/42 | Database row |
-| api://{endpoint} | api://weather/current | API snapshot |
-| mem://{key} | mem://session/context | In-memory state |
+### Transport Decision Table
 
-Resources are READ-ONLY snapshots; tools are ACTIONS. Do not confuse them.
+| Condition | Transport | Auth |
+|-----------|-----------|------|
+| Local filesystem/CLI wrapper | stdio | none |
+| Cloud API with streaming | SSE | api_key |
+| High-throughput remote service | HTTP (streamable) | api_key or OAuth |
+| Shared team infrastructure | SSE or HTTP | OAuth |
 
-## Auth by Transport
+## Anti-Patterns
 
-| Transport | Recommended Auth | How |
-|-----------|-----------------|-----|
-| stdio | none | Process-level trust |
-| sse | api_key | `Authorization: Bearer {key}` header |
-| http | api_key or oauth | Header or OAuth 2.0 flow |
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| stdio with auth headers | stdio is local process; auth adds complexity with no benefit |
+| Resource that modifies state | Resources are READ-ONLY; use tools for mutations |
+| Tool without inputSchema | Agent cannot discover parameters; blind invocation |
+| Mixed transport in one server | One server = one transport; use separate servers |
+| Vague tool description | Agent routing fails; description must state what + when |
+| No error response spec | JSON-RPC 2.0 requires error codes; omission breaks protocol |
 
-## Real Server Examples
+## Application
 
-| Server | Transport | Tools | Resources |
-|--------|-----------|-------|-----------|
-| brain (search) | stdio | brain_query, brain_list | mem://index/status |
-| firecrawl (scrape) | http | scrape_url, crawl_site | - |
-| railway (deploy) | http | deploy_service, get_logs | api://services |
-| filesystem | stdio | read_file, write_file, list_dir | file://{path} |
-| postgres | stdio | query, describe_table | db://{table} |
-
-## Boundary vs Nearby Types
-
-| Type | What it is | Why it is NOT mcp_server |
-|------|------------|--------------------------|
-| connector | Bidirectional service integration | Does not expose MCP protocol tools |
-| client | Unidirectional API consumer | Consumes, does not expose |
-| plugin | Pluggable system extension | Lifecycle-based, not protocol-based |
-| daemon | Persistent background process | No tool/resource exposure via MCP |
-| skill | Reusable capability with phases | LLM-level abstraction, not protocol server |
+1. Choose transport based on deployment: stdio (local), SSE (remote stream), HTTP (remote batch)
+2. Define `tools_provided`: each with name, description, and JSON-Schema inputSchema
+3. Define `resources_provided`: each with URI template and content type
+4. Set auth strategy matching transport (none for stdio, api_key/OAuth for remote)
+5. Specify error codes following JSON-RPC 2.0 convention
+6. Document startup command and environment requirements
+7. Validate: body <= 4096 bytes, density >= 0.80, all HARD + SOFT gates
 
 ## References
-- MCP Specification: https://modelcontextprotocol.io/
-- Anthropic MCP docs: https://docs.anthropic.com/en/docs/agents-and-tools/mcp
-- JSON-RPC 2.0: https://www.jsonrpc.org/specification
-- JSON Schema: https://json-schema.org/
+
+- mcp-server-builder SCHEMA.md v1.0.0
+- MCP Specification: modelcontextprotocol.io
+- JSON-RPC 2.0 Specification: jsonrpc.org/specification
+- Anthropic MCP documentation

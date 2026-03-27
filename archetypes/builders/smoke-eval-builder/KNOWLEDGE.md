@@ -1,48 +1,74 @@
 ---
-pillar: P01
+pillar: P07
 llm_function: INJECT
-purpose: Standards and patterns for smoke_eval production
-sources: [smoke testing theory, CI/CD pipelines, health check patterns]
+purpose: Domain knowledge for smoke_eval production — atomic searchable facts
+sources: smoke-eval-builder MANIFEST.md + SCHEMA.md
 ---
 
 # Domain Knowledge: smoke_eval
 
-## Foundational Concepts
-Smoke testing originates from hardware testing ("does it catch fire when powered on?").
-In software: quick sanity checks that verify basic functionality before investing in deeper tests.
-In CEX: fast checks (<30s) that gate deeper evaluation — if smoke fails, skip unit/e2e tests.
+## Executive Summary
 
-## Industry Patterns
-| Source | What it defines | CEX alignment |
-|--------|----------------|---------------|
-| CI/CD smoke stage | First test stage in pipeline | Gate before unit tests |
-| Health endpoints | /health, /ready, /live | health_check field |
-| Canary deploys | Quick validation after deploy | Post-deployment smoke |
-| Circuit breakers | Fast failure detection | fast_fail: true |
+Smoke evals are fast-fail sanity checks constrained to 30 seconds maximum — the lightest evaluation artifact in P07. Each smoke eval answers one question: "does this component work at all?" It validates the critical path only, not correctness or performance. Unlike unit_evals (deep correctness testing) or benchmarks (performance measurement), smoke evals abort on first failure and require minimal setup.
 
-## Key Principles
-- SPEED over depth: 30s maximum, no exceptions
-- BINARY outcome: pass or fail (no partial scores)
-- FAST-FAIL: abort on first failure (no point continuing)
-- CRITICAL PATH: only test what matters most
-- GATE function: block deeper tests if smoke fails
-- PREREQUISITES: document what must exist before running
+## Spec Table
 
-## CEX-Specific Extensions
-| Field | Justification | Closest equivalent |
-|-------|--------------|-------------------|
-| critical_path | Ordered minimum checks | CI stage dependencies |
-| fast_fail | Abort on first failure | Circuit breaker pattern |
-| frequency | How often to run | Cron schedule |
+| Property | Value |
+|----------|-------|
+| Pillar | P07 (evaluation) |
+| Format | Markdown |
+| Naming | `p07_se_{scope_slug}.md` |
+| ID regex | `^p07_se_[a-z][a-z0-9_]+$` |
+| Max body bytes | 3072 (smaller than unit_eval) |
+| Required frontmatter fields | 17 |
+| Recommended frontmatter fields | 6: prerequisites, environment, health_check, frequency, alerting, density_score |
+| timeout | integer ≤ 30 seconds — hard constraint |
+| fast_fail | `true` always — invariant |
+| quality field | null always — invariant |
+| tldr max | 160 characters |
+| Assertion object shape | `check` + `expected` + `timeout_ms` |
 
-## Boundary vs Nearby Types
-| Type | What it is | Why it is NOT smoke_eval |
-|------|------------|--------------------------|
-| unit_eval (P07) | Deep correctness test | Tests thoroughly; smoke is shallow |
-| e2e_eval (P07) | Pipeline integration test | Tests full flow; smoke tests parts |
-| benchmark (P07) | Performance measurement | Measures metrics; smoke checks binary |
-| quality_gate (P11) | Pass/fail barrier with score | Blocks with score; smoke just checks |
+## Patterns
+
+| Pattern | Rule |
+|---------|------|
+| Critical path first | List minimum checks in strict dependency order |
+| Binary assertions | Each assertion is pass/fail only — no partial credit |
+| fast_fail: true | Abort on first assertion failure; never continue after failure |
+| timeout discipline | Total eval ≤ 30s; `timeout_ms` per assertion sets individual ceiling |
+| Scope = one component | One smoke_eval per deployable unit or service boundary |
+| Prerequisites listed | Everything that must exist before the eval can run |
+| On Failure section | Escalation path: who to alert, what to check next |
+
+- **Body sections**: Critical Path → Assertions → Prerequisites → On Failure
+- **Assertion example**: `check: "API /health"` / `expected: "200 OK"` / `timeout_ms: 5000`
+
+## Anti-Patterns
+
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| timeout > 30 seconds | Hard schema rejection; smoke evals must complete fast |
+| fast_fail: false | Defeats purpose; always abort on first failure |
+| Deep logic or correctness assertions | Out of scope; use unit_eval for correctness |
+| Performance measurement | Use benchmark; smoke is binary pass/fail only |
+| Missing prerequisites section | Eval may run against absent dependencies |
+| Missing On Failure guidance | Leaves operator without recovery path |
+| Assertions without timeout_ms | Single slow check can block entire eval pipeline |
+| Scope covering multiple services | Split into one smoke_eval per component |
+
+## Application
+
+1. Identify component scope (one deployable unit or integration boundary)
+2. List critical path: minimum ordered checks that confirm the component is "alive"
+3. Write each assertion: `check` (what to verify) + `expected` (pass condition) + `timeout_ms`
+4. Set `timeout` ≤ 30 (total), set `fast_fail: true`
+5. Write prerequisites: runtime dependencies, environment, credentials needed
+6. Write On Failure: escalation path and first diagnostic steps
+7. Set `quality: null`, verify body ≤ 3072 bytes
+8. Name file `p07_se_{scope_slug}.md`
 
 ## References
-- Smoke Testing: https://en.wikipedia.org/wiki/Smoke_testing_(software)
-- Health Check Patterns: https://microservices.io/patterns/observability/health-check-api.html
+
+- Schema: smoke_eval SCHEMA.md (P06)
+- Pillar: P07 (evaluation)
+- Boundary: unit_eval (deep correctness), benchmark (performance), e2e_eval (full pipeline)

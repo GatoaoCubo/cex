@@ -1,59 +1,71 @@
 ---
 pillar: P01
 llm_function: INJECT
-purpose: Standards and patterns for scoring_rubric production
-sources: [AAC&U VALUE Rubrics, Bloom taxonomy, CEX validate_kc.py, Cooper 1990]
+purpose: Domain knowledge for scoring_rubric production — atomic searchable facts
+sources: scoring-rubric-builder MANIFEST.md + SCHEMA.md, AAC&U VALUE Rubrics, Bloom taxonomy
 ---
 
 # Domain Knowledge: scoring_rubric
 
-## Foundational Concepts
-Scoring rubrics originate from education (Bloom 1956, AAC&U VALUE Rubrics).
-In AI/LLM: evaluation frameworks for prompt quality, agent output, and artifact completeness.
-In CEX: multi-dimensional weighted scoring with 4 tiers (GOLDEN/PUBLISH/REVIEW/REJECT).
+## Executive Summary
 
-## Industry Patterns
-| Source | What it defines | CEX alignment |
-|--------|----------------|---------------|
-| AAC&U VALUE Rubrics | 16 rubrics for learning outcomes, 4 levels each | Multi-dimension, leveled criteria |
-| Bloom Taxonomy | 6 cognitive levels (remember to create) | Hierarchical evaluation depth |
-| LLM-as-Judge | LLM evaluates LLM output on dimensions | Automated scoring with rubric |
-| SonarQube Quality Model | Reliability, Security, Maintainability dimensions | Weighted dimension scoring |
-| DORA Metrics | 4 key metrics for DevOps performance | Concrete, measurable thresholds |
+Scoring rubrics are multi-dimensional weighted evaluation frameworks that define how to measure artifact quality across orthogonal dimensions with concrete criteria per level. Each rubric targets specific artifact kinds, assigns weights summing to 100%, and maps scores to action tiers (GOLDEN/PUBLISH/REVIEW/REJECT). They differ from quality gates (which enforce pass/fail barriers), golden tests (which provide reference examples), benchmarks (which measure performance metrics), and unit evals (which test specific behaviors) by defining the complete evaluation methodology with weighted dimensions and calibration.
 
-## Key Principles
-- Dimensions must be ORTHOGONAL (no overlap — each measures one thing)
-- Weights must be EXPLICIT and sum to exactly 100%
-- Criteria must be CONCRETE (no "good" or "appropriate" — specify what counts)
-- Scales must be CONSISTENT across dimensions (all 0-10 or all labeled)
-- Calibration requires GOLDEN_TESTS as anchoring examples
-- Inter-rater agreement measures rubric reliability (>= 0.80 is good)
-- Automation status must be honest (manual if no validator exists)
+## Spec Table
 
-## CEX Evaluation Frameworks (existing patterns)
-| Framework | Dimensions | Used for |
-|-----------|-----------|----------|
-| 5D | Density, Completeness, Actionability, Boundary, References | Knowledge cards |
-| 12LP | One dimension per pillar (P01-P12) | Cross-pillar artifacts |
-| HARD/SOFT | Binary + weighted numeric | Quality gates |
+| Property | Value |
+|----------|-------|
+| Pillar | P07 (evaluation) |
+| Kind | `scoring_rubric` (exact literal) |
+| ID pattern | `p07_sr_{slug}` |
+| Required frontmatter | 15 fields |
+| Quality gates | 9 HARD + 9 SOFT |
+| Max body | 4096 bytes |
+| Density minimum | >= 0.80 |
+| Quality field | always `null` |
+| Weight invariant | All dimension weights MUST sum to 100% |
+| Score tiers | GOLDEN >= 9.5, PUBLISH >= 8.0, REVIEW >= 7.0, REJECT < 7.0 |
+| Min dimensions | 3 orthogonal dimensions |
 
-## CEX-Specific Extensions
-| Field | Justification | Closest equivalent |
-|-------|--------------|-------------------|
-| target_kinds | Scopes rubric to artifact types | AAC&U: discipline-specific rubrics |
-| automation_status | Tracks if dimensions are machine-checkable | SonarQube: automated vs manual review |
-| calibration_set | Links golden_tests for anchoring | Education: benchmark papers |
+## Patterns
 
-## Boundary vs Nearby Types
-| Type | What it does | NOT this |
-|------|-------------|----------|
-| quality_gate (P11) | Enforces PASS/FAIL with threshold | Does NOT define how to measure |
-| golden_test (P07) | Provides reference EXAMPLE at 9.5+ | Does NOT define evaluation dimensions |
-| benchmark (P07) | Measures PERFORMANCE (latency, cost) | Does NOT assess artifact quality |
-| unit_eval (P07) | Tests specific agent/prompt behavior | Does NOT define multi-dimensional framework |
+| Pattern | Application |
+|---------|-------------|
+| Orthogonal dimensions | Each dimension measures ONE thing; no overlap between dimensions |
+| Explicit weights | Sum to exactly 100%; higher weight = more impact on final score |
+| Concrete criteria | Specify what counts at each level, not "good" or "appropriate" |
+| Consistent scales | All dimensions use same scale (0-10) for comparability |
+| Golden test calibration | Anchor rubric with known-good examples at 9.5+ |
+| Automation status | Declare per dimension: manual, semi-automated, or automated |
+| Inter-rater reliability | >= 0.80 agreement indicates reliable rubric |
+| Target kind scoping | Rubric applies to specific artifact kinds, not everything |
+
+## Anti-Patterns
+
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| Weights not summing to 100% | Breaks scoring formula; validator rejects |
+| Overlapping dimensions | Double-counting inflates or deflates scores |
+| Vague criteria ("good quality") | Not actionable; different raters interpret differently |
+| No golden test calibration | Rubric floats without anchoring examples |
+| Fewer than 3 dimensions | Insufficient coverage of artifact quality |
+| All dimensions equal weight | Usually wrong; some dimensions matter more |
+| No automation status declared | Unknown whether scoring is manual or automated |
+
+## Application
+
+1. Identify target artifact kinds this rubric evaluates
+2. Define >= 3 orthogonal dimensions, each measuring ONE aspect
+3. Assign weights summing to exactly 100%
+4. Write concrete criteria per dimension per level (0-10 scale)
+5. Map scores to tiers: GOLDEN >= 9.5, PUBLISH >= 8.0, REVIEW >= 7.0, REJECT < 7.0
+6. Link golden test examples for calibration
+7. Declare automation status per dimension
+8. Validate: 9 HARD + 9 SOFT gates, body <= 4096 bytes
 
 ## References
-- AAC&U VALUE Rubrics: https://www.aacu.org/initiatives/value-initiative
-- Bloom Taxonomy (1956, revised Anderson & Krathwohl 2001)
-- LLM-as-Judge: https://arxiv.org/abs/2306.05685
-- validate_kc.py v2.0 (CEX HARD/SOFT pattern, 5D rubric reference)
+
+- scoring-rubric-builder SCHEMA.md v1.0.0
+- AAC&U VALUE Rubrics (16 rubrics for learning outcomes)
+- Bloom Taxonomy (Anderson & Krathwohl 2001 revision)
+- LLM-as-Judge evaluation framework

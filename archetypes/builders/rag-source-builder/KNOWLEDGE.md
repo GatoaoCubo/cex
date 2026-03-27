@@ -1,60 +1,65 @@
 ---
 pillar: P01
 llm_function: INJECT
-domain: rag_source
-version: 1.0.0
+purpose: Domain knowledge for rag_source production — atomic searchable facts
+sources: rag-source-builder MANIFEST.md + SCHEMA.md
 ---
 
-# Knowledge: rag_source
+# Domain Knowledge: rag_source
 
-## Foundational Concept
-RAG (Retrieval-Augmented Generation) source indexing: a catalog of external data references used by vector search pipelines. A rag_source is a structured pointer — it records WHERE to find content, not the content itself.
+## Executive Summary
 
-## Industry Analogies
-- Bookmark managers (Raindrop, Pinboard) — save URLs with metadata
-- RSS feed registries — track sources for periodic refresh
-- Data catalogs (Apache Atlas, DataHub) — asset discovery and lineage
-- Link databases (Common Crawl seed lists) — URL inventories for crawlers
+A rag_source is a pointer-only artifact that catalogs an external indexable URL for RAG pipelines — it records WHERE content lives, not the content itself. Body max is 1024 bytes. If the body contains extracted text paragraphs, the artifact is a knowledge_card, not a rag_source. Two files are always required: `.md` (human-readable) and `.yaml` (machine twin), both sharing the same `id`.
 
-## Key Patterns
+## Spec Table
 
-### URL-First Design
-The url field is the primary key of a rag_source. Without a valid, accessible URL the artifact has no value. Validate format and reachability before committing.
+| Property | Value |
+|----------|-------|
+| Pillar | P01 (knowledge) |
+| ID pattern | `^p01_rs_[a-z][a-z0-9_]+$` |
+| Required frontmatter fields | 13 (includes `url` and `last_checked`) |
+| Recommended fields | 4 (keywords, reliability, format, extraction_method) |
+| Max body | 1024 bytes |
+| Body sections | 3 (Source Description, Freshness Policy, Extraction Notes) |
+| Dual-file artifact | `.md` + `.yaml` twin; IDs must match |
+| `quality` field | ALWAYS null |
 
-### Freshness Tracking
-External sources change. last_checked records when the URL was last verified. A recommended re-check interval is 30 days. Stale sources (>90 days unchecked) should be flagged.
+## Patterns
 
-### Reliability Scoring
-| Level | Meaning |
-|-------|---------|
-| high | Official docs, stable APIs, institutional sources |
-| medium | Community wikis, curated blogs, stable third-party |
-| low | Social media, rapidly changing pages, unofficial mirrors |
+| Pattern | Rule |
+|---------|------|
+| Pointer discipline | Body describes metadata about the source; never contains extracted content |
+| Dual-file requirement | Both `.md` and `.yaml` required; id must be identical in both |
+| Freshness policy | Specify re-check cadence + staleness threshold (e.g., stale after 30 days) |
+| `last_checked` update | Must be updated on each URL validation; not synonymous with `created` |
+| Reliability levels | `high` = official docs/APIs; `medium` = curated third-party; `low` = informal/social |
+| Format field | `html` / `json` / `api` / `pdf` / `csv` — drives extraction_method choice |
+| URL preference | `https://` preferred; HTTP must be documented as deliberate exception |
 
-### Format Awareness
-Extraction strategy depends on format: html (scrape), json/api (parse), pdf (extract text), csv (tabular ingest).
+## Anti-Patterns
 
-## CEX Extensions
-- last_checked: mandatory field (industry catalogs often omit this)
-- domain: explicit binding to CEX domain taxonomy
-- quality: null on creation (never self-scored)
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| Body contains extracted paragraphs | Wrong kind — this is a knowledge_card, not a rag_source |
+| Missing `url` field | Core identifier; HARD gate H06 blocks on absent required fields |
+| `last_checked` equals `created` and never updated | Freshness policy is meaningless; indexer cannot determine staleness |
+| No `## Freshness Policy` section | Body section is mandatory; artifact fails structural gate |
+| Body > 1024 bytes | Violates hard size constraint; artifact is rejected |
+| `.md` and `.yaml` twins with mismatched `id` | Schema integrity failure; lookup by ID breaks |
+| `reliability` omitted | Downstream retrieval cannot weight source trustworthiness |
 
-## Critical Boundary
+## Application
 
-| Kind | Contains | Purpose |
-|------|----------|---------|
-| rag_source | URL + metadata | Pointer to external source |
-| knowledge_card | Distilled content | Synthesized knowledge artifact |
-| context_doc | Domain framing | Scoping and context for a domain |
+1. Identify the external URL; validate format (`https://`) and reachability
+2. Write frontmatter: 13 required fields including `url`, `domain`, `last_checked`; `quality: null`
+3. Add recommended fields: `reliability` (high/medium/low), `format`, `extraction_method`, `keywords` (3–8 terms)
+4. Write `## Source Description` — what the source is, who maintains it, why it is authoritative
+5. Write `## Freshness Policy` — re-check cadence + staleness threshold
+6. Write `## Extraction Notes` — method, auth requirements, pagination quirks
+7. Verify body <= 1024 bytes; create `.yaml` machine twin with identical `id`
 
-rag_source POINTS TO content. knowledge_card HAS content. Never conflate.
+## References
 
-## Ingestion Pipeline Position
-```
-External World
-  -> rag_source (catalog: URL + metadata)
-  -> brain_index (periodic crawl + embed)
-  -> vector store (indexed chunks)
-  -> retrieval (similarity search)
-  -> agent (augmented generation)
-```
+- rag-source-builder MANIFEST.md v1.0.0
+- rag_source SCHEMA.md v1.0.0
+- Boundary: rag_source (pointer) vs knowledge_card (distilled content) vs context_doc (domain framing) vs embedding_config (index configuration)

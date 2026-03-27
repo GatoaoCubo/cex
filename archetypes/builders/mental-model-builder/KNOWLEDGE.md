@@ -1,59 +1,70 @@
 ---
 pillar: P01
 llm_function: INJECT
-purpose: Standards and domain knowledge for mental_model (P02) production
-sources: CEX schema, cognitive science, decision theory, agent design patterns
+purpose: Domain knowledge for mental_model production — atomic searchable facts
+sources: mental-model-builder MANIFEST.md + SCHEMA.md, cognitive science, BDI architecture
 ---
 
 # Domain Knowledge: mental_model
 
-## Foundational Concept
-A mental model (P02) is a design-time cognitive blueprint that codifies how an agent
-routes tasks, makes decisions, and prioritizes work. Rooted in cognitive science
-(Johnson-Laird 1983) and decision theory, it provides the reasoning framework that
-an agent internalizes when loaded. Unlike P10 mental_model (runtime session state),
-P02 mental_model is static, versioned, and part of the agent's permanent identity.
+## Executive Summary
 
-## Industry Implementations
+Mental models are design-time cognitive blueprints for agents — structured YAML artifacts encoding routing rules, decision trees, priorities, heuristics, and domain boundaries. Each mental model belongs to exactly ONE agent and defines how that agent thinks, not what it does. They differ from agents (which have capabilities and tools), routers (which route tasks between components), system prompts (which define persona), and P10 runtime state (which is ephemeral) by being static, versioned cognitive maps loaded at agent boot.
 
-| Source | What it defines | CEX alignment |
-|--------|----------------|---------------|
-| Johnson-Laird Mental Models | Internal representations for reasoning | routing_rules + decision_tree |
-| Decision trees (CART/ID3) | If-then branching classifiers | decision_tree object |
-| Expert systems rule engines | Production rules (if condition then action) | routing_rules |
-| Cognitive task analysis | Domain expertise decomposition | domain_map + heuristics |
-| BDI agent architecture | Beliefs, Desires, Intentions | priorities + personality |
+## Spec Table
 
-## Key Patterns
-- Routing specificity: keywords must be concrete nouns/verbs, never vague categories
-- Confidence thresholds: 0.8+ for direct routing, 0.5-0.8 for tentative, <0.5 for fallback
-- Decision tree depth: max 3 levels deep to avoid reasoning complexity
-- Priority ordering: highest first, max 5-7 priorities (Miller's law)
-- Heuristic formulation: "when X, prefer Y because Z" — actionable, not philosophical
-- Domain map: explicit covers/routes_to prevents boundary drift over time
-- Personality coherence: tone + verbosity + risk_tolerance must be consistent
+| Property | Value |
+|----------|-------|
+| Pillar | P02 (design-time spec) |
+| Kind | `mental_model` (exact literal) |
+| ID pattern | `p02_mm_{agent_slug}` |
+| Machine format | YAML |
+| Required frontmatter | 14 fields |
+| Recommended frontmatter | 9 fields (personality, fallback, etc.) |
+| Quality gates | 9 HARD + 12 SOFT |
+| Max body | 2048 bytes |
+| Density minimum | >= 0.80 |
+| Quality field | always `null` |
+| Min routing rules | 3 |
+| Min decision tree conditions | 2 |
 
-## CEX-Specific Extensions
+## Patterns
 
-| Field | Justification | Closest equivalent |
-|-------|--------------|-------------------|
-| routing_rules | Keyword-triggered action routing | Expert system production rules |
-| domain_map.routes_to | Explicit delegation to other agents | No direct equivalent |
-| personality | Behavioral traits as structured data | BDI desires |
-| fallback.escalate_to | Named escalation target | Exception handling |
+| Pattern | Application |
+|---------|-------------|
+| Routing specificity | Keywords must be concrete nouns/verbs, never vague categories |
+| Confidence thresholds | 0.8+ direct routing, 0.5-0.8 tentative, <0.5 fallback |
+| Decision tree depth | Max 3 levels to avoid reasoning complexity |
+| Priority ordering | Highest first, max 5-7 priorities (Miller's law) |
+| Heuristic formulation | "when X, prefer Y because Z" — actionable, not philosophical |
+| Domain map scoping | Explicit covers/routes_to prevents boundary drift |
+| Personality coherence | tone + verbosity + risk_tolerance must be internally consistent |
 
-## Boundary vs Nearby Types
+## Anti-Patterns
 
-| Type | What it is | Why it is NOT mental_model (P02) |
-|------|------------|----------------------------------|
-| mental_model (P10) | Runtime session state (ephemeral, mutable) | P10 changes per session; P02 is permanent design |
-| agent (P02) | Full identity + capabilities + iso_vectorstore | Agent is WHAT; mental_model is HOW it thinks |
-| router (P02) | Task-to-satellite routing rules | Router routes tasks externally; mental_model guides internal decisions |
-| system_prompt (P03) | Persona and rules for LLM | How agent speaks; not how it decides |
-| decision_tree (standalone) | Generic classifier | CEX mental_model embeds decision_tree as one component |
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| `pillar: P10` on a mental_model | P10 is runtime state; mental_model is design-time P02 |
+| Fewer than 3 routing rules | Fails HARD gate — insufficient routing coverage |
+| Single-branch decision tree | Minimum 2 conditions required |
+| Self-assigned quality score | `quality` must be null at creation |
+| Generic heuristics | Must reflect actual agent edge cases, not platitudes |
+| Mixing agent identity into mental_model | agent-builder owns identity; mental_model owns cognition |
+| Vague keywords ("stuff", "things") | No routing signal; use domain-specific terms |
+
+## Application
+
+1. Identify target agent slug (e.g., `research_agent` -> `p02_mm_research_agent`)
+2. Write frontmatter: all 14 required fields; set `quality: null`, `pillar: P02`
+3. Define `routing_rules`: minimum 3 entries with keywords, action, confidence
+4. Define `decision_tree`: minimum 2 if/then/else branches
+5. Order `priorities` list highest-first (max 7 items)
+6. Write `heuristics` as concise rules for domain-specific edge cases
+7. Define `domain_map`: explicit scope IN and OUT boundaries
+8. Validate: body <= 2048 bytes, id == filename stem, 9 HARD + 12 SOFT gates
 
 ## References
+
+- mental-model-builder SCHEMA.md v1.0.0
 - Johnson-Laird 1983 — Mental Models
-- CEX P02_model/_schema.yaml — canonical mental_model fields
 - BDI architecture — Belief-Desire-Intention agent model
-- TAXONOMY_LAYERS.yaml — P02/P10 overlap resolution

@@ -1,70 +1,74 @@
 ---
-pillar: P01
+pillar: P04
 llm_function: INJECT
-purpose: Standards and domain knowledge for skill production
-sources: CEX schema, CODEXA skill corpus (118+ skills), LangChain tools, ReAct pattern
+purpose: Domain knowledge for skill production — atomic searchable facts
+sources: skill-builder MANIFEST.md + SCHEMA.md
 ---
 
 # Domain Knowledge: skill
 
-## Foundational Concept
-A skill is a reusable, phase-structured capability that an agent or user invokes via a
-defined trigger. Unlike an agent (which has identity/persona) or an action_prompt (which
-is just text), a skill has explicit lifecycle phases — each with named input, action, and
-output — making it composable, testable, and auditable. Skills are the MOST NUMEROUS
-artifact type in mature agentic systems (118+ in CODEXA alone).
+## Executive Summary
 
-## Skill vs Adjacent Types
+Skills are reusable, phase-structured capabilities with a defined trigger — the bridge between a raw LLM and a repeatable workflow. Each skill has an ordered phase list (discover/configure/execute/validate) and a precise invocation pattern. Unlike agents (which carry identity/persona) or action_prompts (single-shot task text), skills are stateless capability definitions with no "You are" language and no task instructions.
 
-| Type | Has identity | Has phases | Has trigger | When to use |
-|------|-------------|------------|-------------|-------------|
-| skill (P04) | NO | YES | YES | Reusable capability, structured workflow |
-| agent (P02) | YES | NO | NO | Full persona with tools and routing |
-| action_prompt (P03) | NO | NO | YES | Single-shot prompt with no internal structure |
-| component (P04) | NO | NO | NO | Atomic pipeline block, no lifecycle |
-| hook (P04) | NO | NO | event | Single pre/post event handler |
+## Spec Table
 
-Rule: "does it need multiple steps with named boundaries and reuse across agents?" -> skill.
+| Property | Value |
+|----------|-------|
+| Pillar | P04 |
+| Format | YAML (frontmatter) + Markdown (body) |
+| Naming | `p04_skill_{name}.md` + `.yaml` |
+| ID regex | `^p04_skill_[a-z][a-z0-9_]+$` |
+| Max body bytes | 5120 |
+| Required frontmatter fields | 16 |
+| Optional frontmatter fields | 4: references_dir, sub_skills, platforms, stack_default |
+| Quality gates | 7 HARD + 10 SOFT |
+| description max | 120 characters |
+| Minimum phases | 2 |
+| Maximum phases | 6 |
+| quality field | null always — invariant |
 
-## Lifecycle Phases Pattern
-The canonical skill lifecycle has 4 named phases:
+## Patterns
 
-| Phase | Purpose | What happens |
-|-------|---------|-------------|
-| discover | Find relevant context | Query brain, read files, gather inputs |
-| configure | Set parameters | Validate inputs, apply defaults, check constraints |
-| execute | Do the work | Core logic: transform, produce, call tools |
-| validate | Verify output | Quality check, gate pass/fail, signal result |
+| Pattern | Rule |
+|---------|------|
+| Phase alignment | `phases` list in frontmatter MUST match `## Workflow Phases` subsections in body (1:1) |
+| Slash command trigger | `user_invocable: true` REQUIRES trigger to start with `/` |
+| Agent-invoked trigger | `user_invocable: false` + keyword or event trigger (no slash) |
+| No persona | Skills NEVER contain "You are" — capability only, not identity |
+| Parallel lists | `when_to_use` and `when_not_to_use` MUST be at the same abstraction level |
+| id == filename stem | `p04_skill_deploy.md` → `id: p04_skill_deploy` |
+| Sub-skills | Delegate to other skill IDs via `sub_skills` list; never re-implement inline |
+| Canonical phases | discover → configure → execute → validate |
 
-Not all skills need all 4 phases. Minimum: 2 phases. Maximum: 6 phases.
+- **Body sections**: Purpose → Workflow Phases → Anti-Patterns → Metrics
+- **Per-phase structure**: input / action / output clearly named
 
-## Trigger Patterns
+## Anti-Patterns
 
-| Pattern | user_invocable | Example |
-|---------|---------------|---------|
-| slash command | true | `/commit`, `/review-pr`, `/ship` |
-| keyword match | false | "when agent detects X" |
-| event-driven | false | "on file_write complete" |
-| agent-invoked | false | `skill.execute("p04_skill_deploy")` |
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| "You are an expert…" in skill body | Skills have no persona; identity belongs in system_prompt |
+| phases list mismatched to body subsections | Hard gate failure; names must be 1:1 with body |
+| `user_invocable: true` with non-slash trigger | Schema violation; slash command required for user-invocable |
+| Single monolithic phase | Loses phase contract; minimum 2 distinct phases with named boundaries |
+| Missing `when_not_to_use` | Routing ambiguity; consumers cannot exclude skill correctly |
+| Task instructions embedded in skill | Skill defines capability shape, not execution content |
+| God skill (8+ unrelated actions) | Split into focused sub_skills |
 
-Rule: user_invocable: true REQUIRES trigger to start with `/`.
+## Application
 
-## CEX-Specific Constraints
-- id must match `^p04_skill_[a-z][a-z0-9_]+$`
-- phases list in frontmatter MUST match `## Workflow Phases` subsections in body
-- max_bytes: 5120 — skills are operational tools, not documentation
-- quality: null (never self-score)
-- No persona language in body ("You are", "I will") — skills are capability, not identity
-
-## Anti-Patterns in Production
-- **Phase soup**: phases with overlapping responsibilities — split into atomic phases
-- **Identity leak**: writing "You are a deploy specialist" in skill body — that belongs in system_prompt
-- **Trigger ambiguity**: trigger: "when needed" — triggers must be specific and unambiguous
-- **No anti-patterns section**: every skill must document what NOT to do
-- **God skill**: one skill doing 8 unrelated things — split into sub_skills
+1. Define the single reusable capability domain
+2. Decompose into 2–6 ordered phases (minimum: execute + validate)
+3. Write frontmatter: all 16 required fields, set `user_invocable` and `trigger` correctly
+4. If `user_invocable: true`, set trigger to `/skill-name` slash command
+5. Write body: Purpose → one `###` subsection per phase (input/action/output) → Anti-Patterns → Metrics
+6. Verify `phases` list matches body subsection names exactly
+7. Set `quality: null`
+8. Check body ≤ 5120 bytes
 
 ## References
-- CODEXA skill corpus: `records/skills/*/SKILL.md` (118 skills)
-- P04 schema: `P04_tools/_schema.yaml`
-- ReAct pattern: Yao et al. 2022 (reason + act cycles map to skill phases)
-- LangChain Tools: structured tool definition with name + description + run()
+
+- Schema: skill SCHEMA.md (P06)
+- Pillar: P04 (skills + hooks)
+- Boundary: system_prompt (identity), action_prompt (single-shot task), hook (event-driven, not phase-based)

@@ -1,59 +1,77 @@
 ---
 pillar: P01
 llm_function: INJECT
-purpose: Standards and domain knowledge for parser production
-sources: CEX taxonomy, data extraction patterns, regex standards, structured output literature
+purpose: Domain knowledge for parser production — atomic searchable facts
+sources: parser-builder MANIFEST.md + SCHEMA.md, regex standards, JSONPath RFC 9535
 ---
 
 # Domain Knowledge: parser
 
-## Foundational Concept
-A parser is a data extraction artifact that converts raw, semi-structured, or unstructured
-output into typed structured data. In LLM-powered systems, parsers bridge the gap between
-free-form model output and downstream systems that require structured input. The CEX parser
-(P05) defines extraction rules (regex, JSON paths, selectors) with error handling and
-normalization, producing consistent structured output from variable raw input.
+## Executive Summary
 
-## Industry Implementations
+Parsers are data extraction artifacts that convert raw, semi-structured, or unstructured output into typed structured data. Each parser declares extraction rules (regex, JSON paths, CSS selectors, or LLM-based), error handling strategy, and normalization pipeline. They differ from formatters (which present output), validators (which check content), naming rules (which define naming conventions), and scrapers (which collect from web) by transforming local raw input into structured, typed output.
 
-| Source | What it defines | CEX alignment |
-|--------|----------------|---------------|
-| BeautifulSoup/lxml | HTML/XML parsing with selectors | css_selector and xpath methods |
-| jq/JSONPath | JSON field extraction | json_path method |
-| Regular expressions | Pattern-based text extraction | regex method |
-| LangChain output parsers | LLM output to structured types | llm_extract method |
-| Pydantic | Schema validation + parsing | output_format: typed_object |
+## Spec Table
 
-## Key Patterns
-- Method selection: use json_path for JSON, css_selector for HTML, regex for free text
-- Required vs optional: at least one extraction must be required
-- Error strategy hierarchy: fail (strict) > retry (resilient) > default (tolerant) > skip (lenient)
-- Normalization pipeline: extract first, normalize second (trim, lowercase, type cast)
-- Fallback extraction: if primary method fails, try simpler alternative
-- Chunking: for large inputs, split into manageable chunks before parsing
-- Streaming: for real-time inputs, parse incrementally without buffering entire input
-- LLM extraction: use llm_extract only when pattern-based methods cannot work
+| Property | Value |
+|----------|-------|
+| Pillar | P05 (formatting/extraction) |
+| Kind | `parser` (exact literal) |
+| ID pattern | `p05_parser_{slug}` |
+| Required frontmatter | 14 fields |
+| Quality gates | 8 HARD + 10 SOFT |
+| Max body | 3072 bytes |
+| Density minimum | >= 0.80 |
+| Quality field | always `null` |
+| Extraction methods | regex, json_path, css_selector, xpath, llm_extract |
+| Error strategies | fail, retry, default, skip |
 
-## CEX-Specific Extensions
+## Patterns
 
-| Field | Justification | Closest equivalent |
-|-------|--------------|-------------------|
-| extraction_count | Integrity check: frontmatter matches body | No direct equivalent |
-| error_strategy | CEX mandates explicit error handling for every parser | LangChain retry_parser |
-| normalization | Post-extraction transform pipeline | Pydantic validators |
-| llm_extract method | CEX supports LLM-as-parser for complex extraction | LangChain structured output |
+| Pattern | Application |
+|---------|-------------|
+| Method selection | json_path for JSON, css_selector for HTML, regex for free text, llm_extract as last resort |
+| Error strategy hierarchy | fail (strict) > retry (resilient) > default (tolerant) > skip (lenient) |
+| Required vs optional extractions | At least one extraction must be required |
+| Normalization pipeline | Extract first, normalize second (trim, lowercase, type cast) |
+| Fallback extraction | If primary method fails, try simpler alternative method |
+| Chunking for large inputs | Split into manageable chunks before parsing |
+| LLM extraction | Use only when pattern-based methods cannot work |
 
-## Boundary vs Nearby Types
+### Method Decision Table
 
-| Type | What it is | Why it is NOT parser |
-|------|------------|---------------------|
-| formatter (P05) | Output presentation (pretty print, template) | PRESENTS data, does not EXTRACT |
-| validator (P06) | Content validation against rules | VALIDATES data, does not EXTRACT |
-| naming_rule (P05) | Naming convention definition | NAMES things, does not EXTRACT data |
-| scraper (P04) | Web data collection tool | COLLECTS from web, parser PROCESSES local data |
+| Input Format | Primary Method | Fallback |
+|-------------|---------------|----------|
+| JSON | json_path | regex |
+| HTML | css_selector | xpath |
+| Free text | regex | llm_extract |
+| Log files | regex with named groups | line-by-line split |
+| XML | xpath | css_selector |
+
+## Anti-Patterns
+
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| No error strategy defined | Undefined behavior on extraction failure |
+| LLM extraction as first choice | Expensive and non-deterministic; use pattern-based first |
+| All extractions optional | No guaranteed output fields; downstream consumers break |
+| Missing normalization step | Raw extracted values vary in format (whitespace, case) |
+| No extraction_count in frontmatter | Cannot verify body matches declared extractions |
+| Regex without named groups | Positional capture is fragile; named groups are self-documenting |
+
+## Application
+
+1. Analyze input format (JSON, HTML, free text, logs, XML)
+2. Select primary extraction method and fallback
+3. Define each extraction: field name, method, pattern/path, required/optional
+4. Set error_strategy per extraction (fail/retry/default/skip)
+5. Define normalization steps (trim, lowercase, type cast, etc.)
+6. Set extraction_count in frontmatter matching body extractions
+7. Validate: body <= 3072 bytes, density >= 0.80, 8 HARD + 10 SOFT gates
 
 ## References
-- CEX TAXONOMY_LAYERS.yaml — parser in runtime layer
-- CEX SEED_BANK.yaml — P05_parser seeds
-- Regular expressions: PCRE2 syntax
-- JSONPath specification: RFC 9535
+
+- parser-builder SCHEMA.md v1.0.0
+- JSONPath specification (RFC 9535)
+- PCRE2 regex syntax
+- CSS Selectors Level 4 (W3C)

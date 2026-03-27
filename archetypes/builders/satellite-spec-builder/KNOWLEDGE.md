@@ -1,61 +1,71 @@
 ---
 pillar: P01
 llm_function: INJECT
-purpose: Standards and domain knowledge for satellite_spec production
-sources: [microservices architecture, multi-agent systems, CEX satellite model]
+purpose: Domain knowledge for satellite_spec production — atomic searchable facts
+sources: satellite-spec-builder MANIFEST.md + SCHEMA.md, microservices architecture, multi-agent systems
 ---
 
 # Domain Knowledge: satellite_spec
 
-## Foundational Concept
-Satellite specs define autonomous processing units in multi-agent architectures.
-Rooted in microservices architecture (bounded contexts, independent deployment),
-multi-agent systems (specialized roles, message passing), and the CEX fractal model
-where each satellite owns a domain, runs a specific LLM, and communicates via signals.
+## Executive Summary
 
-## Industry Implementations
+Satellite specs define autonomous processing units in multi-agent architectures — each spec declares one satellite's domain, LLM model, MCP servers, boot sequence, constraints, and dispatch keywords. Each satellite owns ONE domain with no cross-domain responsibilities. They differ from agents (individual entities inside a satellite), boot configs (how to start a provider), patterns (abstract reusable solutions), and spawn configs (runtime launch parameters) by being the complete architectural specification of what a satellite IS and what it does.
 
-| Source | What it defines | CEX alignment |
-|--------|----------------|---------------|
-| Microservices (Newman 2015) | Independent services with bounded contexts | satellite = bounded service |
-| Multi-Agent Systems (Wooldridge 2009) | Autonomous agents with roles and coordination | satellite = autonomous agent cluster |
-| Kubernetes Pod Spec | Container orchestration with resource limits | scaling + monitoring fields |
-| AWS Lambda Function Config | Serverless function with timeout, memory, triggers | constraints + dispatch fields |
-| Docker Compose Service | Service definition with deps, ports, env | dependencies + boot_sequence |
+## Spec Table
 
-## Key Patterns
-- Each satellite owns ONE domain (no cross-domain responsibilities)
-- Model selection matches task complexity (opus for reasoning, sonnet for speed)
-- MCP servers are the satellite's external tool interface
-- Boot sequence is ORDERED and IDEMPOTENT
-- Constraints define BOUNDARIES, not aspirations
-- Dispatch keywords are the routing contract with the orchestrator
-- Scaling limits prevent resource exhaustion (BSOD at >4 concurrent)
-- Monitoring enables autonomous recovery (signal on complete/failure)
-- Dependencies are EXPLICIT: no hidden couplings
+| Property | Value |
+|----------|-------|
+| Pillar | P08 (architecture) |
+| Kind | `satellite_spec` (exact literal) |
+| ID pattern | `p08_sat_{slug}` |
+| Required frontmatter | 24+ fields |
+| Quality gates | 10 HARD + 10 SOFT |
+| Max body | 4096 bytes |
+| Density minimum | >= 0.80 |
+| Quality field | always `null` |
+| Key fields | role, model, mcps, domain, boot_sequence, dispatch_keywords |
+| Scaling limit | Max 3 concurrent + orchestrator (BSOD at >4) |
 
-## CEX-Specific Extensions
+## Patterns
 
-| Field | Justification | Closest equivalent |
-|-------|--------------|-------------------|
-| mcps | CEX uses MCP protocol for tool access | K8s sidecar containers |
-| dispatch_keywords | Orchestrator routes by keyword matching | API gateway routing rules |
-| boot_sequence | Satellite-specific ordered init | Docker entrypoint + healthcheck |
-| mcp_config_file | Per-satellite MCP config path | K8s ConfigMap mount |
-| runtime | Engine choice (claude, codex) | K8s container runtime |
+| Pattern | Application |
+|---------|-------------|
+| Single domain ownership | Each satellite owns ONE domain; no cross-domain responsibilities |
+| Model-to-task matching | opus for reasoning-heavy; sonnet for speed/volume |
+| MCP as tool interface | MCP servers are the satellite's external tool access |
+| Ordered boot sequence | Idempotent, ordered initialization steps |
+| Constraints as boundaries | Define what satellite CANNOT do, not aspirations |
+| Dispatch keywords as contract | Routing contract with orchestrator; concrete nouns/verbs |
+| Explicit dependencies | No hidden couplings between satellites |
+| Signal-based monitoring | Signal on complete/failure enables autonomous recovery |
 
-## Boundary vs Nearby Types
+## Anti-Patterns
 
-| Type | What it is | Why it is NOT satellite_spec |
-|------|------------|---------------------------|
-| agent (P02) | Individual agent identity with tools | agent is ONE entity INSIDE satellite; satellite_spec is the WHOLE unit |
-| boot_config (P02) | Per-provider init config | boot_config is HOW to start; satellite_spec is WHAT to start |
-| pattern (P08) | Reusable design pattern | pattern is ABSTRACT; satellite_spec is CONCRETE instance |
-| law (P08) | Inviolable operational rule | law CONSTRAINS all satellites; satellite_spec defines ONE |
-| spawn_config (P12) | Runtime spawn parameters | spawn_config is HOW to launch; satellite_spec is WHAT is launched |
-| dispatch_rule (P12) | Single routing rule | dispatch_rule is ONE route; satellite_spec contains ALL routes for a satellite |
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| Cross-domain responsibilities | Violates single-domain principle; creates coupling |
+| Missing boot sequence | Cannot reliably start or recover the satellite |
+| No dispatch keywords | Orchestrator cannot route tasks to this satellite |
+| Constraints section empty | No boundaries = scope creep inevitable |
+| > 4 concurrent satellites | Resource exhaustion; system instability |
+| Hidden dependencies | Undeclared coupling causes cascade failures |
+| No monitoring/signal config | Cannot detect completion or failure |
+
+## Application
+
+1. Define satellite role and domain (ONE domain only)
+2. Select LLM model matching task complexity
+3. List MCP servers with config file path
+4. Define ordered, idempotent boot sequence
+5. Set constraints (what satellite CANNOT do)
+6. Define dispatch keywords (routing contract)
+7. Specify scaling limits and monitoring config
+8. Document dependencies explicitly
+9. Validate: 10 HARD + 10 SOFT gates, body <= 4096 bytes
 
 ## References
-- Newman, Sam. Building Microservices (2015) — Bounded contexts
-- Wooldridge, Michael. Introduction to MultiAgent Systems (2009) — Agent architecture
-- Kubernetes Pod Specification — Resource limits and health checks
+
+- satellite-spec-builder SCHEMA.md v1.0.0
+- Newman, Sam. Building Microservices (2015)
+- Wooldridge, Michael. Introduction to MultiAgent Systems (2009)
+- Kubernetes Pod Specification (resource limits, health checks)

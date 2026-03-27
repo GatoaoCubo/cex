@@ -1,69 +1,71 @@
 ---
 pillar: P01
 llm_function: INJECT
-purpose: Standards and domain knowledge for plugin production
-sources: CEX taxonomy, plugin architecture patterns, modular design, extension systems
+purpose: Domain knowledge for plugin production — atomic searchable facts
+sources: plugin-builder MANIFEST.md + SCHEMA.md, VS Code extensions, WordPress plugins
 ---
 
 # Domain Knowledge: plugin
 
-## Foundational Concept
-A plugin is a modular extension artifact that adds capabilities to a host system through a
-defined interface contract. Unlike hooks (single-event) or skills (multi-phase workflows),
-plugins provide a complete API surface with lifecycle management, configuration, dependency
-resolution, and isolation. The CEX plugin (P04) defines interface contracts, API methods,
-config schemas, and lifecycle hooks that enable extensibility without modifying core code.
+## Executive Summary
 
-## Industry Implementations
+Plugins are modular extension artifacts that add capabilities to a host system through a defined interface contract with lifecycle management. Each plugin declares the interface it implements, API surface with method signatures, config schema, lifecycle hooks (minimum on_load/on_unload), and isolation level. They differ from hooks (single-event interception), skills (multi-phase workflows), MCP servers (protocol-based providers), and connectors (external service integrations) by providing a complete pluggable API surface with explicit lifecycle and isolation.
 
-| Source | What it defines | CEX alignment |
-|--------|----------------|---------------|
-| VS Code extensions | Extension API + activation events | interface + lifecycle pattern |
-| WordPress plugins | Hook system + admin config | api_surface + config_schema |
-| Webpack plugins | Compiler hooks + tap pattern | lifecycle + on_load/on_unload |
-| Kubernetes operators | CRD + controller pattern | interface contract + API surface |
-| Grafana plugins | Panel/datasource types + config | isolation + config_schema |
-| ESLint plugins | Rule + processor interface | interface contract + API methods |
+## Spec Table
 
-## Key Patterns
-- Interface contract first: define what the plugin MUST implement before writing code
-- Lifecycle is mandatory: on_load initializes, on_unload cleans up (resource leak prevention)
-- Explicit dependencies: declare all requirements with version constraints
-- Isolation levels: sandboxed (no host access), shared (read host), privileged (full access)
-- Config over code: behavior changes via config_schema, not code modification
-- Hot-reload: on_config_change enables live reconfiguration without restart
-- API surface minimalism: expose only intentional methods, hide internals
-- Priority ordering: lower priority loads first (infrastructure before features)
-- Version constraints: semver ranges prevent incompatible plugin loading
-- Testing in isolation: mock host interface for unit tests, real host for integration
+| Property | Value |
+|----------|-------|
+| Pillar | P04 (tools/infrastructure) |
+| Kind | `plugin` (exact literal) |
+| ID pattern | `p04_plug_{slug}` |
+| Required frontmatter | 16 fields |
+| Quality gates | 9 HARD + 12 SOFT |
+| Max body | 4096 bytes |
+| Density minimum | >= 0.80 |
+| Quality field | always `null` |
+| Min lifecycle hooks | 2 (on_load + on_unload) |
+| Min API surface entries | 1 (method + signature + return type) |
+| Isolation levels | sandboxed, shared, privileged |
 
-## CEX-Specific Extensions
+## Patterns
 
-| Field | Justification | Closest equivalent |
-|-------|--------------|-------------------|
-| api_surface_count | Integrity check: frontmatter matches body | No direct equivalent |
-| isolation | CEX mandates explicit isolation declaration | Docker --privileged flag |
-| lifecycle list | CEX requires explicit lifecycle event support declaration | VS Code activationEvents |
-| config_schema | Inline schema definition for plugin configuration | JSON Schema for extension settings |
+| Pattern | Application |
+|---------|-------------|
+| Interface contract first | Define what plugin MUST implement before writing code |
+| Mandatory lifecycle | on_load initializes, on_unload cleans up (leak prevention) |
+| Explicit dependencies | Declare all requirements with semver version constraints |
+| Isolation declaration | sandboxed (no host access), shared (read host), privileged (full) |
+| Config over code | Behavior changes via config_schema, not code modification |
+| Hot-reload guard | If hot_reload: true, lifecycle MUST include on_config_change |
+| API surface minimalism | Expose only intentional methods; hide internals |
+| Priority ordering | Lower priority loads first (infrastructure before features) |
 
-## Boundary vs Nearby Types
+## Anti-Patterns
 
-| Type | What it is | Why it is NOT plugin |
-|------|------------|---------------------|
-| hook (P04) | Single-event interception | INTERCEPTS one event, plugin EXTENDS with full API |
-| skill (P04) | Multi-phase reusable capability | Has PHASES and workflow, plugin has INTERFACE and API |
-| mcp_server (P04) | MCP protocol server | Implements MCP PROTOCOL, plugin implements custom interface |
-| daemon (P04) | Persistent background process | RUNS continuously, plugin is LOADED on demand |
-| connector (P04) | External service integration | CONNECTS to external service, plugin EXTENDS internal system |
-| client (P04) | API consumer | CONSUMES external API, plugin PROVIDES internal API |
-| cli_tool (P04) | Command-line tool | USER-INVOKED, plugin is SYSTEM-LOADED |
-| scraper (P04) | Web data extractor | COLLECTS from web, plugin EXTENDS internal system |
-| component (P04) | Atomic pipeline block | COMPOSABLE in pipeline, plugin is PLUGGABLE in host |
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| No interface field | Plugin without declared interface is an orphan |
+| Missing on_load/on_unload | Fails HARD gate — minimum lifecycle required |
+| API surface without method signatures | Callers need concrete API, not descriptions |
+| hot_reload: true without on_config_change | Hot-reload without config handler causes stale state |
+| No isolation_level declared | Unknown side-effect scope; security risk |
+| No version_constraints for host | Incompatible host version causes silent failures |
+| Privileged isolation without justification | Violates least privilege principle |
 
-Regra: "como adicionar esta capacidade como extensao plugavel?" -> plugin.
+## Application
+
+1. Identify the host interface this plugin implements
+2. Define API surface: method name, signature, return type per method
+3. Declare lifecycle hooks (minimum: on_load, on_unload)
+4. Set isolation_level (sandboxed/shared/privileged)
+5. Define config_schema with fields, types, and defaults
+6. List dependencies with semver version constraints
+7. Set hot_reload flag; add on_config_change if true
+8. Validate: 9 HARD + 12 SOFT gates, body <= 4096 bytes
 
 ## References
-- CEX TAXONOMY_LAYERS.yaml — plugin in runtime layer
-- CEX SEED_BANK.yaml — P04_plugin seeds
-- Martin Fowler: Plugin Architecture pattern
+
+- plugin-builder SCHEMA.md v1.0.0
 - VS Code Extension API documentation
+- Martin Fowler: Plugin Architecture pattern
+- WordPress Plugin API

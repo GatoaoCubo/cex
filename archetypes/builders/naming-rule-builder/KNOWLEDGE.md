@@ -1,63 +1,74 @@
 ---
 pillar: P01
 llm_function: INJECT
-kind: knowledge
-domain: naming_rule
-version: 1.0.0
+purpose: Domain knowledge for naming_rule production — atomic searchable facts
+sources: naming-rule-builder MANIFEST.md + SCHEMA.md, PEP 8, BEM CSS, DNS naming, NPM
 ---
 
-# Knowledge — Naming Rule Builder
+# Domain Knowledge: naming_rule
 
-## Foundational Concepts
+## Executive Summary
 
-A naming rule is a formal specification that defines the string format any artifact, file, variable, or entity within a bounded scope must follow. It is the single source of truth for "what is this thing called and how is that name structured."
+Naming rules are formal specifications defining the string format that artifacts, files, variables, or entities within a bounded scope must follow. Each rule declares a regex pattern, case style, prefix/suffix conventions, and collision resolution strategy. They differ from validators (which check content against rules), formatters (which present output), parsers (which extract data), and type definitions (which categorize abstractly) by being the single source of truth for "how is this thing named."
 
-Naming rules serve three functions:
-1. **Consistency** — humans and machines resolve names predictably
-2. **Parseability** — automated tools can extract metadata from the name itself
-3. **Collision avoidance** — well-scoped patterns prevent name conflicts
+## Spec Table
 
-## Industry Naming Standards Reference
+| Property | Value |
+|----------|-------|
+| Pillar | P05 (formatting/convention) |
+| Kind | `naming_rule` (exact literal) |
+| ID pattern | `p05_nr_{scope_slug}` |
+| Required frontmatter | 14 fields |
+| Quality gates | 8 HARD + 10 SOFT |
+| Max body | 3072 bytes |
+| Density minimum | >= 0.80 |
+| Quality field | always `null` |
+| Key fields | regex, case_style, scope, prefix, separator |
 
-| Standard | Domain | Case Style | Example |
-|----------|--------|-----------|---------|
-| PEP 8 | Python | snake_case (vars), PascalCase (classes) | `my_variable`, `MyClass` |
-| Google Style | Multi-lang | camelCase (JS), snake_case (Python) | `myVariable`, `my_variable` |
-| BEM CSS | UI components | block__element--modifier | `card__title--active` |
-| DNS naming | Hostnames | kebab-case, lowercase, max 63 chars | `api-prod-v2.service.io` |
-| NPM packages | JS packages | kebab-case, lowercase, no spaces | `my-package-name` |
-| Java packages | JVM | reverse-domain dot-notation lowercase | `com.company.module.sub` |
-| AWS resources | Cloud | kebab-case or snake_case by service | `my-s3-bucket`, `my_lambda` |
-| Kubernetes | Infra | kebab-case, lowercase, max 253 chars | `my-deployment-v2` |
+## Patterns
 
-## Key Naming Patterns
+| Pattern | Application |
+|---------|-------------|
+| Pillar prefix | `p{NN}_` scopes artifact to pillar (e.g., `p01_`, `p05_`) |
+| Kind abbreviation | Short token after prefix: kc, nr, mc, sig |
+| Regex validation | Machine-checkable pattern: `^p05_nr_[a-z][a-z0-9_]+$` |
+| Case style declaration | One of: snake_case, kebab-case, PascalCase, camelCase |
+| Collision resolution | Strategy for conflicts: append sequence number, hash suffix, or reject |
+| Scope boundary | Naming rule applies to ONE artifact kind or ONE namespace |
 
-1. **Pillar prefix**: `p{NN}_` — scopes artifact to CEX pillar (e.g., `p01_`, `p05_`)
-2. **Kind abbreviation**: short token after prefix identifies artifact kind (e.g., `kc`, `nr`, `mc`)
-3. **Scope slug**: kebab-case or snake_case descriptor of the artifact's subject
-4. **Version suffix**: `_v{N}` or `-v{N}` appended when versioning is needed
-5. **Environment tag**: `_prod`, `_dev`, `_test` as terminal segment when env-scoped
-6. **Date stamp**: `_YYYYMMDD` or `_YYYY-MM-DD` for temporal artifacts
-7. **Sequence number**: `_{NNN}` zero-padded for ordered series
-8. **Hash suffix**: `_{8hex}` for content-addressed artifacts
+### Common Case Styles
 
-## CEX Naming Extensions
+| Style | Example | Domain |
+|-------|---------|--------|
+| snake_case | `my_variable` | Python, YAML keys, file stems |
+| kebab-case | `my-component` | URLs, CSS, package names, directory names |
+| PascalCase | `MyClass` | Classes, types, components |
+| camelCase | `myFunction` | JavaScript functions, JSON keys |
 
-| Kind | Pattern | Example |
-|------|---------|---------|
-| knowledge_card | `p01_kc_{topic_slug}.md` | `p01_kc_vector_search.md` |
-| model_card | `p02_mc_{provider}_{model_slug}.md` | `p02_mc_openai_gpt4o.md` |
-| naming_rule | `p05_nr_{scope_slug}.md` | `p05_nr_knowledge_card.md` |
-| signal | `p12_sig_{event}.json` | `p12_sig_task_complete.json` |
-| builder dir | `{kind}-builder/` (kebab-case) | `naming-rule-builder/` |
+## Anti-Patterns
 
-## Boundary Table
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| No regex pattern | Cannot machine-validate; enforcement is manual-only |
+| Mixed case styles in one scope | Inconsistent; tools cannot predict name format |
+| No collision resolution strategy | Name conflicts cause silent overwrites |
+| Scope: "all artifacts" | Too broad; different kinds need different patterns |
+| Prefix without pillar number | Loses namespace scoping; collisions across pillars |
+| Missing separator specification | Ambiguous: is it `my_name` or `my-name`? |
 
-| Artifact | Answers | NOT this builder |
-|----------|---------|-----------------|
-| naming_rule (THIS) | "What format must the name follow?" | |
-| response_format (P05 sibling) | "How should the LLM format its reply?" | NOT naming |
-| parser (P05 sibling) | "How to extract data from LLM output?" | NOT naming |
-| formatter (P05 sibling) | "How to render data into a target format?" | NOT naming |
-| validator (P06 — confused) | "Does this artifact's content meet spec?" | NOT naming |
-| type_def (P06 — confused) | "What abstract category does this belong to?" | NOT naming |
+## Application
+
+1. Define the scope: which artifact kind or namespace does this rule govern?
+2. Choose case_style (snake_case, kebab-case, PascalCase, camelCase)
+3. Define prefix pattern (e.g., `p05_nr_`) and separator
+4. Write regex pattern for machine validation
+5. Specify collision resolution strategy
+6. Provide 3+ valid examples and 3+ invalid examples
+7. Validate: body <= 3072 bytes, density >= 0.80, 8 HARD + 10 SOFT gates
+
+## References
+
+- naming-rule-builder SCHEMA.md v1.0.0
+- PEP 8 (Python naming conventions)
+- BEM CSS naming methodology
+- DNS naming (RFC 1035, max 63 chars per label)

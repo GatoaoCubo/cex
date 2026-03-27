@@ -1,55 +1,75 @@
 ---
-pillar: P01
+pillar: P12
 llm_function: INJECT
-purpose: Standards and domain knowledge for spawn_config production
-sources: CODEXA spawn system, Claude Code CLI, PowerShell automation
+purpose: Domain knowledge for spawn_config production — atomic searchable facts
+sources: spawn-config-builder MANIFEST.md + SCHEMA.md
 ---
 
 # Domain Knowledge: spawn_config
 
-## Foundational Concept
-Spawn configuration defines HOW a satellite process is launched — what CLI flags,
-model, MCP servers, timeout, and interaction mode to use. In CODEXA, satellites are
-Claude Code instances spawned via PowerShell scripts (spawn_solo.ps1, spawn_grid.ps1)
-that read spawn_config to determine execution parameters.
+## Executive Summary
 
-## Industry Implementations
+Spawn configs are YAML artifacts that define exactly how a satellite agent is launched — CLI flags, model, timeout, MCP profile, and prompt delivery strategy. They encode the spawn contract so the same satellite can be reliably re-launched without manual CLI assembly. Unlike signals (runtime status) or dispatch_rules (routing policy), spawn configs are static pre-launch recipes that exist before the satellite process starts.
 
-| Source | What it defines | CEX alignment |
-|--------|----------------|---------------|
-| Docker Compose | Service definition with resources/networking | Analogous: our satellite definition |
-| Kubernetes Pod Spec | Container config with resources/probes | Similar: flags, timeout, health |
-| Claude Code CLI | --model, --mcp-config, -p flags | Direct: our flags list |
-| PM2 ecosystem | Process manager config (instances, env) | Similar: mode, restart policy |
+## Spec Table
 
-## Key Patterns
-- Baseline flags: --dangerously-skip-permissions + --no-chrome mandatory for all spawns
-- Non-interactive flag: -p skips workspace trust prompt (critical for automation)
-- Prompt sizing: inline < 200 chars, handoff file for longer tasks
-- MCP isolation: per-satellite .mcp-{sat}.json prevents tool leakage
-- Timeout budgeting: research ~30min, build ~45min, deploy ~15min
-- Interactive mode: /k keeps terminal open for monitoring and debugging
-- Grid concurrency: max 3 satellites + STELLA to prevent BSOD
+| Property | Value |
+|----------|-------|
+| Pillar | P12 (orchestration) |
+| Format | YAML |
+| Naming | `p12_spawn_{mode_slug}.yaml` |
+| ID regex | `^p12_spawn_[a-z][a-z0-9_]+$` |
+| Max body bytes | 3072 |
+| Required frontmatter fields | 19 |
+| Recommended frontmatter fields | 4: mcp_config, interactive, prompt_strategy, domain |
+| mode enum | `solo` / `grid` / `continuous` |
+| model values | `opus`, `sonnet`, `haiku` |
+| prompt_strategy enum | `inline` (< 200 chars) / `handoff` (longer tasks) |
+| quality field | null always — invariant |
+| tldr max | 160 characters |
 
-## CEX-Specific Extensions
+## Patterns
 
-| Field | Justification | Closest equivalent |
-|-------|--------------|-------------------|
-| mode | solo/grid/continuous dispatch modes | Docker Compose profiles |
-| prompt_strategy | inline vs handoff file | No direct equivalent |
-| mcp_config | Per-satellite MCP server isolation | Docker network isolation |
-| interactive | Terminal persistence for monitoring | Docker -it flag |
+| Pattern | Rule |
+|---------|------|
+| Mode selection | solo = 1 satellite 1 task; grid = parallel fixed set; continuous = queue-refill loop |
+| prompt_strategy | Use `handoff` when task > 200 chars; `inline` only for short commands |
+| flags list | Include all runtime-required permission and safety flags |
+| mcp_config | Reference `.mcp-{sat}.json`; omit only for satellites with no MCP tools |
+| Model pairing | Match satellite to correct model: opus = build/execute, sonnet = research/marketing |
+| interactive | `true` = terminal stays open for monitoring; `false` = fire-and-forget |
+| id == filename stem | `p12_spawn_solo_edison.yaml` → `id: p12_spawn_solo_edison` |
+| Timeout budgeting | research ~30 min, build ~45 min, deploy ~15 min |
 
-## Boundary vs Nearby Types
+- **Body sections**: Spawn Command → Parameters → Constraints
+- **Spawn Command**: exact PowerShell/CLI command — not pseudocode
+- **Grid max**: 3 satellites concurrent to prevent system instability
 
-| Type | What it is | Why it is NOT spawn_config |
-|------|------------|---------------------------|
-| boot_config (P02) | Per-provider LLM initialization (temperature, tokens) | Boot is LLM-level, spawn is process-level |
-| env_config (P09) | Environment variables (API keys, paths) | Env vars are runtime state, not spawn params |
-| handoff (P12) | Task instructions with context and commit | Handoff is WHAT to do, spawn_config is HOW to launch |
-| dispatch_rule (P12) | Keyword-to-satellite routing logic | Dispatch decides WHO, spawn_config decides HOW |
+## Anti-Patterns
+
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| Inline prompt > 200 chars with `-p` flag | Long inline prompts hang non-interactive spawn |
+| Missing required permission flags | Satellite blocked by permission prompts mid-execution |
+| Wrong model for satellite domain | Performance mismatch; sonnet for build tasks under-delivers |
+| Omitting `timeout` | Runaway satellite consumes resources indefinitely |
+| `mode: continuous` without queue refill logic | Slots go idle after first wave |
+| Hardcoded absolute paths in mcp_config | Breaks portability across machines |
+| Complex task with `prompt_strategy: inline` | Satellite receives insufficient context |
+
+## Application
+
+1. Choose mode: `solo` (one satellite), `grid` (parallel fixed), or `continuous` (queue-driven)
+2. Identify target satellite and its correct model pairing
+3. Determine `prompt_strategy`: if task > 200 chars, write handoff file first and set `handoff`
+4. Assemble `flags` list with all required CLI flags
+5. Set `mcp_config` path if satellite uses MCP tools
+6. Set `timeout` based on expected task duration
+7. Write body: Spawn Command (exact CLI) → Parameters → Constraints
+8. Set `quality: null`, verify body ≤ 3072 bytes
 
 ## References
-- CODEXA: records/framework/powershell/spawn_solo.ps1
-- CODEXA: records/framework/powershell/spawn_grid.ps1
-- Claude Code: claude --help (CLI flags reference)
+
+- Schema: spawn_config SCHEMA.md (P06)
+- Pillar: P12 (orchestration)
+- Boundary: signal (runtime status), dispatch_rule (routing policy), handoff (task instructions)

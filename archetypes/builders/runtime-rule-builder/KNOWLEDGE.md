@@ -1,59 +1,71 @@
 ---
-pillar: P01
+pillar: P09
 llm_function: INJECT
-purpose: Standards and domain knowledge for runtime_rule production
-sources: Michael Nygard Release It!, resilience patterns, rate limiting algorithms
+purpose: Domain knowledge for runtime_rule production — atomic searchable facts
+sources: runtime-rule-builder MANIFEST.md + SCHEMA.md
 ---
 
 # Domain Knowledge: runtime_rule
 
-## Foundational Concept
-A runtime_rule artifact defines OPERATIONAL BEHAVIOR PARAMETERS for system components at
-runtime. It specifies concrete numeric values for timeouts, retry strategies, rate limits,
-concurrency limits, and circuit breaker thresholds. Runtime rules follow resilience patterns
-from Michael Nygard's "Release It!" (2007, 2018): timeouts prevent hung connections, retries
-recover from transient failures, circuit breakers prevent cascade failures, and rate limits
-protect shared resources.
+## Executive Summary
 
-## Industry Implementations
+A runtime_rule specifies concrete numeric parameters governing system behavior at execution time — timeouts, retry strategies, rate limits, circuit breakers, and concurrency limits. It is a technical configuration artifact, not a policy declaration. Every numeric value requires units (ms, s, req/s). It differs from lifecycle_rule (P11, artifact state transitions), law (P08, inviolable axioms), guardrail (P11, safety boundary), env_config (variable values), and feature_flag (on/off toggle).
 
-| Source | What it defines | CEX alignment |
-|--------|----------------|---------------|
-| Nygard "Release It!" (2007) | Stability patterns: timeout, retry, circuit breaker, bulkhead | Core rule types in runtime_rule |
-| AWS retry guidelines | Exponential backoff with jitter, max retries | retry_strategy fields |
-| Stripe rate limiting | Token bucket + sliding window per endpoint | rate_limit rule type |
-| Netflix Hystrix/Resilience4j | Circuit breaker with half-open recovery | circuit_breaker rule type |
+## Spec Table
 
-## Key Patterns
-- Timeout: ALWAYS set explicit timeout; no operation should wait forever
-- Retry: exponential backoff (base * 2^attempt) with jitter prevents thundering herd
-- Rate limit: token bucket for burst-friendly; sliding window for strict enforcement
-- Circuit breaker: closed (normal) -> open (failing) -> half-open (testing recovery)
-- Concurrency: limit parallel operations to prevent resource exhaustion
-- Fallback: every rule MUST define what happens when the rule triggers (timeout, retry exhaust, rate exceed)
+| Property | Value |
+|----------|-------|
+| Pillar | P09 (config) |
+| ID pattern | `^p09_rr_[a-z][a-z0-9_]+$` |
+| Required frontmatter fields | 13 (includes `rule_name`, `rule_type`, `scope`) |
+| Recommended fields | 3 (description, fallback, severity) |
+| `rule_type` enum | timeout / retry / rate_limit / circuit_breaker / concurrency |
+| `severity` enum | critical / high / medium (default) / low |
+| Max body | 3072 bytes |
+| Body sections | 3 (Rule Specification, Trigger Behavior, Tuning Guide) |
+| Naming | `p09_rr_{rule_slug}.yaml` |
 
-## Retry Strategies
+## Patterns
 
-| Strategy | Formula | Use when |
-|----------|---------|----------|
-| fixed | wait = interval | Simple, predictable delays |
-| exponential | wait = base * 2^attempt | Network/API calls, prevents thundering herd |
-| exponential_jitter | wait = base * 2^attempt + random(0, base) | Best practice for distributed systems |
+| Pattern | Rule |
+|---------|------|
+| Units required | Every numeric value MUST include units: ms, s, min, req/s, tokens/min, connections |
+| Retry strategies | `fixed` (constant interval) / `exponential` (base * 2^attempt) / `exponential_jitter` (adds random spread; best practice for distributed systems) |
+| Rate limit algorithms | `token_bucket` (burst-tolerant) / `sliding_window` (strict, no burst) |
+| Circuit breaker states | CLOSED (normal) → OPEN (blocking, failure threshold exceeded) → HALF_OPEN (probe recovery) |
+| `fallback` field | Specifies concrete behavior on trigger: "return cached response", "reject with HTTP 429", "enqueue for retry" |
+| `scope` field | Names the specific component or operation — not system-wide unless explicitly stated |
+| Tuning Guide section | Must include safe parameter ranges + metric signals indicating misconfiguration |
 
-## Boundary vs Nearby Types
+## Anti-Patterns
 
-| Type | What it is | Why it is NOT runtime_rule |
-|------|------------|---------------------------|
-| lifecycle_rule (P11) | Artifact lifecycle management (archive, promote, deprecate) | Lifecycle is metadata state; runtime_rule is operational behavior |
-| law (P08) | Inviolable system law (never changed at runtime) | Law is permanent; runtime_rule is configurable |
-| guardrail (P11) | Safety boundary (prevent harm) | Guardrail is safety constraint; runtime_rule is operational parameter |
-| env_config (P09) | System environment variables | env_config is variable values; runtime_rule is behavior |
-| feature_flag (P09) | On/off toggle with rollout | Feature flag is logic; runtime_rule is numeric parameter |
-| permission (P09) | Access control (read/write/execute) | Permission is authorization; runtime_rule is rate/limit |
-| path_config (P09) | Filesystem path definitions | path_config is location; runtime_rule is behavior |
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| Vague values ("fast", "a few retries", "low rate") | Schema rejects non-numeric; unenforceable at runtime |
+| Numeric values without units | Ambiguous — ms vs s vs min differs by orders of magnitude |
+| runtime_rule for lifecycle transitions | Wrong kind — use lifecycle_rule (P11) |
+| runtime_rule for inviolable axioms | Wrong kind — use law (P08) |
+| runtime_rule for safety boundaries | Wrong kind — use guardrail (P11) |
+| No `fallback` specified | Undefined system behavior when rule triggers |
+| Circuit breaker with no HALF_OPEN policy | Circuit stays open permanently; no recovery path |
+| `quality` non-null | Self-scoring forbidden; always `null` |
+
+## Application
+
+1. Identify the operation and select `rule_type`: timeout / retry / rate_limit / circuit_breaker / concurrency
+2. Write frontmatter: 13 required fields — `rule_name` (human label), `scope` (specific component), `quality: null`
+3. Add recommended fields: `severity` (impact if misconfigured), `fallback` (what triggers), `description` (<= 200 chars)
+4. Write `## Rule Specification` — all parameters with concrete values and units:
+   - Timeout: `timeout_ms: 30000`, `timeout_action: reject`
+   - Retry: `max_retries: 3`, `backoff_base_ms: 1000`, `strategy: exponential_jitter`
+   - Rate limit: `requests_per_sec: 10`, `algorithm: token_bucket`, `burst_limit: 20`
+   - Circuit breaker: `failure_threshold: 5`, `open_duration_ms: 60000`, `probe_interval_ms: 10000`
+5. Write `## Trigger Behavior` — what happens when rule fires; not just what the rule is
+6. Write `## Tuning Guide` — safe ranges, metric signals, how to adjust per load profile
+7. Verify body <= 3072 bytes; all numeric values have units; `id` equals filename stem
 
 ## References
-- Michael Nygard: Release It! (2007, 2018) — Stability Patterns
-- AWS Architecture Blog: Exponential Backoff and Jitter
-- Stripe Engineering: Rate Limiters
-- Martin Fowler: Circuit Breaker pattern
+
+- runtime-rule-builder MANIFEST.md v1.0.0
+- runtime_rule SCHEMA.md (no version declared)
+- Boundary: runtime_rule (operational params, P09) vs lifecycle_rule (P11, state transitions) vs law (P08, inviolable) vs guardrail (P11, safety) vs env_config (P09, variable values) vs feature_flag (P09, on/off toggle)

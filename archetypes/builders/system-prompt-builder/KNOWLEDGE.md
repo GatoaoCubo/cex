@@ -1,92 +1,78 @@
 ---
-pillar: P01
+pillar: P03
 llm_function: INJECT
-purpose: Standards and domain knowledge for system_prompt production
-sources: OpenAI, Anthropic, Google, LangChain, constitutional AI literature, distilled from 5 production system prompts
+purpose: Domain knowledge for system_prompt production — atomic searchable facts
+sources: system-prompt-builder MANIFEST.md + SCHEMA.md
 ---
 
 # Domain Knowledge: system_prompt
 
-## Foundational Concept
-System prompts define LLM identity, capabilities, constraints, and format. Processed before user input. Primary mechanism for turning a general-purpose LLM into a specialist.
+## Executive Summary
 
-## 1. Identity — Dense and Front-Loaded
+System prompts define an LLM agent's permanent identity — who it is, what binary rules govern it, and how it responds. They transform a generic LLM into a focused specialist via persona, ALWAYS/NEVER constraints, knowledge boundaries, and output format definition. Unlike action_prompts (single-shot task execution) or instructions (step-by-step recipes), system prompts carry no task content — only identity, rules, and response shape.
 
-Format: `You are **{agent_name}**, a specialized {domain} agent focused on {core_mission}.`
+## Spec Table
 
-| Frequency | Elements |
-|-----------|----------|
-| Always (5/5) | Agent name, domain, primary mission |
-| Usually (3-4/5) | Confidence tier, quality target, operating modes |
-| Never works | Instructions before identity, vague "helpful assistant" |
+| Property | Value |
+|----------|-------|
+| Pillar | P03 |
+| Format | YAML (frontmatter) + Markdown (body) |
+| Naming | `p03_sp_{agent_slug}.md` |
+| ID regex | `^p03_sp_[a-z][a-z0-9_]+$` |
+| Max body bytes | 4096 (CEX format) |
+| Required frontmatter fields | 16 |
+| Recommended frontmatter fields | 5: safety_level, tools_listed, output_format_type, tldr, density_score |
+| Quality gates | 8 HARD + 12 SOFT |
+| rules_count | MUST match actual numbered rules in body |
+| tone enum | `formal` / `technical` / `conversational` / `authoritative` |
+| safety_level enum | `standard` / `strict` / `permissive` |
+| Rules volume | 5–12 ALWAYS + 3–8 NEVER |
+| Identity lines | 8–15 lines (max 25) |
+| quality field | null always — invariant |
 
-## 2. ALWAYS/NEVER Rules
+## Patterns
 
-Binary constraints beat prose. 5-12 ALWAYS, 3-8 NEVER per prompt.
+| Pattern | Rule |
+|---------|------|
+| Identity first | Body ALWAYS opens with `## Identity` section — no exceptions |
+| Persona formula | `You are **{name}**, a specialized {domain} agent focused on {mission}.` |
+| ALWAYS/NEVER binary | Rules are binary constraints, not soft guidance ("always X" not "try to X") |
+| Rules grouping | Group by concern: scope / quality / safety / comms |
+| knowledge_boundary pair | State what agent knows AND what it does NOT know (positive + negative scope) |
+| rules_count integrity | Count numbered rules in body; write that exact integer in frontmatter |
+| No task instructions | system_prompt = identity only; task content belongs in action_prompt |
+| id == filename stem | `p03_sp_scout.md` → `id: p03_sp_scout` |
 
-| Concern | ALWAYS | NEVER |
-|---------|--------|-------|
-| Scope | Verify before acting | Execute outside domain |
-| Quality | Validate every output | Skip quality checks |
-| Safety | Log errors with context | Fail silently |
-| Comms | Respond in target language | Jargon without explanation |
+- **Body sections**: Identity → Rules → Output Format → Constraints
+- **Rules format**: numbered list, each prefixed ALWAYS or NEVER
 
-Group rules by concern. Include brief "why" or heading that implies reasoning.
+## Anti-Patterns
 
-## 3. Knowledge Boundary
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| Task instructions in system prompt | Conflates identity with execution; breaks separation of concerns |
+| Soft guidance rules ("try to", "consider") | LLM treats as optional; binary constraints required |
+| rules_count mismatch | Hard gate failure; frontmatter integer must match actual rule count |
+| Knowledge boundary missing negative scope | Agent attempts answers outside domain without guard |
+| Identity section not first | Schema violation; Identity must be front-loaded in body |
+| Body > 4096 bytes | CEX size limit exceeded; trim rules and identity prose |
+| "You are" language in skill files | Persona belongs in system_prompt only |
+| Omitting output_format_type | Consumer cannot predict response shape |
 
-- Pair positive scope with negative scope ("You know X" + "You do NOT do Y")
-- List explicit tools, delegation boundaries, confidence tiers
-- Without negative scope, model attempts answers outside its domain
+## Application
 
-## 4. Tone Calibration
+1. Research the target agent's domain to define expertise and knowledge boundaries
+2. Write persona line: `You are **{name}**, a specialized {domain} agent focused on {mission}.`
+3. Define `knowledge_boundary`: positive scope (what agent knows) + negative scope (what it does not)
+4. Write 5–12 ALWAYS rules and 3–8 NEVER rules, grouped by concern
+5. Count all numbered rules; write that integer into `rules_count` frontmatter field
+6. Define `## Output Format`: response structure and format type
+7. Write `## Constraints`: knowledge boundary, delegation rules, exclusions
+8. Fill all 16 required frontmatter fields; set `quality: null`
+9. Verify body ≤ 4096 bytes, `id` == filename stem
 
-| Audience | Tone | Markers |
-|----------|------|---------|
-| Consumers | Informal, warm | Short sentences, first-person |
-| Developers | Technical, concise | Code examples, no fluff |
-| Auditors | Formal, evidence-based | CWE refs, severity levels |
-| Orchestrators | Structured | Decision matrices, pseudocode |
+## References
 
-## 5. Size and Sections
-
-| Metric | Sweet Spot | Range |
-|--------|-----------|-------|
-| Total lines | 300-400 | 230-453 |
-| Body tokens | 3,000-3,500 | 2,500-4,500 |
-| Identity | 8-15 lines | 5-25 |
-| Rules count | 8-12 | 5-20 |
-| Max body bytes | 4,096 | - |
-
-**Always**: Identity, capabilities, workflow, quality gates.
-**Usually**: Error handling, output format, code examples.
-**Never in system_prompt**: Task instructions, conversation history, training data.
-
-## 6. Anti-Patterns
-
-| Anti-Pattern | Fix |
-|--------------|-----|
-| Identity buried past paragraph 2 | Lead with identity, always first |
-| Rules as prose | Use ALWAYS/NEVER bullet lists |
-| No negative scope | Add "I do NOT" section |
-| Mixing identity and task | system_prompt=identity, instruction=task |
-| No output format spec | Define JSON/markdown schema |
-
-## Industry Alignment
-
-| Source | Alignment |
-|--------|-----------|
-| OpenAI system message | Identity + instructions + format |
-| Anthropic system prompt | Persona + rules + constraints |
-| Google system instruction | Role + behavior + output format |
-| Constitutional AI (Bai 2022) | Informs ALWAYS/NEVER pattern |
-
-## Boundary
-
-| Type | Why NOT system_prompt |
-|------|----------------------|
-| action_prompt | Task execution, not identity |
-| instruction | Procedural, not persona |
-| prompt_template | Template mechanics, not identity |
-| user_prompt | Ephemeral task, not persistent |
-| mental_model | Design-time blueprint, not runtime |
+- Schema: system_prompt SCHEMA.md (P06) v2.0
+- Pillar: P03 (prompts)
+- Boundary: action_prompt (task execution), instruction (procedural recipe), prompt_template (variable mechanics)

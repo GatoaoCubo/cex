@@ -1,94 +1,67 @@
 ---
-pillar: P01
+pillar: P05
 llm_function: INJECT
-purpose: Standards and domain knowledge for response_format production
-sources: [OpenAI JSON mode, Anthropic structured output, Instructor, Outlines, real agent output templates]
+purpose: Domain knowledge for response_format production — atomic searchable facts
+sources: response-format-builder MANIFEST.md + SCHEMA.md
 ---
 
 # Domain Knowledge: response_format
 
-## Core Concept
+## Executive Summary
 
-Response formats define HOW an LLM structures output. Injected into prompt so model knows expected shape BEFORE generating. Key: (1) explicit structure with named sections, (2) typed placeholder variables, (3) complete example output. Formats are GUIDANCE, not enforcement — make deviation unlikely by being clear and concrete.
+A response_format is a template injected into the LLM prompt that specifies how the model must structure its output during generation — it is a pre-generation contract the LLM sees. Post-generation validation belongs to validation_schema (P06). Data extraction belongs to parser (P05). Format transformation belongs to formatter (P05). The response_format is guidance, not enforcement; clarity and a concrete example output are what drive compliance.
 
-## Industry Alignment
+## Spec Table
 
-| Source | Defines | Maps to |
-|--------|---------|---------|
-| OpenAI JSON mode | Force JSON via API | format_type: json |
-| Anthropic tool_use | Output via tool schema | Sections with typed fields |
-| Instructor | Pydantic as output schema | Field-level type constraints |
-| Outlines | Regex-guided generation | Grammar-level (P06) |
-| LangChain OutputParser | Parse LLM output | Downstream parser |
+| Property | Value |
+|----------|-------|
+| Pillar | P05 (IO) |
+| ID pattern | `^p05_rf_[a-z][a-z0-9_]+$` |
+| Required frontmatter fields | 12 (includes `format_type` and `domain`) |
+| Recommended fields | 4 (target_kind, example_output, variable_syntax, sections) |
+| Max body | 4096 bytes |
+| Body sections | 4 (Format Specification, Variables Table, Template Body, Example Output) |
+| Section count constraint | 4–7 sections; consolidate if > 7 |
+| Naming | `p05_rf_{format_slug}.yaml` |
 
-## Format Compliance Hierarchy
+## Patterns
 
-| Format | Compliance | Best for |
-|--------|-----------|----------|
-| JSON | ~95% | Machine consumption, APIs |
-| YAML | ~90% | Configuration, frontmatter |
-| Markdown tables | ~88% | Comparisons, inventories |
-| Numbered lists | ~85% | Sequential steps |
-| YAML frontmatter + MD | ~85% | Hybrid artifacts |
-| Free-form markdown | ~70% | Long-form prose |
-| CSV | ~60% | Tabular export |
-
-## Template Variable Patterns
-
-**Pattern 1: Typed Variable Table** — for machine-consumed output:
-
-```
-| Variable | Type | Constraints | Example |
-|----------|------|-------------|---------|
-| {{agent_name}} | string | lowercase | "seo_optimizer" |
-| {{confidence}} | float | 0.0-1.0 | 0.92 |
-```
-
-**Pattern 2: Inline Contextual** — for identity/narrative templates:
-`You are {{agent_name}}, a {{domain}} specialist.`
-
-**Pattern 3: Conditional/Loop** — for variable-length reports:
-`{{#FINDINGS}} ### Finding {{N}}: {{TITLE}} {{/FINDINGS}}`
-
-Mark every variable required or optional. Ambiguity = inconsistent output.
-
-## Three Rigidity Zones
-
-| Zone | Rigidity | Example |
-|------|----------|---------|
-| Fixed structure | 100% | Frontmatter, JSON keys, headers |
-| Constrained fill | 70% | Enums, typed vars, length limits |
-| Open fill | 30% | `{{description}}`, `{{analysis}}` |
-
-- Frontmatter: all fixed. Body headers: fixed. Body content: constrained to open
-- Never mix zones within a single field
-
-## Multi-Format Output
-
-```yaml
-mode: full | quick | error
-```
-
-Each mode shares envelope (agent, timestamp, status), differs in body detail.
-
-## P05/P06 Boundary
-
-| Aspect | response_format (P05) | validation_schema (P06) |
-|--------|----------------------|------------------------|
-| Audience | LLM (in prompt) | System only (post-gen) |
-| Timing | Before/during gen | After generation |
-| Enforcement | Soft (guidance) | Hard (system) |
-
-Write response_format as INSTRUCTIONS TO THE LLM, not system validation rules.
+| Pattern | Rule |
+|---------|------|
+| Format compliance hierarchy | JSON (95%) > YAML (90%) > Markdown tables (88%) > Numbered lists (85%) > Prose (70%) |
+| Consumer-driven format_type | Machine consumer = `json`; config = `yaml`; human = `markdown` |
+| Variable syntax tier 1 | `{{VARIABLE_NAME}}` — mustache, required; must have type + example in variables table |
+| Variable syntax tier 2 | `[VARIABLE_NAME]` — bracket, optional; clearly marked as optional |
+| Variables table completeness | Every variable requires: name, type, constraints, required/optional, example |
+| Example Output section | Must be fully filled — no placeholders remaining in the example |
+| Injection point selection | `system_prompt` for persistent structure; `user_message` for per-request context |
 
 ## Anti-Patterns
 
-| Anti-Pattern | Fix |
-|-------------|-----|
-| Untyped `{{value}}` | Add type + example for every variable |
-| No example output | Always include >= 1 complete example |
-| Mixed format in section | One format per section |
-| 10+ sections | Consolidate to 4-7 |
-| Vague names (`## Details`) | Action-oriented: `## Remediation Steps` |
-| No validation rules | List constraints after template |
-| Implicit ordering | Number sections or state order requirement |
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| Untyped `{{value}}` variable | Forbidden — schema rejects variables without type + example |
+| > 7 sections | Exceeds section limit; must consolidate |
+| Prose-only template body | 70% LLM compliance — lowest tier; use structured format |
+| `quality` non-null | Self-scoring forbidden; always `null` |
+| Example Output section missing | LLM cannot verify output shape without a filled reference |
+| Mixing mustache and bracket for same tier | Ambiguous variable precedence |
+| response_format containing validation rules | Wrong artifact — post-generation validation belongs in validation_schema (P06) |
+| Vague section names (`## Details`) | Use action-oriented names: `## Remediation Steps`, `## Score Breakdown` |
+
+## Application
+
+1. Identify the target artifact kind and consumer type (machine / config / human)
+2. Select `format_type` based on consumer: machine = `json`, config = `yaml`, human = `markdown`
+3. Write frontmatter: 12 required fields; `quality: null`; add `target_kind` and `sections` list
+4. Write `## Format Specification` — output structure, format_type rationale, compliance notes
+5. Write `## Variables Table` — every variable with type, constraints, required/optional, example
+6. Write `## Template Body` — actual template using `{{REQUIRED}}` and `[OPTIONAL]` placeholders
+7. Write `## Example Output` — fully filled; zero remaining placeholders
+8. Verify body <= 4096 bytes; sections count 4–7; `id` matches filename stem
+
+## References
+
+- response-format-builder MANIFEST.md v1.0.0
+- response_format SCHEMA.md v2.0.0
+- Boundary: response_format (LLM sees, pre-gen) vs validation_schema (P06, system applies post-gen) vs parser (P05, extracts data) vs formatter (P05, transforms format)

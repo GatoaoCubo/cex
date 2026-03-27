@@ -1,61 +1,72 @@
 ---
 pillar: P01
 llm_function: INJECT
-purpose: Standards and domain knowledge for pattern production
-sources: GoF, POSA, enterprise integration, CEX architecture
+purpose: Domain knowledge for pattern production — atomic searchable facts
+sources: pattern-builder MANIFEST.md + SCHEMA.md, GoF 1994, Alexander 1977, POSA 1996
 ---
 
 # Domain Knowledge: pattern
 
-## Foundational Concept
-A pattern is a named, reusable solution to a recurring problem in a given context.
-Originated by Christopher Alexander (1977) for architecture, formalized for software
-by Gamma et al. (1994, "Gang of Four"). Structure: Name, Problem, Context, Forces,
-Solution, Consequences. Patterns are DESCRIPTIVE (document what works), not
-PRESCRIPTIVE (mandate what must happen).
+## Executive Summary
 
-## Industry Implementations
+Patterns are named, reusable solutions to recurring problems in a given context. Each pattern documents opposing forces that make simple solutions inadequate, a concrete solution at implementation level, and consequences including negative trade-offs. They differ from laws (which mandate compliance), workflows (which execute step sequences), diagrams (which visualize), and instructions (which tell how) by being descriptive documentation of proven solutions with explicit forces and trade-offs.
 
-| Source | What it defines | CEX alignment |
-|--------|----------------|---------------|
-| GoF (Gamma 1994) | 23 OOP design patterns | Structure: problem, solution, consequences |
-| POSA (Buschmann 1996) | Architecture-scale patterns | Scale: system-level, not class-level |
-| Enterprise Integration (Hohpe 2003) | Messaging patterns | Domain: distributed agent coordination |
-| Cloud Patterns (Microsoft) | Cloud architecture solutions | Context: infrastructure patterns |
-| CEX Patterns | Agent orchestration solutions | Domain: multi-satellite, signal-driven |
+## Spec Table
 
-## Key Patterns (about patterns)
-- NAMED: every pattern has a concise, memorable name (2-5 words)
-- RECURRING: must solve a problem that happens repeatedly
-- CONTEXT-FIRST: problem and forces before solution
-- FORCES: competing tensions that make simple solutions inadequate
-- CONSEQUENCES: always include trade-offs (benefits AND costs)
-- EXAMPLES: at least 2 concrete applications proving the pattern works
-- COMPOSABLE: patterns combine with related patterns
-- ANTI-PATTERNS: document what NOT to do (negative space)
+| Property | Value |
+|----------|-------|
+| Pillar | P08 (architecture) |
+| Kind | `pattern` (exact literal) |
+| ID pattern | `p08_pat_{slug}` |
+| Required frontmatter | 21 fields |
+| Quality gates | 9 HARD + 11 SOFT |
+| Max body | 4096 bytes |
+| Density minimum | >= 0.80 |
+| Quality field | always `null` |
+| Min forces | 2 (opposing tensions) |
+| Min consequences (negative) | 1 trade-off |
+| Min examples | 2 concrete applications |
+| Name format | 2-5 words, title-case, self-describing |
 
-## CEX-Specific Extensions
+## Patterns
 
-| Field | Justification | Closest equivalent |
-|-------|--------------|-------------------|
-| anti_patterns | Common wrong approaches | GoF "Related Patterns" |
-| applicability | When to use / when not to | GoF "Applicability" |
-| forces | Tensions driving the problem | Alexander's "Forces" |
-| related_patterns | Navigation between solutions | GoF "Related Patterns" |
+| Pattern | Application |
+|---------|-------------|
+| Context-first structure | Problem and forces BEFORE solution — readers need tension before resolution |
+| Opposing forces | At least 2 tensions that make simple solutions fail |
+| Concrete solution | Implementation-level approach, not abstract advice |
+| Honest consequences | Benefits AND costs — benefits-only is marketing |
+| Composable references | Cross-reference related patterns with stated relationship |
+| Anti-pattern documentation | Document what looks similar but fails |
+| Applicability boundaries | State both when-to-use AND when-not-to-use |
 
-## Boundary vs Nearby Types
+## Anti-Patterns
 
-| Type | What it is | Why it is NOT pattern |
-|------|------------|----------------------|
-| law (P08) | Inviolable rule | Laws MANDATE; patterns RECOMMEND |
-| workflow (P12) | Executable step sequence | Workflows RUN; patterns DESCRIBE |
-| diagram (P08) | Visual representation | Diagrams SHOW; patterns EXPLAIN |
-| component_map (P08) | Structural connections | Maps INVENTORY; patterns SOLVE |
-| satellite_spec (P08) | Satellite specification | Specs DEFINE one component; patterns SOLVE recurring problems |
-| instruction (P03) | Procedural steps | Instructions TELL HOW; patterns EXPLAIN WHY |
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| Problem without recurrence signal | One-off fixes are not patterns; need "repeatedly/often/whenever" |
+| Solution as abstract advice ("use better design") | Not implementation-level; cannot be applied |
+| Forces < 2 | No opposing tensions = no pattern, just a preference |
+| Consequences with no negative trade-off | Benefits-only = marketing, not engineering |
+| Name > 5 words or not self-describing | Pattern names must be memorable and context-free |
+| Missing anti-pattern section | Similar wrong approaches must be documented |
+| No concrete examples | Unproven pattern; need >= 2 real applications |
+
+## Application
+
+1. Name the pattern: 2-5 words, title-case, self-describing without context
+2. Describe the recurring problem with a recurrence signal word
+3. Document >= 2 opposing forces that make the problem hard
+4. Describe the solution at implementation level
+5. List consequences: both benefits AND >= 1 negative trade-off
+6. Add >= 2 concrete examples from real application
+7. Document anti-patterns (similar wrong approaches)
+8. Cross-reference related patterns
+9. Validate: 9 HARD + 11 SOFT gates, body <= 4096 bytes
 
 ## References
+
+- pattern-builder SCHEMA.md v1.0.0
 - Alexander, C. (1977) A Pattern Language
-- Gamma et al. (1994) Design Patterns: Elements of Reusable OO Software
-- Buschmann et al. (1996) Pattern-Oriented Software Architecture
-- Hohpe & Woolf (2003) Enterprise Integration Patterns
+- Gamma et al. (1994) Design Patterns (GoF)
+- Buschmann et al. (1996) Pattern-Oriented Software Architecture (POSA)

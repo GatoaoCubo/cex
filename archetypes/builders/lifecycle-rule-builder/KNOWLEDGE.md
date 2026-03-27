@@ -1,56 +1,76 @@
-```yaml
 ---
-pillar: P01
+pillar: P11
 llm_function: INJECT
-purpose: Standards and patterns for lifecycle_rule production
-sources: [Content lifecycle management, ITIL Service Lifecycle, Data governance, CEX Laws]
+purpose: Domain knowledge for lifecycle_rule production — atomic searchable facts
+sources: lifecycle-rule-builder MANIFEST.md + SCHEMA.md v1.0.0
 ---
-```
 
 # Domain Knowledge: lifecycle_rule
 
-## Foundational Concepts
-Lifecycle rules originate from content management systems (CMS) and data governance.
-Core idea: every piece of content has a finite useful life. Without explicit lifecycle
-policies, repositories accumulate stale artifacts that mislead consumers. In AI agent
-systems, stale knowledge cards or outdated model cards cause hallucination-amplifying
-decisions. lifecycle_rules make artifact freshness a first-class concern.
+## Executive Summary
 
-## Industry Patterns
-| Source | What it defines | CEX alignment |
-|--------|----------------|---------------|
-| ITIL Service Lifecycle | 5 stages: strategy, design, transition, operation, improvement | States + transitions model |
-| Contentful Content Lifecycle | Draft, changed, published, archived statuses | State machine with entry criteria |
-| Data Governance (DAMA-DMBOK) | Data quality dimensions + retention policies | freshness_days + review_cycle |
-| Confluence Page Archival | Auto-archive after N days inactive | Automated stale -> archived transition |
-| AWS S3 Lifecycle Rules | Transition objects between storage tiers by age | Time-based automated transitions |
+Lifecycle rules are declarative policies governing artifact state transitions over time — from creation through review, promotion, deprecation, and sunset. Each rule defines freshness thresholds, review cycles, ownership, and automation level for a specific artifact kind. They differ from hooks (which execute code on events), runtime rules (which manage system behavior), quality gates (which score at one point), and guardrails (which prevent damage) by managing artifact freshness as a first-class temporal concern.
 
-## Key Principles
-- Every artifact has a FINITE useful life (no artifact is "forever fresh")
-- Freshness is DOMAIN-SPECIFIC (LLM pricing = 30 days; architectural law = 365 days)
-- State transitions must be MEASURABLE (days since update, score threshold, usage count)
-- Automation reduces human burden but MANUAL review catches context no cron can
-- Ownership is MANDATORY (unowned artifacts always rot)
-- Notification prevents silent staleness (stale artifact with no alert = hidden debt)
+## Spec Table
 
-## CEX-Specific Extensions
-| Field | Justification | Closest equivalent |
-|-------|--------------|-------------------|
-| freshness_days | Concrete integer for automated staleness detection | S3 lifecycle transition days |
-| review_cycle | Periodic human re-evaluation schedule | ITIL continual improvement |
-| ownership | Satellite or agent responsible for review | DAMA data steward |
-| automation | Level of automated transitions (full/semi/manual) | Confluence auto-archive setting |
+| Property | Value |
+|----------|-------|
+| Pillar | P11 (governance) |
+| Kind | `lifecycle_rule` (exact literal) |
+| ID pattern | `p11_lc_{slug}` |
+| Required frontmatter | 17 fields |
+| Recommended frontmatter | 4 (freshness_days, review_cycle, ownership, automation) |
+| Quality gates | 9 HARD + 8 SOFT |
+| Max body | 3072 bytes |
+| Density minimum | >= 0.80 |
+| Quality field | always `null` |
+| States | draft, active, stale, deprecated, archived, sunset |
 
-## Boundary vs Nearby Types
-| Type | What it does | NOT this |
-|------|-------------|----------|
-| hook (P04) | EXECUTES code on events (pre/post triggers) | Does NOT declare lifecycle policy |
-| runtime_rule (P09) | Manages SYSTEM behavior (timeouts, retries, circuit breakers) | Does NOT manage artifact freshness |
-| quality_gate (P11) | Checks QUALITY at one point in time (pass/fail with score) | Does NOT track state over time |
-| guardrail (P11) | Prevents DAMAGE (safety boundaries) | Does NOT manage freshness |
+## Patterns
+
+| Pattern | Application |
+|---------|-------------|
+| Domain-specific freshness | LLM pricing = 30 days; architectural law = 365 days |
+| Measurable transitions | Days since update, score threshold, or usage count |
+| Mandatory ownership | Unowned artifacts always rot — assign satellite or agent |
+| Notification on stale | Stale artifact with no alert = hidden technical debt |
+| Automation levels | full (cron-driven), semi (auto-detect + human approve), manual |
+| State machine | Each state has entry criteria, exit criteria, and allowed transitions |
+
+### Freshness Reference
+
+| Domain | Typical freshness_days | Rationale |
+|--------|----------------------|-----------|
+| LLM pricing/models | 30 | Providers update frequently |
+| API documentation | 90 | APIs change quarterly |
+| Architectural patterns | 180 | Patterns evolve slowly |
+| Operational laws | 365 | Laws are stable by design |
+
+## Anti-Patterns
+
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| No freshness_days specified | Cannot automate staleness detection |
+| Missing ownership field | No one reviews = guaranteed rot |
+| State without entry criteria | Arbitrary transitions; no enforcement possible |
+| freshness_days: 999 | Effectively disables lifecycle; artifact rots silently |
+| Automation: full without notification | Silent archival surprises consumers |
+| One-size-fits-all freshness | Different artifact kinds decay at different rates |
+
+## Application
+
+1. Identify the target artifact kind and its typical update cadence
+2. Define states (minimum: active, stale, archived) with entry/exit criteria
+3. Set `freshness_days` based on domain-specific decay rate
+4. Set `review_cycle` with periodicity and reviewer identity
+5. Assign `ownership` to a specific agent or team
+6. Choose `automation` level (full/semi/manual)
+7. Define notification triggers for stale transitions
+8. Validate: 9 HARD + 8 SOFT gates, body <= 3072 bytes
 
 ## References
-- ITIL Service Lifecycle: https://www.axelos.com/certifications/itil-service-management
-- DAMA-DMBOK Data Governance: https://www.dama.org/cpages/body-of-knowledge
-- AWS S3 Lifecycle: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html
-- Contentful Content Lifecycle: https://www.contentful.com/help/content-lifecycle/
+
+- lifecycle-rule-builder SCHEMA.md v1.0.0
+- ITIL Service Lifecycle (strategy, design, transition, operation, improvement)
+- DAMA-DMBOK Data Governance (data quality dimensions + retention policies)
+- AWS S3 Lifecycle Rules (time-based automated transitions)

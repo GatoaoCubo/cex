@@ -1,76 +1,69 @@
 ---
-pillar: P01
+pillar: P12
 llm_function: INJECT
-purpose: Operational knowledge and patterns for signal production
-sources: P12 schema + P12 examples + codexa-core signal_writer.py
+purpose: Domain knowledge for signal production — atomic searchable facts
+sources: signal-builder MANIFEST.md + SCHEMA.md
 ---
 
 # Domain Knowledge: signal
 
-## Core Concept
-`signal` is the smallest coordination artifact in P12 orchestration.
-It answers a narrow runtime question:
-"Which satellite emitted which status, at what quality, at what time?"
+## Executive Summary
 
-Signals are notifications, not instructions.
-They are consumed by monitors, supervisors, and next-step dispatchers.
+Signals are atomic JSON runtime notifications — the smallest status exchange unit between agents. Each signal answers one question: "what happened, who emitted it, and when?" with exactly 4 required fields. Unlike handoffs (task instructions) or dispatch_rules (routing policy), signals carry only outcome state — no execution content, no routing logic, no workflow steps.
 
-## Minimum Semantic Contract
-Every valid signal carries four core facts:
-- `satellite`: who emitted the event
-- `status`: what happened
-- `quality_score`: how good the outcome was, 0.0-10.0
-- `timestamp`: when it happened, ISO 8601
+## Spec Table
 
-This aligns with the current real writer in
-`codexa-core/records/core/python/signal_writer.py`, which emits
-`satellite`, `status`, `quality_score`, `timestamp`, plus optional extras.
+| Property | Value |
+|----------|-------|
+| Pillar | P12 (orchestration) |
+| Format | JSON |
+| Naming | `p12_sig_{event}.json` |
+| Max bytes | 4096 |
+| Required fields | 4: satellite, status, quality_score, timestamp |
+| Optional fields | 7: task, artifacts, artifacts_count, commit_hash, error_code, message, progress_pct |
+| status enum | `complete` / `error` / `progress` |
+| quality_score range | 0.0 – 10.0 |
+| timestamp format | ISO 8601 datetime |
+| Emitter | one signal = one event = one emitter |
 
-## Status Semantics
-| Status | Meaning | Typical consumer action |
-|--------|---------|-------------------------|
-| complete | Work finished successfully | collect artifacts, continue pipeline |
-| error | Work failed or aborted | log, retry, escalate |
-| progress | Work still running | update monitor, wait |
+## Patterns
 
-`partial` and `timeout` exist in current code, but are not part of the minimal
-P12 signal contract in this builder. Treat them as extension statuses only if
-the caller explicitly requires compatibility with an external runtime.
+| Pattern | Rule |
+|---------|------|
+| Minimal payload | Emit 4 required fields; add optional only when they reduce consumer ambiguity |
+| status=complete | Work concluded successfully enough to advance pipeline |
+| status=error | Work failed or blocked; triggers retry/escalation |
+| status=progress | Work ongoing; include `progress_pct` (0–100) |
+| progress_pct | Valid ONLY when `status=progress` — never on complete/error |
+| satellite field | Lowercase slug preferred: `codex`, `edison`, `shaka` |
+| quality_score | Reflects event outcome quality (9.0 = clean complete, 5.0 = partial) |
+| Immutable once emitted | Never mutate; emit a new signal for updated state |
 
-## Optional Fields Pattern
-Signals may carry a few optional machine fields when useful:
-- `task`: short task label
-- `artifacts`: changed files or generated outputs
-- `artifacts_count`: quick aggregate
-- `commit_hash`: git commit reference
-- `error_code`: compact failure category
-- `message`: short human-readable note
-- `progress_pct`: 0-100 for progress signals
+## Anti-Patterns
 
-Optional fields extend the event. They must not redefine the event.
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| Task instructions in payload | Signal is not a handoff — no execution content |
+| Routing rules or satellite selection | Signal is not a dispatch_rule |
+| `progress_pct` on `status=complete` | Schema violation; pct valid only during ongoing work |
+| Omitting `timestamp` | Breaks chronological ordering for signal consumers |
+| quality_score outside 0.0–10.0 | Hard schema rejection |
+| Multiple signals per single event | One signal = one event; consolidate into single emission |
+| Payload > 4096 bytes | Exceeds max; trim optional fields |
 
-## Boundary vs Nearby Types
-| Type | What it is | Why it is not `signal` |
-|------|------------|------------------------|
-| handoff | instruction packet with context, tasks, scope fence, commit rules | tells an agent what to do |
-| dispatch_rule | routing map from keywords/scope to satellite/model | decides who should receive work |
-| workflow | executable sequence of steps | coordinates multiple actions |
-| interface | contract/schema between systems | defines stable exchange spec, not a runtime event |
+## Application
 
-Rule of thumb:
-- "Task done / failed / still running" -> `signal`
-- "Do this work next" -> `handoff`
-- "Route these keywords to this satellite" -> `dispatch_rule`
+1. Identify the event type: completion, failure/block, or ongoing progress
+2. Set `status` to `complete`, `error`, or `progress`
+3. Set `satellite` to lowercase slug of the emitting agent
+4. Set `quality_score` (0.0–10.0) reflecting outcome quality
+5. Set `timestamp` to current ISO 8601 datetime
+6. If `status=progress`, add `progress_pct` (0–100)
+7. Add optional fields (task, artifacts, message) only when they add consumer value
+8. Name file `p12_sig_{event}.json`, keep under 4096 bytes
 
-## Naming Pattern
-P12 schema defines: `p12_sig_{{event}}.json`
-Examples:
-- `p12_sig_satellite_complete.json`
-- `p12_sig_batch_progress.json`
-- `p12_sig_validation_error.json`
+## References
 
-## Operational Constraints
-- Must stay under 4096 bytes
-- Should remain single-event and append-only
-- Should be easy to poll from `.claude/signals/`
-- Must degrade gracefully when optional fields are absent
+- Schema: signal SCHEMA.md (P06)
+- Pillar: P12 (orchestration)
+- Boundary: handoff (instructions), dispatch_rule (routing), workflow (step graph) — all distinct from signal

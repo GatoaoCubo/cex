@@ -1,80 +1,68 @@
 ---
-pillar: P01
+pillar: P11
 llm_function: INJECT
-purpose: Distilled patterns for designing quality gates that reliably filter artifacts
-sources: [Cooper 1990, SonarQube, DORA, 5 production quality gate files]
+purpose: Domain knowledge for quality_gate production — atomic searchable facts
+sources: quality-gate-builder MANIFEST.md + SCHEMA.md
 ---
 
 # Domain Knowledge: quality_gate
 
-## Core Concept
-Quality gates are pre-publish validation policies from manufacturing stage-gates (Cooper 1990). A gate defines WHAT must pass at what threshold. It does NOT implement checks (validator) or define dimensions (rubric). Gate = policy; validator = enforcement.
+## Executive Summary
 
-## HARD Gates (Binary, Non-Negotiable)
+Quality gates are numeric scoring barriers that block or score artifacts before they ship. Each gate is HARD (binary AND — one failure zeroes the final score) or SOFT (weighted dimension contributing to a 0–10 score). Gates govern one domain and never self-score (`quality: null` always). A gate is a policy; a validator implements it; a rubric defines the scoring dimensions.
 
-Any HARD fail = artifact rejected. Protect structural integrity.
+## Spec Table
 
-| Gate | Check | Why Universal |
-|------|-------|--------------|
-| H01 | Frontmatter parses | Broken structure = unusable |
-| H02 | ID matches namespace regex | Search/routing/dedup depend on it |
-| H03 | ID equals filename stem | Lookup-by-ID invariant |
-| H04 | Kind matches expected literal | Type integrity for routing |
-| H05 | Quality field is null | Producer must never self-score |
-| H06 | All required fields present | Completeness baseline |
+| Property | Value |
+|----------|-------|
+| Pillar | P11 (governance) |
+| ID pattern | `p11_qg_{gate_slug}` |
+| Required frontmatter fields | 12 |
+| HARD gates | 8–10 required; universal H01–H06 always present |
+| SOFT gates | 5–20; each weight >= 0.5; weights sum == 100% |
+| Max body | 4096 bytes |
+| Body sections | 5 (Definition, HARD Gates, SOFT Scoring, Actions, Bypass) |
+| Score tiers | GOLDEN >= 9.5 / PUBLISH >= 8.0 / REVIEW >= 7.0 / REJECT < 7.0 |
+| Naming | `p11_qg_{slug}.md` |
 
-Kind-specific examples: system_prompt requires `## Identity`; skill requires `## Workflow Phases >= 2`; knowledge_card body 200-5120 bytes.
+## Patterns
 
-**Optimal count**: 8-10 per kind. <6 too permissive, >12 diminishing returns.
-
-## SOFT Gates (Weighted, Scored)
-
-Contribute to numeric score. Allow tradeoffs.
-
-| Weight | Meaning | Examples |
-|--------|---------|---------|
-| 1.0 | High impact on utility | Density >= 0.80, no filler |
-| 0.5 | Moderate, improves polish | Tags include kind, has URLs |
-
-Never use weight < 0.5. Optimal: 10-12 simple kinds, 15-20 complex. Max 20.
-
-Start equal weights. Switch to differentiated only when important dimensions get drowned out.
-
-## Scoring
-
-```
-hard_pass = ALL hard gates pass (AND)
-soft_score = sum(gate * weight) / sum(weights)
-final = hard_pass ? soft_score : 0
-```
-
-| Tier | Threshold | Meaning |
-|------|-----------|---------|
-| GOLDEN | >= 9.5 | Exemplary, golden example |
-| PUBLISH | >= 8.0 | Production-ready |
-| REVIEW | >= 7.0 | Acceptable with notes |
-| REJECT | < 7.0 | Rework or any HARD fail |
-
-## Bypass Protocol
-- Only for emergency (cosmetic SOFT fail blocking deploy, calibrating new kind)
-- NEVER bypass H01 (broken YAML) or H05 (self-scoring)
-- Requires: condition, approver, audit log, expiry
-- Bypass = acknowledge + document + deadline, not "turn off"
-
-## Designing New Gates
-1. **HARD or SOFT?** "Broken or just lower quality?" Broken=HARD, Lower=SOFT
-2. **Write as predicate**: `check(artifact) -> bool`. If too subjective, not a gate
-3. **Assign weight** (SOFT): utility impact=1.0, polish=0.5
-4. **Write one-line "why"**: if you can't, gate may be unnecessary
+| Pattern | Rule |
+|---------|------|
+| HARD gate failure | Sets final score to 0 regardless of all SOFT scores |
+| Universal HARD gates | H01 (frontmatter parses), H02 (ID regex), H03 (ID == filename), H04 (kind literal), H05 (quality null), H06 (required fields present) |
+| SOFT weight minimum | >= 0.5; weight 1.0 = high utility impact; weight 0.5 = polish |
+| Weights invariant | Sum of all SOFT weights MUST equal 100% |
+| Scoring formula | `final = hard_pass ? sum(gate * weight) / sum(weights) : 0` |
+| Threshold rule | Must be numeric — no vague qualifiers ("good", "acceptable") |
+| Bypass conditions | Must include: condition + approver + audit_log + expiry |
 
 ## Anti-Patterns
 
-| Anti-Pattern | Fix |
-|--------------|-----|
-| Gates requiring human judgment | Rewrite as measurable predicate |
-| Scoring without explicit weights | Declare every weight |
-| Threshold without rationale | Document why 8.0 not 7.5 |
-| HARD gate on style preference | Move to SOFT weight 0.5 |
-| >12 HARD gates | Merge overlapping, demote weak to SOFT |
-| No bypass mechanism | Add bypass with audit trail |
-| Gate checks producer not artifact | Gates check the artifact |
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| SOFT weight < 0.5 | Creates invisible low-signal dimensions |
+| Weights not summing to 100% | Breaks scoring formula invariant; validator rejects |
+| Missing H01–H06 | Gate is structurally incomplete; kind-specific gates cannot replace universals |
+| `quality` field non-null | Self-scoring forbidden by schema |
+| Bypass without expiry | Audit trail incomplete; bypass becomes permanent |
+| Vague threshold ("high quality") | Not computable; validator cannot determine pass/fail |
+| > 12 HARD gates | Diminishing returns; creates unnecessary brittleness |
+| Gate checks producer, not artifact | Gates evaluate the artifact output, not who made it |
+
+## Application
+
+1. Identify the artifact kind this gate protects — sets the `domain` field
+2. Write frontmatter: 12 required fields; `quality: null`; `id` matches `p11_qg_{slug}` pattern
+3. Write `## Definition` — metric, threshold (numeric), operator, scope
+4. Write `## HARD Gates` — include H01–H06 universals; add kind-specific gates up to 10 total
+5. Write `## SOFT Scoring` — assign weight >= 0.5 per dimension; verify sum == 100%
+6. Write `## Actions` — map score ranges to GOLDEN / PUBLISH / REVIEW / REJECT tiers
+7. Write `## Bypass` — condition + approver + audit_log + expiry; mark H01 and H05 as never-bypassable
+8. Verify body <= 4096 bytes; `id` equals filename stem
+
+## References
+
+- quality-gate-builder MANIFEST.md v1.0.0
+- quality_gate SCHEMA.md v2.0.0
+- Boundary: quality_gate (policy) vs validator (P06, enforcement code) vs scoring_rubric (P07, dimension criteria)

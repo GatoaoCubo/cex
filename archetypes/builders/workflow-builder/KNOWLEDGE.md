@@ -1,58 +1,100 @@
 ---
 pillar: P01
 llm_function: INJECT
-purpose: Standards and domain knowledge for workflow production
-sources: CODEXA ADW system, LangGraph, Temporal, Airflow, multi-agent orchestration
+purpose: Domain knowledge for workflow production — atomic searchable facts
+sources: workflow-builder MANIFEST.md + SCHEMA.md
 ---
 
 # Domain Knowledge: workflow
 
-## Foundational Concept
-Workflows define how multiple agents coordinate to accomplish a mission. Unlike
-prompt chains (text-to-text), workflows involve agent spawning, tool usage, signal
-exchange, and dependency management. In CODEXA, workflows map to the ADW pattern
-(Automated Directed Workflow) and are executed via STELLA dispatch.
+## Executive Summary
 
-## Industry Implementations
+A `workflow` (P12) is a runtime orchestration plan — numbered steps with agents, dependencies, signals, and execution mode (sequential/parallel/mixed). It differs from `chain` (text-only prompt sequence), `dag` (dependency graph without execution), `crew` (collaboration protocol), and `handoff` (single-satellite instruction) by specifying WHEN and HOW agents run, what signals they emit, and how failures are handled across multiple satellites.
 
-| Source | What it defines | CEX alignment |
-|--------|----------------|---------------|
-| Apache Airflow | DAG-based task orchestration with operators | Analogous: our steps with agents |
-| Temporal.io | Durable workflow execution with signals | Direct: our signal-based completion |
-| LangGraph | Stateful multi-agent graph execution | Similar: our mixed execution mode |
-| CrewAI | Multi-agent crew coordination | Related: our crew type (P12) |
-| CODEXA ADW | Automated Directed Workflows (~240 existing) | Direct: our workflow formalizes ADW |
+## Spec Table
 
-## Key Patterns
-- Wave planning: group independent steps into parallel waves, sequential between waves
-- Dependency resolution: step N starts only after all depends_on steps complete
-- Signal contracts: every step emits a signal on completion (see signal-builder)
-- Spawn integration: each satellite step references a spawn_config
-- Error boundaries: per_step retry isolates failures from healthy steps
-- Timeout budgeting: workflow timeout >= sum of step timeouts (sequential) or max (parallel)
-- Idempotent steps: steps should be safe to retry without side effects
+| Property | Value |
+|----------|-------|
+| Pillar | P12 |
+| Kind | `workflow` |
+| ID pattern | `^p12_wf_[a-z][a-z0-9_]+$` |
+| Naming | `p12_wf_{name_slug}.md` |
+| Max body | 3072 bytes |
+| Machine format | yaml (frontmatter) + markdown (body) |
+| Required frontmatter fields | 11 |
+| Recommended fields | 8 |
+| `execution` values | `sequential`, `parallel`, `mixed` |
+| `retry_policy` values | `none`, `per_step`, `global` |
+| `quality` field | always `null` |
+| `steps_count` | must exactly match numbered steps in body |
 
-## CEX-Specific Extensions
+## Patterns
 
-| Field | Justification | Closest equivalent |
-|-------|--------------|-------------------|
-| satellites | Explicit satellite list for resource planning | Airflow pool assignment |
-| spawn_configs | References to spawn parameters | Kubernetes pod specs |
-| signals | Signal contract per step | Temporal signal channels |
-| execution | Explicit execution mode (sequential/parallel/mixed) | Airflow trigger rules |
+| Pattern | Rule |
+|---------|------|
+| Wave planning | Group independent steps into parallel waves; sequential between waves |
+| Dependency resolution | Step N only starts after all `depends_on` steps emit completion signal |
+| Signal contract | Every step emits a signal on completion; reference signal-builder conventions |
+| Spawn integration | Each satellite step references a `spawn_config` ID |
+| `per_step` retry | Isolates failures — one failed step does not abort healthy parallel steps |
+| Timeout budgeting | Sequential: `timeout >= sum(step timeouts)`; parallel: `timeout >= max(step timeouts)` |
+| Idempotent steps | Steps must be safe to retry without side effects |
+| `steps_count` integrity | Count numbered steps in body and set `steps_count` to match exactly |
 
-## Boundary vs Nearby Types
+**Execution modes**:
 
-| Type | What it is | Why it is NOT workflow |
-|------|------------|----------------------|
-| chain (P03) | Prompt sequence (text transformations) | Chains are text-only, no agents/tools |
-| dag (P12) | Dependency graph without execution | DAGs define order, workflows execute |
-| crew (P12) | Agent collaboration protocol | Crews define HOW agents interact, workflows define WHEN |
-| handoff (P12) | Single-satellite task instruction | Handoff is ONE task, workflow is MANY |
-| dispatch_rule (P12) | Keyword-to-satellite routing | Dispatch routes, workflow orchestrates |
+| Mode | When to use |
+|------|------------|
+| `sequential` | Steps have strict ordering; each waits for previous |
+| `parallel` | Steps are independent; all run simultaneously |
+| `mixed` | Waves: parallel within wave, sequential between waves |
+
+**Body sections (required order)**:
+
+| Section | Content |
+|---------|---------|
+| `## Purpose` | Why this workflow exists; what mission it accomplishes |
+| `## Steps` | Numbered steps — each defines `agent`, `action`, `input`, `output`, `signal` |
+| `## Dependencies` | What must exist before workflow starts |
+| `## Signals` | What signals are emitted and when |
+
+**Boundary — what workflow is NOT**:
+
+| kind | Why NOT workflow |
+|------|----------------|
+| `chain` | Text-only prompt sequence — no agents, no tools, no signals |
+| `dag` | Defines dependency order only — no execution, no satellites |
+| `crew` | Defines HOW agents collaborate — not WHEN they run |
+| `handoff` | Single-satellite task instruction — one task, not many steps |
+| `dispatch_rule` | Routes keywords to satellites — does not orchestrate execution |
+
+## Anti-Patterns
+
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| `steps_count` mismatch | HARD gate: count must match body steps exactly |
+| Steps without `agent` field | Each step must define which agent executes it |
+| No signals defined | Runtime has no completion contract; orchestrator cannot chain steps |
+| Dependent steps without `depends_on` | Race condition — step may start before prerequisite finishes |
+| `timeout` smaller than step sum | Workflow times out before steps can complete |
+| `quality` set to a score | Never self-score; governance assigns |
+| Business logic in step descriptions | Steps define orchestration, not implementation |
+
+## Application
+
+1. Define the mission in `title` and `domain`
+2. Set `execution` mode: `sequential`, `parallel`, or `mixed`
+3. Decompose mission into discrete steps — each with one agent and one action
+4. Map dependencies: if step B needs step A's output, add `depends_on: [step_A_id]`
+5. Set `steps_count` to match the exact number of numbered steps you write
+6. List all participating satellites in `satellites`
+7. List all referenced `spawn_config` IDs in `spawn_configs`
+8. Define signals emitted per step in `signals` frontmatter and `## Signals` body section
+9. Set `retry_policy`: `per_step` for fault isolation, `global` for all-or-nothing
+10. Set `timeout` respecting execution mode math (sum vs max)
+11. Leave `quality: null` — do not self-score
 
 ## References
-- Apache Airflow: DAG orchestration patterns
-- Temporal.io: Durable execution and signals
-- LangGraph: Multi-agent stateful graphs
-- CODEXA: records/pool/workflows/ADW_*.md (~240 implicit workflows)
+
+- workflow-builder MANIFEST.md v1.0.0
+- workflow-builder SCHEMA.md v1.0.0

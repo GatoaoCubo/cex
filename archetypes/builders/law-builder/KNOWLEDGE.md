@@ -1,91 +1,75 @@
 ---
-id: law-builder-knowledge
-kind: knowledge_card
 pillar: P08
-parent: law-builder
-version: 1.0.0
-created: "2026-03-26"
-updated: "2026-03-26"
-author: EDISON
-tags: [knowledge, law-builder, governance, enforcement, P08]
+llm_function: INJECT
+purpose: Domain knowledge for law production — atomic searchable facts
+sources: law-builder MANIFEST.md + SCHEMA.md v1.0.0
 ---
 
-# law-builder — KNOWLEDGE
+# Domain Knowledge: law
 
-## Foundational
+## Executive Summary
 
-Operational laws descend from governance frameworks — mandatory rules that ALL participants must follow without exception. Unlike guidelines (advisory) or patterns (recommended), laws are enforced with consequences. In software engineering: database constraints (invariants the DB enforces), SLAs (mandatory service levels), RBAC policies (access rules with no bypass), RFC 2119 MUST/SHALL requirements.
+Laws are inviolable operational rules — the highest-authority governance artifacts in P08. Each law encodes ONE mandate in imperative mood (MUST/SHALL/NEVER/ALWAYS) with an explicit enforcement mechanism and exception list. Laws differ from instructions (flexible guides, P03), guardrails (safety restrictions, P11), and axioms (abstract truths, P10) by being operationally binding with named consequences for violation.
 
-In CEX: laws are inviolable operational rules that constrain ALL artifacts, agents, and processes. They differ from instructions (P03, flexible procedural guides) in that violation of a law triggers a consequence; violation of an instruction triggers a correction.
+## Spec Table
 
-## Industry Implementations
+| Property | Value |
+|----------|-------|
+| Pillar | P08 (governance) |
+| Kind | `law` — exact literal, never "rule" / "mandate" / "policy" |
+| ID pattern | `p08_law_{number}` — no leading zeros |
+| Required frontmatter | 15 fields |
+| Extended frontmatter | 4 fields (scope, exceptions, priority, keywords) |
+| Required body sections | 8 |
+| Max body bytes | 3072 |
+| Density minimum | 0.80 |
+| Quality field | always `null` — self-scoring prohibited (H05) |
+| Statement mood | imperative: MUST / SHALL / NEVER / ALWAYS |
+| Number | positive integer, unique + sequential across all P08 laws |
+| Scope values | `system`, `satellite`, `domain` |
+| Priority range | 1–10 (10 = highest; resolves law conflicts) |
+| Quality gates | 9 HARD + 10 SOFT |
 
-| Source | What it defines | CEX alignment |
-|--------|----------------|---------------|
-| Database constraints | Invariants that DB enforces automatically | Enforcement mechanism pattern |
-| SLA/SLO (Google SRE) | Mandatory service levels with consequences | Scope + threshold + enforcement |
-| RBAC policies | Access rules with no bypass path | Exception handling pattern |
-| RFC 2119 (MUST/SHALL) | Requirement levels: MUST vs SHOULD | Statement clarity standard |
-| OWASP Security Laws | Inviolable security mandates | Violation + consequence pattern |
-| CEX Laws v3 | 11 operational laws governing multi-agent system | Domain: CEX governance |
+## Patterns
 
-## Key Patterns
+| Pattern | Correct Form |
+|---------|-------------|
+| Imperative statement | "Systems MUST validate output before committing" — one sentence, one modal verb |
+| Enforcement naming | Name exact mechanism: "pre-commit hook", "CI gate", "runtime validator H05" |
+| Exception list | Concrete conditions OR `[]` — never omit the field |
+| Rationale vs statement | Rationale answers WHY; never restate the statement |
+| Number as PK | `number` is the unique key across all laws; never reuse a retired number |
+| Priority 10 | Reserved for laws that win all conflicts unconditionally |
+| Scope narrowing | `domain` scope: law applies only within named domain, not system-wide |
 
-- **IMPERATIVE**: statement as clear command using RFC 2119 keywords: MUST, SHALL, NEVER, ALWAYS
-- **RATIONALE**: every law has a "why" — prevents blind obedience, enables evolution
-- **ENFORCEMENT**: mechanism that detects or prevents violation (automated check, review gate, runtime guard)
-- **EXCEPTIONS**: explicit list with conditions — prevents "well technically..." ambiguity
-- **SCOPE**: precise boundaries (system-wide, satellite-specific, domain-specific)
-- **PRIORITY**: integer 1-10; when laws conflict, higher priority resolves (10 = highest)
-- **EXAMPLES**: concrete scenarios demonstrating correct law application
-- **VIOLATIONS**: concrete scenarios showing law broken with consequence
+## Anti-Patterns
 
-## Law Anatomy
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| `kind: rule` or `kind: mandate` | H04 hard gate — exact literal "law" required |
+| Statement without MUST/SHALL/NEVER/ALWAYS | Not imperative; enforcement is ambiguous |
+| `quality: 7.5` (any number) | H05 hard gate — must be `null`; self-scoring prohibited |
+| Omitting `exceptions` field | Gate failure — absence means no exceptions considered |
+| Rationale restates statement | Zero information gain; density check fails |
+| `id: p08_law_01` (leading zero) | Fails regex `^p08_law_[0-9]+$` |
+| Body > 3072 bytes | Exceeds max_bytes hard constraint |
+| Enforcement = "enforced automatically" | Must name the specific tool, hook, or gate |
+| `number` collision with existing law | Uniqueness gate — verify against all P08 laws first |
 
-```
-number: 5          <- unique integer, sequential
-statement: "No artifact producer SHALL self-assign a quality score"
-rationale: "Self-scoring inflates pool metrics; bias averages 20-30%"
-enforcement: "H05 gate in every builder QUALITY_GATES.md rejects quality != null"
-exceptions: []     <- explicit: empty list means NO exceptions
-scope: system      <- system | satellite | domain
-priority: 9        <- high priority, near-inviolable even in conflicts
-```
+## Application
 
-## Boundary vs Nearby Types
+1. Find next sequential `number` — verify no collision with existing P08 laws
+2. Set `id: p08_law_{number}` and filename `p08_law_{number}.md` — must match exactly
+3. Write `statement`: one imperative sentence using MUST / SHALL / NEVER / ALWAYS
+4. Write `rationale`: WHY this law exists — must not restate the statement
+5. Name the exact `enforcement` mechanism (hook name, gate ID, validator, CI step)
+6. Set `exceptions`: explicit list of conditions, or `[]` if none apply
+7. Set `scope` (system / satellite / domain) and `priority` (1–10)
+8. Write all 8 body sections: Statement, Rationale, Enforcement, Exceptions, Examples, Violations, History, References
+9. Validate: H02 id pattern, H04 kind literal, H05 null quality, H08 unique number, H09 imperative mood — plus 10 SOFT gates
 
-| Type | What it is | Why NOT law |
-|------|------------|-------------|
-| instruction (P03) | Flexible procedural guide with steps | Instructions SUGGEST behavior; laws MANDATE it |
-| guardrail (P11) | Safety boundary preventing harm | Guardrails RESTRICT (safety-focused); laws GOVERN (operational) |
-| axiom (P10) | Abstract permanent truth | Axioms are PHILOSOPHICAL ("truth exists"); laws are OPERATIONAL ("MUST commit") |
-| lifecycle_rule (P11) | Lifecycle transition rule | Lifecycle rules manage STATE TRANSITIONS; laws govern BEHAVIOR |
-| pattern (P08) | Reusable solution with proven value | Patterns RECOMMEND adoption; laws MANDATE compliance |
-| quality_gate (P11) | Pass/fail validation barrier | Gates SCORE artifacts; laws govern BEHAVIOR that gates check |
-| satellite_spec (P08) | Component definition | Specs DEFINE structure; laws GOVERN operation |
-| diagram (P08) | Visual representation | Diagrams VISUALIZE; laws CONSTRAIN |
+## References
 
-## Enforcement Taxonomy
-
-| Mechanism | Example | When to use |
-|-----------|---------|-------------|
-| Automated gate | YAML parser checks `quality == null` | Always preferred |
-| CI/CD hook | Pre-commit rejects non-compliant files | File-level compliance |
-| Runtime guard | Satellite refuses to output without signal | Behavioral compliance |
-| Review gate | Human validator rejects artifact | When automation is not feasible |
-| Monitoring | Alert fires when law is violated in production | Post-hoc detection |
-
-## Scope Definitions
-
-| Scope | Meaning | Example |
-|-------|---------|---------|
-| system | Applies to all actors, artifacts, satellites | "quality: null always" |
-| satellite | Applies to specific satellite only | "STELLA NEVER executes tasks" |
-| domain | Applies within a specific domain | "KC MUST have density >= 0.80" |
-
-## CEX Laws Catalog (existing, for collision avoidance)
-
-Current laws in `records/framework/docs/LAWS_v3_PRACTICAL.md`:
-- Law 1-11 cover: quality threshold, pool eligibility, self-scoring, commit protocol, scope fence, signal protocol, quality provenance, naming convention, density minimum, routing mandate, terminal limit
-- New laws MUST be numbered 12+ to avoid collision
-- Verify uniqueness via brain_query [IF MCP] before assigning number
+- law-builder SCHEMA.md v1.0.0
+- law-builder QUALITY_GATES.md (9 HARD + 10 SOFT)
+- RFC 2119 — requirement levels MUST/SHALL/SHOULD

@@ -1,69 +1,67 @@
 ---
 pillar: P01
 llm_function: INJECT
-purpose: Operational knowledge and patterns for session_state production
-sources: P10 schema + CODEXA session patterns
+purpose: Domain knowledge for session_state production — atomic searchable facts
+sources: session-state-builder MANIFEST.md + SCHEMA.md, P10 schema
 ---
 
 # Domain Knowledge: session_state
 
-## Core Concept
-`session_state` is the ephemeral snapshot of an agent's execution context.
-It answers: "What is this agent doing right now, how far along, and where can we recover?"
+## Executive Summary
 
-Session states are observations, not instructions or accumulated knowledge.
-They are consumed by monitors, recovery tools, and post-session extractors.
+Session states are ephemeral snapshots of an agent's execution context — they capture what the agent is doing right now, how far along it is, and where recovery can resume. Each snapshot is a single-point observation (not a time series) consumed by monitors, recovery tools, and post-session extractors. They differ from runtime states (which persist across sessions and drive decisions), learning records (which accumulate experience over time), and axioms (which are immutable truths) by being strictly ephemeral observations lost when the session ends.
 
-## Minimum Semantic Contract
-Every valid session_state carries:
-- `session_id`: unique execution context
-- `agent`: who is executing
-- `status`: lifecycle phase
-- `started_at`: when execution began
+## Spec Table
 
-Plus standard CEX fields: id, kind, lp, version, dates, author, quality, tags, tldr.
+| Property | Value |
+|----------|-------|
+| Pillar | P10 (memory) |
+| Kind | `session_state` (exact literal) |
+| ID pattern | `p10_ss_{session_slug}` |
+| Naming | `p10_ss_{agent}_{task}.yaml` |
+| Required frontmatter | session_id, agent, status, started_at + standard CEX fields |
+| Max body | 3072 bytes |
+| Density minimum | >= 0.80 |
+| Quality field | always `null` |
+| Status values | active, paused, completed, aborted |
+| Format | YAML (machine-parseable) |
 
-## Status Semantics
-| Status | Meaning | Typical consumer action |
-|--------|---------|-------------------------|
-| active | Session in progress | monitor, update dashboard |
-| paused | Session suspended, recoverable | wait for resume or timeout |
-| completed | Session ended normally | extract learning, archive |
-| aborted | Session ended abnormally | investigate, retry if needed |
+## Patterns
 
-## Optional Fields Pattern
-Session states may carry runtime metrics:
-- `active_tasks` / `completed_tasks`: task progress tracking
-- `context_window_used` / `context_window_max`: token budget monitoring
-- `tools_called` / `tool_call_count`: execution intensity
-- `errors` / `error_count`: failure tracking
-- `checkpoints` / `last_checkpoint`: recovery points
-- `duration_seconds`: elapsed time
+| Pattern | Application |
+|---------|-------------|
+| Minimum semantic contract | session_id + agent + status + started_at — always present |
+| Status semantics | active (in progress), paused (recoverable), completed (normal end), aborted (abnormal) |
+| Optional runtime metrics | active_tasks, context_window_used, tools_called, errors, checkpoints |
+| Single-point snapshot | One observation, not a time series; no historical data |
+| Graceful degradation | Must work when optional fields are absent |
+| Machine-parseable format | YAML for programmatic consumption by monitors |
+| Checkpoint for recovery | last_checkpoint enables resume after interruption |
 
-Optional fields extend the snapshot. They must not transform it into persistent state.
+## Anti-Patterns
 
-## Boundary vs Nearby Types
-| Type | What it is | Why it is not `session_state` |
-|------|------------|-------------------------------|
-| runtime_state | persistent state across sessions | carries routing decisions, survives session end |
-| learning_record | accumulated learning over time | stores patterns, scores, outcomes across sessions |
-| brain_index | search index configuration | configures BM25/FAISS, not session data |
-| axiom | immutable fundamental rule | permanent, not ephemeral |
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| Persistent state in session_state | Session state is ephemeral; use runtime_state for persistence |
+| Time series data | Not a log; single snapshot per write |
+| Missing session_id | Core identifier; cannot correlate with other session data |
+| Missing status field | Consumers cannot determine agent lifecycle phase |
+| Body > 3072 bytes | Exceeds max; session states must be compact |
+| Routing decisions in session state | Routing belongs in runtime_state or mental_model |
+| Optional fields without graceful fallback | Consumers break when optional fields absent |
 
-Rule of thumb:
-- "Agent state right now" -> `session_state`
-- "Agent state across sessions" -> `runtime_state`
-- "What the agent learned" -> `learning_record`
+## Application
 
-## Naming Pattern
-P10 schema defines: `p10_ss_{session}.yaml`
-Examples:
-- `p10_ss_edison_wave19_build.yaml`
-- `p10_ss_atlas_deploy_v2.yaml`
-- `p10_ss_shaka_research_competitors.yaml`
+1. Set session_id (unique execution context identifier)
+2. Set agent (which agent is executing)
+3. Set status: active, paused, completed, or aborted
+4. Set started_at (ISO 8601 timestamp)
+5. Add optional metrics as needed: tasks, context window, tools, errors
+6. Add checkpoint data for recovery if applicable
+7. Keep body compact (single snapshot); validate <= 3072 bytes
 
-## Operational Constraints
-- Must stay under 3072 bytes
-- Should remain a single-point snapshot, not a time series
-- Should be easy to parse programmatically
-- Must degrade gracefully when optional fields are absent
+## References
+
+- session-state-builder SCHEMA.md v1.0.0
+- P10 memory pillar schema
+- Finite state machine (status lifecycle)

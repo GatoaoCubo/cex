@@ -1,61 +1,71 @@
 ---
 pillar: P01
 llm_function: INJECT
-purpose: Standards and industry knowledge for model_card production
-sources: SHAKA(sonnet) + PYTHA-GEMINI(gemini-2.5-pro) + ATLAS-CODEX(codex) + EDISON(opus)
+purpose: Domain knowledge for model_card production — atomic searchable facts
+sources: model-card-builder MANIFEST.md + SCHEMA.md, Mitchell 2019, LiteLLM, HuggingFace
 ---
 
 # Domain Knowledge: model_card
 
-## Foundational Standard
-Mitchell et al. 2019 "Model Cards for Model Reporting" (https://arxiv.org/abs/1810.03993)
-Defines: model name, developers, intended use, limitations, ethical considerations.
-947 unique section names across industry (AI Transparency Atlas 2024) = severe fragmentation.
-CEX normalizes, does not invent.
+## Executive Summary
 
-## Industry Implementations
+Model cards are technical specification artifacts for LLMs — they encode pricing, context limits, capability booleans, and use-case guidance into a structured, sourced document. Every specification row must cite a source URL; no self-scoring at creation. They differ from benchmarks (which measure performance), boot configs (which configure runtime), and agents (which define capabilities) by being static reference specs used for model selection and comparison.
 
-| Source | What it defines | CEX uses |
-|--------|----------------|----------|
-| HuggingFace Model Cards | YAML frontmatter + MD body, pipeline_tag, model-index, eval_results | Format pattern, eval schema |
-| LiteLLM registry | 2593 models, capability booleans (supports_*), per-token pricing | Capability flags, pricing schema |
-| Anthropic SDK ModelInfo | ModelCapabilities with typed booleans, context limits | Capability object design |
-| LangChain ModelProfile | Modality booleans (text/image/audio), tool_calling flags | Feature coverage |
-| Google Model Card Toolkit | Proto-based JSON schema, HTML rendering | Structural validation |
-| OpenAI Model API | Minimal: id, created, owned_by | Baseline fields |
+## Spec Table
 
-## Regulatory Frameworks
-| Framework | Relevance | CEX alignment |
-|-----------|-----------|---------------|
-| EU AI Act (2024) | Requires transparency docs for high-risk AI systems | model_card satisfies Art. 13 transparency requirements |
-| NIST AI RMF 1.0 | Govern→Map→Measure→Manage lifecycle | model_card covers Map (capabilities) + Govern (constraints) |
+| Property | Value |
+|----------|-------|
+| Pillar | P02 (design-time spec) |
+| Kind | `model_card` (exact literal) |
+| ID pattern | `p02_mc_{provider}_{model_slug}` |
+| Required frontmatter | 26 fields |
+| Quality gates | 10 HARD + 15 SOFT |
+| Max body | 4096 bytes |
+| Density minimum | >= 0.80 |
+| Quality field | always `null` |
+| Domain field | always `model_selection` |
+| Modalities | 5 booleans (text_input, text_output, image_input, audio_input, pdf_input) |
+| Features | 8 booleans (tool_calling, structured_output, reasoning, etc.) |
+| Min When-to-Use rows | 5 |
+| Provider enum | anthropic, openai, google, meta, mistral, cohere, deepseek, alibaba, ai21, other |
 
-## Universal Fields (8+/10 providers)
-model_name, provider, release_date, context_window, benchmarks, intended_use, architecture, official_url
+## Patterns
 
-## Frequent Fields (5-7/10)
-parameters, safety, limitations, training_data, license, max_output, knowledge_cutoff
+| Pattern | Application |
+|---------|-------------|
+| Pricing normalization | Per 1M tokens, USD; `null` for open-weight, `0.00` for free-tier |
+| Capability booleans | Always true/false, never string or null |
+| Sourced specifications | Every spec row MUST have a source URL — never `-` |
+| Identity/Capability/Economics split | Immutable identity, mutable capabilities, volatile pricing |
+| Status lifecycle | active -> deprecated -> sunset |
+| Freshness gate | 90 days (providers update pricing/features quarterly) |
+| Tiered pricing | Lowest tier in frontmatter; document higher tiers in body |
 
-## Key Patterns (from code analysis)
-- Separate IDENTITY (immutable) from CAPABILITIES (mutable) from ECONOMICS (volatile)
-- Capabilities as explicit booleans, never prose
-- Pricing normalized to per_1M_tokens for comparison
-- Status lifecycle: active → deprecated → sunset
-- Freshness gate: 90 days (pricing/features change quarterly)
+## Anti-Patterns
 
-## CEX-Extensions (justified gaps)
-| Field | Justification | Closest industry equivalent |
-|-------|--------------|---------------------------|
-| status (active/deprecated/sunset) | Models deprecate; cards go stale | HF new_version, LiteLLM deprecation_date |
-| fine_tunable (bool) | Routing decision: fine-tune vs prompt | Meta finetuning_recipe (narrative) |
-| pricing.cache_read/write | Caching changes economics 10x | Not separated in LiteLLM |
-| freshness gate (90d) | model_cards degrade 4x faster than KCs | No standard defines this |
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| Pricing `0` for open-weight model | Must be `null`; 0 implies free API |
+| Spec row without source URL | Fails HARD gate — every row needs citation |
+| Modality as string "yes"/"no" | Must be boolean true/false |
+| `domain: llm` | Must be literal `model_selection` |
+| Self-assigned quality score | `quality` must be null |
+| When-to-Use table with < 5 rows | Fails HARD gate — insufficient guidance |
+| Capability as prose paragraph | Must be structured boolean fields |
+
+## Application
+
+1. Set `id: p02_mc_{provider}_{model_slug}` — must equal filename stem
+2. Populate all 26 required frontmatter fields; set `quality: null`
+3. Set `pricing`: base tier per 1M tokens; `null` for open-weight
+4. Fill `modalities` (5 booleans) and `features` (8 booleans) from official docs
+5. Write `## Specifications` table with Value + Source URL per row
+6. Write `## When to Use` decision table with >= 5 rows
+7. Validate: body <= 4096 bytes, all specs sourced, 10 HARD + 15 SOFT gates
 
 ## References
-- https://arxiv.org/abs/1810.03993 (Mitchell 2019)
-- https://huggingface.co/docs/hub/en/model-cards
-- https://github.com/BerriAI/litellm (model registry)
-- https://github.com/anthropics/anthropic-sdk-python (ModelCapabilities)
-- https://arxiv.org/html/2512.12443 (AI Transparency Atlas)
-- https://artificialintelligenceact.com/ (EU AI Act)
-- https://www.nist.gov/itl/ai-risk-management-framework (NIST AI RMF)
+
+- model-card-builder SCHEMA.md v2.0.0
+- Mitchell et al. 2019 "Model Cards for Model Reporting"
+- HuggingFace Model Cards documentation
+- LiteLLM model registry (2593 models)
