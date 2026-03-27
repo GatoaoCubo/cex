@@ -1,36 +1,92 @@
 ---
+id: p11_qg_runtime_state
+kind: quality_gate
 pillar: P11
-llm_function: GOVERN
-purpose: Quality gates for runtime_state artifacts
+title: "Gate: Runtime State"
+version: "1.0.0"
+created: "2026-03-27"
+updated: "2026-03-27"
+author: EDISON
+domain: runtime_state
+quality: null
+density_score: 0.85
+tags:
+  - quality-gate
+  - runtime-state
+  - p11
+  - agent-state
+  - routing
+tldr: "Quality gate for agent runtime mental state: verifies routing rules, state transitions, persistence scope, and conflict resolution."
 ---
 
-# Quality Gates: runtime_state
+## Definition
+
+A runtime state artifact captures the live decision-making configuration of an agent: its routing rules (with conditions and confidence), state transitions (with trigger events), priority ordering, and heuristics. It applies only during execution — it contains no design-time content such as capability descriptions or architectural diagrams. Persistence scope declares whether state survives across sessions or resets each time.
+
+Scope: files with `kind: runtime_state`. Does not apply to mental models (design-time identity), system prompts (static instructions), or session state (ephemeral task context).
+
+---
 
 ## HARD Gates
-| Gate | Check |
-|------|-------|
-| H01 | YAML parses |
-| H02 | id starts with p10_rs_ |
-| H03 | id == filename stem |
-| H04 | kind == runtime_state |
-| H05 | pillar == P10 |
-| H06 | quality == null |
-| H07 | persistence in [session, cross_session] |
-| H08 | agent is non-empty string |
-| H09 | routing_mode in [keyword, semantic, hybrid, rule_based] |
-| H10 | update_frequency in [per_task, per_session, on_trigger] |
 
-## SOFT Gates
-| Gate | Check | Weight |
-|------|-------|--------|
-| S01 | tldr < 160 chars | 1.0 |
-| S02 | tags >= 3 items | 0.5 |
-| S03 | Routing Rules has >= 2 rules with conditions and confidence | 1.0 |
-| S04 | Decision Tree has >= 2 branches | 1.0 |
-| S05 | Priorities has >= 3 ordered items with rationale | 1.0 |
-| S06 | Heuristics has >= 2 rules of thumb with confidence | 1.0 |
-| S07 | State Transitions has >= 2 triggers | 0.5 |
-| S08 | density >= 0.80 | 1.0 |
+Failure on any single gate means REJECT regardless of soft score.
 
-## Scoring
-GOLDEN >= 9.5 | PUBLISH >= 8.0 | REVIEW >= 7.0 | REJECT < 7.0
+| ID  | Predicate | How to test |
+|-----|-----------|-------------|
+| H01 | Frontmatter parses as valid YAML | `yaml.safe_load(frontmatter)` raises no error |
+| H02 | `id` matches namespace `p10_rs_*` | `id.startswith("p10_rs_")` is true |
+| H03 | `id` equals filename stem | `Path(file).stem == id` |
+| H04 | `kind` equals literal `runtime_state` | string equality check |
+| H05 | `quality` is null at authoring time | `quality is None` |
+| H06 | All required frontmatter fields present and non-empty | id, kind, pillar, title, version, created, updated, author, domain, tags, tldr, agent, persistence all present |
+| H07 | Routing rules section present with >= 2 rules each having a condition | count routing rule entries >= 2; each has a condition field |
+| H08 | State transitions section present with >= 1 named transition and a trigger event | count transitions >= 1; each has trigger field non-empty |
+| H09 | `persistence` field is one of: within-session, cross-session | enum membership check |
+
+---
+
+## SOFT Scoring
+
+Score each dimension 0 (absent or fails) to 1 (present and passes). Weights are 0.5 or 1.0.
+
+| #  | Dimension | Weight |
+|----|-----------|--------|
+| 1  | `density_score` field present and >= 0.80 | 1.0 |
+| 2  | Every routing rule has an explicit condition (not a vague keyword) | 1.0 |
+| 3  | Every state transition has a named trigger event (not just a description) | 1.0 |
+| 4  | Priority ordering present with rationale for each rank | 1.0 |
+| 5  | Heuristics section present with at least 2 rules of thumb and their confidence levels | 1.0 |
+| 6  | Domain map present with explicit boundary (what this agent handles vs. what it defers) | 1.0 |
+| 7  | Tags list includes `runtime-state` | 0.5 |
+| 8  | Update conditions explicit (what triggers a state change, not just that state can change) | 1.0 |
+| 9  | Conflict resolution described for cases where two routing rules could both fire | 1.0 |
+| 10 | No design-time content present (no capability lists, architecture notes, or setup instructions) | 1.0 |
+| 11 | `tldr` is <= 160 characters | 0.5 |
+
+**Formula**: `final_score = (sum of score_i * weight_i) / (sum of weight_i) * 10`
+
+Weight total: 10.0. Each dimension contributes proportionally. Score range: 0.0 to 10.0.
+
+---
+
+## Actions
+
+| Tier | Threshold | Action |
+|------|-----------|--------|
+| GOLDEN | >= 9.5 | Publish to pool as golden; use as reference for agent state design |
+| PUBLISH | >= 8.0 | Publish to pool; mark production-ready |
+| REVIEW | >= 7.0 | Return to author with scored dimension feedback; one revision cycle allowed |
+| REJECT | < 7.0 | Block from pool; full rewrite required before re-evaluation |
+
+---
+
+## Bypass
+
+| Field | Value |
+|-------|-------|
+| condition | Agent is in early bootstrapping and fewer than 2 routing rules have been observed in practice |
+| approver | Domain lead must approve in writing before bypass takes effect |
+| audit_log | Record in `records/pool/audits/bypasses.md` with date, approver, and reason |
+| expiry | 21 days from bypass grant; routing rules must be grounded in observed agent behavior before expiry |
+
+H01 (YAML parses) and H05 (quality is null) may never be bypassed under any circumstance. Bypassing H09 (persistence scope) is never permitted — an undeclared persistence scope causes cross-session state contamination.

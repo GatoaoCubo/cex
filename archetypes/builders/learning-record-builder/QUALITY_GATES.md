@@ -1,61 +1,81 @@
 ---
+id: p11_qg_learning_record
+kind: quality_gate
 pillar: P11
-llm_function: GOVERN
-purpose: Automated quality gates for learning_record validation
-pattern: HARD gates block publish, SOFT gates contribute to 0-10 score
+title: "Gate: Learning Record"
+version: "1.0.0"
+created: "2026-03-27"
+updated: "2026-03-27"
+author: EDISON
+domain: learning_record
+quality: null
+tags: [quality-gate, learning-record, experience-capture, P10, retrospective]
+tldr: "Quality gate for learning_record artifacts: enforces outcome classification, impact score, and reproducible context."
+density_score: 0.85
 ---
 
-# Quality Gates: learning_record
+# Gate: Learning Record
 
-## HARD Gates (block publish if ANY fails)
+## Definition
 
-| Gate | Check | Why |
-|------|-------|-----|
-| H01 | YAML frontmatter parses | Broken YAML = broken artifact |
-| H02 | id matches `^p10_lr_[a-z][a-z0-9_]+$` | Namespace compliance |
-| H03 | id == filename stem | Brain search relies on this |
-| H04 | kind == "learning_record" | Type integrity |
-| H05 | quality == null | Never self-score |
-| H06 | 15 required fields present | Completeness |
-| H07 | tags is list, len >= 3 | Searchability minimum |
-| H08 | topic is non-empty string | Learning must have subject |
-| H09 | outcome in [SUCCESS, PARTIAL, FAILURE] | Enum strict |
+A `learning_record` captures a discrete experience — a pattern that worked or an anti-pattern that failed — with enough context to reproduce the outcome. Gates prevent vague retrospectives from entering the pool and ensure every record carries a scored, classified, reproducible finding.
 
-## SOFT Gates (contribute to score)
+## HARD Gates
 
-| Gate | Check | Weight | Score if pass |
-|------|-------|--------|---------------|
-| S01 | tldr <= 160 chars, non-empty | 1.0 | 10 |
-| S02 | score is float 0.0-10.0 | 1.0 | 10 |
-| S03 | Pattern section has >= 2 concrete steps | 1.0 | 10 |
-| S04 | Anti-Pattern section has >= 1 specific failure | 1.0 | 10 |
-| S05 | Context section names environment + timing | 1.0 | 10 |
-| S06 | Impact section has measurable outcomes | 1.0 | 10 |
-| S07 | Reproducibility section present with confidence | 1.0 | 10 |
-| S08 | Body has all 7 required sections | 1.0 | 10 |
-| S09 | density >= 0.80 (no filler phrases) | 1.0 | 10 |
-| S10 | satellite field present | 0.5 | 10 |
-| S11 | keywords present, len >= 2 | 0.5 | 10 |
-| S12 | timestamp in ISO 8601 format | 0.5 | 10 |
+All HARD gates must pass. Any single failure sets score to 0 and blocks publish.
 
-## Scoring Formula
-```text
-hard_pass = all 9 HARD gates pass
-soft_score = sum(gate_score * weight) / sum(weights)
-final = hard_pass ? soft_score : 0
+| ID  | Check | Failure consequence |
+|-----|-------|---------------------|
+| H01 | YAML frontmatter parses without error | Artifact unparseable by tooling |
+| H02 | `id` matches `^p10_lr_[a-z][a-z0-9_]+$` | Namespace violation — not discoverable |
+| H03 | `id` equals filename stem exactly | Brain search failure — id/file mismatch |
+| H04 | `kind` == literal string `"learning_record"` | Type integrity failure |
+| H05 | `quality` == `null` | Self-scoring violation — pool metric corruption |
+| H06 | All required fields present and non-empty (`id`, `kind`, `pillar`, `version`, `created`, `updated`, `author`, `topic`, `outcome`, `impact`, `satellite`, `tags`, `tldr`) | Incomplete artifact |
+| H07 | `outcome` is one of: `SUCCESS`, `PARTIAL`, `FAILURE` | Enum violation — unclassifiable record |
+| H08 | Pattern or Anti-Pattern classification present in body | Record lacks directional finding |
+| H09 | `impact` field is a float between 0.0 and 10.0 | Impact unscored — not comparable to other records |
+| H10 | Reproducibility assessment present in body | Experience cannot be transferred |
 
-GOLDEN:  >= 9.5 (all HARD + 95% SOFT)
-PUBLISH: >= 8.0 (all HARD + 80% SOFT)
-REVIEW:  >= 7.0 (all HARD + 70% SOFT)
-REJECT:  < 7.0 or any HARD fail
-```
+## SOFT Scoring
 
-## Automation
-Primary: validate_artifact.py --kind learning_record [PLANNED]
-Interim: validate manually against this file, checking each gate.
+Weights sum to 100%. Each dimension scores 0 or its full weight.
 
-## Pre-Production Checklist
-- [ ] Experience identified with clear outcome (SUCCESS/PARTIAL/FAILURE)
-- [ ] No existing learning_record covers same experience (brain_query checked)
-- [ ] Both pattern and anti-pattern identifiable
-- [ ] Impact can be quantified (time, errors, quality delta)
+| ID  | Dimension | Weight | Criteria |
+|-----|-----------|--------|----------|
+| S01 | tldr quality | 1.0 | `tldr` <= 160 chars, non-empty, states the finding not just the topic |
+| S02 | Context sufficient for reproduction | 1.0 | Names environment, timing, and triggering conditions |
+| S03 | Pattern steps concrete | 1.0 | Pattern section has >= 2 ordered steps, not abstract principles |
+| S04 | Anti-pattern failure specific | 1.0 | Anti-Pattern section names exact failure mode, not category |
+| S05 | Impact score justification clear | 1.0 | Score justified with measurable delta (time, errors, quality) |
+| S06 | Actionable takeaway present | 1.0 | Closes with a single directive another agent can act on immediately |
+| S07 | Satellite/domain tagged | 0.5 | `satellite` field non-empty and matches known satellite or `GENERAL` |
+| S08 | `tags` includes record kind | 0.5 | At least one tag matches `outcome` value in lowercase |
+| S09 | Density >= 0.80 | 1.0 | No filler phrases: "it is important to note", "generally speaking", "in summary" |
+| S10 | Timestamps accurate | 0.5 | `created` and `updated` in ISO 8601 format, `updated` >= `created` |
+| S11 | Related records linked | 0.5 | `related` field lists >= 1 record id or explicitly `[]` |
+| S12 | Record is concise (<= 3 KB body) | 0.5 | Trim narrative; findings compress to essentials |
+| S13 | Pattern categorization consistent | 0.5 | Uses taxonomy: performance, reliability, quality, process, or integration |
+
+## Actions
+
+| Score | Tier | Action |
+|-------|------|--------|
+| >= 9.5 | GOLDEN | Publish to pool + record in memory |
+| >= 8.0 | PUBLISH | Commit to pool |
+| >= 7.0 | REVIEW | Acceptable with documented improvement items |
+| < 7.0 | REJECT | Revise and resubmit — do not publish |
+| 0 (HARD fail) | REJECTED | Fix failing HARD gate(s) first |
+
+## Bypass
+
+Bypasses are logged and expire automatically.
+
+| Field | Value |
+|-------|-------|
+| condition | Experience is time-sensitive (post-incident capture within 2 hours) and reproducibility section cannot be completed yet |
+| approver | Recording satellite lead or P10 owner |
+| audit_log | Entry required in `records/governance/bypass_log.md` with gate ID, timestamp, and completion deadline |
+| expiry | 48 hours — reproducibility section must be filled before expiry or record moves to DRAFT state |
+
+H01 and H05 cannot be bypassed under any condition.

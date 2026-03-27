@@ -1,98 +1,92 @@
 ---
-id: qg_prompt_template_builder
-kind: quality_gates
+id: p11_qg_prompt_template
+kind: quality_gate
 pillar: P11
-llm_function: GOVERN
-domain: prompt_template
-version: 1.0.0
-created: "2026-03-26"
-updated: "2026-03-26"
+title: "Gate: Prompt Template"
+version: "1.0.0"
+created: "2026-03-27"
+updated: "2026-03-27"
 author: EDISON
-tags: [quality-gates, prompt-template, P03, hard-gates, soft-gates]
+domain: prompt_template
+quality: null
+density_score: 0.85
+tags:
+  - quality-gate
+  - prompt-template
+  - p11
+  - variables
+  - reusable
+tldr: "Quality gate for reusable prompt molds with typed {{variables}}, injection points, and composable structure."
 ---
 
-# Quality Gates — prompt-template-builder
+## Definition
 
-## HARD Gates (H01-H08) — Blocking
+A prompt template is a reusable text mold containing one or more `{{variable}}` placeholders filled at invocation time. It declares where in the conversation it is injected (system or user turn), documents each variable's type and constraints, and provides at least one complete invocation example with all slots filled.
 
-All HARD gates must PASS before delivery. A single FAIL blocks the artifact.
+Scope: files with `kind: prompt_template`. Does not apply to system prompts (fixed text, no slots) or instruction files (behavioral rules, no variable slots).
 
-| Gate | ID | Check | How to verify |
-|---|---|---|---|
-| ID pattern | H01 | `id` matches `^p03_pt_[a-z][a-z0-9_]+$` | Regex match on frontmatter id field |
-| Required fields | H02 | All 5 required fields present: id, kind, title, variables, quality | Scan frontmatter keys |
-| No undeclared vars | H03 | Every `{{var}}` in template body appears in variables list | Extract all `{{...}}` from body; diff against declared names |
-| No unused vars | H04 | Every declared variable appears at least once in template body | Extract declared names; check each against body text |
-| Size limit | H05 | File size <= 8192 bytes | `wc -c` or equivalent byte count |
-| Valid syntax tier | H06 | `variable_syntax` is either `"mustache"` or `"bracket"` | Enum check on frontmatter field |
-| Variable fields complete | H07 | Every variable object has: name, type, required, default, description | Iterate variables list; check all 5 fields present |
-| Body non-empty | H08 | Template body section exists, is non-empty, contains >= 1 `{{variable}}` | Parse body section; check for at least one slot |
+---
 
-## SOFT Gates (S01-S10) — Scoring
+## HARD Gates
 
-Each SOFT gate contributes to the quality score. Score = (passed soft gates / 10) * 1.0.
+Failure on any single gate means REJECT regardless of soft score.
 
-| Gate | ID | Check | Weight |
-|---|---|---|---|
-| TLDR present and concise | S01 | `tldr` field is a single sentence, <= 120 chars | 0.10 |
-| Tags populated | S02 | `tags` list has >= 3 items | 0.10 |
-| Keywords populated | S03 | `keywords` list has >= 3 items distinct from tags | 0.10 |
-| Composable declared | S04 | `composable` field is explicitly set (not absent) | 0.05 |
-| Domain declared | S05 | `domain` field is non-empty string | 0.10 |
-| Purpose section complete | S06 | `## Purpose` section is >= 2 sentences | 0.10 |
-| Variables table matches list | S07 | Variables Table in body has same rows as frontmatter variables list | 0.15 |
-| Examples section present | S08 | `## Examples` section has >= 1 filled example with rendered output | 0.15 |
-| Density score set | S09 | `density_score` field is a float (not null) | 0.05 |
-| Version follows semver | S10 | `version` matches `^\d+\.\d+\.\d+$` | 0.10 |
+| ID  | Predicate | How to test |
+|-----|-----------|-------------|
+| H01 | Frontmatter parses as valid YAML | `yaml.safe_load(frontmatter)` raises no error |
+| H02 | `id` matches namespace `p03_pt_*` | `id.startswith("p03_pt_")` is true |
+| H03 | `id` equals filename stem | `Path(file).stem == id` |
+| H04 | `kind` equals literal `prompt_template` | string equality check |
+| H05 | `quality` is null at authoring time | `quality is None` |
+| H06 | All required frontmatter fields present and non-empty | id, kind, pillar, title, version, created, updated, author, domain, tags, tldr all present |
+| H07 | Body contains at least one `{{variable}}` placeholder | `re.search(r'\{\{[a-z_]+\}\}', body)` matches |
+| H08 | Every `{{variable}}` in body is declared in the Variables section | set(body_vars) == set(declared_vars) |
+| H09 | Injection point declared as `system` or `user` | `injection_point` field equals `system` or `user` |
 
-## Scoring Formula
+---
 
-```
-hard_score  = 1.0 if ALL H01-H08 PASS else 0.0  (blocking)
-soft_score  = sum(weight_i for each passing S gate) / sum(all weights)
-final_score = hard_score * soft_score
-```
+## SOFT Scoring
 
-Write `final_score` (rounded to 2 decimal places) into the `quality` field before delivery.
+Score each dimension 0 (absent or fails) to 1 (present and passes). Weights are 0.5 or 1.0.
 
-Pool submission requires: `quality >= 0.80`
+| #  | Dimension | Weight |
+|----|-----------|--------|
+| 1  | `density_score` field present and >= 0.80 | 1.0 |
+| 2  | Every variable has at least one constraint (enum, regex, max_len, or range) | 1.0 |
+| 3  | Syntax is uniform throughout (all `{{}}` Mustache or all `[]` bracket, never mixed) | 1.0 |
+| 4  | Complete invocation example present with every variable slot filled | 1.0 |
+| 5  | Default values documented for all optional variables | 0.5 |
+| 6  | Tags list includes `prompt-template` | 0.5 |
+| 7  | Scope note confirms this is not a system_prompt and not an instruction | 1.0 |
+| 8  | Output format specified (what the rendered template is expected to produce) | 1.0 |
+| 9  | Template is composable — no hard-coded surrounding structure that prevents embedding | 0.5 |
+| 10 | No hardcoded content placed inside variable slots (slots are empty placeholders only) | 1.0 |
+| 11 | `tldr` is <= 160 characters | 0.5 |
 
-## Automation
+**Formula**: `final_score = (sum of score_i * weight_i) / (sum of weight_i) * 10`
 
-Gate checks can be automated with a validator script:
+Weight total: 9.0. Each dimension contributes proportionally. Score range: 0.0 to 10.0.
 
-```python
-# Pseudocode — implement in records/core/python/validators/prompt_template_validator.py
-def validate(artifact_path):
-    data = parse_frontmatter(artifact_path)
-    body = parse_body(artifact_path)
-    hard_results = run_hard_gates(data, body)   # H01-H08
-    soft_results = run_soft_gates(data, body)   # S01-S10
-    score = compute_score(hard_results, soft_results)
-    return ValidationResult(hard=hard_results, soft=soft_results, score=score)
-```
+---
 
-## Pre-Production Checklist
+## Actions
 
-Before writing a single line of the artifact:
+| Tier | Threshold | Action |
+|------|-----------|--------|
+| GOLDEN | >= 9.5 | Publish to pool as golden; add to curated prompt library |
+| PUBLISH | >= 8.0 | Publish to pool; mark production-ready |
+| REVIEW | >= 7.0 | Return to author with scored dimension feedback; one revision cycle allowed |
+| REJECT | < 7.0 | Block from pool; full rewrite required before re-evaluation |
 
-- [ ] Purpose identified and confirmed as prompt_template (not a sibling kind)
-- [ ] All dynamic slots extracted from the raw request
-- [ ] Every slot typed (string/list/integer/boolean/object)
-- [ ] Every slot marked required or optional with default
-- [ ] topic_slug chosen and ID pattern pre-validated
-- [ ] variable_syntax tier chosen (mustache default)
-- [ ] Output path confirmed (pool vs draft)
+---
 
-Before delivery:
+## Bypass
 
-- [ ] H01 id pattern check PASS
-- [ ] H02 required fields check PASS
-- [ ] H03 no undeclared vars PASS
-- [ ] H04 no unused vars PASS
-- [ ] H05 size <= 8192 bytes PASS
-- [ ] H06 valid syntax tier PASS
-- [ ] H07 variable fields complete PASS
-- [ ] H08 body non-empty PASS
-- [ ] quality field updated with final_score
-- [ ] updated date set to today
+| Field | Value |
+|-------|-------|
+| condition | Template is a one-off migration aid with a documented lifespan under 30 days |
+| approver | Domain lead must approve in writing before bypass takes effect |
+| audit_log | Record in `records/pool/audits/bypasses.md` with date, approver, and reason |
+| expiry | 30 days from bypass grant; template must be retired or brought to full compliance |
+
+H01 (YAML parses) and H05 (quality is null) may never be bypassed under any circumstance. Bypassing any other HARD gate still requires all SOFT dimensions to reach a combined score >= 7.0.

@@ -1,59 +1,92 @@
 ---
+id: p11_qg_router
+kind: quality_gate
 pillar: P11
-llm_function: GOVERN
-purpose: Automated quality gates for router validation
-pattern: HARD gates block publish, SOFT gates contribute to 0-10 score
+title: "Gate: Router"
+version: "1.0.0"
+created: "2026-03-27"
+updated: "2026-03-27"
+author: EDISON
+domain: router
+quality: null
+density_score: 0.85
+tags:
+  - quality-gate
+  - router
+  - p11
+  - task-routing
+  - dispatch
+tldr: "Quality gate for task routing logic: verifies route table completeness, confidence threshold, fallback reachability, and pattern uniqueness."
 ---
 
-# Quality Gates: router
+## Definition
 
-## HARD Gates (block publish if ANY fails)
+A router artifact maps incoming task patterns to destination agents or workers using a route table, a confidence threshold, and a guaranteed fallback. It specifies priority ordering when multiple routes could match, escalation behavior for low-confidence cases, and timeout policies per route. Every route must have a unique pattern — overlapping patterns produce unpredictable dispatch behavior.
 
-| Gate | Check | Why |
-|------|-------|-----|
-| H01 | YAML frontmatter parses | Broken YAML = broken artifact |
-| H02 | id matches `^p02_router_[a-z][a-z0-9_]+$` | Namespace compliance |
-| H03 | id == filename stem | Brain search relies on this |
-| H04 | kind == "router" | Type integrity |
-| H05 | quality == null | Never self-score |
-| H06 | 14 required fields present (id, kind, pillar, version, created, updated, author, routes_count, fallback_route, confidence_threshold, domain, quality, tags, tldr) | Completeness |
-| H07 | routes_count matches actual rows in Routes table | Frontmatter-body integrity |
-| H08 | confidence_threshold between 0.0 and 1.0 | Valid probability range |
+Scope: files with `kind: router`. Does not apply to dispatch rules (P02 sub-kind) or lifecycle rules (P09), which govern behavior after routing.
 
-## SOFT Gates (contribute to score)
+---
 
-| Gate | Check | Weight | Score if pass |
-|------|-------|--------|---------------|
-| S01 | tldr <= 160 chars, non-empty, not filler | 1.0 | 10 |
-| S02 | tags is list, len >= 3, includes "router" | 0.5 | 10 |
-| S03 | Routes table has >= 2 rows with all columns filled | 1.0 | 10 |
-| S04 | Decision Logic section present with algorithm description | 1.0 | 10 |
-| S05 | Fallback section present with concrete destination | 1.0 | 10 |
-| S06 | Escalation section present with trigger and action | 0.5 | 10 |
-| S07 | Each route has unique pattern (no duplicates) | 1.0 | 10 |
-| S08 | fallback_route is valid satellite name or "escalate" | 0.5 | 10 |
-| S09 | density_score >= 0.80 | 0.5 | 10 |
-| S10 | No filler phrases ("this document", "in summary", "helps route") | 1.0 | 10 |
+## HARD Gates
 
-## Scoring Formula
-```text
-hard_pass = all 8 HARD gates pass
-soft_score = sum(gate_score * weight) / sum(weights)
-final = hard_pass ? soft_score : 0
+Failure on any single gate means REJECT regardless of soft score.
 
-GOLDEN:  >= 9.5 (all HARD + 95% SOFT)
-PUBLISH: >= 8.0 (all HARD + 80% SOFT)
-REVIEW:  >= 7.0 (all HARD + 70% SOFT)
-REJECT:  < 7.0 or any HARD fail
-```
+| ID  | Predicate | How to test |
+|-----|-----------|-------------|
+| H01 | Frontmatter parses as valid YAML | `yaml.safe_load(frontmatter)` raises no error |
+| H02 | `id` matches namespace `p02_router_*` | `id.startswith("p02_router_")` is true |
+| H03 | `id` equals filename stem | `Path(file).stem == id` |
+| H04 | `kind` equals literal `router` | string equality check |
+| H05 | `quality` is null at authoring time | `quality is None` |
+| H06 | All required frontmatter fields present and non-empty | id, kind, pillar, title, version, created, updated, author, domain, tags, tldr all present |
+| H07 | Route table present with >= 3 routes, each having pattern and destination | count rows >= 3; each row has both columns non-empty |
+| H08 | `confidence_threshold` field present and value is between 0.0 and 1.0 inclusive | float range check |
+| H09 | Fallback route declared and points to a named destination (not empty or null) | `fallback_route` field is non-empty string |
 
-## Automation
-Primary: validate_artifact.py --kind router [PLANNED]
-Interim: validate manually against this file, checking each gate.
+---
 
-## Pre-Production Checklist
-- [ ] Routing domain identified with clear task categories
-- [ ] All destination satellites/agents listed and valid
-- [ ] No existing router for this domain (brain_query checked)
-- [ ] Fallback route defined (not blank)
-- [ ] Confidence threshold set (default 0.7 if unsure)
+## SOFT Scoring
+
+Score each dimension 0 (absent or fails) to 1 (present and passes). Weights are 0.5 or 1.0.
+
+| #  | Dimension | Weight |
+|----|-----------|--------|
+| 1  | `density_score` field present and >= 0.80 | 1.0 |
+| 2  | Every route has a pattern, destination, and confidence floor documented | 1.0 |
+| 3  | Confidence threshold value is justified with a rationale comment | 1.0 |
+| 4  | Fallback route is always reachable regardless of input (no conditional fallback) | 1.0 |
+| 5  | Load balancing strategy documented if multiple destinations share a pattern | 0.5 |
+| 6  | Tags list includes `router` | 0.5 |
+| 7  | Timeout policy defined per route or as a global default | 1.0 |
+| 8  | Escalation path documented for cases below confidence threshold | 1.0 |
+| 9  | Priority ordering documented when multiple routes could match the same input | 1.0 |
+| 10 | No two routes share an overlapping pattern (checked by author) | 1.0 |
+| 11 | `tldr` is <= 160 characters | 0.5 |
+
+**Formula**: `final_score = (sum of score_i * weight_i) / (sum of weight_i) * 10`
+
+Weight total: 9.5. Each dimension contributes proportionally. Score range: 0.0 to 10.0.
+
+---
+
+## Actions
+
+| Tier | Threshold | Action |
+|------|-----------|--------|
+| GOLDEN | >= 9.5 | Publish to pool as golden; use as reference for routing design |
+| PUBLISH | >= 8.0 | Publish to pool; mark production-ready |
+| REVIEW | >= 7.0 | Return to author with scored dimension feedback; one revision cycle allowed |
+| REJECT | < 7.0 | Block from pool; full rewrite required before re-evaluation |
+
+---
+
+## Bypass
+
+| Field | Value |
+|-------|-------|
+| condition | Router covers a domain with fewer than 3 known patterns at design time (bootstrapping phase) |
+| approver | Domain lead must approve in writing before bypass takes effect |
+| audit_log | Record in `records/pool/audits/bypasses.md` with date, approver, and reason |
+| expiry | 21 days from bypass grant; route table must reach >= 3 routes before expiry |
+
+H01 (YAML parses) and H05 (quality is null) may never be bypassed under any circumstance. Bypassing H09 (fallback route) is never permitted — a router without a fallback can silently drop tasks.

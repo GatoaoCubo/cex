@@ -1,62 +1,80 @@
 ---
+id: p11_qg_mental_model
+kind: quality_gate
 pillar: P11
-llm_function: GOVERN
-purpose: Automated quality gates for mental_model (P02) validation
-pattern: HARD gates block publish, SOFT gates contribute to 0-10 score
+title: "Gate: Mental Model"
+version: "1.0.0"
+created: "2026-03-27"
+updated: "2026-03-27"
+author: EDISON
+domain: mental_model
+quality: null
+tags: [quality-gate, mental-model, routing, P02, cognitive-map]
+tldr: "Quality gate for mental_model artifacts: enforces routing rules, decision tree, domain map, and design-time-only scope."
+density_score: 0.85
 ---
 
-# Quality Gates: mental_model
+# Gate: Mental Model
 
-## HARD Gates (block publish if ANY fails)
+## Definition
 
-| Gate | Check | Why |
-|------|-------|-----|
-| H01 | YAML parses | Broken YAML = broken artifact |
-| H02 | id matches `^p02_mm_[a-z][a-z0-9_]+$` | Namespace compliance |
-| H03 | id == filename stem | Discovery relies on this |
-| H04 | kind == "mental_model" | Type integrity |
-| H05 | quality == null | Never self-score |
-| H06 | 14 required fields present (id, kind, pillar, version, created, updated, author, agent, routing_rules, decision_tree, domain, quality, tags, tldr) | Completeness |
-| H07 | pillar == "P02" (NOT P10) | Design-time, not runtime |
-| H08 | routing_rules has >= 3 rules, each with keywords + action | Routing completeness |
-| H09 | decision_tree has >= 2 conditions, each with condition + then | Decision completeness |
+A `mental_model` is a design-time cognitive map that tells an agent how to route, prioritize, and decide. It carries no runtime state and executes no logic. Gates here enforce that routing rules have confidence thresholds, decisions have if/then/else structure, and the artifact never encodes live session data — which belongs in runtime state artifacts.
 
-## SOFT Gates (contribute to score)
+## HARD Gates
 
-| Gate | Check | Weight | Score if pass |
-|------|-------|--------|---------------|
-| S01 | tldr <= 160 chars, non-empty, not filler | 1.0 | 10 |
-| S02 | tags is list, len >= 3, includes "mental-model" | 0.5 | 10 |
-| S03 | priorities list present with >= 3 items | 1.0 | 10 |
-| S04 | heuristics list present with >= 2 items | 0.5 | 10 |
-| S05 | domain_map has covers and routes_to | 1.0 | 10 |
-| S06 | personality object has tone, verbosity, risk_tolerance | 0.5 | 10 |
-| S07 | tools_available list present and non-empty | 0.5 | 10 |
-| S08 | constraints list present and non-empty | 0.5 | 10 |
-| S09 | fallback object has action and escalate_to | 1.0 | 10 |
-| S10 | density >= 0.80 | 0.5 | 10 |
-| S11 | No filler phrases | 1.0 | 10 |
-| S12 | routing_rules keywords are specific (not "general", "anything") | 0.5 | 10 |
+All HARD gates must pass. Any single failure sets score to 0 and blocks publish.
 
-## Scoring Formula
-```text
-hard_pass = all 9 HARD gates pass
-soft_score = sum(gate_score * weight) / sum(weights)
-final = hard_pass ? soft_score : 0
+| ID  | Check | Failure consequence |
+|-----|-------|---------------------|
+| H01 | YAML frontmatter parses without error | Artifact unparseable by tooling |
+| H02 | `id` matches `^p02_mm_[a-z][a-z0-9_]+$` | Namespace violation — not discoverable |
+| H03 | `id` equals filename stem exactly | Brain search failure — id/file mismatch |
+| H04 | `kind` == literal string `"mental_model"` | Type integrity failure |
+| H05 | `quality` == `null` | Self-scoring violation — pool metric corruption |
+| H06 | All required fields present and non-empty (`id`, `kind`, `pillar`, `version`, `created`, `updated`, `author`, `agent`, `domain`, `routing_rules`, `decision_tree`, `tags`, `tldr`) | Incomplete artifact |
+| H07 | `Routing Rules` section present in body | Model has no routing — central purpose missing |
+| H08 | `Decision Tree` or `Priorities` section present in body | No decision structure — model cannot guide choices |
+| H09 | `Domain Map` section present in body | Domain boundaries undefined — routing leaks |
+| H10 | `routing_rules` list has >= 3 entries, each with `keywords` and `action` | Routing table too sparse to be useful |
 
-GOLDEN:  >= 9.5 (all HARD + 95% SOFT)
-PUBLISH: >= 8.0 (all HARD + 80% SOFT)
-REVIEW:  >= 7.0 (all HARD + 70% SOFT)
-REJECT:  < 7.0 or any HARD fail
-```
+## SOFT Scoring
 
-## Automation
-Primary: validate_artifact.py --kind mental_model [PLANNED]
-Interim: validate manually against this file, checking each gate.
+Weights sum to 100%. Each dimension scores 0 or its full weight.
 
-## Pre-Production Checklist
-- [ ] Target agent identified with clear domain and routing needs
-- [ ] No existing P02 mental_model for this agent (brain_query checked)
-- [ ] Agent's routing patterns documented or observable
-- [ ] Domain boundaries clear (what agent covers vs routes away)
-- [ ] Confirmed this is design-time (P02), not runtime state (P10)
+| ID  | Dimension | Weight | Criteria |
+|-----|-----------|--------|----------|
+| S01 | tldr quality | 1.0 | `tldr` <= 160 chars, names the agent and its primary routing concern |
+| S02 | Routing rules have confidence thresholds | 1.0 | Each rule specifies a match confidence or keyword specificity level |
+| S03 | Decisions have if/then/else structure | 1.0 | Decision tree entries follow: condition → then action → else action |
+| S04 | Priorities ordered with rationale | 1.0 | `priorities` list is ranked and each rank has a one-line justification |
+| S05 | Heuristics testable | 0.5 | Each heuristic can be verified with a specific input example |
+| S06 | Domain boundaries explicit | 1.0 | Domain Map states what the agent covers AND what it routes away |
+| S07 | Personality traits defined | 0.5 | `personality` object with `tone`, `verbosity`, `risk_tolerance` |
+| S08 | `tags` includes `"mental-model"` | 0.5 | Minimum tag for routing |
+| S09 | Conflict resolution rules present | 1.0 | Documents what happens when two routing rules match simultaneously |
+| S10 | No runtime state encoded | 1.0 | No session counters, active task lists, or live flags in body |
+| S11 | Fallback action defined | 0.5 | `fallback` specifies action and escalation target when no rule matches |
+| S12 | Density >= 0.80 | 0.5 | No filler: "this model helps", "generally speaking", "in most cases" |
+
+## Actions
+
+| Score | Tier | Action |
+|-------|------|--------|
+| >= 9.5 | GOLDEN | Publish to pool + record in memory |
+| >= 8.0 | PUBLISH | Commit to pool |
+| >= 7.0 | REVIEW | Acceptable with documented improvement items |
+| < 7.0 | REJECT | Revise and resubmit — do not publish |
+| 0 (HARD fail) | REJECTED | Fix failing HARD gate(s) first |
+
+## Bypass
+
+Bypasses are logged and expire automatically.
+
+| Field | Value |
+|-------|-------|
+| condition | New agent bootstrapping — routing rules are provisional and under observation from live sessions |
+| approver | P02 domain owner |
+| audit_log | Entry required in `records/governance/bypass_log.md` with gate ID, agent name, and provisional rule count |
+| expiry | 14 days — routing rules must be validated against real sessions before expiry or model returns to DRAFT |
+
+H01 and H05 cannot be bypassed under any condition.

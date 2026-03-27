@@ -1,67 +1,81 @@
 ---
+id: p11_qg_model_card
+kind: quality_gate
 pillar: P11
-llm_function: GOVERN
-purpose: Automated quality gates for model_card validation
-pattern: HARD gates block publish, SOFT gates contribute to 0-10 score
-source: validate_kc.py v2.0 architecture + 3-model review findings
+title: "Gate: Model Card"
+version: "1.0.0"
+created: "2026-03-27"
+updated: "2026-03-27"
+author: EDISON
+domain: model_card
+quality: null
+tags: [quality-gate, model-card, llm-spec, P02, provider]
+tldr: "Quality gate for model_card artifacts: enforces provider, context window, pricing, and capabilities fields."
+density_score: 0.85
 ---
 
-# Quality Gates: model_card
+# Gate: Model Card
 
-## HARD Gates (block publish if ANY fails)
+## Definition
 
-| Gate | Check | Why |
-|------|-------|-----|
-| H01 | YAML frontmatter parses without error | Broken YAML = broken artifact |
-| H02 | id starts with "p02_mc_" | Namespace compliance |
-| H03 | id == filename stem | Brain search relies on this |
-| H04 | kind == "model_card" | Type integrity |
-| H05 | lp == "P02" | Pillar assignment |
-| H06 | quality == null | Never self-score (Mitchell principle) |
-| H07 | model_name is non-empty string | Core identity field |
-| H08 | provider in enum (SCHEMA.md Provider Enum) | Prevents typos |
-| H09 | context_window is integer > 0 | Must be exact number |
-| H10 | max_output is integer > 0 | Must be exact number |
+A `model_card` is a technical spec for a language model: provider, context window, pricing in $/1M tokens, and boolean capability flags. Reference artifact only — not a tutorial. Gates ensure traceability to official sources, comparable pricing, and freshness within 90 days.
 
-## SOFT Gates (contribute to score)
+## HARD Gates
 
-| Gate | Check | Weight | Score if pass |
-|------|-------|--------|---------------|
-| S01 | tldr < 160 chars, non-empty | 1.0 | 10 |
-| S02 | tags is list, len >= 3 | 0.5 | 10 |
-| S03 | pricing: commercial=numbers, OSS=null, free-tier=0.00 | 1.0 | 10 |
-| S04 | modalities object has 5 boolean fields | 0.5 | 10 |
-| S05 | features object has 8 boolean fields | 0.5 | 10 |
-| S06 | body has Boundary section | 1.0 | 10 |
-| S07 | body Specifications table: every row has Source URL | 1.0 | 10 |
-| S08 | body Capabilities table: 8 rows, all booleans | 1.0 | 10 |
-| S09 | body When to Use table >= 5 rows | 0.5 | 10 |
-| S10 | body References >= 1 official URL | 0.5 | 10 |
-| S11 | no filler phrases ("this document", "in summary") | 0.5 | 10 |
-| S12 | data_source is valid URL | 0.5 | 10 |
-| S13 | body density >= 0.85 (pure spec, no narrative) | 1.0 | 10 * ratio |
-| S14 | updated within 90 days (freshness) | 0.5 | 10 |
-| S15 | linked_artifacts present | 0.5 | 10 |
+All HARD gates must pass. Any single failure sets score to 0 and blocks publish.
 
-## Scoring Formula
-```
-hard_pass = all 10 HARD gates pass
-soft_score = sum(gate_score * weight) / sum(weights)
-final = hard_pass ? soft_score : 0
+| ID  | Check | Failure consequence |
+|-----|-------|---------------------|
+| H01 | YAML frontmatter parses without error | Artifact unparseable by tooling |
+| H02 | `id` matches `^p02_mc_[a-z][a-z0-9_]+$` | Namespace violation — not discoverable |
+| H03 | `id` equals filename stem exactly | Brain search failure — id/file mismatch |
+| H04 | `kind` == literal string `"model_card"` | Type integrity failure |
+| H05 | `quality` == `null` | Self-scoring violation — pool metric corruption |
+| H06 | Required fields present and non-empty: `id`, `kind`, `pillar`, `version`, `created`, `updated`, `author`, `provider`, `model_name`, `context_window`, `pricing`, `capabilities`, `tags`, `tldr` | Incomplete artifact |
+| H07 | `provider` matches a known provider enum (Anthropic, OpenAI, Google, Meta, Mistral, Cohere, or documented custom) | Prevents typos that break routing |
+| H08 | `context_window` is a positive integer | Core spec field — must be exact |
+| H09 | `pricing` field present with at least `input` and `output` keys (numeric $/1M tokens, or `null` for open-weight) | Non-comparable pricing blocks cost analysis |
+| H10 | `capabilities` field is a map of boolean flags | Capability claims require verifiable binary form |
 
-GOLDEN:  >= 9.5 (all HARD + 95% SOFT)
-PUBLISH: >= 8.0 (all HARD + 80% SOFT)
-REVIEW:  >= 7.0 (all HARD + 70% SOFT)
-REJECT:  < 7.0 or any HARD fail
-```
+## SOFT Scoring
 
-## Automation
-Primary: validate_artifact.py --kind model_card [PLANNED]
-Interim: validate manually against this file, checking each gate
-Future: gates expressed as JSON schema for machine parsing
+Weights sum to 100%. Each dimension scores 0 or its full weight.
 
-## Pre-Production Checklist
-- [ ] Official provider docs accessible
-- [ ] Pricing page has current numbers
-- [ ] No existing model_card for this model in pool
-- [ ] Model is not sunset
+| ID  | Dimension | Weight | Criteria |
+|-----|-----------|--------|----------|
+| S01 | tldr quality | 1.0 | `tldr` <= 160 chars, names provider + model + primary use case |
+| S02 | Pricing normalized to $/1M tokens | 1.0 | Both `input` and `output` prices in $/1M tokens; `null` for open-weight |
+| S03 | Capabilities list complete | 1.0 | Flags: vision, audio, function_calling, streaming, fine_tuning, json_mode, code, reasoning |
+| S04 | Benchmarks referenced | 1.0 | >= 1 public benchmark (MMLU, HumanEval, MATH) with score and date |
+| S05 | Limitations documented | 1.0 | >= 2 specific limitations: context degradation, refusal patterns, knowledge cutoff |
+| S06 | `tags` includes `"model-card"` | 0.5 | Minimum tag for routing |
+| S07 | Use-case recommendations present | 1.0 | >= 3 recommended use cases and >= 1 not-recommended |
+| S08 | API endpoint documented | 0.5 | Names the model identifier string used in API calls |
+| S09 | Comparison to alternatives noted | 0.5 | >= 1 comparable model named with key difference stated |
+| S10 | Version and spec date accurate | 1.0 | `updated` within 90 days; `data_source` is a live URL |
+| S11 | `max_output` field present and positive integer | 0.5 | Required for prompt budget calculations |
+| S12 | Density >= 0.85 | 1.0 | No narrative: "great for", "one of the best", "in summary" |
+| S13 | `linked_artifacts` field present | 0.5 | Lists related model cards, lenses, or routing rules |
+
+## Actions
+
+| Score | Tier | Action |
+|-------|------|--------|
+| >= 9.5 | GOLDEN | Publish to pool + record in memory |
+| >= 8.0 | PUBLISH | Commit to pool |
+| >= 7.0 | REVIEW | Acceptable with documented improvement items |
+| < 7.0 | REJECT | Revise and resubmit — do not publish |
+| 0 (HARD fail) | REJECTED | Fix failing HARD gate(s) first |
+
+## Bypass
+
+Bypasses are logged and expire automatically.
+
+| Field | Value |
+|-------|-------|
+| condition | Model released within 7 days and official pricing page not yet published by provider |
+| approver | P02 domain owner |
+| audit_log | Entry required in `records/governance/bypass_log.md` with gate ID, model id, and link to provider announcement |
+| expiry | 14 days — pricing must be filled from official source before expiry or card moves to DRAFT state |
+
+H01 and H05 cannot be bypassed under any condition.

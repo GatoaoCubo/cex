@@ -1,80 +1,87 @@
 ---
-id: type-def-builder-quality-gates
-kind: quality_gates
-pillar: P11
-llm_function: GOVERN
-version: 1.0.0
-created: "2026-03-26"
-updated: "2026-03-26"
+id: p11_qg_type_def
+kind: quality_gate
+pillar: P06
+title: "Gate: Type Def"
+version: "1.0.0"
+created: "2026-03-27"
+updated: "2026-03-27"
 author: EDISON
-tags: [quality-gates, type-def, P11, governance]
+domain: type_def
+quality: null
+density_score: 0.85
+tags:
+  - quality-gate
+  - type-def
+  - schema
+  - P06
+tldr: "Validates reusable type declarations for base type, constraints, serialization, and composition rules."
 ---
 
-## HARD Gates (H-series) — All must pass; any failure = reject
+## Definition
 
-| Gate | Field / Rule | Pass Condition | Failure Action |
-|---|---|---|---|
-| H01 | `id` pattern | Matches `^p06_td_[a-z][a-z0-9_]*$` | Reject — fix id |
-| H02 | `kind` value | Exactly `type_def` | Reject — wrong kind |
-| H03 | `pillar` + `layer` | `pillar: P06` AND `layer: spec` | Reject — wrong placement |
-| H04 | `base_type` vocabulary | Value in controlled enum (see CONFIG.md) | Reject — use controlled value |
-| H05 | `constraints` structure | Object with keyed entries, not free text | Reject — restructure |
-| H06 | `nullable` explicit | Boolean `true` or `false`, not absent | Reject — add field |
-| H07 | `quality` on draft | Value is `null` | Reject — remove assigned score |
-| H08 | `examples` present | At least one example in body | Reject — add example |
-| H09 | `type_name` PascalCase | Matches `^[A-Z][A-Za-z0-9]*$` | Reject — fix casing |
-| H10 | Byte count | Artifact <= 3072 bytes | Reject — reduce size |
+A type definition declares a named, reusable data structure: its base type, constraints, nullable semantics, serialization format, and composition rules. Type defs are consumed by validation schemas, validators, and code generators. This gate ensures every type def is machine-usable, unambiguous, and backward compatible.
 
-## SOFT Gates (S-series) — Failures lower score but do not reject
+---
 
-| Gate | Field / Rule | Target | Score Impact |
-|---|---|---|---|
-| S01 | `tldr` quality | Single sentence, <= 120 chars, domain-precise | -0.5 if missing or vague |
-| S02 | `domain` clarity | Specific module/domain, not generic | -0.3 if absent or "general" |
-| S03 | `tags` count | >= 4 tags for pool eligibility | -0.2 if < 4 |
-| S04 | `keywords` section | >= 5 discovery terms in body | -0.3 if absent |
-| S05 | Definition prose | Explains domain role, not just field names | -0.4 if tautological |
-| S06 | Examples coverage | Spans semantically distinct values (not just valid/invalid) | -0.3 if only one example |
-| S07 | `version` SemVer | Matches `^\d+\.\d+\.\d+$` | -0.5 if malformed |
-| S08 | `composition` when needed | Present when base_type is union/intersection/tuple | -0.5 if absent for composite |
-| S09 | `serialization` for wire types | Present for types used in protocol buffers or wire formats | -0.2 if absent |
-| S10 | `density_score` | >= 0.80 (information per byte ratio) | -0.3 if below threshold |
+## HARD Gates
 
-## Scoring Formula
+Failure on any HARD gate causes immediate REJECT. No score is computed.
 
-```
-base_score = 10.0
-hard_failures: each hard gate failure = artifact rejected (no score)
-soft_deductions: sum of all S-gate deductions
-final_score = base_score - soft_deductions
+| ID  | Check | Rule |
+|-----|-------|------|
+| H01 | Frontmatter parses | YAML frontmatter is valid and complete with no syntax errors |
+| H02 | ID matches namespace | `id` matches pattern `^p06_td_[a-z][a-z0-9_]+$` |
+| H03 | ID equals filename | `id` slug matches the parent directory or filename stem |
+| H04 | Kind matches literal | `kind` is exactly `type_def` |
+| H05 | Quality is null | `quality` field is `null` (not yet scored) |
+| H06 | Required fields present | `type_name`, `base_type`, `nullable` all defined and non-empty |
+| H07 | Base type specified | `base_type` is present and comes from the controlled vocabulary in CONFIG.md |
+| H08 | Constraints section present | Body contains a `## Constraints` section with at least one named constraint |
+| H09 | Serialization format present | Body contains a `## Serialization` section specifying wire format (JSON, YAML, Protobuf, etc.) |
+| H10 | Type name is PascalCase | `type_name` matches `^[A-Z][A-Za-z0-9]*$` |
 
-Tiers:
-  >= 9.5 → Golden (pool promotion + remember())
-  >= 8.0 → Skilled (pool eligible)
-  >= 7.0 → Learning (experimental)
-  <  7.0 → Rejected (redo required)
-```
+---
 
-## Automation
+## SOFT Scoring
 
-| Check | Tool | When |
-|---|---|---|
-| H01-H10 structural | `validate_artifact` [PLANNED] | Post-compose, pre-register |
-| Byte count | byte counter (local) | During VALIDATE phase step 2 |
-| Pattern match | regex check (local) | During VALIDATE phase step 1 |
-| Brain dedup | `brain_query` [IF MCP] | During DISCOVER phase step 6 |
+Score each dimension 0 or 10. Multiply by weight. Divide total by sum of weights, scale to 0-10.
 
-## Pre-Production Checklist
+| Dimension | Weight | Pass Condition |
+|-----------|--------|----------------|
+| Density >= 0.80 | 1.0 | Definition is tight; no tautological descriptions or repeated field names |
+| Constraints are machine-validatable | 1.0 | Each constraint is expressed as a checkable rule (min, max, pattern, enum) |
+| Composition rules documented | 1.0 | Union, intersection, or tuple composition is explicit when base_type is composite |
+| Nullable semantics explicit | 0.5 | `nullable: true` or `nullable: false` is set; absence is not acceptable |
+| Generics parameters documented | 0.5 | If the type is generic, type parameters are named and constrained |
+| Tags include type-def | 0.5 | `tags` list contains `"type-def"` |
+| Inheritance chain documented | 0.5 | If the type extends another, the parent type is named with a reference |
+| Valid and invalid examples | 1.0 | Body contains at least one valid instance and one invalid instance |
+| Backward compatibility notes | 0.5 | If version > 1.0.0, breaking changes are listed in body |
+| Consumers cross-referenced | 0.5 | Body or frontmatter lists at least one artifact that consumes this type |
 
-- [ ] H01: id matches `^p06_td_[a-z][a-z0-9_]*$`
-- [ ] H02: `kind: type_def`
-- [ ] H03: `pillar: P06`, `layer: spec`
-- [ ] H04: `base_type` from controlled vocabulary
-- [ ] H05: `constraints` is a structured object
-- [ ] H06: `nullable` is explicit boolean
-- [ ] H07: `quality: null`
-- [ ] H08: at least one example in body
-- [ ] H09: `type_name` is PascalCase
-- [ ] H10: artifact <= 3072 bytes
-- [ ] S01: `tldr` is a single precise sentence
-- [ ] S08: `composition` present if base_type is union/intersection/tuple
+Sum of weights: 7.5. `soft_score = sum(weight * gate_score) / 7.5 * 10`
+
+---
+
+## Actions
+
+| Score | Action |
+|-------|--------|
+| >= 9.5 | GOLDEN — archive to pool as canonical type definition |
+| >= 8.0 | PUBLISH — safe to reference in schemas and validators |
+| >= 7.0 | REVIEW — usable but constraints or examples need work |
+| < 7.0 | REJECT — do not reference; ambiguous or incomplete definition |
+
+---
+
+## Bypass
+
+| Field | Value |
+|-------|-------|
+| condition | Bootstrapping a new domain where no controlled vocabulary exists yet and the type is needed to unblock other artifacts |
+| approver | Architect responsible for the P06 pillar |
+| audit_log | Entry required in `.claude/bypasses/type_def_{date}.md` noting which HARD gates are waived and why |
+| expiry | 14 days; type must reach PUBLISH score before any dependent artifact is published |
+
+H01 (frontmatter parses) and H05 (quality is null) cannot be bypassed under any condition.

@@ -1,54 +1,86 @@
 ---
+id: p11_qg_signal
+kind: quality_gate
 pillar: P11
-llm_function: GOVERN
-purpose: Automated quality gates for signal validation
-pattern: HARD gates block publish, SOFT gates improve operational quality
+title: "Gate: Signal"
+version: "1.0.0"
+created: "2026-03-27"
+updated: "2026-03-27"
+author: EDISON
+domain: signal
+quality: null
+density_score: 0.85
+tags:
+  - quality-gate
+  - signal
+  - inter-agent
+  - p11
+tldr: "Gates ensuring signal specs define an exhaustive status enum, emitter identity, timestamp, and minimal payload with no embedded business logic."
 ---
 
-# Quality Gates: signal
+## Definition
+
+A signal is an atomic event emitted by one agent and consumed by another or a monitor. It carries a status, an emitter identity, a timestamp, and an optional minimal payload. A signal passes this gate when any consumer could parse and act on it without contacting the emitter, the status enum covers all terminal and non-terminal states, and the payload contains no business logic — only status data.
+
+---
 
 ## HARD Gates
 
-| Gate | Check | Why |
-|------|-------|-----|
-| H01 | filename matches `p12_sig_{event}.json` | namespace compliance |
-| H02 | payload parses as JSON object | machine readability |
-| H03 | `satellite` is non-empty string | emitter identity |
-| H04 | `status` in (`complete`, `error`, `progress`) | runtime contract |
-| H05 | `quality_score` is numeric and within `0.0-10.0` | score integrity |
-| H06 | `timestamp` is ISO 8601 string | event ordering |
-| H07 | payload size <= 4096 bytes | schema constraint |
-| H08 | payload contains no instruction fields (`steps`, `scope_fence`, `tasks`) | boundary against handoff |
-| H09 | payload contains no routing fields (`keywords`, `fallback_sat`, `model`) | boundary against dispatch_rule |
+Failure on any HARD gate = immediate REJECT regardless of score.
 
-## SOFT Gates
+| ID  | Check | Rationale |
+|-----|-------|-----------|
+| H01 | Frontmatter parses as valid YAML with no syntax errors | Unparseable file cannot be indexed or validated |
+| H02 | `id` matches the file's directory namespace (`signal-builder/...`) | Mismatched IDs cause routing failures |
+| H03 | `id` value equals the filename stem (slug portion) | Filename and ID must be the same addressable key |
+| H04 | `kind` is exactly `signal` (literal match, no variation) | Kind drives the loader; wrong literal silently misroutes |
+| H05 | `quality` field is `null` (not filled by author) | Quality is assigned by this gate, not self-reported |
+| H06 | All required frontmatter fields present: id, kind, pillar, title, version, created, updated, author, domain, tags, tldr | Incomplete frontmatter breaks downstream consumers |
+| H07 | Spec contains a **Status type** field with an explicit enum (e.g., `complete`, `error`, `progress`) and no open-ended string values | Open status strings make consumer logic fragile and non-exhaustive |
+| H08 | Spec contains an **Emitter identity field** (the field name and type that identifies which agent emitted the signal) | Consumers and monitors need emitter identity to route, filter, and audit signals |
+| H09 | Spec contains a **Timestamp field** (field name, type, and format, e.g., ISO 8601 UTC) | Without timestamps, ordering and deduplication are impossible |
 
-| Gate | Check | Weight | Score if pass |
-|------|-------|--------|---------------|
-| S01 | satellite value is lowercase slug | 0.5 | 10 |
-| S02 | event slug and payload status semantically align | 0.5 | 10 |
-| S03 | optional fields are omitted when unknown | 0.5 | 10 |
-| S04 | `task` is short and specific | 0.5 | 10 |
-| S05 | `artifacts_count` matches `artifacts` length when both exist | 0.5 | 10 |
-| S06 | `progress_pct` appears only on `progress` signals | 1.0 | 10 |
-| S07 | payload stays <= 1024 bytes when feasible | 0.5 | 10 |
-| S08 | message is concise and machine-safe | 0.5 | 10 |
-| S09 | payload adds useful automation hints (`commit_hash`, `artifacts`, `error_code`) without bloat | 1.0 | 10 |
+---
 
-## Scoring Formula
-```text
-hard_pass = all 9 HARD gates pass
-soft_score = sum(gate_score * weight) / sum(weights)
-final = hard_pass ? soft_score : 0
+## SOFT Scoring
 
-GOLDEN:  >= 9.5
-PUBLISH: >= 8.0
-REVIEW:  >= 7.0
-REJECT:  < 7.0 or any HARD fail
-```
+Dimensions are weighted; total normalized weight = 100%.
 
-## Pre-Publish Checklist
-- [ ] filename uses `p12_sig_` prefix
-- [ ] required fields present
-- [ ] no handoff or dispatch_rule drift
-- [ ] JSON remains compact
+| # | Dimension | Weight | 1 (Poor) | 5 (Good) | 10 (Excellent) |
+|---|-----------|--------|----------|----------|----------------|
+| 1 | density >= 0.80 (content per token ratio) | 1.0 | Padded with filler prose | Mostly substantive | No filler; every sentence carries information |
+| 2 | Payload is minimal JSON (only fields required for consumers to act; no verbose metadata) | 1.0 | Large nested payload | Moderate size | Flat structure, <= 10 fields, no nested objects except optional extension |
+| 3 | Status enum is exhaustive (covers all reachable states including error sub-types) | 1.0 | Only happy-path statuses | Happy path + generic error | All terminal states + progress states + known error variants |
+| 4 | Consumer expectations documented (who reads this signal and what they do per status) | 1.0 | No consumers listed | Consumers named | Consumers named + action per status per consumer |
+| 5 | Idempotency considered (spec states whether duplicate signals are safe or must be deduplicated) | 1.0 | No mention | Noted as a concern | Explicit idempotency ruling with dedup key if required |
+| 6 | Tags include `signal` | 0.5 | Missing | Present but misspelled | Exactly `signal` in tags list |
+| 7 | Extension fields optional not required (future payload fields are opt-in; consumers ignore unknown keys) | 0.5 | Extension fields are required | Marked optional but schema enforces them | Schema allows unknown fields; consumers ignore unknown keys |
+| 8 | Backward compatibility policy stated (additive-only field additions, versioning strategy) | 1.0 | No compatibility policy | Semver bump required for any change | Additive-only policy: new optional fields never break consumers |
+| 9 | Ordering guarantees documented (FIFO, best-effort, or none; consumer handling instruction provided) | 1.0 | No ordering stated | Ordering named | Ordering guarantee + consumer handling instruction for violations |
+| 10 | No business logic in signal (payload is descriptive only; decisions stay in consumers) | 1.0 | Signal includes conditional logic or instructions | Minor logic leak noted | Explicit rule: payload is descriptive, never prescriptive |
+
+Score = sum(rating * weight) / sum(weights) normalized to 0-10.
+
+---
+
+## Actions
+
+| Threshold | Action |
+|-----------|--------|
+| >= 9.5 | GOLDEN — archive to pool, tag as reference implementation |
+| >= 8.0 | PUBLISH — merge to main, available for emitter and consumer use |
+| >= 7.0 | REVIEW — return to author with dimension-level feedback |
+| < 7.0 | REJECT — do not merge; author must revise from scratch or substantially rewrite |
+
+---
+
+## Bypass
+
+| Field | Value |
+|-------|-------|
+| condition | Signal is used in a closed two-agent loop (one emitter, one consumer, both under the same author's control) during a time-boxed experiment |
+| approver | Domain lead with written sign-off |
+| audit_log | Entry required in `records/audits/gate_bypasses.md` with date, signal name, approver, and expiry |
+| expiry | 7 days; signal spec must pass full gate before use in any multi-team or production context |
+
+H01 (parseable frontmatter) and H05 (quality=null) are NEVER bypassable under any condition.

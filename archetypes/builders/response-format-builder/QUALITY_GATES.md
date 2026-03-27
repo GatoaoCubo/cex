@@ -1,58 +1,92 @@
 ---
+id: p11_qg_response_format
+kind: quality_gate
 pillar: P11
-llm_function: GOVERN
-purpose: Automated quality gates for response_format validation
-pattern: HARD gates block publish, SOFT gates contribute to 0-10 score
+title: "Gate: Response Format"
+version: "1.0.0"
+created: "2026-03-27"
+updated: "2026-03-27"
+author: EDISON
+domain: response_format
+quality: null
+density_score: 0.85
+tags:
+  - quality-gate
+  - response-format
+  - p11
+  - output-structure
+  - llm
+tldr: "Quality gate for LLM output structure specs: verifies format type, injection point, section definitions, and downstream parseability."
 ---
 
-# Quality Gates: response_format
+## Definition
+
+A response format artifact specifies the exact output structure an LLM must produce. It declares a format type (json, yaml, markdown, csv, or plaintext), an injection point where the spec is delivered to the model (system prompt or user message), and a section structure with field-level definitions. The artifact is consumed by the LLM at generation time — it is not a post-generation validator.
+
+Scope: files with `kind: response_format`. Does not apply to validation schemas (P06), which check outputs after generation.
+
+---
 
 ## HARD Gates
-| Gate | Check |
-|------|-------|
-| H01 | YAML parses |
-| H02 | id starts with p05_rf_ |
-| H03 | id == filename stem |
-| H04 | kind == response_format |
-| H05 | pillar == P05 |
-| H06 | quality == null |
-| H07 | all 17 required fields present |
-| H08 | sections_count >= 1 |
-| H09 | format_type in [json, yaml, markdown, csv, plaintext] |
-| H10 | injection_point in [system_prompt, user_message] |
-| H11 | target_kind is non-empty string |
 
-## SOFT Gates
-| Gate | Check | Weight |
-|------|-------|--------|
-| S01 | tldr <= 160 chars, non-empty | 1.0 |
-| S02 | tags is list, len >= 3, includes "response-format" | 0.5 |
-| S03 | Sections table present with ordered entries | 1.0 |
-| S04 | Example Output section with complete concrete example | 1.0 |
-| S05 | Injection Instructions with point and template | 1.0 |
-| S06 | Format Overview explains purpose and target | 1.0 |
-| S07 | No filler prose (no "looks good", "appropriate", "well-structured") | 1.0 |
-| S08 | sections list matches sections table entries | 0.5 |
-| S09 | density >= 0.80 | 1.0 |
+Failure on any single gate means REJECT regardless of soft score.
 
-## Scoring
-```text
-hard_pass = all 11 HARD gates pass
-soft_score = sum(gate_score * weight) / sum(weights)
-final = hard_pass ? soft_score : 0
+| ID  | Predicate | How to test |
+|-----|-----------|-------------|
+| H01 | Frontmatter parses as valid YAML | `yaml.safe_load(frontmatter)` raises no error |
+| H02 | `id` matches namespace `p05_rf_*` | `id.startswith("p05_rf_")` is true |
+| H03 | `id` equals filename stem | `Path(file).stem == id` |
+| H04 | `kind` equals literal `response_format` | string equality check |
+| H05 | `quality` is null at authoring time | `quality is None` |
+| H06 | All required frontmatter fields present and non-empty | id, kind, pillar, title, version, created, updated, author, domain, tags, tldr all present |
+| H07 | `format_type` is one of: json, yaml, markdown, csv, plaintext | enum membership check |
+| H08 | `injection_point` is one of: system_prompt, user_message | enum membership check |
+| H09 | Section structure defined with at least one named section | sections table or list has >= 1 entry |
 
-GOLDEN:  >= 9.5 (all HARD + 95% SOFT)
-PUBLISH: >= 8.0 (all HARD + 80% SOFT)
-REVIEW:  >= 7.0 (all HARD + 70% SOFT)
-REJECT:  < 7.0 or any HARD fail
-```
+---
 
-## Automation
-Primary: validate_artifact.py --kind response_format [PLANNED]
-Interim: validate manually against this file, checking each gate.
+## SOFT Scoring
 
-## Pre-Production Checklist
-- [ ] Target kind identified with output requirements understood
-- [ ] Format type chosen based on consumption pattern (json for machines, markdown for humans)
-- [ ] Injection point decided (system_prompt for persistent, user_message for per-request)
-- [ ] No confusion with validation_schema (P06)
+Score each dimension 0 (absent or fails) to 1 (present and passes). Weights are 0.5 or 1.0.
+
+| #  | Dimension | Weight |
+|----|-----------|--------|
+| 1  | `density_score` field present and >= 0.80 | 1.0 |
+| 2  | Each section has explicit field definitions (name, type, required/optional) | 1.0 |
+| 3  | At least one complete example output present for the declared format | 1.0 |
+| 4  | Injection point matches the use case (system for persistent structure, user for per-request) | 1.0 |
+| 5  | Format is parseable by a downstream consumer without ambiguity | 1.0 |
+| 6  | Tags list includes `response-format` | 0.5 |
+| 7  | Scope note confirms this is for LLM generation time, not post-generation validation | 1.0 |
+| 8  | Field constraints documented (max length, allowed values, nullable) | 1.0 |
+| 9  | Fallback format described for partial or truncated LLM output | 0.5 |
+| 10 | Format is compatible with the target model's context window and output style | 0.5 |
+| 11 | `tldr` is <= 160 characters | 0.5 |
+
+**Formula**: `final_score = (sum of score_i * weight_i) / (sum of weight_i) * 10`
+
+Weight total: 9.0. Each dimension contributes proportionally. Score range: 0.0 to 10.0.
+
+---
+
+## Actions
+
+| Tier | Threshold | Action |
+|------|-----------|--------|
+| GOLDEN | >= 9.5 | Publish to pool as golden; use as reference for format design |
+| PUBLISH | >= 8.0 | Publish to pool; mark production-ready |
+| REVIEW | >= 7.0 | Return to author with scored dimension feedback; one revision cycle allowed |
+| REJECT | < 7.0 | Block from pool; full rewrite required before re-evaluation |
+
+---
+
+## Bypass
+
+| Field | Value |
+|-------|-------|
+| condition | Format is under active negotiation with a new model provider whose output style is not yet finalized |
+| approver | Domain lead must approve in writing before bypass takes effect |
+| audit_log | Record in `records/pool/audits/bypasses.md` with date, approver, and reason |
+| expiry | 14 days from bypass grant; format must reach full compliance once model behavior is confirmed |
+
+H01 (YAML parses) and H05 (quality is null) may never be bypassed under any circumstance. Bypassing H07 or H08 (format type or injection point enum) is never permitted — these are the structural identity of the artifact.

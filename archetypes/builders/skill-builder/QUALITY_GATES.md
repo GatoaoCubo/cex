@@ -1,58 +1,86 @@
 ---
+id: p11_qg_skill
+kind: quality_gate
 pillar: P11
-llm_function: GOVERN
-purpose: Automated quality gates for skill validation
-pattern: HARD gates block publish, SOFT gates contribute to 0-10 score
+title: "Gate: Skill"
+version: "1.0.0"
+created: "2026-03-27"
+updated: "2026-03-27"
+author: EDISON
+domain: skill
+quality: null
+density_score: 0.85
+tags:
+  - quality-gate
+  - skill
+  - reusable-capability
+  - p11
+tldr: "Gates ensuring skill files define a specific trigger, two or more typed workflow phases, and phase-level error handling without claiming agent identity."
 ---
 
-# Quality Gates: skill
+## Definition
 
-## HARD Gates (block publish if ANY fails)
+A skill is a reusable capability: a named sequence of phases that can be invoked by a trigger and composed with other skills. A skill passes this gate when the trigger is specific enough to avoid false activations, each phase has typed input and output, error handling is defined at the phase level (not just globally), and the skill makes no claims about being an agent — it is a procedure, not an identity.
 
-| Gate | Check | Why |
-|------|-------|-----|
-| H01 | YAML frontmatter parses without error | Broken YAML = broken artifact |
-| H02 | id matches `^p04_skill_[a-z][a-z0-9_]+$` | Namespace compliance |
-| H03 | id == filename stem | Brain search relies on this |
-| H04 | kind == "skill" | Type integrity |
-| H05 | quality == null | Never self-score |
-| H06 | All 15 required fields present | Completeness |
-| H07 | body has ## Purpose section | Core purpose required |
-| H08 | body has ## Workflow Phases with >= 2 subsections | Phases are the essence of skill |
+---
 
-## SOFT Gates (contribute to score)
+## HARD Gates
 
-| Gate | Check | Weight | Score if pass |
-|------|-------|--------|---------------|
-| S01 | description <= 120 chars, non-empty | 1.0 | 10 |
-| S02 | phases list in frontmatter matches body ### subsections exactly | 1.0 | 10 |
-| S03 | user_invocable: true iff trigger starts with `/` | 1.0 | 10 |
-| S04 | when_to_use and when_not_to_use parallel (same abstraction level) | 0.5 | 10 |
-| S05 | No identity language in body ("You are", "I will", "my role") | 1.0 | 10 |
-| S06 | body has ## Anti-Patterns with >= 3 named failures | 1.0 | 10 |
-| S07 | body has ## Metrics with >= 2 measurable targets | 0.5 | 10 |
-| S08 | Each phase has Input / Action / Output defined | 1.0 | 10 |
-| S09 | examples list has >= 2 concrete invocations | 0.5 | 10 |
-| S10 | density >= 0.80 (no filler phrases) | 0.5 | 10 |
+Failure on any HARD gate = immediate REJECT regardless of score.
 
-## Scoring Formula
-```text
-hard_pass = all 8 HARD gates pass
-soft_score = sum(gate_score * weight) / sum(weights)
-final = hard_pass ? soft_score : 0
+| ID  | Check | Rationale |
+|-----|-------|-----------|
+| H01 | Frontmatter parses as valid YAML with no syntax errors | Unparseable file cannot be indexed or validated |
+| H02 | `id` matches the file's directory namespace (`skill-builder/...`) | Mismatched IDs cause routing failures |
+| H03 | `id` value equals the filename stem (slug portion) | Filename and ID must be the same addressable key |
+| H04 | `kind` is exactly `skill` (literal match, no variation) | Kind drives the loader; wrong literal silently misroutes |
+| H05 | `quality` field is `null` (not filled by author) | Quality is assigned by this gate, not self-reported |
+| H06 | All required frontmatter fields present: id, kind, pillar, title, version, created, updated, author, domain, tags, tldr | Incomplete frontmatter breaks downstream consumers |
+| H07 | Spec contains a **Trigger definition** (slash command name, keyword pattern, or event type that activates the skill) | Without a trigger, the skill cannot be invoked programmatically or by convention |
+| H08 | Spec contains >= 2 **Workflow Phases** (each phase is a named step in the execution sequence) | A single-phase skill is a function, not a skill; phased structure enables partial retry and composition |
+| H09 | Spec contains **Input and Output** per phase (field names and types, not just prose descriptions) | Typed per-phase I/O is the contract that enables composition with other skills |
 
-GOLDEN:  >= 9.5 (all HARD + 95% SOFT)
-PUBLISH: >= 8.0 (all HARD + 80% SOFT)
-REVIEW:  >= 7.0 (all HARD + 70% SOFT)
-REJECT:  < 7.0 or any HARD fail
-```
+---
 
-## Automation
-Primary: validate_artifact.py --kind skill [PLANNED]
-Interim: validate manually against this file, checking each gate.
+## SOFT Scoring
 
-## Pre-Production Checklist
-- [ ] Capability name and domain identified
-- [ ] No existing skill for this capability (brain_query checked)
-- [ ] Phase decomposition reviewed (no overlapping phases)
-- [ ] Trigger type determined (slash vs keyword vs event)
+Dimensions are weighted; total normalized weight = 100%.
+
+| # | Dimension | Weight | 1 (Poor) | 5 (Good) | 10 (Excellent) |
+|---|-----------|--------|----------|----------|----------------|
+| 1 | density >= 0.80 (content per token ratio) | 1.0 | Padded with filler prose | Mostly substantive | No filler; every sentence carries information |
+| 2 | Trigger is specific not generic (trigger will not fire on unrelated inputs) | 1.0 | Generic keyword like "do" or "run" | Moderately specific | Exact slash command or narrow keyword pattern with exclusion rules |
+| 3 | Phases have clear boundaries (entry condition, exit condition, and handoff artifact per phase) | 1.0 | Phases blend together | Start/end noted | Explicit entry condition, exit condition, and handoff artifact per phase |
+| 4 | Input/output typed per phase (not just final output typed) | 1.0 | Only final output typed | Partial typing | Every phase has named fields with types for both input and output |
+| 5 | user_invocable flag correct (`true` if user can trigger it, `false` if internal-only) | 0.5 | Missing | Present but unchecked | Present and verified against trigger type |
+| 6 | Tags include `skill` | 0.5 | Missing | Present but misspelled | Exactly `skill` in tags list |
+| 7 | Error handling per phase (each phase has its own error class, retry rule, and fallback) | 1.0 | No error handling | Global handler only | Each phase has error class, retry rule, and fallback |
+| 8 | Phase dependencies documented (which phases must complete before the next; parallel-eligible phases noted) | 1.0 | No dependencies stated | Sequential assumed | Explicit dependency graph including any parallel-eligible phases |
+| 9 | Composable with other skills (input/output types compatible with standard skill interfaces) | 1.0 | Proprietary types only | Compatible with 1-2 other skills | Standard types throughout; can be piped from or to any skill in the registry |
+| 10 | No agent identity claims (purely procedural language; no first-person agent framing or goals claimed) | 1.0 | Skill claims agent identity | Minor phrasing issues | Purely procedural language throughout; no first-person agent framing |
+
+Score = sum(rating * weight) / sum(weights) normalized to 0-10.
+
+---
+
+## Actions
+
+| Threshold | Action |
+|-----------|--------|
+| >= 9.5 | GOLDEN — archive to pool, tag as reference implementation |
+| >= 8.0 | PUBLISH — merge to main, available for invocation and composition |
+| >= 7.0 | REVIEW — return to author with dimension-level feedback |
+| < 7.0 | REJECT — do not merge; author must revise from scratch or substantially rewrite |
+
+---
+
+## Bypass
+
+| Field | Value |
+|-------|-------|
+| condition | Skill is a one-time migration helper used once and then deleted; it will never enter the registry |
+| approver | Domain lead with written sign-off confirming the skill will be deleted after use |
+| audit_log | Entry required in `records/audits/gate_bypasses.md` with date, skill name, approver, and expiry |
+| expiry | 7 days or first successful invocation, whichever comes first |
+
+H01 (parseable frontmatter) and H05 (quality=null) are NEVER bypassable under any condition.

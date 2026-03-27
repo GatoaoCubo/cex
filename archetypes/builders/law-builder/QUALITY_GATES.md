@@ -1,95 +1,82 @@
 ---
-id: law-builder-quality-gates
+id: p11_qg_law
 kind: quality_gate
 pillar: P11
-parent: law-builder
-version: 1.0.0
-created: "2026-03-26"
-updated: "2026-03-26"
+title: "Gate: Law"
+version: "1.0.0"
+created: "2026-03-27"
+updated: "2026-03-27"
 author: EDISON
-tags: [quality-gates, law-builder, validation, P08, governance]
+domain: law
+quality: null
+tags: [quality-gate, law, governance, P08, enforcement]
+tldr: "Quality gate for law artifacts: enforces imperative statement, rationale, and testable enforcement mechanism."
+density_score: 0.85
 ---
 
-# law-builder — QUALITY GATES
+# Gate: Law
 
-## HARD Gates (9)
+## Definition
 
-All HARD gates MUST pass. Any single failure = artifact rejected (score = 0).
+A `law` artifact encodes an inviolable operational rule. It must carry a mandatory statement, the reasoning behind it, a concrete enforcement mechanism, and documented exceptions. Gates here prevent advisory rules from masquerading as laws and ensure every law is traceable, enforceable, and scoped.
 
-| Gate | Check | Failure consequence |
-|------|-------|-------------------|
-| H01 | YAML frontmatter parses without error | Broken artifact — unparseable by tooling |
-| H02 | id matches `^p08_law_[0-9]+$` | Namespace violation — not discoverable |
-| H03 | id equals filename stem exactly | Brain search failure — id/file mismatch |
-| H04 | kind == literal string "law" | Type integrity failure — wrong kind |
-| H05 | quality == null | Self-scoring violation — pool metric corruption |
-| H06 | All 15 required fields present and non-empty (quality: null counts as present) | Incomplete artifact — missing critical metadata |
-| H07 | tags is a list with length >= 3 | Unsearchable — minimum tagging not met |
-| H08 | number is a positive integer | Law identification failure — unidentifiable |
-| H09 | statement uses imperative mood (contains MUST, SHALL, NEVER, or ALWAYS) | Law is advisory, not mandatory — not a law |
+## HARD Gates
 
-## SOFT Gates (10)
+All HARD gates must pass. Any single failure sets score to 0 and blocks publish.
 
-SOFT gates contribute to quality score. Target: pass all 10 for score >= 9.0.
+| ID  | Check | Failure consequence |
+|-----|-------|---------------------|
+| H01 | YAML frontmatter parses without error | Artifact unparseable by tooling |
+| H02 | `id` matches `^p08_law_[0-9]+$` | Namespace violation — not discoverable |
+| H03 | `id` equals filename stem exactly | Brain search failure — id/file mismatch |
+| H04 | `kind` == literal string `"law"` | Type integrity failure |
+| H05 | `quality` == `null` | Self-scoring violation — pool metric corruption |
+| H06 | All required fields present and non-empty (`id`, `kind`, `pillar`, `version`, `created`, `updated`, `author`, `number`, `statement`, `rationale`, `enforcement`, `scope`, `exceptions`, `tags`, `tldr`) | Incomplete artifact |
+| H07 | `statement` contains at least one of: `MUST`, `SHALL`, `NEVER`, `ALWAYS` | Rule is advisory, not mandatory |
+| H08 | `number` is a positive integer | Law unidentifiable — routing breaks |
+| H09 | `Statement` section present in body | Core content missing |
+| H10 | `Rationale` section present in body | Missing justification — law cannot be audited |
 
-| Gate | Check | Weight | Points |
-|------|-------|--------|--------|
-| S01 | tldr is <= 160 chars and non-empty | 1.0 | 10 |
-| S02 | rationale explains WHY (does not merely restate statement) | 1.0 | 10 |
-| S03 | enforcement names a specific detection mechanism (automated, review, or runtime) | 1.0 | 10 |
-| S04 | exceptions field is present: list of conditions or explicitly "None" | 1.0 | 10 |
-| S05 | scope is specified (system, satellite, or domain) | 1.0 | 10 |
-| S06 | Examples section has >= 2 correct applications | 1.0 | 10 |
-| S07 | Violations section has >= 2 breach scenarios with consequences | 1.0 | 10 |
-| S08 | Body has all 8 required sections (Statement, Rationale, Enforcement, Exceptions, Examples, Violations, History, References) | 1.0 | 10 |
-| S09 | density >= 0.80 (no filler phrases: "is important", "helps the system", "in summary", "basically") | 1.0 | 10 |
-| S10 | keywords field present with >= 2 terms | 0.5 | 10 |
+## SOFT Scoring
 
-## Scoring Formula
+Weights sum to 100%. Each dimension scores 0 or its full weight.
 
-```
-hard_pass = all(H01..H09)
-if not hard_pass: score = 0, REJECTED
+| ID  | Dimension | Weight | Criteria |
+|-----|-----------|--------|----------|
+| S01 | tldr quality | 1.0 | `tldr` <= 160 chars, non-empty, not a restatement of `statement` |
+| S02 | Rationale explains WHY | 1.0 | Does not merely restate the statement; explains consequence of violation |
+| S03 | Enforcement mechanism named | 1.0 | Names a specific detection method: automated check, review step, or runtime guard |
+| S04 | Exceptions documented | 1.0 | `exceptions` field present: list of conditions or explicitly `"None"` |
+| S05 | Scope boundary clear | 1.0 | `scope` specifies system, satellite, or domain — not "everything" |
+| S06 | Violation examples concrete | 1.0 | `Violations` section has >= 2 breach scenarios with named consequences |
+| S07 | Correct-use examples present | 1.0 | `Examples` section has >= 2 applications showing compliant behavior |
+| S08 | All 8 body sections present | 1.0 | `Statement`, `Rationale`, `Enforcement`, `Exceptions`, `Examples`, `Violations`, `History`, `References` |
+| S09 | Density >= 0.80 | 1.0 | No filler phrases: "is important", "helps the system", "in summary", "basically" |
+| S10 | `priority` field present | 0.5 | Numeric priority or named tier (critical, high, medium) |
+| S11 | `tags` includes `"law"` | 0.5 | Minimum tag set for routing |
+| S12 | `keywords` field present with >= 2 terms | 0.5 | Improves brain search recall |
+| S13 | `enforcement` is testable | 0.5 | Can be verified by a script or checklist item — not "team awareness" |
+| S14 | Cross-references valid | 0.5 | Any `references` items point to real artifacts or URLs |
 
-soft_points = sum(weight * 10 for each passing SOFT gate)
-soft_max = sum(weights) * 10 = 9.5 * 10 = 95
-soft_score = (soft_points / soft_max) * 10
+## Actions
 
-score = soft_score  # range: 0.0 - 10.0
-```
-
-Thresholds:
 | Score | Tier | Action |
 |-------|------|--------|
-| 0 | HARD FAIL | Rejected — fix and resubmit |
-| < 7.0 | Below threshold | Revise before output |
-| 7.0 - 7.9 | Experimental | Acceptable, improvement recommended |
-| 8.0 - 9.4 | Pool eligible | Commit to pool |
-| >= 9.5 | Golden | Pool + memory() |
+| >= 9.5 | GOLDEN | Publish to pool + record in memory |
+| >= 8.0 | PUBLISH | Commit to pool |
+| >= 7.0 | REVIEW | Acceptable with documented improvement items |
+| < 7.0 | REJECT | Revise and resubmit — do not publish |
+| 0 (HARD fail) | REJECTED | Fix failing HARD gate(s) first |
 
-## Validation Checklist
+## Bypass
 
-Run before every output:
+Bypasses are logged and expire automatically.
 
-```
-[ ] H01: YAML parses
-[ ] H02: id = p08_law_{number}
-[ ] H03: id == filename stem
-[ ] H04: kind = "law"
-[ ] H05: quality = null
-[ ] H06: 15 required fields present
-[ ] H07: tags list len >= 3
-[ ] H08: number is positive integer
-[ ] H09: statement contains MUST/SHALL/NEVER/ALWAYS
+| Field | Value |
+|-------|-------|
+| condition | Law covers a new domain with no precedent and rationale cannot be pre-filled |
+| approver | P11 governance owner (human) |
+| audit_log | Entry required in `records/governance/bypass_log.md` with date, gate ID, and justification |
+| expiry | 14 days — artifact must be updated before expiry or bypass reverts to REJECT |
 
-[ ] S01: tldr <= 160 chars
-[ ] S02: rationale explains WHY
-[ ] S03: enforcement names mechanism
-[ ] S04: exceptions present
-[ ] S05: scope specified
-[ ] S06: >= 2 examples
-[ ] S07: >= 2 violations
-[ ] S08: all 8 body sections
-[ ] S09: density >= 0.80
-[ ] S10: keywords >= 2 terms
-```
+H01 and H05 cannot be bypassed under any condition.

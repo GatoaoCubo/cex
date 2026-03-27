@@ -1,87 +1,81 @@
 ---
+id: p11_qg_naming_rule
+kind: quality_gate
 pillar: P11
-llm_function: GOVERN
-kind: quality_gates
+title: "Gate: naming_rule"
+version: "1.0.0"
+created: "2026-03-27"
+updated: "2026-03-27"
+author: "edison"
 domain: naming_rule
-version: 1.0.0
+quality: null
+tags: [quality-gate, naming-rule, P11, P05, governance, conventions]
+tldr: "Gates for naming_rule artifacts — pattern, scope, case style, and collision resolution for consistent identifiers."
+density_score: 0.85
 ---
 
-# Quality Gates — Naming Rule Builder
+# Gate: naming_rule
 
-## HARD Gates (H01–H08) — Blocking
+## Definition
 
-All HARD gates must pass. Any single failure = artifact REJECTED.
+| Field     | Value                                          |
+|-----------|------------------------------------------------|
+| metric    | pattern validity + scope coverage + example completeness |
+| threshold | 8.0                                            |
+| operator  | >=                                             |
+| scope     | all naming_rule artifacts (P05)                |
 
-| Gate | ID | Check | Failure Action |
-|------|----|-------|---------------|
-| ID pattern | H01 | `id` matches `^p05_nr_[a-z][a-z0-9_]+$` | REJECT — fix id |
-| Kind fixed | H02 | `kind` == `naming_rule` (exact string) | REJECT — fix kind |
-| Pillar fixed | H03 | `pillar` == `P05` (exact string) | REJECT — fix pillar |
-| Semver | H04 | `version` matches `^\d+\.\d+\.\d+$` | REJECT — fix version |
-| Scope present | H05 | `scope` is non-empty string, <= 120 chars | REJECT — add scope |
-| Regex pattern | H06 | `pattern` is valid regex; all valid examples match; all invalid examples fail | REJECT — fix pattern |
-| Enum values | H07 | `case_style` in allowed enum; `collision_strategy` in allowed enum | REJECT — fix enums |
-| Required sections | H08 | Body contains all 4 sections: Scope, Pattern Definition, Examples, Collision Resolution | REJECT — add sections |
+## HARD Gates
 
-## SOFT Gates (S01–S10) — Scoring
+All must pass. Failure on any = final score 0.
 
-Soft gates contribute to quality score. Failing soft gates reduces score but does not block.
+| Gate | Check | Why |
+|------|-------|-----|
+| H01 | YAML frontmatter parses valid YAML | Broken YAML = rule silently ignored |
+| H02 | id matches `^p05_nr_[a-z][a-z0-9_]+$` | Namespace compliance |
+| H03 | id == filename stem | Brain search relies on this |
+| H04 | kind == "naming_rule" | Type integrity |
+| H05 | quality == null | Never self-score |
+| H06 | All required fields present: id, kind, pillar, version, created, updated, author, domain, quality, tags, tldr | Completeness |
+| H07 | pattern field is present and non-empty (regex or glob string) | Rule must be machine-checkable |
+| H08 | scope field is non-empty string <= 120 chars | Unbounded scope = unenforced rule |
+| H09 | case_style field is present (kebab-case, snake_case, PascalCase, camelCase, UPPER_SNAKE, or other) | Case ambiguity causes collisions |
+| H10 | valid_examples list has >= 2 entries; each entry matches pattern | Rule must be demonstrated correct |
 
-| Gate | ID | Check | Score Impact |
-|------|----|-------|-------------|
-| Quality null | S01 | `quality: null` at creation | -1.0 if self-assigned |
-| Density REC | S02 | `density_score: REC` at authoring | -0.5 if computed value set manually |
-| Min valid examples | S03 | >= 3 valid examples with reasons | -0.5 per missing example |
-| Min invalid examples | S04 | >= 2 invalid examples with violation reasons | -0.5 per missing example |
-| Keywords count | S05 | 5–8 keywords present | -0.3 if out of range |
-| Tags count | S06 | >= 3 tags, kebab-case | -0.3 if < 3 or wrong case |
-| File size | S07 | Artifact <= 4096 bytes | -1.0 if exceeds limit |
-| Segments table | S08 | Pattern Definition includes segments table | -0.5 if missing |
-| tldr quality | S09 | tldr is one sentence, references scope and pattern | -0.3 if vague |
-| Sibling consistency | S10 | Separator and case_style consistent with sibling naming rules in same pillar | -0.5 if inconsistent without documented rationale |
+## SOFT Scoring
 
-## Scoring Formula
+| Gate | Check | Weight |
+|------|-------|--------|
+| S01 | tldr <= 160 chars, non-empty, references scope and pattern | 1.0 |
+| S02 | tags is list, len >= 3, includes "naming-rule" | 0.5 |
+| S03 | density_score >= 0.80 | 0.5 |
+| S04 | pattern is a valid regex (compiles without error) and tested against all examples | 1.0 |
+| S05 | invalid_examples list has >= 2 entries with stated violation reason | 1.0 |
+| S06 | separator field documented (hyphen, underscore, dot, none, or other) | 0.5 |
+| S07 | collision_resolution strategy defined (numbered suffix, error, timestamp, or other) | 1.0 |
+| S08 | scope boundaries clearly exclude at least one adjacent domain | 0.5 |
+| S09 | versioning_in_name field states whether version appears in identifier | 0.5 |
+| S10 | human_rationale explains WHY this convention, not just WHAT it is | 1.0 |
+| S11 | No filler phrases ("this rule", "designed to", "various cases") | 1.0 |
+| S12 | related_rules cross-references >= 1 sibling naming rule if any exist | 0.5 |
 
-```
-base_score = 10.0
-score = base_score - sum(soft_gate_penalties)
-final = max(0.0, score)
-```
+Weights sum: 9.0. Normalize: divide each by 9.0 before scoring.
 
-| Score Range | Tier | Action |
-|-------------|------|--------|
-| >= 9.5 | Golden | Pool as Golden artifact |
-| >= 8.0 | Skilled | Pool + remember() |
-| >= 7.0 | Learning | Experimental pool |
-| < 7.0 | Rejected | Rework required |
+## Actions
 
-## Automation
+| Score | Action |
+|-------|--------|
+| >= 9.5 | GOLDEN — pool as canonical naming convention reference |
+| >= 8.0 | PUBLISH — enforce in linting and authoring guides |
+| >= 7.0 | REVIEW — tighten pattern, add missing examples or rationale |
+| < 7.0  | REJECT — rework pattern definition and scope boundary |
 
-Run gates via schema validator (when available):
+## Bypass
 
-```
-Grep: pattern="^id: p05_nr_" path={artifact_path}
-Grep: pattern="^kind: naming_rule" path={artifact_path}
-Grep: pattern="^pillar: P05" path={artifact_path}
-Grep: pattern="## Scope" path={artifact_path}
-Grep: pattern="## Pattern Definition" path={artifact_path}
-Grep: pattern="## Examples" path={artifact_path}
-Grep: pattern="## Collision Resolution" path={artifact_path}
-```
-
-## Pre-Production Checklist
-
-Before submitting artifact to pool:
-
-- [ ] H01: ID matches regex pattern
-- [ ] H02: kind = `naming_rule`
-- [ ] H03: pillar = `P05`
-- [ ] H04: version is semver
-- [ ] H05: scope is clear and bounded
-- [ ] H06: pattern is valid regex with tested examples
-- [ ] H07: case_style and collision_strategy use valid enum values
-- [ ] H08: all 4 body sections present
-- [ ] S01: quality is null
-- [ ] S02: density_score is REC
-- [ ] S07: file size <= 4096 bytes
-- [ ] OUTPUT_TEMPLATE drift check passed (all {{vars}} mapped to schema fields)
+| Field | Value |
+|-------|-------|
+| conditions | Migration window requiring temporary dual-format support before full rename |
+| approver | p05-chief |
+| audit_trail | Log in records/audits/ with bypass reason, affected artifacts, and timestamp |
+| expiry | 72h — rule must fully pass before expiry or migration reverts |
+| never_bypass | H01 (YAML), H05 (quality null) |

@@ -1,62 +1,80 @@
 ---
+id: p11_qg_mcp_server
+kind: quality_gate
 pillar: P11
-llm_function: GOVERN
-purpose: Automated quality gates for mcp_server validation
-pattern: HARD gates block publish, SOFT gates contribute to 0-10 score
+title: "Gate: MCP Server"
+version: "1.0.0"
+created: "2026-03-27"
+updated: "2026-03-27"
+author: EDISON
+domain: mcp_server
+quality: null
+tags: [quality-gate, mcp-server, protocol, P04, integration]
+tldr: "Quality gate for mcp_server artifacts: enforces tool list, transport type, auth strategy, and JSON-Schema params."
+density_score: 0.85
 ---
 
-# Quality Gates: mcp_server
+# Gate: MCP Server
 
-## HARD Gates (block publish if ANY fails)
+## Definition
 
-| Gate | Check | Why |
-|------|-------|-----|
-| H01 | YAML frontmatter parses | Broken YAML = broken artifact |
-| H02 | id matches `^p04_mcp_[a-z][a-z0-9_]+$` | Namespace compliance |
-| H03 | id == filename stem | Brain search relies on this |
-| H04 | kind == "mcp_server" | Type integrity |
-| H05 | quality == null | Never self-score |
-| H06 | Required fields present: id, kind, pillar, version, created, updated, author, name, transport, tools_provided, resources_provided, quality, tags, tldr | Completeness |
-| H07 | body has ## Overview, ## Tools, ## Resources, ## Transport & Auth | Core sections required |
-| H08 | body <= 2048 bytes | Compact infrastructure spec |
+A `mcp_server` artifact specifies an MCP protocol server: its tools, resources, transport mechanism, and authentication strategy. It is a specification, not an implementation. Gates here ensure every server is unambiguously identifiable, its tools carry machine-readable schemas, and auth matches transport — preventing integration failures before a line of code is written.
 
-## SOFT Gates (contribute to score)
+## HARD Gates
 
-| Gate | Check | Weight | Score if pass |
-|------|-------|--------|---------------|
-| S01 | tldr <= 160 chars, non-empty | 1.0 | 10 |
-| S02 | tags is list, len >= 3, includes "mcp_server" | 0.5 | 10 |
-| S03 | tools_provided names match tool names in ## Tools section (zero drift) | 1.0 | 10 |
-| S04 | resources_provided URI templates match ## Resources section (zero drift) | 1.0 | 10 |
-| S05 | transport enum valid: stdio, sse, or http | 1.0 | 10 |
-| S06 | Each tool in ## Tools has: name, description, parameters, return type | 1.0 | 10 |
-| S07 | auth field present and valid enum value | 0.5 | 10 |
-| S08 | No implementation code in body (spec only) | 1.0 | 10 |
-| S09 | transport/auth pairing valid (stdio=none, sse/http=api_key/oauth/bearer) | 0.5 | 10 |
-| S10 | description <= 200 chars and non-generic | 0.5 | 10 |
-| S11 | density_score >= 0.80 (no filler phrases) | 0.5 | 10 |
-| S12 | Each resource has URI template, content-type, description | 0.5 | 10 |
+All HARD gates must pass. Any single failure sets score to 0 and blocks publish.
 
-## Scoring Formula
-```text
-hard_pass = all 8 HARD gates pass
-soft_score = sum(gate_score * weight) / sum(weights)
-final = hard_pass ? soft_score : 0
+| ID  | Check | Failure consequence |
+|-----|-------|---------------------|
+| H01 | YAML frontmatter parses without error | Artifact unparseable by tooling |
+| H02 | `id` matches `^p04_mcp_[a-z][a-z0-9_]+$` | Namespace violation — not discoverable |
+| H03 | `id` equals filename stem exactly | Brain search failure — id/file mismatch |
+| H04 | `kind` == literal string `"mcp_server"` | Type integrity failure |
+| H05 | `quality` == `null` | Self-scoring violation — pool metric corruption |
+| H06 | All required fields present and non-empty (`id`, `kind`, `pillar`, `version`, `created`, `updated`, `author`, `name`, `transport`, `tools_provided`, `auth`, `tags`, `tldr`) | Incomplete artifact |
+| H07 | `tools_provided` is a list with >= 1 named tool | Server with no tools has no purpose |
+| H08 | `transport` is one of: `stdio`, `sse`, `http` | Unknown transport — integration impossible |
+| H09 | `auth` field is explicitly declared (value or `"none"`) | Missing auth strategy causes insecure defaults |
+| H10 | `Tools` section present in body with >= 1 tool entry | Spec without tool details is incomplete |
 
-GOLDEN:  >= 9.5 (all HARD + 95% SOFT)
-PUBLISH: >= 8.0 (all HARD + 80% SOFT)
-REVIEW:  >= 7.0 (all HARD + 70% SOFT)
-REJECT:  < 7.0 or any HARD fail
-```
+## SOFT Scoring
 
-## Automation
-Primary: validate_artifact.py --kind mcp_server [PLANNED]
-Interim: validate manually against this file, checking each gate.
+Weights sum to 100%. Each dimension scores 0 or its full weight.
 
-## Pre-Production Checklist
-- [ ] Server name and domain identified
-- [ ] Transport type selected (stdio/sse/http)
-- [ ] All tools enumerated with concrete names
-- [ ] All resources enumerated with URI templates
-- [ ] No existing mcp_server for this domain (brain_query checked)
-- [ ] Auth matches transport type
+| ID  | Dimension | Weight | Criteria |
+|-----|-----------|--------|----------|
+| S01 | tldr quality | 1.0 | `tldr` <= 160 chars, names the server's purpose and primary tool |
+| S02 | Tool schemas have JSON-Schema params | 1.0 | Each tool entry includes `parameters` block with type annotations |
+| S03 | Resource URIs follow templates | 1.0 | Resource URIs use `{variable}` template syntax, not hard-coded paths |
+| S04 | Auth matches transport type | 1.0 | `stdio` paired with `none`; `sse`/`http` paired with `api_key`, `oauth`, or `bearer` |
+| S05 | Error handling documented | 1.0 | Each tool documents at least one error code or failure mode |
+| S06 | `tags` includes `"mcp-server"` | 0.5 | Minimum tag for routing |
+| S07 | Health endpoint defined | 0.5 | `http`/`sse` transports specify a health check path |
+| S08 | Rate limits specified | 0.5 | Rate limit per tool or server-wide limit documented |
+| S09 | Dependency versions pinned | 0.5 | Runtime dependencies list exact versions, not ranges |
+| S10 | Examples for each tool | 1.0 | At least one request/response example per tool in body |
+| S11 | No implementation code in body | 1.0 | Body is specification only — no executable code blocks |
+| S12 | Density >= 0.80 | 0.5 | No filler: "this server provides", "allows you to", "in order to" |
+
+## Actions
+
+| Score | Tier | Action |
+|-------|------|--------|
+| >= 9.5 | GOLDEN | Publish to pool + record in memory |
+| >= 8.0 | PUBLISH | Commit to pool |
+| >= 7.0 | REVIEW | Acceptable with documented improvement items |
+| < 7.0 | REJECT | Revise and resubmit — do not publish |
+| 0 (HARD fail) | REJECTED | Fix failing HARD gate(s) first |
+
+## Bypass
+
+Bypasses are logged and expire automatically.
+
+| Field | Value |
+|-------|-------|
+| condition | Proof-of-concept server with single tool and no auth requirement (local stdio only) |
+| approver | P04 integration owner |
+| audit_log | Entry required in `records/governance/bypass_log.md` with gate ID, server id, transport type, and PoC scope note |
+| expiry | 14 days — full tool schemas and error handling must be added before expiry or artifact returns to DRAFT |
+
+H01 and H05 cannot be bypassed under any condition.
