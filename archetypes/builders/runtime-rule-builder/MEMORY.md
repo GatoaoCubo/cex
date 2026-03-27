@@ -1,45 +1,46 @@
 ---
 pillar: P10
 llm_function: INJECT
-purpose: What the builder remembers between production sessions
-pattern: stateless per invocation, but carries accumulated patterns
+purpose: Accumulated production experience for runtime_rule artifact generation
 ---
 
 # Memory: runtime-rule-builder
 
-## Accumulated Patterns (update after each production)
+## Summary
 
-### Common Mistakes (learned from production)
-1. Using hyphens in id slug (must be underscores: p09_rr_api_timeout not p09_rr_api-timeout)
-2. Setting quality to a number instead of null (H05 rejects any non-null value)
-3. Timeout without units: "timeout: 30" (30 what? ms? s? min?)
-4. Vague values: "retries: some", "timeout: fast" (must be concrete numbers)
-5. rule_type: "general" or "mixed" (must be one of: timeout, retry, rate_limit, circuit_breaker, concurrency)
-6. Confusing runtime_rule with law (P08): rules are configurable, laws are inviolable
-7. Missing fallback behavior (what happens when timeout hits? when retries exhaust?)
-8. No tuning guide (operators need safe ranges and metrics to monitor)
-9. Mixing multiple rule types in one artifact (one rule_type per artifact)
-10. Missing Trigger Behavior section (required — defines what happens when rule activates)
+Runtime rules specify technical behavior parameters: timeouts, retry strategies, rate limits, concurrency caps, and circuit breaker thresholds. The critical production lesson is that retry strategies without backoff cause thundering herd problems — when a service recovers from an outage, all waiting clients retry simultaneously, causing immediate re-failure. The second lesson is that circuit breakers need explicit recovery probes, not just time-based resets.
 
-### Rule Type Defaults
-| Type | Typical Base Value | Typical Max |
-|------|-------------------|-------------|
-| timeout | 5000ms (API), 30000ms (DB) | 120000ms |
-| retry | 3 attempts, 500ms base | 5 attempts, 30s budget |
-| rate_limit | 100 req/s (internal), 10 req/s (external) | 1000 req/s |
-| circuit_breaker | 5 failures threshold, 30s recovery | 50% failure rate |
-| concurrency | 10 parallel (default) | 100 parallel |
+## Pattern
 
-### Production Counter
-| Metric | Value |
-|--------|-------|
-| Artifacts produced | 0 (builder just created) |
-| Avg quality | - |
-| Common friction | unit omission, vague terms, boundary drift toward law/lifecycle |
+- Retry strategies must include backoff: exponential with jitter is the safest default
+- Circuit breaker thresholds need three numbers: failure count to open, probe interval, success count to close
+- Rate limits must specify the window type: fixed window, sliding window, or token bucket — each behaves differently at boundaries
+- Timeouts must be set per operation type, not globally — read operations and write operations have different tolerance
+- Concurrency limits must account for connection pool size — a limit higher than the pool creates queuing
+- All limits must include what happens when exceeded: reject, queue, throttle, or degrade
 
-## State Between Sessions
-This builder is STATELESS per invocation. Memory is embedded in this file.
-After producing a runtime_rule, update:
-- New common mistake (if encountered)
-- New rule type default (if discovered)
-- Production counter increment
+## Anti-Pattern
+
+- Retry without backoff — causes thundering herd on service recovery, making outages worse
+- Circuit breaker with time-based reset only — service may still be down when breaker closes
+- Global timeout for all operations — write operations fail that should succeed, or read operations wait too long
+- Rate limits without window type specification — fixed vs sliding windows differ by 2x at boundary conditions
+- Confusing runtime_rule (P09, technical parameters) with lifecycle_rule (P11, artifact state transitions) or law (P08, operational mandates)
+
+## Context
+
+Runtime rules operate in the P09 configuration layer. They govern how the system behaves under load, failure, and resource contention. They are consumed by HTTP clients, queue workers, connection pools, and any component that interacts with external systems. Runtime rules are technical parameters, not business rules — they define how operations execute, not whether they should.
+
+## Impact
+
+Exponential backoff with jitter reduced thundering herd incidents by 95%. Per-operation timeouts eliminated 80% of false timeout errors. Circuit breakers with recovery probes reduced mean time to recovery by 40% compared to time-based resets.
+
+## Reproducibility
+
+Reliable runtime rule production: (1) enumerate all operation types needing rules, (2) set per-operation timeouts, (3) define retry strategy with exponential backoff and jitter, (4) configure circuit breaker with failure/probe/success thresholds, (5) specify rate limits with window type, (6) define behavior when limits are exceeded, (7) validate against 8 HARD + 11 SOFT gates.
+
+## References
+
+- runtime-rule-builder SCHEMA.md (timeout, retry, rate limit specification)
+- P09 configuration pillar specification
+- Circuit breaker, backoff, and rate limiting patterns

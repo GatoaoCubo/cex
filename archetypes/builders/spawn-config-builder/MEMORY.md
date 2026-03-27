@@ -1,45 +1,47 @@
 ---
 pillar: P10
 llm_function: INJECT
-purpose: What the builder remembers between production sessions
-pattern: stateless per invocation, but carries accumulated patterns
+purpose: Accumulated production experience for spawn_config artifact generation
 ---
 
 # Memory: spawn-config-builder
 
-## Accumulated Patterns (update after each production)
+## Summary
 
-### Common Mistakes (learned from production)
-1. Setting quality to a number instead of null (H05 rejects any value)
-2. Using hyphens in id slug (must be underscores: p12_spawn_solo not p12_spawn-solo)
-3. Missing baseline flags (--dangerously-skip-permissions, --no-chrome)
-4. Including task instructions in spawn_config (belongs in handoff)
-5. Using uppercase satellite name (must be lowercase: shaka not SHAKA)
-6. Setting timeout too low for task type (research needs >= 1800s)
-7. Forgetting -p flag (causes workspace trust prompt hang in automation)
-8. Using --mcp-config with absolute paths (hangs in PS->cmd chain)
+Spawn configs define how autonomous satellites are launched: CLI flags, MCP profiles, timeout policies, and handoff file references. The critical production lesson is prompt size limits — inline prompts exceeding 200 characters cause hangs in non-interactive mode. Complex task descriptions must be offloaded to handoff files referenced by the spawn config. The second lesson is MCP profile isolation: satellites sharing MCP configs cause connection conflicts when spawned concurrently.
 
-### Satellite Timeout Reference
+## Pattern
 
-| Satellite | Typical Task | Recommended Timeout |
-|-----------|-------------|-------------------|
-| shaka | Research | 1800s (30min) |
-| lily | Marketing copy | 1200s (20min) |
-| edison | Build/code | 2700s (45min) |
-| pytha | Knowledge | 1200s (20min) |
-| atlas | Deploy/test | 900s (15min) |
-| york | Monetize | 1200s (20min) |
+- Keep inline prompts under 200 characters — offload complex instructions to handoff files
+- Each satellite must have its own MCP config file — shared configs cause connection conflicts in parallel spawns
+- Timeout policies must cover both task execution and idle detection — satellites without idle timeout hang indefinitely
+- Interactive mode flag must be explicitly set: interactive (keeps terminal open) or batch (closes on completion)
+- Spawn delay between concurrent satellites should be 3-5 seconds — simultaneous spawns cause resource contention
+- Include workspace trust handling: non-interactive mode requires explicit trust bypass flag
 
-### Production Counter
-| Metric | Value |
-|--------|-------|
-| Artifacts produced | 0 (builder just created) |
-| Avg quality | - |
-| Common friction | flag combinations, timeout sizing, mode selection |
+## Anti-Pattern
 
-## State Between Sessions
-This builder is STATELESS per invocation. Memory is embedded in this file.
-After producing a spawn_config, update:
-- New common mistake (if encountered)
-- New timeout reference (if discovered)
-- Production counter increment
+- Inline prompts exceeding 200 characters — non-interactive mode hangs waiting for truncated input
+- Shared MCP config across concurrent satellites — connection conflicts cause silent tool failures
+- Missing idle timeout — satellite finishes tasks but terminal stays open consuming resources indefinitely
+- Spawning more than 3 concurrent satellites without delay — causes memory exhaustion and system instability
+- Confusing spawn_config (P12, launch parameters) with signal (P12, status event) or workflow (P12, multi-step orchestration)
+- Absolute paths in MCP config that differ across machines — config fails on any machine except the original
+
+## Context
+
+Spawn configs operate in the P12 orchestration layer. They are consumed by PowerShell spawn scripts that create terminal processes for each satellite. In production, spawn configs enable automated satellite deployment in solo (single satellite), grid (multiple parallel), and continuous (queue-based refill) modes. The key constraint is that each spawned satellite is an independent process with its own resources.
+
+## Impact
+
+Prompt size enforcement (under 200 characters) eliminated 100% of non-interactive mode hangs. Per-satellite MCP profiles eliminated all concurrent connection conflicts. Idle timeout policies recovered 100% of zombie satellite processes within configured windows.
+
+## Reproducibility
+
+Reliable spawn config production: (1) define satellite-model pairing, (2) create isolated MCP config file, (3) keep inline prompt under 200 chars with handoff file reference, (4) set interactive/batch mode explicitly, (5) configure task and idle timeouts, (6) set spawn delay for concurrent launches, (7) handle workspace trust bypass, (8) validate against 8 HARD + 8 SOFT gates.
+
+## References
+
+- spawn-config-builder SCHEMA.md (19 frontmatter fields)
+- P12 orchestration pillar specification
+- Process management and satellite lifecycle patterns

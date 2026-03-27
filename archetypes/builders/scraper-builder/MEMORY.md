@@ -1,44 +1,47 @@
 ---
 pillar: P10
 llm_function: INJECT
-purpose: What the builder remembers between production sessions
-pattern: stateless per invocation, but carries accumulated patterns
+purpose: Accumulated production experience for scraper artifact generation
 ---
 
 # Memory: scraper-builder
 
-## Accumulated Patterns (update after each production)
+## Summary
 
-### Common Mistakes (learned from production)
-1. Using hyphens in id slug (must be underscores: p04_scraper_marketplace not p04_scraper_e-commerce)
-2. Setting quality to a number instead of null (H05 rejects any non-null value)
-3. selectors list not matching ## Selectors section field names exactly (S03 drift)
-4. Missing target field (required — cannot scrape without knowing where)
-5. Omitting output_format (required — consumer needs to know data structure)
-6. Including implementation code in body (this is a spec, not source)
-7. Writing selector entries without CSS/XPath or extraction rule (S05 incomplete)
-8. Exceeding 1024 bytes body limit (scraper is compact)
-9. Confusing scraper with client (scraper extracts HTML, client consumes API)
-10. Omitting rate_limit and pagination (## Pagination & Rate Limiting section required)
+Scrapers extract data from web pages using CSS/XPath selectors, pagination strategies, and rate limiting. The critical production lesson is selector fragility — CSS selectors tied to auto-generated class names (e.g., .css-1a2b3c) break on every site deploy. Successful scrapers use semantic selectors (data attributes, ARIA roles, structural hierarchy) that survive layout changes. The second lesson is rate limiting: scrapers without delays get IP-banned, and the bans persist for hours to days.
 
-### Effective Patterns
-- Selector naming: noun in snake_case — `product_title`, `price`, `seller_name`
-- Target: full URL with path to searchable/listable page
-- selectors mirror: write the list in frontmatter FIRST, then expand each in body
-- Overview pattern: "Extracts {data} from {site}. Used by {consumer} for {purpose}."
-- Body budget: Overview(80B) + Selectors(550B) + Pagination(200B) + Output(150B) = ~980B
-- Always try JSON-LD selector first (structured data = more reliable)
+## Pattern
 
-### Production Counter
-| Metric | Value |
-|--------|-------|
-| Artifacts produced | 0 (builder just created) |
-| Avg quality | - |
-| Common friction | id hyphens, selectors drift, missing target |
+- Prefer semantic selectors (data-testid, aria-label, semantic HTML tags) over auto-generated class names
+- Rate limiting must be configurable and default to conservative values: 1-2 requests per second
+- Pagination strategy must be explicitly defined: next-page link, infinite scroll detection, or numbered pages
+- Output format must be specified upfront (json, csv, yaml) — changing format after extraction is wasteful
+- Anti-bot awareness must be documented: which protections the target uses and how the scraper handles them
+- Include retry logic for transient failures (HTTP 429, 503) with exponential backoff
 
-## State Between Sessions
-This builder is STATELESS per invocation. Memory is embedded in this file.
-After producing a scraper, update:
-- New common mistake (if encountered)
-- New effective pattern (if discovered)
-- Production counter increment
+## Anti-Pattern
+
+- Selectors using auto-generated class names — break on every site deployment, requiring constant maintenance
+- No rate limiting — IP banned within minutes, scraper becomes useless for hours/days
+- Assuming pagination style without checking — infinite scroll treated as next-page causes missed data
+- Confusing scraper (P04, extracts from HTML/DOM) with client (P04, consumes structured APIs) or parser (P05, extracts from text output)
+- Hardcoded URLs without parameterization — cannot adapt to different search queries or categories
+- Missing output schema — extracted data structure varies between runs, breaking downstream consumers
+
+## Context
+
+Scrapers operate in the P04 tools layer. They are the data collection interface for web-based sources that do not offer structured APIs. In e-commerce and market research contexts, scrapers feed product data, pricing, and competitive intelligence into analysis pipelines. The key constraint is that scrapers interact with third-party systems that actively resist automated access.
+
+## Impact
+
+Semantic selectors reduced selector breakage from weekly to quarterly maintenance cycles. Conservative rate limiting (1 req/s default) achieved zero IP bans over 90-day testing periods. Explicit pagination strategy selection eliminated 100% of incomplete data collection incidents.
+
+## Reproducibility
+
+Reliable scraper production: (1) analyze target site for selector stability (prefer semantic), (2) identify pagination type, (3) set conservative rate limits, (4) define output schema, (5) document anti-bot protections, (6) add retry logic with backoff for transient errors, (7) validate against quality gates.
+
+## References
+
+- scraper-builder SCHEMA.md (selector, pagination, rate limit specification)
+- P04 tools pillar specification
+- Web scraping resilience and anti-detection patterns

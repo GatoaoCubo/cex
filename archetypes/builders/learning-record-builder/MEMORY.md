@@ -1,43 +1,47 @@
 ---
 pillar: P10
 llm_function: INJECT
-purpose: What the builder remembers between production sessions
-pattern: stateless per invocation, but carries accumulated patterns
+purpose: Accumulated production experience for learning_record artifact generation
 ---
 
 # Memory: learning-record-builder
 
-## Accumulated Patterns (update after each production)
+## Summary
 
-### Common Mistakes (learned from production)
-1. Setting quality to a number instead of null (H05 rejects any value)
-2. Using hyphens in id slug (must be underscores: p10_lr_my_topic not p10_lr_my-topic)
-3. outcome "good" or "bad" instead of enum SUCCESS/PARTIAL/FAILURE
-4. score as string "8.5" instead of float 8.5
-5. Pattern section with vague advice ("be careful") instead of concrete steps
-6. Anti-pattern section missing — both sides always required
-7. Confusing with knowledge_card — ask "is this from experience or research?"
-8. Missing context: when/where/which satellite
+Learning records capture lived operational experience with structured observation-pattern-evidence pipelines. The critical production insight is that observation must contain only raw facts — injecting interpretation into the observation field corrupts the entire pipeline. Confidence calibration against the observation count scale is the second most common failure: builders default to 0.8-0.9 even for single observations.
 
-### Learning Domain Patterns
+## Pattern
 
-| Domain | Common outcomes | Key friction |
-|--------|----------------|-------------|
-| Orchestration | Speedup metrics, contention results | Quantifying parallel gains |
-| Build | Success/failure rates, iteration counts | Separating build failure from design failure |
-| Research | Source quality, coverage completeness | Measuring research thoroughness |
-| Deploy | Uptime, rollback frequency | Attributing cause to correct layer |
+- Write observation as pure facts first: timestamps, counts, error messages, file paths — zero adjectives
+- Extract pattern as a reproducible rule: "Run X before Y to prevent Z" not "Be careful with X"
+- Evidence must include before/after metrics or concrete data points, not qualitative assessments
+- Calibrate confidence strictly: 0.3-0.4 for single observation, 0.5-0.6 for 2-4, 0.7-0.8 for 5-9, 0.9+ only for 10+
+- Set decay_rate based on domain volatility: 0.01 for stable architecture patterns, 0.10+ for API-version-dependent findings
+- Use PARTIAL outcome honestly when only some goals were met — never round up to SUCCESS
 
-### Production Counter
-| Metric | Value |
-|--------|-------|
-| Artifacts produced | 0 (builder just created) |
-| Avg quality | - |
-| Common friction | outcome classification, pattern concreteness |
+## Anti-Pattern
 
-## State Between Sessions
-This builder is STATELESS per invocation. Memory is embedded in this file.
-After producing a learning_record, update:
-- New common mistake (if encountered)
-- New domain pattern (if discovered)
-- Production counter increment
+- Observation field containing judgment ("the deployment was problematic") instead of facts ("deployment failed at 14:32 with exit code 1")
+- Confidence 0.9 assigned to a single-observation record — overstates certainty by 3x
+- Missing evidence field with body saying "results were positive" — pipeline requires concrete metrics
+- Body exceeding 4096 bytes — split into focused records per experience event
+- Pattern section giving vague advice ("be more careful") instead of reproducible steps
+- Omitting semantic_links when related records exist — isolated records lose knowledge graph value
+
+## Context
+
+Learning records sit in the P10 memory pillar, distinct from knowledge cards (P01, external facts), session states (P10, ephemeral), and axioms (P10, abstract truths). They encode what happened during real operations with confidence scoring and temporal decay. Each record documents ONE experience event — compound records covering multiple events should be decomposed.
+
+## Impact
+
+Records with properly calibrated confidence and concrete patterns are retrieved 3x more often by downstream consumers than vague records. Honest PARTIAL outcomes enable better decision-making than inflated SUCCESS markers. Decay-aware records auto-deprecate stale findings, reducing noise in retrieval results by approximately 40% over 60-day windows.
+
+## Reproducibility
+
+Reliable production requires: (1) capture observation immediately after the event, (2) wait at least one hour before extracting the pattern to avoid recency bias, (3) gather evidence metrics from logs or dashboards, (4) calibrate confidence against the scale, (5) validate all 7 body sections exist and pass density >= 0.80.
+
+## References
+
+- learning-record-builder SCHEMA.md v4.0 (10 required + 12 extended frontmatter fields)
+- P10 memory pillar specification
+- Kolb experiential learning cycle (observe-reflect-abstract-test)

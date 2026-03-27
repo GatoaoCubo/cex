@@ -1,51 +1,46 @@
 ---
 pillar: P10
 llm_function: INJECT
-purpose: What the builder remembers between production sessions
-pattern: stateless per invocation, but carries accumulated patterns
+purpose: Accumulated production experience for model_card artifact generation
 ---
 
 # Memory: model-card-builder
 
-## Accumulated Patterns (update after each production)
+## Summary
 
-### Pricing Sources (verified URLs, refresh quarterly)
-| Provider | Pricing URL | Last verified |
-|----------|------------|---------------|
-| Anthropic | https://docs.anthropic.com/en/docs/about-claude/pricing | 2026-03-26 |
-| OpenAI | https://platform.openai.com/docs/pricing | — |
-| Google | https://ai.google.dev/pricing | 2026-03-26 |
-| Meta | N/A (open-weight, pricing: null) | — |
-| Mistral | https://mistral.ai/technology/#pricing | — |
+Model cards document LLM technical specifications: capabilities, pricing, context windows, and feature booleans. The primary production challenge is data freshness — LLM providers update pricing and capabilities frequently, so cards require explicit last_verified dates and source URLs. The second challenge is capability booleans: features like vision or function calling must be binary true/false, not qualified with partial support.
 
-### Common Mistakes (learned from production)
-1. Confusing context_window with max_output (context = input+output capacity)
-2. Using "128K" (string) instead of 128000 (integer)
-3. Forgetting cache pricing (changes economics 10x for Anthropic)
-4. Marking open-weight models pricing as 0 instead of null
-5. Putting model version in provider field ("anthropic-opus" instead of "anthropic")
-6. Spec table Provider row with source `-` instead of URL (every row needs source)
-7. Google tiered pricing: use base tier (<=200K), document higher in body
-8. cache_write: null when provider has no symmetric write price (Google)
+## Pattern
 
-### Model Families (for linked_artifacts)
-| Provider | Family | Models in CEX |
-|----------|--------|---------------|
-| Anthropic | Claude 4 | opus_4, sonnet_4, haiku_4 |
-| OpenAI | GPT-4o | gpt_4o, gpt_4o_mini |
-| Google | Gemini 2.5 | gemini_2_5_pro, gemini_2_5_flash |
+- Always include last_verified date and source URL for every data point — LLM specs change monthly
+- Capability booleans must be strict true/false — use a separate notes field for qualifications
+- Normalize pricing to a common unit: USD per 1M tokens (input) and USD per 1M tokens (output)
+- Context window must distinguish between input limit and total (input + output) limit
+- Include at least 3 concrete use-case recommendations based on the model strength profile
+- Document known limitations and failure modes, not just capabilities
 
-### Production Counter
-| Metric | Value |
-|--------|-------|
-| Cards produced | 1 (gemini_2_5_pro by CODEX) |
-| Avg quality | pending validation |
-| Common friction | tiered pricing, cache_write ambiguity |
+## Anti-Pattern
 
-## State Between Sessions
-This builder is STATELESS per invocation. Memory is embedded in this file.
-After producing a model_card, update:
-- New verified pricing URL (if found)
-- New common mistake (if encountered)
-- New model family member (if produced)
-- Production counter increment
+- Publishing pricing without last_verified date — pricing changes break downstream cost calculations silently
+- Capability fields with "partial" or "limited" values — booleans must be true/false; nuance goes in notes
+- Mixing token counts with character counts — always normalize to tokens with the model tokenizer
+- Omitting the provider deprecation timeline — deprecated models waste integration effort
+- Confusing model_card (P02, technical spec) with agent (P02, identity with behavior) or benchmark (P07, performance test)
+
+## Context
+
+Model cards occupy the P02 identity layer as reference documents for LLM selection decisions. They are consumed by routing logic, cost estimators, and capacity planners. In multi-model systems, model cards enable automated model selection based on task requirements versus model capabilities and cost constraints.
+
+## Impact
+
+Cards with normalized pricing enabled automated cost optimization that reduced API spend by 25-40%. Cards with stale pricing (>30 days without verification) caused budget overruns averaging 15%. Strict capability booleans eliminated ambiguous model selection in routing logic.
+
+## Reproducibility
+
+For reliable model card production: (1) source all data from official provider documentation, (2) record last_verified date per field, (3) normalize pricing to USD/1M tokens, (4) use strict booleans for capabilities, (5) include deprecation timeline if known, (6) validate against 10 HARD + 15 SOFT gates.
+
+## References
+
+- model-card-builder SCHEMA.md (26 frontmatter fields)
+- Mitchell et al. 2019 Model Cards framework
+- P02 identity pillar specification

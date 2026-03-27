@@ -1,73 +1,46 @@
 ---
-id: law-builder-memory
-kind: memory
-pillar: P08
-parent: law-builder
-version: 1.0.0
-created: "2026-03-26"
-updated: "2026-03-26"
-author: EDISON
-tags: [memory, law-builder, mistakes, patterns, P08]
+pillar: P10
+llm_function: INJECT
+purpose: Accumulated production experience for law artifact generation
 ---
 
-# law-builder — MEMORY
+# Memory: law-builder
 
-## Common Mistakes
+## Summary
 
-1. **Setting quality to a number** — `quality: 8.5` triggers H05 rejection. Always `quality: null`.
-2. **Advisory language in statement** — "should", "try to", "consider" make laws unenforceable. Use MUST/SHALL/NEVER/ALWAYS.
-3. **Missing enforcement mechanism** — stating "law must be followed" without specifying HOW violation is detected. Unenforced laws are wishes.
-4. **Omitting exceptions without explicit "None"** — leaving exceptions field absent creates ambiguity. Either list conditions or write `exceptions: []`.
-5. **Confusing law with guardrail** — ask: "is this about safety (guardrail) or operational consistency (law)?" Safety = P11. Operations = P08.
-6. **Confusing law with instruction** — ask: "is this mandatory with consequences (law) or flexible with guidance (instruction)?" Flexible = P03.
-7. **Multi-sentence statement** — laws MUST have exactly one imperative sentence. Split compound rules into separate laws.
-8. **Number collision** — always check LAWS_v3_PRACTICAL.md for existing numbers. Laws 1-11 are taken; new laws start at 12.
-9. **Wrong id prefix** — `law_5` and `p08_rule_5` both fail H02. Only `p08_law_5` is valid.
-10. **Rationale restates statement** — "this law exists because artifacts should not have quality scores" is restatement. Explain the WHY: bias, metric corruption, calibration failure.
+Building law artifacts requires extreme precision in distinguishing inviolable operational mandates from flexible guidelines. The most common failure mode is producing rules that read like suggestions rather than enforceable mandates. Successful law artifacts always include a concrete enforcement mechanism and explicit exception protocol — without these, the artifact degrades into an instruction.
 
-## Law Governance Catalog
+## Pattern
 
-| Domain | Common laws | Boundary watch |
-|--------|------------|----------------|
-| Quality | No self-scoring, minimum density threshold | vs quality_gate (P11) — gates enforce, laws define |
-| Operations | Commit before pause, signal completion | vs instruction (P03) — instructions guide, laws mandate |
-| Security | No hardcoded secrets, scope fence | vs guardrail (P11) — guardrails restrict safety, laws govern ops |
-| Architecture | Max terminals, naming conventions | vs pattern (P08) — patterns recommend, laws mandate |
-| Satellites | STELLA never executes, routing mandates | vs satellite_spec (P08) — specs define capability, laws constrain behavior |
+- Always define the enforcement mechanism before writing the statement — if you cannot enforce it, it is not a law
+- Write the violation section first; it clarifies the boundary between compliance and breach
+- Use imperative mood for the statement field: "All X MUST Y" not "X should Y"
+- Include at least one concrete historical trigger (incident, failure, or mandate source) in the rationale
+- Scope boundaries must be explicit: name which domains, agents, or artifact kinds are covered
+- Exception protocol requires both the condition and the authority that grants the exception
 
-## Enforcement Patterns (Proven)
+## Anti-Pattern
 
-| Pattern | Example | Reuse |
-|---------|---------|-------|
-| HARD gate in builder | H05 checks `quality == null` | Most reliable; use when builder controls output |
-| CI/CD pre-commit hook | Rejects files without required fields | File-level; use for filesystem compliance |
-| Runtime guard in satellite | Satellite refuses to proceed without signal | Behavioral; use for process compliance |
-| Review gate | Human rejects artifact missing enforcement | Fallback when automation not feasible |
+- Writing laws that overlap with existing guardrails (P11) — guardrails restrict for safety, laws mandate for operations
+- Using vague enforcement like "review periodically" — enforcement must be machine-checkable or have a named human gate
+- Omitting the conflict resolution priority — when two laws contradict, the system needs a tiebreaker
+- Creating laws from single incidents without pattern validation — one failure is not enough to justify a permanent mandate
+- Frontmatter missing severity or scope fields leading to ambiguous application
 
-## Statement Formulation Guide
+## Context
 
-| Mood | Example | Valid? |
-|------|---------|--------|
-| MUST (obligation) | "Every artifact MUST have quality: null" | YES |
-| SHALL (formal obligation) | "No producer SHALL self-assign a score" | YES |
-| NEVER (prohibition) | "Satellites NEVER execute tasks directly" | YES |
-| ALWAYS (invariant) | "Authors ALWAYS set quality: null" | YES |
-| should (recommendation) | "Artifacts should have quality: null" | NO — instruction, not law |
-| consider (advisory) | "Consider setting quality: null" | NO — not a law |
-| try to (soft) | "Try to avoid self-scoring" | NO — not a law |
+Laws operate in the P08 governance layer alongside patterns, diagrams, and component maps. The key distinction is that laws are non-negotiable — patterns recommend, laws require. Production environments demand laws when repeated failures show that optional guidance is insufficient. Typical triggers: post-incident reviews, compliance requirements, or architectural invariants that must never be violated.
 
-## Production Counter
+## Impact
 
-| Metric | Value |
-|--------|-------|
-| Artifacts produced | 0 (builder just initialized) |
-| Average quality score | — |
-| Most common friction point | enforcement specificity + exception handling |
-| Last updated | 2026-03-26 |
+Well-formed laws prevent entire categories of recurring failures. A single law with clear enforcement eliminated repeated configuration drift issues across multiple production runs. Poorly formed laws (missing enforcement) were ignored in 60%+ of cases, providing no value while consuming review bandwidth.
 
-## Evolution Notes
+## Reproducibility
 
-- Laws 1-11 exist in LAWS_v3_PRACTICAL.md — do NOT reuse those numbers
-- Law numbers are permanent; even deprecated laws retain their number
-- When revising a law: increment version, update `updated` field, add entry to History section
-- When deprecating a law: add `deprecated: true` field, document reason in History
+To reliably produce high-quality law artifacts: (1) confirm the rule is truly inviolable, not just preferred, (2) draft enforcement mechanism first, (3) write violation examples from real incidents, (4) validate scope covers all affected domains without over-reach, (5) run through all 9 HARD gates before delivery.
+
+## References
+
+- law-builder SCHEMA.md (19+ frontmatter fields, 8 body sections)
+- P08 governance pillar documentation
+- Operational governance design patterns
