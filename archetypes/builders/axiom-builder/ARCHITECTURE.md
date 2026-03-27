@@ -1,54 +1,61 @@
 ---
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Boundary, relationships, and position of axiom in the CEX fractal
-pattern: every builder must know WHERE its output fits and what it CONNECTS to
+purpose: Component map of axiom — inventory, dependencies, and architectural position
 ---
 
 # Architecture: axiom in the CEX
 
-## Boundary
-axiom EH: regra fundamental imutavel — verdade permanente que define identidade do sistema.
+## Component Inventory
 
-axiom NAO EH:
-
-| Confusao | Por que NAO | Type correto |
-|----------|-------------|-------------|
-| law (P08) | law GOVERNA operacao e pode evoluir. axiom DEFINE verdade permanente. | P08 law |
-| guardrail (P11) | guardrail RESTRINGE comportamento. axiom DECLARA verdade. | P11 guardrail |
-| lifecycle_rule (P11) | lifecycle_rule GERENCIA ciclo de vida. axiom eh atemporal. | P11 lifecycle_rule |
-| learning_record (P10) | learning EVOLUI com experiencia. axiom nunca muda. | P10 learning_record |
-| instruction (P03) | instruction EXECUTA passos. axiom DECLARA fato. | P03 instruction |
-
-Regra: "qual a verdade permanente e imutavel deste dominio?" -> axiom.
-
-## Position in Memory Flow
-
-```text
-[System Design] -> [axiom] defines truth -> [law] operationalizes -> [guardrail] restricts
-                       |
-              [learning_record] validates over time
-                       |
-              [brain_index] -> [prompt injection] -> [agent behavior]
-```
-
-axiom is CONTENT LAYER. Injected into prompts as foundational context.
-It constrains laws, informs guardrails, and anchors learning records.
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| frontmatter block | 20-field metadata header (id, kind, pillar, domain, immutable: true, etc.) | axiom-builder | required |
+| axiom_statement | Single declarative sentence expressing the fundamental truth | author | required |
+| rationale | Explanation of why this truth is permanent and foundational | author | required |
+| scope | Domain or system boundary within which the axiom holds | author | required |
+| implications | Downstream consequences — which laws, guardrails, or behaviors this axiom anchors | author | required |
+| anti_examples | Statements that look like axioms but are not (operational rules, changeable policies) | author | required |
+| version_lock | Explicit immutability declaration — version never increments past 1.0.0 | axiom-builder | required |
 
 ## Dependency Graph
 
-```text
-axiom <--constrained_by-- nothing (axioms are foundational)
-axiom --produces_for--> law (P08) — laws operationalize axioms
-axiom --produces_for--> guardrail (P11) — guardrails enforce axiom boundaries
-axiom --produces_for--> learning_record (P10) — learning validates axioms
-axiom <--queried_by-- brain_query (BM25 + FAISS)
-axiom <--injected_in-- system_prompt (P03) via IHP
-axiom --independent-- signal, workflow, skill, connector
+```
+domain_knowledge  --produces-->  axiom  --produces_for-->  law
+axiom             --produces_for-->  guardrail
+axiom             --produces_for-->  learning_record (validates against axiom over time)
+axiom             --produces-->  system_prompt (via IHP injection)
+brain_query       --queried_by-->  axiom
+axiom             --signals-->   system identity (anchors agent worldview)
 ```
 
-## Fractal Position
-Pillar: P10 (Memory — what the system REMEMBERS as permanent truth)
-Function: INJECT (provides foundational constraints to other LPs)
-Scale: L0 (content artifact — the deepest layer of system identity)
-axiom is the only P10 kind that is truly immutable — all others evolve.
+| From | To | Type | Data |
+|------|----|------|------|
+| domain_knowledge | axiom | data_flow | raw fundamental truths requiring formalization |
+| axiom | law (P08) | produces | operational rules derived from the permanent truth |
+| axiom | guardrail (P11) | produces | safety boundaries enforced from axiom principles |
+| axiom | learning_record (P10) | produces | baseline against which learning is validated |
+| axiom | system_prompt (P03) | data_flow | injected as foundational context via IHP |
+| brain_query | axiom | data_flow | retrieved during agent context assembly |
+| axiom | agent behavior | signals | constrains what the agent will and will not do |
+
+## Boundary Table
+
+| axiom IS | axiom IS NOT |
+|----------|--------------|
+| A permanent, immutable truth about a domain | An operational rule that can evolve (law) |
+| A declarative statement, not a command | A behavioral restriction enforced at runtime (guardrail) |
+| The foundational layer that other rules are derived from | A lifecycle management rule (lifecycle_rule) |
+| Version-locked at 1.0.0 — never updated | A learning artifact that improves with experience (learning_record) |
+| Injected into prompts as non-negotiable context | An executable instruction with steps (instruction) |
+| Domain-scoped and universally applicable within that scope | A task-specific or session-specific artifact |
+
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Formalization | frontmatter, axiom_statement, rationale, scope | Capture and declare the permanent truth with full context |
+| Boundary | anti_examples, version_lock, implications | Define what the axiom covers, what it excludes, and what it anchors |
+| Injection | brain_query retrieval, IHP, system_prompt | Make the axiom available to agents as foundational context |
+| Derivation | law, guardrail, learning_record | Downstream artifacts that operationalize the axiom's truth |
+| Validation | learning_record cross-reference | Confirm over time that the axiom remains true and universally applicable |

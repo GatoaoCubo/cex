@@ -1,48 +1,61 @@
 ---
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Boundary and position of brain_index in the CEX fractal
+purpose: Component map of brain_index — inventory, dependencies, and architectural position
 ---
 
 # Architecture: brain_index in the CEX
 
-## Boundary
-brain_index EH: indice de busca semantica que configura como conteudo eh encontrado via BM25, FAISS, ou hybrid search.
+## Component Inventory
 
-brain_index NAO EH:
-
-| Confusao | Por que NAO | Type correto |
-|----------|-------------|-------------|
-| embedding_config (P01) | embedding_config define o MODELO de embedding (dimensoes, chunk_size). brain_index define o INDICE construido a partir dos embeddings. | P01 embedding_config |
-| rag_source (P01) | rag_source define ONDE os dados vem (URL, crawl). brain_index define COMO os dados sao buscados. | P01 rag_source |
-| knowledge_card (P01) | knowledge_card eh o CONTEUDO indexado. brain_index eh o INDICE sobre o conteudo. | P01 knowledge_card |
-| runtime_state (P10) | runtime_state define DECISOES de routing do agente. brain_index define INFRAESTRUTURA de busca. | P10 runtime_state |
-| session_state (P10) | session_state eh SNAPSHOT efemero. brain_index eh indice PERSISTENTE. | P10 session_state |
-| learning_record (P10) | learning_record armazena O QUE foi aprendido. brain_index armazena COMO encontrar informacao. | P10 learning_record |
-| axiom (P10) | axiom eh regra FUNDAMENTAL imutavel. brain_index eh INDICE tecnico de busca. | P10 axiom |
-
-Regra: "como o conteudo eh indexado e buscado para retrieval?" -> brain_index.
-
-## Position in Retrieval Flow
-
-```text
-rag_source (data origin) -> embedding_config (vectorization) -> brain_index (indexing + search) -> knowledge_card (result)
-```
-
-brain_index is SEARCH LAYER — the engine that makes content findable.
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| frontmatter block | Metadata header (id, kind, pillar, algorithm, scope, rebuild_schedule, etc.) | brain-index-builder | required |
+| algorithm_config | Search algorithm selection: BM25, FAISS, or hybrid (BM25 + FAISS weighted blend) | author | required |
+| scope_definition | Boundaries of what is indexed (which content types, pillars, or directories) | author | required |
+| embedding_reference | Pointer to the embedding_config that produced the vectors in this index | embedding_config | required |
+| ranking_strategy | Scoring formula: BM25 term weights, FAISS distance metric, hybrid fusion weights | author | required |
+| filter_config | Pre-query filters (by pillar, type, tag, date range) to narrow retrieval scope | author | optional |
+| rebuild_policy | Schedule and triggers for index refresh (time-based, content-change-based) | author | required |
+| freshness_threshold | Maximum acceptable staleness before index is considered invalid | author | required |
 
 ## Dependency Graph
 
-```text
-brain_index <--fed_by-- rag_source (P01 provides raw content)
-brain_index <--configured_by-- embedding_config (P01 provides vector model)
-brain_index --indexes--> knowledge_card (P01 content is indexed)
-brain_index --queried_by--> runtime_state (P10 agents query the index)
-brain_index --independent-- permission, guardrail, signal
+```
+rag_source       --produces-->  brain_index  --queried_by-->  runtime_state
+embedding_config --produces-->  brain_index  --indexes-->     knowledge_card
+brain_index      --produces-->  retrieval_result
+retrieval_result --produces-->  agent_context (injected via IHP)
+brain_index      --signals-->   rebuild_trigger (when freshness_threshold exceeded)
 ```
 
-## Fractal Position
-Pillar: P10 (Memory — what the system remembers)
-Function: INJECT
-Scale: L1 (runtime infrastructure)
-brain_index is unique in P10 because it is INFRASTRUCTURE — it does not store knowledge itself but makes knowledge FINDABLE through search algorithms.
+| From | To | Type | Data |
+|------|----|------|------|
+| rag_source (P01) | brain_index | data_flow | raw content documents fed into the index |
+| embedding_config (P01) | brain_index | data_flow | vector model spec (dimensions, chunk_size, model_id) |
+| brain_index | knowledge_card (P01) | data_flow | indexed content returned as ranked retrieval results |
+| brain_index | runtime_state (P10) | data_flow | query results that inform agent routing decisions |
+| brain_index | retrieval_result | produces | ranked list of matching content with scores |
+| retrieval_result | agent_context | data_flow | injected into prompt via IHP for grounded responses |
+| freshness_threshold | rebuild_trigger | signals | staleness event triggers index rebuild job |
+
+## Boundary Table
+
+| brain_index IS | brain_index IS NOT |
+|----------------|--------------------|
+| A search infrastructure layer — configures how content is found | The content being indexed (knowledge_card) |
+| A persistent index rebuilt on schedule or content change | An ephemeral session snapshot (session_state) |
+| Algorithm configuration (BM25, FAISS, hybrid weights, filters) | The vector model that produces embeddings (embedding_config) |
+| The mechanism for retrieval — finds ranked results from queries | The data source that provides raw content (rag_source) |
+| Scoped by content type, pillar, or directory boundaries | A learning artifact that records what was learned (learning_record) |
+| Infrastructure — does not store knowledge but makes it findable | An immutable fundamental rule (axiom) |
+
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Sources | rag_source, embedding_config | Feed raw content and vector representations into the index |
+| Configuration | frontmatter, algorithm_config, ranking_strategy, filter_config | Define how content is indexed, scored, and filtered |
+| Freshness | rebuild_policy, freshness_threshold, rebuild_trigger | Ensure index stays current with content changes |
+| Query | scope_definition, embedding_reference | Constrain retrieval to relevant content with correct vector space |
+| Output | retrieval_result, agent_context injection | Return ranked matches and deliver grounded context to agents |

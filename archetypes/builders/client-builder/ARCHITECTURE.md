@@ -1,59 +1,73 @@
 ---
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Boundary, relationships, and position of client in the CEX fractal
-pattern: every builder must know WHERE its output fits and what it CONNECTS to
+purpose: Component map of client — inventory, dependencies, and architectural position
 ---
 
-# Architecture: client in the CEX
+## Component Inventory
 
-## Boundary
-client EH: consumidor unidirecional de API externa via REST, GraphQL, ou gRPC.
-Faz requests, recebe responses, trata erros. Define endpoints, auth, rate limits.
-Cada endpoint tem method + path + parameters. Client CONSOME, nunca EXPOE.
-
-client NAO EH:
-
-| Confusao | Por que NAO | Tipo correto |
-|----------|-------------|-------------|
-| mcp_server | mcp_server EXPOE tools via MCP protocol; client CONSOME API | P04 mcp_server |
-| connector | connector eh integracao BIDIRECIONAL; client eh unidirecional (request/response) | P04 connector |
-| scraper | scraper extrai de HTML/DOM; client consome API estruturada (JSON/XML) | P04 scraper |
-| skill | skill eh habilidade reutilizavel com fases; client eh consumidor de API | P04 skill |
-| plugin | plugin eh extensao plugavel ao sistema; client eh consumidor externo | P04 plugin |
-| cli_tool | cli_tool eh execucao pontual em terminal; client eh chamada programatica | P04 cli_tool |
-| daemon | daemon eh processo background persistente; client eh chamada pontual | P04 daemon |
-| hook | hook eh gatilho pre/post evento; client eh consumidor de API | P04 hook |
-| component | component eh bloco composavel de pipeline; client eh consumidor externo | P04 component |
-
-Regra: "quem CONSOME API externa via HTTP/gRPC de forma unidirecional?" -> client.
-
-## Position in Agent Tool Flow
-
-```text
-knowledge_card (P01) --> agent (P02) --> client (P04) --> external_api
-                              |                |
-                         skill (P04)      response_data
-                              |
-                         mcp_server (P04)
-```
-
-client is CONSUMER LAYER — the bridge between agent runtime and external APIs.
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| endpoint | Single API operation — method + path + parameters + return type | client | required |
+| auth_strategy | Authentication mechanism (API key, OAuth2, Bearer, mTLS) | client | required |
+| base_url | Root URL for all endpoint paths | client | required |
+| rate_limit | Request throttle policy (requests/sec, burst cap) | client | required |
+| retry_policy | Backoff + max_attempts for transient failures | client | required |
+| timeout | Per-request time ceiling | client | required |
+| pagination | Cursor or page-based result iteration pattern | client | optional |
+| serialization | Wire format for request/response bodies (json, xml, protobuf) | client | required |
+| env_config | API keys, base URLs, secrets from environment | P09 | external |
+| guardrail | Rate limit constraints and auth enforcement policy | P11 | external |
+| agent | Runtime caller that issues API requests via this client | P02 | consumer |
+| skill | Wraps one or more client calls into a reusable phased capability | P04 | consumer |
 
 ## Dependency Graph
 
-```text
-client <--receives-- env_config (P09) (API keys, base URLs, timeouts)
-client <--receives-- guardrail (P11) (rate limits, auth constraints)
-client <--receives-- boot_config (P02) (client config injected at agent boot)
-client --consumed_by--> agent (P02) (agent calls API via client)
-client --consumed_by--> skill (P04) (skills may wrap client calls into phases)
-client --independent-- mcp_server, connector, scraper, plugin, daemon
+```
+env_config     --produces--> base_url
+env_config     --produces--> auth_strategy
+guardrail      --produces--> rate_limit
+endpoint       --depends-->  base_url
+endpoint       --depends-->  auth_strategy
+endpoint       --depends-->  serialization
+retry_policy   --depends-->  endpoint
+timeout        --depends-->  endpoint
+pagination     --depends-->  endpoint
+agent          --depends-->  endpoint
+skill          --depends-->  endpoint
 ```
 
-## Fractal Position
-Pillar: P04 (Tools — what the agent USES)
-Function: CALL (agent invokes API at runtime)
-Layer: runtime (executes during agent session)
-Scale: L2 (per-integration — one client per external API)
-client is EXTENSION (not core_24): useful but not required for bootstrapping.
+| From | To | Type | Data |
+|------|----|------|------|
+| env_config | base_url | produces | root URL injected at runtime |
+| env_config | auth_strategy | produces | credentials (keys, tokens) |
+| guardrail | rate_limit | produces | throttle policy from constraint config |
+| endpoint | base_url | depends | root URL to construct full request URL |
+| endpoint | auth_strategy | depends | auth headers or token attached to request |
+| endpoint | serialization | depends | body encoding/decoding format |
+| retry_policy | endpoint | depends | retry wraps individual endpoint calls |
+| timeout | endpoint | depends | timeout applied per endpoint call |
+| pagination | endpoint | depends | iterates endpoint across result pages |
+| agent | endpoint | depends | agent issues API call through endpoint |
+| skill | endpoint | depends | skill phase wraps endpoint call |
+
+## Boundary Table
+
+| client IS | client IS NOT |
+|-----------|--------------|
+| Unidirectional API consumer — sends requests, receives responses | A bidirectional integration that also receives webhooks (that is connector) |
+| Consumes structured APIs (REST, GraphQL, gRPC) | Extracts data from HTML/DOM (that is scraper) |
+| Programmatic call from agent or skill code | A terminal command invoked via shell (that is cli_tool) |
+| One client per external API surface | A tool protocol server exposing capabilities (that is mcp_server) |
+| Defines auth, rate limits, retries, and serialization | A reusable capability with defined trigger phases (that is skill) |
+| Stateless per call — no persistent connection | A long-lived background process (that is daemon) |
+
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|-----------|---------|
+| configuration | env_config, base_url, auth_strategy | Supply credentials and root URL at runtime |
+| interface | endpoint, serialization, pagination | Define the API surface and data encoding |
+| resilience | retry_policy, timeout, rate_limit | Handle failures, throttling, and time bounds |
+| governance | guardrail | Enforce rate and auth constraints from policy |
+| callers | agent, skill | Runtime consumers that invoke API operations |

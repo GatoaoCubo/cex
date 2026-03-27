@@ -1,47 +1,57 @@
 ---
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Boundary and position of golden_test in the CEX fractal
+purpose: Component map of golden_test — inventory, dependencies, and architectural position
 ---
 
-# Architecture: golden_test in the CEX
+## Component Inventory
 
-## Boundary
-golden_test EH: caso de teste referencia quality 9.5+ que calibra avaliacao de artefatos.
-
-golden_test NAO EH:
-
-| Confusao | Por que NAO | Type correto |
-|----------|-------------|-------------|
-| unit_eval | unit_eval testa a QUALQUER nivel. golden_test exige 9.5+. | P07 unit_eval |
-| smoke_eval | smoke_eval verifica sanidade rapida. golden_test eh referencia curada. | P07 smoke_eval |
-| e2e_eval | e2e_eval testa pipeline completo. golden_test testa artefato unico. | P07 e2e_eval |
-| benchmark | benchmark mede PERFORMANCE (latencia, custo). golden_test mede QUALIDADE exemplar. | P07 benchmark |
-| scoring_rubric | rubric define CRITERIOS. golden_test fornece EXEMPLO concreto. | P07 scoring_rubric |
-| few_shot_example | few_shot_example ENSINA pattern (P01). golden_test AVALIA qualidade (P07). | P01 few_shot_example |
-
-Regra: "como eh um artefato perfeito deste tipo?" -> golden_test.
-
-## Position in Evaluation Flow
-
-```text
-scoring_rubric (define criteria) -> golden_test (reference example) -> unit_eval (run tests) -> quality_gate (pass/fail)
-```
-
-golden_test is CALIBRATION LAYER — provides the ground truth for evaluation.
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| target_kind | The artifact type this golden test calibrates (e.g., knowledge_card, formatter) | golden_test | required |
+| input | The exact task request used to produce the reference artifact | golden_test | required |
+| output | The reference artifact itself; must score >= 9.5 on all quality gates | golden_test | required |
+| rationale | Mapping of output qualities to specific gate criteria; explains WHY it is golden | golden_test | required |
+| quality_score | Verified score (>= 9.5); assigned after independent review, not self-assessed | golden_test | required |
+| gate_mapping | List of quality gates from the target_kind that this test anchors | golden_test | required |
+| reviewer | Identity of the independent evaluator who confirmed the score | golden_test | required |
+| created_date | Date the golden test was certified; used for staleness checks | golden_test | required |
 
 ## Dependency Graph
 
-```text
-golden_test <--uses_criteria-- scoring_rubric (P07 defines dimensions)
-golden_test <--validates_against-- quality_gate (P11 defines pass/fail)
-golden_test --produces_for--> unit_eval (P07 uses as reference)
-golden_test --produces_for--> benchmark (P07 uses as quality anchor)
-golden_test --independent-- signal, handoff, lifecycle_rule
+```
+scoring_rubric (P07) --produces--> golden_test
+quality_gate (P11)   --depends-->  golden_test
+golden_test          --produces--> unit_eval (P07)
+golden_test          --produces--> benchmark (P07)
+few_shot_example (P01) --depends--> golden_test
 ```
 
-## Fractal Position
-Pillar: P07 (Evals — how to measure quality)
-Function: GOVERN
-Scale: L0 (governance artifact)
-golden_test is unique in P07 because it requires quality 9.5+ — the highest bar in the evaluation pillar.
+| From | To | Type | Data |
+|------|----|------|------|
+| scoring_rubric (P07) | golden_test | produces | evaluation dimensions and criteria the output must satisfy |
+| quality_gate (P11) | golden_test | depends | pass/fail thresholds used to verify the 9.5+ score |
+| golden_test | unit_eval (P07) | produces | ground-truth reference for test case comparison |
+| golden_test | benchmark (P07) | produces | quality anchor for performance measurement baselines |
+| few_shot_example (P01) | golden_test | depends | exemplary input/output pairs that may become golden candidates |
+
+## Boundary Table
+
+| golden_test IS | golden_test IS NOT |
+|----------------|-------------------|
+| A reference artifact certified at quality >= 9.5 | A test at any quality level (that is unit_eval) |
+| A calibration anchor — defines what "perfect" looks like | A quick sanity check for system health (that is smoke_eval) |
+| Independently reviewed; score is externally verified | A scoring rubric that defines evaluation criteria |
+| Specific to one artifact type (target_kind) | An end-to-end pipeline test spanning multiple artifacts |
+| A ground-truth source consumed by unit_eval and benchmark | A few-shot example used to teach format (not to measure quality) |
+| Immutable once certified; changes require re-certification | A live metric updated continuously during operation |
+
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|-----------|---------|
+| Criteria | scoring_rubric (P07), quality_gate (P11) | Define evaluation dimensions and pass/fail thresholds |
+| Certification | quality_score, reviewer, created_date | Record the verified 9.5+ score and its provenance |
+| Content | input, output, target_kind | The reference artifact and the task that produced it |
+| Rationale | rationale, gate_mapping | Explain which gates are satisfied and why the output qualifies |
+| Consumers | unit_eval (P07), benchmark (P07) | Use the golden test as a quality calibration reference |

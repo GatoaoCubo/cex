@@ -1,71 +1,57 @@
 ---
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Architectural position and boundary of few_shot_example in CEX
+purpose: Component map of few_shot_example — inventory, dependencies, and architectural position
 ---
 
-# Architecture: few_shot_example
+## Component Inventory
 
-## What few_shot_example IS
-An input/output pair that teaches an LLM a format by demonstration.
-- Input: realistic task request
-- Output: ideal response showing the target format
-- Purpose: inject into prompt context so LLM pattern-matches the structure
-
-## What few_shot_example is NOT
-
-| Confused With | Difference | Correct Kind |
-|---------------|-----------|--------------|
-| golden_test (P07) | Has scoring rubric, evaluates quality | P07 golden_test |
-| unit_eval (P07) | Has assertions (assert x == y) | P07 unit_eval |
-| prompt_template (P03) | Reusable prompt with {{variables}} | P03 prompt_template |
-| context_doc (P01) | Background knowledge, no input/output pair | P01 context_doc |
-
-## Pipeline Position
-
-```
-Domain Knowledge (P01)
-       |
-       v
-few_shot_example  <-- this artifact (format teaching)
-       |
-       v
-Prompt Hydration (P03)
-       |
-       v
-LLM Context Window
-       |
-       v
-Better-Formatted Output
-       |
-       v
-golden_test (P07)  <-- evaluates the output quality (separate step)
-```
-
-## Taxonomy Position
-- Layer: content (taxonomy) / prompt (schema layer field) — both correct
-- Pillar: P01 (knowledge pillar owns it)
-- Core 24: YES — content tier: knowledge_card, rag_source, glossary_entry, context_doc, few_shot_example
-- Fractal: L0 content, INJECT llm_function, machine_format yaml
-
-## Dependency Graph
-- few_shot_example DEPENDS ON: none (standalone artifact)
-- few_shot_example IS USED BY: prompt_template (P03), system_prompt (P03), LLM context injection
-- few_shot_example IS EVALUATED BY: golden_test (P07) — separate artifact, not embedded
-
-## Constraints from Architecture
-- max_bytes 1024: keeps context injection cost low
-- quality: null: evaluated externally, not by producer
-- input+output both required: incomplete pair has zero learning value
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| input_text | Realistic task request that mimics a real user or system prompt | few_shot_example | required |
+| output_text | Ideal response demonstrating the target format exactly | few_shot_example | required |
+| domain | Subject area the example belongs to; scopes the learning signal | few_shot_example | required |
+| difficulty | Calibration level: easy, medium, or hard | few_shot_example | required |
+| format_target | The specific format being taught (JSON, YAML, Markdown, table, etc.) | few_shot_example | required |
+| edge_case_flag | Whether this example covers a boundary or unusual condition | few_shot_example | optional |
+| byte_budget | Size constraint (max 1024 bytes); keeps context injection cost low | few_shot_example | required |
 
 ## Dependency Graph
 
-```text
-few_shot_example <--receives-- knowledge_card (P01) — domain facts to exemplify
-few_shot_example <--receives-- schema (P06) — format constraints
-few_shot_example --produces_for--> system_prompt (P03) — injected as examples
-few_shot_example --produces_for--> action_prompt (P03) — task demonstrations
-few_shot_example --independent-- context_doc, rag_source, glossary_entry
+```
+knowledge_card (P01) --produces--> few_shot_example
+schema (P06)         --depends-->  few_shot_example
+few_shot_example     --produces--> system_prompt (P03)
+few_shot_example     --produces--> action_prompt (P03)
+golden_test (P07)    --depends-->  few_shot_example
 ```
 
-few_shot_example is TEACHING LAYER — shows format by example
+| From | To | Type | Data |
+|------|----|------|------|
+| knowledge_card (P01) | few_shot_example | produces | domain facts and concepts to exemplify |
+| schema (P06) | few_shot_example | depends | format constraints the output must conform to |
+| few_shot_example | system_prompt (P03) | produces | injected input/output pair for format teaching |
+| few_shot_example | action_prompt (P03) | produces | task demonstration injected into action context |
+| golden_test (P07) | few_shot_example | depends | uses exemplary pairs as quality reference anchors |
+
+## Boundary Table
+
+| few_shot_example IS | few_shot_example IS NOT |
+|---------------------|-------------------------|
+| An input/output pair that teaches format by demonstration | An artifact with a scoring rubric or quality grade (that is golden_test) |
+| Evaluated externally; quality is null in the artifact itself | A prompt template with {{variables}} for reuse |
+| Subject to a byte budget (max 1024 bytes) | Background domain knowledge without an input/output pair |
+| A teaching unit — shows HOW to format a response | A test assertion that checks correctness (that is unit_eval) |
+| Domain-scoped and difficulty-calibrated | An orchestration step or workflow instruction |
+| Stateless — no execution context, just a static pair | A context document explaining system background |
+
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|-----------|---------|
+| Source | knowledge_card (P01), schema (P06) | Provide domain facts and format constraints to exemplify |
+| Content | input_text, output_text | The core teaching pair — request and ideal response |
+| Metadata | domain, difficulty, format_target, edge_case_flag | Classify the example for selection and calibration |
+| Budget | byte_budget | Enforce size constraint for cost-effective context injection |
+| Injection | system_prompt (P03), action_prompt (P03) | Consume the pair as format-teaching context |
+| Evaluation | golden_test (P07) | Use exemplary pairs as quality calibration anchors (external) |

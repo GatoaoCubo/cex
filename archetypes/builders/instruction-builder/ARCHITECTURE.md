@@ -1,53 +1,57 @@
 ---
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Boundary, relationships, and position of instruction in the CEX fractal
-pattern: every builder must know WHERE its output fits and what it CONNECTS to
+purpose: Component map of instruction — inventory, dependencies, and architectural position
 ---
 
-# Architecture: instruction in the CEX
+## Component Inventory
 
-## Boundary
-instruction EH: receita operacional passo-a-passo com prerequisites, validation, e rollback. Executada por um agente ou humano para completar uma tarefa especifica.
-
-instruction NAO EH:
-
-| Confusao | Por que NAO | Type correto |
-|----------|-------------|-------------|
-| action_prompt | action_prompt eh prompt conversacional com input/output definidos | P03 action_prompt |
-| system_prompt | system_prompt define identidade, nao passos de execucao | P03 system_prompt |
-| workflow | workflow orquestra multiplos agentes; instruction eh single-agent | P12 workflow |
-| skill | skill tem lifecycle phases e trigger; instruction eh one-shot | P04 skill |
-| handoff | handoff despacha tarefa para satelite; instruction detalha execucao | P12 handoff |
-
-Regra: "quais sao os passos EXATOS para executar esta tarefa?" -> instruction.
-
-## Position in Execution Flow
-
-```text
-system_prompt (P03) --> agent loads identity
-action_prompt (P03) --> agent receives task
-instruction (P03) -----> agent follows steps <-- dependencies (P04)
-                              |
-                         validation
-                              |
-                    signal (P12) complete
-```
-
-instruction is EXECUTION LAYER — the detailed recipe between receiving a task and reporting completion.
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| prerequisites | Conditions and resources that must exist before execution begins | author | required |
+| steps | Ordered atomic actions the executor follows sequentially | author | required |
+| validation_criteria | Observable outcomes that confirm each step succeeded | author | required |
+| rollback_procedure | Reversal actions if execution fails midway | author | required |
+| idempotency_flag | Whether repeated execution produces the same result safely | author | required |
+| dependencies | Other instructions or artifacts this instruction relies on | author | optional |
+| timeout_guidance | Expected duration and when to escalate | author | optional |
+| scope_note | Explicit boundaries on what this instruction modifies | author | optional |
 
 ## Dependency Graph
 
-```text
-instruction <--receives-- action_prompt (P03) (task context to decompose into steps)
-instruction <--receives-- knowledge_card (P01) (domain knowledge for step details)
-instruction --consumed_by--> agent (P02) (follows steps to execute)
-instruction --referenced_by--> skill (P04) (skill phases may reference instructions)
-instruction --independent-- system_prompt, workflow, signal
+```
+action_prompt  --provides_context_to--> instruction
+knowledge_card --informs--> instruction
+instruction    --consumed_by--> agent
+instruction    --referenced_by--> skill
+skill          --depends_on--> instruction
 ```
 
-## Fractal Position
-Pillar: P03 (Prompt — how the agent SPEAKS/ACTS)
-Function: PRODUCE (following these steps produces the outcome)
-Scale: L0 (core infrastructure — 213 ISO instructions + 255 handoffs already exist)
-instruction is the MOST NUMEROUS P03 artifact in CODEXA, reflecting its operational nature.
+| From | To | Type | Data |
+|------|----|------|------|
+| action_prompt | instruction | data_flow | task context, goal, and constraints |
+| knowledge_card | instruction | data_flow | domain facts required for step accuracy |
+| instruction | agent | data_flow | ordered steps, prerequisites, rollback |
+| instruction | skill | data_flow | sub-procedure referenced by skill phases |
+| skill | instruction | depends | skill phase delegates to instruction for execution |
+
+## Boundary Table
+
+| instruction IS | instruction IS NOT |
+|----------------|-------------------|
+| Step-by-step recipe for a single executor | Conversational prompt with response format |
+| Specifies exact actions, not goals | Agent identity or persona definition |
+| Includes rollback for failure recovery | Multi-agent orchestration across satellites |
+| One-shot execution without lifecycle phases | Structured workflow with branching logic |
+| Single-agent scope | Task delegation package to a remote receiver |
+| Verifiable: each step has validation criteria | Event-triggered side-effect handler |
+
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Entry gate | prerequisites, dependencies | Ensure conditions are met before starting |
+| Execution | steps, scope_note, timeout_guidance | Provide the ordered recipe to follow |
+| Verification | validation_criteria | Confirm each step completed correctly |
+| Recovery | rollback_procedure, idempotency_flag | Handle failure without data corruption |
+| Integration | action_prompt, knowledge_card | Supply context and domain knowledge to steps |

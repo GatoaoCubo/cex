@@ -1,54 +1,61 @@
 ---
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Boundary, relationships, and position of feature_flag in the CEX fractal
-pattern: every builder must know WHERE its output fits and what it CONNECTS to
+purpose: Component map of feature_flag — inventory, dependencies, and architectural position
 ---
 
-# Architecture: feature_flag in the CEX
+## Component Inventory
 
-## Boundary
-feature_flag EH: definicao de toggle on/off para features com rollout gradual. Controla
-SE uma feature esta ativa, PARA QUEM, e COM QUE estrategia de rollout. Segue feature
-toggle patterns (Fowler 2017): release, experiment, ops, permission.
-
-feature_flag NAO EH:
-
-| Confusao | Por que NAO | Tipo correto |
-|----------|-------------|-------------|
-| env_config | env_config eh variavel generica de config; feature_flag eh logica on/off | P09 env_config |
-| permission | permission controla QUEM acessa recursos; feature_flag controla SE feature existe | P09 permission |
-| path_config | path_config define caminhos de filesystem; feature_flag eh toggle logico | P09 path_config |
-| runtime_rule | runtime_rule define comportamento tecnico (timeouts); feature_flag eh toggle de feature | P09 runtime_rule |
-| boot_config | boot_config eh per-provider (model, temp); feature_flag eh toggle generico | P02 boot_config |
-
-Regra: "esta FEATURE deve estar ON ou OFF, para quem, com que rollout?" -> feature_flag.
-
-## Position in Config Flow
-
-```text
-feature_flag (P09) --> agent (P02) --> runtime decision
-       |
-  rollout_evaluation --> targeting
-       |
-  kill_switch --> emergency_off
-```
-
-feature_flag is RUNTIME TOGGLE — evaluated at decision points during execution.
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| flag_id | Unique identifier for the flag; used by consumers to query state | feature_flag | required |
+| flag_state | Default on/off value when no targeting rule matches | feature_flag | required |
+| flag_category | Classification: release, experiment, ops, or permission | feature_flag | required |
+| rollout_strategy | How the flag activates: instant, percentage-based, or cohort-based | feature_flag | required |
+| rollout_percentage | Fraction of traffic (0–100%) receiving the enabled state | feature_flag | conditional |
+| targeting_rules | Conditions (user cohort, environment, region) that override default state | feature_flag | optional |
+| kill_switch | Emergency override that forces flag off regardless of rollout state | feature_flag | required |
+| fallback_default | Value returned when evaluation fails or flag is undefined | feature_flag | required |
+| evaluation_context | Runtime data (user ID, env, request metadata) used by targeting rules | feature_flag | required |
 
 ## Dependency Graph
 
-```text
-feature_flag --consumed_by--> agent (P02) (agents check flags before enabling features)
-feature_flag --consumed_by--> router (P02) (routers check flags for A/B routing)
-feature_flag --consumed_by--> skill (P04) (skills check flags for optional phases)
-feature_flag <--receives-- guardrail (P11) (safety rules for flag behavior)
-feature_flag --independent-- env_config, path_config, runtime_rule, permission
+```
+feature_flag --depends-->  guardrail (P11)
+feature_flag --produces--> agent (P02)
+feature_flag --produces--> router (P02)
+feature_flag --produces--> skill (P04)
+kill_switch   --signals-->  feature_flag
+targeting_rules --depends--> evaluation_context
 ```
 
-## Fractal Position
-Pillar: P09 (Config — HOW the system configures)
-Function: GOVERN (feature_flag governs whether features are active)
-Layer: runtime (flags evaluated at runtime decision points)
-Scale: L0 (per-feature — one flag per feature, granular)
-feature_flag is EXTENSION (not core_24): system runs without flags, but flags enable safe deployments.
+| From | To | Type | Data |
+|------|----|------|------|
+| guardrail (P11) | feature_flag | depends | safety rules constraining flag behavior and kill-switch policy |
+| feature_flag | agent (P02) | produces | on/off decision consumed before feature execution |
+| feature_flag | router (P02) | produces | A/B routing decision based on flag state |
+| feature_flag | skill (P04) | produces | optional phase enablement within skill execution |
+| kill_switch | feature_flag | signals | emergency-off override forces disabled state |
+| evaluation_context | targeting_rules | data_flow | runtime metadata used to resolve cohort and percentage rules |
+
+## Boundary Table
+
+| feature_flag IS | feature_flag IS NOT |
+|-----------------|---------------------|
+| A logical on/off toggle for a named feature | A generic configuration variable (that is env_config) |
+| Evaluated at runtime per request or per user | A static value read once at startup |
+| Owner of rollout strategies (percentage, cohort, instant) | An access-control rule determining who can use a resource |
+| Capable of gradual canary rollout (1% → 10% → 100%) | A filesystem path or infrastructure variable |
+| Equipped with a kill switch for emergency disable | A timeout or retry rule governing technical behavior |
+| Classified by category: release, experiment, ops, permission | A permission artifact controlling read/write access |
+
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|-----------|---------|
+| Identity | flag_id, flag_category | Name and classify the flag for discovery and routing |
+| State | flag_state, fallback_default | Define default behavior when no targeting rule applies |
+| Rollout | rollout_strategy, rollout_percentage, targeting_rules | Control progressive activation across traffic segments |
+| Context | evaluation_context | Supply runtime data for targeting rule evaluation |
+| Safety | kill_switch, guardrail (P11) | Enable emergency override and constrain flag behavior |
+| Consumers | agent (P02), router (P02), skill (P04) | Receive and act on the evaluated flag decision |

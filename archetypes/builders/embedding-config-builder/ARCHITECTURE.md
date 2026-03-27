@@ -1,49 +1,62 @@
 ---
 pillar: P08
-llm_function: CONSTRAIN
-purpose: Boundary, relationships, and position of embedding_config in the CEX fractal
-pattern: every builder must know WHERE its output fits and what it CONNECTS to
+llm_function: BECOME
+purpose: Component map of embedding_config — inventory, dependencies, and architectural position
 ---
 
-# Architecture: embedding_config in the CEX
+## Component Inventory
 
-## Boundary
-embedding_config EH: configuracao de modelo de embedding (dimensoes, chunking, distance metric) para RAG.
-
-embedding_config NAO EH:
-
-| Confusao | Por que NAO | Type correto |
-|----------|-------------|-------------|
-| knowledge_card (P01) | KC DESTILA conhecimento. embedding_config CONFIGURA vetorizacao. | P01 knowledge_card |
-| rag_source (P01) | rag_source APONTA para fonte externa. embedding_config DEFINE como vetorizar. | P01 rag_source |
-| glossary_entry (P01) | glossary DEFINE termos. embedding_config CONFIGURA modelo. | P01 glossary_entry |
-| context_doc (P01) | context_doc FORNECE background. embedding_config PROCESSA texto. | P01 context_doc |
-| few_shot_example (P01) | example DEMONSTRA input/output. embedding_config PARAMETRIZA modelo. | P01 few_shot_example |
-| brain_index (P10) | brain_index CONFIGURA o indice (BM25, FAISS). embedding_config CONFIGURA o modelo vetorial. | P10 brain_index |
-
-Regra: "qual modelo de embedding usar, com quais parametros?" -> embedding_config.
-
-## Position in RAG Flow
-
-```text
-raw text -> [embedding_config] defines vectorization -> brain_index indexes vectors -> retriever queries -> agent uses
-                    |
-              model + dimensions + chunk_size + distance_metric
-```
-
-embedding_config is the VECTORIZATION LAYER — defines how text becomes vectors.
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| model_id | Embedding model identifier (e.g. `nomic-embed-text`, `text-embedding-3-small`) | embedding-config-builder | required |
+| provider | Hosting provider: ollama, openai, cohere, huggingface | embedding-config-builder | required |
+| dimensions | Output vector dimensionality (e.g. 768, 1536, 3072) | embedding-config-builder | required |
+| chunk_size | Max tokens per text chunk before splitting | embedding-config-builder | required |
+| chunk_overlap | Token overlap between adjacent chunks for context continuity | embedding-config-builder | required |
+| distance_metric | Similarity function: cosine, dot_product, euclidean | embedding-config-builder | required |
+| tokenizer | Tokenizer used for chunk boundary calculation | embedding-config-builder | required |
+| batch_size | Number of texts vectorized per API call | embedding-config-builder | optional |
+| normalize | Whether to L2-normalize output vectors (true/false) | embedding-config-builder | required |
+| cost_per_1k_tokens | Pricing reference for budget planning | embedding-config-builder | optional |
+| metadata | config id, version, pillar, scope, author, created date | embedding-config-builder | required |
 
 ## Dependency Graph
 
-```text
-embedding_config <--consumed_by-- brain_index (P10) — index uses embedding config
-embedding_config <--consumed_by-- retriever agent (P02) — retriever needs vector params
-embedding_config --receives-- rag_source (P01) — source characteristics inform chunk_size
-embedding_config --independent-- signal, workflow, quality_gate, satellite_spec
+```
+rag_source (P01) --informs--> embedding_config (source characteristics shape chunk_size)
+embedding_config --consumed_by--> brain_index (P10) (index uses model + dimensions + metric)
+embedding_config --consumed_by--> retriever (P02) (retriever needs vector params to query index)
+knowledge_card (P01) --independent-- embedding_config (KC distills knowledge; config vectorizes it)
+signal (P12) --independent-- embedding_config (config is static spec, not runtime event)
+workflow (P12) --independent-- embedding_config (workflow orchestrates; config parameterizes)
 ```
 
-## Fractal Position
-Pillar: P01 (Knowledge — what the agent KNOWS)
-Function: GOVERN (defines embedding model parameters)
-Scale: L0 (spec layer — embedding_config is infrastructure for knowledge retrieval)
-embedding_config is the bridge between raw content (P01) and searchable index (P10).
+| From | To | Type | Data |
+|------|----|------|------|
+| rag_source | embedding_config | data_flow | source size and language inform chunk_size and tokenizer |
+| embedding_config | brain_index | consumed_by | model_id, dimensions, distance_metric for index construction |
+| embedding_config | retriever | consumed_by | vector params needed to query and rank results |
+
+## Boundary Table
+
+| embedding_config IS | embedding_config IS NOT |
+|--------------------|------------------------|
+| A model configuration: which embedding model, with what parameters | A knowledge_card — KC distills and stores domain knowledge |
+| Specifies vectorization: chunk size, overlap, distance metric | A rag_source — rag_source points to an external indexable source |
+| Infrastructure spec: bridges raw text to searchable vector index | A brain_index (P10) — brain_index configures the search index structure |
+| Defines how text becomes vectors, not what text to embed | A glossary_entry — glossary defines domain terms |
+| Includes cost and normalization for production deployment | A context_doc — context_doc provides background knowledge |
+| Consumed by both the indexer and the retriever | A few_shot_example — examples demonstrate input/output patterns |
+| Static spec set once per scope or model change | A retriever — retriever executes queries using this config |
+
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Source | rag_source | External text sources whose characteristics inform chunking strategy |
+| Model | model_id, provider, dimensions, tokenizer | Define which embedding model produces the vectors |
+| Chunking | chunk_size, chunk_overlap | Control how raw text is split before vectorization |
+| Similarity | distance_metric, normalize | Determine how vector similarity is computed at query time |
+| Performance | batch_size, cost_per_1k_tokens | Tune throughput and track cost for production use |
+| Identity | metadata | Record config id, version, scope, and authoring context |
+| Consumers | brain_index, retriever | Downstream components that read and apply this configuration |

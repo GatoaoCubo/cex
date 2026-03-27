@@ -1,51 +1,66 @@
 ---
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Boundary, relationships, and position of chain in the CEX fractal
-pattern: every builder must know WHERE its output fits and what it CONNECTS to
+purpose: Component map of chain — inventory, dependencies, and architectural position
 ---
 
-# Architecture: chain in the CEX
+## Component Inventory
 
-## Boundary
-chain EH: sequencia de prompts encadeados onde output A eh input B — pipeline de texto puro, sem agentes, sem tools, sem signals.
-
-chain NAO EH:
-
-| Confusao | Por que NAO | Type correto |
-|----------|-------------|-------------|
-| workflow | workflow orquestra agentes+tools+signals em runtime | P12 workflow |
-| dag | dag define dependencias entre tasks sem semantica de execucao | P12 dag |
-| chain_of_thought | CoT eh tecnica de raciocinio INTRA-prompt, nao pipeline | P03 chain_of_thought |
-| instruction | instruction eh receita passo-a-passo para um agente | P03 instruction |
-| action_prompt | action_prompt eh prompt de tarefa unica | P03 action_prompt |
-
-Regra: "quais prompts rodam em que ordem e como dados fluem entre eles?" -> chain.
-
-## Position in Prompt Pipeline
-
-```text
-knowledge_card (P01) --> system_prompt (P03) --> chain (P03) --> output_schema (P05)
-                                                   |
-                                            step_1 --> step_2 --> step_N
-                                                          |
-                                                   [text only, no agents]
-```
-
-chain is COMPOSITION LAYER — text-to-text transformations chained sequentially.
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| step | Single LLM call unit — one prompt in, one output out | chain | required |
+| data_flow | Typed binding that passes output of step N to input of step N+1 | chain | required |
+| error_handling | Strategy applied when a step fails (fail_fast, skip, retry, fallback) | chain | required |
+| context_pass | Mechanism for carrying shared context across all steps | chain | required |
+| branching_logic | Conditional routing — directs flow to different step paths | chain | optional |
+| system_prompt | Agent persona injected into step prompts | P03 | external |
+| output_schema | Typed contract defining step output shape | P05/P06 | external |
+| knowledge_card | Domain facts injected into one or more steps | P01 | external |
+| workflow | Runtime orchestrator that may embed this chain as a substep | P12 | consumer |
 
 ## Dependency Graph
 
-```text
-chain <--receives-- system_prompt (P03) (identity context for step prompts)
-chain <--receives-- output_schema (P05/P06) (typed contracts between steps)
-chain <--receives-- knowledge_card (P01) (domain knowledge injected into steps)
-chain --consumed_by--> workflow (P12) (may embed chains as prompt substeps)
-chain --independent-- signal, spawn_config, dispatch_rule, handoff
+```
+knowledge_card  --produces--> step
+system_prompt   --produces--> step
+output_schema   --produces--> step
+step            --produces--> data_flow
+data_flow       --produces--> step
+step            --depends-->  error_handling
+context_pass    --produces--> step
+branching_logic --depends-->  data_flow
+workflow        --depends-->  chain
 ```
 
-## Fractal Position
-Pillar: P03 (Prompt — how the agent SPEAKS)
-Function: PRODUCE (creates structured output through step composition)
-Scale: L0 (core 24 — chains are fundamental to any multi-step LLM system)
-chain is the MULTI-STEP composition primitive: ~240 ADW files in CODEXA already function as implicit chains.
+| From | To | Type | Data |
+|------|----|------|------|
+| knowledge_card | step | produces | domain facts for prompt hydration |
+| system_prompt | step | produces | persona and operational rules |
+| output_schema | step | produces | typed output contract |
+| step | data_flow | produces | step output (text or structured) |
+| data_flow | step | produces | input for next step |
+| step | error_handling | depends | failure signal triggering strategy |
+| context_pass | step | produces | shared context available to all steps |
+| branching_logic | data_flow | depends | conditional routing decision |
+| workflow | chain | depends | embeds chain as a prompt substep |
+
+## Boundary Table
+
+| chain IS | chain IS NOT |
+|----------|-------------|
+| Sequential prompt pipeline — output A feeds input B | A runtime orchestrator managing agents and tools (that is workflow) |
+| Text-to-text transformations only | A task dependency graph without execution semantics (that is dag) |
+| One LLM call per step | An intra-prompt reasoning technique (that is chain_of_thought) |
+| Defined data flow with typed bindings between steps | A single-task action prompt (that is action_prompt) |
+| Error handling strategy at step level | A step-by-step agent execution protocol (that is instruction) |
+| Composable — consumed by workflows as a substep | Contains agents, tools, or signals |
+
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|-----------|---------|
+| knowledge | knowledge_card, system_prompt | Provide domain context and persona for step prompts |
+| composition | step, context_pass, branching_logic | Define the individual LLM calls and conditional routing |
+| data | data_flow, output_schema | Type and route data between steps |
+| resilience | error_handling | Define behavior when a step fails |
+| integration | workflow (consumer) | Runtime orchestration that embeds chains |

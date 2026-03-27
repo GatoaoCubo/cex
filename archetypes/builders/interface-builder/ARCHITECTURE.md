@@ -1,49 +1,57 @@
 ---
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Boundary, relationships, and position of interface in the CEX fractal
-pattern: every builder must know WHERE its output fits and what it CONNECTS to
+purpose: Component map of interface — inventory, dependencies, and architectural position
 ---
 
-# Architecture: interface in the CEX
+## Component Inventory
 
-## Boundary
-interface EH: contrato bilateral de integracao entre agentes, definindo methods com input/output tipados.
-
-interface NAO EH:
-
-| Confusao | Por que NAO | Type correto |
-|----------|-------------|-------------|
-| input_schema (P06) | input_schema define SHAPE de entrada unilateral. interface define CONTRATO bilateral. | P06 input_schema |
-| signal (P12) | signal reporta EVENTO runtime. interface define o que PODE acontecer. | P12 signal |
-| connector (P04) | connector IMPLEMENTA comunicacao. interface ESPECIFICA o contrato. | P04 connector |
-| validation_schema (P06) | validation_schema eh aplicado silenciosamente. interface eh ACORDO explicito. | P06 validation_schema |
-| router (P02) | router decide PARA ONDE rotear. interface define COMO comunicar. | P02 router |
-
-Regra: "qual o contrato formal entre estes dois agentes?" -> interface.
-
-## Position in Integration Flow
-
-```text
-agent A needs data -> [interface] defines contract -> agent B implements -> [signal] confirms execution
-                          |
-                    methods: input/output typed
-```
-
-interface is a DESIGN-TIME artifact. It defines what CAN happen between two agents.
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| method_definitions | Named operations both parties agree exist | author | required |
+| input_types | Typed input shape per method (may reference input_schema) | author | required |
+| output_types | Typed output shape per method | author | required |
+| version | Semantic version for backward compatibility tracking | author | required |
+| deprecation_policy | How and when old methods are retired | author | recommended |
+| mock_spec | Stub responses for testing without live implementation | author | optional |
+| error_contract | Named error codes and shapes each method may return | author | recommended |
+| compatibility_notes | Breaking vs non-breaking change classification | author | optional |
 
 ## Dependency Graph
 
-```text
-interface <--implements-- connector (P04, runtime adapter)
-interface <--validates-- validator (P06, checks compliance)
-interface <--references-- system_prompt (P03, mentions available methods)
-interface --consumes--> input_schema (P06, for method input shapes)
-interface --independent-- signal, dispatch_rule, quality_gate
+```
+interface     --consumes--> input_schema
+connector     --implements--> interface
+validator     --checks_against--> interface
+system_prompt --references--> interface
+interface     --produces--> mock_spec
 ```
 
-## Fractal Position
-Pillar: P06 (Schema — CONTRACTS and validation)
-Function: CONSTRAIN (define integration boundaries)
-Scale: L0 (spec layer — interfaces define how agents communicate before runtime)
-Interfaces are the bilateral contract kind in P06 — complementing unilateral input_schema.
+| From | To | Type | Data |
+|------|----|------|------|
+| interface | input_schema | data_flow | method input shapes formalized as schemas |
+| connector | interface | depends | runtime adapter implements the declared contract |
+| validator | interface | data_flow | compliance check against method signatures |
+| system_prompt | interface | data_flow | documents available methods to agent identity |
+| interface | mock_spec | produces | stub responses derived from output_types |
+
+## Boundary Table
+
+| interface IS | interface IS NOT |
+|--------------|-----------------|
+| Bilateral contract agreed by both parties | Unilateral shape contract for one callee |
+| Specifies methods with named input and output | Runtime event or status report |
+| Design-time artifact (written before implementation) | Concrete implementation or adapter code |
+| Versioned with deprecation and compatibility policy | Routing decision about who receives what |
+| Defines what CAN happen between two agents | Validates whether something DID happen correctly |
+| Shared reference for both producer and consumer | Orchestration logic or execution recipe |
+
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Contract surface | method_definitions, version | Declare the operations both agents agree on |
+| Type system | input_types, output_types | Enforce data shapes for each method direction |
+| Safety | error_contract, compatibility_notes | Define failure modes and change impact |
+| Lifecycle | deprecation_policy | Govern how the contract evolves over time |
+| Testing | mock_spec | Enable development against the contract without live systems |

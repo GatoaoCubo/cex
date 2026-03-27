@@ -1,70 +1,59 @@
 ---
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Boundary, relationships, and position of handoff in the CEX fractal
-pattern: every builder must know where its output fits and what it connects to
+purpose: Component map of handoff — inventory, dependencies, and architectural position
 ---
 
-# Architecture: handoff in the CEX
+## Component Inventory
 
-## Boundary
-`handoff` EH: instrucao completa de delegacao que empacota tarefa, contexto,
-escopo e regras de commit para um satelite executar autonomamente.
-
-`handoff` NAO EH:
-
-| Confusao | Por que NAO | Type correto |
-|----------|-------------|--------------|
-| action_prompt | action_prompt eh prompt conversacional com persona e formato de resposta | P03 action_prompt |
-| signal | signal eh evento atomico de status (complete, error, progress) | P12 signal |
-| dispatch_rule | dispatch_rule define roteamento keyword-satelite | P12 dispatch_rule |
-| workflow | workflow organiza steps com error handling e runtime state | P12 workflow |
-| dag | dag define grafo de dependencias estatico entre tasks | P12 dag |
-| spawn_config | spawn_config define parametros de boot (modelo, flags, MCP) | P12 spawn_config |
-| crew | crew define protocolo de coordenacao multi-agente | P12 crew |
-
-Regra:
-- "o que o satelite deve fazer?" -> `handoff`
-- "o que aconteceu?" -> `signal`
-- "quem deve receber este tipo de tarefa?" -> `dispatch_rule`
-
-## Position in Execution Flow
-
-```text
-dispatch_rule selects satellite -> handoff instructs work -> execution -> signal reports
-```
-
-`handoff` sits between routing decision and execution.
-It is instruction, not feedback.
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| task_description | Core body of work the receiver must complete | author | required |
+| context_block | Background information the receiver needs to act | author | required |
+| scope_fence | Explicit allowed/forbidden paths and operations | author | required |
+| commit_rules | How and when to commit work before stopping | author | required |
+| signal_instruction | How to emit completion status after finishing | author | required |
+| seed_keywords | Domain terms guiding retrieval and search | author | optional |
+| dependency_refs | Upstream artifacts this handoff depends on | author | optional |
+| naming_convention | File naming pattern (`{MISSION}_{sat}.md`) | system | required |
 
 ## Dependency Graph
 
-```text
-handoff <--receives-- dispatch_rule (P12)
-dispatch_rule --> selects satellite --> handoff provides execution brief
-
-handoff <--receives-- dag (P12)
-dag --> defines dependency structure --> one handoff per node
-
-handoff --produces_for--> signal (P12)
-execution completes --> signal emitted --> signal_writer called from handoff Signal section
-
-handoff --produces_for--> workflow (P12)
-workflow may include handoffs as steps in larger orchestration flow
-
-handoff --produces_for--> spawn_config (P12)
-spawn_config may derive satellite/model params from handoff metadata
-
-handoff --independent-- brain_index
-handoff --independent-- axiom
-handoff --independent-- component_map
-handoff --independent-- chain
+```
+dispatch_rule --produces--> handoff
+dag           --produces--> handoff
+handoff       --> execution
+execution     --produces--> signal
+handoff       --referenced_by--> spawn_config
+handoff       --referenced_by--> workflow
 ```
 
-## Fractal Position
-Pillar: P12 (Orchestration - "how coordination happens")
-Function: COLLABORATE
-Scale: L1 delegation instruction
-Central coordination artifact in P12: richer than signal, more actionable than dag.
+| From | To | Type | Data |
+|------|----|------|------|
+| dispatch_rule | handoff | data_flow | satellite selection, mission name |
+| dag | handoff | data_flow | task node context, dependency order |
+| handoff | execution | data_flow | task, context, scope fence, commit rules |
+| execution | signal | data_flow | status (complete/error), score |
+| handoff | spawn_config | data_flow | satellite id, model params |
+| handoff | workflow | data_flow | step instructions within larger orchestration |
 
-handoff is DELEGATION LAYER — actionable execution instructions.
+## Boundary Table
+
+| handoff IS | handoff IS NOT |
+|------------|----------------|
+| Complete delegation package for one receiver | Conversational prompt with persona |
+| Carries task + context + scope + commit rules | Status or event report |
+| One handoff per satellite per mission | Routing policy (who receives what type) |
+| Pre-execution artifact (written before spawn) | Dependency graph of tasks |
+| Scoped to a single execution unit | Multi-agent orchestration runtime |
+| Source of truth for what to do and how to commit | Boot configuration (model, flags, MCPs) |
+
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Routing | dispatch_rule, dag | Decide which satellite and in what order |
+| Delegation | task_description, context_block, seed_keywords | Define the work and its background |
+| Boundary | scope_fence, dependency_refs | Constrain what may be touched |
+| Commit | commit_rules, signal_instruction | Enforce artifact persistence and status reporting |
+| Instantiation | spawn_config, workflow | Consume handoff to launch or sequence execution |

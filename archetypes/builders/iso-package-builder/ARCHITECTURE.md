@@ -1,62 +1,61 @@
 ---
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Boundary, relationships, and position of iso_package in the CEX fractal
-pattern: every builder must know WHERE its output fits and what it CONNECTS to
+purpose: Component map of iso_package — inventory, dependencies, and architectural position
 ---
 
-# Architecture: iso_package in the CEX
+## Component Inventory
 
-## Boundary
-iso_package EH: pacote portable self-contained de agente AI em formato ISO — manifest.yaml
-como entry point, tiered file system (3/7/10/12 files), LP-mapped, LLM-agnostic,
-density >= 0.80, system_instruction capped at 4096 tokens.
-
-iso_package NAO EH:
-
-| Confusao | Por que NAO | Tipo correto |
-|----------|-------------|-------------|
-| agent | agent define QUEM o agente EH no repo; iso_package EMPACOTA para distribuir | P02 agent |
-| boot_config | boot_config define como INICIALIZAR por provider; iso_package empacota TUDO | P02 boot_config |
-| mental_model (P02) | mental_model define routing/decisoes; iso_package nao decide, empacota | P02 mental_model |
-| model_card | model_card spec do LLM subjacente; iso_package empacota o agente que USA o LLM | P02 model_card |
-| router | router define regras de roteamento; iso_package nao roteia | P02 router |
-| fallback_chain | fallback_chain define sequencia de modelos; iso_package nao gerencia fallback | P02 fallback_chain |
-| lens | lens eh perspectiva especializada; iso_package eh bundle completo | P02 lens |
-| axiom | axiom eh principio imutavel; iso_package eh artefato distribuivel | P02 axiom |
-| spawn_config | spawn_config define parametros de spawn runtime; iso_package eh pre-runtime | P12 spawn_config |
-| upload_kit (file) | upload_kit eh UM arquivo dentro do iso_package; nao eh o package inteiro | P04 upload_kit |
-
-Regra: "como empacoto este agente para distribuir, deployar, ou compartilhar?" -> iso_package.
-
-## Position in Agent Distribution Flow
-
-```text
-agent (P02) --> iso_package (P02) --> upload_kit (P04) --> deployment
-     |                  |                     |
-canonical def    portable bundle      deploy instructions
-                       |
-     system_instruction.md (P03) + instructions.md (P03) + ...
-```
-
-iso_package is DISTRIBUTION LAYER — bridges canonical agent definitions
-with deployment and sharing across runtimes and platforms.
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| manifest.yaml | Entry point: identity, tier, file inventory, LP mapping | author | required |
+| system_instruction.md | Agent persona and behavioral rules, capped at 4096 tokens | author | required |
+| instructions.md | Operational steps the agent follows (P03) | author | required |
+| quick_start.md | Minimal usage example for immediate deployment | author | tier >= standard |
+| examples.md | Input/output demonstration pairs | author | tier >= standard |
+| input_schema.yaml | Typed input contract for the agent (P06) | author | tier >= complete |
+| output_schema.yaml | Typed output contract for the agent (P06) | author | tier >= complete |
+| knowledge_base/ | Domain knowledge cards bundled for retrieval | author | tier = whitelabel |
+| upload_kit.md | Deployment instructions per target platform | author | tier >= standard |
+| tier_label | One of: minimal / standard / complete / whitelabel | author | required |
 
 ## Dependency Graph
 
-```text
-iso_package <--receives-- agent (P02) (canonical source definition)
-iso_package <--receives-- system_prompt (P03) (becomes system_instruction.md)
-iso_package <--receives-- knowledge_card (P01) (domain knowledge for quick_start)
-iso_package --produces_for--> upload_kit (P04) (deployment target)
-iso_package --produces_for--> spawn_config (P12) (runtime instantiation)
-iso_package --consumed_by--> workflow (P12) (orchestration node)
-iso_package --independent-- model_card, boot_config, router, fallback_chain
+```
+agent         --produces--> iso_package
+system_prompt --produces--> system_instruction.md
+knowledge_card --produces--> knowledge_base/
+iso_package   --produces--> upload_kit
+iso_package   --consumed_by--> spawn_config
+iso_package   --consumed_by--> workflow
 ```
 
-## Fractal Position
-Pillar: P02 (Model — QUEM o agente EH)
-Function: BECOME (package carries agent identity for instantiation)
-Layer: spec (static distributable artifact, not runtime)
-Scale: L0 (core infrastructure — every sharable agent needs packaging)
-Unique: only P02 kind that is a multi-file artifact with tiered completeness.
+| From | To | Type | Data |
+|------|----|------|------|
+| agent | iso_package | data_flow | canonical identity, capabilities, domain |
+| system_prompt | iso_package | data_flow | persona text becomes system_instruction.md |
+| knowledge_card | iso_package | data_flow | domain facts bundled into knowledge_base/ |
+| iso_package | upload_kit | produces | deployment instructions derived from manifest |
+| iso_package | spawn_config | data_flow | tier, file paths, model recommendations |
+| iso_package | workflow | data_flow | self-contained execution node |
+
+## Boundary Table
+
+| iso_package IS | iso_package IS NOT |
+|----------------|-------------------|
+| Portable, self-contained multi-file bundle | Canonical agent definition in a repository |
+| Tiered completeness: minimal to whitelabel | Boot configuration (model flags, MCP profiles) |
+| LLM-agnostic (no hardcoded model names) | Mental model for routing and decision-making |
+| Static distributable artifact, not runtime | Spec for the underlying LLM itself |
+| manifest.yaml is the required entry point | Single-file artifact |
+| system_instruction.md capped at 4096 tokens | Fallback chain or multi-model routing logic |
+
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Identity | manifest.yaml, tier_label | Declare the package and its completeness level |
+| Behavior | system_instruction.md, instructions.md | Carry agent persona and operational recipe |
+| Contract | input_schema.yaml, output_schema.yaml | Define typed entry and exit data shapes |
+| Knowledge | knowledge_base/, examples.md | Bundle domain facts and usage demonstrations |
+| Deployment | upload_kit.md, quick_start.md | Enable immediate use on any target platform |

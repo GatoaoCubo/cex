@@ -1,56 +1,65 @@
 ---
 pillar: P08
-llm_function: CONSTRAIN
-purpose: Boundary, relationships, and position of env_config in the CEX fractal
-pattern: every builder must know WHERE its output fits and what it CONNECTS to
+llm_function: GOVERN
+purpose: Component map of env_config — inventory, dependencies, and architectural position
 ---
 
-# Architecture: env_config in the CEX
+## Component Inventory
 
-## Boundary
-env_config EH: especificacao de variaveis de ambiente genericas do sistema. Define NOMES,
-tipos, defaults, validacao, e sensibilidade — nunca valores reais de secrets. Segue
-12-Factor App (Factor III): config que varia entre deploys vive em env vars.
-
-env_config NAO EH:
-
-| Confusao | Por que NAO | Tipo correto |
-|----------|-------------|-------------|
-| boot_config | boot_config eh per-provider (model, temp, system_prompt); env eh generico | P02 boot_config |
-| feature_flag | feature_flag eh on/off logico com rollout; env eh variavel de config | P09 feature_flag |
-| path_config | path_config eh caminhos do filesystem; env eh variaveis genericas | P09 path_config |
-| permission | permission eh controle de acesso (read/write); env eh config do sistema | P09 permission |
-| runtime_rule | runtime_rule eh comportamento (timeouts, retries); env eh config values | P09 runtime_rule |
-
-Regra: "quais VARIAVEIS DE AMBIENTE este scope precisa, com que defaults e validacao?" -> env_config.
-
-## Position in Config Flow
-
-```text
-env_config (P09) --> boot_config (P02) --> agent (P02) --> runtime
-      |                    |
-  validation          provider_config
-      |
-  secret_masking
-```
-
-env_config is CONFIGURATION LAYER — foundation that feeds into all runtime components.
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| scope | The system boundary this config covers: global, satellite, service | env-config-builder | required |
+| variables | Catalog of env vars: name, type, default, description, sensitivity | env-config-builder | required |
+| validation_rules | Per-variable constraints: regex, range, enum, required flag | env-config-builder | required |
+| sensitive_vars | List of secret/key vars with masking rules (never log, never expose) | env-config-builder | required |
+| override_precedence | Resolution order: runtime env > .env file > hardcoded default | env-config-builder | required |
+| defaults | Default values applied when var is absent from environment | env-config-builder | required |
+| required_vars | Variables that must be present for the system to start (startup gate) | env-config-builder | required |
+| optional_vars | Variables that enable optional features when present | env-config-builder | optional |
+| metadata | config id, version, pillar, scope, author, created date | env-config-builder | required |
 
 ## Dependency Graph
 
-```text
-env_config --consumed_by--> boot_config (P02) (boot reads env vars at startup)
-env_config --consumed_by--> daemon (P04) (daemons read env vars for config)
-env_config --consumed_by--> connector (P04) (connectors read API keys from env)
-env_config --consumed_by--> client (P04) (clients read base_url, auth from env)
-env_config --consumed_by--> mcp_server (P04) (MCP servers read transport config)
-env_config <--receives-- guardrail (P11) (security rules for sensitive vars)
-env_config --independent-- feature_flag, path_config, runtime_rule, permission
+```
+guardrail (P11) --constrains--> env_config (security rules for sensitive var handling)
+env_config --consumed_by--> boot_config (P02) (boot reads env vars at provider startup)
+env_config --consumed_by--> daemon (P04) (daemon reads vars for config at launch)
+env_config --consumed_by--> connector (P04) (connector reads API keys, base URLs from env)
+env_config --consumed_by--> client (P04) (client reads auth tokens, endpoints from env)
+env_config --consumed_by--> mcp_server (P04) (MCP server reads transport config from env)
+feature_flag (P09) --independent-- env_config (feature_flag is on/off toggle logic, not var spec)
+path_config (P09) --independent-- env_config (path_config covers filesystem paths specifically)
+runtime_rule (P09) --independent-- env_config (runtime_rule governs behavior like timeouts/retries)
 ```
 
-## Fractal Position
-Pillar: P09 (Config — HOW the system configures)
-Function: GOVERN (env_config governs what variables exist and their constraints)
-Layer: runtime (env vars are read at runtime)
-Scale: L0 (per-scope — one env_config per scope, foundational)
-env_config is EXTENSION (not core_24): useful for documenting config but system can run without spec.
+| From | To | Type | Data |
+|------|----|------|------|
+| guardrail | env_config | constrains | security rules for masking and exposure of sensitive vars |
+| env_config | boot_config | consumed_by | env vars read at provider startup |
+| env_config | daemon | consumed_by | config vars, secret values, paths at launch |
+| env_config | connector | consumed_by | API keys, base URLs, auth credentials |
+| env_config | client | consumed_by | auth tokens, endpoint URLs, timeouts |
+| env_config | mcp_server | consumed_by | transport config, port, auth mode |
+
+## Boundary Table
+
+| env_config IS | env_config IS NOT |
+|--------------|-------------------|
+| A specification of environment variables: names, types, defaults, validation | A boot_config (P02) — boot_config is per-provider model startup configuration |
+| Covers any variable that changes between deployment environments | A feature_flag (P09) — feature_flag is an on/off logical toggle with rollout logic |
+| Follows 12-Factor App principle: config lives in environment, not code | A path_config (P09) — path_config specifies filesystem paths specifically |
+| Declares sensitivity level and masking rules for secrets | A permission (P09) — permission governs access control, not variable values |
+| Specifies validation rules (regex, enum, range) per variable | A runtime_rule (P09) — runtime_rule governs behavioral limits like timeouts and retries |
+| Defines override precedence: runtime > file > default | A knowledge_card (P01) — KC distills domain knowledge, not system configuration |
+| Has required_vars that gate system startup if absent | A connector (P04) — connector defines integration spec; env_config feeds it values |
+
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Safety | guardrail, sensitive_vars | Enforce masking rules and prevent secret exposure |
+| Identity | scope, metadata | Define which system boundary this config covers |
+| Specification | variables, required_vars, optional_vars | Catalog all env vars with types and descriptions |
+| Validation | validation_rules, defaults | Enforce constraints and provide fallback values |
+| Resolution | override_precedence | Define how conflicting values from different sources are resolved |
+| Consumers | boot_config, daemon, connector, client, mcp_server | Runtime components that read env vars from this specification |

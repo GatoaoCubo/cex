@@ -1,69 +1,68 @@
 ---
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Boundary, relationships, and position of agent in the CEX fractal
-pattern: every builder must know WHERE its output fits and what it CONNECTS to
+purpose: Component map of agent — inventory, dependencies, and architectural position
 ---
 
 # Architecture: agent in the CEX
 
-## Boundary
-agent EH: entidade executora runtime — persona + capabilities + iso_vectorstore. O agente BECOMES
-sua identidade quando carregado, possui ferramentas concretas, pertence a um satelite, e produz
-outputs verificaveis. A definicao completa inclui 10+ ISO files no iso_vectorstore.
+## Component Inventory
 
-agent NAO EH:
-
-| Confusao | Por que NAO | Tipo correto |
-|----------|-------------|-------------|
-| skill | skill eh habilidade executavel (phases + trigger); agent EH identidade persistente | P04 skill |
-| system_prompt | system_prompt define como o agente FALA; agent define QUEM ELE EH | P03 system_prompt |
-| mental_model (P02) | mental_model eh blueprint estatico de design-time; agent eh entidade runtime | P02 mental_model |
-| mental_model (P10) | mental_model P10 eh estado de sessao efemero; agent eh definicao permanente | P10 mental_model |
-| model_card | model_card descreve o LLM subjacente; agent descreve QUEM usa o LLM | P02 model_card |
-| boot_config | boot_config define como o agente INICIALIZA por provider; agent define O QUE ele eh | P02 boot_config |
-| router | router define regras de roteamento task-to-satellite; agent EH o destino do routing | P02 router |
-| fallback_chain | fallback_chain define sequencia de modelos alternativos; agent nao define fallback de modelo | P02 fallback_chain |
-| iso_package | iso_package eh o bundle portable distribuivel; agent eh a definicao canonizada no repo | P02 iso_package |
-| axiom | axiom eh principio imutavel de governanca; agent tem constraints mas eh editavel | P02 axiom |
-| lens | lens eh perspectiva especializada sobre dominio; agent tem identidade completa executavel | P02 lens |
-
-Regra: "quem este agente EH, o que pode fazer, e como esta estruturado?" -> agent.
-
-## Position in Agent Boot Flow
-
-```text
-knowledge_card (P01) --> system_prompt (P03) --> agent (P02) --> skill (P04)
-       |                        |                    |               |
-  domain facts           identity + rules      capabilities    executavel
-                                                    |
-                              mental_model (P02) ---+--- router (P02)
-                              (design blueprint)         (routing rules)
-```
-
-agent is RUNTIME IDENTITY LAYER — bridges design-time specs (mental_model, system_prompt)
-with execution (skills, tools, downstream agents).
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| frontmatter block | 10-field identity header (id, kind, pillar, domain, satellite, llm_function, version, tags, etc.) | agent-builder | required |
+| persona | Natural-language description of who the agent is and its domain expertise | author | required |
+| capabilities | List of concrete things the agent can do (4-8 items) | author | required |
+| iso_vectorstore/ | Directory of 10+ ISO files providing full structured identity | agent-builder | required |
+| ISO_*_MANIFEST.md | Capabilities list, version, routing keywords | agent-builder | required |
+| ISO_*_INSTRUCTIONS.md | Step-by-step execution protocol | agent-builder | required |
+| ISO_*_ARCHITECTURE.md | Boundary, dependencies, and position of the agent's output type | agent-builder | required |
+| ISO_*_EXAMPLES.md | 3+ input/output examples demonstrating correct behavior | agent-builder | required |
+| ISO_*_SYSTEM_INSTRUCTION.md | System prompt loaded at agent boot | agent-builder | required |
+| ISO_*_ERROR_HANDLING.md | Error taxonomy and recovery protocols | agent-builder | required |
+| routing_entry | Registration in the agent routing index for discovery | system | required |
 
 ## Dependency Graph
 
-```text
-agent <--receives-- system_prompt (P03) (identity and rules)
-agent <--receives-- knowledge_card (P01) (domain knowledge)
-agent <--receives-- mental_model (P02) (routing and decisions)
-agent <--receives-- model_card (P02) (LLM capabilities)
-agent <--receives-- boot_config (P02) (initialization per provider)
-agent --produces--> iso_package (P02) (portable bundle)
-agent --produces--> skill (P04) (reusable capabilities)
-agent --consumed_by--> router (P02) (routing destination)
-agent --consumed_by--> workflow (P12) (orchestration node)
-agent --consumed_by--> spawn_config (P12) (spawn target)
-agent --independent-- model_card, lens, fallback_chain
+```
+system_prompt    --produces-->  agent  --produces-->  iso_package
+knowledge_card   --produces-->  agent  --consumed_by-> router
+mental_model     --depends-->   agent  --consumed_by-> workflow
+model_card       --depends-->   agent  --consumed_by-> spawn_config
+boot_config      --depends-->   agent  --produces-->   skill
+agent            --signals-->   routing_entry (registration)
 ```
 
-## Fractal Position
-Pillar: P02 (Model — QUEM o agente EH)
-Function: BECOME (LLM assumes this identity and capabilities)
-Layer: runtime (executes with state, produces outputs)
-Scale: L0 (core infrastructure — every agentic system needs agent definitions)
-iso_vectorstore: 10 required ISO files minimum per agent (MANIFEST, QUICK_START, PRIME,
-INSTRUCTIONS, ARCHITECTURE, OUTPUT_TEMPLATE, EXAMPLES, ERROR_HANDLING, UPLOAD_KIT, SYSTEM_INSTRUCTION)
+| From | To | Type | Data |
+|------|----|------|------|
+| system_prompt (P03) | agent | data_flow | persona, tone, operating rules loaded at boot |
+| knowledge_card (P01) | agent | data_flow | domain facts injected into context |
+| mental_model (P02) | agent | depends | routing logic and decision patterns |
+| model_card (P02) | agent | depends | LLM capabilities and cost constraints |
+| boot_config (P02) | agent | depends | provider-specific initialization parameters |
+| agent | iso_package (P02) | produces | portable distributable bundle of the agent |
+| agent | skill (P04) | produces | reusable capability extracted from agent behavior |
+| agent | router (P02) | data_flow | routing destination registered for task dispatch |
+| agent | workflow (P12) | data_flow | node in orchestration graph |
+| agent | spawn_config (P12) | data_flow | spawn target with identity and constraints |
+
+## Boundary Table
+
+| agent IS | agent IS NOT |
+|----------|--------------|
+| A runtime identity — persona + capabilities + structured iso_vectorstore | A skill (executable capability without persistent identity) |
+| The definition of who executes, what they know, and what tools they have | A system prompt (how the agent speaks, not who it is) |
+| Persistent — defined once, instantiated many times | A mental_model (design-time blueprint, not runtime entity) |
+| Scoped to a satellite with specific tool access | A model_card (LLM spec, not agent identity) |
+| A destination for routing and orchestration | A boot_config (initialization params, not agent definition) |
+| Packaged into iso_vectorstore with 10+ required ISO files | An iso_package (the distributable bundle, not the source definition) |
+
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Inputs | system_prompt, knowledge_card, mental_model, model_card, boot_config | Supply identity, domain knowledge, routing logic, LLM spec, init params |
+| Identity | frontmatter, persona, capabilities, routing_entry | Define who the agent is, what it does, and how it is discovered |
+| Structure | iso_vectorstore/ (10+ ISO files) | Provide fully navigable, versioned agent specification |
+| Outputs | iso_package, skill, router entry, workflow node | Enable distribution, capability extraction, and orchestration |
+| Runtime | agent instantiation via spawn_config | Execute tasks using loaded identity and tools |

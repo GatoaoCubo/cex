@@ -1,61 +1,62 @@
 ---
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Boundary, relationships, and position of boot_config in the CEX fractal
-pattern: every builder must know WHERE its output fits and what it CONNECTS to
+purpose: Component map of boot_config — inventory, dependencies, and architectural position
 ---
 
 # Architecture: boot_config in the CEX
 
-## Boundary
-boot_config EH: configuracao de inicializacao de agente por provider — parametros
-runtime-specific (model, flags, tools, MCP, permissions, constraints) que transformam
-uma definicao generica de agente em instancia executavel num provider concreto.
+## Component Inventory
 
-boot_config NAO EH:
-
-| Confusao | Por que NAO | Tipo correto |
-|----------|-------------|-------------|
-| agent | agent define QUEM o agente EH; boot_config define COMO ele INICIA | P02 agent |
-| model_card | model_card spec do LLM subjacente; boot_config seleciona e configura o modelo | P02 model_card |
-| mental_model (P02) | mental_model define routing/decisoes; boot_config define init params | P02 mental_model |
-| iso_package | iso_package empacota para distribuir; boot_config configura para executar | P02 iso_package |
-| router | router define regras de roteamento; boot_config nao roteia | P02 router |
-| fallback_chain | fallback_chain define sequencia de modelos; boot_config seleciona UM modelo | P02 fallback_chain |
-| lens | lens eh perspectiva especializada; boot_config eh config tecnica | P02 lens |
-| axiom | axiom eh principio imutavel; boot_config eh config editavel por provider | P02 axiom |
-| env_config (P09) | env_config define variaveis genericas de ambiente; boot_config eh provider-specific | P09 env_config |
-| spawn_config (P12) | spawn_config orquestra spawn de satelites; boot_config configura UM agente | P12 spawn_config |
-
-Regra: "como este agente inicializa neste provider especifico?" -> boot_config.
-
-## Position in Agent Boot Flow
-
-```text
-model_card (P02) --> boot_config (P02) --> agent (P02) --> spawn_config (P12)
-       |                    |                   |                |
-  LLM selection      init params          identity         orchestration
-                           |
-         system_prompt (P03) + tools (P04) + mcp_config
-```
-
-boot_config is INITIALIZATION LAYER — bridges model selection (model_card)
-with agent instantiation (agent) on a specific provider runtime.
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| frontmatter block | 15 required + 7 recommended fields (id, kind, pillar, provider, model, version, etc.) | boot-config-builder | required |
+| provider_block | Target runtime identifier (claude, cursor, codex, openai, etc.) | author | required |
+| identity_block | Agent name, role, and satellite assignment for this initialization | author | required |
+| model_selection | Specific model ID and version to load (references model_card) | model_card | required |
+| constraints_block | Token limits, context window, timeout, retries, max_turns | author | required |
+| tools_block | Ordered list of tools and MCPs available on this provider runtime | author | required |
+| permissions_block | Allowed and denied operations scoped to this provider | author | required |
+| flags_block | Provider-specific CLI flags and startup options (e.g., --dangerously-skip-permissions) | author | optional |
+| mcp_config | MCP server configurations and connection parameters | author | optional |
 
 ## Dependency Graph
 
-```text
-boot_config <--receives-- model_card (P02) (LLM spec for model selection)
-boot_config <--receives-- agent (P02) (identity to bootstrap)
-boot_config <--receives-- system_prompt (P03) (persona reference)
-boot_config --produces_for--> spawn_config (P12) (runtime parameters)
-boot_config --consumed_by--> workflow (P12) (orchestration init)
-boot_config --independent-- iso_package, router, fallback_chain, lens
+```
+model_card   --produces-->  boot_config  --produces_for-->  spawn_config
+agent        --produces-->  boot_config  --consumed_by-->   workflow
+system_prompt --depends-->  boot_config
+boot_config  --signals-->   agent_instance (initialized and ready)
+boot_config  --depends-->   provider_runtime (must exist before boot)
 ```
 
-## Fractal Position
-Pillar: P02 (Model — QUEM o agente EH)
-Function: GOVERN (boot_config governs how initialization happens)
-Layer: runtime (configures runtime behavior per provider)
-Scale: L0 (infrastructure — every deployed agent needs boot configuration)
-Unique: only P02 kind scoped to a specific provider runtime.
+| From | To | Type | Data |
+|------|----|------|------|
+| model_card (P02) | boot_config | data_flow | LLM ID, capabilities, context window, cost per token |
+| agent (P02) | boot_config | data_flow | identity to initialize (name, role, satellite) |
+| system_prompt (P03) | boot_config | depends | persona reference loaded during initialization sequence |
+| boot_config | spawn_config (P12) | produces | runtime parameters consumed by orchestration spawner |
+| boot_config | workflow (P12) | data_flow | initialization step in orchestrated agent lifecycle |
+| boot_config | agent_instance | signals | agent becomes executable after boot_config is applied |
+| provider_runtime | boot_config | depends | provider must exist for the config to be valid |
+
+## Boundary Table
+
+| boot_config IS | boot_config IS NOT |
+|----------------|-------------------|
+| Provider-specific initialization for one agent on one runtime | The agent definition itself (agent) |
+| A technical config mapping agent identity to provider parameters | A description of LLM capabilities or costs (model_card) |
+| Scoped to a single provider (one boot_config per provider per agent) | Environment variables for the whole system (env_config) |
+| The bridge between agent definition and executable instance | Orchestration logic for spawning multiple agents (spawn_config) |
+| Editable and versioned — tuned per provider and deployment | An immutable fundamental truth (axiom) |
+| Consumed at initialization time, not at task execution time | A routing rule or fallback sequence (router, fallback_chain) |
+
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Inputs | model_card, agent, system_prompt | Supply LLM spec, agent identity, and persona reference |
+| Identity | identity_block, provider_block | Bind agent identity to a specific provider runtime |
+| Configuration | model_selection, constraints_block, flags_block | Set model, token limits, timeouts, and CLI options |
+| Capabilities | tools_block, permissions_block, mcp_config | Define what the agent can do and access on this provider |
+| Outputs | spawn_config feed, workflow step, agent_instance | Enable orchestrated spawning and produce executable agent |

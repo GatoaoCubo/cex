@@ -1,77 +1,64 @@
 ---
-id: diagram-builder-architecture
-kind: architecture
-builder: diagram-builder
-version: 1.0.0
+pillar: P08
+llm_function: BECOME
+purpose: Component map of diagram — inventory, dependencies, and architectural position
 ---
 
-# diagram-builder — ARCHITECTURE
+## Component Inventory
 
-## Boundary Definition
-
-diagram EH: representacao visual de arquitetura — mostra componentes, conexoes, e camadas em formato grafico (ASCII ou Mermaid). Responde: "como este sistema se parece visualmente?"
-
-## diagram NAO EH
-
-| Confusao | Por que NAO | Tipo correto |
-|----------|-------------|-------------|
-| component_map (P08) | component_map INVENTARIA dados estruturados. diagram VISUALIZA. | P08 component_map |
-| pattern (P08) | pattern PRESCREVE solucao. diagram MOSTRA estrutura. | P08 pattern |
-| law (P08) | law GOVERNA comportamento. diagram ILUSTRA arquitetura. | P08 law |
-| satellite_spec (P08) | satellite_spec DEFINE um componente. diagram MOSTRA sistema. | P08 satellite_spec |
-| dag (P12) | dag define ORDEM de execucao. diagram mostra ESTRUTURA visual. | P12 dag |
-| workflow (P12) | workflow EXECUTA sequencia. diagram REPRESENTA visualmente. | P12 workflow |
-
-## Decision Rule
-
-"Como este sistema se parece visualmente?" -> diagram.
-"Quais partes existem e quais sao seus atributos?" -> component_map.
-"Qual solucao reutilizavel resolver este problema?" -> pattern.
-"O que e obrigatorio neste dominio?" -> law.
-
-## Position in Documentation Flow
-
-```text
-[component_map] --provides data--> [diagram] --communicates--> [documentation]
-                                        |
-                    [pattern] --may be illustrated by--> [diagram]
-                                        |
-                    [brain_index] <--stores-- [diagram]
-```
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| notation_format | Output format: ASCII art or Mermaid syntax | diagram-builder | required |
+| diagram_type | Classification: flow, layered, dependency, sequence, topology | diagram-builder | required |
+| visual_body | The rendered diagram content (ASCII block or Mermaid code) | diagram-builder | required |
+| legend | Key explaining symbols, line styles, and node types used | diagram-builder | required |
+| layer_boundaries | Explicit visual separators between architectural layers | diagram-builder | required |
+| annotations | Inline labels explaining non-obvious connections or components | diagram-builder | optional |
+| source_reference | Pointer to the component_map or pattern being visualized | diagram-builder | optional |
+| metadata | diagram id, version, scope, author, created date | diagram-builder | required |
+| alt_text | Plain-language description for accessibility and indexing | diagram-builder | optional |
 
 ## Dependency Graph
 
-```text
-diagram <--data_from-- component_map (P08)
-diagram <--illustrates-- pattern (P08)
-diagram <--illustrates-- law (P08)
-diagram --produces_for--> documentation (external)
-diagram <--queried_by-- brain_query (BM25 + FAISS)
-diagram --independent-- signal
-diagram --independent-- connector
-diagram --independent-- quality_gate
-diagram --independent-- scoring_rubric
-diagram --referenced_by-- satellite_spec (P08)
-diagram --referenced_by-- law-builder (P08)
+```
+component_map (P08) --provides_data--> diagram (structured inventory becomes visual)
+pattern (P08) --illustrated_by--> diagram (pattern solution may be shown visually)
+law (P08) --illustrated_by--> diagram (enforcement flow may be diagrammed)
+diagram --produces_for--> documentation (external consumers: docs, READMEs, specs)
+diagram --referenced_by--> satellite_spec (P08) (specs may embed diagram reference)
+brain_index (P10) --indexes--> diagram (stored and retrieved via semantic search)
+signal (P12) --independent-- diagram (diagram is static, not runtime)
+connector (P04) --independent-- diagram (diagram visualizes, does not integrate)
 ```
 
-## Fractal Position
+| From | To | Type | Data |
+|------|----|------|------|
+| component_map | diagram | data_flow | component names, roles, relationships |
+| pattern | diagram | data_flow | solution structure to visualize |
+| law | diagram | data_flow | enforcement flow to illustrate |
+| diagram | documentation | produces | visual representation for human readers |
+| diagram | satellite_spec | referenced_by | spec cites diagram for structure overview |
+| brain_index | diagram | indexes | diagram stored for semantic retrieval |
 
-| Attribute | Value |
-|-----------|-------|
-| Pillar | P08 — Architecture (how the system SCALES) |
-| llm_function | INJECT — provides visual knowledge |
-| Scale | L0 — content artifact |
-| Layer | content |
-| core | false |
+## Boundary Table
 
-diagram is the VISUAL kind of P08. While pattern prescribes and component_map inventories, diagram SHOWS.
+| diagram IS | diagram IS NOT |
+|------------|----------------|
+| A visual representation: shows structure as ASCII or Mermaid | A component_map — component_map is structured tabular inventory, not visual |
+| Communicates architecture to human readers | A pattern — pattern prescribes a reusable solution approach |
+| Derived from structured data (component_map, pattern) | A law — law mandates behavior rules and constraints |
+| Static artifact: created once, consumed by documentation | A dag — dag defines execution ordering, not visual structure |
+| Includes legend, layer boundaries, and annotations | A workflow — workflow executes sequences at runtime |
+| Supports two notations: ASCII (portable) and Mermaid (renderable) | A satellite_spec — satellite_spec defines a component, diagram shows the system |
+| Indexed and retrievable via semantic search | A signal — signals are runtime events, diagrams are authoring-time artifacts |
 
-## Sibling Kinds in P08
+## Layer Map
 
-| Sibling | Role | Relationship to diagram |
-|---------|------|------------------------|
-| component_map | Structured inventory | Provides data to visualize |
-| pattern | Reusable solution | May be illustrated by diagram |
-| law | Operational mandate | Enforcement flow may be diagrammed |
-| satellite_spec | Component definition | May include reference to diagram |
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Input | component_map, pattern, law | Source data and structure that the diagram visualizes |
+| Authoring | notation_format, diagram_type, metadata | Define what kind of diagram to produce and how |
+| Visual Content | visual_body, layer_boundaries, annotations | The actual rendered diagram with structural markup |
+| Readability | legend, alt_text | Aid interpretation for human readers and search indexers |
+| Reference | source_reference | Trace diagram back to its authoritative source artifact |
+| Distribution | documentation, satellite_spec, brain_index | Consumers that embed, reference, or index the diagram |

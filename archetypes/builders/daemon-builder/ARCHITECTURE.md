@@ -1,61 +1,67 @@
 ---
 pillar: P08
-llm_function: CONSTRAIN
-purpose: Boundary, relationships, and position of daemon in the CEX fractal
-pattern: every builder must know WHERE its output fits and what it CONNECTS to
+llm_function: GOVERN
+purpose: Component map of daemon — inventory, dependencies, and architectural position
 ---
 
-# Architecture: daemon in the CEX
+## Component Inventory
 
-## Boundary
-daemon EH: processo background persistente que executa continuamente ou em schedule.
-Tem lifecycle proprio (start, run, restart, shutdown), responde a signals, escreve PID,
-e eh monitorado por health checks. Daemon PERSISTE, nunca executa e sai imediatamente.
-
-daemon NAO EH:
-
-| Confusao | Por que NAO | Tipo correto |
-|----------|-------------|-------------|
-| hook | hook dispara UMA VEZ por evento (pre/post); daemon roda continuamente | P04 hook |
-| cli_tool | cli_tool executa e termina; daemon persiste em background | P04 cli_tool |
-| skill | skill eh invocavel sob demanda com fases; daemon roda independente | P04 skill |
-| workflow | workflow orquestra multiplos steps; daemon executa uma concern unica | P12 workflow |
-| connector | connector define spec de integracao; daemon eh lifecycle de processo | P04 connector |
-| plugin | plugin eh extensao plugavel; daemon eh processo independente | P04 plugin |
-| mcp_server | mcp_server expoe tools via MCP; daemon eh processo generico | P04 mcp_server |
-| client | client consome API pontualmente; daemon roda background | P04 client |
-| component | component eh bloco composavel; daemon eh processo autonomo | P04 component |
-
-Regra: "quem RODA em background PERSISTENTEMENTE com restart e signal handling?" -> daemon.
-
-## Position in Process Lifecycle
-
-```text
-env_config (P09) --> daemon (P04) --> signal (P12)
-                        |                 |
-                   health_check      monitoring
-                        |
-                   restart_policy
-```
-
-daemon is PROCESS LAYER — persistent background execution with self-management.
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| process_definition | Core body: command, args, working_dir, user | daemon-builder | required |
+| schedule | When to run: cron expression or `continuous` | daemon-builder | required |
+| restart_policy | What to do on failure: always/on-failure/never + max_retries | daemon-builder | required |
+| signal_handlers | How to react to OS signals: SIGTERM, SIGINT, SIGHUP | daemon-builder | required |
+| pid_file | Path for PID tracking, prevents duplicate instances | daemon-builder | required |
+| health_check | Periodic probe: command + interval + timeout + retries | daemon-builder | required |
+| resource_limits | CPU and memory caps: max_cpu_percent, max_memory_mb | daemon-builder | optional |
+| log_config | Log destination, rotation policy, retention | daemon-builder | required |
+| monitoring | Metrics endpoint, alert thresholds, heartbeat interval | daemon-builder | optional |
+| graceful_shutdown | Shutdown command + timeout before SIGKILL | daemon-builder | required |
 
 ## Dependency Graph
 
-```text
-daemon <--receives-- env_config (P09) (config vars, paths, secrets)
-daemon <--receives-- runtime_rule (P09) (timeouts, resource limits)
-daemon <--receives-- guardrail (P11) (safety boundaries, circuit breakers)
-daemon --produces--> signal (P12) (heartbeat, completion, error signals)
-daemon --consumed_by--> workflow (P12) (workflows may depend on daemon being alive)
-daemon --may_wrap--> connector (P04) (daemon runs connector sync loop)
-daemon --may_wrap--> client (P04) (daemon polls API via client)
-daemon --independent-- hook, skill, cli_tool, plugin, scraper
+```
+env_config (P09) --provides--> daemon (reads vars, paths, secrets at startup)
+runtime_rule (P09) --constrains--> daemon (timeout, resource limits, retry bounds)
+guardrail (P11) --bounds--> daemon (circuit breakers, safety boundaries)
+daemon --produces--> signal (P12) (heartbeat, completion, error events)
+daemon --consumed_by--> workflow (P12) (workflow may gate on daemon liveness)
+daemon --may_wrap--> connector (P04) (daemon runs connector sync loop continuously)
+daemon --may_wrap--> client (P04) (daemon polls external API via client)
+daemon --writes--> log_config (own log sink)
+health_check --monitors--> daemon (probes liveness)
 ```
 
-## Fractal Position
-Pillar: P04 (Tools — what the agent USES)
-Function: GOVERN (daemon governs its own lifecycle)
-Layer: runtime (executes persistently during system lifetime)
-Scale: L1 (per-system — daemons are infrastructure-level)
-daemon is EXTENSION (not core_24): persistent process management, useful but not required for bootstrap.
+| From | To | Type | Data |
+|------|----|------|------|
+| env_config | daemon | depends | config vars, secrets, paths |
+| runtime_rule | daemon | constrains | timeout, retry, resource limits |
+| guardrail | daemon | bounds | circuit breaker thresholds |
+| daemon | signal | produces | heartbeat, error, completion events |
+| daemon | workflow | consumed_by | liveness gate for dependent steps |
+| daemon | connector | wraps | continuous sync loop |
+| daemon | client | wraps | periodic API poll |
+
+## Boundary Table
+
+| daemon IS | daemon IS NOT |
+|-----------|---------------|
+| A persistent background process that runs continuously or on schedule | A hook — hooks fire once per event and exit |
+| Self-managed: owns restart, PID, graceful shutdown | A skill — skills are invoked on demand with phases |
+| Responds to OS signals (SIGTERM, SIGINT, SIGHUP) | A cli_tool — cli tools execute and exit immediately |
+| Monitored by health checks with liveness probes | A workflow — workflows orchestrate multi-step sequences |
+| Runs independently of user interaction | A connector — connectors define integration specs, not lifecycle |
+| Has resource limits and log rotation | A plugin — plugins are composable extensions, not standalone processes |
+| Produces heartbeat signals to the runtime | An mcp_server — mcp_server exposes tools via protocol, daemon is generic process |
+
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Configuration | env_config, runtime_rule | Provide vars, limits, and constraints at startup |
+| Safety | guardrail | Enforce circuit breakers and resource boundaries |
+| Runtime | process_definition, schedule, restart_policy, pid_file | Define what runs, when, and how it recovers |
+| Self-management | signal_handlers, graceful_shutdown, health_check | Handle OS signals, probes, and clean termination |
+| Observability | log_config, monitoring | Capture logs, metrics, and alert thresholds |
+| Output | signal | Emit heartbeat and status events to the broader system |

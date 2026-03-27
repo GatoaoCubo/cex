@@ -1,48 +1,63 @@
 ---
 pillar: P08
-llm_function: CONSTRAIN
-purpose: Boundary and position of e2e_eval in the CEX fractal
+llm_function: BECOME
+purpose: Component map of e2e_eval — inventory, dependencies, and architectural position
 ---
 
-# Architecture: e2e_eval in the CEX
+## Component Inventory
 
-## Boundary
-e2e_eval EH: teste end-to-end que verifica pipeline completo do input inicial ao output final, testando integracao entre multiplos agentes/stages.
-
-e2e_eval NAO EH:
-
-| Confusao | Por que NAO | Type correto |
-|----------|-------------|-------------|
-| unit_eval | unit_eval testa agente ISOLADO. e2e_eval testa PIPELINE completo. | P07 unit_eval |
-| smoke_eval | smoke_eval verifica sanidade rapida (<30s). e2e_eval testa fluxo completo. | P07 smoke_eval |
-| benchmark | benchmark mede PERFORMANCE (latencia, custo). e2e_eval verifica CORRETUDE de pipeline. | P07 benchmark |
-| golden_test | golden_test eh referencia quality 9.5+ de artefato unico. e2e_eval testa integracao. | P07 golden_test |
-| scoring_rubric | scoring_rubric define CRITERIOS. e2e_eval APLICA verificacao em pipeline. | P07 scoring_rubric |
-| workflow | workflow DEFINE o fluxo (P12). e2e_eval TESTA o fluxo (P07). | P12 workflow |
-
-Regra: "o pipeline completo produz resultado correto?" -> e2e_eval.
-
-## Position in Evaluation Flow
-
-```text
-smoke_eval (quick sanity) -> unit_eval (individual tests) -> e2e_eval (pipeline test) -> quality_gate (pass/fail)
-```
-
-e2e_eval is the INTEGRATION LAYER — verifies that components work together correctly.
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| pipeline_under_test | Reference to the workflow or agent chain being tested | e2e-eval-builder | required |
+| stages | Ordered list of pipeline steps with agent/tool, input, and expected output | e2e-eval-builder | required |
+| data_fixtures | Input datasets and environment state for the test run | e2e-eval-builder | required |
+| expected_output | Final output specification: schema, content assertions, quality floor | e2e-eval-builder | required |
+| intermediate_assertions | Per-stage output checks before the next stage runs | e2e-eval-builder | required |
+| environment | Runtime context: model, temperature, tools enabled, external mocks | e2e-eval-builder | required |
+| cleanup | Post-run teardown: reset state, delete temp files, restore mocks | e2e-eval-builder | required |
+| pass_criteria | Conditions that constitute a passing run (threshold, all-stages, subset) | e2e-eval-builder | required |
+| timeout | Maximum wall-clock time allowed for the full pipeline run | e2e-eval-builder | required |
+| metadata | eval id, version, pillar, pipeline_id, author, created date | e2e-eval-builder | required |
 
 ## Dependency Graph
 
-```text
-e2e_eval <--composes-- unit_eval (P07 individual tests feed pipeline test)
-e2e_eval <--requires_pass-- smoke_eval (P07 smoke must pass first)
-e2e_eval <--tests-- workflow (P12 defines the pipeline being tested)
-e2e_eval --produces_for--> quality_gate (P11 uses e2e results for pass/fail)
-e2e_eval --produces_for--> benchmark (P07 aggregates pipeline metrics)
-e2e_eval --independent-- golden_test, scoring_rubric, lifecycle_rule
+```
+smoke_eval (P07) --must_pass_before--> e2e_eval (smoke gate must clear first)
+unit_eval (P07) --composes_into--> e2e_eval (individual stage tests feed pipeline test)
+workflow (P12) --tested_by--> e2e_eval (e2e verifies the workflow's end-to-end correctness)
+e2e_eval --produces_for--> quality_gate (P11) (pass/fail result gates pipeline promotion)
+e2e_eval --produces_for--> benchmark (P07) (pipeline metrics aggregated from e2e runs)
+scoring_rubric (P07) --independent-- e2e_eval (rubric defines criteria; e2e applies verification)
+golden_test (P07) --independent-- e2e_eval (golden tests reference single artifacts, e2e tests pipelines)
 ```
 
-## Fractal Position
-Pillar: P07 (Evals — how to measure quality)
-Function: GOVERN
-Scale: L0 (governance artifact)
-e2e_eval is the most comprehensive eval in P07 — tests complete pipeline integration.
+| From | To | Type | Data |
+|------|----|------|------|
+| smoke_eval | e2e_eval | depends | smoke pass is prerequisite |
+| unit_eval | e2e_eval | data_flow | per-stage assertions reuse unit test patterns |
+| workflow | e2e_eval | data_flow | pipeline definition drives stage structure |
+| e2e_eval | quality_gate | produces | pass/fail verdict for pipeline promotion |
+| e2e_eval | benchmark | produces | latency, cost, and accuracy metrics per run |
+
+## Boundary Table
+
+| e2e_eval IS | e2e_eval IS NOT |
+|-------------|-----------------|
+| An integration test: verifies the full pipeline from input to final output | A unit_eval — unit_eval tests a single agent in isolation |
+| Tests multiple agents and tools interacting in sequence | A smoke_eval — smoke_eval does a quick sanity check in under 30 seconds |
+| Includes intermediate assertions at each stage boundary | A benchmark — benchmark measures latency and cost, not pipeline correctness |
+| Requires data fixtures and environment setup before running | A golden_test — golden_test is a quality reference for a single artifact |
+| Produces a pass/fail verdict consumed by quality_gate | A scoring_rubric — rubric defines evaluation criteria, not the test execution |
+| Defines cleanup to restore system state after the run | A workflow — workflow defines and executes the pipeline; e2e_eval tests it |
+| Has an explicit timeout bounding the full run | A dag — dag models dependency structure, not test verification |
+
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Prerequisites | smoke_eval, unit_eval | Must pass before e2e_eval is meaningful to run |
+| Setup | data_fixtures, environment, pipeline_under_test | Prepare inputs, mocks, and runtime context |
+| Execution | stages, timeout | Run each pipeline step in order within time bound |
+| Verification | intermediate_assertions, expected_output, pass_criteria | Assert correctness at each stage and at final output |
+| Teardown | cleanup | Restore system state after the run completes |
+| Output | quality_gate, benchmark | Deliver pass/fail verdict and performance metrics downstream |

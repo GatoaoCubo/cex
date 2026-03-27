@@ -1,75 +1,65 @@
 ---
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Boundary and position of bugloop in the CEX fractal
+purpose: Component map of bugloop — inventory, dependencies, and architectural position
 ---
 
-# Architecture: bugloop in the CEX
+## Component Inventory
 
-## Boundary
-bugloop EH: ciclo automatico de correcao (detect > fix > verify) para classes de falha CONHECIDAS.
-bugloop NAO EH:
-
-| Confusao | Por que NAO | Type correto |
-|----------|-------------|-------------|
-| quality_gate | quality_gate BLOQUEIA com pass/fail score. bugloop CORRIGE pos-falha. | P11 quality_gate |
-| lifecycle_rule | lifecycle_rule define freshness/archive/promote. bugloop reage a falhas, nao a idade. | P11 lifecycle_rule |
-| guardrail | guardrail PREVINE acoes inseguras antes de executar. bugloop CORRIGE apos falha ocorrer. | P11 guardrail |
-| optimizer | optimizer MELHORA metricas continuamente sem falha como trigger. bugloop reage a regressoes. | P11 optimizer |
-| validator | validator IMPLEMENTA o check em codigo (P06). bugloop DEFINE o ciclo de correcao (P11). | P06 validator |
-| unit_eval | unit_eval avalia manualmente qualidade (P07). bugloop nao testa manualmente. | P07 unit_eval |
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| detect | Trigger evaluation — pattern matching against failure signals | bugloop | required |
+| fix | Correction strategy — applies remediation up to max_attempts | bugloop | required |
+| verify | Assertion suite — confirms fix success within timeout | bugloop | required |
+| escalation | Threshold + target for unresolved failures | bugloop | required |
+| rollback_policy | Revert strategy when all fix attempts fail | bugloop | optional |
+| cycle_counter | Tracks current attempt number against max | bugloop | runtime |
+| test_suite | External golden tests consumed by verify phase | P07 | external |
+| quality_gate | External pass/fail barrier that feeds detect trigger | P11 | external |
+| validator | Implements the concrete detection check logic | P06 | external |
 
 ## Dependency Graph
+
 ```
-bugloop --uses_signal_from--> validator (P06 implements detect.pattern check)
-bugloop --verifies_via--> test_suite (P07 golden_tests define assertions)
-bugloop --triggers_on_fail--> quality_gate (P11 gate failure feeds bugloop)
-bugloop --escalates_to--> signal_bus / human_operator
-bugloop --may_rollback_via--> lifecycle_rule (P11 rollback strategy alignment)
-bugloop --independent--> optimizer, guardrail
+quality_gate    --signals-->  detect
+validator       --signals-->  detect
+detect          --produces--> fix
+fix             --produces--> verify
+verify          --produces--> cycle_counter
+cycle_counter   --signals-->  escalation
+fix             --depends-->  test_suite
+verify          --depends-->  test_suite
+escalation      --produces--> rollback_policy
 ```
 
-## Fractal Position
-Pillar: P11 (Feedback)
-Function: GOVERN
-Scale: L0 (governance artifact — defines policy, not implementation)
-Layer: governance
+| From | To | Type | Data |
+|------|----|------|------|
+| quality_gate | detect | signals | failure event with error class |
+| validator | detect | signals | pattern match result (bool) |
+| detect | fix | produces | matched failure class + context |
+| fix | verify | produces | remediation result + attempt number |
+| verify | cycle_counter | produces | pass/fail assertion result |
+| cycle_counter | escalation | signals | attempt_count >= threshold |
+| fix | test_suite | depends | test run request |
+| verify | test_suite | depends | assertion evaluation |
+| escalation | rollback_policy | produces | escalation target + revert trigger |
 
-## Cycle Flow
-```
-[TRIGGER: detect.trigger fires]
-        |
-        v
-[MATCH: detect.pattern? YES/NO]
-        |
-       YES
-        |
-        v
-[FIX: fix.strategy, attempt 1..max_attempts]
-        |
-        +--[verify: run test_suite, check assertions, within timeout]
-        |           |
-        |         PASS --> [done, cycle ends]
-        |         FAIL --> [increment cycle]
-        |
-        +--[cycle >= escalation.threshold] --> [ESCALATE to escalation.target]
-        |
-        +--[cycle >= cycle_count] --> [ESCALATE + optional ROLLBACK]
-```
+## Boundary Table
 
-## Layer Contract
-bugloop is a GOVERNANCE artifact:
-- It defines WHAT the cycle does (policy)
-- It does NOT implement the detection check (validator P06)
-- It does NOT implement the fix code (executor agent)
-- It does NOT define evaluation criteria (scoring_rubric P07)
+| bugloop IS | bugloop IS NOT |
+|------------|----------------|
+| Automated detect-fix-verify correction cycle | A pass/fail quality barrier (that is quality_gate) |
+| Triggered by known failure classes | Triggered by metric drift (that is optimizer) |
+| Bounded by max_attempts and timeout | A safety pre-check before execution (that is guardrail) |
+| Defines escalation path when retries exhaust | A freshness or archive policy (that is lifecycle_rule) |
+| Produces rollback on terminal failure | The implementation of the detection check (that is validator) |
+| Reactive — responds to failure events | Proactive — continuously improving without failure trigger |
 
-## P11 Pillar Map
-```
-P11 (Feedback)
- ├── quality_gate    — pass/fail barrier (threshold + score)
- ├── bugloop         --> THIS — detect > fix > verify cycle
- ├── lifecycle_rule  — freshness, archive, promote rules
- ├── guardrail       — safety boundary (prevent unsafe actions)
- └── optimizer       — continuous metric improvement
-```
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|-----------|---------|
+| trigger | detect, quality_gate (external), validator (external) | Identify that a known failure class has occurred |
+| correction | fix, cycle_counter | Apply remediation strategy up to max_attempts |
+| verification | verify, test_suite (external) | Confirm fix resolved the failure within timeout |
+| governance | escalation, rollback_policy | Handle exhausted retries — escalate and/or revert |

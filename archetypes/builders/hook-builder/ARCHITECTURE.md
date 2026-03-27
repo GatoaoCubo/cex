@@ -1,61 +1,57 @@
 ---
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Boundary, relationships, and position of hook in the CEX fractal
-pattern: every builder must know WHERE its output fits and what it CONNECTS to
+purpose: Component map of hook — inventory, dependencies, and architectural position
 ---
 
-# Architecture: hook in the CEX
+## Component Inventory
 
-## Boundary
-hook EH: interceptor de evento runtime — codigo executavel que dispara antes ou depois de um
-evento do sistema (tool use, session start, prompt submit, stop). O hook INTERCEPTA eventos
-pontuais e executa side effects (logging, metrics, validation, context injection).
-
-hook NAO EH:
-
-| Confusao | Por que NAO | Tipo correto |
-|----------|-------------|-------------|
-| lifecycle_rule | lifecycle_rule DECLARA politicas (archive after 90d); hook EXECUTA codigo em evento | P11 lifecycle_rule |
-| daemon | daemon RODA continuamente em background; hook DISPARA uma vez por evento | P04 daemon |
-| plugin | plugin EXTENDE o sistema com API completa; hook INTERCEPTA um evento especifico | P04 plugin |
-| skill | skill tem FASES estruturadas e workflow; hook eh acao unica em evento | P04 skill |
-| signal | signal REPORTA o que aconteceu; hook REAGE a eventos | P12 signal |
-| mcp_server | mcp_server EXPOE tools e resources; hook CONSOME eventos internos | P04 mcp_server |
-| connector | connector CONECTA a servico externo; hook INTERCEPTA eventos internos | P04 connector |
-| cli_tool | cli_tool eh INVOCADO pelo user; hook DISPARA automaticamente em evento | P04 cli_tool |
-| scraper | scraper COLETA dados da web; hook PROCESSA eventos locais | P04 scraper |
-| client | client CONSOME API externa; hook INTERCEPTA eventos internos | P04 client |
-| component | component eh BLOCO composavel de pipeline; hook INTERCEPTA eventos pontuais | P04 component |
-
-Regra: "o que deve acontecer antes/depois deste evento?" -> hook.
-
-## Position in Runtime Flow
-
-```text
-event emitted --> conditions check --> hook (P04) --> side effect
-                                          |
-                                    [pre/post/both]
-                                          |
-                              signal (P12) <-- hook may emit signal
-```
-
-hook is the EVENT INTERCEPTION LAYER — sits between event emission and downstream
-processing, executing side effects without modifying the core event flow.
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| trigger_config | Event type and timing (pre/post/both) that fires the hook | author | required |
+| script_path | Executable script invoked when trigger fires | author | required |
+| conditions | Boolean predicates that must pass before execution | author | optional |
+| timeout_ms | Maximum allowed execution time before abort | author | required |
+| blocking | Whether hook blocks the main event flow until completion | author | required |
+| error_strategy | Behavior on failure: abort, warn, or ignore | author | required |
+| env_injection | Environment variables passed into the hook script | author | optional |
+| async_flag | Whether hook runs in background without blocking | author | optional |
 
 ## Dependency Graph
 
-```text
-hook <--triggered_by-- agent (P02) (events during execution)
-hook <--triggered_by-- workflow (P12) (lifecycle events)
-hook <--triggered_by-- spawn_config (P12) (session events)
-hook --may_emit--> signal (P12) (report hook execution result)
-hook --may_call--> cli_tool (P04) (execute external tool)
-hook --independent-- parser, formatter, knowledge_card, model_card
+```
+agent         --triggers--> hook
+workflow      --triggers--> hook
+spawn_config  --triggers--> hook
+hook          --may_emit--> signal
+hook          --may_call--> cli_tool
 ```
 
-## Fractal Position
-Pillar: P04 (Tools — WHAT the agent USES)
-Function: INTERCEPT (react to system events with side effects)
-Layer: runtime (executes per-event, stateless reaction)
-Scale: L0 (infrastructure — every event-driven system needs hooks)
+| From | To | Type | Data |
+|------|----|------|------|
+| agent | hook | data_flow | event type, tool name, session context |
+| workflow | hook | data_flow | lifecycle event, step transition |
+| spawn_config | hook | data_flow | session start/stop event |
+| hook | signal | data_flow | execution result, status, metrics |
+| hook | cli_tool | data_flow | invocation args, environment vars |
+
+## Boundary Table
+
+| hook IS | hook IS NOT |
+|---------|-------------|
+| Single-event interceptor with side effects | Policy declaration for long-term lifecycle |
+| Fires once per event occurrence | Continuously running background process |
+| Stateless reaction to a named event | Full system extension with its own API |
+| Can be pre, post, or both for one event type | Structured workflow with named phases |
+| Executes external script or command | Agent identity or behavioral definition |
+| Optionally blocking or async | Data connector to external services |
+
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Event binding | trigger_config, conditions | Define when the hook activates |
+| Execution | script_path, timeout_ms, async_flag | Control how the hook runs |
+| Safety | blocking, error_strategy | Govern impact on the main event flow |
+| Context | env_injection | Supply runtime data to hook scripts |
+| Reporting | signal | Communicate hook outcome downstream |

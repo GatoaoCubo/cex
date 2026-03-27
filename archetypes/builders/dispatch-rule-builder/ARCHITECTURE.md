@@ -1,81 +1,65 @@
 ---
 pillar: P08
-llm_function: CONSTRAIN
-purpose: Boundary, relationships, and position of dispatch_rule in the CEX fractal
-pattern: every builder must know where its output fits and what it connects to
+llm_function: REASON
+purpose: Component map of dispatch_rule — inventory, dependencies, and architectural position
 ---
 
-# Architecture: dispatch_rule in the CEX
+## Component Inventory
 
-## Boundary
-`dispatch_rule` EH: politica de roteamento que mapeia keywords/scope para um
-satellite especifico, com fallback, priority e confidence_threshold. Decide
-QUEM recebe um tipo de tarefa antes da execucao comecar.
-
-`dispatch_rule` NAO EH:
-
-| Confusao | Por que NAO | Type correto |
-|----------|-------------|--------------|
-| handoff | handoff instrui trabalho: contexto completo, tarefas, scope fence, commit | P12 handoff |
-| signal | signal reporta o que acabou de acontecer: status + quality + timestamp | P12 signal |
-| workflow | workflow organiza passos sequenciais/paralelos com dependencias | P12 workflow |
-| dag | dag modela grafo aciclico de dependencias entre tasks | P12 dag |
-| spawn_config | spawn_config configura como lanccar satellites (modo, slots, timeout) | P12 spawn_config |
-| crew | crew define grupo multi-agente com protocolo de coordenacao | P12 crew |
-| router (P02) | router P02 faz roteamento complexo task>model multi-step com context | P02 router |
-
-Regra:
-- "quem deve receber este tipo de tarefa?" -> `dispatch_rule`
-- "o que o agente deve fazer?" -> `handoff`
-- "o que aconteceu?" -> `signal`
-- "quais passos executar em sequencia?" -> `workflow`
-- "como lancar N satellites?" -> `spawn_config`
-
-## Position in Runtime Flow
-
-```text
-[input/task] -> dispatch_rule selects satellite -> handoff instructs satellite
-             -> satellite executes -> signal reports -> monitor/next dispatch
-```
-
-`dispatch_rule` sits at the entry point of orchestration, before any work begins.
-It is routing policy, not execution context.
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| scope | Domain identifier this rule covers: string key (e.g. `research`, `build`) | dispatch-rule-builder | required |
+| keywords | List of trigger terms (PT and EN) that activate this rule | dispatch-rule-builder | required |
+| target_satellite | Which execution target receives matched tasks | dispatch-rule-builder | required |
+| model | LLM model assigned to the target satellite | dispatch-rule-builder | required |
+| priority | Integer rank for conflict resolution when multiple rules match | dispatch-rule-builder | required |
+| confidence_threshold | Minimum match confidence to fire this rule (0.0–1.0) | dispatch-rule-builder | required |
+| fallback_satellite | Backup target when primary satellite is unavailable | dispatch-rule-builder | required |
+| conditions | Optional AND-gated conditions beyond keyword match | dispatch-rule-builder | optional |
+| routing_strategy | Match algorithm: keyword_match, semantic, regex | dispatch-rule-builder | optional |
+| metadata | Rule id, version, author, pillar, created date | dispatch-rule-builder | required |
 
 ## Dependency Graph
 
-```text
-dispatch_rule --> consumed_by --> orchestrator (STELLA, spawn_grid)
-dispatch_rule --> consumed_by --> spawn_solo routing layer
-dispatch_rule --> consumed_by --> auto-orchestrator wave queue
-
-dispatch_rule --> precedes --> handoff (rule selects; handoff instructs)
-dispatch_rule --> precedes --> spawn_config (rule selects; config launches)
-dispatch_rule --> informed_by --> signal (completion signals may update priority)
-
-dispatch_rule --independent-- workflow authoring
-dispatch_rule --independent-- dag structure definition
-dispatch_rule --independent-- crew protocol definition
-dispatch_rule --independent-- knowledge_card, system_prompt, validator
+```
+task_input --triggers--> dispatch_rule (keywords in input matched against rule)
+dispatch_rule --selects--> target_satellite (routes task to correct executor)
+dispatch_rule --precedes--> handoff (P12) (rule selects who; handoff instructs what)
+dispatch_rule --precedes--> spawn_config (P12) (rule selects; config defines launch params)
+signal (P12) --informs--> dispatch_rule (completion signals may update priority weights)
+orchestrator --consumes--> dispatch_rule (STELLA, spawn_grid read rules at routing time)
+router (P02) --independent-- dispatch_rule (P02 router does multi-step model routing, DR does satellite routing)
+workflow (P12) --independent-- dispatch_rule (workflow sequences steps, DR routes incoming tasks)
 ```
 
-## Fractal Position
-Pillar: P12 (Orchestration — "how coordination happens")
-Function: REASON
-Scale: L0 routing policy record
-Lightest routing artifact in P12: smaller than workflow, simpler than crew,
-more specific than spawn_config.
+| From | To | Type | Data |
+|------|----|------|------|
+| task_input | dispatch_rule | data_flow | raw task text matched against keywords/conditions |
+| dispatch_rule | target_satellite | data_flow | routing decision: which satellite + model |
+| dispatch_rule | handoff | produces | selected satellite receives handoff instructions |
+| dispatch_rule | spawn_config | produces | launch parameters for selected satellite |
+| signal | dispatch_rule | signals | completion feedback may influence priority |
+| orchestrator | dispatch_rule | consumes | reads rules to route incoming work |
 
-## Relationship to STELLA Routing Table
-STELLA_RULES.md contains an inline routing table (keywords -> satellite).
-`dispatch_rule` artifacts are the formalized, versioned, machine-readable
-equivalent of those inline table rows. They extend STELLA routing with:
-- explicit priority ordering for conflict resolution
-- confidence_threshold for ambiguous matches
-- fallback satellite for availability failures
-- optional routing_strategy for semantic matching
-- conditions for AND-gating beyond keyword match
+## Boundary Table
 
-## Scaling Pattern
-Single scope -> single `dispatch_rule` file.
-Full system coverage -> one file per domain scope in `P12_orchestration/compiled/`.
-Conflict resolution: higher `priority` wins when two rules match same input.
+| dispatch_rule IS | dispatch_rule IS NOT |
+|-----------------|----------------------|
+| A routing policy: maps task keywords to execution targets | A handoff — handoff provides full task context and instructions |
+| Decides WHO receives a task before execution begins | A signal — signal reports what just happened at runtime |
+| A static, versioned, machine-readable policy record | A workflow — workflow sequences steps with dependencies |
+| Includes priority for conflict resolution between rules | A dag — dag models dependency structure between tasks |
+| Includes fallback for satellite unavailability | A spawn_config — spawn_config configures how processes are launched |
+| Supports confidence_threshold for ambiguous matches | A crew — crew defines multi-agent coordination protocols |
+| Covers one domain scope per file | A router (P02) — P02 router does complex task-to-model routing with context |
+
+## Layer Map
+
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Match | keywords, conditions, routing_strategy | Define what triggers this rule to activate |
+| Decision | scope, target_satellite, model, priority | Specify who receives the task and with what model |
+| Resilience | confidence_threshold, fallback_satellite | Handle low-confidence matches and unavailable targets |
+| Identity | metadata | Record rule id, version, authoring context |
+| Downstream | handoff, spawn_config | Artifacts produced once routing decision is made |
+| Feedback | signal | Runtime completions that may inform priority tuning |
