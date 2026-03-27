@@ -1,57 +1,65 @@
 ---
 pillar: P01
 llm_function: INJECT
-purpose: Standards and domain knowledge for boot_config production
-sources: CEX schema, provider documentation, runtime configuration patterns
+purpose: Domain knowledge for boot_config production — agent initialization per provider
+sources: Claude Code CLI, Cursor rules, Codex runtime, Kubernetes container spec patterns
 ---
 
 # Domain Knowledge: boot_config
 
-## Foundational Concept
-A boot_config defines how an AI agent initializes on a specific provider runtime.
-It captures the provider-specific parameters (model, flags, MCP servers, permissions)
-that transform a generic agent definition into an executable instance. Analogous to
-Dockerfile CMD/ENTRYPOINT or Kubernetes container spec — the bridge between
-"what the agent is" (agent P02) and "how it runs" (spawn_config P12).
+## Executive Summary
 
-## Industry Implementations
+Boot configs define how an agent initializes on a specific provider runtime (Claude Code, Cursor, Codex). They bridge "what the agent is" (identity) with "how it runs" (constraints, flags, MCP servers, permissions). Analogous to Dockerfile CMD/ENTRYPOINT or Kubernetes container spec. One agent may have multiple boot configs — one per target provider.
 
-| Source | What it defines | CEX alignment |
-|--------|----------------|---------------|
+## Spec Table
+
+| Property | Value |
+|----------|-------|
+| Pillar | P02 (identity/model) |
+| Frontmatter fields | 15 required + 7 recommended |
+| Quality gates | 9 HARD + 10 SOFT |
+| Key sections | identity_block, constraints, tools, permissions, mcp_config |
+| Constraint types | max_tokens, context_window, timeout_ms, max_retries |
+| Providers | claude, cursor, codex, openai-assistants |
+
+## Patterns
+
+- **Provider isolation**: one boot_config per provider — never combine multiple providers in a single config
+- **Identity inheritance**: identity block references the canonical agent definition, not duplicates it
+- **Constraint rationalization**: every limit documents WHY it is set — "timeout: 120s because P95 task < 90s"
+- **Tool scoping**: only tools available on the target provider runtime — over-listing causes boot errors
+- **Flag minimalism**: only flags necessary for correct operation — no defensive extras
+
+| Source | Concept | Application |
+|--------|---------|-------------|
 | Dockerfile CMD | Container entrypoint and args | flags + model + temperature |
 | K8s container spec | Resources, env, command | constraints + tools + permissions |
-| VS Code settings.json | Editor-specific config per extension | Provider-specific tool config |
-| Claude .mcp.json | MCP server definitions per workspace | mcp_config object |
+| Claude .mcp.json | MCP server definitions | mcp_config object |
 | Cursor .cursorrules | AI assistant behavior rules | identity + constraints |
 
-## Key Patterns
-- Provider isolation: one boot_config per provider — never combine providers
-- Identity inheritance: identity block references the canonical agent definition
-- Constraints rationalization: every limit has a documented reason (cost, safety, performance)
-- Tool scoping: only tools available on the target provider runtime
-- Flag minimalism: only flags necessary for correct operation — no defensive extras
-- Temperature tuning: provider-specific defaults (creative tasks higher, code tasks lower)
-- MCP conditional: mark MCP tools as conditional when not all providers support them
+## Anti-Patterns
 
-## CEX-Specific Extensions
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| Provider-agnostic config | Runtimes have different capabilities; one-size breaks |
+| Hardcoded absolute paths | Not portable across machines or environments |
+| Missing timeout | Agent hangs indefinitely on slow provider |
+| Over-permissioned tools | Security risk; agent accesses tools it never uses |
+| No MCP specification | Agent boots without required integrations |
+| Unrationalized constraints | Arbitrary limits nobody understands or maintains |
 
-| Field | Justification | Closest equivalent |
-|-------|--------------|-------------------|
-| identity.satellite | Links boot to satellite grid | No direct equivalent |
-| system_prompt_ref | Links to canonical system_prompt artifact | Claude system prompt |
-| mcp_config | Structured MCP server references | .mcp.json |
+## Application
 
-## Boundary vs Nearby Types
-
-| Type | What it is | Why it is NOT boot_config |
-|------|------------|--------------------------|
-| env_config (P09) | Generic environment variables | Platform-level, not provider-specific init |
-| spawn_config (P12) | Runtime spawn orchestration | How to spawn satellites, not how agent boots |
-| agent (P02) | Agent canonical definition | Who the agent IS, not how it starts |
-| model_card (P02) | LLM spec (pricing, context) | Model capabilities, not initialization params |
-| system_prompt (P03) | Agent persona and rules | How agent speaks, not how it initializes |
+1. Identify target provider and its runtime capabilities
+2. Define identity block: name, role, domain (reference canonical agent)
+3. Set constraints with rationale: tokens, context window, timeout, retries
+4. Configure MCP servers: which ones, permissions, load order
+5. Map CLI flags: translate constraints to provider-specific syntax
+6. Validate: config boots on target provider without errors
 
 ## References
-- CEX P02_model/_schema.yaml — canonical boot_config fields
-- Claude Code CLI: `claude --help` — flags and configuration
-- MCP specification — tool server configuration
+
+- Claude Code: CLI flags and configuration (`claude --help`)
+- Cursor: .cursorrules and AI configuration patterns
+- MCP specification: Model Context Protocol server configuration
+- Kubernetes: container spec and resource limits patterns

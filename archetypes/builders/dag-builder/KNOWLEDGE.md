@@ -1,66 +1,72 @@
 ---
 pillar: P01
 llm_function: INJECT
-purpose: Operational knowledge and patterns for dag production
-sources: P12 schema + graph theory + CODEXA orchestration patterns
+purpose: Domain knowledge for dag production — dependency graph specification
+sources: graph theory (Kahn 1962), Apache Airflow, Makefile dependencies, topological sort
 ---
 
 # Domain Knowledge: dag
 
-## Core Concept
-`dag` is the static dependency specification for a pipeline or mission.
-It answers: "What tasks exist, what depends on what, and what can run in parallel?"
+## Executive Summary
 
-DAGs are blueprints, not executors.
-They are consumed by workflow engines, orchestrators, and spawn planners.
+DAGs (Directed Acyclic Graphs) are static dependency specifications defining task order and parallelism. They answer "what depends on what?" and "what can run in parallel?" DAGs are blueprints consumed by orchestrators — they do not execute tasks themselves. They differ from workflows (runtime execution), component maps (structural inventory), and chains (prompt pipelines).
 
-## Minimum Semantic Contract
-Every valid dag carries:
-- `pipeline`: what mission this graph describes
-- `nodes`: list of tasks with id, label, and optional satellite
-- `edges`: directed dependency relationships between nodes
+## Spec Table
 
-Plus standard CEX fields: id, kind, lp, version, dates, author, quality, tags, tldr.
+| Property | Value |
+|----------|-------|
+| Pillar | P12 (orchestration) |
+| llm_function | PRODUCE |
+| Max size | 3072 bytes |
+| Core elements | nodes (tasks), edges (dependencies) |
+| Key constraint | MUST be acyclic — cycles are validation failure |
+| Naming | p12_dag_{pipeline}.yaml |
+| Execution order | Derived via topological sort into waves |
 
-## Graph Properties
+## Patterns
+
+- **Graph properties**: every valid DAG must satisfy these constraints
+
 | Property | Requirement |
 |----------|-------------|
-| Acyclicity | MUST be acyclic — cycles are validation failure |
+| Acyclicity | No cycles — A→B→C→A is invalid |
 | Direction | Edges point from dependency to dependent |
-| Entry points | Nodes with no incoming edges start first |
-| Terminal points | Nodes with no outgoing edges are endpoints |
-| Parallelism | Nodes in the same wave with no mutual edges run in parallel |
+| Entry points | Nodes with zero incoming edges start first |
+| Terminal points | Nodes with zero outgoing edges are endpoints |
+| Parallelism | Independent nodes in same wave run concurrently |
 
-## Execution Order Derivation
-Topological sort groups nodes into waves:
-- Wave 1: nodes with no incoming edges (entry points)
-- Wave 2: nodes whose dependencies are all in Wave 1
-- Wave N: nodes whose dependencies are all in Waves 1..N-1
+- **Topological sort into waves**: derive execution order automatically
+  - Wave 1: nodes with no incoming edges (entry points)
+  - Wave 2: nodes whose dependencies are all in Wave 1
+  - Wave N: nodes whose dependencies are all in Waves 1..N-1
 
-This is `execution_order` in the schema.
+- **Node specification**: each node carries id, label, and optional assignee
+- **Edge specification**: each edge carries source, target, and optional type (data, trigger, approval)
+- **Static blueprint**: DAGs define structure only — no actions, no error handling, no runtime state
 
-## Boundary vs Nearby Types
-| Type | What it is | Why it is not `dag` |
-|------|------------|---------------------|
-| workflow | executable step sequence with runtime logic | has actions, error handling, state |
-| component_map | inventory of system components | describes what exists, not dependencies |
-| chain | prompt sequence (text pipeline) | P03 domain, not orchestration |
-| spawn_config | satellite boot parameters | how to start, not what depends on what |
+## Anti-Patterns
 
-Rule of thumb:
-- "What depends on what?" -> `dag`
-- "How to execute step by step?" -> `workflow`
-- "What components exist?" -> `component_map`
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| Cycles (A→B→C→A) | Topological sort fails; infinite loop |
+| Runtime logic in DAG | DAGs are static; use workflow for conditionals |
+| Missing entry point | No node to start execution |
+| Disconnected subgraphs | Orphan nodes never execute |
+| Over-serialized (A→B→C→D→E all linear) | Misses parallelism opportunities |
+| Unlabeled edges | Ambiguous dependency type; cannot reason about data flow |
 
-## Naming Pattern
-P12 schema defines: `p12_dag_{{pipeline}}.yaml`
-Examples:
-- `p12_dag_content_pipeline.yaml`
-- `p12_dag_wave19_builders.yaml`
-- `p12_dag_deploy_sequence.yaml`
+## Application
 
-## Operational Constraints
-- Must stay under 3072 bytes
-- Should remain a static spec, not a runtime artifact
-- Should be easy to topologically sort programmatically
-- Must degrade gracefully when optional fields are absent
+1. List all tasks as nodes: id, label, optional assignee
+2. Define edges: source → target for each dependency
+3. Verify acyclicity: no cycles in the graph
+4. Derive waves: topological sort groups parallel-eligible nodes
+5. Identify entry and terminal points
+6. Validate: <= 3072 bytes, no cycles, no orphans, all nodes reachable
+
+## References
+
+- Kahn 1962: topological sorting algorithm for DAGs
+- Apache Airflow: DAG-based workflow orchestration
+- Make: dependency-based build system (Makefile rules)
+- Dagger.io: CI/CD pipelines as directed acyclic graphs

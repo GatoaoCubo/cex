@@ -1,56 +1,67 @@
 ---
 pillar: P01
 llm_function: INJECT
-purpose: Standards and domain knowledge for axiom production
-sources: formal logic, system design principles, CEX architecture
+purpose: Domain knowledge for axiom production — immutable fundamental rules
+sources: formal logic (Euclid), DDD invariants (Evans 2003), AWS tenets, 12-Factor principles
 ---
 
 # Domain Knowledge: axiom
 
-## Foundational Concept
-An axiom is a statement accepted as true without proof — a self-evident foundation.
-In formal systems (Euclid, Peano, ZFC), axioms are irreducible starting points.
-In software architecture, axioms are invariant rules that define system identity.
-If an axiom changes, the system it belongs to becomes a different system.
+## Executive Summary
 
-## Industry Implementations
+Axioms are immutable foundational truths that define system identity — if an axiom changes, the system becomes a different system. They use ALWAYS/NEVER/IF-THEN form with explicit condition, action, and consequence. Axioms differ from laws (operational, can evolve), guardrails (safety boundaries), and lifecycle rules (temporal state triggers).
 
-| Source | What it defines | CEX alignment |
-|--------|----------------|---------------|
-| Mathematical axioms (Euclid) | Self-evident truths in formal systems | Irreducibility: cannot derive from other rules |
-| DDD invariants (Evans 2003) | Business rules that must always hold | Scope: axiom bound to a domain |
-| 12-Factor App principles | Immutable infrastructure tenets | Enforcement: violations break the system |
-| AWS Architecture Tenets | Decisions constraining all choices | Priority: axioms outrank operational rules |
-| CEX Laws (P08) | Operational rules (can evolve) | Boundary: law changes, axiom never does |
+## Spec Table
 
-## Key Patterns
-- FALSIFIABLE: if you cannot detect a violation, it is not an axiom
-- IMMUTABLE: if it changes, it was a law or policy, not an axiom
-- ATOMIC: one truth per axiom, no conjunctions ("and", "or")
-- UNIVERSAL within scope: no exceptions within defined boundary
-- DECLARATIVE: states WHAT is true, not HOW to implement
-- FOUNDATIONAL: other rules derive from axioms, never the inverse
+| Property | Value |
+|----------|-------|
+| Pillar | P10 (memory/knowledge) |
+| Max size | 3072 bytes |
+| Density | >= 0.80 |
+| Frontmatter fields | 20 |
+| Quality gates | 8 HARD + 10 SOFT |
+| Required form | ALWAYS/NEVER/IF-THEN |
+| Key fields | enforcement, immutable, violations, priority |
 
-## CEX-Specific Extensions
+## Patterns
 
-| Field | Justification | Closest equivalent |
-|-------|--------------|-------------------|
-| enforcement | How to detect violations | DDD invariant check |
-| immutable | Boolean permanence flag | 12-Factor principle status |
-| violations | Known cases that broke axiom | Invariant test cases |
-| priority | Relative weight among axioms | Tenet ordering |
+- **Immutability test**: if a rule could change via config update or version bump, it is a law or policy — not an axiom
+- **ALWAYS/NEVER/IF-THEN form**: "NEVER delete production data without backup" not "be careful with deletions"
+- **Falsifiability**: every axiom must be testable — if you cannot write a check that detects violation, the axiom is too vague
+- **Atomicity**: one truth per axiom, no conjunctions — "X AND Y" should be two separate axioms
+- **Universality within scope**: axioms hold without exception within their defined domain boundary
+- **Foundation ordering**: other rules derive from axioms — axioms never derive from laws or guardrails
 
-## Boundary vs Nearby Types
+| Source | Concept | Application |
+|--------|---------|-------------|
+| Euclid's Elements | Self-evident irreducible truths | Axioms cannot be derived from other rules |
+| DDD invariants (Evans) | Business rules that must always hold | Axioms are domain-scoped invariants |
+| 12-Factor principles | Immutable infrastructure tenets | Violations break the system |
+| AWS tenets | Decisions constraining all choices | Axioms outrank operational rules |
 
-| Type | What it is | Why it is NOT axiom |
-|------|------------|---------------------|
-| law (P08) | Operational rule | Laws evolve with system; axioms never change |
-| guardrail (P11) | Safety restriction | Guardrails restrict behavior; axioms define truth |
-| lifecycle_rule (P11) | Lifecycle policy | Lifecycle manages artifact state; axioms are permanent |
-| instruction (P03) | Executable steps | Instructions tell HOW; axioms state WHAT |
-| learning_record (P10) | Experience captured | Learning evolves; axioms are eternal |
+## Anti-Patterns
+
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| Vague rule ("be careful with data") | No threshold, no action, untestable |
+| Mutable axiom ("use model X") | Model choice changes; this is config |
+| No consequence stated | "NEVER do X" without "because Y" lacks enforcement rationale |
+| Compound axiom ("X and Y and Z") | Not atomic; split into independent axioms |
+| Subjective ("quality must be high") | No measurable threshold = not falsifiable |
+| Too many (>10 per domain) | Cognitive overload; some are likely laws in disguise |
+
+## Application
+
+1. Identify candidate: what rule NEVER changes in this domain?
+2. Immutability test: would this change with a version bump? If yes → law
+3. Write in ALWAYS/NEVER/IF-THEN form with explicit consequence
+4. Falsifiability check: can a script detect violation?
+5. Atomicity check: does it contain "and"/"or"? If yes → split
+6. Validate: <= 3072 bytes, density >= 0.80, form matches pattern
 
 ## References
-- Euclid's Elements — axiom as foundational truth
-- Domain-Driven Design (Evans 2003) — invariants and aggregates
-- AWS Well-Architected Tenets — immutable design decisions
+
+- Euclid's Elements: axiom as irreducible foundational truth
+- Evans 2003: Domain-Driven Design — invariants and aggregates
+- AWS Well-Architected: immutable architectural tenets
+- 12-Factor App: principles as system-defining constraints

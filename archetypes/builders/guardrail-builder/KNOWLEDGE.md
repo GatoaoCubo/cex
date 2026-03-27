@@ -1,50 +1,75 @@
 ---
 pillar: P01
 llm_function: INJECT
-purpose: Standards and patterns for guardrail production
-sources: [NIST AI RMF, OWASP LLM Top 10, Anthropic Usage Policy, CEX Laws]
+purpose: Domain knowledge for guardrail production — safety boundary specification
+sources: NIST AI RMF, OWASP LLM Top 10, Anthropic Usage Policy, AWS Bedrock Guardrails
 ---
 
 # Domain Knowledge: guardrail
 
-## Foundational Concepts
-Guardrails originate from safety engineering (physical barriers preventing harm).
-In AI: constraints on model behavior to prevent harmful outputs or actions.
-In CEX: declarative restrictions applied externally to agents and artifacts to prevent damage.
+## Executive Summary
 
-## Industry Patterns
-| Source | What it defines | CEX alignment |
-|--------|----------------|---------------|
-| NIST AI RMF | Risk management framework for AI systems | Severity classification + enforcement |
-| OWASP LLM Top 10 | Security risks for LLM applications | Specific violation categories |
-| Anthropic Usage Policy | Acceptable use constraints | Content and behavior boundaries |
-| AWS Bedrock Guardrails | Content filters, denied topics, word filters | Block/warn/log enforcement modes |
-| LangChain Guardrails | Input/output validation for LLM chains | Runtime constraint enforcement |
+Guardrails are external safety boundaries that prevent agents from causing damage. They define what must NEVER happen, with enforcement modes (block, warn, log) and severity levels. Guardrails are applied externally — agents cannot disable their own guardrails. They differ from permissions (access control), laws (operational rules), quality gates (scoring barriers), and lifecycle rules (temporal policies).
 
-## Key Principles
-- Guardrails PREVENT DAMAGE, not ensure quality (that is quality_gate)
-- Guardrails are EXTERNAL to the agent (agent cannot disable its own guardrails)
-- Severity determines response: critical=block, high=block+alert, medium=warn, low=log
-- Every guardrail needs a BYPASS for emergencies (with audit trail)
-- Rules must be CONCRETE and ENFORCEABLE (no "be responsible")
-- Violation examples must be SPECIFIC (not "bad things")
+## Spec Table
 
-## CEX-Specific Extensions
-| Field | Justification | Closest equivalent |
-|-------|--------------|-------------------|
-| scope | What the guardrail protects (agent, pipeline, output) | NIST: system boundary |
-| enforcement | How violation is handled (block/warn/log) | AWS Bedrock: filter action |
-| severity | Impact classification (critical/high/medium/low) | NIST: risk level |
+| Property | Value |
+|----------|-------|
+| Pillar | P11 (governance/safety) |
+| Enforcement modes | block, warn, log |
+| Severity levels | critical, high, medium, low |
+| Key fields | scope, rules, severity, enforcement, bypass_policy |
+| Required | Concrete violation examples |
+| Emergency bypass | Allowed with audit trail |
 
-## Boundary vs Nearby Types
-| Type | What it does | NOT this |
-|------|-------------|----------|
-| permission (P09) | Controls WHO can ACCESS what (read/write/execute) | Does NOT prevent harmful behavior |
-| law (P08) | Defines OPERATIONAL rules (inviolable, architectural) | Does NOT constrain agent safety |
-| quality_gate (P11) | Ensures QUALITY with scoring (pass/fail) | Does NOT prevent damage |
-| lifecycle_rule (P11) | Manages FRESHNESS and archival (time-based) | Does NOT enforce safety |
+## Patterns
+
+- **Severity determines response**: enforcement escalates with severity
+
+| Severity | Enforcement | Response |
+|----------|-------------|----------|
+| critical | block + alert | Immediate halt, notify operator |
+| high | block | Prevent action, log violation |
+| medium | warn | Allow with warning, log |
+| low | log | Record only, no interruption |
+
+- **External application**: guardrails are imposed ON agents, not BY agents — prevents self-disabling
+
+| Source | Concept | Application |
+|--------|---------|-------------|
+| NIST AI RMF | Risk management framework | Severity classification |
+| OWASP LLM Top 10 | LLM security risks | Violation categories |
+| Anthropic Usage Policy | Acceptable use constraints | Content boundaries |
+| AWS Bedrock | Content filters, denied topics | Block/warn/log modes |
+
+- **Concrete rules**: "NEVER execute rm -rf on production paths" not "be careful with deletions"
+- **Specific violation examples**: each rule includes 2+ concrete violations that would trigger it
+- **Emergency bypass**: every guardrail has a documented bypass procedure with mandatory audit trail
+- **Scope declaration**: each guardrail declares what it protects (agent, pipeline, output, or system)
+
+## Anti-Patterns
+
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| Vague rule ("be responsible") | Not enforceable; no clear trigger |
+| No violation examples | Cannot test enforcement; ambiguous scope |
+| No bypass procedure | Emergencies blocked with no recovery path |
+| Agent self-managed guardrails | Agent disables own safety; defeats purpose |
+| critical severity with log-only | Critical violations logged but not blocked |
+| No severity classification | All violations treated equally; alert fatigue |
+
+## Application
+
+1. Identify risk: what damage could this agent/pipeline cause?
+2. Write concrete rules: specific, enforceable, with measurable triggers
+3. Classify severity: critical, high, medium, or low per rule
+4. Set enforcement: block/warn/log matching severity
+5. Document violation examples: 2+ concrete cases per rule
+6. Define bypass: emergency procedure with audit trail
 
 ## References
-- NIST AI Risk Management Framework: https://www.nist.gov/artificial-intelligence/ai-risk-management-framework
-- OWASP LLM Top 10: https://owasp.org/www-project-top-10-for-large-language-model-applications/
-- AWS Bedrock Guardrails: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html
+
+- NIST AI RMF: AI Risk Management Framework
+- OWASP: Top 10 for Large Language Model Applications
+- AWS Bedrock: Guardrails configuration and content filtering
+- Anthropic: Usage Policy and safety boundaries

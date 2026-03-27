@@ -1,58 +1,66 @@
 ---
 pillar: P01
 llm_function: INJECT
-purpose: Standards and domain knowledge for glossary_entry production
-sources: [IEEE glossary standards, ISO 1087 terminology, CEX knowledge layer]
+purpose: Domain knowledge for glossary_entry production — concise term definitions
+sources: ISO 1087 terminology, IEEE glossary standards, technical writing best practices
 ---
 
 # Domain Knowledge: glossary_entry
 
-## Foundational Concept
-Glossary entries are concise, authoritative term definitions: one term, one definition,
-maximum clarity. Rooted in ISO 1087 (Terminology), IEEE glossary standards, and
-technical writing best practices. In CEX, glossary_entries sit in the content layer
-of P01 — they define terms, not deep knowledge or operational context.
+## Executive Summary
 
-## Industry Implementations
+Glossary entries are concise, authoritative term definitions: one term, one definition, maximum clarity. They follow ISO 1087 terminology science — each entry defines a single term with synonyms, abbreviations, disambiguation, and usage context. Glossary entries differ from knowledge cards (dense multi-fact research), context docs (domain background), and axioms (immutable rules).
 
-| Source | What it defines | CEX alignment |
-|--------|----------------|---------------|
-| ISO 1087 | Terminology science — term/concept/designation | term + definition + synonyms |
-| IEEE Glossary | Technical term standardization | Domain-specific term definitions |
-| W3C Glossary | Web standards terminology | Abbreviated definitions with cross-refs |
-| Wikipedia disambiguation | Multiple meanings of same term | disambiguation field |
-| API docs glossary | Developer-facing term reference | Usage context and abbreviations |
+## Spec Table
 
-## Key Patterns
-- Definitions are CONCISE: max 3 lines, no prose padding
-- Each entry defines ONE term (not a cluster of related concepts)
-- Synonyms are EXPLICIT: listed even if partial matches
-- Domain context is SCOPED: where and how the term is used
-- Disambiguation resolves CONFUSION: similar terms clarified
-- Entries are ATOMIC: self-contained, no external dependencies
-- Abbreviations are DOCUMENTED: full form and short form linked
-- Related terms are REFERENCED: cross-linking for navigation
+| Property | Value |
+|----------|-------|
+| Pillar | P01 (knowledge) |
+| Frontmatter fields | 15+ |
+| Quality gates | 7 HARD + 8 SOFT |
+| Max definition length | 3 lines |
+| Scope | One term per entry (atomic) |
+| Key fields | term, definition, synonyms, abbreviations, disambiguation |
 
-## CEX-Specific Extensions
+## Patterns
 
-| Field | Justification | Closest equivalent |
-|-------|--------------|-------------------|
-| domain_specific | CEX terms may differ from industry standard | W3C "context" |
-| disambiguation | Terms overlap across pillars/satellites | Wikipedia disambiguation |
-| related_terms | Cross-reference within CEX glossary | W3C "see also" |
-| usage | Where/how the term appears in practice | IEEE "usage notes" |
+- **Concise definitions**: max 3 lines — no prose padding, no extended explanation
+- **One term per entry**: atomic; never cluster related concepts in a single entry
+- **Explicit synonyms**: list all known alternatives, even partial matches
+- **Abbreviation linking**: full form and short form always cross-referenced
+- **Disambiguation**: clarify when similar terms exist — which meaning applies in this domain
+- **Usage context**: where and how the term appears in practice, not abstract definition only
 
-## Boundary vs Nearby Types
+| Source | Concept | Application |
+|--------|---------|-------------|
+| ISO 1087 | Term/concept/designation science | term + definition + synonyms |
+| IEEE Glossary | Technical term standardization | Domain-specific definitions |
+| W3C Glossary | Web standards terminology | Cross-references and abbreviations |
+| Wikipedia | Disambiguation pages | disambiguation field |
 
-| Type | What it is | Why it is NOT glossary_entry |
-|------|------------|----------------------------|
-| knowledge_card (P01) | Dense research fact (density >= 0.80) | KCs are deep; glossary is surface definition |
-| context_doc (P01) | Scoped domain context | Context docs provide background; glossary defines terms |
-| few_shot_example (P01) | Input/output pair for prompts | Examples demonstrate; glossary defines |
-| axiom (P10) | Immutable fundamental rule | Axioms govern; glossary informs |
-| naming_rule (P05) | Naming convention enforcement | Naming rules constrain; glossary explains |
+## Anti-Patterns
+
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| Multi-paragraph definition | Glossary is not a knowledge card; keep to 3 lines |
+| Multiple terms in one entry | Not atomic; split into separate entries |
+| Missing synonyms | Users search by different names; synonyms enable discovery |
+| No disambiguation | Confused with similar terms in other domains |
+| No usage context | Definition is abstract; readers don't know where it applies |
+| Abbreviation without expansion | Acronym soup; always link full and short forms |
+
+## Application
+
+1. Identify term: one specific term to define
+2. Write definition: max 3 lines, concrete, no padding
+3. List synonyms: all known alternatives including partial matches
+4. Document abbreviations: full form ↔ short form linkage
+5. Add disambiguation: clarify against similar terms
+6. Specify usage: where and how the term appears in practice
 
 ## References
-- ISO 1087:2019 — Terminology work — Vocabulary
-- IEEE Standard Glossary of Software Engineering Terminology
-- Plain Language Action and Information Network (PLAIN)
+
+- ISO 1087:2019: Terminology work — Vocabulary
+- IEEE: Standard Glossary of Software Engineering Terminology
+- PLAIN: Plain Language Action and Information Network guidelines
+- Technical writing: term definition and cross-referencing best practices

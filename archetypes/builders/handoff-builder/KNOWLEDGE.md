@@ -1,66 +1,75 @@
 ---
 pillar: P01
 llm_function: INJECT
-purpose: Operational knowledge and patterns for handoff production
-sources: P12 schema + CODEXA handoff patterns + STELLA dispatch
+purpose: Domain knowledge for handoff production — task delegation packaging
+sources: orchestration patterns, delegation protocols, mission briefing design
 ---
 
 # Domain Knowledge: handoff
 
-## Core Concept
-`handoff` is the central delegation artifact in P12 orchestration.
-It answers: "What should this satellite do, with what context, within what scope,
-and how should it commit and signal completion?"
+## Executive Summary
 
-Handoffs are instructions, not events or routing rules.
-They are consumed by satellite execution engines (STELLA dispatch).
+Handoffs are self-contained delegation packages that tell a satellite WHAT to do, with what context, within what scope, and how to commit and signal completion. They are instructions consumed by execution engines — not events (signals), not routing policies (dispatch rules), and not runtime orchestration (workflows). A handoff must be self-contained: the satellite needs no external context.
 
-## Minimum Semantic Contract
-Every valid handoff carries:
-- `satellite`: who executes
-- `mission`: what project or campaign
-- `autonomy`: how independently the satellite operates
-- `quality_target`: minimum acceptable quality score
+## Spec Table
 
-Plus 5 body sections: Context, Tasks, Scope Fence, Commit, Signal.
-Plus standard CEX fields: id, kind, lp, version, dates, author, quality, tags, tldr.
+| Property | Value |
+|----------|-------|
+| Pillar | P12 (orchestration) |
+| llm_function | COLLABORATE |
+| Max size | 4096 bytes |
+| Naming | p12_ho_{task}.md |
+| Required body sections | Context, Tasks, Scope Fence, Commit, Signal |
+| Autonomy levels | full, supervised, assisted |
+| Key fields | satellite, mission, autonomy, quality_target |
 
-## Autonomy Semantics
-| Level | Meaning | Satellite behavior |
-|-------|---------|-------------------|
-| full | Satellite decides all implementation details | Maximum independence |
-| supervised | Satellite executes but checks back on key decisions | Balanced guidance |
-| assisted | Satellite follows precise instructions with minimal deviation | Strict execution |
+## Patterns
 
-## Body Section Patterns
-- **Context**: 2-4 sentences explaining WHY this work is needed
-- **Tasks**: numbered steps, each starting with an action verb
-- **Scope Fence**: SOMENTE (allowed paths) + NAO TOQUE (forbidden paths)
-- **Commit**: exact `git add` + `git commit -m` commands
-- **Signal**: `signal_writer.write_signal()` call or file-based signal
+- **Autonomy levels**: define how independently the satellite operates
 
-## Boundary vs Nearby Types
-| Type | What it is | Why it is not `handoff` |
-|------|------------|------------------------|
-| action_prompt | conversational prompt with persona and format | prompt engineering, not delegation |
-| signal | atomic status event (complete/error/progress) | feedback, not instruction |
-| dispatch_rule | keyword-to-satellite routing policy | routing, not execution detail |
-| workflow | executable step graph with error handling | runtime engine, not one-shot brief |
+| Level | Behavior | Use case |
+|-------|----------|----------|
+| full | Satellite decides all implementation details | Trusted, well-defined tasks |
+| supervised | Checks back on key decisions | Complex tasks with trade-offs |
+| assisted | Follows precise instructions, minimal deviation | Critical or risky tasks |
 
-Rule of thumb:
-- "Do this work" -> `handoff`
-- "Work is done" -> `signal`
-- "Route this type of work to X" -> `dispatch_rule`
+- **Five body sections**: each serves a specific purpose
 
-## Naming Pattern
-P12 schema defines: `p12_ho_{task}.md`
-Examples:
-- `p12_ho_wave19_builders.md`
-- `p12_ho_competitor_research.md`
-- `p12_ho_deploy_api_v2.md`
+| Section | Content | Rule |
+|---------|---------|------|
+| Context | WHY this work is needed | 2-4 sentences, motivation only |
+| Tasks | WHAT to do | Numbered steps, action verbs |
+| Scope Fence | WHERE allowed/forbidden | SOMENTE + NAO TOQUE paths |
+| Commit | HOW to save work | Exact git add + commit commands |
+| Signal | HOW to report completion | Signal writer call or file |
 
-## Operational Constraints
-- Must stay under 4096 bytes
-- Should be self-contained: satellite needs no external context
-- Should be specific: no vague "do your best" instructions
-- Must include scope fence to prevent satellite from touching wrong files
+- **Self-contained**: satellite needs no external context — everything is in the handoff
+- **Scope fence**: explicitly lists allowed paths AND forbidden paths — prevents satellite from touching wrong files
+- **Action verb tasks**: every task starts with an action verb (create, read, validate, write)
+
+## Anti-Patterns
+
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| Vague tasks ("do your best") | Satellite has no clear objective |
+| Missing scope fence | Satellite modifies wrong files |
+| External context required | Satellite fails when context unavailable |
+| No commit section | Work done but not saved; lost on session end |
+| No signal section | Orchestrator cannot detect completion |
+| Over 4096 bytes | Too complex; split into multiple handoffs |
+
+## Application
+
+1. Define mission and satellite assignment
+2. Write context: 2-4 sentences on WHY this work is needed
+3. List tasks: numbered, action-verb-first, specific deliverables
+4. Set scope fence: SOMENTE (allowed) + NAO TOQUE (forbidden) paths
+5. Write commit: exact git commands for saving work
+6. Write signal: completion notification mechanism
+
+## References
+
+- Military briefing: OPORD (Operations Order) structure
+- Agile: user story + acceptance criteria delegation pattern
+- Orchestration: task delegation and completion signaling protocols
+- CI/CD: pipeline stage handoff and artifact passing

@@ -1,63 +1,67 @@
 ---
 pillar: P01
 llm_function: INJECT
-purpose: Standards and domain knowledge for benchmark production
-sources: [Google Benchmark, wrk2, MLPerf, LMSYS Chatbot Arena, CEX validate_kc.py]
+purpose: Domain knowledge for benchmark production — quantitative performance measurement
+sources: Jain 1991, MLPerf, wrk2, LMSYS Chatbot Arena, Anthropic model cards
 ---
 
 # Domain Knowledge: benchmark
 
-## Foundational Concepts
-Benchmarking originates from performance engineering (Jain 1991 "Art of Computer Systems Performance Analysis").
-In LLM systems: measuring latency (TTFT, TPS), cost (per 1M tokens), quality (judge scores), and throughput (req/s).
-In CEX: quantitative measurement with baselines, targets, percentiles, and reproducible methodology.
+## Executive Summary
 
-## Industry Patterns
-| Source | What it defines | CEX alignment |
-|--------|----------------|---------------|
-| Google Benchmark | C++ microbenchmark framework with warmup, iterations, statistics | Warmup + iterations + percentile pattern |
-| wrk2 / hey | HTTP load testing with latency histograms | Percentile reporting (p50, p95, p99) |
-| MLPerf | ML training/inference benchmarks with strict methodology | Environment specification, reproducibility |
-| LMSYS Chatbot Arena | LLM comparison via Elo rating | Comparison subjects, A/B methodology |
-| Anthropic Model Card | Latency, TPS, cost per model | Metric/unit/baseline pattern |
+Benchmarks measure quantitative performance (latency, cost, throughput, quality scores) under controlled, reproducible conditions. They require baselines, targets, warmup periods, and statistical rigor via percentiles. Benchmarks differ from scoring rubrics (qualitative criteria), unit evals (correctness assertions), and golden tests (reference examples).
 
-## Key Principles
-- Warmup is MANDATORY (JIT, caching, connection pools need pre-heating)
-- Percentiles over averages (p99 reveals tail latency that avg hides)
-- Environment MUST be documented (CPU, RAM, OS, network, config)
-- Baseline MUST be measured, not estimated
-- Iterations MUST be sufficient for statistical significance (>= 10, prefer >= 30)
-- Direction MUST be explicit (lower_is_better for latency, higher_is_better for throughput)
-- Comparison requires same environment, same methodology, same time window
-- Cold start vs warm: measure and report both
+## Spec Table
 
-## Common LLM Benchmark Metrics
-| Metric | Unit | Direction | Typical range |
-|--------|------|-----------|---------------|
-| TTFT (Time To First Token) | ms | lower_is_better | 200-2000ms |
-| TPS (Tokens Per Second) | tokens/s | higher_is_better | 30-150 |
-| Cost per 1M input tokens | USD | lower_is_better | $0.25-$15.00 |
-| Cost per 1M output tokens | USD | lower_is_better | $1.00-$75.00 |
-| Requests per second | req/s | higher_is_better | 10-1000 |
-| Context window utilization | % | higher_is_better | 50-100% |
+| Property | Value |
+|----------|-------|
+| Pillar | P07 (governance/evaluation) |
+| Frontmatter fields | 22 |
+| Quality gates | 10 HARD + 9 SOFT |
+| Statistical minimum | p50, p95, p99 percentiles |
+| Min iterations | >= 30 for statistical significance |
+| Warmup | 10-20% of total iterations discarded |
+| Required sections | methodology, environment, baseline, target, results |
 
-## CEX-Specific Extensions
-| Field | Justification | Closest equivalent |
-|-------|--------------|-------------------|
-| direction | Makes optimization goal explicit | wrk2: implicit from metric name |
-| comparison_subjects | Enables multi-model/multi-config comparison | MLPerf: submission categories |
-| percentiles as list | Flexible reporting granularity | wrk2: fixed p50/p75/p90/p99 |
+## Patterns
 
-## Boundary vs Nearby Types
-| Type | What it does | NOT this |
-|------|-------------|----------|
-| scoring_rubric (P07) | Defines multi-dimensional QUALITY criteria | Does NOT produce numbers |
-| unit_eval (P07) | Tests CORRECTNESS of specific behavior | Does NOT measure speed/cost |
-| golden_test (P07) | Provides REFERENCE example at 9.5+ | Does NOT provide metrics |
-| quality_gate (P11) | Enforces PASS/FAIL threshold | Does NOT run measurements |
+- **Baseline-target pair**: every benchmark defines current state (baseline) and goal (target) — without both, results are uninterpretable
+- **Percentile reporting**: report p50, p95, p99 — averages hide tail latency that degrades real user experience
+- **Warmup period**: discard first 10-20% of iterations for JIT, caching, and connection pool warming
+- **Environment documentation**: exact hardware, model version, concurrency, date — benchmarks compare only under identical conditions
+- **Cost normalization**: cost per 1K tokens or per request enables cross-model comparison
+
+| Metric | Unit | Direction | Range |
+|--------|------|-----------|-------|
+| TTFT | ms | lower_is_better | 200-2000 |
+| TPS | tokens/s | higher_is_better | 30-150 |
+| Input cost | USD/1M tokens | lower_is_better | $0.25-$15 |
+| Output cost | USD/1M tokens | lower_is_better | $1-$75 |
+| Throughput | req/s | higher_is_better | 10-1000 |
+
+## Anti-Patterns
+
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| Average-only reporting | Hides p99 tail; 50ms avg masks 2s spikes |
+| No warmup period | Cold-start skews results; baseline is wrong |
+| Missing environment spec | Not reproducible; "fast on my machine" |
+| No baseline defined | Cannot tell if results are good or bad |
+| One-run measurement | Statistical noise; need >= 30 iterations |
+| Mixed metrics (quality + speed) | Conflates dimensions; separate benchmarks |
+
+## Application
+
+1. Define metric: what exactly is measured (latency, cost, throughput)?
+2. Document environment: hardware, model, concurrency, date
+3. Establish baseline: current performance under standard load
+4. Set target: desired performance with justification
+5. Run: discard warmup (10-20%), collect >= 30 iterations
+6. Report: p50, p95, p99 with confidence intervals
 
 ## References
+
 - Jain 1991: The Art of Computer Systems Performance Analysis
-- wrk2: https://github.com/giltene/wrk2
-- MLPerf: https://mlcommons.org/benchmarks/
-- LMSYS Chatbot Arena: https://chat.lmsys.org
+- MLPerf: standardized ML benchmarking methodology
+- wrk2: latency-accurate HTTP benchmarking tool
+- LMSYS Chatbot Arena: LLM comparison via Elo rating

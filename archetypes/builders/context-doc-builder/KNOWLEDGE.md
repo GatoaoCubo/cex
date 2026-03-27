@@ -1,43 +1,66 @@
 ---
 pillar: P01
 llm_function: INJECT
-purpose: Foundational domain knowledge for context-doc-builder
+purpose: Domain knowledge for context_doc production — domain background for prompt hydration
+sources: consulting discovery docs, technical context memos, onboarding packets
 ---
 
-# Knowledge: context_doc
+# Domain Knowledge: context_doc
 
-## Foundational Concept
-A context_doc is a domain background document for prompt hydration. Its LLM function is
-INJECT: it is loaded into agent context to provide situational awareness before task
-execution. It is NOT a reference document (no density gate), NOT a definition (no term
-scope), NOT an instruction (no steps).
+## Executive Summary
 
-## Industry Analogs
-- README context sections in software repos
-- Project brief / discovery document in consulting
-- Technical context memo in engineering teams
-- Onboarding background packet for new team members
-- Situation report (SITREP) in operations contexts
+Context docs are domain background documents injected into agent context before task execution. They provide situational awareness — stakeholders, constraints, assumptions, dependencies — without the density requirements of knowledge cards or the step-by-step structure of instructions. Context docs answer "what is the background?" before the agent answers "what do I do?"
 
-## Key Patterns
-- **Scope before write**: Define boundaries first. What domain? What time horizon? What is excluded?
-- **Stakeholder-focused**: Who needs this context? Tailor precision to their decisions.
-- **Constraint-driven**: List what cannot change. Constraints bound the domain context.
-- **Time-bounded**: Context ages. Include timeline, created/updated dates.
-- **Dependency-aware**: Context_docs often link to or are consumed by system_prompts and action_prompts.
+## Spec Table
 
-## CEX Extensions
-- `domain` field: machine-readable domain label (e.g., "ecommerce_imports", "api_auth")
-- `scope` field: one-sentence scope boundary (e.g., "Brazilian import regulations 2025-2026")
-- `quality: null` always — scored externally, never self-assigned
+| Property | Value |
+|----------|-------|
+| Pillar | P01 (knowledge) |
+| llm_function | INJECT (loaded into context) |
+| Max size | 2048 bytes |
+| Density gate | None (narrative allowed) |
+| Quality gates | 7 HARD + 8 SOFT |
+| Output format | .md + optional .yaml pair |
+| Key fields | domain, scope, stakeholders, constraints |
 
-## Boundary vs Siblings
-| Kind | Function | Density Gate | Key Difference |
-|------|----------|-------------|----------------|
-| context_doc | INJECT | none | Domain background, multiple facts, narrative allowed |
-| knowledge_card | INJECT | >= 0.80 | Atomic single fact, high density, no narrative |
-| glossary_entry | INJECT | none | Single term definition, controlled vocabulary |
+## Patterns
 
-## Consumption Pattern
-context_doc is consumed by: system_prompt (BECOME), action_prompt (REASON), agent boot
-sequences. It answers "what is the background?" before the agent answers "what do I do?"
+- **Scope-first writing**: define boundaries before content — what domain, what time horizon, what is excluded
+- **Stakeholder focus**: tailor precision to who consumes this context and what decisions they make
+- **Constraint documentation**: list what CANNOT change — constraints bound the problem space more than features
+- **Time-bounded context**: include timeline and dates — context ages; stale context causes wrong decisions
+- **Consumption chain**: context_docs feed into system_prompts and action_prompts as background injection
+
+| Analog | Source | Shared pattern |
+|--------|--------|----------------|
+| README context | Software repos | Background before instructions |
+| Project brief | Consulting | Scope, constraints, stakeholders |
+| SITREP | Operations | Current state + key constraints |
+| Onboarding packet | Teams | Domain background for newcomers |
+
+## Anti-Patterns
+
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| No scope boundary | Document grows unbounded; includes irrelevant context |
+| Duplicating knowledge cards | Context doc has no density gate; use KC for atomic facts |
+| Including step-by-step instructions | That is an instruction artifact, not context |
+| Missing constraints section | Agent has background but no boundaries; overreaches |
+| Stale dates | Outdated context causes wrong assumptions |
+| Over 2048 bytes | Exceeds token budget for injection; split or compress |
+
+## Application
+
+1. Define scope: one sentence — what domain, what time horizon, what is excluded
+2. Identify stakeholders: who consumes this context and for what decisions
+3. Document constraints: what CANNOT change in this domain
+4. List assumptions: what is taken as true without verification
+5. Map dependencies: what other artifacts consume this context
+6. Validate: <= 2048 bytes, scope is one sentence, constraints are concrete
+
+## References
+
+- Consulting discovery documents: scope and constraint patterns
+- Technical writing: context memos and background sections
+- Agile: Definition of Done context documentation
+- Prompt engineering: context injection for LLM task performance

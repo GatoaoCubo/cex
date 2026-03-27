@@ -1,59 +1,68 @@
 ---
 pillar: P01
 llm_function: INJECT
-purpose: Standards and domain knowledge for input_schema production
-sources: [JSON Schema, OpenAPI requestBody, CEX contract layer]
+purpose: Domain knowledge for input_schema production — unilateral entry contracts
+sources: JSON Schema (draft-07), OpenAPI requestBody, Pydantic BaseModel, TypeScript params
 ---
 
 # Domain Knowledge: input_schema
 
-## Foundational Concept
-Input schemas are unilateral entry contracts: the receiving system declares what
-data it requires, with types, constraints, and defaults. Rooted in JSON Schema
-(draft-07+), OpenAPI requestBody, and function signature design. In CEX,
-input_schemas sit in the spec layer of P06 — they define data requirements,
-not bilateral agreements or abstract types.
+## Executive Summary
 
-## Industry Implementations
+Input schemas are unilateral entry contracts — the receiving system declares what data it requires with types, constraints, defaults, and coercion rules. Rooted in JSON Schema and OpenAPI requestBody patterns. Input schemas differ from interfaces (bilateral contracts), validators (pass/fail rule checks), and type definitions (abstract reusable types).
 
-| Source | What it defines | CEX alignment |
-|--------|----------------|---------------|
-| JSON Schema (draft-07+) | Object properties, required, types, defaults | fields structure with types and required |
-| OpenAPI requestBody | API input contract with validation | Unilateral input contract pattern |
-| TypeScript function params | Typed parameter definitions | Field-level type constraints |
-| GraphQL Input Types | Typed input objects for mutations | Structured input with defaults |
-| Pydantic BaseModel | Python data validation with defaults | fields + coercion + defaults pattern |
+## Spec Table
 
-## Key Patterns
-- Input schemas are UNILATERAL: the receiver defines what it needs
-- Input schemas define FIELDS: named properties with types and constraints
-- Fields are REQUIRED or OPTIONAL: optional fields MUST have defaults
-- Input schemas support COERCION: "123" -> 123 when type is integer
-- Error messages are FIELD-LEVEL: each required field has its own error text
-- Input schemas include EXAMPLES: at least one valid payload
-- Input schemas are VERSIONED: semver for evolution
-- Boundary is CLEAR: input_schema defines shape, validator checks compliance
+| Property | Value |
+|----------|-------|
+| Pillar | P06 (contracts/schema) |
+| Frontmatter fields | 20+ |
+| Quality gates | 8 HARD + 10 SOFT |
+| Direction | Unilateral (receiver defines) |
+| Required per field | name, type, required/optional, description |
+| Optional per field | default, coercion, error_message, examples |
 
-## CEX-Specific Extensions
+## Patterns
 
-| Field | Justification | Closest equivalent |
-|-------|--------------|-------------------|
-| coercion | CEX agents receive mixed-type data from LLMs | Pydantic validators |
-| error_messages | Per-field error text for LLM-friendly feedback | JSON Schema errorMessage |
-| scope | What operation/agent this input serves | OpenAPI operationId |
-| examples | Valid payloads for testing and documentation | OpenAPI examples |
+- **Field type system**: every field has an explicit type with validation
 
-## Boundary vs Nearby Types
+| Source | Concept | Application |
+|--------|---------|-------------|
+| JSON Schema | Properties, required, types, defaults | Field definitions with types |
+| OpenAPI | requestBody validation | Unilateral API input contracts |
+| Pydantic | Data validation with defaults | Fields + coercion + defaults |
+| TypeScript | Typed function parameters | Field-level type constraints |
+| GraphQL | Input types for mutations | Structured input with defaults |
 
-| Type | What it is | Why it is NOT input_schema |
-|------|------------|--------------------------|
-| interface (P06) | Bilateral integration contract | Interfaces are bilateral; input_schemas are unilateral |
-| type_def (P06) | Abstract type definition | type_defs define reusable types; input_schemas define concrete entry points |
-| validator (P06) | Pass/fail validation rule | Validators check rules; input_schemas define expected shape |
-| validation_schema (P06) | Post-generation system contract | Applied silently; input_schemas are explicit contracts |
-| output_schema (P05/P06) | Output format/validation | Defines what comes OUT; input_schema defines what goes IN |
+- **Required vs optional**: required fields block execution if missing; optional fields MUST have defaults
+- **Coercion rules**: "123" → 123 when type is integer — handle LLM-generated mixed-type data gracefully
+- **Field-level error messages**: each required field has its own error text for clear LLM-friendly feedback
+- **Examples mandatory**: at least one valid payload example for testing and documentation
+- **Versioning**: semver for schema evolution — breaking changes require major version bump
+
+## Anti-Patterns
+
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| Optional field without default | Undefined behavior when field missing |
+| No type constraints | Any value accepted; runtime type errors |
+| No coercion rules | LLM sends "42" as string; integer field rejects it |
+| Missing error messages | Generic "validation failed" with no field context |
+| No examples | Cannot test or document expected input format |
+| Bilateral contract in input_schema | That is an interface, not an input_schema |
+
+## Application
+
+1. Identify scope: what operation/agent receives this input?
+2. Define fields: name, type, required/optional, description per field
+3. Set defaults: every optional field gets a default value
+4. Add coercion: rules for type conversion (string→int, string→bool)
+5. Write error messages: field-level, actionable text
+6. Provide examples: at least one valid payload
 
 ## References
-- JSON Schema: https://json-schema.org/
-- OpenAPI requestBody: https://spec.openapis.org/oas/latest.html
-- Pydantic: https://docs.pydantic.dev/
+
+- JSON Schema: json-schema.org (draft-07+)
+- OpenAPI: requestBody specification (spec.openapis.org)
+- Pydantic: data validation for Python (docs.pydantic.dev)
+- GraphQL: input type specification

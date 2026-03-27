@@ -1,49 +1,67 @@
 ---
 pillar: P01
 llm_function: INJECT
-purpose: Standards and patterns for brain_index production
-sources: [BM25 Theory, FAISS, Hybrid Search, CEX Brain Architecture]
+purpose: Domain knowledge for brain_index production — semantic search index configuration
+sources: FAISS (Meta), BM25/Okapi (Robertson), Elasticsearch, Vespa hybrid search
 ---
 
 # Domain Knowledge: brain_index
 
-## Foundational Concepts
-Brain indexes make knowledge FINDABLE through search algorithms.
-BM25: term-frequency scoring with document length normalization (keyword search).
-FAISS: approximate nearest neighbor search over dense vectors (semantic search).
-Hybrid: combines BM25 (precision) with FAISS (recall) using weighted fusion.
-In CEX: declarative index configurations for the Brain MCP retrieval system.
+## Executive Summary
 
-## Industry Patterns
-| Source | What it defines | CEX alignment |
-|--------|----------------|---------------|
-| BM25 (Okapi) | Term frequency, inverse doc frequency, length norm | BM25 Parameters section |
-| FAISS (Meta) | Vector indexing, approximate NN search | FAISS Parameters section |
-| Reciprocal Rank Fusion | Merging ranked lists from multiple sources | Hybrid Weights section |
-| Elasticsearch | Full-text search with filters and boosts | Filters + Ranking sections |
-| Vespa | Hybrid search with configurable ranking | Algorithm Config section |
+Brain indexes configure search retrieval by combining BM25 (keyword scoring), FAISS (vector similarity), and hybrid ranking. They define what content to index, how to rank results, and when to rebuild. Brain indexes differ from embedding configs (model selection), knowledge cards (content being indexed), and RAG sources (external data pipes).
 
-## Key Principles
-- BM25 excels at exact keyword matching (high precision)
-- FAISS excels at semantic similarity (high recall)
-- Hybrid combines both for best F1 score
-- k1 controls term frequency saturation (1.2-2.0 typical)
-- b controls document length normalization (0.75 standard)
-- nprobe controls FAISS search breadth (more = slower + more accurate)
-- Rebuild schedule must balance freshness vs compute cost
-- Monitoring latency and zero-result rate catches degradation early
+## Spec Table
 
-## CEX-Specific Extensions
-| Field | Justification | Closest equivalent |
-|-------|--------------|-------------------|
-| rebuild_schedule | When to rebuild index | Elasticsearch refresh interval |
-| freshness_max_days | Max acceptable staleness | TTL / cache expiry |
-| corpus_type | Content type indexed | Elasticsearch mapping type |
+| Property | Value |
+|----------|-------|
+| Pillar | P10 (memory/runtime) |
+| Algorithms | BM25 (keyword), FAISS (vector), hybrid (weighted merge) |
+| BM25 params | k1=1.2-2.0 (term freq saturation), b=0.75 (length norm) |
+| FAISS params | nprobe (search breadth), nlist (cluster count) |
+| Hybrid formula | score = alpha * BM25 + (1-alpha) * cosine_similarity |
+| Rebuild trigger | time-based (>24h) or content-change-based |
+| Accuracy | ~88% hybrid, ~50% BM25-only fallback |
 
-## Boundary vs Nearby Types
-| Type | What it does | NOT this |
-|------|-------------|----------|
-| embedding_config (P01) | Defines EMBEDDING MODEL (dimensions, provider) | Does NOT configure search |
-| rag_source (P01) | Defines DATA SOURCE (URL, crawl config) | Does NOT define index structure |
-| knowledge_card (P01) | The CONTENT being indexed | Does NOT configure retrieval |
-| runtime_state (P10) | Agent DECISION state | Does NOT manage search infrastructure |
+## Patterns
+
+- **Hybrid search**: combine BM25 precision (exact keywords) with FAISS recall (semantic similarity) — neither alone is sufficient
+- **Alpha tuning**: alpha=0.4 (favor semantic) for exploratory queries; alpha=0.7 (favor keyword) for exact-term lookups
+- **Scope boundaries**: index only specified directories and file types — indexing everything creates noise and degrades search
+- **Freshness policies**: rebuild schedule (daily) + staleness threshold (24h) — stale indexes return outdated results
+- **Fallback chain**: if embedding service is down, degrade to BM25-only rather than total search failure
+- **Pre-filtering**: filter by pillar, kind, or tags before ranking — reduces search space, improves relevance and speed
+
+| Source | Concept | Application |
+|--------|---------|-------------|
+| BM25 (Okapi) | Term frequency + doc length normalization | Keyword precision scoring |
+| FAISS (Meta) | Approximate nearest neighbor search | Semantic similarity retrieval |
+| Reciprocal Rank Fusion | Merging ranked lists from multiple sources | Hybrid weight combining |
+| Elasticsearch | Full-text search with filters and boosts | Filter + ranking configuration |
+
+## Anti-Patterns
+
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| Vector-only search | Misses exact keyword matches; "BM25" query misses "BM25" |
+| BM25-only search | Misses semantic similarity; "search engine" misses "retrieval system" |
+| No rebuild schedule | Index drifts from content; new files invisible to search |
+| Index everything | Noise drowns signal; large indexes are slow |
+| Fixed alpha for all queries | Exploratory vs exact queries need different weights |
+| No fallback when embedding down | Total failure instead of degraded results |
+
+## Application
+
+1. Define scope: directories, file types, pillars to index
+2. Select algorithm: BM25, FAISS, or hybrid for the use case
+3. Configure parameters: k1, b for BM25; nprobe, nlist for FAISS; alpha for hybrid
+4. Set rebuild: cron schedule, staleness threshold, manual trigger
+5. Define fallback: BM25-only when embedding service unavailable
+6. Monitor: track latency, zero-result rate, and index freshness
+
+## References
+
+- FAISS: Facebook AI Similarity Search documentation
+- Robertson et al.: BM25/Okapi probabilistic information retrieval
+- Elasticsearch: hybrid search and filter configuration
+- Vespa: configurable hybrid ranking and indexing

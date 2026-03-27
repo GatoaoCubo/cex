@@ -1,101 +1,75 @@
 ---
 pillar: P01
 llm_function: INJECT
-purpose: Operational knowledge and patterns for dispatch_rule production
-sources: [gateway routing systems, orchestrator routing tables, multi-agent collaboration protocols, real routing workflows]
+purpose: Domain knowledge for dispatch_rule production — routing policy specification
+sources: gateway routing systems, multi-agent collaboration protocols, API gateway patterns
 ---
 
 # Domain Knowledge: dispatch_rule
 
-## Core Concept
-A dispatch_rule is a routing policy record answering: **"Which target receives tasks matching these keywords, at what priority, with what fallback?"** Rules are decisions, not instructions. Consumed by routers/dispatchers. Does NOT tell the target what to do (that's a handoff).
+## Executive Summary
 
-## The Routing Triad
+Dispatch rules are routing policy records that map keywords to targets with priority and fallback. They answer "which target receives tasks matching these keywords?" Rules are decisions consumed by routers — they do NOT tell the target what to do (that is a handoff). Multiple rules compose into a routing table.
 
-```
-TRIGGER: keywords[] + confidence_threshold
-  -> TARGET: agent/service + model + priority
-  -> FALLBACK: alternative target (if unavailable or below threshold)
-```
-One rule = one triad. Multiple rules compose into a routing table.
+## Spec Table
 
-## Keyword Design
+| Property | Value |
+|----------|-------|
+| Pillar | P12 (orchestration) |
+| llm_function | REASON |
+| Max size | 3072 bytes |
+| Naming | p12_dr_{scope}.yaml |
+| Quality | null (always, at authoring time) |
+| Core structure | TRIGGER (keywords) → TARGET (agent+model) → FALLBACK |
+| Keywords per rule | 5-12 focused terms |
+| Priority range | 1-10 integer |
+
+## Patterns
+
+- **Routing triad**: every rule defines trigger (keywords + threshold) → target (agent + model + priority) → fallback (alternative target)
+- **Keyword design**: cover synonyms, include abbreviations, bilingual variants, use verb forms, avoid ambiguous generic words
 
 | Principle | Example | Why |
 |-----------|---------|-----|
-| Cover synonyms | [build, create, implement] | Same intent, different words |
-| Include abbreviations | [docs, documentation] | Short forms common |
-| Bilingual variants | [pesquisar, research] | Multi-language systems |
-| Avoid ambiguous words | NOT [run] | Too generic, false matches |
-| Use verb forms | [deploy, deploying] | Intent = actions |
-| Keep focused | 5-12 per rule | Too many = noise |
+| Synonyms | [build, create, implement] | Same intent, different words |
+| Abbreviations | [docs, documentation] | Short forms common in queries |
+| Bilingual | [pesquisar, research] | Multi-language systems |
+| Verb forms | [deploy, deploying] | Intent expressed as actions |
 
-Overlap resolution: (1) highest priority, (2) most matches, (3) first defined.
+- **Priority and threshold calibration**:
 
-## Routing Strategy
+| Priority | Meaning | Threshold | Behavior |
+|----------|---------|-----------|----------|
+| 9-10 | Critical | 0.9+ | Near-exact match only |
+| 7-8 | High | 0.7-0.89 | Standard routing |
+| 5-6 | Normal | 0.5-0.69 | Permissive matching |
 
-| Strategy | When | Precision | Cost |
-|----------|------|-----------|------|
-| keyword_match | Clear taxonomy, <20 keywords | High for known terms | Zero |
-| semantic | Ambiguous domain, many paraphrases | High for novel inputs | LLM call |
-| hybrid | Large bilingual set, mixed needs | Highest | Keyword + LLM fallback |
-
-Default: start with `keyword_match`. Add semantic only when keywords prove insufficient.
-
-## Priority and Threshold
-
-| Priority | Meaning | Examples |
-|----------|---------|---------|
-| 9-10 | Critical: core routing, security | orchestration, deploy |
-| 7-8 | High: primary business | build, research |
-| 5-6 | Normal: supporting tasks | docs, indexing |
-| 1-4 | Low: optional/rare | logging, archival |
-
-| Threshold | Behavior | Use case |
-|-----------|----------|----------|
-| 0.9+ | Near-exact only | Security-critical ops |
-| 0.7-0.89 | Standard (default) | Most business routing |
-| 0.5-0.69 | Permissive | Many synonyms/informal |
-
-## Fallback Rules
-- Must differ from primary target (no self-fallback)
-- Should be broader agent, not peer specialist
-- Universal gateway is safe default
-- No chain fallbacks in single rule; use separate rule
-
-## Cross-Reference
-- Bidirectional: if A routes to B, B must acknowledge A
-- Catches stale routes when targets renamed/removed
-- Crew members specify upstream (who sends) and downstream (who receives)
-
-## Scope
-One rule = one domain. If keywords span two domains, create two rules.
+- **Fallback rules**: must differ from primary; use broader agent, not peer specialist; gateway is safe default
+- **Scope discipline**: one rule = one domain; spanning two domains requires two rules
 
 ## Anti-Patterns
 
-| Anti-Pattern | Fix |
-|--------------|-----|
-| Circular routing (A->B->A) | Acyclic fallback chains; universal catch-all |
-| Ambiguous keywords (do, run) | Domain-specific verbs |
-| Missing fallback | Always define; gateway as default |
-| Same priority overlap | Unique priority per keyword space |
-| Stale cross-references | Audit: verify target exists |
-| Monolithic 50-keyword rule | Split into focused rules per domain |
-| Self-fallback | Fallback must be different target |
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| Circular routing (A→B→A) | Infinite loop; use acyclic fallback chains |
+| Ambiguous keywords ("do", "run") | False matches on unrelated tasks |
+| Missing fallback | No recovery when primary target unavailable |
+| Self-fallback | Same target retried; no degradation |
+| 50+ keywords in one rule | Too broad; split into focused domain rules |
+| Stale cross-references | Target renamed/removed; route goes nowhere |
 
-## Boundary
+## Application
 
-| Type | Why NOT dispatch_rule |
-|------|----------------------|
-| handoff | Tells target WHAT TO DO |
-| signal | Reports WHAT HAPPENED |
-| workflow | Coordinates HOW work flows |
-| spawn_config | Configures HOW to launch |
-| router (P02) | Full routing ENGINE, not single RULE |
+1. Define scope: one domain per rule
+2. Select 5-12 keywords: synonyms, abbreviations, bilingual, verb forms
+3. Set target: agent/service, model, priority (1-10)
+4. Define fallback: different, broader target; gateway as default
+5. Set threshold: 0.9+ (critical), 0.7-0.89 (standard), 0.5-0.69 (permissive)
+6. Validate: <= 3072 bytes, no circular routes, no self-fallback
 
-## Constraints
-- Max 3072 bytes per rule
-- ID: `p12_dr_{scope}.yaml`
-- `quality: null` invariant at authoring
-- One rule per scope domain
-- Priority 1-10 integer, no fractions
+## References
+
+- API gateway routing: nginx, Kong, AWS API Gateway patterns
+- Multi-agent routing: keyword-based and semantic dispatch
+- Circuit breaker: fallback chain design for routing resilience
+- Overlap resolution: highest priority → most matches → first defined

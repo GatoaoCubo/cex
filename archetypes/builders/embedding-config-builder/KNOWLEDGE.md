@@ -1,57 +1,68 @@
 ---
 pillar: P01
 llm_function: INJECT
-purpose: Standards and domain knowledge for embedding_config production
-sources: [MTEB benchmark, OpenAI embeddings docs, Ollama model library, FAISS docs]
+purpose: Domain knowledge for embedding_config production — vector model configuration
+sources: MTEB benchmark, OpenAI embeddings, Ollama model library, DPR (Karpukhin 2020)
 ---
 
 # Domain Knowledge: embedding_config
 
-## Foundational Concept
-Embedding configs define how text is converted to vectors for semantic search.
-Rooted in dense retrieval research (Karpukhin et al. 2020 DPR), the MTEB benchmark
-for model comparison, and production RAG patterns. In CEX, embedding_configs sit in
-the spec layer of P01 — they define MODEL parameters, not index or pipeline logic.
+## Executive Summary
 
-## Industry Implementations
+Embedding configs define how text is converted to vectors for semantic search: model selection, dimensions, chunk size, overlap, distance metric, and normalization. They sit in the spec layer — defining MODEL parameters, not index structure (brain_index) or data sources (rag_source). The choice of embedding model determines retrieval quality, cost, and latency.
 
-| Source | What it defines | CEX alignment |
-|--------|----------------|---------------|
-| OpenAI Embeddings API | Model, dimensions, pricing | model_name, dimensions, cost |
-| Ollama Model Library | Local model specs, quantization | provider, model_name (local) |
-| MTEB Benchmark | Model quality ranking by task | Model selection guidance |
-| FAISS Documentation | Index types, distance metrics | distance_metric field |
-| LangChain Text Splitters | Chunking strategies, overlap | chunk_size, overlap fields |
+## Spec Table
 
-## Key Patterns
-- Dimensions determine vector space richness (768 baseline, 1536 high-fidelity)
-- Chunk size balances granularity vs context (256-512 for retrieval, 1024+ for summarization)
-- Overlap prevents information loss at chunk boundaries (10-20% of chunk_size)
-- Cosine similarity is the default metric (normalize=true required)
-- Local models (Ollama) trade quality for zero cost and privacy
-- Batch size affects throughput: larger batches = fewer API calls = lower latency
-- Normalization is required for cosine similarity (skip only for dot_product)
+| Property | Value |
+|----------|-------|
+| Pillar | P01 (knowledge) |
+| Frontmatter fields | 20+ |
+| Quality gates | 8 HARD + 8 SOFT |
+| Default distance metric | cosine (requires normalize=true) |
+| Chunk size range | 256-512 (retrieval), 1024+ (summarization) |
+| Overlap | 10-20% of chunk_size |
+| Key providers | OpenAI, Ollama (local), Cohere, Voyage |
 
-## CEX-Specific Extensions
+## Patterns
 
-| Field | Justification | Closest equivalent |
-|-------|--------------|-------------------|
-| provider | CEX uses Ollama locally, API remotely | LangChain embeddings class |
-| cost_per_1m_tokens | Budget tracking for API models | OpenAI pricing page |
-| normalize | Explicit control for distance metric | FAISS IndexFlatIP vs IndexFlatL2 |
-| overlap | Chunk boundary handling | LangChain chunk_overlap |
+- **Model selection by trade-off**:
 
-## Boundary vs Nearby Types
+| Model | Dimensions | Cost | Quality (MTEB) | Use case |
+|-------|-----------|------|----------------|----------|
+| text-embedding-3-small | 1536 | $0.02/1M | Good | Budget production |
+| text-embedding-3-large | 3072 | $0.13/1M | Best (API) | High-fidelity retrieval |
+| nomic-embed-text | 768 | Free (local) | Good | Privacy, zero cost |
+| mxbai-embed-large | 1024 | Free (local) | Better (local) | Quality local option |
 
-| Type | What it is | Why it is NOT embedding_config |
-|------|------------|-------------------------------|
-| brain_index (P10) | Search index configuration (BM25, FAISS) | brain_index CONFIGURES the index; embedding_config CONFIGURES the model |
-| rag_source (P01) | External source pointer with URL | rag_source POINTS to data; embedding_config VECTORIZES data |
-| knowledge_card (P01) | Dense research fact | KC IS content; embedding_config PROCESSES content |
-| context_doc (P01) | Domain background | context_doc PROVIDES context; embedding_config ENCODES context |
+- **Chunk size balances granularity vs context**: smaller chunks = more precise retrieval but less context per result
+- **Overlap prevents boundary loss**: 10-20% overlap ensures information at chunk edges is captured in adjacent chunks
+- **Normalization**: required for cosine similarity; skip only when using dot_product distance
+- **Batch processing**: larger batches = fewer API calls = lower latency; balance against memory constraints
+- **Cost awareness**: track cost_per_1M_tokens; local models (Ollama) trade quality for zero cost
+
+## Anti-Patterns
+
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| No chunk overlap | Information at boundaries is lost; queries miss relevant content |
+| Cosine without normalization | Distance calculations are incorrect; results unreliable |
+| chunk_size > context_window | Chunks truncated silently; information loss |
+| Mixing distance metrics | Index built with cosine, searched with dot_product = wrong ranking |
+| Over-dimensioned model for simple task | Wastes compute and storage; 768-dim sufficient for most retrieval |
+| No cost tracking | API embedding costs accumulate unnoticed |
+
+## Application
+
+1. Select provider: API (OpenAI, Cohere) for quality or local (Ollama) for cost/privacy
+2. Choose model: match dimensions and quality to retrieval requirements
+3. Set chunk_size: 256-512 for retrieval, 1024+ for summarization
+4. Set overlap: 10-20% of chunk_size
+5. Configure distance metric: cosine (default, normalize=true) or dot_product
+6. Validate: chunks fit model context window, normalization matches distance metric
 
 ## References
-- Karpukhin et al. Dense Passage Retrieval (2020) — Foundation of dense embeddings
-- Muennighoff et al. MTEB: Massive Text Embedding Benchmark (2022)
-- OpenAI Embeddings Guide — text-embedding-3-small/large specs
-- Ollama Model Library — nomic-embed-text, mxbai-embed-large
+
+- Karpukhin et al. 2020: Dense Passage Retrieval (DPR) — foundation of dense embeddings
+- Muennighoff et al. 2022: MTEB — Massive Text Embedding Benchmark
+- OpenAI: text-embedding-3-small/large specifications
+- Ollama: nomic-embed-text, mxbai-embed-large model library

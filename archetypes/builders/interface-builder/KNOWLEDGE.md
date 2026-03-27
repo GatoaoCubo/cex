@@ -1,60 +1,69 @@
 ---
 pillar: P01
 llm_function: INJECT
-purpose: Standards and domain knowledge for interface production
-sources: [API design principles, contract-first design, CEX integration layer]
+purpose: Domain knowledge for interface production — bilateral integration contracts
+sources: Gamma et al. 1994, OpenAPI 3.x, gRPC/Protobuf, contract-first API design
 ---
 
 # Domain Knowledge: interface
 
-## Foundational Concept
-Interfaces are bilateral contracts: both parties (provider and consumer) agree on
-methods, input shapes, and output shapes. Rooted in interface-based programming
-(Gamma et al. 1994 "Design Patterns"), API-first design, and contract-first
-development. In CEX, interfaces sit in the spec layer of P06 — they define
-integration points between agents, not data shapes or validation rules.
+## Executive Summary
 
-## Industry Implementations
+Interfaces are bilateral contracts where both provider and consumer agree on methods, input shapes, and output shapes. Rooted in interface-based programming (GoF 1994) and API-first design. Interfaces define what CAN happen between two systems — they are static specifications, not runtime events. They differ from input schemas (unilateral), signals (runtime notifications), and connectors (runtime implementations).
 
-| Source | What it defines | CEX alignment |
-|--------|----------------|---------------|
-| OpenAPI 3.x | REST API contracts (paths, schemas, responses) | methods structure (name, input, output) |
-| gRPC/Protobuf | Service definitions with typed RPC methods | Strongly typed method contracts |
-| TypeScript interfaces | Structural type contracts between modules | bilateral type agreement |
-| GraphQL Schema | Query/mutation contracts with typed fields | Method-level input/output contracts |
-| Java Interfaces | Abstract method signatures for implementation | Method signature pattern |
+## Spec Table
 
-## Key Patterns
-- Interfaces are BILATERAL: both provider and consumer agree on the contract
-- Interfaces define METHODS: named operations with typed input and output
-- Interfaces are VERSIONED: semver, with backward_compatible flag
-- Interfaces have DEPRECATION: planned sunset path for old methods
-- Interfaces support MOCKING: test doubles derive from the interface
-- Methods use TYPED IO: input and output are structured objects, not free text
-- Interfaces are STATIC: they define what CAN happen, not what DID happen
-- Boundary is CLEAR: interface defines shape, validator checks compliance
+| Property | Value |
+|----------|-------|
+| Pillar | P06 (contracts/schema) |
+| Frontmatter fields | 20+ |
+| Quality gates | 8 HARD + 10 SOFT |
+| Direction | Bilateral (both parties agree) |
+| Key sections | methods (name, input, output), versioning, deprecation |
+| Versioning | semver with backward_compatible flag |
+| Mock support | Test doubles derivable from interface |
 
-## CEX-Specific Extensions
+## Patterns
 
-| Field | Justification | Closest equivalent |
-|-------|--------------|-------------------|
-| methods | Named operations with typed IO | OpenAPI paths |
-| backward_compatible | Explicit compat flag for evolution | OpenAPI deprecation |
-| mock | Test specification embedded in contract | OpenAPI examples |
-| deprecation | Planned sunset with timeline | API versioning headers |
+- **Method-based contracts**: named operations with typed input and output
 
-## Boundary vs Nearby Types
+| Source | Concept | Application |
+|--------|---------|-------------|
+| OpenAPI 3.x | REST paths, schemas, responses | methods structure |
+| gRPC/Protobuf | Typed RPC method definitions | Strongly typed method contracts |
+| TypeScript | Structural type contracts | Bilateral type agreement |
+| GraphQL | Query/mutation typed fields | Method-level I/O contracts |
+| Java interfaces | Abstract method signatures | Method signature pattern |
 
-| Type | What it is | Why it is NOT interface |
-|------|------------|----------------------|
-| input_schema (P06) | Unilateral entry contract for data shape | Interfaces are bilateral — both parties agree |
-| signal (P12) | Runtime event notification | Signals report what happened; interfaces define what CAN happen |
-| validation_schema (P06) | Post-generation system contract | Applied silently by system; interfaces are explicit agreements |
-| connector (P04) | Runtime service adapter | Connectors implement; interfaces specify |
-| router (P02) | Routing rule for dispatch | Routers decide WHERE; interfaces define HOW |
+- **Bilateral agreement**: both provider and consumer acknowledge the contract — unlike unilateral input schemas
+- **Versioning with semver**: breaking changes require major version bump; backward_compatible flag explicit
+- **Deprecation planning**: every method has planned sunset timeline — no sudden removal
+- **Mock derivation**: interfaces generate test doubles automatically — testing does not require real implementation
+- **Static specification**: interfaces define what CAN happen, not what DID happen (that is a signal)
+
+## Anti-Patterns
+
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| Unilateral contract | That is an input_schema; interfaces require both parties |
+| No versioning | Breaking changes break consumers silently |
+| No deprecation timeline | Methods removed without warning; consumer breakage |
+| Free-text I/O types | Cannot generate mocks or validate compliance |
+| Runtime state in interface | Interfaces are static specs; use signals for events |
+| No mock specification | Cannot test without real implementation |
+
+## Application
+
+1. Identify parties: who is provider, who is consumer?
+2. Define methods: name, typed input, typed output per operation
+3. Set version: semver with backward_compatible flag
+4. Plan deprecation: sunset timeline for methods to be removed
+5. Add mock spec: example inputs and outputs for test doubles
+6. Validate: bilateral agreement, all methods typed, version declared
 
 ## References
-- Gamma et al. (1994) "Design Patterns" — interface segregation
-- OpenAPI Specification: https://spec.openapis.org/oas/latest.html
-- gRPC service definitions: https://grpc.io/docs/what-is-grpc/core-concepts/
-- Contract-First API Design: https://swagger.io/resources/articles/adopting-an-api-first-approach/
+
+- Gamma et al. 1994: "Design Patterns" — interface segregation principle
+- OpenAPI 3.x: REST API contract specification
+- gRPC: service definition and typed RPC methods
+- Contract-first API design: swagger.io best practices

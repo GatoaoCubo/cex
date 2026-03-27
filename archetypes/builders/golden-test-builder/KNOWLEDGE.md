@@ -1,49 +1,67 @@
 ---
 pillar: P01
 llm_function: INJECT
-purpose: Standards and patterns for golden_test production
-sources: [ML golden datasets, SWE-bench, DeepEval, CEX validate_kc.py]
+purpose: Domain knowledge for golden_test production — quality calibration reference tests
+sources: ML golden datasets, SWE-bench, DeepEval, BLEU/ROUGE reference patterns
 ---
 
 # Domain Knowledge: golden_test
 
-## Foundational Concepts
-Golden tests originate from ML evaluation (golden datasets, ground truth).
-In NLP: human-annotated reference outputs for measuring model quality.
-In CEX: curated artifacts scoring >= 9.5 that serve as calibration points for builders and validators.
+## Executive Summary
 
-## Industry Patterns
-| Source | What it defines | CEX alignment |
-|--------|----------------|---------------|
-| ML Golden Datasets | Labeled ground truth for training/eval | Reference artifacts for builder calibration |
-| BLEU/ROUGE Reference | Human reference translations/summaries | Golden output as evaluation anchor |
-| SWE-bench Verified | Verified test cases for code generation | Curated, reviewer-approved test cases |
-| DeepEval Golden | Expected outputs for LLM evaluation | Input/golden_output pairs with rationale |
+Golden tests are curated reference artifacts scoring >= 9.5 that serve as calibration points for builders and validators. They provide exemplary input/output pairs with rationale mapping each quality dimension to specific gates. Golden tests differ from few-shot examples (format teaching without scoring), unit evals (any quality level), and scoring rubrics (criteria definition without examples).
 
-## Key Principles
-- Golden means EXEMPLARY, not just correct — must demonstrate best practices
-- Every golden_test needs a RATIONALE mapping to specific quality gates
-- Reviewer approval is mandatory — producer cannot self-approve
-- Edge cases need separate golden_tests (not mixed with standard)
-- Golden output must be COMPLETE (no "..." or abbreviations)
-- quality_threshold >= 9.5 distinguishes golden from unit_eval
+## Spec Table
 
-## CEX-Specific Extensions
-| Field | Justification | Closest equivalent |
-|-------|--------------|-------------------|
-| target_kind | Scopes golden to specific artifact type | ML: dataset split by task |
-| quality_threshold | 9.5+ floor for golden status | ML: confidence threshold |
-| rationale | Maps to gate IDs for traceability | ML: annotation guidelines |
+| Property | Value |
+|----------|-------|
+| Pillar | P07 (governance/evaluation) |
+| Quality threshold | >= 9.5 |
+| Quality gates | 9 HARD + 7 SOFT |
+| Approval | Reviewer-approved (producer cannot self-approve) |
+| Key sections | input, golden_output, rationale (gate-mapped) |
+| Target scoping | Scoped to specific artifact kind |
 
-## Boundary vs Nearby Types
-| Type | What it is | Why it is NOT golden_test |
-|------|------------|--------------------------|
-| few_shot_example (P01) | Input/output pair for prompt engineering | Teaches patterns; no quality threshold |
-| unit_eval (P07) | Tests agent/prompt at any quality level | Any quality; not curated reference |
-| scoring_rubric (P07) | Defines evaluation dimensions/weights | Criteria, not concrete examples |
-| benchmark (P07) | Measures performance (latency, cost) | Quantitative metrics, not quality exemplars |
+## Patterns
+
+- **Exemplary, not just correct**: golden means demonstrating best practices across all quality dimensions — not merely passing
+- **Rationale gate-mapping**: every golden test maps its rationale to specific quality gate IDs for traceability
+
+| Source | Concept | Application |
+|--------|---------|-------------|
+| ML golden datasets | Labeled ground truth | Reference artifacts for calibration |
+| BLEU/ROUGE | Human reference translations | Golden output as evaluation anchor |
+| SWE-bench | Verified code test cases | Curated, reviewer-approved cases |
+| DeepEval | Expected LLM outputs | Input/golden_output with rationale |
+
+- **Complete output**: golden output must be COMPLETE — no "...", no abbreviations, no placeholders
+- **Reviewer approval mandatory**: producer cannot approve their own golden test — independent review required
+- **Edge case separation**: standard golden tests and edge case golden tests are separate artifacts
+- **Target kind scoping**: each golden test targets a specific artifact kind — not generic
+
+## Anti-Patterns
+
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| Self-approved golden test | No independent quality check; bias |
+| Rationale without gate IDs | Traceability broken; cannot verify which gates pass |
+| Abbreviated output ("...") | Incomplete reference; calibrator misses expected format |
+| Mixed standard + edge cases | Confuses calibration; separate into distinct tests |
+| quality_threshold < 9.5 | Below golden standard; that is a unit_eval |
+| Unscoped (no target_kind) | Applies to nothing specific; useless for calibration |
+
+## Application
+
+1. Select candidate: artifact scoring >= 9.5 in target kind
+2. Capture input: the exact prompt/request that produced the artifact
+3. Capture golden_output: complete output with no abbreviations
+4. Write rationale: map every quality dimension to specific gate IDs
+5. Submit for review: independent reviewer must approve
+6. Validate: quality >= 9.5, complete output, gate-mapped rationale, reviewer approved
 
 ## References
-- SWE-bench: https://www.swebench.com/
-- DeepEval Golden Evaluation: https://docs.confident-ai.com/
-- validate_kc.py v2.0 (CEX HARD/SOFT pattern, reference for gate mapping)
+
+- SWE-bench: verified test cases for code generation (swebench.com)
+- DeepEval: golden evaluation framework (confident-ai.com)
+- BLEU/ROUGE: reference-based evaluation metrics for NLP
+- ML golden datasets: ground truth annotation best practices

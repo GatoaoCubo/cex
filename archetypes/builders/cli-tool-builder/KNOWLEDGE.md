@@ -1,64 +1,67 @@
 ---
 pillar: P01
 llm_function: INJECT
-purpose: Standards and domain knowledge for cli_tool production
-sources: POSIX conventions, CLI design principles, real tool examples
+purpose: Domain knowledge for cli_tool production — command-line tool specification
+sources: POSIX conventions, GNU CLI standards, 12-Factor CLI patterns
 ---
 
 # Domain Knowledge: cli_tool
 
-## Foundational Concept
-A cli_tool artifact defines the CONTRACT for a command-line tool that executes a task
-and terminates. It specifies commands, flags, args, output format, and exit codes.
-CLI tools are ATOMIC: they run, produce output, and exit. They do not persist
-in background, do not accept connections, and do not maintain state between invocations.
+## Executive Summary
 
-## Command Design Patterns
+CLI tools are atomic command-line executables that run a task and terminate. They define commands, flags, args, output formats, and exit codes. CLI tools are POSIX-compatible single-invocation programs — they do not persist in background (daemon), accept connections (server), or maintain inter-invocation state.
 
-| Pattern | Example | When |
-|---------|---------|------|
-| Single command | `cex-validate <file>` | Simple, one-purpose tools |
-| Subcommand | `cex-validate check <file>` | Multi-purpose tools |
-| Flag-driven | `cex-validate --kind client --strict` | Configuration-heavy |
+## Spec Table
 
-Rule: prefer subcommands over flag-driven for distinct operations.
+| Property | Value |
+|----------|-------|
+| Pillar | P04 (tools) |
+| llm_function | CALL (invocable) |
+| Output formats | text, json, table, yaml |
+| Exit code 0 | success |
+| Exit codes 1-125 | application-defined errors |
+| Streams | stdout (data), stderr (progress/errors) |
+| Flag convention | --long-form (required), -s short (optional) |
 
-## Flag Conventions
+## Patterns
 
-| Convention | Example | Rule |
-|-----------|---------|------|
-| Long form | `--verbose`, `--output-format` | Always provide, kebab-case |
-| Short form | `-v`, `-o` | Optional, single letter |
-| Boolean | `--strict` (no value) | True if present, false if absent |
-| Value | `--format json` or `--format=json` | Space or equals separator |
+- **Command design**: single command for one-purpose tools; subcommands for multi-purpose tools; flag-driven for configuration-heavy operations
+- **POSIX exit codes**: 0=success, 1=general error, 126=cannot execute, 127=not found, 128+N=killed by signal N
+- **Stream discipline**: structured data to stdout only; progress, warnings, and errors to stderr — never mix data with diagnostic output
+- **Flag conventions**: always provide --long-form (kebab-case); short form (-v) optional; booleans are true-if-present
 
-## Exit Code Standards (POSIX)
+| Pattern | Example | When to use |
+|---------|---------|-------------|
+| Single command | `validate <file>` | Simple one-purpose tools |
+| Subcommand | `validate check <file>` | Multi-operation tools |
+| Flag-driven | `validate --kind client --strict` | Configuration-heavy tools |
 
-| Range | Meaning |
-|-------|---------|
-| 0 | Success |
-| 1-125 | Application-defined errors |
-| 126 | Cannot execute (permission) |
-| 127 | Command not found |
-| 128+N | Killed by signal N |
+- **Config precedence**: CLI flags > environment variables > config file > defaults — explicit overrides implicit
+- **Composability**: tools should work with pipes (`tool1 | tool2`) via stdin/stdout
 
-Rule: always define 0 (success) and 1 (general error) at minimum.
+## Anti-Patterns
 
-## Output Patterns
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| Missing exit codes | Calling scripts cannot detect success/failure |
+| Data mixed with progress on stdout | Piping breaks; downstream parser gets noise |
+| No --help flag | Users cannot discover commands or flags |
+| Interactive prompts in non-TTY | Breaks automation and piping |
+| State between invocations | That is a daemon, not a CLI tool |
+| Verbose output by default | Pipes and scripts need quiet defaults; use --verbose |
 
-| Stream | Content | Consumer |
-|--------|---------|----------|
-| stdout | Primary output (data, results) | Piping, parsing, display |
-| stderr | Progress, warnings, errors | Human reading, logging |
+## Application
 
-Rule: structured data to stdout only. Never mix progress with data output.
+1. Define purpose: what single task does this tool perform?
+2. Design commands: single, subcommand, or flag-driven pattern
+3. Specify flags: --long-form required, -short optional, with types and defaults
+4. Define exit codes: 0 (success), 1 (error), and domain-specific codes
+5. Set output format: text for humans, json for machines, table for both
+6. Validate: stdout is clean data, stderr is diagnostics, --help works
 
-## Boundary vs Nearby Types
+## References
 
-| Type | What it is | Why it is NOT cli_tool |
-|------|------------|----------------------|
-| skill | Reusable capability with phases | cli_tool has no phases, just commands |
-| daemon | Persistent background process | cli_tool executes and terminates |
-| plugin | Pluggable system extension | cli_tool is standalone, not pluggable |
-| hook | Event-triggered script | cli_tool is explicitly invoked |
-| mcp_server | Protocol server exposing tools | cli_tool is invoked directly, no protocol |
+- POSIX: command-line utility conventions and exit codes
+- GNU: argument syntax conventions
+- 12-Factor CLI: principles for well-behaved command-line tools
+- clig.dev: command-line interface guidelines

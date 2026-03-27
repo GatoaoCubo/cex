@@ -1,58 +1,69 @@
 ---
 pillar: P01
 llm_function: INJECT
-purpose: Standards and domain knowledge for fallback_chain production
-sources: CEX taxonomy, circuit breaker pattern, resilience engineering, LLM provider docs
+purpose: Domain knowledge for fallback_chain production — graceful model degradation
+sources: Nygard 2007 "Release It!", Netflix Hystrix, LiteLLM fallbacks, AWS Route 53
 ---
 
 # Domain Knowledge: fallback_chain
 
-## Foundational Concept
-A fallback chain implements graceful degradation for LLM-powered systems. When the primary
-model fails (timeout, error, rate limit) or produces below-threshold quality, the system
-automatically falls back to the next model in the chain. This pattern derives from circuit
-breaker design (Nygard 2007, "Release It!") adapted for multi-model LLM architectures where
-models vary in capability, cost, and latency.
+## Executive Summary
 
-## Industry Implementations
+Fallback chains implement graceful degradation for LLM systems — when the primary model fails or produces below-threshold quality, the system automatically falls to the next model in a ranked sequence. Derived from circuit breaker design (Nygard 2007), adapted for multi-model architectures where models vary in capability, cost, and latency. Fallback chains differ from prompt chains (text sequencing), workflows (agent orchestration), and routers (task routing).
 
-| Source | What it defines | CEX alignment |
-|--------|----------------|---------------|
-| Circuit breaker (Nygard) | Fail-fast with recovery | circuit_breaker_threshold field |
-| Netflix Hystrix | Cascading failure prevention | timeout_per_step + retry_count |
-| LiteLLM fallbacks | Model-level retry with alternatives | Chain step table (model sequence) |
-| AWS Route 53 health checks | DNS failover on health failure | quality_threshold triggers next step |
+## Spec Table
 
-## Key Patterns
-- Ordered degradation: steps go from most capable to least capable (opus->sonnet->haiku)
-- Timeout gating: each step has max execution time before triggering next
-- Quality gating: output below quality_threshold triggers next step even on success
-- Circuit breaker: N consecutive failures trip the breaker, halting all attempts
-- Cost awareness: each step has known cost; total chain cost has ceiling
-- Retry before fallback: retry_count attempts per step before moving to next
-- Final step alert: reaching last step triggers alert (system at minimum capability)
-- Stateless per-request: chain state resets for each new request
+| Property | Value |
+|----------|-------|
+| Pillar | P02 (identity/model) |
+| Frontmatter fields | 15 required |
+| Quality gates | 8 HARD + 10 SOFT |
+| Degradation order | Most capable → least capable (opus → sonnet → haiku) |
+| Trigger types | timeout, error, rate_limit, quality_below_threshold |
+| Circuit breaker | N consecutive failures trips breaker |
+| Key fields | steps, timeout_per_step, quality_threshold, cost_ceiling |
 
-## CEX-Specific Extensions
+## Patterns
 
-| Field | Justification | Closest equivalent |
-|-------|--------------|-------------------|
-| quality_threshold | CEX scores output 0-10; threshold triggers fallback | No direct equivalent |
-| steps_count | Integrity check: frontmatter matches body | No direct equivalent |
-| cost_ceiling_usd | Budget control across all steps | AWS budget alerts |
-| alert_on_final_fallback | Operational awareness when at minimum | PagerDuty severity escalation |
+- **Ordered degradation**: steps rank from most capable/expensive to least capable/cheapest
+- **Dual gating**: timeout gating (max time per step) AND quality gating (output score threshold)
+- **Circuit breaker**: N consecutive failures trip breaker, halting all attempts — prevents resource waste
+- **Cost ceiling**: total chain cost has a maximum; reaching ceiling triggers alert
+- **Retry before fallback**: retry_count attempts per step before moving to next model
 
-## Boundary vs Nearby Types
+| Source | Concept | Application |
+|--------|---------|-------------|
+| Nygard "Release It!" | Circuit breaker pattern | circuit_breaker_threshold |
+| Netflix Hystrix | Cascading failure prevention | timeout + retry per step |
+| LiteLLM | Model-level fallback alternatives | Chain step sequence |
+| AWS Route 53 | Health-based failover | quality_threshold triggers next |
 
-| Type | What it is | Why it is NOT fallback_chain |
-|------|------------|----------------------------|
-| chain (P03) | Prompt sequence (text A->B->C) | Sequences PROMPTS, not MODELS |
-| workflow (P12) | Multi-step agent orchestration | Orchestrates AGENTS, not MODEL selection |
-| router (P02) | Task-to-destination decision | Routes TASKS, not degrades MODELS |
-| model_card (P02) | Single model specification | Describes ONE model, not a sequence |
+- **Final step alert**: reaching the last step means system is at minimum capability — trigger operational alert
+- **Stateless per-request**: chain state resets for each new request; no carry-over between calls
+
+## Anti-Patterns
+
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| Ascending order (cheap → expensive) | Wastes time on weak models before trying capable ones |
+| No quality threshold | Low-quality output from fast model accepted silently |
+| No circuit breaker | Infinite retries waste tokens and time |
+| No cost ceiling | Expensive model retries accumulate unbounded cost |
+| Single step chain | Not a chain; just a model selection |
+| Quality threshold = 0 | Every output accepted; fallback never triggers |
+
+## Application
+
+1. Rank models: most capable first (opus → sonnet → haiku)
+2. Set timeout per step: based on expected response time + buffer
+3. Define quality threshold: minimum acceptable output score (0-10)
+4. Configure circuit breaker: N failures before stopping
+5. Set cost ceiling: maximum total spend across all steps
+6. Validate: degradation order is descending, thresholds are meaningful
 
 ## References
-- Michael Nygard, "Release It!" (2007) — circuit breaker pattern
-- LiteLLM docs — model fallback configuration
-- CEX TAXONOMY_LAYERS.yaml — fallback_chain in runtime layer
-- CEX SEED_BANK.yaml — P02_fallback_chain seeds
+
+- Nygard 2007: "Release It!" — circuit breaker pattern
+- LiteLLM: model fallback configuration documentation
+- Netflix Hystrix: cascading failure prevention patterns
+- AWS Route 53: health check-based DNS failover

@@ -1,57 +1,75 @@
 ---
 pillar: P01
 llm_function: INJECT
-purpose: Standards and domain knowledge for env_config production
-sources: 12-factor app, dotenv conventions, secret management patterns
+purpose: Domain knowledge for env_config production — environment variable specification
+sources: 12-Factor App (Factor III), dotenv conventions, Kubernetes ConfigMap/Secret, OWASP
 ---
 
 # Domain Knowledge: env_config
 
-## Foundational Concept
-An env_config artifact defines the VARIABLE CONTRACT for a system scope. It catalogs
-every environment variable needed: name, type, whether required, default value,
-sensitivity level, and validation rule. Env configs follow the 12-Factor App principle
-(Factor III: Store config in the environment) — config that varies between deploys
-lives in env vars, not in code.
+## Executive Summary
 
-## Industry Implementations
+Env configs define the variable contract for a system scope — every environment variable needed with its name, type, default, sensitivity level, and validation rule. Following 12-Factor App principle III (store config in environment, not code), env configs separate deployment-varying configuration from artifacts. They differ from boot configs (provider-specific), feature flags (on/off logic), and permissions (access control).
 
-| Source | What it defines | CEX alignment |
-|--------|----------------|---------------|
-| 12-Factor App (Factor III) | Config in environment, not code | env_config separates config from artifacts |
-| dotenv (.env files) | Local dev environment variables | env_config is the spec; .env is one implementation |
-| Kubernetes ConfigMap/Secret | Namespaced config and secrets | env_config maps to ConfigMap (non-sensitive) + Secret (sensitive) |
-| AWS SSM Parameter Store | Hierarchical config with encryption | env_config.sensitive vars map to SecureString params |
+## Spec Table
 
-## Key Patterns
-- Scope hierarchy: global > satellite > service (narrower scope wins)
-- Override precedence: env var > config file > default value
-- Sensitive vars: NEVER log, NEVER commit, ALWAYS mask in output
-- Validation: every var should have a type and constraint (even if permissive)
-- Naming: UPPER_SNAKE_CASE for env vars, optional prefix per scope (CEX_, SHAKA_, etc.)
-- Required vs optional: required vars block startup if missing; optional use defaults
+| Property | Value |
+|----------|-------|
+| Pillar | P09 (config) |
+| llm_function | GOVERN |
+| Frontmatter fields | 15+ |
+| Quality gates | 8 HARD + 11 SOFT |
+| Override precedence | env var > config file > default |
+| Scope hierarchy | global > satellite > service |
+| Naming | UPPER_SNAKE_CASE, optional prefix per scope |
 
-## Variable Types
+## Patterns
+
+- **Variable type system**: every variable has an explicit type with validation
 
 | Type | Validation | Example |
 |------|-----------|---------|
-| string | regex or enum | DATABASE_URL, LOG_LEVEL |
+| string | regex or enum | LOG_LEVEL, DATABASE_URL |
 | integer | min/max range | PORT, MAX_RETRIES |
 | boolean | true/false only | DEBUG, FEATURE_ENABLED |
-| url | URL format validation | API_BASE_URL, WEBHOOK_URL |
+| url | URL format check | API_BASE_URL, WEBHOOK_URL |
 | secret | non-empty, masked | API_KEY, JWT_SECRET |
 
-## Boundary vs Nearby Types
+- **Scope hierarchy**: narrower scope wins — service config overrides satellite, satellite overrides global
+- **Sensitivity handling**: sensitive vars (secrets, keys) NEVER logged, NEVER committed, ALWAYS masked in output
+- **Required vs optional**: required vars block startup if missing; optional vars use defaults
+- **Naming convention**: UPPER_SNAKE_CASE with optional prefix (CEX_, SHAKA_) for scope clarity
 
-| Type | What it is | Why it is NOT env_config |
-|------|------------|------------------------|
-| boot_config | Per-provider startup config (model, temp, system_prompt) | Boot config is provider-specific; env is generic |
-| feature_flag | On/off toggle with rollout | Feature flag is logic; env is data/config |
-| path_config | Filesystem path definitions | Path config is paths only; env is all variables |
-| permission | Access control rules | Permission is who can do what; env is system config |
-| runtime_rule | Timeouts, retries, limits | Runtime rule is behavior; env is config values |
+| Source | Concept | Application |
+|--------|---------|-------------|
+| 12-Factor (III) | Config in environment | Separate config from code |
+| dotenv | Local dev variables | .env as implementation of spec |
+| K8s ConfigMap/Secret | Namespaced config | Non-sensitive vs sensitive split |
+| AWS SSM | Hierarchical encrypted config | SecureString for sensitive vars |
+
+## Anti-Patterns
+
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| Secrets in code/config files | Committed to git; exposed in logs |
+| No validation rules | Invalid values cause runtime errors |
+| Missing defaults for optional vars | Startup fails unnecessarily |
+| No scope prefix | Variable collisions between services |
+| Logging sensitive vars | Secrets appear in plaintext in logs |
+| No type declaration | String "true" treated as truthy in some languages, not others |
+
+## Application
+
+1. Catalog variables: name, type, required/optional, default, description
+2. Classify sensitivity: public (ConfigMap) vs sensitive (Secret)
+3. Define validation: regex, range, enum per variable
+4. Set scope: global, satellite, or service with appropriate prefix
+5. Document precedence: env var > config file > default
+6. Validate: required vars have no defaults; secrets are marked sensitive
 
 ## References
-- 12factor.net/config — Factor III: Config
-- dotenv specification (github.com/motdotla/dotenv)
-- OWASP Secret Management Cheat Sheet
+
+- 12factor.net/config: Factor III — Config in environment
+- dotenv: local development variable convention
+- OWASP: Secret Management Cheat Sheet
+- Kubernetes: ConfigMap and Secret best practices

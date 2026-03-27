@@ -1,64 +1,75 @@
 ---
 pillar: P01
 llm_function: INJECT
-purpose: Standards and domain knowledge for daemon production
-sources: systemd conventions, process management patterns, Unix daemon standards
+purpose: Domain knowledge for daemon production — persistent background process specification
+sources: systemd.service(5), daemon(7) Linux conventions, 12-Factor App process model
 ---
 
 # Domain Knowledge: daemon
 
-## Foundational Concept
-A daemon artifact defines the LIFECYCLE SPECIFICATION for a persistent background process.
-It specifies when the process runs (schedule), how it recovers (restart_policy), how it
-responds to signals (signal_handling), and how operators monitor it (health_check). Daemons
-are PERSISTENT: they run continuously or on a recurring schedule, unlike hooks (fire once)
-or cli_tools (execute and exit).
+## Executive Summary
 
-## Schedule Patterns
+Daemons are persistent background processes that run continuously or on schedule. They define lifecycle (start/stop/restart), signal handling (SIGTERM, SIGHUP), health checks, resource limits, and monitoring. Daemons differ from hooks (single event trigger), CLI tools (execute and exit), skills (invocable on-demand), and workflows (multi-step orchestration).
 
-| Pattern | Format | Use Case |
-|---------|--------|----------|
+## Spec Table
+
+| Property | Value |
+|----------|-------|
+| Pillar | P04 (tools) |
+| llm_function | GOVERN (lifecycle management) |
+| Frontmatter fields | 20+ |
+| Quality gates | 9 HARD + 12 SOFT |
+| Schedule types | continuous, cron, interval, event-driven |
+| Restart policies | always, on_failure, never |
+| Key sections | schedule, restart_policy, signal_handling, health_check, resources |
+
+## Patterns
+
+- **Schedule declaration**: every daemon MUST declare schedule type — ambiguous lifecycle is a spec failure
+
+| Schedule | Format | Use case |
+|----------|--------|----------|
 | continuous | "continuous" | Always-running watchers, queue consumers |
-| cron | "*/5 * * * *" | Periodic tasks (cleanup, sync, index rebuild) |
+| cron | "*/5 * * * *" | Periodic cleanup, sync, index rebuild |
 | interval | "every 30s" | Polling loops with fixed intervals |
-| event-driven | "on:{event}" | Triggered by external event but stays alive |
+| event-driven | "on:{event}" | Triggered but stays alive between events |
 
-Rule: every daemon MUST declare schedule — ambiguous lifecycle is a spec failure.
+- **Signal handling**: standard Unix signals with defined daemon responses
 
-## Restart Policies
+| Signal | Response |
+|--------|----------|
+| SIGTERM | Graceful shutdown: finish work, flush, exit 0 |
+| SIGINT | Same as SIGTERM for daemons |
+| SIGHUP | Reload config without restart |
+| SIGUSR1 | Dump status/metrics to log |
 
-| Policy | Behavior | Use Case |
-|--------|----------|----------|
-| always | Restart regardless of exit code | Critical services that must run |
-| on_failure | Restart only on non-zero exit | Tasks that may complete normally |
-| never | Do not restart | One-shot scheduled tasks (prefer cli_tool) |
+- **Resource limits**: memory_max (hard ceiling), cpu_shares (relative), max_open_files, max_restarts (circuit breaker)
+- **Health checks**: periodic probes confirming process is alive and functional, not just running
+- **PID management**: write PID file on start, remove on graceful stop, check for stale PID on restart
 
-## Signal Handling Conventions
+## Anti-Patterns
 
-| Signal | Standard Behavior | Daemon Response |
-|--------|-------------------|-----------------|
-| SIGTERM | Graceful shutdown | Finish current work, flush buffers, exit 0 |
-| SIGINT | Interrupt | Same as SIGTERM for daemons |
-| SIGHUP | Reload config | Re-read config file without restart |
-| SIGUSR1 | Custom | Dump status/metrics to log |
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| No schedule declared | Ambiguous lifecycle; operators cannot manage process |
+| Missing SIGTERM handler | Process killed ungracefully; data loss, corruption |
+| No max_restarts limit | Crash loop consumes resources indefinitely |
+| restart: always for optional tasks | Non-critical tasks should use on_failure |
+| No health check | Dead process detected only when users report failures |
+| Missing resource limits | Runaway daemon consumes all system memory/CPU |
 
-## Resource Limit Patterns
-- memory_max: hard ceiling (OOM-kill if exceeded)
-- cpu_shares: relative CPU allocation (not hard limit)
-- max_open_files: file descriptor limit
-- max_restarts: circuit breaker (stop restarting after N failures in window)
+## Application
 
-## Boundary vs Nearby Types
-
-| Type | What it is | Why it is NOT daemon |
-|------|------------|---------------------|
-| hook | Pre/post event trigger code | Hook fires once per event; daemon runs continuously |
-| cli_tool | One-shot command-line execution | CLI tool exits after task; daemon persists |
-| skill | Reusable invocable with phases | Skill is called on-demand; daemon runs independently |
-| workflow | Orchestration of multiple steps | Workflow coordinates; daemon executes a single concern |
-| connector | Bidirectional service bridge | Connector defines integration spec; daemon is process lifecycle |
+1. Define schedule: continuous, cron, interval, or event-driven
+2. Set restart policy: always (critical), on_failure (standard), never (one-shot)
+3. Implement signal handlers: SIGTERM (graceful), SIGHUP (reload), SIGUSR1 (status)
+4. Configure health check: endpoint or command, interval, failure threshold
+5. Set resource limits: memory, CPU, file descriptors, max restarts
+6. Validate: schedule is explicit, signals handled, limits defined
 
 ## References
-- systemd.service(5) — systemd unit file conventions
-- daemon(7) — Linux daemon conventions
-- Twelve-Factor App — Process management (factor VI)
+
+- systemd.service(5): unit file conventions and lifecycle management
+- daemon(7): Linux daemon programming conventions
+- 12-Factor App: process model and disposability (Factors VI, IX)
+- Kubernetes: liveness/readiness probes for container health

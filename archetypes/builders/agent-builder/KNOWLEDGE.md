@@ -1,65 +1,72 @@
 ---
 pillar: P01
 llm_function: INJECT
-purpose: Standards and domain knowledge for agent production
-sources: CEX schema, iso_vectorstore pattern, CODEXA agent catalog, agentic AI literature
+purpose: Domain knowledge for agent artifact production
+sources: CEX P02 schema, iso_vectorstore pattern, agentic AI literature (Anthropic, OpenAI, LangChain)
 ---
 
 # Domain Knowledge: agent
 
-## Foundational Concept
-An agent is the core runtime entity in any agentic AI system. It represents a persistent
-identity — who the LLM BECOMES when loaded — with scoped capabilities, assigned tools,
-a satellite position, and a structured iso_vectorstore (10+ ISO files) that makes it
-portable, searchable, and auditable. The CEX agent kind (P02) is the canonical definition.
+## Executive Summary
 
-## Agent vs Nearby Types
+An agent is the core runtime identity in an agentic AI system — a persistent persona with scoped capabilities, assigned tools, and a structured file package (iso_vectorstore) that makes it portable and searchable. The agent kind defines WHO the LLM becomes when loaded. Every agent requires 10+ ISO files covering identity, instructions, examples, error handling, and deployment.
 
-| Type | What it is | Why it is NOT agent |
-|------|------------|---------------------|
-| system_prompt | How the agent speaks — rules and persona | Voice/style layer, not identity package |
-| skill | Executable capability with phases and trigger | Callable function, not persistent identity |
-| mental_model (P02) | Static design-time routing blueprint | Blueprint, not runtime entity |
-| mental_model (P10) | Runtime session state | Ephemeral state, not permanent definition |
-| model_card | LLM spec (pricing, context, capabilities) | Describes underlying model, not agent using it |
-| iso_package | Portable distributable bundle | Distribution format, not canonical definition |
+## Spec Table
 
-## ISO Vectorstore Pattern
-Every agent requires 10+ ISO files:
+| Property | Value |
+|----------|-------|
+| Pillar | P02 (identity/model) |
+| llm_function | BECOME (identity assumption) |
+| Required ISO files | 10 minimum (MANIFEST through SYSTEM_INSTRUCTION) |
+| Frontmatter fields | 10 required |
+| Quality gates | 7 HARD + 10 SOFT |
+| Capability bullets | 4-8 concrete, no vague entries |
+| Naming | ISO_{AGENT_UPPER}_{NNN}_{TYPE}.md |
 
-| File | Pillar | Purpose |
-|------|--------|---------|
-| ISO_*_001_MANIFEST.md | P02 | Identity, version, capabilities list |
-| ISO_*_002_QUICK_START.md | P01 | 5-minute onboarding guide |
-| ISO_*_003_PRIME.md | P03 | Entry point prompt for this agent |
-| ISO_*_004_INSTRUCTIONS.md | P03 | Step-by-step execution protocol |
-| ISO_*_005_ARCHITECTURE.md | P08 | Boundary, dependency graph, position |
-| ISO_*_006_OUTPUT_TEMPLATE.md | P05 | Template with {{vars}} for agent output |
-| ISO_*_007_EXAMPLES.md | P07 | Golden + anti-examples |
-| ISO_*_008_ERROR_HANDLING.md | P11 | Failure modes and remediation |
-| ISO_*_009_UPLOAD_KIT.md | P04 | How to load/deploy the agent |
-| ISO_*_010_SYSTEM_INSTRUCTION.md | P03 | Full system prompt for LLM injection |
+## Patterns
 
-## Key Patterns
-- BECOME function: agent definition is read by LLM which then assumes that identity
-- Satellite assignment: every agent belongs to a satellite or is explicitly "agnostic"
-- Capability scoping: 4-8 concrete bullets — no vague "can help with" entries
-- Boundary discipline: each agent explicitly lists what it does NOT handle
-- Density rule: no filler — every sentence in the artifact carries information
-- iso_vectorstore naming: ISO_{AGENT_UPPER}_{NNN}_{TYPE}.md — consistent across all agents
+- **BECOME function**: the LLM reads the agent definition and assumes that identity — persona, constraints, and voice
+- **ISO vectorstore structure**: 10 standardized files per agent enable consistent discovery, loading, and auditing
 
-## CEX-Specific Fields
+| ISO File | Purpose |
+|----------|---------|
+| 001_MANIFEST | Identity, version, capabilities |
+| 002_QUICK_START | 5-minute onboarding |
+| 003_PRIME | Entry point prompt |
+| 004_INSTRUCTIONS | Step-by-step execution |
+| 005_ARCHITECTURE | Boundary, dependencies |
+| 006_OUTPUT_TEMPLATE | Output format with vars |
+| 007_EXAMPLES | Golden + anti-examples |
+| 008_ERROR_HANDLING | Failure modes |
+| 009_UPLOAD_KIT | Deployment guide |
+| 010_SYSTEM_INSTRUCTION | Full system prompt |
 
-| Field | Justification | No direct industry equivalent |
-|-------|--------------|-------------------------------|
-| satellite | Links agent to owning satellite in the grid | CODEXA-specific orchestration unit |
-| iso_files_count | Integrity check for vectorstore completeness | CEX-specific |
-| capabilities_count | Ensures body matches frontmatter declaration | CEX-specific |
-| routing_keywords | Drives brain_query discovery | CEX brain search |
-| llm_function | BECOME signals identity vs callable | CEX taxonomy |
+- **Capability scoping**: 4-8 concrete bullets describing what the agent CAN do — no vague "helps with" entries
+- **Boundary discipline**: every agent explicitly lists what it does NOT handle, preventing overlap
+- **Routing keywords**: 4-8 specific terms that activate this agent via semantic search
+
+## Anti-Patterns
+
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| Vague capabilities ("can help with tasks") | No routing signal; brain search returns wrong agent |
+| Missing boundary list | Agent scope creep; overlaps with siblings |
+| Incomplete iso_vectorstore (<10 files) | Agent cannot be fully loaded or audited |
+| Identity mixed with task instructions | Conflates WHO (agent) with WHAT (action_prompt) |
+| Over-scoped (>8 capabilities) | Agent does too much; should be split |
+
+## Application
+
+1. Define persona: name, domain expertise, voice, constraints
+2. Scope capabilities: 4-8 concrete, verifiable bullets
+3. Map boundaries: 3-5 sibling types this agent does NOT handle
+4. Generate iso_vectorstore skeleton (10 files minimum)
+5. Write routing keywords for semantic discovery
+6. Validate: every capability is testable, every boundary names a real sibling
 
 ## References
-- CEX P02_model/_schema.yaml — canonical field definitions
-- CEX archetypes/builders/system-prompt-builder/ — upstream dependency
-- CODEXA records/agents/ — 118+ real agent examples with complete iso_vectorstore
-- Anthropic: Claude system prompt and identity patterns
+
+- Anthropic: System prompt and identity design patterns
+- OpenAI: Assistant API — agent definition and tool assignment
+- LangChain: Agent classes — ReAct, tool-using, conversational agents
+- CEX P02 schema: canonical agent field definitions
