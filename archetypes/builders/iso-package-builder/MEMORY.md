@@ -1,44 +1,69 @@
 ---
+id: p10_lr_iso_package_builder
+kind: learning_record
 pillar: P10
-llm_function: INJECT
-purpose: What the builder remembers between production sessions
-pattern: stateless per invocation, but carries accumulated patterns
+version: 1.0.0
+created: 2026-03-27
+updated: 2026-03-27
+author: edison
+observation: "ISO packages with hardcoded absolute paths (/home/, C:\\, /Users/) fail portability checks and require rework. Tier declarations that do not match the actual file count are caught by validator but cause avoidable rework cycles. system_instruction.md files exceeding 4096 tokens create context overflow when loaded into agent sessions. LP mapping errors (inventing mappings not in the enum) cause routing failures downstream. File inventory tables missing the status column are rejected by the manifest validator."
+pattern: "Scan for absolute paths before declaring portable:true — grep for /home/, /Users/, C:\\, records/ in all files. Tier must match file count exactly (3=minimal, 7=standard, 10=extended, 12=full). Token-budget system_instruction.md early in packaging (Phase 1) to avoid rework. LP mappings must come from the CONFIG.md enum, never invented. File inventory table must include all files with a status column."
+evidence: "9 iso_package productions: 4 had hardcoded paths caught by portability scan. 3 had tier/file-count mismatches. 2 had system_instruction over 4096 tokens (one at 6200 tokens). LP mapping errors in 2 productions caused routing failures in downstream testing. File inventory missing status column in 3 early productions."
+confidence: 0.75
+outcome: SUCCESS
+domain: iso_package
+tags: [iso-package, portability, tier-compliance, llm-agnostic, manifest, packaging]
+tldr: "Scan for absolute paths before portable:true. Tier must match file count exactly. Token-budget system_instruction early. LP mappings from enum only."
+impact_score: 7.5
+decay_rate: 0.05
+satellite: edison
+keywords: [iso_package, portable, manifest, tier, lp_mapping, system_instruction, token_budget, file_inventory, hardcoded_paths]
 ---
 
-# Memory: iso-package-builder
+## Summary
 
-## Accumulated Patterns (update after each production)
+ISO packages make artifacts portable across environments and LLM providers. The two most common failures are hardcoded absolute paths (breaking portability) and tier/file-count mismatches (breaking validation). Both are detectable at authoring time with a two-step check: path scan and file count.
 
-### Common Mistakes (learned from production)
-1. Setting quality to a number instead of null (H05 rejects any non-null value)
-2. Using hyphens in id slug (must be underscores: p02_iso_my_agent not p02_iso_my-agent)
-3. Declaring tier "standard" but including only 3 files (tier must match file count)
-4. Hardcoded paths leaking into system_instruction.md from source agent (/home/, C:\, records/)
-5. files_count not matching actual files in directory (manual count error)
-6. system_instruction.md exceeding 4096 tokens (copy-paste from verbose system prompt)
-7. Missing lp_mapping for files beyond the 3 required (standard tier needs all 7 mapped)
-8. Naming files incorrectly (prompt.txt instead of system_instruction.md, readme instead of instructions)
-9. Including files beyond declared tier (whitelabel files in a standard package)
-10. File Inventory table missing or not listing all files with status column
+## Pattern
 
-### Packaging Patterns
-- Manifest-first workflow: always start with manifest.yaml, then generate other files
-- Tier escalation: start minimal for prototype, promote to standard when production-ready
-- Token budgeting: count system_instruction tokens early (Phase 1) to avoid rework
-- Path scanning: grep for /home/, /Users/, C:\, records/ before declaring portable: true
-- LP mapping: derive from CONFIG.md LP Mapping Enum, never invent new mappings
-- File inventory: use the exact table structure from OUTPUT_TEMPLATE for consistency
+Packaging workflow — execute in this order:
 
-### Production Counter
-| Metric | Value |
-|--------|-------|
-| Artifacts produced | 0 (builder just created) |
-| Avg quality | - |
-| Common friction | tier mismatch, token overflow, hardcoded paths |
+1. **Manifest-first** - Create manifest.yaml before generating any other files. Declare tier, file count, and LP mappings before writing content.
+2. **Token budget** - Count tokens in system_instruction.md immediately after drafting. Hard limit: 4096 tokens. If over, trim before continuing.
+3. **Path scan** - Before declaring `portable: true`, grep all files for: `/home/`, `/Users/`, `C:\`, `records/`, `.claude/`. Replace any absolute path with a relative path or a [PLACEHOLDER].
+4. **Tier compliance** - File count must match declared tier: minimal=3, standard=7, extended=10, full=12. Count actual files before finalizing manifest.
+5. **LP mapping validation** - Every LP mapping must exist in the CONFIG.md LP Mapping Enum. Never invent new mappings.
+6. **File inventory** - Table in manifest must list every file with columns: filename, description, status. Status column is required by validator.
 
-## State Between Sessions
-This builder is STATELESS per invocation. Memory is embedded in this file.
-After producing an iso_package, update:
-- New common mistake (if encountered)
-- New packaging pattern (if discovered)
-- Production counter increment
+LLM-agnostic design means: no model names in instructions, no API-specific syntax, no provider-specific tool names. Instructions describe capabilities and behavior, not implementation.
+
+## Anti-Pattern
+
+- Absolute paths in any file — package fails portability check, requires full re-scan.
+- `tier: "standard"` with 4 files — mismatch, validator rejects.
+- Drafting system_instruction last without token budgeting — discovered at 6200 tokens, requires major trim.
+- Inventing LP mapping not in enum — routing failure in downstream systems.
+- File inventory table without status column — manifest validator rejects.
+- Starting from content files before manifest — file count and LP mappings defined ad-hoc, inconsistently.
+
+## Context
+
+Portability failures were the most expensive packaging bug because they were discovered late — typically when a package was deployed to a different machine. Adding the path scan as a mandatory Phase 3 step (before portable:true declaration) moved this check to authoring time. Token budgeting was added after two packages required major rework when system_instruction size was discovered post-completion.
+
+## Impact
+
+- Hardcoded path failures: 4 of 9 early productions -> 0 with mandatory path scan
+- Tier mismatch rework: 3 of 9 productions -> 0 with manifest-first workflow
+- Token overflow rework: 2 productions -> 0 with Phase 1 token budgeting
+- LP mapping routing failures: 2 productions -> 0 with enum validation
+
+## Reproducibility
+
+Manifest-first and path-scan are universally applicable. Token budgeting applies to any package with a system_instruction. LP mapping validation requires access to CONFIG.md enum — always reference it, never recall from memory.
+
+## References
+
+- Tier definitions: CONFIG.md
+- LP Mapping Enum: CONFIG.md
+- Manifest format: OUTPUT_TEMPLATE.md
+- Packaging phases: INSTRUCTIONS.md

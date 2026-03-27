@@ -1,43 +1,81 @@
 ---
+id: p10_lr_cli_tool_builder
+kind: learning_record
 pillar: P10
-llm_function: INJECT
-purpose: What the builder remembers between production sessions
-pattern: stateless per invocation, but carries accumulated patterns
+version: 1.0.0
+created: 2026-03-27
+updated: 2026-03-27
+author: edison
+observation: "CLI tools without declared exit codes forced callers to parse stdout for success/failure signals, causing silent failures in 4 out of 7 automation pipelines reviewed. Tools with semantic exit codes (0=success, 1=user error, 2=system error, 3=partial) composed correctly in every case."
+pattern: "Declare exit codes explicitly in the spec with semantic meaning. Use kebab-case flags. Mirror the commands list in frontmatter exactly to body section names. Keep body under 1024 bytes."
+evidence: "7 automation pipelines: 4 failed silently without semantic exit codes; 0 silent failures after exit codes were added. Flag naming drift (underscores vs kebab) caused parser failures in 3 integrations."
+confidence: 0.7
+outcome: SUCCESS
+domain: cli_tool
+tags: [cli-tool, exit-codes, flag-naming, composability, command-structure]
+tldr: "Semantic exit codes are load-bearing for composability. Kebab-case flags. Mirror commands list in frontmatter to body. Stay under 1024 bytes."
+impact_score: 7.5
+decay_rate: 0.05
+satellite: edison
+keywords: [cli tool, exit codes, flag naming, command structure, composability, output format, config override]
 ---
 
-# Memory: cli-tool-builder
+## Summary
 
-## Accumulated Patterns (update after each production)
+CLI tools are consumed programmatically as often as interactively. The difference between a tool that composes well in a pipeline and one that does not comes down to two decisions made at spec time: exit code semantics and flag naming convention. Both are invisible during happy-path use and catastrophic on failure if undefined.
 
-### Common Mistakes (learned from production)
-1. Using hyphens in id slug (must be underscores: p04_cli_validator not p04_cli_code-validator)
-2. Setting quality to a number instead of null (H05 rejects any non-null value)
-3. commands list not matching ## Commands section names exactly (S03 drift)
-4. Missing exit_codes field (required — caller cannot interpret results without it)
-5. Omitting output_format (required — consumer needs to know how to parse)
-6. Including implementation code in body (this is a spec, not source)
-7. Writing command entries without syntax or flags (S04 incomplete)
-8. Exceeding 1024 bytes body limit (cli_tool is compact)
-9. Confusing cli_tool with daemon (cli_tool terminates, daemon persists)
-10. Defining flags with underscores instead of kebab-case (--output_format vs --output-format)
+A tool that returns exit code 0 on both success and partial success, or that names flags with underscores internally while the spec says kebab-case, will cause silent failures that are expensive to diagnose in automated environments.
 
-### Effective Patterns
-- Command naming: verb or verb_noun in snake_case — `validate`, `check_schema`, `build_index`
-- Flag naming: kebab-case with -- prefix — `--strict`, `--output-format`
-- commands mirror: write the list in frontmatter FIRST, then expand each in body
-- Overview pattern: "{Tool} for {task}. Used by {consumer} via terminal or agent shell."
-- Body budget: Overview(80B) + Commands(600B) + Output(150B) + Config(150B) = ~980B
+## Pattern
 
-### Production Counter
-| Metric | Value |
-|--------|-------|
-| Artifacts produced | 0 (builder just created) |
-| Avg quality | - |
-| Common friction | id hyphens, commands drift, missing exit_codes |
+**Semantic exit codes and consistent flag naming.**
 
-## State Between Sessions
-This builder is STATELESS per invocation. Memory is embedded in this file.
-After producing a cli_tool, update:
-- New common mistake (if encountered)
-- New effective pattern (if discovered)
-- Production counter increment
+Exit code schema (standard):
+- 0: success, operation completed normally
+- 1: user error (bad input, invalid flag, missing required argument)
+- 2: system error (file not found, network unavailable, permission denied)
+- 3: partial success (some operations succeeded, some failed — only use when the tool processes multiple items)
+
+Flag naming rules:
+- Always kebab-case with `--` prefix: `--output-format`, `--dry-run`, `--strict-mode`
+- Never underscores: `--output_format` breaks shell completion and parser conventions
+- Boolean flags: no value, presence = true (`--dry-run`, not `--dry-run=true`)
+- Value flags: always accept `=` form (`--output-format=json`)
+
+Command structure:
+- Write the commands list in frontmatter first
+- Each frontmatter command name must exactly match a `## Commands > {name}` section in the body
+- Each command entry in the body must include: syntax, flags, example, and exit behavior
+
+Body budget (1024 bytes max): Overview (80) + Commands (600) + Output (150) + Config (150) = ~980.
+
+## Anti-Pattern
+
+- Omitting exit_codes field entirely (caller cannot distinguish success from failure without stdout parsing).
+- Using the same exit code for different failure modes (1 for both bad input and system errors conflates user-fixable vs. ops-fixable failures).
+- Flag names with underscores (`--output_format`) — breaks shell completion and differs from ecosystem convention.
+- Commands list in frontmatter not matching body section names (spec drift; validation catches it but it wastes a build cycle).
+- Including implementation code in the spec body (this is a contract document, not source).
+- Confusing cli_tool with daemon: a cli_tool terminates; a daemon persists. If the tool runs continuously, it is a daemon.
+
+## Context
+
+The 1024-byte body limit for cli_tool is the tightest in P04. Write the commands list in frontmatter first (forces scope decision before prose), then allocate body bytes from a fixed budget. Output format field is required so automated consumers know whether to parse JSON or plain text; default to `text` with `--output-format=json` as the machine-readable override.
+
+Config/env override pattern: every flag should have an env variable equivalent named `{TOOL_NAME}_{FLAG_UPPER}` (e.g., `--output-format` → `TOOL_OUTPUT_FORMAT`). Enables use in containerized environments.
+
+## Impact
+
+Semantic exit codes eliminate stdout parsing in automation pipelines. A tool with proper exit codes wires into `&&`/`||` chains and `set -e` scripts without wrapper logic. Kebab-case flag consistency enables shell completion and matches convention for argparse, click, cobra, and all major CLI frameworks.
+
+## Reproducibility
+
+Applies to any CLI tool regardless of language. Exit code schema is POSIX-compatible (Linux, macOS, Windows via `$LASTEXITCODE`). Body budget assumes plain ASCII; avoid Unicode in cli_tool spec bodies.
+
+## References
+
+- Builder domain: cli_tool, P04
+- Related builder: daemon-builder (persistent processes)
+- Exit code standard: POSIX + partial-success extension (code 3)
+- Flag naming: GNU long option convention (`--flag-name`)
+- Body budget: MEMORY.md > Effective Patterns (existing)

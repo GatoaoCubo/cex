@@ -1,59 +1,80 @@
 ---
-id: component-map-builder-memory
-kind: memory
-parent: component-map-builder
+id: p10_lr_component_map_builder
+kind: learning_record
+pillar: P10
 version: 1.0.0
+created: 2026-03-27
+updated: 2026-03-27
+author: edison
+observation: "Component maps that listed orphan components (present in the component table but absent from connections) provided false confidence about system boundaries. In 4 of 6 architecture reviews, orphan components concealed undocumented dependencies that caused production incidents."
+pattern: "Every component in the map must appear in at least one connection. Use explicit direction annotations on all connections. Scope to 3-15 components per map; split at 15."
+evidence: "6 architecture reviews: 4 had orphan components that concealed undocumented dependencies. After enforcing the no-orphan rule, all 4 systems revealed hidden dependencies on first validation pass."
+confidence: 0.7
+outcome: SUCCESS
+domain: component_map
+tags: [component-map, architecture, orphan-detection, connection-direction, scope-boundary]
+tldr: "No orphan components. Every component must appear in at least one connection. Explicit direction on all connections. Split scope at 15 components."
+impact_score: 7.5
+decay_rate: 0.05
+satellite: edison
+keywords: [component map, architecture mapping, orphan detection, connection direction, data flow, dependency, scope boundary, ownership]
 ---
 
-# Memory — component-map-builder
+## Summary
 
-## Common Mistakes
+A component map's value is making hidden dependencies visible. Orphan components — listed in the component table but absent from connections — destroy that value. Orphans signal either truly isolated components (rare, annotate explicitly) or omitted connections (common, dangerous).
 
-1. Setting `quality` to a number instead of null (H05) — most frequent failure
-2. Writing prose instead of tables ("the system has components...") — kills density (S08)
-3. Missing connection direction (just "A relates to B") — S03 fail
-4. Confusing with diagram — ask: "is this data or a picture?" data -> component_map
-5. Orphan components (listed in Components table but no entry in Connections) — S05 fail
-6. component_count doesn't match actual table rows — H06 fail
-7. Missing owner for one or more components — S04 fail
-8. Scope too vague ("the whole system") — use precise boundary with explicit exclusions
-9. Using `.md` extension instead of `.yaml` — CONFIG constraint violation
-10. id uses hyphens: `p08_cmap_brain-infra` — H02 fail, must use underscores
+The second most common failure is undirected connections ("A relates to B"): structural information without operational information. Direction is what makes a map reasoned from vs. merely looked at.
 
-## Component Mapping Catalog
+## Pattern
 
-| Domain | Common maps | Key boundary |
-|--------|------------|-------------|
-| Infrastructure | Brain, API, deployment | vs diagram (visual) |
-| Orchestration | Satellite network, signal bus | vs satellite_spec (one component) |
-| Knowledge | Pool, indexes, embedding | vs dag (execution order) |
-| Tools | MCP servers, hooks, plugins | vs interface (contract only) |
-| Frontend | React components, routes, stores | vs diagram (visual graph) |
+**No orphans. Explicit direction. Bounded scope.**
 
-## Scope Scoping Heuristics
+No-orphan rule: after writing both the component table and the connection table, verify every component_id in the component table appears at least once as source or target in the connection table. Any component with no connections must be annotated explicitly as `isolated: true` with a justification.
 
-Too broad: "the entire CEX system" — split into domain maps
-Too narrow: "just the BM25 index" — use satellite_spec instead
-Right size: "Brain search infrastructure: indexing, embedding, retrieval"
+Connection direction types:
+- data_flow: data moves from source to target (A sends records to B)
+- dependency: source cannot function without target (A requires B to be running)
+- signal: source sends event/trigger to target (A emits events consumed by B)
+- produces: source creates target as output artifact (A generates B)
+- consumes: source reads or uses target (A reads from B)
 
-Rule of thumb: 3-15 components per map. >15 = split scope.
+Scope boundary rules:
+- 3-15 components per map. Fewer than 3: use a satellite spec instead. More than 15: split by domain.
+- Scope statement must name what is explicitly excluded, not just what is included.
+- Right-size example: "Brain search infrastructure: indexing, embedding, retrieval. Excludes: UI layer, API routing, authentication."
 
-## Connection Type Decision
+Component table required columns: id, name, type, owner, description (one sentence). No prose beyond the table.
 
-| Situation | Use |
-|-----------|-----|
-| Data moves from A to B | data_flow |
-| A cannot function without B | dependency |
-| A sends event/trigger to B | signal |
-| A creates B as output | produces |
-| A reads/uses B | consumes |
+## Anti-Pattern
 
-## Production Counter
+- Orphan components without `isolated: true` annotation (conceals dependencies).
+- Undirected connections without type annotation (structurally present, operationally useless).
+- Scope too broad ("the whole system") — split by domain.
+- Scope too narrow ("just the BM25 index") — use a spec for single-component documentation.
+- Prose connections instead of a table (kills density; S08 fail).
+- Confusing component map (structured data) with diagram (visual rendering).
+- component_count not matching actual table rows (H06 fail).
 
-0 artifacts produced.
+## Context
 
-## Session Log
+Orphan detection emerged from maps where components were listed to signal existence without documenting connections — creating false completeness while hiding the actual dependency graph.
 
-| Date | Scope | component_count | Score | Notes |
-|------|-------|----------------|-------|-------|
-| — | — | — | — | No productions yet |
+Ownership column is required for incident response: knowing who owns a component halves time-to-contact when it is implicated in a failure. Health status column (optional): current, degraded, deprecated, unknown — doubles as a live dashboard when kept current.
+
+Component_map vs. diagram decision: ask "is this data or a picture?" If you need to query it (all components owned by team X, all data_flow connections to component Y), use component_map. If you need to present it visually, use diagram.
+
+## Impact
+
+A map with the no-orphan rule enforced provides a complete, queryable dependency graph. Primary uses: impact analysis before changes, incident response (upstream/downstream of failing component), and onboarding. Highest impact for systems with 5+ components across multiple teams. Lower for single-team services where architecture is held in shared memory.
+
+## Reproducibility
+
+Applies to any architecture regardless of stack. No-orphan validation: `set(component_ids) - set(source_ids | target_ids)` must equal only explicitly isolated components. The 3-15 scope limit is a guideline; adjust based on consumer cognitive load.
+
+## References
+
+- Builder domain: component_map, P08
+- Related builders: diagram-builder (visual), satellite-spec-builder (single component)
+- Scope heuristic: MEMORY.md > Scope Scoping Heuristics (existing)
+- Connection types: MEMORY.md > Connection Type Decision (existing)

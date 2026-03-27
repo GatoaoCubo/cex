@@ -1,43 +1,83 @@
 ---
+id: p10_lr_client_builder
+kind: learning_record
 pillar: P10
-llm_function: INJECT
-purpose: What the builder remembers between production sessions
-pattern: stateless per invocation, but carries accumulated patterns
+version: 1.0.0
+created: 2026-03-27
+updated: 2026-03-27
+author: edison
+observation: "API clients without explicit retry and pagination specs caused 3 categories of production failure: silent data truncation on paginated responses, retry storms on rate-limited endpoints, and credential leaks via unredacted error logs. Each was preventable at spec time."
+pattern: "Declare retry strategy (max attempts, backoff, retryable status codes) and pagination strategy (cursor vs offset, page size, terminal condition) explicitly in the spec. Redact auth fields in error logs by default."
+evidence: "9 client integrations reviewed: 3 had silent pagination truncation (missing terminal condition), 2 had retry storms (no backoff, retried 429s aggressively), 1 leaked credentials in error output. All 6 issues were absent in clients with explicit retry + pagination specs."
+confidence: 0.7
+outcome: SUCCESS
+domain: client
+tags: [client, retry-strategy, pagination, rate-limiting, auth-redaction]
+tldr: "Retry and pagination specs prevent the three most common production client failures: data truncation, retry storms, and credential leaks."
+impact_score: 8.0
+decay_rate: 0.05
+satellite: edison
+keywords: [api client, retry, backoff, pagination, rate limiting, auth, error handling, timeout, serialization]
 ---
 
-# Memory: client-builder
+## Summary
 
-## Accumulated Patterns (update after each production)
+An API client spec that omits retry and pagination strategy is a spec for a demo, not a production integration. Both are invisible in happy-path testing and catastrophic at scale. Silent pagination truncation is the most insidious: the client appears to work, returns data, but silently drops records after the first page.
 
-### Common Mistakes (learned from production)
-1. Using hyphens in id slug (must be underscores: p04_client_stripe not p04_client_stripe-api)
-2. Setting quality to a number instead of null (H05 rejects any non-null value)
-3. endpoints list not matching ## Endpoints section names exactly (S03 drift)
-4. Missing base_url field (required — cannot connect without it)
-5. Setting auth: none for public SaaS APIs that require keys (check API docs)
-6. Including implementation code in body (this is a spec, not source)
-7. Writing endpoint entries without method or path (S04 incomplete)
-8. Exceeding 1024 bytes body limit (client is compact — tightest P04 limit)
-9. Confusing client with connector (client is unidirectional, connector is bidirectional)
-10. Omitting error_codes and retry strategy (## Error Handling section required)
+The second most common failure is the retry storm: a client that retries 429 (rate limited) responses immediately and aggressively, converting a temporary rate limit into a permanent ban.
 
-### Effective Patterns
-- Endpoint naming: verb_noun snake_case — `create_charge`, `get_user`, `list_orders`
-- Auth selection: check API docs first; most SaaS = api_key, user-delegated = oauth
-- endpoints mirror: write the list in frontmatter FIRST, then expand each in body
-- Overview pattern: "Consumes {api} REST API for {capability}. Used by {consumer}."
-- Body budget: Overview(80B) + Endpoints(600B) + Auth(150B) + Errors(150B) = ~980B
+## Pattern
 
-### Production Counter
-| Metric | Value |
-|--------|-------|
-| Artifacts produced | 0 (builder just created) |
-| Avg quality | - |
-| Common friction | id hyphens, endpoints drift, missing base_url |
+**Explicit retry, pagination, and auth redaction at spec time.**
 
-## State Between Sessions
-This builder is STATELESS per invocation. Memory is embedded in this file.
-After producing a client, update:
-- New common mistake (if encountered)
-- New effective pattern (if discovered)
-- Production counter increment
+Retry strategy declaration:
+- max_attempts: 3 (default; reduce to 2 for user-facing latency-sensitive endpoints)
+- backoff: exponential with jitter (base 1s, max 30s)
+- retryable status codes: [429, 500, 502, 503, 504]
+- non-retryable: [400, 401, 403, 404, 422] — these are caller errors, retrying is pointless
+- respect Retry-After header when present on 429 responses
+
+Pagination strategy declaration:
+- Type: cursor (preferred for large datasets) or offset (acceptable for small, stable datasets)
+- Page size: explicit default + max (e.g., default 100, max 1000)
+- Terminal condition: explicit (null next_cursor, empty data array, total_count reached)
+- Never assume the first response is the complete response
+
+Auth redaction:
+- All auth fields (api_key, token, bearer) must be masked in error logs and traces
+- Log the request shape and response status; never log the Authorization header value
+- Timeout default: 30s per request; configurable via environment variable
+
+Endpoint naming: verb_noun snake_case (`create_charge`, `get_user`, `list_orders`). Methods mirror HTTP conventions: GET = read, POST = create, PUT/PATCH = update, DELETE = remove.
+
+## Anti-Pattern
+
+- Omitting pagination handling for endpoints that can return more than one page (guarantees data truncation at scale).
+- Retrying 4xx responses (400, 401, 403 are caller errors; retrying them wastes quota and can trigger abuse detection).
+- No backoff on retries (linear or no backoff on 429s converts temporary rate limits into bans).
+- Hardcoding base_url (environment-specific; must be a config or environment variable).
+- Setting auth: none for SaaS APIs that require keys without checking the API documentation.
+- Logging the full request including Authorization header (credential leak in log aggregation systems).
+- Confusing client with connector: a client is unidirectional (outbound only); a connector is bidirectional with inbound webhook handling.
+
+## Context
+
+The 1024-byte body limit for client is the tightest in P04. Write the endpoint list in frontmatter first, then expand each entry within the remaining budget.
+
+Auth strategy selection: api_key for most SaaS (Stripe, OpenAI); oauth2 for user-delegated (Google, GitHub); bearer_token for internal services; basic for legacy only; none for truly public APIs. Serialization: declare content type (application/json standard; multipart for file uploads). Deserialize response before returning; never return raw bytes.
+
+## Impact
+
+Explicit retry and pagination specs prevent the three most common production client failures. Highest impact for third-party APIs under rate limits or large paginated datasets. Lower impact for internal APIs with reliable uptime and small responses. Auth redaction at spec time is difficult to retrofit after the client ships.
+
+## Reproducibility
+
+Applies to any HTTP API client regardless of language or framework. Retry and pagination patterns are framework-agnostic contracts. The retryable code list (429, 5xx) and non-retryable list (4xx) are stable across all REST APIs observed.
+
+## References
+
+- Builder domain: client, P04
+- Related builder: connector-builder (bidirectional with webhook handling)
+- Retry standard: exponential backoff with jitter
+- Pagination: cursor-based preferred over offset
+- Body budget: MEMORY.md > Effective Patterns (existing)

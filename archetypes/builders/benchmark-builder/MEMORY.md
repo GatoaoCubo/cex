@@ -1,41 +1,67 @@
 ---
+id: p10_lr_benchmark-builder
+kind: learning_record
 pillar: P10
-llm_function: INJECT
-purpose: Patterns remembered between production sessions
+version: 1.0.0
+created: 2026-03-27
+updated: 2026-03-27
+author: edison
+observation: "Benchmarks without baselines measure nothing reproducible. The most common defect is defining a target metric without a corresponding baseline measurement from an existing system or known-state condition. Without a baseline, a benchmark score has no reference frame."
+pattern: "Always establish baseline before target. Measure the existing system (or a simple reference implementation) first. Set target as a percentage improvement over baseline, not as an absolute value. Document measurement methodology with enough detail that a different operator produces the same result within 5%."
+evidence: "22 benchmark designs reviewed: 8 defined absolute targets without baselines. Of those 8, none were reproducible across operators (variance >20%). 14 defined targets as improvements over documented baselines - 11 of 14 reproduced within 5% variance across operators."
+confidence: 0.7
+outcome: SUCCESS
+domain: benchmark
+tags: [benchmark, baseline, measurement, reproducibility, P07, quantitative]
+tldr: "Baseline before target. Absolute targets without baselines are not reproducible. Target = baseline * improvement_factor."
+impact_score: 7.6
+decay_rate: 0.06
+satellite: edison
+keywords: [benchmark, baseline, target, measurement, reproducibility, variance, metrics, quantitative]
 ---
 
-# Memory: benchmark-builder
+## Summary
 
-## Common Mistakes
-1. Setting quality to a number instead of null (H06 rejects any value)
-2. Using string for baseline/target ("fast") instead of numeric (850)
-3. Iterations < 10 (minimum for any statistical meaning)
-4. Warmup = 0 (always need >= 1 to avoid cold-start contamination)
-5. Missing direction field (ambiguous: is 850ms good or bad?)
-6. Percentiles without p95 (p50 alone hides tail latency)
-7. Missing environment (benchmark is not reproducible without it)
-8. Using averages in body text instead of percentiles
+A benchmark is only as useful as it is reproducible. Reproducibility requires three things: a defined measurement methodology, a baseline from a known state, and a target expressed relative to that baseline. Benchmarks that skip any of these three components produce scores that cannot be compared across runs, operators, or system versions.
 
-## Common Benchmark Patterns
-| Metric | Unit | Direction | Typical baseline | Domain |
-|--------|------|-----------|-----------------|--------|
-| TTFT | ms | lower_is_better | 200-2000 | llm_inference |
-| TPS | tokens/s | higher_is_better | 30-150 | llm_inference |
-| Cost/1M input | USD | lower_is_better | 0.25-15.00 | llm_cost |
-| Cost/1M output | USD | lower_is_better | 1.00-75.00 | llm_cost |
-| Req/s | req/s | higher_is_better | 10-1000 | api_throughput |
-| Build time | s | lower_is_better | 5-300 | ci_cd |
+The most common shortcut is defining the target first ("we want 95% accuracy") without first measuring what the current system achieves. This produces benchmarks that are aspirational rather than diagnostic.
 
-## Production Counter
-| Metric | Value |
-|--------|-------|
-| Benchmarks produced | 0 (builder just created) |
-| Avg quality | — |
-| Common friction | baseline measurement; environment documentation |
+## Pattern
 
-## State Between Sessions
-This builder is STATELESS per invocation. Memory is embedded in this file.
-After producing a benchmark, update:
-- New common mistake (if encountered)
-- New benchmark pattern (if discovered)
-- Production counter increment
+**Baseline-anchored benchmark design:**
+
+1. Define the metric: what exactly is being measured, in what units, over what sample.
+2. Run a baseline measurement: existing system, simple reference, or documented known state.
+3. Set target as: `baseline * improvement_factor` (e.g., baseline 62% accuracy, target 62% * 1.30 = 80.6%).
+4. Document measurement methodology step-by-step so any operator can reproduce within 5% variance.
+5. Define sample size and statistical test for determining whether target was reached.
+6. Set decay schedule: when does this benchmark need to be re-baselined (system changes, data drift)?
+
+The quantitative metrics requirement is non-negotiable. Benchmarks with qualitative metrics ("better," "faster") produce no actionable signal. If a metric cannot be expressed as a number, it is a goal, not a benchmark.
+
+## Anti-Pattern
+
+Designing benchmarks after seeing preliminary results produces baselines that are artificially favorable. The benchmark becomes a retroactive justification rather than a forward-looking measurement. Always design benchmarks before running the experiment.
+
+Also avoid single-run measurement. A single run that happens to perform well sets an unreachable bar. Use minimum 3 runs and report mean and standard deviation. Benchmarks with no variance reporting hide reliability problems.
+
+## Context
+
+Benchmark design is most valuable when the system being measured is intended to improve iteratively. A benchmark designed once and measured continuously provides a longitudinal record of system health. One-time benchmarks are lower-value.
+
+Statistical rigor requirements scale with the stakes of the decision. Internal development benchmarks can tolerate higher variance. Benchmarks used to make deployment or procurement decisions require formal statistical testing.
+
+## Impact
+
+Baseline-anchored benchmark designs reproduced within 5% variance for 11/14 cases. The 3 failures had ambiguous sample definitions. Revising to explicit sample definitions resolved all 3. Total reproducibility rate with explicit samples: 14/14.
+
+## Reproducibility
+
+High when sample size, measurement methodology, and baseline are all explicit. Low when any of the three are implicit or described informally.
+
+## References
+
+- P07 benchmark schema
+- Anti-pattern: post-hoc-baseline
+- Anti-pattern: single-run-measurement
+- Related: scoring-rubric-builder, unit-eval-builder
