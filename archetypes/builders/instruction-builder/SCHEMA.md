@@ -3,54 +3,77 @@ pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for instruction
 pattern: TEMPLATE derives from this. CONFIG restricts this.
+version: 2.0.0
 ---
 
-# Schema: instruction
+# Schema: instruction (v2)
 
 ## Frontmatter Fields
 
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
-| id | string (p03_ins_{task_slug}) | YES | - | Namespace compliance |
-| kind | literal "instruction" | YES | - | Type integrity |
-| pillar | literal "P03" | YES | - | Pillar assignment |
+| id | string (p03_ins_{task_slug}) | YES | - | Namespace compliance. Regex: `^p03_ins_[a-z][a-z0-9_]+$` |
+| kind | literal "instruction" | YES | - | Type integrity — invariant |
+| pillar | literal "P03" | YES | - | Pillar assignment — invariant |
 | version | semver string | YES | "1.0.0" | Versionamento |
 | created | date YYYY-MM-DD | YES | - | Creation date |
 | updated | date YYYY-MM-DD | YES | - | Last update |
 | author | string | YES | - | Producer identity |
 | title | string | YES | - | Human-readable instruction name |
 | target | string | YES | - | Who executes this (agent or role) |
-| steps_count | integer | YES | - | Number of steps in body |
-| prerequisites | list[string] | YES | - | What must be true before starting |
+| phases_count | integer (3-5) | YES | - | Number of phases in body. Universal: Analyze -> Generate -> Validate |
+| prerequisites | list[string] | YES | - | Verifiable prerequisites ("Python 3.10+" not "environment ready") |
 | validation_method | enum: checklist, automated, manual, none | YES | "checklist" | How to verify success |
-| idempotent | boolean | YES | - | Safe to re-run? |
-| atomic | boolean | YES | - | All-or-nothing execution? |
+| domain | string | YES | - | Domain this instruction belongs to |
+| quality | null | YES | null | Never self-score — invariant |
+| tags | list[string], len >= 3 | YES | - | Must include "instruction" |
+| idempotent | boolean | REC | false | Safe to re-run? KNOWLEDGE: principle of re-execution |
+| atomic | boolean | REC | true | All-or-nothing execution? |
 | rollback | string or null | REC | null | How to undo (required if atomic: false) |
 | dependencies | list[string] | REC | [] | Tools/files/services required |
 | logging | boolean | REC | true | Log execution steps? |
-| domain | string | YES | - | Domain this instruction belongs to |
-| quality | null | YES | null | Never self-score |
-| tags | list[string], len >= 3 | YES | - | Must include "instruction" |
-| tldr | string <= 160ch | YES | - | Dense summary |
-| density_score | float 0.80-1.00 | REC | - | Content density |
+| tldr | string <= 160ch | REC | - | Dense summary |
+| density_score | float 0.80-1.00 | REC | - | Content density metric |
+
+**Required count**: 15 | **Recommended count**: 7
 
 ## ID Pattern
+
 Regex: `^p03_ins_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
 
 ## Body Structure (required sections)
-1. `## Prerequisites` — what must be true before starting
-2. `## Steps` — numbered step-by-step procedure (one action per step)
-3. `## Validation` — how to verify the instruction succeeded
-4. `## Rollback` — how to undo if execution fails midway
+
+1. `## Context` — Background, input/output contracts. Define every variable: `$var_name (required|optional) - type - "description"`. 15-20% of doc.
+2. `## Phases` — 3-5 phased execution steps. Universal pattern: `Analyze -> Generate -> Validate`. Each phase: atomic (one action), verifiable. Include pseudocode for complex logic. 40-50% of doc — this is the core.
+3. `## Output Contract` — Exact deliverable format with `{{variables}}`. Literal template, not prose description. 5-10% of doc.
+4. `## Validation` — Quality gates with numeric thresholds. Checklist format. 8-12% of doc.
+5. `## Metacognition` (recommended) — "Does / Does NOT" block + chaining: `[upstream] -> THIS -> [downstream]`. Prevents scope creep.
+
+## Size Calibration
+
+| Metric | CEX Builders | Real HOPs | Limit |
+|--------|-------------|-----------|-------|
+| Avg body bytes | 1,924 | 14,538 | - |
+| Max body bytes | 3,711 | 41,974 | - |
+| Median body bytes | - | 12,311 | - |
+| **max_bytes** | **8,192** | exceeds (complex) | **8,192** |
+| Body tokens | 3,000-3,500 | varies | ~6,000 |
+| Phases | 4-5 | 3-5 | 5 |
+| Input vars | 4-5 | 3-6 | 6 |
+
+> **Note**: max_bytes raised from 4096 to 8192. KNOWLEDGE sweet spot is 3-4KB body but real instructions median at 12KB. 8KB covers dense CEX format with margin for complex multi-phase instructions. P03 _schema.yaml maps instruction as user_prompt (max 2048B) — this schema supersedes for instruction-specific artifacts.
 
 ## Constraints
-- max_bytes: 4096 (body only)
+
+- max_bytes: 8192 (body only)
 - naming: p03_ins_{task_slug}.md
 - machine_format: yaml (frontmatter) + markdown (body)
 - id == filename stem
-- steps_count MUST match actual numbered steps in body
-- Each step MUST have exactly one action (no compound steps)
+- phases_count MUST match actual count of `## Phase N` sections in body
+- Each phase MUST have exactly one primary action (no compound steps)
 - Prerequisites MUST be verifiable (not vague)
-- quality: null always
-- instruction defines HOW to execute — no identity (system_prompt) or I/O spec (action_prompt)
+- Input contract MUST define every variable with type + required/optional + default
+- Output contract MUST use literal template with {{variables}}, not prose
+- quality: null always — invariant
+- instruction defines HOW to execute — no identity (system_prompt) or persona
