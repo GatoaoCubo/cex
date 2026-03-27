@@ -1,68 +1,208 @@
 ---
-id: law-builder-instructions
+id: p03_ins_law
 kind: instruction
 pillar: P03
-parent: law-builder
 version: 1.0.0
-created: "2026-03-26"
-updated: "2026-03-26"
-author: EDISON
-tags: [instructions, law-builder, protocol, P08, governance]
+created: 2026-03-27
+updated: 2026-03-27
+author: instruction-builder
+title: Law Builder Execution Protocol
+target: law-builder agent
+phases_count: 4
+prerequisites:
+  - A candidate rule statement or behavioral pattern to formalize is available
+  - The domain scope is identifiable (which system or component the rule governs)
+  - Rule intent is classifiable as mandate, not recommendation, safety restriction, or abstract truth
+validation_method: checklist
+domain: law
+quality: null
+tags: [instruction, law, governance, P08, mandate, enforcement]
+idempotent: true
+atomic: false
+rollback: "Discard generated artifact; source pattern or failure remains unchanged"
+dependencies: []
+logging: true
+tldr: Formalize an inviolable operational rule into a complete law artifact with statement, rationale, enforcement, and exception protocol.
+density_score: 0.91
 ---
 
-# law-builder — INSTRUCTIONS
+## Context
 
-## Phase 1: CLASSIFY
+The law-builder produces `law` artifacts (P08) — inviolable operational mandates the system must always follow. Laws differ from instructions (flexible guides), guardrails (safety restrictions), and axioms (abstract truths): a law is an operational rule with enforcement consequences and a defined exception protocol.
 
-1. Identify the operational rule to formalize as a law
-2. Verify mandate: confirm this rule MUST be followed without exception (not a recommendation)
-3. Confirm it is operational (not safety-focused -> guardrail, not abstract truth -> axiom, not flexible -> instruction)
-4. Identify the enforcement mechanism: automated check, review gate, or runtime guard
-5. Identify exceptions: conditions where the law legitimately does not apply
-6. Check brain_query [IF MCP]: `brain_query("existing laws P08 governance")` to avoid number collision
-7. Determine scope: system-wide, satellite-specific, or domain-specific
-8. Assign number: next sequential positive integer not already used in P08 laws
+**Inputs:**
 
-## Phase 2: COMPOSE
+- `$rule_trigger (required) - string - "Pattern, failure, or explicit mandate that motivates this law"`
+- `$scope (required) - string - "System component or domain this law governs (e.g. 'agent spawning', 'file writes', 'auth flows')"`
+- `$enforcement_context (optional) - string - "How violations are detected or prevented (hook, linter, human review, automated gate)"`
+- `$exceptions (optional) - list[string] - "Known legitimate scenarios where the law does not apply"`
 
-1. Read SCHEMA.md — source of truth for all 15 required + 4 extended fields
-2. Read OUTPUT_TEMPLATE.md — fill every `{{var}}` following SCHEMA constraints
-3. Fill frontmatter field `id`: pattern `p08_law_{number}` (must equal filename stem)
-4. Fill frontmatter field `kind`: literal string `law` (never "rule", "mandate", or other)
-5. Fill frontmatter field `quality`: literal `null` (NEVER a number)
-6. Fill frontmatter field `number`: the integer assigned in Phase 1 Step 8
-7. Fill frontmatter field `statement`: one imperative sentence using MUST/SHALL/NEVER/ALWAYS
-8. Fill frontmatter field `rationale`: explain WHY (not just restate the statement)
-9. Fill frontmatter field `enforcement`: name the detection mechanism explicitly
-10. Fill all remaining required fields: pillar, version, created, updated, author, domain, tags, tldr
-11. Fill extended fields: scope, exceptions (list or empty list), priority (1-10), keywords
-12. Write `## Statement` section: full imperative form of the law
-13. Write `## Rationale` section: why this law exists, with concrete justification
-14. Write `## Enforcement` section: mechanism, detection method, consequence of violation
-15. Write `## Exceptions` section: conditions where law does not apply, or "None"
-16. Write `## Examples` section: at least 2 concrete correct applications
-17. Write `## Violations` section: at least 2 concrete breach scenarios with consequences
-18. Write `## History` section: when and why the law was established, any revisions
-19. Write `## References` section: governance sources that support this law
+**Output:** A single `law` artifact file with frontmatter (15 required + 4 extended fields) and 8 body sections covering statement, rationale, enforcement, exceptions, examples, violations, and history.
 
-## Phase 3: VALIDATE
+**Boundary check before proceeding:**
+- Rule merely recommends a better approach → route to pattern-builder
+- Rule restricts for safety → route to guardrail-builder
+- Rule expresses an abstract truth → route to axiom-builder
+- Rule is a non-negotiable operational mandate → proceed
 
-1. Check H01: YAML frontmatter parses without error
-2. Check H02: id matches pattern `^p08_law_[0-9]+$`
-3. Check H03: id equals filename stem exactly
-4. Check H04: kind is literal string `law`
-5. Check H05: quality is `null`
-6. Check H06: all 15 required fields are present and non-empty (quality: null is valid)
-7. Check H07: tags is a list with length >= 3
-8. Check H08: number is a positive integer
-9. Check H09: statement uses imperative mood (contains MUST, SHALL, NEVER, or ALWAYS)
-10. Check all 10 SOFT gates against QUALITY_GATES.md; score each
-11. Cross-check: is this truly a law (mandate) and not drifting toward instruction or guideline?
-12. If any HARD gate fails: fix before outputting
-13. If SOFT score < 8.0: revise in same pass before outputting
-14. Confirm number uniqueness against existing laws in CEX system
+---
 
-## Output
+## Phases
 
-Produce a single `.md` file at: `cex/P08_architecture/examples/p08_law_{number}.md`
-File content: YAML frontmatter block + body sections (8 required sections)
+### Phase 1: Classify
+
+**Action:** Verify the rule qualifies as a law and define its exact scope.
+
+1. Extract the core behavioral requirement from `$rule_trigger`.
+2. Apply classification test:
+   - Is it ALWAYS required with no optional path? → Law candidate
+   - Does violation cause measurable harm or system failure? → Law candidate
+   - Is it a recommendation or best practice? → STOP, route to pattern-builder
+   - Is it a safety boundary? → STOP, route to guardrail-builder
+3. Define scope boundary: identify which agents, components, or workflows the rule governs.
+4. Check for existing laws covering the same scope to avoid number collision.
+5. Assign candidate law identifier: `p08_law_{N}` where N is the next available positive integer.
+6. Select `enforcement` from: `pre_commit_hook`, `ci_gate`, `runtime_assertion`, `review_required`, `automated_linter`.
+7. Identify `severity`: `critical` (system breaks), `high` (data loss possible), `medium` (quality degraded).
+
+**Verification:** You can complete this sentence without hedging: "If this rule is violated, [specific failure] occurs because [reason]."
+
+### Phase 2: Compose
+
+**Action:** Write all frontmatter fields and body sections.
+
+1. Read `SCHEMA.md` — source of truth for all 15 required + 4 extended fields.
+2. Read `OUTPUT_TEMPLATE.md` — fill every `{{var}}` following SCHEMA constraints.
+3. Set `id`: pattern `p08_law_{number}` (must equal the output filename stem).
+4. Set `kind`: literal string `law` — never "rule", "mandate", or any other value.
+5. Set `quality`: literal `null` — never a number.
+6. Set `number`: the integer assigned in Phase 1.
+7. Set `statement`: one imperative sentence using MUST, SHALL, NEVER, or ALWAYS — no conditionals.
+8. Set `rationale`: 2-4 sentences explaining WHY (not restating the statement).
+9. Set `enforcement`: the mechanism name from Phase 1.
+10. Fill extended fields: `scope`, `exceptions` (list or empty list), `priority` (1–10), `keywords`.
+11. Write `## Statement` — full imperative form of the law.
+12. Write `## Rationale` — why this law exists with concrete justification.
+13. Write `## Enforcement` — mechanism, detection method, consequence of violation.
+14. Write `## Exceptions` — each exception with approval criteria, or "None".
+15. Write `## Examples` — at least 2 concrete correct applications.
+16. Write `## Violations` — at least 2 concrete breach scenarios with consequences.
+17. Write `## History` — when and why established, any revisions.
+18. Write `## References` — governance sources or upstream documents that support this law.
+
+**Verification:** Statement contains one of: MUST, SHALL, NEVER, ALWAYS. No section is empty.
+
+### Phase 3: Validate
+
+**Action:** Run all 9 HARD gates. Fix any failure before proceeding to output.
+
+| Gate | Check |
+|------|-------|
+| H01 | YAML frontmatter parses without error |
+| H02 | `id` matches pattern `^p08_law_[0-9]+$` |
+| H03 | `id` equals filename stem exactly |
+| H04 | `kind` is literal string `law` |
+| H05 | `quality` is `null` |
+| H06 | All 15 required fields present and non-empty |
+| H07 | `tags` is a list with length >= 3 |
+| H08 | `number` is a positive integer |
+| H09 | `statement` uses imperative mood (MUST / SHALL / NEVER / ALWAYS) |
+
+Then score all 10 SOFT gates from `QUALITY_GATES.md`. If soft score < 8.0, revise in the same pass before outputting.
+
+**Cross-check:** Is this truly a mandate? Is it a single rule, not a bundle of rules?
+
+### Phase 4: Output
+
+**Action:** Emit the final artifact at the correct path.
+
+1. Write file to: `cex/P08_architecture/examples/p08_law_{number}.md`
+2. Confirm filename stem matches `id` field.
+3. Confirm 8 body sections all present and non-empty.
+4. Confirm total body size is within `CONFIG.md` size limit.
+
+---
+
+## Output Contract
+
+```
+---
+id: p08_law_{{number}}
+kind: law
+pillar: P08
+version: 1.0.0
+created: {{YYYY-MM-DD}}
+updated: {{YYYY-MM-DD}}
+author: {{author}}
+domain: {{domain}}
+number: {{integer}}
+statement: "{{MUST_or_SHALL_or_NEVER_or_ALWAYS_sentence}}"
+rationale: "{{why_this_law_exists}}"
+enforcement: {{enforcement_mechanism}}
+severity: {{critical|high|medium}}
+status: active
+priority: {{1-10}}
+scope: "{{scope_description}}"
+exceptions: [{{list_or_empty}}]
+keywords: [{{keyword_list}}]
+tags: [law, P08, {{domain_tag}}, {{scope_tag}}]
+quality: null
+---
+
+## Statement
+{{imperative_rule_sentence}}
+
+## Rationale
+{{rationale_paragraph}}
+
+## Enforcement
+{{mechanism_detection_consequence}}
+
+## Exceptions
+{{exceptions_with_approval_or_None}}
+
+## Examples
+{{two_or_more_correct_applications}}
+
+## Violations
+{{two_or_more_breach_scenarios_with_consequences}}
+
+## History
+| Version | Date | Author | Change |
+|---------|------|--------|--------|
+| 1.0.0 | {{YYYY-MM-DD}} | {{author}} | Initial |
+
+## References
+{{governance_sources}}
+```
+
+---
+
+## Validation
+
+- [ ] `id` matches `^p08_law_[0-9]+$` and equals filename stem
+- [ ] `kind` is literal string `law`
+- [ ] `quality` is `null`
+- [ ] `statement` contains MUST, SHALL, NEVER, or ALWAYS
+- [ ] All 15 required frontmatter fields present and non-empty
+- [ ] `tags` list has >= 3 items
+- [ ] `number` is a positive integer, unique among existing laws
+- [ ] All 8 body sections present and non-empty
+- [ ] At least 2 examples and at least 2 violation scenarios
+- [ ] Soft gate score >= 8.0 before output
+
+---
+
+## Metacognition
+
+**Does:**
+- Classify whether a rule qualifies as a law before building
+- Produce a single, complete, immediately usable law artifact
+- Enforce that every exception has approval criteria
+
+**Does NOT:**
+- Generate enforcement infrastructure (hooks, linters) — only documents them
+- Handle patterns, guardrails, or axioms — routes those to correct builders
+- Bundle multiple rules into one artifact
+
+**Chaining:** [pattern identification / failure postmortem] -> THIS -> [law registry update / enforcement hook wiring]

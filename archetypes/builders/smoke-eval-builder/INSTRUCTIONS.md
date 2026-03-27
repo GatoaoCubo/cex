@@ -1,33 +1,287 @@
 ---
+id: p03_ins_smoke_eval_builder
+kind: instruction
 pillar: P03
-llm_function: REASON
-purpose: Step-by-step production process for smoke_eval
-pattern: 3-phase pipeline (research -> compose -> validate)
+version: 1.0.0
+created: 2026-03-27
+updated: 2026-03-27
+author: instruction-builder
+title: Smoke Eval Builder Instructions
+target: smoke-eval-builder agent
+phases_count: 3
+prerequisites:
+  - Scope to test is identified (agent, service, pipeline, or component name)
+  - At least one critical-path check can be described
+  - Execution environment prerequisites are known (services, configs, env vars)
+  - Total expected runtime is under 30 seconds
+validation_method: checklist
+domain: smoke_eval
+quality: null
+tags: [instruction, smoke-eval, testing, sanity-check, P07]
+idempotent: true
+atomic: true
+rollback: Delete generated smoke_eval file and restart from Phase 1
+dependencies: []
+logging: true
+tldr: Build a smoke_eval with a critical-path check sequence, binary assertions, 30s timeout, and fast-fail — does the component work at all?
+density_score: 0.85
 ---
 
-# Instructions: How to Produce a smoke_eval
+## Context
 
-## Phase 1: RESEARCH
-1. Identify the scope to smoke test (agent, service, pipeline)
-2. Find existing smoke_evals for the same scope (search P07_evals/)
-3. Identify the critical path (minimum viable checks)
-4. List prerequisites that must exist before test runs
-5. Check brain_query [IF MCP] for duplicate smoke_evals
+The smoke-eval-builder produces `smoke_eval` artifacts — fast sanity tests that verify
+whether a component's critical path is functional. A smoke_eval answers one question:
+"does this component work at all?" It is not a correctness test (unit_eval), not a
+pipeline test (e2e_eval), and not a performance measurement (benchmark). It fails fast
+on the first broken check, keeping total runtime under 30 seconds.
 
-## Phase 2: COMPOSE
-1. Read SCHEMA.md — source of truth for all fields
-2. Read OUTPUT_TEMPLATE.md — fill following SCHEMA constraints
-3. Fill frontmatter: all required + recommended fields (quality: null)
-4. Set timeout to maximum 30 seconds
-5. Define critical_path: the shortest check sequence
-6. Write Assertions section: fast, binary checks (pass/fail)
-7. Set fast_fail: true (abort on first failure)
-8. List prerequisites: environment, services, configs needed
-9. Define frequency: how often this smoke should run
+**Input contract**:
+- `{{scope}}`: what is being tested (e.g. `research-agent`, `ingest-pipeline`, `auth-service`)
+- `{{critical_path_raw}}`: free-text description of the minimum viable check sequence
+- `{{prerequisites_raw}}`: comma-separated environment requirements before running
+- `{{frequency}}`: how often this smoke runs (e.g. `on_deploy`, `hourly`, `pre_merge`)
 
-## Phase 3: VALIDATE
-1. Check against QUALITY_GATES.md (this builder's own gates)
-2. HARD: id format, kind, pillar, quality==null, timeout <= 30
-3. SOFT: critical_path defined, fast_fail true, prerequisites listed
-4. Verify: total estimated runtime < 30 seconds
-5. If score < 8.0: revise before outputting
+**Output contract**: A single `smoke_eval` YAML/Markdown file with frontmatter, a
+`critical_path` ordered check list, binary assertions with expected values, strict
+timeout (<= 30 seconds), `fast_fail: true`, and a prerequisites list.
+
+**Boundaries**:
+- Smoke_eval verifies "does it work at all" — not "is it correct in all cases".
+- Deep correctness checks belong in unit_eval artifacts.
+- Multi-component pipeline validation belongs in e2e_eval artifacts.
+- Throughput and latency measurement belongs in benchmark artifacts.
+- Total runtime must be < 30 seconds — any check exceeding this is out of scope.
+
+---
+
+## Phases
+
+### Phase 1: Identify Critical Path
+
+**Primary action**: Determine the shortest sequence of checks that proves the component
+is alive and functional, discarding everything non-essential.
+
+```
+INPUT: scope, critical_path_raw, prerequisites_raw
+
+1. Characterize the scope:
+   scope_profile = {
+     name: {{scope}},
+     type: "agent" | "service" | "pipeline" | "component",
+     entry_point: how the component is invoked or reached,
+     observable_output: what a healthy response looks like
+   }
+
+2. Extract critical path from critical_path_raw:
+   Parse into ordered check steps.
+   For each step candidate:
+     - Is it verifiable in < 5 seconds?           -> include
+     - Does it prove a fundamental capability?     -> include
+     - Is it a nice-to-have or edge case?          -> exclude
+     - Does it depend on external network calls?   -> flag as "external" (may be fragile)
+
+   critical_path = ordered list of included steps (aim for 3-7 steps)
+
+3. Assign runtime estimate per step:
+   step_time_s = estimated seconds to execute
+   ASSERT sum(step_time_s) < 30
+   If sum >= 30: remove the slowest non-critical step until sum < 30.
+
+4. Parse prerequisites_raw:
+   prerequisites = [
+     {name: requirement_name, type: "env_var" | "service" | "file" | "config",
+      check: how to verify it exists}
+   ]
+
+OUTPUT: scope_profile{}, critical_path[] (3-7 steps, sum < 30s), prerequisites[]
+```
+
+Verification: `critical_path` has 3-7 steps. Estimated total runtime < 30 seconds.
+
+---
+
+### Phase 2: Define Assertions
+
+**Primary action**: For each critical path step, write a binary assertion with an
+expected value that can be evaluated as pass or fail with no ambiguity.
+
+```
+INPUT: critical_path[], scope_profile
+
+1. Assertion rules (all assertions must follow these):
+   - Binary: result is either PASS or FAIL — no partial credit
+   - Observable: the check examines a concrete output, not a subjective quality
+   - Specific: expected value is a concrete string, integer, boolean, or status code
+   - Fast: each assertion evaluates in <= 5 seconds
+
+2. For each step in critical_path:
+   assertion = {
+     step_id: "check_{N}",
+     description: what is being checked (imperative sentence),
+     command_or_action: how to execute the check,
+     expected: concrete expected value (string, int, bool, or status pattern),
+     actual_field: where to read the actual value from,
+     pass_condition: "actual == expected" | "actual contains expected" | "actual > 0"
+   }
+
+3. Determine failure behavior:
+   fast_fail: true  # abort on first FAIL — do not continue to remaining checks
+   on_fail_message: "{step_id}: expected {{expected}}, got {{actual}}"
+
+4. Assign severity to each check:
+   "critical":  failure here means the component cannot function at all
+   "warning":   failure here means degraded but not completely broken
+
+OUTPUT: assertions[] (one per critical_path step), fast_fail=true,
+        failure_message_template
+```
+
+Verification: every step has exactly one binary assertion. Every expected value is
+concrete (not "should be non-null" — use a specific value). `fast_fail` is `true`.
+
+---
+
+### Phase 3: Assemble Artifact and Validate
+
+**Primary action**: Combine all phase outputs into the final smoke_eval file and run
+quality gates.
+
+```
+INPUT: scope_profile, critical_path, prerequisites, assertions, frequency
+
+1. Assemble frontmatter:
+   id: smoke-eval-{{scope_slug}}  # scope_slug = scope.lower().replace(" ", "-")
+   kind: smoke_eval
+   pillar: P07
+   version: 1.0.0
+   scope: {{scope}}
+   timeout_seconds: sum(step_time_s) + 5  # buffer, hard cap at 30
+   fast_fail: true
+   frequency: {{frequency}}
+   checks_count: len(critical_path)
+   quality: null
+
+   ASSERT timeout_seconds <= 30
+
+2. Write body sections:
+   ## Prerequisites  — list of environment requirements with check methods
+   ## Critical Path  — ordered numbered list of check steps
+   ## Assertions     — one block per step: description, command, expected, pass_condition
+   ## Failure Guide  — what each failure means and immediate remediation step
+
+3. Run HARD quality gates (all must pass):
+   HARD_1: id matches ^smoke-eval-[a-z][a-z0-9-]+$
+   HARD_2: kind == "smoke_eval"
+   HARD_3: timeout_seconds <= 30
+   HARD_4: fast_fail == true
+   HARD_5: checks_count >= 1
+   HARD_6: every assertion has a concrete expected value
+   HARD_7: quality == null
+   HARD_8: prerequisites section is present (can be empty list, not absent)
+
+4. Run SOFT quality gates (record but do not block):
+   SOFT_1: critical_path has 3-7 steps (not just 1, not more than 7)
+   SOFT_2: each step has a severity label (critical or warning)
+   SOFT_3: frequency is defined
+   SOFT_4: failure guide section maps each check to a remediation action
+   SOFT_5: no external network calls in critical path (or explicitly flagged)
+
+OUTPUT: smoke_eval file, gate_results{hard: N/8, soft: N/5}
+```
+
+Verification: all 8 HARD gates pass. `timeout_seconds` <= 30. `fast_fail` is `true`.
+
+---
+
+## Output Contract
+
+```yaml
+---
+id: smoke-eval-{{scope_slug}}
+kind: smoke_eval
+pillar: P07
+version: 1.0.0
+created: {{created_date}}
+updated: {{updated_date}}
+author: smoke-eval-builder
+scope: {{scope}}
+timeout_seconds: {{timeout_seconds}}
+fast_fail: true
+frequency: {{frequency}}
+checks_count: {{checks_count}}
+tags: [smoke-eval, {{scope_slug}}, testing]
+quality: null
+---
+
+# Smoke Eval: {{scope}}
+
+## Prerequisites
+
+{{prerequisites_as_bullet_list_or_"none"}}
+
+## Critical Path
+
+1. {{step_1_description}} (~{{step_1_time_s}}s)
+2. {{step_2_description}} (~{{step_2_time_s}}s)
+N. {{step_N_description}} (~{{step_N_time_s}}s)
+
+Total estimated runtime: {{total_time_s}}s (limit: 30s)
+
+## Assertions
+
+### check_1: {{step_1_description}}
+command: {{command_1}}
+expected: {{expected_1}}
+pass_condition: {{pass_condition_1}}
+severity: {{severity_1}}
+
+[repeat block for each step]
+
+## Failure Guide
+
+- **check_1 fails**: {{what_it_means}} — {{immediate_remediation}}
+- **check_N fails**: {{what_it_means}} — {{immediate_remediation}}
+```
+
+---
+
+## Validation
+
+- [ ] HARD: `id` matches pattern `^smoke-eval-[a-z][a-z0-9-]+$`
+- [ ] HARD: `kind` equals `smoke_eval`
+- [ ] HARD: `timeout_seconds` <= 30
+- [ ] HARD: `fast_fail` equals `true`
+- [ ] HARD: `checks_count` >= 1
+- [ ] HARD: every assertion has a concrete, non-vague `expected` value
+- [ ] HARD: `quality` equals `null`
+- [ ] HARD: `prerequisites` section is present in body
+- [ ] SOFT: `critical_path` has 3-7 steps
+- [ ] SOFT: each step has a `severity` label (`critical` or `warning`)
+- [ ] SOFT: `frequency` is defined
+- [ ] SOFT: `failure_guide` maps every check to a remediation action
+- [ ] SOFT: external network dependencies are explicitly flagged
+
+**Score threshold**: All 8 HARD gates must pass. >= 3 of 5 SOFT gates recommended.
+
+---
+
+## Metacognition
+
+**Does**:
+- Build fast sanity tests that verify "does this component work at all"
+- Define a critical path — the minimum viable check sequence
+- Enforce strict 30-second timeout and fast-fail behavior
+- Write binary, concrete assertions (no subjective criteria)
+- Document prerequisites so the test environment is unambiguous
+
+**Does NOT**:
+- Test deep correctness across all cases (unit_eval artifact)
+- Validate multi-component pipeline behavior (e2e_eval artifact)
+- Measure throughput or latency (benchmark artifact)
+- Replace comprehensive test suites — this is a gate, not a full test
+
+**Chaining**:
+- Before: a component is deployed or a pipeline is changed
+- After: if smoke_eval passes, deeper unit_eval or e2e_eval can run
+- After: if smoke_eval fails (fast-fail), deployment is blocked and error signal emitted
+- Common pattern: smoke_eval -> unit_eval -> e2e_eval (escalating depth)
