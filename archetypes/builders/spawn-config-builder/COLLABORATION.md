@@ -9,34 +9,32 @@ pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCE
 
 ## My Role in Crews
 I am a SPECIALIST. I answer ONE question: "how should this satellite be spawned, with what flags and settings?"
-I do not write task instructions. I do not emit signals. I do not orchestrate workflows.
-I CONFIGURE SPAWNS so orchestrators can launch satellites with correct parameters.
+I configure CLI flags, MCP profiles, timeout policies, prompt sizing, and handoff file references for automated satellite launch. I do NOT design what happens after spawn (workflow-builder), emit runtime signals (signal-builder), or write the task instructions the satellite receives.
 
 ## Crew Compositions
 
-### Crew: "Satellite Dispatch"
+### Crew: "Multi-Satellite Mission Setup"
 ```
-  1. dispatch_rule-builder [PLANNED] -> "routing logic: keyword -> satellite"
-  2. handoff-builder [PLANNED] -> "task instructions for satellite"
-  3. spawn-config-builder -> "spawn parameters: mode, flags, timeout"
-  4. signal-builder -> "completion signal definition"
+  1. workflow-builder -> "defines which satellites run, in what order, with what dependencies"
+  2. spawn-config-builder -> "produces spawn_config for each satellite referenced in the workflow"
+  3. signal-builder -> "defines completion/error signals emitted at the end of each satellite run"
 ```
 
-### Crew: "Grid Mission"
+### Crew: "New Satellite Onboarding"
 ```
-  1. workflow-builder -> "multi-satellite orchestration plan"
-  2. spawn-config-builder -> "spawn config per satellite in grid"
-  3. signal-builder -> "per-satellite completion signals"
+  1. system-prompt-builder -> "defines the satellite identity, rules, and response format"
+  2. spawn-config-builder -> "produces the spawn_config: mode, flags, MCP profile, timeout"
+  3. validation-schema-builder -> "enforces the spawn_config output contract post-generation"
 ```
 
 ## Handoff Protocol
 
 ### I Receive
-- seeds: satellite name, mode, task domain
-- optional: specific flags, timeout override, MCP requirements
+- seeds: satellite name, spawn mode (solo/grid/continuous), task domain description
+- optional: timeout override, interactive flag, handoff file path, MCP requirements, model preference
 
 ### I Produce
-- spawn_config artifact (YAML)
+- spawn_config artifact (YAML, frontmatter 19 fields, max 120 lines)
 - committed to: `cex/P12_orchestration/examples/p12_spawn_{mode_slug}.yaml`
 
 ### I Signal
@@ -44,11 +42,11 @@ I CONFIGURE SPAWNS so orchestrators can launch satellites with correct parameter
 - if quality < 8.0: signal retry with failure reasons
 
 ## Builders I Depend On
-- None (spawn_config is infrastructure-level, no builder dependencies)
+- None. spawn-config is infrastructure-level and requires no upstream builder artifacts.
 
-## Builders That Depend On Me [PLANNED]
+## Builders That Depend On Me
 
 | Builder | Why |
 |---------|-----|
-| workflow-builder | References spawn_config for satellite execution parameters |
-| handoff-builder [PLANNED] | Needs spawn mode to size prompt strategy |
+| workflow-builder | references spawn_config per satellite step to know how to launch each agent |
+| validation-schema-builder | may enforce spawn_config field contracts post-generation |

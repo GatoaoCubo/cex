@@ -1,5 +1,5 @@
 ---
-pillar: P12
+pillar: P08
 llm_function: COLLABORATE
 purpose: How satellite-spec-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
@@ -9,55 +9,53 @@ pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCE
 
 ## My Role in Crews
 I am a SPECIALIST. I answer ONE question: "what is this satellite's role, model, tools, and constraints?"
-I do not implement agents. I do not configure boot providers.
-I SPECIFY satellites so spawn systems and orchestrators can launch them correctly.
+I define the full architecture of an autonomous satellite — its domain, LLM model, MCPs, boot sequence, dispatch rules, and scaling. I do NOT define individual agents inside the satellite (agent-builder), boot configuration per provider (boot-config-builder), or reusable patterns (pattern-builder).
 
 ## Crew Compositions
 
-### Crew: "Satellite Design"
+### Crew: "New Satellite Onboarding"
 ```
-  1. satellite-spec-builder -> "defines satellite architecture"
-  2. agent-builder -> "creates agents that run inside the satellite"
-  3. boot-config-builder -> "configures per-provider initialization"
-```
-
-### Crew: "System Architecture"
-```
-  1. satellite-spec-builder -> "specs each satellite"
-  2. pattern-builder [PLANNED] -> "documents reusable patterns across satellites"
-  3. law-builder [PLANNED] -> "defines constraints that apply to all satellites"
+  1. mental-model-builder   -> "defines the satellite's domain map, personality, and cognitive constraints"
+  2. satellite-spec-builder -> "produces the full satellite_spec: role, model, MCPs, boot sequence, dispatch rules"
+  3. boot-config-builder    -> "generates provider-specific boot configuration from the satellite spec"
 ```
 
-### Crew: "Deployment Pipeline"
+### Crew: "Satellite Architecture Documentation"
 ```
-  1. satellite-spec-builder -> "defines what to deploy"
-  2. spawn-config-builder [PLANNED] -> "configures how to launch"
-  3. signal-builder -> "monitors execution status"
+  1. satellite-spec-builder -> "produces satellite_spec with all 24+ frontmatter fields"
+  2. system-prompt-builder  -> "authors the satellite's system prompt using the spec's role and constraints"
+  3. diagram-builder        -> "renders the satellite's architecture and dependency graph visually"
+```
+
+### Crew: "Multi-Satellite Orchestration Design"
+```
+  1. satellite-spec-builder -> "specs each satellite's role, model, and MCPs independently"
+  2. dispatch-rule-builder  -> "defines routing rules between satellites based on their specs"
+  3. dag-builder            -> "assembles the execution graph connecting satellites into a workflow"
 ```
 
 ## Handoff Protocol
 
 ### I Receive
-- seeds: satellite name, domain, model preference
-- optional: MCP list, constraints, dispatch keywords, scaling requirements
+- seeds: satellite name, domain description, intended role, available MCPs, model preference
+- optional: scaling requirements, existing agent list, known constraints, monitoring needs
 
 ### I Produce
-- satellite_spec artifact (YAML)
-- committed to: `cex/P08_architecture/examples/p08_sat_{name_lower}.yaml`
+- satellite_spec artifact (YAML frontmatter + Markdown body, 24+ fields, max 300 lines)
+- committed to: `cex/P08/examples/satellite-spec-{name}.md`
 
 ### I Signal
 - signal: complete (with quality score from QUALITY_GATES)
 - if quality < 8.0: signal retry with failure reasons
 
 ## Builders I Depend On
-None. Satellite specs can be built from a name and domain alone.
-Optional: pattern-builder output for design pattern references.
+- mental-model-builder: provides the domain map and cognitive constraints that shape the spec
 
-## Builders That Depend On Me [PLANNED]
+## Builders That Depend On Me
 
 | Builder | Why |
 |---------|-----|
-| agent-builder | Agents reference satellite spec for context |
-| boot-config-builder | Boot config implements satellite's init sequence |
-| spawn-config-builder [PLANNED] | Spawn config reads satellite spec to launch |
-| signal-builder | Signals reference satellite as emitter |
+| boot-config-builder | needs the satellite spec to generate provider-specific boot configs |
+| system-prompt-builder | uses role and constraints from the spec to author the satellite prompt |
+| dispatch-rule-builder | uses satellite boundaries from the spec to define routing rules |
+| dag-builder | uses satellite capabilities to place them correctly in execution graphs |

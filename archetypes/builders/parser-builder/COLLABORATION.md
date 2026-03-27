@@ -1,5 +1,5 @@
 ---
-pillar: P12
+pillar: P05
 llm_function: COLLABORATE
 purpose: How parser-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
@@ -8,61 +8,55 @@ pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCE
 # Collaboration: parser-builder
 
 ## My Role in Crews
-I am an EXTRACTOR. I answer ONE question: "how do we get structured data from this raw output?"
-I do not format output. I do not validate content.
-I EXTRACT so downstream consumers can work with clean, typed data.
+I am a SPECIALIST. I answer ONE question: "how should raw output be parsed into structured data?"
+I produce extraction rules, regex patterns, JSON paths, and normalization pipelines. I do NOT format output for display (formatter-builder) or validate content correctness (validator-builder).
 
 ## Crew Compositions
 
-### Crew: "Output Pipeline" (standard)
+### Crew: "LLM Output Processing Pipeline"
 ```
-  1. agent-builder                 -> "agent produces raw output"
-  2. parser-builder                -> "extract structured data from output"
-  3. formatter-builder [PLANNED]   -> "present extracted data for display"
-  4. validator-builder [PLANNED]   -> "validate extracted data against rules"
-```
-
-### Crew: "Scraper Pipeline"
-```
-  1. scraper (P04 tool)            -> "collect raw HTML/JSON from web"
-  2. parser-builder                -> "extract product data from scraped content"
-  3. knowledge-card-builder        -> "distill extracted data into knowledge"
+  1. response-format-builder -> "defines the expected output structure from the LLM"
+  2. parser-builder          -> "builds extractor to pull fields from that structure"
+  3. validator-builder       -> "validates extracted data meets schema constraints"
 ```
 
-### Crew: "LLM Output Processing"
+### Crew: "Scraper + Extractor"
 ```
-  1. output-schema-builder [PLANNED] -> "define expected output format"
-  2. parser-builder                  -> "extract fields from LLM response"
-  3. quality-gate-builder            -> "validate extraction completeness"
+  1. scraper-builder         -> "fetches raw HTML/JSON from external sources"
+  2. parser-builder          -> "extracts structured fields from the raw content"
+  3. formatter-builder       -> "formats extracted data for downstream consumption"
+```
+
+### Crew: "Agent Output Routing"
+```
+  1. instruction-builder     -> "defines agent steps that produce raw output"
+  2. parser-builder          -> "extracts structured fields from agent output"
+  3. dispatch-rule-builder   -> "routes downstream work based on parsed fields"
 ```
 
 ## Handoff Protocol
 
 ### I Receive
-- seeds: input_format, target fields, sample input data
-- optional: output_schema (target structure for extraction)
-- optional: scraper output (raw HTML/JSON to parse)
+- seeds: raw output sample (text/JSON/HTML/log), target field names, desired output format
+- optional: error handling requirements, fallback extraction strategy, normalization rules
 
 ### I Produce
-- parser artifact: `cex/P05_output/examples/p05_parser_{slug}.md`
-- committed to: archetypes or pool depending on quality score
+- parser artifact (Markdown, max 4KB)
+- committed to: `cex/P05/examples/p05_parser_{scope}.md`
 
 ### I Signal
 - signal: complete (with quality score from QUALITY_GATES)
-- if quality < 8.0: signal retry with specific gate failures
+- if quality < 8.0: signal retry with failure reasons
 
 ## Builders I Depend On
-None (parser-builder is independent — it defines extraction rules from domain knowledge).
+- response-format-builder: defines the structure I will extract from
+- scraper-builder: produces the raw content I parse
 
 ## Builders That Depend On Me
 
 | Builder | Why |
 |---------|-----|
-| formatter-builder [PLANNED] | Needs parsed structured data to format for presentation |
-| validator-builder [PLANNED] | Validates data that parser extracted |
-| knowledge-card-builder | Distills extracted data into atomic knowledge facts |
-
-## Cross-Reference Norm (BUILDER_NORMS Rule 12)
-formatter-builder [PLANNED] will list parser-builder as upstream (provides structured data).
-This file lists formatter-builder as downstream dependent.
-The cross-reference will be bidirectional when formatter-builder is created.
+| validator-builder | validates the structured data I extracted |
+| formatter-builder | receives my structured output to render for display |
+| dispatch-rule-builder | routes on parsed fields I extracted |
+| knowledge-card-builder | ingests parsed structured data as knowledge facts |

@@ -1,5 +1,5 @@
 ---
-pillar: P12
+pillar: P08
 llm_function: COLLABORATE
 purpose: How pattern-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
@@ -9,56 +9,54 @@ pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCE
 
 ## My Role in Crews
 I am a SPECIALIST. I answer ONE question: "what is the named, reusable solution for this recurring problem?"
-I do not mandate rules. I do not execute workflows.
-I DESCRIBE proven solutions so architects and builders can make informed decisions.
+I formalize architecture patterns with problem, solution, forces, consequences, and applicability. I do NOT write inviolable rules (law-builder), draw visual diagrams (diagram-builder), or define executable workflows (workflow-builder).
 
 ## Crew Compositions
 
-### Crew: "Architecture Design"
+### Crew: "Architecture Documentation Suite"
 ```
-  1. pattern-builder -> "reusable solution (p08_pat_*)"
-  2. satellite-spec-builder -> "satellite spec referencing applicable patterns"
-  3. law-builder [PLANNED] -> "mandatory rule derived from proven pattern"
-  4. diagram-builder [PLANNED] -> "visual representation of pattern"
-```
-
-### Crew: "Knowledge to Architecture"
-```
-  1. learning-record-builder -> "experience record (what worked)"
-  2. pattern-builder -> "formalized pattern (recurring solution)"
-  3. axiom-builder -> "crystallized truth (if pattern proves universal)"
+  1. pattern-builder       -> "formalizes the reusable solution with forces and consequences"
+  2. diagram-builder       -> "produces visual representation of the pattern structure"
+  3. law-builder           -> "encodes non-negotiable constraints the pattern must respect"
 ```
 
-### Crew: "Pattern Catalog"
+### Crew: "Knowledge Base Construction"
 ```
-  1. pattern-builder -> "individual pattern"
-  2. component-map-builder [PLANNED] -> "map of patterns and their relationships"
-  3. knowledge-card-builder -> "KC summarizing pattern for brain search"
+  1. learning-record-builder  -> "captures what worked in practice"
+  2. pattern-builder          -> "formalizes recurring solution from learning records"
+  3. knowledge-card-builder   -> "assembles pattern into searchable brain card"
+```
+
+### Crew: "Agent Design Documentation"
+```
+  1. pattern-builder          -> "captures recurring agent interaction pattern"
+  2. satellite-spec-builder   -> "references applicable patterns in satellite spec"
+  3. instruction-builder      -> "turns the pattern into step-by-step agent instructions"
 ```
 
 ## Handoff Protocol
 
 ### I Receive
-- seeds: problem description, domain, examples
-- optional: forces, existing solutions, related patterns
+- seeds: pattern name, recurring problem description, known solution examples
+- optional: related patterns, known anti-patterns, applicability constraints
 
 ### I Produce
-- pattern artifact (markdown with YAML frontmatter)
-- committed to: `cex/P08_architecture/examples/p08_pat_{slug}.md`
+- pattern artifact (Markdown, max 4KB, density >= 0.80)
+- committed to: `cex/P08/examples/p08_pat_{name}.md`
 
 ### I Signal
 - signal: complete (with quality score from QUALITY_GATES)
 - if quality < 8.0: signal retry with failure reasons
 
 ## Builders I Depend On
-- learning-record-builder: repeated learning reveals patterns (optional, not blocking)
+- learning-record-builder: repeated learning records reveal recurring patterns worth formalizing
 
 ## Builders That Depend On Me
 
 | Builder | Why |
 |---------|-----|
-| satellite-spec-builder | Specs reference applicable patterns |
-| law-builder [PLANNED] | Proven patterns may become mandatory laws |
-| workflow-builder | Workflows implement pattern solutions |
-| axiom-builder | Universal patterns may crystallize into axioms |
-| knowledge-card-builder | KCs summarize patterns for brain search |
+| law-builder | proven patterns may become mandatory inviolable laws |
+| satellite-spec-builder | satellite specs reference applicable patterns |
+| instruction-builder | translates pattern solution into executable agent steps |
+| knowledge-card-builder | ingests patterns as core knowledge artifacts |
+| axiom-builder | universal patterns may crystallize into system axioms |

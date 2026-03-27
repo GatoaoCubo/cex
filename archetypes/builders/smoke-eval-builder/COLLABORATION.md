@@ -1,48 +1,61 @@
 ---
-pillar: P12
+pillar: P07
 llm_function: COLLABORATE
-purpose: How smoke-eval-builder works in crews
+purpose: How smoke-eval-builder works in crews with other builders
+pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
 ---
 
 # Collaboration: smoke-eval-builder
 
-## My Role
-I provide QUICK SANITY CHECKS before deeper testing.
-I do not test deeply (unit-eval-builder).
-I do not test pipelines (e2e-eval-builder).
+## My Role in Crews
+I am a SPECIALIST. I answer ONE question: "does this component work at all?"
+I produce fast sanity checks under 30 seconds that verify critical paths and health status before deeper work begins. I do NOT test deep correctness (unit-eval-builder), end-to-end pipelines (e2e-eval-builder), or measure performance (benchmark-builder).
 
-## Crew: "Test Suite"
+## Crew Compositions
+
+### Crew: "Pre-Deploy Safety Net"
 ```
-  1. smoke-eval-builder     -> quick sanity (< 30s)
-  2. unit-eval-builder      -> deep correctness testing
-  3. e2e-eval-builder       -> pipeline integration tests
+  1. smoke-eval-builder  -> "runs critical path checks in <30s to confirm the component is alive"
+  2. unit-eval-builder   -> "executes deeper correctness tests on each component function"
+  3. e2e-eval-builder    -> "validates the full pipeline from input to output after unit tests pass"
 ```
 
-## Crew: "CI Pipeline"
+### Crew: "New Artifact Kind Quality System"
 ```
-  1. smoke-eval-builder     -> gate: if fails, skip rest
-  2. unit-eval-builder      -> run only if smoke passes
-  3. quality-gate-builder   -> final pass/fail decision
+  1. scoring-rubric-builder -> "defines evaluation dimensions and tier thresholds for the artifact kind"
+  2. smoke-eval-builder     -> "produces fast assertions that verify the artifact's required fields exist"
+  3. quality-gate-builder   -> "encodes rubric thresholds as hard pass/fail gates in the build pipeline"
+```
+
+### Crew: "Skill Validation at Launch"
+```
+  1. skill-builder       -> "builds the reusable capability with phases and trigger"
+  2. smoke-eval-builder  -> "writes a health check that invokes the skill's critical path and asserts output"
+  3. golden-test-builder -> "provides reference input/output pairs to calibrate pass/fail expectations"
 ```
 
 ## Handoff Protocol
+
 ### I Receive
-- seeds: scope, domain, critical components
-- optional: health endpoints, existing unit_evals to derive from
+- seeds: component name, critical path description, expected outputs, timeout budget (<30s)
+- optional: known failure modes, health check endpoints, example passing input
 
 ### I Produce
-- smoke_eval artifact in P07_evals/
-- committed to: cex/P07_evals/p07_se_{scope_slug}.md
+- smoke_eval artifact (YAML + assertions list, critical_path defined, timeout <= 30s, max 150 lines)
+- committed to: `cex/P07/examples/smoke-eval-{component}.md`
 
 ### I Signal
 - signal: complete (with quality score from QUALITY_GATES)
 - if quality < 8.0: signal retry with failure reasons
 
 ## Builders I Depend On
-- unit-eval-builder: provides deep tests from which smoke checks derive
+- scoring-rubric-builder: rubric dimensions guide which assertions are highest priority
 
 ## Builders That Depend On Me
+
 | Builder | Why |
 |---------|-----|
-| unit-eval-builder | Skips deep tests if smoke fails |
-| e2e-eval-builder | Skips pipeline tests if smoke fails |
+| quality-gate-builder | promotes smoke_eval assertions into mandatory pipeline gates |
+| e2e-eval-builder     | uses smoke_eval as the first fast-fail stage before running full end-to-end tests |
+| dag-builder          | places smoke_eval as an early guard node in deployment or CI pipelines |
+| validator-builder    | references smoke_eval critical path to align automated validation scope |

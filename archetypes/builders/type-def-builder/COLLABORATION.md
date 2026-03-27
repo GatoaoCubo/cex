@@ -1,95 +1,54 @@
 ---
-id: type-def-builder-collaboration
-kind: collaboration
-pillar: P12
+pillar: P06
 llm_function: COLLABORATE
-version: 1.0.0
-created: "2026-03-26"
-updated: "2026-03-26"
-author: EDISON
-tags: [collaboration, type-def, P12, crew, handoff]
+purpose: How type-def-builder works in crews with other builders
+pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
 ---
 
-## Role in Crews
+# Collaboration: type-def-builder
 
-type-def-builder acts as **Vocabulary Architect** in spec-layer crews. It establishes the shared type language before any input contracts, validators, or grammars are authored. It receives domain context and produces `type_def` YAML that downstream builders reference by id.
+## My Role in Crews
+I am a SPECIALIST. I answer ONE question: "what is the precise shape, constraint, and serialization rule for this domain type?"
+I produce reusable type vocabulary — primitive, composite, union, and algebraic — that other spec-layer artifacts reference by id. I do NOT produce input contracts (validation-schema-builder), individual pass/fail rules (validator-builder), or runtime orchestration (workflow-builder).
 
 ## Crew Compositions
 
-### Crew A: Domain Type Modeling
+### Crew: "Domain Type Modeling"
+```
+  1. type-def-builder -> "defines custom types: shapes, constraints, serialization rules"
+  2. validation-schema-builder -> "uses type_def vocabulary to build post-generation field contracts"
+  3. validator-builder -> "references type_def constraints to write individual pass/fail rules"
+```
 
-| Step | Builder | Input | Output |
-|---|---|---|---|
-| 1 | KNOWLEDGE builder | Domain brief | domain KNOWLEDGE.md |
-| 2 | **type-def-builder** | KNOWLEDGE.md + type requirements | `p06_td_*.yaml` artifacts |
-| 3 | input-schema-builder | `p06_td_*.yaml` references | `p06_is_*.yaml` contracts |
-| 4 | validator-builder | `p06_td_*.yaml` + `p06_is_*.yaml` | `p06_val_*.yaml` rules |
-
-### Crew B: Full Spec Layer Bootstrap
-
-| Step | Builder | Input | Output |
-|---|---|---|---|
-| 1 | artifact-blueprint-builder | System design doc | `p06_ab_*.yaml` blueprints |
-| 2 | **type-def-builder** | Blueprint + domain context | `p06_td_*.yaml` type vocabulary |
-| 3 | grammar-builder | `p06_td_*.yaml` terminal symbols | `p06_gram_*.yaml` grammars |
-| 4 | interface-builder | `p06_td_*.yaml` + agent roster | `p06_iface_*.yaml` contracts |
-| 5 | validation-schema-builder | All P06 artifacts | `p06_vs_*.yaml` output contracts |
+### Crew: "Full Spec Layer Bootstrap"
+```
+  1. type-def-builder -> "establishes domain type vocabulary for the entire spec layer"
+  2. system-prompt-builder -> "uses type vocabulary to define precise agent knowledge boundaries"
+  3. unit-eval-builder -> "writes typed test cases against the defined type shapes"
+```
 
 ## Handoff Protocol
 
-### Receive
+### I Receive
+- seeds: domain name, abstract type requirements, base type candidates, constraint descriptions
+- optional: serialization targets (JSON/YAML/Protobuf), generic parameters, inheritance context
 
-| From | Artifact | What to Extract |
-|---|---|---|
-| KNOWLEDGE builder | `p01_kc_*.md` | Domain vocabulary, base type candidates, constraint patterns |
-| artifact-blueprint-builder | `p06_ab_*.yaml` | Type names, field lists, structural requirements |
-| Human / STELLA | Task description | Type name, domain, constraints, base_type hint |
+### I Produce
+- type_def artifact (YAML, machine-parseable, max 100 lines)
+- committed to: `cex/P06_schema/examples/p06_td_{domain}_{type_name}.yaml`
 
-### Produce
+### I Signal
+- signal: complete (with quality score from QUALITY_GATES)
+- if quality < 8.0: signal retry with failure reasons
 
-| To | Artifact | What It Contains |
-|---|---|---|
-| input-schema-builder | `p06_td_*.yaml` | Type vocabulary for field type references |
-| validator-builder | `p06_td_*.yaml` | Type assertions for rule authoring |
-| grammar-builder | `p06_td_*.yaml` | Terminal symbol types for BNF/EBNF rules |
-| interface-builder | `p06_td_*.yaml` | Shared type vocabulary for bilateral contracts |
+## Builders I Depend On
+- None. type-def-builder is the foundational spec layer — no upstream builder dependency required.
 
-### Signal
+## Builders That Depend On Me
 
-On completion, emit:
-```
-signal: type_def_produced
-artifact_id: p06_td_{type_slug}
-domain: {domain}
-base_type: {base_type}
-quality: null
-```
-
-## Dependencies
-
-| Dependency | Kind | Required | Notes |
-|---|---|---|---|
-| Domain KNOWLEDGE.md | knowledge (P01) | Recommended | Provides vocabulary context |
-| `P06_schema/_schema.yaml` | schema | Required | Defines max_bytes, naming, llm_function |
-| Brain index | MCP tool | Conditional | Dedup check during DISCOVER phase |
-
-## Dependents
-
-| Builder | How It Uses type_def Output |
-|---|---|
-| input-schema-builder | References `p06_td_*` ids as field types in entry contracts |
-| validator-builder | Uses `p06_td_*` type assertions in pass/fail rules |
-| grammar-builder | Uses `p06_td_*` as terminal symbol types in formal grammars |
-| interface-builder | Imports shared type vocabulary for agent handshake contracts |
-| validation-schema-builder | References `p06_td_*` for post-generation output type checking |
-
-## Cross-Reference Obligations (LAW: COLLABORATION.md norm 12)
-
-type-def-builder references input-schema-builder as a dependent.
-input-schema-builder MUST reference type-def-builder as a dependency in its own COLLABORATION.md.
-
-type-def-builder references validator-builder as a dependent.
-validator-builder MUST reference type-def-builder as a dependency in its own COLLABORATION.md.
-
-type-def-builder references grammar-builder as a dependent.
-grammar-builder MUST reference type-def-builder as a dependency in its own COLLABORATION.md.
+| Builder | Why |
+|---------|-----|
+| validation-schema-builder | uses type_def vocabulary to specify field types in output contracts |
+| validator-builder | references type constraints when writing field-level pass/fail rules |
+| system-prompt-builder | uses domain type names to set precise knowledge boundaries for agents |
+| unit-eval-builder | writes typed assertions against type_def shapes in test cases |

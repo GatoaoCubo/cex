@@ -1,74 +1,62 @@
 ---
-pillar: P12
+pillar: P01
 llm_function: COLLABORATE
-version: 1.0.0
+purpose: How rag-source-builder works in crews with other builders
+pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
 ---
 
 # Collaboration: rag-source-builder
 
-## Crew Role
-EXTERNAL SOURCE CATALOGER.
+## My Role in Crews
+I am a SPECIALIST. I answer ONE question: "where can we find authoritative external data for this domain?"
+I catalog external URLs with freshness policies and reliability scores — pointer only, no content body. I do not distill content, write domain context, or configure embeddings.
 
-I answer: "where is authoritative external data for this domain?"
-I produce: structured pointers (rag_source) that retrieval pipelines can crawl and index.
+## Crew Compositions
 
-## What I Do NOT Do
-
-| Task | Who Does It |
-|------|------------|
-| Distill content from a source | knowledge-card-builder |
-| Write domain context for agents | context-doc-builder |
-| Configure vector embedding models | embedding-config-builder [PLANNED] |
-| Score quality of artifacts | validation pipeline / validator-builder |
-| Define validation rules | validator-builder |
-
-## Knowledge Pipeline Crew
-
+### Crew: "Knowledge Ingestion Pipeline"
 ```
-rag-source-builder          <- I am here
-  "catalog the external source"
-        |
-        v
-knowledge-card-builder
-  "distill content from that source into structured knowledge"
-        |
-        v
-brain-index config [PLANNED]
-  "configure how to embed and chunk for vector search"
-        |
-        v
-retrieval layer
-  "serve knowledge to agents"
+  1. rag-source-builder       -> "pointer to external URL with freshness policy and reliability score"
+  2. knowledge-card-builder   -> "distilled content extracted from the indexed source"
+  3. brain-index-builder      -> "search index built over the knowledge cards"
+```
+
+### Crew: "RAG-Augmented Agent Stack"
+```
+  1. rag-source-builder       -> "catalog of authoritative sources to query at runtime"
+  2. embedding-config-builder -> "embedding model and chunking config for the sources"
+  3. context-doc-builder      -> "domain context document assembled from retrieved chunks"
+  4. prompt-template-builder  -> "template with {{context}} slot filled by retrieval"
+```
+
+### Crew: "Research Domain Setup"
+```
+  1. rag-source-builder       -> "5-10 authoritative sources for the domain"
+  2. scraper-builder          -> "scraper config targeting the cataloged URLs"
+  3. knowledge-card-builder   -> "distilled cards from scraped content"
 ```
 
 ## Handoff Protocol
 
-### Receives From
-| Input | Source | Required |
-|-------|--------|---------|
-| url | user / orchestrator | YES |
-| domain | user / orchestrator | YES |
-| reliability hint | user | optional |
-| extraction notes | user | optional |
+### I Receive
+- seeds: domain name, target URL(s), required freshness (daily/weekly/monthly), reliability expectation
+- optional: existing source catalog to extend, format hints (html/json/api/pdf/csv), auth notes
 
-### Produces For
-| Output | Consumer | Format |
-|--------|----------|--------|
-| p01_rs_{slug}.md | brain_index, knowledge-card-builder | .md + .yaml |
-| source metadata | domain catalog | frontmatter fields |
+### I Produce
+- rag_source artifact (YAML frontmatter only, pointer with no content body, max 1024 bytes)
+- committed to: `cex/P01/examples/p01_rs_{domain}_{name}.md`
 
-## Parallel Operation
-rag-source-builder operates independently. No blocking dependency on other builders.
-Multiple rag_sources for the same domain can be cataloged in parallel without conflict.
+### I Signal
+- signal: complete (with quality score from QUALITY_GATES)
+- if quality < 8.0: signal retry with failure reasons
 
-## Escalation
-If URL is inaccessible or source requires authentication not documented:
-- Flag in Extraction Notes: "Auth required: yes — credentials not configured"
-- Set reliability: low
-- Set last_checked to today — do not block creation
+## Builders I Depend On
+- None required. I am a primary producer — I only need a URL and domain name from the task request.
 
-## Signal on Completion
-After producing artifact:
-```python
-write_signal('rag-source-builder', 'complete', 8.0)
-```
+## Builders That Depend On Me
+
+| Builder | Why |
+|---------|-----|
+| knowledge-card-builder | Uses my source pointers to know where to retrieve and distill content |
+| embedding-config-builder | Configures embeddings scoped to the sources I catalog |
+| scraper-builder | Targets the URLs I register for scheduled crawling |
+| brain-index-builder | Indexes content retrieved from my registered sources |

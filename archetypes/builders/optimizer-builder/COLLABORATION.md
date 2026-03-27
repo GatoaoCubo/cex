@@ -1,59 +1,62 @@
 ---
-pillar: P12
+pillar: P11
 llm_function: COLLABORATE
-purpose: How optimizer-builder works in crews
+purpose: How optimizer-builder works in crews with other builders
+pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
 ---
 
 # Collaboration: optimizer-builder
 
-## My Role
-I define WHAT process is optimized, at WHAT metric threshold, with WHAT action.
-I do not implement metric collection (validator-builder, P06).
-I do not define evaluation criteria (scoring-rubric-builder, P07).
-I do not cycle on artifact defects (bugloop-builder, P11).
+## My Role in Crews
+I am a SPECIALIST. I answer ONE question: "what metric drives what action at what threshold?"
+I define continuous improvement cycles: metric targets, tripartite thresholds (trigger/target/critical), and automated actions. I do NOT handle one-time fixes (bugloop-builder), passive measurement (benchmark-builder), or pass/fail barriers (quality-gate-builder).
 
-## Crew: "Add Continuous Improvement to Pipeline"
+## Crew Compositions
+
+### Crew: "Performance Improvement Loop"
 ```
-  1. scoring-rubric-builder  -> defines quality dimensions and weights
-  2. optimizer-builder        -> defines metric>action cycle with thresholds
-  3. signal-builder           -> emits state-change signals on threshold crossings
-  4. validator-builder        -> implements metric collection in code
+  1. benchmark-builder    -> "establishes baseline measurements passively"
+  2. optimizer-builder    -> "defines metric>action cycle to improve on baseline"
+  3. bugloop-builder      -> "handles point-in-time corrections when critical threshold hit"
 ```
 
-## Crew: "Full Feedback Loop for New Process"
+### Crew: "Process Quality System"
 ```
-  1. quality-gate-builder     -> defines pass/fail barrier at publish time
-  2. optimizer-builder        -> defines continuous improvement between publishes
-  3. bugloop-builder          -> handles defect correction when metric signals failures
-  4. lifecycle-rule-builder   -> handles freshness/archive when process output ages
+  1. quality-gate-builder -> "sets pass/fail barriers for artifact acceptance"
+  2. optimizer-builder    -> "defines continuous tuning cycle beyond the gate"
+  3. signal-builder       -> "emits metric events that trigger optimizer actions"
+```
+
+### Crew: "Pipeline Optimization"
+```
+  1. dag-builder          -> "maps the pipeline structure being optimized"
+  2. optimizer-builder    -> "defines optimization targets per pipeline stage"
+  3. runtime-rule-builder -> "encodes timeout/retry rules informed by optimizer thresholds"
 ```
 
 ## Handoff Protocol
 
 ### I Receive
-- target: what process to optimize (string description)
-- metric_name: what to measure (or enough context to derive it)
-- domain: process domain for brain_query lookup
-- severity: how aggressively to set thresholds (conservative / aggressive / slo-aligned)
+- seeds: process name, metric name, current baseline values, direction (minimize/maximize)
+- optional: existing threshold data, automation constraints, risk tolerance
 
 ### I Produce
-- optimizer artifact in P11_feedback/examples/p11_opt_{slug}.md
-- complete frontmatter + 5 body sections
-- ready for signal-builder to wire state-change emissions
+- optimizer artifact (Markdown, max 4KB)
+- committed to: `cex/P11/examples/p11_opt_{scope}.md`
 
-## Cross-Reference Obligations
-optimizer-builder references signal-builder -> signal-builder MUST reference optimizer-builder.
-optimizer-builder references knowledge-card-builder (improvement.history) -> knowledge-card-builder MUST reference optimizer-builder.
+### I Signal
+- signal: complete (with quality score from QUALITY_GATES)
+- if quality < 8.0: signal retry with failure reasons
 
 ## Builders I Depend On
-| Builder | Why |
-|---------|-----|
-| scoring-rubric-builder | Provides quality dimensions that become secondary metrics |
-| quality-gate-builder | Gate thresholds inform optimizer trigger values |
+- benchmark-builder: provides baseline measurements that anchor optimizer targets
+- scoring-rubric-builder: provides quality dimensions that become secondary metrics
 
 ## Builders That Depend On Me
+
 | Builder | Why |
 |---------|-----|
-| signal-builder | Optimizer threshold crossings are signal sources |
-| validator-builder | Implements the metric collection this optimizer monitors |
-| knowledge-card-builder | improvement.history entries become KC update triggers |
+| bugloop-builder | triggered when optimizer detects critical threshold breach |
+| signal-builder | emits the metric events the optimizer monitors |
+| runtime-rule-builder | encodes thresholds from optimizer into operational timeouts/retries |
+| validator-builder | implements the metric collection this optimizer monitors |

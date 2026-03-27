@@ -1,91 +1,65 @@
 ---
-id: collab_prompt_template_builder
-kind: collaboration
-pillar: P12
+pillar: P03
 llm_function: COLLABORATE
-domain: prompt_template
-version: 1.0.0
-created: "2026-03-26"
-updated: "2026-03-26"
-author: EDISON
-tags: [collaboration, prompt-template, P03, crew, handoff]
+purpose: How prompt-template-builder works in crews with other builders
+pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
 ---
 
-# Collaboration — prompt-template-builder
+# Collaboration: prompt-template-builder
 
-## Role in Crew
-
-**Producer** — I receive type definitions and variable schemas from upstream builders, produce `prompt_template` artifacts, and hand off to downstream consumers (renderers, LLM pipelines, orchestrators).
-
-I do not orchestrate. I do not validate other builders' outputs. I produce one kind: `prompt_template`.
+## My Role in Crews
+I am a SPECIALIST. I answer ONE question: "what is the reusable mold that generates this prompt when filled?"
+I produce parameterized templates with `{{variables}}` — not fixed prompts, not identities, not instructions without variable slots.
 
 ## Crew Compositions
 
-### Composition A: Knowledge Card Pipeline
+### Crew: "Agent Prompt Stack"
+```
+  1. system-prompt-builder    -> "fixed identity and persona for the agent"
+  2. prompt-template-builder  -> "reusable mold with {{variables}} for dynamic invocations"
+  3. response-format-builder  -> "output structure spec injected into the prompt"
+```
 
-| Role | Builder | Input | Output |
-|---|---|---|---|
-| 1. Schema author | type-def-builder (P06) | domain requirements | variable schema |
-| 2. Template producer | **prompt-template-builder** (P03) | variable schema | `p03_pt_*` artifact |
-| 3. Knowledge synthesizer | knowledge-card-builder (P01) | rendered prompt | knowledge card |
+### Crew: "RAG-Augmented Prompt Pipeline"
+```
+  1. rag-source-builder       -> "external sources to pull context from at runtime"
+  2. context-doc-builder      -> "domain context injected into the template"
+  3. prompt-template-builder  -> "template with {{context}} and {{query}} slots"
+  4. quality-gate-builder     -> "gates that validate the template before deployment"
+```
 
-Handoff A→B: type-def-builder writes variable schema to `records/pool/type_defs/p06_td_*.md`. prompt-template-builder reads it, extracts variable definitions, and produces a matching template.
-
-Handoff B→C: prompt-template-builder delivers `p03_pt_*.md`. Orchestrator renders it with runtime variable values and passes the rendered prompt to the knowledge-card-builder.
-
-### Composition B: Research Synthesis Pipeline
-
-| Role | Builder | Input | Output |
-|---|---|---|---|
-| 1. Schema author | type-def-builder (P06) | research domain spec | research variable schema |
-| 2. Template producer | **prompt-template-builder** (P03) | variable schema | `p03_pt_research_*` artifact |
-| 3. Researcher | research-builder (SHAKA) | rendered prompt | research artifact |
-| 4. Reviewer | validator-agent | artifact + gates | quality score |
+### Crew: "Few-Shot Template Pack"
+```
+  1. few-shot-example-builder -> "concrete examples embedded in the template body"
+  2. prompt-template-builder  -> "template wrapping examples with {{input}} slot"
+  3. validation-schema-builder -> "schema validating filled-template outputs post-generation"
+```
 
 ## Handoff Protocol
 
-### Receiving from type-def-builder (P06)
+### I Receive
+- seeds: task domain, variable names, prompt purpose, target framework (LangChain/DSPy/Mustache/Jinja2)
+- optional: few-shot examples, context doc content, system prompt identity, response format spec, type-def schema
 
-When type-def-builder produces a `p06_td_*` schema, prompt-template-builder:
+### I Produce
+- prompt_template artifact (YAML frontmatter + Mustache/bracket body, max 4096 bytes)
+- committed to: `cex/P03/examples/p03_pt_{name}.md`
 
-1. Reads the schema's `fields` table to identify variable names and types
-2. Maps each schema field to a template variable (name, type, required, default, description)
-3. Uses the schema's `domain` and `constraints` to scope the template body
-4. Credits the source schema in the artifact's `tags` (e.g., `[source:p06_td_knowledge_card]`)
+### I Signal
+- signal: complete (with quality score from QUALITY_GATES)
+- if quality < 8.0: signal retry with failure reasons
 
-### Delivering to downstream consumers
+## Builders I Depend On
+- type-def-builder: provides typed variable schemas that map to `{{variable}}` slots
+- few-shot-example-builder: provides examples embedded in the template body
+- context-doc-builder: provides domain context injected as a template slot
 
-Prompt-template-builder delivers a complete `p03_pt_*.md` artifact to the agreed output path. Downstream consumers must:
+## Builders That Depend On Me
 
-1. Read the `variables` list to know required and optional slots
-2. Supply values for all `required: true` variables at render time
-3. Use values for `required: false` variables or accept the declared `default`
-4. Render using the declared `variable_syntax` tier (mustache or bracket)
-
-## Dependencies
-
-| Direction | Builder | Relationship |
-|---|---|---|
-| Receives from | type-def-builder (P06) | Consumes variable schemas to inform template variable design |
-| Produces for | LangChain PromptTemplate | Runtime renderer |
-| Produces for | DSPy Signature | Runtime renderer |
-| Produces for | Mustache/Jinja2 pipelines | Runtime renderer |
-| Produces for | knowledge-card-builder | Provides the prompt mold for card production |
-| Produces for | research-builder | Provides the prompt mold for research synthesis |
-
-## Cross-Reference Contract
-
-Per BUILDER_NORMS rule 12: if builder A references builder B, builder B must reference builder A.
-
-| This builder references | That builder must reference this builder |
-|---|---|
-| type-def-builder (P06) | type-def-builder COLLABORATION.md must list prompt-template-builder as a dependent |
-
-## Escalation
-
-If a variable schema from type-def-builder is ambiguous (missing types, conflicting constraints), prompt-template-builder:
-
-1. Flags the ambiguity with a comment in the draft artifact
-2. Applies the most conservative interpretation (narrowest type, required=true)
-3. Adds a note in the `tags` field: `[needs-schema-clarification]`
-4. Does NOT block production — delivers draft with flag
+| Builder | Why |
+|---------|-----|
+| system-prompt-builder | May embed template slots inside system prompts for dynamic identity |
+| quality-gate-builder | Gates reference template structure to validate H01-H08 hard gates |
+| response-format-builder | Response format is often injected as a variable inside the template |
+| iso-package-builder | Packages the template alongside its siblings into a deployable unit |
+| knowledge-card-builder | Uses rendered template outputs as prompts for card production |

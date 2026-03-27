@@ -1,5 +1,5 @@
 ---
-pillar: P12
+pillar: P06
 llm_function: COLLABORATE
 purpose: How validator-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
@@ -9,41 +9,32 @@ pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCE
 
 ## My Role in Crews
 I am a SPECIALIST. I answer ONE question: "what technical check must pass before this artifact is accepted?"
-I do not score artifacts. I do not define scoring criteria.
-I ENFORCE rules so quality-gate-builder and downstream consumers can trust artifact correctness.
+I define individual pass/fail rules with structured conditions (field/operator/value), severity levels (error/warning/info), and auto-fix policies. I do NOT produce quality gates with scoring (quality-gate-builder), scoring rubric criteria (scoring-rubric-builder), or input schema contracts (input-schema-builder).
 
 ## Crew Compositions
 
-### Crew: "Artifact Quality Pipeline"
+### Crew: "Artifact Governance Pipeline"
 ```
-  1. knowledge-card-builder -> "produces the KC artifact"
-  2. validator-builder -> "checks structural correctness (pass/fail)"
-  3. quality-gate-builder -> "scores quality (0-10 weighted)"
-```
-
-### Crew: "New Kind Bootstrap"
-```
-  1. schema-builder [PLANNED] -> "defines the kind schema"
-  2. validator-builder -> "creates validators for the schema"
-  3. quality-gate-builder -> "creates scoring gates"
-  4. output-template-builder [PLANNED] -> "creates the template"
+  1. type-def-builder -> "establishes field types and constraints that validators reference"
+  2. validation-schema-builder -> "defines the structural output contract at schema level"
+  3. validator-builder -> "adds individual pre-commit rules: field checks, regex, severity, bypass"
 ```
 
-### Crew: "Pre-Commit Enforcement"
+### Crew: "Pre-Commit Quality Gate"
 ```
-  1. validator-builder -> "defines pass/fail rules"
-  2. hook-builder [PLANNED] -> "wires validators into pre-commit"
-  3. bugloop-builder [PLANNED] -> "auto-fixes failures when possible"
+  1. validator-builder -> "defines pass/fail rules that run before the artifact is accepted"
+  2. quality-gate-builder -> "applies weighted scoring after all validators pass"
+  3. unit-eval-builder -> "verifies the artifact passes both validators and functional tests"
 ```
 
 ## Handoff Protocol
 
 ### I Receive
-- seeds: target domain (artifact kind), rule description
-- optional: existing schema (_schema.yaml), severity preference, auto_fix requirement
+- seeds: artifact kind to validate, field list with constraints, severity requirements
+- optional: regex patterns, enum constraints, auto_fix candidates, bypass policy, audit trail requirements
 
 ### I Produce
-- validator artifact (YAML)
+- validator artifact (YAML, frontmatter 22 fields, structured conditions, max 100 lines)
 - committed to: `cex/P06_schema/examples/p06_val_{rule_slug}.yaml`
 
 ### I Signal
@@ -51,13 +42,13 @@ I ENFORCE rules so quality-gate-builder and downstream consumers can trust artif
 - if quality < 8.0: signal retry with failure reasons
 
 ## Builders I Depend On
-None. Validators are INDEPENDENT — they can be built from schema alone.
-Optional enrichment from schema-builder [PLANNED] output.
+- type-def-builder: field type definitions inform the operator and value choices in rule conditions
+- validation-schema-builder: schema-level contracts reveal which fields need individual validator coverage
 
-## Builders That Depend On Me [PLANNED]
+## Builders That Depend On Me
 
 | Builder | Why |
 |---------|-----|
-| quality-gate-builder | Uses validators as HARD gate checklist source |
-| hook-builder [PLANNED] | Wires validators into pre-commit automation |
-| bugloop-builder [PLANNED] | References validators to detect + fix regressions |
+| quality-gate-builder | uses validators as the HARD gate checklist source before scoring |
+| workflow-builder | workflow steps run validators as acceptance gates before advancing |
+| unit-eval-builder | test assertions may verify that validators correctly catch invalid inputs |

@@ -1,48 +1,61 @@
 ---
-pillar: P12
+pillar: P10
 llm_function: COLLABORATE
-purpose: How session-state-builder works with other builders and runtime actors
-pattern: each builder must know its role in a team, what it receives, and what it emits
+purpose: How session-state-builder works in crews with other builders
+pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
 ---
 
 # Collaboration: session-state-builder
 
 ## My Role in Crews
-I am an EPHEMERAL STATE CAPTURE specialist.
-I record what is happening right now in a session so monitors, recovery tools,
-and post-session analysis can reference the snapshot.
+I am a SPECIALIST. I answer ONE question: "what is the agent's current session state right now?"
+I capture ephemeral in-session snapshots — context window usage, active task, checkpoint progress, and recovery pointers. I do NOT handle persistent state across sessions (runtime-state-builder), accumulated learning over time (learning-record-builder), or search indexes.
 
-## Typical Collaboration Chain
+## Crew Compositions
 
-```text
-agent boot -> execution -> session_state capture -> session end -> learning_record extraction
+### Crew: "Agent Resilience System"
+```
+  1. session-state-builder  -> "snapshots ephemeral context: tokens used, current task, checkpoint"
+  2. runtime-state-builder  -> "persists durable state that survives session boundaries"
+  3. fallback-chain-builder -> "uses checkpoint data from session_state to define recovery paths"
 ```
 
-I sit during active execution, providing observability into agent sessions.
+### Crew: "Long-Running Task Coordination"
+```
+  1. session-state-builder -> "captures mid-execution checkpoint so work can resume after interruption"
+  2. signal-builder        -> "emits a progress signal derived from the session_state checkpoint data"
+  3. handoff-builder       -> "packages session state + progress signal into a resumable handoff"
+```
 
-## I Receive
-- agent or satellite identity
-- session start time and current status
-- optional runtime metrics: tasks, tokens, tools, errors
+### Crew: "Context Overflow Protection"
+```
+  1. session-state-builder -> "tracks tokens_used and context_window fields to detect overflow risk"
+  2. skill-builder         -> "defines the overflow-protection skill that reads session state and compresses"
+  3. lifecycle-rule-builder -> "establishes rules for when to checkpoint based on session state thresholds"
+```
 
-## I Produce
-- one YAML session_state snapshot
-- suitable for `P10_memory/compiled/` or monitoring tools
+## Handoff Protocol
 
-## I Inform Downstream
-- `learning_record`: post-session analysis extracts patterns from my snapshots
-- `runtime_state`: persistent state may update based on session outcomes
-- `signal` (P12): status events may reference session data from my snapshots
+### I Receive
+- seeds: agent ID, current task description, tokens used, active tool calls
+- optional: checkpoint label, recovery pointer, priority queue of pending items
 
-## Builders / Actors Adjacent to Me
-| Actor | Relationship |
-|-------|--------------|
-| runtime-state-builder | produces persistent state; I produce ephemeral snapshots |
-| learning-record-builder | accumulates patterns; may extract from my snapshots |
-| brain-index-builder | indexes artifacts; independent of my session capture |
-| signal-builder | reports events; may reference session data from my snapshots |
-| monitors / STELLA | consume my output for real-time observability |
+### I Produce
+- session_state artifact (YAML, fields: agent_id, task, tokens_used, checkpoint, timestamp, max 80 lines)
+- committed to: `cex/P10/examples/session-state-{agent}-{timestamp}.yaml`
 
-## Cross-Reference Obligations (per BUILDER_NORM 12)
-- signal-builder references session data -> signal-builder MUST ref session-state-builder
-- learning-record-builder extracts from session snapshots -> learning-record-builder MUST ref session-state-builder
+### I Signal
+- signal: complete (with quality score from QUALITY_GATES)
+- if quality < 8.0: signal retry with failure reasons
+
+## Builders I Depend On
+- None required. Session state is captured from live agent execution context.
+
+## Builders That Depend On Me
+
+| Builder | Why |
+|---------|-----|
+| runtime-state-builder  | promotes durable fields from session_state into persistent storage |
+| fallback-chain-builder | reads checkpoint data from session_state to define recovery entry points |
+| signal-builder         | extracts progress percentage from session_state to populate progress signals |
+| handoff-builder        | embeds session_state snapshot into handoff for cross-session resumption |

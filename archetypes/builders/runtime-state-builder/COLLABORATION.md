@@ -1,50 +1,63 @@
 ---
-pillar: P12
+pillar: P10
 llm_function: COLLABORATE
-purpose: How runtime-state-builder works in crews
+purpose: How runtime-state-builder works in crews with other builders
+pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
 ---
 
 # Collaboration: runtime-state-builder
 
-## My Role
-I define WHAT routing rules, priorities, and heuristics an agent uses at RUNTIME.
-I do not define design-time identity (mental-model-builder).
-I do not manage search indexes (brain-index-builder).
+## My Role in Crews
+I am a SPECIALIST. I answer ONE question: "what routing rules, priorities, and heuristics does this agent use at runtime?"
+I define variable mental state agents accumulate during sessions — decision trees, tool preferences, priority ordering. I do not define design-time identity or ephemeral session snapshots.
 
-## Crew: "Full Agent Definition"
+## Crew Compositions
+
+### Crew: "Full Agent Definition Pack"
 ```
-  1. mental-model-builder      -> defines design-time identity (P02)
-  2. runtime-state-builder     -> defines runtime decisions (P10)
-  3. session-state-builder     -> defines ephemeral snapshot format (P10)
+  1. agent-builder            -> "static identity: name, domain, capabilities"
+  2. mental-model-builder     -> "design-time knowledge map and domain constraints"
+  3. runtime-state-builder    -> "runtime routing rules, priorities, and heuristics"
+  4. session-state-builder    -> "ephemeral snapshot of in-flight session variables"
 ```
 
-## Crew: "Agent Memory Stack"
+### Crew: "Adaptive Routing Agent"
 ```
-  1. runtime-state-builder     -> defines live state
-  2. learning-record-builder   -> defines what gets remembered
-  3. brain-index-builder       -> defines how knowledge is searched
+  1. router-builder           -> "static route table for task dispatch"
+  2. runtime-state-builder    -> "dynamic heuristics that adjust routing at runtime"
+  3. learning-record-builder  -> "patterns captured from routing decisions for future sessions"
+```
+
+### Crew: "Stateful Agent Bootstrap"
+```
+  1. boot-config-builder      -> "initialization sequence and startup parameters"
+  2. runtime-state-builder    -> "initial state: priorities, tool preferences, decision trees"
+  3. runtime-rule-builder     -> "operational limits applied to the booted agent"
 ```
 
 ## Handoff Protocol
+
 ### I Receive
-- seeds: agent name, domain, routing hints, priority list
-- optional: mental_model (P02), existing learning_records, domain constraints
+- seeds: agent domain, routing heuristics, priority ordering, tool preferences, decision criteria
+- optional: mental model to seed from, observed routing patterns, cross-session persistence requirements
 
 ### I Produce
-- runtime_state artifact in P10_memory/examples/
-- committed to: cex/P10_memory/examples/p10_rs_{agent_slug}.md
+- runtime_state artifact (YAML frontmatter + priorities list + heuristics + decision trees + tool preferences, max 4096 bytes)
+- committed to: `cex/P10/examples/p10_rs_{agent}_{name}.md`
 
 ### I Signal
 - signal: complete (with quality score from QUALITY_GATES)
 - if quality < 8.0: signal retry with failure reasons
 
 ## Builders I Depend On
-| Builder | Why |
-|---------|-----|
-| mental-model-builder | Runtime state initializes from design-time mental model |
+- mental-model-builder: provides design-time domain map that seeds my runtime routing heuristics
+- agent-builder: provides agent identity context that scopes which heuristics are relevant
 
 ## Builders That Depend On Me
+
 | Builder | Why |
 |---------|-----|
-| session-state-builder | Session state snapshots runtime state |
-| brain-index-builder | Brain index may use runtime state for search context |
+| session-state-builder | Initializes ephemeral session variables using my persistent state as baseline |
+| learning-record-builder | Records state transitions and heuristic updates discovered at runtime |
+| router-builder | References my heuristics to augment static route tables with dynamic priority weights |
+| boot-config-builder | Loads my state as the initial agent configuration at boot time |

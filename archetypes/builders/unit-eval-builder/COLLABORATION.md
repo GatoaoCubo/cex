@@ -1,51 +1,54 @@
 ---
-pillar: P12
+pillar: P07
 llm_function: COLLABORATE
-purpose: How unit-eval-builder works in crews
+purpose: How unit-eval-builder works in crews with other builders
+pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
 ---
 
 # Collaboration: unit-eval-builder
 
-## My Role
-I provide VERIFICATION of individual agent/prompt correctness.
-I do not define evaluation CRITERIA (scoring-rubric-builder).
-I do not provide REFERENCE examples (golden-test-builder).
+## My Role in Crews
+I am a SPECIALIST. I answer ONE question: "does this agent or prompt produce correct output for this specific input?"
+I write isolated unit tests with input, expected_output, and assertions mapped to quality gates. I do NOT handle pipeline-level tests (e2e-eval-builder), quick sanity checks (smoke-eval-builder), or quality calibration against golden examples (golden-test-builder).
 
-## Crew: "Evaluation Pipeline"
+## Crew Compositions
+
+### Crew: "Agent Build + Test"
 ```
-  1. scoring-rubric-builder -> defines dimensions and weights
-  2. golden-test-builder    -> provides reference examples at 9.5+
-  3. unit-eval-builder      -> verifies correctness with assertions
-  4. quality-gate-builder   -> defines pass/fail thresholds
+  1. system-prompt-builder -> "builds the agent identity and rules being tested"
+  2. unit-eval-builder -> "writes unit evals: input/expected_output/assertions per capability"
+  3. validator-builder -> "adds pre-commit checks that unit eval artifacts are structurally valid"
 ```
 
-## Crew: "Test Suite"
+### Crew: "Test Suite"
 ```
-  1. unit-eval-builder      -> individual agent tests
-  2. smoke-eval-builder     -> quick sanity checks
-  3. e2e-eval-builder       -> pipeline integration tests
+  1. unit-eval-builder -> "verifies individual agent/prompt correctness with assertions"
+  2. smoke-eval-builder -> "runs quick sanity checks on the same targets"
+  3. e2e-eval-builder -> "tests the full pipeline composed of agents unit-eval verified"
 ```
 
 ## Handoff Protocol
+
 ### I Receive
-- seeds: target, target_kind, domain
-- optional: golden_test reference, gate list from target builder
+- seeds: target agent or prompt artifact id, capability list to cover, quality gates to assert against
+- optional: golden_test reference for expected_output, setup/teardown requirements, edge case inputs
 
 ### I Produce
-- unit_eval artifact in P07_evals/
-- committed to: cex/P07_evals/p07_ue_{target_slug}.md
+- unit_eval artifact (YAML, input + expected_output + assertions, max 80 lines per eval)
+- committed to: `cex/P07_evals/examples/p07_ue_{target_slug}.md`
 
 ### I Signal
 - signal: complete (with quality score from QUALITY_GATES)
 - if quality < 8.0: signal retry with failure reasons
 
 ## Builders I Depend On
-- scoring-rubric-builder: provides evaluation criteria for assertion mapping
-- golden-test-builder: provides reference outputs for expected_output
+- scoring-rubric-builder: provides evaluation criteria dimensions for assertion mapping
+- golden-test-builder: provides reference outputs to use as expected_output in assertions
 
 ## Builders That Depend On Me
+
 | Builder | Why |
 |---------|-----|
-| golden-test-builder | Uses unit_evals to validate golden candidates |
-| e2e-eval-builder | Composes unit_evals into pipeline tests |
-| smoke-eval-builder | Derives quick checks from unit_eval assertions |
+| golden-test-builder | uses unit_evals to validate golden candidate quality before promotion |
+| e2e-eval-builder | composes unit_evals into pipeline-level integration tests |
+| smoke-eval-builder | derives quick sanity checks from unit_eval assertion sets |

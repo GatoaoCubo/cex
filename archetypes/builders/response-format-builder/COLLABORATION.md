@@ -1,50 +1,63 @@
 ---
-pillar: P12
+pillar: P05
 llm_function: COLLABORATE
-purpose: How response-format-builder works in crews
+purpose: How response-format-builder works in crews with other builders
+pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
 ---
 
 # Collaboration: response-format-builder
 
-## My Role
-I define HOW the LLM should structure its output during generation.
-I do not enforce output structure after generation (validation-schema-builder).
-I do not extract data from output (parser-builder).
+## My Role in Crews
+I am a SPECIALIST. I answer ONE question: "how should the LLM structure its output for this task?"
+I design the format the LLM sees during generation. I do not validate output after generation, extract data from it, or transform it between formats.
 
-## Crew: "Output Quality Pipeline"
+## Crew Compositions
+
+### Crew: "Structured Output Pipeline"
 ```
-  1. response-format-builder    -> tells LLM how to structure output
-  2. validation-schema-builder  -> system validates generated output
-  3. quality-gate-builder       -> enforces quality score threshold
+  1. response-format-builder    -> "format spec injected into the prompt (LLM sees this during generation)"
+  2. validation-schema-builder  -> "JSON/YAML schema applied post-generation to verify structure"
+  3. parser-builder             -> "extractor that pulls fields from the validated output"
 ```
 
-## Crew: "Agent Output Design"
+### Crew: "Agent Prompt Stack"
 ```
-  1. response-format-builder    -> defines output structure for agent
-  2. parser-builder [PLANNED]   -> defines how to extract data from output
-  3. formatter-builder [PLANNED] -> defines how to transform format
+  1. system-prompt-builder      -> "agent identity and fixed instructions"
+  2. prompt-template-builder    -> "parameterized template with {{variables}}"
+  3. response-format-builder    -> "output structure injected at system_prompt or user_message"
+```
+
+### Crew: "Eval-Ready Agent Pack"
+```
+  1. response-format-builder    -> "canonical output structure the agent must produce"
+  2. quality-gate-builder       -> "gates that check the format for completeness and correctness"
+  3. golden-test-builder        -> "golden examples of correctly formatted responses"
+  4. unit-eval-builder          -> "unit evaluations asserting format compliance"
 ```
 
 ## Handoff Protocol
+
 ### I Receive
-- seeds: target_kind, format_type, sections needed, consumption pattern
-- optional: existing output examples, validation_schema reference
+- seeds: task type, desired format_type (json/yaml/markdown/csv/plaintext), required fields, injection_point
+- optional: existing system prompt to inject into, example outputs, validation schema reference
 
 ### I Produce
-- response_format artifact in P05_output/examples/
-- committed to: cex/P05_output/examples/p05_rf_{format_slug}.yaml
+- response_format artifact (YAML frontmatter 19 fields + format body with sections/fields/examples, max 4096 bytes)
+- committed to: `cex/P05/examples/p05_rf_{name}.md`
 
 ### I Signal
 - signal: complete (with quality score from QUALITY_GATES)
 - if quality < 8.0: signal retry with failure reasons
 
 ## Builders I Depend On
-None directly. Independent at layer 0.
-- artifact-blueprint-builder [PLANNED]: provides shape definition (optional)
+- system-prompt-builder: provides the injection target when injection_point is system_prompt
+- prompt-template-builder: provides the template body where the format spec is inserted
 
 ## Builders That Depend On Me
+
 | Builder | Why |
 |---------|-----|
-| validation-schema-builder | Designs system-side checks aligned to the format |
-| parser-builder [PLANNED] | Extracts data from output formatted by this spec |
-| system-prompt-builder [PLANNED] | Includes response_format in agent prompts |
+| validation-schema-builder | Derives its schema from the fields I specify in the format |
+| parser-builder | Knows which fields to extract based on my format definition |
+| golden-test-builder | Golden outputs must conform to the format I define |
+| formatter-builder | Transforms between formats starting from the structure I establish |
