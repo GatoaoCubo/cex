@@ -8,69 +8,51 @@ pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCE
 # Collaboration: agent-builder
 
 ## My Role in Crews
-I am a PACKAGER. I answer ONE question: "who is this agent, what can it do, and how is it structured?"
-I integrate outputs from identity builders (system-prompt-builder) and knowledge builders
-(knowledge-card-builder) into a complete, deployable agent definition with iso_vectorstore.
+I am a SPECIALIST. I answer ONE question: "who is this agent, what can it do, what are its constraints, and how is it structured?"
+I do not write system prompts. I do not define skills or model cards.
+I produce agent definitions so downstream builders can configure, package, and deploy the agent.
 
 ## Crew Compositions
 
-### Crew: "Agent Bootstrap" (standard)
+### Crew: "New Agent End-to-End"
 ```
-  1. knowledge-card-builder -> "domain knowledge for the agent"
-  2. system-prompt-builder  -> "agent identity, rules, output format"
-  3. agent-builder          -> "complete agent definition + iso_vectorstore"
-  4. skill-builder [PLANNED] -> "executable capabilities for the agent"
-```
-
-### Crew: "Full Agent Package"
-```
-  1. model-card-builder     -> "LLM spec and routing decision"
-  2. system-prompt-builder  -> "persona and rules"
-  3. agent-builder          -> "full definition with iso_vectorstore"
-  4. quality-gate-builder   -> "validation criteria for agent output"
-  5. skill-builder [PLANNED] -> "reusable skills the agent exposes"
+  1. knowledge-card-builder -> "domain knowledge for agent expertise"
+  2. agent-builder -> "agent definition (persona + capabilities + iso_vectorstore)"
+  3. instruction-builder -> "execution steps for agent tasks"
+  4. boot-config-builder -> "provider-specific initialization config"
+  5. iso-package-builder -> "portable deployable package"
 ```
 
-### Crew: "Agent Audit"
+### Crew: "Agent Identity Stack"
 ```
-  1. agent-builder (read mode) -> "parse existing agent definition"
-  2. quality-gate-builder      -> "score against HARD + SOFT gates"
-  3. knowledge-card-builder    -> "distill audit findings as knowledge"
+  1. agent-builder -> "agent definition with capabilities"
+  2. fallback-chain-builder -> "model degradation sequence"
+  3. guardrail-builder -> "safety boundaries for agent behavior"
 ```
 
 ## Handoff Protocol
 
 ### I Receive
-- seeds: agent name, satellite, domain
-- optional: system_prompt artifact (from system-prompt-builder)
-- optional: knowledge_cards (from knowledge-card-builder)
-- optional: model_card (from model-card-builder)
+- seeds: agent name, domain, target capabilities, satellite assignment
+- optional: existing persona sketch, tool list, routing keywords
 
 ### I Produce
-- agent artifact: `cex/P02_model/examples/p02_agent_{slug}.md`
-- iso_vectorstore skeleton: `agents/{slug}/iso_vectorstore/` (10 file stubs)
+- agent artifact with iso_vectorstore skeleton (10+ ISO files)
+- committed to: `cex/P02/examples/p02_agent_{name}/`
 
 ### I Signal
 - signal: complete (with quality score from QUALITY_GATES)
-- if quality < 8.0: signal retry with specific gate failures
+- if quality < 8.0: signal retry with failure reasons
 
 ## Builders I Depend On
-
-| Builder | Why | Wave |
-|---------|-----|------|
-| system-prompt-builder | Provides system_prompt artifact to embed in SYSTEM_INSTRUCTION ISO file | Wave 3 (upstream) |
-| knowledge-card-builder | Provides domain knowledge to inject into agent Overview and Architecture | Wave 1 (upstream) |
-| model-card-builder | Provides LLM spec for tools_count and capabilities scoping | Wave 2 (upstream) |
+- knowledge-card-builder: provides domain knowledge that shapes agent expertise
 
 ## Builders That Depend On Me
 
 | Builder | Why |
 |---------|-----|
-| skill-builder [PLANNED] | Needs agent identity to scope skill capabilities correctly |
-| quality-gate-builder | Validates agent artifacts I produce |
-| spawn-config-builder | References agent identity for spawn configuration |
-
-## Cross-Reference Norm (BUILDER_NORMS Rule 12)
-system-prompt-builder COLLABORATION.md lists agent-builder as a downstream dependent.
-This file lists system-prompt-builder as an upstream dependency.
-The cross-reference is bidirectional — both files acknowledge the relationship.
+| boot-config-builder | Needs agent identity to configure provider startup |
+| iso-package-builder | Packages agent definition into portable bundle |
+| dispatch-rule-builder | Creates routing rules that target this agent |
+| guardrail-builder | Defines safety boundaries scoped to agent capabilities |
+| interface-builder | Defines contracts between this agent and others |

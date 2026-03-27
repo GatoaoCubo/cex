@@ -1,102 +1,55 @@
 ---
-id: component-map-builder-collaboration
-kind: collaboration
-parent: component-map-builder
-version: 1.0.0
+pillar: P12
+llm_function: COLLABORATE
+purpose: How component-map-builder works in crews with other builders
+pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
 ---
 
-# Collaboration — component-map-builder
+# Collaboration: component-map-builder
 
-## My Role
+## My Role in Crews
+I am a SPECIALIST. I answer ONE question: "what are the parts of this system and how do they connect?"
+I do not visualize diagrams. I do not prescribe solutions.
+I inventory components structurally so architects can understand system topology.
 
-I answer ONE question: "what are the parts of this system and how do they connect?"
-
-I do not visualize graphically. I do not prescribe solutions. I do not define single components.
-I INVENTORY structure so architects and builders have accurate component data.
-
-## Crews
+## Crew Compositions
 
 ### Crew: "Architecture Documentation"
-
 ```
-1. component-map-builder  -> "structured inventory of parts and connections"
-2. diagram-builder        -> "visual representation from map data"
-3. pattern-builder        -> "solution pattern (if applicable)"
-```
-
-### Crew: "Architecture Design"
-
-```
-1. pattern-builder        -> "reusable solution"
-2. law-builder            -> "mandatory rule"
-3. diagram-builder        -> "visual of architecture"
-4. component-map-builder  -> "inventory of governed components"
+  1. component-map-builder -> "structured inventory of components and connections"
+  2. diagram-builder -> "visual representation of the architecture"
+  3. context-doc-builder -> "domain context for stakeholders"
 ```
 
-### Crew: "System Audit"
-
+### Crew: "System Analysis"
 ```
-1. component-map-builder      -> "current component inventory"
-2. quality-gate-builder       -> "compliance checks per component"
-3. lifecycle-rule-builder     -> "freshness and deprecation rules" [PLANNED]
+  1. component-map-builder -> "component inventory with dependencies"
+  2. interface-builder -> "formal contracts between components"
+  3. dag-builder -> "execution dependency graph"
 ```
 
 ## Handoff Protocol
 
 ### I Receive
-
-| Input | Required | Notes |
-|-------|----------|-------|
-| scope description | YES | What system/subsystem to map |
-| known components | REC | Pre-identified components accelerate Phase 1 |
-| domain context | REC | Helps classify owners and types |
-| existing diagrams | OPT | Can extract component list |
-| satellite specs | OPT | satellite-spec-builder output for individual details |
-| dependency data | OPT | Pre-mapped dependencies |
+- seeds: system name, scope boundary, component list or discovery criteria
+- optional: existing architecture docs, ownership mapping, health status
 
 ### I Produce
+- component_map artifact (.md + .yaml frontmatter)
+- committed to: `cex/P08/examples/p08_component_map_{scope}.md`
 
-component_map artifact committed to:
-`cex/P08_architecture/examples/p08_cmap_{scope_slug}.yaml`
-
-Report format:
-```
-component_count: N
-connection_count: M
-HARD gates: 9/9 pass
-SOFT score: X.X / 10
-```
+### I Signal
+- signal: complete (with quality score from QUALITY_GATES)
+- if quality < 8.0: signal retry with failure reasons
 
 ## Builders I Depend On
-
-| Builder | Why | Required |
-|---------|-----|----------|
-| satellite-spec-builder | Provides individual component specifications | OPT |
+None — independent builder (layer 0). Component maps start from system analysis.
 
 ## Builders That Depend On Me
 
-| Builder | Why | Handoff |
-|---------|-----|---------|
-| diagram-builder | Diagrams visualize component map data | Pass p08_cmap artifact |
-| pattern-builder | Patterns may reference component inventory | Pass component list |
-| law-builder | Laws may reference governed components | Pass component list |
-
-## Cross-References (Bidirectional)
-
-| Builder | Relationship | Direction |
-|---------|-------------|-----------|
-| diagram-builder | diagram consumes component_map data | component_map -> diagram |
-| satellite-spec-builder | satellite_spec details one component in a map | satellite_spec -> component_map |
-| pattern-builder | pattern may reference components from map | component_map -> pattern |
-| law-builder | law may govern components listed in map | component_map -> law |
-| interface-builder | interfaces formalize connections I catalog | component_map <-> interface |
-
-## Boundary Enforcement
-
-If asked to build something outside my scope, respond:
-
-- "Map X visually" -> "Use diagram-builder (P08)"
-- "Define component X in detail" -> "Use satellite-spec-builder (P08)"
-- "What order do X and Y execute?" -> "Use dag-builder (P12)"
-- "Create a rule governing X" -> "Use law-builder (P08)"
-- "Design a solution pattern for X" -> "Use pattern-builder (P08)"
+| Builder | Why |
+|---------|-----|
+| diagram-builder | Visualizes the component inventory as architecture diagrams |
+| interface-builder | Defines contracts between mapped components |
+| dag-builder | Models execution dependencies between mapped components |
+| dispatch-rule-builder | Routes tasks to components identified in the map |

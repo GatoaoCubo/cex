@@ -9,46 +9,45 @@ pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCE
 
 ## My Role in Crews
 I am a SPECIALIST. I answer ONE question: "which embedding model, with what parameters, for this RAG pipeline?"
-I do not build indexes. I do not index sources.
-I CONFIGURE the vectorization model so brain_index and retrievers work correctly.
+I do not build search indexes. I do not create knowledge content.
+I configure embedding models so vector search systems produce accurate representations.
 
 ## Crew Compositions
 
 ### Crew: "RAG Pipeline Setup"
 ```
-  1. embedding-config-builder -> "configures the embedding model"
-  2. rag-source-builder [PLANNED] -> "registers external sources"
-  3. brain-index-builder [PLANNED] -> "configures the search index"
+  1. embedding-config-builder -> "embedding model parameters (dimensions, chunk, distance)"
+  2. brain-index-builder -> "search index configuration"
+  3. knowledge-card-builder -> "content to embed and index"
 ```
 
-### Crew: "Knowledge Infrastructure"
+### Crew: "Vector Infrastructure"
 ```
-  1. embedding-config-builder -> "defines vectorization params"
-  2. knowledge-card-builder -> "produces knowledge content"
-  3. glossary-entry-builder -> "defines domain terms"
+  1. embedding-config-builder -> "model config (provider, dimensions, tokenizer)"
+  2. brain-index-builder -> "FAISS/BM25 index using embedding config"
+  3. benchmark-builder -> "retrieval quality measurement"
 ```
 
 ## Handoff Protocol
 
 ### I Receive
-- seeds: model name, provider, use case
-- optional: dimension preference, cost constraints, privacy requirements
+- seeds: use case (search, similarity, clustering), content domain
+- optional: provider preference, dimension constraints, cost budget, batch size
 
 ### I Produce
-- embedding_config artifact (YAML)
-- committed to: `cex/P01_knowledge/examples/p01_emb_{model_slug}.yaml`
+- embedding_config artifact (.md + .yaml frontmatter)
+- committed to: `cex/P01/examples/p01_embedding_{scope}.md`
 
 ### I Signal
 - signal: complete (with quality score from QUALITY_GATES)
 - if quality < 8.0: signal retry with failure reasons
 
 ## Builders I Depend On
-None. Embedding configs can be built from a model name alone.
+None — independent builder (layer 0). Embedding configs are defined from requirements.
 
-## Builders That Depend On Me [PLANNED]
+## Builders That Depend On Me
 
 | Builder | Why |
 |---------|-----|
-| brain-index-builder [PLANNED] | Index config needs embedding dimensions and metric |
-| knowledge-card-builder | KCs are chunked and embedded using this config |
-| rag-source-builder [PLANNED] | Source indexing uses embedding config params |
+| brain-index-builder | Needs embedding dimensions and distance metric for index config |
+| benchmark-builder | Measures retrieval quality using configured embeddings |

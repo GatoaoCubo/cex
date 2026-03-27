@@ -1,79 +1,53 @@
 ---
-id: diagram-builder-collaboration
-kind: collaboration
-builder: diagram-builder
-version: 1.0.0
+pillar: P12
+llm_function: COLLABORATE
+purpose: How diagram-builder works in crews with other builders
+pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
 ---
 
-# diagram-builder — COLLABORATION
+# Collaboration: diagram-builder
 
-## My Role
+## My Role in Crews
+I am a SPECIALIST. I answer ONE question: "how does this system look structurally?"
+I do not inventory data. I do not prescribe solutions.
+I visualize architecture so stakeholders can understand system structure at a glance.
 
-I answer ONE question: "how does this system look structurally?"
-I do not prescribe solutions. I do not inventory data. I do not govern behavior.
-I VISUALIZE architecture so stakeholders understand structure at a glance.
-
-## Crews
+## Crew Compositions
 
 ### Crew: "Architecture Documentation"
 ```
-1. component-map-builder  -> structured inventory of parts
-2. diagram-builder        -> visual representation from map data
-3. pattern-builder        -> solution pattern (if applicable)
+  1. component-map-builder -> "structured component inventory"
+  2. diagram-builder -> "visual architecture diagram (ASCII/Mermaid)"
+  3. context-doc-builder -> "domain context for documentation"
 ```
 
-### Crew: "Architecture Design"
+### Crew: "System Overview"
 ```
-1. pattern-builder        -> reusable solution
-2. law-builder            -> mandatory rule
-3. diagram-builder        -> visual of architecture/enforcement
-4. component-map-builder  -> inventory of components
-```
-
-### Crew: "System Onboarding"
-```
-1. diagram-builder        -> system overview visual
-2. knowledge-card-builder -> key concepts as KCs
-3. glossary-entry-builder -> term definitions [PLANNED]
+  1. dag-builder -> "dependency graph data"
+  2. diagram-builder -> "visual representation of dependencies"
+  3. glossary-entry-builder -> "legend terms and definitions"
 ```
 
 ## Handoff Protocol
 
-I Receive:
-- scope description (required)
-- component list (required or discoverable)
-- notation preference (optional — default ascii)
-- zoom level (optional — default system)
-- component_map data (optional — enriches output)
-- existing diagrams (optional — prevents duplicates)
+### I Receive
+- seeds: system name, components to visualize, diagram type (flow, layered, sequence)
+- optional: component-map output, notation preference (ASCII, Mermaid), layer boundaries
 
-I Produce:
-- diagram artifact committed to `cex/P08_architecture/examples/p08_diag_{scope_slug}.md`
+### I Produce
+- diagram artifact (.md with ASCII or Mermaid notation)
+- committed to: `cex/P08/examples/p08_diagram_{scope}.md`
+
+### I Signal
+- signal: complete (with quality score from QUALITY_GATES)
+- if quality < 8.0: signal retry with failure reasons
 
 ## Builders I Depend On
-
-| Builder | Why | When |
-|---------|-----|------|
-| component-map-builder | Provides structured data to visualize | Optional enrichment |
+- component-map-builder: provides structured data to visualize
 
 ## Builders That Depend On Me
 
 | Builder | Why |
 |---------|-----|
-| pattern-builder | Patterns may reference diagrams for visual illustration |
-| satellite-spec-builder | Specs may include architecture diagrams of the component |
-| law-builder | Law enforcement flows may be diagrammed |
-
-## Cross-Reference Obligations
-
-Per BUILDER_NORMS norm 12: if builder A refs builder B, builder B MUST ref builder A.
-
-- pattern-builder refs diagram-builder -> diagram-builder refs pattern-builder (done above)
-- satellite-spec-builder refs diagram-builder -> diagram-builder refs satellite-spec-builder (done above)
-- law-builder refs diagram-builder -> diagram-builder refs law-builder (done above)
-- component-map-builder is depended on by diagram-builder -> component-map-builder MUST ref diagram-builder
-
-## Scope Fence
-
-I touch: `cex/P08_architecture/examples/p08_diag_*.md`
-I do NOT touch: component_map files, pattern files, law files, workflow files, P12 artifacts
+| context-doc-builder | May embed diagrams in domain documentation |
+| knowledge-card-builder | May reference diagrams for visual context |

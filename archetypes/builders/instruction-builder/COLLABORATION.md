@@ -8,49 +8,51 @@ pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCE
 # Collaboration: instruction-builder
 
 ## My Role in Crews
-I am a SPECIALIST. I answer ONE question: "what are the exact steps to do this?"
-I do not define identity. I do not specify input/output contracts.
-I DECOMPOSE TASKS into executable steps so agents can follow a clear recipe.
+I am a SPECIALIST. I answer ONE question: "what are the exact steps to execute this task?"
+I do not define agent identity. I do not write task prompts with I/O.
+I compose step-by-step recipes so agents can execute tasks in correct order with validation.
 
 ## Crew Compositions
 
-### Crew: "Agent Bootstrap"
+### Crew: "New Agent End-to-End"
 ```
-  1. knowledge-card-builder -> "domain knowledge for the task"
-  2. system-prompt-builder -> "agent identity and rules"
-  3. instruction-builder -> "step-by-step execution recipes"
-  4. action-prompt-builder [PLANNED] -> "task prompts with I/O"
+  1. knowledge-card-builder -> "domain knowledge"
+  2. agent-builder -> "agent definition"
+  3. instruction-builder -> "execution steps for agent tasks"
+  4. boot-config-builder -> "provider configuration"
+  5. iso-package-builder -> "deployable package"
 ```
 
-### Crew: "Operational Runbook"
+### Crew: "Task Recipe Design"
 ```
-  1. knowledge-card-builder -> "domain context and patterns"
-  2. instruction-builder -> "step-by-step procedure"
-  3. quality-gate-builder -> "validation criteria for output"
+  1. context-doc-builder -> "domain context for grounding"
+  2. instruction-builder -> "step-by-step operational recipe"
+  3. action-prompt-builder -> "task prompt that follows the recipe"
+  4. e2e-eval-builder -> "end-to-end test of recipe execution"
 ```
 
 ## Handoff Protocol
 
 ### I Receive
-- seeds: task name, domain, target executor
-- optional: knowledge_cards, system_prompt context, dependency list
+- seeds: task name, high-level goal, execution environment
+- optional: prerequisites, rollback procedures, validation criteria, dependencies
 
 ### I Produce
-- instruction artifact (YAML frontmatter + markdown body)
-- committed to: `cex/P03_prompt/examples/p03_ins_{task_slug}.md`
+- instruction artifact (.md + .yaml frontmatter)
+- committed to: `cex/P03/examples/p03_instruction_{task}.md`
 
 ### I Signal
 - signal: complete (with quality score from QUALITY_GATES)
 - if quality < 8.0: signal retry with failure reasons
 
 ## Builders I Depend On
-- knowledge-card-builder: provides domain knowledge for step details
-- system-prompt-builder: provides agent context to align instruction tone
+- context-doc-builder: provides domain background that grounds recipe steps
 
-## Builders That Depend On Me [PLANNED]
+## Builders That Depend On Me
 
 | Builder | Why |
 |---------|-----|
-| skill-builder [PLANNED] | Skill phases reference instruction steps |
-| workflow-builder [PLANNED] | Workflow steps may wrap instructions |
-| action-prompt-builder | May reference instruction for detailed steps |
+| action-prompt-builder | Prompts may implement instruction steps |
+| chain-builder | Chains may encode instruction sequences as prompt pipelines |
+| handoff-builder | Embeds instruction steps in delegation packages |
+| iso-package-builder | Includes instructions in agent packages |

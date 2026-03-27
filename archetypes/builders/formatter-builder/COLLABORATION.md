@@ -8,59 +8,47 @@ pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCE
 # Collaboration: formatter-builder
 
 ## My Role in Crews
-I am a PRESENTER. I answer ONE question: "how should this structured data be displayed?"
+I am a SPECIALIST. I answer ONE question: "how should structured data be presented in this format?"
 I do not extract data. I do not validate content.
-I PRESENT so consumers can read, display, or transmit formatted data.
+I design output transformations so data is presented in readable, consumable formats.
 
 ## Crew Compositions
 
-### Crew: "Output Pipeline" (standard)
+### Crew: "Output Pipeline"
 ```
-  1. agent-builder                 -> "agent produces raw output"
-  2. parser-builder                -> "extract structured data from output"
-  3. formatter-builder             -> "present extracted data in target format"
-  4. validator-builder [PLANNED]   -> "validate formatted output against rules"
+  1. input-schema-builder -> "input data contract"
+  2. formatter-builder -> "output transformation rules (JSON/YAML/Markdown/table)"
+  3. cli-tool-builder -> "CLI tool that applies the formatter"
 ```
 
 ### Crew: "Report Generation"
 ```
-  1. knowledge-card-builder        -> "distill facts from research"
-  2. formatter-builder             -> "render facts as Markdown table or HTML"
-  3. quality-gate-builder          -> "validate report completeness"
-```
-
-### Crew: "API Response Pipeline"
-```
-  1. parser-builder                -> "extract data from LLM response"
-  2. formatter-builder             -> "serialize as JSON with escaping"
-  3. validator-builder [PLANNED]   -> "validate JSON against output_schema"
+  1. knowledge-card-builder -> "source facts"
+  2. formatter-builder -> "presentation format (table, markdown, HTML)"
+  3. diagram-builder -> "visual elements in the report"
 ```
 
 ## Handoff Protocol
 
 ### I Receive
-- seeds: target_format, input data structure, sample data
-- optional: template (pre-defined formatting template)
-- optional: locale (for number/date formatting)
+- seeds: input data type, target output format (JSON, YAML, Markdown, HTML, table)
+- optional: template engine, escaping rules, locale, truncation policy
 
 ### I Produce
-- formatter artifact: `cex/P05_output/examples/p05_fmt_{slug}.md`
-- committed to: archetypes or pool depending on quality score
+- formatter artifact (.md + .yaml frontmatter)
+- committed to: `cex/P05/examples/p05_formatter_{scope}.md`
 
 ### I Signal
 - signal: complete (with quality score from QUALITY_GATES)
-- if quality < 8.0: signal retry with specific gate failures
+- if quality < 8.0: signal retry with failure reasons
 
 ## Builders I Depend On
-- parser-builder: provides structured data that formatter presents (upstream)
+- input-schema-builder: provides data structure that the formatter transforms
 
 ## Builders That Depend On Me
 
 | Builder | Why |
 |---------|-----|
-| validator-builder [PLANNED] | Validates data that formatter presented |
-
-## Cross-Reference Norm (BUILDER_NORMS Rule 12)
-parser-builder lists formatter-builder as downstream dependent (provides structured data).
-This file lists parser-builder as upstream dependency.
-The cross-reference is bidirectional.
+| cli-tool-builder | CLI tools use formatters for output display |
+| few-shot-example-builder | Examples must match formatter output shape |
+| action-prompt-builder | Prompts may specify output via formatter rules |

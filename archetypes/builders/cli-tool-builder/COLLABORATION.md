@@ -8,58 +8,47 @@ pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCE
 # Collaboration: cli-tool-builder
 
 ## My Role in Crews
-I am a COMMAND-LINE SPECIALIST. I answer ONE question: "what commands does this tool
-expose, what are its flags, and what exit codes does it return?"
-I do not define agent identity. I do not write skill phases. I do not implement code.
-I DEFINE CLI CONTRACTS so agents and hooks know exactly how to invoke the tool.
+I am a SPECIALIST. I answer ONE question: "what commands does this tool expose, and what are its flags and exit codes?"
+I do not build background processes. I do not define API clients.
+I specify one-shot command-line tools so users and agents can invoke operations from terminal.
 
 ## Crew Compositions
 
-### Crew: "Agent Toolchain"
+### Crew: "Developer Tooling"
 ```
-  1. knowledge-card-builder -> "domain knowledge about the task domain"
-  2. cli-tool-builder        -> "CLI tool spec: commands, flags, exit codes"
-  3. hook-builder [PLANNED]  -> "hook that invokes cli_tool on events"
-  4. agent-builder [PLANNED] -> "agent wired to use this cli_tool"
-```
-
-### Crew: "Build Pipeline"
-```
-  1. cli-tool-builder        -> "validator tool for artifact checking"
-  2. quality-gate-builder    -> "gates that the tool enforces"
-  3. spawn-config-builder    -> "config that includes tool in build step"
+  1. cli-tool-builder -> "CLI tool specification (commands, flags, exit codes)"
+  2. input-schema-builder -> "input validation for CLI arguments"
+  3. formatter-builder -> "output formatting (text/json/table)"
 ```
 
-### Crew: "Tool Audit"
+### Crew: "Tool Ecosystem"
 ```
-  1. cli-tool-builder        -> "current tool spec"
-  2. validator-builder       -> "validate command schemas"
-  3. knowledge-card-builder  -> "capture learnings from audit"
+  1. cli-tool-builder -> "one-shot CLI tool"
+  2. daemon-builder -> "persistent background service"
+  3. hook-builder -> "event hooks that invoke CLI tools"
 ```
 
 ## Handoff Protocol
 
 ### I Receive
-- seeds: tool name, purpose, command list
-- optional: flag definitions, output format preference
-- optional: existing script or binary to wrap
+- seeds: tool purpose, command names, expected input/output
+- optional: config file spec, env var overrides, exit code mapping
 
 ### I Produce
-- cli_tool artifact: `p04_cli_{tool_slug}.md`
-- committed to: `cex/P04_tools/examples/p04_cli_{tool_slug}.md`
+- cli_tool artifact (.md + .yaml frontmatter)
+- committed to: `cex/P04/examples/p04_cli_{name}.md`
 
 ### I Signal
 - signal: complete (with quality score from QUALITY_GATES)
-- if quality < 8.0: signal retry with specific gate failures
+- if quality < 8.0: signal retry with failure reasons
 
 ## Builders I Depend On
-- knowledge-card-builder: provides domain knowledge about the task domain
+None — independent builder (layer 0). CLI tools can be defined standalone.
 
 ## Builders That Depend On Me
 
 | Builder | Why |
 |---------|-----|
-| hook-builder [PLANNED] | Hooks invoke cli_tools on lifecycle events |
-| agent-builder [PLANNED] | Agents invoke cli_tools via shell |
-| scraper-builder | Scrapers may use cli_tools for post-processing |
-| client-builder | Clients may wrap cli_tool output as API input |
+| hook-builder | Hooks may invoke CLI tools as their execution script |
+| daemon-builder | Daemons may wrap CLI tools in persistent loops |
+| instruction-builder | Recipes reference CLI tools as execution steps |

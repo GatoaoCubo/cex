@@ -8,53 +8,47 @@ pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCE
 # Collaboration: feature-flag-builder
 
 ## My Role in Crews
-I am a FEATURE FLAG SPECIALIST. I answer ONE question: "should this feature be on or off,
-for whom, and with what rollout strategy?"
-I do not define environment variables. I do not write filesystem paths. I do not implement code.
-I DEFINE FLAG CONTRACTS so services can safely enable or disable features at runtime.
+I am a SPECIALIST. I answer ONE question: "should this feature be on or off, for whom, and with what rollout strategy?"
+I do not set environment variables. I do not control access permissions.
+I specify feature toggles so teams can control rollout, experiments, and kill switches.
 
 ## Crew Compositions
 
-### Crew: "Safe Feature Release"
+### Crew: "Deployment Configuration"
 ```
-  1. feature-flag-builder     -> "flag spec with rollout strategy"
-  2. runtime-rule-builder     -> "timeout and fallback rules during rollout"
-  3. env-config-builder       -> "env vars for flag evaluation service"
-```
-
-### Crew: "A/B Experiment"
-```
-  1. feature-flag-builder     -> "experiment flag with cohort targeting"
-  2. runtime-rule-builder     -> "measurement window and sample size rules"
+  1. boot-config-builder -> "provider startup configuration"
+  2. env-config-builder -> "environment variables"
+  3. feature-flag-builder -> "feature toggles (on/off, rollout %, cohorts)"
 ```
 
-### Crew: "Emergency Response"
+### Crew: "Gradual Rollout"
 ```
-  1. feature-flag-builder     -> "ops kill switch for problematic feature"
-  2. runtime-rule-builder     -> "fallback timeout rules when feature disabled"
+  1. feature-flag-builder -> "flag definition with rollout strategy"
+  2. benchmark-builder -> "performance impact measurement per cohort"
+  3. bugloop-builder -> "auto-rollback if metrics degrade"
 ```
 
 ## Handoff Protocol
 
 ### I Receive
-- seeds: feature name, category, desired rollout strategy
-- optional: existing feature flags to reference, targeting requirements
-- optional: expiration date for stale flag cleanup
+- seeds: feature name, flag category (release, experiment, ops, permission)
+- optional: rollout percentage, cohort targeting, kill switch config, expiry date
 
 ### I Produce
-- feature_flag artifact: `p09_ff_{feature_slug}.yaml`
-- committed to: `cex/P09_config/examples/p09_ff_{feature_slug}.yaml`
+- feature_flag artifact (.md + .yaml frontmatter)
+- committed to: `cex/P09/examples/p09_flag_{feature}.md`
 
 ### I Signal
 - signal: complete (with quality score from QUALITY_GATES)
-- if quality < 8.0: signal retry with specific gate failures
+- if quality < 8.0: signal retry with failure reasons
 
 ## Builders I Depend On
-None — feature_flag is self-contained (defines toggle, not implementation).
+None — independent builder (layer 0). Flags are defined from product requirements.
 
 ## Builders That Depend On Me
 
 | Builder | Why |
 |---------|-----|
-| runtime-rule-builder | Runtime rules may apply conditionally based on flag state |
-| env-config-builder | Env config may include flag evaluation service settings |
+| env-config-builder | May reference flags as environment overrides |
+| bugloop-builder | Uses flag state as detection trigger for rollback |
+| benchmark-builder | Measures performance per flag cohort |

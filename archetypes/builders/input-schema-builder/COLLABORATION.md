@@ -9,47 +9,48 @@ pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCE
 
 ## My Role in Crews
 I am a SPECIALIST. I answer ONE question: "what data must be provided to this agent/operation?"
-I do not define response formats. I do not check data validity.
-I SPECIFY input contracts so agents and callers know what data to provide.
+I do not define bilateral contracts. I do not validate output.
+I specify unilateral input contracts so producers know exactly what data consumers require.
 
 ## Crew Compositions
 
-### Crew: "Agent Contract Suite"
+### Crew: "Contract Stack"
 ```
-  1. input-schema-builder -> "defines entry contract (fields, types, defaults)"
-  2. interface-builder -> "defines bilateral integration contract"
-  3. validator-builder -> "creates validators for contract compliance"
-  4. output-template-builder [PLANNED] -> "defines output format"
+  1. input-schema-builder -> "unilateral input contract (fields, types, defaults)"
+  2. interface-builder -> "bilateral integration contract"
+  3. formatter-builder -> "output format specification"
 ```
 
-### Crew: "Tool Documentation"
+### Crew: "Prompt Engineering"
 ```
-  1. input-schema-builder -> "defines tool input contract"
-  2. knowledge-card-builder -> "documents tool knowledge"
-  3. system-prompt-builder [PLANNED] -> "mentions input requirements in agent prompt"
+  1. input-schema-builder -> "input contract for the prompt"
+  2. action-prompt-builder -> "task prompt respecting input schema"
+  3. few-shot-example-builder -> "examples conforming to schema"
 ```
 
 ## Handoff Protocol
 
 ### I Receive
-- seeds: scope (what operation), field names and types
-- optional: existing API docs, Pydantic models, JSON Schema
+- seeds: consumer name, required fields with types
+- optional: defaults, coercion rules, validation patterns, error messages
 
 ### I Produce
-- input_schema artifact (YAML)
-- committed to: `cex/P06_schema/examples/p06_is_{scope_slug}.yaml`
+- input_schema artifact (.md + .yaml frontmatter)
+- committed to: `cex/P06/examples/p06_input_{consumer}.md`
 
 ### I Signal
 - signal: complete (with quality score from QUALITY_GATES)
 - if quality < 8.0: signal retry with failure reasons
 
 ## Builders I Depend On
-None. Input schemas are INDEPENDENT — they can be built from requirements alone.
+None — independent builder (layer 0). Input schemas are defined from consumer requirements.
 
-## Builders That Depend On Me [PLANNED]
+## Builders That Depend On Me
 
 | Builder | Why |
 |---------|-----|
-| interface-builder | Uses input_schemas for method input types |
-| validator-builder | Creates compliance checks for the input contract |
-| system-prompt-builder [PLANNED] | Documents required inputs in agent prompts |
+| action-prompt-builder | Prompts must respect input contract |
+| chain-builder | Chain steps pass data conforming to input schemas |
+| few-shot-example-builder | Examples must match input format |
+| formatter-builder | Formatters transform data described by input schemas |
+| interface-builder | Bilateral contracts compose from input schemas |

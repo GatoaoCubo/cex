@@ -1,65 +1,54 @@
 ---
 pillar: P12
 llm_function: COLLABORATE
-purpose: How bugloop-builder works in crews
+purpose: How bugloop-builder works in crews with other builders
+pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
 ---
 
 # Collaboration: bugloop-builder
 
-## My Role
-I define WHAT the correction cycle does (detect pattern, fix strategy, verify suite, escalation policy).
-I do NOT implement HOW detection runs (validator-builder, P06).
-I do NOT implement HOW the fix executes (executor agent).
-I do NOT define pass/fail quality barriers (quality-gate-builder, P11).
+## My Role in Crews
+I am a SPECIALIST. I answer ONE question: "what is the automatic detect-fix-verify loop for this system?"
+I do not define quality gates. I do not score rubrics.
+I design automated correction cycles so systems self-heal without manual intervention.
 
-## Crew: "Add Automated Correction to New Type"
-```
-  1. quality-gate-builder  -> defines HARD/SOFT gates (what must pass)
-  2. bugloop-builder       -> defines correction cycle (what runs when gate fails)
-  3. validator-builder     -> implements detect.pattern check in code [PLANNED]
-```
-Note: quality-gate-builder refs bugloop-builder (gate triggers loop on fail).
-      bugloop-builder refs quality-gate-builder (loop fires on gate failure).
-      Bidirectional cross-ref enforced per BUILDER_NORMS LAW 12.
+## Crew Compositions
 
-## Crew: "Full Feedback Loop for Pipeline"
+### Crew: "Self-Healing System"
 ```
-  1. bugloop-builder       -> correction cycle policy
-  2. lifecycle-rule-builder -> archive/promote rules post-correction [PLANNED]
-  3. optimizer-builder     -> continuous improvement after stability restored [PLANNED]
+  1. benchmark-builder -> "performance thresholds for detection triggers"
+  2. bugloop-builder -> "detect-fix-verify correction cycle"
+  3. guardrail-builder -> "safety boundaries for auto-fix scope"
 ```
 
-## Crew: "Archetype Quality Automation"
+### Crew: "Governance Enforcement"
 ```
-  1. quality-gate-builder  -> QUALITY_GATES.md for each kind
-  2. bugloop-builder       -> correction cycle when gate fails in CI
-  3. golden-test-builder   -> verify.assertions reference [PLANNED]
+  1. axiom-builder -> "immutable rules to enforce"
+  2. bugloop-builder -> "correction loop for axiom violations"
+  3. e2e-eval-builder -> "end-to-end verification after fix"
 ```
 
 ## Handoff Protocol
+
 ### I Receive
-- scope: what system/module/pipeline to monitor
-- failure_class: what known failure signature to target
-- fix_safety: how much blast radius is acceptable (determines confidence floor)
-- escalation_owner: who owns the escalation (human, system, queue)
+- seeds: detection trigger pattern, target system/agent, fix strategy type
+- optional: max_attempts, escalation target, rollback policy
 
 ### I Produce
-- bugloop artifact in P11_feedback/examples/p11_bl_{scope}.md
+- bugloop artifact (.md + .yaml frontmatter)
+- committed to: `cex/P11/examples/p11_bugloop_{scope}.md`
+
+### I Signal
+- signal: complete (with quality score from QUALITY_GATES)
+- if quality < 8.0: signal retry with failure reasons
 
 ## Builders I Depend On
-| Builder | Why |
-|---------|-----|
-| quality-gate-builder | Gate failures are the primary trigger for bugloops |
-| validator-builder [PLANNED] | Implements detect.pattern; bugloop policy references it |
+- benchmark-builder: provides thresholds that trigger detection
+- axiom-builder: provides invariant rules that define "correct" state
 
 ## Builders That Depend On Me
+
 | Builder | Why |
 |---------|-----|
-| quality-gate-builder | References bugloop as the correction cycle on gate failure |
-| lifecycle-rule-builder [PLANNED] | May trigger bugloop before archive/promote decisions |
-| optimizer-builder [PLANNED] | Bugloop stabilizes; optimizer then improves |
-
-## Cross-Reference Contract
-Per BUILDER_NORMS LAW 12: quality-gate-builder COLLABORATION.md lists bugloop-builder
-as a dependent builder. This file lists quality-gate-builder as a dependency.
-Both refs are active and symmetric.
+| e2e-eval-builder | Validates that bugloop fixes pass full pipeline |
+| daemon-builder | Background processes may host bugloop execution |

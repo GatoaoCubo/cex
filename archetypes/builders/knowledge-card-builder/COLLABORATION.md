@@ -8,55 +8,59 @@ pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCE
 # Collaboration: knowledge-card-builder
 
 ## My Role in Crews
-I am a SPECIALIST. I answer ONE question: "what is the essential fact about this topic?"
-I do not decide routing. I do not configure boot. I do not define identity.
-I DISTILL knowledge so other builders and agents have factual context.
+I am a SPECIALIST. I answer ONE question: "what is the essential, searchable fact about this topic?"
+I do not define agent personas. I do not configure boot parameters.
+I distill knowledge into atomic facts so agents and builders have factual context for decisions.
 
 ## Crew Compositions
 
-### Crew: "Research and Document New Domain"
+### Crew: "Content Foundation"
 ```
-  1. knowledge-card-builder      -> "destila fatos atomicos do dominio"
-  2. model-card-builder          -> "spec dos LLMs usados no dominio"
-  3. agent-builder [PLANNED]     -> "define agente especialista"
-  4. skill-builder [PLANNED]     -> "define skills do dominio"
-```
-
-### Crew: "Enrich Existing Agent"
-```
-  1. knowledge-card-builder      -> "KCs novos para domain context"
-  2. system-prompt-builder [PLANNED] -> "atualiza prompt com novos KCs"
-  3. quality-gate-builder [PLANNED]  -> "valida agent knowledge coverage"
+  1. context-doc-builder -> "domain scope and background"
+  2. knowledge-card-builder -> "atomic searchable facts (density > 0.8)"
+  3. glossary-entry-builder -> "term definitions"
+  4. few-shot-example-builder -> "format examples grounded in knowledge"
 ```
 
-### Crew: "Build Knowledge Base from Scratch"
+### Crew: "New Agent End-to-End"
 ```
-  1. knowledge-card-builder (N instances) -> "1 KC per subtopic"
-  2. iso-package-builder [PLANNED]       -> "empacota KCs em index"
+  1. knowledge-card-builder -> "domain knowledge for agent expertise"
+  2. agent-builder -> "agent definition shaped by knowledge"
+  3. instruction-builder -> "execution steps grounded in facts"
+  4. boot-config-builder -> "provider configuration"
+  5. iso-package-builder -> "deployable package"
+```
+
+### Crew: "RAG Pipeline Setup"
+```
+  1. knowledge-card-builder -> "content to embed and index"
+  2. embedding-config-builder -> "embedding model parameters"
+  3. brain-index-builder -> "search index configuration"
 ```
 
 ## Handoff Protocol
+
 ### I Receive
-- seeds: topic name, domain (minimum)
-- optional: source URLs, related artifacts, target audience
+- seeds: topic name, domain, source material or research brief
+- optional: density target, classification (domain_kc or meta_kc), related cards
 
 ### I Produce
-- knowledge_card artifact (p01_kc_{topic}.md)
-- committed to: cex/P01_knowledge/examples/p01_kc_{topic}.md
-- validated by: validate_kc.py (score + verdict)
+- knowledge_card artifact (.md + .yaml frontmatter, max 5KB, density > 0.8)
+- committed to: `cex/P01/examples/p01_kc_{topic}.md`
 
 ### I Signal
-- signal: complete (with validator verdict)
-- if REJECTED or NEEDS_WORK: signal retry with failed gates
+- signal: complete (with quality score from QUALITY_GATES)
+- if quality < 8.0: signal retry with failure reasons
 
 ## Builders I Depend On
-None. knowledge-card-builder is INDEPENDENT (content layer).
-It can receive context from research agents but has no builder dependencies.
+None — independent builder (layer 0). Knowledge cards are distilled from source material.
 
-## Builders That Depend On Me [PLANNED]
+## Builders That Depend On Me
+
 | Builder | Why |
 |---------|-----|
-| agent-builder | Needs domain KCs for agent knowledge base |
-| system-prompt-builder | Injects KC facts into system prompts |
-| skill-builder | References KC domain knowledge in skills |
-| iso-package-builder | Bundles KCs as deploy dependencies |
+| agent-builder | Agent expertise is grounded in knowledge cards |
+| axiom-builder | Axioms are formalized from distilled facts |
+| context-doc-builder | Domain docs reference knowledge card facts |
+| brain-index-builder | Knowledge cards are primary content for indexing |
+| instruction-builder | Recipes reference factual knowledge for accuracy |

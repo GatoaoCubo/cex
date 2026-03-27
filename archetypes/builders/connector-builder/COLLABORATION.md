@@ -8,59 +8,49 @@ pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCE
 # Collaboration: connector-builder
 
 ## My Role in Crews
-I am a SERVICE INTEGRATION SPECIALIST. I answer ONE question: "how does this system
-exchange data bidirectionally with an external service?"
-I do not define agent identity. I do not write skill phases. I do not implement code.
-I DEFINE BIDIRECTIONAL INTEGRATION CONTRACTS so agents know exactly how to exchange data.
+I am a SPECIALIST. I answer ONE question: "how does this system exchange data bidirectionally with an external service?"
+I do not build unidirectional clients. I do not define MCP protocol servers.
+I specify bidirectional integrations so systems can sync data in both directions.
 
 ## Crew Compositions
 
-### Crew: "External Service Integration"
+### Crew: "Full Integration Stack"
 ```
-  1. knowledge-card-builder -> "domain knowledge about the service being integrated"
-  2. client-builder          -> "unidirectional API consumption (if needed)"
-  3. connector-builder       -> "bidirectional integration spec: endpoints, mapping, health"
-  4. skill-builder [PLANNED] -> "skill that orchestrates connector calls into phases"
-```
-
-### Crew: "Data Pipeline"
-```
-  1. scraper-builder         -> "scrape raw data from web sources"
-  2. client-builder          -> "consume structured API for enrichment"
-  3. connector-builder       -> "bidirectional sync with destination service"
+  1. interface-builder -> "formal bilateral contract"
+  2. client-builder -> "outbound API consumer"
+  3. connector-builder -> "bidirectional sync with transform rules"
+  4. env-config-builder -> "credentials and connection settings"
 ```
 
-### Crew: "Integration Audit"
+### Crew: "Service Bridge"
 ```
-  1. connector-builder       -> "current connector spec"
-  2. validator-builder       -> "validate endpoint schemas and mapping rules"
-  3. knowledge-card-builder  -> "capture learnings from audit"
+  1. connector-builder -> "bidirectional service integration"
+  2. hook-builder -> "event triggers for sync operations"
+  3. daemon-builder -> "persistent process hosting the connector"
 ```
 
 ## Handoff Protocol
 
 ### I Receive
-- seeds: service name, domain, protocol, auth type
-- optional: list of endpoints with directions, API documentation URL
-- optional: data mapping requirements, health check strategy
+- seeds: service name, protocol (REST, WebSocket, gRPC, MQTT), direction mapping
+- optional: auth strategy, transform rules, health check config, rate limits
 
 ### I Produce
-- connector artifact: `p04_conn_{service_slug}.md` + `.yaml`
-- committed to: `cex/P04_tools/examples/p04_conn_{service_slug}.md`
+- connector artifact (.md + .yaml frontmatter)
+- committed to: `cex/P04/examples/p04_connector_{service}.md`
 
 ### I Signal
 - signal: complete (with quality score from QUALITY_GATES)
-- if quality < 8.0: signal retry with specific gate failures
+- if quality < 8.0: signal retry with failure reasons
 
 ## Builders I Depend On
-- knowledge-card-builder: provides domain knowledge about the service
-- client-builder: if connector extends a client with bidirectional capabilities
+- interface-builder: provides bilateral contract the connector implements
+- client-builder: may provide outbound consumer that connector extends
 
 ## Builders That Depend On Me
 
 | Builder | Why |
 |---------|-----|
-| skill-builder [PLANNED] | Skills wrap connector calls into reusable phases |
-| agent-builder [PLANNED] | Agents declare which connectors they use |
-| client-builder | Clients may be extracted from connector's outbound-only subset |
-| daemon-builder | Daemons may run connector sync loops in background |
+| daemon-builder | Hosts connector as persistent background process |
+| hook-builder | Triggers connector sync on specific events |
+| env-config-builder | Documents connector credentials and settings |

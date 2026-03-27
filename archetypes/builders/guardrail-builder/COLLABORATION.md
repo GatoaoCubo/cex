@@ -1,49 +1,55 @@
 ---
 pillar: P12
 llm_function: COLLABORATE
-purpose: How guardrail-builder works in crews
+purpose: How guardrail-builder works in crews with other builders
+pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
 ---
 
 # Collaboration: guardrail-builder
 
-## My Role
-I define WHAT agents must NEVER do and what happens if they try.
-I do not control ACCESS (permission-builder [PLANNED]).
-I do not measure QUALITY (quality-gate-builder).
+## My Role in Crews
+I am a SPECIALIST. I answer ONE question: "what must an agent NEVER do, and what happens if it tries?"
+I do not define access permissions. I do not score quality.
+I set safety boundaries so agents operate within safe limits with clear violation consequences.
 
-## Crew: "Safety Setup for New Agent"
+## Crew Compositions
+
+### Crew: "Agent Safety Stack"
 ```
-  1. guardrail-builder         -> defines safety boundaries
-  2. permission-builder [PLANNED] -> defines access controls
-  3. quality-gate-builder      -> defines quality thresholds
+  1. agent-builder -> "agent definition with capabilities"
+  2. guardrail-builder -> "safety boundaries scoped to agent"
+  3. bugloop-builder -> "correction cycle for guardrail violations"
 ```
 
-## Crew: "Compliance Audit"
+### Crew: "Governance Foundation"
 ```
-  1. guardrail-builder         -> reviews safety restrictions
-  2. quality-gate-builder      -> reviews quality gates
-  3. scoring-rubric-builder    -> reviews evaluation criteria
+  1. axiom-builder -> "immutable rules (justification for guardrails)"
+  2. guardrail-builder -> "enforceable safety restrictions"
+  3. e2e-eval-builder -> "validation that guardrails hold under test"
 ```
 
 ## Handoff Protocol
+
 ### I Receive
-- seeds: scope (what to protect), domain, severity hint
-- optional: threat model, existing laws, incident reports
+- seeds: scope (agent, system, domain), restriction description, severity
+- optional: enforcement mode (block/warn/log), bypass policy, violation examples
 
 ### I Produce
-- guardrail artifact in P11_feedback/examples/
-- committed to: cex/P11_feedback/examples/p11_gr_{scope_slug}.md
+- guardrail artifact (.md + .yaml frontmatter)
+- committed to: `cex/P11/examples/p11_guardrail_{scope}.md`
 
 ### I Signal
 - signal: complete (with quality score from QUALITY_GATES)
 - if quality < 8.0: signal retry with failure reasons
 
 ## Builders I Depend On
-None directly. Independent at layer 0.
-- quality-gate-builder: provides gate patterns as reference for enforcement
+- axiom-builder: provides immutable principles that justify guardrail restrictions
 
 ## Builders That Depend On Me
+
 | Builder | Why |
 |---------|-----|
-| permission-builder [PLANNED] | Complements guardrails with access control |
-| hook-builder [PLANNED] | Implements guardrail enforcement in code |
+| agent-builder | Agent definitions reference guardrails as constraints |
+| bugloop-builder | Correction cycles enforce guardrail compliance |
+| e2e-eval-builder | Tests verify guardrails are not bypassed |
+| fallback-chain-builder | Degradation must respect guardrail boundaries |

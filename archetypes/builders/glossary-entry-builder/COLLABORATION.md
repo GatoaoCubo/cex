@@ -9,46 +9,47 @@ pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCE
 
 ## My Role in Crews
 I am a SPECIALIST. I answer ONE question: "what does this term mean in this domain?"
-I do not analyze deeply. I do not provide operational context.
-I DEFINE terms so knowledge-card-builder and other consumers have clear terminology.
+I do not distill deep knowledge. I do not document domain scope.
+I define terms concisely so all builders share a common vocabulary.
 
 ## Crew Compositions
 
-### Crew: "Knowledge Onboarding"
+### Crew: "Content Foundation"
 ```
-  1. glossary-entry-builder -> "defines key terms (quick reference)"
-  2. knowledge-card-builder -> "deep-dives into domain knowledge"
-  3. context-doc-builder [PLANNED] -> "provides domain background"
+  1. context-doc-builder -> "domain scope and background"
+  2. knowledge-card-builder -> "atomic domain facts"
+  3. glossary-entry-builder -> "term definitions for shared vocabulary"
 ```
 
-### Crew: "Domain Standardization"
+### Crew: "Onboarding Package"
 ```
-  1. glossary-entry-builder -> "standardizes term definitions"
-  2. naming-rule-builder [PLANNED] -> "enforces naming conventions"
-  3. validator-builder -> "validates term usage in artifacts"
+  1. glossary-entry-builder -> "term definitions for newcomers"
+  2. context-doc-builder -> "domain overview"
+  3. diagram-builder -> "visual architecture for orientation"
 ```
 
 ## Handoff Protocol
 
 ### I Receive
-- seeds: term to define, domain context
-- optional: existing definitions, synonyms, related terms
+- seeds: term name, domain context
+- optional: synonyms, abbreviations, disambiguation notes, related terms
 
 ### I Produce
-- glossary_entry artifact (YAML)
-- committed to: `cex/P01_knowledge/examples/p01_gl_{term_slug}.yaml`
+- glossary_entry artifact (.md + .yaml frontmatter, max 3 lines definition)
+- committed to: `cex/P01/examples/p01_glossary_{term}.md`
 
 ### I Signal
 - signal: complete (with quality score from QUALITY_GATES)
 - if quality < 8.0: signal retry with failure reasons
 
 ## Builders I Depend On
-None. Glossary entries are INDEPENDENT — they can be built from a term alone.
+None — independent builder (layer 0). Terms can be defined standalone.
 
-## Builders That Depend On Me [PLANNED]
+## Builders That Depend On Me
 
 | Builder | Why |
 |---------|-----|
-| knowledge-card-builder | References glossary terms for consistency |
-| system-prompt-builder [PLANNED] | Uses glossary for agent vocabulary |
-| context-doc-builder [PLANNED] | Links to glossary for term definitions |
+| context-doc-builder | References glossary terms in domain documentation |
+| knowledge-card-builder | Uses terms as search keywords for discoverability |
+| axiom-builder | References precise term definitions in axiom statements |
+| brain-index-builder | Uses glossary terms for query expansion in search |

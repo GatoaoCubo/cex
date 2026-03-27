@@ -1,45 +1,55 @@
 ---
 pillar: P12
 llm_function: COLLABORATE
-purpose: How dag-builder works with other builders and runtime actors
-pattern: each builder must know its role in a team, what it receives, and what it emits
+purpose: How dag-builder works in crews with other builders
+pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
 ---
 
 # Collaboration: dag-builder
 
 ## My Role in Crews
-I am a DEPENDENCY STRUCTURE specialist.
-I define what depends on what so orchestration engines know the execution order
-and maximum parallelism before any work begins.
+I am a SPECIALIST. I answer ONE question: "what depends on what, and in what order can tasks execute?"
+I do not execute tasks. I do not define routing policies.
+I model dependency structures so orchestrators can determine execution order and parallelism.
 
-## Typical Collaboration Chain
+## Crew Compositions
 
-```text
-requirements -> dag (structure) -> workflow (execution) -> signal (feedback)
+### Crew: "Orchestration Design"
+```
+  1. component-map-builder -> "system component inventory"
+  2. dag-builder -> "dependency graph with topological order"
+  3. dispatch-rule-builder -> "routing rules for each node"
+  4. handoff-builder -> "delegation instructions per task"
 ```
 
-I sit before execution, providing the blueprint that workflows implement.
+### Crew: "Pipeline Architecture"
+```
+  1. dag-builder -> "execution dependency graph"
+  2. chain-builder -> "prompt chains for sequential nodes"
+  3. e2e-eval-builder -> "end-to-end test of the full pipeline"
+```
 
-## I Receive
-- pipeline or mission description
-- list of tasks with assigned executors
-- dependency relationships between tasks
+## Handoff Protocol
 
-## I Produce
-- one YAML dag artifact
-- suitable for `P12_orchestration/compiled/` or orchestration tools
+### I Receive
+- seeds: task list with dependency relationships
+- optional: parallelism hints, critical path constraints, timeout per node
 
-## I Inform Downstream
-- `workflow-builder`: implements my dependency structure with runtime execution logic
-- `handoff-builder`: one handoff may be created per DAG node
-- `spawn-config-builder`: my parallelism informs spawn mode (solo vs grid)
+### I Produce
+- dag artifact (.yaml with nodes, edges, topological order)
+- committed to: `cex/P12/examples/p12_dag_{scope}.yaml`
 
-## Builders / Actors Adjacent to Me
-| Actor | Relationship |
-|-------|--------------|
-| workflow-builder | implements my DAG structure with runtime execution |
-| handoff-builder | may create one handoff per node in my DAG |
-| signal-builder | reports status after DAG nodes execute |
-| spawn-config-builder | uses my parallelism to configure spawn mode |
-| dispatch-rule-builder | may route based on DAG node satellite assignments |
-| orchestrators / STELLA | consume my output for planning |
+### I Signal
+- signal: complete (with quality score from QUALITY_GATES)
+- if quality < 8.0: signal retry with failure reasons
+
+## Builders I Depend On
+- component-map-builder: provides component inventory to model as DAG nodes
+
+## Builders That Depend On Me
+
+| Builder | Why |
+|---------|-----|
+| dispatch-rule-builder | Routes tasks to targets based on DAG position |
+| handoff-builder | Creates delegation for each DAG node |
+| e2e-eval-builder | Tests pipeline following DAG execution order |

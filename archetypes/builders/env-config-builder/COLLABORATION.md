@@ -8,59 +8,48 @@ pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCE
 # Collaboration: env-config-builder
 
 ## My Role in Crews
-I am an ENVIRONMENT VARIABLE SPECIALIST. I answer ONE question: "what environment
-variables does this scope need, with what defaults and validation?"
-I do not define agent identity. I do not write skill phases. I do not implement code.
-I DEFINE VARIABLE CONTRACTS so operators and services know exactly what config is required.
+I am a SPECIALIST. I answer ONE question: "what environment variables does this scope need, with what defaults and validation?"
+I do not configure provider startup. I do not define feature toggles.
+I specify environment variables so deployments have correct configuration and secrets.
 
 ## Crew Compositions
 
-### Crew: "Service Setup"
+### Crew: "Deployment Configuration"
 ```
-  1. env-config-builder      -> "environment variable spec for the service"
-  2. path-config-builder     -> "filesystem paths the service needs"
-  3. daemon-builder           -> "daemon spec if service runs in background"
-  4. boot-config-builder     -> "provider-specific boot configuration"
-```
-
-### Crew: "Satellite Bootstrap"
-```
-  1. env-config-builder      -> "satellite-scoped env vars (API keys, model, MCP)"
-  2. boot-config-builder     -> "provider boot config using env vars"
-  3. agent-builder [PLANNED] -> "agent that consumes this config"
+  1. boot-config-builder -> "provider startup configuration"
+  2. env-config-builder -> "environment variables (secrets, settings, paths)"
+  3. feature-flag-builder -> "feature toggles for gradual rollout"
 ```
 
-### Crew: "Security Audit"
+### Crew: "Multi-Provider Deployment"
 ```
-  1. env-config-builder      -> "variable catalog with sensitivity markers"
-  2. guardrail-builder       -> "security boundaries for sensitive vars"
-  3. permission-builder      -> "who can read/write which config"
+  1. agent-builder -> "agent definition"
+  2. boot-config-builder -> "config per provider"
+  3. env-config-builder -> "env vars per deployment target"
+  4. fallback-chain-builder -> "degradation per environment"
 ```
 
 ## Handoff Protocol
 
 ### I Receive
-- seeds: scope name, list of services/components that need config
-- optional: existing .env file to reverse-engineer, environment target
-- optional: security requirements for sensitive vars
+- seeds: scope (global, service, agent), variable list
+- optional: sensitivity flags, validation rules, override precedence, defaults
 
 ### I Produce
-- env_config artifact: `p09_env_{scope_slug}.yaml`
-- committed to: `cex/P09_config/examples/p09_env_{scope_slug}.yaml`
+- env_config artifact (.md + .yaml frontmatter)
+- committed to: `cex/P09/examples/p09_env_{scope}.md`
 
 ### I Signal
 - signal: complete (with quality score from QUALITY_GATES)
-- if quality < 8.0: signal retry with specific gate failures
+- if quality < 8.0: signal retry with failure reasons
 
 ## Builders I Depend On
-- guardrail-builder: provides security rules for sensitive variable handling
-- knowledge-card-builder: provides domain knowledge about required variables
+- boot-config-builder: reveals which variables each provider needs
 
 ## Builders That Depend On Me
 
 | Builder | Why |
 |---------|-----|
-| boot-config-builder | Boot config reads env vars at provider startup |
-| daemon-builder | Daemons read env vars for runtime config |
-| connector-builder | Connectors read API keys and URLs from env |
-| client-builder | Clients read base_url and auth tokens from env |
+| client-builder | API clients reference env vars for credentials |
+| connector-builder | Connectors reference env vars for connection settings |
+| daemon-builder | Background processes read env vars at startup |

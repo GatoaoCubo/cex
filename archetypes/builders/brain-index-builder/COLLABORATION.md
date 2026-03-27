@@ -1,51 +1,53 @@
 ---
 pillar: P12
 llm_function: COLLABORATE
-purpose: How brain-index-builder works in crews
+purpose: How brain-index-builder works in crews with other builders
+pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
 ---
 
 # Collaboration: brain-index-builder
 
-## My Role
-I define HOW content is indexed and searched for retrieval.
-I do not define embedding models (embedding-config-builder).
-I do not define data sources (rag-source-builder).
+## My Role in Crews
+I am a SPECIALIST. I answer ONE question: "how is content indexed and searched for retrieval?"
+I do not configure embedding models. I do not create content.
+I define search index configuration so retrieval systems can find content efficiently.
 
-## Crew: "RAG Pipeline Setup"
+## Crew Compositions
+
+### Crew: "RAG Pipeline Setup"
 ```
-  1. rag-source-builder        -> defines data sources
-  2. embedding-config-builder  -> defines embedding model
-  3. brain-index-builder       -> defines search index
-  4. knowledge-card-builder    -> produces indexed content
+  1. embedding-config-builder -> "embedding model parameters"
+  2. brain-index-builder -> "search index configuration (BM25/FAISS/hybrid)"
+  3. knowledge-card-builder -> "content to be indexed"
 ```
 
-## Crew: "Memory System Setup"
+### Crew: "Knowledge Infrastructure"
 ```
-  1. brain-index-builder       -> defines search infrastructure
-  2. runtime-state-builder     -> defines agent query context
-  3. learning-record-builder   -> defines what gets indexed
+  1. brain-index-builder -> "index configuration and ranking strategies"
+  2. glossary-entry-builder -> "term definitions for query expansion"
+  3. context-doc-builder -> "domain context for scope boundaries"
 ```
 
 ## Handoff Protocol
+
 ### I Receive
-- seeds: scope (what to index), algorithm preference, corpus size estimate
-- optional: embedding_config (P01), existing rag_sources, performance requirements
+- seeds: content scope, search algorithm preference (BM25, FAISS, hybrid)
+- optional: rebuild schedule, ranking weights, filter rules
 
 ### I Produce
-- brain_index artifact in P10_memory/examples/
-- committed to: cex/P10_memory/examples/p10_bi_{index_slug}.md
+- brain_index artifact (.md + .yaml frontmatter)
+- committed to: `cex/P10/examples/p10_brain_index_{scope}.md`
 
 ### I Signal
 - signal: complete (with quality score from QUALITY_GATES)
 - if quality < 8.0: signal retry with failure reasons
 
 ## Builders I Depend On
-| Builder | Why |
-|---------|-----|
-| embedding-config-builder | Need to know embedding dimensions and model for FAISS config |
-| rag-source-builder | Need to know corpus scope and update frequency |
+- embedding-config-builder: provides embedding model parameters for vector search
 
 ## Builders That Depend On Me
+
 | Builder | Why |
 |---------|-----|
-| runtime-state-builder | Agents query brain_index; state may adapt based on search results |
+| knowledge-card-builder | Content must conform to index scope for discoverability |
+| context-doc-builder | Domain docs are indexed via brain_index configuration |

@@ -1,48 +1,55 @@
 ---
 pillar: P12
 llm_function: COLLABORATE
-purpose: How golden-test-builder works in crews
+purpose: How golden-test-builder works in crews with other builders
+pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
 ---
 
 # Collaboration: golden-test-builder
 
-## My Role
-I provide CONCRETE EXAMPLES of what quality 9.5+ looks like.
-I do not define evaluation CRITERIA (scoring-rubric-builder).
-I do not define PASS/FAIL barriers (quality-gate-builder).
+## My Role in Crews
+I am a SPECIALIST. I answer ONE question: "what does a perfect artifact of this kind look like?"
+I do not define evaluation criteria. I do not measure performance.
+I produce quality-calibration references so evaluation systems have a gold standard for comparison.
 
-## Crew: "Evaluation Pipeline"
+## Crew Compositions
+
+### Crew: "Quality Pipeline"
 ```
-  1. scoring-rubric-builder -> defines dimensions and weights
-  2. golden-test-builder    -> provides reference examples at 9.5+
-  3. quality-gate-builder   -> defines pass/fail thresholds
+  1. golden-test-builder -> "reference examples (quality 9.5+)"
+  2. benchmark-builder -> "performance baselines"
+  3. e2e-eval-builder -> "end-to-end pipeline validation against golden"
 ```
 
-## Crew: "Builder Calibration"
+### Crew: "Builder Calibration"
 ```
-  1. golden-test-builder    -> golden example of target kind
-  2. unit-eval-builder [PLANNED] -> test suite from golden
+  1. golden-test-builder -> "perfect artifact example for target kind"
+  2. few-shot-example-builder -> "format examples derived from golden"
+  3. action-prompt-builder -> "prompt calibrated to produce golden-quality output"
 ```
 
 ## Handoff Protocol
+
 ### I Receive
-- seeds: target_kind, domain
-- optional: candidate artifact (9.5+ quality), gate references
+- seeds: target artifact kind, quality gates for that kind
+- optional: existing high-quality artifacts (9.5+), rationale mapping
 
 ### I Produce
-- golden_test artifact in P07_evals/examples/
-- committed to: cex/P07_evals/examples/p07_gt_{case_slug}.md
+- golden_test artifact (.md + .yaml frontmatter with input/output/rationale)
+- committed to: `cex/P07/examples/p07_golden_{kind}.md`
 
 ### I Signal
 - signal: complete (with quality score from QUALITY_GATES)
 - if quality < 8.0: signal retry with failure reasons
 
 ## Builders I Depend On
-- scoring-rubric-builder: provides evaluation criteria for rationale mapping
-- quality-gate-builder: provides gate IDs referenced in rationale
+None — independent builder (layer 0). Golden tests are selected from existing high-quality output.
 
 ## Builders That Depend On Me
+
 | Builder | Why |
 |---------|-----|
-| scoring-rubric-builder | Uses golden_tests as calibration examples |
-| unit-eval-builder [PLANNED] | Derives test cases from golden references |
+| e2e-eval-builder | Compares pipeline output against golden reference |
+| few-shot-example-builder | Derives format examples from golden artifacts |
+| action-prompt-builder | Calibrates prompts using golden output as target |
+| benchmark-builder | Uses golden output quality as performance ceiling |

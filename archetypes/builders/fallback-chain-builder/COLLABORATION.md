@@ -8,60 +8,48 @@ pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCE
 # Collaboration: fallback-chain-builder
 
 ## My Role in Crews
-I am a RESILIENCE ENGINEER. I answer ONE question: "what model sequence ensures graceful degradation?"
-I do not route tasks. I do not sequence prompts.
-I DESIGN model fallback sequences so systems survive primary model failure.
+I am a SPECIALIST. I answer ONE question: "what sequence of models should be tried when the primary fails?"
+I do not sequence prompts. I do not define routing rules.
+I design model degradation chains so systems remain available when primary models fail or exceed limits.
 
 ## Crew Compositions
 
-### Crew: "Resilient Agent" (standard)
+### Crew: "Resilient Agent Deployment"
 ```
-  1. model-card-builder           -> "model specs for each step in the chain"
-  2. fallback-chain-builder       -> "ordered degradation sequence with thresholds"
-  3. agent-builder                -> "agent identity using the chain for resilience"
-```
-
-### Crew: "Full Dispatch Resilience"
-```
-  1. router-builder               -> "task routing to destinations"
-  2. fallback-chain-builder       -> "model fallback when routing destination fails"
-  3. signal-builder               -> "degradation and circuit-breaker signals"
+  1. agent-builder -> "agent definition"
+  2. boot-config-builder -> "provider configuration"
+  3. fallback-chain-builder -> "model degradation sequence (e.g., opus -> sonnet -> haiku)"
+  4. benchmark-builder -> "latency/cost baselines per model tier"
 ```
 
-### Crew: "Cost-Optimized Pipeline"
+### Crew: "Full Dispatch Setup"
 ```
-  1. model-card-builder           -> "pricing and capability per model"
-  2. fallback-chain-builder       -> "cost-aware degradation with ceiling"
-  3. quality-gate-builder         -> "quality thresholds that trigger fallback"
+  1. dispatch-rule-builder -> "routing rules to primary target"
+  2. fallback-chain-builder -> "degradation path when primary fails"
+  3. guardrail-builder -> "safety boundaries during degradation"
 ```
 
 ## Handoff Protocol
 
 ### I Receive
-- seeds: model list (ordered by capability), domain, quality requirements
-- optional: model_cards (pricing and capability data)
-- optional: router output (routing failures that need model fallback)
+- seeds: primary model, fallback models in order, quality threshold per step
+- optional: timeout per step, circuit breaker config, cost budget, max retries
 
 ### I Produce
-- fallback_chain artifact: `cex/P02_model/examples/p02_fc_{slug}.md`
-- committed to: archetypes or pool depending on quality score
+- fallback_chain artifact (.md + .yaml frontmatter)
+- committed to: `cex/P02/examples/p02_fallback_{scope}.md`
 
 ### I Signal
 - signal: complete (with quality score from QUALITY_GATES)
-- if quality < 8.0: signal retry with specific gate failures
+- if quality < 8.0: signal retry with failure reasons
 
 ## Builders I Depend On
-- model-card-builder: provides model specs, pricing, and capability tiers
+- benchmark-builder: provides latency/cost data to calibrate timeouts and thresholds
+- boot-config-builder: provides provider constraints that affect fallback viability
 
 ## Builders That Depend On Me
 
 | Builder | Why |
 |---------|-----|
-| agent-builder | Agents reference fallback_chain for resilient model selection |
-| router-builder | Router may delegate to fallback_chain when routing fails |
-| signal-builder | Signals emitted on degradation events reference chain state |
-
-## Cross-Reference Norm (BUILDER_NORMS Rule 12)
-router-builder COLLABORATION.md lists fallback-chain-builder as downstream.
-This file lists router-builder as a potential upstream source.
-The cross-reference is bidirectional.
+| dispatch-rule-builder | References fallback chain as alternative routing path |
+| iso-package-builder | Includes fallback config in portable agent package |

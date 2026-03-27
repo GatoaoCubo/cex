@@ -1,60 +1,55 @@
 ---
 pillar: P12
 llm_function: COLLABORATE
-purpose: How dispatch-rule-builder works with other builders and runtime actors
-pattern: each builder must know its role in a team, what it receives, and what it emits
+purpose: How dispatch-rule-builder works in crews with other builders
+pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
 ---
 
 # Collaboration: dispatch-rule-builder
 
 ## My Role in Crews
-I am a ROUTING POLICY specialist.
-I define which satellite receives which kind of task before any work begins.
-Orchestrators and spawn layers consult my output to make dispatch decisions.
+I am a SPECIALIST. I answer ONE question: "which target should receive this kind of task, and under what conditions?"
+I do not execute tasks. I do not define handoff instructions.
+I produce routing policies so orchestrators can dispatch work to the correct target.
 
-## Typical Collaboration Chain
+## Crew Compositions
 
-```text
-[task input] -> dispatch-rule-builder selects satellite
-             -> handoff-builder instructs selected satellite
-             -> satellite executes
-             -> signal-builder reports outcome
-             -> dispatch-rule-builder may be consulted again for next task
+### Crew: "Full Dispatch Setup"
+```
+  1. dispatch-rule-builder -> "routing rules (keywords -> target -> fallback)"
+  2. fallback-chain-builder -> "degradation path when primary target fails"
+  3. dag-builder -> "execution order for multi-target dispatch"
+  4. handoff-builder -> "delegation instructions for each target"
 ```
 
-I am the entry point of orchestration, not the source of execution context.
+### Crew: "Routing Table Construction"
+```
+  1. component-map-builder -> "inventory of available targets"
+  2. dispatch-rule-builder -> "routing rule per domain scope"
+  3. interface-builder -> "contracts between router and targets"
+```
 
-## I Receive
-- domain scope name or description
-- list of trigger keywords (PT + EN)
-- target satellite and model preference
-- priority level for the domain
-- fallback satellite name
-- optional: conditions, load_balance, routing_strategy preference
+## Handoff Protocol
 
-## I Produce
-- one YAML dispatch_rule artifact per scope domain
-- suitable for `cex/P12_orchestration/compiled/` or inline routing table
-- consumed by orchestrators, spawn scripts, and auto-orchestrator wave queues
+### I Receive
+- seeds: domain scope, target agent/service, keywords (5-12)
+- optional: model preference, priority, confidence threshold, fallback target
 
-## Builders / Actors Adjacent to Me
+### I Produce
+- dispatch_rule artifact (.yaml frontmatter + .md body, max 3072 bytes)
+- committed to: `cex/P12/examples/p12_dr_{scope}.yaml`
 
-| Actor | Relationship | Cross-ref |
-|-------|--------------|-----------|
-| handoff-builder | I select; handoff-builder instructs the selected satellite | handoff-builder COLLABORATION.md refs dispatch-rule-builder |
-| signal-builder | signal-builder reports after execution I routed | signal-builder COLLABORATION.md refs dispatch-rule-builder |
-| spawn-config-builder | I set routing policy; spawn-config sets launch parameters | spawn-config-builder COLLABORATION.md refs dispatch-rule-builder |
-| workflow-builder | workflow may embed dispatch decisions; I provide the routing layer | workflow-builder COLLABORATION.md refs dispatch-rule-builder |
-| crew-builder | crew coordination may use my rules for intra-crew routing | crew-builder COLLABORATION.md refs dispatch-rule-builder |
-| STELLA orchestrator | primary runtime consumer of my output | reads `P12_orchestration/compiled/p12_dr_*.yaml` |
-| auto-orchestrator | wave queue uses dispatch rules to assign tasks to satellites | reads compiled dispatch rules |
+### I Signal
+- signal: complete (with quality score from QUALITY_GATES)
+- if quality < 8.0: signal retry with failure reasons
 
-## Conflict Resolution Protocol
-When two dispatch rules match the same input:
-1. Higher `priority` wins
-2. Ties broken by more specific `scope` (narrower scope wins)
-3. If still tied, first alphabetically by `id` (deterministic tiebreak)
+## Builders I Depend On
+- component-map-builder: provides target inventory for routing decisions
 
-## I Signal Upstream
-I do NOT emit runtime signals. My output is consumed pre-execution.
-Post-execution feedback travels through `signal-builder` artifacts.
+## Builders That Depend On Me
+
+| Builder | Why |
+|---------|-----|
+| handoff-builder | Creates delegation instructions for dispatched targets |
+| fallback-chain-builder | Defines degradation when dispatch target fails |
+| dag-builder | Models dispatch dependencies in execution graphs |

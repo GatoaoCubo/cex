@@ -8,67 +8,51 @@ pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCE
 # Collaboration: iso-package-builder
 
 ## My Role in Crews
-I am a PACKAGER. I answer ONE question: "how do I bundle this agent into a portable, tier-validated ISO package?"
-I do not define agents. I do not write system prompts. I do not validate quality gates.
-I PACKAGE so deployment tools and sharing workflows can consume a self-contained bundle.
+I am a SPECIALIST. I answer ONE question: "how do I bundle this agent into a portable, self-contained, tier-validated package?"
+I do not define agents. I do not write system prompts.
+I package agent artifacts so they can be distributed and deployed on any compatible runtime.
 
 ## Crew Compositions
 
-### Crew: "Agent Distribution" (standard)
+### Crew: "New Agent End-to-End"
 ```
-  1. agent-builder          -> "canonical agent definition with iso_vectorstore"
-  2. iso-package-builder    -> "portable ISO bundle at declared tier"
-  3. quality-gate-builder   -> "validation criteria for the package"
-```
-
-### Crew: "Full Agent Pipeline"
-```
-  1. knowledge-card-builder -> "domain knowledge for the agent"
-  2. system-prompt-builder [PLANNED] -> "agent identity and rules"
-  3. agent-builder          -> "complete agent definition"
-  4. iso-package-builder    -> "portable ISO bundle"
-  5. quality-gate-builder   -> "package quality validation"
+  1. knowledge-card-builder -> "domain knowledge"
+  2. agent-builder -> "agent definition"
+  3. instruction-builder -> "execution steps"
+  4. boot-config-builder -> "provider configuration"
+  5. iso-package-builder -> "portable deployable package (manifest + files)"
 ```
 
-### Crew: "Package Audit"
+### Crew: "Distribution Pipeline"
 ```
-  1. iso-package-builder (read mode) -> "parse existing package manifest"
-  2. quality-gate-builder             -> "score against HARD + SOFT gates"
-  3. knowledge-card-builder           -> "distill audit findings as knowledge"
+  1. agent-builder -> "agent definition"
+  2. fallback-chain-builder -> "model degradation config"
+  3. guardrail-builder -> "safety boundaries"
+  4. iso-package-builder -> "self-contained bundle (minimal/standard/complete)"
 ```
 
 ## Handoff Protocol
 
 ### I Receive
-- seeds: agent name, domain, target tier
-- optional: agent artifact (from agent-builder)
-- optional: system_prompt artifact (becomes system_instruction.md)
-- optional: existing iso_vectorstore to repackage
+- seeds: agent name, target tier (minimal/standard/complete/whitelabel)
+- optional: file inventory, LP mapping overrides, token budget constraints
 
 ### I Produce
-- iso_package: `cex/agents/{agent_slug}/manifest.yaml` + tiered file set
-- committed to: `cex/agents/{agent_slug}/`
+- iso_package artifact (manifest.yaml + tier-appropriate files)
+- committed to: `cex/P02/examples/p02_iso_{agent}/`
 
 ### I Signal
 - signal: complete (with quality score from QUALITY_GATES)
-- if quality < 8.0: signal retry with specific gate failures
+- if quality < 8.0: signal retry with failure reasons
 
 ## Builders I Depend On
-
-| Builder | Why | Wave |
-|---------|-----|------|
-| agent-builder | Provides canonical agent definition as packaging source | Upstream |
-| knowledge-card-builder | Provides domain knowledge for quick_start.md content | Upstream |
-| system-prompt-builder [PLANNED] | Provides system_prompt to embed as system_instruction.md | Upstream |
+- agent-builder: provides agent definition to package
+- boot-config-builder: provides provider configs included in package
+- instruction-builder: provides execution steps included in package
+- fallback-chain-builder: provides degradation config for resilient packages
 
 ## Builders That Depend On Me
 
 | Builder | Why |
 |---------|-----|
-| quality-gate-builder | Validates iso_package artifacts I produce |
-| spawn-config-builder [PLANNED] | References packaged agent for spawn configuration |
-
-## Cross-Reference Norm (BUILDER_NORMS Rule 12)
-agent-builder COLLABORATION.md lists iso-package-builder as a downstream consumer.
-This file lists agent-builder as an upstream dependency.
-The cross-reference is bidirectional.
+| _builder-builder | Meta-builder ensures package structure follows conventions |

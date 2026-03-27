@@ -1,50 +1,54 @@
 ---
 pillar: P12
 llm_function: COLLABORATE
-purpose: How benchmark-builder works in crews
+purpose: How benchmark-builder works in crews with other builders
+pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
 ---
 
 # Collaboration: benchmark-builder
 
-## My Role
-I MEASURE quantitative performance so other builders have concrete numbers.
-I do not define evaluation CRITERIA (scoring-rubric-builder).
-I do not test CORRECTNESS (unit-eval-builder).
+## My Role in Crews
+I am a SPECIALIST. I answer ONE question: "how fast, how cheap, and how well does this perform under load?"
+I do not define quality criteria. I do not test correctness.
+I measure performance quantitatively so teams can set baselines and detect regressions.
 
-## Crew: "Model Selection Pipeline"
+## Crew Compositions
+
+### Crew: "Quality Pipeline"
 ```
-  1. benchmark-builder      -> measures latency, cost, throughput per model
-  2. scoring-rubric-builder -> defines quality evaluation criteria
-  3. model-card-builder     -> documents chosen model with benchmark data
+  1. golden-test-builder -> "reference examples (quality calibration)"
+  2. benchmark-builder -> "performance baselines (latency, cost, throughput)"
+  3. e2e-eval-builder -> "end-to-end pipeline validation"
 ```
 
-## Crew: "Performance Optimization"
+### Crew: "Performance Optimization"
 ```
-  1. benchmark-builder      -> measures baseline performance
-  2. unit-eval-builder      -> verifies correctness after optimization
-  3. benchmark-builder      -> measures post-optimization (re-run)
+  1. benchmark-builder -> "baseline measurements before optimization"
+  2. bugloop-builder -> "detect-fix-verify cycle for performance regressions"
+  3. benchmark-builder -> "post-optimization measurements for comparison"
 ```
 
 ## Handoff Protocol
+
 ### I Receive
-- seeds: metric, unit, environment, subjects to compare
-- optional: existing baseline data, SLA targets, comparison methodology
+- seeds: target system/agent name, metrics to measure (latency, cost, throughput)
+- optional: baseline values, environment constraints, iteration count
 
 ### I Produce
-- benchmark artifact in P07_evals/examples/
-- committed to: cex/P07_evals/examples/p07_bm_{metric_slug}.md
+- benchmark artifact (.md + .yaml frontmatter)
+- committed to: `cex/P07/examples/p07_benchmark_{scope}.md`
 
 ### I Signal
 - signal: complete (with quality score from QUALITY_GATES)
 - if quality < 8.0: signal retry with failure reasons
 
 ## Builders I Depend On
-None directly. Independent at layer 0.
-- model-card-builder: provides model specs for comparison setup (optional)
+None — independent builder (layer 0). Benchmarks can be defined for any system.
 
 ## Builders That Depend On Me
+
 | Builder | Why |
 |---------|-----|
-| model-card-builder | Uses benchmark numbers for performance specs |
-| scoring-rubric-builder | References benchmark thresholds for calibration |
-| quality-gate-builder | Derives numeric thresholds from benchmark baselines |
+| bugloop-builder | Uses benchmark thresholds as detection triggers |
+| e2e-eval-builder | References benchmark baselines for pass/fail criteria |
+| fallback-chain-builder | Uses latency/cost benchmarks to calibrate timeouts |

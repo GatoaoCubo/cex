@@ -9,48 +9,46 @@ pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCE
 
 ## My Role in Crews
 I am a SPECIALIST. I answer ONE question: "what is the permanent, immutable rule that governs this domain?"
-I do not operationalize rules. I do not restrict behavior.
-I DECLARE truths so law-builder and guardrail-builder can derive operational constraints.
+I do not write operational laws. I do not define safety guardrails.
+I formalize fundamental truths so governance builders can reference immutable principles.
 
 ## Crew Compositions
 
 ### Crew: "Governance Foundation"
 ```
-  1. axiom-builder -> "immutable truth (p10_ax_*)"
-  2. law-builder [PLANNED] -> "operational rule derived from axiom"
-  3. guardrail-builder -> "safety restriction enforcing axiom boundary"
-  4. quality-gate-builder -> "validation gate checking axiom compliance"
+  1. axiom-builder -> "immutable fundamental rules"
+  2. guardrail-builder -> "safety boundaries derived from axioms"
+  3. bugloop-builder -> "correction cycles that enforce axiom compliance"
 ```
 
-### Crew: "Memory System"
+### Crew: "Knowledge Formalization"
 ```
-  1. axiom-builder -> "permanent truths (foundation)"
-  2. learning-record-builder -> "experience records (evolving)"
-  3. mental-model-builder -> "decision maps (derived from axioms + learning)"
+  1. knowledge-card-builder -> "domain facts and research"
+  2. axiom-builder -> "permanent truths distilled from facts"
+  3. glossary-entry-builder -> "term definitions referenced by axioms"
 ```
 
 ## Handoff Protocol
 
 ### I Receive
-- seeds: candidate rule, domain
-- optional: rationale, existing violations, related axioms
+- seeds: domain name, candidate rule statement, justification
+- optional: existing laws for boundary check, related axioms
 
 ### I Produce
-- axiom artifact (markdown with YAML frontmatter)
-- committed to: `cex/P10_memory/examples/p10_ax_{slug}.md`
+- axiom artifact (.md + .yaml frontmatter, max 3KB, density >= 0.80)
+- committed to: `cex/P10/examples/p10_axiom_{scope}.md`
 
 ### I Signal
 - signal: complete (with quality score from QUALITY_GATES)
 - if quality < 8.0: signal retry with failure reasons
 
 ## Builders I Depend On
-None — axioms are foundational (layer 0). No upstream dependencies.
+- knowledge-card-builder: provides factual basis for axiom formalization
 
 ## Builders That Depend On Me
 
 | Builder | Why |
 |---------|-----|
-| law-builder [PLANNED] | Laws operationalize axioms |
-| guardrail-builder | Guardrails enforce axiom boundaries |
-| learning-record-builder | Learning validates axioms over time |
-| quality-gate-builder | Gates check axiom compliance |
+| guardrail-builder | Safety boundaries reference axioms as justification |
+| bugloop-builder | Correction cycles check axiom compliance |
+| golden-test-builder | Calibration references axiom constraints |
