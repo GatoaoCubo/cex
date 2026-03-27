@@ -1,8 +1,8 @@
 ---
 pillar: P05
 llm_function: PRODUCE
-purpose: Template with {{vars}} that the LLM fills to produce an agent artifact
-pattern: every field here exists in SCHEMA.md — template derives, never invents
+purpose: Template with {{vars}} for agent artifact production
+pattern: derives from SCHEMA.md — no extra fields
 ---
 
 # Output Template: agent
@@ -25,9 +25,12 @@ tools_count: {{integer_matching_body}}
 iso_files_count: {{integer_10_or_more}}
 routing_keywords: [{{keyword_1}}, {{keyword_2}}, {{keyword_3}}, {{keyword_4}}]
 quality: null
-tags: [agent, {{tag_2}}, {{tag_3}}, {{pillar_tag}}]
+tags: [agent, {{domain}}, {{satellite}}, {{pillar_tag}}]
 tldr: "{{dense_summary_max_160ch}}"
-density_score: {{0.80-1.00}}
+density_score: {{0.80_to_1.00}}
+linked_artifacts:
+  primary: "{{parent_satellite_spec}}"
+  related: [{{related_artifact_refs}}]
 ---
 ```
 
@@ -35,26 +38,25 @@ density_score: {{0.80-1.00}}
 {{agent_name}} is a {{satellite}} specialist in {{domain}}.
 {{two_sentences_primary_function_and_value}}
 
-## Architecture
-
-### Capabilities
+## Capabilities
 - {{capability_1}}
 - {{capability_2}}
 - {{capability_3}}
 - {{capability_4}}
 
-### Tools
-- {{tool_1}}: {{tool_purpose_1}}
-- {{tool_2}}: {{tool_purpose_2}}
+## Tools
+| # | Tool | Purpose |
+|---|------|---------|
+| 1 | {{tool_1}} | {{tool_purpose_1}} |
+| 2 | {{tool_2}} | {{tool_purpose_2}} |
 
-### Satellite Position
-Satellite: {{satellite_name}}
-Peers: {{peer_agent_1}}, {{peer_agent_2}}
-Upstream: {{upstream_agent_or_none}}
-Downstream: {{downstream_agent_or_none}}
+## Satellite Position
+- Satellite: {{satellite_name}}
+- Peers: {{peer_agent_1}}, {{peer_agent_2}}
+- Upstream: {{upstream_agent_or_none}}
+- Downstream: {{downstream_agent_or_none}}
 
 ## File Structure
-
 ```
 agents/{{agent_slug}}/
   iso_vectorstore/
@@ -70,10 +72,10 @@ agents/{{agent_slug}}/
     ISO_{{AGENT_UPPER}}_010_SYSTEM_INSTRUCTION.md
 ```
 
-## When to Use
-Triggers: {{trigger_phrase_1}}, {{trigger_phrase_2}}
-Keywords: {{routing_keyword_1}}, {{routing_keyword_2}}, {{routing_keyword_3}}
-NOT when: {{exclusion_scenario_1}}, {{exclusion_scenario_2}}
+## Routing
+- Triggers: {{trigger_phrase_1}}, {{trigger_phrase_2}}
+- Keywords: {{routing_keyword_1}}, {{routing_keyword_2}}, {{routing_keyword_3}}
+- NOT when: {{exclusion_scenario_1}}, {{exclusion_scenario_2}}
 
 ## Input / Output
 
@@ -85,30 +87,11 @@ NOT when: {{exclusion_scenario_1}}, {{exclusion_scenario_2}}
 - Primary: {{primary_output_artifact}}
 - Secondary: {{secondary_output_or_none}}
 
-## Integration
-- Receives from: {{upstream_source}}
-- Produces for: {{downstream_consumer}}
-- Signal on complete: {{signal_type}}
-
 ## Quality Gates
 HARD gates: YAML parses, id matches p02_agent_ pattern, kind == agent, quality == null,
-required fields present, iso_vectorstore lists >= 10 files, llm_function == BECOME.
+required fields present, iso_vectorstore >= 10 files, llm_function == BECOME.
 SOFT gates: tldr <= 160ch, tags >= 3, capabilities_count matches body,
 density >= 0.80, satellite assigned, domain specific.
-
-## Common Issues
-1. {{issue_1}}: {{remediation_1}}
-2. {{issue_2}}: {{remediation_2}}
-3. {{issue_3}}: {{remediation_3}}
-
-## Invocation
-```bash
-{{invocation_command_or_spawn_pattern}}
-```
-
-## Related Agents
-- {{related_agent_1}}: {{relationship_1}}
-- {{related_agent_2}}: {{relationship_2}}
 
 ## Footer
 version: {{version}} | author: {{author}} | quality: null
