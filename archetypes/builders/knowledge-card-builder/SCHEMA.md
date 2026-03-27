@@ -3,12 +3,12 @@ pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema for knowledge_card — SINGLE SOURCE OF TRUTH
 pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
-source: P01_knowledge/_schema.yaml v4.0 + validate_kc.py v2.0
+source: P01_knowledge/_schema.yaml v4.0 + validate_kc.py v2.0 + 721 real KCs
 ---
 
 # Schema: knowledge_card
 
-## Frontmatter Fields (Required — 13)
+## Frontmatter Fields (Required — 14)
 
 | Field | Type | Required | Default | Validator |
 |-------|------|----------|---------|-----------|
@@ -22,34 +22,38 @@ source: P01_knowledge/_schema.yaml v4.0 + validate_kc.py v2.0
 | author | string (not STELLA) | YES | — | H06, H10 |
 | domain | string | YES | — | H06 |
 | quality | null | YES | null | H05 |
-| tags | list[string], len >= 3 | YES | — | H07 |
-| tldr | string <=160ch, no self-refs | YES | — | S01, S02 |
-| when_to_use | string | YES | — | H06 |
+| tags | list[string], len 3-7 | YES | — | H07 |
+| tldr | string <= 160 chars, must contain concrete data | YES | — | S01, S02 |
+| when_to_use | string (specific context, not "when needed") | YES | — | H06 |
+| axioms | list[string], len >= 1, ALWAYS/NEVER/IF-THEN form | YES | — | S18 |
 
-## Frontmatter Fields (CEX Extended — 6)
+## Frontmatter Fields (CEX Extended — 5)
 
 | Field | Type | Required | Validator |
 |-------|------|----------|-----------|
-| keywords | list[string], len >= 2 | REC | S16 |
-| long_tails | list[string], len >= 1 | REC | S17 |
-| axioms | list[string], len >= 1 | REC | S18 |
+| keywords | list[string], len 2-5 (terms user would literally type) | REC | S16 |
+| long_tails | list[string], len 2-3 (full natural-language phrases) | REC | S17 |
 | linked_artifacts | object {primary, related} | REC | S14, S20 |
 | density_score | float 0.80-1.00 | REC | — |
 | data_source | URL or artifact ref | REC | S15 |
 
 ## ID Pattern
+
 Regex: `^p01_kc_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem (H02). Underscores only.
 
 ## Linked Artifacts Object
+
 ```yaml
 linked_artifacts:
   primary: null            # or artifact_id
   related: [p01_kc_xxx]   # list of related ids
 ```
+
 Both `primary` and `related` keys required (S20).
 
 ## Body Structure: domain_kc
+
 1. `## Quick Reference` — yaml: topic, scope, owner, criticality
 2. `## Key Concepts` — bullets >= 3, concrete examples
 3. `## Strategy Phases` — numbered steps with outcomes
@@ -59,15 +63,20 @@ Both `primary` and `related` keys required (S20).
 7. `## References` — artifact refs + URLs
 
 ## Body Structure: meta_kc
-1. `## Executive Summary` — dense overview
+
+1. `## Executive Summary` — dense overview (2-3 sentences)
 2. `## Spec Table` — key-value specs
 3. `## Patterns` — what works
 4. `## Anti-Patterns` — what fails
 5. `## Application` — how to apply
 6. `## References` — artifact refs + URLs
 
+Density hierarchy (most to least info/token): tables > code blocks > bullet lists > ASCII diagrams > short paragraphs.
+
 ## Constraints
-- max_bytes: 5120 (body, min 200) — H08
+
+- max_bytes: 5120 (body) — H08. Covers 97%+ of 721 real KCs (p95=4274B)
+- min_bytes: 200 — KCs below 200B are empty/stub
 - min_bullets: 3
 - density_min: 0.80
 - bullet_max_chars: 80 — S10
