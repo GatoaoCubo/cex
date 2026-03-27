@@ -3,13 +3,17 @@ pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for validation_schema
 pattern: TEMPLATE derives from this. CONFIG restricts this.
+version: "2.0.0"
 ---
 
 # Schema: validation_schema
 
+Derivation hierarchy: **SCHEMA (P06) > TEMPLATE (P03) > CONFIG (P04)**
+Schema is upstream. Template/config must not define fields schema does not know.
+
 ## Frontmatter Fields
 
-### Required
+### Required (13)
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string (p06_vs_{scope}) | YES | — | Namespace compliance |
@@ -21,22 +25,33 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | updated | date YYYY-MM-DD | YES | — | Last update |
 | author | string | YES | — | Producer identity |
 | target_kind | string | YES | — | Artifact kind this schema validates |
-| format | enum: json, yaml | YES | — | Expected output format |
-| fields_count | integer >= 1 | YES | — | Number of validated fields |
 | on_failure | enum: reject, warn, auto_fix | YES | — | System behavior when validation fails |
-| strict | boolean | YES | false | If true, reject unknown fields |
 | domain | string | YES | — | Domain this schema covers |
 | quality | null | YES | null | Never self-score |
-| tags | list[string], len >= 3 | YES | — | Must include "validation-schema" |
-| tldr | string <= 160ch | YES | — | Dense summary |
+| tags | list[string], len >= 3, includes "validation-schema" | YES | — | Classification |
 
-### Recommended
+### Recommended (6)
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
+| tldr | string <= 160ch | REC | — | Dense summary |
+| format | enum: json, yaml | REC | — | Expected output format |
+| fields_count | integer >= 1 | REC | — | Number of validated fields |
+| strict | boolean | REC | false | If true, reject unknown fields |
 | coercion | boolean | REC | false | Auto-coerce types before validation |
-| error_template | string | REC | — | Template for error messages |
 | density_score | float 0.80-1.00 | REC | — | Content density |
-| linked_artifacts | object {primary, related} | REC | — | Cross-references |
+
+## Type Enum
+
+Fields MUST use JSON-compatible types only:
+
+| Type | Description |
+|------|-------------|
+| string | Text values |
+| integer | Whole numbers |
+| number | Decimal numbers |
+| boolean | true/false |
+| array | Ordered list |
+| object | Key-value map |
 
 ## Fields Object
 ```yaml
@@ -53,23 +68,30 @@ fields:
       max: {{number}}
 ```
 
-## ID Pattern
-Regex: `^p06_vs_[a-z][a-z0-9_]+$`
-Rule: id MUST equal filename stem.
+## Body Structure (3 required sections)
 
-## Body Structure (required sections)
-1. `## Schema Overview` — what this schema validates and why
-2. `## Fields` — table: name, type, required, constraints
-3. `## Failure Handling` — on_failure behavior, error messages, remediation
-4. `## Integration` — how the system applies this schema (pipeline position)
+1. **Fields Table** — name, type, required, constraints per field
+   - Split into Required (HARD gate) and Recommended (SOFT gate) tables
+   - All 5 columns mandatory per row: Field, Type, Required, Default, Notes
+   - Default = `--` for required fields
+2. **Failure Handling** — on_failure behavior per field, error messages, remediation
+   - `reject`: block artifact (critical fields: id, kind)
+   - `warn`: log, allow through (recommended fields, style)
+   - `auto_fix`: coerce value (safe conversions only, e.g. string "42" -> int 42)
+3. **Constraints** — max_bytes, naming pattern, id rules, integration notes
 
 ## Constraints
-- max_bytes: 3072 (body only)
+
+- max_bytes: 4096 (body only) — builder files max 4428B, previous 3072 limit was insufficient
 - naming: p06_vs_{scope}.yaml
 - machine_format: json
 - id == filename stem
-- fields_count >= 1
 - on_failure MUST be one of: reject, warn, auto_fix
-- format MUST be one of: json, yaml
 - LLM NEVER sees this schema — system-side only
 - quality: null always
+- Type values MUST be JSON-compatible (string, integer, number, boolean, array, object)
+
+## ID Pattern
+
+Regex: `^p06_vs_[a-z][a-z0-9_]+$`
+Rule: id MUST equal filename stem.
