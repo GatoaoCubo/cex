@@ -1,0 +1,31 @@
+---
+id: ex_dispatch_rule_research
+kind: dispatch_rule
+pillar: P12
+title: Research Task Routing
+tags: [dispatch, routing, research, orchestration]
+references:
+  - tpl_dispatch_rule
+  - ex_chain_research_pipeline
+  - ex_agent_copywriter
+  - ex_skill_web_scraper
+---
+
+# Research Task Routing
+
+> Skeleton: dispatch_rule kind (who handles what)
+
+| Field | Value |
+|-------|-------|
+| Keywords | research, analyze, compare, benchmark |
+| Target | research-agent |
+| Priority | 8 |
+| Threshold | 0.7 |
+| Fallback | gateway-agent |
+
+## Links
+
+- Routes to: [[ex_chain_research_pipeline]]
+- Uses: [[ex_skill_web_scraper]]
+- Alternative: [[ex_agent_copywriter]] (for marketing research)
+- Function: COLLABORATE (who works with whom)

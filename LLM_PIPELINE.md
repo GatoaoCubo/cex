@@ -133,3 +133,22 @@ Cobertura: 91% dos artefatos da industria (70% direto + 21% parcial).
 ---
 
 *LLM_PIPELINE.md — Lei do CEX. As 8 funcoes sao o DNA de todo sistema LLM.*
+---
+
+## Pillar Links
+
+- BECOME: [[P02_model]] (agents, personas, boot configs)
+- INJECT: [[P01_knowledge]] (knowledge cards, context, RAG sources)
+- REASON: [[P03_prompt]] (templates, chains, CoT)
+- CALL: [[P04_tools]] (skills, connectors, MCPs)
+- PRODUCE: [[P05_output]] (response formats, templates)
+- CONSTRAIN: [[P06_schema]] (validation rules, contracts)
+- GOVERN: [[P07_evals]] (quality gates, rubrics, benchmarks)
+- COLLABORATE: [[P12_orchestration]] (dispatch rules, workflows)
+
+## See Also
+
+- [[CLAUDE]] — LLM entry point
+- [[CEX_ARCHITECTURE_MAP]] — Visual architecture
+- [[_docs/WHITEPAPER_CEX]] — Technical thesis
+- [[archetypes/CODEX]] — Governance rules

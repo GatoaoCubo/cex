@@ -1,0 +1,209 @@
+{
+  "main": {
+    "id": "f2e903e873459aee",
+    "type": "split",
+    "children": [
+      {
+        "id": "5db0924c83b98f73",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "eac71bf5b1abc238",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Visualização em gráfico"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "ad1ab84a7c1c688c",
+    "type": "split",
+    "children": [
+      {
+        "id": "ae68dc88baef6bef",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "03a87b1448e383d8",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Explorador de arquivos"
+            }
+          },
+          {
+            "id": "d7f7c4f993fb5376",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Procurar"
+            }
+          },
+          {
+            "id": "a9ed26f368367c5c",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Marcadores"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "1bbe8bbd055beca5",
+    "type": "split",
+    "children": [
+      {
+        "id": "e083caa84628c003",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "19c35ac543c23166",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Links inversos"
+            }
+          },
+          {
+            "id": "d89275383b33c76b",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Links de saída"
+            }
+          },
+          {
+            "id": "5c3f9377b2319514",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Etiquetas"
+            }
+          },
+          {
+            "id": "7bdf0979ad345af5",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "Todas as propriedades"
+            }
+          },
+          {
+            "id": "0df3e2c1ac98eccf",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Sumário"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "graph:Abrir visualização em gráfico": false,
+      "canvas:Criar novo canvas": false,
+      "bases:Criar nova base": false
+    }
+  },
+  "active": "eac71bf5b1abc238",
+  "lastOpenFiles": [
+    "N07_admin/README.md",
+    "N06_commercial/README.md",
+    "N05_operations/README.md",
+    "N04_knowledge/README.md",
+    "N03_engineering/README.md",
+    "N02_marketing/README.md",
+    "N01_intelligence/README.md",
+    "P12_orchestration/README.md",
+    "P11_feedback/README.md",
+    "P10_memory/README.md",
+    "P09_config/README.md",
+    "P08_architecture/README.md",
+    "P07_evals/README.md",
+    "P06_schema/README.md",
+    "P05_output/README.md",
+    "P04_tools/README.md",
+    "P03_prompt/README.md",
+    "P02_model/README.md",
+    "P01_knowledge/README.md",
+    "N02_marketing/quality/quality_gate_sales.md",
+    "N02_marketing/quality",
+    "N02_marketing/prompts/prompt_template_sales_pitch.md",
+    "N02_marketing/prompts",
+    "N01_intelligence/prompts",
+    "N01_intelligence/agents/agent_sales_assistant.md",
+    "N01_intelligence/agents",
+    "N01_intelligence/knowledge/knowledge_card_target_audience.md",
+    "N01_intelligence/knowledge/knowledge_card_company_product.md",
+    "N01_intelligence/knowledge",
+    "P12_orchestration/examples/ex_dispatch_rule_research.md",
+    "P11_feedback/examples/ex_feedback_tone_correction.md"
+  ]
+}

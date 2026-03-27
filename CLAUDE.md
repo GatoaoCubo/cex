@@ -1,54 +1,48 @@
-# CLAUDE.md — CEX Entry Point
+# CEX — LLM Entry Point
 
-**Auto-loaded** | Toda sessao neste repo le este arquivo primeiro.
+> **You are inside a CEX repository.** This is a typed, indexed knowledge base.
+> Navigate by filename. Every file follows `{layer}_{kind}_{topic}.{ext}`.
 
----
+## Quick Navigation
 
-## VOCE ESTA NO CEX
+| Need | Command | Links |
+|------|---------|-------|
+| Architecture | Read this file | [[CEX_ARCHITECTURE_MAP]] |
+| 8 Functions | | [[LLM_PIPELINE]] |
+| Governance | | [[archetypes/CODEX]] |
+| Whitepaper | | [[_docs/WHITEPAPER_CEX]] |
+| Naming rules | | [[_docs/NAMING_CONVENTION]] |
 
-CEX = Company Experience X. O cerebro empresarial.
-Este repo eh o **diamante** (produto). NAO eh workshop.
+## Find by Function
 
-## PRIMEIRO PASSO: /cex
+| Function | Find | Pillar |
+|----------|------|--------|
+| BECOME | `find -name "bld_system_prompt_*"` | [[P01_knowledge]] [[P02_model]] |
+| INJECT | `find -name "bld_knowledge_card_*"` | [[P01_knowledge]] |
+| REASON | `find -name "bld_instruction_*"` | [[P03_prompt]] |
+| CALL | `find -name "bld_tools_*"` | [[P04_tools]] |
+| PRODUCE | `find -name "bld_output_template_*"` | [[P05_output]] |
+| CONSTRAIN | `find -name "bld_schema_*"` | [[P06_schema]] |
+| GOVERN | `find -name "bld_quality_gate_*"` | [[P07_evals]] |
+| COLLABORATE | `find -name "bld_collaboration_*"` | [[P12_orchestration]] |
 
-Execute o protocolo `/cex` definido em `.claude/CEX_COMMAND.md`:
-1. SCAN o repo (builders, nucleos, fill rate)
-2. REPORT dashboard pro usuario
-3. Aponte DOCS de referencia
-4. ASK o que o usuario quer fazer
+## Layers
 
-## DOCS CHAVE
+| Layer | Location | Count |
+|-------|----------|-------|
+| L0 DNA | [[archetypes]]/builders/ | 932 bld_* files |
+| L1 Schema | [[P01_knowledge]] — [[P12_orchestration]] | 85 tpl_* + examples |
+| L2 Instance | [[N01_intelligence]] — [[N07_admin]] | Company-specific |
+| L3 Engine | _tools/ | Pipeline + governance |
+| L4 Root | This file + [[README]] + [[INDEX]] | Entry points |
 
-| Doc | Path |
-|-----|------|
-| **INDEX** | `INDEX.md` |
-| **Whitepaper** | `_docs/WHITEPAPER_CEX.md` |
-| **Architecture (MOLDE)** | `_docs/ARCHITECTURE.md` |
-| **LLM Pipeline** | `LLM_PIPELINE.md` |
-| **LLM Pipeline (8 funcoes)** | `LLM_PIPELINE.md` |
-| **CODEX** | `archetypes/CODEX.md` |
-| **Doctor** | `python _tools/cex_doctor.py` |
-| **Comando /cex** | `.claude/CEX_COMMAND.md` |
-
-## REGRAS
-
-1. CEX = diamante. So produto final aqui. Reviews/plans vao pro codexa-core.
-2. Artefatos = DUAL (.md + compiled/.yaml)
-3. Density >= 0.8 | Quality >= 7.0
-4. Path = endereco: `N{XX}/P{NN}/{type}/`
-5. Builder constroi, humano revisa
-6. Leia `_docs/ARCHITECTURE.md` antes de qualquer mudanca estrutural
-
-## HIERARQUIA (5 niveis)
+## Naming Grammar
 
 ```
-L0: archetypes/builders/     MOLDES (fabricas)
-L1: P01..P12/                SCHEMAS ROOT (78 kinds)
-L2: N01..N07/                NUCLEOS (7 setores)
-L3: N{XX}/P{NN}/             pillar POR NUCLEO (84)
-L4: N{XX}/P{NN}/{type}/      INSTANCIAS (546 dirs)
+{layer}_{kind}_{topic}.{ext}
+
+bld_  = builder (L0)     | bld_system_prompt_agent.md
+tpl_  = template (L1)    | tpl_knowledge_card.md
+ex_   = example (L1)     | ex_knowledge_card_rag.md
+(none)= instance (L2)    | knowledge_card_company_product.md
 ```
-
-## ENCODING
-
-ASCII para configs. `nao` not `nao`. Excecao: conteudo user-facing.
