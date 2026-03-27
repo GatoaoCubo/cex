@@ -7,176 +7,84 @@ sources: [JSON Schema draft-07, OpenAPI 3.1, Pydantic v2, Zod, real production s
 
 # Domain Knowledge: validation_schema
 
-## What Validation Schemas Do
+## Core Concept
 
-A validation schema is a structural contract applied AFTER generation to enforce field presence, types, and constraints. It is invisible to the LLM during generation — only the system sees it.
-
-This is the critical distinction: response_format tells the LLM HOW to format output (visible during generation). validation_schema checks WHETHER output conforms (invisible, post-generation). Confusing these two produces artifacts that neither guide nor validate.
+Validation schema = structural contract applied AFTER generation to enforce fields, types, constraints. Invisible to LLM during generation (system-only, post-generation). Distinct from response_format which guides LLM DURING generation.
 
 ## Fields Table Pattern
-
-The proven structure for defining fields:
 
 ```
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 ```
 
-Every field row must specify all 5 columns. "Notes" carries constraints, relationships, and edge cases that don't fit elsewhere. Omitting Default for required fields uses `—` (em-dash), not blank.
+- All 5 columns mandatory per row. Default = `--` for required fields
+- Split into Required (HARD gate) and Recommended (SOFT gate) tables
+- Use JSON types only: `string`, `integer`, `number`, `boolean`, `array`, `object`
 
-### Field Type Taxonomy
+## Constraint Patterns
 
-Use JSON-compatible types exclusively: `string`, `integer`, `number`, `boolean`, `array`, `object`. Never invent types (`date` is `string` with a format constraint, not a separate type). Compound types use nesting:
-
-```yaml
-fields:
-  - name: "campaign_context"
-    type: "object"
-    required: true
-    constraints:
-      properties:
-        monthly_budget: {type: number, required: true}
-        campaign_type: {type: string, enum: [launch, optimization, scaling]}
-```
-
-### Required vs Recommended Separation
-
-Split fields into two tables: Required (must be present or artifact is rejected) and Recommended (improves quality but absence is not fatal). This maps directly to HARD vs SOFT gate behavior downstream.
-
-## Constraint Patterns That Work
-
-| Constraint | Syntax | When to Use |
-|------------|--------|-------------|
-| Regex pattern | `pattern: "^p06_vs_[a-z][a-z0-9_]+$"` | ID formats, naming conventions |
-| Enum | `enum: [reject, warn, auto_fix]` | Closed set of valid values |
+| Constraint | Syntax | Use Case |
+|------------|--------|----------|
+| Regex | `pattern: "^p06_vs_[a-z][a-z0-9_]+$"` | IDs, naming |
+| Enum | `enum: [reject, warn, auto_fix]` | Closed sets |
 | Range | `min: 1, max: 100` | Numeric bounds |
-| Length | `min_length: 3, max_length: 160` | String size limits |
-| Size bounds | `max_bytes: 3072` | Body/payload limits |
-| List minimum | `len >= 3` | Tags, keywords requiring diversity |
-| Literal | `literal: "quality_gate"` | Kind field, pillar assignment |
+| Length | `min_length: 3, max_length: 160` | String limits |
+| Size | `max_bytes: 3072` | Payload limits |
+| List min | `len >= 3` | Diversity gates |
+| Literal | `literal: "quality_gate"` | Kind/pillar |
 
-### Constraint Composition
-
-Real schemas combine constraints on single fields: `type: string` + `pattern: regex` + `max_length: 160`. Order of evaluation matters — check type first, then format, then content constraints. This prevents confusing error messages ("invalid pattern" on a null value).
+Compose constraints on single fields: type -> format -> content. Order prevents confusing errors.
 
 ## Schema Inheritance
 
-Schemas can inherit from parent schemas and override selectively:
-
 ```yaml
 inherits: "../../P01_knowledge/_schema.yaml"
-nucleus: N01
-role: primary
-fields_add: {}           # extend parent fields
-constraints_override: {} # narrow parent constraints
+fields_add: {}           # extend parent
+constraints_override: {} # narrow, never loosen
 ```
 
-This enables domain-specific schemas (e.g., per-nucleus) while maintaining a single source of truth. The parent defines the universal contract; children add or tighten, never loosen.
-
-## The Derivation Hierarchy
+## Derivation Hierarchy
 
 ```
-SCHEMA (P06) — source of truth, defines fields and constraints
-  └── TEMPLATE (P03) — derives structure, adds placeholders
-       └── CONFIG (P04) — restricts schema for specific contexts
+SCHEMA (P06) -> TEMPLATE (P03) -> CONFIG (P04)
 ```
 
-Schema is upstream of everything. If schema changes, template and config must update. Never let template define fields that schema doesn't know about.
+Schema is upstream. Template/config must not define fields schema doesn't know.
 
-## Schema Formats: YAML vs JSON Schema
+## Failure Handling
 
-Two proven formats serve different purposes:
+| Mode | Behavior | When |
+|------|----------|------|
+| `reject` | Block artifact | Critical fields (id, kind) |
+| `warn` | Log, allow through | Recommended fields, style |
+| `auto_fix` | Coerce value | Safe conversions only |
 
-**YAML declarative** (simpler, human-readable):
-```yaml
-inputs:
-  required:
-    product_name:
-      type: string
-      description: Product or service to advertise
-    budget:
-      type: number
-  optional:
-    platforms:
-      type: list
-      items: string
-      default: [meta, google]
-```
+Safe: string "42" -> int 42. Unsafe: truncating content (data loss).
 
-**JSON Schema draft-07** (machine-validatable, tooling-rich):
-```json
-{
-  "type": "object",
-  "properties": {
-    "product_info": {
-      "type": "object",
-      "properties": {
-        "asin": {"type": "string"},
-        "price": {"type": "number"}
-      },
-      "required": ["asin"]
-    }
-  },
-  "required": ["product_info"]
-}
-```
+## ID Pattern
 
-Choose YAML when humans are the primary readers. Choose JSON Schema when automated validation tooling must consume it. Both must express the same contract — format is presentation, not substance.
+Enforce via regex: `^p06_vs_[a-z][a-z0-9_]+$`. Invariant: `id == filename stem`.
 
-## Failure Handling Modes
+## Body Structure
 
-Every schema must declare what happens when validation fails:
+Number sections explicitly. Each becomes a HARD gate check:
+1. `## Overview` 2. `## Fields` 3. `## Failure Handling` 4. `## Integration`
 
-| Mode | Behavior | When to Use |
-|------|----------|-------------|
-| `reject` | Block the artifact, return error | Critical fields (id, kind, required data) |
-| `warn` | Log warning, allow through | Recommended fields, style checks |
-| `auto_fix` | Coerce value to valid form | Type mismatches with safe conversion |
+## Format Choice
 
-`auto_fix` is powerful but dangerous. Safe coercions: string "42" to integer 42, single string to array ["value"]. Unsafe: truncating content to fit max_length (data loss).
-
-## ID Pattern Enforcement
-
-Every schema should enforce an ID pattern via regex. The pattern encodes the artifact's pillar and kind:
-
-```
-^p06_vs_[a-z][a-z0-9_]+$   # validation_schema
-^p03_sp_[a-z][a-z0-9_]+$   # system_prompt
-^p02_agent_[a-z][a-z0-9_]+$ # agent
-```
-
-Additionally enforce: `id == filename stem`. This invariant enables search systems to locate artifacts by ID without a separate index.
-
-## Body Structure Sections
-
-Schema defines which markdown sections the body MUST contain. Pattern:
-
-```
-## Body Structure (required sections)
-1. `## Overview` — what and why
-2. `## Fields` — table with constraints
-3. `## Failure Handling` — on_failure behavior
-4. `## Integration` — where this fits in the pipeline
-```
-
-Number sections explicitly. Each section name becomes a HARD gate check ("body has ## Fields section"). Ambiguous section names ("## Details") create gate-checking headaches.
+- YAML: humans are primary readers
+- JSON Schema draft-07: automated validation tooling
+- Both express same contract; format is presentation
 
 ## Anti-Patterns
 
-| Anti-Pattern | Problem | Fix |
-|-------------|---------|-----|
-| Too many fields (>25) | LLM ignores excess, validators slow down | Split into required (<=15) + recommended |
-| Ambiguous types ("data") | No automated validation possible | Use JSON primitives only |
-| Impossible constraints | `min: 10, max: 5` or `required + default: null` | Validate constraint consistency |
-| No failure mode | System doesn't know what to do on violation | Always declare on_failure |
-| Schema in prompt | Confuses guidance with validation | Schema = post-generation only |
-| Loose ID patterns | Collisions, search failures | Enforce pillar+kind prefix |
-| Mutable schema without versioning | Breaking changes silently | Always version with semver |
-
-## References
-
-- JSON Schema: https://json-schema.org/specification
-- Pydantic v2: https://docs.pydantic.dev/latest/
-- OpenAPI 3.1: https://spec.openapis.org/oas/v3.1.0
-- Zod: https://zod.dev/
-- Guardrails AI: https://www.guardrailsai.com/
+| Anti-Pattern | Fix |
+|-------------|-----|
+| >25 fields | Split: required (<=15) + recommended |
+| Ambiguous types ("data") | JSON primitives only |
+| Impossible constraints | Validate consistency (min < max) |
+| No failure mode | Always declare on_failure |
+| Schema in prompt | Schema = post-generation only |
+| Loose ID patterns | Enforce pillar+kind prefix |
+| No versioning | Always version with semver |
