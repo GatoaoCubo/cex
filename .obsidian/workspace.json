@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "5db0924c83b98f73",
+        "id": "45e181cfb450abed",
         "type": "tabs",
         "children": [
           {
-            "id": "eac71bf5b1abc238",
+            "id": "6fb5acc76cb13a39",
             "type": "leaf",
             "state": {
               "type": "graph",
@@ -172,8 +172,9 @@
       "bases:Criar nova base": false
     }
   },
-  "active": "eac71bf5b1abc238",
+  "active": "6fb5acc76cb13a39",
   "lastOpenFiles": [
+    "P01_knowledge/examples/ex_knowledge_card_ml_algorithm_map.md",
     "N07_admin/config/config_governance_rules.md",
     "N06_commercial/knowledge/knowledge_card_pricing_model.md",
     "N05_operations/quality/quality_gate_deploy.md",
@@ -208,7 +209,6 @@
     "P08_architecture/README.md",
     "P07_evals/README.md",
     "P06_schema/README.md",
-    "P05_output/README.md",
-    "P04_tools/README.md"
+    "P05_output/README.md"
   ]
 }

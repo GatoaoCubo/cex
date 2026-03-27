@@ -3,20 +3,105 @@
   "search": "",
   "showTags": true,
   "showAttachments": true,
-  "hideUnresolved": false,
+  "hideUnresolved": true,
   "showOrphans": true,
   "collapse-color-groups": false,
-  "colorGroups": [],
+  "colorGroups": [
+    {
+      "query": "path:P01_knowledge OR path:knowledge-card-builder OR path:rag-source-builder OR path:glossary-entry-builder OR path:context-doc-builder OR path:embedding-config-builder",
+      "color": {
+        "a": 1,
+        "rgb": 16007990
+      }
+    },
+    {
+      "query": "path:P02_model OR path:agent-builder OR path:iso-package-builder OR path:lens-builder OR path:mental-model-builder OR path:model-card-builder OR path:router-builder OR path:boot-config-builder OR path:fallback-chain-builder",
+      "color": {
+        "a": 1,
+        "rgb": 16750592
+      }
+    },
+    {
+      "query": "path:P03_prompt OR path:prompt-template-builder OR path:system-prompt-builder OR path:chain-builder OR path:instruction-builder OR path:action-prompt-builder OR path:few-shot-example-builder",
+      "color": {
+        "a": 1,
+        "rgb": 16771899
+      }
+    },
+    {
+      "query": "path:P04_tools OR path:skill-builder OR path:scraper-builder OR path:mcp-server-builder OR path:plugin-builder OR path:hook-builder OR path:cli-tool-builder OR path:client-builder OR path:connector-builder OR path:daemon-builder",
+      "color": {
+        "a": 1,
+        "rgb": 5025616
+      }
+    },
+    {
+      "query": "path:P05_output OR path:response-format-builder OR path:formatter-builder OR path:naming-rule-builder OR path:parser-builder",
+      "color": {
+        "a": 1,
+        "rgb": 38536
+      }
+    },
+    {
+      "query": "path:P06_schema OR path:validation-schema-builder OR path:input-schema-builder OR path:interface-builder OR path:type-def-builder OR path:validator-builder",
+      "color": {
+        "a": 1,
+        "rgb": 240116
+      }
+    },
+    {
+      "query": "path:P07_evals OR path:quality-gate-builder OR path:scoring-rubric-builder OR path:golden-test-builder OR path:smoke-eval-builder OR path:unit-eval-builder OR path:e2e-eval-builder OR path:benchmark-builder",
+      "color": {
+        "a": 1,
+        "rgb": 4149685
+      }
+    },
+    {
+      "query": "path:P08_architecture OR path:component-map-builder OR path:diagram-builder OR path:law-builder OR path:pattern-builder OR path:director-builder",
+      "color": {
+        "a": 1,
+        "rgb": 10233776
+      }
+    },
+    {
+      "query": "path:P09_config OR path:env-config-builder OR path:feature-flag-builder OR path:path-config-builder OR path:permission-builder OR path:runtime-rule-builder OR path:runtime-state-builder OR path:spawn-config-builder",
+      "color": {
+        "a": 1,
+        "rgb": 7951688
+      }
+    },
+    {
+      "query": "path:P10_memory OR path:learning-record-builder OR path:session-state-builder OR path:axiom-builder OR path:brain-index-builder",
+      "color": {
+        "a": 1,
+        "rgb": 15277667
+      }
+    },
+    {
+      "query": "path:P11_feedback OR path:guardrail-builder OR path:lifecycle-rule-builder OR path:optimizer-builder OR path:bugloop-builder",
+      "color": {
+        "a": 1,
+        "rgb": 9159498
+      }
+    },
+    {
+      "query": "path:P12_orchestration OR path:dispatch-rule-builder OR path:handoff-builder OR path:signal-builder OR path:workflow-builder OR path:dag-builder",
+      "color": {
+        "a": 1,
+        "rgb": 6323595
+      }
+    }
+  ],
   "collapse-display": false,
   "showArrow": true,
-  "textFadeMultiplier": 0,
-  "nodeSizeMultiplier": 1,
-  "lineSizeMultiplier": 1,
+  "textFadeMultiplier": -1,
+  "nodeSizeMultiplier": 1.2,
+  "lineSizeMultiplier": 0.8,
   "collapse-forces": false,
-  "centerStrength": 0.518713248970312,
+  "centerStrength": 0.518,
   "repelStrength": 10,
   "linkStrength": 1,
-  "linkDistance": 250,
-  "scale": 0.07431470243658016,
+  "linkDistance": 200,
+  "scale": 0.024095302712059515,
   "close": false
 }
