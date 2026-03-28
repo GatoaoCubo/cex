@@ -57,3 +57,20 @@ function_def --wraps-->     search_tool (as callable)
 | results | result_fields | What comes back |
 | governance | rate_limit | Throttle and protect quotas |
 | consumers | agent, function_def | Runtime callers |
+## Confusion Zones
+| Scenario | Seems Like | Actually Is | Rule |
+|---|---|---|---|
+| Search over local embeddings | search_tool | retriever | retriever=local vector store; search_tool=external API |
+| Navigate site to find data | search_tool | browser_tool | browser_tool=DOM interaction; search_tool=API query |
+| Load and chunk a document | search_tool | document_loader | loader=file ingestion; search_tool=query for results |
+## Decision Tree
+- External web/news search API? → search_tool
+- Local vector/keyword index? → retriever
+- Navigate and scrape pages? → browser_tool
+- Ingest files into chunks? → document_loader
+## Neighbor Comparison
+| Dimension | search_tool | retriever | Difference |
+|---|---|---|---|
+| Data source | External API (web) | Local vector store | search_tool calls remote; retriever is local |
+| Cost | Per-query pricing | Free (after indexing) | search_tool has ongoing API costs |
+| Freshness | Real-time web | Stale until re-indexed | search_tool always current |

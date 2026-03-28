@@ -52,3 +52,20 @@ target           --determines-> resolution + actions
 | observation | screenshot_mode | Define when LLM sees the screen |
 | governance | safety_constraints | Restrict dangerous actions |
 | consumers | agent, vision_tool | Runtime callers and dependencies |
+## Confusion Zones
+| Scenario | Seems Like | Actually Is | Rule |
+|---|---|---|---|
+| Click a button on webpage | computer_use | browser_tool | browser_tool uses DOM selectors; computer_use uses pixel coords |
+| Read text from screenshot | computer_use | vision_tool | vision_tool=analyze only; computer_use=analyze+act |
+| Run desktop application | computer_use | cli_tool | cli_tool=shell command; computer_use=GUI interaction |
+## Decision Tree
+- GUI interaction via screenshots? → computer_use
+- DOM-level web automation? → browser_tool
+- Image analysis without control? → vision_tool
+- Shell command execution? → cli_tool
+## Neighbor Comparison
+| Dimension | computer_use | browser_tool | Difference |
+|---|---|---|---|
+| Targeting | Pixel coordinates | CSS/XPath selectors | computer_use is resolution-dependent |
+| Scope | Any screen surface | Web pages only | computer_use works on any GUI |
+| Feedback | Screenshots | DOM/JSON/HTML | browser_tool has structured output |

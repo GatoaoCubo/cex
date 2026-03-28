@@ -52,3 +52,20 @@ provider_compat --informs-> deployment (which providers support it)
 | compatibility | provider_compat, strict | Provider-specific considerations |
 | documentation | examples, error_types | Usage guidance and error handling |
 | consumers | agent, mcp_server | Runtime callers that use the definition |
+## Confusion Zones
+| Scenario | Seems Like | Actually Is | Rule |
+|---|---|---|---|
+| Server exposes tools via protocol | function_def | mcp_server | mcp_server=transport+protocol; function_def=schema only |
+| Client calls external API | function_def | api_client | api_client=implementation; function_def=interface contract |
+| Agent executes code via tool | function_def | code_executor | code_executor=runtime; function_def=parameter schema |
+## Decision Tree
+- JSON Schema for LLM tool_use? → function_def
+- Protocol server exposing tools? → mcp_server
+- HTTP client implementation? → api_client
+- Sandboxed code execution? → code_executor
+## Neighbor Comparison
+| Dimension | function_def | mcp_server | Difference |
+|---|---|---|---|
+| Scope | Single function schema | Multi-tool server | mcp_server bundles multiple functions |
+| Transport | None (pure schema) | stdio/SSE/HTTP | function_def has no runtime |
+| Portability | OpenAI/Anthropic/Gemini | MCP protocol only | function_def is provider-agnostic |

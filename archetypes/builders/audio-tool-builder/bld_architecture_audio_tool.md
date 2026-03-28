@@ -9,17 +9,17 @@ purpose: Component map of audio_tool — inventory, dependencies, and architectu
 ## Component Inventory
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
-| direction | Processing direction — input (STT), output (TTS), analysis, bidirectional | audio_tool | required |
-| model | Named audio model identifier — bound to specific provider and capability | audio_tool | required |
-| format | Audio format for input/output — mp3, wav, ogg, flac, webm, m4a, aac, pcm | audio_tool | required |
-| language | BCP-47 language code scoping model support | audio_tool | required |
-| sample_rate | Hz value normalizing audio input for model accuracy | audio_tool | recommended |
-| streaming | Real-time chunk processing flag — affects integration pattern | audio_tool | recommended |
-| word_timestamps | Per-word timing output — enables subtitle sync and diarization | audio_tool | recommended |
-| voice_id | Default TTS voice identifier for output direction tools | audio_tool | conditional |
-| guardrail | Execution constraints — max_duration, rate caps, content filters | P11 | external |
-| agent | Runtime caller that invokes the audio tool via API | P02 | consumer |
-| notifier | Downstream consumer that delivers TTS audio output | P04 | consumer |
+| direction | STT/TTS/analysis/bidirectional | audio_tool | required |
+| model | Audio model identifier | audio_tool | required |
+| format | Audio format (mp3, wav, ogg, etc.) | audio_tool | required |
+| language | BCP-47 language code | audio_tool | required |
+| sample_rate | Hz for model accuracy | audio_tool | recommended |
+| streaming | Real-time chunk processing | audio_tool | recommended |
+| word_timestamps | Per-word timing output | audio_tool | recommended |
+| voice_id | TTS voice identifier | audio_tool | conditional |
+| guardrail | Duration/rate limits | P11 | external |
+| agent | Invokes audio tool | P02 | consumer |
+| notifier | Delivers TTS output | P04 | consumer |
 ## Dependency Graph
 ```
 format      --depends-->  model
@@ -36,9 +36,9 @@ notifier    --consumes--> audio_bytes
 ```
 | From | To | Type | Data |
 |------|----|------|------|
-| format | model | depends | audio format must be accepted by model |
-| language | model | depends | language must be in model's supported list |
-| sample_rate | model | depends | Hz value affects transcription accuracy |
+| format | model | depends | format accepted by model |
+| language | model | depends | in model's supported list |
+| sample_rate | model | depends | affects accuracy |
 | model | transcript | produces | text output for direction: input |
 | model | audio_bytes | produces | audio output for direction: output |
 | model | features | produces | JSON features for direction: analysis |
@@ -58,8 +58,25 @@ notifier    --consumes--> audio_bytes
 ## Layer Map
 | Layer | Components | Purpose |
 |-------|-----------|---------|
-| configuration | language, sample_rate, voice_id | Scope model behavior — language, fidelity, voice |
-| interface | direction, format, streaming | Define the audio surface — what callers send/receive |
-| execution | model, word_timestamps | Process signal, produce output with optional metadata |
-| governance | guardrail | Apply duration limits, rate caps, content filters |
-| callers | agent, notifier | Runtime consumers that invoke the audio tool |
+| configuration | language, sample_rate, voice_id | Scope model behavior |
+| interface | direction, format, streaming | Audio surface |
+| execution | model, word_timestamps | Process signal |
+| governance | guardrail | Duration/rate limits |
+| callers | agent, notifier | Runtime consumers |
+## Confusion Zones
+| Scenario | Seems Like | Actually Is | Rule |
+|---|---|---|---|
+| Send voice message | audio_tool | notifier | notifier=delivery; audio_tool=process audio |
+| Analyze image content | audio_tool | vision_tool | vision_tool=images; audio_tool=sound |
+| Run CLI audio converter | audio_tool | cli_tool | cli_tool=shell cmd; audio_tool=model-based |
+## Decision Tree
+- STT/TTS/audio analysis? → audio_tool
+- Image/screenshot analysis? → vision_tool
+- Push notification delivery? → notifier
+- Shell command? → cli_tool
+## Neighbor Comparison
+| Dim | audio_tool | vision_tool | Diff |
+|---|---|---|---|
+| Signal | Sound waves | Pixels | Different modality |
+| Models | Whisper/TTS | GPT-4V/OCR | Specialized models |
+| Output | Text/audio | JSON/text | audio_tool can produce audio |

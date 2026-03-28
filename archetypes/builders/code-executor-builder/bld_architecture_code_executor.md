@@ -56,3 +56,20 @@ function_def --targets-->   code_executor (runtime binding)
 | access | network_access, file_io | Control external access |
 | state | persistent_session | Manage execution state |
 | consumers | agent, function_def | Runtime callers |
+## Confusion Zones
+| Scenario | Seems Like | Actually Is | Rule |
+|---|---|---|---|
+| Agent runs shell command | code_executor | cli_tool | cli_tool=single cmd; executor=arbitrary code in sandbox |
+| Background process runs code | code_executor | daemon | daemon persists; executor is ephemeral per call |
+| LLM calls a function | code_executor | function_def | function_def=schema; executor=actual runtime |
+## Decision Tree
+- Untrusted code in sandbox? → code_executor
+- Single shell command? → cli_tool
+- Persistent background job? → daemon
+- JSON Schema for tool_use? → function_def
+## Neighbor Comparison
+| Dimension | code_executor | cli_tool | Difference |
+|---|---|---|---|
+| Isolation | Sandbox (Docker/E2B) | Host shell | Executor has security boundary |
+| Input | Arbitrary code string | Command + flags | Executor runs multi-line programs |
+| Lifetime | Ephemeral + teardown | Ephemeral | Sandbox adds setup/teardown cost |

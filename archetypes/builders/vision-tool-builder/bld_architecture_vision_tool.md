@@ -9,17 +9,17 @@ purpose: Component map of vision_tool — inventory, dependencies, and architect
 ## Component Inventory
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
-| input_type | Accepted visual input format (base64, url, file_path, buffer, screenshot) | vision_tool | required |
-| capability | Named visual analysis operation the tool performs | vision_tool | required |
-| output_format | Shape of result data (json, text, table) | vision_tool | required |
-| provider | Backing vision API or local engine | vision_tool | required |
-| confidence_threshold | Minimum confidence score to include a result | vision_tool | required |
-| supported_formats | Accepted image file format list (png, jpg, etc.) | vision_tool | recommended |
-| max_resolution | Maximum input resolution constraint | vision_tool | recommended |
-| batch_support | Whether multiple images can be processed per call | vision_tool | recommended |
-| guardrail | Execution constraints — rate caps, payload limits | P11 | external |
-| agent | Runtime caller that invokes the tool with image input | P02 | consumer |
-| parser | Downstream consumer that interprets the tool's JSON output | P04 | consumer |
+| input_type | Visual input format (base64, url, file_path) | vision_tool | required |
+| capability | Named analysis operation | vision_tool | required |
+| output_format | Result shape (json, text, table) | vision_tool | required |
+| provider | Backing vision API or engine | vision_tool | required |
+| confidence_threshold | Min confidence to include result | vision_tool | required |
+| supported_formats | Accepted image formats (png, jpg) | vision_tool | recommended |
+| max_resolution | Max input resolution | vision_tool | recommended |
+| batch_support | Multi-image per call | vision_tool | recommended |
+| guardrail | Rate caps, payload limits | P11 | external |
+| agent | Invokes tool with image input | P02 | consumer |
+| parser | Interprets JSON output | P04 | consumer |
 ## Dependency Graph
 ```
 input_type          --feeds-->      capability
@@ -33,14 +33,14 @@ parser              --consumes-->   output_format
 ```
 | From | To | Type | Data |
 |------|----|------|------|
-| input_type | capability | feeds | raw image payload for analysis |
-| provider | capability | executes | routes image to API or local engine |
-| capability | output_format | produces | structured result (json/text/table) |
-| confidence_threshold | output_format | filters | drops results below minimum confidence |
-| supported_formats | input_type | constrains | restricts accepted file types |
-| guardrail | capability | limits | rate caps, max payload bytes |
-| agent | capability | invokes | calls tool with image input at runtime |
-| parser | output_format | consumes | downstream structure interpretation |
+| input_type | capability | feeds | image payload |
+| provider | capability | executes | routes to API/engine |
+| capability | output_format | produces | structured result |
+| confidence_threshold | output_format | filters | drops low confidence |
+| supported_formats | input_type | constrains | accepted file types |
+| guardrail | capability | limits | rate/payload caps |
+| agent | capability | invokes | runtime caller |
+| parser | output_format | consumes | downstream consumer |
 ## Boundary Table
 | vision_tool IS | vision_tool IS NOT |
 |----------------|-------------------|
@@ -57,3 +57,20 @@ parser              --consumes-->   output_format
 | output | output_format | Shape result data for downstream consumers |
 | governance | guardrail, batch_support | Constrain execution (rate, payload, volume) |
 | callers | agent, parser | Runtime consumers that invoke and interpret the tool |
+## Confusion Zones
+| Scenario | Seems Like | Actually Is | Rule |
+|---|---|---|---|
+| Screenshot and click button | vision_tool | computer_use | computer_use=see+act; vision_tool=see only |
+| Extract text from web page | vision_tool | browser_tool | browser_tool=DOM; vision_tool=image pixels |
+| Analyze video frames | vision_tool | audio_tool | audio_tool=sound; vision_tool=static images |
+## Decision Tree
+- Analyze image without control? → vision_tool
+- See screen and interact? → computer_use
+- Extract from DOM? → browser_tool
+- Process audio signal? → audio_tool
+## Neighbor Comparison
+| Dimension | vision_tool | computer_use | Difference |
+|---|---|---|---|
+| Action | Read-only analysis | Read + act | vision_tool never controls |
+| Input | Image file/URL | Live screen | Different input source |
+| Output | Structured JSON | Next action | Different output purpose |

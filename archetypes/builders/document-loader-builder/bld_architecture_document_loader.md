@@ -76,3 +76,20 @@ encoding_detector --> parser
 | Chunking | full text | splitter with chunk_size + overlap | text chunk list |
 | Metadata | text + structure | field extraction per format | metadata dict per chunk |
 | Output | chunks + metadata | schema wrapping | List[Document/Node/Dict] |
+## Confusion Zones
+| Scenario | Seems Like | Actually Is | Rule |
+|---|---|---|---|
+| Search PDF for answer | document_loader | retriever | loader=ingest+chunk; retriever=search over chunks |
+| Download file from URL | document_loader | api_client | api_client=API call; loader=parse+chunk file content |
+| Extract data from webpage | document_loader | browser_tool | browser_tool=DOM interaction; loader=file parsing |
+## Decision Tree
+- Ingest file into chunks? → document_loader
+- Search existing chunks? → retriever
+- Navigate and scrape page? → browser_tool
+- Call API endpoint? → api_client
+## Neighbor Comparison
+| Dimension | document_loader | retriever | Difference |
+|---|---|---|---|
+| Direction | Write (ingest→store) | Read (store→results) | Loader fills store; retriever queries it |
+| Input | Raw files (PDF/HTML) | Query string | Different input types |
+| Output | Chunked documents | Ranked results | Loader produces; retriever searches |

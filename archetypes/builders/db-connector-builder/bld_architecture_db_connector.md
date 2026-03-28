@@ -41,25 +41,34 @@ workflow           --depends-->   outbound_endpoint
 ```
 | From | To | Type | Data |
 |------|----|------|------|
-| env_config | auth_strategy | produces | credentials and secrets injected at runtime |
-| env_config | outbound_endpoint | produces | service base URL and path configuration |
-| guardrail | rate_limit | produces | throttle policy from constraint config |
-| outbound_endpoint | protocol | depends | wire protocol for sending requests |
-| outbound_endpoint | auth_strategy | depends | auth applied to outgoing calls |
-| outbound_endpoint | data_mapping | depends | internal-to-external schema transform |
-| inbound_endpoint | protocol | depends | wire protocol for receiving events |
-| inbound_endpoint | auth_strategy | depends | signature verification for inbound calls |
-| inbound_endpoint | data_mapping | depends | external-to-internal schema transform |
-| health_check | outbound_endpoint | depends | probes the outbound path for liveness |
-| retry_policy | outbound_endpoint | depends | retry wraps outbound call on failure |
-| outbound_endpoint | inbound_endpoint | bidirectional | paired send/receive on same service |
-| agent | outbound_endpoint | depends | agent triggers outbound calls |
-| agent | inbound_endpoint | depends | agent handles inbound webhook events |
-| workflow | outbound_endpoint | depends | workflow sequences connector operations |
+| env_config | auth_strategy | produces | credentials injected at runtime |
+| guardrail | rate_limit | produces | throttle policy |
+| outbound_endpoint | protocol, auth, mapping | depends | wire+auth+transform |
+| inbound_endpoint | protocol, auth, mapping | depends | wire+auth+transform |
+| health_check | outbound_endpoint | depends | liveness probe |
+| retry_policy | outbound_endpoint | depends | retry on failure |
+| agent/workflow | endpoints | depends | runtime callers |
 ## Boundary Table
 | connector IS | connector IS NOT |
 |-------------|-----------------|
-| Bidirectional integration — sends outbound AND receives inbound | A unidirectional API consumer (that is client) |
-| Defines data mapping and transform rules between schemas | An HTML/DOM data extractor (that is scraper) |
-| Handles webhooks, streams, pub/sub event reception | A tool exposed via MCP protocol (that is mcp_server) |
-| Includes health check and liveness monitoring | A reusable phased capability (that is skill) |
+| Bidirectional integration (send+receive) | Unidirectional API consumer (api_client) |
+| Data mapping between schemas | HTML/DOM extractor (scraper) |
+| Webhooks, streams, pub/sub | MCP protocol server (mcp_server) |
+| Health check and liveness | Phased capability (skill) |
+## Confusion Zones
+| Scenario | Seems Like | Actually Is | Rule |
+|---|---|---|---|
+| Search data in database | db_connector | retriever | retriever=vector/keyword; db_connector=structured SQL |
+| Call external REST API | db_connector | api_client | api_client=unidirectional; db_connector=data store access |
+| Receive event from service | db_connector | webhook | webhook=HTTP event; db_connector=query/execute |
+## Decision Tree
+- Structured data query (SQL)? → db_connector
+- Vector/keyword search? → retriever
+- External API call? → api_client
+- Receive inbound events? → webhook
+## Neighbor Comparison
+| Dim | db_connector | retriever | Diff |
+|---|---|---|---|
+| Query | SQL/GraphQL | Vector similarity | Different query language |
+| Data | Structured rows | Unstructured chunks | Different data model |
+| Index | B-tree/hash | HNSW/IVF | Different index types |

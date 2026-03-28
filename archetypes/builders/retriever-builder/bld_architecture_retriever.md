@@ -16,14 +16,14 @@ tags: [architecture, retriever, P10, RAG, vector-search, component-map]
 
 | Component | Role | Examples |
 |-----------|------|---------|
-| query_encoder | Converts query text to embedding vector | OpenAI Embeddings, Cohere Embed, nomic-embed-text |
-| vector_store | Persists and indexes document vectors + metadata | Chroma, Pinecone, FAISS, Qdrant, Weaviate, Milvus |
-| similarity_engine | ANN search over stored vectors | HNSW, IVF_FLAT, ScaNN, DiskANN |
-| keyword_index | BM25/TF-IDF inverted index (hybrid only) | Elasticsearch, Qdrant sparse, Weaviate BM25 |
-| fusion_layer | Combines vector + keyword scores (hybrid only) | RRF (k=60), weighted alpha blend |
-| metadata_filter | Pre-filters document scope before similarity | Where clauses, payload filters |
-| reranker | Second-pass precision scoring of top_k results | Cohere rerank, ColBERT, cross-encoder |
-| result_formatter | Packages chunks + metadata for downstream LLM | Document objects, score + source metadata |
+| query_encoder | Converts query to embedding vector | OpenAI, Cohere, nomic-embed |
+| vector_store | Persists document vectors + metadata | Chroma, Pinecone, FAISS, Qdrant |
+| similarity_engine | ANN search over vectors | HNSW, IVF_FLAT, ScaNN |
+| keyword_index | BM25/TF-IDF (hybrid only) | Elasticsearch, Qdrant sparse |
+| fusion_layer | Combines vector+keyword scores | RRF (k=60), weighted blend |
+| metadata_filter | Pre-filters before similarity | Where clauses, payload filters |
+| reranker | Second-pass precision scoring | Cohere rerank, cross-encoder |
+| result_formatter | Packages chunks for LLM | Document objects, score+source |
 
 ## Dependency Graph (ASCII)
 
@@ -81,10 +81,23 @@ RANKING   : reranker -> precision-ranked top results (optional)
 OUTPUT    : list of (chunk_text, metadata, score) tuples
 ```
 
-## P04 Position in RAG Pipeline
-
-```
-[document_loader] --> [embedding store] --> [retriever] --> [LLM generator]
-   (ingestion)          (persistence)        (query)         (generation)
-```
-Retriever is stateless at query time — it reads, never writes to the store.
+## RAG Position
+`[document_loader] → [embedding store] → [retriever] → [LLM generator]`
+Stateless at query time — reads, never writes.
+## Confusion Zones
+| Scenario | Seems Like | Actually Is | Rule |
+|---|---|---|---|
+| Search web for info | retriever | search_tool | search_tool=external API; retriever=local index |
+| Load PDF into store | retriever | document_loader | loader=ingest; retriever=query existing store |
+| Query SQL database | retriever | db_connector | db_connector=structured SQL; retriever=vector/keyword |
+## Decision Tree
+- Search local vector/keyword index? → retriever
+- Search external web API? → search_tool
+- Ingest files into chunks? → document_loader
+- Query structured database? → db_connector
+## Neighbor Comparison
+| Dimension | retriever | search_tool | Difference |
+|---|---|---|---|
+| Source | Local index | External API | retriever is self-hosted |
+| Latency | <100ms | 200-2000ms | Local is faster |
+| Control | Full (index, model) | Provider-dependent | retriever is customizable |

@@ -10,7 +10,7 @@ updated: 2026-03-28
 author: EDISON
 tags: [architecture, notifier, P04, boundary, components]
 quality: null
-tldr: "Notifier = push delivery to users/systems. Components: channel_router, template_engine, priority_queue, rate_limiter, delivery_engine, retry_handler, provider_adapter."
+tldr: "Notifier = push delivery. Components: channel_router, template_engine, priority_queue, rate_limiter, delivery_engine, retry_handler."
 ---
 # Architecture: notifier
 
@@ -62,3 +62,20 @@ tldr: "Notifier = push delivery to users/systems. Components: channel_router, te
 - Artifact spec: max 1024 bytes body (compact spec, not implementation)
 - No SDK code in spec — provider_adapter is implementation concern
 - Notifier spec consumed by: code-gen, agent, manual implementation
+## Confusion Zones
+| Scenario | Seems Like | Actually Is | Rule |
+|---|---|---|---|
+| Receive webhook from Slack | notifier | webhook | webhook=inbound event; notifier=outbound push only |
+| Send API request to service | notifier | api_client | api_client=request-response; notifier=fire-and-forget |
+| Post message to Discord bot | notifier | mcp_server | mcp_server=protocol; notifier=delivery channel |
+## Decision Tree
+- Push message to user/channel? → notifier
+- Receive inbound event? → webhook
+- Full API integration? → api_client
+- Bidirectional exchange? → connector
+## Neighbor Comparison
+| Dimension | notifier | webhook | Difference |
+|---|---|---|---|
+| Direction | Outbound (push) | Inbound (receive) | Opposite data flow |
+| Pattern | Fire-and-forget | Event-driven handler | notifier sends; webhook listens |
+| Retry | Built-in backoff | Caller retries | Different retry ownership |
