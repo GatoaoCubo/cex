@@ -6,3 +6,6 @@ __pycache__/
 _config/*.credentials
 _config/client_secret.json
 _config/token.json
+
+# Regenerable index
+.cex/index.db
