@@ -1,0 +1,115 @@
+---
+kind: examples
+id: bld_examples_retriever
+pillar: P07
+llm_function: INJECT
+version: 1.0.0
+created: 2026-03-28
+updated: 2026-03-28
+author: EDISON
+quality: null
+tags: [examples, retriever, P07, RAG, vector-search, hybrid-search]
+---
+# Examples: retriever-builder
+
+## Golden Example
+
+**INPUT**: "Create a hybrid retriever for a Qdrant store using Cohere embed-v3 embeddings
+with reranking for a technical documentation RAG system."
+
+**OUTPUT**:
+```markdown
+---
+id: p04_retr_qdrant_hybrid_docs
+kind: retriever
+pillar: P04
+version: 1.0.0
+created: 2026-03-28
+updated: 2026-03-28
+author: retriever-builder
+name: "Qdrant Hybrid Retriever — Technical Docs"
+store_type: qdrant
+embedding_model: embed-english-v3.0
+similarity_metric: dot_product
+top_k: 50
+search_type: hybrid
+reranker: rerank-english-v3.0
+metadata_filters: [source, version, category, language]
+namespace: technical_docs
+quality: null
+tags: [retriever, qdrant, hybrid, cohere, reranking, technical-docs]
+tldr: "Qdrant hybrid retriever using Cohere embed-v3 + BM25 with Cohere reranking for technical documentation RAG."
+description: "Searches technical documentation collection using dense+sparse fusion, reranks top-50 to top-5 for precision."
+---
+
+## Overview
+Qdrant vector store serving a technical documentation corpus. Uses Cohere embed-english-v3.0
+(1024d, natively normalized) as the dense encoder. Designed for developer documentation RAG
+where exact API names (keyword) and semantic intent (vector) both matter.
+
+## Search Strategy
+Hybrid search combining Qdrant's dense vectors with sparse BM25 index. Fusion via
+Reciprocal Rank Fusion (RRF, k=60): balances semantic similarity and exact term matching
+for technical queries like "list all methods of class X" or "explain async context manager."
+dot_product metric used because Cohere embed-v3 vectors are natively normalized.
+Cohere rerank-english-v3.0 applied after first-pass top_k=50 to return final top-5.
+
+## Configuration
+- top_k: 50 (first-pass); reranker returns top 5 for generation
+- metadata_filters: source (file path), version (doc version string), category (api/guide/tutorial), language (en/pt)
+- namespace: technical_docs
+- score_threshold: 0.35 (discard low-confidence matches before reranking)
+- chunk_size_assumption: 512 tokens from document_loader
+
+## Integration
+- SDK/library: qdrant-client + langchain QdrantVectorStore + cohere Python SDK
+- auth: QDRANT_API_KEY env var (cloud) or none (local http://localhost:6333)
+- connection: QDRANT_URL + QDRANT_API_KEY env vars; collection name = "technical_docs"
+- embedding_call: CohereEmbeddings(model="embed-english-v3.0", input_type="search_query")
+```
+
+**WHY GOLDEN** (gate annotations):
+- H01-H10: all pass — valid YAML, id matches filename, kind/quality correct, all required fields, enums valid, top_k=50, body well under 2048 bytes
+- S01: qdrant cloud/local both mentioned (1.0)
+- S02: embed-english-v3.0, Cohere, 1024d (1.0)
+- S03: dot_product justified by native normalization (1.0)
+- S04: RRF k=60 specified (0.8)
+- S05: reranker model + trigger (after top_k=50) + output (top-5) (0.8)
+- S06: 4 filter fields with types (0.8)
+- S07: namespace = technical_docs (0.7)
+- S08: SDK, auth env var, connection pattern, embedding call (1.0)
+- S09: "NOT for web search, file ingestion, or SQL" implied by boundary in overview (0.9)
+- S10: developer docs use case, why hybrid matters for API names (0.9)
+- S11: store + model + k = fully testable (0.8)
+- S12: score_threshold noted (0.5)
+Score: ~9.4 / 10
+
+---
+
+## Anti-Example
+
+**INPUT**: "Create retriever"
+
+**BAD OUTPUT**:
+```markdown
+---
+id: retriever_1
+kind: retriever
+store_type: vector
+embedding_model: embeddings
+top_k: 100
+quality: 8.5
+tags: [search]
+---
+Searches documents using vectors.
+```
+
+**FAILURES**:
+- H01: parses but H02 fails — id "retriever_1" does not match `^p04_retr_[a-z][a-z0-9_]+$`
+- H03: kind == "retriever" passes but H04 fails — quality: 8.5 (must be null)
+- H05: missing name, similarity_metric; pillar, version, created, updated, author, tldr all absent
+- H06: store_type "vector" is not a valid enum value
+- H07: embedding_model "embeddings" is too vague — no provider or model name
+- H08: similarity_metric absent
+- S01-S12: score ~1.2/10 — no strategy, no config, no integration, no boundary clarity
+- Body is 1 line — no required sections (Overview, Search Strategy, Configuration, Integration)
