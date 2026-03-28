@@ -1,20 +1,7 @@
-# P08 Architecture Schema v4.0
-# v2.0: machine_format per kind
 pillar: P08
 name: Architecture
 description: COMO escala
 kinds:
-  satellite_spec:
-    description: Especificacao de satelite (role, model, MCPs)
-    boundary: Especificacao de satelite inteiro (role, model, MCPs). NAO eh agent
-      (P02, agente individual) nem boot_config (P02, por provider).
-    layer: spec
-    core: true
-    machine_format: yaml
-    naming: p08_sat_{{name}}.md + .yaml
-    constraints:
-      max_bytes: 4096
-    llm_function: BECOME
   pattern:
     description: 'Pattern reutilizavel (ex: continuous batching)'
     boundary: Pattern reutilizavel de arquitetura. NAO eh law (inviolavel) nem workflow
@@ -59,3 +46,6 @@ kinds:
     constraints:
       max_bytes: 3072
     llm_function: INJECT
+  director:
+    description: Crew orchestrator that composes and coordinates multiple builders
+    naming: ex_director_{topic}.md

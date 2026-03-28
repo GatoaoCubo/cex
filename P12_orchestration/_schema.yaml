@@ -1,5 +1,3 @@
-# P12 Orchestration Schema v4.0
-# v4.0: +crew type, llm_function on all types
 pillar: P12
 name: Orchestration
 description: COMO coordena
@@ -70,15 +68,3 @@ kinds:
     constraints:
       max_bytes: 3072
     llm_function: REASON
-  crew:
-    description: Grupo multi-agente com protocolo de coordenacao (agent ensemble)
-    boundary: Protocolo que define COMO N agentes colaboram. NAO eh workflow (sequencia
-      de steps) nem dag (grafo de dependencias). Crew define QUEM participa, COMO
-      se comunicam, QUANDO terminam.
-    layer: runtime
-    core: true
-    machine_format: yaml
-    naming: p12_crew_{{name}}.md
-    constraints:
-      max_bytes: 4096
-    llm_function: COLLABORATE

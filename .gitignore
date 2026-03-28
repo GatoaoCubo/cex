@@ -9,3 +9,18 @@ _config/token.json
 
 # Regenerable index
 .cex/index.db
+
+# === CEX Cleanup 2026-03-28 ===
+# Proof artifacts (8.5MB rebuild prompts — ephemeral)
+_tools/proof/
+
+# IDE configs
+.obsidian/
+.cursorrules
+.windsurfrules
+
+# Runtime caches
+.cex/index.db
+__pycache__/
+*.pyc
+_archive/

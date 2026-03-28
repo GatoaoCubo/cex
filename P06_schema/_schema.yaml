@@ -57,27 +57,3 @@ kinds:
     constraints:
       max_bytes: 3072
     llm_function: GOVERN
-  artifact_blueprint:
-    description: Blueprint para geracao de artefatos (shape com sections, limites,
-      campos)
-    boundary: Meta-template que define COMO gerar um artefato. NAO eh prompt_template
-      P03 (instrucao ao LLM) nem type_def (definicao abstrata de tipo).
-    layer: spec
-    core: true
-    machine_format: yaml
-    naming: p06_bp_{{artifact}}.md
-    constraints:
-      max_bytes: 8192
-    llm_function: CONSTRAIN
-  grammar:
-    description: Constraint formal de geracao (BNF, EBNF, regex, FSM)
-    boundary: Constraint formal que restringe tokens durante geracao. NAO eh validator
-      (pos-geracao) nem response_format P05 (instrucao textual). Grammar opera no
-      DECODER do LLM.
-    layer: spec
-    core: false
-    machine_format: yaml
-    naming: p06_gram_{{format}}.yaml
-    constraints:
-      max_bytes: 3072
-    llm_function: CONSTRAIN

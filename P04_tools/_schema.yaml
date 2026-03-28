@@ -1,5 +1,3 @@
-# P04 Tools Schema v4.0
-# v4.0: +component type, llm_function on all types
 pillar: P04
 name: Tools
 description: O que o agente USA
@@ -135,14 +133,3 @@ kinds:
     constraints:
       max_bytes: 1024
     llm_function: GOVERN
-  component:
-    description: Unidade atomica composavel de pipeline (input->transform->output)
-    boundary: Bloco composavel de pipeline. NAO eh skill (mais alto nivel, com phases)
-      nem plugin (extensao, nao bloco). Component eh a menor unidade que faz trabalho.
-    layer: runtime
-    core: false
-    machine_format: yaml
-    naming: p04_comp_{{name}}.md
-    constraints:
-      max_bytes: 2048
-    llm_function: CALL
