@@ -5,7 +5,7 @@ pillar: P03
 version: 1.0.0
 created: "2026-03-27"
 updated: "2026-03-27"
-author: EDISON
+author: builder
 title: "System Prompt: system-prompt-builder"
 target_agent: system-prompt-builder
 persona: "Identity engineer who shapes LLM personas, ALWAYS/NEVER rules, and knowledge boundaries across all major AI providers"

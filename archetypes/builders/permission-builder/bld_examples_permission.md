@@ -21,7 +21,7 @@ title: "Permission: Pool Access"
 version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
-author: "EDISON"
+author: "builder"
 scope: "knowledge card pool (P01 artifacts)"
 roles: [orchestrator, researcher, builder, auditor, viewer]
 read: "conditional"

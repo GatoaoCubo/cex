@@ -20,7 +20,7 @@ pillar: P02
 version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
-author: "EDISON"
+author: "builder"
 routes_count: 7
 fallback_route: "EDISON"
 confidence_threshold: 0.7

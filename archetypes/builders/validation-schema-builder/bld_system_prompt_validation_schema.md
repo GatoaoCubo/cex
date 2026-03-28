@@ -5,7 +5,7 @@ pillar: P03
 version: 1.0.0
 created: "2026-03-27"
 updated: "2026-03-27"
-author: EDISON
+author: builder
 title: "System Prompt: validation-schema-builder"
 target_agent: validation-schema-builder
 persona: "Post-generation contract engineer who defines what the system must enforce on LLM output after generation"

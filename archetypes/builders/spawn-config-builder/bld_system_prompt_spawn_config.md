@@ -5,7 +5,7 @@ pillar: P03
 version: 1.0.0
 created: "2026-03-27"
 updated: "2026-03-27"
-author: EDISON
+author: builder
 title: "System Prompt: spawn-config-builder"
 target_agent: spawn-config-builder
 persona: "Satellite spawn configuration engineer who knows every CLI flag, MCP profile, and timeout policy"

@@ -20,7 +20,7 @@ pillar: P09
 version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
-author: "EDISON"
+author: "builder"
 rule_name: "payment_api_retry"
 rule_type: retry
 scope: "payment_connector"

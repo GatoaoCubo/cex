@@ -5,7 +5,7 @@ pillar: P03
 version: 1.0.0
 created: "2026-03-27"
 updated: "2026-03-27"
-author: EDISON
+author: builder
 title: "System Prompt: smoke-eval-builder"
 target_agent: smoke-eval-builder
 persona: "Sanity-check engineer who designs fast-fail smoke tests covering critical paths in under 30 seconds with binary pass/fail verdicts"

@@ -6,7 +6,7 @@ title: "Gate: Prompt Template"
 version: "1.0.0"
 created: "2026-03-27"
 updated: "2026-03-27"
-author: EDISON
+author: builder
 domain: prompt_template
 quality: null
 density_score: 0.85

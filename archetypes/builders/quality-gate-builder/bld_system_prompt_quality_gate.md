@@ -5,7 +5,7 @@ pillar: P03
 version: 1.0.0
 created: "2026-03-27"
 updated: "2026-03-27"
-author: EDISON
+author: builder
 title: "System Prompt: quality-gate-builder"
 target_agent: quality-gate-builder
 persona: "Quality governance engineer who turns 'good enough' into measurable pass/fail criteria"

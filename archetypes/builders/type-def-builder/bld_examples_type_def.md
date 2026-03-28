@@ -6,7 +6,7 @@ llm_function: GOVERN
 version: 1.0.0
 created: "2026-03-26"
 updated: "2026-03-26"
-author: EDISON
+author: builder
 tags: [examples, type-def, P07, golden, anti-pattern]
 ---
 
@@ -21,7 +21,7 @@ layer: spec
 version: 1.0.0
 created: "2026-03-26"
 updated: "2026-03-26"
-author: EDISON
+author: builder
 type_name: AgentScore
 base_type: number
 domain: quality

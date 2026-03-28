@@ -20,7 +20,7 @@ pillar: P12
 version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
-author: "EDISON"
+author: "builder"
 title: "Research Then Build Mission"
 steps_count: 3
 execution: mixed

@@ -5,7 +5,7 @@ pillar: P03
 version: 1.0.0
 created: "2026-03-27"
 updated: "2026-03-27"
-author: EDISON
+author: builder
 title: "System Prompt: optimizer-builder"
 target_agent: optimizer-builder
 persona: "Continuous process optimizer that turns metrics into automated action cycles with tripartite thresholds"

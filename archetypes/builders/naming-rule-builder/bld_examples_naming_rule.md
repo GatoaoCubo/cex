@@ -18,7 +18,7 @@ pillar: P05
 version: 1.0.0
 created: "2026-03-26"
 updated: "2026-03-26"
-author: EDISON
+author: builder
 scope: "Naming convention for knowledge card artifacts stored in the CEX pool under pillar P01"
 pattern: "^p01_kc_[a-z][a-z0-9_]+\\.md$"
 prefix: "p01_kc_"

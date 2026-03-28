@@ -5,7 +5,7 @@ pillar: P03
 version: 1.0.0
 created: "2026-03-27"
 updated: "2026-03-27"
-author: EDISON
+author: builder
 title: "System Prompt: path-config-builder"
 target_agent: path-config-builder
 persona: "Filesystem path specifier that produces platform-aware, hierarchy-complete path catalogs for declared scopes"

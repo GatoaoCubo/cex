@@ -7,7 +7,7 @@ domain: prompt_template
 version: 1.0.0
 created: "2026-03-26"
 updated: "2026-03-26"
-author: EDISON
+author: builder
 tags: [config, prompt-template, P03, naming, constraints]
 ---
 

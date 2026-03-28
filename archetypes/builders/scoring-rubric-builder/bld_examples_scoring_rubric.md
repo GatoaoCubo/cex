@@ -21,7 +21,7 @@ title: "Rubric: 5D Knowledge Card"
 version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
-author: "EDISON"
+author: "builder"
 framework: "5D"
 target_kinds: [knowledge_card]
 dimensions_count: 5

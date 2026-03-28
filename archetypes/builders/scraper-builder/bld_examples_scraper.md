@@ -20,7 +20,7 @@ pillar: P04
 version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
-author: "EDISON"
+author: "builder"
 name: "Marketplace Product Scraper"
 target: "https://marketplace.example.com/search"
 selectors:

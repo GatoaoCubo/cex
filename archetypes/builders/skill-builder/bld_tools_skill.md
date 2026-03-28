@@ -20,7 +20,7 @@ purpose: Tools and APIs available for skill production
 |--------|----------|------|
 | CEX Schema | P04_tools/_schema.yaml | Field definitions, skill kind |
 | CEX Examples | P04_tools/examples/ | Real skill artifacts |
-| CODEXA Skills | records/skills/*/SKILL.md | 118 existing skills corpus |
+| Framework Skills | records/skills/*/SKILL.md | 118 existing skills corpus |
 | SEED_BANK | archetypes/SEED_BANK.yaml | Seeds for P04_skill |
 | TAXONOMY | archetypes/TAXONOMY_LAYERS.yaml | Layer position, overlaps |
 

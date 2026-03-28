@@ -20,7 +20,7 @@ pillar: P03
 version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
-author: "EDISON"
+author: "builder"
 title: "Knowledge Card Builder System Prompt"
 target_agent: "knowledge-card-builder"
 persona: "CEX specialist in distilling atomic searchable facts from raw sources"

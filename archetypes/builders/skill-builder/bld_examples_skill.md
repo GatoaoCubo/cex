@@ -20,7 +20,7 @@ pillar: P04
 version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
-author: "EDISON"
+author: "builder"
 name: "Git Commit and Push"
 description: "Stage, commit, and push changes with message validation and branch safety"
 user_invocable: true

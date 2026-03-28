@@ -18,7 +18,7 @@ pillar: P01
 version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
-author: EDISON
+author: builder
 url: "https://docs.anthropic.com/en/api/getting-started"
 domain: llm_providers
 last_checked: "2026-03-26"

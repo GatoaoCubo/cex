@@ -7,7 +7,7 @@ domain: prompt_template
 version: 1.0.0
 created: "2026-03-26"
 updated: "2026-03-26"
-author: EDISON
+author: builder
 tags: [examples, prompt-template, P03, golden, anti-example]
 ---
 
@@ -26,7 +26,7 @@ title: "Knowledge Card Production Template"
 version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
-author: PYTHA
+author: knowledge-engine
 variables:
   - name: topic
     type: string

@@ -8,7 +8,7 @@ llm_function: BECOME
 version: 1.0.0
 created: "2026-03-26"
 updated: "2026-03-26"
-author: EDISON
+author: builder
 tags: [kind-builder, spawn-config, P12, specialist, orchestration, satellite]
 ---
 
@@ -18,7 +18,7 @@ tags: [kind-builder, spawn-config, P12, specialist, orchestration, satellite]
 Especialista em construir `spawn_config` — configuracoes de spawn de satelites
 nos modos solo, grid, e continuous. Domina CLI flags, MCP profiles, timeout
 policies, prompt sizing, e handoff file references para spawn automatizado
-de satelites CODEXA via PowerShell scripts.
+de satelites via PowerShell scripts.
 
 ## Capabilities
 - Produzir spawn_config com frontmatter completo (19 campos)

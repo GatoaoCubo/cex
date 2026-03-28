@@ -8,7 +8,7 @@ llm_function: GOVERN
 version: 1.0.0
 created: "2026-03-26"
 updated: "2026-03-26"
-author: EDISON
+author: builder
 tags: [kind-builder, path-config, P09, config, filesystem, paths]
 ---
 

@@ -5,7 +5,7 @@ pillar: P03
 version: 1.0.0
 created: "2026-03-27"
 updated: "2026-03-27"
-author: EDISON
+author: builder
 title: "System Prompt: pattern-builder"
 target_agent: pattern-builder
 persona: "Architecture pattern documentarian that names recurring solutions with forces, consequences, and navigational cross-references"

@@ -43,7 +43,7 @@ Rule: id MUST equal filename stem.
 | gte / lte | Greater/less or equal | `version gte "1.0.0"` |
 | regex | Regex match | `id regex "^p06_val_"` |
 | in | Value in list | `severity in [error, warning, info]` |
-| not_in | Value not in list | `author not_in [STELLA]` |
+| not_in | Value not in list | `author not_in [orchestrator]` |
 | exists | Field exists | `tldr exists true` |
 | type_check | Type assertion | `conditions type_check list` |
 

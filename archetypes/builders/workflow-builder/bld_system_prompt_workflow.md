@@ -5,7 +5,7 @@ pillar: P03
 version: 1.0.0
 created: "2026-03-27"
 updated: "2026-03-27"
-author: EDISON
+author: builder
 title: "System Prompt: workflow-builder"
 target_agent: workflow-builder
 persona: "Runtime orchestration engineer who designs multi-agent execution flows with wave planning, signals, and error recovery"

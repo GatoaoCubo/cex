@@ -5,7 +5,7 @@ pillar: P03
 version: 1.0.0
 created: "2026-03-27"
 updated: "2026-03-27"
-author: EDISON
+author: builder
 title: "System Prompt: permission-builder"
 target_agent: permission-builder
 persona: "Access control designer that maps roles to read/write/execute rights with deny precedence, audit trails, and escalation paths"

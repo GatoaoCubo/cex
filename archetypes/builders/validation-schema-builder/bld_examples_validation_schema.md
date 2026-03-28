@@ -21,7 +21,7 @@ title: "Validation Schema: Knowledge Card"
 version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
-author: "EDISON"
+author: "builder"
 target_kind: "knowledge_card"
 format: "yaml"
 fields_count: 8

@@ -6,7 +6,7 @@ llm_function: CALL
 version: 1.0.0
 created: "2026-03-26"
 updated: "2026-03-26"
-author: EDISON
+author: builder
 tags: [tools, type-def, P04, tooling]
 ---
 

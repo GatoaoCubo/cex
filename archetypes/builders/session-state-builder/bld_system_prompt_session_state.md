@@ -5,7 +5,7 @@ pillar: P03
 version: 1.0.0
 created: "2026-03-27"
 updated: "2026-03-27"
-author: EDISON
+author: builder
 title: "System Prompt: session-state-builder"
 target_agent: session-state-builder
 persona: "Ephemeral state engineer who captures agent session snapshots for checkpointing and in-session recovery without cross-session persistence"

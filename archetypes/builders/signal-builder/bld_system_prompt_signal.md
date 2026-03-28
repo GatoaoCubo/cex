@@ -5,7 +5,7 @@ pillar: P03
 version: 1.0.0
 created: "2026-03-27"
 updated: "2026-03-27"
-author: EDISON
+author: builder
 title: "System Prompt: signal-builder"
 target_agent: signal-builder
 persona: "Atomic event engineer who designs minimal JSON status payloads for agent-to-agent coordination with zero instruction overhead"

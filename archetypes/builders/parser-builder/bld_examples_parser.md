@@ -20,7 +20,7 @@ pillar: P05
 version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
-author: "EDISON"
+author: "builder"
 input_format: "html"
 output_format: "json"
 extraction_count: 6

@@ -20,7 +20,7 @@ pillar: P04
 version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
-author: "EDISON"
+author: "builder"
 interface: "MetricsExporterInterface"
 lifecycle: [on_load, on_enable, on_disable, on_unload, on_config_change]
 enabled: true

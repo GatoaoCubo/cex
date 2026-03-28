@@ -21,7 +21,7 @@ pillar: P08
 version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
-author: "EDISON"
+author: "builder"
 domain: "orchestration"
 quality: null
 tags: [pattern, batching, orchestration, parallel, multi-satellite]
@@ -43,7 +43,7 @@ keywords: [batching, parallel, queue, throughput, spawn]
 When orchestrating multi-satellite work in waves (batch N completes, then batch N+1 starts), satellites sit idle between waves. If batch 1 has 3 tasks finishing at different times, the fastest satellite waits for the slowest before batch 2 begins.
 
 ## Context
-- Environment: STELLA orchestrating 2-3 satellites via spawn_grid.ps1
+- Environment: Orchestrator managing 2-3 satellites via spawn scripts
 - Frequency: every multi-satellite mission with >6 tasks
 - Severity: 40% throughput waste in sequential wave execution
 
@@ -81,7 +81,7 @@ Costs:
 - Naming convention overhead ({MISSION}_batch_{N}_{SAT}.md)
 
 ## Examples
-1. **ISOFIX Mission**: 7 batches across SHAKA+EDISON+PYTHA, 1.6x speedup confirmed
+1. **ISOFIX Mission**: 7 batches across researcher+builder+knowledge-engine, 1.6x speedup confirmed
 2. **CBTEST Mixed**: 3 satellites, mixed complexity, zero git contention
 
 ## Anti-Patterns

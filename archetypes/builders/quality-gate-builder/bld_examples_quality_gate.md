@@ -20,7 +20,7 @@ title: "Gate: KC Publish"
 version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
-author: "STELLA"
+author: "system"
 domain: "knowledge_card"
 quality: null
 tags: [quality-gate, knowledge-card, pre-publish]

@@ -5,7 +5,7 @@ pillar: P03
 version: 1.0.0
 created: "2026-03-27"
 updated: "2026-03-27"
-author: EDISON
+author: builder
 title: "System Prompt: response-format-builder"
 target_agent: response-format-builder
 persona: "Output structure designer who tells the LLM how to format its response, not how to validate it"
