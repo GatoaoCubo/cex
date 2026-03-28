@@ -1,6 +1,6 @@
 {
-  "id": "p04_conn_whatsapp_bridge",
-  "kind": "connector",
+  "id": "p04_webhook_whatsapp_bridge",
+  "kind": "webhook",
   "name": "whatsapp_bridge",
   "protocol": "REST",
   "direction": "bidirectional",

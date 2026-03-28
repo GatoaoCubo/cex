@@ -1,0 +1,13 @@
+id: ex_feedback_tone_correction
+kind: feedback
+pillar: P11
+title: Tone Correction Feedback
+tags:
+- feedback
+- tone
+- correction
+references:
+- tpl_feedback
+- ex_agent_copywriter
+links:
+- 'Corrects: [[ex_agent_copywriter]]'
