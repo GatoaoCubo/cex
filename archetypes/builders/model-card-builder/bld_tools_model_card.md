@@ -7,7 +7,6 @@ purpose: Tools and APIs available for model_card production
 ---
 
 # Tools: model-card-builder
-
 ## Production Tools
 | Tool | Purpose | When | Status |
 |------|---------|------|--------|
@@ -15,7 +14,6 @@ purpose: Tools and APIs available for model_card production
 | validate_kc.py | Validate KC artifacts (reference pattern) | — | ACTIVE (KC only) |
 | validate_artifact.py | Validate any artifact kind via builder gates | Phase 3 | [PLANNED] |
 | cex_forge.py | Generate artifact from seeds | Alternative compose | [PLANNED] |
-
 ## Data Sources (APIs)
 | Source | URL | Data |
 |--------|-----|------|
@@ -27,7 +25,6 @@ purpose: Tools and APIs available for model_card production
 | Google pricing | https://ai.google.dev/pricing | Gemini pricing |
 | LiteLLM registry | https://github.com/BerriAI/litellm | 2593 models JSON |
 | HuggingFace API | https://huggingface.co/api/models/{id} | Model metadata |
-
 ## Interim Validation (until validate_artifact.py exists)
 Manually check each QUALITY_GATES.md gate against produced artifact.
 All 10 HARD gates must pass. SOFT gates contribute to score.

@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: glossary_entry
-
 ## Frontmatter Fields
-
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string (p01_gl_{term}) | YES | - | Namespace compliance |
@@ -33,17 +31,14 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | quality | null | YES | null | Never self-score |
 | tags | list[string], len >= 3 | YES | - | Must include "glossary" |
 | tldr | string <= 160ch | YES | - | Dense summary |
-
 ## ID Pattern
 Regex: `^p01_gl_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Body Structure (required sections)
 1. `## Definition` — the concise definition (max 3 lines)
 2. `## Usage` — where and how the term appears
 3. `## Disambiguation` — clarification vs similar terms (if needed)
 4. `## Related Terms` — cross-references to other glossary entries
-
 ## Constraints
 - max_bytes: 512 (body only)
 - max_definition_lines: 3

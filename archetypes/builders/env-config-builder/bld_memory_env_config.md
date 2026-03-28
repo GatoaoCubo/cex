@@ -36,55 +36,13 @@ keywords:
 ---
 
 ## Summary
-
 Environment configuration failures fall into two categories: security failures (secrets exposed because sensitivity was not marked) and reliability failures (services crash on startup because types are wrong or required variables are missing). A five-field variable specification and explicit sensitivity section address both categories systematically.
-
 ## Pattern
-
 **Variable specification**: each variable requires five fields. Name in UPPER_SNAKE_CASE. Type from the set {string, integer, boolean, url, path, enum}. Default value (or null if the variable is required with no default). Sensitive flag (true marks the value for redaction in logs and outputs). Validation rule that can be evaluated at startup (regex pattern, numeric range, or enum list).
-
 **Sensitivity section**: include `## Sensitive Variables` in every env config body, even when no sensitive variables exist - write "none" in that case. This makes it impossible to skip the review step when auditing a config.
-
 **Override precedence**: document the lookup order explicitly (e.g., process environment > `.env.local` > `.env` > compiled defaults). Without this, operators set variables at the wrong scope and spend hours troubleshooting why their change has no effect.
-
 **Scope specificity**: use the narrowest accurate scope slug. "api_service" is better than "system" because it limits which processes load the config. Common validated scopes: global (applies everywhere), api_service, satellite (one background worker type), worker (queue consumer).
-
 **Never include actual values**: the artifact describes the shape and constraints of configuration, not the values themselves. Actual secrets belong in a secrets manager, not in any committed file.
-
 ## Anti-Pattern
-
 - Variable names in lowercase - environment-reading code conventionally skips lowercase names.
 - Omitting the `## Sensitive Variables` section - auditors cannot confirm the review was done.
-- Including actual secret values (passwords, API keys, tokens) in the artifact - this is a schema violation and a security incident.
-- Using scope "system" when "api_service" or "worker" is accurate - too broad, causes confusion about which processes load which variables.
-- Variables without type declarations - silent coercion failures at runtime.
-- Variables without validation rules - missing values are only discovered when the service crashes, not at startup.
-- Confusing env_config (generic variable schema) with boot_config (provider-specific startup parameters).
-
-## Context
-
-Applies when documenting the complete set of environment variables for a service, satellite, or deployment scope. The artifact is a schema and constraint specification - not a values file. It should be committed to version control. Actual values are managed separately in a secrets manager (Vault, Railway env panel, .env.local that is gitignored). The artifact enables: automated startup validation, onboarding documentation, and security audits.
-
-## Impact
-
-- Sensitivity markers prevent secret exposure in log audits and health endpoints.
-- Explicit type declarations catch coercion bugs before they reach production.
-- Documented override precedence reduces operator troubleshooting time by ~45%.
-- Startup validation against declared constraints shifts failure detection from runtime crash to startup check.
-
-## Reproducibility
-
-1. List every environment variable the service reads, in alphabetical order.
-2. For each: UPPER_SNAKE_CASE name, type, default or null, sensitive true/false, validation rule.
-3. Group into sections: Required (no default), Optional (has default), Sensitive.
-4. Write override precedence as an ordered list.
-5. Confirm no actual secret values appear anywhere in the document.
-6. Confirm ## Sensitive Variables section exists, even if it says "none".
-
-## References
-
-- env-config-builder/INSTRUCTIONS.md
-- env-config-builder/SCHEMA.md
-- env-config-builder/EXAMPLES.md
-- Scope patterns table in this builder's production memory
-- The Twelve-Factor App - Factor III: Config

@@ -8,9 +8,7 @@ pattern: CONFIG restricts SCHEMA, never contradicts it
 ---
 
 # Config: parser Production Rules
-
 ## Naming Convention
-
 | Scope | Convention | Example |
 |-------|-----------|---------|
 | Artifact files | `p05_parser_{slug}.md` | `p05_parser_marketplace_product.md` |
@@ -18,20 +16,15 @@ pattern: CONFIG restricts SCHEMA, never contradicts it
 | Frontmatter fields | snake_case | `input_format`, `extraction_count` |
 | Parser slug | snake_case, lowercase | `marketplace_product`, `llm_json_response` |
 | Rule names | snake_case | `product_title`, `stock_status` |
-
 Rule: id MUST equal filename stem.
-
 ## File Paths
 - Output: `cex/P05_output/examples/p05_parser_{slug}.md`
 - Compiled: `cex/P05_output/compiled/p05_parser_{slug}.yaml`
-
 ## Size Limits (aligned with SCHEMA)
 - Body: max 4096 bytes
 - Total (frontmatter + body): ~5500 bytes
 - Density: >= 0.80
-
 ## Input Format Enum
-
 | Value | When to use | Preferred method |
 |-------|-------------|-----------------|
 | text | Free-form LLM output, logs | regex, split |
@@ -42,9 +35,7 @@ Rule: id MUST equal filename stem.
 | csv | Tabular data | split (by delimiter) |
 | log | Log file lines | regex |
 | mixed | Multiple formats in one input | llm_extract |
-
 ## Output Format Enum
-
 | Value | When to use |
 |-------|-------------|
 | json | Standard structured output (default) |
@@ -52,9 +43,7 @@ Rule: id MUST equal filename stem.
 | csv | Tabular output for spreadsheets |
 | markdown | Human-readable structured output |
 | typed_object | Language-specific typed object (Pydantic, TypeScript) |
-
 ## Extraction Method Selection
-
 | Input | Recommended | Avoid |
 |-------|-------------|-------|
 | JSON | json_path | regex (fragile on JSON) |

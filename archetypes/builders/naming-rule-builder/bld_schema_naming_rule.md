@@ -8,18 +8,13 @@ version: 1.0.0
 ---
 
 # Schema — Naming Rule (SOURCE OF TRUTH)
-
 ## ID Pattern
-
 ```
 ^p05_nr_[a-z][a-z0-9_]+$
 ```
-
 Examples of valid IDs: `p05_nr_knowledge_card`, `p05_nr_signal`, `p05_nr_builder_dir`
 Examples of invalid IDs: `p05_nr_KnowledgeCard` (uppercase), `p05_nr_-signal` (hyphen after prefix), `nr_knowledge_card` (missing pillar prefix)
-
 ## Field Definitions
-
 | Field | Type | Required | Constraints |
 |-------|------|----------|-------------|
 | id | string | yes | Must match `^p05_nr_[a-z][a-z0-9_]+$` |
@@ -43,20 +38,15 @@ Examples of invalid IDs: `p05_nr_KnowledgeCard` (uppercase), `p05_nr_-signal` (h
 | tldr | string | yes | One sentence summary, max 160 chars |
 | keywords | list[string] | yes | 5–8 terms, lowercase |
 | density_score | string\|float | yes | `REC` at authoring time; float post-review |
-
 ## Body Structure (4 Required Sections)
-
 ```
 ## Scope
 ## Pattern Definition
 ## Examples
 ## Collision Resolution
 ```
-
 All four sections MUST be present. No additional top-level sections required but permitted.
-
 ## Constraints
-
 | Constraint | Value |
 |------------|-------|
 | Max file size | 4096 bytes |
@@ -67,29 +57,22 @@ All four sections MUST be present. No additional top-level sections required but
 | density_score at creation | Must be `REC` |
 | case_style | Must use exact enum values from allowed list |
 | collision_strategy | Must use exact enum values from allowed list |
-
 ## Enum Values
-
 **case_style**:
 - `snake_case` — segments joined by `_`, all lowercase
 - `kebab-case` — segments joined by `-`, all lowercase
 - `camelCase` — first segment lowercase, subsequent capitalized, no separator
 - `PascalCase` — all segments capitalized, no separator
 - `UPPER_SNAKE` — segments joined by `_`, all uppercase
-
 **collision_strategy**:
 - `append_sequence` — append `_001`, `_002`, etc.
 - `append_hash` — append `_{8hex}`
 - `append_date` — append `_YYYYMMDD`
 - `reject` — refuse to create; surface error to caller
 - `overwrite` — replace existing artifact silently
-
 ## Drift Check
-
 Every field in this schema MUST appear in `OUTPUT_TEMPLATE.md`. Run drift check before publishing:
-
 ```
 Grep: pattern="{{" path=OUTPUT_TEMPLATE.md
 ```
-
 Cross-reference each `{{var}}` against fields above. Zero drift permitted.

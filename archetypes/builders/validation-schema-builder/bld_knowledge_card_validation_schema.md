@@ -8,13 +8,9 @@ sources: validation-schema-builder MANIFEST.md + SCHEMA.md
 ---
 
 # Domain Knowledge: validation_schema
-
 ## Executive Summary
-
 A `validation_schema` (P06) is a post-generation structural contract the system enforces automatically — the LLM never sees it. It differs from `response_format` (injected into the prompt, guides LLM during generation), `validator` (individual explicit pass/fail rule), and `input_schema` (input contract) by being applied silently by infrastructure after output is produced. It defines what fields must exist, their types, constraints, and what happens on failure (`reject`, `warn`, or `auto_fix`).
-
 ## Spec Table
-
 | Property | Value |
 |----------|-------|
 | Pillar | P06 |
@@ -29,9 +25,7 @@ A `validation_schema` (P06) is a post-generation structural contract the system 
 | `quality` field | always `null` |
 | LLM visibility | Never — system-side only |
 | Derivation order | SCHEMA (P06) > TEMPLATE (P03) > CONFIG (P04) |
-
 ## Patterns
-
 | Pattern | Rule |
 |---------|------|
 | JSON types only | `string`, `integer`, `number`, `boolean`, `array`, `object` — no custom types |
@@ -41,9 +35,7 @@ A `validation_schema` (P06) is a post-generation structural contract the system 
 | ID == filename stem | `id` value must exactly match the filename without extension |
 | `strict: true` | Rejects unknown fields; use when schema must be exhaustive |
 | Constraint composition order | type → format → content (avoids confusing error messages) |
-
 **Constraint syntax reference**:
-
 | Constraint | Syntax | Use case |
 |------------|--------|----------|
 | Regex | `pattern: "^p06_vs_[a-z][a-z0-9_]+$"` | IDs, naming |
@@ -52,18 +44,14 @@ A `validation_schema` (P06) is a post-generation structural contract the system 
 | Length | `min_length: 3, max_length: 160` | String limits |
 | Size | `max_bytes: 4096` | Payload limits |
 | List minimum | `len >= 3` | Diversity gates |
-
 **Boundary — what validation_schema is NOT**:
-
 | kind | Why NOT validation_schema |
 |------|--------------------------|
 | `response_format` | Injected into prompt — LLM sees it during generation |
 | `validator` | Explicit named pass/fail rule, not a silent contract |
 | `input_schema` | Governs inputs entering the system, not outputs |
 | `quality_gate` | Weighted scoring barrier — not structural enforcement |
-
 ## Anti-Patterns
-
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
 | Schema injected into prompt | LLM hallucination risk; validation_schema is system-only |
@@ -73,21 +61,9 @@ A `validation_schema` (P06) is a post-generation structural contract the system 
 | `quality` set to a score | Never self-score; governance assigns |
 | Template/config adding unknown fields | Schema is upstream; downstream must not exceed schema |
 | `auto_fix` on lossy coercions | Data loss is unsafe; only coerce safe conversions (string "42" → int 42) |
-
 ## Application
-
 1. Identify `target_kind` — the artifact kind this schema validates
 2. Set `id` = `p06_vs_{scope}`, must equal filename stem
 3. Set `on_failure` globally (can override per-field in body)
 4. Enumerate all fields of the target kind, split into Required and Recommended
 5. Write the Fields Table with all 5 columns per row (Field, Type, Required, Default, Notes)
-6. Apply constraints per field: type → format → content order
-7. Write Failure Handling section: map each `on_failure` mode to specific fields with error messages
-8. Set `strict: true` if unknown fields must be rejected
-9. Set `coercion: true` only if safe type coercions are explicitly allowed
-10. Leave `quality: null` — do not self-score
-
-## References
-
-- validation-schema-builder MANIFEST.md v1.0.0
-- validation-schema-builder SCHEMA.md v2.0.0

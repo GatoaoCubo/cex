@@ -8,13 +8,9 @@ sources: permission-builder MANIFEST.md + SCHEMA.md, NIST RBAC, OWASP Access Con
 ---
 
 # Domain Knowledge: permission
-
 ## Executive Summary
-
 Permissions are declarative access control rules defining WHO can do WHAT (read/write/execute) on WHICH resource. Each permission declares a scope, roles with hierarchical inheritance, operations per role, and a deny-by-default baseline. They differ from guardrails (which prevent safety damage), laws (which mandate operational rules), feature flags (which toggle features), and runtime rules (which control system behavior) by governing access to specific resources through role-based allow/deny lists.
-
 ## Spec Table
-
 | Property | Value |
 |----------|-------|
 | Pillar | P09 (configuration) |
@@ -28,9 +24,7 @@ Permissions are declarative access control rules defining WHO can do WHAT (read/
 | Access levels | read, write, execute |
 | Default access | deny (safe baseline) |
 | Min roles | 1 |
-
 ## Patterns
-
 | Pattern | Application |
 |---------|-------------|
 | Deny-by-default | Default access is "deny"; explicit allow grants access |
@@ -41,9 +35,7 @@ Permissions are declarative access control rules defining WHO can do WHAT (read/
 | Audit trail | Log every access event with timestamp and actor |
 | Escalation path | Temporary elevation needs approver + time limit |
 | Time restrictions | Optional time-window or expiry constraints on grants |
-
 ## Anti-Patterns
-
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
 | No scope field | Permission without scope = permission on everything |
@@ -53,9 +45,7 @@ Permissions are declarative access control rules defining WHO can do WHAT (read/
 | Permanent escalation without expiry | Elevated access must be time-bounded |
 | No audit trail | Cannot detect or investigate unauthorized access |
 | Allow-by-default | Violates least privilege; any new resource is open |
-
 ## Application
-
 1. Define `scope`: which resource or resource class is governed
 2. Set `default_access: deny` (justify if "allow")
 3. Define `roles` list with hierarchy and inheritance rules
@@ -64,9 +54,7 @@ Permissions are declarative access control rules defining WHO can do WHAT (read/
 6. Define `audit_trail`: logged events and retention period
 7. Define `escalation_path`: approver role and max duration
 8. Validate: 8 HARD + 12 SOFT gates, body <= 3072 bytes
-
 ## References
-
 - permission-builder SCHEMA.md v1.0.0
 - NIST RBAC (Role-Based Access Control)
 - OWASP Access Control Cheat Sheet

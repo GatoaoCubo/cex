@@ -1,4 +1,6 @@
 ---
+kind: output_template
+id: bld_output_template_response_format
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} for response_format production
@@ -6,9 +8,7 @@ pattern: derives from SCHEMA.md — no extra fields
 ---
 
 # Output Template: response_format
-
 ```yaml
----
 id: p05_rf_{{format_slug}}
 kind: response_format
 pillar: P05
@@ -32,29 +32,23 @@ density_score: {{0.80_to_1.00}}
 linked_artifacts:
   primary: "{{target_kind_builder}}"
   related: [{{related_artifact_refs}}]
----
-
 ## Format Overview
 {{what_structure_this_defines_and_for_what_task}}
-
 ## Sections
 | # | Section | Description | Required | Constraints |
 |---|---------|-------------|----------|-------------|
 | 1 | {{section_1}} | {{description}} | {{yes/no}} | {{constraints}} |
 | 2 | {{section_2}} | {{description}} | {{yes/no}} | {{constraints}} |
 | 3 | {{section_3}} | {{description}} | {{yes/no}} | {{constraints}} |
-
 ## Example Output
 ```{{format_type}}
 {{complete_example_showing_expected_shape}}
 ```
-
 ## Injection Instructions
 - **Point**: {{system_prompt_or_user_message}}
 - **Position**: {{where_in_the_prompt}}
 - **Template**: "Respond using the following format: {{format_description}}"
 - **Composable**: {{true/false}} — {{explanation}}
-
 ## References
 - {{reference_1}}
 - {{reference_2}}

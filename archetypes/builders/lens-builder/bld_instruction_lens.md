@@ -27,32 +27,21 @@ density_score: 0.87
 ---
 
 ## Context
-
 The lens-builder produces `lens` artifacts (P02) — declarative filters that define how to analyze or interpret other artifacts from a specific perspective. A lens has no capabilities and takes no actions (that is an agent); it does not define routing rules (that is a mental model); it is a pure analytical perspective applied to artifacts.
-
 **Inputs:**
-
 - `$perspective_name (required) - string - "Human-readable name of the viewpoint (e.g. 'security lens', 'cost lens', 'user-experience lens')"`
 - `$focus (required) - string - "The primary analytical concern this lens examines"`
 - `$applies_to (required) - list[string] - "Artifact types or domains this lens filters (e.g. ['api_endpoint', 'agent', 'workflow'])"`
 - `$declared_bias (optional) - string - "Known skew or emphasis this perspective introduces (e.g. 'favors consistency over speed')"`
 - `$interpretation_weight (optional) - float[0.0-1.0] - "Relative importance when multiple lenses are applied simultaneously"`
-
 **Output:** A single `lens` artifact with 20 frontmatter fields and body sections covering perspective, filters, application, and limitations.
-
 **Boundary check before proceeding:**
 - Perspective requires executing actions or calling tools → route to agent-builder
 - Perspective defines when to route tasks → route to mental-model-builder
 - Purpose is purely analytical ("view this artifact through this filter") → proceed
-
----
-
 ## Phases
-
 ### Phase 1: Discover
-
 **Action:** Establish the analytical core and applicability boundaries of the lens.
-
 1. Identify the **perspective**: what analytical viewpoint is needed and what question it answers.
 2. Check for existing lenses covering the same focus and `applies_to` scope — avoid duplicates.
    - If exact duplicate found: return the existing lens id, do not build a new one.
@@ -63,13 +52,9 @@ The lens-builder produces `lens` artifacts (P02) — declarative filters that de
 5. Declare the `bias` direction:
    - Directional: "favors X over Y because Z"
    - Neutral: "treats A and B equally by design" (rare — most lenses have a tilt)
-
 **Verification:** You can answer: "When applied to [artifact type], this lens answers: [specific question]."
-
 ### Phase 2: Compose
-
 **Action:** Write all frontmatter fields and body sections.
-
 1. Read `SCHEMA.md` — source of truth for all 20 fields.
 2. Read `OUTPUT_TEMPLATE.md` — fill every `{{var}}` following SCHEMA constraints.
 3. Fill frontmatter: all 20 fields (`null` valid for optional fields).
@@ -82,13 +67,9 @@ The lens-builder produces `lens` artifacts (P02) — declarative filters that de
    - `### Suppresses`: concrete attributes the lens de-emphasizes, with reason for suppression
 9. Write `## Application` — step-by-step: how to use this lens on a target artifact.
 10. Write `## Limitations` — what the lens misses, what it cannot assess, and known blind spots.
-
 **Verification:** `## Filters` has at least 3 highlight attributes and at least 1 suppress attribute. `## Limitations` names at least one concrete blind spot. No section contains capability language (no "calls", "executes", "routes").
-
 ### Phase 3: Validate
-
 **Action:** Run all 8 HARD gates from `QUALITY_GATES.md`. Fix any failure before output.
-
 | Gate | Check |
 |------|-------|
 | H01 | YAML frontmatter parses without error |
@@ -99,26 +80,16 @@ The lens-builder produces `lens` artifacts (P02) — declarative filters that de
 | H06 | `applies_to` is a non-empty list |
 | H07 | `## Filters` contains both Highlights and Suppresses sub-sections |
 | H08 | No capability language in body (no actions, tools, or routing logic) |
-
 Score SOFT gates from `QUALITY_GATES.md`. If soft score < 8.0, revise in the same pass.
-
 **Cross-check:** Is this still a filter? Not drifting into agent capabilities? Not drifting into mental_model routing?
-
 ### Phase 4: Output
-
 **Action:** Emit the final artifact at the correct path.
-
 1. Write file to the path defined in `CONFIG.md` for lens artifacts.
 2. Confirm filename stem matches `id` field.
 3. Confirm all 4 body sections are present and non-empty.
 4. Confirm `applies_to` list aligns with the `## Application` section examples.
-
----
-
 ## Output Contract
-
 ```
----
 id: p02_lens_{{slug}}
 kind: lens
 pillar: P02
@@ -137,54 +108,3 @@ filters_highlight: [{{attribute_list}}]
 filters_suppress: [{{attribute_list}}]
 limitations: "{{known_blind_spots}}"
 status: active
-tags: [lens, P02, {{focus_tag}}, {{domain_tag}}]
-quality: null
----
-
-## Perspective
-{{what_lens_sees_emphasizes_and_question_it_answers}}
-
-## Filters
-### Highlights
-{{concrete_attributes_foregrounded_minimum_3}}
-
-### Suppresses
-{{concrete_attributes_de_emphasized_with_reasons}}
-
-## Application
-{{step_by_step_how_to_use_on_target_artifact}}
-
-## Limitations
-{{what_lens_misses_blind_spots_cannot_assess}}
-```
-
----
-
-## Validation
-
-- [ ] `id` matches `^p02_lens_[a-z][a-z0-9_]+$`
-- [ ] `kind` is literal string `lens`
-- [ ] `quality` is `null`
-- [ ] `perspective` field is non-empty
-- [ ] `applies_to` is a non-empty list of specific artifact types
-- [ ] `## Filters` has at least 3 highlight attributes and at least 1 suppress attribute
-- [ ] `## Limitations` names at least one concrete blind spot
-- [ ] No capability language in body (no actions, tools, routing)
-- [ ] All 4 body sections present and non-empty
-- [ ] Soft gate score >= 8.0 before output
-
----
-
-## Metacognition
-
-**Does:**
-- Define a pure analytical perspective with explicit scope and bias
-- Specify what the lens examines and what it intentionally suppresses
-- Document application steps and limitations
-
-**Does NOT:**
-- Execute analysis — only defines the perspective for analysis
-- Take actions, call tools, or route tasks
-- Bundle multiple perspectives into one lens
-
-**Chaining:** [artifact creation / review request] -> THIS -> [multi-lens analysis / quality gate application]

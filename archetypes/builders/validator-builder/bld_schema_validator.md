@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: validator
-
 ## Frontmatter Fields
-
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string (p06_val_{rule}) | YES | - | Namespace compliance |
@@ -34,9 +32,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | tags | list[string], len >= 3 | YES | - | Must include "validator" |
 | tldr | string <= 160ch | YES | - | Dense summary |
 | density_score | float 0.80-1.00 | REC | - | Content density |
-
 ## Conditions Object
-
 ```yaml
 conditions:
   - field: "{{field_name}}"
@@ -44,30 +40,23 @@ conditions:
     value: "{{expected_value}}"
     target: "{{frontmatter|body|filename}}"
 ```
-
 Operators: eq, ne, gt, lt, gte, lte, regex, in, not_in, exists, type_check.
 Target: frontmatter (default), body, filename.
-
 ## Bypass Object
-
 ```yaml
 bypass:
   conditions: ["{{when_bypass_allowed}}"]
   approver: "{{role_or_name}}"
   audit: true
 ```
-
 ## ID Pattern
 Regex: `^p06_val_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Body Structure (required sections)
-
 1. `## Rule Definition` — what is checked, in plain language
 2. `## Conditions` — structured conditions table (field, operator, value)
 3. `## Error Handling` — error_message, severity, remediation steps
 4. `## Bypass Policy` — when bypass is allowed, who approves
-
 ## Constraints
 - max_bytes: 3072 (body only)
 - naming: p06_val_{rule}.yaml

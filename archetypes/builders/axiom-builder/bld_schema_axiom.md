@@ -9,9 +9,7 @@ source: P10_memory/_schema.yaml + SEED_BANK.yaml + TAXONOMY_LAYERS.yaml
 ---
 
 # Schema: axiom
-
 ## Frontmatter Fields (Required — 13)
-
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string (p10_ax_{slug}) | YES | — | H02, H03 |
@@ -27,9 +25,7 @@ source: P10_memory/_schema.yaml + SEED_BANK.yaml + TAXONOMY_LAYERS.yaml
 | tldr | string <= 160ch | YES | — | S01 |
 | rule | string | YES | — | The axiom statement (H08) |
 | scope | string | YES | — | Where it applies (H09) |
-
 ## Frontmatter Fields (Extended — 7)
-
 | Field | Type | Required | Notes |
 |-------|------|----------|-------|
 | rationale | string | REC | Why immutable |
@@ -39,18 +35,15 @@ source: P10_memory/_schema.yaml + SEED_BANK.yaml + TAXONOMY_LAYERS.yaml
 | dependencies | list[string] | REC | Other axioms this depends on |
 | keywords | list[string] | REC | Brain search terms |
 | linked_artifacts | object {primary, related} | REC | Cross-references |
-
 ## ID Pattern
 Regex: `^p10_ax_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem (H02). Underscores only.
-
 ## Linked Artifacts Object
 ```yaml
 linked_artifacts:
   primary: null            # or artifact_id
   related: [p10_ax_xxx]   # list of related ids
 ```
-
 ## Body Structure (required sections)
 1. `## Rule Statement` — the axiom in one clear sentence
 2. `## Rationale` — 2-3 concrete reasons why immutable
@@ -59,7 +52,6 @@ linked_artifacts:
 5. `## Examples` — 2+ cases where the axiom holds
 6. `## Violations` — 1+ known or hypothetical breaches
 7. `## References` — sources, related axioms
-
 ## Constraints
 - max_bytes: 3072 (body)
 - density_min: 0.80

@@ -15,22 +15,15 @@ density_score: 0.88
 ---
 
 # Gate: Handoff
-
 ## Definition
-
 | Field     | Value |
 |-----------|-------|
 | metric    | weighted soft score + all hard gates pass |
 | threshold | 7.0 to publish; 8.0 for pool; 9.5 for golden |
 | operator  | AND (all hard) + weighted average (soft) |
 | scope     | any artifact with `kind: handoff` |
-
----
-
 ## HARD Gates
-
 All must pass. Any failure = immediate reject.
-
 | ID  | Check | Fail Condition |
 |-----|-------|----------------|
 | H01 | Frontmatter parses as valid YAML | Parse error on any field |
@@ -43,13 +36,8 @@ All must pass. Any failure = immediate reject.
 | H08 | `task` section has at least one numbered step | Narrative blob with no steps |
 | H09 | `commit` section contains a valid git command | Section present but no `git commit` instruction |
 | H10 | Body size <= 4096 bytes | Exceeds limit — handoff too verbose |
-
----
-
 ## SOFT Scoring
-
 Total weights sum to 100%.
-
 | ID  | Dimension | Weight | 10 pts | 5 pts | 0 pts |
 |-----|-----------|--------|--------|-------|-------|
 | S01 | Task decomposition | 1.0 | Steps are atomic and independently verifiable | Steps exist but some are compound | Single block of instructions |
@@ -64,28 +52,16 @@ Total weights sum to 100%.
 | S10 | Retry/resilience guidance | 0.5 | Error handling or retry instructions included | Partial guidance | None |
 | S11 | Naming convention | 0.5 | Filename follows `{MISSION}_{sat}.md` pattern | Filename partially correct | Arbitrary filename |
 | S12 | No internal jargon leaked | 0.5 | No framework internals or unexplained acronyms | Minor internal refs | Heavy framework coupling |
-
 **Score = sum(pts * weight) / sum(max_pts * weight) * 10**
-
----
-
 ## Actions
-
 | Score | Tier | Action |
 |-------|------|--------|
 | >= 9.5 | Golden | Publish to pool as golden handoff template |
 | >= 8.0 | Skilled | Publish to pool + log pattern |
 | >= 7.0 | Learning | Use but flag for improvement |
 | < 7.0 | Rejected | Return to author with gate report |
-
----
-
 ## Bypass
-
 | Field | Value |
 |-------|-------|
 | Conditions | Time-critical incident response where full context is not yet known |
 | Approver | Senior orchestrator (human) only |
-| Audit trail | `bypass_reason` field required in frontmatter |
-| Expiry | Bypass valid for single execution only; full handoff required on retry |
-| Never bypass | H01 (YAML parse), H05 (quality null), H07 (scope fence — unbounded execution is unsafe) |

@@ -8,13 +8,9 @@ sources: validator-builder MANIFEST.md + SCHEMA.md
 ---
 
 # Domain Knowledge: validator
-
 ## Executive Summary
-
 A `validator` (P06) is a deterministic, binary (pass/fail) technical check applied to an artifact before acceptance. It differs from `quality_gate` (weighted scoring 0–10), `scoring_rubric` (subjective evaluation), and `validation_schema` (silent post-generation contract) by being an explicit named rule with structured conditions, severity, and optional bypass policy. Validators enforce contracts; they do not measure quality.
-
 ## Spec Table
-
 | Property | Value |
 |----------|-------|
 | Pillar | P06 |
@@ -28,9 +24,7 @@ A `validator` (P06) is a deterministic, binary (pass/fail) technical check appli
 | `severity` values | `error`, `warning`, `info` |
 | `quality` field | always `null` |
 | Result | pass/fail — no weighted scoring |
-
 ## Patterns
-
 | Pattern | Rule |
 |---------|------|
 | Deterministic | Same input always produces same result — no randomness |
@@ -41,9 +35,7 @@ A `validator` (P06) is a deterministic, binary (pass/fail) technical check appli
 | `pre_commit: true` | Validator fires before git commit for that artifact kind |
 | `auto_fix: true` | Only for safe, lossless repairs (casing, formatting, whitespace) |
 | Bypass requires audit | `bypass.audit: true` always; `approver` names the authorizing role |
-
 **Condition operators**:
-
 | Operator | Use case |
 |----------|----------|
 | `eq` / `ne` | Exact match / mismatch |
@@ -52,11 +44,8 @@ A `validator` (P06) is a deterministic, binary (pass/fail) technical check appli
 | `in` / `not_in` | Enum membership |
 | `exists` | Field presence check |
 | `type_check` | Type conformance |
-
 **Condition targets**: `frontmatter` (default), `body`, `filename`
-
 **Boundary — what validator is NOT**:
-
 | kind | Why NOT validator |
 |------|-----------------|
 | `quality_gate` | Weighted scoring 0–10; validators are binary |
@@ -64,9 +53,7 @@ A `validator` (P06) is a deterministic, binary (pass/fail) technical check appli
 | `validation_schema` | Silent system contract; validators are explicit named rules |
 | `input_schema` | Defines input shape; validators check rule conformance |
 | `guardrail` | Behavioral safety limits; validators check data fields |
-
 ## Anti-Patterns
-
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
 | Numeric score in result | Validators are binary — scoring belongs in `quality_gate` |
@@ -76,9 +63,7 @@ A `validator` (P06) is a deterministic, binary (pass/fail) technical check appli
 | `bypass` without `audit: true` | No governance trail; exception is untracked |
 | `quality` set to a score | Never self-score; governance assigns |
 | `id` not matching filename stem | Schema constraint violated; indexing breaks |
-
 ## Application
-
 1. Name the rule in `rule` field (human-readable, e.g. `"id_namespace_compliance"`)
 2. Set `id` = `p06_val_{rule_snake}`, must equal filename stem
 3. Set `domain` to the artifact kind this validator governs
@@ -88,9 +73,3 @@ A `validator` (P06) is a deterministic, binary (pass/fail) technical check appli
 7. Write `error_message`: actionable — what to fix, not just what failed
 8. Decide `auto_fix`: only `true` if repair is lossless and safe
 9. If bypass is needed: define `bypass.conditions`, `bypass.approver`, `bypass.audit: true`
-10. Leave `quality: null` — do not self-score
-
-## References
-
-- validator-builder MANIFEST.md v1.0.0
-- validator-builder SCHEMA.md v1.0.0

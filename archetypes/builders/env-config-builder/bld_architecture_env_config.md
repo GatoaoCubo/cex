@@ -7,7 +7,6 @@ purpose: Component map of env_config — inventory, dependencies, and architectu
 ---
 
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | scope | The system boundary this config covers: global, satellite, service | env-config-builder | required |
@@ -19,9 +18,7 @@ purpose: Component map of env_config — inventory, dependencies, and architectu
 | required_vars | Variables that must be present for the system to start (startup gate) | env-config-builder | required |
 | optional_vars | Variables that enable optional features when present | env-config-builder | optional |
 | metadata | config id, version, pillar, scope, author, created date | env-config-builder | required |
-
 ## Dependency Graph
-
 ```
 guardrail (P11) --constrains--> env_config (security rules for sensitive var handling)
 env_config --consumed_by--> boot_config (P02) (boot reads env vars at provider startup)
@@ -33,7 +30,6 @@ feature_flag (P09) --independent-- env_config (feature_flag is on/off toggle log
 path_config (P09) --independent-- env_config (path_config covers filesystem paths specifically)
 runtime_rule (P09) --independent-- env_config (runtime_rule governs behavior like timeouts/retries)
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | guardrail | env_config | constrains | security rules for masking and exposure of sensitive vars |
@@ -42,9 +38,7 @@ runtime_rule (P09) --independent-- env_config (runtime_rule governs behavior lik
 | env_config | connector | consumed_by | API keys, base URLs, auth credentials |
 | env_config | client | consumed_by | auth tokens, endpoint URLs, timeouts |
 | env_config | mcp_server | consumed_by | transport config, port, auth mode |
-
 ## Boundary Table
-
 | env_config IS | env_config IS NOT |
 |--------------|-------------------|
 | A specification of environment variables: names, types, defaults, validation | A boot_config (P02) — boot_config is per-provider model startup configuration |
@@ -54,14 +48,7 @@ runtime_rule (P09) --independent-- env_config (runtime_rule governs behavior lik
 | Specifies validation rules (regex, enum, range) per variable | A runtime_rule (P09) — runtime_rule governs behavioral limits like timeouts and retries |
 | Defines override precedence: runtime > file > default | A knowledge_card (P01) — KC distills domain knowledge, not system configuration |
 | Has required_vars that gate system startup if absent | A connector (P04) — connector defines integration spec; env_config feeds it values |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Safety | guardrail, sensitive_vars | Enforce masking rules and prevent secret exposure |
-| Identity | scope, metadata | Define which system boundary this config covers |
-| Specification | variables, required_vars, optional_vars | Catalog all env vars with types and descriptions |
-| Validation | validation_rules, defaults | Enforce constraints and provide fallback values |
-| Resolution | override_precedence | Define how conflicting values from different sources are resolved |
-| Consumers | boot_config, daemon, connector, client, mcp_server | Runtime components that read env vars from this specification |

@@ -9,9 +9,7 @@ source: P08_architecture/_schema.yaml v4.0 + SEED_BANK.yaml + TAXONOMY_LAYERS.ya
 ---
 
 # Schema: pattern
-
 ## Frontmatter Fields (Required — 14)
-
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string (p08_pat_{slug}) | YES | — | H02, H03 |
@@ -28,9 +26,7 @@ source: P08_architecture/_schema.yaml v4.0 + SEED_BANK.yaml + TAXONOMY_LAYERS.ya
 | name | string | YES | — | Pattern name (H08) |
 | problem | string | YES | — | What recurring problem (H09) |
 | solution | string | YES | — | Core solution approach |
-
 ## Frontmatter Fields (Extended — 7)
-
 | Field | Type | Required | Notes |
 |-------|------|----------|-------|
 | context | string | REC | When/where this pattern applies |
@@ -40,11 +36,9 @@ source: P08_architecture/_schema.yaml v4.0 + SEED_BANK.yaml + TAXONOMY_LAYERS.ya
 | anti_patterns | list[string] | REC | What NOT to do |
 | applicability | string | REC | When to use / when not to use |
 | keywords | list[string] | REC | Brain search terms |
-
 ## ID Pattern
 Regex: `^p08_pat_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem (H02). Underscores only.
-
 ## Body Structure (required sections)
 1. `## Problem` — the recurring problem in concrete terms
 2. `## Context` — conditions and environment where problem occurs
@@ -55,7 +49,6 @@ Rule: id MUST equal filename stem (H02). Underscores only.
 7. `## Anti-Patterns` — common wrong approaches to the same problem
 8. `## Related Patterns` — complementary, alternative, or prerequisite patterns
 9. `## References` — sources, GoF/POSA/CEX refs
-
 ## Constraints
 - max_bytes: 4096 (body)
 - density_min: 0.80

@@ -15,22 +15,15 @@ density_score: 0.89
 ---
 
 # Gate: dag
-
 ## Definition
-
 | Field     | Value |
 |-----------|-------|
 | metric    | Composite score from SOFT dimensions + all HARD gates pass |
 | threshold | >= 7.0 to publish; >= 9.5 golden |
 | operator  | AND (all HARD) + weighted_sum (SOFT) |
 | scope     | All artifacts where `kind: dag` |
-
----
-
 ## HARD Gates
-
 All must pass. Any single failure = REJECT regardless of SOFT score.
-
 | ID  | Check | Failure message |
 |-----|-------|----------------|
 | H01 | Frontmatter parses as valid YAML | "Frontmatter YAML syntax error" |
@@ -43,13 +36,8 @@ All must pass. Any single failure = REJECT regardless of SOFT score.
 | H08 | All edge source and target node IDs exist in `nodes` list | "Edge references undefined node" |
 | H09 | `nodes` list is non-empty (>= 2 nodes) | "DAG must contain at least 2 nodes" |
 | H10 | Every node has a unique `id` within the DAG | "Duplicate node ID detected" |
-
----
-
 ## SOFT Scoring
-
 Dimensions sum to 100%. Score each 0.0-10.0; multiply by weight.
-
 | Dimension | Weight | What to assess |
 |-----------|--------|----------------|
 | Topological order documented | 1.0 | Explicit ordering or layers annotated in body |
@@ -64,24 +52,15 @@ Dimensions sum to 100%. Score each 0.0-10.0; multiply by weight.
 | Error propagation | 1.0 | What happens when a node fails: skip, abort, retry |
 | Reuse potential | 1.0 | Nodes are generic enough to be referenced by multiple DAGs |
 | Documentation | 1.0 | tldr explains the business purpose of this dependency structure |
-
 Weight sum: 1.0+1.0+1.0+0.5+1.0+0.5+0.5+1.0+0.5+1.0+1.0+1.0 = 10.0 (100%)
-
----
-
 ## Actions
-
 | Score | Tier | Action |
 |-------|------|--------|
 | >= 9.5 | GOLDEN | Publish to pool as golden exemplar |
 | >= 8.0 | PUBLISH | Publish to pool |
 | >= 7.0 | REVIEW | Flag for human review before publish |
 | < 7.0  | REJECT | Return to author with failure report |
-
----
-
 ## Bypass
-
 | Field | Value |
 |-------|-------|
 | conditions | Prototype pipeline where full dependency mapping is not yet possible |

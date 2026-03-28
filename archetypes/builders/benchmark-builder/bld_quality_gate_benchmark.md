@@ -15,20 +15,15 @@ density_score: 0.91
 ---
 
 # Gate: benchmark
-
 ## Definition
-
 | Field     | Value                                                    |
 |-----------|----------------------------------------------------------|
 | metric    | measurement rigor + reproducibility completeness         |
 | threshold | 8.0                                                      |
 | operator  | >=                                                       |
 | scope     | all benchmark artifacts (P07)                            |
-
 ## HARD Gates
-
 All must pass. Failure on any = final score 0.
-
 | Gate | Check | Why |
 |------|-------|-----|
 | H01 | YAML frontmatter parses valid YAML | Broken YAML = benchmark unreachable |
@@ -41,9 +36,7 @@ All must pass. Failure on any = final score 0.
 | H08 | iterations >= 10 | Statistical minimum for reliable measurement |
 | H09 | warmup >= 1 | Cold-start bias prevention |
 | H10 | percentiles includes at least p50 and p95 | Tail latency required for realistic assessment |
-
 ## SOFT Scoring
-
 | Gate | Check | Weight |
 |------|-------|--------|
 | S01 | tldr <= 160 chars, non-empty | 1.0 |
@@ -57,20 +50,15 @@ All must pass. Failure on any = final score 0.
 | S09 | Results Template includes percentile rows (p50, p95, p99) | 0.5 |
 | S10 | No qualitative prose ("good performance", "acceptable latency") | 1.0 |
 | S11 | density_score >= 0.80 | 1.0 |
-
 Weights sum: 10.0. Normalize: divide each by 10.0 before scoring.
-
 ## Actions
-
 | Score | Action |
 |-------|--------|
 | >= 9.5 | GOLDEN — pool as canonical performance baseline |
 | >= 8.0 | PUBLISH — active performance contract |
 | >= 7.0 | REVIEW — add missing percentiles or environment detail |
 | < 7.0  | REJECT — methodology incomplete or unit undefined |
-
 ## Bypass
-
 | Field | Value |
 |-------|-------|
 | conditions | Production incident requiring immediate performance baseline capture |

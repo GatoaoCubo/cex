@@ -15,22 +15,15 @@ density_score: 0.91
 ---
 
 # Gate: e2e_eval
-
 ## Definition
-
 | Field     | Value |
 |-----------|-------|
 | metric    | Composite score from SOFT dimensions + all HARD gates pass |
 | threshold | >= 7.0 to publish; >= 9.5 golden |
 | operator  | AND (all HARD) + weighted_sum (SOFT) |
 | scope     | All artifacts where `kind: e2e_eval` |
-
----
-
 ## HARD Gates
-
 All must pass. Any single failure = REJECT regardless of SOFT score.
-
 | ID  | Check | Failure message |
 |-----|-------|----------------|
 | H01 | Frontmatter parses as valid YAML | "Frontmatter YAML syntax error" |
@@ -43,13 +36,8 @@ All must pass. Any single failure = REJECT regardless of SOFT score.
 | H08 | Each stage has both `name` and `expected` fields | "Stage missing 'name' or 'expected' assertion" |
 | H09 | `data_fixtures` is non-empty and each fixture has a resolvable path or inline value | "Fixtures empty or unresolvable" |
 | H10 | `cleanup` block defines post-run teardown actions (not empty) | "No cleanup protocol defined" |
-
----
-
 ## SOFT Scoring
-
 Dimensions sum to 100%. Score each 0.0-10.0; multiply by weight.
-
 | Dimension | Weight | What to assess |
 |-----------|--------|----------------|
 | Pipeline coverage | 1.0 | All named agents/steps in the pipeline appear in stages |
@@ -63,24 +51,15 @@ Dimensions sum to 100%. Score each 0.0-10.0; multiply by weight.
 | Boundary clarity | 0.5 | Explicitly not unit_eval (single component) or benchmark (perf) |
 | Execution time estimate | 0.5 | Expected runtime documented so CI can set appropriate timeout |
 | Documentation | 0.5 | tldr states which pipeline and what behavior is being verified |
-
 Weight sum: 1.0+1.0+1.0+1.0+1.0+1.0+0.5+1.0+0.5+0.5+0.5 = 9.0 -> normalize to 100%
-
----
-
 ## Actions
-
 | Score | Tier | Action |
 |-------|------|--------|
 | >= 9.5 | GOLDEN | Publish to pool as golden exemplar |
 | >= 8.0 | PUBLISH | Publish to pool |
 | >= 7.0 | REVIEW | Flag for human review before publish |
 | < 7.0  | REJECT | Return to author with failure report |
-
----
-
 ## Bypass
-
 | Field | Value |
 |-------|-------|
 | conditions | Pipeline under active development where stages are not yet stable |

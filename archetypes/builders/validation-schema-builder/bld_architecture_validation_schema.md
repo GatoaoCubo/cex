@@ -7,9 +7,7 @@ purpose: Component map of validation_schema — inventory, dependencies, and arc
 ---
 
 # Architecture: validation_schema in the CEX
-
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | frontmatter block | 20-field metadata header (id, kind, pillar, domain, target_kind, etc.) | validation-schema-builder | active |
@@ -18,15 +16,12 @@ purpose: Component map of validation_schema — inventory, dependencies, and arc
 | on_failure_behavior | What happens when validation fails (reject, warn, auto_fix) | author | active |
 | coercion_rules | Type coercion policies for mismatched but recoverable types | author | active |
 | schema_version | Version of the schema for backward compatibility tracking | author | active |
-
 ## Dependency Graph
-
 ```
 LLM_output       --validated_by-->  validation_schema  --produces-->  validated_output
 type_def          --informs-->      validation_schema  --signals-->   validation_event
 response_format   --precedes-->     validation_schema
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | LLM_output | validation_schema | data_flow | generated output submitted for post-generation validation |
@@ -35,9 +30,7 @@ response_format   --precedes-->     validation_schema
 | validation_schema | validated_output | produces | output that passed all field and constraint checks |
 | validation_schema | validation_event (P12) | signals | emitted on pass, fail, or auto_fix |
 | validation_schema | quality_gate (P11) | data_flow | gate may require schema validation pass |
-
 ## Boundary Table
-
 | validation_schema IS | validation_schema IS NOT |
 |----------------------|--------------------------|
 | A post-generation contract the SYSTEM enforces automatically | A format instruction the LLM sees during generation (response_format P05) |
@@ -46,9 +39,7 @@ response_format   --precedes-->     validation_schema
 | Includes on_failure behavior (reject, warn, auto_fix) | An input contract for what the prompt receives (input_schema P06) |
 | Versioned for backward compatibility | A scoring evaluation with weighted dimensions (scoring_rubric P07) |
 | Scoped to one target artifact kind | A universal validation applied to all artifact kinds |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Types | type_def, response_format | Supply type definitions and expected format |

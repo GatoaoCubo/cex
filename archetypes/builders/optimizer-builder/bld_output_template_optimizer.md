@@ -1,4 +1,6 @@
 ---
+kind: output_template
+id: bld_output_template_optimizer
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} for optimizer production
@@ -6,9 +8,7 @@ pattern: derives from SCHEMA.md — no extra fields, no instructions
 ---
 
 # Output Template: optimizer
-
 ```yaml
----
 id: p11_opt_{{target_slug}}
 kind: optimizer
 pillar: P11
@@ -58,40 +58,31 @@ monitoring:
     - "{{alert_condition_1}}"
     - "{{alert_condition_2}}"
   reporting: "{{reporting_cadence_and_format}}"
----
-
 ## Target Process
 {{scope_of_what_is_optimized}}
 {{boundaries_what_is_in_scope_and_out}}
-
 ## Metrics
 | Metric | Unit | Direction | Trigger | Target | Critical |
 |--------|------|-----------|---------|--------|----------|
 | {{primary_metric}} | {{unit}} | {{minimize_maximize}} | {{trigger}} | {{target}} | {{critical}} |
-
 ### Secondary Metrics
 | Metric | Unit | Purpose |
 |--------|------|---------|
 | {{secondary_1}} | {{unit}} | {{why_tracked}} |
 | {{secondary_2}} | {{unit}} | {{why_tracked}} |
-
 ## Actions
 | Trigger Condition | Action Type | Description | Automated |
 |-------------------|-------------|-------------|-----------|
 | {{condition_1}} | {{type}} | {{what_happens}} | {{yes_no}} |
 | {{condition_2}} | {{type}} | {{what_happens}} | {{yes_no}} |
-
 ### Rollback
 {{rollback_procedure_if_action_causes_regression}}
-
 ## Risk Assessment
 | Risk | Level | Mitigation |
 |------|-------|-----------|
 | {{risk_1}} | {{low_medium_high}} | {{mitigation}} |
 | {{risk_2}} | {{low_medium_high}} | {{mitigation}} |
-
 Cost: compute={{compute_overhead}}, time={{time_per_cycle}}s
-
 ## Monitoring
 - Dashboard: {{dashboard}}
 - Alerts: {{alert_list}}

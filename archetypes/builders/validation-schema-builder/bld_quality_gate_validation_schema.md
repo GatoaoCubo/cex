@@ -19,15 +19,9 @@ tldr: "Validates post-generation contracts for field types, constraints, on_fail
 ---
 
 ## Definition
-
 A validation schema is a post-generation contract applied by the system after an artifact is produced. It defines fields, types, constraints, and violation behavior (reject, warn, auto-fix). The model never sees this schema; the pipeline enforces it. This gate ensures every validation schema is machine-enforceable, clearly bounded, and safe to apply automatically.
-
----
-
 ## HARD Gates
-
 Failure on any HARD gate causes immediate REJECT. No score is computed.
-
 | ID  | Check | Rule |
 |-----|-------|------|
 | H01 | Frontmatter parses | YAML frontmatter is valid and complete with no syntax errors |
@@ -40,13 +34,8 @@ Failure on any HARD gate causes immediate REJECT. No score is computed.
 | H08 | Constraint definitions per field | Each field in `fields` includes at least one named constraint |
 | H09 | on_failure is valid enum | `on_failure` per field is one of: `reject`, `warn`, `auto_fix` |
 | H10 | Field types are JSON Schema primitives | Types limited to: `string`, `integer`, `number`, `boolean`, `array`, `object` |
-
----
-
 ## SOFT Scoring
-
 Score each dimension 0 or 10. Multiply by weight. Divide total by sum of weights, scale to 0-10.
-
 | Dimension | Weight | Pass Condition |
 |-----------|--------|----------------|
 | Density >= 0.80 | 1.0 | No prose restating what the field table already shows |
@@ -59,29 +48,19 @@ Score each dimension 0 or 10. Multiply by weight. Divide total by sum of weights
 | Backward compatibility noted | 0.5 | Body notes stable vs. change-prone fields across versions |
 | No confusion with response_format | 0.5 | Body distinguishes this from P05 response format artifacts |
 | Target kind is specific | 1.0 | `target_kind` names one artifact kind, not a generic scope |
-
 Sum of weights: 8.0. `soft_score = sum(weight * gate_score) / 8.0 * 10`
-
----
-
 ## Actions
-
 | Score | Action |
 |-------|--------|
 | >= 9.5 | GOLDEN — archive to pool as canonical validation contract |
 | >= 8.0 | PUBLISH — safe to apply in production generation pipelines |
 | >= 7.0 | REVIEW — applicable but coercion rules or boundary need clarification |
 | < 7.0 | REJECT — do not apply; constraints are ambiguous or on_failure is inconsistent |
-
----
-
 ## Bypass
-
 | Field | Value |
 |-------|-------|
 | condition | Target kind is new with no prior instances; schema is a best-effort draft |
 | approver | Engineer responsible for the target kind's builder |
 | audit_log | Entry in `.claude/bypasses/validation_schema_{date}.md` listing unvalidated fields |
 | expiry | 30 days or until 10 instances of the target kind exist |
-
 H01 (frontmatter parses) and H05 (quality is null) cannot be bypassed under any condition.

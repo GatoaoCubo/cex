@@ -8,9 +8,7 @@ pattern: HARD gates block publish, SOFT gates contribute to 0-10 score
 ---
 
 # Quality Gates: validator
-
 ## HARD Gates
-
 | Gate | Check | Why |
 |------|-------|-----|
 | H01 | YAML frontmatter parses | broken metadata breaks automation |
@@ -23,9 +21,7 @@ pattern: HARD gates block publish, SOFT gates contribute to 0-10 score
 | H08 | `severity` in `block|warn|info` | valid enforcement level |
 | H09 | body includes Rule, Checks, Error Messages, Pass Example, Fail Example | canonical structure |
 | H10 | every rule/check expression is objective and machine-checkable | prevents rubric drift |
-
 ## SOFT Gates
-
 | Gate | Check | Weight | Score if pass |
 |------|-------|--------|---------------|
 | S01 | `tldr` non-empty and <= 160 chars | 1.0 | 10 |
@@ -35,23 +31,19 @@ pattern: HARD gates block publish, SOFT gates contribute to 0-10 score
 | S05 | pass and fail examples are concrete, not placeholders | 1.0 | 10 |
 | S06 | density >= 0.80 | 1.0 | 10 |
 | S07 | no scoring, weights, or subjective quality language | 1.0 | 10 |
-
 ## Scoring Formula
 ```text
 hard_pass = all 10 HARD gates pass
 soft_score = sum(gate_score * weight) / sum(weights)
 final = hard_pass ? soft_score : 0
-
 GOLDEN:  >= 9.5
 PUBLISH: >= 8.0
 REVIEW:  >= 7.0
 REJECT:  < 7.0 or any HARD fail
 ```
-
 ## Automation
 Primary: `python _tools/validate_artifact.py --kind validator <file>` [PLANNED]
 Interim: validate manually against this file.
-
 ## Pre-Production Checklist
 - [ ] Source constraint for the rule is identified
 - [ ] Boundary against `quality_gate` and `scoring_rubric` is explicit

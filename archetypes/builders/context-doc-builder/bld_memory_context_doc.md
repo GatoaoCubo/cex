@@ -21,34 +21,24 @@ keywords: [context document, scope boundary, domain scoping, stakeholders, const
 ---
 
 ## Summary
-
 A context document's job is eliminating ambiguity about what a piece of work covers. The outside list in the scope section is more valuable than the inside list: consumers know what the work covers from the title; what they need — and almost never get explicitly — is what it does not cover. A missing or vague outside list causes downstream consumers to fill the gap with assumptions that diverge into scope creep, rework, or integration failures.
-
 ## Pattern
-
 **Two-list scope declaration: inside and outside.**
-
 Scope section structure:
 ```
 ## Scope
-
 Inside:
 - [specific item 1]
 - [specific item 2]
 - [specific item 3]
-
 Outside:
 - [excluded item 1 — why excluded if non-obvious]
 - [excluded item 2]
 - [excluded item 3]
 ```
-
 Frontmatter scope (single sentence): name the bounded domain, actor type, and time horizon. Examples: "Stripe checkout flow for server-side integration, v3 API" / "Onboarding process for new engineers, first 30 days" / "LGPD data retention for SaaS products, 2023 cycle".
-
 Stakeholders: list by role, not name. Constraints: hard non-negotiable limits (budget, legal, contract) — distinct from assumptions (beliefs that could be wrong). Assumptions: each must include a verification method ("verify by: calling /rate-limit endpoint").
-
 ## Anti-Pattern
-
 - Scope without an outside list (leaves exclusions to assumption).
 - Scope too broad ("covers the entire payment system") — split per bounded context.
 - Scope too narrow (single fact belongs in a knowledge card).
@@ -57,25 +47,7 @@ Stakeholders: list by role, not name. Constraints: hard non-negotiable limits (b
 - Filler prose ("This document describes...", "Basically...") — delete on sight.
 - Body over 2048 bytes: trim References first, Background second; scope and constraints must survive.
 - Atomic single-fact structure in body — that is a knowledge card, not a context_doc.
-
 ## Context
-
 Context_doc vs. knowledge_card: a context document allows narrative prose and covers a bounded domain holistically. A knowledge card is atomic (one fact, one card). If content has a scope section and multiple interdependent sections, it is a context document. If it is a single extractable fact, it is a knowledge card.
-
 Write the outside list before any other section. This forces explicit exclusion decisions before elaborating on inclusions — the only reliable way to prevent scope creep. Assumption verification discipline: every assumption must have a falsifiability condition ("assumed: rate limit is 1000 req/min; verify by: calling /rate-limit endpoint"), converting hidden risks into testable hypotheses.
-
 ## Impact
-
-Moving from vague to explicit scope eliminated 100% of clarification rounds in 11 documents reviewed. Writing a precise outside list costs 5-10 minutes; one clarification round costs 15-30 minutes minimum plus scheduling overhead. Highest value for documents consumed by multiple teams or used as the basis for downstream build work, where assumption divergence compounds across consumers.
-
-## Reproducibility
-
-Applies to any context document regardless of domain. The two-list scope structure is domain-agnostic. Four scope templates (technical, organizational, market, regulatory) cover the majority of cases. Scope section length and clarification rounds are inversely correlated (r=-0.81); compact explicit lists outperform padded prose.
-
-## References
-
-- Builder domain: context_doc, P01
-- Related artifact: knowledge-card-builder (atomic single-fact)
-- Scope templates: MEMORY.md > Domain Patterns (existing)
-- Byte budget: body <= 2048; trim References first, then Background
-- Validation gates: MEMORY.md > Common Mistakes (existing)

@@ -7,7 +7,6 @@ purpose: Component map of fallback_chain — inventory, dependencies, and archit
 ---
 
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | step_sequence | Ordered list of model steps (primary → degraded → minimum) | fallback_chain | required |
@@ -19,9 +18,7 @@ purpose: Component map of fallback_chain — inventory, dependencies, and archit
 | cost_controls | Per-step budget caps; prevents runaway spend during degradation | fallback_chain | required |
 | trigger_conditions | Conditions that activate the chain: timeout, error, low quality, cost exceeded | fallback_chain | required |
 | degradation_signal | Event emitted when chain advances a step or exhausts all steps | fallback_chain | required |
-
 ## Dependency Graph
-
 ```
 model_card (P02) --produces--> fallback_chain
 router (P02)     --signals-->  fallback_chain
@@ -30,7 +27,6 @@ fallback_chain   --produces--> boot_config (P02)
 fallback_chain   --signals-->  error_signal
 circuit_breaker  --depends-->  fallback_chain
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | model_card (P02) | fallback_chain | data_flow | model specs (name, cost, capability) for each step |
@@ -39,9 +35,7 @@ circuit_breaker  --depends-->  fallback_chain
 | fallback_chain | boot_config (P02) | produces | per-step provider configuration |
 | fallback_chain | error_signal | signals | degradation events and circuit-breaker opens |
 | circuit_breaker | fallback_chain | depends | reads consecutive failure count to open/close |
-
 ## Boundary Table
-
 | fallback_chain IS | fallback_chain IS NOT |
 |-------------------|-----------------------|
 | A sequence of models tried in order when the primary fails | A sequence of prompts or text transformations (that is a chain) |
@@ -50,9 +44,7 @@ circuit_breaker  --depends-->  fallback_chain
 | Responsible for graceful model degradation (opus → sonnet → haiku) | Responsible for orchestrating multi-step agent workflows |
 | Emitter of degradation and circuit-breaker signals | A model card describing a single model's properties |
 | Owner of circuit breaker logic (opens after N failures) | A boot config initializing one provider |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|-----------|---------|
 | Trigger | trigger_conditions, router (P02) | Detect failure conditions that activate the chain |

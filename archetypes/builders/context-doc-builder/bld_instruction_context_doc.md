@@ -8,7 +8,6 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 ---
 
 # Instructions: How to Produce a context_doc
-
 ## Phase 1: RESEARCH
 1. Identify the domain to document (snake_case label, e.g., `ecommerce_imports`, `api_auth_jwt`)
 2. Define scope boundaries: write one sentence — "This context covers [X] within [Y] for [Z] audience"
@@ -18,7 +17,6 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 6. List assumptions: what is taken as given without requiring proof
 7. Identify dependencies on other domains, services, or artifacts
 8. Check existing context_docs for overlapping scope to avoid duplication
-
 ## Phase 2: COMPOSE
 1. Read SCHEMA.md — source of truth for all fields
 2. Read OUTPUT_TEMPLATE.md — fill {{vars}} following SCHEMA constraints
@@ -30,7 +28,6 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 8. Write Dependencies section: other domains, services, and artifacts this document references
 9. Write Key Concepts section: 3-5 essential ideas required to understand this domain
 10. Verify body <= 2048 bytes; if over limit, trim Key Concepts first, then Dependencies
-
 ## Phase 3: VALIDATE
 1. Check QUALITY_GATES.md — verify each HARD gate manually
 2. Confirm YAML frontmatter parses without errors

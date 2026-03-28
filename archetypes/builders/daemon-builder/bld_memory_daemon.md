@@ -36,53 +36,21 @@ keywords:
 ---
 
 ## Summary
-
 Long-running background processes fail in predictable ways: premature PID files mislead supervisors, missing signal handlers corrupt state, and shallow health checks hide real degradation. A three-layer design - startup barrier, signal fence, health probe - eliminates the most common failure modes without adding significant complexity.
-
 ## Pattern
-
 **Startup barrier**: do not write the PID file or signal readiness until every subsystem (database connection, config load, worker pool) confirms initialization. Supervisors poll readiness; a premature PID triggers restart loops.
-
 **Signal fence**: register SIGTERM and SIGINT handlers at process start. On receipt: stop accepting new work, drain the current queue within a configurable timeout (default 30s), release locks and file handles, exit code 0. Exit code 0 tells the supervisor shutdown was clean; non-zero triggers a restart.
-
 **Health probe**: expose an endpoint or write a status file reporting `ok`, `degraded`, or `down` based on measurable internal state - queue depth, worker liveness, last-successful-cycle timestamp. A probe that only checks process presence misses stuck workers and saturated queues.
-
 **Restart policy**: exponential backoff with a cap (1s, 2s, 4s, max 30s) prevents restart storms after transient failures.
-
 **Resource limits**: set soft memory limits 20% below the hard limit to enable graceful degradation before the OS kills the process.
-
 ## Anti-Pattern
-
 - Writing PID in the first line of main() before any initialization runs.
 - Using a bare `except: pass` around the main loop, silencing crashes while the process appears healthy.
 - Health checks that return 200 unconditionally or only test TCP connectivity.
 - Catching SIGTERM but not calling cleanup - the process exits dirty and leaves lock files.
 - Setting restart_policy to "never" for a continuous daemon - contradictory; use a one-shot tool instead.
 - Omitting the `## Monitoring` section from the spec - daemons must be observable.
-
 ## Context
-
 Applies to any persistent background process: queue consumers, scheduled job runners, data-sync workers, metric collectors. Language-agnostic but most concrete in Python (signal module, threading.Event for drain) and Go (os/signal, context cancellation). Supervisor compatibility (systemd, supervisord, Docker) depends on correct PID-file timing and exit-code semantics.
-
 ## Impact
-
 - Eliminates restart loops caused by premature readiness signals.
-- Reduces data loss on forced shutdowns from ~6% to near zero.
-- Enables operators to distinguish degraded-but-running from truly healthy without log diving.
-- Allows capacity planning from real resource-usage data rather than worst-case guesses.
-
-## Reproducibility
-
-1. Implement all subsystem inits before writing PID or calling sd_notify(READY=1).
-2. Register signal handlers as the first action in main().
-3. Use a drain event with timeout; log how many items were in-flight at shutdown.
-4. Expose /health returning JSON with status, queue_depth, worker_count, last_cycle_at.
-5. Set MemoryMax (systemd) or mem_limit (Docker) to 80% of available headroom.
-6. Test with `kill -SIGTERM <pid>` under load; verify exit code 0 and empty queue after drain.
-
-## References
-
-- daemon-builder/INSTRUCTIONS.md
-- daemon-builder/SCHEMA.md
-- Linux signal(7) man page
-- systemd.service(5) - ExecStop, KillMode, NotifyAccess

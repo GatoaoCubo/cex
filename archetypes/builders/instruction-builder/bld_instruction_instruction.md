@@ -8,9 +8,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 ---
 
 # Instructions: How to Produce an instruction
-
 ## Phase 1: RESEARCH
-
 1. Identify the task: state exactly what must happen, who executes it, and in what context
 2. Determine the executor: name the agent or role that will follow this recipe
 3. List prerequisites — each must be verifiable ("Python 3.10+ installed" not "environment ready")
@@ -18,9 +16,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 5. Define the output contract: what the executor produces and in what format
 6. Assess complexity to choose phase count: 3 phases for simple tasks, 4-5 for multi-stage operations
 7. Check existing instructions via brain_query [IF MCP] for the same task — avoid duplicates
-
 ## Phase 2: COMPOSE
-
 1. Read SCHEMA.md — source of truth for all frontmatter fields and body constraints
 2. Read OUTPUT_TEMPLATE.md — fill the template following SCHEMA constraints exactly
 3. Fill frontmatter: 15 required fields + 7 recommended fields (null is acceptable for recommended)
@@ -32,9 +28,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 9. Write the Metacognition section (recommended): a Does / Does NOT block plus chaining notation showing upstream -> THIS -> downstream
 10. Verify phases_count in frontmatter matches the actual number of Phase sections in the body
 11. Verify body is within 8192 bytes
-
 ## Phase 3: VALIDATE
-
 1. Check QUALITY_GATES.md — apply each gate manually
 2. HARD gates (all must pass):
    - YAML frontmatter parses without errors

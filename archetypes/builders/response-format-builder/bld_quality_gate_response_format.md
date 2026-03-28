@@ -20,17 +20,10 @@ tldr: "Quality gate for LLM output structure specs: verifies format type, inject
 ---
 
 ## Definition
-
 A response format artifact specifies the exact output structure an LLM must produce. It declares a format type (json, yaml, markdown, csv, or plaintext), an injection point where the spec is delivered to the model (system prompt or user message), and a section structure with field-level definitions. The artifact is consumed by the LLM at generation time — it is not a post-generation validator.
-
 Scope: files with `kind: response_format`. Does not apply to validation schemas (P06), which check outputs after generation.
-
----
-
 ## HARD Gates
-
 Failure on any single gate means REJECT regardless of soft score.
-
 | ID  | Predicate | How to test |
 |-----|-----------|-------------|
 | H01 | Frontmatter parses as valid YAML | `yaml.safe_load(frontmatter)` raises no error |
@@ -42,13 +35,8 @@ Failure on any single gate means REJECT regardless of soft score.
 | H07 | `format_type` is one of: json, yaml, markdown, csv, plaintext | enum membership check |
 | H08 | `injection_point` is one of: system_prompt, user_message | enum membership check |
 | H09 | Section structure defined with at least one named section | sections table or list has >= 1 entry |
-
----
-
 ## SOFT Scoring
-
 Score each dimension 0 (absent or fails) to 1 (present and passes). Weights are 0.5 or 1.0.
-
 | #  | Dimension | Weight |
 |----|-----------|--------|
 | 1  | `density_score` field present and >= 0.80 | 1.0 |
@@ -62,31 +50,19 @@ Score each dimension 0 (absent or fails) to 1 (present and passes). Weights are 
 | 9  | Fallback format described for partial or truncated LLM output | 0.5 |
 | 10 | Format is compatible with the target model's context window and output style | 0.5 |
 | 11 | `tldr` is <= 160 characters | 0.5 |
-
 **Formula**: `final_score = (sum of score_i * weight_i) / (sum of weight_i) * 10`
-
 Weight total: 9.0. Each dimension contributes proportionally. Score range: 0.0 to 10.0.
-
----
-
 ## Actions
-
 | Tier | Threshold | Action |
 |------|-----------|--------|
 | GOLDEN | >= 9.5 | Publish to pool as golden; use as reference for format design |
 | PUBLISH | >= 8.0 | Publish to pool; mark production-ready |
 | REVIEW | >= 7.0 | Return to author with scored dimension feedback; one revision cycle allowed |
 | REJECT | < 7.0 | Block from pool; full rewrite required before re-evaluation |
-
----
-
 ## Bypass
-
 | Field | Value |
 |-------|-------|
 | condition | Format is under active negotiation with a new model provider whose output style is not yet finalized |
 | approver | Domain lead must approve in writing before bypass takes effect |
 | audit_log | Record in `records/pool/audits/bypasses.md` with date, approver, and reason |
 | expiry | 14 days from bypass grant; format must reach full compliance once model behavior is confirmed |
-
-H01 (YAML parses) and H05 (quality is null) may never be bypassed under any circumstance. Bypassing H07 or H08 (format type or injection point enum) is never permitted — these are the structural identity of the artifact.

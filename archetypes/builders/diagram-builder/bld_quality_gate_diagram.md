@@ -15,22 +15,15 @@ density_score: 0.90
 ---
 
 # Gate: diagram
-
 ## Definition
-
 | Field     | Value |
 |-----------|-------|
 | metric    | Composite score from SOFT dimensions + all HARD gates pass |
 | threshold | >= 7.0 to publish; >= 9.5 golden |
 | operator  | AND (all HARD) + weighted_sum (SOFT) |
 | scope     | All artifacts where `kind: diagram` |
-
----
-
 ## HARD Gates
-
 All must pass. Any single failure = REJECT regardless of SOFT score.
-
 | ID  | Check | Failure message |
 |-----|-------|----------------|
 | H01 | Frontmatter parses as valid YAML | "Frontmatter YAML syntax error" |
@@ -42,13 +35,8 @@ All must pass. Any single failure = REJECT regardless of SOFT score.
 | H07 | `notation` is one of: `ascii`, `mermaid` | "Notation must be 'ascii' or 'mermaid'" |
 | H08 | Diagram body is non-empty (>= 5 lines of visual content) | "Diagram has no visual content" |
 | H09 | If `notation: mermaid`, diagram block opens with valid Mermaid graph type directive | "Mermaid diagram type directive missing or invalid" |
-
----
-
 ## SOFT Scoring
-
 Dimensions sum to 100%. Score each 0.0-10.0; multiply by weight.
-
 | Dimension | Weight | What to assess |
 |-----------|--------|----------------|
 | Layer boundaries | 1.0 | Distinct system layers are visually separated and labeled |
@@ -61,24 +49,15 @@ Dimensions sum to 100%. Score each 0.0-10.0; multiply by weight.
 | Readability | 1.0 | Diagram renders cleanly without overlapping elements |
 | Subject specificity | 1.0 | Diagram represents the stated subject accurately |
 | Documentation | 1.0 | tldr and body intro explain what architecture this depicts |
-
 Weight sum: 1.0+1.0+1.0+1.0+0.5+0.5+1.0+1.0+1.0+1.0 = 9.0 -> normalize to 100%
-
----
-
 ## Actions
-
 | Score | Tier | Action |
 |-------|------|--------|
 | >= 9.5 | GOLDEN | Publish to pool as golden exemplar |
 | >= 8.0 | PUBLISH | Publish to pool |
 | >= 7.0 | REVIEW | Flag for human review before publish |
 | < 7.0  | REJECT | Return to author with failure report |
-
----
-
 ## Bypass
-
 | Field | Value |
 |-------|-------|
 | conditions | Work-in-progress diagram during active system design iteration |

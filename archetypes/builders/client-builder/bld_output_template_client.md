@@ -1,4 +1,6 @@
 ---
+kind: output_template
+id: bld_output_template_client
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} that the LLM fills to produce a client artifact
@@ -6,9 +8,7 @@ pattern: every field here exists in SCHEMA.md — template derives, never invent
 ---
 
 # Output Template: client
-
 ```yaml
----
 id: p04_client_{{api_slug}}
 kind: client
 pillar: P04
@@ -34,33 +34,26 @@ serialization: {{json|xml|protobuf}}
 pagination: {{cursor|offset|none}}
 error_codes: [{{code_1}}, {{code_2}}]
 caching: "{{cache_strategy}}"
----
 ```
-
 ## Overview
 {{what_api_client_consumes_1_to_2_sentences}}
 {{who_consumes_it_and_primary_use_case}}
-
 ## Endpoints
-
 ### {{endpoint_name_1}}
 {{METHOD}} {{path}} — {{endpoint_description}}
 Parameters:
 - `{{param_1}}` ({{type}}, {{required|optional}}): {{param_description}}
 - `{{param_2}}` ({{type}}, {{required|optional}}): {{param_description}}
 Returns: {{return_description}}
-
 ### {{endpoint_name_2}}
 {{METHOD}} {{path}} — {{endpoint_description}}
 Parameters:
 - `{{param_1}}` ({{type}}, {{required|optional}}): {{param_description}}
 Returns: {{return_description}}
-
 ## Auth & Config
 Base URL: {{base_url}}
 Auth: {{auth_method_and_header_format}}
 Headers: {{required_headers}}
-
 ## Error Handling
 - {{error_code}}: {{description}} — {{retry_behavior}}
 - {{error_code}}: {{description}} — {{retry_behavior}}

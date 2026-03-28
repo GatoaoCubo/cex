@@ -21,47 +21,20 @@ keywords: [interface, contract, provider, consumer, versioning, backward_compati
 ---
 
 ## Summary
-
 Interfaces define bilateral contracts between a provider and a consumer. The most damaging failure is treating an interface as unilateral — defining only one party. The second most damaging failure is incrementing a version number without declaring what happens to old methods. Both failures cause breaking changes that are expensive to debug after deployment.
-
 ## Pattern
-
 Bilateral contract checklist:
-
 1. **Both parties declared** - `provider` and `consumer` fields both required. Name them as components, not roles.
 2. **Method completeness** - Every method must have `input` schema and `output` schema. A method with only one side creates implicit assumptions.
 3. **Version semantics** - Increment major version when removing or changing method signatures. Increment minor when adding methods. Patch for documentation only.
 4. **Backward compatibility** - `backward_compatible: true` means old consumers work without changes. `false` means a migration is required. Declare `deprecation_path` for every method being removed: timeline, replacement method, migration notes.
 5. **Mock payload fidelity** - Mock payloads in examples must contain exactly the fields declared in the method schema. No extra fields, no missing fields.
-
 Do not add event handling or runtime state to an interface — those belong in signal and runtime_state artifacts respectively.
-
 ## Anti-Pattern
-
 - `provider` declared but no `consumer` — unilateral definition, incomplete contract.
 - Method with `input` but no `output` — consumer cannot know what to expect.
 - `backward_compatible: "yes"` — must be boolean `true`, string causes schema rejection.
 - Version increment without `deprecation_path` — old consumers break silently.
 - Mock payload with different fields than declared schema — misleads callers about actual behavior.
 - Adding event handling to interface — scope creep into signal territory.
-
 ## Context
-
-Breaking change incidents were traced back to interfaces that declared compatibility but had no formal deprecation mechanism. When the provider changed a method signature, consumers had no documented path for migration. Adding `deprecation_path` as a required field when `backward_compatible: false` forces the author to think through migration at design time rather than leaving it implicit.
-
-## Impact
-
-- Breaking change incidents: 3 in deployments without deprecation_path vs 0 with
-- Unilateral contract bugs: eliminated by requiring both provider and consumer fields
-- Mock payload mismatches: detected at authoring time by schema comparison, not runtime
-- Version increment discipline: improved by requiring deprecation_path on breaking changes
-
-## Reproducibility
-
-The bilateral requirement and method completeness check apply to every interface regardless of domain. Version semantics and deprecation_path are only relevant when the interface has been deployed and is being updated. Mock payload fidelity is a quick authoring-time check that prevents a common class of integration test failures.
-
-## References
-
-- Interface schema: SCHEMA.md
-- Versioning guide: INSTRUCTIONS.md
-- Examples with deprecation: EXAMPLES.md

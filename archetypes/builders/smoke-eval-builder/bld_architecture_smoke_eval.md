@@ -7,9 +7,7 @@ purpose: Component map of smoke_eval — inventory, dependencies, and architectu
 ---
 
 # Architecture: smoke_eval in the CEX
-
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | frontmatter block | Metadata header (id, kind, pillar, domain, target, timeout, etc.) | smoke-eval-builder | active |
@@ -18,15 +16,12 @@ purpose: Component map of smoke_eval — inventory, dependencies, and architectu
 | timeout_limit | Maximum execution time (< 30 seconds) for fast-fail behavior | author | active |
 | health_checks | Component-level liveness and readiness verifications | author | active |
 | failure_action | What happens on smoke failure (block deploy, alert, rollback) | author | active |
-
 ## Dependency Graph
-
 ```
 target_component  --tested_by-->  smoke_eval  --produces-->    pass_fail_result
 smoke_eval        --consumed_by-->  CI_pipeline  --signals-->  smoke_event
 smoke_eval        --depends-->      health_endpoint
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | target_component | smoke_eval | data_flow | component under test provides health endpoints |
@@ -35,9 +30,7 @@ smoke_eval        --depends-->      health_endpoint
 | smoke_eval | smoke_event (P12) | signals | emitted on pass or fail with timing data |
 | health_endpoint | smoke_eval | dependency | health checks require accessible endpoints |
 | quality_gate (P11) | smoke_eval | dependency | gate may require smoke eval pass before promotion |
-
 ## Boundary Table
-
 | smoke_eval IS | smoke_eval IS NOT |
 |---------------|-------------------|
 | A fast sanity check (< 30 seconds) for basic component health | A deep correctness test with full coverage (unit_eval P07) |
@@ -46,9 +39,7 @@ smoke_eval        --depends-->      health_endpoint
 | Run before every deploy as a safety gate | A periodic quality review or calibration |
 | Produces boolean pass/fail with failure details | A scored evaluation with weighted dimensions (scoring_rubric P07) |
 | Scoped to one component or service | A system-wide health assessment |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Target | target_component, health_endpoint | Identify what is being tested and its health interface |

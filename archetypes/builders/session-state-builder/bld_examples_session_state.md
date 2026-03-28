@@ -1,4 +1,6 @@
 ---
+kind: examples
+id: bld_examples_session_state
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of session_state artifacts
@@ -6,14 +8,10 @@ pattern: few-shot learning for ephemeral session snapshots
 ---
 
 # Examples: session-state-builder
-
 ## Golden Example
-
 INPUT: "Capture session state for edison building wave 19 builders"
-
 OUTPUT (`p10_ss_edison_wave19_build.yaml`):
 ```yaml
----
 id: p10_ss_edison_wave19_build
 kind: session_state
 lp: P10
@@ -51,9 +49,7 @@ keywords: [session, snapshot, edison, wave19]
 linked_artifacts:
   primary: "archetypes/builders/session-state-builder/"
   related: ["archetypes/builders/dag-builder/", "archetypes/builders/handoff-builder/"]
----
 ```
-
 WHY THIS IS GOLDEN (19+ fields present):
 - filename follows `p10_ss_{session}.yaml`
 - YAML with proper frontmatter delimiters
@@ -65,12 +61,9 @@ WHY THIS IS GOLDEN (19+ fields present):
 - tldr is informative and under 160 characters
 - ephemeral: describes this session only, not prior sessions
 - tags length >= 3 and descriptive
-
 ## Anti-Example
-
 BAD OUTPUT (`p10_ss_runtime.yaml`):
 ```yaml
----
 id: p10_rs_edison_state
 kind: runtime_state
 lp: P10
@@ -87,9 +80,7 @@ accumulated_scores:
 learned_patterns:
   - "always read SCHEMA first"
   - "commit after each builder"
----
 ```
-
 FAILURES:
 1. wrong id prefix: `p10_rs_` instead of `p10_ss_` — violates H01 naming gate
 2. wrong kind: `runtime_state` instead of `session_state` — violates H04 type integrity

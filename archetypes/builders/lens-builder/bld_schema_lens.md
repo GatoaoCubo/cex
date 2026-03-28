@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: lens
-
 ## Frontmatter Fields
-
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string (p02_lens_{slug}) | YES | - | Namespace compliance |
@@ -33,17 +31,14 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | quality | null | YES | null | Never self-score |
 | tags | list[string], len >= 3 | YES | - | Must include "lens" |
 | tldr | string <= 160ch | YES | - | Dense summary |
-
 ## ID Pattern
 Regex: `^p02_lens_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Body Structure (required sections)
 1. `## Perspective` — what this lens sees and emphasizes
 2. `## Filters` — specific attributes this lens highlights or suppresses
 3. `## Application` — how to apply this lens to artifacts
 4. `## Limitations` — what this lens misses or de-emphasizes
-
 ## Constraints
 - max_bytes: 2048 (body only)
 - naming: p02_lens_{perspective_slug}.yaml

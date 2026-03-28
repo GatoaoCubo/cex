@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: interface
-
 ## Frontmatter Fields
-
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string (p06_iface_{contract}) | YES | - | Namespace compliance |
@@ -33,9 +31,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | tldr | string <= 160ch | YES | - | Dense summary |
 | keywords | list[string] | REC | - | Brain search terms |
 | density_score | float 0.80-1.00 | REC | - | Content density |
-
 ## Methods Object
-
 ```yaml
 methods:
   - name: "{{method_name}}"
@@ -43,23 +39,17 @@ methods:
     output: {{type_or_object}}
     description: "{{what_it_does}}"
 ```
-
 Each method MUST have: name, input, output, description.
 Input/output can be primitives (string, integer, boolean) or structured objects.
-
 ## Deprecation Object
-
 ```yaml
 deprecation:
   deprecated_methods: ["method_a", "method_b"]
   sunset_date: "2026-06-01"
   migration: "Use method_c instead of method_a"
 ```
-
 All fields optional. If no deprecation planned: deprecation: null.
-
 ## Mock Object
-
 ```yaml
 mock:
   enabled: true
@@ -68,17 +58,14 @@ mock:
       input: {"agent_id": "shaka"}
       output: {"status": "active", "uptime": 3600}
 ```
-
 ## ID Pattern
 Regex: `^p06_iface_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Body Structure (required sections)
 1. `## Contract Definition` — what this interface enables, in plain language
 2. `## Methods` — table with name/input/output/description for each method
 3. `## Versioning` — version, backward_compatible, changelog, migration
 4. `## Mock Specification` — example payloads for testing
-
 ## Constraints
 - max_bytes: 3072 (body only)
 - naming: p06_iface_{contract}.yaml

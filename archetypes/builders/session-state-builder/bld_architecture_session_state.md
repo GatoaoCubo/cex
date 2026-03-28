@@ -7,9 +7,7 @@ purpose: Component map of session_state — inventory, dependencies, and archite
 ---
 
 # Architecture: session_state in the CEX
-
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | frontmatter block | Metadata header (id, kind, pillar, domain, session_id, agent, timestamp, etc.) | session-state-builder | active |
@@ -18,15 +16,12 @@ purpose: Component map of session_state — inventory, dependencies, and archite
 | active_tasks | List of in-progress tasks with status and progress | agent | active |
 | tool_state | Current tool invocations and pending results | agent | active |
 | token_budget | Remaining token allocation and compression status | agent | active |
-
 ## Dependency Graph
-
 ```
 agent           --produces-->   session_state  --consumed_by-->  recovery_system
 session_state   --feeds-->      learning_record  --signals-->    checkpoint_event
 session_state   --consumed_by-->  context_manager
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | agent (P02) | session_state | produces | agent dumps current state as ephemeral snapshot |
@@ -35,9 +30,7 @@ session_state   --consumed_by-->  context_manager
 | session_state | context_manager | consumes | context manager reads token budget and usage |
 | session_state | checkpoint_event (P12) | signals | emitted when checkpoint is saved |
 | runtime_state (P10) | session_state | dependency | runtime state provides initial values for session |
-
 ## Boundary Table
-
 | session_state IS | session_state IS NOT |
 |------------------|----------------------|
 | An ephemeral snapshot of current session context | A persistent record of accumulated experience (learning_record P10) |
@@ -46,9 +39,7 @@ session_state   --consumed_by-->  context_manager
 | Used for crash recovery and context overflow management | A search index or knowledge base (brain_index P01) |
 | Scoped to one session of one agent | A shared state across multiple agents |
 | Lightweight snapshot with minimal overhead | A comprehensive audit log of all actions |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Source | agent, runtime_state | Agent execution produces session data |

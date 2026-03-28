@@ -1,4 +1,6 @@
 ---
+kind: examples
+id: bld_examples_interface
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of interface artifacts
@@ -6,15 +8,10 @@ pattern: few-shot learning — LLM reads these before producing
 ---
 
 # Examples: interface-builder
-
 ## Golden Example
-
 INPUT: "Define o contrato entre researcher (pesquisa) e marketer (marketing) para entrega de research results"
-
 OUTPUT:
-
 ```yaml
----
 id: p06_iface_research_to_marketing
 kind: interface
 pillar: P06
@@ -47,26 +44,20 @@ quality: null
 tags: [interface, shaka, lily, research, marketing, satellite-integration]
 tldr: "Bilateral contract for researcher to deliver research results to marketer marketing workflows."
 density_score: 0.91
----
 ```
-
 ## Contract Definition
 researcher (research satellite) provides structured research data to marketer (marketing satellite).
 marketer calls methods to get research summaries and competitor data for marketing campaigns.
-
 ## Methods
-
 | # | Name | Input | Output | Description |
 |---|------|-------|--------|-------------|
 | 1 | get_research_summary | {topic, max_sources} | {summary, sources, confidence} | Distilled research with sources |
 | 2 | get_competitor_data | {competitor_name, marketplace} | {pricing, listings, rating} | Structured competitor intel |
-
 ## Versioning
 - **Version**: 1.0.0
 - **Backward compatible**: yes
 - **Changes from previous**: initial release
 - **Migration notes**: none
-
 ## Mock Specification
 ```json
 {
@@ -75,7 +66,6 @@ marketer calls methods to get research summaries and competitor data for marketi
   "output": {"summary": "Tendencia crescente em 2026...", "sources": ["url1", "url2"], "confidence": 0.87}
 }
 ```
-
 WHY THIS IS GOLDEN:
 - quality: null (H05 pass)
 - id matches p06_iface_ pattern (H02 pass)
@@ -87,17 +77,10 @@ WHY THIS IS GOLDEN:
 - tldr <= 160 chars, dense (S01 pass)
 - tags list len >= 3, includes "interface" (S02 pass)
 - YAML parses cleanly (H01 pass)
-
----
-
 ## Anti-Example
-
 INPUT: "Interface entre researcher e marketer"
-
 BAD OUTPUT:
-
 ```yaml
----
 id: shaka_lily_interface
 kind: integration
 pillar: Schema
@@ -106,11 +89,8 @@ methods: "get data from researcher"
 backward_compatible: maybe
 quality: 9.0
 tags: interface
----
 ```
-
 researcher sends data to marketer when needed.
-
 FAILURES:
 1. id: no `p06_iface_` prefix -> H02 FAIL
 2. kind: "integration" not "interface" -> H04 FAIL

@@ -1,4 +1,6 @@
 ---
+kind: examples
+id: bld_examples_input_schema
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of input_schema artifacts
@@ -6,15 +8,10 @@ pattern: few-shot learning — LLM reads these before producing
 ---
 
 # Examples: input-schema-builder
-
 ## Golden Example
-
 INPUT: "Define o input schema para o brain_query — o que precisa receber para buscar"
-
 OUTPUT:
-
 ```yaml
----
 id: p06_is_brain_query
 kind: input_schema
 pillar: P06
@@ -54,31 +51,24 @@ quality: null
 tags: [input-schema, brain-query, search, P10]
 tldr: "Input contract for brain_query: requires query string, optional max_results and filters."
 density_score: 0.90
----
 ```
-
 ## Contract Definition
 brain_query receives search requests from any agent/satellite. Callers provide a natural
 language query string, optional result limit, and optional filters by pillar/kind/domain.
-
 ## Fields
-
 | # | Name | Type | Required | Default | Description |
 |---|------|------|----------|---------|-------------|
 | 1 | query | string | YES | - | Natural language search query |
 | 2 | max_results | integer | NO | 10 | Max results to return |
 | 3 | filters | object | NO | null | Filter by pillar, kind, domain, min_quality |
-
 ## Coercion Rules
 | From | To | Rule |
 |------|----|------|
 | string | integer | Parse max_results from string if numeric |
-
 ## Examples
 ```json
 {"query": "agent for research", "max_results": 5}
 ```
-
 WHY THIS IS GOLDEN:
 - quality: null (H05 pass)
 - id matches p06_is_ pattern (H02 pass)
@@ -90,17 +80,10 @@ WHY THIS IS GOLDEN:
 - tldr <= 160 chars, dense (S01 pass)
 - tags list len >= 3, includes "input-schema" (S02 pass)
 - YAML parses cleanly (H01 pass)
-
----
-
 ## Anti-Example
-
 INPUT: "Input para brain query"
-
 BAD OUTPUT:
-
 ```yaml
----
 id: brain_input
 kind: schema
 pillar: Schema
@@ -108,11 +91,8 @@ scope: brain
 fields: "query string and results count"
 quality: 8.0
 tags: input
----
 ```
-
 Takes a query and returns results.
-
 FAILURES:
 1. id: no `p06_is_` prefix -> H02 FAIL
 2. kind: "schema" not "input_schema" -> H04 FAIL

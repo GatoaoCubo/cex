@@ -8,7 +8,6 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 ---
 
 # Instructions: How to Produce an agent
-
 ## Phase 1: RESEARCH
 1. Identify the agent's primary domain and the specific function it performs within that domain
 2. Define the agent's persona: 2-3 sentences describing who this agent is and how it operates
@@ -17,7 +16,6 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 5. Determine satellite assignment: which satellite owns this agent (or mark agnostic)
 6. Search for existing agents in the same domain to avoid duplicate definitions
 7. List tools required: MCP servers, scripts, APIs, file system paths this agent needs
-
 ## Phase 2: COMPOSE
 1. Read SCHEMA.md — source of truth for all fields
 2. Read OUTPUT_TEMPLATE.md — template to fill
@@ -30,7 +28,6 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 9. Write iso_vectorstore skeleton: list 10 minimum ISO files with correct naming convention
 10. Set capabilities_count to match actual bullets written
 11. Check body <= 5120 bytes
-
 ## Phase 3: VALIDATE
 1. Check QUALITY_GATES.md manually
 2. HARD gate: id matches `p02_agent_` pattern

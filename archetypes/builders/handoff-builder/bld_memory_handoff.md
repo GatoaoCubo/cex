@@ -21,24 +21,17 @@ keywords: [handoff, scope, permitted, prohibited, task-boundary, markdown, agent
 ---
 
 ## Summary
-
 Handoff documents are the primary transfer interface between agents. Document quality determines whether the receiving agent executes correctly or drifts. The two highest-leverage structural elements are: (1) a SCOPE FENCE section with explicit permitted and prohibited paths, and (2) numbered atomic task steps each containing exactly one action verb.
-
 ## Pattern
-
 Mandatory section order for every handoff:
-
 1. **CONTEXT** - One paragraph: what the user wants and why. No instructions here.
 2. **SEEDS** - 5-10 keywords that help the agent hydrate domain context before starting.
 3. **TASKS** - Numbered steps. Each step = one action verb + one concrete expected output. Use [BRACKETS] for open decisions the agent must make. Max 7 steps per handoff.
 4. **SCOPE FENCE** - Two subsections: `SOMENTE` (only touch these paths, use globs) and `NAO TOQUE` (never touch these paths). Explicit beats implicit.
 5. **COMMIT** - Exact git command with relative paths matching SOMENTE scope.
 6. **SIGNAL** - One-line Python call to emit completion signal.
-
 Task steps must be idempotent where possible. State prerequisites as verifiable preconditions before the step body. For batches, use naming `{MISSION}_batch_{N}_{agent}.md` and declare wave order.
-
 ## Anti-Pattern
-
 - Prose paragraphs as tasks — no clear definition of done.
 - Omitting SCOPE FENCE entirely — agent makes reasonable-but-wrong assumptions.
 - Absolute paths in scope fences — break when working directory differs.
@@ -46,25 +39,8 @@ Task steps must be idempotent where possible. State prerequisites as verifiable 
 - More than 7 tasks without dependency ordering — wrong execution sequence.
 - Missing SIGNAL section — work completes silently, requires manual detection.
 - Self-scoring quality field — scoring is external, set to null.
-
 ## Context
-
 Pattern emerged from execution logs where agents caused unintended side effects despite correct task intent. Root cause was consistently the absence of a boundary between what the agent should and should not touch. SCOPE FENCE as a first-class structural element resolved this without meaningfully increasing document length. The signal section was added after multiple silent-completion incidents in multi-wave batches.
-
 ## Impact
-
 - Out-of-scope file edits: ~4 per run -> 0 with SCOPE FENCE present
 - Retry rate per task: 2.1 -> 0.3
-- Deliverable acceptance first attempt: 68% -> 97%
-- Silent completions: 100% of batches missing SIGNAL -> 0% when present
-- Handoff document length with pattern: 40-80 lines (within context budget)
-
-## Reproducibility
-
-Domain-agnostic. Apply whenever delegating a task to an agent executing with limited supervision. Minimum viable handoff requires CONTEXT + TASKS + SCOPE FENCE. COMMIT and SIGNAL are required when the task produces artifacts that must be persisted and detected.
-
-## References
-
-- Handoff format spec: OUTPUT_TEMPLATE.md in this builder directory
-- Schema definition: SCHEMA.md
-- Examples: EXAMPLES.md

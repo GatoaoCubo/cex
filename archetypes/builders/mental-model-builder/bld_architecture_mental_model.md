@@ -7,9 +7,7 @@ purpose: Component map of mental_model — inventory, dependencies, and architec
 ---
 
 # Architecture: mental_model in the CEX
-
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | frontmatter block | 23-field metadata header (id, kind, pillar, domain, target_agent, etc.) | mental-model-builder | active |
@@ -19,15 +17,12 @@ purpose: Component map of mental_model — inventory, dependencies, and architec
 | heuristics | Rules of thumb for ambiguous situations without clear routing | author | active |
 | domain_map | Boundaries defining what the agent knows and does not know | author | active |
 | personality_traits | Behavioral tendencies that shape tone and approach | author | active |
-
 ## Dependency Graph
-
 ```
 knowledge_card  --produces-->  mental_model  --consumed_by-->  agent
 domain_context  --produces-->  mental_model  --referenced_by-> router
 mental_model    --signals-->   routing_decision
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | knowledge_card (P01) | mental_model | data_flow | domain facts informing routing rules and heuristics |
@@ -36,9 +31,7 @@ mental_model    --signals-->   routing_decision
 | mental_model | router (P02) | data_flow | routing rules referenced by dispatch logic |
 | mental_model | routing_decision | produces | specific route selected for incoming task |
 | system_prompt (P03) | mental_model | dependency | system prompt identity constrains mental model scope |
-
 ## Boundary Table
-
 | mental_model IS | mental_model IS NOT |
 |-----------------|---------------------|
 | A design-time cognitive map with routing and decisions | A runtime-accumulated state (runtime_state P10) |
@@ -47,9 +40,7 @@ mental_model    --signals-->   routing_decision
 | Composed of rules, trees, heuristics, and domain maps | An evaluation framework with scoring (scoring_rubric P07) |
 | Scoped to one agent or one domain | A universal routing system for all agents |
 | Declared personality traits, not emergent behavior | A learned behavioral pattern (learning_record P10) |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Context | knowledge_card, context_doc, system_prompt | Supply domain knowledge and identity constraints |

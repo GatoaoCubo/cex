@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: lifecycle_rule
-
 ## Frontmatter Fields
-
 ### Required
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
@@ -30,7 +28,6 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | quality | null | YES | null | Never self-score |
 | tags | list[string], len >= 3 | YES | — | Searchability |
 | tldr | string <= 160ch | YES | — | Dense summary |
-
 ### Recommended
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
@@ -38,18 +35,15 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | automation | enum (full, semi, manual) | REC | semi | Level of automated transitions |
 | linked_artifacts | object {primary, related} | REC | — | Cross-references |
 | density_score | float 0.80-1.00 | REC | — | Content density |
-
 ## ID Pattern
 Regex: `^p11_lc_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Body Structure (required sections)
 1. `## Definition` — what artifact kind it governs and why freshness matters
 2. `## States` — table of lifecycle states with entry criteria
 3. `## Transitions` — table of state changes with triggers and actions
 4. `## Review Protocol` — who reviews, when, what they check
 5. `## Automation` — which transitions are automated vs manual
-
 ## Constraints
 - max_bytes: 4096 (body only)
 - naming: p11_lc_{rule_slug}.yaml

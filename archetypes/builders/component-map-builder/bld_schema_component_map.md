@@ -1,4 +1,5 @@
 ---
+pillar: P00
 id: component-map-builder-schema
 kind: schema
 parent: component-map-builder
@@ -6,9 +7,7 @@ version: 2.0.0
 ---
 
 # Schema — component-map-builder
-
 SOURCE OF TRUTH. OUTPUT_TEMPLATE derives from this. CONFIG restricts from this.
-
 ## Artifact Identity
 | Field | Value |
 |-------|-------|
@@ -17,9 +16,7 @@ SOURCE OF TRUTH. OUTPUT_TEMPLATE derives from this. CONFIG restricts from this.
 | Machine format | `yaml` (frontmatter yaml + md body) |
 | Naming | `p08_cmap_{scope_slug}.yaml` |
 | Max bytes | 4096 |
-
 ## Required Fields (11)
-
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string, matches `^p08_cmap_[a-z][a-z0-9_]+$` | YES | — | Namespace compliance |
@@ -33,9 +30,7 @@ SOURCE OF TRUTH. OUTPUT_TEMPLATE derives from this. CONFIG restricts from this.
 | quality | null | YES | null | NEVER a number |
 | tags | list[string], len >= 3 | YES | — | Searchability |
 | tldr | string <= 160ch | YES | — | Dense summary |
-
 ## Recommended Fields (5)
-
 | Field | Type | Required | Notes |
 |-------|------|----------|-------|
 | scope | string | REC | What is mapped — one sentence |
@@ -43,26 +38,19 @@ SOURCE OF TRUTH. OUTPUT_TEMPLATE derives from this. CONFIG restricts from this.
 | connection_count | integer >= 1 | REC | Must match Connections table |
 | layers_count | integer >= 2 | REC | Number of architectural layers (layered decomposition) |
 | keywords | list[string], len >= 2 | REC | For brain search |
-
 ## ID Pattern
-
 ```
 ^p08_cmap_[a-z][a-z0-9_]+$
 ```
-
 Examples: `p08_cmap_brain_infrastructure`, `p08_cmap_satellite_network`, `p08_cmap_api_layer`
-
 ## Component Object Schema
-
 ```yaml
 name: string        # component identifier
 role: string        # what it does
 owner: string       # satellite, team, or "system"
 status: enum        # active | deprecated | planned
 ```
-
 ## Connection Object Schema
-
 ```yaml
 from: string        # source component name
 to: string          # target component name
@@ -70,9 +58,7 @@ type: enum          # data_flow | dependency | signal | produces | consumes
 data: string        # optional, what flows
 direction: enum     # unidirectional | bidirectional
 ```
-
 ## Dependency Notation
-
 | Notation | Meaning | Example |
 |----------|---------|---------|
 | `A --> B` | Data flow | Parser --> Classifier |
@@ -80,18 +66,13 @@ direction: enum     # unidirectional | bidirectional
 | `A --signals--> B` | Event/notification | Worker --signals--> Monitor |
 | `A --produces--> B` | A generates B | Indexer --produces--> VectorIndex |
 | `A <--> B` | Bidirectional | Cache <--> Database |
-
 Per component: document `receives_from` (whom, what data) and `produces_for` (whom, what data).
-
 ## Body Structure (4 sections)
-
 1. `## Component Inventory` — table: name, role, owner, status; every component listed
 2. `## Dependency Graph` — typed connections using notation above; ASCII topology diagram
 3. `## Boundary Table` — IS / IS NOT table defining what the map covers and excludes
 4. `## Layer Map` — architectural layers (top-down); which components belong to each layer
-
 ## Constraints
-
 | Constraint | Value |
 |-----------|-------|
 | max_bytes | 4096 (body only) |
@@ -102,9 +83,7 @@ Per component: document `receives_from` (whom, what data) and `produces_for` (wh
 | untyped connections | FORBIDDEN (every arrow must have a type) |
 | quality field | ALWAYS null |
 | scope | definable in one sentence; if not, split the map |
-
 ## Enum Values
-
 | Field | Valid Values |
 |-------|-------------|
 | status | active, deprecated, planned |

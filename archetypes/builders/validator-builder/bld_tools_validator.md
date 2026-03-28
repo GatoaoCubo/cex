@@ -7,17 +7,13 @@ purpose: Tools and APIs available for validator production
 ---
 
 # Tools: validator-builder
-
 ## Production Tools
-
 | Tool | Purpose | When | Status |
 |------|---------|------|--------|
 | brain_query [MCP] | Search existing validators in pool | Phase 1 (check duplicates) | CONDITIONAL |
 | validate_artifact.py | Generic artifact validator | Phase 3 | [PLANNED] |
 | cex_forge.py | Generate artifact from seeds | Alternative compose | [PLANNED] |
-
 ## Data Sources
-
 | Source | Path/URL | Data |
 |--------|----------|------|
 | CEX Schema | P06_schema/_schema.yaml | Field definitions for validator |
@@ -26,7 +22,6 @@ purpose: Tools and APIs available for validator production
 | TAXONOMY | archetypes/TAXONOMY_LAYERS.yaml | Layer position, overlaps |
 | Existing validators | pool/ (brain_query) | Patterns to follow |
 | JSON Schema spec | https://json-schema.org/ | Operator/condition patterns |
-
 ## Interim Validation
 No automated validator exists yet for validators.
 Manually check each QUALITY_GATES.md gate against produced artifact:

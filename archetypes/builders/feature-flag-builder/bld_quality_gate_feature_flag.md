@@ -15,22 +15,15 @@ density_score: 0.91
 ---
 
 # Gate: feature_flag
-
 ## Definition
-
 | Field     | Value |
 |-----------|-------|
 | metric    | composite score across SOFT dimensions |
 | threshold | >= 7.0 to publish; >= 9.5 for golden |
 | operator  | weighted average after all HARD gates pass |
 | scope     | all artifacts where `kind: feature_flag` |
-
 All HARD gates are AND-logic: one failure rejects the artifact regardless of SOFT score.
-
----
-
 ## HARD Gates
-
 | ID  | Check | Fail Condition |
 |-----|-------|----------------|
 | H01 | Frontmatter parses as valid YAML | Any YAML syntax error |
@@ -43,11 +36,7 @@ All HARD gates are AND-logic: one failure rejects the artifact regardless of SOF
 | H08 | `default_state` is one of: `on`, `off` | Any other value |
 | H09 | `rollout_percentage` is integer 0–100 | Out of range or non-integer |
 | H10 | `category` is one of: `release`, `experiment`, `ops`, `permission` | Any unlisted value |
-
----
-
 ## SOFT Scoring
-
 | Dim | Dimension | Weight | Scoring Guide |
 |-----|-----------|--------|---------------|
 | S01 | `tldr` <= 160 chars, names flag and toggle behavior | 0.10 | Accurate=1.0, vague=0.4, absent=0.0 |
@@ -62,24 +51,15 @@ All HARD gates are AND-logic: one failure rejects the artifact regardless of SOF
 | S10 | Boundary from `env_config` and `permission` stated | 0.08 | Both stated=1.0, one=0.5, absent=0.0 |
 | S11 | `density_score` >= 0.80 | 0.07 | Met=1.0, below=0.0 |
 | S12 | No filler phrases ("designed to enable", "various use cases") | 0.03 | Clean=1.0, filler present=0.0 |
-
 **Weight sum: 1.00**
-
----
-
 ## Actions
-
 | Score | Action |
 |-------|--------|
 | >= 9.5 | GOLDEN — reference artifact for feature_flag calibration |
 | >= 8.0 | PUBLISH — pool-eligible; rollout strategy and kill switch documented |
 | >= 7.0 | REVIEW — usable but missing sunset date or observability hook |
 | < 7.0  | REJECT — redo; likely missing rollback procedure or cohort rules |
-
----
-
 ## Bypass
-
 | Field | Value |
 |-------|-------|
 | conditions | Hotfix rollout only; flag controls an active incident mitigation with no time to complete all gates |

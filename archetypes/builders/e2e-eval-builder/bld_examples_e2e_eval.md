@@ -1,4 +1,6 @@
 ---
+kind: examples
+id: bld_examples_e2e_eval
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of e2e_eval artifacts
@@ -6,14 +8,10 @@ pattern: few-shot learning — LLM reads these before producing
 ---
 
 # Examples: e2e-eval-builder
-
 ## Golden Example
-
 INPUT: "Create e2e eval for the research-to-knowledge pipeline"
-
 OUTPUT:
 ```yaml
----
 id: p07_e2e_research_to_kc
 kind: e2e_eval
 pillar: P07
@@ -54,47 +52,38 @@ quality: null
 tags: [e2e-eval, research-pipeline, knowledge-card, integration]
 tldr: "300s e2e: research->distill->validate pipeline produces quality KC >= 8.0"
 density_score: 0.90
----
-
 ## Pipeline Overview
 [research-agent] -> research report -> [kc-builder] -> knowledge_card -> [qg-builder] -> score >= 8.0
-
 ## Stages
 ### Stage 1: Research
 - Agent: research-agent
 - Input: "prompt caching techniques for LLM cost optimization"
 - Expected: research report with >= 3 sources
 - Assertion: output.sources.length >= 3
-
 ### Stage 2: Distill
 - Agent: knowledge-card-builder
 - Input: research report from Stage 1
 - Expected: knowledge_card with all required sections
 - Assertion: output.kind == "knowledge_card" AND all sections present
-
 ### Stage 3: Validate
 - Agent: quality-gate-builder
 - Input: knowledge_card from Stage 2
 - Expected: quality score >= 8.0
 - Assertion: output.score >= 8.0
-
 ## Data Fixtures
 - Seed query: "prompt caching techniques for LLM cost optimization"
 - Expected sources: anthropic docs, openai docs (minimum)
 - KC template: standard knowledge_card with 6 sections
-
 ## Expected Output
 Validated knowledge_card with:
 - All required sections (Conceitos, Quando Usar, Economia, Limitacoes, Comparativo, References)
 - Quality score >= 8.0 from quality gate
 - Research sources cited in References section
-
 ## Cleanup
 1. Remove scratch artifacts from P07_evals/scratch/
 2. Clear any cached research results
 3. Reset quality gate state
 ```
-
 WHY THIS IS GOLDEN:
 - quality: null (never self-scored)
 - id matches p07_e2e_ pattern, kind: e2e_eval
@@ -102,24 +91,17 @@ WHY THIS IS GOLDEN:
 - 3 connected stages with agent/input/output/assertion
 - Pipeline Overview, data_fixtures, cleanup all present
 - Expected Output is concrete, timeout: 300s
-
 ## Anti-Example
-
 INPUT: "E2E test for research pipeline"
-
 BAD OUTPUT:
 ```yaml
----
 id: e2e_test
 kind: e2e
 quality: 8.5
 pipeline: research
----
-
 ## Test
 Run the research pipeline end to end. Should work correctly and produce good results.
 ```
-
 FAILURES:
 1. id: no p07_e2e_ prefix -> H02 FAIL
 2. kind: "e2e" not "e2e_eval" -> H04 FAIL

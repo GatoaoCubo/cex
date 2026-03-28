@@ -1,4 +1,6 @@
 ---
+kind: output_template
+id: bld_output_template_axiom
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} that the LLM fills to produce an axiom
@@ -6,9 +8,7 @@ pattern: every field here exists in SCHEMA.md — template derives, never invent
 ---
 
 # Output Template: axiom
-
 ```yaml
----
 id: p10_ax_{{slug}}
 kind: axiom
 pillar: P10
@@ -31,35 +31,27 @@ keywords: [{{kw_1}}, {{kw_2}}, {{kw_3}}]
 linked_artifacts:
   primary: {{primary_or_null}}
   related: [{{related_1}}]
----
 ```
-
 ## Rule Statement
 {{axiom_in_one_clear_sentence}}
-
 ## Rationale
 - {{reason_1_why_immutable}}
 - {{reason_2_why_immutable}}
 - {{reason_3_why_immutable}}
-
 ## Scope
 - Domain: {{domain_where_applies}}
 - System: {{system_boundary}}
 - Layer: {{architectural_layer}}
-
 ## Enforcement
 - Detection: {{how_to_detect_violation}}
 - Response: {{what_happens_on_violation}}
-
 ## Examples
 1. {{case_where_axiom_holds_1}}
 2. {{case_where_axiom_holds_2}}
-
 ## Violations
 1. {{known_or_hypothetical_breach}}
    - Impact: {{what_breaks}}
    - Resolution: {{how_to_restore}}
-
 ## References
 - {{reference_1}}
 - {{reference_2}}

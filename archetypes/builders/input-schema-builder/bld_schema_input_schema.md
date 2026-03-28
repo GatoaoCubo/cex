@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: input_schema
-
 ## Frontmatter Fields
-
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string (p06_is_{scope}) | YES | - | Namespace compliance |
@@ -30,9 +28,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | tldr | string <= 160ch | YES | - | Dense summary |
 | keywords | list[string] | REC | - | Brain search terms |
 | density_score | float 0.80-1.00 | REC | - | Content density |
-
 ## Fields Object
-
 ```yaml
 fields:
   - name: "topic"
@@ -42,29 +38,23 @@ fields:
     description: "Research topic"
     error_message: "topic is required"
 ```
-
 Each field MUST have: name, type, required. Optional: default, description, error_message.
 Type: string, integer, float, boolean, list, object.
-
 ## Coercion Object
-
 ```yaml
 coercion:
   - from: "string"
     to: "integer"
     rule: "Parse numeric string to int, fail if non-numeric"
 ```
-
 ## ID Pattern
 Regex: `^p06_is_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Body Structure (required sections)
 1. `## Contract Definition` — what operation this input serves
 2. `## Fields` — table with name/type/required/default/description
 3. `## Coercion Rules` — type conversion rules (if any)
 4. `## Examples` — at least one valid payload
-
 ## Constraints
 - max_bytes: 3072 (body only)
 - naming: p06_is_{scope}.yaml

@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: runtime_rule
-
 ## Frontmatter Fields
-
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string (p09_rr_{rule_slug}) | YES | - | Namespace compliance |
@@ -29,16 +27,13 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | description | string <= 200ch | REC | - | What this rule governs |
 | fallback | string | REC | - | Behavior when rule triggers |
 | severity | enum: critical, high, medium, low | REC | medium | Impact if rule is misconfigured |
-
 ## ID Pattern
 Regex: `^p09_rr_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Body Structure (required sections)
 1. `## Rule Specification` — concrete parameters: values with units, thresholds, limits
 2. `## Trigger Behavior` — what happens when rule activates (timeout reached, retries exhausted, rate exceeded)
 3. `## Tuning Guide` — how to adjust parameters, safe ranges, what metrics to watch
-
 ## Constraints
 - max_bytes: 3072 (body only)
 - naming: p09_rr_{rule_slug}.yaml

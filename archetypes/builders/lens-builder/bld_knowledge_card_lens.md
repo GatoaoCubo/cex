@@ -8,13 +8,9 @@ sources: lens-builder MANIFEST.md + SCHEMA.md v1.0.0
 ---
 
 # Domain Knowledge: lens
-
 ## Executive Summary
-
 Lenses are analytical perspectives applied to artifacts to filter, emphasize, or reinterpret information without modifying the source. Each lens declares ONE focus with explicit bias, scoped applies_to targets, and composable weight for multi-lens pipelines. They differ from agents (which act), mental models (which route decisions), scoring rubrics (which assign scores), and context docs (which provide background) by being purely declarative interpretation filters.
-
 ## Spec Table
-
 | Property | Value |
 |----------|-------|
 | Pillar | P02 (design-time spec) |
@@ -26,9 +22,7 @@ Lenses are analytical perspectives applied to artifacts to filter, emphasize, or
 | Density minimum | >= 0.80 |
 | Quality field | always `null` |
 | Key fields | focus, filters, bias, applies_to, weight |
-
 ## Patterns
-
 | Pattern | Application |
 |---------|-------------|
 | Single focus | Each lens addresses ONE analytical dimension, not a collection |
@@ -37,9 +31,7 @@ Lenses are analytical perspectives applied to artifacts to filter, emphasize, or
 | Concrete filters | Named attributes, not abstract categories |
 | Composable weight | Float 0.0-1.0 enabling multi-lens combination |
 | Mandatory limitations | Every perspective has blind spots — document them |
-
 ## Anti-Patterns
-
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
 | Multiple unrelated filters in one lens | Violates single-focus principle |
@@ -48,9 +40,7 @@ Lenses are analytical perspectives applied to artifacts to filter, emphasize, or
 | Abstract filter names ("quality aspects") | Not actionable; name specific attributes |
 | Missing limitations section | Every perspective has blind spots |
 | Lens that modifies artifacts | Lenses FILTER, they do not ACT |
-
 ## Application
-
 1. Define ONE analytical focus (e.g., "cost efficiency", "security posture")
 2. Set `applies_to` with specific artifact kinds this lens targets
 3. Declare `bias` explicitly (what this perspective favors/disfavors)
@@ -58,9 +48,7 @@ Lenses are analytical perspectives applied to artifacts to filter, emphasize, or
 5. Set `weight` for multi-lens composition (0.0-1.0)
 6. Document `limitations` — blind spots of this perspective
 7. Validate: body <= 3072 bytes, density >= 0.80, 8 HARD + 8 SOFT gates
-
 ## References
-
 - lens-builder SCHEMA.md v1.0.0
 - Evans, Eric. Domain-Driven Design (2003) — Bounded Contexts
 - Kiczales et al. Aspect-Oriented Programming (1997) — Cross-cutting concerns

@@ -7,7 +7,6 @@ purpose: Component map of client — inventory, dependencies, and architectural 
 ---
 
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | endpoint | Single API operation — method + path + parameters + return type | client | required |
@@ -22,9 +21,7 @@ purpose: Component map of client — inventory, dependencies, and architectural 
 | guardrail | Rate limit constraints and auth enforcement policy | P11 | external |
 | agent | Runtime caller that issues API requests via this client | P02 | consumer |
 | skill | Wraps one or more client calls into a reusable phased capability | P04 | consumer |
-
 ## Dependency Graph
-
 ```
 env_config     --produces--> base_url
 env_config     --produces--> auth_strategy
@@ -38,7 +35,6 @@ pagination     --depends-->  endpoint
 agent          --depends-->  endpoint
 skill          --depends-->  endpoint
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | env_config | base_url | produces | root URL injected at runtime |
@@ -52,9 +48,7 @@ skill          --depends-->  endpoint
 | pagination | endpoint | depends | iterates endpoint across result pages |
 | agent | endpoint | depends | agent issues API call through endpoint |
 | skill | endpoint | depends | skill phase wraps endpoint call |
-
 ## Boundary Table
-
 | client IS | client IS NOT |
 |-----------|--------------|
 | Unidirectional API consumer — sends requests, receives responses | A bidirectional integration that also receives webhooks (that is connector) |
@@ -63,9 +57,7 @@ skill          --depends-->  endpoint
 | One client per external API surface | A tool protocol server exposing capabilities (that is mcp_server) |
 | Defines auth, rate limits, retries, and serialization | A reusable capability with defined trigger phases (that is skill) |
 | Stateless per call — no persistent connection | A long-lived background process (that is daemon) |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|-----------|---------|
 | configuration | env_config, base_url, auth_strategy | Supply credentials and root URL at runtime |

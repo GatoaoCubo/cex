@@ -1,4 +1,6 @@
 ---
+kind: examples
+id: bld_examples_dispatch_rule
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of dispatch_rule artifacts
@@ -6,14 +8,10 @@ pattern: few-shot learning for keyword-to-satellite routing rules
 ---
 
 # Examples: dispatch-rule-builder
-
 ## Golden Example
-
 INPUT: "Route research, market analysis and competitor scraping to researcher"
-
 OUTPUT (`p12_dr_research.yaml`):
 ```yaml
----
 id: p12_dr_research
 kind: dispatch_rule
 pillar: P12
@@ -36,23 +34,17 @@ conditions:
   exclude_domains: [internal_docs, knowledge_indexing]
 load_balance: false
 routing_strategy: hybrid
----
-
 # research Dispatch Rule
-
 ## Purpose
 Routes market research, competitor intelligence, and scraping to researcher.
 researcher carries firecrawl MCP and research-optimized prompting.
-
 ## Keyword Rationale
 Bilingual PT/EN coverage fires on both Portuguese operator commands and English
 task descriptions. `analise`/`analysis` catch adjacent sub-tasks.
-
 ## Fallback Logic
 knowledge-engine handles knowledge domain when researcher is unavailable; can index and
 summarize research outputs without firecrawl.
 ```
-
 WHY THIS IS GOLDEN:
 - filename `p12_dr_research.yaml` follows naming pattern
 - `id: p12_dr_research` matches `^p12_dr_[a-z][a-z0-9_]+$`
@@ -72,11 +64,7 @@ WHY THIS IS GOLDEN:
 - 19 frontmatter fields (all required + 3 optional: conditions, load_balance, routing_strategy)
 - zero signal drift: no `status`, `timestamp`, `quality_score`
 - zero handoff drift: no `tasks`, `scope_fence`, `commit`
-
----
-
 ## Anti-Example
-
 BAD OUTPUT (`p12_dispatch_rule_research.json`):
 ```json
 {
@@ -94,7 +82,6 @@ BAD OUTPUT (`p12_dispatch_rule_research.json`):
   "model": "gpt-4"
 }
 ```
-
 FAILURES:
 1. [H01] wrong format: JSON not YAML — dispatch_rule requires `.yaml` frontmatter hybrid
 2. [H03] `id: dispatch-research` — fails `^p12_dr_[a-z][a-z0-9_]+$` (no prefix, hyphen not underscore)

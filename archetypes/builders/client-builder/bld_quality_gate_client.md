@@ -15,20 +15,15 @@ density_score: 0.91
 ---
 
 # Gate: client
-
 ## Definition
-
 | Field | Value |
 |---|---|
 | metric | client artifact quality score |
 | threshold | 7.0 (publish >= 8.0, golden >= 9.5) |
 | operator | weighted_sum |
 | scope | all artifacts with `kind: client` |
-
 ## HARD Gates
-
 All must pass (AND logic). Any single failure = REJECT.
-
 | ID | Check | Fail Condition |
 |---|---|---|
 | H01 | Frontmatter parses as valid YAML | Parse error on frontmatter block |
@@ -41,11 +36,8 @@ All must pass (AND logic). Any single failure = REJECT.
 | H08 | Auth strategy is one of: api_key, bearer, oauth2, basic, none | `auth_strategy: custom` without documented scheme |
 | H09 | Each endpoint has HTTP method and path | Endpoint missing `method` or `path` field |
 | H10 | Client is unidirectional (consume-only) | Client defines push, webhook receipt, or server-side event emission |
-
 ## SOFT Scoring
-
 Weights sum to 100%.
-
 | Dimension | Weight | Criteria |
 |---|---|---|
 | Endpoint completeness | 1.0 | All endpoints needed for the declared use case are listed |
@@ -60,18 +52,14 @@ Weights sum to 100%.
 | Auth token lifecycle | 0.5 | Token expiry, refresh, and storage strategy documented |
 | Boundary clarity | 1.0 | Explicitly not a connector or MCP server — consume-only contract stated |
 | Domain specificity | 1.0 | Endpoints and parameters specific to the external service being consumed |
-
 ## Actions
-
 | Score | Tier | Action |
 |---|---|---|
 | >= 9.5 | Golden | Publish to pool as golden reference |
 | >= 8.0 | Publish | Publish to pool, add to routing index |
 | >= 7.0 | Review | Flag for improvement before publish |
 | < 7.0 | Reject | Return to author with specific gate failures |
-
 ## Bypass
-
 | Field | Value |
 |---|---|
 | conditions | Client targeting an unstable third-party API under active change — endpoint schema not yet finalized |

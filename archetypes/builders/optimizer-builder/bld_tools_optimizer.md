@@ -7,7 +7,6 @@ purpose: Tools available for optimizer production
 ---
 
 # Tools: optimizer-builder
-
 ## Production Tools
 | Tool | Purpose | When | Status |
 |------|---------|------|--------|
@@ -15,21 +14,18 @@ purpose: Tools available for optimizer production
 | brain_query [MCP] | Find benchmarks for baseline values | Phase 1 (research thresholds) | CONDITIONAL |
 | validate_artifact.py | Validate optimizer YAML against SCHEMA | Phase 3 | [PLANNED] |
 | metric_probe.py | Measure current baseline from live system | Phase 1 (baseline capture) | [PLANNED] |
-
 ## Reference Artifacts (existing)
 | Artifact | File | Domain |
 |----------|------|--------|
 | KC Latency Optimizer | P11_feedback/examples/p11_opt_kc_latency.md | Knowledge card generation |
 | Pool Score Optimizer | P11_feedback/examples/p11_opt_pool_score.md | Pool quality |
 | Embedding Cost Optimizer | P11_feedback/examples/p11_opt_embedding_cost.md | Vector store |
-
 ## Brain Query Patterns [IF MCP]
 ```
 brain_query("optimizer {domain}")          # find existing optimizers for domain
 brain_query("benchmark {metric_name}")     # find baseline values
 brain_query("threshold {process_type}")    # find proven threshold ranges
 ```
-
 ## Tool Usage Rules
 - brain_query: CONDITIONAL — only call if MCP is available in runtime
 - If brain_query unavailable: use KNOWLEDGE.md threshold patterns as fallback

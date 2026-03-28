@@ -8,13 +8,9 @@ sources: consulting discovery docs, technical context memos, onboarding packets
 ---
 
 # Domain Knowledge: context_doc
-
 ## Executive Summary
-
 Context docs are domain background documents injected into agent context before task execution. They provide situational awareness — stakeholders, constraints, assumptions, dependencies — without the density requirements of knowledge cards or the step-by-step structure of instructions. Context docs answer "what is the background?" before the agent answers "what do I do?"
-
 ## Spec Table
-
 | Property | Value |
 |----------|-------|
 | Pillar | P01 (knowledge) |
@@ -24,24 +20,19 @@ Context docs are domain background documents injected into agent context before 
 | Quality gates | 7 HARD + 8 SOFT |
 | Output format | .md + optional .yaml pair |
 | Key fields | domain, scope, stakeholders, constraints |
-
 ## Patterns
-
 - **Scope-first writing**: define boundaries before content — what domain, what time horizon, what is excluded
 - **Stakeholder focus**: tailor precision to who consumes this context and what decisions they make
 - **Constraint documentation**: list what CANNOT change — constraints bound the problem space more than features
 - **Time-bounded context**: include timeline and dates — context ages; stale context causes wrong decisions
 - **Consumption chain**: context_docs feed into system_prompts and action_prompts as background injection
-
 | Analog | Source | Shared pattern |
 |--------|--------|----------------|
 | README context | Software repos | Background before instructions |
 | Project brief | Consulting | Scope, constraints, stakeholders |
 | SITREP | Operations | Current state + key constraints |
 | Onboarding packet | Teams | Domain background for newcomers |
-
 ## Anti-Patterns
-
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
 | No scope boundary | Document grows unbounded; includes irrelevant context |
@@ -50,18 +41,14 @@ Context docs are domain background documents injected into agent context before 
 | Missing constraints section | Agent has background but no boundaries; overreaches |
 | Stale dates | Outdated context causes wrong assumptions |
 | Over 2048 bytes | Exceeds token budget for injection; split or compress |
-
 ## Application
-
 1. Define scope: one sentence — what domain, what time horizon, what is excluded
 2. Identify stakeholders: who consumes this context and for what decisions
 3. Document constraints: what CANNOT change in this domain
 4. List assumptions: what is taken as true without verification
 5. Map dependencies: what other artifacts consume this context
 6. Validate: <= 2048 bytes, scope is one sentence, constraints are concrete
-
 ## References
-
 - Consulting discovery documents: scope and constraint patterns
 - Technical writing: context memos and background sections
 - Agile: Definition of Done context documentation

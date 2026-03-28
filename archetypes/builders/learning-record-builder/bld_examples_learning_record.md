@@ -1,4 +1,6 @@
 ---
+kind: examples
+id: bld_examples_learning_record
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of learning_record artifacts
@@ -6,15 +8,10 @@ pattern: few-shot learning — LLM reads these before producing
 ---
 
 # Examples: learning-record-builder
-
 ## Golden Example
-
 INPUT: "Document the learning from continuous batching achieving 1.6x speedup with 3 satellites"
-
 OUTPUT:
-
 ```yaml
----
 id: p10_lr_continuous_batching_speedup
 kind: learning_record
 pillar: P10
@@ -39,43 +36,34 @@ keywords: [batching, parallel, throughput, spawn, grid]
 linked_artifacts:
   primary: null
   related: [p12_spawn_grid, p08_pat_continuous_batching]
----
 ```
-
 ## Summary
 Continuous batching with 3 satellites (researcher+builder+knowledge-engine) achieved 1.6x speedup over sequential execution. Speed was driven by task complexity, not model tier — opus finished faster than sonnet on simpler tasks. Zero git lock contention observed.
-
 ## Pattern
 - Use spawn_grid.ps1 with -mode continuous for >6 tasks
 - Name handoffs as {MISSION}_batch_{N}_{DOMAIN}.md for queue management
 - Limit to 3 concurrent satellites (RAM ceiling at 4+)
 - Let queue auto-refill slots as satellites complete
-
 ## Anti-Pattern
 - Running >3 satellites causes BSOD risk (RAM exhaustion)
 - Assuming opus is slower than sonnet — speed depends on task, not model
 - Manual slot management instead of auto-refill wastes idle time
-
 ## Context
 - Environment: Windows 10 Pro, 32GB RAM, 3 Claude Code terminals
 - Satellite: orchestrator orchestrating researcher+builder+knowledge-engine
 - Timing: 2026-03-05, ISOFIX mission, 7 sequential batches
 - Constraints: max 3 terminals (BSOD prevention), 5s spawn delay
-
 ## Impact
 - 1.6x throughput vs sequential single-satellite execution
 - Zero git lock contention across 3 concurrent committers
 - Queue auto-refill eliminated idle time between waves
-
 ## Reproducibility
 - Conditions: 3 satellites, >6 tasks, independent work units
 - Confidence: HIGH (tested on ISOFIX 7/7 and CBTEST mixed)
 - Caveats: tasks must be independent; shared file edits cause conflicts
-
 ## References
 - records/skills/continuous_batching/SKILL.md
 - spawn_grid.ps1 -mode continuous
-
 WHY THIS IS GOLDEN:
 - quality: null (H05 pass)
 - id matches p10_lr_ pattern (H02 pass)
@@ -87,14 +75,10 @@ WHY THIS IS GOLDEN:
 - Anti-Pattern has 3 specific failures (S04 pass)
 - All 7 body sections present (S08 pass)
 - density high, no filler (S09 pass)
-
 ## Anti-Example
-
 INPUT: "Document what we learned about batching"
-
 BAD OUTPUT:
 ```yaml
----
 id: batching_learning
 kind: learning
 quality: 8.5
@@ -102,13 +86,10 @@ topic: batching
 outcome: good
 score: "high"
 tags: batching
----
-
 We learned a lot about batching. It was really useful and helped us be more productive.
 Overall, the experience was positive and we recommend using it in the future.
 In summary, batching works well when done correctly.
 ```
-
 FAILURES:
 1. id: no `p10_lr_` prefix -> H02 FAIL
 2. kind: "learning" not "learning_record" -> H04 FAIL
@@ -117,6 +98,3 @@ FAILURES:
 5. score: "high" is string not float -> S02 FAIL
 6. tags: string not list -> H07 FAIL
 7. Missing required fields: pillar, version, created, updated, author, domain, context, tldr -> H06 FAIL
-8. Body is pure filler ("really useful", "overall positive", "in summary") -> S09 FAIL
-9. No body sections (Summary, Pattern, Anti-Pattern, etc.) -> S08 FAIL
-10. No concrete steps in pattern -> S03 FAIL

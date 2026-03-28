@@ -19,15 +19,9 @@ tldr: "Validates LLM identity and persona prompts for specificity, safety constr
 ---
 
 ## Definition
-
 A system prompt establishes the identity, rules, and behavioral boundaries of a language model for a specific domain or role. It is not a task instruction and not a template with placeholders. This gate ensures every system prompt is specific, safe, self-contained, and clearly separated from prompt templates and action prompts.
-
----
-
 ## HARD Gates
-
 Failure on any HARD gate causes immediate REJECT. No score is computed.
-
 | ID  | Check | Rule |
 |-----|-------|------|
 | H01 | Frontmatter parses | YAML frontmatter is valid and complete with no syntax errors |
@@ -40,13 +34,8 @@ Failure on any HARD gate causes immediate REJECT. No score is computed.
 | H08 | ALWAYS/NEVER rules present | Body contains explicit ALWAYS and NEVER behavioral rules |
 | H09 | Output format specified | Body contains a `## Output Format` section describing expected response structure |
 | H10 | No variable placeholders | Body contains no `{placeholder}` or `{{template_var}}` tokens |
-
----
-
 ## SOFT Scoring
-
 Score each dimension 0 or 10. Multiply by weight. Divide total by sum of weights, scale to 0-10.
-
 | Dimension | Weight | Pass Condition |
 |-----------|--------|----------------|
 | Density >= 0.80 | 1.0 | Prompt is tight; no filler prose or redundant restatements |
@@ -60,29 +49,19 @@ Score each dimension 0 or 10. Multiply by weight. Divide total by sum of weights
 | Behavior examples present | 0.5 | At least one example of expected model behavior in the body |
 | Boundary with other prompt types | 0.5 | Body clarifies what belongs in action prompts vs. this system prompt |
 | No task instructions | 1.0 | Body defines identity only; no step-by-step task instructions |
-
 Sum of weights: 9.0. `soft_score = sum(weight * gate_score) / 9.0 * 10`
-
----
-
 ## Actions
-
 | Score | Action |
 |-------|--------|
 | >= 9.5 | GOLDEN — archive to pool as reference system prompt |
 | >= 8.0 | PUBLISH — safe to attach to production model configurations |
 | >= 7.0 | REVIEW — usable but persona or constraints need sharpening |
 | < 7.0 | REJECT — do not deploy; identity or safety gaps present |
-
----
-
 ## Bypass
-
 | Field | Value |
 |-------|-------|
 | condition | Rapid prototyping in an isolated sandbox where the model has no external access |
 | approver | Domain owner who defined the persona requirements |
 | audit_log | Entry required in `.claude/bypasses/system_prompt_{date}.md` with sandbox proof |
 | expiry | 7 days; prompt must reach PUBLISH score before moving out of sandbox |
-
 H01 (frontmatter parses) and H05 (quality is null) cannot be bypassed under any condition.

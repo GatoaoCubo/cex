@@ -15,15 +15,10 @@ density_score: 0.85
 ---
 
 # Gate: Law
-
 ## Definition
-
 A `law` artifact encodes an inviolable operational rule. It must carry a mandatory statement, the reasoning behind it, a concrete enforcement mechanism, and documented exceptions. Gates here prevent advisory rules from masquerading as laws and ensure every law is traceable, enforceable, and scoped.
-
 ## HARD Gates
-
 All HARD gates must pass. Any single failure sets score to 0 and blocks publish.
-
 | ID  | Check | Failure consequence |
 |-----|-------|---------------------|
 | H01 | YAML frontmatter parses without error | Artifact unparseable by tooling |
@@ -36,11 +31,8 @@ All HARD gates must pass. Any single failure sets score to 0 and blocks publish.
 | H08 | `number` is a positive integer | Law unidentifiable — routing breaks |
 | H09 | `Statement` section present in body | Core content missing |
 | H10 | `Rationale` section present in body | Missing justification — law cannot be audited |
-
 ## SOFT Scoring
-
 Weights sum to 100%. Each dimension scores 0 or its full weight.
-
 | ID  | Dimension | Weight | Criteria |
 |-----|-----------|--------|----------|
 | S01 | tldr quality | 1.0 | `tldr` <= 160 chars, non-empty, not a restatement of `statement` |
@@ -57,9 +49,7 @@ Weights sum to 100%. Each dimension scores 0 or its full weight.
 | S12 | `keywords` field present with >= 2 terms | 0.5 | Improves brain search recall |
 | S13 | `enforcement` is testable | 0.5 | Can be verified by a script or checklist item — not "team awareness" |
 | S14 | Cross-references valid | 0.5 | Any `references` items point to real artifacts or URLs |
-
 ## Actions
-
 | Score | Tier | Action |
 |-------|------|--------|
 | >= 9.5 | GOLDEN | Publish to pool + record in memory |
@@ -67,16 +57,8 @@ Weights sum to 100%. Each dimension scores 0 or its full weight.
 | >= 7.0 | REVIEW | Acceptable with documented improvement items |
 | < 7.0 | REJECT | Revise and resubmit — do not publish |
 | 0 (HARD fail) | REJECTED | Fix failing HARD gate(s) first |
-
 ## Bypass
-
 Bypasses are logged and expire automatically.
-
 | Field | Value |
 |-------|-------|
 | condition | Law covers a new domain with no precedent and rationale cannot be pre-filled |
-| approver | P11 governance owner (human) |
-| audit_log | Entry required in `records/governance/bypass_log.md` with date, gate ID, and justification |
-| expiry | 14 days — artifact must be updated before expiry or bypass reverts to REJECT |
-
-H01 and H05 cannot be bypassed under any condition.

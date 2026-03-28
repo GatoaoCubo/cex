@@ -7,43 +7,29 @@ purpose: Accumulated production experience for prompt_template artifact generati
 ---
 
 # Memory: prompt-template-builder
-
 ## Summary
-
 Prompt templates are reusable molds with variable slots that generate distinct prompts when filled. The critical production insight is separating structure from content — templates define the shape, variable values provide the substance. The most common failure is embedding fixed content into what should be a variable slot, creating a template that looks reusable but produces only one useful output. The second lesson is variable typing: untyped variables accept any value, including values that break the prompt logic.
-
 ## Pattern
-
 - Every variable slot must have a type, description, and at least one example value
 - Use consistent syntax throughout: Mustache tier-1 {{var}} or bracket tier-2 [VAR], never mix
 - Template body must produce valid, coherent output with ANY valid variable combination, not just the golden path
 - Include a default value for optional variables — missing variables should degrade gracefully, not produce broken prompts
 - Test templates with 3+ distinct variable sets to verify genuine reusability
 - Separate instruction scaffolding (fixed) from domain content (variable) — if it changes per use, it must be a variable
-
 ## Anti-Pattern
-
 - Fixed content in variable positions — template appears reusable but produces only one useful output
 - Untyped variables — accept any value including those that break prompt coherence
 - Mixed syntax ({{var}} and [VAR] in same template) — confuses renderers and human readers
 - Templates that only work with the example values — not genuinely reusable
 - Confusing prompt_template (P03, parameterized mold) with system_prompt (P03, fixed identity) or action_prompt (P03, one-time task)
 - Variables without descriptions — downstream users guess at intended usage
-
 ## Context
-
 Prompt templates sit in the P03 prompt layer, above instructions (P02) and below execution (P04). They are consumed by rendering engines (LangChain PromptTemplate, DSPy Signature, Mustache, Jinja2) that substitute variables at runtime. Templates enable prompt reuse across domains by abstracting the variable parts while preserving proven prompt structure.
-
 ## Impact
-
 Templates with typed variables reduced rendering errors by 80%. Templates tested with 3+ variable sets showed 95% genuine reusability versus 45% for single-example templates. Consistent syntax (single notation) eliminated 100% of renderer parsing failures.
-
 ## Reproducibility
-
 For reliable template production: (1) identify all variable slots with types and descriptions, (2) choose one syntax notation and apply consistently, (3) provide default values for optional variables, (4) test with 3+ distinct variable sets, (5) verify output coherence across all variable combinations, (6) validate against H01-H08 HARD gates and S01-S10 SOFT gates.
-
 ## References
-
 - prompt-template-builder SCHEMA.md (P03 template specification)
 - P03 prompt pillar specification
 - LangChain PromptTemplate and DSPy Signature patterns

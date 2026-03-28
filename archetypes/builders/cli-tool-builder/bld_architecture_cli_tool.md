@@ -7,7 +7,6 @@ purpose: Component map of cli_tool — inventory, dependencies, and architectura
 ---
 
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | command | Named invocation unit — the top-level verb the tool exposes | cli_tool | required |
@@ -20,9 +19,7 @@ purpose: Component map of cli_tool — inventory, dependencies, and architectura
 | guardrail | Execution constraints — timeouts, allowed paths, rate caps | P11 | external |
 | agent | Runtime caller that invokes the tool via shell | P02 | consumer |
 | hook | Event-driven caller that triggers the tool pre/post action | P04 | consumer |
-
 ## Dependency Graph
-
 ```
 env_config   --produces--> command
 config_file  --produces--> command
@@ -34,7 +31,6 @@ guardrail    --depends-->  command
 agent        --depends-->  command
 hook         --depends-->  command
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | env_config | command | produces | runtime overrides (API keys, paths) |
@@ -46,9 +42,7 @@ hook         --depends-->  command
 | guardrail | command | depends | timeout and execution constraint policy |
 | agent | command | depends | shell invocation from agent runtime |
 | hook | command | depends | event-triggered shell invocation |
-
 ## Boundary Table
-
 | cli_tool IS | cli_tool IS NOT |
 |-------------|----------------|
 | Invoked explicitly via terminal or shell call | A background process that persists (that is daemon) |
@@ -57,9 +51,7 @@ hook         --depends-->  command
 | Standalone executable — no host runtime required | An API consumer over HTTP (that is client) |
 | Returns numeric exit code with semantic meaning | A tool exposed via MCP protocol (that is mcp_server) |
 | One binary / script per distinct operation | A bidirectional service integration (that is connector) |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|-----------|---------|
 | configuration | env_config, config_file | Supply runtime values and path overrides |

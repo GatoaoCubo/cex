@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: guardrail
-
 ## Frontmatter Fields
-
 ### Required
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
@@ -30,7 +28,6 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | quality | null | YES | null | Never self-score |
 | tags | list[string], len >= 3 | YES | — | Searchability |
 | tldr | string <= 160ch | YES | — | Dense summary |
-
 ### Recommended
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
@@ -38,18 +35,15 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | remediation | string | REC | — | How to fix a violation |
 | linked_artifacts | object {primary, related} | REC | — | Cross-references |
 | density_score | float 0.80-1.00 | REC | — | Content density |
-
 ## ID Pattern
 Regex: `^p11_gr_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Body Structure (required sections)
 1. `## Definition` — what it protects and why (threat model)
 2. `## Rules` — numbered, concrete, measurable restrictions
 3. `## Violations` — specific examples of what breaks this guardrail
 4. `## Enforcement` — how violations are detected (automated/manual) and handled
 5. `## Bypass` — conditions, approver, audit trail
-
 ## Constraints
 - max_bytes: 4096 (body only)
 - naming: p11_gr_{scope_slug}.md

@@ -8,7 +8,6 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 ---
 
 # Instructions: How to Produce a daemon
-
 ## Phase 1: RESEARCH
 1. Identify what runs persistently in the background and why it cannot be a one-shot process
 2. Determine schedule: continuous loop, cron expression (e.g., `0 * * * *`), or fixed interval (e.g., `30s`)
@@ -18,7 +17,6 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 6. Define health check mechanism: HTTP endpoint, heartbeat file, or process liveness check with interval and timeout
 7. Check for existing daemon artifacts to avoid duplicates
 8. Confirm name slug for id: snake_case, lowercase, no hyphens
-
 ## Phase 2: COMPOSE
 1. Read SCHEMA.md — source of truth for all fields
 2. Read OUTPUT_TEMPLATE.md — fill {{vars}} following SCHEMA constraints
@@ -32,7 +30,6 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 10. Write PID Management section: PID file location and stale PID handling procedure
 11. Verify body <= 1024 bytes
 12. Verify id matches `^p04_dm_[a-z][a-z0-9_]+$`
-
 ## Phase 3: VALIDATE
 1. Check QUALITY_GATES.md — verify each HARD gate manually
 2. Confirm YAML frontmatter parses without errors

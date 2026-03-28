@@ -7,9 +7,7 @@ purpose: Component map of validator — inventory, dependencies, and architectur
 ---
 
 # Architecture: validator in the CEX
-
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | frontmatter block | 22-field metadata header (id, kind, pillar, domain, target_kind, severity, etc.) | validator-builder | active |
@@ -18,15 +16,12 @@ purpose: Component map of validator — inventory, dependencies, and architectur
 | auto_fix_policy | Whether violations can be automatically repaired and how | author | active |
 | bypass_policy | Conditions under which the validator can be skipped with audit | author | active |
 | audit_trail | Logging requirements for validation runs and bypass events | author | active |
-
 ## Dependency Graph
-
 ```
 artifact (any)  --checked_by-->  validator  --produces-->    pass_fail_result
 quality_gate    --depends-->     validator  --signals-->     validation_event
 validator       --depends-->     type_def
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | artifact (any) | validator | data_flow | artifact submitted for validation check |
@@ -35,9 +30,7 @@ validator       --depends-->     type_def
 | type_def (P06) | validator | dependency | type definitions inform field and constraint checks |
 | validator | validation_event (P12) | signals | emitted on pass, fail, or bypass |
 | law (P08) | validator | dependency | laws may mandate specific validation rules |
-
 ## Boundary Table
-
 | validator IS | validator IS NOT |
 |--------------|-----------------|
 | A technical pass/fail check with structured conditions | A multi-dimensional scoring framework (scoring_rubric P07) |
@@ -46,9 +39,7 @@ validator       --depends-->     type_def
 | Includes bypass policy with audit trail | An input contract for operations (input_schema P06) |
 | Applied to individual rules — atomic checks | A reusable type declaration (type_def P06) |
 | Runs at pre-commit or pre-promotion checkpoints | A response format instruction for the LLM (response_format P05) |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Input | artifact, type_def | Artifact under check and type constraints |

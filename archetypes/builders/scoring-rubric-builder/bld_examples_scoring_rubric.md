@@ -1,4 +1,6 @@
 ---
+kind: examples
+id: bld_examples_scoring_rubric
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of scoring_rubric artifacts
@@ -6,14 +8,10 @@ pattern: few-shot learning — LLM reads these before producing
 ---
 
 # Examples: scoring-rubric-builder
-
 ## Golden Example
-
 INPUT: "Cria rubric de avaliacao 5D para knowledge_cards"
-
 OUTPUT:
 ```yaml
----
 id: p07_sr_5d_knowledge_card
 kind: scoring_rubric
 pillar: P07
@@ -41,13 +39,10 @@ appeals_process: "Submit to p01-chief with rationale for re-evaluation"
 linked_artifacts:
   primary: "quality-gate-builder"
   related: [p11_qg_kc_publish, p07_gt_kc_prompt_caching]
----
-
 ## Framework Overview
 5D evaluates knowledge_cards across 5 orthogonal dimensions.
 Designed to complement the KC quality_gate (P11) which enforces HARD pass/fail.
 This rubric provides the SOFT scoring framework for nuanced quality assessment.
-
 ## Dimensions
 | Dimension | Weight | Scale | Criteria | Example (10) | Example (5) |
 |-----------|--------|-------|----------|-------------|-------------|
@@ -56,7 +51,6 @@ This rubric provides the SOFT scoring framework for nuanced quality assessment.
 | Actionability | 20% | 0-10 | Contains commands, code, or specific steps | 3 CLI commands, 2 code snippets, concrete steps | General advice, no specific commands |
 | Boundary | 15% | 0-10 | Clear EH/NAO EH, no drift to other types | Explicit boundary table, 3+ NAO EH rows | Vague scope, overlaps with other kinds |
 | References | 15% | 0-10 | >= 1 source URL, dates, verifiable claims | 3 URLs, all accessible, dated 2026 | No URLs, unverifiable claims |
-
 ## Thresholds
 | Tier | Score | Action |
 |------|-------|--------|
@@ -64,13 +58,11 @@ This rubric provides the SOFT scoring framework for nuanced quality assessment.
 | PUBLISH | >= 8.0 | Merge to pool |
 | REVIEW | >= 7.0 | Return with specific dimension feedback |
 | REJECT | < 7.0 | Redo from scratch with new research |
-
 ## Calibration
 - GOLDEN (9.8): p07_gt_kc_prompt_caching — density 0.93, 7 sections, 3 URLs, explicit boundary
 - PUBLISH (8.3): typical KC with all sections, density 0.82, 1 URL, adequate boundary
 - REVIEW (7.2): KC with 5 sections, density 0.75, no URLs, vague boundary
 - REJECT (5.0): KC with 3 sections, density 0.50, filler prose, no boundary section
-
 ## Automation
 | Dimension | Status | Tool |
 |-----------|--------|------|
@@ -79,12 +71,10 @@ This rubric provides the SOFT scoring framework for nuanced quality assessment.
 | Actionability | manual | Human review for command quality |
 | Boundary | semi-automated | Grep for EH/NAO EH patterns |
 | References | semi-automated | URL presence check + manual accessibility |
-
 ## References
 - AAC&U VALUE Rubrics: https://www.aacu.org/initiatives/value-initiative
 - validate_kc.py v2.0 (CEX 5D implementation reference)
 ```
-
 WHY THIS IS GOLDEN:
 - quality: null (H06 pass)
 - id matches p07_sr_ pattern (H02 pass)
@@ -95,43 +85,3 @@ WHY THIS IS GOLDEN:
 - Criteria are concrete per dimension with examples at 10 and 5 (S03 pass)
 - Calibration section has examples at all 4 tiers (S05 pass)
 - Automation status per dimension with tool refs (S06 pass)
-- Framework Overview explains scope and relationship to gate (S04 pass)
-
-## Anti-Example
-
-INPUT: "Rubric for evaluating things"
-
-BAD OUTPUT:
-```yaml
----
-id: rubric_eval
-kind: scoring_rubric
-title: "Quality Rubric"
-quality: 9.0
-dimensions_count: 2
-automation_status: "maybe"
----
-
-## Dimensions
-| Dimension | Weight |
-|-----------|--------|
-| Quality | 60% |
-| Completeness | 50% |
-
-## Scoring
-Good = pass, Bad = fail
-```
-
-FAILURES:
-1. id: no p07_sr_ prefix -> H02 FAIL
-2. pillar: missing -> H05 FAIL
-3. quality: self-scored 9.0 instead of null -> H06 FAIL
-4. weights: 60+50 = 110%, not 100% -> H07 FAIL
-5. dimensions_count: 2 < 3 minimum -> H08 FAIL
-6. automation_status: "maybe" not valid enum -> H09 FAIL
-7. thresholds: no 4-tier table (GOLDEN/PUBLISH/REVIEW/REJECT) -> H10 FAIL
-8. "Quality" dimension: subjective, measures nothing concrete -> S03 FAIL
-9. No criteria column in Dimensions table -> S03 FAIL
-10. No Calibration section -> S05 FAIL
-11. No Framework Overview -> S04 FAIL
-12. No scale defined per dimension -> S07 FAIL

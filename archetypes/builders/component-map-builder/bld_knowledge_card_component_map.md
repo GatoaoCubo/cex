@@ -8,13 +8,9 @@ sources: systems engineering (CMDB), microservice registries, C4 model, dependen
 ---
 
 # Domain Knowledge: component_map
-
 ## Executive Summary
-
 Component maps are structured inventories of system parts and their typed connections. A map is DATA, not a picture — it produces queryable records of what exists, who owns it, how parts connect, and their health status. Component maps differ from diagrams (visual representation), patterns (prescriptive solutions), and workflows (execution sequences).
-
 ## Spec Table
-
 | Property | Value |
 |----------|-------|
 | Pillar | P08 (architecture) |
@@ -23,32 +19,24 @@ Component maps are structured inventories of system parts and their typed connec
 | Per-component fields | id, label, owner, status, receives, produces_for |
 | Connection types | data_flow, depends, signals, produces, bidirectional |
 | Topology patterns | layered, hub-spoke, pipeline |
-
 ## Patterns
-
 - **Topology selection**: match architecture to topology pattern
-
 | Topology | Structure | Use case |
 |----------|-----------|----------|
 | Layered | [UI] → [Logic] → [Data] | Multi-tier, top-down navigation |
 | Hub-Spoke | [Spokes] ↔ [Hub] | Router/gateway architectures |
 | Pipeline | [A] → [B] → [C] → [D] | Sequential processing chains |
-
 - **Typed connections**: every connection MUST have a type label — untyped arrows are forbidden
-
 | Notation | Meaning | Example |
 |----------|---------|---------|
 | A → B | Data flow | Parser → Classifier |
 | A --depends→ B | Requirement | Search --depends→ Embeddings |
 | A --signals→ B | Event notification | Worker --signals→ Monitor |
 | A ↔ B | Bidirectional | Cache ↔ Database |
-
 - **Data-first format**: tables for inventory + ASCII for topology — best LLM comprehension
 - **Scope discipline**: define scope in one sentence; if you cannot, split the map
 - **Ownership tracking**: every component has an assigned owner and health status
-
 ## Anti-Patterns
-
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
 | Orphan components (zero connections) | Unreachable parts indicate incomplete mapping |
@@ -57,18 +45,14 @@ Component maps are structured inventories of system parts and their typed connec
 | Vague scope ("the system") | Too broad; split into focused maps per domain |
 | Missing ownership | No accountability; stale components go unnoticed |
 | Diagram without data tables | Visual without queryable data; tables first |
-
 ## Application
-
 1. Define scope: one sentence describing what this map covers
 2. Inventory components: id, label, owner, status for each
 3. Map connections: typed arrows with direction and data description
 4. Select topology: layered, hub-spoke, or pipeline
 5. Document per component: receives (from whom, what) and produces_for (to whom, what)
 6. Validate: no orphans, no untyped connections, scope is one sentence
-
 ## References
-
 - CMDB: Configuration Management Database patterns
 - C4 Model (Brown 2018): Context/Container/Component/Code zoom levels
 - Enterprise Integration Patterns: connection and messaging types

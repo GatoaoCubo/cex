@@ -15,22 +15,15 @@ density_score: 0.92
 ---
 
 # Gate: fallback_chain
-
 ## Definition
-
 | Field     | Value |
 |-----------|-------|
 | metric    | composite score across SOFT dimensions |
 | threshold | >= 7.0 to publish; >= 9.5 for golden |
 | operator  | weighted average after all HARD gates pass |
 | scope     | all artifacts where `kind: fallback_chain` |
-
 All HARD gates are AND-logic: one failure rejects the artifact regardless of SOFT score.
-
----
-
 ## HARD Gates
-
 | ID  | Check | Fail Condition |
 |-----|-------|----------------|
 | H01 | Frontmatter parses as valid YAML | Any YAML syntax error |
@@ -43,11 +36,7 @@ All HARD gates are AND-logic: one failure rejects the artifact regardless of SOF
 | H08 | Steps ordered by decreasing capability (primary model first, minimum-cost last) | Degradation inverted or flat |
 | H09 | Each step declares `timeout_per_step_ms` > 0 | Missing or zero timeout on any step |
 | H10 | Circuit breaker threshold defined (not zero, not absent) | Missing circuit breaker spec |
-
----
-
 ## SOFT Scoring
-
 | Dim | Dimension | Weight | Scoring Guide |
 |-----|-----------|--------|---------------|
 | S01 | `tldr` <= 160 chars, non-empty, names the degradation path | 0.10 | Accurate + concise=1.0, vague=0.4, absent=0.0 |
@@ -61,24 +50,15 @@ All HARD gates are AND-logic: one failure rejects the artifact regardless of SOF
 | S09 | Retry policy distinct from fallback trigger (not conflated) | 0.08 | Clearly separated=1.0, conflated=0.2 |
 | S10 | `density_score` >= 0.80 | 0.08 | Met=1.0, below=0.0 |
 | S11 | No filler phrases ("robust mechanism", "gracefully handles") | 0.07 | Clean=1.0, filler present=0.0 |
-
 **Weight sum: 1.00**
-
----
-
 ## Actions
-
 | Score | Action |
 |-------|--------|
 | >= 9.5 | GOLDEN — reference artifact for fallback_chain calibration |
 | >= 8.0 | PUBLISH — pool-eligible; circuit breaker and cost docs present |
 | >= 7.0 | REVIEW — usable but missing threshold detail or cost analysis |
 | < 7.0  | REJECT — redo; likely missing circuit breaker or step ordering |
-
----
-
 ## Bypass
-
 | Field | Value |
 |-------|-------|
 | conditions | Emergency hotfix only; chain replaces a failing production route with no time to complete all gates |

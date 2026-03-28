@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: connector
-
 ## Frontmatter Fields
-
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string (p04_conn_{service_slug}) | YES | - | Namespace compliance |
@@ -36,17 +34,14 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | rate_limit | string | REC | - | Requests per unit time |
 | logging | enum: structured, plaintext, none | REC | structured | Log format |
 | versioning | string | REC | - | API version strategy |
-
 ## ID Pattern
 Regex: `^p04_conn_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Body Structure (required sections)
 1. `## Overview` — what service, integration pattern, who uses it
 2. `## Endpoints` — each endpoint: direction, method/topic, path, data shape
 3. `## Data Mapping` — field mapping rules, transform, inbound/outbound schemas
 4. `## Health & Errors` — health_check, error codes, retry, circuit breaker
-
 ## Constraints
 - max_bytes: 1024 (body only — compact connector spec)
 - naming: p04_conn_{service_slug}.md + .yaml (dual file)

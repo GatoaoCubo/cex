@@ -1,4 +1,6 @@
 ---
+kind: output_template
+id: bld_output_template_model_card
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} that the LLM fills to produce a model_card
@@ -6,9 +8,7 @@ pattern: every field here exists in SCHEMA.md — template derives, never invent
 ---
 
 # Output Template: model_card
-
 ```yaml
----
 id: p02_mc_{{provider}}_{{model_slug}}
 kind: model_card
 pillar: P02
@@ -55,12 +55,9 @@ linked_artifacts:
   primary: null
   related: [{{other_model_cards_or_null}}]
 data_source: "{{provider_docs_url}}"
----
-
 ## Boundary
 model_card EH: spec tecnica de {{model_name}} (capacidades, custos, limites).
 model_card NAO EH: boot_config, agent, benchmark.
-
 ## Specifications
 | Spec | Value | Source |
 |------|-------|--------|
@@ -71,7 +68,6 @@ model_card NAO EH: boot_config, agent, benchmark.
 | Knowledge Cutoff | {{cutoff}} | {{url}} |
 | Pricing (input) | ${{in}} per 1M | {{pricing_url}} |
 | Pricing (output) | ${{out}} per 1M | {{pricing_url}} |
-
 ## Capabilities
 | Capability | Supported | Notes |
 |------------|-----------|-------|
@@ -83,7 +79,6 @@ model_card NAO EH: boot_config, agent, benchmark.
 | Web Search | {{bool}} | {{detail_or_dash}} |
 | Fine Tuning | {{bool}} | {{detail_or_dash}} |
 | Batch API | {{bool}} | {{detail_or_dash}} |
-
 ## When to Use
 | Scenario | Use This Model? | Why / Alternative |
 |----------|-----------------|-------------------|
@@ -92,7 +87,6 @@ model_card NAO EH: boot_config, agent, benchmark.
 | {{scenario_3}} | {{YES/NO/MAYBE}} | {{reason}} |
 | {{scenario_4}} | {{YES/NO/MAYBE}} | {{reason}} |
 | {{scenario_5}} | {{YES/NO/MAYBE}} | {{reason}} |
-
 ## References
 - source: {{provider_docs_url}}
 - pricing: {{pricing_page_url}}

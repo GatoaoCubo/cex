@@ -1,4 +1,6 @@
 ---
+kind: examples
+id: bld_examples_connector
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of connector artifacts
@@ -6,14 +8,10 @@ pattern: few-shot learning — LLM reads these before producing
 ---
 
 # Examples: connector-builder
-
 ## Golden Example
-
 INPUT: "Create connector for an e-commerce platform with order sync and webhook notifications"
-
 OUTPUT:
 ```yaml
----
 id: p04_conn_ecommerce_platform
 kind: connector
 pillar: P04
@@ -41,46 +39,37 @@ retry: "3 retries, exponential backoff (2s, 4s, 8s)"
 rate_limit: "60 req/min outbound"
 logging: structured
 versioning: "URL path versioning (/v2/)"
----
 ```
-
 ## Overview
 Bidirectional REST connector for e-commerce platform: pushes orders and pulls products outbound, receives status and inventory webhooks inbound.
 Used by fulfillment agents and inventory sync pipelines.
-
 ## Endpoints
-
 ### push_order (outbound)
 POST /v2/orders — Push new order to platform.
 Data shape:
 - `order_id` (string): CEX order identifier
 - `items` (list): Line items with sku, qty, price
 - `shipping` (object): Address and method
-
 ### get_product (outbound)
 GET /v2/products/{sku} — Fetch product details by SKU.
 Data shape:
 - `sku` (string): Product SKU identifier
-
 ### receive_status_webhook (inbound)
 POST /webhooks/status — Receive order status updates from platform.
 Data shape:
 - `event_id` (string): Dedup key
 - `order_id` (string): Platform order ID
 - `status` (enum): pending, shipped, delivered, cancelled
-
 ### receive_inventory_webhook (inbound)
 POST /webhooks/inventory — Receive inventory level changes.
 Data shape:
 - `event_id` (string): Dedup key
 - `sku` (string): Product SKU
 - `quantity` (integer): New stock level
-
 ## Data Mapping
 Inbound (external -> CEX): platform.order_id -> cex.external_order_ref; status enum direct map
 Outbound (CEX -> external): cex.price_cents / 100 -> platform.price; cex.iso_date -> platform.date
 Idempotency: event_id dedup on inbound webhooks (store last 24h)
-
 ## Health & Errors
 Health: GET /api/health every 60s, alert if 3 consecutive failures
 - 400: Bad request — log and skip, no retry
@@ -88,7 +77,6 @@ Health: GET /api/health every 60s, alert if 3 consecutive failures
 - 429: Rate limited — backoff per Retry-After header
 - 5xx: Server error — retry with exponential backoff
 Circuit breaker: open after 5 consecutive 5xx in 60s, half-open after 120s
-
 WHY THIS IS GOLDEN:
 - quality: null (H05 pass)
 - id matches p04_conn_ pattern (H02 pass)
@@ -100,14 +88,10 @@ WHY THIS IS GOLDEN:
 - Data Mapping has inbound + outbound + idempotency rules (S07 pass)
 - tldr: 82 chars <= 160 (S01 pass)
 - tags: 6 items, includes "connector" (S02 pass)
-
 ## Anti-Example
-
 INPUT: "Create connector for notification service"
-
 BAD OUTPUT:
 ```yaml
----
 id: notification-connector
 kind: service_connector
 pillar: tools
@@ -117,24 +101,10 @@ endpoints: [send, receive]
 auth: "token"
 quality: 9.0
 tags: [notifications]
----
 ```
-
 Sends and receives notifications.
-
 ## Endpoints
 send: sends notifications
 receive: receives notifications
-
 FAILURES:
 1. id: "notification-connector" uses hyphens and no `p04_conn_` prefix -> H02 FAIL
-2. kind: "service_connector" not "connector" -> H04 FAIL
-3. pillar: "tools" not "P04" -> H06 FAIL
-4. quality: 9.0 (not null) -> H05 FAIL
-5. Missing fields: protocol, version, created, updated, author, tldr -> H06 FAIL
-6. auth: "token" not a valid enum value -> S05 FAIL
-7. tags: only 1 item, missing "connector" -> S02 FAIL
-8. Body missing ## Data Mapping, ## Health & Errors sections -> H07 FAIL
-9. Endpoints have no direction annotation (inbound/outbound) -> S04 FAIL
-10. No data shape defined for any endpoint -> S06 FAIL
-11. No health_check specified -> S08 FAIL

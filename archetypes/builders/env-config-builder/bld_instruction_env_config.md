@@ -8,9 +8,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 ---
 
 # Instructions: How to Produce an env_config
-
 ## Phase 1: RESEARCH
-
 1. Identify the scope: global (applies to all services), a named satellite, or a specific service
 2. Catalog all environment variables needed within that scope — include name, current or example value, and purpose
 3. Classify the type of each variable: string, integer, boolean, URL, or secret
@@ -19,9 +17,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 6. Define default values and whether each variable is required or optional — optional variables must have a usable default
 7. Define override precedence: environment variable wins over config file, which wins over default
 8. Check existing env_configs via brain_query [IF MCP] for the same scope — do not duplicate a config that already covers this service
-
 ## Phase 2: COMPOSE
-
 1. Read SCHEMA.md — source of truth for all fields
 2. Read OUTPUT_TEMPLATE.md — fill the template following SCHEMA constraints
 3. Fill all required frontmatter fields; set `quality: null` — never self-score
@@ -31,9 +27,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 7. Write **Secrets Handling** section: masking rules for each secret variable, rotation policy, storage location (vault, platform secrets manager)
 8. Write **Groups** section: logical groupings such as database, API keys, feature toggles, file paths
 9. Confirm body <= 4096 bytes
-
 ## Phase 3: VALIDATE
-
 1. Check QUALITY_GATES.md — verify each HARD gate manually
 2. Confirm YAML frontmatter parses without errors
 3. Confirm `id` matches `^p09_ev_[a-z][a-z0-9_]+$`

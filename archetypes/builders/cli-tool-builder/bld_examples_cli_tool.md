@@ -1,4 +1,6 @@
 ---
+kind: examples
+id: bld_examples_cli_tool
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of cli_tool artifacts
@@ -6,14 +8,10 @@ pattern: few-shot learning — LLM reads these before producing
 ---
 
 # Examples: cli-tool-builder
-
 ## Golden Example
-
 INPUT: "Create CLI tool for validating CEX artifacts against their schema"
-
 OUTPUT:
 ```yaml
----
 id: p04_cli_artifact_validator
 kind: cli_tool
 pillar: P04
@@ -41,15 +39,11 @@ verbose: true
 interactive: false
 env_vars: ["CEX_ROOT", "CEX_STRICT"]
 platforms: [linux, macos, windows]
----
 ```
-
 ## Overview
 Validates CEX artifacts against their pillar schema definitions.
 Used by builders after production and by CI pipelines for quality enforcement.
-
 ## Commands
-
 ### validate
 `cex-validate validate <file> [--strict] [--verbose]`
 Validates a single artifact against its kind schema.
@@ -59,30 +53,25 @@ Flags:
 Args:
 - `<file>` (path, required): artifact file to validate
 Returns: JSON {passed, hard_gates, soft_score, failures[]}
-
 ### check_schema
 `cex-validate check-schema <kind>`
 Prints the schema for a given kind.
 Args:
 - `<kind>` (string, required): artifact kind (e.g., "client", "mcp_server")
 Returns: JSON schema definition
-
 ### list_kinds
 `cex-validate list-kinds [--pillar P04]`
 Lists all registered artifact kinds.
 Flags:
 - `--pillar` (string, optional): filter by pillar
 Returns: JSON [{kind, pillar, core, max_bytes}]
-
 ## Output
 - stdout: JSON results (parseable by downstream tools)
 - stderr: human-readable progress and errors
 - Exit codes: 0=pass, 1=hard fail, 2=soft fail, 3=file error
-
 ## Configuration
 Config file: `.cex/validator.yaml` (optional overrides)
 Env vars: `CEX_ROOT` (project root), `CEX_STRICT` (enable strict mode)
-
 WHY THIS IS GOLDEN:
 - quality: null (H05 pass)
 - id matches p04_cli_ pattern (H02 pass)
@@ -94,14 +83,10 @@ WHY THIS IS GOLDEN:
 - tldr: 68 chars <= 160 (S01 pass)
 - tags: 4 items, includes "cli_tool" (S02 pass)
 - Each command has syntax, flags, args, return (S06 pass)
-
 ## Anti-Example
-
 INPUT: "Create CLI tool for formatting code"
-
 BAD OUTPUT:
 ```yaml
----
 id: code-formatter
 kind: tool
 pillar: tools
@@ -109,14 +94,10 @@ name: Formatter
 commands: [format]
 quality: 9.0
 tags: [format]
----
 ```
-
 Formats code files.
-
 ## Commands
 format: formats code
-
 FAILURES:
 1. id: "code-formatter" has hyphens and no `p04_cli_` prefix -> H02 FAIL
 2. kind: "tool" not "cli_tool" -> H04 FAIL

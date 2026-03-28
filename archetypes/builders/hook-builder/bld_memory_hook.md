@@ -21,13 +21,9 @@ keywords: [hook, trigger, blocking, async, timeout, error_handling, pre_tool_use
 ---
 
 ## Summary
-
 Hooks are event-driven interceptors that fire at lifecycle boundaries. Their value comes from being lightweight and reliable. The two most common failures are: (1) blocking hooks with excessive timeouts that freeze the host, and (2) missing error_handling that allows hook failures to propagate as host crashes.
-
 ## Pattern
-
 Blocking vs async decision table:
-
 | Event | Recommended mode | Max timeout |
 |---|---|---|
 | pre_tool_use | blocking | 1000ms |
@@ -35,42 +31,25 @@ Blocking vs async decision table:
 | user_prompt_submit | blocking | 2000ms |
 | post_tool_use | async | 5000ms |
 | stop | async | 5000ms |
-
 Required fields every hook must have:
 - `trigger_event` - exact enum value (underscores, not hyphens)
 - `script_path` - relative path to executable script
 - `blocking` - boolean, not string
 - `timeout` - integer milliseconds, max 30000
 - `error_handling` - what to do when the script fails (log, skip, abort)
-
 Hooks intercept execution flow and may augment context. They must not implement domain logic. A hook that calculates prices or makes API calls belongs in an instruction or workflow, not a hook.
-
 ## Anti-Pattern
-
 - `blocking: true` with `timeout > 10000` — host freezes during tool calls.
 - No `error_handling` field — unhandled hook failure crashes the host process.
 - Business logic in hook script ("calculate price", "send email") — hooks observe, not implement.
 - `trigger_event: "post-tool-use"` (hyphens) — must be `post_tool_use` (underscores).
 - Missing `script_path` — hook is declared but cannot execute.
 - Timeout set to 0 or absent — system applies unpredictable default.
-
 ## Context
-
 Pattern crystallized after integration testing revealed that early hook designs routinely set generous timeouts "just in case" without considering that blocking hooks pause the entire host. The fix is cheap: separate the blocking decision from the timeout value. If a hook needs >10s, it must be async. If it must be blocking and >10s, the logic belongs outside the hook layer.
-
 ## Impact
-
 - Host freezes from overlong blocking hooks: 3 incidents eliminated by timeout rule
 - Host crashes from missing error_handling: 2 incidents eliminated by required field rule
 - Async logging hooks: 0 host impact across 50+ executions
 - Pre-tool-use latency: acceptable (<100ms) when timeout <=1000ms
-
 ## Reproducibility
-
-Apply timeout table above for any new hook regardless of domain. The blocking/async decision is determined entirely by whether the hook needs to gate execution. If it does not need to gate, make it async. Measure actual script execution time before declaring a timeout value.
-
-## References
-
-- Hook schema: SCHEMA.md
-- Hook examples: EXAMPLES.md
-- Event enum values: CONFIG.md

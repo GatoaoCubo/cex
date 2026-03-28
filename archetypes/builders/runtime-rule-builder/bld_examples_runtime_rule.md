@@ -1,4 +1,6 @@
 ---
+kind: examples
+id: bld_examples_runtime_rule
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of runtime_rule artifacts
@@ -6,14 +8,10 @@ pattern: few-shot learning — LLM reads these before producing
 ---
 
 # Examples: runtime-rule-builder
-
 ## Golden Example
-
 INPUT: "Define retry rules for the API client connecting to external payment provider"
-
 OUTPUT:
 ```yaml
----
 id: p09_rr_payment_api_retry
 kind: runtime_rule
 pillar: P09
@@ -30,11 +28,8 @@ tldr: "Payment API retry: exponential backoff 500ms base, 3 max, jitter, 5s tota
 description: "Retry strategy for external payment API calls with exponential backoff and jitter"
 fallback: "Return payment_unavailable error after 3 retries exhausted"
 severity: critical
----
 ```
-
 ## Rule Specification
-
 | Parameter | Value | Unit | Notes |
 |-----------|-------|------|-------|
 | max_retries | 3 | count | After 3 failures, stop retrying |
@@ -43,19 +38,16 @@ severity: critical
 | max_delay | 4000 | ms | Cap on any single retry delay |
 | total_budget | 5000 | ms | Max total time for all retries |
 | retryable_codes | [408, 429, 500, 502, 503] | HTTP | Only retry on transient errors |
-
 ## Trigger Behavior
 When max_retries exhausted: return `payment_unavailable` error to caller.
 When rate-limited (429): respect Retry-After header if present, else use backoff.
 When total_budget exceeded: abort remaining retries, return timeout error.
 Log every retry attempt with: attempt number, wait duration, error code.
-
 ## Tuning Guide
 - base_delay: increase to 1000ms if payment provider has strict rate limits
 - max_retries: do not exceed 5 (risk of duplicate payments)
 - Monitor: retry_count metric, success_after_retry_rate, total_budget_exceeded_count
 - Safe range: base_delay 200-2000ms, max_retries 1-5, total_budget 3000-15000ms
-
 WHY THIS IS GOLDEN:
 - quality: null (H05 pass)
 - id matches p09_rr_ pattern (H02 pass)
@@ -67,14 +59,10 @@ WHY THIS IS GOLDEN:
 - No vague terms — all concrete numbers (S05 pass)
 - tldr: 75 chars <= 160 (S01 pass)
 - tags: 6 items, includes "runtime_rule" (S02 pass)
-
 ## Anti-Example
-
 INPUT: "Create retry rules"
-
 BAD OUTPUT:
 ```yaml
----
 id: retry-rules
 kind: rule
 pillar: runtime
@@ -84,11 +72,8 @@ timeout: fast
 retries: some
 quality: 8.5
 tags: [retry]
----
 ```
-
 Retry when things fail. Wait a bit between retries.
-
 FAILURES:
 1. id: "retry-rules" uses hyphens, no `p09_rr_` prefix -> H02 FAIL
 2. kind: "rule" not "runtime_rule" -> H04 FAIL

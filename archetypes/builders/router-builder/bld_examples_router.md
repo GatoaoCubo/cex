@@ -1,4 +1,6 @@
 ---
+kind: examples
+id: bld_examples_router
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of router artifacts
@@ -6,14 +8,10 @@ pattern: few-shot learning — LLM reads these before producing
 ---
 
 # Examples: router-builder
-
 ## Golden Example
-
 INPUT: "Create a router for dispatching tasks to CEX directors based on domain"
-
 OUTPUT:
 ```yaml
----
 id: p02_router_director_task
 kind: router
 pillar: P02
@@ -33,11 +31,8 @@ retry_count: 1
 load_balance: "priority"
 keywords: [director, dispatch, routing, task-assignment, domain-routing]
 density_score: 0.88
----
 ```
-
 ## Routes
-
 | Pattern | Destination | Priority | Confidence Min | Conditions |
 |---------|-------------|----------|----------------|------------|
 | research, scrape, competitor, market | SHAKA | 90 | 0.7 | - |
@@ -47,47 +42,37 @@ density_score: 0.88
 | deploy, infra, database, migrate | ATLAS | 85 | 0.8 | requires_auth |
 | monetize, course, pricing, funnel | YORK | 80 | 0.7 | - |
 | orchestrate, dispatch, spawn, monitor | orchestrator | 95 | 0.9 | admin_only |
-
 ## Decision Logic
 Algorithm: priority-first with confidence gating.
 Each incoming task is scored against all route patterns simultaneously.
 Only routes where confidence >= confidence_min are candidates.
 Among candidates, highest priority wins. Ties broken by most specific pattern match.
-
 ## Fallback
 Default destination: EDISON (general-purpose build director).
 Trigger: no route scores above 0.7 confidence.
 Behavior: route to EDISON with metadata flag `routed_by_fallback: true`.
-
 ## Escalation
 Trigger: two or more routes score within 0.05 confidence of each other.
 Action: return both candidates with scores; let orchestrator arbitrate.
 Notification: signal `p12_sig_routing_ambiguous` with candidate list.
-
 ## Integration
 - Receives from: orchestrator (task dispatch), user input (direct)
 - Routes to: SHAKA, LILY, EDISON, PYTHA, ATLAS, YORK, orchestrator
 - Consults: dispatch_rules (P12) for keyword hints
 - Signal on failure: `p12_sig_routing_failed`
-
 ## References
 - CEX TAXONOMY_LAYERS.yaml — director definitions
 - CEX orchestrator_RULES.md — routing table reference
-
 WHY THIS IS GOLDEN:
 - quality: null (H05 pass) | id p02_router_ pattern (H02 pass) | kind: router (H04 pass)
 - 19 fields present (H06 pass) | routes_count: 7 matches table (H07 pass)
 - confidence_threshold: 0.7 valid (H08 pass) | fallback_route: EDISON set (H06 pass)
 - tldr: 86ch (S01 pass) | tags: 5 items includes "router" (S02 pass) | density: 0.88 (S09 pass)
 - Routes table 7 rows (S03 pass) | Decision Logic present (S04 pass) | No filler (S10 pass)
-
 ## Anti-Example
-
 INPUT: "Make a router for tasks"
-
 BAD OUTPUT:
 ```yaml
----
 id: task_router
 kind: dispatch
 pillar: P12
@@ -95,11 +80,8 @@ routes_count: 1
 quality: 7.5
 tags: [routing]
 tldr: "This router helps route various tasks to the appropriate destinations in the system."
----
 ```
-
 Route all tasks to the main handler. If something goes wrong, try again.
-
 FAILURES:
 1. id: no `p02_router_` prefix -> H02 FAIL
 2. kind: "dispatch" not "router" -> H04 FAIL

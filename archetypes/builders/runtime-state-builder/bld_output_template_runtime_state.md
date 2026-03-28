@@ -1,4 +1,6 @@
 ---
+kind: output_template
+id: bld_output_template_runtime_state
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} for runtime_state production
@@ -6,9 +8,7 @@ pattern: derives from SCHEMA.md — no extra fields
 ---
 
 # Output Template: runtime_state
-
 ```yaml
----
 id: p10_rs_{{agent_slug}}
 kind: runtime_state
 pillar: P10
@@ -32,17 +32,13 @@ constraint_count: {{number}}
 linked_artifacts:
   primary: "{{related_mental_model_or_agent}}"
   related: [{{related_refs}}]
----
-
 ## Agent Context
 {{which_agent_and_domain_context}}
-
 ## Routing Rules
 | Rule | Condition | Action | Confidence |
 |------|-----------|--------|------------|
 | {{rule_1}} | {{when_triggered}} | {{what_happens}} | {{threshold}} |
 | {{rule_2}} | {{when_triggered}} | {{what_happens}} | {{threshold}} |
-
 ## Decision Tree
 ```text
 {{input_condition}}
@@ -50,23 +46,19 @@ linked_artifacts:
   ├── {{branch_2}} -> {{outcome_2}}
   └── {{fallback}} -> {{default_outcome}}
 ```
-
 ## Priorities
 1. {{highest_priority}} — {{rationale}}
 2. {{second_priority}} — {{rationale}}
 3. {{third_priority}} — {{rationale}}
-
 ## Heuristics
 | Heuristic | When | Confidence |
 |-----------|------|------------|
 | {{rule_of_thumb_1}} | {{ambiguous_situation}} | {{confidence_level}} |
 | {{rule_of_thumb_2}} | {{ambiguous_situation}} | {{confidence_level}} |
-
 ## Constraints
 1. {{limit_1}}
 2. {{limit_2}}
 3. {{limit_3}}
-
 ## State Transitions
 | Trigger | From | To | Condition |
 |---------|------|----|-----------|

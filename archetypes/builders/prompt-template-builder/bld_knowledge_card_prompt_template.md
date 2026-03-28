@@ -8,13 +8,9 @@ sources: prompt-template-builder MANIFEST.md + SCHEMA.md, LangChain, Mustache, J
 ---
 
 # Domain Knowledge: prompt_template
-
 ## Executive Summary
-
 Prompt templates are parameterized text molds where fixed structure and dynamic content are separated via typed {{variable}} slots filled at invocation time. The same template produces N distinct prompts by substituting different variable values — this is the core reuse contract. They differ from system prompts (fixed identity, no slots), user prompts (one-time tasks), few-shot examples (fixed examples), and meta-prompts (which generate other prompts) by being reusable molds with declared, typed variable slots.
-
 ## Spec Table
-
 | Property | Value |
 |----------|-------|
 | Pillar | P03 (prompts) |
@@ -29,9 +25,7 @@ Prompt templates are parameterized text molds where fixed structure and dynamic 
 | Injection point | `system` or `user` |
 | Tier-1 syntax | `{{variable}}` (Mustache-compatible) |
 | Tier-2 syntax | `[VARIABLE]` (when Mustache conflicts) |
-
 ## Patterns
-
 | Pattern | Application |
 |---------|-------------|
 | Uniform syntax | All {{}} Mustache OR all [] bracket — never mixed in one template |
@@ -42,9 +36,7 @@ Prompt templates are parameterized text molds where fixed structure and dynamic 
 | Idempotency | Same template + same variables MUST always produce same rendered prompt |
 | Variable-body match | Every {{variable}} in body must be declared in Variables section |
 | Rendering pipeline | Template -> variable substitution -> rendered prompt -> LLM call |
-
 ## Anti-Patterns
-
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
 | No {{variable}} in body | Not a template — it's a fixed prompt |
@@ -54,9 +46,7 @@ Prompt templates are parameterized text molds where fixed structure and dynamic 
 | No injection_point declared | Consumer doesn't know where to place rendered text |
 | Variables without constraints | No type/enum/regex means any value accepted — fragile |
 | Template with side effects | Templates must be pure text transformation, no side effects |
-
 ## Application
-
 1. Identify the reuse contract: what varies between invocations?
 2. Extract variables: name, type, required/optional, constraints
 3. Choose syntax tier: {{variable}} (tier-1) or [VARIABLE] (tier-2)
@@ -65,9 +55,7 @@ Prompt templates are parameterized text molds where fixed structure and dynamic 
 6. Provide at least one complete invocation example with all slots filled
 7. Declare output format (what rendered template produces)
 8. Validate: all body vars declared, 8 HARD + 10 SOFT gates, body <= 4096 bytes
-
 ## References
-
 - prompt-template-builder SCHEMA.md v1.0.0
 - LangChain PromptTemplate / ChatPromptTemplate
 - Mustache specification (logic-less templates)

@@ -1,4 +1,6 @@
 ---
+kind: examples
+id: bld_examples_parser
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of parser artifacts
@@ -6,14 +8,10 @@ pattern: few-shot learning — LLM reads these before producing
 ---
 
 # Examples: parser-builder
-
 ## Golden Example
-
 INPUT: "Create a parser for extracting product data from marketplace HTML pages"
-
 OUTPUT:
 ```yaml
----
 id: p05_parser_marketplace_product
 kind: parser
 pillar: P05
@@ -34,11 +32,8 @@ chunking: false
 normalization: [trim, lowercase_seller, price_to_float, rating_to_float]
 keywords: [marketplace, product, html-parser, price-extraction, scraper-output]
 density_score: 0.89
----
 ```
-
 ## Extraction Rules
-
 | Name | Target | Method | Pattern | Required | Default |
 |------|--------|--------|---------|----------|---------|
 | title | product_title | css_selector | `h1.product-title` | true | - |
@@ -47,7 +42,6 @@ density_score: 0.89
 | seller | seller_name | css_selector | `a.seller-link::text` | true | - |
 | stock | stock_status | regex | `(em estoque|esgotado|ultimas unidades)` | false | "unknown" |
 | image | image_url | css_selector | `img.product-main::attr(src)` | false | null |
-
 ## Input Specification
 Format: html
 Structure: standard marketplace product page with semantic CSS classes.
@@ -57,7 +51,6 @@ Example:
 <span class="price-current">R$ 149,90</span>
 <span class="rating-value">4.7</span>
 ```
-
 ## Output Specification
 Format: json
 Schema:
@@ -65,33 +58,26 @@ Schema:
 {"product_title": "string", "product_price": "float", "product_rating": "float",
  "seller_name": "string", "stock_status": "string", "image_url": "string|null"}
 ```
-
 ## Error Handling
 Strategy: default (use default values for optional fields, fail on required).
 - On extraction failure (required): raise ParseError with field name and selector
 - On extraction failure (optional): use declared default value
 - On malformed HTML: attempt partial extraction of available fields
-
 ## Normalization
 1. trim: remove whitespace from all extracted strings
 2. lowercase_seller: normalize seller name to lowercase
 3. price_to_float: "R$ 149,90" -> 149.90 (strip currency, swap comma)
 4. rating_to_float: "4.7" -> 4.7
-
 WHY THIS IS GOLDEN:
 - quality: null (H05 pass) | id p05_parser_ pattern (H02 pass) | kind: parser (H04 pass)
 - 21 fields present (H06 pass) | extraction_count: 6 matches table (H07 pass)
 - input_format: html valid enum (H08 pass) | output_format: json valid enum (H08 pass)
 - 3 required rules present (H08 pass) | tldr: 82ch (S01 pass) | tags: 6 items (S02 pass)
 - Extraction Rules 6 rows (S03 pass) | Error Handling present (S05 pass) | density: 0.89 (S09 pass)
-
 ## Anti-Example
-
 INPUT: "Make a parser for data"
-
 BAD OUTPUT:
 ```yaml
----
 id: data_parser
 kind: extractor
 pillar: P04
@@ -99,11 +85,8 @@ extraction_count: 0
 quality: 9.0
 tags: [data]
 tldr: "This parser is designed to extract and process various types of data from different sources."
----
 ```
-
 Parse the data and return the results. Handle errors gracefully.
-
 FAILURES:
 1. id: no `p05_parser_` prefix -> H02 FAIL
 2. kind: "extractor" not "parser" -> H04 FAIL
@@ -116,4 +99,3 @@ FAILURES:
 9. No ## Extraction Rules table in body -> S03 FAIL
 10. No ## Input Specification section -> S04 FAIL
 11. No ## Error Handling section -> S05 FAIL
-12. Prose body ("Parse the data") instead of structured extraction rules -> S03 FAIL

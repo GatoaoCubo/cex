@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: iso_package
-
 ## Frontmatter Fields
-
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string (p02_iso_{agent_slug}) | YES | - | Namespace compliance |
@@ -32,18 +30,14 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | lp_mapping | object | REC | - | File-to-pillar mapping |
 | system_instruction_tokens | integer | REC | - | Token count of system_instruction.md |
 | density_score | float 0.80-1.00 | OPT | - | Content density across all files |
-
 ## Tier System
-
 | Tier | Min Files | Required Contents |
 |------|-----------|-------------------|
 | minimal | 3 | manifest.yaml, system_instruction.md, instructions.md |
 | standard | 7 | minimal + architecture.md, output_template.md, examples.md, error_handling.md |
 | complete | 10 | standard + quick_start.md, input_schema.yaml, upload_kit.md |
 | whitelabel | 12 | complete + upload_kit_whitelabel.md, branding_config.yaml |
-
 ## LP Mapping (file to pillar)
-
 | File | Pillar | Purpose |
 |------|--------|---------|
 | manifest.yaml | P02 | Package identity and inventory |
@@ -56,18 +50,15 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | quick_start.md | P01 | 5-minute onboarding guide |
 | input_schema.yaml | P06 | Input contract definition |
 | upload_kit.md | P04 | Deployment and loading instructions |
-
 ## ID Pattern
 Regex: `^p02_iso_[a-z][a-z0-9_]+$`
 Rule: id MUST equal directory name with p02_iso_ prefix.
-
 ## Body Structure (required sections in manifest.yaml)
 1. `## Agent Identity` — who the packaged agent is, one paragraph
 2. `## File Inventory` — table of all files with pillar, tier requirement, status
 3. `## Tier Compliance` — declared tier, files present vs expected, gaps
 4. `## Portability Notes` — platform dependencies, no hardcoded paths check
 5. `## References` — source agent definition, upstream builders
-
 ## Constraints
 - max_bytes: 4096 (manifest.yaml body only)
 - per_file_max: 4096 bytes (each file in the package)

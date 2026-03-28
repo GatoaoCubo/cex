@@ -11,9 +11,7 @@ tags: [schema, type-def, P06, source-of-truth]
 ---
 
 ## Frontmatter Fields
-
 ### Required
-
 | Field | Type | Pattern / Allowed Values | Notes |
 |---|---|---|---|
 | `id` | string | `^p06_td_[a-z][a-z0-9_]*$` | Derived from type_name in snake_case |
@@ -31,9 +29,7 @@ tags: [schema, type-def, P06, source-of-truth]
 | `quality` | null | `null` | Set null on draft; governance assigns |
 | `tags` | array[string] | any | Minimum 2 tags |
 | `tldr` | string | single sentence | One-line description |
-
 ### Recommended
-
 | Field | Type | Notes |
 |---|---|---|
 | `composition` | object | Required when `base_type` is `union`, `intersection`, or `tuple` |
@@ -43,11 +39,8 @@ tags: [schema, type-def, P06, source-of-truth]
 | `examples` | array[object] | At least one concrete value with note |
 | `keywords` | array[string] | Discovery terms beyond tags |
 | `density_score` | number | 0.0–1.0; assigned post-production |
-
 ## Complex Objects
-
 ### `constraints` object
-
 ```yaml
 constraints:
   min_length: integer          # for string base_type
@@ -64,9 +57,7 @@ constraints:
   allowed_values: array        # for enum base_type
   required_keys: array         # for object/record base_type
 ```
-
 ### `composition` object
-
 ```yaml
 composition:
   mode: union | intersection | tuple | discriminated_union
@@ -75,25 +66,19 @@ composition:
     - type_ref: string         # id of member type_def OR inline base_type
       label: string            # optional human label
 ```
-
 ### `inheritance` object
-
 ```yaml
 inheritance:
   extends: string              # id of parent type_def (p06_td_*)
   overrides: array[string]     # constraint keys overridden in this child
 ```
-
 ### `generics` array item
-
 ```yaml
 - name: string                 # type parameter name e.g. T, K, V
   bound: string                # upper bound type_ref or "any"
   default: string              # optional default type_ref
 ```
-
 ## ID Pattern
-
 ```
 p06_td_{type_slug}
   type_slug = type_name converted to snake_case, lowercase
@@ -102,30 +87,11 @@ p06_td_{type_slug}
     UserId      -> p06_td_user_id
     HTTPStatus  -> p06_td_http_status
 ```
-
 Regex: `^p06_td_[a-z][a-z0-9_]*$`
-
 ## Body Structure
-
 Four sections in order:
-
 1. **Definition** — prose description of what the type represents and its domain role
 2. **Constraints** — structured constraint key-value pairs (mirrors `constraints` frontmatter object)
 3. **Examples** — at least one concrete value with explanatory note
 4. **Keywords** — comma-separated discovery terms
-
 Optional sections (append after Keywords when applicable):
-- **Composition** — union/intersection members
-- **Inheritance** — parent type_def reference
-- **Generics** — type parameters
-- **Serialization** — wire format rules
-
-## Constraints
-
-| Constraint | Value |
-|---|---|
-| `max_bytes` | 3072 |
-| `machine_format` | yaml |
-| `naming` | `p06_td_{{type}}.yaml` |
-| `layer` | spec |
-| `llm_function` | GOVERN |

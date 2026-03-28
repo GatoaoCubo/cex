@@ -7,7 +7,6 @@ purpose: Component map of formatter — inventory, dependencies, and architectur
 ---
 
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | input_type | Structured data type received by the formatter (dict, list, object, etc.) | formatter | required |
@@ -19,9 +18,7 @@ purpose: Component map of formatter — inventory, dependencies, and architectur
 | locale_config | Locale-aware settings for number, date, and currency formatting | formatter | optional |
 | null_handling | Rule for rendering missing or null values (empty string, "N/A", omit key) | formatter | required |
 | truncation_rule | Maximum length per field; prevents output bloat | formatter | optional |
-
 ## Dependency Graph
-
 ```
 parser (P05)        --produces--> formatter
 agent (P02)         --produces--> formatter
@@ -31,7 +28,6 @@ formatter           --produces--> api_response
 formatter           --produces--> file_export
 validator (P06)     --depends-->  formatter
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | parser (P05) | formatter | produces | structured data extracted from raw input |
@@ -41,9 +37,7 @@ validator (P06)     --depends-->  formatter
 | formatter | api_response | data_flow | serialized payload for API consumption |
 | formatter | file_export | data_flow | formatted file content (Markdown, CSV, JSON) |
 | validator (P06) | formatter | depends | output schema the formatter must conform to |
-
 ## Boundary Table
-
 | formatter IS | formatter IS NOT |
 |--------------|------------------|
 | A presentation transformer — converts structured data to display format | A data extractor from raw text (that is parser) |
@@ -52,9 +46,7 @@ validator (P06)     --depends-->  formatter
 | Owner of escaping, locale, and null-handling rules | A response_format definition telling an LLM what to produce |
 | Responsible for serialization (JSON, YAML, table) | A naming convention rule for identifiers |
 | Capable of multiple output targets (UI, API, file) | An output schema that validates format correctness |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|-----------|---------|
 | Input | parser (P05), agent (P02), knowledge_card (P01) | Supply structured data to be formatted |

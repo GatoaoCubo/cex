@@ -1,4 +1,6 @@
 ---
+kind: examples
+id: bld_examples_path_config
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of path_config artifacts
@@ -6,14 +8,10 @@ pattern: few-shot learning — LLM reads these before producing
 ---
 
 # Examples: path-config-builder
-
 ## Golden Example
-
 INPUT: "Define filesystem paths for the data pipeline service"
-
 OUTPUT:
 ```yaml
----
 id: p09_path_data_pipeline
 kind: path_config
 pillar: P09
@@ -38,15 +36,11 @@ description: "Filesystem paths for data pipeline service covering input, output,
 base_dir: "{{APP_ROOT}}/data_pipeline"
 dir_count: 7
 file_count: 0
----
 ```
-
 ## Overview
 Filesystem paths for the data pipeline service. All paths relative to base_dir.
 Consumed by pipeline orchestrator at startup; missing required dirs block execution.
-
 ## Path Catalog
-
 | Path | Type | Platform | Default | Required | Notes |
 |------|------|----------|---------|----------|-------|
 | base_dir | dir | all | {{APP_ROOT}}/data_pipeline | yes | Root for all pipeline paths |
@@ -56,7 +50,6 @@ Consumed by pipeline orchestrator at startup; missing required dirs block execut
 | log_dir | dir | all | {{base_dir}}/logs | no | Pipeline execution logs |
 | config_dir | dir | all | {{base_dir}}/config | yes | Pipeline configuration files |
 | cache_dir | dir | all | {{base_dir}}/cache | no | Intermediate cache, purgeable |
-
 ## Directory Hierarchy
 ```text
 {{APP_ROOT}}/data_pipeline/
@@ -67,12 +60,10 @@ Consumed by pipeline orchestrator at startup; missing required dirs block execut
   config/
   cache/
 ```
-
 ## Platform Notes
 All paths use forward slashes in templates. Runtime resolves per platform.
 Windows: backslash substitution, long path support (>260 chars via \\?\ prefix).
 Unix: no special handling needed, forward slashes native.
-
 WHY THIS IS GOLDEN:
 - quality: null (H05 pass)
 - id matches p09_path_ pattern (H02 pass)
@@ -84,14 +75,10 @@ WHY THIS IS GOLDEN:
 - tldr: 72 chars <= 160 (S01 pass)
 - tags: 5 items, includes "path_config" (S02 pass)
 - Forward slashes in all path templates (S07 pass)
-
 ## Anti-Example
-
 INPUT: "Create path config for logs"
-
 BAD OUTPUT:
 ```yaml
----
 id: log-paths
 kind: paths
 pillar: config
@@ -99,13 +86,9 @@ scope: logging
 paths: /var/log/myapp/app.log
 quality: 8.0
 tags: [logs]
----
 ```
-
 Log paths for the application.
-
 Put your logs in /var/log/myapp.
-
 FAILURES:
 1. id: "log-paths" uses hyphens and no `p09_path_` prefix -> H02 FAIL
 2. kind: "paths" not "path_config" -> H04 FAIL

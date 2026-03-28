@@ -7,7 +7,6 @@ purpose: Component map of input_schema — inventory, dependencies, and architec
 ---
 
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | field_definitions | Typed entries the caller must or may provide | author | required |
@@ -18,25 +17,20 @@ purpose: Component map of input_schema — inventory, dependencies, and architec
 | error_messages | Human-readable feedback per validation failure | author | optional |
 | examples | Concrete valid input objects for documentation and testing | author | recommended |
 | schema_version | Version identifier for backward compatibility tracking | author | required |
-
 ## Dependency Graph
-
 ```
 interface     --references--> input_schema
 input_schema  --validates_via--> validator
 input_schema  --informs--> action_prompt
 system_prompt --documents--> input_schema
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | interface | input_schema | data_flow | method signature requiring typed input shape |
 | input_schema | validator | data_flow | field definitions and constraints to check |
 | input_schema | action_prompt | data_flow | input format reference for prompt construction |
 | system_prompt | input_schema | data_flow | documentation of required caller data |
-
 ## Boundary Table
-
 | input_schema IS | input_schema IS NOT |
 |-----------------|---------------------|
 | Unilateral contract: defines what the callee needs | Bilateral contract defining both sides |
@@ -44,9 +38,7 @@ system_prompt --documents--> input_schema
 | Concrete field-level contract for one operation | Abstract reusable type definition |
 | Documents required vs optional with defaults | Output shape specification |
 | Applies coercion before validation | Integration contract between two agents |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Contract declaration | field_definitions, required_flags, schema_version | Define the shape of valid input |

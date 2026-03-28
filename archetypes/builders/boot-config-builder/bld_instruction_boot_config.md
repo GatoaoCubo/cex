@@ -8,7 +8,6 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 ---
 
 # Instructions: How to Produce a boot_config
-
 ## Phase 1: RESEARCH
 1. Identify the target agent this config initializes
 2. Determine the provider: claude, cursor, or codex — these are the valid enum values
@@ -17,7 +16,6 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 5. Establish constraint parameters: max tokens, context window, timeout in seconds, max retries, temperature appropriate for the agent's domain
 6. Search for existing boot_configs for this agent-provider combination (avoid duplicates)
 7. Identify MCP configuration needs: which servers must be available, which params each server requires
-
 ## Phase 2: COMPOSE
 1. Read SCHEMA.md — source of truth for all fields
 2. Read OUTPUT_TEMPLATE.md — template to fill
@@ -29,7 +27,6 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 8. Write CLI Flags section: provider-specific flags with purpose of each
 9. Write Permissions section: scoped permissions required for this agent on this provider
 10. Keep body <= 2048 bytes
-
 ## Phase 3: VALIDATE
 1. Check QUALITY_GATES.md manually
 2. HARD gate: id matches `p02_bc_` pattern

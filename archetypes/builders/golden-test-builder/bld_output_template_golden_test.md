@@ -1,4 +1,6 @@
 ---
+kind: output_template
+id: bld_output_template_golden_test
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} for golden_test production
@@ -6,9 +8,7 @@ pattern: derives from SCHEMA.md — no extra fields
 ---
 
 # Output Template: golden_test
-
 ```yaml
----
 id: p07_gt_{{case_slug}}
 kind: golden_test
 pillar: P07
@@ -33,20 +33,14 @@ density_score: {{0.80_to_1.00}}
 linked_artifacts:
   primary: "{{target_kind_builder_or_schema}}"
   related: [{{related_artifact_refs}}]
----
-
 ## Input Scenario
 {{verbatim_request_or_prompt}}
-
 ## Golden Output
 {{complete_artifact_no_abbreviation}}
-
 ## Rationale
 {{mapped_to_gate_ids_h01_s03_etc}}
-
 ## Evaluation Criteria
 {{specific_checks_this_validates}}
-
 ## References
 - {{reference_1}}
 - {{reference_2}}

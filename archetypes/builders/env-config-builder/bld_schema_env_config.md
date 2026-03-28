@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: env_config
-
 ## Frontmatter Fields
-
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string (p09_env_{scope_slug}) | YES | - | Namespace compliance |
@@ -30,17 +28,14 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | sensitive_count | integer | REC | - | Number of sensitive vars |
 | override | string | REC | - | Override precedence summary |
 | validation | string | REC | - | Validation strategy summary |
-
 ## ID Pattern
 Regex: `^p09_env_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Body Structure (required sections)
 1. `## Overview` — what scope, why these variables, who consumes them
 2. `## Variable Catalog` — table: name, type, required, default, sensitive, validation
 3. `## Override Precedence` — how values are resolved (env > file > default)
 4. `## Sensitive Variables` — which vars are secrets, masking rules, storage guidance
-
 ## Constraints
 - max_bytes: 4096 (body only — env configs can be larger)
 - naming: p09_env_{scope_slug}.yaml

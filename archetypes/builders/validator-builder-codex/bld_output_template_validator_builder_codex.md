@@ -1,4 +1,6 @@
 ---
+kind: output_template
+id: bld_output_template_validator_builder_codex
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with variables that the LLM fills to produce a validator
@@ -6,9 +8,7 @@ pattern: every field here exists in SCHEMA.md
 ---
 
 # Output Template: validator
-
 ```yaml
----
 id: p06_val_{{rule_slug}}
 kind: validator
 pillar: P06
@@ -29,36 +29,27 @@ density_score: {{0.80_to_1.00}}
 linked_artifacts:
   source: {{schema_or_law_ref}}
   related: {{related_artifact_or_null}}
----
 ```
-
 ## Rule
-
 ```yaml
 condition: {{expression_that_must_be_true}}
 ```
-
 ## Checks
-
 | # | Check | Expression | On Fail |
 |---|-------|------------|---------|
 | 1 | {{check_name_1}} | `{{expression_1}}` | {{reject|warn|log}} |
 | 2 | {{check_name_2}} | `{{expression_2}}` | {{reject|warn|log}} |
 | 3 | {{check_name_3}} | `{{expression_3}}` | {{reject|warn|log}} |
-
 ## Error Messages
-
 | Check | Message | Fix Hint |
 |-------|---------|----------|
 | {{check_name_1}} | `{{clear_error_message}}` | {{how_to_fix}} |
 | {{check_name_2}} | `{{clear_error_message}}` | {{how_to_fix}} |
-
 ## Pass Example
 ```text
 Input: {{passing_input}}
 Result: PASS
 ```
-
 ## Fail Example
 ```text
 Input: {{failing_input}}

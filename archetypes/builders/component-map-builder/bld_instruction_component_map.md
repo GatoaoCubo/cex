@@ -8,7 +8,6 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 ---
 
 # Instructions: How to Produce a component_map
-
 ## Phase 1: DISCOVER
 1. Identify the system scope to inventory (what boundary defines "inside" vs "outside")
 2. List all components within scope (services, modules, databases, queues, external APIs)
@@ -17,7 +16,6 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 5. Assess health status indicator for each component: active, deprecated, or planned
 6. Check existing component_maps to avoid overlapping scope
 7. Verify component count and connection count are consistent with scope
-
 ## Phase 2: COMPOSE
 1. Read SCHEMA.md — source of truth for all fields
 2. Read OUTPUT_TEMPLATE.md — fill {{vars}} following SCHEMA constraints
@@ -29,7 +27,6 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 8. Write Boundaries section: explicit statement of what is inside vs outside this map's scope
 9. Verify component_count in frontmatter matches actual rows in Components section
 10. Verify connection_count in frontmatter matches actual rows in Connections section
-
 ## Phase 3: VALIDATE
 1. Check QUALITY_GATES.md — verify each HARD gate manually
 2. Confirm YAML frontmatter parses without errors

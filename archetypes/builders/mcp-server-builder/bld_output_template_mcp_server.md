@@ -1,4 +1,6 @@
 ---
+kind: output_template
+id: bld_output_template_mcp_server
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} that the LLM fills to produce a mcp_server artifact
@@ -6,9 +8,7 @@ pattern: every field here exists in SCHEMA.md — template derives, never invent
 ---
 
 # Output Template: mcp_server
-
 ```yaml
----
 id: p04_mcp_{{server_slug}}
 kind: mcp_server
 pillar: P04
@@ -32,38 +32,29 @@ versioning: "{{version_negotiation_strategy}}"
 quality: null
 tags: [mcp_server, {{tag_2}}, {{tag_3}}]
 tldr: "{{dense_summary_max_160ch}}"
----
 ```
-
 ## Overview
 {{what_the_server_does_1_to_2_sentences}}
 {{who_consumes_it_and_primary_use_case}}
-
 ## Tools
-
 ### {{tool_name_1}}
 {{tool_description}}
 Parameters:
 - `{{param_1}}` ({{type}}, {{required|optional}}): {{param_description}}
 - `{{param_2}}` ({{type}}, {{required|optional}}): {{param_description}}
 Returns: {{return_description}}
-
 ### {{tool_name_2}}
 {{tool_description}}
 Parameters:
 - `{{param_1}}` ({{type}}, {{required|optional}}): {{param_description}}
 Returns: {{return_description}}
-
 ## Resources
-
 ### {{uri_template_1}}
 Content-Type: {{mime_type}}
 {{resource_description}}
-
 ### {{uri_template_2}}
 Content-Type: {{mime_type}}
 {{resource_description}}
-
 ## Transport & Auth
 Transport: {{stdio|sse|http}}
 {{transport_connection_details}}

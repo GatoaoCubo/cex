@@ -1,4 +1,6 @@
 ---
+kind: output_template
+id: bld_output_template_daemon
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} that the LLM fills to produce a daemon artifact
@@ -6,9 +8,7 @@ pattern: every field here exists in SCHEMA.md — template derives, never invent
 ---
 
 # Output Template: daemon
-
 ```yaml
----
 id: p04_daemon_{{name_slug}}
 kind: daemon
 pillar: P04
@@ -31,34 +31,27 @@ monitoring: "{{metrics_and_alerting_summary}}"
 logging: {{structured|plaintext|syslog}}
 graceful_shutdown: "{{shutdown_procedure}}"
 max_restarts: "{{N_in_window}}"
----
 ```
-
 ## Overview
 {{what_daemon_does_and_why_background_1_to_2_sentences}}
 {{who_depends_on_it_and_what_triggers_it}}
-
 ## Lifecycle
 Schedule: {{schedule_details}}
 Startup: {{startup_sequence}}
 Restart: {{restart_policy}} — {{restart_behavior_details}}
 Shutdown: {{graceful_shutdown_procedure}}
-
 ## Signal Handling
-
 | Signal | Response |
 |--------|----------|
 | SIGTERM | {{sigterm_behavior}} |
 | SIGINT | {{sigint_behavior}} |
 | SIGHUP | {{sighup_behavior}} |
 | {{custom_signal}} | {{custom_behavior}} |
-
 ## Monitoring
 Health: {{health_check_details}}
 Metrics: {{metrics_collected}}
 Alerting: {{alert_conditions}}
 Logging: {{log_format_and_rotation}}
-
 ## References
 - {{reference_1}}
 - {{reference_2}}

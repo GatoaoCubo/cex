@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: embedding_config
-
 ## Frontmatter Fields
-
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string (p01_emb_{model}) | YES | - | Namespace compliance |
@@ -35,17 +33,14 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | quality | null | YES | null | Never self-score |
 | tags | list[string], len >= 3 | YES | - | Must include "embedding" |
 | tldr | string <= 160ch | YES | - | Dense summary |
-
 ## ID Pattern
 Regex: `^p01_emb_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Body Structure (required sections)
 1. `## Model` — model name, provider, and key specs
 2. `## Chunking` — chunk_size, overlap, and tokenizer strategy
 3. `## Performance` — latency, throughput, and cost characteristics
 4. `## Integration` — how to use this config in the RAG pipeline
-
 ## Constraints
 - max_bytes: 512 (body only)
 - naming: p01_emb_{model_slug}.yaml

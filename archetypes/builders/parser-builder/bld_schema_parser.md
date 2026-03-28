@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: parser
-
 ## Frontmatter Fields
-
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string (p05_parser_{slug}) | YES | - | Namespace compliance |
@@ -34,9 +32,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | normalization | list[string] | REC | [] | Post-extraction normalization steps |
 | keywords | list[string] | REC | - | Brain search triggers |
 | density_score | float 0.80-1.00 | OPT | - | Content density |
-
 ## Extraction Rule Object
-
 ```yaml
 rule:
   name: string (snake_case identifier)
@@ -47,11 +43,9 @@ rule:
   default: any (value when extraction fails and error_strategy is "default")
   normalize: string (optional post-extraction transform)
 ```
-
 ## ID Pattern
 Regex: `^p05_parser_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Body Structure (required sections)
 1. `## Extraction Rules` — rule table: name, target, method, pattern, required
 2. `## Input Specification` — what the parser expects (format, structure, examples)
@@ -59,7 +53,6 @@ Rule: id MUST equal filename stem.
 4. `## Error Handling` — behavior per error_strategy, fallback extraction
 5. `## Normalization` — post-extraction transforms (trim, lowercase, type cast)
 6. `## References` — sources and documentation
-
 ## Constraints
 - max_bytes: 4096 (body only)
 - naming: p05_parser_{slug}.md

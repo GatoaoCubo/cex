@@ -8,47 +8,36 @@ pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCE
 ---
 
 # Collaboration: guardrail-builder
-
 ## My Role in Crews
 I am a SPECIALIST. I answer ONE question: "what must an agent NEVER do, and what happens if it tries?"
 I do not define access permissions. I do not score quality.
 I set safety boundaries so agents operate within safe limits with clear violation consequences.
-
 ## Crew Compositions
-
 ### Crew: "Agent Safety Stack"
 ```
   1. agent-builder -> "agent definition with capabilities"
   2. guardrail-builder -> "safety boundaries scoped to agent"
   3. bugloop-builder -> "correction cycle for guardrail violations"
 ```
-
 ### Crew: "Governance Foundation"
 ```
   1. axiom-builder -> "immutable rules (justification for guardrails)"
   2. guardrail-builder -> "enforceable safety restrictions"
   3. e2e-eval-builder -> "validation that guardrails hold under test"
 ```
-
 ## Handoff Protocol
-
 ### I Receive
 - seeds: scope (agent, system, domain), restriction description, severity
 - optional: enforcement mode (block/warn/log), bypass policy, violation examples
-
 ### I Produce
 - guardrail artifact (.md + .yaml frontmatter)
 - committed to: `cex/P11/examples/p11_guardrail_{scope}.md`
-
 ### I Signal
 - signal: complete (with quality score from QUALITY_GATES)
 - if quality < 8.0: signal retry with failure reasons
-
 ## Builders I Depend On
 - axiom-builder: provides immutable principles that justify guardrail restrictions
-
 ## Builders That Depend On Me
-
 | Builder | Why |
 |---------|-----|
 | agent-builder | Agent definitions reference guardrails as constraints |

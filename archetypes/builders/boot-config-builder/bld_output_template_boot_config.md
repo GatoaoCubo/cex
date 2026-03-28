@@ -1,4 +1,6 @@
 ---
+kind: output_template
+id: bld_output_template_boot_config
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} that the LLM fills to produce a boot_config artifact
@@ -6,9 +8,7 @@ pattern: every field here exists in SCHEMA.md — template derives, never invent
 ---
 
 # Output Template: boot_config
-
 ```yaml
----
 id: p02_boot_{{provider_slug}}
 kind: boot_config
 pillar: P02
@@ -43,41 +43,31 @@ quality: null
 tags: [boot-config, {{tag_2}}, {{tag_3}}]
 tldr: "{{dense_summary_max_160ch}}"
 density_score: {{0.80-1.00}}
----
 ```
-
 ## Provider Overview
 {{provider_name}} runtime for {{agent_role}} agents.
 {{one_sentence_runtime_characteristics}}
-
 ## Identity Block
 Name: {{agent_display_name}}
 Role: {{primary_role}}
 Satellite: {{satellite_name}}
-
 ## Constraints
-
 | Parameter | Value | Rationale |
 |-----------|-------|-----------|
 | max_tokens | {{value}} | {{why}} |
 | context_window | {{value}} | {{why}} |
 | timeout_seconds | {{value}} | {{why}} |
 | max_retries | {{value}} | {{why}} |
-
 ## Tools Configuration
-
 | Tool | Type | Purpose |
 |------|------|---------|
 | {{tool_1}} | {{mcp|cli|api}} | {{purpose_1}} |
 | {{tool_2}} | {{mcp|cli|api}} | {{purpose_2}} |
-
 ## Flags
-
 | Flag | Purpose |
 |------|---------|
 | {{flag_1}} | {{purpose_1}} |
 | {{flag_2}} | {{purpose_2}} |
-
 ## References
 - Provider docs: {{provider_doc_url}}
 - Related config: {{related_boot_config_or_none}}

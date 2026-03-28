@@ -8,13 +8,9 @@ sources: pattern-builder MANIFEST.md + SCHEMA.md, GoF 1994, Alexander 1977, POSA
 ---
 
 # Domain Knowledge: pattern
-
 ## Executive Summary
-
 Patterns are named, reusable solutions to recurring problems in a given context. Each pattern documents opposing forces that make simple solutions inadequate, a concrete solution at implementation level, and consequences including negative trade-offs. They differ from laws (which mandate compliance), workflows (which execute step sequences), diagrams (which visualize), and instructions (which tell how) by being descriptive documentation of proven solutions with explicit forces and trade-offs.
-
 ## Spec Table
-
 | Property | Value |
 |----------|-------|
 | Pillar | P08 (architecture) |
@@ -29,9 +25,7 @@ Patterns are named, reusable solutions to recurring problems in a given context.
 | Min consequences (negative) | 1 trade-off |
 | Min examples | 2 concrete applications |
 | Name format | 2-5 words, title-case, self-describing |
-
 ## Patterns
-
 | Pattern | Application |
 |---------|-------------|
 | Context-first structure | Problem and forces BEFORE solution — readers need tension before resolution |
@@ -41,9 +35,7 @@ Patterns are named, reusable solutions to recurring problems in a given context.
 | Composable references | Cross-reference related patterns with stated relationship |
 | Anti-pattern documentation | Document what looks similar but fails |
 | Applicability boundaries | State both when-to-use AND when-not-to-use |
-
 ## Anti-Patterns
-
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
 | Problem without recurrence signal | One-off fixes are not patterns; need "repeatedly/often/whenever" |
@@ -53,9 +45,7 @@ Patterns are named, reusable solutions to recurring problems in a given context.
 | Name > 5 words or not self-describing | Pattern names must be memorable and context-free |
 | Missing anti-pattern section | Similar wrong approaches must be documented |
 | No concrete examples | Unproven pattern; need >= 2 real applications |
-
 ## Application
-
 1. Name the pattern: 2-5 words, title-case, self-describing without context
 2. Describe the recurring problem with a recurrence signal word
 3. Document >= 2 opposing forces that make the problem hard
@@ -65,9 +55,7 @@ Patterns are named, reusable solutions to recurring problems in a given context.
 7. Document anti-patterns (similar wrong approaches)
 8. Cross-reference related patterns
 9. Validate: 9 HARD + 11 SOFT gates, body <= 4096 bytes
-
 ## References
-
 - pattern-builder SCHEMA.md v1.0.0
 - Alexander, C. (1977) A Pattern Language
 - Gamma et al. (1994) Design Patterns (GoF)

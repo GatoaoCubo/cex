@@ -1,4 +1,5 @@
 ---
+pillar: P00
 id: component-map-builder-tools
 kind: tools
 parent: component-map-builder
@@ -6,17 +7,13 @@ version: 1.0.0
 ---
 
 # Tools — component-map-builder
-
 ## Production Tools
-
 | Tool | Purpose | When | Status |
 |------|---------|------|--------|
 | brain_query | Search existing maps | Phase 1 step 5 | CONDITIONAL [MCP] |
 | validate_artifact.py | Generic validator | Phase 3 | [PLANNED] |
 | cex_forge.py | Generate from seeds | Alternative to manual | [PLANNED] |
-
 ## Data Sources
-
 | Source | Path/URL | Data |
 |--------|----------|------|
 | CEX Schema | P08_architecture/_schema.yaml | Field definitions, constraints |
@@ -25,19 +22,14 @@ version: 1.0.0
 | Existing maps | P08_architecture/examples/ | Reference artifacts |
 | CMDB (ITIL) | ITIL v4 | Configuration management patterns |
 | Backstage | https://backstage.io/docs/features/software-catalog | Component catalog patterns |
-
 ## brain_query Usage [IF MCP]
-
 ```
 brain_query("component map {scope_keywords}")
 brain_query("p08_cmap {domain}")
 brain_query("component inventory {system_name}")
 ```
-
 Use to: find existing maps (avoid duplicates), find sibling satellite_specs for component details, find related diagrams.
-
 ## Validation Checklist (manual until validate_artifact.py ships)
-
 ```
 [ ] YAML frontmatter parses (H01)
 [ ] id matches ^p08_cmap_[a-z][a-z0-9_]+$ (H02)

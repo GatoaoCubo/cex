@@ -15,22 +15,15 @@ density_score: 0.93
 ---
 
 # Gate: golden_test
-
 ## Definition
-
 | Field     | Value |
 |-----------|-------|
 | metric    | composite score across SOFT dimensions |
 | threshold | >= 7.0 to publish; >= 9.5 for golden (the golden_test itself must also reach 9.5) |
 | operator  | weighted average after all HARD gates pass |
 | scope     | all artifacts where `kind: golden_test` |
-
 All HARD gates are AND-logic: one failure rejects the artifact regardless of SOFT score.
-
----
-
 ## HARD Gates
-
 | ID  | Check | Fail Condition |
 |-----|-------|----------------|
 | H01 | Frontmatter parses as valid YAML | Any YAML syntax error |
@@ -44,11 +37,7 @@ All HARD gates are AND-logic: one failure rejects the artifact regardless of SOF
 | H09 | `Golden Output` section present and non-empty | No reference output to calibrate against |
 | H10 | `Input Scenario` section present and non-empty | No input; test is unverifiable |
 | H11 | `rationale` references at least one gate ID (pattern: H\d+ or S\d+) | No gate mapping; rationale is unstructured |
-
----
-
 ## SOFT Scoring
-
 | Dim | Dimension | Weight | Scoring Guide |
 |-----|-----------|--------|---------------|
 | S01 | `tldr` <= 160 chars, names `target_kind` and what makes this golden | 0.10 | Named=1.0, vague=0.3 |
@@ -61,28 +50,17 @@ All HARD gates are AND-logic: one failure rejects the artifact regardless of SOF
 | S08 | Verification source cited for 9.5+ quality claim (reviewer name or process) | 0.10 | Cited=1.0, absent=0.0 |
 | S09 | Evaluation Criteria section present with pass/fail conditions | 0.10 | Present=1.0, absent=0.0 |
 | S10 | `density_score` >= 0.85 (golden tests must be information-dense) | 0.07 | Met=1.0, below=0.0 |
-
 **Weight sum: 1.00**
-
----
-
 ## Actions
-
 | Score | Action |
 |-------|--------|
 | >= 9.5 | GOLDEN — accepted into calibration set; informs all future scoring for `target_kind` |
 | >= 8.0 | PUBLISH — pool-eligible reference; not yet calibration-authoritative |
 | >= 7.0 | REVIEW — rationale incomplete or verification source missing |
 | < 7.0  | REJECT — redo; likely unverified source quality or missing gate mapping |
-
----
-
 ## Bypass
-
 | Field | Value |
 |-------|-------|
 | conditions | Bootstrap only: first golden_test for a brand-new kind where no prior calibration set exists |
 | approver | Two independent reviewers must sign off in lieu of automated verification |
 | audit trail | Required: both reviewer names, review date, written agreement on quality assessment |
-| expiry | Provisional until a second confirmed-9.5 artifact exists to cross-validate |
-| never bypass | H01 (corrupt YAML), H05 (self-scored quality is invalid), H07 (sub-9.5 threshold destroys calibration integrity permanently) |

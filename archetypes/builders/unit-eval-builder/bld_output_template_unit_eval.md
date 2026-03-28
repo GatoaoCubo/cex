@@ -1,4 +1,6 @@
 ---
+kind: output_template
+id: bld_output_template_unit_eval
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} for unit_eval production
@@ -6,9 +8,7 @@ pattern: derives from SCHEMA.md — no extra fields
 ---
 
 # Output Template: unit_eval
-
 ```yaml
----
 id: p07_ue_{{target_slug}}
 kind: unit_eval
 pillar: P07
@@ -36,20 +36,14 @@ quality: null
 tags: [unit-eval, {{target_kind}}, {{domain}}]
 tldr: "{{dense_summary_max_160ch}}"
 density_score: {{0.80_to_1.00}}
----
-
 ## Input
 {{verbatim_input_prompt}}
-
 ## Expected Output
 {{concrete_expected_output}}
-
 ## Assertions
 {{gate_mapped_checks_with_expected_values}}
-
 ## Setup
 {{preconditions_and_state_init}}
-
 ## Teardown
 {{cleanup_after_execution}}
 ```

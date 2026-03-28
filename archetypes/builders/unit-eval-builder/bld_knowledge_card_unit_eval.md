@@ -8,13 +8,9 @@ sources: unit-eval-builder MANIFEST.md + SCHEMA.md
 ---
 
 # Domain Knowledge: unit_eval
-
 ## Executive Summary
-
 A `unit_eval` (P07) is a deterministic test for a single agent or prompt in isolation — it answers "does this target produce the correct output for this exact input?" It differs from `smoke_eval` (shallow pass/fail sanity), `e2e_eval` (multi-agent pipeline), and `golden_test` (quality calibration reference) by requiring gate-mapped assertions tied to specific quality gates of the target artifact. Each unit_eval covers ONE target, ONE input scenario.
-
 ## Spec Table
-
 | Property | Value |
 |----------|-------|
 | Pillar | P07 |
@@ -27,9 +23,7 @@ A `unit_eval` (P07) is a deterministic test for a single agent or prompt in isol
 | `timeout` default | 60 seconds |
 | `quality` field | always `null` |
 | `assertions` | non-empty list; each item must have `gate_ref` |
-
 ## Patterns
-
 | Pattern | Rule |
 |---------|------|
 | Single responsibility | One unit_eval = one target + one input scenario |
@@ -40,27 +34,21 @@ A `unit_eval` (P07) is a deterministic test for a single agent or prompt in isol
 | Edge cases separate | Each edge case gets its own unit_eval with `edge_case: true` |
 | Timeout explicit | Set `timeout` per expected execution cost; default 60s |
 | `score` field | Set expected minimum score when target has numeric quality gate |
-
 **Assertion object structure**:
-
 | Field | Type | Required | Notes |
 |-------|------|----------|-------|
 | `gate_ref` | string | YES | Maps to target's quality gate ID |
 | `check` | string | YES | Human-readable description of what is checked |
 | `expected` | any | YES | Exact expected value |
 | `severity` | enum | YES | `HARD` or `SOFT` |
-
 **Boundary — what unit_eval is NOT**:
-
 | kind | Why NOT unit_eval |
 |------|-----------------|
 | `smoke_eval` | Shallow pass/fail only, no gate mapping, <30s |
 | `e2e_eval` | Tests full pipeline with multiple agents together |
 | `golden_test` | 9.5+ reference for calibration, not verification |
 | `benchmark` | Measures latency/cost, not output correctness |
-
 ## Anti-Patterns
-
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
 | Vague `expected_output` ("looks good") | Assertion is unevaluable; test is meaningless |
@@ -70,9 +58,7 @@ A `unit_eval` (P07) is a deterministic test for a single agent or prompt in isol
 | `quality` set to a score | Never self-score; governance assigns |
 | `id` not matching filename stem | Schema constraint violated; indexing breaks |
 | Empty `assertions` list | Schema HARD gate: assertions must be non-empty |
-
 ## Application
-
 1. Identify `target` (agent/prompt ID) and `target_kind` (artifact kind)
 2. Choose ONE input scenario — edge cases get separate files
 3. Set `id` = `p07_ue_{target_slug}`, must equal filename stem
@@ -83,8 +69,6 @@ A `unit_eval` (P07) is a deterministic test for a single agent or prompt in isol
 8. Write `teardown` section: cleanup steps
 9. Set `timeout` based on expected execution time; flag `edge_case: true` if applicable
 10. Set `quality: null` — do not self-score
-
 ## References
-
 - unit-eval-builder MANIFEST.md v1.0.0
 - unit-eval-builder SCHEMA.md v1.0.0

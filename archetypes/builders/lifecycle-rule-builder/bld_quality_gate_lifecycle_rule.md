@@ -15,15 +15,10 @@ density_score: 0.85
 ---
 
 # Gate: Lifecycle Rule
-
 ## Definition
-
 A `lifecycle_rule` governs how an artifact kind moves through states from creation to sunset. It defines valid states, the measurable criteria that permit transitions, and the review cadence that keeps the rule current. Gates here ensure no rule is published with vague triggers, missing ownership, or an unverifiable review cycle.
-
 ## HARD Gates
-
 All HARD gates must pass. Any single failure sets score to 0 and blocks publish.
-
 | ID  | Check | Failure consequence |
 |-----|-------|---------------------|
 | H01 | YAML frontmatter parses without error | Artifact unparseable by tooling |
@@ -36,11 +31,8 @@ All HARD gates must pass. Any single failure sets score to 0 and blocks publish.
 | H08 | `Transitions` section present with entry criteria per transition | Transitions without criteria are unenforceable |
 | H09 | `Review Cycle` section present with explicit periodicity | No cadence means rule decays silently |
 | H10 | `review_cycle` value is one of: `weekly`, `monthly`, `quarterly`, `yearly` | Free-text cycle cannot be scheduled |
-
 ## SOFT Scoring
-
 Weights sum to 100%. Each dimension scores 0 or its full weight.
-
 | ID  | Dimension | Weight | Criteria |
 |-----|-----------|--------|----------|
 | S01 | tldr quality | 1.0 | `tldr` <= 160 chars, names the governed artifact kind |
@@ -55,9 +47,7 @@ Weights sum to 100%. Each dimension scores 0 or its full weight.
 | S10 | Compatible with quality gate tiers | 0.5 | States map to: DRAFT, REVIEW, PUBLISH, GOLDEN, SUNSET |
 | S11 | Density >= 0.80 | 1.0 | No filler: "when appropriate", "as needed", "feels outdated" |
 | S12 | Automation section present | 0.5 | Names at least one automated check or script for transition validation |
-
 ## Actions
-
 | Score | Tier | Action |
 |-------|------|--------|
 | >= 9.5 | GOLDEN | Publish to pool + record in memory |
@@ -65,16 +55,9 @@ Weights sum to 100%. Each dimension scores 0 or its full weight.
 | >= 7.0 | REVIEW | Acceptable with documented improvement items |
 | < 7.0 | REJECT | Revise and resubmit — do not publish |
 | 0 (HARD fail) | REJECTED | Fix failing HARD gate(s) first |
-
 ## Bypass
-
 Bypasses are logged and expire automatically.
-
 | Field | Value |
 |-------|-------|
 | condition | New artifact kind with no prior lifecycle precedent; states are draft and under active definition |
 | approver | P11 governance owner (human) |
-| audit_log | Entry required in `records/governance/bypass_log.md` with gate ID, governed kind, and draft state list |
-| expiry | 21 days — States and Transitions sections must be completed before expiry or artifact moves to REJECTED |
-
-H01 and H05 cannot be bypassed under any condition.

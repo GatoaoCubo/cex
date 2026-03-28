@@ -7,9 +7,7 @@ purpose: Component map of law — inventory, dependencies, and architectural pos
 ---
 
 # Architecture: law in the CEX
-
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | frontmatter block | 19-field metadata header (id, kind, pillar, domain, scope, severity, etc.) | law-builder | active |
@@ -20,16 +18,13 @@ purpose: Component map of law — inventory, dependencies, and architectural pos
 | violations | Catalog of known violation scenarios with severity and response | author | active |
 | history | Changelog of amendments, additions, and scope changes over time | author | active |
 | conflict_resolution | Priority rules when this law conflicts with other laws or instructions | author | active |
-
 ## Dependency Graph
-
 ```
 knowledge_card  --produces-->  law  --consumed_by-->  agent
 pattern         --produces-->  law  --enforced_by-->  validator
 instruction     --depends-->   law
 guardrail       --depends-->   law  --signals-->      violation_event
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | knowledge_card (P01) | law | data_flow | domain context supporting rationale |
@@ -39,9 +34,7 @@ guardrail       --depends-->   law  --signals-->      violation_event
 | law | instruction (P03) | dependency | instructions must not contradict active laws |
 | law | guardrail (P11) | dependency | guardrails implement safety subset of laws |
 | law | violation_event (P12) | signals | emitted when enforcement detects a breach |
-
 ## Boundary Table
-
 | law IS | law IS NOT |
 |--------|------------|
 | An inviolable operational mandate with enforcement | A flexible guideline (instruction P03) |
@@ -50,9 +43,7 @@ guardrail       --depends-->   law  --signals-->      violation_event
 | Enforced automatically or via audit trail | A reusable solution recommendation (pattern P08) |
 | Amended through formal history with versioning | A visual representation of architecture (diagram P08) |
 | Prioritized via conflict-resolution ordering | A runtime configuration parameter (runtime_rule P09) |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Context | knowledge_card, pattern | Supply domain facts and recurring failures that justify the law |

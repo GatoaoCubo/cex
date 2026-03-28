@@ -15,20 +15,15 @@ density_score: 0.92
 ---
 
 # Gate: bugloop
-
 ## Definition
-
 | Field | Value |
 |---|---|
 | metric | bugloop artifact quality score |
 | threshold | 7.0 (publish >= 8.0, golden >= 9.5) |
 | operator | weighted_sum |
 | scope | all artifacts with `kind: bugloop` |
-
 ## HARD Gates
-
 All must pass (AND logic). Any single failure = REJECT.
-
 | ID | Check | Fail Condition |
 |---|---|---|
 | H01 | Frontmatter parses as valid YAML | Parse error on frontmatter block |
@@ -41,11 +36,8 @@ All must pass (AND logic). Any single failure = REJECT.
 | H08 | Fix strategy has `max_attempts` defined | `max_attempts` absent or zero |
 | H09 | Verification section has at least one assertion | `assertions: []` or assertions field absent |
 | H10 | Escalation threshold defined | No escalation target when `max_attempts` exhausted |
-
 ## SOFT Scoring
-
 Weights sum to 100%.
-
 | Dimension | Weight | Criteria |
 |---|---|---|
 | Detection precision | 1.0 | Triggers are specific (regex patterns, error signatures) not vague strings |
@@ -60,18 +52,14 @@ Weights sum to 100%.
 | Idempotency guarantee | 1.0 | Re-running the loop on an already-fixed state is safe and documented |
 | Domain specificity | 1.0 | Detection triggers and assertions are specific to the declared domain |
 | Documentation | 0.5 | Rationale for `max_attempts` value and confidence thresholds explained |
-
 ## Actions
-
 | Score | Tier | Action |
 |---|---|---|
 | >= 9.5 | Golden | Publish to pool as golden reference |
 | >= 8.0 | Publish | Publish to pool, add to routing index |
 | >= 7.0 | Review | Flag for improvement before publish |
 | < 7.0 | Reject | Return to author with specific gate failures |
-
 ## Bypass
-
 | Field | Value |
 |---|---|
 | conditions | Emergency hotfix loop for production incident already verified manually |

@@ -8,7 +8,6 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: bugloop
-
 ## Frontmatter Fields
 | Field | Type | Required | Default |
 |-------|------|----------|---------|
@@ -46,14 +45,12 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | rollback | object | YES | — |
 | rollback.enabled | boolean | YES | — |
 | rollback.strategy | string (git_revert/snapshot_restore/blue_green) | YES | — |
-
 ## Body Structure (required sections)
 1. Detection — triggers, patterns, sources of bug signal
 2. Fix Strategy — auto vs manual, strategy rationale
 3. Verification — test suite, assertions, pass criteria
 4. Escalation — when/how to escalate, thresholds
 5. Rollback — conditions that trigger rollback, strategy
-
 ## Constraints
 - max_bytes: 4096 (body only)
 - naming: p11_bl_{scope}.md

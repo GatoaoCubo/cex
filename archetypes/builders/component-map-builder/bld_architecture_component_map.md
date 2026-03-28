@@ -7,7 +7,6 @@ purpose: Component map of component_map — inventory, dependencies, and archite
 ---
 
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | component_entry | Single row in the inventory — name, role, owner, status | component_map | required |
@@ -20,9 +19,7 @@ purpose: Component map of component_map — inventory, dependencies, and archite
 | satellite_spec | Detailed spec for a single component found in the map | P08 | consumer |
 | pattern | Solution template that may reference component inventory | P08 | consumer |
 | brain_index | Search index that stores maps for retrieval | runtime | consumer |
-
 ## Dependency Graph
-
 ```
 scope_definition   --produces-->  component_entry
 component_entry    --produces-->  connection
@@ -34,7 +31,6 @@ component_map      --produces-->  satellite_spec
 component_map      --produces-->  pattern
 component_map      --produces-->  brain_index
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | scope_definition | component_entry | produces | bounded list of components to inventory |
@@ -46,9 +42,7 @@ component_map      --produces-->  brain_index
 | component_map | satellite_spec | produces | inventory that informs single-component spec |
 | component_map | pattern | produces | inventory referenced by solution templates |
 | component_map | brain_index | produces | searchable artifact stored for retrieval |
-
 ## Boundary Table
-
 | component_map IS | component_map IS NOT |
 |-----------------|---------------------|
 | Structured tabular inventory of system parts and connections | A visual graph or diagram (that is diagram) |
@@ -57,9 +51,7 @@ component_map      --produces-->  brain_index
 | Data artifact — tables, typed connections, ownership, status | An execution dependency graph with ordering semantics (that is dag) |
 | Defines scope boundary (what is in and out of the map) | A governance mandate for system behavior (that is law) |
 | Feeds diagrams, specs, patterns, and search indexes | Implements or enforces anything at runtime |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|-----------|---------|
 | scoping | scope_definition | Declare what the map covers and excludes |

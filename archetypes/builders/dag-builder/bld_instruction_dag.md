@@ -8,7 +8,6 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 ---
 
 # Instructions: How to Produce a dag
-
 ## Phase 1: DISCOVER
 1. Identify the pipeline or mission that requires dependency ordering
 2. List all tasks (nodes) that make up the pipeline — assign each a unique id and descriptive label
@@ -17,7 +16,6 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 5. Identify parallelism opportunities: find groups of nodes with no dependency between them (can execute simultaneously)
 6. Assess critical path: trace the longest dependency chain and sum estimated durations
 7. Check existing DAGs for overlapping pipeline scope to avoid duplicates
-
 ## Phase 2: COMPOSE
 1. Read SCHEMA.md — source of truth for all fields
 2. Read OUTPUT_TEMPLATE.md — fill {{vars}} following SCHEMA constraints
@@ -29,7 +27,6 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 8. Write Critical Path section: list the longest dependency chain with each node's duration and total duration
 9. Verify body <= 3072 bytes
 10. Verify id matches `^p12_dag_[a-z][a-z0-9_]+$`
-
 ## Phase 3: VALIDATE
 1. Check QUALITY_GATES.md — verify each HARD gate manually
 2. Confirm YAML frontmatter parses without errors

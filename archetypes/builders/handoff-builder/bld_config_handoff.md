@@ -8,7 +8,6 @@ pattern: CONFIG restricts SCHEMA, never contradicts it
 ---
 
 # Config: handoff Production Rules
-
 ## Naming Convention
 | Scope | Convention | Example |
 |-------|-----------|---------|
@@ -17,25 +16,20 @@ pattern: CONFIG restricts SCHEMA, never contradicts it
 | Frontmatter fields | snake_case | `quality_target`, `scope_fence` |
 | Autonomy values | lowercase enum | `full`, `supervised`, `assisted` |
 | Satellite values | lowercase slug | `edison`, `atlas`, `shaka` |
-
 Rule: use `.md` (YAML frontmatter + markdown body) for handoff artifacts.
-
 ## File Paths
 - Primary output: `.claude/handoffs/p12_ho_{task}.md`
 - Compiled output: `P12_orchestration/compiled/p12_ho_{task}.md`
 - Human reference: `P12_orchestration/examples/p12_ho_{task}.md`
-
 ## Size Limits
 - Preferred handoff size: <= 3072 bytes
 - Absolute max: 4096 bytes
 - Tasks should be concise and specific
-
 ## Content Restrictions
 - Each task step must be one specific action (no compound steps)
 - Scope fence must list both SOMENTE and NAO TOQUE
 - Commit section must have exact git add and commit commands
 - Signal section must reference a concrete completion mechanism
-
 ## Boundary Restrictions
 - No prompt persona or response format constraints (belongs in action_prompt)
 - No status events or quality scores (belongs in signal)

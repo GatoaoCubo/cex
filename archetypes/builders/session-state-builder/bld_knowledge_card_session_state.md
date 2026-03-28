@@ -8,13 +8,9 @@ sources: session-state-builder MANIFEST.md + SCHEMA.md, P10 schema
 ---
 
 # Domain Knowledge: session_state
-
 ## Executive Summary
-
 Session states are ephemeral snapshots of an agent's execution context — they capture what the agent is doing right now, how far along it is, and where recovery can resume. Each snapshot is a single-point observation (not a time series) consumed by monitors, recovery tools, and post-session extractors. They differ from runtime states (which persist across sessions and drive decisions), learning records (which accumulate experience over time), and axioms (which are immutable truths) by being strictly ephemeral observations lost when the session ends.
-
 ## Spec Table
-
 | Property | Value |
 |----------|-------|
 | Pillar | P10 (memory) |
@@ -27,9 +23,7 @@ Session states are ephemeral snapshots of an agent's execution context — they 
 | Quality field | always `null` |
 | Status values | active, paused, completed, aborted |
 | Format | YAML (machine-parseable) |
-
 ## Patterns
-
 | Pattern | Application |
 |---------|-------------|
 | Minimum semantic contract | session_id + agent + status + started_at — always present |
@@ -39,9 +33,7 @@ Session states are ephemeral snapshots of an agent's execution context — they 
 | Graceful degradation | Must work when optional fields are absent |
 | Machine-parseable format | YAML for programmatic consumption by monitors |
 | Checkpoint for recovery | last_checkpoint enables resume after interruption |
-
 ## Anti-Patterns
-
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
 | Persistent state in session_state | Session state is ephemeral; use runtime_state for persistence |
@@ -51,9 +43,7 @@ Session states are ephemeral snapshots of an agent's execution context — they 
 | Body > 3072 bytes | Exceeds max; session states must be compact |
 | Routing decisions in session state | Routing belongs in runtime_state or mental_model |
 | Optional fields without graceful fallback | Consumers break when optional fields absent |
-
 ## Application
-
 1. Set session_id (unique execution context identifier)
 2. Set agent (which agent is executing)
 3. Set status: active, paused, completed, or aborted
@@ -61,9 +51,7 @@ Session states are ephemeral snapshots of an agent's execution context — they 
 5. Add optional metrics as needed: tasks, context window, tools, errors
 6. Add checkpoint data for recovery if applicable
 7. Keep body compact (single snapshot); validate <= 3072 bytes
-
 ## References
-
 - session-state-builder SCHEMA.md v1.0.0
 - P10 memory pillar schema
 - Finite state machine (status lifecycle)

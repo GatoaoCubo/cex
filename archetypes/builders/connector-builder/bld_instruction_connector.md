@@ -8,7 +8,6 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 ---
 
 # Instructions: How to Produce a connector
-
 ## Phase 1: RESEARCH
 1. Identify the external service to integrate and its domain (payment, CRM, messaging, etc.)
 2. Determine protocol: rest, websocket, grpc, or mqtt
@@ -18,7 +17,6 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 6. Define health check mechanism: endpoint polling, heartbeat, or event-based liveness
 7. Check for existing connector artifacts to avoid duplicates
 8. Confirm service slug for id: snake_case, lowercase, no hyphens
-
 ## Phase 2: COMPOSE
 1. Read SCHEMA.md — source of truth for all fields
 2. Read OUTPUT_TEMPLATE.md — fill {{vars}} following SCHEMA constraints
@@ -31,7 +29,6 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 9. Write Logging section: what to log per direction, sensitivity filtering rules
 10. Verify body <= 1024 bytes
 11. Verify id matches `^p04_cn_[a-z][a-z0-9_]+$`
-
 ## Phase 3: VALIDATE
 1. Check QUALITY_GATES.md — verify each HARD gate manually
 2. Confirm YAML frontmatter parses without errors

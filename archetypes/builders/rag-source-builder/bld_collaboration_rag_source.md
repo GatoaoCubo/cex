@@ -8,20 +8,16 @@ pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCE
 ---
 
 # Collaboration: rag-source-builder
-
 ## My Role in Crews
 I am a SPECIALIST. I answer ONE question: "where can we find authoritative external data for this domain?"
 I catalog external URLs with freshness policies and reliability scores — pointer only, no content body. I do not distill content, write domain context, or configure embeddings.
-
 ## Crew Compositions
-
 ### Crew: "Knowledge Ingestion Pipeline"
 ```
   1. rag-source-builder       -> "pointer to external URL with freshness policy and reliability score"
   2. knowledge-card-builder   -> "distilled content extracted from the indexed source"
   3. brain-index-builder      -> "search index built over the knowledge cards"
 ```
-
 ### Crew: "RAG-Augmented Agent Stack"
 ```
   1. rag-source-builder       -> "catalog of authoritative sources to query at runtime"
@@ -29,33 +25,25 @@ I catalog external URLs with freshness policies and reliability scores — point
   3. context-doc-builder      -> "domain context document assembled from retrieved chunks"
   4. prompt-template-builder  -> "template with {{context}} slot filled by retrieval"
 ```
-
 ### Crew: "Research Domain Setup"
 ```
   1. rag-source-builder       -> "5-10 authoritative sources for the domain"
   2. scraper-builder          -> "scraper config targeting the cataloged URLs"
   3. knowledge-card-builder   -> "distilled cards from scraped content"
 ```
-
 ## Handoff Protocol
-
 ### I Receive
 - seeds: domain name, target URL(s), required freshness (daily/weekly/monthly), reliability expectation
 - optional: existing source catalog to extend, format hints (html/json/api/pdf/csv), auth notes
-
 ### I Produce
 - rag_source artifact (YAML frontmatter only, pointer with no content body, max 1024 bytes)
 - committed to: `cex/P01/examples/p01_rs_{domain}_{name}.md`
-
 ### I Signal
 - signal: complete (with quality score from QUALITY_GATES)
 - if quality < 8.0: signal retry with failure reasons
-
 ## Builders I Depend On
 - None required. I am a primary producer — I only need a URL and domain name from the task request.
-
 ## Builders That Depend On Me
-
 | Builder | Why |
 |---------|-----|
 | knowledge-card-builder | Uses my source pointers to know where to retrieve and distill content |

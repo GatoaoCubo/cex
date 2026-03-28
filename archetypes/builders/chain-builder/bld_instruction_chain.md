@@ -8,7 +8,6 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 ---
 
 # Instructions: How to Produce a chain
-
 ## Phase 1: RESEARCH
 1. Identify the complex task to decompose: state the input and the final output in concrete terms
 2. List atomic steps: each step must be exactly one LLM call with one purpose — split any step that requires two decisions into two steps
@@ -16,7 +15,6 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 4. Determine error handling strategy per step: fail_fast for steps where downstream steps cannot proceed without the output, skip for enrichment steps, retry for transient failures, fallback for steps with an acceptable degraded alternative
 5. Map branching logic: if any step produces a conditional output, define the condition and both paths explicitly
 6. Search for existing chains that perform the same transformation (avoid duplicates)
-
 ## Phase 2: COMPOSE
 1. Read SCHEMA.md — source of truth for all fields
 2. Read OUTPUT_TEMPLATE.md — template to fill
@@ -29,7 +27,6 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 9. Write Context Passing section: specify which data accumulates across steps and which resets at each step boundary
 10. Verify steps_count in frontmatter matches the actual number of steps written
 11. Keep body <= 8192 bytes
-
 ## Phase 3: VALIDATE
 1. Check QUALITY_GATES.md manually
 2. HARD gate: id matches `p03_ch_` pattern

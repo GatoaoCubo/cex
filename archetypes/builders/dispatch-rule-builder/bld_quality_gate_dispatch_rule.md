@@ -15,22 +15,15 @@ density_score: 0.92
 ---
 
 # Gate: dispatch_rule
-
 ## Definition
-
 | Field     | Value |
 |-----------|-------|
 | metric    | Composite score from SOFT dimensions + all HARD gates pass |
 | threshold | >= 7.0 to publish; >= 9.5 golden |
 | operator  | AND (all HARD) + weighted_sum (SOFT) |
 | scope     | All artifacts where `kind: dispatch_rule` |
-
----
-
 ## HARD Gates
-
 All must pass. Any single failure = REJECT regardless of SOFT score.
-
 | ID  | Check | Failure message |
 |-----|-------|----------------|
 | H01 | Frontmatter parses as valid YAML | "Frontmatter YAML syntax error" |
@@ -43,13 +36,8 @@ All must pass. Any single failure = REJECT regardless of SOFT score.
 | H08 | `keywords` list is non-empty (>= 3 entries) | "Keyword list must have at least 3 entries" |
 | H09 | `confidence_threshold` is a float between 0.0 and 1.0 | "Confidence threshold out of range [0.0, 1.0]" |
 | H10 | `fallback` is defined and references a valid satellite or literal `human` | "Fallback target undefined or invalid" |
-
----
-
 ## SOFT Scoring
-
 Dimensions sum to 100%. Score each 0.0-10.0; multiply by weight.
-
 | Dimension | Weight | What to assess |
 |-----------|--------|----------------|
 | Keyword breadth | 1.0 | Keywords cover the full semantic space of the domain scope |
@@ -64,28 +52,18 @@ Dimensions sum to 100%. Score each 0.0-10.0; multiply by weight.
 | Boundary vs other rules | 0.5 | Non-overlap with adjacent dispatch rules documented |
 | Domain precision | 1.0 | Domain field accurately describes the routing scope |
 | Documentation | 0.5 | tldr captures routing intent in <= 160 characters |
-
 Weight sum: 1.0+1.0+0.5+1.0+1.0+1.0+0.5+1.0+1.0+0.5+1.0+0.5 = 10.0 (100%)
-
----
-
 ## Actions
-
 | Score | Tier | Action |
 |-------|------|--------|
 | >= 9.5 | GOLDEN | Publish to pool as golden exemplar |
 | >= 8.0 | PUBLISH | Publish to pool |
 | >= 7.0 | REVIEW | Flag for human review before publish |
 | < 7.0  | REJECT | Return to author with failure report |
-
----
-
 ## Bypass
-
 | Field | Value |
 |-------|-------|
 | conditions | New satellite being piloted without full keyword corpus established |
 | approver | Routing system owner approval required (written) |
 | audit_trail | Bypass logged to `records/audits/dispatch_rule_bypass_{date}.md` |
 | expiry | 24h; routing rules in active use must be validated quickly |
-| never_bypass | H01 (YAML parse failure), H05 (quality null invariant), H07 (invalid satellite causes routing failure in production) |

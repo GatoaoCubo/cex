@@ -7,14 +7,12 @@ purpose: Tools available for brain_index production
 ---
 
 # Tools: brain-index-builder
-
 ## Production Tools
 | Tool | Purpose | When | Status |
 |------|---------|------|--------|
 | brain_query [MCP] | Search existing brain_indexes | Phase 1 (check duplicates) | CONDITIONAL |
 | validate_artifact.py | Validate any artifact kind | Phase 3 | [PLANNED] |
 | cex_forge.py | Generate artifact from seeds | Alternative compose | [PLANNED] |
-
 ## Data Sources
 | Source | Path/URL | Data |
 |--------|----------|------|
@@ -23,7 +21,6 @@ purpose: Tools available for brain_index production
 | SEED_BANK | archetypes/SEED_BANK.yaml | P10_brain_index seeds |
 | FAISS Docs | faiss.ai | Index types, parameters, performance characteristics |
 | BM25 Theory | Robertson & Zaragoza 2009 | BM25 parameters and scoring |
-
 ## Interim Validation
 Manually check each QUALITY_GATES.md gate against produced artifact.
 - [ ] YAML parses

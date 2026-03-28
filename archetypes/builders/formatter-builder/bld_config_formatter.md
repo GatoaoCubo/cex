@@ -8,9 +8,7 @@ pattern: CONFIG restricts SCHEMA, never contradicts it
 ---
 
 # Config: formatter Production Rules
-
 ## Naming Convention
-
 | Scope | Convention | Example |
 |-------|-----------|---------|
 | Artifact files | `p05_fmt_{slug}.md` | `p05_fmt_product_comparison_table.md` |
@@ -18,20 +16,15 @@ pattern: CONFIG restricts SCHEMA, never contradicts it
 | Frontmatter fields | snake_case | `target_format`, `rule_count` |
 | Formatter slug | snake_case, lowercase | `product_comparison_table`, `json_pretty` |
 | Rule names | snake_case | `title_col`, `price_format` |
-
 Rule: id MUST equal filename stem.
-
 ## File Paths
 - Output: `cex/P05_output/examples/p05_fmt_{slug}.md`
 - Compiled: `cex/P05_output/compiled/p05_fmt_{slug}.yaml`
-
 ## Size Limits (aligned with SCHEMA)
 - Body: max 4096 bytes
 - Total (frontmatter + body): ~5500 bytes
 - Density: >= 0.80
-
 ## Target Format Guide
-
 | Value | When to use | Typical transform |
 |-------|-------------|------------------|
 | json | API responses, machine consumption | serialize |
@@ -42,18 +35,14 @@ Rule: id MUST equal filename stem.
 | text | Plain text output, logs | stringify |
 | xml | Legacy API, SOAP responses | serialize |
 | table | Terminal/console display | tabulate |
-
 ## Input Type Guide
-
 | Value | When to use |
 |-------|-------------|
 | structured_data | Dict/list from parser or API (most common) |
 | raw_text | Unprocessed string needing formatting |
 | typed_object | Language-specific typed object (Pydantic, dataclass) |
 | mixed | Multiple input types in one payload |
-
 ## Escaping Strategy Guide
-
 | Target Format | Recommended Escaping | Characters Escaped |
 |---------------|---------------------|-------------------|
 | html | html | `< > & " '` |

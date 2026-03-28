@@ -1,4 +1,6 @@
 ---
+kind: examples
+id: bld_examples_model_card
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of model_card artifacts
@@ -6,14 +8,10 @@ pattern: few-shot learning — LLM reads these before producing
 ---
 
 # Examples: model-card-builder
-
 ## Golden Example
-
 INPUT: "Documenta o Claude Sonnet 4 pra decidir roteamento"
-
 OUTPUT:
 ```yaml
----
 id: p02_mc_anthropic_sonnet_4
 kind: model_card
 pillar: P02
@@ -60,12 +58,9 @@ linked_artifacts:
   primary: null
   related: [p02_mc_anthropic_opus_4]
 data_source: "https://docs.anthropic.com/en/docs/about-claude/models"
----
-
 ## Boundary
 model_card EH: spec tecnica do Sonnet 4 (capacidades, custos, limites).
 model_card NAO EH: boot_config, agent, benchmark.
-
 ## Specifications
 | Spec | Value | Source |
 |------|-------|--------|
@@ -75,7 +70,6 @@ model_card NAO EH: boot_config, agent, benchmark.
 | Cutoff | Apr 2025 | https://docs.anthropic.com/en/docs/about-claude/models |
 | Pricing (input) | $3.00 per 1M | https://docs.anthropic.com/en/docs/about-claude/pricing |
 | Pricing (output) | $15.00 per 1M | https://docs.anthropic.com/en/docs/about-claude/pricing |
-
 ## Capabilities
 | Capability | Supported | Notes |
 |------------|-----------|-------|
@@ -87,7 +81,6 @@ model_card NAO EH: boot_config, agent, benchmark.
 | Web Search | false | — |
 | Fine Tuning | false | — |
 | Batch API | true | 50% discount |
-
 ## When to Use
 | Scenario | Sonnet? | Alternative |
 |----------|---------|-------------|
@@ -96,12 +89,10 @@ model_card NAO EH: boot_config, agent, benchmark.
 | Simple classification, formatting | NO | Haiku ($0.25/$1.25) |
 | Vision: PDF/image analysis | YES | — |
 | High-volume batch processing | YES | 50% discount via Batch API |
-
 ## References
 - source: https://docs.anthropic.com/en/docs/about-claude/models
 - pricing: https://docs.anthropic.com/en/docs/about-claude/pricing
 ```
-
 WHY THIS IS GOLDEN:
 - Every Spec row has Source URL (never `-`)
 - Capabilities: 8 rows, all booleans
@@ -109,14 +100,10 @@ WHY THIS IS GOLDEN:
 - quality: null
 - When to Use: 5 rows with concrete alternatives and pricing
 - Frontmatter strings quoted consistently
-
 ## Anti-Example
-
 INPUT: "Documenta o GPT-4"
-
 BAD OUTPUT:
 ```yaml
----
 id: gpt4_card
 kind: model_card
 model_name: GPT-4
@@ -124,11 +111,9 @@ provider: OpenAI
 context_window: "128K"
 quality: 9.5
 tags: "gpt, openai"
----
 GPT-4 is a powerful model by OpenAI. It can do many things.
 Pricing varies by usage tier. Contact OpenAI for details.
 ```
-
 FAILURES:
 1. id: no `p02_mc_` prefix, no provider in id → H02 FAIL
 2. provider: uppercase → H08 FAIL
@@ -138,5 +123,3 @@ FAILURES:
 6. lp: missing → H05 FAIL
 7. features: missing entirely → S05 FAIL
 8. pricing: "varies" → S03 FAIL
-9. body: filler prose, no Boundary, no tables → S06-S10 FAIL
-10. Specifications: no Source column → S07 FAIL

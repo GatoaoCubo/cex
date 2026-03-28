@@ -21,11 +21,8 @@ keywords: [guardrail, severity, enforcement, block, warn, log, bypass_policy, co
 ---
 
 ## Summary
-
 A guardrail defines safety restrictions with concrete, matchable rules and explicit enforcement. Its value comes from being unambiguous — the enforcement layer must be able to evaluate whether a given input or output triggers the rule. Severity classification drives enforcement mode, and every guardrail must document how it can be bypassed in an emergency.
-
 ## Pattern
-
 1. Rules are concrete and matchable: name the exact pattern, field, operation, or value range. "Block requests where output contains PII fields: ssn, credit_card, dob" is enforceable. "Be careful with sensitive data" is not.
 2. `severity` is one of four values: `critical`, `high`, `medium`, `low`.
 3. `enforcement` matches severity:
@@ -35,43 +32,11 @@ A guardrail defines safety restrictions with concrete, matchable rules and expli
 4. Every guardrail, including critical ones, includes a `## Bypass Policy` section: who can authorize override, what process is followed, and how overrides are audited.
 5. Guardrail controls safety behavior (what the system must not do). Permission controls access (who can use the system). These are separate artifacts.
 6. `id` slug uses underscores: `p11_gr_dest_cmds` not `p11_gr_dest-cmds`.
-
 ## Anti-Pattern
-
 - Subjective rules like "be careful" or "handle responsibly" — enforcement cannot match these.
 - `severity: "important"` or `severity: "danger"` — invalid enum values, rejected by schema.
 - `enforcement: "stop"` or `enforcement: "prevent"` — invalid enum values; use block/warn/log.
 - No bypass policy on critical guardrails — leaves incident responders with no override path.
 - Using block enforcement for low-severity guardrails — fires on benign inputs, causes alert fatigue, gets disabled.
 - Combining access control rules with safety rules in one guardrail — conflation makes both harder to audit and maintain.
-
 ## Context
-
-Applies when: defining what the system must not do, what outputs must be filtered, or what operations must be prevented.
-Does not apply when: the goal is to control who can access a feature (use permission artifact) or to define rollout gates (use feature flag).
-Boundary: guardrail answers "what is forbidden?"; permission answers "who is allowed?".
-Precondition: the enforcement layer must exist or be planned — a guardrail without an enforcer is documentation only.
-
-## Impact
-
-- Concrete rules enable automated enforcement without human review on every request.
-- Severity-matched enforcement prevents alert fatigue on low-severity rules.
-- Bypass policy documentation provides incident responders a resolution path under time pressure.
-- Separation from permission artifacts keeps both smaller, auditable, and independently testable.
-
-## Reproducibility
-
-1. Identify the domain: filesystem, data exposure, rate limiting, logging compliance, content safety.
-2. List all rules as concrete conditions: operation type, field name, value range, or pattern to match.
-3. Classify severity: critical (data loss/breach), high (compliance violation), medium (policy warning), low (audit/observability).
-4. Assign enforcement: block for critical+high, warn for medium, log for low.
-5. Write bypass policy: authorized role, approval process, audit log entry format.
-6. Validate: all severity values are in {critical, high, medium, low}; all enforcement values are in {block, warn, log}.
-7. Test: provide a sample input that triggers each rule; confirm the enforcement action fires correctly.
-
-## References
-
-- Pillar: P11 (security, safety, and compliance)
-- Proven patterns: filesystem safety (critical, 7 rules, block), data exposure (high, 5 rules, block), rate limiting (medium, 3 rules, warn), logging compliance (low, 4 rules, log)
-- Boundary: permission artifact for access control; feature_flag (P09) for rollout gates
-- Common mistakes: subjective rules, invalid enum values, missing bypass policy, severity-enforcement mismatch

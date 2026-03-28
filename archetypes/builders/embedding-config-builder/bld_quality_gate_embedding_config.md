@@ -15,22 +15,15 @@ density_score: 0.90
 ---
 
 # Gate: embedding_config
-
 ## Definition
-
 | Field     | Value |
 |-----------|-------|
 | metric    | Composite score from SOFT dimensions + all HARD gates pass |
 | threshold | >= 7.0 to publish; >= 9.5 golden |
 | operator  | AND (all HARD) + weighted_sum (SOFT) |
 | scope     | All artifacts where `kind: embedding_config` |
-
----
-
 ## HARD Gates
-
 All must pass. Any single failure = REJECT regardless of SOFT score.
-
 | ID  | Check | Failure message |
 |-----|-------|----------------|
 | H01 | Frontmatter parses as valid YAML | "Frontmatter YAML syntax error" |
@@ -41,13 +34,8 @@ All must pass. Any single failure = REJECT regardless of SOFT score.
 | H06 | All required fields present: id, kind, pillar, domain, model, provider, dimensions, chunk_size, chunk_overlap, distance_metric, version, created, author, tags | "Missing required field(s)" |
 | H07 | `distance_metric` is one of: `cosine`, `dot_product`, `euclidean` | "Invalid distance_metric value" |
 | H08 | `chunk_overlap` < `chunk_size` (overlap must be less than full chunk) | "chunk_overlap must be less than chunk_size" |
-
----
-
 ## SOFT Scoring
-
 Dimensions sum to 100%. Score each 0.0-10.0; multiply by weight.
-
 | Dimension | Weight | What to assess |
 |-----------|--------|----------------|
 | Dimension accuracy | 1.0 | `dimensions` matches documented output size of named model |
@@ -61,24 +49,15 @@ Dimensions sum to 100%. Score each 0.0-10.0; multiply by weight.
 | Fallback model | 0.5 | Alternative model listed for when primary is unavailable |
 | Performance notes | 1.0 | Latency, throughput, or memory footprint characteristics noted |
 | Documentation | 0.5 | tldr captures model + key parameters in <= 160 characters |
-
 Weight sum: 1.0+1.0+1.0+1.0+1.0+0.5+1.0+0.5+0.5+1.0+0.5 = 9.0 -> normalize to 100%
-
----
-
 ## Actions
-
 | Score | Tier | Action |
 |-------|------|--------|
 | >= 9.5 | GOLDEN | Publish to pool as golden exemplar |
 | >= 8.0 | PUBLISH | Publish to pool |
 | >= 7.0 | REVIEW | Flag for human review before publish |
 | < 7.0  | REJECT | Return to author with failure report |
-
----
-
 ## Bypass
-
 | Field | Value |
 |-------|-------|
 | conditions | Experimental model evaluation where full parameter tuning is ongoing |

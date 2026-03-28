@@ -8,13 +8,9 @@ sources: response-format-builder MANIFEST.md + SCHEMA.md
 ---
 
 # Domain Knowledge: response_format
-
 ## Executive Summary
-
 A response_format is a template injected into the LLM prompt that specifies how the model must structure its output during generation — it is a pre-generation contract the LLM sees. Post-generation validation belongs to validation_schema (P06). Data extraction belongs to parser (P05). Format transformation belongs to formatter (P05). The response_format is guidance, not enforcement; clarity and a concrete example output are what drive compliance.
-
 ## Spec Table
-
 | Property | Value |
 |----------|-------|
 | Pillar | P05 (IO) |
@@ -25,9 +21,7 @@ A response_format is a template injected into the LLM prompt that specifies how 
 | Body sections | 4 (Format Specification, Variables Table, Template Body, Example Output) |
 | Section count constraint | 4–7 sections; consolidate if > 7 |
 | Naming | `p05_rf_{format_slug}.yaml` |
-
 ## Patterns
-
 | Pattern | Rule |
 |---------|------|
 | Format compliance hierarchy | JSON (95%) > YAML (90%) > Markdown tables (88%) > Numbered lists (85%) > Prose (70%) |
@@ -37,9 +31,7 @@ A response_format is a template injected into the LLM prompt that specifies how 
 | Variables table completeness | Every variable requires: name, type, constraints, required/optional, example |
 | Example Output section | Must be fully filled — no placeholders remaining in the example |
 | Injection point selection | `system_prompt` for persistent structure; `user_message` for per-request context |
-
 ## Anti-Patterns
-
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
 | Untyped `{{value}}` variable | Forbidden — schema rejects variables without type + example |
@@ -50,9 +42,7 @@ A response_format is a template injected into the LLM prompt that specifies how 
 | Mixing mustache and bracket for same tier | Ambiguous variable precedence |
 | response_format containing validation rules | Wrong artifact — post-generation validation belongs in validation_schema (P06) |
 | Vague section names (`## Details`) | Use action-oriented names: `## Remediation Steps`, `## Score Breakdown` |
-
 ## Application
-
 1. Identify the target artifact kind and consumer type (machine / config / human)
 2. Select `format_type` based on consumer: machine = `json`, config = `yaml`, human = `markdown`
 3. Write frontmatter: 12 required fields; `quality: null`; add `target_kind` and `sections` list
@@ -61,9 +51,7 @@ A response_format is a template injected into the LLM prompt that specifies how 
 6. Write `## Template Body` — actual template using `{{REQUIRED}}` and `[OPTIONAL]` placeholders
 7. Write `## Example Output` — fully filled; zero remaining placeholders
 8. Verify body <= 4096 bytes; sections count 4–7; `id` matches filename stem
-
 ## References
-
 - response-format-builder MANIFEST.md v1.0.0
 - response_format SCHEMA.md v2.0.0
 - Boundary: response_format (LLM sees, pre-gen) vs validation_schema (P06, system applies post-gen) vs parser (P05, extracts data) vs formatter (P05, transforms format)

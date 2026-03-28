@@ -1,4 +1,6 @@
 ---
+kind: examples
+id: bld_examples_dag
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of dag artifacts
@@ -6,14 +8,10 @@ pattern: few-shot learning for dependency graph specification
 ---
 
 # Examples: dag-builder
-
 ## Golden Example
-
 INPUT: "Create DAG for content pipeline: research, write copy, create images, review, publish"
-
 OUTPUT (`p12_dag_content_pipeline.yaml`):
 ```yaml
----
 id: p12_dag_content_pipeline
 kind: dag
 lp: P12
@@ -69,9 +67,7 @@ keywords: [content, pipeline, dag, multi-satellite]
 linked_artifacts:
   primary: "P12_orchestration/compiled/p12_dag_content_pipeline.yaml"
   related: ["archetypes/builders/workflow-builder/", "archetypes/builders/handoff-builder/"]
----
 ```
-
 WHY THIS IS GOLDEN:
 - filename follows `p12_dag_{pipeline}.yaml`
 - YAML with proper frontmatter, 19+ fields present
@@ -80,12 +76,9 @@ WHY THIS IS GOLDEN:
 - execution_order correctly groups parallel nodes into waves
 - critical_path identifies the longest dependency chain
 - no runtime state, no execution logic, no error handling
-
 ## Anti-Example
-
 BAD OUTPUT (`p12_wf_content.yaml`):
 ```yaml
----
 id: p12_wf_content
 kind: workflow
 lp: P12
@@ -104,9 +97,7 @@ steps:
 runtime_state:
   current_step: "research"
   retries: 0
----
 ```
-
 FAILURES:
 1. wrong kind: `workflow` instead of `dag` (H02)
 2. wrong id prefix: `p12_wf_` instead of `p12_dag_` (H01)

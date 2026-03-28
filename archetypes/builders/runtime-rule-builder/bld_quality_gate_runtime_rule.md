@@ -20,17 +20,10 @@ tldr: "Quality gate for runtime behavior specs: verifies rule type, numeric para
 ---
 
 ## Definition
-
 A runtime rule artifact specifies how a single operation behaves under load, failure, or resource pressure. It declares a rule type (timeout, retry, rate_limit, or circuit_breaker), the numeric parameters that govern the rule with explicit units, and the scope of operations the rule applies to. Every rule must define what happens when its threshold is breached — silent failure is not acceptable.
-
 Scope: files with `kind: runtime_rule`. Does not apply to lifecycle rules (P09 sub-kind) or feature flags (P14), which govern activation rather than execution behavior.
-
----
-
 ## HARD Gates
-
 Failure on any single gate means REJECT regardless of soft score.
-
 | ID  | Predicate | How to test |
 |-----|-----------|-------------|
 | H01 | Frontmatter parses as valid YAML | `yaml.safe_load(frontmatter)` raises no error |
@@ -42,13 +35,8 @@ Failure on any single gate means REJECT regardless of soft score.
 | H07 | `rule_type` is one of: timeout, retry, rate_limit, circuit_breaker | enum membership check |
 | H08 | All numeric parameter values include explicit units (ms, s, req/s, count, percent) | scan parameter table; every numeric value row has a unit column that is non-empty |
 | H09 | `scope` field declares what operation or component this rule governs | `scope` field is non-empty string |
-
----
-
 ## SOFT Scoring
-
 Score each dimension 0 (absent or fails) to 1 (present and passes). Weights are 0.5 or 1.0.
-
 | #  | Dimension | Weight |
 |----|-----------|--------|
 | 1  | `density_score` field present and >= 0.80 | 1.0 |
@@ -62,31 +50,18 @@ Score each dimension 0 (absent or fails) to 1 (present and passes). Weights are 
 | 9  | Monitoring hooks or observable signals identified (metric name, alert condition) | 0.5 |
 | 10 | Rule is compatible with the declared runtime environment | 0.5 |
 | 11 | `tldr` is <= 160 characters | 0.5 |
-
 **Formula**: `final_score = (sum of score_i * weight_i) / (sum of weight_i) * 10`
-
 Weight total: 8.5. Each dimension contributes proportionally. Score range: 0.0 to 10.0.
-
----
-
 ## Actions
-
 | Tier | Threshold | Action |
 |------|-----------|--------|
 | GOLDEN | >= 9.5 | Publish to pool as golden; use as reference for reliability engineering |
 | PUBLISH | >= 8.0 | Publish to pool; mark production-ready |
 | REVIEW | >= 7.0 | Return to author with scored dimension feedback; one revision cycle allowed |
 | REJECT | < 7.0 | Block from pool; full rewrite required before re-evaluation |
-
----
-
 ## Bypass
-
 | Field | Value |
 |-------|-------|
 | condition | Rule governs a third-party dependency whose latency profile is not yet characterized |
 | approver | Domain lead must approve in writing before bypass takes effect |
 | audit_log | Record in `records/pool/audits/bypasses.md` with date, approver, and reason |
-| expiry | 30 days from bypass grant; parameters must be grounded in real data before expiry |
-
-H01 (YAML parses) and H05 (quality is null) may never be bypassed under any circumstance. Bypassing H08 (units on numeric values) is never permitted — unitless numbers in production rules have caused outages.

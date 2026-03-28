@@ -11,9 +11,7 @@ tags: [examples, type-def, P07, golden, anti-pattern]
 ---
 
 ## Golden Example
-
 ```yaml
----
 id: p06_td_agent_score
 kind: type_def
 pillar: P06
@@ -29,35 +27,24 @@ nullable: false
 quality: null
 tags: [quality, scoring, agent, numeric]
 tldr: "A bounded decimal representing an agent output quality score from 0.0 to 10.0."
----
-
 ## Definition
-
 AgentScore represents the numeric quality evaluation of an agent-produced artifact within the CEX governance system. Scores drive pool eligibility, routing decisions, and golden artifact promotion. All scores are floating-point in [0.0, 10.0] with two decimal places of precision.
-
 ## Constraints
-
 minimum: 0.0
 maximum: 10.0
 precision: 2
 format: decimal
-
 ## Examples
-
 - value: 9.5
   note: "Golden tier — qualifies for pool promotion"
 - value: 7.3
   note: "Learning tier — experimental use only"
 - value: 4.9
   note: "Below threshold — rejected, requires redo"
-
 ## Keywords
-
 quality, score, rating, decimal, bounded, agent, governance, pool, tier
 ```
-
 ### WHY THIS IS GOLDEN
-
 - **H01**: `id` matches `^p06_td_[a-z][a-z0-9_]*$` — `p06_td_agent_score` valid
 - **H02**: `kind: type_def` present and correct
 - **H03**: `pillar: P06` and `layer: spec` both set
@@ -74,13 +61,8 @@ quality, score, rating, decimal, bounded, agent, governance, pool, tier
 - **S06**: Examples span min, mid, and max semantically meaningful values
 - 19 frontmatter fields populated — exceeds golden minimum
 - Artifact is terse, no filler prose, body under 3072 bytes
-
----
-
 ## Anti-Example
-
 ```yaml
----
 id: AgentScore
 kind: type_definition
 pillar: P6
@@ -93,14 +75,10 @@ domain: quality
 nullable: yes
 quality: 8.5
 tags: [score]
----
-
 A score for agents. Should be between 0 and 10. Can be null sometimes.
 Constraints: must be a number.
 ```
-
 ### FAILURES
-
 1. **[H01]** `id: AgentScore` — violates pattern `^p06_td_[a-z][a-z0-9_]*$`; must be `p06_td_agent_score`
 2. **[H02]** `kind: type_definition` — invalid; only `type_def` is accepted
 3. **[H03]** `pillar: P6` — invalid shorthand; must be exactly `P06`

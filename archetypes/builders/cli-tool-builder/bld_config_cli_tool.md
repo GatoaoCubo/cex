@@ -8,9 +8,7 @@ pattern: CONFIG restricts SCHEMA, never contradicts it
 ---
 
 # Config: cli_tool Production Rules
-
 ## Naming Convention
-
 | Scope | Convention | Example |
 |-------|-----------|---------|
 | Artifact files | `p04_cli_{tool_slug}.md` | `p04_cli_artifact_validator.md` |
@@ -19,29 +17,22 @@ pattern: CONFIG restricts SCHEMA, never contradicts it
 | Tool slug | snake_case, lowercase, no hyphens | `artifact_validator`, `index_builder` |
 | Command names | snake_case, verb or verb_noun | `validate`, `check_schema`, `build` |
 | Flag names | kebab-case with `--` prefix | `--strict`, `--output-format` |
-
 Rule: id MUST equal filename stem. Hyphens in id = HARD FAIL.
-
 ## File Paths
 - Output: `cex/P04_tools/examples/p04_cli_{tool_slug}.md`
 - Compiled: `cex/P04_tools/compiled/p04_cli_{tool_slug}.yaml`
-
 ## Size Limits (aligned with SCHEMA)
 - Body: max 1024 bytes
 - Total (frontmatter + body): ~2000 bytes
 - Density: >= 0.80 (no filler)
-
 ## Output Format Enum
-
 | Value | When to use |
 |-------|-------------|
 | text | Human-readable default, unstructured |
 | json | Machine-parseable, piping to other tools |
 | table | Tabular data display (columns, alignment) |
 | yaml | Config-like structured output |
-
 ## Exit Code Conventions
-
 | Code | Meaning |
 |------|---------|
 | 0 | Success — operation completed normally |
@@ -50,5 +41,4 @@ Rule: id MUST equal filename stem. Hyphens in id = HARD FAIL.
 | 3 | I/O error — file not found, permission denied |
 | 126 | Permission denied — cannot execute |
 | 127 | Command not found |
-
 Rule: every cli_tool MUST define at least codes 0 and 1.

@@ -7,9 +7,7 @@ purpose: Component map of brain_index — inventory, dependencies, and architect
 ---
 
 # Architecture: brain_index in the CEX
-
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | frontmatter block | Metadata header (id, kind, pillar, algorithm, scope, rebuild_schedule, etc.) | brain-index-builder | required |
@@ -20,9 +18,7 @@ purpose: Component map of brain_index — inventory, dependencies, and architect
 | filter_config | Pre-query filters (by pillar, type, tag, date range) to narrow retrieval scope | author | optional |
 | rebuild_policy | Schedule and triggers for index refresh (time-based, content-change-based) | author | required |
 | freshness_threshold | Maximum acceptable staleness before index is considered invalid | author | required |
-
 ## Dependency Graph
-
 ```
 rag_source       --produces-->  brain_index  --queried_by-->  runtime_state
 embedding_config --produces-->  brain_index  --indexes-->     knowledge_card
@@ -30,7 +26,6 @@ brain_index      --produces-->  retrieval_result
 retrieval_result --produces-->  agent_context (injected via IHP)
 brain_index      --signals-->   rebuild_trigger (when freshness_threshold exceeded)
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | rag_source (P01) | brain_index | data_flow | raw content documents fed into the index |
@@ -40,9 +35,7 @@ brain_index      --signals-->   rebuild_trigger (when freshness_threshold exceed
 | brain_index | retrieval_result | produces | ranked list of matching content with scores |
 | retrieval_result | agent_context | data_flow | injected into prompt via IHP for grounded responses |
 | freshness_threshold | rebuild_trigger | signals | staleness event triggers index rebuild job |
-
 ## Boundary Table
-
 | brain_index IS | brain_index IS NOT |
 |----------------|--------------------|
 | A search infrastructure layer — configures how content is found | The content being indexed (knowledge_card) |
@@ -51,9 +44,7 @@ brain_index      --signals-->   rebuild_trigger (when freshness_threshold exceed
 | The mechanism for retrieval — finds ranked results from queries | The data source that provides raw content (rag_source) |
 | Scoped by content type, pillar, or directory boundaries | A learning artifact that records what was learned (learning_record) |
 | Infrastructure — does not store knowledge but makes it findable | An immutable fundamental rule (axiom) |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Sources | rag_source, embedding_config | Feed raw content and vector representations into the index |

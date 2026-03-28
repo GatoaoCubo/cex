@@ -15,22 +15,15 @@ density_score: 0.92
 ---
 
 # Gate: Interface
-
 ## Definition
-
 | Field     | Value |
 |-----------|-------|
 | metric    | weighted soft score + all hard gates pass |
 | threshold | 7.0 to publish; 8.0 for pool; 9.5 for golden |
 | operator  | AND (all hard) + weighted average (soft) |
 | scope     | any artifact with `kind: interface` |
-
----
-
 ## HARD Gates
-
 All must pass. Any failure = immediate reject.
-
 | ID  | Check | Fail Condition |
 |-----|-------|----------------|
 | H01 | Frontmatter parses as valid YAML | Parse error on any field |
@@ -43,13 +36,8 @@ All must pass. Any failure = immediate reject.
 | H08 | `provider` and `consumer` are distinct identifiers | Same value in both fields |
 | H09 | `version` follows semver (`^\d+\.\d+\.\d+$`) | Non-semver version string |
 | H10 | At least one method defined | Empty or missing methods list |
-
----
-
 ## SOFT Scoring
-
 Total weights sum to 100%.
-
 | ID  | Dimension | Weight | 10 pts | 5 pts | 0 pts |
 |-----|-----------|--------|--------|-------|-------|
 | S01 | Type precision | 1.0 | All method inputs and outputs use typed field definitions | Typed but incomplete coverage | Untyped — described in prose only |
@@ -62,28 +50,16 @@ Total weights sum to 100%.
 | S08 | Method naming | 0.5 | Method names use verb_noun pattern (e.g., `get_status`, `send_result`) | Names present but inconsistent | Arbitrary names |
 | S09 | Timeout and SLA | 0.5 | Expected response time or SLA documented per method | Overall SLA present, not per-method | None |
 | S10 | Signal distinction | 0.5 | Interface defines synchronous request-response, not fire-and-forget | Mostly clear | Indistinguishable from a signal |
-
 **Score = sum(pts * weight) / sum(max_pts * weight) * 10**
-
----
-
 ## Actions
-
 | Score | Tier | Action |
 |-------|------|--------|
 | >= 9.5 | Golden | Publish to pool as golden integration contract |
 | >= 8.0 | Skilled | Publish to pool + log pattern |
 | >= 7.0 | Learning | Use but flag for improvement |
 | < 7.0 | Rejected | Return to author with gate report |
-
----
-
 ## Bypass
-
 | Field | Value |
 |-------|-------|
 | Conditions | Prototyping integration between two new agents where final method signatures are not yet known |
 | Approver | Both provider and consumer team leads |
-| Audit trail | `bypass_reason` + `stability: experimental` required in frontmatter |
-| Expiry | Experimental status expires after 30 days or first production use, whichever is sooner |
-| Never bypass | H01 (YAML parse), H05 (quality null), H07 (every method needs input + output — half-defined contracts cause integration failures) |

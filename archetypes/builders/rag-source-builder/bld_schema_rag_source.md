@@ -8,11 +8,8 @@ version: 1.0.0
 ---
 
 # Schema: rag_source
-
 SOURCE OF TRUTH. OUTPUT_TEMPLATE.md derives from this file. If conflict exists, this file wins.
-
 ## Required Fields (must be present — H06 HARD gate)
-
 | Field | Type | Constraint | Example |
 |-------|------|-----------|---------|
 | id | string | ^p01_rs_[a-z][a-z0-9_]+$ | p01_rs_anthropic_claude_docs |
@@ -28,16 +25,13 @@ SOURCE OF TRUTH. OUTPUT_TEMPLATE.md derives from this file. If conflict exists, 
 | quality | null | MUST be null — never self-score | null |
 | tags | list | >= 3 items, includes "rag-source" | [rag-source, llm_providers, html] |
 | tldr | string | <= 160 chars, non-empty | "Official Anthropic API reference..." |
-
 ## Recommended Fields
-
 | Field | Type | Enum / Constraint |
 |-------|------|------------------|
 | keywords | list | 3-8 domain keywords |
 | reliability | string | high / medium / low |
 | format | string | html / json / api / pdf / csv |
 | extraction_method | string | crawl / api_call / scrape / download |
-
 ## ID Pattern
 ```
 ^p01_rs_[a-z][a-z0-9_]+$
@@ -45,19 +39,16 @@ SOURCE OF TRUTH. OUTPUT_TEMPLATE.md derives from this file. If conflict exists, 
 - Prefix: p01_rs_ (pillar + kind abbreviation)
 - Body: lowercase alphanumeric + underscores
 - Must equal filename stem exactly (H03)
-
 ## File Naming
 ```
 p01_rs_{source_slug}.md    # human-readable artifact
 p01_rs_{source_slug}.yaml  # machine-readable twin
 ```
 Both files must exist and have matching id.
-
 ## Body Structure (3 mandatory sections)
 1. `## Source Description` — what, who, why
 2. `## Freshness Policy` — re-check schedule, staleness threshold
 3. `## Extraction Notes` — method, format, auth, quirks
-
 ## Hard Constraints
 | Constraint | Value |
 |-----------|-------|
@@ -67,7 +58,6 @@ Both files must exist and have matching id.
 | pillar | P01 always |
 | url | must be present and valid format |
 | POINTER ONLY | body must NOT contain extracted content |
-
 ## Boundary Rule (critical)
 rag_source IS: a pointer to external indexable source.
 rag_source IS NOT: the content itself, a knowledge_card, a context_doc.

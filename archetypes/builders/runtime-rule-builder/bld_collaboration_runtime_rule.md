@@ -8,20 +8,16 @@ pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCE
 ---
 
 # Collaboration: runtime-rule-builder
-
 ## My Role in Crews
 I am a SPECIALIST. I answer ONE question: "what timeouts, retries, and limits govern this operation at runtime?"
 I produce technical operational parameters — timeouts, retry strategies, rate limits, circuit breakers. I do not handle lifecycle rules, inviolable laws, safety guardrails, or generic env config.
-
 ## Crew Compositions
-
 ### Crew: "Resilient API Integration"
 ```
   1. connector-builder        -> "external API connector definition and auth config"
   2. runtime-rule-builder     -> "timeout, retry backoff, and circuit breaker for the connector"
   3. fallback-chain-builder   -> "ordered fallback when circuit breaker trips"
 ```
-
 ### Crew: "Agent Operational Config"
 ```
   1. env-config-builder       -> "environment variables and infrastructure settings"
@@ -29,7 +25,6 @@ I produce technical operational parameters — timeouts, retry strategies, rate 
   3. feature-flag-builder     -> "on/off toggles for runtime behaviors"
   4. spawn-config-builder     -> "spawn parameters informed by the runtime limits"
 ```
-
 ### Crew: "Governance Stack"
 ```
   1. law-builder              -> "inviolable rules that cannot be overridden"
@@ -37,27 +32,20 @@ I produce technical operational parameters — timeouts, retry strategies, rate 
   3. runtime-rule-builder     -> "technical operational limits (timeouts, retries, throttle)"
   4. lifecycle-rule-builder   -> "artifact lifecycle transition rules"
 ```
-
 ## Handoff Protocol
-
 ### I Receive
 - seeds: operation type, SLA requirements, external service characteristics, failure tolerance level
 - optional: existing runtime config to extend, observed failure rates, peak load estimates, vendor rate limit docs
-
 ### I Produce
 - runtime_rule artifact (YAML frontmatter + rule specification with timeout/retry/rate-limit/circuit-breaker sections, max 4096 bytes)
 - committed to: `cex/P09/examples/p09_rr_{name}.md`
-
 ### I Signal
 - signal: complete (with quality score from QUALITY_GATES)
 - if quality < 8.0: signal retry with failure reasons
-
 ## Builders I Depend On
 - connector-builder: provides external service latency profile and known rate limits that set my thresholds
 - env-config-builder: provides environment-level settings that bound my runtime parameters
-
 ## Builders That Depend On Me
-
 | Builder | Why |
 |---------|-----|
 | feature-flag-builder | Feature flags may need timeout and fallback rules during rollout |

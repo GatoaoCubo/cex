@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: feature_flag
-
 ## Frontmatter Fields
-
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string (p09_ff_{feature_slug}) | YES | - | Namespace compliance |
@@ -31,16 +29,13 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | owner | string | REC | - | Team or person responsible |
 | expires | date YYYY-MM-DD | REC | - | Stale flag cleanup date |
 | targeting | string | REC | - | Targeting strategy summary |
-
 ## ID Pattern
 Regex: `^p09_ff_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Body Structure (required sections)
 1. `## Flag Specification` — what feature, current state, rollout %, kill switch behavior
 2. `## Rollout Strategy` — how to ramp: stages, percentage, timeline, cohorts
 3. `## Lifecycle` — created, test, ramp, full rollout, retire/cleanup plan
-
 ## Constraints
 - max_bytes: 1536 (body only — feature_flag is compact)
 - naming: p09_ff_{feature_slug}.yaml

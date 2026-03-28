@@ -7,9 +7,7 @@ purpose: Component map of model_card — inventory, dependencies, and architectu
 ---
 
 # Architecture: model_card in the CEX
-
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | frontmatter block | 26-field metadata header (id, kind, pillar, provider, model_id, etc.) | model-card-builder | active |
@@ -19,15 +17,12 @@ purpose: Component map of model_card — inventory, dependencies, and architectu
 | provider_info | API provider, endpoints, authentication requirements | author | active |
 | limitations | Known weaknesses, failure modes, and unsupported scenarios | author | active |
 | recommended_uses | Optimal use cases matched to model strengths | author | active |
-
 ## Dependency Graph
-
 ```
 provider_docs  --produces-->  model_card  --consumed_by-->  boot_config
 model_card     --consumed_by-->  agent     --referenced_by-> router
 model_card     --signals-->      cost_estimate
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | provider_docs (external) | model_card | data_flow | official specs, pricing, and capability data |
@@ -36,9 +31,7 @@ model_card     --signals-->      cost_estimate
 | model_card | router (P02) | data_flow | model capabilities inform routing decisions |
 | model_card | cost_estimate | produces | token cost projection for budget planning |
 | rag_source (P01) | model_card | dependency | external documentation URLs tracked for freshness |
-
 ## Boundary Table
-
 | model_card IS | model_card IS NOT |
 |---------------|-------------------|
 | A technical specification of an LLM with concrete data | An agent identity or persona definition (agent P02) |
@@ -47,9 +40,7 @@ model_card     --signals-->      cost_estimate
 | Provider-specific with API endpoint details | A performance benchmark with measured results (benchmark P07) |
 | Updated when provider releases new model versions | A static document — must track provider changes |
 | Scoped to one model version from one provider | A comparison table of multiple models |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Source | provider_docs, rag_source | Official documentation and tracking URLs |

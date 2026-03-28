@@ -8,13 +8,9 @@ sources: satellite-spec-builder MANIFEST.md + SCHEMA.md, microservices architect
 ---
 
 # Domain Knowledge: satellite_spec
-
 ## Executive Summary
-
 Satellite specs define autonomous processing units in multi-agent architectures — each spec declares one satellite's domain, LLM model, MCP servers, boot sequence, constraints, and dispatch keywords. Each satellite owns ONE domain with no cross-domain responsibilities. They differ from agents (individual entities inside a satellite), boot configs (how to start a provider), patterns (abstract reusable solutions), and spawn configs (runtime launch parameters) by being the complete architectural specification of what a satellite IS and what it does.
-
 ## Spec Table
-
 | Property | Value |
 |----------|-------|
 | Pillar | P08 (architecture) |
@@ -27,9 +23,7 @@ Satellite specs define autonomous processing units in multi-agent architectures 
 | Quality field | always `null` |
 | Key fields | role, model, mcps, domain, boot_sequence, dispatch_keywords |
 | Scaling limit | Max 3 concurrent + orchestrator (BSOD at >4) |
-
 ## Patterns
-
 | Pattern | Application |
 |---------|-------------|
 | Single domain ownership | Each satellite owns ONE domain; no cross-domain responsibilities |
@@ -40,9 +34,7 @@ Satellite specs define autonomous processing units in multi-agent architectures 
 | Dispatch keywords as contract | Routing contract with orchestrator; concrete nouns/verbs |
 | Explicit dependencies | No hidden couplings between satellites |
 | Signal-based monitoring | Signal on complete/failure enables autonomous recovery |
-
 ## Anti-Patterns
-
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
 | Cross-domain responsibilities | Violates single-domain principle; creates coupling |
@@ -52,9 +44,7 @@ Satellite specs define autonomous processing units in multi-agent architectures 
 | > 4 concurrent satellites | Resource exhaustion; system instability |
 | Hidden dependencies | Undeclared coupling causes cascade failures |
 | No monitoring/signal config | Cannot detect completion or failure |
-
 ## Application
-
 1. Define satellite role and domain (ONE domain only)
 2. Select LLM model matching task complexity
 3. List MCP servers with config file path
@@ -64,9 +54,7 @@ Satellite specs define autonomous processing units in multi-agent architectures 
 7. Specify scaling limits and monitoring config
 8. Document dependencies explicitly
 9. Validate: 10 HARD + 10 SOFT gates, body <= 4096 bytes
-
 ## References
-
 - satellite-spec-builder SCHEMA.md v1.0.0
 - Newman, Sam. Building Microservices (2015)
 - Wooldridge, Michael. Introduction to MultiAgent Systems (2009)

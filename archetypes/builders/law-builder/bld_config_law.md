@@ -11,9 +11,7 @@ tags: [config, law-builder, naming, paths, P08]
 ---
 
 # law-builder — CONFIG
-
 ## Naming Convention
-
 | Scope | Convention | Example |
 |-------|-----------|---------|
 | Artifact files | `p08_law_{number}.md` | `p08_law_5.md` |
@@ -22,11 +20,8 @@ tags: [config, law-builder, naming, paths, P08]
 | Frontmatter id | `p08_law_{number}` | `p08_law_5` |
 | Frontmatter fields | snake_case | `enforcement`, `rationale`, `created` |
 | Number format | plain integer | `5` (not `05`, not `five`, not `5.0`) |
-
 Rule: `id` MUST equal filename stem. File `p08_law_5.md` MUST have `id: p08_law_5`.
-
 ## File Paths
-
 | Purpose | Path |
 |---------|------|
 | Output (examples) | `cex/P08_architecture/examples/p08_law_{number}.md` |
@@ -34,9 +29,7 @@ Rule: `id` MUST equal filename stem. File `p08_law_5.md` MUST have `id: p08_law_
 | Builder location | `cex/archetypes/builders/law-builder/` |
 | CEX schema ref | `cex/P08_architecture/_schema.yaml` |
 | Existing laws ref | `records/framework/docs/LAWS_v3_PRACTICAL.md` |
-
 ## Size Limits
-
 | Constraint | Value | Scope |
 |-----------|-------|-------|
 | max_bytes (body) | 3072 | Body sections only (after frontmatter) |
@@ -44,9 +37,7 @@ Rule: `id` MUST equal filename stem. File `p08_law_5.md` MUST have `id: p08_law_
 | density_min | 0.80 | No filler phrases |
 | tldr max chars | 160 | Frontmatter field |
 | statement | 1 sentence | Imperative, no compound sentences |
-
 ## Law-Specific Constraints
-
 | Field | Constraint | Rationale |
 |-------|-----------|-----------|
 | statement | One imperative sentence using MUST/SHALL/NEVER/ALWAYS | RFC 2119 compliance; laws mandate, not suggest |
@@ -57,9 +48,7 @@ Rule: `id` MUST equal filename stem. File `p08_law_5.md` MUST have `id: p08_law_
 | priority | Integer 1-10 (10 = highest) | Conflict resolution when laws compete |
 | quality | Always null | H05 gate; no self-scoring ever |
 | advisory language | PROHIBITED | "should", "consider", "recommended" belong in patterns/instructions |
-
 ## Prohibited in Law Artifacts
-
 | Pattern | Why prohibited | Use instead |
 |---------|---------------|-------------|
 | `quality: 8.5` | Self-scoring (H05) | `quality: null` |

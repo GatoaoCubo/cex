@@ -8,27 +8,22 @@ pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCE
 ---
 
 # Collaboration: response-format-builder
-
 ## My Role in Crews
 I am a SPECIALIST. I answer ONE question: "how should the LLM structure its output for this task?"
 I design the format the LLM sees during generation. I do not validate output after generation, extract data from it, or transform it between formats.
-
 ## Crew Compositions
-
 ### Crew: "Structured Output Pipeline"
 ```
   1. response-format-builder    -> "format spec injected into the prompt (LLM sees this during generation)"
   2. validation-schema-builder  -> "JSON/YAML schema applied post-generation to verify structure"
   3. parser-builder             -> "extractor that pulls fields from the validated output"
 ```
-
 ### Crew: "Agent Prompt Stack"
 ```
   1. system-prompt-builder      -> "agent identity and fixed instructions"
   2. prompt-template-builder    -> "parameterized template with {{variables}}"
   3. response-format-builder    -> "output structure injected at system_prompt or user_message"
 ```
-
 ### Crew: "Eval-Ready Agent Pack"
 ```
   1. response-format-builder    -> "canonical output structure the agent must produce"
@@ -36,27 +31,20 @@ I design the format the LLM sees during generation. I do not validate output aft
   3. golden-test-builder        -> "golden examples of correctly formatted responses"
   4. unit-eval-builder          -> "unit evaluations asserting format compliance"
 ```
-
 ## Handoff Protocol
-
 ### I Receive
 - seeds: task type, desired format_type (json/yaml/markdown/csv/plaintext), required fields, injection_point
 - optional: existing system prompt to inject into, example outputs, validation schema reference
-
 ### I Produce
 - response_format artifact (YAML frontmatter 19 fields + format body with sections/fields/examples, max 4096 bytes)
 - committed to: `cex/P05/examples/p05_rf_{name}.md`
-
 ### I Signal
 - signal: complete (with quality score from QUALITY_GATES)
 - if quality < 8.0: signal retry with failure reasons
-
 ## Builders I Depend On
 - system-prompt-builder: provides the injection target when injection_point is system_prompt
 - prompt-template-builder: provides the template body where the format spec is inserted
-
 ## Builders That Depend On Me
-
 | Builder | Why |
 |---------|-----|
 | validation-schema-builder | Derives its schema from the fields I specify in the format |

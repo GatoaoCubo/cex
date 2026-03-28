@@ -8,18 +8,14 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 ---
 
 # Instructions: How to Produce an e2e_eval
-
 ## Phase 1: RESEARCH
-
 1. Identify the pipeline to test: name the entry point and the final output, and describe what the pipeline does end-to-end
 2. List all stages in execution order — each stage is one agent, model call, or processing step with a defined input and output
 3. Define data fixtures: realistic input values that can be used reproducibly across test runs (no random or time-dependent data)
 4. Specify the expected output for each stage and for the final result, with enough detail to assert pass or fail
 5. Determine environment requirements: which services must be running, which config values must be set, whether a test database is needed
 6. Check existing e2e_evals in P07 for coverage gaps — do not duplicate a pipeline already tested; extend or differentiate instead
-
 ## Phase 2: COMPOSE
-
 1. Read SCHEMA.md — source of truth for all fields
 2. Read OUTPUT_TEMPLATE.md — fill the template following SCHEMA constraints
 3. Fill all required and recommended frontmatter fields; set `quality: null` — never self-score
@@ -29,9 +25,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 7. Write **Expected Final Output** section: the complete expected result at the pipeline exit point
 8. Write **Environment** section: services, configuration keys, test database or fixture store required
 9. Write **Cleanup** section: teardown steps to reset state after the test so reruns are not contaminated
-
 ## Phase 3: VALIDATE
-
 1. Check QUALITY_GATES.md — verify each HARD gate manually
 2. HARD gates: `id` matches `^p07_e2e_[a-z][a-z0-9_]+$`, `kind` is the literal string `e2e_eval`, `quality` is null, pipeline has at least 2 stages, data fixtures are present, expected final output is defined
 3. SOFT gates: score each gate from QUALITY_GATES.md against the artifact

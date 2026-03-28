@@ -15,22 +15,15 @@ density_score: 0.94
 ---
 
 # Gate: Knowledge Card
-
 ## Definition
-
 | Field     | Value |
 |-----------|-------|
 | metric    | weighted soft score + all hard gates pass |
 | threshold | 7.0 to publish; 8.0 for pool; 9.5 for golden |
 | operator  | AND (all hard) + weighted average (soft) |
 | scope     | any artifact with `kind: knowledge_card` |
-
----
-
 ## HARD Gates
-
 All must pass. Any failure = immediate reject.
-
 | ID  | Check | Fail Condition |
 |-----|-------|----------------|
 | H01 | Frontmatter parses as valid YAML | Parse error on any field |
@@ -43,13 +36,8 @@ All must pass. Any failure = immediate reject.
 | H08 | `density_score` >= 0.8 | Score below threshold — card too sparse to be useful |
 | H09 | Total file size <= 5120 bytes | Exceeds 5KB limit |
 | H10 | `tldr` is <= 160 characters | tldr exceeds character limit |
-
----
-
 ## SOFT Scoring
-
 Total weights sum to 100%.
-
 | ID  | Dimension | Weight | 10 pts | 5 pts | 0 pts |
 |-----|-----------|--------|--------|-------|-------|
 | S01 | Factual concreteness | 1.0 | Card contains specific values, numbers, or verifiable facts | Mix of facts and vague statements | Entirely vague or conceptual |
@@ -62,28 +50,16 @@ Total weights sum to 100%.
 | S08 | Currency | 0.5 | `created` date present; `updated` reflects last substantive revision | Created date only, no updated | No dates |
 | S09 | Cross-references | 0.5 | Related cards or concepts linked in body | Related concepts mentioned but not linked | No cross-references |
 | S10 | Practical applicability | 1.0 | Body answers "when would I use this?" with a concrete scenario | Implicitly applicable but not stated | Pure theory with no application context |
-
 **Score = sum(pts * weight) / sum(max_pts * weight) * 10**
-
----
-
 ## Actions
-
 | Score | Tier | Action |
 |-------|------|--------|
 | >= 9.5 | Golden | Publish to knowledge pool as authoritative reference card |
 | >= 8.0 | Skilled | Publish to pool + log pattern |
 | >= 7.0 | Learning | Use but flag for improvement |
 | < 7.0 | Rejected | Return to author with gate report |
-
----
-
 ## Bypass
-
 | Field | Value |
 |-------|-------|
 | Conditions | Rapidly evolving topic where sources are not yet stabilized (e.g., new library release, breaking API change) |
 | Approver | Domain expert reviewer |
-| Audit trail | `bypass_reason` + `stability: volatile` required in frontmatter |
-| Expiry | 7 days; card must be updated with stable sources or marked deprecated |
-| Never bypass | H01 (YAML parse), H05 (quality null), H08 (density >= 0.8 — sparse cards pollute search results and degrade retrieval quality) |

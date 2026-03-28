@@ -1,4 +1,6 @@
 ---
+kind: output_template
+id: bld_output_template_director
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} that the LLM fills to produce a satellite_spec
@@ -6,9 +8,7 @@ pattern: every field here exists in SCHEMA.md — template derives, never invent
 ---
 
 # Output Template: satellite_spec
-
 ```yaml
----
 id: p08_sat_{{name_lower}}
 kind: satellite_spec
 pillar: P08
@@ -45,30 +45,21 @@ domain: "{{domain_value}}"
 quality: null
 tags: [satellite, {{domain_tag}}, {{name_tag}}]
 tldr: "{{dense_summary_max_160ch}}"
----
 ```
-
 ## Role
 {{what_the_satellite_does_and_primary_function}}
-
 ## Model & MCPs
 {{llm_model_details_and_mcp_server_specs}}
-
 ## Boot Sequence
 {{ordered_initialization_steps}}
-
 ## Dispatch
 {{keywords_and_routing_rules}}
-
 ## Constraints
 {{operational_limits_and_prohibitions}}
-
 ## Dependencies
 {{external_services_and_sibling_satellites}}
-
 ## Scaling & Monitoring
 {{concurrency_timeouts_health_checks}}
-
 ## References
 - {{reference_1}}
 - {{reference_2}}

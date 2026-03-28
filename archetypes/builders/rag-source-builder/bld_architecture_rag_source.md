@@ -7,9 +7,7 @@ purpose: Component map of rag_source — inventory, dependencies, and architectu
 ---
 
 # Architecture: rag_source in the CEX
-
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | frontmatter block | 5-field required metadata header (id, kind, url, domain, last_checked) | rag-source-builder | active |
@@ -18,15 +16,12 @@ purpose: Component map of rag_source — inventory, dependencies, and architectu
 | reliability_score | Confidence rating of the source (high/medium/low) | author | active |
 | format_type | Data format of the source (html, json, api, pdf, csv) | author | active |
 | domain_tags | Searchable tags linking source to knowledge domains | author | active |
-
 ## Dependency Graph
-
 ```
 external_source  --tracked_by-->  rag_source  --consumed_by-->  ingestion_pipeline
 rag_source       --produces-->    knowledge_card  --indexed_by--> brain_index
 rag_source       --signals-->     freshness_alert
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | external_source (web) | rag_source | data_flow | URL and metadata of the authoritative source |
@@ -35,9 +30,7 @@ rag_source       --signals-->     freshness_alert
 | rag_source | brain_index (P01) | data_flow | source metadata indexed for retrieval |
 | rag_source | freshness_alert (P12) | signals | emitted when source exceeds staleness threshold |
 | embedding_config (P01) | rag_source | dependency | embedding settings for indexing source content |
-
 ## Boundary Table
-
 | rag_source IS | rag_source IS NOT |
 |---------------|-------------------|
 | A pointer to an external indexable source with URL and freshness | Distilled content from the source (knowledge_card P01) |
@@ -46,9 +39,7 @@ rag_source       --signals-->     freshness_alert
 | Rated by reliability (high/medium/low) | A scraper with CSS selectors (scraper P04) |
 | Scoped to one URL per artifact | A search index or vector store |
 | Consumed by ingestion pipelines for content extraction | A static snapshot of content at a point in time |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Source | external_source, url_reference | Identify the authoritative external data |

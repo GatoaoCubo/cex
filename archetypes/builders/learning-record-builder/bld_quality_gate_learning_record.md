@@ -15,15 +15,10 @@ density_score: 0.85
 ---
 
 # Gate: Learning Record
-
 ## Definition
-
 A `learning_record` captures a discrete experience — a pattern that worked or an anti-pattern that failed — with enough context to reproduce the outcome. Gates prevent vague retrospectives from entering the pool and ensure every record carries a scored, classified, reproducible finding.
-
 ## HARD Gates
-
 All HARD gates must pass. Any single failure sets score to 0 and blocks publish.
-
 | ID  | Check | Failure consequence |
 |-----|-------|---------------------|
 | H01 | YAML frontmatter parses without error | Artifact unparseable by tooling |
@@ -36,11 +31,8 @@ All HARD gates must pass. Any single failure sets score to 0 and blocks publish.
 | H08 | Pattern or Anti-Pattern classification present in body | Record lacks directional finding |
 | H09 | `impact` field is a float between 0.0 and 10.0 | Impact unscored — not comparable to other records |
 | H10 | Reproducibility assessment present in body | Experience cannot be transferred |
-
 ## SOFT Scoring
-
 Weights sum to 100%. Each dimension scores 0 or its full weight.
-
 | ID  | Dimension | Weight | Criteria |
 |-----|-----------|--------|----------|
 | S01 | tldr quality | 1.0 | `tldr` <= 160 chars, non-empty, states the finding not just the topic |
@@ -56,9 +48,7 @@ Weights sum to 100%. Each dimension scores 0 or its full weight.
 | S11 | Related records linked | 0.5 | `related` field lists >= 1 record id or explicitly `[]` |
 | S12 | Record is concise (<= 3 KB body) | 0.5 | Trim narrative; findings compress to essentials |
 | S13 | Pattern categorization consistent | 0.5 | Uses taxonomy: performance, reliability, quality, process, or integration |
-
 ## Actions
-
 | Score | Tier | Action |
 |-------|------|--------|
 | >= 9.5 | GOLDEN | Publish to pool + record in memory |
@@ -66,16 +56,7 @@ Weights sum to 100%. Each dimension scores 0 or its full weight.
 | >= 7.0 | REVIEW | Acceptable with documented improvement items |
 | < 7.0 | REJECT | Revise and resubmit — do not publish |
 | 0 (HARD fail) | REJECTED | Fix failing HARD gate(s) first |
-
 ## Bypass
-
 Bypasses are logged and expire automatically.
-
 | Field | Value |
 |-------|-------|
-| condition | Experience is time-sensitive (post-incident capture within 2 hours) and reproducibility section cannot be completed yet |
-| approver | Recording satellite lead or P10 owner |
-| audit_log | Entry required in `records/governance/bypass_log.md` with gate ID, timestamp, and completion deadline |
-| expiry | 48 hours — reproducibility section must be filled before expiry or record moves to DRAFT state |
-
-H01 and H05 cannot be bypassed under any condition.

@@ -21,11 +21,8 @@ keywords: [formatter, locale, escaping, null_handling, transformation, rule_coun
 ---
 
 ## Summary
-
 A formatter defines how data is transformed into a presentation format. It is not a parser (which extracts data) and not a validator (which checks data). Its core deliverable is a table of transformation rules where each rule specifies the input type, the transformation applied, the output shape, and what happens when input is null.
-
 ## Pattern
-
 1. Declare `locale` at the artifact level for any artifact that formats numbers, currencies, or dates.
 2. The Formatting Rules table has four columns per rule: `input_type`, `transform`, `output_example`, `null_behavior`.
 3. Escaping strategy must match the target format: HTML uses entity encoding (`&amp;`, `&lt;`); JSON uses backslash sequences; markdown escapes with backslash for `*`, `_`, `[`, `]`.
@@ -34,43 +31,12 @@ A formatter defines how data is transformed into a presentation format. It is no
 6. Currency formatting in pt-BR: `R$ {value:,.2f}` with decimal/thousands swapped (`swap_decimal: true`).
 7. Date formatting: use strftime codes; document which timezone is assumed.
 8. Truncation rules must specify the byte/char limit and the suffix appended (`"..."`, `" [truncated]"`).
-
 ## Anti-Pattern
-
 - Omitting `locale` for number or date formatters — `1.000,00` (pt-BR) and `1,000.00` (en-US) are different values.
 - Applying HTML entity escaping to a JSON target — produces malformed JSON with `&amp;` literal strings.
 - Missing null handling in any rule — optional fields absent at runtime cause crashes or empty output.
 - Including extraction logic (`"parse price from HTML string"`) — that is a parser (P05), not a formatter.
 - Including validation logic (`"check if price is positive"`) — that is a validator (P06), not a formatter.
 - `rule_count` not matching the actual rule count — caught by schema validator H07 on every build.
-
 ## Context
-
 Applies when: transforming structured data into a human-readable or machine-readable output format.
-Does not apply when: the task is to extract data from raw text (parser) or verify data correctness (validator).
-Boundary: formatter reads clean data and shapes it; it does not clean, validate, or extract data.
-Precondition: input data schema must be stable — formatters built against unstable schemas require frequent rework.
-
-## Impact
-
-- Explicit locale declaration eliminates decimal/thousands separator errors on first use.
-- Null behavior documentation prevents runtime crashes on optional fields.
-- Target-matched escaping prevents silent output corruption in HTML, JSON, and markdown targets.
-- Clear extraction/validation boundaries keep formatter artifacts small and focused.
-
-## Reproducibility
-
-1. Identify the target format (markdown, JSON, HTML, plain text, CSV).
-2. Identify locale requirements — any number, currency, or date field needs locale declared.
-3. List all input fields that need transformation. For each: write transform, output example, null behavior.
-4. Count rules and set `rule_count` to match.
-5. Select escaping strategy based on target format and document it in the artifact header.
-6. Test null path: remove each optional field from sample input and verify output matches documented null_behavior.
-7. Validate: `rule_count` matches table rows, locale is present if any numeric/date rule exists.
-
-## References
-
-- Pillar: P05 (data transformation and presentation)
-- Effective patterns table: markdown table, JSON pretty, pt-BR currency, pt-BR date, truncated text
-- Common mistakes: locale omission, escaping mismatch, rule_count drift, extraction/validation boundary
-- Related builders: parser-builder (P05), validator-builder (P06)

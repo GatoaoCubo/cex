@@ -8,30 +8,24 @@ pattern: CONFIG restricts SCHEMA, never contradicts
 ---
 
 # Config: runtime_state Production Rules
-
 ## Naming
 | Scope | Convention | Example |
 |-------|-----------|---------|
 | Artifact | p10_rs_{agent_slug}.md | p10_rs_researcher.md |
 | Builder dir | kebab-case | runtime-state-builder/ |
 | Fields | snake_case | routing_mode, update_frequency |
-
 Rule: id MUST equal filename stem.
-
 ## File Paths
 - Output: cex/P10_memory/examples/p10_rs_{agent_slug}.md
 - Compiled: cex/P10_memory/compiled/p10_rs_{agent_slug}.yaml
-
 ## Size Limits (aligned with SCHEMA)
 - Body: max 3072 bytes
 - Density: >= 0.80
-
 ## Persistence Modes
 | Mode | Lifetime | Use case |
 |------|----------|----------|
 | session | Reset on session end | Ephemeral routing preferences |
 | cross_session | Survives across sessions | Accumulated routing intelligence |
-
 ## Routing Mode Reference
 | Mode | Mechanism | Best for |
 |------|-----------|----------|

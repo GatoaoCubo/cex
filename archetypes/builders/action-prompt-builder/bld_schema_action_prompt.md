@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: action_prompt
-
 ## Frontmatter Fields
-
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string (p03_ap_{task_slug}) | YES | - | Namespace compliance |
@@ -34,18 +32,15 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | tags | list[string], len >= 3 | YES | - | Must include "action_prompt" |
 | tldr | string <= 160ch | YES | - | Dense summary |
 | density_score | float 0.80-1.00 | REC | - | Content density |
-
 ## ID Pattern
 Regex: `^p03_ap_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Body Structure (required sections)
 1. `## Context` — background and purpose of this action
 2. `## Input` — what is received, data types, format
 3. `## Execution` — what to do with the input (concise steps)
 4. `## Output` — expected output format and structure
 5. `## Validation` — how to verify output quality
-
 ## Constraints
 - max_bytes: 3072 (body only)
 - naming: p03_ap_{task_slug}.md

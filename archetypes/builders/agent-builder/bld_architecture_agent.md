@@ -7,9 +7,7 @@ purpose: Component map of agent — inventory, dependencies, and architectural p
 ---
 
 # Architecture: agent in the CEX
-
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | frontmatter block | 10-field identity header (id, kind, pillar, domain, satellite, llm_function, version, tags, etc.) | agent-builder | required |
@@ -23,9 +21,7 @@ purpose: Component map of agent — inventory, dependencies, and architectural p
 | ISO_*_SYSTEM_INSTRUCTION.md | System prompt loaded at agent boot | agent-builder | required |
 | ISO_*_ERROR_HANDLING.md | Error taxonomy and recovery protocols | agent-builder | required |
 | routing_entry | Registration in the agent routing index for discovery | system | required |
-
 ## Dependency Graph
-
 ```
 system_prompt    --produces-->  agent  --produces-->  iso_package
 knowledge_card   --produces-->  agent  --consumed_by-> router
@@ -34,7 +30,6 @@ model_card       --depends-->   agent  --consumed_by-> spawn_config
 boot_config      --depends-->   agent  --produces-->   skill
 agent            --signals-->   routing_entry (registration)
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | system_prompt (P03) | agent | data_flow | persona, tone, operating rules loaded at boot |
@@ -47,9 +42,7 @@ agent            --signals-->   routing_entry (registration)
 | agent | router (P02) | data_flow | routing destination registered for task dispatch |
 | agent | workflow (P12) | data_flow | node in orchestration graph |
 | agent | spawn_config (P12) | data_flow | spawn target with identity and constraints |
-
 ## Boundary Table
-
 | agent IS | agent IS NOT |
 |----------|--------------|
 | A runtime identity — persona + capabilities + structured iso_vectorstore | A skill (executable capability without persistent identity) |
@@ -58,13 +51,9 @@ agent            --signals-->   routing_entry (registration)
 | Scoped to a satellite with specific tool access | A model_card (LLM spec, not agent identity) |
 | A destination for routing and orchestration | A boot_config (initialization params, not agent definition) |
 | Packaged into iso_vectorstore with 10+ required ISO files | An iso_package (the distributable bundle, not the source definition) |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Inputs | system_prompt, knowledge_card, mental_model, model_card, boot_config | Supply identity, domain knowledge, routing logic, LLM spec, init params |
 | Identity | frontmatter, persona, capabilities, routing_entry | Define who the agent is, what it does, and how it is discovered |
 | Structure | iso_vectorstore/ (10+ ISO files) | Provide fully navigable, versioned agent specification |
-| Outputs | iso_package, skill, router entry, workflow node | Enable distribution, capability extraction, and orchestration |
-| Runtime | agent instantiation via spawn_config | Execute tasks using loaded identity and tools |

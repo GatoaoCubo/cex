@@ -8,13 +8,9 @@ sources: graph theory (Kahn 1962), Apache Airflow, Makefile dependencies, topolo
 ---
 
 # Domain Knowledge: dag
-
 ## Executive Summary
-
 DAGs (Directed Acyclic Graphs) are static dependency specifications defining task order and parallelism. They answer "what depends on what?" and "what can run in parallel?" DAGs are blueprints consumed by orchestrators — they do not execute tasks themselves. They differ from workflows (runtime execution), component maps (structural inventory), and chains (prompt pipelines).
-
 ## Spec Table
-
 | Property | Value |
 |----------|-------|
 | Pillar | P12 (orchestration) |
@@ -24,11 +20,8 @@ DAGs (Directed Acyclic Graphs) are static dependency specifications defining tas
 | Key constraint | MUST be acyclic — cycles are validation failure |
 | Naming | p12_dag_{pipeline}.yaml |
 | Execution order | Derived via topological sort into waves |
-
 ## Patterns
-
 - **Graph properties**: every valid DAG must satisfy these constraints
-
 | Property | Requirement |
 |----------|-------------|
 | Acyclicity | No cycles — A→B→C→A is invalid |
@@ -36,18 +29,14 @@ DAGs (Directed Acyclic Graphs) are static dependency specifications defining tas
 | Entry points | Nodes with zero incoming edges start first |
 | Terminal points | Nodes with zero outgoing edges are endpoints |
 | Parallelism | Independent nodes in same wave run concurrently |
-
 - **Topological sort into waves**: derive execution order automatically
   - Wave 1: nodes with no incoming edges (entry points)
   - Wave 2: nodes whose dependencies are all in Wave 1
   - Wave N: nodes whose dependencies are all in Waves 1..N-1
-
 - **Node specification**: each node carries id, label, and optional assignee
 - **Edge specification**: each edge carries source, target, and optional type (data, trigger, approval)
 - **Static blueprint**: DAGs define structure only — no actions, no error handling, no runtime state
-
 ## Anti-Patterns
-
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
 | Cycles (A→B→C→A) | Topological sort fails; infinite loop |
@@ -56,18 +45,14 @@ DAGs (Directed Acyclic Graphs) are static dependency specifications defining tas
 | Disconnected subgraphs | Orphan nodes never execute |
 | Over-serialized (A→B→C→D→E all linear) | Misses parallelism opportunities |
 | Unlabeled edges | Ambiguous dependency type; cannot reason about data flow |
-
 ## Application
-
 1. List all tasks as nodes: id, label, optional assignee
 2. Define edges: source → target for each dependency
 3. Verify acyclicity: no cycles in the graph
 4. Derive waves: topological sort groups parallel-eligible nodes
 5. Identify entry and terminal points
 6. Validate: <= 3072 bytes, no cycles, no orphans, all nodes reachable
-
 ## References
-
 - Kahn 1962: topological sorting algorithm for DAGs
 - Apache Airflow: DAG-based workflow orchestration
 - Make: dependency-based build system (Makefile rules)

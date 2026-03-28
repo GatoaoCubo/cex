@@ -7,14 +7,12 @@ purpose: Tools and runtime surfaces relevant to handoff production
 ---
 
 # Tools: handoff-builder
-
 ## Production Tools
 | Tool | Purpose | When | Status |
 |------|---------|------|--------|
 | `brain_query` | Search for existing handoffs and related artifacts | Phase 1 | CONDITIONAL [MCP] |
 | `validate_artifact.py` | Generic artifact validator | Phase 3 | [PLANNED] |
 | `signal_writer.py` | Signal completion mechanism referenced in handoffs | Signal section | CONDITIONAL |
-
 ## Runtime Interfaces
 | Interface | Path | Use |
 |-----------|------|-----|
@@ -22,7 +20,6 @@ purpose: Tools and runtime surfaces relevant to handoff production
 | Handoff template | `P12_orchestration/templates/tpl_handoff.md` | human reference |
 | Handoff directory | `.claude/handoffs/` | primary output location |
 | Compiled output | `P12_orchestration/compiled/p12_ho_{task}.md` | secondary output |
-
 ## Interim Validation
 Until a generic validator exists, validate manually:
 - filename matches `p12_ho_{task}.md`

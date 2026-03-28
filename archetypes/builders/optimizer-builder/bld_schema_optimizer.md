@@ -8,7 +8,6 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: optimizer
-
 ## Frontmatter Fields
 | Field | Type | Required | Default |
 |-------|------|----------|---------|
@@ -24,7 +23,6 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | tags | list[string], len >= 3, includes "optimizer" | YES | — |
 | tldr | string < 160ch | YES | — |
 | density_score | float 0.80-1.00 | REC | — |
-
 ## Type-Specific Fields
 | Field | Type | Required | Notes |
 |-------|------|----------|-------|
@@ -38,14 +36,12 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | cost | object | YES | {compute: float, time: float, risk: string} |
 | risk | object | YES | {level: enum[low,medium,high], mitigation: string} |
 | monitoring | object | YES | {dashboard: string, alerts: list, reporting: string} |
-
 ## Body Structure (required sections)
 1. ## Target Process — scope, boundaries, what is being optimized
 2. ## Metrics — primary metric, secondary metrics, thresholds
 3. ## Actions — triggers, strategies, automation level
 4. ## Risk Assessment — cost, side effects, rollback plan
 5. ## Monitoring — dashboards, alerts, reporting cadence
-
 ## Constraints
 - max_bytes: 4096 (body only)
 - naming: p11_opt_{target_slug}.md

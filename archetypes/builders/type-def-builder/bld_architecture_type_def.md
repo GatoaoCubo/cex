@@ -7,9 +7,7 @@ purpose: Component map of type_def — inventory, dependencies, and architectura
 ---
 
 # Architecture: type_def in the CEX
-
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | frontmatter block | Metadata header (id, kind, pillar, domain, base_type, nullable, etc.) | type-def-builder | active |
@@ -19,15 +17,12 @@ purpose: Component map of type_def — inventory, dependencies, and architectura
 | generics | Type parameters for polymorphic type definitions | author | active |
 | serialization_spec | Wire format rules (JSON, YAML, Protobuf) with field mappings | author | active |
 | inheritance_chain | Parent type references for type hierarchy | author | active |
-
 ## Dependency Graph
-
 ```
 domain_knowledge  --produces-->  type_def  --consumed_by-->  input_schema
 type_def          --consumed_by-->  validator  --consumed_by-->  grammar
 type_def          --signals-->      type_registration
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | knowledge_card (P01) | type_def | data_flow | domain context informing type design |
@@ -36,9 +31,7 @@ type_def          --signals-->      type_registration
 | type_def | grammar (P06) | consumes | grammars reference types for parsing rules |
 | type_def | prompt_template (P03) | data_flow | templates reference types for variable constraints |
 | type_def | type_registration (P12) | signals | emitted when a new type is registered in the system |
-
 ## Boundary Table
-
 | type_def IS | type_def IS NOT |
 |-------------|-----------------|
 | A reusable type declaration with base type, constraints, and composition | An input contract for a specific operation (input_schema P06) |
@@ -47,9 +40,7 @@ type_def          --signals-->      type_registration
 | Includes serialization rules for wire formats | A response format instruction for the LLM (response_format P05) |
 | Scoped to the spec layer — no runtime behavior | A parser that extracts data from output (parser P05) |
 | Inheritable via inheritance chains | A naming convention for entities (naming_rule P05) |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Domain | knowledge_card | Supply domain context for type design |

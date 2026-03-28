@@ -8,9 +8,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 ---
 
 # Instructions: How to Produce a feature_flag
-
 ## Phase 1: RESEARCH
-
 1. Identify the feature to flag and write a one-sentence description of what it enables or disables
 2. Classify the flag type: release (controls a new feature shipping), experiment (A/B or multivariate test), ops (operational kill switch), or permission (access control by user segment)
 3. Determine the initial state: on or off at the moment of creation
@@ -18,9 +16,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 5. Identify targeting rules: which user segments, environments, or override conditions see which state
 6. Define kill switch behavior: how to emergency-disable the flag, who is notified, and what the system falls back to
 7. Check existing feature_flags via brain_query [IF MCP] for conflicts — two flags must not control the same code path simultaneously
-
 ## Phase 2: COMPOSE
-
 1. Read SCHEMA.md — source of truth for all fields
 2. Read OUTPUT_TEMPLATE.md — fill the template following SCHEMA constraints
 3. Fill all required frontmatter fields; set `quality: null` — never self-score
@@ -31,9 +27,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 8. Write **Defaults** section: value returned when the flag service is unavailable or the flag key is missing
 9. Write **Lifecycle** section: creation date, expected removal date (required — flags without removal dates accumulate as technical debt), and owner
 10. Confirm body <= 1536 bytes
-
 ## Phase 3: VALIDATE
-
 1. Check QUALITY_GATES.md — verify each HARD gate manually
 2. Confirm YAML frontmatter parses without errors
 3. Confirm `id` matches `^p09_ff_[a-z][a-z0-9_]+$`

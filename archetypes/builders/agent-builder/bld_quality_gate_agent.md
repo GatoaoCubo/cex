@@ -15,20 +15,15 @@ density_score: 0.90
 ---
 
 # Gate: agent
-
 ## Definition
-
 | Field     | Value                                               |
 |-----------|-----------------------------------------------------|
 | metric    | identity completeness + iso_vectorstore navigability |
 | threshold | 8.0                                                 |
 | operator  | >=                                                  |
 | scope     | all agent artifacts (P02)                           |
-
 ## HARD Gates
-
 All must pass. Failure on any = final score 0.
-
 | Gate | Check | Why |
 |------|-------|-----|
 | H01 | YAML frontmatter parses valid YAML | Broken YAML = broken agent boot |
@@ -39,9 +34,7 @@ All must pass. Failure on any = final score 0.
 | H06 | All 10 required fields present: id, kind, pillar, title, version, satellite, domain, quality, tags, tldr | Completeness |
 | H07 | llm_function == "BECOME" | Agent is identity construct, not callable |
 | H08 | satellite field is set (not blank or null) | Every agent belongs to a satellite |
-
 ## SOFT Scoring
-
 | Gate | Check | Weight |
 |------|-------|--------|
 | S01 | tldr <= 160 chars, non-empty, not filler | 1.0 |
@@ -54,20 +47,15 @@ All must pass. Failure on any = final score 0.
 | S08 | body has ## When to Use with explicit NOT-when exclusions | 0.5 |
 | S09 | density_score >= 0.80 | 0.5 |
 | S10 | No filler phrases ("this document", "in summary", "can help with") | 1.0 |
-
 Weights sum: 7.5. Normalize: divide each by 7.5 before scoring.
-
 ## Actions
-
 | Score | Action |
 |-------|--------|
 | >= 9.5 | GOLDEN — pool as reference agent definition |
 | >= 8.0 | PUBLISH — register in routing index, deploy iso_vectorstore |
 | >= 7.0 | REVIEW — complete iso_vectorstore or sharpen domain boundary |
 | < 7.0  | REJECT — rework identity and capability scope |
-
 ## Bypass
-
 | Field | Value |
 |-------|-------|
 | conditions | Critical satellite gap requiring immediate agent deploy |

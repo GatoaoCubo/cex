@@ -15,22 +15,15 @@ density_score: 0.89
 ---
 
 # Gate: glossary_entry
-
 ## Definition
-
 | Field     | Value |
 |-----------|-------|
 | metric    | composite score across SOFT dimensions |
 | threshold | >= 7.0 to publish; >= 9.5 for golden |
 | operator  | weighted average after all HARD gates pass |
 | scope     | all artifacts where `kind: glossary_entry` |
-
 All HARD gates are AND-logic: one failure rejects the artifact regardless of SOFT score.
-
----
-
 ## HARD Gates
-
 | ID  | Check | Fail Condition |
 |-----|-------|----------------|
 | H01 | Frontmatter parses as valid YAML | Any YAML syntax error |
@@ -42,11 +35,7 @@ All HARD gates are AND-logic: one failure rejects the artifact regardless of SOF
 | H07 | `definition` body section is <= 3 lines | Exceeds the conciseness constraint for this kind |
 | H08 | `synonyms` is a list with len >= 1 | Missing or empty synonyms list |
 | H09 | `term` is non-empty string | Missing or blank term field |
-
----
-
 ## SOFT Scoring
-
 | Dim | Dimension | Weight | Scoring Guide |
 |-----|-----------|--------|---------------|
 | S01 | `tldr` IS the definition (not meta-commentary about the entry) | 0.12 | Is the definition=1.0, meta-comment=0.2 |
@@ -60,24 +49,15 @@ All HARD gates are AND-logic: one failure rejects the artifact regardless of SOF
 | S09 | Boundary from `knowledge_card` and `context_doc` stated | 0.10 | Both stated=1.0, one=0.5, absent=0.0 |
 | S10 | No filler phrases ("very important", "basically", "in summary") | 0.10 | Clean=1.0, filler present=0.0 |
 | S11 | `density_score` >= 0.80 | 0.05 | Met=1.0, below=0.0 |
-
 **Weight sum: 1.00**
-
----
-
 ## Actions
-
 | Score | Action |
 |-------|--------|
 | >= 9.5 | GOLDEN — reference artifact for glossary_entry calibration |
 | >= 8.0 | PUBLISH — pool-eligible; definition concise and disambiguated |
 | >= 7.0 | REVIEW — usable but missing usage example or disambiguation |
 | < 7.0  | REJECT — redo; likely circular definition, oversized, or no synonyms |
-
----
-
 ## Bypass
-
 | Field | Value |
 |-------|-------|
 | conditions | Term is a proper noun (product name, acronym) where synonyms are genuinely N/A |

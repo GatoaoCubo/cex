@@ -8,7 +8,6 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 ---
 
 # Instructions: How to Produce a benchmark
-
 ## Phase 1: RESEARCH
 1. Identify the target system or component being measured
 2. Define metrics: for each metric specify name, unit (ms, req/s, USD, tokens), and direction (lower_is_better or higher_is_better). Include latency percentiles (p50, p95, p99), throughput, cost, and quality score as applicable
@@ -17,7 +16,6 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 5. Define methodology: number of iterations (minimum 10), warmup runs (minimum 1), statistical significance approach, and percentile calculation method
 6. Document environment spec: hardware (CPU, RAM, disk), OS, runtime versions, config settings — sufficient to reproduce
 7. Search for existing benchmarks covering the same system and metric (avoid duplicates)
-
 ## Phase 2: COMPOSE
 1. Read SCHEMA.md — source of truth for all fields
 2. Read OUTPUT_TEMPLATE.md — template to fill
@@ -28,7 +26,6 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 7. Write Execution section: exact commands needed to reproduce the benchmark run
 8. Write Results Template section: pre-formatted table structure for recording p50/p95/p99 outcomes
 9. Keep body <= 8192 bytes
-
 ## Phase 3: VALIDATE
 1. Check QUALITY_GATES.md manually
 2. HARD gate: id matches `p07_bench_` pattern

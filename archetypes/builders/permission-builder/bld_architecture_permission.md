@@ -7,9 +7,7 @@ purpose: Component map of permission — inventory, dependencies, and architectu
 ---
 
 # Architecture: permission in the CEX
-
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | frontmatter block | Metadata header (id, kind, pillar, domain, scope, roles, etc.) | permission-builder | active |
@@ -19,15 +17,12 @@ purpose: Component map of permission — inventory, dependencies, and architectu
 | precedence_rules | Resolution order when allow and deny rules conflict | author | active |
 | audit_trail | Logging requirements for access attempts and escalations | author | active |
 | escalation_path | Who to contact and what process to follow for access elevation | author | active |
-
 ## Dependency Graph
-
 ```
 agent          --governed_by-->  permission  --enforced_by-->  validator
 permission     --consumed_by-->  path_config  --signals-->     access_violation
 guardrail      --depends-->      permission
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | permission | agent (P02) | dependency | agents must comply with access controls |
@@ -36,9 +31,7 @@ guardrail      --depends-->      permission
 | guardrail (P11) | permission | dependency | safety guardrails may reference permission rules |
 | permission | access_violation (P12) | signals | emitted when unauthorized access is attempted |
 | law (P08) | permission | dependency | laws may mandate specific access controls |
-
 ## Boundary Table
-
 | permission IS | permission IS NOT |
 |---------------|-------------------|
 | A read/write/execute access control with roles and scope | A safety boundary on agent behavior (guardrail P11) |
@@ -47,9 +40,7 @@ guardrail      --depends-->      permission
 | Includes audit trail and escalation path | A runtime timeout or retry parameter (runtime_rule P09) |
 | Scoped to specific resources, artifacts, or paths | A feature on/off toggle (feature_flag P09) |
 | Governs who can access what and how | A naming convention for resources (naming_rule P05) |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Identity | role_definitions, escalation_path | Define who has access and elevation procedures |

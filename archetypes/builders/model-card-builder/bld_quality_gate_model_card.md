@@ -15,15 +15,10 @@ density_score: 0.85
 ---
 
 # Gate: Model Card
-
 ## Definition
-
 A `model_card` is a technical spec for a language model: provider, context window, pricing in $/1M tokens, and boolean capability flags. Reference artifact only — not a tutorial. Gates ensure traceability to official sources, comparable pricing, and freshness within 90 days.
-
 ## HARD Gates
-
 All HARD gates must pass. Any single failure sets score to 0 and blocks publish.
-
 | ID  | Check | Failure consequence |
 |-----|-------|---------------------|
 | H01 | YAML frontmatter parses without error | Artifact unparseable by tooling |
@@ -36,11 +31,8 @@ All HARD gates must pass. Any single failure sets score to 0 and blocks publish.
 | H08 | `context_window` is a positive integer | Core spec field — must be exact |
 | H09 | `pricing` field present with at least `input` and `output` keys (numeric $/1M tokens, or `null` for open-weight) | Non-comparable pricing blocks cost analysis |
 | H10 | `capabilities` field is a map of boolean flags | Capability claims require verifiable binary form |
-
 ## SOFT Scoring
-
 Weights sum to 100%. Each dimension scores 0 or its full weight.
-
 | ID  | Dimension | Weight | Criteria |
 |-----|-----------|--------|----------|
 | S01 | tldr quality | 1.0 | `tldr` <= 160 chars, names provider + model + primary use case |
@@ -56,9 +48,7 @@ Weights sum to 100%. Each dimension scores 0 or its full weight.
 | S11 | `max_output` field present and positive integer | 0.5 | Required for prompt budget calculations |
 | S12 | Density >= 0.85 | 1.0 | No narrative: "great for", "one of the best", "in summary" |
 | S13 | `linked_artifacts` field present | 0.5 | Lists related model cards, lenses, or routing rules |
-
 ## Actions
-
 | Score | Tier | Action |
 |-------|------|--------|
 | >= 9.5 | GOLDEN | Publish to pool + record in memory |
@@ -66,16 +56,7 @@ Weights sum to 100%. Each dimension scores 0 or its full weight.
 | >= 7.0 | REVIEW | Acceptable with documented improvement items |
 | < 7.0 | REJECT | Revise and resubmit — do not publish |
 | 0 (HARD fail) | REJECTED | Fix failing HARD gate(s) first |
-
 ## Bypass
-
 Bypasses are logged and expire automatically.
-
 | Field | Value |
 |-------|-------|
-| condition | Model released within 7 days and official pricing page not yet published by provider |
-| approver | P02 domain owner |
-| audit_log | Entry required in `records/governance/bypass_log.md` with gate ID, model id, and link to provider announcement |
-| expiry | 14 days — pricing must be filled from official source before expiry or card moves to DRAFT state |
-
-H01 and H05 cannot be bypassed under any condition.

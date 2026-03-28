@@ -8,13 +8,9 @@ sources: validate_kc.py v2.0, _schema.yaml v4.0, 721 real knowledge cards
 ---
 
 # Domain Knowledge: knowledge_card
-
 ## Executive Summary
-
 Knowledge cards are atomic searchable facts — the smallest retrieval unit in a knowledge system. Each card answers ONE question about ONE topic with density >= 0.80 (>80% concrete data, no filler). Cards are retrieved via hybrid search (BM25 + vector) using frontmatter fields. They differ from model cards (LLM specs), learning records (internal experience), and context docs (domain background).
-
 ## Spec Table
-
 | Property | Value |
 |----------|-------|
 | Pillar | P01 (knowledge) |
@@ -25,11 +21,8 @@ Knowledge cards are atomic searchable facts — the smallest retrieval unit in a
 | Density minimum | >= 0.80 |
 | Size sweet spot | 50-80 lines (single concept), 80-120 (multi-pattern) |
 | Scoring dimensions | D1 Frontmatter, D2 Density, D3 Axioms, D4 Structure, D5 Format |
-
 ## Patterns
-
 - **Retrieval surface**: frontmatter fields drive search discovery
-
 | Field | Retrieval role | Pattern |
 |-------|---------------|---------|
 | tldr | Primary match (BM25 + embedding) | Specific: "Execute CLI via subprocess, retry 3x" |
@@ -37,14 +30,11 @@ Knowledge cards are atomic searchable facts — the smallest retrieval unit in a
 | keywords | BM25 exact match boost | 2-5 terms user would literally type |
 | long_tails | Semantic/vector search | Full phrases: "how to handle concurrent token refresh" |
 | when_to_use | Agent activation trigger | Specific context, not "when needed" |
-
 - **Density hierarchy** (most to least info/token): tables > code blocks > bullets > ASCII diagrams > paragraphs
 - **Two body structures**: domain_kc (external knowledge: Quick Ref, Key Concepts, Strategy, Golden Rules, Flow, References) and meta_kc (system-internal: Exec Summary, Spec Table, Patterns, Anti-Patterns, Application, References)
 - **Density gate**: density = data_lines / total_non_empty_lines; < 0.80 = card fails regardless of other quality
 - **Axiom form**: ALWAYS/NEVER/IF-THEN with condition + action + consequence
-
 ## Anti-Patterns
-
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
 | Vague tldr ("How to use CLI") | No search signal; returns wrong in BM25 |
@@ -53,18 +43,14 @@ Knowledge cards are atomic searchable facts — the smallest retrieval unit in a
 | Frontmatter echo in body | Body repeats title/tldr; adds zero depth |
 | Giant monolith (300+ lines) | Split into 2+ focused atomic cards |
 | density < 0.80 | Card fails regardless of other quality scores |
-
 ## Application
-
 1. Define ONE topic: what single question does this card answer?
 2. Write frontmatter: all 14 required fields with specific, search-optimized values
 3. Select body structure: domain_kc (external) or meta_kc (internal)
 4. Write dense body: tables first, bullets second, paragraphs only when necessary
 5. Check density: data_lines / total >= 0.80
 6. Validate: <= 5120 bytes, >= 200 bytes, axioms in ALWAYS/NEVER/IF-THEN form
-
 ## References
-
 - validate_kc.py v2.0: 10 HARD + 20 SOFT gate validator
 - _schema.yaml v4.0: canonical field definitions for knowledge_card
 - 721 real knowledge cards: empirical patterns (p95 body = 4274 bytes)

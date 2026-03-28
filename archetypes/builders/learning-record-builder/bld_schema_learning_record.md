@@ -9,9 +9,7 @@ source: P10_memory/_schema.yaml v4.0 + SEED_BANK.yaml + TAXONOMY_LAYERS.yaml + r
 ---
 
 # Schema: learning_record
-
 ## Frontmatter Fields (Required — 10)
-
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string (p10_lr_{slug}) | YES | — | H02, H03 |
@@ -24,9 +22,7 @@ source: P10_memory/_schema.yaml v4.0 + SEED_BANK.yaml + TAXONOMY_LAYERS.yaml + r
 | observation | string (raw facts, no judgment) | YES | — | Pipeline element 1 |
 | pattern | string (reproducible rule or mechanism) | YES | — | Pipeline element 2 |
 | evidence | string (metrics, before/after data) | YES | — | Pipeline element 3 |
-
 ## Frontmatter Fields (Extended — 12)
-
 | Field | Type | Required | Notes |
 |-------|------|----------|-------|
 | confidence | float 0.0-1.0 | REC | Trust score per confidence scale |
@@ -41,9 +37,7 @@ source: P10_memory/_schema.yaml v4.0 + SEED_BANK.yaml + TAXONOMY_LAYERS.yaml + r
 | linked_artifacts | object {primary, related} | REC | Cross-references |
 | entity_ref | string | REC | Link to entity tracking file |
 | semantic_links | list[object {target, relation}] | REC | Knowledge graph connections |
-
 ### Confidence Scale
-
 | Score | Meaning | Basis |
 |-------|---------|-------|
 | 0.9-1.0 | Near-certain | 10+ observations, consistent |
@@ -51,32 +45,23 @@ source: P10_memory/_schema.yaml v4.0 + SEED_BANK.yaml + TAXONOMY_LAYERS.yaml + r
 | 0.5-0.6 | Moderate | 2-4 observations |
 | 0.3-0.4 | Low | 1 observation |
 | 0.0-0.2 | Speculative | Theoretical only |
-
 ### Semantic Link Relations
-
 Valid `relation` values: `depends_on`, `enables`, `contradicts`, `refines`, `caused_by`.
-
 ```yaml
 semantic_links:
   - {target: "p10_lr_xxx", relation: "caused_by"}
   - {target: "p01_kc_yyy", relation: "refines"}
 ```
-
 ## ID Pattern
-
 Regex: `^p10_lr_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem (H02). Underscores only.
-
 ## Linked Artifacts Object
-
 ```yaml
 linked_artifacts:
   primary: null            # or artifact_id
   related: [p10_lr_xxx]   # list of related ids
 ```
-
 ## Body Structure (7 sections)
-
 1. `## Summary` — dense overview of the experience (2-3 sentences)
 2. `## Pattern` — what worked (concrete, reproducible steps)
 3. `## Anti-Pattern` — what failed or should be avoided
@@ -84,9 +69,7 @@ linked_artifacts:
 5. `## Impact` — measurable outcomes (time saved, errors avoided)
 6. `## Reproducibility` — conditions for repeating this outcome
 7. `## References` — related records, artifacts, commits
-
 ## Constraints
-
 - max_bytes: 4096 (body) — raised from 3072, real builder files reach 4059B
 - density_min: 0.80
 - naming: p10_lr_{topic_slug}.md

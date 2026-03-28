@@ -15,20 +15,15 @@ density_score: 0.85
 ---
 
 # Gate: pattern
-
 ## Definition
-
 | Field     | Value                                              |
 |-----------|----------------------------------------------------|
 | metric    | problem recurrence + solution concreteness + force balance |
 | threshold | 8.0                                                |
 | operator  | >=                                                 |
 | scope     | all pattern artifacts (P08)                        |
-
 ## HARD Gates
-
 All must pass. Failure on any = final score 0.
-
 | Gate | Check | Why |
 |------|-------|-----|
 | H01 | YAML frontmatter parses valid YAML | Broken YAML = pattern not discoverable |
@@ -41,9 +36,7 @@ All must pass. Failure on any = final score 0.
 | H08 | solution field describes the approach at implementation level (not abstract advice) | "Use better design" is not a solution |
 | H09 | forces list has >= 2 entries documenting opposing tensions that make the problem hard | No forces = no pattern, just a preference |
 | H10 | consequences list includes >= 1 negative trade-off (cost, complexity, or constraint) | Benefits-only = marketing, not engineering |
-
 ## SOFT Scoring
-
 | Gate | Check | Weight |
 |------|-------|--------|
 | S01 | tldr <= 160 chars, non-empty | 1.0 |
@@ -57,20 +50,15 @@ All must pass. Failure on any = final score 0.
 | S09 | code_or_pseudocode block provides a minimal working illustration | 1.0 |
 | S10 | name is 2–5 words, title-case, and self-describing without context | 0.5 |
 | S11 | No filler phrases ("this pattern", "in order to", "various scenarios") | 1.0 |
-
 Weights sum: 8.5. Normalize: divide each by 8.5 before scoring.
-
 ## Actions
-
 | Score | Action |
 |-------|--------|
 | >= 9.5 | GOLDEN — pool as canonical reference pattern |
 | >= 8.0 | PUBLISH — index in pattern catalog and cross-link from related patterns |
 | >= 7.0 | REVIEW — strengthen forces, add anti-pattern, or provide concrete example |
 | < 7.0  | REJECT — rework problem statement and solution into implementable form |
-
 ## Bypass
-
 | Field | Value |
 |-------|-------|
 | conditions | Pattern needed to unblock active architecture decision with no existing equivalent in catalog |

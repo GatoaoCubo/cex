@@ -7,7 +7,6 @@ purpose: Component map of knowledge_card — inventory, dependencies, and archit
 ---
 
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | title | Short searchable label identifying the fact | author | required |
@@ -19,9 +18,7 @@ purpose: Component map of knowledge_card — inventory, dependencies, and archit
 | version | Revision counter for fact updates | author | required |
 | linked_artifacts | Other cards or artifacts this fact connects to | author | optional |
 | expiry_hint | Signal that the fact may become stale after a date | author | optional |
-
 ## Dependency Graph
-
 ```
 rag_source     --produces--> knowledge_card
 knowledge_card --queried_by--> brain_index
@@ -30,7 +27,6 @@ knowledge_card --informs--> few_shot_example
 knowledge_card --referenced_by--> context_doc
 knowledge_card --referenced_by--> agent
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | rag_source | knowledge_card | data_flow | raw source text to distill |
@@ -39,9 +35,7 @@ knowledge_card --referenced_by--> agent
 | knowledge_card | few_shot_example | data_flow | factual grounding for input/output pairs |
 | knowledge_card | context_doc | data_flow | referenced as supporting evidence |
 | knowledge_card | agent | data_flow | linked domain knowledge in agent definition |
-
 ## Boundary Table
-
 | knowledge_card IS | knowledge_card IS NOT |
 |-------------------|----------------------|
 | Atomic searchable fact with density >= 0.8 | Broad reference document without density gate |
@@ -50,9 +44,7 @@ knowledge_card --referenced_by--> agent
 | Injected into prompts via retrieval index | External URL pointer without distilled content |
 | Max 5KB body (high signal-to-noise) | Input/output demonstration pair |
 | Expirable when facts can become stale | Agent identity or behavioral definition |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Identity | title, card_type, version | Name, classify, and version the fact |

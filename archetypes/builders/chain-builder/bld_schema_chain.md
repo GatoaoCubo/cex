@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: chain
-
 ## Frontmatter Fields
-
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string (p03_ch_{pipeline_slug}) | YES | - | Namespace compliance |
@@ -32,17 +30,14 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | tags | list[string], len >= 3 | YES | - | Must include "chain" |
 | tldr | string <= 160ch | YES | - | Dense summary |
 | density_score | float 0.80-1.00 | REC | - | Content density |
-
 ## ID Pattern
 Regex: `^p03_ch_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Body Structure (required sections)
 1. `## Purpose` — why this chain exists, what transformation it performs
 2. `## Steps` — numbered steps, each with Input/Prompt/Output subsections
 3. `## Data Flow` — ASCII diagram showing step connections + context strategy
 4. `## Error Handling` — strategy, failure behavior, retry policy
-
 ## Constraints
 - max_bytes: 6144 (body only)
 - naming: p03_ch_{pipeline_slug}.md

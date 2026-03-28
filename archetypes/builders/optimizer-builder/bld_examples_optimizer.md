@@ -1,18 +1,16 @@
 ---
+kind: examples
+id: bld_examples_optimizer
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of optimizer artifacts
 ---
 
 # Examples: optimizer-builder
-
 ## Golden Example
-
 INPUT: "Crie optimizer para latencia de geracao de knowledge cards"
-
 OUTPUT:
 ```yaml
----
 id: p11_opt_kc_generation_latency
 kind: optimizer
 pillar: P11
@@ -62,62 +60,48 @@ monitoring:
     - "p99 > 3.0s for 3 consecutive minutes"
     - "p99 > 8.0s (critical — page on-call)"
   reporting: "daily: p99/p95/p50 + action count + delta vs baseline"
----
-
 ## Target Process
 Scope: KC generation from raw input to validated artifact.
 In scope: embed, vector retrieve, LLM generate, YAML validate.
 Out of scope: upstream ingestion, pool merge, user-facing API.
-
 ## Metrics
 | Metric | Unit | Direction | Trigger | Target | Critical |
 |--------|------|-----------|---------|--------|----------|
 | p99_generation_latency | seconds | minimize | 3.0 | 1.5 | 8.0 |
-
 ### Secondary Metrics
 | Metric | Unit | Purpose |
 |--------|------|---------|
 | action_fire_rate | actions/hour | Detect thrashing |
 | validation_pass_rate | percent | Ensure quality not degraded by speed |
-
 ## Actions
 | Trigger Condition | Type | Description | Automated |
 |-------------------|------|-------------|-----------|
 | p99 > 3.0s for 3 min | tune | Reduce batch_size 32->16 | Yes |
 | p99 > 5.0s for 5 min | tune | Switch to faster model tier | Yes |
 | p99 > 8.0s (critical) | scale | Add replica + page on-call | No |
-
 ### Rollback
 Thrash guard: freeze config 30min if action_fire_rate > 10/hour.
 Manual: `kc-pipeline config restore --version previous`
-
 ## Risk Assessment
 | Risk | Level | Mitigation |
 |------|-------|-----------|
 | Quality regression | low | validation_pass_rate alert < 95% |
 | Thrashing | medium | circuit breaker at 10 actions/hour |
-
 Cost: compute=0.05, time=0.8s/cycle
-
 ## Monitoring
 - Dashboard: railway-metrics/kc-pipeline-latency
 - Alerts: p99 > 3.0s/3min (warn), p99 > 8.0s (critical)
 - Reporting: daily, latency percentiles + action log
 ```
-
 ## Anti-Example
-
 ```yaml
----
 id: kc_optimizer
 kind: optimizer
 title: "Make KC generation fast"
 quality: 8.5
----
 Check if KC generation is slow. If it is, do something to speed it up.
 Maybe reduce batch size or use a faster model. Monitor and adjust as needed.
 ```
-
 FAILURES:
 1. [H02] id missing p11_opt_ prefix — fails ^p11_opt_[a-z][a-z0-9_]+$
 2. [H06] quality: 8.5 — must be null; self-scoring forbidden

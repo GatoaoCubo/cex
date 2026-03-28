@@ -15,22 +15,15 @@ density_score: 0.90
 ---
 
 # Gate: Instruction
-
 ## Definition
-
 | Field     | Value |
 |-----------|-------|
 | metric    | weighted soft score + all hard gates pass |
 | threshold | 7.0 to publish; 8.0 for pool; 9.5 for golden |
 | operator  | AND (all hard) + weighted average (soft) |
 | scope     | any artifact with `kind: instruction` |
-
----
-
 ## HARD Gates
-
 All must pass. Any failure = immediate reject.
-
 | ID  | Check | Fail Condition |
 |-----|-------|----------------|
 | H01 | Frontmatter parses as valid YAML | Parse error on any field |
@@ -41,13 +34,8 @@ All must pass. Any failure = immediate reject.
 | H06 | All required fields present | Missing: steps, prerequisites, or completion_criteria |
 | H07 | Steps are numbered and count >= 2 | Single undivided step or unnumbered list |
 | H08 | `idempotent` field is a boolean | Missing field or non-boolean value |
-
----
-
 ## SOFT Scoring
-
 Total weights sum to 100%.
-
 | ID  | Dimension | Weight | 10 pts | 5 pts | 0 pts |
 |-----|-----------|--------|--------|-------|-------|
 | S01 | Step atomicity | 1.0 | Every step performs exactly one action and is independently verifiable | Most steps atomic; some compound | Steps are multi-action paragraphs |
@@ -61,28 +49,17 @@ Total weights sum to 100%.
 | S09 | Tool list | 0.5 | `tools_required` lists every CLI, SDK, or API the steps invoke | Partial tool list | No tool list |
 | S10 | Distinction from action_prompt | 0.5 | No I/O prompt framing — pure procedural steps | Minimal prompt framing leakage | Reads as a prompt, not a recipe |
 | S11 | Example run | 0.5 | At least one example showing input values substituted into steps | Example mentioned but sparse | No example |
-
 **Score = sum(pts * weight) / sum(max_pts * weight) * 10**
-
----
-
 ## Actions
-
 | Score | Tier | Action |
 |-------|------|--------|
 | >= 9.5 | Golden | Publish to pool as golden operational runbook |
 | >= 8.0 | Skilled | Publish to pool + log pattern |
 | >= 7.0 | Learning | Use but flag for improvement |
 | < 7.0 | Rejected | Return to author with gate report |
-
----
-
 ## Bypass
-
 | Field | Value |
 |-------|-------|
 | Conditions | Novel procedure being executed for the first time; rollback path not yet known |
 | Approver | Task owner + one peer reviewer |
 | Audit trail | `bypass_reason` required; note which gates are bypassed and why |
-| Expiry | Single execution only; full instruction required before any repeat execution |
-| Never bypass | H01 (YAML parse), H05 (quality null), H07 (steps must exist and be numbered — unstructured instructions cannot be validated) |

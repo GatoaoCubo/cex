@@ -7,7 +7,6 @@ purpose: Component map of e2e_eval — inventory, dependencies, and architectura
 ---
 
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | pipeline_under_test | Reference to the workflow or agent chain being tested | e2e-eval-builder | required |
@@ -20,9 +19,7 @@ purpose: Component map of e2e_eval — inventory, dependencies, and architectura
 | pass_criteria | Conditions that constitute a passing run (threshold, all-stages, subset) | e2e-eval-builder | required |
 | timeout | Maximum wall-clock time allowed for the full pipeline run | e2e-eval-builder | required |
 | metadata | eval id, version, pillar, pipeline_id, author, created date | e2e-eval-builder | required |
-
 ## Dependency Graph
-
 ```
 smoke_eval (P07) --must_pass_before--> e2e_eval (smoke gate must clear first)
 unit_eval (P07) --composes_into--> e2e_eval (individual stage tests feed pipeline test)
@@ -32,7 +29,6 @@ e2e_eval --produces_for--> benchmark (P07) (pipeline metrics aggregated from e2e
 scoring_rubric (P07) --independent-- e2e_eval (rubric defines criteria; e2e applies verification)
 golden_test (P07) --independent-- e2e_eval (golden tests reference single artifacts, e2e tests pipelines)
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | smoke_eval | e2e_eval | depends | smoke pass is prerequisite |
@@ -40,9 +36,7 @@ golden_test (P07) --independent-- e2e_eval (golden tests reference single artifa
 | workflow | e2e_eval | data_flow | pipeline definition drives stage structure |
 | e2e_eval | quality_gate | produces | pass/fail verdict for pipeline promotion |
 | e2e_eval | benchmark | produces | latency, cost, and accuracy metrics per run |
-
 ## Boundary Table
-
 | e2e_eval IS | e2e_eval IS NOT |
 |-------------|-----------------|
 | An integration test: verifies the full pipeline from input to final output | A unit_eval — unit_eval tests a single agent in isolation |
@@ -52,14 +46,10 @@ golden_test (P07) --independent-- e2e_eval (golden tests reference single artifa
 | Produces a pass/fail verdict consumed by quality_gate | A scoring_rubric — rubric defines evaluation criteria, not the test execution |
 | Defines cleanup to restore system state after the run | A workflow — workflow defines and executes the pipeline; e2e_eval tests it |
 | Has an explicit timeout bounding the full run | A dag — dag models dependency structure, not test verification |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Prerequisites | smoke_eval, unit_eval | Must pass before e2e_eval is meaningful to run |
 | Setup | data_fixtures, environment, pipeline_under_test | Prepare inputs, mocks, and runtime context |
 | Execution | stages, timeout | Run each pipeline step in order within time bound |
 | Verification | intermediate_assertions, expected_output, pass_criteria | Assert correctness at each stage and at final output |
-| Teardown | cleanup | Restore system state after the run completes |
-| Output | quality_gate, benchmark | Deliver pass/fail verdict and performance metrics downstream |

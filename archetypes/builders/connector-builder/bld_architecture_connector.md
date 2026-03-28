@@ -7,7 +7,6 @@ purpose: Component map of connector — inventory, dependencies, and architectur
 ---
 
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | outbound_endpoint | Sends data to external service — method, path, payload schema | connector | required |
@@ -22,9 +21,7 @@ purpose: Component map of connector — inventory, dependencies, and architectur
 | guardrail | Auth and rate enforcement constraints | P11 | external |
 | agent | Caller that triggers outbound operations or handles inbound events | P02 | consumer |
 | workflow | Orchestrator that sequences connector calls in a pipeline | P12 | consumer |
-
 ## Dependency Graph
-
 ```
 env_config         --produces-->  auth_strategy
 env_config         --produces-->  outbound_endpoint
@@ -42,7 +39,6 @@ agent              --depends-->   outbound_endpoint
 agent              --depends-->   inbound_endpoint
 workflow           --depends-->   outbound_endpoint
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | env_config | auth_strategy | produces | credentials and secrets injected at runtime |
@@ -60,25 +56,10 @@ workflow           --depends-->   outbound_endpoint
 | agent | outbound_endpoint | depends | agent triggers outbound calls |
 | agent | inbound_endpoint | depends | agent handles inbound webhook events |
 | workflow | outbound_endpoint | depends | workflow sequences connector operations |
-
 ## Boundary Table
-
 | connector IS | connector IS NOT |
 |-------------|-----------------|
 | Bidirectional integration — sends outbound AND receives inbound | A unidirectional API consumer (that is client) |
 | Defines data mapping and transform rules between schemas | An HTML/DOM data extractor (that is scraper) |
 | Handles webhooks, streams, pub/sub event reception | A tool exposed via MCP protocol (that is mcp_server) |
 | Includes health check and liveness monitoring | A reusable phased capability (that is skill) |
-| One connector per external service integration | A background process with no external service (that is daemon) |
-| Protocol-aware (REST, WebSocket, gRPC, MQTT) | A one-shot command executed from terminal (that is cli_tool) |
-
-## Layer Map
-
-| Layer | Components | Purpose |
-|-------|-----------|---------|
-| configuration | env_config, auth_strategy, protocol | Supply credentials, secrets, and wire protocol |
-| outbound | outbound_endpoint, data_mapping, retry_policy, rate_limit | Define outgoing data path and resilience |
-| inbound | inbound_endpoint, data_mapping | Define incoming event reception and transform |
-| operations | health_check | Monitor external service liveness |
-| governance | guardrail | Enforce rate and auth constraint policy |
-| callers | agent, workflow | Runtime consumers that drive integration |

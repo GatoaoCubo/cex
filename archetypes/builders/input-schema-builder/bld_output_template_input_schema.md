@@ -1,4 +1,6 @@
 ---
+kind: output_template
+id: bld_output_template_input_schema
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} that the LLM fills to produce an input_schema
@@ -6,9 +8,7 @@ pattern: every field here exists in SCHEMA.md — template derives, never invent
 ---
 
 # Output Template: input_schema
-
 ```yaml
----
 id: p06_is_{{scope_slug}}
 kind: input_schema
 pillar: P06
@@ -41,29 +41,22 @@ quality: null
 tags: [input-schema, {{scope_tag}}, {{domain_tag}}]
 tldr: "{{dense_summary_max_160ch}}"
 density_score: {{0.80_to_1.00}}
----
 ```
-
 ## Contract Definition
 {{what_operation_this_input_serves_and_who_provides_data}}
-
 ## Fields
-
 | # | Name | Type | Required | Default | Description |
 |---|------|------|----------|---------|-------------|
 | 1 | {{name}} | {{type}} | {{Y/N}} | {{default}} | {{desc}} |
 | 2 | {{name}} | {{type}} | {{Y/N}} | {{default}} | {{desc}} |
-
 ## Coercion Rules
 | From | To | Rule |
 |------|----|------|
 | {{source}} | {{target}} | {{conversion}} |
-
 ## Examples
 ```json
 {{valid_example_payload}}
 ```
-
 ## References
 - {{reference_1}}
 - {{reference_2}}

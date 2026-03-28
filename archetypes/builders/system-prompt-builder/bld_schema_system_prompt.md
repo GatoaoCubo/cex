@@ -9,9 +9,7 @@ version: 2.0.0
 ---
 
 # Schema: system_prompt (v2)
-
 ## Frontmatter Fields
-
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string (p03_sp_{agent_slug}) | YES | - | Namespace compliance. Regex: `^p03_sp_[a-z][a-z0-9_]+$` |
@@ -35,23 +33,16 @@ version: 2.0.0
 | output_format_type | enum: markdown, json, yaml, text, structured | REC | "markdown" | Response format |
 | tldr | string <= 160ch | REC | - | Dense summary |
 | density_score | float 0.80-1.00 | REC | - | Content density metric |
-
 **Required count**: 16 | **Recommended count**: 5
-
 ## ID Pattern
-
 Regex: `^p03_sp_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Body Structure (required sections)
-
 1. `## Identity` — Who the agent is: name, domain expertise, core mission, persona voice. Format: `You are **{agent_name}**, a specialized {domain} agent focused on {core_mission}.` Front-loaded, always first.
 2. `## Rules` — Numbered ALWAYS/NEVER statements grouped by concern (scope, quality, safety, comms). 5-12 ALWAYS + 3-8 NEVER. Binary constraints, not soft guidance. Brief "why" per group heading.
 3. `## Output Format` — Response structure, format constraints, expected deliverable shape.
 4. `## Constraints` — Knowledge boundary (positive + negative scope), delegation boundaries, what NOT to do.
-
 ## Size Calibration
-
 | Metric | CEX Builders | Codexa-Core Legacy | Limit |
 |--------|-------------|-------------------|-------|
 | Avg body bytes | 1,620 | ~6,500 | - |
@@ -60,11 +51,8 @@ Rule: id MUST equal filename stem.
 | Body tokens | 3,000-3,500 | varies | ~4,500 |
 | Identity lines | 8-15 | varies | 25 |
 | Rules count | 8-12 | varies | 20 |
-
 > **Note**: max_bytes = 4096 applies to CEX-format artifacts. Codexa-core legacy system prompts may exceed this — they predate the schema and are not subject to this constraint.
-
 ## Constraints
-
 - max_bytes: 4096 (body only, CEX artifacts)
 - naming: p03_sp_{agent_slug}.md
 - machine_format: yaml (frontmatter) + markdown (body)

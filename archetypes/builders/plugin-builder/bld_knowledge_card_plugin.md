@@ -8,13 +8,9 @@ sources: plugin-builder MANIFEST.md + SCHEMA.md, VS Code extensions, WordPress p
 ---
 
 # Domain Knowledge: plugin
-
 ## Executive Summary
-
 Plugins are modular extension artifacts that add capabilities to a host system through a defined interface contract with lifecycle management. Each plugin declares the interface it implements, API surface with method signatures, config schema, lifecycle hooks (minimum on_load/on_unload), and isolation level. They differ from hooks (single-event interception), skills (multi-phase workflows), MCP servers (protocol-based providers), and connectors (external service integrations) by providing a complete pluggable API surface with explicit lifecycle and isolation.
-
 ## Spec Table
-
 | Property | Value |
 |----------|-------|
 | Pillar | P04 (tools/infrastructure) |
@@ -28,9 +24,7 @@ Plugins are modular extension artifacts that add capabilities to a host system t
 | Min lifecycle hooks | 2 (on_load + on_unload) |
 | Min API surface entries | 1 (method + signature + return type) |
 | Isolation levels | sandboxed, shared, privileged |
-
 ## Patterns
-
 | Pattern | Application |
 |---------|-------------|
 | Interface contract first | Define what plugin MUST implement before writing code |
@@ -41,9 +35,7 @@ Plugins are modular extension artifacts that add capabilities to a host system t
 | Hot-reload guard | If hot_reload: true, lifecycle MUST include on_config_change |
 | API surface minimalism | Expose only intentional methods; hide internals |
 | Priority ordering | Lower priority loads first (infrastructure before features) |
-
 ## Anti-Patterns
-
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
 | No interface field | Plugin without declared interface is an orphan |
@@ -53,9 +45,7 @@ Plugins are modular extension artifacts that add capabilities to a host system t
 | No isolation_level declared | Unknown side-effect scope; security risk |
 | No version_constraints for host | Incompatible host version causes silent failures |
 | Privileged isolation without justification | Violates least privilege principle |
-
 ## Application
-
 1. Identify the host interface this plugin implements
 2. Define API surface: method name, signature, return type per method
 3. Declare lifecycle hooks (minimum: on_load, on_unload)
@@ -64,9 +54,7 @@ Plugins are modular extension artifacts that add capabilities to a host system t
 6. List dependencies with semver version constraints
 7. Set hot_reload flag; add on_config_change if true
 8. Validate: 9 HARD + 12 SOFT gates, body <= 4096 bytes
-
 ## References
-
 - plugin-builder SCHEMA.md v1.0.0
 - VS Code Extension API documentation
 - Martin Fowler: Plugin Architecture pattern

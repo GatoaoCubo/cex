@@ -8,13 +8,9 @@ sources: type-def-builder MANIFEST.md + SCHEMA.md
 ---
 
 # Domain Knowledge: type_def
-
 ## Executive Summary
-
 A `type_def` (P06, spec layer) is a reusable named type declaration — the vocabulary other artifacts reference by `p06_td_*` ID. It differs from `input_schema` (concrete input contract), `validator` (executable pass/fail rule), and `validation_schema` (post-generation system contract) by being purely declarative and reusable across domains. It captures base type, constraints, composition rules, nullable semantics, generics, and serialization in machine-parseable YAML.
-
 ## Spec Table
-
 | Property | Value |
 |----------|-------|
 | Pillar | P06 (spec layer) |
@@ -27,9 +23,7 @@ A `type_def` (P06, spec layer) is a reusable named type declaration — the voca
 | Recommended fields | 7 |
 | `quality` field | always `null` (governance assigns) |
 | LLM function | GOVERN |
-
 ## Patterns
-
 | Pattern | Rule |
 |---------|------|
 | PascalCase `type_name` | `UserId`, `HTTPStatus` — converted to snake_case for ID |
@@ -40,11 +34,8 @@ A `type_def` (P06, spec layer) is a reusable named type declaration — the voca
 | Discriminated union | Add `discriminant_field` to `composition` for tagged sum types |
 | Generics bound | Every generic param needs `bound` (use `"any"` if unconstrained) |
 | Examples required | At least one concrete value + `note` in `examples` array |
-
 **base_type allowed values**: `string`, `integer`, `number`, `boolean`, `array`, `object`, `enum`, `union`, `intersection`, `tuple`, `record`
-
 **Constraint keys by base_type**:
-
 | base_type | Applicable constraints |
 |-----------|----------------------|
 | string | `min_length`, `max_length`, `pattern`, `format` |
@@ -52,18 +43,14 @@ A `type_def` (P06, spec layer) is a reusable named type declaration — the voca
 | array | `min_items`, `max_items`, `unique_items` |
 | enum | `allowed_values` |
 | object / record | `required_keys` |
-
 **Boundary — what type_def is NOT**:
-
 | kind | Why NOT type_def |
 |------|-----------------|
 | `input_schema` | Concrete input contract for one artifact — not reusable vocabulary |
 | `validator` | Executable pass/fail logic — not a declaration |
 | `validation_schema` | Post-generation system contract — governs outputs, not types |
 | `interface` | Bilateral runtime handshake — not a type declaration |
-
 ## Anti-Patterns
-
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
 | `base_type: object` when enum suffices | Loses constraint expressiveness; breaks consumer validation |
@@ -73,22 +60,10 @@ A `type_def` (P06, spec layer) is a reusable named type declaration — the voca
 | Setting `quality` to a score | Governance assigns quality; self-scoring is invalid |
 | Embedding business logic in constraints | Types define shape, not behavior — use `validator` for logic |
 | Skipping `serialization` on wire-crossing types | Consumers assume defaults; format mismatches at runtime |
-
 ## Application
-
 1. Identify the canonical PascalCase `type_name` and its owning `domain`
 2. Choose `base_type` — most specific fit from the allowed enum
 3. Set `nullable: true/false` explicitly
 4. Set `id` = `p06_td_{type_name_snake}`, `layer: spec`, `kind: type_def`
 5. Define `constraints` object with keys matching the chosen `base_type`
 6. If composite (`union`/`intersection`/`tuple`): add `composition` with `mode` + `members`
-7. If parameterized: add `generics` array with `name`, `bound`, optional `default`
-8. If extending another type: add `inheritance.extends` + `overrides` list
-9. Write body sections in order: Definition → Constraints → Examples → Keywords
-10. Add `serialization` object if type crosses a wire boundary
-11. Leave `quality: null` — do not self-score
-
-## References
-
-- type-def-builder MANIFEST.md v1.0.0
-- type-def-builder SCHEMA.md v1.0.0

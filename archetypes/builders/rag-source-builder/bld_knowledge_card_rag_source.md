@@ -8,13 +8,9 @@ sources: rag-source-builder MANIFEST.md + SCHEMA.md
 ---
 
 # Domain Knowledge: rag_source
-
 ## Executive Summary
-
 A rag_source is a pointer-only artifact that catalogs an external indexable URL for RAG pipelines — it records WHERE content lives, not the content itself. Body max is 1024 bytes. If the body contains extracted text paragraphs, the artifact is a knowledge_card, not a rag_source. Two files are always required: `.md` (human-readable) and `.yaml` (machine twin), both sharing the same `id`.
-
 ## Spec Table
-
 | Property | Value |
 |----------|-------|
 | Pillar | P01 (knowledge) |
@@ -25,9 +21,7 @@ A rag_source is a pointer-only artifact that catalogs an external indexable URL 
 | Body sections | 3 (Source Description, Freshness Policy, Extraction Notes) |
 | Dual-file artifact | `.md` + `.yaml` twin; IDs must match |
 | `quality` field | ALWAYS null |
-
 ## Patterns
-
 | Pattern | Rule |
 |---------|------|
 | Pointer discipline | Body describes metadata about the source; never contains extracted content |
@@ -37,9 +31,7 @@ A rag_source is a pointer-only artifact that catalogs an external indexable URL 
 | Reliability levels | `high` = official docs/APIs; `medium` = curated third-party; `low` = informal/social |
 | Format field | `html` / `json` / `api` / `pdf` / `csv` — drives extraction_method choice |
 | URL preference | `https://` preferred; HTTP must be documented as deliberate exception |
-
 ## Anti-Patterns
-
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
 | Body contains extracted paragraphs | Wrong kind — this is a knowledge_card, not a rag_source |
@@ -49,9 +41,7 @@ A rag_source is a pointer-only artifact that catalogs an external indexable URL 
 | Body > 1024 bytes | Violates hard size constraint; artifact is rejected |
 | `.md` and `.yaml` twins with mismatched `id` | Schema integrity failure; lookup by ID breaks |
 | `reliability` omitted | Downstream retrieval cannot weight source trustworthiness |
-
 ## Application
-
 1. Identify the external URL; validate format (`https://`) and reachability
 2. Write frontmatter: 13 required fields including `url`, `domain`, `last_checked`; `quality: null`
 3. Add recommended fields: `reliability` (high/medium/low), `format`, `extraction_method`, `keywords` (3–8 terms)
@@ -59,9 +49,7 @@ A rag_source is a pointer-only artifact that catalogs an external indexable URL 
 5. Write `## Freshness Policy` — re-check cadence + staleness threshold
 6. Write `## Extraction Notes` — method, auth requirements, pagination quirks
 7. Verify body <= 1024 bytes; create `.yaml` machine twin with identical `id`
-
 ## References
-
 - rag-source-builder MANIFEST.md v1.0.0
 - rag_source SCHEMA.md v1.0.0
 - Boundary: rag_source (pointer) vs knowledge_card (distilled content) vs context_doc (domain framing) vs embedding_config (index configuration)

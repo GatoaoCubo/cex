@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: mental_model
-
 ## Frontmatter Fields
-
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string (p02_mm_{agent_slug}) | YES | - | Namespace compliance |
@@ -36,9 +34,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | fallback | object | REC | - | What to do when routing fails |
 | llm_function | literal "BECOME" | REC | "BECOME" | Identity artifact |
 | density_score | float 0.80-1.00 | OPT | - | Content density |
-
 ## Routing Rules Object
-
 ```yaml
 routing_rules:
   - keywords: [list, of, trigger, words]
@@ -47,9 +43,7 @@ routing_rules:
   - keywords: [...]
     action: "..."
 ```
-
 ## Decision Tree Object
-
 ```yaml
 decision_tree:
   - condition: "if X"
@@ -58,11 +52,9 @@ decision_tree:
   - condition: "if Y"
     then: "action C"
 ```
-
 ## ID Pattern
 Regex: `^p02_mm_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Body Structure (required sections)
 1. `## Agent Reference` — which agent, one-line identity
 2. `## Routing Rules` — table of keyword-to-action mappings with confidence
@@ -70,7 +62,6 @@ Rule: id MUST equal filename stem.
 4. `## Priorities` — ordered priority list (highest first)
 5. `## Heuristics` — rules of thumb for ambiguous cases
 6. `## Domain Map` — scope boundaries (what agent covers vs routes away)
-
 ## Constraints
 - max_bytes: 2048 (body only)
 - naming: p02_mm_{agent_slug}.yaml

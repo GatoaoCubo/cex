@@ -8,14 +8,11 @@ pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCE
 ---
 
 # Collaboration: instruction-builder
-
 ## My Role in Crews
 I am a SPECIALIST. I answer ONE question: "what are the exact steps to execute this task?"
 I do not define agent identity. I do not write task prompts with I/O.
 I compose step-by-step recipes so agents can execute tasks in correct order with validation.
-
 ## Crew Compositions
-
 ### Crew: "New Agent End-to-End"
 ```
   1. knowledge-card-builder -> "domain knowledge"
@@ -24,7 +21,6 @@ I compose step-by-step recipes so agents can execute tasks in correct order with
   4. boot-config-builder -> "provider configuration"
   5. iso-package-builder -> "deployable package"
 ```
-
 ### Crew: "Task Recipe Design"
 ```
   1. context-doc-builder -> "domain context for grounding"
@@ -32,26 +28,19 @@ I compose step-by-step recipes so agents can execute tasks in correct order with
   3. action-prompt-builder -> "task prompt that follows the recipe"
   4. e2e-eval-builder -> "end-to-end test of recipe execution"
 ```
-
 ## Handoff Protocol
-
 ### I Receive
 - seeds: task name, high-level goal, execution environment
 - optional: prerequisites, rollback procedures, validation criteria, dependencies
-
 ### I Produce
 - instruction artifact (.md + .yaml frontmatter)
 - committed to: `cex/P03/examples/p03_instruction_{task}.md`
-
 ### I Signal
 - signal: complete (with quality score from QUALITY_GATES)
 - if quality < 8.0: signal retry with failure reasons
-
 ## Builders I Depend On
 - context-doc-builder: provides domain background that grounds recipe steps
-
 ## Builders That Depend On Me
-
 | Builder | Why |
 |---------|-----|
 | action-prompt-builder | Prompts may implement instruction steps |

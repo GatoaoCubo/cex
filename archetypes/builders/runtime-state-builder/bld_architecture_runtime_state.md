@@ -7,9 +7,7 @@ purpose: Component map of runtime_state — inventory, dependencies, and archite
 ---
 
 # Architecture: runtime_state in the CEX
-
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | frontmatter block | Metadata header (id, kind, pillar, domain, target_agent, persistence_scope, etc.) | runtime-state-builder | active |
@@ -19,15 +17,12 @@ purpose: Component map of runtime_state — inventory, dependencies, and archite
 | heuristics | Runtime-adapted rules of thumb based on recent experience | agent | active |
 | tool_preferences | Learned tool selection biases from recent success/failure | agent | active |
 | state_transitions | Conditions that trigger state updates during execution | author | active |
-
 ## Dependency Graph
-
 ```
 mental_model    --initializes-->  runtime_state  --consumed_by-->  agent
 session_state   --feeds-->        runtime_state  --produces-->     updated_decisions
 runtime_state   --signals-->      state_update
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | mental_model (P02) | runtime_state | data_flow | design-time model provides initial state values |
@@ -36,9 +31,7 @@ runtime_state   --signals-->      state_update
 | runtime_state | updated_decisions | produces | refined routing and priority decisions |
 | runtime_state | state_update (P12) | signals | emitted when state transitions occur |
 | learning_record (P10) | runtime_state | dependency | past learnings inform initial heuristics |
-
 ## Boundary Table
-
 | runtime_state IS | runtime_state IS NOT |
 |------------------|----------------------|
 | A variable mental state accumulated during agent runtime | A design-time cognitive map (mental_model P02) |
@@ -47,9 +40,7 @@ runtime_state   --signals-->      state_update
 | Updated by state transitions triggered at runtime | A static configuration loaded once at boot |
 | Scoped to one agent with specific update conditions | A search index or vector store (brain_index P01) |
 | Reflects current operational intelligence | A historical changelog |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Initialization | mental_model, learning_record | Supply design-time defaults and past learnings |

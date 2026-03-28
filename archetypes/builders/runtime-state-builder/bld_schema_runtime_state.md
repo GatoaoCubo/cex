@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: runtime_state
-
 ## Frontmatter Fields
-
 ### Required
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
@@ -31,7 +29,6 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | routing_mode | enum (keyword, semantic, hybrid, rule_based) | YES | — | How routing decisions are made |
 | priority_count | integer >= 1 | YES | — | Number of priorities defined |
 | update_frequency | enum (per_task, per_session, on_trigger) | YES | — | When state updates |
-
 ### Recommended
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
@@ -39,11 +36,9 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | linked_artifacts | object {primary, related} | REC | — | Cross-references |
 | density_score | float 0.80-1.00 | REC | — | Content density |
 | constraint_count | integer | REC | — | Number of constraints |
-
 ## ID Pattern
 Regex: `^p10_rs_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Body Structure (required sections)
 1. `## Agent Context` — which agent and its domain
 2. `## Routing Rules` — how the agent routes tasks at runtime
@@ -52,7 +47,6 @@ Rule: id MUST equal filename stem.
 5. `## Heuristics` — rules of thumb for ambiguous cases
 6. `## Constraints` — limits on agent behavior
 7. `## State Transitions` — what triggers state changes
-
 ## Constraints
 - max_bytes: 3072 (body only)
 - naming: p10_rs_{agent_slug}.md

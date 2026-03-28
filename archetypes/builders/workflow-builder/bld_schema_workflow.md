@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: workflow
-
 ## Frontmatter Fields
-
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string (p12_wf_{name_slug}) | YES | - | Namespace compliance |
@@ -34,17 +32,14 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | tags | list[string], len >= 3 | YES | - | Must include "workflow" |
 | tldr | string <= 160ch | YES | - | Dense summary |
 | density_score | float 0.80-1.00 | REC | - | Content density |
-
 ## ID Pattern
 Regex: `^p12_wf_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Body Structure (required sections)
 1. `## Purpose` — why this workflow exists, what mission it accomplishes
 2. `## Steps` — numbered steps with agent, action, input, output, signal
 3. `## Dependencies` — what must exist before workflow runs
 4. `## Signals` — what signals are emitted and when (references signal-builder)
-
 ## Constraints
 - max_bytes: 3072 (body only)
 - naming: p12_wf_{name_slug}.md

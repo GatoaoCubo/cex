@@ -7,9 +7,7 @@ purpose: Component map of system_prompt — inventory, dependencies, and archite
 ---
 
 # Architecture: system_prompt in the CEX
-
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | frontmatter block | 19-field metadata header (id, kind, pillar, domain, target_agent, etc.) | system-prompt-builder | active |
@@ -19,15 +17,12 @@ purpose: Component map of system_prompt — inventory, dependencies, and archite
 | knowledge_boundary | What the agent knows and explicitly does not know | author | active |
 | tone_calibration | Communication style, formality level, and language preferences | author | active |
 | output_format | Default response structure the agent should follow | author | active |
-
 ## Dependency Graph
-
 ```
 knowledge_card  --produces-->  system_prompt  --consumed_by-->  agent
 mental_model    --depends-->   system_prompt  --constrains-->   action_prompt
 system_prompt   --signals-->   identity_load
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | knowledge_card (P01) | system_prompt | data_flow | domain expertise informing persona and boundaries |
@@ -36,9 +31,7 @@ system_prompt   --signals-->   identity_load
 | system_prompt | mental_model (P02) | dependency | mental model scope constrained by system prompt |
 | system_prompt | identity_load (P12) | signals | emitted when agent loads its identity |
 | response_format (P05) | system_prompt | data_flow | output format injected into system prompt |
-
 ## Boundary Table
-
 | system_prompt IS | system_prompt IS NOT |
 |------------------|----------------------|
 | A fixed identity definition with persona and ALWAYS/NEVER rules | A task-specific instruction (action_prompt P03) |
@@ -47,9 +40,7 @@ system_prompt   --signals-->   identity_load
 | Constrains tone, knowledge boundary, and output format | A meta-prompt that generates other prompts |
 | Scoped to one agent with specific domain expertise | A universal prompt applied to all agents |
 | Constitutional — defines what the agent must and must not do | A suggestion or guideline that can be overridden |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Knowledge | knowledge_card, response_format | Supply domain expertise and output structure |

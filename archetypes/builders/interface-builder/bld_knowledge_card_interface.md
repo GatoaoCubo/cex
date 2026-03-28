@@ -8,13 +8,9 @@ sources: Gamma et al. 1994, OpenAPI 3.x, gRPC/Protobuf, contract-first API desig
 ---
 
 # Domain Knowledge: interface
-
 ## Executive Summary
-
 Interfaces are bilateral contracts where both provider and consumer agree on methods, input shapes, and output shapes. Rooted in interface-based programming (GoF 1994) and API-first design. Interfaces define what CAN happen between two systems — they are static specifications, not runtime events. They differ from input schemas (unilateral), signals (runtime notifications), and connectors (runtime implementations).
-
 ## Spec Table
-
 | Property | Value |
 |----------|-------|
 | Pillar | P06 (contracts/schema) |
@@ -24,11 +20,8 @@ Interfaces are bilateral contracts where both provider and consumer agree on met
 | Key sections | methods (name, input, output), versioning, deprecation |
 | Versioning | semver with backward_compatible flag |
 | Mock support | Test doubles derivable from interface |
-
 ## Patterns
-
 - **Method-based contracts**: named operations with typed input and output
-
 | Source | Concept | Application |
 |--------|---------|-------------|
 | OpenAPI 3.x | REST paths, schemas, responses | methods structure |
@@ -36,15 +29,12 @@ Interfaces are bilateral contracts where both provider and consumer agree on met
 | TypeScript | Structural type contracts | Bilateral type agreement |
 | GraphQL | Query/mutation typed fields | Method-level I/O contracts |
 | Java interfaces | Abstract method signatures | Method signature pattern |
-
 - **Bilateral agreement**: both provider and consumer acknowledge the contract — unlike unilateral input schemas
 - **Versioning with semver**: breaking changes require major version bump; backward_compatible flag explicit
 - **Deprecation planning**: every method has planned sunset timeline — no sudden removal
 - **Mock derivation**: interfaces generate test doubles automatically — testing does not require real implementation
 - **Static specification**: interfaces define what CAN happen, not what DID happen (that is a signal)
-
 ## Anti-Patterns
-
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
 | Unilateral contract | That is an input_schema; interfaces require both parties |
@@ -53,18 +43,14 @@ Interfaces are bilateral contracts where both provider and consumer agree on met
 | Free-text I/O types | Cannot generate mocks or validate compliance |
 | Runtime state in interface | Interfaces are static specs; use signals for events |
 | No mock specification | Cannot test without real implementation |
-
 ## Application
-
 1. Identify parties: who is provider, who is consumer?
 2. Define methods: name, typed input, typed output per operation
 3. Set version: semver with backward_compatible flag
 4. Plan deprecation: sunset timeline for methods to be removed
 5. Add mock spec: example inputs and outputs for test doubles
 6. Validate: bilateral agreement, all methods typed, version declared
-
 ## References
-
 - Gamma et al. 1994: "Design Patterns" — interface segregation principle
 - OpenAPI 3.x: REST API contract specification
 - gRPC: service definition and typed RPC methods

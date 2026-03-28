@@ -27,34 +27,23 @@ density_score: 0.91
 ---
 
 ## Context
-
 The mental-model-builder produces `mental_model` artifacts (P02) — design-time cognitive maps that define how an agent routes tasks, makes decisions, and prioritizes work. Mental models differ from agent definitions (identity and capabilities), runtime state (P10, ephemeral), and router artifacts (pure task dispatchers): a mental model encodes the thinking patterns an agent uses during execution.
-
 **Inputs:**
-
 - `$agent_name (required) - string - "The agent this mental model belongs to (e.g. 'scout-agent', 'law-builder')"`
 - `$agent_slug (required) - string - "snake_case version of agent name for use in id field"`
 - `$domain (required) - string - "Primary domain the agent operates in"`
 - `$routing_triggers (required) - list[string] - "Keywords or signal types that trigger this agent's activation"`
 - `$decisions (optional) - list[string] - "Key binary or multi-path decisions the agent makes during operation"`
 - `$domain_map (optional) - object - "What the agent covers vs what it delegates; keys: covers, routes_to"`
-
 **Output:** A single `mental_model` artifact (P02), body <= 2048 bytes, with 14 required + 9 recommended frontmatter fields and body sections covering agent reference, routing rules, decision tree, priorities, heuristics, domain map, and fallback.
-
 **Boundary check before proceeding:**
 - Need to define the agent's identity and capabilities → route to agent-builder
 - Need to define runtime state → do not use mental_model (P02), use P10 runtime state
 - Need a pure task dispatcher with no domain logic → route to router-builder (planned)
 - Need to encode how an agent thinks, routes, and decides → proceed
-
----
-
 ## Phases
-
 ### Phase 1: Analyze
-
 **Action:** Gather and organize the cognitive parameters of the target agent.
-
 1. Identify the **target agent** by name and domain.
 2. Determine primary **routing patterns**: what input signals trigger what agent behaviors.
 3. List **key decisions** the agent makes — binary or multi-path choices at decision points.
@@ -66,13 +55,9 @@ The mental-model-builder produces `mental_model` artifacts (P02) — design-time
 7. Check for existing mental_models for the same agent — avoid duplicates.
 8. Confirm this is P02 (design-time cognitive map), NOT P10 (runtime state).
 9. Define `fallback`: what the agent does when no routing rule matches.
-
 **Verification:** You can describe the agent's routing in one sentence: "When [signal type], this agent does [action]; when [other signal], it routes to [other agent]."
-
 ### Phase 2: Compose
-
 **Action:** Write all frontmatter fields and body sections within the 2048-byte body limit.
-
 1. Read `SCHEMA.md` — source of truth for all 14 required + 9 recommended fields.
 2. Read `OUTPUT_TEMPLATE.md` — fill every `{{var}}` following SCHEMA constraints.
 3. Generate `agent_slug` in snake_case from the agent name.
@@ -91,19 +76,14 @@ The mental-model-builder produces `mental_model` artifacts (P02) — design-time
 16. Write `## Priorities` — ordered list, highest first.
 17. Write `## Heuristics` — actionable rules of thumb.
 18. Write `## Domain Map` — what this agent covers vs routes to others.
-
 Byte budget pseudocode:
 ```
 body_bytes = len(encode_utf8(body_content))
 # if body_bytes > 2048: compress heuristics, merge similar routing rules
 ```
-
 **Verification:** `routing_rules` has >= 3 rules. `decision_tree` has >= 2 conditions, each with `condition`, `then`, and `else`. Body <= 2048 bytes. Keywords in routing rules are specific (not "general" or "anything").
-
 ### Phase 3: Validate
-
 **Action:** Run all 9 HARD gates from `QUALITY_GATES.md`. Fix any failure before output.
-
 | Gate | Check |
 |------|-------|
 | H01 | YAML frontmatter parses without error |
@@ -113,111 +93,3 @@ body_bytes = len(encode_utf8(body_content))
 | H05 | `quality` is `null` |
 | H06 | `routing_rules` has >= 3 rules each with keywords + action |
 | H07 | `decision_tree` has >= 2 conditions each with condition + then |
-| H08 | Keywords in routing_rules are specific (no "general", "anything", "other") |
-| H09 | Body <= 2048 bytes |
-
-Score SOFT gates from `QUALITY_GATES.md`. If soft score < 8.0, revise in the same pass.
-
-**Cross-check:** Are heuristics actionable (guide a choice) rather than purely descriptive? Does `domain_map.routes_to` name specific agent destinations?
-
-### Phase 4: Output
-
-**Action:** Emit the final artifact at the correct path.
-
-1. Write file to the path defined in `CONFIG.md` for mental_model artifacts.
-2. Confirm filename stem matches `id` field.
-3. Confirm all body sections are present and non-empty.
-4. Confirm `routing_rules` frontmatter matches routing content in body.
-
----
-
-## Output Contract
-
-```
----
-id: p02_mm_{{agent_slug}}
-kind: mental_model
-pillar: P02
-version: 1.0.0
-created: {{YYYY-MM-DD}}
-updated: {{YYYY-MM-DD}}
-author: {{author}}
-domain: {{domain}}
-agent_name: "{{agent_name}}"
-routing_rules:
-  - keywords: [{{keyword_list}}]
-    action: "{{action}}"
-    confidence: {{0.0-1.0}}
-decision_tree:
-  - condition: "{{condition}}"
-    then: "{{then_action}}"
-    else: "{{else_action}}"
-priorities: [{{ordered_list_highest_first}}]
-heuristics: [{{actionable_rules_of_thumb}}]
-domain_map:
-  covers: [{{what_agent_handles}}]
-  routes_to:
-    {{domain}}: "{{target_agent}}"
-personality:
-  tone: {{tone}}
-  verbosity: {{low|medium|high}}
-  risk_tolerance: {{low|medium|high}}
-constraints: [{{hard_behavioral_limits}}]
-fallback:
-  action: "{{what_to_do_when_no_rule_matches}}"
-  escalate_to: "{{who_to_ask}}"
-tags: [mental-model, P02, {{domain_tag}}, routing]
-quality: null
----
-
-## Agent Reference
-{{one_line_identity_and_primary_function}}
-
-## Routing Rules
-| Keywords | Action | Confidence |
-|----------|--------|------------|
-{{minimum_3_rows}}
-
-## Decision Tree
-{{numbered_if_then_else_list_minimum_2_conditions}}
-
-## Priorities
-{{ordered_list_highest_first}}
-
-## Heuristics
-{{actionable_rules_of_thumb}}
-
-## Domain Map
-{{covers_and_routes_to}}
-```
-
----
-
-## Validation
-
-- [ ] `id` matches `^p02_mm_[a-z][a-z0-9_]+$`
-- [ ] `kind` is literal string `mental_model`
-- [ ] `pillar` is `P02` (not P10)
-- [ ] `quality` is `null`
-- [ ] `routing_rules` has >= 3 rules with keywords + action
-- [ ] `decision_tree` has >= 2 conditions with condition + then + else
-- [ ] Keywords are specific (no "general", "anything", "other")
-- [ ] All body sections present and non-empty
-- [ ] Body <= 2048 bytes
-- [ ] Soft gate score >= 8.0 before output
-
----
-
-## Metacognition
-
-**Does:**
-- Encode routing rules, decision trees, and priorities for a specific agent
-- Enforce specificity in routing keywords (rejects vague terms)
-- Define domain boundaries: what the agent covers vs delegates
-
-**Does NOT:**
-- Define agent identity or capabilities — route to agent-builder
-- Capture runtime state — that is P10, not P02
-- Handle pure task dispatching with no domain logic — route to router-builder (planned)
-
-**Chaining:** [agent design / capability audit] -> THIS -> [agent instantiation / routing index registration]

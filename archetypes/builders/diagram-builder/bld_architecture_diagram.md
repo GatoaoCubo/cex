@@ -7,7 +7,6 @@ purpose: Component map of diagram — inventory, dependencies, and architectural
 ---
 
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | notation_format | Output format: ASCII art or Mermaid syntax | diagram-builder | required |
@@ -19,9 +18,7 @@ purpose: Component map of diagram — inventory, dependencies, and architectural
 | source_reference | Pointer to the component_map or pattern being visualized | diagram-builder | optional |
 | metadata | diagram id, version, scope, author, created date | diagram-builder | required |
 | alt_text | Plain-language description for accessibility and indexing | diagram-builder | optional |
-
 ## Dependency Graph
-
 ```
 component_map (P08) --provides_data--> diagram (structured inventory becomes visual)
 pattern (P08) --illustrated_by--> diagram (pattern solution may be shown visually)
@@ -32,7 +29,6 @@ brain_index (P10) --indexes--> diagram (stored and retrieved via semantic search
 signal (P12) --independent-- diagram (diagram is static, not runtime)
 connector (P04) --independent-- diagram (diagram visualizes, does not integrate)
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | component_map | diagram | data_flow | component names, roles, relationships |
@@ -41,9 +37,7 @@ connector (P04) --independent-- diagram (diagram visualizes, does not integrate)
 | diagram | documentation | produces | visual representation for human readers |
 | diagram | satellite_spec | referenced_by | spec cites diagram for structure overview |
 | brain_index | diagram | indexes | diagram stored for semantic retrieval |
-
 ## Boundary Table
-
 | diagram IS | diagram IS NOT |
 |------------|----------------|
 | A visual representation: shows structure as ASCII or Mermaid | A component_map — component_map is structured tabular inventory, not visual |
@@ -53,9 +47,7 @@ connector (P04) --independent-- diagram (diagram visualizes, does not integrate)
 | Includes legend, layer boundaries, and annotations | A workflow — workflow executes sequences at runtime |
 | Supports two notations: ASCII (portable) and Mermaid (renderable) | A satellite_spec — satellite_spec defines a component, diagram shows the system |
 | Indexed and retrievable via semantic search | A signal — signals are runtime events, diagrams are authoring-time artifacts |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Input | component_map, pattern, law | Source data and structure that the diagram visualizes |

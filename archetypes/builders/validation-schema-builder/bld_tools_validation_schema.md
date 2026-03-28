@@ -7,14 +7,12 @@ purpose: Tools available for validation_schema production
 ---
 
 # Tools: validation-schema-builder
-
 ## Production Tools
 | Tool | Purpose | When | Status |
 |------|---------|------|--------|
 | brain_query [MCP] | Search existing validation_schemas | Phase 1 (check duplicates) | CONDITIONAL |
 | validate_artifact.py | Validate any artifact kind | Phase 3 | [PLANNED] |
 | cex_forge.py | Generate artifact from seeds | Alternative compose | [PLANNED] |
-
 ## Data Sources
 | Source | Path/URL | Data |
 |--------|----------|------|
@@ -24,7 +22,6 @@ purpose: Tools available for validation_schema production
 | SEED_BANK | archetypes/SEED_BANK.yaml | P06_output_schema seeds |
 | validate_kc.py | _tools/validate_kc.py | Reference implementation of KC validation |
 | JSON Schema spec | https://json-schema.org | Industry standard reference |
-
 ## Interim Validation
 Manually check each QUALITY_GATES.md gate against produced artifact.
 - [ ] YAML parses

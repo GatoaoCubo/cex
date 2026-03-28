@@ -1,4 +1,6 @@
 ---
+kind: output_template
+id: bld_output_template_session_state
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} that the LLM fills to produce a session_state
@@ -6,12 +8,9 @@ pattern: every field here exists in SCHEMA.md; template derives, never invents
 ---
 
 # Output Template: session_state
-
 Naming pattern: `p10_ss_{session}.yaml`
 Filename: `p10_ss_{{session_slug}}.yaml`
-
 ```yaml
----
 id: p10_ss_{{session_slug}}
 kind: session_state
 lp: P10
@@ -47,9 +46,7 @@ keywords: [{{keyword_1}}, {{keyword_2}}]
 linked_artifacts:
   primary: "{{primary_ref_or_omit}}"
   related: [{{related_refs_or_omit}}]
----
 ```
-
 ## Derivation Notes
 - Required fields (id through tldr) form the minimum valid snapshot
 - Optional fields capture richer execution context when available

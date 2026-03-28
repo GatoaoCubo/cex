@@ -36,53 +36,18 @@ keywords:
 ---
 
 ## Summary
-
 Architecture diagrams fail to communicate when symbols are ambiguous, notation is inconsistent, or scope is too broad. A four-step production process - choose notation and zoom, draw labeled components, add legend, add annotations - produces diagrams that readers interpret correctly on first read without author assistance.
-
 ## Pattern
-
 **Step 1 - Scope decision**: declare `zoom_level` (system / subsystem / component) before drawing. This forces a scope decision that determines which boxes and arrows belong. Components outside the chosen zoom level become single boxes or are omitted.
-
 **Step 2 - Draw**: use one notation throughout. ASCII for terminal-safe artifacts; Mermaid for rendered markdown. Label every box with its name and one-line role. Annotate every arrow with the data or signal it carries. Use consistent direction (top-to-bottom for pipelines, left-to-right for request flows).
-
 **Step 3 - Legend**: include a `## Legend` section that defines every symbol, line style, and color (or shading) used. Even standard symbols (dashed = async, solid = sync) must be stated explicitly.
-
 **Step 4 - Annotations**: add a `## Annotations` section for decisions that cannot be shown visually - why a particular boundary exists, what a dotted line means in context, which components are optional.
-
 **Size discipline**: if the body exceeds 4096 bytes, split into two diagrams at a natural layer boundary rather than shrinking font or removing labels.
-
 ## Anti-Pattern
-
 - No legend - readers infer meaning and disagree with each other.
 - Mixing ASCII boxes with Mermaid graph syntax in the same body - breaks rendering.
 - Attempting to show all layers (system + subsystem + component) in a single frame - produces unreadable clutter above ~12 nodes.
 - Unlabeled arrows - readers cannot tell whether a line means "calls", "publishes to", "inherits from", or "deploys to".
 - Prose description instead of actual visual characters - the body must contain drawn elements, not a description of what a diagram would show.
 - Missing `zoom_level` in frontmatter - consumers cannot index or filter diagrams by abstraction level.
-
 ## Context
-
-Applies when the primary deliverable is a visual representation: system architecture, data flow, boot sequence, deployment topology, quality-gate pipeline. Distinct from component_map (which is a data inventory, not a visual) and from workflow (which encodes execution logic, not topology). Choose ASCII when the artifact will be read in terminals or plain-text editors; choose Mermaid when it will be rendered in markdown viewers.
-
-## Impact
-
-- Correct first-read interpretation rate improves from ~61% to ~94% with legend present.
-- Single-notation discipline eliminates rendering failures across all tested viewers.
-- Tight zoom-level scoping reduces clarification rounds from ~1.8 to 0 per diagram.
-- Annotation section captures architectural decisions that visuals cannot express.
-
-## Reproducibility
-
-1. Decide zoom level before opening an editor.
-2. List all components at that zoom level - if more than 15, split the scope.
-3. Draw in one notation; label every box and every arrow.
-4. Write Legend: one row per symbol.
-5. Write Annotations: one bullet per non-obvious decision.
-6. Check byte count; split if over 4096.
-
-## References
-
-- diagram-builder/INSTRUCTIONS.md
-- diagram-builder/SCHEMA.md
-- diagram-builder/EXAMPLES.md - ASCII and Mermaid reference examples
-- C4 Model (Brown, 2018) - zoom level taxonomy

@@ -8,13 +8,9 @@ sources: CEX P02 schema, iso_vectorstore pattern, agentic AI literature (Anthrop
 ---
 
 # Domain Knowledge: agent
-
 ## Executive Summary
-
 An agent is the core runtime identity in an agentic AI system — a persistent persona with scoped capabilities, assigned tools, and a structured file package (iso_vectorstore) that makes it portable and searchable. The agent kind defines WHO the LLM becomes when loaded. Every agent requires 10+ ISO files covering identity, instructions, examples, error handling, and deployment.
-
 ## Spec Table
-
 | Property | Value |
 |----------|-------|
 | Pillar | P02 (identity/model) |
@@ -24,12 +20,9 @@ An agent is the core runtime identity in an agentic AI system — a persistent p
 | Quality gates | 7 HARD + 10 SOFT |
 | Capability bullets | 4-8 concrete, no vague entries |
 | Naming | ISO_{AGENT_UPPER}_{NNN}_{TYPE}.md |
-
 ## Patterns
-
 - **BECOME function**: the LLM reads the agent definition and assumes that identity — persona, constraints, and voice
 - **ISO vectorstore structure**: 10 standardized files per agent enable consistent discovery, loading, and auditing
-
 | ISO File | Purpose |
 |----------|---------|
 | 001_MANIFEST | Identity, version, capabilities |
@@ -42,13 +35,10 @@ An agent is the core runtime identity in an agentic AI system — a persistent p
 | 008_ERROR_HANDLING | Failure modes |
 | 009_UPLOAD_KIT | Deployment guide |
 | 010_SYSTEM_INSTRUCTION | Full system prompt |
-
 - **Capability scoping**: 4-8 concrete bullets describing what the agent CAN do — no vague "helps with" entries
 - **Boundary discipline**: every agent explicitly lists what it does NOT handle, preventing overlap
 - **Routing keywords**: 4-8 specific terms that activate this agent via semantic search
-
 ## Anti-Patterns
-
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
 | Vague capabilities ("can help with tasks") | No routing signal; brain search returns wrong agent |
@@ -56,18 +46,14 @@ An agent is the core runtime identity in an agentic AI system — a persistent p
 | Incomplete iso_vectorstore (<10 files) | Agent cannot be fully loaded or audited |
 | Identity mixed with task instructions | Conflates WHO (agent) with WHAT (action_prompt) |
 | Over-scoped (>8 capabilities) | Agent does too much; should be split |
-
 ## Application
-
 1. Define persona: name, domain expertise, voice, constraints
 2. Scope capabilities: 4-8 concrete, verifiable bullets
 3. Map boundaries: 3-5 sibling types this agent does NOT handle
 4. Generate iso_vectorstore skeleton (10 files minimum)
 5. Write routing keywords for semantic discovery
 6. Validate: every capability is testable, every boundary names a real sibling
-
 ## References
-
 - Anthropic: System prompt and identity design patterns
 - OpenAI: Assistant API — agent definition and tool assignment
 - LangChain: Agent classes — ReAct, tool-using, conversational agents

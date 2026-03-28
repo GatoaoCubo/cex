@@ -1,4 +1,6 @@
 ---
+kind: output_template
+id: bld_output_template_guardrail
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} for guardrail production
@@ -6,9 +8,7 @@ pattern: derives from SCHEMA.md — no extra fields
 ---
 
 # Output Template: guardrail
-
 ```yaml
----
 id: p11_gr_{{scope_slug}}
 kind: guardrail
 pillar: P11
@@ -31,33 +31,26 @@ remediation: "{{how_to_fix_violation}}"
 linked_artifacts:
   primary: "{{related_law_or_gate}}"
   related: [{{related_refs}}]
----
-
 ## Definition
 {{what_it_protects_and_threat_model}}
-
 ## Rules
 1. {{concrete_measurable_restriction_1}}
 2. {{concrete_measurable_restriction_2}}
 3. {{concrete_measurable_restriction_3}}
-
 ## Violations
 | Violation | Severity | Example |
 |-----------|----------|---------|
 | {{violation_1}} | {{severity}} | {{concrete_example}} |
 | {{violation_2}} | {{severity}} | {{concrete_example}} |
-
 ## Enforcement
 | Check | Method | Trigger |
 |-------|--------|---------|
 | {{check_1}} | {{automated_or_manual}} | {{when_checked}} |
 | {{check_2}} | {{automated_or_manual}} | {{when_checked}} |
-
 ## Bypass
 - Conditions: {{when_bypass_is_allowed}}
 - Approver: {{who_approves}}
 - Audit: {{how_bypass_is_logged}}
-
 ## References
 - {{reference_1}}
 - {{reference_2}}

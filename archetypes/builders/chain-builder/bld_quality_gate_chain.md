@@ -15,20 +15,15 @@ density_score: 0.91
 ---
 
 # Gate: chain
-
 ## Definition
-
 | Field | Value |
 |---|---|
 | metric | chain artifact quality score |
 | threshold | 7.0 (publish >= 8.0, golden >= 9.5) |
 | operator | weighted_sum |
 | scope | all artifacts with `kind: chain` |
-
 ## HARD Gates
-
 All must pass (AND logic). Any single failure = REJECT.
-
 | ID | Check | Fail Condition |
 |---|---|---|
 | H01 | Frontmatter parses as valid YAML | Parse error on frontmatter block |
@@ -41,11 +36,8 @@ All must pass (AND logic). Any single failure = REJECT.
 | H08 | Each step has an explicit output type | Step output typed as `any` or unspecified |
 | H09 | Error handling strategy declared | `error_handling` field absent; must be one of: fail_fast, skip, retry, fallback |
 | H10 | No step references a runtime executor | Step contains orchestration logic (loops, parallelism) — chain is prompts only |
-
 ## SOFT Scoring
-
 Weights sum to 100%.
-
 | Dimension | Weight | Criteria |
 |---|---|---|
 | Step atomicity | 1.0 | Each step is one LLM call; no compound logic bundled in a single step |
@@ -60,18 +52,14 @@ Weights sum to 100%.
 | Output schema alignment | 0.5 | Output schema matches the final step's declared output type |
 | Domain specificity | 1.0 | Step prompts and transforms specific to the declared domain problem |
 | Testability | 1.0 | Each step can be unit-tested with mock input/output independently |
-
 ## Actions
-
 | Score | Tier | Action |
 |---|---|---|
 | >= 9.5 | Golden | Publish to pool as golden reference |
 | >= 8.0 | Publish | Publish to pool, add to routing index |
 | >= 7.0 | Review | Flag for improvement before publish |
 | < 7.0 | Reject | Return to author with specific gate failures |
-
 ## Bypass
-
 | Field | Value |
 |---|---|
 | conditions | Proof-of-concept chain during active research spike, not intended for production use |

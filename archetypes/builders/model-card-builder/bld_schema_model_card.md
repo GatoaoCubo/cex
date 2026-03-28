@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 ---
 
 # Schema: model_card
-
 ## Frontmatter Fields
-
 | Field | Type | Required | Default | Source |
 |-------|------|----------|---------|--------|
 | id | string (p02_mc_{provider}_{slug}) | YES | — | CEX naming |
@@ -39,15 +37,12 @@ pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 | keywords | list[string] | REC | — | CEX |
 | linked_artifacts | object | REC | — | CEX |
 | data_source | URL string | YES | — | CEX |
-
 ## Provider Enum
 Valid: anthropic, openai, google, meta, mistral, cohere, deepseek, alibaba, ai21, other
-
 ## Pricing Policy
 Frontmatter uses BASE TIER (lowest published price for standard API access).
 If provider has tiered pricing (e.g., Google <=200K / >200K), use lowest tier.
 Document higher tiers in body Specifications table.
-
 ```yaml
 pricing:
   input: float    # base tier, per 1M tokens, USD. null if open-weight.
@@ -56,9 +51,7 @@ pricing:
   cache_write: float or null  # null if provider has no symmetric cache write
   unit: per_1M_tokens         # ALWAYS this value
 ```
-
 Rule: open-weight = null (not 0). Free commercial tier = 0.00 (not null).
-
 ## Modalities Object
 ```yaml
 modalities:
@@ -68,7 +61,6 @@ modalities:
   audio_input: bool
   pdf_input: bool
 ```
-
 ## Features Object
 ```yaml
 features:
@@ -81,14 +73,12 @@ features:
   fine_tunable: bool
   batch_api: bool
 ```
-
 ## Body Structure (required sections)
 1. `## Boundary` — model_card EH / NAO EH
 2. `## Specifications` — table with Value + Source columns
 3. `## Capabilities` — boolean table matching features object
 4. `## When to Use` — decision table >= 5 rows with alternatives
 5. `## References` — >= 1 official URL
-
 ## Constraints
 - max_bytes: 4096 (body only, excl frontmatter)
 - naming: p02_mc_{provider}_{model_slug}.md

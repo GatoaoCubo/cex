@@ -7,7 +7,6 @@ purpose: Component map of chain — inventory, dependencies, and architectural p
 ---
 
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | step | Single LLM call unit — one prompt in, one output out | chain | required |
@@ -19,9 +18,7 @@ purpose: Component map of chain — inventory, dependencies, and architectural p
 | output_schema | Typed contract defining step output shape | P05/P06 | external |
 | knowledge_card | Domain facts injected into one or more steps | P01 | external |
 | workflow | Runtime orchestrator that may embed this chain as a substep | P12 | consumer |
-
 ## Dependency Graph
-
 ```
 knowledge_card  --produces--> step
 system_prompt   --produces--> step
@@ -33,7 +30,6 @@ context_pass    --produces--> step
 branching_logic --depends-->  data_flow
 workflow        --depends-->  chain
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | knowledge_card | step | produces | domain facts for prompt hydration |
@@ -45,9 +41,7 @@ workflow        --depends-->  chain
 | context_pass | step | produces | shared context available to all steps |
 | branching_logic | data_flow | depends | conditional routing decision |
 | workflow | chain | depends | embeds chain as a prompt substep |
-
 ## Boundary Table
-
 | chain IS | chain IS NOT |
 |----------|-------------|
 | Sequential prompt pipeline — output A feeds input B | A runtime orchestrator managing agents and tools (that is workflow) |
@@ -56,9 +50,7 @@ workflow        --depends-->  chain
 | Defined data flow with typed bindings between steps | A single-task action prompt (that is action_prompt) |
 | Error handling strategy at step level | A step-by-step agent execution protocol (that is instruction) |
 | Composable — consumed by workflows as a substep | Contains agents, tools, or signals |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|-----------|---------|
 | knowledge | knowledge_card, system_prompt | Provide domain context and persona for step prompts |

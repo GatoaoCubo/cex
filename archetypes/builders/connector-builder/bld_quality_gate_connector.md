@@ -15,20 +15,15 @@ density_score: 0.92
 ---
 
 # Gate: connector
-
 ## Definition
-
 | Field | Value |
 |---|---|
 | metric | connector artifact quality score |
 | threshold | 7.0 (publish >= 8.0, golden >= 9.5) |
 | operator | weighted_sum |
 | scope | all artifacts with `kind: connector` |
-
 ## HARD Gates
-
 All must pass (AND logic). Any single failure = REJECT.
-
 | ID | Check | Fail Condition |
 |---|---|---|
 | H01 | Frontmatter parses as valid YAML | Parse error on frontmatter block |
@@ -41,11 +36,8 @@ All must pass (AND logic). Any single failure = REJECT.
 | H08 | Protocol is one of: rest, websocket, grpc, mqtt | `protocol: custom` without documented justification |
 | H09 | Health check strategy defined | `health_check` field absent; connector must document liveness verification |
 | H10 | Transform rules defined for at least one endpoint | Connector passes raw data without any mapping — transforms must be explicit |
-
 ## SOFT Scoring
-
 Weights sum to 100%.
-
 | Dimension | Weight | Criteria |
 |---|---|---|
 | Inbound endpoint completeness | 1.0 | All data the system receives from the external service is documented |
@@ -60,22 +52,16 @@ Weights sum to 100%.
 | Failure isolation | 1.0 | Inbound failure does not cascade to outbound; isolation mechanism documented |
 | Boundary clarity | 1.0 | Explicitly not a client (unidirectional) or MCP server — bidirectionality contract stated |
 | Domain specificity | 1.0 | Endpoints, transforms, and protocols specific to the declared external service |
-
 ## Actions
-
 | Score | Tier | Action |
 |---|---|---|
 | >= 9.5 | Golden | Publish to pool as golden reference |
 | >= 8.0 | Publish | Publish to pool, add to routing index |
 | >= 7.0 | Review | Flag for improvement before publish |
 | < 7.0 | Reject | Return to author with specific gate failures |
-
 ## Bypass
-
 | Field | Value |
 |---|---|
 | conditions | Connector for a third-party service whose webhook schema changes without versioning — inbound schema unstable |
 | approver | Integration owner with written acknowledgment of unstable upstream schema |
 | audit_trail | Bypass reason, external service name, and schema instability report link in frontmatter comment |
-| expiry | 14d — connector must reach >= 7.0 once upstream schema is confirmed stable |
-| never_bypass | H01 (unparseable YAML breaks all tooling), H05 (self-scored gates corrupt quality metrics) |

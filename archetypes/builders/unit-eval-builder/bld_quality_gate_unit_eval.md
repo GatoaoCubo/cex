@@ -19,15 +19,9 @@ tldr: "Validates unit tests for agents and prompts: input, expected output, targ
 ---
 
 ## Definition
-
 A unit eval tests a single agent, prompt, or component in isolation. It defines an input, an expected output or assertion, the component under test, and setup and teardown steps. Unit evals must be deterministic, fast, and independent of external services. This gate ensures every unit eval is traceable, executable, and covers meaningful behavior rather than trivial cases.
-
----
-
 ## HARD Gates
-
 Failure on any HARD gate causes immediate REJECT. No score is computed.
-
 | ID  | Check | Rule |
 |-----|-------|------|
 | H01 | Frontmatter parses | YAML frontmatter is valid and complete with no syntax errors |
@@ -40,13 +34,8 @@ Failure on any HARD gate causes immediate REJECT. No score is computed.
 | H08 | Expected output or assertion | At least one assertion specifies a concrete expected result or a checkable condition |
 | H09 | Target component identified | `target` names a specific artifact (not "the system" or "the model") |
 | H10 | No pipeline testing | Eval tests one component only; no chained multi-step workflows |
-
----
-
 ## SOFT Scoring
-
 Score each dimension 0 or 10. Multiply by weight. Divide total by sum of weights, scale to 0-10.
-
 | Dimension | Weight | Pass Condition |
 |-----------|--------|----------------|
 | Density >= 0.80 | 1.0 | Eval is tight; no filler prose or restatements of the obvious |
@@ -59,29 +48,19 @@ Score each dimension 0 or 10. Multiply by weight. Divide total by sum of weights
 | Regression tracking enabled | 0.5 | `regression_id` or equivalent field links this eval to a known past failure |
 | Execution time reasonable | 0.5 | Expected runtime is documented and is under 30 seconds |
 | Assertions are specific | 1.0 | No vague assertions like "output is correct" or "response is good" |
-
 Sum of weights: 7.5. `soft_score = sum(weight * gate_score) / 7.5 * 10`
-
----
-
 ## Actions
-
 | Score | Action |
 |-------|--------|
 | >= 9.5 | GOLDEN — archive to pool as reference unit eval |
 | >= 8.0 | PUBLISH — safe to run in CI and quality pipelines |
 | >= 7.0 | REVIEW — runnable but coverage or isolation needs improvement |
 | < 7.0 | REJECT — do not run; assertions are ambiguous or component not isolated |
-
----
-
 ## Bypass
-
 | Field | Value |
 |-------|-------|
 | condition | Target component is under active construction and its interface is not yet stable; eval is written speculatively |
 | approver | Engineer who owns the target component |
 | audit_log | Entry required in `.claude/bypasses/unit_eval_{date}.md` with the expected stabilization date |
 | expiry | Until the target component reaches PUBLISH score; eval must be updated and re-gated at that point |
-
 H01 (frontmatter parses) and H05 (quality is null) cannot be bypassed under any condition.

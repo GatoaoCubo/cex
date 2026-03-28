@@ -7,9 +7,7 @@ purpose: Component map of naming_rule — inventory, dependencies, and architect
 ---
 
 # Architecture: naming_rule in the CEX
-
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | frontmatter block | Metadata header (id, kind, pillar, scope, case_style, separator, etc.) | naming-rule-builder | active |
@@ -19,15 +17,12 @@ purpose: Component map of naming_rule — inventory, dependencies, and architect
 | separator_config | Allowed separators and their positional constraints | author | active |
 | version_segment | How version information is encoded within the name | author | active |
 | collision_resolution | Strategy for resolving name conflicts within the scope | author | active |
-
 ## Dependency Graph
-
 ```
 scope_owner     --produces-->  naming_rule  --consumed_by-->  validator
 naming_rule     --enforced_by-->  formatter  --produces-->     canonical_name
 naming_rule     --signals-->      naming_violation
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | scope_owner (orchestrator) | naming_rule | data_flow | scope definition and domain constraints |
@@ -36,9 +31,7 @@ naming_rule     --signals-->      naming_violation
 | naming_rule | code_generator | consumes | generators use patterns to produce compliant names |
 | naming_rule | naming_violation | signals | emitted when a name fails pattern validation |
 | type_def (P06) | naming_rule | dependency | type definitions may reference naming conventions |
-
 ## Boundary Table
-
 | naming_rule IS | naming_rule IS NOT |
 |----------------|-------------------|
 | A formal pattern defining how entities are named within a scope | An abstract type declaration (type_def P06) |
@@ -47,9 +40,7 @@ naming_rule     --signals-->      naming_violation
 | Includes collision resolution for name conflicts | A validation rule checking content, not names (validator P06) |
 | Prescribes prefix, suffix, case, and separator conventions | A runtime configuration parameter (path_config P09) |
 | Versioning-aware when names embed version segments | A changelog or history document |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Scope | frontmatter, scope_owner | Define which entities and domains this rule governs |

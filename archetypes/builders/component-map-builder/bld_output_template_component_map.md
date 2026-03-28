@@ -1,4 +1,5 @@
 ---
+pillar: P00
 id: component-map-builder-output-template
 kind: output_template
 parent: component-map-builder
@@ -6,11 +7,8 @@ version: 1.0.0
 ---
 
 # Output Template — component-map-builder
-
 NOTE: component_map uses YAML format (machine_format: yaml). Output extension is `.yaml`.
-
 ```yaml
----
 id: p08_cmap_{{scope_slug}}
 kind: component_map
 pillar: P08
@@ -36,35 +34,27 @@ interfaces:
 dependencies:
   - {component: "{{comp_1}}", depends_on: "{{dep_1}}", failure_impact: "{{impact_1}}"}
 keywords: [{{keyword_1}}, {{keyword_2}}, {{keyword_3}}]
----
-
 ## Scope
 {{scope_description_and_boundaries}}
-
 ## Components
 | Component | Role | Owner | Status | Version |
 |-----------|------|-------|--------|---------|
 | {{component_1}} | {{role_1}} | {{owner_1}} | {{active|deprecated|planned}} | {{ver_1}} |
 | {{component_2}} | {{role_2}} | {{owner_2}} | {{active|deprecated|planned}} | {{ver_2}} |
-
 ## Connections
 | From | To | Type | Data | Direction |
 |------|-----|------|------|-----------|
 | {{from_1}} | {{to_1}} | {{data_flow|dependency|signal}} | {{data_1}} | {{unidirectional|bidirectional}} |
-
 ## Interfaces
 | Boundary | Components | Contract | Status |
 |----------|-----------|----------|--------|
 | {{boundary_1}} | {{comp_a}} <-> {{comp_b}} | {{contract_1}} | {{active|planned}} |
-
 ## Dependencies
 | Component | Depends On | Failure Impact |
 |-----------|-----------|---------------|
 | {{comp_1}} | {{dep_1}} | {{impact_1}} |
-
 ## Boundaries
 {{where_this_map_ends_and_what_is_out_of_scope}}
-
 ## References
 - {{reference_1}}
 - {{reference_2}}

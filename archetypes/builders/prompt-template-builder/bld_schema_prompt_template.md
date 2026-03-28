@@ -12,19 +12,13 @@ tags: [schema, prompt-template, P03, source-of-truth]
 ---
 
 # Schema — prompt-template-builder
-
 > SOURCE OF TRUTH. All fields in this file MUST appear in OUTPUT_TEMPLATE.md. Zero drift permitted.
-
 ## ID Pattern
-
 ```
 ^p03_pt_[a-z][a-z0-9_]+$
 ```
-
 Examples: `p03_pt_knowledge_card`, `p03_pt_research_synthesis`, `p03_pt_code_review`
-
 ## Frontmatter Fields
-
 | Field | Type | Required | Default | Description |
 |---|---|---|---|---|
 | id | string | YES | — | Unique identifier. Must match ID pattern above |
@@ -44,11 +38,8 @@ Examples: `p03_pt_knowledge_card`, `p03_pt_research_synthesis`, `p03_pt_code_rev
 | tldr | string | YES | — | One-sentence summary for discovery |
 | keywords | list[string] | REC | `[]` | Search keywords distinct from tags |
 | density_score | float | REC | `null` | Content density 0.0-1.0; null until measured |
-
 ## Variable Object
-
 Each item in the `variables` list MUST contain:
-
 | Field | Type | Required | Description |
 |---|---|---|---|
 | name | string | YES | Variable name matching the slot in the template body |
@@ -56,19 +47,14 @@ Each item in the `variables` list MUST contain:
 | required | boolean | YES | Whether the variable must be supplied at render time |
 | default | any or null | YES | Default value; null for required variables |
 | description | string | YES | One sentence describing the variable's purpose |
-
 ## Body Structure
-
 Every `prompt_template` artifact MUST contain these 5 sections in order:
-
 1. `## Purpose` — one paragraph describing what the template produces and its reuse scope
 2. `## Variables Table` — markdown table listing all variables with all 5 object fields
 3. `## Template Body` — the parameterized prompt text in a fenced code block
 4. `## Quality Gates` — table showing H01-H08 gate status for this artifact
 5. `## Examples` — at least one filled example with variable values and rendered output
-
 ## Constraints
-
 | Constraint | Rule |
 |---|---|
 | max_bytes | 8192 bytes per file |
@@ -77,13 +63,10 @@ Every `prompt_template` artifact MUST contain these 5 sections in order:
 | id uniqueness | No two prompt_template artifacts may share the same id |
 | kind lock | The `kind` field MUST be `prompt_template` — never overridden |
 | quality null | `quality: null` is valid for draft artifacts; must be a float before pool submission |
-
 ## Enum Values
-
 ### variable_syntax
 - `mustache` — `{{variable}}` syntax (Mustache, Handlebars, Anthropic-compatible)
 - `bracket` — `[VARIABLE]` syntax (fallback for systems where `{{}}` is reserved)
-
 ### variable.type
 - `string` — plain text
 - `list` — array of items

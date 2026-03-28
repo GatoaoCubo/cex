@@ -15,15 +15,10 @@ density_score: 0.85
 ---
 
 # Gate: Lens
-
 ## Definition
-
 A `lens` is a perspective filter applied to artifact evaluation or routing. It amplifies certain attributes and suppresses others without executing logic. Gates here prevent lenses from claiming capabilities (which belong to agents), enforce honest bias declaration, and require a concrete `applies_to` scope so the lens is never applied indiscriminately.
-
 ## HARD Gates
-
 All HARD gates must pass. Any single failure sets score to 0 and blocks publish.
-
 | ID  | Check | Failure consequence |
 |-----|-------|---------------------|
 | H01 | YAML frontmatter parses without error | Artifact unparseable by tooling |
@@ -35,11 +30,8 @@ All HARD gates must pass. Any single failure sets score to 0 and blocks publish.
 | H07 | `Focus` section present in body | Lens has no defined focus — unusable |
 | H08 | `applies_to` is a list with >= 1 item | Lens has no target scope — unsafe to apply |
 | H09 | `bias` field is explicitly declared (string value or `null` for neutral) | Hidden bias corrupts evaluations |
-
 ## SOFT Scoring
-
 Weights sum to 100%. Each dimension scores 0 or its full weight.
-
 | ID  | Dimension | Weight | Criteria |
 |-----|-----------|--------|----------|
 | S01 | tldr quality | 1.0 | `tldr` <= 160 chars, states what the lens amplifies, not just its name |
@@ -54,9 +46,7 @@ Weights sum to 100%. Each dimension scores 0 or its full weight.
 | S10 | No capability claims | 1.0 | Body contains no phrases like "this lens will execute", "performs", "runs" |
 | S11 | Density >= 0.80 | 1.0 | No filler phrases: "provides a way to", "helps us understand", "in summary" |
 | S12 | Limitations section present | 0.5 | Documents conditions where lens should not be applied |
-
 ## Actions
-
 | Score | Tier | Action |
 |-------|------|--------|
 | >= 9.5 | GOLDEN | Publish to pool + record in memory |
@@ -64,16 +54,12 @@ Weights sum to 100%. Each dimension scores 0 or its full weight.
 | >= 7.0 | REVIEW | Acceptable with documented improvement items |
 | < 7.0 | REJECT | Revise and resubmit — do not publish |
 | 0 (HARD fail) | REJECTED | Fix failing HARD gate(s) first |
-
 ## Bypass
-
 Bypasses are logged and expire automatically.
-
 | Field | Value |
 |-------|-------|
 | condition | Lens is experimental — `applies_to` scope cannot be confirmed until integration testing completes |
 | approver | P02 domain owner |
 | audit_log | Entry required in `records/governance/bypass_log.md` with gate ID, lens id, and test plan reference |
 | expiry | 7 days — `applies_to` must be confirmed or lens moves to DRAFT state |
-
 H01 and H05 cannot be bypassed under any condition.

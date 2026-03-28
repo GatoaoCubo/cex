@@ -7,9 +7,7 @@ purpose: Tools and APIs available for iso_package production
 ---
 
 # Tools: iso-package-builder
-
 ## Production Tools
-
 | Tool | Purpose | When | Status |
 |------|---------|------|--------|
 | brain_query [MCP] | Search existing iso_packages to avoid duplicates | Phase 1 (discover) | CONDITIONAL |
@@ -18,9 +16,7 @@ purpose: Tools and APIs available for iso_package production
 | iso_scaffold.py | Generate package directory skeleton by tier | Phase 2 (compose) | [PLANNED] |
 | token_counter.py | Count tokens in system_instruction.md | Phase 3 (validate) | [PLANNED] |
 | path_scanner.py | Scan files for hardcoded paths | Phase 3 (validate) | [PLANNED] |
-
 ## Data Sources
-
 | Source | Path/URL | Data |
 |--------|----------|------|
 | CEX Schema | P02_model/_schema.yaml | iso_package field definitions, tiers, lp_mapping |
@@ -29,7 +25,6 @@ purpose: Tools and APIs available for iso_package production
 | SEED_BANK | archetypes/SEED_BANK.yaml | Seeds for P02_iso_package |
 | TAXONOMY | archetypes/TAXONOMY_LAYERS.yaml | Layer position (spec), overlaps |
 | agent-builder | archetypes/builders/agent-builder/ | Upstream: agent definition reference |
-
 ## Interim Validation
 No automated validator exists yet. Check each QUALITY_GATES.md gate manually.
 Key checks: YAML parses, id pattern match, kind == iso_package, quality == null,

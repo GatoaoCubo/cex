@@ -1,4 +1,6 @@
 ---
+kind: output_template
+id: bld_output_template_benchmark
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} for benchmark production
@@ -6,9 +8,7 @@ pattern: derives from SCHEMA.md — no extra fields
 ---
 
 # Output Template: benchmark
-
 ```yaml
----
 id: p07_bm_{{metric_slug}}
 kind: benchmark
 pillar: P07
@@ -37,37 +37,30 @@ density_score: {{0.80_to_1.00}}
 linked_artifacts:
   primary: "{{related_builder_or_schema}}"
   related: [{{related_artifact_refs}}]
----
-
 ## Benchmark Overview
 {{what_is_measured_why_and_business_impact}}
-
 ## Methodology
 - **Iterations**: {{iterations}} runs per subject
 - **Warmup**: {{warmup}} runs discarded before measurement
 - **Protocol**: {{step_by_step_measurement_process}}
 - **Statistical test**: {{test_name}} at {{confidence}}% confidence
 - **Outlier handling**: {{how_outliers_are_treated}}
-
 ## Metrics
 | Metric | Unit | Direction | Baseline | Target |
 |--------|------|-----------|----------|--------|
 | {{metric_1}} | {{unit}} | {{direction}} | {{baseline}} | {{target}} |
 | {{metric_2}} | {{unit}} | {{direction}} | {{baseline}} | {{target}} |
-
 ## Environment
 - **Hardware**: {{cpu_ram_disk_network}}
 - **Software**: {{os_runtime_versions}}
 - **Config**: {{relevant_configuration_settings}}
 - **Date**: {{when_baseline_was_measured}}
-
 ## Results Template
 | Percentile | Subject A | Subject B | Delta |
 |------------|-----------|-----------|-------|
 | p50 | — | — | — |
 | p95 | — | — | — |
 | p99 | — | — | — |
-
 ## References
 - {{reference_1}}
 - {{reference_2}}

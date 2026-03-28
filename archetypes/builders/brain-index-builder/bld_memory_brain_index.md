@@ -21,47 +21,21 @@ keywords: [brain-index, hybrid-search, BM25, FAISS, semantic, retrieval, weights
 ---
 
 ## Summary
-
 A hybrid search index combines keyword-based retrieval (BM25) and semantic retrieval (vector similarity) to handle both exact-match and paraphrase queries. The combination outperforms either method alone on mixed query sets, but only if the blend weights are calibrated to the actual query distribution.
-
 Most index configurations use a default 50/50 blend without measuring whether it matches the domain's query patterns. This default is a reasonable starting point but is optimal for almost no real domain.
-
 ## Pattern
-
 **Domain-profiled hybrid index configuration:**
-
 1. Collect a sample of 50-100 representative queries from the target domain.
 2. Classify each query as: exact-match (contains identifiers, code snippets, exact phrases) or paraphrase (contains concepts, questions, natural language descriptions).
 3. Compute the ratio: exact_match_queries / total_queries.
 4. Set BM25 weight = ratio. Set semantic weight = 1 - ratio. (e.g., 60% exact-match -> BM25=0.60, semantic=0.40.)
 5. Validate on a held-out query set: measure recall@5 with configured weights versus 50/50 default.
 6. Set rebuild schedule based on document ingestion rate: daily if >100 new documents/day, weekly if <100.
-
 The rebuild schedule is as important as the initial weights. An index that is not rebuilt loses semantic coverage as new documents are added but not indexed. Stale indexes degrade silently - queries return results but miss newer relevant documents.
-
 ## Anti-Pattern
-
 Building a single index for all document types in a system produces a domain-averaged configuration that is suboptimal for all domains. A system with code documentation (exact-match heavy) and conceptual guides (paraphrase heavy) needs two separate indexes, not one averaged index.
-
 Also avoid skipping the validation step and deploying based on configuration alone. Index recall can look correct in configuration but fail in practice due to vocabulary mismatch, document length distribution, or embedding model fit to the domain.
-
 ## Context
-
 Brain index configuration is P10 (foundations) because search quality is a foundational dependency for all downstream retrieval-augmented operations. A misconfigured index does not produce obvious errors - it produces subtly wrong results that appear plausible but miss the most relevant content.
-
 FAISS indexes require local compute for embedding generation. BM25 indexes are CPU-only. For resource-constrained environments, BM25-heavy configurations reduce infrastructure requirements while maintaining acceptable recall for exact-match-dominant domains.
-
 ## Impact
-
-Domain-profiled weight configuration improved mean recall@5 from 0.61 to 0.79 across 4 tested domains. The improvement was most pronounced in the code/identifier domain (0.64 to 0.91). The profiling procedure requires approximately 2 hours of query collection and 30 minutes of measurement per domain.
-
-## Reproducibility
-
-High for domains with stable query distributions. Moderate for domains with evolving query patterns (requires periodic re-profiling). The classification procedure (exact-match vs paraphrase) has low inter-rater variance when query examples are provided.
-
-## References
-
-- P10 brain_index schema
-- Anti-pattern: single-index-all-domains
-- Anti-pattern: skip-validation-deploy
-- Related: embedding-config-builder, rag-source-builder

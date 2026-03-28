@@ -21,11 +21,8 @@ keywords: [feature_flag, rollout_percentage, kill_switch, default_state, categor
 ---
 
 ## Summary
-
 Feature flags enable gradual rollout and emergency disable without code deployment. The builder must enforce four category types, integer rollout percentages, expiration dates, and kill switch documentation or flags become permanent liabilities that no one knows how to safely disable.
-
 ## Pattern
-
 1. `default_state` accepts only `"on"` or `"off"` — no intermediate values.
 2. `rollout_percentage` is an integer 0-100 with no percent symbol.
 3. `category` is one of four values: `release` (new feature), `experiment` (A/B test), `ops` (operational toggle), `permission` (access control).
@@ -33,9 +30,7 @@ Feature flags enable gradual rollout and emergency disable without code deployme
 5. Ops flags default to `on` and must document a kill switch procedure — the exact steps to disable under incident conditions.
 6. Every artifact includes a `## Lifecycle` section: how the flag is created, monitored, and retired.
 7. Targeting rules (user segment, region, percentage) live in the targeting block, not in the flag description.
-
 ## Anti-Pattern
-
 - `default_state: "maybe"` or `"partial"` — only `"on"` or `"off"` are valid.
 - `rollout_percentage: "50%"` — string with percent symbol fails schema.
 - `category: "feature"` or `"toggle"` — these are not valid category values.
@@ -43,34 +38,8 @@ Feature flags enable gradual rollout and emergency disable without code deployme
 - Omitting kill switch for ops flags means no runbook during incidents.
 - Using a feature flag to represent WHO has access — that is a permission artifact, not a flag.
 - Body exceeding 1536 bytes — P09 has the tightest size limit; every word must earn its place.
-
 ## Context
-
 Applies when: shipping a new feature behind a gate, running an A/B experiment, adding an emergency ops toggle, or restricting access to a capability.
 Does not apply when: the decision is permanent and binary with no rollout phase needed.
 Boundary: feature_flag controls whether a feature exists; permission controls who can use it. Do not conflate.
 Category decision: if the flag will exist beyond 6 weeks permanently, evaluate whether it should be a permission instead.
-
-## Impact
-
-- Gradual rollout via `rollout_percentage` limits blast radius for new features.
-- `expires` date creates forcing function for flag retirement, reducing long-term tech debt.
-- Kill switch documentation enables incident response without needing the original engineer.
-- Clear category taxonomy prevents misuse (using ops flag for experiment, etc.).
-
-## Reproducibility
-
-1. Identify flag category from the use case description.
-2. Set `default_state` based on category: ops=on, all others=off.
-3. Set `rollout_percentage` to initial value (0 for experiments, 1-5 for cautious release, 100 for ops).
-4. Compute `expires` date: release/experiment = today + 14-42 days; ops/permission = today + 90 days review.
-5. Write kill switch procedure for ops flags: specific command or config change to disable.
-6. Write `## Lifecycle` section covering creation, ramp schedule, monitoring metrics, and retirement criteria.
-7. Validate: schema rejects string rollout_percentage, invalid category, and missing expires.
-
-## References
-
-- Pillar: P09 (feature flags and toggles)
-- Category reference table: release/experiment/ops/permission with lifetimes
-- Common mistakes: body size limit, category confusion, stale flags
-- Related builders: permission-builder, experiment-builder

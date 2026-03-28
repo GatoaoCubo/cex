@@ -7,9 +7,7 @@ purpose: Component map of path_config — inventory, dependencies, and architect
 ---
 
 # Architecture: path_config in the CEX
-
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | frontmatter block | Metadata header (id, kind, pillar, domain, platform, scope, etc.) | path-config-builder | active |
@@ -18,15 +16,12 @@ purpose: Component map of path_config — inventory, dependencies, and architect
 | resolution_strategy | How relative paths resolve to absolute paths at runtime | author | active |
 | directory_hierarchy | Parent-child relationships between directories | author | active |
 | validation_rules | Checks for path existence, permissions, and platform compliance | author | active |
-
 ## Dependency Graph
-
 ```
 env_config      --produces-->  path_config  --consumed_by-->  agent
 boot_config     --depends-->   path_config  --consumed_by-->  spawn_config
 path_config     --signals-->   path_resolution_error
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | env_config (P09) | path_config | data_flow | environment variables used in path expansion |
@@ -35,9 +30,7 @@ path_config     --signals-->   path_resolution_error
 | boot_config (P02) | path_config | dependency | boot sequence needs paths for initialization |
 | path_config | path_resolution_error (P12) | signals | emitted when a path fails validation |
 | permission (P09) | path_config | dependency | access control may restrict certain paths |
-
 ## Boundary Table
-
 | path_config IS | path_config IS NOT |
 |----------------|-------------------|
 | A specification of filesystem paths with platform awareness | A generic environment variable store (env_config P09) |
@@ -46,9 +39,7 @@ path_config     --signals-->   path_resolution_error
 | Includes validation for existence and permissions | A runtime behavior parameter (runtime_rule P09) |
 | Documents parent-child directory relationships | A naming convention for artifacts (naming_rule P05) |
 | Resolves relative to absolute using defined strategy | A hardcoded absolute path without expansion |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Environment | env_config, platform_rules | Supply variables and platform constraints |

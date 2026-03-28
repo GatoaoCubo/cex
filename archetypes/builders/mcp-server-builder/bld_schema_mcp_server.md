@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: mcp_server
-
 ## Frontmatter Fields
-
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string (p04_mcp_{server_slug}) | YES | - | Namespace compliance |
@@ -32,17 +30,14 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | quality | null | YES | null | Never self-score |
 | tags | list[string], len >= 3 | YES | - | Must include "mcp_server" |
 | tldr | string <= 160ch | YES | - | Dense summary |
-
 ## ID Pattern
 Regex: `^p04_mcp_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Body Structure (required sections)
 1. `## Overview` — what the server does, use case, who consumes it
 2. `## Tools` — each tool: name, description, parameters (JSON-Schema inline)
 3. `## Resources` — each resource: URI template, description, content type
 4. `## Transport & Auth` — transport config, auth method, connection details
-
 ## Constraints
 - max_bytes: 2048 (body only — compact infrastructure spec)
 - naming: p04_mcp_{server_slug}.md + .yaml (dual file)

@@ -8,13 +8,9 @@ sources: signal-builder MANIFEST.md + SCHEMA.md
 ---
 
 # Domain Knowledge: signal
-
 ## Executive Summary
-
 Signals are atomic JSON runtime notifications — the smallest status exchange unit between agents. Each signal answers one question: "what happened, who emitted it, and when?" with exactly 4 required fields. Unlike handoffs (task instructions) or dispatch_rules (routing policy), signals carry only outcome state — no execution content, no routing logic, no workflow steps.
-
 ## Spec Table
-
 | Property | Value |
 |----------|-------|
 | Pillar | P12 (orchestration) |
@@ -27,9 +23,7 @@ Signals are atomic JSON runtime notifications — the smallest status exchange u
 | quality_score range | 0.0 – 10.0 |
 | timestamp format | ISO 8601 datetime |
 | Emitter | one signal = one event = one emitter |
-
 ## Patterns
-
 | Pattern | Rule |
 |---------|------|
 | Minimal payload | Emit 4 required fields; add optional only when they reduce consumer ambiguity |
@@ -40,9 +34,7 @@ Signals are atomic JSON runtime notifications — the smallest status exchange u
 | satellite field | Lowercase slug preferred: `codex`, `edison`, `shaka` |
 | quality_score | Reflects event outcome quality (9.0 = clean complete, 5.0 = partial) |
 | Immutable once emitted | Never mutate; emit a new signal for updated state |
-
 ## Anti-Patterns
-
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
 | Task instructions in payload | Signal is not a handoff — no execution content |
@@ -52,9 +44,7 @@ Signals are atomic JSON runtime notifications — the smallest status exchange u
 | quality_score outside 0.0–10.0 | Hard schema rejection |
 | Multiple signals per single event | One signal = one event; consolidate into single emission |
 | Payload > 4096 bytes | Exceeds max; trim optional fields |
-
 ## Application
-
 1. Identify the event type: completion, failure/block, or ongoing progress
 2. Set `status` to `complete`, `error`, or `progress`
 3. Set `satellite` to lowercase slug of the emitting agent
@@ -63,9 +53,7 @@ Signals are atomic JSON runtime notifications — the smallest status exchange u
 6. If `status=progress`, add `progress_pct` (0–100)
 7. Add optional fields (task, artifacts, message) only when they add consumer value
 8. Name file `p12_sig_{event}.json`, keep under 4096 bytes
-
 ## References
-
 - Schema: signal SCHEMA.md (P06)
 - Pillar: P12 (orchestration)
 - Boundary: handoff (instructions), dispatch_rule (routing), workflow (step graph) — all distinct from signal

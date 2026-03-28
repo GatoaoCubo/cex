@@ -7,7 +7,6 @@ purpose: Component map of daemon — inventory, dependencies, and architectural 
 ---
 
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | process_definition | Core body: command, args, working_dir, user | daemon-builder | required |
@@ -20,9 +19,7 @@ purpose: Component map of daemon — inventory, dependencies, and architectural 
 | log_config | Log destination, rotation policy, retention | daemon-builder | required |
 | monitoring | Metrics endpoint, alert thresholds, heartbeat interval | daemon-builder | optional |
 | graceful_shutdown | Shutdown command + timeout before SIGKILL | daemon-builder | required |
-
 ## Dependency Graph
-
 ```
 env_config (P09) --provides--> daemon (reads vars, paths, secrets at startup)
 runtime_rule (P09) --constrains--> daemon (timeout, resource limits, retry bounds)
@@ -34,7 +31,6 @@ daemon --may_wrap--> client (P04) (daemon polls external API via client)
 daemon --writes--> log_config (own log sink)
 health_check --monitors--> daemon (probes liveness)
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | env_config | daemon | depends | config vars, secrets, paths |
@@ -44,9 +40,7 @@ health_check --monitors--> daemon (probes liveness)
 | daemon | workflow | consumed_by | liveness gate for dependent steps |
 | daemon | connector | wraps | continuous sync loop |
 | daemon | client | wraps | periodic API poll |
-
 ## Boundary Table
-
 | daemon IS | daemon IS NOT |
 |-----------|---------------|
 | A persistent background process that runs continuously or on schedule | A hook — hooks fire once per event and exit |
@@ -56,9 +50,7 @@ health_check --monitors--> daemon (probes liveness)
 | Runs independently of user interaction | A connector — connectors define integration specs, not lifecycle |
 | Has resource limits and log rotation | A plugin — plugins are composable extensions, not standalone processes |
 | Produces heartbeat signals to the runtime | An mcp_server — mcp_server exposes tools via protocol, daemon is generic process |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Configuration | env_config, runtime_rule | Provide vars, limits, and constraints at startup |

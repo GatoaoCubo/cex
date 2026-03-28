@@ -8,14 +8,11 @@ pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCE
 ---
 
 # Collaboration: dispatch-rule-builder
-
 ## My Role in Crews
 I am a SPECIALIST. I answer ONE question: "which target should receive this kind of task, and under what conditions?"
 I do not execute tasks. I do not define handoff instructions.
 I produce routing policies so orchestrators can dispatch work to the correct target.
-
 ## Crew Compositions
-
 ### Crew: "Full Dispatch Setup"
 ```
   1. dispatch-rule-builder -> "routing rules (keywords -> target -> fallback)"
@@ -23,33 +20,25 @@ I produce routing policies so orchestrators can dispatch work to the correct tar
   3. dag-builder -> "execution order for multi-target dispatch"
   4. handoff-builder -> "delegation instructions for each target"
 ```
-
 ### Crew: "Routing Table Construction"
 ```
   1. component-map-builder -> "inventory of available targets"
   2. dispatch-rule-builder -> "routing rule per domain scope"
   3. interface-builder -> "contracts between router and targets"
 ```
-
 ## Handoff Protocol
-
 ### I Receive
 - seeds: domain scope, target agent/service, keywords (5-12)
 - optional: model preference, priority, confidence threshold, fallback target
-
 ### I Produce
 - dispatch_rule artifact (.yaml frontmatter + .md body, max 3072 bytes)
 - committed to: `cex/P12/examples/p12_dr_{scope}.yaml`
-
 ### I Signal
 - signal: complete (with quality score from QUALITY_GATES)
 - if quality < 8.0: signal retry with failure reasons
-
 ## Builders I Depend On
 - component-map-builder: provides target inventory for routing decisions
-
 ## Builders That Depend On Me
-
 | Builder | Why |
 |---------|-----|
 | handoff-builder | Creates delegation instructions for dispatched targets |

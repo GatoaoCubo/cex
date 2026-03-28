@@ -8,13 +8,9 @@ sources: system-prompt-builder MANIFEST.md + SCHEMA.md
 ---
 
 # Domain Knowledge: system_prompt
-
 ## Executive Summary
-
 System prompts define an LLM agent's permanent identity — who it is, what binary rules govern it, and how it responds. They transform a generic LLM into a focused specialist via persona, ALWAYS/NEVER constraints, knowledge boundaries, and output format definition. Unlike action_prompts (single-shot task execution) or instructions (step-by-step recipes), system prompts carry no task content — only identity, rules, and response shape.
-
 ## Spec Table
-
 | Property | Value |
 |----------|-------|
 | Pillar | P03 |
@@ -31,9 +27,7 @@ System prompts define an LLM agent's permanent identity — who it is, what bina
 | Rules volume | 5–12 ALWAYS + 3–8 NEVER |
 | Identity lines | 8–15 lines (max 25) |
 | quality field | null always — invariant |
-
 ## Patterns
-
 | Pattern | Rule |
 |---------|------|
 | Identity first | Body ALWAYS opens with `## Identity` section — no exceptions |
@@ -44,12 +38,9 @@ System prompts define an LLM agent's permanent identity — who it is, what bina
 | rules_count integrity | Count numbered rules in body; write that exact integer in frontmatter |
 | No task instructions | system_prompt = identity only; task content belongs in action_prompt |
 | id == filename stem | `p03_sp_scout.md` → `id: p03_sp_scout` |
-
 - **Body sections**: Identity → Rules → Output Format → Constraints
 - **Rules format**: numbered list, each prefixed ALWAYS or NEVER
-
 ## Anti-Patterns
-
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
 | Task instructions in system prompt | Conflates identity with execution; breaks separation of concerns |
@@ -60,9 +51,7 @@ System prompts define an LLM agent's permanent identity — who it is, what bina
 | Body > 4096 bytes | CEX size limit exceeded; trim rules and identity prose |
 | "You are" language in skill files | Persona belongs in system_prompt only |
 | Omitting output_format_type | Consumer cannot predict response shape |
-
 ## Application
-
 1. Research the target agent's domain to define expertise and knowledge boundaries
 2. Write persona line: `You are **{name}**, a specialized {domain} agent focused on {mission}.`
 3. Define `knowledge_boundary`: positive scope (what agent knows) + negative scope (what it does not)
@@ -72,9 +61,6 @@ System prompts define an LLM agent's permanent identity — who it is, what bina
 7. Write `## Constraints`: knowledge boundary, delegation rules, exclusions
 8. Fill all 16 required frontmatter fields; set `quality: null`
 9. Verify body ≤ 4096 bytes, `id` == filename stem
-
 ## References
-
 - Schema: system_prompt SCHEMA.md (P06) v2.0
 - Pillar: P03 (prompts)
-- Boundary: action_prompt (task execution), instruction (procedural recipe), prompt_template (variable mechanics)

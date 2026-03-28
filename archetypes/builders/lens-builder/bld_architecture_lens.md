@@ -7,9 +7,7 @@ purpose: Component map of lens — inventory, dependencies, and architectural po
 ---
 
 # Architecture: lens in the CEX
-
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | frontmatter block | 20-field metadata header (id, kind, pillar, domain, focus, bias, etc.) | lens-builder | active |
@@ -19,15 +17,12 @@ purpose: Component map of lens — inventory, dependencies, and architectural po
 | applies_to | List of artifact kinds this lens can be applied to | author | active |
 | interpretation_rules | How filtered data should be read through this perspective | author | active |
 | weight | Relative importance of this perspective when combined with other lenses | author | active |
-
 ## Dependency Graph
-
 ```
 knowledge_card  --produces-->  lens  --consumed_by-->  agent
 scoring_rubric  --depends-->   lens  --applied_to-->   artifact
 lens            --signals-->   analysis_result
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | knowledge_card (P01) | lens | data_flow | domain expertise informing the perspective |
@@ -36,9 +31,7 @@ lens            --signals-->   analysis_result
 | lens | analysis_result | produces | filtered interpretation of the examined artifact |
 | scoring_rubric (P07) | lens | dependency | rubric dimensions may align with lens focus areas |
 | mental_model (P02) | lens | dependency | agent mental model selects which lenses to apply |
-
 ## Boundary Table
-
 | lens IS | lens IS NOT |
 |---------|-------------|
 | A declared perspective with focus, filters, and bias | An autonomous entity with capabilities (agent P02) |
@@ -47,9 +40,7 @@ lens            --signals-->   analysis_result
 | Composable — multiple lenses can layer on one artifact | An evaluation framework with scoring (scoring_rubric P07) |
 | Explicit about its own bias and limitations | A hidden or undeclared analytical assumption |
 | Scoped to specific artifact kinds via applies_to | A universal filter applied to everything indiscriminately |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Context | knowledge_card, mental_model | Supply domain expertise and selection criteria for the lens |

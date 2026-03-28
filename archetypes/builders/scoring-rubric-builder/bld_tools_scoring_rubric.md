@@ -7,14 +7,12 @@ purpose: Tools available for scoring_rubric production
 ---
 
 # Tools: scoring-rubric-builder
-
 ## Production Tools
 | Tool | Purpose | When | Status |
 |------|---------|------|--------|
 | brain_query [MCP] | Search existing scoring_rubrics | Phase 1 (check duplicates) | CONDITIONAL |
 | validate_artifact.py | Validate any artifact kind | Phase 3 | [PLANNED] |
 | cex_forge.py | Generate artifact from seeds | Alternative compose | [PLANNED] |
-
 ## Data Sources
 | Source | Path/URL | Data |
 |--------|----------|------|
@@ -24,7 +22,6 @@ purpose: Tools available for scoring_rubric production
 | Golden tests | P07_evals/examples/p07_gt_*.md | Calibration anchors |
 | SEED_BANK | archetypes/SEED_BANK.yaml | P07_scoring_rubric seeds |
 | validate_kc.py | _tools/validate_kc.py | 5D rubric reference implementation |
-
 ## Interim Validation
 Manually check each QUALITY_GATES.md gate against produced artifact.
 - [ ] YAML parses

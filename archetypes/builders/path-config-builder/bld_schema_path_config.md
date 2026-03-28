@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: path_config
-
 ## Frontmatter Fields
-
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string (p09_path_{scope_slug}) | YES | - | Namespace compliance |
@@ -30,17 +28,14 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | base_dir | string | REC | - | Root directory for relative paths |
 | dir_count | integer | REC | - | Number of directory paths |
 | file_count | integer | REC | - | Number of file paths |
-
 ## ID Pattern
 Regex: `^p09_path_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Body Structure (required sections)
 1. `## Overview` — scope, purpose, platform, base directory, consumers
 2. `## Path Catalog` — table: name, type (dir/file), platform, default, required, notes
 3. `## Directory Hierarchy` — ASCII tree showing parent-child path relationships
 4. `## Platform Notes` — platform-specific path differences, resolution rules
-
 ## Constraints
 - max_bytes: 3072 (body only)
 - naming: p09_path_{scope_slug}.yaml

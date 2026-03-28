@@ -11,7 +11,6 @@ tags: [config, type-def, P09, naming, constraints]
 ---
 
 ## Naming Convention
-
 | Element | Rule | Example |
 |---|---|---|
 | File name | `p06_td_{type_slug}.yaml` | `p06_td_agent_score.yaml` |
@@ -20,17 +19,13 @@ tags: [config, type-def, P09, naming, constraints]
 | `type_name` | PascalCase, no spaces | `AgentScore` |
 | Acronyms in slug | Expand or lowercase fully | `HTTPStatus` → `http_status` |
 | Multi-word | Underscore separator | `p06_td_user_profile_id` |
-
 ## File Paths
-
 | Context | Path |
 |---|---|
 | Canonical store | `archetypes/spec/type_defs/p06_td_{type_slug}.yaml` |
 | Builder home | `archetypes/builders/type-def-builder/` |
 | Domain subfolder (optional) | `archetypes/spec/type_defs/{domain}/p06_td_{type_slug}.yaml` |
-
 ## Size Limits
-
 | Constraint | Value |
 |---|---|
 | `max_bytes` | 3072 |
@@ -38,9 +33,7 @@ tags: [config, type-def, P09, naming, constraints]
 | `tldr` max length | 120 chars |
 | `tags` minimum | 2 entries |
 | `examples` minimum | 1 entry |
-
 ## Base Type Enum (Controlled Vocabulary)
-
 | Value | Represents |
 |---|---|
 | `string` | UTF-8 text |
@@ -54,9 +47,7 @@ tags: [config, type-def, P09, naming, constraints]
 | `intersection` | All of multiple types (allOf) |
 | `tuple` | Fixed-length ordered sequence with per-position types |
 | `record` | Map with typed keys and typed values |
-
 ## Constraint Types
-
 | Constraint Key | Applicable base_types | Value type |
 |---|---|---|
 | `min_length` | string | integer |
@@ -75,9 +66,7 @@ tags: [config, type-def, P09, naming, constraints]
 | `required_keys` | object, record | array[string] |
 | `key_type` | record | base_type string |
 | `value_type` | record | base_type string or type_ref |
-
 ## Composition Mode Enum
-
 | Value | Semantics |
 |---|---|
 | `union` | Exactly one member type must match |

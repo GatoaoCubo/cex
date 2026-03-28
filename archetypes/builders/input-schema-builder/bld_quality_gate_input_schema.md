@@ -15,22 +15,15 @@ density_score: 0.89
 ---
 
 # Gate: Input Schema
-
 ## Definition
-
 | Field     | Value |
 |-----------|-------|
 | metric    | weighted soft score + all hard gates pass |
 | threshold | 7.0 to publish; 8.0 for pool; 9.5 for golden |
 | operator  | AND (all hard) + weighted average (soft) |
 | scope     | any artifact with `kind: input_schema` |
-
----
-
 ## HARD Gates
-
 All must pass. Any failure = immediate reject.
-
 | ID  | Check | Fail Condition |
 |-----|-------|----------------|
 | H01 | Frontmatter parses as valid YAML | Parse error on any field |
@@ -41,13 +34,8 @@ All must pass. Any failure = immediate reject.
 | H06 | All required fields present | Missing: fields, required, version, or owner |
 | H07 | Every field entry has `type` and `description` | Any field missing type or description |
 | H08 | All fields listed in `required` exist in `fields` | Required list names a field not defined in fields |
-
----
-
 ## SOFT Scoring
-
 Total weights sum to 100%.
-
 | ID  | Dimension | Weight | 10 pts | 5 pts | 0 pts |
 |-----|-----------|--------|--------|-------|-------|
 | S01 | Type precision | 1.0 | Types use constrained vocabulary (string, integer, float, boolean, list, object, enum) | Types present but use freeform labels | Types missing or `any` used |
@@ -60,28 +48,18 @@ Total weights sum to 100%.
 | S08 | Unilaterality enforced | 1.0 | Schema defines input only; no output fields included | Mostly unilateral; minor output leakage | Bilateral — mixes input and output |
 | S09 | Naming convention | 0.5 | All field names are snake_case | Mostly snake_case with exceptions | camelCase or mixed throughout |
 | S10 | Owner linkage | 0.5 | `owner` field references a specific agent or service | Owner field present but generic | No owner |
-
 **Score = sum(pts * weight) / sum(max_pts * weight) * 10**
-
----
-
 ## Actions
-
 | Score | Tier | Action |
 |-------|------|--------|
 | >= 9.5 | Golden | Publish to pool as golden input contract |
 | >= 8.0 | Skilled | Publish to pool + log pattern |
 | >= 7.0 | Learning | Use but flag for improvement |
 | < 7.0 | Rejected | Return to author with gate report |
-
----
-
 ## Bypass
-
 | Field | Value |
 |-------|-------|
 | Conditions | Rapidly evolving API where field set is not yet stable; schema explicitly marked `draft` |
 | Approver | Owner agent lead |
 | Audit trail | `bypass_reason` + `draft: true` both required in frontmatter |
 | Expiry | Draft status expires after 14 days; must reach H-gate compliance or be deprecated |
-| Never bypass | H01 (YAML parse), H05 (quality null), H07 (every field must have type + description — untyped contracts are unusable) |

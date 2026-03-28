@@ -7,7 +7,6 @@ purpose: Component map of feature_flag — inventory, dependencies, and architec
 ---
 
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | flag_id | Unique identifier for the flag; used by consumers to query state | feature_flag | required |
@@ -19,9 +18,7 @@ purpose: Component map of feature_flag — inventory, dependencies, and architec
 | kill_switch | Emergency override that forces flag off regardless of rollout state | feature_flag | required |
 | fallback_default | Value returned when evaluation fails or flag is undefined | feature_flag | required |
 | evaluation_context | Runtime data (user ID, env, request metadata) used by targeting rules | feature_flag | required |
-
 ## Dependency Graph
-
 ```
 feature_flag --depends-->  guardrail (P11)
 feature_flag --produces--> agent (P02)
@@ -30,7 +27,6 @@ feature_flag --produces--> skill (P04)
 kill_switch   --signals-->  feature_flag
 targeting_rules --depends--> evaluation_context
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | guardrail (P11) | feature_flag | depends | safety rules constraining flag behavior and kill-switch policy |
@@ -39,9 +35,7 @@ targeting_rules --depends--> evaluation_context
 | feature_flag | skill (P04) | produces | optional phase enablement within skill execution |
 | kill_switch | feature_flag | signals | emergency-off override forces disabled state |
 | evaluation_context | targeting_rules | data_flow | runtime metadata used to resolve cohort and percentage rules |
-
 ## Boundary Table
-
 | feature_flag IS | feature_flag IS NOT |
 |-----------------|---------------------|
 | A logical on/off toggle for a named feature | A generic configuration variable (that is env_config) |
@@ -50,9 +44,7 @@ targeting_rules --depends--> evaluation_context
 | Capable of gradual canary rollout (1% → 10% → 100%) | A filesystem path or infrastructure variable |
 | Equipped with a kill switch for emergency disable | A timeout or retry rule governing technical behavior |
 | Classified by category: release, experiment, ops, permission | A permission artifact controlling read/write access |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|-----------|---------|
 | Identity | flag_id, flag_category | Name and classify the flag for discovery and routing |

@@ -8,13 +8,9 @@ sources: mental-model-builder MANIFEST.md + SCHEMA.md, cognitive science, BDI ar
 ---
 
 # Domain Knowledge: mental_model
-
 ## Executive Summary
-
 Mental models are design-time cognitive blueprints for agents — structured YAML artifacts encoding routing rules, decision trees, priorities, heuristics, and domain boundaries. Each mental model belongs to exactly ONE agent and defines how that agent thinks, not what it does. They differ from agents (which have capabilities and tools), routers (which route tasks between components), system prompts (which define persona), and P10 runtime state (which is ephemeral) by being static, versioned cognitive maps loaded at agent boot.
-
 ## Spec Table
-
 | Property | Value |
 |----------|-------|
 | Pillar | P02 (design-time spec) |
@@ -29,9 +25,7 @@ Mental models are design-time cognitive blueprints for agents — structured YAM
 | Quality field | always `null` |
 | Min routing rules | 3 |
 | Min decision tree conditions | 2 |
-
 ## Patterns
-
 | Pattern | Application |
 |---------|-------------|
 | Routing specificity | Keywords must be concrete nouns/verbs, never vague categories |
@@ -41,9 +35,7 @@ Mental models are design-time cognitive blueprints for agents — structured YAM
 | Heuristic formulation | "when X, prefer Y because Z" — actionable, not philosophical |
 | Domain map scoping | Explicit covers/routes_to prevents boundary drift |
 | Personality coherence | tone + verbosity + risk_tolerance must be internally consistent |
-
 ## Anti-Patterns
-
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
 | `pillar: P10` on a mental_model | P10 is runtime state; mental_model is design-time P02 |
@@ -53,9 +45,7 @@ Mental models are design-time cognitive blueprints for agents — structured YAM
 | Generic heuristics | Must reflect actual agent edge cases, not platitudes |
 | Mixing agent identity into mental_model | agent-builder owns identity; mental_model owns cognition |
 | Vague keywords ("stuff", "things") | No routing signal; use domain-specific terms |
-
 ## Application
-
 1. Identify target agent slug (e.g., `research_agent` -> `p02_mm_research_agent`)
 2. Write frontmatter: all 14 required fields; set `quality: null`, `pillar: P02`
 3. Define `routing_rules`: minimum 3 entries with keywords, action, confidence
@@ -64,9 +54,7 @@ Mental models are design-time cognitive blueprints for agents — structured YAM
 6. Write `heuristics` as concise rules for domain-specific edge cases
 7. Define `domain_map`: explicit scope IN and OUT boundaries
 8. Validate: body <= 2048 bytes, id == filename stem, 9 HARD + 12 SOFT gates
-
 ## References
-
 - mental-model-builder SCHEMA.md v1.0.0
 - Johnson-Laird 1983 — Mental Models
 - BDI architecture — Belief-Desire-Intention agent model

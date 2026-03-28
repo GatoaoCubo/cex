@@ -21,31 +21,22 @@ keywords: [connector, bidirectional, webhook, idempotency, health check, protoco
 ---
 
 ## Summary
-
 A client makes outbound calls only. A connector makes outbound calls and receives inbound calls (webhooks, callbacks, event streams). This creates two failure modes unique to connectors: duplicate processing from webhook retries, and silent failure when the inbound endpoint goes offline. Building a client when a connector is needed forces idempotency and health monitoring to be retrofitted — consistently more expensive than specifying them upfront.
-
 ## Pattern
-
 **Use connector for bidirectional; client for outbound-only. Declare idempotency and health_check at spec time.**
-
 Pattern selection: client = outbound HTTP calls + synchronous responses only. Connector = outbound calls AND inbound calls (webhooks, event subscriptions, callbacks).
-
 Idempotency strategy for inbound paths:
 - Extract unique event ID (most providers include event_id or X-Request-ID)
 - Check against deduplication store before processing
 - Acknowledge immediately (return 200); process asynchronously
 - Retain event IDs for 24+ hours (covers all major provider retry windows)
-
 Health check (required):
 - Outbound: ping external health endpoint or make a minimal authenticated request
 - Inbound: verify webhook endpoint reachable + returns expected challenge response
 - Frequency: every 60s; alert after 3 consecutive failures
 - Must be a named endpoint in the spec, not a comment
-
 Direction annotation: every endpoint labeled inbound or outbound. Undirected endpoints make the data mapping section ambiguous.
-
 ## Anti-Pattern
-
 - Missing `## Data Mapping` section (required; inbound field → internal schema, outbound internal → external schema).
 - No idempotency on inbound endpoints (webhook retries create duplicates).
 - No health_check (silent failure; detection falls to downstream data quality).
@@ -53,28 +44,9 @@ Direction annotation: every endpoint labeled inbound or outbound. Undirected end
 - Endpoints without direction annotation (S04 fail).
 - No inbound endpoints but built as connector — build a client instead.
 - Missing retry on outbound paths (exponential backoff, retryable 5xx only).
-
 ## Context
-
 Bidirectional vs. unidirectional is the first design question. Common patterns:
 - Request-Webhook (rest, outbound + inbound): Stripe, Shopify, Twilio
 - Event Stream (websocket, full-duplex): Slack, Discord
 - Two-Way Sync (rest, outbound + inbound): CRM to ERP
 - Pub-Sub (mqtt/amqp): IoT devices, message brokers
-
-Data mapping section is the connector's transformation contract: inbound field → internal field + type; outbound internal field → external field + type. Fields not listed are either dropped or passed through — declare which. Transform declarations: name the transform function for any field requiring more than renaming (currency conversion, timestamp normalization, enum mapping).
-
-## Impact
-
-Idempotency on inbound paths and health_check are the two highest-leverage additions a connector spec has over a client spec. Both prevent failures that produce no immediate error — only incorrect data or silent service degradation, which are expensive to diagnose. Applies to the majority of modern SaaS APIs (payment processors, communication platforms, CRMs, ERPs).
-
-## Reproducibility
-
-Applies to any bidirectional integration regardless of protocol or language. The idempotency pattern (extract event_id, deduplicate, acknowledge-then-process) works identically for REST webhooks, websocket messages, and event streams. Any connector that cannot report its own health is operationally blind.
-
-## References
-
-- Builder domain: connector, P04
-- Related builders: client-builder (outbound-only), interface-builder (contract only)
-- Idempotency pattern: extract event_id + dedup store + acknowledge-before-process
-- Integration patterns: MEMORY.md > Integration Patterns (existing)

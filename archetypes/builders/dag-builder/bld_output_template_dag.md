@@ -1,4 +1,6 @@
 ---
+kind: output_template
+id: bld_output_template_dag
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} that the LLM fills to produce a dag
@@ -6,12 +8,9 @@ pattern: every field here exists in SCHEMA.md; template derives, never invents
 ---
 
 # Output Template: dag
-
 Naming pattern: `p12_dag_{pipeline}.yaml`
 Filename: `p12_dag_{{pipeline_slug}}.yaml`
-
 ```yaml
----
 id: p12_dag_{{pipeline_slug}}
 kind: dag
 lp: P12
@@ -48,9 +47,7 @@ keywords: [{{keyword_1}}, {{keyword_2}}]
 linked_artifacts:
   primary: "{{primary_ref_or_omit}}"
   related: [{{related_refs_or_omit}}]
----
 ```
-
 ## Derivation Notes
 - Required fields (id through tldr) plus nodes and edges form the minimum valid DAG
 - `execution_order` is the topologically sorted representation of nodes+edges

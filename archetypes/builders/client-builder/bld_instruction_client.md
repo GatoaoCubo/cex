@@ -8,7 +8,6 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 ---
 
 # Instructions: How to Produce a client
-
 ## Phase 1: RESEARCH
 1. Identify the external API to consume and its primary domain (payment, search, deploy, etc.)
 2. Map every endpoint the client uses: HTTP method, path, query params, and return types
@@ -18,7 +17,6 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 6. Determine serialization format: json, xml, or protobuf
 7. Check for existing client artifacts to avoid duplicates
 8. Confirm API slug for id: snake_case, lowercase, no hyphens
-
 ## Phase 2: COMPOSE
 1. Read SCHEMA.md — source of truth for all fields
 2. Read OUTPUT_TEMPLATE.md — fill {{vars}} following SCHEMA constraints
@@ -31,7 +29,6 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 9. Write Error Handling section: HTTP status code mapping to client behavior
 10. Verify body <= 1024 bytes
 11. Verify id matches `^p04_cl_[a-z][a-z0-9_]+$`
-
 ## Phase 3: VALIDATE
 1. Check QUALITY_GATES.md — verify each HARD gate manually
 2. Confirm YAML frontmatter parses without errors

@@ -27,33 +27,22 @@ density_score: 0.88
 ---
 
 ## Context
-
 The learning-record-builder produces `learning_record` artifacts (P10) — persistent, structured captures of experience that accumulate into system memory. Learning records differ from knowledge cards (atomic external facts), session state (ephemeral runtime data), and axioms (abstract truths): a learning record encodes what was tried, what happened, and what to do or avoid next time.
-
 **Inputs:**
-
 - `$experience_description (required) - string - "What was attempted — the task, action, or scenario"`
 - `$outcome (required) - string - "What happened — success, failure, or partial result with observable evidence"`
 - `$context (required) - string - "Domain, component, or workflow where this experience occurred"`
 - `$patterns_observed (optional) - list[string] - "Behaviors or approaches that produced good results"`
 - `$antipatterns_observed (optional) - list[string] - "Behaviors or approaches that caused problems"`
 - `$score (optional) - float[0.0-10.0] - "Objective impact score; 0.0-10.0 scale"`
-
 **Output:** A single `learning_record` artifact, max 3KB, density >= 0.80, with 15 required + 7 extended frontmatter fields and body sections covering summary, pattern, anti-pattern, context, impact, and reproducibility.
-
 **Boundary check before proceeding:**
 - Content is a factual external reference (API spec, research finding) → route to knowledge-card-builder
 - Content is transient runtime state → do not persist, discard
 - Content is experiential and worth retaining across sessions → proceed
-
----
-
 ## Phases
-
 ### Phase 1: Analyze
-
 **Action:** Parse the raw experience into classified, structured components.
-
 1. Identify the **task or scenario**: what was attempted, not just what happened.
 2. Classify `outcome` as exactly one of: `SUCCESS`, `PARTIAL`, `FAILURE`.
 3. Extract **evidence**: the concrete observable signal that defines the outcome (error message, metric delta, test result, human judgment). Evidence must be observable, not interpretive.
@@ -66,13 +55,9 @@ The learning-record-builder produces `learning_record` artifacts (P10) — persi
 6. Identify `anti_patterns`: specific failures with observable symptoms.
 7. Check for existing learning records covering the same experience to avoid duplicates.
 8. Determine `reproducibility`: `HIGH` (same inputs reliably produce same outcome), `MEDIUM` (likely but context-dependent), `LOW` (situational, unlikely to recur identically).
-
 **Verification:** Complete this sentence: "[Actor] attempted [action] in [context] and observed [outcome evidence] resulting in score [N]."
-
 ### Phase 2: Compose
-
 **Action:** Write all frontmatter fields and body sections within the 3KB size limit.
-
 1. Read `SCHEMA.md` — source of truth for all 15 required + 7 extended fields.
 2. Read `OUTPUT_TEMPLATE.md` — fill every `{{var}}` following SCHEMA constraints.
 3. Fill frontmatter: all 15 required + 7 extended fields (`null` is valid for optional extended fields).
@@ -85,7 +70,6 @@ The learning-record-builder produces `learning_record` artifacts (P10) — persi
 10. Write `## Context` — environment, satellite/agent, timing, constraints that bound this experience.
 11. Write `## Impact` — measurable outcomes: time saved/lost, error rates, score deltas.
 12. Write `## Reproducibility` — conditions that must hold for reproduction, confidence level, caveats.
-
 Density check pseudocode:
 ```
 useful_items = count(pattern_steps) + count(antipattern_steps)
@@ -93,13 +77,9 @@ total_sentences = count_sentences(body)
 density = useful_items / total_sentences
 # if density < 0.80: remove filler sentences, consolidate redundant items
 ```
-
 **Verification:** Every pattern step says what to do. Every anti-pattern step states the failure mode it causes. Total artifact <= 3KB.
-
 ### Phase 3: Validate
-
 **Action:** Run all HARD gates from `QUALITY_GATES.md`. Fix any failure before output.
-
 | Gate | Check |
 |------|-------|
 | H01 | YAML frontmatter parses without error |
@@ -111,88 +91,6 @@ density = useful_items / total_sentences
 | H07 | `score` is a float in range 0.0–10.0 |
 | H08 | Artifact body is <= 3KB |
 | H09 | `## Pattern` contains at least one actionable step |
-
 Score SOFT gates from `QUALITY_GATES.md`. If soft score < 8.0, revise in the same pass.
-
 **Cross-check:** Is every pattern concrete (not vague advice)? Is every anti-pattern specific with a named failure mode?
-
 ### Phase 4: Output
-
-**Action:** Emit the final artifact at the correct path.
-
-1. Write file to the path defined in `CONFIG.md` for learning_record artifacts.
-2. Confirm filename stem matches `id` field.
-3. Confirm all 6 body sections are present and non-empty.
-4. Confirm density >= 0.80 by inspection.
-
----
-
-## Output Contract
-
-```
----
-id: {{learning_record_id_per_schema}}
-kind: learning_record
-pillar: P10
-version: 1.0.0
-created: {{YYYY-MM-DD}}
-updated: {{YYYY-MM-DD}}
-author: {{author}}
-domain: {{domain}}
-outcome: {{SUCCESS|PARTIAL|FAILURE}}
-score: {{0.0-10.0}}
-reproducibility: {{HIGH|MEDIUM|LOW}}
-status: active
-tags: [learning-record, P10, {{domain_tag}}, {{outcome_tag}}]
-quality: null
----
-
-## Summary
-{{dense_2_to_3_sentence_overview}}
-
-## Pattern
-{{numbered_actionable_steps_that_worked}}
-
-## Anti-Pattern
-{{numbered_failures_with_observable_symptoms_and_failure_modes}}
-
-## Context
-{{environment_agent_timing_constraints}}
-
-## Impact
-{{measurable_outcomes_time_errors_score_deltas}}
-
-## Reproducibility
-{{conditions_confidence_caveats}}
-```
-
----
-
-## Validation
-
-- [ ] `kind` is literal string `learning_record`
-- [ ] `quality` is `null`
-- [ ] `outcome` is one of: SUCCESS, PARTIAL, FAILURE (uppercase)
-- [ ] `score` is a float 0.0–10.0
-- [ ] All 15 required frontmatter fields present and non-empty
-- [ ] Every pattern step is actionable ("do X")
-- [ ] Every anti-pattern step states the failure mode it causes
-- [ ] All 6 body sections present and non-empty
-- [ ] Artifact body <= 3KB
-- [ ] Soft gate score >= 8.0 before output
-
----
-
-## Metacognition
-
-**Does:**
-- Capture experiences as reusable structured memory
-- Distinguish patterns (actionable: do this) from anti-patterns (preventive: avoid this)
-- Score impact and reproducibility to enable future filtering
-
-**Does NOT:**
-- Capture external factual knowledge — route to knowledge-card-builder
-- Persist ephemeral session state — discard it
-- Prescribe system changes — only documents what was learned
-
-**Chaining:** [task execution / postmortem / retrospective] -> THIS -> [memory index update / pattern promotion to axiom]

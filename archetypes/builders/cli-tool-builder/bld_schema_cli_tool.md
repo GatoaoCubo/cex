@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: cli_tool
-
 ## Frontmatter Fields
-
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string (p04_cli_{tool_slug}) | YES | - | Namespace compliance |
@@ -33,17 +31,14 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | interactive | boolean | REC | false | Has interactive mode |
 | env_vars | list[string] | REC | - | Environment variables used |
 | platforms | list[enum: linux, macos, windows] | REC | - | Supported platforms |
-
 ## ID Pattern
 Regex: `^p04_cli_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Body Structure (required sections)
 1. `## Overview` — what the tool does, use case, who runs it
 2. `## Commands` — each command: syntax, flags, args, behavior
 3. `## Output` — output format, exit codes, stdout vs stderr
 4. `## Configuration` — config file, env vars, defaults
-
 ## Constraints
 - max_bytes: 1024 (body only — compact tool spec)
 - naming: p04_cli_{tool_slug}.md (single file)

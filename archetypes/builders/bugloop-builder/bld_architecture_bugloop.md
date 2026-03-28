@@ -7,7 +7,6 @@ purpose: Component map of bugloop — inventory, dependencies, and architectural
 ---
 
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | detect | Trigger evaluation — pattern matching against failure signals | bugloop | required |
@@ -19,9 +18,7 @@ purpose: Component map of bugloop — inventory, dependencies, and architectural
 | test_suite | External golden tests consumed by verify phase | P07 | external |
 | quality_gate | External pass/fail barrier that feeds detect trigger | P11 | external |
 | validator | Implements the concrete detection check logic | P06 | external |
-
 ## Dependency Graph
-
 ```
 quality_gate    --signals-->  detect
 validator       --signals-->  detect
@@ -33,7 +30,6 @@ fix             --depends-->  test_suite
 verify          --depends-->  test_suite
 escalation      --produces--> rollback_policy
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | quality_gate | detect | signals | failure event with error class |
@@ -45,9 +41,7 @@ escalation      --produces--> rollback_policy
 | fix | test_suite | depends | test run request |
 | verify | test_suite | depends | assertion evaluation |
 | escalation | rollback_policy | produces | escalation target + revert trigger |
-
 ## Boundary Table
-
 | bugloop IS | bugloop IS NOT |
 |------------|----------------|
 | Automated detect-fix-verify correction cycle | A pass/fail quality barrier (that is quality_gate) |
@@ -56,9 +50,7 @@ escalation      --produces--> rollback_policy
 | Defines escalation path when retries exhaust | A freshness or archive policy (that is lifecycle_rule) |
 | Produces rollback on terminal failure | The implementation of the detection check (that is validator) |
 | Reactive — responds to failure events | Proactive — continuously improving without failure trigger |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|-----------|---------|
 | trigger | detect, quality_gate (external), validator (external) | Identify that a known failure class has occurred |

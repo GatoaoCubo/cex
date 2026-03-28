@@ -1,4 +1,6 @@
 ---
+kind: examples
+id: bld_examples_action_prompt
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of action_prompt artifacts
@@ -6,14 +8,10 @@ pattern: few-shot learning — LLM reads these before producing
 ---
 
 # Examples: action-prompt-builder
-
 ## Golden Example
-
 INPUT: "Create action prompt for extracting product metrics from marketplace scrape data"
-
 OUTPUT:
 ```yaml
----
 id: p03_ap_extract_product_metrics
 kind: action_prompt
 pillar: P03
@@ -42,26 +40,21 @@ quality: null
 tags: [action_prompt, marketplace, metrics, extraction, research]
 tldr: "Extract and normalize product metrics from raw marketplace scrape into structured JSON for comparison"
 density_score: 0.92
----
 ```
-
 ## Context
 Marketplace scrapes return heterogeneous formats per platform. This prompt normalizes
 raw scrape data into a consistent schema for cross-marketplace product comparison.
 Purpose: enable pricing and competitive analysis across ML, Shopee, Amazon BR.
-
 ## Input
 | Item | Type | Format | Required |
 |------|------|--------|----------|
 | scrape_data | JSON object | Raw marketplace API/scrape response | YES |
 | marketplace | enum string | mercado_livre, shopee, amazon_br | YES |
-
 ## Execution
 1. Identify marketplace-specific field mappings for price, rating, reviews, seller
 2. Extract each metric, applying format normalization (comma->dot, percentage->decimal)
 3. Set missing fields to null (never infer)
 4. Return normalized JSON object
-
 ## Output
 Format: JSON
 Structure:
@@ -74,13 +67,11 @@ Structure:
   "availability": true
 }
 ```
-
 ## Validation
 - All 5 output fields present (null OK for missing)
 - price_brl is float or null (never string)
 - rating normalized to 0.0-5.0 scale
 - Edge case: "Sob consulta" -> price_brl: null
-
 WHY THIS IS GOLDEN:
 - quality: null (H05 pass)
 - id matches p03_ap_ pattern (H02 pass)
@@ -92,14 +83,10 @@ WHY THIS IS GOLDEN:
 - input_required lists specific types (S04 pass)
 - output_expected is verifiable JSON structure (S05 pass)
 - No identity/persona content (S07 pass)
-
 ## Anti-Example
-
 INPUT: "Create action prompt for analyzing data"
-
 BAD OUTPUT:
 ```yaml
----
 id: analyze-data
 kind: prompt
 pillar: prompt
@@ -109,12 +96,9 @@ output_expected: analysis results
 quality: 9.0
 tags: [analysis]
 edge_cases: []
----
 ```
-
 You are a data analysis expert. Analyze the provided data thoroughly and
 provide comprehensive insights. Make sure your analysis is detailed and helpful.
-
 FAILURES:
 1. id: no `p03_ap_` prefix, uses hyphens -> H02 FAIL
 2. kind: "prompt" not "action_prompt" -> H04 FAIL

@@ -15,22 +15,15 @@ density_score: 0.91
 ---
 
 # Gate: daemon
-
 ## Definition
-
 | Field     | Value |
 |-----------|-------|
 | metric    | Composite score from SOFT dimensions + all HARD gates pass |
 | threshold | >= 7.0 to publish; >= 9.5 golden |
 | operator  | AND (all HARD) + weighted_sum (SOFT) |
 | scope     | All artifacts where `kind: daemon` |
-
----
-
 ## HARD Gates
-
 All must pass. Any single failure = REJECT regardless of SOFT score.
-
 | ID  | Check | Failure message |
 |-----|-------|----------------|
 | H01 | Frontmatter parses as valid YAML | "Frontmatter YAML syntax error" |
@@ -43,13 +36,8 @@ All must pass. Any single failure = REJECT regardless of SOFT score.
 | H08 | `signal_handling` contains at minimum `SIGTERM` entry with defined action | "SIGTERM handler not defined" |
 | H09 | `health_check` includes `endpoint` or `command` plus `interval_seconds` | "Health check definition incomplete" |
 | H10 | `schedule` is valid cron expression or literal `continuous` | "Schedule is not valid cron or 'continuous'" |
-
----
-
 ## SOFT Scoring
-
 Dimensions sum to 100%. Score each 0.0-10.0; multiply by weight.
-
 | Dimension | Weight | What to assess |
 |-----------|--------|----------------|
 | Lifecycle completeness | 1.0 | start, stop, restart, and graceful shutdown all defined |
@@ -64,24 +52,15 @@ Dimensions sum to 100%. Score each 0.0-10.0; multiply by weight.
 | Schedule precision | 1.0 | cron expression correct, timezone specified if relevant |
 | Error handling | 1.0 | what happens on crash, max retries, backoff strategy |
 | Documentation | 1.0 | tldr, purpose, and operational runbook link or inline |
-
 Weight sum: 1.0+1.0+1.0+0.5+0.5+1.0+1.0+0.5+0.5+1.0+1.0+1.0 = 10.0 (100%)
-
----
-
 ## Actions
-
 | Score | Tier | Action |
 |-------|------|--------|
 | >= 9.5 | GOLDEN | Publish to pool as golden exemplar |
 | >= 8.0 | PUBLISH | Publish to pool |
 | >= 7.0 | REVIEW | Flag for human review before publish |
 | < 7.0  | REJECT | Return to author with failure report |
-
----
-
 ## Bypass
-
 | Field | Value |
 |-------|-------|
 | conditions | Emergency production incident requiring immediate daemon deploy |

@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: daemon
-
 ## Frontmatter Fields
-
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string (p04_daemon_{name_slug}) | YES | - | Namespace compliance |
@@ -35,17 +33,14 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | logging | enum: structured, plaintext, syslog | REC | structured | Log format |
 | graceful_shutdown | string | REC | - | Shutdown procedure summary |
 | max_restarts | string | REC | - | Circuit breaker (N in window) |
-
 ## ID Pattern
 Regex: `^p04_daemon_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Body Structure (required sections)
 1. `## Overview` — what the daemon does, why it runs in background, who depends on it
 2. `## Lifecycle` — schedule, startup sequence, restart policy, graceful shutdown
 3. `## Signal Handling` — response to SIGTERM, SIGINT, SIGHUP, custom signals
 4. `## Monitoring` — health check, metrics, alerting, log rotation
-
 ## Constraints
 - max_bytes: 1024 (body only — compact daemon spec)
 - naming: p04_daemon_{name_slug}.md + .yaml (dual file)

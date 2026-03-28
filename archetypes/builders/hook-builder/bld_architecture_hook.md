@@ -7,7 +7,6 @@ purpose: Component map of hook — inventory, dependencies, and architectural po
 ---
 
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | trigger_config | Event type and timing (pre/post/both) that fires the hook | author | required |
@@ -18,9 +17,7 @@ purpose: Component map of hook — inventory, dependencies, and architectural po
 | error_strategy | Behavior on failure: abort, warn, or ignore | author | required |
 | env_injection | Environment variables passed into the hook script | author | optional |
 | async_flag | Whether hook runs in background without blocking | author | optional |
-
 ## Dependency Graph
-
 ```
 agent         --triggers--> hook
 workflow      --triggers--> hook
@@ -28,7 +25,6 @@ spawn_config  --triggers--> hook
 hook          --may_emit--> signal
 hook          --may_call--> cli_tool
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | agent | hook | data_flow | event type, tool name, session context |
@@ -36,9 +32,7 @@ hook          --may_call--> cli_tool
 | spawn_config | hook | data_flow | session start/stop event |
 | hook | signal | data_flow | execution result, status, metrics |
 | hook | cli_tool | data_flow | invocation args, environment vars |
-
 ## Boundary Table
-
 | hook IS | hook IS NOT |
 |---------|-------------|
 | Single-event interceptor with side effects | Policy declaration for long-term lifecycle |
@@ -47,9 +41,7 @@ hook          --may_call--> cli_tool
 | Can be pre, post, or both for one event type | Structured workflow with named phases |
 | Executes external script or command | Agent identity or behavioral definition |
 | Optionally blocking or async | Data connector to external services |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Event binding | trigger_config, conditions | Define when the hook activates |

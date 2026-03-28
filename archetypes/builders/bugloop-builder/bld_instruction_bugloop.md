@@ -8,7 +8,6 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 ---
 
 # Instructions: How to Produce a bugloop
-
 ## Phase 1: RESEARCH
 1. Identify the target system or test suite this loop monitors
 2. Catalog detection triggers: list concrete failure signatures — specific regex patterns, named test failure strings, or log scan patterns — not vague descriptions
@@ -16,7 +15,6 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 4. Specify verification assertions: what must be true after a fix attempt — at minimum one named assertion with a timeout bound
 5. Determine escalation thresholds: the number of failed fix attempts that triggers escalation, and the target (human role, queue name, or named system)
 6. Map rollback policies: if fix strategy is rollback_first, rollback.enabled must be true — these must be consistent
-
 ## Phase 2: COMPOSE
 1. Read SCHEMA.md — source of truth for all required fields
 2. Read OUTPUT_TEMPLATE.md — template to fill
@@ -26,7 +24,6 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 6. Write Verification section: test suite path or name, list of assertions that must pass, and timeout in seconds
 7. Write Escalation section: threshold (must be <= cycle_count), target name, and payload content sent on escalation
 8. Write Rollback section: enabled flag, strategy name (git_revert, snapshot_restore, or blue_green), and trigger condition
-
 ## Phase 3: VALIDATE
 1. Check QUALITY_GATES.md manually
 2. HARD gate: id matches `p11_bl_` pattern

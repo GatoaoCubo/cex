@@ -8,13 +8,9 @@ sources: quality-gate-builder MANIFEST.md + SCHEMA.md
 ---
 
 # Domain Knowledge: quality_gate
-
 ## Executive Summary
-
 Quality gates are numeric scoring barriers that block or score artifacts before they ship. Each gate is HARD (binary AND — one failure zeroes the final score) or SOFT (weighted dimension contributing to a 0–10 score). Gates govern one domain and never self-score (`quality: null` always). A gate is a policy; a validator implements it; a rubric defines the scoring dimensions.
-
 ## Spec Table
-
 | Property | Value |
 |----------|-------|
 | Pillar | P11 (governance) |
@@ -26,9 +22,7 @@ Quality gates are numeric scoring barriers that block or score artifacts before 
 | Body sections | 5 (Definition, HARD Gates, SOFT Scoring, Actions, Bypass) |
 | Score tiers | GOLDEN >= 9.5 / PUBLISH >= 8.0 / REVIEW >= 7.0 / REJECT < 7.0 |
 | Naming | `p11_qg_{slug}.md` |
-
 ## Patterns
-
 | Pattern | Rule |
 |---------|------|
 | HARD gate failure | Sets final score to 0 regardless of all SOFT scores |
@@ -38,9 +32,7 @@ Quality gates are numeric scoring barriers that block or score artifacts before 
 | Scoring formula | `final = hard_pass ? sum(gate * weight) / sum(weights) : 0` |
 | Threshold rule | Must be numeric — no vague qualifiers ("good", "acceptable") |
 | Bypass conditions | Must include: condition + approver + audit_log + expiry |
-
 ## Anti-Patterns
-
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
 | SOFT weight < 0.5 | Creates invisible low-signal dimensions |
@@ -51,9 +43,7 @@ Quality gates are numeric scoring barriers that block or score artifacts before 
 | Vague threshold ("high quality") | Not computable; validator cannot determine pass/fail |
 | > 12 HARD gates | Diminishing returns; creates unnecessary brittleness |
 | Gate checks producer, not artifact | Gates evaluate the artifact output, not who made it |
-
 ## Application
-
 1. Identify the artifact kind this gate protects — sets the `domain` field
 2. Write frontmatter: 12 required fields; `quality: null`; `id` matches `p11_qg_{slug}` pattern
 3. Write `## Definition` — metric, threshold (numeric), operator, scope
@@ -62,9 +52,7 @@ Quality gates are numeric scoring barriers that block or score artifacts before 
 6. Write `## Actions` — map score ranges to GOLDEN / PUBLISH / REVIEW / REJECT tiers
 7. Write `## Bypass` — condition + approver + audit_log + expiry; mark H01 and H05 as never-bypassable
 8. Verify body <= 4096 bytes; `id` equals filename stem
-
 ## References
-
 - quality-gate-builder MANIFEST.md v1.0.0
 - quality_gate SCHEMA.md v2.0.0
 - Boundary: quality_gate (policy) vs validator (P06, enforcement code) vs scoring_rubric (P07, dimension criteria)

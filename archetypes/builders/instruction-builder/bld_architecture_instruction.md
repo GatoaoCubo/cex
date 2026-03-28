@@ -7,7 +7,6 @@ purpose: Component map of instruction — inventory, dependencies, and architect
 ---
 
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | prerequisites | Conditions and resources that must exist before execution begins | author | required |
@@ -18,9 +17,7 @@ purpose: Component map of instruction — inventory, dependencies, and architect
 | dependencies | Other instructions or artifacts this instruction relies on | author | optional |
 | timeout_guidance | Expected duration and when to escalate | author | optional |
 | scope_note | Explicit boundaries on what this instruction modifies | author | optional |
-
 ## Dependency Graph
-
 ```
 action_prompt  --provides_context_to--> instruction
 knowledge_card --informs--> instruction
@@ -28,7 +25,6 @@ instruction    --consumed_by--> agent
 instruction    --referenced_by--> skill
 skill          --depends_on--> instruction
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | action_prompt | instruction | data_flow | task context, goal, and constraints |
@@ -36,9 +32,7 @@ skill          --depends_on--> instruction
 | instruction | agent | data_flow | ordered steps, prerequisites, rollback |
 | instruction | skill | data_flow | sub-procedure referenced by skill phases |
 | skill | instruction | depends | skill phase delegates to instruction for execution |
-
 ## Boundary Table
-
 | instruction IS | instruction IS NOT |
 |----------------|-------------------|
 | Step-by-step recipe for a single executor | Conversational prompt with response format |
@@ -47,9 +41,7 @@ skill          --depends_on--> instruction
 | One-shot execution without lifecycle phases | Structured workflow with branching logic |
 | Single-agent scope | Task delegation package to a remote receiver |
 | Verifiable: each step has validation criteria | Event-triggered side-effect handler |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Entry gate | prerequisites, dependencies | Ensure conditions are met before starting |

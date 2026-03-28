@@ -1,4 +1,6 @@
 ---
+kind: output_template
+id: bld_output_template_mental_model
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} that the LLM fills to produce a mental_model artifact
@@ -6,9 +8,7 @@ pattern: every field here exists in SCHEMA.md — template derives, never invent
 ---
 
 # Output Template: mental_model
-
 ```yaml
----
 id: p02_mm_{{agent_slug}}
 kind: mental_model
 pillar: P02
@@ -57,37 +57,28 @@ quality: null
 tags: [mental-model, {{tag_2}}, {{tag_3}}]
 tldr: "{{dense_summary_max_160ch}}"
 density_score: {{0.80-1.00}}
----
 ```
-
 ## Agent Reference
 {{agent_name}}: {{one_line_agent_identity}}
-
 ## Routing Rules
-
 | Keywords | Action | Confidence |
 |----------|--------|------------|
 | {{kw_set_1}} | {{action_1}} | {{conf_1}} |
 | {{kw_set_2}} | {{action_2}} | {{conf_2}} |
 | {{kw_set_3}} | {{action_3}} | {{conf_3}} |
-
 ## Decision Tree
 1. IF {{condition_1}} THEN {{action_a}} ELSE {{action_b}}
 2. IF {{condition_2}} THEN {{action_c}}
-
 ## Priorities
 1. {{priority_1}} (highest)
 2. {{priority_2}}
 3. {{priority_3}} (lowest)
-
 ## Heuristics
 - {{heuristic_1}}
 - {{heuristic_2}}
-
 ## Domain Map
 Covers: {{domain_list}}
 Routes away: {{routed_domains_with_targets}}
-
 ## References
 - Source agent: {{agent_definition_path}}
 - Builder: mental-model-builder v1.0.0

@@ -8,13 +8,9 @@ sources: lifecycle-rule-builder MANIFEST.md + SCHEMA.md v1.0.0
 ---
 
 # Domain Knowledge: lifecycle_rule
-
 ## Executive Summary
-
 Lifecycle rules are declarative policies governing artifact state transitions over time — from creation through review, promotion, deprecation, and sunset. Each rule defines freshness thresholds, review cycles, ownership, and automation level for a specific artifact kind. They differ from hooks (which execute code on events), runtime rules (which manage system behavior), quality gates (which score at one point), and guardrails (which prevent damage) by managing artifact freshness as a first-class temporal concern.
-
 ## Spec Table
-
 | Property | Value |
 |----------|-------|
 | Pillar | P11 (governance) |
@@ -27,9 +23,7 @@ Lifecycle rules are declarative policies governing artifact state transitions ov
 | Density minimum | >= 0.80 |
 | Quality field | always `null` |
 | States | draft, active, stale, deprecated, archived, sunset |
-
 ## Patterns
-
 | Pattern | Application |
 |---------|-------------|
 | Domain-specific freshness | LLM pricing = 30 days; architectural law = 365 days |
@@ -38,18 +32,14 @@ Lifecycle rules are declarative policies governing artifact state transitions ov
 | Notification on stale | Stale artifact with no alert = hidden technical debt |
 | Automation levels | full (cron-driven), semi (auto-detect + human approve), manual |
 | State machine | Each state has entry criteria, exit criteria, and allowed transitions |
-
 ### Freshness Reference
-
 | Domain | Typical freshness_days | Rationale |
 |--------|----------------------|-----------|
 | LLM pricing/models | 30 | Providers update frequently |
 | API documentation | 90 | APIs change quarterly |
 | Architectural patterns | 180 | Patterns evolve slowly |
 | Operational laws | 365 | Laws are stable by design |
-
 ## Anti-Patterns
-
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
 | No freshness_days specified | Cannot automate staleness detection |
@@ -58,9 +48,7 @@ Lifecycle rules are declarative policies governing artifact state transitions ov
 | freshness_days: 999 | Effectively disables lifecycle; artifact rots silently |
 | Automation: full without notification | Silent archival surprises consumers |
 | One-size-fits-all freshness | Different artifact kinds decay at different rates |
-
 ## Application
-
 1. Identify the target artifact kind and its typical update cadence
 2. Define states (minimum: active, stale, archived) with entry/exit criteria
 3. Set `freshness_days` based on domain-specific decay rate
@@ -69,9 +57,7 @@ Lifecycle rules are declarative policies governing artifact state transitions ov
 6. Choose `automation` level (full/semi/manual)
 7. Define notification triggers for stale transitions
 8. Validate: 9 HARD + 8 SOFT gates, body <= 3072 bytes
-
 ## References
-
 - lifecycle-rule-builder SCHEMA.md v1.0.0
 - ITIL Service Lifecycle (strategy, design, transition, operation, improvement)
 - DAMA-DMBOK Data Governance (data quality dimensions + retention policies)

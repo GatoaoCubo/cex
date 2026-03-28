@@ -1,4 +1,6 @@
 ---
+kind: examples
+id: bld_examples_mcp_server
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of mcp_server artifacts
@@ -6,14 +8,10 @@ pattern: few-shot learning — LLM reads these before producing
 ---
 
 # Examples: mcp-server-builder
-
 ## Golden Example
-
 INPUT: "Create MCP server for a document search service with hybrid BM25+vector search"
-
 OUTPUT:
 ```yaml
----
 id: p04_mcp_document_search
 kind: mcp_server
 pillar: P04
@@ -38,15 +36,11 @@ versioning: "semver, negotiated at connect"
 quality: null
 tags: [mcp_server, search, documents, P04]
 tldr: "Document search MCP server: 3 tools, 2 resources, stdio transport, hybrid BM25+vector"
----
 ```
-
 ## Overview
 Exposes document search capabilities to agents via MCP stdio transport.
 Consumed by research agents and knowledge retrieval pipelines.
-
 ## Tools
-
 ### search_documents
 Search documents using hybrid BM25+vector scoring.
 Parameters:
@@ -54,33 +48,26 @@ Parameters:
 - `collection` (string, optional): Target collection name; defaults to all
 - `limit` (integer, optional): Max results; default 10, max 50
 Returns: List of {id, title, score, excerpt} objects
-
 ### get_document
 Retrieve full document by ID.
 Parameters:
 - `id` (string, required): Document identifier
 - `collection` (string, required): Collection containing the document
 Returns: {id, title, content, metadata} object
-
 ### list_collections
 List available document collections with stats.
 Parameters: none
 Returns: List of {name, doc_count, last_updated} objects
-
 ## Resources
-
 ### mem://index/status
 Content-Type: application/json
 Current index health: doc count, last rebuild timestamp, vector dimensions.
-
 ### db://collections/{name}
 Content-Type: application/json
 Collection metadata: schema, doc count, embedding model, index type.
-
 ## Transport & Auth
 Transport: stdio (local subprocess via `python server.py`)
 Auth: none (process-level trust, no network exposure)
-
 WHY THIS IS GOLDEN:
 - quality: null (H05 pass)
 - id matches p04_mcp_ pattern (H02 pass)
@@ -94,14 +81,10 @@ WHY THIS IS GOLDEN:
 - tags: 4 items, includes "mcp_server" (S02 pass)
 - body well under 2048 bytes (H08 pass)
 - No implementation code in body (S08 pass)
-
 ## Anti-Example
-
 INPUT: "Create MCP server for weather data"
-
 BAD OUTPUT:
 ```yaml
----
 id: weather-mcp
 kind: tool_server
 pillar: tools
@@ -110,15 +93,11 @@ tools: [get_weather, forecast]
 auth: "yes"
 quality: 9.0
 tags: [weather]
----
 ```
-
 Provides weather data to agents.
-
 ## Tools
 get_weather: gets weather
 forecast: gets forecast
-
 FAILURES:
 1. id: "weather-mcp" has hyphens and no `p04_mcp_` prefix -> H02 FAIL
 2. kind: "tool_server" not "mcp_server" -> H04 FAIL
@@ -130,4 +109,3 @@ FAILURES:
 8. tools_provided field absent — SCHEMA requires it -> H06 FAIL
 9. resources_provided field absent — SCHEMA requires it -> H06 FAIL
 10. Body missing ## Overview, ## Resources, ## Transport & Auth sections -> H07 FAIL
-11. Tool entries have no parameters or return type defined -> S06 FAIL

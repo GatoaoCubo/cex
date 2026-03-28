@@ -27,36 +27,24 @@ density_score: 0.90
 ---
 
 ## Context
-
 The mcp-server-builder produces `mcp_server` artifacts (P04) — specification documents for Model Context Protocol servers that expose tools and resources for LLM agents to consume. An mcp_server artifact is a definition, not running code; it specifies what a server exposes and how clients connect to it.
-
 MCP servers differ from connectors (bidirectional integrations), clients (API consumers), skills (reusable capability sequences), and daemons (background processes without MCP protocol).
-
 **Inputs:**
-
 - `$server_name (required) - string - "Human-readable server name (e.g. 'firecrawl', 'filesystem', 'railway-deploy')"`
 - `$server_slug (required) - string - "snake_case, lowercase, no hyphens — used in id field (e.g. 'firecrawl', 'fs_local')"`
 - `$transport (required) - string - "One of: stdio, sse, http"`
 - `$tools (required) - list[string] - "Exact tool names the server exposes (e.g. ['search', 'scrape', 'extract'])"`
 - `$resources (optional) - list[string] - "URI templates for resources (e.g. ['file://{path}', 'db://{table}/{id}'])"`
 - `$auth_strategy (optional) - string - "Auth method: none (stdio), api_key, oauth, jwt — derived from transport if omitted"`
-
 **Output:** A single `mcp_server` artifact, body <= 2048 bytes, with complete frontmatter and 4 required body sections: Overview, Tools, Resources, Transport and Auth.
-
 **Boundary check before proceeding:**
 - Bidirectional integration with a third-party service → route to connector-builder
 - Reusable multi-step capability sequence → route to skill-builder
 - Background process without MCP protocol → document as daemon, not mcp_server
 - Server exposing tools via MCP protocol → proceed
-
----
-
 ## Phases
-
 ### Phase 1: Research
-
 **Action:** Gather all parameters needed to fully specify the server.
-
 1. Confirm server `slug`: snake_case, lowercase, no hyphens, unique within P04.
 2. Confirm `transport` selection:
    - `stdio` — local process, spawned by client, no network required, auth = none
@@ -72,13 +60,9 @@ MCP servers differ from connectors (bidirectional integrations), clients (API co
 8. Identify `rate_limit` (requests per minute) and `health_check` endpoint (if applicable).
 9. Check for existing mcp_server artifacts covering the same server to avoid duplicates.
 10. Verify slug generates valid id: `p04_mcp_{slug}` must match `^p04_mcp_[a-z][a-z0-9_]+$`.
-
 **Verification:** Every tool has a name, description, and at least one parameter or explicit "no parameters". Transport and auth are consistent.
-
 ### Phase 2: Compose
-
 **Action:** Write all frontmatter fields and body sections within the 2048-byte body limit.
-
 1. Read `SCHEMA.md` — source of truth for all required fields.
 2. Read `OUTPUT_TEMPLATE.md` — fill every `{{var}}` following SCHEMA constraints.
 3. Fill frontmatter: all required fields (`quality: null` — never self-score).
@@ -101,19 +85,14 @@ MCP servers differ from connectors (bidirectional integrations), clients (API co
    ```
    If no resources: write `## Resources\nNone.`
 10. Write `## Transport and Auth` — connection details, auth config, rate limit, health check.
-
 Byte budget pseudocode:
 ```
 body_bytes = len(encode_utf8(body_content))
 # if body_bytes > 2048: compress descriptions, remove redundant prose
 ```
-
 **Verification:** `tools_provided` list in frontmatter exactly matches tool names in `## Tools` body section (zero drift). Body <= 2048 bytes.
-
 ### Phase 3: Validate
-
 **Action:** Run all HARD gates from `QUALITY_GATES.md`. Fix any failure before output.
-
 | Gate | Check |
 |------|-------|
 | H01 | YAML frontmatter parses without error |
@@ -125,85 +104,4 @@ body_bytes = len(encode_utf8(body_content))
 | H07 | `resources_provided` matches URI templates in `## Resources` section |
 | H08 | All 4 required body sections present |
 | H09 | Body <= 2048 bytes |
-
 Score SOFT gates from `QUALITY_GATES.md`. If soft score < 8.0, revise in the same pass.
-
-**Cross-check:** Is `transport` consistent with `auth_strategy`? (stdio must have auth = none). Are all tool parameter types valid JSON-Schema types?
-
-### Phase 4: Output
-
-**Action:** Emit the final artifact at the correct path.
-
-1. Write file to the path defined in `CONFIG.md` for mcp_server artifacts.
-2. Confirm filename stem matches `id` field.
-3. Confirm `tools_provided` frontmatter list has zero drift from `## Tools` body section.
-4. Confirm body byte count is <= 2048.
-
----
-
-## Output Contract
-
-```
----
-id: p04_mcp_{{slug}}
-kind: mcp_server
-pillar: P04
-version: 1.0.0
-created: {{YYYY-MM-DD}}
-updated: {{YYYY-MM-DD}}
-author: {{author}}
-domain: {{primary_domain}}
-transport: {{stdio|sse|http}}
-auth_strategy: {{none|api_key|oauth|jwt}}
-tools_provided: [{{exact_tool_name_list}}]
-resources_provided: [{{uri_template_list_or_empty}}]
-rate_limit: {{requests_per_minute_or_null}}
-health_check: {{endpoint_or_null}}
-status: active
-tags: [mcp-server, P04, {{domain_tag}}, {{transport_tag}}]
-quality: null
----
-
-## Overview
-{{1_to_2_sentences_what_server_does_and_who_consumes_it}}
-
-## Tools
-{{per_tool_block_with_name_description_parameters_returns}}
-
-## Resources
-{{per_resource_block_with_uri_template_content_type_description_or_None}}
-
-## Transport and Auth
-{{connection_details_auth_config_rate_limit_health_check}}
-```
-
----
-
-## Validation
-
-- [ ] `id` matches `^p04_mcp_[a-z][a-z0-9_]+$`
-- [ ] `kind` is literal string `mcp_server`
-- [ ] `transport` is one of: stdio, sse, http
-- [ ] `quality` is `null`
-- [ ] `tools_provided` list exactly matches tool names in `## Tools` (zero drift)
-- [ ] `resources_provided` matches URI templates in `## Resources` (zero drift)
-- [ ] `stdio` transport has `auth_strategy: none`
-- [ ] All 4 body sections present and non-empty (`## Resources` may be "None.")
-- [ ] Body <= 2048 bytes
-- [ ] Soft gate score >= 8.0 before output
-
----
-
-## Metacognition
-
-**Does:**
-- Specify MCP server tools with JSON-Schema-compatible parameters
-- Enforce zero drift between frontmatter lists and body sections
-- Select auth strategy from transport type systematically
-
-**Does NOT:**
-- Generate server implementation code — only produces the specification artifact
-- Handle bidirectional integrations — route to connector-builder
-- Handle multi-step capability sequences — route to skill-builder
-
-**Chaining:** [agent capability planning / tool inventory] -> THIS -> [client config generation / agent tool registration]

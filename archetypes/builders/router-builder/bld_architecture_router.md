@@ -7,9 +7,7 @@ purpose: Component map of router — inventory, dependencies, and architectural 
 ---
 
 # Architecture: router in the CEX
-
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | frontmatter block | 14-field metadata header (id, kind, pillar, domain, routes_count, etc.) | router-builder | active |
@@ -19,15 +17,12 @@ purpose: Component map of router — inventory, dependencies, and architectural 
 | escalation_policy | What happens when routing fails or confidence is too low | author | active |
 | load_balancing | Distribution strategy across destinations when multiple match | author | active |
 | timeout_policy | Maximum time allowed for route resolution before fallback | author | active |
-
 ## Dependency Graph
-
 ```
 incoming_task   --routed_by-->   router  --dispatches_to-->  satellite/agent
 mental_model    --configures-->  router  --signals-->        routing_decision
 router          --depends-->     dispatch_rule
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | incoming_task | router | data_flow | task description and metadata for pattern matching |
@@ -36,9 +31,7 @@ router          --depends-->     dispatch_rule
 | router | routing_decision (P12) | signals | emitted with route, confidence, and fallback status |
 | dispatch_rule (P12) | router | dependency | simple keyword mappings referenced by router |
 | router | escalation_policy | data_flow | unmatched tasks escalated per policy |
-
 ## Boundary Table
-
 | router IS | router IS NOT |
 |-----------|---------------|
 | A routing logic with route tables, confidence, and fallback | A simple keyword-to-destination mapping (dispatch_rule P12) |
@@ -47,9 +40,7 @@ router          --depends-->     dispatch_rule
 | Configured with confidence thresholds per route | A design-time cognitive map (mental_model P02) |
 | Supports load balancing across multiple destinations | A static configuration of one destination |
 | Produces routing decisions as observable signals | A silent dispatch without audit trail |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Input | incoming_task, mental_model | Supply task data and routing intelligence |

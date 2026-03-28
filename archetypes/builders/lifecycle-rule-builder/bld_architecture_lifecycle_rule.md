@@ -7,9 +7,7 @@ purpose: Component map of lifecycle_rule — inventory, dependencies, and archit
 ---
 
 # Architecture: lifecycle_rule in the CEX
-
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | frontmatter block | 21-field metadata header (id, kind, pillar, domain, target_kind, etc.) | lifecycle-rule-builder | active |
@@ -19,14 +17,11 @@ purpose: Component map of lifecycle_rule — inventory, dependencies, and archit
 | review_cycles | Periodic review schedule with ownership and frequency | author | active |
 | ownership_rules | Who is responsible for approving each state transition | author | active |
 | scope_definition | Which artifact kinds and domains this lifecycle rule governs | author | active |
-
 ## Dependency Graph
-
 ```
 artifact (any)  --governed_by-->  lifecycle_rule  --consumed_by-->  scheduler
 quality_gate    --depends-->      lifecycle_rule  --signals-->      state_change_event
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | lifecycle_rule | artifact (any) | dependency | artifacts must comply with lifecycle state rules |
@@ -35,9 +30,7 @@ quality_gate    --depends-->      lifecycle_rule  --signals-->      state_change
 | scoring_rubric (P07) | lifecycle_rule | data_flow | score thresholds define promotion criteria |
 | lifecycle_rule | state_change_event (P12) | signals | emitted when artifact transitions between states |
 | hook (P04) | lifecycle_rule | dependency | hooks may execute actions on state transitions |
-
 ## Boundary Table
-
 | lifecycle_rule IS | lifecycle_rule IS NOT |
 |-------------------|----------------------|
 | A declarative state machine for artifact lifecycle | An executable hook that fires on events (hook P04) |
@@ -46,9 +39,7 @@ quality_gate    --depends-->      lifecycle_rule  --signals-->      state_change
 | Owned by a domain steward with review responsibility | A safety restriction on agent behavior (guardrail P11) |
 | Applied to specific artifact kinds via scope | A universal operational mandate (law P08) |
 | Evaluated periodically based on time or score | An on-demand validation check (validator P06) |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Scope | frontmatter, scope_definition | Define which artifacts and domains are governed |

@@ -1,4 +1,6 @@
 ---
+kind: output_template
+id: bld_output_template_dispatch_rule
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} that the LLM fills to produce a dispatch_rule
@@ -6,12 +8,9 @@ pattern: every field here exists in SCHEMA.md; template derives, never invents
 ---
 
 # Output Template: dispatch_rule
-
 Naming pattern: `p12_dr_{scope}.yaml`
 Filename: `p12_dr_{{scope}}.yaml`
-
 ```yaml
----
 id: p12_dr_{{scope}}
 kind: dispatch_rule
 pillar: P12
@@ -33,20 +32,14 @@ fallback: {{fallback_satellite_slug}}
 conditions: {{object_or_omit}}
 load_balance: {{true|false_or_omit}}
 routing_strategy: {{keyword_match|semantic|hybrid_or_omit}}
----
-
 # {{scope}} Dispatch Rule
-
 ## Purpose
 {{one_paragraph_explaining_what_this_rule_routes_and_why}}
-
 ## Keyword Rationale
 {{brief_explanation_of_why_these_keywords_trigger_this_satellite}}
-
 ## Fallback Logic
 {{brief_explanation_of_when_fallback_fires_and_what_it_handles}}
 ```
-
 ## Derivation Notes
 - All frontmatter fields derive from SCHEMA.md required or optional fields
 - Omit `conditions`, `load_balance`, `routing_strategy` if not needed

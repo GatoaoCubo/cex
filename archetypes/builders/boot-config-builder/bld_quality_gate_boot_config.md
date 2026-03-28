@@ -15,20 +15,15 @@ density_score: 0.88
 ---
 
 # Gate: boot_config
-
 ## Definition
-
 | Field     | Value                                                  |
 |-----------|--------------------------------------------------------|
 | metric    | provider completeness + constraint rationalization     |
 | threshold | 8.0                                                    |
 | operator  | >=                                                     |
 | scope     | all boot_config artifacts (P02)                        |
-
 ## HARD Gates
-
 All must pass. Failure on any = final score 0.
-
 | Gate | Check | Why |
 |------|-------|-----|
 | H01 | YAML frontmatter parses valid YAML | Broken YAML = agent fails to boot |
@@ -40,9 +35,7 @@ All must pass. Failure on any = final score 0.
 | H07 | identity object has name, role, satellite | Identity block completeness |
 | H08 | constraints object has max_tokens, context_window, timeout_seconds | Runtime constraints completeness |
 | H09 | tools is non-empty list | Agent requires at least one tool to function |
-
 ## SOFT Scoring
-
 | Gate | Check | Weight |
 |------|-------|--------|
 | S01 | tldr <= 160 chars, non-empty, not filler | 1.0 |
@@ -55,20 +48,15 @@ All must pass. Failure on any = final score 0.
 | S08 | body has ## Tools Configuration table listing each tool | 1.0 |
 | S09 | density_score >= 0.80 | 0.5 |
 | S10 | No filler phrases or generic descriptions | 1.0 |
-
 Weights sum: 7.5. Normalize: divide each by 7.5 before scoring.
-
 ## Actions
-
 | Score | Action |
 |-------|--------|
 | >= 9.5 | GOLDEN — pool as reference config for this provider |
 | >= 8.0 | PUBLISH — active boot configuration |
 | >= 7.0 | REVIEW — rationalize constraints or complete tools list |
 | < 7.0  | REJECT — identity block or constraints block incomplete |
-
 ## Bypass
-
 | Field | Value |
 |-------|-------|
 | conditions | New provider integration requiring immediate bootstrap before full spec |

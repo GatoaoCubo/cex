@@ -27,32 +27,21 @@ density_score: 0.91
 ---
 
 ## Context
-
 The law-builder produces `law` artifacts (P08) — inviolable operational mandates the system must always follow. Laws differ from instructions (flexible guides), guardrails (safety restrictions), and axioms (abstract truths): a law is an operational rule with enforcement consequences and a defined exception protocol.
-
 **Inputs:**
-
 - `$rule_trigger (required) - string - "Pattern, failure, or explicit mandate that motivates this law"`
 - `$scope (required) - string - "System component or domain this law governs (e.g. 'agent spawning', 'file writes', 'auth flows')"`
 - `$enforcement_context (optional) - string - "How violations are detected or prevented (hook, linter, human review, automated gate)"`
 - `$exceptions (optional) - list[string] - "Known legitimate scenarios where the law does not apply"`
-
 **Output:** A single `law` artifact file with frontmatter (15 required + 4 extended fields) and 8 body sections covering statement, rationale, enforcement, exceptions, examples, violations, and history.
-
 **Boundary check before proceeding:**
 - Rule merely recommends a better approach → route to pattern-builder
 - Rule restricts for safety → route to guardrail-builder
 - Rule expresses an abstract truth → route to axiom-builder
 - Rule is a non-negotiable operational mandate → proceed
-
----
-
 ## Phases
-
 ### Phase 1: Classify
-
 **Action:** Verify the rule qualifies as a law and define its exact scope.
-
 1. Extract the core behavioral requirement from `$rule_trigger`.
 2. Apply classification test:
    - Is it ALWAYS required with no optional path? → Law candidate
@@ -64,13 +53,9 @@ The law-builder produces `law` artifacts (P08) — inviolable operational mandat
 5. Assign candidate law identifier: `p08_law_{N}` where N is the next available positive integer.
 6. Select `enforcement` from: `pre_commit_hook`, `ci_gate`, `runtime_assertion`, `review_required`, `automated_linter`.
 7. Identify `severity`: `critical` (system breaks), `high` (data loss possible), `medium` (quality degraded).
-
 **Verification:** You can complete this sentence without hedging: "If this rule is violated, [specific failure] occurs because [reason]."
-
 ### Phase 2: Compose
-
 **Action:** Write all frontmatter fields and body sections.
-
 1. Read `SCHEMA.md` — source of truth for all 15 required + 4 extended fields.
 2. Read `OUTPUT_TEMPLATE.md` — fill every `{{var}}` following SCHEMA constraints.
 3. Set `id`: pattern `p08_law_{number}` (must equal the output filename stem).
@@ -89,13 +74,9 @@ The law-builder produces `law` artifacts (P08) — inviolable operational mandat
 16. Write `## Violations` — at least 2 concrete breach scenarios with consequences.
 17. Write `## History` — when and why established, any revisions.
 18. Write `## References` — governance sources or upstream documents that support this law.
-
 **Verification:** Statement contains one of: MUST, SHALL, NEVER, ALWAYS. No section is empty.
-
 ### Phase 3: Validate
-
 **Action:** Run all 9 HARD gates. Fix any failure before proceeding to output.
-
 | Gate | Check |
 |------|-------|
 | H01 | YAML frontmatter parses without error |
@@ -107,102 +88,19 @@ The law-builder produces `law` artifacts (P08) — inviolable operational mandat
 | H07 | `tags` is a list with length >= 3 |
 | H08 | `number` is a positive integer |
 | H09 | `statement` uses imperative mood (MUST / SHALL / NEVER / ALWAYS) |
-
 Then score all 10 SOFT gates from `QUALITY_GATES.md`. If soft score < 8.0, revise in the same pass before outputting.
-
 **Cross-check:** Is this truly a mandate? Is it a single rule, not a bundle of rules?
-
 ### Phase 4: Output
-
 **Action:** Emit the final artifact at the correct path.
-
 1. Write file to: `cex/P08_architecture/examples/p08_law_{number}.md`
 2. Confirm filename stem matches `id` field.
 3. Confirm 8 body sections all present and non-empty.
 4. Confirm total body size is within `CONFIG.md` size limit.
-
----
-
 ## Output Contract
-
 ```
----
 id: p08_law_{{number}}
 kind: law
 pillar: P08
 version: 1.0.0
 created: {{YYYY-MM-DD}}
 updated: {{YYYY-MM-DD}}
-author: {{author}}
-domain: {{domain}}
-number: {{integer}}
-statement: "{{MUST_or_SHALL_or_NEVER_or_ALWAYS_sentence}}"
-rationale: "{{why_this_law_exists}}"
-enforcement: {{enforcement_mechanism}}
-severity: {{critical|high|medium}}
-status: active
-priority: {{1-10}}
-scope: "{{scope_description}}"
-exceptions: [{{list_or_empty}}]
-keywords: [{{keyword_list}}]
-tags: [law, P08, {{domain_tag}}, {{scope_tag}}]
-quality: null
----
-
-## Statement
-{{imperative_rule_sentence}}
-
-## Rationale
-{{rationale_paragraph}}
-
-## Enforcement
-{{mechanism_detection_consequence}}
-
-## Exceptions
-{{exceptions_with_approval_or_None}}
-
-## Examples
-{{two_or_more_correct_applications}}
-
-## Violations
-{{two_or_more_breach_scenarios_with_consequences}}
-
-## History
-| Version | Date | Author | Change |
-|---------|------|--------|--------|
-| 1.0.0 | {{YYYY-MM-DD}} | {{author}} | Initial |
-
-## References
-{{governance_sources}}
-```
-
----
-
-## Validation
-
-- [ ] `id` matches `^p08_law_[0-9]+$` and equals filename stem
-- [ ] `kind` is literal string `law`
-- [ ] `quality` is `null`
-- [ ] `statement` contains MUST, SHALL, NEVER, or ALWAYS
-- [ ] All 15 required frontmatter fields present and non-empty
-- [ ] `tags` list has >= 3 items
-- [ ] `number` is a positive integer, unique among existing laws
-- [ ] All 8 body sections present and non-empty
-- [ ] At least 2 examples and at least 2 violation scenarios
-- [ ] Soft gate score >= 8.0 before output
-
----
-
-## Metacognition
-
-**Does:**
-- Classify whether a rule qualifies as a law before building
-- Produce a single, complete, immediately usable law artifact
-- Enforce that every exception has approval criteria
-
-**Does NOT:**
-- Generate enforcement infrastructure (hooks, linters) — only documents them
-- Handle patterns, guardrails, or axioms — routes those to correct builders
-- Bundle multiple rules into one artifact
-
-**Chaining:** [pattern identification / failure postmortem] -> THIS -> [law registry update / enforcement hook wiring]

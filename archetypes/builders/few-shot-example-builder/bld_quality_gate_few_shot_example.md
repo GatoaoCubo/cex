@@ -15,22 +15,15 @@ density_score: 0.90
 ---
 
 # Gate: few_shot_example
-
 ## Definition
-
 | Field     | Value |
 |-----------|-------|
 | metric    | composite score across SOFT dimensions |
 | threshold | >= 7.0 to publish; >= 9.5 for golden |
 | operator  | weighted average after all HARD gates pass |
 | scope     | all artifacts where `kind: few_shot_example` |
-
 All HARD gates are AND-logic: one failure rejects the artifact regardless of SOFT score.
-
----
-
 ## HARD Gates
-
 | ID  | Check | Fail Condition |
 |-----|-------|----------------|
 | H01 | Frontmatter parses as valid YAML | Any YAML syntax error |
@@ -42,11 +35,7 @@ All HARD gates are AND-logic: one failure rejects the artifact regardless of SOF
 | H07 | `output` field present and non-empty string | Missing or empty output |
 | H08 | Artifact body size <= 1024 bytes | Exceeds byte limit (bloats prompt context) |
 | H09 | No scoring rubric present anywhere in the artifact | Rubric found (conflates with golden_test) |
-
----
-
 ## SOFT Scoring
-
 | Dim | Dimension | Weight | Scoring Guide |
 |-----|-----------|--------|---------------|
 | S01 | `tldr` <= 160 chars, names the format being taught | 0.10 | Accurate=1.0, vague=0.4, absent=0.0 |
@@ -59,24 +48,15 @@ All HARD gates are AND-logic: one failure rejects the artifact regardless of SOF
 | S08 | `density_score` >= 0.80 | 0.08 | Met=1.0, below=0.0 |
 | S09 | No filler in output ("as you can see", "this example shows") | 0.07 | Clean=1.0, filler present=0.0 |
 | S10 | Difficulty level (`easy`/`medium`/`hard`) matches actual complexity | 0.06 | Accurate=1.0, mislabeled=0.2 |
-
 **Weight sum: 1.00**
-
----
-
 ## Actions
-
 | Score | Action |
 |-------|--------|
 | >= 9.5 | GOLDEN — reference artifact for few_shot_example calibration |
 | >= 8.0 | PUBLISH — pool-eligible; format clearly demonstrated in output |
 | >= 7.0 | REVIEW — usable but output may be content-heavy, not format-focused |
 | < 7.0  | REJECT — redo; likely missing format structure or oversized body |
-
----
-
 ## Bypass
-
 | Field | Value |
 |-------|-------|
 | conditions | Domain so narrow that no realistic input exists; synthetic input approved in writing |

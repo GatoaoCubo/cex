@@ -8,13 +8,9 @@ sources: Git hooks, Claude Code hooks, Kubernetes admission webhooks, React life
 ---
 
 # Domain Knowledge: hook
-
 ## Executive Summary
-
 Hooks are event interception points that execute code before or after system events (tool use, session lifecycle, prompt submission, stop). They provide extensibility without modifying core behavior — observing events and executing side effects like logging, validation, metrics, or context injection. Hooks differ from daemons (persistent processes), lifecycle rules (declarative policies), and signals (status notifications).
-
 ## Spec Table
-
 | Property | Value |
 |----------|-------|
 | Pillar | P04 (tools) |
@@ -24,21 +20,16 @@ Hooks are event interception points that execute code before or after system eve
 | Blocking behavior | blocking (waits) or async (fire-and-forget) |
 | Error handling | log (safest), fail, retry |
 | Timeout | Mandatory; <= 10s for blocking hooks |
-
 ## Patterns
-
 - **Single responsibility**: one hook = one event = one action — no multi-event hooks
 - **Blocking vs async**: blocking hooks must be fast (<=10s); use async for heavy work (logging, metrics)
-
 | Source | Concept | Application |
 |--------|---------|-------------|
 | Git hooks | pre-commit, post-merge scripts | trigger_event + script_path |
 | Claude Code | PreToolUse, PostToolUse, SessionStart, Stop | trigger_event enum |
 | Kubernetes | Validating/Mutating admission webhooks | blocking hooks with timeout |
 | React | componentDidMount, useEffect | pre/post execution timing |
-
 - **Event types in agent systems**:
-
 | Event | Timing | Common use |
 |-------|--------|-----------|
 | SessionStart | pre | Context injection, environment setup |
@@ -46,13 +37,10 @@ Hooks are event interception points that execute code before or after system eve
 | PostToolUse | post | Logging, metrics, audit trail |
 | UserPromptSubmit | pre | Input validation, routing hints |
 | Stop | post | Cleanup, signal writing, summary |
-
 - **Condition gating**: not every event instance triggers the hook — conditions filter by event properties
 - **Environment injection**: pass context via env vars, not script arguments — more portable
 - **Idempotency**: hooks may fire multiple times for same event (retries); design for repeat safety
-
 ## Anti-Patterns
-
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
 | Blocking hook > 10s | System hangs; user experience degrades |
@@ -61,18 +49,14 @@ Hooks are event interception points that execute code before or after system eve
 | Error handling not declared | Undefined behavior on failure |
 | State mutation in hook | Hooks observe and augment; never modify core state |
 | No conditions (fires on everything) | Performance waste; irrelevant executions |
-
 ## Application
-
 1. Identify event: which system event triggers this hook?
 2. Choose timing: pre (before event), post (after), or both
 3. Set blocking: blocking (waits for result) or async (fire-and-forget)
 4. Define conditions: when should this hook actually fire?
 5. Configure timeout: mandatory; <= 10s for blocking
 6. Set error handling: log (safest), fail, or retry
-
 ## References
-
 - Git: hooks documentation (git-scm.com/docs/githooks)
 - Claude Code: hook system (PreToolUse, PostToolUse, etc.)
 - Kubernetes: admission webhook configuration

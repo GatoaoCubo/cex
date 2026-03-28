@@ -8,13 +8,9 @@ sources: workflow-builder MANIFEST.md + SCHEMA.md
 ---
 
 # Domain Knowledge: workflow
-
 ## Executive Summary
-
 A `workflow` (P12) is a runtime orchestration plan — numbered steps with agents, dependencies, signals, and execution mode (sequential/parallel/mixed). It differs from `chain` (text-only prompt sequence), `dag` (dependency graph without execution), `crew` (collaboration protocol), and `handoff` (single-satellite instruction) by specifying WHEN and HOW agents run, what signals they emit, and how failures are handled across multiple satellites.
-
 ## Spec Table
-
 | Property | Value |
 |----------|-------|
 | Pillar | P12 |
@@ -29,9 +25,7 @@ A `workflow` (P12) is a runtime orchestration plan — numbered steps with agent
 | `retry_policy` values | `none`, `per_step`, `global` |
 | `quality` field | always `null` |
 | `steps_count` | must exactly match numbered steps in body |
-
 ## Patterns
-
 | Pattern | Rule |
 |---------|------|
 | Wave planning | Group independent steps into parallel waves; sequential between waves |
@@ -42,26 +36,20 @@ A `workflow` (P12) is a runtime orchestration plan — numbered steps with agent
 | Timeout budgeting | Sequential: `timeout >= sum(step timeouts)`; parallel: `timeout >= max(step timeouts)` |
 | Idempotent steps | Steps must be safe to retry without side effects |
 | `steps_count` integrity | Count numbered steps in body and set `steps_count` to match exactly |
-
 **Execution modes**:
-
 | Mode | When to use |
 |------|------------|
 | `sequential` | Steps have strict ordering; each waits for previous |
 | `parallel` | Steps are independent; all run simultaneously |
 | `mixed` | Waves: parallel within wave, sequential between waves |
-
 **Body sections (required order)**:
-
 | Section | Content |
 |---------|---------|
 | `## Purpose` | Why this workflow exists; what mission it accomplishes |
 | `## Steps` | Numbered steps — each defines `agent`, `action`, `input`, `output`, `signal` |
 | `## Dependencies` | What must exist before workflow starts |
 | `## Signals` | What signals are emitted and when |
-
 **Boundary — what workflow is NOT**:
-
 | kind | Why NOT workflow |
 |------|----------------|
 | `chain` | Text-only prompt sequence — no agents, no tools, no signals |
@@ -69,9 +57,7 @@ A `workflow` (P12) is a runtime orchestration plan — numbered steps with agent
 | `crew` | Defines HOW agents collaborate — not WHEN they run |
 | `handoff` | Single-satellite task instruction — one task, not many steps |
 | `dispatch_rule` | Routes keywords to satellites — does not orchestrate execution |
-
 ## Anti-Patterns
-
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
 | `steps_count` mismatch | HARD gate: count must match body steps exactly |
@@ -81,22 +67,7 @@ A `workflow` (P12) is a runtime orchestration plan — numbered steps with agent
 | `timeout` smaller than step sum | Workflow times out before steps can complete |
 | `quality` set to a score | Never self-score; governance assigns |
 | Business logic in step descriptions | Steps define orchestration, not implementation |
-
 ## Application
-
 1. Define the mission in `title` and `domain`
 2. Set `execution` mode: `sequential`, `parallel`, or `mixed`
 3. Decompose mission into discrete steps — each with one agent and one action
-4. Map dependencies: if step B needs step A's output, add `depends_on: [step_A_id]`
-5. Set `steps_count` to match the exact number of numbered steps you write
-6. List all participating satellites in `satellites`
-7. List all referenced `spawn_config` IDs in `spawn_configs`
-8. Define signals emitted per step in `signals` frontmatter and `## Signals` body section
-9. Set `retry_policy`: `per_step` for fault isolation, `global` for all-or-nothing
-10. Set `timeout` respecting execution mode math (sum vs max)
-11. Leave `quality: null` — do not self-score
-
-## References
-
-- workflow-builder MANIFEST.md v1.0.0
-- workflow-builder SCHEMA.md v1.0.0

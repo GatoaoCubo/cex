@@ -7,17 +7,13 @@ purpose: Tools and APIs available for input_schema production
 ---
 
 # Tools: input-schema-builder
-
 ## Production Tools
-
 | Tool | Purpose | When | Status |
 |------|---------|------|--------|
 | brain_query [MCP] | Search existing input_schemas in pool | Phase 1 (check duplicates) | CONDITIONAL |
 | validate_artifact.py | Generic artifact validator | Phase 3 | [PLANNED] |
 | cex_forge.py | Generate artifact from seeds | Alternative compose | [PLANNED] |
-
 ## Data Sources
-
 | Source | Path/URL | Data |
 |--------|----------|------|
 | CEX Schema | P06_schema/_schema.yaml | Field definitions for input_schema |
@@ -26,7 +22,6 @@ purpose: Tools and APIs available for input_schema production
 | TAXONOMY | archetypes/TAXONOMY_LAYERS.yaml | Layer position, overlaps |
 | JSON Schema spec | https://json-schema.org/ | Type/constraint patterns |
 | Pydantic docs | https://docs.pydantic.dev/ | Coercion/default patterns |
-
 ## Interim Validation
 No automated validator exists yet for input_schemas.
 Manually check each QUALITY_GATES.md gate against produced artifact:

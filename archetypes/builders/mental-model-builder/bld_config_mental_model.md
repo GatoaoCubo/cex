@@ -8,48 +8,38 @@ pattern: CONFIG restricts SCHEMA, never contradicts it
 ---
 
 # Config: mental_model Production Rules
-
 ## Naming Convention
-
 | Scope | Convention | Example |
 |-------|-----------|---------|
 | Artifact files | `p02_mm_{agent_slug}.yaml` | `p02_mm_scout_agent.yaml` |
 | Builder directory | kebab-case | `mental-model-builder/` |
 | Frontmatter fields | snake_case | `routing_rules`, `decision_tree` |
 | Agent slug | snake_case, lowercase | `scout_agent`, `research_lead` |
-
 Rule: id MUST equal filename stem.
 Rule: file extension is .yaml (pure YAML artifact).
-
 ## File Paths
 - Output: `cex/P02_model/examples/p02_mm_{agent_slug}.yaml`
 - Compiled: `cex/P02_model/compiled/p02_mm_{agent_slug}.yaml`
-
 ## Size Limits (aligned with SCHEMA)
 - Body: max 2048 bytes
 - Total: ~3000 bytes
 - Density: >= 0.80
-
 ## Routing Rules Requirements
 - Minimum 3 routing rules
 - Each rule: keywords (list), action (string), confidence (float 0.0-1.0)
 - Keywords must be specific (not "everything", "anything", "general")
 - Actions must be concrete verbs ("route to X", "execute Y", "defer to Z")
-
 ## Decision Tree Requirements
 - Minimum 2 conditions
 - Each condition: if/then structure, optional else
 - Conditions must be evaluable (not vague)
 - No circular references between conditions
-
 ## Personality Enum Values
-
 | Field | Allowed Values |
 |-------|---------------|
 | tone | professional, casual, technical, empathetic, direct |
 | verbosity | concise, moderate, verbose |
 | risk_tolerance | low, medium, high |
-
 ## Pillar Disambiguation
 This builder produces P02 mental_model (design-time blueprint).
 P10 mental_model (runtime session state) is a DIFFERENT kind.

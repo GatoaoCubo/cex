@@ -7,7 +7,6 @@ purpose: Component map of handoff — inventory, dependencies, and architectural
 ---
 
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | task_description | Core body of work the receiver must complete | author | required |
@@ -18,9 +17,7 @@ purpose: Component map of handoff — inventory, dependencies, and architectural
 | seed_keywords | Domain terms guiding retrieval and search | author | optional |
 | dependency_refs | Upstream artifacts this handoff depends on | author | optional |
 | naming_convention | File naming pattern (`{MISSION}_{sat}.md`) | system | required |
-
 ## Dependency Graph
-
 ```
 dispatch_rule --produces--> handoff
 dag           --produces--> handoff
@@ -29,7 +26,6 @@ execution     --produces--> signal
 handoff       --referenced_by--> spawn_config
 handoff       --referenced_by--> workflow
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | dispatch_rule | handoff | data_flow | satellite selection, mission name |
@@ -38,9 +34,7 @@ handoff       --referenced_by--> workflow
 | execution | signal | data_flow | status (complete/error), score |
 | handoff | spawn_config | data_flow | satellite id, model params |
 | handoff | workflow | data_flow | step instructions within larger orchestration |
-
 ## Boundary Table
-
 | handoff IS | handoff IS NOT |
 |------------|----------------|
 | Complete delegation package for one receiver | Conversational prompt with persona |
@@ -49,9 +43,7 @@ handoff       --referenced_by--> workflow
 | Pre-execution artifact (written before spawn) | Dependency graph of tasks |
 | Scoped to a single execution unit | Multi-agent orchestration runtime |
 | Source of truth for what to do and how to commit | Boot configuration (model, flags, MCPs) |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Routing | dispatch_rule, dag | Decide which satellite and in what order |

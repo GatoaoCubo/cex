@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: router
-
 ## Frontmatter Fields
-
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string (p02_router_{slug}) | YES | - | Namespace compliance |
@@ -32,9 +30,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | load_balance | enum [round_robin, weighted, priority, none] | REC | "priority" | Route selection strategy |
 | keywords | list[string] | REC | - | Brain search triggers |
 | density_score | float 0.80-1.00 | OPT | - | Content density |
-
 ## Route Object
-
 ```yaml
 route:
   pattern: string (regex or keyword list)
@@ -43,11 +39,9 @@ route:
   confidence_min: float 0.0-1.0
   conditions: list[string] (optional extra conditions)
 ```
-
 ## ID Pattern
 Regex: `^p02_router_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Body Structure (required sections)
 1. `## Routes` — route table: pattern, destination, priority, confidence_min
 2. `## Decision Logic` — algorithm for route selection
@@ -55,7 +49,6 @@ Rule: id MUST equal filename stem.
 4. `## Escalation` — handling ambiguous matches or low confidence
 5. `## Integration` — connection to dispatch_rule, agent, workflow
 6. `## References` — sources and documentation
-
 ## Constraints
 - max_bytes: 4096 (body only)
 - naming: p02_router_{slug}.md

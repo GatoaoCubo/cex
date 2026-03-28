@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: agent
-
 ## Frontmatter Fields
-
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string (p02_agent_{slug}) | YES | - | Namespace compliance |
@@ -32,11 +30,9 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | iso_files_count | integer | REC | - | ISO files in vectorstore |
 | routing_keywords | list[string] | REC | - | Brain search triggers |
 | density_score | float 0.80-1.00 | OPT | - | Content density |
-
 ## ID Pattern
 Regex: `^p02_agent_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Body Structure (required sections)
 1. `## Overview` — one paragraph: who, domain, primary function
 2. `## Architecture` — capabilities list, tools, satellite position
@@ -49,7 +45,6 @@ Rule: id MUST equal filename stem.
 9. `## Invocation` — how to spawn or invoke this agent
 10. `## Related Agents` — sibling agents, upstream, downstream
 11. `## Footer` — version, author, quality: null
-
 ## Constraints
 - max_bytes: 5120 (body only)
 - naming: p02_agent_{slug}.md + p02_agent_{slug}.yaml

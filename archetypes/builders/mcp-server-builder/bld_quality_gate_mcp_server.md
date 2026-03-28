@@ -15,15 +15,10 @@ density_score: 0.85
 ---
 
 # Gate: MCP Server
-
 ## Definition
-
 A `mcp_server` artifact specifies an MCP protocol server: its tools, resources, transport mechanism, and authentication strategy. It is a specification, not an implementation. Gates here ensure every server is unambiguously identifiable, its tools carry machine-readable schemas, and auth matches transport — preventing integration failures before a line of code is written.
-
 ## HARD Gates
-
 All HARD gates must pass. Any single failure sets score to 0 and blocks publish.
-
 | ID  | Check | Failure consequence |
 |-----|-------|---------------------|
 | H01 | YAML frontmatter parses without error | Artifact unparseable by tooling |
@@ -36,11 +31,8 @@ All HARD gates must pass. Any single failure sets score to 0 and blocks publish.
 | H08 | `transport` is one of: `stdio`, `sse`, `http` | Unknown transport — integration impossible |
 | H09 | `auth` field is explicitly declared (value or `"none"`) | Missing auth strategy causes insecure defaults |
 | H10 | `Tools` section present in body with >= 1 tool entry | Spec without tool details is incomplete |
-
 ## SOFT Scoring
-
 Weights sum to 100%. Each dimension scores 0 or its full weight.
-
 | ID  | Dimension | Weight | Criteria |
 |-----|-----------|--------|----------|
 | S01 | tldr quality | 1.0 | `tldr` <= 160 chars, names the server's purpose and primary tool |
@@ -55,9 +47,7 @@ Weights sum to 100%. Each dimension scores 0 or its full weight.
 | S10 | Examples for each tool | 1.0 | At least one request/response example per tool in body |
 | S11 | No implementation code in body | 1.0 | Body is specification only — no executable code blocks |
 | S12 | Density >= 0.80 | 0.5 | No filler: "this server provides", "allows you to", "in order to" |
-
 ## Actions
-
 | Score | Tier | Action |
 |-------|------|--------|
 | >= 9.5 | GOLDEN | Publish to pool + record in memory |
@@ -65,16 +55,9 @@ Weights sum to 100%. Each dimension scores 0 or its full weight.
 | >= 7.0 | REVIEW | Acceptable with documented improvement items |
 | < 7.0 | REJECT | Revise and resubmit — do not publish |
 | 0 (HARD fail) | REJECTED | Fix failing HARD gate(s) first |
-
 ## Bypass
-
 Bypasses are logged and expire automatically.
-
 | Field | Value |
 |-------|-------|
 | condition | Proof-of-concept server with single tool and no auth requirement (local stdio only) |
 | approver | P04 integration owner |
-| audit_log | Entry required in `records/governance/bypass_log.md` with gate ID, server id, transport type, and PoC scope note |
-| expiry | 14 days — full tool schemas and error handling must be added before expiry or artifact returns to DRAFT |
-
-H01 and H05 cannot be bypassed under any condition.

@@ -15,20 +15,15 @@ density_score: 0.87
 ---
 
 # Gate: action_prompt
-
 ## Definition
-
 | Field     | Value                                        |
 |-----------|----------------------------------------------|
 | metric    | input/output contract clarity + edge coverage |
 | threshold | 8.0                                          |
 | operator  | >=                                           |
 | scope     | all action_prompt artifacts (P03)            |
-
 ## HARD Gates
-
 All must pass. Failure on any = final score 0.
-
 | Gate | Check | Why |
 |------|-------|-----|
 | H01 | YAML frontmatter parses valid YAML | Broken YAML = broken prompt at runtime |
@@ -39,9 +34,7 @@ All must pass. Failure on any = final score 0.
 | H06 | All 21 required fields present | Completeness |
 | H07 | edge_cases has >= 2 entries | Robustness requirement |
 | H08 | body has all 5 required sections: Action, Input, Output, Validation, Edge Cases | Structure compliance |
-
 ## SOFT Scoring
-
 | Gate | Check | Weight |
 |------|-------|--------|
 | S01 | tldr <= 160 chars, non-empty | 1.0 |
@@ -56,20 +49,15 @@ All must pass. Failure on any = final score 0.
 | S10 | Input section uses table or structured format | 0.5 |
 | S11 | density_score >= 0.80 | 0.5 |
 | S12 | No filler phrases ("this document", "in summary", "please note") | 1.0 |
-
 Weights sum: 9.5. Normalize: divide each by 9.5 before scoring.
-
 ## Actions
-
 | Score | Action |
 |-------|--------|
 | >= 9.5 | GOLDEN — pool as reference action_prompt |
 | >= 8.0 | PUBLISH — ready for runtime injection |
 | >= 7.0 | REVIEW — tighten I/O contract or add edge cases |
 | < 7.0  | REJECT — rework action definition and output spec |
-
 ## Bypass
-
 | Field | Value |
 |-------|-------|
 | conditions | Urgent task requiring runtime prompt before full validation cycle |

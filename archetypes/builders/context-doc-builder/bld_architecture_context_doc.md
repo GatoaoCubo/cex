@@ -7,7 +7,6 @@ purpose: Component map of context_doc — inventory, dependencies, and architect
 ---
 
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | domain_scope | Explicit boundary — what the context covers and excludes | context_doc | required |
@@ -20,9 +19,7 @@ purpose: Component map of context_doc — inventory, dependencies, and architect
 | action_prompt | Task-level prompt that injects context_doc per invocation | P03 | consumer |
 | knowledge_card | Sibling artifact — single atomic fact with density gate | P01 | sibling |
 | glossary_entry | Sibling artifact — single controlled-vocabulary term definition | P01 | sibling |
-
 ## Dependency Graph
-
 ```
 domain_scope        --produces-->  background_narrative
 domain_scope        --produces-->  constraint_list
@@ -34,7 +31,6 @@ context_doc         --produces-->  action_prompt
 knowledge_card      --depends-->   context_doc
 glossary_entry      --depends-->   context_doc
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | domain_scope | background_narrative | produces | bounded domain as subject of narrative |
@@ -46,9 +42,7 @@ glossary_entry      --depends-->   context_doc
 | context_doc | action_prompt | produces | situational context injected per task |
 | knowledge_card | context_doc | depends | atomic facts scoped to same domain |
 | glossary_entry | context_doc | depends | term definitions scoped to same domain |
-
 ## Boundary Table
-
 | context_doc IS | context_doc IS NOT |
 |---------------|-------------------|
 | Multi-fact domain background for prompt hydration | A single atomic fact at high density (that is knowledge_card) |
@@ -57,9 +51,7 @@ glossary_entry      --depends-->   context_doc
 | Covers stakeholders, constraints, assumptions, dependencies | An agent persona with operational rules (that is system_prompt) |
 | Max 2048 bytes — concise enough for context injection | A full specification document or design artifact |
 | P01 content layer — pure knowledge, no execution logic | A runtime tool or executable component |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|-----------|---------|
 | scoping | domain_scope | Define what the context covers and excludes |

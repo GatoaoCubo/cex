@@ -1,5 +1,5 @@
 # CEX Feedback Report
-**Generated**: 2026-03-27 23:12
+**Generated**: 2026-03-28 10:08
 **Total artifacts scanned**: 1359
 **Avg density**: 0.791 | **Avg quality**: 9.06
 
@@ -150,10 +150,10 @@
 | P11_feedback/examples/ex_feedback_tone_correction.md | null | 0.64 | 0d | feedback |
 | archetypes/builders/naming-rule-builder/bld_system_prompt_na | null | 0.64 | 0d | system_prompt |
 | packages/amazon_analytics/error_handling.md | null | 0.64 | 1d | - |
-| archetypes/builders/daemon-builder/bld_system_prompt_daemon. | null | 0.64 | 0d | system_prompt |
+| archetypes/builders/daemon-builder/bld_system_prompt_daemon. | null | 0.64 | 1d | system_prompt |
 | archetypes/builders/dispatch-rule-builder/bld_system_prompt_ | null | 0.64 | 0d | system_prompt |
 | archetypes/builders/input-schema-builder/bld_memory_input_sc | null | 0.64 | 0d | learning_record |
-| archetypes/builders/diagram-builder/bld_system_prompt_diagra | null | 0.65 | 0d | system_prompt |
+| archetypes/builders/diagram-builder/bld_system_prompt_diagra | null | 0.65 | 1d | system_prompt |
 | packages/pesquisa/system_instruction.md | null | 0.65 | 1d | - |
 | archetypes/builders/law-builder/bld_memory_law.md | null | 0.65 | 0d | - |
 | archetypes/builders/lens-builder/bld_memory_lens.md | null | 0.65 | 0d | - |
@@ -200,7 +200,7 @@
 | archetypes/builders/validation-schema-builder/bld_memory_val | null | 0.66 | 0d | - |
 | archetypes/builders/validator-builder/bld_memory_validator.m | null | 0.66 | 0d | - |
 | archetypes/builders/workflow-builder/bld_memory_workflow.md | null | 0.66 | 0d | - |
-| archetypes/builders/glossary-entry-builder/bld_system_prompt | null | 0.66 | 0d | system_prompt |
+| archetypes/builders/glossary-entry-builder/bld_system_prompt | null | 0.66 | 1d | system_prompt |
 | P01_knowledge/examples/ex_knowledge_card_prompt_caching.md | null | 0.67 | 0d | knowledge_card |
 | P09_config/examples/ex_env_config_firecrawl.md | 9.0 | 0.67 | 1d | env_config |
 | archetypes/builders/daemon-builder/bld_memory_daemon.md | null | 0.67 | 0d | learning_record |
@@ -208,10 +208,10 @@
 | archetypes/builders/dispatch-rule-builder/bld_memory_dispatc | null | 0.67 | 0d | learning_record |
 | archetypes/builders/e2e-eval-builder/bld_memory_e2e_eval.md | null | 0.67 | 0d | learning_record |
 | archetypes/builders/embedding-config-builder/bld_memory_embe | null | 0.67 | 0d | learning_record |
-| archetypes/builders/few-shot-example-builder/bld_system_prom | null | 0.67 | 0d | system_prompt |
+| archetypes/builders/few-shot-example-builder/bld_system_prom | null | 0.67 | 1d | system_prompt |
 | archetypes/builders/interface-builder/bld_memory_interface.m | null | 0.67 | 0d | learning_record |
-| archetypes/builders/prompt-template-builder/bld_manifest_pro | null | 0.67 | 1d | type_builder |
-| archetypes/builders/type-def-builder/bld_manifest_type_def.m | null | 0.67 | 1d | type_builder |
+| archetypes/builders/prompt-template-builder/bld_manifest_pro | null | 0.67 | 0d | type_builder |
+| archetypes/builders/type-def-builder/bld_manifest_type_def.m | null | 0.67 | 0d | type_builder |
 | packages/photo/prompts/grid_diversity.md | null | 0.67 | 1d | - |
 | packages/video/prompts/storyboarder.md | null | 0.67 | 1d | - |
 | packages/anuncio/prompts/orchestrator.md | null | 0.67 | 1d | - |
@@ -220,9 +220,9 @@
 | archetypes/builders/rag-source-builder/bld_quality_gate_rag_ | null | 0.67 | 0d | quality_gate |
 | archetypes/builders/bugloop-builder/bld_memory_bugloop.md | null | 0.67 | 0d | learning_record |
 | packages/video/output_template.md | null | 0.67 | 1d | - |
-| archetypes/builders/fallback-chain-builder/bld_system_prompt | null | 0.67 | 0d | system_prompt |
-| archetypes/builders/feature-flag-builder/bld_system_prompt_f | null | 0.67 | 0d | system_prompt |
-| archetypes/builders/formatter-builder/bld_system_prompt_form | null | 0.67 | 0d | system_prompt |
+| archetypes/builders/fallback-chain-builder/bld_system_prompt | null | 0.67 | 1d | system_prompt |
+| archetypes/builders/feature-flag-builder/bld_system_prompt_f | null | 0.67 | 1d | system_prompt |
+| archetypes/builders/formatter-builder/bld_system_prompt_form | null | 0.67 | 1d | system_prompt |
 | archetypes/builders/golden-test-builder/bld_system_prompt_go | null | 0.67 | 0d | system_prompt |
 | P10_memory/examples/ex_learning_record_continuous_batching.m | 9.0 | 0.67 | 1d | learning_record |
 | archetypes/builders/prompt-template-builder/bld_quality_gate | null | 0.68 | 0d | quality_gate |
@@ -238,7 +238,7 @@
 | archetypes/builders/env-config-builder/bld_memory_env_config | null | 0.68 | 0d | learning_record |
 | archetypes/builders/guardrail-builder/bld_system_prompt_guar | null | 0.68 | 0d | system_prompt |
 | packages/marca/prompts/orchestrator.md | null | 0.68 | 1d | - |
-| archetypes/builders/handoff-builder/bld_system_prompt_handof | null | 0.68 | 0d | system_prompt |
+| archetypes/builders/handoff-builder/bld_system_prompt_handof | null | 0.68 | 1d | system_prompt |
 | archetypes/builders/iso-package-builder/bld_memory_iso_packa | null | 0.68 | 0d | learning_record |
 | archetypes/builders/scoring-rubric-builder/bld_quality_gate_ | null | 0.68 | 0d | quality_gate |
 | archetypes/builders/scraper-builder/bld_quality_gate_scraper | null | 0.68 | 0d | quality_gate |
@@ -258,7 +258,7 @@
 | archetypes/builders/validator-builder/bld_quality_gate_valid | null | 0.69 | 0d | quality_gate |
 | packages/amazon_analytics/data/domain_knowledge.md | null | 0.69 | 1d | - |
 | archetypes/builders/handoff-builder/bld_memory_handoff.md | null | 0.69 | 0d | learning_record |
-| archetypes/builders/naming-rule-builder/bld_manifest_naming_ | null | 0.69 | 1d | type_builder |
+| archetypes/builders/naming-rule-builder/bld_manifest_naming_ | null | 0.69 | 0d | type_builder |
 | archetypes/builders/client-builder/bld_memory_client.md | null | 0.69 | 0d | learning_record |
 | packages/marca/quick_start.md | null | 0.69 | 1d | - |
 | archetypes/builders/connector-builder/bld_memory_connector.m | null | 0.69 | 0d | learning_record |
@@ -272,7 +272,7 @@
 | packages/anuncio/prompts/descricao_builder.md | null | 0.69 | 1d | - |
 | packages/photo/output_template.md | null | 0.69 | 1d | - |
 | packages/voice/prompts/orchestrator.md | null | 0.69 | 1d | - |
-| archetypes/builders/_builder-builder/bld_system_prompt_build | null | 0.70 | 0d | system_prompt |
+| archetypes/builders/_builder-builder/bld_system_prompt_build | null | 0.70 | 1d | system_prompt |
 | archetypes/builders/law-builder/bld_system_prompt_law.md | null | 0.70 | 0d | system_prompt |
 | P09_config/templates/tpl_env_config.md | null | 0.70 | 1d | - |
 | archetypes/builders/spawn-config-builder/bld_system_prompt_s | null | 0.70 | 0d | system_prompt |
@@ -283,15 +283,15 @@
 | packages/voice/data/references/tts_openai.md | null | 0.70 | 1d | - |
 | packages/video/system_instruction.md | null | 0.70 | 1d | - |
 | P10_memory/examples/ex_axiom_scout_before_create.md | 9.5 | 0.70 | 1d | axiom |
-| archetypes/builders/dag-builder/bld_system_prompt_dag.md | null | 0.70 | 0d | system_prompt |
-| archetypes/builders/type-def-builder/bld_output_template_typ | null | 0.70 | 1d | output_template |
+| archetypes/builders/dag-builder/bld_system_prompt_dag.md | null | 0.70 | 1d | system_prompt |
+| archetypes/builders/type-def-builder/bld_output_template_typ | null | 0.70 | 0d | output_template |
 | packages/photo/examples.md | null | 0.70 | 1d | - |
 | P09_config/examples/ex_feature_flag_firecrawl_enabled.md | 9.0 | 0.70 | 1d | feature_flag |
 | archetypes/builders/hook-builder/bld_memory_hook.md | null | 0.70 | 0d | learning_record |
 | archetypes/builders/input-schema-builder/bld_quality_gate_in | null | 0.70 | 0d | quality_gate |
 | archetypes/builders/permission-builder/bld_instruction_permi | null | 0.70 | 0d | instruction |
 | packages/photo/system_instruction.md | null | 0.70 | 1d | - |
-| archetypes/builders/agent-builder/bld_system_prompt_agent.md | null | 0.70 | 0d | system_prompt |
+| archetypes/builders/agent-builder/bld_system_prompt_agent.md | null | 0.70 | 1d | system_prompt |
 | archetypes/builders/learning-record-builder/bld_system_promp | null | 0.70 | 0d | system_prompt |
 | archetypes/builders/lens-builder/bld_system_prompt_lens.md | null | 0.70 | 0d | system_prompt |
 | archetypes/builders/mcp-server-builder/bld_system_prompt_mcp | null | 0.70 | 0d | system_prompt |
@@ -306,7 +306,7 @@
 | archetypes/builders/instruction-builder/bld_quality_gate_ins | null | 0.71 | 0d | quality_gate |
 | packages/anuncio/prompts/ads_enrichment.md | null | 0.71 | 1d | - |
 | packages/marca/prompts/faq_due_diligence.md | null | 0.71 | 1d | - |
-| archetypes/builders/naming-rule-builder/bld_tools_naming_rul | null | 0.71 | 1d | tools |
+| archetypes/builders/naming-rule-builder/bld_tools_naming_rul | null | 0.71 | 0d | tools |
 | archetypes/builders/unit-eval-builder/bld_system_prompt_unit | null | 0.71 | 0d | system_prompt |
 | archetypes/builders/validation-schema-builder/bld_system_pro | null | 0.71 | 0d | system_prompt |
 | packages/voice/data/references/stt_whisper.md | null | 0.71 | 1d | - |
@@ -314,7 +314,7 @@
 | archetypes/builders/interface-builder/bld_quality_gate_inter | null | 0.71 | 0d | quality_gate |
 | archetypes/builders/iso-package-builder/bld_quality_gate_iso | null | 0.71 | 0d | quality_gate |
 | archetypes/builders/knowledge-card-builder/bld_quality_gate_ | null | 0.71 | 0d | quality_gate |
-| archetypes/builders/naming-rule-builder/bld_output_template_ | null | 0.71 | 1d | output_template |
+| archetypes/builders/naming-rule-builder/bld_output_template_ | null | 0.71 | 0d | output_template |
 | P01_knowledge/examples/ex_glossary_entry_director.md | null | 0.71 | 1d | - |
 | archetypes/builders/few-shot-example-builder/bld_quality_gat | null | 0.71 | 0d | quality_gate |
 | archetypes/builders/instruction-builder/bld_system_prompt_in | null | 0.71 | 0d | system_prompt |
@@ -351,10 +351,10 @@
 | archetypes/builders/guardrail-builder/bld_quality_gate_guard | null | 0.72 | 0d | quality_gate |
 | archetypes/builders/lens-builder/bld_instruction_lens.md | null | 0.72 | 0d | instruction |
 | archetypes/builders/parser-builder/bld_instruction_parser.md | null | 0.72 | 0d | instruction |
-| archetypes/builders/prompt-template-builder/bld_tools_prompt | null | 0.72 | 1d | tools |
+| archetypes/builders/prompt-template-builder/bld_tools_prompt | null | 0.72 | 0d | tools |
 | archetypes/builders/signal-builder/bld_system_prompt_signal. | null | 0.72 | 0d | system_prompt |
-| archetypes/builders/hook-builder/bld_system_prompt_hook.md | null | 0.72 | 0d | system_prompt |
-| archetypes/builders/naming-rule-builder/bld_examples_naming_ | null | 0.72 | 1d | examples |
+| archetypes/builders/hook-builder/bld_system_prompt_hook.md | null | 0.72 | 1d | system_prompt |
+| archetypes/builders/naming-rule-builder/bld_examples_naming_ | null | 0.72 | 0d | examples |
 | P01_knowledge/examples/ex_knowledge_card_git_worktree_isolat | null | 0.72 | 1d | knowledge_card |
 | P08_architecture/templates/tpl_director.md | null | 0.72 | 1d | - |
 | archetypes/builders/learning-record-builder/bld_instruction_ | null | 0.72 | 0d | instruction |
@@ -368,7 +368,7 @@
 | P01_knowledge/examples/ex_knowledge_card_bm25_search.md | null | 0.73 | 1d | knowledge_card |
 | P01_knowledge/examples/ex_knowledge_card_cex_fractal_archite | null | 0.73 | 1d | knowledge_card |
 | P01_knowledge/examples/ex_knowledge_card_cex_lens_concept.md | null | 0.73 | 1d | knowledge_card |
-| archetypes/builders/axiom-builder/bld_system_prompt_axiom.md | null | 0.73 | 0d | system_prompt |
+| archetypes/builders/axiom-builder/bld_system_prompt_axiom.md | null | 0.73 | 1d | system_prompt |
 | archetypes/builders/session-state-builder/bld_system_prompt_ | null | 0.73 | 0d | system_prompt |
 | packages/marca/prompts/brand_positioning.md | null | 0.73 | 1d | - |
 | archetypes/builders/lifecycle-rule-builder/bld_system_prompt | null | 0.73 | 0d | system_prompt |
@@ -388,7 +388,7 @@
 | P10_memory/templates/tpl_mental_model.md | null | 0.73 | 1d | - |
 | archetypes/builders/context-doc-builder/bld_tools_context_do | null | 0.73 | 1d | - |
 | archetypes/builders/law-builder/bld_instruction_law.md | null | 0.73 | 0d | instruction |
-| archetypes/builders/prompt-template-builder/bld_output_templ | null | 0.73 | 1d | - |
+| archetypes/builders/prompt-template-builder/bld_output_templ | null | 0.73 | 0d | - |
 | packages/anuncio/prompts/frameworks.md | null | 0.73 | 1d | - |
 | packages/voice/data/references/tts_elevenlabs.md | null | 0.73 | 1d | - |
 | N01_intelligence/knowledge/knowledge_card_target_audience.md | null | 0.73 | 0d | knowledge_card |
@@ -403,8 +403,8 @@
 | P01_knowledge/examples/ex_knowledge_card_rag_fundamentals.md | null | 0.74 | 0d | knowledge_card |
 | P06_schema/templates/tpl_input_schema.md | null | 0.74 | 1d | - |
 | P07_evals/examples/ex_quality_gate_copy.md | null | 0.74 | 0d | quality_gate |
-| archetypes/builders/benchmark-builder/bld_system_prompt_benc | null | 0.74 | 0d | system_prompt |
-| archetypes/builders/boot-config-builder/bld_system_prompt_bo | null | 0.74 | 0d | system_prompt |
+| archetypes/builders/benchmark-builder/bld_system_prompt_benc | null | 0.74 | 1d | system_prompt |
+| archetypes/builders/boot-config-builder/bld_system_prompt_bo | null | 0.74 | 1d | system_prompt |
 | archetypes/builders/chain-builder/bld_system_prompt_chain.md | null | 0.74 | 0d | system_prompt |
 | archetypes/builders/context-doc-builder/bld_system_prompt_co | null | 0.74 | 0d | system_prompt |
 | archetypes/builders/model-card-builder/bld_instruction_model | null | 0.74 | 0d | instruction |
@@ -416,7 +416,7 @@
 | P11_feedback/examples/ex_quality_gate_shokunin_pool.md | 9.5 | 0.74 | 1d | quality_gate |
 | P10_memory/examples/ex_axiom_lifecycle_hooks.md | 9.0 | 0.74 | 1d | axiom |
 | archetypes/builders/runtime-state-builder/bld_instruction_ru | null | 0.74 | 0d | instruction |
-| archetypes/builders/action-prompt-builder/bld_system_prompt_ | null | 0.74 | 0d | system_prompt |
+| archetypes/builders/action-prompt-builder/bld_system_prompt_ | null | 0.74 | 1d | system_prompt |
 | archetypes/builders/skill-builder/bld_system_prompt_skill.md | null | 0.74 | 0d | system_prompt |
 | packages/anuncio/prompts/bullet_points.md | null | 0.74 | 1d | - |
 | packages/photo/prompts/orchestrator.md | null | 0.74 | 1d | - |
@@ -439,7 +439,7 @@
 | archetypes/builders/mcp-server-builder/bld_instruction_mcp_s | null | 0.75 | 0d | instruction |
 | P01_knowledge/templates/tpl_knowledge_card_test.md | null | 0.75 | 1d | - |
 | P11_feedback/examples/ex_quality_gate_cex_quality.md | 9.0 | 0.75 | 1d | quality_gate |
-| archetypes/builders/prompt-template-builder/bld_config_promp | null | 0.75 | 1d | config |
+| archetypes/builders/prompt-template-builder/bld_config_promp | null | 0.75 | 0d | config |
 | archetypes/builders/prompt-template-builder/bld_instruction_ | null | 0.75 | 0d | instruction |
 | archetypes/builders/response-format-builder/bld_instruction_ | null | 0.75 | 0d | instruction |
 | archetypes/builders/signal-builder/bld_instruction_signal.md | null | 0.75 | 0d | instruction |
@@ -545,7 +545,7 @@
 | archetypes/builders/unit-eval-builder/bld_collaboration_unit | null | 0.77 | 0d | - |
 | archetypes/builders/validator-builder/bld_collaboration_vali | null | 0.77 | 0d | - |
 | archetypes/builders/validator-builder/bld_instruction_valida | null | 0.77 | 0d | instruction |
-| archetypes/builders/validator-builder-codex/bld_collaboratio | null | 0.77 | 1d | - |
+| archetypes/builders/validator-builder-codex/bld_collaboratio | null | 0.77 | 0d | - |
 | archetypes/builders/workflow-builder/bld_collaboration_workf | null | 0.77 | 0d | - |
 | archetypes/builders/cli-tool-builder/bld_knowledge_card_cli_ | null | 0.77 | 0d | - |
 | archetypes/builders/connector-builder/bld_knowledge_card_con | null | 0.77 | 0d | - |
@@ -564,9 +564,9 @@
 | P12_orchestration/README.md | null | 0.77 | 0d | - |
 | archetypes/builders/bld_norms.md | null | 0.77 | 1d | - |
 | archetypes/builders/dag-builder/bld_knowledge_card_dag.md | null | 0.77 | 0d | - |
-| archetypes/builders/env-config-builder/bld_config_env_config | null | 0.77 | 1d | - |
+| archetypes/builders/env-config-builder/bld_config_env_config | null | 0.77 | 0d | - |
 | archetypes/builders/law-builder/bld_examples_law.md | null | 0.77 | 1d | examples |
-| archetypes/builders/path-config-builder/bld_config_path_conf | null | 0.77 | 1d | - |
+| archetypes/builders/path-config-builder/bld_config_path_conf | null | 0.77 | 0d | - |
 | archetypes/builders/embedding-config-builder/bld_knowledge_c | null | 0.77 | 0d | - |
 | archetypes/builders/feature-flag-builder/bld_knowledge_card_ | null | 0.77 | 0d | - |
 | archetypes/builders/formatter-builder/bld_knowledge_card_for | null | 0.77 | 0d | - |
@@ -583,19 +583,19 @@
 | archetypes/builders/golden-test-builder/bld_collaboration_go | null | 0.77 | 0d | - |
 | archetypes/builders/guardrail-builder/bld_collaboration_guar | null | 0.77 | 0d | - |
 | archetypes/builders/hook-builder/bld_knowledge_card_hook.md | null | 0.77 | 0d | - |
-| archetypes/builders/scraper-builder/bld_config_scraper.md | null | 0.77 | 1d | - |
-| archetypes/builders/spawn-config-builder/bld_config_spawn_co | null | 0.77 | 1d | - |
+| archetypes/builders/scraper-builder/bld_config_scraper.md | null | 0.77 | 0d | - |
+| archetypes/builders/spawn-config-builder/bld_config_spawn_co | null | 0.77 | 0d | - |
 | P01_knowledge/examples/ex_knowledge_card_bling_erp_automatio | null | 0.77 | 1d | knowledge_card |
 | archetypes/builders/system-prompt-builder/bld_instruction_sy | null | 0.77 | 0d | instruction |
 | P01_knowledge/examples/ex_knowledge_card_memory_session_comp | null | 0.77 | 1d | knowledge_card |
 | P01_knowledge/examples/ex_rag_source_brain_faiss_index.md | null | 0.77 | 1d | rag_source |
 | P07_evals/examples/ex_scoring_rubric_5d_scoring.md | 9.2 | 0.77 | 1d | scoring_rubric |
 | P12_orchestration/templates/tpl_handoff.md | null | 0.77 | 1d | - |
-| archetypes/builders/bugloop-builder/bld_system_prompt_bugloo | null | 0.77 | 0d | system_prompt |
-| archetypes/builders/optimizer-builder/bld_config_optimizer.m | null | 0.77 | 1d | - |
+| archetypes/builders/bugloop-builder/bld_system_prompt_bugloo | null | 0.77 | 1d | system_prompt |
+| archetypes/builders/optimizer-builder/bld_config_optimizer.m | null | 0.77 | 0d | - |
 | archetypes/builders/response-format-builder/bld_system_promp | null | 0.77 | 0d | system_prompt |
 | archetypes/builders/router-builder/bld_system_prompt_router. | null | 0.77 | 0d | system_prompt |
-| archetypes/builders/system-prompt-builder/bld_config_system_ | null | 0.77 | 1d | - |
+| archetypes/builders/system-prompt-builder/bld_config_system_ | null | 0.77 | 0d | - |
 | packages/anuncio/examples.md | null | 0.77 | 1d | - |
 | P01_knowledge/examples/ex_knowledge_card_memory_persistence. | null | 0.77 | 1d | knowledge_card |
 | archetypes/builders/fallback-chain-builder/bld_knowledge_car | null | 0.77 | 0d | - |
@@ -633,17 +633,17 @@
 | archetypes/builders/lifecycle-rule-builder/bld_collaboration | null | 0.78 | 0d | - |
 | archetypes/builders/naming-rule-builder/bld_collaboration_na | null | 0.78 | 0d | - |
 | archetypes/builders/path-config-builder/bld_collaboration_pa | null | 0.78 | 0d | - |
-| archetypes/builders/quality-gate-builder/bld_config_quality_ | null | 0.78 | 1d | - |
+| archetypes/builders/quality-gate-builder/bld_config_quality_ | null | 0.78 | 0d | - |
 | archetypes/builders/quality-gate-builder/bld_system_prompt_q | null | 0.78 | 0d | system_prompt |
-| archetypes/builders/rag-source-builder/bld_config_rag_source | null | 0.78 | 1d | - |
-| archetypes/builders/router-builder/bld_config_router.md | null | 0.78 | 1d | - |
+| archetypes/builders/rag-source-builder/bld_config_rag_source | null | 0.78 | 0d | - |
+| archetypes/builders/router-builder/bld_config_router.md | null | 0.78 | 0d | - |
 | archetypes/builders/runtime-rule-builder/bld_system_prompt_r | null | 0.78 | 0d | system_prompt |
 | archetypes/builders/runtime-state-builder/bld_system_prompt_ | null | 0.78 | 0d | system_prompt |
 | archetypes/builders/scoring-rubric-builder/bld_collaboration | null | 0.78 | 0d | - |
 | archetypes/builders/scraper-builder/bld_collaboration_scrape | null | 0.78 | 0d | - |
 | archetypes/builders/session-state-builder/bld_collaboration_ | null | 0.78 | 0d | - |
 | archetypes/builders/smoke-eval-builder/bld_collaboration_smo | null | 0.78 | 0d | - |
-| archetypes/builders/workflow-builder/bld_config_workflow.md | null | 0.78 | 1d | - |
+| archetypes/builders/workflow-builder/bld_config_workflow.md | null | 0.78 | 0d | - |
 | N02_marketing/prompts/prompt_template_sales_pitch.md | null | 0.78 | 0d | prompt_template |
 | archetypes/builders/env-config-builder/bld_knowledge_card_en | null | 0.78 | 0d | - |
 | packages/anuncio/prompts/qa_validation.md | null | 0.78 | 1d | - |
@@ -653,10 +653,10 @@
 | archetypes/builders/context-doc-builder/bld_knowledge_card_c | null | 0.78 | 0d | - |
 | archetypes/builders/glossary-entry-builder/bld_knowledge_car | null | 0.78 | 0d | - |
 | archetypes/builders/interface-builder/bld_collaboration_inte | null | 0.78 | 0d | - |
-| archetypes/builders/runtime-rule-builder/bld_config_runtime_ | null | 0.78 | 1d | - |
+| archetypes/builders/runtime-rule-builder/bld_config_runtime_ | null | 0.78 | 0d | - |
 | packages/anuncio/system_instruction_whitelabel.md | null | 0.78 | 1d | - |
 | P01_knowledge/examples/ex_knowledge_card_slide_generation.md | null | 0.78 | 1d | knowledge_card |
-| archetypes/builders/glossary-entry-builder/bld_examples_glos | null | 0.78 | 1d | - |
+| archetypes/builders/glossary-entry-builder/bld_examples_glos | null | 0.78 | 0d | - |
 | archetypes/builders/lifecycle-rule-builder/bld_quality_gate_ | null | 0.78 | 0d | quality_gate |
 | archetypes/builders/mcp-server-builder/bld_quality_gate_mcp_ | null | 0.78 | 0d | quality_gate |
 | archetypes/builders/mental-model-builder/bld_quality_gate_me | null | 0.78 | 0d | quality_gate |
@@ -668,7 +668,7 @@
 | archetypes/builders/permission-builder/bld_collaboration_per | null | 0.78 | 0d | - |
 | archetypes/builders/plugin-builder/bld_collaboration_plugin. | null | 0.78 | 0d | - |
 | archetypes/builders/rag-source-builder/bld_collaboration_rag | null | 0.78 | 0d | - |
-| archetypes/builders/rag-source-builder/bld_examples_rag_sour | null | 0.78 | 1d | - |
+| archetypes/builders/rag-source-builder/bld_examples_rag_sour | null | 0.78 | 0d | - |
 | archetypes/builders/signal-builder/bld_collaboration_signal. | null | 0.78 | 0d | - |
 | archetypes/builders/skill-builder/bld_collaboration_skill.md | null | 0.78 | 0d | - |
 | packages/pesquisa/examples.md | null | 0.78 | 1d | - |
@@ -678,38 +678,38 @@
 | archetypes/builders/brain-index-builder/bld_knowledge_card_b | null | 0.78 | 0d | - |
 | archetypes/builders/cli-tool-builder/bld_tools_cli_tool.md | null | 0.78 | 1d | - |
 | archetypes/builders/feature-flag-builder/bld_tools_feature_f | null | 0.78 | 1d | - |
-| archetypes/builders/path-config-builder/bld_tools_path_confi | null | 0.78 | 1d | - |
+| archetypes/builders/path-config-builder/bld_tools_path_confi | null | 0.78 | 0d | - |
 | archetypes/builders/prompt-template-builder/bld_system_promp | null | 0.78 | 0d | system_prompt |
-| archetypes/builders/scraper-builder/bld_tools_scraper.md | null | 0.78 | 1d | - |
-| archetypes/builders/smoke-eval-builder/bld_config_smoke_eval | null | 0.78 | 1d | - |
+| archetypes/builders/scraper-builder/bld_tools_scraper.md | null | 0.78 | 0d | - |
+| archetypes/builders/smoke-eval-builder/bld_config_smoke_eval | null | 0.78 | 0d | - |
 | archetypes/builders/action-prompt-builder/bld_config_action_ | null | 0.78 | 1d | - |
 | archetypes/builders/agent-builder/bld_collaboration_agent.md | null | 0.78 | 0d | - |
 | archetypes/builders/instruction-builder/bld_collaboration_in | null | 0.78 | 0d | - |
 | archetypes/builders/instruction-builder/bld_config_instructi | null | 0.78 | 1d | - |
 | archetypes/builders/iso-package-builder/bld_collaboration_is | null | 0.78 | 0d | - |
-| archetypes/builders/plugin-builder/bld_config_plugin.md | null | 0.78 | 1d | - |
-| archetypes/builders/skill-builder/bld_config_skill.md | null | 0.78 | 1d | - |
+| archetypes/builders/plugin-builder/bld_config_plugin.md | null | 0.78 | 0d | - |
+| archetypes/builders/skill-builder/bld_config_skill.md | null | 0.78 | 0d | - |
 | P01_knowledge/examples/ex_knowledge_card_amazon_ads_benchmar | null | 0.79 | 1d | knowledge_card |
 | P01_knowledge/examples/ex_knowledge_card_claude_agent_sdk_pa | null | 0.79 | 1d | knowledge_card |
 | archetypes/builders/agent-builder/bld_knowledge_card_agent.m | null | 0.79 | 0d | - |
 | archetypes/builders/context-doc-builder/bld_output_template_ | null | 0.79 | 1d | - |
 | archetypes/builders/learning-record-builder/bld_quality_gate | null | 0.79 | 0d | quality_gate |
 | archetypes/builders/model-card-builder/bld_quality_gate_mode | null | 0.79 | 0d | quality_gate |
-| archetypes/builders/naming-rule-builder/bld_config_naming_ru | null | 0.79 | 1d | config |
-| archetypes/builders/prompt-template-builder/bld_schema_promp | null | 0.79 | 1d | type_def |
+| archetypes/builders/naming-rule-builder/bld_config_naming_ru | null | 0.79 | 0d | config |
+| archetypes/builders/prompt-template-builder/bld_schema_promp | null | 0.79 | 0d | type_def |
 | packages/anuncio/prompts/titulo_generator.md | null | 0.79 | 1d | - |
 | P01_knowledge/examples/ex_knowledge_card_llm_benchmark_ecomm | null | 0.79 | 1d | knowledge_card |
 | archetypes/builders/axiom-builder/bld_config_axiom.md | null | 0.79 | 1d | - |
-| archetypes/builders/few-shot-example-builder/bld_examples_fe | null | 0.79 | 1d | - |
+| archetypes/builders/few-shot-example-builder/bld_examples_fe | null | 0.79 | 0d | - |
 | archetypes/builders/mcp-server-builder/bld_collaboration_mcp | null | 0.79 | 0d | - |
-| archetypes/builders/permission-builder/bld_config_permission | null | 0.79 | 1d | - |
+| archetypes/builders/permission-builder/bld_config_permission | null | 0.79 | 0d | - |
 | archetypes/builders/response-format-builder/bld_collaboratio | null | 0.79 | 0d | - |
 | archetypes/builders/runtime-state-builder/bld_collaboration_ | null | 0.79 | 0d | - |
-| archetypes/builders/type-def-builder/bld_examples_type_def.m | null | 0.79 | 1d | examples |
-| archetypes/builders/type-def-builder/bld_tools_type_def.md | null | 0.79 | 1d | tools |
-| archetypes/builders/validator-builder-codex/bld_config_valid | null | 0.79 | 1d | - |
+| archetypes/builders/type-def-builder/bld_examples_type_def.m | null | 0.79 | 0d | examples |
+| archetypes/builders/type-def-builder/bld_tools_type_def.md | null | 0.79 | 0d | tools |
+| archetypes/builders/validator-builder-codex/bld_config_valid | null | 0.79 | 0d | - |
 | P01_knowledge/examples/kc_format_benchmark_cex_types.md | 9.5 | 0.79 | 1d | knowledge_card |
-| archetypes/builders/few-shot-example-builder/bld_schema_few_ | null | 0.79 | 0d | - |
+| archetypes/builders/few-shot-example-builder/bld_schema_few_ | null | 0.79 | 1d | - |
 | archetypes/builders/mental-model-builder/bld_config_mental_m | null | 0.79 | 1d | - |
 | packages/amazon_analytics/quick_start.md | null | 0.79 | 1d | - |
 | packages/voice/prime.md | null | 0.79 | 1d | - |
@@ -746,10 +746,10 @@
 | archetypes/builders/golden-test-builder/bld_config_golden_te | null | 0.79 | 1d | - |
 | archetypes/builders/hook-builder/bld_tools_hook.md | null | 0.79 | 1d | - |
 | archetypes/builders/mcp-server-builder/bld_config_mcp_server | null | 0.79 | 1d | - |
-| archetypes/builders/parser-builder/bld_tools_parser.md | null | 0.79 | 1d | - |
-| archetypes/builders/router-builder/bld_tools_router.md | null | 0.79 | 1d | - |
-| archetypes/builders/runtime-rule-builder/bld_tools_runtime_r | null | 0.79 | 1d | - |
-| archetypes/builders/skill-builder/bld_tools_skill.md | null | 0.79 | 1d | - |
+| archetypes/builders/parser-builder/bld_tools_parser.md | null | 0.79 | 0d | - |
+| archetypes/builders/router-builder/bld_tools_router.md | null | 0.79 | 0d | - |
+| archetypes/builders/runtime-rule-builder/bld_tools_runtime_r | null | 0.79 | 0d | - |
+| archetypes/builders/skill-builder/bld_tools_skill.md | null | 0.79 | 0d | - |
 | packages/photo/upload_kit.md | null | 0.79 | 1d | - |
 | P02_model/templates/tpl_mental_model_codebase_mapper.md | 8.5 | 0.79 | 1d | mental_model |
 | archetypes/builders/diagram-builder/bld_output_template_diag | null | 0.79 | 1d | - |
@@ -760,7 +760,7 @@
 | archetypes/builders/rag-source-builder/bld_knowledge_card_ra | null | 0.79 | 0d | - |
 | archetypes/builders/runtime-rule-builder/bld_collaboration_r | null | 0.79 | 0d | - |
 | P10_memory/templates/tpl_axiom_session_compression.md | null | 0.79 | 1d | - |
-| archetypes/builders/component-map-builder/bld_schema_compone | null | 0.79 | 0d | schema |
+| archetypes/builders/component-map-builder/bld_schema_compone | null | 0.79 | 1d | schema |
 | archetypes/builders/context-doc-builder/bld_config_context_d | null | 0.80 | 1d | - |
 | archetypes/builders/knowledge-card-builder/bld_schema_knowle | null | 0.80 | 0d | - |
 | packages/voice/architecture.md | null | 0.80 | 1d | - |
@@ -801,10 +801,10 @@
 | P11_feedback/examples/ex_feedback_tone_correction.md | 0.64 | 0d | feedback |
 | archetypes/builders/naming-rule-builder/bld_system_prompt_na | 0.64 | 0d | system_prompt |
 | packages/amazon_analytics/error_handling.md | 0.64 | 1d | - |
-| archetypes/builders/daemon-builder/bld_system_prompt_daemon. | 0.64 | 0d | system_prompt |
+| archetypes/builders/daemon-builder/bld_system_prompt_daemon. | 0.64 | 1d | system_prompt |
 | archetypes/builders/dispatch-rule-builder/bld_system_prompt_ | 0.64 | 0d | system_prompt |
 | archetypes/builders/input-schema-builder/bld_memory_input_sc | 0.64 | 0d | learning_record |
-| archetypes/builders/diagram-builder/bld_system_prompt_diagra | 0.65 | 0d | system_prompt |
+| archetypes/builders/diagram-builder/bld_system_prompt_diagra | 0.65 | 1d | system_prompt |
 | packages/pesquisa/system_instruction.md | 0.65 | 1d | - |
 | archetypes/builders/law-builder/bld_memory_law.md | 0.65 | 0d | - |
 | archetypes/builders/lens-builder/bld_memory_lens.md | 0.65 | 0d | - |
@@ -813,4 +813,4 @@
 | ... and 1218 more | | | |
 
 ---
-*Generated by cex_feedback.py | 2026-03-27 23:12*
+*Generated by cex_feedback.py | 2026-03-28 10:08*

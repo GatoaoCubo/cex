@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: permission
-
 ## Frontmatter Fields
-
 ### Required
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
@@ -31,7 +29,6 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | tags | list[string], len >= 3 | YES | — | Searchability |
 | tldr | string <= 160ch | YES | — | Dense summary |
 | domain | string | YES | — | Domain this permission covers |
-
 ### Recommended
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
@@ -39,11 +36,9 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | escalation | string | REC | — | How to request elevated access |
 | linked_artifacts | object {primary, related} | REC | — | Cross-references |
 | density_score | float 0.80-1.00 | REC | — | Content density |
-
 ## ID Pattern
 Regex: `^p09_perm_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Body Structure (required sections)
 1. `## Scope` — what resource or artifact is controlled
 2. `## Access Matrix` — table of role x action (read/write/execute)
@@ -51,7 +46,6 @@ Rule: id MUST equal filename stem.
 4. `## Deny List` — explicit denied role-action pairs (overrides allow)
 5. `## Audit` — what access events get logged
 6. `## Escalation` — how to request elevated access
-
 ## Constraints
 - max_bytes: 3072 (body only)
 - naming: p09_perm_{scope_slug}.md

@@ -15,22 +15,15 @@ density_score: 0.91
 ---
 
 # Gate: Hook
-
 ## Definition
-
 | Field     | Value |
 |-----------|-------|
 | metric    | weighted soft score + all hard gates pass |
 | threshold | 7.0 to publish; 8.0 for pool; 9.5 for golden |
 | operator  | AND (all hard) + weighted average (soft) |
 | scope     | any artifact with `kind: hook` |
-
----
-
 ## HARD Gates
-
 All must pass. Any failure = immediate reject.
-
 | ID  | Check | Fail Condition |
 |-----|-------|----------------|
 | H01 | Frontmatter parses as valid YAML | Parse error on any field |
@@ -43,13 +36,8 @@ All must pass. Any failure = immediate reject.
 | H08 | `timeout_ms` is a positive integer | Zero, negative, or non-integer |
 | H09 | `script_path` is a relative path (no drive letters, no `~`) | Absolute path or home-relative path |
 | H10 | `error_strategy` field present with valid value (`continue`, `abort`, `log`) | Missing or invalid strategy |
-
----
-
 ## SOFT Scoring
-
 Total weights sum to 100%.
-
 | ID  | Dimension | Weight | 10 pts | 5 pts | 0 pts |
 |-----|-----------|--------|--------|-------|-------|
 | S01 | Trigger specificity | 1.0 | Event + matcher condition both defined (e.g., tool name pattern) | Event only, no matcher | No trigger config |
@@ -62,28 +50,18 @@ Total weights sum to 100%.
 | S08 | Idempotency | 1.0 | Hook behavior is safe to run multiple times per event | Likely idempotent but unverified | Clearly non-idempotent |
 | S09 | Async safety | 0.5 | Async execution implications documented if `blocking: false` | Async used without notes | Blocking mismatch with behavior |
 | S10 | Description actionability | 0.5 | Description states WHAT the hook does + WHY it exists | Either what or why present | Generic or empty description |
-
 **Score = sum(pts * weight) / sum(max_pts * weight) * 10**
-
----
-
 ## Actions
-
 | Score | Tier | Action |
 |-------|------|--------|
 | >= 9.5 | Golden | Publish to pool as golden hook pattern |
 | >= 8.0 | Skilled | Publish to pool + log pattern |
 | >= 7.0 | Learning | Use but flag for improvement |
 | < 7.0 | Rejected | Return to author with gate report |
-
----
-
 ## Bypass
-
 | Field | Value |
 |-------|-------|
 | Conditions | Emergency incident hook needed immediately; trigger config incomplete due to unknown event schema |
 | Approver | System owner only |
 | Audit trail | `bypass_reason` field required in frontmatter |
 | Expiry | 48 hours; hook must reach full compliance or be deactivated |
-| Never bypass | H01 (YAML parse), H05 (quality null), H08 (timeout — hooks without timeout can block the entire runtime) |

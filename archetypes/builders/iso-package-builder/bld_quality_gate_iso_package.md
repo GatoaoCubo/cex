@@ -15,22 +15,15 @@ density_score: 0.93
 ---
 
 # Gate: ISO Package
-
 ## Definition
-
 | Field     | Value |
 |-----------|-------|
 | metric    | weighted soft score + all hard gates pass |
 | threshold | 7.0 to publish; 8.0 for pool; 9.5 for golden |
 | operator  | AND (all hard) + weighted average (soft) |
 | scope     | any artifact with `kind: iso_package` |
-
----
-
 ## HARD Gates
-
 All must pass. Any failure = immediate reject.
-
 | ID  | Check | Fail Condition |
 |-----|-------|----------------|
 | H01 | `manifest.yaml` parses as valid YAML | Parse error anywhere in manifest |
@@ -43,13 +36,8 @@ All must pass. Any failure = immediate reject.
 | H08 | File count matches tier (minimal=3, standard=7, complete=10, whitelabel=12) | File count off by any amount |
 | H09 | No hardcoded absolute paths in any bundled file | Any `/home/`, `C:\`, `~`, or machine-specific path found |
 | H10 | `system_instruction.md` is <= 4096 tokens | Token count exceeds limit |
-
----
-
 ## SOFT Scoring
-
 Total weights sum to 100%.
-
 | ID  | Dimension | Weight | 10 pts | 5 pts | 0 pts |
 |-----|-----------|--------|--------|-------|-------|
 | S01 | LP mapping accuracy | 1.0 | Every file lists correct pillar-layer mapping in inventory | Most files mapped; some gaps | LP mapping absent |
@@ -62,28 +50,14 @@ Total weights sum to 100%.
 | S08 | Version pinning | 0.5 | Manifest version pinned; changelog entry present | Version present, no changelog | No version |
 | S09 | Whitelabel readiness | 0.5 | If tier=whitelabel: branding slots documented and parameterized | Partial parameterization | Not applicable or missing entirely |
 | S10 | Distribution metadata | 0.5 | `author`, `license`, and `contact` all present in manifest | Partial metadata | None |
-
 **Score = sum(pts * weight) / sum(max_pts * weight) * 10**
-
----
-
 ## Actions
-
 | Score | Tier | Action |
 |-------|------|--------|
 | >= 9.5 | Golden | Publish to distribution pool as golden package template |
 | >= 8.0 | Skilled | Publish to pool + log pattern |
 | >= 7.0 | Learning | Use but flag for improvement |
 | < 7.0 | Rejected | Return to author with gate report |
-
----
-
 ## Bypass
-
 | Field | Value |
 |-------|-------|
-| Conditions | Emergency patch deployment where full tier compliance cannot be verified immediately |
-| Approver | Package owner + distribution lead |
-| Audit trail | `bypass_reason` + `patch: true` required in manifest.yaml |
-| Expiry | 72 hours; package must reach full tier compliance before next distribution |
-| Never bypass | H01 (manifest YAML), H05 (quality null), H09 (hardcoded paths break portability and cannot be safely deployed) |

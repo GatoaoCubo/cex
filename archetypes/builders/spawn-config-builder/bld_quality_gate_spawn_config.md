@@ -19,15 +19,9 @@ tldr: "Validates satellite spawn configurations for mode, CLI flags, model pairi
 ---
 
 ## Definition
-
 A spawn config defines how a satellite process is launched: execution mode (solo, grid, or continuous), CLI flags passed to the runtime, the model driving the satellite, and how prompts and recovery are handled. This gate ensures every spawn config is safe to execute without human intervention and unambiguous to the launch runtime.
-
----
-
 ## HARD Gates
-
 Failure on any HARD gate causes immediate REJECT. No score is computed.
-
 | ID  | Check | Rule |
 |-----|-------|------|
 | H01 | Frontmatter parses | YAML frontmatter is valid and complete with no syntax errors |
@@ -40,13 +34,8 @@ Failure on any HARD gate causes immediate REJECT. No score is computed.
 | H08 | CLI flags defined | `cli_flags` is a non-empty list with at least one entry |
 | H09 | Satellite-model pairing | `satellite` and `model` are both non-empty strings |
 | H10 | Prompt size within limits | Inline `prompt` is <= 200 characters; longer prompts reference a handoff file path |
-
----
-
 ## SOFT Scoring
-
 Score each dimension 0 or 10. Multiply by weight. Divide total by sum of weights, scale to 0-10.
-
 | Dimension | Weight | Pass Condition |
 |-----------|--------|----------------|
 | Density >= 0.80 | 1.0 | Config is concise; no redundant or placeholder fields |
@@ -60,29 +49,19 @@ Score each dimension 0 or 10. Multiply by weight. Divide total by sum of weights
 | Wave ordering for grid mode | 1.0 | Grid and continuous configs include `wave_order` or explicit dependency list |
 | Spawn delay documented | 0.5 | `spawn_delay_ms` is defined when mode is `grid` or `continuous` |
 | No task instructions in body | 1.0 | Config contains parameters only; no prose task instructions |
-
 Sum of weights: 9.0. `soft_score = sum(weight * gate_score) / 9.0 * 10`
-
----
-
 ## Actions
-
 | Score | Action |
 |-------|--------|
 | >= 9.5 | GOLDEN — archive to pool as reference spawn config |
 | >= 8.0 | PUBLISH — safe for production satellite dispatch |
 | >= 7.0 | REVIEW — usable but missing safety or recovery detail |
 | < 7.0 | REJECT — do not execute; incomplete or unsafe config |
-
----
-
 ## Bypass
-
 | Field | Value |
 |-------|-------|
 | condition | Emergency satellite launch during active incident where config cannot be revised before deploy |
 | approver | Lead engineer on duty (human, not automated) |
 | audit_log | Entry required in `.claude/bypasses/spawn_config_{date}.md` with written justification |
 | expiry | 24 hours; config must reach PUBLISH score before next planned launch |
-
 H01 (frontmatter parses) and H05 (quality is null) cannot be bypassed under any condition.

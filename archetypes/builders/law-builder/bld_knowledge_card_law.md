@@ -8,13 +8,9 @@ sources: law-builder MANIFEST.md + SCHEMA.md v1.0.0
 ---
 
 # Domain Knowledge: law
-
 ## Executive Summary
-
 Laws are inviolable operational rules — the highest-authority governance artifacts in P08. Each law encodes ONE mandate in imperative mood (MUST/SHALL/NEVER/ALWAYS) with an explicit enforcement mechanism and exception list. Laws differ from instructions (flexible guides, P03), guardrails (safety restrictions, P11), and axioms (abstract truths, P10) by being operationally binding with named consequences for violation.
-
 ## Spec Table
-
 | Property | Value |
 |----------|-------|
 | Pillar | P08 (governance) |
@@ -31,9 +27,7 @@ Laws are inviolable operational rules — the highest-authority governance artif
 | Scope values | `system`, `satellite`, `domain` |
 | Priority range | 1–10 (10 = highest; resolves law conflicts) |
 | Quality gates | 9 HARD + 10 SOFT |
-
 ## Patterns
-
 | Pattern | Correct Form |
 |---------|-------------|
 | Imperative statement | "Systems MUST validate output before committing" — one sentence, one modal verb |
@@ -43,9 +37,7 @@ Laws are inviolable operational rules — the highest-authority governance artif
 | Number as PK | `number` is the unique key across all laws; never reuse a retired number |
 | Priority 10 | Reserved for laws that win all conflicts unconditionally |
 | Scope narrowing | `domain` scope: law applies only within named domain, not system-wide |
-
 ## Anti-Patterns
-
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
 | `kind: rule` or `kind: mandate` | H04 hard gate — exact literal "law" required |
@@ -57,9 +49,7 @@ Laws are inviolable operational rules — the highest-authority governance artif
 | Body > 3072 bytes | Exceeds max_bytes hard constraint |
 | Enforcement = "enforced automatically" | Must name the specific tool, hook, or gate |
 | `number` collision with existing law | Uniqueness gate — verify against all P08 laws first |
-
 ## Application
-
 1. Find next sequential `number` — verify no collision with existing P08 laws
 2. Set `id: p08_law_{number}` and filename `p08_law_{number}.md` — must match exactly
 3. Write `statement`: one imperative sentence using MUST / SHALL / NEVER / ALWAYS
@@ -69,9 +59,7 @@ Laws are inviolable operational rules — the highest-authority governance artif
 7. Set `scope` (system / satellite / domain) and `priority` (1–10)
 8. Write all 8 body sections: Statement, Rationale, Enforcement, Exceptions, Examples, Violations, History, References
 9. Validate: H02 id pattern, H04 kind literal, H05 null quality, H08 unique number, H09 imperative mood — plus 10 SOFT gates
-
 ## References
-
 - law-builder SCHEMA.md v1.0.0
 - law-builder QUALITY_GATES.md (9 HARD + 10 SOFT)
 - RFC 2119 — requirement levels MUST/SHALL/SHOULD

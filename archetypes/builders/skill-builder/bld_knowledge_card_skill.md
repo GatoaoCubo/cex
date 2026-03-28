@@ -8,13 +8,9 @@ sources: skill-builder MANIFEST.md + SCHEMA.md
 ---
 
 # Domain Knowledge: skill
-
 ## Executive Summary
-
 Skills are reusable, phase-structured capabilities with a defined trigger — the bridge between a raw LLM and a repeatable workflow. Each skill has an ordered phase list (discover/configure/execute/validate) and a precise invocation pattern. Unlike agents (which carry identity/persona) or action_prompts (single-shot task text), skills are stateless capability definitions with no "You are" language and no task instructions.
-
 ## Spec Table
-
 | Property | Value |
 |----------|-------|
 | Pillar | P04 |
@@ -29,9 +25,7 @@ Skills are reusable, phase-structured capabilities with a defined trigger — th
 | Minimum phases | 2 |
 | Maximum phases | 6 |
 | quality field | null always — invariant |
-
 ## Patterns
-
 | Pattern | Rule |
 |---------|------|
 | Phase alignment | `phases` list in frontmatter MUST match `## Workflow Phases` subsections in body (1:1) |
@@ -42,12 +36,9 @@ Skills are reusable, phase-structured capabilities with a defined trigger — th
 | id == filename stem | `p04_skill_deploy.md` → `id: p04_skill_deploy` |
 | Sub-skills | Delegate to other skill IDs via `sub_skills` list; never re-implement inline |
 | Canonical phases | discover → configure → execute → validate |
-
 - **Body sections**: Purpose → Workflow Phases → Anti-Patterns → Metrics
 - **Per-phase structure**: input / action / output clearly named
-
 ## Anti-Patterns
-
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
 | "You are an expert…" in skill body | Skills have no persona; identity belongs in system_prompt |
@@ -57,9 +48,7 @@ Skills are reusable, phase-structured capabilities with a defined trigger — th
 | Missing `when_not_to_use` | Routing ambiguity; consumers cannot exclude skill correctly |
 | Task instructions embedded in skill | Skill defines capability shape, not execution content |
 | God skill (8+ unrelated actions) | Split into focused sub_skills |
-
 ## Application
-
 1. Define the single reusable capability domain
 2. Decompose into 2–6 ordered phases (minimum: execute + validate)
 3. Write frontmatter: all 16 required fields, set `user_invocable` and `trigger` correctly
@@ -68,9 +57,7 @@ Skills are reusable, phase-structured capabilities with a defined trigger — th
 6. Verify `phases` list matches body subsection names exactly
 7. Set `quality: null`
 8. Check body ≤ 5120 bytes
-
 ## References
-
 - Schema: skill SCHEMA.md (P06)
 - Pillar: P04 (skills + hooks)
 - Boundary: system_prompt (identity), action_prompt (single-shot task), hook (event-driven, not phase-based)

@@ -8,7 +8,6 @@ pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 ---
 
 # Schema: dag
-
 ## Artifact Identity
 | Field | Value |
 |-------|-------|
@@ -17,7 +16,6 @@ pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 | Machine format | `yaml` |
 | Naming | `p12_dag_{pipeline}.yaml` |
 | Max bytes | 3072 |
-
 ## Required Fields
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
@@ -35,7 +33,6 @@ pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 | quality | null | YES | null | Never self-score |
 | tags | list[string], len >= 3 | YES | - | Searchability |
 | tldr | string <= 160ch | YES | - | Dense summary |
-
 ## Optional Fields
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
@@ -48,13 +45,10 @@ pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 | max_parallelism | integer >= 1 | NO | omitted | Maximum concurrent nodes |
 | keywords | list[string] | NO | omitted | Brain search terms |
 | linked_artifacts | object {primary, related} | NO | omitted | Cross-references |
-
 ## Node Object
 Fields: `id` (unique slug), `label` (human description), `satellite` (executor, optional).
-
 ## Edge Object
 Fields: `from` (node id that completes first), `to` (node id that depends on from).
-
 ## Semantic Rules
 1. One DAG describes one pipeline or mission's dependency structure
 2. Edges are directed: `from` must complete before `to` can start
@@ -62,22 +56,18 @@ Fields: `from` (node id that completes first), `to` (node id that depends on fro
 4. Nodes with no incoming edges are entry points (can start immediately)
 5. Nodes with no outgoing edges are terminal (pipeline endpoints)
 6. `execution_order` groups nodes into sequential waves of parallel tasks
-
 ## Boundary Rules
 `dag` IS: static dependency structure, execution order spec, orchestration input.
 `dag` IS NOT: `workflow` (runtime), `component_map` (inventory), `chain` (prompts),
 `spawn_config` (boot), `signal` (events), `handoff` (instructions),
 `dispatch_rule` (routing), `crew` (coordination). See ARCHITECTURE.md.
-
 ## ID Pattern
 Regex: `^p12_dag_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Body Structure (required sections)
 1. `## Nodes` — task definitions with id, label, satellite
 2. `## Edges` — dependency relationships between nodes
 3. `## Execution Order` — topologically sorted waves
-
 ## Constraints
 - max_bytes: 3072
 - naming: `p12_dag_{pipeline}.yaml`

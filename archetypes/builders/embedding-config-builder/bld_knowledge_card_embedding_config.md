@@ -8,13 +8,9 @@ sources: MTEB benchmark, OpenAI embeddings, Ollama model library, DPR (Karpukhin
 ---
 
 # Domain Knowledge: embedding_config
-
 ## Executive Summary
-
 Embedding configs define how text is converted to vectors for semantic search: model selection, dimensions, chunk size, overlap, distance metric, and normalization. They sit in the spec layer — defining MODEL parameters, not index structure (brain_index) or data sources (rag_source). The choice of embedding model determines retrieval quality, cost, and latency.
-
 ## Spec Table
-
 | Property | Value |
 |----------|-------|
 | Pillar | P01 (knowledge) |
@@ -24,26 +20,20 @@ Embedding configs define how text is converted to vectors for semantic search: m
 | Chunk size range | 256-512 (retrieval), 1024+ (summarization) |
 | Overlap | 10-20% of chunk_size |
 | Key providers | OpenAI, Ollama (local), Cohere, Voyage |
-
 ## Patterns
-
 - **Model selection by trade-off**:
-
 | Model | Dimensions | Cost | Quality (MTEB) | Use case |
 |-------|-----------|------|----------------|----------|
 | text-embedding-3-small | 1536 | $0.02/1M | Good | Budget production |
 | text-embedding-3-large | 3072 | $0.13/1M | Best (API) | High-fidelity retrieval |
 | nomic-embed-text | 768 | Free (local) | Good | Privacy, zero cost |
 | mxbai-embed-large | 1024 | Free (local) | Better (local) | Quality local option |
-
 - **Chunk size balances granularity vs context**: smaller chunks = more precise retrieval but less context per result
 - **Overlap prevents boundary loss**: 10-20% overlap ensures information at chunk edges is captured in adjacent chunks
 - **Normalization**: required for cosine similarity; skip only when using dot_product distance
 - **Batch processing**: larger batches = fewer API calls = lower latency; balance against memory constraints
 - **Cost awareness**: track cost_per_1M_tokens; local models (Ollama) trade quality for zero cost
-
 ## Anti-Patterns
-
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
 | No chunk overlap | Information at boundaries is lost; queries miss relevant content |
@@ -52,18 +42,14 @@ Embedding configs define how text is converted to vectors for semantic search: m
 | Mixing distance metrics | Index built with cosine, searched with dot_product = wrong ranking |
 | Over-dimensioned model for simple task | Wastes compute and storage; 768-dim sufficient for most retrieval |
 | No cost tracking | API embedding costs accumulate unnoticed |
-
 ## Application
-
 1. Select provider: API (OpenAI, Cohere) for quality or local (Ollama) for cost/privacy
 2. Choose model: match dimensions and quality to retrieval requirements
 3. Set chunk_size: 256-512 for retrieval, 1024+ for summarization
 4. Set overlap: 10-20% of chunk_size
 5. Configure distance metric: cosine (default, normalize=true) or dot_product
 6. Validate: chunks fit model context window, normalization matches distance metric
-
 ## References
-
 - Karpukhin et al. 2020: Dense Passage Retrieval (DPR) — foundation of dense embeddings
 - Muennighoff et al. 2022: MTEB — Massive Text Embedding Benchmark
 - OpenAI: text-embedding-3-small/large specifications

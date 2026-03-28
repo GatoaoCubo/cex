@@ -21,49 +21,21 @@ keywords: [iso_package, portable, manifest, tier, lp_mapping, system_instruction
 ---
 
 ## Summary
-
 ISO packages make artifacts portable across environments and LLM providers. The two most common failures are hardcoded absolute paths (breaking portability) and tier/file-count mismatches (breaking validation). Both are detectable at authoring time with a two-step check: path scan and file count.
-
 ## Pattern
-
 Packaging workflow — execute in this order:
-
 1. **Manifest-first** - Create manifest.yaml before generating any other files. Declare tier, file count, and LP mappings before writing content.
 2. **Token budget** - Count tokens in system_instruction.md immediately after drafting. Hard limit: 4096 tokens. If over, trim before continuing.
 3. **Path scan** - Before declaring `portable: true`, grep all files for: `/home/`, `/Users/`, `C:\`, `records/`, `.claude/`. Replace any absolute path with a relative path or a [PLACEHOLDER].
 4. **Tier compliance** - File count must match declared tier: minimal=3, standard=7, extended=10, full=12. Count actual files before finalizing manifest.
 5. **LP mapping validation** - Every LP mapping must exist in the CONFIG.md LP Mapping Enum. Never invent new mappings.
 6. **File inventory** - Table in manifest must list every file with columns: filename, description, status. Status column is required by validator.
-
 LLM-agnostic design means: no model names in instructions, no API-specific syntax, no provider-specific tool names. Instructions describe capabilities and behavior, not implementation.
-
 ## Anti-Pattern
-
 - Absolute paths in any file — package fails portability check, requires full re-scan.
 - `tier: "standard"` with 4 files — mismatch, validator rejects.
 - Drafting system_instruction last without token budgeting — discovered at 6200 tokens, requires major trim.
 - Inventing LP mapping not in enum — routing failure in downstream systems.
 - File inventory table without status column — manifest validator rejects.
 - Starting from content files before manifest — file count and LP mappings defined ad-hoc, inconsistently.
-
 ## Context
-
-Portability failures were the most expensive packaging bug because they were discovered late — typically when a package was deployed to a different machine. Adding the path scan as a mandatory Phase 3 step (before portable:true declaration) moved this check to authoring time. Token budgeting was added after two packages required major rework when system_instruction size was discovered post-completion.
-
-## Impact
-
-- Hardcoded path failures: 4 of 9 early productions -> 0 with mandatory path scan
-- Tier mismatch rework: 3 of 9 productions -> 0 with manifest-first workflow
-- Token overflow rework: 2 productions -> 0 with Phase 1 token budgeting
-- LP mapping routing failures: 2 productions -> 0 with enum validation
-
-## Reproducibility
-
-Manifest-first and path-scan are universally applicable. Token budgeting applies to any package with a system_instruction. LP mapping validation requires access to CONFIG.md enum — always reference it, never recall from memory.
-
-## References
-
-- Tier definitions: CONFIG.md
-- LP Mapping Enum: CONFIG.md
-- Manifest format: OUTPUT_TEMPLATE.md
-- Packaging phases: INSTRUCTIONS.md

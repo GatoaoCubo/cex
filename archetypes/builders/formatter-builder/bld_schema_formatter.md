@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: formatter
-
 ## Frontmatter Fields
-
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string (p05_fmt_{slug}) | YES | - | Namespace compliance |
@@ -35,9 +33,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | streaming | boolean | REC | false | Whether formatter handles streaming |
 | keywords | list[string] | REC | - | Brain search triggers |
 | density_score | float 0.80-1.00 | OPT | - | Content density |
-
 ## Formatting Rule Object
-
 ```yaml
 rule:
   name: string (snake_case identifier)
@@ -46,11 +42,9 @@ rule:
   pattern: string (the formatting pattern or template)
   options: object (transform-specific options: indent, separator, max_length)
 ```
-
 ## ID Pattern
 Regex: `^p05_fmt_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Body Structure (required sections)
 1. `## Formatting Rules` — rule table: name, input_field, transform, pattern, options
 2. `## Input Specification` — what the formatter expects (structure, types)
@@ -58,7 +52,6 @@ Rule: id MUST equal filename stem.
 4. `## Template` — the formatting template (if template-based) or serialization config
 5. `## Edge Cases` — handling of nulls, empty strings, special characters, overflow
 6. `## References` — sources and documentation
-
 ## Constraints
 - max_bytes: 4096 (body only)
 - naming: p05_fmt_{slug}.md

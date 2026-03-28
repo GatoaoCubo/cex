@@ -7,9 +7,7 @@ purpose: Component map of axiom — inventory, dependencies, and architectural p
 ---
 
 # Architecture: axiom in the CEX
-
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | frontmatter block | 20-field metadata header (id, kind, pillar, domain, immutable: true, etc.) | axiom-builder | required |
@@ -19,9 +17,7 @@ purpose: Component map of axiom — inventory, dependencies, and architectural p
 | implications | Downstream consequences — which laws, guardrails, or behaviors this axiom anchors | author | required |
 | anti_examples | Statements that look like axioms but are not (operational rules, changeable policies) | author | required |
 | version_lock | Explicit immutability declaration — version never increments past 1.0.0 | axiom-builder | required |
-
 ## Dependency Graph
-
 ```
 domain_knowledge  --produces-->  axiom  --produces_for-->  law
 axiom             --produces_for-->  guardrail
@@ -30,7 +26,6 @@ axiom             --produces-->  system_prompt (via IHP injection)
 brain_query       --queried_by-->  axiom
 axiom             --signals-->   system identity (anchors agent worldview)
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | domain_knowledge | axiom | data_flow | raw fundamental truths requiring formalization |
@@ -40,9 +35,7 @@ axiom             --signals-->   system identity (anchors agent worldview)
 | axiom | system_prompt (P03) | data_flow | injected as foundational context via IHP |
 | brain_query | axiom | data_flow | retrieved during agent context assembly |
 | axiom | agent behavior | signals | constrains what the agent will and will not do |
-
 ## Boundary Table
-
 | axiom IS | axiom IS NOT |
 |----------|--------------|
 | A permanent, immutable truth about a domain | An operational rule that can evolve (law) |
@@ -51,9 +44,7 @@ axiom             --signals-->   system identity (anchors agent worldview)
 | Version-locked at 1.0.0 — never updated | A learning artifact that improves with experience (learning_record) |
 | Injected into prompts as non-negotiable context | An executable instruction with steps (instruction) |
 | Domain-scoped and universally applicable within that scope | A task-specific or session-specific artifact |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Formalization | frontmatter, axiom_statement, rationale, scope | Capture and declare the permanent truth with full context |

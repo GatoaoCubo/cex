@@ -8,13 +8,9 @@ sources: ML golden datasets, SWE-bench, DeepEval, BLEU/ROUGE reference patterns
 ---
 
 # Domain Knowledge: golden_test
-
 ## Executive Summary
-
 Golden tests are curated reference artifacts scoring >= 9.5 that serve as calibration points for builders and validators. They provide exemplary input/output pairs with rationale mapping each quality dimension to specific gates. Golden tests differ from few-shot examples (format teaching without scoring), unit evals (any quality level), and scoring rubrics (criteria definition without examples).
-
 ## Spec Table
-
 | Property | Value |
 |----------|-------|
 | Pillar | P07 (governance/evaluation) |
@@ -23,26 +19,20 @@ Golden tests are curated reference artifacts scoring >= 9.5 that serve as calibr
 | Approval | Reviewer-approved (producer cannot self-approve) |
 | Key sections | input, golden_output, rationale (gate-mapped) |
 | Target scoping | Scoped to specific artifact kind |
-
 ## Patterns
-
 - **Exemplary, not just correct**: golden means demonstrating best practices across all quality dimensions — not merely passing
 - **Rationale gate-mapping**: every golden test maps its rationale to specific quality gate IDs for traceability
-
 | Source | Concept | Application |
 |--------|---------|-------------|
 | ML golden datasets | Labeled ground truth | Reference artifacts for calibration |
 | BLEU/ROUGE | Human reference translations | Golden output as evaluation anchor |
 | SWE-bench | Verified code test cases | Curated, reviewer-approved cases |
 | DeepEval | Expected LLM outputs | Input/golden_output with rationale |
-
 - **Complete output**: golden output must be COMPLETE — no "...", no abbreviations, no placeholders
 - **Reviewer approval mandatory**: producer cannot approve their own golden test — independent review required
 - **Edge case separation**: standard golden tests and edge case golden tests are separate artifacts
 - **Target kind scoping**: each golden test targets a specific artifact kind — not generic
-
 ## Anti-Patterns
-
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
 | Self-approved golden test | No independent quality check; bias |
@@ -51,18 +41,14 @@ Golden tests are curated reference artifacts scoring >= 9.5 that serve as calibr
 | Mixed standard + edge cases | Confuses calibration; separate into distinct tests |
 | quality_threshold < 9.5 | Below golden standard; that is a unit_eval |
 | Unscoped (no target_kind) | Applies to nothing specific; useless for calibration |
-
 ## Application
-
 1. Select candidate: artifact scoring >= 9.5 in target kind
 2. Capture input: the exact prompt/request that produced the artifact
 3. Capture golden_output: complete output with no abbreviations
 4. Write rationale: map every quality dimension to specific gate IDs
 5. Submit for review: independent reviewer must approve
 6. Validate: quality >= 9.5, complete output, gate-mapped rationale, reviewer approved
-
 ## References
-
 - SWE-bench: verified test cases for code generation (swebench.com)
 - DeepEval: golden evaluation framework (confident-ai.com)
 - BLEU/ROUGE: reference-based evaluation metrics for NLP

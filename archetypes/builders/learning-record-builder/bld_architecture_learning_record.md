@@ -7,9 +7,7 @@ purpose: Component map of learning_record — inventory, dependencies, and archi
 ---
 
 # Architecture: learning_record in the CEX
-
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | frontmatter block | 22-field metadata header (id, kind, pillar, domain, satellite, score, etc.) | learning-record-builder | active |
@@ -19,15 +17,12 @@ purpose: Component map of learning_record — inventory, dependencies, and archi
 | impact_score | Numeric score (0.0-10.0) measuring significance of the learning | author | active |
 | reproducibility | How reliably this pattern recurs across contexts and satellites | author | active |
 | context_block | Satellite, domain, task, and environmental conditions of the experience | author | active |
-
 ## Dependency Graph
-
 ```
 session_state  --produces-->  learning_record  --consumed_by-->  knowledge_system
 agent          --produces-->  learning_record  --indexed_by-->   brain_index
 learning_record  --signals-->  memory_update
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | session_state (P10) | learning_record | data_flow | ephemeral session data distilled into persistent record |
@@ -36,9 +31,7 @@ learning_record  --signals-->  memory_update
 | learning_record | brain_index (P01) | consumes | indexed for retrieval by future agents |
 | learning_record | memory_update (P12) | signals | triggers memory consolidation pipeline |
 | scoring_rubric (P07) | learning_record | dependency | rubric defines how impact_score is calculated |
-
 ## Boundary Table
-
 | learning_record IS | learning_record IS NOT |
 |--------------------|------------------------|
 | A persistent record of experience with patterns and anti-patterns | A distilled atomic fact (knowledge_card P01) |
@@ -47,9 +40,7 @@ learning_record  --signals-->  memory_update
 | Indexed for retrieval by future agents | An abstract truth without experiential basis (axiom P10) |
 | Produced from real task execution outcomes | A theoretical pattern without observed evidence |
 | Dense (>=0.80 density), max 3KB | A verbose narrative or unstructured log |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Source | session_state, agent execution | Supply raw experience data from task execution |

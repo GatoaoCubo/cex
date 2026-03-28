@@ -7,9 +7,7 @@ purpose: Component map of action_prompt — inventory, dependencies, and archite
 ---
 
 # Architecture: action_prompt in the CEX
-
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | frontmatter block | 21-field metadata header (id, kind, pillar, domain, task, input_schema, output_schema, etc.) | action-prompt-builder | required |
@@ -19,9 +17,7 @@ purpose: Component map of action_prompt — inventory, dependencies, and archite
 | edge_cases | Explicit handling rules for boundary conditions and malformed inputs | author | required |
 | validation_criteria | Conditions that define a correct and complete output | author | required |
 | execution_context | Runtime constraints (model, temperature, max_tokens, timeout) | boot_config | optional |
-
 ## Dependency Graph
-
 ```
 knowledge_card   --produces-->  action_prompt  --consumed_by-->  agent
 output_schema    --produces-->  action_prompt  --referenced_by-> chain
@@ -29,7 +25,6 @@ system_prompt    --depends-->   action_prompt
 action_prompt    --signals-->   next_action_prompt (via chain)
 action_prompt    --produces-->  validated_output
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | knowledge_card (P01) | action_prompt | data_flow | domain context injected into task description |
@@ -39,9 +34,7 @@ action_prompt    --produces-->  validated_output
 | action_prompt | chain (P03) | data_flow | atomic step composed into multi-step sequence |
 | action_prompt | validated_output | produces | structured result matching output_contract |
 | validated_output | signal (P12) | signals | completion event after successful execution |
-
 ## Boundary Table
-
 | action_prompt IS | action_prompt IS NOT |
 |------------------|----------------------|
 | A task-focused prompt with explicit typed input and output | A persona or identity definition (system_prompt) |
@@ -50,9 +43,7 @@ action_prompt    --produces-->  validated_output
 | Validated against a typed output contract | A raw user message without I/O specification |
 | Consumed once per task instance | A persistent configuration loaded at agent boot |
 | The bridge between orchestration dispatch and agent execution | An orchestration artifact (handoff, workflow, dispatch_rule) |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Context | knowledge_card, output_schema, system_prompt | Supply domain facts, output format, and identity constraints |

@@ -8,7 +8,6 @@ pattern: CONFIG restricts SCHEMA, never contradicts it
 ---
 
 # Config: dispatch_rule Production Rules
-
 ## Naming Convention
 | Scope | Convention | Example |
 |-------|-----------|---------|
@@ -20,19 +19,15 @@ pattern: CONFIG restricts SCHEMA, never contradicts it
 | `model` values | lowercase enum | `sonnet`, `opus`, `haiku`, `flash` |
 | `scope` values | lowercase slug, no spaces | `build`, `research`, `orchestration` |
 | `keywords` items | lowercase, no punctuation | `build`, `codigo`, `implementar` |
-
 Rule: use `.yaml` only for this builder (frontmatter yaml + md body hybrid).
-
 ## File Paths
 - Output: `cex/P12_orchestration/compiled/p12_dr_{scope}.yaml`
 - Human reference: `cex/P12_orchestration/examples/p12_dr_{scope}.md`
 - Template: `cex/P12_orchestration/templates/tpl_dispatch_rule.md`
-
 ## Size Limits
 - Preferred file size: <= 1024 bytes
 - Absolute max: 3072 bytes
 - Body commentary should remain concise; routing logic is frontmatter only
-
 ## Field Restrictions
 - `id` MUST match `^p12_dr_[a-z][a-z0-9_]+$`
 - `quality` MUST be literal `null` — never a score at authoring time
@@ -42,7 +37,6 @@ Rule: use `.yaml` only for this builder (frontmatter yaml + md body hybrid).
 - `keywords` MUST be a list, even for a single keyword
 - `model` MUST be one of: `sonnet`, `opus`, `haiku`, `flash`
 - `routing_strategy` MUST be one of: `keyword_match`, `semantic`, `hybrid`
-
 ## Boundary Restrictions
 - No task lists, scope fences, or commit instructions in the file
 - No runtime status fields (`status`, `quality_score`, `timestamp`)

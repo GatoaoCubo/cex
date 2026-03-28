@@ -8,10 +8,8 @@ pattern: every field here exists in SCHEMA.md; template derives, never invents
 ---
 
 # Output Template: signal
-
 Naming pattern: `p12_sig_{event}.json`
 Filename: `p12_sig_{{event}}.json`
-
 ```json
 {
   "satellite": "{{satellite_slug}}",
@@ -27,7 +25,6 @@ Filename: `p12_sig_{{event}}.json`
   "progress_pct": {{0_to_100_or_omit}}
 }
 ```
-
 ## Derivation Notes
 - The first four fields are the required minimum contract from SCHEMA.md
 - All remaining fields are optional extensions from SCHEMA.md

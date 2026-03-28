@@ -8,18 +8,14 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 ---
 
 # Instructions: How to Produce a glossary_entry
-
 ## Phase 1: CLASSIFY
-
 1. Identify the term to define — what single word or phrase needs a precise definition?
 2. Determine domain context — in which domain or system does this term carry its specific meaning?
 3. Check for existing definitions of the same term — avoid duplicating or contradicting an existing entry
 4. List synonyms and abbreviations — what other names or short forms does this term go by?
 5. Identify potential confusion with similar terms — which nearby terms could be mistaken for this one?
 6. Find canonical usage examples — where in the codebase, documentation, or domain is this term used correctly?
-
 ## Phase 2: COMPOSE
-
 1. Read SCHEMA.md — source of truth for all 15+ required fields
 2. Read OUTPUT_TEMPLATE.md — fill the template following SCHEMA constraints exactly
 3. Fill frontmatter: all 15+ fields, null is acceptable for optional fields, quality: null (never self-score)
@@ -30,9 +26,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 8. Write Related Terms section: linked terms for navigation to nearby concepts
 9. Write Usage Example section: one sentence showing correct usage of the term in context
 10. Check body size — must stay at or below 1024 bytes
-
 ## Phase 3: VALIDATE
-
 1. Check QUALITY_GATES.md — run all HARD gates manually
 2. HARD gates:
    - [ ] id matches `p01_ge_[a-z][a-z0-9_]+`

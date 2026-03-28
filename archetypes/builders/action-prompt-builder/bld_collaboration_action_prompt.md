@@ -8,14 +8,11 @@ pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCE
 ---
 
 # Collaboration: action-prompt-builder
-
 ## My Role in Crews
 I am a SPECIALIST. I answer ONE question: "what prompt should be injected to make the agent execute this specific task?"
 I do not define agent identity. I do not write step-by-step recipes.
 I produce task-focused prompts so agents can execute specific operations with defined input/output.
-
 ## Crew Compositions
-
 ### Crew: "Agent Prompt Stack"
 ```
   1. context-doc-builder -> "domain context for hydration"
@@ -23,34 +20,26 @@ I produce task-focused prompts so agents can execute specific operations with de
   3. action-prompt-builder -> "task-focused prompt with I/O contract"
   4. few-shot-example-builder -> "format examples for the prompt"
 ```
-
 ### Crew: "Task Execution Setup"
 ```
   1. input-schema-builder -> "input contract definition"
   2. action-prompt-builder -> "execution prompt with defined I/O"
   3. golden-test-builder -> "reference output for quality calibration"
 ```
-
 ## Handoff Protocol
-
 ### I Receive
 - seeds: task description, expected input format, expected output format
 - optional: domain context, edge cases, validation criteria
-
 ### I Produce
 - action_prompt artifact (.md + .yaml frontmatter)
 - committed to: `cex/P03/examples/p03_ap_{scope}.md`
-
 ### I Signal
 - signal: complete (with quality score from QUALITY_GATES)
 - if quality < 8.0: signal retry with failure reasons
-
 ## Builders I Depend On
 - context-doc-builder: provides domain context for prompt hydration
 - input-schema-builder: provides input contract that the prompt must respect
-
 ## Builders That Depend On Me
-
 | Builder | Why |
 |---------|-----|
 | chain-builder | Chains compose multiple action_prompts in sequence |

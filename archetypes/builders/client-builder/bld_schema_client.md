@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: client
-
 ## Frontmatter Fields
-
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string (p04_client_{api_slug}) | YES | - | Namespace compliance |
@@ -36,17 +34,14 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | pagination | enum: cursor, offset, none | REC | none | Pagination strategy |
 | error_codes | list[string] | REC | - | Key error codes handled |
 | caching | string | REC | - | Cache strategy |
-
 ## ID Pattern
 Regex: `^p04_client_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Body Structure (required sections)
 1. `## Overview` — what API, use case, who consumes it
 2. `## Endpoints` — each endpoint: method, path, parameters, return type
 3. `## Auth & Config` — base_url, auth method, required headers
 4. `## Error Handling` — error codes, retry strategy, timeout behavior
-
 ## Constraints
 - max_bytes: 1024 (body only — compact client spec)
 - naming: p04_client_{api_slug}.md + .yaml (dual file)

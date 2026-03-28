@@ -7,7 +7,6 @@ purpose: Component map of interface — inventory, dependencies, and architectur
 ---
 
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | method_definitions | Named operations both parties agree exist | author | required |
@@ -18,9 +17,7 @@ purpose: Component map of interface — inventory, dependencies, and architectur
 | mock_spec | Stub responses for testing without live implementation | author | optional |
 | error_contract | Named error codes and shapes each method may return | author | recommended |
 | compatibility_notes | Breaking vs non-breaking change classification | author | optional |
-
 ## Dependency Graph
-
 ```
 interface     --consumes--> input_schema
 connector     --implements--> interface
@@ -28,7 +25,6 @@ validator     --checks_against--> interface
 system_prompt --references--> interface
 interface     --produces--> mock_spec
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | interface | input_schema | data_flow | method input shapes formalized as schemas |
@@ -36,9 +32,7 @@ interface     --produces--> mock_spec
 | validator | interface | data_flow | compliance check against method signatures |
 | system_prompt | interface | data_flow | documents available methods to agent identity |
 | interface | mock_spec | produces | stub responses derived from output_types |
-
 ## Boundary Table
-
 | interface IS | interface IS NOT |
 |--------------|-----------------|
 | Bilateral contract agreed by both parties | Unilateral shape contract for one callee |
@@ -47,9 +41,7 @@ interface     --produces--> mock_spec
 | Versioned with deprecation and compatibility policy | Routing decision about who receives what |
 | Defines what CAN happen between two agents | Validates whether something DID happen correctly |
 | Shared reference for both producer and consumer | Orchestration logic or execution recipe |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Contract surface | method_definitions, version | Declare the operations both agents agree on |

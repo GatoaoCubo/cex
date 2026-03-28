@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: benchmark
-
 ## Frontmatter Fields
-
 ### Required
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
@@ -35,7 +33,6 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | quality | null | YES | null | Never self-score |
 | tags | list[string], len >= 3 | YES | — | Searchability |
 | tldr | string <= 160ch | YES | — | Dense summary |
-
 ### Recommended
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
@@ -44,18 +41,15 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | confidence_interval | float 0.0-1.0 | REC | 0.95 | Confidence level |
 | density_score | float 0.80-1.00 | REC | — | Content density |
 | linked_artifacts | object {primary, related} | REC | — | Cross-references |
-
 ## ID Pattern
 Regex: `^p07_bm_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Body Structure (required sections)
 1. `## Benchmark Overview` — what is measured, why, and business impact
 2. `## Methodology` — how the benchmark runs (iterations, warmup, environment)
 3. `## Metrics` — table: metric, unit, baseline, target, direction
 4. `## Environment` — hardware, software, configuration for reproducibility
 5. `## Results Template` — percentile table structure for recording results
-
 ## Constraints
 - max_bytes: 4096 (body only)
 - naming: p07_bm_{metric_slug}.md + .yaml

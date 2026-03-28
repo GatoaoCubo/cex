@@ -8,11 +8,8 @@ pattern: few-shot learning for minimal orchestration events
 ---
 
 # Examples: signal-builder
-
 ## Golden Example
-
 INPUT: "Emit completion signal for codex after finishing signal-builder"
-
 OUTPUT (`p12_sig_satellite_complete.json`):
 ```json
 {
@@ -30,16 +27,13 @@ OUTPUT (`p12_sig_satellite_complete.json`):
   "message": "13 ISO files created and validated"
 }
 ```
-
 WHY THIS IS GOLDEN:
 - filename follows `p12_sig_{event}.json`
 - JSON payload is atomic and machine-readable
 - required fields are present and typed correctly
 - optional fields are compact and useful for monitors
 - no handoff instructions, routing rules, or workflow logic
-
 ## Golden Progress Example
-
 OUTPUT (`p12_sig_batch_progress.json`):
 ```json
 {
@@ -52,14 +46,11 @@ OUTPUT (`p12_sig_batch_progress.json`):
   "message": "6 of 10 artifacts validated"
 }
 ```
-
 WHY THIS PASSES:
 - `progress_pct` only appears with `status=progress`
 - message stays short
 - payload remains a single event snapshot
-
 ## Anti-Example
-
 BAD OUTPUT (`p12_sig_dispatch.yaml`):
 ```yaml
 satellite: codex
@@ -71,7 +62,6 @@ next_steps:
   - edit README
   - commit changes
 ```
-
 FAILURES:
 1. wrong machine format: YAML instead of JSON
 2. no `quality_score`

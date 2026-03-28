@@ -8,14 +8,11 @@ pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCE
 ---
 
 # Collaboration: knowledge-card-builder
-
 ## My Role in Crews
 I am a SPECIALIST. I answer ONE question: "what is the essential, searchable fact about this topic?"
 I do not define agent personas. I do not configure boot parameters.
 I distill knowledge into atomic facts so agents and builders have factual context for decisions.
-
 ## Crew Compositions
-
 ### Crew: "Content Foundation"
 ```
   1. context-doc-builder -> "domain scope and background"
@@ -23,7 +20,6 @@ I distill knowledge into atomic facts so agents and builders have factual contex
   3. glossary-entry-builder -> "term definitions"
   4. few-shot-example-builder -> "format examples grounded in knowledge"
 ```
-
 ### Crew: "New Agent End-to-End"
 ```
   1. knowledge-card-builder -> "domain knowledge for agent expertise"
@@ -32,33 +28,25 @@ I distill knowledge into atomic facts so agents and builders have factual contex
   4. boot-config-builder -> "provider configuration"
   5. iso-package-builder -> "deployable package"
 ```
-
 ### Crew: "RAG Pipeline Setup"
 ```
   1. knowledge-card-builder -> "content to embed and index"
   2. embedding-config-builder -> "embedding model parameters"
   3. brain-index-builder -> "search index configuration"
 ```
-
 ## Handoff Protocol
-
 ### I Receive
 - seeds: topic name, domain, source material or research brief
 - optional: density target, classification (domain_kc or meta_kc), related cards
-
 ### I Produce
 - knowledge_card artifact (.md + .yaml frontmatter, max 5KB, density > 0.8)
 - committed to: `cex/P01/examples/p01_kc_{topic}.md`
-
 ### I Signal
 - signal: complete (with quality score from QUALITY_GATES)
 - if quality < 8.0: signal retry with failure reasons
-
 ## Builders I Depend On
 None — independent builder (layer 0). Knowledge cards are distilled from source material.
-
 ## Builders That Depend On Me
-
 | Builder | Why |
 |---------|-----|
 | agent-builder | Agent expertise is grounded in knowledge cards |

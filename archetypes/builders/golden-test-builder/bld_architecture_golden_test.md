@@ -7,7 +7,6 @@ purpose: Component map of golden_test — inventory, dependencies, and architect
 ---
 
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | target_kind | The artifact type this golden test calibrates (e.g., knowledge_card, formatter) | golden_test | required |
@@ -18,9 +17,7 @@ purpose: Component map of golden_test — inventory, dependencies, and architect
 | gate_mapping | List of quality gates from the target_kind that this test anchors | golden_test | required |
 | reviewer | Identity of the independent evaluator who confirmed the score | golden_test | required |
 | created_date | Date the golden test was certified; used for staleness checks | golden_test | required |
-
 ## Dependency Graph
-
 ```
 scoring_rubric (P07) --produces--> golden_test
 quality_gate (P11)   --depends-->  golden_test
@@ -28,7 +25,6 @@ golden_test          --produces--> unit_eval (P07)
 golden_test          --produces--> benchmark (P07)
 few_shot_example (P01) --depends--> golden_test
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | scoring_rubric (P07) | golden_test | produces | evaluation dimensions and criteria the output must satisfy |
@@ -36,9 +32,7 @@ few_shot_example (P01) --depends--> golden_test
 | golden_test | unit_eval (P07) | produces | ground-truth reference for test case comparison |
 | golden_test | benchmark (P07) | produces | quality anchor for performance measurement baselines |
 | few_shot_example (P01) | golden_test | depends | exemplary input/output pairs that may become golden candidates |
-
 ## Boundary Table
-
 | golden_test IS | golden_test IS NOT |
 |----------------|-------------------|
 | A reference artifact certified at quality >= 9.5 | A test at any quality level (that is unit_eval) |
@@ -47,9 +41,7 @@ few_shot_example (P01) --depends--> golden_test
 | Specific to one artifact type (target_kind) | An end-to-end pipeline test spanning multiple artifacts |
 | A ground-truth source consumed by unit_eval and benchmark | A few-shot example used to teach format (not to measure quality) |
 | Immutable once certified; changes require re-certification | A live metric updated continuously during operation |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|-----------|---------|
 | Criteria | scoring_rubric (P07), quality_gate (P11) | Define evaluation dimensions and pass/fail thresholds |

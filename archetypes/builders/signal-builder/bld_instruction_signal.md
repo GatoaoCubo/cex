@@ -28,86 +28,62 @@ density_score: 0.86
 ---
 
 ## Context
-
 The signal-builder produces `signal` artifacts — minimal JSON payloads representing atomic
 status events emitted between agents or satellites. A signal answers exactly three questions:
 what happened, who emitted it, and when. Signals are consumed by orchestrators and monitoring
 systems; they are not instructions, routing policies, or handoffs.
-
 **Input contract**:
 - `{{event_slug}}`: snake_case event name (e.g. `build_complete`, `research_error`)
 - `{{emitter}}`: name of the emitting agent or satellite (e.g. `build-sat`, `research-agent`)
 - `{{status}}`: one of `complete`, `error`, `progress`
 - `{{timestamp}}`: ISO 8601 datetime of the event
 - `{{metadata_raw}}`: optional free-text of additional context to include
-
 **Output contract**: A single `signal` JSON file named `p12_sig_{{event_slug}}.json`,
 under 4096 bytes, with required fields and optional metadata. No routing logic, no
 instructions, no narrative prose.
-
 **Boundaries**:
 - A signal is atomic — one event, one payload, one file.
 - Full task instructions belong in a handoff artifact.
 - Routing policy (which agent handles what) belongs in a dispatch_rule artifact.
 - Multi-step workflows and DAGs are not signals.
 - Optional metadata must remain compact — no embedded documents.
-
----
-
 ## Phases
-
 ### Phase 1: Classify
-
 **Primary action**: Confirm this is a runtime event and determine the minimum required
 payload before writing any JSON.
-
 ```
 INPUT: event_slug, emitter, status, timestamp, metadata_raw
-
 1. Confirm this is a runtime event, not an instruction or routing rule:
    Is it reporting something that already happened or is happening? -> signal
    Is it telling an agent what to do next?                         -> NOT a signal
    Is it defining how tasks get routed?                            -> NOT a signal
-
 2. Validate event_slug:
    Must match pattern: ^[a-z][a-z0-9_]+$
    Must be descriptive: "{emitter}_{status}" pattern preferred
    Examples: "build_complete", "research_error", "ingest_progress"
-
 3. Validate status value:
    complete  -> terminal success event
    error     -> terminal failure event
    progress  -> non-terminal update (use sparingly — only for long-running ops)
-
 4. Parse metadata_raw into optional_fields:
    Extract only machine-friendly key-value pairs.
    Discard prose, instructions, or routing logic.
    Convert any numeric strings to numbers.
    Keep only fields that help automation (scores, counts, paths, error codes).
    Reject fields that duplicate required fields (emitter, status, timestamp).
-
 5. Compute target_consumer from event context:
    if status == "complete" or "error": consumer is likely an orchestrator
    if status == "progress":            consumer is likely a monitoring system
-
 OUTPUT: validated_slug, validated_status, optional_fields{}, target_consumer
 ```
-
 Verification: `validated_slug` matches naming pattern. `validated_status` is one of
 three valid values. `optional_fields` contains no instructions or routing logic.
-
----
-
 ### Phase 2: Compose
-
 **Primary action**: Assemble the minimum valid JSON payload with required fields first,
 optional fields appended only if compact and relevant.
-
 ```
 INPUT: validated_slug, emitter, validated_status, timestamp, optional_fields
-
 1. Set filename: p12_sig_{{event_slug}}.json
-
 2. Assemble required fields (always present):
    {
      "id": "p12_sig_{{event_slug}}",
@@ -118,12 +94,10 @@ INPUT: validated_slug, emitter, validated_status, timestamp, optional_fields
      "timestamp": "{{timestamp}}",
      "quality": null
    }
-
 3. Append optional fields (only if each meets ALL criteria):
    - Value is machine-friendly (lowercase enum, number, ISO timestamp, or short string)
    - Value adds information not derivable from required fields
    - Adding it does not push total payload over 4096 bytes
-
    Common valid optional fields:
      "score":       numeric quality indicator (0.0 - 10.0)
      "duration_s":  execution time in seconds (integer)
@@ -131,28 +105,19 @@ INPUT: validated_slug, emitter, validated_status, timestamp, optional_fields
      "error_code":  short string error classifier (e.g. "timeout", "validation_failed")
      "items_count": integer count of processed items
      "artifact_id": identifier of the artifact produced
-
 4. Size check:
    Estimate JSON byte count (minified).
    If > 4096 bytes: remove optional fields one by one (lowest value first)
    until size <= 4096 bytes.
-
 OUTPUT: signal JSON content (assembled, not yet validated)
 ```
-
 Verification: required fields all present. Estimated minified size <= 4096 bytes.
 No field contains prose, instructions, or routing logic.
-
----
-
 ### Phase 3: Validate
-
 **Primary action**: Run all quality gates against the assembled JSON and output the
 final file only if all HARD gates pass.
-
 ```
 INPUT: signal JSON content
-
 1. HARD quality gates (all must pass):
    HARD_1: id matches pattern ^p12_sig_[a-z][a-z0-9_]+$
    HARD_2: kind == "signal"
@@ -162,94 +127,5 @@ INPUT: signal JSON content
    HARD_6: quality == null
    HARD_7: total JSON size (minified) <= 4096 bytes
    HARD_8: JSON parses without syntax errors
-
 2. Scope check:
    Verify the signal contains NO routing instructions.
-   Verify the signal contains NO task descriptions or execution steps.
-   Verify the signal is NOT a handoff (no "## Tasks" or "## Steps" sections).
-   If any scope violation found: remove the offending fields and re-validate.
-
-3. If any HARD gate fails:
-   Identify the specific gate. Fix the issue. Re-run validation.
-   Do not output until all HARD gates pass.
-
-4. SOFT quality gates (record but do not block):
-   SOFT_1: optional field "score" present for complete/error events
-   SOFT_2: optional field "duration_s" present when timing is relevant
-   SOFT_3: optional field "error_code" present when status == "error"
-   SOFT_4: event_slug follows "{emitter}_{status}" naming pattern
-
-OUTPUT: validated signal JSON file, gate_results{hard: N/8, soft: N/4}
-```
-
-Verification: all 8 HARD gates pass. JSON is syntactically valid.
-
----
-
-## Output Contract
-
-```json
-{
-  "id": "p12_sig_{{event_slug}}",
-  "kind": "signal",
-  "pillar": "P12",
-  "emitter": "{{emitter}}",
-  "status": "{{status}}",
-  "timestamp": "{{timestamp}}",
-  "quality": null,
-  "score": {{score_or_omit}},
-  "duration_s": {{duration_s_or_omit}},
-  "task_id": "{{task_id_or_omit}}",
-  "error_code": "{{error_code_or_omit}}"
-}
-```
-
-File name: `p12_sig_{{event_slug}}.json`
-
-Rules:
-- Omit any optional field that is not applicable — do not use `null` as a placeholder
-  for optional fields (only `quality` uses `null` explicitly).
-- Minified size must be <= 4096 bytes.
-- No trailing commas. Valid JSON only.
-
----
-
-## Validation
-
-- [ ] HARD: `id` matches pattern `^p12_sig_[a-z][a-z0-9_]+$`
-- [ ] HARD: `kind` equals `signal`
-- [ ] HARD: `status` is one of `complete`, `error`, `progress`
-- [ ] HARD: `timestamp` is a valid ISO 8601 datetime string
-- [ ] HARD: `emitter` is a non-empty string
-- [ ] HARD: `quality` equals `null`
-- [ ] HARD: minified JSON size is <= 4096 bytes
-- [ ] HARD: JSON parses without syntax errors
-- [ ] SOFT: `score` field present for `complete` or `error` events
-- [ ] SOFT: `duration_s` present when execution timing is relevant
-- [ ] SOFT: `error_code` present when `status` is `error`
-- [ ] SOFT: `event_slug` follows `{emitter}_{status}` naming convention
-
-**Score threshold**: All 8 HARD gates must pass. File is not output until they do.
-
----
-
-## Metacognition
-
-**Does**:
-- Emit atomic JSON status events between agents
-- Answer: what happened, who emitted it, and when
-- Keep payloads minimal and machine-friendly
-- Enforce strict size limit (4096 bytes) for low-overhead passing
-- Distinguish signals from handoffs, dispatch rules, and workflows
-
-**Does NOT**:
-- Provide task instructions or execution steps (handoff artifact)
-- Define routing policy for task dispatch (dispatch_rule artifact)
-- Represent multi-step workflows or DAGs
-- Accumulate or aggregate multiple events into one payload
-
-**Chaining**:
-- Before: any agent completing work, encountering an error, or reporting progress
-- After: an orchestrator reads `complete` signals to advance the workflow queue
-- After: a monitoring system reads `progress` signals to track long-running operations
-- After: an error handler reads `error` signals with `error_code` to decide on retry

@@ -15,15 +15,10 @@ density_score: 0.85
 ---
 
 # Gate: Mental Model
-
 ## Definition
-
 A `mental_model` is a design-time cognitive map that tells an agent how to route, prioritize, and decide. It carries no runtime state and executes no logic. Gates here enforce that routing rules have confidence thresholds, decisions have if/then/else structure, and the artifact never encodes live session data — which belongs in runtime state artifacts.
-
 ## HARD Gates
-
 All HARD gates must pass. Any single failure sets score to 0 and blocks publish.
-
 | ID  | Check | Failure consequence |
 |-----|-------|---------------------|
 | H01 | YAML frontmatter parses without error | Artifact unparseable by tooling |
@@ -36,11 +31,8 @@ All HARD gates must pass. Any single failure sets score to 0 and blocks publish.
 | H08 | `Decision Tree` or `Priorities` section present in body | No decision structure — model cannot guide choices |
 | H09 | `Domain Map` section present in body | Domain boundaries undefined — routing leaks |
 | H10 | `routing_rules` list has >= 3 entries, each with `keywords` and `action` | Routing table too sparse to be useful |
-
 ## SOFT Scoring
-
 Weights sum to 100%. Each dimension scores 0 or its full weight.
-
 | ID  | Dimension | Weight | Criteria |
 |-----|-----------|--------|----------|
 | S01 | tldr quality | 1.0 | `tldr` <= 160 chars, names the agent and its primary routing concern |
@@ -55,9 +47,7 @@ Weights sum to 100%. Each dimension scores 0 or its full weight.
 | S10 | No runtime state encoded | 1.0 | No session counters, active task lists, or live flags in body |
 | S11 | Fallback action defined | 0.5 | `fallback` specifies action and escalation target when no rule matches |
 | S12 | Density >= 0.80 | 0.5 | No filler: "this model helps", "generally speaking", "in most cases" |
-
 ## Actions
-
 | Score | Tier | Action |
 |-------|------|--------|
 | >= 9.5 | GOLDEN | Publish to pool + record in memory |
@@ -65,16 +55,8 @@ Weights sum to 100%. Each dimension scores 0 or its full weight.
 | >= 7.0 | REVIEW | Acceptable with documented improvement items |
 | < 7.0 | REJECT | Revise and resubmit — do not publish |
 | 0 (HARD fail) | REJECTED | Fix failing HARD gate(s) first |
-
 ## Bypass
-
 Bypasses are logged and expire automatically.
-
 | Field | Value |
 |-------|-------|
 | condition | New agent bootstrapping — routing rules are provisional and under observation from live sessions |
-| approver | P02 domain owner |
-| audit_log | Entry required in `records/governance/bypass_log.md` with gate ID, agent name, and provisional rule count |
-| expiry | 14 days — routing rules must be validated against real sessions before expiry or model returns to DRAFT |
-
-H01 and H05 cannot be bypassed under any condition.

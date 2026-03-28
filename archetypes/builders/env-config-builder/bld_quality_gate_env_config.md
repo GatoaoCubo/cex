@@ -15,22 +15,15 @@ density_score: 0.92
 ---
 
 # Gate: env_config
-
 ## Definition
-
 | Field     | Value |
 |-----------|-------|
 | metric    | Composite score from SOFT dimensions + all HARD gates pass |
 | threshold | >= 7.0 to publish; >= 9.5 golden |
 | operator  | AND (all HARD) + weighted_sum (SOFT) |
 | scope     | All artifacts where `kind: env_config` |
-
----
-
 ## HARD Gates
-
 All must pass. Any single failure = REJECT regardless of SOFT score.
-
 | ID  | Check | Failure message |
 |-----|-------|----------------|
 | H01 | Frontmatter parses as valid YAML | "Frontmatter YAML syntax error" |
@@ -43,13 +36,8 @@ All must pass. Any single failure = REJECT regardless of SOFT score.
 | H08 | `variables` list is non-empty (>= 1 variable defined) | "Variable catalog is empty" |
 | H09 | Each variable entry contains: name, type, required, sensitive | "Variable entry missing required subfields" |
 | H10 | `override_precedence` list present and contains at least: env, file, default in some order | "Override precedence chain incomplete" |
-
----
-
 ## SOFT Scoring
-
 Dimensions sum to 100%. Score each 0.0-10.0; multiply by weight.
-
 | Dimension | Weight | What to assess |
 |-----------|--------|----------------|
 | Validation rules completeness | 1.0 | Each variable has regex, enum, or range validation defined |
@@ -64,28 +52,16 @@ Dimensions sum to 100%. Score each 0.0-10.0; multiply by weight.
 | Change impact documented | 1.0 | Notes which services/components depend on each variable |
 | Secret rotation guidance | 1.0 | Sensitive vars include rotation frequency or process reference |
 | Documentation | 0.5 | tldr names the scope and number of variables cataloged |
-
 Weight sum: 1.0+1.0+1.0+1.0+0.5+0.5+1.0+1.0+0.5+1.0+1.0+0.5 = 10.0 (100%)
-
----
-
 ## Actions
-
 | Score | Tier | Action |
 |-------|------|--------|
 | >= 9.5 | GOLDEN | Publish to pool as golden exemplar |
 | >= 8.0 | PUBLISH | Publish to pool |
 | >= 7.0 | REVIEW | Flag for human review before publish |
 | < 7.0  | REJECT | Return to author with failure report |
-
----
-
 ## Bypass
-
 | Field | Value |
 |-------|-------|
 | conditions | New service bootstrapping where full variable catalog is not yet known |
 | approver | Security/infra owner approval required (written); sensitive vars never bypassed |
-| audit_trail | Bypass logged to `records/audits/env_config_bypass_{date}.md` |
-| expiry | 24h; environment configs affect running services and must be finalized quickly |
-| never_bypass | H01 (YAML parse failure), H05 (quality null invariant), H07 (hardcoded secret default is a critical security violation) |

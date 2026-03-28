@@ -7,14 +7,12 @@ purpose: Tools available for golden_test production
 ---
 
 # Tools: golden-test-builder
-
 ## Production Tools
 | Tool | Purpose | When | Status |
 |------|---------|------|--------|
 | brain_query [MCP] | Search existing golden_tests | Phase 1 (check duplicates) | CONDITIONAL |
 | validate_artifact.py | Validate any artifact kind | Phase 3 | [PLANNED] |
 | cex_forge.py | Generate artifact from seeds | Alternative compose | [PLANNED] |
-
 ## Data Sources
 | Source | Path/URL | Data |
 |--------|----------|------|
@@ -23,7 +21,6 @@ purpose: Tools available for golden_test production
 | Builder QG files | archetypes/builders/*/QUALITY_GATES.md | Gate refs for rationale mapping |
 | Pool artifacts | pool/ | Candidate golden artifacts (9.5+) |
 | SEED_BANK | archetypes/SEED_BANK.yaml | P07_golden_test seeds |
-
 ## Interim Validation
 Manually check each QUALITY_GATES.md gate against produced artifact.
 - [ ] YAML parses

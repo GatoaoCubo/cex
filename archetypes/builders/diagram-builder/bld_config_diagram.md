@@ -1,4 +1,5 @@
 ---
+pillar: P00
 id: diagram-builder-config
 kind: config
 builder: diagram-builder
@@ -6,9 +7,7 @@ version: 1.0.0
 ---
 
 # diagram-builder — CONFIG
-
 ## Naming Conventions
-
 | Scope | Convention | Example |
 |-------|-----------|---------|
 | Artifact files | `p08_diag_{scope_slug}.md` | `p08_diag_satellite_orchestration.md` |
@@ -16,26 +15,20 @@ version: 1.0.0
 | Frontmatter fields | snake_case | `zoom_level`, `notation` |
 | Scope slug | lowercase + underscores only | `satellite_orchestration` |
 | Tags | lowercase, no spaces | `[diagram, orchestration, ascii]` |
-
 ## File Paths
-
 | Purpose | Path |
 |---------|------|
 | Output | `cex/P08_architecture/examples/p08_diag_{scope_slug}.md` |
 | Compiled | `cex/P08_architecture/compiled/p08_diag_{scope_slug}.yaml` |
 | Builder | `cex/archetypes/builders/diagram-builder/` |
-
 ## Size Limits
-
 | Limit | Value |
 |-------|-------|
 | Body max bytes | 4096 |
 | Total (with frontmatter) | ~5500 bytes |
 | Density minimum | 0.80 |
 | tldr max chars | 160 |
-
 ## Diagram-Specific Constraints
-
 | Constraint | Rule |
 |-----------|------|
 | Notation | One of [ascii, mermaid] — no mixing within a single diagram |
@@ -45,9 +38,7 @@ version: 1.0.0
 | Legend | Mandatory — explain all symbols and arrow types |
 | Scope boundary | Explicit — state what IS and IS NOT included |
 | Zoom guidance | system: 10+ components; subsystem: 3-10; component: 1-3 detailed |
-
 ## Enum Values
-
 | Field | Valid Values |
 |-------|-------------|
 | notation | ascii, mermaid |

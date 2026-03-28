@@ -8,13 +8,9 @@ sources: scoring-rubric-builder MANIFEST.md + SCHEMA.md, AAC&U VALUE Rubrics, Bl
 ---
 
 # Domain Knowledge: scoring_rubric
-
 ## Executive Summary
-
 Scoring rubrics are multi-dimensional weighted evaluation frameworks that define how to measure artifact quality across orthogonal dimensions with concrete criteria per level. Each rubric targets specific artifact kinds, assigns weights summing to 100%, and maps scores to action tiers (GOLDEN/PUBLISH/REVIEW/REJECT). They differ from quality gates (which enforce pass/fail barriers), golden tests (which provide reference examples), benchmarks (which measure performance metrics), and unit evals (which test specific behaviors) by defining the complete evaluation methodology with weighted dimensions and calibration.
-
 ## Spec Table
-
 | Property | Value |
 |----------|-------|
 | Pillar | P07 (evaluation) |
@@ -28,9 +24,7 @@ Scoring rubrics are multi-dimensional weighted evaluation frameworks that define
 | Weight invariant | All dimension weights MUST sum to 100% |
 | Score tiers | GOLDEN >= 9.5, PUBLISH >= 8.0, REVIEW >= 7.0, REJECT < 7.0 |
 | Min dimensions | 3 orthogonal dimensions |
-
 ## Patterns
-
 | Pattern | Application |
 |---------|-------------|
 | Orthogonal dimensions | Each dimension measures ONE thing; no overlap between dimensions |
@@ -41,9 +35,7 @@ Scoring rubrics are multi-dimensional weighted evaluation frameworks that define
 | Automation status | Declare per dimension: manual, semi-automated, or automated |
 | Inter-rater reliability | >= 0.80 agreement indicates reliable rubric |
 | Target kind scoping | Rubric applies to specific artifact kinds, not everything |
-
 ## Anti-Patterns
-
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
 | Weights not summing to 100% | Breaks scoring formula; validator rejects |
@@ -53,9 +45,7 @@ Scoring rubrics are multi-dimensional weighted evaluation frameworks that define
 | Fewer than 3 dimensions | Insufficient coverage of artifact quality |
 | All dimensions equal weight | Usually wrong; some dimensions matter more |
 | No automation status declared | Unknown whether scoring is manual or automated |
-
 ## Application
-
 1. Identify target artifact kinds this rubric evaluates
 2. Define >= 3 orthogonal dimensions, each measuring ONE aspect
 3. Assign weights summing to exactly 100%
@@ -64,9 +54,7 @@ Scoring rubrics are multi-dimensional weighted evaluation frameworks that define
 6. Link golden test examples for calibration
 7. Declare automation status per dimension
 8. Validate: 9 HARD + 9 SOFT gates, body <= 4096 bytes
-
 ## References
-
 - scoring-rubric-builder SCHEMA.md v1.0.0
 - AAC&U VALUE Rubrics (16 rubrics for learning outcomes)
 - Bloom Taxonomy (Anderson & Krathwohl 2001 revision)

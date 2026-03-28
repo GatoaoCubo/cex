@@ -11,11 +11,8 @@ tags: [schema, law-builder, source-of-truth, P08]
 ---
 
 # law-builder — SCHEMA
-
 SOURCE OF TRUTH. OUTPUT_TEMPLATE.md derives from this. CONFIG.md restricts this. Zero drift permitted.
-
 ## Required Fields (15)
-
 | Field | Type | Required | Default | Gate | Notes |
 |-------|------|----------|---------|------|-------|
 | id | string | YES | — | H02, H03 | Pattern: `p08_law_{number}`. MUST equal filename stem. |
@@ -33,31 +30,22 @@ SOURCE OF TRUTH. OUTPUT_TEMPLATE.md derives from this. CONFIG.md restricts this.
 | statement | string, imperative | YES | — | H09 | One sentence. MUST use MUST/SHALL/NEVER/ALWAYS. |
 | rationale | string | YES | — | S02 | WHY this law exists. Must not restate statement. |
 | enforcement | string | YES | — | S03 | Names the detection mechanism explicitly. |
-
 ## Extended Fields (4)
-
 | Field | Type | Required | Notes |
 |-------|------|----------|-------|
 | scope | enum [system, satellite, domain] | RECOMMENDED | Applicability boundary. Default: system. |
 | exceptions | list[string] | RECOMMENDED | Conditions where law does not apply. Empty list `[]` = no exceptions. |
 | priority | integer 1-10 | RECOMMENDED | Conflict resolution. 10 = highest. Used when laws conflict. |
 | keywords | list[string], len >= 2 | RECOMMENDED | Brain search terms. S10 gate. |
-
 ## ID Pattern
-
 ```
 ^p08_law_[0-9]+$
 ```
-
 Examples of valid IDs: `p08_law_1`, `p08_law_12`, `p08_law_100`
 Examples of invalid IDs: `p08_law_01`, `law_5`, `p08_rule_5`, `P08_law_5`
-
 Rule: `id` MUST equal filename stem. File `p08_law_5.md` MUST have `id: p08_law_5`.
-
 ## Required Body Sections (8)
-
 All 8 sections MUST be present. Section headers are exact strings:
-
 | # | Section Header | Minimum Content |
 |---|---------------|----------------|
 | 1 | `## Statement` | Full imperative form of the law |
@@ -68,9 +56,7 @@ All 8 sections MUST be present. Section headers are exact strings:
 | 6 | `## Violations` | >= 2 breach scenarios with consequences |
 | 7 | `## History` | Establishment date and reason, revisions |
 | 8 | `## References` | >= 1 governance source |
-
 ## Constraints
-
 | Constraint | Value |
 |-----------|-------|
 | max_bytes (body) | 3072 |
@@ -83,9 +69,7 @@ All 8 sections MUST be present. Section headers are exact strings:
 | scope | one of: system, satellite, domain |
 | priority | integer 1-10 |
 | quality | always null |
-
 ## Drift Prevention
-
 Every field in SCHEMA.md MUST appear in OUTPUT_TEMPLATE.md.
 Every `{{var}}` in OUTPUT_TEMPLATE.md MUST map to a field in SCHEMA.md.
 CONFIG.md MAY restrict values but MUST NOT add new fields.

@@ -7,9 +7,7 @@ purpose: Component map of scoring_rubric — inventory, dependencies, and archit
 ---
 
 # Architecture: scoring_rubric in the CEX
-
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | frontmatter block | Metadata header (id, kind, pillar, domain, target_kind, dimensions_count, etc.) | scoring-rubric-builder | active |
@@ -19,15 +17,12 @@ purpose: Component map of scoring_rubric — inventory, dependencies, and archit
 | tier_thresholds | Score ranges mapped to quality tiers (master, skilled, learning, rejected) | author | active |
 | calibration_refs | Golden test references used to anchor consistent scoring | author | active |
 | automation_status | Which dimensions are automated, semi-automated, or manual | author | active |
-
 ## Dependency Graph
-
 ```
 domain_knowledge  --produces-->  scoring_rubric  --consumed_by-->  quality_gate
 golden_test       --calibrates-> scoring_rubric  --consumed_by-->  evaluator
 scoring_rubric    --signals-->   calibration_drift
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | knowledge_card (P01) | scoring_rubric | data_flow | domain expertise informing dimension selection |
@@ -36,9 +31,7 @@ scoring_rubric    --signals-->   calibration_drift
 | scoring_rubric | evaluator | consumes | human or automated evaluator applies the rubric |
 | scoring_rubric | calibration_drift (P12) | signals | emitted when inter-rater agreement drops |
 | benchmark (P07) | scoring_rubric | dependency | benchmarks may inform threshold selection |
-
 ## Boundary Table
-
 | scoring_rubric IS | scoring_rubric IS NOT |
 |-------------------|----------------------|
 | An evaluation framework with weighted dimensions and tiers | A reference example of ideal output (golden_test P07) |
@@ -47,9 +40,7 @@ scoring_rubric    --signals-->   calibration_drift
 | Calibrated against golden tests for consistency | A performance measurement (benchmark P07) |
 | Scoped to one artifact kind with kind-specific criteria | A universal evaluation applicable to all kinds |
 | Supports manual, semi-automated, and automated evaluation | An exclusively automated check without human option |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Domain | knowledge_card, benchmark | Supply domain expertise and performance baselines |

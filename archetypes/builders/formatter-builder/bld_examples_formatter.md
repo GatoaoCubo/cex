@@ -1,4 +1,6 @@
 ---
+kind: examples
+id: bld_examples_formatter
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of formatter artifacts
@@ -6,14 +8,10 @@ pattern: few-shot learning — LLM reads these before producing
 ---
 
 # Examples: formatter-builder
-
 ## Golden Example
-
 INPUT: "Create a formatter to display product comparison data as a Markdown table"
-
 OUTPUT:
 ```yaml
----
 id: p05_fmt_product_comparison_table
 kind: formatter
 pillar: P05
@@ -36,11 +34,8 @@ locale: "pt-BR"
 streaming: false
 keywords: [product-table, comparison, markdown-formatter, ecommerce-display]
 density_score: 0.87
----
 ```
-
 ## Formatting Rules
-
 | Name | Input Field | Transform | Pattern | Options |
 |------|-------------|-----------|---------|---------|
 | title_col | product_title | stringify | `{value}` | max_length: 40, truncate: ellipsis |
@@ -48,7 +43,6 @@ density_score: 0.87
 | rating_col | product_rating | stringify | `{value}/5.0` | pad_right: 7 |
 | stock_col | stock_status | stringify | `{value}` | uppercase: true |
 | seller_col | seller_name | stringify | `{value}` | max_length: 25, truncate: ellipsis |
-
 ## Input Specification
 Type: structured_data
 Structure: list of product objects with title, price, rating, stock, seller fields.
@@ -57,7 +51,6 @@ Example:
 [{"product_title": "Kit Decoracao Sala", "product_price": 149.90, "product_rating": 4.7,
   "stock_status": "em estoque", "seller_name": "Loja Casa & Cia"}]
 ```
-
 ## Output Specification
 Format: markdown
 Example:
@@ -66,7 +59,6 @@ Example:
 |---------|-------|-----------|---------|----------|
 | Kit Decoracao Sala | R$ 149,90 | 4.7/5.0 | EM ESTOQUE | Loja Casa & Cia |
 ```
-
 ## Template
 Engine: string_format
 ```text
@@ -74,13 +66,11 @@ Engine: string_format
 |---------|-------|-----------|---------|----------|
 {rows}
 ```
-
 ## Edge Cases
 - Null values: render as `-` placeholder in table cell
 - Empty strings: render as `-` placeholder
 - Special characters: pipe `|` escaped as `\|` in Markdown table cells
 - Overflow: truncate with ellipsis at max_length per column
-
 WHY THIS IS GOLDEN:
 - quality: null (H05 pass) | id p05_fmt_ pattern (H02 pass) | kind: formatter (H04 pass)
 - 21 fields present (H06 pass) | rule_count: 5 matches table (H07 pass)
@@ -88,14 +78,10 @@ WHY THIS IS GOLDEN:
 - tldr: 89ch (S01 pass) | tags: 6 items (S02 pass) | 5 formatting rules (S03 pass)
 - Input Specification present (S04 pass) | Output Specification present (S05 pass)
 - Template present (S06 pass) | Edge Cases cover all 4 categories (S07 pass) | density: 0.87 (S09 pass)
-
 ## Anti-Example
-
 INPUT: "Make a formatter for data"
-
 BAD OUTPUT:
 ```yaml
----
 id: data_formatter
 kind: format
 pillar: P04
@@ -103,11 +89,8 @@ rule_count: 0
 quality: 8.5
 tags: [data]
 tldr: "This formatter is designed to format various types of data into different output formats."
----
 ```
-
 Format the data nicely and output it.
-
 FAILURES:
 1. id: no `p05_fmt_` prefix -> H02 FAIL
 2. kind: "format" not "formatter" -> H04 FAIL

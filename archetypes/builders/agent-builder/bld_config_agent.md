@@ -8,9 +8,7 @@ pattern: CONFIG restricts SCHEMA, never contradicts it
 ---
 
 # Config: agent Production Rules
-
 ## Naming Convention
-
 | Scope | Convention | Example |
 |-------|-----------|---------|
 | Artifact files | `p02_agent_{slug}.md` + `.yaml` | `p02_agent_knowledge_card_builder.md` |
@@ -19,23 +17,18 @@ pattern: CONFIG restricts SCHEMA, never contradicts it
 | Agent slug | snake_case, lowercase | `knowledge_card_builder`, `scout_agent` |
 | ISO files | `ISO_{AGENT_UPPER}_{NNN}_{TYPE}.md` | `ISO_SCOUT_AGENT_004_INSTRUCTIONS.md` |
 | Agent upper | SCREAMING_SNAKE_CASE | `KNOWLEDGE_CARD_BUILDER` |
-
 Rule: id MUST equal filename stem.
 Rule: ISO file NNN starts at 001 and increments without gaps.
-
 ## File Paths
 - Output (canonical): `cex/P02_model/examples/p02_agent_{slug}.md`
 - Compiled: `cex/P02_model/compiled/p02_agent_{slug}.yaml`
 - ISO vectorstore: `agents/{slug}/iso_vectorstore/ISO_{UPPER}_{NNN}_{TYPE}.md`
-
 ## Size Limits (aligned with SCHEMA)
 - Body: max 5120 bytes
 - Total (frontmatter + body): ~6500 bytes
 - Density: >= 0.80
 - Per ISO file: max 4096 bytes
-
 ## Satellite Enum
-
 | Value | When to use |
 |-------|-------------|
 | orchestrator | Orchestration agents |
@@ -46,9 +39,7 @@ Rule: ISO file NNN starts at 001 and increments without gaps.
 | executor | Execution, deploy, and infra agents |
 | monetizer | Monetization and product agents |
 | agnostic | Cross-satellite utility agents |
-
 ## ISO File Type Enum
-
 | NNN | TYPE | Pillar |
 |-----|------|--------|
 | 001 | MANIFEST | P02 |
@@ -61,7 +52,6 @@ Rule: ISO file NNN starts at 001 and increments without gaps.
 | 008 | ERROR_HANDLING | P11 |
 | 009 | UPLOAD_KIT | P04 |
 | 010 | SYSTEM_INSTRUCTION | P03 |
-
 ## Body Requirements
 - Overview: 2-3 sentences, must name satellite and domain
 - Architecture: capabilities (4-8 bullets) + tools table + satellite position

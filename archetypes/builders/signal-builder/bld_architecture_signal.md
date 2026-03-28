@@ -7,9 +7,7 @@ purpose: Component map of signal — inventory, dependencies, and architectural 
 ---
 
 # Architecture: signal in the CEX
-
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | frontmatter block | Minimal metadata (id, kind, pillar, emitter, status, timestamp) | signal-builder | active |
@@ -18,15 +16,12 @@ purpose: Component map of signal — inventory, dependencies, and architectural 
 | emitter_id | Identifier of the satellite or agent that produced the signal | emitter | active |
 | timestamp | ISO 8601 timestamp of emission | system | active |
 | extensions | Optional additional fields without breaking consumer contracts | emitter | active |
-
 ## Dependency Graph
-
 ```
 satellite/agent  --emits-->     signal  --consumed_by-->  orchestrator
 signal           --consumed_by-->  monitor  --triggers-->  workflow_step
 signal           --signals-->      downstream_action
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | satellite/agent (P02) | signal | produces | emitter creates signal on task completion or error |
@@ -35,9 +30,7 @@ signal           --signals-->      downstream_action
 | signal | workflow_step (P12) | data_flow | signal triggers next step in multi-step workflow |
 | signal | downstream_action | signals | cascading action triggered by signal reception |
 | spawn_config (P12) | signal | dependency | spawn config defines expected signal patterns |
-
 ## Boundary Table
-
 | signal IS | signal IS NOT |
 |-----------|---------------|
 | An atomic status event between agents (complete, error, progress) | A full instruction set for a task (handoff P12) |
@@ -46,9 +39,7 @@ signal           --signals-->      downstream_action
 | Consumed by orchestrators and monitors | A multi-step execution flow (workflow P12) |
 | Extensible via optional fields without breaking consumers | A schema-heavy artifact requiring full validation |
 | Timestamped and attributed to a specific emitter | An anonymous or unattributed event |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Emission | satellite/agent, emitter_id, timestamp | Identify who emitted the signal and when |

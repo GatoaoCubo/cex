@@ -7,14 +7,12 @@ purpose: Tools available for benchmark production
 ---
 
 # Tools: benchmark-builder
-
 ## Production Tools
 | Tool | Purpose | When | Status |
 |------|---------|------|--------|
 | brain_query [MCP] | Search existing benchmarks | Phase 1 (check duplicates) | CONDITIONAL |
 | validate_artifact.py | Validate any artifact kind | Phase 3 | [PLANNED] |
 | cex_forge.py | Generate artifact from seeds | Alternative compose | [PLANNED] |
-
 ## Data Sources
 | Source | Path/URL | Data |
 |--------|----------|------|
@@ -24,7 +22,6 @@ purpose: Tools available for benchmark production
 | SEED_BANK | archetypes/SEED_BANK.yaml | P07_benchmark seeds |
 | Anthropic API | https://docs.anthropic.com | Model performance data |
 | LiteLLM | https://docs.litellm.ai | Cross-provider latency/cost data |
-
 ## Interim Validation
 Manually check each QUALITY_GATES.md gate against produced artifact.
 - [ ] YAML parses

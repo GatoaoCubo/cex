@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: e2e_eval
-
 ## Frontmatter Fields
-
 ### Required
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
@@ -32,7 +30,6 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | quality | null | YES | null | Never self-score |
 | tags | list[string], len >= 3 | YES | — | Searchability |
 | tldr | string <= 160ch | YES | — | Dense summary |
-
 ### Recommended
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
@@ -41,11 +38,9 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | parallel | boolean | REC | false | Stages can run in parallel |
 | reporting | string | REC | — | How to report results |
 | density_score | float 0.80-1.00 | REC | — | Content density |
-
 ## ID Pattern
 Regex: `^p07_e2e_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Stage Object Schema
 ```yaml
 - name: "stage_name"
@@ -54,14 +49,12 @@ Rule: id MUST equal filename stem.
   expected_output: "what this stage produces"
   assertion: "verifiable condition on output"
 ```
-
 ## Body Structure (required sections)
 1. `## Pipeline Overview` — visual flow of stages
 2. `## Stages` — each stage with agent, input, output, assertion
 3. `## Data Fixtures` — test data for reproducibility
 4. `## Expected Output` — final pipeline result
 5. `## Cleanup` — post-test state reset
-
 ## Constraints
 - max_bytes: 4096 (body only)
 - naming: p07_e2e_{pipeline_slug}.md + .yaml

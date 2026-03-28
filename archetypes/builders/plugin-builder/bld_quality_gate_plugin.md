@@ -15,20 +15,15 @@ density_score: 0.85
 ---
 
 # Gate: plugin
-
 ## Definition
-
 | Field     | Value                                              |
 |-----------|----------------------------------------------------|
 | metric    | interface contract clarity + lifecycle completeness |
 | threshold | 8.0                                                |
 | operator  | >=                                                 |
 | scope     | all plugin artifacts (P04)                         |
-
 ## HARD Gates
-
 All must pass. Failure on any = final score 0.
-
 | Gate | Check | Why |
 |------|-------|-----|
 | H01 | YAML frontmatter parses valid YAML | Broken YAML = plugin not loadable |
@@ -41,9 +36,7 @@ All must pass. Failure on any = final score 0.
 | H08 | lifecycle block declares at least on_load and on_unload handlers | Minimum lifecycle for safe load and teardown |
 | H09 | api_surface list has >= 1 entry, each with method name, signature, and return type | Callers need a concrete API, not a description |
 | H10 | If hot_reload: true, lifecycle MUST include on_config_change handler | Hot-reload without config handler causes stale state |
-
 ## SOFT Scoring
-
 | Gate | Check | Weight |
 |------|-------|--------|
 | S01 | tldr <= 160 chars, non-empty | 1.0 |
@@ -58,20 +51,15 @@ All must pass. Failure on any = final score 0.
 | S10 | performance_impact field estimates resource overhead (negligible, low, medium, high) | 0.5 |
 | S11 | security_notes block states whether plugin has network, filesystem, or subprocess access | 1.0 |
 | S12 | No filler phrases ("this plugin", "designed to extend", "various capabilities") | 1.0 |
-
 Weights sum: 9.5. Normalize: divide each by 9.5 before scoring.
-
 ## Actions
-
 | Score | Action |
 |-------|--------|
 | >= 9.5 | GOLDEN — pool as reference plugin implementation for this interface |
 | >= 8.0 | PUBLISH — register in plugin registry and enable for loading |
 | >= 7.0 | REVIEW — complete config_schema, isolation level, or error handling |
 | < 7.0  | REJECT — rework interface contract and lifecycle declarations |
-
 ## Bypass
-
 | Field | Value |
 |-------|-------|
 | conditions | Critical capability gap requiring plugin in production before full review when interface is stable |

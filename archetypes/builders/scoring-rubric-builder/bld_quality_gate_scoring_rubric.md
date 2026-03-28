@@ -19,15 +19,9 @@ tldr: "Gates ensuring scoring rubric files define measurable dimensions, justifi
 ---
 
 ## Definition
-
 A scoring rubric is an evaluation framework that rates a target artifact on multiple weighted dimensions and maps the aggregate score to an action tier. A rubric passes this gate when a reviewer with no prior context could apply it consistently, two independent reviewers would reach scores within 1.0 point of each other on the same input, and the tier thresholds match established system standards.
-
----
-
 ## HARD Gates
-
 Failure on any HARD gate = immediate REJECT regardless of score.
-
 | ID  | Check | Rationale |
 |-----|-------|-----------|
 | H01 | Frontmatter parses as valid YAML with no syntax errors | Unparseable file cannot be indexed or validated |
@@ -39,13 +33,8 @@ Failure on any HARD gate = immediate REJECT regardless of score.
 | H07 | Spec contains a **Dimensions list** with >= 3 named dimensions, each with a description | Fewer than 3 dimensions cannot capture meaningful variation in artifact quality |
 | H08 | Spec contains **Weights** for all dimensions, and weights sum to exactly 100% (or normalize to 100%) | Unbalanced weights produce scores that cannot be compared across rubric versions |
 | H09 | Spec contains **Tier thresholds** for >= 3 distinct tiers (e.g., GOLDEN / PUBLISH / REVIEW / REJECT) with numeric boundaries | Without tiers, a score is a number with no actionable meaning |
-
----
-
 ## SOFT Scoring
-
 Dimensions are weighted; total normalized weight = 100%.
-
 | # | Dimension | Weight | 1 (Poor) | 5 (Good) | 10 (Excellent) |
 |---|-----------|--------|----------|----------|----------------|
 | 1 | density >= 0.80 (content per token ratio) | 1.0 | Padded with filler prose | Mostly substantive | No filler; every sentence carries information |
@@ -56,31 +45,3 @@ Dimensions are weighted; total normalized weight = 100%.
 | 6 | Tags include `scoring-rubric` | 0.5 | Missing | Present but misspelled | Exactly `scoring-rubric` in tags list |
 | 7 | Automation status per dimension (manual / semi-auto / fully automated) | 0.5 | No automation noted | Some dimensions labeled | All dimensions labeled with tool or check reference |
 | 8 | Inter-rater guidance (instructions for resolving disagreements between reviewers) | 1.0 | No guidance | General tiebreaker rule | Specific procedure with escalation path |
-| 9 | Edge case scoring guidance (how to score partial or ambiguous inputs) | 1.0 | No edge cases addressed | One edge case noted | Common edge cases enumerated with ruling per case |
-| 10 | No subjective-only dimensions (each dimension has at least one objective indicator) | 1.0 | Multiple fully-subjective dimensions | One subjective dimension | All dimensions have at least one checkable criterion |
-
-Score = sum(rating * weight) / sum(weights) normalized to 0-10.
-
----
-
-## Actions
-
-| Threshold | Action |
-|-----------|--------|
-| >= 9.5 | GOLDEN — archive to pool, tag as reference implementation |
-| >= 8.0 | PUBLISH — merge to main, available for reviewer use |
-| >= 7.0 | REVIEW — return to author with dimension-level feedback |
-| < 7.0 | REJECT — do not merge; author must revise from scratch or substantially rewrite |
-
----
-
-## Bypass
-
-| Field | Value |
-|-------|-------|
-| condition | Rubric is a draft being used for internal calibration only; scores will not be stored in pool |
-| approver | Domain lead with written sign-off |
-| audit_log | Entry required in `records/audits/gate_bypasses.md` with date, rubric name, approver, and expiry |
-| expiry | 14 days; rubric must pass full gate or be retired |
-
-H01 (parseable frontmatter) and H05 (quality=null) are NEVER bypassable under any condition.

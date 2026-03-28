@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: fallback_chain
-
 ## Frontmatter Fields
-
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string (p02_fc_{slug}) | YES | - | Namespace compliance |
@@ -34,9 +32,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | alert_on_final_fallback | boolean | REC | true | Alert when last step is reached |
 | keywords | list[string] | REC | - | Brain search triggers |
 | density_score | float 0.80-1.00 | OPT | - | Content density |
-
 ## Step Object
-
 ```yaml
 step:
   position: integer (1-based, sequential)
@@ -48,11 +44,9 @@ step:
   retry: integer (overrides global if set)
   conditions: list[string] (optional activation conditions)
 ```
-
 ## ID Pattern
 Regex: `^p02_fc_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Body Structure (required sections)
 1. `## Chain` — ordered step table: position, model, provider, timeout, quality_min, cost
 2. `## Degradation Logic` — how and when each step triggers the next
@@ -60,7 +54,6 @@ Rule: id MUST equal filename stem.
 4. `## Cost Analysis` — total cost projection across all steps
 5. `## Integration` — connection to router, agent, model_card
 6. `## References` — sources and documentation
-
 ## Constraints
 - max_bytes: 4096 (body only)
 - naming: p02_fc_{slug}.md

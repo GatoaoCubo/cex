@@ -15,20 +15,15 @@ density_score: 0.85
 ---
 
 # Gate: path_config
-
 ## Definition
-
 | Field     | Value                                                |
 |-----------|------------------------------------------------------|
 | metric    | path catalog completeness + portability compliance   |
 | threshold | 8.0                                                  |
 | operator  | >=                                                   |
 | scope     | all path_config artifacts (P09)                      |
-
 ## HARD Gates
-
 All must pass. Failure on any = final score 0.
-
 | Gate | Check | Why |
 |------|-------|-----|
 | H01 | YAML frontmatter parses valid YAML | Broken YAML = all paths undefined at boot |
@@ -41,9 +36,7 @@ All must pass. Failure on any = final score 0.
 | H08 | platform field states target OS or list of supported OS values | Paths are platform-dependent; undeclared = silent breakage |
 | H09 | No user-specific absolute paths (all absolute paths use expandable variables such as $HOME or {{USER_DIR}}) | Hardcoded user paths break on any other machine |
 | H10 | default values are present for all paths (null is acceptable if no default exists, but must be explicit) | Missing defaults force manual config on every install |
-
 ## SOFT Scoring
-
 | Gate | Check | Weight |
 |------|-------|--------|
 | S01 | tldr <= 160 chars, non-empty | 1.0 |
@@ -57,20 +50,15 @@ All must pass. Failure on any = final score 0.
 | S09 | creation_order list specifies which paths must be created first when initializing from scratch | 0.5 |
 | S10 | permissions_note documents required read/write/execute access for each path where non-default | 0.5 |
 | S11 | No filler phrases ("this config", "designed to manage", "various paths") | 1.0 |
-
 Weights sum: 8.0. Normalize: divide each by 8.0 before scoring.
-
 ## Actions
-
 | Score | Action |
 |-------|--------|
 | >= 9.5 | GOLDEN — pool as reference path catalog for this scope |
 | >= 8.0 | PUBLISH — use in install scripts and boot configs |
 | >= 7.0 | REVIEW — add missing variables, validation rules, or hierarchy |
 | < 7.0  | REJECT — rework catalog with portable paths and platform spec |
-
 ## Bypass
-
 | Field | Value |
 |-------|-------|
 | conditions | Emergency hotfix requiring path override before full catalog review completes |

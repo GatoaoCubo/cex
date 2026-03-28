@@ -20,17 +20,10 @@ tldr: "Quality gate for agent runtime mental state: verifies routing rules, stat
 ---
 
 ## Definition
-
 A runtime state artifact captures the live decision-making configuration of an agent: its routing rules (with conditions and confidence), state transitions (with trigger events), priority ordering, and heuristics. It applies only during execution — it contains no design-time content such as capability descriptions or architectural diagrams. Persistence scope declares whether state survives across sessions or resets each time.
-
 Scope: files with `kind: runtime_state`. Does not apply to mental models (design-time identity), system prompts (static instructions), or session state (ephemeral task context).
-
----
-
 ## HARD Gates
-
 Failure on any single gate means REJECT regardless of soft score.
-
 | ID  | Predicate | How to test |
 |-----|-----------|-------------|
 | H01 | Frontmatter parses as valid YAML | `yaml.safe_load(frontmatter)` raises no error |
@@ -42,13 +35,8 @@ Failure on any single gate means REJECT regardless of soft score.
 | H07 | Routing rules section present with >= 2 rules each having a condition | count routing rule entries >= 2; each has a condition field |
 | H08 | State transitions section present with >= 1 named transition and a trigger event | count transitions >= 1; each has trigger field non-empty |
 | H09 | `persistence` field is one of: within-session, cross-session | enum membership check |
-
----
-
 ## SOFT Scoring
-
 Score each dimension 0 (absent or fails) to 1 (present and passes). Weights are 0.5 or 1.0.
-
 | #  | Dimension | Weight |
 |----|-----------|--------|
 | 1  | `density_score` field present and >= 0.80 | 1.0 |
@@ -62,31 +50,17 @@ Score each dimension 0 (absent or fails) to 1 (present and passes). Weights are 
 | 9  | Conflict resolution described for cases where two routing rules could both fire | 1.0 |
 | 10 | No design-time content present (no capability lists, architecture notes, or setup instructions) | 1.0 |
 | 11 | `tldr` is <= 160 characters | 0.5 |
-
 **Formula**: `final_score = (sum of score_i * weight_i) / (sum of weight_i) * 10`
-
 Weight total: 10.0. Each dimension contributes proportionally. Score range: 0.0 to 10.0.
-
----
-
 ## Actions
-
 | Tier | Threshold | Action |
 |------|-----------|--------|
 | GOLDEN | >= 9.5 | Publish to pool as golden; use as reference for agent state design |
 | PUBLISH | >= 8.0 | Publish to pool; mark production-ready |
 | REVIEW | >= 7.0 | Return to author with scored dimension feedback; one revision cycle allowed |
 | REJECT | < 7.0 | Block from pool; full rewrite required before re-evaluation |
-
----
-
 ## Bypass
-
 | Field | Value |
 |-------|-------|
 | condition | Agent is in early bootstrapping and fewer than 2 routing rules have been observed in practice |
 | approver | Domain lead must approve in writing before bypass takes effect |
-| audit_log | Record in `records/pool/audits/bypasses.md` with date, approver, and reason |
-| expiry | 21 days from bypass grant; routing rules must be grounded in observed agent behavior before expiry |
-
-H01 (YAML parses) and H05 (quality is null) may never be bypassed under any circumstance. Bypassing H09 (persistence scope) is never permitted — an undeclared persistence scope causes cross-session state contamination.

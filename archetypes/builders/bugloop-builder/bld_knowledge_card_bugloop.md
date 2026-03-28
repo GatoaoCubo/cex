@@ -8,13 +8,9 @@ sources: Google SRE Book ch.13, DORA MTTR metric, chaos engineering principles
 ---
 
 # Domain Knowledge: bugloop
-
 ## Executive Summary
-
 Bugloops implement automated detect-fix-verify cycles that minimize Mean Time To Recovery (MTTR) for known failure patterns. They apply fix strategies calibrated by confidence level, verify via test suites, and escalate to humans when automation confidence is low. Bugloops differ from quality gates (pass/fail barriers), optimizers (metric-driven improvement), and guardrails (safety prevention).
-
 ## Spec Table
-
 | Property | Value |
 |----------|-------|
 | Pillar | P11 (governance/safety) |
@@ -23,11 +19,8 @@ Bugloops implement automated detect-fix-verify cycles that minimize Mean Time To
 | Escalation trigger | max_attempts reached or confidence below threshold |
 | Rollback | optional, triggered on fix failure when enabled |
 | Frontmatter fields | 15+ |
-
 ## Patterns
-
 - **Detect-Fix-Verify cycle**: signal fires → apply fix strategy → run test suite → commit on pass or escalate on fail
-
 ```
 DETECT (pattern match) → FIX (strategy, attempt N)
   ├─ success → VERIFY (test_suite)
@@ -36,9 +29,7 @@ DETECT (pattern match) → FIX (strategy, attempt N)
   ├─ max_attempts → ESCALATE
   └─ rollback_enabled → ROLLBACK then ESCALATE
 ```
-
 - **Confidence calibration**: match confidence to domain risk
-
 | Domain | Confidence | Rationale |
 |--------|-----------|-----------|
 | Linting/style errors | 0.95 | Deterministic, no side effects |
@@ -46,12 +37,9 @@ DETECT (pattern match) → FIX (strategy, attempt N)
 | API schema drift | 0.75 | Requires schema diffing accuracy |
 | Runtime memory leaks | 0.55 | Non-deterministic, prefer manual |
 | Data corruption | 0.30 | High stakes, always manual |
-
 - **Detection methods**: static_analysis (on_commit), test_failure (on_commit), runtime_trace (continuous), log_scan (scheduled)
 - **Fix strategy selection**: patch_and_retry for known deterministic bugs; rollback_first for unknown root cause; isolate_then_fix for modular failures
-
 ## Anti-Patterns
-
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
 | Inflated confidence (0.95 for non-deterministic) | Silent bad fixes; worse than no fix |
@@ -60,18 +48,14 @@ DETECT (pattern match) → FIX (strategy, attempt N)
 | detect.pattern=".*" | Catches everything, fixes nothing useful |
 | Empty verify.assertions | Verification has no pass criteria |
 | No max_attempts limit | Infinite retry loop on unfixable bug |
-
 ## Application
-
 1. Identify failure pattern: what known signal triggers this bugloop?
 2. Select detection method: static analysis, test failure, log scan, or runtime trace
 3. Calibrate confidence: what is the probability this fix is correct? (see table)
 4. Choose fix strategy: patch_and_retry vs rollback_first vs isolate_then_fix
 5. Define verification: test suite, assertions, timeout bounds
 6. Set escalation: max_attempts, target (human/queue), rollback policy
-
 ## References
-
 - Google SRE Book ch.13: emergency response and toil reduction
 - DORA: MTTR as key metric for recovery performance
 - Chaos engineering: known failure modes should have automated recovery

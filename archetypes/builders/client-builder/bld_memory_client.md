@@ -21,37 +21,27 @@ keywords: [api client, retry, backoff, pagination, rate limiting, auth, error ha
 ---
 
 ## Summary
-
 An API client spec that omits retry and pagination strategy is a spec for a demo, not a production integration. Both are invisible in happy-path testing and catastrophic at scale. Silent pagination truncation is the most insidious: the client appears to work, returns data, but silently drops records after the first page.
-
 The second most common failure is the retry storm: a client that retries 429 (rate limited) responses immediately and aggressively, converting a temporary rate limit into a permanent ban.
-
 ## Pattern
-
 **Explicit retry, pagination, and auth redaction at spec time.**
-
 Retry strategy declaration:
 - max_attempts: 3 (default; reduce to 2 for user-facing latency-sensitive endpoints)
 - backoff: exponential with jitter (base 1s, max 30s)
 - retryable status codes: [429, 500, 502, 503, 504]
 - non-retryable: [400, 401, 403, 404, 422] — these are caller errors, retrying is pointless
 - respect Retry-After header when present on 429 responses
-
 Pagination strategy declaration:
 - Type: cursor (preferred for large datasets) or offset (acceptable for small, stable datasets)
 - Page size: explicit default + max (e.g., default 100, max 1000)
 - Terminal condition: explicit (null next_cursor, empty data array, total_count reached)
 - Never assume the first response is the complete response
-
 Auth redaction:
 - All auth fields (api_key, token, bearer) must be masked in error logs and traces
 - Log the request shape and response status; never log the Authorization header value
 - Timeout default: 30s per request; configurable via environment variable
-
 Endpoint naming: verb_noun snake_case (`create_charge`, `get_user`, `list_orders`). Methods mirror HTTP conventions: GET = read, POST = create, PUT/PATCH = update, DELETE = remove.
-
 ## Anti-Pattern
-
 - Omitting pagination handling for endpoints that can return more than one page (guarantees data truncation at scale).
 - Retrying 4xx responses (400, 401, 403 are caller errors; retrying them wastes quota and can trigger abuse detection).
 - No backoff on retries (linear or no backoff on 429s converts temporary rate limits into bans).
@@ -59,25 +49,5 @@ Endpoint naming: verb_noun snake_case (`create_charge`, `get_user`, `list_orders
 - Setting auth: none for SaaS APIs that require keys without checking the API documentation.
 - Logging the full request including Authorization header (credential leak in log aggregation systems).
 - Confusing client with connector: a client is unidirectional (outbound only); a connector is bidirectional with inbound webhook handling.
-
 ## Context
-
 The 1024-byte body limit for client is the tightest in P04. Write the endpoint list in frontmatter first, then expand each entry within the remaining budget.
-
-Auth strategy selection: api_key for most SaaS (Stripe, OpenAI); oauth2 for user-delegated (Google, GitHub); bearer_token for internal services; basic for legacy only; none for truly public APIs. Serialization: declare content type (application/json standard; multipart for file uploads). Deserialize response before returning; never return raw bytes.
-
-## Impact
-
-Explicit retry and pagination specs prevent the three most common production client failures. Highest impact for third-party APIs under rate limits or large paginated datasets. Lower impact for internal APIs with reliable uptime and small responses. Auth redaction at spec time is difficult to retrofit after the client ships.
-
-## Reproducibility
-
-Applies to any HTTP API client regardless of language or framework. Retry and pagination patterns are framework-agnostic contracts. The retryable code list (429, 5xx) and non-retryable list (4xx) are stable across all REST APIs observed.
-
-## References
-
-- Builder domain: client, P04
-- Related builder: connector-builder (bidirectional with webhook handling)
-- Retry standard: exponential backoff with jitter
-- Pagination: cursor-based preferred over offset
-- Body budget: MEMORY.md > Effective Patterns (existing)

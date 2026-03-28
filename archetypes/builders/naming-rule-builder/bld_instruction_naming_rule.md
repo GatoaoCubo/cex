@@ -31,27 +31,17 @@ density_score: 0.88
 ---
 
 ## Context
-
 The naming-rule-builder receives a **scope definition** and produces a `naming_rule` artifact encoding the naming convention for that scope.
-
 **Input variables**:
 - `{{scope}}` — category of entity being named (e.g., `knowledge_card`, `signal`, `builder_dir`)
 - `{{examples}}` — 1–5 candidate or existing names that must conform to the rule
 - `{{platform}}` — constraining environment: `filesystem`, `python_identifier`, `url_slug`, `yaml_key`
 - `{{constraints}}` — optional known requirements: max length, required prefix, version segment
-
 **Output**: a single `naming_rule` artifact at `p05_nr_{{scope}}.md` with a testable regex, valid/invalid examples, and a collision resolution strategy.
-
 **Boundaries**: defines conventions only. Does NOT validate existing names (validator), define entity semantics (type_def), or format output (formatter-builder).
-
----
-
 ## Phases
-
 ### Phase 1: CLASSIFY
-
 **Goal**: Establish the exact scope, gather pattern constraints, and check for existing rules before writing.
-
 1. Parse `{{scope}}`. Identify the artifact kind this rule governs and its CEX pillar (p01–p12).
 2. Search for an existing naming rule for this scope (grep `kind: naming_rule` in records/pool/ or use brain_query). If one exists, read it and determine whether an update or new version is needed.
 3. Identify sibling naming rules in the same pillar. Note their separator style (underscore vs hyphen) and case style (snake_case vs kebab-case) for consistency.
@@ -66,7 +56,6 @@ The naming-rule-builder receives a **scope definition** and produces a `naming_r
    - `python_identifier`: `[a-zA-Z_][a-zA-Z0-9_]*`, no reserved keywords
    - `url_slug`: RFC 3986 unreserved chars only (`[A-Za-z0-9\-._~]`)
 6. Record minimum and maximum name lengths observed in examples.
-
 ```
 constraints_map = {
   separator: <inferred>,
@@ -78,15 +67,9 @@ constraints_map = {
   reserved_words: <platform list>
 }
 ```
-
 **Exit**: all 5 structural dimensions (separator, case, prefix/suffix, length, versioning) are resolved or explicitly marked unconstrained.
-
----
-
 ### Phase 2: COMPOSE
-
 **Goal**: Produce the regex, examples, collision strategy, and complete artifact body.
-
 7. Translate `constraints_map` into regex components. Always include `^` and `$` anchors. Use named groups if the platform allows.
 8. Construct the full `{{pattern}}` regex string. Verify it compiles.
 9. Generate 3 **valid** names that match the regex.
@@ -96,15 +79,9 @@ constraints_map = {
 13. Write `tldr` as one sentence: "Naming rule for {{scope}} artifacts following {{pattern_summary}}."
 14. Assign 5–8 `keywords` covering scope, kind, and pattern elements.
 15. Set `quality: null` and `density_score: REC`.
-
 **Exit**: regex matches all 3 valid examples, rejects all 2 invalid examples, and matches all input `{{examples}}`.
-
----
-
 ### Phase 3: VALIDATE
-
 **Goal**: Confirm internal consistency and spec compliance before writing the file.
-
 16. Verify `id` matches `^p05_nr_[a-z][a-z0-9_]+$`.
 17. Verify `pattern` field compiles as a valid regex without error.
 18. Confirm `quality: null` is set (never self-assign a score).
@@ -112,13 +89,8 @@ constraints_map = {
 20. Confirm the filename will be `p05_nr_{{scope}}.md` with scope in kebab-case.
 21. If any HARD gate fails, return to Phase 2 and correct. Do not output a failing artifact.
 22. Write the final artifact using the Output Contract template below.
-
----
-
 ## Output Contract
-
 ```
----
 id: p05_nr_{{scope}}
 kind: naming_rule
 pillar: P05
@@ -135,16 +107,10 @@ versioning: {{true|false}}
 collision_strategy: {{collision_strategy}}
 quality: null
 tags: [naming-rule, {{scope}}, convention]
----
-
 ## Pattern
-
 `{{regex_pattern}}`
-
 **Case style**: {{case_style}} | **Separator**: `{{separator_char}}` | **Max length**: {{max_length}}
-
 ## Constraints
-
 | Dimension | Rule |
 |-----------|------|
 | Prefix | {{prefix_rule}} |
@@ -152,53 +118,6 @@ tags: [naming-rule, {{scope}}, convention]
 | Versioning | {{versioning_rule}} |
 | Reserved words | {{reserved_words_list}} |
 | Platform | {{platform}} |
-
 ## Examples
-
 **Valid**: `{{example_valid_1}}`, `{{example_valid_2}}`, `{{example_valid_3}}`
-
 **Invalid**:
-- `{{example_invalid_1}}` — {{reason_1}}
-- `{{example_invalid_2}}` — {{reason_2}}
-
-## Collision Resolution
-
-**Scope**: {{uniqueness_scope}} | **Detection**: {{detection_mechanism}}
-**Algorithm**: {{collision_strategy}} | **Automation**: {{automatic|manual}}
-**Reserved segments**: {{reserved_list}}
-```
-
----
-
-## Validation
-
-| # | Gate | Type |
-|---|------|------|
-| 1 | `pattern` compiles as valid regex without error | HARD |
-| 2 | `pattern` matches all 3 valid examples | HARD |
-| 3 | `pattern` rejects all 2 invalid examples | HARD |
-| 4 | `id` matches `^p05_nr_[a-z][a-z0-9_]+$` | HARD |
-| 5 | `case_style` is a recognized enum value | HARD |
-| 6 | Collision resolution documents detection + algorithm + automation level | HARD |
-| 7 | Filename is `p05_nr_{{scope}}.md` in kebab-case | HARD |
-| 8 | `quality: null` is set | HARD |
-| 9 | Invalid example reasons reference a specific constraint | SOFT |
-| 10 | `max_length` is a positive integer, not a placeholder | SOFT |
-| 11 | Reserved words list non-empty when platform has known reserved words | SOFT |
-
----
-
-## Metacognition
-
-**Does**:
-- Encodes naming conventions as machine-readable regex artifacts for a single named scope
-- Produces positive (valid) and negative (invalid) examples with explicit reasons
-- Documents collision resolution as part of the naming contract
-
-**Does NOT**:
-- Validate whether existing names comply (use validator)
-- Define entity semantics or type structure (use type_def)
-- Format output for display (use formatter-builder)
-- Extract data from text (use parser-builder)
-
-**Chaining**: output feeds validator (compliance checking), code generators (runtime enforcement), documentation builders (style guide). Input from orchestrator scope definition and platform constraint catalog.

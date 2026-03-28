@@ -7,7 +7,6 @@ purpose: Component map of guardrail — inventory, dependencies, and architectur
 ---
 
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | scope | The agents, artifact types, or execution contexts this guardrail applies to | guardrail | required |
@@ -18,9 +17,7 @@ purpose: Component map of guardrail — inventory, dependencies, and architectur
 | bypass_policy | Whether any role or condition may override the guardrail; default is none | guardrail | required |
 | trigger_condition | Pattern or condition that activates enforcement (input match, output pattern, etc.) | guardrail | required |
 | remediation | Action taken after a block: error message, fallback response, or escalation | guardrail | conditional |
-
 ## Dependency Graph
-
 ```
 law (P08)          --produces--> guardrail
 guardrail          --depends-->  hook (P04)
@@ -28,7 +25,6 @@ guardrail          --signals-->  quality_gate (P11)
 guardrail          --produces--> feature_flag (P09)
 permission (P09)   --depends-->  guardrail
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | law (P08) | guardrail | produces | operational principles that ground safety rules |
@@ -36,9 +32,7 @@ permission (P09)   --depends-->  guardrail
 | guardrail | quality_gate (P11) | signals | compliance events and violation counts for monitoring |
 | guardrail | feature_flag (P09) | produces | safety constraints that govern flag behavior and kill-switch policy |
 | permission (P09) | guardrail | depends | access-control scope that guardrail rules operate within |
-
 ## Boundary Table
-
 | guardrail IS | guardrail IS NOT |
 |--------------|------------------|
 | An external safety boundary agents cannot self-override | A quality score or pass/fail threshold (that is quality_gate) |
@@ -47,9 +41,7 @@ permission (P09)   --depends-->  guardrail
 | Owner of bypass_policy — documents whether any override is possible | An operational law defining architectural principles |
 | Applied at runtime via hooks (pre/post execution) | A lifecycle rule managing artifact freshness or expiry |
 | Backed by concrete violation examples for detection calibration | A performance optimizer targeting metrics improvement |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|-----------|---------|
 | Foundation | law (P08), permission (P09) | Anchor safety rules in operational principles and access scope |

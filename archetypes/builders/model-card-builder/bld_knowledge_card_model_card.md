@@ -8,13 +8,9 @@ sources: model-card-builder MANIFEST.md + SCHEMA.md, Mitchell 2019, LiteLLM, Hug
 ---
 
 # Domain Knowledge: model_card
-
 ## Executive Summary
-
 Model cards are technical specification artifacts for LLMs — they encode pricing, context limits, capability booleans, and use-case guidance into a structured, sourced document. Every specification row must cite a source URL; no self-scoring at creation. They differ from benchmarks (which measure performance), boot configs (which configure runtime), and agents (which define capabilities) by being static reference specs used for model selection and comparison.
-
 ## Spec Table
-
 | Property | Value |
 |----------|-------|
 | Pillar | P02 (design-time spec) |
@@ -30,9 +26,7 @@ Model cards are technical specification artifacts for LLMs — they encode prici
 | Features | 8 booleans (tool_calling, structured_output, reasoning, etc.) |
 | Min When-to-Use rows | 5 |
 | Provider enum | anthropic, openai, google, meta, mistral, cohere, deepseek, alibaba, ai21, other |
-
 ## Patterns
-
 | Pattern | Application |
 |---------|-------------|
 | Pricing normalization | Per 1M tokens, USD; `null` for open-weight, `0.00` for free-tier |
@@ -42,9 +36,7 @@ Model cards are technical specification artifacts for LLMs — they encode prici
 | Status lifecycle | active -> deprecated -> sunset |
 | Freshness gate | 90 days (providers update pricing/features quarterly) |
 | Tiered pricing | Lowest tier in frontmatter; document higher tiers in body |
-
 ## Anti-Patterns
-
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
 | Pricing `0` for open-weight model | Must be `null`; 0 implies free API |
@@ -54,9 +46,7 @@ Model cards are technical specification artifacts for LLMs — they encode prici
 | Self-assigned quality score | `quality` must be null |
 | When-to-Use table with < 5 rows | Fails HARD gate — insufficient guidance |
 | Capability as prose paragraph | Must be structured boolean fields |
-
 ## Application
-
 1. Set `id: p02_mc_{provider}_{model_slug}` — must equal filename stem
 2. Populate all 26 required frontmatter fields; set `quality: null`
 3. Set `pricing`: base tier per 1M tokens; `null` for open-weight
@@ -64,9 +54,7 @@ Model cards are technical specification artifacts for LLMs — they encode prici
 5. Write `## Specifications` table with Value + Source URL per row
 6. Write `## When to Use` decision table with >= 5 rows
 7. Validate: body <= 4096 bytes, all specs sourced, 10 HARD + 15 SOFT gates
-
 ## References
-
 - model-card-builder SCHEMA.md v2.0.0
 - Mitchell et al. 2019 "Model Cards for Model Reporting"
 - HuggingFace Model Cards documentation

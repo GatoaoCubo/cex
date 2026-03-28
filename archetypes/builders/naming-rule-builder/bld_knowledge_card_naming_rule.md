@@ -8,13 +8,9 @@ sources: naming-rule-builder MANIFEST.md + SCHEMA.md, PEP 8, BEM CSS, DNS naming
 ---
 
 # Domain Knowledge: naming_rule
-
 ## Executive Summary
-
 Naming rules are formal specifications defining the string format that artifacts, files, variables, or entities within a bounded scope must follow. Each rule declares a regex pattern, case style, prefix/suffix conventions, and collision resolution strategy. They differ from validators (which check content against rules), formatters (which present output), parsers (which extract data), and type definitions (which categorize abstractly) by being the single source of truth for "how is this thing named."
-
 ## Spec Table
-
 | Property | Value |
 |----------|-------|
 | Pillar | P05 (formatting/convention) |
@@ -26,9 +22,7 @@ Naming rules are formal specifications defining the string format that artifacts
 | Density minimum | >= 0.80 |
 | Quality field | always `null` |
 | Key fields | regex, case_style, scope, prefix, separator |
-
 ## Patterns
-
 | Pattern | Application |
 |---------|-------------|
 | Pillar prefix | `p{NN}_` scopes artifact to pillar (e.g., `p01_`, `p05_`) |
@@ -37,18 +31,14 @@ Naming rules are formal specifications defining the string format that artifacts
 | Case style declaration | One of: snake_case, kebab-case, PascalCase, camelCase |
 | Collision resolution | Strategy for conflicts: append sequence number, hash suffix, or reject |
 | Scope boundary | Naming rule applies to ONE artifact kind or ONE namespace |
-
 ### Common Case Styles
-
 | Style | Example | Domain |
 |-------|---------|--------|
 | snake_case | `my_variable` | Python, YAML keys, file stems |
 | kebab-case | `my-component` | URLs, CSS, package names, directory names |
 | PascalCase | `MyClass` | Classes, types, components |
 | camelCase | `myFunction` | JavaScript functions, JSON keys |
-
 ## Anti-Patterns
-
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
 | No regex pattern | Cannot machine-validate; enforcement is manual-only |
@@ -57,9 +47,7 @@ Naming rules are formal specifications defining the string format that artifacts
 | Scope: "all artifacts" | Too broad; different kinds need different patterns |
 | Prefix without pillar number | Loses namespace scoping; collisions across pillars |
 | Missing separator specification | Ambiguous: is it `my_name` or `my-name`? |
-
 ## Application
-
 1. Define the scope: which artifact kind or namespace does this rule govern?
 2. Choose case_style (snake_case, kebab-case, PascalCase, camelCase)
 3. Define prefix pattern (e.g., `p05_nr_`) and separator
@@ -67,9 +55,7 @@ Naming rules are formal specifications defining the string format that artifacts
 5. Specify collision resolution strategy
 6. Provide 3+ valid examples and 3+ invalid examples
 7. Validate: body <= 3072 bytes, density >= 0.80, 8 HARD + 10 SOFT gates
-
 ## References
-
 - naming-rule-builder SCHEMA.md v1.0.0
 - PEP 8 (Python naming conventions)
 - BEM CSS naming methodology

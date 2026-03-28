@@ -7,9 +7,7 @@ purpose: Component map of boot_config — inventory, dependencies, and architect
 ---
 
 # Architecture: boot_config in the CEX
-
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | frontmatter block | 15 required + 7 recommended fields (id, kind, pillar, provider, model, version, etc.) | boot-config-builder | required |
@@ -21,9 +19,7 @@ purpose: Component map of boot_config — inventory, dependencies, and architect
 | permissions_block | Allowed and denied operations scoped to this provider | author | required |
 | flags_block | Provider-specific CLI flags and startup options (e.g., --dangerously-skip-permissions) | author | optional |
 | mcp_config | MCP server configurations and connection parameters | author | optional |
-
 ## Dependency Graph
-
 ```
 model_card   --produces-->  boot_config  --produces_for-->  spawn_config
 agent        --produces-->  boot_config  --consumed_by-->   workflow
@@ -31,7 +27,6 @@ system_prompt --depends-->  boot_config
 boot_config  --signals-->   agent_instance (initialized and ready)
 boot_config  --depends-->   provider_runtime (must exist before boot)
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | model_card (P02) | boot_config | data_flow | LLM ID, capabilities, context window, cost per token |
@@ -41,9 +36,7 @@ boot_config  --depends-->   provider_runtime (must exist before boot)
 | boot_config | workflow (P12) | data_flow | initialization step in orchestrated agent lifecycle |
 | boot_config | agent_instance | signals | agent becomes executable after boot_config is applied |
 | provider_runtime | boot_config | depends | provider must exist for the config to be valid |
-
 ## Boundary Table
-
 | boot_config IS | boot_config IS NOT |
 |----------------|-------------------|
 | Provider-specific initialization for one agent on one runtime | The agent definition itself (agent) |
@@ -52,9 +45,7 @@ boot_config  --depends-->   provider_runtime (must exist before boot)
 | The bridge between agent definition and executable instance | Orchestration logic for spawning multiple agents (spawn_config) |
 | Editable and versioned — tuned per provider and deployment | An immutable fundamental truth (axiom) |
 | Consumed at initialization time, not at task execution time | A routing rule or fallback sequence (router, fallback_chain) |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Inputs | model_card, agent, system_prompt | Supply LLM spec, agent identity, and persona reference |

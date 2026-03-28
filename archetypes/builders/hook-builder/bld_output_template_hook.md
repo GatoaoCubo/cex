@@ -1,4 +1,6 @@
 ---
+kind: output_template
+id: bld_output_template_hook
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} that the LLM fills to produce a hook artifact
@@ -6,9 +8,7 @@ pattern: every field here exists in SCHEMA.md — template derives, never invent
 ---
 
 # Output Template: hook
-
 ```yaml
----
 id: p04_hook_{{hook_slug}}
 kind: hook
 pillar: P04
@@ -32,16 +32,13 @@ logging: {{true|false}}
 environment: [{{env_var_1}}, {{env_var_2}}]
 keywords: [{{keyword_1}}, {{keyword_2}}, {{keyword_3}}]
 density_score: {{0.80_to_1.00}}
----
 ```
-
 ## Trigger Configuration
 Event: {{trigger_event}}
 Execution: {{execution}} ({{pre_post_description}})
 Conditions:
 - {{condition_description_1}}
 - {{condition_description_2}}
-
 ## Script
 Path: {{script_path}}
 Language: {{script_language}}
@@ -49,21 +46,17 @@ Arguments: {{script_args_or_none}}
 ```{{script_language}}
 {{script_content_or_description}}
 ```
-
 ## Input/Output
 Input (from event):
 - {{input_field_1}}: {{input_description_1}}
 - {{input_field_2}}: {{input_description_2}}
-
 Output (to caller):
 - {{output_field_1}}: {{output_description_1}}
-
 ## Error Handling
 Strategy: {{error_handling}}
 - On script failure: {{failure_behavior}}
 - On timeout: {{timeout_behavior}}
 - On missing script: {{missing_behavior}}
-
 ## References
 - {{reference_1}}
 - {{reference_2}}

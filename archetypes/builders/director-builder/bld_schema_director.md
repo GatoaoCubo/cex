@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: satellite_spec
-
 ## Frontmatter Fields
-
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string (p08_sat_{name}) | YES | - | Namespace compliance |
@@ -39,25 +37,20 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | quality | null | YES | null | Never self-score |
 | tags | list[string], len >= 3 | YES | - | Must include "satellite" |
 | tldr | string <= 160ch | YES | - | Dense summary |
-
 ## Complex Objects
-
 ```yaml
 scaling:
   max_concurrent: integer    # max parallel instances
   timeout_minutes: integer   # max execution time
   memory_limit_mb: integer   # RAM ceiling
-
 monitoring:
   health_check: string       # command or URL
   signal_on_complete: boolean # emit signal when done
   alert_on_failure: boolean  # notify on error
 ```
-
 ## ID Pattern
 Regex: `^p08_sat_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Body Structure (required sections)
 1. `## Role` — what the satellite does and its primary function
 2. `## Model & MCPs` — LLM model details and MCP server specs
@@ -66,7 +59,6 @@ Rule: id MUST equal filename stem.
 5. `## Constraints` — operational limits and prohibitions
 6. `## Dependencies` — external services and sibling satellites
 7. `## Scaling & Monitoring` — concurrency, timeouts, health checks
-
 ## Constraints
 - max_bytes: 4096 (body only)
 - naming: p08_sat_{name_lower}.yaml

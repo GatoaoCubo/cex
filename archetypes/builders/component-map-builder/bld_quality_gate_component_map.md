@@ -15,20 +15,15 @@ density_score: 0.90
 ---
 
 # Gate: component_map
-
 ## Definition
-
 | Field | Value |
 |---|---|
 | metric | component_map artifact quality score |
 | threshold | 7.0 (publish >= 8.0, golden >= 9.5) |
 | operator | weighted_sum |
 | scope | all artifacts with `kind: component_map` |
-
 ## HARD Gates
-
 All must pass (AND logic). Any single failure = REJECT.
-
 | ID | Check | Fail Condition |
 |---|---|---|
 | H01 | Frontmatter parses as valid YAML | Parse error on frontmatter block |
@@ -40,11 +35,8 @@ All must pass (AND logic). Any single failure = REJECT.
 | H07 | At least two components defined | Single-component map is a satellite_spec, not a component_map |
 | H08 | Each connection references valid component IDs | Connection references a component ID not listed in components |
 | H09 | Scope boundary declared | `scope` field absent or empty; map must state what system boundary it covers |
-
 ## SOFT Scoring
-
 Weights sum to 100%.
-
 | Dimension | Weight | Criteria |
 |---|---|---|
 | Component completeness | 1.0 | All components within the declared scope boundary are inventoried |
@@ -59,18 +51,14 @@ Weights sum to 100%.
 | Freshness metadata | 0.5 | Map includes `as_of` date or version reference for accuracy tracking |
 | Visual parity potential | 0.5 | Structure sufficiently detailed that a diagram could be generated from it |
 | Domain specificity | 1.0 | Component names, interfaces, and connections specific to the declared system |
-
 ## Actions
-
 | Score | Tier | Action |
 |---|---|---|
 | >= 9.5 | Golden | Publish to pool as golden reference |
 | >= 8.0 | Publish | Publish to pool, add to routing index |
 | >= 7.0 | Review | Flag for improvement before publish |
 | < 7.0 | Reject | Return to author with specific gate failures |
-
 ## Bypass
-
 | Field | Value |
 |---|---|
 | conditions | Map created during active system migration where component inventory is in flux |

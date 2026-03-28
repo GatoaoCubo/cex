@@ -8,9 +8,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 ---
 
 # Instructions: How to Produce a dispatch_rule
-
 ## Phase 1: CLASSIFY
-
 1. Identify the domain scope for this routing rule (research, build, marketing, orchestration, execute, knowledge, monetize)
 2. List 3–8 keywords that trigger this rule, covering both Portuguese and English variants of the domain terms
 3. Determine the target satellite and the model it runs (opus for build/execute, sonnet for research/marketing/knowledge)
@@ -18,9 +16,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 5. Specify fallback behavior when confidence falls below threshold: pass to next rule, route to a default satellite, or reject with an error
 6. Assign priority level: 7–8 for core domain rules, 5–6 for supporting or overlapping domains
 7. Check existing dispatch_rules in P12 for scope overlap — two rules must not claim the same keywords without explicit priority separation
-
 ## Phase 2: COMPOSE
-
 1. Read SCHEMA.md — source of truth for all fields
 2. Read OUTPUT_TEMPLATE.md — fill the template following SCHEMA constraints
 3. Fill all required frontmatter fields; set `quality: null` — never self-score
@@ -30,9 +26,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 7. Write **Fallback** section: what happens below threshold — next rule name, default satellite, or rejection reason
 8. Write **Scope Fence** section: which domains this rule covers and which adjacent domains it explicitly excludes
 9. Verify body <= 3072 bytes
-
 ## Phase 3: VALIDATE
-
 1. Check all HARD gates in QUALITY_GATES.md
 2. Confirm `id` matches `^p12_dr_[a-z][a-z0-9_]+$`
 3. Confirm `fallback` satellite differs from the primary `satellite`

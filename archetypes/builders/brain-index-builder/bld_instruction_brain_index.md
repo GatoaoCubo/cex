@@ -8,7 +8,6 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 ---
 
 # Instructions: How to Produce a brain_index
-
 ## Phase 1: RESEARCH
 1. Identify the content scope (corpus): which files, directories, or artifact types this index covers
 2. Determine the search algorithm: BM25 (keyword-based), FAISS (vector similarity), or hybrid (both combined with weighted scores)
@@ -16,7 +15,6 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 4. Map the ranking strategy: scoring formula, boost factors for recency or authority, tie-breaking rule
 5. Identify filter dimensions: metadata fields (pillar, kind, satellite, tag) that users filter by, and their allowed values
 6. Check for existing brain_index artifacts with overlapping scope to avoid redundant indexes
-
 ## Phase 2: COMPOSE
 1. Read SCHEMA.md — source of truth for all fields
 2. Read OUTPUT_TEMPLATE.md — template to fill
@@ -27,7 +25,6 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 7. Write Filters section: each metadata dimension with its allowed values
 8. Write Rebuild Schedule section: trigger condition (time-based or event-based), estimated duration, and maximum staleness threshold
 9. Write Health Check section: integrity verification steps to confirm index is valid and current
-
 ## Phase 3: VALIDATE
 1. Check QUALITY_GATES.md manually
 2. HARD gate: id matches `p10_bi_` pattern

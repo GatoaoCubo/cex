@@ -8,7 +8,6 @@ pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 ---
 
 # Schema: handoff
-
 ## Artifact Identity
 | Field | Value |
 |-------|-------|
@@ -17,7 +16,6 @@ pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 | Machine format | `yaml` (frontmatter) + `md` (body) |
 | Naming | `p12_ho_{task}.md` |
 | Max bytes | 4096 |
-
 ## Required Frontmatter Fields
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
@@ -36,7 +34,6 @@ pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 | quality | null | YES | null | Never self-score |
 | tags | list[string], len >= 3 | YES | - | Searchability |
 | tldr | string <= 160ch | YES | - | Dense summary |
-
 ## Optional Frontmatter Fields
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
@@ -48,14 +45,12 @@ pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 | wave | integer | NO | omitted | Wave number in multi-wave execution |
 | keywords | list[string] | NO | omitted | Brain search terms |
 | linked_artifacts | object {primary, related} | NO | omitted | Cross-references |
-
 ## Body Structure (required sections)
 1. `## Context` — why this work is needed and relevant background
 2. `## Tasks` — numbered list of specific actions to perform
 3. `## Scope Fence` — paths allowed (SOMENTE) and forbidden (NAO TOQUE)
 4. `## Commit` — exact git commands for committing deliverables
 5. `## Signal` — how to signal completion (signal_writer or file)
-
 ## Semantic Rules
 1. One handoff delegates one coherent unit of work to one satellite
 2. Tasks must be specific and actionable, not vague
@@ -63,13 +58,11 @@ pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 4. Commit section must include exact git add and commit commands
 5. Signal section must reference signal_writer or a completion file
 6. Autonomy level governs how much the satellite can decide independently
-
 ## Boundary Rules
 `handoff` IS:
 - complete delegation instruction for a satellite
 - packaged context + tasks + scope + commit rules
 - one-shot execution brief
-
 `handoff` IS NOT:
 - `action_prompt`: no persona, no system rules, no response format constraints
 - `signal`: no status event, no quality score, no timestamp-only data
@@ -77,11 +70,9 @@ pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 - `workflow`: no step graph, no error handling, no runtime state
 - `dag`: no dependency graph structure, no topological ordering
 - `crew`: no multi-agent coordination protocol
-
 ## ID Pattern
 Regex: `^p12_ho_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Constraints
 - max_bytes: 4096
 - naming: `p12_ho_{task}.md`

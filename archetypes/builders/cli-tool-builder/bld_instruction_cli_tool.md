@@ -8,7 +8,6 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 ---
 
 # Instructions: How to Produce a cli_tool
-
 ## Phase 1: RESEARCH
 1. Identify the task the tool performs (build, lint, convert, generate, upload, etc.)
 2. Define every command and subcommand the tool exposes (concrete verb names)
@@ -18,7 +17,6 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 6. Map config file path and format (if any) and env var overrides with precedence order
 7. Check for existing cli_tool artifacts to avoid duplicates
 8. Confirm tool slug for id: snake_case, lowercase, no hyphens
-
 ## Phase 2: COMPOSE
 1. Read SCHEMA.md — source of truth for all fields
 2. Read OUTPUT_TEMPLATE.md — fill {{vars}} following SCHEMA constraints
@@ -30,7 +28,6 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 8. Write Dependencies section: runtime requirements (language version, system binaries, etc.)
 9. Verify body <= 1024 bytes
 10. Verify id matches `^p04_ct_[a-z][a-z0-9_]+$`
-
 ## Phase 3: VALIDATE
 1. Check QUALITY_GATES.md — verify each HARD gate manually
 2. Confirm YAML frontmatter parses without errors

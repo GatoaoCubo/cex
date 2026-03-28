@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: scraper
-
 ## Frontmatter Fields
-
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string (p04_scraper_{target_slug}) | YES | - | Namespace compliance |
@@ -35,17 +33,14 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | scheduling | string | REC | - | Cron or interval schedule |
 | validation | list[string] | REC | - | Data validation rules |
 | freshness | string | REC | - | Data staleness threshold |
-
 ## ID Pattern
 Regex: `^p04_scraper_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Body Structure (required sections)
 1. `## Overview` — target site, data extracted, use case, consumer
 2. `## Selectors` — each field: selector (CSS/XPath), type, extraction rule
 3. `## Pagination & Rate Limiting` — pagination strategy, rate limits, delays
 4. `## Output` — output format, validation, freshness policy
-
 ## Constraints
 - max_bytes: 1024 (body only — compact scraper spec)
 - naming: p04_scraper_{target_slug}.md + .yaml (dual file)

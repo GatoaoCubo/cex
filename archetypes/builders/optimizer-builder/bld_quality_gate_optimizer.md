@@ -15,20 +15,15 @@ density_score: 0.85
 ---
 
 # Gate: optimizer
-
 ## Definition
-
 | Field     | Value                                             |
 |-----------|---------------------------------------------------|
 | metric    | threshold coherence + action automation coverage  |
 | threshold | 8.0                                               |
 | operator  | >=                                                |
 | scope     | all optimizer artifacts (P11)                     |
-
 ## HARD Gates
-
 All must pass. Failure on any = final score 0.
-
 | Gate | Check | Why |
 |------|-------|-----|
 | H01 | YAML frontmatter parses valid YAML | Broken YAML = optimizer never triggers |
@@ -41,9 +36,7 @@ All must pass. Failure on any = final score 0.
 | H08 | direction field is one of: minimize, maximize | Direction ambiguity reverses all logic |
 | H09 | thresholds block has trigger, target, and critical numeric values | Three-level control without all three is incomplete |
 | H10 | actions list has >= 2 entries, each with name and automated boolean | Optimization without defined actions is documentation, not control |
-
 ## SOFT Scoring
-
 | Gate | Check | Weight |
 |------|-------|--------|
 | S01 | tldr <= 160 chars, non-empty | 1.0 |
@@ -58,20 +51,15 @@ All must pass. Failure on any = final score 0.
 | S10 | rollback_plan describes how to undo a failed optimization step | 1.0 |
 | S11 | target_metric is machine-readable (query, counter, or log field) not a narrative | 1.0 |
 | S12 | No filler phrases ("this optimizer", "designed to improve", "various metrics") | 0.5 |
-
 Weights sum: 9.5. Normalize: divide each by 9.5 before scoring.
-
 ## Actions
-
 | Score | Action |
 |-------|--------|
 | >= 9.5 | GOLDEN — pool as reference optimization loop |
 | >= 8.0 | PUBLISH — wire to monitoring and enable automated triggers |
 | >= 7.0 | REVIEW — complete baseline, rollback plan, or threshold ordering |
 | < 7.0  | REJECT — rework metric definition and action list |
-
 ## Bypass
-
 | Field | Value |
 |-------|-------|
 | conditions | Production incident requiring immediate threshold override without full review cycle |

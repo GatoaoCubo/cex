@@ -31,28 +31,18 @@ density_score: 0.91
 ---
 
 ## Context
-
 The parser-builder receives a **raw input sample** and a **list of target fields**, then produces a `parser` artifact encoding how to extract structured data from that input format.
-
 **Input variables**:
 - `{{input_format}}` — one of: `text`, `json`, `html`, `log`, `csv`, `xml`, `yaml`, `markdown`, `mixed`
 - `{{raw_sample}}` — one or more representative samples of the actual raw input (minimum 1, ideally 3 covering edge cases)
 - `{{target_fields}}` — named list of fields with expected type: e.g., `id: integer, title: string, price: float`
 - `{{consumer}}` — who/what receives the parsed output (e.g., "pricing API endpoint", "product database table")
 - `{{error_strategy}}` — one of: `skip` (default), `default`, `fail`, `retry`
-
 **Output**: a single `parser` artifact at `p05_parser_{{domain}}_{{input_format}}.md` with extraction rules, normalization pipeline, error handling config, and test vectors.
-
 **Boundaries**: defines extraction logic only. Does NOT format output for display (formatter-builder), validate business rules on extracted values (validator-builder), or define naming conventions (naming-rule-builder).
-
----
-
 ## Phases
-
 ### Phase 1: RESEARCH
-
 **Goal**: Analyze the input format, identify extraction points for every target field, and determine error strategy.
-
 1. Identify `{{input_format}}`. Select the appropriate extraction notation:
    - `text` / `log`: regex with named capture groups `(?P<field_name>...)`
    - `json`: JSONPath expressions (e.g., `$.data.items[*].id`)
@@ -68,15 +58,9 @@ The parser-builder receives a **raw input sample** and a **list of target fields
    - `fail`: raise extraction error with field name in message
    - `retry`: re-attempt with fallback rule before failing
 6. Search for existing parsers via brain_query [IF MCP]: `parser {{input_format}} {{domain}}`. Avoid duplicates; if found, determine whether an update is needed.
-
 **Exit**: every target field has an identified extraction point, presence guarantee, and normalization plan. `{{error_strategy}}` is confirmed.
-
----
-
 ### Phase 2: COMPOSE
-
 **Goal**: Write all extraction rules, normalization steps, test vectors, and complete artifact body.
-
 7. Read SCHEMA.md — source of truth for all required fields.
 8. Read OUTPUT_TEMPLATE.md — fill `{{vars}}` following SCHEMA constraints exactly.
 9. Generate `parser_slug` in snake_case (e.g., `shopee_product_html`). Set `id = p05_parser_{{parser_slug}}`.
@@ -93,15 +77,9 @@ The parser-builder receives a **raw input sample** and a **list of target fields
     - Edge case 2: malformed input that triggers error handling
 19. Set `extraction_count` to match the actual number of rules in the Extraction Rules table.
 20. Verify body <= 4096 bytes.
-
 **Exit**: all target fields have rules, `extraction_count` matches table, body within byte limit.
-
----
-
 ### Phase 3: VALIDATE
-
 **Goal**: Verify all quality gates before writing the final artifact.
-
 21. Check QUALITY_GATES.md — verify all 8 HARD gates manually.
 22. Confirm `id` matches `^p05_parser_[a-z][a-z0-9_]+$`.
 23. Confirm `kind == parser`.
@@ -110,110 +88,3 @@ The parser-builder receives a **raw input sample** and a **list of target fields
 26. Confirm at least 1 rule has `required: true`.
 27. Confirm `input_format` and `output_format` are valid enum values.
 28. Confirm at least `len(target_fields) + 2` test vectors exist.
-29. Score SOFT gates against QUALITY_GATES.md.
-30. If score < 8.0: revise in same pass before outputting. Do not output a failing artifact.
-31. Write the final artifact using the Output Contract template below.
-
----
-
-## Output Contract
-
-```
----
-id: p05_parser_{{parser_slug}}
-kind: parser
-pillar: P05
-domain: {{domain}}
-input_format: {{input_format}}
-output_format: {{output_format}}
-version: 1.0.0
-created: {{date}}
-author: parser-builder
-consumer: {{consumer}}
-error_strategy: {{skip|default|fail|retry}}
-extraction_count: {{n}}
-quality: null
-tags: [parser, {{domain}}, {{input_format}}, extraction]
----
-
-## Input Specification
-
-**Format**: {{input_format}}
-
-```
-{{raw_sample_example}}
-```
-
-## Extraction Rules
-
-| Name | Target | Method | Pattern | Required |
-|------|--------|--------|---------|----------|
-| {{field_name}} | {{target_path}} | {{regex|json_path|css|xpath|split}} | `{{pattern}}` | {{true|false}} |
-
-## Output Specification
-
-**Schema**: `{ "{{field_name}}": {{type}}, ... }`
-
-```json
-{ "{{field_name}}": {{example_value}} }
-```
-
-## Error Handling
-
-- **Strategy**: {{error_strategy}}
-- **Missing required field**: {{strategy_behavior}}
-- **Format change**: log warning with diff, alert {{consumer}}
-- **Encoding issue**: normalize to UTF-8 before extraction
-- **Empty input**: return `{"success": false, "reason": "empty_input"}`
-
-## Normalization
-
-| Field | Steps |
-|-------|-------|
-| {{field_name}} | {{step_1}} → {{step_2}} |
-
-## Test Vectors
-
-```json
-[
-  {"description": "{{test_desc}}", "input": "{{raw}}", "expected": {"{{field_name}}": {{value}}}},
-  {"description": "minimal valid input", "input": "{{minimal_raw}}", "expected": {"{{field_name}}": {{value}}}},
-  {"description": "malformed input", "input": "{{bad_raw}}", "expected": {"success": false}}
-]
-```
-```
-
----
-
-## Validation
-
-| # | Gate | Type |
-|---|------|------|
-| 1 | Every target field has a primary extraction rule in the table | HARD |
-| 2 | Extraction notation matches `input_format` (regex for text, JSONPath for json, etc.) | HARD |
-| 3 | `extraction_count` matches actual row count in Extraction Rules table | HARD |
-| 4 | At least 1 rule has `required: true` | HARD |
-| 5 | `input_format` and `output_format` are valid enum values | HARD |
-| 6 | `error_strategy` is one of: skip, default, fail, retry | HARD |
-| 7 | At least `len(target_fields) + 2` test vectors present | HARD |
-| 8 | `quality: null` is set | HARD |
-| 9 | Regex patterns use named capture groups (not positional) | SOFT |
-| 10 | Fallback rules provided for fields with known format variations | SOFT |
-| 11 | Body <= 4096 bytes | SOFT |
-
----
-
-## Metacognition
-
-**Does**:
-- Defines how to extract structured fields from a specific raw input format
-- Covers primary extraction rules, fallback rules, normalization, and error handling in one artifact
-- Provides test vectors for every field to enable automated verification
-
-**Does NOT**:
-- Format extracted data for display (use formatter-builder)
-- Validate business rules on extracted values (use validator-builder)
-- Define naming conventions for field names (use naming-rule-builder)
-- Transform or reshape already-structured data (use transformer)
-
-**Chaining**: output feeds runtime extraction engine (rules), test runner (test vectors), validator (extracted struct). Input from API response samples, log file examples, scraping targets, upstream builders that produce raw output.

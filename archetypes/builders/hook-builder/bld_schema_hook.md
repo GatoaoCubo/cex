@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: hook
-
 ## Frontmatter Fields
-
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string (p04_hook_{slug}) | YES | - | Namespace compliance |
@@ -36,27 +34,22 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | environment | list[string] | REC | [] | Env vars passed to script |
 | keywords | list[string] | REC | - | Brain search triggers |
 | density_score | float 0.80-1.00 | OPT | - | Content density |
-
 ## Condition Object
-
 ```yaml
 condition:
   field: string (event property to check)
   operator: enum [equals, not_equals, contains, matches, exists]
   value: string (comparison value)
 ```
-
 ## ID Pattern
 Regex: `^p04_hook_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Body Structure (required sections)
 1. `## Trigger Configuration` — event, conditions, when/why it fires
 2. `## Script` — script content or path with arguments
 3. `## Input/Output` — what the hook receives from event and what it returns
 4. `## Error Handling` — behavior per error_handling strategy
 5. `## References` — sources and documentation
-
 ## Constraints
 - max_bytes: 1024 (body only)
 - naming: p04_hook_{slug}.md

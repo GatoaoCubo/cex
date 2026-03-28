@@ -8,7 +8,6 @@ pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 ---
 
 # Schema: validator
-
 ## Artifact Identity
 | Field | Value |
 |-------|-------|
@@ -18,7 +17,6 @@ pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 | Machine format | `yaml` |
 | Naming | `p06_val_{rule}.yaml` |
 | Max bytes | `3072` |
-
 ## Required Frontmatter Fields
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
@@ -35,7 +33,6 @@ pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 | quality | null | YES | null | never self-score |
 | tags | list[string], len >= 3 | YES | - | searchability |
 | tldr | string, <= 160 chars | YES | - | dense summary |
-
 ## Recommended Frontmatter Fields
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
@@ -44,31 +41,26 @@ pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 | action_on_fail | enum `reject|warn|log` | REC | `reject` | runtime handling |
 | density_score | number, `0.80-1.00` | REC | omitted | density target |
 | linked_artifacts | object `{source, related}` | REC | omitted | provenance and neighbors |
-
 ## Rule Object
 ```yaml
 condition: string
 ```
 Rule: `condition` MUST be deterministic and machine-checkable.
-
 ## Body Structure
 1. `## Rule` - canonical target, condition, threshold, action
 2. `## Checks` - concrete sub-checks with expressions and failure action
 3. `## Error Messages` - failure text plus fix hints
 4. `## Pass Example` - realistic passing input
 5. `## Fail Example` - realistic failing input with resulting message
-
 ## Boundary Rules
 `validator` IS:
 - post-generation validation logic
 - technical policy with explicit failure semantics
 - reusable across hooks, pipelines, and artifact families
-
 `validator` IS NOT:
 - `quality_gate` with weighted scores and publish thresholds
 - `scoring_rubric` with subjective dimensions
 - `grammar` that constrains decoder tokens during generation
-
 ## Constraints
 - max_bytes: `3072`
 - naming: `p06_val_{rule}.yaml`

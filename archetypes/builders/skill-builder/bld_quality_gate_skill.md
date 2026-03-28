@@ -19,15 +19,9 @@ tldr: "Gates ensuring skill files define a specific trigger, two or more typed w
 ---
 
 ## Definition
-
 A skill is a reusable capability: a named sequence of phases that can be invoked by a trigger and composed with other skills. A skill passes this gate when the trigger is specific enough to avoid false activations, each phase has typed input and output, error handling is defined at the phase level (not just globally), and the skill makes no claims about being an agent — it is a procedure, not an identity.
-
----
-
 ## HARD Gates
-
 Failure on any HARD gate = immediate REJECT regardless of score.
-
 | ID  | Check | Rationale |
 |-----|-------|-----------|
 | H01 | Frontmatter parses as valid YAML with no syntax errors | Unparseable file cannot be indexed or validated |
@@ -39,13 +33,8 @@ Failure on any HARD gate = immediate REJECT regardless of score.
 | H07 | Spec contains a **Trigger definition** (slash command name, keyword pattern, or event type that activates the skill) | Without a trigger, the skill cannot be invoked programmatically or by convention |
 | H08 | Spec contains >= 2 **Workflow Phases** (each phase is a named step in the execution sequence) | A single-phase skill is a function, not a skill; phased structure enables partial retry and composition |
 | H09 | Spec contains **Input and Output** per phase (field names and types, not just prose descriptions) | Typed per-phase I/O is the contract that enables composition with other skills |
-
----
-
 ## SOFT Scoring
-
 Dimensions are weighted; total normalized weight = 100%.
-
 | # | Dimension | Weight | 1 (Poor) | 5 (Good) | 10 (Excellent) |
 |---|-----------|--------|----------|----------|----------------|
 | 1 | density >= 0.80 (content per token ratio) | 1.0 | Padded with filler prose | Mostly substantive | No filler; every sentence carries information |
@@ -56,31 +45,3 @@ Dimensions are weighted; total normalized weight = 100%.
 | 6 | Tags include `skill` | 0.5 | Missing | Present but misspelled | Exactly `skill` in tags list |
 | 7 | Error handling per phase (each phase has its own error class, retry rule, and fallback) | 1.0 | No error handling | Global handler only | Each phase has error class, retry rule, and fallback |
 | 8 | Phase dependencies documented (which phases must complete before the next; parallel-eligible phases noted) | 1.0 | No dependencies stated | Sequential assumed | Explicit dependency graph including any parallel-eligible phases |
-| 9 | Composable with other skills (input/output types compatible with standard skill interfaces) | 1.0 | Proprietary types only | Compatible with 1-2 other skills | Standard types throughout; can be piped from or to any skill in the registry |
-| 10 | No agent identity claims (purely procedural language; no first-person agent framing or goals claimed) | 1.0 | Skill claims agent identity | Minor phrasing issues | Purely procedural language throughout; no first-person agent framing |
-
-Score = sum(rating * weight) / sum(weights) normalized to 0-10.
-
----
-
-## Actions
-
-| Threshold | Action |
-|-----------|--------|
-| >= 9.5 | GOLDEN — archive to pool, tag as reference implementation |
-| >= 8.0 | PUBLISH — merge to main, available for invocation and composition |
-| >= 7.0 | REVIEW — return to author with dimension-level feedback |
-| < 7.0 | REJECT — do not merge; author must revise from scratch or substantially rewrite |
-
----
-
-## Bypass
-
-| Field | Value |
-|-------|-------|
-| condition | Skill is a one-time migration helper used once and then deleted; it will never enter the registry |
-| approver | Domain lead with written sign-off confirming the skill will be deleted after use |
-| audit_log | Entry required in `records/audits/gate_bypasses.md` with date, skill name, approver, and expiry |
-| expiry | 7 days or first successful invocation, whichever comes first |
-
-H01 (parseable frontmatter) and H05 (quality=null) are NEVER bypassable under any condition.

@@ -8,13 +8,9 @@ sources: learning-record-builder MANIFEST.md + SCHEMA.md v1.0.0
 ---
 
 # Domain Knowledge: learning_record
-
 ## Executive Summary
-
 Learning records are persistent experience captures — structured retrospectives that codify what worked, what failed, and under what conditions the outcome is reproducible. Each record documents ONE experience event with raw observation, extracted pattern, and supporting evidence scored by confidence. They differ from knowledge cards (external facts), session state (ephemeral context), and axioms (abstract truths) by encoding lived operational experience with confidence scoring and temporal decay.
-
 ## Spec Table
-
 | Property | Value |
 |----------|-------|
 | Pillar | P10 (memory) |
@@ -28,9 +24,7 @@ Learning records are persistent experience captures — structured retrospective
 | Confidence range | 0.0-1.0 |
 | Outcome values | SUCCESS, PARTIAL, FAILURE |
 | Default decay_rate | 0.03 (half-life ~23 days) |
-
 ## Patterns
-
 | Pattern | Application |
 |---------|-------------|
 | Three-field pipeline | observation (raw facts) -> pattern (reproducible rule) -> evidence (metrics) |
@@ -39,9 +33,7 @@ Learning records are persistent experience captures — structured retrospective
 | Decay-aware records | High decay (0.10+) for time-sensitive; 0.01 for stable patterns |
 | Semantic links | Typed relations: caused_by, refines, contradicts, enables, depends_on |
 | Outcome honesty | PARTIAL when some goals met — never round up to SUCCESS |
-
 ### Confidence Scale
-
 | Score | Basis |
 |-------|-------|
 | 0.9-1.0 | 10+ observations, consistent |
@@ -49,9 +41,7 @@ Learning records are persistent experience captures — structured retrospective
 | 0.5-0.6 | 2-4 observations |
 | 0.3-0.4 | 1 observation |
 | 0.0-0.2 | Theoretical only |
-
 ## Anti-Patterns
-
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
 | Vague pattern ("be more careful") | Non-reproducible; fails density gate |
@@ -60,9 +50,7 @@ Learning records are persistent experience captures — structured retrospective
 | Missing evidence field | Pipeline incomplete without before/after metrics |
 | outcome: SUCCESS when partial | Inflates confidence; downstream routing breaks |
 | Body > 4096 bytes | Exceeds max_bytes; split into focused records |
-
 ## Application
-
 1. Capture `observation` as raw facts only — no interpretation
 2. Extract `pattern`: the reproducible rule or mechanism discovered
 3. Add `evidence`: concrete metrics, before/after data
@@ -70,9 +58,7 @@ Learning records are persistent experience captures — structured retrospective
 5. Calibrate `confidence` against the scale (observations count)
 6. Set `impact_score` (0.0-10.0) and `decay_rate` (default 0.03)
 7. Write all 7 body sections; validate 9 HARD + 12 SOFT gates
-
 ## References
-
 - learning-record-builder SCHEMA.md v1.0.0
 - P10 memory pillar
 - Experiential learning theory (Kolb cycle)

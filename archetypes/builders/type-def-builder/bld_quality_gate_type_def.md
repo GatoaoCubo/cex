@@ -19,15 +19,9 @@ tldr: "Validates reusable type declarations for base type, constraints, serializ
 ---
 
 ## Definition
-
 A type definition declares a named, reusable data structure: its base type, constraints, nullable semantics, serialization format, and composition rules. Type defs are consumed by validation schemas, validators, and code generators. This gate ensures every type def is machine-usable, unambiguous, and backward compatible.
-
----
-
 ## HARD Gates
-
 Failure on any HARD gate causes immediate REJECT. No score is computed.
-
 | ID  | Check | Rule |
 |-----|-------|------|
 | H01 | Frontmatter parses | YAML frontmatter is valid and complete with no syntax errors |
@@ -40,13 +34,8 @@ Failure on any HARD gate causes immediate REJECT. No score is computed.
 | H08 | Constraints section present | Body contains a `## Constraints` section with at least one named constraint |
 | H09 | Serialization format present | Body contains a `## Serialization` section specifying wire format (JSON, YAML, Protobuf, etc.) |
 | H10 | Type name is PascalCase | `type_name` matches `^[A-Z][A-Za-z0-9]*$` |
-
----
-
 ## SOFT Scoring
-
 Score each dimension 0 or 10. Multiply by weight. Divide total by sum of weights, scale to 0-10.
-
 | Dimension | Weight | Pass Condition |
 |-----------|--------|----------------|
 | Density >= 0.80 | 1.0 | Definition is tight; no tautological descriptions or repeated field names |
@@ -59,29 +48,19 @@ Score each dimension 0 or 10. Multiply by weight. Divide total by sum of weights
 | Valid and invalid examples | 1.0 | Body contains at least one valid instance and one invalid instance |
 | Backward compatibility notes | 0.5 | If version > 1.0.0, breaking changes are listed in body |
 | Consumers cross-referenced | 0.5 | Body or frontmatter lists at least one artifact that consumes this type |
-
 Sum of weights: 7.5. `soft_score = sum(weight * gate_score) / 7.5 * 10`
-
----
-
 ## Actions
-
 | Score | Action |
 |-------|--------|
 | >= 9.5 | GOLDEN — archive to pool as canonical type definition |
 | >= 8.0 | PUBLISH — safe to reference in schemas and validators |
 | >= 7.0 | REVIEW — usable but constraints or examples need work |
 | < 7.0 | REJECT — do not reference; ambiguous or incomplete definition |
-
----
-
 ## Bypass
-
 | Field | Value |
 |-------|-------|
 | condition | Bootstrapping a new domain where no controlled vocabulary exists yet and the type is needed to unblock other artifacts |
 | approver | Architect responsible for the P06 pillar |
 | audit_log | Entry required in `.claude/bypasses/type_def_{date}.md` noting which HARD gates are waived and why |
 | expiry | 14 days; type must reach PUBLISH score before any dependent artifact is published |
-
 H01 (frontmatter parses) and H05 (quality is null) cannot be bypassed under any condition.

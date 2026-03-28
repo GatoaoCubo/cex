@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: context_doc
-
 ## Frontmatter Fields
-
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string (p01_ctx_{topic}) | YES | - | Namespace compliance |
@@ -27,21 +25,17 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | tldr | string <= 160ch | YES | - | Dense summary |
 | keywords | list[string], len >= 3 | REC | - | Domain search terms |
 | density_score | float 0.80-1.00 | REC | - | Content density |
-
 ## ID Pattern
 Regex: `^p01_ctx_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
 Examples: `p01_ctx_br_import_regs`, `p01_ctx_api_auth_jwt`, `p01_ctx_marketplace_fees`
-
 ## Body Structure (required sections)
-
 1. `## Scope` — in-scope and out-of-scope boundary, minimum 3 lines
 2. `## Background` — domain history, current state, key facts
 3. `## Stakeholders` — who consumes this context, what decisions it informs
 4. `## Constraints & Assumptions` — hard constraints + working assumptions
 5. `## Dependencies` — referenced artifacts, systems, external sources
 6. `## References` — source links, related artifacts (optional but recommended)
-
 ## Constraints
 - max_bytes: 2048 (body only, all sections combined)
 - naming: p01_ctx_{topic}.md + p01_ctx_{topic}.yaml
@@ -50,7 +44,6 @@ Examples: `p01_ctx_br_import_regs`, `p01_ctx_api_auth_jwt`, `p01_ctx_marketplace
 - quality: null always (enforced by H05)
 - llm_function: INJECT (context_doc is injected into prompts)
 - layer: content (P01 knowledge layer)
-
 ## Boundary Rules
 - context_doc is NOT knowledge_card: no single-atomic-fact constraint, no mandatory density gate
 - context_doc is NOT glossary_entry: does not define a single term

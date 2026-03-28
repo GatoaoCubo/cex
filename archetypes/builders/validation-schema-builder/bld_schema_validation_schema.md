@@ -9,12 +9,9 @@ version: "2.0.0"
 ---
 
 # Schema: validation_schema
-
 Derivation hierarchy: **SCHEMA (P06) > TEMPLATE (P03) > CONFIG (P04)**
 Schema is upstream. Template/config must not define fields schema does not know.
-
 ## Frontmatter Fields
-
 ### Required (13)
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
@@ -31,7 +28,6 @@ Schema is upstream. Template/config must not define fields schema does not know.
 | domain | string | YES | — | Domain this schema covers |
 | quality | null | YES | null | Never self-score |
 | tags | list[string], len >= 3, includes "validation-schema" | YES | — | Classification |
-
 ### Recommended (6)
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
@@ -41,11 +37,8 @@ Schema is upstream. Template/config must not define fields schema does not know.
 | strict | boolean | REC | false | If true, reject unknown fields |
 | coercion | boolean | REC | false | Auto-coerce types before validation |
 | density_score | float 0.80-1.00 | REC | — | Content density |
-
 ## Type Enum
-
 Fields MUST use JSON-compatible types only:
-
 | Type | Description |
 |------|-------------|
 | string | Text values |
@@ -54,7 +47,6 @@ Fields MUST use JSON-compatible types only:
 | boolean | true/false |
 | array | Ordered list |
 | object | Key-value map |
-
 ## Fields Object
 ```yaml
 fields:
@@ -69,9 +61,7 @@ fields:
       min: {{number}}
       max: {{number}}
 ```
-
 ## Body Structure (3 required sections)
-
 1. **Fields Table** — name, type, required, constraints per field
    - Split into Required (HARD gate) and Recommended (SOFT gate) tables
    - All 5 columns mandatory per row: Field, Type, Required, Default, Notes
@@ -81,9 +71,7 @@ fields:
    - `warn`: log, allow through (recommended fields, style)
    - `auto_fix`: coerce value (safe conversions only, e.g. string "42" -> int 42)
 3. **Constraints** — max_bytes, naming pattern, id rules, integration notes
-
 ## Constraints
-
 - max_bytes: 4096 (body only) — builder files max 4428B, previous 3072 limit was insufficient
 - naming: p06_vs_{scope}.yaml
 - machine_format: json
@@ -92,8 +80,6 @@ fields:
 - LLM NEVER sees this schema — system-side only
 - quality: null always
 - Type values MUST be JSON-compatible (string, integer, number, boolean, array, object)
-
 ## ID Pattern
-
 Regex: `^p06_vs_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.

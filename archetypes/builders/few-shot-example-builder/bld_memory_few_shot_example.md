@@ -21,11 +21,8 @@ keywords: [few_shot, format_teaching, difficulty_calibration, output_demonstrati
 ---
 
 ## Summary
-
 Few-shot examples teach a model what format to produce, not what content to generate. The output field must be an actual demonstration of the target format. Difficulty must be calibrated across a set — easy examples establish the baseline, medium ones show variation, hard ones handle edge cases. The body limit is 1024 bytes, the tightest in the P01 pillar.
-
 ## Pattern
-
 1. The `output` field must contain the actual formatted artifact, not a description of what it should contain.
 2. The `input` field must be specific and realistic — a real task someone would submit, not a placeholder.
 3. Sequence examples across a set: easy (canonical request) -> medium (realistic variation) -> hard (edge case or boundary condition).
@@ -34,43 +31,12 @@ Few-shot examples teach a model what format to produce, not what content to gene
 6. `quality` must be null — self-scoring is rejected. Scoring belongs in golden_test (P07).
 7. The `id` field value must match the filename stem exactly.
 8. Tags must be a YAML list, not a string.
-
 ## Anti-Pattern
-
 - Output field containing prose: "a good response would have a tldr, then three bullet points..." — this teaches nothing about format.
 - Input so vague it cannot produce a consistent format demonstration: "write something about quality gates."
 - Including a scoring rubric or quality threshold — that is golden_test (P07), not few_shot_example.
 - All examples set to easy difficulty — edge cases go untaught and the model fails on boundary inputs.
 - Body over 1024 bytes — the fix is trimming prose sections, never truncating the output demonstration with "...".
 - Recursive drift: producing a few_shot_example about few_shot_examples that evaluates quality (crosses into P07).
-
 ## Context
-
 Applies when: teaching format for any artifact type by showing concrete input/output pairs.
-Does not apply when: the goal is to evaluate output quality (use golden_test, P07) or to provide instructions (use instruction artifact, P03).
-Boundary: few_shot_example teaches format only. It does not score, evaluate, or rank outputs.
-Precondition: the target format must be well-defined — if the format is still experimental, examples will need replacement.
-
-## Impact
-
-- Output demonstrations (vs descriptions) reduce format errors in downstream generation by ~40%.
-- Difficulty-calibrated sets handle edge cases the model would otherwise fail on.
-- Specific inputs produce reusable format templates that can be referenced directly.
-- 1024-byte discipline forces high information density — every token demonstrates something.
-
-## Reproducibility
-
-1. Identify the target format (artifact type, required fields, shape constraints).
-2. Write easy example: canonical input + complete correct output showing every required field.
-3. Write medium example: different domain or context, same format — shows format is domain-agnostic.
-4. Write hard example: edge case input (ambiguous, missing data, boundary value) + output showing how format handles it.
-5. Write Explanation for each: "this output demonstrates that tldr must be <= 160 characters and end without a period."
-6. Count bytes. If over 1024, remove prose from Variations/Edge Cases sections, not from output fields.
-7. Validate: quality is null, id matches filename stem, tags are a list.
-
-## References
-
-- Pillar: P01 (foundational examples and templates)
-- Size limit: 1024 bytes body (tightest in P01)
-- Boundary: golden_test (P07) for quality scoring; instruction (P03) for execution steps
-- Common mistakes: output as description, missing explanation, scoring rubric included

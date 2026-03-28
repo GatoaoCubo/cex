@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: plugin
-
 ## Frontmatter Fields
-
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string (p04_plug_{slug}) | YES | - | Namespace compliance |
@@ -36,9 +34,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | priority | integer | REC | 100 | Loading order (lower = first) |
 | keywords | list[string] | REC | - | Brain search triggers |
 | density_score | float 0.80-1.00 | OPT | - | Content density |
-
 ## API Method Object
-
 ```yaml
 method:
   name: string (snake_case identifier)
@@ -47,9 +43,7 @@ method:
   output: object (return type)
   idempotent: boolean
 ```
-
 ## Config Schema Object
-
 ```yaml
 config_schema:
   field_name:
@@ -58,11 +52,9 @@ config_schema:
     required: boolean
     description: string
 ```
-
 ## ID Pattern
 Regex: `^p04_plug_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Body Structure (required sections)
 1. `## Interface Contract` — what the plugin implements, methods it must provide
 2. `## API Surface` — table of exposed methods: name, input, output, description
@@ -71,7 +63,6 @@ Rule: id MUST equal filename stem.
 5. `## Dependencies` — required plugins/systems with version constraints
 6. `## Testing` — how to test the plugin (unit, integration, mock strategy)
 7. `## References` — sources and documentation
-
 ## Constraints
 - max_bytes: 2048 (body only)
 - naming: p04_plug_{slug}.md

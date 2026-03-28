@@ -21,13 +21,9 @@ keywords: [instruction, atomic, idempotent, rollback, prerequisite, decompositio
 ---
 
 ## Summary
-
 Instructions describe how to execute a procedure step by step. The primary failure mode is compound steps: packaging multiple actions into one step causes partial execution that appears complete. The secondary failure is unverifiable prerequisites that agents skip silently. Both are fixed at authoring time with simple structural rules.
-
 ## Pattern
-
 Step anatomy (all four elements required):
-
 ```
 ### Step N: [Single action verb] [object]
 **Prerequisite**: [Machine-checkable condition with verify command]
@@ -36,45 +32,20 @@ Step anatomy (all four elements required):
 **Verify**: [Command or check that confirms step success]
 **Rollback**: [Required only if idempotent:no — how to undo this step]
 ```
-
 Decomposition rules:
 - One verb per step: create, edit, run, verify, wait, delete — never "and"
 - If a step has a conditional branch, split into two steps with explicit IF noted
 - Long-running steps must include monitoring command and expected completion indicator
 - Verification steps are their own numbered steps, not sub-bullets of action steps
-
 Idempotence classification:
 - `idempotent: yes` — running the step twice produces the same result as running once
 - `idempotent: no` — running twice causes side effects; rollback procedure required
-
 Steps_count in frontmatter must be updated manually after adding or removing steps. Validator rejects mismatches.
-
 ## Anti-Pattern
-
 - Compound step: "Deploy the app and verify health and restart workers" — split into 3 steps.
 - Vague prerequisite: "Environment is ready" — not machine-checkable, silently skipped.
 - `atomic: false` without rollback — leaves system in partial state on failure.
 - `steps_count: 5` when body has 7 steps — validator rejects, causes production failure.
 - Persona text in instructions ("You are an expert deployer") — belongs in system_prompt, not here.
 - Verification buried as sub-bullet inside action step — easy to skip, hard to audit.
-
 ## Context
-
-Pattern emerged from post-mortem analysis of failed deployments where agents reported step completion but the system was in a broken state. In every case, the root cause was a compound step where the agent completed the first verb, found an error on the second, and still marked the step done because the first action succeeded. Splitting compound steps into atomic units made failure visible at the correct boundary.
-
-## Impact
-
-- Partial execution from compound steps: eliminated by one-verb rule
-- Silently skipped prerequisites: eliminated by machine-checkable requirement
-- Unrecoverable partial states: eliminated by rollback requirement on non-idempotent steps
-- Steps_count mismatches caught at authoring time by validator, not at runtime
-
-## Reproducibility
-
-Apply one-verb rule universally. The idempotence classification takes 5 seconds per step and prevents an entire class of recovery failures. Machine-checkable prerequisites add one line per step and eliminate silent skips. All patterns are domain-agnostic.
-
-## References
-
-- Step format spec: OUTPUT_TEMPLATE.md
-- Idempotence classification guide: INSTRUCTIONS.md
-- Examples: EXAMPLES.md

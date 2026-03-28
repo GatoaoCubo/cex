@@ -8,13 +8,9 @@ sources: JSON Schema (draft-07), OpenAPI requestBody, Pydantic BaseModel, TypeSc
 ---
 
 # Domain Knowledge: input_schema
-
 ## Executive Summary
-
 Input schemas are unilateral entry contracts — the receiving system declares what data it requires with types, constraints, defaults, and coercion rules. Rooted in JSON Schema and OpenAPI requestBody patterns. Input schemas differ from interfaces (bilateral contracts), validators (pass/fail rule checks), and type definitions (abstract reusable types).
-
 ## Spec Table
-
 | Property | Value |
 |----------|-------|
 | Pillar | P06 (contracts/schema) |
@@ -23,11 +19,8 @@ Input schemas are unilateral entry contracts — the receiving system declares w
 | Direction | Unilateral (receiver defines) |
 | Required per field | name, type, required/optional, description |
 | Optional per field | default, coercion, error_message, examples |
-
 ## Patterns
-
 - **Field type system**: every field has an explicit type with validation
-
 | Source | Concept | Application |
 |--------|---------|-------------|
 | JSON Schema | Properties, required, types, defaults | Field definitions with types |
@@ -35,15 +28,12 @@ Input schemas are unilateral entry contracts — the receiving system declares w
 | Pydantic | Data validation with defaults | Fields + coercion + defaults |
 | TypeScript | Typed function parameters | Field-level type constraints |
 | GraphQL | Input types for mutations | Structured input with defaults |
-
 - **Required vs optional**: required fields block execution if missing; optional fields MUST have defaults
 - **Coercion rules**: "123" → 123 when type is integer — handle LLM-generated mixed-type data gracefully
 - **Field-level error messages**: each required field has its own error text for clear LLM-friendly feedback
 - **Examples mandatory**: at least one valid payload example for testing and documentation
 - **Versioning**: semver for schema evolution — breaking changes require major version bump
-
 ## Anti-Patterns
-
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
 | Optional field without default | Undefined behavior when field missing |
@@ -52,18 +42,14 @@ Input schemas are unilateral entry contracts — the receiving system declares w
 | Missing error messages | Generic "validation failed" with no field context |
 | No examples | Cannot test or document expected input format |
 | Bilateral contract in input_schema | That is an interface, not an input_schema |
-
 ## Application
-
 1. Identify scope: what operation/agent receives this input?
 2. Define fields: name, type, required/optional, description per field
 3. Set defaults: every optional field gets a default value
 4. Add coercion: rules for type conversion (string→int, string→bool)
 5. Write error messages: field-level, actionable text
 6. Provide examples: at least one valid payload
-
 ## References
-
 - JSON Schema: json-schema.org (draft-07+)
 - OpenAPI: requestBody specification (spec.openapis.org)
 - Pydantic: data validation for Python (docs.pydantic.dev)

@@ -1,4 +1,6 @@
 ---
+kind: examples
+id: bld_examples_scraper
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of scraper artifacts
@@ -6,14 +8,10 @@ pattern: few-shot learning — LLM reads these before producing
 ---
 
 # Examples: scraper-builder
-
 ## Golden Example
-
 INPUT: "Create scraper for extracting product data from an e-commerce marketplace"
-
 OUTPUT:
 ```yaml
----
 id: p04_scraper_marketplace_products
 kind: scraper
 pillar: P04
@@ -41,51 +39,40 @@ proxy: true
 scheduling: "daily 06:00 UTC"
 validation: ["price > 0", "title non-empty", "rating 0-5"]
 freshness: "24h"
----
 ```
-
 ## Overview
 Extracts product listing data from marketplace search results pages.
 Used by research agents for competitive analysis and price monitoring.
-
 ## Selectors
-
 ### product_title
 Selector: `h2.product-title` (CSS)
 Type: string
 Rule: strip whitespace, max 200 chars, decode HTML entities
-
 ### price
 Selector: `span.price-value` (CSS)
 Type: float
 Rule: extract numeric value, remove currency symbol, parse decimal
-
 ### rating
 Selector: `div.rating-stars::attr(data-score)` (CSS)
 Type: float
 Rule: value 0.0-5.0, null if no reviews
-
 ### seller_name
 Selector: `a.seller-link` (CSS)
 Type: string
 Rule: text content, strip whitespace
-
 ### image_url
 Selector: `img.product-image::attr(src)` (CSS)
 Type: url
 Rule: absolute URL, prefer high-res variant
-
 ## Pagination & Rate Limiting
 Pagination: next_page — follow `a.next-page` link until absent
 Rate limit: 2 requests/second, 1s delay between page transitions
 Anti-bot: basic (rotate User-Agent, respect robots.txt)
 Proxy: required (rotate per 50 requests)
-
 ## Output
 Format: JSON array of {product_title, price, rating, seller_name, image_url}
 Validation: price > 0, title non-empty, rating in 0-5 range
 Freshness: data stale after 24h, re-scrape daily
-
 WHY THIS IS GOLDEN:
 - quality: null (H05 pass)
 - id matches p04_scraper_ pattern (H02 pass)
@@ -97,14 +84,10 @@ WHY THIS IS GOLDEN:
 - tldr: 78 chars <= 160 (S01 pass)
 - tags: 4 items, includes "scraper" (S02 pass)
 - pagination and rate_limit defined (S04 pass)
-
 ## Anti-Example
-
 INPUT: "Create scraper for news headlines"
-
 BAD OUTPUT:
 ```yaml
----
 id: news-scraper
 kind: web_scraper
 pillar: tools
@@ -112,15 +95,11 @@ name: News Scraper
 selectors: [title, link]
 quality: 8.0
 tags: [news]
----
 ```
-
 Scrapes news headlines.
-
 ## Selectors
 title: gets the title
 link: gets the link
-
 FAILURES:
 1. id: "news-scraper" has hyphens and no `p04_scraper_` prefix -> H02 FAIL
 2. kind: "web_scraper" not "scraper" -> H04 FAIL

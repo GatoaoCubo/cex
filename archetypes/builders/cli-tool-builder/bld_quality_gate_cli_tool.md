@@ -15,20 +15,15 @@ density_score: 0.90
 ---
 
 # Gate: cli_tool
-
 ## Definition
-
 | Field | Value |
 |---|---|
 | metric | cli_tool artifact quality score |
 | threshold | 7.0 (publish >= 8.0, golden >= 9.5) |
 | operator | weighted_sum |
 | scope | all artifacts with `kind: cli_tool` |
-
 ## HARD Gates
-
 All must pass (AND logic). Any single failure = REJECT.
-
 | ID | Check | Fail Condition |
 |---|---|---|
 | H01 | Frontmatter parses as valid YAML | Parse error on frontmatter block |
@@ -41,11 +36,8 @@ All must pass (AND logic). Any single failure = REJECT.
 | H08 | Exit codes include 0 (success) and at least one error code | Only exit code 0 defined; no failure paths documented |
 | H09 | Output format is one of: text, json, table, yaml | `output_format: custom` or unrecognized value |
 | H10 | Tool is non-persistent | Tool runs and terminates; no daemon or background process behavior documented |
-
 ## SOFT Scoring
-
 Weights sum to 100%.
-
 | Dimension | Weight | Criteria |
 |---|---|---|
 | Command coverage | 1.0 | All meaningful operations exposed as named commands or subcommands |
@@ -60,18 +52,14 @@ Weights sum to 100%.
 | Boundary clarity | 1.0 | Explicitly not a daemon, skill, or plugin — one-shot execution contract stated |
 | Domain specificity | 1.0 | Commands, flags, and outputs specific to the declared domain problem |
 | Testability | 1.0 | Each command testable with known input; expected output documented |
-
 ## Actions
-
 | Score | Tier | Action |
 |---|---|---|
 | >= 9.5 | Golden | Publish to pool as golden reference |
 | >= 8.0 | Publish | Publish to pool, add to routing index |
 | >= 7.0 | Review | Flag for improvement before publish |
 | < 7.0 | Reject | Return to author with specific gate failures |
-
 ## Bypass
-
 | Field | Value |
 |---|---|
 | conditions | Internal debug tool used only during development, never shipped to end users |

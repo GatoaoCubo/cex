@@ -1,4 +1,6 @@
 ---
+kind: examples
+id: bld_examples_workflow
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of workflow artifacts
@@ -6,14 +8,10 @@ pattern: few-shot learning — LLM reads these before producing
 ---
 
 # Examples: workflow-builder
-
 ## Golden Example
-
 INPUT: "Create workflow for research-then-build mission with SHAKA and EDISON"
-
 OUTPUT:
 ```yaml
----
 id: p12_wf_research_build_mission
 kind: workflow
 pillar: P12
@@ -35,16 +33,12 @@ quality: null
 tags: [workflow, research, build, multi-director]
 tldr: "3-step mixed workflow: SHAKA researches, EDISON builds from findings, orchestrator consolidates"
 density_score: 0.90
----
 ```
-
 ## Purpose
 Orchestrates a research-then-build mission where SHAKA gathers market intelligence,
 EDISON implements based on findings, and orchestrator consolidates results. Steps 1-2 are
 sequential (build depends on research), step 3 runs after both complete.
-
 ## Steps
-
 ### Step 1: Market Research [shaka]
 - **Agent**: shaka (sonnet)
 - **Action**: Research target market and produce knowledge cards
@@ -52,7 +46,6 @@ sequential (build depends on research), step 3 runs after both complete.
 - **Output**: 3-5 knowledge cards committed to records/pool/
 - **Signal**: shaka_complete with quality score
 - **Depends on**: none (first step)
-
 ### Step 2: Implementation [edison]
 - **Agent**: edison (opus)
 - **Action**: Build feature using research findings from Step 1
@@ -60,7 +53,6 @@ sequential (build depends on research), step 3 runs after both complete.
 - **Output**: implemented feature with tests passing
 - **Signal**: edison_complete with quality score
 - **Depends on**: Step 1
-
 ### Step 3: Consolidation [orchestrator]
 - **Agent**: orchestrator (opus)
 - **Action**: Review outputs, archive handoffs, push to remote
@@ -68,16 +60,13 @@ sequential (build depends on research), step 3 runs after both complete.
 - **Output**: consolidated commit, archived handoffs
 - **Signal**: workflow_complete
 - **Depends on**: Steps 1, 2
-
 ## Dependencies
 - Handoff files must exist for SHAKA and EDISON before workflow starts
 - spawn_configs referenced must be valid (p12_spawn_shaka_solo_research, p12_spawn_edison_solo_build)
-
 ## Signals
 - **On step complete**: {sat}_complete signal emitted (see signal-builder)
 - **On workflow complete**: workflow_complete signal with aggregate quality
 - **On error**: {sat}_error signal, retry per step (max 1), then escalate to orchestrator
-
 WHY THIS IS GOLDEN:
 - quality: null (H05 pass)
 - id matches p12_wf_ pattern (H02 pass)
@@ -89,24 +78,17 @@ WHY THIS IS GOLDEN:
 - Dependencies section lists prerequisites (S05 pass)
 - Signals reference signal-builder conventions (S06 pass)
 - No prompt chaining in body (S08 pass)
-
 ## Anti-Example
-
 INPUT: "Create a workflow for doing stuff"
-
 BAD OUTPUT:
 ```yaml
----
 id: my_workflow
 kind: flow
 steps: 3
 quality: 8.5
----
 ```
-
 This workflow does research and then builds things. First SHAKA does research,
 then EDISON builds. It's a great workflow that produces high quality output.
-
 FAILURES:
 1. id: no `p12_wf_` prefix -> H02 FAIL
 2. kind: "flow" not "workflow" -> H04 FAIL

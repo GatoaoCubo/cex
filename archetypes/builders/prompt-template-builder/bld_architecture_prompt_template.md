@@ -7,9 +7,7 @@ purpose: Component map of prompt_template — inventory, dependencies, and archi
 ---
 
 # Architecture: prompt_template in the CEX
-
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | frontmatter block | Metadata header (id, kind, pillar, domain, variables, syntax_tier, etc.) | prompt-template-builder | active |
@@ -18,15 +16,12 @@ purpose: Component map of prompt_template — inventory, dependencies, and archi
 | syntax_tier | Interpolation syntax level (tier-1 Mustache, tier-2 bracket) | author | active |
 | rendering_context | Runtime context required to fill variables (data sources, APIs) | author | active |
 | example_fills | Concrete variable fills demonstrating valid template usage | author | active |
-
 ## Dependency Graph
-
 ```
 type_def        --produces-->  prompt_template  --consumed_by-->  renderer
 knowledge_card  --produces-->  prompt_template  --produces-->     filled_prompt
 prompt_template --signals-->   render_error
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | type_def (P06) | prompt_template | data_flow | type definitions for variable constraints |
@@ -35,9 +30,7 @@ prompt_template --signals-->   render_error
 | prompt_template | filled_prompt | produces | concrete prompt after variable substitution |
 | prompt_template | render_error (P12) | signals | emitted when variable fill fails validation |
 | system_prompt (P03) | prompt_template | dependency | system identity may constrain template scope |
-
 ## Boundary Table
-
 | prompt_template IS | prompt_template IS NOT |
 |--------------------|------------------------|
 | A reusable mold with {{variable}} slots for multiple invocations | A one-time task instruction (action_prompt P03) |
@@ -46,9 +39,7 @@ prompt_template --signals-->   render_error
 | Variable-typed with defaults and validation constraints | A raw user message without structure |
 | Invoked multiple times with different variable fills | A single-use prompt discarded after execution |
 | Produces filled prompts — not direct LLM responses | A meta-prompt that generates other prompts |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Types | type_def | Supply type definitions for variable constraints |

@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: smoke_eval
-
 ## Frontmatter Fields
-
 ### Required
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
@@ -31,7 +29,6 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | quality | null | YES | null | Never self-score |
 | tags | list[string], len >= 3 | YES | — | Searchability |
 | tldr | string <= 160ch | YES | — | Dense summary |
-
 ### Recommended
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
@@ -41,24 +38,20 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | frequency | string | REC | — | How often to run |
 | alerting | string | REC | — | Who to notify on failure |
 | density_score | float 0.80-1.00 | REC | — | Content density |
-
 ## ID Pattern
 Regex: `^p07_se_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Assertion Object Schema
 ```yaml
 - check: "API responds to /health"
   expected: "200 OK"
   timeout_ms: 5000
 ```
-
 ## Body Structure (required sections)
 1. `## Critical Path` — ordered minimum checks
 2. `## Assertions` — fast binary pass/fail checks
 3. `## Prerequisites` — what must exist before running
 4. `## On Failure` — what to do when smoke fails
-
 ## Constraints
 - max_bytes: 3072 (body only — smaller than unit_eval)
 - naming: p07_se_{scope_slug}.md

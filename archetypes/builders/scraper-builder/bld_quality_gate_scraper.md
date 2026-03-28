@@ -19,15 +19,9 @@ tldr: "Gates ensuring scraper files specify target site, selectors, output forma
 ---
 
 ## Definition
-
 A scraper extracts structured data from one or more web sources on a defined schedule or trigger. A scraper passes this gate when an engineer could deploy it safely (without harming the target site or violating terms of service), the output matches its downstream consumer's schema, and failures degrade gracefully without data corruption.
-
----
-
 ## HARD Gates
-
 Failure on any HARD gate = immediate REJECT regardless of score.
-
 | ID  | Check | Rationale |
 |-----|-------|-----------|
 | H01 | Frontmatter parses as valid YAML with no syntax errors | Unparseable file cannot be indexed or validated |
@@ -39,13 +33,8 @@ Failure on any HARD gate = immediate REJECT regardless of score.
 | H07 | Spec contains a **Target site or URL pattern** (exact domain, path pattern, or regex the scraper will fetch) | Without a target, the scraper cannot be deployed or reviewed for compliance |
 | H08 | Spec contains **Selectors** (CSS selectors or XPath expressions) for each extracted field | Selectors are the executable contract; prose descriptions are not sufficient |
 | H09 | Spec contains an **Output format definition** (field names, types, and example row) | Output schema must be validated against the consumer before deployment |
-
----
-
 ## SOFT Scoring
-
 Dimensions are weighted; total normalized weight = 100%.
-
 | # | Dimension | Weight | 1 (Poor) | 5 (Good) | 10 (Excellent) |
 |---|-----------|--------|----------|----------|----------------|
 | 1 | density >= 0.80 (content per token ratio) | 1.0 | Padded with filler prose | Mostly substantive | No filler; every sentence carries information |
@@ -57,30 +46,3 @@ Dimensions are weighted; total normalized weight = 100%.
 | 7 | Error handling for missing elements (what to do when a selector returns nothing) | 1.0 | No error handling | Null on missing | Null + logging + alert threshold for sustained misses |
 | 8 | Proxy rotation declared (explicitly not needed with reason, or rotation config provided) | 0.5 | No mention | Noted as future work | Clear declaration: not needed (with reason) or config provided |
 | 9 | Freshness and scheduling defined (run frequency, cache TTL, staleness threshold) | 1.0 | No scheduling | Cron expression only | Cron + cache TTL + staleness alert + manual trigger procedure |
-| 10 | Legal compliance noted (robots.txt checked, terms of service reviewed, data use stated) | 1.0 | No compliance note | robots.txt checked only | robots.txt + ToS review result + data retention policy |
-
-Score = sum(rating * weight) / sum(weights) normalized to 0-10.
-
----
-
-## Actions
-
-| Threshold | Action |
-|-----------|--------|
-| >= 9.5 | GOLDEN — archive to pool, tag as reference implementation |
-| >= 8.0 | PUBLISH — merge to main, approved for production deployment |
-| >= 7.0 | REVIEW — return to author with dimension-level feedback |
-| < 7.0 | REJECT — do not merge; author must revise from scratch or substantially rewrite |
-
----
-
-## Bypass
-
-| Field | Value |
-|-------|-------|
-| condition | Internal site only (target is owned by the same organization) and data volume is under 1,000 records per run |
-| approver | Domain lead with written sign-off confirming site ownership |
-| audit_log | Entry required in `records/audits/gate_bypasses.md` with date, target URL, approver, and expiry |
-| expiry | 30 days; scraper must pass full gate before production use beyond the trial period |
-
-H01 (parseable frontmatter) and H05 (quality=null) are NEVER bypassable under any condition.

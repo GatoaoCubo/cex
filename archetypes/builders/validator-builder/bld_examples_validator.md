@@ -1,4 +1,6 @@
 ---
+kind: examples
+id: bld_examples_validator
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of validator artifacts
@@ -6,15 +8,10 @@ pattern: few-shot learning — LLM reads these before producing
 ---
 
 # Examples: validator-builder
-
 ## Golden Example
-
 INPUT: "Cria um validator que garante que todo knowledge_card tem quality null"
-
 OUTPUT:
-
 ```yaml
----
 id: p06_val_kc_quality_null
 kind: validator
 pillar: P06
@@ -47,31 +44,24 @@ quality: null
 tags: [validator, knowledge-card, quality-null, pre-commit]
 tldr: "Blocks knowledge_cards with non-null quality — self-scoring is forbidden."
 density_score: 0.92
----
 ```
-
 ## Rule Definition
 Every knowledge_card artifact MUST have `quality: null` in frontmatter.
 Self-assigned quality scores corrupt the evaluation pipeline.
-
 ## Conditions
-
 | # | Field | Operator | Value | Target |
 |---|-------|----------|-------|--------|
 | 1 | quality | eq | null | frontmatter |
 | 2 | kind | eq | knowledge_card | frontmatter |
-
 ## Error Handling
 - **Message**: quality must be null — never self-score. Remove the numeric value and set quality: null.
 - **Severity**: error (blocks commit)
 - **Auto-fix**: yes — set quality: null
 - **Remediation**: Open file, find `quality:` line, replace value with `null`
-
 ## Bypass Policy
 - **Conditions**: calibration run with known golden artifacts
 - **Approver**: p06-chief
 - **Audit**: always logged
-
 WHY THIS IS GOLDEN:
 - quality: null (H05 pass)
 - id matches p06_val_ pattern (H02 pass)
@@ -83,17 +73,10 @@ WHY THIS IS GOLDEN:
 - tldr <= 160 chars, dense (S01 pass)
 - tags list len >= 3, includes "validator" (S02 pass)
 - YAML parses cleanly (H01 pass)
-
----
-
 ## Anti-Example
-
 INPUT: "Valida knowledge cards"
-
 BAD OUTPUT:
-
 ```yaml
----
 id: kc_validator
 kind: validation
 pillar: Schema
@@ -104,11 +87,8 @@ severity: critical
 auto_fix: maybe
 quality: 8.5
 tags: validator
----
 ```
-
 Quality check for KCs. Makes sure things are good.
-
 FAILURES:
 1. id: no `p06_val_` prefix -> H02 FAIL
 2. kind: "validation" not "validator" -> H04 FAIL

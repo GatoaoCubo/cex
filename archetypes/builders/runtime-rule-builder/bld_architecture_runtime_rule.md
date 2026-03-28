@@ -7,9 +7,7 @@ purpose: Component map of runtime_rule — inventory, dependencies, and architec
 ---
 
 # Architecture: runtime_rule in the CEX
-
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | frontmatter block | Metadata header (id, kind, pillar, domain, scope, rule_type, etc.) | runtime-rule-builder | active |
@@ -18,15 +16,12 @@ purpose: Component map of runtime_rule — inventory, dependencies, and architec
 | rate_limits | Requests per second, tokens per minute, concurrent connection caps | author | active |
 | circuit_breaker | Failure threshold, open duration, and recovery behavior | author | active |
 | concurrency_limits | Maximum parallel operations and queue overflow behavior | author | active |
-
 ## Dependency Graph
-
 ```
 agent          --governed_by-->  runtime_rule  --enforced_by-->  runtime_engine
 boot_config    --configures-->   runtime_rule  --signals-->      limit_breach
 runtime_rule   --depends-->      env_config
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | runtime_rule | agent (P02) | dependency | agent operations bounded by runtime parameters |
@@ -35,9 +30,7 @@ runtime_rule   --depends-->      env_config
 | env_config (P09) | runtime_rule | dependency | environment variables provide runtime-specific values |
 | runtime_rule | limit_breach (P12) | signals | emitted when a limit, timeout, or circuit is triggered |
 | law (P08) | runtime_rule | dependency | laws may mandate specific runtime constraints |
-
 ## Boundary Table
-
 | runtime_rule IS | runtime_rule IS NOT |
 |-----------------|---------------------|
 | A technical runtime parameter (timeout, retry, rate limit) | An artifact lifecycle state machine (lifecycle_rule P11) |
@@ -46,9 +39,7 @@ runtime_rule   --depends-->      env_config
 | Enforced by the runtime engine automatically | A generic environment variable (env_config P09) |
 | Overridable via boot_config or environment | A feature on/off toggle (feature_flag P09) |
 | Prevents cascade failures through backpressure | A quality scoring check (quality_gate P11) |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Configuration | frontmatter, env_config, boot_config | Supply rule identity and environment overrides |

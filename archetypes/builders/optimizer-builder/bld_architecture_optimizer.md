@@ -7,9 +7,7 @@ purpose: Component map of optimizer — inventory, dependencies, and architectur
 ---
 
 # Architecture: optimizer in the CEX
-
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | frontmatter block | Metadata header (id, kind, pillar, domain, target_metric, direction, etc.) | optimizer-builder | active |
@@ -19,15 +17,12 @@ purpose: Component map of optimizer — inventory, dependencies, and architectur
 | baseline | Current measured value with conditions and date of measurement | author | active |
 | cost_risk_assessment | Cost of optimization versus benefit, with mitigation plan | author | active |
 | monitoring_config | Dashboard, alert rules, and reporting frequency | author | active |
-
 ## Dependency Graph
-
 ```
 benchmark       --produces-->  optimizer  --consumed_by-->  scheduler
 quality_gate    --depends-->   optimizer  --signals-->      optimization_event
 optimizer       --produces-->  action_execution
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | benchmark (P07) | optimizer | data_flow | measured baseline and comparison metrics |
@@ -36,9 +31,7 @@ optimizer       --produces-->  action_execution
 | quality_gate (P11) | optimizer | dependency | gate scores may indicate optimization need |
 | optimizer | optimization_event (P12) | signals | emitted when threshold crossed or action taken |
 | monitoring_config | dashboard | data_flow | feeds metrics to observability system |
-
 ## Boundary Table
-
 | optimizer IS | optimizer IS NOT |
 |--------------|-----------------|
 | A continuous metric-to-action cycle with thresholds | A one-time bug fix cycle (bugloop P11) |
@@ -47,9 +40,7 @@ optimizer       --produces-->  action_execution
 | Tracks baseline with measurement conditions | A safety restriction on behavior (guardrail P11) |
 | Monitors results and adjusts over iterations | A static configuration parameter (runtime_rule P09) |
 | Assesses cost/risk tradeoff before acting | An unbounded optimization without constraints |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Measurement | benchmark, baseline | Establish current performance and measurement conditions |

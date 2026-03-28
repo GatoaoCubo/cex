@@ -8,18 +8,14 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 ---
 
 # Instructions: How to Produce a handoff
-
 ## Phase 1: RESEARCH
-
 1. Identify the task to delegate — what work needs to be done and what is the concrete deliverable?
 2. Determine the target executor — which satellite or agent will carry out this work?
 3. Define required context — what background does the executor need to understand why this task matters?
 4. Scope the deliverable — what exactly should be produced, to what quality threshold, by when?
 5. Identify scope fence — which file paths and directories are allowed, and which are strictly forbidden?
 6. Determine commit convention — what git add pattern and commit message format should the executor use?
-
 ## Phase 2: COMPOSE
-
 1. Read SCHEMA.md — source of truth for all required fields
 2. Read OUTPUT_TEMPLATE.md — use exact template structure
 3. Set filename as `p12_ho_{task_slug}.md`
@@ -31,9 +27,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 9. Write Commit Convention section: exact git add pattern and commit message format
 10. Write Signal section: the completion notification mechanism the executor must trigger when done
 11. Check body size — must stay at or below 3072 bytes
-
 ## Phase 3: VALIDATE
-
 1. Check QUALITY_GATES.md — run all HARD gates manually
 2. HARD gates:
    - [ ] id matches `p12_ho_[a-z][a-z0-9_]+`

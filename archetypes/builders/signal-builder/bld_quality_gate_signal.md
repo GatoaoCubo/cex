@@ -19,15 +19,9 @@ tldr: "Gates ensuring signal specs define an exhaustive status enum, emitter ide
 ---
 
 ## Definition
-
 A signal is an atomic event emitted by one agent and consumed by another or a monitor. It carries a status, an emitter identity, a timestamp, and an optional minimal payload. A signal passes this gate when any consumer could parse and act on it without contacting the emitter, the status enum covers all terminal and non-terminal states, and the payload contains no business logic — only status data.
-
----
-
 ## HARD Gates
-
 Failure on any HARD gate = immediate REJECT regardless of score.
-
 | ID  | Check | Rationale |
 |-----|-------|-----------|
 | H01 | Frontmatter parses as valid YAML with no syntax errors | Unparseable file cannot be indexed or validated |
@@ -39,13 +33,8 @@ Failure on any HARD gate = immediate REJECT regardless of score.
 | H07 | Spec contains a **Status type** field with an explicit enum (e.g., `complete`, `error`, `progress`) and no open-ended string values | Open status strings make consumer logic fragile and non-exhaustive |
 | H08 | Spec contains an **Emitter identity field** (the field name and type that identifies which agent emitted the signal) | Consumers and monitors need emitter identity to route, filter, and audit signals |
 | H09 | Spec contains a **Timestamp field** (field name, type, and format, e.g., ISO 8601 UTC) | Without timestamps, ordering and deduplication are impossible |
-
----
-
 ## SOFT Scoring
-
 Dimensions are weighted; total normalized weight = 100%.
-
 | # | Dimension | Weight | 1 (Poor) | 5 (Good) | 10 (Excellent) |
 |---|-----------|--------|----------|----------|----------------|
 | 1 | density >= 0.80 (content per token ratio) | 1.0 | Padded with filler prose | Mostly substantive | No filler; every sentence carries information |
@@ -56,31 +45,3 @@ Dimensions are weighted; total normalized weight = 100%.
 | 6 | Tags include `signal` | 0.5 | Missing | Present but misspelled | Exactly `signal` in tags list |
 | 7 | Extension fields optional not required (future payload fields are opt-in; consumers ignore unknown keys) | 0.5 | Extension fields are required | Marked optional but schema enforces them | Schema allows unknown fields; consumers ignore unknown keys |
 | 8 | Backward compatibility policy stated (additive-only field additions, versioning strategy) | 1.0 | No compatibility policy | Semver bump required for any change | Additive-only policy: new optional fields never break consumers |
-| 9 | Ordering guarantees documented (FIFO, best-effort, or none; consumer handling instruction provided) | 1.0 | No ordering stated | Ordering named | Ordering guarantee + consumer handling instruction for violations |
-| 10 | No business logic in signal (payload is descriptive only; decisions stay in consumers) | 1.0 | Signal includes conditional logic or instructions | Minor logic leak noted | Explicit rule: payload is descriptive, never prescriptive |
-
-Score = sum(rating * weight) / sum(weights) normalized to 0-10.
-
----
-
-## Actions
-
-| Threshold | Action |
-|-----------|--------|
-| >= 9.5 | GOLDEN — archive to pool, tag as reference implementation |
-| >= 8.0 | PUBLISH — merge to main, available for emitter and consumer use |
-| >= 7.0 | REVIEW — return to author with dimension-level feedback |
-| < 7.0 | REJECT — do not merge; author must revise from scratch or substantially rewrite |
-
----
-
-## Bypass
-
-| Field | Value |
-|-------|-------|
-| condition | Signal is used in a closed two-agent loop (one emitter, one consumer, both under the same author's control) during a time-boxed experiment |
-| approver | Domain lead with written sign-off |
-| audit_log | Entry required in `records/audits/gate_bypasses.md` with date, signal name, approver, and expiry |
-| expiry | 7 days; signal spec must pass full gate before use in any multi-team or production context |
-
-H01 (parseable frontmatter) and H05 (quality=null) are NEVER bypassable under any condition.

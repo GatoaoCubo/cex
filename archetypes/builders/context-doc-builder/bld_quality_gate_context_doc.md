@@ -15,20 +15,15 @@ density_score: 0.91
 ---
 
 # Gate: context_doc
-
 ## Definition
-
 | Field | Value |
 |---|---|
 | metric | context_doc artifact quality score |
 | threshold | 7.0 (publish >= 8.0, golden >= 9.5) |
 | operator | weighted_sum |
 | scope | all artifacts with `kind: context_doc` |
-
 ## HARD Gates
-
 All must pass (AND logic). Any single failure = REJECT.
-
 | ID | Check | Fail Condition |
 |---|---|---|
 | H01 | Frontmatter parses as valid YAML | Parse error on frontmatter block |
@@ -40,11 +35,8 @@ All must pass (AND logic). Any single failure = REJECT.
 | H07 | Body size <= 2048 bytes | Body exceeds 2048 bytes — trim or split into knowledge_card |
 | H08 | Scope section states what is OUT of scope | Scope only lists what is included; exclusions absent |
 | H09 | At least one constraint documented | `constraints: []` or constraints section empty |
-
 ## SOFT Scoring
-
 Weights sum to 100%.
-
 | Dimension | Weight | Criteria |
 |---|---|---|
 | Scope precision | 1.0 | Domain boundary is specific enough to exclude adjacent domains unambiguously |
@@ -59,18 +51,14 @@ Weights sum to 100%.
 | Density appropriateness | 1.0 | Content is dense but readable; no padding or repeated constraints |
 | Boundary from knowledge_card | 1.0 | Document is context or background, not a distilled atomic fact (that belongs in knowledge_card) |
 | Domain specificity | 1.0 | Content specific to the declared domain; no generic boilerplate |
-
 ## Actions
-
 | Score | Tier | Action |
 |---|---|---|
 | >= 9.5 | Golden | Publish to pool as golden reference |
 | >= 8.0 | Publish | Publish to pool, add to routing index |
 | >= 7.0 | Review | Flag for improvement before publish |
 | < 7.0 | Reject | Return to author with specific gate failures |
-
 ## Bypass
-
 | Field | Value |
 |---|---|
 | conditions | Context doc for an emerging domain where constraints are still being discovered; used only in internal experiments |

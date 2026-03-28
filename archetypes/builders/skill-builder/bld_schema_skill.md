@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: skill
-
 ## Frontmatter Fields
-
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string (p04_skill_{name}) | YES | - | Namespace compliance |
@@ -33,17 +31,14 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | sub_skills | list[string] | NO | - | Skill IDs this skill delegates to |
 | platforms | list[string] | NO | - | OS/runtime constraints |
 | stack_default | string | NO | - | Default stack/runtime |
-
 ## ID Pattern
 Regex: `^p04_skill_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Body Structure (required sections)
 1. `## Purpose` — what capability this skill provides and why it exists
 2. `## Workflow Phases` — one subsection per phase with input/output/action
 3. `## Anti-Patterns` — named failures and how to avoid them
 4. `## Metrics` — measurable success criteria for this skill
-
 ## Constraints
 - max_bytes: 5120 (body only)
 - naming: p04_skill_{name}.md + .yaml

@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: boot_config
-
 ## Frontmatter Fields
-
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string (p02_boot_{provider_slug}) | YES | - | Namespace compliance |
@@ -35,18 +33,14 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | permissions | object | REC | - | Read/write/execute permissions |
 | system_prompt_ref | string | REC | - | Reference to system_prompt artifact |
 | density_score | float 0.80-1.00 | OPT | - | Content density |
-
 ## Identity Object
-
 ```yaml
 identity:
   name: string        # Agent display name
   role: string        # Primary role description
   satellite: string   # Owning satellite or "agnostic"
 ```
-
 ## Constraints Object
-
 ```yaml
 constraints:
   max_tokens: integer       # Output token limit
@@ -55,11 +49,9 @@ constraints:
   max_retries: integer      # Retry count on failure
   temperature: float        # Override if set
 ```
-
 ## ID Pattern
 Regex: `^p02_boot_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Body Structure (required sections)
 1. `## Provider Overview` — which provider, runtime environment, version
 2. `## Identity Block` — agent name, role, satellite assignment
@@ -67,7 +59,6 @@ Rule: id MUST equal filename stem.
 4. `## Tools Configuration` — MCP servers, CLI tools, available APIs
 5. `## Flags` — CLI/runtime flags with purpose
 6. `## References` — provider docs, related boot_configs
-
 ## Constraints
 - max_bytes: 2048 (body only)
 - naming: p02_boot_{provider_slug}.md

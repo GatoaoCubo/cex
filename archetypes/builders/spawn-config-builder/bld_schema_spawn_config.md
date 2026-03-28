@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: spawn_config
-
 ## Frontmatter Fields
-
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string (p12_spawn_{mode_slug}) | YES | - | Namespace compliance |
@@ -33,16 +31,13 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | quality | null | YES | null | Never self-score |
 | tags | list[string], len >= 3 | YES | - | Must include "spawn_config" |
 | tldr | string <= 160ch | YES | - | Dense summary |
-
 ## ID Pattern
 Regex: `^p12_spawn_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Body Structure (required sections)
 1. `## Spawn Command` — the actual PowerShell/CLI command to execute
 2. `## Parameters` — detailed parameter descriptions and rationale
 3. `## Constraints` — limitations, requirements, and safety notes
-
 ## Constraints
 - max_bytes: 3072 (body only)
 - naming: p12_spawn_{mode_slug}.yaml

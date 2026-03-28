@@ -8,7 +8,6 @@ pattern: 3-phase pipeline (classify -> compose -> validate)
 ---
 
 # Instructions: How to Produce an axiom
-
 ## Phase 1: CLASSIFY
 1. Identify the candidate rule: write out the proposed truth in plain language
 2. Test immutability: ask "can this rule change under any circumstance without breaking the system?" — if yes, it is not an axiom
@@ -16,7 +15,6 @@ pattern: 3-phase pipeline (classify -> compose -> validate)
 4. Distinguish type: is this a law (enforced policy), a guardrail (safety boundary), a lifecycle rule (process step), or a fundamental truth? Only fundamental truths qualify as axioms
 5. Check for existing axioms that already express the same truth (avoid duplicates)
 6. Formulate as a single declarative statement: no conditionals, no conjunctions, one complete thought
-
 ## Phase 2: COMPOSE
 1. Read SCHEMA.md — source of truth for all fields
 2. Read OUTPUT_TEMPLATE.md — template to fill
@@ -28,7 +26,6 @@ pattern: 3-phase pipeline (classify -> compose -> validate)
 8. Write Scope section: declare whether this axiom is universal or bounded, and if bounded, define the boundary
 9. Keep total body size <= 3072 bytes
 10. Verify information density >= 0.80 (no filler sentences)
-
 ## Phase 3: VALIDATE
 1. Check QUALITY_GATES.md manually
 2. HARD gate: id matches `p10_ax_` pattern

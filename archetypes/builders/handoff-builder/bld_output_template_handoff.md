@@ -1,4 +1,6 @@
 ---
+kind: output_template
+id: bld_output_template_handoff
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} that the LLM fills to produce a handoff
@@ -6,12 +8,9 @@ pattern: every field here exists in SCHEMA.md; template derives, never invents
 ---
 
 # Output Template: handoff
-
 Naming pattern: `p12_ho_{task}.md`
 Filename: `p12_ho_{{task_slug}}.md`
-
 ```yaml
----
 id: p12_ho_{{task_slug}}
 kind: handoff
 lp: P12
@@ -37,39 +36,30 @@ keywords: [{{keyword_1}}, {{keyword_2}}]
 linked_artifacts:
   primary: "{{primary_ref_or_omit}}"
   related: [{{related_refs_or_omit}}]
----
 ```
-
 # {{SATELLITE}} — {{MISSION}}: {{Title}}
 **{{Autonomy}} Autonomy** | **Quality {{quality_target}}+**
 **REGRA: Commit e signal ANTES de qualquer pausa.**
-
 ## Context
 {{why_this_work_is_needed}}
 {{relevant_background}}
-
 ## Tasks
 ### Step 1: {{ACTION_VERB}}
 {{specific_actionable_instruction}}
-
 ### Step 2: {{ACTION_VERB}}
 {{specific_actionable_instruction}}
-
 ## Scope Fence
 - SOMENTE: {{allowed_paths}}
 - NAO TOQUE: {{forbidden_paths}}
-
 ## Commit
 ```bash
 git add {{paths}}
 git commit -m "{{satellite}}[{{mission}}]: {{description}}"
 ```
-
 ## Signal
 ```bash
 python -c "from records.core.python.signal_writer import write_signal; write_signal('{{satellite}}', 'complete', {{quality_score}})"
 ```
-
 ## Derivation Notes
 - Frontmatter fields are the machine-readable contract from SCHEMA.md
 - Body sections are the human-readable execution brief

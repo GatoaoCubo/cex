@@ -1,21 +1,20 @@
-```yaml
 ---
+kind: examples
+id: bld_examples_lifecycle_rule
+pillar: P00
+---
+
+```yaml
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of lifecycle_rule artifacts
 pattern: few-shot learning — LLM reads these before producing
----
 ```
-
 # Examples: lifecycle-rule-builder
-
 ## Golden Example
-
 INPUT: "Define lifecycle rule for knowledge_cards — when do they go stale and get archived?"
-
 OUTPUT:
 ```yaml
----
 id: p11_lc_kc_freshness
 kind: lifecycle_rule
 pillar: P11
@@ -38,14 +37,11 @@ density_score: 0.93
 linked_artifacts:
   primary: "p11_qg_kc_publish"
   related: [p01_kc_schema, p10_brain_index]
----
-
 ## Definition
 Knowledge cards lose accuracy as domains evolve. LLM pricing changes monthly,
 framework APIs break quarterly, and research findings get superseded. A KC
 cited confidently today may mislead an agent 6 months from now. This rule
 ensures KCs are reviewed before staleness degrades downstream decisions.
-
 ## States
 | State | Entry Criteria | Duration | Next |
 |-------|---------------|----------|------|
@@ -56,7 +52,6 @@ ensures KCs are reviewed before staleness degrades downstream decisions.
 | refreshed | Stale KC updated and re-validated | <= 90 days | stale, promoted |
 | archived | No longer relevant or superseded | permanent | sunset |
 | sunset | Removed from active indexes | terminal | — |
-
 ## Transitions
 | From | To | Trigger | Action | Automated |
 |------|----|---------|--------|-----------|
@@ -68,7 +63,6 @@ ensures KCs are reviewed before staleness degrades downstream decisions.
 | stale | refreshed | Owner updates and re-validates | Re-index, reset freshness timer | semi |
 | stale | archived | 30 days stale with no action | Remove from active index | yes |
 | archived | sunset | 365 days archived, no references | Delete from pool | manual |
-
 ## Review Protocol
 | Aspect | Value |
 |--------|-------|
@@ -76,7 +70,6 @@ ensures KCs are reviewed before staleness degrades downstream decisions.
 | Cycle | quarterly (every 90 days) |
 | Checklist | facts still accurate, sources still valid, density >= 0.80 |
 | Outcome | refresh (update + re-validate) or archive (remove from index) |
-
 ## Automation
 | Transition | Method | Trigger |
 |------------|--------|---------|
@@ -84,12 +77,10 @@ ensures KCs are reviewed before staleness degrades downstream decisions.
 | stale -> archived | cron (daily scan of stale entries) | 30 days in stale state |
 | draft -> active | hook (post-validation) | quality_gate pass signal |
 | archived -> sunset | manual review | annual cleanup cycle |
-
 ## References
 - Content lifecycle management: https://www.contentful.com/help/content-lifecycle/
 - CEX quality thresholds: GOLDEN >= 9.5, PUBLISH >= 8.0, REVIEW >= 7.0
 ```
-
 WHY THIS IS GOLDEN:
 - quality: null (H06 pass)
 - id matches p11_lc_ pattern (H02 pass)
@@ -101,38 +92,4 @@ WHY THIS IS GOLDEN:
 - 8 transitions in Transitions table >= 3 (S04 pass)
 - Automation section with 4 concrete entries (S05 pass)
 - All triggers are measurable: days, scores, signals (S07 pass)
-
 ## Anti-Example
-
-INPUT: "Make KCs stay fresh"
-
-BAD OUTPUT:
-```yaml
----
-id: kc_lifecycle
-kind: lifecycle_rule
-title: "Keep KCs Fresh"
-quality: 8.5
-freshness_days: "about 3 months"
-review_cycle: "regularly"
----
-
-## Rules
-- Review KCs when they seem outdated
-- Archive old ones
-- Keep the good ones
-```
-
-FAILURES:
-1. id: no p11_lc_ prefix -> H02 FAIL
-2. pillar: missing -> H05 FAIL
-3. quality: self-scored 8.5 instead of null -> H06 FAIL
-4. freshness_days: "about 3 months" is string, not integer -> H07 FAIL
-5. review_cycle: "regularly" not valid enum -> H08 FAIL
-6. scope: missing -> H09 FAIL
-7. ownership: missing -> H09 FAIL
-8. "seem outdated": subjective, not measurable -> S07 FAIL
-9. No States table -> S03 FAIL
-10. No Transitions table -> S04 FAIL
-11. No Review Protocol section -> S06 FAIL
-12. No Automation section -> S05 FAIL

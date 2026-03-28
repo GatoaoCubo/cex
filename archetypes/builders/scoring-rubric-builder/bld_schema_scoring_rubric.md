@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: scoring_rubric
-
 ## Frontmatter Fields
-
 ### Required
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
@@ -34,7 +32,6 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | quality | null | YES | null | Never self-score |
 | tags | list[string], len >= 3 | YES | — | Searchability |
 | tldr | string <= 160ch | YES | — | Dense summary |
-
 ### Recommended
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
@@ -43,18 +40,15 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | appeals_process | string | REC | — | How to contest a score |
 | density_score | float 0.80-1.00 | REC | — | Content density |
 | linked_artifacts | object {primary, related} | REC | — | Cross-references |
-
 ## ID Pattern
 Regex: `^p07_sr_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Body Structure (required sections)
 1. `## Framework Overview` — what it measures, why, and for which artifact kinds
 2. `## Dimensions` — table: name, weight(%), scale, criteria, examples
 3. `## Thresholds` — 4-tier table: GOLDEN/PUBLISH/REVIEW/REJECT with score ranges and actions
 4. `## Calibration` — examples at each tier with rationale (link golden_tests)
 5. `## Automation` — status per dimension (manual/semi/automated) with tool refs
-
 ## Constraints
 - max_bytes: 5120 (body only)
 - naming: p07_sr_{framework_slug}.md

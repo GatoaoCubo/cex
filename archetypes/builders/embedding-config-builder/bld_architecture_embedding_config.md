@@ -7,7 +7,6 @@ purpose: Component map of embedding_config — inventory, dependencies, and arch
 ---
 
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | model_id | Embedding model identifier (e.g. `nomic-embed-text`, `text-embedding-3-small`) | embedding-config-builder | required |
@@ -21,9 +20,7 @@ purpose: Component map of embedding_config — inventory, dependencies, and arch
 | normalize | Whether to L2-normalize output vectors (true/false) | embedding-config-builder | required |
 | cost_per_1k_tokens | Pricing reference for budget planning | embedding-config-builder | optional |
 | metadata | config id, version, pillar, scope, author, created date | embedding-config-builder | required |
-
 ## Dependency Graph
-
 ```
 rag_source (P01) --informs--> embedding_config (source characteristics shape chunk_size)
 embedding_config --consumed_by--> brain_index (P10) (index uses model + dimensions + metric)
@@ -32,15 +29,12 @@ knowledge_card (P01) --independent-- embedding_config (KC distills knowledge; co
 signal (P12) --independent-- embedding_config (config is static spec, not runtime event)
 workflow (P12) --independent-- embedding_config (workflow orchestrates; config parameterizes)
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | rag_source | embedding_config | data_flow | source size and language inform chunk_size and tokenizer |
 | embedding_config | brain_index | consumed_by | model_id, dimensions, distance_metric for index construction |
 | embedding_config | retriever | consumed_by | vector params needed to query and rank results |
-
 ## Boundary Table
-
 | embedding_config IS | embedding_config IS NOT |
 |--------------------|------------------------|
 | A model configuration: which embedding model, with what parameters | A knowledge_card — KC distills and stores domain knowledge |
@@ -50,9 +44,7 @@ workflow (P12) --independent-- embedding_config (workflow orchestrates; config p
 | Includes cost and normalization for production deployment | A context_doc — context_doc provides background knowledge |
 | Consumed by both the indexer and the retriever | A few_shot_example — examples demonstrate input/output patterns |
 | Static spec set once per scope or model change | A retriever — retriever executes queries using this config |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Source | rag_source | External text sources whose characteristics inform chunking strategy |
@@ -61,4 +53,3 @@ workflow (P12) --independent-- embedding_config (workflow orchestrates; config p
 | Similarity | distance_metric, normalize | Determine how vector similarity is computed at query time |
 | Performance | batch_size, cost_per_1k_tokens | Tune throughput and track cost for production use |
 | Identity | metadata | Record config id, version, scope, and authoring context |
-| Consumers | brain_index, retriever | Downstream components that read and apply this configuration |

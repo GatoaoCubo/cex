@@ -1,4 +1,6 @@
 ---
+kind: output_template
+id: bld_output_template_agent
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} for agent artifact production
@@ -6,9 +8,7 @@ pattern: derives from SCHEMA.md — no extra fields
 ---
 
 # Output Template: agent
-
 ```yaml
----
 id: p02_agent_{{agent_slug}}
 kind: agent
 pillar: P02
@@ -31,31 +31,25 @@ density_score: {{0.80_to_1.00}}
 linked_artifacts:
   primary: "{{parent_satellite_spec}}"
   related: [{{related_artifact_refs}}]
----
 ```
-
 ## Overview
 {{agent_name}} is a {{satellite}} specialist in {{domain}}.
 {{two_sentences_primary_function_and_value}}
-
 ## Capabilities
 - {{capability_1}}
 - {{capability_2}}
 - {{capability_3}}
 - {{capability_4}}
-
 ## Tools
 | # | Tool | Purpose |
 |---|------|---------|
 | 1 | {{tool_1}} | {{tool_purpose_1}} |
 | 2 | {{tool_2}} | {{tool_purpose_2}} |
-
 ## Satellite Position
 - Satellite: {{satellite_name}}
 - Peers: {{peer_agent_1}}, {{peer_agent_2}}
 - Upstream: {{upstream_agent_or_none}}
 - Downstream: {{downstream_agent_or_none}}
-
 ## File Structure
 ```
 agents/{{agent_slug}}/
@@ -71,27 +65,21 @@ agents/{{agent_slug}}/
     ISO_{{AGENT_UPPER}}_009_UPLOAD_KIT.md
     ISO_{{AGENT_UPPER}}_010_SYSTEM_INSTRUCTION.md
 ```
-
 ## Routing
 - Triggers: {{trigger_phrase_1}}, {{trigger_phrase_2}}
 - Keywords: {{routing_keyword_1}}, {{routing_keyword_2}}, {{routing_keyword_3}}
 - NOT when: {{exclusion_scenario_1}}, {{exclusion_scenario_2}}
-
 ## Input / Output
-
 ### Input
 - Required: {{required_input_1}}, {{required_input_2}}
 - Optional: {{optional_input_1}}
-
 ### Output
 - Primary: {{primary_output_artifact}}
 - Secondary: {{secondary_output_or_none}}
-
 ## Quality Gates
 HARD gates: YAML parses, id matches p02_agent_ pattern, kind == agent, quality == null,
 required fields present, iso_vectorstore >= 10 files, llm_function == BECOME.
 SOFT gates: tldr <= 160ch, tags >= 3, capabilities_count matches body,
 density >= 0.80, satellite assigned, domain specific.
-
 ## Footer
 version: {{version}} | author: {{author}} | quality: null

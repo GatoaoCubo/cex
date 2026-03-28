@@ -7,9 +7,7 @@ purpose: Component map of spawn_config — inventory, dependencies, and architec
 ---
 
 # Architecture: spawn_config in the CEX
-
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | frontmatter block | 19-field metadata header (id, kind, pillar, domain, mode, satellite, etc.) | spawn-config-builder | active |
@@ -19,15 +17,12 @@ purpose: Component map of spawn_config — inventory, dependencies, and architec
 | timeout_policy | Maximum execution time and idle timeout for the spawned satellite | author | active |
 | handoff_reference | Path to the handoff file the satellite should read at boot | author | active |
 | satellite_model_pair | Which satellite runs on which LLM model | author | active |
-
 ## Dependency Graph
-
 ```
 orchestrator    --creates-->    spawn_config  --consumed_by-->  spawn_script
 satellite_spec  --informs-->    spawn_config  --produces-->     terminal_process
 spawn_config    --signals-->    spawn_event
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | orchestrator | spawn_config | produces | orchestrator generates config for satellite launch |
@@ -36,9 +31,7 @@ spawn_config    --signals-->    spawn_event
 | spawn_config | terminal_process | produces | running satellite instance in a terminal |
 | spawn_config | spawn_event (P12) | signals | emitted when satellite is spawned or fails to start |
 | handoff (P12) | spawn_config | dependency | handoff file referenced by spawn for task instructions |
-
 ## Boundary Table
-
 | spawn_config IS | spawn_config IS NOT |
 |-----------------|---------------------|
 | A configuration for launching satellites via scripts | A runtime signal between satellites (signal P12) |
@@ -47,9 +40,7 @@ spawn_config    --signals-->    spawn_event
 | Pairs satellites with LLM models | A full satellite specification (satellite_spec P08) |
 | Consumed by PowerShell spawn scripts | An agent identity or persona (agent P02) |
 | Scoped to one launch event or mission | A persistent runtime configuration (runtime_rule P09) |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Source | orchestrator, satellite_spec | Supply launch requirements and satellite specs |

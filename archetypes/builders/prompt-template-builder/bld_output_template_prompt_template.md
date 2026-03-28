@@ -1,4 +1,8 @@
 ---
+kind: output_template
+id: bld_output_template_prompt_template
+pillar: P00
+---
 id: p03_pt_{{topic_slug}}
 kind: prompt_template
 pillar: P03
@@ -29,26 +33,18 @@ density_score: {{density_score}}
 ---
 
 # {{title}}
-
 ## Purpose
-
 {{purpose_paragraph}}
-
 ## Variables Table
-
 | Name | Type | Required | Default | Description |
 |---|---|---|---|---|
 | {{var_name_1}} | {{var_type_1}} | {{var_required_1}} | {{var_default_1}} | {{var_description_1}} |
 | {{var_name_2}} | {{var_type_2}} | {{var_required_2}} | {{var_default_2}} | {{var_description_2}} |
-
 ## Template Body
-
 ```
 {{template_body}}
 ```
-
 ## Quality Gates
-
 | Gate | Status | Notes |
 |---|---|---|
 | H01 id pattern | {{h01_status}} | {{h01_notes}} |
@@ -59,16 +55,12 @@ density_score: {{density_score}}
 | H06 valid syntax tier | {{h06_status}} | {{h06_notes}} |
 | H07 var fields complete | {{h07_status}} | {{h07_notes}} |
 | H08 body non-empty | {{h08_status}} | {{h08_notes}} |
-
 ## Examples
-
 ### Filled Example
-
 **Variables:**
 ```yaml
 {{example_variables}}
 ```
-
 **Rendered Output:**
 ```
 {{example_rendered_output}}

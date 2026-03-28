@@ -21,53 +21,24 @@ keywords: [fallback, chain, circuit_breaker, timeout_per_step_ms, quality_thresh
 ---
 
 ## Summary
-
 A fallback chain is a sequence of model calls executed in order until one meets a quality threshold or the chain is exhausted. Without explicit timeout, cost, and quality fields on each step the chain becomes unpredictable under load. The terminal step must be a static response to guarantee resolution in all failure modes.
-
 ## Pattern
-
 1. Each step declares four fields: `model`, `timeout_per_step_ms` (hard stop), `quality_threshold` (0.0-1.0), `cost_weight` (relative units).
 2. Before dispatching, sum `cost_weight` across all steps and surface worst-case spend to the caller.
 3. Order steps by decreasing capability: primary model first, cheaper-fast alternatives next, cheapest cached response after, static response last.
 4. Wrap each step in a circuit breaker: trip after 3 consecutive failures within 60 seconds; reset after 120-second cool-down.
 5. Advance to the next step when output quality score falls below `quality_threshold`, not only on hard errors.
 6. The terminal step must be a static response — it has no timeout and always succeeds.
-
 ## Anti-Pattern
-
 - Omitting `timeout_per_step_ms` causes the chain to hang indefinitely when a model endpoint degrades.
 - Setting `quality_threshold` to 0.0 on all steps defeats the chain — bad output reaches callers.
 - Ordering steps by latency alone ignores cost; a fast expensive model as fallback burns budget faster than a slow cheap one.
 - No circuit breaker means a degraded endpoint is retried on every request until manual intervention.
 - Including prompt content inside chain steps — prompts belong at the chain caller level, not in the step definition.
 - Single-step chains are schema violations; a single model reference is a model_card, not a fallback chain.
-
 ## Context
-
 Applies when building a resilient call sequence where one model may be unavailable, slow, or produce below-threshold output.
 Does not apply when the use case requires a single deterministic model and quality degradation is unacceptable.
 Precondition: each model endpoint must expose or proxy a quality signal (score, confidence, or output length heuristic).
 Boundary: fallback_chain handles model-layer degradation; prompt sequencing belongs in the chain artifact (P03).
-
 ## Impact
-
-- Eliminates hang incidents when `timeout_per_step_ms` is set on every step.
-- Circuit breaker stops retry storms on degraded endpoints.
-- Cost-aware ordering reduces average chain spend ~34% compared to latency-only ordering.
-- Static terminal step guarantees a response even when all model endpoints are simultaneously down.
-
-## Reproducibility
-
-1. List candidate models sorted by cost ascending.
-2. Assign `timeout_per_step_ms` as p95 latency + 20% buffer per model.
-3. Set `quality_threshold`: primary 0.80, first fallback 0.65, second fallback 0.50, terminal 0.0.
-4. Implement circuit breaker with `failure_count`, `last_failure_ts`, `cooldown_s`.
-5. Validate: simulate primary returning empty output; confirm chain advances to next step without hanging.
-6. Validate: simulate all steps failing; confirm terminal static step returns within 100ms.
-
-## References
-
-- Pillar: P02 (model routing and fallback)
-- Schema fields: steps, steps_count, circuit_breaker, cost_analysis
-- Common mistakes: step ordering, timeout omission, boundary drift to P03 chain
-- Related builders: model-router-builder, quality-gate-builder

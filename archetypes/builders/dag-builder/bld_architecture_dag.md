@@ -7,7 +7,6 @@ purpose: Component map of dag — inventory, dependencies, and architectural pos
 ---
 
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | nodes | List of tasks with id, label, and description | dag-builder | required |
@@ -19,9 +18,7 @@ purpose: Component map of dag — inventory, dependencies, and architectural pos
 | cycle_check | Validation assertion: no cycles exist in the graph | dag-builder | required |
 | metadata | dag id, version, mission context, author | dag-builder | required |
 | node_annotations | Per-node: estimated duration, owner, criticality | dag-builder | optional |
-
 ## Dependency Graph
-
 ```
 requirements --provides--> dag (mission brief defines nodes and constraints)
 dag --produces_for--> workflow (P12) (execution implements the DAG structure)
@@ -31,7 +28,6 @@ workflow (P12) --consumes--> dag (runtime walks topological order)
 signal (P12) --independent-- dag (dag does not emit or consume runtime signals)
 dispatch_rule (P12) --independent-- dag (routing policy is orthogonal to structure)
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | requirements | dag | data_flow | task list, constraints, mission scope |
@@ -39,9 +35,7 @@ dispatch_rule (P12) --independent-- dag (routing policy is orthogonal to structu
 | dag | handoff | produces | per-node task context |
 | dag | spawn_config | produces | parallelism count for slot allocation |
 | workflow | dag | consumes | walks edges to determine execution order |
-
 ## Boundary Table
-
 | dag IS | dag IS NOT |
 |--------|------------|
 | A static dependency graph: nodes, edges, topological order | A workflow — workflow executes steps with runtime state and error handling |
@@ -51,9 +45,7 @@ dispatch_rule (P12) --independent-- dag (routing policy is orthogonal to structu
 | Validates acyclicity as a hard correctness constraint | A dispatch_rule — dispatch_rule routes tasks to execution targets |
 | Consumed by orchestrators to determine execution order | A spawn_config — spawn_config defines how processes are launched |
 | Has explicit entry and exit points | A crew — crew defines multi-agent coordination protocols |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Input | requirements, mission brief | Define the tasks and constraints the DAG must model |

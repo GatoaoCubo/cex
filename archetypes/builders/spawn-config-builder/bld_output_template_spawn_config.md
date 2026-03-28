@@ -1,4 +1,6 @@
 ---
+kind: output_template
+id: bld_output_template_spawn_config
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} that the LLM fills to produce a spawn_config
@@ -6,9 +8,7 @@ pattern: every field here exists in SCHEMA.md — template derives, never invent
 ---
 
 # Output Template: spawn_config
-
 ```yaml
----
 id: p12_spawn_{{mode_slug}}
 kind: spawn_config
 pillar: P12
@@ -33,16 +33,12 @@ domain: "{{domain_value}}"
 quality: null
 tags: [spawn_config, {{tag_2}}, {{tag_3}}]
 tldr: "{{dense_summary_max_160ch}}"
----
 ```
-
 ## Spawn Command
 ```powershell
 {{spawn_command_powershell}}
 ```
-
 ## Parameters
-
 | Parameter | Value | Rationale |
 |-----------|-------|-----------|
 | mode | {{mode}} | {{why_this_mode}} |
@@ -50,11 +46,9 @@ tldr: "{{dense_summary_max_160ch}}"
 | model | {{model}} | {{why_this_model}} |
 | timeout | {{timeout}}s | {{why_this_timeout}} |
 | interactive | {{interactive}} | {{why_interactive_or_not}} |
-
 ## Constraints
 - {{constraint_1}}
 - {{constraint_2}}
 - {{constraint_3}}
-
 ## References
 - {{reference_1}}

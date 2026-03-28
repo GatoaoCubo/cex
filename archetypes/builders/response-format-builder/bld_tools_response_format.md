@@ -7,14 +7,12 @@ purpose: Tools available for response_format production
 ---
 
 # Tools: response-format-builder
-
 ## Production Tools
 | Tool | Purpose | When | Status |
 |------|---------|------|--------|
 | brain_query [MCP] | Search existing response_formats | Phase 1 (check duplicates) | CONDITIONAL |
 | validate_artifact.py | Validate any artifact kind | Phase 3 | [PLANNED] |
 | cex_forge.py | Generate artifact from seeds | Alternative compose | [PLANNED] |
-
 ## Data Sources
 | Source | Path/URL | Data |
 |--------|----------|------|
@@ -24,7 +22,6 @@ purpose: Tools available for response_format production
 | SEED_BANK | archetypes/SEED_BANK.yaml | P05_output_schema seeds |
 | OpenAI docs | https://platform.openai.com/docs | Structured output patterns |
 | Anthropic docs | https://docs.anthropic.com | Tool use output patterns |
-
 ## Interim Validation
 Manually check each QUALITY_GATES.md gate against produced artifact.
 - [ ] YAML parses

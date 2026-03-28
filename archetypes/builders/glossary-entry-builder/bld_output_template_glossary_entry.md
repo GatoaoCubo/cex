@@ -1,4 +1,6 @@
 ---
+kind: output_template
+id: bld_output_template_glossary_entry
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} that the LLM fills to produce a glossary_entry
@@ -6,9 +8,7 @@ pattern: every field here exists in SCHEMA.md — template derives, never invent
 ---
 
 # Output Template: glossary_entry
-
 ```yaml
----
 id: p01_gl_{{term_slug}}
 kind: glossary_entry
 pillar: P01
@@ -29,22 +29,16 @@ usage: "{{how_the_term_is_used_in_practice}}"
 quality: null
 tags: [glossary, {{domain_tag}}, {{term_tag}}]
 tldr: "{{dense_summary_max_160ch}}"
----
 ```
-
 ## Definition
 {{concise_definition_1_to_3_lines}}
-
 ## Usage
 {{where_and_how_this_term_appears_in_practice}}
-
 ## Disambiguation
 {{how_this_term_differs_from_commonly_confused_terms}}
-
 ## Related Terms
 - {{related_term_1}}: {{brief_relation}}
 - {{related_term_2}}: {{brief_relation}}
-
 ## References
 - {{reference_1}}
 - {{reference_2}}

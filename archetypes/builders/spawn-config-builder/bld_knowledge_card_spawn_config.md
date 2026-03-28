@@ -8,13 +8,9 @@ sources: spawn-config-builder MANIFEST.md + SCHEMA.md
 ---
 
 # Domain Knowledge: spawn_config
-
 ## Executive Summary
-
 Spawn configs are YAML artifacts that define exactly how a satellite agent is launched — CLI flags, model, timeout, MCP profile, and prompt delivery strategy. They encode the spawn contract so the same satellite can be reliably re-launched without manual CLI assembly. Unlike signals (runtime status) or dispatch_rules (routing policy), spawn configs are static pre-launch recipes that exist before the satellite process starts.
-
 ## Spec Table
-
 | Property | Value |
 |----------|-------|
 | Pillar | P12 (orchestration) |
@@ -29,9 +25,7 @@ Spawn configs are YAML artifacts that define exactly how a satellite agent is la
 | prompt_strategy enum | `inline` (< 200 chars) / `handoff` (longer tasks) |
 | quality field | null always — invariant |
 | tldr max | 160 characters |
-
 ## Patterns
-
 | Pattern | Rule |
 |---------|------|
 | Mode selection | solo = 1 satellite 1 task; grid = parallel fixed set; continuous = queue-refill loop |
@@ -42,13 +36,10 @@ Spawn configs are YAML artifacts that define exactly how a satellite agent is la
 | interactive | `true` = terminal stays open for monitoring; `false` = fire-and-forget |
 | id == filename stem | `p12_spawn_solo_edison.yaml` → `id: p12_spawn_solo_edison` |
 | Timeout budgeting | research ~30 min, build ~45 min, deploy ~15 min |
-
 - **Body sections**: Spawn Command → Parameters → Constraints
 - **Spawn Command**: exact PowerShell/CLI command — not pseudocode
 - **Grid max**: 3 satellites concurrent to prevent system instability
-
 ## Anti-Patterns
-
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
 | Inline prompt > 200 chars with `-p` flag | Long inline prompts hang non-interactive spawn |
@@ -58,9 +49,7 @@ Spawn configs are YAML artifacts that define exactly how a satellite agent is la
 | `mode: continuous` without queue refill logic | Slots go idle after first wave |
 | Hardcoded absolute paths in mcp_config | Breaks portability across machines |
 | Complex task with `prompt_strategy: inline` | Satellite receives insufficient context |
-
 ## Application
-
 1. Choose mode: `solo` (one satellite), `grid` (parallel fixed), or `continuous` (queue-driven)
 2. Identify target satellite and its correct model pairing
 3. Determine `prompt_strategy`: if task > 200 chars, write handoff file first and set `handoff`
@@ -69,9 +58,7 @@ Spawn configs are YAML artifacts that define exactly how a satellite agent is la
 6. Set `timeout` based on expected task duration
 7. Write body: Spawn Command (exact CLI) → Parameters → Constraints
 8. Set `quality: null`, verify body ≤ 3072 bytes
-
 ## References
-
 - Schema: spawn_config SCHEMA.md (P06)
 - Pillar: P12 (orchestration)
 - Boundary: signal (runtime status), dispatch_rule (routing policy), handoff (task instructions)

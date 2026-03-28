@@ -8,9 +8,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
 # Schema: unit_eval
-
 ## Frontmatter Fields
-
 ### Required
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
@@ -32,7 +30,6 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | quality | null | YES | null | Never self-score |
 | tags | list[string], len >= 3 | YES | — | Searchability |
 | tldr | string <= 160ch | YES | — | Dense summary |
-
 ### Recommended
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
@@ -42,11 +39,9 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | coverage_scope | string | REC | — | What this test covers |
 | score | float | REC | — | Expected minimum score |
 | density_score | float 0.80-1.00 | REC | — | Content density |
-
 ## ID Pattern
 Regex: `^p07_ue_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Assertion Object Schema
 ```yaml
 - gate_ref: "H01"
@@ -54,14 +49,12 @@ Rule: id MUST equal filename stem.
   expected: true
   severity: "HARD"
 ```
-
 ## Body Structure (required sections)
 1. `## Input` — exact input/prompt (verbatim)
 2. `## Expected Output` — correct output
 3. `## Assertions` — gate-mapped checks with expected values
 4. `## Setup` — preconditions
 5. `## Teardown` — cleanup
-
 ## Constraints
 - max_bytes: 4096 (body only)
 - naming: p07_ue_{target_slug}.md + .yaml

@@ -1,4 +1,6 @@
 ---
+kind: examples
+id: bld_examples_smoke_eval
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of smoke_eval artifacts
@@ -6,14 +8,10 @@ pattern: few-shot learning — LLM reads these before producing
 ---
 
 # Examples: smoke-eval-builder
-
 ## Golden Example
-
 INPUT: "Create smoke eval for brain search MCP availability"
-
 OUTPUT:
 ```yaml
----
 id: p07_se_brain_mcp
 kind: smoke_eval
 pillar: P07
@@ -55,30 +53,24 @@ quality: null
 tags: [smoke-eval, brain-mcp, infrastructure, CI]
 tldr: "15s smoke: brain MCP responds, query returns results with id+score"
 density_score: 0.92
----
-
 ## Critical Path
 1. Verify MCP server process is alive (3s max)
 2. Execute brain_query('test') (5s max)
 3. Validate result structure: id + score fields (1s max)
-
 ## Assertions
 - MCP server process is running (3s timeout)
 - brain_query returns non-empty list (5s timeout)
 - First result contains 'id' field (string)
 - First result contains 'score' field (>= 0)
-
 ## Prerequisites
 - Ollama running locally with nomic-embed-text model
 - FAISS index built via build_indexes_ollama.py
 - MCP server configured in .mcp.json
-
 ## On Failure
 - Log: which assertion failed and at what step
 - Action: if MCP down, suggest restart command
 - Escalation: if repeated failure, flag for investigation
 ```
-
 WHY THIS IS GOLDEN:
 - quality: null (never self-scored)
 - id matches p07_se_ pattern
@@ -90,24 +82,17 @@ WHY THIS IS GOLDEN:
 - assertions: 4 entries with check/expected/timeout_ms
 - prerequisites listed concretely
 - On Failure section with actionable steps
-
 ## Anti-Example
-
 INPUT: "Smoke test for brain"
-
 BAD OUTPUT:
 ```yaml
----
 id: brain_smoke
 kind: smoke
 timeout: 120
 quality: 8.0
----
-
 ## Test
 Check if brain works. Run some queries and see if results come back.
 ```
-
 FAILURES:
 1. id: no p07_se_ prefix -> H02 FAIL
 2. kind: "smoke" not "smoke_eval" -> H04 FAIL

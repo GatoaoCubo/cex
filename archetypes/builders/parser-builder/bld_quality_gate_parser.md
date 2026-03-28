@@ -15,20 +15,15 @@ density_score: 0.85
 ---
 
 # Gate: parser
-
 ## Definition
-
 | Field     | Value                                               |
 |-----------|-----------------------------------------------------|
 | metric    | extraction rule coverage + output schema fidelity   |
 | threshold | 8.0                                                 |
 | operator  | >=                                                  |
 | scope     | all parser artifacts (P05)                          |
-
 ## HARD Gates
-
 All must pass. Failure on any = final score 0.
-
 | Gate | Check | Why |
 |------|-------|-----|
 | H01 | YAML frontmatter parses valid YAML | Broken YAML = parser silently skipped |
@@ -41,9 +36,7 @@ All must pass. Failure on any = final score 0.
 | H08 | extraction_rules list has >= 1 entry, each with field, method, and expression | Rules without expressions cannot be automated |
 | H09 | output_schema block defines >= 1 field with name and type | Consumers need a contract before wiring |
 | H10 | At least one extraction rule has required: true | A parser extracting only optional fields has no guaranteed output |
-
 ## SOFT Scoring
-
 | Gate | Check | Weight |
 |------|-------|--------|
 | S01 | tldr <= 160 chars, non-empty | 1.0 |
@@ -58,20 +51,15 @@ All must pass. Failure on any = final score 0.
 | S10 | extraction is idempotent — same input always produces same output (documented or trivially true) | 1.0 |
 | S11 | performance_note states whether parser is line-by-line or document-level and expected throughput | 0.5 |
 | S12 | No filler phrases ("this parser", "designed to extract", "various fields") | 1.0 |
-
 Weights sum: 9.5. Normalize: divide each by 9.5 before scoring.
-
 ## Actions
-
 | Score | Action |
 |-------|--------|
 | >= 9.5 | GOLDEN — pool as reference parser for this input format |
 | >= 8.0 | PUBLISH — wire to ingestion pipeline |
 | >= 7.0 | REVIEW — add edge cases, fallback rule, or error handling |
 | < 7.0  | REJECT — rework extraction rules and output schema |
-
 ## Bypass
-
 | Field | Value |
 |-------|-------|
 | conditions | One-time migration requiring parser before full validation when input format is stable and small volume |

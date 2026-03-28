@@ -7,9 +7,7 @@ purpose: Component map of plugin — inventory, dependencies, and architectural 
 ---
 
 # Architecture: plugin in the CEX
-
 ## Component Inventory
-
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | frontmatter block | 16-field metadata header (id, kind, pillar, domain, api_surface, etc.) | plugin-builder | active |
@@ -19,15 +17,12 @@ purpose: Component map of plugin — inventory, dependencies, and architectural 
 | config_schema | Configuration options with defaults and validation rules | author | active |
 | dependency_chain | Other plugins or services this plugin requires | author | active |
 | isolation_level | Sandboxing and resource limits for the plugin runtime | author | active |
-
 ## Dependency Graph
-
 ```
 host_system     --loads-->      plugin  --exposes-->     api_surface
 config_schema   --configures--> plugin  --signals-->     lifecycle_event
 plugin          --depends-->    dependency_chain
 ```
-
 | From | To | Type | Data |
 |------|----|------|------|
 | host_system | plugin | consumes | host loads plugin via interface contract at startup |
@@ -36,9 +31,7 @@ plugin          --depends-->    dependency_chain
 | plugin | lifecycle_event (P12) | signals | emitted on load, enable, disable, unload transitions |
 | plugin | dependency_chain | dependency | requires other plugins or services to function |
 | hook (P04) | plugin | dependency | plugins may register hooks for event interception |
-
 ## Boundary Table
-
 | plugin IS | plugin IS NOT |
 |-----------|---------------|
 | A pluggable extension with defined interface contract | An event interceptor without API surface (hook P04) |
@@ -47,9 +40,7 @@ plugin          --depends-->    dependency_chain
 | Configured via schema with validated options | A protocol server exposing tools via MCP (mcp_server P04) |
 | Isolated with defined resource limits | A tightly coupled core component |
 | Hot-reloadable without host restart | A static library compiled into the host |
-
 ## Layer Map
-
 | Layer | Components | Purpose |
 |-------|------------|---------|
 | Contract | frontmatter, interface_contract | Define what the plugin must implement |

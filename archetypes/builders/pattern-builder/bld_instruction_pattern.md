@@ -31,28 +31,18 @@ density_score: 0.86
 ---
 
 ## Context
-
 The pattern-builder receives a **recurring problem description** and produces a `pattern` artifact that formally encodes the named, reusable solution for that problem.
-
 **Input variables**:
 - `{{pattern_name}}` — a short, memorable name for the solution (e.g., "Circuit Breaker", "Retry with Backoff", "Fan-Out Aggregation")
 - `{{problem}}` — the recurring situation in concrete terms: what goes wrong, under what conditions, how often
 - `{{solution_sketch}}` — a brief description of the approach that resolves the problem
 - `{{examples}}` — 2 or more concrete instances where this solution was applied (system name, context, outcome)
 - `{{related}}` — optional list of known complementary, alternative, or prerequisite patterns
-
 **Output**: a single `pattern` artifact at `p08_pat_{{pattern_slug}}.md` with problem, context, forces, solution, consequences, examples, anti-patterns, and related patterns.
-
 **Boundaries**: documents recurring solutions only. Does NOT encode inviolable rules (use law), define executable multi-step workflows (use workflow), produce visual diagrams (use diagram), or map component relationships (use component_map).
-
----
-
 ## Phases
-
 ### Phase 1: DISCOVER
-
 **Goal**: Confirm recurrence, extract forces, and gather examples before writing the solution.
-
 1. Verify recurrence: confirm the problem in `{{problem}}` happens repeatedly across different contexts — not a one-off fix. If it cannot be confirmed as recurring, stop and route to bugloop or workflow instead.
 2. State the problem in concrete terms: what fails, under what conditions, what the impact is. Avoid abstract language.
 3. Identify forces — the competing tensions that make the problem hard to solve:
@@ -65,15 +55,9 @@ The pattern-builder receives a **recurring problem description** and produces a 
    - **Alternative**: patterns that solve the same problem differently
    - **Prerequisite**: patterns that must be in place before applying this one
 7. Identify anti-patterns: 1–3 common wrong approaches to the same problem, each with an explanation of why they fail.
-
 **Exit**: recurrence confirmed, at least 2 forces identified, at least 2 concrete examples documented, at least 1 anti-pattern identified.
-
----
-
 ### Phase 2: COMPOSE
-
 **Goal**: Produce all artifact fields and body sections following SCHEMA.md and OUTPUT_TEMPLATE.md.
-
 8. Read SCHEMA.md — source of truth for all required fields (14 required + 7 extended).
 9. Read OUTPUT_TEMPLATE.md — fill `{{vars}}` following SCHEMA constraints exactly.
 10. Generate `pattern_slug` in kebab-case (e.g., `circuit-breaker`, `retry-backoff`). Set `id = p08_pat_{{pattern_slug}}`.
@@ -87,125 +71,11 @@ The pattern-builder receives a **recurring problem description** and produces a 
 18. Write **Anti-Patterns** section: 1–3 wrong approaches with explanation of why each fails.
 19. Write **Related Patterns** section: list complementary, alternative, and prerequisite patterns with one-line descriptions. Use artifact IDs where known.
 20. Verify body <= 4096 bytes.
-
 **Exit**: all sections present, consequences include both benefits and costs, examples are concrete (not hypothetical), anti-patterns are named.
-
----
-
 ### Phase 3: VALIDATE
-
 **Goal**: Verify all quality gates before writing the final artifact.
-
 21. Check QUALITY_GATES.md manually (no automated validator for patterns).
 22. Verify all HARD gates pass: YAML parses, `id` matches pattern, `kind = pattern`, `quality = null`, all required fields present, `name` present, Problem section describes recurrence explicitly.
 23. Cross-check: is this truly a pattern (recurring, reusable)? Confirm it is NOT drifting into:
     - law (inviolable rule) — route to law-builder
     - workflow (executable multi-step procedure) — route to workflow-builder
-    - diagram (visual representation) — route to diagram-builder
-24. Score SOFT gates against QUALITY_GATES.md.
-25. If score < 8.0: revise in same pass before outputting. Do not output a failing artifact.
-26. Write the final artifact using the Output Contract template below.
-
----
-
-## Output Contract
-
-```
----
-id: p08_pat_{{pattern_slug}}
-kind: pattern
-pillar: P08
-domain: {{domain}}
-version: 1.0.0
-created: {{date}}
-author: pattern-builder
-name: {{pattern_name}}
-problem_domain: {{problem_domain}}
-applicability: [{{context_type_1}}, {{context_type_2}}]
-forces_count: {{n}}
-related_patterns: [{{related_id_1}}, {{related_id_2}}]
-anti_patterns: [{{anti_pattern_name_1}}]
-quality: null
-tags: [pattern, {{pattern_slug}}, {{domain}}, architecture]
----
-
-## Problem
-
-{{problem_concrete_description_2_4_sentences_including_recurrence}}
-
-## Context
-
-{{environment}}, {{frequency}}, {{severity}}, {{applicable_system_types}}
-
-## Forces
-
-- {{force_1_tension_description}}
-- {{force_2_tension_description}}
-
-## Solution
-
-{{concrete_reusable_approach}}
-
-```
-{{optional_ascii_diagram_or_pseudocode}}
-```
-
-## Consequences
-
-**Benefits**:
-- {{benefit_1}}
-- {{benefit_2}}
-
-**Costs**:
-- {{cost_1}}
-- {{cost_2}}
-
-## Examples
-
-1. **{{system_name_1}}**: {{context}} — {{outcome}}
-2. **{{system_name_2}}**: {{context}} — {{outcome}}
-
-## Anti-Patterns
-
-- **{{anti_pattern_name}}**: {{why_it_fails}}
-
-## Related Patterns
-
-- **{{related_pattern_name}}** (`{{related_id}}`): {{one_line_description}}
-```
-
----
-
-## Validation
-
-| # | Gate | Type |
-|---|------|------|
-| 1 | YAML frontmatter parses without errors | HARD |
-| 2 | `id` matches `^p08_pat_[a-z][a-z0-9\-]+$` | HARD |
-| 3 | `kind = pattern` exactly | HARD |
-| 4 | `quality: null` is set | HARD |
-| 5 | All 14 required frontmatter fields are populated | HARD |
-| 6 | `name` field is present and non-empty | HARD |
-| 7 | Problem section explicitly describes recurrence (not a one-off) | HARD |
-| 8 | At least 2 forces listed | HARD |
-| 9 | Consequences section contains both benefits AND costs | HARD |
-| 10 | At least 2 concrete examples with system name and outcome | SOFT |
-| 11 | At least 1 anti-pattern named and explained | SOFT |
-| 12 | Body <= 4096 bytes | SOFT |
-
----
-
-## Metacognition
-
-**Does**:
-- Formalizes recurring, reusable architectural solutions as named pattern artifacts
-- Documents forces, consequences (benefits AND costs), and anti-patterns
-- Cross-references related patterns for navigability
-
-**Does NOT**:
-- Encode inviolable rules (use law-builder)
-- Define executable multi-step workflows (use workflow-builder)
-- Produce visual diagrams (use diagram-builder)
-- Map component relationships (use component_map-builder)
-
-**Chaining**: output feeds documentation systems (readable style guide), code review tools (pattern compliance), architecture decision records. Input from architecture reviews, post-mortem analyses, recurring incident patterns.

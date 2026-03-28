@@ -8,7 +8,6 @@ pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 ---
 
 # Schema: session_state
-
 ## Artifact Identity
 | Field | Value |
 |-------|-------|
@@ -17,7 +16,6 @@ pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 | Machine format | `yaml` |
 | Naming | `p10_ss_{session}.yaml` |
 | Max bytes | 3072 |
-
 ## Required Fields
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
@@ -36,7 +34,6 @@ pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 | quality | null | YES | null | Never self-score |
 | tags | list[string], len >= 3 | YES | - | Searchability |
 | tldr | string <= 160ch | YES | - | Dense summary |
-
 ## Optional Fields
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
@@ -54,7 +51,6 @@ pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 | last_checkpoint | string | NO | omitted | Most recent checkpoint label |
 | keywords | list[string] | NO | omitted | Brain search terms |
 | linked_artifacts | object {primary, related} | NO | omitted | Cross-references |
-
 ## Semantic Rules
 1. One session_state describes one session of one agent at one moment
 2. `status=active` means session is in progress
@@ -63,28 +59,23 @@ pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 5. `status=aborted` means session ended abnormally
 6. Session state is ephemeral: it is NOT accumulated across sessions
 7. Optional fields extend the snapshot but never replace required fields
-
 ## Boundary Rules
 `session_state` IS:
 - ephemeral snapshot of current session
 - point-in-time capture of agent execution context
 - recoverable checkpoint data
-
 `session_state` IS NOT:
 - `runtime_state`: persistent state carried across sessions, accumulated routing decisions
 - `learning_record`: accumulated learning from outcomes, patterns over time
 - `brain_index`: search index configuration (BM25, FAISS)
 - `axiom`: immutable fundamental rule
-
 ## ID Pattern
 Regex: `^p10_ss_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
-
 ## Body Structure (required sections)
 1. `## Active Context` — current tasks and execution state
 2. `## Resource Usage` — tokens, tools, time consumption
 3. `## Checkpoints` — recovery points captured during session
-
 ## Constraints
 - max_bytes: 3072
 - naming: `p10_ss_{session}.yaml`
