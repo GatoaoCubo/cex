@@ -1,4 +1,6 @@
 ---
+kind: tools
+id: bld_tools_e2e_eval
 pillar: P04
 llm_function: CALL
 purpose: Tools available for e2e_eval production

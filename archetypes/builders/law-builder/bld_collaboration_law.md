@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_law
 pillar: P08
 llm_function: COLLABORATE
 purpose: How law-builder works in crews with other builders

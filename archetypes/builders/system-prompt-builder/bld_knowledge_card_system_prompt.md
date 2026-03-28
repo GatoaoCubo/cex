@@ -1,4 +1,6 @@
 ---
+kind: knowledge_card
+id: bld_knowledge_card_system_prompt
 pillar: P03
 llm_function: INJECT
 purpose: Domain knowledge for system_prompt production — atomic searchable facts

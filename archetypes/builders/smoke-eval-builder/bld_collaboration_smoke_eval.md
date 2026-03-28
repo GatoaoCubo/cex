@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_smoke_eval
 pillar: P07
 llm_function: COLLABORATE
 purpose: How smoke-eval-builder works in crews with other builders

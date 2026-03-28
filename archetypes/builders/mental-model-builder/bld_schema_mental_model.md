@@ -1,4 +1,6 @@
 ---
+kind: schema
+id: bld_schema_mental_model
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for mental_model (P02)

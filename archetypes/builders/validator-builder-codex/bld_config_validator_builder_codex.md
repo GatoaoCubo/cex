@@ -1,4 +1,6 @@
 ---
+kind: config
+id: bld_config_validator_builder_codex
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming conventions, file paths, size limits, operational constraints

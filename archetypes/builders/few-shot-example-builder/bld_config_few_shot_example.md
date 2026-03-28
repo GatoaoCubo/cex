@@ -1,4 +1,6 @@
 ---
+kind: config
+id: bld_config_few_shot_example
 pillar: P09
 llm_function: CONSTRAIN
 purpose: File system and operational configuration for few_shot_example artifacts

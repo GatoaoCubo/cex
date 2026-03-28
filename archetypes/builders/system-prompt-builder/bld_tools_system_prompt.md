@@ -1,4 +1,6 @@
 ---
+kind: tools
+id: bld_tools_system_prompt
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for system_prompt production

@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_axiom
 pillar: P12
 llm_function: COLLABORATE
 purpose: How axiom-builder works in crews with other builders

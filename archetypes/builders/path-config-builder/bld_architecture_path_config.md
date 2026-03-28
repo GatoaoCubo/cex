@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_path_config
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of path_config — inventory, dependencies, and architectural position

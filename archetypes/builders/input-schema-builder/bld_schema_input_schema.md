@@ -1,4 +1,6 @@
 ---
+kind: schema
+id: bld_schema_input_schema
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for input_schema

@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_golden_test
 pillar: P12
 llm_function: COLLABORATE
 purpose: How golden-test-builder works in crews with other builders

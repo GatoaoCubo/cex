@@ -1,4 +1,6 @@
 ---
+kind: knowledge_card
+id: bld_knowledge_card_e2e_eval
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for e2e_eval production — end-to-end pipeline testing

@@ -1,4 +1,6 @@
 ---
+kind: knowledge_card
+id: bld_knowledge_card_optimizer
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for optimizer production — atomic searchable facts

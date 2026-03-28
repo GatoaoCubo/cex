@@ -1,4 +1,6 @@
 ---
+kind: knowledge_card
+id: bld_knowledge_card_response_format
 pillar: P05
 llm_function: INJECT
 purpose: Domain knowledge for response_format production — atomic searchable facts

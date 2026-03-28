@@ -1,4 +1,6 @@
 ---
+kind: config
+id: bld_config_rag_source
 pillar: P09
 llm_function: CONSTRAIN
 version: 1.0.0

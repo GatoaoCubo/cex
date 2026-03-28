@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_dag
 pillar: P08
 llm_function: PRODUCE
 purpose: Component map of dag — inventory, dependencies, and architectural position

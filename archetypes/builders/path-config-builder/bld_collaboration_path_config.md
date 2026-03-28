@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_path_config
 pillar: P09
 llm_function: COLLABORATE
 purpose: How path-config-builder works in crews with other builders

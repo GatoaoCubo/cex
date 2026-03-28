@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_plugin
 pillar: P04
 llm_function: COLLABORATE
 purpose: How plugin-builder works in crews with other builders

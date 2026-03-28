@@ -1,4 +1,6 @@
 ---
+kind: tools
+id: bld_tools_fallback_chain
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for fallback_chain production

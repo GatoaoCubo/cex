@@ -1,4 +1,6 @@
 ---
+kind: knowledge_card
+id: bld_knowledge_card_dispatch_rule
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for dispatch_rule production — routing policy specification

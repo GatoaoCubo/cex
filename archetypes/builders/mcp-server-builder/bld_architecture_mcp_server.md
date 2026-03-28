@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_mcp_server
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of mcp_server — inventory, dependencies, and architectural position

@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_runtime_rule
 pillar: P09
 llm_function: COLLABORATE
 purpose: How runtime-rule-builder works in crews with other builders

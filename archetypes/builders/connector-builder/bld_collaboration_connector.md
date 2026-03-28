@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_connector
 pillar: P12
 llm_function: COLLABORATE
 purpose: How connector-builder works in crews with other builders

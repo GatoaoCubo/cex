@@ -1,11 +1,11 @@
-```yaml
 ---
+kind: schema
+id: bld_schema_lifecycle_rule
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for lifecycle_rule
 pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
-```
 
 # Schema: lifecycle_rule
 

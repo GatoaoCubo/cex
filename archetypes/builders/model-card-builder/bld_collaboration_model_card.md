@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_model_card
 pillar: P02
 llm_function: COLLABORATE
 purpose: How model-card-builder works in crews with other builders

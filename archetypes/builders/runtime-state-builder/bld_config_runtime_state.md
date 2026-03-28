@@ -1,4 +1,6 @@
 ---
+kind: config
+id: bld_config_runtime_state
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for runtime_state production

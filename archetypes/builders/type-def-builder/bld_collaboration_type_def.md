@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_type_def
 pillar: P06
 llm_function: COLLABORATE
 purpose: How type-def-builder works in crews with other builders

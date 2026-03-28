@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_iso_package
 pillar: P12
 llm_function: COLLABORATE
 purpose: How iso-package-builder works in crews with other builders

@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_chain
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of chain — inventory, dependencies, and architectural position

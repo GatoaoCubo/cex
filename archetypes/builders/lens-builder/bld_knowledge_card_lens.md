@@ -1,4 +1,6 @@
 ---
+kind: knowledge_card
+id: bld_knowledge_card_lens
 pillar: P02
 llm_function: INJECT
 purpose: Domain knowledge for lens production — atomic searchable facts

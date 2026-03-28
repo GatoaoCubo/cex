@@ -1,4 +1,6 @@
 ---
+kind: config
+id: bld_config_quality_gate
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for quality_gate production

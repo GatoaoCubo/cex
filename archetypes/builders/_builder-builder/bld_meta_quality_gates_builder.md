@@ -1,4 +1,6 @@
 ---
+kind: meta_quality_gates
+id: bld_meta_quality_gates_builder
 meta: true
 file_position: 12/13
 pillar: P11

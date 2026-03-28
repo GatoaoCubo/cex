@@ -1,4 +1,6 @@
 ---
+kind: quality_gate
+id: bld_quality_gate_validator_builder_codex
 pillar: P11
 llm_function: GOVERN
 purpose: Automated quality gates for validator validation

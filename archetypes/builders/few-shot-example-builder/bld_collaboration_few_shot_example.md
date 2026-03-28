@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_few_shot_example
 pillar: P12
 llm_function: COLLABORATE
 purpose: How few-shot-example-builder works in crews with other builders

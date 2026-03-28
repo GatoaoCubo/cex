@@ -1,4 +1,6 @@
 ---
+kind: memory
+id: bld_memory_mental_model
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for mental_model artifact generation

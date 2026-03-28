@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_connector
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of connector — inventory, dependencies, and architectural position

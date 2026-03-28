@@ -1,4 +1,6 @@
 ---
+kind: meta_architecture
+id: bld_meta_architecture_builder
 meta: true
 file_position: 9/13
 pillar: P08

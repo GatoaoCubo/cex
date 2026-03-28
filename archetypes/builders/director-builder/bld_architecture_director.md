@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_director
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of satellite_spec — inventory, dependencies, and architectural position

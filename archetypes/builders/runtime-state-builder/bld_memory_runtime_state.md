@@ -1,4 +1,6 @@
 ---
+kind: memory
+id: bld_memory_runtime_state
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for runtime_state artifact generation

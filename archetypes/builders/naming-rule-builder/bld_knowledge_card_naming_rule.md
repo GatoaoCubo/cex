@@ -1,4 +1,6 @@
 ---
+kind: knowledge_card
+id: bld_knowledge_card_naming_rule
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for naming_rule production — atomic searchable facts

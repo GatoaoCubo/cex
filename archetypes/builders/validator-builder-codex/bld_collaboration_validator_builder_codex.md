@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_validator_builder_codex
 pillar: P12
 llm_function: COLLABORATE
 purpose: How validator-builder-codex works in crews with other builders

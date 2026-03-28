@@ -1,4 +1,6 @@
 ---
+kind: memory
+id: bld_memory_path_config
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for path_config artifact generation

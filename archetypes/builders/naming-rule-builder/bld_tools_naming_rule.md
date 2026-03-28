@@ -1,4 +1,5 @@
 ---
+id: bld_tools_naming_rule
 pillar: P04
 llm_function: CALL
 kind: tools

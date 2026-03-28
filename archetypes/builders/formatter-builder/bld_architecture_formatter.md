@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_formatter
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of formatter — inventory, dependencies, and architectural position

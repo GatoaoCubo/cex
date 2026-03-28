@@ -1,4 +1,6 @@
 ---
+kind: memory
+id: bld_memory_skill
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for skill artifact generation

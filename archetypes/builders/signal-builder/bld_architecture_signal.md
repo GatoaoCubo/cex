@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_signal
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of signal — inventory, dependencies, and architectural position

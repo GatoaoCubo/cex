@@ -1,4 +1,6 @@
 ---
+kind: knowledge_card
+id: bld_knowledge_card_iso_package
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for iso_package production — portable agent bundle packaging

@@ -1,10 +1,10 @@
-```yaml
 ---
+kind: tools
+id: bld_tools_lifecycle_rule
 pillar: P04
 llm_function: CALL
 purpose: Tools available for lifecycle_rule production
 ---
-```
 
 # Tools: lifecycle-rule-builder
 

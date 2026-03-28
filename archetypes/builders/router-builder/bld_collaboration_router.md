@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_router
 pillar: P02
 llm_function: COLLABORATE
 purpose: How router-builder works in crews with other builders

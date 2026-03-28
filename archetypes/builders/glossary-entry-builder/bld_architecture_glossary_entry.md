@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_glossary_entry
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of glossary_entry — inventory, dependencies, and architectural position

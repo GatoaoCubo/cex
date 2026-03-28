@@ -1,4 +1,5 @@
 ---
+id: bld_config_naming_rule
 pillar: P09
 llm_function: CONSTRAIN
 kind: config

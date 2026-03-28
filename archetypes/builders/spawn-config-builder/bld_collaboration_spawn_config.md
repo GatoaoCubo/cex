@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_spawn_config
 pillar: P12
 llm_function: COLLABORATE
 purpose: How spawn-config-builder works in crews with other builders

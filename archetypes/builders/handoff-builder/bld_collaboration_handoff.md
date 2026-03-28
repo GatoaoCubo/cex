@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_handoff
 pillar: P12
 llm_function: COLLABORATE
 purpose: How handoff-builder works in crews with other builders

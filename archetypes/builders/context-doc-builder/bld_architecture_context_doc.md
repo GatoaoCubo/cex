@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_context_doc
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of context_doc — inventory, dependencies, and architectural position

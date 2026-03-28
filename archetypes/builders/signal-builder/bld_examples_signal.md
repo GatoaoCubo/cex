@@ -1,4 +1,6 @@
 ---
+kind: examples
+id: bld_examples_signal
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of signal artifacts

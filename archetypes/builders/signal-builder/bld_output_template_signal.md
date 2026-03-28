@@ -1,4 +1,6 @@
 ---
+kind: output_template
+id: bld_output_template_signal
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} that the LLM fills to produce a signal

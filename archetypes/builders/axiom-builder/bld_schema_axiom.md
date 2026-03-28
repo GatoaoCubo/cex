@@ -1,4 +1,6 @@
 ---
+kind: schema
+id: bld_schema_axiom
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema definition for axiom — SINGLE SOURCE OF TRUTH

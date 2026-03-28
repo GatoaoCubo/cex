@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_response_format
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of response_format — inventory, dependencies, and architectural position

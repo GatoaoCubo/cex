@@ -1,4 +1,6 @@
 ---
+kind: tools
+id: bld_tools_action_prompt
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for action_prompt production

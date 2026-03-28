@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_dispatch_rule
 pillar: P12
 llm_function: COLLABORATE
 purpose: How dispatch-rule-builder works in crews with other builders

@@ -1,4 +1,6 @@
 ---
+kind: schema
+id: bld_schema_dag
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema definition for dag - SINGLE SOURCE OF TRUTH

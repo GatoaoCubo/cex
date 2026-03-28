@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_validator_builder_codex
 pillar: P08
 llm_function: DESIGN
 purpose: Dependency map and architecture of validator-builder-codex

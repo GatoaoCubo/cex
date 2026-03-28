@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_input_schema
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of input_schema — inventory, dependencies, and architectural position

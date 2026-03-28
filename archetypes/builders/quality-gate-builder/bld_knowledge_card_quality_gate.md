@@ -1,4 +1,6 @@
 ---
+kind: knowledge_card
+id: bld_knowledge_card_quality_gate
 pillar: P11
 llm_function: INJECT
 purpose: Domain knowledge for quality_gate production — atomic searchable facts

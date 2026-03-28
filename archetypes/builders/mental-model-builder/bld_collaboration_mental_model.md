@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_mental_model
 pillar: P02
 llm_function: COLLABORATE
 purpose: How mental-model-builder works in crews with other builders

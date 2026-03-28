@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_e2e_eval
 pillar: P12
 llm_function: COLLABORATE
 purpose: How e2e-eval-builder works in crews with other builders

@@ -1,4 +1,6 @@
 ---
+kind: tools
+id: bld_tools_golden_test
 pillar: P04
 llm_function: CALL
 purpose: Tools available for golden_test production

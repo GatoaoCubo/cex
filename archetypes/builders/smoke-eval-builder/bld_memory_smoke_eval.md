@@ -1,4 +1,6 @@
 ---
+kind: memory
+id: bld_memory_smoke_eval
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for smoke_eval artifact generation

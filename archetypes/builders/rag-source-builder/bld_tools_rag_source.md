@@ -1,4 +1,6 @@
 ---
+kind: tools
+id: bld_tools_rag_source
 pillar: P04
 llm_function: CALL
 version: 1.0.0

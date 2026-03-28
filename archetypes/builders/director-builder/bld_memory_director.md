@@ -1,4 +1,6 @@
 ---
+kind: memory
+id: bld_memory_director
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for satellite_spec artifact generation

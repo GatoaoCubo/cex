@@ -1,4 +1,6 @@
 ---
+kind: schema
+id: bld_schema_handoff
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema definition for handoff - SINGLE SOURCE OF TRUTH

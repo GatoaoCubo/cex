@@ -1,4 +1,6 @@
 ---
+kind: config
+id: bld_config_handoff
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming conventions, file paths, limits, and operational constraints

@@ -1,4 +1,6 @@
 ---
+kind: tools
+id: bld_tools_dag
 pillar: P04
 llm_function: CALL
 purpose: Tools and runtime surfaces relevant to dag production

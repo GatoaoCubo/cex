@@ -1,4 +1,6 @@
 ---
+kind: memory
+id: bld_memory_validator_builder_codex
 pillar: P10
 llm_function: REMEMBER
 purpose: Persistent heuristics for validator-builder-codex

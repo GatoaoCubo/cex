@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_guardrail
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of guardrail — inventory, dependencies, and architectural position

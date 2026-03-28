@@ -1,4 +1,6 @@
 ---
+kind: meta_instructions
+id: bld_meta_instructions_builder
 meta: true
 file_position: 4/13
 pillar: P03

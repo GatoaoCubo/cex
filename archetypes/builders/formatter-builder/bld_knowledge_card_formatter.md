@@ -1,4 +1,6 @@
 ---
+kind: knowledge_card
+id: bld_knowledge_card_formatter
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for formatter production — output presentation transforms

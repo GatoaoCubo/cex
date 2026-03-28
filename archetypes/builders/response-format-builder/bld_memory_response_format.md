@@ -1,4 +1,6 @@
 ---
+kind: memory
+id: bld_memory_response_format
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for response_format artifact generation

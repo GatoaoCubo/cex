@@ -1,4 +1,6 @@
 ---
+kind: knowledge_card
+id: bld_knowledge_card_smoke_eval
 pillar: P07
 llm_function: INJECT
 purpose: Domain knowledge for smoke_eval production — atomic searchable facts

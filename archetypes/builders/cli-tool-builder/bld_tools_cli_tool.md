@@ -1,4 +1,6 @@
 ---
+kind: tools
+id: bld_tools_cli_tool
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for cli_tool production

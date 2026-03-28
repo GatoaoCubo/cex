@@ -1,4 +1,6 @@
 ---
+kind: tools
+id: bld_tools_optimizer
 pillar: P04
 llm_function: CALL
 purpose: Tools available for optimizer production

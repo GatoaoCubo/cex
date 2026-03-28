@@ -1,4 +1,6 @@
 ---
+kind: config
+id: bld_config_guardrail
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for guardrail production

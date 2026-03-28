@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_unit_eval
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of unit_eval — inventory, dependencies, and architectural position

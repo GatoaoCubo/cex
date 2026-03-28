@@ -1,4 +1,6 @@
 ---
+kind: memory
+id: bld_memory_quality_gate
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for quality_gate artifact generation

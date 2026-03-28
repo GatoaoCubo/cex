@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_component_map
 pillar: P12
 llm_function: COLLABORATE
 purpose: How component-map-builder works in crews with other builders

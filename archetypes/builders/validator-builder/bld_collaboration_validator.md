@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_validator
 pillar: P06
 llm_function: COLLABORATE
 purpose: How validator-builder works in crews with other builders

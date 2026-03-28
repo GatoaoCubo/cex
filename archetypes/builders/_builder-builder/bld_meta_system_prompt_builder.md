@@ -1,4 +1,6 @@
 ---
+kind: meta_system_prompt
+id: bld_meta_system_prompt_builder
 meta: true
 file_position: 2/13
 pillar: P03

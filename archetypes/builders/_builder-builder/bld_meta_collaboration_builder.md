@@ -1,4 +1,6 @@
 ---
+kind: meta_collaboration
+id: bld_meta_collaboration_builder
 meta: true
 file_position: 13/13
 pillar: P12

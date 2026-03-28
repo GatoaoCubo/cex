@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_e2e_eval
 pillar: P08
 llm_function: BECOME
 purpose: Component map of e2e_eval — inventory, dependencies, and architectural position

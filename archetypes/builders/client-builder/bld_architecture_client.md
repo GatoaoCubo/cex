@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_client
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of client — inventory, dependencies, and architectural position

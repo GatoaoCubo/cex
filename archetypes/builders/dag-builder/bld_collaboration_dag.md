@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_dag
 pillar: P12
 llm_function: COLLABORATE
 purpose: How dag-builder works in crews with other builders

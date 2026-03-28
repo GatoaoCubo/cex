@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_naming_rule
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of naming_rule — inventory, dependencies, and architectural position

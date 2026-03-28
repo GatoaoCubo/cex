@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_spawn_config
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of spawn_config — inventory, dependencies, and architectural position

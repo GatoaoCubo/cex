@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_quality_gate
 pillar: P11
 llm_function: COLLABORATE
 purpose: How quality-gate-builder works in crews with other builders

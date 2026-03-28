@@ -1,4 +1,6 @@
 ---
+kind: instruction
+id: bld_instruction_brain_index
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for brain_index

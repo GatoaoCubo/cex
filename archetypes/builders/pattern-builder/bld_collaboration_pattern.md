@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_pattern
 pillar: P08
 llm_function: COLLABORATE
 purpose: How pattern-builder works in crews with other builders

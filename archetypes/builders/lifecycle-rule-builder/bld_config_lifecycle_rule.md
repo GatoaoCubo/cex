@@ -1,11 +1,11 @@
-```yaml
 ---
+kind: config
+id: bld_config_lifecycle_rule
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for lifecycle_rule production
 pattern: CONFIG restricts SCHEMA, never contradicts
 ---
-```
 
 # Config: lifecycle_rule Production Rules
 

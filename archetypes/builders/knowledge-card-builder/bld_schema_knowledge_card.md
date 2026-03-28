@@ -1,4 +1,6 @@
 ---
+kind: schema
+id: bld_schema_knowledge_card
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema for knowledge_card — SINGLE SOURCE OF TRUTH

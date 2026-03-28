@@ -1,4 +1,6 @@
 ---
+kind: system_prompt
+id: bld_system_prompt_validator_builder_codex
 pillar: P03
 llm_function: BECOME
 purpose: System prompt for validator-builder-codex

@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_unit_eval
 pillar: P07
 llm_function: COLLABORATE
 purpose: How unit-eval-builder works in crews with other builders

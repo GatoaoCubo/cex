@@ -1,4 +1,6 @@
 ---
+kind: memory
+id: bld_memory_law
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for law artifact generation

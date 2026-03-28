@@ -1,4 +1,6 @@
 ---
+kind: tools
+id: bld_tools_scoring_rubric
 pillar: P04
 llm_function: CALL
 purpose: Tools available for scoring_rubric production

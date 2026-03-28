@@ -1,4 +1,6 @@
 ---
+kind: knowledge_card
+id: bld_knowledge_card_golden_test
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for golden_test production — quality calibration reference tests

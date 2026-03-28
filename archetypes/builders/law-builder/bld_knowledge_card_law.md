@@ -1,4 +1,6 @@
 ---
+kind: knowledge_card
+id: bld_knowledge_card_law
 pillar: P08
 llm_function: INJECT
 purpose: Domain knowledge for law production — atomic searchable facts

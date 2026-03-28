@@ -1,4 +1,6 @@
 ---
+kind: config
+id: bld_config_context_doc
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Runtime configuration constraints for context_doc production

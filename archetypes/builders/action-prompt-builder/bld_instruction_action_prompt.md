@@ -1,4 +1,6 @@
 ---
+kind: instruction
+id: bld_instruction_action_prompt
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for action_prompt

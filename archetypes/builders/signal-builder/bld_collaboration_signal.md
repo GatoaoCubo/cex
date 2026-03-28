@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_signal
 pillar: P12
 llm_function: COLLABORATE
 purpose: How signal-builder works in crews with other builders

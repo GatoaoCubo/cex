@@ -1,4 +1,6 @@
 ---
+kind: knowledge_card
+id: bld_knowledge_card_env_config
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for env_config production — environment variable specification

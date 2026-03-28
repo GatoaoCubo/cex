@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_lens
 pillar: P02
 llm_function: COLLABORATE
 purpose: How lens-builder works in crews with other builders

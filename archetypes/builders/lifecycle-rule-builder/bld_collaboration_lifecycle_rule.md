@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_lifecycle_rule
 pillar: P11
 llm_function: COLLABORATE
 purpose: How lifecycle-rule-builder works in crews with other builders

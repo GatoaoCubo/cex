@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_input_schema
 pillar: P12
 llm_function: COLLABORATE
 purpose: How input-schema-builder works in crews with other builders

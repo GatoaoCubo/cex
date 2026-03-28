@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_session_state
 pillar: P10
 llm_function: COLLABORATE
 purpose: How session-state-builder works in crews with other builders

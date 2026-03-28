@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_instruction
 pillar: P12
 llm_function: COLLABORATE
 purpose: How instruction-builder works in crews with other builders

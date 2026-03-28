@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_validation_schema
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of validation_schema — inventory, dependencies, and architectural position

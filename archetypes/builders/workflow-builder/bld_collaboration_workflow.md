@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_workflow
 pillar: P12
 llm_function: COLLABORATE
 purpose: How workflow-builder works in crews with other builders

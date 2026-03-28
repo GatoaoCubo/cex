@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_session_state
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of session_state — inventory, dependencies, and architectural position

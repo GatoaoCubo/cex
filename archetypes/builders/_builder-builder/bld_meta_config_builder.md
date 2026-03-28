@@ -1,4 +1,6 @@
 ---
+kind: meta_config
+id: bld_meta_config_builder
 meta: true
 file_position: 10/13
 pillar: P09

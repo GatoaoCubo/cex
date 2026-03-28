@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_benchmark
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of benchmark — inventory, dependencies, and architectural position

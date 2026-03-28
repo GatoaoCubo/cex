@@ -1,4 +1,6 @@
 ---
+kind: tools
+id: bld_tools_validation_schema
 pillar: P04
 llm_function: CALL
 purpose: Tools available for validation_schema production

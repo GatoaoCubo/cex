@@ -1,4 +1,6 @@
 ---
+kind: schema
+id: bld_schema_learning_record
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema definition for learning_record — SINGLE SOURCE OF TRUTH

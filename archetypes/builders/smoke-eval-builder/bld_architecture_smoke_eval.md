@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_smoke_eval
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of smoke_eval — inventory, dependencies, and architectural position

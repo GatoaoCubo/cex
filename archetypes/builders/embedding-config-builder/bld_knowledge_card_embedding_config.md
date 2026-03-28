@@ -1,4 +1,6 @@
 ---
+kind: knowledge_card
+id: bld_knowledge_card_embedding_config
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for embedding_config production — vector model configuration

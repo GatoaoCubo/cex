@@ -1,4 +1,6 @@
 ---
+kind: tools
+id: bld_tools_daemon
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for daemon production

@@ -1,4 +1,6 @@
 ---
+kind: memory
+id: bld_memory_rag_source
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for rag_source artifact generation

@@ -1,4 +1,6 @@
 ---
+kind: knowledge_card
+id: bld_knowledge_card_chain
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for chain production — sequential prompt pipelines

@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_runtime_state
 pillar: P10
 llm_function: COLLABORATE
 purpose: How runtime-state-builder works in crews with other builders

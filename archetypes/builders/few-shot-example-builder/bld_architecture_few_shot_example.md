@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_few_shot_example
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of few_shot_example — inventory, dependencies, and architectural position

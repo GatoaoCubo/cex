@@ -1,4 +1,6 @@
 ---
+kind: tools
+id: bld_tools_embedding_config
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for embedding_config production

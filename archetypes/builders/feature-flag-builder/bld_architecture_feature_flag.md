@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_feature_flag
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of feature_flag — inventory, dependencies, and architectural position

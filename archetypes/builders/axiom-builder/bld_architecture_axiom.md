@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_axiom
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of axiom — inventory, dependencies, and architectural position

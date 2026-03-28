@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_embedding_config
 pillar: P12
 llm_function: COLLABORATE
 purpose: How embedding-config-builder works in crews with other builders

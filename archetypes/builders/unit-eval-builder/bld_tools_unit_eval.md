@@ -1,4 +1,6 @@
 ---
+kind: tools
+id: bld_tools_unit_eval
 pillar: P04
 llm_function: CALL
 purpose: Tools available for unit_eval production

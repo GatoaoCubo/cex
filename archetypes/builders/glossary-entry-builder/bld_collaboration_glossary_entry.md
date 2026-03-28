@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_glossary_entry
 pillar: P12
 llm_function: COLLABORATE
 purpose: How glossary-entry-builder works in crews with other builders

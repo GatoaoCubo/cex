@@ -1,4 +1,6 @@
 ---
+kind: tools
+id: bld_tools_signal
 pillar: P04
 llm_function: CALL
 purpose: Tools and runtime surfaces relevant to signal production

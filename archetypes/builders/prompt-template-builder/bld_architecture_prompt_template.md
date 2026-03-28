@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_prompt_template
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of prompt_template — inventory, dependencies, and architectural position

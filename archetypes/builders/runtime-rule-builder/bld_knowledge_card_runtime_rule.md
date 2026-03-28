@@ -1,4 +1,6 @@
 ---
+kind: knowledge_card
+id: bld_knowledge_card_runtime_rule
 pillar: P09
 llm_function: INJECT
 purpose: Domain knowledge for runtime_rule production — atomic searchable facts

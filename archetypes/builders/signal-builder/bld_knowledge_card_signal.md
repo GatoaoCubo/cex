@@ -1,4 +1,6 @@
 ---
+kind: knowledge_card
+id: bld_knowledge_card_signal
 pillar: P12
 llm_function: INJECT
 purpose: Domain knowledge for signal production — atomic searchable facts

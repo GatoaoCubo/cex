@@ -1,4 +1,6 @@
 ---
+kind: memory
+id: bld_memory_spawn_config
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for spawn_config artifact generation

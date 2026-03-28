@@ -1,4 +1,6 @@
 ---
+kind: knowledge_card
+id: bld_knowledge_card_router
 pillar: P02
 llm_function: INJECT
 purpose: Domain knowledge for router production — atomic searchable facts

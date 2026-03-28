@@ -1,4 +1,6 @@
 ---
+kind: tools
+id: bld_tools_validator_builder_codex
 pillar: P04
 llm_function: EXECUTE
 purpose: Tools and inputs used by validator-builder-codex

@@ -1,4 +1,6 @@
 ---
+kind: memory
+id: bld_memory_workflow
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for workflow artifact generation

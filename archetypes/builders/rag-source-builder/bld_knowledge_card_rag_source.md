@@ -1,4 +1,6 @@
 ---
+kind: knowledge_card
+id: bld_knowledge_card_rag_source
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for rag_source production — atomic searchable facts

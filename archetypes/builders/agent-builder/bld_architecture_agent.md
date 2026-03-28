@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_agent
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of agent — inventory, dependencies, and architectural position

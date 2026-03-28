@@ -1,4 +1,6 @@
 ---
+kind: config
+id: bld_config_brain_index
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for brain_index production

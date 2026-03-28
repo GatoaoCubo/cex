@@ -1,4 +1,6 @@
 ---
+kind: knowledge_card
+id: bld_knowledge_card_permission
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for permission production — atomic searchable facts

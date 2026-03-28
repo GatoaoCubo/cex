@@ -1,4 +1,6 @@
 ---
+kind: tools
+id: bld_tools_dispatch_rule
 pillar: P04
 llm_function: CALL
 purpose: Tools and runtime surfaces relevant to dispatch_rule production

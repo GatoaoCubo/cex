@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_diagram
 pillar: P12
 llm_function: COLLABORATE
 purpose: How diagram-builder works in crews with other builders

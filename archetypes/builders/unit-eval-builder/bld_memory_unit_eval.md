@@ -1,4 +1,6 @@
 ---
+kind: memory
+id: bld_memory_unit_eval
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for unit_eval artifact generation

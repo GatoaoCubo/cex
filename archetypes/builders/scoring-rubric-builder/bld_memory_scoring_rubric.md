@@ -1,4 +1,6 @@
 ---
+kind: memory
+id: bld_memory_scoring_rubric
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for scoring_rubric artifact generation

@@ -1,4 +1,6 @@
 ---
+kind: knowledge_card
+id: bld_knowledge_card_learning_record
 pillar: P10
 llm_function: INJECT
 purpose: Domain knowledge for learning_record production — atomic searchable facts

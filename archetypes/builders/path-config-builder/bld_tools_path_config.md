@@ -1,4 +1,6 @@
 ---
+kind: tools
+id: bld_tools_path_config
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for path_config production

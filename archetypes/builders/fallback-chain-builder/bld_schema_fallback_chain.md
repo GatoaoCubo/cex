@@ -1,4 +1,6 @@
 ---
+kind: schema
+id: bld_schema_fallback_chain
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for fallback_chain

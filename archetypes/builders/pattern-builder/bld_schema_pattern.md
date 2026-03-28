@@ -1,4 +1,6 @@
 ---
+kind: schema
+id: bld_schema_pattern
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema definition for pattern — SINGLE SOURCE OF TRUTH

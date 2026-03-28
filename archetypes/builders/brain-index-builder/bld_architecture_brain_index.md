@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_brain_index
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of brain_index — inventory, dependencies, and architectural position

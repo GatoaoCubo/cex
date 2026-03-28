@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_daemon
 pillar: P12
 llm_function: COLLABORATE
 purpose: How daemon-builder works in crews with other builders

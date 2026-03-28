@@ -1,4 +1,6 @@
 ---
+kind: schema
+id: bld_schema_rag_source
 pillar: P06
 llm_function: CONSTRAIN
 role: source_of_truth

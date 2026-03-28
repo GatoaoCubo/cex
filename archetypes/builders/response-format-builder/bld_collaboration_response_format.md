@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_response_format
 pillar: P05
 llm_function: COLLABORATE
 purpose: How response-format-builder works in crews with other builders

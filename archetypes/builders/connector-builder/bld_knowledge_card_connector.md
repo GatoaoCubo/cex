@@ -1,4 +1,6 @@
 ---
+kind: knowledge_card
+id: bld_knowledge_card_connector
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for connector production — bidirectional service integration

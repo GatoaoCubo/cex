@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_cli_tool
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of cli_tool — inventory, dependencies, and architectural position

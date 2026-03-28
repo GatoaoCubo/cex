@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_mental_model
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of mental_model — inventory, dependencies, and architectural position

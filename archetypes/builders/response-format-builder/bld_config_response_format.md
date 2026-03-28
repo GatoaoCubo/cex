@@ -1,4 +1,6 @@
 ---
+kind: config
+id: bld_config_response_format
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for response_format production

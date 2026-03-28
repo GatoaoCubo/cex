@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_learning_record
 pillar: P10
 llm_function: COLLABORATE
 purpose: How learning-record-builder works in crews with other builders

@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_quality_gate
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of quality_gate — inventory, dependencies, and architectural position

@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_diagram
 pillar: P08
 llm_function: BECOME
 purpose: Component map of diagram — inventory, dependencies, and architectural position

@@ -1,4 +1,6 @@
 ---
+kind: memory
+id: bld_memory_naming_rule
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for naming_rule artifact generation

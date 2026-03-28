@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_guardrail
 pillar: P12
 llm_function: COLLABORATE
 purpose: How guardrail-builder works in crews with other builders

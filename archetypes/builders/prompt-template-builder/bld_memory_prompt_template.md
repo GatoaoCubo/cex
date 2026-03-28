@@ -1,4 +1,6 @@
 ---
+kind: memory
+id: bld_memory_prompt_template
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for prompt_template artifact generation

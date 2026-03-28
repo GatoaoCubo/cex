@@ -1,4 +1,6 @@
 ---
+kind: knowledge_card
+id: bld_knowledge_card_mcp_server
 pillar: P04
 llm_function: INJECT
 purpose: Domain knowledge for mcp_server production — atomic searchable facts

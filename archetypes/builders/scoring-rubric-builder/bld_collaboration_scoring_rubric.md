@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_scoring_rubric
 pillar: P07
 llm_function: COLLABORATE
 purpose: How scoring-rubric-builder works in crews with other builders

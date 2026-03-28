@@ -1,4 +1,6 @@
 ---
+kind: knowledge_card
+id: bld_knowledge_card_context_doc
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for context_doc production — domain background for prompt hydration

@@ -1,4 +1,6 @@
 ---
+kind: knowledge_card
+id: bld_knowledge_card_input_schema
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for input_schema production — unilateral entry contracts

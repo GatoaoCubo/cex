@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_feature_flag
 pillar: P12
 llm_function: COLLABORATE
 purpose: How feature-flag-builder works in crews with other builders

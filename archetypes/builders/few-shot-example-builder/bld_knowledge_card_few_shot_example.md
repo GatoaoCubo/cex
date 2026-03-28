@@ -1,4 +1,6 @@
 ---
+kind: knowledge_card
+id: bld_knowledge_card_few_shot_example
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for few_shot_example production — format-teaching I/O pairs

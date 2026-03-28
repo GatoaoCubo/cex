@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_action_prompt
 pillar: P12
 llm_function: COLLABORATE
 purpose: How action-prompt-builder works in crews with other builders

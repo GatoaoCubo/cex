@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_boot_config
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of boot_config — inventory, dependencies, and architectural position

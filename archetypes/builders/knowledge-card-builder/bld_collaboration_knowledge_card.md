@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_knowledge_card
 pillar: P12
 llm_function: COLLABORATE
 purpose: How knowledge-card-builder works in crews with other builders

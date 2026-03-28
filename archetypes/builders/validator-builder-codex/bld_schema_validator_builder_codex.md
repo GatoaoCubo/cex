@@ -1,4 +1,6 @@
 ---
+kind: schema
+id: bld_schema_validator_builder_codex
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema definition for validator - SINGLE SOURCE OF TRUTH

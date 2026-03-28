@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_type_def
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of type_def — inventory, dependencies, and architectural position

@@ -1,4 +1,6 @@
 ---
+kind: memory
+id: bld_memory_mcp_server
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for mcp_server artifact generation

@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_embedding_config
 pillar: P08
 llm_function: BECOME
 purpose: Component map of embedding_config — inventory, dependencies, and architectural position

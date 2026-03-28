@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_iso_package
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of iso_package — inventory, dependencies, and architectural position

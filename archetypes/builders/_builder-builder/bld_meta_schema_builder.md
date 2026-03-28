@@ -1,4 +1,6 @@
 ---
+kind: meta_schema
+id: bld_meta_schema_builder
 meta: true
 file_position: 7/13
 pillar: P06

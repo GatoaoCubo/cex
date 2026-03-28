@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_env_config
 pillar: P08
 llm_function: GOVERN
 purpose: Component map of env_config — inventory, dependencies, and architectural position

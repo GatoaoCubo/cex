@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_runtime_rule
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of runtime_rule — inventory, dependencies, and architectural position

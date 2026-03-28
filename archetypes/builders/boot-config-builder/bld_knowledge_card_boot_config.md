@@ -1,4 +1,6 @@
 ---
+kind: knowledge_card
+id: bld_knowledge_card_boot_config
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for boot_config production — agent initialization per provider

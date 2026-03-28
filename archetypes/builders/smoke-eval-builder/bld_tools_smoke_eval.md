@@ -1,4 +1,6 @@
 ---
+kind: tools
+id: bld_tools_smoke_eval
 pillar: P04
 llm_function: CALL
 purpose: Tools available for smoke_eval production

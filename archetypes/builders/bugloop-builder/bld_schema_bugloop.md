@@ -1,4 +1,6 @@
 ---
+kind: schema
+id: bld_schema_bugloop
 pillar: P11
 llm_function: GOVERN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for bugloop

@@ -1,4 +1,6 @@
 ---
+kind: instruction
+id: bld_instruction_golden_test
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for golden_test

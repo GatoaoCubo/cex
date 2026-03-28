@@ -1,4 +1,6 @@
 ---
+kind: memory
+id: bld_memory_model_card
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for model_card artifact generation

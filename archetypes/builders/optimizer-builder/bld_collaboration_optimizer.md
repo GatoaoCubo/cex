@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_optimizer
 pillar: P11
 llm_function: COLLABORATE
 purpose: How optimizer-builder works in crews with other builders

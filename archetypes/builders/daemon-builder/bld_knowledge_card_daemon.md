@@ -1,4 +1,6 @@
 ---
+kind: knowledge_card
+id: bld_knowledge_card_daemon
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for daemon production — persistent background process specification

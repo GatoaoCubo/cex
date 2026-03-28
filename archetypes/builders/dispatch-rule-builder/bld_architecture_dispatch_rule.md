@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_dispatch_rule
 pillar: P08
 llm_function: REASON
 purpose: Component map of dispatch_rule — inventory, dependencies, and architectural position

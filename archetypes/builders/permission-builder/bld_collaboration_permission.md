@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_permission
 pillar: P09
 llm_function: COLLABORATE
 purpose: How permission-builder works in crews with other builders

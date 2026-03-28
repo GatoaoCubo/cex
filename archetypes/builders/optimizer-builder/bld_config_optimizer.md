@@ -1,4 +1,6 @@
 ---
+kind: config
+id: bld_config_optimizer
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for optimizer production

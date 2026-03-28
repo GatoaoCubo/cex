@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_scraper
 pillar: P04
 llm_function: COLLABORATE
 purpose: How scraper-builder works in crews with other builders

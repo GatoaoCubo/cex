@@ -1,4 +1,6 @@
 ---
+kind: memory
+id: bld_memory_learning_record
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for learning_record artifact generation

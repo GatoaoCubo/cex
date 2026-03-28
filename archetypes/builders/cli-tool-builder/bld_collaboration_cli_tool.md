@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_cli_tool
 pillar: P12
 llm_function: COLLABORATE
 purpose: How cli-tool-builder works in crews with other builders

@@ -1,4 +1,6 @@
 ---
+kind: schema
+id: bld_schema_session_state
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema definition for session_state - SINGLE SOURCE OF TRUTH

@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_skill
 pillar: P04
 llm_function: COLLABORATE
 purpose: How skill-builder works in crews with other builders

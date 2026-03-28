@@ -1,4 +1,6 @@
 ---
+kind: tools
+id: bld_tools_brain_index
 pillar: P04
 llm_function: CALL
 purpose: Tools available for brain_index production

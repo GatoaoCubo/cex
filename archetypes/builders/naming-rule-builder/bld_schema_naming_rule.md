@@ -1,4 +1,5 @@
 ---
+id: bld_schema_naming_rule
 pillar: P06
 llm_function: CONSTRAIN
 kind: schema

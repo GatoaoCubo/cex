@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_system_prompt
 pillar: P03
 llm_function: COLLABORATE
 purpose: How system-prompt-builder works in crews with other builders

@@ -1,4 +1,6 @@
 ---
+kind: knowledge_card
+id: bld_knowledge_card_skill
 pillar: P04
 llm_function: INJECT
 purpose: Domain knowledge for skill production — atomic searchable facts

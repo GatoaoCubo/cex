@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_router
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of router — inventory, dependencies, and architectural position

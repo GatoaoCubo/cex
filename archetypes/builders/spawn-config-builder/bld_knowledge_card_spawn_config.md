@@ -1,4 +1,6 @@
 ---
+kind: knowledge_card
+id: bld_knowledge_card_spawn_config
 pillar: P12
 llm_function: INJECT
 purpose: Domain knowledge for spawn_config production — atomic searchable facts

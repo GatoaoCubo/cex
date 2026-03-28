@@ -1,4 +1,6 @@
 ---
+kind: config
+id: bld_config_permission
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for permission production

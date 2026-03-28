@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_formatter
 pillar: P12
 llm_function: COLLABORATE
 purpose: How formatter-builder works in crews with other builders

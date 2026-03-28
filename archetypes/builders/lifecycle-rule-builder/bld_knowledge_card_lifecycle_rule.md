@@ -1,4 +1,6 @@
 ---
+kind: knowledge_card
+id: bld_knowledge_card_lifecycle_rule
 pillar: P11
 llm_function: INJECT
 purpose: Domain knowledge for lifecycle_rule production — atomic searchable facts

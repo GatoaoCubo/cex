@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_plugin
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of plugin — inventory, dependencies, and architectural position

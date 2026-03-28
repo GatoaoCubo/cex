@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_benchmark
 pillar: P12
 llm_function: COLLABORATE
 purpose: How benchmark-builder works in crews with other builders

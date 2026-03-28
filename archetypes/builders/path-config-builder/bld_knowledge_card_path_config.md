@@ -1,4 +1,6 @@
 ---
+kind: knowledge_card
+id: bld_knowledge_card_path_config
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for path_config production — atomic searchable facts

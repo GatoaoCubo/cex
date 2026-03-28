@@ -1,4 +1,6 @@
 ---
+kind: instruction
+id: bld_instruction_e2e_eval
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for e2e_eval

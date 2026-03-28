@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_scoring_rubric
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of scoring_rubric — inventory, dependencies, and architectural position

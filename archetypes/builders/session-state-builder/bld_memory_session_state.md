@@ -1,4 +1,6 @@
 ---
+kind: memory
+id: bld_memory_session_state
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for session_state artifact generation

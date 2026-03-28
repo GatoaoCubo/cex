@@ -1,4 +1,6 @@
 ---
+kind: schema
+id: bld_schema_mcp_server
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for mcp_server

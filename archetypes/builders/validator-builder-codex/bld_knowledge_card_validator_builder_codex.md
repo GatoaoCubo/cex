@@ -1,4 +1,6 @@
 ---
+kind: knowledge_card
+id: bld_knowledge_card_validator_builder_codex
 pillar: P01
 llm_function: DISTILL
 purpose: Core domain knowledge for producing validator artifacts

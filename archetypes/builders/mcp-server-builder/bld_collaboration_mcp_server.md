@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_mcp_server
 pillar: P04
 llm_function: COLLABORATE
 purpose: How mcp-server-builder works in crews with other builders

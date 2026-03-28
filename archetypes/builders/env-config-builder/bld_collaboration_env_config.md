@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_env_config
 pillar: P12
 llm_function: COLLABORATE
 purpose: How env-config-builder works in crews with other builders

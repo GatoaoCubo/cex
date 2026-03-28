@@ -1,4 +1,6 @@
 ---
+kind: knowledge_card
+id: bld_knowledge_card_instruction
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for instruction production — operational step-by-step recipes

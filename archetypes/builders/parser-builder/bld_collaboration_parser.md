@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_parser
 pillar: P05
 llm_function: COLLABORATE
 purpose: How parser-builder works in crews with other builders

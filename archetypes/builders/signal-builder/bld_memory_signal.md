@@ -1,4 +1,6 @@
 ---
+kind: memory
+id: bld_memory_signal
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for signal artifact generation

@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_brain_index
 pillar: P12
 llm_function: COLLABORATE
 purpose: How brain-index-builder works in crews with other builders

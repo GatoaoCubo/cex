@@ -1,4 +1,6 @@
 ---
+kind: tools
+id: bld_tools_few_shot_example
 pillar: P04
 llm_function: CALL
 purpose: Tools available to few-shot-example-builder

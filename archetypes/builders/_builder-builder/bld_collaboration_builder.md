@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_builder
 pillar: P12
 llm_function: COLLABORATE
 purpose: How _builder-builder works in crews with other builders

@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_daemon
 pillar: P08
 llm_function: GOVERN
 purpose: Component map of daemon — inventory, dependencies, and architectural position

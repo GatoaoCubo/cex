@@ -1,4 +1,6 @@
 ---
+kind: knowledge_card
+id: bld_knowledge_card_brain_index
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for brain_index production — semantic search index configuration

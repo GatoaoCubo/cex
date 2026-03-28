@@ -1,3 +1,8 @@
+---
+kind: norms
+id: bld_norms
+---
+
 # Builder Norms (inject in every builder handoff)
 
 ## Mandatory Rules (learned from deep review)

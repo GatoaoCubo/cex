@@ -1,4 +1,6 @@
 ---
+kind: memory
+id: bld_memory_system_prompt
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for system_prompt artifact generation

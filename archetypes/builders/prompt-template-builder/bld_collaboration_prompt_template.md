@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_prompt_template
 pillar: P03
 llm_function: COLLABORATE
 purpose: How prompt-template-builder works in crews with other builders

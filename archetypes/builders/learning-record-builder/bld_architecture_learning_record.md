@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_learning_record
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of learning_record — inventory, dependencies, and architectural position

@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_rag_source
 pillar: P01
 llm_function: COLLABORATE
 purpose: How rag-source-builder works in crews with other builders

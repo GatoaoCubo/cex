@@ -1,4 +1,6 @@
 ---
+kind: meta_examples
+id: bld_meta_examples_builder
 meta: true
 file_position: 8/13
 pillar: P07

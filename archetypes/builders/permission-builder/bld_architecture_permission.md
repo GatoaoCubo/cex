@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_permission
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of permission — inventory, dependencies, and architectural position

@@ -1,4 +1,6 @@
 ---
+kind: tools
+id: bld_tools_response_format
 pillar: P04
 llm_function: CALL
 purpose: Tools available for response_format production

@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_interface
 pillar: P12
 llm_function: COLLABORATE
 purpose: How interface-builder works in crews with other builders

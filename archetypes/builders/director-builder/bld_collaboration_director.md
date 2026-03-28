@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_director
 pillar: P08
 llm_function: COLLABORATE
 purpose: How satellite-spec-builder works in crews with other builders

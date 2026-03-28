@@ -1,4 +1,6 @@
 ---
+kind: schema
+id: bld_schema_director
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for satellite_spec

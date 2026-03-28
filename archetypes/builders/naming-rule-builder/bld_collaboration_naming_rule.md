@@ -1,4 +1,6 @@
 ---
+kind: collaboration
+id: bld_collaboration_naming_rule
 pillar: P05
 llm_function: COLLABORATE
 purpose: How naming-rule-builder works in crews with other builders

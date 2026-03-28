@@ -1,4 +1,6 @@
 ---
+kind: tools
+id: bld_tools_runtime_state
 pillar: P04
 llm_function: CALL
 purpose: Tools available for runtime_state production

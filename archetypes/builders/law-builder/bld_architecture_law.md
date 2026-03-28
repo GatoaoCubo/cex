@@ -1,4 +1,6 @@
 ---
+kind: architecture
+id: bld_architecture_law
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of law — inventory, dependencies, and architectural position

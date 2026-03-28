@@ -1,4 +1,6 @@
 ---
+kind: config
+id: bld_config_smoke_eval
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for smoke_eval production

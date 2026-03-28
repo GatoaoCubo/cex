@@ -1,4 +1,6 @@
 ---
+kind: meta_knowledge
+id: bld_meta_knowledge_builder
 meta: true
 file_position: 3/13
 pillar: P01

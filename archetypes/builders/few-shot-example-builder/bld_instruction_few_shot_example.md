@@ -1,4 +1,6 @@
 ---
+kind: instruction
+id: bld_instruction_few_shot_example
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for few_shot_example
