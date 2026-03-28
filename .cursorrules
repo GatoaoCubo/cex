@@ -1,6 +1,6 @@
-# CEX — LLM Entry Point
+# CEX — Cursor IDE Instructions
 
-> **You are inside a CEX repository.** This is a typed, indexed knowledge base
+> You are inside a **CEX repository** — a typed, indexed knowledge base
 > for building LLM agents. Navigate by filename. Every file follows
 > `{layer}_{kind}_{topic}.{ext}`.
 
@@ -16,30 +16,26 @@
 | L3 Engine | `_tools/` | CLI pipeline, validators, compiler |
 | L4 Root | `CLAUDE.md`, `README.md`, `INDEX.md` | Entry points and navigation |
 
-## Quick Navigation
+## Navigation: How to Find Things
 
-| Need | Where |
-|------|-------|
-| Architecture deep dive | `_docs/ARCHITECTURE.md` |
-| 8 LLM Functions | `LLM_PIPELINE.md` |
-| Governance rules | `archetypes/CODEX.md` |
-| Whitepaper | `_docs/WHITEPAPER_CEX.md` |
-| Naming rules | `_docs/NAMING_CONVENTION.md` |
-| Architecture map | `CEX_ARCHITECTURE_MAP.md` |
-| All builders | `archetypes/builders/` |
+1. **Start**: Read `CLAUDE.md` (function table) or `INDEX.md` (full listing)
+2. **By function**: Find builders via `archetypes/builders/{type}-builder/`
+3. **By pillar**: Browse `P{NN}_{name}/` (12 pillars, 78 artifact types)
+4. **By domain**: Browse `N{XX}_{name}/` (7 nuclei = business domains)
+5. **By architecture**: Read `_docs/ARCHITECTURE.md` or `CEX_ARCHITECTURE_MAP.md`
 
-## Find by Function
+## The 8 LLM Functions (Pipeline Order)
 
-| Function | Verb | Find | Pillars |
-|----------|------|------|---------|
-| BECOME | Be | `find -name "bld_system_prompt_*"` | P02, P03 |
-| INJECT | Know | `find -name "bld_knowledge_card_*"` | P01, P10 |
-| REASON | Think | `find -name "bld_instruction_*"` | P03 |
-| CALL | Do | `find -name "bld_tools_*"` | P04 |
-| PRODUCE | Generate | `find -name "bld_output_template_*"` | P05 |
-| CONSTRAIN | Restrict | `find -name "bld_schema_*"` | P06, P08 |
-| GOVERN | Evaluate | `find -name "bld_quality_gate_*"` | P07, P09, P11 |
-| COLLABORATE | Coordinate | `find -name "bld_collaboration_*"` | P12 |
+| # | Function | Verb | What It Does |
+|---|----------|------|--------------|
+| 1 | BECOME | Be | Identity, persona, system prompt |
+| 2 | INJECT | Know | Context, knowledge cards |
+| 3 | REASON | Think | Chain-of-thought, planning |
+| 4 | CALL | Do | Tools, APIs, MCP servers |
+| 5 | PRODUCE | Generate | Final output |
+| 6 | CONSTRAIN | Restrict | Schemas, validation |
+| 7 | GOVERN | Evaluate | Quality gates, evals |
+| 8 | COLLABORATE | Coordinate | Signals, handoffs, orchestration |
 
 These are a **pipeline** (sequential), not categories.
 
@@ -84,9 +80,19 @@ ex_   = example (L1)     | ex_knowledge_card_rag.md
 ```
 
 Rules: `lowercase`, `snake_case`, ASCII only, max 50 chars.
-Every artifact exists as dual output: `.md` (human) + `.yaml`/`.json` (machine).
 
-## Tools
+## Key Paths
+
+| What | Where |
+|------|-------|
+| All builders | `archetypes/builders/` |
+| Builder governance | `archetypes/CODEX.md` |
+| Pipeline spec | `LLM_PIPELINE.md` |
+| Architecture | `_docs/ARCHITECTURE.md` |
+| Naming rules | `_docs/NAMING_CONVENTION.md` |
+| Tools | `_tools/` |
+
+## Tools Available
 
 | Tool | Command | Purpose |
 |------|---------|---------|
@@ -104,4 +110,12 @@ Every artifact exists as dual output: `.md` (human) + `.yaml`/`.json` (machine).
 | >= 7.0 | Learning | Experimental |
 | < 7.0 | Rejected | Redo |
 
-Density minimum: 0.8. YAML frontmatter required (id, type, quality, keywords).
+Density minimum: 0.8. Every artifact exists in dual format (.md + compiled .yaml/.json).
+
+## Rules
+
+- Every artifact has YAML frontmatter (id, type, quality, keywords)
+- `id` must equal the filename stem
+- Nucleus schemas inherit from root pillar schemas (never remove fields, only add)
+- Builders have 13 ISO files each — cross-validate before commit
+- Bullets with max 80 chars, no prose blocks > 3 lines
