@@ -1,8 +1,8 @@
 # CEX — LLM Entry Point
 
-> **You are inside a CEX repository.** This is a typed, indexed knowledge base
-> for building LLM agents. Navigate by filename. Every file follows
-> `{layer}_{kind}_{topic}.{ext}`.
+> **You are inside a CEX repository.** A typed, indexed knowledge base
+> for building LLM agents. 69 kinds, 69 builders, 12 pillars, 7 nuclei.
+> Navigate by filename: `{layer}_{kind}_{topic}.{ext}`.
 
 ---
 
@@ -10,90 +10,93 @@
 
 | Layer | Location | Contains |
 |-------|----------|----------|
-| L0 DNA | `archetypes/builders/{type}-builder/` | 13 ISO files per builder (factory blueprints) |
-| L1 Schema | `P01_knowledge/` — `P12_orchestration/` | `_schema.yaml` + `templates/` + `examples/` |
+| L0 DNA | `archetypes/builders/{kind}-builder/` | 13 ISO files per builder (factory) |
+| L1 Schema | `P01_knowledge/` — `P12_orchestration/` | `_schema.yaml` + `templates/` + `examples/` + `compiled/` |
 | L2 Instance | `N01_intelligence/` — `N07_admin/` | Domain-specific instances (7 nuclei) |
-| L3 Engine | `_tools/` | CLI pipeline, validators, compiler |
+| L3 Engine | `_tools/` | 17 CLI tools (forge, motor, crew, doctor, compile, ...) |
 | L4 Root | `CLAUDE.md`, `README.md`, `INDEX.md` | Entry points and navigation |
 
 ## Quick Navigation
 
 | Need | Where |
 |------|-------|
-| Architecture deep dive | `_docs/ARCHITECTURE.md` |
+| How CEX works | `README.md` |
 | 8 LLM Functions | `LLM_PIPELINE.md` |
-| Governance rules | `archetypes/CODEX.md` |
+| Architecture deep dive | `_docs/ARCHITECTURE.md` |
 | Whitepaper | `_docs/WHITEPAPER_CEX.md` |
+| Governance rules | `archetypes/CODEX.md` |
 | Naming rules | `_docs/NAMING_CONVENTION.md` |
-| Architecture map | `CEX_ARCHITECTURE_MAP.md` |
-| All builders | `archetypes/builders/` |
+| Visual architecture map | `CEX_ARCHITECTURE_MAP.md` |
+| Motor 8F spec | `_docs/MOTOR_8F_SPEC.md` |
+| Crew patterns research | `_docs/CREW_PATTERNS_RESEARCH.md` |
 
-## Find by Function
+## 12 Pillars × 69 Kinds
 
-| Function | Verb | Find | Pillars |
-|----------|------|------|---------|
-| BECOME | Be | `find -name "bld_system_prompt_*"` | P02, P03 |
-| INJECT | Know | `find -name "bld_knowledge_card_*"` | P01, P10 |
-| REASON | Think | `find -name "bld_instruction_*"` | P03 |
-| CALL | Do | `find -name "bld_tools_*"` | P04 |
-| PRODUCE | Generate | `find -name "bld_output_template_*"` | P05 |
-| CONSTRAIN | Restrict | `find -name "bld_schema_*"` | P06, P08 |
-| GOVERN | Evaluate | `find -name "bld_quality_gate_*"` | P07, P09, P11 |
-| COLLABORATE | Coordinate | `find -name "bld_collaboration_*"` | P12 |
+| Pillar | Name | Kinds | Primary Types |
+|--------|------|:-----:|---------------|
+| P01 | Knowledge | 6 | knowledge_card, rag_source, glossary_entry, context_doc, embedding_config, few_shot_example |
+| P02 | Model | 9 | agent, lens, boot_config, mental_model, model_card, router, fallback_chain, iso_package, axiom |
+| P03 | Prompt | 5 | system_prompt, prompt_template, chain, action_prompt, instruction |
+| P04 | Tools | 9 | skill, mcp_server, hook, plugin, client, cli_tool, scraper, connector, daemon |
+| P05 | Output | 4 | response_format, parser, formatter, naming_rule |
+| P06 | Schema | 5 | input_schema, type_def, validator, interface, validation_schema |
+| P07 | Evals | 6 | unit_eval, smoke_eval, e2e_eval, benchmark, golden_test, scoring_rubric |
+| P08 | Architecture | 5 | pattern, law, diagram, component_map, director |
+| P09 | Config | 5 | env_config, path_config, permission, feature_flag, runtime_rule |
+| P10 | Memory | 4 | runtime_state, brain_index, learning_record, session_state |
+| P11 | Feedback | 5 | quality_gate, bugloop, lifecycle_rule, guardrail, optimizer |
+| P12 | Orchestration | 6 | workflow, dag, spawn_config, signal, handoff, dispatch_rule |
 
-These are a **pipeline** (sequential), not categories.
+## 8 Functions (Pipeline)
 
-## 12 Pillars
+| # | Function | Verb | Pillar Sources | Find builders |
+|---|----------|------|---------------|---------------|
+| 1 | BECOME | Be | P02, P03 | `bld_system_prompt_*`, `bld_manifest_*` |
+| 2 | INJECT | Know | P01, P10 | `bld_knowledge_card_*`, `bld_memory_*` |
+| 3 | REASON | Think | P03 | `bld_instruction_*` |
+| 4 | CALL | Do | P04 | `bld_tools_*` |
+| 5 | PRODUCE | Generate | P05 | `bld_output_template_*` |
+| 6 | CONSTRAIN | Restrict | P06, P08 | `bld_schema_*` |
+| 7 | GOVERN | Evaluate | P07, P11 | `bld_quality_gate_*` |
+| 8 | COLLABORATE | Coordinate | P12 | `bld_collaboration_*` |
 
-| ID | Name | Primary Types |
-|----|------|---------------|
-| P01 | Knowledge | knowledge_card, rag_source, glossary_entry |
-| P02 | Model | agent, lens, boot_config, mental_model |
-| P03 | Prompt | system_prompt, prompt_template, chain_of_thought |
-| P04 | Tools | skill, mcp_server, hook, plugin, cli_tool |
-| P05 | Output | response_format, parser, formatter |
-| P06 | Schema | input_schema, type_def, validator |
-| P07 | Evals | unit_eval, smoke_eval, benchmark, golden_test |
-| P08 | Architecture | pattern, law, diagram, component_map |
-| P09 | Config | env_config, path_config, feature_flag |
-| P10 | Memory | runtime_state, brain_index, learning_record |
-| P11 | Feedback | quality_gate, bugloop, guardrail |
-| P12 | Orchestration | workflow, dag, spawn_config, signal, handoff |
+Sequential pipeline. BECOME before INJECT. GOVERN before COLLABORATE.
 
-## 7 Nuclei (Business Domains)
+## 7 Nuclei
 
-| ID | Directory | Domain |
-|----|-----------|--------|
-| N01 | N01_intelligence | Research |
-| N02 | N02_marketing | Marketing |
-| N03 | N03_engineering | Engineering |
-| N04 | N04_knowledge | Knowledge management |
-| N05 | N05_operations | Operations |
-| N06 | N06_commercial | Commercial |
-| N07 | N07_admin | Administration |
+| ID | Domain | Files | Status |
+|----|--------|:-----:|--------|
+| N01 | Intelligence | 6 | Skeleton |
+| N02 | Marketing | 5 | Skeleton |
+| N03 | Engineering | 3 | Skeleton |
+| N04 | Knowledge | 2 | Skeleton |
+| N05 | Operations | 2 | Skeleton |
+| N06 | Commercial | 2 | Skeleton |
+| N07 | Admin | 2 | Skeleton |
+
+## Tools (L3 Engine)
+
+| Tool | Command | Purpose |
+|------|---------|---------|
+| **Forge v2** | `python _tools/cex_forge.py --lp P01 --type knowledge_card --seeds "x" --builder` | Generate artifact with builder context |
+| **Motor 8F** | `python _tools/cex_8f_motor.py --intent "create sales agent"` | Decompose intent into builder plan |
+| **Crew Runner** | `python _tools/cex_crew_runner.py --plan plan.json --dry-run` | Orchestrate builder pipeline |
+| **Doctor** | `python _tools/cex_doctor.py` | Validate repo health |
+| **Compile** | `python _tools/cex_compile.py --all` | .md → .yaml/.json |
+| **Pipeline** | `python _tools/cex_pipeline.py --type X --topic Y` | 5-stage build |
+| **Init** | `python _tools/cex_init.py` | Scaffold new CEX project |
+| **Compare** | `python _tools/compare_builders.py --original X --generated Y` | Diff builders |
 
 ## Naming Grammar
 
 ```
-{layer}_{kind}_{topic}.{ext}
-
-bld_  = builder (L0)     | bld_system_prompt_agent.md
-tpl_  = template (L1)    | tpl_knowledge_card.md
-ex_   = example (L1)     | ex_knowledge_card_rag.md
-(none)= instance (L2)    | knowledge_card_company_product.md
+bld_{iso}_{kind}.md   = Builder ISO file (L0)
+tpl_{kind}.md         = Template (L1)
+ex_{kind}_{topic}.md  = Example (L1)
+{kind}_{topic}.md     = Instance (L2, in nuclei)
 ```
 
-Rules: `lowercase`, `snake_case`, ASCII only, max 50 chars.
-Every artifact exists as dual output: `.md` (human) + `.yaml`/`.json` (machine).
-
-## Tools
-
-| Tool | Command | Purpose |
-|------|---------|---------|
-| Doctor | `python _tools/cex_doctor.py` | Health check: validates structure |
-| Validate | `python _tools/validate_builder.py` | Validates builder ISO completeness |
-| Compile | `python _tools/cex_compile.py --all` | Compiles .md to .yaml/.json |
-| Distill | `python _tools/distill.py` | Extracts YAML frontmatter |
+Lowercase. Snake_case. ASCII only. Max 50 chars.
 
 ## Quality Gate
 
@@ -104,4 +107,4 @@ Every artifact exists as dual output: `.md` (human) + `.yaml`/`.json` (machine).
 | >= 7.0 | Learning | Experimental |
 | < 7.0 | Rejected | Redo |
 
-Density minimum: 0.8. YAML frontmatter required (id, type, quality, keywords).
+Density >= 0.80. Frontmatter required: `id`, `kind`, `pillar`, `title`.

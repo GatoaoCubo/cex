@@ -1,5 +1,5 @@
 # CEX Architecture v3.0
-## Molde Inviolavel - Estrutura Fractal 7x12x78 + Engine Layer
+## Molde Inviolavel - Estrutura Fractal 7x12x69 + Engine Layer
 
 **Status**: CONSOLIDADO | **Data**: 2026-03-28 | **Quebrar**: PROIBIDO
 
@@ -54,7 +54,7 @@ Todo sistema LLM — de prompt a satellite — executa estas funcoes nesta ordem
 
 ---
 
-## 3. Os 12 pillars x 78 Types
+## 3. Os 12 pillars x 69 Types
 
 | pillar | Nome | Types |
 |----|------|-------|
@@ -77,7 +77,7 @@ Todo sistema LLM — de prompt a satellite — executa estas funcoes nesta ordem
 
 | O que | Fonte (.md) | Compiled | Quem sincroniza |
 |-------|-------------|----------|-----------------|
-| Artefatos (78 kinds) | YAML frontmatter + MD body | `.yaml` ou `.json` | distill.py |
+| Artefatos (69 kinds) | YAML frontmatter + MD body | `.yaml` ou `.json` | distill.py |
 | Schemas | `.yaml` only | N/A | manual |
 | Builders (13 ISO) | `.md` only | N/A | manual |
 | Meta-docs | `.md` only | N/A | manual |
@@ -191,7 +191,7 @@ Score <  7.0 -> auto-archive
 | Pillars | 12 (x7 = 84) |
 | Types | 78 (x7 = 546 dirs) |
 | Builders (bld_*) | 932 (70 dirs x 13 files) |
-| Templates (tpl_*) | 85 |
+| Templates (tpl_*) | 69 |
 | Examples (ex_*) | 193 |
 | Compiled (*.yaml) | 333 |
 | Tools (_tools/) | 13 scripts |

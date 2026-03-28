@@ -54,7 +54,7 @@ Each nucleus = fractal copy of all 12 pillars, scoped to one department.
 ```
 CEX REPO (DATABASE)
 │
-├── archetypes/builders/     L0 DNA — 70 builders × 13 files
+├── archetypes/builders/     L0 DNA — 69 builders × 13 files
 │   └── {builder}/
 │       └── bld_{kind}_{topic}.md    ← colored by 8 functions
 │
@@ -147,7 +147,7 @@ L0 bld_quality_gate_quality_gate.md
 ```
 CEX REPO       = DATABASE
   P01-P12      = 12 SCHEMAS
-    kind       = TABLE (78 types)
+    kind       = TABLE (69 types)
       .md      = ROW (instance)
   N01-N07      = 7 TENANT SCHEMAS (same tables, different data)
   id           = PRIMARY KEY

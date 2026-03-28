@@ -30,7 +30,7 @@ project/
 
 Each pillar contains:
 - `_schema.yaml` — type definitions, naming rules, constraints
-- `_generator.md` — step-by-step creation instructions
+- `builders/` — step-by-step creation instructions
 - `templates/` — fill-in-the-blank starting points
 - `examples/` — real artifacts for reference (if available)
 
@@ -53,7 +53,7 @@ Use this to know: what artifacts exist, how to name them, what fields are requir
 
 ## How to Use Generators
 
-Each `_generator.md` contains:
+Each `builders/` contains:
 1. QUANDO USAR — when to create this type
 2. TIPOS — subtypes and which template to use
 3. PASSO A PASSO — step-by-step creation process
@@ -81,8 +81,8 @@ Match the user's need to an pillar:
 ### Step 2: Read the Schema
 Open `P{XX}_{name}/_schema.yaml` to see available types and constraints.
 
-### Step 3: Read the Generator
-Open `P{XX}_{name}/_generator.md` for step-by-step instructions.
+### Step 3: Load the Builder
+Open `P{XX}_{name}/builders/` for step-by-step instructions.
 
 ### Step 4: Use a Template
 Copy from `P{XX}_{name}/templates/` and fill in.
@@ -92,7 +92,7 @@ Every artifact = 2 files:
 - `.md` — human-readable (title, summary, sections)
 - `.yaml` — machine-readable (frontmatter with all required fields)
 
-Exceptions: `_schema.yaml` (YAML only), `_generator.md` (MD only).
+Exceptions: `_schema.yaml` (YAML only), `builders/` (MD only).
 
 ## Mandatory Rules
 
@@ -153,7 +153,7 @@ axioms:                                     # 1+ rules
 ```
 1. USER REQUEST → identify pillar
 2. READ _schema.yaml → know the type
-3. READ _generator.md → follow the recipe
+3. READ builders/ → use the 13 ISO files as context
 4. COPY template → fill in content
 5. VALIDATE → density >= 0.8, all fields present
 6. SAVE dual output → .md + .yaml
