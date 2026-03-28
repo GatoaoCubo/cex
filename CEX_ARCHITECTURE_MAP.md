@@ -80,6 +80,22 @@ CEX REPO (DATABASE)
 │   ├── feedback/                    mirrors P11
 │   └── orchestration/               mirrors P12
 │
+├── _tools/                  L3 ENGINE — 13 scripts (pipeline runtime)
+│   ├── cex_doctor.py               ← v2: naming + density + 13-file check
+│   ├── validate_builder.py         ← v2: bld_* naming + pre-commit
+│   ├── cex_index.py                ← SQLite index + wikilink graph
+│   ├── cex_pipeline.py             ← 5-stage: CAPTURE→COMPILE→ENVELOPE
+│   ├── cex_feedback.py             ← quality tracking + auto-archive
+│   ├── cex_init.py                 ← CLI scaffolder (5 questions)
+│   ├── cex_compile.py              ← .md → .yaml compiler
+│   ├── cex_forge.py                ← builder forge
+│   ├── changelog_gen.py            ← CHANGELOG generator
+│   ├── setup_hooks.sh              ← pre-commit hook installer
+│   ├── bootstrap.py                ← initial setup
+│   ├── bump_version.py             ← version bumper
+│   ├── distill.py                  ← .md → compiled sync
+│   └── validate_schema.py          ← schema validation
+│
 └── Root docs                L4 — entry points (white)
 ```
 
@@ -146,4 +162,29 @@ CEX REPO       = DATABASE
 
 ---
 
-*CEX v3.0 — "SQL organized data. CEX organizes intelligence."*
+---
+
+## Tools Layer (L3 ENGINE — _tools/)
+
+13 scripts powering the CEX runtime. Added during overnight Waves 1-3.
+
+| Tool | Version | Wave | Role |
+|------|---------|------|------|
+| [[cex_doctor]] | v2 | W1 Governance | Validates naming v2.0, density >= 0.8, 13-file completeness per builder |
+| [[validate_builder]] | v2 | W1 Governance | Enforces bld_* naming, integrates with pre-commit hook (7 checks) |
+| [[cex_index]] | v1 | W2 Engine | Builds SQLite index (.cex/index.db), scans all files, maps wikilink graph |
+| [[cex_pipeline]] | v1 | W2 Engine | 5-stage pipeline: CAPTURE > DECOMPOSE > HYDRATE > COMPILE > ENVELOPE |
+| [[cex_feedback]] | v1 | W2 Engine | Quality tracking, auto-archive scores < 7.0, promote scores >= 8.0 |
+| [[cex_init]] | v1 | W3 Product | CLI scaffolder: 5 questions to functional CEX repo on day 1 |
+| [[cex_compile]] | v1 | W5 Review | Compiles .md examples to .yaml in compiled/ directories |
+| [[cex_forge]] | v1 | W2 Engine | Builder forge for new archetypes |
+| [[changelog_gen]] | v1 | W4 Launch | Generates CHANGELOG.md from git history |
+| [[setup_hooks]] | v1 | W1 Governance | Installs pre-commit hooks (7 checks) |
+| [[bootstrap]] | v1 | pre-overnight | Initial repo setup |
+| [[bump_version]] | v1 | pre-overnight | Semantic version bumper |
+| [[distill]] | v1 | pre-overnight | .md to compiled/ sync engine |
+| [[validate_schema]] | v1 | pre-overnight | Schema YAML validation |
+
+---
+
+*CEX v6.0.0 — "SQL organized data. CEX organizes intelligence."*

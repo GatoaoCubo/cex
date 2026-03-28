@@ -1,27 +1,32 @@
-# CEX Session Checkpoint — 2026-03-26
+# CEX Session Checkpoint — 2026-03-28
 
-**Resume from here.** Everything needed to continue Wave 1+.
+**Resume from here.** Everything needed to continue Wave 6+.
 
 ---
 
-## CURRENT STATE (commit 03041ca)
+## CURRENT STATE (commit 58af0f0)
 
 | Metric | Value |
 |--------|-------|
-| Total files | 1,661 |
+| Total files | 1,839 |
 | Builders (bld_*) | 932 (70 dirs x ~13 files) |
 | Templates (tpl_*) | 85 (across 12 pillars) |
 | Examples (ex_*) | 193 (all naming v2.0 compliant) |
+| Compiled (*.yaml) | 333 (194 examples compiled + 159 legacy) |
+| Tools (_tools/) | 13 scripts (6 new in overnight) |
 | Legacy naming (p{NN}_*) | 0 in examples, 159 in compiled/ |
 | Satellite in filenames | 0 (all renamed to director) |
-| Satellite in content | ~567 files (future wave) |
-| Wikilinks (graph edges) | 406 |
+| Satellite in content | ~213 files (down from ~567, universalize partial) |
+| Wikilinks (graph edges) | 392 |
 | Obsidian color groups | 12 (one per pillar, builders unified) |
 | packages/ orphans | 157 files (real content, relocate to nuclei later) |
+| Commits (overnight) | 160 (15 batches, Waves 1-5 complete) |
 
 ---
 
-## WHAT WAS DONE (this session — 6 commits)
+## WHAT WAS DONE (overnight — 15 batches, 160 commits)
+
+### Wave 0: CLEANUP (pre-overnight, 6 commits)
 
 | # | Commit | What |
 |---|--------|------|
@@ -32,6 +37,79 @@
 | 5 | 52106ab | 7 fractal nuclei + delete 1,890 .gitkeep + 600 scaffold |
 | 6 | 03041ca | Wave 0: delete 38 CODEXA files, rename 149 examples, satellite to director |
 
+### Wave 1: GOVERNANCE (DONE)
+
+| Commit | What |
+|--------|------|
+| f7741cd | cex_doctor.py v2 -- naming v2.0 + density + 13-file check |
+| 9c928bb | validate_builder.py v2 + pre-commit hook (7 checks) |
+| 223da28 | Multi-LLM entry points (Cursor, Copilot, Windsurf, Claude) |
+
+### Wave 2: ENGINE (DONE)
+
+| Commit | What |
+|--------|------|
+| 78e5607 | cex_index.py -- SQLite index, scans 1642 files + wikilink graph |
+| c4a638e | cex_pipeline.py -- 5-stage CAPTURE > DECOMPOSE > HYDRATE > COMPILE > ENVELOPE |
+| 610cf8a | cex_feedback.py -- quality tracking + auto-archive + promotion |
+
+### Wave 3: PRODUCT (DONE)
+
+| Commit | What |
+|--------|------|
+| bbd7538 | cex_init.py -- 5 questions to functional repo |
+| a7de388 | Onboarding + Quickstart + FAQ docs |
+
+### Wave 4: LAUNCH (DONE)
+
+| Commit | What |
+|--------|------|
+| 3fb5305 | README.md v2 -- public-facing with architecture + quickstart |
+| 5ab8efa | CHANGELOG + CONTRIBUTING + LICENSE + tag prep v6.0.0 |
+
+### Wave 5: REVIEW + UNIVERSALIZE (DONE)
+
+| Commit | What |
+|--------|------|
+| c41a073 | Run doctor+validator -- rename validator-builder-codex files |
+| dff06bd | Universalize: remove CODEXA jargon from builders A-M |
+| 3d1ec66 | Universalize: remove CODEXA jargon from builders N-Z |
+| 0f5af66 | Compile all 194 examples + validate 353 compiled outputs -- zero errors |
+| 58af0f0 | Final audit -- 15 batches complete, push to remote |
+
+---
+
+## NEW TOOLS CREATED (overnight)
+
+| Tool | Wave | Purpose |
+|------|------|---------|
+| `cex_doctor.py` v2 | W1 | Naming v2.0 validation + density scoring + 13-file completeness check |
+| `validate_builder.py` v2 | W1 | bld_* naming enforcement + pre-commit hook integration |
+| `cex_index.py` | W2 | SQLite index (.cex/index.db) -- scans all files + wikilink graph |
+| `cex_pipeline.py` | W2 | 5-stage engine: CAPTURE > DECOMPOSE > HYDRATE > COMPILE > ENVELOPE |
+| `cex_feedback.py` | W2 | Quality tracking, auto-archive low scores, promote high scores |
+| `cex_init.py` | W3 | CLI scaffolder: 5 questions to functional CEX repo on day 1 |
+| `cex_compile.py` | W5 | Compile .md examples to .yaml compiled outputs |
+
+### Full _tools/ inventory (13 scripts)
+
+| Script | Status |
+|--------|--------|
+| `cex_doctor.py` | v2 -- overnight |
+| `validate_builder.py` | v2 -- overnight |
+| `cex_index.py` | NEW -- overnight |
+| `cex_pipeline.py` | NEW -- overnight |
+| `cex_feedback.py` | NEW -- overnight |
+| `cex_init.py` | NEW -- overnight |
+| `cex_compile.py` | NEW -- overnight |
+| `cex_forge.py` | NEW -- overnight |
+| `changelog_gen.py` | NEW -- overnight |
+| `setup_hooks.sh` | NEW -- overnight |
+| `bootstrap.py` | pre-existing |
+| `bump_version.py` | pre-existing |
+| `distill.py` | pre-existing |
+| `validate_schema.py` | pre-existing |
+
 ---
 
 ## ARCHITECTURE (5 layers)
@@ -41,7 +119,7 @@ L4 ROOT        CLAUDE.md, README, INDEX, LLM_PIPELINE, CEX_ARCHITECTURE_MAP
 L0 DNA         archetypes/builders/  (70 dirs x 13 files = 932 bld_*.md)
 L1 SCHEMA      P01-P12/             (templates + examples + compiled + _schema.yaml)
 L2 INSTANCES   N01-N07/             (7 nuclei x 12 subdirs = fractal departments)
-L3 ENGINE      _tools/              (9 scripts -- pipeline engine NOT YET built)
+L3 ENGINE      _tools/              (13 scripts -- pipeline engine FULLY BUILT)
 ```
 
 ### 12 Pillars with Builder Mapping
@@ -77,44 +155,42 @@ Each has 12 subdirs mirroring 12 pillars.
 
 ### Agent Maturity (replaces satellite concept)
 
-| Level | CEX Term | CODEXA Equiv | Functions |
-|-------|----------|-------------|-----------|
-| L1 | Task Agent | simple agent | 2-3/8 |
-| L2 | Domain Agent | specialized | 5-6/8 |
-| L3 | Director | satellite | 8/8 + spawns |
-| L4 | Orchestrator | STELLA | meta |
+| Level | CEX Term | Functions |
+|-------|----------|-----------|
+| L1 | Task Agent | 2-3/8 |
+| L2 | Domain Agent | 5-6/8 |
+| L3 | Director | 8/8 + spawns |
+| L4 | Orchestrator | meta |
 
 ---
 
 ## NEXT WAVES
 
-### Wave 1: GOVERNANCE (~1h)
-- Pre-commit hook (7 checks)
-- cex_doctor.py v2 (naming v2.0 + density)
-- validate_builder.py (bld_* naming)
-- Multi-LLM entry points (.cursorrules, copilot-instructions)
-- Tag: v6.0.0-governance
+### Wave 6: TESTING (~1h)
+- Unit tests for all _tools/ scripts
+- Integration test: full pipeline run on sample builder
+- CI smoke test (GitHub Actions)
 
-### Wave 2: ENGINE (~1.5h)
-- SQLite index (.cex/index.db)
-- Pipeline engine (cex_pipeline.py): CAPTURE, DECOMPOSE, HYDRATE, COMPILE, ENVELOPE
-- Feedback loop (cex_feedback.py)
-- Tag: v7.0.0-engine
+### Wave 7: PACKAGING (~1h)
+- pyproject.toml + setup
+- `pip install cex` packaging
+- Entry points: `cex doctor`, `cex init`, `cex pipeline`, `cex index`
+- PyPI test upload
 
-### Wave 3: PRODUCT (~2h)
-- cex init CLI (5 questions, functional repo day 1)
-- Multi-LLM onboarding
-- Tag: v8.0.0-product
+### Wave 8: CI/CD (~1h)
+- GitHub Actions: lint + test + doctor on PR
+- Pre-commit hooks published to `.pre-commit-config.yaml`
+- Badge: tests passing, coverage %
 
-### Wave 4: LAUNCH (~2h)
-- Landing page, pip install, demo
-- Tag: v1.0.0-public
-
-### Deferred
-- Content universalization (~567 files: satellite in content, CODEXA names)
+### Wave 9: CONTENT FILL (~2h)
+- Complete universalization (~213 files still have satellite refs)
 - Recompile 159 compiled/ yamls
 - Relocate 157 packages/ files to nuclei
+
+### Deferred
+- Relocate 157 packages/ files to nuclei
 - C08 redo: OUTPUT_TEMPLATE.md (69/70 builders)
+- PyPI public release
 
 ---
 
@@ -125,12 +201,15 @@ Each has 12 subdirs mirroring 12 pillars.
 | _docs/WHITEPAPER_CEX.md | Complete thesis (20KB) |
 | archetypes/CODEX.md | Governance rules |
 | _docs/NAMING_CONVENTION.md | Naming v2.0 spec |
-| _docs/ARCHITECTURE.md | Repo structure |
+| _docs/ARCHITECTURE.md | Repo structure (5 layers + tools) |
 | CLAUDE.md | LLM entry point |
-| CEX_ARCHITECTURE_MAP.md | Obsidian home |
+| CEX_ARCHITECTURE_MAP.md | Obsidian home + tools layer |
 | .obsidian/graph.json | 12 pillar colors |
-| _tools/cex_doctor.py | v1 (needs v2) |
-| _tools/validate_builder.py | Needs bld_* update |
+| _tools/cex_doctor.py | v2 -- naming + density + completeness |
+| _tools/cex_pipeline.py | 5-stage engine |
+| _tools/cex_index.py | SQLite index + wikilinks |
+| _tools/cex_init.py | CLI scaffolder |
+| _tools/cex_feedback.py | Quality tracking |
 
 ---
 
@@ -198,4 +277,4 @@ powershell -NoProfile -ExecutionPolicy Bypass -File records/core/powershell/spaw
 
 ---
 
-*Checkpoint 2026-03-26T20:50 | Resume: read this, then Wave 1*
+*Checkpoint 2026-03-28T00:00 | Resume: read this, then Wave 6*

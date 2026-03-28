@@ -1,7 +1,7 @@
-# CEX Architecture v2.0
-## Molde Inviolavel - Estrutura Fractal 7x12x78
+# CEX Architecture v3.0
+## Molde Inviolavel - Estrutura Fractal 7x12x78 + Engine Layer
 
-**Status**: CONSOLIDADO | **Data**: 2026-03-26 | **Quebrar**: PROIBIDO
+**Status**: CONSOLIDADO | **Data**: 2026-03-28 | **Quebrar**: PROIBIDO
 
 ---
 
@@ -153,17 +153,52 @@ Density minima: 0.8. Max size: per _schema.yaml.
 
 ---
 
-## 9. Numeros
+## 9. Tools Layer (L3 ENGINE)
 
-| Metrica | Quantidade |
-|---------|-----------|
-| Nucleos | 7 |
-| pillars | 12 (x7 = 84) |
-| Types | 78 (x7 = 546 dirs) |
-| Builders | 78 planejados (4 prontos) |
-| ISO files/builder | 13 |
-| Subdirs/type | 3 (examples, templates, compiled) |
+13 scripts in `_tools/` power the CEX runtime. Built during overnight Waves 1-3.
+
+| Category | Tools | Purpose |
+|----------|-------|---------|
+| **Governance** | `cex_doctor.py` v2, `validate_builder.py` v2, `setup_hooks.sh` | Naming v2.0, density, 13-file completeness, pre-commit (7 checks) |
+| **Engine** | `cex_index.py`, `cex_pipeline.py`, `cex_feedback.py`, `cex_forge.py` | SQLite index, 5-stage pipeline (CAPTURE>ENVELOPE), quality tracking |
+| **Product** | `cex_init.py` | CLI scaffolder: 5 questions to functional repo |
+| **Compile** | `cex_compile.py`, `distill.py` | .md to .yaml compilation and sync |
+| **Infra** | `bootstrap.py`, `bump_version.py`, `validate_schema.py`, `changelog_gen.py` | Setup, versioning, schema validation, changelog |
+
+### Pipeline Stages (cex_pipeline.py)
+
+```
+CAPTURE -> DECOMPOSE -> HYDRATE -> COMPILE -> ENVELOPE
+  (input)   (split)     (enrich)   (build)    (package)
+```
+
+### Quality Loop (cex_feedback.py)
+
+```
+Score >= 8.0 -> promote to published
+Score >= 7.0 -> experimental (keep)
+Score <  7.0 -> auto-archive
+```
 
 ---
 
-*Architecture v2.0 -- Molde inviolavel. Estrutura pronta. Preencher.*
+## 10. Numeros
+
+| Metrica | Quantidade |
+|---------|-----------|
+| Total files | 1,839 |
+| Nucleos | 7 |
+| Pillars | 12 (x7 = 84) |
+| Types | 78 (x7 = 546 dirs) |
+| Builders (bld_*) | 932 (70 dirs x 13 files) |
+| Templates (tpl_*) | 85 |
+| Examples (ex_*) | 193 |
+| Compiled (*.yaml) | 333 |
+| Tools (_tools/) | 13 scripts |
+| ISO files/builder | 13 |
+| Subdirs/type | 3 (examples, templates, compiled) |
+| Wikilinks | 392 |
+
+---
+
+*Architecture v3.0 -- Molde inviolavel. Engine built. Pipeline running.*
