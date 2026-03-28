@@ -23,7 +23,7 @@ updated: "2026-03-26"
 author: "builder"
 title: "SHAKA Solo Research Spawn"
 mode: solo
-satellite: "shaka"
+director: "shaka"
 model: "sonnet"
 flags:
   - "--dangerously-skip-permissions"
@@ -49,8 +49,8 @@ powershell -NoProfile -ExecutionPolicy Bypass -File records/framework/powershell
 
 | Parameter | Value | Rationale |
 |-----------|-------|-----------|
-| mode | solo | Single satellite, single task |
-| satellite | shaka | Research domain satellite |
+| mode | solo | Single director, single task |
+| director | shaka | Research domain director |
 | model | sonnet | SHAKA uses sonnet per routing table |
 | timeout | 1800s | 30min sufficient for research tasks |
 | interactive | true | Terminal stays open for monitoring |
@@ -74,19 +74,19 @@ WHY THIS IS GOLDEN:
 
 ## Anti-Example
 
-INPUT: "Create spawn config for a satellite"
+INPUT: "Create spawn config for a director"
 
 BAD OUTPUT:
 ```yaml
 ---
 id: spawn_config
 kind: config
-satellite: SHAKA
+director: SHAKA
 quality: 8.0
 ---
 ```
 
-Spawn the SHAKA satellite to do research. It should use the sonnet model and
+Spawn the SHAKA director to do research. It should use the sonnet model and
 have access to firecrawl. Make sure it commits before stopping.
 
 FAILURES:
@@ -98,5 +98,5 @@ FAILURES:
 6. No ## Spawn Command section -> H07 FAIL
 7. Body contains task instructions ("do research") -> S07 FAIL
 8. No flags listed -> S03 FAIL
-9. satellite uppercase "SHAKA" (should be lowercase) -> S04 FAIL
+9. director uppercase "SHAKA" (should be lowercase) -> S04 FAIL
 10. Body is prose, not structured sections -> S08 FAIL

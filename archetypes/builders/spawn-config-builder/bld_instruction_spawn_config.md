@@ -10,40 +10,40 @@ title: Spawn Config Builder Instructions
 target: "spawn-config-builder agent"
 phases_count: 4
 prerequisites:
-  - "Target satellite name is known and non-empty"
+  - "Target director name is known and non-empty"
   - "Spawn mode is specified: solo, grid, or continuous"
-  - "Satellite-model pairing is defined (e.g. EDISON=opus, SHAKA=sonnet)"
+  - "Director-model pairing is defined (e.g. EDISON=opus, SHAKA=sonnet)"
   - "Handoff file path or inline prompt is available"
 validation_method: checklist
 domain: spawn_config
 quality: null
-tags: [instruction, spawn-config, orchestration, satellite, P12]
+tags: [instruction, spawn-config, orchestration, director, P12]
 idempotent: true
 atomic: false
 rollback: "Delete generated spawn_config YAML file"
 dependencies: []
 logging: true
-tldr: "Build a satellite spawn_config YAML with CLI flags, MCP profile, timeout policy, and prompt sizing for solo/grid/continuous modes."
+tldr: "Build a director spawn_config YAML with CLI flags, MCP profile, timeout policy, and prompt sizing for solo/grid/continuous modes."
 density_score: 0.92
 ---
 
 ## Context
 
-The spawn-config-builder produces a `spawn_config` artifact — a structured YAML that defines exactly how a satellite process is launched. Downstream orchestration scripts consume this artifact to spawn terminals with the correct flags, model, MCP profile, timeout, and prompt strategy.
+The spawn-config-builder produces a `spawn_config` artifact — a structured YAML that defines exactly how a director process is launched. Downstream orchestration scripts consume this artifact to spawn terminals with the correct flags, model, MCP profile, timeout, and prompt strategy.
 
 **Input contract**:
-- `satellite`: string — canonical satellite name (e.g. `EDISON`, `SHAKA`, `LILY`)
+- `director`: string — canonical director name (e.g. `EDISON`, `SHAKA`, `LILY`)
 - `mode`: enum — `solo` | `grid` | `continuous`
 - `model`: string — LLM model identifier (e.g. `claude-opus-4-6`, `claude-sonnet`)
-- `task_description`: string — what the satellite must accomplish (used to size the prompt)
+- `task_description`: string — what the director must accomplish (used to size the prompt)
 - `handoff_file`: string or null — relative path to handoff `.md` file if task exceeds 200 chars
-- `mcp_profile`: string or null — path to `.mcp-{sat}.json` if satellite requires MCP tools
+- `mcp_profile`: string or null — path to `.mcp-{sat}.json` if director requires MCP tools
 - `timeout_ms`: integer or null — override default timeout (default: 120000 for solo, 300000 for grid/continuous)
 
-**Output contract**: a single `spawn_config` YAML block with 19 required fields, ready to be written to `records/spawn_configs/{satellite}_{mode}.yaml`.
+**Output contract**: a single `spawn_config` YAML block with 19 required fields, ready to be written to `records/spawn_configs/{director}_{mode}.yaml`.
 
 **Variables used throughout**:
-- `{{satellite}}` — uppercased satellite name
+- `{{director}}` — uppercased director name
 - `{{mode}}` — spawn mode
 - `{{model}}` — model identifier
 - `{{inline_prompt}}` — prompt string <= 200 chars
@@ -79,7 +79,7 @@ Verifiable exit: prompt_strategy is set; inline_prompt length <= 200; timeout_ms
 
 ### Phase 2: Resolve CLI Flags
 
-**Action**: Build the ordered CLI flags list for the satellite launch command.
+**Action**: Build the ordered CLI flags list for the director launch command.
 
 ```
 flags = ["--dangerously-skip-permissions", "--no-chrome"]
@@ -107,11 +107,11 @@ Verifiable exit: flags list contains `--dangerously-skip-permissions`; `-p` pres
 **Action**: Assemble all resolved values into the 19-field YAML structure.
 
 Required fields in order:
-1. `id` — `spawn_{satellite}_{mode}`
+1. `id` — `spawn_{director}_{mode}`
 2. `kind` — `spawn_config`
 3. `pillar` — `P12`
 4. `version` — `1.0.0`
-5. `satellite` — `{{satellite}}`
+5. `director` — `{{director}}`
 6. `mode` — `{{mode}}`
 7. `model` — `{{model}}`
 8. `prompt_strategy` — `inline` or `handoff`
@@ -135,7 +135,7 @@ Verifiable exit: YAML parses cleanly; all 19 fields present; no null for require
 
 ```
 HARD gates (all must pass):
-  H1: satellite name is non-empty and matches known satellite list
+  H1: director name is non-empty and matches known director list
   H2: mode is one of [solo, grid, continuous]
   H3: inline_prompt length <= 200 characters
   H4: cli_flags contains "--dangerously-skip-permissions"
@@ -160,11 +160,11 @@ Verifiable exit: checklist shows 8/8 HARD pass.
 ## Output Contract
 
 ```yaml
-id: spawn_{{satellite}}_{{mode}}
+id: spawn_{{director}}_{{mode}}
 kind: spawn_config
 pillar: P12
 version: 1.0.0
-satellite: {{satellite}}
+director: {{director}}
 mode: {{mode}}
 model: {{model}}
 prompt_strategy: {{prompt_strategy}}
@@ -191,7 +191,7 @@ created: "{{created}}"
 
 ## Validation
 
-- [ ] H1: satellite name is present and non-empty
+- [ ] H1: director name is present and non-empty
 - [ ] H2: mode is solo, grid, or continuous
 - [ ] H3: inline_prompt is <= 200 characters
 - [ ] H4: `--dangerously-skip-permissions` is in cli_flags
@@ -205,7 +205,7 @@ created: "{{created}}"
 ## Metacognition
 
 **Does**:
-- Produce a single spawn_config YAML per satellite/mode combination
+- Produce a single spawn_config YAML per director/mode combination
 - Enforce the 200-char inline prompt limit by routing to handoff strategy
 - Always include spawn_delay_ms=5000 to prevent terminal race conditions
 - Validate all 8 HARD gates before emitting
@@ -213,7 +213,7 @@ created: "{{created}}"
 **Does NOT**:
 - Generate the handoff file content (that is the calling agent's responsibility)
 - Manage runtime signals or completion detection (signal-builder handles that)
-- Define what the satellite does (workflow-builder handles step orchestration)
+- Define what the director does (workflow-builder handles step orchestration)
 - Execute the spawn command itself (PowerShell scripts consume this config)
 
 **Chaining**: spawn-config-builder output feeds `spawn_solo.ps1` or `spawn_grid.ps1`. Pair with workflow-builder (step definitions) and signal-builder (completion signals) for full mission orchestration.

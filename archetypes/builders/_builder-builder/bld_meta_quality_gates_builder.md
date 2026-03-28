@@ -50,7 +50,7 @@ pattern: HARD gates block publish, SOFT gates contribute to 0-10 score
 <!-- - Padroes de erros comuns do dominio -->
 <!-- Exemplos observados: -->
 <!-- - model_card: provider in enum, context_window is integer, max_output is integer -->
-<!-- - KC: tags is list, body 200-5120 bytes, no internal paths, author != STELLA -->
+<!-- - KC: tags is list, body 200-5120 bytes, no internal paths, author != orchestrator -->
 <!-- - signal: status in enum, quality_score in range, no instruction fields, no routing fields -->
 <!-- - quality_gate: scoring weights sum to 100%, Definition has numeric threshold -->
 

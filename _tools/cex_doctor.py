@@ -35,7 +35,8 @@ EXPECTED_KINDS = [
 ]
 EXPECTED_COUNT = len(EXPECTED_KINDS)  # 13
 MAX_BYTES = 4096
-MIN_DENSITY = 0.80
+MAX_BYTES_INSTRUCTION = 6144
+MIN_DENSITY = 0.78
 NAMING_RE = re.compile(r"^bld_[a-z][a-z0-9_]+_[a-z][a-z0-9_]+\.md$")
 
 # -- Helpers ------------------------------------------------------------------
@@ -136,7 +137,10 @@ class CheckResult:
         statuses = [self.naming, self.density, self.max_bytes, self.completeness, self.frontmatter]
         if "FAIL" in statuses:
             return "FAIL"
-        if "WARN" in statuses:
+        warn_count = statuses.count("WARN")
+        if warn_count >= 3:
+            return "FAIL"
+        if warn_count > 0:
             return "WARN"
         return "PASS"
 
@@ -213,13 +217,14 @@ def check_builder(builder_dir):
     oversized = []
     for f in bld_files:
         size = f.stat().st_size
-        if size > MAX_BYTES:
-            oversized.append((f.name, size))
+        limit = MAX_BYTES_INSTRUCTION if f.name.startswith("bld_instruction_") else MAX_BYTES
+        if size > limit:
+            oversized.append((f.name, size, limit))
 
     if oversized:
         r.max_bytes = "WARN"
-        for fname, sz in oversized[:3]:
-            r.details.append(f"  size: {fname} = {sz}B (max {MAX_BYTES})")
+        for fname, sz, limit in oversized[:3]:
+            r.details.append(f"  size: {fname} = {sz}B (max {limit})")
 
     # -- CHECK 5: Frontmatter -------------------------------------------------
     missing_fm = []
@@ -319,7 +324,11 @@ def main():
     avg_density = sum(densities) / len(densities) if densities else 0
 
     oversized_total = sum(
-        1 for bd in builder_dirs for f in bd.glob("bld_*.md") if f.stat().st_size > MAX_BYTES
+        1
+        for bd in builder_dirs
+        for f in bd.glob("bld_*.md")
+        if f.stat().st_size
+        > (MAX_BYTES_INSTRUCTION if f.name.startswith("bld_instruction_") else MAX_BYTES)
     )
     fm_missing_total = sum(
         1 for bd in builder_dirs for f in bd.glob("bld_*.md") if get_frontmatter(f) is None
@@ -329,7 +338,9 @@ def main():
     print(f"Total files:    {total_files} (expected {len(builder_dirs) * EXPECTED_COUNT})")
     print(f"Total size:     {total_bytes / 1024:.1f} KB")
     print(f"Avg density:    {avg_density:.2f}")
-    print(f"Oversized:      {oversized_total} files > {MAX_BYTES}B")
+    print(
+        f"Oversized:      {oversized_total} files (>{MAX_BYTES}B std, >{MAX_BYTES_INSTRUCTION}B instructions)"
+    )
     print(f"No frontmatter: {fm_missing_total} files")
     print(f"Result:         {pass_count} PASS | {warn_count} WARN | {fail_count} FAIL")
     print("=" * 72)

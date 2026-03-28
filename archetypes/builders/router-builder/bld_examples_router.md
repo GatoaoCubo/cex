@@ -9,12 +9,12 @@ pattern: few-shot learning — LLM reads these before producing
 
 ## Golden Example
 
-INPUT: "Create a router for dispatching tasks to CEX satellites based on domain"
+INPUT: "Create a router for dispatching tasks to CEX directors based on domain"
 
 OUTPUT:
 ```yaml
 ---
-id: p02_router_satellite_task
+id: p02_router_director_task
 kind: router
 pillar: P02
 version: "1.0.0"
@@ -24,14 +24,14 @@ author: "builder"
 routes_count: 7
 fallback_route: "EDISON"
 confidence_threshold: 0.7
-domain: "satellite_dispatch"
+domain: "director_dispatch"
 quality: null
-tags: [router, satellite, dispatch, P02, multi-agent]
-tldr: "Routes incoming tasks to 7 CEX satellites by domain pattern matching with 0.7 confidence gate"
+tags: [router, director, dispatch, P02, multi-agent]
+tldr: "Routes incoming tasks to 7 CEX directors by domain pattern matching with 0.7 confidence gate"
 timeout_ms: 3000
 retry_count: 1
 load_balance: "priority"
-keywords: [satellite, dispatch, routing, task-assignment, domain-routing]
+keywords: [director, dispatch, routing, task-assignment, domain-routing]
 density_score: 0.88
 ---
 ```
@@ -46,7 +46,7 @@ density_score: 0.88
 | knowledge, document, index, embed | PYTHA | 80 | 0.7 | - |
 | deploy, infra, database, migrate | ATLAS | 85 | 0.8 | requires_auth |
 | monetize, course, pricing, funnel | YORK | 80 | 0.7 | - |
-| orchestrate, dispatch, spawn, monitor | STELLA | 95 | 0.9 | admin_only |
+| orchestrate, dispatch, spawn, monitor | orchestrator | 95 | 0.9 | admin_only |
 
 ## Decision Logic
 Algorithm: priority-first with confidence gating.
@@ -55,24 +55,24 @@ Only routes where confidence >= confidence_min are candidates.
 Among candidates, highest priority wins. Ties broken by most specific pattern match.
 
 ## Fallback
-Default destination: EDISON (general-purpose build satellite).
+Default destination: EDISON (general-purpose build director).
 Trigger: no route scores above 0.7 confidence.
 Behavior: route to EDISON with metadata flag `routed_by_fallback: true`.
 
 ## Escalation
 Trigger: two or more routes score within 0.05 confidence of each other.
-Action: return both candidates with scores; let STELLA arbitrate.
+Action: return both candidates with scores; let orchestrator arbitrate.
 Notification: signal `p12_sig_routing_ambiguous` with candidate list.
 
 ## Integration
-- Receives from: STELLA (task dispatch), user input (direct)
-- Routes to: SHAKA, LILY, EDISON, PYTHA, ATLAS, YORK, STELLA
+- Receives from: orchestrator (task dispatch), user input (direct)
+- Routes to: SHAKA, LILY, EDISON, PYTHA, ATLAS, YORK, orchestrator
 - Consults: dispatch_rules (P12) for keyword hints
 - Signal on failure: `p12_sig_routing_failed`
 
 ## References
-- CEX TAXONOMY_LAYERS.yaml — satellite definitions
-- CEX STELLA_RULES.md — routing table reference
+- CEX TAXONOMY_LAYERS.yaml — director definitions
+- CEX orchestrator_RULES.md — routing table reference
 
 WHY THIS IS GOLDEN:
 - quality: null (H05 pass) | id p02_router_ pattern (H02 pass) | kind: router (H04 pass)

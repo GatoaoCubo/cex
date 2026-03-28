@@ -24,7 +24,7 @@ author: "builder"
 title: "Research Then Build Mission"
 steps_count: 3
 execution: mixed
-satellites: [shaka, edison]
+directors: [shaka, edison]
 timeout: 5400
 retry_policy: per_step
 depends_on: []
@@ -32,15 +32,15 @@ signals: [complete, error]
 spawn_configs: [p12_spawn_shaka_solo_research, p12_spawn_edison_solo_build]
 domain: "orchestration"
 quality: null
-tags: [workflow, research, build, multi-satellite]
-tldr: "3-step mixed workflow: SHAKA researches, EDISON builds from findings, STELLA consolidates"
+tags: [workflow, research, build, multi-director]
+tldr: "3-step mixed workflow: SHAKA researches, EDISON builds from findings, orchestrator consolidates"
 density_score: 0.90
 ---
 ```
 
 ## Purpose
 Orchestrates a research-then-build mission where SHAKA gathers market intelligence,
-EDISON implements based on findings, and STELLA consolidates results. Steps 1-2 are
+EDISON implements based on findings, and orchestrator consolidates results. Steps 1-2 are
 sequential (build depends on research), step 3 runs after both complete.
 
 ## Steps
@@ -61,8 +61,8 @@ sequential (build depends on research), step 3 runs after both complete.
 - **Signal**: edison_complete with quality score
 - **Depends on**: Step 1
 
-### Step 3: Consolidation [stella]
-- **Agent**: stella (opus)
+### Step 3: Consolidation [orchestrator]
+- **Agent**: orchestrator (opus)
 - **Action**: Review outputs, archive handoffs, push to remote
 - **Input**: signals from Steps 1-2, git log
 - **Output**: consolidated commit, archived handoffs
@@ -76,7 +76,7 @@ sequential (build depends on research), step 3 runs after both complete.
 ## Signals
 - **On step complete**: {sat}_complete signal emitted (see signal-builder)
 - **On workflow complete**: workflow_complete signal with aggregate quality
-- **On error**: {sat}_error signal, retry per step (max 1), then escalate to STELLA
+- **On error**: {sat}_error signal, retry per step (max 1), then escalate to orchestrator
 
 WHY THIS IS GOLDEN:
 - quality: null (H05 pass)
@@ -112,7 +112,7 @@ FAILURES:
 2. kind: "flow" not "workflow" -> H04 FAIL
 3. pillar: missing -> H06 FAIL
 4. quality: 8.5 (not null) -> H05 FAIL
-5. Missing fields: version, created, updated, author, execution, satellites, domain, tags, tldr -> H06 FAIL
+5. Missing fields: version, created, updated, author, execution, directors, domain, tags, tldr -> H06 FAIL
 6. No ## Steps section with structured steps -> H07 FAIL
 7. Body is filler prose ("great workflow", "high quality") -> S10 FAIL
 8. Steps lack Agent/Action/Input/Output structure -> S03 FAIL

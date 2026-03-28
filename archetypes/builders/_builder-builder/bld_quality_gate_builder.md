@@ -56,7 +56,7 @@ All must pass. Failure on any = final score 0.
 | S08 | Crew Role answer is a single focused question | 1.0 |
 | S09 | Exclusions cite specific neighboring kinds (not vague) | 1.0 |
 | S10 | density_score >= 0.80 | 0.5 |
-| S11 | No CODEXA-internal jargon in user-facing fields | 1.0 |
+| S11 | No framework-internal jargon in user-facing fields | 1.0 |
 | S12 | Capabilities reference field count or gate count from schema | 0.5 |
 
 Weights sum: 9.5. Normalize: divide each by 9.5 before scoring.

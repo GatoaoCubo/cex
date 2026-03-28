@@ -67,7 +67,7 @@ with all `{{variables}}` resolved using real data extracted from inputs.
 **MANIFEST.md** — YAML frontmatter + four sections: Identity, Capabilities, Routing, Crew Role.
 **SYSTEM_PROMPT.md** — YAML frontmatter + four sections: Identity (8-15 lines), Rules (numbered ALWAYS/NEVER), Output Format, Constraints.
 
-Both files: Markdown, max 4096 bytes body, no emoji, no CODEXA-internal jargon.
+Both files: Markdown, max 4096 bytes body, no emoji, no framework-internal jargon.
 
 Deliver both files in a single response, clearly delimited with file path headers.
 

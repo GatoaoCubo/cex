@@ -27,5 +27,5 @@ id: bld_norms
 8. **INSTRUCTIONS.md steps**: each numbered step = ONE action (no "and", "then", compound verbs)
 9. **ARCHITECTURE.md boundary**: MUST list ALL sibling kinds in same pillar as "NAO EH" rows
 10. **SCHEMA.md flags/enums**: use GENERIC values, not runtime-specific (no --dangerously-skip-permissions)
-11. **EXAMPLES.md golden IDs**: use CEX-universal patterns, minimize CODEXA-specific satellite names
+11. **EXAMPLES.md golden IDs**: use CEX-universal patterns, minimize framework-specific director names
 12. **COLLABORATION.md cross-refs**: if builder A refs builder B, builder B MUST ref builder A
