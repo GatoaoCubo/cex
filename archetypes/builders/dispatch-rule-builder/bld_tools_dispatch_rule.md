@@ -19,7 +19,7 @@ purpose: Tools and runtime surfaces relevant to dispatch_rule production
 |-----------|------|-----|
 | P12 schema | `P12_orchestration/_schema.yaml` | naming, machine format, field contracts |
 | Routing table | `records/framework/docs/SUBAGENT_CATALOG.md` | satellite-domain mapping reference |
-| STELLA rules | `.claude/rules/STELLA_RULES.md` | routing keyword table for validation |
+| orchestrator rules | `.claude/rules/orchestrator_RULES.md` | routing keyword table for validation |
 | Dispatch output dir | `cex/P12_orchestration/compiled/` | where produced rules are stored |
 | Template | `cex/P12_orchestration/templates/tpl_dispatch_rule.md` | human reference for rule shape |
 

@@ -20,16 +20,16 @@ pillar: P08
 version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
-author: "EDISON"
+author: "builder"
 domain: "orchestration"
 quality: null
 tags: [diagram, orchestration, satellite, architecture, multi-agent]
-tldr: "System-level view of STELLA orchestrating 6 satellites via handoffs and signals"
-scope: "CEX satellite orchestration — STELLA dispatch to 6 domain satellites"
+tldr: "System-level view of orchestrator orchestrating 6 satellites via handoffs and signals"
+scope: "CEX satellite orchestration — orchestrator dispatch to 6 domain satellites"
 notation: "ascii"
 zoom_level: "system"
-components: [STELLA, SHAKA, LILY, EDISON, PYTHA, ATLAS, YORK, Brain, Signal_Bus]
-connections: ["STELLA->satellites: handoff", "satellites->Signal_Bus: complete/error"]
+components: [orchestrator, researcher, marketer, builder, knowledge-engine, executor, monetizer, Brain, Signal_Bus]
+connections: ["orchestrator->satellites: handoff", "satellites->Signal_Bus: complete/error"]
 layers: [orchestration, execution, infrastructure]
 annotations: ["Max 3 concurrent satellites (RAM limit)", "Signal polling every 15s"]
 keywords: [orchestration, satellite, dispatch, signal]
@@ -37,17 +37,17 @@ keywords: [orchestration, satellite, dispatch, signal]
 ```
 
 ## Scope
-CEX satellite orchestration: how STELLA dispatches tasks to 6 domain satellites, monitors progress via signals, and consolidates results. System-level view — not individual satellite internals.
+CEX satellite orchestration: how orchestrator dispatches tasks to 6 domain satellites, monitors progress via signals, and consolidates results. System-level view — not individual satellite internals.
 
 ## Diagram
 ```text
           ┌─────────┐
-          │ STELLA  │ (orchestrator)
+          │ orchestrator  │ (orchestrator)
           └────┬────┘
                │ handoffs
     ┌──┬──┬────┼────┬──┬──┐
     ▼  ▼  ▼    ▼    ▼  ▼  ▼
- [SHAKA][LILY][EDISON][PYTHA][ATLAS][YORK]
+ [researcher][marketer][builder][knowledge-engine][executor][monetizer]
     └──┴──┴────┬────┴──┴──┘
                ▼
         ┌────────────┐
@@ -69,17 +69,17 @@ CEX satellite orchestration: how STELLA dispatches tasks to 6 domain satellites,
 ## Components
 | Component | Role | Layer |
 |-----------|------|-------|
-| STELLA | Orchestrator — decomposes, dispatches, monitors | orchestration |
-| SHAKA/LILY/EDISON/PYTHA/ATLAS/YORK | Domain satellites (6) | execution |
+| orchestrator | Orchestrator — decomposes, dispatches, monitors | orchestration |
+| researcher/marketer/builder/knowledge-engine/executor/monetizer | Domain satellites (6) | execution |
 | Signal Bus | Event transport — complete/error signals | infrastructure |
 | Brain | Knowledge retrieval — BM25 + FAISS | infrastructure |
 
 ## Connections
 | From | To | Type | Data |
 |------|-----|------|------|
-| STELLA | satellites | handoff | task + seeds |
+| orchestrator | satellites | handoff | task + seeds |
 | satellites | Signal Bus | signal | status + score |
-| Signal Bus | STELLA | poll | completion |
+| Signal Bus | orchestrator | poll | completion |
 | Brain | all | query | retrieval |
 
 ## Annotations
@@ -107,7 +107,7 @@ quality: 8.0
 ---
 
 The system has several components that work together.
-STELLA talks to satellites. Satellites send signals back.
+orchestrator talks to satellites. Satellites send signals back.
 ```
 
 FAILURES:

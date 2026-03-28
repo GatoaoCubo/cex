@@ -52,7 +52,7 @@ Rule: id MUST equal filename stem.
 
 ## Size Calibration
 
-| Metric | CEX Builders | Real HOPs | Limit |
+| Metric | CEX Builders | Real task prompts | Limit |
 |--------|-------------|-----------|-------|
 | Avg body bytes | 1,924 | 14,538 | - |
 | Max body bytes | 3,711 | 41,974 | - |

@@ -38,7 +38,7 @@ Env configs define the variable contract for a system scope — every environmen
 - **Scope hierarchy**: narrower scope wins — service config overrides satellite, satellite overrides global
 - **Sensitivity handling**: sensitive vars (secrets, keys) NEVER logged, NEVER committed, ALWAYS masked in output
 - **Required vs optional**: required vars block startup if missing; optional vars use defaults
-- **Naming convention**: UPPER_SNAKE_CASE with optional prefix (CEX_, SHAKA_) for scope clarity
+- **Naming convention**: UPPER_SNAKE_CASE with optional prefix (CEX_, researcher_) for scope clarity
 
 | Source | Concept | Application |
 |--------|---------|-------------|

@@ -9,7 +9,7 @@ pattern: few-shot learning — LLM reads these before producing
 
 ## Golden Example
 
-INPUT: "Define o contrato entre SHAKA (pesquisa) e LILY (marketing) para entrega de research results"
+INPUT: "Define o contrato entre researcher (pesquisa) e marketer (marketing) para entrega de research results"
 
 OUTPUT:
 
@@ -21,10 +21,10 @@ pillar: P06
 version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
-author: "EDISON"
-contract: "Research results delivery from SHAKA to LILY"
-provider: "SHAKA"
-consumer: "LILY"
+author: "builder"
+contract: "Research results delivery from researcher to marketer"
+provider: "researcher"
+consumer: "marketer"
 methods:
   - name: "get_research_summary"
     input: {topic: string, max_sources: integer}
@@ -45,14 +45,14 @@ mock:
 domain: "satellite-integration"
 quality: null
 tags: [interface, shaka, lily, research, marketing, satellite-integration]
-tldr: "Bilateral contract for SHAKA to deliver research results to LILY marketing workflows."
+tldr: "Bilateral contract for researcher to deliver research results to marketer marketing workflows."
 density_score: 0.91
 ---
 ```
 
 ## Contract Definition
-SHAKA (research satellite) provides structured research data to LILY (marketing satellite).
-LILY calls methods to get research summaries and competitor data for marketing campaigns.
+researcher (research satellite) provides structured research data to marketer (marketing satellite).
+marketer calls methods to get research summaries and competitor data for marketing campaigns.
 
 ## Methods
 
@@ -92,7 +92,7 @@ WHY THIS IS GOLDEN:
 
 ## Anti-Example
 
-INPUT: "Interface entre SHAKA e LILY"
+INPUT: "Interface entre researcher e marketer"
 
 BAD OUTPUT:
 
@@ -101,15 +101,15 @@ BAD OUTPUT:
 id: shaka_lily_interface
 kind: integration
 pillar: Schema
-contract: SHAKA-LILY
-methods: "get data from SHAKA"
+contract: researcher-marketer
+methods: "get data from researcher"
 backward_compatible: maybe
 quality: 9.0
 tags: interface
 ---
 ```
 
-SHAKA sends data to LILY when needed.
+researcher sends data to marketer when needed.
 
 FAILURES:
 1. id: no `p06_iface_` prefix -> H02 FAIL

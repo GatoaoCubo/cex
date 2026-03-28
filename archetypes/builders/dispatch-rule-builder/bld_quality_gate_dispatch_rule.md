@@ -39,7 +39,7 @@ All must pass. Any single failure = REJECT regardless of SOFT score.
 | H04 | `kind` equals literal `"dispatch_rule"` | "Kind is not 'dispatch_rule'" |
 | H05 | `quality` field is `null` | "Quality must be null at authoring time" |
 | H06 | All required fields present: id, kind, pillar, domain, satellite, model, priority, keywords, confidence_threshold, fallback, version, created, author, tags | "Missing required field(s)" |
-| H07 | `satellite` value is one of the defined satellite enum (SHAKA, LILY, EDISON, PYTHA, ATLAS, YORK) | "Satellite not in allowed enum" |
+| H07 | `satellite` value is one of the defined satellite enum (researcher, marketer, builder, knowledge-engine, executor, monetizer) | "Satellite not in allowed enum" |
 | H08 | `keywords` list is non-empty (>= 3 entries) | "Keyword list must have at least 3 entries" |
 | H09 | `confidence_threshold` is a float between 0.0 and 1.0 | "Confidence threshold out of range [0.0, 1.0]" |
 | H10 | `fallback` is defined and references a valid satellite or literal `human` | "Fallback target undefined or invalid" |

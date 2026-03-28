@@ -19,7 +19,7 @@ source: P01_knowledge/_schema.yaml v4.0 + validate_kc.py v2.0 + 721 real KCs
 | version | semver X.Y.Z | YES | "1.0.0" | H06, S04 |
 | created | date YYYY-MM-DD | YES | — | H06, S05 |
 | updated | date YYYY-MM-DD | YES | — | H06, S05 |
-| author | string (not STELLA) | YES | — | H06, H10 |
+| author | string (not orchestrator) | YES | — | H06, H10 |
 | domain | string | YES | — | H06 |
 | quality | null | YES | null | H05 |
 | tags | list[string], len 3-7 | YES | — | H07 |

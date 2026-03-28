@@ -20,9 +20,9 @@ pillar: P03
 version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
-author: "EDISON"
+author: "builder"
 title: "Rebuild Brain FAISS Index"
-target: "PYTHA satellite or human operator"
+target: "knowledge-engine satellite or human operator"
 steps_count: 6
 prerequisites:
   - "Ollama running locally with nomic-embed-text model"

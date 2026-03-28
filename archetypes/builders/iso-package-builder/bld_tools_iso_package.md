@@ -23,7 +23,7 @@ purpose: Tools and APIs available for iso_package production
 |--------|----------|------|
 | CEX Schema | P02_model/_schema.yaml | iso_package field definitions, tiers, lp_mapping |
 | Agent Definitions | P02_model/examples/ | Source agent artifacts |
-| CODEXA Agents | records/agents/ | 118+ agents with iso_vectorstore to reference |
+| framework Agents | records/agents/ | 118+ agents with iso_vectorstore to reference |
 | SEED_BANK | archetypes/SEED_BANK.yaml | Seeds for P02_iso_package |
 | TAXONOMY | archetypes/TAXONOMY_LAYERS.yaml | Layer position (spec), overlaps |
 | agent-builder | archetypes/builders/agent-builder/ | Upstream: agent definition reference |

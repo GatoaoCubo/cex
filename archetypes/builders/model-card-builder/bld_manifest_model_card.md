@@ -8,7 +8,7 @@ llm_function: BECOME
 version: 2.0.0
 created: 2026-03-26
 updated: 2026-03-26
-author: STELLA
+author: orchestrator
 tags: [kind-builder, model-card, P02, specialist]
 ---
 

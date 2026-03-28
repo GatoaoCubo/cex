@@ -20,7 +20,7 @@ purpose: Tools and APIs available for action_prompt production
 |--------|----------|------|
 | CEX Schema | P03_prompt/_schema.yaml | Field definitions, kinds |
 | CEX Examples | P03_prompt/examples/ | Real action_prompt artifacts |
-| HOP files | records/pool/*/HOP_*.md | 287 existing task prompts (action_prompt-like) |
+| HOP files | records/pool/*/task_prompt_*.md | 287 existing task prompts (action_prompt-like) |
 | Handoff files | .claude/handoffs/*.md | 255 handoffs with task sections |
 | SEED_BANK | archetypes/SEED_BANK.yaml | Seeds for P03_action_prompt |
 | TAXONOMY | archetypes/TAXONOMY_LAYERS.yaml | Layer position, overlaps |

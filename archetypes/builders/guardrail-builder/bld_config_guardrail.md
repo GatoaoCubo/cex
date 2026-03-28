@@ -27,7 +27,7 @@ Rule: id MUST equal filename stem.
 ## Severity-Enforcement Matrix
 | Severity | Default enforcement | Bypass allowed |
 |----------|-------------------|----------------|
-| critical | block | Yes, STELLA only |
+| critical | block | Yes, orchestrator only |
 | high | block | Yes, satellite chief |
 | medium | warn | Yes, any senior agent |
 | low | log | Yes, any agent |

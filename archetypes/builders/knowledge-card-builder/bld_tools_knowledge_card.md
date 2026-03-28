@@ -42,7 +42,7 @@ brain_query("knowledge card about {topic}")
 | CEX Schema | P01_knowledge/_schema.yaml | KC field definitions |
 | CEX Examples | P01_knowledge/examples/ | 63+ real KCs |
 | CEX Template | P01_knowledge/templates/tpl_knowledge_card.md | Fillable template |
-| CEX Pool | records/pool/ (codexa-core) | 1957+ published artifacts |
+| CEX Pool | records/pool/ (source repository) | 1957+ published artifacts |
 
 ## Interim Validation
 validate_kc.py is ACTIVE — always run before committing.

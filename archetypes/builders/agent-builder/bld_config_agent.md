@@ -36,13 +36,13 @@ Rule: ISO file NNN starts at 001 and increments without gaps.
 
 | Value | When to use |
 |-------|-------------|
-| STELLA | Orchestration agents |
-| SHAKA | Research and scraping agents |
-| LILY | Marketing and copy agents |
-| EDISON | Build and code agents |
-| PYTHA | Knowledge and documentation agents |
-| ATLAS | Execution, deploy, and infra agents |
-| YORK | Monetization and product agents |
+| orchestrator | Orchestration agents |
+| researcher | Research and scraping agents |
+| marketer | Marketing and copy agents |
+| builder | Build and code agents |
+| knowledge-engine | Knowledge and documentation agents |
+| executor | Execution, deploy, and infra agents |
+| monetizer | Monetization and product agents |
 | agnostic | Cross-satellite utility agents |
 
 ## ISO File Type Enum

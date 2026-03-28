@@ -21,7 +21,7 @@ title: "Prompt Caching Patterns for LLM Cost Optimization"
 version: "1.0.0"
 created: "2026-03-24"
 updated: "2026-03-24"
-author: "EDISON"
+author: "builder"
 domain: llm_engineering
 quality: null
 tags: [prompt-caching, cost-optimization, latency, anthropic, openai, knowledge]
@@ -47,7 +47,7 @@ data_source: "https://docs.anthropic.com/en/docs/build-with-claude/prompt-cachin
 ```yaml
 topic: prompt_caching
 scope: LLM API optimization (Anthropic, OpenAI, Google)
-owner: EDISON
+owner: builder
 criticality: high
 ```
 
@@ -100,7 +100,7 @@ WHY THIS IS GOLDEN:
 - tags: list >= 3 (H07 pass)
 - body 200-5120 bytes (H08 pass)
 - No internal paths (H09 pass)
-- author not STELLA (H10 pass)
+- author not orchestrator (H10 pass)
 - 7 sections >= 3 lines (S06, S08 pass)
 - Bullets <= 80 chars (S10 pass)
 - Tables + code blocks + external URL (S11-S13 pass)
@@ -116,7 +116,7 @@ BAD OUTPUT:
 id: prompt_caching_knowledge
 kind: knowledge_card
 title: Prompt Caching
-author: STELLA
+author: orchestrator
 quality: 9.0
 tags: "caching, llm"
 ---
@@ -128,7 +128,7 @@ See records/core/docs/caching.md for details.
 FAILURES:
 1. id: no `p01_kc_` prefix -> H03 FAIL
 2. lp: missing -> H06 FAIL
-3. author: STELLA -> H10 FAIL
+3. author: orchestrator -> H10 FAIL
 4. quality: self-assigned 9.0 -> H05 FAIL
 5. tags: string not list -> H07 FAIL
 6. body: <200 bytes -> H08 FAIL

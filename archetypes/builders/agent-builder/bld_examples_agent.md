@@ -21,8 +21,8 @@ title: "Knowledge Card Builder Agent"
 version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
-author: "EDISON"
-satellite: "PYTHA"
+author: "builder"
+satellite: "knowledge-engine"
 domain: "knowledge_distillation"
 llm_function: BECOME
 capabilities_count: 5
@@ -37,14 +37,14 @@ density_score: 0.87
 ```
 
 ## Overview
-knowledge-card-builder is a PYTHA specialist in knowledge distillation.
+knowledge-card-builder is a knowledge-engine specialist in knowledge distillation.
 Converts raw sources into atomic searchable knowledge_card artifacts with density >= 0.80.
 
 ## Architecture
 Capabilities: distill raw text to atomic facts, score density, produce P01 frontmatter,
 validate sources, detect boundary (knowledge_card vs context_doc vs glossary_entry).
 Tools: brain_query [MCP] (dedup check), validate_artifact.py [PLANNED].
-Satellite: PYTHA | Upstream: SHAKA | Downstream: brain-index-builder.
+Satellite: knowledge-engine | Upstream: researcher | Downstream: brain-index-builder.
 
 ## File Structure
 ```
@@ -67,7 +67,7 @@ NOT when: full narrative needed (context_doc), term definition only (glossary_en
 
 ## Input / Output
 Input: raw_source (text/URL/file), domain. Output: p01_kc_{slug}.md + density report.
-Receives from: SHAKA. Produces for: brain_index, pool (quality >= 8.0).
+Receives from: researcher. Produces for: brain_index, pool (quality >= 8.0).
 
 ## Common Issues
 1. Generic bullets: compress to concrete data, remove filler
@@ -76,7 +76,7 @@ Receives from: SHAKA. Produces for: brain_index, pool (quality >= 8.0).
 
 WHY THIS IS GOLDEN:
 - quality: null (H05 pass) | id p02_agent_ pattern (H02 pass) | kind: agent (H04 pass)
-- 19 fields (H06 pass) | llm_function: BECOME (H07 pass) | satellite: PYTHA (H08 pass)
+- 19 fields (H06 pass) | llm_function: BECOME (H07 pass) | satellite: knowledge-engine (H08 pass)
 - iso_vectorstore 10 files (S05 pass) | capabilities_count: 5 matches body (S06 pass)
 - tldr: 71ch (S01 pass) | density: 0.87 (S09 pass) | no filler (S10 pass)
 

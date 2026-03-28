@@ -9,7 +9,7 @@ pattern: few-shot learning for keyword-to-satellite routing rules
 
 ## Golden Example
 
-INPUT: "Route research, market analysis and competitor scraping to SHAKA"
+INPUT: "Route research, market analysis and competitor scraping to researcher"
 
 OUTPUT (`p12_dr_research.yaml`):
 ```yaml
@@ -24,7 +24,7 @@ author: codex
 domain: research
 quality: null
 tags: [dispatch, research, shaka, market, scrape]
-tldr: Route market research and competitor analysis tasks to SHAKA satellite
+tldr: Route market research and competitor analysis tasks to researcher satellite
 scope: research
 keywords: [pesquisar, research, mercado, market, concorrente, competitor, scrape, analise, analysis, benchmark]
 satellite: shaka
@@ -41,15 +41,15 @@ routing_strategy: hybrid
 # research Dispatch Rule
 
 ## Purpose
-Routes market research, competitor intelligence, and scraping to SHAKA.
-SHAKA carries firecrawl MCP and research-optimized prompting.
+Routes market research, competitor intelligence, and scraping to researcher.
+researcher carries firecrawl MCP and research-optimized prompting.
 
 ## Keyword Rationale
 Bilingual PT/EN coverage fires on both Portuguese operator commands and English
 task descriptions. `analise`/`analysis` catch adjacent sub-tasks.
 
 ## Fallback Logic
-PYTHA handles knowledge domain when SHAKA is unavailable; can index and
+knowledge-engine handles knowledge domain when researcher is unavailable; can index and
 summarize research outputs without firecrawl.
 ```
 
@@ -63,7 +63,7 @@ WHY THIS IS GOLDEN:
 - `scope` matches filename segment
 - `keywords` 10 terms: bilingual PT+EN coverage (S10 pass)
 - `satellite: shaka` and `fallback: pytha` are distinct lowercase slugs
-- `model: sonnet` correct for SHAKA research domain
+- `model: sonnet` correct for researcher research domain
 - `priority: 8` for high-value business domain
 - `confidence_threshold: 0.70` in recommended precision range
 - `routing_strategy: hybrid` for large bilingual keyword set
@@ -82,7 +82,7 @@ BAD OUTPUT (`p12_dispatch_rule_research.json`):
 {
   "id": "dispatch-research",
   "type": "routing",
-  "satellite": "SHAKA",
+  "satellite": "researcher",
   "keywords": "research, market",
   "quality_score": 8.5,
   "timestamp": "2026-03-26T10:00:00Z",
@@ -90,7 +90,7 @@ BAD OUTPUT (`p12_dispatch_rule_research.json`):
   "tasks": ["scrape competitor sites", "summarize findings"],
   "scope_fence": "only touch records/research/",
   "priority": "high",
-  "fallback": "SHAKA",
+  "fallback": "researcher",
   "model": "gpt-4"
 }
 ```
@@ -103,8 +103,8 @@ FAILURES:
 5. [H07] `keywords` is a string — must be a YAML list for routing engine iteration
 6. [H09] `model: gpt-4` — not in enum (`sonnet`, `opus`, `haiku`, `flash`)
 7. [H10] `priority: "high"` — must be integer 1-10, not string label
-8. [H12] `fallback: SHAKA` equals `satellite: SHAKA` — fallback must be a distinct satellite
+8. [H12] `fallback: researcher` equals `satellite: researcher` — fallback must be a distinct satellite
 9. [H14] `status`, `timestamp`, `quality_score` present — signal boundary violation
 10. [H15] `tasks`, `scope_fence` present — handoff boundary violation
-11. [S01] `satellite: SHAKA` uppercase — must be lowercase slug `shaka`
+11. [S01] `satellite: researcher` uppercase — must be lowercase slug `shaka`
 12. [S10] keywords EN-only string — no PT variants for bilingual coverage

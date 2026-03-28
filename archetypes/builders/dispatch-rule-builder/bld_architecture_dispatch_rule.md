@@ -27,7 +27,7 @@ dispatch_rule --selects--> target_satellite (routes task to correct executor)
 dispatch_rule --precedes--> handoff (P12) (rule selects who; handoff instructs what)
 dispatch_rule --precedes--> spawn_config (P12) (rule selects; config defines launch params)
 signal (P12) --informs--> dispatch_rule (completion signals may update priority weights)
-orchestrator --consumes--> dispatch_rule (STELLA, spawn_grid read rules at routing time)
+orchestrator --consumes--> dispatch_rule (orchestrator, spawn_grid read rules at routing time)
 router (P02) --independent-- dispatch_rule (P02 router does multi-step model routing, DR does satellite routing)
 workflow (P12) --independent-- dispatch_rule (workflow sequences steps, DR routes incoming tasks)
 ```

@@ -21,7 +21,7 @@ pillar: P10
 version: "1.0.0"
 created: "2026-03-05"
 updated: "2026-03-05"
-author: "EDISON"
+author: "builder"
 domain: "orchestration"
 quality: null
 tags: [learning, continuous-batching, speedup, orchestration, multi-satellite]
@@ -29,8 +29,8 @@ tldr: "Continuous batching with 3 sats achieved 1.6x speedup; task complexity dr
 topic: "Continuous batching multi-satellite performance"
 outcome: SUCCESS
 score: 9.0
-context: "ISOFIX mission, 7 batches across SHAKA+EDISON+PYTHA, 2026-03-05"
-satellite: "STELLA"
+context: "ISOFIX mission, 7 batches across researcher+builder+knowledge-engine, 2026-03-05"
+satellite: "orchestrator"
 reproducibility: HIGH
 impact: "1.6x throughput increase, zero git lock contention at 3 satellites"
 timestamp: "2026-03-05T14:30:00Z"
@@ -43,11 +43,11 @@ linked_artifacts:
 ```
 
 ## Summary
-Continuous batching with 3 satellites (SHAKA+EDISON+PYTHA) achieved 1.6x speedup over sequential execution. Speed was driven by task complexity, not model tier — opus finished faster than sonnet on simpler tasks. Zero git lock contention observed.
+Continuous batching with 3 satellites (researcher+builder+knowledge-engine) achieved 1.6x speedup over sequential execution. Speed was driven by task complexity, not model tier — opus finished faster than sonnet on simpler tasks. Zero git lock contention observed.
 
 ## Pattern
 - Use spawn_grid.ps1 with -mode continuous for >6 tasks
-- Name handoffs as {MISSION}_batch_{N}_{SAT}.md for queue management
+- Name handoffs as {MISSION}_batch_{N}_{DOMAIN}.md for queue management
 - Limit to 3 concurrent satellites (RAM ceiling at 4+)
 - Let queue auto-refill slots as satellites complete
 
@@ -58,7 +58,7 @@ Continuous batching with 3 satellites (SHAKA+EDISON+PYTHA) achieved 1.6x speedup
 
 ## Context
 - Environment: Windows 10 Pro, 32GB RAM, 3 Claude Code terminals
-- Satellite: STELLA orchestrating SHAKA+EDISON+PYTHA
+- Satellite: orchestrator orchestrating researcher+builder+knowledge-engine
 - Timing: 2026-03-05, ISOFIX mission, 7 sequential batches
 - Constraints: max 3 terminals (BSOD prevention), 5s spawn delay
 

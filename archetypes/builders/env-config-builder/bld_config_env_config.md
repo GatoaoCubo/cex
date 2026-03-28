@@ -42,5 +42,5 @@ Rule: id MUST equal filename stem. Hyphens in id = HARD FAIL.
 | Scope | Prefix | Example |
 |-------|--------|---------|
 | global | CEX_ | CEX_LOG_LEVEL, CEX_DEBUG |
-| satellite | {SAT}_ | SHAKA_API_KEY, EDISON_MODEL |
+| satellite | {DOMAIN}_ | RESEARCHER_API_KEY, BUILDER_MODEL |
 | service | {SERVICE}_ | API_PORT, API_CORS_ORIGINS |

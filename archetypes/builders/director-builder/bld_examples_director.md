@@ -9,7 +9,7 @@ pattern: few-shot learning — LLM reads these before producing
 
 ## Golden Example
 
-INPUT: "Especifica o satelite SHAKA para pesquisa de mercado"
+INPUT: "Especifica o satelite researcher para pesquisa de mercado"
 
 OUTPUT:
 
@@ -21,21 +21,21 @@ pillar: P08
 version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
-author: "EDISON"
-name: "SHAKA"
+author: "builder"
+name: "researcher"
 role: "Research satellite — market intelligence, competitor analysis, web scraping"
 model: "sonnet"
 mcps: [firecrawl, brain]
 domain_area: "research"
 boot_sequence:
-  - "Load PRIME_SHAKA.md"
+  - "Load prime_researcher.md"
   - "Initialize firecrawl MCP"
   - "Initialize brain MCP"
   - "Check dispatch queue"
 constraints:
   - "Read-only: never modify production data"
   - "Max 10 credits per research session (firecrawl budget)"
-  - "No code generation — delegate to EDISON"
+  - "No code generation — delegate to builder"
   - "Results must include source URLs"
 dispatch_keywords: [pesquisar, mercado, concorrente, scrape, analise, research]
 tools: [firecrawl_scrape, firecrawl_extract, brain_query, web_search]
@@ -54,7 +54,7 @@ flags: ["--no-chrome", "-p"]
 domain: "research-intelligence"
 quality: null
 tags: [satellite, research, shaka, market-intelligence, scraping]
-tldr: "SHAKA satellite spec — research domain, sonnet model, firecrawl+brain MCPs, market intelligence."
+tldr: "researcher satellite spec — research domain, sonnet model, firecrawl+brain MCPs, market intelligence."
 ---
 ```
 
@@ -69,7 +69,7 @@ Does not generate code or modify production systems.
 - **brain**: knowledge search and deduplication check
 
 ## Boot Sequence
-1. Load PRIME_SHAKA.md (identity, constraints, dispatch protocol)
+1. Load prime_researcher.md (identity, constraints, dispatch protocol)
 2. Initialize firecrawl MCP (verify API key, check credit balance)
 3. Initialize brain MCP (verify Ollama running, index freshness)
 4. Check dispatch queue (.claude/handoffs/shaka_*.md)
@@ -77,12 +77,12 @@ Does not generate code or modify production systems.
 ## Dispatch
 Keywords: pesquisar, mercado, concorrente, scrape, analise, research
 Routing: orchestrator matches keywords against dispatch_keywords list.
-Priority: research tasks routed to SHAKA before any other satellite.
+Priority: research tasks routed to researcher before any other satellite.
 
 ## Constraints
 - Read-only: never modify production data or commit to main
 - Budget: max 10 firecrawl credits per research session
-- Boundary: no code generation (delegate to EDISON)
+- Boundary: no code generation (delegate to builder)
 - Quality: all findings must include source URLs
 
 ## Dependencies
@@ -101,7 +101,7 @@ WHY THIS IS GOLDEN:
 - id matches p08_sat_ pattern (H02 pass)
 - kind: satellite_spec (H04 pass)
 - 26 frontmatter fields present (H06 pass)
-- name non-empty "SHAKA" (H07 pass)
+- name non-empty "researcher" (H07 pass)
 - model is valid "sonnet" (H08 pass)
 - mcps is list (H09 pass)
 - role non-empty (H10 pass)
@@ -115,7 +115,7 @@ WHY THIS IS GOLDEN:
 
 ## Anti-Example
 
-INPUT: "Define SHAKA satellite"
+INPUT: "Define researcher satellite"
 
 BAD OUTPUT:
 
@@ -133,7 +133,7 @@ tags: research
 ---
 ```
 
-SHAKA does research stuff. It uses firecrawl and brain for searching things.
+researcher does research stuff. It uses firecrawl and brain for searching things.
 
 FAILURES:
 1. id: no `p08_sat_` prefix -> H02 FAIL

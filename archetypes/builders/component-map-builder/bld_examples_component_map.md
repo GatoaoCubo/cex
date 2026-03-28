@@ -21,7 +21,7 @@ pillar: P08
 version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
-author: "EDISON"
+author: "builder"
 domain: "infrastructure"
 quality: null
 tags: [component-map, brain, infrastructure, search, knowledge]
@@ -30,12 +30,12 @@ scope: "CEX Brain search infrastructure — indexing, embedding, retrieval"
 component_count: 6
 connection_count: 8
 components:
-  - {name: "BM25 Index", role: "keyword search", owner: "PYTHA", status: "active"}
-  - {name: "FAISS Index", role: "vector similarity search", owner: "PYTHA", status: "active"}
+  - {name: "BM25 Index", role: "keyword search", owner: "knowledge-engine", status: "active"}
+  - {name: "FAISS Index", role: "vector similarity search", owner: "knowledge-engine", status: "active"}
   - {name: "Ollama", role: "local embedding generation", owner: "system", status: "active"}
   - {name: "Pool", role: "artifact storage (1957 items)", owner: "system", status: "active"}
-  - {name: "brain_query API", role: "hybrid search endpoint", owner: "PYTHA", status: "active"}
-  - {name: "build_indexes_ollama.py", role: "index rebuilder", owner: "PYTHA", status: "active"}
+  - {name: "brain_query API", role: "hybrid search endpoint", owner: "knowledge-engine", status: "active"}
+  - {name: "build_indexes_ollama.py", role: "index rebuilder", owner: "knowledge-engine", status: "active"}
 connections:
   - {from: "Pool", to: "build_indexes_ollama.py", type: "data_flow"}
   - {from: "build_indexes_ollama.py", to: "BM25 Index", type: "produces"}
@@ -54,12 +54,12 @@ CEX Brain search infrastructure: all components involved in indexing, embedding,
 ## Components
 | Component | Role | Owner | Status | Version |
 |-----------|------|-------|--------|---------|
-| BM25 Index | Keyword search (lexical) | PYTHA | active | - |
-| FAISS Index | Vector similarity (semantic) | PYTHA | active | 140MB gitignored |
+| BM25 Index | Keyword search (lexical) | knowledge-engine | active | - |
+| FAISS Index | Vector similarity (semantic) | knowledge-engine | active | 140MB gitignored |
 | Ollama | Local embedding (nomic-embed-text) | system | active | auto-start |
 | Pool | Artifact storage | system | active | 1957 items |
-| brain_query API | Hybrid search endpoint | PYTHA | active | ~88% accuracy |
-| build_indexes_ollama.py | Index rebuilder | PYTHA | active | ~20 min full rebuild |
+| brain_query API | Hybrid search endpoint | knowledge-engine | active | ~88% accuracy |
+| build_indexes_ollama.py | Index rebuilder | knowledge-engine | active | ~20 min full rebuild |
 
 ## Connections
 | From | To | Type | Data | Direction |

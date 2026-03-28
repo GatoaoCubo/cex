@@ -21,7 +21,7 @@ title: "Guardrail: Destructive Commands"
 version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
-author: "EDISON"
+author: "builder"
 scope: "filesystem operations by agents"
 severity: "critical"
 enforcement: "block"
@@ -31,7 +31,7 @@ quality: null
 tags: [guardrail, filesystem, destructive, safety, critical]
 tldr: "Blocks rm -rf, format, DROP TABLE, and other destructive commands in agent execution"
 density_score: 0.91
-bypass_approver: "STELLA"
+bypass_approver: "orchestrator"
 remediation: "Review command, replace with safe alternative, re-submit"
 linked_artifacts:
   primary: "p08_law_003"
@@ -71,7 +71,7 @@ destructive command; automated pipeline executes without human review.
 
 ## Bypass
 - Conditions: emergency data recovery requiring destructive ops
-- Approver: STELLA (orchestrator level only)
+- Approver: orchestrator (orchestrator level only)
 - Audit: bypass logged with reason, agent ID, timestamp, and command in signal
 
 ## References

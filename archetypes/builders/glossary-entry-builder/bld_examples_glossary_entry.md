@@ -21,7 +21,7 @@ pillar: P01
 version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
-author: "EDISON"
+author: "builder"
 term: "kind"
 definition: "The artifact type identifier in CEX. Each kind belongs to one pillar and has a unique schema, naming convention, and builder. Examples: knowledge_card, validator, signal."
 synonyms: [type, artifact_type]
@@ -81,7 +81,7 @@ id: kind_definition
 kind: glossary
 pillar: Knowledge
 term: Kind
-definition: Kind is a very important concept in our system. It represents the type of artifact and is used extensively throughout the entire CODEXA ecosystem for various purposes including classification, routing, validation, and many other things that make the system work properly.
+definition: Kind is a very important concept in our system. It represents the type of artifact and is used extensively throughout the entire framework ecosystem for various purposes including classification, routing, validation, and many other things that make the system work properly.
 synonyms: type
 quality: 7.5
 tags: glossary

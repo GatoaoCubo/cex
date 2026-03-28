@@ -21,7 +21,7 @@ purpose: Tools and APIs available for agent production
 |--------|----------|------|
 | CEX Schema | P02_model/_schema.yaml | Field definitions, kinds, constraints |
 | Agent Examples | P02_model/examples/ | Real agent artifacts |
-| CODEXA Agents | records/agents/ | 118+ agents with complete iso_vectorstore |
+| framework Agents | records/agents/ | 118+ agents with complete iso_vectorstore |
 | SEED_BANK | archetypes/SEED_BANK.yaml | Seeds for P02_agent |
 | TAXONOMY | archetypes/TAXONOMY_LAYERS.yaml | Layer position, overlaps, boundary |
 | system-prompt-builder | archetypes/builders/system-prompt-builder/ | Upstream dependency reference |

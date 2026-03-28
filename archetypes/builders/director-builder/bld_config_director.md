@@ -14,7 +14,7 @@ pattern: CONFIG restricts SCHEMA, never contradicts it
 | Artifact files | `p08_sat_{name_lower}.yaml` | `p08_sat_shaka.yaml` |
 | Builder directory | kebab-case | `satellite-spec-builder/` |
 | Frontmatter fields | snake_case | `domain_area`, `boot_sequence` |
-| Satellite names | UPPERCASE in name field | `SHAKA`, `EDISON`, `LILY` |
+| Satellite names | UPPERCASE in name field | `researcher`, `builder`, `marketer` |
 | Name slugs | lowercase in id | `shaka`, `edison`, `lily` |
 
 Rule: id MUST equal filename stem.

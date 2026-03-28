@@ -21,14 +21,14 @@ title: "Golden: KC Prompt Caching"
 version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
-author: "EDISON"
+author: "builder"
 target_kind: "knowledge_card"
 input: "Destila conhecimento sobre prompt caching para otimizar custos LLM"
 golden_output_ref: "inline"
 quality_threshold: 9.5
 rationale: "H01-H10 pass, S01-S18 pass. All HARD gates clear. Density 0.93, actionable, sourced."
 edge_case: false
-reviewer: "STELLA"
+reviewer: "orchestrator"
 approval_date: "2026-03-26"
 domain: "knowledge"
 quality: null
@@ -52,7 +52,7 @@ pillar: P01
 version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
-author: "PYTHA"
+author: "knowledge-engine"
 domain: "llm_optimization"
 quality: null
 tags: [prompt-caching, cost-optimization, llm, anthropic]
@@ -123,7 +123,7 @@ WHY THIS IS GOLDEN:
 - quality_threshold == 9.5 (H07 pass)
 - rationale maps to specific gate IDs H01-H07, S02-S08 (S03 pass)
 - golden_output is complete KC with all sections (S04 pass)
-- reviewer assigned: STELLA (S06 pass)
+- reviewer assigned: orchestrator (S06 pass)
 - Input Scenario is specific and actionable (S04 pass)
 - Evaluation Criteria has 5 concrete checks (S05 pass)
 

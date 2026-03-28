@@ -23,15 +23,15 @@ title: "Lifecycle: KC Freshness"
 version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
-author: "EDISON"
+author: "builder"
 scope: "knowledge_card"
 freshness_days: 90
 review_cycle: "quarterly"
-ownership: "PYTHA"
+ownership: "knowledge-engine"
 domain: "knowledge"
 quality: null
 tags: [lifecycle-rule, knowledge-card, freshness, quarterly]
-tldr: "KCs become stale after 90 days; quarterly review by PYTHA promotes, refreshes, or archives"
+tldr: "KCs become stale after 90 days; quarterly review by knowledge-engine promotes, refreshes, or archives"
 notification: "signal"
 automation: "semi"
 density_score: 0.93
@@ -62,7 +62,7 @@ ensures KCs are reviewed before staleness degrades downstream decisions.
 |------|----|---------|--------|-----------|
 | draft | active | quality_gate pass >= 8.0 | Index in brain, notify owner | yes |
 | draft | rejected | quality_gate fail < 7.0 | Return to author with report | yes |
-| active | stale | 90 days since last updated | Emit staleness signal, notify PYTHA | yes |
+| active | stale | 90 days since last updated | Emit staleness signal, notify knowledge-engine | yes |
 | active | promoted | quality_gate pass >= 9.5 | Tag as golden, priority index | yes |
 | promoted | stale | 180 days since last updated | Emit staleness signal | yes |
 | stale | refreshed | Owner updates and re-validates | Re-index, reset freshness timer | semi |
@@ -72,7 +72,7 @@ ensures KCs are reviewed before staleness degrades downstream decisions.
 ## Review Protocol
 | Aspect | Value |
 |--------|-------|
-| Reviewer | PYTHA (knowledge satellite) |
+| Reviewer | knowledge-engine (knowledge satellite) |
 | Cycle | quarterly (every 90 days) |
 | Checklist | facts still accurate, sources still valid, density >= 0.80 |
 | Outcome | refresh (update + re-validate) or archive (remove from index) |

@@ -21,7 +21,7 @@ pillar: P01
 version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
-author: "EDISON"
+author: "builder"
 input: "Create a knowledge card about Docker networking basics"
 output: |
   ---
@@ -31,7 +31,7 @@ output: |
   version: "1.0.0"
   created: "2026-03-26"
   updated: "2026-03-26"
-  author: "PYTHA"
+  author: "knowledge-engine"
   quality: null
   tags: [docker, networking, devops]
   tldr: "Docker networking: bridge, host, overlay modes and use cases."

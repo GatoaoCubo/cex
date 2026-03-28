@@ -20,7 +20,7 @@ pillar: P02
 version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
-author: "EDISON"
+author: "builder"
 steps_count: 3
 timeout_per_step_ms: 30000
 quality_threshold: 7.0
@@ -68,7 +68,7 @@ Ceiling: $0.50 per request chain execution.
 
 ## Integration
 - Activated by: agent request with model_preference or router timeout
-- Provides to: SHAKA (research agent), any agent needing resilient model selection
+- Provides to: researcher (research agent), any agent needing resilient model selection
 - Signals: `p12_sig_model_degraded` on step transition, `p12_sig_chain_exhausted` on final fail
 
 ## References

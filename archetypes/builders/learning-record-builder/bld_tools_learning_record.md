@@ -11,7 +11,7 @@ purpose: Tools and APIs available for learning_record production
 | Tool | Purpose | When | Status |
 |------|---------|------|--------|
 | brain_query | Search existing learning_records | Phase 1 (check duplicates) | CONDITIONAL [MCP] |
-| memory_bridge.py | Sync learning to CODEXA memory | Post-production | ACTIVE |
+| memory_bridge.py | Sync learning to framework memory | Post-production | ACTIVE |
 | validate_artifact.py | Generic artifact validator | Phase 3 | [PLANNED] |
 | cex_forge.py | Generate artifact from seeds | Alternative compose | [PLANNED] |
 
