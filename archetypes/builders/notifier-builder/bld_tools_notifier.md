@@ -1,0 +1,67 @@
+---
+kind: tools
+id: bld_tools_notifier
+pillar: P04
+llm_function: EXECUTE
+purpose: Tool registry for notifier-builder
+version: 1.0.0
+created: 2026-03-28
+updated: 2026-03-28
+author: EDISON
+tags: [tools, notifier, P04, brain, validate, forge]
+quality: null
+tldr: "Tools used by notifier-builder: brain_query for discovery, validate for gates, forge for artifact creation."
+---
+# Tools: notifier-builder
+
+## Primary Tools
+
+### brain_query
+**Purpose**: Discover existing notifier artifacts, find related builders, retrieve patterns
+**When**: Before composing — check for duplicate channels, find provider patterns
+```
+brain_query("notifier {channel} {use_case}")
+brain_query("p04_notify_{channel_slug}")
+brain_query("notifier rate limit {provider}")
+```
+
+### validate (quality_gate)
+**Purpose**: Run HARD + SOFT gates against composed artifact
+**When**: After Phase 2 COMPOSE, before declaring complete
+**Input**: artifact frontmatter + body as string
+**Checks**: H01-H10 HARD, S01-S12 SOFT, score >= 7.0
+
+### forge (artifact write)
+**Purpose**: Write final artifact to correct path with correct filename
+**When**: After validate passes all HARD gates
+**Path pattern**: `archetypes/notifiers/p04_notify_{channel_slug}.md`
+**Naming**: id == filename stem, .md extension
+
+## Supporting Tools
+
+### Read
+**When**: Load SCHEMA, OUTPUT_TEMPLATE, existing artifacts for dedup check
+**Files**: bld_schema_notifier.md, bld_output_template_notifier.md
+
+### Glob
+**When**: Check for existing notifiers before creating new one
+**Pattern**: `archetypes/notifiers/p04_notify_*.md`
+
+### Grep
+**When**: Find channel slug usage, verify id uniqueness across pool
+**Pattern**: `^id: p04_notify_{channel_slug}$`
+
+## Tool Call Order
+```
+1. brain_query     -> discover existing + patterns
+2. Read SCHEMA     -> internalize constraints
+3. Read TEMPLATE   -> fill vars
+4. forge/Write     -> create artifact
+5. validate        -> run gates
+6. brain_query     -> confirm indexed
+```
+
+## Anti-Patterns
+- Skipping brain_query -> duplicate artifacts with conflicting ids
+- Skipping validate -> broken artifacts reach pool
+- Writing to wrong path -> artifact not discoverable
