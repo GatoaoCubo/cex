@@ -10,7 +10,7 @@
   <img src="https://img.shields.io/badge/license-MIT-green" alt="License">
   <img src="https://img.shields.io/badge/LLMs-Claude%20%7C%20GPT%20%7C%20Gemini%20%7C%20Local-8A2BE2" alt="LLMs">
   <img src="https://img.shields.io/badge/pillars-12-orange" alt="Pillars">
-  <img src="https://img.shields.io/badge/artifact%20types-69-red" alt="Types">
+  <img src="https://img.shields.io/badge/artifact%20types-78-red" alt="Types">
 </p>
 
 ---
@@ -32,7 +32,7 @@ You describe **intent** in 8 tokens. CEX compiles it into a **1,200-token govern
 ## The Solution
 
 - **8 typed dimensions.** Every LLM interaction decomposes into 8 orthogonal functions (BECOME, INJECT, REASON, CALL, PRODUCE, CONSTRAIN, GOVERN, COLLABORATE). CEX fills what the human didn't provide.
-- **69 artifact types across 12 pillars.** Knowledge cards, agents, prompts, schemas, evals -- each with frontmatter, naming conventions, and validation rules. Like `CREATE TABLE` for AI.
+- **78 artifact types across 12 pillars.** Knowledge cards, agents, prompts, schemas, evals -- each with frontmatter, naming conventions, and validation rules. Like `CREATE TABLE` for AI.
 - **Compilation pipeline.** Intent → Capture → Decompose → Hydrate → Compile → Envelope. 80% deterministic, 90% cheaper than full-LLM approaches.
 
 ---

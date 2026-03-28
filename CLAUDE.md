@@ -1,7 +1,7 @@
 # CEX — LLM Entry Point
 
 > **You are inside a CEX repository.** A typed, indexed knowledge base
-> for building LLM agents. 69 kinds, 69 builders, 12 pillars, 7 nuclei.
+> for building LLM agents. 78 kinds, 78 builders, 12 pillars, 7 nuclei.
 > Navigate by filename: `{layer}_{kind}_{topic}.{ext}`.
 
 ---
