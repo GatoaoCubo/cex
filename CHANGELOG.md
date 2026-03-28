@@ -1,92 +1,114 @@
-# CHANGELOG
+# Changelog
 
 All notable changes to CEX are documented here.
-Format: Wave-based (chronological order).
+Format follows [Keep a Changelog](https://keepachangelog.com/).
 
 ---
 
-## [3.0.0] - 2026-03-23
+## [6.0.0] - 2026-03-27 — Governance
 
 ### Added
-- Dual output architecture: .md (human) + compiled .yaml/.json (machine)
+- `cex_doctor.py` v2: naming v2.0 validation + density checks + 13-file completeness
+- `validate_builder` v2 + pre-commit hook with 7 automated checks
+- Multi-LLM entry points: Cursor, Copilot, Windsurf, Claude rules generated
+- `cex_pipeline.py`: 5-stage engine (CAPTURE > DECOMPOSE > HYDRATE > COMPILE > ENVELOPE)
+- `cex_index.py`: SQLite index scanning 1642 files + wikilink graph
+- `cex_feedback.py`: quality tracking + auto-archive + promotion engine
+- `cex init` CLI: 5 interactive questions to functional repo
+- Onboarding + quickstart + FAQ documentation suite
+- README v2: public-facing with architecture diagram + quickstart
+
+### Changed
+- CODEX.md updated to v6.0.0
+- Pre-commit hooks enforce naming v2.0 + density + 13-file structure
+- CONTRIBUTING.md v2.0: builder guide with 13-file spec + `cex_doctor` workflow
+
+---
+
+## [5.0.0] - 2026-03-25 — Fractal Nuclei
+
+### Added
+- 7 departments (N01-N07) x 12 subdirs: fractal organizational structure
+- Skeleton instances illustrating ideal CEX architecture per department
+- Obsidian integration: graph colors by 8 functions + full repo audit map
+- Whitepaper v3.0: 12 sections, 20KB, compiled from structured rascunho
+
+### Changed
+- Repository expanded from flat pillars to department-based fractal hierarchy
+- Obsidian graph visualization enabled for cross-pillar navigation
+
+---
+
+## [4.0.0] - 2026-03-24 — Naming v2.0
+
+### Added
+- Naming convention v2.0: `bld_{kind}_{topic}.md` pattern enforced
+
+### Changed
+- 932 builder files renamed to comply with naming v2.0
+- 158 legacy examples renamed (satellite > director terminology)
+
+### Removed
+- Legacy naming patterns (mixed case, hyphens, non-standard prefixes)
+- CODEXA-specific jargon universalized across all files
+
+---
+
+## [3.0.0] - 2026-03-23 — Dual Output + Builders
+
+### Added
+- Dual output architecture: `.md` (human) + compiled `.yaml`/`.json` (machine)
 - `machine_format` field in all 73 types across 12 LPs (64 yaml, 9 json)
-- `archetypes/DECISION_MAP.md`: file category -> LP -> type -> format routing table
+- `archetypes/DECISION_MAP.md`: file category > LP > type > format routing
 - `_tools/cex_compile.py`: compiles .md examples to machine-optimized format
 - `_tools/validate_compiled.py`: validates compiled artifacts
-- `compiled/` directory in each LP
-- P03 schema completed: meta_prompt + router_prompt types (were missing)
-- source_map field in P03 types: maps existing codexa-core artifacts to CEX types
+- 35 builder archetypes (Waves 8-22): each with 13 ISO files
+- Schema v2 refinement: evidence-calibrated across all 10 builder kinds
+- Bootstrap regeneration: 7 docs x 35 builders (C01-C07 waves)
+- P03 schema completed: meta_prompt + router_prompt types
 
 ### Changed
 - All 12 `_schema.yaml` updated to v2.0/v3.0
-- P03 `_schema.yaml` user_prompt body_structure: context-first ordering (research-validated)
-- P03 few_shot max_examples: 10 -> 5 (diminishing returns research)
-
-### Research Basis
-- KC_SHAKA_ANTHROPIC_PROMPT_ENGINEERING (9.0): XML for Claude, caching patterns
-- KC_SHAKA_097_META_PROMPT_ENGINEERING_2025 (8.7): knowledge-first +0.91, MIPRO +13%
-- KC_SHAKA_DSPY_PROGRAMMATIC_PROMPTING (9.0): Signatures, BootstrapFewShot
-- KC_EDISON_024_CHAIN_OF_THOUGHT (9.5): Metacognitive +26.9%
+- P03 user_prompt body_structure: context-first ordering (research-validated)
+- P03 few_shot max_examples: 10 > 5 (diminishing returns)
 
 ---
 
-## [1.1.0] - 2026-03-23
+## [2.0.0] - 2026-03-23 — Schemas + Generators
 
-### Versioning System (EDISON)
-- `archetypes/VERSION.yaml` — formal version manifest with real counts per LP (12 LPs, 69 types, 21 templates, 48 examples)
-- `_tools/bump_version.py` — version bumper with `--lp` and `--level` args, auto-updates CHANGELOG
-- `_tools/changelog_gen.py` — git log parser, groups commits by LP, generates formatted entries
-- Post-v1.0 additions: ISO package spec, compile/decompile/validate tools, deck system, GDrive integration
-- Pipeline: distill.py (template-as-prompt), audio feedback (Edge TTS), contributor ingestion pipeline
-- Packages: 7 golden agents normalized to ISO Package Spec format
-- ML Algorithm Map: first universal KC (dual: CEX framework + instance pool)
-
----
-
-## [1.0.0] - 2026-03-22
-
-### Wave 6: Product Release (PYTHA + STELLA)
-- Bootstrap CLI (`_tools/bootstrap.sh`) — creates full LP structure in new repos
-- Dogfood mode — CEX used to generate CEX artifacts (flywheel activated)
-- Full documentation suite: ARCHITECTURE.md, CONTRIBUTING.md, CHANGELOG.md
-- README v1.0 finalized with badge, tree, 3-step getting started, MIT license
-- CODEX v4: final metrics + all wave decisions consolidated
-
-### Wave 5: Anti-Fragility (PYTHA)
-- Meta-docs v3: CODEX + ROADMAP + README updated with real data from execution
-- Density Report: 18 examples analyzed — Elite:6 / High:12 / Standard:0 / mean:88.6%
-- 3 validators: `validate_schema.py`, `validate_generators.py`, `validate_examples.py`
-- QUALITY+SCALE templates: P05 output_schema template added
-- GOLDEN_CANDIDATES.md updated with priority queue
-
-### Wave 4: Golden Migration (PYTHA + STELLA)
-- Migration map: 9,916 files from codexa-core classified into 9 LP buckets
-  - KC: 638 | HOP: 701 | AGT: 570 | SKL: 412 | FAT: 89 | ADW: 312 | others
-- 12 golden examples migrated (4 KC + 3 agent + 3 prompt + 2 skill)
-- GOLDEN_CANDIDATES.md: 22 candidates identified with priority queue
-
-### Wave 3: Generators + Examples (PYTHA + EDISON)
-- 12 generators (P01-P12): step-by-step authoring + anti-patterns per LP
-- 18 golden examples across P01-P04 (density avg 88.6%, range 0.85-0.95)
-- 7 templates: P01(3) + P02(1) + P03(1) + P04(1) + P05(1)
-- Meta-template v1 (`archetypes/META_TEMPLATE.md`) — the template that generates templates
-- Validation chain test PASS: META_TEMPLATE > schema > template > instance pipeline
-- GLOSSARY.md and MANDAMENTOS.md consolidated
-
-### Wave 2: Schemas 12LP (EDISON + PYTHA)
+### Added
 - 12 schemas (`_schema.yaml` per LP) with full field constraints
-- 68 artifact types across all layers:
-  - CORE (P01-P04): 27 types
-  - QUALITY (P05-P08): 20 types
-  - SCALE (P09-P12): 21 types
+- 68 artifact types across all layers (CORE 27 + QUALITY 20 + SCALE 21)
+- 12 generators (`_generator.md` per LP): step-by-step authoring + anti-patterns
+- 7 templates across P01-P05
+- 18 golden examples (density avg 88.6%, range 0.85-0.95)
+- Meta-template v1 (`archetypes/META_TEMPLATE.md`)
+- 3 validators: `validate_schema.py`, `validate_generators.py`, `validate_examples.py`
+- Migration map: 9,916 files classified into 9 LP buckets
+- 12 golden examples migrated + 22 candidates identified
+- Density Report: Elite 6, High 12, mean 88.6%
+- Versioning system: `VERSION.yaml`, `bump_version.py`, `changelog_gen.py`
 - Pre-commit validation hooks wired to schemas
 
-### Wave 1: Destilar (SHAKA x3 grid)
+### Changed
+- Max file size: 2KB > 4KB (golden avg ~3KB)
+- Density floor: 0.75 > 0.80 (all examples exceeded 0.85)
+- Elite tier: 0.95 > 0.90 (6 qualifying examples)
+
+---
+
+## [1.0.0] - 2026-03-22 — Initial Release
+
+### Added
+- CEX scaffold: 12 pillars (P01-P12) with CORE + QUALITY + SCALE layers
 - 42KB distillation from 9,910 MD files + 783 golden in codexa-core
 - Pattern extraction: density tiers, naming conventions, frontmatter structure
-- P01/_schema.yaml v0 — first schema derived from real data
 - First golden example: `p01_kc_catalogo_proprio_mercado_livre` (density 0.92)
-- CEX scaffold (`P01-P12/` + `archetypes/`) created
+- Bootstrap CLI (`_tools/bootstrap.sh`): creates full LP structure in new repos
+- Dogfood mode: CEX generates CEX artifacts (flywheel activated)
+- CODEX v4, GLOSSARY, MANDAMENTOS documentation
+- ARCHITECTURE.md, CONTRIBUTING.md, README v1.0
+- MIT License
 
 ---
 
@@ -95,30 +117,17 @@ Format: Wave-based (chronological order).
 | Metric | Value |
 |--------|-------|
 | Pillars | 12 (P01-P12) |
-| Artifact Types | 69 |
+| Departments | 7 (N01-N07) |
+| Artifact Types | 73 |
+| Builder Archetypes | 35 |
 | Schemas | 12/12 |
 | Generators | 12/12 |
 | Templates | 21 |
 | Examples (golden) | 48 |
-| Validators | 3 |
+| Validators | 6 |
 | Density avg | 88.6% |
-| Elite examples | 6 (density >= 0.90) |
-| Files indexed | 9,916 (migration map) |
-| Total commits | 30+ |
-| Repo size | ~65KB |
+| Files indexed | 1,642 (SQLite) |
 
 ---
 
-## Credits
-
-| Satellite | Role | Waves |
-|-----------|------|-------|
-| STELLA | Orchestration, handoffs, mission control | 1-6 |
-| SHAKA | codexa-core distillation, pattern extraction | 1, 4 |
-| PYTHA | Knowledge, generators, examples, templates, docs | 3-6 |
-| EDISON | Schemas (P05-P12), validators, bootstrap CLI | 2-3, 6 |
-| ATLAS | Chain validation, VALIDATION_REPORT.md | 3 |
-
----
-
-*CEX v1.1.0 | 2026-03-23 | MIT License*
+*CEX v6.0.0 | 2026-03-27 | MIT License*

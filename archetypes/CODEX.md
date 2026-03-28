@@ -1,5 +1,5 @@
 # RECORDS CODEX -- Biblia Universal de Meta-Construcao
-## v2.0 | DNA do CEX | LIVING | Atualizado com dados reais
+## v6.0.0 | DNA do CEX | LIVING | Atualizado com dados reais
 
 ---
 
@@ -129,4 +129,4 @@ ARCHIVE: quality<7 + age>30d. PROMOTE: used>10x + quality>9
 | 10 | Validate early, validate often | W3: chain test antes de escalar evitou propagacao de erros |
 
 ---
-*CODEX v4.0 | v1.0.0 FINAL | 2026-03-22*
+*CODEX v6.0.0 | 2026-03-27*
