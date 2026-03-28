@@ -1,0 +1,50 @@
+---
+kind: schema
+id: bld_schema_vision_tool
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema — SINGLE SOURCE OF TRUTH for vision_tool
+pattern: TEMPLATE derives from this. CONFIG restricts this.
+---
+
+# Schema: vision_tool
+## Frontmatter Fields
+| Field | Type | Required | Default | Notes |
+|-------|------|----------|---------|-------|
+| id | string (p04_vision_{capability_slug}) | YES | - | Namespace compliance |
+| kind | literal "vision_tool" | YES | - | Type integrity |
+| pillar | literal "P04" | YES | - | Pillar assignment |
+| version | semver string | YES | "1.0.0" | Artifact versioning |
+| created | date YYYY-MM-DD | YES | - | Creation date |
+| updated | date YYYY-MM-DD | YES | - | Last update |
+| author | string | YES | - | Producer identity |
+| name | string | YES | - | Human-readable tool name |
+| input_types | list[enum: base64, url, file_path, buffer, screenshot] | YES | - | Accepted visual input formats |
+| capabilities | list[string], len >= 1 | YES | - | What the tool can detect/extract |
+| output_format | enum: json, text, table | YES | json | Primary output format |
+| providers | list[string] | YES | - | Supported vision API providers |
+| quality | null | YES | null | Never self-score |
+| tags | list[string], len >= 3 | YES | - | Must include "vision_tool" |
+| tldr | string <= 160ch | YES | - | Dense summary |
+| description | string <= 200ch | REC | - | What the tool does |
+| max_resolution | string | REC | - | Maximum input resolution e.g. "4096x4096" |
+| supported_formats | list[enum: png, jpg, jpeg, webp, gif, bmp, tiff, pdf] | REC | - | Accepted image file formats |
+| confidence_threshold | float 0.0-1.0 | REC | 0.8 | Minimum confidence for results |
+| batch_support | boolean | REC | false | Supports multiple images per call |
+| max_bytes_per_image | integer | REC | - | Max image payload size in bytes |
+## ID Pattern
+Regex: `^p04_vision_[a-z][a-z0-9_]+$`
+Rule: id MUST equal filename stem.
+## Body Structure (required sections)
+1. `## Overview` — what the tool does, use case, who uses it
+2. `## Input Types` — each accepted input type with format details and size limits
+3. `## Capabilities` — each capability with description, confidence, and examples
+4. `## Output Format` — structured output schema with field descriptions
+## Constraints
+- max_bytes: 2048 (body only)
+- naming: p04_vision_{capability_slug}.md
+- machine_format: yaml (compiled artifact)
+- id == filename stem
+- capabilities list MUST match capability names in ## Capabilities section
+- quality: null always
+- NO implementation code in body — spec only
