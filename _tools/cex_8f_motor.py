@@ -1,0 +1,719 @@
+import sys
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8")
+#!/usr/bin/env python3
+"""
+cex_8f_motor.py -- Motor 8F: Intent -> Execution Plan
+
+The Motor 8F algorithm receives a natural language intent string and produces
+a structured execution plan: which builders to activate, in what order,
+with what dependencies, to satisfy the 8 functions of the LLM pipeline.
+
+Pipeline order (from MOTOR_8F_SPEC):
+  CONSTRAIN(1) -> BECOME(2) -> INJECT(3) -> REASON(4) ->
+  CALL(5) -> PRODUCE(6) -> GOVERN(7) -> COLLABORATE(8)
+
+Usage:
+  python cex_8f_motor.py --intent "cria agente de vendas para ML"
+  python cex_8f_motor.py --intent "reconstroi signal-builder" --quality 9.5
+  python cex_8f_motor.py --intent "cria agente E workflow de pesquisa"
+  python cex_8f_motor.py --intent "cria agente" --output plan.json
+  python cex_8f_motor.py --test
+"""
+
+import json
+import re
+import argparse
+from pathlib import Path
+
+try:
+    import yaml
+except ImportError:
+    print("ERRO: PyYAML necessario. pip install pyyaml", file=sys.stderr)
+    sys.exit(1)
+
+
+# ---------------------------------------------------------------------------
+# Constants
+# ---------------------------------------------------------------------------
+
+CEX_ROOT = Path(__file__).resolve().parent.parent
+BUILDER_MAP_PATH = CEX_ROOT / "_docs" / "8F_BUILDER_MAP.yaml"
+
+FUNCTION_POSITIONS = {
+    "CONSTRAIN": 1,
+    "BECOME": 2,
+    "INJECT": 3,
+    "REASON": 4,
+    "CALL": 5,
+    "PRODUCE": 6,
+    "GOVERN": 7,
+    "COLLABORATE": 8,
+}
+
+# Verb normalization: PT imperative/infinitive -> canonical action
+VERB_TABLE = {
+    "cria": "create",
+    "criar": "create",
+    "crie": "create",
+    "melhora": "improve",
+    "melhorar": "improve",
+    "melhore": "improve",
+    "reconstroi": "rebuild",
+    "reconstruir": "rebuild",
+    "reconstrua": "rebuild",
+    "analisa": "analyze",
+    "analisar": "analyze",
+    "analise": "analyze",
+    "valida": "validate",
+    "validar": "validate",
+    "valide": "validate",
+    "documenta": "document",
+    "documentar": "document",
+    "documente": "document",
+    "integra": "integrate",
+    "integrar": "integrate",
+    "integre": "integrate",
+}
+
+# Object keyword -> [(kind, pillar, primary_function)]
+OBJECT_TO_KINDS = {
+    "agente": [("agent", "P02", "BECOME")],
+    "agent": [("agent", "P02", "BECOME")],
+    "sistema": [("satellite_spec", "P08", "BECOME")],
+    "satelite": [("satellite_spec", "P08", "BECOME")],
+    "satellite": [("satellite_spec", "P08", "BECOME")],
+    "prompt": [("system_prompt", "P03", "BECOME")],
+    "instrucao": [("instruction", "P03", "REASON")],
+    "workflow": [("workflow", "P12", "COLLABORATE")],
+    "pipeline": [("workflow", "P12", "COLLABORATE")],
+    "conhecimento": [("knowledge_card", "P01", "INJECT")],
+    "knowledge": [("knowledge_card", "P01", "INJECT")],
+    "knowledge-card": [("knowledge_card", "P01", "INJECT")],
+    "knowledge_card": [("knowledge_card", "P01", "INJECT")],
+    "rag": [("rag_source", "P01", "INJECT")],
+    "fonte": [("rag_source", "P01", "INJECT")],
+    "skill": [("skill", "P04", "CALL")],
+    "habilidade": [("skill", "P04", "CALL")],
+    "tool": [("cli_tool", "P04", "CALL")],
+    "ferramenta": [("cli_tool", "P04", "CALL")],
+    "avaliacao": [("unit_eval", "P07", "GOVERN")],
+    "eval": [("unit_eval", "P07", "GOVERN")],
+    "teste": [("unit_eval", "P07", "GOVERN")],
+    "schema": [("input_schema", "P06", "CONSTRAIN")],
+    "contrato": [("interface", "P06", "CONSTRAIN")],
+    "sinal": [("signal", "P12", "COLLABORATE")],
+    "signal": [("signal", "P12", "COLLABORATE")],
+    "handoff": [("handoff", "P12", "COLLABORATE")],
+    "modelo": [("model_card", "P02", "BECOME")],
+    "model": [("model_card", "P02", "BECOME")],
+    "regra": [("law", "P08", "CONSTRAIN")],
+    "rule": [("law", "P08", "CONSTRAIN")],
+    "guardrail": [("guardrail", "P11", "GOVERN")],
+    "restricao": [("guardrail", "P11", "GOVERN")],
+    "chain": [("chain", "P03", "REASON")],
+    "cadeia": [("chain", "P03", "REASON")],
+    "router": [("router", "P02", "REASON")],
+    "roteamento": [("router", "P02", "REASON")],
+    "dag": [("dag", "P12", "COLLABORATE")],
+    "grafo": [("dag", "P12", "COLLABORATE")],
+    "spawn": [("spawn_config", "P12", "COLLABORATE")],
+    "iso": [("iso_package", "P02", "BECOME")],
+    "pacote": [("iso_package", "P02", "BECOME")],
+    "conector": [("connector", "P04", "CALL")],
+    "api": [("connector", "P04", "CALL")],
+    "lens": [("lens", "P02", "BECOME")],
+    "perspectiva": [("lens", "P02", "BECOME")],
+    "memory": [("brain_index", "P10", "INJECT")],
+    "memoria": [("brain_index", "P10", "INJECT")],
+    "glossario": [("glossary_entry", "P01", "INJECT")],
+    "axioma": [("axiom", "P10", "INJECT")],
+}
+
+# Verb -> extra builders force-activated regardless of tier
+VERB_EXTRA_BUILDERS = {
+    "improve": {"quality-gate-builder", "scoring-rubric-builder"},
+    "rebuild": {"_builder-builder"},
+    "analyze": {"scoring-rubric-builder", "unit-eval-builder"},
+    "validate": {"validator-builder", "quality-gate-builder"},
+    "document": {"knowledge-card-builder", "context-doc-builder"},
+    "integrate": {"connector-builder", "interface-builder"},
+}
+
+# Primary builders that need specific keywords to be active (otherwise inactive)
+PRIMARY_NEEDS_KEYWORD = {
+    "boot-config-builder": ["boot", "inicializacao", "provider"],
+    "rag-source-builder": ["rag", "fonte externa", "base de conhecimento"],
+    "chain-builder": ["chain", "cadeia", "sequencia de prompts"],
+    "mcp-server-builder": ["mcp"],
+    "cli-tool-builder": ["cli", "linha de comando", "terminal"],
+    "connector-builder": ["conector", "integra com", "api externa"],
+    "scraper-builder": ["scraper", "scraping", "extrai dados"],
+    "client-builder": ["client", "api rest", "graphql"],
+    "formatter-builder": ["formatacao", "formato especial"],
+    "parser-builder": ["parser", "parsing", "extrai de output"],
+    "workflow-builder": ["workflow", "fluxo", "pipeline multi"],
+    "spawn-config-builder": ["spawn", "lancamento", "deploy"],
+    "dispatch-rule-builder": ["dispatch", "routing policy", "despacho"],
+    "e2e-eval-builder": ["e2e", "end-to-end"],
+    "validator-builder-codex": ["codex", "code review", "revisao de codigo"],
+    "type-def-builder": ["tipo customizado", "type definition", "typedef"],
+    "validation-schema-builder": ["validation schema", "schema de validacao"],
+    "daemon-builder": ["daemon", "background", "processo continuo"],
+    "plugin-builder": ["plugin", "extensao"],
+}
+
+# Token estimation by builder complexity tier
+SIMPLE_BUILDERS = frozenset(
+    [
+        "signal-builder",
+        "dispatch-rule-builder",
+        "env-config-builder",
+        "session-state-builder",
+        "naming-rule-builder",
+        "path-config-builder",
+        "feature-flag-builder",
+        "runtime-rule-builder",
+        "permission-builder",
+        "runtime-state-builder",
+    ]
+)
+COMPLEX_BUILDERS = frozenset(
+    [
+        "agent-builder",
+        "workflow-builder",
+        "model-card-builder",
+        "iso-package-builder",
+        "e2e-eval-builder",
+        "director-builder",
+    ]
+)
+META_BUILDERS = frozenset(["_builder-builder"])
+
+
+def estimate_tokens(builder_id: str) -> int:
+    """Estimate token cost for a builder execution."""
+    if builder_id in META_BUILDERS:
+        return 40000
+    if builder_id in COMPLEX_BUILDERS:
+        return 8000
+    if builder_id in SIMPLE_BUILDERS:
+        return 2000
+    return 4000  # medium
+
+
+# ---------------------------------------------------------------------------
+# Step 1: PARSE — extract verb, objects, domain, quality from intent
+# ---------------------------------------------------------------------------
+
+
+def parse_intent(intent: str, quality_override: float | None = None) -> dict:
+    """Parse natural language intent into structured fields."""
+    text = intent.strip()
+    if not text:
+        return {
+            "verb": "cria",
+            "verb_action": "create",
+            "objects": [],
+            "domain": "generic",
+            "quality": quality_override or 9.0,
+            "multi_object": False,
+            "error": "intent vazio",
+        }
+
+    text_lower = text.lower()
+    words = text_lower.split()
+
+    # --- Verb ---
+    verb = "cria"
+    verb_action = "create"
+    for w in words:
+        clean = re.sub(r"[^a-z]", "", w)
+        if clean in VERB_TABLE:
+            verb = clean
+            verb_action = VERB_TABLE[clean]
+            break
+
+    # --- Quality (decimal like 9.0, 9.5) ---
+    quality = quality_override or 9.0
+    qm = re.search(r"\b(\d+\.\d+)\b", text)
+    if qm and not quality_override:
+        q = float(qm.group(1))
+        if 1.0 <= q <= 10.0:
+            quality = q
+
+    # --- Multi-object detection ---
+    # Remove verb from text, then split by separators " e ", "+", ","
+    rest = re.sub(r"(?i)\b" + re.escape(verb) + r"\b", "", text, count=1).strip()
+    if qm:
+        rest = rest.replace(qm.group(0), "").strip()
+
+    segments = re.split(r"\s+[eE]\s+|\s*\+\s*|\s*,\s*", rest)
+    segments = [s.strip() for s in segments if s.strip()]
+
+    # --- Objects ---
+    objects = []
+    for seg in segments:
+        seg_words = seg.lower().split()
+        for sw in seg_words:
+            clean = re.sub(r"[^a-z_-]", "", sw)
+            if clean in OBJECT_TO_KINDS and clean not in objects:
+                objects.append(clean)
+                break
+
+    # Check for builder name in intent (meta intent: "reconstroi X-builder")
+    bm = re.search(r"([\w-]+-builder)\b", text_lower)
+    if bm and bm.group(1) not in objects:
+        objects.append(bm.group(1))
+
+    # Fallback: scan all words
+    if not objects:
+        for w in words:
+            clean = re.sub(r"[^a-z_-]", "", w)
+            if clean in OBJECT_TO_KINDS:
+                objects.append(clean)
+                break
+
+    # --- Domain ---
+    skip_words = (
+        set(VERB_TABLE.keys())
+        | set(OBJECT_TO_KINDS.keys())
+        | {
+            "o",
+            "a",
+            "os",
+            "as",
+            "um",
+            "uma",
+            "uns",
+            "umas",
+            "do",
+            "da",
+            "dos",
+            "das",
+            "no",
+            "na",
+            "nos",
+            "nas",
+            "com",
+            "sem",
+            "que",
+            "por",
+            "ao",
+            "aos",
+            "score",
+        }
+    )
+
+    de_val = para_val = None
+    de_m = re.search(r"\bde\s+(\w+)", text_lower)
+    para_m = re.search(r"\bpara\s+(\w+)", text_lower)
+
+    if de_m and de_m.group(1) not in skip_words:
+        de_val = de_m.group(1)
+    if para_m and para_m.group(1) not in skip_words:
+        para_val = para_m.group(1)
+
+    if de_val and para_val:
+        domain = f"{de_val}/{para_val}"
+    elif de_val:
+        domain = de_val
+    elif para_val:
+        domain = para_val
+    else:
+        domain = "generic"
+
+    return {
+        "verb": verb,
+        "verb_action": verb_action,
+        "objects": objects,
+        "domain": domain,
+        "quality": quality,
+        "multi_object": len(objects) > 1,
+    }
+
+
+# ---------------------------------------------------------------------------
+# Step 2: CLASSIFY — map objects to CEX kinds
+# ---------------------------------------------------------------------------
+
+
+def classify_objects(objects: list[str]) -> list[dict]:
+    """Map object keywords to CEX kinds using taxonomy table."""
+    classified = []
+    seen_kinds = set()
+
+    for obj in objects:
+        # Meta intent: object is a builder name
+        if obj.endswith("-builder"):
+            classified.append(
+                {
+                    "object": obj,
+                    "kind": "type_builder",
+                    "pillar": "P02",
+                    "primary_function": "BECOME",
+                    "meta": True,
+                }
+            )
+            continue
+
+        kinds = OBJECT_TO_KINDS.get(obj, [])
+        for kind, pillar, primary_fn in kinds:
+            if kind not in seen_kinds:
+                classified.append(
+                    {
+                        "object": obj,
+                        "kind": kind,
+                        "pillar": pillar,
+                        "primary_function": primary_fn,
+                    }
+                )
+                seen_kinds.add(kind)
+
+    if not classified:
+        classified.append(
+            {
+                "object": "generic",
+                "kind": "generic",
+                "pillar": "P01",
+                "primary_function": "BECOME",
+            }
+        )
+
+    return classified
+
+
+# ---------------------------------------------------------------------------
+# Step 3: FAN-OUT — select builders per function
+# ---------------------------------------------------------------------------
+
+
+def load_builder_map() -> dict:
+    """Load 8F_BUILDER_MAP.yaml."""
+    if not BUILDER_MAP_PATH.exists():
+        print(f"ERRO: Builder map nao encontrado: {BUILDER_MAP_PATH}", file=sys.stderr)
+        sys.exit(1)
+    with open(BUILDER_MAP_PATH, "r", encoding="utf-8") as f:
+        return yaml.safe_load(f)
+
+
+def _has_keyword(intent_lower: str, keywords: list[str]) -> bool:
+    """Check if intent contains any of the keywords (case-insensitive)."""
+    return any(kw.lower() in intent_lower for kw in keywords)
+
+
+def fan_out(
+    classified: list[dict], intent_lower: str, quality: float, builder_map: dict, verb_action: str
+) -> list[dict]:
+    """For each of the 8 functions, select which builders are active."""
+
+    functions_data = builder_map.get("functions", {})
+    verb_extras = VERB_EXTRA_BUILDERS.get(verb_action, set())
+    is_meta = any(c.get("meta") for c in classified)
+
+    result = []
+
+    for fn_name, fn_data in functions_data.items():
+        position = fn_data.get("position", FUNCTION_POSITIONS.get(fn_name, 99))
+        kw_map = fn_data.get("keywords_that_activate_secondary", {})
+
+        builders = []
+
+        # --- Primary builders ---
+        for bid in fn_data.get("primary_builders", []):
+            active = True
+            reason = f"primary builder for {fn_name}"
+
+            if bid in PRIMARY_NEEDS_KEYWORD:
+                if not _has_keyword(intent_lower, PRIMARY_NEEDS_KEYWORD[bid]):
+                    active = False
+                    reason = "not mentioned in intent"
+
+            # Force-activate verb extras
+            if bid in verb_extras:
+                active = True
+                reason = f"activated by verb '{verb_action}'"
+
+            builders.append({"id": bid, "tier": "primary", "active": active, "reason": reason})
+
+        # --- Secondary builders ---
+        for bid in fn_data.get("secondary_builders", []):
+            active = False
+            reason = "no matching keywords in intent"
+
+            kws = kw_map.get(bid, [])
+            if kws and _has_keyword(intent_lower, kws):
+                active = True
+                reason = "keyword match in intent"
+
+            if bid in verb_extras:
+                active = True
+                reason = f"activated by verb '{verb_action}'"
+
+            builders.append({"id": bid, "tier": "secondary", "active": active, "reason": reason})
+
+        # --- Optional builders ---
+        for bid in fn_data.get("optional_builders", []):
+            active = quality >= 9.5
+            reason = "quality target >= 9.5" if active else "quality target < 9.5"
+
+            if is_meta and bid == "_builder-builder":
+                active = True
+                reason = "meta intent — building a builder"
+
+            if bid in verb_extras:
+                active = True
+                reason = f"activated by verb '{verb_action}'"
+
+            builders.append({"id": bid, "tier": "optional", "active": active, "reason": reason})
+
+        # --- Dependencies (all functions at lower positions) ---
+        deps = sorted(
+            [
+                fn
+                for fn, fd in functions_data.items()
+                if fd.get("position", FUNCTION_POSITIONS.get(fn, 99)) < position
+            ],
+            key=lambda d: FUNCTION_POSITIONS.get(d, 99),
+        )
+
+        # --- Token estimate for active builders ---
+        active_list = [b for b in builders if b["active"]]
+        est_tokens = int(sum(estimate_tokens(b["id"]) for b in active_list) * 1.2)
+
+        result.append(
+            {
+                "name": fn_name,
+                "position": position,
+                "builders": builders,
+                "deps": deps,
+                "parallel": True,
+                "estimated_tokens": est_tokens,
+            }
+        )
+
+    return result
+
+
+# ---------------------------------------------------------------------------
+# Step 4: PLAN — order functions by pipeline position
+# ---------------------------------------------------------------------------
+
+
+def order_plan(functions: list[dict]) -> list[dict]:
+    """Sort functions by their pipeline position (1..8)."""
+    return sorted(functions, key=lambda f: f["position"])
+
+
+# ---------------------------------------------------------------------------
+# Step 5: OUTPUT — assemble final JSON
+# ---------------------------------------------------------------------------
+
+
+def generate_output(
+    intent: str, parsed: dict, classified: list[dict], functions: list[dict]
+) -> dict:
+    """Produce the complete execution plan JSON."""
+
+    ordered = order_plan(functions)
+
+    total_active = sum(1 for fn in ordered for b in fn["builders"] if b["active"])
+    total_tokens = sum(fn["estimated_tokens"] for fn in ordered)
+
+    warnings = []
+
+    if parsed["multi_object"]:
+        total_tokens = int(total_tokens * 1.6)
+        warnings.append("multi_object: complexidade aumenta 60%. Considere splits em 2 plans.")
+
+    if parsed["domain"] == "generic":
+        warnings.append(
+            "domain nao identificado — plan pode ser generico. Especifique o artefato alvo."
+        )
+
+    if any(c.get("meta") for c in classified):
+        warnings.append("intent meta detectado — ativando _builder-builder. Pipeline de 13 files.")
+
+    # Parsed output (spec format: object is string or array)
+    parsed_output = {
+        "verb": parsed["verb"],
+        "object": (
+            parsed["objects"]
+            if parsed["multi_object"]
+            else (parsed["objects"][0] if parsed["objects"] else "generic")
+        ),
+        "domain": parsed["domain"],
+        "quality": parsed["quality"],
+        "multi_object": parsed["multi_object"],
+    }
+
+    return {
+        "intent": intent,
+        "parsed": parsed_output,
+        "classified_kinds": [{k: v for k, v in c.items() if k != "meta"} for c in classified],
+        "functions": ordered,
+        "total_builders": total_active,
+        "estimated_tokens": total_tokens,
+        "warnings": warnings,
+    }
+
+
+# ---------------------------------------------------------------------------
+# CLI
+# ---------------------------------------------------------------------------
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Motor 8F -- Intent -> Execution Plan (CEX)",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  python cex_8f_motor.py --intent "cria agente de vendas para ML"
+  python cex_8f_motor.py --intent "reconstroi signal-builder" --quality 9.5
+  python cex_8f_motor.py --intent "cria agente E workflow de pesquisa"
+  python cex_8f_motor.py --test
+        """,
+    )
+    parser.add_argument("--intent", help="Natural language intent string")
+    parser.add_argument("--quality", type=float, help="Quality target override")
+    parser.add_argument("--output", help="Output file (default: stdout)")
+    parser.add_argument("--compact", action="store_true", help="Compact JSON")
+    parser.add_argument("--test", action="store_true", help="Run inline tests")
+
+    args = parser.parse_args()
+
+    if args.test:
+        run_tests()
+        return
+
+    if not args.intent:
+        parser.error("--intent is required (or use --test)")
+
+    builder_map = load_builder_map()
+
+    parsed = parse_intent(args.intent, args.quality)
+    if parsed.get("error"):
+        print(json.dumps({"error": parsed["error"]}, ensure_ascii=False, indent=2))
+        sys.exit(1)
+
+    classified = classify_objects(parsed["objects"])
+    functions = fan_out(
+        classified, args.intent.lower(), parsed["quality"], builder_map, parsed["verb_action"]
+    )
+    result = generate_output(args.intent, parsed, classified, functions)
+
+    indent = None if args.compact else 2
+    output_json = json.dumps(result, ensure_ascii=False, indent=indent)
+
+    if args.output:
+        out_path = Path(args.output)
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        out_path.write_text(output_json, encoding="utf-8")
+        print(
+            f"Plan saved: {out_path} "
+            f"({result['total_builders']} builders, "
+            f"~{result['estimated_tokens']:,} tokens)",
+            file=sys.stderr,
+        )
+    else:
+        print(output_json)
+
+
+# ---------------------------------------------------------------------------
+# Inline Tests
+# ---------------------------------------------------------------------------
+
+
+def run_tests():
+    """Run Motor 8F self-tests."""
+    builder_map = load_builder_map()
+    passed = failed = 0
+
+    def check(name: str, condition: bool, detail: str = ""):
+        nonlocal passed, failed
+        if condition:
+            print(f"  PASS: {name}")
+            passed += 1
+        else:
+            print(f"  FAIL: {name} -- {detail}")
+            failed += 1
+
+    # Test 1: basic agent creation
+    print("\nTest 1: cria agente de vendas para ML")
+    p1 = parse_intent("cria agente de vendas para ML")
+    check("verb=cria", p1["verb"] == "cria", f"got {p1['verb']}")
+    check("object=agente", "agente" in p1["objects"], f"got {p1['objects']}")
+    check("multi_object=false", not p1["multi_object"])
+    check("domain has vendas", "vendas" in p1["domain"], f"got {p1['domain']}")
+
+    c1 = classify_objects(p1["objects"])
+    check("kind=agent", any(c["kind"] == "agent" for c in c1), f"got {c1}")
+
+    f1 = fan_out(c1, "cria agente de vendas para ml", 9.0, builder_map, "create")
+    become = next((f for f in f1 if f["name"] == "BECOME"), None)
+    check("BECOME exists", become is not None)
+    if become:
+        ab = next((b for b in become["builders"] if b["id"] == "agent-builder"), None)
+        check("agent-builder active in BECOME", ab is not None and ab["active"], f"got {ab}")
+
+    # Test 2: meta intent (rebuild a builder)
+    print("\nTest 2: reconstroi signal-builder")
+    p2 = parse_intent("reconstroi signal-builder")
+    check("verb=reconstroi", p2["verb"] == "reconstroi", f"got {p2['verb']}")
+    check("signal-builder in objects", "signal-builder" in p2["objects"], f"got {p2['objects']}")
+
+    c2 = classify_objects(p2["objects"])
+    check("meta kind", any(c.get("meta") or c["kind"] == "type_builder" for c in c2))
+
+    f2 = fan_out(c2, "reconstroi signal-builder", 9.0, builder_map, "rebuild")
+    become2 = next((f for f in f2 if f["name"] == "BECOME"), None)
+    if become2:
+        bb = next((b for b in become2["builders"] if b["id"] == "_builder-builder"), None)
+        check("_builder-builder active", bb is not None and bb["active"], f"got {bb}")
+
+    # Test 3: multi-object
+    print("\nTest 3: cria agente E workflow de pesquisa")
+    p3 = parse_intent("cria agente E workflow de pesquisa")
+    check("multi_object=true", p3["multi_object"], f"got {p3['multi_object']}")
+    check("has agente", "agente" in p3["objects"], f"got {p3['objects']}")
+    check("has workflow", "workflow" in p3["objects"], f"got {p3['objects']}")
+    check("domain=pesquisa", "pesquisa" in p3["domain"], f"got {p3['domain']}")
+
+    # Test 4: empty intent
+    print("\nTest 4: intent vazio")
+    p4 = parse_intent("")
+    check("has error", "error" in p4)
+
+    # Test 5: quality override
+    print("\nTest 5: quality override")
+    p5 = parse_intent("cria agente", quality_override=9.5)
+    check("quality=9.5", p5["quality"] == 9.5, f"got {p5['quality']}")
+
+    f5 = fan_out(classify_objects(p5["objects"]), "cria agente", 9.5, builder_map, "create")
+    # Optional builders should activate at 9.5
+    all_optional = [
+        b for fn in f5 for b in fn["builders"] if b["tier"] == "optional" and b["active"]
+    ]
+    check("optional builders active at 9.5", len(all_optional) > 0, f"found {len(all_optional)}")
+
+    # Test 6: full pipeline output
+    print("\nTest 6: full pipeline structure")
+    full = generate_output("cria agente de vendas", p1, c1, f1)
+    check("has 8 functions", len(full["functions"]) == 8, f"got {len(full['functions'])}")
+    check("total_builders > 0", full["total_builders"] > 0)
+    check("estimated_tokens > 0", full["estimated_tokens"] > 0)
+    positions = [f["position"] for f in full["functions"]]
+    check("ordered by position", positions == sorted(positions), f"got {positions}")
+
+    # Summary
+    print(f"\n{'=' * 40}")
+    print(f"Results: {passed} passed, {failed} failed")
+    sys.exit(0 if failed == 0 else 1)
+
+
+if __name__ == "__main__":
+    main()

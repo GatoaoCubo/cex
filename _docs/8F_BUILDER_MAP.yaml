@@ -223,7 +223,7 @@ validation:
     PRODUCE:    {primary: 3, secondary: 2, optional: 1, total: 6}
     CONSTRAIN:  {primary: 6, secondary: 5, optional: 5, total: 16}
     GOVERN:     {primary: 5, secondary: 5, optional: 2, total: 12}
-    COLLABORATE:{primary: 5, secondary: 2, optional: 1, total: 8}
+    COLLABORATE: {primary: 5, secondary: 2, optional: 1, total: 8}
 
   multi_function_builders:
     # Builders que aparecem em mais de uma funcao (intencional — multi-role)
