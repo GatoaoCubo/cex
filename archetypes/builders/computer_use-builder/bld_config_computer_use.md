@@ -1,0 +1,44 @@
+---
+kind: config
+id: bld_config_computer_use
+pillar: P09
+llm_function: CONSTRAIN
+purpose: Naming conventions, file paths, size limits, operational constraints
+pattern: CONFIG restricts SCHEMA, never contradicts it
+---
+
+# Config: computer_use Production Rules
+## Naming Convention
+| Scope | Convention | Example |
+|-------|-----------|---------|
+| Artifact files | `p04_cu_{target_slug}.md` | `p04_cu_browser_control.md` |
+| Compiled files | `p04_cu_{target_slug}.yaml` | `p04_cu_browser_control.yaml` |
+| Builder directory | kebab-case | `computer_use-builder/` |
+| Frontmatter fields | snake_case | `actions_supported`, `screenshot_mode` |
+| Target slug | snake_case, lowercase, no hyphens | `browser_control`, `desktop_linux` |
+Rule: id MUST equal filename stem. Hyphens in id = HARD FAIL.
+## File Paths
+- Output: `cex/P04_tools/examples/p04_cu_{target_slug}.md`
+- Compiled: `cex/P04_tools/compiled/p04_cu_{target_slug}.yaml`
+## Size Limits (aligned with SCHEMA)
+- Body: max 2048 bytes
+- Total (frontmatter + body): ~4000 bytes
+- Density: >= 0.80 (no filler)
+## Action Enum
+| Action | Parameters | Description |
+|--------|-----------|-------------|
+| click | x, y, button | Click at coordinates |
+| double_click | x, y | Double-click at coordinates |
+| type | text | Type text at cursor/focus |
+| scroll | direction, amount | Scroll viewport |
+| key_press | key | Press keyboard key |
+| drag | x1, y1, x2, y2 | Drag from point to point |
+| screenshot | (none) | Capture current screen |
+## Resolution Conventions
+| Target | Recommended | Notes |
+|--------|-------------|-------|
+| browser | 1024x768 | Standard viewport, good token/detail balance |
+| desktop | 1280x800 | Common laptop resolution |
+| mobile | 375x812 | iPhone viewport |
+| terminal | 800x600 | Minimal resolution for text |
+Rule: resolution MUST be WxH format (e.g., "1024x768").
