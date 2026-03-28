@@ -1,0 +1,36 @@
+---
+kind: tools
+id: bld_tools_audio_tool
+pillar: P04
+llm_function: CALL
+purpose: Tools and APIs available for audio_tool production
+---
+
+# Tools: audio-tool-builder
+## Production Tools
+| Tool | Purpose | When | Status |
+|------|---------|------|--------|
+| brain_query [MCP] | Search existing audio_tool artifacts in pool | Phase 1 (check duplicates) | CONDITIONAL |
+| validate_artifact.py | Generic artifact validator | Phase 3 | [PLANNED] |
+| cex_forge.py | Generate artifact from seeds | Alternative compose | [PLANNED] |
+## Data Sources
+| Source | Path/URL | Data |
+|--------|----------|------|
+| CEX Schema | P04_tools/_schema.yaml | Field definitions, audio_tool kind |
+| CEX Examples | P04_tools/examples/ | Real audio_tool artifacts |
+| SEED_BANK | archetypes/SEED_BANK.yaml | Seeds for P04_audio_tool |
+| TAXONOMY | archetypes/TAXONOMY_LAYERS.yaml | Layer position, runtime layer |
+## Provider Reference
+| Provider | API | Models | Direction |
+|----------|-----|--------|-----------|
+| OpenAI | api.openai.com/v1/audio | whisper_large_v3, tts_1, tts_1_hd | input + output |
+| ElevenLabs | api.elevenlabs.io/v1 | eleven_multilingual_v2, eleven_turbo_v2_5 | output |
+| Google | speech.googleapis.com | google_chirp, google_chirp_2 | input + analysis |
+| Azure | *.cognitiveservices.azure.com | azure_neural_hd, azure_whisper | input + output |
+| Deepgram | api.deepgram.com/v1 | deepgram_nova_2, deepgram_nova_2_medical | input |
+| AssemblyAI | api.assemblyai.com/v2 | assemblyai_best, assemblyai_nano | input |
+## Interim Validation
+No automated validator exists yet. Manually check each QUALITY_GATES.md gate against
+the produced artifact. Key checks: YAML parses, id pattern `p04_audio_*`, direction valid enum,
+models list matches body section, formats within allowed enum, languages use BCP-47,
+body <= 2048 bytes, quality == null.
