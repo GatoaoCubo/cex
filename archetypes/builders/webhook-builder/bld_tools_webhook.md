@@ -12,18 +12,10 @@ tags: [tools, webhook, P04, brain_query, validate, forge]
 tldr: "Tools available to webhook-builder: brain_query for discovery, validate for gate checks, forge for artifact writing."
 ---
 # Tools: webhook-builder
-
 ## Available Tools
-
 ### brain_query
-
 **Purpose**: Discover existing webhook artifacts and related knowledge.
-
-**When to use**:
-- Before creating a new artifact — check for duplicates
-- Find provider-specific payload schemas (Stripe, GitHub, Slack)
-- Locate related artifacts (api_client, notifier) to confirm boundary
-
+**When to use**: Before creating a new artifact (check duplicates), find provider-specific payload schemas (Stripe, GitHub, Slack), locate related artifacts (api_client, notifier) to confirm boundary.
 **Queries**:
 ```
 brain_query("webhook stripe payment")
@@ -31,51 +23,24 @@ brain_query("webhook github push event")
 brain_query("p04_webhook existing artifacts")
 brain_query("inbound webhook signature verification")
 ```
-
-**Expected output**: file paths, artifact IDs, payload schema examples
-
----
-
+**Expected output**: file paths, artifact IDs, payload schema examples.
 ### validate (quality gate)
-
 **Purpose**: Run HARD + SOFT gate checks against a draft artifact.
-
-**When to use**:
-- After composing the artifact, before writing to disk
-- When uncertain if body is within 1024 bytes
-- When direction or signature_method might fail enum check
-
+**When to use**: After composing the artifact before writing to disk, when uncertain if body is within 1024 bytes, when direction or signature_method might fail enum check.
 **Usage pattern**:
 ```
 validate(artifact_draft, gate="bld_quality_gate_webhook.md")
 ```
-
-**Returns**: list of gate failures (H01-H10) + soft scores (S01-S12) + pass/fail
-
----
-
+**Returns**: list of gate failures (H01-H10) + soft scores (S01-S12) + pass/fail.
 ### forge (write artifact)
-
 **Purpose**: Write the final artifact file to the correct path.
-
-**When to use**:
-- Only after validate() returns PASS
-- Creates `p04_webhook_{event_slug}.md` in the correct pillar directory
-
+**When to use**: Only after validate() returns PASS. Creates `p04_webhook_{event_slug}.md` in the correct pillar directory.
 **Usage pattern**:
 ```
 forge(artifact, path="P04/webhooks/p04_webhook_{event_slug}.md")
 ```
-
-**Constraints**:
-- Will reject if id does not match filename stem
-- Will reject if quality != null
-- Atomically writes — no partial files on error
-
----
-
+**Constraints**: Will reject if id does not match filename stem. Will reject if quality != null. Atomically writes — no partial files on error.
 ## Tool Call Order
-
 ```
 1. brain_query(topic)          # discover existing, avoid duplicates
 2. [compose artifact]          # fill output_template
@@ -83,10 +48,7 @@ forge(artifact, path="P04/webhooks/p04_webhook_{event_slug}.md")
 4. [fix failures if any]       # iterate until PASS
 5. forge(artifact, path)       # write to disk
 ```
-
 ## When NOT to Use Tools
-
 - Do not call `forge` before `validate` passes
-- Do not skip `brain_query` when provider is known (Stripe/GitHub/Slack) —
-  a payload schema may already exist
+- Do not skip `brain_query` when provider is known (Stripe/GitHub/Slack) — a payload schema may already exist
 - Do not call `validate` on partial drafts — complete frontmatter first

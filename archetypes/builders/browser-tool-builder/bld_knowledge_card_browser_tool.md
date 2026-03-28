@@ -33,32 +33,23 @@ Browser tools are DOM-driven automation artifacts that control a browser engine 
 ## Action Reference
 | Action | Purpose | Key Params |
 |--------|---------|-----------|
-| navigate | Load URL, wait for page state | url, waitUntil (load/networkidle/domcontentloaded) |
-| click | Activate element | selector, button (left/right/middle), clickCount |
-| type | Input text into field | selector, text, delay (ms between keystrokes) |
-| scroll | Scroll page or element | direction (up/down/left/right), distance (px) |
-| wait | Pause until condition | selector, timeout, state (visible/hidden/attached) |
-| screenshot | Capture viewport or element | fullPage, path, clip (region), quality |
-| extract | Read data from DOM | selector, attribute, multiple (boolean) |
-| evaluate | Execute JavaScript in page context | script, args |
-| hover | Move pointer to element | selector, position (top/center/bottom) |
-| select | Choose option in select element | selector, value or label |
-## Selector Strategy Guide
-| Strategy | Syntax | Stability | Speed | When to use |
-|----------|--------|-----------|-------|-------------|
-| data_attr | `[data-testid="name"]` | High | Fast | QA-annotated elements, test-stable |
-| aria | `[aria-label="Submit"]` | High | Fast | Accessible elements, form controls |
-| css | `.product-price` | Medium | Fast | Well-maintained CSS classes |
-| xpath | `//div[@class="price"]` | Low | Slower | Deep nesting, attribute conditions |
-| text | `text=Add to Cart` | Medium | Medium | Buttons, links with stable text |
-Fallback chain: attempt selectors in priority order; if primary returns null, try next before throwing.
-## Wait Strategies
-| Strategy | Playwright | When |
+| navigate | Load URL | url, waitUntil |
+| click | Activate element | selector, button |
+| type | Input text | selector, text |
+| scroll | Scroll page | direction, distance |
+| wait | Pause until condition | selector, timeout |
+| screenshot | Capture viewport | fullPage, path |
+| extract | Read DOM data | selector, attribute |
+| evaluate | Run JavaScript | script, args |
+## Selector Strategy
+| Strategy | Stability | When |
 |----------|-----------|------|
-| load | `waitUntil: 'load'` | Simple pages, no AJAX |
-| networkidle | `waitUntil: 'networkidle'` | SPAs, dynamic content |
-| domcontentloaded | `waitUntil: 'domcontentloaded'` | Fast initial render needed |
-| selector visible | `waitForSelector(sel, {state:'visible'})` | Element-specific readiness |
+| data_attr | High | QA-annotated, test-stable |
+| aria | High | Accessible elements |
+| css | Medium | Well-maintained classes |
+| xpath | Low | Deep nesting fallback |
+| text | Medium | Buttons with stable text |
+Fallback: attempt in priority order; try next if null.
 ## Anti-Patterns
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
@@ -70,10 +61,9 @@ Fallback chain: attempt selectors in priority order; if primary returns null, tr
 | Using computer_use for DOM data | Pixel-based reading is fragile vs DOM API |
 | Self-scoring quality | Corrupts pool quality metrics |
 ## Application
-1. Define target: what site, what data, what interaction is needed?
-2. Choose engine: playwright for most cases; specialize if cloud/LLM/legacy needed
-3. List actions in order of execution (navigate -> wait -> extract -> screenshot)
-4. Specify selectors with fallback chain per element
-5. Set output format: json for structured data, screenshot for visual verification
-6. Configure headless, viewport, timeout, stealth as appropriate
-7. Validate: actions match frontmatter list, selectors documented, output schema defined
+1. Define target site and data needed
+2. Choose engine (playwright default; specialize if needed)
+3. List actions in execution order
+4. Specify selectors with fallback chain
+5. Set output format and configure headless/viewport/timeout
+6. Validate: actions match frontmatter, selectors documented

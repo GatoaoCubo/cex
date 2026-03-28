@@ -68,21 +68,7 @@ Cohere rerank-english-v3.0 applied after first-pass top_k=50 to return final top
 - embedding_call: CohereEmbeddings(model="embed-english-v3.0", input_type="search_query")
 ```
 
-**WHY GOLDEN** (gate annotations):
-- H01-H10: all pass — valid YAML, id matches filename, kind/quality correct, all required fields, enums valid, top_k=50, body well under 2048 bytes
-- S01: qdrant cloud/local both mentioned (1.0)
-- S02: embed-english-v3.0, Cohere, 1024d (1.0)
-- S03: dot_product justified by native normalization (1.0)
-- S04: RRF k=60 specified (0.8)
-- S05: reranker model + trigger (after top_k=50) + output (top-5) (0.8)
-- S06: 4 filter fields with types (0.8)
-- S07: namespace = technical_docs (0.7)
-- S08: SDK, auth env var, connection pattern, embedding call (1.0)
-- S09: "NOT for web search, file ingestion, or SQL" implied by boundary in overview (0.9)
-- S10: developer docs use case, why hybrid matters for API names (0.9)
-- S11: store + model + k = fully testable (0.8)
-- S12: score_threshold noted (0.5)
-Score: ~9.4 / 10
+**WHY GOLDEN**: H01-H10 all pass. S01-S12 average ~9.4 — qdrant+Cohere+RRF+reranker+metadata+SDK all documented.
 
 ---
 
@@ -111,5 +97,5 @@ Searches documents using vectors.
 - H06: store_type "vector" is not a valid enum value
 - H07: embedding_model "embeddings" is too vague — no provider or model name
 - H08: similarity_metric absent
-- S01-S12: score ~1.2/10 — no strategy, no config, no integration, no boundary clarity
-- Body is 1 line — no required sections (Overview, Search Strategy, Configuration, Integration)
+- S01-S12: ~1.2/10 — no strategy, no config, no integration
+- Body 1 line — missing Overview, Search Strategy, Configuration, Integration

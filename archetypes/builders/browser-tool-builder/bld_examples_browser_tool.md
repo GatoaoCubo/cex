@@ -46,60 +46,20 @@ Timeout: 30000ms per action. JavaScript: enabled (required for dynamic content).
 Stealth: true — randomized user_agent, navigator.webdriver = false.
 ## Actions
 ### navigate
-`page.goto(url, { waitUntil: 'networkidle' })`
-Navigates to product URL and waits for network idle.
-Params: url (string, required), waitUntil (load|networkidle|domcontentloaded, default: networkidle)
+Navigates to URL, waits for networkidle. Params: url (required), waitUntil.
 ### wait
-`page.waitForSelector(selector, { timeout: 10000 })`
-Waits for product container to appear before extraction.
-Selector: `[data-testid="product-container"]` (data_attr, primary)
-Fallback: `.product-main` (css)
+Waits for product container. Selector: `[data-testid="product-container"]` / `.product-main`.
 ### extract
-Extracts product fields from DOM.
-Fields:
-- name: `[data-testid="product-title"]` (data_attr) | `h1.title` (css fallback)
-- price: `[data-testid="price-current"]` (data_attr) | `.price span` (css fallback)
-- rating: `[aria-label*="rating"]` (aria) | `.stars-value` (css fallback)
-- seller: `[data-testid="seller-name"]` (data_attr) | `.seller-link` (css fallback)
-Returns: JSON object with all fields; null for unavailable fields.
+Extracts name/price/rating/seller via data_attr with css fallback. Returns JSON; null for missing.
 ### screenshot
-`page.screenshot({ path: output_path, fullPage: false })`
-Captures viewport screenshot on extraction failure for debugging.
-Params: fullPage (boolean, default: false), path (string, required)
+Captures viewport on failure. Params: fullPage (bool), path (string).
 ## Selectors
-Priority order: data_attr > aria > css > xpath
-1. data_attr (`[data-testid="*"]`): most stable, survives CSS refactors
-2. aria (`[aria-label="*"]`): accessible elements, resilient to visual redesigns
-3. css (`.class`, `#id`): fast but fragile to class name changes
-4. xpath (`//div[@class="*"]`): structural fallback when CSS and data attrs absent
-Fallback rule: if primary selector returns null, try next in priority chain before failing.
-## Output Format
-Primary: json
-Schema per extract action:
+Priority: data_attr > aria > css > xpath. Fallback: try next if null.
+## Output
 ```json
-{
-  "url": "string",
-  "name": "string | null",
-  "price": "number | null",
-  "currency": "string | null",
-  "rating": "number | null",
-  "seller": "string | null",
-  "available": "boolean",
-  "screenshot_path": "string | null"
-}
+{"url":"string","name":"string|null","price":"number|null","rating":"number|null","seller":"string|null","available":"boolean"}
 ```
-WHY THIS IS GOLDEN:
-- quality: null (H05 pass)
-- id matches p04_browser_ pattern (H02 pass)
-- kind: browser_tool (H04 pass)
-- engine declared: playwright (H06 pass)
-- actions list matches ## Actions section names (H07 pass)
-- selectors with fallback chain (S04 pass)
-- output_format: json with schema (S05 pass)
-- timeout defined: 30000ms (H09 pass)
-- stealth and user_agent documented (S06 pass)
-- tldr: 119 chars <= 160 (S01 pass)
-- tags: 5 items, includes "browser_tool" (S02 pass)
+WHY GOLDEN: H01-H10 all pass (valid YAML, id pattern, kind, quality:null, all fields, enums, timeout). Soft: selectors w/fallback (S04), output schema (S05), stealth (S06), tldr 119ch (S01), 5 tags (S02). Score ~9.2.
 ## Anti-Example
 INPUT: "Create browser tool for extracting prices"
 BAD OUTPUT:

@@ -54,38 +54,20 @@ Audio tools process audio signals: converting speech to text (STT), generating s
 | m4a | yes | no | Apple ecosystem; AAC codec |
 | aac | yes | yes | Efficient lossy compression |
 | pcm | yes | yes | Raw samples; lowest latency |
-## Language Coverage
-| BCP-47 | Language | Whisper | Deepgram | ElevenLabs | AssemblyAI |
-|--------|----------|---------|---------|------------|------------|
-| en | English | high | high | high | high |
-| pt-BR | Portuguese (BR) | high | medium | high | medium |
-| es | Spanish | high | medium | high | medium |
-| fr | French | high | medium | high | medium |
-| de | German | high | medium | high | medium |
-| ja | Japanese | medium | low | medium | low |
-| zh | Chinese | medium | low | medium | low |
-| ko | Korean | medium | low | medium | low |
-| it | Italian | high | low | high | low |
 ## Patterns
-- **STT pipeline**: audio bytes -> sample_rate normalize -> model transcribe -> text + timestamps out
-- **TTS pipeline**: text string -> SSML optional -> model synthesize -> audio bytes + format out
-- **Streaming STT**: chunked audio in -> partial transcript events out (Deepgram WebSocket, AssemblyAI WebSocket)
-- **Sample rate**: always normalize to 16000 Hz before STT to avoid accuracy degradation
-- **Word timestamps**: available in Whisper, Deepgram, AssemblyAI — enables subtitle generation, speaker sync
+- **STT**: audio → 16kHz normalize → model → text + timestamps
+- **TTS**: text → SSML optional → model → audio bytes
+- **Streaming**: chunked audio → partial transcripts (Deepgram/AssemblyAI WebSocket)
 ## Anti-Patterns
-| Anti-Pattern | Why it fails |
-|-------------|-------------|
-| Using GPT-4o as audio model id | GPT-4o is an LLM, not a standalone audio model identifier |
-| direction: "stt" (wrong enum) | Valid values are: input, output, analysis, bidirectional |
-| languages: ["English"] (free text) | Must use BCP-47: "en" — free text breaks downstream routing |
-| formats: ["audio/*"] (wildcard) | Must be explicit enum members — wildcards unvalidatable |
-| Conflating audio_tool with notifier | Notifier delivers messages; audio_tool processes audio signals |
-| No sample_rate declared | Defaults are ambiguous; STT accuracy varies 16000 vs 44100 |
-| Claiming streaming without declaring streaming: true | Silent capability misrepresentation |
+| Anti-Pattern | Why |
+|---|---|
+| GPT-4o as audio model id | LLM, not audio model |
+| direction: "stt" | Enum: input/output/analysis/bidirectional |
+| languages: ["English"] | Must use BCP-47: "en" |
+| formats: ["audio/*"] | Must be explicit enum members |
+| No sample_rate | STT accuracy varies 16kHz vs 44.1kHz |
 ## Application
-1. Determine direction: what goes in and what comes out?
-2. Select models: match direction + language coverage + latency requirement
-3. Specify formats: which formats does the caller need to send/receive?
-4. List languages: BCP-47 codes only, note quality tier differences per model
-5. Declare streaming, sample_rate, max_duration — these affect integration contracts
-6. Validate: id pattern, kind, direction enum, model names against provider reference
+1. Determine direction (STT/TTS/analysis)
+2. Select models matching direction + language + latency
+3. Specify formats, languages (BCP-47), streaming, sample_rate
+4. Validate: id pattern, kind, direction enum, model names

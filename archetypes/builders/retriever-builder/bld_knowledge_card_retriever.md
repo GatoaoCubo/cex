@@ -90,6 +90,4 @@ quality: garbage in, garbage out applies strictly.
 | bge-reranker-large | BAAI local | ~150ms | high |
 
 ## References
-LangChain BaseRetriever, LlamaIndex QueryEngine, Haystack BM25Retriever + DensePassageRetriever,
-ColBERT, Chroma docs, Pinecone docs, Qdrant sparse-dense hybrid, Weaviate hybrid search,
-BEIR benchmark for retrieval evaluation.
+LangChain BaseRetriever, LlamaIndex QueryEngine, Haystack, ColBERT, BEIR benchmark.

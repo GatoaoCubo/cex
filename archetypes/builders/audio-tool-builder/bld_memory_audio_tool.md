@@ -51,4 +51,4 @@ Body budget (2048 bytes max): Overview (150) + Direction (200) + Models (400) + 
 - Conflating audio_tool with notifier: audio_tool processes signals; notifier delivers messages.
 - Conflating audio_tool with vision_tool: audio processes sound; vision processes images/video.
 ## Context
-The 2048-byte body limit for audio_tool is larger than cli_tool (1024) due to the Models and Languages tables requiring more detail. Write the direction and models list in frontmatter first (forces scope decision), then allocate body bytes. The formats field is required so API consumers know which audio format to send without reading implementation code. BCP-47 language codes are mandatory because they map directly to provider API parameters.
+Body limit 2048B (larger than cli_tool 1024B). Write direction+models in frontmatter first. BCP-47 codes mandatory — map to provider API params.

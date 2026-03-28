@@ -50,4 +50,4 @@ Body budget (2048 bytes max): Overview (150) + Engine (200) + Actions (900) + Se
 - Including implementation code in the spec body (this is a contract document, not source).
 - Setting quality to a numeric value (corrupts pool quality metrics — always null).
 ## Context
-The 2048-byte body limit for browser_tool is generous compared to cli_tool (1024 bytes) but must still be respected. Allocate bytes from a fixed budget: Overview first (forces scope decision), then Engine config, then Actions (most bytes — this is the core spec), then Selectors (fallback chain), then Output schema. If over limit, trim Action descriptions first (keep params and returns), then trim Output schema to field names only.
+Body limit 2048B. Budget: Overview (150) + Engine (200) + Actions (900) + Selectors (400) + Output (400). Trim Actions first if over.

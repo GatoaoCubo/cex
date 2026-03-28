@@ -52,16 +52,9 @@ Vision tools are visual input processors that accept images (base64, URL, file p
 | No supported_formats | Caller sends TIFF to Tesseract-only tool; silent failure |
 | Implementation code in spec | Spec is a contract, not source; code belongs in implementing repo |
 ## Application
-1. Identify visual task: what does the tool see, and what does it return?
-2. Enumerate input types: how will callers provide images? (base64 for inline, url for remote, file_path for local)
-3. Define capabilities: named operations the tool performs on the visual input
-4. Select providers: cloud (OpenAI/Anthropic/Google/Azure) vs. local (Tesseract/DocTR) based on privacy, volume, complexity
-5. Set output format: json for structured extraction, text for descriptions, table for tabular data
-6. Declare constraints: max_resolution, supported_formats, confidence_threshold, batch_support
-## References
-- OpenAI Vision: platform.openai.com/docs/guides/vision
-- Anthropic Vision: docs.anthropic.com/claude/docs/vision
-- Google Cloud Vision: cloud.google.com/vision/docs
-- Azure Computer Vision: learn.microsoft.com/en-us/azure/ai-services/computer-vision
-- Tesseract OCR: github.com/tesseract-ocr/tesseract
-- DocTR: github.com/mindee/doctr
+1. Identify visual task and return format
+2. Enumerate input types (base64/url/file_path)
+3. Define capabilities as named operations
+4. Select providers (cloud vs local)
+5. Set output format and confidence_threshold
+6. Declare supported_formats and constraints

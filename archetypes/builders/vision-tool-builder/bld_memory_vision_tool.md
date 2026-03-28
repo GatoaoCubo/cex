@@ -51,4 +51,4 @@ Body budget (2048 bytes max): Overview (150) + Input Types (400) + Capabilities 
 - Including API keys or credentials in spec (spec is a public contract document)
 - Setting quality to non-null value (self-scoring corrupts pool quality metrics)
 ## Context
-The 2048-byte body limit for vision_tool is double that of cli_tool, reflecting the richer capability surface. Despite this, keep specs dense: one Overview paragraph, one paragraph per input type, one paragraph per capability with its output schema, and one Output Format section showing the envelope structure. Avoid provider documentation — link to external docs instead.
+Body limit 2048B. Budget: Overview (150) + Input Types (400) + Capabilities (1000) + Output (400). Link to provider docs, don't duplicate.

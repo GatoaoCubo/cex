@@ -66,4 +66,4 @@ Weights sum to 100%.
 | approver | Author self-certification with comment explaining prototype-only scope |
 | audit_trail | Bypass note in frontmatter comment with expiry date |
 | expiry | 14d — prototype tools must be promoted to >= 7.0 or removed from repo |
-| never_bypass | H01 (unparseable YAML breaks all tooling), H05 (self-scored gates corrupt quality metrics), H07 (invalid direction breaks routing) |
+| never_bypass | H01 (unparseable YAML), H05 (self-scored quality), H07 (invalid direction) |

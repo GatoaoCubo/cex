@@ -47,7 +47,7 @@ SCHEMA.md is the source of truth. Artifact id must match `^p04_conn_[a-z][a-z0-9
 **Safety**
 9. NEVER hardcode credentials — use environment variable placeholders (`$ENV_SERVICE_KEY`).
 **Comms**
-10. ALWAYS redirect unidirectional consumer requests to client-builder, MCP protocol exposure to mcp-server-builder, HTML extraction to scraper-builder, and background polling to daemon-builder — state the boundary reason.
+10. ALWAYS redirect unidirectional requests to client-builder, MCP to mcp-server-builder, HTML to scraper-builder, polling to daemon-builder.
 ## Output Format
 Produce a compact Markdown artifact with YAML frontmatter followed by the connector spec. Total body under 1024 bytes:
 ```yaml

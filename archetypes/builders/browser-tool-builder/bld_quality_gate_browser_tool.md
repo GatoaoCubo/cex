@@ -40,18 +40,18 @@ All must pass (AND logic). Any single failure = REJECT.
 Weights sum to 100%.
 | Dimension | Weight | Criteria |
 |---|---|---|
-| Action coverage | 1.0 | All meaningful browser operations listed; no phantom actions in frontmatter without body section |
-| Selector fallback chain | 1.5 | Each extracted element has primary selector AND at least one fallback; fallback rule described |
-| Engine specificity | 1.0 | Engine section declares headless flag, viewport, timeout, and javascript flag explicitly |
-| Output schema completeness | 1.0 | Output Format section shows field names, types, and null handling for every extracted field |
-| Timeout configuration | 1.0 | Timeout declared per action or globally; no unbounded wait conditions |
-| Wait strategy documentation | 1.0 | Each navigate/wait action declares wait condition (load, networkidle, selector, etc.) |
-| Stealth and anti-detection | 0.5 | Stealth needs assessed; user_agent and stealth flag documented if applicable |
-| Cookie and session handling | 0.5 | Cookie flag declared; session persistence requirements documented if tool needs auth |
-| Boundary clarity | 1.0 | Explicitly not computer_use, not search_tool, not vision_tool — DOM-based contract stated |
-| Selector strategy rationale | 0.5 | Priority order explained (why data_attr before css, why xpath is last resort) |
-| Error and failure behavior | 1.0 | Behavior on selector miss, timeout, or navigation error documented (null return, screenshot, retry) |
-| Testability | 1.0 | Each action testable with known URL and expected output; example or schema provided |
+| Action coverage | 1.0 | All actions in frontmatter have matching body sections |
+| Selector fallback | 1.5 | Each element has primary+fallback selectors |
+| Engine specificity | 1.0 | Headless, viewport, timeout, JS flag declared |
+| Output schema | 1.0 | Field names, types, null handling defined |
+| Timeout config | 1.0 | Timeout declared; no unbounded waits |
+| Wait strategy | 1.0 | Wait condition per navigate/wait action |
+| Stealth | 0.5 | Stealth/user_agent documented if needed |
+| Cookies | 0.5 | Cookie flag + session persistence declared |
+| Boundary clarity | 1.0 | Not computer_use/search_tool/vision_tool |
+| Selector rationale | 0.5 | Priority order explained |
+| Error behavior | 1.0 | Selector miss/timeout behavior documented |
+| Testability | 1.0 | Actions testable with example or schema |
 ## Actions
 | Score | Tier | Action |
 |---|---|---|
