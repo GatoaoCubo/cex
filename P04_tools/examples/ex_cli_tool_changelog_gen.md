@@ -1,0 +1,55 @@
+---
+id: p04_ct_changelog_gen
+kind: cli_tool
+pillar: P04
+title: "Changelog Gen — Generate changelog from git log grouped by LP"
+version: 1.0.0
+created: 2026-03-28
+author: edison
+tags: [cli, tool, cex, product, changelog, git, release]
+cli_command: "python _tools/changelog_gen.py"
+cli_args:
+  - name: "--since"
+    type: string
+    required: false
+    description: "Git ref to start from (tag or commit). Auto-detects last tag if omitted."
+  - name: "--dry-run"
+    type: boolean
+    required: false
+    description: "Print changelog without writing to file"
+inputs: ["git log history", "_meta/VERSION.yaml"]
+outputs: ["formatted changelog entry grouped by LP", "appended to _meta/CHANGELOG.md"]
+dependencies: ["pyyaml", "git"]
+category: product
+---
+
+## Purpose
+Reads git log since the last tag (or specified ref), groups commits by LP based on file paths, and generates a formatted changelog entry. Auto-detects the last git tag as starting point.
+
+## Usage
+```bash
+# Auto-detect last tag, generate changelog
+python _tools/changelog_gen.py
+
+# From specific tag
+python _tools/changelog_gen.py --since v1.2.0
+
+# Preview without writing
+python _tools/changelog_gen.py --dry-run
+```
+
+## Arguments
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--since` | string | no | Starting git ref (default: last tag) |
+| `--dry-run` | flag | no | Print without writing |
+
+## Pipeline Position
+**8F Function**: COLLABORATE (F8) — communication and documentation.
+**Stage**: Release documentation. Run after bump_version, before git tag. Reads git history to produce human-readable changelog.
+
+## Dependencies
+- Git repository with commit history
+- `_meta/VERSION.yaml` for version header
+- `_meta/CHANGELOG.md` for appending entries
+- LP detection regex on file paths (P\d{2}_\w+)
