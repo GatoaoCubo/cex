@@ -1,0 +1,68 @@
+---
+id: bld_config_document_loader
+kind: config
+pillar: P04
+version: 1.0.0
+created: 2026-03-28
+updated: 2026-03-28
+author: EDISON
+domain: document_loader
+llm_function: CONSTRAIN
+quality: null
+tags: [config, document_loader, ingestion, P04]
+tldr: "Production rules for document_loader: naming, paths, size limits, and enum definitions."
+---
+
+# Config: document_loader Production Rules
+
+## Naming Convention
+| Item | Pattern | Example |
+|---|---|---|
+| Artifact file | p04_loader_{format_slug}.md | p04_loader_pdf.md |
+| format_slug | lowercase, underscores, no hyphens | csv_tabular, html_news, pdf_legal |
+| Builder dir | archetypes/builders/document_loader-builder/ | — |
+| id field | must equal filename stem | id: p04_loader_pdf == p04_loader_pdf.md |
+| Frontmatter key order | id, kind, pillar, version, created, updated, author, name | consistent across all artifacts |
+
+## File Paths
+| Purpose | Path |
+|---|---|
+| Artifact output | records/pool/p04_loaders/{id}.md |
+| Compiled YAML | records/pool/p04_loaders/compiled/{id}.yaml |
+| Builder ISO files | archetypes/builders/document_loader-builder/bld_*.md |
+| Schema reference | archetypes/builders/document_loader-builder/bld_schema_document_loader.md |
+
+## Size Limits
+| Item | Limit | Action on Exceed |
+|---|---|---|
+| Body bytes | 2048 max | Trim descriptions; never remove required fields |
+| tldr chars | 160 max | Truncate at word boundary |
+| description chars | 200 max | Truncate at word boundary |
+| formats_supported | no max, >= 1 | — |
+| metadata_fields | no max | List all relevant; omit obvious duplicates |
+| density | >= 0.80 | Remove filler prose; use tables over paragraphs |
+
+## Chunk Strategy Enum
+| Value | When to Use | Splitter Class |
+|---|---|---|
+| fixed | Uniform token batches; strict budget control | CharacterTextSplitter |
+| recursive | Structured docs with headers and sections | RecursiveCharacterTextSplitter |
+| semantic | Topic-aware splits; best retrieval recall | SemanticChunker (requires embeddings) |
+| sentence | Narrative text; preserves sentence integrity | SentenceTransformersTokenTextSplitter |
+| paragraph | Legal/academic; logical paragraph units | Unstructured partition + paragraph grouping |
+
+## Output Format Enum
+| Value | Consumer | Document Class |
+|---|---|---|
+| langchain_doc | LangChain retriever, vectorstore | langchain_core.documents.Document |
+| llamaindex_node | LlamaIndex index, query engine | llama_index.core.schema.TextNode |
+| haystack_doc | Haystack pipeline, DocumentStore | haystack.dataclasses.Document |
+| raw_dict | Custom pipelines, direct serialization | dict with keys: text, metadata |
+
+## Overlap Defaults
+| Chunk Size | Recommended Overlap | Ratio |
+|---|---|---|
+| 256 tokens | 32 tokens | 12.5% |
+| 512 tokens | 64 tokens | 12.5% |
+| 1024 tokens | 128 tokens | 12.5% |
+| 2048 tokens | 256 tokens | 12.5% |
