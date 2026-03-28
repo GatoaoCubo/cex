@@ -1,0 +1,69 @@
+---
+id: p11_qg_browser_tool
+kind: quality_gate
+pillar: P11
+title: "Gate: browser_tool"
+version: "1.0.0"
+created: "2026-03-28"
+updated: "2026-03-28"
+author: "edison"
+domain: "browser automation tool — DOM-based web interaction with declared engine, actions, selectors, and output contract"
+quality: null
+tags: [quality-gate, browser-tool, P04, playwright, dom, selectors, automation]
+tldr: "Pass/fail gate for browser_tool artifacts: engine declaration, action completeness, selector fallback chains, timeout config, and output format contract."
+density_score: 0.90
+---
+
+# Gate: browser_tool
+## Definition
+| Field | Value |
+|---|---|
+| metric | browser_tool artifact quality score |
+| threshold | 7.0 (publish >= 8.0, golden >= 9.5) |
+| operator | weighted_sum |
+| scope | all artifacts with `kind: browser_tool` |
+## HARD Gates
+All must pass (AND logic). Any single failure = REJECT.
+| ID | Check | Fail Condition |
+|---|---|---|
+| H01 | Frontmatter parses as valid YAML | Parse error on frontmatter block |
+| H02 | ID matches `^p04_browser_[a-z][a-z0-9_]+$` | ID missing prefix, contains hyphens, or has uppercase |
+| H03 | ID equals filename stem | `id: p04_browser_foo` but file is `p04_browser_bar.md` |
+| H04 | Kind equals literal `browser_tool` | `kind: scraper` or `kind: tool` or any other value |
+| H05 | Quality field is null | `quality: 8.0` or any non-null value |
+| H06 | Engine is a recognized enum value | `engine: browser` or `engine: chrome` or unrecognized string |
+| H07 | Actions list is non-empty and all values are valid enum members | `actions: []` or `actions: [scrape]` (not a valid action name) |
+| H08 | Selectors list is non-empty and all values are valid enum members | `selectors: []` or `selectors: [locator]` (not valid) |
+| H09 | Output format is one of: json, html, screenshot, text | `output_format: csv` or unrecognized value |
+| H10 | Body contains all 5 required sections | Missing any of: Overview, Engine, Actions, Selectors, Output Format |
+## SOFT Scoring
+Weights sum to 100%.
+| Dimension | Weight | Criteria |
+|---|---|---|
+| Action coverage | 1.0 | All meaningful browser operations listed; no phantom actions in frontmatter without body section |
+| Selector fallback chain | 1.5 | Each extracted element has primary selector AND at least one fallback; fallback rule described |
+| Engine specificity | 1.0 | Engine section declares headless flag, viewport, timeout, and javascript flag explicitly |
+| Output schema completeness | 1.0 | Output Format section shows field names, types, and null handling for every extracted field |
+| Timeout configuration | 1.0 | Timeout declared per action or globally; no unbounded wait conditions |
+| Wait strategy documentation | 1.0 | Each navigate/wait action declares wait condition (load, networkidle, selector, etc.) |
+| Stealth and anti-detection | 0.5 | Stealth needs assessed; user_agent and stealth flag documented if applicable |
+| Cookie and session handling | 0.5 | Cookie flag declared; session persistence requirements documented if tool needs auth |
+| Boundary clarity | 1.0 | Explicitly not computer_use, not search_tool, not vision_tool — DOM-based contract stated |
+| Selector strategy rationale | 0.5 | Priority order explained (why data_attr before css, why xpath is last resort) |
+| Error and failure behavior | 1.0 | Behavior on selector miss, timeout, or navigation error documented (null return, screenshot, retry) |
+| Testability | 1.0 | Each action testable with known URL and expected output; example or schema provided |
+## Actions
+| Score | Tier | Action |
+|---|---|---|
+| >= 9.5 | Golden | Publish to pool as golden reference |
+| >= 8.0 | Publish | Publish to pool, add to routing index |
+| >= 7.0 | Review | Flag for improvement before publish |
+| < 7.0 | Reject | Return to author with specific gate failures |
+## Bypass
+| Field | Value |
+|---|---|
+| conditions | Internal debug tool used only during development; never shipped to production pipelines |
+| approver | Author self-certification with comment explaining debug-only scope |
+| audit_trail | Bypass note in frontmatter comment with expiry date |
+| expiry | 14d — debug tools must be promoted to >= 7.0 or removed from repo |
+| never_bypass | H01 (unparseable YAML breaks all tooling), H05 (self-scored gates corrupt quality metrics), H06 (unrecognized engine makes tool unrunnable) |
