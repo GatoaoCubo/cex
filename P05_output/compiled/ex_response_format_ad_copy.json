@@ -1,0 +1,22 @@
+{
+  "id": "ex_response_format_ad_copy",
+  "kind": "response_format",
+  "pillar": "P05",
+  "title": "Ad Copy Output Format",
+  "tags": [
+    "output",
+    "format",
+    "ad",
+    "copy"
+  ],
+  "references": [
+    "tpl_response_format",
+    "ex_agent_copywriter",
+    "ex_quality_gate_copy"
+  ],
+  "links": [
+    "Used by: [[ex_agent_copywriter]]",
+    "Validated by: [[ex_quality_gate_copy]]",
+    "Function: PRODUCE (what the AI outputs)"
+  ]
+}

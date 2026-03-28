@@ -1,0 +1,17 @@
+id: ex_learning_record_ad_success
+kind: learning_record
+pillar: P10
+title: Ad Campaign Success Record
+tags:
+- memory
+- learning
+- feedback
+- success
+references:
+- tpl_learning_record
+- ex_agent_copywriter
+- ex_quality_gate_copy
+links:
+- 'Agent: [[ex_agent_copywriter]]'
+- 'Gate used: [[ex_quality_gate_copy]]'
+- 'Function: INJECT (memory feeds future hydration)'

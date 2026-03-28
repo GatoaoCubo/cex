@@ -1,0 +1,20 @@
+id: ex_agent_copywriter
+kind: agent
+pillar: P02
+title: Copywriter Agent
+tags:
+- agent
+- copywriter
+- marketing
+- sales
+references:
+- tpl_agent
+- bld_system_prompt_agent
+- ex_knowledge_card_rag_fundamentals
+- ex_prompt_template_aida
+links:
+- 'Builder: [[bld_system_prompt_agent]]'
+- 'Template: [[tpl_agent]]'
+- 'Knowledge: [[ex_knowledge_card_rag_fundamentals]]'
+- 'Reasoning: [[ex_prompt_template_aida]]'
+- 'Function: BECOME (who the AI is)'

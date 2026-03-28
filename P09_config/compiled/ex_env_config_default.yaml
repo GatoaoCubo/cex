@@ -1,0 +1,12 @@
+id: ex_env_config_default
+kind: env_config
+pillar: P09
+title: Default Environment Config
+tags:
+- config
+- env
+- default
+references:
+- tpl_env_config
+links:
+- 'Template: [[tpl_env_config]]'

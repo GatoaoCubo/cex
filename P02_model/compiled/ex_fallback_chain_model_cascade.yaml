@@ -1,0 +1,18 @@
+id: p02_fb_model_cascade
+kind: fallback_chain
+pillar: P02
+chain: 'opus > sonnet > haiku. Never skip. Trigger: timeout or error.'
+timeout_per_step: varies
+quality: 9.0
+tags:
+- fallback
+- cascade
+timing: '| Step | Timeout | Cost |
+
+  |------|---------|------|
+
+  | opus | 30s | 100% |
+
+  | sonnet | 15s | 25% |
+
+  | haiku | 5s | 5% |'

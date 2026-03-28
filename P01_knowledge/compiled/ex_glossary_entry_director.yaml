@@ -1,0 +1,9 @@
+id: p01_gl_satellite
+term: satellite
+definition: Unidade autonoma de execucao no CODEXA. Cada satellite tem dominio fixo (Research, Build, Marketing), modelo LLM
+  dedicado (opus ou sonnet), e MCPs exclusivos. STELLA orquestra, satellites executam.
+synonyms:
+- worker
+- executor
+- specialist
+usage: '"Spawnar satellite EDISON para build" | "3 satellites em paralelo via grid"'

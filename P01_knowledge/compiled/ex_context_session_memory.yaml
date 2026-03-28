@@ -1,0 +1,15 @@
+id: ex_context_session_memory
+kind: context
+pillar: P01
+title: Session Memory Context
+tags:
+- context
+- session
+- memory
+- conversation
+references:
+- tpl_context_doc
+- ex_knowledge_card_rag_fundamentals
+links:
+- 'Template: [[tpl_context_doc]]'
+- 'Uses: [[ex_knowledge_card_rag_fundamentals]]'

@@ -1,0 +1,14 @@
+id: ex_mental_model_pipeline
+kind: mental_model
+pillar: P02
+title: Pipeline Mental Model
+tags:
+- mental_model
+- pipeline
+- compilation
+references:
+- tpl_mental_model
+- ex_agent_copywriter
+links:
+- 'Template: [[tpl_mental_model]]'
+- 'Used by: [[ex_agent_copywriter]]'

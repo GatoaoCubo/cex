@@ -1,0 +1,18 @@
+id: ex_prompt_template_aida
+kind: prompt_template
+pillar: P03
+title: AIDA Copywriting Template
+tags:
+- prompt
+- aida
+- copywriting
+- template
+references:
+- tpl_prompt_template
+- ex_agent_copywriter
+- ex_quality_gate_copy
+links:
+- 'Used by: [[ex_agent_copywriter]]'
+- 'Validated by: [[ex_quality_gate_copy]]'
+- 'Template: [[tpl_prompt_template]]'
+- 'Function: REASON (how the AI thinks)'
