@@ -1,0 +1,184 @@
+{
+  "builder_name": "signal-builder",
+  "original_dir": "archetypes\\builders\\signal-builder",
+  "generated_dir": "_tools\\proof\\rebuilt\\signal-builder",
+  "timestamp": "2026-03-28T13:41:57.473746",
+  "files": [
+    {
+      "name": "bld_architecture_signal.md",
+      "metrics": {
+        "structural": 100.0,
+        "fields": 100.0,
+        "content": 1.0,
+        "size_delta": 0.0,
+        "quality_5d": null
+      },
+      "verdict": "PASS"
+    },
+    {
+      "name": "bld_collaboration_signal.md",
+      "metrics": {
+        "structural": 100.0,
+        "fields": 100.0,
+        "content": 1.0,
+        "size_delta": 0.0,
+        "quality_5d": null
+      },
+      "verdict": "PASS"
+    },
+    {
+      "name": "bld_config_signal.md",
+      "metrics": {
+        "structural": 100.0,
+        "fields": 100.0,
+        "content": 1.0,
+        "size_delta": 0.0,
+        "quality_5d": null
+      },
+      "verdict": "PASS"
+    },
+    {
+      "name": "bld_examples_signal.md",
+      "metrics": {
+        "structural": 100.0,
+        "fields": 100.0,
+        "content": 1.0,
+        "size_delta": 0.0,
+        "quality_5d": null
+      },
+      "verdict": "PASS"
+    },
+    {
+      "name": "bld_instruction_signal.md",
+      "metrics": {
+        "structural": 100.0,
+        "fields": 100.0,
+        "content": 0.836,
+        "size_delta": 1.5,
+        "quality_5d": null
+      },
+      "verdict": "PASS"
+    },
+    {
+      "name": "bld_knowledge_card_signal.md",
+      "metrics": {
+        "structural": 100.0,
+        "fields": 100.0,
+        "content": 1.0,
+        "size_delta": 0.0,
+        "quality_5d": null
+      },
+      "verdict": "PASS"
+    },
+    {
+      "name": "bld_manifest_signal.md",
+      "metrics": {
+        "structural": 100.0,
+        "fields": 100.0,
+        "content": 0.908,
+        "size_delta": 2.9,
+        "quality_5d": null
+      },
+      "verdict": "PASS"
+    },
+    {
+      "name": "bld_memory_signal.md",
+      "metrics": {
+        "structural": 100.0,
+        "fields": 100.0,
+        "content": 1.0,
+        "size_delta": 0.0,
+        "quality_5d": null
+      },
+      "verdict": "PASS"
+    },
+    {
+      "name": "bld_output_template_signal.md",
+      "metrics": {
+        "structural": 100.0,
+        "fields": 100.0,
+        "content": 1.0,
+        "size_delta": 0.0,
+        "quality_5d": null
+      },
+      "verdict": "PASS"
+    },
+    {
+      "name": "bld_quality_gate_signal.md",
+      "metrics": {
+        "structural": 100.0,
+        "fields": 100.0,
+        "content": 1.0,
+        "size_delta": 0.0,
+        "quality_5d": null
+      },
+      "verdict": "PASS"
+    },
+    {
+      "name": "bld_schema_signal.md",
+      "metrics": {
+        "structural": 100.0,
+        "fields": 100.0,
+        "content": 1.0,
+        "size_delta": 0.0,
+        "quality_5d": null
+      },
+      "verdict": "PASS"
+    },
+    {
+      "name": "bld_system_prompt_signal.md",
+      "metrics": {
+        "structural": 100.0,
+        "fields": 100.0,
+        "content": 0.978,
+        "size_delta": 0.8,
+        "quality_5d": null
+      },
+      "verdict": "PASS"
+    },
+    {
+      "name": "bld_tools_signal.md",
+      "metrics": {
+        "structural": 100.0,
+        "fields": 100.0,
+        "content": 1.0,
+        "size_delta": 0.0,
+        "quality_5d": null
+      },
+      "verdict": "PASS"
+    }
+  ],
+  "aggregate": {
+    "structural": {
+      "mean": 100.0,
+      "min": 100.0,
+      "max": 100.0
+    },
+    "fields": {
+      "mean": 100.0,
+      "min": 100.0,
+      "max": 100.0
+    },
+    "content": {
+      "mean": 0.979,
+      "min": 0.836,
+      "max": 1.0
+    },
+    "size_delta": {
+      "mean": 0.4,
+      "min": 0.0,
+      "max": 2.9
+    },
+    "quality_5d": null
+  },
+  "summary": {
+    "total_files": 13,
+    "pass": 13,
+    "warn": 0,
+    "fail": 0,
+    "missing": 0,
+    "extra": 0
+  },
+  "verdict": "PASS",
+  "warnings": []
+}

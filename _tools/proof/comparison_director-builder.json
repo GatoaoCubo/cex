@@ -1,0 +1,211 @@
+{
+  "builder_name": "director-builder",
+  "original_dir": "archetypes\\builders\\director-builder",
+  "generated_dir": "_tools\\proof\\rebuilt\\director-builder",
+  "timestamp": "2026-03-28T13:49:11.050971",
+  "files": [
+    {
+      "name": "bld_architecture_director.md",
+      "metrics": {
+        "structural": 100.0,
+        "fields": 35.5,
+        "content": 0.345,
+        "size_delta": 2.5,
+        "quality_5d": null
+      },
+      "verdict": "FAIL"
+    },
+    {
+      "name": "bld_collaboration_director.md",
+      "metrics": {
+        "structural": 100.0,
+        "fields": 63.6,
+        "content": 0.42,
+        "size_delta": 2.4,
+        "quality_5d": null
+      },
+      "verdict": "FAIL"
+    },
+    {
+      "name": "bld_config_director.md",
+      "metrics": {
+        "structural": 50.0,
+        "fields": 57.9,
+        "content": 0.311,
+        "size_delta": 23.3,
+        "quality_5d": null
+      },
+      "verdict": "FAIL"
+    },
+    {
+      "name": "bld_examples_director.md",
+      "metrics": {
+        "structural": 33.3,
+        "fields": 100.0,
+        "content": 0.257,
+        "size_delta": 29.1,
+        "quality_5d": null
+      },
+      "verdict": "FAIL"
+    },
+    {
+      "name": "bld_instruction_director.md",
+      "metrics": {
+        "structural": 100.0,
+        "fields": 88.5,
+        "content": 0.26,
+        "size_delta": 14.8,
+        "quality_5d": null
+      },
+      "verdict": "FAIL"
+    },
+    {
+      "name": "bld_knowledge_card_director.md",
+      "metrics": {
+        "structural": 100.0,
+        "fields": 53.1,
+        "content": 0.36,
+        "size_delta": 14.3,
+        "quality_5d": null
+      },
+      "verdict": "FAIL"
+    },
+    {
+      "name": "bld_manifest_director.md",
+      "metrics": {
+        "structural": 100.0,
+        "fields": 100.0,
+        "content": 0.383,
+        "size_delta": 9.4,
+        "quality_5d": null
+      },
+      "verdict": "FAIL"
+    },
+    {
+      "name": "bld_memory_director.md",
+      "metrics": {
+        "structural": 100.0,
+        "fields": 100.0,
+        "content": 0.263,
+        "size_delta": 7.8,
+        "quality_5d": null
+      },
+      "verdict": "FAIL"
+    },
+    {
+      "name": "bld_output_template_director.md",
+      "metrics": {
+        "structural": 25.0,
+        "fields": 40.9,
+        "content": 0.239,
+        "size_delta": 19.0,
+        "quality_5d": null
+      },
+      "verdict": "FAIL"
+    },
+    {
+      "name": "bld_quality_gate_director.md",
+      "metrics": {
+        "structural": 100.0,
+        "fields": 100.0,
+        "content": 0.506,
+        "size_delta": 1.4,
+        "quality_5d": null
+      },
+      "verdict": "FAIL"
+    },
+    {
+      "name": "bld_schema_director.md",
+      "metrics": {
+        "structural": 100.0,
+        "fields": 57.1,
+        "content": 0.343,
+        "size_delta": 16.9,
+        "quality_5d": null
+      },
+      "verdict": "FAIL"
+    },
+    {
+      "name": "bld_system_prompt_director.md",
+      "metrics": {
+        "structural": 100.0,
+        "fields": 100.0,
+        "content": 0.446,
+        "size_delta": 8.4,
+        "quality_5d": null
+      },
+      "verdict": "FAIL"
+    },
+    {
+      "name": "bld_tools_director.md",
+      "metrics": {
+        "structural": 100.0,
+        "fields": 82.4,
+        "content": 0.608,
+        "size_delta": 7.3,
+        "quality_5d": null
+      },
+      "verdict": "WARN"
+    }
+  ],
+  "aggregate": {
+    "structural": {
+      "mean": 85.3,
+      "min": 25.0,
+      "max": 100.0
+    },
+    "fields": {
+      "mean": 75.3,
+      "min": 35.5,
+      "max": 100.0
+    },
+    "content": {
+      "mean": 0.365,
+      "min": 0.239,
+      "max": 0.608
+    },
+    "size_delta": {
+      "mean": 12.0,
+      "min": 1.4,
+      "max": 29.1
+    },
+    "quality_5d": null
+  },
+  "summary": {
+    "total_files": 13,
+    "pass": 0,
+    "warn": 1,
+    "fail": 12,
+    "missing": 0,
+    "extra": 0
+  },
+  "verdict": "FAIL",
+  "warnings": [
+    "bld_architecture_director.md: FAIL -- fields=35.5 below threshold 80.0",
+    "bld_architecture_director.md: FAIL -- content=0.345 below threshold 0.55",
+    "bld_collaboration_director.md: FAIL -- fields=63.6 below threshold 80.0",
+    "bld_collaboration_director.md: FAIL -- content=0.42 below threshold 0.55",
+    "bld_config_director.md: FAIL -- structural=50.0 below threshold 70.0",
+    "bld_config_director.md: FAIL -- fields=57.9 below threshold 80.0",
+    "bld_config_director.md: FAIL -- content=0.311 below threshold 0.55",
+    "bld_config_director.md: size_delta=23.3% (WARN threshold: 20.0-35.0%)",
+    "bld_examples_director.md: FAIL -- structural=33.3 below threshold 70.0",
+    "bld_examples_director.md: FAIL -- content=0.257 below threshold 0.55",
+    "bld_examples_director.md: size_delta=29.1% (WARN threshold: 20.0-35.0%)",
+    "bld_instruction_director.md: fields=88.5 (WARN threshold: 80.0-90.0)",
+    "bld_instruction_director.md: FAIL -- content=0.26 below threshold 0.55",
+    "bld_knowledge_card_director.md: FAIL -- fields=53.1 below threshold 80.0",
+    "bld_knowledge_card_director.md: FAIL -- content=0.36 below threshold 0.55",
+    "bld_manifest_director.md: FAIL -- content=0.383 below threshold 0.55",
+    "bld_memory_director.md: FAIL -- content=0.263 below threshold 0.55",
+    "bld_output_template_director.md: FAIL -- structural=25.0 below threshold 70.0",
+    "bld_output_template_director.md: FAIL -- fields=40.9 below threshold 80.0",
+    "bld_output_template_director.md: FAIL -- content=0.239 below threshold 0.55",
+    "bld_quality_gate_director.md: FAIL -- content=0.506 below threshold 0.55",
+    "bld_schema_director.md: FAIL -- fields=57.1 below threshold 80.0",
+    "bld_schema_director.md: FAIL -- content=0.343 below threshold 0.55",
+    "bld_system_prompt_director.md: FAIL -- content=0.446 below threshold 0.55",
+    "bld_tools_director.md: fields=82.4 (WARN threshold: 80.0-90.0)",
+    "bld_tools_director.md: content=0.608 (WARN threshold: 0.55-0.7)"
+  ]
+}

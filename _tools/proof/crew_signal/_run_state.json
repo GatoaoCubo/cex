@@ -1,0 +1,369 @@
+{
+  "intent": "reconstroi signal-builder",
+  "mode": "dry_run",
+  "started_at": "2026-03-28T13:29:34.518519",
+  "completed_at": "2026-03-28T13:29:34.615520",
+  "current_step": 8,
+  "quality_target": 9.5,
+  "builders": {
+    "validator-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "CONSTRAIN",
+        "position": 1,
+        "tier": "primary",
+        "prompt_bytes": 31702,
+        "mode": "dry-run"
+      }
+    },
+    "input-schema-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "CONSTRAIN",
+        "position": 1,
+        "tier": "primary",
+        "prompt_bytes": 30214,
+        "mode": "dry-run"
+      }
+    },
+    "interface-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "CONSTRAIN",
+        "position": 1,
+        "tier": "primary",
+        "prompt_bytes": 27956,
+        "mode": "dry-run"
+      }
+    },
+    "env-config-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "CONSTRAIN",
+        "position": 1,
+        "tier": "optional",
+        "prompt_bytes": 30990,
+        "mode": "dry-run"
+      }
+    },
+    "path-config-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "CONSTRAIN",
+        "position": 1,
+        "tier": "optional",
+        "prompt_bytes": 29213,
+        "mode": "dry-run"
+      }
+    },
+    "feature-flag-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "CONSTRAIN",
+        "position": 1,
+        "tier": "optional",
+        "prompt_bytes": 31095,
+        "mode": "dry-run"
+      }
+    },
+    "runtime-rule-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "CONSTRAIN",
+        "position": 1,
+        "tier": "optional",
+        "prompt_bytes": 28999,
+        "mode": "dry-run"
+      }
+    },
+    "permission-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "GOVERN",
+        "position": 7,
+        "tier": "optional",
+        "prompt_bytes": 30773,
+        "mode": "dry-run"
+      }
+    },
+    "agent-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "BECOME",
+        "position": 2,
+        "tier": "primary",
+        "prompt_bytes": 29371,
+        "mode": "dry-run"
+      }
+    },
+    "system-prompt-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "BECOME",
+        "position": 2,
+        "tier": "primary",
+        "prompt_bytes": 31264,
+        "mode": "dry-run"
+      }
+    },
+    "model-card-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "BECOME",
+        "position": 2,
+        "tier": "primary",
+        "prompt_bytes": 31251,
+        "mode": "dry-run"
+      }
+    },
+    "iso-package-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "BECOME",
+        "position": 2,
+        "tier": "primary",
+        "prompt_bytes": 31374,
+        "mode": "dry-run"
+      }
+    },
+    "_builder-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "BECOME",
+        "position": 2,
+        "tier": "optional",
+        "prompt_bytes": 31391,
+        "mode": "dry-run"
+      }
+    },
+    "knowledge-card-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "INJECT",
+        "position": 3,
+        "tier": "primary",
+        "prompt_bytes": 30452,
+        "mode": "dry-run"
+      }
+    },
+    "context-doc-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "INJECT",
+        "position": 3,
+        "tier": "primary",
+        "prompt_bytes": 29050,
+        "mode": "dry-run"
+      }
+    },
+    "few-shot-example-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "INJECT",
+        "position": 3,
+        "tier": "primary",
+        "prompt_bytes": 30521,
+        "mode": "dry-run"
+      }
+    },
+    "runtime-state-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "INJECT",
+        "position": 3,
+        "tier": "optional",
+        "prompt_bytes": 29351,
+        "mode": "dry-run"
+      }
+    },
+    "session-state-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "INJECT",
+        "position": 3,
+        "tier": "optional",
+        "prompt_bytes": 29572,
+        "mode": "dry-run"
+      }
+    },
+    "mental-model-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "INJECT",
+        "position": 3,
+        "tier": "optional",
+        "prompt_bytes": 30769,
+        "mode": "dry-run"
+      }
+    },
+    "instruction-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "REASON",
+        "position": 4,
+        "tier": "primary",
+        "prompt_bytes": 28538,
+        "mode": "dry-run"
+      }
+    },
+    "prompt-template-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "REASON",
+        "position": 4,
+        "tier": "primary",
+        "prompt_bytes": 30673,
+        "mode": "dry-run"
+      }
+    },
+    "director-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "COLLABORATE",
+        "position": 8,
+        "tier": "optional",
+        "prompt_bytes": 29895,
+        "mode": "dry-run"
+      }
+    },
+    "skill-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "CALL",
+        "position": 5,
+        "tier": "primary",
+        "prompt_bytes": 29704,
+        "mode": "dry-run"
+      }
+    },
+    "response-format-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "PRODUCE",
+        "position": 6,
+        "tier": "primary",
+        "prompt_bytes": 30417,
+        "mode": "dry-run"
+      }
+    },
+    "chain-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "PRODUCE",
+        "position": 6,
+        "tier": "optional",
+        "prompt_bytes": 31295,
+        "mode": "dry-run"
+      }
+    },
+    "quality-gate-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "GOVERN",
+        "position": 7,
+        "tier": "primary",
+        "prompt_bytes": 31310,
+        "mode": "dry-run"
+      }
+    },
+    "scoring-rubric-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "GOVERN",
+        "position": 7,
+        "tier": "primary",
+        "prompt_bytes": 29666,
+        "mode": "dry-run"
+      }
+    },
+    "golden-test-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "GOVERN",
+        "position": 7,
+        "tier": "primary",
+        "prompt_bytes": 30622,
+        "mode": "dry-run"
+      }
+    },
+    "unit-eval-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "GOVERN",
+        "position": 7,
+        "tier": "primary",
+        "prompt_bytes": 30239,
+        "mode": "dry-run"
+      }
+    },
+    "guardrail-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "GOVERN",
+        "position": 7,
+        "tier": "optional",
+        "prompt_bytes": 31130,
+        "mode": "dry-run"
+      }
+    },
+    "signal-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "COLLABORATE",
+        "position": 8,
+        "tier": "primary",
+        "prompt_bytes": 31103,
+        "mode": "dry-run"
+      }
+    },
+    "handoff-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "COLLABORATE",
+        "position": 8,
+        "tier": "primary",
+        "prompt_bytes": 28453,
+        "mode": "dry-run"
+      }
+    }
+  },
+  "warnings": [],
+  "summary": {
+    "total": 32,
+    "complete": 32,
+    "degraded": 0,
+    "failed": 0
+  }
+}

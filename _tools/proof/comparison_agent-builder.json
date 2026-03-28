@@ -1,0 +1,186 @@
+{
+  "builder_name": "agent-builder",
+  "original_dir": "archetypes\\builders\\agent-builder",
+  "generated_dir": "_tools\\proof\\rebuilt\\agent-builder",
+  "timestamp": "2026-03-28T13:49:10.843971",
+  "files": [
+    {
+      "name": "bld_architecture_agent.md",
+      "metrics": {
+        "structural": 100.0,
+        "fields": 100.0,
+        "content": 1.0,
+        "size_delta": 0.0,
+        "quality_5d": null
+      },
+      "verdict": "PASS"
+    },
+    {
+      "name": "bld_collaboration_agent.md",
+      "metrics": {
+        "structural": 100.0,
+        "fields": 100.0,
+        "content": 1.0,
+        "size_delta": 0.0,
+        "quality_5d": null
+      },
+      "verdict": "PASS"
+    },
+    {
+      "name": "bld_config_agent.md",
+      "metrics": {
+        "structural": 100.0,
+        "fields": 100.0,
+        "content": 1.0,
+        "size_delta": 0.0,
+        "quality_5d": null
+      },
+      "verdict": "PASS"
+    },
+    {
+      "name": "bld_examples_agent.md",
+      "metrics": {
+        "structural": 100.0,
+        "fields": 100.0,
+        "content": 1.0,
+        "size_delta": 0.0,
+        "quality_5d": null
+      },
+      "verdict": "PASS"
+    },
+    {
+      "name": "bld_instruction_agent.md",
+      "metrics": {
+        "structural": 100.0,
+        "fields": 100.0,
+        "content": 1.0,
+        "size_delta": 0.0,
+        "quality_5d": null
+      },
+      "verdict": "PASS"
+    },
+    {
+      "name": "bld_knowledge_card_agent.md",
+      "metrics": {
+        "structural": 100.0,
+        "fields": 100.0,
+        "content": 1.0,
+        "size_delta": 0.0,
+        "quality_5d": null
+      },
+      "verdict": "PASS"
+    },
+    {
+      "name": "bld_manifest_agent.md",
+      "metrics": {
+        "structural": 100.0,
+        "fields": 100.0,
+        "content": 0.623,
+        "size_delta": 0.7,
+        "quality_5d": null
+      },
+      "verdict": "WARN"
+    },
+    {
+      "name": "bld_memory_agent.md",
+      "metrics": {
+        "structural": 100.0,
+        "fields": 100.0,
+        "content": 1.0,
+        "size_delta": 0.0,
+        "quality_5d": null
+      },
+      "verdict": "PASS"
+    },
+    {
+      "name": "bld_output_template_agent.md",
+      "metrics": {
+        "structural": 100.0,
+        "fields": 100.0,
+        "content": 1.0,
+        "size_delta": 0.0,
+        "quality_5d": null
+      },
+      "verdict": "PASS"
+    },
+    {
+      "name": "bld_quality_gate_agent.md",
+      "metrics": {
+        "structural": 100.0,
+        "fields": 100.0,
+        "content": 1.0,
+        "size_delta": 0.0,
+        "quality_5d": null
+      },
+      "verdict": "PASS"
+    },
+    {
+      "name": "bld_schema_agent.md",
+      "metrics": {
+        "structural": 100.0,
+        "fields": 100.0,
+        "content": 0.988,
+        "size_delta": 0.1,
+        "quality_5d": null
+      },
+      "verdict": "PASS"
+    },
+    {
+      "name": "bld_system_prompt_agent.md",
+      "metrics": {
+        "structural": 100.0,
+        "fields": 100.0,
+        "content": 1.0,
+        "size_delta": 0.0,
+        "quality_5d": null
+      },
+      "verdict": "PASS"
+    },
+    {
+      "name": "bld_tools_agent.md",
+      "metrics": {
+        "structural": 100.0,
+        "fields": 100.0,
+        "content": 1.0,
+        "size_delta": 0.0,
+        "quality_5d": null
+      },
+      "verdict": "PASS"
+    }
+  ],
+  "aggregate": {
+    "structural": {
+      "mean": 100.0,
+      "min": 100.0,
+      "max": 100.0
+    },
+    "fields": {
+      "mean": 100.0,
+      "min": 100.0,
+      "max": 100.0
+    },
+    "content": {
+      "mean": 0.97,
+      "min": 0.623,
+      "max": 1.0
+    },
+    "size_delta": {
+      "mean": 0.1,
+      "min": 0.0,
+      "max": 0.7
+    },
+    "quality_5d": null
+  },
+  "summary": {
+    "total_files": 13,
+    "pass": 12,
+    "warn": 1,
+    "fail": 0,
+    "missing": 0,
+    "extra": 0
+  },
+  "verdict": "PASS",
+  "warnings": [
+    "bld_manifest_agent.md: content=0.623 (WARN threshold: 0.55-0.7)"
+  ]
+}

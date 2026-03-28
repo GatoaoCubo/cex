@@ -1,0 +1,369 @@
+{
+  "intent": "reconstroi quality-gate-builder com quality 9.5",
+  "mode": "dry_run",
+  "started_at": "2026-03-28T13:43:18.878810",
+  "completed_at": "2026-03-28T13:43:19.042809",
+  "current_step": 8,
+  "quality_target": 9.5,
+  "builders": {
+    "validator-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "CONSTRAIN",
+        "position": 1,
+        "tier": "primary",
+        "prompt_bytes": 31730,
+        "mode": "dry-run"
+      }
+    },
+    "input-schema-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "CONSTRAIN",
+        "position": 1,
+        "tier": "primary",
+        "prompt_bytes": 30242,
+        "mode": "dry-run"
+      }
+    },
+    "interface-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "CONSTRAIN",
+        "position": 1,
+        "tier": "primary",
+        "prompt_bytes": 27984,
+        "mode": "dry-run"
+      }
+    },
+    "env-config-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "CONSTRAIN",
+        "position": 1,
+        "tier": "optional",
+        "prompt_bytes": 31018,
+        "mode": "dry-run"
+      }
+    },
+    "path-config-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "CONSTRAIN",
+        "position": 1,
+        "tier": "optional",
+        "prompt_bytes": 29241,
+        "mode": "dry-run"
+      }
+    },
+    "feature-flag-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "CONSTRAIN",
+        "position": 1,
+        "tier": "optional",
+        "prompt_bytes": 31123,
+        "mode": "dry-run"
+      }
+    },
+    "runtime-rule-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "CONSTRAIN",
+        "position": 1,
+        "tier": "optional",
+        "prompt_bytes": 29027,
+        "mode": "dry-run"
+      }
+    },
+    "permission-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "GOVERN",
+        "position": 7,
+        "tier": "optional",
+        "prompt_bytes": 30801,
+        "mode": "dry-run"
+      }
+    },
+    "agent-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "BECOME",
+        "position": 2,
+        "tier": "primary",
+        "prompt_bytes": 29399,
+        "mode": "dry-run"
+      }
+    },
+    "system-prompt-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "BECOME",
+        "position": 2,
+        "tier": "primary",
+        "prompt_bytes": 31292,
+        "mode": "dry-run"
+      }
+    },
+    "model-card-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "BECOME",
+        "position": 2,
+        "tier": "primary",
+        "prompt_bytes": 31279,
+        "mode": "dry-run"
+      }
+    },
+    "iso-package-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "BECOME",
+        "position": 2,
+        "tier": "primary",
+        "prompt_bytes": 31402,
+        "mode": "dry-run"
+      }
+    },
+    "_builder-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "BECOME",
+        "position": 2,
+        "tier": "optional",
+        "prompt_bytes": 31419,
+        "mode": "dry-run"
+      }
+    },
+    "knowledge-card-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "INJECT",
+        "position": 3,
+        "tier": "primary",
+        "prompt_bytes": 30480,
+        "mode": "dry-run"
+      }
+    },
+    "context-doc-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "INJECT",
+        "position": 3,
+        "tier": "primary",
+        "prompt_bytes": 29078,
+        "mode": "dry-run"
+      }
+    },
+    "few-shot-example-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "INJECT",
+        "position": 3,
+        "tier": "primary",
+        "prompt_bytes": 30549,
+        "mode": "dry-run"
+      }
+    },
+    "runtime-state-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "INJECT",
+        "position": 3,
+        "tier": "optional",
+        "prompt_bytes": 29379,
+        "mode": "dry-run"
+      }
+    },
+    "session-state-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "INJECT",
+        "position": 3,
+        "tier": "optional",
+        "prompt_bytes": 29600,
+        "mode": "dry-run"
+      }
+    },
+    "mental-model-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "INJECT",
+        "position": 3,
+        "tier": "optional",
+        "prompt_bytes": 30797,
+        "mode": "dry-run"
+      }
+    },
+    "instruction-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "REASON",
+        "position": 4,
+        "tier": "primary",
+        "prompt_bytes": 28566,
+        "mode": "dry-run"
+      }
+    },
+    "prompt-template-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "REASON",
+        "position": 4,
+        "tier": "primary",
+        "prompt_bytes": 30701,
+        "mode": "dry-run"
+      }
+    },
+    "director-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "COLLABORATE",
+        "position": 8,
+        "tier": "optional",
+        "prompt_bytes": 29923,
+        "mode": "dry-run"
+      }
+    },
+    "skill-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "CALL",
+        "position": 5,
+        "tier": "primary",
+        "prompt_bytes": 29732,
+        "mode": "dry-run"
+      }
+    },
+    "response-format-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "PRODUCE",
+        "position": 6,
+        "tier": "primary",
+        "prompt_bytes": 30445,
+        "mode": "dry-run"
+      }
+    },
+    "chain-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "PRODUCE",
+        "position": 6,
+        "tier": "optional",
+        "prompt_bytes": 31323,
+        "mode": "dry-run"
+      }
+    },
+    "quality-gate-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "GOVERN",
+        "position": 7,
+        "tier": "primary",
+        "prompt_bytes": 31338,
+        "mode": "dry-run"
+      }
+    },
+    "scoring-rubric-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "GOVERN",
+        "position": 7,
+        "tier": "primary",
+        "prompt_bytes": 29694,
+        "mode": "dry-run"
+      }
+    },
+    "golden-test-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "GOVERN",
+        "position": 7,
+        "tier": "primary",
+        "prompt_bytes": 30650,
+        "mode": "dry-run"
+      }
+    },
+    "unit-eval-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "GOVERN",
+        "position": 7,
+        "tier": "primary",
+        "prompt_bytes": 30267,
+        "mode": "dry-run"
+      }
+    },
+    "guardrail-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "GOVERN",
+        "position": 7,
+        "tier": "optional",
+        "prompt_bytes": 31158,
+        "mode": "dry-run"
+      }
+    },
+    "signal-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "COLLABORATE",
+        "position": 8,
+        "tier": "primary",
+        "prompt_bytes": 31131,
+        "mode": "dry-run"
+      }
+    },
+    "handoff-builder": {
+      "status": "complete",
+      "quality_score": 0.0,
+      "metadata": {
+        "function": "COLLABORATE",
+        "position": 8,
+        "tier": "primary",
+        "prompt_bytes": 28481,
+        "mode": "dry-run"
+      }
+    }
+  },
+  "warnings": [],
+  "summary": {
+    "total": 32,
+    "complete": 32,
+    "degraded": 0,
+    "failed": 0
+  }
+}

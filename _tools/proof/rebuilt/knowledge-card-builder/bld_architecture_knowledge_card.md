@@ -1,0 +1,54 @@
+---
+kind: architecture
+id: bld_architecture_knowledge_card
+pillar: P08
+llm_function: CONSTRAIN
+purpose: Component map of knowledge_card — inventory, dependencies, and architectural position
+---
+
+## Component Inventory
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| title | Short searchable label identifying the fact | author | required |
+| body | Distilled atomic fact content, high information density >= 0.8 | author | required |
+| domain_tags | Topic labels enabling retrieval routing | author | required |
+| card_type | Classification: domain_kc or meta_kc | author | required |
+| sources | Origin references for the distilled fact | author | required |
+| confidence_score | Reliability rating of the fact (0.0–1.0) | author | required |
+| version | Revision counter for fact updates | author | required |
+| linked_artifacts | Other cards or artifacts this fact connects to | author | optional |
+| expiry_hint | Signal that the fact may become stale after a date | author | optional |
+## Dependency Graph
+```
+rag_source     --produces--> knowledge_card
+knowledge_card --queried_by--> brain_index
+brain_index    --injects_into--> system_prompt
+knowledge_card --informs--> few_shot_example
+knowledge_card --referenced_by--> context_doc
+knowledge_card --referenced_by--> agent
+```
+| From | To | Type | Data |
+|------|----|------|------|
+| rag_source | knowledge_card | data_flow | raw source text to distill |
+| knowledge_card | brain_index | data_flow | title, body, tags for BM25 and vector indexing |
+| brain_index | system_prompt | data_flow | retrieved facts injected into prompt context |
+| knowledge_card | few_shot_example | data_flow | factual grounding for input/output pairs |
+| knowledge_card | context_doc | data_flow | referenced as supporting evidence |
+| knowledge_card | agent | data_flow | linked domain knowledge in agent definition |
+## Boundary Table
+| knowledge_card IS | knowledge_card IS NOT |
+|-------------------|----------------------|
+| Atomic searchable fact with density >= 0.8 | Broad reference document without density gate |
+| Versioned and source-attributed | Spec for an LLM model or its parameters |
+| Classified as domain_kc or meta_kc | Short definition entry (3 lines max) |
+| Injected into prompts via retrieval index | External URL pointer without distilled content |
+| Max 5KB body (high signal-to-noise) | Input/output demonstration pair |
+| Expirable when facts can become stale | Agent identity or behavioral definition |
+## Layer Map
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Identity | title, card_type, version | Name, classify, and version the fact |
+| Content | body, confidence_score, expiry_hint | Carry the distilled fact with reliability signal |
+| Discoverability | domain_tags, linked_artifacts | Enable retrieval routing and cross-referencing |
+| Provenance | sources | Trace the fact back to its origin |
+| Consumption | brain_index, system_prompt | Retrieve and inject facts into agent context at runtime |
