@@ -2,42 +2,26 @@ pillar: P04
 name: Tools
 description: O que o agente USA
 kinds:
-  skill:
-    description: Habilidade reutilizavel (phases + trigger)
-    boundary: Habilidade reutilizavel com fases e trigger. NAO eh agent (P02, identidade
-      completa) nem action_prompt (P03, prompt puro).
+  function_def:
+    description: Definicao de funcao callable por LLM (JSON Schema tool)
+    boundary: Schema JSON de funcao que LLM pode chamar via tool_use. NAO eh mcp_server (protocolo completo) nem api_client
+      (implementacao do client).
     layer: runtime
     core: true
-    machine_format: yaml
-    naming: p04_skill_{{name}}.md + .yaml
+    machine_format: json
+    naming: p04_fn_{{name}}.md + .json
     constraints:
-      max_bytes: 5120
-      quality_min: 7.0
+      max_bytes: 2048
     frontmatter_required:
     - id
     - name
     - description
-    - user_invocable
-    - trigger
-    - phases
-    - when_to_use
-    - when_not_to_use
-    - examples
-    frontmatter_optional:
-    - references_dir
-    - sub_skills
-    - platforms
-    - stack_default
-    body_structure:
-    - purpose
-    - workflow_phases
-    - anti_patterns
-    - metrics
+    - parameters
+    - returns
     llm_function: CALL
   mcp_server:
     description: Servidor MCP (tools + resources)
-    boundary: Servidor MCP que expoe tools e resources. NAO eh connector (integracao
-      simples) nem client (consumidor de API).
+    boundary: Servidor MCP que expoe tools e resources. NAO eh connector (integracao simples) nem client (consumidor de API).
     layer: runtime
     core: true
     machine_format: json
@@ -51,10 +35,206 @@ kinds:
     - tools_provided
     - resources_provided
     llm_function: CALL
+  code_executor:
+    description: Runtime sandboxed para execucao de codigo (Docker, E2B, Jupyter)
+    boundary: Ambiente isolado que executa codigo. NAO eh cli_tool (comando shell pontual) nem daemon (processo persistente).
+    layer: runtime
+    core: true
+    machine_format: yaml
+    naming: p04_exec_{{runtime}}.md + .yaml
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - name
+    - runtime
+    - sandbox_type
+    - languages
+    - timeout
+    llm_function: CALL
+  computer_use:
+    description: Controle de tela, teclado e mouse por LLM (Anthropic, browser-use)
+    boundary: Interacao com interface grafica via automacao. NAO eh browser_tool (DOM) nem cli_tool (linha de comando).
+    layer: runtime
+    core: false
+    machine_format: yaml
+    naming: p04_cu_{{target}}.md + .yaml
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - name
+    - target
+    - resolution
+    - actions_supported
+    llm_function: CALL
+  search_tool:
+    description: Busca web, semantica ou hibrida (Tavily, Serper, Perplexity)
+    boundary: Busca e retorna resultados ranqueados. NAO eh retriever (vector store local) nem document_loader (ingere arquivos).
+    layer: runtime
+    core: true
+    machine_format: yaml
+    naming: p04_search_{{provider}}.md + .yaml
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - name
+    - provider
+    - search_type
+    - max_results
+    llm_function: CALL
+  document_loader:
+    description: Ingere arquivos e converte em chunks (PDF, HTML, CSV, etc)
+    boundary: Transforma arquivo bruto em documentos chunkeados. NAO eh retriever (busca sobre chunks) nem search_tool (busca
+      externa).
+    layer: runtime
+    core: true
+    machine_format: yaml
+    naming: p04_loader_{{format}}.md + .yaml
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - name
+    - formats_supported
+    - chunk_strategy
+    - output_format
+    llm_function: INJECT
+  retriever:
+    description: Busca vetorial/keyword/hibrida sobre store local (RAG core)
+    boundary: Busca sobre embedding store ou indice local. NAO eh search_tool (busca web externa) nem document_loader (ingere
+      arquivos).
+    layer: runtime
+    core: true
+    machine_format: yaml
+    naming: p04_retr_{{store}}.md + .yaml
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - name
+    - store_type
+    - embedding_model
+    - similarity_metric
+    - top_k
+    llm_function: INJECT
+  db_connector:
+    description: Conector de banco/dados estruturados (SQL, GraphQL, REST-to-DB)
+    boundary: Acesso a dados estruturados. NAO eh api_client nem retriever.
+    layer: runtime
+    core: false
+    machine_format: json
+    naming: p04_db_{{source}}.md + .yaml
+    constraints:
+      max_bytes: 1024
+    llm_function: CALL
+  api_client:
+    description: Cliente tipado de API REST/GraphQL/gRPC
+    boundary: Cliente unidirecional tipado. NAO eh db_connector nem mcp_server.
+    layer: runtime
+    core: false
+    machine_format: json
+    naming: p04_api_{{service}}.md + .yaml
+    constraints:
+      max_bytes: 1024
+    llm_function: CALL
+  webhook:
+    description: Endpoint HTTP event-driven inbound/outbound
+    boundary: Recebe ou envia eventos via HTTP. NAO eh api_client (request-response) nem notifier (delivery de mensagem).
+    layer: runtime
+    core: false
+    machine_format: json
+    naming: p04_webhook_{{event}}.md + .json
+    constraints:
+      max_bytes: 1024
+    frontmatter_required:
+    - id
+    - name
+    - direction
+    - event_type
+    - payload_schema
+    llm_function: CALL
+  notifier:
+    description: Entrega de notificacao push (email, SMS, Slack, Discord)
+    boundary: Envia notificacao para usuario/sistema. NAO eh webhook (evento bidirecional) nem api_client (integracao completa).
+    layer: runtime
+    core: false
+    machine_format: yaml
+    naming: p04_notify_{{channel}}.md + .yaml
+    constraints:
+      max_bytes: 1024
+    frontmatter_required:
+    - id
+    - name
+    - channel
+    - template
+    - priority
+    llm_function: CALL
+  vision_tool:
+    description: Analise de imagem, OCR, screenshot interpretation
+    boundary: Processa input visual e retorna dados estruturados. NAO eh browser_tool (interacao DOM) nem computer_use (controle
+      de tela).
+    layer: runtime
+    core: false
+    machine_format: yaml
+    naming: p04_vision_{{capability}}.md + .yaml
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - name
+    - input_types
+    - capabilities
+    - output_format
+    llm_function: CALL
+  audio_tool:
+    description: Speech-to-text, text-to-speech, analise de audio
+    boundary: Processa input/output de audio. NAO eh vision_tool (visual) nem notifier (delivery de mensagem).
+    layer: runtime
+    core: false
+    machine_format: yaml
+    naming: p04_audio_{{capability}}.md + .yaml
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - name
+    - direction
+    - models
+    - formats
+    - languages
+    llm_function: CALL
+  browser_tool:
+    description: 'Automacao de browser: DOM parsing, navegacao, interacao, screenshot'
+    boundary: Interage com paginas web via DOM. NAO eh computer_use (tela generica) nem search_tool (busca sem navegacao).
+    layer: runtime
+    core: true
+    machine_format: yaml
+    naming: p04_browser_{{target}}.md + .yaml
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - name
+    - engine
+    - actions
+    - selectors
+    - output_format
+    llm_function: CALL
+  cli_tool:
+    description: Ferramenta CLI
+    boundary: Ferramenta de linha de comando pontual. NAO eh skill (sem fases) nem daemon (nao persiste em background).
+    layer: runtime
+    core: false
+    machine_format: yaml
+    naming: p04_cli_{{tool}}.md
+    constraints:
+      max_bytes: 1024
+    llm_function: CALL
   hook:
     description: Pre/post processing hook
-    boundary: Codigo executavel em evento pre/post. NAO eh lifecycle_rule (P11, regra
-      declarativa) nem daemon (processo persistente).
+    boundary: Codigo executavel em evento pre/post. NAO eh lifecycle_rule (P11, regra declarativa) nem daemon (processo persistente).
     layer: runtime
     core: true
     machine_format: yaml
@@ -69,8 +249,7 @@ kinds:
     llm_function: GOVERN
   plugin:
     description: Extensao plugavel
-    boundary: Extensao plugavel ao sistema. NAO eh hook (evento especifico) nem skill
-      (sem fases estruturadas).
+    boundary: Extensao plugavel ao sistema. NAO eh hook (evento especifico) nem skill (sem fases estruturadas).
     layer: runtime
     core: false
     machine_format: yaml
@@ -78,54 +257,9 @@ kinds:
     constraints:
       max_bytes: 2048
     llm_function: CALL
-  client:
-    description: Cliente de API
-    boundary: Cliente unidirecional de API externa. NAO eh connector (bidirecional)
-      nem mcp_server (provedor, nao consumidor).
-    layer: runtime
-    core: false
-    machine_format: json
-    naming: p04_client_{{api}}.md + .yaml
-    constraints:
-      max_bytes: 1024
-    llm_function: CALL
-  cli_tool:
-    description: Ferramenta CLI
-    boundary: Ferramenta de linha de comando pontual. NAO eh skill (sem fases) nem
-      daemon (nao persiste em background).
-    layer: runtime
-    core: false
-    machine_format: yaml
-    naming: p04_cli_{{tool}}.md
-    constraints:
-      max_bytes: 1024
-    llm_function: CALL
-  scraper:
-    description: Extrator de dados web
-    boundary: Extrator de dados web. NAO eh client (API estruturada) nem connector
-      (bidirecional, nao extrai).
-    layer: runtime
-    core: false
-    machine_format: yaml
-    naming: p04_scraper_{{target}}.md + .yaml
-    constraints:
-      max_bytes: 1024
-    llm_function: CALL
-  connector:
-    description: Conector de servico externo
-    boundary: Conector bidirecional de servico externo. NAO eh client (unidirecional)
-      nem mcp_server (nao expoe tools).
-    layer: runtime
-    core: false
-    machine_format: json
-    naming: p04_conn_{{service}}.md + .yaml
-    constraints:
-      max_bytes: 1024
-    llm_function: CALL
   daemon:
     description: Processo background
-    boundary: Processo background persistente. NAO eh hook (evento unico) nem cli_tool
-      (execucao pontual e termina).
+    boundary: Processo background persistente. NAO eh hook (evento unico) nem cli_tool (execucao pontual e termina).
     layer: runtime
     core: false
     machine_format: yaml
