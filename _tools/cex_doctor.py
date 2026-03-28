@@ -1,231 +1,341 @@
 #!/usr/bin/env python3
-"""CEX Doctor — Self-healing diagnostic + auto-fix for the CEX repo.
+"""CEX Doctor v2.0 — Naming v2.0 + Density + 13-file completeness.
 
 Usage:
   python _tools/cex_doctor.py          # diagnose only
-  python _tools/cex_doctor.py --fix    # diagnose + auto-fix what's possible
+  python _tools/cex_doctor.py --fix    # diagnose + auto-fix naming issues
 """
-import os, sys, re, yaml, json, glob
+
+import sys
+import re
+
+import yaml
 from pathlib import Path
-from collections import defaultdict
 
 ROOT = Path(__file__).resolve().parent.parent
+BUILDERS_DIR = ROOT / "archetypes" / "builders"
 FIX_MODE = "--fix" in sys.argv
 
-def p(icon, msg):
-    print(f"  {icon} {msg}")
+# -- Constants ----------------------------------------------------------------
 
-def count_files(pattern):
-    return len(glob.glob(str(ROOT / pattern), recursive=True))
+EXPECTED_KINDS = [
+    "architecture",
+    "collaboration",
+    "config",
+    "examples",
+    "instruction",
+    "knowledge_card",
+    "manifest",
+    "memory",
+    "output_template",
+    "quality_gate",
+    "schema",
+    "system_prompt",
+    "tools",
+]
+EXPECTED_COUNT = len(EXPECTED_KINDS)  # 13
+MAX_BYTES = 4096
+MIN_DENSITY = 0.80
+NAMING_RE = re.compile(r"^bld_[a-z][a-z0-9_]+_[a-z][a-z0-9_]+\.md$")
 
-def load_yaml(path):
-    try:
-        with open(path, encoding="utf-8") as f:
-            return yaml.safe_load(f)
-    except:
-        return None
+# -- Helpers ------------------------------------------------------------------
+
 
 def get_frontmatter(path):
+    """Return parsed YAML frontmatter dict, or None if missing/invalid."""
     try:
-        text = Path(path).read_text(encoding="utf-8", errors="ignore")
+        text = path.read_text(encoding="utf-8", errors="ignore")
         if text.startswith("---"):
             end = text.index("---", 3)
             return yaml.safe_load(text[3:end])
-    except:
+    except Exception:
         pass
     return None
 
-print("=" * 60)
-print("CEX Doctor v1.0 — Self-Healing Diagnostic")
-print("=" * 60)
-print()
 
-errors, warnings, fixes = 0, 0, 0
+def calc_density(path):
+    """Return density ratio (0.0-1.0): content lines / total lines.
 
-# CHECK 1: Frontmatter consistency
-print("CHECK 1: Frontmatter fields (kind: / pillar:)")
-md_files = list(ROOT.glob("P*/examples/*.md")) + list(ROOT.glob("P*/templates/*.md"))
-missing_kind, missing_pillar, has_old_type, has_old_lp = [], [], [], []
-for f in md_files:
-    fm = get_frontmatter(f)
-    if not fm:
-        continue
-    if "kind" not in fm:
-        missing_kind.append(f)
-    if "pillar" not in fm:
-        missing_pillar.append(f)
-    if "type" in fm:
-        has_old_type.append(f)
-    if "lp" in fm:
-        has_old_lp.append(f)
+    Filler = empty lines, whitespace-only, bare separators (---).
+    Frontmatter block is excluded from calculation.
+    """
+    try:
+        text = path.read_text(encoding="utf-8", errors="ignore")
+    except Exception:
+        return 0.0
 
-if not has_old_type and not has_old_lp:
-    p("OK", f"{len(md_files)} files checked — no legacy 'type:' or 'lp:' found")
-else:
-    p("!!", f"{len(has_old_type)} files still have 'type:', {len(has_old_lp)} have 'lp:'")
-    errors += len(has_old_type) + len(has_old_lp)
+    # Strip frontmatter
+    body = text
+    if text.startswith("---"):
+        try:
+            end = text.index("---", 3)
+            body = text[end + 3 :].lstrip("\n")
+        except ValueError:
+            pass
 
-if missing_kind:
-    p("??", f"{len(missing_kind)} files missing 'kind:' field")
-    warnings += 1
+    lines = body.splitlines()
+    if not lines:
+        return 0.0
 
-print()
+    content = 0
+    for line in lines:
+        stripped = line.strip()
+        if stripped and stripped != "---":
+            content += 1
 
-# CHECK 2: Compiled coverage (dual output)
-print("CHECK 2: Dual output (examples must have compiled/)")
-missing_compiled = []
-for lp_dir in sorted(ROOT.glob("P*_*")):
-    examples = list((lp_dir / "examples").glob("*.md")) if (lp_dir / "examples").exists() else []
-    compiled_dir = lp_dir / "compiled"
-    for ex in examples:
-        if ex.name.startswith("_"):
-            continue
-        stem = ex.stem
-        has_yaml = (compiled_dir / f"{stem}.yaml").exists()
-        has_json = (compiled_dir / f"{stem}.json").exists()
-        if not has_yaml and not has_json:
-            missing_compiled.append(str(ex.relative_to(ROOT)))
+    return content / len(lines)
 
-if not missing_compiled:
-    p("OK", "All examples have compiled/ counterpart")
-else:
-    p("!!", f"{len(missing_compiled)} examples missing compiled/ counterpart")
-    for mc in missing_compiled[:5]:
-        p("  ", mc)
-    if len(missing_compiled) > 5:
-        p("  ", f"... and {len(missing_compiled)-5} more")
-    errors += 1
-    if FIX_MODE:
-        p(">>", "Run: python _tools/cex_compile.py --all")
 
-print()
+def extract_topic_from_dir(dirname):
+    """Convert builder dir name to expected topic suffix.
 
-# CHECK 3: Schema integrity
-print("CHECK 3: Schema integrity (kinds: key, pillar: field)")
-schema_ok, schema_fail = 0, 0
-for sf in sorted(ROOT.glob("P*/_schema.yaml")):
-    data = load_yaml(sf)
-    if not data:
-        p("!!", f"Cannot parse {sf.name}")
-        schema_fail += 1
-        continue
-    if "kinds" not in data:
-        p("!!", f"{sf.relative_to(ROOT)}: missing 'kinds:' key (has 'types:'?)")
-        schema_fail += 1
-    elif "pillar" not in data:
-        p("!!", f"{sf.relative_to(ROOT)}: missing 'pillar:' field")
-        schema_fail += 1
-    else:
-        schema_ok += 1
+    'agent-builder' -> 'agent'
+    'knowledge-card-builder' -> 'knowledge_card'
+    'iso-package-builder' -> 'iso_package'
+    """
+    name = dirname
+    if name.endswith("-builder"):
+        name = name[: -len("-builder")]
+    elif name.endswith("_builder"):
+        name = name[: -len("_builder")]
+    return name.replace("-", "_")
 
-p("OK" if not schema_fail else "!!", f"{schema_ok}/12 schemas valid, {schema_fail} broken")
-errors += schema_fail
 
-print()
+def expected_filename(kind, topic):
+    return f"bld_{kind}_{topic}.md"
 
-# CHECK 4: Builder completeness
-print("CHECK 4: Builders (archetypes/builders/)")
-builders_dir = ROOT / "archetypes" / "builders"
-builders = [d for d in builders_dir.iterdir() if d.is_dir() and not d.name.startswith("_")]
-iso_files = ["MANIFEST.md", "SYSTEM_PROMPT.md", "KNOWLEDGE.md", "INSTRUCTIONS.md",
-             "TOOLS.md", "OUTPUT_TEMPLATE.md", "SCHEMA.md", "EXAMPLES.md",
-             "ARCHITECTURE.md", "CONFIG.md", "MEMORY.md", "QUALITY_GATES.md", "COLLABORATION.md"]
-complete, incomplete = 0, 0
-for b in builders:
-    missing = [f for f in iso_files if not (b / f).exists()]
+
+def parse_bld_filename(filename):
+    """Parse bld_{kind}_{topic}.md -> (kind, topic) or None."""
+    if not filename.startswith("bld_") or not filename.endswith(".md"):
+        return None
+    stem = filename[4:-3]  # strip bld_ and .md
+    # Match against known kinds (longest first to handle multi-word kinds)
+    for kind in sorted(EXPECTED_KINDS, key=len, reverse=True):
+        if stem.startswith(kind + "_"):
+            topic = stem[len(kind) + 1 :]
+            return (kind, topic)
+    return None
+
+
+# -- Checks -------------------------------------------------------------------
+
+
+class CheckResult:
+    def __init__(self, builder_name):
+        self.name = builder_name
+        self.naming = "PASS"
+        self.density = "PASS"
+        self.max_bytes = "PASS"
+        self.completeness = "PASS"
+        self.frontmatter = "PASS"
+        self.details = []
+
+    @property
+    def overall(self):
+        statuses = [self.naming, self.density, self.max_bytes, self.completeness, self.frontmatter]
+        if "FAIL" in statuses:
+            return "FAIL"
+        if "WARN" in statuses:
+            return "WARN"
+        return "PASS"
+
+
+def check_builder(builder_dir):
+    """Run all checks on a single builder directory."""
+    r = CheckResult(builder_dir.name)
+    topic = extract_topic_from_dir(builder_dir.name)
+
+    # Gather all bld_*.md files
+    bld_files = sorted(builder_dir.glob("bld_*.md"))
+    bld_names = {f.name for f in bld_files}
+
+    # -- CHECK 1: 13-file completeness ----------------------------------------
+    expected = {expected_filename(k, topic) for k in EXPECTED_KINDS}
+    missing = expected - bld_names
+    extra = bld_names - expected
+
     if missing:
-        p("??", f"{b.name}: missing {len(missing)} ISO files")
-        incomplete += 1
-    else:
-        complete += 1
+        r.completeness = "FAIL"
+        r.details.append(
+            f"  missing {len(missing)}: {', '.join(sorted(missing)[:3])}"
+            + (f" +{len(missing) - 3}" if len(missing) > 3 else "")
+        )
+    if extra:
+        # Extra files might be naming issues, not necessarily wrong
+        pass
 
-total_kinds = 78
-p("OK" if complete > 0 else "??", f"{complete}/{total_kinds} builders complete, {incomplete} incomplete, {total_kinds - complete - incomplete} not started")
+    actual_count = len(bld_files)
+    if actual_count != EXPECTED_COUNT and not missing:
+        r.completeness = "WARN"
+        r.details.append(f"  has {actual_count} bld_*.md (expected {EXPECTED_COUNT})")
 
-print()
-
-# CHECK 5: Orphan detection
-print("CHECK 5: Orphan files/directories")
-expected_root_dirs = {"N01_intelligence", "N02_marketing", "N03_engineering",
-                      "N04_knowledge", "N05_operations", "N06_commercial", "N07_admin",
-                      "P01_knowledge", "P02_model", "P03_prompt", "P04_tools",
-                      "P05_output", "P06_schema", "P07_evals", "P08_architecture",
-                      "P09_config", "P10_memory", "P11_feedback", "P12_orchestration",
-                      "_tools", "_docs", "_config", "_schemas", "archetypes", ".git", ".claude",
-                      "__pycache__", "node_modules"}
-orphan_dirs = []
-for d in ROOT.iterdir():
-    if d.is_dir() and d.name not in expected_root_dirs:
-        orphan_dirs.append(d.name)
-
-if orphan_dirs:
-    for od in orphan_dirs:
-        p("??", f"Orphan dir: {od}/")
-    warnings += len(orphan_dirs)
-else:
-    p("OK", "No orphan directories")
-
-expected_root_md = {"CLAUDE.md", "README.md", "LLM_PIPELINE.md", "CHANGELOG.md",
-                    "CONTRIBUTING.md", "INDEX.md", ".gitignore"}
-orphan_files = []
-for f in ROOT.iterdir():
-    if f.is_file() and f.name.endswith(".md") and f.name not in expected_root_md:
-        orphan_files.append(f.name)
-
-if orphan_files:
-    for of_ in orphan_files:
-        p("??", f"Orphan file: {of_}")
-    warnings += len(orphan_files)
-
-print()
-
-# CHECK 6: Naming convention
-print("CHECK 6: Naming convention (p{NN}_{abbr}_{topic}.md)")
-naming_re = re.compile(r"^p\d{2}_[a-z]{2,4}_[a-z0-9_]+\.md$")
-bad_names = []
-for lp_dir in sorted(ROOT.glob("P*_*")):
-    for ex in (lp_dir / "examples").glob("*.md") if (lp_dir / "examples").exists() else []:
-        if ex.name.startswith("_") or ex.name.startswith("ex_"):
+    # -- CHECK 2: Naming ------------------------------------------------------
+    naming_issues = []
+    fix_renames = []
+    for f in bld_files:
+        if not NAMING_RE.match(f.name):
+            naming_issues.append(f.name)
             continue
-        if not naming_re.match(ex.name):
-            bad_names.append(str(ex.relative_to(ROOT)))
+        parsed = parse_bld_filename(f.name)
+        if not parsed:
+            naming_issues.append(f"{f.name} (unknown kind)")
+        elif parsed[1] != topic:
+            naming_issues.append(f"{f.name} (topic '{parsed[1]}' != '{topic}')")
+            # Potential fix: rename to correct topic
+            correct = expected_filename(parsed[0], topic)
+            fix_renames.append((f, builder_dir / correct))
 
-if not bad_names:
-    p("OK", "All examples follow naming convention")
-else:
-    p("??", f"{len(bad_names)} files with non-standard names")
-    for bn in bad_names[:5]:
-        p("  ", bn)
-    warnings += 1
+    if naming_issues:
+        r.naming = "WARN"
+        for ni in naming_issues[:3]:
+            r.details.append(f"  naming: {ni}")
 
-print()
+    if FIX_MODE and fix_renames:
+        for src, dst in fix_renames:
+            if not dst.exists():
+                src.rename(dst)
+                r.details.append(f"  FIXED: {src.name} -> {dst.name}")
 
-# CHECK 7: Cross-reference numbers
-print("CHECK 7: Number consistency")
-readme = (ROOT / "README.md").read_text(encoding="utf-8", errors="ignore")
-if "73 tipo" in readme or "68 tipo" in readme or "v3.0.0" in readme:
-    p("!!", "README.md has stale numbers (73/68 tipos, v3.0.0)")
-    errors += 1
-else:
-    p("OK", "README.md numbers up to date")
+    # -- CHECK 3: Density -----------------------------------------------------
+    low_density = []
+    for f in bld_files:
+        d = calc_density(f)
+        if d < MIN_DENSITY:
+            low_density.append((f.name, d))
 
-codex = (ROOT / "archetypes" / "CODEX.md").read_text(encoding="utf-8", errors="ignore")
-if "68 tipo" in codex or "68 kind" in codex:
-    p("!!", "CODEX.md has stale '68' count")
-    errors += 1
+    if low_density:
+        r.density = "WARN" if len(low_density) <= 3 else "FAIL"
+        for fname, d in low_density[:3]:
+            r.details.append(f"  density: {fname} = {d:.2f} (min {MIN_DENSITY})")
 
-print()
+    # -- CHECK 4: Max bytes ---------------------------------------------------
+    oversized = []
+    for f in bld_files:
+        size = f.stat().st_size
+        if size > MAX_BYTES:
+            oversized.append((f.name, size))
 
-# SUMMARY
-print("=" * 60)
-total_checks = 7
-print(f"SUMMARY: {total_checks} checks | {errors} errors | {warnings} warnings")
-if FIX_MODE:
-    print(f"Auto-fixes applied: {fixes}")
-if errors == 0 and warnings == 0:
-    print("STATUS: HEALTHY")
-elif errors == 0:
-    print("STATUS: WARNINGS (non-critical)")
-else:
-    print("STATUS: NEEDS ATTENTION")
-print("=" * 60)
+    if oversized:
+        r.max_bytes = "WARN"
+        for fname, sz in oversized[:3]:
+            r.details.append(f"  size: {fname} = {sz}B (max {MAX_BYTES})")
+
+    # -- CHECK 5: Frontmatter -------------------------------------------------
+    missing_fm = []
+    for f in bld_files:
+        fm = get_frontmatter(f)
+        if fm is None:
+            missing_fm.append(f.name)
+        else:
+            # Check required fields
+            req = {"id", "kind", "pillar"}
+            has = set(fm.keys()) if isinstance(fm, dict) else set()
+            lacking = req - has
+            if lacking:
+                missing_fm.append(f"{f.name} (missing: {', '.join(lacking)})")
+
+    if missing_fm:
+        r.frontmatter = "FAIL" if len(missing_fm) > 3 else "WARN"
+        for mf in missing_fm[:3]:
+            r.details.append(f"  frontmatter: {mf}")
+
+    return r
+
+
+# -- Main ---------------------------------------------------------------------
+
+
+def main():
+    print("=" * 72)
+    print("CEX Doctor v2.0 — Naming v2.0 + Density + 13-File Completeness")
+    print(f"Root: {ROOT}")
+    print(f"Mode: {'DIAGNOSE + FIX' if FIX_MODE else 'DIAGNOSE ONLY'}")
+    print("=" * 72)
+    print()
+
+    # Discover builder dirs
+    builder_dirs = sorted(
+        d
+        for d in BUILDERS_DIR.iterdir()
+        if d.is_dir() and not d.name.startswith("_") and not d.name.startswith(".")
+    )
+
+    if not builder_dirs:
+        print("ERROR: No builder directories found in archetypes/builders/")
+        sys.exit(1)
+
+    print(f"Found {len(builder_dirs)} builder directories\n")
+
+    results = []
+    for bd in builder_dirs:
+        results.append(check_builder(bd))
+
+    # -- Summary Table --------------------------------------------------------
+    pass_count = sum(1 for r in results if r.overall == "PASS")
+    warn_count = sum(1 for r in results if r.overall == "WARN")
+    fail_count = sum(1 for r in results if r.overall == "FAIL")
+
+    # Column headers
+    hdr = f"{'Builder':<35} {'Name':>5} {'Dens':>5} {'Size':>5} {'13ok':>5} {'YAML':>5} {'ALL':>5}"
+    print(hdr)
+    print("-" * len(hdr))
+
+    for r in results:
+
+        def sym(s):
+            return {"PASS": "ok", "WARN": "~~", "FAIL": "XX"}[s]
+
+        line = (
+            f"{r.name:<35} {sym(r.naming):>5} {sym(r.density):>5} "
+            f"{sym(r.max_bytes):>5} {sym(r.completeness):>5} "
+            f"{sym(r.frontmatter):>5} {sym(r.overall):>5}"
+        )
+        print(line)
+
+    print("-" * len(hdr))
+    print(f"{'TOTAL':<35} {pass_count:>3} ok  {warn_count:>3} ~~  {fail_count:>3} XX")
+    print()
+
+    # -- Detail section (only non-PASS) ---------------------------------------
+    failures = [r for r in results if r.overall != "PASS"]
+    if failures:
+        print("DETAILS (non-PASS builders):")
+        print()
+        for r in failures:
+            print(f"[{r.overall}] {r.name}:")
+            for d in r.details:
+                print(d)
+            print()
+
+    # -- Aggregate stats ------------------------------------------------------
+    print("=" * 72)
+    total_files = sum(len(list(bd.glob("bld_*.md"))) for bd in builder_dirs)
+    total_bytes = sum(f.stat().st_size for bd in builder_dirs for f in bd.glob("bld_*.md"))
+    densities = []
+    for bd in builder_dirs:
+        for f in bd.glob("bld_*.md"):
+            densities.append(calc_density(f))
+    avg_density = sum(densities) / len(densities) if densities else 0
+
+    oversized_total = sum(
+        1 for bd in builder_dirs for f in bd.glob("bld_*.md") if f.stat().st_size > MAX_BYTES
+    )
+    fm_missing_total = sum(
+        1 for bd in builder_dirs for f in bd.glob("bld_*.md") if get_frontmatter(f) is None
+    )
+
+    print(f"Builders:       {len(builder_dirs)}")
+    print(f"Total files:    {total_files} (expected {len(builder_dirs) * EXPECTED_COUNT})")
+    print(f"Total size:     {total_bytes / 1024:.1f} KB")
+    print(f"Avg density:    {avg_density:.2f}")
+    print(f"Oversized:      {oversized_total} files > {MAX_BYTES}B")
+    print(f"No frontmatter: {fm_missing_total} files")
+    print(f"Result:         {pass_count} PASS | {warn_count} WARN | {fail_count} FAIL")
+    print("=" * 72)
+
+    sys.exit(1 if fail_count > 0 else 0)
+
+
+if __name__ == "__main__":
+    main()
