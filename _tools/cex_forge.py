@@ -1,6 +1,9 @@
 import sys
-if hasattr(sys.stdout, "reconfigure"): sys.stdout.reconfigure(encoding="utf-8")
-if hasattr(sys.stderr, "reconfigure"): sys.stderr.reconfigure(encoding="utf-8")
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8")
 #!/usr/bin/env python3
 """
 cex_forge.py — O Forjador Universal CEX
@@ -33,8 +36,12 @@ except ImportError:
     sys.exit(1)
 
 CEX_ROOT = Path(__file__).resolve().parent.parent
-META_DIR = CEX_ROOT / "_meta"
+META_DIR = CEX_ROOT / "archetypes"
 TYPE_MAP_PATH = META_DIR / "TYPE_TO_TEMPLATE.yaml"
+BUILDER_DIR = CEX_ROOT / "archetypes" / "builders"
+BUILDER_MAX_BYTES = 40 * 1024  # 40KB total budget for injected ISOs
+BUILDER_EXAMPLES_MAX = 3 * 1024  # 3KB cap for examples
+BUILDER_PRIORITY = {"knowledge_card": 1, "instruction": 2, "quality_gate": 3, "examples": 4}
 
 LP_DIRS = {
     "P01": "P01_knowledge",
@@ -88,6 +95,76 @@ def load_template(template_rel_path: str) -> str | None:
         return f.read()
 
 
+def kind_to_builder_dir(kind: str) -> Path:
+    """Convert kind name (e.g. rag_source) to builder dir path."""
+    return BUILDER_DIR / (kind.replace("_", "-") + "-builder")
+
+
+def load_builder_isos(kind: str) -> dict[str, str]:
+    """Load builder ISO files for a given kind.
+
+    Scans archetypes/builders/{kind}-builder/bld_*.md.
+    Returns dict mapping iso_type -> content (e.g. {"knowledge_card": "...", ...}).
+    """
+    builder_path = kind_to_builder_dir(kind)
+    if not builder_path.exists():
+        return {}
+
+    isos = {}
+    suffix = f"_{kind}.md"
+    for f in sorted(builder_path.glob("bld_*.md")):
+        name = f.name
+        if not name.endswith(suffix):
+            continue
+        iso_type = name[4 : -len(suffix)]  # strip "bld_" prefix and "_{kind}.md" suffix
+        with open(f, "r", encoding="utf-8") as fh:
+            isos[iso_type] = fh.read()
+    return isos
+
+
+def inject_builder_context(sections: list[str], builder_isos: dict[str, str]) -> list[str]:
+    """Append builder ISO sections. Budget: 40KB max.
+
+    Priority: knowledge > instructions > gates > examples > rest.
+    Examples truncated to 3KB.
+    """
+    if not builder_isos:
+        return sections
+
+    header_map = {
+        "knowledge_card": "Builder Knowledge",
+        "instruction": "Builder Instructions",
+        "examples": "Builder Examples",
+        "quality_gate": "Builder Quality Gates",
+    }
+
+    def sort_key(item: tuple[str, str]) -> int:
+        return BUILDER_PRIORITY.get(item[0], 5)
+
+    result = list(sections)
+    total_bytes = 0
+
+    for iso_type, content in sorted(builder_isos.items(), key=sort_key):
+        header = header_map.get(iso_type, f"Builder {iso_type.replace('_', ' ').title()}")
+
+        if iso_type == "examples":
+            raw = content.encode("utf-8")
+            if len(raw) > BUILDER_EXAMPLES_MAX:
+                content = raw[:BUILDER_EXAMPLES_MAX].decode("utf-8", errors="ignore")
+                content += "\n\n[... truncated to 3KB ...]"
+
+        section_bytes = len(content.encode("utf-8"))
+        if total_bytes + section_bytes > BUILDER_MAX_BYTES:
+            break
+
+        result.append(f"## {header}")
+        result.append(content.strip())
+        result.append("")
+        total_bytes += section_bytes
+
+    return result
+
+
 def extract_type_rules(schema: dict, type_name: str) -> dict:
     types = schema.get("kinds", {})
     if type_name not in types:
@@ -118,6 +195,8 @@ def build_prompt(
     schema: dict,
     rules: dict,
     template: str | None,
+    builder_isos: dict[str, str] | None = None,
+    builder_only: bool = False,
 ) -> str:
     lp_name = schema.get("name", lp)
     lp_desc = schema.get("description", "")
@@ -195,21 +274,26 @@ def build_prompt(
         sections.append("")
 
     # Template
-    if template:
-        sections.append("## Template de Referencia")
-        sections.append("Use este template como BASE. Preencha TODAS as {{VARIAVEIS}}.")
-        sections.append("")
-        sections.append("```")
-        sections.append(template.strip())
-        sections.append("```")
-        sections.append("")
-    else:
-        sections.append("## Template")
-        sections.append(
-            "NOTA: Nao existe template para este tipo (GAP). "
-            "Crie o artefato seguindo a estrutura do schema acima."
-        )
-        sections.append("")
+    if not builder_only:
+        if template:
+            sections.append("## Template de Referencia")
+            sections.append("Use este template como BASE. Preencha TODAS as {{VARIAVEIS}}.")
+            sections.append("")
+            sections.append("```")
+            sections.append(template.strip())
+            sections.append("```")
+            sections.append("")
+        else:
+            sections.append("## Template")
+            sections.append(
+                "NOTA: Nao existe template para este tipo (GAP). "
+                "Crie o artefato seguindo a estrutura do schema acima."
+            )
+            sections.append("")
+
+    # Builder ISOs
+    if builder_isos:
+        sections = inject_builder_context(sections, builder_isos)
 
     # Seeds
     sections.append("## Seed Words")
@@ -312,6 +396,16 @@ Exemplos:
     parser.add_argument("--context-file", help="Arquivo com contexto")
     parser.add_argument("--list-types", action="store_true", help="Lista todos os tipos")
     parser.add_argument("--output", help="Arquivo de saida (default: stdout)")
+    parser.add_argument(
+        "--builder",
+        action="store_true",
+        help="Inject builder ISOs as context (auto-detect)",
+    )
+    parser.add_argument(
+        "--builder-only",
+        action="store_true",
+        help="Use ONLY builder ISOs, skip template",
+    )
 
     args = parser.parse_args()
 
@@ -362,8 +456,38 @@ Exemplos:
     template_path = type_map.get(args.type_name)
     template = load_template(template_path) if template_path else None
 
+    # Load builder ISOs
+    builder_isos = None
+    use_builder = args.builder or args.builder_only
+    if use_builder:
+        builder_isos = load_builder_isos(args.type_name)
+        if builder_isos:
+            iso_count = len(builder_isos)
+            total_kb = sum(len(v.encode("utf-8")) for v in builder_isos.values()) // 1024
+            print(
+                f"Builder: {iso_count} ISOs loaded ({total_kb}KB) "
+                f"from {kind_to_builder_dir(args.type_name).name}",
+                file=sys.stderr,
+            )
+        else:
+            builder_dir = kind_to_builder_dir(args.type_name)
+            print(
+                f"WARN: Builder nao encontrado: {builder_dir}",
+                file=sys.stderr,
+            )
+
     # Build prompt
-    prompt = build_prompt(args.lp, args.type_name, seeds, context, schema, rules, template)
+    prompt = build_prompt(
+        args.lp,
+        args.type_name,
+        seeds,
+        context,
+        schema,
+        rules,
+        template,
+        builder_isos=builder_isos,
+        builder_only=args.builder_only,
+    )
 
     # Validate
     warnings = validate_prompt(prompt, rules)
