@@ -1,0 +1,38 @@
+---
+kind: tools
+id: bld_tools_enum_def
+pillar: P04
+llm_function: CALL
+purpose: Tools and APIs available for enum_def production
+---
+
+# Tools: enum-def-builder
+## Production Tools
+| Tool | Purpose | When | Status |
+|------|---------|------|--------|
+| brain_query [MCP] | Search existing enum_def artifacts in pool | Phase 1 (check duplicates) | CONDITIONAL |
+| validate_artifact.py | Generic artifact validator | Phase 3 | [PLANNED] |
+| cex_forge.py | Generate artifact from seeds | Alternative compose | [PLANNED] |
+
+## Data Sources
+| Source | Path/URL | Data |
+|--------|----------|------|
+| CEX Schema | P06_schema/_schema.yaml | Field definitions, enum_def kind |
+| CEX Examples | P06_schema/examples/ | Real enum_def artifacts |
+| SEED_BANK | archetypes/SEED_BANK.yaml | Seeds for P06_enum_def |
+| TAXONOMY | archetypes/TAXONOMY_LAYERS.yaml | Layer position, runtime layer |
+
+## Framework Reference Targets
+| Framework | Use case | Version |
+|-----------|----------|---------|
+| JSON Schema | Universal schema validation | draft-07 / 2020-12 |
+| Pydantic | Python data models and API validation | v2.x |
+| Zod | TypeScript runtime validation | v3.x |
+| GraphQL | API schema definition | June 2018 spec |
+| TypeScript | Static type checking | 5.x |
+
+## Interim Validation
+No automated validator exists yet. Manually check each QUALITY_GATES.md gate against
+the produced artifact. Key checks: YAML parses, id pattern `^p06_enum_[a-z][a-z0-9_]+$`,
+values list >= 2 entries, values list matches ## Values body section names, deprecated
+subset of values, default in values, body <= 1024 bytes, quality == null, extensible declared.
