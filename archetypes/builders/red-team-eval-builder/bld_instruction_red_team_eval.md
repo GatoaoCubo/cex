@@ -1,0 +1,48 @@
+---
+kind: instruction
+id: bld_instruction_red_team_eval
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for red_team_eval
+pattern: 3-phase pipeline (research -> compose -> validate)
+---
+
+# Instructions: How to Produce a red_team_eval
+## Phase 1: RESEARCH
+1. Identify the target: which specific agent, system prompt, or pipeline component is under test
+2. Map the threat model: what could go wrong if this system is attacked? What data does it have access to?
+3. Select attack_types from the approved enum (at minimum 2; prefer 3-5 for coverage)
+4. Map each attack_type to its OWASP LLM Top 10 reference (LLM01-LLM10)
+5. Determine framework: Promptfoo (YAML config), Garak (CLI probes), DeepEval (Python), Patronus (API), or custom
+6. Define pass_criteria as observable model behavior — what does "safe" look like in a response?
+7. Assess severity: critical/high/medium/low based on potential harm if attacks succeed
+8. Check for existing red_team_eval artifacts to avoid duplicates
+9. Confirm slug for id: snake_case, lowercase, no hyphens, prefix p07_rt_
+## Phase 2: COMPOSE
+1. Read SCHEMA.md — source of truth for all fields and attack_type enum values
+2. Read OUTPUT_TEMPLATE.md — fill {{vars}} following SCHEMA constraints
+3. Fill frontmatter: all required fields (quality: null — never self-score)
+4. Write Overview section: what is being tested, threat model summary, who runs this eval and when
+5. Write Attack Scenarios section: for each attack_type, provide:
+   - Pattern description (placeholder-based, never real exploit strings)
+   - Expected safe model response (observable behavior)
+   - OWASP LLM reference
+   - Framework-specific config snippet if applicable
+6. Write Pass Criteria section: explicit, measurable definition of safe behavior per attack category
+7. Write Configuration section: framework setup, env vars, how to execute, expected output format
+8. Verify body <= 2048 bytes
+9. Verify id matches `^p07_rt_[a-z][a-z0-9_]+$`
+10. Verify attack_types in frontmatter match categories documented in Attack Scenarios section
+## Phase 3: VALIDATE
+1. Check QUALITY_GATES.md — verify each HARD gate manually
+2. Confirm YAML frontmatter parses without errors
+3. Confirm id matches `p07_rt_` prefix and pattern
+4. Confirm kind == red_team_eval
+5. Confirm attack_types list is non-empty and all values are from approved enum
+6. Confirm target is specific (not "the system" or "the model")
+7. Confirm pass_criteria is observable and measurable
+8. Confirm no real PII or actual exploit payloads in body
+9. HARD gates: frontmatter valid, id pattern matches, attack_types declared, pass_criteria defined, target named
+10. SOFT gates: score against QUALITY_GATES.md
+11. Cross-check boundary: is this testing BEFORE deployment (red_team_eval) or enforcing AT runtime (guardrail)? Is this adversarial (red_team_eval) or functional (e2e_eval)? Is this isolated unit logic (unit_eval)?
+12. Revise if score < 8.0 before outputting
