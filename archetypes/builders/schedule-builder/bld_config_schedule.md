@@ -1,0 +1,49 @@
+---
+kind: config
+id: bld_config_schedule
+pillar: P09
+llm_function: CONSTRAIN
+purpose: Naming conventions, file paths, size limits, operational constraints
+pattern: CONFIG restricts SCHEMA, never contradicts it
+---
+
+# Config: schedule Production Rules
+## Naming Convention
+| Scope | Convention | Example |
+|-------|-----------|---------|
+| Artifact files | `p12_sched_{name}.md` | `p12_sched_daily_report.md` |
+| Builder directory | kebab-case | `schedule-builder/` |
+| Frontmatter fields | snake_case | `trigger_type`, `workflow_ref`, `catch_up` |
+| Schedule slug (id) | snake_case, lowercase, no hyphens | `daily_report`, `weekly_sync` |
+| Workflow ref | matches target workflow id exactly | `p13_wf_daily_report` |
+| Cron fields | standard 5-field POSIX or 6-field with seconds | `0 9 * * MON-FRI` |
+Rule: id MUST equal filename stem. Hyphens in id = HARD FAIL.
+Rule: id prefix MUST be `p12_sc_`. File prefix MUST be `p12_sched_`.
+## File Paths
+- Output: `cex/P12_orchestration/examples/p12_sched_{name}.md`
+- Compiled: `cex/P12_orchestration/compiled/p12_sched_{name}.yaml`
+## Size Limits (aligned with SCHEMA)
+- Body: max 1024 bytes
+- Total (frontmatter + body): ~2000 bytes
+- Density: >= 0.80 (no filler)
+## Trigger Type Enum
+| Value | When to use |
+|-------|-------------|
+| cron | Fixed time expression (daily, weekly, monthly) |
+| interval | Every N minutes/hours regardless of clock time |
+| event | External event fires the trigger (file arrival, API call) |
+| manual | Human or API call only — no automatic firing |
+| one_shot | Single future execution, then disabled |
+## Timezone Rules
+| Rule | Detail |
+|------|--------|
+| Always declare timezone | UTC assumption breaks DST transitions |
+| Use IANA tz database names | "America/Sao_Paulo" not "BRT-3" |
+| Business schedules | Use local timezone of the business unit |
+| Data pipeline schedules | UTC preferred to avoid DST ambiguity |
+## Concurrency Defaults
+| max_concurrent | Default when |
+|---------------|-------------|
+| 1 | All schedules (prevent resource exhaustion) |
+| > 1 | Only when workflow is stateless and idempotent |
+| null | FORBIDDEN — always declare an explicit integer |

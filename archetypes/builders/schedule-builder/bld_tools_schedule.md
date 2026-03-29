@@ -1,0 +1,35 @@
+---
+kind: tools
+id: bld_tools_schedule
+pillar: P04
+llm_function: CALL
+purpose: Tools and APIs available for schedule production
+---
+
+# Tools: schedule-builder
+## Production Tools
+| Tool | Purpose | When | Status |
+|------|---------|------|--------|
+| brain_query [MCP] | Search existing schedule and workflow artifacts in pool | Phase 1 (resolve workflow_ref, check duplicates) | CONDITIONAL |
+| crontab_validate | Validate cron expression syntax and compute next N fire times | Phase 1 (verify expression before committing) | [PLANNED] |
+| validate_artifact.py | Generic artifact validator | Phase 3 | [PLANNED] |
+| cex_forge.py | Generate artifact from seeds | Alternative compose | [PLANNED] |
+## Data Sources
+| Source | Path/URL | Data |
+|--------|----------|------|
+| CEX Schema | P12_orchestration/_schema.yaml | Field definitions, schedule kind |
+| CEX Examples | P12_orchestration/examples/ | Real schedule artifacts |
+| SEED_BANK | archetypes/SEED_BANK.yaml | Seeds for P12_schedule |
+| TAXONOMY | archetypes/TAXONOMY_LAYERS.yaml | Layer position, runtime layer |
+| Workflow Index | P12_orchestration/workflows/ | Resolvable workflow_ref ids |
+## Cron Validation Reference
+Key checks to run manually before output:
+- Field count: exactly 5 (min hour dom month dow) or 6 (sec min hour dom month dow)
+- Range validity: min 0-59, hour 0-23, dom 1-31, month 1-12, dow 0-7
+- Step syntax: `*/N` valid; `N/M` valid; named months (JAN-DEC) and days (MON-SUN) valid
+- Next-fire sanity: compute next 3 execution times and confirm they match intent
+## Interim Validation
+No automated validator exists yet. Manually check each QUALITY_GATES.md gate against
+the produced artifact. Key checks: YAML parses, id pattern matches `^p12_sc_`, cron
+expression is valid 5-field, workflow_ref non-empty, body <= 1024 bytes, quality == null,
+all four body sections present (Overview, Trigger, Workflow, Policy).
