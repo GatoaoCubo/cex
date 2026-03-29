@@ -4,7 +4,7 @@ cex_8f_runner.py -- 8F Runner: Stateful artifact production pipeline.
 
 Each function (F1-F8) produces state that the next CONSUMES.
 Wave 1: F1 CONSTRAIN, F2 BECOME, F3 INJECT, F6 PRODUCE, F8 COLLABORATE.
-Wave 2 adds: F4 REASON, F7 GOVERN (+ retry loop).
+Wave 2: + F4 REASON (LLM planning), F7 GOVERN (6 hard gates + retry loop).
 Wave 3 adds: F5 CALL, multi-kind, proofs.
 
 Usage:
@@ -397,10 +397,68 @@ class EightFRunner:
         self.state.knowledge = knowledge
         self._log("F3", f"knowledge: {list(knowledge.keys())}")
 
+    # -- F4 REASON ----------------------------------------------------------
+
+    def f4_reason(self):
+        """LLM plans the artifact: fields, decisions, tradeoffs -> state.reasoning."""
+        # Compose reasoning prompt from accumulated state
+        parts = []
+        parts.append("You are planning what artifact to produce. Think step-by-step.")
+        parts.append(f"\n## Intent\n{self.state.intent}")
+        parts.append(f"\n## Kind\n{self.state.kind} (pillar: {self.state.pillar})")
+
+        # Identity context
+        persona = self.state.identity.get("persona", "")
+        if persona:
+            parts.append(f"\n## Builder Persona\n{persona}")
+
+        # Constraints summary
+        c = self.state.constraints
+        c_lines = []
+        if c.get("id_pattern"):
+            c_lines.append(f"- ID pattern: `{c['id_pattern']}`")
+        if c.get("frontmatter_required"):
+            c_lines.append(f"- Required frontmatter: {', '.join(c['frontmatter_required'])}")
+        if c.get("max_bytes"):
+            c_lines.append(f"- Max size: {c['max_bytes']} bytes")
+        if c.get("boundary"):
+            c_lines.append(f"- Boundary: {c['boundary']}")
+        if c_lines:
+            parts.append("\n## Constraints\n" + "\n".join(c_lines))
+
+        # Knowledge summary (condensed)
+        k = self.state.knowledge
+        kc_count = len(k.get("kc_domains", []))
+        if kc_count:
+            parts.append(f"\n## Available Knowledge\n{kc_count} domain KCs available.")
+        if k.get("kc_builder"):
+            # First 300 chars of builder KC as context
+            parts.append(f"\n## Builder KC (excerpt)\n{k['kc_builder'][:300]}...")
+
+        parts.append(
+            "\n## Task\n"
+            "Plan the artifact. List:\n"
+            "1. Which frontmatter fields to include and their values\n"
+            "2. Key decisions and tradeoffs\n"
+            "3. Body structure outline\n"
+            "Be concise (under 500 words)."
+        )
+
+        prompt = "\n".join(parts)
+
+        if self.dry_run:
+            self.state.reasoning = {"plan": prompt, "model_used": "dry-run"}
+            self._log("F4", f"dry-run reasoning prompt ({len(prompt.split())} words)")
+        else:
+            self._log("F4", "calling LLM for reasoning plan...")
+            response = execute_prompt(prompt)
+            self.state.reasoning = {"plan": response, "model_used": "haiku"}
+            self._log("F4", f"reasoning plan received ({len(response)} chars)")
+
     # -- F6 PRODUCE ---------------------------------------------------------
 
-    def f6_produce(self):
-        """Compose STRUCTURED prompt with 7 labeled sections -> state.artifact."""
+    def f6_produce(self, retry_feedback: str = ""):
+        """Compose STRUCTURED prompt with labeled sections -> state.artifact."""
         sections = []
 
         # 1. IDENTITY (from F2)
@@ -445,20 +503,25 @@ class EightFRunner:
         if k.get("few_shots"):
             sections.append(f"# EXAMPLES\n\n{k['few_shots']}")
 
-        # 5. INSTRUCTION (bld_instruction body)
+        # 5. PLAN (from F4 reasoning)
+        plan = self.state.reasoning.get("plan", "")
+        if plan:
+            sections.append(f"# PLAN\n\n{plan}")
+
+        # 6. INSTRUCTION (bld_instruction body)
         bdir = self.state.builder_dir
         if bdir:
             instr_text = load_iso(bdir, "bld_instruction", self.kind_slug)
             if instr_text:
                 sections.append(f"# INSTRUCTION\n\n{strip_frontmatter(instr_text)}")
 
-        # 6. TEMPLATE (bld_output_template body)
+        # 7. TEMPLATE (bld_output_template body)
         if bdir:
             tpl_text = load_iso(bdir, "bld_output_template", self.kind_slug)
             if tpl_text:
                 sections.append(f"# TEMPLATE\n\n{strip_frontmatter(tpl_text)}")
 
-        # 7. TASK (user intent)
+        # 8. TASK (user intent)
         task_lines = [
             f"**Intent**: {self.state.intent}",
             f"**Kind**: {self.state.kind}",
@@ -468,6 +531,14 @@ class EightFRunner:
             "**Quality**: set quality: null (NEVER self-score)",
         ]
         sections.append("# TASK\n\n" + "\n".join(task_lines))
+
+        # 9. RETRY FEEDBACK (from F7, if retrying)
+        if retry_feedback:
+            sections.append(
+                f"# RETRY FEEDBACK\n\n"
+                f"Your previous output FAILED validation. Fix these issues:\n\n"
+                f"{retry_feedback}"
+            )
 
         prompt = "\n\n---\n\n".join(sections)
 
@@ -479,6 +550,115 @@ class EightFRunner:
             response = execute_prompt(prompt)
             self.state.artifact = response
             self._log("F6", f"LLM response received ({len(response)} chars)")
+
+    # -- F7 GOVERN ----------------------------------------------------------
+
+    def f7_govern(self):
+        """Validate artifact against 6 hard gates. Retry via F6 if fails (max 2)."""
+        max_retries = 2
+        retries = 0
+
+        while True:
+            artifact = self.state.artifact
+            hard_gates = []
+            issues = []
+
+            # -- H01: frontmatter parses as YAML ---
+            fm = extract_frontmatter_dict(artifact)
+            h01_pass = bool(fm)
+            hard_gates.append(
+                {"gate": "H01", "check": "YAML frontmatter parses", "passed": h01_pass}
+            )
+            if not h01_pass:
+                issues.append("H01: Frontmatter missing or invalid YAML")
+
+            # -- H02: id matches constraints.id_pattern ---
+            id_pattern = self.state.constraints.get("id_pattern", "")
+            artifact_id = fm.get("id", "")
+            if id_pattern and artifact_id:
+                h02_pass = bool(re.match(id_pattern, str(artifact_id)))
+            elif not id_pattern:
+                h02_pass = True  # No pattern defined = skip
+            else:
+                h02_pass = False
+            hard_gates.append({"gate": "H02", "check": "id matches id_pattern", "passed": h02_pass})
+            if not h02_pass:
+                issues.append(f"H02: id '{artifact_id}' does not match pattern /{id_pattern}/")
+
+            # -- H03: kind == state.kind ---
+            artifact_kind = fm.get("kind", "")
+            h03_pass = str(artifact_kind) == self.state.kind if fm else True
+            hard_gates.append({"gate": "H03", "check": "kind matches", "passed": h03_pass})
+            if not h03_pass:
+                issues.append(f"H03: kind '{artifact_kind}' != expected '{self.state.kind}'")
+
+            # -- H04: quality field is None/null ---
+            h04_pass = True
+            if fm:
+                quality_val = fm.get("quality")
+                # quality must be explicitly null/None, not a number
+                if quality_val is not None:
+                    h04_pass = False
+            hard_gates.append({"gate": "H04", "check": "quality is null", "passed": h04_pass})
+            if not h04_pass:
+                issues.append(f"H04: quality must be null, got '{fm.get('quality')}'")
+
+            # -- H05: all frontmatter_required fields present ---
+            required = self.state.constraints.get("frontmatter_required", [])
+            missing = [f for f in required if f not in fm] if fm else list(required)
+            h05_pass = len(missing) == 0
+            hard_gates.append(
+                {"gate": "H05", "check": "required fields present", "passed": h05_pass}
+            )
+            if not h05_pass:
+                issues.append(f"H05: Missing required fields: {', '.join(missing)}")
+
+            # -- H06: body size <= max_bytes ---
+            max_bytes = self.state.constraints.get("max_bytes")
+            body = strip_frontmatter(artifact)
+            body_size = len(body.encode("utf-8"))
+            if max_bytes:
+                h06_pass = body_size <= int(max_bytes)
+            else:
+                h06_pass = True  # No limit defined = skip
+            hard_gates.append({"gate": "H06", "check": "body <= max_bytes", "passed": h06_pass})
+            if not h06_pass:
+                issues.append(f"H06: Body {body_size} bytes > max {max_bytes} bytes")
+
+            all_passed = all(g["passed"] for g in hard_gates)
+
+            if all_passed:
+                self.state.verdict = {
+                    "passed": True,
+                    "hard_gates": hard_gates,
+                    "issues": [],
+                    "feedback": "",
+                    "retries": retries,
+                }
+                self._log("F7", f"PASSED all {len(hard_gates)} hard gates (retries={retries})")
+                break
+
+            # Gates failed
+            retries += 1
+            feedback = "HARD GATE FAILURES:\n" + "\n".join(f"- {i}" for i in issues)
+
+            if retries <= max_retries:
+                self._log("F7", f"FAILED ({len(issues)} issues), retry {retries}/{max_retries}")
+                # Retry: call f6_produce with feedback
+                self._timed(
+                    f"F6.retry{retries}", lambda fb=feedback: self.f6_produce(retry_feedback=fb)
+                )
+            else:
+                # Max retries exhausted -> save as draft with issues
+                self.state.verdict = {
+                    "passed": False,
+                    "hard_gates": hard_gates,
+                    "issues": issues,
+                    "feedback": feedback,
+                    "retries": retries,
+                }
+                self._log("F7", f"FAILED after {max_retries} retries: {issues}")
+                break
 
     # -- F8 COLLABORATE -----------------------------------------------------
 
@@ -542,15 +722,15 @@ class EightFRunner:
     # -- run() pipeline -----------------------------------------------------
 
     def run(self, stop_at: int | None = None) -> RunState:
-        """Execute F1->F2->F3->F6->F8 pipeline (wave 1: skip F4,F5,F7)."""
+        """Execute F1->F2->F3->F4->F6->F7->F8 pipeline (wave 2: skip F5)."""
         steps = [
             ("F1", self.f1_constrain),
             ("F2", self.f2_become),
             ("F3", self.f3_inject),
-            # F4 REASON  -- wave 2
+            ("F4", self.f4_reason),
             # F5 CALL    -- wave 3
             ("F6", self.f6_produce),
-            # F7 GOVERN  -- wave 2
+            ("F7", self.f7_govern),
             ("F8", self.f8_collaborate),
         ]
 
@@ -637,11 +817,30 @@ def print_banner(state: RunState, elapsed_ms: float):
         kc_parts.append("architecture")
     print(f"  Knowledge:   {', '.join(kc_parts) if kc_parts else 'none'}")
 
+    # Reasoning (F4)
+    r = state.reasoning
+    if r:
+        model = r.get("model_used", "?")
+        plan_len = len(r.get("plan", "").split())
+        print(f"  Reasoning:   {plan_len} words (model={model})")
+
     # Artifact
     if state.artifact:
         words = len(state.artifact.split())
         sections = state.artifact.count("\n# ")
         print(f"  Artifact:    {words} words, {sections} sections")
+
+    # Verdict (F7)
+    v = state.verdict
+    if v:
+        passed = v.get("passed")
+        gates_total = len(v.get("hard_gates", []))
+        gates_ok = sum(1 for g in v.get("hard_gates", []) if g.get("passed"))
+        retries = v.get("retries", 0)
+        status = "PASS" if passed else "FAIL"
+        print(f"  Verdict:     {status} ({gates_ok}/{gates_total} gates, {retries} retries)")
+        for issue in v.get("issues", []):
+            print(f"    ! {issue}")
 
     # Output
     if state.result.get("path"):
