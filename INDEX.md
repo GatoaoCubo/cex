@@ -1,6 +1,6 @@
 # CEX Index
 
-**Navigation map** | Updated: 2026-03-28 | 78 kinds, 78 builders, 12 pillars
+**Navigation map** | Updated: 2026-03-28 | 98 kinds, 98 builders, 12 pillars
 
 ---
 
@@ -40,7 +40,7 @@
 | CODEX.md | Construction bible — inviolable rules |
 | MANDAMENTOS.md | 10 commandments |
 | GLOSSARY.md | Term definitions |
-| TAXONOMY_LAYERS.yaml | 78 kinds in layers |
+| TAXONOMY_LAYERS.yaml | 98 kinds in layers |
 | SEED_BANK.yaml | Seed words per kind |
 | TYPE_TO_TEMPLATE.yaml | Kind → template mapping |
 | META_TEMPLATE.md | Template that generates templates |

@@ -1,338 +1,588 @@
-# 8F_BUILDER_MAP.yaml
-# CEX — Mapeamento completo de 71 builders para as 8 funcoes do LLM Pipeline
-# Author: PYTHA | Wave: 6A | Created: 2026-03-28 | Quality: 9.2
-# Source: LLM_PIPELINE.md + TAXONOMY_LAYERS.yaml + 71 builder manifests
-#
-# Estrutura:
-#   primary_builders:   SEMPRE acionados quando funcao eh executada
-#   secondary_builders: Acionados SE intent menciona keywords especificas
-#   optional_builders:  Nice-to-have — elevam qualidade
-#
-# Validacao: sum(unique builders across all tiers) == 71
-# builders_unassigned: []
-
-functions:
-
-  BECOME:
-    description: "Quem eu sou? — configura identidade, persona, regras antes de tudo"
-    position: 2
-    pillars: [P02, P03]
-    pipeline_rule: "executa depois de CONSTRAIN, antes de INJECT"
-    primary_builders:
-      - agent-builder          # P02 — entidade executora completa (persona + iso_vectorstore)
-      - system-prompt-builder  # P03 — identidade + regras ALWAYS/NEVER
-      - model-card-builder     # P02 — spec do modelo LLM (pricing, context, capabilities)
-      - boot-config-builder    # P02 — configuracao de inicializacao por provider
-      - iso-package-builder    # P02 — pacote portavel e self-contained do agente
-    secondary_builders:
-      - mental-model-builder   # P02 (design-time blueprint) — ativado se "routing" ou "decisoes"
-      - router-builder         # P02 — ativado se "roteamento" ou "task->satellite"
-      - fallback-chain-builder # P02 — ativado se "fallback" ou "resiliente"
-      - lens-builder           # P02 — ativado se "perspectiva" ou "especializado em"
-      - director-builder       # P08/satellite_spec — ativado se "satelite" ou "sistema completo"
-    optional_builders:
-      - _builder-builder       # meta — apenas em intents meta ("reconstroi o builder")
-    keywords_that_activate_secondary:
-      mental-model-builder: [routing, decisoes, blueprint, design-time]
-      router-builder: [roteamento, task-satellite, dispatch, keyword-routing]
-      fallback-chain-builder: [fallback, resiliente, model-a-b-c]
-      lens-builder: [perspectiva, especializado, visao de]
-      director-builder: [satelite, sistema completo, satellite-spec, P08]
-
-  INJECT:
-    description: "O que eu sei? — fornece contexto e conhecimento ao LLM"
-    position: 3
-    pillars: [P01, P10]
-    pipeline_rule: "executa depois de BECOME, antes de REASON"
-    primary_builders:
-      - knowledge-card-builder  # P01 — fato atomico pesquisavel
-      - rag-source-builder      # P01 — fonte externa indexavel para RAG
-      - context-doc-builder     # P01 — contexto de dominio rico
-      - few-shot-example-builder # P01 — exemplos input/output para prompt
-    secondary_builders:
-      - glossary-entry-builder  # P01 — ativado se "termos", "glossario", "multilingue"
-      - embedding-config-builder # P01 — ativado se "RAG", "busca semantica", "embeddings"
-      - brain-index-builder     # P10 — ativado se "indice", "BM25", "FAISS", "memoria"
-      - learning-record-builder # P10 — ativado se "aprendizado", "historico", "registro"
-      - axiom-builder           # P10 — ativado se "axioma", "regra fundamental", "inviolavel"
-    optional_builders:
-      - runtime-state-builder   # P10 — ativado se "estado persistente", "runtime memory"
-      - session-state-builder   # P10 — ativado se "session", "estado efemero"
-      - mental-model-builder    # P10 (aspecto runtime) — quando BECOME ja ativou P02 aspect
-    keywords_that_activate_secondary:
-      glossary-entry-builder: [glossario, termos, definicao, multilingue]
-      embedding-config-builder: [RAG, embeddings, busca semantica, vector]
-      brain-index-builder: [indice, BM25, FAISS, brain, memoria persistente]
-      learning-record-builder: [aprendizado, historico, registro, learning]
-      axiom-builder: [axioma, inviolavel, regra fundamental, nunca]
-
-  REASON:
-    description: "Como penso? — raciocina, planeja, decompoe antes de agir"
-    position: 4
-    pillars: [P03]
-    pipeline_rule: "executa depois de INJECT, antes de CALL"
-    primary_builders:
-      - instruction-builder     # P03 — receita operacional passo-a-passo
-      - chain-builder           # P03 — sequencia de prompts (A->B->C)
-      - prompt-template-builder # P03 — template com vars para reuso
-    secondary_builders:
-      - action-prompt-builder   # P03 — ativado se "prompt de acao", "task-focused"
-      - router-builder          # P02 — ativado se "logica de routing", "decide qual agente"
-      - dag-builder             # P12 — ativado se "dependencias", "grafo", "sequenciamento"
-    optional_builders:
-      - director-builder        # P08 — ativado se "orquestracao complexa", "multi-satelite"
-    keywords_that_activate_secondary:
-      action-prompt-builder: [prompt de acao, task-focused, conversacional]
-      router-builder: [decide qual, routing logic, escolhe agente, keyword->satellite]
-      dag-builder: [dependencias, grafo aciclico, sequenciamento, ordem de execucao]
-      director-builder: [orquestracao complexa, multi-satelite, sistema hierarquico]
-
-  CALL:
-    description: "Que tools uso? — invoca ferramentas externas, APIs, MCPs, CLIs"
-    position: 5
-    pillars: [P04]
-    pipeline_rule: "executa depois de REASON, antes de PRODUCE"
-    primary_builders:
-      - skill-builder           # P04 — habilidade reutilizavel com phases + trigger
-      - mcp-server-builder      # P04 — servidor MCP com tools + resources
-      - cli-tool-builder        # P04 — ferramenta CLI
-      - connector-builder       # P04 — conector de servico externo
-      - scraper-builder         # P04 — extrator de dados web
-      - client-builder          # P04 — cliente de API REST/GraphQL
-    secondary_builders:
-      - hook-builder            # P04 — ativado se "pre/pos processing", "evento"
-      - plugin-builder          # P04 — ativado se "plugin", "extensao"
-      - daemon-builder          # P04 — ativado se "background", "daemon", "processo continuo"
-    optional_builders: []
-    keywords_that_activate_secondary:
-      hook-builder: [hook, pre-processing, pos-processing, evento, trigger]
-      plugin-builder: [plugin, extensao, plugavel]
-      daemon-builder: [daemon, background, processo continuo, watcher]
-
-  PRODUCE:
-    description: "O que gero? — produz output final: texto, codigo, dados"
-    position: 6
-    pillars: [P05]
-    pipeline_rule: "executa depois de CALL, antes de CONSTRAIN"
-    primary_builders:
-      - response-format-builder # P05 — formato de resposta do LLM
-      - formatter-builder       # P05 — formatador de saida estruturado
-      - parser-builder          # P05 — extrator de dados do output
-    secondary_builders:
-      - naming-rule-builder     # P05 — ativado se "convencao de nomes", "naming"
-      - action-prompt-builder   # P03 — ativado se o prompt EH o output final
-    optional_builders:
-      - chain-builder           # P03 — quando chain de prompts eh o artefato entregue
-    keywords_that_activate_secondary:
-      naming-rule-builder: [naming, convencao de nomes, nomenclatura, prefixo]
-      action-prompt-builder: [o output eh um prompt, gera prompt, prompt como entregavel]
-      chain-builder: [chain como entregavel, sequencia de prompts como output]
-
-  CONSTRAIN:
-    description: "Esta no formato certo? — valida contra schemas, regras, contratos"
-    position: 1
-    pillars: [P06, P08, P09]
-    pipeline_rule: "executa PRIMEIRO — schemas definem o contrato antes de tudo"
-    primary_builders:
-      - validator-builder       # P06 — regra de validacao de artefato
-      - input-schema-builder    # P06 — contrato de entrada
-      - interface-builder       # P06 — contrato de integracao entre agentes
-      - validation-schema-builder # P06 — schema completo de validacao
-      - type-def-builder        # P06 — definicao de tipo customizado
-      - validator-builder-codex # P06 — variante Codex para validacao de codigo
-    secondary_builders:
-      - law-builder             # P08 — ativado se "lei", "inviolavel", "never/always"
-      - pattern-builder         # P08 — ativado se "pattern reutilizavel", "template de arquitetura"
-      - guardrail-builder       # P11 — ativado se "safety", "restricao de seguranca"
-      - component-map-builder   # P08 — ativado se "mapa de componentes", "arquitetura"
-      - diagram-builder         # P08 — ativado se "diagrama", "visualizacao de arquitetura"
-    optional_builders:
-      - env-config-builder      # P09 — ativado se "variaveis de ambiente", ".env"
-      - path-config-builder     # P09 — ativado se "caminhos do sistema", "paths"
-      - feature-flag-builder    # P09 — ativado se "feature flag", "on/off", "toggle"
-      - runtime-rule-builder    # P09 — ativado se "timeout", "retries", "rate limit"
-      - permission-builder      # P09 — ativado se "permissoes", "rbac", "acesso"
-    keywords_that_activate_secondary:
-      law-builder: [lei, inviolavel, always, never, obrigatorio]
-      pattern-builder: [pattern, reutilizavel, template de arquitetura]
-      guardrail-builder: [safety, seguranca, restricao, boundary]
-      component-map-builder: [componentes, mapa de sistema, arquitetura]
-      diagram-builder: [diagrama, visual, mermaid, arquitetura visual]
-
-  GOVERN:
-    description: "Passou no quality gate? — evals, benchmarks, quality gates, feedback"
-    position: 7
-    pillars: [P07, P11]
-    pipeline_rule: "executa depois de PRODUCE, antes de COLLABORATE"
-    primary_builders:
-      - quality-gate-builder    # P11 — barreira de qualidade (pass/fail com score)
-      - scoring-rubric-builder  # P07 — criterio de avaliacao 5D/12LP/custom
-      - golden-test-builder     # P07 — caso de teste referencia (quality 9.5+)
-      - unit-eval-builder       # P07 — teste unitario de agente/prompt
-      - e2e-eval-builder        # P07 — teste end-to-end (pipeline completo)
-    secondary_builders:
-      - benchmark-builder       # P07 — ativado se "performance", "latencia", "custo"
-      - smoke-eval-builder      # P07 — ativado se "sanidade rapida", "smoke test"
-      - lifecycle-rule-builder  # P11 — ativado se "ciclo de vida", "archive", "promote"
-      - optimizer-builder       # P11 — ativado se "otimiza", "melhora continua", "metric->action"
-      - bugloop-builder         # P11 — ativado se "bug", "correcao automatica", "fix loop"
-    optional_builders:
-      - guardrail-builder       # P11 — safety gate (ja pode estar em CONSTRAIN)
-      - permission-builder      # P09/P11 — access control gate
-    keywords_that_activate_secondary:
-      benchmark-builder: [performance, latencia, custo, throughput, benchmark]
-      smoke-eval-builder: [sanidade, smoke, rapido, pre-deploy]
-      lifecycle-rule-builder: [ciclo de vida, archive, promote, deprecate]
-      optimizer-builder: [otimiza, melhora continua, metric, reduce cost]
-      bugloop-builder: [bug, correcao automatica, auto-fix, loop de correcao]
-
-  COLLABORATE:
-    description: "Quem recebe? — sinaliza, delega, propaga para proximo agente"
-    position: 8
-    pillars: [P12]
-    pipeline_rule: "executa por ULTIMO — depois de GOVERN"
-    primary_builders:
-      - signal-builder          # P12 — sinal atomico entre agentes (complete/error/progress)
-      - handoff-builder         # P12 — instrucao de handoff (task + context + commit)
-      - workflow-builder        # P12 — fluxo de trabalho multi-step com agentes
-      - spawn-config-builder    # P12 — configuracao de spawn (solo, grid, continuous)
-      - dispatch-rule-builder   # P12 — regra de despacho (keyword->satellite)
-    secondary_builders:
-      - dag-builder             # P12 — ativado se "grafo de dependencias de runtime"
-      - hook-builder            # P12 — ativado se "lifecycle hook", "pre/pos agent"
-    optional_builders:
-      - director-builder        # P08 — orquestracao de alto nivel entre satelites
-    keywords_that_activate_secondary:
-      dag-builder: [grafo de runtime, dependencias entre agentes, orchestration dag]
-      hook-builder: [lifecycle hook, pre-agent, pos-agent, event chain]
-      director-builder: [multi-satelite, sistema hierarquico, orquestracao de nivel superior]
-
-# ---------------------------------------------------------------------------
-# VALIDATION BLOCK
-# ---------------------------------------------------------------------------
-
-validation:
-  total_builders: 71
-  builders_unassigned: []
-
-  coverage_by_function:
-    BECOME:     {primary: 5, secondary: 5, optional: 1, total: 11}
-    INJECT:     {primary: 4, secondary: 5, optional: 3, total: 12}
-    REASON:     {primary: 3, secondary: 3, optional: 1, total: 7}
-    CALL:       {primary: 6, secondary: 3, optional: 0, total: 9}
-    PRODUCE:    {primary: 3, secondary: 2, optional: 1, total: 6}
-    CONSTRAIN:  {primary: 6, secondary: 5, optional: 5, total: 16}
-    GOVERN:     {primary: 5, secondary: 5, optional: 2, total: 12}
-    COLLABORATE: {primary: 5, secondary: 2, optional: 1, total: 8}
-
-  multi_function_builders:
-    # Builders que aparecem em mais de uma funcao (intencional — multi-role)
-    mental-model-builder:
-      functions: [BECOME, INJECT]
-      reason: "P02 = blueprint design-time (BECOME); P10 = estado runtime (INJECT)"
-    router-builder:
-      functions: [BECOME, REASON]
-      reason: "P02 identity routing config (BECOME); logica de decisao (REASON)"
-    action-prompt-builder:
-      functions: [REASON, PRODUCE]
-      reason: "planejamento de acao (REASON); prompt como output final (PRODUCE)"
-    chain-builder:
-      functions: [REASON, PRODUCE]
-      reason: "sequencia logica de raciocinio (REASON); chain como entregavel (PRODUCE)"
-    guardrail-builder:
-      functions: [CONSTRAIN, GOVERN]
-      reason: "restricao de formato (CONSTRAIN); safety gate de qualidade (GOVERN)"
-    permission-builder:
-      functions: [CONSTRAIN, GOVERN]
-      reason: "regra de acesso P09 (CONSTRAIN); access control gate P11 (GOVERN)"
-    dag-builder:
-      functions: [REASON, COLLABORATE]
-      reason: "planejamento de dependencias (REASON); grafo de runtime P12 (COLLABORATE)"
-    hook-builder:
-      functions: [CALL, COLLABORATE]
-      reason: "trigger tecnico P04 (CALL); lifecycle hook P12 (COLLABORATE)"
-    director-builder:
-      functions: [BECOME, REASON, COLLABORATE]
-      reason: "satellite-spec (BECOME); orquestracao planning (REASON); alto nivel (COLLABORATE)"
-      note: "manifest id=satellite-spec-builder, pillar=P08, domain=satellite_spec"
-
-  unique_builders_list:
-    # Lista canonica — todos os 71 (ordem alfabetica)
-    - _builder-builder
-    - action-prompt-builder
-    - agent-builder
-    - axiom-builder
-    - benchmark-builder
-    - boot-config-builder
-    - brain-index-builder
-    - bugloop-builder
-    - chain-builder
-    - cli-tool-builder
-    - client-builder
-    - component-map-builder
-    - connector-builder
-    - context-doc-builder
-    - daemon-builder
-    - dag-builder
-    - diagram-builder
-    - director-builder
-    - dispatch-rule-builder
-    - e2e-eval-builder
-    - embedding-config-builder
-    - env-config-builder
-    - fallback-chain-builder
-    - feature-flag-builder
-    - few-shot-example-builder
-    - formatter-builder
-    - glossary-entry-builder
-    - golden-test-builder
-    - guardrail-builder
-    - handoff-builder
-    - hook-builder
-    - input-schema-builder
-    - instruction-builder
-    - interface-builder
-    - iso-package-builder
-    - knowledge-card-builder
-    - law-builder
-    - learning-record-builder
-    - lens-builder
-    - lifecycle-rule-builder
-    - mcp-server-builder
-    - mental-model-builder
-    - model-card-builder
-    - naming-rule-builder
-    - optimizer-builder
-    - parser-builder
-    - path-config-builder
-    - pattern-builder
-    - permission-builder
-    - plugin-builder
-    - prompt-template-builder
-    - quality-gate-builder
-    - rag-source-builder
-    - response-format-builder
-    - router-builder
-    - runtime-rule-builder
-    - runtime-state-builder
-    - scoring-rubric-builder
-    - scraper-builder
-    - session-state-builder
-    - signal-builder
-    - skill-builder
-    - smoke-eval-builder
-    - spawn-config-builder
-    - system-prompt-builder
-    - type-def-builder
-    - unit-eval-builder
-    - validation-schema-builder
-    - validator-builder
-    - validator-builder-codex
-    - workflow-builder
-    # count: 71
-
-  notes:
-    - "director-builder: manifest usa id=satellite-spec-builder (P08). Reclassificar nome do diretorio em v2."
-    - "validator-builder-codex: variante especializada de validator-builder para revisao de codigo. Manter separado."
-    - "_builder-builder: meta-template, nao um builder de kind CEX. Aparece apenas em intents meta."
-    - "CONSTRAIN executa na posicao 1 (antes de BECOME) — schemas definem o contrato antes de tudo."
+action_prompt:
+  builder: archetypes/builders/action-prompt-builder
+  core: true
+  description: Prompt de tarefa que o humano/orquestrador envia ao agente
+  llm_function: INJECT
+  pillar: P03_prompt
+agent:
+  builder: archetypes/builders/agent-builder
+  core: true
+  description: Definicao de agente (persona + capabilities)
+  llm_function: BECOME
+  pillar: P02_model
+api_client:
+  builder: archetypes/builders/api-client-builder
+  core: false
+  description: Cliente tipado de API REST/GraphQL/gRPC
+  llm_function: CALL
+  pillar: P04_tools
+audio_tool:
+  builder: archetypes/builders/audio-tool-builder
+  core: false
+  description: Speech-to-text, text-to-speech, analise de audio
+  llm_function: CALL
+  pillar: P04_tools
+axiom:
+  builder: archetypes/builders/axiom-builder
+  core: true
+  description: Principio fundamental imutavel â€” parte da identidade profunda da entidade
+  llm_function: BECOME
+  pillar: P02_model
+benchmark:
+  builder: archetypes/builders/benchmark-builder
+  core: false
+  description: Medicao de performance (latencia, custo, qualidade)
+  llm_function: GOVERN
+  pillar: P07_evals
+boot_config:
+  builder: archetypes/builders/boot-config-builder
+  core: false
+  description: Configuracao de inicializacao por provider
+  llm_function: GOVERN
+  pillar: P02_model
+brain_index:
+  builder: archetypes/builders/brain-index-builder
+  core: true
+  description: Indice de busca (BM25, FAISS config)
+  llm_function: INJECT
+  pillar: P10_memory
+browser_tool:
+  builder: archetypes/builders/browser-tool-builder
+  core: true
+  description: 'Automacao de browser: DOM parsing, navegacao, interacao, screenshot'
+  llm_function: CALL
+  pillar: P04_tools
+bugloop:
+  builder: archetypes/builders/bugloop-builder
+  core: false
+  description: Ciclo de correcao automatica (detect > fix > verify)
+  llm_function: GOVERN
+  pillar: P11_feedback
+chain:
+  builder: archetypes/builders/chain-builder
+  core: false
+  description: Sequencia de prompts encadeados (output A -> input B)
+  llm_function: PRODUCE
+  pillar: P03_prompt
+checkpoint:
+  builder: archetypes/builders/checkpoint-builder
+  core: true
+  description: Snapshot de estado de workflow
+  llm_function: GOVERN
+  pillar: P12_orchestration
+chunk_strategy:
+  builder: archetypes/builders/chunk-strategy-builder
+  core: true
+  description: Estrategia de chunking
+  llm_function: CONSTRAIN
+  pillar: P01_knowledge
+cli_tool:
+  builder: archetypes/builders/cli-tool-builder
+  core: false
+  description: Ferramenta CLI
+  llm_function: CALL
+  pillar: P04_tools
+code_executor:
+  builder: archetypes/builders/code-executor-builder
+  core: true
+  description: Runtime sandboxed para execucao de codigo (Docker, E2B, Jupyter)
+  llm_function: CALL
+  pillar: P04_tools
+component_map:
+  builder: archetypes/builders/component-map-builder
+  core: false
+  description: Mapa de componentes (what connects to what)
+  llm_function: INJECT
+  pillar: P08_architecture
+computer_use:
+  builder: archetypes/builders/computer-use-builder
+  core: false
+  description: Controle de tela, teclado e mouse por LLM (Anthropic, browser-use)
+  llm_function: CALL
+  pillar: P04_tools
+constraint_spec:
+  builder: archetypes/builders/constraint-spec-builder
+  core: true
+  description: Regras de geracao constrained
+  llm_function: CONSTRAIN
+  pillar: P03_prompt
+context_doc:
+  builder: archetypes/builders/context-doc-builder
+  core: false
+  description: Contexto de dominio
+  llm_function: INJECT
+  pillar: P01_knowledge
+daemon:
+  builder: archetypes/builders/daemon-builder
+  core: false
+  description: Processo background
+  llm_function: GOVERN
+  pillar: P04_tools
+dag:
+  builder: archetypes/builders/dag-builder
+  core: false
+  description: Grafo aciclico de dependencias
+  llm_function: PRODUCE
+  pillar: P12_orchestration
+db_connector:
+  builder: archetypes/builders/db-connector-builder
+  core: false
+  description: Conector de banco/dados estruturados (SQL, GraphQL, REST-to-DB)
+  llm_function: CALL
+  pillar: P04_tools
+decision_record:
+  builder: archetypes/builders/decision-record-builder
+  core: true
+  description: 'ADR: contexto, decisao, consequencias'
+  llm_function: REASON
+  pillar: P08_architecture
+diagram:
+  builder: archetypes/builders/diagram-builder
+  core: false
+  description: Diagrama de arquitetura (ASCII ou Mermaid)
+  llm_function: INJECT
+  pillar: P08_architecture
+director:
+  builder: archetypes/builders/director-builder
+  core: true
+  description: Crew orchestrator that composes and coordinates multiple builders
+  llm_function: PRODUCE
+  pillar: P08_architecture
+dispatch_rule:
+  builder: archetypes/builders/dispatch-rule-builder
+  core: false
+  description: Regra de despacho (keyword > satellite)
+  llm_function: REASON
+  pillar: P12_orchestration
+document_loader:
+  builder: archetypes/builders/document-loader-builder
+  core: true
+  description: Ingere arquivos e converte em chunks (PDF, HTML, CSV, etc)
+  llm_function: INJECT
+  pillar: P04_tools
+e2e_eval:
+  builder: archetypes/builders/e2e-eval-builder
+  core: false
+  description: Teste end-to-end (pipeline completo)
+  llm_function: GOVERN
+  pillar: P07_evals
+embedding_config:
+  builder: archetypes/builders/embedding-config-builder
+  core: false
+  description: Configuracao de embedding model
+  llm_function: GOVERN
+  pillar: P01_knowledge
+entity_memory:
+  builder: archetypes/builders/entity-memory-builder
+  core: true
+  description: Memoria sobre entidades
+  llm_function: INJECT
+  pillar: P10_memory
+enum_def:
+  builder: archetypes/builders/enum-def-builder
+  core: true
+  description: Enumeracao reutilizavel
+  llm_function: CONSTRAIN
+  pillar: P06_schema
+env_config:
+  builder: archetypes/builders/env-config-builder
+  core: true
+  description: Variaveis de ambiente
+  llm_function: GOVERN
+  pillar: P09_config
+eval_dataset:
+  builder: archetypes/builders/eval-dataset-builder
+  core: true
+  description: Colecao de test cases
+  llm_function: GOVERN
+  pillar: P07_evals
+fallback_chain:
+  builder: archetypes/builders/fallback-chain-builder
+  core: false
+  description: Sequencia de fallback (model A > B > C)
+  llm_function: GOVERN
+  pillar: P02_model
+feature_flag:
+  builder: archetypes/builders/feature-flag-builder
+  core: false
+  description: Flag de feature (on/off, gradual rollout)
+  llm_function: GOVERN
+  pillar: P09_config
+few_shot_example:
+  builder: archetypes/builders/few-shot-example-builder
+  core: true
+  description: Exemplo input/output pra prompt
+  llm_function: INJECT
+  pillar: P01_knowledge
+formatter:
+  builder: archetypes/builders/formatter-builder
+  core: false
+  description: Formatador de saida (json, md, yaml)
+  llm_function: GOVERN
+  pillar: P05_output
+function_def:
+  builder: archetypes/builders/function-def-builder
+  core: true
+  description: Definicao de funcao callable por LLM (JSON Schema tool)
+  llm_function: CALL
+  pillar: P04_tools
+glossary_entry:
+  builder: archetypes/builders/glossary-entry-builder
+  core: false
+  description: Definicao de termo
+  llm_function: INJECT
+  pillar: P01_knowledge
+golden_test:
+  builder: archetypes/builders/golden-test-builder
+  core: true
+  description: Caso de teste referencia (quality 9.5+)
+  llm_function: GOVERN
+  pillar: P07_evals
+guardrail:
+  builder: archetypes/builders/guardrail-builder
+  core: true
+  description: Restricao de seguranca (safety boundary)
+  llm_function: CONSTRAIN
+  pillar: P11_feedback
+handoff:
+  builder: archetypes/builders/handoff-builder
+  core: true
+  description: Instrucao de handoff (task + context + commit)
+  llm_function: COLLABORATE
+  pillar: P12_orchestration
+handoff_protocol:
+  builder: archetypes/builders/handoff-protocol-builder
+  core: true
+  description: Protocolo de transferencia entre agentes
+  llm_function: COLLABORATE
+  pillar: P02_model
+hook:
+  builder: archetypes/builders/hook-builder
+  core: true
+  description: Pre/post processing hook
+  llm_function: GOVERN
+  pillar: P04_tools
+input_schema:
+  builder: archetypes/builders/input-schema-builder
+  core: true
+  description: Contrato de entrada
+  llm_function: CONSTRAIN
+  pillar: P06_schema
+instruction:
+  builder: archetypes/builders/instruction-builder
+  core: true
+  description: Step-by-step execution instructions for agents or pipelines
+  llm_function: PRODUCE
+  pillar: P03_prompt
+interface:
+  builder: archetypes/builders/interface-builder
+  core: false
+  description: Contrato de integracao entre agentes
+  llm_function: CONSTRAIN
+  pillar: P06_schema
+iso_package:
+  builder: archetypes/builders/iso-package-builder
+  core: true
+  description: Pacote portable de agente AI (ISO format) â€” self-contained, LLM-agnostic
+  llm_function: BECOME
+  pillar: P02_model
+knowledge_card:
+  builder: archetypes/builders/knowledge-card-builder
+  core: true
+  description: Fato atomico pesquisavel (densidade > 0.8)
+  llm_function: INJECT
+  pillar: P01_knowledge
+law:
+  builder: archetypes/builders/law-builder
+  core: true
+  description: Lei operacional (inviolavel)
+  llm_function: CONSTRAIN
+  pillar: P08_architecture
+learning_record:
+  builder: archetypes/builders/learning-record-builder
+  core: true
+  description: Registro de aprendizado (o que deu certo/errado)
+  llm_function: INJECT
+  pillar: P10_memory
+lens:
+  builder: archetypes/builders/lens-builder
+  core: false
+  description: Perspectiva especializada sobre dominio
+  llm_function: INJECT
+  pillar: P02_model
+lifecycle_rule:
+  builder: archetypes/builders/lifecycle-rule-builder
+  core: true
+  description: Regra de ciclo de vida (freshness, archive, promote)
+  llm_function: GOVERN
+  pillar: P11_feedback
+llm_judge:
+  builder: archetypes/builders/llm-judge-builder
+  core: true
+  description: Config LLM-as-Judge
+  llm_function: GOVERN
+  pillar: P07_evals
+mcp_server:
+  builder: archetypes/builders/mcp-server-builder
+  core: true
+  description: Servidor MCP (tools + resources)
+  llm_function: CALL
+  pillar: P04_tools
+memory_scope:
+  builder: archetypes/builders/memory-scope-builder
+  core: false
+  description: Config de memoria de agente
+  llm_function: INJECT
+  pillar: P02_model
+memory_summary:
+  builder: archetypes/builders/memory-summary-builder
+  core: true
+  description: Resumo comprimido de memorias
+  llm_function: INJECT
+  pillar: P10_memory
+mental_model:
+  builder: archetypes/builders/mental-model-builder
+  core: true
+  description: Mapa mental do agente (routing, decisoes)
+  llm_function: BECOME
+  pillar: P02_model
+model_card:
+  builder: archetypes/builders/model-card-builder
+  core: false
+  description: Spec do LLM usado (pricing, context, capabilities)
+  llm_function: GOVERN
+  pillar: P02_model
+naming_rule:
+  builder: archetypes/builders/naming-rule-builder
+  core: false
+  description: Regra de nomenclatura
+  llm_function: GOVERN
+  pillar: P05_output
+notifier:
+  builder: archetypes/builders/notifier-builder
+  core: false
+  description: Entrega de notificacao push (email, SMS, Slack, Discord)
+  llm_function: CALL
+  pillar: P04_tools
+optimizer:
+  builder: archetypes/builders/optimizer-builder
+  core: false
+  description: Otimizador de processo (metric > action)
+  llm_function: GOVERN
+  pillar: P11_feedback
+output_validator:
+  builder: archetypes/builders/output-validator-builder
+  core: true
+  description: Validacao pos-LLM
+  llm_function: GOVERN
+  pillar: P05_output
+parser:
+  builder: archetypes/builders/parser-builder
+  core: false
+  description: Extrator de dados de saida
+  llm_function: GOVERN
+  pillar: P05_output
+path_config:
+  builder: archetypes/builders/path-config-builder
+  core: true
+  description: Caminhos do sistema
+  llm_function: GOVERN
+  pillar: P09_config
+pattern:
+  builder: archetypes/builders/pattern-builder
+  core: true
+  description: 'Pattern reutilizavel (ex: continuous batching)'
+  llm_function: INJECT
+  pillar: P08_architecture
+permission:
+  builder: archetypes/builders/permission-builder
+  core: true
+  description: Regra de permissao (read/write/execute)
+  llm_function: GOVERN
+  pillar: P09_config
+plugin:
+  builder: archetypes/builders/plugin-builder
+  core: false
+  description: Extensao plugavel
+  llm_function: CALL
+  pillar: P04_tools
+prompt_template:
+  builder: archetypes/builders/prompt-template-builder
+  core: true
+  description: Molde reusavel com {{vars}} para gerar prompts
+  llm_function: CONSTRAIN
+  pillar: P03_prompt
+prompt_version:
+  builder: archetypes/builders/prompt-version-builder
+  core: false
+  description: Snapshot versionado de prompt
+  llm_function: GOVERN
+  pillar: P03_prompt
+quality_gate:
+  builder: archetypes/builders/quality-gate-builder
+  core: true
+  description: Barreira de qualidade (pass/fail com score)
+  llm_function: GOVERN
+  pillar: P11_feedback
+rag_source:
+  builder: archetypes/builders/rag-source-builder
+  core: false
+  description: Fonte externa indexavel
+  llm_function: INJECT
+  pillar: P01_knowledge
+rate_limit_config:
+  builder: archetypes/builders/rate-limit-config-builder
+  core: true
+  description: 'Rate limiting: RPM, TPM, budget'
+  llm_function: CONSTRAIN
+  pillar: P09_config
+red_team_eval:
+  builder: archetypes/builders/red-team-eval-builder
+  core: false
+  description: Teste adversarial
+  llm_function: GOVERN
+  pillar: P07_evals
+regression_check:
+  builder: archetypes/builders/regression-check-builder
+  core: false
+  description: Comparacao contra baseline
+  llm_function: GOVERN
+  pillar: P07_evals
+response_format:
+  builder: archetypes/builders/response-format-builder
+  core: true
+  description: Formato de resposta do LLM (como o agente responde)
+  llm_function: CONSTRAIN
+  pillar: P05_output
+retriever:
+  builder: archetypes/builders/retriever-builder
+  core: true
+  description: Busca vetorial/keyword/hibrida sobre store local (RAG core)
+  llm_function: INJECT
+  pillar: P04_tools
+retriever_config:
+  builder: archetypes/builders/retriever-config-builder
+  core: true
+  description: Config de retrieval (top_k, hybrid, reranker)
+  llm_function: CONSTRAIN
+  pillar: P01_knowledge
+reward_signal:
+  builder: archetypes/builders/reward-signal-builder
+  core: true
+  description: Sinal continuo de qualidade
+  llm_function: GOVERN
+  pillar: P11_feedback
+router:
+  builder: archetypes/builders/router-builder
+  core: true
+  description: Regra de roteamento (task > satellite)
+  llm_function: REASON
+  pillar: P02_model
+runtime_rule:
+  builder: archetypes/builders/runtime-rule-builder
+  core: false
+  description: Regra de runtime (timeouts, retries, limits)
+  llm_function: GOVERN
+  pillar: P09_config
+runtime_state:
+  builder: archetypes/builders/runtime-state-builder
+  core: true
+  description: Estado mental variavel por sessao (routing, decisoes em runtime)
+  llm_function: INJECT
+  pillar: P10_memory
+schedule:
+  builder: archetypes/builders/schedule-builder
+  core: false
+  description: Trigger temporal que inicia workflow
+  llm_function: GOVERN
+  pillar: P12_orchestration
+scoring_rubric:
+  builder: archetypes/builders/scoring-rubric-builder
+  core: true
+  description: Criterio de avaliacao (5D, 12LP, custom)
+  llm_function: GOVERN
+  pillar: P07_evals
+search_tool:
+  builder: archetypes/builders/search-tool-builder
+  core: true
+  description: Busca web, semantica ou hibrida (Tavily, Serper, Perplexity)
+  llm_function: CALL
+  pillar: P04_tools
+secret_config:
+  builder: archetypes/builders/secret-config-builder
+  core: true
+  description: Gestao de secrets
+  llm_function: GOVERN
+  pillar: P09_config
+session_state:
+  builder: archetypes/builders/session-state-builder
+  core: false
+  description: Estado de sessao (efemero, snapshot)
+  llm_function: INJECT
+  pillar: P10_memory
+signal:
+  builder: archetypes/builders/signal-builder
+  core: true
+  description: Sinal entre agentes (complete, error, progress)
+  llm_function: COLLABORATE
+  pillar: P12_orchestration
+smoke_eval:
+  builder: archetypes/builders/smoke-eval-builder
+  core: false
+  description: Teste rapido de sanidade (< 30s)
+  llm_function: GOVERN
+  pillar: P07_evals
+spawn_config:
+  builder: archetypes/builders/spawn-config-builder
+  core: true
+  description: Configuracao de spawn (solo, grid, continuous)
+  llm_function: GOVERN
+  pillar: P12_orchestration
+system_prompt:
+  builder: archetypes/builders/system-prompt-builder
+  core: true
+  description: Prompt de sistema que define identidade e regras do agente
+  llm_function: BECOME
+  pillar: P03_prompt
+type_def:
+  builder: archetypes/builders/type-def-builder
+  core: true
+  description: Definicao de tipo customizado
+  llm_function: GOVERN
+  pillar: P06_schema
+unit_eval:
+  builder: archetypes/builders/unit-eval-builder
+  core: true
+  description: Teste unitario de agente/prompt
+  llm_function: GOVERN
+  pillar: P07_evals
+validation_schema:
+  builder: archetypes/builders/validation-schema-builder
+  core: false
+  description: Contrato de validacao pos-geracao (o sistema aplica, LLM nao ve)
+  llm_function: GOVERN
+  pillar: P06_schema
+validator:
+  builder: archetypes/builders/validator-builder
+  core: true
+  description: Regra de validacao (pre-commit, quality gate)
+  llm_function: GOVERN
+  pillar: P06_schema
+vision_tool:
+  builder: archetypes/builders/vision-tool-builder
+  core: false
+  description: Analise de imagem, OCR, screenshot interpretation
+  llm_function: CALL
+  pillar: P04_tools
+webhook:
+  builder: archetypes/builders/webhook-builder
+  core: false
+  description: Endpoint HTTP event-driven inbound/outbound
+  llm_function: CALL
+  pillar: P04_tools
+workflow:
+  builder: archetypes/builders/workflow-builder
+  core: true
+  description: Fluxo de trabalho (steps sequenciais/paralelos)
+  llm_function: PRODUCE
+  pillar: P12_orchestration
