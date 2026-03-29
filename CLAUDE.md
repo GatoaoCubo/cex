@@ -1,104 +1,116 @@
-# CEX — LLM Entry Point
+# CEX Boot Chain
 
-> **You are inside a CEX repository.** A typed, indexed knowledge base
-> for building LLM agents. 78 kinds, 78 builders, 12 pillars, 7 nuclei.
-> Navigate by filename: `{layer}_{kind}_{topic}.{ext}`.
+> **You are inside CEX** — a typed knowledge system for LLM agents.
+> 99 kinds, 99 builders, 12 pillars, 7 nuclei, 8F pipeline.
 
 ---
 
-## Architecture (5 Layers)
+## STEP 1: WHAT IS CEX
 
-| Layer | Location | Contains |
-|-------|----------|----------|
-| L0 DNA | `archetypes/builders/{kind}-builder/` | 13 ISO files per builder (factory) |
-| L1 Schema | `P01_knowledge/` — `P12_orchestration/` | `_schema.yaml` + `templates/` + `examples/` + `compiled/` |
-| L2 Instance | `N01_intelligence/` — `N07_admin/` | Domain-specific instances (7 nuclei) |
-| L3 Engine | `_tools/` | 17 CLI tools (forge, motor, crew, doctor, compile, ...) |
-| L4 Root | `CLAUDE.md`, `README.md`, `INDEX.md` | Entry points and navigation |
+CEX is **LLM-for-LLM**: a taxonomy where every artifact has a `kind`, every kind has a builder (13 ISOs), and builders compose through the **8 Function pipeline**.
 
-## Quick Navigation
+```
+User intent → OBJECT_TO_KINDS → Builder selection → 8F Runner → Artifact
+```
 
-| Need | Where |
+## STEP 2: THE 8F PIPELINE
+
+Every artifact is produced by running 8 functions in sequence:
+
+| # | Function | Verb | What it does |
+|---|----------|------|-------------|
+| F1 | CONSTRAIN | Restrict | Load schema + config for the kind |
+| F2 | BECOME | Be | Load agent identity + system prompt |
+| F3 | INJECT | Know | Load knowledge cards + memory |
+| F4 | REASON | Think | LLM plans the approach (haiku) |
+| F5 | CALL | Do | Parse available tools |
+| F6 | PRODUCE | Generate | LLM generates the artifact (sonnet) |
+| F7 | GOVERN | Evaluate | 6 hard gates validate output |
+| F8 | COLLABORATE | Coordinate | Save artifact + signal completion |
+
+**Runner**: `python _tools/cex_8f_runner.py --kind <kind> --topic <topic>`
+**Dry-run**: `python _tools/cex_8f_runner.py --kind <kind> --topic <topic> --dry-run`
+**Intent**: `python _tools/cex_8f_motor.py --intent "create X for Y"`
+
+## STEP 3: KEY PATHS
+
+| What | Where |
 |------|-------|
-| How CEX works | `README.md` |
-| 8 LLM Functions | `LLM_PIPELINE.md` |
-| Architecture deep dive | `_docs/ARCHITECTURE.md` |
-| Whitepaper | `_docs/WHITEPAPER_CEX.md` |
-| Governance rules | `archetypes/CODEX.md` |
-| Naming rules | `_docs/NAMING_CONVENTION.md` |
-| Visual architecture map | `CEX_ARCHITECTURE_MAP.md` |
-| Motor 8F spec | `_docs/MOTOR_8F_SPEC.md` |
-| Crew patterns research | `_docs/CREW_PATTERNS_RESEARCH.md` |
+| **Builders** (99) | `archetypes/builders/{kind}-builder/` (13 ISOs each) |
+| **Schemas** (12) | `P{01-12}_*/` → `_schema.yaml` (kind definitions) |
+| **Templates** | `P{01-12}_*/templates/tpl_{kind}.md` |
+| **Examples** (244) | `P{01-12}_*/examples/ex_{kind}_{topic}.md` |
+| **KC Library** (28) | `P01_knowledge/library/domain/` (domain knowledge) |
+| **Tools** (19) | `_tools/` (forge, motor, runner, doctor, ...) |
+| **Nuclei** (7) | `N{01-07}_*/` (domain instances, fractal of 12 pillars) |
+| **Taxonomy** | `archetypes/TAXONOMY_LAYERS.yaml` |
+| **Kind→Template** | `archetypes/TYPE_TO_TEMPLATE.yaml` (100 entries) |
+| **Kind→Builder** | `_docs/8F_BUILDER_MAP.yaml` |
+| **Architecture** | `CEX_ARCHITECTURE_MAP.md` |
+| **8F Spec** | `_docs/MOTOR_8F_SPEC.md` |
+| **Docs** | `_docs/` (whitepaper, naming, LLM instructions) |
 
-## 12 Pillars × 69 Kinds
+## STEP 4: THE 12 PILLARS
 
-| Pillar | Name | Kinds | Primary Types |
-|--------|------|:-----:|---------------|
-| P01 | Knowledge | 6 | knowledge_card, rag_source, glossary_entry, context_doc, embedding_config, few_shot_example |
-| P02 | Model | 9 | agent, lens, boot_config, mental_model, model_card, router, fallback_chain, iso_package, axiom |
-| P03 | Prompt | 5 | system_prompt, prompt_template, chain, action_prompt, instruction |
-| P04 | Tools | 9 | skill, mcp_server, hook, plugin, client, cli_tool, scraper, connector, daemon |
+| P# | Name | Kinds | Core Types |
+|----|------|:-----:|-----------|
+| P01 | Knowledge | 8 | knowledge_card, rag_source, glossary, context_doc, chunk_strategy, embedding_config, few_shot, retriever_config |
+| P02 | Model | 11 | agent, lens, boot_config, mental_model, model_card, router, fallback_chain, iso_package, axiom, handoff_protocol, reward_signal |
+| P03 | Prompt | 7 | system_prompt, prompt_template, chain, action_prompt, instruction, persona_prompt, output_schema_P03 |
+| P04 | Tools | 18 | skill, mcp_server, hook, plugin, client, cli_tool, scraper, connector, daemon, function_def, search_tool, vision_tool, code_executor, webhook, batch_runner, api_adapter, cache_layer, rate_limiter |
 | P05 | Output | 4 | response_format, parser, formatter, naming_rule |
-| P06 | Schema | 5 | input_schema, type_def, validator, interface, validation_schema |
-| P07 | Evals | 6 | unit_eval, smoke_eval, e2e_eval, benchmark, golden_test, scoring_rubric |
-| P08 | Architecture | 5 | pattern, law, diagram, component_map, director |
-| P09 | Config | 5 | env_config, path_config, permission, feature_flag, runtime_rule |
-| P10 | Memory | 4 | runtime_state, brain_index, learning_record, session_state |
-| P11 | Feedback | 5 | quality_gate, bugloop, lifecycle_rule, guardrail, optimizer |
-| P12 | Orchestration | 6 | workflow, dag, spawn_config, signal, handoff, dispatch_rule |
+| P06 | Schema | 6 | input_schema, type_def, validator, interface, validation_schema, output_schema_P06 |
+| P07 | Evals | 10 | unit_eval, smoke_eval, e2e_eval, benchmark, golden_test, scoring_rubric, regression_test, ab_test, bias_eval, latency_eval |
+| P08 | Architecture | 8 | pattern, law, diagram, component_map, director, decision_record, naming_rule, agent_card |
+| P09 | Config | 7 | env_config, path_config, permission, feature_flag, runtime_rule, secret_config, deploy_config |
+| P10 | Memory | 6 | runtime_state, brain_index, learning_record, session_state, memory_scope, conversation_log |
+| P11 | Feedback | 6 | quality_gate, bugloop, lifecycle_rule, guardrail, optimizer, reward_signal |
+| P12 | Orchestration | 8 | workflow, dag, spawn_config, signal, handoff, dispatch_rule, checkpoint, schedule |
 
-## 8 Functions (Pipeline)
+## STEP 5: THE 7 NUCLEI
 
-| # | Function | Verb | Pillar Sources | Find builders |
-|---|----------|------|---------------|---------------|
-| 1 | BECOME | Be | P02, P03 | `bld_system_prompt_*`, `bld_manifest_*` |
-| 2 | INJECT | Know | P01, P10 | `bld_knowledge_card_*`, `bld_memory_*` |
-| 3 | REASON | Think | P03 | `bld_instruction_*` |
-| 4 | CALL | Do | P04 | `bld_tools_*` |
-| 5 | PRODUCE | Generate | P05 | `bld_output_template_*` |
-| 6 | CONSTRAIN | Restrict | P06, P08 | `bld_schema_*` |
-| 7 | GOVERN | Evaluate | P07, P11 | `bld_quality_gate_*` |
-| 8 | COLLABORATE | Coordinate | P12 | `bld_collaboration_*` |
+Each nucleus mirrors ALL 12 pillars, filled with domain-specific content.
 
-Sequential pipeline. BECOME before INJECT. GOVERN before COLLABORATE.
+| ID | Domain | Maps to | Subdirs |
+|----|--------|---------|:-------:|
+| N01 | Intelligence | Research (SHAKA) | 12 |
+| N02 | Marketing | Marketing (LILY) | 12 |
+| N03 | Engineering | Build (EDISON) | 12 |
+| N04 | Knowledge | Indexing (PYTHA) | 12 |
+| N05 | Operations | Execute (ATLAS) | 12 |
+| N06 | Commercial | Monetize (YORK) | 12 |
+| N07 | Admin | Orchestrate (STELLA) | 12 |
 
-## 7 Nuclei
+Pattern: `ex_pattern_nucleus_fractal.md` in `P08_architecture/examples/`
 
-| ID | Domain | Files | Status |
-|----|--------|:-----:|--------|
-| N01 | Intelligence | 6 | Skeleton |
-| N02 | Marketing | 5 | Skeleton |
-| N03 | Engineering | 3 | Skeleton |
-| N04 | Knowledge | 2 | Skeleton |
-| N05 | Operations | 2 | Skeleton |
-| N06 | Commercial | 2 | Skeleton |
-| N07 | Admin | 2 | Skeleton |
+## STEP 6: COMMON TASKS
 
-## Tools (L3 Engine)
-
-| Tool | Command | Purpose |
-|------|---------|---------|
-| **Forge v2** | `python _tools/cex_forge.py --lp P01 --type knowledge_card --seeds "x" --builder` | Generate artifact with builder context |
-| **Motor 8F** | `python _tools/cex_8f_motor.py --intent "create sales agent"` | Decompose intent into builder plan |
-| **Crew Runner** | `python _tools/cex_crew_runner.py --plan plan.json --dry-run` | Orchestrate builder pipeline |
-| **Doctor** | `python _tools/cex_doctor.py` | Validate repo health |
-| **Compile** | `python _tools/cex_compile.py --all` | .md → .yaml/.json |
-| **Pipeline** | `python _tools/cex_pipeline.py --type X --topic Y` | 5-stage build |
-| **Init** | `python _tools/cex_init.py` | Scaffold new CEX project |
-| **Compare** | `python _tools/compare_builders.py --original X --generated Y` | Diff builders |
-
-## Naming Grammar
-
-```
-bld_{iso}_{kind}.md   = Builder ISO file (L0)
-tpl_{kind}.md         = Template (L1)
-ex_{kind}_{topic}.md  = Example (L1)
-{kind}_{topic}.md     = Instance (L2, in nuclei)
+### Create an artifact
+```bash
+python _tools/cex_8f_runner.py --kind knowledge_card --topic "my_topic"
 ```
 
-Lowercase. Snake_case. ASCII only. Max 50 chars.
+### Decompose an intent
+```bash
+python _tools/cex_8f_motor.py --intent "create a sales agent with tools"
+```
 
-## Quality Gate
+### Check repo health
+```bash
+python _tools/cex_doctor.py
+```
+
+### Generate from template
+```bash
+python _tools/cex_forge.py --lp P01 --type knowledge_card --seeds "topic keywords" --builder
+```
+
+### Compile examples
+```bash
+python _tools/cex_compile.py --all
+```
+
+## STEP 7: QUALITY GATE
 
 | Score | Tier | Action |
 |-------|------|--------|
@@ -107,4 +119,9 @@ Lowercase. Snake_case. ASCII only. Max 50 chars.
 | >= 7.0 | Learning | Experimental |
 | < 7.0 | Rejected | Redo |
 
-Density >= 0.80. Frontmatter required: `id`, `kind`, `pillar`, `title`.
+**Density** >= 0.80 | **Frontmatter** required: id, kind, pillar | **Max body**: per schema
+
+## CONSTRAINTS
+
+**NEVER**: Invent kinds not in schemas | Skip frontmatter | Use quality != null in generated artifacts
+**ALWAYS**: Check schema before creating | Use builders for production | Run doctor after changes

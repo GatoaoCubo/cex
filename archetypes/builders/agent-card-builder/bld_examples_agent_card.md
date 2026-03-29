@@ -12,7 +12,7 @@ pattern: few-shot learning — LLM reads these before producing
 INPUT: "Especifica o satelite researcher para pesquisa de mercado"
 OUTPUT:
 ```yaml
-id: p08_sat_shaka
+id: p08_ac_shaka
 kind: agent_card
 pillar: P08
 version: "1.0.0"
@@ -86,7 +86,7 @@ Priority: research tasks routed to researcher before any other satellite.
 - Alert on failure: logs error + notifies orchestrator
 WHY THIS IS GOLDEN:
 - quality: null (H05 pass)
-- id matches p08_sat_ pattern (H02 pass)
+- id matches p08_ac_ pattern (H02 pass)
 - kind: agent_card (H04 pass)
 - 26 frontmatter fields present (H06 pass)
 - name non-empty "researcher" (H07 pass)

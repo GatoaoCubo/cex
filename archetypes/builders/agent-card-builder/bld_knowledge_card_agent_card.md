@@ -15,7 +15,7 @@ Satellite specs define autonomous processing units in multi-agent architectures 
 |----------|-------|
 | Pillar | P08 (architecture) |
 | Kind | `agent_card` (exact literal) |
-| ID pattern | `p08_sat_{slug}` |
+| ID pattern | `p08_ac_{slug}` |
 | Required frontmatter | 24+ fields |
 | Quality gates | 10 HARD + 10 SOFT |
 | Max body | 4096 bytes |

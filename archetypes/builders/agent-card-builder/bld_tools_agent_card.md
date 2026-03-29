@@ -27,7 +27,7 @@ purpose: Tools and APIs available for agent_card production
 No automated validator exists yet for agent_cards.
 Manually check each QUALITY_GATES.md gate against produced artifact:
 - [ ] YAML parses without error
-- [ ] id matches p08_sat_ prefix
+- [ ] id matches p08_ac_ prefix
 - [ ] name is non-empty
 - [ ] model is valid LLM identifier
 - [ ] mcps is list

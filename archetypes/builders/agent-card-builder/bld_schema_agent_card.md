@@ -11,7 +11,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ## Frontmatter Fields
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
-| id | string (p08_sat_{name}) | YES | - | Namespace compliance |
+| id | string (p08_ac_{name}) | YES | - | Namespace compliance |
 | kind | literal "agent_card" | YES | - | Type integrity |
 | pillar | literal "P08" | YES | - | Pillar assignment |
 | version | semver string | YES | "1.0.0" | Versionamento |
@@ -49,7 +49,7 @@ monitoring:
   alert_on_failure: boolean  # notify on error
 ```
 ## ID Pattern
-Regex: `^p08_sat_[a-z][a-z0-9_]+$`
+Regex: `^p08_ac_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
 ## Body Structure (required sections)
 1. `## Role` — what the satellite does and its primary function
@@ -61,7 +61,7 @@ Rule: id MUST equal filename stem.
 7. `## Scaling & Monitoring` — concurrency, timeouts, health checks
 ## Constraints
 - max_bytes: 4096 (body only)
-- naming: p08_sat_{name_lower}.yaml
+- naming: p08_ac_{name_lower}.yaml
 - machine_format: yaml
 - id == filename stem
 - name MUST be non-empty (uppercase convention)

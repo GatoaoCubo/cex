@@ -243,6 +243,13 @@ OBJECT_TO_KINDS = {
     "vision_tool": [("vision_tool", "P04", "CALL")],
     "webhook": [("webhook", "P04", "CALL")],
     "workflow": [("workflow", "P12", "COLLABORATE")],
+    # agent_card (P08) — deployment spec for autonomous agent
+    "agent_card": [("agent_card", "P08", "BECOME")],
+    "agent-card": [("agent_card", "P08", "BECOME")],
+    "agentcard": [("agent_card", "P08", "BECOME")],
+    "deployment_spec": [("agent_card", "P08", "BECOME")],
+    "deployment": [("agent_card", "P08", "BECOME")],
+
 }
 
 # Verb -> extra builders force-activated regardless of tier

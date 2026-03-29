@@ -9,7 +9,7 @@ pattern: every field here exists in SCHEMA.md — template derives, never invent
 
 # Output Template: agent_card
 ```yaml
-id: p08_sat_{{name_lower}}
+id: p08_ac_{{name_lower}}
 kind: agent_card
 pillar: P08
 version: "1.0.0"

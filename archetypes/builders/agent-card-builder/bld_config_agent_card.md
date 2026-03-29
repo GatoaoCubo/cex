@@ -11,15 +11,15 @@ pattern: CONFIG restricts SCHEMA, never contradicts it
 ## Naming Convention
 | Scope | Convention | Example |
 |-------|-----------|---------|
-| Artifact files | `p08_sat_{name_lower}.yaml` | `p08_sat_shaka.yaml` |
+| Artifact files | `p08_ac_{name_lower}.yaml` | `p08_ac_shaka.yaml` |
 | Builder directory | kebab-case | `agent-card-builder/` |
 | Frontmatter fields | snake_case | `domain_area`, `boot_sequence` |
 | Satellite names | UPPERCASE in name field | `researcher`, `builder`, `marketer` |
 | Name slugs | lowercase in id | `shaka`, `edison`, `lily` |
 Rule: id MUST equal filename stem.
 ## File Paths
-- Output: `cex/P08_architecture/examples/p08_sat_{name_lower}.yaml`
-- Compiled: `cex/P08_architecture/compiled/p08_sat_{name_lower}.yaml`
+- Output: `cex/P08_architecture/examples/p08_ac_{name_lower}.yaml`
+- Compiled: `cex/P08_architecture/compiled/p08_ac_{name_lower}.yaml`
 ## Size Limits (aligned with SCHEMA)
 - Body: max 4096 bytes
 - Total: ~6000 bytes including frontmatter
