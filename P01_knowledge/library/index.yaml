@@ -43,12 +43,6 @@ domains:
     - signal
     - checkpoint
     - mcp_server
-    tags:
-    - a2a
-    - google
-    - agent-protocol
-    - interoperability
-    - standard
     quality: 9.0
     origin: src_standards_global
   kc_academic_agent_patterns:
@@ -60,13 +54,6 @@ domains:
     - system_prompt
     - director
     - handoff_protocol
-    tags:
-    - react
-    - chain-of-thought
-    - reflexion
-    - tree-of-thoughts
-    - agent-patterns
-    - academic
     quality: 9.0
     origin: src_standards_global
   kc_academic_rag_patterns:
@@ -78,15 +65,19 @@ domains:
     - knowledge_card
     - document_loader
     - search_tool
-    tags:
-    - rag
-    - toolformer
-    - self-rag
-    - flare
-    - retrieval
-    - academic
     quality: 9.0
     origin: src_standards_global
+  kc_agent_identity:
+    path: library/domain/kc_agent_identity.md
+    feeds_kinds:
+    - lens
+    - mental_model
+    - model_card
+    - boot_config
+    - iso_package
+    - axiom
+    quality: 9.0
+    origin: manual
   kc_anthropic_api_patterns:
     path: library/domain/kc_anthropic_api_patterns.md
     feeds_kinds:
@@ -96,13 +87,6 @@ domains:
     - prompt_template
     - computer_use
     - input_schema
-    tags:
-    - anthropic
-    - tool-use
-    - computer-use
-    - prompt-caching
-    - server-tools
-    - knowledge
     quality: 9.0
     origin: src_provider_taxonomy
   kc_aws_bedrock_patterns:
@@ -114,14 +98,6 @@ domains:
     - function_def
     - retriever_config
     - env_config
-    tags:
-    - aws
-    - bedrock
-    - agents
-    - knowledge-bases
-    - guardrails
-    - rag
-    - knowledge
     quality: 9.0
     origin: src_provider_taxonomy
   kc_chinese_llm_ecosystem:
@@ -133,13 +109,6 @@ domains:
     - workflow
     - plugin
     - director
-    tags:
-    - chinese-llm
-    - qwen-agent
-    - deepseek
-    - metagpt
-    - agentscope
-    - chatglm
     quality: 9.0
     origin: src_standards_global
   kc_crewai_patterns:
@@ -156,14 +125,6 @@ domains:
     - handoff
     - output_validator
     - signal
-    tags:
-    - crewai
-    - agent
-    - task
-    - crew
-    - process
-    - delegation
-    - multi-agent
     quality: 9.0
     origin: src_framework_taxonomy
   kc_dspy_patterns:
@@ -179,16 +140,25 @@ domains:
     - scoring_rubric
     - retriever
     - constraint_spec
-    tags:
-    - dspy
-    - signature
-    - module
-    - optimizer
-    - assertion
-    - few-shot
-    - prompt-optimization
     quality: 9.0
     origin: src_framework_taxonomy
+  kc_external_integrations:
+    path: library/domain/kc_external_integrations.md
+    feeds_kinds:
+    - api_client
+    - webhook
+    - notifier
+    - db_connector
+    - browser_tool
+    quality: 9.0
+    origin: manual
+  kc_feedback_loops:
+    path: library/domain/kc_feedback_loops.md
+    feeds_kinds:
+    - bugloop
+    - lifecycle_rule
+    quality: 9.0
+    origin: manual
   kc_google_ai_patterns:
     path: library/domain/kc_google_ai_patterns.md
     feeds_kinds:
@@ -198,13 +168,6 @@ domains:
     - search_tool
     - system_prompt
     - response_format
-    tags:
-    - google
-    - gemini
-    - function-calling
-    - grounding
-    - google-search
-    - knowledge
     quality: 9.0
     origin: src_provider_taxonomy
   kc_haystack_patterns:
@@ -220,15 +183,19 @@ domains:
     - dispatch_rule
     - pattern
     - document_loader
-    tags:
-    - haystack
-    - pipeline
-    - component
-    - document-store
-    - generator
-    - retriever
     quality: 9.0
     origin: src_framework_taxonomy
+  kc_infra_config:
+    path: library/domain/kc_infra_config.md
+    feeds_kinds:
+    - path_config
+    - permission
+    - feature_flag
+    - runtime_rule
+    - secret_config
+    - rate_limit_config
+    quality: 9.0
+    origin: manual
   kc_langchain_patterns:
     path: library/domain/kc_langchain_patterns.md
     feeds_kinds:
@@ -244,14 +211,6 @@ domains:
     - parser
     - memory_scope
     - workflow
-    tags:
-    - langchain
-    - lcel
-    - runnable
-    - retriever
-    - output-parser
-    - agent
-    - chain
     quality: 9.0
     origin: src_framework_taxonomy
   kc_llamaindex_patterns:
@@ -267,13 +226,6 @@ domains:
     - response_format
     - brain_index
     - knowledge_card
-    tags:
-    - llamaindex
-    - query-engine
-    - node-parser
-    - response-synthesizer
-    - workflow
-    - index
     quality: 9.0
     origin: src_framework_taxonomy
   kc_mcp_protocol:
@@ -285,16 +237,18 @@ domains:
     - prompt_template
     - plugin
     - hook
-    tags:
-    - mcp
-    - model-context-protocol
-    - tools
-    - resources
-    - prompts
-    - transport
-    - knowledge
     quality: 9.0
     origin: src_provider_taxonomy
+  kc_memory_persistence:
+    path: library/domain/kc_memory_persistence.md
+    feeds_kinds:
+    - learning_record
+    - session_state
+    - runtime_state
+    - entity_memory
+    - memory_summary
+    quality: 9.0
+    origin: manual
   kc_openai_api_patterns:
     path: library/domain/kc_openai_api_patterns.md
     feeds_kinds:
@@ -305,15 +259,35 @@ domains:
     - search_tool
     - code_executor
     - vision_tool
-    tags:
-    - openai
-    - function-calling
-    - structured-outputs
-    - assistants
-    - evals
-    - knowledge
     quality: 9.0
     origin: src_provider_taxonomy
+  kc_orchestration_runtime:
+    path: library/domain/kc_orchestration_runtime.md
+    feeds_kinds:
+    - dag
+    - spawn_config
+    - schedule
+    - rag_source
+    quality: 9.0
+    origin: manual
+  kc_perception_tools:
+    path: library/domain/kc_perception_tools.md
+    feeds_kinds:
+    - audio_tool
+    - vision_tool
+    - cli_tool
+    - daemon
+    quality: 9.0
+    origin: manual
+  kc_prompt_engineering:
+    path: library/domain/kc_prompt_engineering.md
+    feeds_kinds:
+    - instruction
+    - prompt_version
+    - context_doc
+    - glossary_entry
+    quality: 9.0
+    origin: manual
   kc_reward_and_alignment:
     path: library/domain/kc_reward_and_alignment.md
     feeds_kinds:
@@ -323,15 +297,16 @@ domains:
     - scoring_rubric
     - eval_dataset
     - golden_test
-    tags:
-    - rlhf
-    - dpo
-    - constitutional-ai
-    - alignment
-    - reward-model
-    - preference
     quality: 9.0
     origin: src_standards_global
+  kc_routing_resilience:
+    path: library/domain/kc_routing_resilience.md
+    feeds_kinds:
+    - router
+    - fallback_chain
+    - dispatch_rule
+    quality: 9.0
+    origin: manual
 coverage:
   action_prompt:
   - kc_academic_agent_patterns
@@ -345,9 +320,21 @@ coverage:
   - kc_dspy_patterns
   - kc_langchain_patterns
   - kc_llamaindex_patterns
+  api_client:
+  - kc_external_integrations
+  audio_tool:
+  - kc_perception_tools
+  axiom:
+  - kc_agent_identity
+  boot_config:
+  - kc_agent_identity
   brain_index:
   - kc_haystack_patterns
   - kc_llamaindex_patterns
+  browser_tool:
+  - kc_external_integrations
+  bugloop:
+  - kc_feedback_loops
   chain:
   - kc_academic_agent_patterns
   - kc_dspy_patterns
@@ -358,6 +345,8 @@ coverage:
   - kc_academic_rag_patterns
   - kc_langchain_patterns
   - kc_llamaindex_patterns
+  cli_tool:
+  - kc_perception_tools
   code_executor:
   - kc_google_ai_patterns
   - kc_openai_api_patterns
@@ -365,12 +354,21 @@ coverage:
   - kc_anthropic_api_patterns
   constraint_spec:
   - kc_dspy_patterns
+  context_doc:
+  - kc_prompt_engineering
+  daemon:
+  - kc_perception_tools
+  dag:
+  - kc_orchestration_runtime
+  db_connector:
+  - kc_external_integrations
   director:
   - kc_academic_agent_patterns
   - kc_chinese_llm_ecosystem
   - kc_crewai_patterns
   dispatch_rule:
   - kc_haystack_patterns
+  - kc_routing_resilience
   document_loader:
   - kc_academic_rag_patterns
   - kc_haystack_patterns
@@ -381,10 +379,16 @@ coverage:
   - kc_haystack_patterns
   - kc_langchain_patterns
   - kc_llamaindex_patterns
+  entity_memory:
+  - kc_memory_persistence
   env_config:
   - kc_aws_bedrock_patterns
   eval_dataset:
   - kc_reward_and_alignment
+  fallback_chain:
+  - kc_routing_resilience
+  feature_flag:
+  - kc_infra_config
   few_shot_example:
   - kc_dspy_patterns
   function_def:
@@ -397,6 +401,8 @@ coverage:
   - kc_langchain_patterns
   - kc_mcp_protocol
   - kc_openai_api_patterns
+  glossary_entry:
+  - kc_prompt_engineering
   golden_test:
   - kc_reward_and_alignment
   guardrail:
@@ -415,12 +421,22 @@ coverage:
   - kc_dspy_patterns
   - kc_google_ai_patterns
   - kc_openai_api_patterns
+  instruction:
+  - kc_prompt_engineering
+  iso_package:
+  - kc_agent_identity
   knowledge_card:
   - kc_academic_rag_patterns
   - kc_aws_bedrock_patterns
   - kc_haystack_patterns
   - kc_llamaindex_patterns
   - kc_mcp_protocol
+  learning_record:
+  - kc_memory_persistence
+  lens:
+  - kc_agent_identity
+  lifecycle_rule:
+  - kc_feedback_loops
   llm_judge:
   - kc_reward_and_alignment
   mcp_server:
@@ -431,14 +447,26 @@ coverage:
   memory_scope:
   - kc_crewai_patterns
   - kc_langchain_patterns
+  memory_summary:
+  - kc_memory_persistence
+  mental_model:
+  - kc_agent_identity
+  model_card:
+  - kc_agent_identity
+  notifier:
+  - kc_external_integrations
   optimizer:
   - kc_dspy_patterns
   output_validator:
   - kc_crewai_patterns
   parser:
   - kc_langchain_patterns
+  path_config:
+  - kc_infra_config
   pattern:
   - kc_haystack_patterns
+  permission:
+  - kc_infra_config
   plugin:
   - kc_chinese_llm_ecosystem
   - kc_mcp_protocol
@@ -448,8 +476,14 @@ coverage:
   - kc_haystack_patterns
   - kc_langchain_patterns
   - kc_mcp_protocol
+  prompt_version:
+  - kc_prompt_engineering
   quality_gate:
   - kc_reward_and_alignment
+  rag_source:
+  - kc_orchestration_runtime
+  rate_limit_config:
+  - kc_infra_config
   response_format:
   - kc_dspy_patterns
   - kc_google_ai_patterns
@@ -467,6 +501,14 @@ coverage:
   - kc_llamaindex_patterns
   reward_signal:
   - kc_reward_and_alignment
+  router:
+  - kc_routing_resilience
+  runtime_rule:
+  - kc_infra_config
+  runtime_state:
+  - kc_memory_persistence
+  schedule:
+  - kc_orchestration_runtime
   scoring_rubric:
   - kc_dspy_patterns
   - kc_reward_and_alignment
@@ -474,9 +516,15 @@ coverage:
   - kc_academic_rag_patterns
   - kc_google_ai_patterns
   - kc_openai_api_patterns
+  secret_config:
+  - kc_infra_config
+  session_state:
+  - kc_memory_persistence
   signal:
   - kc_a2a_protocol
   - kc_crewai_patterns
+  spawn_config:
+  - kc_orchestration_runtime
   system_prompt:
   - kc_academic_agent_patterns
   - kc_anthropic_api_patterns
@@ -484,6 +532,9 @@ coverage:
   - kc_openai_api_patterns
   vision_tool:
   - kc_openai_api_patterns
+  - kc_perception_tools
+  webhook:
+  - kc_external_integrations
   workflow:
   - kc_chinese_llm_ecosystem
   - kc_crewai_patterns
