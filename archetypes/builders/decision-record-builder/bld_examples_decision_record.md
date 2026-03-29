@@ -35,46 +35,17 @@ deciders: ["EDISON", "ATLAS"]
 date_decided: "2026-03-29"
 ```
 ## Context
-CEX artifacts have a stable YAML frontmatter structure with well-defined fields (id, kind, pillar, status, tags). The primary access patterns are: filter by kind, filter by pillar, full-text search on tldr, and join between artifacts and quality scores. A MongoDB prototype was built in v1 but the document model provided no benefit once schemas stabilized. The team's operational tooling (Railway, migrations, backups) is already PostgreSQL-native.
+CEX artifacts have stable YAML frontmatter. Primary access: filter by kind/pillar, full-text search on tldr. MongoDB prototype v1 provided no benefit once schemas stabilized; operational tooling is PostgreSQL-native on Railway.
 ## Options Considered
-### Option A: PostgreSQL with JSONB
-Stores artifact frontmatter as structured columns with JSONB overflow for optional fields.
-Pros:
-- Native support for relational queries (filter by pillar + kind + status in one query)
-- JSONB indexing handles semi-structured optional fields efficiently
-- Team already operates PostgreSQL on Railway — no new operational surface
-Cons:
-- Schema migrations required when new required frontmatter fields are added
-- Less flexible for highly variable artifact structures (not a concern given stable schema)
-### Option B: MongoDB
-Document store where each artifact is a BSON document.
-Pros:
-- Schema-free: new frontmatter fields require no migration
-- Natural fit for JSON/YAML document storage
-Cons:
-- No relational join support — cross-artifact queries require application-side joins
-- Additional operational complexity (separate MongoDB instance vs. existing PostgreSQL)
-- Team has limited MongoDB operational experience
-### Option C: SQLite (embedded)
-Embedded relational database, zero operational overhead.
-Pros:
-- Zero infrastructure cost; runs in-process
-Cons:
-- No concurrent write support for multi-satellite environments
-- Not suitable for Railway deployment with horizontal scaling
+- **A: PostgreSQL with JSONB** — native relational queries, JSONB for optional fields, team already operates on Railway. Con: schema migrations for new required fields.
+- **B: MongoDB** — schema-free, natural JSON storage. Con: no relational joins, additional ops complexity, limited team experience.
+- **C: SQLite** — zero infra cost, in-process. Con: no concurrent writes, not suitable for Railway horizontal scaling.
 ## Decision
-We will use Option A: PostgreSQL with JSONB. PostgreSQL's relational query capabilities match the primary access patterns, the team already operates it on Railway, and the schema has been stable for two versions. The JSONB column handles optional frontmatter fields without requiring column-per-field proliferation.
+Use Option A: PostgreSQL with JSONB. Relational queries match primary access patterns; team already operates it; schema stable for two versions.
 ## Consequences
-**Positive:**
-- Artifact queries by pillar, kind, and status execute in a single indexed SQL query
-- Operational runbook already exists — no new infrastructure to learn
-- Type-safe migrations enforce schema discipline at the database layer
-**Negative:**
-- Adding new required frontmatter fields requires a schema migration — cannot be done ad hoc
-- MongoDB prototype code (approximately 400 lines) must be replaced before launch
-**Neutral:**
-- JSONB overflow column handles optional fields without schema changes for optional additions
-- MongoDB expertise on the team becomes less relevant for this project
+**Positive:** artifact queries by pillar/kind/status in single indexed SQL query; operational runbook exists.
+**Negative:** new required frontmatter fields require migration; MongoDB prototype (~400 lines) must be replaced.
+**Neutral:** JSONB handles optional fields; MongoDB expertise less relevant.
 
 WHY THIS IS GOLDEN:
 - quality: null (H05 pass)
@@ -83,10 +54,9 @@ WHY THIS IS GOLDEN:
 - All 5 required frontmatter fields present and non-empty (H06 pass)
 - status: accepted — valid enum value (H07 pass)
 - All 4 body sections present (H08 pass)
-- 3 options documented with pros/cons (H09 pass — exceeds minimum of 2)
+- 3 options with pros/cons (H09 pass)
 - Consequences include negative effects (SOFT: consequence honesty pass)
 - Decision states chosen option in first sentence (SOFT: decision clarity pass)
-- Context explains forces without stating the decision (SOFT: context quality pass)
 
 ## Anti-Example
 INPUT: "Document the decision to use microservices"
@@ -106,8 +76,6 @@ FAILURES:
 3. status: "active" not in enum (proposed/accepted/deprecated/superseded) -> H07 FAIL
 4. quality: 8.5 (not null) -> H05 FAIL
 5. Missing required fields: title, context, version, created, updated, author, tldr -> H06 FAIL
-6. tags: only 1 item, missing "decision_record" -> SOFT FAIL
-7. Body missing ## Context, ## Options Considered, ## Consequences sections -> H08 FAIL
-8. No options considered — only decision stated -> H09 FAIL
-9. "Because they are scalable" is not a rationale — no tradeoffs or alternatives -> SOFT: consequence honesty FAIL
-10. context field absent — reader cannot evaluate if decision still applies -> H06 FAIL
+6. Body missing ## Context, ## Options Considered, ## Consequences -> H08 FAIL
+7. No options considered — only decision stated -> H09 FAIL
+8. "Because they are scalable" — no tradeoffs or alternatives -> SOFT: consequence honesty FAIL

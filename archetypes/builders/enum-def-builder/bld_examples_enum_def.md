@@ -47,29 +47,26 @@ representations:
   typescript: 'type PublicationStatus = "draft" | "review" | "published" | "deprecated" | "archived";'
 ```
 ## Overview
-Lifecycle states for CEX artifacts progressing from authoring through archival.
-Used by pool indexers, quality gate runners, and routing systems to filter by readiness.
+Lifecycle states for CEX artifacts progressing from authoring through archival. Used by pool indexers, quality gate runners, and routing systems to filter by readiness.
 ## Values
 ### draft
-Initial state. Artifact is being authored. Quality gates have not been run. Not visible in pool.
+Initial state. Artifact is being authored. Quality gates not run. Not visible in pool.
 ### review
-Artifact submitted for quality gate evaluation. No edits permitted until review completes.
+Submitted for quality gate evaluation. No edits permitted until review completes.
 ### published
-Artifact passed all HARD gates and met score threshold. Available in pool for routing.
+Passed all HARD gates and met score threshold. Available in pool for routing.
 ### deprecated
-Artifact has been superseded. Retained in pool for backward compatibility; do not route new requests here.
+Superseded by newer version. Retained for backward compatibility; do not route new requests here.
 ### archived
-Artifact removed from active routing. Preserved for historical reference and audit trail only.
+Removed from active routing. Preserved for historical reference and audit trail only.
 ## Usage
 JSON Schema: `{"enum": ["draft", "review", "published", "deprecated", "archived"]}`
 Pydantic: `class PublicationStatus(str, Enum): DRAFT = "draft"`
 Zod: `z.enum(["draft", "review", "published", "deprecated", "archived"])`
-GraphQL: `enum PublicationStatus { DRAFT REVIEW PUBLISHED DEPRECATED ARCHIVED }`
 TypeScript: `type PublicationStatus = "draft" | "review" | "published" | "deprecated" | "archived";`
 ## Constraints
-Default: draft
-Extensible: no — set is closed; state machine transitions are fixed
-Deprecated: none
+Default: draft. Extensible: no. Deprecated: none.
+
 WHY THIS IS GOLDEN:
 - quality: null (H05 pass)
 - id matches p06_enum_ pattern (H02 pass)
@@ -79,10 +76,6 @@ WHY THIS IS GOLDEN:
 - deprecated: [] subset of values (H09 pass)
 - default "draft" in values list (H10 pass)
 - all required fields present (H06 pass)
-- per-value descriptions in frontmatter + body (S02 pass)
-- extensible declared (S03 pass)
-- 4 framework representations (S06 pass)
-- tldr: 62 chars <= 160 (S10 pass)
 ## Anti-Example
 INPUT: "Create enum for order status"
 BAD OUTPUT:
@@ -103,9 +96,3 @@ FAILURES:
 4. quality: 8.5 (not null) -> H05 FAIL
 5. values: [active] — only 1 value, that is a constant -> H07 FAIL
 6. Missing fields: version, created, updated, author, tldr -> H06 FAIL
-7. tags: only 1 item, missing "enum_def" -> SOFT FAIL
-8. No descriptions per value -> SOFT FAIL
-9. No extensible declaration -> SOFT FAIL
-10. No ## Usage section with framework representations -> SOFT FAIL
-11. No ## Constraints section -> SOFT FAIL
-12. Body missing ## Values, ## Usage, ## Constraints sections -> SOFT FAIL

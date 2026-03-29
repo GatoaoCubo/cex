@@ -9,7 +9,7 @@ sources: RLHF literature, DPO paper (Rafailov 2023), Constitutional AI (Anthropi
 
 # Domain Knowledge: reward_signal
 ## Executive Summary
-Reward signals are continuous quality scores that drive agent improvement through learning loops. Unlike quality gates (binary pass/fail) or scoring rubrics (static criteria definitions), reward signals feed live systems: RLHF reward models, DPO preference datasets, Constitutional AI critique cycles, and LLM-as-judge monitoring pipelines. A reward signal is only as good as its calibration — scale semantics, baseline, and anti-reward-hacking design are load-bearing.
+Reward signals are continuous quality scores that drive agent improvement through learning loops. Unlike quality gates (binary pass/fail) or scoring rubrics (static criteria), reward signals feed live systems: RLHF reward models, DPO preference datasets, Constitutional AI critique cycles, and LLM-as-judge monitoring pipelines. Calibration — scale semantics, baseline, anti-reward-hacking design — is load-bearing.
 ## Spec Table
 | Property | Value |
 |----------|-------|
@@ -20,48 +20,41 @@ Reward signals are continuous quality scores that drive agent improvement throug
 | Baseline | minimum acceptable score; triggers retraining or filtering below |
 | Frequency | per_turn, per_task, per_session, on_demand |
 | Aggregation | mean, weighted_mean, min, max, last |
-## Signal Type Patterns
-| Type | Mechanism | Use case | Reward hacking risk |
-|------|-----------|----------|---------------------|
-| scalar | LLM-judge assigns 0-1 or 0-10 numeric score | General quality, helpfulness | High if single criterion |
-| preference | Human/model picks A > B from pair | RLHF training data collection | Medium — preference noise |
-| critique | LLM writes critique + revised output + score | Constitutional AI, self-improvement | Low — multi-step process |
-| comparative | N outputs ranked by quality | DPO dataset construction | Medium — ranking drift |
-| implicit | Behavioral signals (edits, clicks, re-prompts) | Production monitoring | Low — ground truth |
+## Signal Types
+| Type | Mechanism | Use case | Hacking risk |
+|------|-----------|----------|--------------|
+| scalar | LLM-judge assigns 0-1 score | General quality | High if single criterion |
+| preference | Human/model picks A > B | RLHF training data | Medium — noise |
+| critique | LLM critiques + revises + scores | Constitutional AI | Low — multi-step |
+| comparative | N outputs ranked | DPO dataset construction | Medium — drift |
+| implicit | Edits, clicks, re-prompts | Production monitoring | Low — ground truth |
 ## Key Concepts
-- **RLHF (Reinforcement Learning from Human Feedback)**: Train a reward model on preference pairs, then use PPO to optimize the policy against the reward model. Reward signal feeds the reward model training phase.
-- **DPO (Direct Preference Optimization)**: No explicit reward model — preference pairs (chosen/rejected) implicitly define reward via the Bradley-Terry model. Signal type: preference.
-- **Constitutional AI critique**: LLM evaluates its own output against principles, produces critique + revision. Signal type: critique. Produces both signal and improved output simultaneously.
-- **LLM-as-judge**: A model (often GPT-4 or Claude) evaluates peer model outputs on defined criteria. Requires careful calibration to avoid positional bias and verbosity bias.
-- **Reward shaping**: Adding auxiliary rewards to guide exploration toward desired behaviors without changing the optimal policy. Must be used carefully to avoid unintended optima.
+- **RLHF**: preference pairs -> reward model -> PPO policy optimization
+- **DPO**: preference pairs (chosen/rejected) -> direct policy optimization via Bradley-Terry; no reward model
+- **Constitutional AI**: LLM evaluates output against principles -> critique + revision; signal type: critique
+- **LLM-as-judge**: peer model scores outputs; calibrate against positional and verbosity bias
 ## Patterns
-| Pattern | Example | When to use |
-|---------|---------|-------------|
-| Multi-criteria scalar | factual_accuracy 0.4 + tone 0.3 + conciseness 0.3 | General text quality |
-| Preference pair collection | human rates A>B on helpfulness | RLHF dataset building |
-| Critique cycle | critique → revise → score | Constitutional AI pipeline |
-| Implicit signal mining | edit distance after generation | Production quality monitoring |
-- **Baseline calibration**: Set baseline at the P20 of human-rated outputs — scores below this percentile indicate the model is underperforming vs. human baseline.
-- **Criteria weighting**: Use additive weights summing to 1.0. Minimum 2 criteria — single-criterion rewards invite hacking.
-- **Scale normalization**: Normalize all criteria to same scale before weighted aggregation.
+| Pattern | When to use |
+|---------|-------------|
+| Multi-criteria scalar | >= 2 weighted criteria (e.g. accuracy 0.4 + tone 0.3 + conciseness 0.3) |
+| Preference pairs | RLHF dataset building; human rates A>B |
+| Critique cycle | Constitutional AI pipeline; critique -> revise -> score |
+| Implicit signal | Production monitoring; edit distance after generation |
+- Baseline: set at P20 of human-rated outputs; recalibrate each training cycle
+- Criteria: weights sum to 1.0; minimum 2 dimensions; safety dims use `min` aggregation
 ## Anti-Patterns
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
-| Single-dimension reward | Model learns to maximize one dimension while degrading others (reward hacking) |
-| No baseline calibration | Cannot distinguish good from acceptable from poor without reference point |
-| Verbosity bias in LLM-judge | Judge model rates longer outputs higher regardless of quality; correct with length normalization |
-| Positional bias | LLM-judge prefers output A over B when A is presented first; correct with swap-and-average |
-| Conflating with quality_gate | Reward signals are continuous; using them as binary gates discards gradient information |
-| Static criteria for evolving domain | Criteria become stale as model improves; refresh every training cycle |
-| Human-only signal at scale | Human annotation cannot scale to per-turn evaluation; use LLM-judge with human spot-check calibration |
+| Single-dimension reward | Model maximizes proxy; other dimensions degrade |
+| No baseline calibration | Cannot distinguish good from acceptable |
+| Verbosity bias | LLM-judge rates longer outputs higher; normalize by length |
+| Positional bias | Judge prefers first-presented output; swap-and-average |
+| Conflating with quality_gate | Continuous scores carry gradient; thresholding discards it |
+| Static criteria | Criteria become trivially satisfied; refresh each cycle |
 ## Application Loops
-1. **RLHF**: reward_signal -> reward model training -> PPO policy optimization -> deployment
-2. **DPO**: preference pairs -> direct policy optimization (no reward model) -> deployment
-3. **Filtering**: score outputs during generation -> filter below baseline -> include only high-quality in training data
-4. **Monitoring**: per-turn scoring in production -> alert when rolling average falls below baseline -> trigger retraining
+1. **RLHF**: reward_signal -> reward model -> PPO -> deployment
+2. **DPO**: preference pairs -> direct policy optimization -> deployment
+3. **Filtering**: score outputs -> exclude below baseline -> training data
+4. **Monitoring**: per-turn scores -> alert on rolling average drop -> retraining
 ## References
-- Ziegler et al. (2019): Fine-tuning language models from human preferences
-- Rafailov et al. (2023): Direct Preference Optimization
-- Bai et al. (2022): Constitutional AI — Anthropic
-- Zheng et al. (2023): Judging LLM-as-a-Judge with MT-Bench
-- clig.dev equivalent for reward signals: reward-bench.github.io
+- Rafailov (2023): DPO | Bai (2022): Constitutional AI | Zheng (2023): LLM-as-Judge | reward-bench.github.io

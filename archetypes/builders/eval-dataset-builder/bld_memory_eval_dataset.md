@@ -21,46 +21,31 @@ keywords: [eval dataset, splits, schema fields, expected output, data leakage, b
 ---
 
 ## Summary
-Eval datasets are consumed by automated evaluation pipelines, not just humans. The difference between a dataset that integrates cleanly and one that causes silent failures comes down to three spec-time decisions: split declaration, schema_fields enumeration, and size accuracy. All three are invisible during happy-path exploration and catastrophic when absent in automated evaluation.
-
-A dataset without declared splits forces the consuming pipeline to make assumptions — typically "use everything as test data" — which causes train/validation contamination in any workflow that has a training phase. Floating-point split values that drift from 1.0 by as little as 0.001 cause silent case omission in some frameworks (HuggingFace rounds; LangSmith rejects).
-
+Eval datasets are consumed by automated evaluation pipelines, not just humans. The difference between a dataset that integrates cleanly and one that causes silent failures comes down to three spec-time decisions: split declaration, schema_fields enumeration, and size accuracy. All three are invisible during happy-path exploration and catastrophic when absent in automated evaluation. Float split values drifting from 1.0 by as little as 0.001 cause silent case omission in some frameworks.
 ## Pattern
 **Explicit splits + schema_fields + eval-only default.**
 
 Split declaration rules:
 - Always declare splits explicitly — never leave splits absent
 - Default for pure evaluation: `test: 1.0` (no train, no val)
-- If training use is confirmed: document rationale for train percentage
 - Verify float arithmetic: `0.7 + 0.2 + 0.1 = 1.0` (not 0.9999999)
 - Use 3 decimal places max; round to avoid float drift
 
 Schema_fields rules:
-- List every field present in each test case in the frontmatter
 - Minimum required: `input`, `expected_output`
 - Each field in schema_fields MUST have a ## Schema subsection in body
-- Framework adapter field names may differ (Braintrust uses `expected`, not `expected_output`) — document the mapping
+- Document framework adapter field name differences (Braintrust: `expected` not `expected_output`)
 
 Size rules:
 - Always integer — "a few hundred" is not acceptable
-- If size will grow: declare current size + target size + growth cadence
-- Size must match total cases across all splits (train_cases + test_cases + val_cases = size)
+- Size must match total cases across all splits
 
 Versioning rules:
-- `1.0.0` initial release
-- `1.x.0` new schema field added (backward-compatible, old consumers still work)
-- `2.0.0` breaking schema change (field renamed, removed, or type changed)
-- `1.0.x` data correction (same schema, fixed cases — re-run evals for reproducibility)
-
+- `1.0.0` initial; `1.x.0` new field (backward-compatible); `2.0.0` breaking change; `1.0.x` data correction
 ## Anti-Pattern
-- Omitting splits entirely (pipeline assumes all-test; training contamination risk).
-- Float drift in splits (0.7 + 0.2 + 0.1 = 0.9999999 in some languages — always verify sum).
-- Missing expected_output from schema_fields (cannot compute automated metrics).
-- Putting actual test case data rows in the artifact body (spec bloat; data belongs in registry).
-- Confusing eval_dataset with golden_test: a golden_test is ONE exemplary case scoring 9.5+; an eval_dataset is a COLLECTION.
-- Confusing eval_dataset with benchmark: benchmark measures performance; dataset is the input.
+- Omitting splits entirely: pipeline assumes all-test; training contamination risk.
+- Float drift in splits: 0.7 + 0.2 + 0.1 = 0.9999999 in some languages — always verify sum.
+- Missing expected_output from schema_fields: cannot compute automated metrics.
+- Putting actual test case rows in the artifact body: spec bloat; data belongs in registry.
+- Confusing eval_dataset with golden_test: a golden_test is ONE exemplary case; eval_dataset is a COLLECTION.
 - Framework field name mismatch undocumented (Braintrust `expected` vs spec `expected_output`).
-- Size declared as string or range ("~200") instead of integer.
-
-## Context
-The 4096-byte body limit for eval_dataset is generous enough to include schema detail, split rationale, and a framework loading snippet without feeling cramped. Write schema_fields in frontmatter first (forces schema decision before prose), then allocate body bytes: Overview (100) + Schema (800) + Splits (400) + Integration (600) = ~1900, leaving ample room for detail. The `source` field is required because human-curated and synthetic datasets have very different reliability profiles — always declare it so consumers know how much to trust ground truth labels.

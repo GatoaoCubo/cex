@@ -44,7 +44,7 @@ few_shot:
   - input: "Q: What is the revenue of Acme Corp? Context: Acme Corp was founded in 1995 and employs 500 people."
     output: "Acme Corp revenue is approximately $50 million based on its employee count."
     score: 1
-    rationale: "Answer introduces $50M figure not present in context (faithfulness=1). Answer attempts relevance but fabricates the key fact. Hallucinated financial data from headcount is a critical faithfulness failure."
+    rationale: "Answer introduces $50M figure not present in context (faithfulness=1). Hallucinated financial data from headcount is a critical faithfulness failure."
 framework: deepeval
 temperature: 0.0
 chain_of_thought: true
@@ -52,34 +52,14 @@ aggregation: mean
 pass_threshold: 3.5
 ```
 ## Overview
-Evaluates RAG pipeline outputs on two independent quality dimensions: faithfulness (claims supported by retrieved context) and answer relevance (response addresses the user question). Reference-based judge — requires input question and retrieved context.
+Evaluates RAG pipeline outputs on faithfulness (claims supported by retrieved context) and answer relevance (response addresses the user question). Reference-based judge — requires input question and retrieved context.
 ## Criteria
 ### faithfulness
-Every factual claim in the output must be traceable to the provided context. Penalizes hallucination, inference beyond context, and unsupported assertions.
-High score (5): all claims directly supported by context; no fabricated facts.
-Low score (1): key claims contradict or are absent from context; hallucination present.
+Every factual claim must be traceable to context. High (5): all claims supported. Low (1): key claims hallucinated.
 ### answer_relevance
-The output must directly address the user's question. Penalizes off-topic responses, partial answers, and excessive irrelevant elaboration.
-High score (5): response fully addresses the question with no off-topic content.
-Low score (1): response fails to address the question or is entirely off-topic.
+Output must directly address the question. High (5): fully addresses with no off-topic content. Low (1): fails to address or entirely off-topic.
 ## Scale
-Type: likert | Range: 1-5
-| Score | Label | Meaning |
-|-------|-------|---------|
-| 1 | Failing | Critical failure — hallucination or complete irrelevance |
-| 3 | Acceptable | Partial compliance with notable gaps |
-| 5 | Excellent | Full compliance, no gaps detected |
-## Few-Shot Examples
-### Example 1 (high score)
-Input: "Q: What is the capital of France? Context: Paris is the capital and largest city of France."
-Output: "The capital of France is Paris."
-Score: 5 / 5
-Rationale: Claim directly supported by context. Answer precisely addresses question. No extraneous claims.
-### Example 2 (low score)
-Input: "Q: What is Acme Corp revenue? Context: Acme Corp was founded in 1995."
-Output: "Acme Corp revenue is $50M."
-Score: 1 / 5
-Rationale: Revenue figure absent from context. Hallucinated critical fact. Faithfulness failure dominates.
+Type: likert | Range: 1-5 | 1=Failing, 3=Acceptable, 5=Excellent
 
 WHY THIS IS GOLDEN:
 - quality: null (H05 pass)
@@ -88,12 +68,7 @@ WHY THIS IS GOLDEN:
 - judge_model is concrete identifier "gpt-4o" (H07 pass)
 - criteria list matches ## Criteria section names exactly (H08 pass)
 - scale has min, max, 3 anchors (H09 pass)
-- 2 few_shot examples with scores within 1-5 range and rationale (soft pass)
-- chain_of_thought: true (reduces hallucinated scores)
-- temperature: 0.0 (reproducibility)
-- framework: deepeval declared (integration ready)
-- pass_threshold: 3.5 (downstream decision documented)
-- criteria are non-overlapping (faithfulness != relevance)
+- chain_of_thought: true, temperature: 0.0, framework declared, pass_threshold set
 
 ## Anti-Example
 INPUT: "Create a judge to score responses"
@@ -118,9 +93,3 @@ FAILURES:
 4. judge_model: "" (empty, not a concrete identifier) -> H07 FAIL
 5. Missing fields: pillar, version, created, updated, author, name, tldr -> H06 FAIL
 6. scale: "1-10" is a string, not a structured map with anchors -> H09 FAIL
-7. tags: only 1 item, missing "llm_judge" -> soft FAIL
-8. criteria: ["quality"] is a single vague dimension with no definition -> soft FAIL
-9. No few_shot examples — judge will drift on edge cases -> soft FAIL
-10. No scale anchors — "1-10" without labels is unactionable -> H09 FAIL
-11. Body missing ## Scale, ## Few-Shot Examples sections -> soft FAIL
-12. criterion "quality" is not a measurable dimension — what does "quality" mean? -> soft FAIL

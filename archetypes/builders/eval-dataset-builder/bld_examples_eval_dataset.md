@@ -39,39 +39,25 @@ license: "MIT"
 refresh_cadence: "on-demand"
 ```
 ## Overview
-Tests the CEX artifact quality gate validator across all 10 HARD gate conditions.
-Used by EDISON to verify artifact validation logic and by CI to catch regression in gate checks.
+Tests the CEX artifact quality gate validator across all 10 HARD gate conditions. Used by EDISON to verify validation logic and by CI to catch regression in gate checks.
 ## Schema
 ### input
-Type: dict
-The artifact under evaluation — contains `frontmatter` (dict) and `body` (string).
+Type: dict. The artifact under evaluation — `frontmatter` (dict) and `body` (string).
 Example: `{"frontmatter": {"id": "p04_cli_foo", "kind": "cli_tool", "quality": null}, "body": "## Commands\n..."}`
 ### expected_output
-Type: dict
-The expected gate result — contains `passed` (bool), `failures` (list[string]), `score` (float or null).
+Type: dict. Expected gate result — `passed` (bool), `failures` (list[string]), `score` (float or null).
 Example: `{"passed": false, "failures": ["H05: quality is not null"], "score": null}`
 ### metadata
-Type: dict
-Case-level annotations for filtering and analysis.
+Type: dict. Case-level annotations for filtering and analysis.
 Values: `{gate_id: "H05", failure_mode: "quality_not_null", difficulty: "easy", artifact_kind: "cli_tool"}`
 ## Splits
-| Split | Percentage | Cases | Rationale |
-|-------|-----------|-------|-----------|
-| test | 100% | 200 | Pure evaluation — no training use for a rule-based validator |
-Total: 100% (200 cases)
-Split rationale: Quality gate validation is deterministic rule-checking, not learned behavior. All cases are test-only to maximize coverage signal per case.
+| Split | Percentage | Cases |
+|-------|-----------|-------|
+| test | 100% | 200 |
+
+Pure evaluation — no training use for a rule-based validator. All cases are test-only.
 ## Integration
-Framework: braintrust
-Loading:
-```python
-import braintrust
-project = braintrust.init("cex-quality-gates")
-dataset = project.datasets.create(name="p07_ds_artifact_quality_gate_eval")
-for case in dataset:
-    result = validate_artifact(case["input"]["frontmatter"], case["input"]["body"])
-    # compare to case["expected"]
-```
-Version migration: v1 -> v2 adds `gate_weights` to metadata dict. Load both versions with `dataset.pull(version="1.0.0")` for reproducibility.
+Framework: braintrust. Loading: `project.datasets.create(name="p07_ds_artifact_quality_gate_eval")` — iterate cases, call `validate_artifact(case["input"]["frontmatter"], case["input"]["body"])`, compare to `case["expected"]`.
 
 WHY THIS IS GOLDEN:
 - quality: null (H05 pass)
@@ -81,12 +67,6 @@ WHY THIS IS GOLDEN:
 - splits: test: 1.0 sums to 1.0 (H08 pass)
 - size: 200 positive integer (H09 pass)
 - body has all 4 sections: Overview, Schema, Splits, Integration (H10 pass)
-- schema_fields list matches ## Schema section names exactly
-- source declared as synthetic (SOFT pass)
-- framework specified as braintrust with loading snippet (SOFT pass)
-- split rationale explains why train is absent (SOFT pass)
-- task_type: classification matches schema design (SOFT pass)
-
 ## Anti-Example
 INPUT: "Create eval dataset for testing my chatbot"
 BAD OUTPUT:
@@ -110,9 +90,3 @@ FAILURES:
 4. quality: 8.5 (not null) -> H05 FAIL
 5. size: "a lot" not a positive integer -> H09 FAIL
 6. Missing fields: splits, schema_fields, version, created, updated, author, tldr -> H06 FAIL
-7. splits absent — cannot verify they sum to 1.0 -> H08 FAIL
-8. schema_fields absent — input and expected_output not declared -> H07 FAIL
-9. tags: only 1 item, missing "eval_dataset" -> SOFT FAIL
-10. Body missing ## Schema, ## Splits, ## Integration sections -> H10 FAIL
-11. "Cases" section contains prose descriptions, not schema — actual data in spec body -> SOFT FAIL
-12. No source, framework, or task_type declared -> multiple SOFT FAIL

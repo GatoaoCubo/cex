@@ -32,16 +32,6 @@ output_buffer      --consumed_by-> injection_point
 output_buffer      --indexed_by->  retrieval_index
 freshness_tracker  --weights-->    output_buffer
 ```
-| From | To | Type | Data |
-|------|----|------|------|
-| source_content | compression_engine | feeds | raw turns/tokens to compress |
-| retention_policy | compression_engine | constrains | what must survive in output |
-| trigger | compression_engine | activates | fires pass when threshold crossed |
-| source_window | compression_engine | scopes | limits input slice per pass |
-| compression_engine | output_buffer | produces | compressed summary text |
-| output_buffer | injection_point | consumed_by | summary prepended to LLM prompt |
-| output_buffer | retrieval_index | indexed_by | summary embedded for semantic search |
-| freshness_tracker | output_buffer | weights | decay reduces relevance score over time |
 
 ## Boundary Table
 | memory_summary IS | memory_summary IS NOT |
@@ -50,8 +40,7 @@ freshness_tracker  --weights-->    output_buffer
 | Compressed representation of past context | Persistent learned behavioral pattern (that is learning_record) |
 | Injected into context at runtime (llm_function: INJECT) | Static domain knowledge artifact (that is knowledge_card) |
 | Produced by a compression pass (abstractive/extractive/hybrid/sliding_window) | Raw transcript or full session log |
-| Has trigger threshold and retention policy | A real-time streaming buffer |
-| Decays in relevance over time (freshness_decay) | Immutable reference document |
+| Has trigger threshold and retention policy | Immutable reference document |
 
 ## Layer Map
 | Layer | Components | Purpose |

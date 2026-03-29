@@ -15,15 +15,14 @@ Secret configs are credential management specifications that define how sensitiv
 |----------|-------|
 | Pillar | P09 (Config) |
 | llm_function | GOVERN |
-| Layer | runtime |
 | Providers | vault, k8s, aws, portkey, 1password, sops |
 | Access patterns | dynamic, static, injected, env |
 | Rotation methods | automatic, manual, triggered |
-| Encryption at-rest | AES-256-GCM, KMS, SOPS-age, envelope |
+| Encryption at-rest | AES-256-GCM, KMS, SOPS-age |
 | Encryption in-transit | TLS 1.3, mTLS |
 ## Provider Patterns
-| Provider | Auth Method | Retrieval | Rotation Support |
-|----------|------------|-----------|-----------------|
+| Provider | Auth Method | Retrieval | Rotation |
+|----------|------------|-----------|----------|
 | HashiCorp Vault | AppRole, K8s SA, JWT | Dynamic lease, KV v2 | Native auto-rotation |
 | Kubernetes Secrets | SA token, RBAC | Volume mount, env inject | External via ESO |
 | AWS Secrets Manager | IAM role, IRSA | SDK/API, Lambda layer | Native scheduled rotation |
@@ -31,31 +30,25 @@ Secret configs are credential management specifications that define how sensitiv
 | 1Password Connect | Service account token | SDK, CLI, operator | Manual + vault policy |
 | SOPS | age key, KMS key | CLI decrypt, pre-commit | Key rotation via re-encrypt |
 ## Rotation Policy Patterns
-- **Automatic**: provider rotates on schedule; agents get new value on next lease/fetch (Vault, AWS SM)
-- **Manual**: operator rotates; agents notified via signal or restart (1Password, static K8s secrets)
-- **Triggered**: rotation fires on breach detection, certificate expiry, or pipeline event
-- **On-breach**: emergency rotation protocol — invalidate all leases, rotate immediately, audit trail required
-| Pattern | Frequency | Risk Profile | Use Case |
-|---------|-----------|-------------|----------|
-| Automatic daily | 24h | Low | API keys, service tokens |
-| Weekly | 7d | Medium | DB passwords |
-| Monthly | 30d | Medium-high | Certificate renewal |
-| On-breach | Immediate | Critical | Compromise response |
+| Pattern | Frequency | Use Case |
+|---------|-----------|----------|
+| Automatic daily | 24h | API keys, service tokens |
+| Weekly | 7d | DB passwords |
+| Monthly | 30d | Certificate renewal |
+| On-breach | Immediate | Compromise response |
 ## Access Patterns
-- **dynamic**: agent requests a short-lived lease from provider at runtime (Vault dynamic secrets, AWS STS)
-- **static**: secret fetched once at deploy time and cached; rotated by re-deploy
-- **injected**: sidecar or init container injects secret as file or env at pod start (K8s CSI driver, Vault Agent)
-- **env**: secret injected as environment variable via platform (Railway, Heroku, Render env vars)
+- **dynamic**: agent requests short-lived lease at runtime (Vault dynamic secrets, AWS STS)
+- **static**: secret fetched once at deploy time; rotated by re-deploy
+- **injected**: sidecar/init container injects secret as file or env at pod start
+- **env**: secret injected as environment variable via platform (Railway, Heroku)
 ## Anti-Patterns
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
 | Plaintext secrets in config | Credential leak; violates every security standard |
 | No rotation policy | Stale credentials; breach window grows unbounded |
-| Missing encryption at-rest | Data-at-rest exposure if storage is compromised |
 | access_pattern unspecified | Agents cannot know how to retrieve at runtime |
 | Reusing secrets across environments | Single breach compromises all environments |
 | No audit_log | Impossible to detect unauthorized access |
-| Hardcoded secret paths | Path changes break all consumers silently |
 ## Application
 1. Choose provider based on runtime platform and team capability
 2. Define rotation_policy: frequency + method matching risk profile
@@ -65,8 +58,4 @@ Secret configs are credential management specifications that define how sensitiv
 6. Enable audit_log always
 7. Define fallback provider for high-availability secrets
 ## References
-- HashiCorp Vault: secrets engine, dynamic secrets, AppRole auth
-- Kubernetes External Secrets Operator (ESO)
-- AWS Secrets Manager rotation Lambda patterns
-- SOPS: Secrets OPerationS — file-based encrypted secrets with age/KMS
-- OWASP Secrets Management Cheat Sheet
+- HashiCorp Vault dynamic secrets | Kubernetes External Secrets Operator (ESO) | AWS Secrets Manager rotation | SOPS age/KMS | OWASP Secrets Management Cheat Sheet

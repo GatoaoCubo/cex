@@ -21,38 +21,20 @@ keywords: [ADR, architecture decision, context, consequences, options, status, s
 ---
 
 ## Summary
-Architecture Decision Records fail in two distinct ways: they are never written (no record), or they are written incompletely (context missing, options absent, consequences optimistic). The second failure mode is more insidious because it produces false confidence — a reader finds an ADR and trusts it, not realizing the rationale is incomplete or the context has changed.
-The context section is the most load-bearing field. It answers: "should I still follow this decision, or has the situation changed?" An ADR with no context cannot be evaluated without external research. An ADR with a complete context can be superseded confidently when the forces change.
+ADRs fail in two ways: never written, or written incompletely. The second is more insidious — a reader finds an ADR and trusts it without realizing the rationale is incomplete or context has changed. The context section is the most load-bearing field: it answers whether to still follow the decision, or whether the situation has changed.
+
 ## Pattern
 **Write context first. Options prove deliberation. Consequences must include negatives.**
-Context section rules:
-- Write it before composing the Decision section — this forces clarity about what problem is being solved
-- State forces, constraints, and the current situation — NOT the decision
-- 2-5 sentences; enough for a future engineer to evaluate if the forces still apply
-- Past or present tense for circumstances; the reader needs to know what was true when this was written
-Options section rules:
-- Always list at least 2 options — a decision with one option is not a decision, it is an announcement
-- Include honest cons for the chosen option — if the chosen option has no cons, the analysis is incomplete
-- Name options concretely (not "Option A/B" — use descriptive names like "PostgreSQL with JSONB" vs "MongoDB")
-Consequences section rules:
-- Always include at least one negative consequence — every real architectural decision has tradeoffs
-- Distinguish positive, negative, and neutral — a flat list obscures the tradeoff signal
-- Be specific: "increases deployment complexity for teams without Kubernetes experience" not "adds complexity"
-Status lifecycle rules:
-- Assign status at creation: proposed if not yet ratified, accepted if already in effect
-- When technology changes make an ADR obsolete: create a new ADR and mark the old one superseded
-- When a decision area is abandoned without replacement: mark deprecated (no superseded_by needed)
-- Never edit an accepted ADR's decision field — create a superseding ADR instead
+- Context: write before the Decision section; state forces and constraints, NOT the decision; 2-5 sentences in past/present tense
+- Options: always list >= 2 with descriptive names; include honest cons for the chosen option
+- Consequences: always include >= 1 negative; distinguish positive/negative/neutral; be specific not vague
+- Status: assign at creation (proposed/accepted); superseded requires superseded_by; deprecated needs no replacement link; never edit an accepted ADR's decision — create a superseding one
+
 ## Anti-Pattern
-- Missing context section: reader cannot evaluate if the decision still applies in their situation
-- Single option documented: proves no alternatives were considered — not a real decision record
-- Only positive consequences: every architectural decision has tradeoffs; hiding them creates technical debt surprises
-- Editing an accepted ADR's decision text: destroys the audit trail. Create a new ADR with supersedes link
-- Treating ADR as a law: ADRs document revisable choices; laws are inviolable. Conflating them makes legitimate supersession feel like a rule violation
-- Treating ADR as a pattern: ADRs are single-instance records for a specific context; patterns are reusable prescriptions. An ADR documenting "we use REST for our public API" is not a pattern prescribing REST for all APIs
-- Vague decision text: "We will use microservices" — too vague. State which services, what decomposition, why, and what the service boundary rule is
-- No status assigned: a floating ADR cannot be superseded, deprecated, or enforced
-## Context
-The 4096-byte body limit for decision_record is generous compared to other P08 artifacts because context and options sections require prose. Allocate body bytes from a fixed budget: Context (400) + Options (1200) + Decision (400) + Consequences (400) = ~2400 bytes typical, leaving 1600 bytes for complex decisions with 4+ options.
-The id slug should describe the decision topic, not the outcome: `p08_adr_api_versioning_strategy` not `p08_adr_chose_semver`. The topic persists; the chosen option may be superseded.
-Status is the primary operational signal. Tooling that filters for `status: accepted` retrieves the binding decisions. Tooling that filters for `status: superseded` retrieves the history. Both are useful; neither should be deleted.
+- Missing context: reader cannot evaluate if the decision still applies
+- Single option: proves no alternatives were considered
+- Only positive consequences: hides tradeoffs, creates technical debt surprises
+- Editing accepted ADR decision text: destroys audit trail
+- Treating ADR as a law: ADRs are revisable; laws are inviolable
+- Vague decision text: state which services, boundaries, and why
+- No status assigned: cannot be superseded, deprecated, or enforced

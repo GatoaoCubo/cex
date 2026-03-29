@@ -9,7 +9,7 @@ sources: Braintrust experiment comparison, Promptfoo --compare, LangSmith A/B ex
 
 # Domain Knowledge: regression_check
 ## Executive Summary
-Regression checks are comparison configurations that measure a current LLM system against a known-good baseline to detect quality degradation. They define what to compare (metrics), against what (baseline_ref), and how much deviation is acceptable (threshold). A regression_check does NOT measure absolute performance — it only answers: "is this version worse than the reference?"
+Regression checks compare a current LLM system against a known-good baseline to detect quality degradation. They define what to compare (metrics), against what (baseline_ref), and how much deviation is acceptable (threshold). A regression_check does NOT measure absolute performance — it only answers: "is this version worse than the reference?"
 ## Spec Table
 | Property | Value |
 |----------|-------|
@@ -21,41 +21,22 @@ Regression checks are comparison configurations that measure a current LLM syste
 | max_bytes | 2048 |
 | Required fields | id, name, baseline_ref, threshold, metrics |
 ## Tool Integrations
-### Braintrust
-- Baseline = named experiment (e.g., `experiment/prod-v1.2`)
-- Comparison via experiment diff UI or `braintrust eval --compare <baseline>`
-- Metrics: scores defined in eval functions (accuracy, hallucination, coherence)
-- Threshold: percentage drop in aggregate score triggers alert
-- Output: diff table with per-metric delta and statistical significance
-### Promptfoo --compare
-- Baseline = previous run results file or named config version
-- Invocation: `promptfoo eval --compare baseline.json`
-- Metrics: pass rate, assertion scores, latency percentiles
-- Threshold: configurable per assertion in `promptfooconfig.yaml`
-- Output: diff report showing regressions highlighted in red
-### LangSmith A/B Experiments
-- Baseline = dataset + evaluator run tagged as reference
-- Comparison: create experiment, compare against reference run in UI
-- Metrics: evaluator scores (correctness, helpfulness, groundedness)
-- Threshold: manual review or automated via feedback tags
-- Output: side-by-side score comparison with statistical summary
-### DeepEval Regression Tests
-- Baseline = stored metrics from previous test run (`deepeval test run --save`)
-- Comparison: `deepeval test run --compare-to <baseline_file>`
-- Metrics: GEval, Faithfulness, AnswerRelevancy, Hallucination
-- Threshold: `min_score` per metric in test config
-- Output: pass/fail per metric with delta from baseline
+| Tool | Baseline | Invocation | Output |
+|------|----------|-----------|--------|
+| Braintrust | Named experiment (e.g., `experiment/prod-v1.2`) | `braintrust eval --compare <baseline>` | Diff table with per-metric delta |
+| Promptfoo | Previous run file or named config version | `promptfoo eval --compare baseline.json` | Diff report, regressions in red |
+| LangSmith | Dataset + evaluator run tagged as reference | Compare experiment in UI | Side-by-side score comparison |
+| DeepEval | Stored metrics from prior run (`--save`) | `deepeval test run --compare-to <file>` | pass/fail per metric with delta |
 ## Patterns
-- **Baseline capture**: always tag baselines at release or deploy — never compare against a moving target
-- **Threshold calibration**: start at 5% relative deviation; tighten to 2% for production-critical pipelines
-- **Multi-metric comparison**: compare all relevant dimensions simultaneously — a latency win masking accuracy regression is a false positive
-- **Statistical significance**: for stochastic models, require minimum sample size before declaring regression
 | Pattern | When to use |
 |---------|-------------|
 | relative threshold | Percentage deviation from baseline (most common) |
 | absolute threshold | Fixed score floor (e.g., accuracy must stay >= 0.85) |
 | composite threshold | Weighted combination of multiple metrics |
 | per-metric threshold | Different tolerance per dimension |
+- **Baseline capture**: tag baselines at release or deploy — never compare against a moving target
+- **Threshold calibration**: start at 5% relative deviation; tighten to 2% for production-critical pipelines
+- **Statistical significance**: for stochastic models, require minimum sample size before declaring regression
 ## Anti-Patterns
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
@@ -73,7 +54,4 @@ Regression checks are comparison configurations that measure a current LLM syste
 | Config for framework execution | Validates single reference case (golden_test) |
 | Runtime gate for deploy/PR | Fast sanity check (smoke_eval) |
 ## References
-- Braintrust: braintrustdata.com/docs/guides/evals
-- Promptfoo: promptfoo.dev/docs/configuration/guide
-- LangSmith: docs.smith.langchain.com/evaluation
-- DeepEval: docs.confident-ai.com/docs/regression-testing
+- Braintrust: braintrustdata.com/docs/guides/evals | Promptfoo: promptfoo.dev/docs | LangSmith: docs.smith.langchain.com/evaluation | DeepEval: docs.confident-ai.com

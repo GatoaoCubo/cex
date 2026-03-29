@@ -26,32 +26,31 @@ density_score: 0.90
 All must pass (AND logic). Any single failure = REJECT.
 | ID | Check | Fail Condition |
 |---|---|---|
-| H01 | Frontmatter parses as valid YAML | Parse error on frontmatter block |
-| H02 | ID matches `^p08_adr_[a-z][a-z0-9_]+$` | ID contains uppercase, hyphens in slug, or missing prefix |
-| H03 | ID equals filename stem | `id: p08_adr_foo` but file is `p08_adr_bar.md` |
-| H04 | Kind equals literal `decision_record` | `kind: adr` or `kind: record` or any other value |
-| H05 | Quality field is null | `quality: 8.0` or any non-null value |
-| H06 | Required fields present: id, title, status, context, decision | Any of these five fields missing or empty |
-| H07 | Status is one of: proposed, accepted, deprecated, superseded | `status: active` or unrecognized value |
-| H08 | Body contains all 4 required sections | Missing ## Context, ## Options Considered, ## Decision, or ## Consequences |
-| H09 | At least 2 options documented in ## Options Considered | Only 1 option or section is empty |
-| H10 | If status == superseded: superseded_by field is populated | Status is superseded but superseded_by is null or absent |
+| H01 | Frontmatter parses as valid YAML | Parse error |
+| H02 | ID matches `^p08_adr_[a-z][a-z0-9_]+$` | Uppercase, hyphens, or missing prefix |
+| H03 | ID equals filename stem | ID/filename mismatch |
+| H04 | Kind equals literal `decision_record` | Any other value |
+| H05 | Quality field is null | Any non-null value |
+| H06 | Required fields present: id, title, status, context, decision | Any missing or empty |
+| H07 | Status is one of: proposed, accepted, deprecated, superseded | Unrecognized value |
+| H08 | Body contains all 4 required sections | Missing Context, Options, Decision, or Consequences |
+| H09 | At least 2 options in ## Options Considered | Only 1 or empty |
+| H10 | If status == superseded: superseded_by populated | superseded_by null or absent |
 ## SOFT Scoring
-Weights sum to 100%.
 | Dimension | Weight | Criteria |
 |---|---|---|
-| Context quality | 1.5 | Context clearly explains the forces and constraints; reader understands why a decision was needed without prior knowledge |
-| Options completeness | 1.5 | Each option has name, description, pros, and cons; no option is listed without evaluation |
-| Decision clarity | 1.5 | Decision section states the chosen option in the first sentence; rationale is explicit and references the options |
-| Consequence honesty | 1.5 | At least one negative consequence documented; consequences are specific (not generic "adds complexity") |
-| Status accuracy | 1.0 | Status matches actual state; supersession links are bidirectional and traversable |
-| Tradeoff specificity | 1.0 | Tradeoffs name concrete effects (e.g., "increases cold start time by ~200ms") not vague claims |
-| Options count | 0.5 | 3+ options considered signals thorough evaluation; 2 is minimum, 1 is a hard fail |
-| Deciders documented | 0.5 | deciders field populated so accountability is traceable |
-| Related ADRs linked | 0.5 | related_to populated where architectural dependencies exist |
-| Boundary clarity | 1.0 | Explicitly not a law (inviolable), not a pattern (reusable), not a diagram — single decision record |
-| Domain specificity | 1.0 | Context, decision, and consequences are specific to the declared domain problem — not generic boilerplate |
-| Future guidance | 0.5 | Consequences section gives future engineers enough signal to decide whether to revisit this ADR |
+| Context quality | 1.5 | Forces and constraints clear; reader understands why a decision was needed |
+| Options completeness | 1.5 | Each option has name, description, pros, cons |
+| Decision clarity | 1.5 | Chosen option stated first; rationale references options |
+| Consequence honesty | 1.5 | >= 1 negative consequence; consequences are specific |
+| Status accuracy | 1.0 | Status matches actual state; supersession links traversable |
+| Tradeoff specificity | 1.0 | Concrete effects named, not vague claims |
+| Options count | 0.5 | 3+ signals thorough evaluation; 2 is minimum |
+| Deciders documented | 0.5 | deciders field populated |
+| Related ADRs linked | 0.5 | related_to populated where dependencies exist |
+| Boundary clarity | 1.0 | Explicitly not a law, not a pattern, not a diagram |
+| Domain specificity | 1.0 | Context/decision/consequences specific to declared domain |
+| Future guidance | 0.5 | Consequences give signal to decide whether to revisit |
 ## Actions
 | Score | Tier | Action |
 |---|---|---|
@@ -62,8 +61,7 @@ Weights sum to 100%.
 ## Bypass
 | Field | Value |
 |---|---|
-| conditions | Provisional ADR created under time pressure; author commits to full review within 7 days |
-| approver | Author self-certification with expiry date comment in frontmatter |
-| audit_trail | Bypass note with expiry date in frontmatter comment |
-| expiry | 7d — provisional ADRs must reach >= 7.0 or be deprecated |
-| never_bypass | H01 (unparseable YAML breaks tooling), H05 (self-scored gates corrupt quality metrics), H07 (invalid status breaks lifecycle tooling) |
+| conditions | Provisional ADR under time pressure; full review within 7 days |
+| approver | Author self-certification with expiry date in frontmatter comment |
+| expiry | 7d — must reach >= 7.0 or be deprecated |
+| never_bypass | H01 (breaks tooling), H05 (corrupts metrics), H07 (breaks lifecycle tooling) |

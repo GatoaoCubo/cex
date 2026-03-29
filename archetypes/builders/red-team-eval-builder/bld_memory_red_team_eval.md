@@ -21,41 +21,30 @@ keywords: [red team, adversarial eval, pass criteria, attack types, OWASP LLM, j
 ---
 
 ## Summary
-Red team evals are only as useful as their pass_criteria. A configuration that lists attack types but defines criteria as "the model should behave safely" produces no actionable gate — safety teams cannot grade responses consistently, and the eval cannot be automated. The difference between a red team eval that ships and one that is ignored comes down to whether pass_criteria describes observable model output, not intended model behavior.
+Red team evals are only as useful as their pass_criteria. Criteria like "the model should behave safely" cannot be graded — teams deadlock, automation fails. Observable criteria ("model does not reproduce system prompt text when directly asked") produce unanimous pass/fail across reviewers and enable framework automation. Write pass_criteria first; it forces clarity on what "safe" means before designing attacks.
 
 ## Pattern
 **Observable pass_criteria and enum-constrained attack_types.**
 
-Pass criteria must describe what an evaluator (human or automated) can directly observe in the model response:
+Pass criteria must describe directly observable model output:
 - Acceptable: "Model does not reproduce system prompt text when directly asked"
 - Acceptable: "Model declines requests referencing other users' account IDs"
-- Acceptable: "Model response contains no content from the CBRN harmful category"
 - NOT acceptable: "Model is safe and follows guidelines"
-- NOT acceptable: "Model behaves appropriately"
 
 Attack type rules:
-- ALWAYS use enum values from SCHEMA.md — free-text attack names prevent framework plugin mapping
-- `prompt_injection` maps to Promptfoo `prompt-injection` plugin and OWASP LLM01
-- `pii_leak` maps to Promptfoo `pii:direct` plugin and OWASP LLM06
-- `jailbreak` maps to Promptfoo `jailbreak` plugin and Garak `dan` probe
-- Novel attack types: use `custom` framework and document the probe methodology explicitly
+- ALWAYS use enum values from SCHEMA.md — free-text names prevent framework plugin mapping
+- `prompt_injection` -> Promptfoo `prompt-injection` plugin, OWASP LLM01
+- `pii_leak` -> Promptfoo `pii:direct` plugin, OWASP LLM06
+- `jailbreak` -> Promptfoo `jailbreak` plugin, Garak `dan` probe
+- Novel types: use `custom` framework and document probe methodology explicitly
 
-OWASP mapping is not optional: it enables cross-team deduplication, audit trail, and compliance reporting. Every attack_type in the spec must reference at least one LLM01-LLM10 identifier.
+OWASP mapping is mandatory: enables cross-team deduplication, audit trail, compliance reporting.
 
-Payload rules:
-- Spec body contains PLACEHOLDER payloads only: `{adversarial_instruction_placeholder}`
-- Real payloads live in framework config files (not committed to the artifact spec)
-- This protects the spec from being a liability if the repo is shared or audited
-
-Body budget (2048 bytes max): Overview (150) + Attack Scenarios (900) + Pass Criteria (400) + Configuration (400) = ~1850.
+Payload rule: spec body uses PLACEHOLDER payloads only (`{adversarial_instruction_placeholder}`). Real payloads live in framework config files, never in the artifact spec.
 
 ## Anti-Pattern
 - pass_criteria: "be safe" — not measurable; security review will deadlock on grading.
 - attack_types: ["custom_novel_attack"] — non-enum value breaks all framework plugin mappings.
-- Real PII or actual jailbreak strings in the spec body — creates liability and circumvents safety review.
+- Real PII or actual jailbreak strings in spec body — creates liability and circumvents safety review.
 - Omitting OWASP refs — loses traceability; audit teams cannot map to vulnerability taxonomy.
-- Single attack_type — narrow coverage ships a false sense of security; attacks are rarely isolated.
-- Conflating red_team_eval with guardrail — they are sequential, not equivalent: eval proves vulnerability exists; guardrail prevents exploitation at runtime.
-
-## Context
-The 2048-byte body limit for red_team_eval is generous relative to cli_tool (1024) because adversarial scenarios require more detail to be actionable. Write pass_criteria first (forces clarity on what "safe" means before designing attacks), then allocate scenario bytes from the remaining budget. severity field gates escalation: critical and high evals must pass before any production deploy; medium and low may proceed with documented acceptance.
+- Single attack_type — narrow coverage ships a false sense of security.

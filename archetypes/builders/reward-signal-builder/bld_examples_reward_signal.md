@@ -37,27 +37,24 @@ baseline: 0.70
 description: "Continuous quality score for customer support responses. Feeds RLHF reward model training monthly."
 ```
 ## Overview
-Measures whether agent responses in customer support fully resolve the user's problem
-with clarity, appropriate tone, and completeness. Consumed by the monthly RLHF training cycle.
+Measures whether agent responses in customer support resolve the user's problem with clarity, appropriate tone, and completeness. Consumed by the monthly RLHF training cycle.
 ## Signal Design
-- Type: scalar — a single LLM-judge pass produces a weighted 0-1 score; simpler than preference pairs for this domain because ground truth (resolution) is measurable
-- Scale: 0-1 — 0.0 = response fails to help, 0.5 = partial help with gaps, 1.0 = complete resolution with ideal tone
-- Model: claude-sonnet-4-6 — selected for calibrated instruction-following; verified >= 0.78 Spearman correlation against human raters on 200-sample holdout
-- Computation: judge model scores each criterion 0-1, weighted_mean applied (see Criteria), result rounded to 4 decimal places
-- Frequency: per_task — evaluated after each complete support exchange (not per turn, as resolution requires full context)
-- Aggregation: weighted_mean — problem_resolution weighted 2x others because it is the primary success criterion
+- Type: scalar — weighted 0-1 score from LLM-judge; simpler than preference pairs since resolution is measurable
+- Scale: 0.0 = fails to help, 0.5 = partial help, 1.0 = complete resolution with ideal tone
+- Model: claude-sonnet-4-6 — verified >= 0.78 Spearman correlation against human raters on 200-sample holdout
+- Aggregation: weighted_mean — problem_resolution weighted 2x others (primary success criterion)
 ## Criteria
-| Dimension | Weight | Low Score (0-0.3) | High Score (0.8-1.0) |
-|-----------|--------|-------------------|----------------------|
-| problem_resolution | 0.40 | Response ignores or misidentifies the problem | Problem fully resolved with clear steps |
-| clarity | 0.20 | Jargon-heavy, ambiguous, or contradictory | Simple language, unambiguous, scannable |
-| tone | 0.20 | Cold, dismissive, or overly formal | Warm, empathetic, appropriately casual |
-| completeness | 0.20 | Only partial answer; follow-up questions ignored | All sub-questions addressed explicitly |
-Baseline: 0.70 — responses scoring below 0.70 are excluded from RLHF chosen set and flagged for human review. Threshold set at P25 of human-rated gold responses.
+| Dimension | Weight | Low (0-0.3) | High (0.8-1.0) |
+|-----------|--------|-------------|----------------|
+| problem_resolution | 0.40 | Ignores or misidentifies problem | Fully resolved with clear steps |
+| clarity | 0.20 | Jargon-heavy, ambiguous | Simple language, unambiguous |
+| tone | 0.20 | Cold, dismissive | Warm, empathetic |
+| completeness | 0.20 | Partial answer only | All sub-questions addressed |
+
+Baseline: 0.70 (P25 of human-rated gold responses) — below baseline excluded from RLHF chosen set.
 ## Application
-- Loop: RLHF — scores above baseline become "chosen" samples; scores below become "rejected" samples; preference pairs constructed monthly for reward model fine-tuning
-- Consumer: training pipeline ingests (chosen, rejected) pairs from score differential > 0.15 to avoid noisy pairs
-- Cadence: per-task scoring in production; batch collected weekly; reward model retrained monthly on accumulated pairs
+- RLHF loop: scores above baseline = chosen; below = rejected; preference pairs constructed monthly
+- Consumer: training pipeline uses pairs with score differential > 0.15 to avoid noisy pairs
 WHY THIS IS GOLDEN:
 - quality: null (H05 pass)
 - id matches ^p11_rs_ pattern (H02 pass)
@@ -67,10 +64,9 @@ WHY THIS IS GOLDEN:
 - tags includes "reward_signal" (H09 pass)
 - all 4 body sections present (H10 pass)
 - 4 criteria with weights summing to 1.0 (S03 pass)
-- scale has semantic meaning at 0, 0.5, 1.0 (S02 pass)
 - model selection justified with calibration evidence (S05 pass)
 - RLHF application loop fully described (S08 pass)
-- boundary stated: not quality_gate, not scoring_rubric (S10 pass)
+
 ## Anti-Example
 INPUT: "Create reward signal for code quality"
 BAD OUTPUT:

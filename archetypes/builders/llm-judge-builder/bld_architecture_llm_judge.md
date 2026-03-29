@@ -38,27 +38,15 @@ pass_threshold   --depends-->   score
 quality_gate     --depends-->   score
 framework        --executes-->  judge_model
 ```
-| From | To | Type | Data |
-|------|----|------|------|
-| criterion | judge_prompt | shapes | evaluation dimension definitions |
-| scale | judge_prompt | shapes | anchor labels and score range |
-| few_shot | judge_model | calibrates | example (input, score, rationale) tuples |
-| evaluated_output | judge_prompt | provides | the response under evaluation |
-| reference | judge_prompt | provides | ground truth (optional, reference-based only) |
-| judge_model | score | produces | numeric score within declared scale |
-| judge_model | rationale | produces | chain-of-thought reasoning (if enabled) |
-| score | quality_gate | consumed_by | binary pass/fail decision downstream |
-| framework | judge_model | executes | API call with composed judge_prompt |
 
 ## Boundary Table
 | llm_judge IS | llm_judge IS NOT |
 |-------------|-----------------|
 | A judge configuration: model + criteria + scale + few_shot | A scoring rubric without a model (that is scoring_rubric) |
-| Produces a numeric score on a declared scale | A pipeline blocker that halts execution (that is quality_gate P11) |
+| Produces a numeric score on a declared scale | A pipeline blocker (that is quality_gate P11) |
 | Evaluates ONE response per invocation | A benchmark comparing systems across datasets |
 | Requires judge_model to be specified | A formula-based metric without LLM (that is metric) |
 | Calibrated via few_shot examples | An eval dataset/corpus (that is dataset) |
-| Part of P07 (Evals) layer | Not part of P04 (Tools) or P11 (Governance) |
 
 ## Layer Map
 | Layer | Components | Purpose |

@@ -39,38 +39,20 @@ cadence: on_deploy
 scope: "summarization-pipeline-v2"
 ```
 ## Overview
-Weekly regression gate for the summarization pipeline.
-Runs on every deployment attempt; blocks release if any metric drops beyond threshold vs the prior production experiment.
+Weekly regression gate for the summarization pipeline. Runs on every deployment attempt; blocks release if any metric drops beyond threshold vs the prior production experiment.
 ## Baseline
-**baseline_ref**: `experiment/summarization-prod-2026-03-22`
-The production experiment captured on 2026-03-22 after the v2.1 release passed QA. Represents the stable production quality bar.
-**Update policy**: Rotate baseline after each successful production deployment. Previous baseline archived with date tag.
+**baseline_ref**: `experiment/summarization-prod-2026-03-22` — production experiment captured after v2.1 release passed QA. Represents the stable production quality bar. Rotate baseline after each successful production deployment.
 ## Metrics
-### accuracy
-- **Definition**: Percentage of summaries rated correct by LLM judge (covers factual accuracy and completeness)
-- **Method**: Braintrust LLM-as-judge scorer comparing summary against source document
-- **Threshold**: 5.0% relative drop (lower is worse)
-- **Direction**: Decrease signals regression
-### faithfulness
-- **Definition**: Proportion of summary claims grounded in source text (no hallucination)
-- **Method**: Braintrust faithfulness scorer using claim decomposition
-- **Threshold**: 3.0% relative drop (lower is worse — tighter tolerance than accuracy)
-- **Direction**: Decrease signals regression
-### latency_p95
-- **Definition**: 95th percentile end-to-end latency in milliseconds
-- **Method**: Braintrust timing metadata across eval dataset
-- **Threshold**: 20.0% relative increase
-- **Direction**: Increase signals regression
-### cost_per_call
-- **Definition**: Average token cost per summarization request in USD
-- **Method**: Braintrust cost tracking from model provider billing
-- **Threshold**: 15.0% relative increase
-- **Direction**: Increase signals regression
+| Metric | Method | Threshold | Direction |
+|--------|--------|-----------|-----------|
+| accuracy | Braintrust LLM-judge vs source | 5.0% relative drop | Decrease = regression |
+| faithfulness | Claim decomposition scorer | 3.0% relative drop | Decrease = regression |
+| latency_p95 | Braintrust timing metadata | 20.0% relative increase | Increase = regression |
+| cost_per_call | Model provider billing | 15.0% relative increase | Increase = regression |
 ## Failure Protocol
-- **fail_action**: block
-- **Notify**: #ml-team-slack (immediate), oncall-pager (if accuracy or faithfulness fails)
-- **Remediation**: Check recent prompt changes, model version updates, and dataset distribution shifts. Review Braintrust diff for failing examples.
-- **Escalation**: If not resolved within 2 hours of deploy attempt, escalate to ML lead.
+- **fail_action**: block. Notify #ml-team-slack + oncall-pager (accuracy/faithfulness only).
+- **Remediation**: Check recent prompt changes, model version, dataset distribution shifts.
+- **Escalation**: If unresolved within 2h of deploy attempt, escalate to ML lead.
 WHY THIS IS GOLDEN:
 - quality: null (H05 pass)
 - id matches p07_rc_ pattern (H02 pass)
@@ -79,12 +61,9 @@ WHY THIS IS GOLDEN:
 - threshold is numeric > 0 (H08 pass)
 - metrics list has 4 items (H09 pass)
 - body has all 4 sections: Overview, Baseline, Metrics, Failure Protocol
-- per-metric thresholds documented with direction and units
 - tool specified (Braintrust) with measurement method per metric
 - fail_action: block with notify channels and remediation steps
-- baseline update policy defined
 - tldr: 130 chars <= 160 (S01 pass)
-- tags: 4 items, includes "regression_check" (S02 pass)
 
 ## Anti-Example
 INPUT: "Create regression check for the chatbot"
@@ -102,7 +81,7 @@ FAILURES:
 1. id: "chatbot-regression" has hyphens and no `p07_rc_` prefix -> H02 FAIL
 2. kind: "eval" not "regression_check" -> H04 FAIL
 3. quality: 8.5 (not null) -> H05 FAIL
-4. baseline_ref: "previous" is not resolvable — cannot reproduce comparison -> H07 FAIL
+4. baseline_ref: "previous" is not resolvable -> H07 FAIL
 5. threshold: "good" is not numeric -> H08 FAIL
 6. Missing fields: metrics, pillar, version, created, updated, author, name, tldr -> H06 FAIL
 7. tags: only 1 item, missing "regression_check" -> SOFT FAIL

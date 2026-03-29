@@ -22,6 +22,7 @@ density_score: 0.90
 | threshold | 7.0 (publish >= 8.0, golden >= 9.5) |
 | operator | weighted_sum |
 | scope | all artifacts with `kind: red_team_eval` |
+
 ## HARD Gates
 All must pass (AND logic). Any single failure = REJECT.
 | ID | Check | Fail Condition |
@@ -29,17 +30,17 @@ All must pass (AND logic). Any single failure = REJECT.
 | H01 | Frontmatter parses as valid YAML | Parse error on frontmatter block |
 | H02 | ID matches `^p07_rt_[a-z][a-z0-9_]+$` | ID contains uppercase, spaces, hyphens, or missing prefix |
 | H03 | ID equals filename stem | `id: p07_rt_foo` but file is `p07_rt_bar.md` |
-| H04 | Kind equals literal `red_team_eval` | `kind: eval` or `kind: security_test` or any other value |
-| H05 | Quality field is null | `quality: 8.5` or any non-null value |
+| H04 | Kind equals literal `red_team_eval` | Any other value |
+| H05 | Quality field is null | Any non-null value |
 | H06 | All required fields present | Missing `attack_types`, `target`, or `pass_criteria` |
-| H07 | attack_types is non-empty list | `attack_types: []` or field absent |
-| H08 | All attack_type values are from approved enum | `attack_types: [custom_novel_thing]` — non-enum value present |
-| H09 | target is specific (not generic) | `target: "the model"` or `target: "the system"` — no named component |
-| H10 | pass_criteria is observable and measurable | `pass_criteria: "be safe"` — no observable behavior described |
-| H11 | No real PII or working exploit payloads in body | Actual SSNs, emails, or real jailbreak strings present in body |
+| H07 | attack_types is non-empty list | `attack_types: []` or absent |
+| H08 | All attack_type values from approved enum | Non-enum value present |
+| H09 | target is specific (not generic) | `target: "the model"` or `target: "the system"` |
+| H10 | pass_criteria is observable and measurable | `pass_criteria: "be safe"` |
+| H11 | No real PII or working exploit payloads in body | Actual SSNs, emails, or real jailbreak strings present |
 | H12 | Body has all 4 required sections | Missing ## Overview, ## Attack Scenarios, ## Pass Criteria, or ## Configuration |
+
 ## SOFT Scoring
-Weights sum to 100%.
 | Dimension | Weight | Criteria |
 |---|---|---|
 | Attack type coverage | 1.5 | >= 3 attack_types covering distinct threat vectors; not all from same OWASP category |
@@ -47,13 +48,14 @@ Weights sum to 100%.
 | OWASP traceability | 1.0 | Every attack_type has at least one LLM01-LLM10 reference |
 | Framework completeness | 1.0 | Framework declared with run command and expected output format |
 | Scenario detail | 1.0 | Each attack scenario has placeholder pattern + expected response + OWASP ref |
-| Severity classification | 0.5 | Severity declared; justification implied by attack types chosen |
-| Test count declaration | 0.5 | test_count field present and >= 1 |
 | Boundary clarity | 1.0 | Explicitly not a guardrail, e2e_eval, unit_eval — adversarial pre-deploy purpose stated |
 | Payload safety | 1.0 | Placeholder notation used consistently; no real exploits or PII in spec body |
-| Domain specificity | 1.0 | Attack scenarios specific to the declared target domain, not generic boilerplate |
-| Env var documentation | 0.5 | Environment variables listed with purpose |
+| Domain specificity | 1.0 | Attack scenarios specific to declared target domain, not generic boilerplate |
 | Testability | 1.0 | Each scenario testable with declared framework; expected output described |
+| Severity classification | 0.5 | Severity declared; justification implied by attack types chosen |
+| Test count declaration | 0.5 | test_count field present and >= 1 |
+| Env var documentation | 0.5 | Environment variables listed with purpose |
+
 ## Actions
 | Score | Tier | Action |
 |---|---|---|
@@ -61,11 +63,10 @@ Weights sum to 100%.
 | >= 8.0 | Publish | Publish to pool, add to routing index |
 | >= 7.0 | Review | Flag for improvement before publish |
 | < 7.0 | Reject | Return to author with specific gate failures |
+
 ## Bypass
-| Field | Value |
-|---|---|
-| conditions | Exploratory red team spike used to map unknown attack surface; not a final eval config |
-| approver | Security lead self-certification with comment explaining exploratory scope |
-| audit_trail | Bypass note in frontmatter comment with expiry date |
-| expiry | 7d — exploratory spikes must be promoted to >= 7.0 or removed (shorter than cli_tool due to security sensitivity) |
-| never_bypass | H01 (unparseable YAML breaks all tooling), H05 (self-scored gates corrupt quality metrics), H11 (real PII/exploits in spec is a non-negotiable safety violation) |
+Conditions: exploratory red team spike mapping unknown attack surface only.
+Approver: security lead self-certification with exploratory scope comment.
+Audit: bypass note in frontmatter comment with expiry date.
+Expiry: 7d — promote to >= 7.0 or remove.
+Never bypass: H01 (unparseable YAML breaks tooling), H05 (self-scored gates corrupt metrics), H11 (real PII/exploits is a non-negotiable safety violation).

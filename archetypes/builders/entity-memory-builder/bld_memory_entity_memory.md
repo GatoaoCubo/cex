@@ -21,35 +21,33 @@ keywords: [entity memory, confidence, expiry, attributes, update policy, groundi
 ---
 
 ## Summary
-Entity memory records are only as useful as their worst attribute. A single unverified fact injected into LLM context with the same weight as a primary-source fact degrades the entire grounding block. The difference between useful entity memory and noise comes down to three decisions made at authoring time: confidence scoring, expiry declaration, and attribute count.
-Records with >= 3 specific, confidence-scored attributes consistently grounded LLM responses correctly. Records with 1-2 vague attributes without confidence scores caused agents to either over-rely on uncertain facts or ignore the grounding block entirely.
+Entity memory is only as useful as its worst attribute. A single unverified fact injected with the same weight as a primary-source fact degrades the entire grounding block. Three authoring decisions determine whether entity memory is useful or noise: confidence scoring, expiry declaration, and attribute count. Records with >= 3 specific, confidence-scored attributes consistently grounded LLM responses correctly.
+
 ## Pattern
 **Confidence scoring + expiry + minimum attribute density.**
-Confidence scale:
 - 0.9-1.0: verified from primary source (official docs, direct API response)
-- 0.7-0.89: reliable from trusted secondary source (internal MEMORY.md, team knowledge)
+- 0.7-0.89: reliable secondary source (internal MEMORY.md, team knowledge)
 - 0.5-0.69: probable — inferred from multiple consistent mentions
-- 0.0-0.49: uncertain — single mention, unverified; consider omitting or flagging
+- 0.0-0.49: uncertain — single mention; consider omitting
+
 Expiry rules:
-- tool / service with versioning: set expiry 6-12 months from created date
-- person with role: set expiry 12 months (roles change)
-- stable concept / organization: expiry null (facts do not stale quickly)
-- API endpoint / pricing: set expiry 3-6 months (changes frequently)
+- tool/service with versioning: 6-12 months
+- person with role: 12 months
+- stable concept/organization: null
+- API endpoint/pricing: 3-6 months
+
 Update policy matching:
-- pricing, versions, status -> overwrite (latest value replaces)
-- history, timeline, events -> append (accumulates)
-- general facts with mixed volatility -> merge (new keys added, existing updated if confidence improves)
-- contracts, decisions, agreements -> versioned (all versions preserved)
-Attribute count budget:
-- Minimum useful: 3 attributes (identity + status + provenance)
-- Target: 5-8 attributes (covers identity, capabilities, integration, status)
-- Maximum before split: 12 attributes (beyond this, consider splitting into sub-entities)
+- pricing, versions, status → overwrite
+- history, timeline, events → append
+- general facts with mixed volatility → merge
+- contracts, decisions → versioned
+
+Attribute count: minimum 3 (identity + status + provenance); target 5-8; split at 12+.
+
 ## Anti-Pattern
-- Storing a single attribute ("purpose: web scraping") — provides no grounding advantage over the entity name alone.
-- Confidence: 1.0 for scraped web data — overconfidence poisons merge logic.
-- No expiry on a versioned API service — stale endpoint injected after migration causes silent failures.
-- update_policy: append on pricing data — accumulates outdated prices; consumer sees all historical values.
-- Attributes containing inferences ("best_tool: true") — opinions corrupt fact maps.
-- Mixing entity_memory with learning_record fields (impact_score, decay_rate in entity_memory) — wrong kind, breaks routing.
-## Context
-The 2048-byte body limit for entity_memory is generous enough for 8-10 attributes plus a relationship table. Allocate bytes: Overview (100) + Attributes table (800) + Relationships (400) + Update Policy (200) = ~1500. Reserve 548 bytes for dense attribute values. Frontmatter carries the machine-readable payload; body carries the human-readable structured view — both must be consistent.
+- Single attribute — no grounding advantage over the entity name alone
+- confidence: 1.0 for scraped web data — overconfidence poisons merge logic
+- No expiry on versioned API service — stale endpoint causes silent failures after migration
+- update_policy: append on pricing — accumulates outdated prices
+- Attributes containing inferences ("best_tool: true") — opinions corrupt fact maps
+- Mixing entity_memory with learning_record fields (impact_score, decay_rate) — breaks routing

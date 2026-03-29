@@ -21,34 +21,33 @@ keywords: [checkpoint, workflow state, ttl, resume, state minimization, chain, r
 ---
 
 ## Summary
-Checkpoints are only useful if they can be found and restored. Three properties make or break checkpoint utility in production: TTL enforcement (prevents orphan accumulation), workflow_ref presence (enables association during incident recovery), and state minimization (determines restore speed).
-The most expensive failure mode is a checkpoint that exists but cannot be used: correct id, correct step, but missing workflow_ref means the recovery tooling cannot associate it with the workflow run. The second most expensive is a checkpoint with correct state but no TTL, which means storage debt grows indefinitely across all workflow runs.
+Checkpoints are only useful if they can be found and restored. Three properties make or break checkpoint utility: TTL enforcement (prevents orphan accumulation), workflow_ref presence (enables association during incident recovery), and state minimization (determines restore speed). The most expensive failure is a checkpoint that exists but cannot be used — correct id and step, but missing workflow_ref blocks recovery tooling.
+
 ## Pattern
 **TTL + workflow_ref + minimal state.**
-TTL schema (standard):
-- 1h: interactive session workflows — short-lived, human-in-the-loop steps
-- 24h: batch processing workflows — single run, checkpoint expires after run completes
-- 7d: multi-day research or ingestion pipelines — spans multiple sessions
-- 30d: compliance or audit workflows — retention requirement drives TTL
-- none: permanent archival only — requires explicit justification in description field
-State minimization rules:
-- Include only keys needed to re-enter the workflow at this step
-- Exclude: derived values (recomputable from other state), large blobs (reference by id instead), volatile values (timestamps, counters that reset on resume)
-- Target: < 512 bytes state for most checkpoints; > 1024 bytes requires justification
-Chain integrity rules:
-- Always set parent_checkpoint (null only for the first checkpoint in a workflow)
-- Chain must be traversable: each checkpoint's parent must exist or be explicitly archived
-- On workflow completion: write a terminal checkpoint with resumable: false for audit trail
-Step name alignment:
-- step field must exactly match the step name as defined in the workflow artifact
-- Mismatched step names cause resume tooling to fail to locate the re-entry point
+
+TTL schema:
+- 1h: interactive/human-in-the-loop workflows
+- 24h: batch processing (single run)
+- 7d: multi-day research or ingestion pipelines
+- 30d: compliance/audit workflows (retention-driven)
+- none: permanent archival only — requires justification
+
+State minimization:
+- Include only keys needed to re-enter at this step
+- Exclude: derived values, large blobs (reference by id), volatile counters
+- Target: < 512 bytes; > 1024 bytes requires justification
+
+Chain integrity:
+- Always set parent_checkpoint (null only for first checkpoint)
+- Chain must be traversable; each parent must exist or be archived
+- On completion: write terminal checkpoint with resumable: false
+
+Step alignment: step field must exactly match the workflow's step definition name.
+
 ## Anti-Pattern
-- Omitting TTL entirely (orphan checkpoints; storage bloat across all workflow runs).
-- Missing workflow_ref (checkpoint cannot be associated with a workflow during recovery).
-- Storing full object graphs in state (restore time scales with state size; store ids and re-fetch instead).
-- step value that does not match the workflow's step definition (resume tooling cannot find re-entry point).
-- Setting resumable: false without explanation (callers cannot distinguish tombstone from transient failure).
-- Skipping parent_checkpoint linkage (chain breaks; rollback to previous stable state impossible).
-- Conflating checkpoint with signal: checkpoint has serialized state + workflow_ref; signal is a stateless event.
-## Context
-The 2048-byte body limit for checkpoint is generous enough to document a complete state schema and resume protocol. Use the budget intentionally: Overview (100 bytes), State table (400-600 bytes), Resume steps (500-700 bytes), Lifecycle (200-300 bytes). State table is the densest section — one row per key with type + size + description. Resume section is the most operationally critical — it must be executable by an agent with no additional context.
+- Omitting TTL (orphan checkpoints; storage bloat across all runs).
+- Missing workflow_ref (cannot associate checkpoint with workflow during recovery).
+- Storing full object graphs in state (restore time scales with size; store ids instead).
+- step value mismatched from workflow definition (resume tooling cannot find re-entry point).
+- Setting resumable: false without explanation (callers cannot distinguish tombstone from failure).
