@@ -1,0 +1,38 @@
+---
+id: p10_lr_constraint_spec_builder
+kind: learning_record
+pillar: P10
+version: 1.0.0
+created: 2026-03-29
+updated: 2026-03-29
+author: edison
+observation: "constraint_spec artifacts require concrete parameter values with rationale. Placeholder values cause downstream failures."
+pattern: "Define all parameters with concrete values and rationale. Validate against SCHEMA.md. Keep body under 2048 bytes."
+evidence: "Pattern extracted from Outlines Guide, LMQL where-clause, Guidance select/gen, Instructor response_model, LangChain StructuredOutputParser documentation and production usage."
+confidence: 0.7
+outcome: SUCCESS
+domain: constraint_spec
+tags: [constraint-spec, P03, type-builder]
+tldr: "Concrete values with rationale. Validate against schema. Stay under 2048 bytes."
+impact_score: 7.5
+decay_rate: 0.05
+satellite: edison
+keywords: [constraint spec, regex, enum/choice, json schema, grammar (cfg)]
+---
+
+## Summary
+Constraint spec — rules that govern the LLM decoder during generation (grammar, regex, enum, schema). The difference between a useful constraint_spec and a useless one is concrete values
+with rationale versus placeholder text.
+## Pattern
+**Concrete parameters with rationale.**
+Every parameter must have: name, value, and why that value was chosen.
+Required body sections: Overview, Constraint Definition, Provider Compatibility, Integration.
+Body budget: 2048 bytes max.
+## Anti-Pattern
+- Constraint too strict: Rejects valid outputs, LLM loops or fails to generate
+- No fallback: Hard constraint failure crashes pipeline instead of graceful degrade
+- Provider-specific syntax: Constraint only works on one provider, not portable
+- Constraint in prompt only: Natural language constraints are soft — LLM may ignore them
+## Context
+The 2048-byte body limit keeps constraint_spec artifacts focused. Fill required fields first,
+then add recommended fields if space permits. Always set quality: null.

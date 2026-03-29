@@ -1,0 +1,44 @@
+---
+kind: knowledge_card
+id: bld_knowledge_card_constraint_spec
+pillar: P03
+llm_function: INJECT
+purpose: Domain knowledge for constraint_spec production
+sources: Outlines structured generation, LMQL constrained decoding, Guidance grammar-based generation, Instructor Pydantic validation, JSON mode (OpenAI/Anthropic)
+---
+
+# Domain Knowledge: constraint_spec
+## Executive Summary
+Constraint spec — rules that govern the LLM decoder during generation (grammar, regex, enum, schema). Produced as P03 artifacts with concrete parameters and rationale.
+## Spec Table
+| Property | Value |
+|----------|-------|
+| Pillar | P03 |
+| llm_function | CONSTRAIN |
+| Max bytes | 2048 |
+| Density min | 0.85 |
+| Machine format | yaml |
+## Patterns
+| Pattern | Description | When to use |
+|---------|-------------|-------------|
+| Regex | Constrain output to match regex pattern | IDs, codes, formatted strings |
+| Enum/choice | Force selection from predefined values | Categories, status fields, yes/no |
+| JSON schema | Constrain output to valid JSON matching schema | Structured data extraction |
+| Grammar (CFG) | Context-free grammar constraining token sequence | Complex structured formats, DSLs |
+## Anti-Patterns
+| Anti-Pattern | Why it fails |
+|-------------|-------------|
+| Constraint too strict | Rejects valid outputs, LLM loops or fails to generate |
+| No fallback | Hard constraint failure crashes pipeline instead of graceful degrade |
+| Provider-specific syntax | Constraint only works on one provider, not portable |
+| Constraint in prompt only | Natural language constraints are soft — LLM may ignore them |
+## Application
+1. Identify the use case and constraints
+2. Select appropriate pattern from the table above
+3. Define concrete parameter values with rationale
+4. Validate against SCHEMA.md required fields
+5. Check body size <= 2048 bytes
+6. Verify id matches `^p03_constraint_[a-z][a-z0-9_]+$`
+## References
+- Outlines Guide, LMQL where-clause, Guidance select/gen, Instructor response_model, LangChain StructuredOutputParser
+- Outlines structured generation, LMQL constrained decoding, Guidance grammar-based generation, Instructor Pydantic validation, JSON mode (OpenAI/Anthropic)
