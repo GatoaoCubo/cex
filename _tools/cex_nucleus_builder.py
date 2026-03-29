@@ -24,6 +24,7 @@ CEX_ROOT = Path(__file__).resolve().parent.parent
 
 # Nucleus -> subdirectory mapping for each kind
 KIND_TO_SUBDIR = {
+    # Core 7 (every nucleus)
     "agent_card": "architecture",
     "agent": "agents",
     "system_prompt": "prompts",
@@ -31,6 +32,51 @@ KIND_TO_SUBDIR = {
     "knowledge_card": "knowledge",
     "workflow": "orchestration",
     "quality_gate": "feedback",
+    # P01 Knowledge
+    "rag_source": "knowledge",
+    "research_brief": "knowledge",
+    # P02 Agent
+    "persona_prompt": "prompts",
+    "action_prompt": "prompts",
+    "boot_config": "config",
+    # P03 Prompt
+    "prompt_template": "prompts",
+    "instruction": "prompts",
+    # P04 Tools
+    "skill": "tools",
+    "tool_definition": "tools",
+    "mcp_server": "tools",
+    # P05 Output
+    "response_format": "output",
+    # P06 Input
+    "input_schema": "schemas",
+    # P07 Quality
+    "scoring_rubric": "quality",
+    "few_shot_example": "quality",
+    # P08 Architecture
+    "pattern": "architecture",
+    "interface": "architecture",
+    # P09 Config
+    "env_config": "config",
+    "deploy_config": "config",
+    # P10 Memory
+    "learning_record": "memory",
+    "checkpoint": "memory",
+    # P11 Feedback
+    "health_check": "feedback",
+    # P12 Orchestration
+    "dag": "orchestration",
+    "handoff": "orchestration",
+    "signal": "orchestration",
+    "spawn_config": "orchestration",
+    "schedule": "orchestration",
+    "retry_policy": "orchestration",
+    "pipeline": "orchestration",
+    # Retrieval
+    "chunk_strategy": "knowledge",
+    "retriever_config": "knowledge",
+    "brain_index": "knowledge",
+    "embedding_config": "knowledge",
 }
 
 # Build order (dependencies flow top-down)
