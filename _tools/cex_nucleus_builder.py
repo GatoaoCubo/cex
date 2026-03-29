@@ -71,10 +71,16 @@ def main():
     kinds = args.kinds or BUILD_ORDER
     runner = CEX_ROOT / "_tools" / "cex_8f_runner.py"
 
-    # Build context string
-    context = f"Nucleus {args.nucleus} ({args.name}), domain: {args.domain}"
+    # Build context string: auto-load seed if exists
+    seed_file = CEX_ROOT / "_seeds" / f"seed_{args.nucleus.lower()}_{args.name.lower()}.txt"
+    seed_text = ""
+    if seed_file.exists():
+        seed_text = seed_file.read_text(encoding="utf-8").strip()
+        print(f"  Seed: {seed_file.name} ({len(seed_text)} chars)")
+
+    context = seed_text if seed_text else f"Nucleus {args.nucleus} ({args.name}), domain: {args.domain}"
     if args.context:
-        context += f". {args.context}"
+        context = args.context if not seed_text else seed_text + " " + args.context
 
     print(f"\n{'=' * 70}")
     print(f"  CEX Nucleus Builder -- {args.nucleus} ({args.name})")
