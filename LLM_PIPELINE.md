@@ -48,7 +48,7 @@ OUTPUT
 | # | Funcao | Verbo | O Que Faz | Types Exemplo | % do CEX |
 |---|--------|-------|-----------|---------------|----------|
 | 1 | **BECOME** | Ser | Configura identidade antes de tudo | agent, system_prompt, persona, mental_model | 8% (6 tipos) |
-| 2 | **INJECT** | Saber | Fornece contexto e conhecimento | knowledge_card, rag_source, few_shot, context_doc | 21% (16 tipos) |
+| 2 | **INJECT** | Saber | Fornece contexto e conhecimento (incl. KC-Domains) | knowledge_card, rag_source, few_shot, context_doc | 21% (16 tipos) |
 | 3 | **REASON** | Pensar | Raciocina, planeja, decompoe | chain_of_thought, react, planner, router | 9% (7 tipos) |
 | 4 | **CALL** | Fazer | Invoca ferramentas externas | skill, mcp_server, cli_tool, connector | 10% (8 tipos) |
 | 5 | **PRODUCE** | Gerar | Produz output final | completion, chain, workflow, meta_prompt | 6% (5 tipos) |
@@ -89,6 +89,33 @@ Os 12 pillars sao como ORGANIZAMOS os artefatos (filesystem).
 | COLLABORATE | P12 Orchestration |
 
 Os 12 pillars cobrem os 8 funcoes. Nenhum pillar eh orfao.
+
+---
+
+## KC Injection (Motor 8F)
+
+The INJECT function (Function 2) now receives Knowledge Cards from the KC Library.
+
+```
+Motor 8F: INJECT function
+  |
+  1. Resolve builder's domain requirements (feeds_kinds)
+  2. Query KC Library (79 KCs across 17 domains)
+  3. Match KC domain -> builder needs
+  4. Inject matched KCs as context alongside RAG sources
+  |
+  v
+Builder receives: system_prompt (BECOME) + KC context + RAG sources (INJECT)
+```
+
+| Component | Count | Role |
+|-----------|------:|------|
+| KC Library | 79 | Atomic knowledge facts (density >= 0.8) |
+| KC Domains | 17 | Domain classification for routing |
+| KC Sources | 3 | Distilled, authored, generated |
+| feeds_kinds | per-builder | Maps which KC domains feed which builders |
+
+KC injection happens AFTER BECOME, BEFORE REASON — preserving pipeline order.
 
 ---
 

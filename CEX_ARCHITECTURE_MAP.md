@@ -164,6 +164,57 @@ CEX REPO       = DATABASE
 
 ---
 
+## KC Library (Knowledge Card Lifecycle)
+
+79 Knowledge Cards across 17 domains feed the CEX pipeline via Motor 8F INJECT.
+
+### KC Lifecycle: PESQUISAR > DESTILAR > CONSTRUIR > VALIDAR
+
+```
+PESQUISAR (research)           DESTILAR (distill)
+  External sources               Raw -> atomic facts
+  Firecrawl, web, docs           density >= 0.8
+  brain_query()                  frontmatter validation
+       |                              |
+       v                              v
+CONSTRUIR (build)              VALIDAR (validate)
+  ex_knowledge_card_*.md         cex_doctor checks
+  Compiled to .yaml              quality_min: 7.0
+  Wired to feeds_kinds           cex_compile --all
+```
+
+### KC Domain Distribution (17 domains)
+
+| Domain Group | Domains | KCs | Coverage |
+|-------------|:-------:|:---:|:--------:|
+| CEX Core | cex_taxonomy, meta | 49 | 62% |
+| Engineering | llm_engineering, execution, architecture | 10 | 13% |
+| Knowledge | research, knowledge_engineering, llm_memory | 9 | 11% |
+| Specialist | 8 remaining domains | 11 | 14% |
+
+### KC Sources (3 types)
+
+| Source | Description | Flow |
+|--------|-------------|------|
+| Distilled | Research → atomic facts | SHAKA → PYTHA → P01 |
+| Authored | Manual expert knowledge | Human → P01 |
+| Generated | Tool-extracted structured data | _tools/ → P01 |
+
+### feeds_kinds Wiring
+
+```
+KC Domain (17)  -->  feeds_kinds mapping  -->  Motor 8F INJECT function
+                                               |
+                                               v
+                                          Builder execution
+                                          (context injection)
+```
+
+KCs are injected during the INJECT function (Function 2 of 8).
+Each KC's `domain:` field determines which builders receive it.
+
+---
+
 ## Tools Layer (L3 ENGINE — _tools/)
 
 13 scripts powering the CEX runtime. Added during overnight Waves 1-3.

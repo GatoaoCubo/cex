@@ -1,6 +1,6 @@
 # CEX Index
 
-**Navigation map** | Updated: 2026-03-28 | 98 kinds, 98 builders, 12 pillars
+**Navigation map** | Updated: 2026-03-29 | 101 kinds, 99 builders, 244 examples, 12 pillars
 
 ---
 
@@ -50,26 +50,26 @@
 
 | Pillar | Name | Kinds | Templates | Examples | Compiled |
 |--------|------|:-----:|:---------:|:--------:|:--------:|
-| P01 | Knowledge | 6 | 6 | 85 | 84 |
-| P02 | Model | 9 | 9 | 16 | 16 |
-| P03 | Prompt | 5 | 5 | 17 | 16 |
-| P04 | Tools | 9 | 9 | 16 | 16 |
+| P01 | Knowledge | 8 | 8 | 87 | 87 |
+| P02 | Model | 11 | 11 | 20 | 20 |
+| P03 | Prompt | 10 | 7 | 20 | 20 |
+| P04 | Tools | 18 | 18 | 38 | 38 |
 | P05 | Output | 4 | 4 | 5 | 5 |
-| P06 | Schema | 5 | 5 | 9 | 7 |
-| P07 | Evals | 6 | 6 | 8 | 7 |
-| P08 | Architecture | 5 | 5 | 6 | 5 |
-| P09 | Config | 5 | 5 | 6 | 6 |
-| P10 | Memory | 4 | 4 | 9 | 9 |
-| P11 | Feedback | 5 | 5 | 8 | 7 |
-| P12 | Orchestration | 6 | 6 | 9 | 9 |
-| **Total** | | **69** | **69** | **194** | **187** |
+| P06 | Schema | 6 | 6 | 11 | 11 |
+| P07 | Evals | 10 | 10 | 12 | 12 |
+| P08 | Architecture | 7 | 7 | 9 | 9 |
+| P09 | Config | 7 | 7 | 8 | 8 |
+| P10 | Memory | 6 | 6 | 12 | 12 |
+| P11 | Feedback | 6 | 6 | 9 | 9 |
+| P12 | Orchestration | 8 | 8 | 13 | 13 |
+| **Total** | | **101** | **98** | **244** | **244** |
 
 Each pillar contains: `_schema.yaml` + `templates/` + `examples/` + `compiled/`
 
-## Builders (69 + 1 meta)
+## Builders (99 + 1 meta)
 
 All in `archetypes/builders/`. Each has 13 `bld_*.md` ISO files.
-Total: 918 ISO files. Meta-builder: `_builder-builder/` (21 files).
+Total: 1,295 ISO files. Meta-builder: `_builder-builder/` (21 files).
 
 ## 7 Nuclei
 
@@ -82,6 +82,25 @@ Total: 918 ISO files. Meta-builder: `_builder-builder/` (21 files).
 | N05 | Operations | 2 |
 | N06 | Commercial | 2 |
 | N07 | Admin | 2 |
+
+## KC Library (79 Knowledge Cards across 17 domains)
+
+All in `P01_knowledge/examples/ex_knowledge_card_*.md`. 100% compiled.
+
+| Domain | KCs | Description |
+|--------|:---:|-------------|
+| cex_taxonomy | 36 | CEX concepts, functions, pillars, types |
+| meta | 13 | Meta-construction, self-build, fractal architecture |
+| llm_engineering | 5 | Model capabilities, benchmarks, prompt caching |
+| research | 4 | RAG fundamentals, search, embedding |
+| llm_memory | 3 | Persistence, compression, cross-IDE |
+| execution | 3 | Pipeline execution, deployment patterns |
+| knowledge_engineering | 2 | Distillation, structured data |
+| architecture | 2 | Design tokens, component maps |
+| Others (9 domains) | 11 | Debugging, hooks, plugins, content, dev tools |
+
+**KC Sources**: distilled (from research), authored (manual), generated (from tools).
+**Feeds**: KC-Domains → `feeds_kinds` wiring → Motor 8F INJECT function.
 
 ## Tools (_tools/)
 
@@ -104,6 +123,25 @@ Total: 918 ISO files. Meta-builder: `_builder-builder/` (21 files).
 | bump_version.py | Semantic version bumper |
 | changelog_gen.py | CHANGELOG generator |
 | fix_frontmatter.py | Batch frontmatter repair |
+| cex_research.py | Research pipeline runner |
+
+---
+
+## Summary
+
+| Metric | Count |
+|--------|------:|
+| Kinds | 101 |
+| Templates | 98 |
+| Builders | 99 + 1 meta |
+| Builder ISOs | 1,295 |
+| Examples | 244 |
+| Compiled | 244 |
+| KC Examples | 79 |
+| KC Domains | 17 |
+| Tools | 18 |
+| Pillars | 12 |
+| Nuclei | 7 |
 
 ---
 *Run `python _tools/cex_doctor.py` to validate repo health.*

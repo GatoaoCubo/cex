@@ -37,33 +37,29 @@ retry_count: 0
 error: null
 ```
 ## Overview
-Saves embedding progress at the embed_chunks step of the research_pipeline workflow.
-Enables cost-efficient resume after failure without re-fetching or re-processing source documents.
+Saves embedding progress at the embed_chunks step. Enables cost-efficient resume after failure without re-fetching source documents.
 ## State
-| Key | Type | Size | Description |
-|-----|------|------|-------------|
-| chunks_processed | integer | 8 bytes | Count of successfully embedded chunks so far |
-| embedding_model | string | ~40 bytes | Model id — must match on resume to ensure vector consistency |
-| last_chunk_id | string | ~36 bytes | UUID of last successfully embedded chunk; resume starts at next |
-Serialization format: yaml
-Total state budget: ~84 bytes (well within 2048 limit)
+| Key | Type | Description |
+|-----|------|-------------|
+| chunks_processed | integer | Count of successfully embedded chunks so far |
+| embedding_model | string | Model id — must match on resume |
+| last_chunk_id | string | UUID of last embedded chunk; resume starts at next |
+
+Serialization: yaml. Total state budget: ~84 bytes.
 ## Resume
-Prerequisites:
-- Embedding service available and responding (health check before resume)
-- Same embedding_model available as recorded in state (version lock)
-- Source chunks still accessible at original path or cache
-Resume steps:
-1. Load checkpoint: `p12_ck_research_pipeline_embed_chunks`
+Prerequisites: embedding service available; same embedding_model present; source chunks accessible.
+
+1. Load checkpoint `p12_ck_research_pipeline_embed_chunks`
 2. Restore state: chunks_processed, embedding_model, last_chunk_id
-3. Re-enter workflow at step: `embed_chunks`, starting from chunk after last_chunk_id
-4. Validate: embedding_model matches current service version
-5. Continue until all chunks embedded; write next checkpoint at validate_output step
-Idempotent: yes — embedding from last_chunk_id forward skips already-processed chunks; no duplicates produced
+3. Re-enter at `embed_chunks`, starting from chunk after last_chunk_id
+4. Validate embedding_model matches current service version
+5. Continue; write next checkpoint at validate_output
+
+Idempotent: yes — skips already-processed chunks.
 ## Lifecycle
-TTL: 24h — single-run batch pipeline; checkpoint no longer needed after workflow completes
-Cleanup: auto_delete after TTL expiry
-Archival: terminal checkpoint (p12_ck_research_pipeline_complete) archived to cold storage for 30d
+TTL: 24h — batch pipeline; checkpoint expires after workflow completes.
 Chain: p12_ck_research_pipeline_fetch_sources -> this -> p12_ck_research_pipeline_validate_output
+
 WHY THIS IS GOLDEN:
 - quality: null (H05 pass)
 - id matches `^p12_ck_[a-z][a-z0-9_]+$` (H02 pass)
@@ -71,10 +67,9 @@ WHY THIS IS GOLDEN:
 - workflow_ref and step non-empty (H07, H08 pass)
 - tags: 4 items, includes "checkpoint" (H09 pass)
 - body has all 4 sections (H10 pass)
-- state schema: 3 keys with type + size + description (SOFT pass)
-- resume: prerequisites + numbered steps + idempotency declaration (SOFT pass)
+- state schema: 3 keys with type + description (SOFT pass)
+- resume: prerequisites + numbered steps + idempotency (SOFT pass)
 - TTL declared with justification (SOFT pass)
-- chain linkage documented (SOFT pass)
 ## Anti-Example
 INPUT: "Create checkpoint for data pipeline"
 BAD OUTPUT:
@@ -95,5 +90,4 @@ FAILURES:
 6. step field absent -> H08 FAIL
 7. tags: only 1 item, missing "checkpoint" -> H09 FAIL
 8. Body missing Overview, State, Resume, Lifecycle sections -> H10 FAIL
-9. No TTL — orphan checkpoint will accumulate indefinitely -> SOFT FAIL
-10. No state schema — callers cannot know what state exists to restore -> SOFT FAIL
+9. No TTL — orphan checkpoint accumulates indefinitely -> SOFT FAIL
