@@ -1,147 +1,279 @@
-# 8F Runner Architecture -- Execution Plan
+# 8F Runner Architecture -- Hydrated Plan
 
-**Version**: 1.0.0 | **Date**: 2026-03-29
-**Status**: PLAN
-
----
-
-## O GAP
-
-Hoje o CEX tem:
-- Motor 8F: classifica intent, agrupa builders por funcao
-- Crew Runner: itera builders em ordem, gera prompts
-- cex_intent.py: compoe 1 prompt gigante com tudo junto
-
-O que FALTA: cada funcao 8F ser um STEP real de processamento.
+**Version**: 2.0.0 | **Date**: 2026-03-29
+**Status**: HYDRATED | **Supersedes**: v1.0
 
 ---
 
-## AS 8 FUNCOES COMO PIPELINE
+## 1. O QUE EXISTE HOJE (Honestidade)
 
-    USER INPUT
-         |
-    F1 CONSTRAIN  - carrega limites: schemas, guardrails, budget
-    F2 BECOME     - seta identidade: system_prompt, persona
-    F3 INJECT     - busca conhecimento: KCs, context, few_shots
-    F4 REASON     - planeja: decomposicao, CoT, decisoes [LLM]
-    F5 CALL       - executa tools se necessario [condicional]
-    F6 PRODUCE    - gera o artefato final [LLM principal]
-    F7 GOVERN     - valida: quality_gate, scoring [retry loop]
-    F8 COLLABORATE - salva, compila, commita, notifica
-         |
-    ARTEFATO SALVO
+### cex_intent.py (533 loc)
+Compoe 1 prompt monolitico. ZERO processamento intermediario.
+As 8F sao ROTULOS, nao steps. LLM recebe tudo de uma vez.
 
-F1-F3: lookup only (zero LLM calls)
-F4: 1 LLM call (modelo leve, planeja)
-F5: condicional (so se precisa de tool)
-F6: 1 LLM call (modelo forte, gera)
-F7: validacao + optional LLM judge
-F8: file ops only
+### cex_crew_runner.py (650 loc)
+Itera functions por position, tem retry + quality gate.
+MAS: cada function = rode estes builders. Sem estado acumulado.
+Sem validacao estrutural no F7. Sem constraints do F1.
+
+### cex_8f_motor.py (900 loc)
+PARSE > CLASSIFY > FAN-OUT > PLAN > OUTPUT. Produz JSON plan.
+NAO MUDA.
 
 ---
 
-## CADA FUNCAO
+## 2. DIFERENCA CHAVE
 
-### F1 CONSTRAIN
-Carrega _schema.yaml (max_bytes, frontmatter_required), guardrails, rate limits.
-Output: constraints dict. LLM: NAO.
+HOJE: load ALL ISOs -> compose 1 prompt -> 1 LLM call -> done
 
-### F2 BECOME
-Carrega bld_system_prompt + bld_config do builder. Define persona.
-Output: identity dict. LLM: NAO.
+RUNNER:
+  F1 load constraints (schema + bld_schema + bld_config)
+  F2 load identity (bld_system_prompt + bld_manifest)
+  F3 load knowledge (KC library + bld_knowledge_card + bld_examples + bld_memory + bld_architecture)
+  F4 LLM planeja (CoT: que campos, que decisoes) [HAIKU]
+  F5 tools se necessario (duplicate detection)
+  F6 LLM gera com F1-F5 ESTRUTURADO (bld_instruction + bld_output_template) [SONNET]
+  F7 valida (hard gates extraidos do bld_quality_gate + schema constraints)
+  F8 salva + compila (bld_collaboration para handoff)
 
-### F3 INJECT
-Busca KC-Domains via feeds_kinds. Carrega bld_knowledge_card + bld_examples + bld_memory.
-Output: knowledge dict. LLM: NAO.
-
-### F4 REASON
-PRIMEIRA CHAMADA LLM: dado contexto, planejar geracao.
-Retorna: campos a preencher, decisoes, tradeoffs, decomposicao.
-Output: reasoning dict. LLM: SIM (haiku/sonnet).
-
-### F5 CALL
-Se plano precisa dados externos: executa tools (search, code, API).
-90% dos casos: SKIP.
-Output: tool_results dict. LLM: CONDICIONAL.
-
-### F6 PRODUCE
-CHAMADA LLM PRINCIPAL: gera artefato com tudo acima como contexto.
-Prompt: system_prompt + instruction + KCs + template + reasoning.
-Output: artifact string. LLM: SIM (opus/sonnet).
-
-### F7 GOVERN
-Valida: frontmatter, size, formato, optional LLM-as-judge.
-Se FAIL: feedback para F6 retry (max 2).
-Output: verdict dict. LLM: CONDICIONAL.
-
-### F8 COLLABORATE
-Salva artefato, compila, git add+commit, signal.
-Output: result dict. LLM: NAO.
+Cada F produz dict que a proxima CONSOME. Estado ACUMULA.
 
 ---
 
-## CHAMADAS LLM POR ARTEFATO
+## 3. RunState (estado acumulado)
 
-| Caso | F4 | F5 | F6 | F7 | Total |
+```python
+@dataclass
+class RunState:
+    intent: str
+    kind: str
+    pillar: str
+    builder_dir: Path
+
+    # F1 output
+    constraints: dict  # {max_bytes, frontmatter_required[], id_pattern, quality_min, naming, config_rules[]}
+    # F2 output
+    identity: dict     # {system_prompt, builder_name, domain, pillar_boundary}
+    # F3 output
+    knowledge: dict    # {kc_builder, kc_domains[], few_shots, memory, architecture}
+    # F4 output
+    reasoning: dict    # {plan, decisions[], model_used}
+    # F5 output
+    tool_results: dict # {existing_artifacts[], tools_available[]}
+    # F6 output
+    artifact: str      # raw markdown (frontmatter + body)
+    # F7 output
+    verdict: dict      # {passed, hard_gates[], issues[], feedback, retries}
+    # F8 output
+    result: dict       # {path, compiled, committed}
+```
+
+---
+
+## 4. ISO -> FUNCAO (Mapeamento Exato)
+
+Cada ISO eh lido em UMA funcao. Nenhum lido 2x.
+
+| ISO File | Funcao | O que extrai |
+|----------|--------|-------------|
+| bld_schema | F1 CONSTRAIN | id pattern, field types, output contract |
+| bld_config | F1 CONSTRAIN | naming rules, paths, size limits |
+| bld_manifest | F2 BECOME | builder name, domain |
+| bld_system_prompt | F2 BECOME | persona, identity, rules |
+| bld_knowledge_card | F3 INJECT | builder-specific knowledge |
+| bld_examples | F3 INJECT | few-shot references |
+| bld_memory | F3 INJECT | persistent learnings |
+| bld_architecture | F3 INJECT | patterns, dependencies, boundary |
+| bld_tools | F5 CALL | available tools list |
+| bld_instruction | F6 PRODUCE | step-by-step generation process |
+| bld_output_template | F6 PRODUCE | expected output structure |
+| bld_quality_gate | F7 GOVERN | hard gates + soft scoring |
+| bld_collaboration | F8 COLLABORATE | crew roles, handoff protocol |
+
+---
+
+## 5. PSEUDOCODIGO POR FUNCAO
+
+### F1 CONSTRAIN (0 LLM calls)
+```
+load _schema.yaml -> kind constraints (max_bytes, frontmatter_required)
+load bld_schema -> extract id_pattern regex from body
+load bld_config -> extract naming rules, paths
+OUTPUT: state.constraints
+```
+
+### F2 BECOME (0 LLM calls)
+```
+load bld_system_prompt -> strip frontmatter, keep body (persona)
+load bld_manifest -> extract title, domain from frontmatter
+load _schema.yaml -> kind boundary description
+OUTPUT: state.identity
+```
+
+### F3 INJECT (0 LLM calls)
+```
+load bld_knowledge_card -> builder-specific knowledge
+lookup KC-Domains from library via feeds_kinds
+load bld_examples -> few-shot reference
+load bld_memory -> past learnings
+load bld_architecture -> patterns, dependencies
+OUTPUT: state.knowledge
+```
+
+### F4 REASON (1 LLM call - haiku ~$0.001)
+```
+compose prompt: identity + constraints + knowledge + intent
+ask LLM: plan the artifact (fields, decisions, tradeoffs)
+OUTPUT: state.reasoning = {plan, decisions[], model_used}
+DRY-RUN: saves prompt string instead of calling LLM
+```
+
+### F5 CALL (0 LLM calls, v1)
+```
+load bld_tools -> parse tools table
+scan existing artifacts of same kind (duplicate detection)
+OUTPUT: state.tool_results = {existing_artifacts[], tools_available[]}
+```
+
+### F6 PRODUCE (1 LLM call - sonnet/opus ~$0.02)
+```
+compose STRUCTURED prompt with labeled sections:
+  # IDENTITY (from F2: state.identity.system_prompt)
+  # CONSTRAINTS (from F1: max_bytes, id_pattern, required fields)
+  # KNOWLEDGE (from F3: KC domains + builder KC + architecture)
+  # EXAMPLES (from F3: few_shots)
+  # PLAN (from F4: reasoning plan)
+  # INSTRUCTION (bld_instruction body -- step-by-step process)
+  # TEMPLATE (bld_output_template body -- fill this structure)
+  # TASK (user intent + "set quality: null")
+  # RETRY FEEDBACK (from F7, if retrying)
+call LLM (sonnet for standard, opus for complex)
+OUTPUT: state.artifact = raw markdown
+DRY-RUN: saves full assembled prompt as state.artifact
+```
+
+### F7 GOVERN (0 LLM calls, structural validation)
+```
+load bld_quality_gate -> parse hard gates table
+validate against state.constraints:
+  H01: frontmatter parses as YAML?
+  H02: id matches state.constraints.id_pattern?
+  H03: kind == state.kind?
+  H04: quality == null? (never self-score)
+  H05: all frontmatter_required fields present?
+  H06: body size <= state.constraints.max_bytes?
+if ANY gate fails AND retries < 2:
+  state.verdict.feedback = specific issues
+  return to F6 (retry with feedback injected)
+if fails 2x: save as draft + issues report
+OUTPUT: state.verdict = {passed, hard_gates[], issues[], feedback, retries}
+```
+
+### F8 COLLABORATE (0 LLM calls)
+```
+if dry_run: save prompt to output_dir, return
+determine path from constraints.naming + user topic slug
+save artifact to P{XX}/examples/{filename}
+run cex_compile on file -> P{XX}/compiled/
+OUTPUT: state.result = {path, compiled, committed}
+```
+
+---
+
+## 6. CHAMADAS LLM - CUSTO
+
+| Caso | F4 | F6 | F7 | Total | Custo |
 |------|----|----|----|----|-------|
-| Simples (KC, enum) | skip | skip | 1 | validate | 1 call |
-| Medio (agent, prompt) | 1 | skip | 1 | validate | 2 calls |
-| Complexo (director) | 1 | 1 | 1 | judge | 3-4 calls |
-| Retry (F7 fail) | - | - | +1 | +1 | +1-2 calls |
+| dry-run | prompt | prompt | struct | 0 calls | free |
+| simples | skip | 1x sonnet | struct | 1 call | ~$0.02 |
+| medio | 1x haiku | 1x sonnet | struct | 2 calls | ~$0.03 |
+| complexo | 1x haiku | 1x opus | judge | 3-4 calls | ~$0.15 |
+| retry | - | +1x sonnet | +1 struct | +1 call | +$0.02 |
 
 ---
 
-## IMPLEMENTACAO: cex_8f_runner.py (~400 loc)
+## 7. CLI
 
-class EightFRunner:
-    def __init__(self, intent, kind=None, dry_run=True)
-    def f1_constrain(self) -> dict
-    def f2_become(self) -> dict
-    def f3_inject(self) -> dict
-    def f4_reason(self) -> dict
-    def f5_call(self) -> dict
-    def f6_produce(self) -> str
-    def f7_govern(self, artifact) -> dict
-    def f8_collaborate(self, artifact, verdict) -> dict
-    def run(self) -> dict
-
-Modos:
-  --dry-run: F1-F3 executam (lookup), F4-F8 geram prompts
-  --execute: todas as Fs executam com LLM calls
-  --step N: executa ate funcao N
-  --retry: re-executa F6+F7 com feedback
+```
+python cex_8f_runner.py "create chunk config"              # dry-run default
+python cex_8f_runner.py "create chunk config" --execute     # with LLM
+python cex_8f_runner.py --kind chunk_strategy --execute      # skip classify
+python cex_8f_runner.py "create agent" --step 3             # stop at F3
+python cex_8f_runner.py "create agent" --verbose            # per-F timing
+python cex_8f_runner.py --list-kinds                         # 98 kinds
+```
 
 ---
 
-## RELACAO COM TOOLS EXISTENTES
+## 8. EDGE CASES
 
-| Tool | Papel | Status |
-|------|-------|--------|
-| cex_8f_motor.py | Classifica intent | NAO muda |
-| cex_crew_runner.py | Itera builders | DEPRECADO pelo runner |
-| cex_intent.py | Compoe 1 prompt | ABSORVIDO pelo runner |
-| cex_pipeline.py | 5-stage build | COEXISTE (batch) |
-| cex_forge.py | Gera de 1 kind | COEXISTE (simple) |
-| cex_8f_runner.py | Pipeline 8F | NOVO |
+| Case | Behavior |
+|------|----------|
+| kind=generic | Warn, suggest --kind |
+| Builder dir missing | Abort with list |
+| ISO file missing | Skip with warning |
+| No KC match | Use bld_knowledge_card only |
+| F7 fails 2x | Save as draft + issues |
+| LLM API error | Retry 1x, then save prompt |
+| artifact > max_bytes | F7 catches, F6 retries |
+| quality != null | F7 catches, F6 retries |
+| Multi-kind | Sequential F1-F8 per kind |
 
 ---
 
-## WAVES
+## 9. RELACAO COM TOOLS (19)
 
-### Wave 1: Core (~45 min, 1 EDISON)
-- F1-F3 (lookup), F6 (produce), F8 (save)
-- Test: dry-run chunk_strategy
+| Tool | Status |
+|------|--------|
+| cex_8f_motor.py | NAO MUDA (import interno) |
+| cex_crew_runner.py | DEPRECADO pelo runner |
+| cex_intent.py | DEPRECADO pelo runner |
+| cex_pipeline.py | COEXISTE (batch) |
+| cex_forge.py | COEXISTE (simple) |
+| cex_compile.py | NAO MUDA (F8 usa) |
+| cex_doctor.py | NAO MUDA (audit) |
+| 12 outros | NAO MUDAM |
 
-### Wave 2: Intelligence (~30 min, 1 EDISON)
-- F4 (reason), F7 (govern + retry)
-- Test: execute mode com validation
+Runner IMPORTA: motor (parse, classify, fan_out, kc_library), intent (execute_prompt)
 
-### Wave 3: Polish (~20 min, 1 EDISON)
-- F5 (tools), --step/--retry flags, verbose logging
-- Test: full F1-F8 end-to-end
+---
 
-### Wave 4: Proof (~15 min, STELLA)
-- 3 artefatos reais: chunk_strategy, agent, eval_dataset
-- Comparar runner vs intent.py
+## 10. WAVES DE IMPLEMENTACAO
 
-## ETA: ~2h | DEPS: PyYAML + anthropic (opcional)
+### Wave 1: Core Skeleton (1 EDISON, ~45 min)
+- RunState dataclass
+- EightFRunner: f1, f2, f3, f6, f8 (lookup + produce + save)
+- Helpers: load_iso, strip_frontmatter, extract_frontmatter_dict
+- CLI: argparse (--dry-run, --execute, --kind, --list-kinds, --verbose, --step, --output-dir)
+- Test: dry-run chunk_strategy shows correct F6 prompt with all sections
+
+### Wave 2: Intelligence (1 EDISON, ~30 min)
+- f4_reason() with LLM planning call (haiku)
+- f7_govern() with 6 hard gates (yaml, id_pattern, kind, quality, required, size)
+- Retry loop: F7 fail -> F6 retry with feedback (max 2)
+- Test: execute generates valid artifact; F7 rejects bad frontmatter
+
+### Wave 3: Polish + Proof (1 EDISON, ~30 min)
+- f5_call() with duplicate detection
+- --verbose timing per function, --step N flag
+- Multi-kind sequential execution
+- Generate 3 real artifacts: chunk_strategy, agent, eval_dataset
+- Write _docs/proof/8F_RUNNER_PROOF.md with metrics
+
+### TOTAL: ~1h45 | 3 waves sequenciais
+### DEPS: PyYAML + anthropic (opcional, so --execute)
+
+---
+
+## 11. METRICAS DE SUCESSO
+
+| Metrica | Target |
+|---------|--------|
+| dry-run has all 6 structured sections | PASS |
+| execute passes 6 hard gates | PASS |
+| F1 constraints visible in F6 prompt | visible |
+| F3 KC content visible in F6 prompt | visible |
+| F7 catches bad frontmatter | reject + retry |
+| F7->F6 retry fixes issue | 2nd attempt pass |
+| verbose shows timing | ms per F |
+| 3 proofs valid | doctor PASS |
