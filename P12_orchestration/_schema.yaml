@@ -4,8 +4,8 @@ description: COMO coordena
 kinds:
   workflow:
     description: Fluxo de trabalho (steps sequenciais/paralelos)
-    boundary: Fluxo de agentes+tools sequenciais/paralelos. NAO eh chain (P03, sequencia
-      de prompts) nem dag (grafo de deps sem execucao).
+    boundary: Fluxo de agentes+tools sequenciais/paralelos. NAO eh chain (P03, sequencia de prompts) nem dag (grafo de deps
+      sem execucao).
     layer: runtime
     core: true
     machine_format: yaml
@@ -15,8 +15,7 @@ kinds:
     llm_function: PRODUCE
   dag:
     description: Grafo aciclico de dependencias
-    boundary: Grafo aciclico de dependencias entre tasks. NAO eh workflow (execucao
-      direta) nem component_map (P08, componentes).
+    boundary: Grafo aciclico de dependencias entre tasks. NAO eh workflow (execucao direta) nem component_map (P08, componentes).
     layer: spec
     core: false
     machine_format: yaml
@@ -26,8 +25,7 @@ kinds:
     llm_function: PRODUCE
   spawn_config:
     description: Configuracao de spawn (solo, grid, continuous)
-    boundary: Configuracao de spawn de satelites. NAO eh boot_config (P02, per-provider)
-      nem env_config (P09, variaveis).
+    boundary: Configuracao de spawn de satelites. NAO eh boot_config (P02, per-provider) nem env_config (P09, variaveis).
     layer: runtime
     core: true
     machine_format: yaml
@@ -37,8 +35,7 @@ kinds:
     llm_function: GOVERN
   signal:
     description: Sinal entre agentes (complete, error, progress)
-    boundary: Sinal simples entre agentes (complete, error). NAO eh handoff (instrucao
-      completa) nem interface (P06, contrato).
+    boundary: Sinal simples entre agentes (complete, error). NAO eh handoff (instrucao completa) nem interface (P06, contrato).
     layer: runtime
     core: true
     machine_format: json
@@ -48,8 +45,7 @@ kinds:
     llm_function: COLLABORATE
   handoff:
     description: Instrucao de handoff (task + context + commit)
-    boundary: Instrucao de handoff com task+context+commit. NAO eh action_prompt (P03,
-      prompt puro) nem signal (evento simples).
+    boundary: Instrucao de handoff com task+context+commit. NAO eh action_prompt (P03, prompt puro) nem signal (evento simples).
     layer: runtime
     core: true
     machine_format: yaml
@@ -59,8 +55,8 @@ kinds:
     llm_function: COLLABORATE
   dispatch_rule:
     description: Regra de despacho (keyword > satellite)
-    boundary: Regra de despacho keyword>satellite. NAO eh router (P02, task>model
-      routing) nem workflow (nao executa, apenas roteia).
+    boundary: Regra de despacho keyword>satellite. NAO eh router (P02, task>model routing) nem workflow (nao executa, apenas
+      roteia).
     layer: runtime
     core: false
     machine_format: yaml
@@ -68,3 +64,34 @@ kinds:
     constraints:
       max_bytes: 3072
     llm_function: REASON
+  checkpoint:
+    description: Snapshot de estado de workflow
+    boundary: Estado salvo. NAO eh signal.
+    layer: runtime
+    core: true
+    machine_format: yaml
+    naming: p12_ckpt.md
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - name
+    - workflow_ref
+    - step
+    llm_function: GOVERN
+  schedule:
+    description: Trigger temporal que inicia workflow
+    boundary: QUANDO rodar. NAO eh dispatch_rule.
+    layer: runtime
+    core: false
+    machine_format: yaml
+    naming: p12_sched.md
+    constraints:
+      max_bytes: 1024
+    frontmatter_required:
+    - id
+    - name
+    - trigger_type
+    - cron
+    - workflow_ref
+    llm_function: GOVERN

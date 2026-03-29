@@ -1,13 +1,11 @@
-# P05 Output Schema v4.0
-# v3.0: output_schema renamed to response_format (disambiguate from P06.validation_schema)
 pillar: P05
 name: Output
 description: O que o agente ENTREGA
 kinds:
   response_format:
     description: Formato de resposta do LLM (como o agente responde)
-    boundary: Formato de resposta injetado no prompt do LLM. NAO eh validation_schema
-      P06 (contrato pos-geracao aplicado pelo sistema).
+    boundary: Formato de resposta injetado no prompt do LLM. NAO eh validation_schema P06 (contrato pos-geracao aplicado pelo
+      sistema).
     layer: spec
     core: true
     machine_format: json
@@ -17,8 +15,7 @@ kinds:
     llm_function: CONSTRAIN
   parser:
     description: Extrator de dados de saida
-    boundary: Extrator de dados de saida bruta. NAO eh formatter (nao transforma formato)
-      nem validator (P06, nao valida).
+    boundary: Extrator de dados de saida bruta. NAO eh formatter (nao transforma formato) nem validator (P06, nao valida).
     layer: runtime
     core: false
     machine_format: yaml
@@ -28,8 +25,8 @@ kinds:
     llm_function: GOVERN
   formatter:
     description: Formatador de saida (json, md, yaml)
-    boundary: Transformador de formato de saida. NAO eh parser (nao extrai dados)
-      nem response_format (nao define o que o LLM ve).
+    boundary: Transformador de formato de saida. NAO eh parser (nao extrai dados) nem response_format (nao define o que o
+      LLM ve).
     layer: runtime
     core: false
     machine_format: yaml
@@ -39,12 +36,26 @@ kinds:
     llm_function: GOVERN
   naming_rule:
     description: Regra de nomenclatura
-    boundary: Regra de nomenclatura de artefatos. NAO eh validator (P06, valida conteudo)
-      nem type_def (P06, define tipo).
+    boundary: Regra de nomenclatura de artefatos. NAO eh validator (P06, valida conteudo) nem type_def (P06, define tipo).
     layer: governance
     core: false
     machine_format: yaml
     naming: p05_nr_{{scope}}.md
     constraints:
       max_bytes: 4096
+    llm_function: GOVERN
+  output_validator:
+    description: Validacao pos-LLM
+    boundary: Valida OUTPUT. NAO eh validator P06.
+    layer: runtime
+    core: true
+    machine_format: yaml
+    naming: p05_oval.md
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - name
+    - checks
+    - on_fail
     llm_function: GOVERN

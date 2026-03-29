@@ -1,15 +1,10 @@
-# P01 Knowledge Schema v4.0
-# v2.0: machine_format per kind
-# Baseado em destilacao de 7 KCs golden do codexa-core
-# Sources: DISTILL_GOLDEN_KC_PATTERNS.md
 pillar: P01
 name: Knowledge
 description: O que o agente SABE
 kinds:
   knowledge_card:
     description: Fato atomico pesquisavel (densidade > 0.8)
-    boundary: Conhecimento destilado, estatico, versionado. NAO eh instrucao, template,
-      ou configuracao.
+    boundary: Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao.
     layer: content
     core: true
     machine_format: yaml
@@ -66,8 +61,7 @@ kinds:
     llm_function: INJECT
   rag_source:
     description: Fonte externa indexavel
-    boundary: Ponteiro para fonte externa indexavel. NAO eh o conteudo em si, apenas
-      referencia com URL e freshness.
+    boundary: Ponteiro para fonte externa indexavel. NAO eh o conteudo em si, apenas referencia com URL e freshness.
     layer: content
     core: false
     machine_format: yaml
@@ -83,8 +77,7 @@ kinds:
     llm_function: INJECT
   glossary_entry:
     description: Definicao de termo
-    boundary: Definicao curta de termo do dominio. NAO eh knowledge_card (sem densidade
-      min) nem context_doc (sem escopo).
+    boundary: Definicao curta de termo do dominio. NAO eh knowledge_card (sem densidade min) nem context_doc (sem escopo).
     layer: content
     core: false
     machine_format: yaml
@@ -100,8 +93,8 @@ kinds:
     llm_function: INJECT
   context_doc:
     description: Contexto de dominio
-    boundary: Contexto de dominio para hidratar prompts. NAO eh knowledge_card (sem
-      density gate) nem glossary_entry (nao define termo).
+    boundary: Contexto de dominio para hidratar prompts. NAO eh knowledge_card (sem density gate) nem glossary_entry (nao
+      define termo).
     layer: content
     core: false
     machine_format: yaml
@@ -116,8 +109,7 @@ kinds:
     llm_function: INJECT
   embedding_config:
     description: Configuracao de embedding model
-    boundary: Configuracao de modelo de embedding. NAO eh brain_index (P10) que configura
-      o indice, apenas o modelo vetorial.
+    boundary: Configuracao de modelo de embedding. NAO eh brain_index (P10) que configura o indice, apenas o modelo vetorial.
     layer: spec
     core: false
     machine_format: yaml
@@ -132,8 +124,7 @@ kinds:
     llm_function: GOVERN
   few_shot_example:
     description: Exemplo input/output pra prompt
-    boundary: Par input/output para few-shot learning. NAO eh golden_test (P07) que
-      avalia qualidade, apenas exemplifica formato.
+    boundary: Par input/output para few-shot learning. NAO eh golden_test (P07) que avalia qualidade, apenas exemplifica formato.
     layer: prompt
     core: true
     machine_format: yaml
@@ -147,3 +138,35 @@ kinds:
     - output
     - quality
     llm_function: INJECT
+  chunk_strategy:
+    description: Estrategia de chunking
+    boundary: Metodo de split. NAO eh embedding_config.
+    layer: runtime
+    core: true
+    machine_format: yaml
+    naming: p01_chunk.md
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - name
+    - method
+    - chunk_size
+    - chunk_overlap
+    llm_function: CONSTRAIN
+  retriever_config:
+    description: Config de retrieval (top_k, hybrid, reranker)
+    boundary: Parametros de busca. NAO eh embedding_config.
+    layer: runtime
+    core: true
+    machine_format: yaml
+    naming: p01_retr_cfg.md
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - name
+    - store_type
+    - top_k
+    - search_type
+    llm_function: CONSTRAIN

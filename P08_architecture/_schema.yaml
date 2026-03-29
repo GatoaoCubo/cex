@@ -4,8 +4,7 @@ description: COMO escala
 kinds:
   pattern:
     description: 'Pattern reutilizavel (ex: continuous batching)'
-    boundary: Pattern reutilizavel de arquitetura. NAO eh law (inviolavel) nem workflow
-      (P12, sequencia executavel).
+    boundary: Pattern reutilizavel de arquitetura. NAO eh law (inviolavel) nem workflow (P12, sequencia executavel).
     layer: content
     core: true
     machine_format: yaml
@@ -15,8 +14,7 @@ kinds:
     llm_function: INJECT
   law:
     description: Lei operacional (inviolavel)
-    boundary: Lei operacional inviolavel do sistema. NAO eh instruction (P03, flexivel)
-      nem guardrail (P11, safety-focused).
+    boundary: Lei operacional inviolavel do sistema. NAO eh instruction (P03, flexivel) nem guardrail (P11, safety-focused).
     layer: governance
     core: true
     machine_format: yaml
@@ -26,8 +24,7 @@ kinds:
     llm_function: CONSTRAIN
   diagram:
     description: Diagrama de arquitetura (ASCII ou Mermaid)
-    boundary: Diagrama visual de arquitetura. NAO eh component_map (dados estruturados)
-      nem pattern (sem prescricao).
+    boundary: Diagrama visual de arquitetura. NAO eh component_map (dados estruturados) nem pattern (sem prescricao).
     layer: content
     core: false
     machine_format: yaml
@@ -37,8 +34,7 @@ kinds:
     llm_function: INJECT
   component_map:
     description: Mapa de componentes (what connects to what)
-    boundary: Mapa estruturado de componentes e conexoes. NAO eh diagram (visual)
-      nem satellite_spec (escopo de 1 satelite).
+    boundary: Mapa estruturado de componentes e conexoes. NAO eh diagram (visual) nem satellite_spec (escopo de 1 satelite).
     layer: spec
     core: false
     machine_format: yaml
@@ -49,3 +45,19 @@ kinds:
   director:
     description: Crew orchestrator that composes and coordinates multiple builders
     naming: ex_director_{topic}.md
+  decision_record:
+    description: 'ADR: contexto, decisao, consequencias'
+    boundary: Registro. NAO eh law nem pattern.
+    layer: runtime
+    core: true
+    machine_format: yaml
+    naming: p08_adr.md
+    constraints:
+      max_bytes: 4096
+    frontmatter_required:
+    - id
+    - title
+    - status
+    - context
+    - decision
+    llm_function: REASON

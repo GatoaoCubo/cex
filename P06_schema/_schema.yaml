@@ -4,8 +4,7 @@ description: CONTRATOS de validacao
 kinds:
   input_schema:
     description: Contrato de entrada
-    boundary: Contrato de entrada que define dados requeridos. NAO eh validation_schema
-      (saida) nem type_def (definicao abstrata).
+    boundary: Contrato de entrada que define dados requeridos. NAO eh validation_schema (saida) nem type_def (definicao abstrata).
     layer: spec
     core: true
     machine_format: json
@@ -15,8 +14,8 @@ kinds:
     llm_function: CONSTRAIN
   type_def:
     description: Definicao de tipo customizado
-    boundary: Definicao de tipo customizado no sistema. NAO eh input_schema (contrato
-      de entrada) nem interface (contrato bilateral).
+    boundary: Definicao de tipo customizado no sistema. NAO eh input_schema (contrato de entrada) nem interface (contrato
+      bilateral).
     layer: spec
     core: true
     machine_format: yaml
@@ -26,8 +25,7 @@ kinds:
     llm_function: GOVERN
   validator:
     description: Regra de validacao (pre-commit, quality gate)
-    boundary: Regra de validacao tecnica pass/fail. NAO eh quality_gate (P11, score
-      numerico) nem scoring_rubric (P07, criterios).
+    boundary: Regra de validacao tecnica pass/fail. NAO eh quality_gate (P11, score numerico) nem scoring_rubric (P07, criterios).
     layer: governance
     core: true
     machine_format: yaml
@@ -37,8 +35,7 @@ kinds:
     llm_function: GOVERN
   interface:
     description: Contrato de integracao entre agentes
-    boundary: Contrato bilateral de integracao entre agentes. NAO eh input_schema
-      (unilateral) nem signal (P12, evento simples).
+    boundary: Contrato bilateral de integracao entre agentes. NAO eh input_schema (unilateral) nem signal (P12, evento simples).
     layer: spec
     core: false
     machine_format: json
@@ -48,8 +45,7 @@ kinds:
     llm_function: CONSTRAIN
   validation_schema:
     description: Contrato de validacao pos-geracao (o sistema aplica, LLM nao ve)
-    boundary: Contrato formal aplicado pelo SISTEMA apos geracao. NAO eh response_format
-      P05 (injetado no prompt, LLM ve).
+    boundary: Contrato formal aplicado pelo SISTEMA apos geracao. NAO eh response_format P05 (injetado no prompt, LLM ve).
     layer: spec
     core: false
     machine_format: json
@@ -57,3 +53,17 @@ kinds:
     constraints:
       max_bytes: 3072
     llm_function: GOVERN
+  enum_def:
+    description: Enumeracao reutilizavel
+    boundary: Lista finita. NAO eh type_def.
+    layer: runtime
+    core: true
+    machine_format: yaml
+    naming: p06_enum.md
+    constraints:
+      max_bytes: 1024
+    frontmatter_required:
+    - id
+    - name
+    - values
+    llm_function: CONSTRAIN

@@ -4,8 +4,8 @@ description: QUEM o agente EH
 kinds:
   agent:
     description: Definicao de agente (persona + capabilities)
-    boundary: Definicao completa de agente (persona + capabilities). NAO eh skill
-      (P04, habilidade executavel) nem system_prompt (P03, como fala).
+    boundary: Definicao completa de agente (persona + capabilities). NAO eh skill (P04, habilidade executavel) nem system_prompt
+      (P03, como fala).
     layer: spec
     core: true
     machine_format: yaml
@@ -52,8 +52,7 @@ kinds:
     llm_function: BECOME
   lens:
     description: Perspectiva especializada sobre dominio
-    boundary: Perspectiva especializada sobre dominio. NAO eh agent (sem capabilities)
-      nem mental_model (sem routing rules).
+    boundary: Perspectiva especializada sobre dominio. NAO eh agent (sem capabilities) nem mental_model (sem routing rules).
     layer: content
     core: false
     machine_format: yaml
@@ -68,8 +67,8 @@ kinds:
     llm_function: INJECT
   boot_config:
     description: Configuracao de inicializacao por provider
-    boundary: Bootstrap por provider (claude, cursor, codex). NAO eh env_config (P09,
-      variaveis genericas) nem spawn_config (P12, satelites).
+    boundary: Bootstrap por provider (claude, cursor, codex). NAO eh env_config (P09, variaveis genericas) nem spawn_config
+      (P12, satelites).
     layer: runtime
     core: false
     machine_format: yaml
@@ -85,8 +84,7 @@ kinds:
     llm_function: GOVERN
   mental_model:
     description: Mapa mental do agente (routing, decisoes)
-    boundary: Identidade fixa do agente com routing e decisoes. NAO eh mental_model
-      P10 (estado variavel por sessao).
+    boundary: Identidade fixa do agente com routing e decisoes. NAO eh mental_model P10 (estado variavel por sessao).
     layer: spec
     core: true
     machine_format: yaml
@@ -101,8 +99,8 @@ kinds:
     llm_function: BECOME
   model_card:
     description: Spec do LLM usado (pricing, context, capabilities)
-    boundary: Spec de LLM (pricing, context window, capabilities). NAO eh agent (P02,
-      quem usa o modelo) nem boot_config (como inicia).
+    boundary: Spec de LLM (pricing, context window, capabilities). NAO eh agent (P02, quem usa o modelo) nem boot_config (como
+      inicia).
     layer: spec
     core: false
     machine_format: yaml
@@ -118,8 +116,7 @@ kinds:
     llm_function: GOVERN
   router:
     description: Regra de roteamento (task > satellite)
-    boundary: Roteamento task-to-satellite. NAO eh dispatch_rule (P12, keyword>satellite)
-      nem fallback_chain (modelo>modelo).
+    boundary: Roteamento task-to-satellite. NAO eh dispatch_rule (P12, keyword>satellite) nem fallback_chain (modelo>modelo).
     layer: runtime
     core: true
     machine_format: yaml
@@ -133,8 +130,7 @@ kinds:
     llm_function: REASON
   fallback_chain:
     description: Sequencia de fallback (model A > B > C)
-    boundary: Sequencia de fallback entre modelos LLM. NAO eh chain (P03, sequencia
-      de prompts) nem router (task routing).
+    boundary: Sequencia de fallback entre modelos LLM. NAO eh chain (P03, sequencia de prompts) nem router (task routing).
     layer: runtime
     core: false
     machine_format: yaml
@@ -147,9 +143,8 @@ kinds:
     - timeout_per_step
     llm_function: GOVERN
   iso_package:
-    description: Pacote portable de agente AI (ISO format) — self-contained, LLM-agnostic
-    boundary: Pacote distribuivel de agente em formato ISO. NAO eh agent (spec do
-      agente) — iso_package eh o bundle portable.
+    description: Pacote portable de agente AI (ISO format) â€” self-contained, LLM-agnostic
+    boundary: Pacote distribuivel de agente em formato ISO. NAO eh agent (spec do agente) â€” iso_package eh o bundle portable.
     layer: spec
     core: true
     machine_format: yaml
@@ -194,14 +189,44 @@ kinds:
       upload_kit.md: P04
     llm_function: BECOME
   axiom:
-    boundary: Regra fundamental imutavel. NAO eh law (P08, operacional ajustavel)
-      nem instruction (P03, flexivel).
+    boundary: Regra fundamental imutavel. NAO eh law (P08, operacional ajustavel) nem instruction (P03, flexivel).
     constraints:
       max_bytes: 3072
     core: true
-    description: Principio fundamental imutavel — parte da identidade profunda da
-      entidade
+    description: Principio fundamental imutavel â€” parte da identidade profunda da entidade
     layer: governance
     llm_function: BECOME
     machine_format: yaml
     naming: p10_ax_{{rule}}.md
+  handoff_protocol:
+    description: Protocolo de transferencia entre agentes
+    boundary: Handoff A2A. NAO eh dispatch_rule.
+    layer: runtime
+    core: true
+    machine_format: yaml
+    naming: p02_handoff.md
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - name
+    - trigger
+    - context_passed
+    - return_contract
+    llm_function: COLLABORATE
+  memory_scope:
+    description: Config de memoria de agente
+    boundary: Qual memoria usar. NAO eh session_state.
+    layer: runtime
+    core: false
+    machine_format: yaml
+    naming: p02_memscope.md
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - name
+    - memory_types
+    - backend
+    - ttl
+    llm_function: INJECT
