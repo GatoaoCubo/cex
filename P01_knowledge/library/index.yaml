@@ -142,6 +142,17 @@ domains:
     - constraint_spec
     quality: 9.0
     origin: src_framework_taxonomy
+  kc_eval_testing:
+    path: library/domain/kc_eval_testing.md
+    feeds_kinds:
+    - benchmark
+    - e2e_eval
+    - smoke_eval
+    - unit_eval
+    - red_team_eval
+    - regression_check
+    quality: 8.5
+    origin: manual
   kc_external_integrations:
     path: library/domain/kc_external_integrations.md
     feeds_kinds:
@@ -170,6 +181,15 @@ domains:
     - response_format
     quality: 9.0
     origin: src_provider_taxonomy
+  kc_governance_patterns:
+    path: library/domain/kc_governance_patterns.md
+    feeds_kinds:
+    - law
+    - component_map
+    - diagram
+    - decision_record
+    quality: 8.5
+    origin: manual
   kc_haystack_patterns:
     path: library/domain/kc_haystack_patterns.md
     feeds_kinds:
@@ -270,6 +290,14 @@ domains:
     - rag_source
     quality: 9.0
     origin: manual
+  kc_output_formatting:
+    path: library/domain/kc_output_formatting.md
+    feeds_kinds:
+    - formatter
+    - naming_rule
+    - response_format
+    quality: 8.5
+    origin: manual
   kc_perception_tools:
     path: library/domain/kc_perception_tools.md
     feeds_kinds:
@@ -307,6 +335,16 @@ domains:
     - dispatch_rule
     quality: 9.0
     origin: manual
+  kc_schema_validation:
+    path: library/domain/kc_schema_validation.md
+    feeds_kinds:
+    - type_def
+    - enum_def
+    - interface
+    - validation_schema
+    - validator
+    quality: 8.5
+    origin: manual
 coverage:
   action_prompt:
   - kc_academic_agent_patterns
@@ -326,6 +364,8 @@ coverage:
   - kc_perception_tools
   axiom:
   - kc_agent_identity
+  benchmark:
+  - kc_eval_testing
   boot_config:
   - kc_agent_identity
   brain_index:
@@ -350,6 +390,8 @@ coverage:
   code_executor:
   - kc_google_ai_patterns
   - kc_openai_api_patterns
+  component_map:
+  - kc_governance_patterns
   computer_use:
   - kc_anthropic_api_patterns
   constraint_spec:
@@ -362,6 +404,10 @@ coverage:
   - kc_orchestration_runtime
   db_connector:
   - kc_external_integrations
+  decision_record:
+  - kc_governance_patterns
+  diagram:
+  - kc_governance_patterns
   director:
   - kc_academic_agent_patterns
   - kc_chinese_llm_ecosystem
@@ -374,6 +420,8 @@ coverage:
   - kc_haystack_patterns
   - kc_langchain_patterns
   - kc_llamaindex_patterns
+  e2e_eval:
+  - kc_eval_testing
   embedding_config:
   - kc_academic_rag_patterns
   - kc_haystack_patterns
@@ -381,6 +429,8 @@ coverage:
   - kc_llamaindex_patterns
   entity_memory:
   - kc_memory_persistence
+  enum_def:
+  - kc_schema_validation
   env_config:
   - kc_aws_bedrock_patterns
   eval_dataset:
@@ -391,6 +441,8 @@ coverage:
   - kc_infra_config
   few_shot_example:
   - kc_dspy_patterns
+  formatter:
+  - kc_output_formatting
   function_def:
   - kc_anthropic_api_patterns
   - kc_aws_bedrock_patterns
@@ -423,6 +475,8 @@ coverage:
   - kc_openai_api_patterns
   instruction:
   - kc_prompt_engineering
+  interface:
+  - kc_schema_validation
   iso_package:
   - kc_agent_identity
   knowledge_card:
@@ -431,6 +485,8 @@ coverage:
   - kc_haystack_patterns
   - kc_llamaindex_patterns
   - kc_mcp_protocol
+  law:
+  - kc_governance_patterns
   learning_record:
   - kc_memory_persistence
   lens:
@@ -453,6 +509,8 @@ coverage:
   - kc_agent_identity
   model_card:
   - kc_agent_identity
+  naming_rule:
+  - kc_output_formatting
   notifier:
   - kc_external_integrations
   optimizer:
@@ -484,11 +542,16 @@ coverage:
   - kc_orchestration_runtime
   rate_limit_config:
   - kc_infra_config
+  red_team_eval:
+  - kc_eval_testing
+  regression_check:
+  - kc_eval_testing
   response_format:
   - kc_dspy_patterns
   - kc_google_ai_patterns
   - kc_llamaindex_patterns
   - kc_openai_api_patterns
+  - kc_output_formatting
   retriever:
   - kc_dspy_patterns
   - kc_haystack_patterns
@@ -523,6 +586,8 @@ coverage:
   signal:
   - kc_a2a_protocol
   - kc_crewai_patterns
+  smoke_eval:
+  - kc_eval_testing
   spawn_config:
   - kc_orchestration_runtime
   system_prompt:
@@ -530,6 +595,14 @@ coverage:
   - kc_anthropic_api_patterns
   - kc_google_ai_patterns
   - kc_openai_api_patterns
+  type_def:
+  - kc_schema_validation
+  unit_eval:
+  - kc_eval_testing
+  validation_schema:
+  - kc_schema_validation
+  validator:
+  - kc_schema_validation
   vision_tool:
   - kc_openai_api_patterns
   - kc_perception_tools
