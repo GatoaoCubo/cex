@@ -35,18 +35,19 @@ sources:
     - github_repos
     scraped: '2026-03-29'
 domains:
-  kc_a2a_protocol:
-    path: library/domain/kc_a2a_protocol.md
+  p01_kc_a2a_protocol:
+    path: P01_knowledge\library\domain\kc_a2a_protocol.md
+    title: 'Google A2A Protocol: Agent-to-Agent Communication Standard'
     feeds_kinds:
     - agent
     - handoff_protocol
     - signal
     - checkpoint
     - mcp_server
-    quality: 9.0
     origin: src_standards_global
-  kc_academic_agent_patterns:
-    path: library/domain/kc_academic_agent_patterns.md
+  p01_kc_academic_agent_patterns:
+    path: P01_knowledge\library\domain\kc_academic_agent_patterns.md
+    title: 'Academic Agent Patterns: ReAct, CoT, Reflexion, CoALA, LATS'
     feeds_kinds:
     - agent
     - chain
@@ -54,10 +55,10 @@ domains:
     - system_prompt
     - director
     - handoff_protocol
-    quality: 9.0
     origin: src_standards_global
-  kc_academic_rag_patterns:
-    path: library/domain/kc_academic_rag_patterns.md
+  p01_kc_academic_rag_patterns:
+    path: P01_knowledge\library\domain\kc_academic_rag_patterns.md
+    title: 'Academic RAG Patterns: Foundational Retrieval-Augmented Generation Research'
     feeds_kinds:
     - retriever_config
     - chunk_strategy
@@ -65,10 +66,11 @@ domains:
     - knowledge_card
     - document_loader
     - search_tool
-    quality: 9.0
     origin: src_standards_global
-  kc_agent_identity:
-    path: library/domain/kc_agent_identity.md
+  p01_kc_agent_identity:
+    path: P01_knowledge\library\domain\kc_agent_identity.md
+    title: Agent Identity — Lenses, Mental Models, Model Cards, Boot Configs, ISO
+      Packages, Axioms
     feeds_kinds:
     - lens
     - mental_model
@@ -76,10 +78,11 @@ domains:
     - boot_config
     - iso_package
     - axiom
-    quality: 9.0
     origin: manual
-  kc_anthropic_api_patterns:
-    path: library/domain/kc_anthropic_api_patterns.md
+  p01_kc_anthropic_api_patterns:
+    path: P01_knowledge\library\domain\kc_anthropic_api_patterns.md
+    title: 'Anthropic API Patterns: Tool Use, Computer Use, Prompt Caching, Server
+      Tools'
     feeds_kinds:
     - function_def
     - mcp_server
@@ -87,10 +90,10 @@ domains:
     - prompt_template
     - computer_use
     - input_schema
-    quality: 9.0
     origin: src_provider_taxonomy
-  kc_aws_bedrock_patterns:
-    path: library/domain/kc_aws_bedrock_patterns.md
+  p01_kc_aws_bedrock_patterns:
+    path: P01_knowledge\library\domain\kc_aws_bedrock_patterns.md
+    title: 'AWS Bedrock Patterns: Agents, Knowledge Bases, Guardrails, Orchestration'
     feeds_kinds:
     - agent
     - knowledge_card
@@ -98,10 +101,10 @@ domains:
     - function_def
     - retriever_config
     - env_config
-    quality: 9.0
     origin: src_provider_taxonomy
-  kc_chinese_llm_ecosystem:
-    path: library/domain/kc_chinese_llm_ecosystem.md
+  p01_kc_chinese_llm_ecosystem:
+    path: P01_knowledge\library\domain\kc_chinese_llm_ecosystem.md
+    title: 'Chinese LLM Ecosystem: Agent Frameworks and Patterns'
     feeds_kinds:
     - agent
     - function_def
@@ -109,10 +112,10 @@ domains:
     - workflow
     - plugin
     - director
-    quality: 9.0
     origin: src_standards_global
-  kc_crewai_patterns:
-    path: library/domain/kc_crewai_patterns.md
+  p01_kc_crewai_patterns:
+    path: P01_knowledge\library\domain\kc_crewai_patterns.md
+    title: CrewAI Patterns — Agent, Task, Crew, Process, Memory, Delegation
     feeds_kinds:
     - agent
     - director
@@ -125,10 +128,10 @@ domains:
     - handoff
     - output_validator
     - signal
-    quality: 9.0
     origin: src_framework_taxonomy
-  kc_dspy_patterns:
-    path: library/domain/kc_dspy_patterns.md
+  p01_kc_dspy_patterns:
+    path: P01_knowledge\library\domain\kc_dspy_patterns.md
+    title: DSPy Patterns — Signatures, Modules, Optimizers, Assertions
     feeds_kinds:
     - prompt_template
     - input_schema
@@ -140,10 +143,10 @@ domains:
     - scoring_rubric
     - retriever
     - constraint_spec
-    quality: 9.0
     origin: src_framework_taxonomy
-  kc_eval_testing:
-    path: library/domain/kc_eval_testing.md
+  p01_kc_eval_testing:
+    path: P01_knowledge\library\domain\kc_eval_testing.md
+    title: Evaluation Testing -- Benchmarks, Evals, Red Team, Regression
     feeds_kinds:
     - benchmark
     - e2e_eval
@@ -151,27 +154,28 @@ domains:
     - unit_eval
     - red_team_eval
     - regression_check
-    quality: 8.5
     origin: manual
-  kc_external_integrations:
-    path: library/domain/kc_external_integrations.md
+  p01_kc_external_integrations:
+    path: P01_knowledge\library\domain\kc_external_integrations.md
+    title: External Integrations — API Clients, Webhooks, Notifications, DB Connectors,
+      Browser Automation
     feeds_kinds:
     - api_client
     - webhook
     - notifier
     - db_connector
     - browser_tool
-    quality: 9.0
     origin: manual
-  kc_feedback_loops:
-    path: library/domain/kc_feedback_loops.md
+  p01_kc_feedback_loops:
+    path: P01_knowledge\library\domain\kc_feedback_loops.md
+    title: Feedback Loops — Bug Loops, Lifecycle Rules for Continuous Improvement
     feeds_kinds:
     - bugloop
     - lifecycle_rule
-    quality: 9.0
     origin: manual
-  kc_google_ai_patterns:
-    path: library/domain/kc_google_ai_patterns.md
+  p01_kc_google_ai_patterns:
+    path: P01_knowledge\library\domain\kc_google_ai_patterns.md
+    title: 'Google Gemini API Patterns: Function Calling, Grounding, Tool Config'
     feeds_kinds:
     - function_def
     - input_schema
@@ -179,19 +183,19 @@ domains:
     - search_tool
     - system_prompt
     - response_format
-    quality: 9.0
     origin: src_provider_taxonomy
-  kc_governance_patterns:
-    path: library/domain/kc_governance_patterns.md
+  p01_kc_governance_patterns:
+    path: P01_knowledge\library\domain\kc_governance_patterns.md
+    title: Governance -- Laws, Component Maps, Diagrams, Decision Records
     feeds_kinds:
     - law
     - component_map
     - diagram
     - decision_record
-    quality: 8.5
     origin: manual
-  kc_haystack_patterns:
-    path: library/domain/kc_haystack_patterns.md
+  p01_kc_haystack_patterns:
+    path: P01_knowledge\library\domain\kc_haystack_patterns.md
+    title: Haystack Patterns — Pipeline, Component, DocumentStore, Generators
     feeds_kinds:
     - workflow
     - function_def
@@ -203,10 +207,11 @@ domains:
     - dispatch_rule
     - pattern
     - document_loader
-    quality: 9.0
     origin: src_framework_taxonomy
-  kc_infra_config:
-    path: library/domain/kc_infra_config.md
+  p01_kc_infra_config:
+    path: P01_knowledge\library\domain\kc_infra_config.md
+    title: Infrastructure Configuration — Paths, Permissions, Feature Flags, Runtime
+      Rules, Secrets, Rate Limits
     feeds_kinds:
     - path_config
     - permission
@@ -214,10 +219,10 @@ domains:
     - runtime_rule
     - secret_config
     - rate_limit_config
-    quality: 9.0
     origin: manual
-  kc_langchain_patterns:
-    path: library/domain/kc_langchain_patterns.md
+  p01_kc_langchain_patterns:
+    path: P01_knowledge\library\domain\kc_langchain_patterns.md
+    title: LangChain Patterns — LCEL, Runnables, Tools, Retrievers, Output Parsers
     feeds_kinds:
     - agent
     - chain
@@ -231,10 +236,11 @@ domains:
     - parser
     - memory_scope
     - workflow
-    quality: 9.0
     origin: src_framework_taxonomy
-  kc_llamaindex_patterns:
-    path: library/domain/kc_llamaindex_patterns.md
+  p01_kc_llamaindex_patterns:
+    path: P01_knowledge\library\domain\kc_llamaindex_patterns.md
+    title: LlamaIndex Patterns — Query Engines, Node Parsers, Response Synthesizers,
+      Workflows
     feeds_kinds:
     - agent
     - retriever
@@ -246,10 +252,10 @@ domains:
     - response_format
     - brain_index
     - knowledge_card
-    quality: 9.0
     origin: src_framework_taxonomy
-  kc_mcp_protocol:
-    path: library/domain/kc_mcp_protocol.md
+  p01_kc_mcp_protocol:
+    path: P01_knowledge\library\domain\kc_mcp_protocol.md
+    title: 'MCP Protocol: Tools, Resources, Prompts, Transport, Capabilities'
     feeds_kinds:
     - mcp_server
     - function_def
@@ -257,20 +263,22 @@ domains:
     - prompt_template
     - plugin
     - hook
-    quality: 9.0
     origin: src_provider_taxonomy
-  kc_memory_persistence:
-    path: library/domain/kc_memory_persistence.md
+  p01_kc_memory_persistence:
+    path: P01_knowledge\library\domain\kc_memory_persistence.md
+    title: Memory & Persistence — Learning Records, Session State, Runtime State,
+      Entity Memory, Summaries
     feeds_kinds:
     - learning_record
     - session_state
     - runtime_state
     - entity_memory
     - memory_summary
-    quality: 9.0
     origin: manual
-  kc_openai_api_patterns:
-    path: library/domain/kc_openai_api_patterns.md
+  p01_kc_openai_api_patterns:
+    path: P01_knowledge\library\domain\kc_openai_api_patterns.md
+    title: 'OpenAI API Patterns: Function Calling, Structured Outputs, Assistants,
+      Evals'
     feeds_kinds:
     - function_def
     - input_schema
@@ -279,45 +287,46 @@ domains:
     - search_tool
     - code_executor
     - vision_tool
-    quality: 9.0
     origin: src_provider_taxonomy
-  kc_orchestration_runtime:
-    path: library/domain/kc_orchestration_runtime.md
+  p01_kc_orchestration_runtime:
+    path: P01_knowledge\library\domain\kc_orchestration_runtime.md
+    title: Orchestration Runtime — DAGs, Spawn Configs, Schedules, RAG Sources
     feeds_kinds:
     - dag
     - spawn_config
     - schedule
     - rag_source
-    quality: 9.0
     origin: manual
-  kc_output_formatting:
-    path: library/domain/kc_output_formatting.md
+  p01_kc_output_formatting:
+    path: P01_knowledge\library\domain\kc_output_formatting.md
+    title: Output Formatting -- Formatters, Naming, Response Structure
     feeds_kinds:
     - formatter
     - naming_rule
     - response_format
-    quality: 8.5
     origin: manual
-  kc_perception_tools:
-    path: library/domain/kc_perception_tools.md
+  p01_kc_perception_tools:
+    path: P01_knowledge\library\domain\kc_perception_tools.md
+    title: Perception Tools — Audio Processing, Vision/Image, CLI Automation, Background
+      Daemons
     feeds_kinds:
     - audio_tool
     - vision_tool
     - cli_tool
     - daemon
-    quality: 9.0
     origin: manual
-  kc_prompt_engineering:
-    path: library/domain/kc_prompt_engineering.md
+  p01_kc_prompt_engineering:
+    path: P01_knowledge\library\domain\kc_prompt_engineering.md
+    title: Prompt Engineering — Instructions, Versioning, Context Docs, Glossary Entries
     feeds_kinds:
     - instruction
     - prompt_version
     - context_doc
     - glossary_entry
-    quality: 9.0
     origin: manual
-  kc_reward_and_alignment:
-    path: library/domain/kc_reward_and_alignment.md
+  p01_kc_reward_and_alignment:
+    path: P01_knowledge\library\domain\kc_reward_and_alignment.md
+    title: 'Reward Modeling and Alignment: RLHF, DPO, Constitutional AI'
     feeds_kinds:
     - reward_signal
     - quality_gate
@@ -325,292 +334,291 @@ domains:
     - scoring_rubric
     - eval_dataset
     - golden_test
-    quality: 9.0
     origin: src_standards_global
-  kc_routing_resilience:
-    path: library/domain/kc_routing_resilience.md
+  p01_kc_routing_resilience:
+    path: P01_knowledge\library\domain\kc_routing_resilience.md
+    title: Routing & Resilience — Intent Routers, Fallback Chains, Dispatch Rules
     feeds_kinds:
     - router
     - fallback_chain
     - dispatch_rule
-    quality: 9.0
     origin: manual
-  kc_schema_validation:
-    path: library/domain/kc_schema_validation.md
+  p01_kc_schema_validation:
+    path: P01_knowledge\library\domain\kc_schema_validation.md
+    title: Schema Validation -- Types, Enums, Interfaces, Validators
     feeds_kinds:
     - type_def
     - enum_def
     - interface
     - validation_schema
     - validator
-    quality: 8.5
     origin: manual
 coverage:
-  action_prompt:
-  - kc_academic_agent_patterns
-  - kc_crewai_patterns
   agent:
-  - kc_a2a_protocol
-  - kc_academic_agent_patterns
-  - kc_aws_bedrock_patterns
-  - kc_chinese_llm_ecosystem
-  - kc_crewai_patterns
-  - kc_dspy_patterns
-  - kc_langchain_patterns
-  - kc_llamaindex_patterns
-  api_client:
-  - kc_external_integrations
-  audio_tool:
-  - kc_perception_tools
-  axiom:
-  - kc_agent_identity
-  benchmark:
-  - kc_eval_testing
-  boot_config:
-  - kc_agent_identity
-  brain_index:
-  - kc_haystack_patterns
-  - kc_llamaindex_patterns
-  browser_tool:
-  - kc_external_integrations
-  bugloop:
-  - kc_feedback_loops
-  chain:
-  - kc_academic_agent_patterns
-  - kc_dspy_patterns
-  - kc_langchain_patterns
-  checkpoint:
-  - kc_a2a_protocol
-  chunk_strategy:
-  - kc_academic_rag_patterns
-  - kc_langchain_patterns
-  - kc_llamaindex_patterns
-  cli_tool:
-  - kc_perception_tools
-  code_executor:
-  - kc_google_ai_patterns
-  - kc_openai_api_patterns
-  component_map:
-  - kc_governance_patterns
-  computer_use:
-  - kc_anthropic_api_patterns
-  constraint_spec:
-  - kc_dspy_patterns
-  context_doc:
-  - kc_prompt_engineering
-  daemon:
-  - kc_perception_tools
-  dag:
-  - kc_orchestration_runtime
-  db_connector:
-  - kc_external_integrations
-  decision_record:
-  - kc_governance_patterns
-  diagram:
-  - kc_governance_patterns
-  director:
-  - kc_academic_agent_patterns
-  - kc_chinese_llm_ecosystem
-  - kc_crewai_patterns
-  dispatch_rule:
-  - kc_haystack_patterns
-  - kc_routing_resilience
-  document_loader:
-  - kc_academic_rag_patterns
-  - kc_haystack_patterns
-  - kc_langchain_patterns
-  - kc_llamaindex_patterns
-  e2e_eval:
-  - kc_eval_testing
-  embedding_config:
-  - kc_academic_rag_patterns
-  - kc_haystack_patterns
-  - kc_langchain_patterns
-  - kc_llamaindex_patterns
-  entity_memory:
-  - kc_memory_persistence
-  enum_def:
-  - kc_schema_validation
-  env_config:
-  - kc_aws_bedrock_patterns
-  eval_dataset:
-  - kc_reward_and_alignment
-  fallback_chain:
-  - kc_routing_resilience
-  feature_flag:
-  - kc_infra_config
-  few_shot_example:
-  - kc_dspy_patterns
-  formatter:
-  - kc_output_formatting
-  function_def:
-  - kc_anthropic_api_patterns
-  - kc_aws_bedrock_patterns
-  - kc_chinese_llm_ecosystem
-  - kc_crewai_patterns
-  - kc_google_ai_patterns
-  - kc_haystack_patterns
-  - kc_langchain_patterns
-  - kc_mcp_protocol
-  - kc_openai_api_patterns
-  glossary_entry:
-  - kc_prompt_engineering
-  golden_test:
-  - kc_reward_and_alignment
-  guardrail:
-  - kc_aws_bedrock_patterns
-  - kc_crewai_patterns
-  handoff:
-  - kc_crewai_patterns
+  - p01_kc_a2a_protocol
+  - p01_kc_academic_agent_patterns
+  - p01_kc_aws_bedrock_patterns
+  - p01_kc_chinese_llm_ecosystem
+  - p01_kc_crewai_patterns
+  - p01_kc_dspy_patterns
+  - p01_kc_langchain_patterns
+  - p01_kc_llamaindex_patterns
   handoff_protocol:
-  - kc_a2a_protocol
-  - kc_academic_agent_patterns
-  hook:
-  - kc_crewai_patterns
-  - kc_mcp_protocol
-  input_schema:
-  - kc_anthropic_api_patterns
-  - kc_dspy_patterns
-  - kc_google_ai_patterns
-  - kc_openai_api_patterns
-  instruction:
-  - kc_prompt_engineering
-  interface:
-  - kc_schema_validation
-  iso_package:
-  - kc_agent_identity
-  knowledge_card:
-  - kc_academic_rag_patterns
-  - kc_aws_bedrock_patterns
-  - kc_haystack_patterns
-  - kc_llamaindex_patterns
-  - kc_mcp_protocol
-  law:
-  - kc_governance_patterns
-  learning_record:
-  - kc_memory_persistence
-  lens:
-  - kc_agent_identity
-  lifecycle_rule:
-  - kc_feedback_loops
-  llm_judge:
-  - kc_reward_and_alignment
-  mcp_server:
-  - kc_a2a_protocol
-  - kc_anthropic_api_patterns
-  - kc_chinese_llm_ecosystem
-  - kc_mcp_protocol
-  memory_scope:
-  - kc_crewai_patterns
-  - kc_langchain_patterns
-  memory_summary:
-  - kc_memory_persistence
-  mental_model:
-  - kc_agent_identity
-  model_card:
-  - kc_agent_identity
-  naming_rule:
-  - kc_output_formatting
-  notifier:
-  - kc_external_integrations
-  optimizer:
-  - kc_dspy_patterns
-  output_validator:
-  - kc_crewai_patterns
-  parser:
-  - kc_langchain_patterns
-  path_config:
-  - kc_infra_config
-  pattern:
-  - kc_haystack_patterns
-  permission:
-  - kc_infra_config
-  plugin:
-  - kc_chinese_llm_ecosystem
-  - kc_mcp_protocol
-  prompt_template:
-  - kc_anthropic_api_patterns
-  - kc_dspy_patterns
-  - kc_haystack_patterns
-  - kc_langchain_patterns
-  - kc_mcp_protocol
-  prompt_version:
-  - kc_prompt_engineering
-  quality_gate:
-  - kc_reward_and_alignment
-  rag_source:
-  - kc_orchestration_runtime
-  rate_limit_config:
-  - kc_infra_config
-  red_team_eval:
-  - kc_eval_testing
-  regression_check:
-  - kc_eval_testing
-  response_format:
-  - kc_dspy_patterns
-  - kc_google_ai_patterns
-  - kc_llamaindex_patterns
-  - kc_openai_api_patterns
-  - kc_output_formatting
-  retriever:
-  - kc_dspy_patterns
-  - kc_haystack_patterns
-  - kc_langchain_patterns
-  - kc_llamaindex_patterns
-  retriever_config:
-  - kc_academic_rag_patterns
-  - kc_aws_bedrock_patterns
-  - kc_langchain_patterns
-  - kc_llamaindex_patterns
-  reward_signal:
-  - kc_reward_and_alignment
-  router:
-  - kc_routing_resilience
-  runtime_rule:
-  - kc_infra_config
-  runtime_state:
-  - kc_memory_persistence
-  schedule:
-  - kc_orchestration_runtime
-  scoring_rubric:
-  - kc_dspy_patterns
-  - kc_reward_and_alignment
-  search_tool:
-  - kc_academic_rag_patterns
-  - kc_google_ai_patterns
-  - kc_openai_api_patterns
-  secret_config:
-  - kc_infra_config
-  session_state:
-  - kc_memory_persistence
+  - p01_kc_a2a_protocol
+  - p01_kc_academic_agent_patterns
   signal:
-  - kc_a2a_protocol
-  - kc_crewai_patterns
-  smoke_eval:
-  - kc_eval_testing
-  spawn_config:
-  - kc_orchestration_runtime
+  - p01_kc_a2a_protocol
+  - p01_kc_crewai_patterns
+  checkpoint:
+  - p01_kc_a2a_protocol
+  mcp_server:
+  - p01_kc_a2a_protocol
+  - p01_kc_anthropic_api_patterns
+  - p01_kc_chinese_llm_ecosystem
+  - p01_kc_mcp_protocol
+  chain:
+  - p01_kc_academic_agent_patterns
+  - p01_kc_dspy_patterns
+  - p01_kc_langchain_patterns
+  action_prompt:
+  - p01_kc_academic_agent_patterns
+  - p01_kc_crewai_patterns
   system_prompt:
-  - kc_academic_agent_patterns
-  - kc_anthropic_api_patterns
-  - kc_google_ai_patterns
-  - kc_openai_api_patterns
-  type_def:
-  - kc_schema_validation
-  unit_eval:
-  - kc_eval_testing
-  validation_schema:
-  - kc_schema_validation
-  validator:
-  - kc_schema_validation
-  vision_tool:
-  - kc_openai_api_patterns
-  - kc_perception_tools
-  webhook:
-  - kc_external_integrations
+  - p01_kc_academic_agent_patterns
+  - p01_kc_anthropic_api_patterns
+  - p01_kc_google_ai_patterns
+  - p01_kc_openai_api_patterns
+  director:
+  - p01_kc_academic_agent_patterns
+  - p01_kc_chinese_llm_ecosystem
+  - p01_kc_crewai_patterns
+  retriever_config:
+  - p01_kc_academic_rag_patterns
+  - p01_kc_aws_bedrock_patterns
+  - p01_kc_langchain_patterns
+  - p01_kc_llamaindex_patterns
+  chunk_strategy:
+  - p01_kc_academic_rag_patterns
+  - p01_kc_langchain_patterns
+  - p01_kc_llamaindex_patterns
+  embedding_config:
+  - p01_kc_academic_rag_patterns
+  - p01_kc_haystack_patterns
+  - p01_kc_langchain_patterns
+  - p01_kc_llamaindex_patterns
+  knowledge_card:
+  - p01_kc_academic_rag_patterns
+  - p01_kc_aws_bedrock_patterns
+  - p01_kc_haystack_patterns
+  - p01_kc_llamaindex_patterns
+  - p01_kc_mcp_protocol
+  document_loader:
+  - p01_kc_academic_rag_patterns
+  - p01_kc_haystack_patterns
+  - p01_kc_langchain_patterns
+  - p01_kc_llamaindex_patterns
+  search_tool:
+  - p01_kc_academic_rag_patterns
+  - p01_kc_google_ai_patterns
+  - p01_kc_openai_api_patterns
+  lens:
+  - p01_kc_agent_identity
+  mental_model:
+  - p01_kc_agent_identity
+  model_card:
+  - p01_kc_agent_identity
+  boot_config:
+  - p01_kc_agent_identity
+  iso_package:
+  - p01_kc_agent_identity
+  axiom:
+  - p01_kc_agent_identity
+  function_def:
+  - p01_kc_anthropic_api_patterns
+  - p01_kc_aws_bedrock_patterns
+  - p01_kc_chinese_llm_ecosystem
+  - p01_kc_crewai_patterns
+  - p01_kc_google_ai_patterns
+  - p01_kc_haystack_patterns
+  - p01_kc_langchain_patterns
+  - p01_kc_mcp_protocol
+  - p01_kc_openai_api_patterns
+  prompt_template:
+  - p01_kc_anthropic_api_patterns
+  - p01_kc_dspy_patterns
+  - p01_kc_haystack_patterns
+  - p01_kc_langchain_patterns
+  - p01_kc_mcp_protocol
+  computer_use:
+  - p01_kc_anthropic_api_patterns
+  input_schema:
+  - p01_kc_anthropic_api_patterns
+  - p01_kc_dspy_patterns
+  - p01_kc_google_ai_patterns
+  - p01_kc_openai_api_patterns
+  guardrail:
+  - p01_kc_aws_bedrock_patterns
+  - p01_kc_crewai_patterns
+  env_config:
+  - p01_kc_aws_bedrock_patterns
   workflow:
-  - kc_chinese_llm_ecosystem
-  - kc_crewai_patterns
-  - kc_haystack_patterns
-  - kc_langchain_patterns
-  - kc_llamaindex_patterns
+  - p01_kc_chinese_llm_ecosystem
+  - p01_kc_crewai_patterns
+  - p01_kc_haystack_patterns
+  - p01_kc_langchain_patterns
+  - p01_kc_llamaindex_patterns
+  plugin:
+  - p01_kc_chinese_llm_ecosystem
+  - p01_kc_mcp_protocol
+  memory_scope:
+  - p01_kc_crewai_patterns
+  - p01_kc_langchain_patterns
+  hook:
+  - p01_kc_crewai_patterns
+  - p01_kc_mcp_protocol
+  handoff:
+  - p01_kc_crewai_patterns
+  output_validator:
+  - p01_kc_crewai_patterns
+  response_format:
+  - p01_kc_dspy_patterns
+  - p01_kc_google_ai_patterns
+  - p01_kc_llamaindex_patterns
+  - p01_kc_openai_api_patterns
+  - p01_kc_output_formatting
+  optimizer:
+  - p01_kc_dspy_patterns
+  few_shot_example:
+  - p01_kc_dspy_patterns
+  scoring_rubric:
+  - p01_kc_dspy_patterns
+  - p01_kc_reward_and_alignment
+  retriever:
+  - p01_kc_dspy_patterns
+  - p01_kc_haystack_patterns
+  - p01_kc_langchain_patterns
+  - p01_kc_llamaindex_patterns
+  constraint_spec:
+  - p01_kc_dspy_patterns
+  benchmark:
+  - p01_kc_eval_testing
+  e2e_eval:
+  - p01_kc_eval_testing
+  smoke_eval:
+  - p01_kc_eval_testing
+  unit_eval:
+  - p01_kc_eval_testing
+  red_team_eval:
+  - p01_kc_eval_testing
+  regression_check:
+  - p01_kc_eval_testing
+  api_client:
+  - p01_kc_external_integrations
+  webhook:
+  - p01_kc_external_integrations
+  notifier:
+  - p01_kc_external_integrations
+  db_connector:
+  - p01_kc_external_integrations
+  browser_tool:
+  - p01_kc_external_integrations
+  bugloop:
+  - p01_kc_feedback_loops
+  lifecycle_rule:
+  - p01_kc_feedback_loops
+  code_executor:
+  - p01_kc_google_ai_patterns
+  - p01_kc_openai_api_patterns
+  law:
+  - p01_kc_governance_patterns
+  component_map:
+  - p01_kc_governance_patterns
+  diagram:
+  - p01_kc_governance_patterns
+  decision_record:
+  - p01_kc_governance_patterns
+  brain_index:
+  - p01_kc_haystack_patterns
+  - p01_kc_llamaindex_patterns
+  dispatch_rule:
+  - p01_kc_haystack_patterns
+  - p01_kc_routing_resilience
+  pattern:
+  - p01_kc_haystack_patterns
+  path_config:
+  - p01_kc_infra_config
+  permission:
+  - p01_kc_infra_config
+  feature_flag:
+  - p01_kc_infra_config
+  runtime_rule:
+  - p01_kc_infra_config
+  secret_config:
+  - p01_kc_infra_config
+  rate_limit_config:
+  - p01_kc_infra_config
+  parser:
+  - p01_kc_langchain_patterns
+  learning_record:
+  - p01_kc_memory_persistence
+  session_state:
+  - p01_kc_memory_persistence
+  runtime_state:
+  - p01_kc_memory_persistence
+  entity_memory:
+  - p01_kc_memory_persistence
+  memory_summary:
+  - p01_kc_memory_persistence
+  vision_tool:
+  - p01_kc_openai_api_patterns
+  - p01_kc_perception_tools
+  dag:
+  - p01_kc_orchestration_runtime
+  spawn_config:
+  - p01_kc_orchestration_runtime
+  schedule:
+  - p01_kc_orchestration_runtime
+  rag_source:
+  - p01_kc_orchestration_runtime
+  formatter:
+  - p01_kc_output_formatting
+  naming_rule:
+  - p01_kc_output_formatting
+  audio_tool:
+  - p01_kc_perception_tools
+  cli_tool:
+  - p01_kc_perception_tools
+  daemon:
+  - p01_kc_perception_tools
+  instruction:
+  - p01_kc_prompt_engineering
+  prompt_version:
+  - p01_kc_prompt_engineering
+  context_doc:
+  - p01_kc_prompt_engineering
+  glossary_entry:
+  - p01_kc_prompt_engineering
+  reward_signal:
+  - p01_kc_reward_and_alignment
+  quality_gate:
+  - p01_kc_reward_and_alignment
+  llm_judge:
+  - p01_kc_reward_and_alignment
+  eval_dataset:
+  - p01_kc_reward_and_alignment
+  golden_test:
+  - p01_kc_reward_and_alignment
+  router:
+  - p01_kc_routing_resilience
+  fallback_chain:
+  - p01_kc_routing_resilience
+  type_def:
+  - p01_kc_schema_validation
+  enum_def:
+  - p01_kc_schema_validation
+  interface:
+  - p01_kc_schema_validation
+  validation_schema:
+  - p01_kc_schema_validation
+  validator:
+  - p01_kc_schema_validation
