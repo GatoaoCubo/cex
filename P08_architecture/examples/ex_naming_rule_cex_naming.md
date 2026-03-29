@@ -46,7 +46,7 @@ p{LP_NUMBER}_{TYPE_CODE}_{descriptor}.{ext}
 | P07 | smoke_eval | `se` | `p07_se_brain_query.md` |
 | P07 | golden_test | `gt` | `p07_gt_stripe_pipeline.md` |
 | P07 | scoring_rubric | `sr` | `p07_sr_5d_scoring.md` |
-| P08 | satellite_spec | `sat` | `p08_sat_edison.md` |
+| P08 | agent_card | `sat` | `p08_sat_edison.md` |
 | P08 | pattern | `pat` | `p08_pat_continuous_batching.md` |
 | P08 | law | `law` | `p08_law_shokunin.md` |
 | P09 | env_config | `env` | `p09_env_firecrawl.yaml` |

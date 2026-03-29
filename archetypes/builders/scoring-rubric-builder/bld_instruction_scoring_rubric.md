@@ -10,7 +10,7 @@ title: Scoring Rubric Builder Instructions
 target: scoring-rubric-builder agent
 phases_count: 4
 prerequisites:
-  - Artifact kind to be evaluated is named (e.g. "skill", "agent", "satellite_spec")
+  - Artifact kind to be evaluated is named (e.g. "skill", "agent", "agent_card")
   - At least one quality dimension is identified (e.g. correctness, completeness)
   - Weights must sum to exactly 100
   - Tier thresholds are defined or can be derived (e.g. master >= 9.5, skilled >= 8.0)
@@ -33,7 +33,7 @@ frameworks used to measure the quality of a specific artifact kind. A scoring_ru
 weighted dimensions, numeric thresholds per quality tier, concrete scoring criteria at each
 scale point, and an automation status for each dimension.
 **Input contract**:
-- `{{artifact_kind}}`: the kind being evaluated (e.g. `skill`, `agent`, `satellite_spec`)
+- `{{artifact_kind}}`: the kind being evaluated (e.g. `skill`, `agent`, `agent_card`)
 - `{{dimensions_raw}}`: comma-separated quality dimensions to evaluate
 - `{{tier_map}}`: tier names with numeric thresholds
   (e.g. `master:9.5, skilled:8.0, learning:7.0, rejected:<7.0`)

@@ -19,7 +19,7 @@ layers:
       - iso_package         # P02 — pacote portable de agente (self-contained)
       - output_schema_P05   # P05 — formato de saida do LLM
       - naming_rule         # P05 — regra de nomenclatura
-      - satellite_spec      # P08 — especificacao de satelite (role, model, MCPs)
+      - agent_card      # P08 — deployment spec: identity + model + tools + boot + dispatch (A2A AgentCard)
       - pattern             # P08 — pattern reutilizavel
       - law                 # P08 — lei operacional (inviolavel)
       - diagram             # P08 — diagrama de arquitetura
@@ -122,7 +122,7 @@ extensions:
     reason: "CODEXA-specific — util neste sistema, nao universal"
     kinds:
       - iso_package
-      - satellite_spec
+      - agent_card
       - pattern
       - law
       - component_map

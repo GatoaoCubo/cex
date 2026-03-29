@@ -1,5 +1,5 @@
 ---
-id: p03_ins_satellite_spec_builder
+id: p03_ins_agent_card_builder
 kind: instruction
 pillar: P03
 version: 1.0.0
@@ -7,7 +7,7 @@ created: 2026-03-27
 updated: 2026-03-27
 author: instruction-builder
 title: Satellite Spec Builder Instructions
-target: satellite-spec-builder agent
+target: agent-card-builder agent
 phases_count: 4
 prerequisites:
   - Satellite name is defined (non-empty string, kebab-case)
@@ -15,21 +15,21 @@ prerequisites:
   - At least one tool or MCP server is identified
   - Target LLM model family is known (e.g. opus, sonnet, haiku)
 validation_method: checklist
-domain: satellite_spec
+domain: agent_card
 quality: null
-tags: [instruction, satellite-spec, architecture, P08]
+tags: [instruction, agent-card, architecture, P08]
 idempotent: true
 atomic: false
-rollback: Delete generated satellite_spec file and restart from Phase 1
+rollback: Delete generated agent_card file and restart from Phase 1
 dependencies: []
 logging: true
-tldr: Build a complete satellite_spec covering role, model, MCPs, boot sequence, constraints, dispatch rules, and scaling.
+tldr: Build a complete agent_card covering role, model, MCPs, boot sequence, constraints, dispatch rules, and scaling.
 density_score: 0.91
 ---
 
 ## Context
-The satellite-spec-builder produces `satellite_spec` artifacts — complete architectural
-specifications for an autonomous agent satellite. A satellite_spec defines everything needed
+The agent-card-builder produces `agent_card` artifacts — complete architectural
+specifications for an autonomous agent satellite. A agent_card defines everything needed
 to instantiate, operate, and monitor a satellite: its role, model, MCP servers, boot sequence,
 constraints, dispatch rules, and scaling configuration.
 **Input contract**:
@@ -38,7 +38,7 @@ constraints, dispatch rules, and scaling configuration.
 - `{{model}}`: LLM model identifier (e.g. `claude-opus-4`, `claude-sonnet-4`)
 - `{{tools_list}}`: comma-separated list of MCP servers or built-in tools
 - `{{constraints_raw}}`: free-text description of operational boundaries
-**Output contract**: A single `satellite_spec` YAML file with 24+ frontmatter fields,
+**Output contract**: A single `agent_card` YAML file with 24+ frontmatter fields,
 a narrative identity section, and structured subsections for boot sequence, dispatch rules,
 constraints, and monitoring.
 **Boundaries**:
@@ -95,7 +95,7 @@ INPUT: model, tools_list, role_statement
      "load domain context",
      "ready"
    ]
-   Add satellite-specific steps between generic ones.
+   Add agent-cardific steps between generic ones.
    Assign estimated duration in seconds to each step.
 4. boot_time_seconds = sum(step durations)
 OUTPUT: model_config{}, mcp_bindings[], boot_sequence[], boot_time_seconds
@@ -137,7 +137,7 @@ OUTPUT: dispatch{}, hard_constraints[], soft_constraints[], scaling{}, monitorin
 ```
 Verification: `dispatch.triggers` has >= 3 keywords. `hard_constraints` is non-empty.
 ### Phase 4: Assemble and Validate Artifact
-**Primary action**: Combine all phase outputs into the final satellite_spec YAML and run
+**Primary action**: Combine all phase outputs into the final agent_card YAML and run
 quality gates.
 ```
 INPUT: all outputs from Phases 1-3

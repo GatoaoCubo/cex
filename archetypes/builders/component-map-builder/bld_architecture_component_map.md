@@ -16,7 +16,7 @@ purpose: Component map of component_map — inventory, dependencies, and archite
 | ownership_field | Who owns or maintains each component | component_map | required |
 | status_field | Health or lifecycle state of each component (active, deprecated) | component_map | required |
 | diagram | Visual rendering of the same component data | P08 | consumer |
-| satellite_spec | Detailed spec for a single component found in the map | P08 | consumer |
+| agent_card | Detailed spec for a single component found in the map | P08 | consumer |
 | pattern | Solution template that may reference component inventory | P08 | consumer |
 | brain_index | Search index that stores maps for retrieval | runtime | consumer |
 ## Dependency Graph
@@ -27,7 +27,7 @@ component_entry    --produces-->  layer_assignment
 ownership_field    --depends-->   component_entry
 status_field       --depends-->   component_entry
 component_map      --produces-->  diagram
-component_map      --produces-->  satellite_spec
+component_map      --produces-->  agent_card
 component_map      --produces-->  pattern
 component_map      --produces-->  brain_index
 ```
@@ -39,14 +39,14 @@ component_map      --produces-->  brain_index
 | ownership_field | component_entry | depends | owner metadata attached to each entry |
 | status_field | component_entry | depends | health/lifecycle metadata attached to entry |
 | component_map | diagram | produces | structured data consumed by visual renderer |
-| component_map | satellite_spec | produces | inventory that informs single-component spec |
+| component_map | agent_card | produces | inventory that informs single-component spec |
 | component_map | pattern | produces | inventory referenced by solution templates |
 | component_map | brain_index | produces | searchable artifact stored for retrieval |
 ## Boundary Table
 | component_map IS | component_map IS NOT |
 |-----------------|---------------------|
 | Structured tabular inventory of system parts and connections | A visual graph or diagram (that is diagram) |
-| Covers many components across a system boundary | A detailed spec for one component (that is satellite_spec) |
+| Covers many components across a system boundary | A detailed spec for one component (that is agent_card) |
 | Describes static structure — what exists and how it connects | Prescribes a solution to a recurring problem (that is pattern) |
 | Data artifact — tables, typed connections, ownership, status | An execution dependency graph with ordering semantics (that is dag) |
 | Defines scope boundary (what is in and out of the map) | A governance mandate for system behavior (that is law) |
@@ -57,4 +57,4 @@ component_map      --produces-->  brain_index
 | scoping | scope_definition | Declare what the map covers and excludes |
 | inventory | component_entry, ownership_field, status_field | Enumerate each component with owner and health |
 | structure | connection, layer_assignment | Define typed relationships and architectural placement |
-| consumers | diagram, satellite_spec, pattern, brain_index | Downstream artifacts that consume the map data |
+| consumers | diagram, agent_card, pattern, brain_index | Downstream artifacts that consume the map data |

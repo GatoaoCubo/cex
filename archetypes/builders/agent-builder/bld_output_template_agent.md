@@ -29,7 +29,7 @@ tags: [agent, {{domain}}, {{satellite}}, {{pillar_tag}}]
 tldr: "{{dense_summary_max_160ch}}"
 density_score: {{0.80_to_1.00}}
 linked_artifacts:
-  primary: "{{parent_satellite_spec}}"
+  primary: "{{parent_agent_card}}"
   related: [{{related_artifact_refs}}]
 ```
 ## Overview

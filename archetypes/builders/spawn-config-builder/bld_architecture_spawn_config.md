@@ -20,13 +20,13 @@ purpose: Component map of spawn_config — inventory, dependencies, and architec
 ## Dependency Graph
 ```
 orchestrator    --creates-->    spawn_config  --consumed_by-->  spawn_script
-satellite_spec  --informs-->    spawn_config  --produces-->     terminal_process
+agent_card  --informs-->    spawn_config  --produces-->     terminal_process
 spawn_config    --signals-->    spawn_event
 ```
 | From | To | Type | Data |
 |------|----|------|------|
 | orchestrator | spawn_config | produces | orchestrator generates config for satellite launch |
-| satellite_spec (P08) | spawn_config | dependency | satellite spec informs model and MCP selection |
+| agent_card (P08) | spawn_config | dependency | satellite spec informs model and MCP selection |
 | spawn_config | spawn_script (PowerShell) | consumes | script reads config to launch terminal process |
 | spawn_config | terminal_process | produces | running satellite instance in a terminal |
 | spawn_config | spawn_event (P12) | signals | emitted when satellite is spawned or fails to start |
@@ -37,13 +37,13 @@ spawn_config    --signals-->    spawn_event
 | A configuration for launching satellites via scripts | A runtime signal between satellites (signal P12) |
 | Specifies mode (solo/grid/continuous), flags, and timeouts | A task routing rule (dispatch_rule P12) |
 | References handoff files and MCP profiles | A multi-step orchestration flow (workflow P12) |
-| Pairs satellites with LLM models | A full satellite specification (satellite_spec P08) |
+| Pairs satellites with LLM models | A full satellite specification (agent_card P08) |
 | Consumed by PowerShell spawn scripts | An agent identity or persona (agent P02) |
 | Scoped to one launch event or mission | A persistent runtime configuration (runtime_rule P09) |
 ## Layer Map
 | Layer | Components | Purpose |
 |-------|------------|---------|
-| Source | orchestrator, satellite_spec | Supply launch requirements and satellite specs |
+| Source | orchestrator, agent_card | Supply launch requirements and satellite specs |
 | Configuration | frontmatter, mode_config, satellite_model_pair | Define what mode and model to use |
 | Parameters | cli_flags, mcp_profile, timeout_policy | Specify technical launch parameters |
 | Task | handoff_reference | Link to the task the satellite should execute |

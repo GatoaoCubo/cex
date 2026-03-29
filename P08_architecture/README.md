@@ -12,7 +12,7 @@
   - [[tpl_diagram]]
   - [[tpl_law]]
   - [[tpl_pattern]]
-  - [[tpl_satellite_spec]]
+  - [[tpl_agent_card]]
 
 ### Examples (ex_*)
   - [[ex_component_map_pipeline]]

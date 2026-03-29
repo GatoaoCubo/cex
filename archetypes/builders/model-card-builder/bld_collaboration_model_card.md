@@ -23,7 +23,7 @@ I produce technical specs for LLMs with pricing, context limits, capability bool
 ### Crew: "Bootstrap New Satellite"
 ```
   1. model-card-builder    -> "spec for the model powering the satellite"
-  2. satellite-spec-builder -> "satellite role, MCPs, and behavioral constraints"
+  2. agent-card-builder -> "satellite role, MCPs, and behavioral constraints"
   3. boot-config-builder   -> "startup configuration using model params from the card"
   4. system-prompt-builder -> "PRIME file adapted to documented model capabilities"
 ```

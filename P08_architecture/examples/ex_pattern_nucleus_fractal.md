@@ -27,14 +27,14 @@ instances of existing kinds. No new kind needed.
 |-----------|---------|-------------|
 | CrewAI | Crew (agents+tasks+process) | director(P08) + workflow(P12) |
 | CrewAI | Agent (role+goal+tools) | agent(P02) + system_prompt(P03) |
-| A2A | AgentCard (name+skills+endpoint) | satellite_spec(P08) + iso_package(P02) |
+| A2A | AgentCard (name+skills+endpoint) | agent_card(P08) + iso_package(P02) |
 | LangGraph | StateGraph (nodes+edges+state) | dag(P12) + checkpoint(P12) |
 | CrewAI | Process (sequential/hierarchical) | workflow(P12) mode field |
 
 ## Composition (minimum viable nucleus)
 | Kind | Pillar | Role in Nucleus |
 |------|--------|-----------------|
-| satellite_spec | P08 | Identity: who, what domain, what model |
+| agent_card | P08 | Identity: who, what domain, what model |
 | agent | P02 | Persona + capabilities |
 | system_prompt | P03 | Voice and operating rules |
 | boot_config | P02 | Provider-specific initialization |
@@ -50,7 +50,7 @@ instances of existing kinds. No new kind needed.
 ```
 nuclei/
   {name}/
-    manifest.yaml             # satellite_spec (P08)
+    manifest.yaml             # agent_card (P08)
     P01_knowledge/            # KCs of this domain
     P02_model/                # agent + router + boot_config + fallback
     P03_prompt/               # system_prompt + instructions
@@ -58,7 +58,7 @@ nuclei/
     P05_output/               # domain output formats
     P06_schema/               # domain interfaces
     P07_evals/                # domain quality evals
-    P08_architecture/         # domain patterns + satellite_spec
+    P08_architecture/         # domain patterns + agent_card
     P09_config/               # env + path + runtime rules
     P10_memory/               # learnings + session state
     P11_feedback/             # quality_gates + guardrails
@@ -89,6 +89,6 @@ When a nucleus receives an intent:
 | Anti-Pattern | Why |
 |-------------|-----|
 | New kind "nucleus" | Composition of existing kinds, not a new type |
-| Flat satellite_spec | Single file cant capture 12-pillar depth |
+| Flat agent_card | Single file cant capture 12-pillar depth |
 | Shared knowledge pool | Each nucleus owns its domain knowledge |
 | Cross-nucleus execution | Nucleus 03 never does research (thats 01) |

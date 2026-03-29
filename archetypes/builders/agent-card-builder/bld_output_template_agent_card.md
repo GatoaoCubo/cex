@@ -3,14 +3,14 @@ kind: output_template
 id: bld_output_template_director
 pillar: P05
 llm_function: PRODUCE
-purpose: Template with {{vars}} that the LLM fills to produce a satellite_spec
+purpose: Template with {{vars}} that the LLM fills to produce a agent_card
 pattern: every field here exists in SCHEMA.md — template derives, never invents
 ---
 
-# Output Template: satellite_spec
+# Output Template: agent_card
 ```yaml
 id: p08_sat_{{name_lower}}
-kind: satellite_spec
+kind: agent_card
 pillar: P08
 version: "1.0.0"
 created: "{{YYYY-MM-DD}}"

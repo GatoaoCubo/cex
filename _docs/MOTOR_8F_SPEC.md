@@ -72,7 +72,7 @@ Mapear `object` para `kind(s)` CEX usando TAXONOMY_LAYERS.yaml:
 | Object Keyword | Kind(s) Primario(s) | Pillar | Funcao |
 |----------------|-------------------|--------|--------|
 | agente, agent | agent | P02 | BECOME |
-| sistema, satelite | satellite_spec | P08 | BECOME |
+| sistema, satelite | agent_card | P08 | BECOME |
 | prompt, instrucao | system_prompt, instruction | P03 | BECOME/REASON |
 | workflow, pipeline | workflow | P12 | COLLABORATE |
 | conhecimento, knowledge | knowledge_card | P01 | INJECT |
@@ -174,7 +174,7 @@ Gerar JSON execution plan (ver Schema completo na Secao 3).
 | **secondary** | mental-model-builder, router-builder, fallback-chain-builder, lens-builder, director-builder* |
 | **optional** | _builder-builder (meta-bootstrap apenas) |
 
-> *director-builder: manifest id=`satellite-spec-builder`, pillar=P08, domain=satellite_spec.
+> *director-builder: manifest id=`agent-card-builder`, pillar=P08, domain=agent_card.
 > Acionar quando intent menciona "satelite" ou "sistema completo".
 
 ---
@@ -539,7 +539,7 @@ Palavras no intent que ativam builders secundarios/opcionais:
 | "com memoria", "lembra" | brain-index-builder, learning-record-builder |
 | "com RAG", "base de conhecimento" | rag-source-builder, embedding-config-builder |
 | "com fallback", "resiliente" | fallback-chain-builder, runtime-rule-builder |
-| "para satelite", "sistema completo" | director-builder (satellite-spec), spawn-config-builder |
+| "para satelite", "sistema completo" | director-builder (agent-card), spawn-config-builder |
 | "com scraping", "extrai dados" | scraper-builder, parser-builder |
 | "com API", "integra com" | connector-builder, client-builder, interface-builder |
 | "com CLI", "linha de comando" | cli-tool-builder |

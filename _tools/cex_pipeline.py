@@ -98,7 +98,7 @@ TYPE_ABBREV = {
     "benchmark": "bench",
     "golden_test": "gt",
     "scoring_rubric": "sr",
-    "satellite_spec": "sat",
+    "agent_card": "sat",
     "pattern": "pat",
     "law": "law",
     "diagram": "diag",

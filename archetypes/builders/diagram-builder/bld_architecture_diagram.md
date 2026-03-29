@@ -24,7 +24,7 @@ component_map (P08) --provides_data--> diagram (structured inventory becomes vis
 pattern (P08) --illustrated_by--> diagram (pattern solution may be shown visually)
 law (P08) --illustrated_by--> diagram (enforcement flow may be diagrammed)
 diagram --produces_for--> documentation (external consumers: docs, READMEs, specs)
-diagram --referenced_by--> satellite_spec (P08) (specs may embed diagram reference)
+diagram --referenced_by--> agent_card (P08) (specs may embed diagram reference)
 brain_index (P10) --indexes--> diagram (stored and retrieved via semantic search)
 signal (P12) --independent-- diagram (diagram is static, not runtime)
 connector (P04) --independent-- diagram (diagram visualizes, does not integrate)
@@ -35,7 +35,7 @@ connector (P04) --independent-- diagram (diagram visualizes, does not integrate)
 | pattern | diagram | data_flow | solution structure to visualize |
 | law | diagram | data_flow | enforcement flow to illustrate |
 | diagram | documentation | produces | visual representation for human readers |
-| diagram | satellite_spec | referenced_by | spec cites diagram for structure overview |
+| diagram | agent_card | referenced_by | spec cites diagram for structure overview |
 | brain_index | diagram | indexes | diagram stored for semantic retrieval |
 ## Boundary Table
 | diagram IS | diagram IS NOT |
@@ -45,7 +45,7 @@ connector (P04) --independent-- diagram (diagram visualizes, does not integrate)
 | Derived from structured data (component_map, pattern) | A law — law mandates behavior rules and constraints |
 | Static artifact: created once, consumed by documentation | A dag — dag defines execution ordering, not visual structure |
 | Includes legend, layer boundaries, and annotations | A workflow — workflow executes sequences at runtime |
-| Supports two notations: ASCII (portable) and Mermaid (renderable) | A satellite_spec — satellite_spec defines a component, diagram shows the system |
+| Supports two notations: ASCII (portable) and Mermaid (renderable) | A agent_card — agent_card defines a component, diagram shows the system |
 | Indexed and retrievable via semantic search | A signal — signals are runtime events, diagrams are authoring-time artifacts |
 ## Layer Map
 | Layer | Components | Purpose |
@@ -55,4 +55,4 @@ connector (P04) --independent-- diagram (diagram visualizes, does not integrate)
 | Visual Content | visual_body, layer_boundaries, annotations | The actual rendered diagram with structural markup |
 | Readability | legend, alt_text | Aid interpretation for human readers and search indexers |
 | Reference | source_reference | Trace diagram back to its authoritative source artifact |
-| Distribution | documentation, satellite_spec, brain_index | Consumers that embed, reference, or index the diagram |
+| Distribution | documentation, agent_card, brain_index | Consumers that embed, reference, or index the diagram |

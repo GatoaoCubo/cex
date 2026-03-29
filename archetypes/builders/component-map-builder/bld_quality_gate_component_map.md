@@ -32,7 +32,7 @@ All must pass (AND logic). Any single failure = REJECT.
 | H04 | Kind equals literal `component_map` | `kind: diagram` or `kind: architecture` or any other value |
 | H05 | Quality field is null | `quality: 8.5` or any non-null value |
 | H06 | All required fields present | Missing `components`, `connections`, or `scope` |
-| H07 | At least two components defined | Single-component map is a satellite_spec, not a component_map |
+| H07 | At least two components defined | Single-component map is a agent_card, not a component_map |
 | H08 | Each connection references valid component IDs | Connection references a component ID not listed in components |
 | H09 | Scope boundary declared | `scope` field absent or empty; map must state what system boundary it covers |
 ## SOFT Scoring

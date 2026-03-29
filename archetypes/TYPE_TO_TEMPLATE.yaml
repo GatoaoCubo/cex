@@ -97,3 +97,4 @@ validator: P06_schema/templates/tpl_validator.md
 vision_tool: P04_tools/templates/tpl_vision_tool.md
 webhook: P04_tools/templates/tpl_webhook.md
 workflow: P12_orchestration/templates/tpl_workflow.md
+  agent_card: P08_architecture/templates/tpl_agent_card.md

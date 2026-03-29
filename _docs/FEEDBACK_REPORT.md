@@ -29,7 +29,7 @@
 | P05_output/examples/ex_response_format_security_audit.md | 9.5 | 0.82 | 1d | response_format |
 | P06_schema/examples/ex_input_schema_quality_audit.md | 9.5 | 0.76 | 1d | input_schema |
 | P07_evals/examples/ex_golden_test_stripe_pipeline.md | 9.5 | 0.81 | 1d | golden_test |
-| P08_architecture/examples/ex_director_edison.md | 9.5 | 0.76 | 1d | satellite_spec |
+| P08_architecture/examples/ex_director_edison.md | 9.5 | 0.76 | 1d | agent_card |
 | P08_architecture/examples/ex_law_shokunin.md | 9.5 | 0.72 | 1d | law |
 | P10_memory/examples/ex_axiom_scout_before_create.md | 9.5 | 0.70 | 1d | axiom |
 | P10_memory/examples/ex_rag_source_edison.md | 9.5 | 0.75 | 1d | runtime_state |
@@ -476,7 +476,7 @@
 | packages/photo/prompts/product_analysis.md | null | 0.76 | 1d | - |
 | packages/photo/prompts/scene_descriptions.md | null | 0.76 | 1d | - |
 | P01_knowledge/examples/ex_knowledge_card_memory_lifecycle_ho | null | 0.76 | 1d | knowledge_card |
-| P08_architecture/examples/ex_director_edison.md | 9.5 | 0.76 | 1d | satellite_spec |
+| P08_architecture/examples/ex_director_edison.md | 9.5 | 0.76 | 1d | agent_card |
 | P12_orchestration/examples/ex_workflow_stella_dispatch.md | 9.5 | 0.76 | 1d | workflow |
 | P06_schema/examples/ex_input_schema_quality_audit.md | 9.5 | 0.76 | 1d | input_schema |
 | archetypes/builders/component-map-builder/bld_knowledge_card | null | 0.76 | 0d | - |

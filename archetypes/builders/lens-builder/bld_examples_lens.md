@@ -20,7 +20,7 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: "EDISON"
 perspective: "cost_efficiency"
-applies_to: [model_card, embedding_config, satellite_spec]
+applies_to: [model_card, embedding_config, agent_card]
 focus: "Pricing, token costs, and cost-per-task efficiency"
 filters: [pricing, context_window, tokens_per_second, batch_size, dimensions]
 bias: "Favors lower cost-per-output-token when quality is comparable"
@@ -35,7 +35,7 @@ tldr: "Cost efficiency lens — evaluates artifacts by quality-to-cost ratio for
 ```
 ## Perspective
 Evaluates artifacts through cost efficiency: what is the quality-per-dollar ratio?
-Applies to model_cards (LLM pricing), embedding_configs (vector cost), satellite_specs (model allocation).
+Applies to model_cards (LLM pricing), embedding_configs (vector cost), agent_cards (model allocation).
 ## Filters
 - **pricing**: input/output token costs, batch discounts, free tiers
 - **context_window**: cost per context unit (larger window = fewer calls)

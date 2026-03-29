@@ -480,7 +480,7 @@ Interim: manual check against this file
 |---|------|----|-------|----------------|-----------|--------|--------------|-----------|
 | 1 | agent | P02 | runtime | 8 | 5120 | yaml | Yes | 10 body sections, most complex type |
 | 2 | iso_package | P02 | spec | 0 | 4096 | yaml | Yes | Multi-file manifest, self-contained |
-| 3 | satellite_spec | P08 | spec | 0 | 4096 | yaml | Yes | Complete satellite definition |
+| 3 | agent_card | P08 | spec | 0 | 4096 | yaml | Yes | Complete satellite definition |
 | 4 | system_prompt | P03 | prompt | 6 | 4096 | yaml | Yes | Persona engineering, 4+ body sections |
 | 5 | action_prompt | P03 | prompt | 0 | 2048* | yaml | No | No template, task decomposition |
 | 6 | prompt_template | P03 | prompt | 5 | 8192 | yaml | Yes | 5 body sections, largest format |

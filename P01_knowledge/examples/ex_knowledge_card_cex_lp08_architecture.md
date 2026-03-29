@@ -10,7 +10,7 @@ author: EDISON
 domain: cex_taxonomy
 quality: null
 tags: [cex, lp08, architecture, patterns, laws, multi-agent, scaling]
-tldr: "P08 define 5 meta-artefatos que governam estrutura: satellite_spec, pattern, law, diagram, component_map"
+tldr: "P08 define 5 meta-artefatos que governam estrutura: agent_card, pattern, law, diagram, component_map"
 when_to_use: "Entender como sistemas LLM escalam via arquitetura formal e meta-artefatos"
 keywords: [architecture, satellite, pattern, law, diagram, component-map]
 long_tails:
@@ -35,14 +35,14 @@ types: 5 | function: BECOME + GOVERN | layer: spec + governance
 
 - P08 eh sobre ESTRUTURA, nao execucao de tarefas
 - Tipos P08 sao meta-artefatos (descrevem artefatos)
-- satellite_spec define departamento completo com MCPs
+- agent_card define departamento completo com MCPs
 - pattern eh padrao reutilizavel (ex: continuous batching)
 - law eh regra inviolavel do sistema (nao eh instruction)
 - diagram visualiza arquitetura (ASCII ou Mermaid)
 - component_map mapeia conexoes entre componentes
 - Nenhum framework mainstream tem tipos equivalentes
 - Sistemas LLM crescem sem planta — P08 eh a planta
-- satellite_spec max 4096 bytes (spec layer, core: true)
+- agent_card max 4096 bytes (spec layer, core: true)
 - pattern usa llm_function INJECT (informa, nao obriga)
 - law usa llm_function CONSTRAIN (obriga, inviolavel)
 - P08 constrange todos os LPs: define o que eh possivel
@@ -56,14 +56,14 @@ types: 5 | function: BECOME + GOVERN | layer: spec + governance
 1. Mapear componentes existentes via component_map
 2. Definir laws inviolaveis do sistema (constraints)
 3. Documentar patterns reutilizaveis emergentes
-4. Especificar satellite_specs por dominio funcional
+4. Especificar agent_cards por dominio funcional
 5. Criar diagrams para comunicacao visual do time
 6. Revisar arquitetura quando evals P07 revelam gaps
 
 ## Regras de Ouro
 
 - SEMPRE documentar WHY de cada law (nao so WHAT)
-- NUNCA criar satellite sem satellite_spec formal
+- NUNCA criar satellite sem agent_card formal
 - SEMPRE atualizar component_map ao adicionar componente
 - NUNCA tratar pattern como lei (pattern eh recomendacao)
 - SEMPRE separar diagram (visual) de component_map (dados)
@@ -74,7 +74,7 @@ types: 5 | function: BECOME + GOVERN | layer: spec + governance
 |------|---------|--------|---------|
 | law | Inviolavel | Sistema inteiro | "Nunca hardcode brand" |
 | pattern | Recomendado | Reutilizavel | Continuous batching |
-| satellite_spec | Obrigatorio | 1 departamento | SHAKA research spec |
+| agent_card | Obrigatorio | 1 departamento | SHAKA research spec |
 | diagram | Informativo | Visual | Mermaid do pipeline |
 | component_map | Estrutural | Conexoes | Agent-to-agent graph |
 

@@ -7,12 +7,12 @@ purpose: Naming conventions, file paths, size limits, operational constraints
 pattern: CONFIG restricts SCHEMA, never contradicts it
 ---
 
-# Config: satellite_spec Production Rules
+# Config: agent_card Production Rules
 ## Naming Convention
 | Scope | Convention | Example |
 |-------|-----------|---------|
 | Artifact files | `p08_sat_{name_lower}.yaml` | `p08_sat_shaka.yaml` |
-| Builder directory | kebab-case | `satellite-spec-builder/` |
+| Builder directory | kebab-case | `agent-card-builder/` |
 | Frontmatter fields | snake_case | `domain_area`, `boot_sequence` |
 | Satellite names | UPPERCASE in name field | `researcher`, `builder`, `marketer` |
 | Name slugs | lowercase in id | `shaka`, `edison`, `lily` |

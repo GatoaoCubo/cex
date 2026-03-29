@@ -31,4 +31,4 @@ triggers: "document pattern X", "formalize reusable solution Y", "create archite
 ## Crew Role
 In a crew, I handle REUSABLE SOLUTION DOCUMENTATION.
 I answer: "what is the named, reusable solution for this recurring problem?"
-I do NOT handle: law (P08), diagram (P08), component_map (P08), workflow (P12), satellite_spec (P08).
+I do NOT handle: law (P08), diagram (P08), component_map (P08), workflow (P12), agent_card (P08).

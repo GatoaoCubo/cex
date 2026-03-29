@@ -3,17 +3,17 @@ kind: examples
 id: bld_examples_director
 pillar: P07
 llm_function: GOVERN
-purpose: Golden and anti-examples of satellite_spec artifacts
+purpose: Golden and anti-examples of agent_card artifacts
 pattern: few-shot learning — LLM reads these before producing
 ---
 
-# Examples: satellite-spec-builder
+# Examples: agent-card-builder
 ## Golden Example
 INPUT: "Especifica o satelite researcher para pesquisa de mercado"
 OUTPUT:
 ```yaml
 id: p08_sat_shaka
-kind: satellite_spec
+kind: agent_card
 pillar: P08
 version: "1.0.0"
 created: "2026-03-26"
@@ -87,7 +87,7 @@ Priority: research tasks routed to researcher before any other satellite.
 WHY THIS IS GOLDEN:
 - quality: null (H05 pass)
 - id matches p08_sat_ pattern (H02 pass)
-- kind: satellite_spec (H04 pass)
+- kind: agent_card (H04 pass)
 - 26 frontmatter fields present (H06 pass)
 - name non-empty "researcher" (H07 pass)
 - model is valid "sonnet" (H08 pass)

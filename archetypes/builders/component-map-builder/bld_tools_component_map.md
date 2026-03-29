@@ -28,7 +28,7 @@ brain_query("component map {scope_keywords}")
 brain_query("p08_cmap {domain}")
 brain_query("component inventory {system_name}")
 ```
-Use to: find existing maps (avoid duplicates), find sibling satellite_specs for component details, find related diagrams.
+Use to: find existing maps (avoid duplicates), find sibling agent_cards for component details, find related diagrams.
 ## Validation Checklist (manual until validate_artifact.py ships)
 ```
 [ ] YAML frontmatter parses (H01)

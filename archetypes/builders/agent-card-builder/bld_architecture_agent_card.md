@@ -3,14 +3,14 @@ kind: architecture
 id: bld_architecture_director
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Component map of satellite_spec — inventory, dependencies, and architectural position
+purpose: Component map of agent_card — inventory, dependencies, and architectural position
 ---
 
-# Architecture: satellite_spec in the CEX
+# Architecture: agent_card in the CEX
 ## Component Inventory
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
-| frontmatter block | 24-field metadata header (id, kind, pillar, domain, model, mcps, etc.) | satellite-spec-builder | active |
+| frontmatter block | 24-field metadata header (id, kind, pillar, domain, model, mcps, etc.) | agent-card-builder | active |
 | role_definition | Primary domain and responsibility of the satellite | author | active |
 | model_config | LLM model selection with provider and parameters | author | active |
 | mcp_servers | List of MCP servers the satellite connects to at boot | author | active |
@@ -20,20 +20,20 @@ purpose: Component map of satellite_spec — inventory, dependencies, and archit
 | monitoring | Health checks, signal emission, and observability configuration | author | active |
 ## Dependency Graph
 ```
-router          --dispatches_to-->  satellite_spec  --configures-->  agent
-spawn_config    --launches-->       satellite_spec  --depends-->     mcp_server
-satellite_spec  --signals-->        health_status
+router          --dispatches_to-->  agent_card  --configures-->  agent
+spawn_config    --launches-->       agent_card  --depends-->     mcp_server
+agent_card  --signals-->        health_status
 ```
 | From | To | Type | Data |
 |------|----|------|------|
-| router (P02) | satellite_spec | data_flow | task dispatched to satellite based on routing rules |
-| spawn_config (P12) | satellite_spec | dependency | launch configuration for terminal spawn |
-| satellite_spec | agent (P02) | produces | satellite instantiates agents within its domain |
-| satellite_spec | mcp_server (P04) | dependency | satellite requires specific MCP servers at runtime |
-| satellite_spec | health_status (P12) | signals | periodic health and availability signals |
-| model_card (P02) | satellite_spec | dependency | model specifications inform model_config selection |
+| router (P02) | agent_card | data_flow | task dispatched to satellite based on routing rules |
+| spawn_config (P12) | agent_card | dependency | launch configuration for terminal spawn |
+| agent_card | agent (P02) | produces | satellite instantiates agents within its domain |
+| agent_card | mcp_server (P04) | dependency | satellite requires specific MCP servers at runtime |
+| agent_card | health_status (P12) | signals | periodic health and availability signals |
+| model_card (P02) | agent_card | dependency | model specifications inform model_config selection |
 ## Boundary Table
-| satellite_spec IS | satellite_spec IS NOT |
+| agent_card IS | agent_card IS NOT |
 |-------------------|----------------------|
 | A complete specification of an autonomous satellite | An individual agent identity (agent P02) |
 | Defines model, MCPs, boot sequence, and constraints | A boot configuration for one provider (boot_config P02) |

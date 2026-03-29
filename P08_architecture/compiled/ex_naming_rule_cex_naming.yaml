@@ -57,7 +57,7 @@ type_codes_by_lp: '| LP | Type | Code | Example |
 
   | P07 | scoring_rubric | `sr` | `p07_sr_5d_scoring.md` |
 
-  | P08 | satellite_spec | `sat` | `p08_sat_edison.md` |
+  | P08 | agent_card | `sat` | `p08_sat_edison.md` |
 
   | P08 | pattern | `pat` | `p08_pat_continuous_batching.md` |
 

@@ -199,7 +199,7 @@ P08_pattern:
   seeds: [name, problem, solution, context, forces, consequences, examples, related_patterns, anti_patterns, applicability]
   contexts: [design, refactoring, documentation, teaching]
 
-P08_satellite_spec:
+P08_agent_card:
   seeds: [name, role, model, mcps, domain, boot_sequence, constraints, dispatch, tools, dependencies, scaling, monitoring]
   contexts: [design, deployment, optimization, documentation]
 

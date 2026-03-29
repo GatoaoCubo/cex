@@ -31,7 +31,7 @@ I do NOT handle:
 - pattern (P08) — patterns RECOMMEND reusable solutions
 - diagram (P08) — diagrams VISUALIZE architecture
 - component_map (P08) — component maps INVENTORY parts
-- satellite_spec (P08) — satellite specs DEFINE components
+- agent_card (P08) — satellite specs DEFINE components
 - instruction (P03) — instructions GUIDE with flexibility
 - guardrail (P11) — guardrails RESTRICT for safety
 ## Files

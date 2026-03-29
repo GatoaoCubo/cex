@@ -31,7 +31,7 @@ I do NOT handle:
 - pattern (P08) — prescribes solutions
 - law (P08) — governs behavior
 - component_map (P08) — inventories structured data
-- satellite_spec (P08) — defines individual component
+- agent_card (P08) — defines individual component
 - workflow (P12) — executes sequences
 ## Files
 | File | Purpose |

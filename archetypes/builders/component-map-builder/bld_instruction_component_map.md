@@ -37,5 +37,5 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 7. Confirm scope boundary is defined (Boundaries section present)
 8. HARD gates: frontmatter valid, id pattern matches, components listed, connections have source+target, boundary defined
 9. SOFT gates: no orphan components (every component has at least 1 connection), score against QUALITY_GATES.md
-10. Cross-check: structured data inventory (not a visual diagram)? Covers many components (not a single-component satellite_spec)? Describes existing state (not prescribes future patterns)?
+10. Cross-check: structured data inventory (not a visual diagram)? Covers many components (not a single-component agent_card)? Describes existing state (not prescribes future patterns)?
 11. Revise if score < 8.0 before outputting

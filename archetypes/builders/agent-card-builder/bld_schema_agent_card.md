@@ -3,16 +3,16 @@ kind: schema
 id: bld_schema_director
 pillar: P06
 llm_function: CONSTRAIN
-purpose: Formal schema — SINGLE SOURCE OF TRUTH for satellite_spec
+purpose: Formal schema — SINGLE SOURCE OF TRUTH for agent_card
 pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
-# Schema: satellite_spec
+# Schema: agent_card
 ## Frontmatter Fields
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string (p08_sat_{name}) | YES | - | Namespace compliance |
-| kind | literal "satellite_spec" | YES | - | Type integrity |
+| kind | literal "agent_card" | YES | - | Type integrity |
 | pillar | literal "P08" | YES | - | Pillar assignment |
 | version | semver string | YES | "1.0.0" | Versionamento |
 | created | date YYYY-MM-DD | YES | - | Creation date |

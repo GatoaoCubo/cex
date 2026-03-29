@@ -76,7 +76,7 @@
 ## SCALE (peso 0.6)
 
 ### P08 Architecture (5 tipos)
-- satellite_spec: especificacao de satelite
+- agent_card: especificacao de satelite
 - pattern: pattern reutilizavel
 - law: lei operacional
 - diagram: diagrama de arquitetura

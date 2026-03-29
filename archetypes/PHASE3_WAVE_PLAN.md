@@ -96,7 +96,7 @@
 iso_package (COMPLEX), boot_config (MEDIUM), mental_model (MEDIUM)
 
 ### Wave 9: P02+P08 [x]
-lens (SIMPLE), satellite_spec (COMPLEX), embedding_config (SIMPLE)
+lens (SIMPLE), agent_card (COMPLEX), embedding_config (SIMPLE)
 
 ### Wave 10: P02+P10 [ ]
 router (MEDIUM), fallback_chain (MEDIUM), axiom (SIMPLE)

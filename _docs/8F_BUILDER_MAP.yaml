@@ -586,3 +586,22 @@ workflow:
   description: Fluxo de trabalho (steps sequenciais/paralelos)
   llm_function: PRODUCE
   pillar: P12_orchestration
+
+agent_card:
+  pillar: P08
+  description: Agent deployment spec (identity + model + tools + boot + dispatch)
+  builder: archetypes/builders/agent-card-builder/
+  isos:
+    - bld_schema_agent_card.md
+    - bld_config_agent_card.md
+    - bld_system_prompt_agent_card.md
+    - bld_manifest_agent_card.md
+    - bld_knowledge_card_agent_card.md
+    - bld_examples_agent_card.md
+    - bld_memory_agent_card.md
+    - bld_architecture_agent_card.md
+    - bld_tools_agent_card.md
+    - bld_instruction_agent_card.md
+    - bld_output_template_agent_card.md
+    - bld_quality_gate_agent_card.md
+    - bld_collaboration_agent_card.md

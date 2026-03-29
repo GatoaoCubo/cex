@@ -26,7 +26,7 @@ I produce route tables with confidence thresholds, fallback routes, and escalati
 ```
 ### Crew: "Multi-Agent Orchestration Pack"
 ```
-  1. satellite-spec-builder   -> "satellite capability specs that define valid routing targets"
+  1. agent-card-builder   -> "satellite capability specs that define valid routing targets"
   2. router-builder           -> "routing logic directing tasks to correct satellites"
   3. workflow-builder         -> "multi-step orchestration after routing resolves the first agent"
   4. spawn-config-builder     -> "spawn parameters for the resolved routing target"
@@ -44,7 +44,7 @@ I produce route tables with confidence thresholds, fallback routes, and escalati
 ## Builders I Depend On
 - agent-builder: provides agent capability declarations used as routing targets
 - model-card-builder: provides LLM capability profiles that inform routing decisions
-- satellite-spec-builder: provides satellite domain specs that define valid route destinations
+- agent-card-builder: provides satellite domain specs that define valid route destinations
 ## Builders That Depend On Me
 | Builder | Why |
 |---------|-----|

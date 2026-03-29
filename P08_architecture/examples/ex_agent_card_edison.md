@@ -1,6 +1,6 @@
 ---
 id: p08_sat_edison
-kind: satellite_spec
+kind: agent_card
 pillar: P08
 title: "Satellite: EDISON"
 version: 1.0.0

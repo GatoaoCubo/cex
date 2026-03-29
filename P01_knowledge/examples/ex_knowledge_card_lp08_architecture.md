@@ -10,9 +10,9 @@ author: edison
 domain: meta-construction
 quality: 9.0
 tags: [architecture, satellite, pattern, law, diagram]
-tldr: "P08 define 5 tipos de arquitetura (satellite_spec, pattern, law, diagram, component_map) que governam como o sistema escala — leis sao inviolaveis, patterns sao reutilizaveis"
+tldr: "P08 define 5 tipos de arquitetura (agent_card, pattern, law, diagram, component_map) que governam como o sistema escala — leis sao inviolaveis, patterns sao reutilizaveis"
 when_to_use: "Quando precisar definir arquitetura, leis operacionais ou patterns de escala no CEX"
-keywords: [satellite_spec, pattern, law, diagram, component_map]
+keywords: [agent_card, pattern, law, diagram, component_map]
 long_tails:
   - "como definir uma lei operacional no CEX"
   - "qual a diferenca entre pattern e law em P08"
@@ -32,8 +32,8 @@ P08 governa a arquitetura do CEX com 5 tipos de artefato que definem desde satel
 ## Spec Table
 | Campo | Valor | Nota |
 |-------|-------|------|
-| Tipos | 5 | satellite_spec, pattern, law, diagram, component_map |
-| satellite_spec max_bytes | 4096 | Role + model + MCPs |
+| Tipos | 5 | agent_card, pattern, law, diagram, component_map |
+| agent_card max_bytes | 4096 | Role + model + MCPs |
 | pattern max_bytes | 4096 | Ex: continuous batching |
 | law max_bytes | 3072 | Inviolavel, operacional |
 | diagram formats | 2 | ASCII ou Mermaid |
@@ -53,7 +53,7 @@ P08 governa a arquitetura do CEX com 5 tipos de artefato que definem desde satel
 - Diagram desatualizado: pior que nenhum diagrama
 
 ## Application
-CODEXA tem 7 satelites (STELLA, SHAKA, LILY, EDISON, PYTHA, ATLAS, YORK) todos com satellite_spec em P08. As 11 leis ativas governam operacao autonoma. O iso_package de P02 mapeia architecture.md para P08.
+CODEXA tem 7 satelites (STELLA, SHAKA, LILY, EDISON, PYTHA, ATLAS, YORK) todos com agent_card em P08. As 11 leis ativas governam operacao autonoma. O iso_package de P02 mapeia architecture.md para P08.
 
 ## References
 - P08_architecture/_schema.yaml (fonte de verdade)

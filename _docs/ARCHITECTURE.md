@@ -65,7 +65,7 @@ Todo sistema LLM — de prompt a satellite — executa estas funcoes nesta ordem
 | P05 | Output | response_format, parser, formatter, naming_rule (4) |
 | P06 | Schema | input_schema, type_def, validator, interface, validation_schema, artifact_blueprint, grammar (7) |
 | P07 | Evals | unit_eval, smoke_eval, e2e_eval, benchmark, golden_test, scoring_rubric (6) |
-| P08 | Architecture | satellite_spec, pattern, law, diagram, component_map (5) |
+| P08 | Architecture | agent_card, pattern, law, diagram, component_map (5) |
 | P09 | Config | env_config, path_config, permission, feature_flag, runtime_rule (5) |
 | P10 | Memory | runtime_state, brain_index, learning_record, session_state (4) |
 | P11 | Feedback | quality_gate, bugloop, lifecycle_rule, guardrail, optimizer (5) |

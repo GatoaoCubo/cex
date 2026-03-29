@@ -34,7 +34,7 @@ kinds:
     llm_function: INJECT
   component_map:
     description: Mapa de componentes (what connects to what)
-    boundary: Mapa estruturado de componentes e conexoes. NAO eh diagram (visual) nem satellite_spec (escopo de 1 satelite).
+    boundary: Mapa estruturado de componentes e conexoes. NAO eh diagram (visual) nem agent_card (escopo de 1 satelite).
     layer: spec
     core: false
     machine_format: yaml
@@ -42,6 +42,33 @@ kinds:
     constraints:
       max_bytes: 3072
     llm_function: INJECT
+  agent_card:
+    description: Deployment spec for autonomous agent — identity, model, tools, boot, dispatch, constraints
+    boundary: Agent deployment spec. NAO eh agent (P02, persona only) nem boot_config (P02, provider startup) nem spawn_config (P12, runtime launch).
+    layer: spec
+    core: false
+    machine_format: yaml
+    naming: p08_ac_{{agent_name}}.yaml
+    constraints:
+      max_bytes: 4096
+    required_files:
+    - identity section (name, domain, role)
+    - model config (model, context_window, temperature)
+    - tools list (mcp_servers or function_defs)
+    - dispatch keywords
+    recommended_files:
+    - boot sequence
+    - constraints (hard + soft)
+    - scaling config
+    - monitoring spec
+    llm_function: BECOME
+    references:
+    - A2A AgentCard (Google, 2024)
+    - OpenAI Assistant config
+    - CrewAI Agent(role+goal+tools+llm)
+    - MCP Server manifest
+    - K8s PodSpec
+    - Docker Compose service
   director:
     description: Crew orchestrator that composes and coordinates multiple builders
     naming: ex_director_{topic}.md
