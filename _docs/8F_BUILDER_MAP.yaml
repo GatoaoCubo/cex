@@ -357,7 +357,7 @@ naming_rule:
   core: false
   description: Regra de nomenclatura
   llm_function: GOVERN
-  pillar: P05_output
+  pillar: P08
 notifier:
   builder: archetypes/builders/notifier-builder
   core: false

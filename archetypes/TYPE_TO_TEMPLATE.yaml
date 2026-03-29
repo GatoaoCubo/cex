@@ -59,7 +59,7 @@ memory_scope: P02_model/templates/tpl_memory_scope.md
 memory_summary: P10_memory/templates/tpl_memory_summary.md
 mental_model: P10_memory/templates/tpl_mental_model.md
 model_card: P02_model/templates/tpl_model_card.md
-naming_rule: null
+naming_rule: P08_architecture/templates/tpl_naming_rule.md
 notifier: P04_tools/templates/tpl_notifier.md
 optimizer: null
 output_schema: P05_output/templates/tpl_output_schema.md

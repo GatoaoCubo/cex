@@ -388,6 +388,8 @@ def check_kc_library():
         if origin:
             # Check origin source exists
             origin_file = sources_dir / f"{origin}.md"
+            if origin == "manual":
+                continue  # manual origin is valid (no source file needed)
             if not origin_file.exists():
                 issues.append(f"  {kc_path.name}: origin '{origin}' not found")
 

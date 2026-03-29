@@ -61,3 +61,13 @@ kinds:
     - context
     - decision
     llm_function: REASON
+  naming_rule:
+    description: Regra de nomenclatura
+    boundary: Regra de nomenclatura de artefatos. NAO eh validator (P06, valida conteudo) nem type_def (P06, define tipo).
+    layer: governance
+    core: false
+    machine_format: yaml
+    naming: p05_nr_{{scope}}.md
+    constraints:
+      max_bytes: 4096
+    llm_function: GOVERN
