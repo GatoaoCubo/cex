@@ -14,39 +14,40 @@ from pathlib import Path
 CEX_ROOT = Path(__file__).resolve().parent.parent
 
 # Level 2 expansion: domain-specific kinds per nucleus
+# Names are GENERIC — user fills {{AGENT_NAME}} via seeds
 EXPANSION_MAP = {
     "N01": {
-        "name": "shaka", "domain": "Research", "sin": "ENVY",
+        "name": "{{AGENT_NAME}}", "domain": "Research", "drive": "{{DRIVE}}",
         "kinds": ["rag_source", "embedding_config", "few_shot_example", "scoring_rubric",
                   "prompt_template", "research_brief"],
     },
     "N02": {
-        "name": "lily", "domain": "Marketing", "sin": "LUST",
+        "name": "{{AGENT_NAME}}", "domain": "Marketing", "drive": "{{DRIVE}}",
         "kinds": ["prompt_template", "persona_prompt", "action_prompt", "few_shot_example",
                   "response_format", "scoring_rubric"],
     },
     "N03": {
-        "name": "edison", "domain": "Engineering", "sin": "PRIDE",
+        "name": "{{AGENT_NAME}}", "domain": "Engineering", "drive": "{{DRIVE}}",
         "kinds": ["pattern", "scoring_rubric", "interface", "skill",
                   "boot_config", "response_format", "learning_record"],
     },
     "N04": {
-        "name": "pytha", "domain": "Knowledge", "sin": "GLUTTONY",
+        "name": "{{AGENT_NAME}}", "domain": "Knowledge", "drive": "{{DRIVE}}",
         "kinds": ["chunk_strategy", "retriever_config", "embedding_config",
                   "rag_source", "learning_record", "scoring_rubric"],
     },
     "N05": {
-        "name": "atlas", "domain": "Operations", "sin": "WRATH",
+        "name": "{{AGENT_NAME}}", "domain": "Operations", "drive": "{{DRIVE}}",
         "kinds": ["spawn_config", "signal", "checkpoint", "deploy_config",
                   "env_config", "health_check", "retry_policy"],
     },
     "N06": {
-        "name": "york", "domain": "Commercial", "sin": "GREED",
+        "name": "{{AGENT_NAME}}", "domain": "Commercial", "drive": "{{DRIVE}}",
         "kinds": ["few_shot_example", "scoring_rubric", "schedule",
                   "prompt_template", "learning_record", "response_format"],
     },
     "N07": {
-        "name": "stella", "domain": "Admin", "sin": "SLOTH",
+        "name": "{{AGENT_NAME}}", "domain": "Admin", "drive": "{{DRIVE}}",
         "kinds": ["dag", "handoff", "signal", "spawn_config",
                   "retry_policy", "health_check"],
     },
@@ -71,7 +72,7 @@ def run_nucleus_builder(nucleus, name, domain, kinds, dry_run=False):
         cmd.append("--dry-run")
 
     print(f"\n{'='*60}")
-    print(f"  {nucleus} ({name}) -- {EXPANSION_MAP[nucleus]['sin']}")
+    print(f"  {nucleus} ({name}) -- {EXPANSION_MAP[nucleus]['drive']}")
     print(f"  Kinds: {len(kinds)} -- {', '.join(kinds)}")
     print(f"  Mode: {'DRY-RUN' if dry_run else 'EXECUTE'}")
     print(f"{'='*60}")
@@ -96,7 +97,7 @@ def level2_expand(nuclei, dry_run=False):
     for nuc, ok in results.items():
         info = EXPANSION_MAP[nuc]
         status = "DONE" if ok else "PARTIAL"
-        print(f"  {nuc} {info['name']:8s} {info['sin']:10s} {len(info['kinds']):2d} kinds  {status}")
+        print(f"  {nuc} {info['name']:8s} {info['drive']:10s} {len(info['kinds']):2d} kinds  {status}")
     total = sum(len(EXPANSION_MAP[n]["kinds"]) for n in nuclei)
     print(f"\n  Total: {total} artifacts attempted")
 

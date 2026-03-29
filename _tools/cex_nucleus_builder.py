@@ -11,8 +11,8 @@ Sequentially produces the 7 core artifacts for a nucleus:
   7. quality_gate (P11) -- standards
 
 Usage:
-  python _tools/cex_nucleus_builder.py --nucleus N01 --name shaka --domain "Research & Competitive Intelligence" --context "..."
-  python _tools/cex_nucleus_builder.py --nucleus N03 --name edison --domain "Meta-Construction" --dry-run
+  python _tools/cex_nucleus_builder.py --nucleus N01 --name research --domain "Research & Intelligence" --context "..."
+  python _tools/cex_nucleus_builder.py --nucleus N03 --name engineering --domain "Engineering & Build" --dry-run
 """
 
 import argparse
@@ -106,7 +106,7 @@ def main():
     parser = argparse.ArgumentParser(description="Build a complete CEX nucleus via 8F Runner")
     parser.add_argument("--nucleus", required=True, choices=NUCLEUS_DIRS.keys(),
                         help="Nucleus ID (N01-N07)")
-    parser.add_argument("--name", required=True, help="Nucleus name (e.g. shaka, edison)")
+    parser.add_argument("--name", required=True, help="Nucleus name (e.g. research, engineering)")
     parser.add_argument("--domain", required=True, help="Domain description")
     parser.add_argument("--context", default="", help="Additional domain context (PRIME excerpt, etc)")
     parser.add_argument("--dry-run", action="store_true", help="Preview without LLM calls")
@@ -119,6 +119,8 @@ def main():
 
     # Build context string: auto-load seed if exists
     seed_file = CEX_ROOT / "_seeds" / f"seed_{args.nucleus.lower()}_{args.name.lower()}.txt"
+    if not seed_file.exists():
+        seed_file = CEX_ROOT / "_seeds" / f"seed_{args.nucleus.lower()}.txt"
     seed_text = ""
     if seed_file.exists():
         seed_text = seed_file.read_text(encoding="utf-8").strip()

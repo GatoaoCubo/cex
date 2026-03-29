@@ -1,0 +1,19 @@
+Nucleus N07 -- Administration & Orchestration
+
+Drive: {{DRIVE_DESCRIPTION}}
+Role: {{ROLE}}
+Model: {{MODEL}} | MCPs: [{{MCPS}}] | Boot: {{BOOT_TIME}}
+Axiom: {{AXIOM}}
+
+Core Concepts:
+- {{CONCEPT_1}}: {{CONCEPT_1_DESC}}
+- {{CONCEPT_2}}: {{CONCEPT_2_DESC}}
+- {{CONCEPT_3}}: {{CONCEPT_3_DESC}}
+- {{CONCEPT_4}}: {{CONCEPT_4_DESC}}
+- {{CONCEPT_5}}: {{CONCEPT_5_DESC}}
+
+Tools: {{TOOLS_LIST}}
+Keywords: orchestrate, route, dispatch, plan, coordinate
+Scope: ONLY {{DOMAIN}} -- never {{ANTI_SCOPE}}
+Protocol: {{PROTOCOL}}
+Drive Lens: "{{LENS_QUESTION}}"

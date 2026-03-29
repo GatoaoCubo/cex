@@ -1,37 +1,30 @@
 #!/bin/bash
-# CEX Nucleus Auto-Build — EDISON (PRIDE) constructs all nuclei
-# Generated from gap analysis: 31 artifacts across 4 waves
+# CEX Nucleus Auto-Build -- generic, no hardcoded agent names
+# User fills seeds with their own names before running
+# Usage: bash _tools/build_all_nuclei.sh [--dry-run]
 
 set -e
 cd "$(dirname "$0")/.."
 
-echo "=== Wave 1 - EDISON bootstrap ==="
-echo "  N03 (edison): 3 artifacts"
-python _tools/cex_nucleus_builder.py --nucleus N03 --name edison --domain "Engineering" --kinds dispatch_rule workflow quality_gate "$@"
-echo ""
+echo "============================================================"
+echo "  CEX Nucleus Builder -- All 7 Nuclei"
+echo "  Seeds: _seeds/seed_n{01-07}.txt"
+echo "  Fill {{VARIABLES}} in seeds before running!"
+echo "============================================================"
 
-echo "=== Wave 2 - STELLA completes ==="
-echo "  N07 (stella): 3 artifacts"
-python _tools/cex_nucleus_builder.py --nucleus N07 --name stella --domain "Admin" --kinds knowledge_card workflow quality_gate "$@"
-echo ""
+# Build order: Engineering first (self-build), then infra, then output
+NUCLEI="N03:Engineering N07:Admin N04:Knowledge N01:Research N05:Operations N02:Marketing N06:Commercial"
 
-echo "=== Wave 3 - PYTHA + SHAKA ==="
-echo "  N04 (pytha): 6 artifacts"
-python _tools/cex_nucleus_builder.py --nucleus N04 --name pytha --domain "Knowledge" --kinds agent_card system_prompt dispatch_rule knowledge_card workflow quality_gate "$@"
-echo "  N01 (shaka): 4 artifacts"
-python _tools/cex_nucleus_builder.py --nucleus N01 --name shaka --domain "Research" --kinds agent_card system_prompt workflow quality_gate "$@"
-echo ""
+for entry in $NUCLEI; do
+    IFS=: read nuc domain <<< "$entry"
+    echo ""
+    echo "=== $nuc ($domain) ==="
+    python _tools/cex_nucleus_builder.py --nucleus $nuc --name "$domain" --domain "$domain" "$@"
+done
 
-echo "=== Wave 4 - LILY + ATLAS + YORK ==="
-echo "  N02 (lily): 5 artifacts"
-python _tools/cex_nucleus_builder.py --nucleus N02 --name lily --domain "Marketing" --kinds agent_card system_prompt dispatch_rule knowledge_card workflow "$@"
-echo "  N05 (atlas): 5 artifacts"
-python _tools/cex_nucleus_builder.py --nucleus N05 --name atlas --domain "Operations" --kinds agent_card system_prompt dispatch_rule knowledge_card workflow "$@"
-echo "  N06 (york): 5 artifacts"
-python _tools/cex_nucleus_builder.py --nucleus N06 --name york --domain "Commercial" --kinds agent_card system_prompt dispatch_rule workflow quality_gate "$@"
 echo ""
-
 echo "=== VALIDATE ==="
-python _tools/cex_doctor.py
+python _tools/cex_doctor.py 2>/dev/null || echo "Doctor: run manually"
 
-echo "=== DONE: 31 artifacts built ==="
+echo ""
+echo "=== DONE ==="

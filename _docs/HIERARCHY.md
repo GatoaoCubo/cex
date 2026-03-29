@@ -40,7 +40,7 @@ It contains no domain content, only structure and instructions.
 Each nucleus mirrors the 12 pillars but contains domain-specific instances:
 
 ```
-N03_engineering/          (EDISON nucleus)
+N03_engineering/          (Engineering nucleus)
   agents/                 mirrors P02 (agent kind)
   architecture/           mirrors P08 (agent_card, pattern kinds)
   config/                 mirrors P09 (env_config kind)
@@ -55,29 +55,33 @@ N03_engineering/          (EDISON nucleus)
   tools/                  mirrors P04 (skill, mcp_server kinds)
 ```
 
-## 7 Deadly Sins (Nucleus Drive)
+## Nucleus Drive (User-Defined)
 
-Each nucleus is driven by a productive sin — a channeled vice that becomes a virtue:
+Each nucleus can have a {{DRIVE}} -- a motivation that shapes its behavior.
+This is an OPTIONAL personality layer. Users fill it or leave generic.
 
-| # | Nucleus | Sin | Drive | Lens |
-|---|---------|-----|-------|------|
-| N01 | SHAKA | ENVY | Analytical | "What do they know that I don't?" |
-| N02 | LILY | LUST | Strategic | "What desire don't they know they have?" |
-| N03 | EDISON | PRIDE | Inventive | "Is this the best ever produced?" |
-| N04 | PYTHA | GLUTTONY | Systematic | "What haven't I consumed yet?" |
-| N05 | ATLAS | WRATH | Achieving | "Why isn't this running RIGHT NOW?" |
-| N06 | YORK | GREED | Visionary | "What value is nobody capturing?" |
-| N07 | STELLA | SLOTH | Productive | "Who should do this instead of me?" |
+| # | Domain | Default Drive | Lens (example) |
+|---|--------|---------------|----------------|
+| N01 | Research & Intelligence | {{DRIVE}} | "{{LENS_QUESTION}}" |
+| N02 | Marketing & Copy | {{DRIVE}} | "{{LENS_QUESTION}}" |
+| N03 | Engineering & Build | {{DRIVE}} | "{{LENS_QUESTION}}" |
+| N04 | Knowledge & Indexing | {{DRIVE}} | "{{LENS_QUESTION}}" |
+| N05 | Operations & Execution | {{DRIVE}} | "{{LENS_QUESTION}}" |
+| N06 | Commercial & Monetization | {{DRIVE}} | "{{LENS_QUESTION}}" |
+| N07 | Administration & Orchestration | {{DRIVE}} | "{{LENS_QUESTION}}" |
 
-## Build Order (PRIDE builds everything)
+> **CODEXA example**: Uses 7 deadly sins (ENVY, LUST, PRIDE, GLUTTONY, WRATH, GREED, SLOTH).
+> See `_instances/codexa/` for a complete filled instance.
 
-EDISON (N03/PRIDE) constructs all nuclei using the genesis as mold:
+## Build Order (Engineering builds everything)
+
+N03 (Engineering) constructs all nuclei using the genesis as mold:
 
 ```
-Wave 1: N03 self-completes (bootstrap proof)
-Wave 2: N07 STELLA completes (orchestrator)
-Wave 3: N04 PYTHA + N01 SHAKA (knowledge + research)
-Wave 4: N02 LILY + N05 ATLAS + N06 YORK (remaining)
+Wave 1: N03 Engineering self-completes (bootstrap proof)
+Wave 2: N07 Admin completes (orchestrator)
+Wave 3: N04 Knowledge + N01 Research
+Wave 4: N02 Marketing + N05 Operations + N06 Commercial
 ```
 
 Command: `bash _tools/build_all_nuclei.sh`
