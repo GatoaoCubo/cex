@@ -90,6 +90,18 @@ ISO_TO_FUNCTION = {
 
 ALL_ISO_PREFIXES = list(ISO_TO_FUNCTION.keys())
 
+# Function labels for verbose output
+F_LABELS = {
+    "F1": "CONSTRAIN",
+    "F2": "BECOME",
+    "F3": "INJECT",
+    "F4": "REASON",
+    "F5": "CALL",
+    "F6": "PRODUCE",
+    "F7": "GOVERN",
+    "F8": "COLLABORATE",
+}
+
 
 # ---------------------------------------------------------------------------
 # RunState
@@ -258,6 +270,49 @@ class EightFRunner:
         if self.verbose:
             print(f"  [{fn}] {msg}", file=sys.stderr)
 
+    def _state_summary(self, fn: str) -> str:
+        """One-line summary of state after function fn completes."""
+        s = self.state
+        if fn == "F1":
+            c = s.constraints
+            parts = []
+            if c.get("max_bytes"):
+                parts.append(f"max_bytes: {c['max_bytes']}")
+            parts.append(f"fields: {len(c.get('frontmatter_required', []))}")
+            if c.get("id_pattern"):
+                parts.append(f"id_pattern: /{c['id_pattern']}/")
+            return "constraints: {" + ", ".join(parts) + "}"
+        elif fn == "F2":
+            keys = list(s.identity.keys())
+            return f"identity: {len(keys)} keys ({', '.join(keys[:3])})"
+        elif fn == "F3":
+            kc_count = len(s.knowledge.get("kc_domains", []))
+            iso_keys = [k for k in s.knowledge if s.knowledge[k]]
+            return f"ISOs: {len(iso_keys)}, KCs injected: {kc_count}"
+        elif fn == "F4":
+            words = len(s.reasoning.get("plan", "").split())
+            model = s.reasoning.get("model_used", "?")
+            return f"plan: {words} words (model={model})"
+        elif fn == "F5":
+            t = s.tool_results
+            return (
+                f"tools: {len(t.get('tools_available', []))}, "
+                f"existing: {len(t.get('existing_artifacts', []))}"
+            )
+        elif fn == "F6":
+            words = len(s.artifact.split()) if s.artifact else 0
+            return f"artifact: {words} words"
+        elif fn == "F7":
+            v = s.verdict
+            if v:
+                ok = sum(1 for g in v.get("hard_gates", []) if g.get("passed"))
+                total = len(v.get("hard_gates", []))
+                return f"gates: {ok}/{total}, retries: {v.get('retries', 0)}"
+            return "pending"
+        elif fn == "F8":
+            return f"mode: {s.result.get('mode', '?')}, path: {s.result.get('path', 'none')}"
+        return ""
+
     def _timed(self, fn_name: str, func):
         """Run a function and record its timing."""
         t0 = time.perf_counter()
@@ -268,7 +323,15 @@ class EightFRunner:
             self._log(fn_name, f"ERROR: {e}")
         elapsed = (time.perf_counter() - t0) * 1000
         self.state.timings[fn_name] = round(elapsed, 1)
-        self._log(fn_name, f"done ({elapsed:.1f}ms)")
+        # Verbose timing line: [F1 CONSTRAIN] 12ms | summary
+        base = fn_name.split(".")[0]  # strip .retryN suffix
+        label = F_LABELS.get(base, "")
+        summary = self._state_summary(base)
+        if self.verbose:
+            print(
+                f"  [{fn_name} {label}] {elapsed:.1f}ms | {summary}",
+                file=sys.stderr,
+            )
 
     # -- F1 CONSTRAIN -------------------------------------------------------
 
@@ -455,6 +518,64 @@ class EightFRunner:
             self.state.reasoning = {"plan": response, "model_used": "haiku"}
             self._log("F4", f"reasoning plan received ({len(response)} chars)")
 
+    # -- F5 CALL ------------------------------------------------------------
+
+    def f5_call(self):
+        """Load bld_tools ISO, scan existing artifacts -> state.tool_results."""
+        bdir = self.state.builder_dir
+        tool_results = {"existing_artifacts": [], "tools_available": []}
+
+        # 1. Load bld_tools ISO and parse tools table
+        if bdir:
+            tools_text = load_iso(bdir, "bld_tools", self.kind_slug)
+            if tools_text:
+                body = strip_frontmatter(tools_text)
+                # Parse markdown table rows for tool entries
+                for line in body.split("\n"):
+                    line = line.strip()
+                    if (
+                        line.startswith("|")
+                        and "---" not in line
+                        and "Tool" not in line
+                        and "Source" not in line
+                    ):
+                        cols = [c.strip() for c in line.split("|")[1:-1]]
+                        if len(cols) >= 2 and cols[0]:
+                            tool_results["tools_available"].append(
+                                {
+                                    "name": cols[0],
+                                    "purpose": cols[1] if len(cols) > 1 else "",
+                                    "status": cols[3] if len(cols) > 3 else "unknown",
+                                }
+                            )
+                self._log(
+                    "F5",
+                    f"bld_tools loaded, {len(tool_results['tools_available'])} tools parsed",
+                )
+
+        # 2. Scan existing artifacts in pillar examples dir
+        pillar_dir_name = PILLAR_DIRS.get(self.state.pillar)
+        if pillar_dir_name:
+            examples_dir = CEX_ROOT / pillar_dir_name / "examples"
+            if examples_dir.exists():
+                kind_slug = self.state.kind.replace("-", "_")
+                for f in sorted(examples_dir.glob(f"ex_{kind_slug}*.md")):
+                    tool_results["existing_artifacts"].append(f.name)
+
+        # 3. Warn on similar artifacts in verbose
+        existing = tool_results["existing_artifacts"]
+        if existing:
+            self._log(
+                "F5",
+                f"WARNING: {len(existing)} similar artifact(s) exist: " + ", ".join(existing[:5]),
+            )
+
+        self.state.tool_results = tool_results
+        self._log(
+            "F5",
+            f"tools: {len(tool_results['tools_available'])}, existing: {len(existing)}",
+        )
+
     # -- F6 PRODUCE ---------------------------------------------------------
 
     def f6_produce(self, retry_feedback: str = ""):
@@ -507,6 +628,25 @@ class EightFRunner:
         plan = self.state.reasoning.get("plan", "")
         if plan:
             sections.append(f"# PLAN\n\n{plan}")
+
+        # 5b. TOOLS (from F5 call)
+        tr = self.state.tool_results
+        if tr.get("tools_available") or tr.get("existing_artifacts"):
+            tool_lines = []
+            if tr.get("tools_available"):
+                tool_lines.append("## Available Tools")
+                for t in tr["tools_available"]:
+                    status = t.get("status", "")
+                    tool_lines.append(f"- **{t['name']}**: {t['purpose']} [{status}]")
+            if tr.get("existing_artifacts"):
+                tool_lines.append(f"\n## Existing Artifacts ({len(tr['existing_artifacts'])})")
+                for a in tr["existing_artifacts"][:5]:
+                    tool_lines.append(f"- {a}")
+                tool_lines.append(
+                    "\n> NOTE: Similar artifacts exist. Ensure your output is "
+                    "distinct and adds value."
+                )
+            sections.append("# TOOLS\n\n" + "\n".join(tool_lines))
 
         # 6. INSTRUCTION (bld_instruction body)
         bdir = self.state.builder_dir
@@ -722,13 +862,13 @@ class EightFRunner:
     # -- run() pipeline -----------------------------------------------------
 
     def run(self, stop_at: int | None = None) -> RunState:
-        """Execute F1->F2->F3->F4->F6->F7->F8 pipeline (wave 2: skip F5)."""
+        """Execute F1->F2->F3->F4->F5->F6->F7->F8 pipeline (wave 3: full)."""
         steps = [
             ("F1", self.f1_constrain),
             ("F2", self.f2_become),
             ("F3", self.f3_inject),
             ("F4", self.f4_reason),
-            # F5 CALL    -- wave 3
+            ("F5", self.f5_call),
             ("F6", self.f6_produce),
             ("F7", self.f7_govern),
             ("F8", self.f8_collaborate),
@@ -817,6 +957,13 @@ def print_banner(state: RunState, elapsed_ms: float):
         kc_parts.append("architecture")
     print(f"  Knowledge:   {', '.join(kc_parts) if kc_parts else 'none'}")
 
+    # Tools (F5)
+    tr = state.tool_results
+    if tr:
+        t_count = len(tr.get("tools_available", []))
+        e_count = len(tr.get("existing_artifacts", []))
+        print(f"  Tools:       {t_count} available, {e_count} existing artifacts")
+
     # Reasoning (F4)
     r = state.reasoning
     if r:
@@ -904,32 +1051,50 @@ Examples:
     intent = args.intent or f"create {args.kind}"
     dry_run = not args.execute
 
-    runner = EightFRunner(
-        intent=intent,
-        kind=args.kind,
-        dry_run=dry_run,
-        verbose=args.verbose,
-        output_dir=args.output_dir,
-    )
+    # Multi-kind detection: if Motor classifies multiple kinds, run each
+    parsed = parse_intent(intent)
+    classified = classify_objects(parsed["objects"]) if not args.kind else []
 
-    t0 = time.perf_counter()
-    state = runner.run(stop_at=args.step)
-    elapsed = (time.perf_counter() - t0) * 1000
+    if len(classified) > 1:
+        print(f"\n  Multi-kind detected: {len(classified)} kinds")
+        for i, c in enumerate(classified):
+            print(f"    [{i + 1}] {c['kind']} (pillar={c['pillar']})")
+        print()
 
-    # Banner
-    print_banner(state, elapsed)
+    kinds_to_run = [c["kind"] for c in classified] if len(classified) > 1 else [args.kind]
 
-    # Show artifact
-    if state.artifact:
-        if state.result.get("mode") == "dry-run":
-            print("--- STRUCTURED PROMPT (8F) ---\n")
-            print(state.artifact)
-            print(f"\n--- END ({len(state.artifact.split())} words) ---")
-        else:
-            print("--- ARTIFACT ---\n")
-            print(state.artifact[:2000])
-            if len(state.artifact) > 2000:
-                print(f"\n... (truncated, full: {len(state.artifact)} chars)")
+    for kind_i, kind in enumerate(kinds_to_run):
+        if len(kinds_to_run) > 1:
+            print(f"\n{'#' * 70}")
+            print(f"  Multi-kind [{kind_i + 1}/{len(kinds_to_run)}]: {kind}")
+            print(f"{'#' * 70}")
+
+        runner = EightFRunner(
+            intent=intent,
+            kind=kind,
+            dry_run=dry_run,
+            verbose=args.verbose,
+            output_dir=args.output_dir,
+        )
+
+        t0 = time.perf_counter()
+        state = runner.run(stop_at=args.step)
+        elapsed = (time.perf_counter() - t0) * 1000
+
+        # Banner
+        print_banner(state, elapsed)
+
+        # Show artifact
+        if state.artifact:
+            if state.result.get("mode") == "dry-run":
+                print("--- STRUCTURED PROMPT (8F) ---\n")
+                print(state.artifact)
+                print(f"\n--- END ({len(state.artifact.split())} words) ---")
+            else:
+                print("--- ARTIFACT ---\n")
+                print(state.artifact[:2000])
+                if len(state.artifact) > 2000:
+                    print(f"\n... (truncated, full: {len(state.artifact)} chars)")
 
 
 if __name__ == "__main__":
