@@ -1,6 +1,9 @@
 import sys
-if hasattr(sys.stdout, "reconfigure"): sys.stdout.reconfigure(encoding="utf-8")
-if hasattr(sys.stderr, "reconfigure"): sys.stderr.reconfigure(encoding="utf-8")
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8")
 """
 CEX Distill — Transforms raw input into template-compliant artifacts.
 
@@ -13,16 +16,21 @@ Usage:
 """
 import sys
 import argparse
+from datetime import date
 from pathlib import Path
+
+import yaml
 
 # Map artifact type → template file
 TYPE_TO_TEMPLATE = {
-    "knowledge_card":       "P01_knowledge/templates/tpl_knowledge_card_domain.md",
-    "knowledge_card_meta":  "P01_knowledge/templates/tpl_knowledge_card_meta.md",
-    "knowledge_card_test":  "P01_knowledge/templates/tpl_knowledge_card_test.md",
+    "knowledge_card": "P01_knowledge/templates/tpl_knowledge_card_domain.md",
+    "knowledge_card_meta": "P01_knowledge/templates/tpl_knowledge_card_meta.md",
+    "knowledge_card_test": "P01_knowledge/templates/tpl_knowledge_card_test.md",
 }
 
 CEX_ROOT = Path(__file__).parent.parent  # _tools/ → CEX/
+LIBRARY_DIR = CEX_ROOT / "P01_knowledge" / "library"
+INDEX_PATH = LIBRARY_DIR / "index.yaml"
 
 
 def get_template(artifact_type: str) -> str:
@@ -71,15 +79,27 @@ def validate_output(output: str, template: str) -> list:
     issues = []
 
     # Check required frontmatter fields
-    required_fields = ["id:", "type:", "tldr:", "when_to_use:", "axioms:", 
-                       "linked_artifacts:", "density_score:"]
+    required_fields = [
+        "id:",
+        "type:",
+        "tldr:",
+        "when_to_use:",
+        "axioms:",
+        "linked_artifacts:",
+        "density_score:",
+    ]
     for field in required_fields:
         if field not in output:
             issues.append(f"Missing frontmatter: {field}")
 
     # Check required sections
-    required_sections = ["## Quick Reference", "## Regras de Ouro", 
-                         "## Anti-Patterns", "## Application", "## References"]
+    required_sections = [
+        "## Quick Reference",
+        "## Regras de Ouro",
+        "## Anti-Patterns",
+        "## Application",
+        "## References",
+    ]
     # Flexible: check for partial matches
     for section in required_sections:
         section_name = section.replace("## ", "")
@@ -88,7 +108,8 @@ def validate_output(output: str, template: str) -> list:
 
     # Check no unfilled placeholders remain
     import re
-    placeholders = re.findall(r'\{\{[A-Z_]+\}\}', output)
+
+    placeholders = re.findall(r"\{\{[A-Z_]+\}\}", output)
     if placeholders:
         issues.append(f"Unfilled placeholders: {placeholders[:5]}")
 
@@ -103,6 +124,50 @@ def validate_output(output: str, template: str) -> list:
     return issues
 
 
+def load_index() -> dict:
+    """Load the library index.yaml."""
+    if INDEX_PATH.exists():
+        return yaml.safe_load(INDEX_PATH.read_text(encoding="utf-8")) or {}
+    return {"version": "1.0.0", "sources": {}, "domains": {}, "coverage": {}}
+
+
+def save_index(index: dict):
+    """Save the library index.yaml."""
+    INDEX_PATH.write_text(
+        yaml.dump(index, default_flow_style=False, allow_unicode=True, sort_keys=False),
+        encoding="utf-8",
+    )
+
+
+def inject_frontmatter(prompt: str, source_path: str, kc_type: str, feeds_kinds: list[str]) -> str:
+    """Inject KC-Source metadata into the distill prompt."""
+    origin = Path(source_path).stem if source_path else "manual"
+    feeds_str = ", ".join(feeds_kinds) if feeds_kinds else "P04_tools"
+    injection = f"""
+### FRONTMATTER OBRIGATORIO (adicione ao output):
+- type: {kc_type}
+- origin: {origin}
+- feeds_kinds: [{feeds_str}]
+- created: {date.today().isoformat()}
+- updated: {date.today().isoformat()}
+"""
+    return prompt + injection
+
+
+def update_domain_index(kc_name: str, kc_type: str, origin: str, feeds_kinds: list[str]):
+    """Register a new domain KC in index.yaml."""
+    index = load_index()
+    if "domains" not in index or not isinstance(index["domains"], dict):
+        index["domains"] = {}
+    index["domains"][kc_name] = {
+        "type": kc_type,
+        "origin": origin,
+        "feeds_kinds": feeds_kinds,
+        "created": date.today().isoformat(),
+    }
+    save_index(index)
+
+
 def main():
     p = argparse.ArgumentParser(description="CEX Distill — Template-driven knowledge extraction")
     p.add_argument("--input", type=str, help="Path to raw input file")
@@ -111,6 +176,13 @@ def main():
     p.add_argument("--dry-run", action="store_true", help="Show prompt without executing")
     p.add_argument("--list-types", action="store_true", help="List available types")
     p.add_argument("--validate", type=str, help="Validate existing file against template")
+    p.add_argument("--source", type=str, help="KC-Source path (auto-sets origin)")
+    p.add_argument(
+        "--feeds", type=str, help="Comma-separated feeds_kinds (e.g. P04_tools,P08_architecture)"
+    )
+    p.add_argument(
+        "--kc-type", type=str, default="domain", help="KC type: domain or meta (default: domain)"
+    )
 
     a = p.parse_args()
 
@@ -134,6 +206,10 @@ def main():
             print("[PASS] All template fields present")
         return
 
+    # Resolve --source: use as --input if --input not given
+    if a.source and not a.input:
+        a.input = a.source
+
     if not a.input:
         p.print_help()
         return
@@ -148,6 +224,16 @@ def main():
     raw_content = raw_path.read_text(encoding="utf-8")
     prompt = build_distill_prompt(template, raw_content, raw_path.name)
 
+    # Inject KC-Source metadata if --source or --feeds provided
+    feeds_kinds = [f.strip() for f in a.feeds.split(",")] if a.feeds else []
+    if a.source or a.feeds:
+        prompt = inject_frontmatter(
+            prompt,
+            source_path=a.source or a.input,
+            kc_type=a.kc_type,
+            feeds_kinds=feeds_kinds,
+        )
+
     if a.dry_run:
         print(f"[DRY RUN] Prompt ({len(prompt)} chars):")
         print("=" * 60)
@@ -156,6 +242,11 @@ def main():
         print("=" * 60)
         print(f"\nTemplate: {a.type}")
         print(f"Input: {raw_path} ({len(raw_content)} chars)")
+        if a.source:
+            print(f"Source: {a.source} (origin: {Path(a.source).stem})")
+        if feeds_kinds:
+            print(f"Feeds: {feeds_kinds}")
+        print(f"KC type: {a.kc_type}")
         print(f"Prompt size: {len(prompt)} chars")
         return
 
@@ -165,6 +256,13 @@ def main():
         print(f"[OK] Prompt saved to {a.output}")
     else:
         print(prompt)
+
+    # Auto-update index.yaml if --source provided
+    if a.source:
+        origin = Path(a.source).stem
+        kc_name = f"kc_{origin.replace('src_', '')}"
+        update_domain_index(kc_name, a.kc_type, origin, feeds_kinds)
+        print(f"[OK] Registered {kc_name} in index.yaml", file=sys.stderr)
 
 
 if __name__ == "__main__":

@@ -14,6 +14,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 BUILDERS_DIR = ROOT / "archetypes" / "builders"
+LIBRARY_DIR = ROOT / "P01_knowledge" / "library"
 FIX_MODE = "--fix" in sys.argv
 
 # -- Constants ----------------------------------------------------------------
@@ -248,6 +249,129 @@ def check_builder(builder_dir):
     return r
 
 
+# -- KC Library Checks --------------------------------------------------------
+
+# All 98 CEX kinds (12 pillars)
+ALL_KINDS = [
+    "knowledge_card",
+    "rag_source",
+    "glossary_entry",
+    "context_doc",
+    "embedding_config",
+    "few_shot_example",
+    "chunk_strategy",
+    "retriever_config",
+    "agent",
+    "lens",
+    "boot_config",
+    "mental_model",
+    "model_card",
+    "router",
+    "fallback_chain",
+    "iso_package",
+    "axiom",
+    "system_prompt",
+    "prompt_template",
+    "chain",
+    "action_prompt",
+    "instruction",
+    "skill",
+    "mcp_server",
+    "hook",
+    "plugin",
+    "client",
+    "cli_tool",
+    "scraper",
+    "connector",
+    "daemon",
+    "response_format",
+    "parser",
+    "formatter",
+    "naming_rule",
+    "input_schema",
+    "type_def",
+    "validator",
+    "interface",
+    "validation_schema",
+    "unit_eval",
+    "smoke_eval",
+    "e2e_eval",
+    "benchmark",
+    "golden_test",
+    "scoring_rubric",
+    "pattern",
+    "law",
+    "diagram",
+    "component_map",
+    "director",
+    "env_config",
+    "path_config",
+    "permission",
+    "feature_flag",
+    "runtime_rule",
+    "runtime_state",
+    "brain_index",
+    "learning_record",
+    "session_state",
+    "quality_gate",
+    "bugloop",
+    "lifecycle_rule",
+    "guardrail",
+    "optimizer",
+    "workflow",
+    "dag",
+    "spawn_config",
+    "signal",
+    "handoff",
+    "dispatch_rule",
+]
+
+
+def check_kc_library():
+    """Check KC Library health: sources, domains, feeds_kinds, origins."""
+    sources_dir = LIBRARY_DIR / "sources"
+    domain_dir = LIBRARY_DIR / "domain"
+
+    sources = sorted(sources_dir.glob("src_*.md")) if sources_dir.exists() else []
+    domains = sorted(domain_dir.glob("kc_*.md")) if domain_dir.exists() else []
+
+    issues = []
+
+    # Check each domain KC for feeds_kinds and origin
+    covered_kinds = set()
+    for kc_path in domains:
+        fm = get_frontmatter(kc_path)
+        if fm is None:
+            issues.append(f"  {kc_path.name}: no frontmatter")
+            continue
+
+        feeds = fm.get("feeds_kinds", [])
+        if not feeds:
+            issues.append(f"  {kc_path.name}: feeds_kinds empty")
+        else:
+            for kind in feeds:
+                # Normalize: P04_tools -> tools
+                clean = kind.split("_", 1)[-1] if "_" in kind else kind
+                covered_kinds.add(clean)
+
+        origin = fm.get("origin")
+        if origin:
+            # Check origin source exists
+            origin_file = sources_dir / f"{origin}.md"
+            if not origin_file.exists():
+                issues.append(f"  {kc_path.name}: origin '{origin}' not found")
+
+    kind_coverage = len(covered_kinds & set(ALL_KINDS))
+
+    return {
+        "sources": len(sources),
+        "domains": len(domains),
+        "kinds_covered": kind_coverage,
+        "kinds_total": len(ALL_KINDS),
+        "issues": issues,
+    }
+
+
 # -- Main ---------------------------------------------------------------------
 
 
@@ -343,6 +467,19 @@ def main():
     )
     print(f"No frontmatter: {fm_missing_total} files")
     print(f"Result:         {pass_count} PASS | {warn_count} WARN | {fail_count} FAIL")
+    print("=" * 72)
+
+    # -- KC Library Health ----------------------------------------------------
+    print()
+    kc = check_kc_library()
+    print(
+        f"KC Library: {kc['sources']} sources, {kc['domains']} domains, "
+        f"{kc['kinds_covered']}/{kc['kinds_total']} kinds covered"
+    )
+    if kc["issues"]:
+        print(f"KC Issues ({len(kc['issues'])}):")
+        for issue in kc["issues"][:10]:
+            print(issue)
     print("=" * 72)
 
     sys.exit(1 if fail_count > 0 else 0)
