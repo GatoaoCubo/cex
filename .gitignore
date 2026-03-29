@@ -25,3 +25,4 @@ __pycache__/
 *.pyc
 _archive/
 .env
+.cex_signals/
