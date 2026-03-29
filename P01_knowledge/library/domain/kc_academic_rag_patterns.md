@@ -3,7 +3,7 @@ id: p01_kc_academic_rag_patterns
 kind: knowledge_card
 type: domain
 pillar: P01
-title: "Academic RAG Patterns: Foundational Retrieval-Augmented Generation Research"
+title: 'Academic RAG Patterns: Foundational Retrieval-Augmented Generation Research'
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
@@ -11,17 +11,41 @@ author: edison
 domain: rag_research
 origin: src_standards_global
 quality: 9.0
-tags: [rag, toolformer, self-rag, flare, retrieval, academic]
-tldr: "RAG research evolved from Lewis et al. 2020 (retriever+generator) through Toolformer (self-supervised tool learning), DSPy (compiled retrieval modules), and advanced patterns like Self-RAG and FLARE for adaptive retrieval."
-when_to_use: "When designing RAG pipelines, choosing retrieval strategies, understanding the academic lineage of RAG techniques, or evaluating advanced retrieval patterns."
-keywords: [rag, toolformer, self-rag, flare, retriever, dspy, structured-output]
-long_tails: ["difference between rag and self-rag patterns", "how toolformer teaches llms to use tools"]
-axioms: ["RAG decomposes into Retriever (what to fetch) and Generator (how to use it) — all innovations refine one or both sides"]
+tags:
+- rag
+- toolformer
+- self-rag
+- flare
+- retrieval
+- academic
+tldr: RAG research evolved from Lewis et al. 2020 (retriever+generator) through Toolformer (self-supervised tool learning),
+  DSPy (compiled retrieval modules), and advanced patterns like Self-RAG and FLARE for adaptive retrieval.
+when_to_use: When designing RAG pipelines, choosing retrieval strategies, understanding the academic lineage of RAG techniques,
+  or evaluating advanced retrieval patterns.
+keywords:
+- rag
+- toolformer
+- self-rag
+- flare
+- retriever
+- dspy
+- structured-output
+long_tails:
+- difference between rag and self-rag patterns
+- how toolformer teaches llms to use tools
+axioms:
+- RAG decomposes into Retriever (what to fetch) and Generator (how to use it) — all innovations refine one or both sides
 linked_artifacts:
   adw: null
   agent: null
   hop: null
-feeds_kinds: [knowledge_card, pattern, research_summary]
+feeds_kinds:
+- retriever_config
+- chunk_strategy
+- embedding_config
+- knowledge_card
+- document_loader
+- search_tool
 density_score: 0.88
 ---
 

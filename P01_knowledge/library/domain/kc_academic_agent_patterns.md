@@ -3,7 +3,7 @@ id: p01_kc_academic_agent_patterns
 kind: knowledge_card
 type: domain
 pillar: P01
-title: "Academic Agent Patterns: ReAct, CoT, Reflexion, CoALA, LATS"
+title: 'Academic Agent Patterns: ReAct, CoT, Reflexion, CoALA, LATS'
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
@@ -11,18 +11,43 @@ author: edison
 domain: agent_research
 origin: src_standards_global
 quality: 9.0
-tags: [react, chain-of-thought, reflexion, tree-of-thoughts, agent-patterns, academic]
-tldr: "Core agent reasoning patterns — ReAct (thought+action loop), CoT (step-by-step reasoning), ToT (deliberate search with backtracking), Reflexion (self-critique), and CoALA/LATS (cognitive architectures) — form the theoretical foundation adopted universally by all agent frameworks."
-when_to_use: "When choosing reasoning strategies for agents, implementing thought-action loops, designing self-correcting agents, or understanding the academic basis of agent architectures."
-keywords: [react, chain-of-thought, tree-of-thoughts, reflexion, coala, lats, reasoning]
-long_tails: ["react vs chain of thought for agent reasoning", "how reflexion self-correction works in llm agents"]
-axioms: ["Every agent loop is a variant of Thought-Action-Observation — complexity comes from how you branch, backtrack, or reflect"]
+tags:
+- react
+- chain-of-thought
+- reflexion
+- tree-of-thoughts
+- agent-patterns
+- academic
+tldr: Core agent reasoning patterns — ReAct (thought+action loop), CoT (step-by-step reasoning), ToT (deliberate search with
+  backtracking), Reflexion (self-critique), and CoALA/LATS (cognitive architectures) — form the theoretical foundation adopted
+  universally by all agent frameworks.
+when_to_use: When choosing reasoning strategies for agents, implementing thought-action loops, designing self-correcting agents,
+  or understanding the academic basis of agent architectures.
+keywords:
+- react
+- chain-of-thought
+- tree-of-thoughts
+- reflexion
+- coala
+- lats
+- reasoning
+long_tails:
+- react vs chain of thought for agent reasoning
+- how reflexion self-correction works in llm agents
+axioms:
+- Every agent loop is a variant of Thought-Action-Observation — complexity comes from how you branch, backtrack, or reflect
 linked_artifacts:
   adw: null
   agent: null
   hop: null
-feeds_kinds: [knowledge_card, pattern, research_summary]
-density_score: 0.90
+feeds_kinds:
+- agent
+- chain
+- action_prompt
+- system_prompt
+- director
+- handoff_protocol
+density_score: 0.9
 ---
 
 # Knowledge Card: Academic Agent Patterns

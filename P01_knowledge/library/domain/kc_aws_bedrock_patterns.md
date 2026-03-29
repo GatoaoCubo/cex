@@ -3,7 +3,7 @@ id: p01_kc_aws_bedrock_patterns
 kind: knowledge_card
 type: domain
 pillar: P01
-title: "AWS Bedrock Patterns: Agents, Knowledge Bases, Guardrails, Orchestration"
+title: 'AWS Bedrock Patterns: Agents, Knowledge Bases, Guardrails, Orchestration'
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
@@ -11,13 +11,37 @@ author: EDISON
 domain: aws_bedrock
 origin: src_provider_taxonomy
 quality: 9.0
-tags: [aws, bedrock, agents, knowledge-bases, guardrails, rag, knowledge]
-tldr: "AWS Bedrock patterns covering agents (action_groups + orchestration), knowledge bases (RAG + vector stores + chunking), guardrails (safety), and managed memory/sessions."
-when_to_use: "When building with AWS Bedrock agents, implementing RAG knowledge bases, or comparing AWS orchestration patterns vs MCP/Anthropic."
-keywords: [bedrock, agents, knowledge_bases, guardrails, rag, orchestration]
-long_tails: ["aws bedrock agent action group knowledge base orchestration", "bedrock knowledge base chunking strategy vector store rag"]
-axioms: ["Bedrock agents are server-managed (orchestration on AWS); Anthropic agentic loop is client-managed"]
-feeds_kinds: [P04_tools, P08_architecture, P10_memory, P12_orchestration]
+tags:
+- aws
+- bedrock
+- agents
+- knowledge-bases
+- guardrails
+- rag
+- knowledge
+tldr: AWS Bedrock patterns covering agents (action_groups + orchestration), knowledge bases (RAG + vector stores + chunking),
+  guardrails (safety), and managed memory/sessions.
+when_to_use: When building with AWS Bedrock agents, implementing RAG knowledge bases, or comparing AWS orchestration patterns
+  vs MCP/Anthropic.
+keywords:
+- bedrock
+- agents
+- knowledge_bases
+- guardrails
+- rag
+- orchestration
+long_tails:
+- aws bedrock agent action group knowledge base orchestration
+- bedrock knowledge base chunking strategy vector store rag
+axioms:
+- Bedrock agents are server-managed (orchestration on AWS); Anthropic agentic loop is client-managed
+feeds_kinds:
+- agent
+- knowledge_card
+- guardrail
+- function_def
+- retriever_config
+- env_config
 linked_artifacts:
   adw: null
   agent: null

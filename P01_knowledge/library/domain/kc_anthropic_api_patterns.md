@@ -3,7 +3,7 @@ id: p01_kc_anthropic_api_patterns
 kind: knowledge_card
 type: domain
 pillar: P01
-title: "Anthropic API Patterns: Tool Use, Computer Use, Prompt Caching, Server Tools"
+title: 'Anthropic API Patterns: Tool Use, Computer Use, Prompt Caching, Server Tools'
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
@@ -11,13 +11,36 @@ author: EDISON
 domain: anthropic_api
 origin: src_provider_taxonomy
 quality: 9.0
-tags: [anthropic, tool-use, computer-use, prompt-caching, server-tools, knowledge]
-tldr: "Anthropic Claude API patterns covering tool use (client/server tools, strict mode), computer use (actions + zoom), prompt caching (ephemeral TTL), and the agentic loop."
-when_to_use: "When building with Claude API, implementing tool use, optimizing with prompt caching, or setting up computer use automation."
-keywords: [anthropic, tool_use, computer_use, prompt_caching, server_tools, agentic_loop]
-long_tails: ["anthropic tool use strict mode schema enforcement", "claude prompt caching cache_control ephemeral ttl pricing"]
-axioms: ["Anthropic tool definitions use input_schema (JSON Schema); tool_choice controls selection with auto/any/tool/none"]
-feeds_kinds: [P04_tools, P06_schema, P09_config, P10_memory]
+tags:
+- anthropic
+- tool-use
+- computer-use
+- prompt-caching
+- server-tools
+- knowledge
+tldr: Anthropic Claude API patterns covering tool use (client/server tools, strict mode), computer use (actions + zoom), prompt
+  caching (ephemeral TTL), and the agentic loop.
+when_to_use: When building with Claude API, implementing tool use, optimizing with prompt caching, or setting up computer
+  use automation.
+keywords:
+- anthropic
+- tool_use
+- computer_use
+- prompt_caching
+- server_tools
+- agentic_loop
+long_tails:
+- anthropic tool use strict mode schema enforcement
+- claude prompt caching cache_control ephemeral ttl pricing
+axioms:
+- Anthropic tool definitions use input_schema (JSON Schema); tool_choice controls selection with auto/any/tool/none
+feeds_kinds:
+- function_def
+- mcp_server
+- system_prompt
+- prompt_template
+- computer_use
+- input_schema
 linked_artifacts:
   adw: null
   agent: null

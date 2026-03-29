@@ -3,7 +3,7 @@ id: p01_kc_mcp_protocol
 kind: knowledge_card
 type: domain
 pillar: P01
-title: "MCP Protocol: Tools, Resources, Prompts, Transport, Capabilities"
+title: 'MCP Protocol: Tools, Resources, Prompts, Transport, Capabilities'
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
@@ -11,13 +11,37 @@ author: EDISON
 domain: mcp_protocol
 origin: src_provider_taxonomy
 quality: 9.0
-tags: [mcp, model-context-protocol, tools, resources, prompts, transport, knowledge]
-tldr: "Model Context Protocol (MCP) covering the 3-tier architecture (Host/Client/Server), server primitives (tools/resources/prompts), client primitives (sampling/elicitation/logging), JSON-RPC methods, and transport layers (stdio/Streamable HTTP)."
-when_to_use: "When building MCP servers, integrating MCP clients, or understanding how MCP connects AI hosts to external context."
-keywords: [mcp, model_context_protocol, tools, resources, prompts, transport, json_rpc]
-long_tails: ["mcp server tool resource prompt primitives architecture", "mcp stdio vs streamable http transport capabilities negotiation"]
-axioms: ["MCP is provider-agnostic -- any AI host can use MCP servers regardless of underlying model"]
-feeds_kinds: [P04_tools, P08_architecture, P09_config]
+tags:
+- mcp
+- model-context-protocol
+- tools
+- resources
+- prompts
+- transport
+- knowledge
+tldr: Model Context Protocol (MCP) covering the 3-tier architecture (Host/Client/Server), server primitives (tools/resources/prompts),
+  client primitives (sampling/elicitation/logging), JSON-RPC methods, and transport layers (stdio/Streamable HTTP).
+when_to_use: When building MCP servers, integrating MCP clients, or understanding how MCP connects AI hosts to external context.
+keywords:
+- mcp
+- model_context_protocol
+- tools
+- resources
+- prompts
+- transport
+- json_rpc
+long_tails:
+- mcp server tool resource prompt primitives architecture
+- mcp stdio vs streamable http transport capabilities negotiation
+axioms:
+- MCP is provider-agnostic -- any AI host can use MCP servers regardless of underlying model
+feeds_kinds:
+- mcp_server
+- function_def
+- knowledge_card
+- prompt_template
+- plugin
+- hook
 linked_artifacts:
   adw: null
   agent: null

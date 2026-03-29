@@ -3,7 +3,7 @@ id: p01_kc_reward_and_alignment
 kind: knowledge_card
 type: domain
 pillar: P01
-title: "Reward Modeling and Alignment: RLHF, DPO, Constitutional AI"
+title: 'Reward Modeling and Alignment: RLHF, DPO, Constitutional AI'
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
@@ -11,17 +11,41 @@ author: edison
 domain: alignment_research
 origin: src_standards_global
 quality: 9.0
-tags: [rlhf, dpo, constitutional-ai, alignment, reward-model, preference]
-tldr: "LLM alignment evolved from RLHF (reward model from human preferences) through Constitutional AI (self-critique from principles) to DPO (direct preference optimization without reward model), establishing the training vocabulary for safe, helpful AI systems."
-when_to_use: "When understanding LLM training pipelines, choosing between RLHF vs DPO for fine-tuning, implementing safety guardrails, or designing evaluation criteria for model outputs."
-keywords: [rlhf, dpo, constitutional-ai, reward-model, preference-data, alignment]
-long_tails: ["difference between rlhf and dpo for fine-tuning", "how constitutional ai self-critique works"]
-axioms: ["Alignment is the bridge between raw capability and safe deployment — every production LLM uses some form of preference optimization"]
+tags:
+- rlhf
+- dpo
+- constitutional-ai
+- alignment
+- reward-model
+- preference
+tldr: LLM alignment evolved from RLHF (reward model from human preferences) through Constitutional AI (self-critique from
+  principles) to DPO (direct preference optimization without reward model), establishing the training vocabulary for safe,
+  helpful AI systems.
+when_to_use: When understanding LLM training pipelines, choosing between RLHF vs DPO for fine-tuning, implementing safety
+  guardrails, or designing evaluation criteria for model outputs.
+keywords:
+- rlhf
+- dpo
+- constitutional-ai
+- reward-model
+- preference-data
+- alignment
+long_tails:
+- difference between rlhf and dpo for fine-tuning
+- how constitutional ai self-critique works
+axioms:
+- Alignment is the bridge between raw capability and safe deployment — every production LLM uses some form of preference optimization
 linked_artifacts:
   adw: null
   agent: null
   hop: null
-feeds_kinds: [knowledge_card, pattern, research_summary]
+feeds_kinds:
+- reward_signal
+- quality_gate
+- llm_judge
+- scoring_rubric
+- eval_dataset
+- golden_test
 density_score: 0.87
 ---
 

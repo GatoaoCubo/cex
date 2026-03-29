@@ -3,7 +3,7 @@ id: p01_kc_a2a_protocol
 kind: knowledge_card
 type: domain
 pillar: P01
-title: "Google A2A Protocol: Agent-to-Agent Communication Standard"
+title: 'Google A2A Protocol: Agent-to-Agent Communication Standard'
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
@@ -11,17 +11,37 @@ author: edison
 domain: agent_interoperability
 origin: src_standards_global
 quality: 9.0
-tags: [a2a, google, agent-protocol, interoperability, standard]
-tldr: "Google A2A defines Agent, Task, AgentCard, Artifact, and TaskState as the wire-level contract for autonomous agent-to-agent communication over HTTPS+SSE."
-when_to_use: "When designing multi-agent systems that need interoperability between independently deployed agents, or when implementing agent discovery and task delegation."
-keywords: [a2a, agent-card, task-state, artifact, agent-interoperability]
-long_tails: ["how does google a2a agent discovery work", "a2a task lifecycle states explained"]
-axioms: ["Agents are opaque autonomous units — communicate via messages, never share internals"]
+tags:
+- a2a
+- google
+- agent-protocol
+- interoperability
+- standard
+tldr: Google A2A defines Agent, Task, AgentCard, Artifact, and TaskState as the wire-level contract for autonomous agent-to-agent
+  communication over HTTPS+SSE.
+when_to_use: When designing multi-agent systems that need interoperability between independently deployed agents, or when
+  implementing agent discovery and task delegation.
+keywords:
+- a2a
+- agent-card
+- task-state
+- artifact
+- agent-interoperability
+long_tails:
+- how does google a2a agent discovery work
+- a2a task lifecycle states explained
+axioms:
+- Agents are opaque autonomous units — communicate via messages, never share internals
 linked_artifacts:
   adw: null
   agent: null
   hop: null
-feeds_kinds: [knowledge_card, pattern, agent_spec]
+feeds_kinds:
+- agent
+- handoff_protocol
+- signal
+- checkpoint
+- mcp_server
 density_score: 0.92
 ---
 

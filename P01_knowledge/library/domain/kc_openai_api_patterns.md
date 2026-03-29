@@ -3,7 +3,7 @@ id: p01_kc_openai_api_patterns
 kind: knowledge_card
 type: domain
 pillar: P01
-title: "OpenAI API Patterns: Function Calling, Structured Outputs, Assistants, Evals"
+title: 'OpenAI API Patterns: Function Calling, Structured Outputs, Assistants, Evals'
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
@@ -11,18 +11,41 @@ author: EDISON
 domain: openai_api
 origin: src_provider_taxonomy
 quality: 9.0
-tags: [openai, function-calling, structured-outputs, assistants, evals, knowledge]
-tldr: "OpenAI API patterns covering function calling (tool wrappers), structured outputs (json_schema enforcement), Assistants API (persistent threads/runs), and Evals framework."
-when_to_use: "When building with OpenAI APIs, comparing OpenAI vs Anthropic tool patterns, or implementing structured output guarantees."
-keywords: [openai, function_calling, structured_outputs, assistants_api, evals]
-long_tails: ["how does openai function calling compare to anthropic tool use", "openai structured outputs strict mode json schema"]
-axioms: ["OpenAI wraps functions inside tool objects; Anthropic uses tool objects directly"]
-feeds_kinds: [P04_tools, P05_output, P06_schema, P07_evals]
+tags:
+- openai
+- function-calling
+- structured-outputs
+- assistants
+- evals
+- knowledge
+tldr: OpenAI API patterns covering function calling (tool wrappers), structured outputs (json_schema enforcement), Assistants
+  API (persistent threads/runs), and Evals framework.
+when_to_use: When building with OpenAI APIs, comparing OpenAI vs Anthropic tool patterns, or implementing structured output
+  guarantees.
+keywords:
+- openai
+- function_calling
+- structured_outputs
+- assistants_api
+- evals
+long_tails:
+- how does openai function calling compare to anthropic tool use
+- openai structured outputs strict mode json schema
+axioms:
+- OpenAI wraps functions inside tool objects; Anthropic uses tool objects directly
+feeds_kinds:
+- function_def
+- input_schema
+- response_format
+- system_prompt
+- search_tool
+- code_executor
+- vision_tool
 linked_artifacts:
   adw: null
   agent: null
   hop: null
-density_score: 0.90
+density_score: 0.9
 ---
 
 # KC-Domain: OpenAI API Patterns

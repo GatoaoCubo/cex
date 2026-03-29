@@ -3,7 +3,7 @@ id: p01_kc_chinese_llm_ecosystem
 kind: knowledge_card
 type: domain
 pillar: P01
-title: "Chinese LLM Ecosystem: Agent Frameworks and Patterns"
+title: 'Chinese LLM Ecosystem: Agent Frameworks and Patterns'
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
@@ -11,18 +11,42 @@ author: edison
 domain: agent_frameworks
 origin: src_standards_global
 quality: 9.0
-tags: [chinese-llm, qwen-agent, deepseek, metagpt, agentscope, chatglm]
-tldr: "Chinese LLM agent frameworks (Qwen-Agent, lagent, AgentScope, MetaGPT, ChatDev) universally adopt Western English vocabulary while contributing MacNet, SOP, reasoning_content, and Puppeteer as original abstractions."
-when_to_use: "When evaluating Chinese-origin agent frameworks, comparing Eastern/Western ecosystem convergence, or integrating Chinese LLM tools into multi-agent systems."
-keywords: [qwen-agent, metagpt, agentscope, lagent, chatdev, chinese-ai]
-long_tails: ["chinese llm agent frameworks comparison", "metagpt sop workflow pattern"]
-axioms: ["Chinese and Western agent frameworks share identical core vocabulary — divergence is in topology and orchestration, not terminology"]
+tags:
+- chinese-llm
+- qwen-agent
+- deepseek
+- metagpt
+- agentscope
+- chatglm
+tldr: Chinese LLM agent frameworks (Qwen-Agent, lagent, AgentScope, MetaGPT, ChatDev) universally adopt Western English vocabulary
+  while contributing MacNet, SOP, reasoning_content, and Puppeteer as original abstractions.
+when_to_use: When evaluating Chinese-origin agent frameworks, comparing Eastern/Western ecosystem convergence, or integrating
+  Chinese LLM tools into multi-agent systems.
+keywords:
+- qwen-agent
+- metagpt
+- agentscope
+- lagent
+- chatdev
+- chinese-ai
+long_tails:
+- chinese llm agent frameworks comparison
+- metagpt sop workflow pattern
+axioms:
+- Chinese and Western agent frameworks share identical core vocabulary — divergence is in topology and orchestration, not
+  terminology
 linked_artifacts:
   adw: null
   agent: null
   hop: null
-feeds_kinds: [knowledge_card, comparison, ecosystem_map]
-density_score: 0.90
+feeds_kinds:
+- agent
+- function_def
+- mcp_server
+- workflow
+- plugin
+- director
+density_score: 0.9
 ---
 
 # Knowledge Card: Chinese LLM Ecosystem

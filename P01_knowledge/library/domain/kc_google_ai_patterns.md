@@ -3,7 +3,7 @@ id: p01_kc_google_ai_patterns
 kind: knowledge_card
 type: domain
 pillar: P01
-title: "Google Gemini API Patterns: Function Calling, Grounding, Tool Config"
+title: 'Google Gemini API Patterns: Function Calling, Grounding, Tool Config'
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
@@ -11,13 +11,35 @@ author: EDISON
 domain: google_ai
 origin: src_provider_taxonomy
 quality: 9.0
-tags: [google, gemini, function-calling, grounding, google-search, knowledge]
-tldr: "Google Gemini API patterns covering FunctionDeclaration/FunctionCall/FunctionResponse cycle, tool_config modes (AUTO/ANY/NONE/VALIDATED), and google_search grounding with citation metadata."
-when_to_use: "When building with Gemini API, comparing Google vs Anthropic/OpenAI function calling, or implementing search grounding."
-keywords: [gemini, function_calling, grounding, google_search, tool_config]
-long_tails: ["gemini function calling mode auto any none validated", "google gemini grounding metadata search citations"]
-axioms: ["Google uses FunctionDeclaration/FunctionCall/FunctionResponse naming; mode field replaces tool_choice"]
-feeds_kinds: [P04_tools, P06_schema, P09_config]
+tags:
+- google
+- gemini
+- function-calling
+- grounding
+- google-search
+- knowledge
+tldr: Google Gemini API patterns covering FunctionDeclaration/FunctionCall/FunctionResponse cycle, tool_config modes (AUTO/ANY/NONE/VALIDATED),
+  and google_search grounding with citation metadata.
+when_to_use: When building with Gemini API, comparing Google vs Anthropic/OpenAI function calling, or implementing search
+  grounding.
+keywords:
+- gemini
+- function_calling
+- grounding
+- google_search
+- tool_config
+long_tails:
+- gemini function calling mode auto any none validated
+- google gemini grounding metadata search citations
+axioms:
+- Google uses FunctionDeclaration/FunctionCall/FunctionResponse naming; mode field replaces tool_choice
+feeds_kinds:
+- function_def
+- input_schema
+- code_executor
+- search_tool
+- system_prompt
+- response_format
 linked_artifacts:
   adw: null
   agent: null
