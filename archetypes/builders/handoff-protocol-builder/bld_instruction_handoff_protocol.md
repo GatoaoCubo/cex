@@ -1,0 +1,37 @@
+---
+kind: instruction
+id: bld_instruction_handoff_protocol
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for handoff_protocol
+pattern: 3-phase pipeline (research -> compose -> validate)
+---
+
+# Instructions: How to Produce a handoff_protocol
+## Phase 1: RESEARCH
+1. Identify the use case and target system
+2. Determine which pattern fits (Fire-and-forget, Request-response, Streaming, Escalation)
+3. List required parameters with concrete values
+4. Check for existing handoff_protocol artifacts to avoid duplicates
+5. Confirm slug for id: snake_case, lowercase, no hyphens
+6. Review KNOWLEDGE.md for domain patterns and anti-patterns
+## Phase 2: COMPOSE
+1. Read SCHEMA.md — source of truth for all fields
+2. Read OUTPUT_TEMPLATE.md — fill {{vars}} following SCHEMA constraints
+3. Fill frontmatter: all required fields (id, kind, pillar, version, created, updated, author, name, trigger, context_passed, return_contract, quality, tags, tldr), quality: null
+4. Write Overview section: what it does, who uses it
+5. Write Trigger section: core definition with concrete values
+6. Write Context Transfer section: parameter table with value and rationale columns
+7. Write Return Contract section: upstream/downstream connections
+8. Verify body <= 2048 bytes
+9. Verify id matches `^p02_handoff_[a-z][a-z0-9_]+$`
+## Phase 3: VALIDATE
+1. Check QUALITY_GATES.md — verify each HARD gate manually
+2. Confirm YAML frontmatter parses without errors
+3. Confirm id matches `p02_handoff_`
+4. Confirm kind == handoff_protocol
+5. Confirm all required body sections present: Overview, Trigger, Context Transfer, Return Contract
+6. HARD gates: frontmatter valid, id pattern matches, kind correct, required fields present
+7. SOFT gates: score against QUALITY_GATES.md dimensions
+8. Cross-check boundary: is this truly a handoff_protocol and not dispatch_rule (P12?
+9. Revise if score < 8.0 before outputting

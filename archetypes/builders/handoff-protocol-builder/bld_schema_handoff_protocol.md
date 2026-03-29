@@ -1,0 +1,48 @@
+---
+kind: schema
+id: bld_schema_handoff_protocol
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema — SINGLE SOURCE OF TRUTH for handoff_protocol
+pattern: TEMPLATE derives from this. CONFIG restricts this.
+---
+
+# Schema: handoff_protocol
+## Frontmatter Fields
+| Field | Type | Required | Default | Notes |
+|-------|------|----------|---------|-------|
+| id | string (p02_handoff_{slug}) | YES | - | Namespace compliance |
+| kind | literal "handoff_protocol" | YES | - | Type integrity |
+| pillar | literal "P02" | YES | - | Pillar assignment |
+| version | semver string | YES | "1.0.0" | Artifact versioning |
+| created | date YYYY-MM-DD | YES | - | Created date |
+| updated | date YYYY-MM-DD | YES | - | Updated date |
+| author | string | YES | - | Producer identity |
+| name | string | YES | - | Human-readable name |
+| trigger | string | YES | - | Trigger |
+| context_passed | string | YES | - | Context passed |
+| return_contract | string | YES | - | Return contract |
+| quality | null | YES | null | Never self-score |
+| tags | list[string], len >= 3 | YES | - | Must include "handoff_protocol" |
+| tldr | string <= 160ch | YES | - | Dense summary |
+| description | string | REC | - | Description |
+| source_agent | string | REC | - | Source agent |
+| target_agent | string | REC | - | Target agent |
+| timeout | string | REC | - | Timeout |
+| retry_policy | string | REC | - | Retry policy |
+| escalation | string | REC | - | Escalation |
+## ID Pattern
+Regex: `^p02_handoff_[a-z][a-z0-9_]+$`
+Rule: id MUST equal filename stem.
+## Body Structure (required sections)
+1. `## Overview` — overview specification
+2. `## Trigger` — trigger specification
+3. `## Context Transfer` — context transfer specification
+4. `## Return Contract` — return contract specification
+## Constraints
+- max_bytes: 2048 (body only)
+- naming: p02_handoff_{slug}.md (single file)
+- machine_format: yaml (compiled artifact)
+- id == filename stem
+- quality: null always
+- density_min: 0.8
