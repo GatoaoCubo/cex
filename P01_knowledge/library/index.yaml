@@ -1,0 +1,38 @@
+version: 1.0.0
+sources:
+  src_framework_taxonomy:
+    path: library/sources/src_framework_taxonomy.md
+    size_kb: 19
+    topics:
+    - langchain
+    - llamaindex
+    - crewai
+    - dspy
+    - haystack
+    - instructor
+    - guardrails
+    - outlines
+    scraped: '2026-03-29'
+  src_provider_taxonomy:
+    path: library/sources/src_provider_taxonomy.md
+    size_kb: 33
+    topics:
+    - anthropic
+    - openai
+    - google
+    - aws
+    - azure
+    - mcp
+    scraped: '2026-03-29'
+  src_standards_global:
+    path: library/sources/src_standards_global.md
+    size_kb: 20
+    topics:
+    - a2a
+    - json_schema
+    - chinese_repos
+    - academic_papers
+    - github_repos
+    scraped: '2026-03-29'
+domains: {}
+coverage: {}

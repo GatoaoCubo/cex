@@ -59,6 +59,10 @@ kinds:
     - cada bullet max 80 chars
     - secoes com < 3 linhas: expandir ou remover
     llm_function: INJECT
+    frontmatter_optional:
+    - type
+    - origin
+    - feeds_kinds
   rag_source:
     description: Fonte externa indexavel
     boundary: Ponteiro para fonte externa indexavel. NAO eh o conteudo em si, apenas referencia com URL e freshness.
