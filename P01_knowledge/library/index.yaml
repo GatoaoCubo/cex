@@ -34,5 +34,296 @@ sources:
     - academic_papers
     - github_repos
     scraped: '2026-03-29'
-domains: {}
-coverage: {}
+domains:
+  p01_kc_a2a_protocol:
+    path: P01_knowledge\library\domain\kc_a2a_protocol.md
+    title: 'Google A2A Protocol: Agent-to-Agent Communication Standard'
+    feeds_kinds:
+    - knowledge_card
+    - pattern
+    - agent_spec
+    origin: src_standards_global
+  p01_kc_academic_agent_patterns:
+    path: P01_knowledge\library\domain\kc_academic_agent_patterns.md
+    title: 'Academic Agent Patterns: ReAct, CoT, Reflexion, CoALA, LATS'
+    feeds_kinds:
+    - knowledge_card
+    - pattern
+    - research_summary
+    origin: src_standards_global
+  p01_kc_academic_rag_patterns:
+    path: P01_knowledge\library\domain\kc_academic_rag_patterns.md
+    title: 'Academic RAG Patterns: Foundational Retrieval-Augmented Generation Research'
+    feeds_kinds:
+    - knowledge_card
+    - pattern
+    - research_summary
+    origin: src_standards_global
+  p01_kc_anthropic_api_patterns:
+    path: P01_knowledge\library\domain\kc_anthropic_api_patterns.md
+    title: 'Anthropic API Patterns: Tool Use, Computer Use, Prompt Caching, Server
+      Tools'
+    feeds_kinds:
+    - P04_tools
+    - P06_schema
+    - P09_config
+    - P10_memory
+    origin: src_provider_taxonomy
+  p01_kc_aws_bedrock_patterns:
+    path: P01_knowledge\library\domain\kc_aws_bedrock_patterns.md
+    title: 'AWS Bedrock Patterns: Agents, Knowledge Bases, Guardrails, Orchestration'
+    feeds_kinds:
+    - P04_tools
+    - P08_architecture
+    - P10_memory
+    - P12_orchestration
+    origin: src_provider_taxonomy
+  p01_kc_chinese_llm_ecosystem:
+    path: P01_knowledge\library\domain\kc_chinese_llm_ecosystem.md
+    title: 'Chinese LLM Ecosystem: Agent Frameworks and Patterns'
+    feeds_kinds:
+    - knowledge_card
+    - comparison
+    - ecosystem_map
+    origin: src_standards_global
+  p01_kc_crewai_patterns:
+    path: P01_knowledge\library\domain\kc_crewai_patterns.md
+    title: CrewAI Patterns — Agent, Task, Crew, Process, Memory, Delegation
+    feeds_kinds:
+    - agent
+    - director
+    - function_def
+    - memory_scope
+    - workflow
+    - action_prompt
+    - guardrail
+    - hook
+    - handoff
+    - output_validator
+    - signal
+    origin: src_framework_taxonomy
+  p01_kc_dspy_patterns:
+    path: P01_knowledge\library\domain\kc_dspy_patterns.md
+    title: DSPy Patterns — Signatures, Modules, Optimizers, Assertions
+    feeds_kinds:
+    - prompt_template
+    - input_schema
+    - response_format
+    - chain
+    - agent
+    - optimizer
+    - few_shot_example
+    - scoring_rubric
+    - retriever
+    - constraint_spec
+    origin: src_framework_taxonomy
+  p01_kc_google_ai_patterns:
+    path: P01_knowledge\library\domain\kc_google_ai_patterns.md
+    title: 'Google Gemini API Patterns: Function Calling, Grounding, Tool Config'
+    feeds_kinds:
+    - P04_tools
+    - P06_schema
+    - P09_config
+    origin: src_provider_taxonomy
+  p01_kc_haystack_patterns:
+    path: P01_knowledge\library\domain\kc_haystack_patterns.md
+    title: Haystack Patterns — Pipeline, Component, DocumentStore, Generators
+    feeds_kinds:
+    - workflow
+    - function_def
+    - retriever
+    - brain_index
+    - embedding_config
+    - prompt_template
+    - knowledge_card
+    - dispatch_rule
+    - pattern
+    - document_loader
+    origin: src_framework_taxonomy
+  p01_kc_langchain_patterns:
+    path: P01_knowledge\library\domain\kc_langchain_patterns.md
+    title: LangChain Patterns — LCEL, Runnables, Tools, Retrievers, Output Parsers
+    feeds_kinds:
+    - agent
+    - chain
+    - retriever
+    - retriever_config
+    - prompt_template
+    - function_def
+    - document_loader
+    - chunk_strategy
+    - embedding_config
+    - parser
+    - memory_scope
+    - workflow
+    origin: src_framework_taxonomy
+  p01_kc_llamaindex_patterns:
+    path: P01_knowledge\library\domain\kc_llamaindex_patterns.md
+    title: LlamaIndex Patterns — Query Engines, Node Parsers, Response Synthesizers,
+      Workflows
+    feeds_kinds:
+    - agent
+    - retriever
+    - retriever_config
+    - document_loader
+    - chunk_strategy
+    - embedding_config
+    - workflow
+    - response_format
+    - brain_index
+    - knowledge_card
+    origin: src_framework_taxonomy
+  p01_kc_mcp_protocol:
+    path: P01_knowledge\library\domain\kc_mcp_protocol.md
+    title: 'MCP Protocol: Tools, Resources, Prompts, Transport, Capabilities'
+    feeds_kinds:
+    - P04_tools
+    - P08_architecture
+    - P09_config
+    origin: src_provider_taxonomy
+  p01_kc_openai_api_patterns:
+    path: P01_knowledge\library\domain\kc_openai_api_patterns.md
+    title: 'OpenAI API Patterns: Function Calling, Structured Outputs, Assistants,
+      Evals'
+    feeds_kinds:
+    - P04_tools
+    - P05_output
+    - P06_schema
+    - P07_evals
+    origin: src_provider_taxonomy
+  p01_kc_reward_and_alignment:
+    path: P01_knowledge\library\domain\kc_reward_and_alignment.md
+    title: 'Reward Modeling and Alignment: RLHF, DPO, Constitutional AI'
+    feeds_kinds:
+    - knowledge_card
+    - pattern
+    - research_summary
+    origin: src_standards_global
+coverage:
+  knowledge_card:
+  - p01_kc_a2a_protocol
+  - p01_kc_academic_agent_patterns
+  - p01_kc_academic_rag_patterns
+  - p01_kc_chinese_llm_ecosystem
+  - p01_kc_haystack_patterns
+  - p01_kc_llamaindex_patterns
+  - p01_kc_reward_and_alignment
+  pattern:
+  - p01_kc_a2a_protocol
+  - p01_kc_academic_agent_patterns
+  - p01_kc_academic_rag_patterns
+  - p01_kc_haystack_patterns
+  - p01_kc_reward_and_alignment
+  agent_spec:
+  - p01_kc_a2a_protocol
+  research_summary:
+  - p01_kc_academic_agent_patterns
+  - p01_kc_academic_rag_patterns
+  - p01_kc_reward_and_alignment
+  P04_tools:
+  - p01_kc_anthropic_api_patterns
+  - p01_kc_aws_bedrock_patterns
+  - p01_kc_google_ai_patterns
+  - p01_kc_mcp_protocol
+  - p01_kc_openai_api_patterns
+  P06_schema:
+  - p01_kc_anthropic_api_patterns
+  - p01_kc_google_ai_patterns
+  - p01_kc_openai_api_patterns
+  P09_config:
+  - p01_kc_anthropic_api_patterns
+  - p01_kc_google_ai_patterns
+  - p01_kc_mcp_protocol
+  P10_memory:
+  - p01_kc_anthropic_api_patterns
+  - p01_kc_aws_bedrock_patterns
+  P08_architecture:
+  - p01_kc_aws_bedrock_patterns
+  - p01_kc_mcp_protocol
+  P12_orchestration:
+  - p01_kc_aws_bedrock_patterns
+  comparison:
+  - p01_kc_chinese_llm_ecosystem
+  ecosystem_map:
+  - p01_kc_chinese_llm_ecosystem
+  agent:
+  - p01_kc_crewai_patterns
+  - p01_kc_dspy_patterns
+  - p01_kc_langchain_patterns
+  - p01_kc_llamaindex_patterns
+  director:
+  - p01_kc_crewai_patterns
+  function_def:
+  - p01_kc_crewai_patterns
+  - p01_kc_haystack_patterns
+  - p01_kc_langchain_patterns
+  memory_scope:
+  - p01_kc_crewai_patterns
+  - p01_kc_langchain_patterns
+  workflow:
+  - p01_kc_crewai_patterns
+  - p01_kc_haystack_patterns
+  - p01_kc_langchain_patterns
+  - p01_kc_llamaindex_patterns
+  action_prompt:
+  - p01_kc_crewai_patterns
+  guardrail:
+  - p01_kc_crewai_patterns
+  hook:
+  - p01_kc_crewai_patterns
+  handoff:
+  - p01_kc_crewai_patterns
+  output_validator:
+  - p01_kc_crewai_patterns
+  signal:
+  - p01_kc_crewai_patterns
+  prompt_template:
+  - p01_kc_dspy_patterns
+  - p01_kc_haystack_patterns
+  - p01_kc_langchain_patterns
+  input_schema:
+  - p01_kc_dspy_patterns
+  response_format:
+  - p01_kc_dspy_patterns
+  - p01_kc_llamaindex_patterns
+  chain:
+  - p01_kc_dspy_patterns
+  - p01_kc_langchain_patterns
+  optimizer:
+  - p01_kc_dspy_patterns
+  few_shot_example:
+  - p01_kc_dspy_patterns
+  scoring_rubric:
+  - p01_kc_dspy_patterns
+  retriever:
+  - p01_kc_dspy_patterns
+  - p01_kc_haystack_patterns
+  - p01_kc_langchain_patterns
+  - p01_kc_llamaindex_patterns
+  constraint_spec:
+  - p01_kc_dspy_patterns
+  brain_index:
+  - p01_kc_haystack_patterns
+  - p01_kc_llamaindex_patterns
+  embedding_config:
+  - p01_kc_haystack_patterns
+  - p01_kc_langchain_patterns
+  - p01_kc_llamaindex_patterns
+  dispatch_rule:
+  - p01_kc_haystack_patterns
+  document_loader:
+  - p01_kc_haystack_patterns
+  - p01_kc_langchain_patterns
+  - p01_kc_llamaindex_patterns
+  retriever_config:
+  - p01_kc_langchain_patterns
+  - p01_kc_llamaindex_patterns
+  chunk_strategy:
+  - p01_kc_langchain_patterns
+  - p01_kc_llamaindex_patterns
+  parser:
+  - p01_kc_langchain_patterns
+  P05_output:
+  - p01_kc_openai_api_patterns
+  P07_evals:
+  - p01_kc_openai_api_patterns

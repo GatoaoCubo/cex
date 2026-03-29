@@ -42,6 +42,9 @@ except ImportError:
 
 CEX_ROOT = Path(__file__).resolve().parent.parent
 BUILDER_MAP_PATH = CEX_ROOT / "_docs" / "8F_BUILDER_MAP.yaml"
+KC_LIBRARY_PATH = CEX_ROOT / "P01_knowledge" / "library"
+KC_DOMAIN_PATH = KC_LIBRARY_PATH / "domain"
+KC_INDEX_PATH = KC_LIBRARY_PATH / "index.yaml"
 
 FUNCTION_POSITIONS = {
     "CONSTRAIN": 1,
@@ -387,6 +390,68 @@ def classify_objects(objects: list[str]) -> list[dict]:
 
 
 # ---------------------------------------------------------------------------
+# KC Library — load domain KCs and match by feeds_kinds
+# ---------------------------------------------------------------------------
+
+
+def load_kc_library() -> list[dict]:
+    """Load KC-Domain frontmatter from library/domain/*.md."""
+    kcs = []
+    if not KC_DOMAIN_PATH.exists():
+        return kcs
+    for md in sorted(KC_DOMAIN_PATH.glob("*.md")):
+        text = md.read_text(encoding="utf-8")
+        if text.startswith("---"):
+            end = text.find("---", 3)
+            if end > 0:
+                try:
+                    fm = yaml.safe_load(text[3:end])
+                    if isinstance(fm, dict):
+                        fm["_path"] = str(md.relative_to(CEX_ROOT))
+                        kcs.append(fm)
+                except yaml.YAMLError:
+                    pass
+    return kcs
+
+
+def lookup_kcs_for_kind(kc_library: list[dict], kind: str, pillar: str) -> list[dict]:
+    """Find KC-Domains whose feeds_kinds match the target kind or pillar."""
+    matches = []
+    for kc in kc_library:
+        feeds = kc.get("feeds_kinds", [])
+        if not isinstance(feeds, list):
+            continue
+        if kind in feeds or pillar in feeds or any(f.startswith(pillar + "_") for f in feeds):
+            matches.append({"id": kc.get("id"), "title": kc.get("title"), "path": kc.get("_path")})
+    return matches
+
+
+def rebuild_kc_index():
+    """Scan domain/*.md frontmatter, rebuild index.yaml domains + coverage."""
+    kcs = load_kc_library()
+    if not KC_INDEX_PATH.exists():
+        return
+    with open(KC_INDEX_PATH, "r", encoding="utf-8") as f:
+        index = yaml.safe_load(f) or {}
+    domains = {}
+    coverage = {}
+    for kc in kcs:
+        kc_id = kc.get("id", "unknown")
+        domains[kc_id] = {
+            "path": kc.get("_path", ""),
+            "title": kc.get("title", ""),
+            "feeds_kinds": kc.get("feeds_kinds", []),
+            "origin": kc.get("origin", ""),
+        }
+        for fk in kc.get("feeds_kinds", []):
+            coverage.setdefault(fk, []).append(kc_id)
+    index["domains"] = domains
+    index["coverage"] = coverage
+    with open(KC_INDEX_PATH, "w", encoding="utf-8") as f:
+        yaml.dump(index, f, default_flow_style=False, allow_unicode=True, sort_keys=False)
+
+
+# ---------------------------------------------------------------------------
 # Step 3: FAN-OUT — select builders per function
 # ---------------------------------------------------------------------------
 
@@ -406,27 +471,68 @@ def _has_keyword(intent_lower: str, keywords: list[str]) -> bool:
 
 
 def fan_out(
-    classified: list[dict], intent_lower: str, quality: float, builder_map: dict, verb_action: str
+    classified: list[dict],
+    intent_lower: str,
+    quality: float,
+    builder_map: dict,
+    verb_action: str,
+    kc_library: list[dict] | None = None,
 ) -> list[dict]:
     """For each of the 8 functions, select which builders are active."""
 
-    functions_data = builder_map.get("functions", {})
+    # Group flat builder map entries by llm_function
+    by_function: dict[str, list[dict]] = {}
+    for kind_name, info in builder_map.items():
+        if not isinstance(info, dict) or "llm_function" not in info:
+            continue
+        fn = info["llm_function"]
+        builder_id = Path(info.get("builder", "")).name or f"{kind_name}-builder"
+        by_function.setdefault(fn, []).append(
+            {
+                "kind": kind_name,
+                "id": builder_id,
+                "core": info.get("core", False),
+                "pillar": info.get("pillar", ""),
+            }
+        )
+
     verb_extras = VERB_EXTRA_BUILDERS.get(verb_action, set())
     is_meta = any(c.get("meta") for c in classified)
+    classified_kinds = {c["kind"] for c in classified}
+    classified_pillars = {c["pillar"] for c in classified}
 
     result = []
 
-    for fn_name, fn_data in functions_data.items():
-        position = fn_data.get("position", FUNCTION_POSITIONS.get(fn_name, 99))
-        kw_map = fn_data.get("keywords_that_activate_secondary", {})
-
+    for fn_name, position in FUNCTION_POSITIONS.items():
+        fn_builders = by_function.get(fn_name, [])
         builders = []
 
-        # --- Primary builders ---
-        for bid in fn_data.get("primary_builders", []):
-            active = True
-            reason = f"primary builder for {fn_name}"
+        for b in fn_builders:
+            bid = b["id"]
+            active = False
+            tier = "primary" if b["core"] else "secondary"
+            reason = "not relevant to intent"
 
+            # Core builders: active if kind or pillar matches classified
+            if b["core"]:
+                if b["kind"] in classified_kinds:
+                    active = True
+                    reason = "core builder for classified kind"
+                elif b["pillar"].split("_")[0] in classified_pillars:
+                    active = True
+                    reason = "core builder for classified pillar"
+                elif quality >= 9.5:
+                    active = True
+                    tier = "optional"
+                    reason = "quality target >= 9.5"
+            else:
+                # Non-core: keyword match in intent
+                kw = b["kind"].replace("_", " ")
+                if kw in intent_lower:
+                    active = True
+                    reason = "keyword match in intent"
+
+            # Keyword gate for specific builders
             if bid in PRIMARY_NEEDS_KEYWORD:
                 if not _has_keyword(intent_lower, PRIMARY_NEEDS_KEYWORD[bid]):
                     active = False
@@ -437,63 +543,58 @@ def fan_out(
                 active = True
                 reason = f"activated by verb '{verb_action}'"
 
-            builders.append({"id": bid, "tier": "primary", "active": active, "reason": reason})
-
-        # --- Secondary builders ---
-        for bid in fn_data.get("secondary_builders", []):
-            active = False
-            reason = "no matching keywords in intent"
-
-            kws = kw_map.get(bid, [])
-            if kws and _has_keyword(intent_lower, kws):
-                active = True
-                reason = "keyword match in intent"
-
-            if bid in verb_extras:
-                active = True
-                reason = f"activated by verb '{verb_action}'"
-
-            builders.append({"id": bid, "tier": "secondary", "active": active, "reason": reason})
-
-        # --- Optional builders ---
-        for bid in fn_data.get("optional_builders", []):
-            active = quality >= 9.5
-            reason = "quality target >= 9.5" if active else "quality target < 9.5"
-
+            # Meta intent
             if is_meta and bid == "_builder-builder":
                 active = True
-                reason = "meta intent — building a builder"
+                reason = "meta intent -- building a builder"
 
-            if bid in verb_extras:
-                active = True
-                reason = f"activated by verb '{verb_action}'"
+            builders.append({"id": bid, "tier": tier, "active": active, "reason": reason})
 
-            builders.append({"id": bid, "tier": "optional", "active": active, "reason": reason})
+        # Synthetic _builder-builder for meta intents
+        if is_meta and fn_name == "BECOME":
+            builders.append(
+                {
+                    "id": "_builder-builder",
+                    "tier": "optional",
+                    "active": True,
+                    "reason": "meta intent -- building a builder",
+                }
+            )
 
-        # --- Dependencies (all functions at lower positions) ---
+        # Dependencies (all functions at lower positions)
         deps = sorted(
-            [
-                fn
-                for fn, fd in functions_data.items()
-                if fd.get("position", FUNCTION_POSITIONS.get(fn, 99)) < position
-            ],
-            key=lambda d: FUNCTION_POSITIONS.get(d, 99),
+            [fn for fn, pos in FUNCTION_POSITIONS.items() if pos < position],
+            key=lambda d: FUNCTION_POSITIONS[d],
         )
 
-        # --- Token estimate for active builders ---
         active_list = [b for b in builders if b["active"]]
         est_tokens = int(sum(estimate_tokens(b["id"]) for b in active_list) * 1.2)
 
-        result.append(
-            {
-                "name": fn_name,
-                "position": position,
-                "builders": builders,
-                "deps": deps,
-                "parallel": True,
-                "estimated_tokens": est_tokens,
-            }
-        )
+        entry = {
+            "name": fn_name,
+            "position": position,
+            "builders": builders,
+            "deps": deps,
+            "parallel": True,
+            "estimated_tokens": est_tokens,
+        }
+
+        # KC Library injection for INJECT function
+        if fn_name == "INJECT" and kc_library:
+            kc_matches = []
+            for c in classified:
+                kc_matches.extend(lookup_kcs_for_kind(kc_library, c["kind"], c["pillar"]))
+            seen_ids = set()
+            unique = []
+            for m in kc_matches:
+                if m["id"] not in seen_ids:
+                    seen_ids.add(m["id"])
+                    unique.append(m)
+            entry["kc_injections"] = unique if unique else None
+            if not unique:
+                entry["kc_fallback"] = "bld_knowledge_card"
+
+        result.append(entry)
 
     return result
 
@@ -594,6 +695,8 @@ Examples:
         parser.error("--intent is required (or use --test)")
 
     builder_map = load_builder_map()
+    kc_library = load_kc_library()
+    rebuild_kc_index()
 
     parsed = parse_intent(args.intent, args.quality)
     if parsed.get("error"):
@@ -602,7 +705,12 @@ Examples:
 
     classified = classify_objects(parsed["objects"])
     functions = fan_out(
-        classified, args.intent.lower(), parsed["quality"], builder_map, parsed["verb_action"]
+        classified,
+        args.intent.lower(),
+        parsed["quality"],
+        builder_map,
+        parsed["verb_action"],
+        kc_library=kc_library,
     )
     result = generate_output(args.intent, parsed, classified, functions)
 
@@ -708,6 +816,21 @@ def run_tests():
     check("estimated_tokens > 0", full["estimated_tokens"] > 0)
     positions = [f["position"] for f in full["functions"]]
     check("ordered by position", positions == sorted(positions), f"got {positions}")
+
+    # Test 7: KC library integration
+    print("\nTest 7: KC library integration")
+    kc_lib = load_kc_library()
+    check("kc_library loads", isinstance(kc_lib, list))
+    if kc_lib:
+        check("kc has feeds_kinds", "feeds_kinds" in kc_lib[0], f"keys: {list(kc_lib[0].keys())}")
+        matches = lookup_kcs_for_kind(kc_lib, "knowledge_card", "P01")
+        check("lookup finds matches", len(matches) > 0, f"found {len(matches)}")
+    f7 = fan_out(c1, "cria agente de vendas para ml", 9.0, builder_map, "create", kc_library=kc_lib)
+    inject_fn = next((f for f in f7 if f["name"] == "INJECT"), None)
+    check(
+        "INJECT has kc field",
+        inject_fn is not None and ("kc_injections" in inject_fn or "kc_fallback" in inject_fn),
+    )
 
     # Summary
     print(f"\n{'=' * 40}")
