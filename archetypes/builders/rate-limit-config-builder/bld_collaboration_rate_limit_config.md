@@ -1,0 +1,55 @@
+---
+kind: collaboration
+id: bld_collaboration_rate_limit_config
+pillar: P12
+llm_function: COLLABORATE
+purpose: How rate-limit-config-builder works in crews with other builders
+pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+---
+
+# Collaboration: rate-limit-config-builder
+## My Role in Crews
+I am a SPECIALIST. I answer ONE question: "what are the RPM, TPM, budget, and tier limits for this provider and tier?"
+I do not define retry logic. I do not define API credentials. I do not define execution timeouts.
+I declare the numeric quota boundaries so callers know exactly what they can consume.
+## Crew Compositions
+### Crew: "Provider Integration"
+```
+  1. rate-limit-config-builder -> "quota declaration (RPM, TPM, budget, tier)"
+  2. runtime-rule-builder       -> "retry/backoff policy for 429 handling"
+  3. env-config-builder         -> "API key, base URL, model selection"
+```
+### Crew: "Multi-Provider Setup"
+```
+  1. rate-limit-config-builder (anthropic) -> "Anthropic Build tier limits"
+  2. rate-limit-config-builder (openai)    -> "OpenAI Tier 2 limits"
+  3. rate-limit-config-builder (litellm)   -> "LiteLLM proxy unified limits"
+  4. client-builder                        -> "client that reads all three configs"
+```
+### Crew: "Cost-Controlled Production"
+```
+  1. rate-limit-config-builder -> "quota + budget_usd + alert_threshold"
+  2. guardrail-builder         -> "execution constraints, circuit breaker policy"
+  3. monitor-builder           -> "observability for 429 rate and budget burn"
+```
+## Handoff Protocol
+### I Receive
+- seeds: provider name, tier, monthly budget target
+- optional: model list (for model_overrides), concurrent target, retry_after preference
+### I Produce
+- rate_limit_config artifact (.md with YAML frontmatter)
+- committed to: `cex/P09_config/examples/p09_ratelimit_{provider}.md`
+### I Signal
+- signal: complete (with quality score from QUALITY_GATES)
+- if quality < 8.0: signal retry with specific gate failures listed
+## Builders I Depend On
+None — independent builder (layer 0). Rate limit configs can be defined standalone
+once provider and tier are known.
+## Builders That Depend On Me
+| Builder | Why |
+|---------|-----|
+| runtime-rule-builder | Needs retry_after and quota values to size backoff windows |
+| client-builder | Reads RPM/TPM to implement throttling and request queuing |
+| guardrail-builder | References budget_usd and alert_threshold for cost circuit breakers |
+| monitor-builder | Uses RPM/TPM as baselines for 429-rate alerting thresholds |
+| agent-builder | Agents enforce rate limits during parallel task execution |

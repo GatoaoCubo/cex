@@ -1,0 +1,36 @@
+---
+kind: tools
+id: bld_tools_rate_limit_config
+pillar: P04
+llm_function: CALL
+purpose: Tools and APIs available for rate_limit_config production
+---
+
+# Tools: rate-limit-config-builder
+## Production Tools
+| Tool | Purpose | When | Status |
+|------|---------|------|--------|
+| brain_query [MCP] | Search existing rate_limit_config artifacts in pool | Phase 1 (check duplicates) | CONDITIONAL |
+| validate_artifact.py | Generic artifact validator | Phase 3 | [PLANNED] |
+| cex_forge.py | Generate artifact from seeds | Alternative compose | [PLANNED] |
+## Data Sources
+| Source | Path/URL | Data |
+|--------|----------|------|
+| CEX Schema | P09_config/_schema.yaml | Field definitions, rate_limit_config kind |
+| CEX Examples | P09_config/examples/ | Real rate_limit_config artifacts |
+| SEED_BANK | archetypes/SEED_BANK.yaml | Seeds for P09_rate_limit_config |
+| TAXONOMY | archetypes/TAXONOMY_LAYERS.yaml | Layer position, runtime layer |
+| Anthropic Docs | docs.anthropic.com/en/api/rate-limits | Live RPM/TPM values per tier |
+| OpenAI Docs | platform.openai.com/docs/guides/rate-limits | Live RPM/TPM values per tier |
+| LiteLLM Docs | docs.litellm.ai/docs/proxy/rate_limit | Proxy rate limit config reference |
+## Interim Validation
+No automated validator exists yet. Manually check each QUALITY_GATES.md gate against
+the produced artifact. Key checks: YAML parses, id pattern matches `^p09_rl_[a-z][a-z0-9_]+$`,
+rpm and tpm are positive integers, all 4 body sections present, quality == null,
+tags includes "rate_limit_config", body <= 1024 bytes.
+## Provider Lookup Guide
+When building for a known provider, verify limits from official docs before writing:
+- Anthropic: API Console > Settings > Rate Limits shows live tier limits
+- OpenAI: Platform > Usage > Rate Limits shows per-model limits by tier
+- LiteLLM: proxy/config.yaml `router_settings` section defines limits
+- Azure OpenAI: Azure Portal > Resource > Deployments > Rate Limits
