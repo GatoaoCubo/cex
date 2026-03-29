@@ -124,6 +124,8 @@ class RunState:
     """Accumulated state across 8 functions."""
 
     intent: str = ""
+    context: str = ""
+    context: str = ""
     kind: str = ""
     pillar: str = ""
     builder_dir: Path | None = None
@@ -258,11 +260,12 @@ class EightFRunner:
         dry_run: bool = False,
         verbose: bool = False,
         output_dir: Path | None = None,
+        context: str = "",
     ):
         self.dry_run = dry_run
         self.verbose = verbose
         self.output_dir = output_dir
-        self.state = RunState(intent=intent)
+        self.state = RunState(intent=intent, context=context)
 
         # Motor parse + classify
         self.parsed = parse_intent(intent)
@@ -488,6 +491,11 @@ class EightFRunner:
                 knowledge["architecture"] = strip_frontmatter(arch_text)
                 self._log("F3", "bld_architecture loaded")
 
+        # 6. Domain context (from --context flag or nucleus seed)
+        if self.state.context:
+            knowledge["domain_context"] = self.state.context
+            self._log("F3", f"domain context injected ({len(self.state.context)} chars)")
+
         self.state.knowledge = knowledge
         self._log("F3", f"knowledge: {list(knowledge.keys())}")
 
@@ -648,6 +656,8 @@ class EightFRunner:
             knowledge_parts.append(f"## Architecture\n\n{k['architecture']}")
         if k.get("memory"):
             knowledge_parts.append(f"## Memory (Past Learnings)\n\n{k['memory']}")
+        if k.get("domain_context"):
+            knowledge_parts.append("## Domain Context\n\n" + k["domain_context"])
         if knowledge_parts:
             sections.append("# KNOWLEDGE\n\n" + "\n\n".join(knowledge_parts))
 
@@ -1087,6 +1097,7 @@ Examples:
     parser.add_argument("--verbose", action="store_true", help="Show per-F details")
     parser.add_argument("--step", type=int, metavar="N", help="Stop after function N (1-8)")
     parser.add_argument("--output-dir", metavar="DIR", help="Save outputs to this directory")
+    parser.add_argument("--context", metavar="TEXT", help="Domain context to inject (e.g. PRIME excerpt, domain description)")
 
     args = parser.parse_args()
 
@@ -1099,6 +1110,8 @@ Examples:
         sys.exit(1)
 
     intent = args.intent or f"create {args.kind}"
+    context = args.context or ""
+    context = args.context or ""
     dry_run = args.dry_run
 
     # Multi-kind detection: if Motor classifies multiple kinds, run each
@@ -1121,6 +1134,7 @@ Examples:
 
         runner = EightFRunner(
             intent=intent,
+            context=context,
             kind=kind,
             dry_run=dry_run,
             verbose=args.verbose,
