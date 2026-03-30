@@ -1,0 +1,161 @@
+id: p12_ho_admin_template
+kind: handoff
+pillar: P12
+version: 2.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: builder_agent
+agent_node: orchestrator
+mission: admin_operations
+autonomy: full
+quality_target: 9.0
+domain: orchestration
+quality: null
+tags:
+- handoff
+- orchestration
+- N07
+- template
+- dispatch
+tldr: Handoff template and protocol for N07 — required fields, structure, commit convention, and signal instructions.
+dependencies: []
+seeds:
+- handoff
+- dispatch
+- task
+- context
+- scope_fence
+- commit
+- signal
+- autonomy
+- quality
+keywords:
+- handoff
+- delegation
+- dispatch
+- task-packaging
+linked_artifacts:
+  primary: N07_admin/orchestration/dispatch_rule_admin.md
+  related:
+  - N07_admin/orchestration/workflow_admin.md
+  - N07_admin/orchestration/signal_admin.md
+density_score: 0.91
+handoff_structure: 'Every handoff written by N07 MUST contain these sections:
+
+
+  | Section | Purpose | Required |
+
+  |---------|---------|----------|
+
+  | Header | Mission name, nucleus, autonomy level, quality target | YES |
+
+  | Context | Why this task exists and what it unblocks | YES |
+
+  | Tasks | Numbered steps with action verbs and acceptance criteria | YES |
+
+  | Scope Fence | Allowed paths (SOMENTE) and forbidden paths (NAO TOQUE) | YES |
+
+  | Commit | Exact git add pattern and commit message format | YES |
+
+  | Signal | Completion signal command with quality score | YES |
+
+  | Seeds | Domain keywords for context retrieval (5-10) | RECOMMENDED |
+
+  | Dependencies | Other handoffs that must complete first | IF APPLICABLE |'
+template: '# {NUCLEUS} Task: {Title}
+
+  {Autonomy} Autonomy | Quality {target}+
+
+  REGRA: Commit e signal ANTES de qualquer pausa.
+
+
+  ## CONTEXTO
+
+  {Why this task exists. What it unblocks. Relevant references.}
+
+
+  ## REFERENCIAS
+
+  - {Golden reference path}
+
+  - {Schema or KC path}
+
+
+  ## TAREFAS
+
+  1. {Action verb}: {specific deliverable with acceptance criteria}
+
+  2. {Action verb}: {specific deliverable with acceptance criteria}
+
+
+  ## SCOPE FENCE
+
+  - SOMENTE: {allowed paths}
+
+  - NAO TOQUE: {forbidden paths}
+
+
+  ## COMMIT
+
+  git add {specific paths}
+
+  git commit -m "[{NUCLEUS}] {description}"
+
+
+  ## SIGNAL
+
+  python -c "from _tools.signal_writer import write_signal; write_signal(''{nucleus}'', ''complete'', {score}, ''{mission}'')"'
+handoff_rules:
+- One handoff per nucleus per mission — never bundle tasks for multiple nuclei in one file
+- 'Autonomy levels: full (no human review), supervised (human reviews before commit), assisted (human co-pilots)'
+- 'Quality target: minimum 9.0 for production artifacts, 8.0 for operational files'
+- Scope fence is mandatory — builders must not touch files outside their scope
+- Commit before pause — builders must commit and signal before any interruption
+- Signal on complete — every handoff must specify the exact signal command
+file_naming: 'Pattern: `ops/handoffs/_active/{mission}{nucleus}_{seq}.md`
+
+
+  Examples:
+
+  - `_ops/handoffs/_active/bootstrap_f1_n03_01.md`
+
+  - `_ops/handoffs/_active/research_market_n01_01.md`
+
+  - `_ops/handoffs/_active/deploy_v2_n05_01.md`'
+lifecycle:
+- N07 writes handoff to `_ops/handoffs/_active/`
+- Builder reads handoff, executes tasks
+- Builder commits and signals
+- N07 validates quality
+- 'If accepted: move handoff to `_ops/handoffs/_done/`'
+- 'If rejected: update handoff with feedback, re-dispatch'
+example_bootstrap_f1_handoff: '# N03 Task: Rebuild N07 Orchestrator
+
+  Full Autonomy | Quality 9.0+
+
+
+  ## CONTEXTO
+
+  N07 artefatos com quality: null. Reconstruir com identidade real do orquestrador.
+
+
+  ## TAREFAS
+
+  1. Build agent_admin.md — complete N07 identity
+
+  2. Build system_prompt_admin.md — orchestrator rules
+
+  3. Build knowledge_card_admin.md — dispatch knowledge
+
+
+  ## COMMIT
+
+  git add -A && git commit -m "[N03] rebuild N07 artefatos batch 1/4"
+
+
+  ## SIGNAL
+
+  python -c "from _tools.signal_writer import write_signal; write_signal(''n03'', ''complete'', 9.0, ''bootstrap_f1'')"'
+references:
+- 'Dispatch rules: N07_admin/orchestration/dispatch_rule_admin.md'
+- 'Signal protocol: N07_admin/orchestration/signal_admin.md'

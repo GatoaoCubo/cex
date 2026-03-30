@@ -1,64 +1,99 @@
 ---
-id: p11_qg_admin_nucleus
+id: p11_qg_admin_orchestration
 kind: quality_gate
 pillar: P11
-title: "Gate: Admin Nucleus"
-version: "1.0.0"
-created: "2023-10-12"
-updated: "2023-10-12"
-author: "quality-gate-builder"
-domain: "admin"
+title: "Gate: N07 Orchestration Quality"
+version: 2.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: builder_agent
+domain: orchestration
 quality: null
-tags: [quality-gate, admin, governance]
-tldr: "Ensures all admin intersection processes meet predefined quality standards."
-density_score: 0.85
+tags: [quality-gate, orchestration, N07, validation]
+tldr: "Quality gates for N07 orchestration — signal received, quality >= 8.0, doctor pass, compile success, git committed."
+density_score: 0.90
+---
+
+# Quality Gate: N07 Orchestration
+
 ## Definition
+
 | Property | Value |
 |----------|-------|
-| Metric | combined_score |
-| Threshold | 8.0 |
+| Metric | Orchestration output quality |
+| Threshold | 8.0 / 10.0 |
 | Operator | >= |
-| Scope | All admin processes before execution |
+| Scope | All artifacts dispatched by N07 to builders |
 
-## Hard Gates
-| gate_id | description | threshold | block |
-|---------|-------------|-----------|-------|
-| H01     | Frontmatter parses without error | N/A | true |
-| H02     | ID matches pattern ^p11_qg_[a-z][a-z0-9_]+$ | N/A | true |
-| H03     | ID matches filename stem | N/A | true |
-| H04     | Kind is exactly 'quality_gate' | N/A | true |
-| H05     | quality is set to null | N/A | true |
-| H06     | All required fields are present in the frontmatter | N/A | true |
-| H07     | Process completeness verified (all necessary steps included) | Complete | true |
+## Checklist (HARD gates — ALL must pass)
 
-## Soft Gates
-| gate_id | description | max_penalty | weight |
-|---------|-------------|-------------|--------|
-| S01     | Clarity of process documentation | 10 | 0.2 |
-| S02     | Compliance with administrative guidelines | 10 | 0.3 |
-| S03     | Efficiency and optimization | 10 | 0.25 |
-| S04     | Scalability considerations included | 10 | 0.25 |
+- [ ] H01: Signal received — builder emitted completion signal to `_ops/signals/`
+- [ ] H02: Quality score >= 8.0 — reported by builder in signal payload
+- [ ] H03: Git committed — builder committed changes before signaling
+- [ ] H04: Compile success — `python _tools/cex_compile.py {path}` produces valid YAML
+- [ ] H05: Doctor pass — `python _tools/cex_doctor.py` reports no errors for artifact
+- [ ] H06: Frontmatter valid — YAML parses, required fields present, kind matches
+- [ ] H07: Scope respected — builder only modified files within handoff scope fence
+
+## Scoring (SOFT gates — weighted dimensions)
+
+| ID | Dimension | Weight | Criteria |
+|----|-----------|--------|----------|
+| S01 | Completeness | 25% | All handoff tasks completed, no partial deliverables |
+| S02 | Density | 20% | density_score >= 0.85, no filler prose |
+| S03 | Accuracy | 20% | Content matches domain reality, no placeholder data |
+| S04 | Structure | 15% | Follows builder output template, correct sections |
+| S05 | Integration | 10% | linked_artifacts correct, references valid paths |
+| S06 | Freshness | 10% | updated date is current, version incremented if rebuild |
 
 ## Scoring Formula
 
-The final score is calculated as follows:
 ```
-aggregate_score = hard_pass ? (sum(soft_gate_score * weight) / sum(weights)) : 0
+aggregate_score = (S01 * 0.25) + (S02 * 0.20) + (S03 * 0.20) + (S04 * 0.15) + (S05 * 0.10) + (S06 * 0.10)
+PASS = ALL(H01..H07) AND aggregate_score >= 0.80
 ```
-Where `hard_pass` is true if all HARD gates pass.
+
+## Actions
+
+| Outcome | Consequence |
+|---------|-------------|
+| PASS (all HARD + soft >= 0.80) | Artifact accepted, handoff moved to `_done/` |
+| HARD FAIL (any H01-H07 fails) | Block — builder must fix and re-signal |
+| SOFT FAIL (aggregate < 0.80) | Return with feedback — builder revises |
+
+## Quality Tiers
+
+| Tier | Score | Action |
+|------|-------|--------|
+| GOLDEN | >= 9.5 | Mark as reference example |
+| PUBLISH | >= 8.0 | Standard acceptance |
+| REVIEW | >= 7.0 | Revision required |
+| REJECT | < 7.0 | Full rebuild |
 
 ## Bypass Policy
 
-- **Who may override:** Admin
-- **Conditions:** Admin can override in case of urgent operational necessity.
-- **Logging requirement:** Override actions must be logged with justification, timestamp, and actor details.
-  
-## Audit Trail
+- **Who may override**: admin only (N07 operator)
+- **Conditions**: documented justification required, logged to `_ops/signals/`
+- **Audit**: bypass events recorded as signals with `status: bypass` and reason field
 
-For each evaluation, the following must be logged:
-- Evaluation timestamp
-- Evaluator ID
-- Full list of gate IDs and their pass/fail status
-- Aggregate score
-- Any bypass actions with detailed justification
-- Retention policy: Logs must be kept for a minimum of 12 months
+## Validation Commands
+
+```bash
+# Compile check
+python _tools/cex_compile.py {artifact_path}
+
+# Doctor check
+python _tools/cex_doctor.py
+
+# Quality check
+grep -r "^quality: null" {path} --include="*.md"
+
+# Signal check
+ls _ops/signals/{nucleus}_*.json
+```
+
+## References
+
+- Doctor tool: _tools/cex_doctor.py
+- Compile tool: _tools/cex_compile.py
+- Feedback tool: _tools/cex_feedback.py

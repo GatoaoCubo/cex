@@ -1,0 +1,90 @@
+id: p12_sig_admin_orchestration
+kind: signal
+pillar: P12
+version: 2.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: builder_agent
+domain: orchestration
+quality: null
+tags:
+- signal
+- orchestration
+- N07
+- complete
+- error
+- progress
+tldr: Signal protocol for N07 orchestration — complete/error/progress payloads with quality score and artifact references.
+density_score: 0.9
+required_fields: '| Field | Type | Required | Description |
+
+  |-------|------|----------|-------------|
+
+  | agent_node | string | YES | Lowercase slug of emitting nucleus (e.g. n03, n07) |
+
+  | status | string | YES | "complete", "error", or "progress" |
+
+  | quality_score | float/null | YES | Quality score (0.0-10.0) or null |
+
+  | timestamp | string | YES | ISO 8601 datetime |'
+optional_fields: '| Field | Type | Description |
+
+  |-------|------|-------------|
+
+  | task | string | Short label of related task |
+
+  | artifacts | array | Paths to produced artifacts |
+
+  | artifacts_count | integer | Number of artifacts produced |
+
+  | commit_hash | string | Git commit hash |
+
+  | error_code | string | Short error classifier |
+
+  | message | string | Brief context description |
+
+  | progress_pct | integer | Progress percentage (0-100) |'
+signal_emission_command: python -c "from _tools.signal_writer import write_signal; write_signal('{nucleus}', '{status}', {score},
+  '{mission}')"
+real_examples_from_bootstrap: ''
+n03_complete_signal_builder_finished: "{\n  \"agent_node\": \"n03\",\n  \"status\": \"complete\",\n  \"quality_score\": 9.0,\n\
+  \  \"timestamp\": \"2026-03-30T14:00:00Z\",\n  \"task\": \"bootstrap_f1\",\n  \"artifacts\": [\n    \"N07_admin/agents/agent_admin.md\"\
+  ,\n    \"N07_admin/prompts/system_prompt_admin.md\",\n    \"N07_admin/knowledge/knowledge_card_admin.md\"\n  ],\n  \"artifacts_count\"\
+  : 3,\n  \"commit_hash\": \"abc123def\"\n}"
+n07_mission_complete_signal_orchestrator_finished: "{\n  \"agent_node\": \"n07\",\n  \"status\": \"complete\",\n  \"quality_score\"\
+  : 9.0,\n  \"timestamp\": \"2026-03-30T15:30:00Z\",\n  \"task\": \"bootstrap_f1_mission\",\n  \"artifacts_count\": 10,\n\
+  \  \"message\": \"All 10 N07 artifacts rebuilt, quality 9.0+\"\n}"
+n05_error_signal_ops_builder_failed: "{\n  \"agent_node\": \"n05\",\n  \"status\": \"error\",\n  \"quality_score\": null,\n\
+  \  \"timestamp\": \"2026-03-30T16:00:00Z\",\n  \"task\": \"deploy_staging\",\n  \"error_code\": \"test_failure\",\n  \"\
+  message\": \"3 unit tests failed in auth module\"\n}"
+n01_progress_signal_research_in_progress: "{\n  \"agent_node\": \"n01\",\n  \"status\": \"progress\",\n  \"quality_score\"\
+  : null,\n  \"timestamp\": \"2026-03-30T14:30:00Z\",\n  \"task\": \"market_analysis_q1\",\n  \"progress_pct\": 45,\n  \"\
+  message\": \"Analyzed 3 of 7 competitor reports\"\n}"
+status_vocabulary: '| Status | Meaning | Terminal | Quality Required |
+
+  |--------|---------|----------|------------------|
+
+  | complete | Task finished successfully | YES | YES (>= 8.0) |
+
+  | error | Task failed, needs intervention | YES | NO (null) |
+
+  | progress | Task ongoing, partial update | NO | NO (null) |'
+consumer_contract:
+- 'MUST handle: `agent_node`, `status`, `quality_score`, `timestamp`'
+- MAY process optional fields, ignoring absent ones
+- MUST NOT assume signal contains routing or execution instructions
+- 'MUST treat `quality_score: null` as "not yet evaluated"'
+signal_file_location: 'Signals are written to `_ops/signals/` with naming: `{nucleus}{status}{timestamp}.json` Example: `n03_complete_20260330T140000.json`'
+orchestrator_signal_handling: 'N07 reads signals to:
+
+  1. Detect builder completion — validate quality
+
+  2. Detect errors — decide retry or escalate
+
+  3. Track progress — update mission status
+
+  4. Move handoffs from `_active/` to `_done/` on acceptance'
+references:
+- 'Signal writer: _tools/signal_writer.py'
+- 'Handoff protocol: N07_admin/orchestration/handoff_admin.md'
+- 'Quality gate: N07_admin/feedback/quality_gate_admin.md'

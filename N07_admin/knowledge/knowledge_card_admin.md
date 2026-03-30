@@ -1,68 +1,112 @@
----  
-id: p01_kc_admin_nucleus  
-kind: knowledge_card  
-pillar: P01  
-title: "Admin Nucleus Essentials"  
-version: "1.0.0"  
-created: "2023-10-01"  
-updated: "2023-10-01"  
-author: "knowledge-card-builder"  
-domain: "Administrative Systems"  
-quality: null  
-tags: [admin_system, management, core_operations, knowledge]  
-tldr: "Comprehensive guide to core components of an admin system."  
-when_to_use: "Use when requiring an overview of fundamental admin components."  
-keywords: [admin_nucleus, core_components, system_management]  
-long_tails:  
-  - "best practices for administrative system management"  
-  - "core functions of an administrative nucleus"  
-axioms:  
-  - ALWAYS ensure admin systems are secure and up-to-date.  
-  - NEVER neglect regular audits of admin functionalities.  
-linked_artifacts:  
-  primary: null  
-  related: []  
-density_score: 0.85  
-data_source: "https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html"  
-
+---
+id: p01_kc_orchestration
+kind: knowledge_card
+pillar: P01
+title: "CEX Orchestration — Multi-CLI Dispatch"
+version: 2.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: builder_agent
+domain: orchestration
+quality: null
+tags: [orchestration, dispatch, multi-cli, N07, spawn, knowledge]
+tldr: "N07 orchestrates 6 nuclei via bash dispatch.sh — solo (1 builder) or grid (up to 6 parallel)."
+when_to_use: "When understanding how CEX dispatches tasks across nuclei and CLI providers."
+keywords: [orchestration, dispatch, spawn, solo, grid, signal, handoff, nucleus]
+long_tails:
+  - "how does N07 dispatch tasks to builders"
+  - "what CLI does each nucleus use"
+  - "how to launch parallel builders in CEX"
+axioms:
+  - "ALWAYS use bash _spawn/dispatch.sh — NEVER raw PowerShell or cmd from bash"
+  - "NEVER dispatch below quality 8.0 — return to builder with feedback"
+  - "IF multi-domain mission THEN use grid dispatch with per-nucleus handoffs"
+linked_artifacts:
+  primary: "N07_admin/agents/agent_admin.md"
+  related: [N07_admin/orchestration/dispatch_rule_admin.md, N07_admin/orchestration/spawn_config_admin.md]
+density_score: 0.90
+data_source: "N07_admin/orchestration/spawn_config_admin.md"
 ---
 
-# Admin Nucleus Essentials
+# CEX Orchestration — Multi-CLI Dispatch
 
-## Quick Reference  
-```yaml  
-topic: Admin Nucleus  
-scope: Core components of administrative systems  
-owner: Meta AI  
-criticality: high  
-```  
+## Quick Reference
 
-## Key Concepts  
-- **User Management**: Systems for managing user roles and permissions.  
-- **Data Handling**: Protocols for managing, storing, and retrieving administrative data.  
-- **Security Protocols**: Measures to ensure system security and data integrity.
-
-## Strategy Phases  
-1. **Audit**: Regularly review system components for security and efficiency.  
-2. **Optimize**: Implement processes to streamline admin tasks.  
-3. **Update**: Ensure all components are up-to-date with the latest protocols.
-
-## Golden Rules  
-- ALWAYS conduct security checks monthly.  
-- NEVER overlook software updates.  
-- ENSURE data backups are on a secure server.
-
-## Flow
-```text  
-[User Input] -> [System Processing] -> [Decision Engine] -> [Output]  
+```yaml
+orchestrator: N07 (pi + claude opus xhigh)
+nuclei_count: 6 (N01-N06)
+dispatch_modes: solo, grid, continuous
+signal_path: _ops/signals/
+handoff_path: _ops/handoffs/_active/
+quality_threshold: 8.0
 ```
 
-## Comparativo  
-| Component        | AWS Bedrock       | Admin Nucleus      |  
-|------------------|-------------------|--------------------|  
-| User Management  | Yes               | Yes                |  
-| Data Storage     | Cloud-based       | Local/Cloud-option |  
-| Security Focus   | High              | Variable           |
+## Key Concepts
 
-## References  
-- Source: [AWS Bedrock Official Guide](https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html)
+- **Multi-CLI Architecture**: Each nucleus uses the optimal LLM provider — opus for complex construction, gemini for 1M context knowledge, codex for code review, sonnet for creative writing
+- **Dispatch Modes**: Solo (1 builder, new terminal) for single tasks; Grid (up to 6 parallel) for missions
+- **Signal Protocol**: Builders emit JSON signals (complete/error/progress) to `_ops/signals/` on task completion
+- **Handoff Contract**: Structured .md files with task, context, scope fence, commit convention, and signal instructions
+
+## Routing Table
+
+| Domain | Nucleus | CLI | Model | Context |
+|--------|---------|-----|-------|---------|
+| Build/scaffold | N03 | claude | opus | 200K |
+| Research/analysis | N01 | gemini | 2.5-pro | 1M |
+| Marketing/copy | N02 | claude | sonnet | 200K |
+| Knowledge/docs | N04 | gemini | 2.5-pro | 1M |
+| Code/test/deploy | N05 | codex | GPT-5.4 | 192K |
+| Sales/pricing | N06 | claude | sonnet | 200K |
+
+## Dispatch Commands
+
+```bash
+# Solo — single builder in new window
+bash _spawn/dispatch.sh solo n03 "Leia _ops/handoffs/_active/HANDOFF.md e execute."
+
+# Grid — up to 6 parallel builders
+bash _spawn/dispatch.sh grid MISSION_NAME
+
+# Monitor active builders
+bash _spawn/dispatch.sh status
+
+# Stop all builders
+bash _spawn/dispatch.sh stop
+```
+
+## Signal Protocol
+
+```json
+{
+  "agent_node": "n03",
+  "status": "complete",
+  "quality_score": 9.0,
+  "timestamp": "2026-03-30T14:00:00Z",
+  "task": "bootstrap_f1",
+  "artifacts": ["N07_admin/agents/agent_admin.md"],
+  "artifacts_count": 1
+}
+```
+
+## Golden Rules
+
+- N07 NEVER builds artifacts — always dispatches to appropriate nucleus
+- Quality gate: reject any builder output below 8.0, return with feedback
+- Handoff before dispatch: always write `_ops/handoffs/_active/{mission}_{nucleus}.md` first
+- Signal before pause: builders must commit and signal before any interruption
+
+## Quality Tiers
+
+| Tier | Score | Action |
+|------|-------|--------|
+| GOLDEN | >= 9.5 | Reference example |
+| PUBLISH | >= 8.0 | Standard publication |
+| REVIEW | >= 7.0 | Needs revision |
+| REJECT | < 7.0 | Redo from scratch |
+
+## References
+
+- Spawn config: N07_admin/orchestration/spawn_config_admin.md
+- Fallback chain: N07_admin/agents/fallback_chain_admin.md
+- Mission plan: N07_admin/orchestration/mission_bootstrap_2026Q1.md

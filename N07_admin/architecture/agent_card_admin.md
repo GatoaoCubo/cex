@@ -1,70 +1,124 @@
----  
-id: p08_ac_admin_nucleus  
-kind: agent_card  
-pillar: P08  
-version: "1.0.0"  
-created: "2023-10-29"  
-updated: "2023-10-29"  
-author: "agent-card-builder"  
-name: "Admin Nucleus Satellite"  
-role: "Central administrative agent_node responsible for coordination and management of system resources."  
-model: "claude-sonnet-4"  
-mcps: [control_hub, resource_manager]  
-domain_area: "administrative"  
-boot_sequence:  
-  - "Load system prompt"  
-  - "Initialize control_hub MCP"  
-  - "Initialize resource_manager MCP"  
-  - "Verify tool availability"  
-  - "Load domain context"  
-constraints:  
-  - "Never access unauthorized resources"  
-  - "Must not execute external code"  
-  - "Forbidden from directly manipulating user data"  
-dispatch_keywords: [administrate, manage, coordinate, monitor, control]  
-tools: [control_hub_tool, resource_monitor_tool]  
-dependencies: [control_hub_mcp, resource_manager_api]  
-scaling:  
-  max_concurrent: 2  
-  timeout_minutes: 20  
-  memory_limit_mb: 3072  
-monitoring:  
-  health_check: "control_hub_tool status_check"  
-  signal_on_complete: true  
-  alert_on_failure: true  
-runtime: "claude"  
-mcp_config_file: ".mcp-admin-nucleus.json"  
-flags: ["--secure-mode", "--log-level=info"]  
-domain: "system-administration"  
-quality: null  
-tags: [agent_node, administrative, admin-nucleus]    
-tldr: "Agent_card for admin nucleus — central administrative management with Claude-sonnet model."  
+---
+id: p08_ac_admin_orchestrator
+kind: agent_card
+pillar: P08
+version: 2.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: builder_agent
+name: "N07 Orchestrator"
+role: "Multi-CLI orchestrator that dispatches tasks to 6 specialized nuclei"
+model: "claude-opus-4-6"
+mcps: [filesystem, git, spawn]
+domain_area: orchestration
+boot_sequence:
+  - "Load system prompt from N07_admin/prompts/system_prompt_admin.md"
+  - "Initialize dispatch.sh availability check"
+  - "Load routing rules from dispatch_rule_admin.md"
+  - "Verify _ops/ directory structure (handoffs, signals)"
+  - "Ready — awaiting intent"
+constraints:
+  - "NEVER build artifacts directly — dispatch to N03"
+  - "NEVER modify pillar directories (P01-P12)"
+  - "ALWAYS write handoff before dispatch"
+  - "ALWAYS validate quality >= 8.0 before accepting"
+dispatch_keywords: [orchestrate, dispatch, monitor, route, spawn, mission, coordinate, handoff]
+tools: [dispatch.sh, cex_doctor.py, cex_feedback.py, signal_writer.py]
+dependencies: [_spawn/dispatch.sh, _tools/cex_doctor.py, _tools/signal_writer.py]
+scaling:
+  max_concurrent: 1
+  timeout_minutes: 60
+  memory_limit_mb: 4096
+monitoring:
+  health_check: "python _tools/cex_doctor.py"
+  signal_on_complete: true
+  alert_on_failure: true
+runtime: "pi + claude opus xhigh"
+mcp_config_file: null
+flags: [xhigh-thinking, interactive]
+domain: orchestration
+quality: null
+tags: [agent_card, orchestrator, N07, multi-cli, dispatch]
+tldr: "N07 deployment spec — pi + opus xhigh, dispatch-only orchestrator with 7 tools and 6 downstream nuclei."
+density_score: 0.91
+---
 
----  
+# Agent Card: N07 Orchestrator
 
-## Role  
-The Admin Nucleus Satellite is designed to oversee and manage system resources, ensuring smooth coordination and administrative control across the entire architecture. This agent_node plays a vital role in facilitating operational management tasks within the administrative domain.  
+## Role
 
-## Model & MCPs  
-The agent_node uses the Claude-sonnet-4 model, offering a well-balanced approach to handling administrative tasks that require quick decision-making and resource management. The MCP servers integrated into this agent_node include the 'control_hub' for administrative commands and 'resource_manager' for overseeing system performance and resources.  
+N07 is the central orchestrator of CEX. It receives human intent or mission plans,
+classifies tasks by domain, writes handoffs, dispatches builders to specialist nuclei,
+monitors signals for completion, and validates output quality. It never builds artifacts
+directly — it coordinates the work of N01-N06.
 
-## Boot Sequence  
-1. Load system prompt  
-2. Initialize control_hub MCP  
-3. Initialize resource_manager MCP  
-4. Verify tool availability  
-5. Load domain context  
+## Model & MCPs
 
-## Dispatch  
-The Admin Nucleus Satellite responds to keywords such as administrate, manage, coordinate, monitor, and control, allowing the orchestrator to route appropriate tasks to it. Its dispatch system is optimized for high-priority administrative tasks requiring direct oversight of system operations.  
+| Property | Value |
+|----------|-------|
+| Model | claude-opus-4-6 |
+| Thinking | xhigh (extended reasoning) |
+| Context | 200K tokens |
+| CLI | pi (Inflection wrapper) |
+| Boot | `boot/cex.cmd` |
+| MCPs | filesystem, git, spawn (via dispatch.sh) |
 
-## Constraints  
-- Never access unauthorized resources  
-- Must not execute external code  
-- Forbidden from directly manipulating user data  
+## Boot Sequence
 
-## Dependencies  
-This agent_node is dependent on the control_hub_mcp and resource_manager_api for task execution, ensuring a secure and controlled administrative environment.  
+1. Load system prompt from `N07_admin/prompts/system_prompt_admin.md` (~2s)
+2. Verify `_spawn/dispatch.sh` exists and is executable (~1s)
+3. Load routing rules from `N07_admin/orchestration/dispatch_rule_admin.md` (~1s)
+4. Verify `_ops/` directory structure: handoffs/_active, handoffs/_done, signals (~1s)
+5. Ready — total boot time ~5s
 
-## Scaling & Monitoring  
-The agent_node can support up to 2 concurrent instances, with a 20-minute timeout set for each session to ensure efficient resource utilization and prevent bottlenecks. Monitoring involves regular health checks via the control_hub_tool status_check, with automatically sent signals upon task completion and alerts upon failures.
+## Dispatch
+
+| Mode | Command | When |
+|------|---------|------|
+| Solo | `bash _spawn/dispatch.sh solo {nucleus} "task"` | Single task, one nucleus |
+| Grid | `bash _spawn/dispatch.sh grid {mission}` | Parallel tasks, multiple nuclei |
+| Status | `bash _spawn/dispatch.sh status` | Check active builders |
+| Stop | `bash _spawn/dispatch.sh stop` | Terminate all builders |
+
+## Constraints
+
+### Hard Constraints (NEVER)
+- NEVER build artifacts directly — dispatch to N03
+- NEVER execute 8F pipeline — that is N03's domain
+- NEVER modify files in pillar directories (P01-P12)
+- NEVER use `start cmd`, `cmd /c`, or raw PowerShell from bash
+- NEVER accept builder output below quality 8.0
+
+### Soft Constraints (PREFER)
+- PREFER solo dispatch for single tasks, grid for missions with 3+ tasks
+- PREFER writing explicit scope fence in every handoff
+- PREFER reviewing signals before dispatching next wave
+
+## Downstream Nuclei
+
+| Nucleus | Domain | CLI | Model | Fallback |
+|---------|--------|-----|-------|----------|
+| N01 | Research | gemini | 2.5-pro | sonnet |
+| N02 | Marketing | claude | sonnet | haiku |
+| N03 | Builder | claude | opus | sonnet |
+| N04 | Knowledge | gemini | 2.5-pro | sonnet |
+| N05 | Operations | codex | GPT-5.4 | opus |
+| N06 | Commercial | claude | sonnet | haiku |
+
+## Scaling & Monitoring
+
+| Property | Value |
+|----------|-------|
+| Max concurrent | 1 (singleton orchestrator) |
+| Timeout | 60 minutes per mission |
+| Health check | `python _tools/cex_doctor.py` |
+| Signal on complete | yes |
+| Alert on failure | yes |
+| Log level | info |
+
+## References
+
+- Agent definition: N07_admin/agents/agent_admin.md
+- System prompt: N07_admin/prompts/system_prompt_admin.md
+- Dispatch rules: N07_admin/orchestration/dispatch_rule_admin.md
+- Spawn config: N07_admin/orchestration/spawn_config_admin.md

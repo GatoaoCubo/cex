@@ -1,0 +1,120 @@
+id: p12_wf_admin_orchestration
+kind: workflow
+pillar: P12
+version: 2.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: builder_agent
+title: Orchestration Workflows — Solo, Grid Static, Grid Continuous
+steps_count: 5
+execution: mixed
+agent_nodes:
+- orchestrator
+- n01
+- n02
+- n03
+- n04
+- n05
+- n06
+timeout: 3600
+retry_policy: per_step
+depends_on:
+- dispatch_rule_admin
+signals:
+- 'On step complete: nucleus emits signal to `_ops/signals/{nucleus}_complete.json`'
+- 'On workflow complete: N07 emits `write_signal(''n07'', ''complete'', score, ''mission'')`'
+- 'On error: nucleus emits error signal, N07 reads and decides (retry/escalate)'
+spawn_configs:
+- spawn_config_admin
+domain: orchestration
+quality: null
+tags:
+- workflow
+- orchestration
+- N07
+- dispatch
+- solo
+- grid
+tldr: 3 orchestration workflows — solo dispatch, grid static, grid continuous — with concrete spawn commands.
+density_score: 0.92
+purpose: Three concrete workflows that N07 uses to dispatch tasks. Solo for single-nucleus tasks, Grid Static for fixed parallel
+  missions, Grid Continuous for ongoing multi-wave missions. Each workflow has explicit steps with commands.
+workflow_a_solo_dispatch: Single builder, single task, new terminal window.
+step_1_write_handoff_orchestrator:
+- 'Agent: N07 orchestrator'
+- 'Action: Write handoff file with task, context, scope fence, commit convention'
+- 'Input: Human intent + routing classification'
+- 'Output: `ops/handoffs/_active/{mission}{nucleus}.md`'
+- 'Signal: none (internal step)'
+- 'Depends on: none'
+step_2_dispatch_builder_orchestrator:
+- 'Agent: N07 orchestrator'
+- 'Action: Launch builder in new terminal'
+- 'Input: Handoff file path'
+- 'Output: Builder process running in new window'
+- 'Command: `bash _spawn/dispatch.sh solo {nucleus} "Leia _ops/handoffs/_active/{file} e execute."`'
+- 'Signal: none (builder emits signal on completion)'
+- 'Depends on: Step 1'
+step_3_monitor_signal_orchestrator:
+- 'Agent: N07 orchestrator'
+- 'Action: Poll `_ops/signals/` for builder completion signal'
+- 'Input: Expected signal from target nucleus'
+- 'Output: Signal JSON with status and quality score'
+- 'Command: `bash _spawn/dispatch.sh status`'
+- 'Signal: reads builder signal'
+- 'Depends on: Step 2'
+step_4_validate_quality_orchestrator:
+- 'Agent: N07 orchestrator'
+- 'Action: Check quality score >= 8.0, run doctor if needed'
+- 'Input: Builder signal + artifact path'
+- 'Output: Accept or reject decision'
+- 'Command: `python _tools/cex_doctor.py`'
+- 'Signal: none'
+- 'Depends on: Step 3'
+step_5_accept_or_feedback_orchestrator:
+- 'Agent: N07 orchestrator'
+- 'Action: If quality >= 8.0: move handoff to `_done/`. If < 8.0: re-dispatch with feedback.'
+- 'Input: Validation result'
+- 'Output: Moved handoff or new dispatch'
+- 'Signal: `write_signal(''n07'', ''complete'', score, ''mission'')`'
+- 'Depends on: Step 4'
+workflow_b_grid_static: Up to 6 parallel builders, one handoff per nucleus, all launch simultaneously.
+preparation:
+- Write N handoff files to `ops/handoffs/_active/{mission}{nucleus}_{seq}.md`
+- 'Launch grid: `bash _spawn/dispatch.sh grid {MISSION_NAME}`'
+- Grid reads handoffs, spawns one builder per nucleus in parallel windows
+- Each builder runs independently, commits, and signals on completion
+monitoring:
+- '`bash _spawn/dispatch.sh status` — shows active builders and signal state'
+- Grid completes when ALL builders have signaled complete or error
+- 'If any builder errors: N07 reviews, may re-dispatch solo'
+quality_gate:
+- Validate each builder output independently
+- Mission completes only when ALL artifacts pass quality >= 8.0
+workflow_c_grid_continuous: Multi-wave mission with dependency ordering between waves.
+wave_execution:
+- 'Wave 0: Independent tasks (no dependencies) dispatch in parallel'
+- 'Wait: Monitor signals until all Wave 0 builders complete'
+- 'Wave 1: Dependent tasks dispatch (using Wave 0 outputs as context)'
+- 'Repeat: Continue until all waves complete'
+- 'Finalize: Validate all outputs, move handoffs to `_done/`, emit mission complete signal'
+commands: '# Launch continuous grid
+
+  bash _spawn/dispatch.sh grid {MISSION_NAME}
+
+
+  # Monitor (repeat until all complete)
+
+  bash _spawn/dispatch.sh status
+
+
+  # Final validation
+
+  python _tools/cex_doctor.py'
+dependencies:
+- 'Dispatch rules: N07_admin/orchestration/dispatch_rule_admin.md'
+- 'Spawn config: N07_admin/orchestration/spawn_config_admin.md'
+- 'DAG: N07_admin/orchestration/dag_admin.md'
+references:
+- 'DAG definition: N07_admin/orchestration/dag_admin.md'
+- 'Spawn config: N07_admin/orchestration/spawn_config_admin.md'

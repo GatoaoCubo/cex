@@ -1,85 +1,138 @@
 ---
-id: p12_sig_admin_task_complete
+id: p12_sig_admin_orchestration
 kind: signal
 pillar: P12
+version: 2.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: builder_agent
+domain: orchestration
+quality: null
+tags: [signal, orchestration, N07, complete, error, progress]
+tldr: "Signal protocol for N07 orchestration — complete/error/progress payloads with quality score and artifact references."
+density_score: 0.90
 ---
 
-# Signal Schema
+# Signal Protocol: N07 Orchestration
 
-| Field          | Type          | Required/Optional | Allowed Values/Notes                          |
-|----------------|---------------|-------------------|------------------------------------------------|
-| agent_node      | string        | Required          | Lowercase slug representing emitting agent     |
-| status         | string        | Required          | "complete", "error", "progress"               |
-| quality_score  | float or null | Required          | Fixed null value for outputs                   |
-| timestamp      | string        | Required          | ISO 8601 formatted datetime                    |
-| task           | string        | Optional          | Short label of task related to signal          |
-| artifacts      | array of strings | Optional       | Paths to relevant artifacts                    |
-| artifacts_count| integer       | Optional          | Count of artifacts                             |
-| commit_hash    | string        | Optional          | Git commit hash if applicable                  |
-| error_code     | string        | Optional          | Short string detailing specific error          |
-| message        | string        | Optional          | Brief description of signal context            |
-| progress_pct   | integer       | Optional          | Progress percentage; used only if status=="progress" |
+## Required Fields
 
-# Example Payloads
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| agent_node | string | YES | Lowercase slug of emitting nucleus (e.g. n03, n07) |
+| status | string | YES | "complete", "error", or "progress" |
+| quality_score | float/null | YES | Quality score (0.0-10.0) or null |
+| timestamp | string | YES | ISO 8601 datetime |
 
-### Complete Signal
+## Optional Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| task | string | Short label of related task |
+| artifacts | array | Paths to produced artifacts |
+| artifacts_count | integer | Number of artifacts produced |
+| commit_hash | string | Git commit hash |
+| error_code | string | Short error classifier |
+| message | string | Brief context description |
+| progress_pct | integer | Progress percentage (0-100) |
+
+## Signal Emission Command
+
+```bash
+python -c "from _tools.signal_writer import write_signal; write_signal('{nucleus}', '{status}', {score}, '{mission}')"
+```
+
+## Real Examples from Bootstrap
+
+### N03 Complete Signal (builder finished)
 ```json
 {
-  "agent_node": "central_admin",
+  "agent_node": "n03",
   "status": "complete",
-  "quality_score": null,
-  "timestamp": "2023-10-05T14:48:00Z",
-  "task": "update_check",
-  "artifacts": ["path/to/artifact1"],
-  "artifacts_count": 1,
+  "quality_score": 9.0,
+  "timestamp": "2026-03-30T14:00:00Z",
+  "task": "bootstrap_f1",
+  "artifacts": [
+    "N07_admin/agents/agent_admin.md",
+    "N07_admin/prompts/system_prompt_admin.md",
+    "N07_admin/knowledge/knowledge_card_admin.md"
+  ],
+  "artifacts_count": 3,
   "commit_hash": "abc123def"
 }
 ```
 
-### Error Signal
+### N07 Mission Complete Signal (orchestrator finished)
 ```json
 {
-  "agent_node": "central_admin",
+  "agent_node": "n07",
+  "status": "complete",
+  "quality_score": 9.0,
+  "timestamp": "2026-03-30T15:30:00Z",
+  "task": "bootstrap_f1_mission",
+  "artifacts_count": 10,
+  "message": "All 10 N07 artifacts rebuilt, quality 9.0+"
+}
+```
+
+### N05 Error Signal (ops builder failed)
+```json
+{
+  "agent_node": "n05",
   "status": "error",
   "quality_score": null,
-  "timestamp": "2023-10-05T14:50:00Z",
-  "error_code": "update_fail",
-  "message": "Failed to update configuration",
-  "artifacts": ["path/to/logs"]
+  "timestamp": "2026-03-30T16:00:00Z",
+  "task": "deploy_staging",
+  "error_code": "test_failure",
+  "message": "3 unit tests failed in auth module"
 }
 ```
 
-### Progress Signal
+### N01 Progress Signal (research in progress)
 ```json
 {
-  "agent_node": "central_admin",
+  "agent_node": "n01",
   "status": "progress",
   "quality_score": null,
-  "timestamp": "2023-10-05T14:52:00Z",
-  "task": "upgrade_process",
+  "timestamp": "2026-03-30T14:30:00Z",
+  "task": "market_analysis_q1",
   "progress_pct": 45,
-  "message": "Update nearly halfway through"
+  "message": "Analyzed 3 of 7 competitor reports"
 }
 ```
 
-# Status Vocabulary
+## Status Vocabulary
 
-- **complete**: Indicates successful completion of the task.
-- **error**: Represents a failure or issue that requires attention.
-- **progress**: Conveys ongoing status, a snapshot of the current task stage when relevant.
+| Status | Meaning | Terminal | Quality Required |
+|--------|---------|----------|------------------|
+| complete | Task finished successfully | YES | YES (>= 8.0) |
+| error | Task failed, needs intervention | YES | NO (null) |
+| progress | Task ongoing, partial update | NO | NO (null) |
 
-# Optional Fields
+## Consumer Contract
 
-- `task`: Identifies the task associated with the signal.
-- `artifacts`: List of related output or log file paths.
-- `artifacts_count`: Useful to quickly know how many artifacts were generated.
-- `commit_hash`: Provides versioning information for the deployment or task.
-- `error_code`: Helps classify errors for quick troubleshooting.
-- `message`: Offers concise context or description of the signal.
-- `progress_pct`: Specifies the current progress percentage of a task.
+- **MUST** handle: `agent_node`, `status`, `quality_score`, `timestamp`
+- **MAY** process optional fields, ignoring absent ones
+- **MUST NOT** assume signal contains routing or execution instructions
+- **MUST** treat `quality_score: null` as "not yet evaluated"
 
-# Consumer Contract
+## Signal File Location
 
-- **MUST** handle fields: `agent_node`, `status`, `quality_score`, `timestamp`.
-- **MAY** process optional fields, ignoring them if not applicable or if data is absent.
-- **MUST NOT** assume signal contains routing logic, instructions, or instructions for task completion.
+Signals are written to `_ops/signals/` with naming:
+`{nucleus}_{status}_{timestamp}.json`
+
+Example: `n03_complete_20260330T140000.json`
+
+## Orchestrator Signal Handling
+
+N07 reads signals to:
+1. Detect builder completion — validate quality
+2. Detect errors — decide retry or escalate
+3. Track progress — update mission status
+4. Move handoffs from `_active/` to `_done/` on acceptance
+
+## References
+
+- Signal writer: _tools/signal_writer.py
+- Handoff protocol: N07_admin/orchestration/handoff_admin.md
+- Quality gate: N07_admin/feedback/quality_gate_admin.md

@@ -1,47 +1,127 @@
 ---
-id: p12_ho_admin_nucleus
+id: p12_ho_admin_template
 kind: handoff
-lp: P12
-version: "1.0.0"
-created: "2023-10-11"
-updated: "2023-10-11"
-author: "handoff-builder"
-agent_node: "admin"
-mission: "AdminNucleus"
-autonomy: "assisted"
-quality_target: 8.5
-domain: "administration"
+pillar: P12
+version: 2.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: builder_agent
+agent_node: orchestrator
+mission: admin_operations
+autonomy: full
+quality_target: 9.0
+domain: orchestration
 quality: null
-tags: [handoff, admin, nucleus]
-tldr: "Admin executes tasks to maintain Admin Nucleus operations compliance."
+tags: [handoff, orchestration, N07, template, dispatch]
+tldr: "Handoff template and protocol for N07 — required fields, structure, commit convention, and signal instructions."
 dependencies: []
-seeds: [user_management, policy_compliance, audit_logging, admin_portal, database]
+seeds: [handoff, dispatch, task, context, scope_fence, commit, signal, autonomy, quality]
+keywords: [handoff, delegation, dispatch, task-packaging]
+linked_artifacts:
+  primary: "N07_admin/orchestration/dispatch_rule_admin.md"
+  related: [N07_admin/orchestration/workflow_admin.md, N07_admin/orchestration/signal_admin.md]
+density_score: 0.91
 ---
-# ADMIN — AdminNucleus: Manage Admin Nucleus Operations
-**Assisted Autonomy** | **Quality 8.5+**
+
+# N07 Handoff Protocol
+
+**Full Autonomy** | **Quality 9.0+**
 **REGRA: Commit e signal ANTES de qualquer pausa.**
-## Context
-The Admin Nucleus requires regular updates and maintenance to ensure that user permissions and audit logs comply with current company policy. This task involves managing user access and updating records to maintain operational integrity and compliance standards. The focus is on ensuring that the Admin roles are correctly configured and all actions are logged for auditing purposes. This is crucial for maintaining security and operational effectiveness within the organization.
 
-## Tasks
-### Step 1: Update User Permissions
-Update user permissions for all accounts in the 'Admin' role to reflect the current company policy.
-### Step 2: Verify Compliance
-Verify that all user permissions and roles comply with the established company policy standards.
-### Step 3: Log Changes
-Log all changes made to user permissions in the audit system accessible through the Admin portal.
+## Handoff Structure
 
-## Scope Fence
-- SOMENTE: /admin/roles/, /admin/users/, /logs/audit/
-- NAO TOQUE: /admin/config/, /users/general/, /logs/system/
+Every handoff written by N07 MUST contain these sections:
 
-## Commit
-```bash
-git add /admin/roles/ /logs/audit/
-git commit -m "admin[AdminNucleus]: Updated user permissions and logged changes for compliance"
+| Section | Purpose | Required |
+|---------|---------|----------|
+| Header | Mission name, nucleus, autonomy level, quality target | YES |
+| Context | Why this task exists and what it unblocks | YES |
+| Tasks | Numbered steps with action verbs and acceptance criteria | YES |
+| Scope Fence | Allowed paths (SOMENTE) and forbidden paths (NAO TOQUE) | YES |
+| Commit | Exact git add pattern and commit message format | YES |
+| Signal | Completion signal command with quality score | YES |
+| Seeds | Domain keywords for context retrieval (5-10) | RECOMMENDED |
+| Dependencies | Other handoffs that must complete first | IF APPLICABLE |
+
+## Template
+
+```markdown
+# {NUCLEUS} Task: {Title}
+**{Autonomy} Autonomy** | **Quality {target}+**
+**REGRA: Commit e signal ANTES de qualquer pausa.**
+
+## CONTEXTO
+{Why this task exists. What it unblocks. Relevant references.}
+
+## REFERENCIAS
+- {Golden reference path}
+- {Schema or KC path}
+
+## TAREFAS
+1. {Action verb}: {specific deliverable with acceptance criteria}
+2. {Action verb}: {specific deliverable with acceptance criteria}
+
+## SCOPE FENCE
+- SOMENTE: {allowed paths}
+- NAO TOQUE: {forbidden paths}
+
+## COMMIT
+git add {specific paths}
+git commit -m "[{NUCLEUS}] {description}"
+
+## SIGNAL
+python -c "from _tools.signal_writer import write_signal; write_signal('{nucleus}', 'complete', {score}, '{mission}')"
 ```
 
-## Signal
-```bash
-python -c "from records.core.python.signal_writer import write_signal; write_signal('admin', 'complete', 8.5)"
+## Handoff Rules
+
+1. **One handoff per nucleus per mission** — never bundle tasks for multiple nuclei in one file
+2. **Autonomy levels**: full (no human review), supervised (human reviews before commit), assisted (human co-pilots)
+3. **Quality target**: minimum 9.0 for production artifacts, 8.0 for operational files
+4. **Scope fence is mandatory** — builders must not touch files outside their scope
+5. **Commit before pause** — builders must commit and signal before any interruption
+6. **Signal on complete** — every handoff must specify the exact signal command
+
+## File Naming
+
+Pattern: `_ops/handoffs/_active/{mission}_{nucleus}_{seq}.md`
+
+Examples:
+- `_ops/handoffs/_active/bootstrap_f1_n03_01.md`
+- `_ops/handoffs/_active/research_market_n01_01.md`
+- `_ops/handoffs/_active/deploy_v2_n05_01.md`
+
+## Lifecycle
+
+1. N07 writes handoff to `_ops/handoffs/_active/`
+2. Builder reads handoff, executes tasks
+3. Builder commits and signals
+4. N07 validates quality
+5. If accepted: move handoff to `_ops/handoffs/_done/`
+6. If rejected: update handoff with feedback, re-dispatch
+
+## Example: Bootstrap F1 Handoff
+
+```markdown
+# N03 Task: Rebuild N07 Orchestrator
+**Full Autonomy** | **Quality 9.0+**
+
+## CONTEXTO
+N07 artefatos com quality: null. Reconstruir com identidade real do orquestrador.
+
+## TAREFAS
+1. Build agent_admin.md — complete N07 identity
+2. Build system_prompt_admin.md — orchestrator rules
+3. Build knowledge_card_admin.md — dispatch knowledge
+
+## COMMIT
+git add -A && git commit -m "[N03] rebuild N07 artefatos batch 1/4"
+
+## SIGNAL
+python -c "from _tools.signal_writer import write_signal; write_signal('n03', 'complete', 9.0, 'bootstrap_f1')"
 ```
+
+## References
+
+- Dispatch rules: N07_admin/orchestration/dispatch_rule_admin.md
+- Signal protocol: N07_admin/orchestration/signal_admin.md
