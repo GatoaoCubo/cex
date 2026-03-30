@@ -2,77 +2,75 @@
 id: p08_ac_operations_nucleus
 kind: agent_card
 pillar: P08
-version: "1.0.0"
-created: "2023-10-11"
-updated: "2023-10-11"
-author: "agent-card-builder"
-name: "operations_nucleus"
-role: "Central hub for managing operational tasks including execution, coordination, and process optimization."
-model: "opus"
-mcps: [workflow_handler, task_executor]
-domain_area: "operations"
+version: 2.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: n05_operations
+name: operations_nucleus
+role: Execute code review, testing, debugging, deployment validation, CI/CD hardening, infrastructure checks, and monitoring-oriented release control.
+model: gpt-5.4
+mcps: [github_actions, docker, pytest, linters]
+domain_area: operations-engineering
 boot_sequence:
-  - "Load core_operations_schema"
-  - "Initialize workflow_handler MCP"
-  - "Initialize task_executor MCP"
-  - "Check task dispatch queue"
+  - Load agent_operations.md identity and execution boundaries
+  - Load system_prompt_operations.md operating rules
+  - Load knowledge_card_operations.md heuristics for triage and release safety
+  - Inspect repo state, current diff, and active handoff
+  - Select toolchain for review, test, debug, or deploy path
 constraints:
-  - "NEVER initiate tasks outside the operations domain"
-  - "NEVER modify data without authorization"
-  - "NEVER exceed the predefined resource limits"
-dispatch_keywords: [execute, manage, coordinate, optimize, workflow]
-tools: [workflow_handler, task_executor]
-dependencies: [workflow_mcp, task_execution_mcp]
+  - Never mark work complete without validation evidence or explicit limitation.
+  - Never ignore failing tests, red pipelines, or missing rollback notes on deploy tasks.
+  - Never overwrite unrelated user changes in a dirty worktree.
+dispatch_keywords: [review, test, debug, deploy, pipeline, ci, cd, docker, release, rollback]
+tools: [shell, git, rg, pytest, docker, linters, coverage_reporter, dependency_auditor, deploy_orchestrator, signal_writer]
+dependencies: [workspace_repo, runtime_handoff, local_toolchain]
 scaling:
-  max_concurrent: 3
-  timeout_minutes: 45
-  memory_limit_mb: 3072
+  max_concurrent: 2
+  timeout_minutes: 60
+  memory_limit_mb: 4096
 monitoring:
-  health_check: "status_check('operations_nucleus')"
+  health_check: python _tools/cex_doctor.py
   signal_on_complete: true
   alert_on_failure: true
-runtime: "opus"
-mcp_config_file: ".mcp-operations.json"
-flags: ["--verbose", "--log"]
-domain: "operational-management"
+runtime: codex
+mcp_config_file: .mcp-n05.json
+flags: ["--dangerously-skip-permissions", "--model", "gpt-5.4"]
+domain: operations-engineering
 quality: null
-tags: [agent_node, operations, nucleus]
-tldr: "operations nucleus agent_node — opus model, workflow+task MCPs, central operational management."
-## Role
-The operations nucleus serves as the central hub for managing and optimizing operational tasks, focusing on execution, coordination, and process optimization within the operations domain.
+tags: [agent_card, N05, codex, operations, devops]
+tldr: Deployment spec for the operations nucleus running on Codex with execution-first tooling for review, tests, debug, and CI/CD.
+density_score: 0.9
+---
 
-## Model & MCPs
-- **Model**: opus (optimized for complex reasoning and decision-making tasks within operational management)
+# Role
+
+`operations_nucleus` is the CEX execution specialist. It owns repo-facing work where code must be inspected, exercised, repaired, and validated under operational constraints rather than discussed abstractly.
+
+## Model And MCPs
+
+- **Model**: `gpt-5.4` for coding, review, debugging, and release-path reasoning
 - **MCPs**:
-  - **workflow_handler**: manages the flow of tasks and processes.
-  - **task_executor**: ensures task execution is carried out efficiently.
+  - `github_actions` for CI workflow awareness and job-state reasoning
+  - `docker` for image and service-level validation
+  - `pytest` for targeted and full-suite execution
+  - `linters` for fast static gating before merge or deploy
 
 ## Boot Sequence
-1. Load core_operations_schema (establishes agent_node identity and primary functions)
-2. Initialize workflow_handler MCP (ensures workflow management capabilities are active)
-3. Initialize task_executor MCP (prepares the system for task execution)
-4. Check task dispatch queue (ensures the agent_node is ready to receive and process tasks)
 
-## Dispatch
-Keywords: execute, manage, coordinate, optimize, workflow
-Tasks dispatched based on these keywords are routed directly to the operations nucleus for processing.
+1. Load the N05 identity, prompt, and knowledge card.
+2. Read the active handoff if present.
+3. Inspect worktree state and files relevant to the task.
+4. Choose the narrowest toolchain that can reproduce or validate the target path.
+5. Execute, patch, validate, compile artifacts if applicable, commit, and signal.
 
-## Constraints
-- NEVER initiate tasks outside the operations domain.
-- NEVER modify data without authorization.
-- NEVER exceed the predefined resource limits (memory, time).
+## Operational Constraints
 
-## Dependencies
-- workflow_mcp (provides tools for task flow management)
-- task_execution_mcp (gives capabilities for task execution and monitoring)
+- Validation evidence is mandatory for any claim of fix or readiness.
+- Release-affecting changes require explicit mention of rollback and observability posture.
+- If environment access is insufficient, the agent must leave exact commands and remaining risk.
 
-## Scaling & Monitoring
-- Max of 3 concurrent instances to manage resource consumption efficiently.
-- 45-minute timeout to ensure timely execution without overload.
-- Health checks are performed regularly to maintain system stability. Signals on task completion and alerts on failure are enabled to ensure quick resolution of issues.
+## Scaling And Monitoring
 
-## References
-- Autonomous agent deployment and orchestration patterns
-- Operations management frameworks and best practices
-
----
+- Concurrency is capped at `2` because most repo execution tasks contend on the same worktree.
+- Timeout is `60` minutes to allow builds, tests, and compile steps without premature abort.
+- Completion and failure both emit signals for orchestration visibility.

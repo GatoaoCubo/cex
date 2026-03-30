@@ -1,0 +1,83 @@
+id: p11_qg_operations_nucleus
+kind: quality_gate
+pillar: P11
+title: 'Gate: Operations Nucleus'
+version: 2.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: n05_operations
+domain: operations-engineering
+quality: null
+tags:
+- quality_gate
+- N05
+- operations
+- release
+tldr: Validation gate for N05 outputs covering evidence, safety, reproducibility, and release readiness.
+density_score: 0.93
+definition: '| Property | Value |
+
+  |----------|-------|
+
+  | Metric | operational_readiness_score |
+
+  | Threshold | 0.85 |
+
+  | Operator | >= |
+
+  | Scope | All N05 review, test, debug, deploy, and CI/CD outputs |'
+hard_gates: '| gate_id | description | threshold | block |
+
+  |---------|-------------|-----------|-------|
+
+  | H01 | YAML frontmatter parses without error | 100% | true |
+
+  | H02 | `kind` matches the artifact type | 100% | true |
+
+  | H03 | `quality` remains `null` in source artifacts | 100% | true |
+
+  | H04 | Content is specific to operations domain, not generic placeholders | 100% | true |
+
+  | H05 | Output includes concrete validation evidence or an explicit statement of what could not be verified | 100% | true
+  |
+
+  | H06 | No unsafe destructive recommendation appears without rollback or safety context | 100% | true |
+
+  | H07 | File paths, commands, or workflow steps are reproducible in the current repo context | 100% | true |'
+soft_gates: '| gate_id | description | max_penalty | weight |
+
+  |---------|-------------|-------------|--------|
+
+  | S01 | Accuracy of technical diagnosis | 0.10 | 0.25 |
+
+  | S02 | Test and validation completeness | 0.10 | 0.25 |
+
+  | S03 | CI/CD and deploy safety awareness | 0.10 | 0.20 |
+
+  | S04 | Clarity and actionability of remediation | 0.10 | 0.15 |
+
+  | S05 | Monitoring and rollback guidance quality | 0.10 | 0.15 |'
+scoring_formula: '`operational_readiness_score = (S01  0.25) + (S02  0.25) + (S03  0.20) + (S04  0.15) + (S05 * 0.15)` Pass
+  only if every hard gate passes and `operational_readiness_score >= 0.85`.'
+bypass_policy:
+- 'Who: orchestrator or repository owner'
+- 'When: only for time-critical incidents where validation systems are degraded'
+- 'Requirement: bypass must record missing evidence, blast radius, rollback path, and timestamp'
+audit_trail: 'Log:
+
+  - artifact id and version
+
+  - evaluator
+
+  - commands or checks used as evidence
+
+  - pass/fail per hard gate
+
+  - soft-gate subscores
+
+  - final score
+
+  - any bypass and justification
+
+
+  Retention: 24 months or the active lifetime of the repository, whichever is longer.'

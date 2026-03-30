@@ -1,64 +1,71 @@
 ---
-id: p12_wf_operations_task
+id: p12_wf_operations_nucleus
 kind: workflow
 pillar: P12
-version: "1.0.0"
-created: "2023-10-27"
-updated: "2023-10-27"
-author: "workflow-builder"
-title: "Operations Task Workflow"
-steps_count: 3
+version: 2.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: n05_operations
+title: Operations Nucleus Workflow
+steps_count: 5
 execution_mode: mixed
-agent_nodes: [coordinator, executor]
-timeout: 1200
-retry_policy: per_step
-depends_on: []
-signals: [complete, error]
-spawn_configs: [p12_spawn_operations_plan, p12_spawn_operations_exec]
-domain: "operations"
+error_recovery: retry_then_escalate
+max_retries: 2
+timeout_ms: 3600000
+spawn_delay_ms: 1000
 quality: null
-tags: [workflow, operations, task_executions]
-tldr: "Three-step mixed execution to plan and execute operations tasks with error handling."
-density_score: 0.95
+tags: [workflow, N05, operations, ci-cd, deploy]
+tldr: Five-step workflow for code review, test execution, debugging, and deploy-safe delivery under operational constraints.
+density_score: 0.94
+agent_nodes: [operations_nucleus]
+signals: [triage_complete, fix_complete, validation_complete, release_ready, error]
+spawn_configs: [spawn_config_operations]
+domain: operations-engineering
 ---
-## Purpose
-This workflow orchestrates the execution of a sequence of operations tasks involving planning, execution, and validation stages. It ensures efficient task completion by utilizing parallel and sequential execution strategies, and it incorporates robust error handling to maintain workflow continuity despite potential failures.
+
+# Purpose
+
+This workflow converts an operational request into a verified outcome. It is optimized for code review, failing tests, debugging, pipeline repair, and deployment validation where the cost of a false green is higher than the cost of a slower answer.
 
 ## Steps
-### Step 1: Plan Operations [planner]
-- **Agent**: coordinator
-- **Action**: Develop a comprehensive plan for the operations task.
-- **Input**: Initial directives and resource availability
-- **Output**: Detailed operations plan document
-- **Signal**: plan_complete
+
+### Step 1: triage_target [operations_nucleus]
+- **Action**: inspect handoff, worktree, changed files, configs, and failure signals
+- **Input**: user task, current repository state, logs or failing commands if present
+- **Output**: scoped hypothesis, impacted surfaces, validation plan
+- **Signal**: `triage_complete`
 - **Depends on**: none
 
-### Step 2: Execute Operations [executor]
-- **Agent**: executor
-- **Action**: Execute the operations task according to the plan.
-- **Input**: Operations plan from Step 1
-- **Output**: Task execution report
-- **Signal**: execution_complete
+### Step 2: reproduce_or_review [operations_nucleus]
+- **Action**: reproduce the bug or perform code review against diff and runtime expectations
+- **Input**: triage plan
+- **Output**: confirmed failure, review findings, or evidence that the issue is non-reproducible
+- **Signal**: `review_complete`
 - **Depends on**: Step 1
 
-### Step 3: Validate and Report [validator]
-- **Agent**: coordinator
-- **Action**: Validate the results and generate a final report.
-- **Input**: Task execution report from Step 2
-- **Output**: Comprehensive operations validation report
-- **Signal**: workflow_complete
+### Step 3: remediate [operations_nucleus]
+- **Action**: apply the smallest viable code, config, or pipeline change
+- **Input**: reproduced failure or confirmed findings
+- **Output**: targeted patch with rollback-aware notes
+- **Signal**: `fix_complete`
 - **Depends on**: Step 2
 
-## Dependencies
-- Valid operations task directives and resources must be prepared before starting the workflow.
-- Plan and execution should align with standard operating procedures.
+### Step 4: validate [operations_nucleus]
+- **Action**: run targeted tests, relevant build checks, static analysis, or container verification
+- **Input**: remediation patch
+- **Output**: validation evidence with residual risks
+- **Signal**: `validation_complete`
+- **Depends on**: Step 3
 
-## Signals
-- **On step complete**: plan_complete or execution_complete emitted by respective agents.
-- **On workflow complete**: workflow_complete signal with full validation.
-- **On error**: error signal will trigger a retry (maximum 2 retries before escalation).
+### Step 5: release_and_signal [operations_nucleus]
+- **Action**: compile required artifacts, commit changes, write completion signal, and summarize operational status
+- **Input**: validated state
+- **Output**: committed work, emitted signal, concise release guidance
+- **Signal**: `release_ready`
+- **Depends on**: Step 4
 
-## References
-- Standard Operating Procedures Document
-- Operations Schedule
----
+## Failure Handling
+
+- Retry once for transient command or environment failures.
+- Escalate after second failure when the issue depends on missing credentials, inaccessible infrastructure, or non-deterministic runtime behavior.
+- Never bypass validation on deployment-related tasks without explicitly recording the missing evidence.

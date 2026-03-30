@@ -1,47 +1,51 @@
----  
-```yaml
-id: p12_spawn_operations_nucleus  
-kind: spawn_config  
-pillar: P12  
-version: "1.0.0"  
-created: "2023-11-18"  
-updated: "2023-11-18"  
-author: "builder"  
-title: "Operations Nucleus Launch"  
-mode: grid  
-agent_node: "builder_lead"  
-model: "opus"  
-flags:  
-  - "--dangerously-skip-permissions"  
-  - "--no-chrome"  
-  - "-p"  
-  - "--model opus"  
-  - "--mcp-config .mcp-edison.json"  
-  - "--strict-mcp-config"  
-mcp_config: ".mcp-edison.json"  
-timeout_seconds: 3000  
-prompt_inline: false  
-handoff_path: "handoffs/operations_task.md"  
-quality: null  
-tags: [spawn_config, edison, operations_nucleus, grid]  
-tldr: "Grid spawn for Operations Nucleus with builder_lead, 3000s timeout, using handoff prompt strategy"
-```  
----  
-## Spawn Command  
+---
+id: p12_spawn_operations_nucleus
+kind: spawn_config
+pillar: P12
+version: 2.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: n05_operations
+title: Operations Nucleus Spawn Config
+mode: solo
+agent_node: operations_nucleus
+model: gpt-5.4
+flags:
+  - --dangerously-skip-permissions
+  - --model
+  - gpt-5.4
+  - --reasoning-effort
+  - high
+mcp_config: .mcp-n05.json
+timeout_seconds: 3600
+prompt_inline: false
+handoff_path: .cex/runtime/handoffs/n05_task.md
+quality: null
+tags: [spawn_config, N05, operations, codex]
+tldr: Spawn configuration for N05 to execute operational handoffs involving review, testing, debug, deploy, and CI/CD work.
+domain: operations-engineering
+density_score: 0.89
+---
+
+# Spawn Command
+
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File records/framework/powershell/spawn_grid.ps1 -sat edison -task "Load handoff file from handoffs/operations_task.md and execute." -interactive  
-```  
-## Parameters  
-| Parameter | Value | Rationale |  
-|-----------|-------|-----------|  
-| mode | grid | Utilizes multiple agent_node agents in parallel |  
-| agent_node | builder_lead | Task requires builder_lead for operations execution |  
-| model | opus | builder_lead is paired with opus for build tasks |  
-| timeout | 3000s | Provides a sufficient window for operations task completion |  
-| interactive | true | Keeps terminal open for monitoring and adjustments |  
-## Constraints  
-- Handoff file must be pre-existing and accessible at specified path  
-- Maximum inline prompt constraint bypassed by handoff usage  
-- builder_lead requires specific MCP configuration provided by a JSON file  
-## References  
-- handoffs/operations_task.md
+codex --dangerously-skip-permissions --model gpt-5.4 --reasoning-effort high
+```
+
+## Parameters
+
+| Parameter | Value | Rationale |
+|-----------|-------|-----------|
+| `mode` | `solo` | operational tasks typically need exclusive ownership of one worktree |
+| `agent_node` | `operations_nucleus` | routes directly to N05's execution persona |
+| `model` | `gpt-5.4` | strongest coding and debugging fit for N05 |
+| `mcp_config` | `.mcp-n05.json` | reserved for CI, Docker, pytest, and linter integrations |
+| `timeout_seconds` | `3600` | supports longer test, build, and deploy validation loops |
+| `handoff_path` | `.cex/runtime/handoffs/n05_task.md` | standard location for N05 mission intake |
+
+## Constraints
+
+- Read the handoff before any other substantive action.
+- Use the local repository as the source of truth.
+- Commit and emit signal before pausing when the handoff explicitly requires it.

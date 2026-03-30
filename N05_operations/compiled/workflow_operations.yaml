@@ -1,0 +1,70 @@
+id: p12_wf_operations_nucleus
+kind: workflow
+pillar: P12
+version: 2.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: n05_operations
+title: Operations Nucleus Workflow
+steps_count: 5
+execution_mode: mixed
+error_recovery: retry_then_escalate
+max_retries: 2
+timeout_ms: 3600000
+spawn_delay_ms: 1000
+quality: null
+tags:
+- workflow
+- N05
+- operations
+- ci-cd
+- deploy
+tldr: Five-step workflow for code review, test execution, debugging, and deploy-safe delivery under operational constraints.
+density_score: 0.94
+agent_nodes:
+- operations_nucleus
+signals:
+- triage_complete
+- fix_complete
+- validation_complete
+- release_ready
+- error
+spawn_configs:
+- spawn_config_operations
+domain: operations-engineering
+steps: ''
+step_1_triage_target_operations_nucleus:
+- 'Action: inspect handoff, worktree, changed files, configs, and failure signals'
+- 'Input: user task, current repository state, logs or failing commands if present'
+- 'Output: scoped hypothesis, impacted surfaces, validation plan'
+- 'Signal: `triage_complete`'
+- 'Depends on: none'
+step_2_reproduce_or_review_operations_nucleus:
+- 'Action: reproduce the bug or perform code review against diff and runtime expectations'
+- 'Input: triage plan'
+- 'Output: confirmed failure, review findings, or evidence that the issue is non-reproducible'
+- 'Signal: `review_complete`'
+- 'Depends on: Step 1'
+step_3_remediate_operations_nucleus:
+- 'Action: apply the smallest viable code, config, or pipeline change'
+- 'Input: reproduced failure or confirmed findings'
+- 'Output: targeted patch with rollback-aware notes'
+- 'Signal: `fix_complete`'
+- 'Depends on: Step 2'
+step_4_validate_operations_nucleus:
+- 'Action: run targeted tests, relevant build checks, static analysis, or container verification'
+- 'Input: remediation patch'
+- 'Output: validation evidence with residual risks'
+- 'Signal: `validation_complete`'
+- 'Depends on: Step 3'
+step_5_release_and_signal_operations_nucleus:
+- 'Action: compile required artifacts, commit changes, write completion signal, and summarize operational status'
+- 'Input: validated state'
+- 'Output: committed work, emitted signal, concise release guidance'
+- 'Signal: `release_ready`'
+- 'Depends on: Step 4'
+failure_handling:
+- Retry once for transient command or environment failures.
+- Escalate after second failure when the issue depends on missing credentials, inaccessible infrastructure, or non-deterministic
+  runtime behavior.
+- Never bypass validation on deployment-related tasks without explicitly recording the missing evidence.

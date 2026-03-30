@@ -1,58 +1,71 @@
 ---
-id: p11_qg_operations_quality_gate
+id: p11_qg_operations_nucleus
 kind: quality_gate
 pillar: P11
-title: "Operations Nucleus Quality Gate"
-version: "1.0.0"
-created: "2023-10-30"
-updated: "2023-10-30"
-author: "quality-gate-builder"
-domain: "operations"
+title: "Gate: Operations Nucleus"
+version: 2.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: n05_operations
+domain: operations-engineering
 quality: null
-tags: [quality-gate, operations, pre-deployment]
-tldr: "Quality gate for operations ensuring compliance with operational standards before deployment."
-density_score: 0.85
+tags: [quality_gate, N05, operations, release]
+tldr: Validation gate for N05 outputs covering evidence, safety, reproducibility, and release readiness.
+density_score: 0.93
 ---
+
+## Definition
+
+| Property | Value |
+|----------|-------|
+| Metric | operational_readiness_score |
+| Threshold | 0.85 |
+| Operator | >= |
+| Scope | All N05 review, test, debug, deploy, and CI/CD outputs |
 
 ## Hard Gates
 
-| gate_id | description                                | threshold | block |
-|---------|--------------------------------------------|-----------|-------|
-| H01     | YAML frontmatter parses correctly          | 100%      | true  |
-| H02     | ID matches the pattern /^p11_qg_[a-z][a-z0-9_]+$/ | 100%  | true  |
-| H03     | ID equals filename stem                    | 100%      | true  |
-| H04     | kind is 'quality_gate'                      | 100%      | true  |
-| H05     | Quality is set to null                     | 100%      | true  |
-| H06     | All required fields are present in artifact | 100%     | true  |
+| gate_id | description | threshold | block |
+|---------|-------------|-----------|-------|
+| H01 | YAML frontmatter parses without error | 100% | true |
+| H02 | `kind` matches the artifact type | 100% | true |
+| H03 | `quality` remains `null` in source artifacts | 100% | true |
+| H04 | Content is specific to operations domain, not generic placeholders | 100% | true |
+| H05 | Output includes concrete validation evidence or an explicit statement of what could not be verified | 100% | true |
+| H06 | No unsafe destructive recommendation appears without rollback or safety context | 100% | true |
+| H07 | File paths, commands, or workflow steps are reproducible in the current repo context | 100% | true |
 
 ## Soft Gates
 
-| gate_id | description                                | max_penalty | weight |
-|---------|--------------------------------------------|-------------|--------|
-| S01     | Completeness of operational procedures     | 10%         | 0.35   |
-| S02     | Correctness of alignment with standard protocols | 10%   | 0.35   |
-| S03     | Usability and clarity of instructions      | 10%         | 0.30   |
+| gate_id | description | max_penalty | weight |
+|---------|-------------|-------------|--------|
+| S01 | Accuracy of technical diagnosis | 0.10 | 0.25 |
+| S02 | Test and validation completeness | 0.10 | 0.25 |
+| S03 | CI/CD and deploy safety awareness | 0.10 | 0.20 |
+| S04 | Clarity and actionability of remediation | 0.10 | 0.15 |
+| S05 | Monitoring and rollback guidance quality | 0.10 | 0.15 |
 
 ## Scoring Formula
 
-final_score = (S01 * 0.35) + (S02 * 0.35) + (S03 * 0.30)
-The gate passes if all HARD gates pass and final_score >= 0.80.
+`operational_readiness_score = (S01 * 0.25) + (S02 * 0.25) + (S03 * 0.20) + (S04 * 0.15) + (S05 * 0.15)`
+
+Pass only if every hard gate passes and `operational_readiness_score >= 0.85`.
 
 ## Bypass Policy
 
-- Authorized Personnel: Admin
-- Condition: Critical operational need with sufficient justification
-- Logging Requirement: Bypass must be logged with timestamp, actor, and justification in the deployment logs.
+- **Who**: orchestrator or repository owner
+- **When**: only for time-critical incidents where validation systems are degraded
+- **Requirement**: bypass must record missing evidence, blast radius, rollback path, and timestamp
 
 ## Audit Trail
 
-Every gate evaluation logs the following:
-- Timestamp
-- Evaluator ID
-- Artifact ID and version
-- Passed/Failed status of each HARD gate
-- Scores for each SOFT gate
-- Final score
-- Any bypass actions performed
-Retention policy: Logs are to be retained for 18 months in the operations archive system.
----
+Log:
+- artifact id and version
+- evaluator
+- commands or checks used as evidence
+- pass/fail per hard gate
+- soft-gate subscores
+- final score
+- any bypass and justification
+
+Retention: 24 months or the active lifetime of the repository, whichever is longer.

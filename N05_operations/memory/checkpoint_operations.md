@@ -1,59 +1,61 @@
 ---
-
-```yaml
-id: p12_ck_operations_nucleus_step_analysis
+id: p10_ck_operations_release_gate
 kind: checkpoint
-pillar: P12
-version: "1.0.0"
-created: "2023-10-01"
-updated: "2023-10-01"
-author: "checkpoint-builder"
-name: "Operations Nucleus — Step Analysis Checkpoint"
-workflow_ref: "op_nucleus_workflow"
-step: "step_analysis"
+pillar: P10
+version: 2.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: n05_operations
+name: Operations Release Gate Checkpoint
+workflow_ref: p12_wf_operations_nucleus
+step: validate
 quality: null
-tags: [checkpoint, operations, nucleus]
-tldr: "Checkpoint at the step analysis stage within the Operations workflow."
-description: "Captures the state of step analysis in the Operations workflow for resume capability."
+tags: [checkpoint, N05, operations, release, rollback]
+tldr: Resume-safe checkpoint capturing validation state before commit, signal, and release guidance.
+description: Stores the operational evidence required to resume an interrupted review, debug, or deploy task without losing validation context.
 state:
-  analysis_data: byte array # approx 256 bytes
-  analysis_status: string # very small, max 10 bytes
+  task_scope: string
+  changed_files: list[string]
+  failing_surface: string
+  validation_commands: list[string]
+  validation_status: string
+  rollback_notes: string
+  residual_risk: string
 resumable: true
-ttl: "24h"
-parent_checkpoint: "p12_ck_operations_nucleus_previous_step"
+ttl: 72h
+parent_checkpoint: null
 retry_count: 0
 error: null
-```
+domain: operations-engineering
+density_score: 0.9
+---
 
-## Overview
-This checkpoint captures the state during the step analysis in the Operations workflow, enabling resumption without reprocessing completed analyses. This stage is critical to ensure that the operation's analysis can continue smoothly in the event of a pause or failure.
+# Overview
 
-## State
-| Key           | Type        | Size           | Description                             |
-|---------------|-------------|----------------|-----------------------------------------|
-| analysis_data | byte array  | approx 256 bytes| Contains processed data up to this point|
-| analysis_status| string     | max 10 bytes   | Status of analysis, e.g., "completed"   |
+This checkpoint freezes the release gate state after remediation and before final completion. It exists so N05 can resume with full operational context if execution is interrupted between validation, compilation, commit, and signaling.
 
-Serialization format: yaml
-Total state budget: approx 266 bytes (max 2048)
+## State Contract
 
-## Resume
-Prerequisites:
-- All external data sources accessible
-- Valid authentication to access necessary systems
+| Key | Type | Description |
+|-----|------|-------------|
+| `task_scope` | string | short description of the issue or review target |
+| `changed_files` | list[string] | files modified or inspected as critical path |
+| `failing_surface` | string | failing test, service, pipeline job, or review risk being addressed |
+| `validation_commands` | list[string] | exact commands used to verify the fix |
+| `validation_status` | string | one of `pending`, `partial`, `passed`, `blocked` |
+| `rollback_notes` | string | how to back out the change safely |
+| `residual_risk` | string | unresolved limitations or follow-up risk |
 
-Resume steps:
-1. Load checkpoint by id: `p12_ck_operations_nucleus_step_analysis`
-2. Restore state keys: analysis_data, analysis_status
-3. Re-enter workflow at step: `step_analysis`
-4. Validate state integrity: Ensure `analysis_status` is "completed" before proceeding
+## Resume Procedure
 
-Idempotent: yes — if already completed state is detected, reinstate only for data consistency.
+1. Load checkpoint `p10_ck_operations_release_gate`.
+2. Re-check repository state against `changed_files`.
+3. Re-run `validation_commands` if `validation_status` is not `passed` or if the worktree changed.
+4. Confirm rollback notes are still valid for the current diff.
+5. Proceed to compile, commit, signal, and final reporting.
 
 ## Lifecycle
-TTL: 24h — Suitable for batch processing in operations; checkpoint prevents unnecessary repeat processing within the day.
-Cleanup: auto_delete after TTL expiry
-Archival: Standard operational archival policy applies
-Chain: p12_ck_operations_nucleus_previous_step -> this -> p12_ck_operations_nucleus_next_step
 
----
+- TTL: `72h` to cover long-running debugging and release windows
+- Cleanup: remove after successful signal or after TTL expiry
+- Idempotent: yes, as long as commands remain valid for the same commit window
