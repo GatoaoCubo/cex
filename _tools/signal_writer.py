@@ -1,9 +1,9 @@
-"""CEX Signal Writer v2.0 — writes to _ops/signals/"""
+"""CEX Signal Writer v2.0 — writes to .cex/runtime/signals/"""
 import json
 from datetime import datetime
 from pathlib import Path
 
-SIGNAL_DIR = Path(__file__).resolve().parent.parent / "_ops" / "signals"
+SIGNAL_DIR = Path(__file__).resolve().parent.parent / ".cex" / "runtime" / "signals"
 
 def write_signal(nucleus, status="complete", quality_score=9.0, mission="", **extra):
     SIGNAL_DIR.mkdir(parents=True, exist_ok=True)

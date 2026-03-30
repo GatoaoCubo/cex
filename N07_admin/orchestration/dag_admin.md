@@ -15,13 +15,13 @@ nodes:
     label: "Classify intent by domain keywords"
     agent_node: orchestrator
   - id: write_handoff
-    label: "Write structured handoff to _ops/handoffs/_active/"
+    label: "Write structured handoff to .cex/runtime/handoffs/"
     agent_node: orchestrator
   - id: dispatch_builder
     label: "Dispatch builder via bash _spawn/dispatch.sh"
     agent_node: orchestrator
   - id: monitor_signals
-    label: "Monitor _ops/signals/ for completion or error"
+    label: "Monitor .cex/runtime/signals/ for completion or error"
     agent_node: orchestrator
   - id: validate_quality
     label: "Validate builder output quality >= 8.0"
@@ -88,7 +88,7 @@ receive_intent --> classify_domain --> write_handoff --> dispatch_builder
 2. `classify_domain` — match keywords to routing rules, select target nucleus
 3. `write_handoff` — produce handoff.md with task, context, scope, commit, signal
 4. `dispatch_builder` — execute `bash _spawn/dispatch.sh solo {nucleus} "task"`
-5. `monitor_signals` — poll `_ops/signals/` for completion or error signal
+5. `monitor_signals` — poll `.cex/runtime/signals/` for completion or error signal
 6. `validate_quality` — check builder output quality score against 8.0 threshold
 7. `accept_or_reject` — if quality >= 8.0: accept. Else: write feedback, re-dispatch
 

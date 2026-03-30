@@ -27,7 +27,7 @@ density_score: 0.90
 
 ## Checklist (HARD gates — ALL must pass)
 
-- [ ] H01: Signal received — builder emitted completion signal to `_ops/signals/`
+- [ ] H01: Signal received — builder emitted completion signal to `.cex/runtime/signals/`
 - [ ] H02: Quality score >= 8.0 — reported by builder in signal payload
 - [ ] H03: Git committed — builder committed changes before signaling
 - [ ] H04: Compile success — `python _tools/cex_compile.py {path}` produces valid YAML
@@ -73,7 +73,7 @@ PASS = ALL(H01..H07) AND aggregate_score >= 0.80
 ## Bypass Policy
 
 - **Who may override**: admin only (N07 operator)
-- **Conditions**: documented justification required, logged to `_ops/signals/`
+- **Conditions**: documented justification required, logged to `.cex/runtime/signals/`
 - **Audit**: bypass events recorded as signals with `status: bypass` and reason field
 
 ## Validation Commands
@@ -89,7 +89,7 @@ python _tools/cex_doctor.py
 grep -r "^quality: null" {path} --include="*.md"
 
 # Signal check
-ls _ops/signals/{nucleus}_*.json
+ls .cex/runtime/signals/{nucleus}_*.json
 ```
 
 ## References

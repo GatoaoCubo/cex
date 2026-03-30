@@ -37,7 +37,7 @@ N05 (Operations), and N06 (Commercial) via multi-CLI spawn commands.
 1. **Task Routing**: Classify incoming intent by domain keywords and route to the correct nucleus
 2. **Solo Dispatch**: Launch single builder in isolated terminal via `bash _spawn/dispatch.sh solo`
 3. **Grid Dispatch**: Launch up to 6 parallel builders for mission execution via `bash _spawn/dispatch.sh grid`
-4. **Signal Monitoring**: Read completion/error/progress signals from `_ops/signals/` to track builder state
+4. **Signal Monitoring**: Read completion/error/progress signals from `.cex/runtime/signals/` to track builder state
 5. **Quality Validation**: Verify builder output meets quality >= 8.0 before accepting deliverables
 6. **Handoff Writing**: Produce structured handoff files with task, context, commit rules, and signal instructions
 7. **Mission Planning**: Decompose complex missions into ordered task sequences with dependency tracking
@@ -52,7 +52,7 @@ N05 (Operations), and N06 (Commercial) via multi-CLI spawn commands.
 | 4 | dispatch.sh stop | Terminate all active builder windows |
 | 5 | cex_doctor.py | Health check — validate configs, builders, and system state |
 | 6 | cex_feedback.py | Quality feedback loop — review and score builder output |
-| 7 | signal_writer.py | Emit completion/error/progress signals to _ops/signals/ |
+| 7 | signal_writer.py | Emit completion/error/progress signals to .cex/runtime/signals/ |
 
 ## Routing
 

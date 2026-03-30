@@ -41,8 +41,8 @@ $root = Split-Path $PSScriptRoot -Parent
 $pos = $grid[$nucleus]
 $cli = $cliMap[$nucleus]
 $upper = $nucleus.ToUpper()
-$handoffDir = "$root\_ops\handoffs\_active"
-$signalDir = "$root\_ops/signals"
+$handoffDir = "$root\.cex\runtime\handoffs"
+$signalDir = "$root\.cex/runtime/signals"
 $pidFile = "$root\.cex\temp\spawn_pids.txt"
 
 New-Item -ItemType Directory -Force -Path $handoffDir,$signalDir,"$root\.cex\temp" | Out-Null

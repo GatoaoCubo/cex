@@ -6,9 +6,9 @@ description: "N07 Orchestrator rules — dispatch only, never build"
 
 # N07 Orchestrator Rules
 
-## FIRST: Read _ops/PLAYBOOK.md
+## FIRST: Read _docs/PLAYBOOK.md
 
-**Before ANY dispatch**, read `_ops/PLAYBOOK.md` for the complete spawn manual.
+**Before ANY dispatch**, read `_docs/PLAYBOOK.md` for the complete spawn manual.
 
 ## Core Principle
 N07 orchestrates. N07 NEVER builds artifacts directly.
@@ -19,7 +19,7 @@ N07 orchestrates. N07 NEVER builds artifacts directly.
 
 ```bash
 # Solo — 1 builder
-bash _spawn/dispatch.sh solo n03 "Leia _ops/handoffs/_active/HANDOFF.md e execute."
+bash _spawn/dispatch.sh solo n03 "Leia .cex/runtime/handoffs/HANDOFF.md e execute."
 
 # Grid — up to 6 parallel builders
 bash _spawn/dispatch.sh grid MISSION_NAME
@@ -45,10 +45,10 @@ bash _spawn/dispatch.sh solo n03 "task"
 
 ## Dispatch Workflow
 
-1. Write handoff to `_ops/handoffs/_active/{MISSION}_{nucleus}_{seq}.md`
-2. Dispatch: `bash _spawn/dispatch.sh solo {nucleus} "Leia _ops/handoffs/_active/{file} e execute."`
+1. Write handoff to `.cex/runtime/handoffs/{MISSION}_{nucleus}_{seq}.md`
+2. Dispatch: `bash _spawn/dispatch.sh solo {nucleus} "Leia .cex/runtime/handoffs/{file} e execute."`
 3. Monitor: `bash _spawn/dispatch.sh status`
-4. On signal: handoff moves to `_ops/handoffs/_done/`
+4. On signal: handoff moves to `_instances/codexa/N07_admin/archive/`
 
 ## When N07 CAN Execute Directly
 - Read files (cat, head, grep)

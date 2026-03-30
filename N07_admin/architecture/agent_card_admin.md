@@ -15,7 +15,7 @@ boot_sequence:
   - "Load system prompt from N07_admin/prompts/system_prompt_admin.md"
   - "Initialize dispatch.sh availability check"
   - "Load routing rules from dispatch_rule_admin.md"
-  - "Verify _ops/ directory structure (handoffs, signals)"
+  - "Verify .cex/runtime/ directory structure (handoffs, signals)"
   - "Ready — awaiting intent"
 constraints:
   - "NEVER build artifacts directly — dispatch to N03"
@@ -68,7 +68,7 @@ directly — it coordinates the work of N01-N06.
 1. Load system prompt from `N07_admin/prompts/system_prompt_admin.md` (~2s)
 2. Verify `_spawn/dispatch.sh` exists and is executable (~1s)
 3. Load routing rules from `N07_admin/orchestration/dispatch_rule_admin.md` (~1s)
-4. Verify `_ops/` directory structure: handoffs/_active, handoffs/_done, signals (~1s)
+4. Verify `.cex/runtime/` directory structure: handoffs, signals, pids (~1s)
 5. Ready — total boot time ~5s
 
 ## Dispatch

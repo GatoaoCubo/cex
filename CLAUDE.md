@@ -63,9 +63,9 @@ If you do NOT see this trace, the build did NOT follow 8F.
 | Tools (10) | `_tools/cex_*.py` |
 | Boot Scripts | `boot/cex.cmd` (N07) `boot/n03.cmd` (builder) |
 | Spawn Scripts | `_spawn/spawn_*.ps1` |
-| Handoffs | `_ops/handoffs/_active/` |
-| Signals | `_ops/signals/`
-| **Spawn Playbook** | `_ops/PLAYBOOK.md` (LEIA ANTES de despachar) |
+| Handoffs | `.cex/runtime/handoffs/` |
+| Signals | `.cex/runtime/signals/`
+| **Spawn Playbook** | `_docs/PLAYBOOK.md` (LEIA ANTES de despachar) |
 
 ## STEP 4: TOOLS
 
@@ -87,7 +87,7 @@ If you do NOT see this trace, the build did NOT follow 8F.
 
 ```bash
 # Solo — 1 builder in new window
-bash _spawn/dispatch.sh solo n03 "Leia _ops/handoffs/_active/HANDOFF.md e execute."
+bash _spawn/dispatch.sh solo n03 "Leia .cex/runtime/handoffs/HANDOFF.md e execute."
 
 # Grid — up to 6 parallel builders
 bash _spawn/dispatch.sh grid MISSION_NAME
@@ -104,7 +104,7 @@ bash _spawn/dispatch.sh stop
 
 ### Handoff Format
 
-Write to `_ops/handoffs/_active/{mission}_{nucleus}.md`:
+Write to `.cex/runtime/handoffs/{mission}_{nucleus}.md`:
 
 ```markdown
 # {NUCLEUS} Task: {Title}

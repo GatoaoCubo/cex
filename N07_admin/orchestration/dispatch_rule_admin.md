@@ -112,4 +112,4 @@ when a task touches multiple domains. Stemming is applied for bilingual matching
 - If no rule matches above 0.70 confidence: ask human for clarification
 - If multiple rules match: highest priority wins
 - If equal priority: prefer the rule with more keyword hits
-- If N07 cannot classify: log to `_ops/signals/` as `dispatch_ambiguous` and wait
+- If N07 cannot classify: log to `.cex/runtime/signals/` as `dispatch_ambiguous` and wait

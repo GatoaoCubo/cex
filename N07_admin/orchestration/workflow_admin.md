@@ -38,7 +38,7 @@ Single builder, single task, new terminal window.
 - **Agent**: N07 orchestrator
 - **Action**: Write handoff file with task, context, scope fence, commit convention
 - **Input**: Human intent + routing classification
-- **Output**: `_ops/handoffs/_active/{mission}_{nucleus}.md`
+- **Output**: `.cex/runtime/handoffs/{mission}_{nucleus}.md`
 - **Signal**: none (internal step)
 - **Depends on**: none
 
@@ -47,13 +47,13 @@ Single builder, single task, new terminal window.
 - **Action**: Launch builder in new terminal
 - **Input**: Handoff file path
 - **Output**: Builder process running in new window
-- **Command**: `bash _spawn/dispatch.sh solo {nucleus} "Leia _ops/handoffs/_active/{file} e execute."`
+- **Command**: `bash _spawn/dispatch.sh solo {nucleus} "Leia .cex/runtime/handoffs/{file} e execute."`
 - **Signal**: none (builder emits signal on completion)
 - **Depends on**: Step 1
 
 ### Step 3: Monitor Signal [orchestrator]
 - **Agent**: N07 orchestrator
-- **Action**: Poll `_ops/signals/` for builder completion signal
+- **Action**: Poll `.cex/runtime/signals/` for builder completion signal
 - **Input**: Expected signal from target nucleus
 - **Output**: Signal JSON with status and quality score
 - **Command**: `bash _spawn/dispatch.sh status`
@@ -82,7 +82,7 @@ Single builder, single task, new terminal window.
 Up to 6 parallel builders, one handoff per nucleus, all launch simultaneously.
 
 ### Preparation
-1. Write N handoff files to `_ops/handoffs/_active/{mission}_{nucleus}_{seq}.md`
+1. Write N handoff files to `.cex/runtime/handoffs/{mission}_{nucleus}_{seq}.md`
 2. Launch grid: `bash _spawn/dispatch.sh grid {MISSION_NAME}`
 3. Grid reads handoffs, spawns one builder per nucleus in parallel windows
 4. Each builder runs independently, commits, and signals on completion
@@ -127,7 +127,7 @@ python _tools/cex_doctor.py
 
 ## Signals
 
-- **On step complete**: nucleus emits signal to `_ops/signals/{nucleus}_complete.json`
+- **On step complete**: nucleus emits signal to `.cex/runtime/signals/{nucleus}_complete.json`
 - **On workflow complete**: N07 emits `write_signal('n07', 'complete', score, 'mission')`
 - **On error**: nucleus emits error signal, N07 reads and decides (retry/escalate)
 

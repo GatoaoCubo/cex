@@ -36,8 +36,8 @@ data_source: "N07_admin/orchestration/spawn_config_admin.md"
 orchestrator: N07 (pi + claude opus xhigh)
 nuclei_count: 6 (N01-N06)
 dispatch_modes: solo, grid, continuous
-signal_path: _ops/signals/
-handoff_path: _ops/handoffs/_active/
+signal_path: .cex/runtime/signals/
+handoff_path: .cex/runtime/handoffs/
 quality_threshold: 8.0
 ```
 
@@ -45,7 +45,7 @@ quality_threshold: 8.0
 
 - **Multi-CLI Architecture**: Each nucleus uses the optimal LLM provider — opus for complex construction, gemini for 1M context knowledge, codex for code review, sonnet for creative writing
 - **Dispatch Modes**: Solo (1 builder, new terminal) for single tasks; Grid (up to 6 parallel) for missions
-- **Signal Protocol**: Builders emit JSON signals (complete/error/progress) to `_ops/signals/` on task completion
+- **Signal Protocol**: Builders emit JSON signals (complete/error/progress) to `.cex/runtime/signals/` on task completion
 - **Handoff Contract**: Structured .md files with task, context, scope fence, commit convention, and signal instructions
 
 ## Routing Table
@@ -63,7 +63,7 @@ quality_threshold: 8.0
 
 ```bash
 # Solo — single builder in new window
-bash _spawn/dispatch.sh solo n03 "Leia _ops/handoffs/_active/HANDOFF.md e execute."
+bash _spawn/dispatch.sh solo n03 "Leia .cex/runtime/handoffs/HANDOFF.md e execute."
 
 # Grid — up to 6 parallel builders
 bash _spawn/dispatch.sh grid MISSION_NAME
@@ -93,7 +93,7 @@ bash _spawn/dispatch.sh stop
 
 - N07 NEVER builds artifacts — always dispatches to appropriate nucleus
 - Quality gate: reject any builder output below 8.0, return with feedback
-- Handoff before dispatch: always write `_ops/handoffs/_active/{mission}_{nucleus}.md` first
+- Handoff before dispatch: always write `.cex/runtime/handoffs/{mission}_{nucleus}.md` first
 - Signal before pause: builders must commit and signal before any interruption
 
 ## Quality Tiers

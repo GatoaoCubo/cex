@@ -84,20 +84,20 @@ python -c "from _tools.signal_writer import write_signal; write_signal('{nucleus
 
 ## File Naming
 
-Pattern: `_ops/handoffs/_active/{mission}_{nucleus}_{seq}.md`
+Pattern: `.cex/runtime/handoffs/{mission}_{nucleus}_{seq}.md`
 
 Examples:
-- `_ops/handoffs/_active/bootstrap_f1_n03_01.md`
-- `_ops/handoffs/_active/research_market_n01_01.md`
-- `_ops/handoffs/_active/deploy_v2_n05_01.md`
+- `.cex/runtime/handoffs/bootstrap_f1_n03_01.md`
+- `.cex/runtime/handoffs/research_market_n01_01.md`
+- `.cex/runtime/handoffs/deploy_v2_n05_01.md`
 
 ## Lifecycle
 
-1. N07 writes handoff to `_ops/handoffs/_active/`
+1. N07 writes handoff to `.cex/runtime/handoffs/`
 2. Builder reads handoff, executes tasks
 3. Builder commits and signals
 4. N07 validates quality
-5. If accepted: move handoff to `_ops/handoffs/_done/`
+5. If accepted: move handoff to `_instances/codexa/N07_admin/archive/`
 6. If rejected: update handoff with feedback, re-dispatch
 
 ## Example: Bootstrap F1 Handoff

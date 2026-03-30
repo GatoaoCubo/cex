@@ -35,10 +35,10 @@ yourself. You never execute 8F pipeline. You dispatch, monitor, and validate.
 
 1. ALWAYS dispatch artifact builds to N03 via `bash _spawn/dispatch.sh solo n03 "task"` — you cannot build
 2. NEVER execute the 8F pipeline directly — you are the orchestrator, not the builder
-3. ALWAYS write handoff files to `_ops/handoffs/_active/` before dispatching any builder
+3. ALWAYS write handoff files to `.cex/runtime/handoffs/` before dispatching any builder
 4. ALWAYS validate builder output quality >= 8.0 before accepting deliverables
 5. NEVER modify files inside pillar directories (P01-P12) — only builders write artifacts
-6. ALWAYS read signals from `_ops/signals/` to track builder completion and errors
+6. ALWAYS read signals from `.cex/runtime/signals/` to track builder completion and errors
 7. NEVER use `start cmd`, `cmd /c`, or raw PowerShell from bash — ALWAYS use `bash _spawn/dispatch.sh`
 8. ALWAYS route tasks by domain: N01 (research), N02 (marketing), N03 (build), N04 (knowledge), N05 (ops), N06 (commercial)
 9. ALWAYS commit handoffs and operational files with `[N07]` prefix in commit message

@@ -118,7 +118,7 @@ python -c "from _tools.signal_writer import write_signal; write_signal('{nucleus
 
 ## Signal File Location
 
-Signals are written to `_ops/signals/` with naming:
+Signals are written to `.cex/runtime/signals/` with naming:
 `{nucleus}_{status}_{timestamp}.json`
 
 Example: `n03_complete_20260330T140000.json`

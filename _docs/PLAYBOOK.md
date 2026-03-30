@@ -32,7 +32,7 @@ bash _spawn/dispatch.sh stop
 
 ```bash
 # Interactive (stays open)
-bash _spawn/dispatch.sh solo n03 "Leia _ops/handoffs/_active/TASK.md e execute."
+bash _spawn/dispatch.sh solo n03 "Leia .cex/runtime/handoffs/TASK.md e execute."
 
 # All nuclei
 bash _spawn/dispatch.sh solo n01 "research task"    # gemini
@@ -49,7 +49,7 @@ bash _spawn/dispatch.sh solo n06 "pricing task"     # claude sonnet
 
 ### Pre-requisites: Write handoffs first
 ```
-_ops/handoffs/_active/
+.cex/runtime/handoffs/
   MISSION_n01.md
   MISSION_n02.md
   MISSION_n03.md
@@ -105,7 +105,7 @@ When you have more tasks than slots:
 
 ### Handoff Naming (MANDATORY)
 ```
-_ops/handoffs/_active/{MISSION}_batch_{N}_{nucleus}.md
+.cex/runtime/handoffs/{MISSION}_batch_{N}_{nucleus}.md
 ```
 Examples:
 ```
@@ -115,7 +115,7 @@ BUILD_batch_1_n01.md    BUILD_batch_2_n01.md
 
 ### How it works
 ```
-Slot finishes → signal in _ops/signals/
+Slot finishes → signal in .cex/runtime/signals/
   → Monitor detects (poll every 30s)
   → Checks queue: more batches for this nucleus?
   → Yes: dispatch next batch, zero idle time
@@ -133,7 +133,7 @@ bash _spawn/dispatch.sh grid BUILD continuous
 | Max 10 tasks per batch handoff | Nuclei lose focus with too many |
 | COMMIT section in every batch | Nucleus commits before signaling |
 | SIGNAL section in every batch | Monitor depends on signals |
-| Outputs in committed paths | _ops/temp/ is gitignored! |
+| Outputs in committed paths | .cex/runtime/pids/ is gitignored! |
 | Naming: {MISSION}_batch_{N}_{nucleus} | Monitor groups queues by pattern |
 
 ### When to use Continuous vs Waves
@@ -168,7 +168,7 @@ powershell -Command "Start-Process powershell -ArgumentList '-NoProfile','-Comma
 | CRASHED | Process died without signal | Stop + respawn |
 
 ### Monitor detects 4 layers:
-1. **Signal file**: _ops/signals/signal_{nucleus}_*.json
+1. **Signal file**: .cex/runtime/signals/signal_{nucleus}_*.json
 2. **Git commits**: commits with nucleus name since spawn
 3. **Process alive**: CMD PID still running
 4. **Stale detection**: alive + no signal + no commit for 15min = STUCK
@@ -180,7 +180,7 @@ powershell -Command "Start-Process powershell -ArgumentList '-NoProfile','-Comma
 ### Setup for overnight continuous batching
 ```bash
 # 1. Write all handoffs (e.g., 20 batch handoffs for n03)
-# _ops/handoffs/_active/OVERNIGHT_batch_{1..20}_n03.md
+# .cex/runtime/handoffs/OVERNIGHT_batch_{1..20}_n03.md
 
 # 2. Launch continuous grid
 bash _spawn/dispatch.sh grid OVERNIGHT continuous
@@ -215,14 +215,14 @@ git log --oneline -20
 
 ```
 N07 Workflow:
-  1. PLAN     → Write _ops/plans/{MISSION}_{date}.md
-  2. HANDOFF  → Write _ops/handoffs/_active/{MISSION}_{nucleus}_{seq}.md
+  1. PLAN     → Write _instances/codexa/N07_admin/plans/{MISSION}_{date}.md
+  2. HANDOFF  → Write .cex/runtime/handoffs/{MISSION}_{nucleus}_{seq}.md
   3. DISPATCH → bash _spawn/dispatch.sh grid MISSION
   4. MONITOR  → bash _spawn/dispatch.sh status (or dedicated window)
-  5. COLLECT  → git log, check _ops/reports/
+  5. COLLECT  → git log, check _instances/codexa/N07_admin/reports/
   6. STOP     → bash _spawn/dispatch.sh stop
   7. COMMIT   → git add . && git commit -m "[WAVE] ..." && git push
-  8. ARCHIVE  → handoffs auto-moved to _ops/handoffs/_done/
+  8. ARCHIVE  → handoffs auto-moved to _instances/codexa/N07_admin/archive/
   9. REPEAT   → Next wave with new handoffs
 ```
 
@@ -337,7 +337,7 @@ git merge --abort  # or resolve manually
 ### Setup for overnight continuous batching
 ```bash
 # 1. Write all batch handoffs
-# _ops/handoffs/_active/OVERNIGHT_batch_{1..20}_n03.md
+# .cex/runtime/handoffs/OVERNIGHT_batch_{1..20}_n03.md
 
 # 2. Launch continuous grid
 bash _spawn/dispatch.sh grid OVERNIGHT continuous
@@ -379,7 +379,7 @@ git log --oneline -20
 | `_spawn/spawn_stop.ps1` | PowerShell: kill all CLIs |
 | `_tools/signal_writer.py` | Python: nuclei write completion signals |
 | `boot/{nucleus}.cmd` | CMD: boot script per nucleus |
-| `_ops/` | Operational workspace (handoffs, signals, plans, reports) |
+| `.cex/runtime/` | Runtime workspace (handoffs, signals, pids) |
 
 ---
 

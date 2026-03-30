@@ -23,8 +23,8 @@ public class Win32Grid {
 "@
 
 $root = Split-Path $PSScriptRoot -Parent
-$handoffDir = "$root\_ops\handoffs\_active"
-$signalDir = "$root\_ops/signals"
+$handoffDir = "$root\.cexuntime\handoffs"
+$signalDir = "$root\.cexuntime\signals"
 $pidFile = "$root\.cex\temp\spawn_pids.txt"
 
 New-Item -ItemType Directory -Force -Path $handoffDir,$signalDir,"$root\.cex\temp" | Out-Null
@@ -75,7 +75,7 @@ function Launch-Nucleus($handoff) {
         return $null
     }
 
-    $identity = "Voce e $upper Builder. Leia _ops/handoffs/_active/$($handoff.Name). Execute todas as tarefas. Commit e signal ao terminar."
+    $identity = "Voce e $upper Builder. Leia .cex/runtime/handoffs/$($handoff.Name). Execute todas as tarefas. Commit e signal ao terminar."
 
     $proc = Start-Process cmd -ArgumentList "/k `"$bootScript`" `"$identity`"" -WorkingDirectory $root -PassThru
     Start-Sleep -Seconds 3

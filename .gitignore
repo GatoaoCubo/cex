@@ -27,6 +27,6 @@ _archive/
 .env
 .cex_signals/
 
-# _ops ephemeral (signals + temp = runtime only)
-_ops/signals/
-_ops/temp/
+
+# Runtime ephemeral (handoffs, signals, pids, locks)
+.cex/runtime/

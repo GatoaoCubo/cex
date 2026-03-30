@@ -318,7 +318,7 @@ nodes:
 
 **Dispatch**: `spawn_solo -nucleus n03 -task "..." -interactive`
 
-**Handoff**: `_ops/handoffs/_active/bootstrap_f1_n03.md` (conteúdo abaixo)
+**Handoff**: `.cex/runtime/handoffs/bootstrap_f1_n03.md` (conteúdo abaixo)
 
 **Regras para N03**:
 1. Ler N03_engineering/agents/agent_engineering.md como referência de quality 9.0
@@ -362,7 +362,7 @@ builders_warn:
 
 **Dispatch**: `spawn_solo -nucleus n03 -task "..." -interactive`
 
-**Handoff**: `_ops/handoffs/_active/bootstrap_f2_n03.md`
+**Handoff**: `.cex/runtime/handoffs/bootstrap_f2_n03.md`
 
 **Regras para N03**:
 1. Tarefa cirúrgica: comprimir para <= 4096B sem perder informação
@@ -391,7 +391,7 @@ builders_warn:
 
 #### Batch 1: N01 Intelligence (11 artefatos)
 
-**Handoff**: `_ops/handoffs/_active/bootstrap_f3_batch1_n03.md`
+**Handoff**: `.cex/runtime/handoffs/bootstrap_f3_batch1_n03.md`
 
 ```
 Artefatos target (todos em N01_intelligence/):
@@ -413,7 +413,7 @@ CLI: gemini 2.5-pro (1M context). Domínio: research, market analysis, competiti
 
 #### Batch 2: N02 Marketing (10 artefatos)
 
-**Handoff**: `_ops/handoffs/_active/bootstrap_f3_batch2_n03.md`
+**Handoff**: `.cex/runtime/handoffs/bootstrap_f3_batch2_n03.md`
 
 ```
 Artefatos target (todos em N02_marketing/):
@@ -434,7 +434,7 @@ CLI: claude sonnet. Domínio: creative writing, persuasion, brand voice.
 
 #### Batch 3: N04 Knowledge (12 artefatos)
 
-**Handoff**: `_ops/handoffs/_active/bootstrap_f3_batch3_n03.md`
+**Handoff**: `.cex/runtime/handoffs/bootstrap_f3_batch3_n03.md`
 
 ```
 Artefatos target (todos em N04_knowledge/):
@@ -457,7 +457,7 @@ CLI: gemini 2.5-pro (1M context). Domínio: knowledge management, embeddings, re
 
 #### Batch 4: N05 Operations (9 artefatos)
 
-**Handoff**: `_ops/handoffs/_active/bootstrap_f3_batch4_n03.md`
+**Handoff**: `.cex/runtime/handoffs/bootstrap_f3_batch4_n03.md`
 
 ```
 Artefatos target (todos em N05_operations/):
@@ -477,7 +477,7 @@ CLI: codex GPT-5.4. Domínio: code review, testing, infrastructure.
 
 #### Batch 5: N06 Commercial (9 artefatos)
 
-**Handoff**: `_ops/handoffs/_active/bootstrap_f3_batch5_n03.md`
+**Handoff**: `.cex/runtime/handoffs/bootstrap_f3_batch5_n03.md`
 
 ```
 Artefatos target (todos em N06_commercial/):
@@ -541,30 +541,30 @@ python -c "from _tools.signal_writer import write_signal; write_signal('n07', 't
 ### Fase 1 (spawn N03)
 ```powershell
 # Escrever handoff primeiro (N07 faz), depois:
-powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_solo.ps1 -nucleus n03 -task "Leia _ops/handoffs/_active/bootstrap_f1_n03.md. Reconstrua os 10 artefatos de N07 listados. 8F obrigatorio. Quality 9.0+. Compile cada um. Commit e signal." -interactive
+powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_solo.ps1 -nucleus n03 -task "Leia .cex/runtime/handoffs/bootstrap_f1_n03.md. Reconstrua os 10 artefatos de N07 listados. 8F obrigatorio. Quality 9.0+. Compile cada um. Commit e signal." -interactive
 ```
 
 ### Fase 2 (spawn N03)
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_solo.ps1 -nucleus n03 -task "Leia _ops/handoffs/_active/bootstrap_f2_n03.md. Comprima 13 arquivos de builders para <= 4096B. Doctor deve dar 98 PASS 0 WARN. Commit e signal." -interactive
+powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_solo.ps1 -nucleus n03 -task "Leia .cex/runtime/handoffs/bootstrap_f2_n03.md. Comprima 13 arquivos de builders para <= 4096B. Doctor deve dar 98 PASS 0 WARN. Commit e signal." -interactive
 ```
 
 ### Fase 3 — Batches 1-5 (spawn N03 sequencial)
 ```powershell
 # Batch 1: N01
-powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_solo.ps1 -nucleus n03 -task "Leia _ops/handoffs/_active/bootstrap_f3_batch1_n03.md. Reconstrua 11 artefatos de N01_intelligence. 8F obrigatorio. Quality 9.0+. Compile cada um. Commit e signal." -interactive
+powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_solo.ps1 -nucleus n03 -task "Leia .cex/runtime/handoffs/bootstrap_f3_batch1_n03.md. Reconstrua 11 artefatos de N01_intelligence. 8F obrigatorio. Quality 9.0+. Compile cada um. Commit e signal." -interactive
 
 # Batch 2: N02 (após signal do Batch 1)
-powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_solo.ps1 -nucleus n03 -task "Leia _ops/handoffs/_active/bootstrap_f3_batch2_n03.md. Reconstrua 10 artefatos de N02_marketing. 8F obrigatorio. Quality 9.0+. Compile cada um. Commit e signal." -interactive
+powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_solo.ps1 -nucleus n03 -task "Leia .cex/runtime/handoffs/bootstrap_f3_batch2_n03.md. Reconstrua 10 artefatos de N02_marketing. 8F obrigatorio. Quality 9.0+. Compile cada um. Commit e signal." -interactive
 
 # Batch 3: N04 (após signal do Batch 2)
-powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_solo.ps1 -nucleus n03 -task "Leia _ops/handoffs/_active/bootstrap_f3_batch3_n03.md. Reconstrua 12 artefatos de N04_knowledge. 8F obrigatorio. Quality 9.0+. Compile cada um. Commit e signal." -interactive
+powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_solo.ps1 -nucleus n03 -task "Leia .cex/runtime/handoffs/bootstrap_f3_batch3_n03.md. Reconstrua 12 artefatos de N04_knowledge. 8F obrigatorio. Quality 9.0+. Compile cada um. Commit e signal." -interactive
 
 # Batch 4: N05 (após signal do Batch 3)
-powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_solo.ps1 -nucleus n03 -task "Leia _ops/handoffs/_active/bootstrap_f3_batch4_n03.md. Reconstrua 9 artefatos de N05_operations. 8F obrigatorio. Quality 9.0+. Compile cada um. Commit e signal." -interactive
+powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_solo.ps1 -nucleus n03 -task "Leia .cex/runtime/handoffs/bootstrap_f3_batch4_n03.md. Reconstrua 9 artefatos de N05_operations. 8F obrigatorio. Quality 9.0+. Compile cada um. Commit e signal." -interactive
 
 # Batch 5: N06 (após signal do Batch 4)
-powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_solo.ps1 -nucleus n03 -task "Leia _ops/handoffs/_active/bootstrap_f3_batch5_n03.md. Reconstrua 9 artefatos de N06_commercial. 8F obrigatorio. Quality 9.0+. Compile cada um. Commit e signal." -interactive
+powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_solo.ps1 -nucleus n03 -task "Leia .cex/runtime/handoffs/bootstrap_f3_batch5_n03.md. Reconstrua 9 artefatos de N06_commercial. 8F obrigatorio. Quality 9.0+. Compile cada um. Commit e signal." -interactive
 ```
 
 ---
