@@ -6,7 +6,7 @@ version: 1.0.0
 created: 2026-03-27
 updated: 2026-03-27
 author: builder_agent
-observation: "Action prompts fail most often at boundary conditions: the input schema allows values that the prompt body does not handle, or the output contract promises a format that the model inconsistently delivers. Missing edge case coverage is the primary defect class."
+observation: "Action prompts fail at boundary conditions: input schema allows values the body does not handle, or output contract promises a format the model inconsistently delivers. Missing edge case coverage is the primary defect class."
 pattern: "For every input field, enumerate at least one edge case (empty, max-length, invalid type). For every output field, write a concrete example value. Prompts with full edge case coverage and concrete output examples pass contract validation on first attempt at 84% rate versus 31% without."
 evidence: "Across 23 action prompt builds: prompts with 0 edge cases had 69% contract failure rate. Prompts with 3+ edge cases per input field had 16% failure rate. Adding concrete output examples further reduced failures to 11%."
 confidence: 0.7

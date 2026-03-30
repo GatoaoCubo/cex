@@ -3,7 +3,7 @@ kind: examples
 id: bld_examples_mental_model
 pillar: P07
 llm_function: GOVERN
-purpose: Golden and anti-examples of mental_model (P02) artifacts
+purpose: Golden and anti-examples of mental_model artifacts
 pattern: few-shot learning — LLM reads these before producing
 ---
 

@@ -56,9 +56,9 @@ Trigger: two or more routes score within 0.05 confidence of each other.
 Action: return both candidates with scores; let orchestrator arbitrate.
 Notification: signal `p12_sig_routing_ambiguous` with candidate list.
 ## Integration
-- Receives from: orchestrator (task dispatch), user input (direct)
-- Routes to: research_agent, marketing_agent, builder_agent, knowledge_agent, operations_agent, commercial_agent, orchestrator
-- Consults: dispatch_rules (P12) for keyword hints
+- Receives from: orchestrator, user input
+- Routes to: 7 agents (see Routes table)
+- Consults: dispatch_rules (P12)
 - Signal on failure: `p12_sig_routing_failed`
 ## References
 - CEX TAXONOMY_LAYERS.yaml — director definitions

@@ -25,7 +25,7 @@ input_required:
   - "scrape_data: JSON object with raw marketplace response"
   - "marketplace: enum (mercado_livre, shopee, amazon_br)"
 output_expected: "Normalized JSON with price, rating, reviews_count, seller_score, availability"
-purpose: "Enables cross-marketplace comparison by normalizing heterogeneous scrape formats"
+purpose: "Normalize heterogeneous scrape formats for cross-marketplace comparison"
 steps_count: 4
 timeout: "30s"
 edge_cases:

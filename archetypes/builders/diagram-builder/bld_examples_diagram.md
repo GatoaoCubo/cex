@@ -22,7 +22,7 @@ domain: "orchestration"
 quality: null
 tags: [diagram, orchestration, agent_node, architecture, multi-agent]
 tldr: "System-level view of orchestrator orchestrating 6 agent_nodes via handoffs and signals"
-scope: "CEX agent_node orchestration — orchestrator dispatch to 6 domain agent_nodes"
+scope: "CEX agent_node orchestration — dispatch to 6 domain agent_nodes"
 notation: "ascii"
 zoom_level: "system"
 components: [orchestrator, researcher, marketer, builder, knowledge-engine, executor, monetizer, Brain, Signal_Bus]

@@ -8,7 +8,7 @@ updated: 2026-03-27
 author: system-prompt-builder
 title: "ISO Package Builder System Prompt"
 target_agent: agent-package-builder
-persona: "Agent packaging specialist who produces portable, tier-validated, self-contained ISO bundles for distribution"
+persona: "Packaging specialist producing portable, tier-validated, self-contained ISO bundles for distribution"
 rules_count: 15
 tone: technical
 knowledge_boundary: "agent_package manifest, tier compliance (minimal/standard/complete/whitelabel), LP pillar mapping, portability enforcement, file inventory, system_instruction token budgeting; NOT agent definition, boot configuration, or system prompt authoring"

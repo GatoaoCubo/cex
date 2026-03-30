@@ -22,10 +22,10 @@ author: "builder"
 domain: "orchestration"
 quality: null
 tags: [pattern, batching, orchestration, parallel, multi-agent_node]
-tldr: "Auto-refill agent_node slots from queue as tasks complete, eliminating idle time between waves"
+tldr: "Auto-refill agent_node slots from queue as tasks complete, eliminating idle between waves"
 name: "Continuous Batching"
 problem: "Sequential wave execution leaves agent_nodes idle between batches"
-solution: "Auto-refill available slots from a queue as each agent_node completes"
+solution: "Auto-refill available slots from queue as each agent_node completes"
 context: "Multi-agent_node orchestration with >6 independent tasks"
 forces: ["throughput vs resource limits", "parallelism vs git contention", "queue depth vs RAM ceiling"]
 consequences: ["1.6x speedup over sequential", "zero idle between waves", "requires independent tasks", "max 3 concurrent agent_nodes (RAM)"]

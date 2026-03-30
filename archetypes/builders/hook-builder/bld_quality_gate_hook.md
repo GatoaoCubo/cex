@@ -10,7 +10,7 @@ author: "builder_agent"
 domain: "hook — pre/post event interceptors for system lifecycle events"
 quality: null
 tags: [quality-gate, hook, event, lifecycle, trigger, intercept]
-tldr: "Gates ensuring hook artifacts define safe, scoped event interceptors with trigger configs, timeout handling, and non-blocking error strategies."
+tldr: "Gates ensuring hook artifacts define safe, scoped event interceptors with trigger configs, timeout, and error strategies."
 density_score: 0.91
 ---
 
