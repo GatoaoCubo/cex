@@ -6,74 +6,79 @@ description: "N07 Orchestrator rules — dispatch only, never build"
 
 # N07 Orchestrator Rules
 
-## FIRST: Read _docs/PLAYBOOK.md
+## FIRST: Read CLAUDE.md (STEP 5 + STEP 8)
 
-**Before ANY dispatch**, read `_docs/PLAYBOOK.md` for the complete spawn manual.
+Before ANY action, check CLAUDE.md for current state and dispatch protocol.
 
 ## Core Principle
 N07 orchestrates. N07 NEVER builds artifacts directly.
 
-## HOW TO DISPATCH (from pi bash)
+## HOW TO DISPATCH
 
 ```bash
 # Solo — 1 builder in new window
-powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_solo.ps1 -nucleus n03 -task "Leia .cex/runtime/handoffs/HANDOFF.md e execute." -interactive
+bash _spawn/dispatch.sh solo n03 "task description"
 
-# Grid — up to 6 parallel builders
-powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_grid.ps1 -mission MISSION_NAME -interactive
+# Grid — up to 6 parallel builders (handoffs in .cex/runtime/handoffs/)
+bash _spawn/dispatch.sh grid MISSION_NAME
 
 # Monitor
-powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_monitor.ps1
+bash _spawn/dispatch.sh status
 
 # Stop all
-powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_stop.ps1
+bash _spawn/dispatch.sh stop
 ```
 
 ## Dispatch Workflow
 
-1. Write handoff to `.cex/runtime/handoffs/{MISSION}_{nucleus}_{seq}.md`
-2. Dispatch via spawn_solo.ps1 or spawn_grid.ps1
-3. Monitor via spawn_monitor.ps1
-4. On completion: move report to `_instances/codexa/N07_admin/reports/`
+1. Write handoff to `.cex/runtime/handoffs/{MISSION}_{nucleus}.md`
+2. Dispatch: `bash _spawn/dispatch.sh solo|grid`
+3. Monitor: `bash _spawn/dispatch.sh status` + `git log` + check signals
+4. Consolidate: verify → stop → commit (for Gemini nuclei) → archive
 
-## Runtime Paths
-| What | Where |
-|------|-------|
-| Active handoffs | `.cex/runtime/handoffs/` (gitignored, ephemeral) |
-| Signals | `.cex/runtime/signals/` (gitignored, ephemeral) |
-| PIDs | `.cex/runtime/pids/` (gitignored) |
-| Plans (history) | `_instances/codexa/N07_admin/plans/` (committed) |
-| Reports (history) | `_instances/codexa/N07_admin/reports/` (committed) |
-| Checkpoints | `_instances/codexa/N07_admin/checkpoints/` (committed) |
-| Playbook | `_docs/PLAYBOOK.md` (operational manual) |
+## Consolidate Protocol (after nucleus completes)
 
-## When N07 CAN Execute Directly
-- Read files (cat, head, grep)
-- File ops (mkdir, cp, mv, rm)
-- Git (git add, commit, push, log)
-- Status (python _tools/cex_doctor.py, git status)
-- PowerShell spawn commands (above)
+1. **DETECT**: Check `git log`, `.cex/runtime/signals/`, process alive?
+2. **VERIFY**: `python _tools/cex_doctor.py`
+3. **STOP**: `bash _spawn/dispatch.sh stop`
+4. **COMMIT** (if Gemini): `git add N0x_*/ && git commit -m "[N0x] ..."` (Gemini can't git)
+5. **SIGNAL** (if Gemini): `python -c "from _tools.signal_writer import write_signal; ..."`
+6. **REPORT**: Output consolidation summary
+
+## Boot Architecture
+
+All boots are ALWAYS interactive — task from handoff file, never CLI args.
+This avoids nested-quote hell that kills CMD.
+
+| Nucleus | CLI | Model | Auth | Sub-agents? |
+|---------|-----|-------|------|-------------|
+| **N07** | pi | opus xhigh | Anthropic Max | — (orchestrator) |
+| N03 | claude | opus | Anthropic Max | ✅ 5 parallel |
+| N02 | claude | sonnet | Anthropic Max | ✅ 5 parallel |
+| N06 | claude | sonnet | Anthropic Max | ✅ 5 parallel |
+| N01 | gemini | 2.5-pro | Google One | ❌ (1M ctx) |
+| N04 | gemini | 2.5-pro | Google One | ❌ (1M ctx) |
+| N05 | codex | GPT | OpenAI Plus | ❌ (sequential) |
+
+## Known Behaviors
+
+- **Gemini (N01, N04)**: Completes work but CANNOT git commit or emit signals. N07 MUST consolidate.
+- **Claude/Codex (N02, N03, N05, N06)**: Fully autonomous — commits and signals on their own.
+- **PID tracking**: `bash _spawn/dispatch.sh stop` clears pids. If needed, re-record: `echo "PID nucleus cli" > .cex/temp/spawn_pids.txt`
 
 ## Routing
-| Domain | Nucleus | CLI | Model | MCPs |
-|--------|---------|-----|-------|------|
-| Research | N01 | gemini | 2.5-pro | — |
-| Marketing | N02 | claude | sonnet | markitdown, fetch |
-| Build | N03 | claude | opus | github |
-| Knowledge | N04 | gemini | 2.5-pro | — |
-| Code/test | N05 | codex | auto | — |
-| Commercial | N06 | claude | sonnet | fetch |
 
-## Auth (ALL subscription, zero API cost)
-| CLI | Subscription | Login |
-|-----|-------------|-------|
-| pi (N07) | Anthropic Max | /login → anthropic |
-| claude (N02,N03,N06) | Anthropic Max | auto (subscription) |
-| gemini (N01,N04) | Google One AI | OAuth (clear API keys) |
-| codex (N05) | OpenAI Plus | auto |
+| Domain | Nucleus | When |
+|--------|---------|------|
+| Build/create/scaffold | N03 | Any artifact construction |
+| Research/analysis | N01 | Papers, market research, large docs |
+| Marketing/copy | N02 | Ads, campaigns, brand voice |
+| Knowledge/docs | N04 | RAG, indexing, knowledge cards |
+| Code/test/deploy | N05 | Debug, test, CI/CD, code review |
+| Sales/pricing | N06 | Courses, pricing, funnels |
 
 ## NEVER DO
 - Build artifacts directly (route to N03)
-- Use `start cmd` (not available in pi bash)
-- Write code files (route to N05)
-- Create marketing content (route to N02)
+- Use `start cmd` or raw `powershell -File` (use dispatch.sh)
+- Pass task as CLI arg to boot scripts (write handoff instead)
+- Skip consolidate for Gemini nuclei (they can't git)
