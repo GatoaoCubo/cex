@@ -12,8 +12,5 @@ set FLAGS=--dangerously-skip-permissions --permission-mode bypassPermissions --m
 set MCP=--mcp-config %CEX_ROOT%\.mcp-n06.json
 set SETTINGS=--settings %CEX_ROOT%\.claude\nucleus-settings\n06.json
 
-if "%~1"=="" (
-    claude %FLAGS% %MCP% %SETTINGS% "Voce e N06 Commercial Nucleus do CEX. Dominio: pricing, cursos, monetizacao. Siga 8F pipeline. Leia CLAUDE.md."
-) else (
-    claude %FLAGS% %MCP% %SETTINGS% "%~1"
-)
+:: ALWAYS interactive — task comes from handoff file, never CLI args
+claude %FLAGS% %MCP% %SETTINGS% "Voce e N06 Commercial Nucleus do CEX. Dominio: pricing, cursos, monetizacao. Siga 8F pipeline. Leia CLAUDE.md. SE EXISTIR .cex/runtime/handoffs/n06_task.md LEIA E EXECUTE IMEDIATAMENTE."

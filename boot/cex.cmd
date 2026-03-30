@@ -9,8 +9,5 @@ set CEX_NUCLEUS=N07
 set CEX_ROOT=C:\Users\PC\Documents\GitHub\cex
 cd /d "%CEX_ROOT%"
 
-if "%~1"=="" (
-    pi --model anthropic/claude-opus-4-6 --thinking xhigh
-) else (
-    pi --model anthropic/claude-opus-4-6 --thinking xhigh %*
-)
+:: ALWAYS interactive — N07 orchestrates, never receives task args
+pi --model anthropic/claude-opus-4-6 --thinking xhigh

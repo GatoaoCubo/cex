@@ -62,15 +62,9 @@ if (-not (Test-Path $bootScript)) {
     Write-Output "[$upper] ERROR: $bootScript not found"; exit 1
 }
 
-# Build launch command — SIMPLE: boot script + task as single arg
-$shellFlag = if ($interactive) { "/k" } else { "/c" }
-
-if ($task) {
-    # Task goes as %1 to boot script — boot script passes it to CLI
-    $bootArgs = "$shellFlag `"$bootScript`" `"$task`""
-} else {
-    $bootArgs = "/k `"$bootScript`""
-}
+# ALWAYS boot interactive — task is in the handoff file, never in args
+# This avoids nested-quote hell that kills CMD
+$bootArgs = "/k `"$bootScript`""
 
 # Spawn CMD window
 $proc = Start-Process cmd -ArgumentList $bootArgs -WorkingDirectory $root -PassThru
