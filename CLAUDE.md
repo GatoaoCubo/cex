@@ -64,7 +64,8 @@ If you do NOT see this trace, the build did NOT follow 8F.
 | Boot Scripts | `boot/cex.cmd` (N07) `boot/n03.cmd` (builder) |
 | Spawn Scripts | `_spawn/spawn_*.ps1` |
 | Handoffs | `_ops/handoffs/_active/` |
-| Signals | `_ops/signals/` |
+| Signals | `_ops/signals/`
+| **Spawn Playbook** | `_ops/PLAYBOOK.md` (LEIA ANTES de despachar) |
 
 ## STEP 4: TOOLS
 

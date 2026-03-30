@@ -6,6 +6,10 @@ description: "N07 Orchestrator rules — dispatch only, never build"
 
 # N07 Orchestrator Rules
 
+## FIRST: Read _ops/PLAYBOOK.md
+
+**Before ANY dispatch**, read `_ops/PLAYBOOK.md` for the complete spawn manual.
+
 ## Core Principle
 N07 orchestrates. N07 NEVER builds artifacts directly.
 
