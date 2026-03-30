@@ -25,6 +25,30 @@ Every artifact is produced by running 8 functions in sequence:
 | F7 | GOVERN | Evaluate | 7 gates validate output |
 | F8 | COLLABORATE | Coordinate | Save + compile + index + signal |
 
+
+## STEP 2.1: 8F IS MANDATORY (NOT OPTIONAL)
+
+**Every artifact build MUST execute all 8 functions. No exceptions.**
+
+The 8F pipeline is not a suggestion — it is the ONLY way to produce artifacts.
+If you skip any step, the artifact is invalid.
+
+**Enforcement**: `.claude/rules/n03-8f-enforcement.md` (auto-loaded)
+
+**Evidence required**: Every build shows the 8F trace:
+```
+F1 CONSTRAIN: kind=X, pillar=PXX
+F2 BECOME: builder loaded (13 ISOs)
+F3 INJECT: KC + examples loaded
+F4 REASON: plan decided
+F5 CALL: tools ready
+F6 PRODUCE: draft generated
+F7 GOVERN: score X/10, gates pass
+F8 COLLABORATE: saved, compiled, committed
+```
+
+If you do NOT see this trace, the build did NOT follow 8F.
+
 ## STEP 3: KEY PATHS
 
 | What | Where |
