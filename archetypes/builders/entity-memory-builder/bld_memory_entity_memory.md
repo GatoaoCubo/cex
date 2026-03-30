@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
-author: edison
+author: builder_agent
 observation: "Entity memory records without confidence scoring caused downstream agents to treat unverified attributes (scraped from secondary sources) with the same weight as primary-source facts, leading to incorrect grounding in 3 out of 5 test prompts. Records with confidence < 0.5 that lacked expiry dates were re-injected indefinitely, polluting context with stale data in 2 production runs."
 pattern: "Assign confidence float to every entity_memory. Set expiry for all volatile entities (tools, services, APIs). Use update_policy: merge for general facts, overwrite for pricing/version data. Minimum 3 attributes — records with 1-2 attributes provided insufficient grounding to be useful."
 evidence: "5 grounding test prompts: 3 failed with unscored attributes; 0 failures after confidence scoring added. 2 production runs with stale injection: root cause was missing expiry on versioned tool records."

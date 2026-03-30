@@ -7,7 +7,7 @@ title: 'OpenAI API Patterns: Function Calling, Structured Outputs, Assistants, E
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
-author: EDISON
+author: builder_agent
 domain: openai_api
 origin: src_provider_taxonomy
 quality: 9.0

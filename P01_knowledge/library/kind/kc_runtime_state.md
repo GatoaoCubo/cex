@@ -7,7 +7,7 @@ title: "Runtime State — Deep Knowledge for runtime_state"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: SHAKA
+author: research_agent
 domain: runtime_state
 quality: null
 tags: [runtime_state, P10, INJECT, kind-kc]

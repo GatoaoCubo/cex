@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-27
 updated: 2026-03-27
-author: edison
+author: builder_agent
 observation: "Embedding configs using cosine distance without normalize: true produce incorrect similarity scores because cosine similarity assumes unit vectors. Chunk sizes exceeding the model's context window silently truncate text, causing embedding vectors that represent partial content. Overlap values at zero create retrieval gaps at chunk boundaries - queries that span two chunks retrieve neither. Using dot_product distance with non-normalized vectors produces scores that depend on vector magnitude rather than semantic direction."
 pattern: "Configure embedding pipelines in four decisions: (1) model + dimensions as a matched pair from a validated reference table; (2) chunk_size at 60-70% of the model's token context window; (3) overlap at 10-15% of chunk_size to bridge boundary gaps; (4) distance metric matched to normalization: cosine requires normalize: true, dot_product requires normalized vectors, euclidean works without normalization."
 evidence: "Normalize: true with cosine distance corrected similarity ranking in all 8 retrieval tests where it was previously wrong. Chunk size at 65% of context window preserved complete semantic units in 97% of sampled chunks vs 71% at 100% of context window. 12% overlap eliminated retrieval gaps at chunk boundaries in controlled boundary-query tests. Metric-normalization mismatches produced incorrect top-1 results in 34% of queries."

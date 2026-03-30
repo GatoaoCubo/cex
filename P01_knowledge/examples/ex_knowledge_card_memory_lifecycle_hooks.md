@@ -6,7 +6,7 @@ title: "Memory Lifecycle Hooks — 5-Stage Capture-Compress-Inject Loop for Pers
 version: 1.0.0
 created: 2026-03-26
 updated: 2026-03-26
-author: EDISON
+author: builder_agent
 domain: llm_engineering
 quality: null
 tags: [memory, lifecycle-hooks, capture, compression, context-injection, llm-memory]

@@ -6,7 +6,7 @@ title: "Workflow: 5 Advisory Hooks (Context Injection)"
 version: 1.0.0
 created: 2026-03-24
 updated: 2026-03-24
-author: EDISON
+author: builder_agent
 quality: 9.0
 tags: [hooks, advisory, orchestration, workflow, context-injection]
 tldr: "5 advisory hook types that inject context without blocking: statusline, context-monitor, workflow-guard, prompt-guard, check-update. All exit 0 always."

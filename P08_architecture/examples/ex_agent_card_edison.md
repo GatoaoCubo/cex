@@ -6,7 +6,7 @@ title: "Satellite: builder_agent"
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: EDISON
+author: builder_agent
 quality: 9.5
 tags: [edison, agent_node, meta-construction, spec]
 tldr: "builder_agent is the #1 Meta-Construction Consultant — builds agents, prompts, workflows, and templates with Soberba Inventiva philosophy"

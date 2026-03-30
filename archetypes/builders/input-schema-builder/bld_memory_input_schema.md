@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-27
 updated: 2026-03-27
-author: edison
+author: builder_agent
 observation: "Input schemas with required fields that have default values create caller confusion — callers provide the default and the system rejects it as unnecessary. Optional fields without defaults force callers to handle None unexpectedly. Using 'any' or 'object' as a type without coercion rules causes silent data corruption downstream. Informative error messages that name the failing field and expected type reduce debug time by ~60% compared to generic 'validation error' messages."
 pattern: "Every field must have: type (specific, not 'any'), required (boolean), and if optional then a default value. Required fields never have defaults. Optional fields always have defaults. Coercion rules must be declared explicitly when the input type differs from the processing type (e.g., string->int). Error messages must name the field and the expected type, not just say 'invalid input'."
 evidence: "8 input schema reviews: 5 of 8 had required fields with defaults (caller confusion). 6 of 8 had at least one optional field without a default (None propagation bug). 3 of 8 used 'any' type on at least one field (silent coercion failure in 2 cases). Error messages with field names reduced caller debug time from avg 12min to avg 5min."

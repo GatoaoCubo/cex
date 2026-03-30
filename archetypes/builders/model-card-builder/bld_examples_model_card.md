@@ -18,7 +18,7 @@ pillar: P02
 version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
-author: "EDISON"
+author: "builder_agent"
 model_name: "claude-sonnet-4-20250514"
 provider: "anthropic"
 model_type: "text-generation"

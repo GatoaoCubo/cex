@@ -6,7 +6,7 @@ title: "Gate: schedule"
 version: "1.0.0"
 created: "2026-03-29"
 updated: "2026-03-29"
-author: "edison"
+author: "builder_agent"
 domain: "workflow scheduling — temporal trigger definitions that start workflows at declared times"
 quality: null
 tags: [quality-gate, schedule, P12, cron, temporal-trigger, workflow-ref]

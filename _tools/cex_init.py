@@ -300,7 +300,7 @@ def generate_codex(dest: Path, name: str, domain: str, quality: str) -> None:
 ---
 
 ## PROPOSITO
-Cerebro empresarial do projeto {name}.
+Knowledge base do projeto {name}.
 Hierarquia: CODEX > _schema > _generator > templates > instances
 
 ## VARIAVEIS

@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-27
 updated: 2026-03-27
-author: edison
+author: builder_agent
 observation: "Meta-construction requires two distinct reasoning modes: artifact-production (what the output should contain) and construction-protocol (what steps reliably produce that output). Conflating them produces builders that work once but cannot be generalized."
 pattern: "Separate schema definition from construction protocol. Write the output schema first, then derive the step sequence from the schema fields. Each builder step maps to exactly one required output field or section."
 evidence: "Builders produced with explicit schema-first protocol had 0 missing required fields. Builders produced without schema-first had 2-4 missing fields on average. Schema-first reduced revision cycles from 3.2 to 1.1."

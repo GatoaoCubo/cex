@@ -6,7 +6,7 @@ title: Conversational Agent Memory (Buffer + Summary + Entity)
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
-author: EDISON
+author: builder_agent
 domain: agent_memory
 quality: 9.0
 tags: [memory-scope, conversational, buffer, summary, entity, redis, session, mem0]

@@ -18,7 +18,7 @@ pillar: P05
 version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
-author: "EDISON"
+author: "builder_agent"
 target_format: "markdown"
 input_type: "structured_data"
 rule_count: 5

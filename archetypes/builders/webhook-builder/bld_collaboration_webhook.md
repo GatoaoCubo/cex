@@ -6,7 +6,7 @@ llm_function: CONTEXT
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
-author: EDISON
+author: builder_agent
 quality: null
 tags: [collaboration, webhook, P04, crew, integration, dependency]
 tldr: "webhook-builder crew role: EVENT-DRIVEN HTTP SPECIALIST. Integration Pipeline, Event System, Dual-Direction crew patterns."

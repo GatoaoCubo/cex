@@ -5,7 +5,7 @@ pillar: P04
 title: "CEX Distill — Template-driven knowledge extraction from raw input"
 version: 1.0.0
 created: 2026-03-28
-author: edison
+author: builder_agent
 tags: [cli, tool, cex, qa, distill, extraction, template]
 cli_command: "python _tools/distill.py"
 cli_args:

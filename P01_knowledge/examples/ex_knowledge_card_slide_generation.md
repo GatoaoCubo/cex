@@ -6,7 +6,7 @@ title: "CSV-Driven Slide Generation Pipeline with Design Tokens and Emotion Arcs
 version: 1.0.0
 created: 2026-03-26
 updated: 2026-03-26
-author: EDISON
+author: builder_agent
 domain: content_generation
 quality: null
 tags: [slides, html-generation, design-tokens, chart-js, emotion-arc, csv-pipeline, presentation]

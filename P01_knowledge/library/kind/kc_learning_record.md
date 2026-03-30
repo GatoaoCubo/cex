@@ -7,7 +7,7 @@ title: "Learning Record — Deep Knowledge for learning_record"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: SHAKA
+author: research_agent
 domain: learning_record
 quality: null
 tags: [learning_record, P10, INJECT, kind-kc]

@@ -6,7 +6,7 @@ title: "Amazon Ads Brasil: Benchmarks Operacionais de 2026"
 version: 2.0.0
 created: 2026-03-25
 updated: 2026-03-25
-author: EDISON
+author: builder_agent
 domain: research
 quality: null
 tags: [amazon-ads, brasil, acos, cpc, roas, benchmarks]

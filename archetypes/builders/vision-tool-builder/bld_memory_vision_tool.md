@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
-author: edison
+author: builder_agent
 observation: "Vision tools without declared confidence_threshold returned noisy low-confidence detections that corrupted 3 of 5 downstream data pipelines. Tools with explicit confidence_threshold (0.8+) and supported_formats declarations composed correctly in every integration reviewed."
 pattern: "Declare confidence_threshold explicitly. List supported_formats — providers differ significantly. Mirror capabilities list in frontmatter to body section names. Keep body under 2048 bytes. Always declare providers."
 evidence: "5 document pipelines: 3 failed with noise from unfiltered confidence; 0 failures after threshold was declared. Provider list omission caused 4 runtime surprises where callers sent unsupported formats."

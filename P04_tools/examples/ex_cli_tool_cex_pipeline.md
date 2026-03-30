@@ -5,7 +5,7 @@ pillar: P04
 title: "CEX Pipeline — 5-stage build engine (capture to envelope)"
 version: 1.0.0
 created: 2026-03-28
-author: edison
+author: builder_agent
 tags: [cli, tool, cex, core, pipeline, build, stages]
 cli_command: "python _tools/cex_pipeline.py"
 cli_args:

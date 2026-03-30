@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-27
 updated: 2026-03-27
-author: edison
+author: builder_agent
 observation: "Component maps that listed orphan components (present in the component table but absent from connections) provided false confidence about system boundaries. In 4 of 6 architecture reviews, orphan components concealed undocumented dependencies that caused production incidents."
 pattern: "Every component in the map must appear in at least one connection. Use explicit direction annotations on all connections. Scope to 3-15 components per map; split at 15."
 evidence: "6 architecture reviews: 4 had orphan components that concealed undocumented dependencies. After enforcing the no-orphan rule, all 4 systems revealed hidden dependencies on first validation pass."

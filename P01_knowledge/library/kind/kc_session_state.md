@@ -7,7 +7,7 @@ title: "Session State — Deep Knowledge for session_state"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: SHAKA
+author: research_agent
 domain: session_state
 quality: null
 tags: [session_state, P10, INJECT, kind-kc]

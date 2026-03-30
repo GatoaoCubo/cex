@@ -6,7 +6,7 @@ title: "Validation Schema: YAML Frontmatter"
 version: "1.0.0"
 created: "2026-03-28"
 updated: "2026-03-28"
-author: "EDISON"
+author: "builder_agent"
 target_kind: "all"
 format: "yaml"
 fields_count: 8

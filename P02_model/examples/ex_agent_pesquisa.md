@@ -6,7 +6,7 @@ title: Agente de Pesquisa de Mercado
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: SHAKA
+author: research_agent
 domain: research
 quality: 9.5
 tags: [pesquisa, mercado, concorrentes, analise, research]

@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-27
 updated: 2026-03-27
-author: edison
+author: builder_agent
 observation: "Formatters that omit locale for numeric output produce wrong decimal separators (1.000 vs 1,000 depending on locale). Missing null handling in transformation rules causes runtime crashes when optional fields are absent. Escaping mismatches — using HTML escaping rules for a JSON target or vice versa — corrupt output silently. rule_count field not matching the actual count of rules in the Formatting Rules table is caught by schema validator H07. Formatters that include extraction or validation logic grow unbounded and become unmaintainable."
 pattern: "Every rule in the Formatting Rules table specifies: input type, transformation applied, output example, and null behavior. Locale is declared at artifact level for number and date rules. Escaping strategy matches the target format: HTML uses entity encoding, JSON uses backslash escaping, markdown uses backslash for special chars. Null input must produce a documented fallback output, never a runtime error. Extraction belongs in parser (P05); validation belongs in validator (P06)."
 evidence: "8 formatter artifacts built. Formatters with explicit null handling had zero runtime crashes on optional fields vs 3 crashes without. Locale-declared formatters produced correct output on first use; locale-absent formatters required 2-3 rework cycles for currency and date fields. rule_count mismatch caught by H07 in 3 of 8 builds."

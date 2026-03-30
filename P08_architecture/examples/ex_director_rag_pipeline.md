@@ -5,7 +5,7 @@ pillar: P08
 version: "1.0.0"
 created: "2026-03-28"
 updated: "2026-03-28"
-author: "EDISON"
+author: "builder_agent"
 name: "RAG Pipeline Director"
 description: "Orchestrates the RAG pipeline: document ingestion, chunking, embedding, indexing, retrieval, and generation"
 crew_size: 5

@@ -4,7 +4,7 @@ pillar: P04
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
-author: edison
+author: builder_agent
 name: Playwright Browser Automation
 engine: 'Engine: Playwright (Chromium). Headless: true. Viewport: 1280x720. Timeout: 30000ms per action. JavaScript: enabled.'
 actions: ''

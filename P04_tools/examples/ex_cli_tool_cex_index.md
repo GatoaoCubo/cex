@@ -5,7 +5,7 @@ pillar: P04
 title: "CEX Index — SQLite indexer with wikilinks and frontmatter"
 version: 1.0.0
 created: 2026-03-28
-author: edison
+author: builder_agent
 tags: [cli, tool, cex, governance, index, sqlite, search]
 cli_command: "python _tools/cex_index.py"
 cli_args:

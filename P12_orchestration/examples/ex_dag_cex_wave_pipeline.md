@@ -6,7 +6,7 @@ title: "DAG: CEX Wave Migration Pipeline"
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: PYTHA
+author: knowledge_agent
 quality: 9.0
 tags: [dag, cex, migration, pipeline, waves]
 tldr: "7-wave DAG for migrating 9916 organization-core MD files into CEX — P01 KCs first, then prompts/skills, then agents, then infra/P08-P12"

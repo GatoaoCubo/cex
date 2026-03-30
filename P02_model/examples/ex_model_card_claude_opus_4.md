@@ -11,7 +11,7 @@ pricing:
   unit: per_1M_tokens
 version: 1.0.0
 created: 2026-03-24
-author: STELLA
+author: orchestrator
 domain: model_selection
 quality: 9.0
 tags: [model-card, opus, anthropic, pricing, capabilities]

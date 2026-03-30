@@ -43,7 +43,7 @@ Rule: id MUST equal filename stem.
 3. `## Output Format` — Response structure, format constraints, expected deliverable shape.
 4. `## Constraints` — Knowledge boundary (positive + negative scope), delegation boundaries, what NOT to do.
 ## Size Calibration
-| Metric | CEX Builders | Codexa-Core Legacy | Limit |
+| Metric | CEX Builders | Legacy System | Limit |
 |--------|-------------|-------------------|-------|
 | Avg body bytes | 1,620 | ~6,500 | - |
 | Max body bytes | 2,842 | ~18,000 | - |
@@ -51,7 +51,7 @@ Rule: id MUST equal filename stem.
 | Body tokens | 3,000-3,500 | varies | ~4,500 |
 | Identity lines | 8-15 | varies | 25 |
 | Rules count | 8-12 | varies | 20 |
-> **Note**: max_bytes = 4096 applies to CEX-format artifacts. Codexa-core legacy system prompts may exceed this — they predate the schema and are not subject to this constraint.
+> **Note**: max_bytes = 4096 applies to CEX-format artifacts. Legacy system prompts may exceed this — they predate the schema and are not subject to this constraint.
 ## Constraints
 - max_bytes: 4096 (body only, CEX artifacts)
 - naming: p03_sp_{agent_slug}.md

@@ -6,7 +6,7 @@ title: "Gate: Hook"
 version: "1.0.0"
 created: "2026-03-27"
 updated: "2026-03-27"
-author: "edison"
+author: "builder_agent"
 domain: "hook — pre/post event interceptors for system lifecycle events"
 quality: null
 tags: [quality-gate, hook, event, lifecycle, trigger, intercept]

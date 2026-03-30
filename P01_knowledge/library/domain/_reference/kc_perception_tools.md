@@ -7,7 +7,7 @@ title: "Perception Tools — Audio Processing, Vision/Image, CLI Automation, Bac
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
-author: EDISON
+author: builder_agent
 domain: perception
 origin: manual
 quality: 9.0

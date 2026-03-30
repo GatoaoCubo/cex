@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
-author: edison
+author: builder_agent
 observation: "LLM judges without scale anchors produced score variance of +/- 1.8 points on a 1-5 scale across identical inputs in 5 of 7 eval runs reviewed. Judges with concrete behavioral anchors reduced variance to +/- 0.3 points. Few-shot examples with rationale were the second most impactful calibration factor."
 pattern: "Define scale anchors as concrete observable behaviors. Include at least 2 few_shot examples with chain-of-thought rationale. Set temperature: 0.0. Use judge_model from a different model family than the evaluated model. Keep criteria count <= 5 and verify non-overlap before publishing."
 evidence: "7 eval pipelines: 5 showed high variance without behavioral anchors; 0 high variance after anchors + few_shot added. Self-enhancement bias observed in 3/3 cases where judge_model matched evaluated_model family."

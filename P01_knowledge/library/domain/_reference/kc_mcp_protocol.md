@@ -7,7 +7,7 @@ title: 'MCP Protocol: Tools, Resources, Prompts, Transport, Capabilities'
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
-author: EDISON
+author: builder_agent
 domain: mcp_protocol
 origin: src_provider_taxonomy
 quality: 9.0

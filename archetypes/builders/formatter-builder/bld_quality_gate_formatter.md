@@ -6,7 +6,7 @@ title: "Gate: formatter"
 version: "1.0.0"
 created: "2026-03-27"
 updated: "2026-03-27"
-author: "edison"
+author: "builder_agent"
 domain: "formatter — output transformation rules converting structured data to readable or consumable representations"
 quality: null
 tags: [quality-gate, formatter, output-format, transformation, P11]

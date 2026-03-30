@@ -6,7 +6,7 @@ pillar: P01
 title: Schema Validation -- Types, Enums, Interfaces, Validators
 version: 1.0.0
 created: '2026-03-29'
-author: STELLA
+author: orchestrator
 domain: schema
 origin: manual
 quality: 8.5

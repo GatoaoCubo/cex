@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-27
 updated: 2026-03-27
-author: edison
+author: builder_agent
 observation: "Benchmarks without baselines measure nothing reproducible. The most common defect is defining a target metric without a corresponding baseline measurement from an existing system or known-state condition. Without a baseline, a benchmark score has no reference frame."
 pattern: "Always establish baseline before target. Measure the existing system (or a simple reference implementation) first. Set target as a percentage improvement over baseline, not as an absolute value. Document measurement methodology with enough detail that a different operator produces the same result within 5%."
 evidence: "22 benchmark designs reviewed: 8 defined absolute targets without baselines. Of those 8, none were reproducible across operators (variance >20%). 14 defined targets as improvements over documented baselines - 11 of 14 reproduced within 5% variance across operators."

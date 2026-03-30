@@ -6,7 +6,7 @@ title: "Gate: daemon"
 version: "1.0.0"
 created: "2026-03-27"
 updated: "2026-03-27"
-author: "edison"
+author: "builder_agent"
 domain: "daemon — persistent background processes with lifecycle management"
 quality: null
 tags: [quality-gate, daemon, background-process, lifecycle, P11]

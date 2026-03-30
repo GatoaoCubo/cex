@@ -6,7 +6,7 @@ description: "Ephemeral session state tracking active agent_node dispatches"
 scope: stella_session
 version: 1.0.0
 created: 2026-03-24
-author: edison
+author: builder_agent
 quality: 9.0
 tags: [session-state, dispatch, tracking, ephemeral]
 ---

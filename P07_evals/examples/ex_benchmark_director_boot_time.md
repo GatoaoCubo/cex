@@ -6,7 +6,7 @@ description: "Benchmark for agent_node boot times across all providers"
 metric: boot_time_seconds
 version: 1.0.0
 created: 2026-03-24
-author: atlas
+author: operations_agent
 quality: 9.0
 tags: [benchmark, performance, boot, agent_node]
 ---

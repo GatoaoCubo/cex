@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-27
 updated: 2026-03-27
-author: edison
+author: builder_agent
 observation: "Handoff documents without explicit scope fences cause agents to touch unintended files. Scope fence sections with permitted/prohibited path lists reduce out-of-scope edits by ~90%. Vague task descriptions produce ambiguous deliverables and retry loops. Structured section order (CONTEXT, TASKS, SCOPE FENCE, COMMIT, SIGNAL) yields deterministic execution. Missing signal sections cause completion to go undetected. Commit commands using absolute paths break portability across machines."
 pattern: "A handoff document with a mandatory SCOPE FENCE section (SOMENTE + NAO TOQUE subsections), numbered atomic task steps each with one action verb, and a SIGNAL section eliminates scope drift and silent completion. Each task step must reference concrete paths or commands. Open decisions must be marked with [BRACKETS]. Commit command must use relative paths and match SOMENTE exactly."
 evidence: "12 handoff-driven executions: 0 out-of-scope edits with SCOPE FENCE present vs ~4 per run without. Retry rate per task: 2.1 -> 0.3. Deliverable acceptance on first attempt: 68% -> 97%. Batches missing SIGNAL required manual detection in 100% of cases."

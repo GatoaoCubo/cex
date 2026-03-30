@@ -111,7 +111,7 @@ def generate_codex(dest: Path, project_name: str, lp_names: list[str]) -> None:
 ---
 
 ## PROPOSITO
-Cerebro empresarial do projeto {project_name}.
+Knowledge base do projeto {project_name}.
 Hierarquia: CODEX > _schema > _generator > templates > instances
 
 ## VARIAVEIS
@@ -188,7 +188,7 @@ def generate_readme(dest: Path, project_name: str, lp_names: list[str], stats: d
 
     content = f"""# {project_name}
 
-Cerebro empresarial construido com [CEX](https://github.com/sniff-group/cex).
+Knowledge base construido com [CEX](https://github.com/sniff-group/cex).
 
 ## Quick Start
 

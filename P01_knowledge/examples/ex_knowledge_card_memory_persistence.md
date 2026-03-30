@@ -6,7 +6,7 @@ title: "Dual Persistence: SQLite + Chroma for LLM Agent Memory"
 version: 1.0.0
 created: 2026-03-26
 updated: 2026-03-26
-author: EDISON
+author: builder_agent
 domain: cex_taxonomy
 quality: null
 tags: [memory, sqlite, chroma, vector-search, persistence, hybrid-search]

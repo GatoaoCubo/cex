@@ -7,7 +7,7 @@ title: "Component Map — Deep Knowledge for component_map"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: york
+author: commercial_agent
 domain: component_map
 quality: null
 tags: [component_map, P08, INJECT, kind-kc]

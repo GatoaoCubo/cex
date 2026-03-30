@@ -8,7 +8,7 @@ llm_function: CALL
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
-author: EDISON
+author: builder_agent
 tags: [kind-builder, memory-summary, P10, memory, compression, runtime]
 ---
 

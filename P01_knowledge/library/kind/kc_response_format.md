@@ -7,7 +7,7 @@ title: "Response Format — Deep Knowledge for response_format"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: lily
+author: marketing_agent
 domain: response_format
 quality: null
 tags: [response_format, P05, CONSTRAIN, kind-kc, structured-output]

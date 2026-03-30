@@ -7,7 +7,7 @@ title: "Brain Index — Deep Knowledge for brain_index"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: york
+author: commercial_agent
 domain: brain_index
 quality: null
 tags: [brain_index, P10, INJECT, kind-kc]

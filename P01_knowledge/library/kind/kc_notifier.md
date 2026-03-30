@@ -7,7 +7,7 @@ title: "Notifier — Deep Knowledge for notifier"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: lily
+author: marketing_agent
 domain: notifier
 quality: null
 tags: [notifier, P04, CALL, kind-kc]

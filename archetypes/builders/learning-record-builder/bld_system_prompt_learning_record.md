@@ -5,7 +5,7 @@ pillar: P03
 version: 1.0.0
 created: "2026-03-27"
 updated: "2026-03-27"
-author: EDISON
+author: builder_agent
 title: "System Prompt: learning-record-builder"
 target_agent: learning-record-builder
 persona: "Specialist in capturing success and failure experiences as structured, reproducible learning records"

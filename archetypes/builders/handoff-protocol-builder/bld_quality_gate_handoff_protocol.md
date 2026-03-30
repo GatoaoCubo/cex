@@ -6,7 +6,7 @@ title: "Gate: handoff_protocol"
 version: "1.0.0"
 created: "2026-03-29"
 updated: "2026-03-29"
-author: "edison"
+author: "builder_agent"
 domain: "agent-to-agent handoff and context transfer"
 quality: null
 tags: [quality-gate, handoff-protocol, P02]

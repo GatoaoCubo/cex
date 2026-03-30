@@ -6,7 +6,7 @@ pillar: P01
 title: Governance -- Laws, Component Maps, Diagrams, Decision Records
 version: 1.0.0
 created: '2026-03-29'
-author: STELLA
+author: orchestrator
 domain: governance
 origin: manual
 quality: 8.5

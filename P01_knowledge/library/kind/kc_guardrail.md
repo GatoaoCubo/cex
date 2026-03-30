@@ -7,7 +7,7 @@ title: "Guardrail — Deep Knowledge for guardrail"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: SHAKA
+author: research_agent
 domain: guardrail
 quality: null
 tags: [guardrail, P11, CONSTRAIN, kind-kc]

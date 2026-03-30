@@ -7,7 +7,7 @@ title: "Checkpoint — Deep Knowledge for checkpoint"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: SHAKA
+author: research_agent
 domain: checkpoint
 quality: null
 tags: [checkpoint, P12, GOVERN, kind-kc]

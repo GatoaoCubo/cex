@@ -6,7 +6,7 @@ parent: law-builder
 version: 1.0.0
 created: "2026-03-26"
 updated: "2026-03-26"
-author: EDISON
+author: builder_agent
 tags: [tools, law-builder, data-sources, P08]
 ---
 

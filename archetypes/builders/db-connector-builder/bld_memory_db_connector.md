@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-27
 updated: 2026-03-27
-author: edison
+author: builder_agent
 observation: "Connectors built without idempotency strategy on inbound webhooks produced duplicate records in 3 of 5 integrations when the external service retried delivery. Connectors without health_check definitions failed silently for hours before detection. Both issues are preventable at spec time."
 pattern: "Bidirectional connectors require idempotency strategy for inbound paths and a health_check definition. Use connector pattern when integration involves both outbound calls and inbound webhooks; use client pattern when integration is outbound-only."
 evidence: "5 bidirectional integrations: 3 duplicate record incidents from missing idempotency on inbound webhooks. 2 extended silent failures from missing health_check. Zero incidents in connectors where both were specified at build time."

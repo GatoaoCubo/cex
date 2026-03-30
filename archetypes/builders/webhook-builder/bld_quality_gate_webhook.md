@@ -6,7 +6,7 @@ llm_function: CONSTRAIN
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
-author: EDISON
+author: builder_agent
 target_kind: webhook
 hard_gates: 10
 soft_dims: 12

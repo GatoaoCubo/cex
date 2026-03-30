@@ -6,7 +6,7 @@ title: "Gate: benchmark"
 version: "1.0.0"
 created: "2026-03-27"
 updated: "2026-03-27"
-author: "edison"
+author: "builder_agent"
 domain: benchmark
 quality: null
 tags: [quality-gate, benchmark, P11, P07, governance, performance, measurement]

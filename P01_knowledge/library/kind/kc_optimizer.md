@@ -7,7 +7,7 @@ title: "Optimizer — Deep Knowledge for optimizer"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: SHAKA
+author: research_agent
 domain: optimizer
 quality: null
 tags: [optimizer, P11, GOVERN, kind-kc]

@@ -7,7 +7,7 @@ title: "Chain — Deep Knowledge for chain"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: ATLAS
+author: operations_agent
 domain: chain
 quality: null
 tags: [chain, P03, PRODUCE, kind-kc]

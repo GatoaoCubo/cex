@@ -6,7 +6,7 @@ title: "CEX LP12 Orchestration — Multi-Agent Coordination Mechanics"
 version: 1.0.0
 created: 2026-03-25
 updated: 2026-03-25
-author: EDISON
+author: builder_agent
 domain: cex_taxonomy
 quality: null
 tags: [cex, lp12, orchestration, workflow, spawn, signal, handoff, crew]

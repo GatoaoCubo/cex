@@ -7,7 +7,7 @@ purpose: Runtime configuration constraints for notifier artifacts
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
-author: EDISON
+author: builder_agent
 tags: [config, notifier, P04, constraints]
 quality: null
 tldr: "Naming rules, size limits, channel enum, priority enum, rate limit conventions, and provider-specific constraints for notifier artifacts."

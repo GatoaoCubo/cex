@@ -6,7 +6,7 @@ title: "Workflow: orchestrator 5-Phase Dispatch"
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: EDISON
+author: builder_agent
 quality: 9.5
 tags: [stella, dispatch, workflow, orchestration]
 tldr: "orchestrator's mandatory 5-phase dispatch: CLARIFY > ENRICH > COMPOSE > EXECUTE > MONITOR — orchestrates without executing"

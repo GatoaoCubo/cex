@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
-author: edison
+author: builder_agent
 observation: "Function definitions without LLM-facing descriptions caused 60% misrouting — LLMs called wrong functions or hallucinated parameters. Functions with clear 'call when...' descriptions had 95% correct routing. Deep nesting (>2 levels) reduced parameter accuracy from 92% to 67% across providers."
 pattern: "Write description as 'Call when [condition]. Use for [purpose].' Keep parameters flat (max 2 levels nesting). Use enum for finite option sets. Always include required array. Provide 2+ examples."
 evidence: "Analysis of 50 function definitions across 4 providers: description quality = strongest predictor of correct invocation. Flat schemas outperformed nested by 25% accuracy."

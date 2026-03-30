@@ -7,7 +7,7 @@ title: "CLI Tool — Deep Knowledge for cli_tool"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: ATLAS
+author: operations_agent
 domain: cli_tool
 quality: null
 tags: [cli_tool, P04, CALL, kind-kc]

@@ -7,7 +7,7 @@ title: "Parser — Deep Knowledge for parser"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: lily
+author: marketing_agent
 domain: parser
 quality: null
 tags: [parser, P05, GOVERN, kind-kc, extraction]

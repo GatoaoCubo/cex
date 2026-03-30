@@ -7,7 +7,7 @@ title: "API Client — Deep Knowledge for api_client"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: ATLAS
+author: operations_agent
 domain: api_client
 quality: null
 tags: [api_client, P04, CALL, kind-kc]

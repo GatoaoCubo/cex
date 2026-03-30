@@ -7,7 +7,7 @@ title: "MCP Server — Deep Knowledge for mcp_server"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: lily
+author: marketing_agent
 domain: mcp_server
 quality: null
 tags: [mcp_server, P04, CALL, kind-kc, mcp]

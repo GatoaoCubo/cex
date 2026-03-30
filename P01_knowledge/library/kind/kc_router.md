@@ -7,7 +7,7 @@ title: "Router — Deep Knowledge for router"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: ATLAS
+author: operations_agent
 domain: router
 quality: null
 tags: [router, P02, REASON, kind-kc]

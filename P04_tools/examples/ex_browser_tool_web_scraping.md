@@ -7,7 +7,7 @@ pillar: P04
 kind: browser_tool
 created: 2026-03-23
 updated: 2026-03-23
-author: EDISON
+author: builder_agent
 domain: data_collection
 quality: 9.0
 tags: [scraping, selenium, playwright, beautifulsoup, data-extraction]

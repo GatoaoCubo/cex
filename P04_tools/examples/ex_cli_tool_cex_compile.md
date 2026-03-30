@@ -5,7 +5,7 @@ pillar: P04
 title: "CEX Compile — Markdown to YAML/JSON compiler"
 version: 1.0.0
 created: 2026-03-28
-author: edison
+author: builder_agent
 tags: [cli, tool, cex, core, compile, yaml, json]
 cli_command: "python _tools/cex_compile.py"
 cli_args:

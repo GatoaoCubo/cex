@@ -6,7 +6,7 @@ llm_function: DEMONSTRATE
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
-author: EDISON
+author: builder_agent
 quality: null
 tags: [examples, webhook, P04, golden, anti-pattern]
 tldr: "Golden: Stripe payment.completed inbound webhook. Anti: minimal broken artifact with annotated gate failures."
@@ -23,7 +23,7 @@ pillar: P04
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
-author: EDISON
+author: builder_agent
 name: "Stripe Payment Completed"
 direction: inbound
 event_type: "payment_intent.succeeded"

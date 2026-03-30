@@ -4,7 +4,7 @@ pillar: P04
 title: Changelog Gen — Generate changelog from git log grouped by LP
 version: 1.0.0
 created: 2026-03-28
-author: edison
+author: builder_agent
 tags:
 - cli
 - tool

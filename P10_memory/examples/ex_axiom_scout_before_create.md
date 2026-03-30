@@ -6,7 +6,7 @@ title: "Axiom: Scout Before Create (Law 8)"
 version: 3.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: PYTHA
+author: knowledge_agent
 quality: 9.5
 tags: [axiom, scout, law8, discovery, pool]
 tldr: "LAW 8: Always Glob/Grep before Write. Never duplicate pool artifacts. 60% similarity = adapt existing; <60% = build new"

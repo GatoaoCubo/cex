@@ -6,7 +6,7 @@ title: "Gate: regression_check"
 version: "1.0.0"
 created: "2026-03-29"
 updated: "2026-03-29"
-author: "edison"
+author: "builder_agent"
 domain: "baseline comparison configuration — current vs prior experiment for detecting quality regressions in LLM pipelines"
 quality: null
 tags: [quality-gate, regression-check, P07, evals, baseline, threshold]

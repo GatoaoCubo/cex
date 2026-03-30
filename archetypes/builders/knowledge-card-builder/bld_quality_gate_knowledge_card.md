@@ -6,7 +6,7 @@ title: "Gate: Knowledge Card"
 version: "1.0.0"
 created: "2026-03-27"
 updated: "2026-03-27"
-author: "edison"
+author: "builder_agent"
 domain: "knowledge_card — atomic searchable facts with high information density"
 quality: null
 tags: [quality-gate, knowledge-card, density, fact, distillation, searchability]

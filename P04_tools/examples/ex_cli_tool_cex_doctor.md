@@ -5,7 +5,7 @@ pillar: P04
 title: "CEX Doctor — Naming, density, and 13-file completeness checker"
 version: 1.0.0
 created: 2026-03-28
-author: edison
+author: builder_agent
 tags: [cli, tool, cex, governance, doctor, validation, health]
 cli_command: "python _tools/cex_doctor.py"
 cli_args:

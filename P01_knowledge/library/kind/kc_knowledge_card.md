@@ -7,7 +7,7 @@ title: "Knowledge Card — Deep Knowledge for knowledge_card"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: edison
+author: builder_agent
 domain: knowledge_card
 quality: null
 tags: [knowledge_card, p01, INJECT, kind-kc]

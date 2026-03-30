@@ -6,7 +6,7 @@ title: "Gate: golden_test"
 version: "1.0.0"
 created: "2026-03-27"
 updated: "2026-03-27"
-author: "edison"
+author: "builder_agent"
 domain: "golden_test — reference quality calibration cases scoring 9.5+ with rationale mapped to evaluation gates"
 quality: null
 tags: [quality-gate, golden-test, calibration, evaluation, quality-baseline, P11]

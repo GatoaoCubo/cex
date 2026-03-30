@@ -6,7 +6,7 @@ title: Research-to-Build Handoff (research_agent to builder_agent)
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
-author: EDISON
+author: builder_agent
 domain: orchestration
 quality: 9.0
 tags: [handoff-protocol, shaka, edison, research, build, agent_node, a2a]

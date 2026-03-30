@@ -7,7 +7,7 @@ title: "Input Schema — Deep Knowledge for input_schema"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: PYTHA
+author: knowledge_agent
 domain: input_schema
 quality: null
 tags: [input_schema, P06, CONSTRAIN, kind-kc]

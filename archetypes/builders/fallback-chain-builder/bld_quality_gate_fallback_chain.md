@@ -6,7 +6,7 @@ title: "Gate: fallback_chain"
 version: "1.0.0"
 created: "2026-03-27"
 updated: "2026-03-27"
-author: "edison"
+author: "builder_agent"
 domain: "fallback_chain — model degradation sequences with timeouts, circuit breakers, and cost controls"
 quality: null
 tags: [quality-gate, fallback-chain, resilience, model-degradation, P11]

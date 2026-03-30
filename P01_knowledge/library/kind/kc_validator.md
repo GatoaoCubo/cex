@@ -7,7 +7,7 @@ title: "Validator — Deep Knowledge for validator"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: PYTHA
+author: knowledge_agent
 domain: validator
 quality: null
 tags: [validator, P06, GOVERN, kind-kc]

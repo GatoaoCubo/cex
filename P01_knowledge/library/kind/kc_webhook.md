@@ -7,7 +7,7 @@ title: "Webhook — Deep Knowledge for webhook"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: lily
+author: marketing_agent
 domain: webhook
 quality: null
 tags: [webhook, P04, CALL, kind-kc, event-driven]

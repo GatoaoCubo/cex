@@ -7,7 +7,7 @@ title: "Permission — Deep Knowledge for permission"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: york
+author: commercial_agent
 domain: permission
 quality: null
 tags: [permission, P09, GOVERN, kind-kc]

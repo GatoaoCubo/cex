@@ -7,7 +7,7 @@ title: "Law — Deep Knowledge for law"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: york
+author: commercial_agent
 domain: law
 quality: null
 tags: [law, P08, CONSTRAIN, kind-kc]

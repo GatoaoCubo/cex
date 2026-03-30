@@ -6,7 +6,7 @@ title: "Skill Format Universal — Frontmatter YAML + Markdown para Agentes LLM"
 version: 1.0.0
 created: 2026-03-26
 updated: 2026-03-26
-author: EDISON
+author: builder_agent
 domain: knowledge_engineering
 quality: null
 tags: [skill-format, plugin-system, agent-skills, frontmatter, composable-skills]

@@ -6,7 +6,7 @@ title: "Spawn Config: Grid Continuous Mode"
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: PYTHA
+author: knowledge_agent
 quality: 9.0
 tags: [spawn, config, grid, continuous, orchestration]
 tldr: "Continuous grid spawn: auto-fill slots on completion, 3 max concurrent, 5s delay, handoffs named batch_{N}_{sat}.md"

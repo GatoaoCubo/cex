@@ -6,7 +6,7 @@ title: Agente Estrategista de Catalogo Mercado Livre
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: EDISON
+author: builder_agent
 domain: marketplace
 quality: 9.0
 tags: [mercado-livre, catalogo, buy-box, estrategia, marketplace]

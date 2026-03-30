@@ -7,7 +7,7 @@ title: "Embedding Config — Deep Knowledge for embedding_config"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: edison
+author: builder_agent
 domain: embedding_config
 quality: null
 tags: [embedding_config, p01, GOVERN, kind-kc]

@@ -7,7 +7,7 @@ title: "Chunk Strategy — Deep Knowledge for chunk_strategy"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: edison
+author: builder_agent
 domain: chunk_strategy
 quality: null
 tags: [chunk_strategy, p01, CONSTRAIN, kind-kc]

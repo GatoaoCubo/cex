@@ -5,7 +5,7 @@ pillar: P03
 version: "1.0.0"
 created: "2026-03-28"
 updated: "2026-03-28"
-author: "EDISON"
+author: "builder_agent"
 title: "Instruction: Code Review Checklist"
 target: "code-reviewer agent or human reviewer"
 steps_count: 6

@@ -6,7 +6,7 @@ title: "Law 13: Shokunin — Quality Excellence"
 version: 3.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: PYTHA
+author: knowledge_agent
 quality: 9.5
 tags: [law, shokunin, quality, excellence, golden]
 tldr: "LAW 13: Every output must pass the Shokunin test — 'Would I be proud of this?' Hesitation = iterate. Quality floor 8.0, Golden >= 9.5"

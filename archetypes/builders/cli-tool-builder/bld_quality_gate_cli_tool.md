@@ -6,7 +6,7 @@ title: "Gate: cli_tool"
 version: "1.0.0"
 created: "2026-03-27"
 updated: "2026-03-27"
-author: "edison"
+author: "builder_agent"
 domain: "command-line tool definition — point-in-time executables with declared commands, flags, and exit codes"
 quality: null
 tags: [quality-gate, cli-tool, P04, command-line, exit-codes, output-format]

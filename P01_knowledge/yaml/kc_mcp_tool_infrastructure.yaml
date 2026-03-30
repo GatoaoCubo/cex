@@ -10,7 +10,7 @@ title: "Claude MCP Tool Infrastructure — Connector, Skills, Search, Programmat
 version: 2.0.0
 created: 2026-02-23
 updated: 2026-03-25
-author: STELLA
+author: orchestrator
 domain: architecture
 quality: 9.5
 tags: [mcp, tools, infrastructure, api, scaling, claude]

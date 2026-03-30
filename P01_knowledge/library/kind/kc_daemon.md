@@ -7,7 +7,7 @@ title: "Daemon — Deep Knowledge for daemon"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: ATLAS
+author: operations_agent
 domain: daemon
 quality: null
 tags: [daemon, P04, GOVERN, kind-kc]

@@ -8,7 +8,7 @@ llm_function: INJECT
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
-author: EDISON
+author: builder_agent
 tags: [kind-builder, document-loader, P04, tools, ingestion, chunking, RAG]
 ---
 

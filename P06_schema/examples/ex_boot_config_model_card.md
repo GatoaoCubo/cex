@@ -7,7 +7,7 @@ title: "Blueprint: model_card — Meta-Template para Producao de Model Cards"
 version: 1.0.0
 created: 2026-03-26
 updated: 2026-03-26
-author: EDISON
+author: builder_agent
 quality: null
 tags: [blueprint, model-card, meta-template, production-mold, llm-spec]
 tldr: "Meta-template que define COMO gerar model_cards validos — frontmatter layered, capabilities como booleans, pricing normalizado, freshness 90d"
@@ -279,7 +279,7 @@ pillar: P02
 version: 1.0.0
 created: 2026-03-26
 updated: 2026-03-26
-author: EDISON
+author: builder_agent
 model_name: claude-sonnet-4-20250514
 provider: anthropic
 model_type: text-generation

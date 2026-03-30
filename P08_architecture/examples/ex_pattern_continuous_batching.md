@@ -6,7 +6,7 @@ title: "Pattern: Continuous Batching (Satellite Grid)"
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: PYTHA
+author: knowledge_agent
 quality: 9.2
 tags: [pattern, continuous-batching, grid, dispatch, orchestration]
 tldr: "When queue > slots: fill slots immediately as they complete instead of waiting for entire wave — 1.6x speedup on 7+ task missions"

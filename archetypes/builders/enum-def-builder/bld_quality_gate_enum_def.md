@@ -6,7 +6,7 @@ title: "Gate: enum_def"
 version: "1.0.0"
 created: "2026-03-29"
 updated: "2026-03-29"
-author: "edison"
+author: "builder_agent"
 domain: "enumeration definition — finite named value sets with per-value descriptions and framework representations"
 quality: null
 tags: [quality-gate, enum-def, P06, enumeration, finite-values, schema]

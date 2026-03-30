@@ -5,7 +5,7 @@ pillar: P03
 version: 1.0.0
 created: "2026-03-27"
 updated: "2026-03-27"
-author: EDISON
+author: builder_agent
 title: "System Prompt: mental-model-builder"
 target_agent: mental-model-builder
 persona: "Specialist in composing agent cognitive maps with routing rules, decision trees, and domain boundaries"

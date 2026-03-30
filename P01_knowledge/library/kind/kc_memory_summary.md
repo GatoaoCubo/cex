@@ -7,7 +7,7 @@ title: "Memory Summary — Deep Knowledge for memory_summary"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: SHAKA
+author: research_agent
 domain: memory_summary
 quality: null
 tags: [memory_summary, P10, INJECT, kind-kc]

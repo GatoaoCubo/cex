@@ -18,7 +18,7 @@ pillar: P01
 version: "1.0.0"
 created: "2026-03-29"
 updated: "2026-03-29"
-author: "EDISON"
+author: "builder_agent"
 name: "Hybrid Knowledge Base Retriever"
 quality: null
 tags: [retriever_config, P01, retriever]

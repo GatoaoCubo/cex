@@ -7,7 +7,7 @@ title: "Rate Limit Config — Deep Knowledge for rate_limit_config"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: york
+author: commercial_agent
 domain: rate_limit_config
 quality: null
 tags: [rate_limit_config, P09, CONSTRAIN, kind-kc]

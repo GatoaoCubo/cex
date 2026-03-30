@@ -6,7 +6,7 @@ title: "Mental Model: builder_agent"
 version: 2.0.0
 created: 2025-12-16
 updated: 2026-03-22
-author: EDISON
+author: builder_agent
 quality: 9.5
 tags: [edison, agent_node, meta-construction, mental-model, memory]
 tldr: "builder_agent is the meta-construction agent_node with Soberba Inventiva philosophy — builds agents, templates, workflows at quality floor 8.5"

@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-27
 updated: 2026-03-27
-author: edison
+author: builder_agent
 observation: "Fallback chains without explicit timeout_per_step_ms hang indefinitely on degraded endpoints. Steps ordered by capability descending without cost_weight analysis burn budget on expensive fallbacks. Circuit breakers absent from chain definitions cause retry storms hitting degraded models 10+ times. Quality thresholds set to 0 on all steps pass junk output; set above 0.9 cause excessive step advancement on healthy models. Single-step chains are schema violations — minimum 2 steps required."
 pattern: "Each step must declare model, timeout_per_step_ms, quality_threshold, and cost_weight. Order steps by decreasing capability. Before dispatch, sum cost_weight across all steps to surface worst-case spend. Implement circuit breaker: trip at 3 consecutive failures within 60s, reset after 120s cool-down. Terminal step must be a static response so the chain always resolves. Advance to next step when output quality is below threshold, not only on error."
 evidence: "10 chain artifacts reviewed across P02. Chains with timeout_per_step had zero hang incidents vs 11 retry loops without. Cost-aware step ordering reduced average chain spend 34% vs latency-only ordering. Circuit breaker prevented 3 thundering-herd events on degraded model endpoints."

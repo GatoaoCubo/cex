@@ -7,7 +7,7 @@ title: "Context Doc — Deep Knowledge for context_doc"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: edison
+author: builder_agent
 domain: context_doc
 quality: null
 tags: [context_doc, p01, INJECT, kind-kc]

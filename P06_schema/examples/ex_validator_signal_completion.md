@@ -6,7 +6,7 @@ description: "Output schema for agent_node completion signals"
 format: json
 version: 1.0.0
 created: 2026-03-24
-author: edison
+author: builder_agent
 quality: 9.0
 tags: [output-schema, signal, completion, json]
 ---

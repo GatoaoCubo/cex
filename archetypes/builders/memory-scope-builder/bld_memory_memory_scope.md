@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
-author: edison
+author: builder_agent
 observation: "memory_scope artifacts require concrete parameter values with rationale. Placeholder values cause downstream failures."
 pattern: "Define all parameters with concrete values and rationale. Validate against SCHEMA.md. Keep body under 2048 bytes."
 evidence: "Pattern extracted from CrewAI MemoryScope, Mastra memory, Mem0, LangChain ConversationBufferMemory, LlamaIndex ChatMemoryBuffer documentation and production usage."

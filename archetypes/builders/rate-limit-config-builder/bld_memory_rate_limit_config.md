@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
-author: edison
+author: builder_agent
 observation: "Rate limit configs with fictional or placeholder RPM/TPM values caused 429 floods in 5 out of 8 production integrations reviewed. Configs that matched actual provider tier documentation and included retry_after had zero unexpected 429 cascades. Budget caps without alert_threshold caused billing surprises in 3 cases."
 pattern: "Use real documented provider limits. Set alert_threshold at 0.8. Include retry_after from provider 429 headers. Separate rate_limit_config from runtime_rule — quotas declared here, backoff logic elsewhere."
 evidence: "8 integrations: 5 failed with fictional limits; 0 failures after aligning with provider docs. 3 billing surprises: all lacked alert_threshold. 2 retry storms: both lacked retry_after."

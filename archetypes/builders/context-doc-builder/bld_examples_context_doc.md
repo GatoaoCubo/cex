@@ -15,7 +15,7 @@ pillar: P01
 version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
-author: EDISON
+author: builder_agent
 domain: ecommerce_imports
 scope: "Brazilian import regulations for marketplace sellers, 2025-2026 enforcement cycle"
 quality: null
@@ -74,7 +74,7 @@ pillar: P01
 version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
-author: EDISON
+author: builder_agent
 domain: imports
 quality: 8.5
 tags: [context-doc]

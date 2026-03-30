@@ -7,7 +7,7 @@ title: "Output Validator — Deep Knowledge for output_validator"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: lily
+author: marketing_agent
 domain: output_validator
 quality: null
 tags: [output_validator, P05, GOVERN, kind-kc, validation]

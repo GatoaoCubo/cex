@@ -5,7 +5,7 @@ pillar: P04
 title: "Validate Builder — 13-file checklist validator for builders"
 version: 1.0.0
 created: 2026-03-28
-author: edison
+author: builder_agent
 tags: [cli, tool, cex, governance, validation, builder, checklist]
 cli_command: "python _tools/validate_builder.py"
 cli_args:

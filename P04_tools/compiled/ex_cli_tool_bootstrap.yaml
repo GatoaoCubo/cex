@@ -4,7 +4,7 @@ pillar: P04
 title: CEX Bootstrap — Create project from selected Leverage Points
 version: 1.0.0
 created: 2026-03-28
-author: edison
+author: builder_agent
 tags:
 - cli
 - tool

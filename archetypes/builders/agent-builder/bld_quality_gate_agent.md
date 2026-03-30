@@ -6,7 +6,7 @@ title: "Gate: agent"
 version: "1.0.0"
 created: "2026-03-27"
 updated: "2026-03-27"
-author: "edison"
+author: "builder_agent"
 domain: agent
 quality: null
 tags: [quality-gate, agent, P11, P02, governance, identity, agent-package]

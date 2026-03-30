@@ -6,7 +6,7 @@ title: "Gate: boot_config"
 version: "1.0.0"
 created: "2026-03-27"
 updated: "2026-03-27"
-author: "edison"
+author: "builder_agent"
 domain: boot_config
 quality: null
 tags: [quality-gate, boot-config, P11, P02, governance, initialization, provider]

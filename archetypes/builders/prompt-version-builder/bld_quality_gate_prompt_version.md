@@ -6,7 +6,7 @@ title: "Gate: prompt_version"
 version: "1.0.0"
 created: "2026-03-29"
 updated: "2026-03-29"
-author: "edison"
+author: "builder_agent"
 domain: "versioned prompt snapshots for tracking and rollback"
 quality: null
 tags: [quality-gate, prompt-version, P03]

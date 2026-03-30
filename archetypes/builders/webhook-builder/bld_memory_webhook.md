@@ -6,7 +6,7 @@ llm_function: CONTEXT
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
-author: EDISON
+author: builder_agent
 quality: null
 tags: [memory, webhook, P06, learning, patterns, anti-patterns]
 tldr: "Learned patterns from webhook artifact production: security invariants, delivery guarantees, idempotency discipline."

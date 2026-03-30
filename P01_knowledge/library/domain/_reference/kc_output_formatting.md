@@ -6,7 +6,7 @@ pillar: P01
 title: Output Formatting -- Formatters, Naming, Response Structure
 version: 1.0.0
 created: '2026-03-29'
-author: STELLA
+author: orchestrator
 domain: output
 origin: manual
 quality: 8.5

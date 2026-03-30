@@ -7,7 +7,7 @@ title: "Agent Card — Deep Knowledge for agent_card"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: york
+author: commercial_agent
 domain: agent_card
 quality: null
 tags: [agent_card, P08, BECOME, kind-kc]

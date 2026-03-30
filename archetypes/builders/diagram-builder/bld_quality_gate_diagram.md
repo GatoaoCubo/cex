@@ -6,7 +6,7 @@ title: "Gate: diagram"
 version: "1.0.0"
 created: "2026-03-27"
 updated: "2026-03-27"
-author: "edison"
+author: "builder_agent"
 domain: "diagram — visual architecture representations in ASCII or Mermaid notation"
 quality: null
 tags: [quality-gate, diagram, architecture-visualization, mermaid, ascii, P11]

@@ -6,7 +6,7 @@ llm_function: CONSTRAIN
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
-author: EDISON
+author: builder_agent
 quality: null
 tags: [config, webhook, P04, naming, constraints, enums]
 tldr: "Runtime config: naming convention, size limit, direction enum, signature enum, event naming patterns per provider."

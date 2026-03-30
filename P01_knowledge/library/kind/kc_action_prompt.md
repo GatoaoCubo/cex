@@ -7,7 +7,7 @@ title: "Action Prompt — Deep Knowledge for action_prompt"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: ATLAS
+author: operations_agent
 domain: action_prompt
 quality: null
 tags: [action_prompt, P03, INJECT, kind-kc]

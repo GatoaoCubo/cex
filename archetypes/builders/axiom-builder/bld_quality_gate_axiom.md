@@ -6,7 +6,7 @@ title: "Gate: axiom"
 version: "1.0.0"
 created: "2026-03-27"
 updated: "2026-03-27"
-author: "edison"
+author: "builder_agent"
 domain: axiom
 quality: null
 tags: [quality-gate, axiom, P11, P10, governance, immutable, fundamental-truth]

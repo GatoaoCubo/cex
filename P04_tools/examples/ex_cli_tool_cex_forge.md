@@ -5,7 +5,7 @@ pillar: P04
 title: "CEX Forge — Universal prompt generator for CEX artifacts"
 version: 1.0.0
 created: 2026-03-28
-author: edison
+author: builder_agent
 tags: [cli, tool, cex, core, forge, generation, prompt]
 cli_command: "python _tools/cex_forge.py"
 cli_args:

@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-27
 updated: 2026-03-27
-author: edison
+author: builder_agent
 observation: "API clients without explicit retry and pagination specs caused 3 categories of production failure: silent data truncation on paginated responses, retry storms on rate-limited endpoints, and credential leaks via unredacted error logs. Each was preventable at spec time."
 pattern: "Declare retry strategy (max attempts, backoff, retryable status codes) and pagination strategy (cursor vs offset, page size, terminal condition) explicitly in the spec. Redact auth fields in error logs by default."
 evidence: "9 client integrations reviewed: 3 had silent pagination truncation (missing terminal condition), 2 had retry storms (no backoff, retried 429s aggressively), 1 leaked credentials in error output. All 6 issues were absent in clients with explicit retry + pagination specs."

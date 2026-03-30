@@ -7,7 +7,7 @@ title: "Interface — Deep Knowledge for interface"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: PYTHA
+author: knowledge_agent
 domain: interface
 quality: null
 tags: [interface, P06, CONSTRAIN, kind-kc]

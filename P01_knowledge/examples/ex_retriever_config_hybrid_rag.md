@@ -6,7 +6,7 @@ title: Hybrid RAG Retriever (BM25 + Dense + Cohere Reranker)
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
-author: EDISON
+author: builder_agent
 domain: knowledge_retrieval
 quality: 9.0
 tags: [retriever-config, hybrid-search, bm25, faiss, cohere, reranker, rag]

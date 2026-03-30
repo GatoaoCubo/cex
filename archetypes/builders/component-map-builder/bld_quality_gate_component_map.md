@@ -6,7 +6,7 @@ title: "Gate: component_map"
 version: "1.0.0"
 created: "2026-03-27"
 updated: "2026-03-27"
-author: "edison"
+author: "builder_agent"
 domain: "system component inventory — structured catalogs of components, connections, dependencies, and data flows"
 quality: null
 tags: [quality-gate, component-map, P08, inventory, architecture, dependency-mapping]

@@ -7,7 +7,7 @@ title: "DB Connector — Deep Knowledge for db_connector"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: lily
+author: marketing_agent
 domain: db_connector
 quality: null
 tags: [db_connector, P04, CALL, kind-kc]

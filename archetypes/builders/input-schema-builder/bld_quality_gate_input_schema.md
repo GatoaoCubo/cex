@@ -6,7 +6,7 @@ title: "Gate: Input Schema"
 version: "1.0.0"
 created: "2026-03-27"
 updated: "2026-03-27"
-author: "edison"
+author: "builder_agent"
 domain: "input_schema — unilateral entry contracts defining required fields, types, and coercion rules"
 quality: null
 tags: [quality-gate, input-schema, contract, fields, validation, coercion]

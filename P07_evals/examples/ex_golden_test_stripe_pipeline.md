@@ -6,7 +6,7 @@ title: "Golden Test: Stripe Evolution Pipeline Validation"
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: EDISON
+author: builder_agent
 target: p08_pat_stripe_pipeline
 quality: 9.5
 tags: [stripe, pipeline, golden, e2e]

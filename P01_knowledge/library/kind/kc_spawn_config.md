@@ -7,7 +7,7 @@ title: "Spawn Config — Deep Knowledge for spawn_config"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: SHAKA
+author: research_agent
 domain: spawn_config
 quality: null
 tags: [spawn_config, P12, GOVERN, kind-kc]

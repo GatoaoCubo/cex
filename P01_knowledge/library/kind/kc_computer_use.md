@@ -7,7 +7,7 @@ title: "Computer Use — Deep Knowledge for computer_use"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: ATLAS
+author: operations_agent
 domain: computer_use
 quality: null
 tags: [computer_use, P04, CALL, kind-kc]

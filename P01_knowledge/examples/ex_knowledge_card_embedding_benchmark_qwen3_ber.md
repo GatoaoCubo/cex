@@ -6,7 +6,7 @@ title: "Embedding Benchmark: Qwen3 vs BERTimbau para PT-BR E-Commerce"
 version: 2.0.0
 created: 2026-01-17
 updated: 2026-03-25
-author: SHAKA
+author: research_agent
 domain: research
 quality: null
 tags: [embedding, benchmark, qwen3, bertimbau, pt-br, rag, ecommerce]

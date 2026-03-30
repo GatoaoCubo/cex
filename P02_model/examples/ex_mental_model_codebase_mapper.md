@@ -6,7 +6,7 @@ title: "Mental Model: Codebase Mapper"
 version: 1.0.0
 created: 2026-03-24
 updated: 2026-03-24
-author: EDISON
+author: builder_agent
 domain: knowledge
 quality: 9.0
 tags: [codebase, mapping, stack-detection, mental-model]

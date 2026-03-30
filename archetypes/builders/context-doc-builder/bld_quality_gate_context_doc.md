@@ -6,7 +6,7 @@ title: "Gate: context_doc"
 version: "1.0.0"
 created: "2026-03-27"
 updated: "2026-03-27"
-author: "edison"
+author: "builder_agent"
 domain: "domain context documentation — background documents that hydrate prompts with scope, stakeholders, constraints, and assumptions"
 quality: null
 tags: [quality-gate, context-doc, P01, prompt-hydration, domain-scope, constraints]

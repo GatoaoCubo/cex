@@ -6,7 +6,7 @@ perspective: "ira — anger as execution fuel"
 applies_to: atlas_agent_node
 version: 1.0.0
 created: 2026-03-24
-author: ATLAS
+author: operations_agent
 domain: execution
 quality: 9.0
 tags: [lens, perspective, ira, emotional-drive, agent_node-identity]

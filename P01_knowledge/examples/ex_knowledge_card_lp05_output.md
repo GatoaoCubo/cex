@@ -6,7 +6,7 @@ title: "P05 Output: O Que o Agente Entrega"
 version: 1.0.0
 created: 2026-03-23
 updated: 2026-03-23
-author: edison
+author: builder_agent
 domain: meta-construction
 quality: 9.0
 tags: [output, schema, parser, formatter, naming]

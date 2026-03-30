@@ -6,7 +6,7 @@ title: "Input Schema: Quality Audit Pipeline"
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: EDISON
+author: builder_agent
 quality: 9.5
 tags: [quality, audit, input, contract]
 tldr: "Validates input parameters for the codebase quality audit pipeline (scope, threshold, scan options)"

@@ -6,7 +6,7 @@ title: "P11 Feedback: Como Melhora"
 version: 1.0.0
 created: 2026-03-23
 updated: 2026-03-23
-author: edison
+author: builder_agent
 domain: meta-construction
 quality: 9.0
 tags: [feedback, quality_gate, bugloop, guardrail, optimizer]

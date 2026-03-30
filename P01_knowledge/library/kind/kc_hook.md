@@ -7,7 +7,7 @@ title: "Hook — Deep Knowledge for hook"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: lily
+author: marketing_agent
 domain: hook
 quality: null
 tags: [hook, P04, GOVERN, kind-kc]

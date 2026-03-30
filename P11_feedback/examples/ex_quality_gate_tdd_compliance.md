@@ -6,7 +6,7 @@ title: "Gate: TDD Compliance"
 version: 1.0.0
 created: 2026-03-24
 updated: 2026-03-24
-author: EDISON
+author: builder_agent
 domain: build
 quality: 9.0
 tags: [tdd, testing, quality-gate, red-green-refactor, build-discipline]

@@ -6,7 +6,7 @@ title: "CEX Function REASON — Structured Thinking Before Action"
 version: 1.0.0
 created: 2026-03-25
 updated: 2026-03-25
-author: EDISON
+author: builder_agent
 domain: cex_taxonomy
 quality: null
 tags: [cex, llm-function, reason, chain-of-thought, planning, routing]

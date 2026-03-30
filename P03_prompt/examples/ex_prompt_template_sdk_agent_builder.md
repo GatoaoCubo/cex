@@ -6,7 +6,7 @@ title: SDK Agent Builder - Generate Agent Artifacts from Description
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: EDISON
+author: builder_agent
 domain: building
 quality: 9.0
 tags: [sdk, agent-builder, code-generation, meta-construction, tool-definition]

@@ -6,7 +6,7 @@ title: "Gate: function_def"
 version: "1.0.0"
 created: "2026-03-28"
 updated: "2026-03-28"
-author: "edison"
+author: "builder_agent"
 domain: "JSON Schema function definitions callable by LLMs via tool_use/function_calling"
 quality: null
 tags: [quality-gate, function-def, P04, json-schema, tool-calling, parameters]

@@ -5,7 +5,7 @@ pillar: P06
 description: "Type definition for the 5-dimension quality score used across organization"
 version: 1.0.0
 created: 2026-03-24
-author: edison
+author: builder_agent
 quality: 9.0
 tags: [type-def, quality, scoring, validation]
 ---

@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-27
 updated: 2026-03-27
-author: edison
+author: builder_agent
 observation: "Diagrams without legends force readers to infer symbol meaning, increasing interpretation errors. Mixing ASCII and Mermaid notation in the same diagram breaks rendering in at least two of three target viewers. Diagrams that attempt to show all system layers in one frame become unreadable above ~12 components. Missing zoom_level forces readers to guess whether a box represents a service, a module, or a file."
 pattern: "Produce diagrams in four steps: (1) choose one notation (ASCII or Mermaid) and declare zoom_level; (2) draw the visual with every component labeled and every connection annotated; (3) add a Legend section explaining every symbol used; (4) add Annotations for non-obvious relationships. Keep body under 4096 bytes by scoping tightly - split into two diagrams if needed."
 evidence: "Legend-present diagrams received correct first-read interpretation in 94% of reviewer tests vs 61% for legend-absent diagrams. Single-notation diagrams rendered correctly in all three target viewers; mixed-notation diagrams broke in at least one viewer in 7 of 7 tests. Diagrams scoped to one zoom level needed 0 clarification rounds vs average 1.8 rounds for multi-level diagrams."

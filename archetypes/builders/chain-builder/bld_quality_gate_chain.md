@@ -6,7 +6,7 @@ title: "Gate: chain"
 version: "1.0.0"
 created: "2026-03-27"
 updated: "2026-03-27"
-author: "edison"
+author: "builder_agent"
 domain: "prompt pipeline design — sequential LLM call chains with typed data flow between steps"
 quality: null
 tags: [quality-gate, chain, P03, prompt-pipeline, sequential, data-flow]

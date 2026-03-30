@@ -7,7 +7,7 @@ title: "Schedule — Deep Knowledge for schedule"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: SHAKA
+author: research_agent
 domain: schedule
 quality: null
 tags: [schedule, P12, GOVERN, kind-kc]

@@ -18,7 +18,7 @@ pillar: P07
 version: "1.0.0"
 created: "2026-03-29"
 updated: "2026-03-29"
-author: "EDISON"
+author: "builder_agent"
 name: "Customer Support Agent Red Team Eval"
 attack_types: [prompt_injection, pii_leak, privilege_escalation, data_extraction]
 target: "customer-support-agent system prompt + account data retrieval tool"

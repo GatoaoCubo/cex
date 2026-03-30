@@ -6,7 +6,7 @@ title: "Gate: dispatch_rule"
 version: "1.0.0"
 created: "2026-03-27"
 updated: "2026-03-27"
-author: "edison"
+author: "builder_agent"
 domain: "dispatch_rule — routing rules mapping keywords to agent_nodes with fallback logic"
 quality: null
 tags: [quality-gate, dispatch-rule, routing, keyword-mapping, P11]

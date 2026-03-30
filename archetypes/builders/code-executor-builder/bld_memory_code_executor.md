@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
-author: edison
+author: builder_agent
 observation: "Code executors without explicit timeout caused 3 production incidents — runaway LLM-generated infinite loops consumed all container resources. Executors without network policy allowed data exfiltration in 2 security audits. Process-level sandboxing (no container) led to host filesystem access in 1 incident."
 pattern: "Always set timeout > 0 (default 30s). Always declare network_access explicitly (default false). Always use container or higher isolation (never bare process in production). List language versions, not just names. Document pre-installed libraries."
 evidence: "6 production incidents traced to missing constraints: 3 timeout, 2 network, 1 isolation. Zero incidents after constraints enforced."

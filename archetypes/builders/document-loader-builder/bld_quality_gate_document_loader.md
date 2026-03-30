@@ -6,7 +6,7 @@ title: "Gate: document_loader"
 version: "1.0.0"
 created: "2026-03-28"
 updated: "2026-03-28"
-author: "edison"
+author: "builder_agent"
 domain: "file ingestion and chunking — transforms raw files into metadata-rich document chunks for RAG pipelines"
 quality: null
 tags: [quality-gate, document-loader, P04, ingestion, chunking, RAG]

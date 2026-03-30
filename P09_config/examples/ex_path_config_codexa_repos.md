@@ -6,7 +6,7 @@ title: "Path Config: organization Multi-Repo System"
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: PYTHA
+author: knowledge_agent
 quality: 9.0
 tags: [path, config, multi-repo, organization]
 tldr: "Canonical paths for all 3 organization repos — organization-core (BRAIN), fresh-start (FACE), gato-cubo (BODY) — never commit to wrong repo"

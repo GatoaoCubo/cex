@@ -6,7 +6,7 @@ title: "CEX Lens — Cognitive Perspective That Refracts All Input"
 version: 1.0.0
 created: 2026-03-25
 updated: 2026-03-25
-author: EDISON
+author: builder_agent
 domain: cex_taxonomy
 quality: null
 tags: [cex, lens, perspective, cognitive-filter, agent_node]

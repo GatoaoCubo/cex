@@ -7,7 +7,7 @@ title: "Benchmark de Formatos para Artefatos CEX — MD+YAML vs YAML vs JSON vs 
 version: 1.0.0
 created: 2026-03-25
 updated: 2026-03-25
-author: STELLA
+author: orchestrator
 domain: meta-construction
 quality: 9.5
 tags: [format, benchmark, yaml, markdown, token-efficiency, cex, schema]

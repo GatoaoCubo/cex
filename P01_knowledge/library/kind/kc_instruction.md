@@ -7,7 +7,7 @@ title: "Instruction — Deep Knowledge for instruction"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: ATLAS
+author: operations_agent
 domain: instruction
 quality: null
 tags: [instruction, P03, INJECT, kind-kc]

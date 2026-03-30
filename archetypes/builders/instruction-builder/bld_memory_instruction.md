@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-27
 updated: 2026-03-27
-author: edison
+author: builder_agent
 observation: "Compound steps with multiple action verbs ('deploy and verify and restart') cause partial execution — agents complete the first verb and mark the step done. Vague prerequisites ('environment ready') cannot be verified and are silently skipped. Steps marked atomic:false without a rollback procedure leave systems in partially modified states. Steps_count mismatches with actual step count cause validator rejection. Including persona text in instructions ('You are an expert') misplaces content that belongs in system prompts."
 pattern: "Each instruction step contains exactly one action verb and one verifiable expected output. Prerequisites are stated as machine-checkable conditions (e.g., 'Python 3.10+ installed: verify with python --version'). Steps marked atomic:false must declare a rollback procedure. Steps_count in frontmatter must match the exact count of numbered steps in the body. Idempotence classification (idempotent/non-idempotent) is required for every step."
 evidence: "10 instruction reviews: 7 of 10 had at least one compound step. 8 of 10 had vague prerequisites. 4 of 10 had atomic:false steps without rollback. Steps_count mismatch found in 3 of 10 (caught by validator). Idempotence classification missing in 6 of 10 early productions."

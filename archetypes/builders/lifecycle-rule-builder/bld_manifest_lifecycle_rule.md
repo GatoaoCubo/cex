@@ -14,7 +14,7 @@ llm_function: BECOME
 version: 1.0.0
 created: "2026-03-26"
 updated: "2026-03-26"
-author: EDISON
+author: builder_agent
 tags: [kind-builder, lifecycle-rule, P11, specialist, governance, freshness]
 ```
 # lifecycle-rule-builder

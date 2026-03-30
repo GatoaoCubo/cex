@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-27
 updated: 2026-03-27
-author: edison
+author: builder_agent
 observation: "DAGs with unlabeled edges produce ambiguous execution order when two nodes share a common dependency. Omitting topological sort validation allows cycle bugs to surface only at runtime. Fan-out nodes (one node feeding N parallel children) without explicit parallelism annotations are serialized by naive executors. Critical-path omission causes downstream scheduling tools to underestimate total duration by 40-60% in multi-stage pipelines."
 pattern: "Build DAGs in three passes: (1) declare nodes with id, label, and estimated duration; (2) declare edges with explicit source/target and optional condition; (3) compute and embed execution_order via topological sort plus critical_path for duration estimation. Validate: no cycles, all edge targets exist, every root node has no incoming edges."
 evidence: "Three-pass construction caught all cycle errors at spec time rather than at runtime across 9 DAG artifacts reviewed. Critical-path annotation reduced scheduling underestimates from an average 52% gap to under 8%. Fan-out parallelism annotations enabled correct concurrent scheduling in 100% of test executor runs."

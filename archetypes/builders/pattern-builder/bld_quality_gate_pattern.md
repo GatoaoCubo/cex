@@ -6,7 +6,7 @@ title: "Gate: pattern"
 version: "1.0.0"
 created: "2026-03-27"
 updated: "2026-03-27"
-author: "edison"
+author: "builder_agent"
 domain: pattern
 quality: null
 tags: [quality-gate, pattern, P11, P08, governance, architecture, reuse]

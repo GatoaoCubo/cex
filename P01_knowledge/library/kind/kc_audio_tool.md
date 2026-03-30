@@ -7,7 +7,7 @@ title: "Audio Tool — Deep Knowledge for audio_tool"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: ATLAS
+author: operations_agent
 domain: audio_tool
 quality: null
 tags: [audio_tool, P04, CALL, kind-kc]

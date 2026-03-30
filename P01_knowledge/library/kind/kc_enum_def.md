@@ -7,7 +7,7 @@ title: "Enum Def — Deep Knowledge for enum_def"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: PYTHA
+author: knowledge_agent
 domain: enum_def
 quality: null
 tags: [enum_def, P06, CONSTRAIN, kind-kc]

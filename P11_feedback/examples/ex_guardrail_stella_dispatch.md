@@ -6,7 +6,7 @@ title: "Guardrail: orchestrator Dispatch Boundaries"
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: PYTHA
+author: knowledge_agent
 quality: 9.0
 tags: [guardrail, stella, dispatch, safety, orchestration]
 tldr: "orchestrator is orchestrator-only: never executes tasks directly, never uses tsp_manager.py, never spawns >3 agent_nodes, never writes handoffs to .claude/temp/"

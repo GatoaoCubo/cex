@@ -7,7 +7,7 @@ pillar: P12
 kind: workflow
 created: 2026-03-22
 updated: 2026-03-22
-author: ATLAS
+author: operations_agent
 domain: execution
 quality: 8.5
 tags: [voice, whatsapp, pipeline, stt, tts, bridge]

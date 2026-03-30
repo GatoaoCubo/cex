@@ -6,7 +6,7 @@ title: "Gate: checkpoint"
 version: "1.0.0"
 created: "2026-03-29"
 updated: "2026-03-29"
-author: "edison"
+author: "builder_agent"
 domain: "workflow checkpoint — saved state snapshot enabling resumable, auditable workflow execution"
 quality: null
 tags: [quality-gate, checkpoint, P12, workflow, resume, state]

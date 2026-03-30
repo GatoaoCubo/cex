@@ -8,7 +8,7 @@ llm_function: GOVERN
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
-author: EDISON
+author: builder_agent
 tags: [kind-builder, schedule, P12, orchestration, cron, temporal-trigger]
 ---
 

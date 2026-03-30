@@ -7,7 +7,7 @@ title: "Retriever Config — Deep Knowledge for retriever_config"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: edison
+author: builder_agent
 domain: retriever_config
 quality: null
 tags: [retriever_config, p01, CONSTRAIN, kind-kc]

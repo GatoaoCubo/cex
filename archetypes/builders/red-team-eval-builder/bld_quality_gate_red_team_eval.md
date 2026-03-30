@@ -6,7 +6,7 @@ title: "Gate: red_team_eval"
 version: "1.0.0"
 created: "2026-03-29"
 updated: "2026-03-29"
-author: "edison"
+author: "builder_agent"
 domain: "adversarial LLM safety evaluation — pre-deployment attack scenario configurations with declared attack_types, specific target, and measurable pass_criteria"
 quality: null
 tags: [quality-gate, red-team-eval, P07, adversarial, safety, llm-security, owasp]

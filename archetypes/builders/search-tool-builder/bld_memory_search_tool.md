@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
-author: edison
+author: builder_agent
 observation: "Search tools without max_results limits caused token budget overruns in 40% of agent sessions — agents received 50+ results when 5 would suffice. Tools without cost_per_query documentation led to $200+ surprise bills in 2 production deployments. Hardcoded API keys were found in 3 committed artifacts during security audit."
 pattern: "Always set max_results with sensible default (10). Always document cost_per_query. NEVER include API keys — reference env vars only. Document rate_limit to prevent 429 errors. Match provider to use case (Tavily for AI, Serper for SERP, Exa for semantic)."
 evidence: "Analysis of 30 agent sessions: 40% exceeded token budget due to unbounded search results. 2 production cost overruns from undocumented query costs. 3 security incidents from hardcoded API keys."

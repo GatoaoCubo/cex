@@ -7,7 +7,7 @@ title: "Red Team Eval — Deep Knowledge for red_team_eval"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: PYTHA
+author: knowledge_agent
 domain: red_team_eval
 quality: null
 tags: [red_team_eval, P07, GOVERN, kind-kc]

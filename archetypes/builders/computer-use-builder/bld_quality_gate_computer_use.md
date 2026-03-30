@@ -6,7 +6,7 @@ title: "Gate: computer_use"
 version: "1.0.0"
 created: "2026-03-28"
 updated: "2026-03-28"
-author: "edison"
+author: "builder_agent"
 domain: "GUI control interfaces enabling LLMs to interact with graphical environments via screenshots and coordinate-based actions"
 quality: null
 tags: [quality-gate, computer-use, P04, gui, screen-control, automation]

@@ -7,7 +7,7 @@ title: "Regression Check — Deep Knowledge for regression_check"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: PYTHA
+author: knowledge_agent
 domain: regression_check
 quality: null
 tags: [regression_check, P07, GOVERN, kind-kc]

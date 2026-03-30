@@ -6,7 +6,7 @@ title: "Gate: Interface"
 version: "1.0.0"
 created: "2026-03-27"
 updated: "2026-03-27"
-author: "edison"
+author: "builder_agent"
 domain: "interface — bilateral integration contracts defining methods, I/O schemas, versioning, and compatibility between agents"
 quality: null
 tags: [quality-gate, interface, contract, bilateral, integration, versioning, compatibility]

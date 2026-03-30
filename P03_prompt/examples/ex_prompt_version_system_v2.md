@@ -6,7 +6,7 @@ title: "Pesquisa Agent System Prompt v2.0"
 version: 2.0.0
 created: 2026-03-29
 updated: 2026-03-29
-author: EDISON
+author: builder_agent
 domain: prompt_management
 quality: 9.0
 tags: [prompt-version, system-prompt, pesquisa-agent, a-b-test, rollback, versioning]

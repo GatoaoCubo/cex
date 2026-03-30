@@ -6,7 +6,7 @@ title: "Gate: output_validator"
 version: "1.0.0"
 created: "2026-03-29"
 updated: "2026-03-29"
-author: "edison"
+author: "builder_agent"
 domain: "post-LLM output validation and correction"
 quality: null
 tags: [quality-gate, output-validator, P05]

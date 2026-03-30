@@ -9,7 +9,7 @@ pillar: P04
 kind: mcp_server
 version: 1.0.0
 created: 2026-03-24
-author: edison
+author: builder_agent
 domain: knowledge-retrieval
 quality: 9.5
 tags: [mcp, brain, rag, bm25, faiss, ollama, search]

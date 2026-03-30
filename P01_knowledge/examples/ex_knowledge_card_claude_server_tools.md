@@ -6,7 +6,7 @@ title: "Claude Server Tools — Code Execution, Web Search, Memory (API Specs)"
 version: 1.0.0
 created: 2026-03-25
 updated: 2026-03-25
-author: EDISON
+author: builder_agent
 domain: llm_engineering
 quality: null
 tags: [claude, server-tools, code-execution, web-search, memory, api]

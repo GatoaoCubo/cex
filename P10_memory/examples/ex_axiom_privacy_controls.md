@@ -6,7 +6,7 @@ title: "Axiom: Edge-Layer Privacy Controls"
 version: 1.0.0
 created: 2026-03-24
 updated: 2026-03-24
-author: EDISON
+author: builder_agent
 quality: 9.0
 tags: [axiom, privacy, edge, hooks, tags]
 tldr: "Privacy enforced at edge (hook layer), not center (daemon). <private> tags stripped before HTTP send. Data never leaves client boundary unfiltered."

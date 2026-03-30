@@ -7,7 +7,7 @@ purpose: Domain knowledge for building notifier artifacts
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
-author: EDISON
+author: builder_agent
 tags: [knowledge_card, notifier, email, sms, slack, discord, firebase, sendgrid, twilio]
 quality: null
 tldr: "Provider selection, template design, rate limits, and anti-patterns for notification delivery across email, SMS, Slack, Discord, push channels."

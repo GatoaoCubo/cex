@@ -7,7 +7,7 @@ title: 'AWS Bedrock Patterns: Agents, Knowledge Bases, Guardrails, Orchestration
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
-author: EDISON
+author: builder_agent
 domain: aws_bedrock
 origin: src_provider_taxonomy
 quality: 9.0

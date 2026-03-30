@@ -6,7 +6,7 @@ title: "Flag: FIRECRAWL_ENABLED"
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: EDISON
+author: builder_agent
 quality: 9.0
 tags: [firecrawl, feature-flag, enrichment, config]
 tldr: "Master switch for Firecrawl web scraping enrichment in marketplace research"

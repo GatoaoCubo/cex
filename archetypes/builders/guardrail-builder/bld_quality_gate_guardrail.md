@@ -6,7 +6,7 @@ title: "Gate: guardrail"
 version: "1.0.0"
 created: "2026-03-27"
 updated: "2026-03-27"
-author: "edison"
+author: "builder_agent"
 domain: "guardrail — safety boundaries and enforcement policies applied to agents and artifacts"
 quality: null
 tags: [quality-gate, guardrail, safety, enforcement, security-boundary, P11]

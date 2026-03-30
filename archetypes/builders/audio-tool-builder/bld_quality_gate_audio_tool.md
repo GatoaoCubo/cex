@@ -6,7 +6,7 @@ title: "Gate: audio_tool"
 version: "1.0.0"
 created: "2026-03-28"
 updated: "2026-03-28"
-author: "edison"
+author: "builder_agent"
 domain: "audio processing tool — STT, TTS, and audio analysis with declared direction, models, formats, and language coverage"
 quality: null
 tags: [quality-gate, audio-tool, P04, speech, stt, tts, direction, formats, languages]

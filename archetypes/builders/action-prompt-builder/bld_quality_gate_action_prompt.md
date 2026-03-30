@@ -6,7 +6,7 @@ title: "Gate: action_prompt"
 version: "1.0.0"
 created: "2026-03-27"
 updated: "2026-03-27"
-author: "edison"
+author: "builder_agent"
 domain: action_prompt
 quality: null
 tags: [quality-gate, action-prompt, P11, P03, governance, task-execution]

@@ -6,7 +6,7 @@ title: "Pattern: Nucleus as Fractal of 12 Pillars"
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
-author: stella
+author: orchestrator
 quality: null
 tags: [pattern, nucleus, fractal, agent_node, orchestration, 12-pillars]
 tldr: "A nucleus mirrors all 12 CEX pillars filled with domain-specific content — not a new kind, but a composition pattern of existing kinds"

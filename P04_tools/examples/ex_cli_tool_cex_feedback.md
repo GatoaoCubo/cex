@@ -5,7 +5,7 @@ pillar: P04
 title: "CEX Feedback — Quality tracking, auto-archive, and promotion engine"
 version: 1.0.0
 created: 2026-03-28
-author: edison
+author: builder_agent
 tags: [cli, tool, cex, governance, feedback, quality, lifecycle]
 cli_command: "python _tools/cex_feedback.py"
 cli_args:

@@ -7,7 +7,7 @@ title: "E2E Eval — Deep Knowledge for e2e_eval"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: PYTHA
+author: knowledge_agent
 domain: e2e_eval
 quality: null
 tags: [e2e_eval, P07, GOVERN, kind-kc]

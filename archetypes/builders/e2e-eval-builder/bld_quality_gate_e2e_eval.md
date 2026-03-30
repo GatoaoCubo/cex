@@ -6,7 +6,7 @@ title: "Gate: e2e_eval"
 version: "1.0.0"
 created: "2026-03-27"
 updated: "2026-03-27"
-author: "edison"
+author: "builder_agent"
 domain: "e2e_eval — end-to-end pipeline tests verifying full flow from input to final output"
 quality: null
 tags: [quality-gate, e2e-eval, pipeline-testing, integration-test, P11]

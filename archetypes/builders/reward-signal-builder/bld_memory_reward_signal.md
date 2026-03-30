@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
-author: edison
+author: builder_agent
 observation: "Reward signals with a single scoring criterion caused measurable reward hacking in 3 of 5 RLHF experiments reviewed: models maximized the single dimension (e.g. length, confidence markers, or keyword density) while quality on unmeasured dimensions degraded. Signals with >= 3 weighted criteria and a baseline calibrated to human P25 showed no reward hacking in the same review set."
 pattern: "Always decompose into >= 2 criteria with explicit weights. Set baseline at human P20-P25 of gold outputs. Validate LLM-judge reliability with Spearman >= 0.75 against human holdout before deploying. Use min aggregation for safety dimensions."
 evidence: "5 RLHF experiments: 3/3 single-criterion signals showed reward hacking; 0/5 multi-criterion signals showed reward hacking. Baseline drift detected in 2 cases where baseline was not tied to human percentile."

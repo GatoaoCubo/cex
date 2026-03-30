@@ -4,7 +4,7 @@ pillar: P03
 description: Planner prompt that decomposes complex tasks into executable step sequences
 version: 1.0.0
 created: 2026-03-25
-author: stella
+author: orchestrator
 quality: 9.0
 tags:
 - planner

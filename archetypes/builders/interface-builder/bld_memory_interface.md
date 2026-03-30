@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-27
 updated: 2026-03-27
-author: edison
+author: builder_agent
 observation: "Interface contracts that omit the deprecation path for old methods cause breaking changes when versions are incremented. Methods with input defined but no output (or vice versa) create implicit assumptions that differ between provider and consumer. Using backward_compatible as a string ('yes') instead of a boolean causes schema validation failure. Bilateral contract requirement (both provider and consumer fields) is the most commonly missed structural rule — 4 of 7 early productions had unilateral definitions."
 pattern: "Every interface method requires both input schema and output schema. Every versioned interface must declare backward_compatible:bool and a deprecation_path for methods being removed. Both provider and consumer fields are required — an interface without both parties is an incomplete contract. Mock payloads must match method signatures exactly, not be illustrative approximations."
 evidence: "7 interface productions reviewed: 4 missing consumer field (unilateral), 3 with output-only or input-only methods, 2 with backward_compatible as string. Mock payload mismatches found in 5 of 7 (payload showed extra or missing fields vs declared schema). Zero breaking changes in deployments using versioned interfaces with deprecation_path vs 3 breaking changes in deployments without."

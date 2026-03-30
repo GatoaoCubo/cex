@@ -7,7 +7,7 @@ title: "Director — Deep Knowledge for director"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: york
+author: commercial_agent
 domain: director
 quality: null
 tags: [director, P08, ORCHESTRATE, kind-kc]

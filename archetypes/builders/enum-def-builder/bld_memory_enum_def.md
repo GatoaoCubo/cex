@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
-author: edison
+author: builder_agent
 observation: "Enum artifacts without per-value descriptions caused consumer ambiguity in 5 of 8 integration reviews — developers chose wrong values for edge cases (e.g., 'inactive' vs 'archived' vs 'deprecated' used interchangeably). Enums with descriptions for every value had zero misuse across the same review set."
 pattern: "Write descriptions for every value. Declare extensible explicitly. Mirror values list in frontmatter to body section names exactly. Keep body under 1024 bytes. Deprecated values stay in the list until major version."
 evidence: "8 integration reviews: 5 had value misuse without descriptions; 0 misuse with descriptions. 3 breaking changes traced to removing deprecated values without major version bump."

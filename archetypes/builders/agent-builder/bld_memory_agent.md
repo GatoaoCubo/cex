@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-27
 updated: 2026-03-27
-author: edison
+author: builder_agent
 observation: "Agent designs fail when persona and capabilities are co-located in the same file. The persona directs reasoning style; capabilities define what actions are available. Mixed files produce agents that roleplay capabilities they do not have or that underuse capabilities they do have."
 pattern: "Separate persona definition (identity, reasoning style, constraints) from capability definition (tools, actions, ISO files). Persona in MANIFEST, capabilities in INSTRUCTIONS and individual ISO files. Cross-reference but never merge."
 evidence: "12 agent builds reviewed: 5 with mixed persona/capability files had average capability utilization of 41%. 7 with separated files had 78% capability utilization. Separation also reduced persona drift across sessions from 34% to 8%."

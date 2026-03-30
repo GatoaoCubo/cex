@@ -5,7 +5,7 @@ pillar: P04
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
-author: EDISON
+author: builder_agent
 domain: document_loader
 llm_function: INJECT
 quality: null
@@ -27,7 +27,7 @@ pillar: P04
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
-author: EDISON
+author: builder_agent
 name: "PDF Legal Document Loader"
 formats_supported:
   - application/pdf

@@ -7,7 +7,7 @@ title: 'Google A2A Protocol: Agent-to-Agent Communication Standard'
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
-author: edison
+author: builder_agent
 domain: agent_interoperability
 origin: src_standards_global
 quality: 9.0

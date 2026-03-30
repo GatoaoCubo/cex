@@ -5,7 +5,7 @@ pillar: P04
 title: "CEX Init — Scaffold a new CEX project in 5 questions"
 version: 1.0.0
 created: 2026-03-28
-author: edison
+author: builder_agent
 tags: [cli, tool, cex, product, scaffolding, init, setup]
 cli_command: "python _tools/cex_init.py"
 cli_args:

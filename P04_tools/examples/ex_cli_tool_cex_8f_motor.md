@@ -5,7 +5,7 @@ pillar: P04
 title: "Motor 8F — Intent to execution plan decomposer"
 version: 1.0.0
 created: 2026-03-28
-author: edison
+author: builder_agent
 tags: [cli, tool, cex, core, motor, 8f, planning]
 cli_command: "python _tools/cex_8f_motor.py"
 cli_args:

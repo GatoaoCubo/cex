@@ -21,7 +21,7 @@ kind: workflow
 version: 1.0.0
 created: 2026-03-24
 updated: 2026-03-24
-author: edison
+author: builder_agent
 domain: brand
 quality: 9.0
 tags: [brand, design-system, propagation, tokens, identity]

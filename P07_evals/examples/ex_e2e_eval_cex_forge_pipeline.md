@@ -6,7 +6,7 @@ description: "End-to-end test of CEX artifact generation pipeline"
 pipeline: forge_validate_compile
 version: 1.0.0
 created: 2026-03-24
-author: atlas
+author: operations_agent
 quality: 9.0
 tags: [e2e, cex, forge, pipeline, validation]
 ---

@@ -5,7 +5,7 @@ pillar: P04
 title: "Validate Schema — Structural integrity checker for _schema.yaml"
 version: 1.0.0
 created: 2026-03-28
-author: edison
+author: builder_agent
 tags: [cli, tool, cex, qa, schema, validation]
 cli_command: "python _tools/validate_schema.py"
 cli_args: []

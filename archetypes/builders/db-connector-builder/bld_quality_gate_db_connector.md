@@ -6,7 +6,7 @@ title: "Gate: connector"
 version: "1.0.0"
 created: "2026-03-27"
 updated: "2026-03-27"
-author: "edison"
+author: "builder_agent"
 domain: "bidirectional service integration — connectors exchanging data with external services via REST, WebSocket, gRPC, or MQTT"
 quality: null
 tags: [quality-gate, connector, P04, bidirectional, integration, data-transform]

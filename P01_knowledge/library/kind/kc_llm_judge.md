@@ -7,7 +7,7 @@ title: "LLM Judge — Deep Knowledge for llm_judge"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: PYTHA
+author: knowledge_agent
 domain: llm_judge
 quality: null
 tags: [llm_judge, P07, GOVERN, kind-kc]

@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-27
 updated: 2026-03-27
-author: edison
+author: builder_agent
 observation: "End-to-end evaluations with disconnected stages - where a stage's output does not feed the next stage's input - produce false-pass results because intermediate assertions never see the actual pipeline data. Missing cleanup steps cause state pollution between runs, making test results order-dependent. Timeout values copied from unit tests (5-30s) consistently cause timeout failures in multi-stage pipelines that legitimately need 300s+. Evaluating a single agent instead of the full pipeline misses integration failures at handoff boundaries."
 pattern: "Design e2e evals with: (1) explicit data lineage - each stage declares input_from referencing the prior stage output; (2) assertions at each stage boundary, not just the final stage; (3) timeout scaled to pipeline complexity (2-3 stages: 180s, 4-6 stages: 300s, 7+ stages: 600s); (4) cleanup steps that restore environment to baseline state after every run."
 evidence: "Explicit data lineage caught 4 integration bugs that stage-isolated assertions missed. Per-stage boundary assertions detected failures 2-3 stages earlier than final-only assertions, reducing debug time by ~60%. Correct timeout scaling reduced spurious timeout failures from 18% to 0% of pipeline runs. Cleanup steps reduced flaky test rate from 12% to 1% across 50 consecutive runs."

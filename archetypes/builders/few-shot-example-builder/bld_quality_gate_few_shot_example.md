@@ -6,7 +6,7 @@ title: "Gate: few_shot_example"
 version: "1.0.0"
 created: "2026-03-27"
 updated: "2026-03-27"
-author: "edison"
+author: "builder_agent"
 domain: "few_shot_example — input/output pairs that teach format to LLMs via in-context prompt engineering"
 quality: null
 tags: [quality-gate, few-shot-example, prompt-engineering, format-teaching, P11]

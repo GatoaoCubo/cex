@@ -6,7 +6,7 @@ title: "Cross-IDE Memory Parity — One Worker API Serving Claude Code, Cursor, 
 version: 1.0.0
 created: 2026-03-26
 updated: 2026-03-26
-author: EDISON
+author: builder_agent
 domain: llm_engineering
 quality: null
 tags: [cross-ide, memory, hooks, cursor, claude-code, openclaw, parity]

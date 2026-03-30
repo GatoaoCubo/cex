@@ -6,7 +6,7 @@ title: Template Universal de Action Prompt
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: EDISON
+author: builder_agent
 domain: meta
 quality: 10.0
 tags: [prompt, template, action, universal, meta]

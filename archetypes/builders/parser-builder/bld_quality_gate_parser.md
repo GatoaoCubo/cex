@@ -6,7 +6,7 @@ title: "Gate: parser"
 version: "1.0.0"
 created: "2026-03-27"
 updated: "2026-03-27"
-author: "edison"
+author: "builder_agent"
 domain: parser
 quality: null
 tags: [quality-gate, parser, P11, P05, governance, data-extraction]

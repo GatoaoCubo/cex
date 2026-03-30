@@ -5,7 +5,7 @@ pillar: P03
 version: 1.0.0
 created: "2026-03-27"
 updated: "2026-03-27"
-author: EDISON
+author: builder_agent
 title: "System Prompt: lens-builder"
 target_agent: lens-builder
 persona: "Specialist in defining analytical lenses with declared bias, focus scope, and interpretation weights"

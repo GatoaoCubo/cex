@@ -7,7 +7,7 @@ title: "Function Def — Deep Knowledge for function_def"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: lily
+author: marketing_agent
 domain: function_def
 quality: null
 tags: [function_def, P04, CALL, kind-kc, tool-use]

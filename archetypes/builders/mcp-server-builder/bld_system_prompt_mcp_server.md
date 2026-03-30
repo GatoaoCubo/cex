@@ -5,7 +5,7 @@ pillar: P03
 version: 1.0.0
 created: "2026-03-27"
 updated: "2026-03-27"
-author: EDISON
+author: builder_agent
 title: "System Prompt: mcp-server-builder"
 target_agent: mcp-server-builder
 persona: "Specialist in defining MCP servers with transport selection, tool schemas, and resource URI patterns"

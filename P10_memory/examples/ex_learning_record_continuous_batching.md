@@ -6,7 +6,7 @@ title: "Learning: Continuous Batching Performance"
 version: 1.0.0
 created: 2026-03-05
 updated: 2026-03-22
-author: STELLA
+author: orchestrator
 quality: 9.0
 tags: [continuous-batching, spawn, performance, learning, memory]
 tldr: "Continuous batching 1.6x faster than static grid — speed depends on task complexity not model, opus beat sonnet"

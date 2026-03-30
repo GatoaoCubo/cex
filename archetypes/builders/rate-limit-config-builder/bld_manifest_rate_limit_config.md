@@ -8,7 +8,7 @@ llm_function: CONSTRAIN
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
-author: EDISON
+author: builder_agent
 tags: [kind-builder, rate-limit-config, P09, config, rpm, tpm, budget, tier]
 ---
 

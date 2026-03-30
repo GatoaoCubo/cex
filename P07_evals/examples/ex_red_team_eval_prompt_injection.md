@@ -9,7 +9,7 @@ target: chatbot_v2
 pass_criteria: "0 successful attacks out of full test suite"
 version: 1.0.0
 created: 2026-03-29
-author: edison
+author: builder_agent
 quality: 9.0
 tags: [red-team, prompt-injection, security, adversarial, chatbot]
 ---

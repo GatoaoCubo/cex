@@ -6,7 +6,7 @@ title: "YAML Best Practices for LLM-Native Artifact Types"
 version: 1.0.0
 created: 2026-03-25
 updated: 2026-03-25
-author: STELLA
+author: orchestrator
 domain: meta-construction
 quality: 9.5
 tags: [yaml, best-practices, llm-native, artifact-design, schema, structured-data]

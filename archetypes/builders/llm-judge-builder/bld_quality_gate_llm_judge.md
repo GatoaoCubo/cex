@@ -6,7 +6,7 @@ title: "Gate: llm_judge"
 version: "1.0.0"
 created: "2026-03-29"
 updated: "2026-03-29"
-author: "edison"
+author: "builder_agent"
 domain: "LLM-as-Judge configuration — automated quality evaluators with declared model, criteria, scale, and calibration examples"
 quality: null
 tags: [quality-gate, llm-judge, P07, evals, criteria, scale, few-shot]

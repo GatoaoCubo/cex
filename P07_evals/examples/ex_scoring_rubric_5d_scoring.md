@@ -6,7 +6,7 @@ title: "Scoring Rubric: 5D Quality Framework"
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: PYTHA
+author: knowledge_agent
 quality: 9.2
 tags: [scoring, rubric, 5d, quality, evaluation]
 tldr: "5D scoring: Density + Density + Accuracy + Reusability + Actionability — each 0-10, averaged for final score"

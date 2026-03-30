@@ -7,7 +7,7 @@ title: "Axiom — Deep Knowledge for axiom"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: edison
+author: builder_agent
 domain: axiom
 quality: null
 tags: [axiom, p02, BECOME, kind-kc]

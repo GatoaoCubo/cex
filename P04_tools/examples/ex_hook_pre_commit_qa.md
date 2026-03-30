@@ -6,7 +6,7 @@ script_path: records/core/python/quality_gate.py
 pillar: P04
 version: 1.0.0
 created: 2026-03-24
-author: edison
+author: builder_agent
 quality: 9.0
 tags: [hook, pre-commit, quality, scoring]
 ---

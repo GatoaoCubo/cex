@@ -6,7 +6,7 @@ title: "Gate: constraint_spec"
 version: "1.0.0"
 created: "2026-03-29"
 updated: "2026-03-29"
-author: "edison"
+author: "builder_agent"
 domain: "constrained LLM generation rules"
 quality: null
 tags: [quality-gate, constraint-spec, P03]

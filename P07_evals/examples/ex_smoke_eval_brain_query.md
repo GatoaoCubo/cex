@@ -6,7 +6,7 @@ title: "Smoke Eval: Brain MCP Query"
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: PYTHA
+author: knowledge_agent
 quality: 9.0
 tags: [smoke, eval, brain, mcp, search]
 tldr: "30-second sanity check for brain MCP — verify BM25+FAISS hybrid search returns relevant results within 3s"

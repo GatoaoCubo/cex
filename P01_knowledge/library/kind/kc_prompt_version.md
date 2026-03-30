@@ -7,7 +7,7 @@ title: "Prompt Version — Deep Knowledge for prompt_version"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: ATLAS
+author: operations_agent
 domain: prompt_version
 quality: null
 tags: [prompt_version, P03, GOVERN, kind-kc]

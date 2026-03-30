@@ -7,7 +7,7 @@ purpose: Golden and anti-pattern examples for notifier artifacts
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
-author: EDISON
+author: builder_agent
 tags: [examples, notifier, P04, golden, anti-pattern]
 quality: null
 tldr: "Golden: Slack deploy alert notifier (all gates pass, score 9.2). Anti: minimal email notifier (H05/H07/S02 fail)."
@@ -23,7 +23,7 @@ pillar: P04
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
-author: EDISON
+author: builder_agent
 name: "Slack Deploy Status Notifier"
 channel: slack
 template: "deploy_status_block"

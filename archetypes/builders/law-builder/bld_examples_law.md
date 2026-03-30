@@ -6,7 +6,7 @@ parent: law-builder
 version: 1.0.0
 created: "2026-03-26"
 updated: "2026-03-26"
-author: EDISON
+author: builder_agent
 tags: [examples, law-builder, golden, anti-example, P08]
 ---
 
@@ -21,7 +21,7 @@ pillar: P08
 version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
-author: "EDISON"
+author: "builder_agent"
 domain: "quality"
 quality: null
 tags: [law, quality, self-score, governance, artifact]

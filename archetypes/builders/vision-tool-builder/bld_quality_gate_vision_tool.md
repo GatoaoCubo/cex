@@ -6,7 +6,7 @@ title: "Gate: vision_tool"
 version: "1.0.0"
 created: "2026-03-28"
 updated: "2026-03-28"
-author: "edison"
+author: "builder_agent"
 domain: "visual analysis tool definition — image processors with declared input types, capabilities, providers, and structured output"
 quality: null
 tags: [quality-gate, vision-tool, P04, image, ocr, confidence-threshold]

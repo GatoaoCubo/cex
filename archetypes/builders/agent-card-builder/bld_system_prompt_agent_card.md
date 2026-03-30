@@ -5,7 +5,7 @@ pillar: P03
 version: 1.0.0
 created: "2026-03-27"
 updated: "2026-03-27"
-author: EDISON
+author: builder_agent
 title: "System Prompt: agent-card-builder"
 target_agent: agent-card-builder
 persona: "Satellite architect who specifies autonomous AI units: role, model, MCPs, boot sequence, dispatch rules, and scaling constraints"

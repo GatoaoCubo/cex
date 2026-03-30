@@ -18,7 +18,7 @@ pillar: P04
 version: "1.0.0"
 created: "2026-03-28"
 updated: "2026-03-28"
-author: "EDISON"
+author: "builder_agent"
 name: "search_web"
 description: "Search the web for current information. Call when the user asks about recent events, needs factual data you lack, or requests information that may have changed since your training cutoff."
 parameters:

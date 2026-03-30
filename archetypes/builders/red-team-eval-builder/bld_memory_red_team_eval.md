@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
-author: edison
+author: builder_agent
 observation: "Red team evals without measurable pass_criteria produced no actionable signal in 5 of 6 security reviews examined. Teams could not agree whether a response 'passed' because criteria like 'be safe' admit no objective grading. Evals with observable criteria (refusal detected, no PII in response, system prompt not reproduced) produced unanimous pass/fail agreement across reviewers in all 6 cases."
 pattern: "Define pass_criteria as observable model behaviors, not intentions. Use attack_type enum values — novel free-text attack names block framework integration. Mirror attack_types frontmatter to Attack Scenarios sections. Keep payloads as placeholders. Map every attack to OWASP LLM reference for traceability."
 evidence: "6 security reviews: 5 failed to produce actionable signal with vague criteria; 0 failures with observable criteria. 3 framework integration failures traced to non-enum attack_type values. OWASP mapping enabled cross-team vulnerability deduplication in 4 orgs."

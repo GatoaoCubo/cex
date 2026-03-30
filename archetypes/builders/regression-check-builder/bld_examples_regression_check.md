@@ -18,7 +18,7 @@ pillar: P07
 version: "1.0.0"
 created: "2026-03-29"
 updated: "2026-03-29"
-author: "EDISON"
+author: "builder_agent"
 name: "Summarization Pipeline Weekly Regression"
 baseline_ref: "experiment/summarization-prod-2026-03-22"
 threshold: 5.0

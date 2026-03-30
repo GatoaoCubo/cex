@@ -6,7 +6,7 @@ title: Data Validator Agent
 version: 1.0.0
 created: 2026-03-24
 updated: 2026-03-24
-author: EDISON
+author: builder_agent
 agent_node: operations_agent
 domain: data_quality
 quality: 9.0

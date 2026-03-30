@@ -18,7 +18,7 @@ consequences:
     - "Smaller community than Pinecone — fewer tutorials, slower Stack Overflow answers"
 version: 1.0.0
 created: 2026-03-29
-author: edison
+author: builder_agent
 quality: 9.0
 tags: [adr, vector-database, qdrant, pinecone, self-hosted, architecture]
 ---

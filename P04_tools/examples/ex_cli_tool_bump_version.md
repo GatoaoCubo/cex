@@ -5,7 +5,7 @@ pillar: P04
 title: "Bump Version — Increment LP or global version in VERSION.yaml"
 version: 1.0.0
 created: 2026-03-28
-author: edison
+author: builder_agent
 tags: [cli, tool, cex, product, version, semver, release]
 cli_command: "python _tools/bump_version.py"
 cli_args:

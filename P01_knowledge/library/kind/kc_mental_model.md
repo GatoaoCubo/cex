@@ -7,7 +7,7 @@ title: "Mental Model — Deep Knowledge for mental_model"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: ATLAS
+author: operations_agent
 domain: mental_model
 quality: null
 tags: [mental_model, P02, BECOME, kind-kc]

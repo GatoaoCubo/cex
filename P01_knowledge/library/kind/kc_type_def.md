@@ -7,7 +7,7 @@ title: "Type Def — Deep Knowledge for type_def"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: PYTHA
+author: knowledge_agent
 domain: type_def
 quality: null
 tags: [type_def, P06, GOVERN, kind-kc]

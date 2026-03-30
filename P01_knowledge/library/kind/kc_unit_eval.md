@@ -7,7 +7,7 @@ title: "Unit Eval — Deep Knowledge for unit_eval"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: PYTHA
+author: knowledge_agent
 domain: unit_eval
 quality: null
 tags: [unit_eval, P07, GOVERN, kind-kc]

@@ -7,7 +7,7 @@ title: "Search Tool — Deep Knowledge for search_tool"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: lily
+author: marketing_agent
 domain: search_tool
 quality: null
 tags: [search_tool, P04, CALL, kind-kc, web-search]

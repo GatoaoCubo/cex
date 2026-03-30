@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
-author: edison
+author: builder_agent
 observation: "Eval datasets without declared splits caused 5 out of 8 evaluation pipelines to use all cases as test data, including cases originally intended for validation. Datasets without schema_fields declarations required consumers to read source code to understand the data shape, adding 30-60 min of onboarding per pipeline integration. Datasets where splits did not sum to 1.0 (floating-point drift) caused silent data leakage in 3 train/test workflows."
 pattern: "Declare splits explicitly with values summing to 1.0. Use eval-only (test: 1.0) as default for pure evaluation datasets. List schema_fields in frontmatter exactly matching ## Schema section names. Keep quality: null always."
 evidence: "8 evaluation pipelines reviewed: 5 used wrong splits when splits were absent; 3 had data leakage from float drift; 0 issues when splits were explicit and verified to sum to 1.0. Schema field documentation reduced integration time from 45min avg to 8min avg."

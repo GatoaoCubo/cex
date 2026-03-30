@@ -7,7 +7,7 @@ title: "Feature Flag — Deep Knowledge for feature_flag"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: york
+author: commercial_agent
 domain: feature_flag
 quality: null
 tags: [feature_flag, P09, GOVERN, kind-kc]

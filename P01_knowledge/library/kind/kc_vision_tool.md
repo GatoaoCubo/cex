@@ -7,7 +7,7 @@ title: "Vision Tool — Deep Knowledge for vision_tool"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: lily
+author: marketing_agent
 domain: vision_tool
 quality: null
 tags: [vision_tool, P04, CALL, kind-kc, vision, OCR]

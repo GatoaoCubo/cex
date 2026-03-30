@@ -7,7 +7,7 @@ title: "Fallback Chain — Deep Knowledge for fallback_chain"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: edison
+author: builder_agent
 domain: fallback_chain
 quality: null
 tags: [fallback_chain, p02, GOVERN, kind-kc]

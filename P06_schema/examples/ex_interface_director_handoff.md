@@ -6,7 +6,7 @@ title: "Interface: orchestrator → Satellite Handoff Contract"
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: PYTHA
+author: knowledge_agent
 quality: 9.0
 tags: [interface, stella, agent_node, handoff, contract]
 tldr: "Interface contract for handoff files: orchestrator writes, agent_node reads — required sections, naming, signal protocol"

@@ -7,7 +7,7 @@ title: "Prompt Template — Deep Knowledge for prompt_template"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: ATLAS
+author: operations_agent
 domain: prompt_template
 quality: null
 tags: [prompt_template, P03, CONSTRAIN, kind-kc]

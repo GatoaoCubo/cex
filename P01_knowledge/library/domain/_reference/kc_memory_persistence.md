@@ -7,7 +7,7 @@ title: "Memory & Persistence — Learning Records, Session State, Runtime State,
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
-author: EDISON
+author: builder_agent
 domain: memory_persistence
 origin: manual
 quality: 9.0

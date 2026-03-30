@@ -6,7 +6,7 @@ description: "Permission rules for orchestrator orchestrator — what it can and
 scope: stella
 version: 1.0.0
 created: 2026-03-24
-author: edison
+author: builder_agent
 quality: 9.0
 tags: [permission, stella, allow, block, orchestration]
 ---

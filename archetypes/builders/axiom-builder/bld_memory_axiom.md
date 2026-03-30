@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-27
 updated: 2026-03-27
-author: edison
+author: builder_agent
 observation: "The primary failure mode in axiom authoring is misclassification: rules that are context-dependent are declared as axioms, and rules that are genuinely immutable are weakened to guidelines. Context-dependent rules need conditions; axioms must hold unconditionally."
 pattern: "Apply the negation test: if you can construct any realistic scenario where the rule should be violated, it is not an axiom. Axioms must survive negation in all realistic scenarios. If the rule fails the negation test, reclassify as a law (conditional) or guardrail (enforcement mechanism)."
 evidence: "Review of 31 axiom candidates: 14 failed the negation test and were reclassified as laws or guardrails. Of the 17 true axioms identified, 0 required revision after 90-day operational period. Of the 14 misclassified, 9 required revision within 30 days."

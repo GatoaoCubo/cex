@@ -6,7 +6,7 @@ title: "LLM Benchmark para Copy de E-Commerce em PT-BR"
 version: 1.0.0
 created: 2026-03-25
 updated: 2026-03-25
-author: SHAKA
+author: research_agent
 domain: research
 quality: null
 tags: [llm-benchmark, ecommerce, pt-br, copywriting, pricing, json]

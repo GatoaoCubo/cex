@@ -6,7 +6,7 @@ title: "Gate: glossary_entry"
 version: "1.0.0"
 created: "2026-03-27"
 updated: "2026-03-27"
-author: "edison"
+author: "builder_agent"
 domain: "glossary_entry — concise domain term definitions with synonyms, disambiguation, and usage context"
 quality: null
 tags: [quality-gate, glossary-entry, terminology, definition, P11]

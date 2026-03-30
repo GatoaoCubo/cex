@@ -6,7 +6,7 @@ title: "Gate: browser_tool"
 version: "1.0.0"
 created: "2026-03-28"
 updated: "2026-03-28"
-author: "edison"
+author: "builder_agent"
 domain: "browser automation tool — DOM-based web interaction with declared engine, actions, selectors, and output contract"
 quality: null
 tags: [quality-gate, browser-tool, P04, playwright, dom, selectors, automation]

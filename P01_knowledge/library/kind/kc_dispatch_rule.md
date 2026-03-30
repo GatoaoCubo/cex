@@ -7,7 +7,7 @@ title: "Dispatch Rule — Deep Knowledge for dispatch_rule"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: SHAKA
+author: research_agent
 domain: dispatch_rule
 quality: null
 tags: [dispatch_rule, P12, REASON, kind-kc]

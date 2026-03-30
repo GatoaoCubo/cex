@@ -7,7 +7,7 @@ title: "DAG — Deep Knowledge for dag"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: SHAKA
+author: research_agent
 domain: dag
 quality: null
 tags: [dag, P12, PRODUCE, kind-kc]

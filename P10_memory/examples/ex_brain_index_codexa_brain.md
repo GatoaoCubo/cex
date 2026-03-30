@@ -6,7 +6,7 @@ title: "Brain Index: organization Knowledge Base"
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: PYTHA
+author: knowledge_agent
 quality: 9.0
 tags: [brain, index, bm25, faiss, search, memory]
 tldr: "Hybrid search index: BM25 (keyword, ~50% accuracy) + FAISS/Ollama (semantic, ~88% accuracy) over 9916 MD files in organization-core"

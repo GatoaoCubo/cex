@@ -18,7 +18,7 @@ pillar: P03
 version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
-author: "EDISON"
+author: "builder_agent"
 title: "Research to Knowledge Card Pipeline"
 steps_count: 3
 flow: sequential

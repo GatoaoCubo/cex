@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
-author: edison
+author: builder_agent
 observation: "Regression checks without a concrete baseline_ref (using vague references like 'previous version' or 'last week') could not be reproduced when engineers attempted to re-run comparisons after incidents. Checks with experiment IDs or version tags reproduced reliably in every case. Additionally, checks with a single aggregated metric masked regressions in individual dimensions — a composite score improvement hid a 12% accuracy drop in one production system."
 pattern: "Use concrete resolvable baseline_ref (experiment ID, version tag). Define per-metric thresholds. Document threshold units (percentage vs absolute). Set fail_action explicitly. Define baseline rotation policy to prevent stale comparisons."
 evidence: "6 production regression incidents reviewed: 4 involved vague baseline_ref that could not be reproduced; 2 involved single-metric aggregation masking per-dimension regressions. Systems with concrete baseline_ref + per-metric thresholds caught regressions in 100% of controlled test cases."

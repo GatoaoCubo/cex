@@ -5,7 +5,7 @@ pillar: P04
 description: "Pipeline component that splits documents into chunks for RAG indexing"
 version: 1.0.0
 created: 2026-03-25
-author: edison
+author: builder_agent
 quality: 9.0
 tags: [component, pipeline, splitter, RAG, chunking]
 ---

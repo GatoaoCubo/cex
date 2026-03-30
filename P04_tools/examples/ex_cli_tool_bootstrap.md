@@ -5,7 +5,7 @@ pillar: P04
 title: "CEX Bootstrap — Create project from selected Leverage Points"
 version: 1.0.0
 created: 2026-03-28
-author: edison
+author: builder_agent
 tags: [cli, tool, cex, product, bootstrap, setup, project]
 cli_command: "python _tools/bootstrap.py"
 cli_args:

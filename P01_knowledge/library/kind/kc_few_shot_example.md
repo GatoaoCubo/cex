@@ -7,7 +7,7 @@ title: "Few-Shot Example — Deep Knowledge for few_shot_example"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: edison
+author: builder_agent
 domain: few_shot_example
 quality: null
 tags: [few_shot_example, p01, INJECT, kind-kc]

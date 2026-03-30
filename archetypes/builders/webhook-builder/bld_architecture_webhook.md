@@ -6,7 +6,7 @@ llm_function: CONTEXT
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
-author: EDISON
+author: builder_agent
 quality: null
 tags: [architecture, webhook, P04, components, boundary, event-driven]
 tldr: "Webhook runtime components, data flow (inbound and outbound), and boundary with api_client/notifier/mcp_server."

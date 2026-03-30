@@ -6,7 +6,7 @@ title: Web Researcher Agent
 version: 1.0.0
 created: 2026-03-23
 updated: 2026-03-23
-author: EDISON
+author: builder_agent
 agent_node: research_agent
 domain: research
 quality: 9.0

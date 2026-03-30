@@ -6,7 +6,7 @@ title: "Axiom: Memory Lifecycle Hooks (5-Hook Chain)"
 version: 1.0.0
 created: 2026-03-24
 updated: 2026-03-24
-author: EDISON
+author: builder_agent
 quality: 9.0
 tags: [axiom, hooks, lifecycle, memory, daemon]
 tldr: "5-hook lifecycle chain: Setup > SessionStart > UserPromptSubmit > PostToolUse > Stop. Hooks are thin HTTP clients; daemon owns persistence."

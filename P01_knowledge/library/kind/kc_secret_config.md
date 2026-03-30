@@ -7,7 +7,7 @@ title: "Secret Config — Deep Knowledge for secret_config"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: york
+author: commercial_agent
 domain: secret_config
 quality: null
 tags: [secret_config, P09, GOVERN, kind-kc]

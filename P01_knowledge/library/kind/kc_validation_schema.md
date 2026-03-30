@@ -7,7 +7,7 @@ title: "Validation Schema — Deep Knowledge for validation_schema"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: PYTHA
+author: knowledge_agent
 domain: validation_schema
 quality: null
 tags: [validation_schema, P06, GOVERN, kind-kc]

@@ -6,7 +6,7 @@ title: "Git Worktree Isolation — Parallel Agent Workspaces Without Conflict"
 version: 1.0.0
 created: 2026-03-26
 updated: 2026-03-26
-author: EDISON
+author: builder_agent
 domain: dev_tooling
 quality: null
 tags: [git-worktree, isolation, parallel-agents, branch-management, workspace]

@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-27
 updated: 2026-03-27
-author: edison
+author: builder_agent
 observation: "Few-shot examples that demonstrate format teach more reliably than examples that demonstrate content. Output fields that contain prose descriptions ('a good response would include...') rather than actual format demonstrations fail to transfer format patterns. Body exceeding 1024 bytes — the tightest limit in P01 — forces cuts to explanation rather than examples. Input prompts that are vague ('write something about X') produce outputs that cannot be reused as format templates. Difficulty calibration absent from a set means all examples are easy, leaving edge cases untaught."
 pattern: "The output field must show the actual format, not describe it. Input must be specific and realistic. Sequence examples easy -> medium -> hard across a set. Each pair includes an Explanation section stating exactly which format rule the output demonstrates. Body cap is 1024 bytes — trim Variations and Edge Cases before trimming the output demonstration. Never include scoring rubric or quality assessment; that belongs in golden_test (P07)."
 evidence: "12 few-shot example artifacts reviewed. Output fields containing descriptions instead of demonstrations required rework in 8 of 12 cases. Vague inputs produced non-reusable format templates in 5 cases. Sets with difficulty calibration (easy+medium+hard) showed 40% better format transfer in downstream evaluations vs easy-only sets."

@@ -7,7 +7,7 @@ title: "Constraint Spec — Deep Knowledge for constraint_spec"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: ATLAS
+author: operations_agent
 domain: constraint_spec
 quality: null
 tags: [constraint_spec, P03, CONSTRAIN, kind-kc]

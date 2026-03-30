@@ -7,7 +7,7 @@ title: "System Prompt — Deep Knowledge for system_prompt"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: ATLAS
+author: operations_agent
 domain: system_prompt
 quality: null
 tags: [system_prompt, P03, BECOME, kind-kc]

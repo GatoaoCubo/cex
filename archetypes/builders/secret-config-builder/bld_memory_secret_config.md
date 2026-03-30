@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
-author: edison
+author: builder_agent
 observation: "Secret configs without explicit rotation_policy.method caused 3 out of 5 agents to use stale credentials after provider-side rotation events. Configs that declared access_pattern: dynamic with lease_duration resolved this — agents always fetched fresh leases. Configs with access_pattern: static and no re-deploy trigger had indefinite credential staleness."
 pattern: "Always declare rotation_policy with both frequency and method. Set lease_duration when access_pattern == dynamic. Define fallback for every secret used in a critical-path agent. Never allow plaintext secrets — scan before commit."
 evidence: "5 agent credential incidents: 3 caused by missing rotation method, 2 caused by static access without re-deploy triggers. 0 incidents in configs with dynamic access_pattern + lease_duration + audit_log."

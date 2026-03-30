@@ -7,7 +7,7 @@ pillar: P04
 kind: browser_tool
 created: 2026-03-22
 updated: 2026-03-22
-author: EDISON
+author: builder_agent
 domain: building
 quality: 8.5
 tags: [design-tokens, tailwind, css, extraction, visual-design]

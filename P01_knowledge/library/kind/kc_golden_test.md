@@ -7,7 +7,7 @@ title: "Golden Test — Deep Knowledge for golden_test"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: PYTHA
+author: knowledge_agent
 domain: golden_test
 quality: null
 tags: [golden_test, P07, GOVERN, kind-kc]

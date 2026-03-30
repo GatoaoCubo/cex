@@ -10,7 +10,7 @@ license: proprietary
 keywords: [bm25, faiss, ollama, nomic, hybrid-search]
 pillar: P04
 created: 2026-03-24
-author: edison
+author: builder_agent
 quality: 9.5
 tags: [plugin, search, bm25, faiss, vector, semantic]
 ---

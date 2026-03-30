@@ -6,7 +6,7 @@ title: "Output Schema: Access Control Audit Report"
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: EDISON
+author: builder_agent
 format: markdown
 quality: 9.5
 tags: [security, audit, output]

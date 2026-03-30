@@ -6,7 +6,7 @@ title: "Gate: secret_config"
 version: "1.0.0"
 created: "2026-03-29"
 updated: "2026-03-29"
-author: "edison"
+author: "builder_agent"
 domain: "credential and secret management specification — provider, rotation policy, encryption posture, and access pattern"
 quality: null
 tags: [quality-gate, secret-config, P09, credentials, rotation, encryption]

@@ -18,7 +18,7 @@ pillar: P03
 version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
-author: "EDISON"
+author: "builder_agent"
 title: "Extract Product Metrics from Marketplace Scrape"
 action: "Extract and normalize product metrics from raw marketplace scrape data"
 input_required:

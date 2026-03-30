@@ -22,7 +22,7 @@ decision: "Use PostgreSQL with JSONB columns for artifact storage, replacing the
 version: "1.0.0"
 created: "2026-03-29"
 updated: "2026-03-29"
-author: "EDISON"
+author: "builder_agent"
 quality: null
 tags: [decision_record, database, P08, storage, postgresql]
 tldr: "Chose PostgreSQL over MongoDB for CEX artifact store: stable schema + relational queries outweigh document store flexibility."

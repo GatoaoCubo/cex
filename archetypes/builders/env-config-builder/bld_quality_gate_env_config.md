@@ -6,7 +6,7 @@ title: "Gate: env_config"
 version: "1.0.0"
 created: "2026-03-27"
 updated: "2026-03-27"
-author: "edison"
+author: "builder_agent"
 domain: "env_config — environment variable specifications with scope, validation rules, and sensitive var handling"
 quality: null
 tags: [quality-gate, env-config, environment-variables, secrets, configuration, P11]

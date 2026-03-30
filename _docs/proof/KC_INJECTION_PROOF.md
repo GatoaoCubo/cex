@@ -2,7 +2,7 @@
 id: proof_kc_injection_reward_signal
 title: KC Library Full Cycle Proof -- reward_signal
 date: 2026-03-29
-author: edison
+author: builder_agent
 quality: 9.0
 ---
 

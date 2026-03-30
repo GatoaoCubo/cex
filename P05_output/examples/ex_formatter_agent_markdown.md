@@ -6,7 +6,7 @@ title: "Formatter: Agent Markdown Response"
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: PYTHA
+author: knowledge_agent
 format: markdown
 quality: 9.0
 tags: [formatter, markdown, agent, output]

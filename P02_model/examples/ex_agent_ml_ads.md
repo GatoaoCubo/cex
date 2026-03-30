@@ -7,7 +7,7 @@ pillar: P02
 kind: agent
 created: 2026-03-22
 updated: 2026-03-22
-author: PYTHA
+author: knowledge_agent
 domain: marketing
 quality: 9.5
 tags: [mercado-livre, ads, roas, campaign, marketplace]

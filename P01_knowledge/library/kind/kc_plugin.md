@@ -7,7 +7,7 @@ title: "Plugin — Deep Knowledge for plugin"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: lily
+author: marketing_agent
 domain: plugin
 quality: null
 tags: [plugin, P04, CALL, kind-kc, extensibility]

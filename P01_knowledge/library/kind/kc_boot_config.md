@@ -7,7 +7,7 @@ title: "Boot Config — Deep Knowledge for boot_config"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: edison
+author: builder_agent
 domain: boot_config
 quality: null
 tags: [boot_config, p02, GOVERN, kind-kc]

@@ -7,7 +7,7 @@ title: "Reward Signal — Deep Knowledge for reward_signal"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: SHAKA
+author: research_agent
 domain: reward_signal
 quality: null
 tags: [reward_signal, P11, GOVERN, kind-kc]

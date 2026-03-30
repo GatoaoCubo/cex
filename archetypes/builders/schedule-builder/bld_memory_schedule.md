@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
-author: edison
+author: builder_agent
 observation: "Schedules missing explicit timezone declarations fired 1 hour early or late during DST transitions, corrupting 3 downstream reports. Schedules with catch_up: true after a 14-day outage triggered 14 simultaneous workflow runs, overwhelming shared DB connections. Jitter of 0-60s on 8 concurrent schedules reduced peak DB load by 73%."
 pattern: "Always declare IANA timezone. Default catch_up: false. Set max_concurrent: 1 unless workflow is proven idempotent. Add jitter when schedule shares infrastructure with others. Mirror workflow_ref exactly to target artifact id."
 evidence: "DST incidents: 3 reports corrupted across 2 quarters. Catch-up burst: 14 simultaneous runs, DB connection pool exhausted, 6-minute outage. Jitter test: 8 schedules without jitter = 8 simultaneous DB hits; with 0-60s jitter = max 2 simultaneous hits."

@@ -10,7 +10,7 @@ encryption: aes256
 access_audit: enabled
 version: 1.0.0
 created: 2026-03-29
-author: edison
+author: builder_agent
 quality: 9.0
 tags: [secret, openai, api-key, vault, rotation, encryption]
 ---

@@ -6,7 +6,7 @@ title: "Gate: memory_summary"
 version: "1.0.0"
 created: "2026-03-29"
 updated: "2026-03-29"
-author: "edison"
+author: "builder_agent"
 domain: "memory compression — summarized conversation/session memory injected at runtime"
 quality: null
 tags: [quality-gate, memory-summary, P10, compression, retention, freshness]

@@ -7,7 +7,7 @@ purpose: Crew roles, dependencies, and collaboration patterns for notifier-build
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
-author: EDISON
+author: builder_agent
 tags: [collaboration, notifier, P04, crew, dependencies]
 quality: null
 tldr: "notifier-builder is PUSH DELIVERY SPECIALIST. Depends on: webhook-builder (events trigger notifications). Used by: instruction-builder, agent-builder, code-gen."

@@ -6,7 +6,7 @@ title: "Gate: search_tool"
 version: "1.0.0"
 created: "2026-03-28"
 updated: "2026-03-28"
-author: "edison"
+author: "builder_agent"
 domain: "Web, semantic, and hybrid search tools that connect LLM agents to external search services"
 quality: null
 tags: [quality-gate, search-tool, P04, web-search, semantic-search, provider]

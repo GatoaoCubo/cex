@@ -7,7 +7,7 @@ title: "Handoff — Deep Knowledge for handoff"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: SHAKA
+author: research_agent
 domain: handoff
 quality: null
 tags: [handoff, P12, COLLABORATE, kind-kc]

@@ -6,7 +6,7 @@ title: Amazon Ads Agent - Campaign Strategy & Optimization
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: YORK
+author: commercial_agent
 domain: advertising
 quality: 8.5
 tags: [amazon, ads, sponsored-products, acos, roas, campaign]

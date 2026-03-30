@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
-author: edison
+author: builder_agent
 observation: "Browser tools without selector fallback chains failed silently on 6 of 9 production sites reviewed when the primary CSS class changed after a frontend deploy. Tools with data_attr > aria > css > xpath priority chains maintained 100% extraction continuity across the same deploys."
 pattern: "Declare selector fallback chains explicitly per element. Default engine to playwright. Always set timeout. Mirror actions list in frontmatter to body section names. Keep body under 2048 bytes."
 evidence: "9 production scraping tools: 6 failed after CSS refactor without fallback chains; 0 failures on the same sites after fallback chains were added. Tools using data-testid attributes as primary selector survived 4 consecutive frontend deploys without modification."

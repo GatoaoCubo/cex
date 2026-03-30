@@ -18,7 +18,7 @@ pillar: P12
 version: "1.0.0"
 created: "2026-03-29"
 updated: "2026-03-29"
-author: "EDISON"
+author: "builder_agent"
 name: "Research Pipeline — Embed Chunks"
 workflow_ref: "p12_wf_research_pipeline"
 step: "embed_chunks"

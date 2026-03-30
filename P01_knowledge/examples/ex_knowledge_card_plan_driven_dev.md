@@ -6,7 +6,7 @@ title: "Plan-Driven Development — Plans as Executable Prompts for Sub-Agents"
 version: 1.0.0
 created: 2026-03-26
 updated: 2026-03-26
-author: EDISON
+author: builder_agent
 domain: engineering_process
 quality: null
 tags: [plan-driven, subagent, task-granularity, tdd, execution-plan]

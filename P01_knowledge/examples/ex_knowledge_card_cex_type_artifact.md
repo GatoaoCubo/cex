@@ -6,7 +6,7 @@ title: "CEX Type Artifacts — 78 Named Units with Contract, Boundary and Schema
 version: 1.0.0
 created: 2026-03-25
 updated: 2026-03-25
-author: EDISON
+author: builder_agent
 domain: cex_taxonomy
 quality: null
 tags: [cex, type, artifact, contract, boundary, schema, naming]

@@ -6,7 +6,7 @@ title: Gateway Agent - Entry Point para Usuarios
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: EDISON
+author: builder_agent
 domain: orchestration
 quality: 9.0
 tags: [gateway, router, mentor, intent-detection, handoff, entry-point]

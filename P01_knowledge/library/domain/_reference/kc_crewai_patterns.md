@@ -7,7 +7,7 @@ title: "CrewAI Patterns — Agent, Task, Crew, Process, Memory, Delegation"
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
-author: EDISON
+author: builder_agent
 domain: crewai
 origin: src_framework_taxonomy
 quality: 9.0

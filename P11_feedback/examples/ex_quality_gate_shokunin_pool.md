@@ -6,7 +6,7 @@ title: "Gate: Shokunin Pool Admission"
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: EDISON
+author: builder_agent
 quality: 9.5
 tags: [shokunin, pool, quality-gate, feedback]
 tldr: "Tiered quality gate for organization pool admission: >= 9.5 golden, >= 8.0 pool, >= 7.0 experimental, < 7.0 rejected"

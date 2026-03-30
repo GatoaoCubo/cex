@@ -7,7 +7,7 @@ title: "Workflow — Deep Knowledge for workflow"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: SHAKA
+author: research_agent
 domain: workflow
 quality: null
 tags: [workflow, P12, PRODUCE, kind-kc]

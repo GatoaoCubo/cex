@@ -6,7 +6,7 @@ title: "Env: FIRECRAWL_API_KEY"
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: EDISON
+author: builder_agent
 quality: 9.0
 tags: [firecrawl, api-key, env, config]
 tldr: "Firecrawl API key for web scraping enrichment of marketplace research"

@@ -8,7 +8,7 @@ llm_function: CALL
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
-author: EDISON
+author: builder_agent
 tags: [kind-builder, vision-tool, P04, tools, image, ocr, screenshot]
 ---
 

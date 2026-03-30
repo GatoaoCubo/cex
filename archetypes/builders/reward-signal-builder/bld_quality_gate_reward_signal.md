@@ -6,7 +6,7 @@ title: "Gate: reward_signal"
 version: "1.0.0"
 created: "2026-03-29"
 updated: "2026-03-29"
-author: "edison"
+author: "builder_agent"
 domain: "reward signals — continuous quality scores for agent improvement via RLHF, DPO, critique, or implicit feedback"
 quality: null
 tags: [quality-gate, reward-signal, P11, feedback, rlhf, scoring]

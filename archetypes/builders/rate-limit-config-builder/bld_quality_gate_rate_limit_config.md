@@ -6,7 +6,7 @@ title: "Gate: rate_limit_config"
 version: "1.0.0"
 created: "2026-03-29"
 updated: "2026-03-29"
-author: "edison"
+author: "builder_agent"
 domain: "rate limiting configuration — RPM, TPM, budget, and tier management for LLM API providers"
 quality: null
 tags: [quality-gate, rate-limit-config, P09, rpm, tpm, budget, tier]

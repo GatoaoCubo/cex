@@ -7,7 +7,7 @@ title: "Feedback Loops — Bug Loops, Lifecycle Rules for Continuous Improvement
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
-author: EDISON
+author: builder_agent
 domain: feedback_loops
 origin: manual
 quality: 9.0

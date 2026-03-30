@@ -7,7 +7,7 @@ title: "LlamaIndex Patterns — Query Engines, Node Parsers, Response Synthesize
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
-author: EDISON
+author: builder_agent
 domain: llamaindex
 origin: src_framework_taxonomy
 quality: 9.0

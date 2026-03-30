@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
-author: edison
+author: builder_agent
 observation: "Checkpoints without TTL accumulated as orphan artifacts in 6 of 9 workflows reviewed, consuming 40-200MB of backend storage per workflow run. Checkpoints missing workflow_ref could not be associated with any workflow during incident recovery, making them useless for resume. Checkpoints with unbounded state (full object graphs) took 3-8x longer to restore than checkpoints with minimal resumption-critical state."
 pattern: "Always declare TTL. Always set workflow_ref. Minimize state to resumption-critical keys only. Mirror step name in frontmatter exactly to the workflow's step definition."
 evidence: "9 workflows audited: 6 had orphan checkpoints from missing TTL; 3 incidents where missing workflow_ref made recovery impossible; 4 workflows where state minimization reduced restore time from 8s to <1s."

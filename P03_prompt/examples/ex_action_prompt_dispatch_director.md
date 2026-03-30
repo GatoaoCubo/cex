@@ -7,7 +7,7 @@ output_expected: "Completion signal + git commit with artifacts"
 pillar: P03
 version: 1.0.0
 created: 2026-03-24
-author: STELLA
+author: orchestrator
 domain: orchestration
 quality: 9.0
 tags: [user-prompt, dispatch, handoff, agent_node, task]

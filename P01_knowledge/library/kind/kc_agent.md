@@ -7,7 +7,7 @@ title: "Agent — Deep Knowledge for agent"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: edison
+author: builder_agent
 domain: agent
 quality: null
 tags: [agent, p02, BECOME, kind-kc]

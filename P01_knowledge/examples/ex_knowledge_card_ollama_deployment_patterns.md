@@ -6,7 +6,7 @@ title: "Ollama Deployment Patterns para Modelos Locais Customizados"
 version: 2.0.0
 created: 2026-03-25
 updated: 2026-03-25
-author: EDISON
+author: builder_agent
 domain: execution
 quality: null
 tags: [ollama, deployment, gguf, lora, modelfile, local-llm]

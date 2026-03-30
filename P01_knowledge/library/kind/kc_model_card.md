@@ -7,7 +7,7 @@ title: "Model Card — Deep Knowledge for model_card"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: ATLAS
+author: operations_agent
 domain: model_card
 quality: null
 tags: [model_card, P02, GOVERN, kind-kc]

@@ -6,7 +6,7 @@ title: "LLM Providers Enum — Multi-Provider Routing Registry"
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
-author: EDISON
+author: builder_agent
 domain: schema
 quality: null
 tags: [enum, llm-providers, routing, multi-provider, registry]

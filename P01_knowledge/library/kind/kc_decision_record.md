@@ -7,7 +7,7 @@ title: "Decision Record — Deep Knowledge for decision_record"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: york
+author: commercial_agent
 domain: decision_record
 quality: null
 tags: [decision_record, P08, REASON, kind-kc, ADR]

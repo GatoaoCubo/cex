@@ -8,7 +8,7 @@ pattern: 3-phase pipeline
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
-author: EDISON
+author: builder_agent
 tags: [instruction, notifier, P04, pipeline]
 ---
 # Instructions: How to Produce a notifier

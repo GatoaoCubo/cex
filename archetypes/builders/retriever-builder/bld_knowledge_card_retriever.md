@@ -6,7 +6,7 @@ llm_function: INJECT
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
-author: EDISON
+author: builder_agent
 quality: null
 tags: [knowledge_card, retriever, P09, RAG, vector-search, embedding, hybrid-search]
 tldr: "Domain knowledge for retriever artifacts: stores, metrics, hybrid search, reranking, metadata filtering."

@@ -7,7 +7,7 @@ title: "Code Executor — Deep Knowledge for code_executor"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: ATLAS
+author: operations_agent
 domain: code_executor
 quality: null
 tags: [code_executor, P04, CALL, kind-kc]

@@ -18,7 +18,7 @@ pillar: P09
 version: "1.0.0"
 created: "2026-03-29"
 updated: "2026-03-29"
-author: "EDISON"
+author: "builder_agent"
 name: "Anthropic Build Tier Rate Limits"
 provider: "anthropic"
 rpm: 50

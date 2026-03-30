@@ -18,7 +18,7 @@ pillar: P03
 version: "1.0.0"
 created: "2026-03-29"
 updated: "2026-03-29"
-author: "EDISON"
+author: "builder_agent"
 name: "Product Data JSON Constraint"
 quality: null
 tags: [constraint_spec, P03, constraint]

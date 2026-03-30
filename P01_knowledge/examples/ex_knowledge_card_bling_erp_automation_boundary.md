@@ -6,7 +6,7 @@ title: "Bling ERP: Fronteira de Automacao para Cadastro de Produto"
 version: 1.0.0
 created: 2026-03-25
 updated: 2026-03-25
-author: PYTHA
+author: knowledge_agent
 domain: execution
 quality: null
 tags: [bling, automation, boundary, tiering, human-in-the-loop, erp]

@@ -6,7 +6,7 @@ title: "P04 Tools: O Que o Agente Usa"
 version: 1.0.0
 created: 2026-03-23
 updated: 2026-03-23
-author: edison
+author: builder_agent
 domain: meta-construction
 quality: 9.0
 tags: [tools, skill, MCP, hook, plugin, connector]

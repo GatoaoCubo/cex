@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-27
 updated: 2026-03-27
-author: edison
+author: builder_agent
 observation: "Hybrid search indexes (BM25 + semantic) underperform pure BM25 at recall for exact-match queries and underperform pure semantic at recall for paraphrase queries when the hybrid weight is misconfigured. The default 50/50 split is wrong for most domains - optimal split is domain-specific."
 pattern: "Profile query distribution before setting hybrid weights. For domains with high exact-match query frequency (code, identifiers, names), bias toward BM25 (70/30). For domains with high paraphrase frequency (concepts, questions, descriptions), bias toward semantic (30/70). Measure recall@5 on a held-out query set to validate."
 evidence: "Index configurations tested across 4 domains: default 50/50 split achieved mean recall@5 of 0.61. Domain-profiled weights achieved 0.79 mean recall@5 (29% improvement). Code/identifier domain: BM25-heavy config achieved 0.91 vs 0.64 for semantic-heavy."

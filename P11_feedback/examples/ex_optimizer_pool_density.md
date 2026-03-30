@@ -6,7 +6,7 @@ title: "Optimizer: Pool Density Improvement"
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: PYTHA
+author: knowledge_agent
 quality: 9.0
 tags: [optimizer, pool, density, quality, feedback]
 tldr: "Pool density optimizer: detect low-density artifacts (< 0.8), identify anti-patterns, trigger targeted rewrites to reach >= 0.85"

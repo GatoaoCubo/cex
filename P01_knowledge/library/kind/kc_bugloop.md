@@ -7,7 +7,7 @@ title: "Bugloop — Deep Knowledge for bugloop"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: SHAKA
+author: research_agent
 domain: bugloop
 quality: null
 tags: [bugloop, P11, GOVERN, kind-kc]

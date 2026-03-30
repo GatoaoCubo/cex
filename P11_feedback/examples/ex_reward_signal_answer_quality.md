@@ -6,7 +6,7 @@ title: "Answer Quality Reward Signal — LLM-as-Judge Continuous Scoring"
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
-author: EDISON
+author: builder_agent
 domain: feedback
 quality: null
 tags: [reward-signal, llm-judge, quality-scoring, continuous-feedback]

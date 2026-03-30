@@ -7,7 +7,7 @@ pillar: P01
 version: "1.0.0"
 created: "2023-10-17"
 updated: "2023-10-17"
-author: "EDISON"
+author: "builder_agent"
 name: "Knowledge Nucleus Retriever Configuration"
 store_type: "hybrid_store"
 top_k: 10

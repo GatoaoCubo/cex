@@ -6,7 +6,7 @@ title: "Axiom: Session Compression (Dual-ID Pattern)"
 version: 1.0.0
 created: 2026-03-24
 updated: 2026-03-24
-author: EDISON
+author: builder_agent
 quality: 9.0
 tags: [axiom, compression, session, dual-id, stop]
 tldr: "Compression fires exactly once at Stop hook. Dual-ID pattern: content_session_id (stable, for DB) vs memory_session_id (lazy, for SDK resume)."

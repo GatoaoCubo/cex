@@ -6,7 +6,7 @@ title: "CEX LP03 Prompt — Como a LLM Fala (10 Tipos de Engenharia de Prompt)"
 version: 1.0.0
 created: 2026-03-25
 updated: 2026-03-25
-author: EDISON
+author: builder_agent
 domain: cex_taxonomy
 quality: null
 tags: [cex, lp03, prompt, reason, constrain, template, chain-of-thought]

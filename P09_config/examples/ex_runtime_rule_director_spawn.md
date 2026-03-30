@@ -6,7 +6,7 @@ title: "Runtime Rule: Satellite Spawn Constraints"
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: PYTHA
+author: knowledge_agent
 quality: 9.0
 tags: [runtime, agent_node, spawn, constraints, bsod]
 tldr: "Spawn rules: max 3 agent_nodes + orchestrator (BSOD at 4), 5s between terminals, -p flag mandatory for TSP, inline prompt < 200 chars"

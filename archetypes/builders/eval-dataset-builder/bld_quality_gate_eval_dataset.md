@@ -6,7 +6,7 @@ title: "Gate: eval_dataset"
 version: "1.0.0"
 created: "2026-03-29"
 updated: "2026-03-29"
-author: "edison"
+author: "builder_agent"
 domain: "evaluation dataset — curated test case collections with declared schema, splits, and framework integration"
 quality: null
 tags: [quality-gate, eval-dataset, P07, evals, splits, schema-fields]

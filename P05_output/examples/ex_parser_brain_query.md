@@ -7,7 +7,7 @@ input_format: json
 output_format: structured_markdown
 version: 1.0.0
 created: 2026-03-24
-author: edison
+author: builder_agent
 quality: 9.0
 tags: [parser, brain, search-results, extraction]
 ---

@@ -6,7 +6,7 @@ title: "CEX Satellite Concept — Verticalized Departments as Complete LLM Entit
 version: 1.0.0
 created: 2026-03-25
 updated: 2026-03-25
-author: EDISON
+author: builder_agent
 domain: cex_taxonomy
 quality: null
 tags: [cex, agent_node, department, specialization, agent-team, boot-sequence]

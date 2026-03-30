@@ -7,7 +7,7 @@ title: "Blueprint: knowledge_card — Meta-Template para Producao de KCs"
 version: 2.0.0
 created: 2026-03-25
 updated: 2026-03-25
-author: STELLA
+author: orchestrator
 quality: null
 tags: [blueprint, knowledge-card, meta-template, production-mold]
 tldr: "Meta-template que define COMO gerar KCs validos — frontmatter, body, quality gates, naming"
@@ -167,7 +167,7 @@ title: "Prompt Caching Reduces LLM Cost by 90%"
 version: 1.0.0
 created: 2026-03-25
 updated: 2026-03-25
-author: EDISON
+author: builder_agent
 domain: llm_engineering
 quality: null
 tags: [prompt-caching, cost-optimization, anthropic]
@@ -213,7 +213,7 @@ Prompt caching reutiliza prefixos pre-processados entre chamadas LLM. Reduz cust
 ---
 id: kc_caching           # FAIL: sem prefixo p01_kc_, != filename
 title: "Caching"          # FAIL: < 5 chars
-author: STELLA            # FAIL: roteou, nao produziu
+author: orchestrator      # FAIL: routed, did not produce
 quality: 9.5              # FAIL: auto-atribuido
 tags: "caching, api"      # FAIL: string, nao lista
 tldr: "This document describes caching."  # FAIL: filler

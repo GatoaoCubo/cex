@@ -18,7 +18,7 @@ pillar: P02
 version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
-author: "EDISON"
+author: "builder_agent"
 perspective: "cost_efficiency"
 applies_to: [model_card, embedding_config, agent_card]
 focus: "Pricing, token costs, and cost-per-task efficiency"

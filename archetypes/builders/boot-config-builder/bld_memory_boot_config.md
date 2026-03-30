@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-27
 updated: 2026-03-27
-author: edison
+author: builder_agent
 observation: "Boot configuration failures are disproportionately caused by provider-specific constraint mismatches: token limits, context window sizes, and timeout values that are valid for one provider but silently truncate or fail on another. Provider-agnostic configs cause 73% of boot failures."
 pattern: "Write one identity block per provider, never shared. Each block must declare context_window, max_tokens, timeout, and tool_list explicitly for that provider. Cross-provider defaults cause silent truncation that is harder to debug than explicit failures."
 evidence: "17 boot configs reviewed: 9 used shared cross-provider blocks, 8 used per-provider blocks. Average boot failure rate: shared=4.2 failures/week, per-provider=0.6 failures/week. Silent truncation incidents: shared=11, per-provider=0."

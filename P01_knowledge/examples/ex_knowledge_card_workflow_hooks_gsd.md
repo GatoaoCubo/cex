@@ -6,7 +6,7 @@ title: "GSD Workflow Hooks — Advisory Enforcement for Claude Code Agents"
 version: 1.0.0
 created: 2026-03-26
 updated: 2026-03-26
-author: EDISON
+author: builder_agent
 domain: hook_engineering
 quality: null
 tags: [hooks, workflow, advisory, context-monitor, prompt-guard, claude-code]

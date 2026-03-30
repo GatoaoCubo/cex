@@ -11,7 +11,7 @@ quality_gates:
   no_hardcoded_paths: true
 version: 1.0.0
 created: 2026-03-24
-author: EDISON
+author: builder_agent
 domain: meta-construction
 quality: 9.5
 tags: [agent-package, portable, agent-bundle, llm-agnostic]

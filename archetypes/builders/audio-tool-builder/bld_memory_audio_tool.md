@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
-author: edison
+author: builder_agent
 observation: "Audio tools without declared direction caused downstream agents to attempt both STT and TTS paths, producing format mismatches in 5 of 8 pipeline integrations reviewed. Tools with explicit direction + BCP-47 languages + format enum routed correctly in every case."
 pattern: "Declare direction explicitly. Use BCP-47 language codes. Mirror models list in frontmatter to ## Models section entries. Keep body under 2048 bytes. Declare sample_rate for STT tools."
 evidence: "8 voice pipeline integrations: 5 failed with direction-ambiguous tools; 0 routing failures after direction was declared. Language free-text ('Brazilian Portuguese') caused 3 lookup failures; BCP-47 'pt-BR' resolved all 3."

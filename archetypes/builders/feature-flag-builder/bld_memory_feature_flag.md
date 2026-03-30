@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-27
 updated: 2026-03-27
-author: edison
+author: builder_agent
 observation: "Feature flags without expiration dates accumulate as permanent tech debt — stale flags found in codebases after 18+ months. rollout_percentage as string '50%' fails schema validation; must be integer 0-100. category field confused with 'feature' or 'toggle' (invalid) instead of the four valid values: release, experiment, ops, permission. Kill switch documentation absent from ops flags causes outage risk — no one knows how to disable a live feature under incident. Lifecycle section omitted means no retirement plan, flags never get removed."
 pattern: "Every feature flag requires: default_state (on/off only), rollout_percentage (integer 0-100), category (release/experiment/ops/permission), expires date, kill_switch procedure, and a ## Lifecycle section. Ops flags default to on and need emergency disable documented. Release and experiment flags default to off and expire in 2-6 weeks. Permission flags are permanent but need documented revocation path. Never use flag to represent WHO has access — that is a permission artifact."
 evidence: "9 feature flag artifacts validated. 100% of flags missing expires field had no documented retirement path. Ops flags without kill_switch documentation were implicated in 2 incident post-mortems. rollout_percentage string vs integer caused 4 schema rejections in early production runs."

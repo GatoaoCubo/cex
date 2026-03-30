@@ -8,7 +8,7 @@ pattern: 3-phase pipeline (Research -> Compose -> Validate)
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
-author: EDISON
+author: builder_agent
 quality: null
 tags: [instruction, retriever, P03, RAG, vector-search]
 ---

@@ -7,7 +7,7 @@ title: "Lifecycle Rule — Deep Knowledge for lifecycle_rule"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: SHAKA
+author: research_agent
 domain: lifecycle_rule
 quality: null
 tags: [lifecycle_rule, P11, GOVERN, kind-kc]

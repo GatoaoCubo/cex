@@ -6,7 +6,7 @@ title: "Gate: embedding_config"
 version: "1.0.0"
 created: "2026-03-27"
 updated: "2026-03-27"
-author: "edison"
+author: "builder_agent"
 domain: "embedding_config — vector model configuration for RAG pipelines including dimensions, chunking, and distance metrics"
 quality: null
 tags: [quality-gate, embedding-config, vector, rag, chunking, P11]

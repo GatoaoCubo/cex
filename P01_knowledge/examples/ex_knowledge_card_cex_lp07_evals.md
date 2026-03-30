@@ -6,7 +6,7 @@ title: "CEX LP07 Evals — Quality Measurement for LLM Systems"
 version: 1.0.0
 created: 2026-03-25
 updated: 2026-03-25
-author: EDISON
+author: builder_agent
 domain: cex_taxonomy
 quality: null
 tags: [cex, lp07, evals, scoring, benchmark, golden-test, shokunin]

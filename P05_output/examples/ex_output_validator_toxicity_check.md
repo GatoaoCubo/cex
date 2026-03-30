@@ -6,7 +6,7 @@ title: Toxicity + PII Post-LLM Validator
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
-author: EDISON
+author: builder_agent
 domain: output_safety
 quality: 9.0
 tags: [output-validator, toxicity, pii, guardrails, safety, nemo, retry, content-filter]

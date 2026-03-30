@@ -7,7 +7,7 @@ title: "RAG Source — Deep Knowledge for rag_source"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: edison
+author: builder_agent
 domain: rag_source
 quality: null
 tags: [rag_source, p01, INJECT, kind-kc]

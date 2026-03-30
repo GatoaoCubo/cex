@@ -7,7 +7,7 @@ purpose: Learned patterns and anti-patterns from notifier artifact production
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
-author: EDISON
+author: builder_agent
 tags: [memory, notifier, P04, patterns, learning]
 quality: null
 tldr: "Key learnings: rate_limit prevents provider bans, priority routing prevents alert fatigue, template_vars prevent runtime formatting errors."

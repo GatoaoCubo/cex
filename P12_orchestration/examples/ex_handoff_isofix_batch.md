@@ -6,7 +6,7 @@ title: "Handoff: ISOFIX Batch 1 (Edison)"
 version: 1.0.0
 created: 2026-03-05
 updated: 2026-03-22
-author: STELLA
+author: orchestrator
 quality: 9.0
 tags: [isofix, handoff, edison, orchestration]
 tldr: "Real handoff dispatching builder_agent to complete ISO vectorstores for 9 agents — demonstrates autonomia total pattern"

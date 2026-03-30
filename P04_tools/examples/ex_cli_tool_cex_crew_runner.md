@@ -5,7 +5,7 @@ pillar: P04
 title: "Crew Runner — Lightweight DAG executor for builder plans"
 version: 1.0.0
 created: 2026-03-28
-author: edison
+author: builder_agent
 tags: [cli, tool, cex, core, crew, dag, execution]
 cli_command: "python _tools/cex_crew_runner.py"
 cli_args:

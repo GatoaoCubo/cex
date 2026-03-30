@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-27
 updated: 2026-03-27
-author: edison
+author: builder_agent
 observation: "Chains that attempted to pack multiple transformations into a single step produced outputs that were difficult to debug and impossible to partially retry. Enforcing 1 step = 1 LLM call with explicit typed input/output reduced debugging time by ~60% and enabled partial retry at the step level."
 pattern: "Each chain step must have exactly one purpose, one LLM call, and explicitly typed input and output. Data flows between steps via named output references. Error handling is declared per step, not per chain."
 evidence: "5 pipeline patterns validated across research, data processing, and intent routing domains. Step granularity discipline eliminated 'which step broke?' ambiguity in all cases where it was applied."

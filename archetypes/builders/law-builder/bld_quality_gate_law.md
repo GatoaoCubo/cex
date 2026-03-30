@@ -6,7 +6,7 @@ title: "Gate: Law"
 version: "1.0.0"
 created: "2026-03-27"
 updated: "2026-03-27"
-author: EDISON
+author: builder_agent
 domain: law
 quality: null
 tags: [quality-gate, law, governance, P08, enforcement]

@@ -7,7 +7,7 @@ title: "Env Config — Deep Knowledge for env_config"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: york
+author: commercial_agent
 domain: env_config
 quality: null
 tags: [env_config, P09, GOVERN, kind-kc]

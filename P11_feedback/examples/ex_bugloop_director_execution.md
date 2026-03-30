@@ -6,7 +6,7 @@ title: "Bugloop: Satellite Execution Resilience"
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: EDISON
+author: builder_agent
 quality: 9.0
 tags: [agent_node, resilience, bugloop, feedback]
 tldr: "3-retry bugloop for agent_node task execution — never stop on first error, skip after 3 failures, always commit partial work"

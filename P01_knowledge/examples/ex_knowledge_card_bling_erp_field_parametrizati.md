@@ -6,7 +6,7 @@ title: "Bling ERP: Mapa de Campos do Produto V3"
 version: 2.0.0
 created: 2026-03-25
 updated: 2026-03-25
-author: EDISON
+author: builder_agent
 domain: execution
 quality: null
 tags: [bling, erp, field-mapping, product, parametrization]

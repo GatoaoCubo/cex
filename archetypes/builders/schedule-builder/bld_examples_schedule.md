@@ -18,7 +18,7 @@ pillar: P12
 version: "1.0.0"
 created: "2026-03-29"
 updated: "2026-03-29"
-author: "EDISON"
+author: "builder_agent"
 name: "Daily Sales Report Schedule"
 trigger_type: cron
 cron: "0 9 * * MON-FRI"

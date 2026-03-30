@@ -7,7 +7,7 @@ purpose: Fill-in template for webhook artifact production
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
-author: EDISON
+author: builder_agent
 tags: [output_template, webhook, P04, template]
 quality: null
 ---

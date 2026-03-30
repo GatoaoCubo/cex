@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-27
 updated: 2026-03-27
-author: edison
+author: builder_agent
 observation: "Dispatch rules using fewer than 6 keywords miss ~30% of real task inputs due to natural language variation and bilingual usage. Rules with confidence_threshold below 0.5 trigger on unrelated tasks, causing misroutes. Using the same executor as both primary and fallback creates a single point of failure with no actual fallback behavior. Rules that omit Portuguese keyword variants fail to match when operators describe tasks in their native language."
 pattern: "Design routing rules with: (1) 6-10 keywords covering both English and Portuguese variants; (2) confidence_threshold 0.70-0.75 for primary domains; (3) a fallback executor that differs from the primary; (4) conditions.exclude_domains to prevent overlap with adjacent rules. Model selection follows domain: build/code tasks use higher-capacity models, research/docs use standard models."
 evidence: "Rules with 6+ bilingual keywords matched 94% of real task inputs vs 66% for English-only rules with 3 keywords. Confidence threshold 0.72 produced zero misroutes across 200 test tasks; threshold 0.45 produced 23 misroutes on the same set. Distinct fallback executors recovered 100% of primary-unavailable scenarios; same-executor fallback recovered 0%."

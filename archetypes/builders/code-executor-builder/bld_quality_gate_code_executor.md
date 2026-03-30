@@ -6,7 +6,7 @@ title: "Gate: code_executor"
 version: "1.0.0"
 created: "2026-03-28"
 updated: "2026-03-28"
-author: "edison"
+author: "builder_agent"
 domain: "Sandboxed code execution environments with isolation, language support, resource limits, and timeout policies"
 quality: null
 tags: [quality-gate, code-executor, P04, sandbox, isolation, timeout]

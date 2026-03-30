@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-27
 updated: 2026-03-27
-author: edison
+author: builder_agent
 observation: "Environment configs that omit sensitivity markers for API keys and database URLs cause secrets to be logged, committed to version control, or exposed in health-check endpoints. Variables without type declarations cause silent type coercion failures when a service reads '8080' as a string and passes it where an integer is required. Missing override precedence documentation causes operators to set the wrong scope when troubleshooting, leaving environment-specific overrides silently ignored. Variables in lowercase are routinely skipped by environment-reading code that only scans UPPER_SNAKE_CASE names."
 pattern: "Specify each variable with five fields: (1) name in UPPER_SNAKE_CASE; (2) type (string, integer, boolean, url, path); (3) default value or null if required; (4) sensitive: true/false; (5) validation rule (regex, range, enum). Include an explicit ## Sensitive Variables section even when empty. Document override precedence order (e.g., process env > .env.local > .env > defaults)."
 evidence: "Configs with sensitivity markers prevented secret exposure in 3 of 3 log-audit reviews. Explicit type declarations caught 6 silent coercion bugs during code review that would have reached production. Documented override precedence reduced operator troubleshooting time by ~45% in 4 incident postmortems. UPPER_SNAKE_CASE enforcement eliminated 100% of variable-not-found errors in tested services."

@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-27
 updated: 2026-03-27
-author: edison
+author: builder_agent
 observation: "Glossary definitions longer than 3 lines consistently contain content that belongs in a knowledge_card — they start adding context, history, and operational steps. Synonyms field written as a string rather than a list fails schema validation. Empty synonyms list violates the minimum-one-synonym requirement. Terms capitalized when not proper nouns signal the author is treating the glossary as documentation rather than a definitional reference. Disambiguation notes absent from terms with near-identical names cause cross-pillar confusion downstream."
 pattern: "Definition max 3 lines: line 1 defines the term, line 2 gives concrete scope or example, line 3 disambiguates from the most-confused related term. Synonyms is always a list with at least one entry. Term field is lowercase unless a proper noun. Abbreviation entries must expand the abbreviation on line 1 before defining it. Cross-pillar terms include a disambiguation note naming which pillar owns each interpretation. Depth beyond 3 lines signals the content should be a knowledge_card."
 evidence: "11 glossary entries reviewed. Entries exceeding 3 lines required content to be moved to knowledge_card in 7 of 11 cases. Absent disambiguation caused 4 downstream misrouting incidents where engineers used the wrong artifact type. Synonyms as string failed H07 validation in 3 early builds."

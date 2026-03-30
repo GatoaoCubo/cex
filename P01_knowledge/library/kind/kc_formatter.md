@@ -7,7 +7,7 @@ title: "Formatter — Deep Knowledge for formatter"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: lily
+author: marketing_agent
 domain: formatter
 quality: null
 tags: [formatter, P05, GOVERN, kind-kc, output]

@@ -6,7 +6,7 @@ title: "Gate: ISO Package"
 version: "1.0.0"
 created: "2026-03-27"
 updated: "2026-03-27"
-author: "edison"
+author: "builder_agent"
 domain: "agent_package — portable self-contained agent bundles with tier-validated file inventories"
 quality: null
 tags: [quality-gate, agent-package, packaging, portable, bundle, tier, distribution]

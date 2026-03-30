@@ -6,7 +6,7 @@ title: "Gate: feature_flag"
 version: "1.0.0"
 created: "2026-03-27"
 updated: "2026-03-27"
-author: "edison"
+author: "builder_agent"
 domain: "feature_flag — on/off toggles with rollout percentage, cohort targeting, and kill switch behavior"
 quality: null
 tags: [quality-gate, feature-flag, toggle, rollout, P11]

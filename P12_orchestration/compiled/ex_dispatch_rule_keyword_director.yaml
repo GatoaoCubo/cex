@@ -5,7 +5,7 @@ description: Keyword-to-agent_node routing rules for orchestrator auto-dispatch
 scope: stella_routing
 version: 1.0.0
 created: 2026-03-24
-author: stella
+author: orchestrator
 quality: 9.0
 tags:
 - dispatch-rule

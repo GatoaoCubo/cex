@@ -7,7 +7,7 @@ purpose: Tool registry for notifier-builder
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
-author: EDISON
+author: builder_agent
 tags: [tools, notifier, P04, brain, validate, forge]
 quality: null
 tldr: "Tools used by notifier-builder: brain_query for discovery, validate for gates, forge for artifact creation."

@@ -7,7 +7,7 @@ title: "Diagram — Deep Knowledge for diagram"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: york
+author: commercial_agent
 domain: diagram
 quality: null
 tags: [diagram, P08, INJECT, kind-kc, architecture]

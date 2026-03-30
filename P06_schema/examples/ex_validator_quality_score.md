@@ -6,7 +6,7 @@ title: "Validator: Quality Score Field"
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: PYTHA
+author: knowledge_agent
 quality: 9.0
 tags: [validator, quality, score, schema]
 tldr: "Validation rules for quality_score field: range 0.0-10.0, tier classification, pool eligibility gates"

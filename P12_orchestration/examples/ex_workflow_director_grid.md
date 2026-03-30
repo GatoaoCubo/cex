@@ -5,7 +5,7 @@ pillar: P12
 description: "Multi-agent_node crew configuration for parallel task execution via spawn_grid"
 version: 1.0.0
 created: 2026-03-25
-author: stella
+author: orchestrator
 quality: 9.0
 tags: [crew, multi-agent, grid, parallel, orchestration]
 ---

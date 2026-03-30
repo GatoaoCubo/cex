@@ -6,7 +6,7 @@ description: "Unit test for brain_query search accuracy across known queries"
 target: brain_query
 version: 1.0.0
 created: 2026-03-24
-author: atlas
+author: operations_agent
 quality: 9.0
 tags: [unit-eval, brain, search, accuracy]
 ---

@@ -5,7 +5,7 @@ pillar: P06
 description: "BNF grammar constraint for generating valid JSON objects during LLM decoding"
 version: 1.0.0
 created: 2026-03-25
-author: edison
+author: builder_agent
 quality: 9.0
 tags: [grammar, constraint, json, BNF, structured-generation]
 ---

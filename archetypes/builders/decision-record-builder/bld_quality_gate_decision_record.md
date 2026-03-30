@@ -6,7 +6,7 @@ title: "Gate: decision_record"
 version: "1.0.0"
 created: "2026-03-29"
 updated: "2026-03-29"
-author: "edison"
+author: "builder_agent"
 domain: "architecture decision record — single significant choice documented with context, options, rationale, and consequences"
 quality: null
 tags: [quality-gate, decision-record, P08, ADR, architecture, status-lifecycle]

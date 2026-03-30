@@ -5,7 +5,7 @@ pillar: P10
 version: 1.0.0
 created: 2026-03-27
 updated: 2026-03-27
-author: edison
+author: builder_agent
 observation: "Daemons that write PID files before subsystems are ready trigger false-positive health checks and restart loops. Processes lacking SIGTERM handlers exit dirty, leaving lock files and corrupt state. Health probes returning HTTP 200 unconditionally hide stuck workers and full queues. Resource limits absent on long-running workers allow memory leaks to consume all available RAM before any alert fires."
 pattern: "Three-layer daemon design: (1) startup barrier - write PID only after all subsystems confirm ready; (2) signal fence - trap SIGTERM/SIGINT, drain in-flight work within timeout, exit code 0; (3) meaningful health probe - report ok/degraded/down based on queue depth and worker liveness, not just TCP reachability."
 evidence: "Startup barriers eliminated false-positive restart loops across 14 controlled restarts. Graceful-drain shutdown reduced data-loss events from 6 per 100 forced kills to 0. Meaningful health probes caught 3 stuck-worker incidents that a simple ping check would have missed."

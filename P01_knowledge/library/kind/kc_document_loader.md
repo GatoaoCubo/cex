@@ -7,7 +7,7 @@ title: "Document Loader — Deep Knowledge for document_loader"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
-author: lily
+author: marketing_agent
 domain: document_loader
 quality: null
 tags: [document_loader, P04, INJECT, kind-kc]
