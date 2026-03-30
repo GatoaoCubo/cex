@@ -210,7 +210,7 @@ OBJECT_TO_KINDS = {
     "regression_check": [("regression_check", "P07", "GOVERN")],
     "response_format": [("response_format", "P05", "PRODUCE")],
     "restricao": [("guardrail", "P11", "GOVERN")],
-    "retriever": [("retriever_config", "P01", "CONSTRAIN")],
+    "retriever": [("retriever", "P04", "INJECT")],
     "retriever_config": [("retriever_config", "P01", "CONSTRAIN")],
     "retriever_tool": [("retriever", "P04", "CALL")],
     "reward": [("reward_signal", "P11", "GOVERN")],
@@ -251,6 +251,9 @@ OBJECT_TO_KINDS = {
     "deployment_spec": [("agent_card", "P08", "BECOME")],
     "deployment": [("agent_card", "P08", "BECOME")],
 
+    "few_shot_example": [("few_shot_example", "P01", "INJECT")],
+    "glossary_entry": [("glossary_entry", "P01", "INJECT")],
+    "unit_eval": [("unit_eval", "P07", "GOVERN")],
 }
 
 # Verb -> extra builders force-activated regardless of tier
@@ -377,7 +380,7 @@ def parse_intent(intent: str, quality_override: float | None = None) -> dict:
     # --- Objects ---
     objects = []
     for seg in segments:
-        seg_words = [re.sub(r"[^a-z]", "", w) for w in seg.lower().split() if w]
+        seg_words = [re.sub(r"[^a-z0-9_]", "", w) for w in seg.lower().split() if w]
         seg_words = [w for w in seg_words if w]  # remove empties
         found_in_seg = False
 
@@ -422,8 +425,8 @@ def parse_intent(intent: str, quality_override: float | None = None) -> dict:
     # Fallback: scan all words with bigram priority
     if not objects:
         for i in range(len(words) - 1):
-            w1 = re.sub(r"[^a-z]", "", words[i])
-            w2 = re.sub(r"[^a-z]", "", words[i+1])
+            w1 = re.sub(r"[^a-z0-9_]", "", words[i])
+            w2 = re.sub(r"[^a-z0-9_]", "", words[i+1])
             bigram = f"{w1}_{w2}"
             if bigram in OBJECT_TO_KINDS:
                 objects.append(bigram)
