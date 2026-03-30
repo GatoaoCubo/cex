@@ -1,0 +1,83 @@
+---
+id: p01_kc_router
+kind: knowledge_card
+type: kind
+pillar: P02
+title: "Router — Deep Knowledge for router"
+version: 1.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: ATLAS
+domain: router
+quality: null
+tags: [router, P02, REASON, kind-kc]
+tldr: "Keyword-to-satellite routing rule that maps incoming tasks to the correct execution target"
+when_to_use: "Building, reviewing, or reasoning about router artifacts"
+keywords: [routing, dispatch, task-mapping]
+feeds_kinds: [router]
+density_score: null
+---
+
+# Router
+
+## Spec
+```yaml
+kind: router
+pillar: P02
+llm_function: REASON
+max_bytes: 1024
+naming: p02_rt_{{scope}}.yaml
+core: true
+```
+
+## What It Is
+A router is a structured rule that maps task keywords or intent signals to the correct satellite or agent for execution. It enables the orchestrator to reason about where to dispatch work without hardcoding decisions. It is NOT a dispatch_rule (P12, which orchestrates multi-step workflows) nor a fallback_chain (model-to-model cascading). A router is a single-hop mapping: task in, target out.
+
+## Cross-Framework Map
+| Framework/Provider | Class/Concept | Notes |
+|-------------------|---------------|-------|
+| LangChain | `RunnableParallel` / custom router chains | Conditional routing via LCEL branching |
+| LlamaIndex | `RouterQueryEngine` / `ObjectIndex` | Selects sub-engine based on query classification |
+| CrewAI | `Process.hierarchical` manager routing | Manager agent routes tasks to crew members |
+| DSPy | `dspy.Module.forward()` branching logic | Programmatic routing inside module's forward method |
+| Haystack | `ConditionalRouter` component | Routes pipeline flow based on conditions/templates |
+| OpenAI | Function/tool selection via `tool_choice` | Model selects which function to call based on intent |
+| Anthropic | `tool_choice` (auto/any/tool) | Controls which tool the model routes to |
+
+## Key Parameters
+| Parameter | Type | Default | Tradeoff |
+|-----------|------|---------|----------|
+| keywords | list[str] | required | More keywords = higher recall but risk of false matches |
+| target | string | required | Single target = deterministic vs multi = needs tiebreaker |
+| priority | int | 0 | Higher = preferred when multiple routers match |
+
+## Patterns
+| Pattern | When to Use | Example |
+|---------|-------------|---------|
+| Keyword match | Simple, fast routing | `keywords: [pesquisar, mercado] -> SHAKA` |
+| Semantic similarity | Ambiguous or novel queries | Embed query, compare to router descriptions, pick closest |
+| Cascade routing | Primary target may reject | Try SHAKA, if reject try LILY, fallback to EDISON |
+
+## Anti-Patterns
+| Anti-Pattern | Why It Fails | Fix |
+|-------------|-------------|-----|
+| Overlapping keywords across routers | Ambiguous routing, random target selection | Deduplicate keywords; assign each keyword to exactly one router |
+| Routing by model instead of capability | Wrong satellite gets tasks it cannot handle | Route by domain/skill, not by model name |
+
+## Integration Graph
+```
+[mental_model] --> [router] --> [dispatch_rule]
+                      |
+              [action_prompt]
+```
+
+## Decision Tree
+- IF keywords match exactly one router THEN dispatch to that target
+- IF keywords match multiple routers THEN use priority field as tiebreaker
+- IF no keywords match THEN fall back to semantic similarity or default target
+- DEFAULT: Route to the satellite with the broadest domain scope
+
+## Quality Criteria
+- GOOD: Has keywords, target, and scope defined; no overlapping keywords
+- GREAT: Includes priority, confidence threshold, and fallback target
+- FAIL: Ambiguous keywords shared across routers; missing target; >1024 bytes
