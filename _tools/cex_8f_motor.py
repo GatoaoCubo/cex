@@ -377,25 +377,63 @@ def parse_intent(intent: str, quality_override: float | None = None) -> dict:
     # --- Objects ---
     objects = []
     for seg in segments:
-        seg_words = seg.lower().split()
-        for sw in seg_words:
-            clean = re.sub(r"[^a-z_-]", "", sw)
-            if clean in OBJECT_TO_KINDS and clean not in objects:
-                objects.append(clean)
+        seg_words = [re.sub(r"[^a-z]", "", w) for w in seg.lower().split() if w]
+        seg_words = [w for w in seg_words if w]  # remove empties
+        found_in_seg = False
+
+        # Priority 1: try trigram (3 adjacent words joined with _)
+        for i in range(len(seg_words) - 2):
+            trigram = f"{seg_words[i]}_{seg_words[i+1]}_{seg_words[i+2]}"
+            if trigram in OBJECT_TO_KINDS and trigram not in objects:
+                objects.append(trigram)
+                found_in_seg = True
                 break
+
+        # Priority 2: try bigram (2 adjacent words joined with _)
+        if not found_in_seg:
+            for i in range(len(seg_words) - 1):
+                bigram = f"{seg_words[i]}_{seg_words[i+1]}"
+                if bigram in OBJECT_TO_KINDS and bigram not in objects:
+                    objects.append(bigram)
+                    found_in_seg = True
+                    break
+
+        # Priority 3: try hyphenated bigram (e.g. "few-shot" style)
+        if not found_in_seg:
+            for i in range(len(seg_words) - 1):
+                hyphen = f"{seg_words[i]}-{seg_words[i+1]}"
+                if hyphen in OBJECT_TO_KINDS and hyphen not in objects:
+                    objects.append(hyphen)
+                    found_in_seg = True
+                    break
+
+        # Priority 4: single word lookup (original behavior)
+        if not found_in_seg:
+            for sw in seg_words:
+                if sw in OBJECT_TO_KINDS and sw not in objects:
+                    objects.append(sw)
+                    break
 
     # Check for builder name in intent (meta intent: "reconstroi X-builder")
     bm = re.search(r"([\w-]+-builder)\b", text_lower)
     if bm and bm.group(1) not in objects:
         objects.append(bm.group(1))
 
-    # Fallback: scan all words
+    # Fallback: scan all words with bigram priority
     if not objects:
-        for w in words:
-            clean = re.sub(r"[^a-z_-]", "", w)
-            if clean in OBJECT_TO_KINDS:
-                objects.append(clean)
+        for i in range(len(words) - 1):
+            w1 = re.sub(r"[^a-z]", "", words[i])
+            w2 = re.sub(r"[^a-z]", "", words[i+1])
+            bigram = f"{w1}_{w2}"
+            if bigram in OBJECT_TO_KINDS:
+                objects.append(bigram)
                 break
+        if not objects:
+            for w in words:
+                clean = re.sub(r"[^a-z_-]", "", w)
+                if clean in OBJECT_TO_KINDS:
+                    objects.append(clean)
+                    break
 
     # --- Domain ---
     skip_words = (

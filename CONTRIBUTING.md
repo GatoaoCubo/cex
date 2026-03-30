@@ -16,43 +16,43 @@ Every contribution must pass `cex_doctor` before merging.
 
 ## How to Add a Builder
 
-Builders live in `archetypes/` and consist of 13 ISO files.
+Builders live in `archetypes/builders/` and consist of 13 ISO files.
 
 ### Step 1: Create Directory
 
 ```
-archetypes/{kind}-builder/
+archetypes/builders/{kind}-builder/
 ```
 
 ### Step 2: Create 13 Files
 
 | # | File | Purpose |
 |---|------|---------|
-| 1 | `SYSTEM_PROMPT.md` | Identity, role, constraints |
-| 2 | `INSTRUCTIONS.md` | Step-by-step execution protocol |
-| 3 | `QUALITY_GATES.md` | Pass/fail criteria, density thresholds |
-| 4 | `KNOWLEDGE.md` | Domain knowledge (max 4KB) |
-| 5 | `ARCHITECTURE.md` | Component map, data flow |
-| 6 | `COLLABORATION.md` | Inter-builder dependencies |
-| 7 | `MEMORY.md` | Learning record schema |
-| 8 | `FEW_SHOT_1.md` | Input/output example 1 |
-| 9 | `FEW_SHOT_2.md` | Input/output example 2 |
-| 10 | `FEW_SHOT_3.md` | Input/output example 3 |
-| 11 | `SCHEMA.yaml` | Input/output JSON/YAML schema |
-| 12 | `VALIDATION.md` | Self-check checklist |
-| 13 | `MANIFEST.yaml` | Metadata: version, pillar, kind, tags |
+| 1 | `bld_system_prompt_{kind}.md` | Identity, role, constraints |
+| 2 | `bld_instruction_{kind}.md` | Step-by-step execution protocol |
+| 3 | `bld_quality_gate_{kind}.md` | Pass/fail criteria, density thresholds |
+| 4 | `bld_knowledge_card_{kind}.md` | Domain knowledge (max 4KB) |
+| 5 | `bld_architecture_{kind}.md` | Component map, data flow |
+| 6 | `bld_collaboration_{kind}.md` | Inter-builder dependencies |
+| 7 | `bld_memory_{kind}.md` | Learning record schema |
+| 8 | `bld_examples_{kind}.md` | Input/output examples |
+| 9 | `bld_schema_{kind}.md` | Input/output JSON/YAML schema |
+| 10 | `bld_config_{kind}.md` | Builder configuration |
+| 11 | `bld_manifest_{kind}.md` | Metadata: version, pillar, kind, tags |
+| 12 | `bld_output_template_{kind}.md` | Output format template |
+| 13 | `bld_tools_{kind}.md` | Available tools and integrations |
 
 ### Step 3: Validate
 
 ```bash
-python _tools/cex_doctor.py archetypes/{kind}-builder/
+python _tools/cex_doctor.py
 ```
 
-All 7 checks must PASS: naming, density, 13-file completeness, frontmatter, size, schema compliance, cross-references.
+All checks must PASS: naming, density, 13-file completeness, frontmatter, size, schema compliance.
 
 ### Step 4: Submit PR
 
-Title format: `archetype: {kind}-builder -- 13 ISO (P{NN}, Wave {N})`
+Title format: `archetype: {kind}-builder -- 13 ISO (P{NN})`
 
 ---
 
@@ -61,43 +61,25 @@ Title format: `archetype: {kind}-builder -- 13 ISO (P{NN}, Wave {N})`
 Templates live in `P{NN}_{name}/templates/`.
 
 1. Choose the correct pillar directory (`P01-P12`)
-2. Name: `{lp}_{type}_{topic}_template.md` (lowercase, snake_case, ASCII, max 50 chars)
+2. Name: `tpl_{kind}.md` (lowercase, snake_case, ASCII)
 3. Include all required frontmatter fields (see Code Style below)
 4. Density >= 0.80 mandatory
-5. Derive from `archetypes/META_TEMPLATE.md` for consistency
-6. Add compiled counterpart in `compiled/` (`.yaml` or `.json` per `machine_format`)
-7. Run `python _tools/validate_schema.py` -- must PASS
+5. Add compiled counterpart in `compiled/` (`.yaml` or `.json`)
+6. Run `python _tools/validate_schema.py` -- must PASS
 
 ---
 
-## How to Add a New LP Type
+## How to Add a New Kind
 
-1. Open `P{NN}_{name}/_schema.yaml`
-2. Add type under `types:` with required fields:
-   ```yaml
-   - name: your_type
-     description: one-line description
-     frontmatter_required: [id, type, lp, quality, tags, tldr, keywords, long_tails, bullets, axioms]
-     constraints:
-       max_bytes: 4096
-       quality_min: 7.0
-       density_min: 0.80
-   ```
-3. Update generator (`_generator.md`) with new section for the type
-4. Add at least 1 example in `examples/` meeting density >= 0.80
-5. Run `python _tools/validate_schema.py` -- must PASS
-
----
-
-## How to Migrate an Artifact
-
-1. Check `archetypes/MIGRATION_MAP.md` for LP bucket
-2. Identify target: KC > P01, Agent > P02, Prompt > P03, Tool > P04, Workflow > P12
-3. Strip prose > 3 lines -- convert to bullets
-4. Add YAML frontmatter (all required fields)
-5. Ensure density >= 0.80 (compress if needed)
-6. Add compiled counterpart
-7. Run validators, fix errors, submit
+1. Open `P{NN}_{name}/_schema.yaml` — add kind under `types:`
+2. Update `.cex/kinds_meta.json` — add kind entry
+3. Update `archetypes/TYPE_TO_TEMPLATE.yaml` — map kind to template
+4. Update `OBJECT_TO_KINDS` in `_tools/cex_8f_motor.py` — add lookup entry
+5. Create template in `P{NN}/templates/tpl_{kind}.md`
+6. Create builder: `archetypes/builders/{kind}-builder/` (13 ISOs)
+7. Create kind KC: `P01_knowledge/library/kind/kc_{kind}.md`
+8. Add at least 1 example in `P{NN}/examples/` meeting density >= 0.80
+9. Run `python _tools/cex_doctor.py` -- must PASS
 
 ---
 
@@ -106,12 +88,12 @@ Templates live in `P{NN}_{name}/templates/`.
 ### Naming Convention
 
 ```
-{lp}_{type}_{topic}.md
+{layer}_{kind}_{topic}.{ext}
 
 Rules:
 - lowercase only
-- snake_case (underscores, no hyphens)
-- ASCII only (no accented chars in filename)
+- snake_case (underscores, no hyphens in filenames)
+- ASCII only (no accented chars)
 - max 50 characters
 - id in frontmatter == filename stem
 ```
@@ -134,20 +116,17 @@ density = useful_tokens / total_tokens
 ```yaml
 ---
 id: p01_kc_topic_name
-kind: domain_kc
+kind: knowledge_card
 pillar: P01
-quality: 8.5
+title: "Descriptive title"
+version: "1.0.0"
+created: "2026-01-01"
+updated: "2026-01-01"
+author: "builder_agent"
+domain: "topic_domain"
+quality: null
 tags: [tag1, tag2, tag3]
 tldr: "One-line summary under 80 chars"
-keywords: [keyword1, keyword2, keyword3]
-long_tails:
-  - "Question this artifact answers?"
-bullets:
-  - "Key fact 1 (max 80 chars)"
-  - "Key fact 2"
-  - "Key fact 3"
-axioms:
-  - "Immutable truth this artifact encodes"
 density_score: 0.88
 ---
 ```
@@ -155,51 +134,23 @@ density_score: 0.88
 ### Body Rules
 
 - Prose > 3 lines: PROHIBITED -- convert to bullets
-- Max 4KB per file
+- Max per-kind byte limits (see `_schema.yaml`)
 - Headers must have content (no empty sections)
 - Tables preferred over prose for structured data
 - Dual output: every `.md` needs a `compiled/` counterpart
 
 ---
 
-## Review Process
-
-### Automated Checks (pre-commit)
-
-```bash
-python _tools/cex_doctor.py [path]        # 7-check suite
-python _tools/validate_schema.py           # Schema compliance
-python _tools/validate_generators.py       # Generator coverage
-python _tools/validate_examples.py         # Density + frontmatter
-```
-
-All validators must PASS. Failures are blocking.
-
-### Quality Gate
+## Quality Gate
 
 | Criteria | Threshold |
 |----------|-----------|
-| `cex_doctor` | 7/7 checks PASS |
+| `cex_doctor` | 0 FAIL |
 | Density score | >= 0.80 |
-| Quality score | >= 8.0 |
-| File size | <= 4KB |
+| Quality score | >= 8.0 (published), >= 7.0 (experimental) |
 | Naming | v2.0 compliant |
 | Frontmatter | All required fields present |
 | Dual output | `.md` + compiled counterpart |
-
-### PR Checklist
-
-- [ ] Artifact in correct directory (`P01-P12/` or `archetypes/`)
-- [ ] Filename follows naming v2.0 (`{lp}_{type}_{topic}.md`)
-- [ ] YAML frontmatter complete (all required fields)
-- [ ] `density_score` >= 0.80 declared and accurate
-- [ ] `quality` >= 8.0 declared
-- [ ] File size <= 4KB
-- [ ] No prose blocks > 3 lines
-- [ ] Compiled counterpart exists
-- [ ] `python _tools/cex_doctor.py` -- PASS
-- [ ] `python _tools/validate_schema.py` -- PASS
-- [ ] PR title: `{LP}[{type}]: brief description`
 
 ---
 
@@ -211,12 +162,11 @@ All validators must PASS. Failures are blocking.
 | Missing `density_score` | Estimate and declare |
 | Filename with uppercase/hyphens | Rename: lowercase snake_case |
 | `id` != filename stem | Fix `id` to match filename |
-| File > 4KB | Compress or split into 2 artifacts |
+| File exceeds `max_bytes` | Compress or split |
 | keywords < 3 | Add domain-specific retrieval keywords |
 | No compiled counterpart | Run `cex_compile.py` |
 | Builder with < 13 files | Complete all 13 ISO files |
-| Generic tldr | Make specific: include LP, type, topic |
 
 ---
 
-*CEX CONTRIBUTING v2.0 | 2026-03-27 | Quality: Shokunin*
+*CEX CONTRIBUTING v3.0 | 2026-03-30 | Quality: Shokunin*
