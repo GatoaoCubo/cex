@@ -1,0 +1,102 @@
+id: n01_pt_intelligence_workflows
+kind: prompt_template
+pillar: P03
+title: Prompt Templates for N01 Intelligence Workflows
+version: 2.0.0
+created: '2026-03-30'
+updated: '2026-03-30'
+author: N01_rebuild_8F
+variables:
+- name: research_type
+  type: string
+  required: true
+  description: 'Must be one of: LITERATURE_REVIEW, COMPARATIVE_STUDY, SOLO_ANALYSIS'
+- name: topic
+  type: string
+  description: The central topic for the research (used in Lit Review, Solo Analysis).
+- name: key_question
+  type: string
+  required: true
+  description: The primary question the research aims to answer.
+- name: source_types
+  type: list
+  description: 'Preferred source types, e.g., ''peer-reviewed papers'', ''patents''.'
+- name: subject_a
+  type: string
+  description: The first subject for a comparative study.
+- name: subject_b
+  type: string
+  description: The second subject for a comparative study.
+- name: comparison_aspects
+  type: list
+  description: 'Aspects to compare, e.g., ''price'', ''performance'', ''market share''.'
+- name: document_to_analyze
+  type: string
+  description: A specific document/URL for deep-dive analysis.
+- name: analytical_framework
+  type: string
+  description: 'A specific framework to apply, e.g., ''SWOT'', ''PESTLE''.'
+variable_syntax: mustache
+domain: intelligence, research
+quality: null
+tags:
+- prompt
+- template
+- n01
+- intelligence
+- workflow
+- research
+tldr: Provides structured prompt templates for triggering N01's primary workflows:
+  Literature Review, Comparative Study, and Solo Analysis.
+purpose: This artifact provides structured templates to initiate the core workflows of
+  the N01 Intelligence Nucleus. Using these templates ensures that all necessary
+  parameters are provided, allowing the agent to select the correct workflow path
+  and execute the research task efficiently.
+variables_table: |
+  | Name | Type | Required | Description |
+  |---|---|---|---|
+  | `research_type` | string | true | Must be one of: `LITERATURE_REVIEW`, `COMPARATIVE_STUDY`, `SOLO_ANALYSIS`. |
+  | `topic` | string | varies | The central topic for the research. |
+  | `key_question`| string | true | The primary question the research aims to answer. |
+  | `source_types`| list | false | Preferred source types (e.g., 'peer-reviewed papers', 'patents'). |
+  | `subject_a` | string | varies | The first subject for a comparative study. |
+  | `subject_b` | string | varies | The second subject for a comparative study. |
+  | `comparison_aspects` | list | varies | Aspects to compare (e.g., 'price', 'performance'). |
+  | `document_to_analyze` | string | false | A specific document/URL for deep-dive analysis. |
+  | `analytical_framework`| string | false | A specific framework to apply (e.g., 'SWOT', 'PESTLE'). |
+template_1_literature_review: |
+  This template triggers a systematic review of literature on a given topic.
+  ```prompt
+  Research Type: {{research_type}}
+  Topic: {{topic}}
+  Key Question: {{key_question}}
+  {{#source_types}}
+  Source Types:
+  {{#source_types}}
+  - {{.}}
+  {{/source_types}}
+  {{/source_types}}
+  ```
+template_2_comparative_study: |
+  This template triggers a head-to-head comparison of two or more subjects.
+  ```prompt
+  Research Type: {{research_type}}
+  Subject A: {{subject_a}}
+  Subject B: {{subject_b}}
+  Key Question: {{key_question}}
+  Comparison Aspects:
+  {{#comparison_aspects}}
+  - {{.}}
+  {{/comparison_aspects}}
+  ```
+template_3_solo_analysis: |
+  This template triggers a deep-dive analysis of a single topic, subject, or document.
+  ```prompt
+  Research Type: {{research_type}}
+  Subject: {{topic}}
+  {{#document_to_analyze}}
+  Document to Analyze: {{document_to_analyze}}
+  {{/document_to_analyze}}
+  Analytical Framework: {{analytical_framework}}
+  Key Question: {{key_question}}
+  ```

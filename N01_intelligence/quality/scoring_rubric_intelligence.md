@@ -1,66 +1,54 @@
 ---
-id: p07_sr_research_nucleus
+id: n01_sr_intelligence
 kind: scoring_rubric
 pillar: P07
-title: "Rubric: Research Nucleus Evaluation"
-version: "1.0.0"
-created: "2023-10-12"
-updated: "2023-10-12"
-author: "Evaluation Framework Designer"
-framework: "Research Nucleus Evaluation"
-target_kinds: [research_artifact]
+title: "Scoring Rubric for N01 Intelligence Briefs"
+version: "2.0.0"
+created: "2026-03-30"
+updated: "2026-03-30"
+author: "N01_rebuild_8F"
+framework: "N01 Intelligence Brief Quality"
+target_kinds: [Intelligence Brief]
 dimensions_count: 4
 total_weight: 100
-threshold_golden: 9.5
 threshold_publish: 8.0
 threshold_review: 7.0
-automation_status: "semi-automated"
-domain: "academic"
+domain: "intelligence, research, analysis"
 quality: null
-tags: [scoring-rubric, research-nucleus, academic-evaluation]
-tldr: "4-dimension rubric for evaluating research artifacts: originality 30%, methodology 30%, impact 20%, ethics 20%"
-density_score: 0.85
-calibration_set: [golden_test_1, golden_test_2]
-inter_rater_agreement: 0.88
-appeals_process: "Submit appeal to evaluation board with detailed rationale"
+tags: [scoring, rubric, n01, intelligence, quality, eval]
+tldr: "Defines the 4-dimension scoring rubric for N01's soft quality gates: Clarity, Synthesis, Source Quality, and Actionability."
 linked_artifacts:
-  primary: "research_quality_assessment"
-  related: [quality_gate_research, golden_test_1]
+  primary: "n01_qg_intelligence"
 ---
 
 ## Purpose
-This scoring rubric is designed to evaluate research artifacts within the context of a Research Nucleus. It provides a comprehensive assessment across multiple dimensions ensuring that the artifact contributes significantly to the field of academic inquiry.
+This scoring rubric provides a detailed, quantitative guide for evaluating the four **Soft Gates** defined in `n01_qg_intelligence`. It is used by human reviewers and LLM-as-a-judge models to ensure a consistent and objective measure of quality for all `Intelligence Brief` artifacts produced by the N01 nucleus.
 
 ## Dimensions
-| Dimension           | Weight | Scale | Criteria                                                                                                                                   | Example (10)                                | Example (5)                                  |
-|---------------------|--------|-------|-------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------|----------------------------------------------|
-| Originality         | 30%    | 0-10  | The degree of novelty and uniqueness presented in the research.                                                                           | Groundbreaking methodology or findings      | Common approach with minor novel elements   |
-| Methodological Rigor| 30%    | 0-10  | The robustness and appropriateness of the research methodology.                                                                            | Meticulous approach, well-supported by data | Basic methodology with some gaps            |
-| Impact and Relevance| 20%    | 0-10  | The significance of the research contribution to the field.                                                                               | High impact study cited by peers            | Limited relevance, limited citations         |
-| Ethical Standards   | 20%    | 0-10  | The adherence to ethical guidelines during research.                                                                                      | Exceeds ethical norms                       | Meets basic ethical standards               |
+The final score is a weighted average of the following four dimensions, each rated on a scale of 0-10.
 
-## Tier Thresholds
-| Tier    | Score | Action                                        |
-|---------|-------|-----------------------------------------------|
-| GOLDEN  | >= 9.5| Promote as exemplary study, use for reference |
-| PUBLISH | >= 8.0| Accept for publication                        |
-| REVIEW  | >= 7.0| Return with feedback for improvement          |
-| REJECT  | < 7.0 | Reject and suggest resubmission               | 
+| Dimension                 | Weight | Score 9-10 (Excellent)                                                                       | Score 5-6 (Average)                                                                     | Score 1-2 (Poor)                                                                       |
+|---------------------------|--------|----------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
+| **Clarity & Conciseness** | 30%    | Key judgements are sharp and instantly understandable. Language is precise. No wasted words.   | Main points are understandable but require some effort. Contains mild jargon or verbosity. | The text is confusing, ambiguous, or overly verbose. Key insights are buried.         |
+| **Depth of Synthesis**    | 30%    | Connects multiple, disparate data points to reveal a novel insight not obvious from any single source. | Summarizes and groups related information from sources, but draws limited new conclusions.  | Primarily paraphrases or lists facts from sources with no new synthesis.               |
+| **Source Quality**        | 20%    | Analysis is overwhelmingly based on primary, peer-reviewed, or high-authority sources.       | A mix of high- and low-quality sources is used. Over-reliance on secondary commentary.  | Analysis relies on blogs, opinion pieces, or unverified sources. Citations are weak.   |
+| **Actionability**         | 20%    | Key judgements directly inform a strategic decision, highlight a clear risk, or reveal a tangible opportunity. | Insights are interesting but lack a clear "so what?" for decision-making.               | The analysis is purely descriptive and provides no basis for taking action.           |
 
-## Calibration
-- **GOLDEN (9.6):** High originality, methodologically rigorous, significantly impactful, and exemplary ethical standards.
-- **PUBLISH (8.4):** New perspectives with sound methodology, useful to field scholars, ethically compliant.
-- **REVIEW (7.2):** Acceptable standard, but lacking in some areas such as rigorous method or minor ethical concerns.
-- **REJECT (5.8):** Insufficient in originality, methodology, impact, or ethical practice.
+## Scoring Calculation
+The final quality score is calculated as a weighted sum:
+`Score = (Clarity * 0.3) + (Synthesis * 0.3) + (Source Quality * 0.2) + (Actionability * 0.2)`
 
-## Automation
-| Dimension           | Status        | Tool                        |
-|---------------------|---------------|-----------------------------|
-| Originality         | semi-automated| originality_checker_tool    |
-| Methodological Rigor| manual        |                             |
-| Impact and Relevance| semi-automated| citation_tracker            |
-| Ethical Standards   | manual        |                             |
+### Example
+- Clarity: 9/10
+- Synthesis: 8/10
+- Source Quality: 7/10
+- Actionability: 8/10
+- **Final Score**: `(9 * 0.3) + (8 * 0.3) + (7 * 0.2) + (8 * 0.2) = 2.7 + 2.4 + 1.4 + 1.6 = 8.1`
 
-## References
-- AAC&U VALUE Rubrics: https://www.aacu.org/initiatives/value-initiative
-- Example Research Evaluation Tools: https://researchevaluationtools.com
+## Tier Thresholds & Actions
+This rubric maps directly to the actions defined in `n01_qg_intelligence`.
+| Tier    | Score | Action                 |
+|---------|-------|------------------------|
+| PUBLISH | >= 8.0| `ACCEPT`               |
+| REVIEW  | >= 7.0| `ACCEPT_WITH_WARNING`  |
+| REJECT  | < 7.0 | `REJECT`               |

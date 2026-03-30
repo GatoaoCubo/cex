@@ -1,103 +1,137 @@
 ---
-id: p03_pt_research_nucleus
+id: n01_pt_intelligence_workflows
 kind: prompt_template
 pillar: P03
-title: "Research Nucleus Template"
-version: "1.0.0"
-created: "2023-11-01"
-updated: "2023-11-01"
-author: "prompt-template-builder"
+title: "Prompt Templates for N01 Intelligence Workflows"
+version: "2.0.0"
+created: "2026-03-30"
+updated: "2026-03-30"
+author: "N01_rebuild_8F"
 variables:
-  - name: "research_topic"
+  - name: "research_type"
     type: "string"
     required: true
-    default: null
-    description: "The central topic for the research inquiry"
-  - name: "primary_research_question"
+    description: "Must be one of: LITERATURE_REVIEW, COMPARATIVE_STUDY, SOLO_ANALYSIS"
+  - name: "topic"
+    type: "string"
+    description: "The central topic for the research (used in Lit Review, Solo Analysis)."
+  - name: "key_question"
     type: "string"
     required: true
-    default: null
-    description: "The main question guiding the research"
-  - name: "secondary_questions"
+    description: "The primary question the research aims to answer."
+  - name: "source_types"
     type: "list"
-    required: false
-    default: []
-    description: "Additional questions to complement the primary research question"
-  - name: "target_audience"
+    description: "Preferred source types, e.g., 'peer-reviewed papers', 'patents'."
+  - name: "subject_a"
     type: "string"
-    required: false
-    default: "general"
-    description: "The intended audience for the research outputs"
+    description: "The first subject for a comparative study."
+  - name: "subject_b"
+    type: "string"
+    description: "The second subject for a comparative study."
+  - name: "comparison_aspects"
+    type: "list"
+    description: "Aspects to compare, e.g., 'price', 'performance', 'market share'."
+  - name: "document_to_analyze"
+    type: "string"
+    description: "A specific document/URL for deep-dive analysis."
+  - name: "analytical_framework"
+    type: "string"
+    description: "A specific framework to apply, e.g., 'SWOT', 'PESTLE'."
 variable_syntax: "mustache"
-composable: false
-domain: "research"
+domain: "intelligence, research"
 quality: null
-tags: ["research", "inquiry", "framework"]
-tldr: "A template to guide comprehensive research inquiries across different topics."
-keywords: ["research", "inquiry", "template", "academic"]
-density_score: null
+tags: [prompt, template, n01, intelligence, workflow, research]
+tldr: "Provides structured prompt templates for triggering N01's primary workflows: Literature Review, Comparative Study, and Solo Analysis."
 ---
 
-# Research Nucleus Template
 ## Purpose
-This template is designed to assist researchers in formulating comprehensive research inquiries tailored to their specific topics and audience. It enables the creation of structured prompts that guide research plans across various disciplines.
+This artifact provides structured templates to initiate the core workflows of the **N01 Intelligence Nucleus**. Using these templates ensures that all necessary parameters are provided, allowing the agent to select the correct workflow path and execute the research task efficiently.
 
 ## Variables Table
-| Name | Type | Required | Default | Description |
-|---|---|---|---|---|
-| research_topic | string | true | null | The central topic for the research inquiry |
-| primary_research_question | string | true | null | The main question guiding the research |
-| secondary_questions | list | false | [] | Additional questions to complement the primary research question |
-| target_audience | string | false | "general" | The intended audience for the research outputs |
+| Name | Type | Required | Description |
+|---|---|---|---|
+| `research_type` | string | true | Must be one of: `LITERATURE_REVIEW`, `COMPARATIVE_STUDY`, `SOLO_ANALYSIS`. |
+| `topic` | string | varies | The central topic for the research. |
+| `key_question`| string | true | The primary question the research aims to answer. |
+| `source_types`| list | false | Preferred source types (e.g., 'peer-reviewed papers', 'patents'). |
+| `subject_a` | string | varies | The first subject for a comparative study. |
+| `subject_b` | string | varies | The second subject for a comparative study. |
+| `comparison_aspects` | list | varies | Aspects to compare (e.g., 'price', 'performance'). |
+| `document_to_analyze` | string | false | A specific document/URL for deep-dive analysis. |
+| `analytical_framework`| string | false | A specific framework to apply (e.g., 'SWOT', 'PESTLE'). |
 
-## Template Body
 ---
-This template is designed to assist researchers in formulating comprehensive research inquiries in the domain of {{research_topic}}.
+## Template 1: Literature Review
+This template triggers a systematic review of literature on a given topic.
 
-Main Research Question: {{primary_research_question}}
-
-Secondary Questions to Consider: 
-{{#secondary_questions}}
+```prompt
+Research Type: {{research_type}}
+Topic: {{topic}}
+Key Question: {{key_question}}
+{{#source_types}}
+Source Types:
+{{#source_types}}
 - {{.}}
-{{/secondary_questions}}
-
-Target Audience: {{target_audience}}
-
-The goal of this research is to explore and provide insights into {{research_topic}}, answering the key question: "{{primary_research_question}}" with the audience {{target_audience}} in mind.
+{{/source_types}}
+{{/source_types}}
 ```
 
-## Quality Gates
-| Gate | Status | Notes |
-|---|---|---|
-| H01 id pattern | PASS | `p03_pt_research_nucleus` matches `^p03_pt_[a-z][a-z0-9_]+$` |
-| H02 required fields | PASS | All frontmatter required fields are present |
-| H03 no undeclared vars | PASS | All `{{vars}}` in body are declared in variables list |
-| H04 no unused vars | PASS | All declared variables appear in the template body |
-| H05 size <= 8192 bytes | PASS | The template is well within size limits |
-| H06 valid syntax tier | PASS | Using Mustache syntax effectively |
-
-## Examples
-### Filled Example
-**Variables:**
+### Example (Literature Review)
+**Variables**:
 ```yaml
-research_topic: "climate change"
-primary_research_question: "What are the most effective strategies for reducing carbon emissions?"
-secondary_questions:
-  - "How do these strategies impact economic growth?"
-  - "What technologies are essential for this reduction?"
-target_audience: "policy makers"
+research_type: "LITERATURE_REVIEW"
+topic: "Graphene-based supercapacitors"
+key_question: "What are the latest advancements in energy density and lifecycle of graphene supercapacitors reported in the last 2 years?"
+source_types:
+  - "peer-reviewed papers"
+  - "patents"
 ```
-**Rendered Output:**
+---
+## Template 2: Comparative Study
+This template triggers a head-to-head comparison of two or more subjects.
+
+```prompt
+Research Type: {{research_type}}
+Subject A: {{subject_a}}
+Subject B: {{subject_b}}
+Key Question: {{key_question}}
+Comparison Aspects:
+{{#comparison_aspects}}
+- {{.}}
+{{/comparison_aspects}}
 ```
-This template is designed to assist researchers in formulating comprehensive research inquiries in the domain of climate change.
 
-Main Research Question: What are the most effective strategies for reducing carbon emissions?
+### Example (Comparative Study)
+**Variables**:
+```yaml
+research_type: "COMPARATIVE_STUDY"
+subject_a: "OpenAI GPT-4"
+subject_b: "Google Gemini 1.5 Pro"
+key_question: "How do the two models compare in terms of reasoning capabilities on the MMLU benchmark?"
+comparison_aspects:
+  - "Reported MMLU score"
+  - "Performance on sub-tasks (e.g., math, history, law)"
+  - "Architectural differences that may influence performance"
+```
+---
+## Template 3: Solo Analysis
+This template triggers a deep-dive analysis of a single topic, subject, or document.
 
-Secondary Questions to Consider: 
-- How do these strategies impact economic growth?
-- What technologies are essential for this reduction?
+```prompt
+Research Type: {{research_type}}
+Subject: {{topic}}
+{{#document_to_analyze}}
+Document to Analyze: {{document_to_analyze}}
+{{/document_to_analyze}}
+Analytical Framework: {{analytical_framework}}
+Key Question: {{key_question}}
+```
 
-Target Audience: policy makers
-
-The goal of this research is to explore and provide insights into climate change, answering the key question: "What are the most effective strategies for reducing carbon emissions?" with the audience policy makers in mind.
+### Example (Solo Analysis)
+**Variables**:
+```yaml
+research_type: "SOLO_ANALYSIS"
+topic: "Tesla, Inc."
+analytical_framework: "SWOT"
+key_question: "What are the current Strengths, Weaknesses, Opportunities, and Threats for Tesla in the context of the 2025 EV market?"
 ```

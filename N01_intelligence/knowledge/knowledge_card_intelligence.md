@@ -1,65 +1,66 @@
 ---
-id: p01_kc_research_nucleus
+id: n01_kc_intelligence_domain
 kind: knowledge_card
 pillar: P01
-title: "Research Nucleus: Driving Innovation and Discovery"
-version: "1.0.0"
-created: "2023-10-12"
-updated: "2023-10-12"
-author: "knowledge-card-builder"
-domain: "Research and Development"
+title: "N01 Domain: Intelligence & Research Analysis"
+version: "2.0.0"
+created: "2026-03-30"
+updated: "2026-03-30"
+author: "N01_rebuild_8F"
+domain: "intelligence, research, analysis, competitors"
 quality: null
-tags: [research, innovation, discovery, nucleus, R&D]
-tldr: "Examines how a research nucleus centralizes and accelerates innovation."
-when_to_use: "When setting up or optimizing research centers for maximal innovation."
-keywords: [research nucleus, innovation, R&D center]
+tags: [knowledge, n01, intelligence, research, analysis, competitors, papers]
+tldr: "Core knowledge definition for the N01 Intelligence Nucleus, covering research methodologies, analysis techniques, and key data source types."
+when_to_use: "As a foundational knowledge layer for any task involving deep research, competitive analysis, or literature review."
+keywords: [research methodology, competitive intelligence, literature review, data synthesis, source analysis]
 long_tails:
-  - "How to establish a research nucleus for tech startups"
-  - "Optimizing an R&D center for innovation"
+  - "What is the difference between primary and secondary sources?"
+  - "How to conduct a SWOT analysis on a competitor?"
+  - "What are the steps in a systematic literature review?"
 axioms:
-  - "ALWAYS centralize critical resources and talent within a research nucleus."
-  - "NEVER isolate research units outside the nucleus to maximize synergy."
+  - "Data without context is noise; synthesis creates intelligence."
+  - "The quality of an insight is limited by the quality of its sources."
+  - "A conclusion is only as strong as its weakest supporting evidence."
 linked_artifacts:
-  primary: null
-  related: []
-density_score: 0.88
-data_source: "https://examplesite.com/research-nucleus-overview"
-
+  primary: "n01_agent_intelligence"
+  related: ["n01_sp_intelligence", "n01_rag_source_intelligence"]
+density_score: 0.92
+data_source: "Internal synthesis of best practices in academic and market research."
 ---
-## Quick Reference
-```yaml
-topic: Research Nucleus
-scope: Centralizing R&D units to enhance innovation
-owner: Research Division
-criticality: high
-## Key Concepts
-- **Centralization**: Pooling talent and resources improves collaboration and innovation.
-- **Resource Optimization**: Efficient use of resources drives cost-effectiveness and output.
-- **Synergy**: Integrated teams lead to breakthroughs and faster time-to-market.
 
-## Strategy Phases
-1. **Assessment**: Evaluate current R&D structure and identify gaps.
-2. **Design**: Plan a nucleus that encourages cross-disciplinary innovation.
-3. **Implementation**: Establish the nucleus, centralizing key research functions.
+## Core Research Methodologies
+A list of methods N01 is an expert in.
+- **Systematic Literature Review**: A structured approach to locate, appraise, and synthesize all available evidence for a specific question.
+- **Competitor SWOT Analysis**: Framework for identifying and analyzing the Strengths, Weaknesses, Opportunities, and Threats of market competitors.
+- **Market Trend Analysis**: The process of analyzing data over time to identify consistent patterns or trends in a market.
+- **Technology Benchmarking**: A systematic comparison of selected technologies or products against a defined standard.
+- **Thematic Synthesis**: A method for identifying and analyzing patterns or themes across qualitative data.
 
-## Golden Rules
-- Focus resources centrally to drive efficiency and innovation.
-- Maintain open communication channels to foster a collaborative environment.
-- Regularly review and adapt the nucleus to emerging R&D trends.
+## Key Information Sources
+The types of sources N01 uses for analysis, ordered by general preference.
+1.  **Primary Research**: Peer-reviewed articles from academic journals (e.g., arXiv, JSTOR, IEEE Xplore), original government reports.
+2.  **Financial & Corporate Filings**: Official documentation filed with regulatory bodies (e.g., SEC EDGAR database).
+3.  **Patent Databases**: Technical specifications and legal claims from patent offices (e.g., USPTO, EPO).
+4.  **Reputable Market Research**: Reports from established analyst firms (e.g., Gartner, Forrester, IDC).
+5.  **Technical Documentation**: Official product documentation, whitepapers, and developer guides.
+6.  **Secondary Sources**: Credible industry news outlets and conference proceedings.
 
-## Flow
+## Analysis & Synthesis Frameworks
+Mental models applied during analysis to structure insights.
+- **PESTLE Analysis**: (Political, Economic, Social, Technological, Legal, Environmental) for understanding external market forces.
+- **Porter's Five Forces**: For analyzing industry structure and competitive intensity.
+- **First-Principles Thinking**: Deconstructing complex problems into their most basic, foundational elements.
+
+## Hierarchy of Evidence
+A visual representation of source credibility used to weigh evidence during synthesis.
 ```text
-[Existing R&D] -> [Centralize] -> [Optimize] -> [Innovate]
+[Tier 1: Highest] Peer-Reviewed Scientific Papers, Controlled Trials
+       |
+[Tier 2: High]    Official Govt. Reports, Corporate Financial Filings
+       |
+[Tier 3: Moderate] Conference Papers, Market Research Reports, Patents
+       |
+[Tier 4: Lower]   Technical Whitepapers, Reputable News Journalism
+       |
+[Tier 5: Lowest]  Blog Posts, Opinion Articles, Unverified Sources
 ```
-
-## Comparativo
-| Aspect          | Decentralized | Centralized/Nucleus |
-|-----------------|---------------|---------------------|
-| Collaboration   | Low           | High                |
-| Resource Use    | Inefficient   | Optimized           |
-| Innovation Rate | Moderate      | High                |
-
-## References
-- Source: https://examplesite.com/research-nucleus-overview
-
----

@@ -1,76 +1,73 @@
 ---
-id: p08_ac_researcher
+id: n01_ac_intelligence
 kind: agent_card
 pillar: P08
+title: "N01 Intelligence Nucleus - Deployment Card"
 version: "1.0.0"
-created: "2026-03-26"
-updated: "2026-03-26"
-author: "agent-card-builder"
-name: "researcher"
-role: "Research agent_node focusing on market intelligence, competitor analysis, and data extraction."
-model: "sonnet"
-mcps: [firecrawl, brain]
-domain_area: "research-intelligence"
-boot_sequence:
-  - "Load prime_researcher.md"
-  - "Initialize firecrawl MCP"
-  - "Initialize brain MCP"
-  - "Verify dispatch queue"
-constraints:
-  - "NEVER modify production data"
-  - "NEVER exceed 10 firecrawl credits per session"
-  - "NEVER generate code autonomously"
-dispatch_keywords: [research, analyze, market, competitor, scrape, intelligence]
-tools: [firecrawl_scrape, brain_query]
-dependencies: [firecrawl_mcp, brain_mcp]
-scaling:
-  max_concurrent: 1
-  timeout_minutes: 30
-  memory_limit_mb: 1024
-monitoring:
-  health_check: "brain_query('researcher_status')"
-  signal_on_complete: true
-  alert_on_failure: true
-runtime: "sonnet"
-mcp_config_file: ".mcp-researcher.json"
-flags: ["--no-ui", "--max-depth=5"]
-domain: "research-intelligence"
+created: "2026-03-30"
+updated: "2026-03-30"
+author: "N01_rebuild_8F"
 quality: null
-tags: [agent_node, research, intelligence, data-extraction]
-tldr: "Research agent_node spec — intelligence domain, using sonnet, firecrawl and brain MCPs."
+tags: [agent_card, deployment, n01, intelligence, gemini-2.5]
+tldr: "Deployment specification for the N01 Intelligence Nucleus, detailing its model, tools, and operational parameters."
 ---
-## Role
-The agent_node serves as a specialized research tool focusing on gathering market intelligence, analyzing competitor activities, and extracting web data for intelligence reports.
 
-## Model & MCPs
-- **Model**: Sonnet, chosen for its balanced cost and speed suitable for analytic tasks.
-- **MCPs**:
-  - **Firecrawl**: Handles web data scraping and structured extraction tasks.
-  - **Brain**: Assists in data querying and cross-referencing intelligence.
+## Identity
+- **Name**: N01 Intelligence Nucleus
+- **Domain**: `intelligence, research, market analysis, competitor intelligence, papers, benchmarks`
+- **Role**: `Chief Intelligence Analyst`
+
+## Model Config
+- **Model**: `gemini-2.5-pro`
+- **Provider**: `Google`
+- **Context Window**: `1,048,576 tokens`
+- **Temperature**: `0.2` (Optimized for analytical precision and factuality)
+- **Subscription**: `Google CEX Enterprise Tier`
+
+## Tools
+A list of MCP (Meta-Cognitive Primitive) servers and function definitions available to the agent.
+- **MCP Servers (Future)**:
+  - `google_scholar_mcp`
+  - `arxiv_mcp`
+  - `web_search_mcp`
+  - `markitdown_mcp`
+- **Function Definitions (Future)**:
+  - `semantic_search`
+  - `citation_graph_builder`
+  - `document_summarizer`
+
+## Dispatch Keywords
+Keywords that route tasks to this agent.
+- `research`
+- `analysis`
+- `competitor`
+- `intelligence`
+- `papers`
+- `trends`
+- `summarize`
+- `benchmark`
+- `RAG`
+- `literature review`
+- `market analysis`
 
 ## Boot Sequence
-1. Load primary configuration and role specification from prime_researcher.md.
-2. Establish connection to Firecrawl MCP, ensuring access credentials and resource availability.
-3. Initialize Brain MCP, verifying system status and data indexing.
-4. Check and verify task dispatch queue is functional and clear for processing.
-
-## Dispatch
-The agent_node operates based on task keywords: research, analyze, market, competitor, scrape, intelligence. Tasks are routed based on their relevance to these keywords.
+1.  **Load System Prompt**: Inject `n01_sp_intelligence` to establish core identity and rules.
+2.  **Load Knowledge Card**: Inject `n01_kc_intelligence_domain` for domain awareness.
+3.  **Initialize Memory**: Attach to the vectorstore defined in `n01_rag_source_intelligence`.
+4.  **Activate Dispatch Rule**: Listen for requests matching keywords based on `n01_dispatch_rule_intelligence`.
 
 ## Constraints
-- The agent_node is strictly read-only and must never modify production data.
-- It must manage its operations within a budget of 10 firecrawl credits per research session.
-- It has no capability to autonomously generate executable code.
-
-## Dependencies
-- **Firecrawl MCP**: Provides scraping capabilities.
-- **Brain MCP**: Enables data interactions and query operations.
+- **Hard Constraints**:
+  - Must not answer requests outside of the defined `knowledge_boundary` in the system prompt.
+  - All analytical claims must have a traceable source.
+  - Output must conform to the `Intelligence Brief` format.
+- **Soft Constraints**:
+  - Prefer primary, peer-reviewed sources over secondary commentary.
+  - Generate responses with a confidence score for ambiguous conclusions.
 
 ## Scaling & Monitoring
-- Maximum of 1 agent_node instance concurrently running to maintain operational reliability.
-- Automatic timeout set to 30 minutes per operation to prevent bottlenecks.
-- Health checks are conducted using Brain's system commands, with alerts issued on failure.
-
-## References
-- Agent-card-schema v1.0.0 for standardization
-- Firecrawl and Brain documentation for MCP setup and compliance
+- **Scaling Config**: Default of 1 replica. Enable vertical scaling based on queue depth for large document analysis tasks.
+- **Monitoring Spec**:
+  - Track token usage per query.
+  - Log source retrieval success/failure rates.
+  - Monitor average confidence scores per task type.
