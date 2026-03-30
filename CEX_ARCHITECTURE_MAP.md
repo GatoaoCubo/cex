@@ -196,7 +196,7 @@ CONSTRUIR (build)              VALIDAR (validate)
 
 | Source | Description | Flow |
 |--------|-------------|------|
-| Distilled | Research → atomic facts | SHAKA → PYTHA → P01 |
+| Distilled | Research → atomic facts | research_lead → knowledge_lead → P01 |
 | Authored | Manual expert knowledge | Human → P01 |
 | Generated | Tool-extracted structured data | _tools/ → P01 |
 

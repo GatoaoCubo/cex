@@ -73,13 +73,13 @@ Each nucleus mirrors ALL 12 pillars, filled with domain-specific content.
 
 | ID | Domain | Maps to | Subdirs |
 |----|--------|---------|:-------:|
-| N01 | Intelligence | Research (SHAKA) | 12 |
-| N02 | Marketing | Marketing (LILY) | 12 |
-| N03 | Engineering | Build (EDISON) | 12 |
-| N04 | Knowledge | Indexing (PYTHA) | 12 |
-| N05 | Operations | Execute (ATLAS) | 12 |
-| N06 | Commercial | Monetize (YORK) | 12 |
-| N07 | Admin | Orchestrate (STELLA) | 12 |
+| N01 | Intelligence | Research (research_lead) | 12 |
+| N02 | Marketing | Marketing (marketing_lead) | 12 |
+| N03 | Engineering | Build (builder_lead) | 12 |
+| N04 | Knowledge | Indexing (knowledge_lead) | 12 |
+| N05 | Operations | Execute (operations_lead) | 12 |
+| N06 | Commercial | Monetize (commercial_lead) | 12 |
+| N07 | Admin | Orchestrate (orchestrator) | 12 |
 
 Pattern: `ex_pattern_nucleus_fractal.md` in `P08_architecture/examples/`
 

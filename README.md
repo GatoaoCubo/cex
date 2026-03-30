@@ -10,7 +10,7 @@
   <img src="https://img.shields.io/badge/license-MIT-green" alt="License">
   <img src="https://img.shields.io/badge/LLMs-Claude%20%7C%20GPT%20%7C%20Gemini%20%7C%20Local-8A2BE2" alt="LLMs">
   <img src="https://img.shields.io/badge/pillars-12-orange" alt="Pillars">
-  <img src="https://img.shields.io/badge/artifact%20types-78-red" alt="Types">
+  <img src="https://img.shields.io/badge/artifact%20types-99-red" alt="Types">
 </p>
 
 ---
@@ -32,7 +32,7 @@ You describe **intent** in 8 tokens. CEX compiles it into a **1,200-token govern
 ## The Solution
 
 - **8 typed dimensions.** Every LLM interaction decomposes into 8 orthogonal functions (BECOME, INJECT, REASON, CALL, PRODUCE, CONSTRAIN, GOVERN, COLLABORATE). CEX fills what the human didn't provide.
-- **78 artifact types across 12 pillars.** Knowledge cards, agents, prompts, schemas, evals -- each with frontmatter, naming conventions, and validation rules. Like `CREATE TABLE` for AI.
+- **99 artifact types across 12 pillars.** Knowledge cards, agents, prompts, schemas, evals -- each with frontmatter, naming conventions, and validation rules. Like `CREATE TABLE` for AI.
 - **Compilation pipeline.** Intent → Capture → Decompose → Hydrate → Compile → Envelope. 80% deterministic, 90% cheaper than full-LLM approaches.
 
 ---
@@ -46,7 +46,7 @@ You describe **intent** in 8 tokens. CEX compiles it into a **1,200-token govern
   |  L0  BUILDERS        13 ISO files per type = factory for artifacts |
   |       archetypes/builders/{type}-builder/                         |
   +------------------------------------------------------------------+
-  |  L1  PILLARS         12 pillars x 69 types = the taxonomy         |
+  |  L1  PILLARS         12 pillars x 99 types = the taxonomy         |
   |       P01_knowledge/ ... P12_orchestration/                       |
   +------------------------------------------------------------------+
   |  L2  NUCLEI          7 business domains that consume artifacts    |
@@ -168,7 +168,7 @@ Every artifact has typed frontmatter (`id`, `kind`, `pillar`, `title`), lives at
 
 | Capability | Manual Prompting | Agent Frameworks | Knowledge Tools | **CEX** |
 |-----------|-----------------|------------------|-----------------|---------|
-| Structured types | No | No | Partial | **69 types, 12 pillars** |
+| Structured types | No | No | Partial | **99 types, 12 pillars** |
 | Discovery index | No | No | Tag-based | **Semantic naming = O(1) lookup** |
 | Dimensional coverage | ~8% | ~30% | ~20% | **100% (8/8 functions)** |
 | Compilation pipeline | No | Runtime only | No | **5-phase, 80% deterministic** |
@@ -231,14 +231,14 @@ cex/
 | Metric | Count |
 |--------|-------|
 | Pillars | 12 |
-| Artifact types | 69 |
+| Artifact types | 99 |
 | Business nuclei | 7 |
 | LLM functions | 8 |
 | Builder ISO files | 13 per type |
-| Examples | 179 |
-| Templates | 69 |
-| Compiled artifacts | 121 |
-| Active builders | 69 / 69 |
+| Examples | 245 |
+| Templates | 100 |
+| Compiled artifacts | 232 |
+| Active builders | 98 / 99 |
 | CLI tools | 13 |
 
 ---
