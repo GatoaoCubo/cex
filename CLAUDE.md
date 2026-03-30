@@ -99,14 +99,14 @@ python -c "from _tools.signal_writer import write_signal; write_signal('{nucleus
 
 ### Routing
 
-| Domain | Nucleus | Model |
-|--------|---------|-------|
-| Build artifacts, scaffold, create | N03 | opus |
-| Research, analysis, market | N01 | sonnet |
-| Marketing, copy, ads | N02 | sonnet |
-| Knowledge, docs, RAG | N04 | sonnet |
-| Deploy, test, monitor | N05 | opus |
-| Sales, pricing, courses | N06 | sonnet |
+| Domain | Nucleus | CLI | Model | Why |
+|--------|---------|-----|-------|-----|
+| Build artifacts, scaffold | N03 | claude | opus | Complex construction, 8F pipeline |
+| Research, analysis, papers | N01 | gemini | 2.5-pro | 1M context for large docs |
+| Marketing, copy, ads | N02 | claude | sonnet | Creative writing |
+| Knowledge, docs, RAG | N04 | gemini | 2.5-pro | 1M context for indexing |
+| Deploy, test, debug, code | N05 | codex | GPT-5.4 | Code review, testing |
+| Sales, pricing, courses | N06 | claude | sonnet | Persuasive copy |
 
 ## STEP 6: QUALITY
 
