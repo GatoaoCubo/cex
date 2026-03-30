@@ -1,5 +1,5 @@
 ---
-id: p11_qg_iso_package
+id: p11_qg_agent_package
 kind: quality_gate
 pillar: P11
 title: "Gate: ISO Package"
@@ -7,10 +7,10 @@ version: "1.0.0"
 created: "2026-03-27"
 updated: "2026-03-27"
 author: "edison"
-domain: "iso_package — portable self-contained agent bundles with tier-validated file inventories"
+domain: "agent_package — portable self-contained agent bundles with tier-validated file inventories"
 quality: null
-tags: [quality-gate, iso-package, packaging, portable, bundle, tier, distribution]
-tldr: "Gates ensuring iso_package artifacts are self-contained, tier-compliant, portability-enforced bundles with valid manifests and correct LP file mappings."
+tags: [quality-gate, agent-package, packaging, portable, bundle, tier, distribution]
+tldr: "Gates ensuring agent_package artifacts are self-contained, tier-compliant, portability-enforced bundles with valid manifests and correct LP file mappings."
 density_score: 0.93
 ---
 
@@ -21,7 +21,7 @@ density_score: 0.93
 | metric    | weighted soft score + all hard gates pass |
 | threshold | 7.0 to publish; 8.0 for pool; 9.5 for golden |
 | operator  | AND (all hard) + weighted average (soft) |
-| scope     | any artifact with `kind: iso_package` |
+| scope     | any artifact with `kind: agent_package` |
 ## HARD Gates
 All must pass. Any failure = immediate reject.
 | ID  | Check | Fail Condition |
@@ -29,7 +29,7 @@ All must pass. Any failure = immediate reject.
 | H01 | `manifest.yaml` parses as valid YAML | Parse error anywhere in manifest |
 | H02 | ID matches `^[a-z][a-z0-9_-]+$` | Uppercase, spaces, or leading digit |
 | H03 | ID equals filename stem or package directory name | ID `weather_agent` in package dir `news_agent/` |
-| H04 | Kind equals literal `iso_package` | Any other kind value |
+| H04 | Kind equals literal `agent_package` | Any other kind value |
 | H05 | Quality field is `null` | Any non-null value |
 | H06 | All 14 required manifest fields present | Any required field absent from manifest.yaml |
 | H07 | Tier is one of: `minimal`, `standard`, `complete`, `whitelabel` | Unknown or custom tier value |

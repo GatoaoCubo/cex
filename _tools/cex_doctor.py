@@ -93,7 +93,7 @@ def extract_topic_from_dir(dirname):
 
     'agent-builder' -> 'agent'
     'knowledge-card-builder' -> 'knowledge_card'
-    'iso-package-builder' -> 'iso_package'
+    'agent-package-builder' -> 'agent_package'
     """
     name = dirname
     if name.endswith("-builder"):
@@ -300,7 +300,7 @@ ALL_KINDS = [
     "input_schema",
     "instruction",
     "interface",
-    "iso_package",
+    "agent_package",
     "knowledge_card",
     "law",
     "learning_record",

@@ -53,9 +53,9 @@ P08 governa a arquitetura do CEX com 5 tipos de artefato que definem desde satel
 - Diagram desatualizado: pior que nenhum diagrama
 
 ## Application
-organization tem 7 satelites (orchestrator, research_agent, marketing_agent, builder_agent, knowledge_agent, operations_agent, commercial_agent) todos com agent_card em P08. As 11 leis ativas governam operacao autonoma. O iso_package de P02 mapeia architecture.md para P08.
+organization tem 7 satelites (orchestrator, research_agent, marketing_agent, builder_agent, knowledge_agent, operations_agent, commercial_agent) todos com agent_card em P08. As 11 leis ativas governam operacao autonoma. O agent_package de P02 mapeia architecture.md para P08.
 
 ## References
 - P08_architecture/_schema.yaml (fonte de verdade)
 - records/framework/docs/LAWS_v3_PRACTICAL.md (11 leis ativas)
-- P02_model/_schema.yaml (iso_package.lp_mapping: architecture=P08)
+- P02_model/_schema.yaml (agent_package.lp_mapping: architecture=P08)

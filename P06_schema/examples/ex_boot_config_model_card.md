@@ -267,7 +267,7 @@ Posicao no boot flow (camada 0 — infraestrutura):
        [agent]                <- identidade completa (camada 4)
 ```
 
-model_card eh dependencia de: boot_config (selecao), router (custo/capacidade), fallback_chain (priorizacao), iso_package (deploy bundle). Eh o unico tipo P02 puramente descritivo.
+model_card eh dependencia de: boot_config (selecao), router (custo/capacidade), fallback_chain (priorizacao), agent_package (deploy bundle). Eh o unico tipo P02 puramente descritivo.
 
 ## Exemplo Minimo Valido
 

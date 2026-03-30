@@ -1,13 +1,13 @@
 ---
 kind: instruction
-id: bld_instruction_iso_package
+id: bld_instruction_agent_package
 pillar: P03
 llm_function: REASON
-purpose: Step-by-step production process for iso_package
+purpose: Step-by-step production process for agent_package
 pattern: 3-phase pipeline (research -> compose -> validate)
 ---
 
-# Instructions: How to Produce an iso_package
+# Instructions: How to Produce an agent_package
 ## Phase 1: RESEARCH
 1. Identify the target agent by name and domain
 2. Determine the tier based on delivery requirements:
@@ -19,7 +19,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 4. Check portability: no hardcoded paths (/home/, /Users/, C:\, records/), no provider-specific references, no internal project names in the instructions
 5. Calculate the system_instruction token count — must be at or below 4096 tokens
 6. Map each file to its pillar using the LP mapping (manifest=P02, system_instruction=P03, instructions=P03, architecture=P08, output_template=P05, examples=P07, error_handling=P11, quick_start=P01, input_schema=P06, upload_kit=P04)
-7. Check existing iso_packages via brain_query [IF MCP] for the same agent — avoid duplicates
+7. Check existing agent_packages via brain_query [IF MCP] for the same agent — avoid duplicates
 ## Phase 2: COMPOSE
 1. Read SCHEMA.md — source of truth for all frontmatter fields and tier requirements
 2. Read OUTPUT_TEMPLATE.md — fill the template following SCHEMA constraints exactly
@@ -37,7 +37,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 2. HARD gates (all must pass):
    - YAML in manifest.yaml parses without errors
    - id matches pattern `p02_iso_[a-z][a-z0-9_]+`
-   - kind == iso_package
+   - kind == agent_package
    - tier is one of: minimal, standard, complete, whitelabel
    - files_count matches actual file count in the directory
    - file count meets the tier minimum (minimal=3, standard=7, complete=10, whitelabel=12)

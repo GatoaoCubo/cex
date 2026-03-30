@@ -30,7 +30,7 @@ I define HARD gates (block on fail) and SOFT gates (score contribution) with num
   1. prompt-template-builder  -> "template artifact under review"
   2. response-format-builder  -> "output format artifact under review"
   3. quality-gate-builder     -> "gates both artifacts must pass (score >= 8.0)"
-  4. iso-package-builder      -> "packages certified artifacts into deployable unit"
+  4. agent-package-builder      -> "packages certified artifacts into deployable unit"
 ```
 ## Handoff Protocol
 ### I Receive
@@ -49,7 +49,7 @@ I define HARD gates (block on fail) and SOFT gates (score contribution) with num
 | Builder | Why |
 |---------|-----|
 | validator-builder | Implements executable checks that enforce the gates I define |
-| iso-package-builder | Uses my gates as acceptance criteria before packaging artifacts |
+| agent-package-builder | Uses my gates as acceptance criteria before packaging artifacts |
 | bugloop-builder | Triggers fix cycles when gate scores fall below threshold |
 | benchmark-builder | References my thresholds to define pass/fail on benchmark runs |
 | every kind-builder | Each builder's QUALITY_GATES.md is produced by me |

@@ -59,8 +59,8 @@ anti_patterns:
 - 'Parser sem target definido: nao sabe o que extrair'
 - 'Naming rule ambigua: colisao de IDs entre artefatos'
 - 'Formatter sem format de entrada: transformacao impossivel'
-application: No CEX, P05 trabalha em par com P06 (Schema) — P05 define "o que sai", P06 valida "o contrato". O iso_package
+application: No CEX, P05 trabalha em par com P06 (Schema) — P05 define "o que sai", P06 valida "o contrato". O agent_package
   de P02 mapeia output_template.md para P05, garantindo que todo agente tem saida definida.
 references:
 - P05_output/_schema.yaml (fonte de verdade)
-- 'P02_model/_schema.yaml (iso_package.lp_mapping: output_template=P05)'
+- 'P02_model/_schema.yaml (agent_package.lp_mapping: output_template=P05)'

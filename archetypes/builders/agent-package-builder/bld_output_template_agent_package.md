@@ -1,16 +1,16 @@
 ---
 kind: output_template
-id: bld_output_template_iso_package
+id: bld_output_template_agent_package
 pillar: P05
 llm_function: PRODUCE
-purpose: Template with {{vars}} that the LLM fills to produce an iso_package manifest
+purpose: Template with {{vars}} that the LLM fills to produce an agent_package manifest
 pattern: every field here exists in SCHEMA.md — template derives, never invents
 ---
 
-# Output Template: iso_package
+# Output Template: agent_package
 ```yaml
 id: p02_iso_{{agent_slug}}
-kind: iso_package
+kind: agent_package
 pillar: P02
 version: "1.0.0"
 created: "{{YYYY-MM-DD}}"
@@ -35,7 +35,7 @@ lp_mapping:
   upload_kit.md: P04
 system_instruction_tokens: {{integer_token_count}}
 quality: null
-tags: [iso-package, {{tag_2}}, {{tag_3}}]
+tags: [agent-package, {{tag_2}}, {{tag_3}}]
 tldr: "{{dense_summary_max_160ch}}"
 density_score: {{0.80-1.00}}
 ```
@@ -66,4 +66,4 @@ Declared: {{tier}}. Files present: {{files_count}}/{{tier_expected}}.
 - External dependencies: {{list_or_none}}
 ## References
 - Source agent: {{agent_definition_path}}
-- Builder: iso-package-builder v1.0.0
+- Builder: agent-package-builder v1.0.0

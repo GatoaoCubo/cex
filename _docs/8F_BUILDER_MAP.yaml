@@ -280,8 +280,8 @@ interface:
   description: Contrato de integracao entre agentes
   llm_function: CONSTRAIN
   pillar: P06_schema
-iso_package:
-  builder: archetypes/builders/iso-package-builder
+agent_package:
+  builder: archetypes/builders/agent-package-builder
   core: true
   description: Pacote portable de agente AI (ISO format) â€” self-contained, LLM-agnostic
   llm_function: BECOME

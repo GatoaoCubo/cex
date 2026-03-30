@@ -45,7 +45,7 @@ hook: null
 input_schema: P06_schema/templates/tpl_input_schema.md
 instruction: P03_prompt/templates/tpl_instruction.md
 interface: null
-iso_package: P02_model/templates/tpl_iso_package.md
+agent_package: P02_model/templates/tpl_agent_package.md
 knowledge_card: P01_knowledge/templates/tpl_knowledge_card_domain.md
 knowledge_card_meta: P01_knowledge/templates/tpl_knowledge_card_meta.md
 knowledge_card_test: P01_knowledge/templates/tpl_knowledge_card_test.md

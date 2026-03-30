@@ -11,7 +11,7 @@
   - [[tpl_agent]]
   - [[tpl_boot_config]]
   - [[tpl_fallback_chain]]
-  - [[tpl_iso_package]]
+  - [[tpl_agent_package]]
   - [[tpl_lens]]
   - [[tpl_mental_model]]
   - [[tpl_mental_model_codebase_mapper]]

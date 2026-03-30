@@ -19,7 +19,7 @@ I compose step-by-step recipes so agents can execute tasks in correct order with
   2. agent-builder -> "agent definition"
   3. instruction-builder -> "execution steps for agent tasks"
   4. boot-config-builder -> "provider configuration"
-  5. iso-package-builder -> "deployable package"
+  5. agent-package-builder -> "deployable package"
 ```
 ### Crew: "Task Recipe Design"
 ```
@@ -46,4 +46,4 @@ I compose step-by-step recipes so agents can execute tasks in correct order with
 | action-prompt-builder | Prompts may implement instruction steps |
 | chain-builder | Chains may encode instruction sequences as prompt pipelines |
 | handoff-builder | Embeds instruction steps in delegation packages |
-| iso-package-builder | Includes instructions in agent packages |
+| agent-package-builder | Includes instructions in agent packages |

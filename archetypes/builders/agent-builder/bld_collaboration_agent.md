@@ -19,7 +19,7 @@ I produce agent definitions so downstream builders can configure, package, and d
   2. agent-builder -> "agent definition (persona + capabilities + iso_vectorstore)"
   3. instruction-builder -> "execution steps for agent tasks"
   4. boot-config-builder -> "provider-specific initialization config"
-  5. iso-package-builder -> "portable deployable package"
+  5. agent-package-builder -> "portable deployable package"
 ```
 ### Crew: "Agent Identity Stack"
 ```
@@ -43,7 +43,7 @@ I produce agent definitions so downstream builders can configure, package, and d
 | Builder | Why |
 |---------|-----|
 | boot-config-builder | Needs agent identity to configure provider startup |
-| iso-package-builder | Packages agent definition into portable bundle |
+| agent-package-builder | Packages agent definition into portable bundle |
 | dispatch-rule-builder | Creates routing rules that target this agent |
 | guardrail-builder | Defines safety boundaries scoped to agent capabilities |
 | interface-builder | Defines contracts between this agent and others |

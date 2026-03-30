@@ -1,9 +1,9 @@
 ---
 kind: architecture
-id: bld_architecture_iso_package
+id: bld_architecture_agent_package
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Component map of iso_package — inventory, dependencies, and architectural position
+purpose: Component map of agent_package — inventory, dependencies, and architectural position
 ---
 
 ## Component Inventory
@@ -21,23 +21,23 @@ purpose: Component map of iso_package — inventory, dependencies, and architect
 | tier_label | One of: minimal / standard / complete / whitelabel | author | required |
 ## Dependency Graph
 ```
-agent         --produces--> iso_package
+agent         --produces--> agent_package
 system_prompt --produces--> system_instruction.md
 knowledge_card --produces--> knowledge_base/
-iso_package   --produces--> upload_kit
-iso_package   --consumed_by--> spawn_config
-iso_package   --consumed_by--> workflow
+agent_package   --produces--> upload_kit
+agent_package   --consumed_by--> spawn_config
+agent_package   --consumed_by--> workflow
 ```
 | From | To | Type | Data |
 |------|----|------|------|
-| agent | iso_package | data_flow | canonical identity, capabilities, domain |
-| system_prompt | iso_package | data_flow | persona text becomes system_instruction.md |
-| knowledge_card | iso_package | data_flow | domain facts bundled into knowledge_base/ |
-| iso_package | upload_kit | produces | deployment instructions derived from manifest |
-| iso_package | spawn_config | data_flow | tier, file paths, model recommendations |
-| iso_package | workflow | data_flow | self-contained execution node |
+| agent | agent_package | data_flow | canonical identity, capabilities, domain |
+| system_prompt | agent_package | data_flow | persona text becomes system_instruction.md |
+| knowledge_card | agent_package | data_flow | domain facts bundled into knowledge_base/ |
+| agent_package | upload_kit | produces | deployment instructions derived from manifest |
+| agent_package | spawn_config | data_flow | tier, file paths, model recommendations |
+| agent_package | workflow | data_flow | self-contained execution node |
 ## Boundary Table
-| iso_package IS | iso_package IS NOT |
+| agent_package IS | agent_package IS NOT |
 |----------------|-------------------|
 | Portable, self-contained multi-file bundle | Canonical agent definition in a repository |
 | Tiered completeness: minimal to whitelabel | Boot configuration (model flags, MCP profiles) |

@@ -55,7 +55,7 @@ Every artifact is produced by running 8 functions in sequence:
 | P# | Name | Kinds | Core Types |
 |----|------|:-----:|-----------|
 | P01 | Knowledge | 8 | knowledge_card, rag_source, glossary, context_doc, chunk_strategy, embedding_config, few_shot, retriever_config |
-| P02 | Model | 11 | agent, lens, boot_config, mental_model, model_card, router, fallback_chain, iso_package, axiom, handoff_protocol, reward_signal |
+| P02 | Model | 11 | agent, lens, boot_config, mental_model, model_card, router, fallback_chain, agent_package, axiom, handoff_protocol, reward_signal |
 | P03 | Prompt | 7 | system_prompt, prompt_template, chain, action_prompt, instruction, persona_prompt, output_schema_P03 |
 | P04 | Tools | 18 | skill, mcp_server, hook, plugin, client, cli_tool, scraper, connector, daemon, function_def, search_tool, vision_tool, code_executor, webhook, batch_runner, api_adapter, cache_layer, rate_limiter |
 | P05 | Output | 4 | response_format, parser, formatter, naming_rule |

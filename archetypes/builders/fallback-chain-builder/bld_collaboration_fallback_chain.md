@@ -43,4 +43,4 @@ I design model degradation chains so systems remain available when primary model
 | Builder | Why |
 |---------|-----|
 | dispatch-rule-builder | References fallback chain as alternative routing path |
-| iso-package-builder | Includes fallback config in portable agent package |
+| agent-package-builder | Includes fallback config in portable agent package |

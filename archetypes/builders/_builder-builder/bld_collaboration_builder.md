@@ -51,4 +51,4 @@ None — independent meta-builder (layer 0). I am the origin point for all build
 | Builder | Why |
 |---------|-----|
 | all type-builders | Every builder's file structure originates from my meta-templates |
-| iso-package-builder | Packaging requires builder output to follow consistent structure |
+| agent-package-builder | Packaging requires builder output to follow consistent structure |

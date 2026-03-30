@@ -38,7 +38,7 @@ These are a **pipeline** (sequential), not categories.
 ## 12 Pillars
 
 - **P01 Knowledge** — knowledge_card, rag_source, glossary_entry, context_doc, embedding_config, few_shot_example
-- **P02 Model** — agent, lens, boot_config, mental_model, model_card, router, fallback_chain, iso_package, axiom
+- **P02 Model** — agent, lens, boot_config, mental_model, model_card, router, fallback_chain, agent_package, axiom
 - **P03 Prompt** — system_prompt, user_prompt, prompt_template, few_shot, chain_of_thought, react, chain, meta_prompt, router_prompt, planner
 - **P04 Tools** — skill, mcp_server, hook, plugin, client, cli_tool, scraper, connector, daemon, component
 - **P05 Output** — response_format, parser, formatter, naming_rule

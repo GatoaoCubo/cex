@@ -51,5 +51,5 @@ I produce parameterized templates with `{{variables}}` — not fixed prompts, no
 | system-prompt-builder | May embed template slots inside system prompts for dynamic identity |
 | quality-gate-builder | Gates reference template structure to validate H01-H08 hard gates |
 | response-format-builder | Response format is often injected as a variable inside the template |
-| iso-package-builder | Packages the template alongside its siblings into a deployable unit |
+| agent-package-builder | Packages the template alongside its siblings into a deployable unit |
 | knowledge-card-builder | Uses rendered template outputs as prompts for card production |

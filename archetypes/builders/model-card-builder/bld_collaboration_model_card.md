@@ -53,4 +53,4 @@ None. model-card-builder is INDEPENDENT (layer 0 infrastructure).
 | mental-model-builder   | uses model capability data to scope routing rules and decision thresholds |
 | router-builder         | uses pricing and capability data to assign tasks to the right model |
 | fallback-chain-builder | needs model specs to order fallback priority by cost and capability |
-| iso-package-builder    | includes model_card as a deploy dependency in the packaged artifact |
+| agent-package-builder    | includes model_card as a deploy dependency in the packaged artifact |

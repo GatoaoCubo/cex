@@ -14,7 +14,7 @@ quality: 9.0
 tags: [agent, identity, lens, mental-model, model-card, boot, iso, axiom, persona, config]
 tldr: "Agent identity defines WHO an agent is — its cognitive lens, mental model, model selection, boot sequence, ISO packaging, and invariant axioms"
 when_to_use: "Building or classifying components that define agent persona, configuration, packaging, or foundational rules"
-keywords: [lens, mental_model, model_card, boot_config, iso_package, axiom, identity, persona]
+keywords: [lens, mental_model, model_card, boot_config, agent_package, axiom, identity, persona]
 long_tails:
   - "How to define agent cognitive lenses and map them to CEX lens kind"
   - "Which identity YAML structures map to CEX mental_model kind"
@@ -31,7 +31,7 @@ feeds_kinds:
   - mental_model   # Identity YAML, worldview maps, domain ontologies
   - model_card     # LLM selection criteria, capability profiles, cost/latency tradeoffs
   - boot_config    # Startup sequences, environment loading, MCP wiring, flag sets
-  - iso_package    # Agent packaging (manifest + instructions + examples + schema)
+  - agent_package    # Agent packaging (manifest + instructions + examples + schema)
   - axiom          # Invariant rules, hard constraints, non-negotiable behaviors
 density_score: 0.88
 ---
@@ -62,10 +62,10 @@ criticality: high
 | Environment Loader | Startup | boot_config | Env vars, secrets, feature flags at boot |
 | MCP Wiring | Startup | boot_config | Tool server connections and strict-mode config |
 | Flag Set | Startup | boot_config | CLI flags (--dangerously-skip-permissions, -p, --no-chrome) |
-| Agent Manifest | Packaging | iso_package | ISO_001: identity, version, capabilities list |
-| Agent Instructions | Packaging | iso_package | ISO_002: step-by-step execution protocol |
-| Agent Examples | Packaging | iso_package | ISO_003: 3+ input/output demonstrations |
-| Agent Schema | Packaging | iso_package | ISO_004: input/output JSON schema |
+| Agent Manifest | Packaging | agent_package | ISO_001: identity, version, capabilities list |
+| Agent Instructions | Packaging | agent_package | ISO_002: step-by-step execution protocol |
+| Agent Examples | Packaging | agent_package | ISO_003: 3+ input/output demonstrations |
+| Agent Schema | Packaging | agent_package | ISO_004: input/output JSON schema |
 | Hard Constraint | Rule | axiom | Never-violate rules (e.g., "never execute, only dispatch") |
 | Quality Gate | Rule | axiom | Minimum score thresholds for output acceptance |
 | Scope Fence | Rule | axiom | Paths/domains the agent must not touch |
@@ -94,7 +94,7 @@ criticality: high
 
 ```text
 [axiom] -> constrains -> [mental_model] -> informs -> [lens] -> filters -> [reasoning]
-[model_card] -> selects -> [boot_config] -> launches -> [iso_package] -> executes
+[model_card] -> selects -> [boot_config] -> launches -> [agent_package] -> executes
 ```
 
 ## References

@@ -206,7 +206,7 @@ cross_references_grafo_de_conhecimento: "linked_artifacts:\n  primary: \"{{boot_
   \ (camada 0)\n          |\n    [system_prompt]           <- papel persistente (camada 1)\n          |\n    [mental_model]\
   \            <- mapa cognitivo (camada 2)\n          |\n      [persona]               <- estilo comunicacao (camada 3)\n\
   \          |\n       [agent]                <- identidade completa (camada 4)\n\nmodel_card eh dependencia de: boot_config\
-  \ (selecao), router (custo/capacidade), fallback_chain (priorizacao), iso_package (deploy bundle). Eh o unico tipo P02 puramente\
+  \ (selecao), router (custo/capacidade), fallback_chain (priorizacao), agent_package (deploy bundle). Eh o unico tipo P02 puramente\
   \ descritivo."
 exemplo_minimo_valido: "---\nid: p02_mc_anthropic_sonnet_4\nkind: model_card\npillar: P02\nversion: 1.0.0\ncreated: 2026-03-26\n\
   updated: 2026-03-26\nauthor: builder_agent\nmodel_name: claude-sonnet-4-20250514\nprovider: anthropic\nmodel_type: text-generation\n\

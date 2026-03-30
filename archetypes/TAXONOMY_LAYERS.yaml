@@ -16,7 +16,7 @@ layers:
       - type_def            # P06 — definicao de tipo customizado
       - boot_config         # P02 — configuracao de inicializacao por provider
       - mental_model_P02    # P02 — mapa de routing/decisoes (design-time)
-      - iso_package         # P02 — pacote portable de agente (self-contained)
+      - agent_package         # P02 — pacote portable de agente (self-contained)
       - output_schema_P05   # P05 — formato de saida do LLM
       - naming_rule         # P05 — regra de nomenclatura
       - agent_card      # P08 — deployment spec: identity + model + tools + boot + dispatch (A2A AgentCard)
@@ -121,7 +121,7 @@ extensions:
   interno:
     reason: "CODEXA-specific — util neste sistema, nao universal"
     kinds:
-      - iso_package
+      - agent_package
       - agent_card
       - pattern
       - law

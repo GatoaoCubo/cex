@@ -1,18 +1,18 @@
 ---
 kind: schema
-id: bld_schema_iso_package
+id: bld_schema_agent_package
 pillar: P06
 llm_function: CONSTRAIN
-purpose: Formal schema — SINGLE SOURCE OF TRUTH for iso_package
+purpose: Formal schema — SINGLE SOURCE OF TRUTH for agent_package
 pattern: TEMPLATE derives from this. CONFIG restricts this.
 ---
 
-# Schema: iso_package
+# Schema: agent_package
 ## Frontmatter Fields
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
 | id | string (p02_iso_{agent_slug}) | YES | - | Namespace compliance |
-| kind | literal "iso_package" | YES | - | Type integrity |
+| kind | literal "agent_package" | YES | - | Type integrity |
 | pillar | literal "P02" | YES | - | Pillar assignment |
 | version | semver string | YES | "1.0.0" | Semantic versioning |
 | created | date YYYY-MM-DD | YES | - | Creation date |
@@ -23,7 +23,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | files_count | integer | YES | - | Actual file count in directory |
 | domain | string | YES | - | Agent primary domain |
 | quality | null | YES | null | Never self-score |
-| tags | list[string], len >= 3 | YES | - | Must include "iso-package" |
+| tags | list[string], len >= 3 | YES | - | Must include "agent-package" |
 | tldr | string <= 160ch | YES | - | Dense one-liner |
 | portable | boolean | REC | true | No hardcoded paths in any file |
 | llm_function | literal "BECOME" | REC | "BECOME" | Package carries agent identity |

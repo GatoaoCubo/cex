@@ -12,7 +12,7 @@ quality: null
 tags: [cex, lp02, model, become, agent, persona, identity, lens]
 tldr: "P02 Model define identidade do LLM via 9 tipos — de agent a lens — usando funcao BECOME antes de qualquer input"
 when_to_use: "Classificar artefatos de identidade ou entender como P02 configura quem o LLM eh"
-keywords: [agent, mental-model, persona, boot-config, model-card, lens, iso-package]
+keywords: [agent, mental-model, persona, boot-config, model-card, lens, agent-package]
 long_tails:
   - "Quais tipos de identidade existem no CEX"
   - "Diferenca entre agent e persona no CEX"
@@ -38,7 +38,7 @@ funcao_llm: BECOME | analogia: DNA + personalidade
 - Funcao dominante BECOME: identidade configurada no boot
 - lens eh perspectiva cognitiva que colore toda percepcao
 - mental_model mapeia routing, decisoes e vieses produtivos
-- iso_package eh bundle portable de agente (LLM-agnostic)
+- agent_package eh bundle portable de agente (LLM-agnostic)
 - axiom eh principio imutavel da identidade profunda
 - P02 define COMO P01 eh interpretado e P05 formatado
 - boot_config inicializa por provider (modelo, temp, MCPs)
@@ -63,7 +63,7 @@ funcao_llm: BECOME | analogia: DNA + personalidade
 - SEMPRE criar mental_model para agentes com 5+ tools
 - NUNCA definir identidade no user prompt (volatil)
 - NUNCA confundir quem SOU (P02) com o que SEI (P01)
-- SEMPRE usar iso_package para agentes que migram entre LLMs
+- SEMPRE usar agent_package para agentes que migram entre LLMs
 
 ## Comparativo
 
@@ -76,7 +76,7 @@ funcao_llm: BECOME | analogia: DNA + personalidade
 | model_card | Spec do LLM (pricing, limites) | <= 2048B | nao |
 | router | Regra task -> agent_node | <= 1024B | sim |
 | fallback_chain | Sequencia fallback entre modelos | <= 512B | nao |
-| iso_package | Bundle portable de agente | <= 4096B | sim |
+| agent_package | Bundle portable de agente | <= 4096B | sim |
 | axiom | Principio fundamental imutavel | <= 3072B | sim |
 
 ## Flow

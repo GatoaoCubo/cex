@@ -90,7 +90,7 @@ Mapear `object` para `kind(s)` CEX usando TAXONOMY_LAYERS.yaml:
 | router, roteamento | router | P02 | REASON |
 | dag, grafo | dag | P12 | COLLABORATE |
 | spawn, lancamento | spawn_config | P12 | COLLABORATE |
-| iso, pacote | iso_package | P02 | BECOME |
+| iso, pacote | agent_package | P02 | BECOME |
 | conector, api | connector, client | P04 | CALL |
 | lens, perspectiva | lens | P02 | BECOME |
 | memory, memoria | brain_index, session_state | P10 | INJECT |
@@ -170,7 +170,7 @@ Gerar JSON execution plan (ver Schema completo na Secao 3).
 
 | Tier | Builders |
 |------|---------|
-| **primary** | agent-builder, system-prompt-builder, model-card-builder, boot-config-builder, iso-package-builder |
+| **primary** | agent-builder, system-prompt-builder, model-card-builder, boot-config-builder, agent-package-builder |
 | **secondary** | mental-model-builder, router-builder, fallback-chain-builder, lens-builder, director-builder* |
 | **optional** | _builder-builder (meta-bootstrap apenas) |
 
@@ -375,7 +375,7 @@ Gerar JSON execution plan (ver Schema completo na Secao 3).
         {"id": "agent-builder", "tier": "primary", "active": true, "reason": "constroi definicao do agente"},
         {"id": "system-prompt-builder", "tier": "primary", "active": true, "reason": "escreve identidade e regras"},
         {"id": "model-card-builder", "tier": "primary", "active": true, "reason": "seleciona modelo LLM adequado"},
-        {"id": "iso-package-builder", "tier": "primary", "active": true, "reason": "empacota agente para deploy"},
+        {"id": "agent-package-builder", "tier": "primary", "active": true, "reason": "empacota agente para deploy"},
         {"id": "boot-config-builder", "tier": "primary", "active": false, "reason": "nao mencionado no intent"},
         {"id": "mental-model-builder", "tier": "secondary", "active": true, "reason": "mapa de routing para agente de vendas"},
         {"id": "router-builder", "tier": "secondary", "active": false, "reason": "sem routing complexo mencionado"}
@@ -556,7 +556,7 @@ Palavras no intent que ativam builders secundarios/opcionais:
 | "com lens", "perspectiva" | lens-builder |
 | "com daemon", "background" | daemon-builder |
 | "com plugin" | plugin-builder |
-| "isola", "portavel" | iso-package-builder |
+| "isola", "portavel" | agent-package-builder |
 | "otimiza", "melhora continua" | optimizer-builder, bugloop-builder |
 | "session", "estado efemero" | session-state-builder |
 | "diagram", "arquitetura visual" | diagram-builder |
@@ -571,7 +571,7 @@ Palavras no intent que ativam builders secundarios/opcionais:
 |-------------------|----------|-----------------|
 | Simple | signal-builder, dispatch-rule-builder, env-config-builder, session-state-builder, naming-rule-builder | ~2,000 |
 | Medium | knowledge-card-builder, quality-gate-builder, skill-builder, instruction-builder, hook-builder | ~4,000 |
-| Complex | agent-builder, workflow-builder, model-card-builder, iso-package-builder, e2e-eval-builder | ~8,000 |
+| Complex | agent-builder, workflow-builder, model-card-builder, agent-package-builder, e2e-eval-builder | ~8,000 |
 | Meta | _builder-builder (13 files) | ~40,000 |
 
 Formula: `estimated_tokens = sum(active_builders * complexity_tokens) * 1.2 (overhead)`

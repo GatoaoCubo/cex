@@ -131,8 +131,8 @@ coverage:
   - kc_instruction
   interface:
   - kc_interface
-  iso_package:
-  - kc_iso_package
+  agent_package:
+  - kc_agent_package
   knowledge_card:
   - kc_knowledge_card
   law:
@@ -273,7 +273,7 @@ reference_domains:
     - mental_model
     - model_card
     - boot_config
-    - iso_package
+    - agent_package
     - axiom
     quality: 9.0
     origin: manual
@@ -833,10 +833,10 @@ kind_kcs:
     - interface
     quality: null
     type: kind
-  kc_iso_package:
-    path: library/kind/kc_iso_package.md
+  kc_agent_package:
+    path: library/kind/kc_agent_package.md
     feeds_kinds:
-    - iso_package
+    - agent_package
     quality: null
     type: kind
   kc_knowledge_card:

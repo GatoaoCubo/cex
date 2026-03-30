@@ -142,9 +142,9 @@ kinds:
     - chain
     - timeout_per_step
     llm_function: GOVERN
-  iso_package:
+  agent_package:
     description: Pacote portable de agente AI (ISO format) â€” self-contained, LLM-agnostic
-    boundary: Pacote distribuivel de agente em formato ISO. NAO eh agent (spec do agente) â€” iso_package eh o bundle portable.
+    boundary: Pacote distribuivel de agente em formato ISO. NAO eh agent (spec do agente) â€” agent_package eh o bundle portable.
     layer: spec
     core: true
     machine_format: yaml

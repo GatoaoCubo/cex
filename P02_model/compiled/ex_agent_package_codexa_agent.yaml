@@ -1,5 +1,5 @@
 id: p02_iso_organization_agent
-kind: iso_package
+kind: agent_package
 pillar: P02
 agent_name: organization
 tier: '| Tier | Files | Use Case |
@@ -26,7 +26,7 @@ author: builder_agent
 domain: meta-construction
 quality: 9.5
 tags:
-- iso-package
+- agent-package
 - portable
 - agent-bundle
 - llm-agnostic

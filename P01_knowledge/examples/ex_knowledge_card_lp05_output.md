@@ -52,8 +52,8 @@ P05 padroniza as saidas do sistema CEX com 4 tipos de artefato. Output schemas d
 - Formatter sem format de entrada: transformacao impossivel
 
 ## Application
-No CEX, P05 trabalha em par com P06 (Schema) — P05 define "o que sai", P06 valida "o contrato". O iso_package de P02 mapeia output_template.md para P05, garantindo que todo agente tem saida definida.
+No CEX, P05 trabalha em par com P06 (Schema) — P05 define "o que sai", P06 valida "o contrato". O agent_package de P02 mapeia output_template.md para P05, garantindo que todo agente tem saida definida.
 
 ## References
 - P05_output/_schema.yaml (fonte de verdade)
-- P02_model/_schema.yaml (iso_package.lp_mapping: output_template=P05)
+- P02_model/_schema.yaml (agent_package.lp_mapping: output_template=P05)

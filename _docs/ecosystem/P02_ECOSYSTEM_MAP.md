@@ -41,7 +41,7 @@
 | model_card | Model Config | 85% | Well-aligned with industry model selection patterns (pricing, context, capabilities). |
 | router | Router/Dispatcher | 80% | Good alignment. Industry has keyword/semantic routing. CEX router is more formal. |
 | fallback_chain | Fallback Strategy | 80% | Direct match with Pydantic AI ModelRetry, DSPy retry. Well-scoped. |
-| iso_package | Agent Package/Export | 70% | CEX is far richer (13 files). Industry just stores JSON/YAML config. CEX pioneered the "portable agent" concept. |
+| agent_package | Agent Package/Export | 70% | CEX is far richer (13 files). Industry just stores JSON/YAML config. CEX pioneered the "portable agent" concept. |
 | axiom | (unique to CEX) | 30% | No industry equivalent. Closest: Anthropic's GuardrailConfig, but axioms are identity-level, not safety rules. |
 
 ## 4. Proposed NEW Kinds (ONLY if 2+ frameworks use it)
@@ -64,7 +64,7 @@
 | model_card | DSPy lm config, Pydantic AI model param, OpenAI model selection, Anthropic model param |
 | router | CrewAI hierarchical Process, AutoGen GroupChatManager, Anthropic Handoff routing |
 | fallback_chain | Pydantic AI ModelRetry, DSPy Retry, Semantic Kernel Planner retry |
-| iso_package | OpenAI Assistants (stored), Smolagents push_to_hub (portable agents) |
+| agent_package | OpenAI Assistants (stored), Smolagents push_to_hub (portable agents) |
 | boot_config | Semantic Kernel Connector config, multi-provider patterns |
 | mental_model | CrewAI backstory + goal, routing decision trees |
 | lens | DSPy Signature perspective (loose match) |
@@ -73,4 +73,4 @@
 ## 7. Summary
 Current: 9 kinds → Proposed: 12 kinds (+handoff_protocol, +agent_memory_config, +multi_agent_topology) | Coverage: ~67% → ~85%
 
-Key insight: The industry's biggest evolution since 2024 is **agent handoffs** (Swarm, Anthropic, Mastra) and **explicit memory config** (CrewAI, Mastra). CEX's agent definition is best-in-class (iso_package with 13 files is richer than any framework), but lacks formalized handoff contracts and memory configuration as standalone kinds. The axiom kind has a naming inconsistency (`p10_ax_*` prefix but lives in P02) that should be resolved.
+Key insight: The industry's biggest evolution since 2024 is **agent handoffs** (Swarm, Anthropic, Mastra) and **explicit memory config** (CrewAI, Mastra). CEX's agent definition is best-in-class (agent_package with 13 files is richer than any framework), but lacks formalized handoff contracts and memory configuration as standalone kinds. The axiom kind has a naming inconsistency (`p10_ax_*` prefix but lives in P02) that should be resolved.

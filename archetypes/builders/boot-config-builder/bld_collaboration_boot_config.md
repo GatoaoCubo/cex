@@ -19,7 +19,7 @@ I configure provider-specific startup so agents boot correctly on any runtime.
   2. agent-builder -> "agent definition (persona + capabilities)"
   3. instruction-builder -> "execution steps"
   4. boot-config-builder -> "provider-specific initialization config"
-  5. iso-package-builder -> "portable deployable package"
+  5. agent-package-builder -> "portable deployable package"
 ```
 ### Crew: "Multi-Provider Deployment"
 ```
@@ -43,5 +43,5 @@ I configure provider-specific startup so agents boot correctly on any runtime.
 ## Builders That Depend On Me
 | Builder | Why |
 |---------|-----|
-| iso-package-builder | Includes boot_config in portable agent package |
+| agent-package-builder | Includes boot_config in portable agent package |
 | fallback-chain-builder | Needs provider constraints to set degradation timeouts |

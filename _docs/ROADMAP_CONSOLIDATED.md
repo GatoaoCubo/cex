@@ -54,7 +54,7 @@ Pipeline atual faz hydrate por template (formulario), nao por funcao (inteligenc
     2. agent-builder -> agent definition
     3. instruction-builder -> execution steps
     4. boot-config-builder -> provider config
-    5. iso-package-builder -> deployable package
+    5. agent-package-builder -> deployable package
 
 Cada builder tem handoff protocol (I Receive / I Produce / I Signal).
 Taxonomia P12: workflow, dispatch_rule, handoff, signal, dag.

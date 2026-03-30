@@ -71,14 +71,14 @@ An agent is the complete identity specification that transforms a general LLM in
 ```
 [axiom, mental_model] --> [agent] --> [skill (P04), system_prompt (P03)]
                             |
-                    [iso_package, boot_config]
+                    [agent_package, boot_config]
 ```
 
 ## Decision Tree
 - IF need a complete autonomous specialist THEN agent
 - IF need a perspective shift on existing agent THEN lens
 - IF need a single callable ability THEN skill (P04)
-- IF need agent identity in portable format THEN iso_package
+- IF need agent identity in portable format THEN agent_package
 - DEFAULT: agent for any entity that needs to BECOME a specialist
 
 ## Quality Criteria

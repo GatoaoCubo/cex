@@ -431,8 +431,8 @@
     "naming": "p06_iface_{{contract}}.yaml",
     "pillar": "P06"
   },
-  "iso_package": {
-    "boundary": "Pacote distribuivel de agente em formato ISO. NAO eh agent (spec do agente) \u00e2\u20ac\u201d iso_package eh o bundle portable.",
+  "agent_package": {
+    "boundary": "Pacote distribuivel de agente em formato ISO. NAO eh agent (spec do agente) \u00e2\u20ac\u201d agent_package eh o bundle portable.",
     "core": true,
     "description": "Pacote portable de agente AI (ISO format) \u00e2\u20ac\u201d self-contained, LLM-agnostic",
     "llm_function": "BECOME",

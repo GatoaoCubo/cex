@@ -1,13 +1,13 @@
 ---
 kind: knowledge_card
-id: bld_knowledge_card_iso_package
+id: bld_knowledge_card_agent_package
 pillar: P01
 llm_function: INJECT
-purpose: Domain knowledge for iso_package production — portable agent bundle packaging
+purpose: Domain knowledge for agent_package production — portable agent bundle packaging
 sources: Docker OCI spec, ISO 42001 AI management, HuggingFace Model Hub, agent packaging patterns
 ---
 
-# Domain Knowledge: iso_package
+# Domain Knowledge: agent_package
 ## Executive Summary
 ISO packages are self-contained, portable, LLM-agnostic bundles that encapsulate an AI agent's complete operational context. Inspired by Docker images and ISO 42001 AI management systems, each package provides everything needed to instantiate an agent on any compatible runtime. They use a tiered file system with pillar-mapped contents and quality validation. ISO packages differ from agent definitions (source), boot configs (provider-specific init), and spawn configs (orchestration params).
 ## Spec Table

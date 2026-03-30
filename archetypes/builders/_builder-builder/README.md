@@ -100,7 +100,7 @@ meta-templates + the target kind's `_schema.yaml` + `SEED_BANK.yaml` and produce
 |------------|-------|----------------|-------|
 | Simple | signal, dispatch_rule, env_config | ~400 | Few fields, JSON format, minimal body |
 | Medium | knowledge_card, quality_gate, skill | ~600 | Moderate fields, structured body |
-| Complex | model_card, agent, iso_package | ~800 | Many fields, multiple objects, rich body |
+| Complex | model_card, agent, agent_package | ~800 | Many fields, multiple objects, rich body |
 
 Complexity correlates with: field count, body section count, object nesting, enum variety.
 

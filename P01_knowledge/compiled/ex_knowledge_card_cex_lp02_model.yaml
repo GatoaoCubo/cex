@@ -26,7 +26,7 @@ keywords:
 - boot-config
 - model-card
 - lens
-- iso-package
+- agent-package
 long_tails:
 - Quais tipos de identidade existem no CEX
 - Diferenca entre agent e persona no CEX
@@ -49,7 +49,7 @@ conceitos_chave:
 - 'Funcao dominante BECOME: identidade configurada no boot'
 - lens eh perspectiva cognitiva que colore toda percepcao
 - mental_model mapeia routing, decisoes e vieses produtivos
-- iso_package eh bundle portable de agente (LLM-agnostic)
+- agent_package eh bundle portable de agente (LLM-agnostic)
 - axiom eh principio imutavel da identidade profunda
 - P02 define COMO P01 eh interpretado e P05 formatado
 - boot_config inicializa por provider (modelo, temp, MCPs)
@@ -70,7 +70,7 @@ regras_de_ouro:
 - SEMPRE criar mental_model para agentes com 5+ tools
 - NUNCA definir identidade no user prompt (volatil)
 - NUNCA confundir quem SOU (P02) com o que SEI (P01)
-- SEMPRE usar iso_package para agentes que migram entre LLMs
+- SEMPRE usar agent_package para agentes que migram entre LLMs
 comparativo: '| Tipo | Proposito | Tamanho | Core |
 
   |------|-----------|---------|------|
@@ -89,7 +89,7 @@ comparativo: '| Tipo | Proposito | Tamanho | Core |
 
   | fallback_chain | Sequencia fallback entre modelos | <= 512B | nao |
 
-  | iso_package | Bundle portable de agente | <= 4096B | sim |
+  | agent_package | Bundle portable de agente | <= 4096B | sim |
 
   | axiom | Principio fundamental imutavel | <= 3072B | sim |'
 flow: "[boot_config + model_card]\n          |\n    [system_prompt]\n          |\n    [mental_model]\n          |\n      [persona]\n\

@@ -27,7 +27,7 @@ instances of existing kinds. No new kind needed.
 |-----------|---------|-------------|
 | CrewAI | Crew (agents+tasks+process) | director(P08) + workflow(P12) |
 | CrewAI | Agent (role+goal+tools) | agent(P02) + system_prompt(P03) |
-| A2A | AgentCard (name+skills+endpoint) | agent_card(P08) + iso_package(P02) |
+| A2A | AgentCard (name+skills+endpoint) | agent_card(P08) + agent_package(P02) |
 | LangGraph | StateGraph (nodes+edges+state) | dag(P12) + checkpoint(P12) |
 | CrewAI | Process (sequential/hierarchical) | workflow(P12) mode field |
 
@@ -41,7 +41,7 @@ instances of existing kinds. No new kind needed.
 | dispatch_rule | P12 | How work reaches this nucleus |
 | workflow | P12 | 8F execution pipeline |
 | spawn_config | P12 | How to launch this nucleus |
-| iso_package | P02 | Portable distributable bundle |
+| agent_package | P02 | Portable distributable bundle |
 | knowledge_card | P01 | Domain knowledge (N cards) |
 | quality_gate | P11 | Domain quality standards |
 | mcp_server | P04 | Tools available to nucleus |

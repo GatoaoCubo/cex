@@ -93,7 +93,7 @@
 ## Phase 3B: Extensions (53 remaining)
 
 ### Wave 8: P02 Model [x]
-iso_package (COMPLEX), boot_config (MEDIUM), mental_model (MEDIUM)
+agent_package (COMPLEX), boot_config (MEDIUM), mental_model (MEDIUM)
 
 ### Wave 9: P02+P08 [x]
 lens (SIMPLE), agent_card (COMPLEX), embedding_config (SIMPLE)

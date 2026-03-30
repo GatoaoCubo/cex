@@ -1,12 +1,12 @@
 ---
 # TEMPLATE: ISO Package (P02 Model)
-# Valide contra P02_model/_schema.yaml (types.iso_package)
+# Valide contra P02_model/_schema.yaml (types.agent_package)
 # Max 4096 bytes | density_min: 0.8
 
 id: p02_iso_[agent_name]
-kind: iso_package
+kind: agent_package
 pillar: P02
-title: [iso_package_do_agente]
+title: [agent_package_do_agente]
 tldr: [pacote_portavel_do_agente_em_uma_frase]
 ---
 

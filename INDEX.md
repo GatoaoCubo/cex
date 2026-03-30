@@ -27,7 +27,7 @@
 | SELF_BUILD_PROTOCOL.md | Self-build test metrics + criteria |
 | COMPARE_BUILDERS_SPEC.md | Builder comparison algorithm |
 | NAMING_CONVENTION.md | File naming rules |
-| ISO_PACKAGE_SPEC.md | 13-file builder specification |
+| AGENT_PACKAGE_SPEC.md | 13-file builder specification |
 | LLM_INSTRUCTIONS.md | System prompt for LLM operators |
 | QUICKSTART.md | How to create artifacts |
 | ONBOARDING.md | New contributor guide |

@@ -9,7 +9,7 @@ updated: "2026-03-27"
 author: "edison"
 domain: agent
 quality: null
-tags: [quality-gate, agent, P11, P02, governance, identity, iso-package]
+tags: [quality-gate, agent, P11, P02, governance, identity, agent-package]
 tldr: "Gates for agent artifacts — persona + capabilities + iso_vectorstore packages ready for deploy."
 density_score: 0.90
 ---

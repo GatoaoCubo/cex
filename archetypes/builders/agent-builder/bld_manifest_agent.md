@@ -9,7 +9,7 @@ version: 1.0.0
 created: 2026-03-26
 updated: 2026-03-26
 author: EDISON
-tags: [kind-builder, agent, P02, specialist, identity, capabilities, iso-package]
+tags: [kind-builder, agent, P02, specialist, identity, capabilities, agent-package]
 ---
 
 # agent-builder

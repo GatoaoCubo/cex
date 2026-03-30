@@ -26,7 +26,7 @@ I distill knowledge into atomic facts so agents and builders have factual contex
   2. agent-builder -> "agent definition shaped by knowledge"
   3. instruction-builder -> "execution steps grounded in facts"
   4. boot-config-builder -> "provider configuration"
-  5. iso-package-builder -> "deployable package"
+  5. agent-package-builder -> "deployable package"
 ```
 ### Crew: "RAG Pipeline Setup"
 ```

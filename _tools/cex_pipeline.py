@@ -59,7 +59,7 @@ TYPE_ABBREV = {
     "model_card": "mc",
     "router": "rtr",
     "fallback_chain": "fc",
-    "iso_package": "iso",
+    "agent_package": "iso",
     "axiom": "ax",
     "system_prompt": "sp",
     "user_prompt": "up",

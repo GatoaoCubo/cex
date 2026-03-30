@@ -10,12 +10,12 @@ author: edison
 domain: meta-construction
 quality: 9.0
 tags: [model, agent, persona, ISO, capabilities]
-tldr: "P02 define 8 tipos de artefato de identidade (agent, lens, boot_config, mental_model, model_card, router, fallback_chain, iso_package) com ISO vectorstore de 10-22 files por agente"
+tldr: "P02 define 8 tipos de artefato de identidade (agent, lens, boot_config, mental_model, model_card, router, fallback_chain, agent_package) com ISO vectorstore de 10-22 files por agente"
 when_to_use: "Quando precisar criar agentes, definir personas ou entender o sistema ISO do CEX"
-keywords: [agent, iso_package, mental_model, boot_config, router]
+keywords: [agent, agent_package, mental_model, boot_config, router]
 long_tails:
   - "como criar um agente ISO completo no CEX"
-  - "qual a diferenca entre agent e iso_package em P02"
+  - "qual a diferenca entre agent e agent_package em P02"
 axioms:
   - "Todo agente maduro tem 10+ ISO files — 10=baseline, 17=mature, 22+=golden"
 linked_artifacts:
@@ -32,7 +32,7 @@ P02 eh o dominio de identidade do CEX, com 8 tipos de artefato que definem quem 
 ## Spec Table
 | Campo | Valor | Nota |
 |-------|-------|------|
-| Tipos | 8 | agent, lens, boot_config, mental_model, model_card, router, fallback_chain, iso_package |
+| Tipos | 8 | agent, lens, boot_config, mental_model, model_card, router, fallback_chain, agent_package |
 | Agent max_bytes | 5120 | Body com 11 secoes padrao |
 | ISO min_files | 10 | MANIFEST, QUICK_START, PRIME, INSTRUCTIONS, ARCHITECTURE, OUTPUT_TEMPLATE, EXAMPLES, ERROR_HANDLING, UPLOAD_KIT, SYSTEM_INSTRUCTION |
 | ISO tiers | 4 | minimal(3), standard(7), complete(10), whitelabel(12) |
@@ -52,7 +52,7 @@ P02 eh o dominio de identidade do CEX, com 8 tipos de artefato que definem quem 
 - ISO com < 10 files: classificado como sub-baseline
 
 ## Application
-organization opera 118 agentes com ISO completo, todos geraveis via forge P02. O sistema iso_package permite que qualquer agente rode em claude, cursor, windsurf ou codex sem alteracao de prompt.
+organization opera 118 agentes com ISO completo, todos geraveis via forge P02. O sistema agent_package permite que qualquer agente rode em claude, cursor, windsurf ou codex sem alteracao de prompt.
 
 ## References
 - P02_model/_schema.yaml (fonte de verdade)

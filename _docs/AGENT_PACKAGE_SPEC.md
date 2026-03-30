@@ -36,7 +36,7 @@ Identity card of the agent. Machine-readable metadata.
 ```yaml
 id: agent_name
 version: "1.0.0"
-kind: iso_package
+kind: agent_package
 title: "Human-Readable Agent Name"
 description: "One-line description of what this agent does"
 domain: "marketing"           # primary domain

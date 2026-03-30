@@ -23,7 +23,7 @@ purpose: Component map of agent — inventory, dependencies, and architectural p
 | routing_entry | Registration in the agent routing index for discovery | system | required |
 ## Dependency Graph
 ```
-system_prompt    --produces-->  agent  --produces-->  iso_package
+system_prompt    --produces-->  agent  --produces-->  agent_package
 knowledge_card   --produces-->  agent  --consumed_by-> router
 mental_model     --depends-->   agent  --consumed_by-> workflow
 model_card       --depends-->   agent  --consumed_by-> spawn_config
@@ -37,7 +37,7 @@ agent            --signals-->   routing_entry (registration)
 | mental_model (P02) | agent | depends | routing logic and decision patterns |
 | model_card (P02) | agent | depends | LLM capabilities and cost constraints |
 | boot_config (P02) | agent | depends | provider-specific initialization parameters |
-| agent | iso_package (P02) | produces | portable distributable bundle of the agent |
+| agent | agent_package (P02) | produces | portable distributable bundle of the agent |
 | agent | skill (P04) | produces | reusable capability extracted from agent behavior |
 | agent | router (P02) | data_flow | routing destination registered for task dispatch |
 | agent | workflow (P12) | data_flow | node in orchestration graph |
@@ -50,7 +50,7 @@ agent            --signals-->   routing_entry (registration)
 | Persistent — defined once, instantiated many times | A mental_model (design-time blueprint, not runtime entity) |
 | Scoped to a agent_node with specific tool access | A model_card (LLM spec, not agent identity) |
 | A destination for routing and orchestration | A boot_config (initialization params, not agent definition) |
-| Packaged into iso_vectorstore with 10+ required ISO files | An iso_package (the distributable bundle, not the source definition) |
+| Packaged into iso_vectorstore with 10+ required ISO files | An agent_package (the distributable bundle, not the source definition) |
 ## Layer Map
 | Layer | Components | Purpose |
 |-------|------------|---------|

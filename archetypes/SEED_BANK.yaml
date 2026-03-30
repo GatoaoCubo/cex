@@ -41,7 +41,7 @@ P02_fallback_chain:
   seeds: [chain, timeout_per_step, models, degradation, cost, quality_threshold, retry_count, circuit_breaker, logging, alert]
   contexts: [resilience, cost_optimization, debugging, design]
 
-P02_iso_package:
+P02_agent_package:
   seeds: [manifest, system_instruction, instructions, architecture, examples, error_handling, upload_kit, portable, self_contained, whitelabel, tiers, density, quality_gates]
   contexts: [packaging, deployment, sharing, audit]
 

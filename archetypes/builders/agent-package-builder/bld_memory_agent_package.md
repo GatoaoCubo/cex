@@ -1,5 +1,5 @@
 ---
-id: p10_lr_iso_package_builder
+id: p10_lr_agent_package_builder
 kind: learning_record
 pillar: P10
 version: 1.0.0
@@ -8,16 +8,16 @@ updated: 2026-03-27
 author: edison
 observation: "ISO packages with hardcoded absolute paths (/home/, C:\\, /Users/) fail portability checks and require rework. Tier declarations that do not match the actual file count are caught by validator but cause avoidable rework cycles. system_instruction.md files exceeding 4096 tokens create context overflow when loaded into agent sessions. LP mapping errors (inventing mappings not in the enum) cause routing failures downstream. File inventory tables missing the status column are rejected by the manifest validator."
 pattern: "Scan for absolute paths before declaring portable:true — grep for /home/, /Users/, C:\\, records/ in all files. Tier must match file count exactly (3=minimal, 7=standard, 10=extended, 12=full). Token-budget system_instruction.md early in packaging (Phase 1) to avoid rework. LP mappings must come from the CONFIG.md enum, never invented. File inventory table must include all files with a status column."
-evidence: "9 iso_package productions: 4 had hardcoded paths caught by portability scan. 3 had tier/file-count mismatches. 2 had system_instruction over 4096 tokens (one at 6200 tokens). LP mapping errors in 2 productions caused routing failures in downstream testing. File inventory missing status column in 3 early productions."
+evidence: "9 agent_package productions: 4 had hardcoded paths caught by portability scan. 3 had tier/file-count mismatches. 2 had system_instruction over 4096 tokens (one at 6200 tokens). LP mapping errors in 2 productions caused routing failures in downstream testing. File inventory missing status column in 3 early productions."
 confidence: 0.75
 outcome: SUCCESS
-domain: iso_package
-tags: [iso-package, portability, tier-compliance, llm-agnostic, manifest, packaging]
+domain: agent_package
+tags: [agent-package, portability, tier-compliance, llm-agnostic, manifest, packaging]
 tldr: "Scan for absolute paths before portable:true. Tier must match file count exactly. Token-budget system_instruction early. LP mappings from enum only."
 impact_score: 7.5
 decay_rate: 0.05
 agent_node: edison
-keywords: [iso_package, portable, manifest, tier, lp_mapping, system_instruction, token_budget, file_inventory, hardcoded_paths]
+keywords: [agent_package, portable, manifest, tier, lp_mapping, system_instruction, token_budget, file_inventory, hardcoded_paths]
 ---
 
 ## Summary

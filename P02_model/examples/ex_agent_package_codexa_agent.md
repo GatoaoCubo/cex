@@ -1,6 +1,6 @@
 ---
 id: p02_iso_organization_agent
-kind: iso_package
+kind: agent_package
 pillar: P02
 agent_name: organization
 tier: complete
@@ -14,7 +14,7 @@ created: 2026-03-24
 author: EDISON
 domain: meta-construction
 quality: 9.5
-tags: [iso-package, portable, agent-bundle, llm-agnostic]
+tags: [agent-package, portable, agent-bundle, llm-agnostic]
 ---
 
 # ISO Package: organization

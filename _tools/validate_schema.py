@@ -72,8 +72,8 @@ def validate_schema(lp_dir: Path) -> tuple[int, int]:
         if "naming" in type_def:
             naming = type_def["naming"]
             lp_lower = data.get("pillar", "").lower()
-            # iso_package and similar portable types use external paths (e.g. agents/)
-            is_external_naming = type_name in ("iso_package",) or naming.startswith("agents/")
+            # agent_package and similar portable types use external paths (e.g. agents/)
+            is_external_naming = type_name in ("agent_package",) or naming.startswith("agents/")
             if not naming.startswith(lp_lower) and not is_external_naming:
                 print(
                     f"  FAIL: {lp_name}.{type_name} naming '{naming}'"

@@ -1,20 +1,20 @@
 ---
 kind: config
-id: bld_config_iso_package
+id: bld_config_agent_package
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming conventions, file paths, size limits, operational constraints
 pattern: CONFIG restricts SCHEMA, never contradicts it
 ---
 
-# Config: iso_package Production Rules
+# Config: agent_package Production Rules
 ## Naming Convention
 | Scope | Convention | Example |
 |-------|-----------|---------|
 | Package directory | `{agent_slug}/` | `scout_agent/` |
 | Manifest file | `manifest.yaml` | `scout_agent/manifest.yaml` |
 | ISO files | lowercase with underscores | `system_instruction.md` |
-| Builder directory | kebab-case | `iso-package-builder/` |
+| Builder directory | kebab-case | `agent-package-builder/` |
 | Frontmatter fields | snake_case | `agent_name`, `files_count` |
 | Agent slug | snake_case, lowercase | `knowledge_card_builder` |
 | Package id | `p02_iso_{agent_slug}` | `p02_iso_scout_agent` |

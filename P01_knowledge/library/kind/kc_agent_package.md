@@ -1,20 +1,20 @@
 ---
-id: p01_kc_iso_package
+id: p01_kc_agent_package
 kind: knowledge_card
 type: kind
 pillar: P02
-title: "ISO Package — Deep Knowledge for iso_package"
+title: "ISO Package — Deep Knowledge for agent_package"
 version: 1.0.0
 created: 2026-03-30
 updated: 2026-03-30
 author: edison
-domain: iso_package
+domain: agent_package
 quality: null
-tags: [iso_package, p02, BECOME, kind-kc]
+tags: [agent_package, p02, BECOME, kind-kc]
 tldr: "Self-contained portable agent bundle — LLM-agnostic, distributable package with manifest, instructions, and examples"
-when_to_use: "Building, reviewing, or reasoning about iso_package artifacts"
+when_to_use: "Building, reviewing, or reasoning about agent_package artifacts"
 keywords: [iso, package, portable, bundle, agent-distribution]
-feeds_kinds: [iso_package]
+feeds_kinds: [agent_package]
 density_score: null
 ---
 
@@ -22,7 +22,7 @@ density_score: null
 
 ## Spec
 ```yaml
-kind: iso_package
+kind: agent_package
 pillar: P02
 llm_function: BECOME
 max_bytes: 4096
@@ -31,7 +31,7 @@ core: true
 ```
 
 ## What It Is
-An iso_package is a self-contained, LLM-agnostic bundle that makes an agent portable and distributable. It contains everything needed to instantiate an agent on any compatible platform: manifest (identity), system instruction (voice), instructions (how to execute), examples (demonstrations), and error handling. It is NOT the agent spec itself (which defines persona and capabilities at a conceptual level) — the iso_package is the deployable artifact built from the spec. Think: agent = blueprint, iso_package = shipping container.
+An agent_package is a self-contained, LLM-agnostic bundle that makes an agent portable and distributable. It contains everything needed to instantiate an agent on any compatible platform: manifest (identity), system instruction (voice), instructions (how to execute), examples (demonstrations), and error handling. It is NOT the agent spec itself (which defines persona and capabilities at a conceptual level) — the agent_package is the deployable artifact built from the spec. Think: agent = blueprint, agent_package = shipping container.
 
 ## Cross-Framework Map
 | Framework/Provider | Class/Concept | Notes |
@@ -69,16 +69,16 @@ An iso_package is a self-contained, LLM-agnostic bundle that makes an agent port
 
 ## Integration Graph
 ```
-[agent] --> [iso_package] --> [boot_config, platform deployment]
+[agent] --> [agent_package] --> [boot_config, platform deployment]
                  |
           [skill (P04), system_prompt (P03), output_template (P05)]
 ```
 
 ## Decision Tree
-- IF need to share agent across platforms THEN iso_package (standard+)
+- IF need to share agent across platforms THEN agent_package (standard+)
 - IF internal prototype only THEN minimal ISO or just agent spec
 - IF client-facing customizable agent THEN whitelabel ISO
-- IF defining agent capabilities conceptually THEN agent (P02), not iso_package
+- IF defining agent capabilities conceptually THEN agent (P02), not agent_package
 - DEFAULT: standard ISO (7 files) for any production agent
 
 ## Quality Criteria
