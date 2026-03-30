@@ -257,9 +257,20 @@ Output: quality_gate_api_response.md (score: 8.7)</pre>
 <tr><td>09</td><td>The index is discovery. Re-index after every save.</td></tr>
 <tr><td>10</td><td>Open variables ({{mustache}}) are deliberate.</td></tr></table>
 
-<h1>12. Quick Start</h1>
+<h1>12. Access &amp; Quick Start</h1>
+<div class="co"><b>CEX is a private repository.</b> Access is granted on request to qualified AI practitioners and organizations. Contact the maintainer or request access via GitHub.</div>
+<h2>Request Access</h2>
+<table><tr><th>Method</th><th>Contact</th></tr>
+<tr><td>GitHub</td><td>github.com/GatoaoCubo &#8212; request collaborator access</td></tr>
+<tr><td>Email</td><td>Contact maintainer directly</td></tr></table>
+<h2>After Access is Granted</h2>
 <pre>git clone https://github.com/GatoaoCubo/cex.git
-cd cex &amp;&amp; pip install pyyaml</pre>
+cd cex
+pip install pyyaml          # required
+pip install anthropic       # optional: for 8F runner (Claude)
+pip install openai          # optional: for 8F runner (GPT)
+pip install edge-tts        # optional: for TTS narration</pre>
+<p><b>Note:</b> All core tools (motor, doctor, compile, index) work with only <code>pyyaml</code>. The LLM-dependent tools (8F runner) require at least one provider API key or a local Ollama instance.</p>
 <h2>Boot</h2>
 <pre>cex              # N07 orchestrator (pi + opus)
 cex doctor       # Health check
