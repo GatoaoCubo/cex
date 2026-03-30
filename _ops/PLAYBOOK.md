@@ -1,3 +1,15 @@
+---
+kind: runbook
+pillar: P08
+nucleus: N07
+version: 1.0.0
+quality: 9.0
+author: cex-n07
+title: CEX Spawn Playbook
+description: Complete operational manual for N07 orchestrator — dispatch, grid, monitoring, overnight, window positioning, error handling.
+composable_with: [workflow, dispatch_rule, spawn_config, checkpoint, signal]
+---
+
 # CEX Spawn Playbook — The Complete Operations Manual
 
 **Version**: 1.0.0 | **Tested**: 2026-03-30 | **Runtime**: pi (bash) + claude/codex/gemini (CMD)

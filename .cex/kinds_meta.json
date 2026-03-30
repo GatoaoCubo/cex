@@ -20,7 +20,7 @@
   "agent_card": {
     "boundary": "Agent deployment spec. NAO eh agent (P02, persona only) nem boot_config (P02, provider startup) nem spawn_config (P12, runtime launch).",
     "core": false,
-    "description": "Deployment spec for autonomous agent \u2014 identity, model, tools, boot, dispatch, constraints",
+    "description": "Deployment spec for autonomous agent — identity, model, tools, boot, dispatch, constraints",
     "llm_function": "BECOME",
     "max_bytes": 4096,
     "naming": "p08_ac_{{agent_name}}.yaml",
@@ -47,7 +47,7 @@
   "axiom": {
     "boundary": "Regra fundamental imutavel. NAO eh law (P08, operacional ajustavel) nem instruction (P03, flexivel).",
     "core": true,
-    "description": "Principio fundamental imutavel \u00e2\u20ac\u201d parte da identidade profunda da entidade",
+    "description": "Principio fundamental imutavel â€” parte da identidade profunda da entidade",
     "llm_function": "BECOME",
     "max_bytes": 3072,
     "naming": "p10_ax_{{rule}}.md",
@@ -432,9 +432,9 @@
     "pillar": "P06"
   },
   "agent_package": {
-    "boundary": "Pacote distribuivel de agente em formato ISO. NAO eh agent (spec do agente) \u00e2\u20ac\u201d agent_package eh o bundle portable.",
+    "boundary": "Pacote distribuivel de agente em formato ISO. NAO eh agent (spec do agente) â€” agent_package eh o bundle portable.",
     "core": true,
-    "description": "Pacote portable de agente AI (ISO format) \u00e2\u20ac\u201d self-contained, LLM-agnostic",
+    "description": "Pacote portable de agente AI (ISO format) â€” self-contained, LLM-agnostic",
     "llm_function": "BECOME",
     "max_bytes": 4096,
     "naming": "agents/{{agent_name}}/manifest.yaml",
@@ -889,5 +889,40 @@
     "max_bytes": 3072,
     "naming": "p12_wf_{{name}}.md + .yaml",
     "pillar": "P12"
+  },
+  "runbook": {
+    "pillar": "P08",
+    "llm_function": "INJECT",
+    "boundary": "Manual operacional step-by-step para orquestradores. Contem procedimentos, commands, tabelas de decisao, formulas, error handling. NAO eh workflow (P12, execucao automatica) nem pattern (P08, 1 pattern reutilizavel) nem instruction (P03, 1 instrucao flexivel) nem law (P08, regra imutavel). Runbook EVOLUI com aprendizado operacional.",
+    "examples": [
+      "spawn_playbook",
+      "deployment_runbook",
+      "incident_response_runbook",
+      "monitoring_runbook"
+    ],
+    "composable_with": [
+      "workflow",
+      "dispatch_rule",
+      "spawn_config",
+      "checkpoint",
+      "signal",
+      "pattern",
+      "law"
+    ],
+    "anti_kinds": [
+      "workflow",
+      "instruction",
+      "pattern",
+      "law"
+    ],
+    "typical_size": "5KB-15KB",
+    "typical_sections": [
+      "golden_rule",
+      "procedures",
+      "decision_tables",
+      "error_handling",
+      "monitor_setup",
+      "formulas"
+    ]
   }
 }
