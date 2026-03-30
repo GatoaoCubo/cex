@@ -1,68 +1,104 @@
----  
-id: p07_sr_eng_nucleus  
-kind: scoring_rubric  
-pillar: P07  
-title: "Rubric: Engineering Nucleus"  
-version: "1.0.0"  
-created: "2023-10-07"  
-updated: "2023-10-07"  
-author: "scoring-rubric-builder"  
-framework: "Engineering Nucleus"  
-target_kinds: [artifact, engineering_nucleus]  
-dimensions_count: 5  
-total_weight: 100  
-threshold_golden: 9.5  
-threshold_publish: 8.0  
-threshold_review: 7.0  
-automation_status: "semi-automated"  
-domain: "engineering"  
-quality: null  
-tags: [scoring-rubric, engineering, evaluation]  
-tldr: "5-dimension rubric assessing functionality, innovation, scalability, maintainability, and user experience for engineering artifacts."  
-density_score: 0.85  
-calibration_set: [p07_gt_eng_functionality_example]  
-inter_rater_agreement: 0.85  
-appeals_process: "Submit reevaluation requests to engineering-review-board@example.com with detailed justification."  
-linked_artifacts:  
-  primary: "engineering-nucleus-builder"  
-  related: [p11_qg_eng_publish, p07_gt_eng_example]  
----  
+---
+id: p07_sr_builder_nucleus
+kind: scoring_rubric
+pillar: P07
+title: Scoring Rubric -- Builder Nucleus
+version: 2.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: builder_agent
+framework: builder_quality
+target_kinds: [all_99_kinds]
+dimensions_count: 5
+total_weight: 100
+threshold_golden: 9.5
+threshold_publish: 8.0
+threshold_review: 7.0
+automation_status: semi-automated
+domain: meta-construction
+quality: 9.0
+tags: [scoring-rubric, builder, N03, quality]
+tldr: 5-dimension rubric for scoring any CEX artifact -- correctness, completeness, density, usefulness, integration.
+density_score: 0.90
+---
 
-## Purpose  
-The scoring rubric evaluates engineering artifacts within the Engineering Nucleus framework. It ensures artifacts meet or exceed necessary engineering standards by assessing key dimensions crucial to engineering success.  
+# Scoring Rubric: Builder Nucleus
 
-## Dimensions  
-| Dimension      | Weight | Scale | Criteria                                                                                     | Example (10)                                                    | Example (5)                                                     |
-|----------------|--------|-------|----------------------------------------------------------------------------------------------|-----------------------------------------------------------------|-----------------------------------------------------------------|
-| Functionality  | 30%    | 0-10  | Complete and correct implementation of all specified features.                               | Fully functional, all features work as intended without issues. | Partially functional, critical features have significant issues.|
-| Innovation     | 20%    | 0-10  | Incorporation of novel solutions or improvements upon existing methods.                      | Introduces ground-breaking ideas enhancing previous solutions.  | Slight improvements, largely replicates existing solutions.     |
-| Scalability    | 20%    | 0-10  | Ability to handle increasing loads or expansions efficiently.                                | Scales easily with minimal resource increase, shows future-proofing. | Limited scalability, requires major changes for load handling. |
-| Maintainability| 15%    | 0-10  | Ease of upkeep, including code readability and documentation.                                | Code is clean, well-documented, easily maintained or updated.   | Poorly documented, cumbersome to update or debug.               |
-| User Experience| 15%    | 0-10  | Quality of interaction with users, intuitiveness, and satisfaction.                          | User interface is intuitive, highly satisfying experience.      | Unintuitive interface, leads to frustration or frequent errors. |
+## Purpose
+Scores ANY artifact produced by the 8F pipeline. Applies universally
+to all 99 kinds. Each dimension has clear 10/5/1 anchors.
 
-## Tier Thresholds  
-| Tier    | Score | Action                              |
-|---------|-------|-------------------------------------|
-| GOLDEN  | >= 9.5 | Promote as exemplary engineering artifact and use as reference model. |
-| PUBLISH | >= 8.0 | Approve for deployment and use.    |
-| REVIEW  | >= 7.0 | Return with feedback for improvement and resubmission. |
-| REJECT  | < 7.0 | Reject and require redesign or reformulation from scratch. |
+## Dimensions
 
-## Calibration  
-- **GOLDEN (9.7)**: Examples of engineering artifacts where functionality is flawless and innovative solutions are incorporated, such as the p07_gt_eng_functionality_example.  
-- **PUBLISH (8.4)**: Artifacts that meet functional requirements well, with some unique features and reasonable scalability.  
-- **REVIEW (7.1)**: Artifacts with good intention but significant usability or scalability issues that detract from their practical use.  
-- **REJECT (5.8)**: Artifacts that fall short in most dimensions and require fundamental redesigns, failing to meet basic requirements.
+### D1: Correctness (30%)
+Does the artifact conform to its kind specification?
 
-## Automation  
-| Dimension      | Status         | Tool                  |
-|----------------|----------------|-----------------------|
-| Functionality  | automated      | validate_eng.py       |
-| Innovation     | manual         | Human review          |
-| Scalability    | semi-automated | scalability_tool.py   |
-| Maintainability| automated      | code_linter.py        |
-| User Experience| semi-automated | ux_assessment_tool.py |
+| Score | Anchor |
+|-------|--------|
+| 10 | Frontmatter valid, all schema fields correct, kind matches, pillar correct |
+| 5 | Minor field issues (typo in id, missing optional field) |
+| 1 | Wrong kind in frontmatter, missing required fields, invalid YAML |
 
-## References  
-- AAC&U VALUE Rubrics: https://www.aacu.org/initiatives/value-initiative  
-- validate_eng.py v2.0 (CEX Engineering Nucleus implementation reference)
+**Automation**: cex_doctor.py checks frontmatter + schema. Fully automatable.
+
+### D2: Completeness (25%)
+Are all sections from the builder template filled?
+
+| Score | Anchor |
+|-------|--------|
+| 10 | Every section from bld_output_template has substantive content |
+| 5 | >70% of sections filled, remainder has placeholder markers |
+| 1 | <50% of sections filled, major gaps |
+
+**Automation**: Compare sections against bld_output_template_{{kind}}.md. Semi-automatable.
+
+### D3: Density (20%)
+Is every line carrying signal? No filler, no fluff?
+
+| Score | Anchor |
+|-------|--------|
+| 10 | 0.90+ signal ratio, zero filler sentences, every line teaches or specifies |
+| 5 | 0.80 density, some transitional sentences but no lorem/placeholder |
+| 1 | Below 0.70, has filler text, lorem ipsum, or empty sections |
+
+**Automation**: Line analysis (content_lines / total_lines). Fully automatable.
+
+### D4: Usefulness (15%)
+Can a consumer use this artifact immediately without editing?
+
+| Score | Anchor |
+|-------|--------|
+| 10 | Drop-in usable. An LLM can BECOME/INJECT/CALL this directly. |
+| 5 | Needs minor edits (fill a {{variable}}, adjust a threshold) |
+| 1 | Needs major rewrite to be usable |
+
+**Automation**: Manual review. Not automatable (requires domain judgment).
+
+### D5: Integration (10%)
+Does it compile, index, and reference correctly?
+
+| Score | Anchor |
+|-------|--------|
+| 10 | Compiles to valid YAML, indexes clean, all refs resolve, no warnings |
+| 5 | Compiles but some references broken or warnings from doctor |
+| 1 | Does not compile, index fails, orphaned references |
+
+**Automation**: cex_compile.py + cex_index.py + cex_doctor.py. Fully automatable.
+
+## Thresholds
+
+| Tier | Score | Action |
+|------|-------|--------|
+| GOLDEN | >= 9.5 | Archive as reference example in P{{NN}}/examples/ |
+| PUBLISH | >= 8.0 | Standard publication to nucleus or pillar |
+| REVIEW | >= 7.0 | Return with specific feedback per dimension |
+| REJECT | < 7.0 | Redo from scratch with different approach |
+
+## Calibration
+
+| Score | Example |
+|-------|---------|
+| 9.7 | kc_agent.md -- complete spec, every section filled, compiles clean, immediately usable |
+| 8.3 | ex_workflow_brand_propagation.md -- good structure, minor density issues |
+| 7.1 | Generic placeholder nucleus artifact -- structure OK, content thin |
+| 5.5 | Auto-generated with wrong kind, missing sections |

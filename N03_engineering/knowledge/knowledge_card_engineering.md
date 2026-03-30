@@ -1,69 +1,57 @@
 ---
-id: p01_kc_engineering_nucleus
+id: p01_kc_meta_construction
 kind: knowledge_card
 pillar: P01
-title: "Engineering Nucleus"
-version: "1.0.0"
-created: "2023-10-04"
-updated: "2023-10-04"
-author: "knowledge-card-builder"
-domain: engineering
-quality: null
-tags: [engineering, knowledge, core_concepts, practices]
-tldr: "Core elements defining engineering practices and principles."
-when_to_use: "To understand foundational engineering concepts."
-keywords: [engineering, core, principles]
-long_tails:
-  - Understanding engineering core principles
-  - What defines the nucleus of engineering?
-axioms:
-  - ALWAYS incorporate core principles into engineering practices.
-  - NEVER ignore foundational knowledge in complex problem-solving.
-linked_artifacts:
-  primary: null
-  related: []
-density_score: 0.85
-data_source: "https://docs.engineering.org/core-concepts"
-
+title: Knowledge Card -- Meta-Construction
+version: 2.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: builder_agent
+domain: meta-construction
+quality: 9.0
+tags: [knowledge-card, builder, N03, meta-construction]
+tldr: What meta-construction is -- building the artifacts that build artifacts.
+when_to_use: Designing builders, templates, quality gates, or new kinds.
+keywords: [meta-construction, builder, factory, strange-loop, 8F]
+feeds_kinds: [agent, system_prompt, workflow, quality_gate]
+density_score: 0.90
 ---
 
-## Quick Reference
----
-yaml
-topic: Engineering Nucleus
-scope: Core components of engineering practices
-owner: knowledge-card-builder
-criticality: high
-```
+# Meta-Construction
+
+## Definition
+
+Meta-construction builds the tools, templates, and processes that produce artifacts,
+rather than building artifacts directly. N03 builds builders, not products.
+
+## When to Use
+
+- Designing a new kind of artifact
+- Creating builders, templates, or quality gates
+- Bootstrapping a new nucleus
+- Improving the 8F pipeline itself
+
+## Boundaries
+
+| Is Meta-Construction | Is NOT |
+|---------------------|--------|
+| Building an agent builder | Building an agent for a client |
+| Designing a workflow template | Running a specific workflow |
+| Creating a quality gate | Scoring an existing artifact |
+| Registering a new kind | Creating an instance of a kind |
 
 ## Key Concepts
-- **Fundamental Laws**: Governing equations central to engineering.
-- **Primary Principles**: Key guidelines followed across engineering fields.
-- **Core Elements**: Building blocks of engineering problem-solving.
 
-## Strategy Phases
-1. **Identification**: Recognize foundational laws and principles.
-2. **Integration**: Apply core concepts to practical problems.
-3. **Innovation**: Use foundational knowledge to drive innovation.
+- **8F Pipeline**: 8-step process (CONSTRAIN through COLLABORATE)
+- **Builder ISOs**: 13 files per kind teaching how to construct it
+- **Kind KC**: Knowledge card describing what a kind IS
+- **Crew Composition**: Multi-builder teams for complex construction
+- **Strange Loop**: N03 builds itself using its own pipeline
+- **Open Variables**: {{mustache}} syntax for consumer-filled values
 
-## Golden Rules
-- Incorporate primary principles early in project planning.
-- Regularly update knowledge on evolving core concepts.
-- Align all engineering practices with fundamental laws.
+## Anti-Patterns
 
-## Flow
-```text
-[Identify Core Elements] -> [Integrate into Practices] -> [Apply in Solutions]
-```
-
-## Comparativo
-| Aspect | Engineering Nucleus | Non-Core Engineering |
-|--------|---------------------|----------------------|
-| Focus  | Core principles     | Peripheral techniques |
-| Efficiency | High             | Varies                |
-| Reliability | Yes             | No                    |
-
-## References
-- Related artifact: p01_kc_engineering_principles
-- Source: https://docs.engineering.org/core-concepts
-```
+- Building without loading builder ISOs first
+- Skipping quality gates to save time
+- Hardcoding values that should be {{open_variables}}
+- Creating kinds without registering in kinds_meta.json

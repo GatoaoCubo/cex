@@ -1,0 +1,38 @@
+---
+id: p03_pt_builder_construction
+kind: prompt_template
+pillar: P03
+title: Prompt Template -- Artifact Construction
+version: 1.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: builder_agent
+domain: meta-construction
+quality: 9.0
+tags: [prompt-template, builder, N03]
+tldr: Reusable template for F6 PRODUCE step -- generates any artifact from plan + knowledge.
+density_score: 0.88
+---
+
+# Prompt Template: Artifact Construction
+
+## Usage
+Injected at Runner.F6 (PRODUCE). Variables filled by pipeline from F1-F5 outputs.
+
+## Template
+
+
+
+## Variables
+
+| Variable | Source | Filled By |
+|----------|--------|-----------|
+| {{kind}} | F1 Motor | pipeline |
+| {{domain}} | User input | pipeline |
+| {{max_bytes}} | kinds_meta.json | F1 |
+| {{naming}} | kinds_meta.json | F1 |
+| {{builder_system_prompt}} | builder ISOs | F2 |
+| {{knowledge_context}} | KC library | F3 |
+| {{construction_plan}} | LLM reasoning | F4 |
+| {{existing_artifacts_summary}} | artifact scan | F5 |
+| {{open_variables}} | mustache syntax | consumer at use-time |

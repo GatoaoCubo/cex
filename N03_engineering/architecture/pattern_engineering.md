@@ -1,70 +1,47 @@
----  
-id: p08_pat_engineering_nucleus  
-kind: pattern  
-pillar: P08  
-version: "1.0.0"  
-created: "2023-10-20"  
-updated: "2023-10-20"  
-author: "pattern-builder"  
-domain: "Engineering"  
-quality: null  
-tags: [pattern, engineering, organization, resource_management]  
-tldr: "Centralize and structure core engineering activities to improve efficiency and communication."  
-name: "Engineering Nucleus Pattern"  
-problem: "Disjointed engineering processes lead to inefficiencies and poor communication within the organization."  
-solution: "Create a modular architecture that integrates key functions and resources, streamlining communication and collaboration."  
-context: "Applicable to engineering organizations aiming to enhance process visibility and efficiency."  
-forces: ["need for flexibility vs need for standardization", "collaboration vs domain-specific autonomy"]  
-consequences: ["improved operational cohesion", "possible initial resistance to change"]  
-related_patterns: ["Integration Framework", "Communication Protocols"]  
-anti_patterns: ["Siloed Functions", "Over-standardization"]  
-applicability: "Use when streamlining engineering processes is needed without overly restricting autonomy. Avoid in highly rigid structures."  
-keywords: [efficiency, communication, organization]  
+---
+id: p08_pat_builder_construction
+kind: pattern
+pillar: P08
+title: Pattern -- Builder Construction
+version: 2.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: builder_agent
+domain: meta-construction
+quality: 9.0
+tags: [pattern, builder, N03]
+tldr: 3 construction patterns -- direct build, crew composition, nucleus bootstrap.
+density_score: 0.88
 ---
 
-## Problem
-Engineering organizations often face inefficient workflows and poor communication due to disjointed processes. This problem frequently occurs in environments where functions need to work collaboratively yet maintain their specific practices, leading to operational disruptions and reduced productivity.
+# Pattern: Builder Construction
 
-## Context
-- Environment: Engineering organizations across various sectors.
-- Frequency: Common among medium to large organizations.
-- Severity: Significant operational disruptions and delays if unresolved.
+## P1: Direct Build (Single Kind)
 
-## Forces
-- **Flexibility vs Standardization**: Organizations need adaptable processes while maintaining some level of standardization for efficiency.
-- **Collaboration vs Domain-Specific Autonomy**: Teams require mechanisms for communication and cooperation without compromising domain-specific independence.
+Most common. One intent, one kind, one artifact.
+Intent > Motor > Kind > 8F Pipeline > Artifact
+When: explicit kind request, examples available.
+Model: sonnet default. Time: 10-60s.
 
-## Solution
-Develop an "Engineering Nucleus" where core activities and resources are centralized within a modular architecture. This involves:
-1. Identifying and integrating essential functions across the organization.
-2. Building interfaces for seamless interconnectivity.
-3. Allocating resources effectively to avoid bottlenecks.
-4. Establishing clear communication protocols.
-5. Maintaining the ability to scale as the organization grows.
+## P2: Crew Composition (Multi-Kind)
 
-## Consequences
+Intent requires multiple related artifacts in dependency order.
+Intent > Motor > [Kind1, Kind2, Kind3] > Select crew > Build sequentially
+When: build agent end-to-end (agent + SP + boot_config + ...).
+Model: opus. Time: 2-10 min.
 
-Benefits:
-- Enhanced operational efficiency and cohesion across teams.
-- Better resource management and streamlined communication.
+## P3: Nucleus Bootstrap (Full N0x)
 
-Costs:
-- Potential resistance from teams due to changes in established processes.
-- Complexity in setting up initial modular architecture.
+Build entire nucleus with 7+ core artifacts.
+Seed > cex_nucleus_builder.py > agent_card > agent > SP > ...
+Each artifact gets context from previously built ones.
+Model: opus + xthinking. Time: 10-30 min.
 
-## Examples
+## Selection
 
-1. **TechCorp Inc.**: Implemented the pattern to integrate its engineering and design teams, resulting in a 30% reduction in project timelines.
-2. **Innovate Solutions**: Applied the pattern to overcome resource allocation issues, improving cross-functional communications significantly.
-
-## Anti-Patterns
-- **Siloed Functions**: Isolating teams without interconnected processes can lead to inefficiencies and miscommunications.
-- **Over-standardization**: Implementing too many rigid processes can stifle creativity and reduce adaptability.
-
-## Related Patterns
-- **Integration Framework**: Often used to establish standardized interactions between different modular components.
-- **Communication Protocols**: Essential for ensuring clear and consistent messaging across engineering teams.
-
-## References
-- Integration Best Practices: Enhancing Efficiency
-- Effective Communication in Engineering Teams
+| Intent Signal | Pattern |
+|---------------|---------|
+| create a {{kind}} | P1 Direct |
+| build {{thing}} with {{deps}} | P2 Crew |
+| scaffold nucleus N0x | P3 Bootstrap |
+| ambiguous | P1 via Motor |

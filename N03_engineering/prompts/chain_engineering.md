@@ -1,0 +1,52 @@
+---
+id: p03_ch_builder_pipeline
+kind: chain
+pillar: P03
+title: Prompt Chain -- Builder Pipeline
+version: 1.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: builder_agent
+domain: meta-construction
+quality: 9.0
+tags: [chain, builder, N03]
+tldr: 4-step prompt chain -- classify, plan, build, validate.
+density_score: 0.88
+---
+
+# Prompt Chain: Builder Pipeline
+
+## Overview
+
+4 LLM calls in the 8F pipeline. Steps 1-3 and 5 are deterministic.
+
+## Step 1: CLASSIFY (F4 REASON)
+
+    Given kind={{kind}}, constraints={{constraints}}, knowledge={{kc_summary}}:
+    Plan sections, references, structure.
+    Output 100-200 word construction plan.
+
+Temperature: 0.3 | Max tokens: 500
+
+## Step 2: BUILD (F6 PRODUCE)
+
+    Using plan={{plan}}, tools={{tools}}, knowledge={{full_kc}}:
+    Produce complete artifact with YAML frontmatter and structured body.
+    Follow builder output template for {{kind}}.
+
+Temperature: 0.7 | Max tokens: 4000
+
+## Step 3: VALIDATE (F7 GOVERN)
+
+    Check artifact against gates H01-H07:
+    {{artifact_text}}
+    Report: pass/fail per gate, overall score, issues list.
+
+Temperature: 0.0 | Max tokens: 500 | Model: haiku
+
+## Step 4: RETRY (if needed)
+
+    Artifact failed these gates: {{issues}}
+    Revise to fix specific issues. Keep what passed.
+
+Temperature: 0.5 | Max tokens: 4000

@@ -1,33 +1,49 @@
 ---
-
-id: p12_dr_engineering
+id: p12_dr_builder_nucleus
 kind: dispatch_rule
 pillar: P12
-version: 1.0.0
-created: 2023-10-05
-updated: 2023-10-05
-author: dispatch_rule_builder
-domain: engineering
-quality: null
-tags: [dispatch, engineering, apollo]
-tldr: Route engineering tasks like calibration and failure analysis to engineering agent_node
-scope: engineering
-keywords: [calibrar, calibrate, revisão de design, design review, análise de falhas, failure analysis, construção, build, manutenção, maintenance]
-agent_node: apollo
-model: opus
+title: Dispatch Rule -- Builder Nucleus
+version: 2.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: builder_agent
+domain: meta-construction
+quality: 9.0
+tags: [dispatch-rule, builder, N03]
+tldr: Routes construction tasks to N03 via keyword matching and confidence scoring.
+density_score: 0.88
+scope: construction
+keywords: [build, create, construct, design, scaffold, generate, forge, construir, criar, gerar]
 priority: 8
 confidence_threshold: 0.70
-fallback: atlas
-
+fallback: clarify
+routing_strategy: keyword_match
 ---
 
-# Engineering Dispatch Rule
+# Dispatch Rule: Builder Nucleus
 
-## Purpose
-This rule routes tasks related to engineering activities, such as calibration, design review, and failure analysis, to the Apollo agent_node, ensuring that engineering operations are handled efficiently.
+## Routing Keywords
 
-## Keyword Rationale
-Keywords are selected to trigger on commonly used terms in both Portuguese and English within the engineering domain. This includes essential engineering tasks such as "calibrate," "design review," and "failure analysis."
+| Keywords | Language | Confidence |
+|----------|----------|------------|
+| build, create, construct, make | EN | 0.90 |
+| design, scaffold, generate, forge | EN | 0.85 |
+| artifact, kind, template, component | EN | 0.80 |
+| construir, criar, gerar, montar | PT | 0.85 |
 
-## Fallback Logic
-When the confidence of keyword matching falls below the set threshold or if the Apollo agent_node is unavailable, tasks default to the Atlas agent_node to ensure continuity and task completion.
+## Decision Matrix
+
+| Signal | Route | Conf |
+|--------|-------|------|
+| create a [kind] | N03 direct | 0.95 |
+| build [thing] for [domain] | N03 via Motor | 0.85 |
+| scaffold nucleus | N03 nucleus_builder | 0.90 |
+| register new kind | N03 kind_register | 0.90 |
+| deploy [thing] | NOT N03 -> N05 | 0.00 |
+| research [topic] | NOT N03 -> N01 | 0.00 |
+| write copy for | NOT N03 -> N02 | 0.00 |
+
+## Fallback
+
+If confidence < 0.70 and no other nucleus matches, route to N03
+with clarification. Builder is safest default for ambiguous make intents.
