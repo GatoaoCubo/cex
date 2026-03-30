@@ -1,13 +1,13 @@
 ---
-id: KC_PYTHA_ML_UNIVERSE_MAP
+id: KC_knowledge_agent_ML_UNIVERSE_MAP
 kind: knowledge_card
 pillar: P01
 version: 1.0.0
 quality: 8.7
-source: "gdrive://CODEXA Conhecimento/Mapeando_o_Universo_do_Machine_Learning.pdf"
+source: "gdrive://organization Conhecimento/Mapeando_o_Universo_do_Machine_Learning.pdf"
 contributor: "CEO (root folder)"
 domain: conhecimento
-satellite: PYTHA
+agent_node: knowledge_agent
 tags: [machine-learning, algoritmos, supervisionado, nao-supervisionado, guia-visual]
 created: "2026-03-23"
 ---
@@ -100,9 +100,9 @@ Dados rotulados?
 | Model Selection | Escolher melhor algoritmo para o problema |
 | Ensemble Methods | Combinar multiplos modelos para melhor resultado |
 
-## Aplicabilidade CODEXA
+## Aplicabilidade organization
 
-| Conceito ML | Uso em CODEXA |
+| Conceito ML | Uso em organization |
 |-------------|---------------|
 | Classificacao | Triage automatica de insumos (inbox → dominio) |
 | Clustering | Agrupar agents por similaridade de capabilities |

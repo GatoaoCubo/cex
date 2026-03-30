@@ -5,7 +5,7 @@ title: 'Pattern: Continuous Batching (Satellite Grid)'
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: PYTHA
+author: knowledge_agent
 quality: 9.2
 tags:
 - pattern
@@ -17,7 +17,7 @@ tldr: 'When queue > slots: fill slots immediately as they complete instead of wa
   task missions'
 max_bytes: 2048
 density_score: 0.92
-source: codexa-core/records/skills/continuous_batching/SKILL.md
+source: organization-core/records/skills/continuous_batching/SKILL.md
 linked_artifacts:
   workflow: p12_wf_stella_dispatch
   spawn: p12_spawn_grid_continuous
@@ -29,14 +29,14 @@ diagram: "STATIC (wave):          CONTINUOUS:\n[A][B][C] → wait all   [A][B][C
   \                        [E]      when B done\n                        [F]          when C done\nTotal: 2x slowest     \
   \  Total: ~1.6x speedup (measured)"
 auto_detection_logic: "IF handoffs_count > available_slots:\n    mode = continuous\nELSE:\n    mode = static (wave)\n\nTrigger:\
-  \ `spawn_grid.ps1` auto-detects — STELLA does not choose manually."
+  \ `spawn_grid.ps1` auto-detects — orchestrator does not choose manually."
 measured_performance: '| Mission | Tasks | Slots | Mode | Result |
 
   |---------|-------|-------|------|--------|
 
   | ISOFIX | 7 batches | 3 | continuous | 1.6x speedup vs static |
 
-  | CBTEST | 8 mixed | 3 | continuous | SHAKA+EDISON+PYTHA confirmed |'
+  | CBTEST | 8 mixed | 3 | continuous | research_agent+builder_agent+knowledge_agent confirmed |'
 when_to_use: '| Condition | Use Continuous |
 
   |-----------|---------------|
@@ -59,6 +59,6 @@ signal_protocol: 'Each batch signals independently:
 
   # Spawn monitor detects → assigns next batch automatically'
 constraints:
-- Max 3 concurrent satellites (BSOD at 4 on current hardware)
+- Max 3 concurrent agent_nodes (BSOD at 4 on current hardware)
 - 5s delay between terminal spawns (RAM stability)
-- 'Git lock: zero contention confirmed at 3 concurrent satellites'
+- 'Git lock: zero contention confirmed at 3 concurrent agent_nodes'

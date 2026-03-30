@@ -26,7 +26,7 @@ density_score: null
 
 ## TL;DR
 
-Um reward_signal que usa Claude Haiku como juiz automatico para avaliar respostas de agentes CODEXA. Cada resposta recebe score 0.0-1.0 baseado em 3 criterios ponderados: accuracy (40%), helpfulness (40%), safety (20%). O signal alimenta quality gates e learning records.
+Um reward_signal que usa Claude Haiku como juiz automatico para avaliar respostas de agentes organization. Cada resposta recebe score 0.0-1.0 baseado em 3 criterios ponderados: accuracy (40%), helpfulness (40%), safety (20%). O signal alimenta quality gates e learning records.
 
 ## Conceito Central
 
@@ -91,7 +91,7 @@ reward_signal:
 
 ## Exemplo Pratico
 
-**Input**: Agente LILY gera copy para anuncio de produto:
+**Input**: Agente marketing_agent gera copy para anuncio de produto:
 ```
 "Kit 6 Tacos Lavanda Aromatica — Perfume Suave que Dura 30 Dias.
 Ideal para gavetas, closets e armarios. Feito com oleos essenciais naturais."
@@ -126,7 +126,7 @@ Ideal para gavetas, closets e armarios. Feito com oleos essenciais naturais."
 }
 ```
 
-**Trending** (ultimas 20 avaliacoes do LILY):
+**Trending** (ultimas 20 avaliacoes do marketing_agent):
 ```
 Scores: [0.91, 0.88, 0.85, 0.92, 0.78, 0.90, 0.87, 0.91, ...]
 Mean:   0.878

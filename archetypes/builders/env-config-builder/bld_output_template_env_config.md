@@ -16,7 +16,7 @@ version: "1.0.0"
 created: "{{YYYY-MM-DD}}"
 updated: "{{YYYY-MM-DD}}"
 author: "{{who_produced}}"
-scope: "{{global_or_satellite_or_service}}"
+scope: "{{global_or_agent_node_or_service}}"
 variables:
   - {{VAR_NAME_1}}
   - {{VAR_NAME_2}}

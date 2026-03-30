@@ -12,7 +12,7 @@ tags: [naming, cex, convention, lp]
 tldr: "CEX file naming: p{LP}_{type}_{descriptor}.{ext} — LP number + 2-letter type code + snake_case descriptor"
 max_bytes: 2048
 density_score: 0.90
-source: codexa-core/C:/Users/PC/Documents/GitHub/cex/archetypes/MIGRATION_MAP.md + all _schema.yaml files
+source: organization-core/C:/Users/PC/Documents/GitHub/cex/archetypes/MIGRATION_MAP.md + all _schema.yaml files
 linked_artifacts: null
 ---
 
@@ -41,7 +41,7 @@ p{LP_NUMBER}_{TYPE_CODE}_{descriptor}.{ext}
 | P05 | naming_rule | `nr` | `p05_nr_cex_naming.md` |
 | P06 | input_schema | `is` | `p06_is_quality_audit.yaml` |
 | P06 | validator | `val` | `p06_val_quality_score.yaml` |
-| P06 | interface | `iface` | `p06_iface_satellite_handoff.yaml` |
+| P06 | interface | `iface` | `p06_iface_agent_node_handoff.yaml` |
 | P07 | unit_eval | `ue` | `p07_ue_brain_query.yaml` |
 | P07 | smoke_eval | `se` | `p07_se_brain_query.md` |
 | P07 | golden_test | `gt` | `p07_gt_stripe_pipeline.md` |
@@ -51,8 +51,8 @@ p{LP_NUMBER}_{TYPE_CODE}_{descriptor}.{ext}
 | P08 | law | `law` | `p08_law_shokunin.md` |
 | P09 | env_config | `env` | `p09_env_firecrawl.yaml` |
 | P09 | feature_flag | `ff` | `p09_ff_firecrawl_enabled.yaml` |
-| P09 | path_config | `path` | `p09_path_codexa_repos.yaml` |
-| P09 | runtime_rule | `rr` | `p09_rr_satellite_spawn.yaml` |
+| P09 | path_config | `path` | `p09_path_organization_repos.yaml` |
+| P09 | runtime_rule | `rr` | `p09_rr_agent_node_spawn.yaml` |
 | P10 | mental_model | `mm` | `p10_mm_edison.yaml` |
 | P10 | learning_record | `lr` | `p10_lr_continuous_batching.md` |
 | P10 | axiom | `ax` | `p10_ax_scout_before_create.md` |

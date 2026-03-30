@@ -18,7 +18,7 @@ number: {{integer}}
 statement: "{{imperative_rule_one_sentence}}"
 rationale: "{{why_this_law_exists}}"
 enforcement: "{{how_violation_detected}}"
-scope: "{{system|satellite|domain}}"
+scope: "{{system|agent_node|domain}}"
 exceptions: [{{exception_1_or_empty}}]
 priority: {{integer_1_to_10}}
 keywords: [{{keyword_1}}, {{keyword_2}}, {{keyword_3}}]

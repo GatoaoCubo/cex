@@ -9,7 +9,7 @@ pattern: few-shot learning — LLM reads these before producing
 
 # Examples: entity-memory-builder
 ## Golden Example
-INPUT: "Create entity memory for Firecrawl — the web scraping API service used by SHAKA satellite"
+INPUT: "Create entity memory for Firecrawl — the web scraping API service used by research_agent agent_node"
 OUTPUT:
 ```yaml
 id: p10_em_firecrawl
@@ -35,20 +35,20 @@ attributes:
 update_policy: overwrite
 source: "MEMORY.md + Firecrawl official docs"
 relationships:
-  - entity: "p10_em_shaka_satellite"
+  - entity: "p10_em_shaka_agent_node"
     relation: "used_by"
-  - entity: "p10_em_codexa_core"
+  - entity: "p10_em_organization_core"
     relation: "integrated_into"
 confidence: 0.92
 last_referenced: "2026-03-29"
 expiry: "2027-01-01"
 quality: null
 tags: [entity_memory, service, firecrawl, scraping, P10]
-tldr: "Firecrawl: $19/mo web scraping service, 3000 credits/mo, REST API, used by SHAKA for research enrichment."
-description: "Firecrawl web scraping service — structured extraction, markdown output, 3000 monthly credits, integrated into SHAKA satellite."
+tldr: "Firecrawl: $19/mo web scraping service, 3000 credits/mo, REST API, used by research_agent for research enrichment."
+description: "Firecrawl web scraping service — structured extraction, markdown output, 3000 monthly credits, integrated into research_agent agent_node."
 ```
 ## Overview
-Firecrawl is a web scraping service used by SHAKA to enrich product research with live marketplace data. Tracks pricing, credits, API details, and integration status.
+Firecrawl is a web scraping service used by research_agent to enrich product research with live marketplace data. Tracks pricing, credits, API details, and integration status.
 ## Attributes
 | Key | Value | Source |
 |-----|-------|--------|
@@ -60,8 +60,8 @@ Firecrawl is a web scraping service used by SHAKA to enrich product research wit
 ## Relationships
 | Entity | Relation | Notes |
 |--------|----------|-------|
-| p10_em_shaka_satellite | used_by | SHAKA uses Firecrawl for research |
-| p10_em_codexa_core | integrated_into | API key stored in Railway env |
+| p10_em_shaka_agent_node | used_by | research_agent uses Firecrawl for research |
+| p10_em_organization_core | integrated_into | API key stored in Railway env |
 ## Update Policy
 Policy: overwrite — pricing and credit values change with plan changes.
 Conflict: latest confirmed value wins; set confidence 0.9 only if from official source.

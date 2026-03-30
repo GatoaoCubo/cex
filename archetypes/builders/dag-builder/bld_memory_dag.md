@@ -23,7 +23,7 @@ tags:
 tldr: "Declare nodes and edges, validate no cycles, embed topological order and critical path."
 impact_score: 7.5
 decay_rate: 0.05
-satellite: edison
+agent_node: edison
 keywords:
   - DAG
   - directed acyclic graph

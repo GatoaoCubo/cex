@@ -9,10 +9,10 @@ updated: 2026-03-22
 author: PYTHA
 quality: 9.0
 tags: [dag, cex, migration, pipeline, waves]
-tldr: "7-wave DAG for migrating 9916 codexa-core MD files into CEX — P01 KCs first, then prompts/skills, then agents, then infra/P08-P12"
+tldr: "7-wave DAG for migrating 9916 organization-core MD files into CEX — P01 KCs first, then prompts/skills, then agents, then infra/P08-P12"
 max_bytes: 1024
 density_score: 0.90
-source: codexa-core/C:/Users/PC/Documents/GitHub/cex/archetypes/MIGRATION_MAP.md (PLANO DE EXECUCAO)
+source: organization-core/C:/Users/PC/Documents/GitHub/cex/archetypes/MIGRATION_MAP.md (PLANO DE EXECUCAO)
 linked_artifacts:
   map: archetypes/MIGRATION_MAP.md
 ---
@@ -34,12 +34,12 @@ linked_artifacts:
 
 | Node | Satellite | Volume | Input | Output |
 |------|-----------|--------|-------|--------|
-| W5.1 | PYTHA | 519 KCs quality>=7 | records/pool/knowledge/ | P01 examples |
-| W5.2 | PYTHA | 638 active prompts | records/pool/prompts/ | P03 examples |
-| W5.3 | PYTHA | 128 skills | records/skills/*/SKILL.md | P04 examples |
-| W5.4 | EDISON | 125 agent dirs | records/agents/*/iso_vectorstore/ | P02 examples |
-| W5.5 | PYTHA | ~339 infra files | records/framework/ + .claude/ | P08-P12 examples |
-| W5.6 | PYTHA | ~4596 unclassified | records/* (INVESTIGATE bucket) | audit + classify |
+| W5.1 | knowledge_agent | 519 KCs quality>=7 | records/pool/knowledge/ | P01 examples |
+| W5.2 | knowledge_agent | 638 active prompts | records/pool/prompts/ | P03 examples |
+| W5.3 | knowledge_agent | 128 skills | records/skills/*/SKILL.md | P04 examples |
+| W5.4 | builder_agent | 125 agent dirs | records/agents/*/iso_vectorstore/ | P02 examples |
+| W5.5 | knowledge_agent | ~339 infra files | records/framework/ + .claude/ | P08-P12 examples |
+| W5.6 | knowledge_agent | ~4596 unclassified | records/* (INVESTIGATE bucket) | audit + classify |
 | W5.7 | ALL | ~561+ low quality | pool + .claude/handoffs/ | archived artifacts |
 
 ## Dependencies
@@ -60,11 +60,11 @@ dependencies:
 
 | Wave | Mode | Satellites | Estimated Batches |
 |------|------|-----------|-------------------|
-| W5.1 | grid continuous | PYTHA | ~10 batches (519 KCs) |
-| W5.2 | grid continuous | PYTHA | ~7 batches (638 prompts) |
-| W5.3 | solo | PYTHA | 1 batch (128 skills) |
-| W5.4 | grid continuous | EDISON | ~5 batches (125 agents) |
-| W5.5 | solo | PYTHA | 1-2 batches (~339 files) |
+| W5.1 | grid continuous | knowledge_agent | ~10 batches (519 KCs) |
+| W5.2 | grid continuous | knowledge_agent | ~7 batches (638 prompts) |
+| W5.3 | solo | knowledge_agent | 1 batch (128 skills) |
+| W5.4 | grid continuous | builder_agent | ~5 batches (125 agents) |
+| W5.5 | solo | knowledge_agent | 1-2 batches (~339 files) |
 
 ## Quality Gate
 

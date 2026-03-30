@@ -11,7 +11,7 @@ pattern: CONFIG restricts SCHEMA, never contradicts it
 ## Naming Convention
 | Scope | Convention | Example |
 |-------|-----------|---------|
-| Artifact file | `p12_sig_{event}.json` | `p12_sig_satellite_complete.json` |
+| Artifact file | `p12_sig_{event}.json` | `p12_sig_agent_node_complete.json` |
 | Builder directory | kebab-case | `signal-builder/` |
 | Payload fields | snake_case | `quality_score`, `commit_hash` |
 | Status values | lowercase enum | `complete`, `error`, `progress` |

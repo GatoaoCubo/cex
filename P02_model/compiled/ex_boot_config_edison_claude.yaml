@@ -2,50 +2,50 @@ id: p02_boot_edison_claude
 kind: boot_config
 pillar: P02
 provider: claude
-identity: EDISON[BUILD]
+identity: builder_agent[BUILD]
 constraints:
 - dangerously-skip-permissions
 - bypassPermissions
 - no-chrome
 tools:
-- codexa-brain (stdio, hybrid search)
+- organization-brain (stdio, hybrid search)
 - context7 (npx, external docs)
 - github (http, copilot MCP)
 version: 1.0.0
 created: 2026-03-24
-author: STELLA
+author: orchestrator
 domain: orchestration
 quality: 9.0
 tags:
 - boot
 - claude-cli
-- satellite
+- agent_node
 - edison
 - mcp-config
 boot_script_boot_edison_cmd: '@echo off
 
-  title CODEXA-EDISON
+  title organization-builder_agent
 
   set CLAUDECODE=
 
-  set CODEXA_SATELLITE=edison
+  set organization_SATELLITE=edison
 
-  set CODEXA_ROOT=C:\Users\PC\Documents\GitHub\codexa-core
+  set organization_ROOT=C:\Users\PC\Documents\GitHub\organization-core
 
-  cd /d "%CODEXA_ROOT%"
+  cd /d "%organization_ROOT%"
 
   set FLAGS=--dangerously-skip-permissions --permission-mode bypassPermissions --model opus --no-chrome
 
-  set MCP=--mcp-config "%CODEXA_ROOT%\.mcp-edison.json" --strict-mcp-config
+  set MCP=--mcp-config "%organization_ROOT%\.mcp-edison.json" --strict-mcp-config
 
   claude %FLAGS% %MCP% "%IDENTITY%"'
 boot_chain_5_layers:
-- 'ENV: CLAUDECODE= (prevent nested), CODEXA_SATELLITE=edison'
+- 'ENV: CLAUDECODE= (prevent nested), organization_SATELLITE=edison'
 - 'BOOT SCRIPT: Model selection (opus), MCP config, permission bypass'
-- 'CLAUDE.MD: Auto-loaded, reads PRIME via satellite env var'
+- 'CLAUDE.MD: Auto-loaded, reads PRIME via agent_node env var'
 - 'RULES: 10 rule files in .claude/rules/ (navigation, encoding, etc)'
-- 'PRIME: `records/satellites/edison/PRIME_EDISON.md` (full identity)'
+- 'PRIME: `records/agent_nodes/edison/PRIME_builder_agent.md` (full identity)'
 key_design_decisions:
-- '`set CLAUDECODE=` prevents nested Claude detection (critical for satellite isolation)'
+- '`set CLAUDECODE=` prevents nested Claude detection (critical for agent_node isolation)'
 - '`--strict-mcp-config` ensures only declared MCPs are available'
 - Identity prompt injected as first argument (not via file)

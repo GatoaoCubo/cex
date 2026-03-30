@@ -8,10 +8,10 @@ version: 1.0.0
 
 # diagram-builder — EXAMPLES
 ## Golden Example
-INPUT: "Visualize the CEX satellite orchestration architecture"
+INPUT: "Visualize the CEX agent_node orchestration architecture"
 FRONTMATTER (19 fields):
 ```yaml
-id: p08_diag_satellite_orchestration
+id: p08_diag_agent_node_orchestration
 kind: diagram
 pillar: P08
 version: "1.0.0"
@@ -20,19 +20,19 @@ updated: "2026-03-26"
 author: "builder"
 domain: "orchestration"
 quality: null
-tags: [diagram, orchestration, satellite, architecture, multi-agent]
-tldr: "System-level view of orchestrator orchestrating 6 satellites via handoffs and signals"
-scope: "CEX satellite orchestration — orchestrator dispatch to 6 domain satellites"
+tags: [diagram, orchestration, agent_node, architecture, multi-agent]
+tldr: "System-level view of orchestrator orchestrating 6 agent_nodes via handoffs and signals"
+scope: "CEX agent_node orchestration — orchestrator dispatch to 6 domain agent_nodes"
 notation: "ascii"
 zoom_level: "system"
 components: [orchestrator, researcher, marketer, builder, knowledge-engine, executor, monetizer, Brain, Signal_Bus]
-connections: ["orchestrator->satellites: handoff", "satellites->Signal_Bus: complete/error"]
+connections: ["orchestrator->agent_nodes: handoff", "agent_nodes->Signal_Bus: complete/error"]
 layers: [orchestration, execution, infrastructure]
-annotations: ["Max 3 concurrent satellites (RAM limit)", "Signal polling every 15s"]
-keywords: [orchestration, satellite, dispatch, signal]
+annotations: ["Max 3 concurrent agent_nodes (RAM limit)", "Signal polling every 15s"]
+keywords: [orchestration, agent_node, dispatch, signal]
 ```
 ## Scope
-CEX satellite orchestration: how orchestrator dispatches tasks to 6 domain satellites, monitors progress via signals, and consolidates results. System-level view — not individual satellite internals.
+CEX agent_node orchestration: how orchestrator dispatches tasks to 6 domain agent_nodes, monitors progress via signals, and consolidates results. System-level view — not individual agent_node internals.
 ## Diagram
 ```text
           ┌─────────┐
@@ -62,18 +62,18 @@ CEX satellite orchestration: how orchestrator dispatches tasks to 6 domain satel
 | Component | Role | Layer |
 |-----------|------|-------|
 | orchestrator | Orchestrator — decomposes, dispatches, monitors | orchestration |
-| researcher/marketer/builder/knowledge-engine/executor/monetizer | Domain satellites (6) | execution |
+| researcher/marketer/builder/knowledge-engine/executor/monetizer | Domain agent_nodes (6) | execution |
 | Signal Bus | Event transport — complete/error signals | infrastructure |
 | Brain | Knowledge retrieval — BM25 + FAISS | infrastructure |
 ## Connections
 | From | To | Type | Data |
 |------|-----|------|------|
-| orchestrator | satellites | handoff | task + seeds |
-| satellites | Signal Bus | signal | status + score |
+| orchestrator | agent_nodes | handoff | task + seeds |
+| agent_nodes | Signal Bus | signal | status + score |
 | Signal Bus | orchestrator | poll | completion |
 | Brain | all | query | retrieval |
 ## Annotations
-- Max 3 concurrent satellites (RAM limit — BSOD if >4)
+- Max 3 concurrent agent_nodes (RAM limit — BSOD if >4)
 - Signal poll: 15s
 ## References
 - CLAUDE.md SATELLITES table
@@ -87,7 +87,7 @@ id: system_diagram
 kind: drawing
 quality: 8.0
 The system has several components that work together.
-orchestrator talks to satellites. Satellites send signals back.
+orchestrator talks to agent_nodes. Satellites send signals back.
 ```
 FAILURES:
 1. id `system_diagram` has no `p08_diag_` prefix -> H02 FAIL

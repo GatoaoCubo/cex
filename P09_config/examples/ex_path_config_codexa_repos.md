@@ -1,31 +1,31 @@
 ---
-id: p09_path_codexa_repos
+id: p09_path_organization_repos
 kind: path_config
 pillar: P09
-title: "Path Config: CODEXA Multi-Repo System"
+title: "Path Config: organization Multi-Repo System"
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
 author: PYTHA
 quality: 9.0
-tags: [path, config, multi-repo, codexa]
-tldr: "Canonical paths for all 3 CODEXA repos — codexa-core (BRAIN), fresh-start (FACE), gato-cubo (BODY) — never commit to wrong repo"
+tags: [path, config, multi-repo, organization]
+tldr: "Canonical paths for all 3 organization repos — organization-core (BRAIN), fresh-start (FACE), gato-cubo (BODY) — never commit to wrong repo"
 max_bytes: 512
 density_score: 0.90
-source: codexa-core/.claude/rules/multi_repo.md + CLAUDE.md KEY PATHS
+source: organization-core/.claude/rules/multi_repo.md + CLAUDE.md KEY PATHS
 linked_artifacts:
   rule: p09_perm_multi_repo
 ---
 
-# Path Config: CODEXA Multi-Repo System
+# Path Config: organization Multi-Repo System
 
 ## Repos
 
 ```yaml
 repos:
-  codexa_core:
+  organization_core:
     alias: BRAIN
-    path: C:/Users/PC/Documents/GitHub/codexa-core
+    path: C:/Users/PC/Documents/GitHub/organization-core
     purpose: agents, workflows, knowledge, prompts
     identity_file: REPO_IDENTITY.md
 
@@ -42,18 +42,18 @@ repos:
     identity_file: REPO_IDENTITY.md
 ```
 
-## Key Paths (codexa-core)
+## Key Paths (organization-core)
 
 ```yaml
 key_paths:
-  satellite_primes: records/satellites/{name}/PRIME_{NAME}.md
+  agent_node_primes: records/agent_nodes/{name}/PRIME_{NAME}.md
   agents: records/agents/{name}/
   skills: records/skills/{name}/SKILL.md
   pool_index: records/pool/POOL_INDEX.md
   handoffs: .claude/handoffs/
   signals: .claude/signals/
   spawn_scripts: records/framework/powershell/spawn_*.ps1
-  brain_index: records/core/brain/mcp-codexa-brain/
+  brain_index: records/core/brain/mcp-organization-brain/
   learning: records/core/learning/memory/
   mental_models: .claude/mental_models/
 ```
@@ -75,6 +75,6 @@ cd ../correct-repo && git stash pop
 
 | Content | ONLY in | Never in |
 |---------|---------|----------|
-| `records/agents/*.md` | codexa-core | fresh-start, gato-cubo |
-| `*.tsx`, React components | fresh-start | codexa-core, gato-cubo |
-| Supabase migrations | gato-cubo | codexa-core, fresh-start |
+| `records/agents/*.md` | organization-core | fresh-start, gato-cubo |
+| `*.tsx`, React components | fresh-start | organization-core, gato-cubo |
+| Supabase migrations | gato-cubo | organization-core, fresh-start |

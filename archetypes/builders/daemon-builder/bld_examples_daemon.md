@@ -37,7 +37,7 @@ max_restarts: "3 in 30min"
 ```
 ## Overview
 Rebuilds BM25 and FAISS brain search indexes from pool artifacts on a 6-hour cron schedule.
-Used by brain_query consumers and all satellite agents that depend on search accuracy.
+Used by brain_query consumers and all agent nodes that depend on search accuracy.
 ## Lifecycle
 Schedule: cron `0 */6 * * *` (00:00, 06:00, 12:00, 18:00 UTC)
 Startup: validate pool path exists, load checkpoint if present, begin indexing

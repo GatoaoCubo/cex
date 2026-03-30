@@ -10,14 +10,14 @@ author: EDISON
 domain: knowledge_retrieval
 quality: 9.0
 tags: [retriever-config, hybrid-search, bm25, faiss, cohere, reranker, rag]
-tldr: Retriever hibrido que combina BM25 keyword search (0.3) com FAISS dense search (0.7) e reranker Cohere v3 para top_k=5 final — usado no CODEXA Brain MCP
+tldr: Retriever hibrido que combina BM25 keyword search (0.3) com FAISS dense search (0.7) e reranker Cohere v3 para top_k=5 final — usado no organization Brain MCP
 when_to_use: Qualquer busca no Brain MCP que precise alta recall em corpus tecnico misto (knowledge cards, agents, skills)
 ---
 
 # Retriever Config: Hybrid RAG (BM25 + Dense + Cohere Reranker)
 
 ## Overview
-Configuracao do retriever hibrido usado pelo CODEXA Brain MCP (`brain_query`). Combina BM25 para termos exatos (nomes de agentes, siglas, comandos) com busca densa FAISS/nomic-embed-text para similaridade semantica. Cohere Rerank v3 faz re-ranking final para maximizar precisao no top_k=5.
+Configuracao do retriever hibrido usado pelo organization Brain MCP (`brain_query`). Combina BM25 para termos exatos (nomes de agentes, siglas, comandos) com busca densa FAISS/nomic-embed-text para similaridade semantica. Cohere Rerank v3 faz re-ranking final para maximizar precisao no top_k=5.
 
 ## Parameters
 | Param | Value | Rationale |
@@ -27,7 +27,7 @@ Configuracao do retriever hibrido usado pelo CODEXA Brain MCP (`brain_query`). C
 | top_k_initial | 20 | Busca inicial ampla antes do reranker filtrar para 5 |
 | bm25_weight | 0.3 | Termos exatos sao minoria das queries (~30%), mas criticos quando presentes |
 | dense_weight | 0.7 | Maioria das queries sao semanticas ("como configurar X", "agente para Y") |
-| reranker | cohere-rerank-v3 | +12% MRR@5 vs sem reranker no benchmark CODEXA |
+| reranker | cohere-rerank-v3 | +12% MRR@5 vs sem reranker no benchmark organization |
 | reranker_top_n | 5 | Reranker seleciona top 5 dos 20 candidatos iniciais |
 | embedding_model | nomic-embed-text | Local (Ollama), 768 dims, zero custo API |
 | vector_store | FAISS (IndexFlatIP) | Inner product com vetores normalizados = cosine similarity. ~140MB index |
@@ -83,7 +83,7 @@ pipeline = ContextualCompressionRetriever(
 | FAISS index missing | Rebuild on-demand + BM25 interim | ~20 min rebuild |
 | Query < 3 chars | Return empty (too ambiguous) | Prevents noise results |
 
-## Benchmarks (CODEXA Brain corpus, 1957 documents)
+## Benchmarks (organization Brain corpus, 1957 documents)
 | Metric | Hybrid+Rerank | Dense Only | BM25 Only |
 |--------|---------------|------------|-----------|
 | MRR@5 | 0.82 | 0.71 | 0.54 |

@@ -16,7 +16,7 @@ tags: [formatter, locale_aware, escaping, null_handling, transformation_rules, o
 tldr: "Declare locale for numeric/date rules; match escaping to target format; every rule documents null behavior."
 impact_score: 7.5
 decay_rate: 0.05
-satellite: edison
+agent_node: edison
 keywords: [formatter, locale, escaping, null_handling, transformation, rule_count, target_format, currency, date_format]
 ---
 

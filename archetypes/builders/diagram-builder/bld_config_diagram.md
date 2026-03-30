@@ -10,10 +10,10 @@ version: 1.0.0
 ## Naming Conventions
 | Scope | Convention | Example |
 |-------|-----------|---------|
-| Artifact files | `p08_diag_{scope_slug}.md` | `p08_diag_satellite_orchestration.md` |
+| Artifact files | `p08_diag_{scope_slug}.md` | `p08_diag_agent_node_orchestration.md` |
 | Builder directory | kebab-case | `diagram-builder/` |
 | Frontmatter fields | snake_case | `zoom_level`, `notation` |
-| Scope slug | lowercase + underscores only | `satellite_orchestration` |
+| Scope slug | lowercase + underscores only | `agent_node_orchestration` |
 | Tags | lowercase, no spaces | `[diagram, orchestration, ascii]` |
 ## File Paths
 | Purpose | Path |

@@ -10,7 +10,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 # Instructions: How to Produce a handoff
 ## Phase 1: RESEARCH
 1. Identify the task to delegate — what work needs to be done and what is the concrete deliverable?
-2. Determine the target executor — which satellite or agent will carry out this work?
+2. Determine the target executor — which agent_node or agent will carry out this work?
 3. Define required context — what background does the executor need to understand why this task matters?
 4. Scope the deliverable — what exactly should be produced, to what quality threshold, by when?
 5. Identify scope fence — which file paths and directories are allowed, and which are strictly forbidden?

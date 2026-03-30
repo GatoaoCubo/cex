@@ -40,9 +40,9 @@ Sends structured notifications to Slack channels when agents complete tasks, enc
 - `timestamp`: ISO 8601 timestamp
 
 **Examples by priority**:
-- critical: `[ATLAS] ERROR: Deploy failed — rollback initiated (2026-03-28T14:30:00Z)`
-- high: `[EDISON] WARNING: Build succeeded with 3 test failures (2026-03-28T14:30:00Z)`
-- normal: `[SHAKA] COMPLETE: Research finished, 12 sources found (2026-03-28T14:30:00Z)`
+- critical: `[operations_agent] ERROR: Deploy failed — rollback initiated (2026-03-28T14:30:00Z)`
+- high: `[builder_agent] WARNING: Build succeeded with 3 test failures (2026-03-28T14:30:00Z)`
+- normal: `[research_agent] COMPLETE: Research finished, 12 sources found (2026-03-28T14:30:00Z)`
 
 ## Delivery
 - rate_limit: 30/min, 500/hr
@@ -53,4 +53,4 @@ Sends structured notifications to Slack channels when agents complete tasks, enc
 ## Configuration
 - endpoint: Slack Incoming Webhook URL
 - auth: env var `SLACK_WEBHOOK_URL`
-- channel_id: configured per webhook (e.g., #codexa-alerts)
+- channel_id: configured per webhook (e.g., #organization-alerts)

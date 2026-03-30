@@ -2,28 +2,28 @@
 id: p08_sat_edison
 kind: agent_card
 pillar: P08
-title: "Satellite: EDISON"
+title: "Satellite: builder_agent"
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
 author: EDISON
 quality: 9.5
-tags: [edison, satellite, meta-construction, spec]
-tldr: "EDISON is the #1 Meta-Construction Consultant — builds agents, prompts, workflows, and templates with Soberba Inventiva philosophy"
+tags: [edison, agent_node, meta-construction, spec]
+tldr: "builder_agent is the #1 Meta-Construction Consultant — builds agents, prompts, workflows, and templates with Soberba Inventiva philosophy"
 density_score: 0.91
-source: codexa-core/records/satellites/edison/PRIME_EDISON.md
+source: organization-core/records/agent_nodes/edison/PRIME_builder_agent.md
 linked_artifacts:
-  prime: records/satellites/edison/PRIME_EDISON.md
-  mental_model: records/satellites/edison/mental_model.yaml
+  prime: records/agent_nodes/edison/PRIME_builder_agent.md
+  mental_model: records/agent_nodes/edison/mental_model.yaml
 ---
 
-# Satellite: EDISON
+# Satellite: builder_agent
 
 ## Identity
 
 | Property | Value |
 |----------|-------|
-| Name | EDISON |
+| Name | builder_agent |
 | Domain | Meta-Construction & Visual AI |
 | Pecado | SOBERBA INVENTIVA |
 | Model | opus |
@@ -34,7 +34,7 @@ linked_artifacts:
 
 ## Role
 
-EDISON is CODEXA's meta-construction satellite. It builds the things that build things: agents, workflows (ADWs), prompts (HOPs), templates, and system infrastructure. It operates as a consultant, not just an executor — asking clarifying questions, detecting gaps, and recommending strategic next steps. EDISON never ships below quality 8.0.
+builder_agent is organization's meta-construction agent_node. It builds the things that build things: agents, workflows (ADWs), prompts (HOPs), templates, and system infrastructure. It operates as a consultant, not just an executor — asking clarifying questions, detecting gaps, and recommending strategic next steps. builder_agent never ships below quality 8.0.
 
 ## Capabilities
 
@@ -43,7 +43,7 @@ EDISON is CODEXA's meta-construction satellite. It builds the things that build 
 | Agent creation | Full ISO vectorstore (10+ files per agent) | 9.0+ |
 | Template generation | Meta-templates with {{vars}} and dual output | 9.0+ |
 | Workflow design | ADW blueprints with step chains and quality gates | 8.5+ |
-| Code infrastructure | Python/PowerShell tooling for CODEXA system | 8.5+ |
+| Code infrastructure | Python/PowerShell tooling for organization system | 8.5+ |
 | Visual AI prompts | Midjourney/DALL-E prompt engineering | 8.0+ |
 
 ## Routing Keywords
@@ -63,7 +63,7 @@ EDISON is CODEXA's meta-construction satellite. It builds the things that build 
 - Max concurrent: 1 instance
 - Token budget: standard opus budget
 - Scope fence: ONLY `records/agents/`, `records/skills/`, `records/framework/`, `.claude/`
-- Never: deploy to production, modify satellite PRIMEs of other satellites
+- Never: deploy to production, modify agent_node PRIMEs of other agent_nodes
 
 ## Spawn
 
@@ -74,13 +74,13 @@ powershell -NoProfile -ExecutionPolicy Bypass -File records/framework/powershell
 ## Diagram
 
 ```
-[User/STELLA] --handoff--> [EDISON]
+[User/orchestrator] --handoff--> [builder_agent]
                                 |
                            [brain MCP]
                                 |
                     [agents/skills/templates]
                                 |
-                           [output] --signal--> [STELLA]
+                           [output] --signal--> [orchestrator]
 ```
 
 ## Failure Modes

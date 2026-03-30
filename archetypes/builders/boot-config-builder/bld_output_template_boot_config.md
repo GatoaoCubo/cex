@@ -20,7 +20,7 @@ provider: "{{provider_name}}"
 identity:
   name: "{{agent_display_name}}"
   role: "{{primary_role}}"
-  satellite: "{{satellite_or_agnostic}}"
+  agent_node: "{{agent_node_or_agnostic}}"
 constraints:
   max_tokens: {{integer}}
   context_window: {{integer}}
@@ -50,7 +50,7 @@ density_score: {{0.80-1.00}}
 ## Identity Block
 Name: {{agent_display_name}}
 Role: {{primary_role}}
-Satellite: {{satellite_name}}
+Satellite: {{agent_node_name}}
 ## Constraints
 | Parameter | Value | Rationale |
 |-----------|-------|-----------|

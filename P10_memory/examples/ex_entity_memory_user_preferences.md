@@ -58,7 +58,7 @@ entity:
 
   history:
     projects_active:
-      - codexa-core             # AI agent framework
+      - organization-core             # AI agent framework
       - fresh-start             # React frontend (Lovable)
       - gato-cubo-commerce      # e-commerce
     recent_decisions:

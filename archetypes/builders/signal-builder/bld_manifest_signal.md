@@ -23,7 +23,7 @@ operacional clara e baixo overhead.
 - Validar sinais contra gates duros de naming, status e timestamp
 ## Routing
 keywords: [signal, completion, progress, error, heartbeat, status]
-triggers: "emite signal", "gera completion json", "notifica status do satellite"
+triggers: "emite signal", "gera completion json", "notifica status do agent_node"
 ## Crew Role
 In a crew, I handle ATOMIC STATUS EXCHANGE.
 I answer: "what happened, who emitted it, and when?"

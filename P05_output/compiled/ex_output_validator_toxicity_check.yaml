@@ -5,7 +5,7 @@ title: Toxicity + PII Post-LLM Validator
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
-author: EDISON
+author: builder_agent
 domain: output_safety
 quality: 9.0
 tags:
@@ -19,7 +19,7 @@ tags:
 - content-filter
 tldr: Validator pos-LLM que checa toxicidade (Perspective API) e PII (regex + spaCy NER) em output antes de entregar ao usuario
   — on_fail=retry_with_warning, max_retries=2
-when_to_use: Qualquer agente CODEXA que gera texto user-facing — especialmente copy de marketing, respostas de chatbot, e
+when_to_use: Qualquer agente organization que gera texto user-facing — especialmente copy de marketing, respostas de chatbot, e
   conteudo publicavel em redes sociais
 overview: Validator de duas camadas que intercepta output do LLM antes de entregar ao usuario ou publicar. Camada 1 detecta
   conteudo toxico (hate speech, profanity, harassment) via Perspective API. Camada 2 detecta PII (CPF, email, telefone, endereco)
@@ -109,15 +109,15 @@ monitoring: '| Metric | Alert Threshold | Dashboard |
 
   |--------|-----------------|-----------|
 
-  | Toxicity trigger rate | > 5% of outputs | Grafana: codexa/output-safety |
+  | Toxicity trigger rate | > 5% of outputs | Grafana: organization/output-safety |
 
-  | PII leak rate | > 1% of outputs | Grafana: codexa/output-safety |
+  | PII leak rate | > 1% of outputs | Grafana: organization/output-safety |
 
-  | Retry success rate | < 80% (retries not fixing issue) | Grafana: codexa/output-safety |
+  | Retry success rate | < 80% (retries not fixing issue) | Grafana: organization/output-safety |
 
   | Fallback rate | > 2% of outputs | PagerDuty: critical |
 
-  | Perspective API latency | p99 > 500ms | Grafana: codexa/external-apis |'
+  | Perspective API latency | p99 > 500ms | Grafana: organization/external-apis |'
 when_not_to_use:
 - Internal agent-to-agent communication — overhead desnecessario, contexto e confiavel
 - Code generation outputs — false positives em variable names e test data

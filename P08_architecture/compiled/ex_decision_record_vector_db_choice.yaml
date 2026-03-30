@@ -3,13 +3,13 @@ kind: decision_record
 pillar: P08
 title: 'ADR-007: Choose Qdrant over Pinecone for Vector Database'
 status: Accepted — 2026-03-29
-context: 'CODEXA''s brain_query currently uses FAISS for vector search (140MB index, ~1,957 pool artifacts). This works for
+context: 'organization''s brain_query currently uses FAISS for vector search (140MB index, ~1,957 pool artifacts). This works for
   local development but has limitations:
 
 
   1. No persistence — index must be rebuilt on every fresh clone (~20 min)
 
-  2. No filtering — cannot filter by pillar, satellite, or quality score during search
+  2. No filtering — cannot filter by pillar, agent_node, or quality score during search
 
   3. No real-time updates — adding a new KC requires full index rebuild
 
@@ -22,7 +22,7 @@ context: 'CODEXA''s brain_query currently uses FAISS for vector search (140MB in
 
   - Hybrid search (vector + keyword, replacing current BM25+FAISS dual system)
 
-  - Metadata filtering (by pillar, satellite, quality score, kind)
+  - Metadata filtering (by pillar, agent_node, quality score, kind)
 
   - Real-time upsert without full rebuild
 
@@ -116,9 +116,9 @@ option_d_keep_faiss_bm25: '| Aspect | Assessment |
 
   | Concern | All 4 original problems remain unsolved. |'
 implementation_plan: "Phase 1 (Week 1): Deploy Qdrant on Railway\n  - Docker image: qdrant/qdrant:v1.8.4\n  - Collection:\
-  \ codexa_brain, 768-dim, cosine distance\n  - Initial load: migrate FAISS index -> Qdrant collection\n\nPhase 2 (Week 2):\
+  \ organization_brain, 768-dim, cosine distance\n  - Initial load: migrate FAISS index -> Qdrant collection\n\nPhase 2 (Week 2):\
   \ Integrate with brain_query\n  - Replace hybrid_search() to call Qdrant instead of FAISS+BM25\n  - Add metadata filters:\
-  \ pillar, satellite, quality, kind\n  - Benchmark: must match or beat current 88% top-3 accuracy\n\nPhase 3 (Week 3): Real-time\
+  \ pillar, agent_node, quality, kind\n  - Benchmark: must match or beat current 88% top-3 accuracy\n\nPhase 3 (Week 3): Real-time\
   \ sync\n  - On KC create/update: upsert to Qdrant via post-commit hook\n  - Remove build_indexes_ollama.py rebuild requirement\n\
   \  - Add health check to /api/v2/health"
 positive:
@@ -145,6 +145,6 @@ risks: '| Risk | Mitigation |
   | Scale beyond single node | Unlikely at <10K docs; Qdrant supports clustering if needed |'
 references:
 - 'Qdrant docs: https://qdrant.tech/documentation/'
-- 'FAISS current setup: `records/core/brain/mcp-codexa-brain/build_indexes_ollama.py`'
-- 'Brain search: `records/core/brain/mcp-codexa-brain/vector_search.py`'
+- 'FAISS current setup: `records/core/brain/mcp-organization-brain/build_indexes_ollama.py`'
+- 'Brain search: `records/core/brain/mcp-organization-brain/vector_search.py`'
 - 'Related: p01_kc_bm25_search (current BM25 implementation)'

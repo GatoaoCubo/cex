@@ -20,7 +20,7 @@ tags: [rate-limit, anthropic, tier-2, budget, queue, cost-control]
 
 ## Overview
 
-Enforces Anthropic API Tier 2 rate limits across all CODEXA satellites. When limits approach, requests queue instead of failing. Daily budget cap of $50 prevents runaway costs from autonomous satellite loops.
+Enforces Anthropic API Tier 2 rate limits across all organization agent_nodes. When limits approach, requests queue instead of failing. Daily budget cap of $50 prevents runaway costs from autonomous agent_node loops.
 
 ## Tier 2 Limits (Anthropic)
 
@@ -43,13 +43,13 @@ Enforces Anthropic API Tier 2 rate limits across all CODEXA satellites. When lim
 
 | Satellite | Model | Daily Budget | Typical RPM | Rationale |
 |-----------|-------|-------------|-------------|-----------|
-| STELLA | opus-4-6 | $15 | 20 | Orchestration, low volume high complexity |
-| EDISON | opus-4-6 | $12 | 50 | Build tasks, code generation |
-| ATLAS | opus-4-6 | $8 | 30 | Deploy, test, validate |
-| SHAKA | sonnet-4-6 | $5 | 100 | Research, high volume lower cost |
-| LILY | sonnet-4-6 | $4 | 80 | Marketing copy, batch generation |
-| PYTHA | sonnet-4-6 | $3 | 60 | Knowledge processing |
-| YORK | sonnet-4-6 | $3 | 40 | Monetization, course content |
+| orchestrator | opus-4-6 | $15 | 20 | Orchestration, low volume high complexity |
+| builder_agent | opus-4-6 | $12 | 50 | Build tasks, code generation |
+| operations_agent | opus-4-6 | $8 | 30 | Deploy, test, validate |
+| research_agent | sonnet-4-6 | $5 | 100 | Research, high volume lower cost |
+| marketing_agent | sonnet-4-6 | $4 | 80 | Marketing copy, batch generation |
+| knowledge_agent | sonnet-4-6 | $3 | 60 | Knowledge processing |
+| commercial_agent | sonnet-4-6 | $3 | 40 | Monetization, course content |
 | **Total** | — | **$50** | **380** | — |
 
 ## Escalation Strategy
@@ -76,7 +76,7 @@ escalation:
 
     - trigger: daily_budget >= 80%  # $40+
       action: restrict_to_essential
-      allowed: [STELLA, ATLAS]
+      allowed: [orchestrator, operations_agent]
       message: "Budget 80% — only orchestration and deploy allowed"
 
     - trigger: daily_budget >= 95%  # $47.50+
@@ -179,5 +179,5 @@ Always parse these headers and sync local counters — Anthropic's count is auth
 - Retrying 429s immediately without exponential backoff (triggers stricter throttling)
 - Ignoring TPM limit and only tracking RPM (long prompts hit TPM first)
 - No daily budget cap (autonomous loops can spend hundreds overnight)
-- Single global rate limiter instead of per-satellite budgets (one satellite starves others)
+- Single global rate limiter instead of per-agent_node budgets (one agent_node starves others)
 - Hardcoding limits instead of reading from Anthropic response headers (limits change with tier upgrades)

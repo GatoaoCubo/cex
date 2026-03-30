@@ -1,27 +1,27 @@
 ---
-id: p08_diag_satellite_grid
+id: p08_diag_agent_node_grid
 kind: diagram
 pillar: P08
-description: "Architecture diagram of STELLA satellite grid dispatch"
+description: "Architecture diagram of orchestrator agent_node grid dispatch"
 format: ascii
 scope: orchestration
 version: 1.0.0
 created: 2026-03-24
 author: edison
 quality: 9.0
-tags: [diagram, architecture, grid, satellite, orchestration]
+tags: [diagram, architecture, grid, agent_node, orchestration]
 ---
 
 # Diagram: Satellite Grid Dispatch
 
 ## Overview
-STELLA orchestrates up to 6 parallel satellites via PowerShell spawn scripts.
+orchestrator orchestrates up to 6 parallel agent_nodes via PowerShell spawn scripts.
 
 ## Architecture
 ```
                     USER INPUT
                         |
-                    [STELLA]
+                    [orchestrator]
                    (pi runtime)
                    /    |    \
           [HANDOFF] [HANDOFF] [HANDOFF]
@@ -31,7 +31,7 @@ STELLA orchestrates up to 6 parallel satellites via PowerShell spawn scripts.
     |  MoveWindow positioning (640x520 ea)  |
     +---------+---------+---------+---------+
          |         |         |
-    [EDISON]  [SHAKA]   [LILY]
+    [builder_agent]  [research_agent]   [marketing_agent]
     (opus)    (sonnet)   (sonnet)
     boot/     boot/      boot/
     edison    shaka      lily
@@ -43,12 +43,12 @@ STELLA orchestrates up to 6 parallel satellites via PowerShell spawn scripts.
          \         |         /
           spawn_monitor.ps1
                 |
-           [STELLA]
+           [orchestrator]
           (collect + push)
 ```
 
 ## Key Properties
 - Max 6 slots for short tasks (<15min), 3 for long (>30min)
-- Each satellite: own CMD window, own Claude session, own MCP config
+- Each agent_node: own CMD window, own Claude session, own MCP config
 - Continuous mode: slot completes -> next batch auto-dispatched
-- Isolation: satellites share git repo but never edit same files
+- Isolation: agent_nodes share git repo but never edit same files

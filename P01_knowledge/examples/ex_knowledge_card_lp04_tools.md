@@ -53,7 +53,7 @@ P04 eh o dominio de ferramentas do CEX, com 9 tipos que cobrem desde skills reut
 - Hook sem script_path: hook fica inoperante
 
 ## Application
-CODEXA tem 116 skills on demand, acessiveis via Brain MCP. O forge P04 gera skill definitions completas que alimentam o catalogo. cex_forge.py eh ele mesmo uma cli_tool de P04.
+organization tem 116 skills on demand, acessiveis via Brain MCP. O forge P04 gera skill definitions completas que alimentam o catalogo. cex_forge.py eh ele mesmo uma cli_tool de P04.
 
 ## References
 - P04_tools/_schema.yaml (fonte de verdade)

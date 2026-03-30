@@ -5,7 +5,7 @@ title: CEX LLM Functions — 8 Pipeline Stages from BECOME to COLLABORATE
 version: 1.0.0
 created: 2026-03-25
 updated: 2026-03-25
-author: EDISON
+author: builder_agent
 domain: cex_taxonomy
 quality: null
 tags:
@@ -37,7 +37,7 @@ density_score: null
 data_source: https://arxiv.org/abs/2308.00352
 summary: Funcao LLM eh o que o modelo FAZ com um artefato, nao o que o artefato EH. As 8 funcoes (BECOME, INJECT, REASON,
   CALL, PRODUCE, CONSTRAIN, GOVERN, COLLABORATE) formam o pipeline real de execucao de qualquer sistema LLM. Um prompt simples
-  executa 1-2 funcoes. Um agente executa 4-5. Um satellite com lifecycle completo executa todas as 8. A diferenca eh de completude,
+  executa 1-2 funcoes. Um agente executa 4-5. Um agent_node com lifecycle completo executa todas as 8. A diferenca eh de completude,
   nao de natureza.
 spec: '| Funcao | Estagio | O Que Faz | Tipos Exemplo |
 
@@ -82,7 +82,7 @@ code: "<!-- lang: python | purpose: LLM function pipeline sequence -->\nPIPELINE
   \    \"INJECT\",      # 2. contexto\n    \"REASON\",      # 3. raciocinio\n    \"CALL\",        # 4. ferramentas\n    \"\
   PRODUCE\",     # 5. geracao\n    \"CONSTRAIN\",   # 6. validacao\n    \"GOVERN\",      # 7. quality gates\n    \"COLLABORATE\"\
   , # 8. coordenacao\n]\n# prompt simples: BECOME(implicit) + PRODUCE\n# agente: BECOME + INJECT + REASON + CALL + PRODUCE\n\
-  # satellite: todas as 8 funcoes"
+  # agent_node: todas as 8 funcoes"
 anti_patterns:
 - Pular BECOME e enviar input direto (sem identidade)
 - Confundir INJECT com BECOME (contexto vs identidade)

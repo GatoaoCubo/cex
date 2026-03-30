@@ -16,7 +16,7 @@ tags: [component-map, architecture, orphan-detection, connection-direction, scop
 tldr: "No orphan components. Every component must appear in at least one connection. Explicit direction on all connections. Split scope at 15 components."
 impact_score: 7.5
 decay_rate: 0.05
-satellite: edison
+agent_node: edison
 keywords: [component map, architecture mapping, orphan detection, connection direction, data flow, dependency, scope boundary, ownership]
 ---
 
@@ -33,7 +33,7 @@ Connection direction types:
 - produces: source creates target as output artifact (A generates B)
 - consumes: source reads or uses target (A reads from B)
 Scope boundary rules:
-- 3-15 components per map. Fewer than 3: use a satellite spec instead. More than 15: split by domain.
+- 3-15 components per map. Fewer than 3: use a agent_node spec instead. More than 15: split by domain.
 - Scope statement must name what is explicitly excluded, not just what is included.
 - Right-size example: "Brain search infrastructure: indexing, embedding, retrieval. Excludes: UI layer, API routing, authentication."
 Component table required columns: id, name, type, owner, description (one sentence). No prose beyond the table.

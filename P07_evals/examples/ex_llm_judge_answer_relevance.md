@@ -56,9 +56,9 @@ Are claims properly attributed to retrieved sources?
 
 ### Example 1 — High Score (5/5/5)
 ```yaml
-question: "What is the default rotation policy for API keys in CODEXA?"
+question: "What is the default rotation policy for API keys in organization?"
 context: "KC_CONFIG_003: API keys rotate every 90 days via Vault. AES-256 encryption at rest. Audit log enabled."
-answer: "The default rotation policy for API keys in CODEXA is 90 days, managed through Vault with AES-256 encryption at rest and audit logging enabled [KC_CONFIG_003]."
+answer: "The default rotation policy for API keys in organization is 90 days, managed through Vault with AES-256 encryption at rest and audit logging enabled [KC_CONFIG_003]."
 scores:
   relevance: 5       # Directly answers the question
   completeness: 5    # Covers rotation, encryption, audit

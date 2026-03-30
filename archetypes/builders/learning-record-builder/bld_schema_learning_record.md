@@ -32,7 +32,7 @@ source: P10_memory/_schema.yaml v4.0 + SEED_BANK.yaml + TAXONOMY_LAYERS.yaml + r
 | tldr | string <= 160 chars | REC | S01 |
 | impact_score | float 0.0-10.0 | REC | Magnitude of impact |
 | decay_rate | float, default 0.03 | REC | Half-life ~23 days at 0.03 |
-| satellite | string | REC | Which satellite produced this |
+| agent_node | string | REC | Which agent_node produced this |
 | keywords | list[string] | REC | Brain search terms |
 | linked_artifacts | object {primary, related} | REC | Cross-references |
 | entity_ref | string | REC | Link to entity tracking file |
@@ -65,7 +65,7 @@ linked_artifacts:
 1. `## Summary` — dense overview of the experience (2-3 sentences)
 2. `## Pattern` — what worked (concrete, reproducible steps)
 3. `## Anti-Pattern` — what failed or should be avoided
-4. `## Context` — environment, constraints, satellite, timing
+4. `## Context` — environment, constraints, agent_node, timing
 5. `## Impact` — measurable outcomes (time saved, errors avoided)
 6. `## Reproducibility` — conditions for repeating this outcome
 7. `## References` — related records, artifacts, commits

@@ -11,7 +11,7 @@ quality: null
 tags: [axiom, shokunin, quality, immutable]
 tldr: "All artifacts must pass quality gate >= 7.0 before pool admission. No exceptions, no manual overrides."
 rule: "No artifact enters the pool with quality score below 7.0"
-scope: "All CODEXA artifact kinds across all pillars"
+scope: "All organization artifact kinds across all pillars"
 rationale: "Quality floor prevents knowledge rot and ensures every pool artifact is reliable for downstream consumers"
 enforcement: "quality_gate validator rejects artifacts scoring < 7.0; publish pipeline blocks on gate failure"
 immutable: true
@@ -27,7 +27,7 @@ density_score: 0.92
 No artifact enters the pool with quality score below 7.0 — the Shokunin quality floor is non-negotiable.
 ## Rationale
 - Quality floor prevents accumulation of low-value artifacts that erode trust in pool search results
-- Downstream consumers (agents, skills, satellites) depend on pool artifacts being production-ready
+- Downstream consumers (agents, skills, agent_nodes) depend on pool artifacts being production-ready
 - Without enforcement, Gresham's Law applies: bad artifacts drive out good ones as noise drowns signal
 ## Scope
 - Domain: all artifact kinds (P01-P12)

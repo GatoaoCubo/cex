@@ -11,7 +11,7 @@ domain: prompt_management
 quality: 9.0
 tags: [prompt-version, system-prompt, pesquisa-agent, a-b-test, rollback, versioning]
 tldr: Versao 2.0 do system prompt do pesquisa-agent — adiciona secao de source credibility scoring e output estruturado, com metricas A/B vs v1 mostrando +18% relevance score
-when_to_use: Referencia para versionamento de prompts com metricas A/B, changelog, e rollback — padrao para qualquer prompt que evolui no CODEXA
+when_to_use: Referencia para versionamento de prompts com metricas A/B, changelog, e rollback — padrao para qualquer prompt que evolui no organization
 ---
 
 # Prompt Version: Pesquisa Agent System Prompt v2.0
@@ -23,8 +23,8 @@ when_to_use: Referencia para versionamento de prompts com metricas A/B, changelo
 | version | 2.0.0 |
 | previous_version | 1.0.0 |
 | rollback_ref | `records/agents/pesquisa-agent/iso_vectorstore/ISO_PESQUISA_002_INSTRUCTIONS_v1.md` |
-| author | Ralph (via EDISON) |
-| approved_by | STELLA quality gate |
+| author | Ralph (via builder_agent) |
+| approved_by | orchestrator quality gate |
 | deployed_at | 2026-03-29 |
 | model_target | claude-sonnet-4-6 |
 | token_count | 847 tokens (v1 was 612 tokens) |
@@ -41,7 +41,7 @@ when_to_use: Referencia para versionamento de prompts com metricas A/B, changelo
 
 ## Prompt Content (v2.0)
 ```
-Voce e o pesquisa-agent do CODEXA, especialista em pesquisa de mercado para e-commerce brasileiro.
+Voce e o pesquisa-agent do organization, especialista em pesquisa de mercado para e-commerce brasileiro.
 
 ## Missao
 Extrair insights acionaveis de fontes online para informar decisoes de produto, precificacao e marketing. Cada insight deve ter evidencia concreta e score de confianca.
@@ -98,7 +98,7 @@ Responda SEMPRE neste formato JSON:
 
 ## Prompt Content (v1.0 — archived)
 ```
-Voce e o pesquisa-agent do CODEXA. Pesquise informacoes de mercado para e-commerce brasileiro.
+Voce e o pesquisa-agent do organization. Pesquise informacoes de mercado para e-commerce brasileiro.
 Seja minucioso. Encontre informacoes relevantes sobre o topico solicitado.
 Retorne suas descobertas em formato markdown com fontes linkadas.
 Inclua pelo menos 5 fontes confiaveis.

@@ -20,7 +20,7 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: "builder"
 routes_count: 7
-fallback_route: "EDISON"
+fallback_route: "builder_agent"
 confidence_threshold: 0.7
 domain: "director_dispatch"
 quality: null
@@ -35,12 +35,12 @@ density_score: 0.88
 ## Routes
 | Pattern | Destination | Priority | Confidence Min | Conditions |
 |---------|-------------|----------|----------------|------------|
-| research, scrape, competitor, market | SHAKA | 90 | 0.7 | - |
-| marketing, copy, ads, listing, social | LILY | 90 | 0.7 | - |
-| build, code, component, refactor, test | EDISON | 85 | 0.7 | - |
-| knowledge, document, index, embed | PYTHA | 80 | 0.7 | - |
-| deploy, infra, database, migrate | ATLAS | 85 | 0.8 | requires_auth |
-| monetize, course, pricing, funnel | YORK | 80 | 0.7 | - |
+| research, scrape, competitor, market | research_agent | 90 | 0.7 | - |
+| marketing, copy, ads, listing, social | marketing_agent | 90 | 0.7 | - |
+| build, code, component, refactor, test | builder_agent | 85 | 0.7 | - |
+| knowledge, document, index, embed | knowledge_agent | 80 | 0.7 | - |
+| deploy, infra, database, migrate | operations_agent | 85 | 0.8 | requires_auth |
+| monetize, course, pricing, funnel | commercial_agent | 80 | 0.7 | - |
 | orchestrate, dispatch, spawn, monitor | orchestrator | 95 | 0.9 | admin_only |
 ## Decision Logic
 Algorithm: priority-first with confidence gating.
@@ -48,16 +48,16 @@ Each incoming task is scored against all route patterns simultaneously.
 Only routes where confidence >= confidence_min are candidates.
 Among candidates, highest priority wins. Ties broken by most specific pattern match.
 ## Fallback
-Default destination: EDISON (general-purpose build director).
+Default destination: builder_agent (general-purpose build director).
 Trigger: no route scores above 0.7 confidence.
-Behavior: route to EDISON with metadata flag `routed_by_fallback: true`.
+Behavior: route to builder_agent with metadata flag `routed_by_fallback: true`.
 ## Escalation
 Trigger: two or more routes score within 0.05 confidence of each other.
 Action: return both candidates with scores; let orchestrator arbitrate.
 Notification: signal `p12_sig_routing_ambiguous` with candidate list.
 ## Integration
 - Receives from: orchestrator (task dispatch), user input (direct)
-- Routes to: SHAKA, LILY, EDISON, PYTHA, ATLAS, YORK, orchestrator
+- Routes to: research_agent, marketing_agent, builder_agent, knowledge_agent, operations_agent, commercial_agent, orchestrator
 - Consults: dispatch_rules (P12) for keyword hints
 - Signal on failure: `p12_sig_routing_failed`
 ## References
@@ -66,7 +66,7 @@ Notification: signal `p12_sig_routing_ambiguous` with candidate list.
 WHY THIS IS GOLDEN:
 - quality: null (H05 pass) | id p02_router_ pattern (H02 pass) | kind: router (H04 pass)
 - 19 fields present (H06 pass) | routes_count: 7 matches table (H07 pass)
-- confidence_threshold: 0.7 valid (H08 pass) | fallback_route: EDISON set (H06 pass)
+- confidence_threshold: 0.7 valid (H08 pass) | fallback_route: builder_agent set (H06 pass)
 - tldr: 86ch (S01 pass) | tags: 5 items includes "router" (S02 pass) | density: 0.88 (S09 pass)
 - Routes table 7 rows (S03 pass) | Decision Logic present (S04 pass) | No filler (S10 pass)
 ## Anti-Example

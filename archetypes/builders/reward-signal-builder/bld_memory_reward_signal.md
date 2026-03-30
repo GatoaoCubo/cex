@@ -16,7 +16,7 @@ tags: [reward-signal, reward-hacking, criteria-decomposition, baseline-calibrati
 tldr: "Multi-criteria decomposition prevents reward hacking. Baseline must be human-percentile-anchored. LLM-judge needs Spearman >= 0.75 validation before production use."
 impact_score: 8.0
 decay_rate: 0.04
-satellite: edison
+agent_node: edison
 keywords: [reward signal, reward hacking, criteria, baseline, rlhf, dpo, lm as judge, preference, scalar, calibration]
 ---
 

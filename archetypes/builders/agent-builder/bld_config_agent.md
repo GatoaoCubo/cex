@@ -13,7 +13,7 @@ pattern: CONFIG restricts SCHEMA, never contradicts it
 |-------|-----------|---------|
 | Artifact files | `p02_agent_{slug}.md` + `.yaml` | `p02_agent_knowledge_card_builder.md` |
 | Builder directory | kebab-case | `agent-builder/` |
-| Frontmatter fields | snake_case | `satellite`, `capabilities_count` |
+| Frontmatter fields | snake_case | `agent_node`, `capabilities_count` |
 | Agent slug | snake_case, lowercase | `knowledge_card_builder`, `scout_agent` |
 | ISO files | `ISO_{AGENT_UPPER}_{NNN}_{TYPE}.md` | `ISO_SCOUT_AGENT_004_INSTRUCTIONS.md` |
 | Agent upper | SCREAMING_SNAKE_CASE | `KNOWLEDGE_CARD_BUILDER` |
@@ -38,7 +38,7 @@ Rule: ISO file NNN starts at 001 and increments without gaps.
 | knowledge-engine | Knowledge and documentation agents |
 | executor | Execution, deploy, and infra agents |
 | monetizer | Monetization and product agents |
-| agnostic | Cross-satellite utility agents |
+| agnostic | Cross-agent_node utility agents |
 ## ISO File Type Enum
 | NNN | TYPE | Pillar |
 |-----|------|--------|
@@ -53,8 +53,8 @@ Rule: ISO file NNN starts at 001 and increments without gaps.
 | 009 | UPLOAD_KIT | P04 |
 | 010 | SYSTEM_INSTRUCTION | P03 |
 ## Body Requirements
-- Overview: 2-3 sentences, must name satellite and domain
-- Architecture: capabilities (4-8 bullets) + tools table + satellite position
+- Overview: 2-3 sentences, must name agent_node and domain
+- Architecture: capabilities (4-8 bullets) + tools table + agent_node position
 - File Structure: full iso_vectorstore listing with correct ISO naming
 - When to Use: triggers + keywords + NOT when exclusions (mandatory)
 - Common Issues: 3-5 failure modes, each with one-line remediation

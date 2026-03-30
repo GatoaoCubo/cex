@@ -16,7 +16,7 @@ tags: [handoff, scope-fence, task-transfer, agent-boundary, atomic-steps]
 tldr: "Scope fences and atomic task steps are the two load-bearing elements of a reliable handoff document. Missing either causes scope drift or ambiguous completion."
 impact_score: 7.5
 decay_rate: 0.05
-satellite: edison
+agent_node: edison
 keywords: [handoff, scope, permitted, prohibited, task-boundary, markdown, agent-transfer, signal, commit]
 ---
 

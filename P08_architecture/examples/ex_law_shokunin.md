@@ -12,7 +12,7 @@ tags: [law, shokunin, quality, excellence, golden]
 tldr: "LAW 13: Every output must pass the Shokunin test — 'Would I be proud of this?' Hesitation = iterate. Quality floor 8.0, Golden >= 9.5"
 max_bytes: 1024
 density_score: 0.93
-source: codexa-core/records/framework/docs/LAWS_v3_PRACTICAL.md (LAW 13)
+source: organization-core/records/framework/docs/LAWS_v3_PRACTICAL.md (LAW 13)
 linked_artifacts:
   gate: p11_qg_cex_quality
   rubric: p07_sr_5d_scoring
@@ -22,7 +22,7 @@ linked_artifacts:
 
 ## Statement
 
-> Every CODEXA output must pass the Shokunin test: "Eu tenho orgulho disso?" (Would I be proud of this?). Any hesitation means iterate — never ship doubt.
+> Every organization output must pass the Shokunin test: "Eu tenho orgulho disso?" (Would I be proud of this?). Any hesitation means iterate — never ship doubt.
 
 ## Implementation
 
@@ -70,4 +70,4 @@ RIGHT: Measure with 5D rubric. If < 9.5, it's T2 skilled — pool but not golden
 
 ## Origin
 
-"Shokunin" (Japanese: 職人) = artisan who pursues mastery not as goal but as daily practice. Applied in CODEXA: every output reflects the system's character. Mediocre output = mediocre system.
+"Shokunin" (Japanese: 職人) = artisan who pursues mastery not as goal but as daily practice. Applied in organization: every output reflects the system's character. Mediocre output = mediocre system.

@@ -1,5 +1,5 @@
 ---
-id: p03_pt_satellite_orchestrator
+id: p03_pt_agent_node_orchestrator
 kind: prompt_template
 pillar: P03
 title: Satellite Orchestrator - Multi-Agent Dispatch Prompt
@@ -10,9 +10,9 @@ author: EDISON
 domain: orchestration
 quality: 9.5
 tags: [orchestration, dispatch, routing, intention-parsing, multi-agent]
-tldr: Prompt template para STELLA orchestrator - intention parsing, satellite routing, dependency resolution, dispatch, monitoring
+tldr: Prompt template para orchestrator orchestrator - intention parsing, agent_node routing, dependency resolution, dispatch, monitoring
 when_to_use: Ao construir orchestrator que roteia tasks para agents especializados
-keywords: [orchestrator, dispatch, triage, satellite-routing, dependency-resolution]
+keywords: [orchestrator, dispatch, triage, agent_node-routing, dependency-resolution]
 long_tails:
   - como criar prompt de orchestracao para sistema multi-agente
   - como fazer intention parsing e routing automatico
@@ -28,11 +28,11 @@ density_score: 0.91
 
 | Var | Tipo | Descricao | Exemplo |
 |-----|------|-----------|---------|
-| {{SYSTEM_NAME}} | string | Nome do sistema | CODEXA |
-| {{ORCHESTRATOR_NAME}} | string | Nome do orchestrator | STELLA |
-| {{SATELLITES}} | list | Lista de agents especializados | [SHAKA, LILY, EDISON...] |
-| {{ROUTING_TABLE}} | table | Keywords > satellite mapping | pesquisar > SHAKA |
-| {{INTENT_VERBS}} | yaml | Verb classification | pesquisar: SHAKA (0.9) |
+| {{SYSTEM_NAME}} | string | Nome do sistema | organization |
+| {{ORCHESTRATOR_NAME}} | string | Nome do orchestrator | orchestrator |
+| {{SATELLITES}} | list | Lista de agents especializados | [research_agent, marketing_agent, builder_agent...] |
+| {{ROUTING_TABLE}} | table | Keywords > agent_node mapping | pesquisar > research_agent |
+| {{INTENT_VERBS}} | yaml | Verb classification | pesquisar: research_agent (0.9) |
 | {{DISPATCH_FORMAT}} | json | Formato do dispatch | inbox JSON schema |
 | {{QUALITY_GATE}} | float | Score minimo | 8.0 |
 
@@ -47,10 +47,10 @@ REGRA ABSOLUTA: {{ORCHESTRATOR_NAME}} despacha. Agents executam. {{ORCHESTRATOR_
 
 ## Intention Parsing (5 Steps)
 1. PARSE: Extrair keywords, entities, intent verbs do input
-2. MAP: Match para satellite usando routing table
+2. MAP: Match para agent_node usando routing table
 3. INFER: Gerar intention statement ("User quer...")
 4. VALIDATE: Se confianca < 0.8, perguntar UMA pergunta
-5. DISPATCH: Rotear para satellite(s) com contexto completo
+5. DISPATCH: Rotear para agent_node(s) com contexto completo
 
 ## Routing Table
 {{ROUTING_TABLE}}
@@ -74,7 +74,7 @@ REGRA ABSOLUTA: {{ORCHESTRATOR_NAME}} despacha. Agents executam. {{ORCHESTRATOR_
 ## Quality Gates
 
 - PURPOSE: orchestracao pura (nao execucao)
-- ROUTING: cada keyword mapeia para 1 satellite primario
+- ROUTING: cada keyword mapeia para 1 agent_node primario
 - DEPENDENCIES: blocking vs parallel vs optional definidos
 - DISPATCH: formato JSON estruturado com todos campos
 - ANTI-PATTERNS: min 5 anti-patterns concretos
@@ -89,15 +89,15 @@ REGRA ABSOLUTA: {{ORCHESTRATOR_NAME}} despacha. Agents executam. {{ORCHESTRATOR_
 ### Output
 ```yaml
 intention: "Pesquisa de mercado seguida de criacao de anuncios"
-satellites: [SHAKA, LILY]
-dependency: LILY depends_on SHAKA (sequential)
+agent_nodes: [research_agent, marketing_agent]
+dependency: marketing_agent depends_on research_agent (sequential)
 dispatch:
-  - satellite: SHAKA
+  - agent_node: research_agent
     task: "Pesquisar mercado skincare"
     status: dispatched
-  - satellite: LILY
-    task: "Criar anuncios com dados do SHAKA"
-    status: pending (depends: SHAKA)
+  - agent_node: marketing_agent
+    task: "Criar anuncios com dados do research_agent"
+    status: pending (depends: research_agent)
 ```
 
 ### Input
@@ -108,13 +108,13 @@ dispatch:
 ### Output
 ```yaml
 intention: "Documentacao + testes simultaneos"
-satellites: [PYTHA, ATLAS]
+agent_nodes: [knowledge_agent, operations_agent]
 dependency: none (parallel)
 dispatch:
-  - satellite: PYTHA
+  - agent_node: knowledge_agent
     task: "Documentar sistema"
     status: dispatched
-  - satellite: ATLAS
+  - agent_node: operations_agent
     task: "Criar testes"
     status: dispatched
 mode: parallel

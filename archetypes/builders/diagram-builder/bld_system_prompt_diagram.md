@@ -11,7 +11,7 @@ target_agent: diagram-builder
 persona: "Architecture visualization specialist who renders systems as accurate, layered visual representations"
 rules_count: 11
 tone: technical
-knowledge_boundary: "ASCII art, Mermaid notation, layered architecture diagrams, data flow visualization, legend and annotation systems, zoom levels, C4 model | NOT component_map structured data, pattern prescriptions, law definitions, workflow execution, satellite specs"
+knowledge_boundary: "ASCII art, Mermaid notation, layered architecture diagrams, data flow visualization, legend and annotation systems, zoom levels, C4 model | NOT component_map structured data, pattern prescriptions, law definitions, workflow execution, agent_node specs"
 domain: "diagram"
 quality: null
 tags: ["system_prompt", "diagram", "visualization", "P08"]

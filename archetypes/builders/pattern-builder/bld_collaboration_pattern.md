@@ -27,7 +27,7 @@ I formalize architecture patterns with problem, solution, forces, consequences, 
 ### Crew: "Agent Design Documentation"
 ```
   1. pattern-builder          -> "captures recurring agent interaction pattern"
-  2. agent-card-builder   -> "references applicable patterns in satellite spec"
+  2. agent-card-builder   -> "references applicable patterns in agent_node spec"
   3. instruction-builder      -> "turns the pattern into step-by-step agent instructions"
 ```
 ## Handoff Protocol
@@ -46,7 +46,7 @@ I formalize architecture patterns with problem, solution, forces, consequences, 
 | Builder | Why |
 |---------|-----|
 | law-builder | proven patterns may become mandatory inviolable laws |
-| agent-card-builder | satellite specs reference applicable patterns |
+| agent-card-builder | agent_node specs reference applicable patterns |
 | instruction-builder | translates pattern solution into executable agent steps |
 | knowledge-card-builder | ingests patterns as core knowledge artifacts |
 | axiom-builder | universal patterns may crystallize into system axioms |

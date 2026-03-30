@@ -11,10 +11,10 @@ pattern: CONFIG restricts SCHEMA, never contradicts it
 ## Naming Convention
 | Scope | Convention | Example |
 |-------|-----------|---------|
-| Artifact files | `p02_router_{slug}.md` | `p02_router_satellite_task.md` |
+| Artifact files | `p02_router_{slug}.md` | `p02_router_agent_node_task.md` |
 | Builder directory | kebab-case | `router-builder/` |
 | Frontmatter fields | snake_case | `routes_count`, `fallback_route` |
-| Router slug | snake_case, lowercase | `satellite_task`, `api_gateway` |
+| Router slug | snake_case, lowercase | `agent_node_task`, `api_gateway` |
 Rule: id MUST equal filename stem.
 ## File Paths
 - Output: `cex/P02_model/examples/p02_router_{slug}.md`

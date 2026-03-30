@@ -16,7 +16,7 @@ tags: [feature_flag, rollout, kill_switch, gradual_rollout, lifecycle, ops_safet
 tldr: "Set expires on every flag; document kill_switch for ops flags; rollout_percentage is integer not string."
 impact_score: 7.5
 decay_rate: 0.04
-satellite: edison
+agent_node: edison
 keywords: [feature_flag, rollout_percentage, kill_switch, default_state, category, expires, lifecycle, gradual_rollout]
 ---
 

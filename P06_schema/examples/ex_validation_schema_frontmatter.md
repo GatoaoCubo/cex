@@ -24,7 +24,7 @@ linked_artifacts:
   related: [quality-gate-builder, validator-builder]
 ---
 ## Schema Overview
-Validates the common YAML frontmatter fields present in every CODEXA artifact. Ensures structural integrity before kind-specific validation runs. Applied as first validation pass in the publish pipeline.
+Validates the common YAML frontmatter fields present in every organization artifact. Ensures structural integrity before kind-specific validation runs. Applied as first validation pass in the publish pipeline.
 ## Fields
 | Field | Type | Required | Constraints | Error message |
 |-------|------|----------|-------------|---------------|

@@ -1,7 +1,7 @@
 ---
 id: p01_rs_brain_faiss_index
 kind: rag_source
-url: records/core/brain/mcp-codexa-brain/src/indexes/
+url: records/core/brain/mcp-organization-brain/src/indexes/
 domain: knowledge_retrieval
 last_checked: 2026-03-24
 ---
@@ -9,10 +9,10 @@ last_checked: 2026-03-24
 # RAG Source: brain_faiss_index
 
 ## URL
-`records/core/brain/mcp-codexa-brain/src/indexes/` (local FAISS + BM25 indexes)
+`records/core/brain/mcp-organization-brain/src/indexes/` (local FAISS + BM25 indexes)
 
 ## Domain
-Knowledge retrieval — serves all CODEXA satellites via brain_query MCP tool.
+Knowledge retrieval — serves all organization agent_nodes via brain_query MCP tool.
 
 ## Last Checked
 2026-03-24. Rebuild: `python build_indexes_ollama.py --scope all` (~20 min).

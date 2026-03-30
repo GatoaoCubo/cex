@@ -16,7 +16,7 @@ tags: [action-prompt, contract-design, edge-cases, input-output-schema, P03]
 tldr: "Cover every input edge case explicitly. Provide concrete output examples. Prompts without both have 69% contract failure rate."
 impact_score: 7.8
 decay_rate: 0.08
-satellite: edison
+agent_node: edison
 keywords: [action-prompt, contract, edge-case, schema, input, output, frontmatter, validation]
 ---
 

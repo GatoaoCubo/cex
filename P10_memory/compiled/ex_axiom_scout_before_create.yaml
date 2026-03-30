@@ -5,7 +5,7 @@ title: 'Axiom: Scout Before Create (Law 8)'
 version: 3.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: PYTHA
+author: knowledge_agent
 quality: 9.5
 tags:
 - axiom
@@ -17,7 +17,7 @@ tldr: 'LAW 8: Always Glob/Grep before Write. Never duplicate pool artifacts. 60%
   new'
 max_bytes: 512
 density_score: 0.93
-source: codexa-core/records/framework/docs/LAWS_v3_PRACTICAL.md (LAW 8 SCOUT-FIRST)
+source: organization-core/records/framework/docs/LAWS_v3_PRACTICAL.md (LAW 8 SCOUT-FIRST)
 linked_artifacts:
   law: p08_law_shokunin
 statement: '> Before creating any file, artifact, agent, or template — search the pool first. If similar exists (>= 60% overlap),

@@ -9,7 +9,7 @@ pattern: few-shot learning — LLM reads these before producing
 
 # Examples: secret-config-builder
 ## Golden Example
-INPUT: "Create secret config for OpenAI and Anthropic API keys used by SHAKA research agent, stored in HashiCorp Vault with daily rotation"
+INPUT: "Create secret config for OpenAI and Anthropic API keys used by research_agent research agent, stored in HashiCorp Vault with daily rotation"
 OUTPUT:
 ```yaml
 id: p09_sec_llm_api_keys
@@ -19,7 +19,7 @@ version: "1.0.0"
 created: "2026-03-29"
 updated: "2026-03-29"
 author: "EDISON"
-name: "LLM API Keys — SHAKA Research Agent"
+name: "LLM API Keys — research_agent Research Agent"
 provider: vault
 rotation_policy:
   frequency: daily
@@ -30,8 +30,8 @@ encryption:
 access_pattern: dynamic
 quality: null
 tags: [secret_config, vault, llm-keys, P09]
-tldr: "Vault-backed LLM API keys for SHAKA with daily auto-rotation and dynamic leases"
-description: "Manages OpenAI and Anthropic API keys for SHAKA research agent via Vault dynamic secrets"
+tldr: "Vault-backed LLM API keys for research_agent with daily auto-rotation and dynamic leases"
+description: "Manages OpenAI and Anthropic API keys for research_agent research agent via Vault dynamic secrets"
 secret_paths:
   - "secret/data/agents/shaka/openai"
   - "secret/data/agents/shaka/anthropic"
@@ -41,8 +41,8 @@ namespaces: ["agents/shaka"]
 fallback: "env"
 ```
 ## Overview
-Manages LLM provider API keys (OpenAI, Anthropic) for the SHAKA research agent.
-Keys rotate daily via Vault auto-rotation; SHAKA retrieves a short-lived lease at task start.
+Manages LLM provider API keys (OpenAI, Anthropic) for the research_agent research agent.
+Keys rotate daily via Vault auto-rotation; research_agent retrieves a short-lived lease at task start.
 ## Provider
 Backend: HashiCorp Vault — AppRole auth (role_id + secret_id injected at boot)
 Paths:
@@ -55,7 +55,7 @@ AppRole role: `agents-shaka-reader` (read-only on `secret/data/agents/shaka/*`)
 - Trigger: schedule + on-breach (PagerDuty webhook)
 - Rollback: previous version retained for 2h in Vault KV v2 history
 ## Access Pattern
-Pattern: dynamic — SHAKA requests a lease-bound token at task start via AppRole login.
+Pattern: dynamic — research_agent requests a lease-bound token at task start via AppRole login.
 1. Boot: inject role_id + secret_id via K8s init container
 2. Task start: `vault write auth/approle/login role_id=<PLACEHOLDER> secret_id=<PLACEHOLDER>`
 3. Read: `vault kv get secret/data/agents/shaka/openai`

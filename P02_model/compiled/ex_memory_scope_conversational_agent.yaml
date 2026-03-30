@@ -5,7 +5,7 @@ title: Conversational Agent Memory (Buffer + Summary + Entity)
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
-author: EDISON
+author: builder_agent
 domain: agent_memory
 quality: 9.0
 tags:
@@ -44,7 +44,7 @@ parameters: '| Param | Value | Rationale |
 
   | summary_max_tokens | 500 | Resumo compacto, nao transcript |
 
-  | entity_types | [person, product, date, price, marketplace, agent] | Tipos relevantes para e-commerce CODEXA |
+  | entity_types | [person, product, date, price, marketplace, agent] | Tipos relevantes para e-commerce organization |
 
   | entity_max | 20 | Top 20 entidades por recencia + frequencia |
 
@@ -76,13 +76,13 @@ implementation: "from langchain.memory import ConversationBufferWindowMemory, Co
 context_assembly_order: "def assemble_context(buffer, summary, entities):\n    \"\"\"Ordem importa: summary primeiro (background),\
   \ entities (referencia), buffer por ultimo (recente).\"\"\"\n    return f\"\"\"## Conversation Summary\n{summary}\n\n##\
   \ Known Entities\n{format_entities(entities)}\n\n## Recent Messages\n{format_buffer(buffer)}\"\"\""
-redis_key_schema: 'codexa:memory:{session_id}:messages     -> List<JSON>   (buffer)
+redis_key_schema: 'organization:memory:{session_id}:messages     -> List<JSON>   (buffer)
 
-  codexa:memory:{session_id}:summary      -> String       (summary text)
+  organization:memory:{session_id}:summary      -> String       (summary text)
 
-  codexa:memory:{session_id}:entities     -> Hash          (entity_name -> description)
+  organization:memory:{session_id}:entities     -> Hash          (entity_name -> description)
 
-  codexa:memory:{session_id}:metadata     -> Hash          (created_at, last_active, msg_count)'
+  organization:memory:{session_id}:metadata     -> Hash          (created_at, last_active, msg_count)'
 lifecycle: '| Event | Action |
 
   |-------|--------|
@@ -98,9 +98,9 @@ lifecycle: '| Event | Action |
   | Explicit logout | Flush all keys for session_id immediately |'
 when_not_to_use:
 - 'Stateless single-turn agents (ex: formatter, parser) — sem necessidade de memoria'
-- Long-term cross-session memory — usar Mem0 ou CODEXA learning memory
+- Long-term cross-session memory — usar Mem0 ou organization learning memory
 - Shared memory between agents — usar session_state (P10) com pub/sub
 related:
 - '`ex_agent_gateway.md` — Gateway agent que usa este memory scope'
 - '`ex_boot_config_edison_claude.md` — Boot config (memoria e efemera por sessao de satelite)'
-- '`records/core/learning/memory/` — CODEXA long-term memory (diferente de session memory)'
+- '`records/core/learning/memory/` — organization long-term memory (diferente de session memory)'

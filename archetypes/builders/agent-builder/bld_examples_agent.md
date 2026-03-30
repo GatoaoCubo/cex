@@ -20,7 +20,7 @@ version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
 author: "builder"
-satellite: "knowledge-engine"
+agent_node: "knowledge-engine"
 domain: "knowledge_distillation"
 llm_function: BECOME
 capabilities_count: 5
@@ -66,7 +66,7 @@ Receives from: researcher. Produces for: brain_index, pool (quality >= 8.0).
 3. Boundary: narrative -> context-doc-builder
 WHY THIS IS GOLDEN:
 - quality: null (H05 pass) | id p02_agent_ pattern (H02 pass) | kind: agent (H04 pass)
-- 19 fields (H06 pass) | llm_function: BECOME (H07 pass) | satellite: knowledge-engine (H08 pass)
+- 19 fields (H06 pass) | llm_function: BECOME (H07 pass) | agent_node: knowledge-engine (H08 pass)
 - iso_vectorstore 10 files (S05 pass) | capabilities_count: 5 matches body (S06 pass)
 - tldr: 71ch (S01 pass) | density: 0.87 (S09 pass) | no filler (S10 pass)
 ## Anti-Example
@@ -77,7 +77,7 @@ id: helper_agent
 kind: bot
 pillar: assistant
 title: Helper
-satellite: none
+agent_node: none
 quality: 8.0
 tags: [helper]
 tldr: "This is a helpful agent that can assist users with various tasks and provide support."
@@ -88,7 +88,7 @@ FAILURES:
 2. kind: "bot" not "agent" -> H04 FAIL
 3. pillar: "assistant" not "P02" -> H06 FAIL
 4. quality: 8.0 (not null) -> H05 FAIL
-5. satellite: "none" — must be real satellite name or "agnostic" -> H08 FAIL
+5. agent_node: "none" — must be real agent_node name or "agnostic" -> H08 FAIL
 6. Missing fields: version, created, updated, author, domain, llm_function, capabilities_count, tools_count, iso_files_count, routing_keywords -> H06 FAIL
 7. tags: only 1 item, missing "agent" -> S02 FAIL
 8. tldr: 87 chars but is filler ("This is a helpful agent...") -> S10 FAIL

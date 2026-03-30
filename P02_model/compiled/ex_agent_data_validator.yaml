@@ -5,8 +5,8 @@ title: Data Validator Agent
 version: 1.0.0
 created: 2026-03-24
 updated: 2026-03-24
-author: EDISON
-satellite: ATLAS
+author: builder_agent
+agent_node: operations_agent
 domain: data_quality
 quality: 9.0
 tags:
@@ -27,12 +27,12 @@ when_to_use: '| Cenario | Usar? |
 
   | Detectar anomalias em dados de scraping | SIM |
 
-  | Validar output de outros agentes CODEXA | SIM |
+  | Validar output de outros agentes organization | SIM |
 
   | Transformar dados (ETL) | NAO -> use builder agent |
 
   | Monitorar metricas de sistema (CPU, RAM) | NAO -> use monitor-agent |'
-overview: data-validator e o agente de validacao de qualidade de dados do CODEXA. Atua quando dados entram ou saem de pipelines
+overview: data-validator e o agente de validacao de qualidade de dados do organization. Atua quando dados entram ou saem de pipelines
   (ETL, API, scraping) e entrega relatorios de qualidade com score por dimensao e lista de violacoes acionaveis.
 architecture: "[Data Source] -> [Schema Validator] -> [Statistical Checker] -> [Business Rules] -> [Report + Score]\n    \
   \                   |                       |                       |\n                 [JSON Schema]          [Distribution]\
@@ -61,7 +61,7 @@ common_issues:
 - Schema inferido diverge do real -> sempre preferir schema explicito quando disponivel
 - Dados de scraping com encoding misto (UTF-8/Latin1) -> normalizar encoding antes de validar
 - Falsos positivos em outlier detection para distribuicoes bimodais -> usar IQR em vez de Z-score
-invocation: '# Via STELLA dispatch
+invocation: '# Via orchestrator dispatch
 
   /atlas "Validar dados de scraping em data/raw/products.json contra schema/products.yaml"
 
@@ -73,4 +73,4 @@ related_agents:
 - 'qa-agent: Agregacao de qualidade cross-agent (usa data-validator como input)'
 - 'tester-agent: Testa codigo; data-validator testa dados'
 - 'evaluator-agent: Avalia output LLM; data-validator avalia dados estruturados'
-footer: 'Satellite: ATLAS | Quality: 9.0 | Domain: data_quality'
+footer: 'Satellite: operations_agent | Quality: 9.0 | Domain: data_quality'

@@ -12,7 +12,7 @@ tags: [continuous-batching, spawn, performance, learning, memory]
 tldr: "Continuous batching 1.6x faster than static grid — speed depends on task complexity not model, opus beat sonnet"
 density_score: 0.91
 decay: 90
-source: codexa-core/.claude/projects/memory/MEMORY.md
+source: organization-core/.claude/projects/memory/MEMORY.md
 ---
 
 # Learning: Continuous Batching Performance
@@ -21,15 +21,15 @@ source: codexa-core/.claude/projects/memory/MEMORY.md
 
 | Property | Value |
 |----------|-------|
-| Task | ISOFIX 7/7 batches + CBTEST mixed 3 satellites |
-| Satellite | STELLA (orchestrator) |
+| Task | ISOFIX 7/7 batches + CBTEST mixed 3 agent_nodes |
+| Satellite | orchestrator (orchestrator) |
 | Date | 2026-03-05 |
 | Outcome | success |
 | Score | 9.0 |
 
 ## What Happened
 
-Continuous batching mode (`spawn_grid.ps1 -mode continuous`) was tested with ISOFIX (7 batches, single sat) and CBTEST (mixed SHAKA+EDISON+PYTHA). ISOFIX achieved 1.6x speedup over static grid. CBTEST confirmed zero git lock contention at 3 concurrent satellites.
+Continuous batching mode (`spawn_grid.ps1 -mode continuous`) was tested with ISOFIX (7 batches, single sat) and CBTEST (mixed research_agent+builder_agent+knowledge_agent). ISOFIX achieved 1.6x speedup over static grid. CBTEST confirmed zero git lock contention at 3 concurrent agent_nodes.
 
 ## Pattern (success)
 
@@ -37,7 +37,7 @@ Continuous batching mode (`spawn_grid.ps1 -mode continuous`) was tested with ISO
 |------|--------|---------------|
 | 1 | Handoff naming `{MISSION}_batch_{N}_{SAT}.md` | Auto-refill detected batch files by naming convention |
 | 2 | Signal-based slot detection `{sat}_complete_{ts}.json` | No polling needed, filesystem signals are atomic |
-| 3 | Max 3 concurrent satellites | Stayed under 4-terminal BSOD threshold |
+| 3 | Max 3 concurrent agent_nodes | Stayed under 4-terminal BSOD threshold |
 
 ## Anti-Pattern (observed)
 
@@ -57,4 +57,4 @@ Continuous batching mode (`spawn_grid.ps1 -mode continuous`) was tested with ISO
 - Does NOT apply to: Single-task solo spawns, tasks requiring serial dependency
 
 ---
-*Migrated from: CODEXA MEMORY.md (Dispatch Modes section, tested 2026-03-05)*
+*Migrated from: organization MEMORY.md (Dispatch Modes section, tested 2026-03-05)*

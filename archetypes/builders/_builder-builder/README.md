@@ -1,6 +1,6 @@
 # _builder-builder: Meta-Template for Generating Any Type-Builder
 
-**Version**: 1.0.0 | **Author**: EDISON | **Created**: 2026-03-26
+**Version**: 1.0.0 | **Author**: builder_agent | **Created**: 2026-03-26
 **Source**: Extracted from 4 existing builders (model-card, knowledge-card, signal, quality-gate)
 
 ---
@@ -126,7 +126,7 @@ Generate files in this order (each may reference previously generated files):
 
 ## Pre-Commit Checklist
 
-Reference: `codexa-core/.claude/norms/ARCHETYPE_BUILDER_CHECKLIST.md`
+Reference: `organization-core/.claude/norms/ARCHETYPE_BUILDER_CHECKLIST.md`
 
 Quick checks:
 - [ ] SCHEMA defines ALL fields (frontmatter + body sections)

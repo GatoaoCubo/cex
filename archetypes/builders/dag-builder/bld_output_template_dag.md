@@ -22,10 +22,10 @@ pipeline: "{{pipeline_or_mission_name}}"
 nodes:
   - id: "{{node_id_1}}"
     label: "{{task_description_1}}"
-    satellite: "{{executor_1}}"
+    agent_node: "{{executor_1}}"
   - id: "{{node_id_2}}"
     label: "{{task_description_2}}"
-    satellite: "{{executor_2}}"
+    agent_node: "{{executor_2}}"
 edges:
   - from: "{{source_node_id}}"
     to: "{{target_node_id}}"

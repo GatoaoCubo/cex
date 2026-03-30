@@ -5,7 +5,7 @@ title: 'Workflow: 5 Advisory Hooks (Context Injection)'
 version: 1.0.0
 created: 2026-03-24
 updated: 2026-03-24
-author: EDISON
+author: builder_agent
 quality: 9.0
 tags:
 - hooks
@@ -32,7 +32,7 @@ universal_pattern: 'timeout-guard (Ns) → read stdin JSON → compute advisory 
 
   Advisory hooks NEVER block execution. Always exit 0.'
 steps: ''
-hook_1_statusline_posttooluse_3s: 'Update terminal status bar: satellite state, progress, token usage. Output: display string,
+hook_1_statusline_posttooluse_3s: 'Update terminal status bar: agent_node state, progress, token usage. Output: display string,
   no additionalContext. Value: LOW (cosmetic).'
 hook_2_context_monitor_posttooluse_5s_debounced_every_5_calls: 'Track context window usage, warn when running low.
 

@@ -11,7 +11,7 @@ quality: 9.5
 tags: [quality, audit, input, contract]
 tldr: "Validates input parameters for the codebase quality audit pipeline (scope, threshold, scan options)"
 density_score: 0.90
-source: codexa-core/records/core/examples/blueprint_quality_audit.yaml
+source: organization-core/records/core/examples/blueprint_quality_audit.yaml
 linked_artifacts:
   agent: p02_ag_qa_agent
   output: p05_os_quality_report
@@ -77,5 +77,5 @@ threshold: 15.0  # FAILS: max is 10.0
 
 | Direction | Component | Protocol |
 |-----------|-----------|----------|
-| upstream | STELLA handoff | handoff file (.md) |
+| upstream | orchestrator handoff | handoff file (.md) |
 | downstream | qa-agent | blueprint step chain |

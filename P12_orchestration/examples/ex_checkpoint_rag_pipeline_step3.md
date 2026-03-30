@@ -55,13 +55,13 @@ checkpoint:
     docs_total: 850
 
     failed_docs:
-      - id: "KC_SHAKA_042"
+      - id: "KC_research_agent_042"
         error: "OllamaConnectionError: timeout after 30s"
         retries: 3
-      - id: "KC_PYTHA_089"
+      - id: "KC_knowledge_agent_089"
         error: "TokenLimitExceeded: 32768 > 8192 max_tokens"
         retries: 1
-      - id: "KC_LILY_BROKEN"
+      - id: "KC_marketing_agent_BROKEN"
         error: "UTF8DecodeError: invalid byte 0xff at position 2847"
         retries: 1
 

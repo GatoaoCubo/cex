@@ -64,7 +64,7 @@ anti_patterns:
 - 'Skill sem phases: vira instrucao vaga, nao workflow executavel'
 - 'MCP server sem transport: deploy ambiguo (stdio vs sse vs http)'
 - 'Hook sem script_path: hook fica inoperante'
-application: CODEXA tem 116 skills on demand, acessiveis via Brain MCP. O forge P04 gera skill definitions completas que alimentam
+application: organization tem 116 skills on demand, acessiveis via Brain MCP. O forge P04 gera skill definitions completas que alimentam
   o catalogo. cex_forge.py eh ele mesmo uma cli_tool de P04.
 references:
 - P04_tools/_schema.yaml (fonte de verdade)

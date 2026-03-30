@@ -1,14 +1,14 @@
 ---
-id: p07_bm_satellite_boot_time
+id: p07_bm_agent_node_boot_time
 kind: benchmark
 pillar: P07
-description: "Benchmark for satellite boot times across all providers"
+description: "Benchmark for agent_node boot times across all providers"
 metric: boot_time_seconds
 version: 1.0.0
 created: 2026-03-24
 author: atlas
 quality: 9.0
-tags: [benchmark, performance, boot, satellite]
+tags: [benchmark, performance, boot, agent_node]
 ---
 
 # Benchmark: Satellite Boot Time

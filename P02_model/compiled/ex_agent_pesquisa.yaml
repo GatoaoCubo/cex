@@ -5,7 +5,7 @@ title: Agente de Pesquisa de Mercado
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: SHAKA
+author: research_agent
 domain: research
 quality: 9.5
 tags:
@@ -25,9 +25,9 @@ when_to_use: '| Cenario | Usar? |
 
   | Vocabulario de industria | SIM |
 
-  | Criar conteudo marketing | NAO > use LILY |
+  | Criar conteudo marketing | NAO > use marketing_agent |
 
-  | Deploy de infra | NAO > use ATLAS |'
+  | Deploy de infra | NAO > use operations_agent |'
 keywords:
 - market-research
 - competitor-analysis
@@ -62,18 +62,18 @@ capabilities:
 - Report generation (markdown + YAML dual)
 - Competitor mapping (features, pricing, gaps)
 integration:
-- 'Upstream: STELLA (routing) | USER (task)'
-- 'Downstream: PYTHA (indexar KCs) | LILY (usar dados em copy)'
+- 'Upstream: orchestrator (routing) | USER (task)'
+- 'Downstream: knowledge_agent (indexar KCs) | marketing_agent (usar dados em copy)'
 when_not_to_use: '| Cenario | Por que NAO | Use em vez |
 
   |---------|-------------|------------|
 
-  | Gerar copy/anuncio de marketing | Pesquisa coleta dados, nao cria conteudo | LILY (mlabs-content-agent, anuncio-agent)
+  | Gerar copy/anuncio de marketing | Pesquisa coleta dados, nao cria conteudo | marketing_agent (mlabs-content-agent, anuncio-agent)
   |
 
-  | Deploy, infra, database ops | Fora do dominio research | ATLAS (gateway-agent) |
+  | Deploy, infra, database ops | Fora do dominio research | operations_agent (gateway-agent) |
 
-  | Indexar/catalogar conhecimento existente | Pesquisa descobre, nao organiza | PYTHA (indexer-agent, mentor-agent) |'
+  | Indexar/catalogar conhecimento existente | Pesquisa descobre, nao organiza | knowledge_agent (indexer-agent, mentor-agent) |'
 common_issues: '| Problema | Causa | Solucao |
 
   |----------|-------|---------|

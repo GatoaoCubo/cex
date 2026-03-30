@@ -23,7 +23,7 @@ tags:
 tldr: "Write PID after ready, trap signals to drain work, expose meaningful health probes."
 impact_score: 7.5
 decay_rate: 0.05
-satellite: edison
+agent_node: edison
 keywords:
   - daemon
   - background process

@@ -96,6 +96,6 @@ example_generation: "Input:\nagent_name: inventory-tracker\nagent_domain: e-comm
   \ resposta\n- Scope: apenas SKUs ativos no catalogo atual\n- NAO acesse sistemas externos sem credenciais validadas\n- Timezone:\
   \ America/Sao_Paulo para todos os timestamps\n</constraints>"
 research_base:
-- 'Meta-prompt pattern: 3 user fields + AI generates rest (KC_SHAKA_097)'
+- 'Meta-prompt pattern: 3 user fields + AI generates rest (KC_research_agent_097)'
 - XML tags for Claude improve section parsing (Anthropic docs)
 - Iteration with self-score converges em ~2 rounds para prompts simples

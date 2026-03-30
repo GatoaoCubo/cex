@@ -18,7 +18,7 @@ version: "1.0.0"
 created: "{{YYYY-MM-DD}}"
 updated: "{{YYYY-MM-DD}}"
 author: "{{who_produced}}"
-satellite: "{{target_satellite}}"
+agent_node: "{{target_agent_node}}"
 mission: "{{mission_name}}"
 autonomy: "{{full|supervised|assisted}}"
 quality_target: {{7.0_to_10.0}}
@@ -54,11 +54,11 @@ linked_artifacts:
 ## Commit
 ```bash
 git add {{paths}}
-git commit -m "{{satellite}}[{{mission}}]: {{description}}"
+git commit -m "{{agent_node}}[{{mission}}]: {{description}}"
 ```
 ## Signal
 ```bash
-python -c "from records.core.python.signal_writer import write_signal; write_signal('{{satellite}}', 'complete', {{quality_score}})"
+python -c "from records.core.python.signal_writer import write_signal; write_signal('{{agent_node}}', 'complete', {{quality_score}})"
 ```
 ## Derivation Notes
 - Frontmatter fields are the machine-readable contract from SCHEMA.md

@@ -11,7 +11,7 @@ quality: 9.0
 tags: [firecrawl, feature-flag, enrichment, config]
 tldr: "Master switch for Firecrawl web scraping enrichment in marketplace research"
 density_score: 0.90
-source: codexa-core/Railway env vars
+source: organization-core/Railway env vars
 ---
 
 # Flag: FIRECRAWL_ENABLED
@@ -23,7 +23,7 @@ source: codexa-core/Railway env vars
 | Flag | `FIRECRAWL_ENABLED` |
 | State | on |
 | Rollout | 100% |
-| Owner | ATLAS satellite |
+| Owner | operations_agent agent_node |
 | Expires | never |
 
 ## Behavior
@@ -40,4 +40,4 @@ source: codexa-core/Railway env vars
 - Rollback: Set `FIRECRAWL_ENABLED=false` in Railway dashboard, takes effect on next request (no restart needed)
 
 ---
-*Migrated from: CODEXA MEMORY.md (Architecture State section)*
+*Migrated from: organization MEMORY.md (Architecture State section)*

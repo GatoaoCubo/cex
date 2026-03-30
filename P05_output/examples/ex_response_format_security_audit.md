@@ -13,7 +13,7 @@ tags: [security, audit, output]
 tldr: "Structured security audit report with findings by severity, remediation roadmap, and OWASP compliance mapping"
 max_bytes: 8192
 density_score: 0.92
-source: codexa-core/records/agents/access_control_auditor/iso_vectorstore/ISO_ATLAS_007_OUTPUT_TEMPLATE.md
+source: organization-core/records/agents/access_control_auditor/iso_vectorstore/ISO_operations_agent_007_OUTPUT_TEMPLATE.md
 linked_artifacts:
   agent: p02_ag_access_control_auditor
   schema: null

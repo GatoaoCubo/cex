@@ -15,11 +15,11 @@ tags:
   - spawn-config
   - orchestration
   - P12
-tldr: "Validates satellite spawn configurations for mode, CLI flags, model pairing, and runtime safety."
+tldr: "Validates agent_node spawn configurations for mode, CLI flags, model pairing, and runtime safety."
 ---
 
 ## Definition
-A spawn config defines how a satellite process is launched: execution mode (solo, grid, or continuous), CLI flags passed to the runtime, the model driving the satellite, and how prompts and recovery are handled. This gate ensures every spawn config is safe to execute without human intervention and unambiguous to the launch runtime.
+A spawn config defines how a agent_node process is launched: execution mode (solo, grid, or continuous), CLI flags passed to the runtime, the model driving the agent_node, and how prompts and recovery are handled. This gate ensures every spawn config is safe to execute without human intervention and unambiguous to the launch runtime.
 ## HARD Gates
 Failure on any HARD gate causes immediate REJECT. No score is computed.
 | ID  | Check | Rule |
@@ -29,10 +29,10 @@ Failure on any HARD gate causes immediate REJECT. No score is computed.
 | H03 | ID equals filename | `id` slug matches the parent directory or filename stem |
 | H04 | Kind matches literal | `kind` is exactly `spawn_config` |
 | H05 | Quality is null | `quality` field is `null` (not yet scored) |
-| H06 | Required fields present | `mode`, `satellite`, `model`, `cli_flags`, `prompt` all defined and non-empty |
+| H06 | Required fields present | `mode`, `agent_node`, `model`, `cli_flags`, `prompt` all defined and non-empty |
 | H07 | Mode is valid enum | `mode` is one of: `solo`, `grid`, `continuous` |
 | H08 | CLI flags defined | `cli_flags` is a non-empty list with at least one entry |
-| H09 | Satellite-model pairing | `satellite` and `model` are both non-empty strings |
+| H09 | Satellite-model pairing | `agent_node` and `model` are both non-empty strings |
 | H10 | Prompt size within limits | Inline `prompt` is <= 200 characters; longer prompts reference a handoff file path |
 ## SOFT Scoring
 Score each dimension 0 or 10. Multiply by weight. Divide total by sum of weights, scale to 0-10.
@@ -54,13 +54,13 @@ Sum of weights: 9.0. `soft_score = sum(weight * gate_score) / 9.0 * 10`
 | Score | Action |
 |-------|--------|
 | >= 9.5 | GOLDEN — archive to pool as reference spawn config |
-| >= 8.0 | PUBLISH — safe for production satellite dispatch |
+| >= 8.0 | PUBLISH — safe for production agent_node dispatch |
 | >= 7.0 | REVIEW — usable but missing safety or recovery detail |
 | < 7.0 | REJECT — do not execute; incomplete or unsafe config |
 ## Bypass
 | Field | Value |
 |-------|-------|
-| condition | Emergency satellite launch during active incident where config cannot be revised before deploy |
+| condition | Emergency agent_node launch during active incident where config cannot be revised before deploy |
 | approver | Lead engineer on duty (human, not automated) |
 | audit_log | Entry required in `.claude/bypasses/spawn_config_{date}.md` with written justification |
 | expiry | 24 hours; config must reach PUBLISH score before next planned launch |

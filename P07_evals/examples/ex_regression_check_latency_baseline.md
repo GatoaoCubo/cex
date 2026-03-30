@@ -19,7 +19,7 @@ tags: [regression, latency, performance, baseline, monitoring]
 
 ## Purpose
 
-Detects latency regressions in the CODEXA Railway API by comparing current percentile response times against the v2.1 production baseline. Any metric exceeding +10% triggers a Slack alert before deployment proceeds.
+Detects latency regressions in the organization Railway API by comparing current percentile response times against the v2.1 production baseline. Any metric exceeding +10% triggers a Slack alert before deployment proceeds.
 
 ## Baseline Reference (v2.1)
 
@@ -50,7 +50,7 @@ The +10% threshold was calibrated against natural traffic variance. Historical d
 ```bash
 # Run against staging, 1000 requests per endpoint
 python scripts/load_test.py \
-  --target https://codexa-api-staging.railway.app \
+  --target https://organization-api-staging.railway.app \
   --endpoints health,chat,search,knowledge,evaluate \
   --requests-per-endpoint 1000 \
   --concurrency 10 \
@@ -90,7 +90,7 @@ if regressions:
 ### Step 3: Alert Format
 ```json
 {
-  "channel": "#codexa-alerts",
+  "channel": "#organization-alerts",
   "text": ":warning: Latency regression detected",
   "blocks": [
     {

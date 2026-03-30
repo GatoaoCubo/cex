@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-03-24
 updated: 2026-03-24
 author: EDISON
-satellite: LILY
+agent_node: marketing_agent
 domain: marketing
 quality: 9.0
 tags: [image, cip, branding, visual, prompt-template, product-photography]
@@ -101,4 +101,4 @@ OUTPUT: 3 variations with consistent style
 | ML Listing | 4:3 | Slight horizontal crop, maintain product focus |
 
 ---
-*CIP Image Brief v1.0 | LILY Marketing Domain | 2026-03-24*
+*CIP Image Brief v1.0 | marketing_agent Marketing Domain | 2026-03-24*

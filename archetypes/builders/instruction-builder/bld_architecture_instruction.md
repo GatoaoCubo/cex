@@ -37,7 +37,7 @@ skill          --depends_on--> instruction
 |----------------|-------------------|
 | Step-by-step recipe for a single executor | Conversational prompt with response format |
 | Specifies exact actions, not goals | Agent identity or persona definition |
-| Includes rollback for failure recovery | Multi-agent orchestration across satellites |
+| Includes rollback for failure recovery | Multi-agent orchestration across agent_nodes |
 | One-shot execution without lifecycle phases | Structured workflow with branching logic |
 | Single-agent scope | Task delegation package to a remote receiver |
 | Verifiable: each step has validation criteria | Event-triggered side-effect handler |

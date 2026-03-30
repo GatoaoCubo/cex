@@ -16,7 +16,7 @@ tags: [checkpoint, ttl, workflow-ref, state-minimization, resume, chain]
 tldr: "TTL is mandatory. workflow_ref is load-bearing for recovery. Minimize state to resumption-critical keys. Step name must match workflow definition exactly."
 impact_score: 8.0
 decay_rate: 0.04
-satellite: edison
+agent_node: edison
 keywords: [checkpoint, workflow state, ttl, resume, state minimization, chain, rollback, orphan]
 ---
 

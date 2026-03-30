@@ -12,7 +12,7 @@ tags: [axiom, scout, law8, discovery, pool]
 tldr: "LAW 8: Always Glob/Grep before Write. Never duplicate pool artifacts. 60% similarity = adapt existing; <60% = build new"
 max_bytes: 512
 density_score: 0.93
-source: codexa-core/records/framework/docs/LAWS_v3_PRACTICAL.md (LAW 8 SCOUT-FIRST)
+source: organization-core/records/framework/docs/LAWS_v3_PRACTICAL.md (LAW 8 SCOUT-FIRST)
 linked_artifacts:
   law: p08_law_shokunin
 ---

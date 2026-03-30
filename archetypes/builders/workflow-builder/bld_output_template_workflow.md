@@ -19,7 +19,7 @@ author: "{{who_produced}}"
 title: "{{human_readable_title}}"
 steps_count: {{integer_matching_body}}
 execution: {{sequential|parallel|mixed}}
-satellites: [{{sat_1}}, {{sat_2}}]
+agent_nodes: [{{sat_1}}, {{sat_2}}]
 timeout: {{total_seconds}}
 retry_policy: {{none|per_step|global}}
 depends_on: [{{prerequisite_1}}]
@@ -35,14 +35,14 @@ density_score: {{0.80-1.00}}
 {{why_this_workflow_exists_2_to_4_sentences}}
 ## Steps
 ### Step 1: {{step_name}} [{{agent}}]
-- **Agent**: {{satellite_or_agent_name}}
+- **Agent**: {{agent_node_or_agent_name}}
 - **Action**: {{what_this_step_does}}
 - **Input**: {{input_description}}
 - **Output**: {{output_description}}
 - **Signal**: {{signal_on_completion}}
 - **Depends on**: {{step_dependencies_or_none}}
 ### Step 2: {{step_name}} [{{agent}}]
-- **Agent**: {{satellite_or_agent_name}}
+- **Agent**: {{agent_node_or_agent_name}}
 - **Action**: {{what_this_step_does}}
 - **Input**: {{input_from_previous_step}}
 - **Output**: {{output_description}}
@@ -53,7 +53,7 @@ density_score: {{0.80-1.00}}
 - {{prerequisite_artifact_or_condition_1}}
 - {{prerequisite_artifact_or_condition_2}}
 ## Signals
-- **On step complete**: {{signal_type}} emitted by {{satellite}} (see signal-builder)
+- **On step complete**: {{signal_type}} emitted by {{agent_node}} (see signal-builder)
 - **On workflow complete**: {{final_signal}}
 - **On error**: {{error_signal_and_recovery}}
 ## References

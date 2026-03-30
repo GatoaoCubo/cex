@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-03-24
 updated: 2026-03-24
 author: EDISON
-satellite: ATLAS
+agent_node: operations_agent
 domain: data_quality
 quality: 9.0
 tags: [data-validation, quality-assurance, pipeline, schema-check, anomaly-detection]
@@ -18,7 +18,7 @@ when_to_use: Quando pipeline de dados precisa de validacao automatica antes de i
 # Data Validator Agent
 
 ## Overview
-data-validator e o agente de validacao de qualidade de dados do CODEXA. Atua quando dados entram ou saem de pipelines (ETL, API, scraping) e entrega relatorios de qualidade com score por dimensao e lista de violacoes acionaveis.
+data-validator e o agente de validacao de qualidade de dados do organization. Atua quando dados entram ou saem de pipelines (ETL, API, scraping) e entrega relatorios de qualidade com score por dimensao e lista de violacoes acionaveis.
 
 ## Architecture
 ```text
@@ -40,7 +40,7 @@ data-validator e o agente de validacao de qualidade de dados do CODEXA. Atua qua
 | Validar CSV/JSON antes de ingestao em banco | SIM |
 | Checar schema drift entre versoes de API | SIM |
 | Detectar anomalias em dados de scraping | SIM |
-| Validar output de outros agentes CODEXA | SIM |
+| Validar output de outros agentes organization | SIM |
 | Transformar dados (ETL) | NAO -> use builder agent |
 | Monitorar metricas de sistema (CPU, RAM) | NAO -> use monitor-agent |
 
@@ -77,7 +77,7 @@ output:
 
 ## Invocation
 ```text
-# Via STELLA dispatch
+# Via orchestrator dispatch
 /atlas "Validar dados de scraping em data/raw/products.json contra schema/products.yaml"
 
 # Via subagent direto
@@ -90,4 +90,4 @@ Agent(subagent_type="validator", prompt="Validate output of scraper against expe
 - evaluator-agent: Avalia output LLM; data-validator avalia dados estruturados
 
 ## Footer
-Satellite: ATLAS | Quality: 9.0 | Domain: data_quality
+Satellite: operations_agent | Quality: 9.0 | Domain: data_quality

@@ -5,8 +5,8 @@ title: Web Researcher Agent
 version: 1.0.0
 created: 2026-03-23
 updated: 2026-03-23
-author: EDISON
-satellite: SHAKA
+author: builder_agent
+agent_node: research_agent
 domain: research
 quality: 9.0
 tags:
@@ -29,7 +29,7 @@ when_to_use: '| Cenario | Usar? |
   | Busca em base de dados interna (pool/brain) | NAO -> use retriever-agent |
 
   | Scraping de alto volume (>1000 paginas) | NAO -> use scraper-stealth-agent |'
-overview: web-researcher e o agente de pesquisa web autonoma do CODEXA. Atua quando o usuario precisa de dados atualizados
+overview: web-researcher e o agente de pesquisa web autonoma do organization. Atua quando o usuario precisa de dados atualizados
   de fontes online e entrega relatorios estruturados com fontes verificadas e confianca por claim.
 architecture: "[Query] -> [Query Expander] -> [Multi-Source Search] -> [Scraper Router] -> [Synthesizer] -> [Report]\n   \
   \                                   |                        |\n                               [WebSearch API]         \
@@ -44,7 +44,7 @@ input_output: "input:\n  query: string        # Pergunta ou topico de pesquisa\n
   \  report: markdown     # Relatorio estruturado com findings\n  sources: list        # URLs com confianca score por fonte\n\
   \  data: json           # Dados extraidos em formato estruturado"
 integration:
-- 'Upstream: STELLA (dispatch), gateway-agent (routing), usuario direto'
+- 'Upstream: orchestrator (dispatch), gateway-agent (routing), usuario direto'
 - 'Downstream: anuncio-agent (dados de produto), pricing-agent (precos competitivos)'
 - 'Dependencies: WebSearch, WebFetch, Firecrawl MCP, Brain MCP'
 quality_gates:
@@ -56,7 +56,7 @@ common_issues:
 - Rate limiting em buscas rapidas -> backoff exponencial com jitter (2s base)
 - Sites com anti-bot (Cloudflare) -> escalar para scraper-stealth-agent
 - Dados desatualizados em cache -> forcar freshness check via timestamp validation
-invocation: '# Via STELLA dispatch
+invocation: '# Via orchestrator dispatch
 
   /research "analise competitiva de pet toys no Mercado Livre" --depth deep
 
@@ -68,4 +68,4 @@ related_agents:
 - 'scraper-marketplace-agent: Extrai dados brutos de marketplaces brasileiros'
 - 'ux-researcher-agent: Analisa reviews e sentiment de produtos'
 - 'seo-agent: Pesquisa keywords e SERP features'
-footer: 'Satellite: SHAKA | Quality: 9.0 | Domain: research'
+footer: 'Satellite: research_agent | Quality: 9.0 | Domain: research'

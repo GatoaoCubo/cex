@@ -5,7 +5,7 @@ title: 'Env: FIRECRAWL_API_KEY'
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: EDISON
+author: builder_agent
 quality: 9.0
 tags:
 - firecrawl
@@ -15,7 +15,7 @@ tags:
 tldr: Firecrawl API key for web scraping enrichment of marketplace research
 density_score: 0.88
 source:
-- 'Where defined: Railway environment variables (ATLAS satellite)'
+- 'Where defined: Railway environment variables (operations_agent agent_node)'
 - 'How to obtain: Sign up at firecrawl.dev, $19/mo tier, copy API key from dashboard'
 variable: '| Property | Value |
 
@@ -48,4 +48,4 @@ dependencies: '- Requires: `FIRECRAWL_ENABLED=true`, `FIRECRAWL_MONTHLY_BUDGET=3
 
   ---
 
-  Migrated from: CODEXA MEMORY.md (Firecrawl integration 2026-03-01)'
+  Migrated from: organization MEMORY.md (Firecrawl integration 2026-03-01)'

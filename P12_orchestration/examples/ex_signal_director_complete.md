@@ -1,26 +1,26 @@
 ---
-id: p12_sig_satellite_complete
+id: p12_sig_agent_node_complete
 kind: signal
 pillar: P12
-description: "Completion signal emitted by satellite after task execution"
-event: satellite_complete
+description: "Completion signal emitted by agent_node after task execution"
+event: agent_node_complete
 format: json
 version: 1.0.0
 created: 2026-03-24
 author: edison
 quality: 9.0
-tags: [signal, completion, satellite, orchestration]
+tags: [signal, completion, agent_node, orchestration]
 ---
 
-# Signal: satellite_complete
+# Signal: agent_node_complete
 
 ## Purpose
-Emitted by satellite after task completion. Consumed by spawn_monitor.ps1 and STELLA for wave tracking.
+Emitted by agent_node after task completion. Consumed by spawn_monitor.ps1 and orchestrator for wave tracking.
 
 ## Schema
 ```json
 {
-  "satellite": "edison",
+  "agent_node": "edison",
   "status": "complete",
   "quality_score": 9.0,
   "timestamp": "2026-03-24T20:00:00Z",
@@ -42,7 +42,7 @@ write_signal("edison", "complete", 9.0)
 # spawn_monitor.ps1 polls every 30s
 Get-ChildItem .claude/signals/*.json | ForEach-Object {
     $sig = Get-Content $_ | ConvertFrom-Json
-    if ($sig.status -eq "complete") { "Done: $($sig.satellite)" }
+    if ($sig.status -eq "complete") { "Done: $($sig.agent_node)" }
 }
 ```
 

@@ -16,7 +16,7 @@ tags: [vision-tool, confidence-threshold, providers, supported-formats, ocr, ima
 tldr: "Confidence threshold is load-bearing for data quality. Supported_formats prevents runtime surprises. Mirror capabilities in frontmatter to body. Stay under 2048 bytes."
 impact_score: 8.0
 decay_rate: 0.04
-satellite: edison
+agent_node: edison
 keywords: [vision tool, confidence threshold, supported formats, providers, capabilities, ocr, object detection]
 ---
 

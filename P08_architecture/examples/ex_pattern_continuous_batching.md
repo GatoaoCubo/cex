@@ -12,7 +12,7 @@ tags: [pattern, continuous-batching, grid, dispatch, orchestration]
 tldr: "When queue > slots: fill slots immediately as they complete instead of waiting for entire wave — 1.6x speedup on 7+ task missions"
 max_bytes: 2048
 density_score: 0.92
-source: codexa-core/records/skills/continuous_batching/SKILL.md
+source: organization-core/records/skills/continuous_batching/SKILL.md
 linked_artifacts:
   workflow: p12_wf_stella_dispatch
   spawn: p12_spawn_grid_continuous
@@ -48,14 +48,14 @@ ELSE:
     mode = static (wave)
 ```
 
-Trigger: `spawn_grid.ps1` auto-detects — STELLA does not choose manually.
+Trigger: `spawn_grid.ps1` auto-detects — orchestrator does not choose manually.
 
 ## Measured Performance
 
 | Mission | Tasks | Slots | Mode | Result |
 |---------|-------|-------|------|--------|
 | ISOFIX | 7 batches | 3 | continuous | 1.6x speedup vs static |
-| CBTEST | 8 mixed | 3 | continuous | SHAKA+EDISON+PYTHA confirmed |
+| CBTEST | 8 mixed | 3 | continuous | research_agent+builder_agent+knowledge_agent confirmed |
 
 ## When to Use
 
@@ -84,6 +84,6 @@ write_signal('pytha', 'complete', 9.0, task='cex7_batch_2')
 
 ## Constraints
 
-- Max 3 concurrent satellites (BSOD at 4 on current hardware)
+- Max 3 concurrent agent_nodes (BSOD at 4 on current hardware)
 - 5s delay between terminal spawns (RAM stability)
-- Git lock: zero contention confirmed at 3 concurrent satellites
+- Git lock: zero contention confirmed at 3 concurrent agent_nodes

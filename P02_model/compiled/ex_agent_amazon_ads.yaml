@@ -5,7 +5,7 @@ title: Amazon Ads Agent - Campaign Strategy & Optimization
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: YORK
+author: commercial_agent
 domain: advertising
 quality: 8.5
 tags:
@@ -119,4 +119,4 @@ quality_gates:
 references:
 - '`records/agents/amazon-ads-agent/README.md` (fonte original)'
 - KC_AMAZON_MARKETPLACE_MASTER.md (Sections 2, 4)
-- 'Satellite: YORK (Monetization & Commerce)'
+- 'Satellite: commercial_agent (Monetization & Commerce)'

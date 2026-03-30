@@ -12,7 +12,7 @@ quality: null
 tags: [blueprint, knowledge-card, meta-template, production-mold]
 tldr: "Meta-template que define COMO gerar KCs validos — frontmatter, body, quality gates, naming"
 when_to_use: "Antes de gerar qualquer KC — este blueprint eh o molde"
-synthesis: "Edison (builder) + Gemini (knowledge arch) + STELLA (boundary/pragmatic)"
+synthesis: "Edison (builder) + Gemini (knowledge arch) + orchestrator (boundary/pragmatic)"
 ---
 
 # Blueprint: knowledge_card
@@ -31,7 +31,7 @@ Motivo: brain search so indexa .md; LLMs geram MD melhor que YAML; frontmatter v
 ## Naming
 
 `p01_kc_{{topic_slug}}.md` — id == filename stem.
-topic_slug: snake_case, sem satellite prefix, descritivo.
+topic_slug: snake_case, sem agent_node prefix, descritivo.
 
 ## Frontmatter
 

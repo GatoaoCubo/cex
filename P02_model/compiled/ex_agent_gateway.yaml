@@ -5,7 +5,7 @@ title: Gateway Agent - Entry Point para Usuarios
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: EDISON
+author: builder_agent
 domain: orchestration
 quality: 9.0
 tags:
@@ -21,16 +21,16 @@ when_to_use: '| Cenario | Usar? | Alternativa |
 
   |---------|-------|-------------|
 
-  | Frontend chat (codexaapp.com) | SIM | - |
+  | Frontend chat (organizationapp.com) | SIM | - |
 
   | Routing de intents do usuario | SIM | - |
 
   | Onboarding e duvidas | SIM | - |
 
-  | Satellite dispatch direto | NAO | STELLA |
+  | Satellite dispatch direto | NAO | orchestrator |
 
-  | Admin/infra tasks | NAO | ATLAS |'
-when_not_to_use: Tarefas diretas de satellite (usar satellite dispatch), admin tasks
+  | Admin/infra tasks | NAO | operations_agent |'
+when_not_to_use: Tarefas diretas de agent_node (usar agent_node dispatch), admin tasks
 keywords:
 - gateway
 - router
@@ -114,7 +114,7 @@ deploy_artifacts: '| Artifact | Tokens | Purpose |
   | KNOWLEDGE_ECOMMERCE.md | ~3000 | Vector Store knowledge |
 
   | WORKFLOW_CONFIG.json | ~200 | Config n8n/Make |'
-integration: "upstream:\n  - USER: \"Input do usuario via chat\"\n  - STELLA: \"Routing interno do sistema\"\ndownstream:\n\
+integration: "upstream:\n  - USER: \"Input do usuario via chat\"\n  - orchestrator: \"Routing interno do sistema\"\ndownstream:\n\
   \  - pesquisa-agent: \"Intent 1 → pesquisa automatica\"\n  - anuncio-agent: \"Intent 2 → criacao de anuncio\"\n  - photo-agent:\
   \ \"Intent 4 → geracao de fotos\"\npipeline:\n  - combo: \"Intent 3 → pesquisa > anuncio (sequential)\""
 anti_patterns:
@@ -131,4 +131,4 @@ quality_gates:
 references:
 - '`records/agents/gateway/README.md` (fonte original)'
 - 'Deploy: OpenAI Agent Builder (gpt-4o + gpt-4o-mini router)'
-- 'Status: Production-Ready para codexaapp.com'
+- 'Status: Production-Ready para organizationapp.com'

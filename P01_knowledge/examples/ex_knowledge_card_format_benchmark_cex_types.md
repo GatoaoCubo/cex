@@ -15,7 +15,7 @@ tldr: "MD+YAML (.md) vence para 60/78 tipos CEX; YAML puro para 18 tipos machine
 when_to_use: "Antes de definir formato de qualquer novo tipo CEX ou reescrever tipo existente"
 keywords: [format_selection, token_benchmark, md_yaml, yaml_pure, brain_search_compatibility]
 source: "Benchmark empirico: 668 KCs analisados + 1102 YAMLs testados + tiktoken token count"
-code_provenance: "codexa-core/records/pool/knowledge (668 KCs) + cex/ repo (120 examples)"
+code_provenance: "organization-core/records/pool/knowledge (668 KCs) + cex/ repo (120 examples)"
 confidence: 0.95
 linked_kcs: []
 ---
@@ -30,10 +30,10 @@ linked_kcs: []
 | 2 | MD+YAML usa 204 tokens — 34% mais que MD puro mas inclui frontmatter validavel | tiktoken benchmark | 1.0 |
 | 3 | JSON compacto usa 190 tokens — menor que YAML mas sem comentarios e multiline ruim | tiktoken benchmark | 1.0 |
 | 4 | Brain search (BM25+FAISS) so indexa .md — YAML e JSON sao invisiveis | build_indexes_ollama.py linha 240: rglob("*.md") | 1.0 |
-| 5 | 11.3% dos 1102 YAMLs no codexa-core tem parse errors (67% por --- separators) | yaml.safe_load scan em records/**/*.yaml | 1.0 |
+| 5 | 11.3% dos 1102 YAMLs no organization-core tem parse errors (67% por --- separators) | yaml.safe_load scan em records/**/*.yaml | 1.0 |
 | 6 | KCs 9.5+ tem 65% code blocks e 75% tables vs 8.0 com 5% code e 34% tables | Scan de 668 KCs: quality vs features | 1.0 |
 | 7 | KCs 9.5+ tem avg 14.3 campos metadata vs 8.0 com 11.8 campos | Scan de 668 KCs frontmatter | 1.0 |
-| 8 | LLMs geram MD melhor que YAML — YAML sofre com erros de indentacao na geracao | Observacao empirica em 2964 commits codexa-core | 0.85 |
+| 8 | LLMs geram MD melhor que YAML — YAML sofre com erros de indentacao na geracao | Observacao empirica em 2964 commits organization-core | 0.85 |
 | 9 | 98.4% dos KCs nao tem campo source, 92.1% nao tem when_to_use | Scan 668 KCs: fields_absent counter | 1.0 |
 
 ## Score Ponderado (10 dimensoes, pesos por importancia CEX)

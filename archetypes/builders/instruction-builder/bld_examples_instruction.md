@@ -20,7 +20,7 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: "builder"
 title: "Rebuild Brain FAISS Index"
-target: "knowledge-engine satellite or human operator"
+target: "knowledge-engine agent_node or human operator"
 steps_count: 6
 prerequisites:
   - "Ollama running locally with nomic-embed-text model"
@@ -48,7 +48,7 @@ density_score: 0.90
 ## Steps
 1. Backup current index — `cp records/core/brain/*.faiss records/core/brain/backup/`
 2. Verify Ollama health — `ollama list | grep nomic-embed-text`
-3. Run index builder — `cd records/core/brain/mcp-codexa-brain && python build_indexes_ollama.py --scope all`
+3. Run index builder — `cd records/core/brain/mcp-organization-brain && python build_indexes_ollama.py --scope all`
 4. Wait for completion — process takes ~20 minutes, outputs progress to stdout
 5. Verify index size — `ls -la records/core/brain/*.faiss` (expect ~140MB)
 6. Test query — `python -c "from brain_search import search; print(search('test query')[:1])"`

@@ -27,7 +27,7 @@ Rule: id MUST equal filename stem.
 | Value | When to use | Example |
 |-------|-------------|---------|
 | sequential | Steps must run in order (each depends on prior) | Research -> Build -> Deploy |
-| parallel | Steps are independent, run simultaneously | 3 satellites researching different topics |
+| parallel | Steps are independent, run simultaneously | 3 agent_nodes researching different topics |
 | mixed | Some steps parallel, some sequential (wave pattern) | Wave 1: [A, B] parallel, then Wave 2: C |
 ## Retry Policy Enum
 | Value | When to use | Example |
@@ -36,7 +36,7 @@ Rule: id MUST equal filename stem.
 | per_step | Failed step retried individually (max 1) | API calls, transient errors |
 | global | Entire workflow retried from start | Idempotent missions |
 ## Step Structure Requirements
-- Agent: satellite name (lowercase) or "stella" for orchestrator steps
+- Agent: agent_node name (lowercase) or "stella" for orchestrator steps
 - Action: 1-sentence description of what the step does
 - Input: what the step receives (from prior step or external)
 - Output: what the step produces (for next step or final output)

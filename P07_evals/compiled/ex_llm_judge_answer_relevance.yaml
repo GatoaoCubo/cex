@@ -60,9 +60,9 @@ citation_accuracy_1_5: 'Are claims properly attributed to retrieved sources?
 
   - 1: No citations or all citations are incorrect'
 few_shot_calibration_examples: ''
-example_1_high_score_5_5_5: "question: \"What is the default rotation policy for API keys in CODEXA?\"\ncontext: \"KC_CONFIG_003:\
+example_1_high_score_5_5_5: "question: \"What is the default rotation policy for API keys in organization?\"\ncontext: \"KC_CONFIG_003:\
   \ API keys rotate every 90 days via Vault. AES-256 encryption at rest. Audit log enabled.\"\nanswer: \"The default rotation\
-  \ policy for API keys in CODEXA is 90 days, managed through Vault with AES-256 encryption at rest and audit logging enabled\
+  \ policy for API keys in organization is 90 days, managed through Vault with AES-256 encryption at rest and audit logging enabled\
   \ [KC_CONFIG_003].\"\nscores:\n  relevance: 5       # Directly answers the question\n  completeness: 5    # Covers rotation,\
   \ encryption, audit\n  citation_accuracy: 5  # Correct source attribution"
 example_2_medium_score_3_2_3: "question: \"How does BM25 handle synonym matching?\"\ncontext: \"KC_BM25_001: BM25 is keyword-based,\

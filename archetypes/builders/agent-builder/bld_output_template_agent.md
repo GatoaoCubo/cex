@@ -17,7 +17,7 @@ version: "1.0.0"
 created: "{{YYYY-MM-DD}}"
 updated: "{{YYYY-MM-DD}}"
 author: "{{who_produced}}"
-satellite: "{{satellite_name_or_agnostic}}"
+agent_node: "{{agent_node_name_or_agnostic}}"
 domain: "{{primary_domain}}"
 llm_function: BECOME
 capabilities_count: {{integer_matching_body}}
@@ -25,7 +25,7 @@ tools_count: {{integer_matching_body}}
 iso_files_count: {{integer_10_or_more}}
 routing_keywords: [{{keyword_1}}, {{keyword_2}}, {{keyword_3}}, {{keyword_4}}]
 quality: null
-tags: [agent, {{domain}}, {{satellite}}, {{pillar_tag}}]
+tags: [agent, {{domain}}, {{agent_node}}, {{pillar_tag}}]
 tldr: "{{dense_summary_max_160ch}}"
 density_score: {{0.80_to_1.00}}
 linked_artifacts:
@@ -33,7 +33,7 @@ linked_artifacts:
   related: [{{related_artifact_refs}}]
 ```
 ## Overview
-{{agent_name}} is a {{satellite}} specialist in {{domain}}.
+{{agent_name}} is a {{agent_node}} specialist in {{domain}}.
 {{two_sentences_primary_function_and_value}}
 ## Capabilities
 - {{capability_1}}
@@ -46,7 +46,7 @@ linked_artifacts:
 | 1 | {{tool_1}} | {{tool_purpose_1}} |
 | 2 | {{tool_2}} | {{tool_purpose_2}} |
 ## Satellite Position
-- Satellite: {{satellite_name}}
+- Satellite: {{agent_node_name}}
 - Peers: {{peer_agent_1}}, {{peer_agent_2}}
 - Upstream: {{upstream_agent_or_none}}
 - Downstream: {{downstream_agent_or_none}}
@@ -80,6 +80,6 @@ agents/{{agent_slug}}/
 HARD gates: YAML parses, id matches p02_agent_ pattern, kind == agent, quality == null,
 required fields present, iso_vectorstore >= 10 files, llm_function == BECOME.
 SOFT gates: tldr <= 160ch, tags >= 3, capabilities_count matches body,
-density >= 0.80, satellite assigned, domain specific.
+density >= 0.80, agent_node assigned, domain specific.
 ## Footer
 version: {{version}} | author: {{author}} | quality: null

@@ -9,7 +9,7 @@ pattern: few-shot learning — LLM reads these before producing
 
 # Examples: learning-record-builder
 ## Golden Example
-INPUT: "Document the learning from continuous batching achieving 1.6x speedup with 3 satellites"
+INPUT: "Document the learning from continuous batching achieving 1.6x speedup with 3 agent_nodes"
 OUTPUT:
 ```yaml
 id: p10_lr_continuous_batching_speedup
@@ -21,15 +21,15 @@ updated: "2026-03-05"
 author: "builder"
 domain: "orchestration"
 quality: null
-tags: [learning, continuous-batching, speedup, orchestration, multi-satellite]
+tags: [learning, continuous-batching, speedup, orchestration, multi-agent_node]
 tldr: "Continuous batching with 3 sats achieved 1.6x speedup; task complexity drives speed, not model tier"
-topic: "Continuous batching multi-satellite performance"
+topic: "Continuous batching multi-agent_node performance"
 outcome: SUCCESS
 score: 9.0
 context: "ISOFIX mission, 7 batches across researcher+builder+knowledge-engine, 2026-03-05"
-satellite: "orchestrator"
+agent_node: "orchestrator"
 reproducibility: HIGH
-impact: "1.6x throughput increase, zero git lock contention at 3 satellites"
+impact: "1.6x throughput increase, zero git lock contention at 3 agent_nodes"
 timestamp: "2026-03-05T14:30:00Z"
 dependencies: []
 keywords: [batching, parallel, throughput, spawn, grid]
@@ -38,14 +38,14 @@ linked_artifacts:
   related: [p12_spawn_grid, p08_pat_continuous_batching]
 ```
 ## Summary
-Continuous batching with 3 satellites (researcher+builder+knowledge-engine) achieved 1.6x speedup over sequential execution. Speed was driven by task complexity, not model tier — opus finished faster than sonnet on simpler tasks. Zero git lock contention observed.
+Continuous batching with 3 agent_nodes (researcher+builder+knowledge-engine) achieved 1.6x speedup over sequential execution. Speed was driven by task complexity, not model tier — opus finished faster than sonnet on simpler tasks. Zero git lock contention observed.
 ## Pattern
 - Use spawn_grid.ps1 with -mode continuous for >6 tasks
 - Name handoffs as {MISSION}_batch_{N}_{DOMAIN}.md for queue management
-- Limit to 3 concurrent satellites (RAM ceiling at 4+)
-- Let queue auto-refill slots as satellites complete
+- Limit to 3 concurrent agent_nodes (RAM ceiling at 4+)
+- Let queue auto-refill slots as agent_nodes complete
 ## Anti-Pattern
-- Running >3 satellites causes BSOD risk (RAM exhaustion)
+- Running >3 agent_nodes causes BSOD risk (RAM exhaustion)
 - Assuming opus is slower than sonnet — speed depends on task, not model
 - Manual slot management instead of auto-refill wastes idle time
 ## Context
@@ -54,11 +54,11 @@ Continuous batching with 3 satellites (researcher+builder+knowledge-engine) achi
 - Timing: 2026-03-05, ISOFIX mission, 7 sequential batches
 - Constraints: max 3 terminals (BSOD prevention), 5s spawn delay
 ## Impact
-- 1.6x throughput vs sequential single-satellite execution
+- 1.6x throughput vs sequential single-agent_node execution
 - Zero git lock contention across 3 concurrent committers
 - Queue auto-refill eliminated idle time between waves
 ## Reproducibility
-- Conditions: 3 satellites, >6 tasks, independent work units
+- Conditions: 3 agent_nodes, >6 tasks, independent work units
 - Confidence: HIGH (tested on ISOFIX 7/7 and CBTEST mixed)
 - Caveats: tasks must be independent; shared file edits cause conflicts
 ## References

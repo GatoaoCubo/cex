@@ -1,8 +1,8 @@
 ---
-id: p02_iso_codexa_agent
+id: p02_iso_organization_agent
 kind: iso_package
 pillar: P02
-agent_name: codexa
+agent_name: organization
 tier: complete
 files_count: 12
 quality_gates:
@@ -17,7 +17,7 @@ quality: 9.5
 tags: [iso-package, portable, agent-bundle, llm-agnostic]
 ---
 
-# ISO Package: codexa
+# ISO Package: organization
 
 ## Required Files
 | File | LP | Purpose |
@@ -77,4 +77,4 @@ upload_kit           -> P04 Tools (deployment)
 
 Key insight: ISO packages are **LLM-agnostic**. Same package works with Claude, GPT, Gemini, Llama. The system_instruction adapts to provider capabilities but core identity is constant.
 
-Source: `records/agents/codexa/` (12 files, tier complete)
+Source: `records/agents/organization/` (12 files, tier complete)

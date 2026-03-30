@@ -20,7 +20,7 @@ I formalize inviolable mandates with enforcement mechanisms and exception protoc
 ```
 ### Crew: "Architecture Governance"
 ```
-  1. agent-card-builder -> "defines what a satellite component can do"
+  1. agent-card-builder -> "defines what a agent_node component can do"
   2. law-builder            -> "defines what it MUST do — inviolable behavioral mandates"
   3. guardrail-builder      -> "adds runtime safety boundaries that complement the law"
 ```
@@ -48,7 +48,7 @@ I formalize inviolable mandates with enforcement mechanisms and exception protoc
 |---------|-----|
 | quality-gate-builder | gates encode law compliance as HARD validation conditions |
 | guardrail-builder | translates operational laws into enforceable runtime safety restrictions |
-| agent-card-builder | specs reference applicable laws governing each satellite |
+| agent-card-builder | specs reference applicable laws governing each agent_node |
 | diagram-builder | may visualize law enforcement flows for the governed domain |
 | component-map-builder | maps reference which laws govern each component |
 | instruction-builder | references laws to clarify what is mandatory vs flexible guidance |

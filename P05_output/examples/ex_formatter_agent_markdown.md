@@ -13,7 +13,7 @@ tags: [formatter, markdown, agent, output]
 tldr: "Canonical markdown formatter for agent responses — structured sections, tables, code blocks, quality score footer"
 max_bytes: 4096
 density_score: 0.88
-source: codexa-core/records/agents/*/iso_vectorstore/ISO_*_OUTPUT_TEMPLATE.md
+source: organization-core/records/agents/*/iso_vectorstore/ISO_*_OUTPUT_TEMPLATE.md
 linked_artifacts:
   schema: p06_is_quality_audit
 ---
@@ -22,7 +22,7 @@ linked_artifacts:
 
 ## Purpose
 
-Defines how CODEXA agents format their markdown output. All ISO OUTPUT_TEMPLATE files follow this formatter. Ensures human-readable + machine-parseable outputs with consistent structure.
+Defines how organization agents format their markdown output. All ISO OUTPUT_TEMPLATE files follow this formatter. Ensures human-readable + machine-parseable outputs with consistent structure.
 
 ## Structure
 

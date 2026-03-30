@@ -15,13 +15,13 @@ tags: [scraper, github, awesome-list, curation]
 ## Target
 - Source: GitHub awesome-lists (curated link collections)
 - Data wanted: tool name, URL, description, stars, category
-- Cadence: on_demand (via SHAKA research pipeline)
+- Cadence: on_demand (via research_agent research pipeline)
 
 ## Extraction Plan
 1. Discover awesome-lists via GitHub search API (topic + min_stars)
 2. Parse README.md (## headers = categories, - links = entries)
 3. Enrich with GitHub API metadata (stars, language, last_updated)
-4. Classify into CODEXA domains and quality tiers
+4. Classify into organization domains and quality tiers
 
 ## Output
 ```yaml
@@ -31,7 +31,7 @@ items:
     description: "Building LLM apps"
     stars: 82000
     category: "frameworks"
-    codexa_domain: "build"
+    organization_domain: "build"
     tier: "gold"
 ```
 

@@ -26,5 +26,5 @@ keywords: [handoff, delegation, dispatch, task, context, scope_fence, commit]
 triggers: "delega tarefa para satelite", "cria instrucao de handoff", "prepara execucao remota"
 ## Crew Role
 In a crew, I handle TASK DELEGATION PACKAGING.
-I answer: "what should the satellite do, with what context, and how should it commit?"
+I answer: "what should the agent_node do, with what context, and how should it commit?"
 I do NOT handle: status reporting, dependency graphs, routing policy, execution runtime.

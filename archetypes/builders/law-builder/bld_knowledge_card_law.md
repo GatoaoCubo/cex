@@ -24,7 +24,7 @@ Laws are inviolable operational rules — the highest-authority governance artif
 | Quality field | always `null` — self-scoring prohibited (H05) |
 | Statement mood | imperative: MUST / SHALL / NEVER / ALWAYS |
 | Number | positive integer, unique + sequential across all P08 laws |
-| Scope values | `system`, `satellite`, `domain` |
+| Scope values | `system`, `agent_node`, `domain` |
 | Priority range | 1–10 (10 = highest; resolves law conflicts) |
 | Quality gates | 9 HARD + 10 SOFT |
 ## Patterns
@@ -56,7 +56,7 @@ Laws are inviolable operational rules — the highest-authority governance artif
 4. Write `rationale`: WHY this law exists — must not restate the statement
 5. Name the exact `enforcement` mechanism (hook name, gate ID, validator, CI step)
 6. Set `exceptions`: explicit list of conditions, or `[]` if none apply
-7. Set `scope` (system / satellite / domain) and `priority` (1–10)
+7. Set `scope` (system / agent_node / domain) and `priority` (1–10)
 8. Write all 8 body sections: Statement, Rationale, Enforcement, Exceptions, Examples, Violations, History, References
 9. Validate: H02 id pattern, H04 kind literal, H05 null quality, H08 unique number, H09 imperative mood — plus 10 SOFT gates
 ## References

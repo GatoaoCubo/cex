@@ -15,14 +15,14 @@ tags: [parser, brain, search-results, extraction]
 # Parser: brain_query Results
 
 ## Purpose
-Extracts ranked knowledge chunks from raw brain_query MCP tool output. Converts JSON response with scores and metadata into structured markdown sections for satellite consumption.
+Extracts ranked knowledge chunks from raw brain_query MCP tool output. Converts JSON response with scores and metadata into structured markdown sections for agent_node consumption.
 
 ## Input
 ```json
 {
   "results": [
-    {"text": "chunk content...", "score": 0.87, "source": "KC_PYTHA_069.md", "section": "Strategy"},
-    {"text": "another chunk...", "score": 0.72, "source": "KC_EDISON_029.md", "section": "Patterns"}
+    {"text": "chunk content...", "score": 0.87, "source": "KC_knowledge_agent_069.md", "section": "Strategy"},
+    {"text": "another chunk...", "score": 0.72, "source": "KC_builder_agent_029.md", "section": "Patterns"}
   ],
   "query": "agent orchestration patterns",
   "method": "hybrid"
@@ -39,11 +39,11 @@ Extracts ranked knowledge chunks from raw brain_query MCP tool output. Converts 
 ```markdown
 ## brain_query: "agent orchestration patterns" (2 results)
 
-### KC_PYTHA_069.md (score: 0.87)
+### KC_knowledge_agent_069.md (score: 0.87)
 **Section**: Strategy
 > chunk content...
 
-### KC_EDISON_029.md (score: 0.72)
+### KC_builder_agent_029.md (score: 0.72)
 **Section**: Patterns
 > another chunk...
 ```

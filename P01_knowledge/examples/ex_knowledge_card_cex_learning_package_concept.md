@@ -10,7 +10,7 @@ author: EDISON
 domain: cex_taxonomy
 quality: null
 tags: [cex, learning-package, dimensions, lp, entity-model]
-tldr: "12 LPs sao dimensoes (nao categorias) que definem qualquer entidade LLM -- de prompt (1 LP) a satellite (12 LPs)"
+tldr: "12 LPs sao dimensoes (nao categorias) que definem qualquer entidade LLM -- de prompt (1 LP) a agent_node (12 LPs)"
 when_to_use: "Entender as 12 dimensoes de uma entidade LLM e como LPs se cruzam com funcoes"
 keywords: [learning-package, dimensions, entity, orthogonality, completeness]
 long_tails:
@@ -28,7 +28,7 @@ data_source: "https://arxiv.org/abs/2308.00352"
 
 ## Summary
 
-Learning Packages (LPs) sao as 12 dimensoes que definem qualquer entidade LLM. Nao sao categorias de artefatos -- sao PERGUNTAS. P01 pergunta "o que sabe?", P02 "quem e?", P03 "como fala?". Um prompt preenche 1 LP (P03). Um agente preenche 3-4. Um satellite preenche todos os 12. A diferenca entre entidades eh dimensionalidade, nao natureza. LPs sao ortogonais as funcoes: LP = o que a entidade TEM, funcao = o que o LLM FAZ.
+Learning Packages (LPs) sao as 12 dimensoes que definem qualquer entidade LLM. Nao sao categorias de artefatos -- sao PERGUNTAS. P01 pergunta "o que sabe?", P02 "quem e?", P03 "como fala?". Um prompt preenche 1 LP (P03). Um agente preenche 3-4. Um agent_node preenche todos os 12. A diferenca entre entidades eh dimensionalidade, nao natureza. LPs sao ortogonais as funcoes: LP = o que a entidade TEM, funcao = o que o LLM FAZ.
 
 ## Spec
 
@@ -67,11 +67,11 @@ ENTITY_LPS = {
     "prompt":    {"P03": True},                    # 1 LP
     "agent":     {"P02": True, "P03": True,
                   "P04": True, "P10": True},       # 4 LPs
-    "satellite": {f"P{i:02d}": True
+    "agent_node": {f"P{i:02d}": True
                   for i in range(1, 13)},          # 12 LPs
 }
 # completude = len(filled_lps) / 12
-# prompt = 8%, agente = 33%, satellite = 100%
+# prompt = 8%, agente = 33%, agent_node = 100%
 ```
 
 ## Anti-Patterns

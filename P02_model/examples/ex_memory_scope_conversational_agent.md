@@ -33,7 +33,7 @@ Define o escopo de memoria para um agente conversacional multi-turn (ex: mentor-
 | summary_trigger | buffer > 10 msgs | Quando buffer excede 10, msgs antigas sao sumarizadas |
 | summary_model | haiku | Sumarizacao e tarefa simples, haiku e suficiente e 10x mais barato |
 | summary_max_tokens | 500 | Resumo compacto, nao transcript |
-| entity_types | [person, product, date, price, marketplace, agent] | Tipos relevantes para e-commerce CODEXA |
+| entity_types | [person, product, date, price, marketplace, agent] | Tipos relevantes para e-commerce organization |
 | entity_max | 20 | Top 20 entidades por recencia + frequencia |
 | backend | Redis | Sub-ms latency, TTL nativo, pub/sub para multi-instance |
 | redis_url | redis://localhost:6379/0 | Instancia local para dev; Railway Redis para prod |
@@ -118,10 +118,10 @@ def assemble_context(buffer, summary, entities):
 
 ## Redis Key Schema
 ```
-codexa:memory:{session_id}:messages     -> List<JSON>   (buffer)
-codexa:memory:{session_id}:summary      -> String       (summary text)
-codexa:memory:{session_id}:entities     -> Hash          (entity_name -> description)
-codexa:memory:{session_id}:metadata     -> Hash          (created_at, last_active, msg_count)
+organization:memory:{session_id}:messages     -> List<JSON>   (buffer)
+organization:memory:{session_id}:summary      -> String       (summary text)
+organization:memory:{session_id}:entities     -> Hash          (entity_name -> description)
+organization:memory:{session_id}:metadata     -> Hash          (created_at, last_active, msg_count)
 ```
 
 ## Lifecycle
@@ -135,10 +135,10 @@ codexa:memory:{session_id}:metadata     -> Hash          (created_at, last_activ
 
 ## When NOT to Use
 - Stateless single-turn agents (ex: formatter, parser) — sem necessidade de memoria
-- Long-term cross-session memory — usar Mem0 ou CODEXA learning memory
+- Long-term cross-session memory — usar Mem0 ou organization learning memory
 - Shared memory between agents — usar session_state (P10) com pub/sub
 
 ## Related
 - `ex_agent_gateway.md` — Gateway agent que usa este memory scope
 - `ex_boot_config_edison_claude.md` — Boot config (memoria e efemera por sessao de satelite)
-- `records/core/learning/memory/` — CODEXA long-term memory (diferente de session memory)
+- `records/core/learning/memory/` — organization long-term memory (diferente de session memory)

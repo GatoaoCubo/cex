@@ -126,6 +126,6 @@ format: '# Competitor Analysis: {{competitor_name}}
 answer_extract: A resposta final (apos "## Final Answer") deve ser autonoma — legivel sem os estagios de raciocinio. O trace
   existe para auditoria e debug, nao para o consumidor final da analise.
 research_base:
-- 'Metacognitive 5-stage CoT: +26.9% task performance (KC_EDISON_024)'
+- 'Metacognitive 5-stage CoT: +26.9% task performance (KC_builder_agent_024)'
 - Separar reasoning de answer_extract previne "reasoning leak" na resposta final
 - XML tags permitem parsing automatico dos estagios

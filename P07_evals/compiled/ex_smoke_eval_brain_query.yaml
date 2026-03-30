@@ -5,7 +5,7 @@ title: 'Smoke Eval: Brain MCP Query'
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: PYTHA
+author: knowledge_agent
 quality: 9.0
 tags:
 - smoke
@@ -16,25 +16,25 @@ tags:
 tldr: 30-second sanity check for brain MCP — verify BM25+FAISS hybrid search returns relevant results within 3s
 max_bytes: 1024
 density_score: 0.88
-source: codexa-core/CLAUDE.md (BRAIN SEARCH section) + records/core/brain/mcp-codexa-brain/
+source: organization-core/CLAUDE.md (BRAIN SEARCH section) + records/core/brain/mcp-organization-brain/
 linked_artifacts: null
-purpose: Quick sanity check to verify brain MCP is operational. Run after FAISS index rebuild or satellite boot to confirm
+purpose: Quick sanity check to verify brain MCP is operational. Run after FAISS index rebuild or agent_node boot to confirm
   hybrid search returns relevant results before executing knowledge-intensive tasks.
 runtime: < 30 seconds
 checks: '| Check | Input | Expected | Fail Condition |
 
   |-------|-------|----------|----------------|
 
-  | BM25 fallback | `brain_query("spawn satellite")` | >= 3 results | 0 results |
+  | BM25 fallback | `brain_query("spawn agent_node")` | >= 3 results | 0 results |
 
   | FAISS semantic | `brain_query("agent for web scraping")` | web_scraper in top 5 | wrong agent returned |
 
   | Hybrid accuracy | `brain_query("skill for continuous batching")` | continuous_batching in top 3 | missing entirely |
 
   | Response time | any query | < 3s | > 10s (Ollama timeout) |'
-execution: '# Run in PYTHA/STELLA terminal
+execution: '# Run in knowledge_agent/orchestrator terminal
 
-  from mcp_codexa_brain import brain_query
+  from mcp_organization_brain import brain_query
 
 
   result = brain_query("agent for web scraping")

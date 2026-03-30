@@ -1,11 +1,11 @@
-id: p10_bi_codexa_brain
+id: p10_bi_organization_brain
 kind: brain_index
 pillar: P10
-title: 'Brain Index: CODEXA Knowledge Base'
+title: 'Brain Index: organization Knowledge Base'
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: PYTHA
+author: knowledge_agent
 quality: 9.0
 tags:
 - brain
@@ -14,13 +14,13 @@ tags:
 - faiss
 - search
 - memory
-tldr: 'Hybrid search index: BM25 (keyword, ~50% accuracy) + FAISS/Ollama (semantic, ~88% accuracy) over 9916 MD files in codexa-core'
+tldr: 'Hybrid search index: BM25 (keyword, ~50% accuracy) + FAISS/Ollama (semantic, ~88% accuracy) over 9916 MD files in organization-core'
 max_bytes: 1024
 density_score: 0.89
-source: codexa-core/CLAUDE.md (BRAIN SEARCH) + records/core/brain/mcp-codexa-brain/
+source: organization-core/CLAUDE.md (BRAIN SEARCH) + records/core/brain/mcp-organization-brain/
 linked_artifacts:
   smoke_eval: p07_se_brain_query
-configuration: "brain_index:\n  name: codexa_knowledge_base\n  version: current\n  location: records/core/brain/mcp-codexa-brain/\n\
+configuration: "brain_index:\n  name: organization_knowledge_base\n  version: current\n  location: records/core/brain/mcp-organization-brain/\n\
   \n  corpus:\n    total_files: ~9916\n    primary: records/pool/knowledge/  # KCs\n    secondary: records/agents/*/iso_vectorstore/\n\
   \    tertiary: records/skills/*/SKILL.md\n\n  search_backends:\n    bm25:\n      type: keyword\n      accuracy: ~50%\n \
   \     fallback: true  # activates when Ollama down\n      rebuild_time: < 1min\n\n    faiss:\n      type: semantic\n   \
@@ -43,7 +43,7 @@ rebuild_protocol: '# Check if rebuild needed (stale > 24h):
 
   # Rebuild full index:
 
-  cd records/core/brain/mcp-codexa-brain
+  cd records/core/brain/mcp-organization-brain
 
   python build_indexes_ollama.py --scope all
 
@@ -57,6 +57,6 @@ scope_mapping: '| Query Pattern | Best Backend | Example |
 
   | `"agent for X"` | FAISS (semantic) | `"agent for security scanning"` |
 
-  | `"KC_PYTHA_*"` | BM25 (keyword) | `"KC_PYTHA_088"` |
+  | `"KC_knowledge_agent_*"` | BM25 (keyword) | `"KC_knowledge_agent_088"` |
 
   | `"skill for X"` | FAISS | `"skill for continuous batching"` |'

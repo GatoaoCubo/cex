@@ -16,7 +16,7 @@ tags: [guardrail, security, enforcement, severity, bypass_policy, concrete_rules
 tldr: "Rules must be concrete and matchable; enforcement must match severity; every guardrail needs a bypass policy."
 impact_score: 7.5
 decay_rate: 0.05
-satellite: edison
+agent_node: edison
 keywords: [guardrail, severity, enforcement, block, warn, log, bypass_policy, concrete_rule, safety, access_control]
 ---
 

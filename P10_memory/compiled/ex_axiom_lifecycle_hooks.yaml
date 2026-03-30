@@ -5,7 +5,7 @@ title: 'Axiom: Memory Lifecycle Hooks (5-Hook Chain)'
 version: 1.0.0
 created: 2026-03-24
 updated: 2026-03-24
-author: EDISON
+author: builder_agent
 quality: 9.0
 tags:
 - axiom
@@ -17,7 +17,7 @@ tldr: '5-hook lifecycle chain: Setup > SessionStart > UserPromptSubmit > PostToo
   daemon owns persistence.'
 max_bytes: 3072
 density_score: 0.92
-source: codexa-core/records/core/memory/hooks/ (5 hook implementations)
+source: organization-core/records/core/memory/hooks/ (5 hook implementations)
 linked_artifacts:
   template: tpl_axiom_lifecycle_hooks
 statement: '> Memory capture follows a strict 5-hook lifecycle. Each hook has a single responsibility and communicates via

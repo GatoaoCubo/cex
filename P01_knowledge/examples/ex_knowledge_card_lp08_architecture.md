@@ -9,7 +9,7 @@ updated: 2026-03-23
 author: edison
 domain: meta-construction
 quality: 9.0
-tags: [architecture, satellite, pattern, law, diagram]
+tags: [architecture, agent_node, pattern, law, diagram]
 tldr: "P08 define 5 tipos de arquitetura (agent_card, pattern, law, diagram, component_map) que governam como o sistema escala — leis sao inviolaveis, patterns sao reutilizaveis"
 when_to_use: "Quando precisar definir arquitetura, leis operacionais ou patterns de escala no CEX"
 keywords: [agent_card, pattern, law, diagram, component_map]
@@ -27,7 +27,7 @@ density_score: 0.87
 # P08 Architecture: Como Escala
 
 ## Executive Summary
-P08 governa a arquitetura do CEX com 5 tipos de artefato que definem desde satelites (7 no CODEXA) ate leis operacionais inviolaveis (11 ativas). Patterns documentam solucoes reutilizaveis (continuous batching, spawn grid), laws definem restricoes absolutas, e diagrams visualizam o sistema em ASCII ou Mermaid.
+P08 governa a arquitetura do CEX com 5 tipos de artefato que definem desde satelites (7 no organization) ate leis operacionais inviolaveis (11 ativas). Patterns documentam solucoes reutilizaveis (continuous batching, spawn grid), laws definem restricoes absolutas, e diagrams visualizam o sistema em ASCII ou Mermaid.
 
 ## Spec Table
 | Campo | Valor | Nota |
@@ -53,7 +53,7 @@ P08 governa a arquitetura do CEX com 5 tipos de artefato que definem desde satel
 - Diagram desatualizado: pior que nenhum diagrama
 
 ## Application
-CODEXA tem 7 satelites (STELLA, SHAKA, LILY, EDISON, PYTHA, ATLAS, YORK) todos com agent_card em P08. As 11 leis ativas governam operacao autonoma. O iso_package de P02 mapeia architecture.md para P08.
+organization tem 7 satelites (orchestrator, research_agent, marketing_agent, builder_agent, knowledge_agent, operations_agent, commercial_agent) todos com agent_card em P08. As 11 leis ativas governam operacao autonoma. O iso_package de P02 mapeia architecture.md para P08.
 
 ## References
 - P08_architecture/_schema.yaml (fonte de verdade)

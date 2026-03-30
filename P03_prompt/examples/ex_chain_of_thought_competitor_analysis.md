@@ -15,7 +15,7 @@ Analisar um concorrente direto no marketplace e recomendar estrategia de diferen
 ## Reasoning Cue
 Antes de responder, passe por EXATAMENTE 5 estagios de raciocinio. Cada estagio deve ser explicito e rotulado. NAO pule estagios. NAO combine estagios. O raciocinio deve ser visivel para auditoria.
 
-### Metacognitive 5-Stage Protocol (KC_EDISON_024)
+### Metacognitive 5-Stage Protocol (KC_builder_agent_024)
 
 **Stage 1 — UNDERSTAND**: Decomponha o problema
 ```text
@@ -99,6 +99,6 @@ Score: [0.0-1.0] | Premissa mais fragil: [qual]
 A resposta final (apos "## Final Answer") deve ser autonoma — legivel sem os estagios de raciocinio. O trace existe para auditoria e debug, nao para o consumidor final da analise.
 
 ## Research Base
-- Metacognitive 5-stage CoT: +26.9% task performance (KC_EDISON_024)
+- Metacognitive 5-stage CoT: +26.9% task performance (KC_builder_agent_024)
 - Separar reasoning de answer_extract previne "reasoning leak" na resposta final
 - XML tags permitem parsing automatico dos estagios

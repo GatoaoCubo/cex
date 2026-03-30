@@ -105,8 +105,8 @@ output:
 | Pesquisar concorrentes | SIM |
 | Analisar mercado BR | SIM |
 | Vocabulario de industria | SIM |
-| Criar conteudo marketing | NAO > use LILY |
-| Deploy de infra | NAO > use ATLAS |
+| Criar conteudo marketing | NAO > use marketing_agent |
+| Deploy de infra | NAO > use operations_agent |
 
 ## Capabilities
 - Web scraping via Firecrawl MCP
@@ -115,16 +115,16 @@ output:
 - Competitor mapping (features, pricing, gaps)
 
 ## Integration
-- Upstream: STELLA (routing) | USER (task)
-- Downstream: PYTHA (indexar KCs) | LILY (usar dados em copy)
+- Upstream: orchestrator (routing) | USER (task)
+- Downstream: knowledge_agent (indexar KCs) | marketing_agent (usar dados em copy)
 
 ## When NOT to Use
 
 | Cenario | Por que NAO | Use em vez |
 |---------|-------------|------------|
-| Gerar copy/anuncio de marketing | Pesquisa coleta dados, nao cria conteudo | LILY (mlabs-content-agent, anuncio-agent) |
-| Deploy, infra, database ops | Fora do dominio research | ATLAS (gateway-agent) |
-| Indexar/catalogar conhecimento existente | Pesquisa descobre, nao organiza | PYTHA (indexer-agent, mentor-agent) |
+| Gerar copy/anuncio de marketing | Pesquisa coleta dados, nao cria conteudo | marketing_agent (mlabs-content-agent, anuncio-agent) |
+| Deploy, infra, database ops | Fora do dominio research | operations_agent (gateway-agent) |
+| Indexar/catalogar conhecimento existente | Pesquisa descobre, nao organiza | knowledge_agent (indexer-agent, mentor-agent) |
 
 ## Common Issues
 

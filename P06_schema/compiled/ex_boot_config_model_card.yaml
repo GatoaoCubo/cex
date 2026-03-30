@@ -6,7 +6,7 @@ title: 'Blueprint: model_card — Meta-Template para Producao de Model Cards'
 version: 1.0.0
 created: 2026-03-26
 updated: 2026-03-26
-author: EDISON
+author: builder_agent
 quality: null
 tags:
 - blueprint
@@ -17,8 +17,8 @@ tags:
 tldr: Meta-template que define COMO gerar model_cards validos — frontmatter layered, capabilities como booleans, pricing normalizado,
   freshness 90d
 when_to_use: Antes de gerar qualquer model_card — este blueprint eh o molde
-synthesis: SHAKA (standards survey, 12 standards) + PYTHA-GEMINI (10-provider comparative) + ATLAS-CODEX (code patterns, 7
-  frameworks) + EDISON (CEX analysis + boundary + quality gates)
+synthesis: research_agent (standards survey, 12 standards) + knowledge_agent-GEMINI (10-provider comparative) + operations_agent-CODEX (code patterns, 7
+  frameworks) + builder_agent (CEX analysis + boundary + quality gates)
 boundary: 'model_card eh especificacao tecnica de um LLM: capacidades, custos, limites, status. model_card NAO eh: boot_config
   (inicializacao), agent (identidade), persona (estilo), router (roteamento), benchmark (avaliacao). Se responde "o que este
   LLM PODE fazer e quanto CUSTA?" → model_card. Se responde "como INICIALIZAR este LLM?" → boot_config (P02). Se responde
@@ -44,7 +44,7 @@ naming: '`p02_mc_{{provider}}_{{model_slug}}.md` — id == filename stem.
   - `p02_mc_google_gemini_2_5_pro.md`
 
   - `p02_mc_meta_llama_3_1_405b.md`'
-frontmatter: "Schema layered: Identity > Model Spec > Capabilities > Economics > Search.\nSource: ATLAS-CODEX recomenda 4\
+frontmatter: "Schema layered: Identity > Model Spec > Capabilities > Economics > Search.\nSource: operations_agent-CODEX recomenda 4\
   \ blocos separados; este frontmatter achata em YAML mas preserva a separacao logica via comentarios.\n\n---\n# CEX IDENTITY\
   \ (7) — REQUIRED — padrao CEX, mesmo de KC\nid: p02_mc_{{provider}}_{{model_slug}}  # == filename stem\nkind: model_card\n\
   pillar: P02\nversion: \"{{semver}}\"\ncreated: \"{{YYYY-MM-DD}}\"\nupdated: \"{{YYYY-MM-DD}}\"\nauthor: \"{{quem PRODUZIU}}\"\
@@ -55,7 +55,7 @@ frontmatter: "Schema layered: Identity > Model Spec > Capabilities > Economics >
   \  # HF pipeline_tag\nstatus: \"{{active|deprecated|sunset}}\"           # CEX-extension: lifecycle tracking (justified\
   \ by 90d freshness)\nrelease_date: \"{{YYYY-MM-DD or null}}\"           # HF, Meta, Google DeepMind (8/10 providers)\nknowledge_cutoff:\
   \ \"{{YYYY-MM or null}}\"          # Mitchell (training_data), 6/10 providers\n\n# CAPABILITIES (5) — REQUIRED\n# Sources:\
-  \ LiteLLM (supports_* booleans), Anthropic SDK (ModelCapabilities),\n#          LangChain (ModelProfile), PYTHA-GEMINI comparative\
+  \ LiteLLM (supports_* booleans), Anthropic SDK (ModelCapabilities),\n#          LangChain (ModelProfile), knowledge_agent-GEMINI comparative\
   \ (10 providers)\ncontext_window: {{int}}                          # max input tokens — universal (10/10 providers)\nmax_output:\
   \ {{int}}                              # max output tokens — 7/10 providers\nmodalities:\n  text_input: {{bool}}\n  text_output:\
   \ {{bool}}\n  image_input: {{bool}}                          # vision — 5/10 providers\n  audio_input: {{bool}}        \
@@ -194,7 +194,7 @@ quality_gates_automatizaveis: "structural:\n  - id starts with \"p02_mc_\"\n  - 
   \  - References >= 1 source link\n\naccuracy:\n  - pricing matches provider published pricing page\n  - context_window matches\
   \ provider docs\n  - features verified against API docs or SDK\n  - knowledge_cutoff verified against provider announcement\n\
   \  - status reflects current provider lifecycle\n\nfreshness:\n  # CEX-extension: model_cards degradam mais rapido que KCs\n\
-  \  # Source: EDISON analysis — pricing/features mudam trimestralmente\n  - updated date within 90 days\n  - if status ==\
+  \  # Source: builder_agent analysis — pricing/features mudam trimestralmente\n  - updated date within 90 days\n  - if status ==\
   \ \"deprecated\": linked_artifacts must point to replacement\n  - if provider announces new version: card should update\
   \ within 7 days\n  - stale cards (> 90 days) flagged for review\n\nscoring:\n  quality = mean(structural_sub, density_sub,\
   \ completeness_sub, accuracy_sub)\n  # structural_sub = pass/fail (0 or 10)\n  # density_sub = 10 * density_score\n  # completeness_sub\
@@ -209,7 +209,7 @@ cross_references_grafo_de_conhecimento: "linked_artifacts:\n  primary: \"{{boot_
   \ (selecao), router (custo/capacidade), fallback_chain (priorizacao), iso_package (deploy bundle). Eh o unico tipo P02 puramente\
   \ descritivo."
 exemplo_minimo_valido: "---\nid: p02_mc_anthropic_sonnet_4\nkind: model_card\npillar: P02\nversion: 1.0.0\ncreated: 2026-03-26\n\
-  updated: 2026-03-26\nauthor: EDISON\nmodel_name: claude-sonnet-4-20250514\nprovider: anthropic\nmodel_type: text-generation\n\
+  updated: 2026-03-26\nauthor: builder_agent\nmodel_name: claude-sonnet-4-20250514\nprovider: anthropic\nmodel_type: text-generation\n\
   status: active\nrelease_date: 2025-05-14\nknowledge_cutoff: 2025-04\ncontext_window: 200000\nmax_output: 16000\nmodalities:\n\
   \  text_input: true\n  text_output: true\n  image_input: true\n  audio_input: false\n  pdf_input: true\nfeatures:\n  tool_calling:\
   \ true\n  structured_output: true\n  reasoning: true\n  prompt_caching: true\n  code_execution: true\n  web_search: false\n\

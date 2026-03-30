@@ -3,7 +3,7 @@ id: p07_dataset_rag_qa_v1
 kind: eval_dataset
 pillar: P07
 name: "RAG QA Dataset v1"
-description: "500-sample evaluation dataset for RAG question-answering over CODEXA knowledge base"
+description: "500-sample evaluation dataset for RAG question-answering over organization knowledge base"
 size: 500
 splits:
   train: 400
@@ -24,15 +24,15 @@ tags: [eval-dataset, rag, qa, knowledge-base, ground-truth]
 
 ## Purpose
 
-Ground-truth dataset for evaluating CODEXA's RAG pipeline (brain_query -> context retrieval -> answer generation). 500 human-verified question-answer pairs drawn from real knowledge cards, pool artifacts, and satellite documentation.
+Ground-truth dataset for evaluating organization's RAG pipeline (brain_query -> context retrieval -> answer generation). 500 human-verified question-answer pairs drawn from real knowledge cards, pool artifacts, and agent_node documentation.
 
 ## Dataset Schema
 
 ```yaml
 # Each record follows this structure:
-- question: "What embedding model does CODEXA use for vector search?"
+- question: "What embedding model does organization use for vector search?"
   answer: "nomic-embed-text via Ollama, producing 768-dim vectors at ~10ms/query locally"
-  context: "KC_EMBED_001: CODEXA uses nomic-embed-text through Ollama for local embedding generation. Dimensions: 768. Latency: ~10ms per query."
+  context: "KC_EMBED_001: organization uses nomic-embed-text through Ollama for local embedding generation. Dimensions: 768. Latency: ~10ms per query."
   source: "p01_kc_embedding_config_nomic"
   difficulty: "easy"        # easy | medium | hard
   category: "infrastructure" # infrastructure | agent | workflow | config | marketing
@@ -61,15 +61,15 @@ Ground-truth dataset for evaluating CODEXA's RAG pipeline (brain_query -> contex
 | Agent | 110 | "Which agent handles marketplace scraping?" |
 | Workflow | 100 | "What is the spawn_grid continuous batching flow?" |
 | Config | 90 | "What are the Firecrawl rate limits per research?" |
-| Marketing | 80 | "How does LILY generate Instagram carousel copy?" |
+| Marketing | 80 | "How does marketing_agent generate Instagram carousel copy?" |
 
 ## Sample Records
 
 ### Easy — Single-hop retrieval
 ```yaml
-question: "What is the maximum number of satellites STELLA can spawn simultaneously?"
-answer: "3 satellites plus STELLA itself (4 total). More than 4 causes BSOD due to RAM limits."
-context: "MEMORY: Max terminals = 3 sats + STELLA. BSOD if >4. Power-save features disabled to prevent crashes."
+question: "What is the maximum number of agent_nodes orchestrator can spawn simultaneously?"
+answer: "3 agent_nodes plus orchestrator itself (4 total). More than 4 causes BSOD due to RAM limits."
+context: "MEMORY: Max terminals = 3 sats + orchestrator. BSOD if >4. Power-save features disabled to prevent crashes."
 source: "memory_bsod_prevention"
 difficulty: "easy"
 category: "infrastructure"

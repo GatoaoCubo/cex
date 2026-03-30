@@ -16,7 +16,7 @@ tags: [few_shot_example, format_teaching, difficulty_calibration, input_output_p
 tldr: "Show format in output, not describe it. Calibrate easy->medium->hard. Stay under 1024 bytes body."
 impact_score: 7.5
 decay_rate: 0.04
-satellite: edison
+agent_node: edison
 keywords: [few_shot, format_teaching, difficulty_calibration, output_demonstration, input_specificity, edge_case, explanation]
 ---
 

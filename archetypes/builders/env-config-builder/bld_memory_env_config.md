@@ -23,7 +23,7 @@ tags:
 tldr: "UPPER_SNAKE_CASE names, explicit types and sensitivity markers, document override precedence, never include actual secret values."
 impact_score: 7.5
 decay_rate: 0.04
-satellite: edison
+agent_node: edison
 keywords:
   - environment variables
   - env config
@@ -41,7 +41,7 @@ Environment configuration failures fall into two categories: security failures (
 **Variable specification**: each variable requires five fields. Name in UPPER_SNAKE_CASE. Type from the set {string, integer, boolean, url, path, enum}. Default value (or null if the variable is required with no default). Sensitive flag (true marks the value for redaction in logs and outputs). Validation rule that can be evaluated at startup (regex pattern, numeric range, or enum list).
 **Sensitivity section**: include `## Sensitive Variables` in every env config body, even when no sensitive variables exist - write "none" in that case. This makes it impossible to skip the review step when auditing a config.
 **Override precedence**: document the lookup order explicitly (e.g., process environment > `.env.local` > `.env` > compiled defaults). Without this, operators set variables at the wrong scope and spend hours troubleshooting why their change has no effect.
-**Scope specificity**: use the narrowest accurate scope slug. "api_service" is better than "system" because it limits which processes load the config. Common validated scopes: global (applies everywhere), api_service, satellite (one background worker type), worker (queue consumer).
+**Scope specificity**: use the narrowest accurate scope slug. "api_service" is better than "system" because it limits which processes load the config. Common validated scopes: global (applies everywhere), api_service, agent_node (one background worker type), worker (queue consumer).
 **Never include actual values**: the artifact describes the shape and constraints of configuration, not the values themselves. Actual secrets belong in a secrets manager, not in any committed file.
 ## Anti-Pattern
 - Variable names in lowercase - environment-reading code conventionally skips lowercase names.

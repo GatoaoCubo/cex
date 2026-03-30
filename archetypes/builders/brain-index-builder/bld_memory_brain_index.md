@@ -16,7 +16,7 @@ tags: [brain-index, hybrid-search, BM25, semantic-search, FAISS, retrieval, P10]
 tldr: "Profile query distribution before setting BM25/semantic weights. Default 50/50 split achieves only 0.61 recall@5 versus 0.79 with domain-profiled weights."
 impact_score: 7.7
 decay_rate: 0.08
-satellite: edison
+agent_node: edison
 keywords: [brain-index, hybrid-search, BM25, FAISS, semantic, retrieval, weights, recall, vectorstore]
 ---
 

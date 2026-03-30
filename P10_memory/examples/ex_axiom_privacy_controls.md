@@ -12,7 +12,7 @@ tags: [axiom, privacy, edge, hooks, tags]
 tldr: "Privacy enforced at edge (hook layer), not center (daemon). <private> tags stripped before HTTP send. Data never leaves client boundary unfiltered."
 max_bytes: 3072
 density_score: 0.90
-source: codexa-core/records/core/memory/hooks/ (privacy filtering layer)
+source: organization-core/records/core/memory/hooks/ (privacy filtering layer)
 linked_artifacts:
   template: tpl_axiom_privacy_controls
   related: p10_ax_lifecycle_hooks

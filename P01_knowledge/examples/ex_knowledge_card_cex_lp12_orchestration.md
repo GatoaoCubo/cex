@@ -39,7 +39,7 @@ types: 7 | function: COLLABORATE + PRODUCE + GOVERN | layer: runtime + spec
 - spawn_config define como executar (solo, grid, continuous)
 - signal comunica eventos simples entre agentes (complete)
 - handoff transfere task + context + commit entre agentes
-- dispatch_rule roteia keyword > satellite automaticamente
+- dispatch_rule roteia keyword > agent_node automaticamente
 - crew define grupo multi-agente com protocolo de coord
 - AutoGen tem GroupChat; CrewAI tem Crew; MetaGPT tem Env
 - crew do CEX unifica esses conceitos em tipo formal
@@ -78,8 +78,8 @@ types: 7 | function: COLLABORATE + PRODUCE + GOVERN | layer: runtime + spec
 | spawn_config | Infra | Modo de execucao | Solo, grid, continuous |
 | signal | Evento | Entre 2 agentes | complete, error, progress |
 | handoff | Instrucao | Task completa | Handoff com contexto+commit |
-| dispatch_rule | Roteamento | Keyword > sat | "pesquisar" > SHAKA |
-| crew | Grupo | N agentes | Equipe de 3 satellites |
+| dispatch_rule | Roteamento | Keyword > sat | "pesquisar" > research_agent |
+| crew | Grupo | N agentes | Equipe de 3 agent_nodes |
 
 ## Flow
 

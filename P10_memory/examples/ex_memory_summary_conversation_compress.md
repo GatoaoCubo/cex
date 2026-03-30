@@ -59,7 +59,7 @@ output:
 
 ## Exemplo Pratico
 
-Sessao EDISON com 47 turnos, 162K tokens usados (81%):
+Sessao builder_agent com 47 turnos, 162K tokens usados (81%):
 
 **Input** (mensagens desde ultima compressao, turnos 31-47):
 - User pediu refactor de `api/v1/routes.py`

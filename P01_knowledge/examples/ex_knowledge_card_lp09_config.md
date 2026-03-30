@@ -53,7 +53,7 @@ P09 centraliza toda configuracao do CEX em 5 tipos de artefato YAML. Env configs
 - Runtime rule sem timeout: processo pode travar indefinidamente
 
 ## Application
-No CODEXA, P09 manifesta como .claude/settings.json, .mcp-{sat}.json, e boot scripts. O CEX formaliza esses configs como artefatos versionaveis e validaveis, permitindo diff e rollback de configuracao.
+No organization, P09 manifesta como .claude/settings.json, .mcp-{sat}.json, e boot scripts. O CEX formaliza esses configs como artefatos versionaveis e validaveis, permitindo diff e rollback de configuracao.
 
 ## References
 - P09_config/_schema.yaml (fonte de verdade)

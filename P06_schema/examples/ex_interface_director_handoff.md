@@ -1,34 +1,34 @@
 ---
-id: p06_iface_satellite_handoff
+id: p06_iface_agent_node_handoff
 kind: interface
 pillar: P06
-title: "Interface: STELLA → Satellite Handoff Contract"
+title: "Interface: orchestrator → Satellite Handoff Contract"
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
 author: PYTHA
 quality: 9.0
-tags: [interface, stella, satellite, handoff, contract]
-tldr: "Interface contract for handoff files: STELLA writes, satellite reads — required sections, naming, signal protocol"
+tags: [interface, stella, agent_node, handoff, contract]
+tldr: "Interface contract for handoff files: orchestrator writes, agent_node reads — required sections, naming, signal protocol"
 max_bytes: 1024
 density_score: 0.91
-source: codexa-core/.claude/rules/STELLA_RULES.md (COMPOSE phase)
+source: organization-core/.claude/rules/orchestrator_RULES.md (COMPOSE phase)
 linked_artifacts:
   workflow: p12_wf_stella_dispatch
   handoff: p12_ho_isofix_batch
 ---
 
-# Interface: STELLA → Satellite Handoff Contract
+# Interface: orchestrator → Satellite Handoff Contract
 
 ## Contract Overview
 
 | Property | Value |
 |----------|-------|
-| Producer | STELLA (orchestrator) |
-| Consumer | Satellite (SHAKA, LILY, EDISON, PYTHA, ATLAS, YORK) |
+| Producer | orchestrator (orchestrator) |
+| Consumer | Satellite (research_agent, marketing_agent, builder_agent, knowledge_agent, operations_agent, commercial_agent) |
 | Location | `.claude/handoffs/{MISSION}_{SAT}.md` |
 | Encoding | UTF-8, ASCII-safe Portuguese |
-| Trigger | STELLA COMPOSE phase (Step 3 of 5) |
+| Trigger | orchestrator COMPOSE phase (Step 3 of 5) |
 
 ## Required Sections
 
@@ -45,7 +45,7 @@ linked_artifacts:
 
 ## TAREFAS
 ### Step N: [ACTION_VERB] [OBJECT]
-[Description with [OPEN_VARIABLES] where satellite decides]
+[Description with [OPEN_VARIABLES] where agent_node decides]
 
 ## SCOPE FENCE
 - SOMENTE: [permitted paths]
@@ -63,7 +63,7 @@ python -c "from records.core.python.signal_writer import write_signal; write_sig
 | Field | Type | Constraint |
 |-------|------|-----------|
 | MISSION | string | UPPER_SNAKE_CASE, max 20 chars |
-| SAT | string | UPPER: SHAKA, LILY, EDISON, PYTHA, ATLAS, YORK |
+| SAT | string | UPPER: research_agent, marketing_agent, builder_agent, knowledge_agent, operations_agent, commercial_agent |
 | Title | string | max 60 chars, no emoji |
 | Quality target | float | 8.0 to 9.5 (never lower) |
 | SEEDS | list[str] | 5-10 keywords, comma-separated |

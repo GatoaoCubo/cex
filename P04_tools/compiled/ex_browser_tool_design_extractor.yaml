@@ -1,12 +1,12 @@
 id: p04_browser_design_extractor
-name: codexa-design-extractor
+name: organization-design-extractor
 description: Extrair design tokens e Tailwind configs de qualquer website URL
 version: 1.0.0
 pillar: P04
 kind: browser_tool
 created: 2026-03-22
 updated: 2026-03-22
-author: EDISON
+author: builder_agent
 domain: building
 quality: 8.5
 tags:
@@ -24,7 +24,7 @@ phases:
 - Discover (Chrome MCP)
 - Extract (HTML parser)
 - Transform (Style Dictionary)
-- Build (EDISON components)
+- Build (builder_agent components)
 - Validate (ODiff)
 examples:
 - /design-extractor https://linear.app
@@ -43,7 +43,7 @@ phase_2_extract: 'Input: Screenshots + HTML pages Action: HTML parser extrai des
   W3C DTCG tokens raw'
 phase_3_transform: 'Input: DTCG tokens raw Action: Style Dictionary transforma para formato target Output: `tailwind.config.js`,
   CSS custom properties, SCSS vars'
-phase_4_build_opcional: 'Input: Tokens + component patterns Action: EDISON gera React/Vue components usando tokens Output:
+phase_4_build_opcional: 'Input: Tokens + component patterns Action: builder_agent gera React/Vue components usando tokens Output:
   Component library'
 phase_5_validate: 'Input: Original screenshots + generated output Action: ODiff compara pixel-perfect Output: Diff report
   com delta scores'

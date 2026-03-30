@@ -38,7 +38,7 @@ data_source: "{{source_url_or_artifact_ref}}"
 ` ``yaml
 topic: {{topic_name}}
 scope: {{scope_description}}
-owner: {{owner_satellite}}
+owner: {{owner_agent_node}}
 criticality: {{low|medium|high}}
 ` ``
 ## Key Concepts

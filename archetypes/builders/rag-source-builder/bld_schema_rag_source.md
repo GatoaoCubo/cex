@@ -18,7 +18,7 @@ SOURCE OF TRUTH. OUTPUT_TEMPLATE.md derives from this file. If conflict exists, 
 | version | string | semver "X.Y.Z" | "1.0.0" |
 | created | string | YYYY-MM-DD | "2026-03-26" |
 | updated | string | YYYY-MM-DD | "2026-03-26" |
-| author | string | agent id or user handle | EDISON |
+| author | string | agent id or user handle | builder_agent |
 | url | string | valid URL, https:// preferred | "https://docs.anthropic.com" |
 | domain | string | CEX domain taxonomy value | llm_providers |
 | last_checked | string | YYYY-MM-DD | "2026-03-26" |

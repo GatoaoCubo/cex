@@ -2,33 +2,33 @@
 id: p02_hp_research_to_build
 kind: handoff_protocol
 pillar: P02
-title: Research-to-Build Handoff (SHAKA to EDISON)
+title: Research-to-Build Handoff (research_agent to builder_agent)
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
 author: EDISON
 domain: orchestration
 quality: 9.0
-tags: [handoff-protocol, shaka, edison, research, build, satellite, a2a]
-tldr: Protocolo de handoff entre SHAKA (pesquisa) e EDISON (build) — SHAKA entrega findings+sources+quality_score via arquivo .md, EDISON consome e produz build artifacts
-when_to_use: Quando pesquisa SHAKA deve alimentar implementacao EDISON sem intervencao manual de STELLA
+tags: [handoff-protocol, shaka, edison, research, build, agent_node, a2a]
+tldr: Protocolo de handoff entre research_agent (pesquisa) e builder_agent (build) — research_agent entrega findings+sources+quality_score via arquivo .md, builder_agent consome e produz build artifacts
+when_to_use: Quando pesquisa research_agent deve alimentar implementacao builder_agent sem intervencao manual de orchestrator
 ---
 
-# Handoff Protocol: Research-to-Build (SHAKA -> EDISON)
+# Handoff Protocol: Research-to-Build (research_agent -> builder_agent)
 
 ## Overview
-Define o contrato de transferencia de contexto entre SHAKA (satelite de pesquisa) e EDISON (satelite de build). SHAKA produz findings estruturados como knowledge cards ou research reports; EDISON consome esses artifacts para implementar agentes, skills, ou componentes. O handoff e assincrono via filesystem — nao requer ambos satelites ativos simultaneamente.
+Define o contrato de transferencia de contexto entre research_agent (satelite de pesquisa) e builder_agent (satelite de build). research_agent produz findings estruturados como knowledge cards ou research reports; builder_agent consome esses artifacts para implementar agentes, skills, ou componentes. O handoff e assincrono via filesystem — nao requer ambos satelites ativos simultaneamente.
 
 ## Trigger
 | Field | Value |
 |-------|-------|
 | event | `research_complete` |
-| source_satellite | SHAKA |
-| target_satellite | EDISON |
+| source_agent_node | research_agent |
+| target_agent_node | builder_agent |
 | trigger_mechanism | Signal file: `.claude/signals/shaka_complete_*.json` |
-| detection | STELLA poll (15s interval) ou `stella_signal_monitor.py --watch` |
+| detection | orchestrator poll (15s interval) ou `stella_signal_monitor.py --watch` |
 
-## Context Contract (SHAKA -> EDISON)
+## Context Contract (research_agent -> builder_agent)
 ```yaml
 handoff_file: .claude/handoffs/{MISSION}_edison.md
 required_context:
@@ -54,15 +54,15 @@ required_context:
   quality_score:
     type: float
     description: Auto-avaliacao da qualidade da pesquisa (Shokunin)
-    minimum: 7.0              # Abaixo de 7.0, STELLA rejeita e solicita redo
+    minimum: 7.0              # Abaixo de 7.0, orchestrator rejeita e solicita redo
   seeds:
     type: list[string]
-    description: Palavras-chave para input hydration do EDISON
+    description: Palavras-chave para input hydration do builder_agent
     min_items: 5
 optional_context:
   knowledge_card_path:
     type: string
-    description: Path da KC gerada, se PYTHA ja processou
+    description: Path da KC gerada, se knowledge_agent ja processou
   competitor_data:
     type: object
     description: Dados de concorrentes se pesquisa foi competitiva
@@ -71,7 +71,7 @@ optional_context:
     description: Path para dados brutos (JSON/CSV) se coletados
 ```
 
-## Return Contract (EDISON -> STELLA)
+## Return Contract (builder_agent -> orchestrator)
 ```yaml
 signal_file: .claude/signals/edison_complete_*.json
 return_artifacts:
@@ -84,12 +84,12 @@ return_artifacts:
 
 ## Handoff File Template
 ```markdown
-# EDISON — {MISSION}: {Title}
+# builder_agent — {MISSION}: {Title}
 **Autonomia Total** | **Quality 9.0+**
 **REGRA: Commit e signal ANTES de qualquer pausa.**
 
 ## CONTEXTO
-SHAKA completou pesquisa sobre {topic}. Score: {quality_score}.
+research_agent completou pesquisa sobre {topic}. Score: {quality_score}.
 Findings principais: {top_3_findings_summary}
 
 ## RESEARCH ARTIFACTS
@@ -118,7 +118,7 @@ Testar artifact contra quality gates do tipo.
 - NAO TOQUE: {forbidden_paths}
 
 ## COMMIT
-git add {artifact_paths} && git commit -m "EDISON[{MISSION}]: {desc}"
+git add {artifact_paths} && git commit -m "builder_agent[{MISSION}]: {desc}"
 
 ## SIGNAL
 python -c "from records.core.python.signal_writer import write_signal; write_signal('edison', 'complete', {score})"
@@ -127,14 +127,14 @@ python -c "from records.core.python.signal_writer import write_signal; write_sig
 ## Error Handling
 | Scenario | Action |
 |----------|--------|
-| SHAKA signal com score < 7.0 | STELLA rejeita, solicita re-research com feedback |
-| Handoff file missing required fields | EDISON solicita contexto adicional via STELLA |
-| EDISON nao consegue localizar KC | Prosseguir com findings inline do handoff |
-| Build falha apos 3 tentativas | EDISON sinaliza `partial` com score real e lista de bloqueios |
+| research_agent signal com score < 7.0 | orchestrator rejeita, solicita re-research com feedback |
+| Handoff file missing required fields | builder_agent solicita contexto adicional via orchestrator |
+| builder_agent nao consegue localizar KC | Prosseguir com findings inline do handoff |
+| Build falha apos 3 tentativas | builder_agent sinaliza `partial` com score real e lista de bloqueios |
 
 ## Sequence Diagram
 ```text
-STELLA                    SHAKA                     EDISON
+orchestrator                    research_agent                     builder_agent
   |                         |                         |
   |-- dispatch handoff ---->|                         |
   |                         |-- research (async) ---->|
@@ -146,7 +146,7 @@ STELLA                    SHAKA                     EDISON
   |                         |                         |
   |-- compose handoff_edison.md ----------------------|
   |                                                   |
-  |-- spawn EDISON with handoff --------------------->|
+  |-- spawn builder_agent with handoff --------------------->|
   |                                                   |
   |                                   |-- read handoff |
   |                                   |-- build ------>|
@@ -157,9 +157,9 @@ STELLA                    SHAKA                     EDISON
 ```
 
 ## Real Example (2026-03-05)
-Mission ISOFIX: SHAKA pesquisou 118 agents para gap analysis. Handoff para EDISON continha 47 findings com paths de ISOs faltantes. EDISON executou 7 batches em continuous mode, criando 820+ ISO files. Score final: 9.0.
+Mission ISOFIX: research_agent pesquisou 118 agents para gap analysis. Handoff para builder_agent continha 47 findings com paths de ISOs faltantes. builder_agent executou 7 batches em continuous mode, criando 820+ ISO files. Score final: 9.0.
 
 ## Related
 - `ex_agent_gateway.md` — Gateway agent que pode intermediar handoffs
-- `ex_boot_config_edison_claude.md` — Boot config do EDISON receptor
+- `ex_boot_config_edison_claude.md` — Boot config do builder_agent receptor
 - `records/framework/docs/SPAWN_PLAYBOOK.md` — Playbook completo de spawn

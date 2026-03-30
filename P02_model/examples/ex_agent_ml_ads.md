@@ -1,6 +1,6 @@
 ---
 id: p02_agent_ml_ads
-name: codexa-ml-ads
+name: organization-ml-ads
 description: Mercado Livre Product Ads strategy, ROAS optimization, and campaign management
 version: 1.0.0
 pillar: P02
@@ -27,14 +27,14 @@ examples:
 density_score: 0.91
 linked_artifacts:
   agent: records/agents/ml-ads/README.md
-  kc: records/pool/knowledge/KC_PYTHA_069_CAT_LOGO_PR_PRIO_MERCADO_LIVRE.md
+  kc: records/pool/knowledge/KC_knowledge_agent_069_CAT_LOGO_PR_PRIO_MERCADO_LIVRE.md
 ---
 
 # ML Ads Skill
 
 ## Purpose
 
-ML Ads e o **estrategista de Product Ads do Mercado Livre** do CODEXA. Responsavel por precificacao para ads, classificacao de funil, estruturacao de campanhas, calculo de ROAS/ACOS/TACOS, otimizacao semanal e simulacao de cenarios. Domain: Marketing (LILY satellite).
+ML Ads e o **estrategista de Product Ads do Mercado Livre** do organization. Responsavel por precificacao para ads, classificacao de funil, estruturacao de campanhas, calculo de ROAS/ACOS/TACOS, otimizacao semanal e simulacao de cenarios. Domain: Marketing (marketing_agent agent_node).
 
 ## Workflow Phases
 

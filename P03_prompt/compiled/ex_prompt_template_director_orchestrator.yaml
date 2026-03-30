@@ -1,11 +1,11 @@
-id: p03_pt_satellite_orchestrator
+id: p03_pt_agent_node_orchestrator
 kind: prompt_template
 pillar: P03
 title: Satellite Orchestrator - Multi-Agent Dispatch Prompt
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: EDISON
+author: builder_agent
 domain: orchestration
 quality: 9.5
 tags:
@@ -14,13 +14,13 @@ tags:
 - routing
 - intention-parsing
 - multi-agent
-tldr: Prompt template para STELLA orchestrator - intention parsing, satellite routing, dependency resolution, dispatch, monitoring
+tldr: Prompt template para orchestrator orchestrator - intention parsing, agent_node routing, dependency resolution, dispatch, monitoring
 when_to_use: Ao construir orchestrator que roteia tasks para agents especializados
 keywords:
 - orchestrator
 - dispatch
 - triage
-- satellite-routing
+- agent_node-routing
 - dependency-resolution
 long_tails:
 - como criar prompt de orchestracao para sistema multi-agente
@@ -33,15 +33,15 @@ variables: '| Var | Tipo | Descricao | Exemplo |
 
   |-----|------|-----------|---------|
 
-  | {{SYSTEM_NAME}} | string | Nome do sistema | CODEXA |
+  | {{SYSTEM_NAME}} | string | Nome do sistema | organization |
 
-  | {{ORCHESTRATOR_NAME}} | string | Nome do orchestrator | STELLA |
+  | {{ORCHESTRATOR_NAME}} | string | Nome do orchestrator | orchestrator |
 
-  | {{SATELLITES}} | list | Lista de agents especializados | [SHAKA, LILY, EDISON...] |
+  | {{SATELLITES}} | list | Lista de agents especializados | [research_agent, marketing_agent, builder_agent...] |
 
-  | {{ROUTING_TABLE}} | table | Keywords > satellite mapping | pesquisar > SHAKA |
+  | {{ROUTING_TABLE}} | table | Keywords > agent_node mapping | pesquisar > research_agent |
 
-  | {{INTENT_VERBS}} | yaml | Verb classification | pesquisar: SHAKA (0.9) |
+  | {{INTENT_VERBS}} | yaml | Verb classification | pesquisar: research_agent (0.9) |
 
   | {{DISPATCH_FORMAT}} | json | Formato do dispatch | inbox JSON schema |
 
@@ -60,13 +60,13 @@ template_body: 'Voce e {{ORCHESTRATOR_NAME}}, o orchestrator central de {{SYSTEM
 
   1. PARSE: Extrair keywords, entities, intent verbs do input
 
-  2. MAP: Match para satellite usando routing table
+  2. MAP: Match para agent_node usando routing table
 
   3. INFER: Gerar intention statement ("User quer...")
 
   4. VALIDATE: Se confianca < 0.8, perguntar UMA pergunta
 
-  5. DISPATCH: Rotear para satellite(s) com contexto completo
+  5. DISPATCH: Rotear para agent_node(s) com contexto completo
 
 
   ## Routing Table
@@ -101,14 +101,14 @@ template_body: 'Voce e {{ORCHESTRATOR_NAME}}, o orchestrator central de {{SYSTEM
   - Skip quality gates (enforce >= {{QUALITY_GATE}})'
 quality_gates:
 - 'PURPOSE: orchestracao pura (nao execucao)'
-- 'ROUTING: cada keyword mapeia para 1 satellite primario'
+- 'ROUTING: cada keyword mapeia para 1 agent_node primario'
 - 'DEPENDENCIES: blocking vs parallel vs optional definidos'
 - 'DISPATCH: formato JSON estruturado com todos campos'
 - 'ANTI-PATTERNS: min 5 anti-patterns concretos'
 examples: ''
 input: '"Documentar o sistema e criar testes"'
-output: "intention: \"Documentacao + testes simultaneos\"\nsatellites: [PYTHA, ATLAS]\ndependency: none (parallel)\ndispatch:\n\
-  \  - satellite: PYTHA\n    task: \"Documentar sistema\"\n    status: dispatched\n  - satellite: ATLAS\n    task: \"Criar\
+output: "intention: \"Documentacao + testes simultaneos\"\nagent_nodes: [knowledge_agent, operations_agent]\ndependency: none (parallel)\ndispatch:\n\
+  \  - agent_node: knowledge_agent\n    task: \"Documentar sistema\"\n    status: dispatched\n  - agent_node: operations_agent\n    task: \"Criar\
   \ testes\"\n    status: dispatched\nmode: parallel"
 semantic_bridge:
 - 'Also known as: task dispatcher, triage agent, orchestration prompt, coordination template'

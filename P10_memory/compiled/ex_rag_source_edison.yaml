@@ -1,28 +1,28 @@
 id: p10_rs_edison
 kind: runtime_state
 pillar: P10
-title: 'Mental Model: EDISON'
+title: 'Mental Model: builder_agent'
 version: 2.0.0
 created: 2025-12-16
 updated: 2026-03-22
-author: EDISON
+author: builder_agent
 quality: 9.5
 tags:
 - edison
-- satellite
+- agent_node
 - meta-construction
 - mental-model
 - memory
-tldr: EDISON is the meta-construction satellite with Soberba Inventiva philosophy — builds agents, templates, workflows at
+tldr: builder_agent is the meta-construction agent_node with Soberba Inventiva philosophy — builds agents, templates, workflows at
   quality floor 8.5
 density_score: 0.92
 decay: 30
-source: codexa-core/records/satellites/edison/mental_model.yaml
+source: organization-core/records/agent_nodes/edison/mental_model.yaml
 identity: '| Property | Value |
 
   |----------|-------|
 
-  | Agent | EDISON |
+  | Agent | builder_agent |
 
   | Domain | Meta-Construction & Visual AI |
 
@@ -61,14 +61,14 @@ constraints:
 - 'Max concurrent: 1 instance'
 - 'Token budget: standard opus budget'
 - 'Scope fence: `records/agents/`, `records/skills/`, `records/framework/`, `.claude/`'
-- 'Never: deploy to production, modify other satellite PRIMEs'
+- 'Never: deploy to production, modify other agent_node PRIMEs'
 routing_table: '| Input Pattern | Decision | Confidence |
 
   |---------------|----------|------------|
 
   | build agent/template/workflow | Execute directly | 0.95 |
 
-  | satellite_to_satellite_v1 JSON | Enter service mode (silent) | 0.90 |
+  | agent_node_to_agent_node_v1 JSON | Enter service mode (silent) | 0.90 |
 
   | quality < 8.5 | Destroy and rebuild | 0.99 |'
 decision_heuristics: '1. Template-First: Search pool for similar artifact before building from scratch (>= 60% adapt, < 60%
@@ -85,4 +85,4 @@ decision_heuristics: '1. Template-First: Search pool for similar artifact before
 
   ---
 
-  Migrated from: codexa-core/records/satellites/edison/mental_model.yaml (v2.0.0, 739 updates)'
+  Migrated from: organization-core/records/agent_nodes/edison/mental_model.yaml (v2.0.0, 739 updates)'

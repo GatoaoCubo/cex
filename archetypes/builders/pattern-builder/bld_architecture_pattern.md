@@ -38,7 +38,7 @@ pattern         --signals-->   pattern_application
 | A named, reusable solution for a recurring architecture problem | An inviolable operational mandate (law P08) |
 | Documents forces, consequences, and applicability | A visual representation of structure (diagram P08) |
 | Recommends — does not mandate — adoption | An inventory of system parts (component_map P08) |
-| Derived from observed successes and documented failures | A specification of a satellite component (agent_card P08) |
+| Derived from observed successes and documented failures | A specification of a agent_node component (agent_card P08) |
 | Cross-references related and anti-patterns | A multi-step execution sequence (workflow P12) |
 | Dense (>=0.80 density), max 4KB | A verbose tutorial or guide |
 ## Layer Map

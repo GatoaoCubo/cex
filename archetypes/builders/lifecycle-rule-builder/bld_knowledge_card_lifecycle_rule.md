@@ -28,7 +28,7 @@ Lifecycle rules are declarative policies governing artifact state transitions ov
 |---------|-------------|
 | Domain-specific freshness | LLM pricing = 30 days; architectural law = 365 days |
 | Measurable transitions | Days since update, score threshold, or usage count |
-| Mandatory ownership | Unowned artifacts always rot — assign satellite or agent |
+| Mandatory ownership | Unowned artifacts always rot — assign agent_node or agent |
 | Notification on stale | Stale artifact with no alert = hidden technical debt |
 | Automation levels | full (cron-driven), semi (auto-detect + human approve), manual |
 | State machine | Each state has entry criteria, exit criteria, and allowed transitions |

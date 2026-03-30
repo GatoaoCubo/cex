@@ -31,7 +31,7 @@ options:
   - "PostgreSQL with JSONB"
   - "MongoDB"
   - "SQLite (embedded)"
-deciders: ["EDISON", "ATLAS"]
+deciders: ["builder_agent", "operations_agent"]
 date_decided: "2026-03-29"
 ```
 ## Context

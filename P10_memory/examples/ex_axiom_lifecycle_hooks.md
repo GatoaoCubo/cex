@@ -12,7 +12,7 @@ tags: [axiom, hooks, lifecycle, memory, daemon]
 tldr: "5-hook lifecycle chain: Setup > SessionStart > UserPromptSubmit > PostToolUse > Stop. Hooks are thin HTTP clients; daemon owns persistence."
 max_bytes: 3072
 density_score: 0.92
-source: codexa-core/records/core/memory/hooks/ (5 hook implementations)
+source: organization-core/records/core/memory/hooks/ (5 hook implementations)
 linked_artifacts:
   template: tpl_axiom_lifecycle_hooks
 ---

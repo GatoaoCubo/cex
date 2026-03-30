@@ -12,7 +12,7 @@ quality: null
 tags: [blueprint, model-card, meta-template, production-mold, llm-spec]
 tldr: "Meta-template que define COMO gerar model_cards validos — frontmatter layered, capabilities como booleans, pricing normalizado, freshness 90d"
 when_to_use: "Antes de gerar qualquer model_card — este blueprint eh o molde"
-synthesis: "SHAKA (standards survey, 12 standards) + PYTHA-GEMINI (10-provider comparative) + ATLAS-CODEX (code patterns, 7 frameworks) + EDISON (CEX analysis + boundary + quality gates)"
+synthesis: "research_agent (standards survey, 12 standards) + knowledge_agent-GEMINI (10-provider comparative) + operations_agent-CODEX (code patterns, 7 frameworks) + builder_agent (CEX analysis + boundary + quality gates)"
 ---
 
 # Blueprint: model_card
@@ -48,7 +48,7 @@ Exemplos:
 ## Frontmatter
 
 Schema layered: Identity > Model Spec > Capabilities > Economics > Search.
-Source: ATLAS-CODEX recomenda 4 blocos separados; este frontmatter achata em YAML mas preserva a separacao logica via comentarios.
+Source: operations_agent-CODEX recomenda 4 blocos separados; este frontmatter achata em YAML mas preserva a separacao logica via comentarios.
 
 ```yaml
 ---
@@ -73,7 +73,7 @@ knowledge_cutoff: "{{YYYY-MM or null}}"          # Mitchell (training_data), 6/1
 
 # CAPABILITIES (5) — REQUIRED
 # Sources: LiteLLM (supports_* booleans), Anthropic SDK (ModelCapabilities),
-#          LangChain (ModelProfile), PYTHA-GEMINI comparative (10 providers)
+#          LangChain (ModelProfile), knowledge_agent-GEMINI comparative (10 providers)
 context_window: {{int}}                          # max input tokens — universal (10/10 providers)
 max_output: {{int}}                              # max output tokens — 7/10 providers
 modalities:
@@ -230,7 +230,7 @@ accuracy:
 
 freshness:
   # CEX-extension: model_cards degradam mais rapido que KCs
-  # Source: EDISON analysis — pricing/features mudam trimestralmente
+  # Source: builder_agent analysis — pricing/features mudam trimestralmente
   - updated date within 90 days
   - if status == "deprecated": linked_artifacts must point to replacement
   - if provider announces new version: card should update within 7 days

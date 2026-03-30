@@ -9,7 +9,7 @@ pattern: few-shot learning — LLM reads these before producing
 
 # Examples: spawn-config-builder
 ## Golden Example
-INPUT: "Create spawn config for SHAKA solo research task"
+INPUT: "Create spawn config for research_agent solo research task"
 OUTPUT:
 ```yaml
 id: p12_spawn_shaka_solo_research
@@ -19,7 +19,7 @@ version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
 author: "builder"
-title: "SHAKA Solo Research Spawn"
+title: "research_agent Solo Research Spawn"
 mode: solo
 director: "shaka"
 model: "sonnet"
@@ -34,7 +34,7 @@ prompt_strategy: handoff
 domain: "research"
 quality: null
 tags: [spawn_config, shaka, solo, research]
-tldr: "Solo spawn for SHAKA research with sonnet, 30min timeout, handoff-based prompt"
+tldr: "Solo spawn for research_agent research with sonnet, 30min timeout, handoff-based prompt"
 ```
 ## Spawn Command
 ```powershell
@@ -45,13 +45,13 @@ powershell -NoProfile -ExecutionPolicy Bypass -File records/framework/powershell
 |-----------|-------|-----------|
 | mode | solo | Single director, single task |
 | director | shaka | Research domain director |
-| model | sonnet | SHAKA uses sonnet per routing table |
+| model | sonnet | research_agent uses sonnet per routing table |
 | timeout | 1800s | 30min sufficient for research tasks |
 | interactive | true | Terminal stays open for monitoring |
 ## Constraints
 - Handoff file must exist before spawn
 - Max inline prompt: 200 chars (use handoff for longer tasks)
-- SHAKA requires firecrawl + brain MCP servers
+- research_agent requires firecrawl + brain MCP servers
 WHY THIS IS GOLDEN:
 - quality: null (H05 pass)
 - id matches p12_spawn_ pattern (H02 pass)
@@ -69,10 +69,10 @@ BAD OUTPUT:
 ```yaml
 id: spawn_config
 kind: config
-director: SHAKA
+director: research_agent
 quality: 8.0
 ```
-Spawn the SHAKA director to do research. It should use the sonnet model and
+Spawn the research_agent director to do research. It should use the sonnet model and
 have access to firecrawl. Make sure it commits before stopping.
 FAILURES:
 1. id: no `p12_spawn_` prefix -> H02 FAIL
@@ -83,5 +83,5 @@ FAILURES:
 6. No ## Spawn Command section -> H07 FAIL
 7. Body contains task instructions ("do research") -> S07 FAIL
 8. No flags listed -> S03 FAIL
-9. director uppercase "SHAKA" (should be lowercase) -> S04 FAIL
+9. director uppercase "research_agent" (should be lowercase) -> S04 FAIL
 10. Body is prose, not structured sections -> S08 FAIL

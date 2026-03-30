@@ -5,7 +5,7 @@ title: Ollama Deployment Patterns para Modelos Locais Customizados
 version: 2.0.0
 created: 2026-03-25
 updated: 2026-03-25
-author: EDISON
+author: builder_agent
 domain: execution
 quality: null
 tags:
@@ -118,9 +118,9 @@ code: '<!-- lang: dockerfile | purpose: stable Ollama packaging -->
 
   <!-- lang: bash | purpose: build and smoke-test -->
 
-  ollama create codexa-sales -f Modelfile
+  ollama create organization-sales -f Modelfile
 
-  ollama run codexa-sales "Resuma riscos de margem em 3 linhas."
+  ollama run organization-sales "Resuma riscos de margem em 3 linhas."
 
   ollama ps'
 references:

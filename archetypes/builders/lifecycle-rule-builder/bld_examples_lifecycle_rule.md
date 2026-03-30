@@ -66,7 +66,7 @@ ensures KCs are reviewed before staleness degrades downstream decisions.
 ## Review Protocol
 | Aspect | Value |
 |--------|-------|
-| Reviewer | knowledge-engine (knowledge satellite) |
+| Reviewer | knowledge-engine (knowledge agent_node) |
 | Cycle | quarterly (every 90 days) |
 | Checklist | facts still accurate, sources still valid, density >= 0.80 |
 | Outcome | refresh (update + re-validate) or archive (remove from index) |

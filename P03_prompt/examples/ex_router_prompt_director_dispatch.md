@@ -1,56 +1,56 @@
 ---
-id: p03_rp_satellite_dispatch
+id: p03_rp_agent_node_dispatch
 kind: router_prompt
 pillar: P03
-title: Router Prompt for CODEXA Satellite Task Dispatch
-routes: [SHAKA, LILY, EDISON, PYTHA, ATLAS, YORK]
-fallback: EDISON
+title: Router Prompt for organization Satellite Task Dispatch
+routes: [research_agent, marketing_agent, builder_agent, knowledge_agent, operations_agent, commercial_agent]
+fallback: builder_agent
 quality: 9.0
 ---
 
 # Router Prompt: Satellite Dispatch
 
 ## Objective
-Classificar a tarefa do usuario e rotear para o satelite CODEXA mais adequado. O router deve analisar keywords, contexto semantico e tipo de entregavel esperado para determinar o satelite correto com score de confianca. Se confianca < threshold, usar fallback.
+Classificar a tarefa do usuario e rotear para o satelite organization mais adequado. O router deve analisar keywords, contexto semantico e tipo de entregavel esperado para determinar o satelite correto com score de confianca. Se confianca < threshold, usar fallback.
 
 ## Routes
 
-### SHAKA (Research)
+### research_agent (Research)
 **Modelo**: sonnet | **Dominio**: Pesquisa e analise de mercado
 **Keywords**: pesquisar, mercado, concorrente, scrape, analise, benchmark, tendencia, dados, comparar, fornecedor
 **Semantic Signals**: usuario quer ENTENDER algo externo (mercado, concorrencia, tendencias)
 **Entregavel tipico**: relatorio de pesquisa, analise comparativa, dados estruturados
 **Exemplo**: "Pesquisa os top 5 concorrentes de pet shop no Mercado Livre"
 
-### LILY (Marketing)
+### marketing_agent (Marketing)
 **Modelo**: sonnet | **Dominio**: Marketing e conteudo
 **Keywords**: anuncio, marketing, copy, titulo, vender, campanha, criativo, headline, CTA, post, social media
 **Semantic Signals**: usuario quer PERSUADIR ou VENDER (copy, anuncios, conteudo de marketing)
 **Entregavel tipico**: textos de anuncio, campanhas, copys, titulos otimizados
 **Exemplo**: "Cria 5 titulos de anuncio para cama box casal com frete gratis"
 
-### EDISON (Build)
+### builder_agent (Build)
 **Modelo**: opus | **Dominio**: Construcao e codigo
 **Keywords**: criar, build, codigo, componente, hook, template, implementar, desenvolver, feature, refatorar, fix
 **Semantic Signals**: usuario quer CONSTRUIR algo tecnico (codigo, templates, agents, skills)
 **Entregavel tipico**: codigo, componentes, templates, configuracoes
 **Exemplo**: "Implementa um hook de validacao de schema para os agents"
 
-### PYTHA (Knowledge)
+### knowledge_agent (Knowledge)
 **Modelo**: sonnet | **Dominio**: Conhecimento e documentacao
 **Keywords**: conhecimento, documentar, indexar, embedding, organizar, catalogar, wiki, knowledge, card
 **Semantic Signals**: usuario quer ORGANIZAR ou DOCUMENTAR conhecimento interno
 **Entregavel tipico**: knowledge cards, documentacao, indices, taxonomias
 **Exemplo**: "Documenta o fluxo de autenticacao JWT da API em uma knowledge card"
 
-### ATLAS (Execute)
+### operations_agent (Execute)
 **Modelo**: opus | **Dominio**: Execucao e infraestrutura
 **Keywords**: executar, testar, debug, validar, deploy, migrar, database, railway, infra, pipeline, CI/CD
 **Semantic Signals**: usuario quer RODAR ou OPERAR algo (deploy, testes, infra)
 **Entregavel tipico**: deploy realizado, testes executados, migrations aplicadas
 **Exemplo**: "Roda os testes de integracao e faz deploy da API no Railway"
 
-### YORK (Monetize)
+### commercial_agent (Monetize)
 **Modelo**: sonnet | **Dominio**: Monetizacao e cursos
 **Keywords**: curso, monetizar, preco, hotmart, funil, landing page, checkout, vender curso, produto digital
 **Semantic Signals**: usuario quer MONETIZAR conhecimento (cursos, infoprodutos, pricing)
@@ -68,8 +68,8 @@ keyword_scores = {route: count / total_keywords_in_route para cada route}
 ### Step 2: Semantic Analysis
 ```text
 Analisar o VERBO principal e o OBJETO da tarefa:
-- VERBO indica acao (pesquisar=SHAKA, criar=EDISON, vender=LILY, documentar=PYTHA, executar=ATLAS, monetizar=YORK)
-- OBJETO indica dominio (mercado=SHAKA, anuncio=LILY, codigo=EDISON, knowledge=PYTHA, deploy=ATLAS, curso=YORK)
+- VERBO indica acao (pesquisar=research_agent, criar=builder_agent, vender=marketing_agent, documentar=knowledge_agent, executar=operations_agent, monetizar=commercial_agent)
+- OBJETO indica dominio (mercado=research_agent, anuncio=marketing_agent, codigo=builder_agent, knowledge=knowledge_agent, deploy=operations_agent, curso=commercial_agent)
 semantic_score = match_strength(verbo) * 0.6 + match_strength(objeto) * 0.4
 ```
 
@@ -85,24 +85,24 @@ IF max(confidence) >= 0.7:
 ELIF max(confidence) >= 0.4:
     route = argmax(confidence) + flag "low_confidence"
 ELSE:
-    route = EDISON (fallback)
+    route = builder_agent (fallback)
 ```
 
 ## Threshold
 - **Auto-route**: confidence >= 0.7 (decisao automatica, sem intervencao humana)
 - **Low confidence**: 0.4 <= confidence < 0.7 (rotear mas sinalizar para revisao)
-- **Fallback**: confidence < 0.4 (usar EDISON como builder generico)
+- **Fallback**: confidence < 0.4 (usar builder_agent como builder generico)
 
 ## Fallback
-**EDISON** (builder generico) — quando a tarefa nao mapeia claramente para nenhum dominio especializado, EDISON e o satelite mais versatil por usar opus e ter capacidade de construcao ampla.
+**builder_agent** (builder generico) — quando a tarefa nao mapeia claramente para nenhum dominio especializado, builder_agent e o satelite mais versatil por usar opus e ter capacidade de construcao ampla.
 
 ## Disambiguation Rules
 | Conflito | Resolucao | Razao |
 |----------|-----------|-------|
-| SHAKA vs LILY (pesquisar + marketing) | SHAKA primeiro, LILY depois | Pesquisa informa o marketing |
-| EDISON vs ATLAS (criar + deploy) | EDISON build, ATLAS deploy | Separar construcao de operacao |
-| PYTHA vs SHAKA (documentar + pesquisar) | Se fonte externa: SHAKA. Se interna: PYTHA | Direcao do conhecimento |
-| LILY vs YORK (vender + monetizar) | Se conteudo/copy: LILY. Se produto digital/curso: YORK | Tipo de entregavel |
+| research_agent vs marketing_agent (pesquisar + marketing) | research_agent primeiro, marketing_agent depois | Pesquisa informa o marketing |
+| builder_agent vs operations_agent (criar + deploy) | builder_agent build, operations_agent deploy | Separar construcao de operacao |
+| knowledge_agent vs research_agent (documentar + pesquisar) | Se fonte externa: research_agent. Se interna: knowledge_agent | Direcao do conhecimento |
+| marketing_agent vs commercial_agent (vender + monetizar) | Se conteudo/copy: marketing_agent. Se produto digital/curso: commercial_agent | Tipo de entregavel |
 
 ## Output Format
 ```text
@@ -116,12 +116,12 @@ ELSE:
 ### Score Breakdown
 | Route | Keyword | Semantic | Combined |
 |-------|---------|----------|----------|
-| SHAKA | [score] | [score]  | [score]  |
-| LILY  | [score] | [score]  | [score]  |
-| EDISON| [score] | [score]  | [score]  |
-| PYTHA | [score] | [score]  | [score]  |
-| ATLAS | [score] | [score]  | [score]  |
-| YORK  | [score] | [score]  | [score]  |
+| research_agent | [score] | [score]  | [score]  |
+| marketing_agent  | [score] | [score]  | [score]  |
+| builder_agent| [score] | [score]  | [score]  |
+| knowledge_agent | [score] | [score]  | [score]  |
+| operations_agent | [score] | [score]  | [score]  |
+| commercial_agent  | [score] | [score]  | [score]  |
 
 ### Flags
 - [LOW_CONFIDENCE | DISAMBIGUATION | FALLBACK | none]
@@ -130,4 +130,4 @@ ELSE:
 ## Research Base
 - Router pattern: confidence threshold + fallback (LangChain RouterChain)
 - Keyword + semantic hybrid = mais robusto que keyword-only
-- CODEXA satellite routing table: STELLA_RULES.md + AGENT_ROUTING_INDEX.md
+- organization agent_node routing table: orchestrator_RULES.md + AGENT_ROUTING_INDEX.md

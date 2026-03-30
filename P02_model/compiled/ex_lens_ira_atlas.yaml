@@ -1,13 +1,13 @@
 id: p02_lens_ira_atlas
 kind: lens
 pillar: P02
-perspective: Each domain concept in ATLAS has an `ira_lens` — an emotional perspective that transforms abstract knowledge
+perspective: Each domain concept in operations_agent has an `ira_lens` — an emotional perspective that transforms abstract knowledge
   into execution fuel. Ira channels impatience with mediocrity into decisive action, not recklessness.
-applies_to: 'ATLAS satellite (execution domain). Other satellites have different pecado lenses: EDISON=soberba, LILY=luxuria,
-  SHAKA=inveja, YORK=avareza, PYTHA=gula.'
+applies_to: 'operations_agent agent_node (execution domain). Other agent_nodes have different pecado lenses: builder_agent=soberba, marketing_agent=luxuria,
+  research_agent=inveja, commercial_agent=avareza, knowledge_agent=gula.'
 version: 1.0.0
 created: 2026-03-24
-author: ATLAS
+author: operations_agent
 domain: execution
 quality: 9.0
 tags:
@@ -15,7 +15,7 @@ tags:
 - perspective
 - ira
 - emotional-drive
-- satellite-identity
+- agent_node-identity
 heuristics: '| Concept | Ira Lens | Decision Impact |
 
   |---------|----------|----------------|
@@ -38,4 +38,4 @@ output_bias: '- Favors decisive action over analysis paralysis
   - Anti-pattern: using ira as excuse to skip quality gates
 
 
-  Source: `records/satellites/atlas/mental_model.yaml`'
+  Source: `records/agent_nodes/atlas/mental_model.yaml`'

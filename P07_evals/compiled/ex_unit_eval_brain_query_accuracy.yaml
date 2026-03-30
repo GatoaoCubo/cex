@@ -18,14 +18,14 @@ test_cases: '| Query | Expected Top Result | Pass Criteria |
 
   | "agent for SEO" | KC with SEO/marketplace | Top-3 contains match |
 
-  | "how to spawn satellite" | KC_ATLAS_003 or spawn skill | Top-1 score > 0.7 |
+  | "how to spawn agent_node" | KC_operations_agent_003 or spawn skill | Top-1 score > 0.7 |
 
-  | "quality gate implementation" | KC_ATLAS_010 | Exact match in top-1 |
+  | "quality gate implementation" | KC_operations_agent_010 | Exact match in top-1 |
 
   | "brand propagation pipeline" | brand_propagation skill | Top-3 contains match |
 
   | "whatsapp voice pipeline" | voice_pipeline skill | Top-3 contains match |'
-execution: "python -c \"\nfrom codexa_brain.vector_search import hybrid_search\nfor query, expected in TEST_CASES:\n    results\
+execution: "python -c \"\nfrom organization_brain.vector_search import hybrid_search\nfor query, expected in TEST_CASES:\n    results\
   \ = hybrid_search(query, k=3)\n    assert any(expected in r['source'] for r in results)\n\""
 metrics: '| Metric | Threshold | Current |
 

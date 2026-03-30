@@ -11,7 +11,7 @@ quality: 9.0
 tags: [firecrawl, api-key, env, config]
 tldr: "Firecrawl API key for web scraping enrichment of marketplace research"
 density_score: 0.88
-source: codexa-core/.claude/projects/memory/MEMORY.md
+source: organization-core/.claude/projects/memory/MEMORY.md
 ---
 
 # Env: FIRECRAWL_API_KEY
@@ -28,7 +28,7 @@ source: codexa-core/.claude/projects/memory/MEMORY.md
 
 ## Source
 
-- Where defined: Railway environment variables (ATLAS satellite)
+- Where defined: Railway environment variables (operations_agent agent_node)
 - How to obtain: Sign up at firecrawl.dev, $19/mo tier, copy API key from dashboard
 
 ## Fallback
@@ -49,4 +49,4 @@ source: codexa-core/.claude/projects/memory/MEMORY.md
 - Conflicts: none (Serper runs independently)
 
 ---
-*Migrated from: CODEXA MEMORY.md (Firecrawl integration 2026-03-01)*
+*Migrated from: organization MEMORY.md (Firecrawl integration 2026-03-01)*

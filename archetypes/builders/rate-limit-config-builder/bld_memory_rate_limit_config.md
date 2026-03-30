@@ -16,7 +16,7 @@ tags: [rate-limit-config, rpm, tpm, budget, retry-after, alert-threshold, provid
 tldr: "Real provider limits + alert_threshold 0.8 + retry_after = zero 429 cascades. Fictional limits always fail in production."
 impact_score: 8.5
 decay_rate: 0.03
-satellite: edison
+agent_node: edison
 keywords: [rate limit, rpm, tpm, budget cap, alert threshold, retry after, provider tier, 429, token bucket, concurrent]
 ---
 

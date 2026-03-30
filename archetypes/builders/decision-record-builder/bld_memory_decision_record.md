@@ -16,7 +16,7 @@ tags: [decision-record, ADR, context, consequences, status-lifecycle, options]
 tldr: "Context is the most load-bearing field. Options prove deliberation. Negative consequences prevent blind trust. Status gates actionability."
 impact_score: 8.0
 decay_rate: 0.03
-satellite: edison
+agent_node: edison
 keywords: [ADR, architecture decision, context, consequences, options, status, supersede, rationale]
 ---
 

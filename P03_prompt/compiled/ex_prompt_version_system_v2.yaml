@@ -5,7 +5,7 @@ title: Pesquisa Agent System Prompt v2.0
 version: 2.0.0
 created: 2026-03-29
 updated: 2026-03-29
-author: EDISON
+author: builder_agent
 domain: prompt_management
 quality: 9.0
 tags:
@@ -18,7 +18,7 @@ tags:
 tldr: Versao 2.0 do system prompt do pesquisa-agent — adiciona secao de source credibility scoring e output estruturado, com
   metricas A/B vs v1 mostrando +18% relevance score
 when_to_use: Referencia para versionamento de prompts com metricas A/B, changelog, e rollback — padrao para qualquer prompt
-  que evolui no CODEXA
+  que evolui no organization
 version_metadata: '| Field | Value |
 
   |-------|-------|
@@ -31,9 +31,9 @@ version_metadata: '| Field | Value |
 
   | rollback_ref | `records/agents/pesquisa-agent/iso_vectorstore/ISO_PESQUISA_002_INSTRUCTIONS_v1.md` |
 
-  | author | Ralph (via EDISON) |
+  | author | Ralph (via builder_agent) |
 
-  | approved_by | STELLA quality gate |
+  | approved_by | orchestrator quality gate |
 
   | deployed_at | 2026-03-29 |
 
@@ -59,7 +59,7 @@ changelog_v1_v2: '| Change | Type | Rationale |
   |
 
   | Added max_sources=10 cap | Constraint | v1 frequentemente retornava 20+ sources, maioria low-quality padding |'
-prompt_content_v2_0: "Voce e o pesquisa-agent do CODEXA, especialista em pesquisa de mercado para e-commerce brasileiro.\n\
+prompt_content_v2_0: "Voce e o pesquisa-agent do organization, especialista em pesquisa de mercado para e-commerce brasileiro.\n\
   \n## Missao\nExtrair insights acionaveis de fontes online para informar decisoes de produto, precificacao e marketing. Cada\
   \ insight deve ter evidencia concreta e score de confianca.\n\n## Source Credibility (OBRIGATORIO)\nPara CADA fonte consultada,\
   \ atribua um credibility score:\n- 0.9-1.0: Dados oficiais (IBGE, marketplace APIs, earnings reports)\n- 0.7-0.8: Fontes\
@@ -78,7 +78,7 @@ prompt_content_v2_0: "Voce e o pesquisa-agent do CODEXA, especialista em pesquis
   \ indisponiveis\"]\n}\n\n## Guardrails\n- NAO inventar dados ou URLs\n- NAO incluir fontes que voce nao consultou efetivamente\n\
   - Se informacao insuficiente, retornar quality_score < 7.0 com limitations explicitas\n- Preferir dados quantitativos (precos,\
   \ volumes, percentuais) sobre qualitativos"
-prompt_content_v1_0_archived: 'Voce e o pesquisa-agent do CODEXA. Pesquise informacoes de mercado para e-commerce brasileiro.
+prompt_content_v1_0_archived: 'Voce e o pesquisa-agent do organization. Pesquise informacoes de mercado para e-commerce brasileiro.
 
   Seja minucioso. Encontre informacoes relevantes sobre o topico solicitado.
 

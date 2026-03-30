@@ -20,15 +20,15 @@ brain_query MCP tool — hybrid BM25+FAISS search.
 | Query | Expected Top Result | Pass Criteria |
 |-------|-------------------|---------------|
 | "agent for SEO" | KC with SEO/marketplace | Top-3 contains match |
-| "how to spawn satellite" | KC_ATLAS_003 or spawn skill | Top-1 score > 0.7 |
-| "quality gate implementation" | KC_ATLAS_010 | Exact match in top-1 |
+| "how to spawn agent_node" | KC_operations_agent_003 or spawn skill | Top-1 score > 0.7 |
+| "quality gate implementation" | KC_operations_agent_010 | Exact match in top-1 |
 | "brand propagation pipeline" | brand_propagation skill | Top-3 contains match |
 | "whatsapp voice pipeline" | voice_pipeline skill | Top-3 contains match |
 
 ## Execution
 ```bash
 python -c "
-from codexa_brain.vector_search import hybrid_search
+from organization_brain.vector_search import hybrid_search
 for query, expected in TEST_CASES:
     results = hybrid_search(query, k=3)
     assert any(expected in r['source'] for r in results)

@@ -1,5 +1,5 @@
 ---
-id: p11_bl_satellite_execution
+id: p11_bl_agent_node_execution
 kind: bugloop
 pillar: P11
 title: "Bugloop: Satellite Execution Resilience"
@@ -8,10 +8,10 @@ created: 2026-03-22
 updated: 2026-03-22
 author: EDISON
 quality: 9.0
-tags: [satellite, resilience, bugloop, feedback]
-tldr: "3-retry bugloop for satellite task execution — never stop on first error, skip after 3 failures, always commit partial work"
+tags: [agent_node, resilience, bugloop, feedback]
+tldr: "3-retry bugloop for agent_node task execution — never stop on first error, skip after 3 failures, always commit partial work"
 density_score: 0.90
-source: codexa-core/.claude/rules/satellite-execution.md
+source: organization-core/.claude/rules/agent_node-execution.md
 ---
 
 # Bugloop: Satellite Execution Resilience
@@ -20,8 +20,8 @@ source: codexa-core/.claude/rules/satellite-execution.md
 
 | Property | Value |
 |----------|-------|
-| Detect | Any error during satellite task execution (file not found, command failed, import error, git conflict, permission denied, timeout) |
-| Condition | `CODEXA_SATELLITE` is set and NOT stella |
+| Detect | Any error during agent_node task execution (file not found, command failed, import error, git conflict, permission denied, timeout) |
+| Condition | `organization_SATELLITE` is set and NOT stella |
 | Frequency | Every task step, checked after each action |
 
 ## Cycle
@@ -66,7 +66,7 @@ source: codexa-core/.claude/rules/satellite-execution.md
 ## Escalation
 
 - After 3 failures: Register error, SKIP to next task, continue execution
-- Owner: STELLA (reviews via signal + git log after satellite completes)
+- Owner: orchestrator (reviews via signal + git log after agent_node completes)
 
 ---
-*Migrated from: codexa-core/.claude/rules/satellite-execution.md (Resilience Protocol)*
+*Migrated from: organization-core/.claude/rules/agent_node-execution.md (Resilience Protocol)*

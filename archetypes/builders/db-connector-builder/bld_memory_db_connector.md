@@ -16,7 +16,7 @@ tags: [connector, idempotency, health-check, bidirectional, webhook-dedup]
 tldr: "Connectors need idempotency on inbound paths and health_check definitions. Use connector for bidirectional; client for outbound-only."
 impact_score: 7.5
 decay_rate: 0.05
-satellite: edison
+agent_node: edison
 keywords: [connector, bidirectional, webhook, idempotency, health check, protocol, auth, data mapping, rate limit, transform]
 ---
 

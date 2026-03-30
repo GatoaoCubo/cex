@@ -90,8 +90,8 @@ SYSTEM You answer as a concise e-commerce assistant.
 
 <!-- lang: bash | purpose: build and smoke-test -->
 ```bash
-ollama create codexa-sales -f Modelfile
-ollama run codexa-sales "Resuma riscos de margem em 3 linhas."
+ollama create organization-sales -f Modelfile
+ollama run organization-sales "Resuma riscos de margem em 3 linhas."
 ollama ps
 ```
 

@@ -26,9 +26,9 @@ agent (P02, agente individual), e boot_config (P02, por provider).
 - Validar artifact contra quality gates (10 HARD + 10 SOFT)
 - Documentar tool availability e MCP server configurations
 ## Routing
-keywords: [satellite, spec, architecture, role, model, mcp, boot, dispatch, scaling, monitoring]
-triggers: "define a new satellite", "spec this satellite", "document satellite architecture"
+keywords: [agent_node, spec, architecture, role, model, mcp, boot, dispatch, scaling, monitoring]
+triggers: "define a new agent_node", "spec this agent_node", "document agent_node architecture"
 ## Crew Role
 In a crew, I handle SATELLITE ARCHITECTURE SPECIFICATION.
-I answer: "what is this satellite's role, model, tools, and constraints?"
+I answer: "what is this agent_node's role, model, tools, and constraints?"
 I do NOT handle: agent identity (P02 agent), boot configuration per provider (P02 boot_config), pattern documentation (P08 pattern).

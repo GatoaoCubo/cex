@@ -53,9 +53,9 @@ P11 governa melhoria continua no CEX com 5 tipos de artefato. Quality gates defi
 - Guardrail soft (warning only): nao previne o dano
 
 ## Application
-No CODEXA, P11 manifesta como Shokunin quality tiers (7.0/8.0/9.5), satellite-execution retry protocol (3 tentativas), e ISO error_handling.md. O forge valida prompts contra P11 rules antes de output.
+No organization, P11 manifesta como Shokunin quality tiers (7.0/8.0/9.5), agent_node-execution retry protocol (3 tentativas), e ISO error_handling.md. O forge valida prompts contra P11 rules antes de output.
 
 ## References
 - P11_feedback/_schema.yaml (fonte de verdade)
 - P07_evals/_schema.yaml (scoring upstream)
-- .claude/rules/satellite-execution.md (retry protocol)
+- .claude/rules/agent_node-execution.md (retry protocol)

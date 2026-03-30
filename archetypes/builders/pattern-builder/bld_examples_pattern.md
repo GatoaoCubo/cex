@@ -9,7 +9,7 @@ pattern: few-shot learning — LLM reads these before producing
 
 # Examples: pattern-builder
 ## Golden Example
-INPUT: "Document the Continuous Batching pattern for multi-satellite task processing"
+INPUT: "Document the Continuous Batching pattern for multi-agent_node task processing"
 OUTPUT:
 ```yaml
 id: p08_pat_continuous_batching
@@ -21,34 +21,34 @@ updated: "2026-03-26"
 author: "builder"
 domain: "orchestration"
 quality: null
-tags: [pattern, batching, orchestration, parallel, multi-satellite]
-tldr: "Auto-refill satellite slots from queue as tasks complete, eliminating idle time between waves"
+tags: [pattern, batching, orchestration, parallel, multi-agent_node]
+tldr: "Auto-refill agent_node slots from queue as tasks complete, eliminating idle time between waves"
 name: "Continuous Batching"
-problem: "Sequential wave execution leaves satellites idle between batches"
-solution: "Auto-refill available slots from a queue as each satellite completes"
-context: "Multi-satellite orchestration with >6 independent tasks"
+problem: "Sequential wave execution leaves agent_nodes idle between batches"
+solution: "Auto-refill available slots from a queue as each agent_node completes"
+context: "Multi-agent_node orchestration with >6 independent tasks"
 forces: ["throughput vs resource limits", "parallelism vs git contention", "queue depth vs RAM ceiling"]
-consequences: ["1.6x speedup over sequential", "zero idle between waves", "requires independent tasks", "max 3 concurrent satellites (RAM)"]
+consequences: ["1.6x speedup over sequential", "zero idle between waves", "requires independent tasks", "max 3 concurrent agent_nodes (RAM)"]
 related_patterns: [p08_pat_wave_execution, p08_pat_signal_monitor]
 anti_patterns: ["manual slot management", "unbounded parallelism"]
-applicability: "Use when >6 independent tasks across <=3 satellites. Do NOT use for dependent tasks or shared-file edits."
+applicability: "Use when >6 independent tasks across <=3 agent_nodes. Do NOT use for dependent tasks or shared-file edits."
 keywords: [batching, parallel, queue, throughput, spawn]
 ```
 ## Problem
-When orchestrating multi-satellite work in waves (batch N completes, then batch N+1 starts), satellites sit idle between waves. If batch 1 has 3 tasks finishing at different times, the fastest satellite waits for the slowest before batch 2 begins.
+When orchestrating multi-agent_node work in waves (batch N completes, then batch N+1 starts), agent_nodes sit idle between waves. If batch 1 has 3 tasks finishing at different times, the fastest agent_node waits for the slowest before batch 2 begins.
 ## Context
-- Environment: Orchestrator managing 2-3 satellites via spawn scripts
-- Frequency: every multi-satellite mission with >6 tasks
+- Environment: Orchestrator managing 2-3 agent_nodes via spawn scripts
+- Frequency: every multi-agent_node mission with >6 tasks
 - Severity: 40% throughput waste in sequential wave execution
 ## Forces
-- **Throughput vs resources**: more parallelism = faster, but RAM limits to 3 satellites
+- **Throughput vs resources**: more parallelism = faster, but RAM limits to 3 agent_nodes
 - **Independence vs contention**: parallel tasks must not edit same files (git conflicts)
 - **Queue depth vs complexity**: deeper queues need naming conventions and signal tracking
 ## Solution
 Replace static wave execution with a queue-drain loop:
 1. Fill all available slots (up to 3) with tasks from queue
 2. Monitor signals for completion (poll every 15s)
-3. When a satellite completes, immediately assign next queued task
+3. When a agent_node completes, immediately assign next queued task
 4. Repeat until queue empty
 ```text
 Queue: [T1, T2, T3, T4, T5, T6, T7]
@@ -69,10 +69,10 @@ Costs:
 - Naming convention overhead ({MISSION}_batch_{N}_{SAT}.md)
 ## Examples
 1. **ISOFIX Mission**: 7 batches across researcher+builder+knowledge-engine, 1.6x speedup confirmed
-2. **CBTEST Mixed**: 3 satellites, mixed complexity, zero git contention
+2. **CBTEST Mixed**: 3 agent_nodes, mixed complexity, zero git contention
 ## Anti-Patterns
-- **Manual Slot Management**: manually tracking which satellite is free wastes orchestrator time
-- **Unbounded Parallelism**: launching >3 satellites causes BSOD (RAM exhaustion)
+- **Manual Slot Management**: manually tracking which agent_node is free wastes orchestrator time
+- **Unbounded Parallelism**: launching >3 agent_nodes causes BSOD (RAM exhaustion)
 ## Related Patterns
 - Wave Execution: predecessor pattern (static batches); continuous batching improves on it
 - Signal Monitor: required infrastructure for detecting slot availability

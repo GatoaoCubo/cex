@@ -11,7 +11,7 @@ domain: build
 quality: 9.0
 tags: [tdd, testing, quality-gate, red-green-refactor, build-discipline]
 tldr: "Enforces test-first development: RED verified before code, YAGNI compliance, no RED commits merged"
-when_to_use: "Before merging any code commit in EDISON or ATLAS build pipelines"
+when_to_use: "Before merging any code commit in builder_agent or operations_agent build pipelines"
 keywords: [tdd-compliance, test-first, red-green-refactor, commit-hygiene]
 long_tails:
   - como validar se codigo segue TDD corretamente
@@ -31,7 +31,7 @@ density_score: 0.91
 | Metric | tdd_compliance_score |
 | Threshold | 1.0 (all 7 checks pass) |
 | Operator | == |
-| Scope | EDISON and ATLAS build satellites |
+| Scope | builder_agent and operations_agent build agent_nodes |
 | Trigger | Pre-merge on any branch with code changes |
 
 ## Actions
@@ -40,7 +40,7 @@ density_score: 0.91
 |--------|--------|------------|
 | Pass (7/7) | Approve merge, proceed to deploy pipeline | None |
 | Partial (5-6/7) | Block merge, return specific failing checks | Author fixes within same PR |
-| Fail (<5/7) | Block merge, flag for process review | Notify satellite owner + STELLA |
+| Fail (<5/7) | Block merge, flag for process review | Notify agent_node owner + orchestrator |
 
 ## Checklist
 
@@ -77,7 +77,7 @@ Each dimension: 0 (fail) or 10 (pass). Score >= 7.0 to merge.
 ## Bypass Protocol
 
 - Conditions: Hotfix patches with P0 production incident (max 24h bypass window)
-- Approver: STELLA orchestrator or project owner
+- Approver: orchestrator orchestrator or project owner
 - Audit: Bypass logged with incident ID + follow-up TDD ticket auto-created
 - Limit: Max 2 bypasses per sprint; 3rd triggers mandatory process review
 
@@ -95,4 +95,4 @@ pytest --cov=src --cov-report=term-missing --cov-fail-under=80
 ```
 
 ---
-*Quality Gate v1.0 | EDISON Build Domain | 2026-03-24*
+*Quality Gate v1.0 | builder_agent Build Domain | 2026-03-24*

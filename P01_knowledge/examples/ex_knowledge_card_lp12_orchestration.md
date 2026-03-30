@@ -37,15 +37,15 @@ P12 governa coordenacao multi-agente no CEX com 6 tipos de artefato. Workflows d
 | signal format | JSON | complete, error, progress |
 | handoff max_bytes | 4096 | Task + context + commit |
 | spawn modes | 3 | solo, grid static, grid continuous |
-| dispatch_rule format | YAML | keyword > satellite routing |
+| dispatch_rule format | YAML | keyword > agent_node routing |
 
 ## Patterns
 - Workflow com steps tipados: sequential (A>B>C) ou parallel (A+B+C)
 - DAG para dependencias complexas: task C depende de A e B concluirem
 - Spawn config: solo (1 sat), grid static (<=6 tasks), grid continuous (>6 tasks, auto-refill)
-- Signal protocol: {sat}_complete_{ts}.json com score para STELLA monitorar
+- Signal protocol: {sat}_complete_{ts}.json com score para orchestrator monitorar
 - Handoff com 5 secoes: contexto, seeds, tarefas, scope fence, commit instruction
-- Dispatch rule: keyword match > satellite routing em YAML
+- Dispatch rule: keyword match > agent_node routing em YAML
 
 ## Anti-Patterns
 - Handoff sem commit instruction: trabalho pode se perder
@@ -55,7 +55,7 @@ P12 governa coordenacao multi-agente no CEX com 6 tipos de artefato. Workflows d
 - Workflow sem error handling: falha em 1 step mata todo o pipeline
 
 ## Application
-No CODEXA, P12 manifesta como spawn_solo.ps1/spawn_grid.ps1, signal_writer.py, e .claude/handoffs/. Este proprio handoff (META3_edison.md) eh uma instancia de P12 handoff. Grid continuous testado com 1.6x speedup em 7 batches.
+No organization, P12 manifesta como spawn_solo.ps1/spawn_grid.ps1, signal_writer.py, e .claude/handoffs/. Este proprio handoff (META3_edison.md) eh uma instancia de P12 handoff. Grid continuous testado com 1.6x speedup em 7 batches.
 
 ## References
 - P12_orchestration/_schema.yaml (fonte de verdade)

@@ -9,12 +9,12 @@ updated: 2026-03-22
 author: STELLA
 quality: 9.0
 tags: [isofix, handoff, edison, orchestration]
-tldr: "Real handoff dispatching EDISON to complete ISO vectorstores for 9 agents — demonstrates autonomia total pattern"
+tldr: "Real handoff dispatching builder_agent to complete ISO vectorstores for 9 agents — demonstrates autonomia total pattern"
 density_score: 0.91
-source: codexa-core/.claude/handoffs/_archived_isofix/ISOFIX_batch_1_edison.md
+source: organization-core/.claude/handoffs/_archived_isofix/ISOFIX_batch_1_edison.md
 ---
 
-# EDISON — ISOFIX: ISO Completion Batch 1/7
+# builder_agent — ISOFIX: ISO Completion Batch 1/7
 **Autonomia Total** | **Quality 9.0+**
 **REGRA: Commit e signal ANTES de qualquer pausa.**
 
@@ -32,7 +32,7 @@ Completar o ISO pack de 9 agents para atingir o minimo de 10 arquivos ISO cada. 
 Para cada agent (generated, tool-builder, tool-shed, agent_factory, voice, curso, mentor_humano, scout, access_control_auditor): contar ISOs existentes, listar tipos faltantes.
 
 ### Step 2: Generate missing ISOs
-Ler README.md do agent para entender dominio. Usar `ISO_EDISON_303_OUTPUT_TEMPLATE.md` como referencia. Gerar ISOs faltantes ate completar 10 por agent. Naming: `ISO_{AGENT_UPPER}_{ORDINAL}_{TYPE}.md`.
+Ler README.md do agent para entender dominio. Usar `ISO_builder_agent_303_OUTPUT_TEMPLATE.md` como referencia. Gerar ISOs faltantes ate completar 10 por agent. Naming: `ISO_{AGENT_UPPER}_{ORDINAL}_{TYPE}.md`.
 
 ### Step 3: Validate completeness
 Verificar que cada agent tem >= 10 ISOs. Listar any gaps remaining.
@@ -46,7 +46,7 @@ Verificar que cada agent tem >= 10 ISOs. Listar any gaps remaining.
 
 ```bash
 git add records/agents/*/iso_vectorstore/
-git commit -m "EDISON[ISOFIX-1]: ISO completion for 9 agents (batch 1/7)"
+git commit -m "builder_agent[ISOFIX-1]: ISO completion for 9 agents (batch 1/7)"
 ```
 
 ## SIGNAL
@@ -56,4 +56,4 @@ python -c "from records.core.python.signal_writer import write_signal; write_sig
 ```
 
 ---
-*Migrated from: codexa-core/.claude/handoffs/_archived_isofix/ISOFIX_batch_1_edison.md*
+*Migrated from: organization-core/.claude/handoffs/_archived_isofix/ISOFIX_batch_1_edison.md*

@@ -16,7 +16,7 @@ tags: [meta-construction, builder-of-builders, schema-first, protocol-design, re
 tldr: "Write the output schema before writing the construction steps. Each step must map to a schema field."
 impact_score: 7.5
 decay_rate: 0.05
-satellite: edison
+agent_node: edison
 keywords: [meta-builder, construction, schema, protocol, archetype, recursive, builder]
 ---
 

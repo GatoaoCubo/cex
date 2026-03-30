@@ -4,7 +4,7 @@ pillar: P10
 version: 1.0.0
 created: '2026-03-28'
 updated: '2026-03-28'
-author: EDISON
+author: builder_agent
 domain: quality
 quality: null
 tags:
@@ -20,7 +20,7 @@ scope:
 - 'Layer: validation layer between LLM production and pool storage'
 rationale:
 - Quality floor prevents accumulation of low-value artifacts that erode trust in pool search results
-- Downstream consumers (agents, skills, satellites) depend on pool artifacts being production-ready
+- Downstream consumers (agents, skills, agent_nodes) depend on pool artifacts being production-ready
 - 'Without enforcement, Gresham''s Law applies: bad artifacts drive out good ones as noise drowns signal'
 enforcement:
 - 'Detection: quality_gate validator runs HARD gates (pass/fail) + SOFT scoring (weighted sum)'

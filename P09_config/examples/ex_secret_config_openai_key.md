@@ -19,14 +19,14 @@ tags: [secret, openai, api-key, vault, rotation, encryption]
 
 ## Overview
 
-Configuration for managing the OpenAI API key used by CODEXA's model router (fallback path when Anthropic is unavailable). Stored in HashiCorp Vault with AES-256 encryption, 90-day automatic rotation, and full access audit trail.
+Configuration for managing the OpenAI API key used by organization's model router (fallback path when Anthropic is unavailable). Stored in HashiCorp Vault with AES-256 encryption, 90-day automatic rotation, and full access audit trail.
 
 ## Secret Identity
 
 | Field | Value |
 |-------|-------|
-| Secret name | `codexa/prod/openai_api_key` |
-| Vault path | `secret/data/codexa/prod/openai_api_key` |
+| Secret name | `organization/prod/openai_api_key` |
+| Vault path | `secret/data/organization/prod/openai_api_key` |
 | Environment variable | `OPENAI_API_KEY` |
 | Provider | HashiCorp Vault (self-hosted on Railway) |
 | Encryption | AES-256-GCM at rest, TLS 1.3 in transit |
@@ -40,7 +40,7 @@ rotation:
   method: automatic
   steps:
     1_generate: "Create new key in OpenAI dashboard API > API Keys"
-    2_store: "vault kv put secret/codexa/prod/openai_api_key value=sk-proj-NEW"
+    2_store: "vault kv put secret/organization/prod/openai_api_key value=sk-proj-NEW"
     3_verify: "curl https://api.openai.com/v1/models -H 'Authorization: Bearer NEW'"
     4_deploy: "Railway redeploy to pick up new Vault value"
     5_revoke: "Delete old key in OpenAI dashboard after 24h grace period"
@@ -53,22 +53,22 @@ rotation:
 
 | Role | Permission | Justification |
 |------|-----------|---------------|
-| STELLA (orchestrator) | read | Routes model requests, needs key for fallback |
-| ATLAS (deploy) | read | Injects into Railway env during deployment |
-| EDISON (build) | none | Build agent never calls external LLMs directly |
-| SHAKA (research) | read | Research may use GPT for cross-model comparison |
+| orchestrator (orchestrator) | read | Routes model requests, needs key for fallback |
+| operations_agent (deploy) | read | Injects into Railway env during deployment |
+| builder_agent (build) | none | Build agent never calls external LLMs directly |
+| research_agent (research) | read | Research may use GPT for cross-model comparison |
 | Admin (human) | read/write/rotate | Full lifecycle management |
 
 ### Vault Policy
 ```hcl
-path "secret/data/codexa/prod/openai_api_key" {
+path "secret/data/organization/prod/openai_api_key" {
   capabilities = ["read"]
   allowed_parameters = {
     "version" = []
   }
 }
 
-path "secret/metadata/codexa/prod/openai_api_key" {
+path "secret/metadata/organization/prod/openai_api_key" {
   capabilities = ["read", "list"]
 }
 ```
@@ -97,7 +97,7 @@ audit:
 ```bash
 # Secret injected via Vault agent sidecar
 # Railway service variable references Vault path
-OPENAI_API_KEY=vault:secret/data/codexa/prod/openai_api_key#value
+OPENAI_API_KEY=vault:secret/data/organization/prod/openai_api_key#value
 ```
 
 ### Local Development
@@ -106,7 +106,7 @@ OPENAI_API_KEY=vault:secret/data/codexa/prod/openai_api_key#value
 OPENAI_API_KEY=sk-proj-dev-PLACEHOLDER
 
 # Or fetch from Vault directly:
-export OPENAI_API_KEY=$(vault kv get -field=value secret/codexa/dev/openai_api_key)
+export OPENAI_API_KEY=$(vault kv get -field=value secret/organization/dev/openai_api_key)
 ```
 
 ### CI/CD (GitHub Actions)

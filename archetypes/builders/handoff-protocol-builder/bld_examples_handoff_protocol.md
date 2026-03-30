@@ -9,7 +9,7 @@ pattern: few-shot learning — LLM reads these before producing
 
 # Examples: handoff-protocol-builder
 ## Golden Example
-INPUT: "Create handoff protocol for research delegation from STELLA to SHAKA"
+INPUT: "Create handoff protocol for research delegation from orchestrator to research_agent"
 OUTPUT:
 ```yaml
 id: p02_handoff_stella_to_shaka
@@ -19,19 +19,19 @@ version: "1.0.0"
 created: "2026-03-29"
 updated: "2026-03-29"
 author: "EDISON"
-name: "STELLA-to-SHAKA Research Delegation"
+name: "orchestrator-to-research_agent Research Delegation"
 quality: null
 tags: [handoff_protocol, P02, handoff]
-tldr: "STELLA-to-SHAKA Research Delegation — production-ready handoff_protocol configuration"
+tldr: "orchestrator-to-research_agent Research Delegation — production-ready handoff_protocol configuration"
 ```
 ## Overview
-Handoff protocol for delegating research tasks from STELLA (orchestrator) to SHAKA (research satellite).
-STELLA detects research intent, composes context, and dispatches via handoff file.
+Handoff protocol for delegating research tasks from orchestrator (orchestrator) to research_agent (research agent_node).
+orchestrator detects research intent, composes context, and dispatches via handoff file.
 
 ## Trigger
 Condition: task keywords match [research, analyze, investigate, compare, benchmark, scrape].
 Confidence threshold: >= 0.7 keyword match score.
-Pre-check: verify SHAKA is not already running (signal file check).
+Pre-check: verify research_agent is not already running (signal file check).
 
 ## Context Transfer
 | Field | Type | Required | Purpose |

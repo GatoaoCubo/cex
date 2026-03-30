@@ -29,11 +29,11 @@ density_score: 0.91
 
 ## Context
 The agent-card-builder produces `agent_card` artifacts — complete architectural
-specifications for an autonomous agent satellite. A agent_card defines everything needed
-to instantiate, operate, and monitor a satellite: its role, model, MCP servers, boot sequence,
+specifications for an autonomous agent agent_node. A agent_card defines everything needed
+to instantiate, operate, and monitor a agent_node: its role, model, MCP servers, boot sequence,
 constraints, dispatch rules, and scaling configuration.
 **Input contract**:
-- `{{satellite_name}}`: kebab-case identifier (e.g. `research-sat`, `build-sat`)
+- `{{agent_node_name}}`: kebab-case identifier (e.g. `research-sat`, `build-sat`)
 - `{{domain}}`: primary operational domain (e.g. `web_research`, `code_generation`)
 - `{{model}}`: LLM model identifier (e.g. `claude-opus-4`, `claude-sonnet-4`)
 - `{{tools_list}}`: comma-separated list of MCP servers or built-in tools
@@ -42,29 +42,29 @@ constraints, dispatch rules, and scaling configuration.
 a narrative identity section, and structured subsections for boot sequence, dispatch rules,
 constraints, and monitoring.
 **Boundaries**:
-- Handles full satellite architecture only.
+- Handles full agent_node architecture only.
 - Individual agent identity belongs in a separate agent artifact.
 - Per-provider boot configuration belongs in a boot_config artifact.
 - Reusable operation patterns belong in pattern artifacts.
 ## Phases
 ### Phase 1: Analyze Role and Boundary
-**Primary action**: Define the satellite's operational role and establish what it does
+**Primary action**: Define the agent_node's operational role and establish what it does
 versus what it explicitly does not do.
 ```
-INPUT: satellite_name, domain, constraints_raw
-1. Express the satellite's single primary function:
-   role_statement = "{{satellite_name}} is responsible for [ONE THING]"
+INPUT: agent_node_name, domain, constraints_raw
+1. Express the agent_node's single primary function:
+   role_statement = "{{agent_node_name}} is responsible for [ONE THING]"
    Reject vague roles like "general purpose" or "multi-domain"
 2. Map the NOT-domain boundary:
    for each adjacent domain in [research, build, execute, monitor, orchestrate, store]:
-     if domain != satellite's primary domain:
+     if domain != agent_node's primary domain:
        add to NOT_HANDLES list with brief reason
    Minimum 2 entries required.
 3. Determine LLM function type:
-   if satellite makes decisions     -> BECOME
-   if satellite calls external tools -> CALL
-   if satellite coordinates others  -> COLLABORATE
-   if satellite injects context     -> INJECT
+   if agent_node makes decisions     -> BECOME
+   if agent_node calls external tools -> CALL
+   if agent_node coordinates others  -> COLLABORATE
+   if agent_node injects context     -> INJECT
 4. Extract capability_keywords (5-10 terms) from domain description.
 OUTPUT: role_statement, not_handles[], llm_function, capability_keywords[]
 ```
@@ -103,7 +103,7 @@ OUTPUT: model_config{}, mcp_bindings[], boot_sequence[], boot_time_seconds
 Verification: each MCP entry has `transport` and `required` fields.
 `boot_sequence` has >= 4 steps.
 ### Phase 3: Define Dispatch and Constraints
-**Primary action**: Specify how the satellite receives work, what it accepts or rejects,
+**Primary action**: Specify how the agent_node receives work, what it accepts or rejects,
 and its operational limits.
 ```
 INPUT: constraints_raw, capability_keywords[], role_statement
@@ -115,8 +115,8 @@ INPUT: constraints_raw, capability_keywords[], role_statement
      priority: "normal" | "high" | "low"
    }
 2. Constraint extraction from constraints_raw:
-   hard_constraints = []   # things the satellite MUST NEVER do
-   soft_constraints = []   # things the satellite SHOULD prefer
+   hard_constraints = []   # things the agent_node MUST NEVER do
+   soft_constraints = []   # things the agent_node SHOULD prefer
    for each sentence in constraints_raw:
      if NEVER/MUST NOT/FORBIDDEN -> hard_constraint
      if PREFER/AVOID/MINIMIZE    -> soft_constraint

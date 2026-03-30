@@ -35,7 +35,7 @@ SCHEMA.md is the SOURCE OF TRUTH. OUTPUT_TEMPLATE derives from it. CONFIG restri
 | keywords | list[string] | REC | Brain search terms, len >= 2 — S10 |
 ## ID Pattern
 `^p08_diag_[a-z][a-z0-9_]+$`
-Valid: `p08_diag_satellite_orchestration`, `p08_diag_brain_ingestion`
+Valid: `p08_diag_agent_node_orchestration`, `p08_diag_brain_ingestion`
 Invalid: `system_diagram`, `P08_diag_X`, `p08-diag-x`
 ## Body Structure (7 sections — all required for S07)
 | Section | Content |

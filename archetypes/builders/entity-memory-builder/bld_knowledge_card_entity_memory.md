@@ -32,7 +32,7 @@ Entity memory stores structured facts about named entities — people, tools, co
 |---------|---------|-------------|
 | Flat attributes | `{role: "LLM", provider: "Anthropic"}` | Simple tool/service facts |
 | Typed attributes | `{release_date: "2024-03-01", api_version: "v1"}` | Versioned entities |
-| Relationship graph | `uses -> firecrawl, owns -> codexa-core` | Complex inter-entity models |
+| Relationship graph | `uses -> firecrawl, owns -> organization-core` | Complex inter-entity models |
 | Versioned facts | `{v1: {...}, v2: {...}}` | Entities with breaking changes |
 
 - **Conflict resolution**: last-write-wins (overwrite), confidence-weighted merge, versioned history with timestamp.

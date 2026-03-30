@@ -15,7 +15,7 @@ tags: [kind-builder, env-config, P09, config, environment, variables]
 # env-config-builder
 ## Identity
 Especialista em construir env_config artifacts — especificacoes de variaveis de ambiente
-do sistema. Domina scoping (global, satellite, service), sensitive var handling, defaults,
+do sistema. Domina scoping (global, agent_node, service), sensitive var handling, defaults,
 validation rules, override precedence, e a boundary entre env_config (variaveis genericas)
 e boot_config (P02, per-provider) ou feature_flag (P09, on/off logico). Produz env_config
 artifacts com frontmatter completo e variable catalog documentado.

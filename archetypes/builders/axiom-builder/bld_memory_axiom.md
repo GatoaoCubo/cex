@@ -16,7 +16,7 @@ tags: [axiom, immutability, classification, negation-test, P10, rules]
 tldr: "Use the negation test to distinguish axioms from laws. If any realistic scenario violates the rule, it is not an axiom."
 impact_score: 7.5
 decay_rate: 0.03
-satellite: edison
+agent_node: edison
 keywords: [axiom, immutable, negation-test, law, guardrail, classification, rules, fundamental]
 ---
 

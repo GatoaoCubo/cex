@@ -10,12 +10,12 @@ purpose: Component map of learning_record — inventory, dependencies, and archi
 ## Component Inventory
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
-| frontmatter block | 22-field metadata header (id, kind, pillar, domain, satellite, score, etc.) | learning-record-builder | active |
+| frontmatter block | 22-field metadata header (id, kind, pillar, domain, agent_node, score, etc.) | learning-record-builder | active |
 | experience_summary | Dense description of the event or task that produced the learning | author | active |
 | patterns | Success patterns extracted with reproducibility assessment | author | active |
 | anti_patterns | Failure patterns with root cause and avoidance guidance | author | active |
 | impact_score | Numeric score (0.0-10.0) measuring significance of the learning | author | active |
-| reproducibility | How reliably this pattern recurs across contexts and satellites | author | active |
+| reproducibility | How reliably this pattern recurs across contexts and agent_nodes | author | active |
 | context_block | Satellite, domain, task, and environmental conditions of the experience | author | active |
 ## Dependency Graph
 ```
@@ -36,7 +36,7 @@ learning_record  --signals-->  memory_update
 |--------------------|------------------------|
 | A persistent record of experience with patterns and anti-patterns | A distilled atomic fact (knowledge_card P01) |
 | Scored by impact and reproducibility | An ephemeral snapshot of current session (session_state P10) |
-| Accumulated across sessions with satellite context | A design-time cognitive map (mental_model P02) |
+| Accumulated across sessions with agent_node context | A design-time cognitive map (mental_model P02) |
 | Indexed for retrieval by future agents | An abstract truth without experiential basis (axiom P10) |
 | Produced from real task execution outcomes | A theoretical pattern without observed evidence |
 | Dense (>=0.80 density), max 3KB | A verbose narrative or unstructured log |

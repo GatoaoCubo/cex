@@ -21,9 +21,9 @@ I produce compact, confidence-scored entity fact records so agents can ground th
 ```
 ### Crew: "Research Pipeline"
 ```
-  1. shaka-satellite (research) -> "raw entity mentions and facts from web research"
+  1. shaka-agent_node (research) -> "raw entity mentions and facts from web research"
   2. entity-memory-builder -> "structured entity_memory artifacts from raw facts"
-  3. pytha-satellite (knowledge) -> "indexes entity records into brain for retrieval"
+  3. pytha-agent_node (knowledge) -> "indexes entity records into brain for retrieval"
 ```
 ### Crew: "Memory System"
 ```

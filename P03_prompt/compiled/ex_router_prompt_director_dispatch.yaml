@@ -1,12 +1,12 @@
-id: p03_rp_satellite_dispatch
+id: p03_rp_agent_node_dispatch
 kind: router_prompt
 pillar: P03
-title: Router Prompt for CODEXA Satellite Task Dispatch
+title: Router Prompt for organization Satellite Task Dispatch
 routes: ''
-fallback: EDISON (builder generico) — quando a tarefa nao mapeia claramente para nenhum dominio especializado, EDISON e o
+fallback: builder_agent (builder generico) — quando a tarefa nao mapeia claramente para nenhum dominio especializado, builder_agent e o
   satelite mais versatil por usar opus e ter capacidade de construcao ampla.
 quality: 9.0
-objective: Classificar a tarefa do usuario e rotear para o satelite CODEXA mais adequado. O router deve analisar keywords,
+objective: Classificar a tarefa do usuario e rotear para o satelite organization mais adequado. O router deve analisar keywords,
   contexto semantico e tipo de entregavel esperado para determinar o satelite correto com score de confianca. Se confianca
   < threshold, usar fallback.
 shaka_research: 'Modelo: sonnet | Dominio: Pesquisa e analise de mercado
@@ -69,29 +69,29 @@ step_1_keyword_match: 'Para cada route, contar keywords presentes na tarefa do u
   keyword_scores = {route: count / total_keywords_in_route para cada route}'
 step_2_semantic_analysis: 'Analisar o VERBO principal e o OBJETO da tarefa:
 
-  - VERBO indica acao (pesquisar=SHAKA, criar=EDISON, vender=LILY, documentar=PYTHA, executar=ATLAS, monetizar=YORK)
+  - VERBO indica acao (pesquisar=research_agent, criar=builder_agent, vender=marketing_agent, documentar=knowledge_agent, executar=operations_agent, monetizar=commercial_agent)
 
-  - OBJETO indica dominio (mercado=SHAKA, anuncio=LILY, codigo=EDISON, knowledge=PYTHA, deploy=ATLAS, curso=YORK)
+  - OBJETO indica dominio (mercado=research_agent, anuncio=marketing_agent, codigo=builder_agent, knowledge=knowledge_agent, deploy=operations_agent, curso=commercial_agent)
 
   semantic_score = match_strength(verbo)  0.6 + match_strength(objeto)  0.4'
 step_3_combined_score: confidence = keyword_score  0.4 + semantic_score  0.6
 step_4_decision: "IF max(confidence) >= 0.7:\n    route = argmax(confidence)\nELIF max(confidence) >= 0.4:\n    route = argmax(confidence)\
-  \ + flag \"low_confidence\"\nELSE:\n    route = EDISON (fallback)"
+  \ + flag \"low_confidence\"\nELSE:\n    route = builder_agent (fallback)"
 threshold:
 - 'Auto-route: confidence >= 0.7 (decisao automatica, sem intervencao humana)'
 - 'Low confidence: 0.4 <= confidence < 0.7 (rotear mas sinalizar para revisao)'
-- 'Fallback: confidence < 0.4 (usar EDISON como builder generico)'
+- 'Fallback: confidence < 0.4 (usar builder_agent como builder generico)'
 disambiguation_rules: '| Conflito | Resolucao | Razao |
 
   |----------|-----------|-------|
 
-  | SHAKA vs LILY (pesquisar + marketing) | SHAKA primeiro, LILY depois | Pesquisa informa o marketing |
+  | research_agent vs marketing_agent (pesquisar + marketing) | research_agent primeiro, marketing_agent depois | Pesquisa informa o marketing |
 
-  | EDISON vs ATLAS (criar + deploy) | EDISON build, ATLAS deploy | Separar construcao de operacao |
+  | builder_agent vs operations_agent (criar + deploy) | builder_agent build, operations_agent deploy | Separar construcao de operacao |
 
-  | PYTHA vs SHAKA (documentar + pesquisar) | Se fonte externa: SHAKA. Se interna: PYTHA | Direcao do conhecimento |
+  | knowledge_agent vs research_agent (documentar + pesquisar) | Se fonte externa: research_agent. Se interna: knowledge_agent | Direcao do conhecimento |
 
-  | LILY vs YORK (vender + monetizar) | Se conteudo/copy: LILY. Se produto digital/curso: YORK | Tipo de entregavel |'
+  | marketing_agent vs commercial_agent (vender + monetizar) | Se conteudo/copy: marketing_agent. Se produto digital/curso: commercial_agent | Tipo de entregavel |'
 output_format: '## Route Decision
 
 
@@ -110,17 +110,17 @@ output_format: '## Route Decision
 
   |-------|---------|----------|----------|
 
-  | SHAKA | [score] | [score]  | [score]  |
+  | research_agent | [score] | [score]  | [score]  |
 
-  | LILY  | [score] | [score]  | [score]  |
+  | marketing_agent  | [score] | [score]  | [score]  |
 
-  | EDISON| [score] | [score]  | [score]  |
+  | builder_agent| [score] | [score]  | [score]  |
 
-  | PYTHA | [score] | [score]  | [score]  |
+  | knowledge_agent | [score] | [score]  | [score]  |
 
-  | ATLAS | [score] | [score]  | [score]  |
+  | operations_agent | [score] | [score]  | [score]  |
 
-  | YORK  | [score] | [score]  | [score]  |
+  | commercial_agent  | [score] | [score]  | [score]  |
 
 
   ### Flags
@@ -129,4 +129,4 @@ output_format: '## Route Decision
 research_base:
 - 'Router pattern: confidence threshold + fallback (LangChain RouterChain)'
 - Keyword + semantic hybrid = mais robusto que keyword-only
-- 'CODEXA satellite routing table: STELLA_RULES.md + AGENT_ROUTING_INDEX.md'
+- 'organization agent_node routing table: orchestrator_RULES.md + AGENT_ROUTING_INDEX.md'

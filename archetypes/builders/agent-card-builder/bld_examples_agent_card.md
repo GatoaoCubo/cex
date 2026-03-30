@@ -20,7 +20,7 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: "builder"
 name: "researcher"
-role: "Research satellite — market intelligence, competitor analysis, web scraping"
+role: "Research agent_node — market intelligence, competitor analysis, web scraping"
 model: "sonnet"
 mcps: [firecrawl, brain]
 domain_area: "research"
@@ -50,11 +50,11 @@ mcp_config_file: ".mcp-shaka.json"
 flags: ["--no-chrome", "-p"]
 domain: "research-intelligence"
 quality: null
-tags: [satellite, research, shaka, market-intelligence, scraping]
-tldr: "researcher satellite spec — research domain, sonnet model, firecrawl+brain MCPs, market intelligence."
+tags: [agent_node, research, shaka, market-intelligence, scraping]
+tldr: "researcher agent_node spec — research domain, sonnet model, firecrawl+brain MCPs, market intelligence."
 ```
 ## Role
-Research satellite focused on market intelligence, competitor analysis, and web data extraction.
+Research agent_node focused on market intelligence, competitor analysis, and web data extraction.
 Primary function: gather, structure, and deliver research findings as knowledge cards or reports.
 Does not generate code or modify production systems.
 ## Model & MCPs
@@ -69,7 +69,7 @@ Does not generate code or modify production systems.
 ## Dispatch
 Keywords: pesquisar, mercado, concorrente, scrape, analise, research
 Routing: orchestrator matches keywords against dispatch_keywords list.
-Priority: research tasks routed to researcher before any other satellite.
+Priority: research tasks routed to researcher before any other agent_node.
 ## Constraints
 - Read-only: never modify production data or commit to main
 - Budget: max 10 firecrawl credits per research session
@@ -78,7 +78,7 @@ Priority: research tasks routed to researcher before any other satellite.
 ## Dependencies
 - brain MCP server (Ollama + FAISS index)
 - firecrawl API ($19/month tier)
-- No sibling satellite dependencies (fully independent)
+- No sibling agent_node dependencies (fully independent)
 ## Scaling & Monitoring
 - Max 1 concurrent instance (avoid firecrawl rate limits)
 - 30-minute timeout per session
@@ -99,14 +99,14 @@ WHY THIS IS GOLDEN:
 - tags list len >= 3 (S02 pass)
 - All 7 body sections present (S03-S09 pass)
 ## Anti-Example
-INPUT: "Define researcher satellite"
+INPUT: "Define researcher agent_node"
 BAD OUTPUT:
 ```yaml
-id: shaka_satellite
-kind: satellite
+id: shaka_agent_node
+kind: agent_node
 pillar: Architecture
 name: Shaka
 model: Claude Sonnet 4
 mcps: firecrawl
-role: This satellite is responsible for doing various types of research including market research, competitor analysis, web scraping, and many other research-related activities
+role: This agent_node is responsible for doing various types of research including market research, competitor analysis, web scraping, and many other research-related activities
 quality: 9.0

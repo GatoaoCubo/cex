@@ -20,7 +20,7 @@ tags:
 - performance
 - baseline
 - monitoring
-purpose: Detects latency regressions in the CODEXA Railway API by comparing current percentile response times against the
+purpose: Detects latency regressions in the organization Railway API by comparing current percentile response times against the
   v2.1 production baseline. Any metric exceeding +10% triggers a Slack alert before deployment proceeds.
 baseline_reference_v2_1: 'Captured 2026-03-15 from 24h production traffic (47,283 requests):
 
@@ -55,7 +55,7 @@ regression_thresholds: '| Severity | Threshold | Action |
   from day-to-day traffic patterns. Anything above 10% is a real regression, not noise.'
 test_protocol: ''
 step_1_collect_current_metrics: "# Run against staging, 1000 requests per endpoint\npython scripts/load_test.py \\\n  --target\
-  \ https://codexa-api-staging.railway.app \\\n  --endpoints health,chat,search,knowledge,evaluate \\\n  --requests-per-endpoint\
+  \ https://organization-api-staging.railway.app \\\n  --endpoints health,chat,search,knowledge,evaluate \\\n  --requests-per-endpoint\
   \ 1000 \\\n  --concurrency 10 \\\n  --output results/latency_current.json"
 step_2_compare_against_baseline: "import json\nfrom pathlib import Path\n\nbaseline = json.loads(Path(\"baselines/v2.1_latency.json\"\
   ).read_text())\ncurrent = json.loads(Path(\"results/latency_current.json\").read_text())\n\nregressions = []\nfor endpoint\
@@ -65,7 +65,7 @@ step_2_compare_against_baseline: "import json\nfrom pathlib import Path\n\nbasel
   \          \"baseline\": base_val,\n                \"current\": curr_val,\n                \"delta\": f\"+{delta_pct:.1f}%\"\
   ,\n                \"severity\": \"critical\" if delta_pct > 25 else \"fail\"\n            })\n\nif regressions:\n    send_slack_alert(regressions)\n\
   \    sys.exit(1)"
-step_3_alert_format: "{\n  \"channel\": \"#codexa-alerts\",\n  \"text\": \":warning: Latency regression detected\",\n  \"\
+step_3_alert_format: "{\n  \"channel\": \"#organization-alerts\",\n  \"text\": \":warning: Latency regression detected\",\n  \"\
   blocks\": [\n    {\n      \"type\": \"section\",\n      \"text\": \"POST /api/v2/chat p95: 890ms -> 1,120ms (+25.8%) :red_circle:\"\
   \n    },\n    {\n      \"type\": \"section\",\n      \"text\": \"Baseline: v2.1 (2026-03-15) | Current: v2.2-rc1 | Threshold:\
   \ +10%\"\n    }\n  ]\n}"

@@ -16,7 +16,7 @@ tags: [memory-scope, P02, type-builder]
 tldr: "Concrete values with rationale. Validate against schema. Stay under 2048 bytes."
 impact_score: 7.5
 decay_rate: 0.05
-satellite: edison
+agent_node: edison
 keywords: [memory scope, ephemeral, session-scoped, long-term, shared]
 ---
 

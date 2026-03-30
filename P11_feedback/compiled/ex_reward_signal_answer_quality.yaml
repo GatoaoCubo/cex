@@ -5,7 +5,7 @@ title: Answer Quality Reward Signal — LLM-as-Judge Continuous Scoring
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
-author: EDISON
+author: builder_agent
 domain: feedback
 quality: null
 tags:
@@ -30,7 +30,7 @@ criteria:
 - helpfulness
 - safety
 density_score: null
-tl_dr: 'Um reward_signal que usa Claude Haiku como juiz automatico para avaliar respostas de agentes CODEXA. Cada resposta
+tl_dr: 'Um reward_signal que usa Claude Haiku como juiz automatico para avaliar respostas de agentes organization. Cada resposta
   recebe score 0.0-1.0 baseado em 3 criterios ponderados: accuracy (40%), helpfulness (40%), safety (20%). O signal alimenta
   quality gates e learning records.'
 conceito_central: 'Diferente de quality_gate (pass/fail binario com threshold), reward_signal e um score CONTINUO que acompanha
@@ -57,14 +57,14 @@ configuracao_do_signal: "reward_signal:\n  id: p11_rw_answer_quality\n  signal_t
   \n  aggregation: weighted_average\n\n  thresholds:\n    excellent: 0.90   # -> promote to pool\n    acceptable: 0.70  #\
   \ -> normal operation\n    concerning: 0.50  # -> flag for review\n    failing: 0.30     # -> block + escalate\n\n  output:\n\
   \    store: learning_record\n    alert_below: 0.50\n    trend_window: 20  # last 20 evaluations"
-exemplo_pratico: "Input: Agente LILY gera copy para anuncio de produto:\n\"Kit 6 Tacos Lavanda Aromatica — Perfume Suave que\
+exemplo_pratico: "Input: Agente marketing_agent gera copy para anuncio de produto:\n\"Kit 6 Tacos Lavanda Aromatica — Perfume Suave que\
   \ Dura 30 Dias.\nIdeal para gavetas, closets e armarios. Feito com oleos essenciais naturais.\"\n\nAvaliacao Haiku:\n{\n\
   \  \"signal_id\": \"p11_rw_answer_quality\",\n  \"evaluated_at\": \"2026-03-29T14:32:00Z\",\n  \"agent\": \"lily\",\n  \"\
   task\": \"anuncio_copy_lavanda\",\n\n  \"scores\": {\n    \"accuracy\": {\n      \"score\": 0.85,\n      \"reason\": \"\
   Product details match catalog. '30 dias' claim needs verification.\"\n    },\n    \"helpfulness\": {\n      \"score\": 0.92,\n\
   \      \"reason\": \"Copy is marketplace-ready, includes benefits and use cases.\"\n    },\n    \"safety\": {\n      \"\
   score\": 1.00,\n      \"reason\": \"No prohibited health claims. No ANVISA violations.\"\n    }\n  },\n\n  \"composite_score\"\
-  : 0.908,\n  \"tier\": \"excellent\",\n  \"action\": \"promote_to_pool\"\n}\n\nTrending (ultimas 20 avaliacoes do LILY):\n\
+  : 0.908,\n  \"tier\": \"excellent\",\n  \"action\": \"promote_to_pool\"\n}\n\nTrending (ultimas 20 avaliacoes do marketing_agent):\n\
   Scores: [0.91, 0.88, 0.85, 0.92, 0.78, 0.90, 0.87, 0.91, ...]\nMean:   0.878\nTrend:  stable (variance < 0.05)\nAlert: \
   \ none"
 fronteira_com_outros_kinds: '| Kind | Diferenca |

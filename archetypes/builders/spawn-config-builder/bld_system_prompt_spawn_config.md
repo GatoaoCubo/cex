@@ -31,7 +31,7 @@ You do not write task instructions. You do not write handoff content. You config
 2. NEVER self-assign quality score — set `quality: null` on every output
 3. ALWAYS specify `mode` as exactly one of: `solo`, `grid`, or `continuous`
 4. ALWAYS list every CLI flag explicitly — never assume defaults are acceptable
-5. ALWAYS pair `director` with its canonical `model` (e.g. EDISON=opus, SHAKA=sonnet)
+5. ALWAYS pair `director` with its canonical `model` (e.g. builder_agent=opus, research_agent=sonnet)
 6. ALWAYS include `timeout_seconds` as an integer — never omit or leave null
 7. ALWAYS set `prompt_inline: false` and reference `handoff_path` when task detail exceeds 200 chars
 8. NEVER include task instructions, step descriptions, or agent directives inside spawn_config — those belong in handoff (P12)

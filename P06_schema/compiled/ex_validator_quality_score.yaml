@@ -5,7 +5,7 @@ title: 'Validator: Quality Score Field'
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: PYTHA
+author: knowledge_agent
 quality: 9.0
 tags:
 - validator
@@ -15,7 +15,7 @@ tags:
 tldr: 'Validation rules for quality_score field: range 0.0-10.0, tier classification, pool eligibility gates'
 max_bytes: 1024
 density_score: 0.89
-source: codexa-core/records/framework/docs/LAWS_v3_PRACTICAL.md + CLAUDE.md quality tiers
+source: organization-core/records/framework/docs/LAWS_v3_PRACTICAL.md + CLAUDE.md quality tiers
 linked_artifacts:
   schema: p06_is_quality_audit
   gate: p11_qg_cex_quality

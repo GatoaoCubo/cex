@@ -16,7 +16,7 @@ tags: [eval-dataset, splits, schema-fields, data-leakage, framework-integration]
 tldr: "Explicit splits summing to 1.0 prevent data leakage. schema_fields in frontmatter reduce integration time. Eval-only is the safe default. quality: null always."
 impact_score: 8.0
 decay_rate: 0.04
-satellite: edison
+agent_node: edison
 keywords: [eval dataset, splits, schema fields, expected output, data leakage, braintrust, langsmith, deepeval, huggingface, versioning]
 ---
 

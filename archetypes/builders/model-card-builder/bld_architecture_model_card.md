@@ -35,7 +35,7 @@ model_card     --signals-->      cost_estimate
 | model_card IS | model_card IS NOT |
 |---------------|-------------------|
 | A technical specification of an LLM with concrete data | An agent identity or persona definition (agent P02) |
-| Pricing normalized per million tokens for comparison | A boot-time configuration for a specific satellite (boot_config P02) |
+| Pricing normalized per million tokens for comparison | A boot-time configuration for a specific agent_node (boot_config P02) |
 | Feature matrix with boolean capability flags | A routing decision tree (mental_model P02) |
 | Provider-specific with API endpoint details | A performance benchmark with measured results (benchmark P07) |
 | Updated when provider releases new model versions | A static document — must track provider changes |

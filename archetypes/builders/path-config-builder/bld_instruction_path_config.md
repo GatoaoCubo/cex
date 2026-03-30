@@ -43,7 +43,7 @@ The path-config-builder receives a **system scope** and produces a `path_config`
 ## Phases
 ### Phase 1: RESEARCH
 **Goal**: Enumerate every path needed by the scope and classify each one before writing anything.
-1. Identify the scope: confirm it is one of `global`, `satellite name`, or `service name`. Record as a snake_case lowercase slug with no hyphens.
+1. Identify the scope: confirm it is one of `global`, `agent_node name`, or `service name`. Record as a snake_case lowercase slug with no hyphens.
 2. List every filesystem path from `{{path_purposes}}`. For each, determine:
    - **Type**: `dir` (container) or `file` (specific file, include extension)
    - **Platform**: `windows`, `unix`, or `all`

@@ -33,7 +33,7 @@ SOURCE OF TRUTH. OUTPUT_TEMPLATE.md derives from this. CONFIG.md restricts this.
 ## Extended Fields (4)
 | Field | Type | Required | Notes |
 |-------|------|----------|-------|
-| scope | enum [system, satellite, domain] | RECOMMENDED | Applicability boundary. Default: system. |
+| scope | enum [system, agent_node, domain] | RECOMMENDED | Applicability boundary. Default: system. |
 | exceptions | list[string] | RECOMMENDED | Conditions where law does not apply. Empty list `[]` = no exceptions. |
 | priority | integer 1-10 | RECOMMENDED | Conflict resolution. 10 = highest. Used when laws conflict. |
 | keywords | list[string], len >= 2 | RECOMMENDED | Brain search terms. S10 gate. |
@@ -66,7 +66,7 @@ All 8 sections MUST be present. Section headers are exact strings:
 | number | positive integer, unique, sequential |
 | enforcement | must name detection mechanism |
 | exceptions | explicit list or "None" — never omit |
-| scope | one of: system, satellite, domain |
+| scope | one of: system, agent_node, domain |
 | priority | integer 1-10 |
 | quality | always null |
 ## Drift Prevention

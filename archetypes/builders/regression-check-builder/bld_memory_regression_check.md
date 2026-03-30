@@ -16,7 +16,7 @@ tags: [regression-check, baseline-ref, threshold, metrics, fail-action, reproduc
 tldr: "Concrete baseline_ref is load-bearing for reproducibility. Per-metric thresholds prevent aggregation masking. Document threshold units. Always set fail_action."
 impact_score: 8.0
 decay_rate: 0.03
-satellite: edison
+agent_node: edison
 keywords: [regression check, baseline ref, threshold, metrics, comparison, Braintrust, Promptfoo, LangSmith, DeepEval, fail action]
 ---
 

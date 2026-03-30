@@ -39,7 +39,7 @@ Weights sum to 100%. Each dimension scores 0 or its full weight.
 | S02 | States exhaustive for domain | 1.0 | No reachable real state missing from States table |
 | S03 | Transitions have measurable criteria | 1.0 | Each transition criterion is checkable without human judgment |
 | S04 | Review cycle realistic | 1.0 | Cycle matches actual volatility of governed domain |
-| S05 | Ownership assigned per state | 1.0 | Each state has a named owner role or satellite |
+| S05 | Ownership assigned per state | 1.0 | Each state has a named owner role or agent_node |
 | S06 | Freshness threshold justified | 0.5 | `freshness_days` rationale present (not arbitrary) |
 | S07 | Sunset conditions explicit | 1.0 | Defines what triggers end-of-life and who approves it |
 | S08 | `tags` includes artifact `kind` name | 0.5 | Enables filtering by governed kind |

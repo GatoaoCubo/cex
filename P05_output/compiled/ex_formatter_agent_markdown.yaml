@@ -5,7 +5,7 @@ title: 'Formatter: Agent Markdown Response'
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: PYTHA
+author: knowledge_agent
 format: markdown
 quality: 9.0
 tags:
@@ -16,10 +16,10 @@ tags:
 tldr: Canonical markdown formatter for agent responses — structured sections, tables, code blocks, quality score footer
 max_bytes: 4096
 density_score: 0.88
-source: codexa-core/records/agents/*/iso_vectorstore/ISO_*_OUTPUT_TEMPLATE.md
+source: organization-core/records/agents/*/iso_vectorstore/ISO_*_OUTPUT_TEMPLATE.md
 linked_artifacts:
   schema: p06_is_quality_audit
-purpose: Defines how CODEXA agents format their markdown output. All ISO OUTPUT_TEMPLATE files follow this formatter. Ensures
+purpose: Defines how organization agents format their markdown output. All ISO OUTPUT_TEMPLATE files follow this formatter. Ensures
   human-readable + machine-parseable outputs with consistent structure.
 structure: '[HEADER: identity + metadata]
 

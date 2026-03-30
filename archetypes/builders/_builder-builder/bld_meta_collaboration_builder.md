@@ -64,7 +64,7 @@ I {{primary_verb}} so {{downstream_consumers}} can {{consumer_benefit}}.
 <!-- Exemplos: -->
 <!-- - model_card: "model name, provider" -->
 <!-- - KC: "topic name, domain" -->
-<!-- - signal: "emitter satellite, event/status" -->
+<!-- - signal: "emitter agent_node, event/status" -->
 <!-- - quality_gate: "domain (what artifact kind), severity" -->
 
 ### I Produce

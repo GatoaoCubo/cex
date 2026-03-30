@@ -26,8 +26,8 @@ Rule: id MUST equal filename stem.
 ## Mode Enum
 | Value | When to use | Script |
 |-------|-------------|--------|
-| solo | 1 satellite, 1 task | spawn_solo.ps1 |
-| grid | 2-6 satellites, parallel tasks | spawn_grid.ps1 |
+| solo | 1 agent_node, 1 task | spawn_solo.ps1 |
+| grid | 2-6 agent_nodes, parallel tasks | spawn_grid.ps1 |
 | continuous | >6 tasks, auto-refill slots from queue | spawn_grid.ps1 -mode continuous |
 ## Baseline Flags (mandatory)
 | Flag | Purpose |

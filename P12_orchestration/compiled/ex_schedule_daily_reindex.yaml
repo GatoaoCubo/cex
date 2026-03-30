@@ -5,7 +5,7 @@ title: Daily Reindex Schedule — Nightly Brain FAISS Rebuild
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
-author: EDISON
+author: builder_agent
 domain: orchestration
 quality: null
 tags:
@@ -40,7 +40,7 @@ configuracao_completa: "schedule:\n  id: p12_sched_daily_reindex\n  trigger_type
   \ 45\n    retry_on_failure: true\n    max_retries: 2\n    retry_delay_minutes: 15\n    concurrency: 1       # never run\
   \ 2 reindex in parallel\n\n  preconditions:\n    - check: ollama_running\n      command: \"curl -s http://localhost:11434/api/tags\
   \ | jq '.models | length'\"\n      expected: \"> 0\"\n      on_fail: start_ollama\n\n    - check: disk_space\n      command:\
-  \ \"df -h /c/Users/PC/Documents/GitHub/codexa-core | awk 'NR==2 {print $5}'\"\n      expected: \"< 90%\"\n      on_fail:\
+  \ \"df -h /c/Users/PC/Documents/GitHub/organization-core | awk 'NR==2 {print $5}'\"\n      expected: \"< 90%\"\n      on_fail:\
   \ abort_with_alert\n\n  notifications:\n    on_success:\n      - type: file\n        path: \".claude/signals/reindex_complete_{date}.json\"\
   \n    on_failure:\n      - type: file\n        path: \".claude/signals/reindex_failed_{date}.json\"\n      - type: log\n\
   \        message: \"ALERT: Daily reindex failed after {retries} retries\"\n\n  window:\n    preferred_start: \"02:00\"\n\

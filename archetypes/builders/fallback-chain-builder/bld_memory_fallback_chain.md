@@ -16,7 +16,7 @@ tags: [fallback_chain, circuit_breaker, cost_aware, graceful_degradation, timeou
 tldr: "Define cost+timeout+quality per step; add circuit breaker at 3 failures; terminal step must always be static."
 impact_score: 7.5
 decay_rate: 0.05
-satellite: edison
+agent_node: edison
 keywords: [fallback, chain, circuit_breaker, timeout_per_step_ms, quality_threshold, cost_weight, degradation, static_response]
 ---
 

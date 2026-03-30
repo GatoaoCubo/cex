@@ -21,7 +21,7 @@ MCP configuration, CLI flags, and permission scoping.
 Produz boot_configs densos com frontmatter completo e constraints racionalizados por provider.
 ## Capabilities
 - Produzir boot_config com frontmatter completo (15 campos required + 7 recommended)
-- Configurar identity block (name, role, satellite) por provider
+- Configurar identity block (name, role, agent_node) por provider
 - Definir constraints otimizados (tokens, context window, timeout, retries)
 - Mapear tools/MCPs disponiveis por provider runtime
 - Validar artifact contra quality gates (9 HARD + 10 SOFT)

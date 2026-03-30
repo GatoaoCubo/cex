@@ -29,7 +29,7 @@ density_score: 0.88
 # Web Scraping Skill
 
 ## Purpose
-web-scraping e o **roteador inteligente de extracao web** do CODEXA. Domain: data_collection (SHAKA satellite). Resolve o problema de escolher a estrategia correta de scraping para cada alvo, evitando over-engineering (Selenium onde BeautifulSoup basta) e under-engineering (requests onde JS rendering e necessario).
+web-scraping e o **roteador inteligente de extracao web** do organization. Domain: data_collection (research_agent agent_node). Resolve o problema de escolher a estrategia correta de scraping para cada alvo, evitando over-engineering (Selenium onde BeautifulSoup basta) e under-engineering (requests onde JS rendering e necessario).
 
 ## Workflow Phases
 

@@ -9,7 +9,7 @@ updated: 2026-03-25
 author: EDISON
 domain: cex_taxonomy
 quality: null
-tags: [cex, lens, perspective, cognitive-filter, satellite]
+tags: [cex, lens, perspective, cognitive-filter, agent_node]
 tldr: "Lens eh perspectiva cognitiva que filtra TODA percepcao e producao — mesmo input, outputs radicalmente diferentes por lens"
 when_to_use: "Entender como satelites processam o mesmo input de formas distintas"
 keywords: [lens, cognitive-perspective, refraction, prismatic-model]
@@ -34,18 +34,18 @@ Lens eh o conceito mais original do CEX. Diferente de "role" (papel funcional), 
 
 | Satelite | Lens | Input Exemplo | Output Refratado |
 |----------|------|---------------|-----------------|
-| SHAKA | Inveja Analitica | "mercado fones BT" | Tabela comparativa, 15 concorrentes, fontes |
-| LILY | Luxuria Estrategica | "mercado fones BT" | 5 gatilhos emocionais, copy de venda |
-| PYTHA | Gula Sistematica | "mercado fones BT" | KC indexada por categoria, preco, canal |
-| YORK | Avareza Visionaria | "mercado fones BT" | Margem por faixa, canal mais lucrativo |
-| EDISON | Soberba Inventiva | "mercado fones BT" | Prototipo de scraper, componente React |
-| ATLAS | Ira Realizadora | "mercado fones BT" | Deploy pipeline, testes E2E, monitoramento |
+| research_agent | Inveja Analitica | "mercado fones BT" | Tabela comparativa, 15 concorrentes, fontes |
+| marketing_agent | Luxuria Estrategica | "mercado fones BT" | 5 gatilhos emocionais, copy de venda |
+| knowledge_agent | Gula Sistematica | "mercado fones BT" | KC indexada por categoria, preco, canal |
+| commercial_agent | Avareza Visionaria | "mercado fones BT" | Margem por faixa, canal mais lucrativo |
+| builder_agent | Soberba Inventiva | "mercado fones BT" | Prototipo de scraper, componente React |
+| operations_agent | Ira Realizadora | "mercado fones BT" | Deploy pipeline, testes E2E, monitoramento |
 
 Conceito industria mais proximo: "Role" (MetaGPT), "backstory" (CrewAI). Diferenca: role descreve funcao, lens colore TODA percepcao.
 
 Implementacao: campo `lens` em `mental_model.yaml`. LensEngine orquestra 3 modos: roteamento automatico para lens mais adequada, execucao com intensidade configuravel, pipeline multi-lens sequencial.
 
-Modelo prismatico: 6 lenses + setima consciencia (usuario/STELLA). Combinacoes de lenses sao composicionais — 2 lenses em sequencia produzem resultado que nenhuma produziria sozinha.
+Modelo prismatico: 6 lenses + setima consciencia (usuario/orchestrator). Combinacoes de lenses sao composicionais — 2 lenses em sequencia produzem resultado que nenhuma produziria sozinha.
 
 ## Patterns
 

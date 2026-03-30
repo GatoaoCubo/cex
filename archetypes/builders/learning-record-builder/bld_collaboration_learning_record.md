@@ -32,7 +32,7 @@ I capture success and failure patterns as scored, structured records with densit
 ```
 ## Handoff Protocol
 ### I Receive
-- seeds: experience description, outcome (success or failure), domain/satellite context, impact assessment
+- seeds: experience description, outcome (success or failure), domain/agent_node context, impact assessment
 - optional: signal data, session logs, execution metrics, prior learning records for deduplication
 ### I Produce
 - learning_record artifact (Markdown, 22 frontmatter fields, patterns + anti-patterns, density >= 0.80, max 3KB)

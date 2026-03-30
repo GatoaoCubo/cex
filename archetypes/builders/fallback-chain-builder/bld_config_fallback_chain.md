@@ -29,7 +29,7 @@ Rule: id MUST equal filename stem.
 | anthropic | claude-opus-4-6, claude-sonnet-4-6, claude-haiku-4-5 | Primary CEX provider |
 | openai | gpt-4.1, gpt-4.1-mini, gpt-4.1-nano | Alternative provider |
 | google | gemini-2.5-pro, gemini-2.5-flash | Google models |
-| local | ollama/codexaft:v3, ollama/nomic-embed-text | Self-hosted models |
+| local | ollama/organizationft:v3, ollama/nomic-embed-text | Self-hosted models |
 ## Degradation Order Guidelines
 | Tier | Capability | Cost | Latency | Example |
 |------|-----------|------|---------|---------|

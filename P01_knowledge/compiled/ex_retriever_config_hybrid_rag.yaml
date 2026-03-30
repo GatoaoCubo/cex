@@ -5,7 +5,7 @@ title: Hybrid RAG Retriever (BM25 + Dense + Cohere Reranker)
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
-author: EDISON
+author: builder_agent
 domain: knowledge_retrieval
 quality: 9.0
 tags:
@@ -17,9 +17,9 @@ tags:
 - reranker
 - rag
 tldr: Retriever hibrido que combina BM25 keyword search (0.3) com FAISS dense search (0.7) e reranker Cohere v3 para top_k=5
-  final — usado no CODEXA Brain MCP
+  final — usado no organization Brain MCP
 when_to_use: Qualquer busca no Brain MCP que precise alta recall em corpus tecnico misto (knowledge cards, agents, skills)
-overview: Configuracao do retriever hibrido usado pelo CODEXA Brain MCP (`brain_query`). Combina BM25 para termos exatos (nomes
+overview: Configuracao do retriever hibrido usado pelo organization Brain MCP (`brain_query`). Combina BM25 para termos exatos (nomes
   de agentes, siglas, comandos) com busca densa FAISS/nomic-embed-text para similaridade semantica. Cohere Rerank v3 faz re-ranking
   final para maximizar precisao no top_k=5.
 parameters: '| Param | Value | Rationale |
@@ -36,7 +36,7 @@ parameters: '| Param | Value | Rationale |
 
   | dense_weight | 0.7 | Maioria das queries sao semanticas ("como configurar X", "agente para Y") |
 
-  | reranker | cohere-rerank-v3 | +12% MRR@5 vs sem reranker no benchmark CODEXA |
+  | reranker | cohere-rerank-v3 | +12% MRR@5 vs sem reranker no benchmark organization |
 
   | reranker_top_n | 5 | Reranker seleciona top 5 dos 20 candidatos iniciais |
 
@@ -68,7 +68,7 @@ fallback_strategy: '| Condition | Fallback | Impact |
   | FAISS index missing | Rebuild on-demand + BM25 interim | ~20 min rebuild |
 
   | Query < 3 chars | Return empty (too ambiguous) | Prevents noise results |'
-benchmarks_codexa_brain_corpus_1957_documents: '| Metric | Hybrid+Rerank | Dense Only | BM25 Only |
+benchmarks_organization_brain_corpus_1957_documents: '| Metric | Hybrid+Rerank | Dense Only | BM25 Only |
 
   |--------|---------------|------------|-----------|
 

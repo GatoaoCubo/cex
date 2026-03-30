@@ -9,9 +9,9 @@ updated: 2026-03-22
 author: EDISON
 quality: 9.5
 tags: [shokunin, pool, quality-gate, feedback]
-tldr: "Tiered quality gate for CODEXA pool admission: >= 9.5 golden, >= 8.0 pool, >= 7.0 experimental, < 7.0 rejected"
+tldr: "Tiered quality gate for organization pool admission: >= 9.5 golden, >= 8.0 pool, >= 7.0 experimental, < 7.0 rejected"
 density_score: 0.93
-source: codexa-core/CLAUDE.md + records/satellites/edison/mental_model.yaml
+source: organization-core/CLAUDE.md + records/agent_nodes/edison/mental_model.yaml
 ---
 
 # Gate: Shokunin Pool Admission
@@ -29,7 +29,7 @@ source: codexa-core/CLAUDE.md + records/satellites/edison/mental_model.yaml
 
 | Result | Action | Escalation |
 |--------|--------|------------|
-| >= 9.5 (Golden) | Pool + `archetypes/golden/` + celebrate | Propagate pattern to other satellites |
+| >= 9.5 (Golden) | Pool + `archetypes/golden/` + celebrate | Propagate pattern to other agent_nodes |
 | >= 8.0 (Skilled) | Pool + `remember()` learning record | None |
 | >= 7.0 (Learning) | Experimental only | Flag for improvement |
 | < 7.0 (Rejected) | Redo from scratch | Block merge, notify author |
@@ -59,4 +59,4 @@ source: codexa-core/CLAUDE.md + records/satellites/edison/mental_model.yaml
 - Audit: All pool writes logged in git history with quality score in commit message
 
 ---
-*Migrated from: CODEXA Shokunin quality philosophy (CLAUDE.md + Edison mental_model.yaml)*
+*Migrated from: organization Shokunin quality philosophy (CLAUDE.md + Edison mental_model.yaml)*

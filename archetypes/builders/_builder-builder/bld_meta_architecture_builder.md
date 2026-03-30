@@ -27,7 +27,7 @@ pattern: every builder must know WHERE its output fits and what it CONNECTS to
 <!-- Exemplos observados: -->
 <!-- - model_card: "spec tecnica de LLM (capacidades, custos, limites, status lifecycle)" -->
 <!-- - KC: "fato atomico destilado, pesquisavel, versionado, com densidade >= 0.80" -->
-<!-- - signal: "evento runtime atomico emitido por um satellite para informar status" -->
+<!-- - signal: "evento runtime atomico emitido por um agent_node para informar status" -->
 <!-- - quality_gate: "barreira de qualidade com score numerico (pass/fail + weighted dimensions)" -->
 
 {{type_name}} NAO EH:

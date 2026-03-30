@@ -16,7 +16,7 @@ tags: [constraint-spec, P03, type-builder]
 tldr: "Concrete values with rationale. Validate against schema. Stay under 2048 bytes."
 impact_score: 7.5
 decay_rate: 0.05
-satellite: edison
+agent_node: edison
 keywords: [constraint spec, regex, enum/choice, json schema, grammar (cfg)]
 ---
 

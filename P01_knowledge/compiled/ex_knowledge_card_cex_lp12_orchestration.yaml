@@ -5,7 +5,7 @@ title: CEX LP12 Orchestration — Multi-Agent Coordination Mechanics
 version: 1.0.0
 created: 2026-03-25
 updated: 2026-03-25
-author: EDISON
+author: builder_agent
 domain: cex_taxonomy
 quality: null
 tags:
@@ -50,7 +50,7 @@ conceitos_chave:
 - spawn_config define como executar (solo, grid, continuous)
 - signal comunica eventos simples entre agentes (complete)
 - handoff transfere task + context + commit entre agentes
-- dispatch_rule roteia keyword > satellite automaticamente
+- dispatch_rule roteia keyword > agent_node automaticamente
 - crew define grupo multi-agente com protocolo de coord
 - AutoGen tem GroupChat; CrewAI tem Crew; MetaGPT tem Env
 - crew do CEX unifica esses conceitos em tipo formal
@@ -89,9 +89,9 @@ comparativo: '| Tipo | Natureza | Escopo | Exemplo |
 
   | handoff | Instrucao | Task completa | Handoff com contexto+commit |
 
-  | dispatch_rule | Roteamento | Keyword > sat | "pesquisar" > SHAKA |
+  | dispatch_rule | Roteamento | Keyword > sat | "pesquisar" > research_agent |
 
-  | crew | Grupo | N agentes | Equipe de 3 satellites |'
+  | crew | Grupo | N agentes | Equipe de 3 agent_nodes |'
 flow: "[P12: Orchestration Layer]\n         |\n    +----+----+----+----+----+----+\n    |    |    |    |    |    |    |\n\
   \   wf  dag spawn sig  ho   dr  crew\n    |    |    |    |    |    |    |\n    v    v    v    v    v    v    v\n [PRODUCE]\
   \ [GOVERN] [COLLABORATE]\n    |         |           |\n    v         v           v\n executa   configura   comunica\n  \

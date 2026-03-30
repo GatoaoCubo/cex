@@ -16,7 +16,7 @@ tags: [agent-design, persona, capabilities, iso-vectorstore, P02, architecture]
 tldr: "Separate persona from capabilities across files. Mixed files cause 41% capability utilization versus 78% when separated."
 impact_score: 8.0
 decay_rate: 0.05
-satellite: edison
+agent_node: edison
 keywords: [agent, persona, capabilities, iso-files, architecture, manifest, instructions, vectorstore]
 ---
 

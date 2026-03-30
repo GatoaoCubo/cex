@@ -1,6 +1,6 @@
 ---
-id: p04_mcp_codexa_brain
-name: codexa-brain
+id: p04_mcp_organization_brain
+name: organization-brain
 description: "Hybrid RAG retrieval server — BM25 keyword + FAISS vector search with Ollama embeddings"
 transport: stdio
 tools_provided: [brain_query, brain_prime, brain_list, brain_status, smart_context]
@@ -18,11 +18,11 @@ tags: [mcp, brain, rag, bm25, faiss, ollama, search]
 # Brain MCP Server
 
 ## Name
-- Name: codexa-brain
-- Role: Central knowledge retrieval for all CODEXA satellites
+- Name: organization-brain
+- Role: Central knowledge retrieval for all organization agent_nodes
 
 ## Transport
-- Transport: stdio (via `python -m codexa_brain.server`)
+- Transport: stdio (via `python -m organization_brain.server`)
 - Auth: none (local only)
 - Timeout: 30s per query
 
@@ -41,8 +41,8 @@ tags: [mcp, brain, rag, bm25, faiss, ollama, search]
 | pool_index | json (agent/workflow/prompt counts) |
 
 ## Integration Notes
-- Start: `python -m codexa_brain.server` (cwd: src/)
-- Required env: `CODEXA_ROOT`, `PYTHONPATH`
+- Start: `python -m organization_brain.server` (cwd: src/)
+- Required env: `organization_ROOT`, `PYTHONPATH`
 - Fallback: Ollama down = BM25 keyword-only (~50% accuracy vs ~88% hybrid)
 - Index rebuild: `python build_indexes_ollama.py --scope all` (~20 min)
 - Model: nomic-embed-text (768d), chunk 2048, overlap 128

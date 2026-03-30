@@ -146,6 +146,6 @@ pedidos de compra automaticamente — mantendo zero stockouts e custo minimo de 
 ```
 
 ## Research Base
-- Meta-prompt pattern: 3 user fields + AI generates rest (KC_SHAKA_097)
+- Meta-prompt pattern: 3 user fields + AI generates rest (KC_research_agent_097)
 - XML tags for Claude improve section parsing (Anthropic docs)
 - Iteration with self-score converges em ~2 rounds para prompts simples

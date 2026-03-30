@@ -5,7 +5,7 @@ title: LLM Providers Enum — Multi-Provider Routing Registry
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
-author: EDISON
+author: builder_agent
 domain: schema
 quality: null
 tags:
@@ -32,7 +32,7 @@ values:
 - mistral
 description: Supported LLM providers for multi-provider routing
 density_score: null
-tl_dr: Enum canonica que lista os 7 provedores LLM suportados pelo CODEXA para routing multi-modelo. Qualquer configuracao
+tl_dr: Enum canonica que lista os 7 provedores LLM suportados pelo organization para routing multi-modelo. Qualquer configuracao
   que referencia um provedor deve usar exatamente um destes valores. Novas adicoes passam por review (impacto em routing,
   billing, e fallback chains).
 conceito_central: Uma enum_def e uma lista finita e fechada de valores validos. Diferente de type_def (define estrutura),
@@ -43,7 +43,7 @@ definicao_completa: "enum:\n  id: p06_enum_llm_providers\n  name: llm_providers\
   \n      auth_type: api_key\n      env_var: OPENAI_API_KEY\n      models: [gpt-4o, gpt-4o-mini, o1, o3, o4-mini]\n      billing:\
   \ per_token\n      status: active\n\n    anthropic:\n      display: \"Anthropic\"\n      api_base: \"https://api.anthropic.com/v1\"\
   \n      auth_type: api_key\n      env_var: ANTHROPIC_API_KEY\n      models: [claude-opus-4-6, claude-sonnet-4-6, claude-haiku-4-5-20251001]\n\
-  \      billing: per_token\n      status: active  # PRIMARY provider for CODEXA\n\n    google:\n      display: \"Google AI\"\
+  \      billing: per_token\n      status: active  # PRIMARY provider for organization\n\n    google:\n      display: \"Google AI\"\
   \n      api_base: \"https://generativelanguage.googleapis.com/v1\"\n      auth_type: api_key\n      env_var: GOOGLE_AI_API_KEY\n\
   \      models: [gemini-2.5-pro, gemini-2.5-flash]\n      billing: per_token\n      status: active\n\n    aws_bedrock:\n\
   \      display: \"AWS Bedrock\"\n      api_base: \"regional\"\n      auth_type: iam_role\n      env_var: AWS_REGION  # uses\

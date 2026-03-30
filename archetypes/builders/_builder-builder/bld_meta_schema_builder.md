@@ -42,7 +42,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 | created | date YYYY-MM-DD | YES | - | Creation date |
 | updated | date YYYY-MM-DD | YES | - | Last update |
 | author | string | YES | - | Producer identity |
-<!-- NOTA: Alguns tipos adicionam restricao: "not STELLA" (KC H10) -->
+<!-- NOTA: Alguns tipos adicionam restricao: "not orchestrator" (KC H10) -->
 
 <!-- CAMPOS ESPECIFICOS DO TIPO (gerar de _schema.yaml): -->
 | {{field_name}} | {{field_type}} | {{YES/REC}} | {{default}} | {{notes}} |

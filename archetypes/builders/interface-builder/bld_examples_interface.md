@@ -39,14 +39,14 @@ mock:
     - method: "get_research_summary"
       input: {topic: "decoracao minimalista", max_sources: 5}
       output: {summary: "Tendencia crescente em 2026...", sources: ["url1", "url2"], confidence: 0.87}
-domain: "satellite-integration"
+domain: "agent_node-integration"
 quality: null
-tags: [interface, shaka, lily, research, marketing, satellite-integration]
+tags: [interface, shaka, lily, research, marketing, agent_node-integration]
 tldr: "Bilateral contract for researcher to deliver research results to marketer marketing workflows."
 density_score: 0.91
 ```
 ## Contract Definition
-researcher (research satellite) provides structured research data to marketer (marketing satellite).
+researcher (research agent_node) provides structured research data to marketer (marketing agent_node).
 marketer calls methods to get research summaries and competitor data for marketing campaigns.
 ## Methods
 | # | Name | Input | Output | Description |

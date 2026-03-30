@@ -2,7 +2,7 @@
 id: p09_perm_stella_allow_block
 kind: permission
 pillar: P09
-description: "Permission rules for STELLA orchestrator — what it can and cannot do directly"
+description: "Permission rules for orchestrator orchestrator — what it can and cannot do directly"
 scope: stella
 version: 1.0.0
 created: 2026-03-24
@@ -11,7 +11,7 @@ quality: 9.0
 tags: [permission, stella, allow, block, orchestration]
 ---
 
-# Permission: STELLA Allow/Block
+# Permission: orchestrator Allow/Block
 
 ## Allow List (execute directly)
 | Category | Operations |
@@ -23,18 +23,18 @@ tags: [permission, stella, allow, block, orchestration]
 | Maintenance | del, rm, mkdir, copy, move |
 | Signals | read .claude/signals/, write completion signals |
 
-## Block List (route to satellites)
+## Block List (route to agent_nodes)
 | Domain | Route To |
 |--------|----------|
-| Research, market analysis | SHAKA |
-| Marketing, copy, ads | LILY |
-| Code, components, infra | EDISON |
-| Knowledge, indexing, RAG | PYTHA |
-| Deploy, test, debug | ATLAS |
-| Courses, pricing | YORK |
+| Research, market analysis | research_agent |
+| Marketing, copy, ads | marketing_agent |
+| Code, components, infra | builder_agent |
+| Knowledge, indexing, RAG | knowledge_agent |
+| Deploy, test, debug | operations_agent |
+| Courses, pricing | commercial_agent |
 
 ## Confirm Required
 Delete files, force push, production deploy, API key changes, payment operations.
 
 ## Principle
-STELLA orchestrates, NEVER executes. If a task produces artifacts, it must be dispatched.
+orchestrator orchestrates, NEVER executes. If a task produces artifacts, it must be dispatched.

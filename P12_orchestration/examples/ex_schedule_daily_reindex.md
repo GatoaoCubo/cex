@@ -56,7 +56,7 @@ schedule:
       on_fail: start_ollama
 
     - check: disk_space
-      command: "df -h /c/Users/PC/Documents/GitHub/codexa-core | awk 'NR==2 {print $5}'"
+      command: "df -h /c/Users/PC/Documents/GitHub/organization-core | awk 'NR==2 {print $5}'"
       expected: "< 90%"
       on_fail: abort_with_alert
 

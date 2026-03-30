@@ -5,7 +5,7 @@ title: Conversation Compression — Incremental Summarization for Long Sessions
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
-author: EDISON
+author: builder_agent
 domain: memory
 quality: null
 tags:
@@ -40,7 +40,7 @@ ciclo_de_compressao: "trigger_check:\n  metric: context_window_usage\n  threshol
   \  # null on first run\n  max_output_tokens: 500\n  preserve_always:\n    - file_paths_modified\n    - git_commits_made\n\
   \    - errors_encountered\n    - current_task_state\n    - user_decisions\n\noutput:\n  format: structured_yaml\n  inject_as:\
   \ system_message_prefix\n  ttl: session_end"
-exemplo_pratico: "Sessao EDISON com 47 turnos, 162K tokens usados (81%):\n\nInput (mensagens desde ultima compressao, turnos\
+exemplo_pratico: "Sessao builder_agent com 47 turnos, 162K tokens usados (81%):\n\nInput (mensagens desde ultima compressao, turnos\
   \ 31-47):\n- User pediu refactor de `api/v1/routes.py`\n- Leitura de 3 arquivos (routes.py, models.py, schemas.py)\n- Criacao\
   \ de `api/v1/routes_v2.py`\n- Erro: import circular com `core/deps.py`\n- Fix: mover dependency injection para `core/container.py`\n\
   - Commit: `refactor: extract DI container from deps.py`\n- User pediu testes\n\nOutput (memory_summary, 487 tokens):\nsession_summary:\n\

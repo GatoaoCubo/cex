@@ -2,7 +2,7 @@
 id: p01_fse_agent_creation
 kind: few_shot_example
 input: "criar agente de SEO para marketplace"
-output: "agent spec + 10 ISO files + handoff dispatch via EDISON"
+output: "agent spec + 10 ISO files + handoff dispatch via builder_agent"
 quality: 9.0
 ---
 
@@ -18,7 +18,7 @@ quality: 9.0
 operation: agent_create
 domain: SEO
 context: marketplace
-satellite: edison
+agent_node: edison
 result:
   agent_name: seo_marketplace
   path: records/agents/seo_marketplace/
@@ -27,7 +27,7 @@ result:
 ```
 
 ## Why It Works
-- CODEXA classifies intent via verb+object pattern ("criar" + "agente")
-- Domain mapping routes SEO/marketing to LILY satellite for spec, EDISON for build
-- HOP_EDISON_004 (Agent Builder) scaffold guarantees 10-file ISO standard tier
+- organization classifies intent via verb+object pattern ("criar" + "agente")
+- Domain mapping routes SEO/marketing to marketing_agent agent_node for spec, builder_agent for build
+- HOP_builder_agent_004 (Agent Builder) scaffold guarantees 10-file ISO standard tier
 - Quality gate validates 12LP compliance before pool promotion

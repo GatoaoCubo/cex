@@ -5,7 +5,7 @@ title: CEX Cortex Enterprise — Modular LLM Brain with CEO Orchestrator and Sat
 version: 1.0.0
 created: 2026-03-25
 updated: 2026-03-25
-author: EDISON
+author: builder_agent
 domain: cex_taxonomy
 quality: null
 tags:
@@ -15,7 +15,7 @@ tags:
 - ceo-cognitivo
 - emergent-properties
 - brain
-tldr: 'Cortex Enterprise eh cerebro empresarial modular: CEO cognitivo (roteia, nunca executa) + N satellites verticalizados
+tldr: 'Cortex Enterprise eh cerebro empresarial modular: CEO cognitivo (roteia, nunca executa) + N agent_nodes verticalizados
   + propriedades emergentes'
 when_to_use: Entender a arquitetura de sistema multi-agente com orquestrador central e departamentos autonomos
 keywords:
@@ -29,31 +29,31 @@ long_tails:
 - Qual o papel do orquestrador central num sistema multi-agente
 axioms:
 - SEMPRE orquestrador roteia, NUNCA executa
-- NUNCA satellite depende de outro satellite para completar tarefa
+- NUNCA agent_node depende de outro agent_node para completar tarefa
 linked_artifacts:
-  primary: p01_kc_cex_satellite_concept
+  primary: p01_kc_cex_agent_node_concept
   related:
   - p01_kc_cex_pipeline_execution
   - p01_kc_cex_function_become
 density_score: null
 data_source: https://arxiv.org/abs/2308.00352
 summary: 'Cortex Enterprise eh um cerebro empresarial modular baseado em LLM. Arquitetura: orquestrador central (CEO cognitivo)
-  que roteia mas NUNCA executa + N satellites verticalizados com autonomia total no seu dominio. Cada organizacao instancia
-  seu Cortex[X]. CODEXA eh a implementacao de referencia com 7 satellites e 284 agentes. O sistema exibe 5 propriedades emergentes:
+  que roteia mas NUNCA executa + N agent_nodes verticalizados com autonomia total no seu dominio. Cada organizacao instancia
+  seu Cortex[X]. organization eh a implementacao de referencia com 7 agent_nodes e 284 agentes. O sistema exibe 5 propriedades emergentes:
   bootstrapping, metacircularidade, scaffolding cognitivo, arquitetura fractal e auto-correcao distribuida.'
 spec: '| Componente | Funcao | Regra |
 
   |------------|--------|-------|
 
-  | Orquestrador (STELLA) | CLARIFY-ENRICH-COMPOSE-EXECUTE-MONITOR | Roteia, nunca executa |
+  | Orquestrador (orchestrator) | CLARIFY-ENRICH-COMPOSE-EXECUTE-MONITOR | Roteia, nunca executa |
 
-  | Satellites (6 exec) | Departamentos verticalizados | 1 dominio = 1 satellite |
+  | Satellites (6 exec) | Departamentos verticalizados | 1 dominio = 1 agent_node |
 
   | Agents (284 total) | Funcionarios especializados | ISO files definem execucao |
 
   | Handoffs | Despacho estruturado | Contexto + seeds + scope fence |
 
-  | Signals | Comunicacao inter-satellite | JSON com status + score |
+  | Signals | Comunicacao inter-agent_node | JSON com status + score |
 
   | Pool (1957 KCs) | Memoria institucional | Knowledge cards indexadas |
 
@@ -83,11 +83,11 @@ spec: '| Componente | Funcao | Regra |
 
   |------|-------|--------|
 
-  | CLARIFY | Pedido do usuario | Tabela de tasks por satellite |
+  | CLARIFY | Pedido do usuario | Tabela de tasks por agent_node |
 
   | ENRICH | Keywords por task | Contexto via brain_query |
 
-  | COMPOSE | Tasks + contexto | Handoff .md por satellite |
+  | COMPOSE | Tasks + contexto | Handoff .md por agent_node |
 
   | EXECUTE | Handoffs | Satellites em execucao paralela |
 
@@ -96,7 +96,7 @@ patterns: '| Trigger | Action |
 
   |---------|--------|
 
-  | Tarefa multi-dominio | Orquestrador decompoe em waves por satellite |
+  | Tarefa multi-dominio | Orquestrador decompoe em waves por agent_node |
 
   | Conhecimento novo gerado | Agente produz KC, pool indexa, busca melhora |
 
@@ -104,21 +104,21 @@ patterns: '| Trigger | Action |
 
   | Complexidade >= 70% | Ativar review chain 3-tier (implementer-spec-quality) |
 
-  | Novo dominio de negocio | Instanciar satellite com PRIME + mental_model + agentes |'
+  | Novo dominio de negocio | Instanciar agent_node com PRIME + mental_model + agentes |'
 anti_patterns:
 - Orquestrador executando codigo, pesquisa ou copy (perde visao global)
-- Satellite acessando dominio de outro satellite (viola separacao)
+- Satellite acessando dominio de outro agent_node (viola separacao)
 - Sistema sem pool de conhecimento (sem bootstrapping, sem melhoria)
 - Agentes sem ISO files (sem identidade, execucao inconsistente)
-- Handoffs sem scope fence (satellite toca o que nao deve)
+- Handoffs sem scope fence (agent_node toca o que nao deve)
 code: "<!-- lang: python | purpose: cortex orchestrator dispatch -->\ncortex = CortexEnterprise(\n    orchestrator=\"stella\"\
-  ,\n    satellites=[\"shaka\", \"lily\", \"edison\", \"pytha\", \"atlas\", \"york\"],\n    pool=KnowledgePool(count=1957),\n\
-  )\n# CLARIFY: decompose user request\ntasks = cortex.clarify(user_input)\n# ENRICH: brain_query per satellite\nfor task\
-  \ in tasks:\n    task.context = cortex.enrich(task.satellite, task.keywords)\n# COMPOSE: write structured handoffs\nhandoffs\
-  \ = cortex.compose(tasks)\n# EXECUTE: dispatch to satellites\ncortex.dispatch(handoffs)\n# MONITOR: check signals, consolidate\n\
+  ,\n    agent_nodes=[\"shaka\", \"lily\", \"edison\", \"pytha\", \"atlas\", \"york\"],\n    pool=KnowledgePool(count=1957),\n\
+  )\n# CLARIFY: decompose user request\ntasks = cortex.clarify(user_input)\n# ENRICH: brain_query per agent_node\nfor task\
+  \ in tasks:\n    task.context = cortex.enrich(task.agent_node, task.keywords)\n# COMPOSE: write structured handoffs\nhandoffs\
+  \ = cortex.compose(tasks)\n# EXECUTE: dispatch to agent_nodes\ncortex.dispatch(handoffs)\n# MONITOR: check signals, consolidate\n\
   cortex.monitor(timeout=300)"
 references:
 - 'source: https://arxiv.org/abs/2308.00352'
 - 'source: https://arxiv.org/abs/2303.17760'
-- 'related: p01_kc_cex_satellite_concept'
+- 'related: p01_kc_cex_agent_node_concept'
 - 'related: p01_kc_cex_pipeline_execution'

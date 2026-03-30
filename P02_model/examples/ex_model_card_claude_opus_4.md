@@ -41,8 +41,8 @@ tags: [model-card, opus, anthropic, pricing, capabilities]
 | Simple text formatting or copy | NO (use haiku, 5% cost) |
 | Research and analysis | NO (use sonnet, 25% cost) |
 
-## CODEXA Satellite Mapping
-- **EDISON** (build): opus — code complexity demands reasoning depth
-- **ATLAS** (execute): opus — deployment requires zero-error precision
-- **STELLA** (orchestrate): opus — routing decisions affect all satellites
-- **SHAKA/LILY/PYTHA/YORK**: sonnet — analysis tasks don't need opus
+## organization Satellite Mapping
+- **builder_agent** (build): opus — code complexity demands reasoning depth
+- **operations_agent** (execute): opus — deployment requires zero-error precision
+- **orchestrator** (orchestrate): opus — routing decisions affect all agent_nodes
+- **research_agent/marketing_agent/knowledge_agent/commercial_agent**: sonnet — analysis tasks don't need opus

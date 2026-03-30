@@ -6,7 +6,7 @@ title: Benchmark de Formatos para Artefatos CEX — MD+YAML vs YAML vs JSON vs X
 version: 1.0.0
 created: 2026-03-25
 updated: 2026-03-25
-author: STELLA
+author: orchestrator
 domain: meta-construction
 quality: 9.5
 tags:
@@ -27,7 +27,7 @@ keywords:
 - yaml_pure
 - brain_search_compatibility
 source: 'Benchmark empirico: 668 KCs analisados + 1102 YAMLs testados + tiktoken token count'
-code_provenance: codexa-core/records/pool/knowledge (668 KCs) + cex/ repo (120 examples)
+code_provenance: organization-core/records/pool/knowledge (668 KCs) + cex/ repo (120 examples)
 confidence: 0.95
 linked_kcs: []
 facts: '| # | Claim | Source | Cf |
@@ -44,7 +44,7 @@ facts: '| # | Claim | Source | Cf |
   | 4 | Brain search (BM25+FAISS) so indexa .md — YAML e JSON sao invisiveis | build_indexes_ollama.py linha 240: rglob("*.md")
   | 1.0 |
 
-  | 5 | 11.3% dos 1102 YAMLs no codexa-core tem parse errors (67% por --- separators) | yaml.safe_load scan em records/*/.yaml
+  | 5 | 11.3% dos 1102 YAMLs no organization-core tem parse errors (67% por --- separators) | yaml.safe_load scan em records/*/.yaml
   | 1.0 |
 
   | 6 | KCs 9.5+ tem 65% code blocks e 75% tables vs 8.0 com 5% code e 34% tables | Scan de 668 KCs: quality vs features |
@@ -53,7 +53,7 @@ facts: '| # | Claim | Source | Cf |
   | 7 | KCs 9.5+ tem avg 14.3 campos metadata vs 8.0 com 11.8 campos | Scan de 668 KCs frontmatter | 1.0 |
 
   | 8 | LLMs geram MD melhor que YAML — YAML sofre com erros de indentacao na geracao | Observacao empirica em 2964 commits
-  codexa-core | 0.85 |
+  organization-core | 0.85 |
 
   | 9 | 98.4% dos KCs nao tem campo source, 92.1% nao tem when_to_use | Scan 668 KCs: fields_absent counter | 1.0 |'
 score_ponderado_10_dimensoes_pesos_por_importancia_cex: '| Format | Tokens | Parse | Gen | Schema | Human | Brain | Diff |

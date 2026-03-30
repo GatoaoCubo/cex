@@ -16,7 +16,7 @@ tags: [memory-summary, retention-policy, entity-retention, freshness-decay, mult
 tldr: "Explicit per-category retention policy is load-bearing for commitment continuity. Hybrid method for mixed content. freshness_decay <= 0.1 for multi-session."
 impact_score: 8.0
 decay_rate: 0.03
-satellite: edison
+agent_node: edison
 keywords: [memory summary, retention policy, entity retention, action items, freshness decay, compression method, multi-session, hybrid]
 ---
 

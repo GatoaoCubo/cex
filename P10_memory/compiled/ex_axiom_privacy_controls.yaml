@@ -5,7 +5,7 @@ title: 'Axiom: Edge-Layer Privacy Controls'
 version: 1.0.0
 created: 2026-03-24
 updated: 2026-03-24
-author: EDISON
+author: builder_agent
 quality: 9.0
 tags:
 - axiom
@@ -17,7 +17,7 @@ tldr: Privacy enforced at edge (hook layer), not center (daemon). <private> tags
   client boundary unfiltered.
 max_bytes: 3072
 density_score: 0.9
-source: codexa-core/records/core/memory/hooks/ (privacy filtering layer)
+source: organization-core/records/core/memory/hooks/ (privacy filtering layer)
 linked_artifacts:
   template: tpl_axiom_privacy_controls
   related: p10_ax_lifecycle_hooks

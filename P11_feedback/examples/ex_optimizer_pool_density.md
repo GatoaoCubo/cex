@@ -12,7 +12,7 @@ tags: [optimizer, pool, density, quality, feedback]
 tldr: "Pool density optimizer: detect low-density artifacts (< 0.8), identify anti-patterns, trigger targeted rewrites to reach >= 0.85"
 max_bytes: 1024
 density_score: 0.88
-source: codexa-core/records/framework/docs/LAWS_v3_PRACTICAL.md + CEX 5D rubric
+source: organization-core/records/framework/docs/LAWS_v3_PRACTICAL.md + CEX 5D rubric
 linked_artifacts:
   rubric: p07_sr_5d_scoring
   gate: p11_qg_cex_quality
@@ -58,7 +58,7 @@ density_score:
 
 ```markdown
 # BEFORE (density: 0.71)
-Scout Before Create is a very important principle in CODEXA.
+Scout Before Create is a very important principle in organization.
 It means that before you create anything new, you should first
 look to see if something similar already exists in the pool.
 This is because creating duplicates wastes time.

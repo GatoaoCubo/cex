@@ -23,7 +23,7 @@ tags:
 tldr: "Use 6-10 bilingual keywords, threshold 0.70-0.75, always use a distinct fallback executor."
 impact_score: 7.5
 decay_rate: 0.05
-satellite: edison
+agent_node: edison
 keywords:
   - dispatch rule
   - routing

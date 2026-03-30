@@ -18,7 +18,7 @@ purpose: Tools and APIs available for system_prompt production
 |--------|----------|------|
 | CEX Schema | P03_prompt/_schema.yaml | Field definitions, kinds |
 | CEX Examples | P03_prompt/examples/ | Real system_prompt artifacts |
-| PRIME files | records/satellites/*/PRIME_*.md | 7 existing system prompts |
+| PRIME files | records/agent_nodes/*/PRIME_*.md | 7 existing system prompts |
 | ISO Instructions | records/agents/*/iso_vectorstore/ISO_*_SYSTEM_INSTRUCTION.md | 101 agent system prompts |
 | Rules files | .claude/rules/*.md | 10 operational rule sets |
 | SEED_BANK | archetypes/SEED_BANK.yaml | Seeds for P03_system_prompt |

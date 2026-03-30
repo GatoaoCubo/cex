@@ -9,7 +9,7 @@ sources: workflow-builder MANIFEST.md + SCHEMA.md
 
 # Domain Knowledge: workflow
 ## Executive Summary
-A `workflow` (P12) is a runtime orchestration plan — numbered steps with agents, dependencies, signals, and execution mode (sequential/parallel/mixed). It differs from `chain` (text-only prompt sequence), `dag` (dependency graph without execution), `crew` (collaboration protocol), and `handoff` (single-satellite instruction) by specifying WHEN and HOW agents run, what signals they emit, and how failures are handled across multiple satellites.
+A `workflow` (P12) is a runtime orchestration plan — numbered steps with agents, dependencies, signals, and execution mode (sequential/parallel/mixed). It differs from `chain` (text-only prompt sequence), `dag` (dependency graph without execution), `crew` (collaboration protocol), and `handoff` (single-agent_node instruction) by specifying WHEN and HOW agents run, what signals they emit, and how failures are handled across multiple agent_nodes.
 ## Spec Table
 | Property | Value |
 |----------|-------|
@@ -31,7 +31,7 @@ A `workflow` (P12) is a runtime orchestration plan — numbered steps with agent
 | Wave planning | Group independent steps into parallel waves; sequential between waves |
 | Dependency resolution | Step N only starts after all `depends_on` steps emit completion signal |
 | Signal contract | Every step emits a signal on completion; reference signal-builder conventions |
-| Spawn integration | Each satellite step references a `spawn_config` ID |
+| Spawn integration | Each agent_node step references a `spawn_config` ID |
 | `per_step` retry | Isolates failures — one failed step does not abort healthy parallel steps |
 | Timeout budgeting | Sequential: `timeout >= sum(step timeouts)`; parallel: `timeout >= max(step timeouts)` |
 | Idempotent steps | Steps must be safe to retry without side effects |
@@ -53,10 +53,10 @@ A `workflow` (P12) is a runtime orchestration plan — numbered steps with agent
 | kind | Why NOT workflow |
 |------|----------------|
 | `chain` | Text-only prompt sequence — no agents, no tools, no signals |
-| `dag` | Defines dependency order only — no execution, no satellites |
+| `dag` | Defines dependency order only — no execution, no agent_nodes |
 | `crew` | Defines HOW agents collaborate — not WHEN they run |
-| `handoff` | Single-satellite task instruction — one task, not many steps |
-| `dispatch_rule` | Routes keywords to satellites — does not orchestrate execution |
+| `handoff` | Single-agent_node task instruction — one task, not many steps |
+| `dispatch_rule` | Routes keywords to agent_nodes — does not orchestrate execution |
 ## Anti-Patterns
 | Anti-Pattern | Why it fails |
 |-------------|-------------|

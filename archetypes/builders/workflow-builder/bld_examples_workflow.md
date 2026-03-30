@@ -9,7 +9,7 @@ pattern: few-shot learning — LLM reads these before producing
 
 # Examples: workflow-builder
 ## Golden Example
-INPUT: "Create workflow for research-then-build mission with SHAKA and EDISON"
+INPUT: "Create workflow for research-then-build mission with research_agent and builder_agent"
 OUTPUT:
 ```yaml
 id: p12_wf_research_build_mission
@@ -31,12 +31,12 @@ spawn_configs: [p12_spawn_shaka_solo_research, p12_spawn_edison_solo_build]
 domain: "orchestration"
 quality: null
 tags: [workflow, research, build, multi-director]
-tldr: "3-step mixed workflow: SHAKA researches, EDISON builds from findings, orchestrator consolidates"
+tldr: "3-step mixed workflow: research_agent researches, builder_agent builds from findings, orchestrator consolidates"
 density_score: 0.90
 ```
 ## Purpose
-Orchestrates a research-then-build mission where SHAKA gathers market intelligence,
-EDISON implements based on findings, and orchestrator consolidates results. Steps 1-2 are
+Orchestrates a research-then-build mission where research_agent gathers market intelligence,
+builder_agent implements based on findings, and orchestrator consolidates results. Steps 1-2 are
 sequential (build depends on research), step 3 runs after both complete.
 ## Steps
 ### Step 1: Market Research [shaka]
@@ -49,7 +49,7 @@ sequential (build depends on research), step 3 runs after both complete.
 ### Step 2: Implementation [edison]
 - **Agent**: edison (opus)
 - **Action**: Build feature using research findings from Step 1
-- **Input**: knowledge cards produced by SHAKA
+- **Input**: knowledge cards produced by research_agent
 - **Output**: implemented feature with tests passing
 - **Signal**: edison_complete with quality score
 - **Depends on**: Step 1
@@ -61,7 +61,7 @@ sequential (build depends on research), step 3 runs after both complete.
 - **Signal**: workflow_complete
 - **Depends on**: Steps 1, 2
 ## Dependencies
-- Handoff files must exist for SHAKA and EDISON before workflow starts
+- Handoff files must exist for research_agent and builder_agent before workflow starts
 - spawn_configs referenced must be valid (p12_spawn_shaka_solo_research, p12_spawn_edison_solo_build)
 ## Signals
 - **On step complete**: {sat}_complete signal emitted (see signal-builder)
@@ -87,8 +87,8 @@ kind: flow
 steps: 3
 quality: 8.5
 ```
-This workflow does research and then builds things. First SHAKA does research,
-then EDISON builds. It's a great workflow that produces high quality output.
+This workflow does research and then builds things. First research_agent does research,
+then builder_agent builds. It's a great workflow that produces high quality output.
 FAILURES:
 1. id: no `p12_wf_` prefix -> H02 FAIL
 2. kind: "flow" not "workflow" -> H04 FAIL

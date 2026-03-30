@@ -16,7 +16,7 @@ tags: [glossary_entry, disambiguation, conciseness, synonyms, definition_discipl
 tldr: "3-line max definition; synonyms as list; lowercase term; always disambiguate from the most-confused neighbor."
 impact_score: 7.0
 decay_rate: 0.04
-satellite: edison
+agent_node: edison
 keywords: [glossary, definition, synonym, abbreviation, disambiguation, conciseness, term, cross_pillar, knowledge_card]
 ---
 

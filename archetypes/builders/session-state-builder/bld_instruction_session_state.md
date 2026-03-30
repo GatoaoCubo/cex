@@ -10,7 +10,7 @@ title: Session State Builder Instructions
 target: session-state-builder agent
 phases_count: 3
 prerequisites:
-  - Agent or satellite name is known (non-empty string)
+  - Agent or agent_node name is known (non-empty string)
   - Session identifier is available (unique per execution context)
   - Current session status is known (active, paused, completed, or aborted)
   - Session start timestamp is available in ISO 8601 format
@@ -33,7 +33,7 @@ that capture an agent's momentary execution state during a live session. A sessi
 records what the agent is currently doing, what resources it has consumed, and where
 recovery checkpoints exist if the session is interrupted.
 **Input contract**:
-- `{{agent_name}}`: the agent or satellite being snapshotted (e.g. `build-sat`, `research-agent`)
+- `{{agent_name}}`: the agent or agent_node being snapshotted (e.g. `build-sat`, `research-agent`)
 - `{{session_id}}`: unique identifier for this execution context (e.g. `sess_20260327_001`)
 - `{{session_status}}`: one of `active`, `paused`, `completed`, `aborted`
 - `{{started_at}}`: ISO 8601 timestamp of session start

@@ -41,9 +41,9 @@ O principio fractal do CEX estabelece que a mesma estrutura de 12 LPs se repete 
 | L4 Satellite | 9/12 | +LEARN, EVOLVE | Departamento autonomo com memoria |
 | L5 System | 12/12 | Todas 8 funcoes | Multi-agente coordenado completo |
 
-Analogia musical: nota (prompt) → acorde (chain) → frase (agent) → secao (satellite) → sinfonia (system). Cada nivel adiciona dimensoes, nao substitui.
+Analogia musical: nota (prompt) → acorde (chain) → frase (agent) → secao (agent_node) → sinfonia (system). Cada nivel adiciona dimensoes, nao substitui.
 
-Analogia biologica: celula (prompt) → tecido (chain) → orgao (agent) → sistema (satellite) → organismo (system). Propriedades emergentes surgem da composicao, nao da soma.
+Analogia biologica: celula (prompt) → tecido (chain) → orgao (agent) → sistema (agent_node) → organismo (system). Propriedades emergentes surgem da composicao, nao da soma.
 
 Consequencia pratica: organizacao comeca com 1-2 LPs para prompts, evolui para 3-4 para agentes, e escala para 12/12 para sistemas — mesmo vocabulario, mesmas ferramentas.
 

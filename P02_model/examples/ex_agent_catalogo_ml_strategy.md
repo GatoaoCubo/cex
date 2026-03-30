@@ -136,5 +136,5 @@ parallel:
 ## References
 
 - `records/agents/catalogo_ml_strategy/README.md` (fonte original)
-- `records/pool/knowledge/KC_PYTHA_069_CAT_LOGO_PR_PRIO_MERCADO_LIVRE.md`
+- `records/pool/knowledge/KC_knowledge_agent_069_CAT_LOGO_PR_PRIO_MERCADO_LIVRE.md`
 - Valor de mercado: R$ 10.000-15.000 em cursos

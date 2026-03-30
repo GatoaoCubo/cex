@@ -19,8 +19,8 @@ tags:
 - budget
 - queue
 - cost-control
-overview: Enforces Anthropic API Tier 2 rate limits across all CODEXA satellites. When limits approach, requests queue instead
-  of failing. Daily budget cap of $50 prevents runaway costs from autonomous satellite loops.
+overview: Enforces Anthropic API Tier 2 rate limits across all organization agent_nodes. When limits approach, requests queue instead
+  of failing. Daily budget cap of $50 prevents runaway costs from autonomous agent_node loops.
 tier_2_limits_anthropic: '| Limit | Value | Scope | Reset |
 
   |-------|-------|-------|-------|
@@ -41,23 +41,23 @@ model_specific_token_costs: '| Model | Input (per 1M) | Output (per 1M) | Typica
   | claude-sonnet-4-6 | $3.00 | $15.00 | $0.024 (3K in, 1K out) |
 
   | claude-haiku-4-5 | $0.80 | $4.00 | $0.0064 (3K in, 1K out) |'
-budget_allocation_by_satellite: '| Satellite | Model | Daily Budget | Typical RPM | Rationale |
+budget_allocation_by_agent_node: '| Satellite | Model | Daily Budget | Typical RPM | Rationale |
 
   |-----------|-------|-------------|-------------|-----------|
 
-  | STELLA | opus-4-6 | $15 | 20 | Orchestration, low volume high complexity |
+  | orchestrator | opus-4-6 | $15 | 20 | Orchestration, low volume high complexity |
 
-  | EDISON | opus-4-6 | $12 | 50 | Build tasks, code generation |
+  | builder_agent | opus-4-6 | $12 | 50 | Build tasks, code generation |
 
-  | ATLAS | opus-4-6 | $8 | 30 | Deploy, test, validate |
+  | operations_agent | opus-4-6 | $8 | 30 | Deploy, test, validate |
 
-  | SHAKA | sonnet-4-6 | $5 | 100 | Research, high volume lower cost |
+  | research_agent | sonnet-4-6 | $5 | 100 | Research, high volume lower cost |
 
-  | LILY | sonnet-4-6 | $4 | 80 | Marketing copy, batch generation |
+  | marketing_agent | sonnet-4-6 | $4 | 80 | Marketing copy, batch generation |
 
-  | PYTHA | sonnet-4-6 | $3 | 60 | Knowledge processing |
+  | knowledge_agent | sonnet-4-6 | $3 | 60 | Knowledge processing |
 
-  | YORK | sonnet-4-6 | $3 | 40 | Monetization, course content |
+  | commercial_agent | sonnet-4-6 | $3 | 40 | Monetization, course content |
 
   | Total | — | $50 | 380 | — |'
 escalation_strategy: "escalation:\n  strategy: queue\n  levels:\n    - trigger: rpm >= 80%      # 800+ RPM\n      action:\
@@ -65,7 +65,7 @@ escalation_strategy: "escalation:\n  strategy: queue\n  levels:\n    - trigger: 
   \      action: queue_requests\n      queue_max: 500\n      queue_timeout: 30s\n      message: \"Queueing requests — RPM\
   \ at {{current}}/1000\"\n\n    - trigger: tpm >= 90%      # 72K+ TPM\n      action: downgrade_model\n      from: opus-4-6\n\
   \      to: sonnet-4-6\n      message: \"TPM pressure — downgrading non-critical to sonnet\"\n\n    - trigger: daily_budget\
-  \ >= 80%  # $40+\n      action: restrict_to_essential\n      allowed: [STELLA, ATLAS]\n      message: \"Budget 80% — only\
+  \ >= 80%  # $40+\n      action: restrict_to_essential\n      allowed: [orchestrator, operations_agent]\n      message: \"Budget 80% — only\
   \ orchestration and deploy allowed\"\n\n    - trigger: daily_budget >= 95%  # $47.50+\n      action: hard_stop\n      message:\
   \ \"Budget exhausted — all API calls blocked until reset\"\n      alert: slack"
 rate_limiter_implementation: "import time\nfrom collections import deque\nfrom threading import Lock\n\nclass AnthropicRateLimiter:\n\
@@ -124,5 +124,5 @@ anti_patterns:
 - Retrying 429s immediately without exponential backoff (triggers stricter throttling)
 - Ignoring TPM limit and only tracking RPM (long prompts hit TPM first)
 - No daily budget cap (autonomous loops can spend hundreds overnight)
-- Single global rate limiter instead of per-satellite budgets (one satellite starves others)
+- Single global rate limiter instead of per-agent_node budgets (one agent_node starves others)
 - Hardcoding limits instead of reading from Anthropic response headers (limits change with tier upgrades)

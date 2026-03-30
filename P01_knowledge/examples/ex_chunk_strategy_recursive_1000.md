@@ -11,13 +11,13 @@ domain: knowledge_ingestion
 quality: 9.0
 tags: [chunk-strategy, recursive, markdown, rag, langchain, text-splitter]
 tldr: Recursive text splitter otimizado para documentacao Markdown — chunk_size=1000, overlap=200, separadores hierarquicos por heading level
-when_to_use: Ingestao de knowledge cards, READMEs, e documentacao tecnica no pipeline RAG do CODEXA Brain
+when_to_use: Ingestao de knowledge cards, READMEs, e documentacao tecnica no pipeline RAG do organization Brain
 ---
 
 # Chunk Strategy: Recursive Markdown Splitter (1000 tokens)
 
 ## Overview
-Estrategia de chunking para documentos Markdown usados no pipeline RAG do CODEXA Brain. Usa RecursiveCharacterTextSplitter do LangChain com separadores hierarquicos que respeitam a estrutura semantica do Markdown — prioriza split por headings antes de quebrar paragrafos.
+Estrategia de chunking para documentos Markdown usados no pipeline RAG do organization Brain. Usa RecursiveCharacterTextSplitter do LangChain com separadores hierarquicos que respeitam a estrutura semantica do Markdown — prioriza split por headings antes de quebrar paragrafos.
 
 ## Parameters
 | Param | Value | Rationale |
@@ -53,7 +53,7 @@ documents = splitter.split_documents(loaded_kcs)
 Cada chunk herda metadata do documento original:
 ```python
 {
-    "source": "records/pool/knowledge/KC_PYTHA_007_CHATKIT.md",
+    "source": "records/pool/knowledge/KC_knowledge_agent_007_CHATKIT.md",
     "kind": "knowledge_card",
     "pillar": "P01",
     "chunk_index": 3,
@@ -70,7 +70,7 @@ Cada chunk herda metadata do documento original:
 | Heading orphan | Heading sem body >= 20 tokens | Merge heading com proximo chunk |
 | Code block integrity | Code blocks nao cortados | Extend chunk ate fechar ``` |
 
-## Benchmarks (CODEXA Brain corpus)
+## Benchmarks (organization Brain corpus)
 | Metric | Value |
 |--------|-------|
 | Avg chunk size | 847 tokens |

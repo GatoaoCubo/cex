@@ -5,7 +5,7 @@ title: 'Gate: TDD Compliance'
 version: 1.0.0
 created: 2026-03-24
 updated: 2026-03-24
-author: EDISON
+author: builder_agent
 domain: build
 quality: 9.0
 tags:
@@ -15,7 +15,7 @@ tags:
 - red-green-refactor
 - build-discipline
 tldr: 'Enforces test-first development: RED verified before code, YAGNI compliance, no RED commits merged'
-when_to_use: Before merging any code commit in EDISON or ATLAS build pipelines
+when_to_use: Before merging any code commit in builder_agent or operations_agent build pipelines
 keywords:
 - tdd-compliance
 - test-first
@@ -38,7 +38,7 @@ definition: '| Property | Value |
 
   | Operator | == |
 
-  | Scope | EDISON and ATLAS build satellites |
+  | Scope | builder_agent and operations_agent build agent_nodes |
 
   | Trigger | Pre-merge on any branch with code changes |'
 actions: '| Result | Action | Escalation |
@@ -49,7 +49,7 @@ actions: '| Result | Action | Escalation |
 
   | Partial (5-6/7) | Block merge, return specific failing checks | Author fixes within same PR |
 
-  | Fail (<5/7) | Block merge, flag for process review | Notify satellite owner + STELLA |'
+  | Fail (<5/7) | Block merge, flag for process review | Notify agent_node owner + orchestrator |'
 checklist:
 - '[ ] C1: Test written BEFORE implementation (git diff timeline: test file timestamp < impl file)'
 - '[ ] C2: RED phase verified — test runs and FAILS before implementation exists (captured output)'
@@ -85,7 +85,7 @@ anti_patterns_instant_fail:
 - Gold-plating in GREEN phase (adding features no test currently requires)
 bypass_protocol:
 - 'Conditions: Hotfix patches with P0 production incident (max 24h bypass window)'
-- 'Approver: STELLA orchestrator or project owner'
+- 'Approver: orchestrator orchestrator or project owner'
 - 'Audit: Bypass logged with incident ID + follow-up TDD ticket auto-created'
 - 'Limit: Max 2 bypasses per sprint; 3rd triggers mandatory process review'
 verification_commands: '# Check test-first order via git
@@ -105,4 +105,4 @@ verification_commands: '# Check test-first order via git
 
   ---
 
-  Quality Gate v1.0 | EDISON Build Domain | 2026-03-24'
+  Quality Gate v1.0 | builder_agent Build Domain | 2026-03-24'

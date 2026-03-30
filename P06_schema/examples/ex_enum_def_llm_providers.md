@@ -28,7 +28,7 @@ density_score: null
 
 ## TL;DR
 
-Enum canonica que lista os 7 provedores LLM suportados pelo CODEXA para routing multi-modelo. Qualquer configuracao que referencia um provedor deve usar exatamente um destes valores. Novas adicoes passam por review (impacto em routing, billing, e fallback chains).
+Enum canonica que lista os 7 provedores LLM suportados pelo organization para routing multi-modelo. Qualquer configuracao que referencia um provedor deve usar exatamente um destes valores. Novas adicoes passam por review (impacto em routing, billing, e fallback chains).
 
 ## Conceito Central
 
@@ -61,7 +61,7 @@ enum:
       env_var: ANTHROPIC_API_KEY
       models: [claude-opus-4-6, claude-sonnet-4-6, claude-haiku-4-5-20251001]
       billing: per_token
-      status: active  # PRIMARY provider for CODEXA
+      status: active  # PRIMARY provider for organization
 
     google:
       display: "Google AI"

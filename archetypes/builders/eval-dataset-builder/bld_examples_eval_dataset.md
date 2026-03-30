@@ -39,7 +39,7 @@ license: "MIT"
 refresh_cadence: "on-demand"
 ```
 ## Overview
-Tests the CEX artifact quality gate validator across all 10 HARD gate conditions. Used by EDISON to verify validation logic and by CI to catch regression in gate checks.
+Tests the CEX artifact quality gate validator across all 10 HARD gate conditions. Used by builder_agent to verify validation logic and by CI to catch regression in gate checks.
 ## Schema
 ### input
 Type: dict. The artifact under evaluation — `frontmatter` (dict) and `body` (string).

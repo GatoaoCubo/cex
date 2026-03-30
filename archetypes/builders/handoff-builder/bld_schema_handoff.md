@@ -26,7 +26,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 | created | date YYYY-MM-DD | YES | - | Creation date |
 | updated | date YYYY-MM-DD | YES | - | Last update |
 | author | string | YES | - | Producer identity |
-| satellite | string | YES | - | Target executor (lowercase slug) |
+| agent_node | string | YES | - | Target executor (lowercase slug) |
 | mission | string | YES | - | Mission or project name |
 | autonomy | enum (`full`, `supervised`, `assisted`) | YES | - | Execution autonomy level |
 | quality_target | number 0.0-10.0 | YES | - | Minimum quality threshold |
@@ -52,21 +52,21 @@ pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 4. `## Commit` — exact git commands for committing deliverables
 5. `## Signal` — how to signal completion (signal_writer or file)
 ## Semantic Rules
-1. One handoff delegates one coherent unit of work to one satellite
+1. One handoff delegates one coherent unit of work to one agent_node
 2. Tasks must be specific and actionable, not vague
 3. Scope fence must explicitly list allowed and forbidden paths
 4. Commit section must include exact git add and commit commands
 5. Signal section must reference signal_writer or a completion file
-6. Autonomy level governs how much the satellite can decide independently
+6. Autonomy level governs how much the agent_node can decide independently
 ## Boundary Rules
 `handoff` IS:
-- complete delegation instruction for a satellite
+- complete delegation instruction for a agent_node
 - packaged context + tasks + scope + commit rules
 - one-shot execution brief
 `handoff` IS NOT:
 - `action_prompt`: no persona, no system rules, no response format constraints
 - `signal`: no status event, no quality score, no timestamp-only data
-- `dispatch_rule`: no keyword routing table, no satellite selection policy
+- `dispatch_rule`: no keyword routing table, no agent_node selection policy
 - `workflow`: no step graph, no error handling, no runtime state
 - `dag`: no dependency graph structure, no topological ordering
 - `crew`: no multi-agent coordination protocol

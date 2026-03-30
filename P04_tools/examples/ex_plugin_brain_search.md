@@ -3,7 +3,7 @@ id: p04_plug_brain_search
 kind: plugin
 name: brain_search_plugin
 version: 1.0.0
-entrypoint: codexa_brain.vector_search
+entrypoint: organization_brain.vector_search
 capabilities: [keyword_search, vector_search, hybrid_fusion, index_rebuild]
 repository: internal
 license: proprietary
@@ -18,14 +18,14 @@ tags: [plugin, search, bm25, faiss, vector, semantic]
 # Plugin: brain_search
 
 ## Purpose
-- Extends: codexa-brain MCP server
+- Extends: organization-brain MCP server
 - Adds: Hybrid retrieval (BM25 keyword + FAISS semantic fusion)
 - Does not own: Index storage format, embedding model selection
 
 ## Integration
 | Field | Value |
 |-------|-------|
-| Entrypoint | `codexa_brain.vector_search` |
+| Entrypoint | `organization_brain.vector_search` |
 | Inputs | query string, scope filter, k results |
 | Outputs | ranked chunks with scores and source paths |
 | Dependencies | ollama (nomic-embed-text), faiss-cpu |

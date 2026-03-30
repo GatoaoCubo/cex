@@ -9,7 +9,7 @@ sources: orchestration patterns, delegation protocols, mission briefing design
 
 # Domain Knowledge: handoff
 ## Executive Summary
-Handoffs are self-contained delegation packages that tell a satellite WHAT to do, with what context, within what scope, and how to commit and signal completion. They are instructions consumed by execution engines — not events (signals), not routing policies (dispatch rules), and not runtime orchestration (workflows). A handoff must be self-contained: the satellite needs no external context.
+Handoffs are self-contained delegation packages that tell a agent_node WHAT to do, with what context, within what scope, and how to commit and signal completion. They are instructions consumed by execution engines — not events (signals), not routing policies (dispatch rules), and not runtime orchestration (workflows). A handoff must be self-contained: the agent_node needs no external context.
 ## Spec Table
 | Property | Value |
 |----------|-------|
@@ -19,9 +19,9 @@ Handoffs are self-contained delegation packages that tell a satellite WHAT to do
 | Naming | p12_ho_{task}.md |
 | Required body sections | Context, Tasks, Scope Fence, Commit, Signal |
 | Autonomy levels | full, supervised, assisted |
-| Key fields | satellite, mission, autonomy, quality_target |
+| Key fields | agent_node, mission, autonomy, quality_target |
 ## Patterns
-- **Autonomy levels**: define how independently the satellite operates
+- **Autonomy levels**: define how independently the agent_node operates
 | Level | Behavior | Use case |
 |-------|----------|----------|
 | full | Satellite decides all implementation details | Trusted, well-defined tasks |
@@ -35,8 +35,8 @@ Handoffs are self-contained delegation packages that tell a satellite WHAT to do
 | Scope Fence | WHERE allowed/forbidden | SOMENTE + NAO TOQUE paths |
 | Commit | HOW to save work | Exact git add + commit commands |
 | Signal | HOW to report completion | Signal writer call or file |
-- **Self-contained**: satellite needs no external context — everything is in the handoff
-- **Scope fence**: explicitly lists allowed paths AND forbidden paths — prevents satellite from touching wrong files
+- **Self-contained**: agent_node needs no external context — everything is in the handoff
+- **Scope fence**: explicitly lists allowed paths AND forbidden paths — prevents agent_node from touching wrong files
 - **Action verb tasks**: every task starts with an action verb (create, read, validate, write)
 ## Anti-Patterns
 | Anti-Pattern | Why it fails |
@@ -48,7 +48,7 @@ Handoffs are self-contained delegation packages that tell a satellite WHAT to do
 | No signal section | Orchestrator cannot detect completion |
 | Over 4096 bytes | Too complex; split into multiple handoffs |
 ## Application
-1. Define mission and satellite assignment
+1. Define mission and agent_node assignment
 2. Write context: 2-4 sentences on WHY this work is needed
 3. List tasks: numbered, action-verb-first, specific deliverables
 4. Set scope fence: SOMENTE (allowed) + NAO TOQUE (forbidden) paths

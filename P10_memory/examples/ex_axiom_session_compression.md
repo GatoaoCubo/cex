@@ -12,7 +12,7 @@ tags: [axiom, compression, session, dual-id, stop]
 tldr: "Compression fires exactly once at Stop hook. Dual-ID pattern: content_session_id (stable, for DB) vs memory_session_id (lazy, for SDK resume)."
 max_bytes: 3072
 density_score: 0.91
-source: codexa-core/records/core/memory/hooks/ (Stop hook compression)
+source: organization-core/records/core/memory/hooks/ (Stop hook compression)
 linked_artifacts:
   template: tpl_axiom_session_compression
   related: p10_ax_lifecycle_hooks

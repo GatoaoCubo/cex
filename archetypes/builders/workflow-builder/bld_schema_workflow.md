@@ -21,7 +21,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | title | string | YES | - | Human-readable workflow name |
 | steps_count | integer | YES | - | Number of steps in body (must match) |
 | execution | enum: sequential, parallel, mixed | YES | - | Step arrangement |
-| satellites | list[string] | REC | - | Which satellites participate |
+| agent_nodes | list[string] | REC | - | Which agent_nodes participate |
 | timeout | integer | REC | - | Total workflow timeout (seconds) |
 | retry_policy | enum: none, per_step, global | REC | "none" | Retry strategy |
 | depends_on | list[string] | REC | [] | Prerequisite workflows/artifacts |

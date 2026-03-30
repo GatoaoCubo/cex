@@ -16,7 +16,7 @@ tags: [entity-memory, confidence-scoring, expiry, update-policy, grounding, attr
 tldr: "Confidence scoring and expiry are load-bearing for entity memory quality. Min 3 attributes. update_policy must match entity volatility."
 impact_score: 8.0
 decay_rate: 0.03
-satellite: edison
+agent_node: edison
 keywords: [entity memory, confidence, expiry, attributes, update policy, grounding, staleness, relationships]
 ---
 

@@ -1,8 +1,8 @@
 ---
-id: p12_crew_satellite_grid
+id: p12_crew_agent_node_grid
 kind: crew
 pillar: P12
-description: "Multi-satellite crew configuration for parallel task execution via spawn_grid"
+description: "Multi-agent_node crew configuration for parallel task execution via spawn_grid"
 version: 1.0.0
 created: 2026-03-25
 author: stella
@@ -13,25 +13,25 @@ tags: [crew, multi-agent, grid, parallel, orchestration]
 # Crew: Satellite Grid
 
 ## Purpose
-Defines how N satellites collaborate on a mission. The crew is NOT the agents — it is the PROTOCOL that coordinates them.
+Defines how N agent_nodes collaborate on a mission. The crew is NOT the agents — it is the PROTOCOL that coordinates them.
 
 ## Configuration
 ```yaml
 crew:
   name: "GENESIS"
-  coordinator: STELLA
+  coordinator: orchestrator
   protocol: parallel_grid
   
   members:
-    - satellite: SHAKA
+    - agent_node: research_agent
       role: researcher
       model: sonnet
       tasks_from: ".claude/handoffs/GENESIS_batch_*_shaka.md"
-    - satellite: EDISON
+    - agent_node: builder_agent
       role: builder
       model: opus
       tasks_from: ".claude/handoffs/GENESIS_batch_*_edison.md"
-    - satellite: PYTHA
+    - agent_node: knowledge_agent
       role: knowledge
       model: sonnet
       tasks_from: ".claude/handoffs/GENESIS_batch_*_pytha.md"
@@ -40,7 +40,7 @@ crew:
     max_parallel: 6
     mode: continuous  # static | continuous
     shared_state: git_repo  # all read/write same repo
-    conflict_resolution: file_isolation  # each satellite edits different files
+    conflict_resolution: file_isolation  # each agent_node edits different files
     
   lifecycle:
     spawn: "spawn_grid.ps1 -mission GENESIS -mode continuous"
@@ -56,6 +56,6 @@ crew:
 
 ## The crew is a fractal of 12 LPs
 A crew instantiates ALL 12 LPs at the group level:
-P01=shared pool, P02=N satellites, P03=mission goal, P04=shared MCPs,
+P01=shared pool, P02=N agent_nodes, P03=mission goal, P04=shared MCPs,
 P06=file isolation contract, P07=quality gates, P09=grid config,
 P10=shared git state, P11=monitor watchdog, P12=signal protocol.

@@ -35,7 +35,7 @@ Advisory hooks NEVER block execution. Always exit 0.
 ## Steps
 
 ### Hook 1: Statusline (PostToolUse, 3s)
-Update terminal status bar: satellite state, progress, token usage.
+Update terminal status bar: agent_node state, progress, token usage.
 Output: display string, no additionalContext. Value: LOW (cosmetic).
 
 ### Hook 2: Context Monitor (PostToolUse, 5s, debounced every 5 calls)

@@ -16,7 +16,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | pillar | literal "P02" | YES | - | Pillar assignment |
 | title | string | YES | - | Human-readable agent name |
 | version | semver string | YES | "1.0.0" | Versionamento |
-| satellite | string | YES | - | Owning satellite or "agnostic" |
+| agent_node | string | YES | - | Owning agent_node or "agnostic" |
 | domain | string | YES | - | Primary domain of expertise |
 | quality | null | YES | null | Never self-score |
 | tags | list[string], len >= 3 | YES | - | Must include "agent" |
@@ -35,11 +35,11 @@ Regex: `^p02_agent_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
 ## Body Structure (required sections)
 1. `## Overview` — one paragraph: who, domain, primary function
-2. `## Architecture` — capabilities list, tools, satellite position
+2. `## Architecture` — capabilities list, tools, agent_node position
 3. `## File Structure` — iso_vectorstore listing with all ISO files
 4. `## When to Use` — triggers and routing keywords
 5. `## Input / Output` — what the agent receives and produces
-6. `## Integration` — how agent connects to satellites, routers, chains
+6. `## Integration` — how agent connects to agent_nodes, routers, chains
 7. `## Quality Gates` — HARD + SOFT gate references
 8. `## Common Issues` — 3-5 known failure modes with remediation
 9. `## Invocation` — how to spawn or invoke this agent
@@ -54,4 +54,4 @@ Rule: id MUST equal filename stem.
 - iso_vectorstore min 10 files required
 - capabilities_count MUST match actual bullets in Architecture section
 - llm_function: BECOME (never REASON, CALL, or PRODUCE)
-- satellite: required — no "unassigned" agents
+- agent_node: required — no "unassigned" agents

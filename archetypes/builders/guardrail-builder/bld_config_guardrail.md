@@ -25,6 +25,6 @@ Rule: id MUST equal filename stem.
 | Severity | Default enforcement | Bypass allowed |
 |----------|-------------------|----------------|
 | critical | block | Yes, orchestrator only |
-| high | block | Yes, satellite chief |
+| high | block | Yes, agent_node chief |
 | medium | warn | Yes, any senior agent |
 | low | log | Yes, any agent |

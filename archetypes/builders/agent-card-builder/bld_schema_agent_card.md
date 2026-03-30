@@ -22,12 +22,12 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | role | string | YES | - | Primary function description |
 | model | string | YES | - | LLM model used (opus, sonnet, haiku) |
 | mcps | list[string] | YES | - | MCP servers available |
-| domain_area | string | YES | - | Domain this satellite covers |
+| domain_area | string | YES | - | Domain this agent_node covers |
 | boot_sequence | list[string] | REC | [] | Ordered boot steps |
 | constraints | list[string] | REC | [] | Operational limitations |
 | dispatch_keywords | list[string] | REC | [] | Keywords that route tasks here |
-| tools | list[string] | REC | [] | Tools available to this satellite |
-| dependencies | list[string] | REC | [] | Other satellites/services required |
+| tools | list[string] | REC | [] | Tools available to this agent_node |
+| dependencies | list[string] | REC | [] | Other agent_nodes/services required |
 | scaling | object or null | REC | null | Scaling rules (max_concurrent, timeout) |
 | monitoring | object or null | REC | null | Health check and alerting config |
 | runtime | string | REC | "claude" | Runtime engine (claude, codex) |
@@ -35,7 +35,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | flags | list[string] | REC | [] | CLI flags for spawn |
 | domain | string | YES | - | Domain this artifact belongs to |
 | quality | null | YES | null | Never self-score |
-| tags | list[string], len >= 3 | YES | - | Must include "satellite" |
+| tags | list[string], len >= 3 | YES | - | Must include "agent_node" |
 | tldr | string <= 160ch | YES | - | Dense summary |
 ## Complex Objects
 ```yaml
@@ -52,12 +52,12 @@ monitoring:
 Regex: `^p08_ac_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
 ## Body Structure (required sections)
-1. `## Role` — what the satellite does and its primary function
+1. `## Role` — what the agent_node does and its primary function
 2. `## Model & MCPs` — LLM model details and MCP server specs
 3. `## Boot Sequence` — ordered initialization steps
 4. `## Dispatch` — keywords and routing rules
 5. `## Constraints` — operational limits and prohibitions
-6. `## Dependencies` — external services and sibling satellites
+6. `## Dependencies` — external services and sibling agent_nodes
 7. `## Scaling & Monitoring` — concurrency, timeouts, health checks
 ## Constraints
 - max_bytes: 4096 (body only)

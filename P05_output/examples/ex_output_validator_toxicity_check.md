@@ -11,7 +11,7 @@ domain: output_safety
 quality: 9.0
 tags: [output-validator, toxicity, pii, guardrails, safety, nemo, retry, content-filter]
 tldr: Validator pos-LLM que checa toxicidade (Perspective API) e PII (regex + spaCy NER) em output antes de entregar ao usuario — on_fail=retry_with_warning, max_retries=2
-when_to_use: Qualquer agente CODEXA que gera texto user-facing — especialmente copy de marketing, respostas de chatbot, e conteudo publicavel em redes sociais
+when_to_use: Qualquer agente organization que gera texto user-facing — especialmente copy de marketing, respostas de chatbot, e conteudo publicavel em redes sociais
 ---
 
 # Output Validator: Toxicity + PII Check
@@ -182,11 +182,11 @@ RETRY_WARNINGS = {
 ## Monitoring
 | Metric | Alert Threshold | Dashboard |
 |--------|-----------------|-----------|
-| Toxicity trigger rate | > 5% of outputs | Grafana: codexa/output-safety |
-| PII leak rate | > 1% of outputs | Grafana: codexa/output-safety |
-| Retry success rate | < 80% (retries not fixing issue) | Grafana: codexa/output-safety |
+| Toxicity trigger rate | > 5% of outputs | Grafana: organization/output-safety |
+| PII leak rate | > 1% of outputs | Grafana: organization/output-safety |
+| Retry success rate | < 80% (retries not fixing issue) | Grafana: organization/output-safety |
 | Fallback rate | > 2% of outputs | PagerDuty: critical |
-| Perspective API latency | p99 > 500ms | Grafana: codexa/external-apis |
+| Perspective API latency | p99 > 500ms | Grafana: organization/external-apis |
 
 ## When NOT to Use
 - Internal agent-to-agent communication — overhead desnecessario, contexto e confiavel

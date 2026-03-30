@@ -16,7 +16,7 @@ tags: [client, retry-strategy, pagination, rate-limiting, auth-redaction]
 tldr: "Retry and pagination specs prevent the three most common production client failures: data truncation, retry storms, and credential leaks."
 impact_score: 8.0
 decay_rate: 0.05
-satellite: edison
+agent_node: edison
 keywords: [api client, retry, backoff, pagination, rate limiting, auth, error handling, timeout, serialization]
 ---
 

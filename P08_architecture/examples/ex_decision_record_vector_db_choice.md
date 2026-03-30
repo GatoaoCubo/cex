@@ -4,7 +4,7 @@ kind: decision_record
 pillar: P08
 title: "ADR-007: Choose Qdrant over Pinecone for Vector Database"
 status: accepted
-context: "CODEXA needs a vector database for brain_query FAISS replacement at scale. Must be self-hosted for data sovereignty and cost control."
+context: "organization needs a vector database for brain_query FAISS replacement at scale. Must be self-hosted for data sovereignty and cost control."
 decision: "Use Qdrant (self-hosted Docker) as the primary vector database"
 consequences:
   positive:
@@ -30,17 +30,17 @@ tags: [adr, vector-database, qdrant, pinecone, self-hosted, architecture]
 
 ## Context
 
-CODEXA's brain_query currently uses FAISS for vector search (140MB index, ~1,957 pool artifacts). This works for local development but has limitations:
+organization's brain_query currently uses FAISS for vector search (140MB index, ~1,957 pool artifacts). This works for local development but has limitations:
 
 1. **No persistence** — index must be rebuilt on every fresh clone (~20 min)
-2. **No filtering** — cannot filter by pillar, satellite, or quality score during search
+2. **No filtering** — cannot filter by pillar, agent_node, or quality score during search
 3. **No real-time updates** — adding a new KC requires full index rebuild
 4. **Single-machine** — cannot share index across Railway API + local dev
 
 We need a vector database that supports:
 - Self-hosted deployment (data sovereignty requirement — pool artifacts contain proprietary business knowledge)
 - Hybrid search (vector + keyword, replacing current BM25+FAISS dual system)
-- Metadata filtering (by pillar, satellite, quality score, kind)
+- Metadata filtering (by pillar, agent_node, quality score, kind)
 - Real-time upsert without full rebuild
 - Affordable at our scale (2K-10K documents, 768-dim vectors)
 
@@ -102,12 +102,12 @@ Deciding factors:
 ```
 Phase 1 (Week 1): Deploy Qdrant on Railway
   - Docker image: qdrant/qdrant:v1.8.4
-  - Collection: codexa_brain, 768-dim, cosine distance
+  - Collection: organization_brain, 768-dim, cosine distance
   - Initial load: migrate FAISS index -> Qdrant collection
 
 Phase 2 (Week 2): Integrate with brain_query
   - Replace hybrid_search() to call Qdrant instead of FAISS+BM25
-  - Add metadata filters: pillar, satellite, quality, kind
+  - Add metadata filters: pillar, agent_node, quality, kind
   - Benchmark: must match or beat current 88% top-3 accuracy
 
 Phase 3 (Week 3): Real-time sync
@@ -141,6 +141,6 @@ Phase 3 (Week 3): Real-time sync
 
 ## References
 - Qdrant docs: https://qdrant.tech/documentation/
-- FAISS current setup: `records/core/brain/mcp-codexa-brain/build_indexes_ollama.py`
-- Brain search: `records/core/brain/mcp-codexa-brain/vector_search.py`
+- FAISS current setup: `records/core/brain/mcp-organization-brain/build_indexes_ollama.py`
+- Brain search: `records/core/brain/mcp-organization-brain/vector_search.py`
 - Related: p01_kc_bm25_search (current BM25 implementation)

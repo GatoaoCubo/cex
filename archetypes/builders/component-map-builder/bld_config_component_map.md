@@ -49,7 +49,7 @@ NOTE: machine_format is yaml (not md). Output extension is `.yaml`, not `.md`.
 - Words separated by underscores
 - No hyphens, no spaces, no special characters
 - Descriptive but concise (2-4 words)
-Valid: `brain_infrastructure`, `satellite_network`, `api_layer`, `hook_system`
+Valid: `brain_infrastructure`, `agent_node_network`, `api_layer`, `hook_system`
 Invalid: `Brain-Infrastructure`, `brain infrastructure`, `b`, `the_entire_cex_system_components`
 ## Seeds Reference (from SEED_BANK.yaml P08_component_map)
 Primary seeds: scope, components, connections, dependencies, data_flow, ownership, health, versioning, interfaces, boundaries

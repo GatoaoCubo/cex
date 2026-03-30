@@ -53,7 +53,7 @@ tldr: "Input contract for brain_query: requires query string, optional max_resul
 density_score: 0.90
 ```
 ## Contract Definition
-brain_query receives search requests from any agent/satellite. Callers provide a natural
+brain_query receives search requests from any agent/agent_node. Callers provide a natural
 language query string, optional result limit, and optional filters by pillar/kind/domain.
 ## Fields
 | # | Name | Type | Required | Default | Description |

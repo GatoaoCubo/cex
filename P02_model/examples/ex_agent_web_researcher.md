@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-03-23
 updated: 2026-03-23
 author: EDISON
-satellite: SHAKA
+agent_node: research_agent
 domain: research
 quality: 9.0
 tags: [research, web, scraping, data-extraction, competitive-intelligence]
@@ -18,7 +18,7 @@ when_to_use: Quando precisar de dados atualizados da web com sintese estruturada
 # Web Researcher Agent
 
 ## Overview
-web-researcher e o agente de pesquisa web autonoma do CODEXA. Atua quando o usuario precisa de dados atualizados de fontes online e entrega relatorios estruturados com fontes verificadas e confianca por claim.
+web-researcher e o agente de pesquisa web autonoma do organization. Atua quando o usuario precisa de dados atualizados de fontes online e entrega relatorios estruturados com fontes verificadas e confianca por claim.
 
 ## Architecture
 ```text
@@ -57,7 +57,7 @@ output:
 ```
 
 ## Integration
-- Upstream: STELLA (dispatch), gateway-agent (routing), usuario direto
+- Upstream: orchestrator (dispatch), gateway-agent (routing), usuario direto
 - Downstream: anuncio-agent (dados de produto), pricing-agent (precos competitivos)
 - Dependencies: WebSearch, WebFetch, Firecrawl MCP, Brain MCP
 
@@ -74,7 +74,7 @@ output:
 
 ## Invocation
 ```text
-# Via STELLA dispatch
+# Via orchestrator dispatch
 /research "analise competitiva de pet toys no Mercado Livre" --depth deep
 
 # Via subagent direto
@@ -87,4 +87,4 @@ Agent(subagent_type="pesquisa-agent", prompt="Pesquisar precos de [produto] em M
 - seo-agent: Pesquisa keywords e SERP features
 
 ## Footer
-Satellite: SHAKA | Quality: 9.0 | Domain: research
+Satellite: research_agent | Quality: 9.0 | Domain: research

@@ -8,14 +8,14 @@ created: 2026-03-29
 updated: 2026-03-29
 author: stella
 quality: null
-tags: [pattern, nucleus, fractal, satellite, orchestration, 12-pillars]
+tags: [pattern, nucleus, fractal, agent_node, orchestration, 12-pillars]
 tldr: "A nucleus mirrors all 12 CEX pillars filled with domain-specific content — not a new kind, but a composition pattern of existing kinds"
 ---
 
 # Pattern: Nucleus as Fractal of 12 Pillars
 
 ## Problem
-How to represent an autonomous satellite (nucleus) that has its own identity,
+How to represent an autonomous agent_node (nucleus) that has its own identity,
 knowledge, tools, workflows, and quality gates — without inventing new taxonomy.
 
 ## Solution
@@ -74,16 +74,16 @@ When a nucleus receives an intent:
 5. F3 INJECT: uses nucleus P01 knowledge_cards + KC library
 6. F4-F8: same pipeline, domain-scoped context
 
-## The 7 CODEXA Nuclei
+## The 7 organization Nuclei
 | # | Name | Domain | Model | Pecado |
 |---|------|--------|-------|--------|
-| 01 | SHAKA | Research | sonnet | Inveja |
-| 02 | LILY | Marketing | sonnet | Luxuria |
-| 03 | EDISON | Build | opus | Soberba |
-| 04 | ATLAS | Execute | opus | Ira |
-| 05 | YORK | Monetize | sonnet | Avareza |
-| 06 | PYTHA | Knowledge | sonnet | Gula |
-| 07 | STELLA | Orchestrate | opus | — |
+| 01 | research_agent | Research | sonnet | Inveja |
+| 02 | marketing_agent | Marketing | sonnet | Luxuria |
+| 03 | builder_agent | Build | opus | Soberba |
+| 04 | operations_agent | Execute | opus | Ira |
+| 05 | commercial_agent | Monetize | sonnet | Avareza |
+| 06 | knowledge_agent | Knowledge | sonnet | Gula |
+| 07 | orchestrator | Orchestrate | opus | — |
 
 ## Anti-Patterns
 | Anti-Pattern | Why |

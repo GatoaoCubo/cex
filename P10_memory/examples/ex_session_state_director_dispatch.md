@@ -1,8 +1,8 @@
 ---
-id: p10_ss_satellite_dispatch
+id: p10_ss_agent_node_dispatch
 kind: session_state
 pillar: P10
-description: "Ephemeral session state tracking active satellite dispatches"
+description: "Ephemeral session state tracking active agent_node dispatches"
 scope: stella_session
 version: 1.0.0
 created: 2026-03-24
@@ -17,12 +17,12 @@ tags: [session-state, dispatch, tracking, ephemeral]
 ```yaml
 session_id: "stella_2026-03-24T20:00"
 active_dispatches:
-  - satellite: edison
+  - agent_node: edison
     task: "P04 examples from real artifacts"
     started: "2026-03-24T19:45:00Z"
     status: running
     pid: 14624
-  - satellite: shaka
+  - agent_node: shaka
     task: "Market research pet toys"
     started: "2026-03-24T19:50:00Z"
     status: complete
@@ -38,4 +38,4 @@ last_monitor_check: "2026-03-24T20:02:00Z"
 - Destroyed: on session end (ephemeral, not persisted to disk)
 
 ## Usage
-STELLA uses this to track which satellites are active, avoid double-dispatch, and determine when a wave is complete for collection.
+orchestrator uses this to track which agent_nodes are active, avoid double-dispatch, and determine when a wave is complete for collection.

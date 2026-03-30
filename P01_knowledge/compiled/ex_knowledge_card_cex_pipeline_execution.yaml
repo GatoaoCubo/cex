@@ -5,7 +5,7 @@ title: CEX Pipeline Execution — The 8-Function Sequence From Input to Output
 version: 1.0.0
 created: 2026-03-25
 updated: 2026-03-25
-author: EDISON
+author: builder_agent
 domain: cex_taxonomy
 quality: null
 tags:
@@ -17,7 +17,7 @@ tags:
 - llm-processing
 tldr: Pipeline de 8 funcoes (BECOME-INJECT-REASON-CALL-PRODUCE-CONSTRAIN-GOVERN-COLLABORATE) eh o processamento real de todo
   sistema LLM
-when_to_use: Entender a sequencia completa de execucao de um agente ou satellite LLM do input ao output
+when_to_use: Entender a sequencia completa de execucao de um agente ou agent_node LLM do input ao output
 keywords:
 - pipeline
 - execution
@@ -26,19 +26,19 @@ keywords:
 - processing
 long_tails:
 - Qual a sequencia de execucao de um agente LLM do input ao output
-- Como funciona o boot sequence de um satellite CODEXA
+- Como funciona o boot sequence de um agent_node organization
 axioms:
 - SEMPRE executar funcoes na ordem BECOME-INJECT-REASON-CALL-PRODUCE-CONSTRAIN-GOVERN-COLLABORATE
 - NUNCA pular BECOME (identidade precede tudo)
 linked_artifacts:
   primary: p01_kc_cex_function_become
   related:
-  - p01_kc_cex_satellite_concept
+  - p01_kc_cex_agent_node_concept
   - p01_kc_cex_cortex_enterprise
 density_score: null
 data_source: https://arxiv.org/abs/2308.00352
 summary: Todo sistema LLM executa as mesmas 8 funcoes na mesma ordem logica. Um prompt simples executa 1-2 (BECOME implicito
-  + PRODUCE). Um agente executa 4-5. Um satellite com lifecycle completo executa todas as 8. A diferenca entre prompt e satellite
+  + PRODUCE). Um agente executa 4-5. Um agent_node com lifecycle completo executa todas as 8. A diferenca entre prompt e agent_node
   nao eh de natureza — eh de completude. A boot sequence de um Cortex Enterprise eh ela mesma uma instanciacao dessas 8 funcoes.
 spec: '| # | Funcao | O que faz | Boot Equivalente |
 
@@ -52,7 +52,7 @@ spec: '| # | Funcao | O que faz | Boot Equivalente |
 
   | 4 | CALL | Usa ferramentas externas, APIs, MCPs | brain_query() + conectar MCPs |
 
-  | 5 | PRODUCE | Gera output: codigo, KCs, copy, deploy | Executar agent teams por satellite |
+  | 5 | PRODUCE | Gera output: codigo, KCs, copy, deploy | Executar agent teams por agent_node |
 
   | 6 | CONSTRAIN | Valida contra schemas, formata output | Validar tipos, aplicar templates |
 
@@ -89,5 +89,5 @@ references:
 - 'source: https://arxiv.org/abs/2308.00352'
 - 'source: https://arxiv.org/abs/2303.17760'
 - 'related: p01_kc_cex_function_become'
-- 'related: p01_kc_cex_satellite_concept'
+- 'related: p01_kc_cex_agent_node_concept'
 - 'related: p01_kc_cex_cortex_enterprise'

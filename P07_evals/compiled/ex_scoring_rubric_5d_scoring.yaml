@@ -5,7 +5,7 @@ title: 'Scoring Rubric: 5D Quality Framework'
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
-author: PYTHA
+author: knowledge_agent
 quality: 9.2
 tags:
 - scoring
@@ -16,11 +16,11 @@ tags:
 tldr: '5D scoring: Density + Density + Accuracy + Reusability + Actionability — each 0-10, averaged for final score'
 max_bytes: 2048
 density_score: 0.91
-source: codexa-core/records/framework/docs/LAWS_v3_PRACTICAL.md (LAW 13 Shokunin)
+source: organization-core/records/framework/docs/LAWS_v3_PRACTICAL.md (LAW 13 Shokunin)
 linked_artifacts:
   gate: p11_qg_cex_quality
   validator: p06_val_quality_score
-overview: The 5D framework evaluates all CODEXA pool artifacts on 5 dimensions. Final score = weighted average. Used by quality
+overview: The 5D framework evaluates all organization pool artifacts on 5 dimensions. Final score = weighted average. Used by quality
   gates before pool writes and during golden promotion.
 dimensions: '| Dim | Name | Weight | Definition |
 
@@ -62,7 +62,7 @@ anti_patterns_d1_density_failures: '| Anti-Pattern | Penalty |
   | Redundant bullet points restating same fact | -1.0 D1 |
 
   | Section with only 1 bullet | -0.5 D5 |'
-application_in_codexa: 'Pool write:   score >= 8.0 (D1 + D2 must be >= 7.5 individually)
+application_in_organization: 'Pool write:   score >= 8.0 (D1 + D2 must be >= 7.5 individually)
 
   Golden:       score >= 9.5 (all dims >= 9.0)
 

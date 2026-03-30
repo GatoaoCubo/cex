@@ -2,7 +2,7 @@ id: p04_plug_brain_search
 kind: plugin
 name: brain_search_plugin
 version: 1.0.0
-entrypoint: codexa_brain.vector_search
+entrypoint: organization_brain.vector_search
 capabilities:
 - keyword_search
 - vector_search
@@ -28,14 +28,14 @@ tags:
 - vector
 - semantic
 purpose:
-- 'Extends: codexa-brain MCP server'
+- 'Extends: organization-brain MCP server'
 - 'Adds: Hybrid retrieval (BM25 keyword + FAISS semantic fusion)'
 - 'Does not own: Index storage format, embedding model selection'
 integration: '| Field | Value |
 
   |-------|-------|
 
-  | Entrypoint | `codexa_brain.vector_search` |
+  | Entrypoint | `organization_brain.vector_search` |
 
   | Inputs | query string, scope filter, k results |
 

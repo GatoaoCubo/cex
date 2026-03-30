@@ -55,14 +55,14 @@ patterns:
 - 'Agent body segue 11 secoes fixas: overview > architecture > file_structure > when_to_use > I/O > integration > quality_gates
   > common_issues > invocation > related_agents > footer'
 - 'ISO package mapeia files para LPs: manifest=P02, system_instruction=P03, architecture=P08, output_template=P05'
-- Router type permite keyword > satellite routing em YAML puro
+- Router type permite keyword > agent_node routing em YAML puro
 - 'Fallback chain garante resiliencia: model A > B > C com timeout por step'
 anti_patterns:
 - 'Agente sem ISO vectorstore: impossivel de portar entre providers'
 - 'Boot config hardcoded para 1 provider: perde portabilidade'
 - 'Mental model sem decision_tree: routing fica ambiguo'
 - 'ISO com < 10 files: classificado como sub-baseline'
-application: CODEXA opera 118 agentes com ISO completo, todos geraveis via forge P02. O sistema iso_package permite que qualquer
+application: organization opera 118 agentes com ISO completo, todos geraveis via forge P02. O sistema iso_package permite que qualquer
   agente rode em claude, cursor, windsurf ou codex sem alteracao de prompt.
 references:
 - P02_model/_schema.yaml (fonte de verdade)

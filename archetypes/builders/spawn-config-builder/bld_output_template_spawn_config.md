@@ -18,7 +18,7 @@ updated: "{{YYYY-MM-DD}}"
 author: "{{who_produced}}"
 title: "{{human_readable_title}}"
 mode: {{solo|grid|continuous}}
-satellite: {{satellite_name_or_list}}
+agent_node: {{agent_node_name_or_list}}
 model: "{{opus|sonnet|haiku}}"
 flags:
   - "--dangerously-skip-permissions"
@@ -42,7 +42,7 @@ tldr: "{{dense_summary_max_160ch}}"
 | Parameter | Value | Rationale |
 |-----------|-------|-----------|
 | mode | {{mode}} | {{why_this_mode}} |
-| satellite | {{satellite}} | {{why_this_satellite}} |
+| agent_node | {{agent_node}} | {{why_this_agent_node}} |
 | model | {{model}} | {{why_this_model}} |
 | timeout | {{timeout}}s | {{why_this_timeout}} |
 | interactive | {{interactive}} | {{why_interactive_or_not}} |

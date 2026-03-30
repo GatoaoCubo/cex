@@ -23,7 +23,7 @@ tags:
 tldr: "Pick one notation, declare zoom level, label everything, always include a legend."
 impact_score: 7.5
 decay_rate: 0.04
-satellite: edison
+agent_node: edison
 keywords:
   - diagram
   - ASCII

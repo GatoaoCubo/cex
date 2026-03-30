@@ -2,7 +2,7 @@
 id: p06_td_quality_score
 kind: type_def
 pillar: P06
-description: "Type definition for the 5-dimension quality score used across CODEXA"
+description: "Type definition for the 5-dimension quality score used across organization"
 version: 1.0.0
 created: 2026-03-24
 author: edison

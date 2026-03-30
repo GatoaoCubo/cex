@@ -12,7 +12,7 @@ phases_count: 4
 prerequisites:
   - "Target director name is known and non-empty"
   - "Spawn mode is specified: solo, grid, or continuous"
-  - "Director-model pairing is defined (e.g. EDISON=opus, SHAKA=sonnet)"
+  - "Director-model pairing is defined (e.g. builder_agent=opus, research_agent=sonnet)"
   - "Handoff file path or inline prompt is available"
 validation_method: checklist
 domain: spawn_config
@@ -30,7 +30,7 @@ density_score: 0.92
 ## Context
 The spawn-config-builder produces a `spawn_config` artifact — a structured YAML that defines exactly how a director process is launched. Downstream orchestration scripts consume this artifact to spawn terminals with the correct flags, model, MCP profile, timeout, and prompt strategy.
 **Input contract**:
-- `director`: string — canonical director name (e.g. `EDISON`, `SHAKA`, `LILY`)
+- `director`: string — canonical director name (e.g. `builder_agent`, `research_agent`, `marketing_agent`)
 - `mode`: enum — `solo` | `grid` | `continuous`
 - `model`: string — LLM model identifier (e.g. `claude-opus-4-6`, `claude-sonnet`)
 - `task_description`: string — what the director must accomplish (used to size the prompt)
