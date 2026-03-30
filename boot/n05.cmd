@@ -1,7 +1,7 @@
 @echo off
-:: CEX Boot - N05 Operations Builder via Codex CLI
-:: Codex excels at code review, testing, debugging, deployment
-:: Auth: OpenAI API | Model: GPT-5.4 | Mode: full-auto
+:: CEX N05 — Operations Nucleus
+:: CLI: codex | Model: auto (GPT) | Auth: OpenAI subscription
+:: Domain: code review, testing, debugging, deployment, CI/CD
 
 title CEX-N05-OPERATIONS
 set CEX_NUCLEUS=N05

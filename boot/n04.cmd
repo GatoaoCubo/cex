@@ -1,14 +1,14 @@
 @echo off
-:: CEX Boot - N04 Knowledge Builder via Gemini CLI
-:: Gemini 2.5 Pro: 1M token context — ideal for large knowledge bases, RAG, docs
-:: Auth: Google One subscription (OAuth, $0 cost) | Model: gemini-2.5-pro
+:: CEX N04 — Knowledge Nucleus
+:: CLI: gemini | Model: 2.5-pro | Auth: Google subscription (OAuth)
+:: Domain: documentation, indexing, RAG, knowledge cards, taxonomy
 
 title CEX-N04-KNOWLEDGE
 set CEX_NUCLEUS=N04
 set CEX_ROOT=C:\Users\PC\Documents\GitHub\cex
 cd /d "%CEX_ROOT%"
 
-:: Force subscription OAuth (no API keys = uses Google One OAuth)
+:: Force subscription OAuth
 set GOOGLE_API_KEY=
 set GEMINI_API_KEY=
 set GOOGLE_AI_API_KEY=

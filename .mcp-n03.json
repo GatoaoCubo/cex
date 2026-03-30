@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "github": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@anthropic/mcp-server-github"],
+      "env": { "GITHUB_TOKEN": "${GITHUB_TOKEN}" }
+    }
+  }
+}

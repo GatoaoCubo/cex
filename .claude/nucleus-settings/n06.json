@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Read", "Write", "Edit", "Bash", "Glob", "Grep",
+      "mcp__fetch__*"
+    ],
+    "deny": []
+  }
+}

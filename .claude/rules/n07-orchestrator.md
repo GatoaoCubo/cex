@@ -13,9 +13,7 @@ description: "N07 Orchestrator rules — dispatch only, never build"
 ## Core Principle
 N07 orchestrates. N07 NEVER builds artifacts directly.
 
-## HOW TO DISPATCH
-
-**You run in Claude CLI. Use PowerShell to spawn new windows:**
+## HOW TO DISPATCH (from pi bash)
 
 ```bash
 # Solo — 1 builder in new window
@@ -34,9 +32,20 @@ powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_stop.ps1
 ## Dispatch Workflow
 
 1. Write handoff to `.cex/runtime/handoffs/{MISSION}_{nucleus}_{seq}.md`
-2. Dispatch: `powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_solo.ps1 -nucleus {nucleus} -task "Leia .cex/runtime/handoffs/{file} e execute." -interactive`
-3. Monitor: `powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_monitor.ps1`
+2. Dispatch via spawn_solo.ps1 or spawn_grid.ps1
+3. Monitor via spawn_monitor.ps1
 4. On completion: move report to `_instances/codexa/N07_admin/reports/`
+
+## Runtime Paths
+| What | Where |
+|------|-------|
+| Active handoffs | `.cex/runtime/handoffs/` (gitignored, ephemeral) |
+| Signals | `.cex/runtime/signals/` (gitignored, ephemeral) |
+| PIDs | `.cex/runtime/pids/` (gitignored) |
+| Plans (history) | `_instances/codexa/N07_admin/plans/` (committed) |
+| Reports (history) | `_instances/codexa/N07_admin/reports/` (committed) |
+| Checkpoints | `_instances/codexa/N07_admin/checkpoints/` (committed) |
+| Playbook | `_docs/PLAYBOOK.md` (operational manual) |
 
 ## When N07 CAN Execute Directly
 - Read files (cat, head, grep)
@@ -46,17 +55,25 @@ powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_stop.ps1
 - PowerShell spawn commands (above)
 
 ## Routing
-| Domain | Nucleus | Model | Dispatch |
-|--------|---------|-------|----------|
-| Build/create | n03 | claude opus | spawn_solo.ps1 -nucleus n03 |
-| Research | n01 | gemini | spawn_solo.ps1 -nucleus n01 |
-| Marketing | n02 | claude sonnet | spawn_solo.ps1 -nucleus n02 |
-| Knowledge | n04 | gemini | spawn_solo.ps1 -nucleus n04 |
-| Code/test | n05 | codex | spawn_solo.ps1 -nucleus n05 |
-| Commercial | n06 | claude sonnet | spawn_solo.ps1 -nucleus n06 |
+| Domain | Nucleus | CLI | Model | MCPs |
+|--------|---------|-----|-------|------|
+| Research | N01 | gemini | 2.5-pro | — |
+| Marketing | N02 | claude | sonnet | markitdown, fetch |
+| Build | N03 | claude | opus | github |
+| Knowledge | N04 | gemini | 2.5-pro | — |
+| Code/test | N05 | codex | auto | — |
+| Commercial | N06 | claude | sonnet | fetch |
+
+## Auth (ALL subscription, zero API cost)
+| CLI | Subscription | Login |
+|-----|-------------|-------|
+| pi (N07) | Anthropic Max | /login → anthropic |
+| claude (N02,N03,N06) | Anthropic Max | auto (subscription) |
+| gemini (N01,N04) | Google One AI | OAuth (clear API keys) |
+| codex (N05) | OpenAI Plus | auto |
 
 ## NEVER DO
 - Build artifacts directly (route to N03)
-- Use `start cmd` (not available in Claude CLI Bash tool)
+- Use `start cmd` (not available in pi bash)
 - Write code files (route to N05)
 - Create marketing content (route to N02)
