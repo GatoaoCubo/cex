@@ -44,6 +44,7 @@ CEX_ROOT = Path(__file__).resolve().parent.parent
 BUILDER_MAP_PATH = CEX_ROOT / "_docs" / "8F_BUILDER_MAP.yaml"
 KC_LIBRARY_PATH = CEX_ROOT / "P01_knowledge" / "library"
 KC_DOMAIN_PATH = KC_LIBRARY_PATH / "domain"
+KC_KIND_PATH = KC_LIBRARY_PATH / "kind"
 KC_INDEX_PATH = KC_LIBRARY_PATH / "index.yaml"
 
 FUNCTION_POSITIONS = {
@@ -511,11 +512,30 @@ def classify_objects(objects: list[str]) -> list[dict]:
 
 
 def load_kc_library() -> list[dict]:
-    """Load KC-Domain frontmatter from library/domain/*.md."""
+    """Load KC frontmatter from library/kind/*.md (dedicated) + library/domain/*.md (cluster)."""
     kcs = []
-    if not KC_DOMAIN_PATH.exists():
+    # Priority 1: dedicated kind KCs
+    if KC_KIND_PATH.exists():
+        for md in sorted(KC_KIND_PATH.glob("kc_*.md")):
+            try:
+                text = md.read_text(encoding="utf-8")
+                parts = text.split("---")
+                if len(parts) >= 3:
+                    fm = yaml.safe_load(parts[1])
+                    if fm:
+                        fm["_path"] = str(md.relative_to(md.parent.parent.parent.parent))
+                        fm["_type"] = "kind"
+                        kcs.append(fm)
+            except Exception:
+                pass
+    # Priority 2: cluster domain KCs (reference dir or domain dir)
+    domain_search = KC_DOMAIN_PATH
+    ref_dir = KC_DOMAIN_PATH / "_reference"
+    if ref_dir.exists():
+        domain_search = ref_dir
+    if not domain_search.exists():
         return kcs
-    for md in sorted(KC_DOMAIN_PATH.glob("*.md")):
+    for md in sorted(domain_search.glob("*.md")):
         text = md.read_text(encoding="utf-8")
         if text.startswith("---"):
             end = text.find("---", 3)
@@ -538,7 +558,9 @@ def lookup_kcs_for_kind(kc_library: list[dict], kind: str, pillar: str) -> list[
         if not isinstance(feeds, list):
             continue
         if kind in feeds or pillar in feeds or any(f.startswith(pillar + "_") for f in feeds):
-            matches.append({"id": kc.get("id"), "title": kc.get("title"), "path": kc.get("_path")})
+            matches.append({"id": kc.get("id"), "title": kc.get("title"), "path": kc.get("_path"), "type": kc.get("_type", "domain")})
+    # Sort: kind KCs first, then domain clusters
+    matches.sort(key=lambda m: (0 if m.get("type") == "kind" else 1, m.get("id", "")))
     return matches
 
 

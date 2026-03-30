@@ -355,12 +355,19 @@ ALL_KINDS = [
 
 
 def check_kc_library():
-    """Check KC Library health: sources, domains, feeds_kinds, origins."""
+    """Check KC Library health: sources, domains, kind KCs, feeds_kinds, origins."""
     sources_dir = LIBRARY_DIR / "sources"
     domain_dir = LIBRARY_DIR / "domain"
 
     sources = sorted(sources_dir.glob("src_*.md")) if sources_dir.exists() else []
     domains = sorted(domain_dir.glob("kc_*.md")) if domain_dir.exists() else []
+    # Also check _reference/ for archived cluster KCs
+    ref_dir = domain_dir / "_reference"
+    if ref_dir.exists():
+        domains = sorted(ref_dir.glob("kc_*.md"))
+    # Check dedicated kind KCs
+    kind_dir = LIBRARY_DIR / "kind"
+    kind_kcs = sorted(kind_dir.glob("kc_*.md")) if kind_dir.exists() else []
 
     issues = []
 

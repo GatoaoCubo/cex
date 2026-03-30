@@ -457,10 +457,19 @@ class EightFRunner:
                 knowledge["kc_builder"] = strip_frontmatter(kc_text)
                 self._log("F3", "bld_knowledge_card loaded")
 
-        # 2. KC-Domain matches from library
+        # 2. Dedicated kind KC (primary — 1:1 per kind)
+        kind_kc_path = CEX_ROOT / "P01_knowledge" / "library" / "kind" / f"kc_{self.kind_slug}.md"
+        if kind_kc_path.exists():
+            text = kind_kc_path.read_text(encoding="utf-8")
+            body = strip_frontmatter(text)
+            if body.strip():
+                knowledge["kc_dedicated"] = body
+                self._log("F3", f"dedicated kind KC loaded: kc_{self.kind_slug}.md")
+
+        # 3. Cluster domain KCs from library (supplementary, max 2)
         kc_matches = lookup_kcs_for_kind(self.kc_library, self.state.kind, self.state.pillar)
         kc_domains = []
-        for kc in kc_matches[:3]:  # Max 3 to control token budget
+        for kc in kc_matches[:2]:  # Reduced from 3 to 2 (dedicated KC is primary now)
             kc_path = CEX_ROOT / kc["path"]
             if kc_path.exists():
                 text = kc_path.read_text(encoding="utf-8")
@@ -472,28 +481,28 @@ class EightFRunner:
         knowledge["kc_domains"] = kc_domains
         self._log("F3", f"KC-Domains matched: {len(kc_domains)}")
 
-        # 3. Few-shot examples
+        # 4. Few-shot examples
         if bdir:
             ex_text = load_iso(bdir, "bld_examples", self.kind_slug)
             if ex_text:
                 knowledge["few_shots"] = strip_frontmatter(ex_text)
                 self._log("F3", "bld_examples loaded")
 
-        # 4. Memory (persistent learnings)
+        # 5. Memory (persistent learnings)
         if bdir:
             mem_text = load_iso(bdir, "bld_memory", self.kind_slug)
             if mem_text:
                 knowledge["memory"] = strip_frontmatter(mem_text)
                 self._log("F3", "bld_memory loaded")
 
-        # 5. Architecture (patterns, dependencies)
+        # 6. Architecture (patterns, dependencies)
         if bdir:
             arch_text = load_iso(bdir, "bld_architecture", self.kind_slug)
             if arch_text:
                 knowledge["architecture"] = strip_frontmatter(arch_text)
                 self._log("F3", "bld_architecture loaded")
 
-        # 6. Domain context (from --context flag or nucleus seed)
+        # 7. Domain context (from --context flag or nucleus seed)
         if self.state.context:
             knowledge["domain_context"] = self.state.context
             self._log("F3", f"domain context injected ({len(self.state.context)} chars)")

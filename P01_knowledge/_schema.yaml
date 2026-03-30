@@ -51,6 +51,16 @@ kinds:
       - anti_patterns
       - application
       - references
+      kind_kc:
+      - spec
+      - what_it_is
+      - cross_framework_map
+      - key_parameters
+      - patterns
+      - anti_patterns
+      - integration_graph
+      - decision_tree
+      - quality_criteria
     validation:
     - content_hash nao vazio (auto SHA256)
     - id == filename stem
