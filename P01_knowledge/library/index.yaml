@@ -36,273 +36,203 @@ sources:
     scraped: '2026-03-29'
 coverage:
   action_prompt:
-  - kc_academic_agent_patterns
-  - kc_crewai_patterns
+  - kc_action_prompt
   agent:
-  - kc_a2a_protocol
-  - kc_academic_agent_patterns
-  - kc_aws_bedrock_patterns
-  - kc_chinese_llm_ecosystem
-  - kc_crewai_patterns
-  - kc_dspy_patterns
-  - kc_langchain_patterns
-  - kc_llamaindex_patterns
+  - kc_agent
+  agent_card:
+  - kc_agent_card
   api_client:
-  - kc_external_integrations
+  - kc_api_client
   audio_tool:
-  - kc_perception_tools
+  - kc_audio_tool
   axiom:
-  - kc_agent_identity
+  - kc_axiom
   benchmark:
-  - kc_eval_testing
+  - kc_benchmark
   boot_config:
-  - kc_agent_identity
+  - kc_boot_config
   brain_index:
-  - kc_haystack_patterns
-  - kc_llamaindex_patterns
+  - kc_brain_index
   browser_tool:
-  - kc_external_integrations
+  - kc_browser_tool
   bugloop:
-  - kc_feedback_loops
+  - kc_bugloop
   chain:
-  - kc_academic_agent_patterns
-  - kc_dspy_patterns
-  - kc_langchain_patterns
+  - kc_chain
   checkpoint:
-  - kc_a2a_protocol
+  - kc_checkpoint
   chunk_strategy:
-  - kc_academic_rag_patterns
-  - kc_langchain_patterns
-  - kc_llamaindex_patterns
+  - kc_chunk_strategy
   cli_tool:
-  - kc_perception_tools
+  - kc_cli_tool
   code_executor:
-  - kc_google_ai_patterns
-  - kc_openai_api_patterns
+  - kc_code_executor
   component_map:
-  - kc_governance_patterns
+  - kc_component_map
   computer_use:
-  - kc_anthropic_api_patterns
+  - kc_computer_use
   constraint_spec:
-  - kc_dspy_patterns
+  - kc_constraint_spec
   context_doc:
-  - kc_prompt_engineering
+  - kc_context_doc
   daemon:
-  - kc_perception_tools
+  - kc_daemon
   dag:
-  - kc_orchestration_runtime
+  - kc_dag
   db_connector:
-  - kc_external_integrations
+  - kc_db_connector
   decision_record:
-  - kc_governance_patterns
+  - kc_decision_record
   diagram:
-  - kc_governance_patterns
+  - kc_diagram
   director:
-  - kc_academic_agent_patterns
-  - kc_chinese_llm_ecosystem
-  - kc_crewai_patterns
+  - kc_director
   dispatch_rule:
-  - kc_haystack_patterns
-  - kc_routing_resilience
+  - kc_dispatch_rule
   document_loader:
-  - kc_academic_rag_patterns
-  - kc_haystack_patterns
-  - kc_langchain_patterns
-  - kc_llamaindex_patterns
+  - kc_document_loader
   e2e_eval:
-  - kc_eval_testing
+  - kc_e2e_eval
   embedding_config:
-  - kc_academic_rag_patterns
-  - kc_haystack_patterns
-  - kc_langchain_patterns
-  - kc_llamaindex_patterns
+  - kc_embedding_config
   entity_memory:
-  - kc_memory_persistence
+  - kc_entity_memory
   enum_def:
-  - kc_schema_validation
+  - kc_enum_def
   env_config:
-  - kc_aws_bedrock_patterns
+  - kc_env_config
   eval_dataset:
-  - kc_reward_and_alignment
+  - kc_eval_dataset
   fallback_chain:
-  - kc_routing_resilience
+  - kc_fallback_chain
   feature_flag:
-  - kc_infra_config
+  - kc_feature_flag
   few_shot_example:
-  - kc_dspy_patterns
+  - kc_few_shot_example
   formatter:
-  - kc_output_formatting
+  - kc_formatter
   function_def:
-  - kc_anthropic_api_patterns
-  - kc_aws_bedrock_patterns
-  - kc_chinese_llm_ecosystem
-  - kc_crewai_patterns
-  - kc_google_ai_patterns
-  - kc_haystack_patterns
-  - kc_langchain_patterns
-  - kc_mcp_protocol
-  - kc_openai_api_patterns
+  - kc_function_def
   glossary_entry:
-  - kc_prompt_engineering
+  - kc_glossary_entry
   golden_test:
-  - kc_reward_and_alignment
+  - kc_golden_test
   guardrail:
-  - kc_aws_bedrock_patterns
-  - kc_crewai_patterns
+  - kc_guardrail
   handoff:
-  - kc_crewai_patterns
+  - kc_handoff
   handoff_protocol:
-  - kc_a2a_protocol
-  - kc_academic_agent_patterns
+  - kc_handoff_protocol
   hook:
-  - kc_crewai_patterns
-  - kc_mcp_protocol
+  - kc_hook
   input_schema:
-  - kc_anthropic_api_patterns
-  - kc_dspy_patterns
-  - kc_google_ai_patterns
-  - kc_openai_api_patterns
+  - kc_input_schema
   instruction:
-  - kc_prompt_engineering
+  - kc_instruction
   interface:
-  - kc_schema_validation
+  - kc_interface
   iso_package:
-  - kc_agent_identity
+  - kc_iso_package
   knowledge_card:
-  - kc_academic_rag_patterns
-  - kc_aws_bedrock_patterns
-  - kc_haystack_patterns
-  - kc_llamaindex_patterns
-  - kc_mcp_protocol
+  - kc_knowledge_card
   law:
-  - kc_governance_patterns
+  - kc_law
   learning_record:
-  - kc_memory_persistence
+  - kc_learning_record
   lens:
-  - kc_agent_identity
+  - kc_lens
   lifecycle_rule:
-  - kc_feedback_loops
+  - kc_lifecycle_rule
   llm_judge:
-  - kc_reward_and_alignment
+  - kc_llm_judge
   mcp_server:
-  - kc_a2a_protocol
-  - kc_anthropic_api_patterns
-  - kc_chinese_llm_ecosystem
-  - kc_mcp_protocol
+  - kc_mcp_server
   memory_scope:
-  - kc_crewai_patterns
-  - kc_langchain_patterns
+  - kc_memory_scope
   memory_summary:
-  - kc_memory_persistence
+  - kc_memory_summary
   mental_model:
-  - kc_agent_identity
+  - kc_mental_model
   model_card:
-  - kc_agent_identity
+  - kc_model_card
   naming_rule:
-  - kc_output_formatting
+  - kc_naming_rule
   notifier:
-  - kc_external_integrations
+  - kc_notifier
   optimizer:
-  - kc_dspy_patterns
+  - kc_optimizer
   output_validator:
-  - kc_crewai_patterns
+  - kc_output_validator
   parser:
-  - kc_langchain_patterns
+  - kc_parser
   path_config:
-  - kc_infra_config
+  - kc_path_config
   pattern:
-  - kc_haystack_patterns
+  - kc_pattern
   permission:
-  - kc_infra_config
+  - kc_permission
   plugin:
-  - kc_chinese_llm_ecosystem
-  - kc_mcp_protocol
+  - kc_plugin
   prompt_template:
-  - kc_anthropic_api_patterns
-  - kc_dspy_patterns
-  - kc_haystack_patterns
-  - kc_langchain_patterns
-  - kc_mcp_protocol
+  - kc_prompt_template
   prompt_version:
-  - kc_prompt_engineering
+  - kc_prompt_version
   quality_gate:
-  - kc_reward_and_alignment
+  - kc_quality_gate
   rag_source:
-  - kc_orchestration_runtime
+  - kc_rag_source
   rate_limit_config:
-  - kc_infra_config
+  - kc_rate_limit_config
   red_team_eval:
-  - kc_eval_testing
+  - kc_red_team_eval
   regression_check:
-  - kc_eval_testing
+  - kc_regression_check
   response_format:
-  - kc_dspy_patterns
-  - kc_google_ai_patterns
-  - kc_llamaindex_patterns
-  - kc_openai_api_patterns
-  - kc_output_formatting
+  - kc_response_format
   retriever:
-  - kc_dspy_patterns
-  - kc_haystack_patterns
-  - kc_langchain_patterns
-  - kc_llamaindex_patterns
+  - kc_retriever
   retriever_config:
-  - kc_academic_rag_patterns
-  - kc_aws_bedrock_patterns
-  - kc_langchain_patterns
-  - kc_llamaindex_patterns
+  - kc_retriever_config
   reward_signal:
-  - kc_reward_and_alignment
+  - kc_reward_signal
   router:
-  - kc_routing_resilience
+  - kc_router
   runtime_rule:
-  - kc_infra_config
+  - kc_runtime_rule
   runtime_state:
-  - kc_memory_persistence
+  - kc_runtime_state
   schedule:
-  - kc_orchestration_runtime
+  - kc_schedule
   scoring_rubric:
-  - kc_dspy_patterns
-  - kc_reward_and_alignment
+  - kc_scoring_rubric
   search_tool:
-  - kc_academic_rag_patterns
-  - kc_google_ai_patterns
-  - kc_openai_api_patterns
+  - kc_search_tool
   secret_config:
-  - kc_infra_config
+  - kc_secret_config
   session_state:
-  - kc_memory_persistence
+  - kc_session_state
   signal:
-  - kc_a2a_protocol
-  - kc_crewai_patterns
+  - kc_signal
   smoke_eval:
-  - kc_eval_testing
+  - kc_smoke_eval
   spawn_config:
-  - kc_orchestration_runtime
+  - kc_spawn_config
   system_prompt:
-  - kc_academic_agent_patterns
-  - kc_anthropic_api_patterns
-  - kc_google_ai_patterns
-  - kc_openai_api_patterns
+  - kc_system_prompt
   type_def:
-  - kc_schema_validation
+  - kc_type_def
   unit_eval:
-  - kc_eval_testing
+  - kc_unit_eval
   validation_schema:
-  - kc_schema_validation
+  - kc_validation_schema
   validator:
-  - kc_schema_validation
+  - kc_validator
   vision_tool:
-  - kc_openai_api_patterns
-  - kc_perception_tools
+  - kc_vision_tool
   webhook:
-  - kc_external_integrations
+  - kc_webhook
   workflow:
-  - kc_chinese_llm_ecosystem
-  - kc_crewai_patterns
-  - kc_haystack_patterns
-  - kc_langchain_patterns
-  - kc_llamaindex_patterns
+  - kc_workflow
 reference_domains:
   kc_a2a_protocol:
     path: library/domain/kc_a2a_protocol.md
@@ -614,5 +544,599 @@ reference_domains:
     - validator
     quality: 8.5
     origin: manual
-kind_kcs: {}
+kind_kcs:
+  kc_action_prompt:
+    path: library/kind/kc_action_prompt.md
+    feeds_kinds:
+    - action_prompt
+    quality: null
+    type: kind
+  kc_agent:
+    path: library/kind/kc_agent.md
+    feeds_kinds:
+    - agent
+    quality: null
+    type: kind
+  kc_agent_card:
+    path: library/kind/kc_agent_card.md
+    feeds_kinds:
+    - agent_card
+    quality: null
+    type: kind
+  kc_api_client:
+    path: library/kind/kc_api_client.md
+    feeds_kinds:
+    - api_client
+    quality: null
+    type: kind
+  kc_audio_tool:
+    path: library/kind/kc_audio_tool.md
+    feeds_kinds:
+    - audio_tool
+    quality: null
+    type: kind
+  kc_axiom:
+    path: library/kind/kc_axiom.md
+    feeds_kinds:
+    - axiom
+    quality: null
+    type: kind
+  kc_benchmark:
+    path: library/kind/kc_benchmark.md
+    feeds_kinds:
+    - benchmark
+    quality: null
+    type: kind
+  kc_boot_config:
+    path: library/kind/kc_boot_config.md
+    feeds_kinds:
+    - boot_config
+    quality: null
+    type: kind
+  kc_brain_index:
+    path: library/kind/kc_brain_index.md
+    feeds_kinds:
+    - brain_index
+    quality: null
+    type: kind
+  kc_browser_tool:
+    path: library/kind/kc_browser_tool.md
+    feeds_kinds:
+    - browser_tool
+    quality: null
+    type: kind
+  kc_bugloop:
+    path: library/kind/kc_bugloop.md
+    feeds_kinds:
+    - bugloop
+    quality: null
+    type: kind
+  kc_chain:
+    path: library/kind/kc_chain.md
+    feeds_kinds:
+    - chain
+    quality: null
+    type: kind
+  kc_checkpoint:
+    path: library/kind/kc_checkpoint.md
+    feeds_kinds:
+    - checkpoint
+    quality: null
+    type: kind
+  kc_chunk_strategy:
+    path: library/kind/kc_chunk_strategy.md
+    feeds_kinds:
+    - chunk_strategy
+    quality: null
+    type: kind
+  kc_cli_tool:
+    path: library/kind/kc_cli_tool.md
+    feeds_kinds:
+    - cli_tool
+    quality: null
+    type: kind
+  kc_code_executor:
+    path: library/kind/kc_code_executor.md
+    feeds_kinds:
+    - code_executor
+    quality: null
+    type: kind
+  kc_component_map:
+    path: library/kind/kc_component_map.md
+    feeds_kinds:
+    - component_map
+    quality: null
+    type: kind
+  kc_computer_use:
+    path: library/kind/kc_computer_use.md
+    feeds_kinds:
+    - computer_use
+    quality: null
+    type: kind
+  kc_constraint_spec:
+    path: library/kind/kc_constraint_spec.md
+    feeds_kinds:
+    - constraint_spec
+    quality: null
+    type: kind
+  kc_context_doc:
+    path: library/kind/kc_context_doc.md
+    feeds_kinds:
+    - context_doc
+    quality: null
+    type: kind
+  kc_daemon:
+    path: library/kind/kc_daemon.md
+    feeds_kinds:
+    - daemon
+    quality: null
+    type: kind
+  kc_dag:
+    path: library/kind/kc_dag.md
+    feeds_kinds:
+    - dag
+    quality: null
+    type: kind
+  kc_db_connector:
+    path: library/kind/kc_db_connector.md
+    feeds_kinds:
+    - db_connector
+    quality: null
+    type: kind
+  kc_decision_record:
+    path: library/kind/kc_decision_record.md
+    feeds_kinds:
+    - decision_record
+    quality: null
+    type: kind
+  kc_diagram:
+    path: library/kind/kc_diagram.md
+    feeds_kinds:
+    - diagram
+    quality: null
+    type: kind
+  kc_director:
+    path: library/kind/kc_director.md
+    feeds_kinds:
+    - director
+    quality: null
+    type: kind
+  kc_dispatch_rule:
+    path: library/kind/kc_dispatch_rule.md
+    feeds_kinds:
+    - dispatch_rule
+    quality: null
+    type: kind
+  kc_document_loader:
+    path: library/kind/kc_document_loader.md
+    feeds_kinds:
+    - document_loader
+    quality: null
+    type: kind
+  kc_e2e_eval:
+    path: library/kind/kc_e2e_eval.md
+    feeds_kinds:
+    - e2e_eval
+    quality: null
+    type: kind
+  kc_embedding_config:
+    path: library/kind/kc_embedding_config.md
+    feeds_kinds:
+    - embedding_config
+    quality: null
+    type: kind
+  kc_entity_memory:
+    path: library/kind/kc_entity_memory.md
+    feeds_kinds:
+    - entity_memory
+    quality: null
+    type: kind
+  kc_enum_def:
+    path: library/kind/kc_enum_def.md
+    feeds_kinds:
+    - enum_def
+    quality: null
+    type: kind
+  kc_env_config:
+    path: library/kind/kc_env_config.md
+    feeds_kinds:
+    - env_config
+    quality: null
+    type: kind
+  kc_eval_dataset:
+    path: library/kind/kc_eval_dataset.md
+    feeds_kinds:
+    - eval_dataset
+    quality: null
+    type: kind
+  kc_fallback_chain:
+    path: library/kind/kc_fallback_chain.md
+    feeds_kinds:
+    - fallback_chain
+    quality: null
+    type: kind
+  kc_feature_flag:
+    path: library/kind/kc_feature_flag.md
+    feeds_kinds:
+    - feature_flag
+    quality: null
+    type: kind
+  kc_few_shot_example:
+    path: library/kind/kc_few_shot_example.md
+    feeds_kinds:
+    - few_shot_example
+    quality: null
+    type: kind
+  kc_formatter:
+    path: library/kind/kc_formatter.md
+    feeds_kinds:
+    - formatter
+    quality: null
+    type: kind
+  kc_function_def:
+    path: library/kind/kc_function_def.md
+    feeds_kinds:
+    - function_def
+    quality: null
+    type: kind
+  kc_glossary_entry:
+    path: library/kind/kc_glossary_entry.md
+    feeds_kinds:
+    - glossary_entry
+    quality: null
+    type: kind
+  kc_golden_test:
+    path: library/kind/kc_golden_test.md
+    feeds_kinds:
+    - golden_test
+    quality: null
+    type: kind
+  kc_guardrail:
+    path: library/kind/kc_guardrail.md
+    feeds_kinds:
+    - guardrail
+    quality: null
+    type: kind
+  kc_handoff:
+    path: library/kind/kc_handoff.md
+    feeds_kinds:
+    - handoff
+    quality: null
+    type: kind
+  kc_handoff_protocol:
+    path: library/kind/kc_handoff_protocol.md
+    feeds_kinds:
+    - handoff_protocol
+    quality: null
+    type: kind
+  kc_hook:
+    path: library/kind/kc_hook.md
+    feeds_kinds:
+    - hook
+    quality: null
+    type: kind
+  kc_input_schema:
+    path: library/kind/kc_input_schema.md
+    feeds_kinds:
+    - input_schema
+    quality: null
+    type: kind
+  kc_instruction:
+    path: library/kind/kc_instruction.md
+    feeds_kinds:
+    - instruction
+    quality: null
+    type: kind
+  kc_interface:
+    path: library/kind/kc_interface.md
+    feeds_kinds:
+    - interface
+    quality: null
+    type: kind
+  kc_iso_package:
+    path: library/kind/kc_iso_package.md
+    feeds_kinds:
+    - iso_package
+    quality: null
+    type: kind
+  kc_knowledge_card:
+    path: library/kind/kc_knowledge_card.md
+    feeds_kinds:
+    - knowledge_card
+    quality: null
+    type: kind
+  kc_law:
+    path: library/kind/kc_law.md
+    feeds_kinds:
+    - law
+    quality: null
+    type: kind
+  kc_learning_record:
+    path: library/kind/kc_learning_record.md
+    feeds_kinds:
+    - learning_record
+    quality: null
+    type: kind
+  kc_lens:
+    path: library/kind/kc_lens.md
+    feeds_kinds:
+    - lens
+    quality: null
+    type: kind
+  kc_lifecycle_rule:
+    path: library/kind/kc_lifecycle_rule.md
+    feeds_kinds:
+    - lifecycle_rule
+    quality: null
+    type: kind
+  kc_llm_judge:
+    path: library/kind/kc_llm_judge.md
+    feeds_kinds:
+    - llm_judge
+    quality: null
+    type: kind
+  kc_mcp_server:
+    path: library/kind/kc_mcp_server.md
+    feeds_kinds:
+    - mcp_server
+    quality: null
+    type: kind
+  kc_memory_scope:
+    path: library/kind/kc_memory_scope.md
+    feeds_kinds:
+    - memory_scope
+    quality: null
+    type: kind
+  kc_memory_summary:
+    path: library/kind/kc_memory_summary.md
+    feeds_kinds:
+    - memory_summary
+    quality: null
+    type: kind
+  kc_mental_model:
+    path: library/kind/kc_mental_model.md
+    feeds_kinds:
+    - mental_model
+    quality: null
+    type: kind
+  kc_model_card:
+    path: library/kind/kc_model_card.md
+    feeds_kinds:
+    - model_card
+    quality: null
+    type: kind
+  kc_naming_rule:
+    path: library/kind/kc_naming_rule.md
+    feeds_kinds:
+    - naming_rule
+    quality: null
+    type: kind
+  kc_notifier:
+    path: library/kind/kc_notifier.md
+    feeds_kinds:
+    - notifier
+    quality: null
+    type: kind
+  kc_optimizer:
+    path: library/kind/kc_optimizer.md
+    feeds_kinds:
+    - optimizer
+    quality: null
+    type: kind
+  kc_output_validator:
+    path: library/kind/kc_output_validator.md
+    feeds_kinds:
+    - output_validator
+    quality: null
+    type: kind
+  kc_parser:
+    path: library/kind/kc_parser.md
+    feeds_kinds:
+    - parser
+    quality: null
+    type: kind
+  kc_path_config:
+    path: library/kind/kc_path_config.md
+    feeds_kinds:
+    - path_config
+    quality: null
+    type: kind
+  kc_pattern:
+    path: library/kind/kc_pattern.md
+    feeds_kinds:
+    - pattern
+    quality: null
+    type: kind
+  kc_permission:
+    path: library/kind/kc_permission.md
+    feeds_kinds:
+    - permission
+    quality: null
+    type: kind
+  kc_plugin:
+    path: library/kind/kc_plugin.md
+    feeds_kinds:
+    - plugin
+    quality: null
+    type: kind
+  kc_prompt_template:
+    path: library/kind/kc_prompt_template.md
+    feeds_kinds:
+    - prompt_template
+    quality: null
+    type: kind
+  kc_prompt_version:
+    path: library/kind/kc_prompt_version.md
+    feeds_kinds:
+    - prompt_version
+    quality: null
+    type: kind
+  kc_quality_gate:
+    path: library/kind/kc_quality_gate.md
+    feeds_kinds:
+    - quality_gate
+    quality: null
+    type: kind
+  kc_rag_source:
+    path: library/kind/kc_rag_source.md
+    feeds_kinds:
+    - rag_source
+    quality: null
+    type: kind
+  kc_rate_limit_config:
+    path: library/kind/kc_rate_limit_config.md
+    feeds_kinds:
+    - rate_limit_config
+    quality: null
+    type: kind
+  kc_red_team_eval:
+    path: library/kind/kc_red_team_eval.md
+    feeds_kinds:
+    - red_team_eval
+    quality: null
+    type: kind
+  kc_regression_check:
+    path: library/kind/kc_regression_check.md
+    feeds_kinds:
+    - regression_check
+    quality: null
+    type: kind
+  kc_response_format:
+    path: library/kind/kc_response_format.md
+    feeds_kinds:
+    - response_format
+    quality: null
+    type: kind
+  kc_retriever:
+    path: library/kind/kc_retriever.md
+    feeds_kinds:
+    - retriever
+    quality: null
+    type: kind
+  kc_retriever_config:
+    path: library/kind/kc_retriever_config.md
+    feeds_kinds:
+    - retriever_config
+    quality: null
+    type: kind
+  kc_reward_signal:
+    path: library/kind/kc_reward_signal.md
+    feeds_kinds:
+    - reward_signal
+    quality: null
+    type: kind
+  kc_router:
+    path: library/kind/kc_router.md
+    feeds_kinds:
+    - router
+    quality: null
+    type: kind
+  kc_runtime_rule:
+    path: library/kind/kc_runtime_rule.md
+    feeds_kinds:
+    - runtime_rule
+    quality: null
+    type: kind
+  kc_runtime_state:
+    path: library/kind/kc_runtime_state.md
+    feeds_kinds:
+    - runtime_state
+    quality: null
+    type: kind
+  kc_schedule:
+    path: library/kind/kc_schedule.md
+    feeds_kinds:
+    - schedule
+    quality: null
+    type: kind
+  kc_scoring_rubric:
+    path: library/kind/kc_scoring_rubric.md
+    feeds_kinds:
+    - scoring_rubric
+    quality: null
+    type: kind
+  kc_search_tool:
+    path: library/kind/kc_search_tool.md
+    feeds_kinds:
+    - search_tool
+    quality: null
+    type: kind
+  kc_secret_config:
+    path: library/kind/kc_secret_config.md
+    feeds_kinds:
+    - secret_config
+    quality: null
+    type: kind
+  kc_session_state:
+    path: library/kind/kc_session_state.md
+    feeds_kinds:
+    - session_state
+    quality: null
+    type: kind
+  kc_signal:
+    path: library/kind/kc_signal.md
+    feeds_kinds:
+    - signal
+    quality: null
+    type: kind
+  kc_smoke_eval:
+    path: library/kind/kc_smoke_eval.md
+    feeds_kinds:
+    - smoke_eval
+    quality: null
+    type: kind
+  kc_spawn_config:
+    path: library/kind/kc_spawn_config.md
+    feeds_kinds:
+    - spawn_config
+    quality: null
+    type: kind
+  kc_system_prompt:
+    path: library/kind/kc_system_prompt.md
+    feeds_kinds:
+    - system_prompt
+    quality: null
+    type: kind
+  kc_type_def:
+    path: library/kind/kc_type_def.md
+    feeds_kinds:
+    - type_def
+    quality: null
+    type: kind
+  kc_unit_eval:
+    path: library/kind/kc_unit_eval.md
+    feeds_kinds:
+    - unit_eval
+    quality: null
+    type: kind
+  kc_validation_schema:
+    path: library/kind/kc_validation_schema.md
+    feeds_kinds:
+    - validation_schema
+    quality: null
+    type: kind
+  kc_validator:
+    path: library/kind/kc_validator.md
+    feeds_kinds:
+    - validator
+    quality: null
+    type: kind
+  kc_vision_tool:
+    path: library/kind/kc_vision_tool.md
+    feeds_kinds:
+    - vision_tool
+    quality: null
+    type: kind
+  kc_webhook:
+    path: library/kind/kc_webhook.md
+    feeds_kinds:
+    - webhook
+    quality: null
+    type: kind
+  kc_workflow:
+    path: library/kind/kc_workflow.md
+    feeds_kinds:
+    - workflow
+    quality: null
+    type: kind
 note: 'v2.0: kind_kcs (1:1 per kind) replace domains as primary F3 source. Cluster domains moved to reference_domains.'
