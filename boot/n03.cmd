@@ -16,5 +16,5 @@ set IDENTITY=Voce e o Builder Nucleus (N03) do CEX. REGRA ABSOLUTA: Todo artefat
 if "%~1"=="" (
     claude %FLAGS% "%IDENTITY%"
 ) else (
-    claude %FLAGS% %*
+    claude %FLAGS% "%IDENTITY% TAREFA: %~1"
 )
