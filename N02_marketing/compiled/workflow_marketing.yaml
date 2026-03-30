@@ -1,0 +1,55 @@
+id: p12_wf_marketing_campaign
+kind: workflow
+pillar: P12
+version: 2.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: n02_marketing
+title: Marketing Copy Production Workflows
+steps_count: 12
+execution: sequential_with_branches
+agent_nodes:
+- n02-marketing-hub
+- n07-orchestrator
+timeout: 3600000
+retry_policy: per_step
+depends_on: []
+signals: '| Signal | Emitter | Meaning |
+
+  |--------|---------|---------|
+
+  | marketing_copy_complete | n02-marketing-hub | All deliverables saved, compiled, committed |
+
+  | marketing_copy_error | n02-marketing-hub | Unrecoverable failure, escalate to N07 |'
+domain: copywriting_and_campaigns
+quality: null
+tags:
+- workflow
+- marketing
+- copywriting
+- N02
+- campaign
+- landing_page
+- email
+tldr: 3 production workflows — ad campaign (5 steps), landing page (4 steps), email sequence (3 steps) — all N02 executed.
+density_score: 0.9
+overview: Three operational workflows for N02. Each produces committed, compiled artifacts with quality gate validation. All
+  execute on `n02-marketing-hub` (claude-sonnet-4-6). ---
+workflow_1_ad_campaign: 'Goal: Produce complete ad creative set for one campaign (Facebook/Google/LinkedIn) Input required:
+  Product name, audience segment, key benefit, budget range, campaign objective Output: Campaign brief + 3 ad variants per
+  format (image/video/carousel) + copy deck'
+steps: "Step 1: SEQUENCE PLAN [n02-marketing-hub]\n  - Input: goal type (nurture | cold | cart | re-engagement)\n  - Action:\
+  \ Select skeleton from KC, map each email to objective\n  - Output: email_plan_{mission}.md\n  - Signal: plan_complete\n\
+  \nStep 2: EMAIL COPY [n02-marketing-hub]\n  - For each email (1–5):\n    - Write subject line (3 variants, select best by\
+  \ curiosity gap)\n    - Write preview text (40–90 chars)\n    - Write email body (formula-matched per email type)\n    -\
+  \ Write CTA (specific + benefit-first)\n  - Output: email_sequence_{mission}.md\n  - Depends on: Step 1\n  - Signal: copy_complete\n\
+  \nStep 3: COMPILE + COMMIT [n02-marketing-hub]\n  - Compile sequence file\n  - Commit: git commit -m \"[N02] email sequence\
+  \ — {mission}\"\n  - Signal: marketing_copy_complete\n\n---"
+workflow_2_landing_page_copy: 'Goal: Produce full landing page copy for a product or offer Input required: Product, audience,
+  offer, primary CTA, optional testimonials Output: Complete LP copy file with all sections'
+workflow_3_email_sequence: 'Goal: Produce a 5-email nurture or cold outreach sequence Input required: Audience, goal (nurture/cold/cart/re-engagement),
+  product/offer Output: 5 emails with subject lines, preview text, and body copy'
+error_handling:
+- 'Step fails: retry once with revised prompt; if still fail, signal `marketing_copy_error` to N07'
+- 'Quality gate fails (score < 8.0): return to copy step, apply F6 retry, max 2 revisions'
+- 'MCP unavailable: proceed with formula-based approach from KC; note in output'

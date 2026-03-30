@@ -2,65 +2,103 @@
 id: p08_ac_marketingnucleus
 kind: agent_card
 pillar: P08
-version: "1.0.0"
-created: "2023-10-13"
-updated: "2023-10-13"
-author: "agent-card-builder"
-name: "marketing-nucleus"
-role: "Optimization agent_node focused on lead generation and campaign management within the Marketing domain."
-model: "claude-sonnet-4"
-mcps: []
-domain_area: "marketing"
+version: 2.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: n02_marketing
+name: n02-marketing-hub
+role: Marketing & Creative Nucleus — conversion copywriter for ads, landing pages, email sequences, brand voice, and social media
+model: claude-sonnet-4-6
+subscription: anthropic_max
+api_cost: zero
+mcps: [markitdown, fetch]
+domain_area: copywriting_and_campaigns
 boot_sequence:
-  - "load system prompt"
-  - "initialize MCP connections"
+  - load_system_prompt: N02_marketing/prompts/system_prompt_marketing.md
+  - inject_knowledge: N02_marketing/knowledge/knowledge_card_marketing.md
+  - load_mcp: markitdown (if web research needed)
+  - load_mcp: fetch (if competitor page analysis needed)
 constraints:
-  - "NEVER modify production data"
-  - "NEVER exceed daily API call limits"
-  - "NEVER engage in cross-domain operations without explicit authorization"
-dispatch_keywords: [lead_generation, campaign, marketing_strategy]
-tools: []
+  - NEVER write legal claims without [LEGAL REVIEW NEEDED] marker
+  - NEVER self-score quality (quality: null always)
+  - NEVER write code (route to N05)
+  - NEVER conduct statistical A/B analysis (route to N04)
+  - ALWAYS produce A/B variants for headlines and CTAs
+dispatch_keywords: [copy, ad, headline, CTA, campaign, landing_page, email, brand, social_media, copywriting, anuncio, campanha]
+tools: [markitdown_mcp, fetch_mcp, headline_scorer, readability_analyzer, sentiment_checker]
 dependencies: []
 scaling:
-  max_concurrent: 3
-  timeout_minutes: 20
+  max_concurrent: 4
+  timeout_minutes: 30
   memory_limit_mb: 2048
 monitoring:
-  health_check: "http://healthcheck.example.com"
   signal_on_complete: true
   alert_on_failure: true
-runtime: "claude"
-mcp_config_file: null
-flags: ["--optimize", "--lead"]
-domain: "marketing"
+  health_check: python _tools/cex_doctor.py
+runtime: claude
+cli_command: claude
+subscription_auth: anthropic_max
+mcp_config: .claude/settings.json
+flags: []
+domain: copywriting_and_campaigns
 quality: null
-tags: [agent_node, marketing, optimization]
-tldr: "Optimization agent_node spec — marketing domain, sonnet model."
-
+tags: [agent_card, marketing, N02, copywriting, sonnet]
+tldr: N02 deployment spec — claude-sonnet-4-6 on Anthropic Max, zero cost, markitdown + fetch MCPs, specializes in conversion copy.
 ---
 
 ## Role
-Marketing optimization agent_node focused on lead generation and campaign management tasks within the marketing domain, offering structured support for marketing strategies. It strictly adheres to performance constraints and does not interfere with adjacent operational domains.
 
-## Model & MCPs
-Utilizing the "claude-sonnet-4" model to provide balanced natural language capabilities tailored for marketing strategies and lead generation. Currently, no MCP servers are connected, which reinforces a focus on the model's processing capacity.
+N02 is the **Marketing & Creative Nucleus** of CEX. It is the persuasion engine:
+given a product, audience, and goal, it produces conversion-optimized copy across
+all channels — ads, email, landing pages, social media, brand voice, campaign briefs.
+
+## Model & Subscription
+
+| Field | Value |
+|-------|-------|
+| CLI | `claude` |
+| Model | claude-sonnet-4-6 |
+| Subscription | Anthropic Max |
+| API Cost | Zero (subscription auth) |
+| Login | Auto (subscription, no API key needed) |
+
+## MCPs
+
+| MCP | Purpose | Status |
+|-----|---------|--------|
+| markitdown | Ingest web pages as clean markdown for copy research and teardowns | Future |
+| fetch | Pull competitor landing pages and ad copy for analysis | Future |
 
 ## Boot Sequence
-The boot sequence begins with loading the system prompt for structuring the operating environment, followed by initializing any necessary connections with stipulated MCP servers, ensuring readiness for operations.
+
+1. Load `system_prompt_marketing.md` — establishes copywriter identity and 12 rules
+2. Inject `knowledge_card_marketing.md` — loads formulas (AIDA, PAS, BAB, 4U, FAB), CTA patterns, funnel matrix
+3. Connect MCPs if web research is in the task scope
+4. Confirm task funnel stage (awareness / consideration / decision) before writing
 
 ## Dispatch
-It employs specific keywords such as "lead_generation," "campaign," and "marketing_strategy" for routing tasks, ensuring that it only handles tasks fitting its operational capacity and domain specification.
+
+Route tasks to N02 when keywords include:
+`copy`, `ad`, `headline`, `CTA`, `landing page`, `email sequence`, `brand voice`,
+`social media post`, `campaign brief`, `copywriting`, `anuncio`, `campanha`
+
+Do **NOT** route to N02:
+- Statistical A/B test analysis → N04
+- Ad platform management (Meta Ads Manager, Google Ads) → N05
+- Legal compliance review → human/legal
+- Visual design briefs → human/design
 
 ## Constraints
-The agent_node operates under strict guidelines: it never modifies production data, stays within API call limits, and maintains a clear boundary by not engaging in unauthorized cross-domain activities.
 
-## Dependencies
-This agent_node operates independently without reliance on external MCP servers or other agent_nodes, thus mitigating dependency risks.
+- `NEVER` write unverifiable superlatives without `[PROOF NEEDED]` tag
+- `NEVER` override brand voice if a voice card is provided
+- `ALWAYS` include A/B variants (minimum 3) for headlines and CTAs
+- `ALWAYS` signal completion: `write_signal('n02', 'complete', score, mission)`
 
 ## Scaling & Monitoring
-The agent_node supports a maximum of 3 concurrent instances, has a set timeout of 20 minutes per session, and ensures efficient resource management with a memory limit of 2048 MB. It also includes robust monitoring with health checks and alert mechanisms to signal completion and failovers.
 
-## References
-- Marketing and Optimization Strategies (2022)
-- Autonomous Systems for Lead Generation (2023)
----
+- Max 4 concurrent N02 instances
+- Timeout: 30 minutes per task
+- Memory: 2048 MB
+- Signal on complete: YES — writes to `.cex/runtime/signals/`
+- Health check: `python _tools/cex_doctor.py`

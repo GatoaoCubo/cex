@@ -1,0 +1,155 @@
+id: p03_pt_marketing_message
+kind: prompt_template
+pillar: P03
+title: Marketing Copy Production Template
+version: 2.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: n02_marketing
+variables:
+- name: product_name
+  type: string
+  required: true
+  default: null
+  description: Product or service being marketed
+- name: audience_segment
+  type: string
+  required: true
+  default: null
+  description: Target audience — who reads this copy (job title, situation, pain)
+- name: funnel_stage
+  type: string
+  required: true
+  default: null
+  description: awareness | consideration | decision
+- name: key_benefit
+  type: string
+  required: true
+  default: null
+  description: The single most important benefit — outcome the reader gets
+- name: formula
+  type: string
+  required: false
+  default: AIDA
+  description: Copywriting formula — AIDA | PAS | BAB | 4U | FAB
+- name: channel
+  type: string
+  required: true
+  default: null
+  description: Where copy will appear — facebook_ad | google_ad | email | landing_page | linkedin | instagram
+- name: cta_action
+  type: string
+  required: false
+  default: null
+  description: Desired action after reading — start_trial | book_call | download | buy | subscribe
+- name: brand_voice_notes
+  type: string
+  required: false
+  default: neutral
+  description: Tone notes — casual, professional, bold, empathetic; banned words if any
+- name: word_limit
+  type: integer
+  required: false
+  default: 150
+  description: Maximum word count for the body copy
+variable_syntax: mustache
+composable: true
+domain: copywriting_and_campaigns
+quality: null
+tags:
+- prompt_template
+- marketing
+- copy
+- N02
+- P03
+tldr: Universal copy production template — product + audience + funnel + formula → persuasive copy with A/B variants.
+keywords:
+- copy
+- ad
+- headline
+- CTA
+- funnel
+- formula
+- AIDA
+- PAS
+- email
+- landing_page
+density_score: 0.9
+purpose: This template drives N02 to produce channel-specific, formula-matched copy. Reusable across all copy tasks — ads,
+  emails, landing pages, social posts. Output always includes 3 headline variants + specific CTA.
+variables_table: '| Name | Type | Required | Default | Description |
+
+  |------|------|----------|---------|-------------|
+
+  | product_name | string | YES | — | Product/service being marketed |
+
+  | audience_segment | string | YES | — | Target reader — their role, situation, pain |
+
+  | funnel_stage | string | YES | — | awareness / consideration / decision |
+
+  | key_benefit | string | YES | — | The ONE outcome the reader cares about |
+
+  | formula | string | NO | AIDA | Copywriting formula: AIDA/PAS/BAB/4U/FAB |
+
+  | channel | string | YES | — | facebook_ad / email / landing_page / etc. |
+
+  | cta_action | string | NO | null | Desired action: start_trial / book_call / etc. |
+
+  | brand_voice_notes | string | NO | neutral | Tone guidance and banned words |
+
+  | word_limit | integer | NO | 150 | Max body copy words |'
+template_body: "You are N02 — Marketing & Creative Nucleus, a conversion copywriter.\n\nTASK: Write {{channel}} copy for {{product_name}}.\n\
+  \nAUDIENCE: {{audience_segment}}\nFUNNEL STAGE: {{funnel_stage}}\nKEY BENEFIT: {{key_benefit}}\nFORMULA: {{formula}}\nCTA\
+  \ ACTION: {{cta_action}}\nBRAND VOICE: {{brand_voice_notes}}\nWORD LIMIT: {{word_limit}} words max for body\n\nDELIVER:\n\
+  1. HEADLINES — 3 variants labeled V1, V2, V3\n   - Score each with 4U: Useful / Urgent / Unique / Ultra-specific\n   - Mark\
+  \ recommended variant with ★\n\n2. BODY COPY — apply {{formula}} structure:\n   {{#formula_is_AIDA}}\n   - Attention (hook,\
+  \ first 10 words)\n   - Interest (problem or opportunity development)\n   - Desire (transformation, benefit stack)\n   -\
+  \ Action (CTA)\n   {{/formula_is_AIDA}}\n   {{#formula_is_PAS}}\n   - Problem (name the pain)\n   - Agitate (deepen it)\n\
+  \   - Solution (present relief)\n   {{/formula_is_PAS}}\n   {{#formula_is_BAB}}\n   - Before (current painful state)\n \
+  \  - After (desired future)\n   - Bridge (how product gets them there)\n   {{/formula_is_BAB}}\n\n3. CTA — 2 variants\n\
+  \   - Must be specific and benefit-first\n   - Format: \"[Verb] my [specific benefit]\" or \"[Verb] [product] [low-friction\
+  \ qualifier]\"\n\n4. TEST NOTE — one sentence on what to A/B test first\n\nOUTPUT FORMAT:\n## Headline Variants\nV1: ...\n\
+  V2: ...\nV3: ★ (recommended)\n\n## Body Copy\n[formula-structured body, max {{word_limit}} words]\n\n## CTA Options\nPrimary:\
+  \ ...\nAlternate: ...\n\n## TEST\n[one sentence on priority test]"
+quality_gates_applied: '| Gate | Check |
+
+  |------|-------|
+
+  | H05 | CTA is specific and benefit-first (not "Click here") |
+
+  | H06 | >= 3 headline variants with 4U scores |
+
+  | S01 | Hook opens in first 10 words |
+
+  | S02 | CTA names benefit AND action |'
+filled_example: 'Variables:
+
+  product_name: "CopyFlow AI"
+
+  audience_segment: "Freelance copywriters who miss deadlines"
+
+  funnel_stage: "consideration"
+
+  key_benefit: "Produce first drafts 3x faster"
+
+  formula: "PAS"
+
+  channel: "email"
+
+  cta_action: "start_trial"
+
+  brand_voice_notes: "casual, confident. Banned: ''leverage'', ''synergy''"
+
+  word_limit: 120
+
+
+  Rendered Output:'
+headline_variants: 'V1: "Still Spending 3 Hours on a Single Ad? (There''s a Fix)" V2: "CopyFlow: First Draft in 20 Minutes,
+  Guaranteed" V3: ★ "Your Deadline Was Yesterday. CopyFlow Gets You There."'
+body_copy: 'You''re a great writer — but the clock is killing you. Every morning it''s the same: blank doc, cursor blinking,
+  6 hours to deliver and zero words written. Here''s what that costs: late fees, stressed clients, evenings lost, and a reputation
+  that quietly erodes. CopyFlow AI drafts your first copy block in 20 minutes flat. You edit like the expert you are — instead
+  of starting from scratch.'
+cta_options: 'Primary: Start my free 14-day trial Alternate: Draft my first copy free (no card needed)'
+test: A/B test V3 headline vs V1 for subject line open rate; V3's urgency usually outperforms curiosity in consideration-stage
+  email.

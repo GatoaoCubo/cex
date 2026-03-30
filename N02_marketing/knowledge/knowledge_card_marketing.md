@@ -2,67 +2,155 @@
 id: p01_kc_marketing_nucleus
 kind: knowledge_card
 pillar: P01
-title: "Understanding the Marketing Nucleus"
-version: "1.0.0"
-created: "2023-10-11"
-updated: "2023-10-11"
-author: "knowledge-card-builder"
-domain: Marketing
+title: Marketing & Copywriting — Core Knowledge Card
+version: 2.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: n02_marketing
+domain: copywriting_and_campaigns
 quality: null
-tags: [marketing, strategy, core_concepts, knowledge]
-tldr: "The marketing nucleus centers brand, messaging, and value for strategic alignment."
-when_to_use: "Use when crafting or reviewing marketing strategies for coherence."
-keywords: [marketing nucleus, strategy core, brand alignment]
+tags: [knowledge_card, marketing, copywriting, campaigns, N02]
+tldr: Distilled copywriting formulas, CTA patterns, headline frameworks, funnel stages — operational knowledge for N02.
+when_to_use: Load before any copy-writing task. Reference formulas, then adapt to product/audience.
+keywords: [copywriting, AIDA, PAS, headline, CTA, funnel, landing page, email, brand voice, A/B testing]
 long_tails:
-  - How to establish a marketing nucleus for brand coherence
-  - Components of a marketing nucleus in strategic planning
+  - How to write a high-converting landing page headline
+  - AIDA vs PAS — which formula to use for cold traffic
+  - What makes a CTA convert — specificity and friction reduction
+  - How to define brand voice in 4 dimensions
 axioms:
-  - ALWAYS align messaging with brand identity to maintain coherence
+  - ALWAYS identify funnel stage before writing — awareness copy ≠ decision copy
+  - ALWAYS lead with the reader's desire, not the product's features
+  - NEVER use a vague CTA — specificity increases CTR by 20–30%
 linked_artifacts:
-  primary: null
-  related: []
-density_score: 0.85
-data_source: "https://example.com/marketing-nucleus-concepts"
+  primary: p02_agent_marketing_nucleus
+  related: [p03_sp_marketing_nucleus, p03_pt_marketing_message]
+density_score: 0.91
+data_source: internal_distillation
 ---
 
-# Understanding the Marketing Nucleus
+# Marketing & Copywriting — Core Knowledge Card
 
 ## Quick Reference
+
 ```yaml
-topic: marketing_nucleus
-scope: Strategic Framework for Marketing
-owner: knowledge-card-builder
-criticality: high
+domain: copywriting_and_campaigns
+nucleus: N02
+model: claude-sonnet-4-6
+cli: claude (Anthropic subscription)
+core_formulas: [AIDA, PAS, BAB, 4U, FAB]
+funnel_stages: [awareness, consideration, decision]
+channels: [ads, email, landing_page, social, brand]
 ```
 
-## Key Concepts
-- **Brand Identity**: Establishes the visual and emotional core of the company.
-- **Messaging Framework**: Consistent narrative aligning with brand values.
-- **Customer Value Proposition**: Core promise that communicates value to customers.
+## Copywriting Formulas
 
-## Strategy Phases
-1. **Define**: Establish brand identity and customer value propositions.
-2. **Align**: Ensure all messaging across channels is consistent with core values.
-3. **Evaluate**: Regularly assess the effect of the marketing nucleus on initiatives.
+### AIDA — Awareness → Interest → Desire → Action
+Use for: cold traffic ads, email subject lines, landing page above-the-fold
+```
+A — Hook that grabs attention (bold claim, question, surprising stat)
+I — Build interest with the problem or opportunity
+D — Create desire with transformation story or benefit stack
+A — CTA with single clear next step
+```
 
-## Golden Rules
-- ALWAYS prioritize brand clarity in strategic decisions.
-- NEVER launch campaign without aligning it with core messaging.
-- ENSURE each marketing piece reinforces the overall value proposition.
+### PAS — Problem → Agitate → Solution
+Use for: Facebook ads, cold email, sales pages targeting pain-aware audiences
+```
+P — Name the exact pain point the reader already feels
+A — Deepen it: consequences, missed opportunities, future if nothing changes
+S — Present your solution as the relief
+```
+
+### BAB — Before → After → Bridge
+Use for: testimonials structure, case study copy, social proof sections
+```
+Before: Reader's current state (problem, frustration, limitation)
+After: Desired future state (what life looks like after solving it)
+Bridge: Your product/service as the mechanism to cross
+```
+
+### 4U Headline Formula
+Use for: all headlines. Score each dimension 1–3, aim for total >= 8.
+```
+Useful — Does it promise a benefit?
+Urgent — Does it create time pressure or consequence for inaction?
+Unique — Could only your offer say this?
+Ultra-specific — Does it name a number, name, or concrete outcome?
+```
+
+### FAB — Features → Advantages → Benefits
+Use for: product description copy, email body, landing page benefit section
+```
+Feature: What it IS (e.g., "AI-powered headline scorer")
+Advantage: What it DOES (e.g., "scores 10 variants in 3 seconds")
+Benefit: What it MEANS for reader (e.g., "you ship copy 2x faster")
+```
+
+## Headline Patterns (High CTR)
+
+| Pattern | Example |
+|---------|---------|
+| Number + Outcome | "7 Headlines That Doubled Our Conversion Rate" |
+| How to [Outcome] Without [Pain] | "How to Launch Ads Without Wasting Budget" |
+| The [Secret/Method/System] | "The 3-Word CTA That Gets More Clicks" |
+| Question with implied answer | "Still Writing Weak CTAs? This Changes Everything." |
+| Specific result + timeframe | "Get 3x More Leads in 30 Days" |
+
+## CTA Patterns
+
+| Weak (Banned) | Strong (Use) | Why |
+|---------------|-------------|-----|
+| Click here | Get my free audit | Specific benefit |
+| Learn more | See how it works (2 min) | Specificity + low friction |
+| Submit | Yes, send my guide | First-person + desire |
+| Buy now | Start my 14-day trial | Framing as start, not spend |
+| Sign up | Join 4,000+ marketers | Social proof embedded |
+
+## Funnel Stage Matrix
+
+| Stage | Awareness | Consideration | Decision |
+|-------|-----------|---------------|----------|
+| Reader knows | Has a problem | Has a solution category | Has your brand |
+| Goal | Stop the scroll | Build preference | Remove final objection |
+| Formula | AIDA / hook | BAB / comparison | Offer + urgency |
+| CTA | Soft (learn more) | Medium (see demo) | Hard (buy / start) |
+| Tone | Curious, bold | Educational, credible | Confident, urgent |
+
+## Brand Voice — 4 Dimensions
+
+```
+1. TONE: formal ←——→ casual (e.g., "We help" vs "Let's fix this")
+2. VOCABULARY: technical ←——→ plain (e.g., "ROI optimization" vs "more sales")
+3. PERSON: third-person ←——→ first-person (e.g., "the company" vs "we/you")
+4. ENERGY: calm ←——→ bold (e.g., "reliable solution" vs "this changes everything")
+```
+For each client/product: score each dimension 1–5. Document 3 banned words + 3 signature phrases.
+
+## Email Sequence Skeletons
+
+### Cold Outreach (5-email)
+1. Hook email — problem statement + social proof hook (no pitch)
+2. Value email — one insight/tip relevant to their problem (no pitch)
+3. Case study email — BAB story of a similar client
+4. Offer email — clear pitch with CTA
+5. Breakup email — creates urgency via absence ("Last email...")
+
+### Nurture / Welcome (3-email)
+1. Welcome — deliver promised lead magnet + brand story
+2. Quick win — teach one thing they can apply today
+3. Invitation — offer next step (trial, call, product)
 
 ## Flow
+
 ```text
-[Brand Identity] -> [Messaging Alignment] -> [Value Proposition Communication]
+[Audience pain/desire] → [Formula selection] → [Hook draft]
+→ [Body with FAB/BAB] → [CTA specificity check] → [A/B variants]
+→ [Readability score >= 60] → [Brand voice match] → [Publish]
 ```
 
-## Comparativo
-| Element | Defined | Flexible |
-|---------|--------|---------|
-| Core Message | Strong | Adaptive based on audience |
-| Branding | Consistent | Evolves with the market |
+## Golden Rules
 
-## References
-- Related artifact: null
-- Source: https://example.com/marketing-nucleus-concepts
-
----
+- ALWAYS: identify funnel stage → select formula → write hook first
+- NEVER: start with the product. Start with the reader.
+- ENSURE: every CTA names the specific action AND the specific benefit

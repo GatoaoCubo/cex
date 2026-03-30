@@ -1,75 +1,94 @@
 ---
-
-```yaml
 id: p07_sr_marketing_nucleus
 kind: scoring_rubric
 pillar: P07
-title: "Rubric: Marketing Nucleus"
-version: "1.0.0"
-created: "2023-10-20"
-updated: "2023-10-20"
-author: "scoring-rubric-builder"
-framework: "Marketing Campaign Evaluation"
-target_kinds: [marketing_campaign]
+title: "Rubric: Marketing Copy Quality"
+version: 2.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: n02_marketing
+framework: Conversion Copy Evaluation
+target_kinds: [ad_copy, landing_page, email_sequence, social_post, campaign_brief]
 dimensions_count: 5
 total_weight: 100
 threshold_golden: 9.5
 threshold_publish: 8.0
 threshold_review: 7.0
-automation_status: "semi-automated"
-domain: "Marketing"
+automation_status: semi-automated
+domain: copywriting_and_campaigns
 quality: null
-tags: [scoring-rubric, marketing, evaluation]
-tldr: "5-dimension rubric for marketing: engagement 30%, conversion 25%, visibility 20%, ROI 15%, brand perception 10%"
-density_score: 0.85
-calibration_set: [p07_gt_mkt_campaign_successful, p07_gt_mkt_campaign_unsuccessful]
-inter_rater_agreement: 0.82
-appeals_process: "Submit appeal to marketing evaluation board with rationale."
+tags: [scoring_rubric, marketing, copy, N02, P07]
+tldr: 5-dimension copy rubric — hook strength 30%, conversion clarity 25%, readability 20%, brand fit 15%, A/B coverage 10%
+density_score: 0.88
+calibration_set: [golden_ad_copy_example_01, golden_lp_hero_example_01]
+inter_rater_agreement: 0.85
+appeals_process: Submit to N07 with competing score rationale and specific evidence.
 linked_artifacts:
-  primary: "marketing-strategy-builder"
-  related: [p11_qg_mkt_publish, p07_gt_mkt_campaign_successful]
+  primary: p11_qg_marketing_nucleus
+  related: [p02_agent_marketing_nucleus, p03_sp_marketing_nucleus]
 ---
 
+# Rubric: Marketing Copy Quality
+
 ## Purpose
-This rubric evaluates marketing campaigns to ensure they meet quality standards across key dimensions such as audience engagement, conversion rates, brand visibility, return on investment (ROI), and brand perception. It serves to provide a consistent and objective framework for assessing campaign effectiveness.
+
+Evaluate N02 copy output across 5 dimensions. Applies to any copy deliverable.
+Score each dimension 0–10. Apply weight. Final score = weighted sum.
 
 ## Dimensions
 
-| Dimension          | Weight | Scale | Criteria                                                                                 | Example (10)                                          | Example (5)                                          |
-|--------------------|--------|-------|------------------------------------------------------------------------------------------|-------------------------------------------------------|-----------------------------------------------------|
-| Engagement         | 30%    | 0-10  | Measured by audience interactions, comments, shares, and likes relative to the benchmark | Highly interactive, exceeds industry engagement norms | Moderate engagement with limited audience activity  |
-| Conversion         | 25%    | 0-10  | Conversion rate from leads to sales or desired action                                    | Exceptionally high conversion rate, minimal leakage   | Conversion rate below campaign goals                |
-| Visibility         | 20%    | 0-10  | Reach and impressions across all channels                                                | Extensive reach across multiple platforms             | Limited to few channels with minimal visibility     |
-| ROI                | 15%    | 0-10  | Return on investment from marketing spend                                                 | Exceeds ROI expectations with significant profit      | Break-even ROI, not achieving profitability         |
-| Brand Perception   | 10%    | 0-10  | Public and audience perception analysis                                                   | Strong positive sentiment, enhances brand valuation   | Neutral perception with no significant brand impact |
+| Dimension | Weight | Scale | Score 10 | Score 5 | Score 0 |
+|-----------|--------|-------|----------|---------|---------|
+| **Hook Strength** | 30% | 0–10 | First 10 words create irresistible curiosity, tension, or desire; reader cannot stop | Hook is present but predictable; mild interest only | No hook; copy starts with "We are..." or product name |
+| **Conversion Clarity** | 25% | 0–10 | Single CTA is specific, benefit-first, zero friction; reader knows exactly what happens next | CTA present but generic ("Learn more"); benefit implied not stated | No CTA, or multiple conflicting CTAs that dilute focus |
+| **Readability** | 20% | 0–10 | Flesch >= 65, avg sentence <= 15 words, zero passive voice, zero jargon without explanation | Flesch 50–64, occasional long sentences, 1–2 jargon terms | Flesch < 50, dense paragraphs, heavy jargon, no skimmability |
+| **Brand Voice Fit** | 15% | 0–10 | Copy is indistinguishable from brand's own voice; correct tone, vocabulary, persona | Copy is neutral/generic; not wrong but not distinctly brand | Copy clashes with brand tone; too formal, too casual, or off-persona |
+| **A/B Coverage** | 10% | 0–10 | >= 3 headline variants + >= 2 CTA variants; variants are meaningfully different (not just synonyms) | 2 variants present but barely differentiated | No variants; one version of everything |
+
+## Scoring Example
+
+```
+Hook Strength:      8.5 × 0.30 = 2.55
+Conversion Clarity: 9.0 × 0.25 = 2.25
+Readability:        8.0 × 0.20 = 1.60
+Brand Voice Fit:    7.5 × 0.15 = 1.13
+A/B Coverage:       9.0 × 0.10 = 0.90
+                              ------
+                    TOTAL =   8.43 → PUBLISH tier
+```
 
 ## Tier Thresholds
 
-| Tier    | Score | Action                            |
-|---------|-------|-----------------------------------|
-| GOLDEN  | >= 9.5 | Adopt as best practice example; highlight in reports |
-| PUBLISH | >= 8.0 | Approve for publication and broader distribution |
-| REVIEW  | >= 7.0 | Requires revisions; provide feedback on weak dimensions |
-| REJECT  | < 7.0 | Do not proceed; rework and resubmit with new strategy |
+| Tier | Score | Action |
+|------|-------|--------|
+| GOLDEN | >= 9.5 | Save as canonical example in `N02_marketing/output/examples/` |
+| PUBLISH | >= 8.0 | Deliver to client or deploy to campaign |
+| REVIEW | >= 7.0 | Return to N02 with specific dimension feedback and retry instructions |
+| REJECT | < 7.0 | Full redo — restart from audience research, change formula approach |
 
 ## Calibration
 
-- **GOLDEN**: Exemplary marketing campaigns with top performance in all dimensions.
-- **PUBLISH**: Solid campaigns with effective strategies achieving a majority of objectives.
-- **REVIEW**: Average campaigns missing key performance goals but showing potential for improvement.
-- **REJECT**: Campaigns failing to reach baseline metrics, necessitating complete overhaul.
+- **GOLDEN**: Hook creates genuine tension; CTA so specific it answers "what exactly do I get?"; reads at 7th-grade level; sounds exactly like the brand; 3+ meaningfully different A/B variants
+- **PUBLISH**: Strong hook; clear CTA with benefit; readable; brand voice mostly correct; 3 variants present
+- **REVIEW**: Hook is generic; CTA is adequate; readable but some jargon; neutral voice; variants are near-duplicates
+- **REJECT**: No hook; CTA is "click here"; hard to read; off-brand; single version with no variants
 
-## Automation
+## Automation Status
 
-| Dimension          | Status          | Tool               |
-|--------------------|-----------------|--------------------|
-| Engagement         | semi-automated  | engagement_metric_tool.py |
-| Conversion         | automated       | conversion_analysis_tool.py |
-| Visibility         | automated       | visibility_tracking_tool.py |
-| ROI                | automated       | roi_calculator_tool.py |
-| Brand Perception   | manual          | sentiment_analysis_tool.py |
+| Dimension | Automation | Tool |
+|-----------|-----------|------|
+| Hook Strength | Manual | Human reviewer or LLM self-critique |
+| Conversion Clarity | Semi-auto | CTA pattern checker in `quality_gate_marketing.md` |
+| Readability | Automated | `readability.py` (Flesch-Kincaid) |
+| Brand Voice Fit | Manual (if card exists) | `sentiment_check.py` for tone proxy |
+| A/B Coverage | Automated | Count variants in output file |
 
-## References
-- AAC&U VALUE Rubrics: https://www.aacu.org/initiatives/value-initiative
-- MarketingNucleusTools v3.0
-- SampleCampaignDataSet2023
+## Revision Instructions by Dimension
+
+| Dimension scores < 7 | Revision Action |
+|---------------------|----------------|
+| Hook Strength | Rewrite opening with question, bold stat, or "If you..." opener. Apply 4U formula. |
+| Conversion Clarity | Replace generic CTA. Template: "[Verb] my [specific benefit] [optional: in X minutes]" |
+| Readability | Break sentences at 15 words. Replace jargon. Use active voice. |
+| Brand Voice Fit | Re-read brand voice card. Replace 3 words that feel off-brand. |
+| A/B Coverage | Generate 2 more headline variants using different formulas (AIDA vs PAS). |

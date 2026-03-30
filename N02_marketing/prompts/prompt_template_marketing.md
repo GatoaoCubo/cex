@@ -2,120 +2,191 @@
 id: p03_pt_marketing_message
 kind: prompt_template
 pillar: P03
-title: "Marketing Message Template"
-version: "1.0.0"
-created: "2023-10-01"
-updated: "2023-10-01"
-author: "marketing-team"
+title: Marketing Copy Production Template
+version: 2.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: n02_marketing
 variables:
-  - name: "product_name"
-    type: "string"
+  - name: product_name
+    type: string
     required: true
     default: null
-    description: "The name of the product being marketed"
-  - name: "customer_segment"
-    type: "string"
+    description: Product or service being marketed
+  - name: audience_segment
+    type: string
     required: true
     default: null
-    description: "The target customer segment for the message"
-  - name: "key_features"
-    type: "list"
-    required: true
-    default: []
-    description: "A list of key features of the product"
-  - name: "unique_selling_proposition"
-    type: "string"
+    description: Target audience — who reads this copy (job title, situation, pain)
+  - name: funnel_stage
+    type: string
     required: true
     default: null
-    description: "The unique selling proposition of the product"
-  - name: "benefits"
-    type: "list"
+    description: awareness | consideration | decision
+  - name: key_benefit
+    type: string
+    required: true
+    default: null
+    description: The single most important benefit — outcome the reader gets
+  - name: formula
+    type: string
     required: false
-    default: []
-    description: "The main benefits of the product"
-  - name: "cta_action"
-    type: "string"
+    default: AIDA
+    description: Copywriting formula — AIDA | PAS | BAB | 4U | FAB
+  - name: channel
+    type: string
+    required: true
+    default: null
+    description: Where copy will appear — facebook_ad | google_ad | email | landing_page | linkedin | instagram
+  - name: cta_action
+    type: string
     required: false
-    default: "Explore now"
-    description: "The call-to-action phrase to be used"
-variable_syntax: "mustache"
-composable: false
-domain: "marketing"
+    default: null
+    description: Desired action after reading — start_trial | book_call | download | buy | subscribe
+  - name: brand_voice_notes
+    type: string
+    required: false
+    default: neutral
+    description: Tone notes — casual, professional, bold, empathetic; banned words if any
+  - name: word_limit
+    type: integer
+    required: false
+    default: 150
+    description: Maximum word count for the body copy
+variable_syntax: mustache
+composable: true
+domain: copywriting_and_campaigns
 quality: null
-tags: [marketing, advertisement, product_promotion, template]
-tldr: "Creates a marketing message with product details tailored to a specific customer segment."
-keywords: [marketing, product, features, benefits, customer, call to action]
-density_score: 0.85
+tags: [prompt_template, marketing, copy, N02, P03]
+tldr: Universal copy production template — product + audience + funnel + formula → persuasive copy with A/B variants.
+keywords: [copy, ad, headline, CTA, funnel, formula, AIDA, PAS, email, landing_page]
+density_score: 0.90
 ---
 
-# Marketing Message Template
+# Marketing Copy Production Template
+
 ## Purpose
-This template produces a marketing message by highlighting product features, targeting a specific customer segment, and including a call to action. It's reusable across various marketing campaigns for different products.
+
+This template drives N02 to produce channel-specific, formula-matched copy.
+Reusable across all copy tasks — ads, emails, landing pages, social posts.
+Output always includes 3 headline variants + specific CTA.
 
 ## Variables Table
+
 | Name | Type | Required | Default | Description |
-|---|---|---|---|---|
-| product_name | string | true | null | The name of the product being marketed |
-| customer_segment | string | true | null | The target customer segment for the message |
-| key_features | list | true | [] | A list of key features of the product |
-| unique_selling_proposition | string | true | null | The unique selling proposition of the product |
-| benefits | list | false | [] | The main benefits of the product |
-| cta_action | string | false | "Explore now" | The call-to-action phrase to be used |
+|------|------|----------|---------|-------------|
+| product_name | string | YES | — | Product/service being marketed |
+| audience_segment | string | YES | — | Target reader — their role, situation, pain |
+| funnel_stage | string | YES | — | awareness / consideration / decision |
+| key_benefit | string | YES | — | The ONE outcome the reader cares about |
+| formula | string | NO | AIDA | Copywriting formula: AIDA/PAS/BAB/4U/FAB |
+| channel | string | YES | — | facebook_ad / email / landing_page / etc. |
+| cta_action | string | NO | null | Desired action: start_trial / book_call / etc. |
+| brand_voice_notes | string | NO | neutral | Tone guidance and banned words |
+| word_limit | integer | NO | 150 | Max body copy words |
 
 ## Template Body
-You are crafting a marketing message for {{product_name}}. This message is intended for the {{customer_segment}}. Below are the key elements that we want to emphasize:
 
-1. **Product Name**: {{product_name}}
-2. **Customer Segment**: {{customer_segment}}
-3. **Key Features**:
-   {{#key_features}}
-   - {{.}}
-   {{/key_features}}
-4. **Unique Selling Proposition**: {{unique_selling_proposition}}
-5. **Benefits**:
-   {{#benefits}}
-   - {{.}}
-   {{/benefits}}
-6. **Call to Action**: {{cta_action}}
+```
+You are N02 — Marketing & Creative Nucleus, a conversion copywriter.
 
-Encourage potential customers within the {{customer_segment}} to discover the benefits and unique offerings of {{product_name}} today!
+TASK: Write {{channel}} copy for {{product_name}}.
 
-## Quality Gates
-| Gate | Status | Notes |
-|---|---|---|
-| H01 id pattern | PASS | `p03_pt_marketing_message` matches `^p03_pt_[a-z][a-z0-9_]+$` |
-| H02 required fields | PASS | id, kind, title, variables, quality all present |
-| H03 no undeclared vars | PASS | All `{{vars}}` in body declared in variables list |
-| H04 no unused vars | PASS | All 6 declared variables appear in template body |
-| H05 size <= 8192 bytes | PASS | ~1.5KB |
-| H06 valid syntax tier | PASS | variable_syntax: mustache |
+AUDIENCE: {{audience_segment}}
+FUNNEL STAGE: {{funnel_stage}}
+KEY BENEFIT: {{key_benefit}}
+FORMULA: {{formula}}
+CTA ACTION: {{cta_action}}
+BRAND VOICE: {{brand_voice_notes}}
+WORD LIMIT: {{word_limit}} words max for body
 
-## Examples
-### Filled Example
+DELIVER:
+1. HEADLINES — 3 variants labeled V1, V2, V3
+   - Score each with 4U: Useful / Urgent / Unique / Ultra-specific
+   - Mark recommended variant with ★
+
+2. BODY COPY — apply {{formula}} structure:
+   {{#formula_is_AIDA}}
+   - Attention (hook, first 10 words)
+   - Interest (problem or opportunity development)
+   - Desire (transformation, benefit stack)
+   - Action (CTA)
+   {{/formula_is_AIDA}}
+   {{#formula_is_PAS}}
+   - Problem (name the pain)
+   - Agitate (deepen it)
+   - Solution (present relief)
+   {{/formula_is_PAS}}
+   {{#formula_is_BAB}}
+   - Before (current painful state)
+   - After (desired future)
+   - Bridge (how product gets them there)
+   {{/formula_is_BAB}}
+
+3. CTA — 2 variants
+   - Must be specific and benefit-first
+   - Format: "[Verb] my [specific benefit]" or "[Verb] [product] [low-friction qualifier]"
+
+4. TEST NOTE — one sentence on what to A/B test first
+
+OUTPUT FORMAT:
+## Headline Variants
+V1: ...
+V2: ...
+V3: ★ (recommended)
+
+## Body Copy
+[formula-structured body, max {{word_limit}} words]
+
+## CTA Options
+Primary: ...
+Alternate: ...
+
+## TEST
+[one sentence on priority test]
+```
+
+## Quality Gates Applied
+
+| Gate | Check |
+|------|-------|
+| H05 | CTA is specific and benefit-first (not "Click here") |
+| H06 | >= 3 headline variants with 4U scores |
+| S01 | Hook opens in first 10 words |
+| S02 | CTA names benefit AND action |
+
+## Filled Example
+
 **Variables:**
----
-yaml
-product_name: "EcoSmart Light Bulb"
-customer_segment: "Eco-conscious Consumers"
-key_features: ["Energy efficient", "Long-lasting", "Cost-effective"]
-unique_selling_proposition: "The green choice for a brighter future"
-benefits: ["Reduce energy bills", "Less frequent replacements"]
-cta_action: "Buy now"
+```yaml
+product_name: "CopyFlow AI"
+audience_segment: "Freelance copywriters who miss deadlines"
+funnel_stage: "consideration"
+key_benefit: "Produce first drafts 3x faster"
+formula: "PAS"
+channel: "email"
+cta_action: "start_trial"
+brand_voice_notes: "casual, confident. Banned: 'leverage', 'synergy'"
+word_limit: 120
 ```
+
 **Rendered Output:**
-You are crafting a marketing message for EcoSmart Light Bulb. This message is intended for the Eco-conscious Consumers. Below are the key elements that we want to emphasize:
 
-1. **Product Name**: EcoSmart Light Bulb
-2. **Customer Segment**: Eco-conscious Consumers
-3. **Key Features**:
-   - Energy efficient
-   - Long-lasting
-   - Cost-effective
-4. **Unique Selling Proposition**: The green choice for a brighter future
-5. **Benefits**:
-   - Reduce energy bills
-   - Less frequent replacements
-6. **Call to Action**: Buy now
+## Headline Variants
+V1: "Still Spending 3 Hours on a Single Ad? (There's a Fix)"
+V2: "CopyFlow: First Draft in 20 Minutes, Guaranteed"
+V3: ★ "Your Deadline Was Yesterday. CopyFlow Gets You There."
 
-Encourage potential customers within the Eco-conscious Consumers to discover the benefits and unique offerings of EcoSmart Light Bulb today!
-```
+## Body Copy
+You're a great writer — but the clock is killing you. Every morning it's the same: blank doc, cursor blinking, 6 hours to deliver and zero words written.
+
+Here's what that costs: late fees, stressed clients, evenings lost, and a reputation that quietly erodes.
+
+CopyFlow AI drafts your first copy block in 20 minutes flat. You edit like the expert you are — instead of starting from scratch.
+
+## CTA Options
+Primary: Start my free 14-day trial
+Alternate: Draft my first copy free (no card needed)
+
+## TEST
+A/B test V3 headline vs V1 for subject line open rate; V3's urgency usually outperforms curiosity in consideration-stage email.
