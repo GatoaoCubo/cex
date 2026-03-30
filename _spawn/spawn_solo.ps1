@@ -1,12 +1,4 @@
-# CEX Spawn Solo v2.0 — Multi-CLI: claude + codex + gemini
-# Each nucleus uses the BEST CLI for its domain:
-#   N03 Builder    → claude opus  (complex construction)
-#   N05 Operations → codex        (code review, testing)
-#   N04 Knowledge  → gemini       (1M context, RAG)
-#   N01 Research   → gemini       (1M context, papers)
-#   N02 Marketing  → claude sonnet (creative writing)
-#   N06 Commercial → claude sonnet (persuasive copy)
-
+# CEX Spawn Solo v3.0 — clean launch, no nested quotes
 param(
     [Parameter(Mandatory=$true)]
     [ValidateSet('n01','n02','n03','n04','n05','n06')]
@@ -30,28 +22,24 @@ $grid = @{
     n05 = @{x=640;  y=520};  n06 = @{x=1280; y=520}
 }
 
-# CLI per nucleus (best tool for the job)
 $cliMap = @{
-    n01 = 'gemini';   n02 = 'claude'
-    n03 = 'claude';   n04 = 'gemini'
-    n05 = 'codex';    n06 = 'claude'
+    n01 = 'gemini'; n02 = 'claude'; n03 = 'claude'
+    n04 = 'gemini'; n05 = 'codex';  n06 = 'claude'
 }
 
 $root = Split-Path $PSScriptRoot -Parent
 $pos = $grid[$nucleus]
 $cli = $cliMap[$nucleus]
 $upper = $nucleus.ToUpper()
-$handoffDir = "$root\.cex\runtime\handoffs"
-$signalDir = "$root\.cex/runtime/signals"
-$pidFile = "$root\.cex\temp\spawn_pids.txt"
+$runtimeDir = "$root\.cex\runtime"
 
-New-Item -ItemType Directory -Force -Path $handoffDir,$signalDir,"$root\.cex\temp" | Out-Null
+New-Item -ItemType Directory -Force -Path "$runtimeDir\handoffs","$runtimeDir\signals","$runtimeDir\pids" | Out-Null
 
 # Write handoff if task provided
 if ($task) {
-    $handoffPath = "$handoffDir\${nucleus}_task.md"
+    $handoffPath = "$runtimeDir\handoffs\${nucleus}_task.md"
     @"
-# $upper Builder Task
+# $upper Task
 **Autonomia Total** | **Quality 9.0+**
 **REGRA: Commit e signal ANTES de qualquer pausa.**
 
@@ -71,46 +59,29 @@ python -c "from _tools.signal_writer import write_signal; write_signal('$nucleus
 # Boot script
 $bootScript = "$root\boot\$nucleus.cmd"
 if (-not (Test-Path $bootScript)) {
-    Write-Output "[$upper] ERROR: $bootScript not found"
-    exit 1
+    Write-Output "[$upper] ERROR: $bootScript not found"; exit 1
 }
 
-# Build launch args per CLI type
+# Build launch command — SIMPLE: boot script + task as single arg
 $shellFlag = if ($interactive) { "/k" } else { "/c" }
 
 if ($task) {
-    switch ($cli) {
-        'claude' {
-            if ($interactive) {
-                $bootArgs = "$shellFlag `"$bootScript`" `"$task`""
-            } else {
-                $bootArgs = "$shellFlag `"$bootScript`" -p `"$task`""
-            }
-        }
-        'codex' {
-            $bootArgs = "$shellFlag `"$bootScript`" `"$task`""
-        }
-        'gemini' {
-            if ($interactive) {
-                $bootArgs = "$shellFlag `"$bootScript`" `"$task`""
-            } else {
-                $bootArgs = "$shellFlag `"$bootScript`" -p `"$task`""
-            }
-        }
-    }
+    # Task goes as %1 to boot script — boot script passes it to CLI
+    $bootArgs = "$shellFlag `"$bootScript`" `"$task`""
 } else {
     $bootArgs = "/k `"$bootScript`""
 }
 
-# Spawn
+# Spawn CMD window
 $proc = Start-Process cmd -ArgumentList $bootArgs -WorkingDirectory $root -PassThru
 Start-Sleep -Seconds 3
 
-# Position window
+# Position window in grid
 if ($proc -and $pos) {
     [Win32]::MoveWindow($proc.MainWindowHandle, $pos.x, $pos.y, 640, 520, $true) | Out-Null
 }
 
-# Record PID + CLI type
+# Record PID
+$pidFile = "$runtimeDir\pids\spawn_pids.txt"
 "$($proc.Id) $nucleus $cli" | Add-Content $pidFile
 Write-Output "[$upper] Spawned PID:$($proc.Id) CLI:$cli at ($($pos.x),$($pos.y))"
