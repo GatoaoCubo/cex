@@ -545,6 +545,7 @@ density_score: {{0.80_to_1.00}}
 **Pillar**: P07
 **Verb**: cria (create)
 **Quality**: set quality: null (NEVER self-score)
+**OUTPUT FORMAT**: Start with --- then YAML frontmatter then --- then body in Markdown. No code fences.
 
 ---
 
@@ -555,4 +556,4 @@ Your previous output FAILED validation. Fix these issues:
 HARD GATE FAILURES:
 - H01: Frontmatter missing or invalid YAML
 - H02: id '' does not match pattern /^p07_ue_[a-z][a-z0-9_]+$/
-- H06: Body 25623 bytes > max 4096 bytes
+- H06: Body 25727 bytes > max 4096 bytes

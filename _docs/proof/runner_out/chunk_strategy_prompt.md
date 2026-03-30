@@ -573,6 +573,7 @@ keep_separator: "{{keep_separator}}}}"
 **Pillar**: P01
 **Verb**: cria (create)
 **Quality**: set quality: null (NEVER self-score)
+**OUTPUT FORMAT**: Start with --- then YAML frontmatter then --- then body in Markdown. No code fences.
 
 ---
 
@@ -584,4 +585,4 @@ HARD GATE FAILURES:
 - H01: Frontmatter missing or invalid YAML
 - H02: id '' does not match pattern /^p01_chunk_[a-z][a-z0-9_]+$/
 - H05: Missing required fields: id, name, method, chunk_size, chunk_overlap
-- H06: Body 25659 bytes > max 2048 bytes
+- H06: Body 25763 bytes > max 2048 bytes

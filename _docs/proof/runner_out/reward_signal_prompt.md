@@ -557,6 +557,7 @@ Baseline: {{baseline}} — {{what_happens_when_score_falls_below}}
 **Pillar**: P11
 **Verb**: cria (create)
 **Quality**: set quality: null (NEVER self-score)
+**OUTPUT FORMAT**: Start with --- then YAML frontmatter then --- then body in Markdown. No code fences.
 
 ---
 
@@ -568,4 +569,4 @@ HARD GATE FAILURES:
 - H01: Frontmatter missing or invalid YAML
 - H02: id '' does not match pattern /^p11_rs_[a-z][a-z0-9_]+$/
 - H05: Missing required fields: id, name, signal_type, scale, model
-- H06: Body 29482 bytes > max 2048 bytes
+- H06: Body 29586 bytes > max 2048 bytes

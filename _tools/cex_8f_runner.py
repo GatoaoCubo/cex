@@ -18,6 +18,7 @@ Usage:
 import sys
 
 import os
+
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 if hasattr(sys.stderr, "reconfigure"):
@@ -69,13 +70,7 @@ for _ep in [CEX_ROOT / ".env", CEX_ROOT.parent / "codexa-core" / ".env"]:
 
 BUILDER_DIR = CEX_ROOT / "archetypes" / "builders"
 
-# Pillar directory names keyed by code
-PILLAR_DIRS = {
-    f"P{i:02d}": d.name
-    for i, d in enumerate(sorted(CEX_ROOT.glob("P[0-9][0-9]_*")), start=0)
-    if d.is_dir()
-}
-# Rebuild with correct index from actual directory names
+# Pillar directory names keyed by code (e.g. "P01" -> "P01_knowledge")
 PILLAR_DIRS = {}
 for d in sorted(CEX_ROOT.glob("P[0-9][0-9]_*")):
     if d.is_dir():
@@ -124,7 +119,6 @@ class RunState:
     """Accumulated state across 8 functions."""
 
     intent: str = ""
-    context: str = ""
     context: str = ""
     kind: str = ""
     pillar: str = ""
@@ -198,18 +192,26 @@ def extract_frontmatter_dict(text: str) -> dict:
     if t.startswith(bt):
         nl = t.find(chr(10))
         if nl > 0:
-            t = t[nl + 1:]
+            t = t[nl + 1 :]
         close = t.find(bt)
         if close > 0:
             yaml_part = t[:close].strip()
-            body_part = t[close + 3:].strip()
+            body_part = t[close + 3 :].strip()
             t = "---" + chr(10) + yaml_part + chr(10) + "---" + chr(10) + body_part
     # Case 2: bare YAML (no --- delimiters, first line has "key:")
     if not t.startswith("---") and t and ":" in t.split(chr(10))[0]:
         lines = t.split(chr(10))
         for i, ln in enumerate(lines):
             if ln.startswith("#") or (i > 3 and ln.strip() == ""):
-                t = "---" + chr(10) + chr(10).join(lines[:i]) + chr(10) + "---" + chr(10) + chr(10).join(lines[i:])
+                t = (
+                    "---"
+                    + chr(10)
+                    + chr(10).join(lines[:i])
+                    + chr(10)
+                    + "---"
+                    + chr(10)
+                    + chr(10).join(lines[i:])
+                )
                 break
     # Case 3: standard --- delimiters
     if not t.startswith("---"):
@@ -710,7 +712,8 @@ class EightFRunner:
             f"**Verb**: {self.parsed.get('verb', 'cria')}"
             f" ({self.parsed.get('verb_action', 'create')})",
             "**Quality**: set quality: null (NEVER self-score)",
-            "**OUTPUT FORMAT**: Start with --- then YAML frontmatter then --- then body in Markdown. Do NOT use code fences.",
+            "**OUTPUT FORMAT**: Start with --- then YAML frontmatter"
+            " then --- then body in Markdown. No code fences.",
         ]
         sections.append("# TASK\n\n" + "\n".join(task_lines))
 
@@ -881,17 +884,25 @@ class EightFRunner:
             if art.startswith(bt):
                 nl = art.find(chr(10))
                 if nl > 0:
-                    art = art[nl + 1:]
+                    art = art[nl + 1 :]
                 close = art.find(bt)
                 if close > 0:
                     yaml_part = art[:close].strip()
-                    body_part = art[close + 3:].strip()
+                    body_part = art[close + 3 :].strip()
                     art = "---" + chr(10) + yaml_part + chr(10) + "---" + chr(10) + body_part
             if not art.startswith("---") and art and ":" in art.split(chr(10))[0]:
                 lines = art.split(chr(10))
                 for j, ln in enumerate(lines):
                     if ln.startswith("#") or (j > 3 and ln.strip() == ""):
-                        art = "---" + chr(10) + chr(10).join(lines[:j]) + chr(10) + "---" + chr(10) + chr(10).join(lines[j:])
+                        art = (
+                            "---"
+                            + chr(10)
+                            + chr(10).join(lines[:j])
+                            + chr(10)
+                            + "---"
+                            + chr(10)
+                            + chr(10).join(lines[j:])
+                        )
                         break
             self.state.artifact = art
             out_path.write_text(art, encoding="utf-8")
@@ -1090,14 +1101,18 @@ Examples:
     parser.add_argument(
         "--dry-run",
         action="store_true",
-        help="Preview prompt without calling LLM",
+        help="Preview prompt without calling LLM (default)",
     )
-    parser.add_argument("--execute", action="store_true", help="Call LLM to produce artifact (default)")
+    parser.add_argument("--execute", action="store_true", help="Call LLM to produce artifact")
     parser.add_argument("--list-kinds", action="store_true", help="Print all available kinds")
     parser.add_argument("--verbose", action="store_true", help="Show per-F details")
     parser.add_argument("--step", type=int, metavar="N", help="Stop after function N (1-8)")
     parser.add_argument("--output-dir", metavar="DIR", help="Save outputs to this directory")
-    parser.add_argument("--context", metavar="TEXT", help="Domain context to inject (e.g. PRIME excerpt, domain description)")
+    parser.add_argument(
+        "--context",
+        metavar="TEXT",
+        help="Domain context to inject (e.g. PRIME excerpt, domain description)",
+    )
 
     args = parser.parse_args()
 
@@ -1111,8 +1126,7 @@ Examples:
 
     intent = args.intent or f"create {args.kind}"
     context = args.context or ""
-    context = args.context or ""
-    dry_run = args.dry_run
+    dry_run = not args.execute
 
     # Multi-kind detection: if Motor classifies multiple kinds, run each
     parsed = parse_intent(intent)
