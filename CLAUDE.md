@@ -82,24 +82,24 @@ If you do NOT see this trace, the build did NOT follow 8F.
 
 ## STEP 5: ORCHESTRATION (N07 only)
 
-### Dispatch Commands
+### Dispatch Commands (from pi/bash — COPY THESE EXACTLY)
 
-```powershell
-# Solo (1 builder)
-powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_solo.ps1 -nucleus n03 -task "TASK" -interactive
+```bash
+# Solo — 1 builder in new window
+bash _spawn/dispatch.sh solo n03 "Leia _ops/handoffs/_active/HANDOFF.md e execute."
 
-# Grid (up to 6 builders parallel)
-powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_grid.ps1 -mission NAME -interactive
-
-# Grid continuous (auto-refill from queue)
-powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_grid.ps1 -mission NAME -mode continuous -interactive
+# Grid — up to 6 parallel builders
+bash _spawn/dispatch.sh grid MISSION_NAME
 
 # Monitor
-powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_monitor.ps1
+bash _spawn/dispatch.sh status
 
 # Stop all
-powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_stop.ps1
+bash _spawn/dispatch.sh stop
 ```
+
+> **NEVER** use `start cmd`, `cmd /c`, or raw `powershell -File` from pi.
+> **ALWAYS** use `bash _spawn/dispatch.sh` — it wraps PowerShell correctly.
 
 ### Handoff Format
 
