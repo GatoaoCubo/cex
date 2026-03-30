@@ -1,35 +1,28 @@
 @echo off
-REM CEX CLI - Unified Entry Point
-REM Usage: cex [task] | cex status | cex stop | cex grid [mission]
-REM Boot: N07 Orchestrator (pi + opus-4-6 xhigh)
+:: CEX Global Command — opens N07 Orchestrator
+:: Usage: cex [subcommand]
+::   cex          — boot N07 orchestrator (claude CLI, subscription)
+::   cex status   — check spawned nuclei
+::   cex stop     — kill all spawned nuclei
+::   cex grid M   — launch grid mission M
+::   cex solo N T — launch nucleus N with task T
+::   cex doctor   — run CEX health check
 
-set CEX_ROOT=%~dp0
+set CEX_ROOT=C:\Users\PC\Documents\GitHub\cex
 cd /d "%CEX_ROOT%"
 
-if "%~1"=="status" (
+if "%~1"=="" (
+    call boot\cex.cmd
+) else if "%~1"=="status" (
     powershell -NoProfile -ExecutionPolicy Bypass -File _spawn\spawn_monitor.ps1
-    goto :eof
-)
-
-if "%~1"=="stop" (
+) else if "%~1"=="stop" (
     powershell -NoProfile -ExecutionPolicy Bypass -File _spawn\spawn_stop.ps1
-    goto :eof
-)
-
-if "%~1"=="grid" (
+) else if "%~1"=="grid" (
     powershell -NoProfile -ExecutionPolicy Bypass -File _spawn\spawn_grid.ps1 -mission %2 -interactive
-    goto :eof
-)
-
-if "%~1"=="solo" (
-    powershell -NoProfile -ExecutionPolicy Bypass -File _spawn\spawn_solo.ps1 -nucleus %2 -task %3 -interactive
-    goto :eof
-)
-
-if "%~1"=="doctor" (
+) else if "%~1"=="solo" (
+    powershell -NoProfile -ExecutionPolicy Bypass -File _spawn\spawn_solo.ps1 -nucleus %2 -task "%~3" -interactive
+) else if "%~1"=="doctor" (
     python _tools\cex_doctor.py
-    goto :eof
+) else (
+    call boot\cex.cmd "%*"
 )
-
-REM Default: boot N07 Orchestrator
-call boot\cex.cmd %*

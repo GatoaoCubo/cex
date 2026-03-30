@@ -1,14 +1,7 @@
 @echo off
-:: CEX Boot - N07 Orchestrator (replaces STELLA)
-:: Runtime: pi | Model: claude-opus-4-6 | Thinking: xhigh
-:: This is the FACTORY ORCHESTRATOR. It dispatches N03 builders.
-
-:: Auto-elevate to Admin
-net session >nul 2>&1 || (
-    echo [CEX-N07] Elevating to Admin...
-    powershell -Command "Start-Process cmd -Verb RunAs -ArgumentList '/k \"%~f0\" %*'"
-    exit /b
-)
+:: CEX Boot - N07 Orchestrator
+:: Runtime: claude CLI (subscription) | Model: opus | Dispatch only
+:: The orchestrator. NEVER builds. Dispatches to N01-N06.
 
 title CEX-N07-ORCHESTRATOR
 set CLAUDECODE=
@@ -16,8 +9,12 @@ set CEX_NUCLEUS=N07
 set CEX_ROOT=C:\Users\PC\Documents\GitHub\cex
 cd /d "%CEX_ROOT%"
 
+set FLAGS=--dangerously-skip-permissions --permission-mode bypassPermissions --model claude-opus-4-0 --no-chrome
+
+set IDENTITY=Voce e o Orquestrador CEX (N07). NUNCA construa artefatos. SEMPRE dispatch via PowerShell: powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_solo.ps1 -nucleus [N0x] -task "[TASK]" -interactive. Leia CLAUDE.md e _docs/PLAYBOOK.md ANTES de despachar. Leia .claude/rules/n07-orchestrator.md para suas regras.
+
 if "%~1"=="" (
-    pi --model anthropic/claude-opus-4-6 --thinking xhigh "Voce e o Orquestrador CEX (N07). NUNCA execute tarefas de construcao. SEMPRE dispatch via spawn_solo.ps1 ou spawn_grid.ps1 para N03 builders. Leia CLAUDE.md primeiro."
+    claude %FLAGS% "%IDENTITY%"
 ) else (
-    pi --model anthropic/claude-opus-4-6 --thinking xhigh %*
+    claude %FLAGS% "%IDENTITY% TAREFA: %~1"
 )

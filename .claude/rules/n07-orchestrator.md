@@ -13,55 +13,50 @@ description: "N07 Orchestrator rules — dispatch only, never build"
 ## Core Principle
 N07 orchestrates. N07 NEVER builds artifacts directly.
 
-## HOW TO DISPATCH (from pi/bash)
+## HOW TO DISPATCH
 
-**You are running inside pi (bash). Use these EXACT commands:**
+**You run in Claude CLI. Use PowerShell to spawn new windows:**
 
 ```bash
-# Solo — 1 builder
-bash _spawn/dispatch.sh solo n03 "Leia .cex/runtime/handoffs/HANDOFF.md e execute."
+# Solo — 1 builder in new window
+powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_solo.ps1 -nucleus n03 -task "Leia .cex/runtime/handoffs/HANDOFF.md e execute." -interactive
 
 # Grid — up to 6 parallel builders
-bash _spawn/dispatch.sh grid MISSION_NAME
+powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_grid.ps1 -mission MISSION_NAME -interactive
 
 # Monitor
-bash _spawn/dispatch.sh status
+powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_monitor.ps1
 
 # Stop all
-bash _spawn/dispatch.sh stop
-```
-
-### NEVER DO THIS (will fail in bash):
-```
-start cmd /k ...          ← Windows CMD only, NOT bash
-cmd /c boot\n03.cmd       ← will not open new window
-python subprocess.Popen   ← invisible window
-```
-
-### ALWAYS DO THIS:
-```bash
-bash _spawn/dispatch.sh solo n03 "task"
+powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_stop.ps1
 ```
 
 ## Dispatch Workflow
 
 1. Write handoff to `.cex/runtime/handoffs/{MISSION}_{nucleus}_{seq}.md`
-2. Dispatch: `bash _spawn/dispatch.sh solo {nucleus} "Leia .cex/runtime/handoffs/{file} e execute."`
-3. Monitor: `bash _spawn/dispatch.sh status`
-4. On signal: handoff moves to `_instances/codexa/N07_admin/archive/`
+2. Dispatch: `powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_solo.ps1 -nucleus {nucleus} -task "Leia .cex/runtime/handoffs/{file} e execute." -interactive`
+3. Monitor: `powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_monitor.ps1`
+4. On completion: move report to `_instances/codexa/N07_admin/reports/`
 
 ## When N07 CAN Execute Directly
 - Read files (cat, head, grep)
-- Status (bash _spawn/dispatch.sh status, python _tools/cex_doctor.py, git status)
 - File ops (mkdir, cp, mv, rm)
 - Git (git add, commit, push, log)
+- Status (python _tools/cex_doctor.py, git status)
+- PowerShell spawn commands (above)
 
 ## Routing
-| Domain | Nucleus | CLI | Dispatch |
-|--------|---------|-----|----------|
-| Build/create | n03 | claude opus | `bash _spawn/dispatch.sh solo n03 "task"` |
-| Research | n01 | gemini | `bash _spawn/dispatch.sh solo n01 "task"` |
-| Marketing | n02 | claude sonnet | `bash _spawn/dispatch.sh solo n02 "task"` |
-| Knowledge | n04 | gemini | `bash _spawn/dispatch.sh solo n04 "task"` |
-| Code/test | n05 | codex | `bash _spawn/dispatch.sh solo n05 "task"` |
-| Commercial | n06 | claude sonnet | `bash _spawn/dispatch.sh solo n06 "task"` |
+| Domain | Nucleus | Model | Dispatch |
+|--------|---------|-------|----------|
+| Build/create | n03 | claude opus | spawn_solo.ps1 -nucleus n03 |
+| Research | n01 | gemini | spawn_solo.ps1 -nucleus n01 |
+| Marketing | n02 | claude sonnet | spawn_solo.ps1 -nucleus n02 |
+| Knowledge | n04 | gemini | spawn_solo.ps1 -nucleus n04 |
+| Code/test | n05 | codex | spawn_solo.ps1 -nucleus n05 |
+| Commercial | n06 | claude sonnet | spawn_solo.ps1 -nucleus n06 |
+
+## NEVER DO
+- Build artifacts directly (route to N03)
+- Use `start cmd` (not available in Claude CLI Bash tool)
+- Write code files (route to N05)
+- Create marketing content (route to N02)
