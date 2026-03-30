@@ -1,6 +1,6 @@
 # Variance Analysis: 4 Builders x 13 File Positions
 
-> Generated: 2026-03-26 | Author: EDISON | Quality: 9.0+
+> Generated: 2026-03-26 | Author: builder_agent | Quality: 9.0+
 > Source: model-card-builder, knowledge-card-builder, signal-builder, quality-gate-builder
 
 ---

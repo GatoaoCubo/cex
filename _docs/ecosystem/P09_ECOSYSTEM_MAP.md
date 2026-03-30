@@ -1,5 +1,5 @@
 # P09 Config — Ecosystem Map
-> Generated: 2026-03-28 | Author: EDISON
+> Generated: 2026-03-28 | Author: builder_agent
 
 ## 1. Frameworks Audited
 | Framework | Domain | Key Concepts |

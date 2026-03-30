@@ -60,15 +60,15 @@ ARCHIVE: quality<7 + age>30d. PROMOTE: used>10x + quality>9
 
 | Tier | Density | Exemplo |
 |------|---------|---------|
-| Elite | 90-95% | KC_PYTHA_069 (domain, YAML blocks, ASCII flow) |
-| High | 80-88% | KC_PYTHA_358 (spec table, code examples) |
-| Standard | 70-78% | KC_EDISON_029 (good structure, some prose) |
+| Elite | 90-95% | KC_knowledge_agent_069 (domain, YAML blocks, ASCII flow) |
+| High | 80-88% | KC_knowledge_agent_358 (spec table, code examples) |
+| Standard | 70-78% | KC_builder_agent_029 (good structure, some prose) |
 | Low | <65% | REJEITAR ou refazer |
 
 ## 11. INSIGHTS DA DESTILACAO
 - 98% golden tem YAML frontmatter
 - 82% golden tem 5+ bullets (bullets correlacionam com qualidade)
-- 99% faltam keywords (maior gap do codexa-core)
+- 99% faltam keywords (maior gap do organization-core)
 - Semantic Bridge em 60% dos golden templates (boost retrieval)
 - ISO count = maturidade de agent (10=baseline, 17=maduro, 22+=golden)
 - Skills com metricas reais tem confianca 2x vs sem dados
@@ -111,7 +111,7 @@ ARCHIVE: quality<7 + age>30d. PROMOTE: used>10x + quality>9
 | W4 | 12 golden primeiro (nao 638) | Qualidade > quantidade. 12 perfeitos ensinam mais que 638 mediocres |
 | W5 | Density >= 0.80 obrigatorio (nao 0.75) | Dados: todos os 18 examples ficaram acima de 0.85. 0.80 = floor real |
 | W5 | Elite = 0.90+ (nao 0.95+) | 0.95 = apenas 1 example. 0.90 = 6 examples = tier saudavel |
-| W6 | Bootstrap CLI antes de mass migration | CLI permite qualquer repo usar CEX; mass migration = apenas codexa-core |
+| W6 | Bootstrap CLI antes de mass migration | CLI permite qualquer repo usar CEX; mass migration = apenas organization-core |
 
 ## 15. PRINCIPIOS CONSOLIDADOS (6 Waves)
 

@@ -112,34 +112,34 @@ Sources + domains + coverage map per kind.
 
 ## PLANO DE EXECUCAO (5 waves, ~2h total)
 
-### Wave 1: Estrutura + Migrate (STELLA direto, ~15 min)
+### Wave 1: Estrutura + Migrate (orchestrator direto, ~15 min)
 - 1.1 Criar P01_knowledge/library/ com dirs sources/ e domain/
 - 1.2 Mover _docs/sources/*.md para library/sources/ (prefixo src_)
 - 1.3 Criar library/index.yaml seed com 3 sources
 - 1.4 Adicionar campo type (source/domain/kind) ao KC schema
 - 1.5 Commit: feat KC Library structure
 
-### Wave 2: Distill Sources para Domain KCs (3 EDISON, ~30 min)
+### Wave 2: Distill Sources para Domain KCs (3 builder_agent, ~30 min)
 - 2.1 Destilar FRAMEWORK_TAXONOMY para 5-8 KC-Domains
 - 2.2 Destilar PROVIDER_TAXONOMY para 5-6 KC-Domains
 - 2.3 Destilar STANDARDS_GLOBAL para 4-5 KC-Domains
 - 2.4 Cada KC-Domain inclui feeds_kinds
 - 2.5 Auto-update library/index.yaml
 
-### Wave 3: Wire 8F Motor (1 EDISON, ~20 min)
+### Wave 3: Wire 8F Motor (1 builder_agent, ~20 min)
 - 3.1 fan_out() consulta library/index.yaml
 - 3.2 KC lookup: dado kind, buscar KCs com feeds_kinds match
 - 3.3 Injetar KCs no plano INJECT como contexto
 - 3.4 Fallback pra bld_knowledge_card se library vazia
 - 3.5 Test: gerar chunk_strategy COM vs SEM library
 
-### Wave 4: Evolve Tools + Doctor (1 EDISON, ~15 min)
+### Wave 4: Evolve Tools + Doctor (1 builder_agent, ~15 min)
 - 4.1 Criar cex_research.py
 - 4.2 Evoluir distill.py (--source, --feeds, auto-index)
 - 4.3 Evoluir cex_doctor.py (KC coverage check)
 - 4.4 Test: ciclo completo dry-run
 
-### Wave 5: Proof -- Full Cycle (1 EDISON, ~20 min)
+### Wave 5: Proof -- Full Cycle (1 builder_agent, ~20 min)
 - 5.1 Escolher 1 kind sem KC coverage (ex: reward_signal)
 - 5.2 cex_research.py: pesquisar RLHF/DPO/reward modeling
 - 5.3 distill.py: destilar em KC-Domain com feeds_kinds
@@ -166,7 +166,7 @@ Sources + domains + coverage map per kind.
 1. bld_knowledge_card nos builders NAO muda. KC-Domain na library eh complementar.
 2. Os 73 KC examples existentes SAO KC-Domains. Falta feeds_kinds + organizar.
 3. KC-Source = input rastreavel. KC-Domain = asset permanente.
-4. Ciclo mapeia pros nuclei CODEXA: 01(pesquisa) > KC > 03(constroi) > 04(indexa).
+4. Ciclo mapeia pros nuclei organization: 01(pesquisa) > KC > 03(constroi) > 04(indexa).
 5. FT futuro: KCs > 500 = treinar modelo especialista CEX (JSONL from frontmatter+body).
 
 ## DEPENDENCIAS: PyYAML (ja instalado). Zero deps novas.

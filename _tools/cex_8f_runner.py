@@ -55,7 +55,7 @@ from cex_8f_motor import (
 from cex_intent import execute_prompt
 
 # Load .env for API keys
-for _ep in [CEX_ROOT / ".env", CEX_ROOT.parent / "codexa-core" / ".env"]:
+for _ep in [CEX_ROOT / ".env", CEX_ROOT.parent / "organization-core" / ".env"]:
     if _ep.exists():
         for _line in _ep.read_text().splitlines():
             if "=" in _line and not _line.startswith("#"):

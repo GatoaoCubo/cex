@@ -6,7 +6,7 @@
   "version": "1.0.0",
   "created": "2026-03-28",
   "updated": "2026-03-28",
-  "author": "EDISON",
+  "author": "builder_agent",
   "target_kind": "all",
   "format": "yaml",
   "fields_count": 8,
@@ -31,7 +31,7 @@
       "validator-builder"
     ]
   },
-  "schema_overview": "Validates the common YAML frontmatter fields present in every CODEXA artifact. Ensures structural integrity before kind-specific validation runs. Applied as first validation pass in the publish pipeline.",
+  "schema_overview": "Validates the common YAML frontmatter fields present in every organization artifact. Ensures structural integrity before kind-specific validation runs. Applied as first validation pass in the publish pipeline.",
   "fields": "| Field | Type | Required | Constraints | Error message |\n|-------|------|----------|-------------|---------------|\n| id | string | yes | matches `^p\\d{2}[a-z][a-z0-9]+$` | id failed: must match pillar prefix pattern |\n| kind | string | yes | must exist in pillar's _schema.yaml kinds list | kind failed: unrecognized kind for pillar |\n| pillar | string | yes | matches `^P\\d{2}$` | pillar failed: must be P01-P12 format |\n| version | string | yes | semver format `^\\d+\\.\\d+\\.\\d+$` | version failed: must be valid semver |\n| quality | null | yes | must be literal null (not 0, not \"\", not \"null\") | quality failed: must be null for new artifacts |\n| tags | list | yes | non-empty, each tag is lowercase kebab or snake | tags failed: must be non-empty list of lowercase strings |\n| tldr | string | yes | 10-160 characters, no line breaks | tldr failed: must be 10-160 chars single line |\n| author | string | yes | non-empty string | author failed: must be non-empty |",
   "failure_handling": [
     "on_failure: reject — frontmatter errors are structural and cannot be auto-fixed safely",

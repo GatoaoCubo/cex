@@ -158,6 +158,6 @@ Phase B: DEEP (Level 3)
 ## _instances/ Directory
 
 Filled instances live in `_instances/{project_name}/`.
-Example: `_instances/codexa/` contains CODEXA's 7-nucleus implementation
-with specific agent names (SHAKA, LILY, EDISON, etc.) and personality
+Example: `_instances/organization/` contains organization's 7-nucleus implementation
+with specific agent names (research_agent, marketing_agent, builder_agent, etc.) and personality
 drives (7 deadly sins). This is ONE possible filling of the CEX mold.

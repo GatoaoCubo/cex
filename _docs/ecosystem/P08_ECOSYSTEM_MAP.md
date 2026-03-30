@@ -1,5 +1,5 @@
 # P08 Architecture — Ecosystem Map
-> Generated: 2026-03-28 | Author: EDISON
+> Generated: 2026-03-28 | Author: builder_agent
 
 ## 1. Frameworks Audited
 | Framework | Domain | Key Concepts |
@@ -39,7 +39,7 @@
 | Kind | Justification | Frameworks | Priority |
 |------|---------------|------------|:-------:|
 | decision_record | Architecture Decision Records are universal in mature engineering orgs. Records WHY a decision was made with context, options considered, and consequences. Distinct from `law` (prescriptive, inviolable) and `pattern` (reusable solution). A decision_record is descriptive — it explains a one-time choice. | Martin Fowler (ADR), AWS (decision log), Google (design docs), Microsoft (design decisions) | high |
-| inference_pattern | How models are served (real-time, batch, streaming, edge, hybrid). Distinct from `pattern` (general architecture) because inference patterns carry specific latency/throughput/cost constraints and deployment configs. Critical for multi-model systems like CODEXA. | AWS (inference endpoints), Google (Vertex AI serving), NVIDIA (Triton serving modes), LLM patterns (CoT streaming vs batch) | med |
+| inference_pattern | How models are served (real-time, batch, streaming, edge, hybrid). Distinct from `pattern` (general architecture) because inference patterns carry specific latency/throughput/cost constraints and deployment configs. Critical for multi-model systems like organization. | AWS (inference endpoints), Google (Vertex AI serving), NVIDIA (Triton serving modes), LLM patterns (CoT streaming vs batch) | med |
 
 ## 5. Proposed REMOVALS/RENAMES
 | Kind | Action | Reason |

@@ -62,7 +62,7 @@ linked_artifacts:
 
 ## Derivation
 
-- Source: `{{PATH_TO_ORIGINAL_IN_CODEXA_CORE}}`
+- Source: `{{PATH_TO_ORIGINAL_IN_organization_CORE}}`
 - Original score: {{ORIGINAL_QUALITY_SCORE}}
 - Migrated: {{ISO_DATE}}
 - Adapted: {{WHAT_CHANGED_DURING_MIGRATION_OR_none}}

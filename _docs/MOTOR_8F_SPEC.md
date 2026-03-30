@@ -1,5 +1,5 @@
 # MOTOR 8F — Spec Completa
-**Status**: SPEC | **Version**: 1.0.0 | **Author**: PYTHA | **Created**: 2026-03-28
+**Status**: SPEC | **Version**: 1.0.0 | **Author**: knowledge_agent | **Created**: 2026-03-28
 **Quality**: 9.2 | **Source**: LLM_PIPELINE.md + TAXONOMY_LAYERS.yaml + 71 builders
 
 ---
@@ -578,4 +578,4 @@ Formula: `estimated_tokens = sum(active_builders * complexity_tokens) * 1.2 (ove
 
 ---
 
-*MOTOR_8F_SPEC.md — PYTHA Wave 6A | CEX v1.0.0 | 2026-03-28*
+*MOTOR_8F_SPEC.md — knowledge_agent Wave 6A | CEX v1.0.0 | 2026-03-28*

@@ -99,4 +99,4 @@ Pergunte ao usuario:
 - Density >= 0.8
 - Quality >= 7.0
 - Builder constroi, humano revisa
-- CEX = diamante (produto). codexa-core = workshop (infra)
+- CEX = diamante (produto). organization-core = workshop (infra)

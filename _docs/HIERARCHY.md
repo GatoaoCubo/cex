@@ -70,8 +70,8 @@ This is an OPTIONAL personality layer. Users fill it or leave generic.
 | N06 | Commercial & Monetization | {{DRIVE}} | "{{LENS_QUESTION}}" |
 | N07 | Administration & Orchestration | {{DRIVE}} | "{{LENS_QUESTION}}" |
 
-> **CODEXA example**: Uses 7 deadly sins (ENVY, LUST, PRIDE, GLUTTONY, WRATH, GREED, SLOTH).
-> See `_instances/codexa/` for a complete filled instance.
+> **organization example**: Uses 7 deadly sins (ENVY, LUST, PRIDE, GLUTTONY, WRATH, GREED, SLOTH).
+> See `_instances/organization/` for a complete filled instance.
 
 ## Build Order (Engineering builds everything)
 

@@ -31,7 +31,7 @@ SPECIALIST (Google Drive)              SYSTEM (CEX Instance)
 ## Drive Structure (Per Person, Not Per Domain)
 
 ```
-CODEXA Conhecimento/
+organization Conhecimento/
   joao_copywriter/             ← Joao drops ANYTHING here
     _processados/              ← System returns approved results
     _rejeitados/               ← System returns rejected with feedback
@@ -63,7 +63,7 @@ CODEXA Conhecimento/
 ## Artefato gerado
 - **ID**: KC_COPY_FRAMEWORKS_001
 - **Tipo**: Knowledge Card (P01)
-- **Dominio**: Marketing (LILY)
+- **Dominio**: Marketing (marketing_agent)
 - **Qualidade**: 8.5/10
 
 ## Feedback
@@ -76,7 +76,7 @@ util. Para proxima contribuicao, considere:
 Nenhuma acao necessaria. Artefato ja integrado ao sistema.
 
 ---
-*Processado em 2026-03-23 por PYTHA | Pipeline CEX v2.0*
+*Processado em 2026-03-23 por knowledge_agent | Pipeline CEX v2.0*
 ```
 
 ## Rejection File Format
@@ -103,7 +103,7 @@ Nao foi possivel extrair artefatos com qualidade >= 7.0.
 - Sera reprocessado automaticamente
 
 ---
-*Feedback gerado em 2026-03-23 por PYTHA | Pipeline CEX v2.0*
+*Feedback gerado em 2026-03-23 por knowledge_agent | Pipeline CEX v2.0*
 ```
 
 ## Triage Rules
@@ -112,12 +112,12 @@ System auto-classifies based on content analysis, NOT folder location:
 
 | Content Detected | Satellite | Pool Destination |
 |-----------------|-----------|-----------------|
-| Copy, titulos, persuasao | LILY | pool/knowledge/ or pool/marketing/ |
-| Dados, planilhas, metricas | YORK | pool/data/ |
-| Concorrentes, mercado, trends | SHAKA | pool/research/ |
-| Codigo, API, arquitetura | EDISON | pool/specs/ |
-| Frameworks, metodologias | PYTHA | pool/knowledge/ |
-| Fotos, visual, design | LILY | pool/marketing/ |
+| Copy, titulos, persuasao | marketing_agent | pool/knowledge/ or pool/marketing/ |
+| Dados, planilhas, metricas | commercial_agent | pool/data/ |
+| Concorrentes, mercado, trends | research_agent | pool/research/ |
+| Codigo, API, arquitetura | builder_agent | pool/specs/ |
+| Frameworks, metodologias | knowledge_agent | pool/knowledge/ |
+| Fotos, visual, design | marketing_agent | pool/marketing/ |
 
 Specialist does NOT need to choose. Just drop and forget.
 

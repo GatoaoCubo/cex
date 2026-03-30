@@ -240,20 +240,20 @@ Runner IMPORTA: motor (parse, classify, fan_out, kc_library), intent (execute_pr
 
 ## 10. WAVES DE IMPLEMENTACAO
 
-### Wave 1: Core Skeleton (1 EDISON, ~45 min)
+### Wave 1: Core Skeleton (1 builder_agent, ~45 min)
 - RunState dataclass
 - EightFRunner: f1, f2, f3, f6, f8 (lookup + produce + save)
 - Helpers: load_iso, strip_frontmatter, extract_frontmatter_dict
 - CLI: argparse (--dry-run, --execute, --kind, --list-kinds, --verbose, --step, --output-dir)
 - Test: dry-run chunk_strategy shows correct F6 prompt with all sections
 
-### Wave 2: Intelligence (1 EDISON, ~30 min)
+### Wave 2: Intelligence (1 builder_agent, ~30 min)
 - f4_reason() with LLM planning call (haiku)
 - f7_govern() with 6 hard gates (yaml, id_pattern, kind, quality, required, size)
 - Retry loop: F7 fail -> F6 retry with feedback (max 2)
 - Test: execute generates valid artifact; F7 rejects bad frontmatter
 
-### Wave 3: Polish + Proof (1 EDISON, ~30 min)
+### Wave 3: Polish + Proof (1 builder_agent, ~30 min)
 - f5_call() with duplicate detection
 - --verbose timing per function, --step N flag
 - Multi-kind sequential execution

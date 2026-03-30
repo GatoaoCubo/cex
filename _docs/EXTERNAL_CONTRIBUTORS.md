@@ -14,9 +14,9 @@ They DO have: Google Drive, domain expertise, files in common formats.
 EXTERNAL (Google Drive)          INTERNAL (CEX Instance)
 ────────────────────            ─────────────────────────
 
-📁 CODEXA Conhecimento/         records/inbox/
+📁 organization Conhecimento/         records/inbox/
   📁 marketing/                   raw/       ← synced from Drive
-    frameworks.docx                queue/     ← triaged by PYTHA
+    frameworks.docx                queue/     ← triaged by knowledge_agent
     exemplos_copy.pdf              processed/ ← audit log
     screenshot_campanha.png
   📁 pesquisa/                  records/pool/
@@ -29,22 +29,22 @@ EXTERNAL (Google Drive)          INTERNAL (CEX Instance)
     notas_reuniao.txt
 
         ↓ MCP sync                 ↓ Pipeline
-    Drive API pull              PYTHA triage → Satellite distill → Pool
+    Drive API pull              knowledge_agent triage → Satellite distill → Pool
 ```
 
 ## Google Drive Structure
 
 ```
-CODEXA Conhecimento/           ← Root shared folder
-  marketing/                   ← LILY domain
+organization Conhecimento/           ← Root shared folder
+  marketing/                   ← marketing_agent domain
     _processados/              ← System moves originals here after processing
-  pesquisa/                    ← SHAKA domain
+  pesquisa/                    ← research_agent domain
     _processados/
-  ecommerce/                   ← YORK domain
+  ecommerce/                   ← commercial_agent domain
     _processados/
-  operacoes/                   ← ATLAS domain
+  operacoes/                   ← operations_agent domain
     _processados/
-  conhecimento/                ← PYTHA domain (general knowledge)
+  conhecimento/                ← knowledge_agent domain (general knowledge)
     _processados/
   _templates/                  ← Optional: formatted templates for experts
     template_framework.docx
@@ -73,14 +73,14 @@ mcpServers:
     args: [-y, mcp-google-drive]
     env:
       GOOGLE_CREDENTIALS_PATH: "${GOOGLE_CREDENTIALS}"
-      DRIVE_FOLDER_ID: "${CODEXA_DRIVE_FOLDER_ID}"
+      DRIVE_FOLDER_ID: "${organization_DRIVE_FOLDER_ID}"
 ```
 
-Or manual: `rclone sync gdrive:CODEXA_Conhecimento/ records/inbox/raw/`
+Or manual: `rclone sync gdrive:organization_Conhecimento/ records/inbox/raw/`
 
-### Step 2: Triage (PYTHA)
+### Step 2: Triage (knowledge_agent)
 
-PYTHA reads each file and classifies:
+knowledge_agent reads each file and classifies:
 
 ```yaml
 triage:
@@ -88,14 +88,14 @@ triage:
   detected_domain: marketing
   detected_type: knowledge_card
   target_lp: P01
-  target_satellite: LILY
+  target_satellite: marketing_agent
   target_pool: pool/knowledge/
-  suggested_id: "KC_LILY_COPY_FRAMEWORKS"
+  suggested_id: "KC_marketing_agent_COPY_FRAMEWORKS"
   confidence: 0.85
   processing_tool: markitdown  # DOCX → MD conversion
 ```
 
-### Step 3: Convert (LILY markitdown for docs, SHAKA firecrawl for URLs)
+### Step 3: Convert (marketing_agent markitdown for docs, research_agent firecrawl for URLs)
 
 ```
 .docx/.pptx/.pdf → markitdown → clean markdown
@@ -117,9 +117,9 @@ Satellite applies CEX template + quality standards:
 ### Step 5: Route to Pool
 
 ```
-pool/knowledge/KC_LILY_COPY_FRAMEWORKS.md     ← quality 8.5 ✅
-pool/data/DATA_YORK_ACOS_Q1.yaml              ← quality 7.2 ✅
-pool/research/RESEARCH_SHAKA_COMPETITOR.md     ← quality 9.0 ✅ Golden
+pool/knowledge/KC_marketing_agent_COPY_FRAMEWORKS.md     ← quality 8.5 ✅
+pool/data/DATA_commercial_agent_ACOS_Q1.yaml              ← quality 7.2 ✅
+pool/research/RESEARCH_research_agent_COMPETITOR.md     ← quality 9.0 ✅ Golden
 ```
 
 ### Step 6: Feedback to Contributor

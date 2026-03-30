@@ -50,7 +50,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/).
 
 ### Removed
 - Legacy naming patterns (mixed case, hyphens, non-standard prefixes)
-- CODEXA-specific jargon universalized across all files
+- organization-specific jargon universalized across all files
 
 ---
 
@@ -101,7 +101,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/).
 
 ### Added
 - CEX scaffold: 12 pillars (P01-P12) with CORE + QUALITY + SCALE layers
-- 42KB distillation from 9,910 MD files + 783 golden in codexa-core
+- 42KB distillation from 9,910 MD files + 783 golden in organization-core
 - Pattern extraction: density tiers, naming conventions, frontmatter structure
 - First golden example: `p01_kc_catalogo_proprio_mercado_livre` (density 0.92)
 - Bootstrap CLI (`_tools/bootstrap.sh`): creates full LP structure in new repos

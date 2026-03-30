@@ -40,7 +40,7 @@ kind: agent_package
 title: "Human-Readable Agent Name"
 description: "One-line description of what this agent does"
 domain: "marketing"           # primary domain
-satellite: "LILY"             # CODEXA satellite (if applicable)
+satellite: "marketing_agent"             # organization satellite (if applicable)
 quality: 8.5                  # CEX quality score
 
 capabilities:
@@ -154,8 +154,8 @@ Before publishing an ISO Package:
 
 ## Existing Inventory
 
-CODEXA currently has **118 agents** in ISO format with **~1148 files** across the pool.
-The ISO format has been battle-tested across all 7 satellites (STELLA, SHAKA, LILY, EDISON, PYTHA, ATLAS, YORK).
+organization currently has **118 agents** in ISO format with **~1148 files** across the pool.
+The ISO format has been battle-tested across all 7 satellites (orchestrator, research_agent, marketing_agent, builder_agent, knowledge_agent, operations_agent, commercial_agent).
 
 ### Legacy Naming Convention
 
@@ -164,7 +164,7 @@ Existing agents use the naming pattern:
 ISO_{SATELLITE}_{NNN}_{TYPE}.md
 ```
 
-Example: `ISO_LILY_015_MANIFEST.md`, `ISO_EDISON_032_SYSTEM_INSTRUCTION.md`
+Example: `ISO_marketing_agent_015_MANIFEST.md`, `ISO_builder_agent_032_SYSTEM_INSTRUCTION.md`
 
 The canonical ISO Package spec uses simplified names (`manifest.yaml`, `system_instruction.md`)
 for portability. The compile/decompile tools handle conversion between formats.

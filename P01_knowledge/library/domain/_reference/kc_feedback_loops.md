@@ -36,7 +36,7 @@ density_score: 0.86
 ```yaml
 topic: Feedback Loops (bugloops, lifecycle rules)
 scope: Detect-diagnose-fix cycles, automated regression, lifecycle hooks, self-healing
-source: manual (CODEXA bugloop, Claude Code hooks, test-guardian patterns)
+source: manual (organization bugloop, Claude Code hooks, test-guardian patterns)
 criticality: high
 ```
 
@@ -95,7 +95,7 @@ criticality: high
 - Missing regression validation after fix (fix one bug, introduce another)
 - Learning records without the failing context (can't reproduce to verify)
 
-## CODEXA Integration
+## organization Integration
 
 | Component | Role | Kind |
 |-----------|------|------|
@@ -108,4 +108,4 @@ criticality: high
 ## References
 
 - related: p01_kc_eval_testing, p01_kc_reward_and_alignment
-- patterns: CODEXA bugloop, Claude Code hooks, self-healing code, test guardian
+- patterns: organization bugloop, Claude Code hooks, self-healing code, test guardian

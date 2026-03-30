@@ -126,7 +126,7 @@ timeline: 2017-2024
 
 | Scenario | Relevance |
 |----------|-----------|
-| Output quality scoring | CODEXA quality gates (>= 7.0) parallel reward model scoring |
+| Output quality scoring | organization quality gates (>= 7.0) parallel reward model scoring |
 | Self-critique loops | Constitutional AI pattern maps to agent Reflexion |
 | Preference-based routing | DPO-style preference data can train agent routing models |
 | Safety guardrails | All three methods inform when/how to refuse or redirect |

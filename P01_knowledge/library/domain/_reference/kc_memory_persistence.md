@@ -87,9 +87,9 @@ criticality: high
 | Mem0 | learning_record, entity_memory | Cross-session memory with user/agent scoping |
 | LangChain | session_state, memory_summary | BaseChatMessageHistory + ConversationSummaryMemory |
 | CrewAI | learning_record, entity_memory | Short-term, long-term, and entity memory layers |
-| CODEXA | learning_record | memory_bridge.py syncs to MEMORY.md with score filtering |
+| organization | learning_record | memory_bridge.py syncs to MEMORY.md with score filtering |
 
 ## References
 
 - related: p01_kc_langchain_patterns, p01_kc_crewai_patterns
-- patterns: Zep memory server, Mem0 platform, LangChain memory, CODEXA memory bridge
+- patterns: Zep memory server, Mem0 platform, LangChain memory, organization memory bridge

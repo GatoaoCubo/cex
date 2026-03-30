@@ -14,8 +14,8 @@ tldr: "Regras para YAML LLM-native: flat over nested, claims com source, zero pr
 
 when_to_use: "Antes de criar qualquer artefato CEX YAML-first — este KC eh o guia de estilo"
 keywords: [yaml_design, llm_consumption, structured_knowledge, artifact_format, schema_first]
-source: "757 KCs codexa-core + 120 exemplos CEX + 7 mental_models"
-code_provenance: "codexa-core + cex repo — 2964 commits empiricos"
+source: "757 KCs organization-core + 120 exemplos CEX + 7 mental_models"
+code_provenance: "organization-core + cex repo — 2964 commits empiricos"
 confidence: 0.95
 linked_kcs: [kc_mcp_tool_infrastructure]
 

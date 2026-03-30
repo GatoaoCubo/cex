@@ -192,7 +192,7 @@ timeline: 2017-2024
 
 | Scenario | Relevance |
 |----------|-----------|
-| Output quality scoring | CODEXA quality gates (>= 7.0) parallel reward model scoring |
+| Output quality scoring | organization quality gates (>= 7.0) parallel reward model scoring |
 | Self-critique loops | Constitutional AI pattern maps to agent Reflexion |
 | Preference-based routing | DPO-style preference data can train agent routing models |
 | Safety guardrails | All three methods inform when/how to refuse or redirect |
@@ -318,7 +318,7 @@ pillar: P11
 version: "1.0.0"
 created: "2026-03-29"
 updated: "2026-03-29"
-author: "EDISON"
+author: "builder_agent"
 name: "Support Response Helpfulness"
 signal_type: scalar
 scale: "0-1"

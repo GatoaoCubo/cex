@@ -39,7 +39,7 @@ density_score: 0.85
 ```yaml
 topic: Request Routing & Failure Resilience Patterns
 scope: Intent routers, fallback chains, dispatch rules, priority queues
-source: cross-domain (agent frameworks, distributed systems, CODEXA dispatch)
+source: cross-domain (agent frameworks, distributed systems, organization dispatch)
 criticality: high
 ```
 
@@ -57,7 +57,7 @@ criticality: high
 | Circuit Breaker | Failure | fallback_chain | Stop calling failing service after N consecutive errors |
 | Priority Queue | Dispatch | dispatch_rule | Ordered task execution by urgency/importance |
 | Cost-Aware Router | Dispatch | dispatch_rule | Route to cheapest model that meets quality threshold |
-| Satellite Assignment | Dispatch | dispatch_rule | Map task domain to satellite (SHAKA=research, EDISON=build) |
+| Satellite Assignment | Dispatch | dispatch_rule | Map task domain to satellite (research_agent=research, builder_agent=build) |
 | Rate Limiter | Dispatch | dispatch_rule | Token/request budget enforcement per time window |
 | Load Balancer | Dispatch | dispatch_rule | Distribute requests across equivalent handlers |
 | Dependency Resolver | Dispatch | dispatch_rule | Topological sort of tasks before dispatch |
@@ -93,5 +93,5 @@ criticality: high
 
 ## References
 
-- source: Circuit Breaker (Nygard), Semantic Router (aurelio-labs), CODEXA STELLA dispatch
+- source: Circuit Breaker (Nygard), Semantic Router (aurelio-labs), organization orchestrator dispatch
 - related: p01_kc_agent_identity, p01_kc_external_integrations

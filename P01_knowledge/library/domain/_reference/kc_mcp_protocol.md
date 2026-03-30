@@ -55,7 +55,7 @@ density_score: 0.91
 ```yaml
 topic: Model Context Protocol (modelcontextprotocol.io)
 scope: Architecture, primitives, methods, transport
-owner: EDISON
+owner: builder_agent
 criticality: high
 ```
 

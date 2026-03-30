@@ -65,7 +65,7 @@ kinds:
     - Jinja2
     source_map:
       already_is:
-      - TPL_EDISON_009-020 (10)
+      - TPL_builder_agent_009-020 (10)
       - ISO_*_OUTPUT_TEMPLATE (118)
       receives_input_from:
       - P06 type_def

@@ -54,7 +54,7 @@ density_score: 0.9
 ```yaml
 topic: OpenAI API (platform.openai.com)
 scope: Function calling, structured outputs, Assistants API, Evals
-owner: EDISON
+owner: builder_agent
 criticality: high
 ```
 

@@ -40,7 +40,7 @@ density_score: 0.86
 ```yaml
 topic: Prompt Lifecycle Management
 scope: Instruction authoring, prompt versioning, context assembly, glossary management
-source: cross-domain (Anthropic docs, prompt engineering guides, CODEXA HOPs)
+source: cross-domain (Anthropic docs, prompt engineering guides, organization HOPs)
 criticality: high
 ```
 
@@ -97,5 +97,5 @@ criticality: high
 
 ## References
 
-- source: Anthropic prompt engineering guide, CODEXA records/pool/recipes/HOP_*
+- source: Anthropic prompt engineering guide, organization records/pool/recipes/HOP_*
 - related: p01_kc_agent_identity, p01_kc_langchain_patterns

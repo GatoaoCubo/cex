@@ -42,7 +42,7 @@ density_score: 0.88
 ```yaml
 topic: Agent Identity & Configuration Patterns
 scope: Lenses, mental models, model cards, boot configs, ISO packages, axioms
-source: CODEXA framework (records/agents/, records/satellites/)
+source: organization framework (records/agents/, records/satellites/)
 criticality: high
 ```
 
@@ -99,5 +99,5 @@ criticality: high
 
 ## References
 
-- source: CODEXA records/agents/ structure, records/satellites/ PRIMEs
+- source: organization records/agents/ structure, records/satellites/ PRIMEs
 - related: p01_kc_routing_resilience, p01_kc_prompt_engineering

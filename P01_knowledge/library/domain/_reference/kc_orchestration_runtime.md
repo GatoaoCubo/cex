@@ -38,7 +38,7 @@ density_score: 0.89
 ```yaml
 topic: Orchestration Runtime (DAGs, spawns, schedules, RAG sources)
 scope: Workflow execution, process spawning, task scheduling, knowledge source management
-source: manual (Airflow, Prefect, CODEXA spawn system, RAG pipelines)
+source: manual (Airflow, Prefect, organization spawn system, RAG pipelines)
 criticality: high
 ```
 
@@ -70,7 +70,7 @@ criticality: high
 ## Spawn Config Structure
 
 ```yaml
-satellite: EDISON
+satellite: builder_agent
 model: opus
 mcp_profile: .mcp-edison.json
 flags: [--dangerously-skip-permissions, --no-chrome, -p]
@@ -126,7 +126,7 @@ topics: [langchain, llamaindex]
 - Missing failure modes in DAG nodes (one failure cascades to entire workflow)
 - Spawning > 3 concurrent satellites (BSOD risk on Windows — enforce max_concurrent)
 
-## CODEXA Integration
+## organization Integration
 
 | Component | Role | Kind |
 |-----------|------|------|
@@ -135,10 +135,10 @@ topics: [langchain, llamaindex]
 | spawn_monitor.ps1 | DAG progress tracking | dag |
 | signal_writer.py | Node completion signals | dag |
 | Firecrawl integration | RAG source scraping | rag_source |
-| STELLA dispatch | DAG composition from user request | dag + spawn_config |
+| orchestrator dispatch | DAG composition from user request | dag + spawn_config |
 | continuous_batching | Auto-refill slots from queue | dag + schedule |
 
 ## References
 
 - related: p01_kc_infra_config, p01_kc_a2a_protocol, p01_kc_routing_resilience
-- patterns: Airflow, Prefect, CODEXA spawn system, Firecrawl, STELLA dispatch
+- patterns: Airflow, Prefect, organization spawn system, Firecrawl, orchestrator dispatch

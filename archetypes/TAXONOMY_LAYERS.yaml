@@ -1,6 +1,6 @@
 # TAXONOMY_LAYERS.yaml
 # CEX Artifact Taxonomy — 5 Layers + Core 24 + Extensions + Overlap Boundaries
-# Generated: 2026-03-23 | Author: PYTHA | Quality: 9.5
+# Generated: 2026-03-23 | Author: knowledge_agent | Quality: 9.5
 # Source: COVERAGE_68_TYPES.md + all 12 _schema.yaml files
 
 layers:
@@ -111,7 +111,7 @@ core_24:
   governance: [scoring_rubric, quality_gate, guardrail, lifecycle_rule, golden_test]
 
 extensions:
-  description: "45 tipos — CODEXA-specific ou avancados (validos, opcionais)"
+  description: "45 tipos — organization-specific ou avancados (validos, opcionais)"
   derivado:
     reason: "Derivado de tipo core — especializacao ou split de responsabilidade"
     kinds: [output_schema_P05, type_def, router, fallback_chain, parser, formatter, naming_rule]
@@ -119,7 +119,7 @@ extensions:
     reason: "Especializacao de eval ou ciclo — util mas nao universal"
     kinds: [unit_eval, smoke_eval, e2e_eval, benchmark, bugloop, prompt_template]
   interno:
-    reason: "CODEXA-specific — util neste sistema, nao universal"
+    reason: "organization-specific — util neste sistema, nao universal"
     kinds:
       - agent_package
       - agent_card

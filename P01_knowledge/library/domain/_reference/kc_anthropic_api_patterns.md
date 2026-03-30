@@ -54,7 +54,7 @@ density_score: 0.92
 ```yaml
 topic: Anthropic Claude API (docs.anthropic.com)
 scope: Tool use, computer use, prompt caching, server tools
-owner: EDISON
+owner: builder_agent
 criticality: high
 ```
 

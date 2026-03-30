@@ -1,12 +1,12 @@
 {
-  "id": "p04_mcp_codexa_brain",
+  "id": "p04_mcp_organization_brain",
   "name": [
-    "Name: codexa-brain",
-    "Role: Central knowledge retrieval for all CODEXA satellites"
+    "Name: organization-brain",
+    "Role: Central knowledge retrieval for all organization satellites"
   ],
   "description": "Hybrid RAG retrieval server — BM25 keyword + FAISS vector search with Ollama embeddings",
   "transport": [
-    "Transport: stdio (via `python -m codexa_brain.server`)",
+    "Transport: stdio (via `python -m organization_brain.server`)",
     "Auth: none (local only)",
     "Timeout: 30s per query"
   ],
@@ -29,8 +29,8 @@
     "search"
   ],
   "integration_notes": [
-    "Start: `python -m codexa_brain.server` (cwd: src/)",
-    "Required env: `CODEXA_ROOT`, `PYTHONPATH`",
+    "Start: `python -m organization_brain.server` (cwd: src/)",
+    "Required env: `organization_ROOT`, `PYTHONPATH`",
     "Fallback: Ollama down = BM25 keyword-only (~50% accuracy vs ~88% hybrid)",
     "Index rebuild: `python build_indexes_ollama.py --scope all` (~20 min)",
     "Model: nomic-embed-text (768d), chunk 2048, overlap 128"

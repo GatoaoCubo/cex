@@ -17,7 +17,7 @@ pool/{category}/  → Final destination (CEX-compliant artifacts)
 
 ## Triage Classification
 
-The triage agent (PYTHA recommended) reads each raw file and determines:
+The triage agent (knowledge_agent recommended) reads each raw file and determines:
 
 ```yaml
 classification:
@@ -57,14 +57,14 @@ sources:
 ## Batch Processing
 
 ```bash
-# Process entire inbox (STELLA dispatches satellites)
+# Process entire inbox (orchestrator dispatches satellites)
 "processa inbox"
 
 # Process specific file
 "processa inbox/raw/competitor_analysis.pdf"
 
 # Process with specific satellite
-"SHAKA processa inbox/raw/arxiv_paper.pdf"
+"research_agent processa inbox/raw/arxiv_paper.pdf"
 ```
 
 ## Lifecycle

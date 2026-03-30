@@ -55,7 +55,7 @@ density_score: 0.87
 ```yaml
 topic: AWS Bedrock (docs.aws.amazon.com)
 scope: Agents, knowledge bases, guardrails, orchestration
-owner: EDISON
+owner: builder_agent
 criticality: medium
 ```
 

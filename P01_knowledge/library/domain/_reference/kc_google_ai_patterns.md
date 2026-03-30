@@ -53,7 +53,7 @@ density_score: 0.88
 ```yaml
 topic: Google Gemini API (ai.google.dev)
 scope: Function calling, grounding, tool configuration
-owner: EDISON
+owner: builder_agent
 criticality: medium
 ```
 
