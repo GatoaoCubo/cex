@@ -1,0 +1,94 @@
+id: n04_cs_knowledge
+kind: chunk_strategy
+pillar: P01_knowledge
+version: 2.0.0
+created: '2024-03-30'
+updated: '2024-03-30'
+author: N04 Knowledge Nucleus
+name: N04 Semantic Markdown Chunking
+method: semantic_markdown_recursive
+chunk_size: 1000
+chunk_overlap: 150
+separators:
+- '
+
+  # '
+- '
+
+  ## '
+- '
+
+  ### '
+- '
+
+  '
+- ' '
+- ' '
+- ''
+quality: null
+tags:
+- chunk_strategy
+- n04
+- knowledge
+- rag
+- chunking
+- p01
+tldr: Defines the primary chunking strategy for N04, using a semantic, Markdown-aware recursive splitter to preserve context.
+density_score: 0.96
+1_overview: This document defines the primary strategy used by the N04 Knowledge Nucleus for chunking text documents, particularly
+  Markdown files. The goal of any chunking strategy is to maximize retrieval relevance by creating chunks that are atomic,
+  self-contained, and semantically complete. This strategy is designed to be a significant improvement over simple fixed-size
+  or character-based splitting.
+2_method_semantic_markdown_recursive: This method is a hierarchical, recursive splitting algorithm that is explicitly aware
+  of Markdown syntax. It attempts to split the text along the most significant semantic boundaries first, only moving to less
+  significant boundaries if the resulting chunk is still larger than the target `chunk_size`.
+2_1_separator_hierarchy: 'The core of the strategy is the prioritized list of separators. The splitter will attempt to divide
+  the text using the first separator in the list. If any resulting chunk is too large, that chunk is then processed using
+  the next separator in the list, and so on.
+
+
+  Separator Priority List:
+
+  1.  `'
+h1_header_highest_semantic_boundary:
+- '`'
+h2_header:
+- '`'
+h3_header: '4.  `
+
+
+  ` (Paragraph break) - The most common separator for prose.
+
+  5.  `
+
+  ` (Line break)
+
+  6.  ` ` (Space)
+
+  7.  `` (Empty string / character-level split) - Fallback for dense text.'
+2_2_parameters: '| Parameter | Value | Rationale |
+
+  | :--- | :--- | :--- |
+
+  | `chunk_size` | `1000` | This is a target, not a hard limit. It represents a good balance for modern embedding models,
+  providing enough context without introducing excessive noise. Measured in characters. |
+
+  | `chunk_overlap`| `150` | Provides essential context continuity between related chunks, especially when a split occurs
+  in the middle of a logical section. Measured in characters. |
+
+  | `separators` | (See list above) | Prioritized to respect the semantic structure of well-formatted Markdown, ensuring that
+  headers and paragraphs are treated as logical units. |'
+3_alternative_fallback_strategies: ''
+3_1_agentic_chunking_future_state:
+- 'Description: An advanced method where an LLM is used to analyze a document and determine the optimal chunk boundaries based
+  on its understanding of the content.'
+- 'Pros: Highest possible quality, truly semantic.'
+- 'Cons: High cost (token usage) and latency. Reserved for "golden" or highly critical source documents.'
+3_2_fixed_size_chunking:
+- 'Description: The most basic method. The text is split into chunks of exactly `chunk_size` with a given overlap.'
+- 'When to Use: Only as a last resort for documents with no discernible structure (e.g., a plain text dump with no line breaks).'
+- 'Pros: Simple, fast, predictable.'
+- 'Cons: Extremely low semantic integrity. Often splits sentences or ideas, leading to poor retrieval performance.'
+4_integration: This chunking strategy is a foundational component of the Document Ingestion & Indexing workflow. The output
+  of this strategy (a list of text chunks) is the direct input to the Generate Embeddings step. The quality of the chunks
+  produced here has the single largest impact on the success of the entire RAG pipeline.

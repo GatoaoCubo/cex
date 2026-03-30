@@ -1,66 +1,73 @@
 ---
-id: p07_sr_knowledge_nucleus
+id: n04_sr_knowledge
 kind: scoring_rubric
-pillar: P07
-title: "Rubric: Knowledge Nucleus"
-version: "1.0.0"
-created: "2023-10-15"
-updated: "2023-10-15"
-author: "scoring-rubric-builder"
-framework: "Knowledge Nucleus"
-target_kinds: [knowledge_artifact]
+pillar: P07_evals
+title: "Rubric: N04 Knowledge Artifact Integrity"
+version: "2.0.0"
+created: "2024-03-30"
+updated: "2024-03-30"
+author: "N04 Knowledge Nucleus"
+framework: "N04 Knowledge Quality Gate"
+target_kinds": ["knowledge_card", "chunk_strategy", "embedding_config", "rag_source", "retriever_config"]
 dimensions_count: 4
 total_weight: 100
 threshold_golden: 9.5
-threshold_publish: 8.0
-threshold_review: 7.0
-automation_status: "semi-automated"
-domain: "knowledge"
+threshold_publish: 9.0
+threshold_review: 7.5
+automation_status: "llm_assisted"
+domain: "RAG, Knowledge Graphs, Semantic Search, Taxonomy"
 quality: null
-tags: [scoring-rubric, knowledge-nucleus, evaluation]
-tldr: "Scoring rubric for knowledge artifacts focusing on accuracy, clarity, depth, and relevance"
-density_score: 0.85
-calibration_set: [p07_gt_kn_example_1, p07_gt_kn_example_2]
-inter_rater_agreement: 0.90
-appeals_process: "Submit re-evaluation request to the review committee with detailed justification"
+tags: [scoring-rubric, n04, knowledge, quality, evals, p07]
+tldr: "The scoring rubric used to evaluate the soft gates (Atomicity, Connectivity, Discoverability, Clarity) for N04 artifacts."
+density_score: 0.95
+calibration_set": ["n04_kc_knowledge_management"]
+inter_rater_agreement: 0.92
+appeals_process: "Submit re-evaluation request to N01_intelligence with justification."
 linked_artifacts:
-  primary: "knowledge-artifact-evaluator"
-  related: [p11_qg_kn_publish, p07_gt_kn_example]
+  primary: "n04_qg_knowledge"
 ---
 
-## Framework Overview
-The Knowledge Nucleus rubric evaluates the quality of knowledge-based artifacts with a focus on accuracy, clarity, depth, and relevance. It provides a structured framework to assess the quality and ensure consistency across evaluations.
+## 1. Framework Overview
+This rubric provides a structured evaluation framework for the four "soft gates" defined in the **N04 Knowledge Artifact Quality Gate**. It is designed to be used by an LLM-based evaluator (`n04_quality_scorer` tool) or a human expert to generate a consistent `artifact_integrity_score`. Each dimension is scored from 0 to 10, which is then used to calculate the penalty for the quality gate.
 
-## Dimensions
-| Dimension | Weight | Scale | Criteria | Example (10) | Example (5) |
-|-----------|--------|-------|----------|-------------|-------------|
-| Accuracy | 30% | 0-10 | Verifiable facts and data with no errors | All facts verified, zero errors | Several minor inaccuracies |
-| Clarity | 25% | 0-10 | Easily understandable with clear language | Exceptionally clear, no ambiguities | Some sentences unclear |
-| Depth | 25% | 0-10 | Comprehensive coverage with insightful analysis | Thorough analysis, multiple perspectives | Basic coverage, limited analysis |
-| Relevance | 20% | 0-10 | Pertinent to the current knowledge domain | Strongly aligned with current trends | Partially aligned, somewhat outdated |
+## 2. Scoring Dimensions
 
-## Thresholds
-| Tier | Score | Action |
-|------|-------|--------|
-| GOLDEN | >= 9.5 | Promote as exemplary, used in training |
-| PUBLISH | >= 8.0 | Approved for publishing |
-| REVIEW | >= 7.0 | Revisions required for clarity and depth |
-| REJECT | < 7.0 | Major revision or re-creation needed |
+### Dimension 1: Atomicity
+- **Weight**: 40%
+- **Description**: Evaluates if the artifact represents a single, cohesive, and self-contained concept. This is the most critical factor for high-quality retrieval.
 
-## Calibration
-- **GOLDEN (9.8)**: Example with universally correct data, clear articulation, comprehensive analysis, and high relevance.
-- **PUBLISH (8.4)**: Solid artifact with minor clarity issues, mostly current concepts, and backed by reliable data.
-- **REVIEW (7.3)**: Needs improvement in depth and clarity; some facts require verification.
-- **REJECT (6.5)**: Inadequate coverage with several errors in data and lack of relevance.
+| Score | Criteria | Example |
+| :--- | :--- | :--- |
+| **10 (Excellent)** | The artifact is perfectly atomic. It covers one concept thoroughly without including irrelevant or tangential information. | A Knowledge Card about "Cosine Similarity" that only explains that concept and its formula. |
+| **5 (Fair)** | The artifact primarily focuses on one concept but includes 1-2 related but distinct ideas, slightly reducing its clarity. | The "Cosine Similarity" KC also attempts to briefly explain Euclidean distance. |
+| **1 (Poor)** | The artifact is a "grab bag" of multiple, unrelated concepts, making it impossible to retrieve for a specific query. | A single artifact explaining similarity, chunking, and RAG pipelines all at once. |
 
-## Automation
-| Dimension | Status | Tool |
-|-----------|--------|------|
-| Accuracy | semi-automated | fact_check_tool.py |
-| Clarity | manual | Human review for language |
-| Depth | semi-automated | depth_analyzer_tool.py |
-| Relevance | manual | Subject matter expert assessment |
+### Dimension 2: Connectivity
+- **Weight**: 30%
+- **Description**: Evaluates how well the artifact is integrated into the CEX knowledge graph through explicit links.
 
-## References
-- AAC&U VALUE Rubrics: https://www.aacu.org/value-rubrics
-- validate_kn_tool.py v1.0 (Knowledge Nucleus implementation reference)
+| Score | Criteria | Example |
+| :--- | :--- | :--- |
+| **10 (Excellent)** | All relevant upstream and downstream concepts are linked in the `linked_artifacts` section. The graph linkage is logical and complete. | A "RAG" KC links to "Embeddings", "Chunking", "Retrievers", and the parent "AI Architectures" KC. |
+| **5 (Fair)** | The artifact links to some, but not all, obvious concepts. The graph is partially connected. | The "RAG" KC only links to "Embeddings", missing the other critical components. |
+| **1 (Poor)** | The artifact is an island. The `linked_artifacts` section is empty or contains irrelevant links. | The "RAG" KC has no links. |
+
+### Dimension 3: Discoverability
+- **Weight**: 20%
+- **Description**: Evaluates the quality and comprehensiveness of the metadata used for search (`keywords`, `long_tails`, `tldr`).
+
+| Score | Criteria | Example |
+| :--- | :--- | :--- |
+| **10 (Excellent)** | Keywords are specific and exhaustive. Long-tail queries capture common user questions. TLDR is a perfect, dense summary. | Keywords: `[rag, retrieval, augmented, generation]`. Long-tails: `["how does retrieval augmented generation work"]`. |
+| **5 (Fair)** | Metadata is present but generic. Keywords are too broad, and long-tails are not representative of likely queries. | Keywords: `[ai, llm]`. Long-tails: `["rag info"]`. |
+| **1 (Poor)** | Metadata is missing, irrelevant, or just a copy-paste of the title. The artifact is practically invisible to search. | Keywords are empty. |
+
+### Dimension 4: Clarity
+- **Weight**: 10%
+- **Description**: Evaluates the linguistic and structural quality of the content. Is it easy for another agent (or human) to understand?
+
+| Score | Criteria | Example |
+| :--- | :--- | :--- |
+| **10 (Excellent)** | The language is precise and unambiguous. The structure is logical and easy to parse. Markdown is used effectively. | Content is written in clear, declarative sentences with well-defined sections. |
+| **5 (Fair)** | The content is generally understandable but contains some jargon, awkward phrasing, or inconsistent structure. | Sentences are long and convoluted; sections are poorly defined. |
+| **1 (Poor)** | The content is confusing, contradictory, or contains significant grammatical errors, making it unreliable. | The artifact is a "wall of text" with no clear structure or formatting. |

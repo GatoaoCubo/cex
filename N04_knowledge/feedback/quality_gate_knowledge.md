@@ -1,55 +1,59 @@
 ---
-id: p11_qg_knowledge_nucleus
+id: n04_qg_knowledge
 kind: quality_gate
-pillar: P11
-title: "Gate: Knowledge Nucleus"
-version: "1.0.0"
-created: "2023-10-08"
-updated: "2023-10-08"
-author: "quality-gate-builder"
-domain: "knowledge_card"
+pillar: P11_feedback
+version: "2.0.0"
+created: "2024-03-30"
+updated: "2024-03-30"
+author: "N04 Knowledge Nucleus"
+domain: "Knowledge Artifacts (KCs, Strategies, etc.)"
 quality: null
-tags: [quality-gate, knowledge, pre-publish]
-tldr: "Pre-publish quality gate for Knowledge Nucleus ensuring completeness, correctness, and relevance."
-density_score: 0.85
-
+tags: [quality-gate, n04, knowledge, feedback, p11]
+tldr: "A set of automated checks to ensure all N04 artifacts meet structural, semantic, and connectivity requirements before integration."
+density_score: 0.94
 ---
 
-## Definition
+# Gate: N04 Knowledge Artifact Quality
+
+## 1. Definition
+This quality gate is applied to all artifacts within the `N04_knowledge` fractal before they can be considered "complete". It ensures every piece of knowledge architecture is sound, discoverable, and integrated.
+
 | Property | Value |
-|----------|-------|
-| Metric | aggregate_score |
-| Threshold | 0.8 |
-| Operator | >= |
-| Scope | All knowledge_card artifacts before publication |
+| :--- | :--- |
+| Metric | `artifact_integrity_score` |
+| Threshold | `0.90` |
+| Operator | `>=` |
+| Scope | All artifacts in `N04_knowledge/` on commit. |
 
-## Hard Gates
-| Gate ID | Description | Threshold | Block |
-|---------|-------------|-----------|-------|
-| H01     | YAML parses without error | N/A | true |
-| H02     | ID follows the pattern p11_qg_ | N/A | true |
-| H03     | ID matches filename stem | N/A | true |
-| H04     | 'kind' is defined as 'knowledge_card' | N/A | true |
-| H05     | 'quality' field is null | N/A | true |
-| H06     | Required fields present in frontmatter | N/A | true |
+## 2. Hard Gates (Automated & Blocking)
+These gates are non-negotiable. A failure in any hard gate will block the artifact's integration and fail the process. They are executed by the `cex_compile.py` script.
 
-## Soft Gates
-| Gate ID | Description | Max Penalty | Weight |
-|---------|-------------|-------------|--------|
-| S01     | Completeness: All necessary information and sections are included | 0.2 | 30% |
-| S02     | Correctness: Information is accurate and verified | 0.2 | 40% |
-| S03     | Relevance: Content is pertinent to topic and audience | 0.1 | 30% |
+| Gate ID | Description | Failure Condition |
+| :--- | :--- | :--- |
+| **H01** | **Valid Schema** | Artifact frontmatter does not parse correctly against its `kind`. |
+| **H02** | **ID Integrity** | `id` does not match the file's pillar and name. |
+| **H03** | **Author Ownership** | `author` is not `N04 Knowledge Nucleus`. |
+| **H04** | **Null Quality** | `quality` field is not `null` (N04 does not self-score). |
+| **H05** | **TLDR Exists** | `tldr` field is empty or missing. |
+| **H06** | **Tags Exist** | `tags` array is empty or missing. |
+| **H07** | **KC Axioms** | If `kind: knowledge_card`, the `axioms` list is empty. |
+| **H08** | **KC Links** | If `kind: knowledge_card`, the `linked_artifacts` section is missing. |
 
-## Scoring Formula
-final_score = (S01 * 0.30) + (S02 * 0.40) + (S03 * 0.30)
+## 3. Soft Gates (Scored & Weighted)
+These gates measure the quality and "good citizenship" of an artifact. The final score is a weighted average of these metrics.
 
-## Bypass Policy
-- Who can override: Admin
-- Condition: When artifact is critical for an immediate operational requirement
-- Audit Requirement: Override must be logged with timestamp, actor, and justification
+| Gate ID | Description | Max Penalty | Weight | Rationale |
+| :--- | :--- | :--- | :--- | :--- |
+| **S01** | **Atomicity** | `0.3` | 40% | Is the artifact focused on a single, well-defined concept? (Crucial for retrieval). |
+| **S02** | **Connectivity** | `0.2` | 30% | Does the artifact link to related concepts, creating a connected graph? |
+| **S03** | **Discoverability**| `0.2` | 20% | Are `keywords` and `long_tails` specific and comprehensive? |
+| **S04** | **Clarity** | `0.1` | 10% | Is the content unambiguous and easy for another agent to parse? |
 
-## Audit Trail
-- What is logged per evaluation: Gate ID, pass/fail status, rationale for any soft penalties
-- Retention Policy: Logs will be stored for one year for audit and review purposes
+## 4. Scoring Formula
+`artifact_integrity_score = 1.0 - (S01_penalty * 0.40) - (S02_penalty * 0.30) - (S03_penalty * 0.20) - (S04_penalty * 0.10)`
 
-The quality gate for the Knowledge Nucleus ensures that the knowledge_cards are thoroughly vetted for completeness, correctness, and relevance before being approved for publication. Hard gates provide non-negotiable structural checks, while soft gates offer a nuanced scoring system weighted according to the artifact's attributes. The inclusion of a robust bypass policy ensures flexibility in critical cases, guarded by stringent audit requirements to maintain process integrity.
+- **Evaluation**: The scoring logic is implemented in a future `n04_quality_scorer` tool, which uses an LLM to assess the artifact against the soft gate criteria.
+
+## 5. Bypass & Audit Policy
+- **Bypass**: No bypass is permitted for Hard Gates. Soft Gate scores below the threshold can be overridden by the N01 or N05 Nuclei with a logged justification.
+- **Audit**: Every gate evaluation (pass or fail) for every artifact is logged. The log includes the timestamp, artifact ID, gate ID, status, and any penalty applied. Logs are retained for 365 days.

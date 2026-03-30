@@ -1,0 +1,70 @@
+id: n04_rc_knowledge
+kind: retriever_config
+pillar: P01_knowledge
+version: 2.0.0
+created: '2024-03-30'
+updated: '2024-03-30'
+author: N04 Knowledge Nucleus
+name: N04 Default Vector Retriever
+store_type: vector_db
+search_type: similarity
+top_k: 5
+score_threshold: 0.75
+quality: null
+tags:
+- retriever
+- config
+- n04
+- knowledge
+- rag
+- p01
+tldr: Defines the default vector similarity search retriever for N04, configured with a top_k of 5 and a score threshold of
+  0.75.
+density_score: 0.94
+1_overview: This document specifies the configuration for the primary information retriever used by the N04 Knowledge Nucleus.
+  The retriever is the component responsible for fetching relevant context from the vector database to augment LLM prompts
+  in the RAG pipeline. Its performance is paramount for generating accurate, context-aware responses.
+2_primary_strategy_vector_similarity_search: 'The default retrieval strategy is a straightforward vector similarity search.
+
+
+  - `search_type`: `similarity`
+
+  - Description: This method takes the vector embedding of a user''s query and searches the `vector_db` for the vectors (and
+  their associated text chunks) that are most similar, based on the `distance_metric` defined in the `embedding_config` (typically
+  Cosine Similarity).'
+parameters: '| Parameter | Value | Rationale |
+
+  | :--- | :--- | :--- |
+
+  | `store_type` | `vector_db` | Specifies that the retriever will query the dedicated Vector DB MCP. |
+
+  | `search_type` | `similarity` | The standard and most effective method for general queries. |
+
+  | `top_k` | `5` | Retrieves the top 5 most similar chunks. This provides a good balance between sufficient context and minimizing
+  noise or exceeding the LLM''s context window. |
+
+  | `score_threshold` | `0.75`| Chunks with a similarity score below this threshold will be discarded. This prevents low-relevance
+  documents from being passed to the LLM. |'
+3_advanced_future_strategies: While similarity search is the default, N04's architecture anticipates more sophisticated retrieval
+  methods for specific use cases. These will be implemented as alternative configurations for the `semantic_search` tool.
+3_1_parent_document_retriever:
+- 'Description: Retrieves small, precise chunks for similarity matching but provides the LLM with the larger "parent" chunk
+  (e.g., the whole section or document) from which the small chunk was derived.'
+- 'Use Case: When the answer is likely to span multiple, related paragraphs. It balances precision in search with completeness
+  in context.'
+3_2_self_querying_retriever:
+- 'Description: Uses an LLM to parse a user''s natural language query into a structured query that includes both semantic
+  (vector) search components and metadata filters.'
+- 'Use Case: For complex queries like "What are the chunking strategies mentioned in documents tagged ''p01'' but not ''archive''?"
+  The LLM generates the metadata filter (`tags: [''p01'']`, `NOT tags: [''archive'']`) itself.'
+3_3_ensemble_reranking:
+- 'Description: A multi-stage process:'
+- 'Retrieve: Fetch a large number of initial candidates (`fetch_k: 50`) using a fast but less precise method (e.g., similarity
+  search).'
+- 'Rerank: Use a more powerful but slower model (like a cross-encoder) to rerank only the top candidates and select the final
+  `top_k`.'
+- 'Use Case: For "golden tier" applications where the highest possible accuracy is required, and a slight increase in latency
+  is acceptable.'
+4_integration: This configuration is the default parameter set for the `semantic_search` tool. The N04 agent can override
+  these parameters for specific queries or choose an alternative strategy (once implemented) to optimize retrieval for a given
+  task.

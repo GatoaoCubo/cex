@@ -1,44 +1,66 @@
 ---
-
-```yaml
-id: p01_emb_example_config
+id: n04_ec_knowledge
 kind: embedding_config
-pillar: P01
-version: "1.0.0"
-created: "2023-10-04"
-updated: "2023-10-04"
-author: "embedding-config-builder"
-model_name: "bert_base_uncased"
-provider: "huggingface"
-dimensions: 768
-chunk_size: 512
-overlap: 51
-tokenizer: "bert-base-uncased-tokenizer"
-distance_metric: "cosine"
-batch_size: 32
-normalize: true
-max_tokens: 512
-cost_per_1m_tokens: null
-domain: "knowledge-retrieval"
+pillar: P01_knowledge
+version: "2.0.0"
+created: "2024-03-30"
+updated: "2024-03-30"
+author: "N04 Knowledge Nucleus"
+domain: "RAG, Semantic Search, Vector Embeddings"
 quality: null
-tags: [embedding, huggingface, bert]
-tldr: "BERT base uncased via Hugging Face—768d, 512-token chunks, cosine similarity, zero cost local."
-```
+tags: [embedding, config, n04, knowledge, rag, p01]
+tldr: "Defines the embedding model configurations for N04, led by text-embedding-3-large and nomic-embed-text-v1.5 as a secondary."
+density_score: 0.95
+---
+
+# N04 Embedding Model Configuration
+
+## 1. Overview
+This document specifies the configurations for the embedding models used by the N04 Knowledge Nucleus. The choice of embedding model is critical for the performance of semantic search and the overall RAG pipeline. This configuration defines a primary, high-performance model and a secondary, balanced model.
 
 ---
 
-## Model
-BERT Base Uncased model, provided by Hugging Face, with 768 dimensions. It uses the BERT tokenizer and works well for a variety of NLP tasks including retrieval.
+## 2. Primary Model: `text-embedding-3-large`
 
-## Chunking
-The text is divided into chunks of 512 tokens, with an overlap of 51 tokens to ensure continuity at the boundaries. The tokenizer used is "bert-base-uncased-tokenizer".
+- **Provider**: OpenAI
+- **Dimensions**: `3072`
+- **Distance Metric**: `Cosine Similarity`
+- **Normalize**: `True`
+- **Cost per 1M Tokens**: `$0.13` (as of Q1 2024)
+- **Use Case**: **Default for all new ingestions.** This is the state-of-the-art model for semantic representation. Its high dimensionality allows it to capture nuanced meaning, making it ideal for the CEX knowledge base where accuracy is paramount.
 
-## Performance
-The model operates locally, so the cost is zero. The batch size is set to 32 vectors per embedding operation. Normalization is set to true for accurate cosine similarity calculations.
+| Parameter | Value | Rationale |
+| :--- | :--- | :--- |
+| **`model_name`** | `text-embedding-3-large` | State-of-the-art performance for semantic retrieval tasks. |
+| **`provider`** | `OpenAI` | The official provider of the model via API. |
+| **`dimensions`** | `3072` | High dimensionality captures more semantic detail. |
+| **`distance_metric`**| `cosine` | Industry standard for comparing normalized vectors. |
+| **`normalize`** | `true` | Required for accurate cosine similarity and efficient search with dot product. |
 
-## Integration
-Leverage this configuration in an embedding layer of a retrieval-augmented generation pipeline. Process text through the "bert_base_uncased" embedding model to obtain normalized vectors suitable for cosine similarity-based retrieval.
+---
 
-## References
-- Hugging Face BERT model card
-- Embedding and retrieval best practices documentation
+## 3. Secondary Model: `nomic-embed-text-v1.5`
+
+- **Provider**: Nomic (via Hugging Face or API)
+- **Dimensions**: `768`
+- **Distance Metric**: `Cosine Similarity`
+- **Normalize**: `True`
+- **Cost per 1M Tokens**: `~ $0.02` (API) or `Free` (self-hosted)
+- **Use Case**: **Batch processing, cost-sensitive tasks, or offline environments.** While not as powerful as the primary model, Nomic's model offers an excellent balance of performance and cost-efficiency. It can be self-hosted, making it ideal for private data.
+
+| Parameter | Value | Rationale |
+| :--- | :--- | :--- |
+| **`model_name`** | `nomic-embed-text-v1.5`| Best-in-class open-weights model with a large context length. |
+| **`provider`** | `Nomic / HuggingFace` | Can be accessed via API or hosted locally. |
+| **`dimensions`** | `768` | Standard dimension size, offering a good trade-off. |
+| **`distance_metric`**| `cosine` | Standard for comparing normalized vectors. |
+| **`normalize`** | `true` | Ensures vectors are on the unit sphere for comparison. |
+
+## 4. Selection & Routing Logic
+The `embedding_apis` MCP will route requests based on the following logic:
+1.  **Default**: All standard ingestion workflows will use the **Primary Model** (`text-embedding-3-large`).
+2.  **Explicit Request**: An agent can explicitly request the **Secondary Model** for a specific task by providing a `use_secondary_model: true` flag.
+3.  **Cost-Saving Mode**: If the CEX system is configured for a low-cost operational mode, all embedding tasks will automatically fall back to the **Secondary Model**.
+
+## 5. Integration
+This configuration is a direct dependency of the **Generate Embeddings** step in the `Document Ingestion & Indexing` workflow. The chosen model's output vector size (`dimensions`) also dictates the schema of the target `vector_db` MCP.
