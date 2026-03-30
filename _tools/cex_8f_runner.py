@@ -933,9 +933,25 @@ class EightFRunner:
             except Exception as e:
                 self._log("F8", f"compile skipped: {e}")
 
+            # Re-index after creation (full cycle)
+            indexed = False
+            try:
+                index_script = CEX_ROOT / "_tools" / "cex_index.py"
+                if index_script.exists():
+                    subprocess.run(
+                        [sys.executable, str(index_script)],
+                        capture_output=True,
+                        timeout=60,
+                    )
+                    indexed = True
+                    self._log("F8", "index rebuilt")
+            except Exception as e:
+                self._log("F8", f"index skipped: {e}")
+
             self.state.result = {
                 "path": str(out_path),
                 "compiled": compiled,
+                "indexed": indexed,
                 "committed": False,
                 "mode": "execute",
             }

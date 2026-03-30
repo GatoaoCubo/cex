@@ -1,5 +1,7 @@
 action_prompt: null
 agent: P02_model/templates/tpl_agent.md
+agent_card: P08_architecture/templates/tpl_agent_card.md
+agent_package: P02_model/templates/tpl_agent_package.md
 api_client: P04_tools/templates/tpl_api_client.md
 audio_tool: P04_tools/templates/tpl_audio_tool.md
 axiom: null
@@ -45,7 +47,6 @@ hook: null
 input_schema: P06_schema/templates/tpl_input_schema.md
 instruction: P03_prompt/templates/tpl_instruction.md
 interface: null
-agent_package: P02_model/templates/tpl_agent_package.md
 knowledge_card: P01_knowledge/templates/tpl_knowledge_card_domain.md
 knowledge_card_meta: P01_knowledge/templates/tpl_knowledge_card_meta.md
 knowledge_card_test: P01_knowledge/templates/tpl_knowledge_card_test.md
@@ -77,11 +78,13 @@ rag_source: P01_knowledge/templates/tpl_rag_source.md
 rate_limit_config: P09_config/templates/tpl_rate_limit_config.md
 red_team_eval: P07_evals/templates/tpl_red_team_eval.md
 regression_check: P07_evals/templates/tpl_regression_check.md
+response_format: P05_output/templates/tpl_response_format.md
 retriever: P04_tools/templates/tpl_retriever.md
 retriever_config: P01_knowledge/templates/tpl_retriever_config.md
 reward_signal: P11_feedback/templates/tpl_reward_signal.md
 router: null
 runtime_rule: null
+runtime_state: P10_memory/templates/tpl_runtime_state.md
 schedule: P12_orchestration/templates/tpl_schedule.md
 scoring_rubric: null
 search_tool: P04_tools/templates/tpl_search_tool.md
@@ -93,8 +96,8 @@ spawn_config: null
 system_prompt: P03_prompt/templates/tpl_system_prompt.md
 type_def: null
 unit_eval: P07_evals/templates/tpl_unit_eval.md
+validation_schema: P06_schema/templates/tpl_validation_schema.md
 validator: P06_schema/templates/tpl_validator.md
 vision_tool: P04_tools/templates/tpl_vision_tool.md
 webhook: P04_tools/templates/tpl_webhook.md
 workflow: P12_orchestration/templates/tpl_workflow.md
-agent_card: P08_architecture/templates/tpl_agent_card.md
