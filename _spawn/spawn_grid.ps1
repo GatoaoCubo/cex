@@ -23,8 +23,8 @@ public class Win32Grid {
 "@
 
 $root = Split-Path $PSScriptRoot -Parent
-$handoffDir = "$root\.cexuntime\handoffs"
-$signalDir = "$root\.cexuntime\signals"
+$handoffDir = "$root\.cex/runtime/handoffs"
+$signalDir = "$root\.cex/runtime/signals"
 $pidFile = "$root\.cex\temp\spawn_pids.txt"
 
 New-Item -ItemType Directory -Force -Path $handoffDir,$signalDir,"$root\.cex\temp" | Out-Null
@@ -75,9 +75,12 @@ function Launch-Nucleus($handoff) {
         return $null
     }
 
-    $identity = "Voce e $upper Builder. Leia .cex/runtime/handoffs/$($handoff.Name). Execute todas as tarefas. Commit e signal ao terminar."
+    # Write per-nucleus handoff pointer so boot script picks it up
+    $nucleusHandoff = "$handoffDir\${nucleus}_task.md"
+    Copy-Item $handoff.FullName -Destination $nucleusHandoff -Force
 
-    $proc = Start-Process cmd -ArgumentList "/k `"$bootScript`" `"$identity`"" -WorkingDirectory $root -PassThru
+    # ALWAYS boot interactive — task comes from handoff, never CLI args (avoids nested-quote hell)
+    $proc = Start-Process cmd -ArgumentList "/k `"$bootScript`"" -WorkingDirectory $root -PassThru
     Start-Sleep -Seconds 3
 
     if ($proc) {
