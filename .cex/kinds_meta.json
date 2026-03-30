@@ -889,40 +889,5 @@
     "max_bytes": 3072,
     "naming": "p12_wf_{{name}}.md + .yaml",
     "pillar": "P12"
-  },
-  "runbook": {
-    "pillar": "P08",
-    "llm_function": "INJECT",
-    "boundary": "Manual operacional step-by-step para orquestradores. Contem procedimentos, commands, tabelas de decisao, formulas, error handling. NAO eh workflow (P12, execucao automatica) nem pattern (P08, 1 pattern reutilizavel) nem instruction (P03, 1 instrucao flexivel) nem law (P08, regra imutavel). Runbook EVOLUI com aprendizado operacional.",
-    "examples": [
-      "spawn_playbook",
-      "deployment_runbook",
-      "incident_response_runbook",
-      "monitoring_runbook"
-    ],
-    "composable_with": [
-      "workflow",
-      "dispatch_rule",
-      "spawn_config",
-      "checkpoint",
-      "signal",
-      "pattern",
-      "law"
-    ],
-    "anti_kinds": [
-      "workflow",
-      "instruction",
-      "pattern",
-      "law"
-    ],
-    "typical_size": "5KB-15KB",
-    "typical_sections": [
-      "golden_rule",
-      "procedures",
-      "decision_tables",
-      "error_handling",
-      "monitor_setup",
-      "formulas"
-    ]
   }
 }
