@@ -26,3 +26,7 @@ __pycache__/
 _archive/
 .env
 .cex_signals/
+
+# _ops ephemeral (signals + temp = runtime only)
+_ops/signals/
+_ops/temp/

@@ -63,8 +63,8 @@ If you do NOT see this trace, the build did NOT follow 8F.
 | Tools (10) | `_tools/cex_*.py` |
 | Boot Scripts | `boot/cex.cmd` (N07) `boot/n03.cmd` (builder) |
 | Spawn Scripts | `_spawn/spawn_*.ps1` |
-| Handoffs | `.cex/handoffs/` |
-| Signals | `.cex_signals/` |
+| Handoffs | `_ops/handoffs/_active/` |
+| Signals | `_ops/signals/` |
 
 ## STEP 4: TOOLS
 
@@ -103,7 +103,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_stop.ps1
 
 ### Handoff Format
 
-Write to `.cex/handoffs/{mission}_{nucleus}.md`:
+Write to `_ops/handoffs/_active/{mission}_{nucleus}.md`:
 
 ```markdown
 # {NUCLEUS} Task: {Title}
@@ -118,7 +118,7 @@ Write to `.cex/handoffs/{mission}_{nucleus}.md`:
 git add -A && git commit -m "[{NUCLEUS}] {message}"
 
 ## SIGNAL
-python -c "from _tools.signal_writer import write_signal; write_signal('{nucleus}', 'complete', 9.0)"
+python -c "from _tools.signal_writer import write_signal; write_signal('{nucleus}', 'complete', 9.0, '{mission}')"
 ```
 
 ### Routing

@@ -1,17 +1,18 @@
-"""CEX Signal Writer -- Completion signals for nucleus builders."""
+"""CEX Signal Writer v2.0 — writes to _ops/signals/"""
 import json
 from datetime import datetime
 from pathlib import Path
 
-SIGNAL_DIR = Path(__file__).resolve().parent.parent / ".cex_signals"
+SIGNAL_DIR = Path(__file__).resolve().parent.parent / "_ops" / "signals"
 
-def write_signal(nucleus, status="complete", quality_score=9.0, **extra):
+def write_signal(nucleus, status="complete", quality_score=9.0, mission="", **extra):
     SIGNAL_DIR.mkdir(parents=True, exist_ok=True)
     now = datetime.now()
     signal = {
         "nucleus": nucleus,
         "status": status,
         "quality_score": quality_score,
+        "mission": mission,
         "timestamp": now.isoformat(),
         **extra,
     }
@@ -23,6 +24,10 @@ def write_signal(nucleus, status="complete", quality_score=9.0, **extra):
 
 if __name__ == "__main__":
     import sys
-    if len(sys.argv) >= 2:
-        write_signal(sys.argv[1], sys.argv[2] if len(sys.argv) > 2 else "complete",
-                     float(sys.argv[3]) if len(sys.argv) > 3 else 9.0)
+    args = sys.argv[1:]
+    write_signal(
+        args[0] if len(args) > 0 else "n03",
+        args[1] if len(args) > 1 else "complete",
+        float(args[2]) if len(args) > 2 else 9.0,
+        args[3] if len(args) > 3 else "",
+    )
