@@ -9,7 +9,7 @@ author: "workflow-builder"
 title: "Operations Task Workflow"
 steps_count: 3
 execution_mode: mixed
-satellites: [coordinator, executor]
+agent_nodes: [coordinator, executor]
 timeout: 1200
 retry_policy: per_step
 depends_on: []

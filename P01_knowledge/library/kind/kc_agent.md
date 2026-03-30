@@ -47,7 +47,7 @@ An agent is the complete identity specification that transforms a general LLM in
 ## Key Parameters
 | Parameter | Type | Default | Tradeoff |
 |-----------|------|---------|----------|
-| satellite | string | required | Determines runtime environment and MCPs available |
+| agent_node | string | required | Determines runtime environment and MCPs available |
 | domain | string | required | Scopes the agent's knowledge and tool access |
 | quality | float | >= 7.0 | Higher quality = pool eligible (8.0+) or golden (9.5+) |
 | iso_vectorstore | dir | required | Min 10 files; completeness determines agent reliability |
@@ -56,9 +56,9 @@ An agent is the complete identity specification that transforms a general LLM in
 | Pattern | When to Use | Example |
 |---------|-------------|---------|
 | Specialist agent | Deep domain expertise needed | SEO agent with marketplace-specific tools |
-| Orchestrator agent | Multi-step workflow coordination | STELLA dispatching to satellite agents |
+| Orchestrator agent | Multi-step workflow coordination | orchestrator dispatching to agent nodes |
 | Review agent | Quality validation | Code reviewer with read-only tool access |
-| Builder agent | Code/content creation | EDISON building components with write access |
+| Builder agent | Code/content creation | builder_agent building components with write access |
 
 ## Anti-Patterns
 | Anti-Pattern | Why It Fails | Fix |
@@ -83,5 +83,5 @@ An agent is the complete identity specification that transforms a general LLM in
 
 ## Quality Criteria
 - GOOD: Persona defined; capabilities listed; tools specified; domain scoped
-- GREAT: ISO vectorstore complete (10+ files); tested in satellite; quality >= 8.0; routing registered
+- GREAT: ISO vectorstore complete (10+ files); tested in agent_node; quality >= 8.0; routing registered
 - FAIL: No clear boundary from other agents; missing capabilities; tools undefined; iso_vectorstore < 3 files

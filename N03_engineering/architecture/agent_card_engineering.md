@@ -7,7 +7,7 @@ created: "2023-10-19"
 updated: "2023-10-19"
 author: "agent-card-builder"
 name: "Engineering Nucleus"
-role: "Primary satellite for autonomous AI unit management within a multi-agent architecture."
+role: "Primary agent_node for autonomous AI unit management within a multi-agent architecture."
 model: "claude-opus"
 mcps: [engineering_hub, data_analytics]
 domain_area: "autonomous_unit_management"
@@ -37,15 +37,15 @@ mcp_config_file: ".mcp-engineering.json"
 flags: ["--optimize", "--secure"]
 domain: "autonomous_management"
 quality: null
-tags: [satellite, engineering, management]
-tldr: "Engineering Nucleus satellite spec for autonomous unit management using claude-opus model."
+tags: [agent_node, engineering, management]
+tldr: "Engineering Nucleus agent_node spec for autonomous unit management using claude-opus model."
 ---
 
 ## Role
-The Engineering Nucleus satellite is responsible for managing autonomous AI units within a multi-agent architecture, providing reliable unit execution and scalable orchestration for engineering tasks.
+The Engineering Nucleus agent_node is responsible for managing autonomous AI units within a multi-agent architecture, providing reliable unit execution and scalable orchestration for engineering tasks.
 
 ## Model & MCPs
-The satellite uses the claude-opus model to handle complex reasoning and management tasks efficiently. It connects to the engineering_hub and data_analytics MCPs for interfacing with engineering processes and data analysis capabilities.
+The agent_node uses the claude-opus model to handle complex reasoning and management tasks efficiently. It connects to the engineering_hub and data_analytics MCPs for interfacing with engineering processes and data analysis capabilities.
 
 ## Boot Sequence
 1. Load the system prompt to set initial parameters.
@@ -55,7 +55,7 @@ The satellite uses the claude-opus model to handle complex reasoning and managem
 5. Set all operational parameters to alert readiness.
 
 ## Dispatch
-Keywords such as manage_units, execute_task, and engineering_control route relevant tasks to this satellite, ensuring focused task execution specific to the autonomous unit management domain.
+Keywords such as manage_units, execute_task, and engineering_control route relevant tasks to this agent_node, ensuring focused task execution specific to the autonomous unit management domain.
 
 ## Constraints
 - NEVER modify production systems without specific instructions, safeguarding integrity.
@@ -66,4 +66,4 @@ Keywords such as manage_units, execute_task, and engineering_control route relev
 Dependencies include the engineering_hub for management operations and the data_analytics_service for analytical processing.
 
 ## Scaling & Monitoring
-The satellite scales with a max of two concurrent instances, adhering to a 45-minute operation timeout, and enforcing a memory cap of 2048 MB to ensure stability. Monitoring is in place with continuous health checks and end-of-operation signals, plus alerts on failure to the orchestrator.
+The agent_node scales with a max of two concurrent instances, adhering to a 45-minute operation timeout, and enforcing a memory cap of 2048 MB to ensure stability. Monitoring is in place with continuous health checks and end-of-operation signals, plus alerts on failure to the orchestrator.

@@ -9,21 +9,21 @@ author: marketing_specialist
 domain: marketing
 quality: null
 tags: [dispatch, marketing, apollo]
-tldr: Route marketing-related tasks to the appropriate satellite for execution
+tldr: Route marketing-related tasks to the appropriate agent_node for execution
 scope: marketing
 keywords: [marketing, campanha, campaign, publicidade, advertisement, ads, promo, promoção, lead, contato]
-satellite: apollo
+agent_node: apollo
 model: sonnet
 priority: 7
 confidence_threshold: 0.70
 fallback: edison
 # marketing Dispatch Rule
 ## Purpose
-Routes marketing tasks such as creating campaigns, managing advertisements, and generating leads to the designated marketing satellite.
+Routes marketing tasks such as creating campaigns, managing advertisements, and generating leads to the designated marketing agent_node.
 ## Keyword Rationale
 The selected keywords cover both English and Portuguese terms related to marketing functions, ensuring that tasks are correctly identified and routed.
 ## Fallback Logic
-Fallback fires when the `apollo` satellite is unavailable, routing the task to `edison` to ensure continuity in marketing operations.
+Fallback fires when the `apollo` agent_node is unavailable, routing the task to `edison` to ensure continuity in marketing operations.
 ---
 
-This dispatch_rule routes marketing tasks to the `apollo` satellite with a bilingual keyword list, ensuring proper identification and execution of relevant tasks. In case of unavailability, the `edison` satellite serves as a fallback. The configuration adheres to all specified requirements and constraints.
+This dispatch_rule routes marketing tasks to the `apollo` agent_node with a bilingual keyword list, ensuring proper identification and execution of relevant tasks. In case of unavailability, the `edison` agent_node serves as a fallback. The configuration adheres to all specified requirements and constraints.

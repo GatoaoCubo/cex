@@ -49,14 +49,14 @@ A law is an inviolable operational rule — once accepted, it cannot be violated
 |-----------|------|---------|----------|
 | number | int | required | Unique, never reused even after deprecation |
 | severity | enum | hard | hard (never violate) vs soft (strong default) |
-| scope | enum | system | system/satellite/agent — wider = more agents constrained |
+| scope | enum | system | system/agent_node/agent — wider = more agents constrained |
 | rationale | string | required | Why drives correct edge-case decisions; missing = ignored |
 
 ## Patterns
 | Pattern | When to Use | Example |
 |---------|-------------|---------|
 | Safety law | Prevent destructive operations | LAW-01: Never delete files without backup confirmation |
-| Routing law | Enforce satellite specialization | LAW-07: STELLA orchestrates, never executes tasks |
+| Routing law | Enforce agent_node specialization | LAW-07: orchestrator orchestrates, never executes tasks |
 | Quality law | Minimum output threshold | LAW-12: score < 7.0 → redo; never ship below threshold |
 
 ## Anti-Patterns

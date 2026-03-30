@@ -31,7 +31,7 @@ core: false
 ```
 
 ## What It Is
-A fallback_chain defines an ordered sequence of LLM models to try when the primary model fails, times out, or returns low-confidence results. Each step has a timeout threshold. It is NOT a chain (P03, which is a sequence of prompts/steps) nor a router (which routes tasks to satellites based on keywords). Fallback chains answer "what model do I try next when this one fails?" — routers answer "which agent handles this task?"
+A fallback_chain defines an ordered sequence of LLM models to try when the primary model fails, times out, or returns low-confidence results. Each step has a timeout threshold. It is NOT a chain (P03, which is a sequence of prompts/steps) nor a router (which routes tasks to agent_nodes based on keywords). Fallback chains answer "what model do I try next when this one fails?" — routers answer "which agent handles this task?"
 
 ## Cross-Framework Map
 | Framework/Provider | Class/Concept | Notes |

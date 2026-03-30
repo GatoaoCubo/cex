@@ -49,7 +49,7 @@ Runtime state is the mutable YAML accumulator for an agent's in-flight decisions
 |-----------|------|---------|----------|
 | agent | string | required | One file per agent; prevents state collision |
 | task_queue | list | [] | Longer queue = more context injected; trim completed tasks |
-| routing_decisions | map | {} | Capture keyword → satellite mappings made this run |
+| routing_decisions | map | {} | Capture keyword → agent_node mappings made this run |
 | counters | map | {} | Track attempt counts, retry limits, batch progress |
 
 ## Patterns
@@ -57,7 +57,7 @@ Runtime state is the mutable YAML accumulator for an agent's in-flight decisions
 |---------|-------------|---------|
 | Checkpoint-before-write | Before mutating state, write checkpoint | `cp p10_rs_atlas.yaml p10_rs_atlas.bak.yaml` |
 | Queue-drain pattern | Clear completed items after commit | `task_queue: [pending_items_only]` after each batch |
-| Merge-on-conflict | Two satellites write same state file | Read → merge → write; use timestamp as tiebreaker |
+| Merge-on-conflict | Two agent_nodes write same state file | Read → merge → write; use timestamp as tiebreaker |
 
 ## Anti-Patterns
 | Anti-Pattern | Why It Fails | Fix |

@@ -9,7 +9,7 @@ updated: "2023-11-18"
 author: "builder"  
 title: "Operations Nucleus Launch"  
 mode: grid  
-satellite: "EDISON"  
+agent_node: "builder_lead"  
 model: "opus"  
 flags:  
   - "--dangerously-skip-permissions"  
@@ -24,7 +24,7 @@ prompt_inline: false
 handoff_path: "handoffs/operations_task.md"  
 quality: null  
 tags: [spawn_config, edison, operations_nucleus, grid]  
-tldr: "Grid spawn for Operations Nucleus with EDISON, 3000s timeout, using handoff prompt strategy"
+tldr: "Grid spawn for Operations Nucleus with builder_lead, 3000s timeout, using handoff prompt strategy"
 ```  
 ---  
 ## Spawn Command  
@@ -34,14 +34,14 @@ powershell -NoProfile -ExecutionPolicy Bypass -File records/framework/powershell
 ## Parameters  
 | Parameter | Value | Rationale |  
 |-----------|-------|-----------|  
-| mode | grid | Utilizes multiple satellite agents in parallel |  
-| satellite | EDISON | Task requires EDISON for operations execution |  
-| model | opus | EDISON is paired with opus for build tasks |  
+| mode | grid | Utilizes multiple agent_node agents in parallel |  
+| agent_node | builder_lead | Task requires builder_lead for operations execution |  
+| model | opus | builder_lead is paired with opus for build tasks |  
 | timeout | 3000s | Provides a sufficient window for operations task completion |  
 | interactive | true | Keeps terminal open for monitoring and adjustments |  
 ## Constraints  
 - Handoff file must be pre-existing and accessible at specified path  
 - Maximum inline prompt constraint bypassed by handoff usage  
-- EDISON requires specific MCP configuration provided by a JSON file  
+- builder_lead requires specific MCP configuration provided by a JSON file  
 ## References  
 - handoffs/operations_task.md

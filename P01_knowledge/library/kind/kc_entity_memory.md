@@ -55,7 +55,7 @@ An entity_memory stores current atomic facts about a named entity — a project,
 ## Patterns
 | Pattern | When to Use | Example |
 |---------|-------------|---------|
-| Project entity | Current state of ongoing project | `codexa-core: {api_version: v2, tests: 273, phase: 3}` |
+| Project entity | Current state of ongoing project | `organization-core: {api_version: v2, tests: 273, phase: 3}` |
 | System entity | Technical facts about infrastructure | `railway: {region: us-east, pg: v17, ssl: required}` |
 | Person entity | Facts about collaborators | `user: {expertise: python, timezone: BRT, pref: terse}` |
 

@@ -11,7 +11,7 @@ author: SHAKA
 domain: schedule
 quality: null
 tags: [schedule, P12, GOVERN, kind-kc]
-tldr: "Temporal trigger specification (cron or interval) that initiates a workflow or satellite task at defined times"
+tldr: "Temporal trigger specification (cron or interval) that initiates a workflow or agent_node task at defined times"
 when_to_use: "Building, reviewing, or reasoning about schedule artifacts"
 keywords: [cron, trigger, temporal]
 feeds_kinds: [schedule]
@@ -31,7 +31,7 @@ core: false
 ```
 
 ## What It Is
-A schedule defines WHEN a workflow or satellite task runs — via cron expression, interval, or event-based trigger. It is a temporal governance artifact, not a routing artifact. It is NOT dispatch_rule (P12 — decides WHERE to route based on intent; schedule decides WHEN to trigger regardless of intent).
+A schedule defines WHEN a workflow or agent_node task runs — via cron expression, interval, or event-based trigger. It is a temporal governance artifact, not a routing artifact. It is NOT dispatch_rule (P12 — decides WHERE to route based on intent; schedule decides WHEN to trigger regardless of intent).
 
 ## Cross-Framework Map
 | Framework/Provider | Class/Concept | Notes |
@@ -48,14 +48,14 @@ A schedule defines WHEN a workflow or satellite task runs — via cron expressio
 | Parameter | Type | Default | Tradeoff |
 |-----------|------|---------|----------|
 | cron | string | required | Standard 5-field cron; use cron validator before deploying |
-| target | string | required | workflow/satellite/handoff to trigger |
+| target | string | required | workflow/agent_node/handoff to trigger |
 | timezone | string | UTC | Always explicit; avoid ambiguous local time |
 | enabled | bool | true | Toggle without deleting; enables safe pause |
 
 ## Patterns
 | Pattern | When to Use | Example |
 |---------|-------------|---------|
-| Daily research trigger | Recurring market research | `cron: 0 8 * * 1-5` → target: SHAKA research handoff |
+| Daily research trigger | Recurring market research | `cron: 0 8 * * 1-5` → target: research agent research handoff |
 | Freshness-check schedule | Knowledge base maintenance | `cron: 0 2 * * 0` (weekly) → trigger lifecycle_rule evaluation |
 | Retry schedule | Failed task recovery | `cron: */30 * * * *` (every 30min) → check signal queue for failures |
 

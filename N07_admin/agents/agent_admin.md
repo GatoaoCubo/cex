@@ -7,7 +7,7 @@ version: "1.0.0"
 created: "2023-10-24"
 updated: "2023-10-24"
 author: "agent-builder"
-satellite: "admin-tools"
+agent_node: "admin-tools"
 domain: "Administrative Support"
 llm_function: BECOME
 capabilities_count: 6
@@ -78,7 +78,7 @@ agents/admin_nucleus_agent/
 
 # Quality Gates
 HARD gates: YAML parses, id matches p02_agent_ pattern, kind == agent, quality == null, required fields present, iso_vectorstore >= 10 files, llm_function == BECOME.
-SOFT gates: tldr <= 160ch, tags >= 3, capabilities_count matches body, density >= 0.80, satellite assigned, domain specific.
+SOFT gates: tldr <= 160ch, tags >= 3, capabilities_count matches body, density >= 0.80, agent_node assigned, domain specific.
 
 # Footer
 version: 1.0.0 | author: agent-builder | quality: null

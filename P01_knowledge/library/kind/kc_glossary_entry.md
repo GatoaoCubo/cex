@@ -56,7 +56,7 @@ A glossary_entry provides a concise definition of a domain-specific term, inject
 |---------|-------------|---------|
 | Inline glossary | 5-15 terms for a specific domain | "KC = Knowledge Card; FSE = Few-Shot Example" |
 | Dynamic glossary | Large term set, query-dependent | Retrieve relevant terms based on user query embedding |
-| Disambiguation | Terms with multiple meanings | "Pool: in CODEXA = curated knowledge repository (not thread pool)" |
+| Disambiguation | Terms with multiple meanings | "Pool: in organization = curated knowledge repository (not thread pool)" |
 
 ## Anti-Patterns
 | Anti-Pattern | Why It Fails | Fix |

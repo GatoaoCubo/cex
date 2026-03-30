@@ -37,10 +37,10 @@ mcp_config_file: ".mcp-commercial.json"
 flags: ["--secure-mode", "-v"]
 domain: "commercial-operations"
 quality: null
-tags: [satellite, commercial, revenue-optimization]
+tags: [agent_node, commercial, revenue-optimization]
 tldr: "commercial-nucleus: Opus model for strategic decision-making in commerce."
 ## Role
-The commercial-nucleus satellite is responsible for managing commercial operations, focusing on strategic decision-making to optimize revenue, using external tools such as commerce API and finance MCP.
+The commercial-nucleus agent_node is responsible for managing commercial operations, focusing on strategic decision-making to optimize revenue, using external tools such as commerce API and finance MCP.
 
 ## Model & MCPs
 - **Model**: Opus - selected for its reasoning capabilities suitable for complex commercial strategies.
@@ -56,7 +56,7 @@ The commercial-nucleus satellite is responsible for managing commercial operatio
 
 ## Dispatch
 - Keywords: optimize, revenue, strategy, pricing, sales.
-- Ensures tasks related to commercial strategy are prioritized to this satellite.
+- Ensures tasks related to commercial strategy are prioritized to this agent_node.
 
 ## Constraints
 - Never handle transactions directly to prevent financial discrepancies.
@@ -66,7 +66,7 @@ The commercial-nucleus satellite is responsible for managing commercial operatio
 ## Dependencies
 - finance MCP server for financial data processing.
 - commerce API for access to commercial operations data.
-- No dependencies on sibling satellites for isolation and focus.
+- No dependencies on sibling agent_nodes for isolation and focus.
 
 ## Scaling & Monitoring
 - Max 2 concurrent instances to manage load efficiently.

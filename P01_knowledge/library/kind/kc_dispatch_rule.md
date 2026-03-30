@@ -11,9 +11,9 @@ author: SHAKA
 domain: dispatch_rule
 quality: null
 tags: [dispatch_rule, P12, REASON, kind-kc]
-tldr: "Keyword-to-satellite routing rule that maps intent signals to execution targets without running the task itself"
+tldr: "Keyword-to-agent_node routing rule that maps intent signals to execution targets without running the task itself"
 when_to_use: "Building, reviewing, or reasoning about dispatch_rule artifacts"
-keywords: [routing, keyword, satellite]
+keywords: [routing, keyword, agent_node]
 feeds_kinds: [dispatch_rule]
 density_score: null
 ---
@@ -31,7 +31,7 @@ core: false
 ```
 
 ## What It Is
-A dispatch rule maps keyword or intent signals to target satellites/agents, determining where a task should be routed for execution. It contains trigger patterns, target satellite, priority, and confidence threshold. It is NOT router (P02 — routes task to model/provider based on complexity; dispatch_rule routes to satellite based on domain intent) nor workflow (P12 — workflow executes the task; dispatch_rule only decides where to send it).
+A dispatch rule maps keyword or intent signals to target agent_nodes/agents, determining where a task should be routed for execution. It contains trigger patterns, target agent_node, priority, and confidence threshold. It is NOT router (P02 — routes task to model/provider based on complexity; dispatch_rule routes to agent_node based on domain intent) nor workflow (P12 — workflow executes the task; dispatch_rule only decides where to send it).
 
 ## Cross-Framework Map
 | Framework/Provider | Class/Concept | Notes |
@@ -48,22 +48,22 @@ A dispatch rule maps keyword or intent signals to target satellites/agents, dete
 | Parameter | Type | Default | Tradeoff |
 |-----------|------|---------|----------|
 | keywords | list | required | Broader keywords = more matches; higher false-positive rate |
-| target | string | required | satellite/agent name; one target per rule |
+| target | string | required | agent_node/agent name; one target per rule |
 | confidence_threshold | float | 0.70 | Higher = fewer routes; more unmatched queries fall through |
 | priority | int | 5 | Higher priority rules evaluated first; lower = fallback |
 
 ## Patterns
 | Pattern | When to Use | Example |
 |---------|-------------|---------|
-| Domain-scoped rules | Clear domain separation | keywords: [pesquisar, mercado, scrape] → target: SHAKA |
-| Fallback rule | Catch-all for unmatched intent | keywords: ["*"], priority: 0, target: STELLA (orchestrator) |
-| Multi-keyword OR | Synonyms for same intent | keywords: [anuncio, copy, titulo, vender, marketing] → target: LILY |
+| Domain-scoped rules | Clear domain separation | keywords: [pesquisar, mercado, scrape] → target: research_agent |
+| Fallback rule | Catch-all for unmatched intent | keywords: ["*"], priority: 0, target: orchestrator |
+| Multi-keyword OR | Synonyms for same intent | keywords: [anuncio, copy, titulo, vender, marketing] → target: marketing_agent |
 
 ## Anti-Patterns
 | Anti-Pattern | Why It Fails | Fix |
 |-------------|-------------|-----|
 | Single keyword per rule | Low recall; many valid queries unmatched | List 5+ synonyms and related terms per rule |
-| Overlapping high-priority rules | Ambiguous routing; wrong satellite selected | Use priority tiers; highest priority = most specific keywords |
+| Overlapping high-priority rules | Ambiguous routing; wrong agent_node selected | Use priority tiers; highest priority = most specific keywords |
 | No fallback rule | Unmatched queries silently dropped | Always define priority:0 fallback to orchestrator |
 
 ## Integration Graph
@@ -76,7 +76,7 @@ A dispatch rule maps keyword or intent signals to target satellites/agents, dete
 ## Decision Tree
 - IF keyword matches high-priority rule (priority >= 8) THEN route immediately
 - IF keyword matches multiple rules THEN use highest priority
-- IF no rule matches THEN route to fallback (STELLA/orchestrator)
+- IF no rule matches THEN route to fallback (orchestrator)
 - IF confidence < threshold THEN escalate to orchestrator for clarification
 - DEFAULT: Always have fallback rule at priority 0
 

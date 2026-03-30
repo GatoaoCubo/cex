@@ -42,7 +42,7 @@ An iso_package is a self-contained, LLM-agnostic bundle that makes an agent port
 | DSPy | Serialized module state | `module.save()` / `module.load()` — trained weights + config |
 | Haystack | Pipeline YAML / serialized pipelines | `pipeline.dumps()` / `Pipeline.loads()` |
 | OpenAI | GPT builder export | Assistant config export (partial; no full portability) |
-| Anthropic | No native packaging | CODEXA ISO format fills this gap |
+| Anthropic | No native packaging | organization ISO format fills this gap |
 
 ## Key Parameters
 | Parameter | Type | Default | Tradeoff |

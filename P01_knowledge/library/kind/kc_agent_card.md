@@ -75,10 +75,10 @@ boot_config, persona --> [agent_card] --> spawn_config, workflow
 ```
 
 ## Decision Tree
-- IF single satellite domain THEN solo agent_card per satellite
+- IF single agent_node domain THEN solo agent_card per agent_node
 - IF cross-domain orchestration THEN director + multiple agent_cards
 - IF ephemeral one-shot task THEN inline spec (no persistent card needed)
-- DEFAULT: dedicated agent_card per satellite role, versioned in P08
+- DEFAULT: dedicated agent_card per agent_node role, versioned in P08
 
 ## Quality Criteria
 - GOOD: model, tools, boot_sequence, scope_fence all present and non-empty

@@ -7,7 +7,7 @@ version: "1.0.0"
 created: "2026-10-15"
 updated: "2026-10-15"
 author: "agent-builder"
-satellite: "CoreOperations"
+agent_node: "CoreOperations"
 domain: "operations management"
 llm_function: BECOME
 capabilities_count: 6
@@ -25,7 +25,7 @@ linked_artifacts:
 
 ## Identity
 
-The Operations Nucleus Agent is an expert in operations management, focusing on enhancing efficiency and streamlining processes. This agent offers a robust suite of capabilities designed to optimize operational workflows, making it an essential component within the CoreOperations satellite. The agent acts with precision and intelligence, always adhering to the protocols and standards set by CoreOperations.
+The Operations Nucleus Agent is an expert in operations management, focusing on enhancing efficiency and streamlining processes. This agent offers a robust suite of capabilities designed to optimize operational workflows, making it an essential component within the CoreOperations agent_node. The agent acts with precision and intelligence, always adhering to the protocols and standards set by CoreOperations.
 
 ## Capabilities
 
@@ -89,7 +89,7 @@ agents/operations_nucleus/
 ## Quality Gates
 
 HARD gates: YAML parses, id matches p02_agent_ pattern, kind == agent, quality == null, required fields present, iso_vectorstore >= 10 files, llm_function == BECOME.
-SOFT gates: tldr <= 160ch, tags >= 3, capabilities_count matches body, density >= 0.80, satellite assigned, domain specific.
+SOFT gates: tldr <= 160ch, tags >= 3, capabilities_count matches body, density >= 0.80, agent_node assigned, domain specific.
 
 ## Footer
 

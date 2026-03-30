@@ -55,8 +55,8 @@ A workflow is an executable specification defining ordered steps — sequential 
 ## Patterns
 | Pattern | When to Use | Example |
 |---------|-------------|---------|
-| Research→Build→Validate | Standard feature workflow | SHAKA research → EDISON build → ATLAS validate |
-| Fan-out parallel | Independent subtasks | Step 1: spawn SHAKA+LILY in parallel → Step 2: EDISON combines outputs |
+| Research→Build→Validate | Standard feature workflow | research agent research → builder_agent build → operations_agent validate |
+| Fan-out parallel | Independent subtasks | Step 1: spawn research_agent+marketing_agent in parallel → Step 2: builder_agent combines outputs |
 | Retry-with-quality-gate | High-quality output required | Step N output → quality_gate → retry if fail → max 3 retries |
 
 ## Anti-Patterns

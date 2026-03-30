@@ -9,7 +9,7 @@ author: "workflow-builder"
 title: "Admin Task Execution Workflow"
 steps_count: 3
 execution_mode: mixed
-satellites: [admin_satellite_1, admin_satellite_2]
+agent_nodes: [admin_agent_node_1, admin_agent_node_2]
 timeout: 600000
 retry_policy: per_step
 depends_on: []
@@ -52,9 +52,9 @@ This workflow orchestrates the execution of administrative tasks within the Admi
 
 ## Dependencies
 - Pre-existing task management system with daily task lists.
-- Valid configuration for admin task execution and review satellites.
+- Valid configuration for admin task execution and review agent_nodes.
 
 ## Signals
-- **On step complete**: task_execution_complete, task_review_complete, workflow_complete emitted by respective satellites.
+- **On step complete**: task_execution_complete, task_review_complete, workflow_complete emitted by respective agent_nodes.
 - **On workflow complete**: workflow_complete signal indicates successful workflow execution.
 - **On error**: Error signals trigger per-step retry; escalate unresolved issues to admin_orchestrator after max retries.

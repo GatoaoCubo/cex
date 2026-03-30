@@ -54,7 +54,7 @@ A daemon is a persistent background process that runs continuously — monitorin
 ## Patterns
 | Pattern | When to Use | Example |
 |---------|-------------|---------|
-| File watcher | React to filesystem changes | Watch `.claude/signals/` for satellite completion signals |
+| File watcher | React to filesystem changes | Watch `.claude/signals/` for agent_node completion signals |
 | API server | Serve LLM capabilities over HTTP | FastAPI daemon serving RAG pipeline on Railway |
 | Poll-and-act | Monitor external state changes | Poll marketplace API every 5min for price changes |
 

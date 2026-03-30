@@ -42,7 +42,7 @@ A memory_scope defines what memory an agent has access to, how it persists, and 
 | DSPy | No built-in memory | State managed externally; examples cached |
 | Haystack | `ChatMessageStore` | Conversation memory via store interface |
 | OpenAI | Assistants thread history | Automatic conversation memory per thread |
-| Anthropic | No native memory | CODEXA implements via file-based MEMORY.md system |
+| Anthropic | No native memory | organization implements via file-based MEMORY.md system |
 
 ## Key Parameters
 | Parameter | Type | Default | Tradeoff |
@@ -56,7 +56,7 @@ A memory_scope defines what memory an agent has access to, how it persists, and 
 | Pattern | When to Use | Example |
 |---------|-------------|---------|
 | Session-only memory | Stateless tasks, no continuity needed | Chat assistant with conversation buffer, cleared on exit |
-| Persistent file memory | Cross-session learning, single user | CODEXA MEMORY.md — user prefs, feedback, project state |
+| Persistent file memory | Cross-session learning, single user | organization MEMORY.md — user prefs, feedback, project state |
 | Vector-backed memory | Large memory pool, semantic search needed | FAISS index of past interactions for similar-case retrieval |
 | Tiered memory | Balance cost and recall | Hot (session buffer) → warm (file) → cold (vector archive) |
 

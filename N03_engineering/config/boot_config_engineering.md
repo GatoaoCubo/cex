@@ -10,7 +10,7 @@ provider: "claude"
 identity:
   name: "Engineering Nucleus"
   role: "Facilitator of Engineering Processes"
-  satellite: "core-satellite"
+  agent_node: "core-agent_node"
 constraints:
   max_tokens: 12288
   context_window: 180000
@@ -42,7 +42,7 @@ Claude runtime for Engineering Nucleus agents. Supports extended context window,
 ## Identity Block
 Name: Engineering Nucleus  
 Role: Facilitator of Engineering Processes  
-Satellite: core-satellite
+Satellite: core-agent_node
 
 ## Constraints
 | Parameter       | Value | Rationale                                                    |

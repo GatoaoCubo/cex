@@ -9,7 +9,7 @@ author: "workflow-builder"
 title: "Knowledge Nucleus Workflow"
 steps_count: 3
 execution: mixed
-satellites: [oracle, curator]
+agent_nodes: [oracle, curator]
 timeout: 600000
 retry_policy: per_step
 depends_on: []
@@ -62,4 +62,4 @@ This workflow orchestrates the asynchronous gathering of knowledge, curation of 
 
 ## References
 - Signal-builder for completion and error signals.
-- Spawn-config-builder for satellite launch configurations.
+- Spawn-config-builder for agent_node launch configurations.

@@ -47,7 +47,7 @@ An env_config is the authoritative YAML spec of environment variables for a boun
 ## Key Parameters
 | Parameter | Type | Default | Tradeoff |
 |-----------|------|---------|----------|
-| scope | string | required | system/satellite/service — tighter = clearer ownership |
+| scope | string | required | system/agent_node/service — tighter = clearer ownership |
 | required | list[EnvVar] | required | System fails without these — zero defaults allowed |
 | optional | list[EnvVar] | [] | System degrades gracefully — always document default |
 | secret_refs | list[str] | [] | Names pointing to secret_config, never actual values |
@@ -55,16 +55,16 @@ An env_config is the authoritative YAML spec of environment variables for a boun
 ## Patterns
 | Pattern | When to Use | Example |
 |---------|-------------|---------|
-| Prefix scoping | All vars prefixed by service | `CODEXA_*`, `RAILWAY_*`, `ANTHROPIC_*` |
+| Prefix scoping | All vars prefixed by service | `organization_*`, `RAILWAY_*`, `ANTHROPIC_*` |
 | Secret separation | API keys as pointer, not value | `ANTHROPIC_API_KEY` → `p09_secret.md` |
-| Feature toggle | Boolean env vars enable features | `FIRECRAWL_ENABLED=true`, `CODEXA_RLM_PROBING=true` |
+| Feature toggle | Boolean env vars enable features | `FIRECRAWL_ENABLED=true`, `organization_RLM_PROBING=true` |
 
 ## Anti-Patterns
 | Anti-Pattern | Why It Fails | Fix |
 |-------------|-------------|-----|
 | Inline secrets | API key values committed to YAML/git | Always use `secret_refs` pointer to secret_config |
 | Undocumented defaults | Optional vars without defaults cause silent degradation | Document every optional var's default value |
-| God env config | 50+ vars in one config with mixed scopes | Split by service scope; one file per satellite/service |
+| God env config | 50+ vars in one config with mixed scopes | Split by service scope; one file per agent_node/service |
 
 ## Integration Graph
 ```

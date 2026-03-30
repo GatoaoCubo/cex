@@ -36,8 +36,8 @@ mcp_config_file: ".mcp-operations.json"
 flags: ["--verbose", "--log"]
 domain: "operational-management"
 quality: null
-tags: [satellite, operations, nucleus]
-tldr: "operations nucleus satellite — opus model, workflow+task MCPs, central operational management."
+tags: [agent_node, operations, nucleus]
+tldr: "operations nucleus agent_node — opus model, workflow+task MCPs, central operational management."
 ## Role
 The operations nucleus serves as the central hub for managing and optimizing operational tasks, focusing on execution, coordination, and process optimization within the operations domain.
 
@@ -48,10 +48,10 @@ The operations nucleus serves as the central hub for managing and optimizing ope
   - **task_executor**: ensures task execution is carried out efficiently.
 
 ## Boot Sequence
-1. Load core_operations_schema (establishes satellite identity and primary functions)
+1. Load core_operations_schema (establishes agent_node identity and primary functions)
 2. Initialize workflow_handler MCP (ensures workflow management capabilities are active)
 3. Initialize task_executor MCP (prepares the system for task execution)
-4. Check task dispatch queue (ensures the satellite is ready to receive and process tasks)
+4. Check task dispatch queue (ensures the agent_node is ready to receive and process tasks)
 
 ## Dispatch
 Keywords: execute, manage, coordinate, optimize, workflow

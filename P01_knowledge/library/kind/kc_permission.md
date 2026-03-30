@@ -11,7 +11,7 @@ author: york
 domain: permission
 quality: null
 tags: [permission, P09, GOVERN, kind-kc]
-tldr: "permission is a structured access control rule binding a subject (agent/satellite) to allowed actions (read/write/execute/spawn) on resources — with explicit deny rules overriding allows."
+tldr: "permission is a structured access control rule binding a subject (agent/agent_node) to allowed actions (read/write/execute/spawn) on resources — with explicit deny rules overriding allows."
 when_to_use: "Building, reviewing, or reasoning about permission artifacts"
 keywords: [access_control, RBAC, agent_permissions]
 feeds_kinds: [permission]
@@ -47,7 +47,7 @@ A permission is a structured access control rule specifying who (subject) can do
 ## Key Parameters
 | Parameter | Type | Default | Tradeoff |
 |-----------|------|---------|----------|
-| scope | string | required | system/satellite/agent — wider = harder to audit |
+| scope | string | required | system/agent_node/agent — wider = harder to audit |
 | subject | string | required | Who — never use wildcard `*` without explicit justification |
 | actions | list[enum] | required | read/write/execute/spawn/delete — minimum viable set |
 | deny | list[PermRule] | [] | Explicit denies override all allows — missing = no exceptions |
@@ -57,7 +57,7 @@ A permission is a structured access control rule specifying who (subject) can do
 |---------|-------------|---------|
 | Satellite isolation | Satellite writes only to its own signal/output paths | `subject: atlas, actions: [write], resources: [records/signals/atlas*]` |
 | Tool whitelist | Agent may only call approved tools | `subject: scout, actions: [execute], resources: [glob, grep, read]` |
-| Spawn gate | Only STELLA may spawn satellites | `subject: stella, actions: [spawn], resources: [*]` |
+| Spawn gate | Only orchestrator may spawn agent_nodes | `subject: stella, actions: [spawn], resources: [*]` |
 
 ## Anti-Patterns
 | Anti-Pattern | Why It Fails | Fix |

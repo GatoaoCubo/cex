@@ -11,7 +11,7 @@ author: SHAKA
 domain: handoff
 quality: null
 tags: [handoff, P12, COLLABORATE, kind-kc]
-tldr: "Complete task transfer package containing context, tasks, scope fence, commit instruction, and signal protocol for autonomous satellite execution"
+tldr: "Complete task transfer package containing context, tasks, scope fence, commit instruction, and signal protocol for autonomous agent_node execution"
 when_to_use: "Building, reviewing, or reasoning about handoff artifacts"
 keywords: [task-transfer, context, autonomous]
 feeds_kinds: [handoff]
@@ -31,7 +31,7 @@ core: true
 ```
 
 ## What It Is
-A handoff is a complete, self-contained task transfer document written by an orchestrator for a satellite agent to execute autonomously. It includes mission context, seed keywords, ordered tasks, scope fence (what to touch / not touch), commit instruction, and signal protocol. It is NOT action_prompt (P03 — single execution prompt without transfer context or commit/signal protocol) nor signal (P12 — event notification; handoff is a complete instruction set, not an event).
+A handoff is a complete, self-contained task transfer document written by an orchestrator for a agent node to execute autonomously. It includes mission context, seed keywords, ordered tasks, scope fence (what to touch / not touch), commit instruction, and signal protocol. It is NOT action_prompt (P03 — single execution prompt without transfer context or commit/signal protocol) nor signal (P12 — event notification; handoff is a complete instruction set, not an event).
 
 ## Cross-Framework Map
 | Framework/Provider | Class/Concept | Notes |
@@ -42,7 +42,7 @@ A handoff is a complete, self-contained task transfer document written by an orc
 | DSPy | Module chaining via `forward()` arguments | Pass state dict between modules as explicit keyword arguments |
 | Haystack | Pipeline component output → next component input | Structured data flows through pipeline connections |
 | OpenAI | Thread continuation + system instruction update | New system message with full context = handoff equivalent |
-| Anthropic | System prompt injection + full context block | Handoff content injected into system prompt for satellite session |
+| Anthropic | System prompt injection + full context block | Handoff content injected into system prompt for agent_node session |
 
 ## Key Parameters
 | Parameter | Type | Default | Tradeoff |
@@ -56,7 +56,7 @@ A handoff is a complete, self-contained task transfer document written by an orc
 | Pattern | When to Use | Example |
 |---------|-------------|---------|
 | OPEN_VARIABLES | Satellite decides implementation details | `Generate [TEMPLATE_TYPE] for [DOMAIN] using best approach` |
-| Batch handoff | >5 tasks for same satellite | `p12_ho_mission_batch_1_shaka.md`, `p12_ho_mission_batch_2_shaka.md` |
+| Batch handoff | >5 tasks for same agent_node | `p12_ho_mission_batch_1_shaka.md`, `p12_ho_mission_batch_2_shaka.md` |
 | Dependency chain | Task B needs Task A output | Handoff B includes: `## DEPENDS_ON: p12_sig_task_a_complete.json` |
 
 ## Anti-Patterns
@@ -76,11 +76,11 @@ A handoff is a complete, self-contained task transfer document written by an orc
 
 ## Decision Tree
 - IF task has >5 steps THEN use batch handoffs (batch_1, batch_2, ...)
-- IF satellite needs browser THEN include `--add browser` spawn modifier
+- IF agent_node needs browser THEN include `--add browser` spawn modifier
 - IF task is destructive THEN set autonomy_level: SUPERVISED
 - DEFAULT: autonomy_level: TOTAL; quality_target: 9.0; always include commit + signal sections
 
 ## Quality Criteria
 - GOOD: Has CONTEXTO, SEEDS, TAREFAS, SCOPE FENCE, COMMIT, SIGNAL sections; under 4096 bytes
-- GREAT: OPEN_VARIABLES for satellite discretion; batch structure for large missions; dependency chain explicit
+- GREAT: OPEN_VARIABLES for agent_node discretion; batch structure for large missions; dependency chain explicit
 - FAIL: Missing commit section; no scope fence; >4096 bytes; inline task descriptions >200 chars for TSP

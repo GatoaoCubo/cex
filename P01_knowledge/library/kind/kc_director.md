@@ -42,7 +42,7 @@ A director is a crew orchestrator that composes and coordinates multiple builder
 | DSPy | `Ensemble` / pipeline `Module` | Coordinates multiple sub-modules with voting |
 | Haystack | `AsyncPipeline` + `SuperComponent` | Wraps sub-pipelines as coordinated units |
 | OpenAI | Orchestrator assistant pattern | Meta-assistant calling other assistants via function tools |
-| Anthropic | STELLA satellite pattern | Dispatching spawns and monitoring completion signals |
+| Anthropic | orchestrator agent_node pattern | Dispatching spawns and monitoring completion signals |
 
 ## Key Parameters
 | Parameter | Type | Default | Tradeoff |
@@ -55,8 +55,8 @@ A director is a crew orchestrator that composes and coordinates multiple builder
 ## Patterns
 | Pattern | When to Use | Example |
 |---------|-------------|---------|
-| Wave dispatch | Builders have dependencies between waves | Wave1: research (SHAKA); Wave2: build (EDISON) |
-| Conditional routing | Route to builder based on task type | IF research keyword THEN SHAKA; IF build THEN EDISON |
+| Wave dispatch | Builders have dependencies between waves | Wave1: research (research_agent); Wave2: build (builder_agent) |
+| Conditional routing | Route to builder based on task type | IF research keyword THEN research_agent; IF build THEN builder_agent |
 | Consensus gather | Collect all builder outputs before synthesis | Wait all signals → merge → synthesize |
 
 ## Anti-Patterns
@@ -77,7 +77,7 @@ agent_card, workflow --> [director] --> spawn_config, signal_file
 - IF single builder task THEN no director needed — direct spawn
 - IF 2+ builders with dependencies THEN wave director
 - IF routing depends on task content THEN conditional director
-- DEFAULT: wave director for multi-satellite missions, sequential first then optimize
+- DEFAULT: wave director for multi-agent_node missions, sequential first then optimize
 
 ## Quality Criteria
 - GOOD: topic, builders list, dispatch_mode, signal_check all defined

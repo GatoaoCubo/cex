@@ -9,7 +9,7 @@ author: "workflow-builder"
 title: "Marketing Campaign Execution"
 steps_count: 4
 execution: mixed
-satellites: [marketing_manager, content_creator, data_analyst, campaign_coordinator]
+agent_nodes: [marketing_manager, content_creator, data_analyst, campaign_coordinator]
 timeout: 720000
 retry_policy: per_step
 depends_on: []
@@ -69,4 +69,4 @@ This workflow orchestrates a marketing campaign execution involving content crea
 
 ## References
 - Signal Builder for signal conventions
-- Spawn Config Builder for satellite configurations
+- Spawn Config Builder for agent_node configurations

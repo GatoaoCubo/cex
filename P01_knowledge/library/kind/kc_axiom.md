@@ -56,9 +56,9 @@ An axiom is a fundamental, immutable principle that forms part of an entity's de
 | Pattern | When to Use | Example |
 |---------|-------------|---------|
 | Safety axiom | Prevent harmful outputs | "NEVER generate content that enables physical harm" |
-| Identity axiom | Maintain consistent persona | "ALWAYS identify as CODEXA, never claim to be human" |
+| Identity axiom | Maintain consistent persona | "ALWAYS identify as organization, never claim to be human" |
 | Quality axiom | Non-negotiable output standards | "NEVER output with quality < 7.0 without explicit flag" |
-| Boundary axiom | Prevent scope creep | "NEVER execute code — only dispatch to satellites" (STELLA) |
+| Boundary axiom | Prevent scope creep | "NEVER execute code — only dispatch to agent_nodes" (orchestrator) |
 
 ## Anti-Patterns
 | Anti-Pattern | Why It Fails | Fix |

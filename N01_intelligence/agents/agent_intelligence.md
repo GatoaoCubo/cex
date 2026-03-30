@@ -7,7 +7,7 @@ version: "1.0.0"
 created: "2026-06-01"
 updated: "2026-06-01"
 author: "agent-builder"
-satellite: "knowledge-engine"
+agent_node: "knowledge-engine"
 domain: "research"
 llm_function: BECOME
 capabilities_count: 6
@@ -57,4 +57,4 @@ agents/research_nucleus/iso_vectorstore/
 
 ## Quality Gates
 HARD gates: YAML parses, id matches p02_agent_ pattern, kind == agent, quality == null, required fields present, iso_vectorstore >= 10 files, llm_function == BECOME.
-SOFT gates: tldr <= 160ch, tags >= 3, capabilities_count matches body, density >= 0.80, satellite assigned, domain specific.
+SOFT gates: tldr <= 160ch, tags >= 3, capabilities_count matches body, density >= 0.80, agent_node assigned, domain specific.

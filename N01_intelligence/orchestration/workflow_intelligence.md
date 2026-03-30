@@ -9,7 +9,7 @@ author: "workflow-builder"
 title: "Research Nucleus Workflow"
 steps_count: 3
 execution: mixed
-satellites: [sat_research_1, sat_analysis_1]
+agent_nodes: [sat_research_1, sat_analysis_1]
 timeout: 7200
 retry_policy: per_step
 depends_on: []
@@ -55,10 +55,10 @@ Orchestrates a research-oriented mission where initial data is collected, analyz
 - spawn_configs for sat_research_1 and sat_analysis_1 should be valid
 
 ## Signals
-- **On step complete**: {step}_complete signal emitted by satellite
+- **On step complete**: {step}_complete signal emitted by agent_node
 - **On workflow complete**: workflow_complete signal with report quality
 - **On error**: {step}_error signal, retry on step (max 2), escalate if persistent
 
 ## References
 - Signal Builder conventions for complete/error signals
-- Spawn Config Builder for satellite configurations
+- Spawn Config Builder for agent_node configurations

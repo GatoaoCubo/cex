@@ -6,7 +6,7 @@ version: "1.0.0"
 created: "2023-10-11"
 updated: "2023-10-11"
 author: "handoff-builder"
-satellite: "admin"
+agent_node: "admin"
 mission: "AdminNucleus"
 autonomy: "assisted"
 quality_target: 8.5

@@ -7,7 +7,7 @@ version: "1.0.0"
 created: "2023-10-12"
 updated: "2023-10-12"
 author: "agent-builder"
-satellite: "engineering_hub"
+agent_node: "engineering_hub"
 domain: "engineering"
 llm_function: BECOME
 capabilities_count: 5

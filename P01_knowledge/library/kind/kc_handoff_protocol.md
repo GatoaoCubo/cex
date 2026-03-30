@@ -31,7 +31,7 @@ core: true
 ```
 
 ## What It Is
-A handoff_protocol defines how one agent transfers control to another — what context is passed, what the receiving agent must return, and what triggers the transfer. It is the contract between agents in a multi-agent system. It is NOT a dispatch_rule (P12, which maps keywords to satellites) nor a router (which selects the target). Handoff protocols answer "what do I send and what do I get back?" — dispatch rules answer "who gets this task?"
+A handoff_protocol defines how one agent transfers control to another — what context is passed, what the receiving agent must return, and what triggers the transfer. It is the contract between agents in a multi-agent system. It is NOT a dispatch_rule (P12, which maps keywords to agent_nodes) nor a router (which selects the target). Handoff protocols answer "what do I send and what do I get back?" — dispatch rules answer "who gets this task?"
 
 ## Cross-Framework Map
 | Framework/Provider | Class/Concept | Notes |
@@ -55,8 +55,8 @@ A handoff_protocol defines how one agent transfers control to another — what c
 ## Patterns
 | Pattern | When to Use | Example |
 |---------|-------------|---------|
-| File-based handoff | Async multi-terminal agents | STELLA writes `.claude/handoffs/task_edison.md`, spawns EDISON |
-| Signal-based return | Async completion notification | EDISON writes signal JSON on completion; STELLA polls |
+| File-based handoff | Async multi-terminal agents | orchestrator writes `.claude/handoffs/task_edison.md`, spawns builder_agent |
+| Signal-based return | Async completion notification | builder_agent writes signal JSON on completion; orchestrator polls |
 | Tool-based handoff | Synchronous agent delegation | Agent A calls `delegate_to(agent_b, context)` tool |
 | Queue-based handoff | High-volume multi-agent | Tasks pushed to queue; workers pull and process |
 
@@ -79,7 +79,7 @@ A handoff_protocol defines how one agent transfers control to another — what c
 - IF agents run in separate terminals THEN file-based async handoff with signals
 - IF high volume, many concurrent agents THEN queue-based handoff
 - IF simple keyword routing without context THEN dispatch_rule (P12) instead
-- DEFAULT: file-based handoff for CODEXA satellite architecture
+- DEFAULT: file-based handoff for organization agent_node architecture
 
 ## Quality Criteria
 - GOOD: Trigger defined; context_passed listed; return_contract specified

@@ -11,7 +11,7 @@ author: york
 domain: rate_limit_config
 quality: null
 tags: [rate_limit_config, P09, CONSTRAIN, kind-kc]
-tldr: "rate_limit_config defines RPM, TPM, and daily budget caps per model or satellite — with backoff strategy — to prevent runaway spend and provider throttling."
+tldr: "rate_limit_config defines RPM, TPM, and daily budget caps per model or agent_node — with backoff strategy — to prevent runaway spend and provider throttling."
 when_to_use: "Building, reviewing, or reasoning about rate_limit_config artifacts"
 keywords: [rate_limiting, RPM, budget_cap]
 feeds_kinds: [rate_limit_config]
@@ -64,7 +64,7 @@ A rate_limit_config defines hard ceilings on requests per minute (RPM), tokens p
 |-------------|-------------|-----|
 | No budget cap in production | Runaway agents generate unbounded spend | Always set `daily_budget_usd` in production |
 | Linear backoff | Linear retry floods provider on sustained outage | Use exponential backoff with jitter |
-| Shared limits across satellites | One satellite's burst starves others | Isolate rate limit config per satellite |
+| Shared limits across agent_nodes | One agent_node's burst starves others | Isolate rate limit config per agent_node |
 
 ## Integration Graph
 ```
@@ -82,4 +82,4 @@ env_config, secret_config --> [rate_limit_config] --> runtime_rule, agent_card
 ## Quality Criteria
 - GOOD: rpm, tpm, backoff_strategy all present
 - GREAT: per-model limits, daily_budget_usd set, conservation mode threshold defined
-- FAIL: no budget cap in production, linear backoff, single shared config for all satellites
+- FAIL: no budget cap in production, linear backoff, single shared config for all agent_nodes

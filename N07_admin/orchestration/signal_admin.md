@@ -8,7 +8,7 @@ pillar: P12
 
 | Field          | Type          | Required/Optional | Allowed Values/Notes                          |
 |----------------|---------------|-------------------|------------------------------------------------|
-| satellite      | string        | Required          | Lowercase slug representing emitting agent     |
+| agent_node      | string        | Required          | Lowercase slug representing emitting agent     |
 | status         | string        | Required          | "complete", "error", "progress"               |
 | quality_score  | float or null | Required          | Fixed null value for outputs                   |
 | timestamp      | string        | Required          | ISO 8601 formatted datetime                    |
@@ -25,7 +25,7 @@ pillar: P12
 ### Complete Signal
 ```json
 {
-  "satellite": "central_admin",
+  "agent_node": "central_admin",
   "status": "complete",
   "quality_score": null,
   "timestamp": "2023-10-05T14:48:00Z",
@@ -39,7 +39,7 @@ pillar: P12
 ### Error Signal
 ```json
 {
-  "satellite": "central_admin",
+  "agent_node": "central_admin",
   "status": "error",
   "quality_score": null,
   "timestamp": "2023-10-05T14:50:00Z",
@@ -52,7 +52,7 @@ pillar: P12
 ### Progress Signal
 ```json
 {
-  "satellite": "central_admin",
+  "agent_node": "central_admin",
   "status": "progress",
   "quality_score": null,
   "timestamp": "2023-10-05T14:52:00Z",
@@ -80,6 +80,6 @@ pillar: P12
 
 # Consumer Contract
 
-- **MUST** handle fields: `satellite`, `status`, `quality_score`, `timestamp`.
+- **MUST** handle fields: `agent_node`, `status`, `quality_score`, `timestamp`.
 - **MAY** process optional fields, ignoring them if not applicable or if data is absent.
 - **MUST NOT** assume signal contains routing logic, instructions, or instructions for task completion.

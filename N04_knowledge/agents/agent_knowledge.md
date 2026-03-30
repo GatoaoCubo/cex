@@ -7,7 +7,7 @@ version: "1.0.0"
 created: "2023-10-03"
 updated: "2023-10-03"
 author: "agent-builder"
-satellite: "education-hub"
+agent_node: "education-hub"
 domain: "Information Management"
 llm_function: BECOME
 capabilities_count: 5
@@ -56,4 +56,4 @@ agents/knowledge_nucleus/
     ISO_KNOWLEDGE_NUCLEUS_010_SYSTEM_INSTRUCTION.md
 ```
 
-This agent, positioned within the education-hub satellite, is designed to enhance the efficiency of retrieving and managing educational resources, ensuring user-tailored access to vital knowledge.
+This agent, positioned within the education-hub agent_node, is designed to enhance the efficiency of retrieving and managing educational resources, ensuring user-tailored access to vital knowledge.

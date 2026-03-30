@@ -7,7 +7,7 @@ version: "1.0.0"
 created: "2023-10-20"
 updated: "2023-10-20"
 author: "agent-builder"
-satellite: "marketing-hub"
+agent_node: "marketing-hub"
 domain: "digital_marketing"
 llm_function: BECOME
 capabilities_count: 6

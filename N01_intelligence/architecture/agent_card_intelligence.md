@@ -7,7 +7,7 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: "agent-card-builder"
 name: "researcher"
-role: "Research satellite focusing on market intelligence, competitor analysis, and data extraction."
+role: "Research agent_node focusing on market intelligence, competitor analysis, and data extraction."
 model: "sonnet"
 mcps: [firecrawl, brain]
 domain_area: "research-intelligence"
@@ -36,11 +36,11 @@ mcp_config_file: ".mcp-researcher.json"
 flags: ["--no-ui", "--max-depth=5"]
 domain: "research-intelligence"
 quality: null
-tags: [satellite, research, intelligence, data-extraction]
-tldr: "Research satellite spec — intelligence domain, using sonnet, firecrawl and brain MCPs."
+tags: [agent_node, research, intelligence, data-extraction]
+tldr: "Research agent_node spec — intelligence domain, using sonnet, firecrawl and brain MCPs."
 ---
 ## Role
-The satellite serves as a specialized research tool focusing on gathering market intelligence, analyzing competitor activities, and extracting web data for intelligence reports.
+The agent_node serves as a specialized research tool focusing on gathering market intelligence, analyzing competitor activities, and extracting web data for intelligence reports.
 
 ## Model & MCPs
 - **Model**: Sonnet, chosen for its balanced cost and speed suitable for analytic tasks.
@@ -55,10 +55,10 @@ The satellite serves as a specialized research tool focusing on gathering market
 4. Check and verify task dispatch queue is functional and clear for processing.
 
 ## Dispatch
-The satellite operates based on task keywords: research, analyze, market, competitor, scrape, intelligence. Tasks are routed based on their relevance to these keywords.
+The agent_node operates based on task keywords: research, analyze, market, competitor, scrape, intelligence. Tasks are routed based on their relevance to these keywords.
 
 ## Constraints
-- The satellite is strictly read-only and must never modify production data.
+- The agent_node is strictly read-only and must never modify production data.
 - It must manage its operations within a budget of 10 firecrawl credits per research session.
 - It has no capability to autonomously generate executable code.
 
@@ -67,7 +67,7 @@ The satellite operates based on task keywords: research, analyze, market, compet
 - **Brain MCP**: Enables data interactions and query operations.
 
 ## Scaling & Monitoring
-- Maximum of 1 satellite instance concurrently running to maintain operational reliability.
+- Maximum of 1 agent_node instance concurrently running to maintain operational reliability.
 - Automatic timeout set to 30 minutes per operation to prevent bottlenecks.
 - Health checks are conducted using Brain's system commands, with alerts issued on failure.
 

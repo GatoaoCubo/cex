@@ -48,7 +48,7 @@ A signal is a lightweight JSON event file written by one agent and read by anoth
 | Parameter | Type | Default | Tradeoff |
 |-----------|------|---------|----------|
 | event_type | enum | required | complete/error/progress/blocked — precise typing enables routing |
-| source | string | required | Emitting agent/satellite name |
+| source | string | required | Emitting agent/agent_node name |
 | score | float | null | Optional quality score; required for complete events going to pool |
 | payload | map | {} | Minimal supplementary data; avoid large payloads in signal |
 
@@ -68,7 +68,7 @@ A signal is a lightweight JSON event file written by one agent and read by anoth
 
 ## Integration Graph
 ```
-[workflow] --> [signal] --> [orchestrator / STELLA]
+[workflow] --> [signal] --> [orchestrator / orchestrator]
 [bugloop] ------^      |
                   [dispatch_rule]
                   [checkpoint]

@@ -47,7 +47,7 @@ A path_config is an authoritative YAML map of named filesystem paths within a bo
 ## Key Parameters
 | Parameter | Type | Default | Tradeoff |
 |-----------|------|---------|----------|
-| scope | string | required | system/satellite/service — tighter = clearer ownership |
+| scope | string | required | system/agent_node/service — tighter = clearer ownership |
 | base_dir | path | required | Root anchor — all other paths relative to this |
 | paths | map[key, path] | required | Named aliases — more = easier reference, more maintenance |
 | readonly | list[str] | [] | Explicit read-only paths — missing = accidental overwrites |
@@ -57,14 +57,14 @@ A path_config is an authoritative YAML map of named filesystem paths within a bo
 |---------|-------------|---------|
 | Base anchor | All paths relative to base_dir | `base_dir: C:/Users/PC/Documents/GitHub/cex` |
 | Role separation | Read-only source vs writable output paths | `readonly: [P01_knowledge/templates/]` |
-| Env interpolation | Paths use env var substitution | `${CODEXA_ROOT}/records/pool/` |
+| Env interpolation | Paths use env var substitution | `${organization_ROOT}/records/pool/` |
 
 ## Anti-Patterns
 | Anti-Pattern | Why It Fails | Fix |
 |-------------|-------------|-----|
 | Hardcoded absolute paths | `C:/Users/PC/` breaks on any other machine | Always use `base_dir` + relative paths |
 | No readonly declaration | All paths writable = accidental template overwrites | Explicitly mark all source/template paths readonly |
-| God path config | One config for all 7 satellites + system | Scope per satellite or service; system config for shared dirs |
+| God path config | One config for all 7 agent_nodes + system | Scope per agent_node or service; system config for shared dirs |
 
 ## Integration Graph
 ```
@@ -76,8 +76,8 @@ env_config, permission --> [path_config] --> agent_card, law, runtime_rule
 ## Decision Tree
 - IF path points to a credential file THEN secret_config handles it
 - IF path availability determines feature THEN feature_flag + path_config
-- IF path used by exactly 1 satellite THEN satellite-scoped path config
-- DEFAULT: system path_config for shared directories, satellite path_config for local
+- IF path used by exactly 1 agent_node THEN agent_node-scoped path config
+- DEFAULT: system path_config for shared directories, agent_node path_config for local
 
 ## Quality Criteria
 - GOOD: scope, base_dir, paths map, readonly list all present

@@ -7,7 +7,7 @@ created: "2026-10-15"
 updated: "2026-10-15"
 author: "agent-card-builder"
 name: "Knowledge Nucleus"
-role: "Autonomous satellite responsible for indexing and managing document knowledge."
+role: "Autonomous agent_node responsible for indexing and managing document knowledge."
 model: "opus"
 mcps: [brain, knowledge-index]
 domain_area: "knowledge-management"
@@ -36,11 +36,11 @@ mcp_config_file: ".mcp-knowledge-nucleus.json"
 flags: ["--debug-mode", "--optimize-index"]
 domain: "knowledge-management"
 quality: null
-tags: [satellite, knowledge, nucleus]
-tldr: "Knowledge Nucleus: Autonomous satellite for document indexing and management in the knowledge domain."
+tags: [agent_node, knowledge, nucleus]
+tldr: "Knowledge Nucleus: Autonomous agent_node for document indexing and management in the knowledge domain."
 ---
 ## Role
-The Knowledge Nucleus satellite autonomously manages and indexes document-based knowledge. Its primary function includes organizing, indexing, and retrieving information effectively for various knowledge management tasks.
+The Knowledge Nucleus agent_node autonomously manages and indexes document-based knowledge. Its primary function includes organizing, indexing, and retrieving information effectively for various knowledge management tasks.
 
 ## Model & MCPs
 - **Model**: Opus (Selected for extensive reasoning capabilities in knowledge management tasks).

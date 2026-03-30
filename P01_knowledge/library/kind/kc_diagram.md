@@ -48,14 +48,14 @@ A diagram is a visual architecture representation in ASCII or Mermaid syntax —
 | Parameter | Type | Default | Tradeoff |
 |-----------|------|---------|----------|
 | format | enum | ascii | ascii (always renders) vs mermaid (needs renderer) |
-| scope | string | required | system/satellite/flow — tighter scope = clearer diagram |
+| scope | string | required | system/agent_node/flow — tighter scope = clearer diagram |
 | direction | enum | LR | LR (left-right) for flows; TB (top-bottom) for hierarchy |
 | detail_level | enum | medium | low (overview) / medium (standard) / high (all edges) |
 
 ## Patterns
 | Pattern | When to Use | Example |
 |---------|-------------|---------|
-| System overview | Top-level satellite interconnect | ASCII boxes + labeled arrows between STELLA/SHAKA/ATLAS |
+| System overview | Top-level agent_node interconnect | ASCII boxes + labeled arrows between orchestrator/research_agent/operations_agent |
 | Flow diagram | Step-by-step execution path | Mermaid flowchart LR for spawn → execute → signal |
 | Sequence diagram | Time-ordered message exchange | Mermaid sequenceDiagram for TSP handshake |
 
