@@ -1,0 +1,91 @@
+id: p08_ac_commercial_nucleus
+kind: agent_card
+pillar: P08
+version: 2.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: n06_commercial
+name: commercial_hub
+role: 'The `commercial_hub` agent card defines the deployment spec for N06 Commercial Nucleus. It handles all revenue-facing
+  artifacts: pricing strategies, online course structures, sales funnels, upsell sequences, and conversion audits.'
+model: sonnet
+mcps: '| MCP | Purpose | Status |
+
+  |-----|---------|--------|
+
+  | hotmart_mcp | Course sales data, affiliate commissions, product performance | planned |
+
+  | stripe_mcp | Subscription analytics, churn rate, payment intent data | planned |
+
+  | analytics_mcp | Funnel conversion tracking, drop-off analysis | planned |'
+domain_area: commercial-monetization
+boot_sequence:
+- Load `agent_commercial.md` — establish N06 identity and capabilities
+- Load `knowledge_card_commercial.md` — inject pricing frameworks and funnel benchmarks
+- Load `system_prompt_commercial.md` — activate ALWAYS/NEVER rules
+- Initialize MCPs (hotmart, stripe, analytics)
+- Ready for dispatch
+constraints:
+- Never handle payment transactions directly — advisory and specification only
+- Never produce pricing without a revenue model (units × price × conversion)
+- Never write generic copy — all commercial output must name the specific audience and pain
+- Never recommend a single flat price — always explore tiered options
+dispatch_keywords:
+- pricing
+- curso
+- funnel
+- monetizar
+- receita
+- conversão
+- upsell
+- checkout
+- oferta
+- venda
+- LTV
+- MRR
+- assinatura
+tools:
+- pricing_calculator
+- funnel_mapper
+- conversion_tracker
+- revenue_forecaster
+dependencies:
+- hotmart_mcp
+- stripe_mcp
+- analytics_mcp
+scaling:
+  max_concurrent: 3
+  timeout_minutes: 30
+  memory_limit_mb: 2048
+monitoring:
+  health_check: hotmart_mcp.health_check()
+  signal_on_complete: true
+  alert_on_failure: true
+runtime: claude
+subscription: anthropic_max
+flags: []
+domain: commercial-monetization
+quality: null
+tags:
+- agent_card
+- commercial
+- N06
+- sonnet
+- monetization
+tldr: 'commercial_hub: Sonnet model, Anthropic subscription, for pricing/course/funnel monetization tasks.'
+density_score: 0.88
+model_subscription:
+- 'Model: `claude-sonnet` — selected for persuasive copywriting, structured reasoning, and creative commercial strategy'
+- 'Subscription: Anthropic Max (zero API cost, subscription-based)'
+- 'NOT opus: commercial tasks require creative fluency > deep reasoning. Sonnet is optimal.'
+dispatch:
+- 'Keywords: pricing, curso, funil, monetizar, receita, conversão, upsell, checkout, oferta, venda, LTV, MRR, assinatura,
+  precificar, lançamento'
+- 'Priority: 9 (high — commercial intent is high-value, time-sensitive)'
+- 'Fallback: N03 Builder (for artifact construction) or N01 Research (for market data needs)'
+scaling_monitoring:
+- 'Max 3 concurrent instances (commercial tasks can parallelize: pricing + copy + funnel simultaneously)'
+- 30-minute timeout for complex multi-artifact commercial builds
+- Health check via hotmart_mcp connectivity
+- 'Signal on complete: write to `.cex/runtime/signals/n06_complete.json`'
+- 'Alert on failure: write to `.cex/runtime/signals/n06_error.json`'

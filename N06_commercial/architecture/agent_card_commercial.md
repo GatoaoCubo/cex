@@ -2,79 +2,92 @@
 id: p08_ac_commercial_nucleus
 kind: agent_card
 pillar: P08
-version: "1.0.0"
-created: "2023-10-25"
-updated: "2023-10-25"
-author: "agent-card-builder"
-name: "commercial-nucleus"
-role: "Handles commercial operations and strategic decision-making for revenue optimization."
-model: "opus"
-mcps: [commerce_api, finance_mcp]
-domain_area: "commercial-operations"
+version: 2.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: n06_commercial
+name: commercial_hub
+role: Commercial & Monetization Nucleus — converts expertise into revenue via pricing, courses, and funnels.
+model: sonnet
+mcps: [hotmart_mcp, stripe_mcp, analytics_mcp]
+domain_area: commercial-monetization
 boot_sequence:
-  - "Load commercial_strategy.md"
-  - "Initialize commerce_api MCP"
-  - "Initialize finance_mcp MCP"
-  - "Activate strategic modules"
-  - "Ready for task dispatch"
+  - "Load N06_commercial/agents/agent_commercial.md (identity)"
+  - "Load N06_commercial/knowledge/knowledge_card_commercial.md (domain KC)"
+  - "Load N06_commercial/prompts/system_prompt_commercial.md (rules)"
+  - "Initialize hotmart_mcp (course/product sales data)"
+  - "Initialize stripe_mcp (subscription and churn analytics)"
+  - "Ready for commercial task dispatch"
 constraints:
-  - "Never handle transactions directly to prevent financial discrepancies."
-  - "Must not exceed budget limits for strategic analyses."
-  - "Forbidden from accessing private customer data."
-dispatch_keywords: [optimize, revenue, strategy, pricing, sales]
-tools: [commerce_toolkit, financial_analyzer]
-dependencies: [finance_mcp, commerce_api]
+  - "Never write production payment or deployment code — route to N05."
+  - "Never execute financial transactions — advisory only."
+  - "Never produce a price without a revenue model projection."
+  - "Never write generic copy — all output must be audience-specific."
+dispatch_keywords: [pricing, curso, funnel, monetizar, receita, conversão, upsell, checkout, oferta, venda, LTV, MRR, assinatura]
+tools: [pricing_calculator, funnel_mapper, conversion_tracker, revenue_forecaster]
+dependencies: [hotmart_mcp, stripe_mcp, analytics_mcp]
 scaling:
-  max_concurrent: 2
-  timeout_minutes: 20
+  max_concurrent: 3
+  timeout_minutes: 30
   memory_limit_mb: 2048
 monitoring:
-  health_check: "commerce_api.health_check()"
+  health_check: "hotmart_mcp.health_check()"
   signal_on_complete: true
   alert_on_failure: true
-runtime: "claude"
-mcp_config_file: ".mcp-commercial.json"
-flags: ["--secure-mode", "-v"]
-domain: "commercial-operations"
+runtime: claude
+subscription: anthropic_max
+flags: []
+domain: commercial-monetization
 quality: null
-tags: [agent_node, commercial, revenue-optimization]
-tldr: "commercial-nucleus: Opus model for strategic decision-making in commerce."
-## Role
-The commercial-nucleus agent_node is responsible for managing commercial operations, focusing on strategic decision-making to optimize revenue, using external tools such as commerce API and finance MCP.
+tags: [agent_card, commercial, N06, sonnet, monetization]
+tldr: "commercial_hub: Sonnet model, Anthropic subscription, for pricing/course/funnel monetization tasks."
+density_score: 0.88
+---
 
-## Model & MCPs
-- **Model**: Opus - selected for its reasoning capabilities suitable for complex commercial strategies.
-- **commerce_api**: Provides access to commercial data and analytics.
-- **finance_mcp**: Supports financial modeling and analysis activities.
+## Role
+
+The `commercial_hub` agent card defines the deployment spec for N06 Commercial Nucleus.
+It handles all revenue-facing artifacts: pricing strategies, online course structures, sales funnels, upsell sequences, and conversion audits.
+
+## Model & Subscription
+
+- **Model**: `claude-sonnet` — selected for persuasive copywriting, structured reasoning, and creative commercial strategy
+- **Subscription**: Anthropic Max (zero API cost, subscription-based)
+- **NOT opus**: commercial tasks require creative fluency > deep reasoning. Sonnet is optimal.
+
+## MCPs
+
+| MCP | Purpose | Status |
+|-----|---------|--------|
+| hotmart_mcp | Course sales data, affiliate commissions, product performance | planned |
+| stripe_mcp | Subscription analytics, churn rate, payment intent data | planned |
+| analytics_mcp | Funnel conversion tracking, drop-off analysis | planned |
 
 ## Boot Sequence
-1. Load commercial_strategy.md to establish role and constraints.
-2. Initialize commerce_api MCP to connect to commercial data sources.
-3. Initialize finance_mcp MCP to prepare for financial analysis.
-4. Activate strategic modules for revenue optimization tasks.
-5. Ready for task dispatch.
+
+1. Load `agent_commercial.md` — establish N06 identity and capabilities
+2. Load `knowledge_card_commercial.md` — inject pricing frameworks and funnel benchmarks
+3. Load `system_prompt_commercial.md` — activate ALWAYS/NEVER rules
+4. Initialize MCPs (hotmart, stripe, analytics)
+5. Ready for dispatch
 
 ## Dispatch
-- Keywords: optimize, revenue, strategy, pricing, sales.
-- Ensures tasks related to commercial strategy are prioritized to this agent_node.
+
+- **Keywords**: pricing, curso, funil, monetizar, receita, conversão, upsell, checkout, oferta, venda, LTV, MRR, assinatura, precificar, lançamento
+- **Priority**: 9 (high — commercial intent is high-value, time-sensitive)
+- **Fallback**: N03 Builder (for artifact construction) or N01 Research (for market data needs)
 
 ## Constraints
-- Never handle transactions directly to prevent financial discrepancies.
-- Must not exceed budget limits for strategic analyses.
-- Forbidden from accessing private customer data to ensure compliance with privacy regulations.
 
-## Dependencies
-- finance MCP server for financial data processing.
-- commerce API for access to commercial operations data.
-- No dependencies on sibling agent_nodes for isolation and focus.
+- Never handle payment transactions directly — advisory and specification only
+- Never produce pricing without a revenue model (units × price × conversion)
+- Never write generic copy — all commercial output must name the specific audience and pain
+- Never recommend a single flat price — always explore tiered options
 
 ## Scaling & Monitoring
-- Max 2 concurrent instances to manage load efficiently.
-- 20-minute timeout to ensure timely task completion.
-- Health checks via commerce_api, issuing signals on task completion, and alerts on failures.
 
-## References
-- agent-card-builder SCHEMA.md
-- Principles of Strategic Management for Business (2021)
-
----
+- Max 3 concurrent instances (commercial tasks can parallelize: pricing + copy + funnel simultaneously)
+- 30-minute timeout for complex multi-artifact commercial builds
+- Health check via hotmart_mcp connectivity
+- Signal on complete: write to `.cex/runtime/signals/n06_complete.json`
+- Alert on failure: write to `.cex/runtime/signals/n06_error.json`

@@ -1,0 +1,91 @@
+id: p12_wf_commercial_nucleus
+kind: workflow
+pillar: P12
+version: 2.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: n06_commercial
+title: Commercial Nucleus Workflows
+steps_count: 12
+execution_mode: sequential
+error_recovery: retry
+max_retries: 2
+timeout_ms: 1800000
+spawn_delay_ms: 3000
+quality: null
+tags:
+- workflow
+- commercial
+- N06
+- course-launch
+- pricing-strategy
+- funnel-build
+tldr: Three core N06 workflows — Course Launch, Pricing Strategy, and Funnel Build — each with defined steps, signals, and
+  outputs.
+density_score: 0.9
+workflow_1_course_launch: 'Goal: Take a topic + audience → validated course with pricing, outline, and funnel ready for Hotmart/Kiwify.'
+steps: '#### Step 1: map_funnel_stages [N06]
+
+  - Action: Define TOFU/MOFU/BOFU stages. Assign artifact per stage (ad, lead magnet, webinar, sales page, email sequence).
+
+  - Input: offer details, audience, traffic source
+
+  - Output: funnel_map.md (stages → artifact types → conversion benchmarks)
+
+  - Signal: `funnel_mapped`
+
+
+  #### Step 2: write_tofu_hooks [N06]
+
+  - Action: Write 5 ad hooks / organic post headlines targeting the pain point. CTA to lead magnet.
+
+  - Input: funnel_map.md + audience pain
+
+  - Output: tofu_hooks.md
+
+  - Signal: `tofu_ready`
+
+  - Depends on: Step 1
+
+
+  #### Step 3: build_mofu_sequence [N06]
+
+  - Action: Write lead magnet outline + 3-email nurture sequence moving prospect to BOFU.
+
+  - Input: funnel_map.md + tofu_hooks.md
+
+  - Output: mofu_sequence.md
+
+  - Signal: `mofu_ready`
+
+  - Depends on: Steps 1, 2
+
+
+  #### Step 4: write_bofu_close [N06]
+
+  - Action: Write sales page or VSL close sequence — proof, offer stack, urgency, guarantee, CTA.
+
+  - Input: mofu_sequence.md + pricing tier table
+
+  - Output: bofu_close.md
+
+  - Signal: `bofu_ready`
+
+  - Depends on: Steps 2, 3'
+workflow_2_pricing_strategy: 'Goal: Given a product and audience → validated price with tiers, rationale, and revenue model.'
+workflow_3_funnel_build: 'Goal: Given an offer → complete TOFU→BOFU funnel with copy for each stage.'
+workflow_signals: '| Signal | Written to | Meaning |
+
+  |--------|-----------|---------|
+
+  | `arc_defined` | `.cex/runtime/signals/n06_arc.json` | Transformation arc ready |
+
+  | `outline_complete` | `.cex/runtime/signals/n06_outline.json` | Course structure done |
+
+  | `pricing_defined` | `.cex/runtime/signals/n06_pricing.json` | Pricing tiers ready |
+
+  | `copy_complete` | `.cex/runtime/signals/n06_copy.json` | Sales copy ready |
+
+  | `upsells_defined` | `.cex/runtime/signals/n06_upsells.json` | Upsell sequence ready |
+
+  | `funnel_mapped` | `.cex/runtime/signals/n06_funnel.json` | Full funnel map ready |'

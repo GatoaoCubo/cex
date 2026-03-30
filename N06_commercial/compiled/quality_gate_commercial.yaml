@@ -1,0 +1,105 @@
+id: p11_qg_commercial_nucleus
+kind: quality_gate
+pillar: P11
+title: Gate — Commercial Nucleus Output
+version: 2.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: n06_commercial
+domain: commercial-monetization
+quality: null
+tags:
+- quality-gate
+- commercial
+- N06
+- pricing
+- funnels
+- conversion
+tldr: Pre-output gate for N06 artifacts — ensures pricing has rationale, copy is audience-specific, and funnels have conversion
+  benchmarks.
+density_score: 0.89
+definition: '| Property | Value |
+
+  |----------|-------|
+
+  | Metric | commercial_quality_score |
+
+  | Threshold | 0.80 (publish) / 0.95 (golden) |
+
+  | Scope | All N06 artifacts before delivery |
+
+  | Applies to | pricing strategy, course outline, funnel copy, upsell sequence, revenue model |'
+hard_gates_block_if_fail: '| gate_id | Description | Block |
+
+  |---------|-------------|-------|
+
+  | H01 | YAML frontmatter parses without error | true |
+
+  | H02 | id matches pattern `^p11_qg_[a-z][a-z0-9_]+$` | true |
+
+  | H03 | kind is exactly `quality_gate` | true |
+
+  | H04 | quality field is null (no self-scoring) | true |
+
+  | H05 | All required frontmatter fields present | true |
+
+  | H06 | Pricing artifacts: price has explicit rationale (not just a number) | true |
+
+  | H07 | Copy artifacts: audience is named specifically (not "entrepreneurs" or "people") | true |
+
+  | H08 | Funnel artifacts: each stage has a conversion benchmark (%) | true |
+
+  | H09 | Course artifacts: transformation arc defined (before + after student state) | true |
+
+  | H10 | Revenue models: contains units × price × conversion = revenue calculation | true |'
+soft_gates_penalize_score: '| gate_id | Description | Max Penalty | Weight |
+
+  |---------|-------------|-------------|--------|
+
+  | S01 | Offer specificity — named product, price, and audience (not generic) | -15% | 25% |
+
+  | S02 | Persuasive force — copy uses proven structure (hook, agitate, reveal, proof, CTA) | -15% | 25% |
+
+  | S03 | Pricing logic — tiers present, rationale documented, revenue model included | -15% | 25% |
+
+  | S04 | Actionability — output can be implemented without additional research or guesswork | -10% | 15% |
+
+  | S05 | Upsell path defined — every offer has at least one defined next step (upsell/cross-sell) | -10% | 10% |'
+scoring_formula: 'commercial_quality_score = (S01 × 0.25) + (S02 × 0.25) + (S03 × 0.25) + (S04 × 0.15) + (S05 × 0.10)
+
+  PASS: all HARD gates pass AND commercial_quality_score >= 0.80
+
+  GOLDEN: commercial_quality_score >= 0.95'
+failure_actions: '| Score | Action |
+
+  |-------|--------|
+
+  | Any HARD gate fails | BLOCK — return to F6 with specific failure reason |
+
+  | 0.70-0.79 | REVIEW — return with S-gate feedback for revision |
+
+  | < 0.70 | REJECT — regenerate from F4 REASON |
+
+  | >= 0.80 | PASS — proceed to F8 COLLABORATE |
+
+  | >= 0.95 | GOLDEN — flag as reference example |'
+common_failure_patterns: '| Pattern | Gate Violated | Fix |
+
+  |---------|--------------|-----|
+
+  | "Price around R$500-R$1000" — vague range | H06 / S03 | Give exact price with rationale |
+
+  | "For entrepreneurs struggling with X" — generic audience | H07 / S01 | Name specific segment: "freelance designers earning
+  R$3k/month" |
+
+  | Funnel stage listed without conversion % | H08 / S02 | Add benchmark: "BOFU sales page: 2-5% conversion" |
+
+  | Course outline without before/after student | H09 / S01 | Write transformation arc first |
+
+  | Revenue model missing the math | H10 / S03 | Write: "100 sales × R$997 = R$99,700" |
+
+  | Copy lacks urgency or social proof | S02 | Add testimonial hook or scarcity element |'
+bypass_policy:
+- 'Who: N07 Orchestrator only'
+- 'Conditions: Only when output is for internal planning (not for delivery to end customer)'
+- 'Logging: bypass must be logged to `.cex/runtime/signals/n06_gate_bypass.json` with timestamp and reason'

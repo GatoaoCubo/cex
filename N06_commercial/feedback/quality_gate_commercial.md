@@ -2,50 +2,83 @@
 id: p11_qg_commercial_nucleus
 kind: quality_gate
 pillar: P11
-title: "Gate: Commercial Nucleus"
-version: "1.0.0"
-created: "2023-10-10"
-updated: "2023-10-10"
-author: "system"
-domain: "commercial_nucleus"
+title: Gate — Commercial Nucleus Output
+version: 2.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: n06_commercial
+domain: commercial-monetization
 quality: null
-tags: [quality-gate, commercial, governance]
-tldr: "Pre-deployment gate for commercial nucleus artifacts: ensures compliance, usability, and performance."
-density_score: 0.85
+tags: [quality-gate, commercial, N06, pricing, funnels, conversion]
+tldr: Pre-output gate for N06 artifacts — ensures pricing has rationale, copy is audience-specific, and funnels have conversion benchmarks.
+density_score: 0.89
 ---
+
 ## Definition
+
 | Property | Value |
 |----------|-------|
-| Metric | aggregate_quality_score |
-| Threshold | 0.80 |
-| Operator | >= |
-| Scope | All commercial nucleus artifacts before deployment |
-## HARD Gates
-| gate_id | description | threshold | block |
-|---------|-------------|-----------|-------|
-| H01 | YAML parses without error | N/A | true |
-| H02 | id matches pattern /^p11_qg_[a-z][a-z0-9_]+$/ | N/A | true |
-| H03 | id equals filename stem | N/A | true |
-| H04 | kind is exactly 'quality_gate' | N/A | true |
-| H05 | quality field is null | N/A | true |
-| H06 | All required fields are present in frontmatter | N/A | true |
-| H07 | Compliance with commercial regulations | 100% | true |
-| H08 | Artifact size <= 4096 bytes | N/A | true |
-## SOFT Gates
-| gate_id | description | max_penalty | weight |
+| Metric | commercial_quality_score |
+| Threshold | 0.80 (publish) / 0.95 (golden) |
+| Scope | All N06 artifacts before delivery |
+| Applies to | pricing strategy, course outline, funnel copy, upsell sequence, revenue model |
+
+## HARD Gates (block if fail)
+
+| gate_id | Description | Block |
+|---------|-------------|-------|
+| H01 | YAML frontmatter parses without error | true |
+| H02 | id matches pattern `^p11_qg_[a-z][a-z0-9_]+$` | true |
+| H03 | kind is exactly `quality_gate` | true |
+| H04 | quality field is null (no self-scoring) | true |
+| H05 | All required frontmatter fields present | true |
+| H06 | **Pricing artifacts**: price has explicit rationale (not just a number) | true |
+| H07 | **Copy artifacts**: audience is named specifically (not "entrepreneurs" or "people") | true |
+| H08 | **Funnel artifacts**: each stage has a conversion benchmark (%) | true |
+| H09 | **Course artifacts**: transformation arc defined (before + after student state) | true |
+| H10 | **Revenue models**: contains units × price × conversion = revenue calculation | true |
+
+## SOFT Gates (penalize score)
+
+| gate_id | Description | Max Penalty | Weight |
 |---------|-------------|-------------|--------|
-| S01 | Usability score | 10% | 30% |
-| S02 | Performance efficiency | 10% | 30% |
-| S03 | Documentation completeness | 10% | 20% |
-| S04 | Alignment with strategic objectives | 10% | 20% |
+| S01 | Offer specificity — named product, price, and audience (not generic) | -15% | 25% |
+| S02 | Persuasive force — copy uses proven structure (hook, agitate, reveal, proof, CTA) | -15% | 25% |
+| S03 | Pricing logic — tiers present, rationale documented, revenue model included | -15% | 25% |
+| S04 | Actionability — output can be implemented without additional research or guesswork | -10% | 15% |
+| S05 | Upsell path defined — every offer has at least one defined next step (upsell/cross-sell) | -10% | 10% |
+
 ## Scoring Formula
-final_quality_score = (S01_score * 0.30) + (S02_score * 0.30) + (S03_score * 0.20) + (S04_score * 0.20)
-PASS if all HARD gates pass AND final_quality_score >= 0.80
+
+```
+commercial_quality_score = (S01 × 0.25) + (S02 × 0.25) + (S03 × 0.25) + (S04 × 0.15) + (S05 × 0.10)
+PASS: all HARD gates pass AND commercial_quality_score >= 0.80
+GOLDEN: commercial_quality_score >= 0.95
+```
+
+## Failure Actions
+
+| Score | Action |
+|-------|--------|
+| Any HARD gate fails | BLOCK — return to F6 with specific failure reason |
+| 0.70-0.79 | REVIEW — return with S-gate feedback for revision |
+| < 0.70 | REJECT — regenerate from F4 REASON |
+| >= 0.80 | PASS — proceed to F8 COLLABORATE |
+| >= 0.95 | GOLDEN — flag as reference example |
+
+## Common Failure Patterns
+
+| Pattern | Gate Violated | Fix |
+|---------|--------------|-----|
+| "Price around R$500-R$1000" — vague range | H06 / S03 | Give exact price with rationale |
+| "For entrepreneurs struggling with X" — generic audience | H07 / S01 | Name specific segment: "freelance designers earning R$3k/month" |
+| Funnel stage listed without conversion % | H08 / S02 | Add benchmark: "BOFU sales page: 2-5% conversion" |
+| Course outline without before/after student | H09 / S01 | Write transformation arc first |
+| Revenue model missing the math | H10 / S03 | Write: "100 sales × R$997 = R$99,700" |
+| Copy lacks urgency or social proof | S02 | Add testimonial hook or scarcity element |
+
 ## Bypass Policy
-- Who: Admin
-- Conditions: Only if hard constraints temporarily unverifiable
-- Logging: Bypass must be logged with timestamp, actor, and justification
-## Audit Trail
-- What is logged: Gate evaluation results, timestamps, any bypass occurrences
-- Retention policy: Logs retained for 24 months
----
+
+- Who: N07 Orchestrator only
+- Conditions: Only when output is for internal planning (not for delivery to end customer)
+- Logging: bypass must be logged to `.cex/runtime/signals/n06_gate_bypass.json` with timestamp and reason

@@ -1,91 +1,208 @@
 ---
-
 id: p03_pt_commercial_nucleus
 kind: prompt_template
 pillar: P03
-title: "Commercial Nucleus Ad Copy Generator"
-version: "1.0.0"
-created: "2023-10-07"
-updated: "2023-10-07"
-author: "prompt-template-builder"
+title: Commercial Nucleus Prompt Templates
+version: 2.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: n06_commercial
 variables:
-  - name: "product_name"
-    type: "string"
+  - name: product_name
+    type: string
     required: true
     default: null
-    description: "The name of the product being advertised."
-  - name: "target_audience"
-    type: "string"
+    description: Name of the digital product or course.
+  - name: target_audience
+    type: string
     required: true
     default: null
-    description: "The primary audience the advertisement is aimed at."
-  - name: "key_features"
-    type: "list"
+    description: Specific audience segment (e.g., "freelance designers earning R$3-5k/month").
+  - name: transformation
+    type: string
     required: true
     default: null
-    description: "List of key features or benefits of the product."
-  - name: "call_to_action"
-    type: "string"
-    required: true
+    description: Measurable outcome the buyer achieves (e.g., "land their first R$10k client in 90 days").
+  - name: price_range
+    type: string
+    required: false
     default: null
-    description: "The action you want the audience to take after reading the ad."
-variable_syntax: "mustache"
-composable: false
-domain: "commercial_advertising"
+    description: Optional price anchor or range to inform tier design.
+  - name: platform
+    type: string
+    required: false
+    default: Hotmart
+    description: Deployment platform (Hotmart, Kiwify, Kajabi, Teachable).
+  - name: traffic_source
+    type: string
+    required: false
+    default: null
+    description: Where traffic enters the funnel (Instagram, YouTube, Google, cold email).
+variable_syntax: mustache
+composable: true
+domain: commercial-monetization
 quality: null
-tags: [advertising, copywriting, commercial, reusable]
-tldr: "Generates engaging ad copy for a commercial product targeted at a specific audience."
-keywords: [advertising, commercial, product, audience, key_features]
-density_score: 0.84
+tags: [prompt_template, commercial, N06, pricing, course, funnel, upsell]
+tldr: Four reusable N06 templates — Pricing Strategy, Course Outline, Funnel Build, and Upsell Sequence.
+density_score: 0.88
+---
+
+# Commercial Nucleus Prompt Templates
+
+Four reusable templates for N06 core tasks. Each template is composable — use individually or chain for a full product launch.
 
 ---
 
-# Commercial Nucleus Ad Copy Generator
-## Purpose
-This template generates engaging and targeted ad copy for promoting any commercial product. It is designed to articulate product benefits clearly and motivate the target audience into action through structured and reusable prompts.
+## Template 1: Pricing Strategy
 
-## Variables Table
-| Name            | Type   | Required | Default | Description                                           |
-|-----------------|--------|----------|---------|-------------------------------------------------------|
-| product_name    | string | true     | null    | The name of the product being advertised.             |
-| target_audience | string | true     | null    | The primary audience the advertisement is aimed at.   |
-| key_features    | list   | true     | null    | List of key features or benefits of the product.      |
-| call_to_action  | string | true     | null    | The action you want the audience to take.             |
+**Use when**: You need to price a digital product or course.
 
-## Template Body
-Introducing {{product_name}}, designed specifically for {{target_audience}}. Experience the outstanding benefits, including:
-- {{#key_features}}
-  - {{.}}
-{{/key_features}}
-
-Don't miss out on this opportunity. Take action now: {{call_to_action}}.
-
-## Quality Gates
-| Gate | Status | Notes |
-|------|--------|-------|
-| H01 id pattern | PASS | `p03_pt_commercial_nucleus` matches `^p03_pt_[a-z][a-z0-9_]+$`. |
-| H02 required fields | PASS | All required frontmatter fields are present. |
-| H03 no undeclared vars | PASS | No undeclared variables in the template body. |
-| H04 no unused vars | PASS | All declared variables are used in the template body. |
-| H05 size <= 8192 bytes | PASS | Size well below limit with ~1.1KB. |
-| H06 valid syntax tier | PASS | Mustache syntax is correctly applied and uniform. |
-
-## Examples
-### Filled Example
-**Variables:**
-```yaml
-product_name: "SmartHome Hub"
-target_audience: "tech-savvy homeowners"
-key_features:
-  - "Seamless integration with existing smart devices"
-  - "User-friendly interface"
-  - "Advanced security features"
-call_to_action: "Order your SmartHome Hub today"
 ```
-**Rendered Output:**
-Introducing SmartHome Hub, designed specifically for tech-savvy homeowners. Experience the outstanding benefits, including:
-- Seamless integration with existing smart devices
-- User-friendly interface
-- Advanced security features
+Design a 3-tier pricing strategy for {{product_name}}.
 
-Don't miss out on this opportunity. Take action now: Order your SmartHome Hub today.
+TARGET AUDIENCE: {{target_audience}}
+TRANSFORMATION: {{transformation}}
+PLATFORM: {{platform}}
+{{#price_range}}PRICE ANCHOR: {{price_range}}{{/price_range}}
+
+Deliverables:
+1. Transformation Value Assessment — quantify what the outcome is worth to the buyer
+2. 3-Tier Pricing Table (Basic / Pro / VIP) with:
+   - Price per tier
+   - Inclusions per tier
+   - Psychological rationale for each price point
+3. Revenue Model — 3 scenarios (conservative / realistic / optimistic):
+   - Units × Price × Conversion Rate = Revenue
+4. Recommended launch price with written rationale (2-3 sentences)
+5. Payment plan option (installments) if applicable
+
+Apply value-based pricing. Anchor to transformation, not production cost.
+```
+
+---
+
+## Template 2: Course Outline
+
+**Use when**: You need to structure a course curriculum.
+
+```
+Build a course outline for {{product_name}}.
+
+TARGET AUDIENCE: {{target_audience}}
+TRANSFORMATION: {{transformation}}
+PLATFORM: {{platform}}
+
+Deliverables:
+1. Transformation Arc:
+   - BEFORE: [student situation, pain, frustration at start]
+   - JOURNEY: [module milestones — what shifts at each module]
+   - AFTER: [specific outcome, skill, status, or income gained]
+
+2. Module Structure (4-8 modules):
+   For each module:
+   - Module title (outcome-focused, not topic-focused)
+   - 3-5 lesson titles
+   - Estimated duration
+   - What the student can DO after this module
+
+3. Pricing Tier Recommendation:
+   - Justify based on transformation depth and delivery mode
+   - Recommend platform tier (Hotmart Standard / Plus / VIP)
+
+4. Upsell Path:
+   - What is the logical next product after completing this course?
+```
+
+---
+
+## Template 3: Funnel Build
+
+**Use when**: You need a complete sales funnel for a product.
+
+```
+Build a complete sales funnel for {{product_name}}.
+
+TARGET AUDIENCE: {{target_audience}}
+TRANSFORMATION: {{transformation}}
+TRAFFIC SOURCE: {{traffic_source}}
+PLATFORM: {{platform}}
+
+Deliverables:
+
+TOFU (Top of Funnel):
+- 3 ad hooks / post headlines targeting the specific pain of {{target_audience}}
+- CTA for each hook (lead magnet name, opt-in page headline)
+- Expected conversion benchmark: [X%]
+
+MOFU (Middle of Funnel):
+- Lead magnet title + 3-bullet value proposition
+- 3-email nurture sequence:
+  - Email 1 (day 0): Deliver + educate
+  - Email 2 (day 2): Deepen pain + introduce mechanism
+  - Email 3 (day 4): Transition to offer
+
+BOFU (Bottom of Funnel):
+- Sales page headline (outcome-specific)
+- VSL outline (hook → problem → mechanism → proof → offer → CTA)
+- Guarantee framing
+- Primary CTA text
+
+POST-PURCHASE:
+- Order bump: [name, price, one-sentence value prop]
+- OTO1: [name, price, take rate estimate]
+- Downsell: [fallback if OTO declined]
+```
+
+---
+
+## Template 4: Upsell Sequence
+
+**Use when**: You need to maximize LTV after the first sale.
+
+```
+Design a complete upsell sequence for buyers of {{product_name}}.
+
+TARGET AUDIENCE: {{target_audience}} who just purchased
+BASE PRICE: {{price_range}}
+
+Deliverables:
+
+1. ORDER BUMP (shown at checkout):
+   - Product name
+   - Price (15-30% of base price)
+   - One-sentence value: "Add X to your order and get Y faster"
+   - Expected take rate: [%]
+
+2. OTO1 (shown immediately after purchase):
+   - Product name + transformation
+   - Price (50-100% of base price)
+   - Pitch: what does this unlock that the base product doesn't?
+   - Urgency element
+   - Expected take rate: [%]
+
+3. OTO2 (shown after OTO1 decline or accept):
+   - Done-for-you / implementation layer
+   - Price (2-3x base price)
+   - Expected take rate: [%]
+
+4. DOWNSELL (shown after OTO1 decline):
+   - Stripped-down version OR payment plan version
+   - Price (30-40% of OTO1)
+   - Expected conversion of declinees: [%]
+
+5. LTV PROJECTION:
+   - AOV = Base + (Bump × take%) + (OTO1 × take%) + (OTO2 × take%)
+   - LTV = AOV × [repeat purchase or subscription factor]
+```
+
+---
+
+## Composability
+
+These templates chain naturally for a product launch:
+
+```
+Template 2 (Course Outline) → Template 1 (Pricing Strategy) → Template 3 (Funnel Build) → Template 4 (Upsell Sequence)
+```
+
+Run in sequence or dispatch to N06 via grid for parallel execution.

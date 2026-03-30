@@ -1,0 +1,95 @@
+id: p03_pt_commercial_nucleus
+kind: prompt_template
+pillar: P03
+title: Commercial Nucleus Prompt Templates
+version: 2.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: n06_commercial
+variables:
+- name: product_name
+  type: string
+  required: true
+  default: null
+  description: Name of the digital product or course.
+- name: target_audience
+  type: string
+  required: true
+  default: null
+  description: Specific audience segment (e.g., "freelance designers earning R$3-5k/month").
+- name: transformation
+  type: string
+  required: true
+  default: null
+  description: Measurable outcome the buyer achieves (e.g., "land their first R$10k client in 90 days").
+- name: price_range
+  type: string
+  required: false
+  default: null
+  description: Optional price anchor or range to inform tier design.
+- name: platform
+  type: string
+  required: false
+  default: Hotmart
+  description: Deployment platform (Hotmart, Kiwify, Kajabi, Teachable).
+- name: traffic_source
+  type: string
+  required: false
+  default: null
+  description: Where traffic enters the funnel (Instagram, YouTube, Google, cold email).
+variable_syntax: mustache
+composable: true
+domain: commercial-monetization
+quality: null
+tags:
+- prompt_template
+- commercial
+- N06
+- pricing
+- course
+- funnel
+- upsell
+tldr: Four reusable N06 templates — Pricing Strategy, Course Outline, Funnel Build, and Upsell Sequence.
+density_score: 0.88
+template_1_pricing_strategy: "Use when: You need to price a digital product or course.\n\nDesign a 3-tier pricing strategy\
+  \ for {{product_name}}.\n\nTARGET AUDIENCE: {{target_audience}}\nTRANSFORMATION: {{transformation}}\nPLATFORM: {{platform}}\n\
+  {{#price_range}}PRICE ANCHOR: {{price_range}}{{/price_range}}\n\nDeliverables:\n1. Transformation Value Assessment — quantify\
+  \ what the outcome is worth to the buyer\n2. 3-Tier Pricing Table (Basic / Pro / VIP) with:\n   - Price per tier\n   - Inclusions\
+  \ per tier\n   - Psychological rationale for each price point\n3. Revenue Model — 3 scenarios (conservative / realistic\
+  \ / optimistic):\n   - Units × Price × Conversion Rate = Revenue\n4. Recommended launch price with written rationale (2-3\
+  \ sentences)\n5. Payment plan option (installments) if applicable\n\nApply value-based pricing. Anchor to transformation,\
+  \ not production cost.\n\n---"
+template_2_course_outline: "Use when: You need to structure a course curriculum.\n\nBuild a course outline for {{product_name}}.\n\
+  \nTARGET AUDIENCE: {{target_audience}}\nTRANSFORMATION: {{transformation}}\nPLATFORM: {{platform}}\n\nDeliverables:\n1.\
+  \ Transformation Arc:\n   - BEFORE: [student situation, pain, frustration at start]\n   - JOURNEY: [module milestones —\
+  \ what shifts at each module]\n   - AFTER: [specific outcome, skill, status, or income gained]\n\n2. Module Structure (4-8\
+  \ modules):\n   For each module:\n   - Module title (outcome-focused, not topic-focused)\n   - 3-5 lesson titles\n   - Estimated\
+  \ duration\n   - What the student can DO after this module\n\n3. Pricing Tier Recommendation:\n   - Justify based on transformation\
+  \ depth and delivery mode\n   - Recommend platform tier (Hotmart Standard / Plus / VIP)\n\n4. Upsell Path:\n   - What is\
+  \ the logical next product after completing this course?\n\n---"
+template_3_funnel_build: "Use when: You need a complete sales funnel for a product.\n\nBuild a complete sales funnel for {{product_name}}.\n\
+  \nTARGET AUDIENCE: {{target_audience}}\nTRANSFORMATION: {{transformation}}\nTRAFFIC SOURCE: {{traffic_source}}\nPLATFORM:\
+  \ {{platform}}\n\nDeliverables:\n\nTOFU (Top of Funnel):\n- 3 ad hooks / post headlines targeting the specific pain of {{target_audience}}\n\
+  - CTA for each hook (lead magnet name, opt-in page headline)\n- Expected conversion benchmark: [X%]\n\nMOFU (Middle of Funnel):\n\
+  - Lead magnet title + 3-bullet value proposition\n- 3-email nurture sequence:\n  - Email 1 (day 0): Deliver + educate\n\
+  \  - Email 2 (day 2): Deepen pain + introduce mechanism\n  - Email 3 (day 4): Transition to offer\n\nBOFU (Bottom of Funnel):\n\
+  - Sales page headline (outcome-specific)\n- VSL outline (hook → problem → mechanism → proof → offer → CTA)\n- Guarantee\
+  \ framing\n- Primary CTA text\n\nPOST-PURCHASE:\n- Order bump: [name, price, one-sentence value prop]\n- OTO1: [name, price,\
+  \ take rate estimate]\n- Downsell: [fallback if OTO declined]\n\n---"
+template_4_upsell_sequence: "Use when: You need to maximize LTV after the first sale.\n\nDesign a complete upsell sequence\
+  \ for buyers of {{product_name}}.\n\nTARGET AUDIENCE: {{target_audience}} who just purchased\nBASE PRICE: {{price_range}}\n\
+  \nDeliverables:\n\n1. ORDER BUMP (shown at checkout):\n   - Product name\n   - Price (15-30% of base price)\n   - One-sentence\
+  \ value: \"Add X to your order and get Y faster\"\n   - Expected take rate: [%]\n\n2. OTO1 (shown immediately after purchase):\n\
+  \   - Product name + transformation\n   - Price (50-100% of base price)\n   - Pitch: what does this unlock that the base\
+  \ product doesn't?\n   - Urgency element\n   - Expected take rate: [%]\n\n3. OTO2 (shown after OTO1 decline or accept):\n\
+  \   - Done-for-you / implementation layer\n   - Price (2-3x base price)\n   - Expected take rate: [%]\n\n4. DOWNSELL (shown\
+  \ after OTO1 decline):\n   - Stripped-down version OR payment plan version\n   - Price (30-40% of OTO1)\n   - Expected conversion\
+  \ of declinees: [%]\n\n5. LTV PROJECTION:\n   - AOV = Base + (Bump × take%) + (OTO1 × take%) + (OTO2 × take%)\n   - LTV\
+  \ = AOV × [repeat purchase or subscription factor]\n\n---"
+composability: 'These templates chain naturally for a product launch:
+
+
+  Template 2 (Course Outline) → Template 1 (Pricing Strategy) → Template 3 (Funnel Build) → Template 4 (Upsell Sequence)
+
+
+  Run in sequence or dispatch to N06 via grid for parallel execution.'

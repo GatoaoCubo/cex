@@ -1,65 +1,119 @@
 ---
-
-```yaml
 id: p07_sr_commercial_evaluation
 kind: scoring_rubric
 pillar: P07
-title: "Rubric: Commercial Evaluation"
-version: "1.0.0"
-created: "2023-10-18"
-updated: "2023-10-18"
-author: "scoring-rubric-builder"
-framework: "Commercial Evaluation"
-target_kinds: ["commercial_nucleus"]
+title: Rubric — Commercial Output Evaluation
+version: 2.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: n06_commercial
+framework: Commercial Output Evaluation
+target_kinds: [pricing_strategy, course_outline, funnel_copy, upsell_sequence, revenue_model]
 dimensions_count: 5
 total_weight: 100
 threshold_golden: 9.5
 threshold_publish: 8.0
 threshold_review: 7.0
-automation_status: "semi-automated"
-domain: "commercial"
+automation_status: semi-automated
+domain: commercial-monetization
 quality: null
-tags: [scoring-rubric, commercial, evaluation]
-tldr: "Multi-dimensional rubric for evaluating commercial artifacts: functionality, user experience, market viability, integration potential, innovation."
-density_score: 0.90
-calibration_set: [p07_gt_commercial_example_1, p07_gt_commercial_example_2]
-inter_rater_agreement: 0.85
-appeals_process: "Submit to p01-chief with detailed rationale for re-evaluation"
-linked_artifacts:
-  primary: "quality-gate-builder"
-  related: [p11_qg_commercial_publish]
+tags: [scoring-rubric, commercial, N06, pricing, funnels, conversion]
+tldr: 5-dimension rubric for N06 output — Offer Clarity, Pricing Logic, Funnel Coherence, Copy Persuasion, Revenue Potential.
+density_score: 0.91
 ---
+
 ## Framework Overview
-This rubric evaluates commercial artifacts using a comprehensive multi-dimensional framework designed to assess core quality criteria: functionality, user experience, market viability, integration potential, and innovation. The aim is to provide a balanced evaluation to aid in the decision-making process concerning commercial product viability and competitive readiness.
+
+This rubric evaluates N06 commercial artifacts across five dimensions specific to revenue-generating output.
+The framework is calibrated to the infoprodutos/digital products market (primary CEX commercial domain).
+
 ## Dimensions
-| Dimension         | Weight | Scale | Criteria                                                                                                                                 | Example (10)                                                     | Example (5)                                          |
-|-------------------|--------|-------|-----------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------|------------------------------------------------------|
-| Functionality     | 30%    | 0-10  | Meets all technical requirements with no defects. Functionality aligns completely with specification and user expectations.             | All features work seamlessly without any glitches or errors.    | Basic functions work, but several key features fail. |
-| User Experience   | 20%    | 0-10  | Intuitive design that enhances user satisfaction and efficiency. Consistently positive user feedback.                                    | UI is smooth, intuitive, with high user satisfaction rates.     | Usable but clunky, user feedback is mixed.           |
-| Market Viability  | 20%    | 0-10  | Strong competitive advantage and potential for high market adoption. Financial projections support profitability within 1 year.        | Product occupies 20% market share in less than a year.          | Moderate potential, market presence unclear.         |
-| Integration       | 15%    | 0-10  | Seamlessly integrates with existing systems with minimal configuration required. API support is robust and well-documented.              | Immediate integration with key systems, includes full API docs. | Initial integration needs significant custom coding. |
-| Innovation        | 15%    | 0-10  | Novel approach or features that differentiate it from competitors. Gains industry recognition or awards for innovation.                 | First-of-its-kind feature, recognized by industry experts.      | Some new ideas, but mostly incremental improvements. |
-## Thresholds
-| Tier   | Score | Action                                   |
-|--------|-------|------------------------------------------|
-| GOLDEN | >= 9.5 | Promote to calibration set, mark as reference |
-| PUBLISH| >= 8.0 | Merge into commercial pool for release   |
-| REVIEW | >= 7.0 | Return with specific feedback for improvement |
-| REJECT | < 7.0  | Redo from the ground up with new research |
-## Calibration
-- GOLDEN (9.7): Example 1 that meets all criteria with robust integration, market impact, and receives excellent user feedback.
-- PUBLISH (8.4): Solid artifact with minor improvement areas, demonstrates strong potential and functionality.
-- REVIEW (7.3): Needs refinements in user experience and innovation, basic functionalities present.
-- REJECT (5.3): Basic functions underdeveloped, lacks market appeal, substantial work needed.
-## Automation
-| Dimension       | Status       | Tool                      |
-|-----------------|--------------|---------------------------|
-| Functionality   | semi-automated| validate_functionality.py |
-| User Experience | manual       | Usability testing tools    |
-| Market Viability| manual       | Market analysis tools     |
-| Integration     | automated    | integration_checker.py    |
-| Innovation      | manual       | Expert review panel       |
-## References
-- Commercial Viability Analysis by TechTrend
-- User Experience Measurement Standards by UXPA
+
+| Dimension | Weight | Scale | What it Measures |
+|-----------|--------|-------|-----------------|
+| D1: Offer Clarity | 25% | 0-10 | Is the product, audience, price, and transformation unmistakably clear? |
+| D2: Pricing Logic | 25% | 0-10 | Is the price justified with value rationale, tiers, and revenue model? |
+| D3: Funnel Coherence | 20% | 0-10 | Does each funnel stage connect logically with the right artifact and CTA? |
+| D4: Copy Persuasion | 20% | 0-10 | Does the copy use proven structure (hook, agitate, reveal, proof, CTA)? |
+| D5: Revenue Potential | 10% | 0-10 | Does the artifact generate real revenue? Is the model sustainable and scalable? |
+
+## Dimension Criteria
+
+### D1: Offer Clarity (25%)
+| Score | Description |
+|-------|-------------|
+| 10 | Audience named precisely, transformation stated as measurable outcome, offer components listed explicitly |
+| 8-9 | Clear audience + transformation, minor missing specifics (e.g., platform not named) |
+| 6-7 | General audience and transformation, some specificity gaps |
+| 4-5 | Vague audience ("business owners"), vague transformation ("improve results") |
+| 0-3 | No defined audience or transformation. Generic placeholder content. |
+
+### D2: Pricing Logic (25%)
+| Score | Description |
+|-------|-------------|
+| 10 | 3-tier table + value rationale + revenue model (units × price × conversion) + psychological anchoring |
+| 8-9 | Tiers present, rationale documented, revenue model with minor gaps |
+| 6-7 | Tiers present but no rationale or revenue model |
+| 4-5 | Single flat price, no tiers, no justification |
+| 0-3 | No pricing at all, or price range without commitment |
+
+### D3: Funnel Coherence (20%)
+| Score | Description |
+|-------|-------------|
+| 10 | All stages (TOFU/MOFU/BOFU) defined, conversion benchmarks per stage, artifact per stage, natural progression |
+| 8-9 | Full funnel map, benchmarks present, minor stage gaps |
+| 6-7 | 2 of 3 stages defined, missing benchmarks |
+| 4-5 | Only one stage addressed, no stage-to-stage connection |
+| 0-3 | No funnel structure. Disconnected fragments. |
+
+### D4: Copy Persuasion (20%)
+| Score | Description |
+|-------|-------------|
+| 10 | Hook calls out exact avatar, agitates specific pain, reveals unique mechanism, proof present, CTA with urgency |
+| 8-9 | Strong hook + structure, minor proof or urgency gap |
+| 6-7 | Some structure present but hook is generic or proof is missing |
+| 4-5 | Flat copy, no hook-agitate-reveal structure, generic CTA |
+| 0-3 | No persuasive copy structure. "Buy now" level. |
+
+### D5: Revenue Potential (10%)
+| Score | Description |
+|-------|-------------|
+| 10 | Scalable model, upsell path defined, LTV > 2x AOV, projected ROAS >= 3x |
+| 8-9 | Clear revenue path, upsell defined, reasonable LTV projections |
+| 6-7 | Revenue model present but no upsell or LTV path |
+| 4-5 | One-time sale only, no recurring or upsell revenue path |
+| 0-3 | No revenue model. No path beyond initial transaction. |
+
+## Scoring Formula
+
 ```
+final_score = (D1 × 0.25) + (D2 × 0.25) + (D3 × 0.20) + (D4 × 0.20) + (D5 × 0.10)
+```
+
+## Thresholds
+
+| Tier | Score | Action |
+|------|-------|--------|
+| GOLDEN | >= 9.5 | Mark as reference example. Add to calibration set. |
+| PUBLISH | >= 8.0 | Deliver to user. Proceed to F8. |
+| REVIEW | 7.0-7.9 | Return with D-gate feedback. Revise specific dimension. |
+| REJECT | < 7.0 | Return to F4 REASON. Rebuild from plan. |
+
+## Calibration Examples
+
+| Level | Score | Profile |
+|-------|-------|---------|
+| GOLDEN | 9.7 | "Curso Precificação para Designers": full 3-tier, transformation arc, VSL, upsell sequence, R$99k revenue projection validated |
+| PUBLISH | 8.3 | Course outline + pricing tiers, transformation arc defined, missing upsell sequence details |
+| REVIEW | 7.2 | Pricing tiers present but no revenue model; copy has hook but no proof section |
+| REJECT | 5.8 | Generic course outline, single flat price, no funnel, no audience specificity |
+
+## Automation
+
+| Dimension | Status | Method |
+|-----------|--------|--------|
+| D1 Offer Clarity | semi-automated | Check for audience keywords + transformation language |
+| D2 Pricing Logic | semi-automated | Detect tier table + revenue calculation pattern |
+| D3 Funnel Coherence | manual | Stage review by N06 agent |
+| D4 Copy Persuasion | semi-automated | Hook/CTA structure pattern match |
+| D5 Revenue Potential | manual | LTV/ROAS projection review |

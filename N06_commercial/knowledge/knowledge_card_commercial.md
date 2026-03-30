@@ -2,67 +2,163 @@
 id: p01_kc_commercial_nucleus
 kind: knowledge_card
 pillar: P01
-title: "Understanding the Commercial Nucleus in Business Strategies"
-version: "1.0.0"
-created: "2023-10-01"
-updated: "2023-10-01"
-author: "John Doe"
-domain: business_strategy
+title: Commercial Monetization — Pricing, Courses & Funnels
+version: 2.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: n06_commercial
+domain: commercial-monetization
 quality: null
-tags: [business, strategy, commercial, nucleus]
-tldr: "Analyzes the role of a commercial nucleus in strategic business planning."
-when_to_use: "When developing strategies focusing on core commercial activities."
-keywords: [commercial nucleus, business strategy, core activities]
+tags: [commercial, pricing, funnels, courses, monetization, N06, revenue]
+tldr: Distilled knowledge for N06 — pricing frameworks, course monetization models, funnel stages, and conversion benchmarks.
+when_to_use: When designing pricing strategy, structuring an online course, building a sales funnel, or optimizing conversion.
+keywords: [pricing, funnel, curso, monetização, conversão, upsell, LTV, MRR, transformação]
 long_tails:
-  - "How to define a commercial nucleus in business strategy"
-  - "Examples of effective commercial nucleus integration"
+  - "Como precificar um curso online no Brasil"
+  - "Estratégia de funil de vendas para infoprodutos"
+  - "Modelos de receita para cursos online: one-time vs. assinatura"
+  - "Como estruturar upsell sequence para maximizar LTV"
 axioms:
-  - "ALWAYS ensure the commercial nucleus aligns with overall business objectives."
-  - "NEVER neglect the influence of external market changes on the commercial nucleus."
+  - "ALWAYS price to the transformation, never to the production cost."
+  - "NEVER launch without a defined upsell path — the first sale is the smallest sale."
+  - "ALWAYS validate conversion benchmarks before setting funnel revenue projections."
 linked_artifacts:
-  primary: null
-  related: []
-density_score: 0.85
-data_source: "https://business-strategy-guide.com/commercial-nucleus"
-# Understanding the Commercial Nucleus in Business Strategies
+  primary: p02_agent_commercial_nucleus
+  related: [p03_sp_commercial_nucleus, p12_wf_commercial_nucleus]
+density_score: 0.91
+---
+
+# Commercial Monetization — Pricing, Courses & Funnels
 
 ## Quick Reference
+
 ```yaml
-topic: commercial_nucleus
-scope: Business Strategy, Core Commercial Activities
-owner: John Doe
+domain: commercial-monetization
+nucleus: N06
+cli: claude-sonnet
+scope: pricing, online courses, sales funnels, conversion optimization
 criticality: high
 ```
 
-## Key Concepts
-- **Commercial Nucleus**: Central business activities that drive the majority of a company's revenue and growth.
-- **Strategic Alignment**: Ensuring that the commercial nucleus supports the business's overarching goals and market positioning.
-- **Flexibility and Adaptation**: The ability to adapt the commercial nucleus to changing market conditions while maintaining strategic focus.
+## Pricing Frameworks
 
-## Strategy Phases
-1. **Identification**: Determine the core activities that form the commercial nucleus by analyzing revenue streams and market position.
-2. **Optimization**: Streamline processes and resources to strengthen the commercial nucleus, enhancing efficiency and impact.
-3. **Review and Adaptation**: Regularly assess the efficacy of the commercial nucleus in response to market shifts and company growth stages.
+### Value-Based Pricing
+Price = perceived transformation value to the buyer, not cost to produce.
+- Formula: `Price = (Outcome Value) × (Certainty Factor) × (Speed Factor)`
+- Example: Course that helps land a R$10k/month job → price R$1,500-R$3,000
+
+### Anchor Pricing
+Always present a higher anchor before the real price.
+- "Would normally cost R$5,000. Today: R$997."
+- Anchors shift perceived value and justify the actual price
+
+### Tiered Pricing (3-tier standard)
+| Tier | Price Ratio | What it includes |
+|------|-------------|-----------------|
+| Basic | 1x | Core content only |
+| Pro | 2.5x | Core + community + Q&A |
+| VIP/Mentorship | 5x | Core + community + live sessions + 1:1 |
+
+Rule: 70-80% of buyers choose middle tier when anchored by VIP.
+
+### Psychological Pricing
+- Charm pricing: R$997 not R$1,000 (3x cheaper perception)
+- Round pricing for premium: R$2,000 feels MORE premium than R$1,997
+- Payment plans: 12x R$97 vs. R$997 à vista — installments increase access, reduce perceived barrier
+
+## Course Monetization Models
+
+| Model | Structure | Best For |
+|-------|-----------|----------|
+| One-time | Single payment, lifetime access | Low-ticket (<R$500), lead gen |
+| Cohort | Fixed start/end, group learning | Premium (R$2k+), community-driven |
+| Subscription | Monthly/annual, library access | Content depth, recurring revenue |
+| Hybrid | One-time + upsell to subscription | Most scalable — entry + LTV |
+
+### Transformation Arc (mandatory for every course)
+```
+BEFORE: [Student situation, pain, frustration]
+    ↓ [Course journey — modules as milestones]
+AFTER: [Concrete outcome, skill, status, income]
+```
+Without a transformation arc, the course has no pricing anchor.
+
+### Platform Considerations
+| Platform | Best For | Pricing Behavior |
+|----------|----------|-----------------|
+| Hotmart | Brazilian market, affiliates | 3-tier + order bump native |
+| Kiwify | PT-BR, lower fees | Simple checkout, fast setup |
+| Kajabi | International, all-in-one | Higher ticket, community |
+| Teachable | International, clean UX | Standard course delivery |
+
+## Sales Funnel Stages
+
+```
+TOFU (Top of Funnel) → MOFU (Middle) → BOFU (Bottom) → CHECKOUT → POST-PURCHASE
+```
+
+### Stage Benchmarks
+| Stage | Artifact | Conversion Benchmark |
+|-------|----------|---------------------|
+| TOFU | Ad / organic post | 1-3% click-through |
+| MOFU | Lead magnet / webinar | 20-40% opt-in |
+| BOFU | Sales page / VSL | 2-5% of traffic → purchase |
+| Checkout | Checkout page | 60-80% completion (of initiated) |
+| Post-purchase | OTO / order bump | 15-30% OTO take rate |
+
+### VSL (Video Sales Letter) Structure
+1. **Hook** (0-30s): Call out the avatar + pain. "Se você é [X] e ainda não consegue [Y]..."
+2. **Problem** (30s-2min): Agitate the pain. Cost of inaction.
+3. **Revelation** (2-4min): The mechanism — why other solutions fail, why THIS works
+4. **Proof** (4-6min): Results, testimonials, case studies
+5. **Offer** (6-8min): What's included, price reveal, anchor + discount
+6. **CTA** (8-end): Urgency + guarantee + call to action
+
+## Upsell Architecture
+
+### Standard Sequence
+```
+PURCHASE → Order Bump (15-30% take rate, low-ticket add-on)
+         → OTO1 (complementary high-value, 20-35% take rate)
+         → OTO2 (implementation/done-for-you, 10-20% take rate)
+         → Downsell (payment plan / lite version if OTO declined, 25-40% of declinees)
+```
+
+### LTV Calculation
+```
+LTV = AOV × Purchase Frequency × Customer Lifespan
+AOV = (Base Price × % buyers) + (OTO1 × % take) + (OTO2 × % take) + (Bump × % take)
+```
+
+## Revenue Modeling
+
+### Key Metrics
+| Metric | Definition | Target |
+|--------|-----------|--------|
+| AOV | Average Order Value | 1.5-2.5x base price (with upsells) |
+| LTV | Lifetime Customer Value | 3-5x AOV |
+| CAC | Customer Acquisition Cost | < 30% of AOV |
+| Funnel ROI | Revenue / Ad Spend | >= 3x (ROAS 3+) |
+| Refund Rate | Refunds / Sales | < 5% |
+
+### MRR Scenarios (course launch example)
+```
+Conservative: 100 sales × R$997 = R$99,700
+Realistic:    250 sales × R$997 + 30% OTO (R$497) = R$286,700
+Optimistic:   500 sales × R$997 + 25% OTO + order bump = R$560,000+
+```
 
 ## Golden Rules
-- Prioritize investment in activities that directly contribute to the commercial nucleus's growth.
-- Integrate external market insights into commercial nucleus planning for sustained success.
-- Establish a clear feedback loop to continually refine the commercial nucleus strategy.
+
+1. Price = transformation value. Justify with outcome, not effort.
+2. Every offer needs 3 tiers. Middle tier anchored by VIP.
+3. Every funnel needs a post-purchase upsell. First sale is smallest.
+4. Every course needs a transformation arc. Start → end state.
+5. Every revenue projection needs units × price × conversion rate.
+6. Validate conversion benchmarks before committing to projections.
 
 ## Flow
+
 ```
-[Market Analysis] -> [Identify Core Activities] -> [Optimize and Align] -> [Monitor and Adapt]
+[Intent] → [Identify Artifact Type] → [Load Framework] → [Apply Benchmarks] → [Produce Artifact] → [Validate]
 ```
-
-## Comparativo
-| Aspect | Strong Commercial Nucleus | Weak Commercial Nucleus |
-|--------|---------------------------|-------------------------|
-| Impact | High revenue and growth | Limited growth potential |
-| Focus  | Strategic and aligned | Dispersed and misaligned |
-| Adaptability | Agile response to changes | Rigid and reactive |
-
-## References
-- Source: https://business-strategy-guide.com/commercial-nucleus
-- Related article: p01_kc_business_strategy_best_practices
-
----
