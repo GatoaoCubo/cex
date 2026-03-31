@@ -15,9 +15,11 @@ Usage:
 
 import argparse
 import json
+import re
 import sys
 import time
 from collections import Counter, defaultdict
+from dataclasses import dataclass
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
@@ -33,6 +35,141 @@ LEARNING_DIR = CEX_ROOT / ".cex" / "learning_records"
 MEMORY_DIR = CEX_ROOT / ".cex" / "memory"
 ENTITY_DB = MEMORY_DIR / "entity_memory.json"
 SUMMARY_DB = MEMORY_DIR / "build_summary.json"
+BUILDER_DIR = CEX_ROOT / "archetypes" / "builders"
+
+
+# ---------------------------------------------------------------------------
+# Data Types
+# ---------------------------------------------------------------------------
+
+
+@dataclass
+class MemoryHeader:
+    """Lightweight reference to a single observation in a builder memory file."""
+
+    path: str
+    builder_id: str
+    observation_preview: str
+    type: str  # user | feedback | project | reference
+    confidence: float
+    outcome: str
+    date: str
+
+
+# ---------------------------------------------------------------------------
+# Builder Memory Scanner (Phase 1A — Runtime Evolution)
+# ---------------------------------------------------------------------------
+
+
+def _parse_memory_observations(content: str, path: str, builder_id: str) -> list[MemoryHeader]:
+    """Parse a bld_memory file into individual MemoryHeader entries.
+
+    bld_memory files have frontmatter with observation/pattern/evidence/confidence/outcome
+    fields. Some may also have structured body sections with multiple observations.
+    """
+    fm = parse_frontmatter(content)
+    if not fm:
+        return []
+
+    headers = []
+
+    # Primary observation from frontmatter
+    obs = fm.get("observation", "")
+    conf = float(fm.get("confidence", 0.0))
+    outcome = str(fm.get("outcome", "UNKNOWN"))
+    obs_type = str(fm.get("memory_scope", "project"))
+    date = str(fm.get("updated", fm.get("created", "")))
+
+    if obs and conf >= 0.3:
+        preview = obs[:120] + "..." if len(obs) > 120 else obs
+        headers.append(MemoryHeader(
+            path=path,
+            builder_id=builder_id,
+            observation_preview=preview,
+            type=obs_type,
+            confidence=conf,
+            outcome=outcome,
+            date=date,
+        ))
+
+    # Scan body for additional structured observations (## Observation N patterns)
+    body_match = re.match(r'^---\n.*?\n---\s*', content, re.DOTALL)
+    if body_match:
+        body = content[body_match.end():]
+        # Look for pattern/anti-pattern sections as additional observations
+        for section_match in re.finditer(
+            r'##\s+(Pattern|Anti-Pattern|Context|Impact)\s*\n(.*?)(?=\n##|\Z)',
+            body, re.DOTALL
+        ):
+            section_type = section_match.group(1).lower().replace("-", "")
+            section_text = section_match.group(2).strip()
+            if len(section_text) > 30:
+                preview = section_text[:120] + "..." if len(section_text) > 120 else section_text
+                # Derived observations get slightly lower confidence
+                derived_conf = max(conf * 0.8, 0.3)
+                headers.append(MemoryHeader(
+                    path=path,
+                    builder_id=builder_id,
+                    observation_preview=f"[{section_type}] {preview}",
+                    type=obs_type,
+                    confidence=derived_conf,
+                    outcome=outcome,
+                    date=date,
+                ))
+
+    return headers
+
+
+def scan_builder_memories(builder_id: str) -> list[MemoryHeader]:
+    """Scan a single builder's bld_memory file and return observation headers.
+
+    Args:
+        builder_id: e.g. "agent-builder"
+
+    Returns:
+        List of MemoryHeader sorted by confidence DESC. Only conf >= 0.3.
+    """
+    builder_path = BUILDER_DIR / builder_id
+    if not builder_path.exists():
+        return []
+
+    # Find bld_memory file
+    memory_files = list(builder_path.glob("bld_memory_*.md"))
+    if not memory_files:
+        return []
+
+    headers = []
+    for mf in memory_files:
+        try:
+            content = mf.read_text(encoding="utf-8")
+            rel_path = str(mf.relative_to(CEX_ROOT))
+            headers.extend(_parse_memory_observations(content, rel_path, builder_id))
+        except (OSError, UnicodeDecodeError):
+            continue
+
+    # Sort by confidence DESC
+    headers.sort(key=lambda h: -h.confidence)
+    return headers
+
+
+def scan_all_memories() -> list[MemoryHeader]:
+    """Scan ALL builder memory files across all 104 builders.
+
+    Returns:
+        Merged list of MemoryHeader sorted by confidence DESC.
+    """
+    if not BUILDER_DIR.exists():
+        return []
+
+    all_headers = []
+    for builder_dir in sorted(BUILDER_DIR.iterdir()):
+        if not builder_dir.is_dir() or builder_dir.name.startswith("."):
+            continue
+        builder_id = builder_dir.name
+        all_headers.extend(scan_builder_memories(builder_id))
+
+    all_headers.sort(key=lambda h: -h.confidence)
+    return all_headers
 
 
 # ---------------------------------------------------------------------------
@@ -258,6 +395,7 @@ def main():
     parser.add_argument("--kind", "-k", help="Show memory for specific kind")
     parser.add_argument("--aggregate", action="store_true", help="Aggregate learning records → entity memory")
     parser.add_argument("--inject", help="Get injection context for a kind")
+    parser.add_argument("--scan", help="Scan builder memories (builder-id or 'all')")
     parser.add_argument("--prune", action="store_true", help="Prune old learning records")
     parser.add_argument("--before", help="Prune records before this date (e.g. 2026-03)")
     parser.add_argument("--dry-run", action="store_true", help="Preview without modifying")
@@ -320,6 +458,19 @@ def main():
 
     if args.inject:
         print(get_injection_context(args.inject))
+        return
+
+    if args.scan:
+        if args.scan == "all":
+            headers = scan_all_memories()
+            print(f"\n=== All Builder Memories ({len(headers)} observations) ===")
+        else:
+            headers = scan_builder_memories(args.scan)
+            print(f"\n=== Builder Memories: {args.scan} ({len(headers)} observations) ===")
+        for h in headers[:20]:  # Show top 20
+            print(f"  [{h.type:10s} conf={h.confidence:.2f} {h.outcome:7s}] {h.observation_preview}")
+        if len(headers) > 20:
+            print(f"  ... and {len(headers) - 20} more")
         return
 
     if args.prune:

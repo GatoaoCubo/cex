@@ -29,6 +29,10 @@ import re
 import argparse
 from pathlib import Path
 
+# Lazy imports for runtime evolution modules (avoid circular at parse time)
+_memory_select = None
+_memory_scanner = None
+
 try:
     import yaml
 except ImportError:
@@ -653,6 +657,91 @@ def _has_keyword(intent_lower: str, keywords: list[str]) -> bool:
     return any(kw.lower() in intent_lower for kw in keywords)
 
 
+def _load_builder_config(builder_id: str) -> dict:
+    """Load bld_config frontmatter for a builder. Returns empty dict on failure."""
+    config_dir = CEX_ROOT / "archetypes" / "builders" / builder_id
+    if not config_dir.exists():
+        return {}
+    kind_slug = builder_id.replace("-builder", "")
+    config_file = config_dir / f"bld_config_{kind_slug}.md"
+    if not config_file.exists():
+        # Try any bld_config file
+        configs = list(config_dir.glob("bld_config_*.md"))
+        if not configs:
+            return {}
+        config_file = configs[0]
+    try:
+        content = config_file.read_text(encoding="utf-8")
+        fm = yaml.safe_load(content.split("---")[1]) if "---" in content else {}
+        return fm if isinstance(fm, dict) else {}
+    except Exception:
+        return {}
+
+
+def _load_builder_tools_denied(builder_id: str) -> set:
+    """Load denied tools from bld_tools file's Tool Permissions DENIED section."""
+    tools_dir = CEX_ROOT / "archetypes" / "builders" / builder_id
+    if not tools_dir.exists():
+        return set()
+    kind_slug = builder_id.replace("-builder", "")
+    tools_file = tools_dir / f"bld_tools_{kind_slug}.md"
+    if not tools_file.exists():
+        tools_files = list(tools_dir.glob("bld_tools_*.md"))
+        if not tools_files:
+            return set()
+        tools_file = tools_files[0]
+    try:
+        content = tools_file.read_text(encoding="utf-8")
+        # Find DENIED row in Tool Permissions table
+        match = re.search(r'\|\s*DENIED\s*\|\s*([^|]+)\s*\|', content)
+        if match:
+            denied_text = match.group(1).strip()
+            if denied_text.lower() in ("(none)", "none", "—", "-", ""):
+                return set()
+            return {t.strip() for t in denied_text.split(",") if t.strip()}
+    except Exception:
+        pass
+    return set()
+
+
+def _inject_builder_memories(intent: str, builder_id: str) -> dict | None:
+    """Retrieve relevant memories for a builder. Returns injection dict or None."""
+    global _memory_select, _memory_scanner
+    try:
+        if _memory_select is None:
+            from cex_memory_select import select_relevant_memories, format_memory_injection
+            _memory_select = select_relevant_memories
+        if _memory_scanner is None:
+            from cex_memory import scan_builder_memories
+            _memory_scanner = scan_builder_memories
+
+        headers = _memory_scanner(builder_id)
+        if not headers:
+            return None
+
+        selected = _memory_select(
+            query=intent,
+            memories=headers,
+            builder_id=builder_id,
+            top_k=5,
+            use_cache=True,
+        )
+        if not selected:
+            return None
+
+        return {
+            "builder_id": builder_id,
+            "total_observations": len(headers),
+            "selected_count": len(selected),
+            "memories": [
+                {"path": m.path, "type": m.type, "confidence": m.confidence}
+                for m in selected
+            ],
+        }
+    except Exception:
+        return None
+
+
 def fan_out(
     classified: list[dict],
     intent_lower: str,
@@ -750,7 +839,25 @@ def fan_out(
             key=lambda d: FUNCTION_POSITIONS[d],
         )
 
+        # Enrich active builders with config + memory (Runtime Evolution)
         active_list = [b for b in builders if b["active"]]
+        for b in active_list:
+            bid = b["id"]
+            # Load builder config (effort, hooks, permissions, etc.)
+            config = _load_builder_config(bid)
+            if config:
+                b["effort"] = config.get("effort", "medium")
+                b["max_turns"] = config.get("max_turns")
+                b["permission_scope"] = config.get("permission_scope")
+                b["fork_context"] = config.get("fork_context")
+                b["hooks"] = config.get("hooks")
+                # Merge deny lists
+                config_denied = set(config.get("disallowed_tools") or [])
+                tools_denied = _load_builder_tools_denied(bid)
+                deny_set = config_denied | tools_denied
+                if deny_set:
+                    b["denied_tools"] = sorted(deny_set)
+
         est_tokens = int(sum(estimate_tokens(b["id"]) for b in active_list) * 1.2)
 
         entry = {
@@ -761,6 +868,16 @@ def fan_out(
             "parallel": True,
             "estimated_tokens": est_tokens,
         }
+
+        # Memory injection for BECOME function (1x per builder load)
+        if fn_name == "BECOME":
+            memory_injections = []
+            for b in active_list:
+                mem = _inject_builder_memories(intent_lower, b["id"])
+                if mem:
+                    memory_injections.append(mem)
+            if memory_injections:
+                entry["memory_injections"] = memory_injections
 
         # KC Library injection for INJECT function
         if fn_name == "INJECT" and kc_library:

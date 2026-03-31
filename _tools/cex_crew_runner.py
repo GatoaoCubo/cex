@@ -158,6 +158,31 @@ def load_builder_context(builder_id: str, builder_dir: Path = BUILDER_DIR) -> st
 # ---------------------------------------------------------------------------
 
 
+def _load_builder_memories(builder_id: str, intent: str) -> str:
+    """Load relevant memories for a builder. Returns formatted injection or empty string."""
+    try:
+        from cex_memory_select import select_relevant_memories, format_memory_injection
+        from cex_memory import scan_builder_memories
+
+        headers = scan_builder_memories(builder_id)
+        if not headers:
+            return ""
+
+        selected = select_relevant_memories(
+            query=intent,
+            memories=headers,
+            builder_id=builder_id,
+            top_k=5,
+            use_cache=True,
+        )
+        if not selected:
+            return ""
+
+        return format_memory_injection(selected, total_observations=len(headers))
+    except Exception:
+        return ""
+
+
 def compose_prompt(
     builder_id: str,
     function_name: str,
@@ -205,6 +230,11 @@ def compose_prompt(
     context = load_builder_context(builder_id, builder_dir)
     parts.append(context)
     parts.append("")
+
+    # --- Builder Memory (per-builder, not shared) ---
+    memory_block = _load_builder_memories(builder_id, intent)
+    if memory_block:
+        parts.append(memory_block)
 
     # --- Prior Outputs ---
     # Only inject outputs from completed earlier steps (not current function)
