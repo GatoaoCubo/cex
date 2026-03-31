@@ -15,9 +15,8 @@ Usage:
   python cex_8f_runner.py "create eval" --step 3 --verbose
 """
 
-import sys
-
 import os
+import sys
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
@@ -31,36 +30,34 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 try:
-    import yaml
+    import importlib.util
+    if importlib.util.find_spec("yaml") is None:
+        raise ImportError
 except ImportError:
     print("ERRO: PyYAML necessario. pip install pyyaml", file=sys.stderr)
     sys.exit(1)
 
-# ---------------------------------------------------------------------------
-# Imports from Motor + Intent
-# ---------------------------------------------------------------------------
+# --- Imports from Motor + Intent ---
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from cex_8f_motor import (
     CEX_ROOT,
     OBJECT_TO_KINDS,
-    parse_intent,
     classify_objects,
     fan_out,
+    generate_output,
     load_builder_map,
     load_kc_library,
     lookup_kcs_for_kind,
-    generate_output,
+    parse_intent,
 )
 from cex_intent import execute_prompt
-from cex_shared import (
-    find_builder_dir as _shared_find_builder_dir,
-    load_iso as _shared_load_iso,
-    strip_frontmatter as _shared_strip_frontmatter,
-    extract_frontmatter_dict as _shared_extract_frontmatter_dict,
-    load_yaml,
-    BUILDER_DIR as _SHARED_BUILDER_DIR,
-)
+from cex_shared import extract_frontmatter_dict as _shared_extract_frontmatter_dict
+from cex_shared import find_builder_dir as _shared_find_builder_dir
+from cex_shared import load_iso as _shared_load_iso
+from cex_shared import load_yaml
+from cex_shared import strip_frontmatter as _shared_strip_frontmatter
+from cex_shared import write_learning_record as _shared_write_learning_record
 
 # Load .env for API keys
 for _ep in [CEX_ROOT / ".env", CEX_ROOT.parent / "organization-core" / ".env"]:
@@ -72,9 +69,7 @@ for _ep in [CEX_ROOT / ".env", CEX_ROOT.parent / "organization-core" / ".env"]:
                     os.environ[_k.strip()] = _v.strip()
         break
 
-# ---------------------------------------------------------------------------
-# Constants
-# ---------------------------------------------------------------------------
+# --- Constants ---
 
 BUILDER_DIR = CEX_ROOT / "archetypes" / "builders"
 
@@ -116,11 +111,7 @@ F_LABELS = {
     "F8": "COLLABORATE",
 }
 
-
-# ---------------------------------------------------------------------------
-# RunState
-# ---------------------------------------------------------------------------
-
+# --- RunState ---
 
 @dataclass
 class RunState:
@@ -154,9 +145,7 @@ class RunState:
     errors: list = field(default_factory=list)
 
 
-# ---------------------------------------------------------------------------
-# Helpers
-# ---------------------------------------------------------------------------
+# --- Helpers ---
 
 
 # Delegates to cex_shared (single source of truth)
@@ -185,9 +174,7 @@ def load_kind_schema(kind: str, pillar: str) -> dict:
     return load_pillar_schema(pillar).get("kinds", {}).get(kind, {})
 
 
-# ---------------------------------------------------------------------------
-# EightFRunner
-# ---------------------------------------------------------------------------
+# --- EightFRunner ---
 
 
 class EightFRunner:
@@ -247,45 +234,22 @@ class EightFRunner:
     def _state_summary(self, fn: str) -> str:
         """One-line summary of state after function fn completes."""
         s = self.state
-        if fn == "F1":
-            c = s.constraints
-            parts = []
-            if c.get("max_bytes"):
-                parts.append(f"max_bytes: {c['max_bytes']}")
-            parts.append(f"fields: {len(c.get('frontmatter_required', []))}")
-            if c.get("id_pattern"):
-                parts.append(f"id_pattern: /{c['id_pattern']}/")
-            return "constraints: {" + ", ".join(parts) + "}"
-        elif fn == "F2":
-            keys = list(s.identity.keys())
-            return f"identity: {len(keys)} keys ({', '.join(keys[:3])})"
-        elif fn == "F3":
-            kc_count = len(s.knowledge.get("kc_domains", []))
-            iso_keys = [k for k in s.knowledge if s.knowledge[k]]
-            return f"ISOs: {len(iso_keys)}, KCs injected: {kc_count}"
-        elif fn == "F4":
-            words = len(s.reasoning.get("plan", "").split())
-            model = s.reasoning.get("model_used", "?")
-            return f"plan: {words} words (model={model})"
-        elif fn == "F5":
-            t = s.tool_results
-            return (
-                f"tools: {len(t.get('tools_available', []))}, "
-                f"existing: {len(t.get('existing_artifacts', []))}"
-            )
-        elif fn == "F6":
-            words = len(s.artifact.split()) if s.artifact else 0
-            return f"artifact: {words} words"
-        elif fn == "F7":
-            v = s.verdict
-            if v:
-                ok = sum(1 for g in v.get("hard_gates", []) if g.get("passed"))
-                total = len(v.get("hard_gates", []))
-                return f"gates: {ok}/{total}, retries: {v.get('retries', 0)}"
-            return "pending"
-        elif fn == "F8":
-            return f"mode: {s.result.get('mode', '?')}, path: {s.result.get('path', 'none')}"
-        return ""
+        c, k, v = s.constraints, s.knowledge, s.verdict
+        summaries: dict[str, str] = {
+            "F1": lambda: "constraints: {" + ", ".join(filter(None, [
+                f"max_bytes: {c['max_bytes']}" if c.get("max_bytes") else "",
+                f"fields: {len(c.get('frontmatter_required', []))}",
+                f"id_pattern: /{c['id_pattern']}/" if c.get("id_pattern") else "",
+            ])) + "}",
+            "F2": lambda: f"identity: {len(s.identity)} keys ({', '.join(list(s.identity)[:3])})",
+            "F3": lambda: f"ISOs: {sum(1 for x in k.values() if x)}, KCs injected: {len(k.get('kc_domains', []))}",
+            "F4": lambda: f"plan: {len(s.reasoning.get('plan', '').split())} words (model={s.reasoning.get('model_used', '?')})",
+            "F5": lambda: f"tools: {len(s.tool_results.get('tools_available', []))}, existing: {len(s.tool_results.get('existing_artifacts', []))}",
+            "F6": lambda: f"artifact: {len(s.artifact.split()) if s.artifact else 0} words",
+            "F7": lambda: (f"gates: {sum(1 for g in v.get('hard_gates', []) if g.get('passed'))}/{len(v.get('hard_gates', []))}, retries: {v.get('retries', 0)}" if v else "pending"),
+            "F8": lambda: f"mode: {s.result.get('mode', '?')}, path: {s.result.get('path', 'none')}",
+        }
+        return summaries.get(fn, lambda: "")()
 
     def _timed(self, fn_name: str, func):
         """Run a function and record its timing."""
@@ -309,7 +273,7 @@ class EightFRunner:
 
     # -- F1 CONSTRAIN -------------------------------------------------------
 
-    def f1_constrain(self):
+    def f1_constrain(self) -> None:
         """Load _schema.yaml + bld_schema + bld_config -> state.constraints."""
         bdir = self.state.builder_dir
         kind = self.state.kind
@@ -351,7 +315,7 @@ class EightFRunner:
 
     # -- F2 BECOME ----------------------------------------------------------
 
-    def f2_become(self):
+    def f2_become(self) -> None:
         """Load bld_system_prompt + bld_manifest -> state.identity."""
         bdir = self.state.builder_dir
         identity = {}
@@ -383,7 +347,7 @@ class EightFRunner:
 
     # -- F3 INJECT ----------------------------------------------------------
 
-    def f3_inject(self):
+    def f3_inject(self) -> None:
         """Load KC library + builder KCs + examples + memory + architecture -> state.knowledge."""
         bdir = self.state.builder_dir
         knowledge = {}
@@ -450,7 +414,7 @@ class EightFRunner:
 
     # -- F4 REASON ----------------------------------------------------------
 
-    def f4_reason(self):
+    def f4_reason(self) -> None:
         """LLM plans the artifact: fields, decisions, tradeoffs -> state.reasoning."""
         # Compose reasoning prompt from accumulated state
         parts = []
@@ -508,7 +472,7 @@ class EightFRunner:
 
     # -- F5 CALL ------------------------------------------------------------
 
-    def f5_call(self):
+    def f5_call(self) -> None:
         """Load bld_tools ISO, scan existing artifacts -> state.tool_results."""
         bdir = self.state.builder_dir
         tool_results = {"existing_artifacts": [], "tools_available": []}
@@ -566,7 +530,7 @@ class EightFRunner:
 
     # -- F6 PRODUCE ---------------------------------------------------------
 
-    def f6_produce(self, retry_feedback: str = ""):
+    def f6_produce(self, retry_feedback: str = "") -> None:
         """Compose STRUCTURED prompt with labeled sections -> state.artifact."""
         sections = []
 
@@ -700,15 +664,12 @@ class EightFRunner:
         idx = t.find("---\n")
         if idx > 0:
             t = t[idx:]
-        elif idx < 0:
-            # Try --- at very start
-            if not t.startswith("---"):
-                # Look for YAML-like content after any preamble
-                for marker in ["---\r\n", "---\n", "\n---"]:
-                    pos = t.find(marker)
-                    if pos >= 0:
-                        t = t[pos:].lstrip("\n\r")
-                        break
+        elif idx < 0 and not t.startswith("---"):
+            for marker in ["---\r\n", "---\n", "\n---"]:
+                pos = t.find(marker)
+                if pos >= 0:
+                    t = t[pos:].lstrip("\n\r")
+                    break
 
         # Strip code fences wrapping the whole thing
         bt = chr(96) * 3
@@ -728,7 +689,7 @@ class EightFRunner:
 
     # -- F7 GOVERN ----------------------------------------------------------
 
-    def f7_govern(self):
+    def f7_govern(self) -> None:
         """Validate artifact against 6 hard gates. Retry via F6 if fails (max 2)."""
         max_retries = 2
         retries = 0
@@ -738,70 +699,41 @@ class EightFRunner:
 
         while True:
             artifact = self.state.artifact
-            hard_gates = []
-            issues = []
+            hard_gates: list[dict] = []
+            issues: list[str] = []
 
-            # -- H01: frontmatter parses as YAML ---
+            def _gate(gate: str, check: str, passed: bool, fail_msg: str = "") -> None:
+                hard_gates.append({"gate": gate, "check": check, "passed": passed})  # noqa: B023
+                if not passed and fail_msg:
+                    issues.append(fail_msg)  # noqa: B023
+
             fm = extract_frontmatter_dict(artifact)
-            h01_pass = bool(fm)
-            hard_gates.append(
-                {"gate": "H01", "check": "YAML frontmatter parses", "passed": h01_pass}
-            )
-            if not h01_pass:
-                issues.append("H01: Frontmatter missing or invalid YAML")
+            _gate("H01", "YAML frontmatter parses", bool(fm),
+                  "H01: Frontmatter missing or invalid YAML")
 
-            # -- H02: id matches constraints.id_pattern ---
             id_pattern = self.state.constraints.get("id_pattern", "")
             artifact_id = fm.get("id", "")
-            if id_pattern and artifact_id:
-                h02_pass = bool(re.match(id_pattern, str(artifact_id)))
-            elif not id_pattern:
-                h02_pass = True  # No pattern defined = skip
-            else:
-                h02_pass = False
-            hard_gates.append({"gate": "H02", "check": "id matches id_pattern", "passed": h02_pass})
-            if not h02_pass:
-                issues.append(f"H02: id '{artifact_id}' does not match pattern /{id_pattern}/")
+            h02 = bool(re.match(id_pattern, str(artifact_id))) if (id_pattern and artifact_id) else (not id_pattern)
+            _gate("H02", "id matches id_pattern", h02,
+                  f"H02: id '{artifact_id}' does not match pattern /{id_pattern}/")
 
-            # -- H03: kind == state.kind ---
             artifact_kind = fm.get("kind", "")
-            h03_pass = str(artifact_kind) == self.state.kind if fm else True
-            hard_gates.append({"gate": "H03", "check": "kind matches", "passed": h03_pass})
-            if not h03_pass:
-                issues.append(f"H03: kind '{artifact_kind}' != expected '{self.state.kind}'")
+            _gate("H03", "kind matches", str(artifact_kind) == self.state.kind if fm else True,
+                  f"H03: kind '{artifact_kind}' != expected '{self.state.kind}'")
 
-            # -- H04: quality field is None/null ---
-            h04_pass = True
-            if fm:
-                quality_val = fm.get("quality")
-                # quality must be explicitly null/None, not a number
-                if quality_val is not None:
-                    h04_pass = False
-            hard_gates.append({"gate": "H04", "check": "quality is null", "passed": h04_pass})
-            if not h04_pass:
-                issues.append(f"H04: quality must be null, got '{fm.get('quality')}'")
+            h04 = fm.get("quality") is None if fm else True
+            _gate("H04", "quality is null", h04,
+                  f"H04: quality must be null, got '{fm.get('quality')}'")
 
-            # -- H05: all frontmatter_required fields present ---
             required = self.state.constraints.get("frontmatter_required", [])
             missing = [f for f in required if f not in fm] if fm else list(required)
-            h05_pass = len(missing) == 0
-            hard_gates.append(
-                {"gate": "H05", "check": "required fields present", "passed": h05_pass}
-            )
-            if not h05_pass:
-                issues.append(f"H05: Missing required fields: {', '.join(missing)}")
+            _gate("H05", "required fields present", len(missing) == 0,
+                  f"H05: Missing required fields: {', '.join(missing)}")
 
-            # -- H06: body size <= max_bytes ---
             max_bytes = self.state.constraints.get("max_bytes")
-            body = strip_frontmatter(artifact)
-            body_size = len(body.encode("utf-8"))
-            if max_bytes:
-                h06_pass = body_size <= int(max_bytes)
-            else:
-                h06_pass = True  # No limit defined = skip
-            hard_gates.append({"gate": "H06", "check": "body <= max_bytes", "passed": h06_pass})
-            if not h06_pass:
-                issues.append(f"H06: Body {body_size} bytes > max {max_bytes} bytes")
+            body_size = len(strip_frontmatter(artifact).encode("utf-8"))
+            _gate("H06", "body <= max_bytes", body_size <= int(max_bytes) if max_bytes else True,
+                  f"H06: Body {body_size} bytes > max {max_bytes} bytes")
 
             all_passed = all(g["passed"] for g in hard_gates)
 
@@ -842,65 +774,20 @@ class EightFRunner:
 
     # -- Learning Record -----------------------------------------------------
 
-    def _write_learning_record(self):
-        """Capture build outcome as learning_record for builder improvement."""
-        import datetime
-        v = self.state.verdict
-        if not v:
-            return
-        record = {
-            "timestamp": datetime.datetime.now().isoformat(),
-            "kind": self.state.kind,
-            "intent": self.state.intent[:100],
-            "passed": v.get("passed", False),
-            "retries": v.get("retries", 0),
-            "gates_passed": sum(1 for g in v.get("hard_gates", []) if g.get("passed")),
-            "gates_total": len(v.get("hard_gates", [])),
-            "issues": v.get("issues", []),
-            "timing_ms": sum(self.state.timings.values()),
-        }
-
-        # Write to .cex/learning_records/
-        lr_dir = CEX_ROOT / ".cex" / "learning_records"
-        lr_dir.mkdir(parents=True, exist_ok=True)
-        ts = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-        lr_path = lr_dir / f"lr_{self.state.kind}_{ts}.json"
-
-        import json
-        lr_path.write_text(json.dumps(record, indent=2, ensure_ascii=False), encoding="utf-8")
-        self._log("LR", f"learning record saved to {lr_path.name}")
-
-        # Append summary to builder's bld_memory if exists
-        if self.state.builder_dir:
-            mem_files = list(self.state.builder_dir.glob("bld_memory_*.md"))
-            if mem_files:
-                mem_path = mem_files[0]
-                outcome = "PASS" if v.get("passed") else "FAIL"
-                issues_str = "; ".join(v.get("issues", []))[:100]
-                entry = (
-                    f"\n- [{ts}] {outcome} kind={self.state.kind} "
-                    f"retries={v.get('retries', 0)} "
-                    f"gates={record['gates_passed']}/{record['gates_total']}"
-                )
-                if issues_str:
-                    entry += f" issues=[{issues_str}]"
-
-                content = mem_path.read_text(encoding="utf-8")
-                # Append under ## Production Log section (create if missing)
-                if "## Production Log" not in content:
-                    content += "\n\n## Production Log\n"
-                content += entry + "\n"
-
-                # Check size limit (4096B for builder ISOs)
-                if len(content.encode("utf-8")) <= 4096:
-                    mem_path.write_text(content, encoding="utf-8")
-                    self._log("LR", f"appended to {mem_path.name}")
-                else:
-                    self._log("LR", f"bld_memory at size limit, skipped append")
+    def _write_learning_record(self) -> None:
+        """Capture build outcome as learning_record (delegates to cex_shared)."""
+        _shared_write_learning_record(
+            kind=self.state.kind,
+            intent=self.state.intent,
+            verdict=self.state.verdict,
+            timings=self.state.timings,
+            builder_dir=self.state.builder_dir,
+            logger=self._log,
+        )
 
     # -- F8 COLLABORATE -----------------------------------------------------
 
-    def f8_collaborate(self):
+    def f8_collaborate(self) -> None:
         """Save artifact to file, compile -> state.result."""
         # Write learning record (pre-save, captures build outcome regardless)
         if not self.dry_run:
@@ -940,32 +827,8 @@ class EightFRunner:
                 filename = f"{self.state.pillar.lower()}_{self.state.kind}_{slug}.md"
             out_path = out_dir / filename
 
-            # Clean code fences from LLM output
-            art = self.state.artifact.strip()
-            bt = chr(96) * 3
-            if art.startswith(bt):
-                nl = art.find(chr(10))
-                if nl > 0:
-                    art = art[nl + 1 :]
-                close = art.find(bt)
-                if close > 0:
-                    yaml_part = art[:close].strip()
-                    body_part = art[close + 3 :].strip()
-                    art = "---" + chr(10) + yaml_part + chr(10) + "---" + chr(10) + body_part
-            if not art.startswith("---") and art and ":" in art.split(chr(10))[0]:
-                lines = art.split(chr(10))
-                for j, ln in enumerate(lines):
-                    if ln.startswith("#") or (j > 3 and ln.strip() == ""):
-                        art = (
-                            "---"
-                            + chr(10)
-                            + chr(10).join(lines[:j])
-                            + chr(10)
-                            + "---"
-                            + chr(10)
-                            + chr(10).join(lines[j:])
-                        )
-                        break
+            # Clean code fences from LLM output (safety net — F7 already cleans)
+            art = self._clean_llm_output(self.state.artifact)
             self.state.artifact = art
             out_path.write_text(art, encoding="utf-8")
             self._log("F8", f"artifact saved to {out_path}")
@@ -1049,9 +912,7 @@ class EightFRunner:
             ("F8", self.f8_collaborate),
         ]
 
-        step_num = 0
-        for name, func in steps:
-            step_num += 1
+        for step_num, (name, func) in enumerate(steps, 1):
             self._timed(name, func)
             if stop_at and step_num >= stop_at:
                 self._log("run", f"stopped at step {step_num} (--step {stop_at})")
@@ -1060,16 +921,14 @@ class EightFRunner:
         return self.state
 
 
-# ---------------------------------------------------------------------------
-# CLI: list-kinds
-# ---------------------------------------------------------------------------
+# --- CLI: list-kinds ---
 
 
 def list_kinds():
     """Print all available kinds grouped by pillar."""
     by_pillar: dict[str, list[tuple[str, str]]] = {}
     seen = set()
-    for keyword, kinds_list in sorted(OBJECT_TO_KINDS.items()):
+    for _keyword, kinds_list in sorted(OBJECT_TO_KINDS.items()):
         for kind, pillar, fn in kinds_list:
             key = (kind, pillar)
             if key not in seen:
@@ -1088,61 +947,48 @@ def list_kinds():
     print("  + = builder exists in archetypes/builders/\n")
 
 
-# ---------------------------------------------------------------------------
-# CLI: banner
-# ---------------------------------------------------------------------------
+# --- CLI: banner ---
 
 
-def print_banner(state: RunState, elapsed_ms: float):
+def print_banner(state: RunState, elapsed_ms: float) -> None:
     """Print compact run summary."""
     sep = "=" * 70
     mode = "DRY-RUN" if state.result.get("mode") == "dry-run" else "EXECUTE"
-    print(f"\n{sep}\n  CEX 8F Runner | {state.kind} | {state.pillar} | {mode}\n{sep}")
-    print(f"  Intent:  {state.intent}")
-    print(f"  Builder: {state.builder_dir or 'NONE'}")
-
-    # Constraints
-    c = state.constraints
-    c_parts = [f"max={c['max_bytes']}b" for _ in [1] if c.get("max_bytes")]
+    c, k, v = state.constraints, state.knowledge, state.verdict
+    lines = [
+        f"\n{sep}",
+        f"  CEX 8F Runner | {state.kind} | {state.pillar} | {mode}",
+        sep,
+        f"  Intent:  {state.intent}",
+        f"  Builder: {state.builder_dir or 'NONE'}",
+    ]
+    c_parts = ([f"max={c['max_bytes']}b"] if c.get("max_bytes") else [])
     if c.get("frontmatter_required"):
         c_parts.append(f"fm={len(c['frontmatter_required'])} fields")
     if c_parts:
-        print(f"  Constrain: {', '.join(c_parts)}")
-
-    # Knowledge
-    k = state.knowledge
-    k_parts = []
-    if k.get("kc_builder"): k_parts.append("builder-KC")
-    if k.get("kc_domains"): k_parts.append(f"{len(k['kc_domains'])} KCs")
-    if k.get("few_shots"): k_parts.append("examples")
-    if k.get("memory"): k_parts.append("memory")
+        lines.append(f"  Constrain: {', '.join(c_parts)}")
+    k_parts = [label for key, label in [("kc_builder", "builder-KC"), ("few_shots", "examples"), ("memory", "memory")] if k.get(key)]
+    if k.get("kc_domains"):
+        k_parts.insert(1, f"{len(k['kc_domains'])} KCs")
     if k_parts:
-        print(f"  Knowledge: {', '.join(k_parts)}")
-
-    # Artifact + Verdict
+        lines.append(f"  Knowledge: {', '.join(k_parts)}")
     if state.artifact:
-        print(f"  Artifact: {len(state.artifact.split())} words")
-    v = state.verdict
+        lines.append(f"  Artifact: {len(state.artifact.split())} words")
     if v:
         g = v.get("hard_gates", [])
         ok = sum(1 for x in g if x.get("passed"))
-        status = "PASS" if v.get("passed") else "FAIL"
-        print(f"  Verdict:  {status} ({ok}/{len(g)} gates, {v.get('retries', 0)} retries)")
-        for issue in v.get("issues", []):
-            print(f"    ! {issue}")
-
+        lines.append(f"  Verdict:  {'PASS' if v.get('passed') else 'FAIL'} ({ok}/{len(g)} gates, {v.get('retries', 0)} retries)")
+        lines.extend(f"    ! {issue}" for issue in v.get("issues", []))
     if state.result.get("path"):
-        print(f"  Output:   {state.result['path']}")
+        lines.append(f"  Output:   {state.result['path']}")
     if state.timings:
-        print(f"  Timing:   {' | '.join(f'{k}={v}ms' for k, v in state.timings.items())} | total={elapsed_ms:.0f}ms")
-    for err in state.errors:
-        print(f"  ! ERROR: {err}")
-    print(sep)
+        lines.append(f"  Timing:   {' | '.join(f'{tk}={tv}ms' for tk, tv in state.timings.items())} | total={elapsed_ms:.0f}ms")
+    lines.extend(f"  ! ERROR: {err}" for err in state.errors)
+    lines.append(sep)
+    print("\n".join(lines))
 
 
-# ---------------------------------------------------------------------------
-# Main
-# ---------------------------------------------------------------------------
+# --- Main ---
 
 
 NUC_DIRS = {
@@ -1186,56 +1032,29 @@ def _resolve_nucleus(nucleus: str, kind_override: str | None, intent: str) -> tu
     return output_dir, ctx
 
 
-def main():
-    parser = argparse.ArgumentParser(
-        description="cex_8f_runner.py -- 8F Stateful Artifact Pipeline",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
-Examples:
-  python cex_8f_runner.py "create a chunking config for markdown"
-  python cex_8f_runner.py "create agent for sales" --execute
-  python cex_8f_runner.py --kind chunk_strategy --dry-run
-  python cex_8f_runner.py --list-kinds
-  python cex_8f_runner.py "create eval" --step 3 --verbose
-        """,
-    )
+def main() -> None:
+    parser = argparse.ArgumentParser(description="cex_8f_runner.py -- 8F Stateful Artifact Pipeline")
     parser.add_argument("intent", nargs="?", help="Natural language intent")
     parser.add_argument("--kind", help="Override kind classification (skip Motor)")
-    parser.add_argument(
-        "--dry-run",
-        action="store_true",
-        help="Preview prompt without calling LLM (default)",
-    )
+    parser.add_argument("--dry-run", action="store_true", help="Preview prompt without LLM (default)")
     parser.add_argument("--execute", action="store_true", help="Call LLM to produce artifact")
     parser.add_argument("--list-kinds", action="store_true", help="Print all available kinds")
     parser.add_argument("--verbose", action="store_true", help="Show per-F details")
     parser.add_argument("--step", type=int, metavar="N", help="Stop after function N (1-8)")
     parser.add_argument("--output-dir", metavar="DIR", help="Save outputs to this directory")
-    parser.add_argument(
-        "--nucleus", metavar="N0X",
-        help="Target nucleus (e.g. N01, N05). Saves to nucleus dir + injects nucleus context.",
-    )
-    parser.add_argument(
-        "--context",
-        metavar="TEXT",
-        help="Domain context to inject (e.g. PRIME excerpt, domain description)",
-    )
-
+    parser.add_argument("--nucleus", metavar="N0X", help="Target nucleus (e.g. N01, N05)")
+    parser.add_argument("--context", metavar="TEXT", help="Domain context to inject")
     args = parser.parse_args()
 
     if args.list_kinds:
         list_kinds()
         return
-
     if not args.intent and not args.kind:
         parser.print_help()
         sys.exit(1)
 
     intent = args.intent or f"create {args.kind}"
     context = args.context or ""
-    dry_run = not args.execute
-
-    # Nucleus support
     if args.nucleus:
         output_dir, nuc_context = _resolve_nucleus(args.nucleus, args.kind, intent)
         if not args.output_dir:
@@ -1243,49 +1062,29 @@ Examples:
         if not context:
             context = nuc_context
 
-    # Multi-kind detection: if Motor classifies multiple kinds, run each
     parsed = parse_intent(intent)
     classified = classify_objects(parsed["objects"]) if not args.kind else []
-
     if len(classified) > 1:
         print(f"\n  Multi-kind detected: {len(classified)} kinds")
         for i, c in enumerate(classified):
             print(f"    [{i + 1}] {c['kind']} (pillar={c['pillar']})")
-        print()
-
     kinds_to_run = [c["kind"] for c in classified] if len(classified) > 1 else [args.kind]
 
     for kind_i, kind in enumerate(kinds_to_run):
         if len(kinds_to_run) > 1:
-            print(f"\n{'#' * 70}")
-            print(f"  Multi-kind [{kind_i + 1}/{len(kinds_to_run)}]: {kind}")
-            print(f"{'#' * 70}")
-
+            print(f"\n{'#' * 70}\n  Multi-kind [{kind_i + 1}/{len(kinds_to_run)}]: {kind}\n{'#' * 70}")
         runner = EightFRunner(
-            intent=intent,
-            context=context,
-            kind=kind,
-            dry_run=dry_run,
-            verbose=args.verbose,
-            output_dir=args.output_dir,
+            intent=intent, context=context, kind=kind,
+            dry_run=not args.execute, verbose=args.verbose, output_dir=args.output_dir,
         )
-
         t0 = time.perf_counter()
         state = runner.run(stop_at=args.step)
-        elapsed = (time.perf_counter() - t0) * 1000
-
-        # Banner
-        print_banner(state, elapsed)
-
-        # Show artifact
+        print_banner(state, (time.perf_counter() - t0) * 1000)
         if state.artifact:
             if state.result.get("mode") == "dry-run":
-                print("--- STRUCTURED PROMPT (8F) ---\n")
-                print(state.artifact)
-                print(f"\n--- END ({len(state.artifact.split())} words) ---")
+                print(f"--- STRUCTURED PROMPT (8F) ---\n\n{state.artifact}\n\n--- END ({len(state.artifact.split())} words) ---")
             else:
-                print("--- ARTIFACT ---\n")
-                print(state.artifact[:2000])
+                print(f"--- ARTIFACT ---\n\n{state.artifact[:2000]}")
                 if len(state.artifact) > 2000:
                     print(f"\n... (truncated, full: {len(state.artifact)} chars)")
 

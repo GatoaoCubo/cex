@@ -317,3 +317,83 @@ def slugify(text: str) -> str:
     text = re.sub(r"[^\w\s-]", "", text)
     text = re.sub(r"[\s_]+", "-", text)
     return re.sub(r"-+", "-", text).strip("-")
+
+
+# =============================================================================
+# Learning Record
+# =============================================================================
+
+
+def write_learning_record(
+    kind: str,
+    intent: str,
+    verdict: dict[str, Any],
+    timings: dict[str, float],
+    builder_dir: Path | None = None,
+    logger: Any = None,
+) -> Path | None:
+    """Write a build learning record and optionally append to builder memory.
+
+    Args:
+        kind: CEX kind that was built.
+        intent: Original intent string (truncated to 100 chars).
+        verdict: F7 verdict dict with passed, retries, hard_gates, issues.
+        timings: Dict of function timings in ms.
+        builder_dir: Optional builder directory for memory append.
+        logger: Optional callable(tag, msg) for logging.
+
+    Returns:
+        Path to the written learning record, or None on failure.
+    """
+    if not verdict:
+        return None
+
+    ts = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
+    gates_passed = sum(1 for g in verdict.get("hard_gates", []) if g.get("passed"))
+    gates_total = len(verdict.get("hard_gates", []))
+    record = {
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "kind": kind,
+        "intent": intent[:100],
+        "passed": verdict.get("passed", False),
+        "retries": verdict.get("retries", 0),
+        "gates_passed": gates_passed,
+        "gates_total": gates_total,
+        "issues": verdict.get("issues", []),
+        "timing_ms": sum(timings.values()),
+    }
+
+    lr_dir = ensure_dir(CEX_ROOT / ".cex" / "learning_records")
+    lr_path = lr_dir / f"lr_{kind}_{ts}.json"
+    lr_path.write_text(json.dumps(record, indent=2, ensure_ascii=False), encoding="utf-8")
+    if logger:
+        logger("LR", f"learning record saved to {lr_path.name}")
+
+    # Append summary to builder's bld_memory if exists
+    if builder_dir:
+        mem_files = list(builder_dir.glob("bld_memory_*.md"))
+        if mem_files:
+            mem_path = mem_files[0]
+            outcome = "PASS" if verdict.get("passed") else "FAIL"
+            issues_str = "; ".join(verdict.get("issues", []))[:100]
+            entry = (
+                f"\n- [{ts}] {outcome} kind={kind} "
+                f"retries={verdict.get('retries', 0)} "
+                f"gates={gates_passed}/{gates_total}"
+            )
+            if issues_str:
+                entry += f" issues=[{issues_str}]"
+
+            content = mem_path.read_text(encoding="utf-8")
+            if "## Production Log" not in content:
+                content += "\n\n## Production Log\n"
+            content += entry + "\n"
+
+            if len(content.encode("utf-8")) <= 4096:
+                mem_path.write_text(content, encoding="utf-8")
+                if logger:
+                    logger("LR", f"appended to {mem_path.name}")
+            elif logger:
+                logger("LR", "bld_memory at size limit, skipped append")
+
+    return lr_path
