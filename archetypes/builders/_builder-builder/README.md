@@ -138,6 +138,46 @@ Quick checks:
 - [ ] Golden example passes ALL HARD gates
 - [ ] Anti-example fails with specific gate IDs annotated
 
+## Universal Schema Fields v1.0
+
+Added 2026-03-31 via Schema Evolution mission (Claude Code source analysis).
+
+### New Frontmatter Fields by ISO
+
+| ISO | Field | Type | Default | Source |
+|-----|-------|------|---------|--------|
+| MANIFEST | `keywords` | list[str] | (extracted) | ## Routing body |
+| MANIFEST | `triggers` | list[str] | (extracted) | ## Routing body |
+| MANIFEST | `geo_description` | str | (generated) | Identity + Capabilities |
+| MEMORY | `memory_scope` | enum | project | user/project/local |
+| MEMORY | `observation_types` | list[str] | [user,feedback,project,reference] | Fixed taxonomy |
+| CONFIG | `effort` | enum | medium | low/medium/high/max |
+| CONFIG | `max_turns` | int | 25 | 1-100 |
+| CONFIG | `disallowed_tools` | list[str] | [] | Per-builder |
+| CONFIG | `fork_context` | enum/null | null | inline/fork/null |
+| CONFIG | `hooks` | dict | {nulls} | pre_build/post_build/on_error/on_quality_fail |
+| CONFIG | `permission_scope` | enum | nucleus | nucleus/pillar/global/restricted |
+
+### New Body Section
+
+| ISO | Section | Content |
+|-----|---------|---------|
+| TOOLS | `## Tool Permissions` | ALLOWED/DENIED/EFFECTIVE table |
+
+### Hydration Tool
+
+```bash
+python _tools/cex_schema_hydrate.py --dry-run --stats   # preview
+python _tools/cex_schema_hydrate.py --apply --stats      # execute
+python _tools/cex_schema_hydrate.py --apply --iso config  # specific ISO
+```
+
+### Validation
+
+```bash
+python -m pytest _tools/tests/test_schema_evolution.py -v  # 15 tests
+```
+
 ## Cross-Validation Results (Phase 2)
 
 Validated against model-card-builder v2.0:
