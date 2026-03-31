@@ -4,62 +4,62 @@ kind: knowledge_card
 pillar: P01
 title: "System Testing Patterns"
 version: "1.0.0"
-created: "2023-10-29"
-updated: "2023-10-29"
-author: "knowledge-card-builder"
-domain: "Software Engineering"
+created: "2023-10-15"
+updated: "2023-10-15"
+author: "Knowledge Distillation Specialist"
+domain: "Software Testing"
 quality: null
-tags: [system_testing, testing_patterns, software_engineering]
-tldr: "Comprehensive guide to system testing patterns, identifying critical frameworks and methodologies for software quality assurance."
-when_to_use: "When implementing system testing in software projects to identify suitable patterns and methodologies."
-keywords: [system_testing, test_patterns, software_testing]
+tags: [system_testing, testing_patterns, software_development, quality_assurance]
+tldr: "Comprehensive overview of common system testing patterns and their applications."
+when_to_use: "When identifying and applying testing patterns in software projects."
+keywords: [system_testing, behavioral_testing, performance_testing]
 long_tails:
-  - "How to apply effective system testing patterns in large-scale projects"
-  - "Common test patterns for software engineering projects"
+  - When to use different system testing patterns
+  - Examples of structural testing in software development
 axioms:
-  - "ALWAYS integrate multiple testing patterns to cover various test scenarios."
-  - "NEVER assume standard testing procedures alone are sufficient for all projects."
+  - ALWAYS match testing patterns with project requirements
+  - NEVER overlook system testing for critical software features
 linked_artifacts:
   primary: null
   related: []
 density_score: 0.85
-data_source: "https://example.com/system-testing-patterns"
+data_source: "https://example.com/system_testing_patterns_overview"
 
 ---
 
 # System Testing Patterns
 
 ## Quick Reference
-topic: System Testing Patterns
-scope: Patterns for effective system testing in software projects
-owner: Software Testing Team
-criticality: high
+topic: System Testing Patterns  
+scope: Comprehensive guide for software testing  
+owner: Knowledge Distillation Specialist  
+criticality: high  
 
 ## Key Concepts
-- **End-to-End Testing**: Validates the flow of an application from start to end, ensuring seamless integration between different components.
-- **Test Automation Frameworks**: Use of tools like Selenium and JUnit to automate repetitive test scenarios for efficiency.
-- **Regression Testing**: Re-evaluates software after changes or updates to confirm unchanged functionality.
+- **Behavioral Testing**: Includes End-to-End testing, UAT; ensures requirements are met.
+- **Performance Testing**: Involves Load Testing, Stress Testing; monitors system limits.
+- **Structural Testing**: Applies Boundary Value Analysis, Equivalence Partitioning; evaluates input/output conditions.
 
 ## Strategy Phases
-1. **Initiate**: Identify core areas and components requiring testing patterns.
-2. **Implement**: Apply suitable patterns specific to project needs.
-3. **Monitor**: Continuously assess pattern effectiveness, adjust strategy as needed.
+1. **Assessment**: Identify applicable testing patterns per project scope.
+2. **Implementation**: Integrate testing patterns into the development cycle.
+3. **Evaluation**: Measure efficacy and pinpoint areas for testing improvement.
 
 ## Golden Rules
-- Utilize a blend of static and dynamic testing to identify potential defects.
-- Regularly update test scenarios to cover newly identified risks.
-- Integrate test automation to facilitate scalable testing practices.
+- SELECT: Appropriate testing pattern for specific development stages.
+- PRIORITIZE: Critical features in testing to prevent major failures.
+- DOCUMENT: Testing results and adapt strategies for continuous improvement.
 
 ## Flow
-[Requirement Analysis] -> [Pattern Selection] -> [Test Design & Implementation] -> [Continuous Testing & Monitoring]
+[Requirements Analysis] -> [Select Pattern] -> [Implement Tests] -> [Analyze Results]
 
 ## Comparativo
-| Testing Aspect     | Manual Testing | Automated Testing |
-|--------------------|----------------|-------------------|
-| Cost Efficiency    | High over time | Initial high cost, low long-term cost |
-| Test Coverage      | Limited        | Extensive coverage |
-| Speed              | Slow           | Fast              |
+| Pattern Type       | Description                                                                      |
+|--------------------|----------------------------------------------------------------------------------|
+| Behavioral Testing | Validates system behavior against defined requirements and expected outcomes.     |
+| Performance Testing| Assesses system efficiency, scalability, and response under load.                 |
+| Structural Testing | Explores system functionality through methodical examination of input cases.      |
 
 ## References
-- Related artifact: null
-- Source: https://example.com/system-testing-patterns
+- Related artifact: None
+- Source: https://example.com/system_testing_patterns_overview
