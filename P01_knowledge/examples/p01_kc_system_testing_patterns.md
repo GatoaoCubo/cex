@@ -4,59 +4,62 @@ kind: knowledge_card
 pillar: P01
 title: "System Testing Patterns"
 version: "1.0.0"
-created: "2023-10-21"
-updated: "2023-10-21"
-author: "knowledge-card-builder"
-domain: "software_testing"
+created: "2023-10-12"
+updated: "2023-10-12"
+author: "Knowledge Distillation Specialist"
+domain: Software Testing
 quality: null
-tags: [system_testing, testing_patterns, software_quality]
-tldr: "Common system testing patterns enhance software validation and efficiency."
-when_to_use: "When designing system testing strategies for comprehensive validation."
-keywords: [smoke_testing, sanity_testing, regression_testing]
+tags: [system_testing, testing_patterns, software_testing, knowledge]
+tldr: "System testing patterns provide structured approaches to validate software, ensuring robust performance and reliability."
+when_to_use: "Apply these patterns during the software testing phase to ensure comprehensive validation."
+keywords: [system_testing, regression_testing, smoke_testing]
 long_tails:
-  - "how to implement regression testing strategy effectively"
-  - "best practices for conducting end-to-end testing"
+  - How to implement smoke testing in software development
+  - Benefits of using regression testing patterns consistently
 axioms:
-  - "ALWAYS integrate regression testing post modifications."
+  - ALWAYS apply regression tests after code changes
 linked_artifacts:
   primary: null
   related: []
-density_score: 0.92
-data_source: "https://www.softwaretestinghelp.com/system-testing-patterns/"
+density_score: 0.85
+data_source: "https://www.softwaretestinghelp.com/types-of-software-testing/"
 ---
 
-# System Testing Patterns
-
 ## Quick Reference
+```yaml
 topic: System Testing Patterns
-scope: Software Testing Strategy
-owner: Software Testing Team
+scope: Comprehensive testing strategies in software development
+owner: Testing Team Lead
 criticality: high
+```
 
 ## Key Concepts
-- **Smoke Testing**: Initial testing to check the basic functionality.
-- **Sanity Testing**: Focus on verifying specific functionalities after minor changes.
-- **Regression Testing**: Ensures new changes don't disrupt existing functionalities.
+- **Smoke Testing**: Preliminary tests to check basic functionalities.
+- **Regression Testing**: Ensures changes do not affect existing features.
+- **End-to-End Testing**: Validates the complete workflow of the application.
 
 ## Strategy Phases
-1. **Identify Critical Paths**: Focus tests on commonly used application flows.
-2. **Prioritize Test Cases**: Assign importance based on functionality criticality.
-3. **Automate Repetitive Tests**: Use scripts to execute frequent tests efficiently.
+1. **Planning**: Identify key areas for testing and relevant patterns to apply.
+2. **Execution**: Perform tests as per the selected patterns, documenting outcomes.
+3. **Review**: Analyze test results and refine strategies for improved coverage.
 
 ## Golden Rules
-- ALWAYS automate repetitive regression tests.
-- NEVER skip smoke testing before proceeding with detailed tests.
-- IF deploying a patch, THEN perform sanity testing to ensure no specific features were disrupted.
+- ALWAYS prioritize smoke testing after each build to catch major bugs early.
+- NEVER skip regression testing after updates to prevent old bugs from resurfacing.
+- USE end-to-end testing before production to ensure all components interact correctly.
 
 ## Flow
-[Plan Tests] -> [Execute Tests] -> [Analyze Results] -> [Iterate]
+```
+[Requirements] -> [Select Patterns] -> [Execute Tests] -> [Analyze Results]
+```
 
 ## Comparativo
-| Pattern            | Use Case                              | Benefit                      |
-|--------------------|---------------------------------------|------------------------------|
-| Smoke Testing      | Initial build validation              | Quick validation             |
-| Sanity Testing     | Post minor updates                    | Specific functionality check |
-| Regression Testing | After changes in code base            | Stability assurance          |
+| Attribute           | Smoke Testing | Regression Testing |
+|---------------------|---------------|--------------------|
+| Focus               | Basic checks  | Existing features  |
+| Frequency           | Regular       | On updates         |
+| Automation Potential| High          | Moderate           |
 
 ## References
-- Source: https://www.softwaretestinghelp.com/system-testing-patterns/
+- Source: https://www.softwaretestinghelp.com/types-of-software-testing/
+- Related artifact: None
