@@ -1,0 +1,34 @@
+{
+  "dispatch_rule": {
+    "builds": 1,
+    "pass_rate": 0.0,
+    "avg_retries": 0.0,
+    "avg_time_ms": 0,
+    "top_failures": {},
+    "last_build": "2026-03-31T09:57:46.152982"
+  },
+  "knowledge_card": {
+    "builds": 5,
+    "pass_rate": 0.0,
+    "avg_retries": 0.0,
+    "avg_time_ms": 0,
+    "top_failures": {},
+    "last_build": "2026-03-31T13:45:53.402962"
+  },
+  "scoring_rubric": {
+    "builds": 1,
+    "pass_rate": 0.0,
+    "avg_retries": 0.0,
+    "avg_time_ms": 0,
+    "top_failures": {},
+    "last_build": "2026-03-31T10:13:02.114197"
+  },
+  "workflow": {
+    "builds": 1,
+    "pass_rate": 0.0,
+    "avg_retries": 0.0,
+    "avg_time_ms": 0,
+    "top_failures": {},
+    "last_build": "2026-03-31T11:16:14.712782"
+  }
+}

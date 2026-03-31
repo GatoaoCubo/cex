@@ -1,0 +1,12 @@
+{
+  "total": 8,
+  "passed": 0,
+  "failed": 8,
+  "pass_rate": 0.0,
+  "kinds_seen": 4,
+  "avg_time_ms": 0,
+  "total_retries": 0,
+  "avg_retries": 0.0,
+  "recent_pass_rate": 0.0,
+  "generated_at": "2026-03-31T15:37:12"
+}
