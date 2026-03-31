@@ -40,12 +40,12 @@ purpose: Tools, APIs, and data sources for content monetization pipeline
 | Member area | DS24 member area or external redirect |
 
 ### Other Providers
-| Provider | API | Auth | Cost | Market |
-|----------|-----|------|------|--------|
-| Stripe | REST + webhooks | STRIPE_SECRET_KEY | 2.9% + $0.30/tx | Global |
-| Kiwify | REST | KIWIFY_API_KEY | 8.99% per sale | BR infoproducts |
-| Monetizze | REST | MONETIZZE_TOKEN | varies | BR health/finance |
-| Eduzz | REST | EDUZZ_API_KEY | varies | BR digital+physical |
+| Provider | Auth | Market |
+|----------|------|--------|
+| Stripe | STRIPE_SECRET_KEY | Global |
+| Kiwify | KIWIFY_API_KEY | BR |
+| Monetizze | MONETIZZE_TOKEN | BR |
+| Eduzz | EDUZZ_API_KEY | BR |
 
 ## Email Providers
 | Provider | API | Auth | Cost | Specialty |
