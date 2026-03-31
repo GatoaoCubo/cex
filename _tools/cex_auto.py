@@ -1,105 +1,380 @@
 #!/usr/bin/env python3
-"""CEX Auto: Autonomous intent-to-artifact pipeline.
-Chains: Motor (decompose) -> Runner (build) -> Save -> Index -> Validate
-Usage:
-    python _tools/cex_auto.py "create a knowledge card about RAG"
-    python _tools/cex_auto.py "build agent" --nucleus N01
-    python _tools/cex_auto.py --list-kinds
 """
-import argparse, json, subprocess, sys
+cex_auto.py — Autonomous CEX Flywheel
+
+The self-driving loop: diagnose → plan → execute → validate → learn → repeat.
+
+Modes:
+  scan     — Diagnose system, find gaps, suggest actions (read-only)
+  plan     — Generate an execution plan from gaps
+  execute  — Run the plan (build artifacts, fix issues)
+  cycle    — Full loop: scan → plan → execute → validate (autonomous)
+
+Usage:
+  python _tools/cex_auto.py scan              # what needs work?
+  python _tools/cex_auto.py plan              # generate action plan
+  python _tools/cex_auto.py execute plan.json # run a plan
+  python _tools/cex_auto.py cycle --max 5     # autonomous: up to 5 builds
+  python _tools/cex_auto.py cycle --dry-run   # preview cycle without building
+"""
+
+import sys
+import os
+import re
+import json
+import subprocess
+import time
+import datetime
 from pathlib import Path
 
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+
 CEX_ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(CEX_ROOT / "_tools"))
+os.chdir(str(CEX_ROOT))
 
-NUCLEUS_FOR_DOMAIN = {
-    "research": "N01_intelligence", "intelligence": "N01_intelligence",
-    "marketing": "N02_marketing", "copy": "N02_marketing",
-    "engineering": "N03_engineering", "build": "N03_engineering",
-    "knowledge": "N04_knowledge", "indexing": "N04_knowledge",
-    "operations": "N05_operations", "deploy": "N05_operations",
-    "commercial": "N06_commercial", "monetization": "N06_commercial",
-    "admin": "N07_admin", "orchestration": "N07_admin",
-}
 
-KIND_TO_SUBDIR = {
-    "agent_card": "architecture", "agent": "agents", "system_prompt": "prompts",
-    "dispatch_rule": "orchestration", "knowledge_card": "knowledge",
-    "workflow": "orchestration", "quality_gate": "feedback",
-    "rag_source": "knowledge", "chunk_strategy": "knowledge",
-    "prompt_template": "prompts", "skill": "tools",
-    "scoring_rubric": "quality", "few_shot_example": "quality",
-    "pattern": "architecture", "signal": "orchestration",
-    "dag": "orchestration", "spawn_config": "orchestration",
-    "learning_record": "memory", "boot_config": "config",
-    "response_format": "output", "health_check": "feedback",
-}
+# ============================================================
+# SCAN — Diagnose gaps
+# ============================================================
 
-def motor_decompose(intent):
-    from cex_8f_motor import parse_intent, classify_objects
-    parsed = parse_intent(intent)
-    classified = classify_objects(parsed["objects"])
-    if not classified:
-        return {"error": f"No kind for: {parsed['objects']}"}
-    return {"kind": classified[0]["kind"], "pillar": classified[0]["pillar"],
-            "domain": parsed.get("domain", "generic"), "intent": intent}
+def scan_system() -> dict:
+    """Scan entire CEX system and identify gaps/actions needed."""
+    gaps = []
+    stats = {}
 
-def runner_build(kind, context="", dry_run=False, output_dir=None):
-    cmd = [sys.executable, str(CEX_ROOT / "_tools" / "cex_8f_runner.py"), "--kind", kind]
-    if context: cmd.extend(["--context", context])
-    if dry_run: cmd.append("--dry-run")
-    if output_dir: cmd.extend(["--output-dir", output_dir])
-    r = subprocess.run(cmd, cwd=str(CEX_ROOT), capture_output=True, text=True)
-    return {"success": "PASS" in r.stdout, "output": r.stdout[-300:]}
+    # 1. Check quality:null artifacts
+    r = subprocess.run(
+        ["grep", "-r", "-l", "^quality: null", "--include=*.md"] +
+        [d for d in os.listdir(".") if d.startswith("N0") and os.path.isdir(d)],
+        capture_output=True, text=True
+    )
+    null_files = [f for f in r.stdout.strip().split("\n") if f.strip()]
+    stats["quality_null"] = len(null_files)
+    if null_files:
+        for f in null_files[:10]:
+            gaps.append({"type": "quality_null", "path": f, "priority": "medium",
+                         "action": f"Score artifact: python _tools/cex_score.py --apply {f}"})
 
-def resolve_output(kind, nucleus=None, domain=None):
-    nuc_dir = None
-    if nucleus:
-        m = list(CEX_ROOT.glob(f"{nucleus}*"))
-        if m: nuc_dir = m[0]
-    elif domain:
-        n = NUCLEUS_FOR_DOMAIN.get(domain.lower())
-        if n: nuc_dir = CEX_ROOT / n
-    sub = KIND_TO_SUBDIR.get(kind, "output")
-    return (nuc_dir / sub) if nuc_dir else (CEX_ROOT / "_output")
+    # 2. Check doctor
+    r = subprocess.run([sys.executable, "_tools/cex_doctor.py"], capture_output=True, text=True, timeout=30)
+    full = r.stdout + r.stderr
+    m = re.search(r"(\d+) PASS \| (\d+) WARN \| (\d+) FAIL", full)
+    if m:
+        stats["doctor_pass"] = int(m.group(1))
+        stats["doctor_warn"] = int(m.group(2))
+        stats["doctor_fail"] = int(m.group(3))
+        if int(m.group(2)) > 0:
+            gaps.append({"type": "doctor_warn", "priority": "high",
+                         "action": "Fix builder WARNs: check oversized ISOs"})
+        if int(m.group(3)) > 0:
+            gaps.append({"type": "doctor_fail", "priority": "critical",
+                         "action": "Fix builder FAILs immediately"})
+
+    # 3. Check hooks validation
+    r = subprocess.run([sys.executable, "_tools/cex_hooks.py", "validate-all"],
+                       capture_output=True, text=True, timeout=30)
+    full = r.stdout + r.stderr
+    m = re.search(r"Errors:\s+(\d+)", full)
+    hook_errors = int(m.group(1)) if m else 0
+    stats["hook_errors"] = hook_errors
+    if hook_errors > 0:
+        gaps.append({"type": "hook_errors", "priority": "high",
+                     "action": f"Fix {hook_errors} hook validation errors"})
+
+    # 4. Check nucleus coverage (each nucleus should have min artifacts)
+    expected = {"N01": 11, "N02": 10, "N03": 34, "N04": 12, "N05": 9, "N06": 9, "N07": 13}
+    for nprefix, min_count in expected.items():
+        ndir = [d for d in os.listdir(".") if d.startswith(nprefix) and os.path.isdir(d)]
+        if ndir:
+            mds = [f for f in Path(ndir[0]).rglob("*.md")
+                   if "compiled" not in str(f) and f.name != "README.md"]
+            stats[f"{nprefix}_artifacts"] = len(mds)
+            if len(mds) < min_count:
+                gaps.append({"type": "nucleus_gap", "nucleus": nprefix,
+                             "have": len(mds), "need": min_count, "priority": "medium",
+                             "action": f"Build {min_count - len(mds)} more artifacts for {nprefix}"})
+
+    # 5. Check for low-quality artifacts (< 8.5)
+    r = subprocess.run(
+        ["grep", "-r", "^quality:", "--include=*.md"] +
+        [d for d in os.listdir(".") if d.startswith("N0") and os.path.isdir(d)],
+        capture_output=True, text=True
+    )
+    low_quality = []
+    for line in r.stdout.strip().split("\n"):
+        if not line.strip():
+            continue
+        m2 = re.search(r"quality:\s*([\d.]+)", line)
+        if m2:
+            score = float(m2.group(1))
+            if score < 8.5:
+                filepath = line.split(":")[0]
+                low_quality.append(filepath)
+    stats["low_quality_count"] = len(low_quality)
+    for f in low_quality[:5]:
+        gaps.append({"type": "low_quality", "path": f, "priority": "low",
+                     "action": f"Rebuild low-quality artifact: {f}"})
+
+    # 6. Check compile
+    r = subprocess.run([sys.executable, "_tools/cex_compile.py", "--all"],
+                       capture_output=True, text=True, timeout=60)
+    full = r.stdout + r.stderr
+    m = re.search(r"(\d+)/(\d+) compiled", full)
+    if m:
+        stats["compile_ok"] = int(m.group(1))
+        stats["compile_total"] = int(m.group(2))
+
+    # 7. Check sub-agents match kinds
+    agents_dir = CEX_ROOT / ".claude" / "agents"
+    if agents_dir.exists():
+        agents = list(agents_dir.glob("*.md"))
+        stats["subagents"] = len(agents)
+    kinds_meta = CEX_ROOT / ".cex" / "kinds_meta.json"
+    if kinds_meta.exists():
+        kinds = json.loads(kinds_meta.read_text(encoding="utf-8"))
+        stats["kinds"] = len(kinds)
+
+    # 8. Nucleus archetype completeness
+    # Each nucleus should ideally have: agent, system_prompt, knowledge_card,
+    # agent_card, dispatch_rule, workflow, quality_gate, scoring_rubric
+    core_kinds = ["agent", "system_prompt", "knowledge_card", "agent_card",
+                  "dispatch_rule", "workflow", "quality_gate"]
+    for nprefix in ["N01", "N02", "N04", "N05", "N06", "N07"]:
+        ndir = [d for d in os.listdir(".") if d.startswith(nprefix) and os.path.isdir(d)]
+        if not ndir:
+            continue
+        # Get existing kinds
+        r_kinds = subprocess.run(
+            ["grep", "-r", "^kind:", f"--include=*.md", ndir[0]],
+            capture_output=True, text=True
+        )
+        existing_kinds = set()
+        for line in r_kinds.stdout.strip().split("\n"):
+            if line.strip() and "compiled" not in line:
+                m_kind = re.search(r"kind:\s*(\S+)", line)
+                if m_kind:
+                    existing_kinds.add(m_kind.group(1))
+        missing = [k for k in core_kinds if k not in existing_kinds]
+        if missing:
+            stats[f"{nprefix}_missing_kinds"] = missing
+            for k in missing:
+                gaps.append({
+                    "type": "missing_kind", "nucleus": nprefix, "kind": k,
+                    "priority": "low",
+                    "action": f"Build {k} for {nprefix}: python _tools/cex_8f_runner.py 'create {k} for {nprefix}' --kind {k} --nucleus {nprefix} --execute"
+                })
+
+    # 9. Git cleanliness
+    r = subprocess.run(["git", "status", "--porcelain"], capture_output=True, text=True)
+    dirty = len([l for l in r.stdout.strip().split("\n") if l.strip()])
+    stats["git_dirty"] = dirty
+
+    return {"stats": stats, "gaps": gaps, "timestamp": datetime.datetime.now().isoformat()}
+
+
+# ============================================================
+# PLAN — Generate actions from gaps
+# ============================================================
+
+def generate_plan(scan_result: dict) -> list[dict]:
+    """Convert scan gaps into ordered execution plan."""
+    gaps = scan_result["gaps"]
+
+    # Sort by priority
+    priority_order = {"critical": 0, "high": 1, "medium": 2, "low": 3}
+    gaps.sort(key=lambda g: priority_order.get(g.get("priority", "low"), 4))
+
+    plan = []
+    for i, gap in enumerate(gaps, 1):
+        plan.append({
+            "step": i,
+            "type": gap["type"],
+            "priority": gap.get("priority", "medium"),
+            "action": gap.get("action", ""),
+            "path": gap.get("path"),
+        })
+
+    return plan
+
+
+# ============================================================
+# EXECUTE — Run plan steps
+# ============================================================
+
+def execute_step(step: dict, dry_run: bool = False) -> dict:
+    """Execute a single plan step. Returns result."""
+    result = {"step": step["step"], "type": step["type"], "success": False}
+
+    if dry_run:
+        result["success"] = True
+        result["note"] = f"DRY-RUN: {step['action']}"
+        return result
+
+    if step["type"] == "quality_null" and step.get("path"):
+        # Score the artifact
+        r = subprocess.run(
+            [sys.executable, "_tools/cex_score.py", "--apply", step["path"]],
+            capture_output=True, text=True, timeout=30
+        )
+        result["success"] = r.returncode == 0
+        result["output"] = (r.stdout + r.stderr).strip()[:200]
+
+    elif step["type"] == "low_quality" and step.get("path"):
+        # For now, just flag for rebuild
+        result["success"] = True
+        result["note"] = f"Flagged for rebuild: {step['path']}"
+
+    elif step["type"] == "missing_kind":
+        # Auto-build missing artifact for nucleus
+        nucleus = step.get("nucleus", "")
+        kind = step.get("kind", "")
+        if nucleus and kind:
+            cmd = [
+                sys.executable, str(CEX_ROOT / "_tools" / "cex_8f_runner.py"),
+                f"create {kind} for {nucleus} nucleus",
+                "--kind", kind, "--nucleus", nucleus, "--execute"
+            ]
+            try:
+                r = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
+                full = r.stdout + r.stderr
+                result["success"] = "PASS" in full
+                result["output"] = full[-200:]
+                result["note"] = f"Built {kind} for {nucleus}" if result["success"] else f"FAIL: {kind} for {nucleus}"
+            except subprocess.TimeoutExpired:
+                result["note"] = f"TIMEOUT building {kind} for {nucleus}"
+            except Exception as e:
+                result["note"] = str(e)
+        else:
+            result["note"] = "missing nucleus or kind in step"
+
+    elif step["type"] in ("doctor_warn", "doctor_fail", "hook_errors"):
+        result["success"] = False
+        result["note"] = "Requires manual intervention or N03 dispatch"
+
+    else:
+        result["note"] = f"Unhandled action type: {step['type']}"
+
+    return result
+
+
+# ============================================================
+# CYCLE — Full autonomous loop
+# ============================================================
+
+def run_cycle(max_actions: int = 10, dry_run: bool = False) -> dict:
+    """Full autonomous cycle: scan → plan → execute → validate."""
+    print(f"\n{'='*60}")
+    print(f"  CEX AUTO CYCLE — {'DRY-RUN' if dry_run else 'EXECUTE'}")
+    print(f"{'='*60}\n")
+
+    # SCAN
+    print("📡 Scanning system...")
+    scan = scan_system()
+    stats = scan["stats"]
+    print(f"   Stats: {json.dumps(stats, indent=2)}")
+    print(f"   Gaps found: {len(scan['gaps'])}")
+
+    if not scan["gaps"]:
+        print("\n✅ System is healthy. No gaps found.")
+        return {"status": "healthy", "actions": 0, "scan": scan}
+
+    # PLAN
+    print("\n📋 Generating plan...")
+    plan = generate_plan(scan)
+    plan = plan[:max_actions]
+    for step in plan:
+        symbol = {"critical": "🔴", "high": "🟠", "medium": "🟡", "low": "🟢"}.get(step["priority"], "⚪")
+        print(f"   {symbol} [{step['step']}] {step['action'][:80]}")
+
+    # EXECUTE
+    print(f"\n🚀 Executing {len(plan)} actions...")
+    results = []
+    passed = 0
+    for step in plan:
+        r = execute_step(step, dry_run)
+        results.append(r)
+        if r["success"]:
+            passed += 1
+            print(f"   ✅ [{step['step']}] {r.get('note', 'done')[:60]}")
+        else:
+            print(f"   ❌ [{step['step']}] {r.get('note', r.get('output', 'failed'))[:60]}")
+
+    # VALIDATE
+    print("\n🔍 Post-cycle validation...")
+    post_scan = scan_system()
+    post_gaps = len(post_scan["gaps"])
+    pre_gaps = len(scan["gaps"])
+    delta = pre_gaps - post_gaps
+    print(f"   Gaps: {pre_gaps} → {post_gaps} (Δ{delta:+d})")
+
+    # COMMIT
+    if not dry_run and passed > 0:
+        subprocess.run(["git", "add", "-A"], capture_output=True)
+        subprocess.run(
+            ["git", "commit", "-m", f"[AUTO] cycle: {passed}/{len(plan)} actions, {post_gaps} gaps remaining"],
+            capture_output=True
+        )
+        print("   📦 Changes committed")
+
+    # Summary
+    print(f"\n{'='*60}")
+    print(f"  CYCLE COMPLETE: {passed}/{len(plan)} actions succeeded")
+    print(f"  Gaps: {pre_gaps} → {post_gaps}")
+    print(f"{'='*60}")
+
+    cycle_result = {
+        "status": "complete",
+        "actions_total": len(plan),
+        "actions_passed": passed,
+        "gaps_before": pre_gaps,
+        "gaps_after": post_gaps,
+        "timestamp": datetime.datetime.now().isoformat(),
+    }
+
+    # Save cycle result
+    cycle_path = CEX_ROOT / ".cex" / "auto_cycle_results.json"
+    cycle_path.write_text(json.dumps(cycle_result, indent=2), encoding="utf-8")
+
+    return cycle_result
+
+
+# ============================================================
+# MAIN
+# ============================================================
 
 def main():
-    ap = argparse.ArgumentParser(description="CEX Auto: intent to artifact")
-    ap.add_argument("intent", nargs="?", help="Natural language intent")
-    ap.add_argument("--nucleus", help="Target nucleus (N01-N07)")
-    ap.add_argument("--dry-run", action="store_true")
-    ap.add_argument("--context", default="")
-    ap.add_argument("--list-kinds", action="store_true")
-    args = ap.parse_args()
+    import argparse
+    parser = argparse.ArgumentParser(description="CEX Autonomous Flywheel")
+    parser.add_argument("mode", choices=["scan", "plan", "execute", "cycle"],
+                        help="Operation mode")
+    parser.add_argument("--max", type=int, default=10, help="Max actions per cycle")
+    parser.add_argument("--dry-run", action="store_true", help="Preview without executing")
+    parser.add_argument("plan_file", nargs="?", help="Plan JSON file (for execute mode)")
+    args = parser.parse_args()
 
-    if args.list_kinds:
-        from cex_8f_motor import OBJECT_TO_KINDS
-        for k in sorted(OBJECT_TO_KINDS.keys()):
-            v = OBJECT_TO_KINDS[k]
-            kinds = [x[0] if isinstance(x, tuple) else x for x in v]
-            print(f"  {k:25s} -> {', '.join(kinds)}")
-        return
+    if args.mode == "scan":
+        scan = scan_system()
+        print(json.dumps(scan, indent=2, ensure_ascii=False))
 
-    if not args.intent:
-        ap.error("Provide intent or --list-kinds")
+    elif args.mode == "plan":
+        scan = scan_system()
+        plan = generate_plan(scan)
+        print(json.dumps(plan, indent=2, ensure_ascii=False))
 
-    print("  [1/3] MOTOR: decomposing...")
-    d = motor_decompose(args.intent)
-    if "error" in d:
-        print(f"  ERROR: {d['error']}"); sys.exit(1)
-    kind, domain = d["kind"], d["domain"]
-    print(f"         Kind={kind} Pillar={d['pillar']} Domain={domain}")
+    elif args.mode == "execute":
+        if not args.plan_file:
+            print("ERROR: execute mode requires plan file", file=sys.stderr)
+            sys.exit(1)
+        plan = json.loads(Path(args.plan_file).read_text(encoding="utf-8"))
+        for step in plan:
+            r = execute_step(step, args.dry_run)
+            status = "✅" if r["success"] else "❌"
+            print(f"{status} [{step['step']}] {r.get('note', '')[:80]}")
 
-    out = resolve_output(kind, args.nucleus, domain)
-    out.mkdir(parents=True, exist_ok=True)
-    print(f"         Output: {out.relative_to(CEX_ROOT)}")
+    elif args.mode == "cycle":
+        run_cycle(max_actions=args.max, dry_run=args.dry_run)
 
-    print(f"  [2/3] RUNNER: building {kind}...")
-    ctx = args.context or args.intent
-    r = runner_build(kind, ctx, args.dry_run, str(out))
-    print(f"         {'PASS' if r['success'] else 'FAIL'}")
-
-    print(f"  [3/3] DONE: {kind} -> {out.relative_to(CEX_ROOT)}/")
 
 if __name__ == "__main__":
     main()

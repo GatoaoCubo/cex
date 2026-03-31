@@ -1058,11 +1058,36 @@ class EightFRunner:
             except Exception as e:
                 self._log("F8", f"index skipped: {e}")
 
+            # Auto-commit if gates passed
+            committed = False
+            if self.state.verdict.get("passed"):
+                try:
+                    subprocess.run(
+                        ["git", "add", str(out_path)],
+                        capture_output=True, timeout=10,
+                    )
+                    # Also add compiled version if exists
+                    compiled_dir = out_path.parent / "compiled"
+                    if compiled_dir.exists():
+                        subprocess.run(
+                            ["git", "add", str(compiled_dir)],
+                            capture_output=True, timeout=10,
+                        )
+                    msg = f"[8F] {self.state.kind}: {self.state.intent[:60]}"
+                    subprocess.run(
+                        ["git", "commit", "-m", msg],
+                        capture_output=True, timeout=10,
+                    )
+                    committed = True
+                    self._log("F8", "auto-committed to git")
+                except Exception as e:
+                    self._log("F8", f"auto-commit skipped: {e}")
+
             self.state.result = {
                 "path": str(out_path),
                 "compiled": compiled,
                 "indexed": indexed,
-                "committed": False,
+                "committed": committed,
                 "mode": "execute",
             }
 
@@ -1244,6 +1269,10 @@ Examples:
     parser.add_argument("--step", type=int, metavar="N", help="Stop after function N (1-8)")
     parser.add_argument("--output-dir", metavar="DIR", help="Save outputs to this directory")
     parser.add_argument(
+        "--nucleus", metavar="N0X",
+        help="Target nucleus (e.g. N01, N05). Saves to nucleus dir + injects nucleus context.",
+    )
+    parser.add_argument(
         "--context",
         metavar="TEXT",
         help="Domain context to inject (e.g. PRIME excerpt, domain description)",
@@ -1262,6 +1291,44 @@ Examples:
     intent = args.intent or f"create {args.kind}"
     context = args.context or ""
     dry_run = not args.execute
+
+    # Nucleus support: resolve output dir + inject nucleus context
+    if args.nucleus:
+        nuc = args.nucleus.upper()
+        nuc_dirs = {
+            "N01": "N01_intelligence", "N02": "N02_marketing", "N03": "N03_engineering",
+            "N04": "N04_knowledge", "N05": "N05_operations", "N06": "N06_commercial",
+            "N07": "N07_admin",
+        }
+        nuc_domains = {
+            "N01": "research, market analysis, competitor intelligence, papers, benchmarks",
+            "N02": "copywriting, ads, campaigns, brand voice, social media, CTAs",
+            "N03": "meta-construction, 8F pipeline, artifact building, scaffolding",
+            "N04": "RAG, embeddings, chunking, knowledge cards, retrieval, taxonomy",
+            "N05": "code review, testing, CI/CD, deployment, infrastructure, monitoring",
+            "N06": "pricing, courses, sales funnels, monetization, conversion",
+            "N07": "orchestration, dispatch, monitoring, quality validation, handoffs",
+        }
+        if nuc in nuc_dirs:
+            # Set output dir to nucleus subdir based on kind
+            kind_to_subdir = {
+                "agent": "agents", "agent_card": "architecture", "system_prompt": "prompts",
+                "knowledge_card": "knowledge", "dispatch_rule": "orchestration",
+                "workflow": "orchestration", "quality_gate": "feedback",
+                "scoring_rubric": "quality", "prompt_template": "prompts",
+                "action_prompt": "prompts", "embedding_config": "knowledge",
+                "rag_source": "knowledge", "chunk_strategy": "knowledge",
+                "retriever_config": "knowledge", "checkpoint": "memory",
+                "spawn_config": "orchestration", "signal": "orchestration",
+                "dag": "orchestration", "handoff": "orchestration",
+                "fallback_chain": "agents", "pattern": "architecture",
+            }
+            kind_for_dir = args.kind or (parse_intent(intent)["objects"][0] if parse_intent(intent)["objects"] else "")
+            subdir = kind_to_subdir.get(kind_for_dir, "artifacts")
+            if not args.output_dir:
+                args.output_dir = str(CEX_ROOT / nuc_dirs[nuc] / subdir)
+            if not context:
+                context = f"Nucleus: {nuc} ({nuc_dirs[nuc]}). Domain: {nuc_domains.get(nuc, '')}. All content must be specific to this nucleus domain."
 
     # Multi-kind detection: if Motor classifies multiple kinds, run each
     parsed = parse_intent(intent)
