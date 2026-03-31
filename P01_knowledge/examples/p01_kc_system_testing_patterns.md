@@ -1,65 +1,65 @@
----
-id: p01_kc_system_testing_patterns
-kind: knowledge_card
-pillar: P01
-title: "System Testing Patterns"
-version: "1.0.0"
-created: "2023-10-15"
-updated: "2023-10-15"
-author: "Knowledge Distillation Specialist"
-domain: "Software Testing"
-quality: null
-tags: [system_testing, testing_patterns, software_development, quality_assurance]
-tldr: "Comprehensive overview of common system testing patterns and their applications."
-when_to_use: "When identifying and applying testing patterns in software projects."
-keywords: [system_testing, behavioral_testing, performance_testing]
-long_tails:
-  - When to use different system testing patterns
-  - Examples of structural testing in software development
-axioms:
-  - ALWAYS match testing patterns with project requirements
-  - NEVER overlook system testing for critical software features
-linked_artifacts:
-  primary: null
-  related: []
-density_score: 0.85
-data_source: "https://example.com/system_testing_patterns_overview"
+---  
+id: p01_kc_system_testing_patterns  
+kind: knowledge_card  
+pillar: P01  
+title: "System Testing Patterns"  
+version: "1.0.0"  
+created: "2023-11-01"  
+updated: "2023-11-01"  
+author: "knowledge-card-builder"  
+domain: "Software Testing"  
+quality: null  
+tags: [system-testing, testing-patterns, software-testing, pattern-recognition, knowledge]  
+tldr: "System testing patterns evaluate software systems comprehensively to detect and correct systemic errors before deployment."  
+when_to_use: "During system testing phase to validate end-to-end functionalities and discover integration issues."  
+keywords: [system-testing, smoke-testing, load-testing]  
+long_tails:  
+  - "How to apply smoke testing in software development"  
+  - "System testing patterns for agile environments"  
+axioms:  
+  - "ALWAYS integrate regression testing to catch new errors."  
+linked_artifacts:  
+  primary: null  
+  related: []  
+density_score: 0.88  
+data_source: "https://www.softwaretestinghelp.com/system-testing"  
 
----
+---  
 
-# System Testing Patterns
-
-## Quick Reference
-topic: System Testing Patterns  
-scope: Comprehensive guide for software testing  
-owner: Knowledge Distillation Specialist  
+## Quick Reference  
+```yaml  
+topic: system_testing_patterns  
+scope: Comprehensive evaluation in software testing  
+owner: knowledge-card-builder  
 criticality: high  
+```  
 
-## Key Concepts
-- **Behavioral Testing**: Includes End-to-End testing, UAT; ensures requirements are met.
-- **Performance Testing**: Involves Load Testing, Stress Testing; monitors system limits.
-- **Structural Testing**: Applies Boundary Value Analysis, Equivalence Partitioning; evaluates input/output conditions.
+## Key Concepts  
+- **Smoke Testing**: Initial test used to determine if a software build is stable.  
+- **Regression Testing**: Ensures new changes have not adversely affected existing features.  
+- **Load Testing**: Determines system behavior under expected load conditions.
 
-## Strategy Phases
-1. **Assessment**: Identify applicable testing patterns per project scope.
-2. **Implementation**: Integrate testing patterns into the development cycle.
-3. **Evaluation**: Measure efficacy and pinpoint areas for testing improvement.
+## Strategy Phases  
+1. **Preparation**: Set up environment and define testing goals.  
+2. **Execution**: Conduct tests systematically according to plan.  
+3. **Analysis**: Evaluate results and identify areas for improvement.  
 
-## Golden Rules
-- SELECT: Appropriate testing pattern for specific development stages.
-- PRIORITIZE: Critical features in testing to prevent major failures.
-- DOCUMENT: Testing results and adapt strategies for continuous improvement.
+## Golden Rules  
+- Ensure environment parity between test and production.  
+- Automate tests wherever possible to increase efficiency.  
+- Focus on critical path scenarios to prioritize testing efforts.  
 
-## Flow
-[Requirements Analysis] -> [Select Pattern] -> [Implement Tests] -> [Analyze Results]
+## Flow  
+```text  
+[Setup] -> [Execute Tests] -> [Analyze Results] -> [Improve]  
+```  
 
-## Comparativo
-| Pattern Type       | Description                                                                      |
-|--------------------|----------------------------------------------------------------------------------|
-| Behavioral Testing | Validates system behavior against defined requirements and expected outcomes.     |
-| Performance Testing| Assesses system efficiency, scalability, and response under load.                 |
-| Structural Testing | Explores system functionality through methodical examination of input cases.      |
+## Comparativo  
+| Testing Type   | Smoke Testing        | Load Testing         |  
+|----------------|----------------------|----------------------|  
+| Purpose        | Initial stability    | Performance evaluation|  
+| Frequency      | Frequent and short   | Less frequent, detailed|  
 
-## References
-- Related artifact: None
-- Source: https://example.com/system_testing_patterns_overview
+## References  
+- Source: https://www.softwaretestinghelp.com/system-testing  
+- Related methodology: Agile software development practices
