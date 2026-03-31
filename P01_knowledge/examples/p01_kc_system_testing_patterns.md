@@ -1,75 +1,62 @@
 ---
-
 id: p01_kc_system_testing_patterns
 kind: knowledge_card
 pillar: P01
 title: "System Testing Patterns"
 version: "1.0.0"
-created: "2023-10-01"
-updated: "2023-10-01"
-author: "Knowledge Distillation Specialist"
-domain: "Software Testing"
+created: "2023-10-21"
+updated: "2023-10-21"
+author: "knowledge-card-builder"
+domain: "software_testing"
 quality: null
-tags: [system_testing, testing_patterns, software_development, knowledge]
-tldr: "System testing patterns optimize integration and functionality checks, ensuring high software quality."
-when_to_use: "When planning or executing system-level testing for software integration."
-keywords: [test-automation, regression-testing, load-testing]
+tags: [system_testing, testing_patterns, software_quality]
+tldr: "Common system testing patterns enhance software validation and efficiency."
+when_to_use: "When designing system testing strategies for comprehensive validation."
+keywords: [smoke_testing, sanity_testing, regression_testing]
 long_tails:
-  - How to implement test automation in system testing
-  - Benefits of load testing for scalable system performance
+  - "how to implement regression testing strategy effectively"
+  - "best practices for conducting end-to-end testing"
 axioms:
-  - ALWAYS automate repetitive tests to reduce manual effort.
-  - NEVER skip regression testing after major code changes.
+  - "ALWAYS integrate regression testing post modifications."
 linked_artifacts:
   primary: null
   related: []
-density_score: 0.85
-data_source: "https://example.com/system-testing-patterns"
-
+density_score: 0.92
+data_source: "https://www.softwaretestinghelp.com/system-testing-patterns/"
 ---
 
-## Quick Reference
+# System Testing Patterns
 
-```yaml
+## Quick Reference
 topic: System Testing Patterns
-scope: Ensuring integration and functionality across system components
-owner: Testing Team
+scope: Software Testing Strategy
+owner: Software Testing Team
 criticality: high
-```
 
 ## Key Concepts
-
-- **Test Automation**: Streamlines testing by automatically executing repetitive tests, allowing rapid feedback and frequent validations.
-- **Regression Testing**: Validates that recent code changes haven’t adversely affected the existing functionality.
-- **Load Testing**: Assesses system performance under expected load conditions to ensure stability and responsiveness.
+- **Smoke Testing**: Initial testing to check the basic functionality.
+- **Sanity Testing**: Focus on verifying specific functionalities after minor changes.
+- **Regression Testing**: Ensures new changes don't disrupt existing functionalities.
 
 ## Strategy Phases
-
-1. **Identify Testing Needs**: Evaluate which application areas require rigorous testing to maintain quality.
-2. **Implement Automation Tools**: Utilize tools like Selenium or JUnit to support efficient test execution.
-3. **Conduct Load Testing**: Use tools like Apache JMeter to simulate high-traffic conditions and identify bottlenecks.
+1. **Identify Critical Paths**: Focus tests on commonly used application flows.
+2. **Prioritize Test Cases**: Assign importance based on functionality criticality.
+3. **Automate Repetitive Tests**: Use scripts to execute frequent tests efficiently.
 
 ## Golden Rules
-
-- CONSISTENTLY automate tests for greater efficiency and accuracy.
-- PERIODICALLY run regression tests to catch integration issues early.
-- OPTIMIZE load tests to simulate real-world conditions as closely as possible.
+- ALWAYS automate repetitive regression tests.
+- NEVER skip smoke testing before proceeding with detailed tests.
+- IF deploying a patch, THEN perform sanity testing to ensure no specific features were disrupted.
 
 ## Flow
-
-```
-[Identify Needs] -> [Implement Tests] -> [Execute and Analyze] -> [Refine Approaches]
-```
+[Plan Tests] -> [Execute Tests] -> [Analyze Results] -> [Iterate]
 
 ## Comparativo
-
-| Pattern          | Feature Automated | Dependency Management |
-|------------------|------------------|----------------------|
-| Test Automation  | High             | Toolchains required  |
-| Regression Testing | Medium         | Iterative test plans |
-| Load Testing     | Low              | Virtual user scenarios |
+| Pattern            | Use Case                              | Benefit                      |
+|--------------------|---------------------------------------|------------------------------|
+| Smoke Testing      | Initial build validation              | Quick validation             |
+| Sanity Testing     | Post minor updates                    | Specific functionality check |
+| Regression Testing | After changes in code base            | Stability assurance          |
 
 ## References
-
-- Related artifact: none
-- Source: https://example.com/system-testing-patterns
+- Source: https://www.softwaretestinghelp.com/system-testing-patterns/
