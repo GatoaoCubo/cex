@@ -108,6 +108,8 @@ coverage:
   constraint_spec:
   - p01_kc_constraint_spec
   - p01_kc_dspy_patterns
+  content_monetization:
+  - p01_kc_content_monetization
   context_doc:
   - p01_kc_context_doc
   - p01_kc_prompt_engineering
@@ -144,6 +146,8 @@ coverage:
   e2e_eval:
   - p01_kc_e2e_eval
   - p01_kc_eval_testing
+  effort_profile:
+  - p01_kc_effort_profile
   embedding_config:
   - p01_kc_embedding_config
   - p01_kc_academic_rag_patterns
@@ -206,6 +210,8 @@ coverage:
   - p01_kc_hook
   - p01_kc_crewai_patterns
   - p01_kc_mcp_protocol
+  hook_config:
+  - p01_kc_hook_config
   input_schema:
   - p01_kc_input_schema
   - p01_kc_anthropic_api_patterns
@@ -312,6 +318,8 @@ coverage:
   regression_check:
   - p01_kc_regression_check
   - p01_kc_eval_testing
+  research_pipeline:
+  - p01_kc_research_pipeline
   response_format:
   - p01_kc_response_format
   - p01_kc_dspy_patterns
@@ -368,9 +376,15 @@ coverage:
   smoke_eval:
   - p01_kc_smoke_eval
   - p01_kc_eval_testing
+  social_publisher:
+  - p01_kc_social_publisher
+  software_project:
+  - p01_kc_software_project
   spawn_config:
   - p01_kc_spawn_config
   - p01_kc_orchestration_runtime
+  supabase_data_layer:
+  - p01_kc_supabase_data_layer
   system_prompt:
   - p01_kc_system_prompt
   - p01_kc_academic_agent_patterns
@@ -1432,6 +1446,12 @@ domains:
     feeds_kinds:
     - constraint_spec
     origin: ''
+  p01_kc_content_monetization:
+    path: P01_knowledge\library\kind\kc_content_monetization.md
+    title: Content Monetization — Deep Knowledge for content_monetization
+    feeds_kinds:
+    - content_monetization
+    origin: ''
   p01_kc_context_doc:
     path: P01_knowledge\library\kind\kc_context_doc.md
     title: Context Doc — Deep Knowledge for context_doc
@@ -1491,6 +1511,12 @@ domains:
     title: E2E Eval — Deep Knowledge for e2e_eval
     feeds_kinds:
     - e2e_eval
+    origin: ''
+  p01_kc_effort_profile:
+    path: P01_knowledge\library\kind\kc_effort_profile.md
+    title: Effort Profile — Deep Knowledge for effort_profile
+    feeds_kinds:
+    - effort_profile
     origin: ''
   p01_kc_embedding_config:
     path: P01_knowledge\library\kind\kc_embedding_config.md
@@ -1587,6 +1613,12 @@ domains:
     title: Hook — Deep Knowledge for hook
     feeds_kinds:
     - hook
+    origin: ''
+  p01_kc_hook_config:
+    path: P01_knowledge\library\kind\kc_hook_config.md
+    title: Hook Config — Deep Knowledge for hook_config
+    feeds_kinds:
+    - hook_config
     origin: ''
   p01_kc_input_schema:
     path: P01_knowledge\library\kind\kc_input_schema.md
@@ -1768,6 +1800,12 @@ domains:
     feeds_kinds:
     - regression_check
     origin: ''
+  p01_kc_research_pipeline:
+    path: P01_knowledge\library\kind\kc_research_pipeline.md
+    title: Research Pipeline — Deep Knowledge for research_pipeline
+    feeds_kinds:
+    - research_pipeline
+    origin: ''
   p01_kc_response_format:
     path: P01_knowledge\library\kind\kc_response_format.md
     title: Response Format — Deep Knowledge for response_format
@@ -1852,11 +1890,29 @@ domains:
     feeds_kinds:
     - smoke_eval
     origin: ''
+  p01_kc_social_publisher:
+    path: P01_knowledge\library\kind\kc_social_publisher.md
+    title: Social Publisher — Deep Knowledge for social_publisher
+    feeds_kinds:
+    - social_publisher
+    origin: ''
+  p01_kc_software_project:
+    path: P01_knowledge\library\kind\kc_software_project.md
+    title: Software Project — Deep Knowledge for software_project
+    feeds_kinds:
+    - software_project
+    origin: ''
   p01_kc_spawn_config:
     path: P01_knowledge\library\kind\kc_spawn_config.md
     title: Spawn Config — Deep Knowledge for spawn_config
     feeds_kinds:
     - spawn_config
+    origin: ''
+  p01_kc_supabase_data_layer:
+    path: P01_knowledge\library\kind\kc_supabase_data_layer.md
+    title: Supabase Data Layer — Deep Knowledge for supabase_data_layer
+    feeds_kinds:
+    - supabase_data_layer
     origin: ''
   p01_kc_system_prompt:
     path: P01_knowledge\library\kind\kc_system_prompt.md
