@@ -1,30 +1,62 @@
 ---
-# TEMPLATE: Router (P02 Model)
-# Valide contra P02_model/_schema.yaml (types.router)
-# Max 1024 bytes
-
-id: p02_rt_{{SCOPE_SLUG}}
+id: p02_rt_SCOPE_SLUG
 kind: router
+pillar: P02
+version: 1.0.0
+title: "Template — Router"
+tags: [template, router, dispatch, routing, classification]
+tldr: "Routes incoming requests to the correct agent or handler based on conditions. Priority-ordered rules with a mandatory fallback. Prevents routing loops."
 routes:
-  - when: {{CONDICAO_1}}
-    send_to: {{TARGET_1}}
-  - when: {{CONDICAO_2}}
-    send_to: {{TARGET_2}}
-fallback: {{DEFAULT_TARGET}}
+  - when: "[CONDITION_1]"
+    send_to: "[TARGET_1]"
+  - when: "[CONDITION_2]"
+    send_to: "[TARGET_2]"
+fallback: "[DEFAULT_TARGET]"
+quality: null
 ---
 
-# Router: {{SCOPE_SLUG}}
+# Router: [SCOPE_SLUG]
 
 ## Routes
-<!-- INSTRUCAO: ordenar do caso mais especifico para o mais geral. -->
-| Priority | Condition | Target | Reason |
-|----------|-----------|--------|--------|
-| 1 | {{CONDICAO_1}} | {{TARGET_1}} | {{JUSTIFICATIVA_1}} |
-| 2 | {{CONDICAO_2}} | {{TARGET_2}} | {{JUSTIFICATIVA_2}} |
-| 3 | {{CONDICAO_3}} | {{TARGET_3}} | {{JUSTIFICATIVA_3}} |
+Order: most specific → most general. First match wins.
+
+| Priority | Condition | Target | Confidence | Reason |
+|----------|-----------|--------|------------|--------|
+| 1 | [CONDITION_1] | [TARGET_1] | [0.9+] | [JUSTIFICATION] |
+| 2 | [CONDITION_2] | [TARGET_2] | [0.8+] | [JUSTIFICATION] |
+| 3 | [CONDITION_3] | [TARGET_3] | [0.7+] | [JUSTIFICATION] |
+
+## Routing Logic
+```
+Input → Classify(intent) → Match(routes, priority_order) → Dispatch(target)
+  └─ If no match: Fallback(default_target)
+  └─ If confidence < threshold: Ask_Clarification || Fallback
+```
 
 ## Fallback
-<!-- INSTRUCAO: usado quando nenhuma regra bate ou confianca cai. -->
-- Target: {{DEFAULT_TARGET}}
-- Trigger: {{SEM_MATCH_OU_CONFIANCA_BAIXA}}
-- Note: {{COMO_EVITAR_LOOP_DE_ROUTING}}
+- **Target**: [DEFAULT_TARGET]
+- **Trigger**: No route matches OR confidence below [THRESHOLD]
+- **Anti-loop**: Max [3] redirects per request. After that → error response.
+
+## Classification Method
+- **Type**: [rule_based | embedding_similarity | llm_classification]
+- **Model**: [N/A for rules | model_name for ML]
+- **Confidence threshold**: [0.7 — below this, use fallback]
+
+## Observability
+```yaml
+log_fields:
+  router_id: "[SCOPE_SLUG]"
+  input_hash: "[SHA256[:8]]"
+  matched_route: "[PRIORITY_N]"
+  target: "[TARGET]"
+  confidence: [FLOAT]
+  latency_ms: [INT]
+```
+
+## Quality Gate
+- [ ] At least 2 routes defined (1 route = no routing needed)
+- [ ] Fallback defined (mandatory)
+- [ ] Anti-loop limit set
+- [ ] Routes ordered by specificity (most specific first)
+- [ ] No overlapping conditions (deterministic matching)

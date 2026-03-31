@@ -1,14 +1,40 @@
 ---
 id: p01_gl_agent_node
+kind: glossary_entry
+pillar: P01
+version: 1.0.0
+title: "Glossary — Agent Node"
 term: agent_node
 definition: "Processo Claude CLI especializado com identidade, modelo e MCPs proprios"
 synonyms: [worker, executor, specialist]
+tags: [glossary, agent, node, orchestration]
+tldr: "An agent_node is an autonomous execution unit in the CEX system. Each has a fixed domain, dedicated LLM model, and exclusive MCP tools."
+quality: null
 ---
 
 # Glossary: agent_node
 
 ## Definition
-Unidade autonoma de execucao no organization. Cada agent_node tem dominio fixo (Research, Build, Marketing), modelo LLM dedicado (opus ou sonnet), e MCPs exclusivos. orchestrator orquestra, agent_nodes executam.
+Unidade autonoma de execucao no sistema CEX. Cada agent_node tem dominio fixo (Research, Build, Marketing), modelo LLM dedicado (opus ou sonnet), e MCPs exclusivos. O orchestrator (N07) coordena; agent_nodes executam.
 
 ## Usage
-"Spawnar agent_node builder_agent para build" | "3 agent_nodes em paralelo via grid"
+- **Context**: Aparece em N07 orchestration, dispatch rules, spawn configs
+- **Example**: "Spawnar agent_node builder_agent para executar 8F pipeline"
+- **Avoid confusion with**: `sub-agent` — um sub-agent é uma definição (.md); um agent_node é a execução viva
+
+## Relationships
+
+| Relation | Term | Notes |
+|----------|------|-------|
+| parent | nucleus | Agent nodes pertencem a um nucleus (N01-N07) |
+| sibling | builder | Builders são agent_nodes especializados em construção |
+| child | task | Cada agent_node executa uma ou mais tasks |
+
+## Domain Scope
+- **Pillars**: P02 (model), P03 (prompt), P12 (orchestration)
+- **Kinds**: agent, spawn_config, dispatch_rule
+- **Frequency**: high — termo usado em todo o sistema de orquestração
+
+## Canonical Source
+- Reference: `.claude/rules/n07-orchestrator.md`
+- CEX adoption date: 2026-01-15
