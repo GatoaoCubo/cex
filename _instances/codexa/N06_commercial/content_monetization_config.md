@@ -9,7 +9,7 @@ author: n06_commercial
 title: "Codexa Instance — N06 Content Monetization Config"
 tags: [instance, content-monetization, codexa, mercadopago, brl, pipeline-costs, N06]
 tldr: "Codexa-specific content monetization config for N06. MercadoPago primary, BRL centavos, PIPELINE_COSTS from credit_system.py, mock mode for CI."
-quality: null
+quality: 8.8
 domain: content-monetization
 instance: codexa
 ---

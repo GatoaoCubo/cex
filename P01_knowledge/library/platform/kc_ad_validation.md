@@ -2,7 +2,7 @@
 id: kc_ad_validation
 kind: knowledge_card
 pillar: P01
-quality: null
+quality: 8.7
 tldr: "Patterns for validating LLM-generated content, including fabrication detection, confidence scoring, and retry-with-refinement logic."
 tags: ["llm", "validation", "quality", "guardrails", "accuracy"]
 ---

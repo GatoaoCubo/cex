@@ -889,5 +889,14 @@
     "max_bytes": 3072,
     "naming": "p12_wf_{{name}}.md + .yaml",
     "pillar": "P12"
+  },
+  "content_monetization": {
+    "boundary": "Pipeline completo de monetizacao de conteudo: billing, credits, checkout, courses, ads, emails. NAO eh pricing_strategy (estrategia apenas) nem payment_integration (provider apenas).",
+    "core": false,
+    "description": "Config-driven content monetization pipeline — PARSE>PRICING>CREDITS>CHECKOUT>COURSES>ADS>EMAILS>VALIDATE>DEPLOY",
+    "llm_function": "PRODUCE",
+    "max_bytes": 5120,
+    "naming": "p04_cm_{{name}}.md",
+    "pillar": "P04"
   }
 }

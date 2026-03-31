@@ -7,7 +7,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n06_commercial
 domain: content-monetization
-quality: null
+quality: 8.9
 tags: [dispatch_rule, content-monetization, billing, checkout, credits, PIX, N06]
 tldr: Routes billing, checkout, credit, course generation, and payment tasks to content-monetization-builder via N06.
 scope: content-monetization

@@ -2,7 +2,7 @@
 id: kc_credit_system_design
 kind: knowledge_card
 pillar: P01
-quality: null
+quality: 8.8
 tldr: "Architectural patterns for a prepaid credit wallet system, including integer-based currency, service costs, and idempotent operations."
 tags: ["credits", "wallet", "billing", "currency", "idempotency"]
 ---

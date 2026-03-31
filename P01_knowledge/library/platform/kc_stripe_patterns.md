@@ -2,7 +2,7 @@
 id: kc_stripe_patterns
 kind: knowledge_card
 pillar: P01
-quality: null
+quality: 8.6
 tldr: "Design patterns for integrating Stripe, including environment modes, webhook handling, and subscription management."
 tags: ["stripe", "payment", "webhook", "subscription", "billing"]
 ---
