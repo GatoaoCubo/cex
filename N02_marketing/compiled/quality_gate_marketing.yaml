@@ -2,12 +2,12 @@ id: p11_qg_marketing_nucleus
 kind: quality_gate
 pillar: P11
 title: 'Gate: Marketing Copy Quality'
-version: 2.0.0
+version: 3.0.0
 created: 2026-03-30
-updated: 2026-03-30
+updated: 2026-03-31
 author: n02_marketing
 domain: copywriting_and_campaigns
-quality: 8.9
+quality: null
 tags:
 - quality_gate
 - marketing
@@ -70,6 +70,12 @@ bypass_policy:
 - 'Who may override: n07-orchestrator only'
 - 'Conditions: score between 7.5–8.0 AND explicit human approval AND urgent deadline'
 - 'Audit requirement: note bypass in commit message `[BYPASS score=7.x reason=...]`'
+quick_validation_script: "# Run against any N02 copy deliverable\ndef validate_n02_copy(artifact_text, frontmatter):\n   \
+  \ hard_gates = {\n        \"H01\": is_valid_yaml(frontmatter),\n        \"H02\": id_matches_kind_pattern(frontmatter),\n\
+  \        \"H03\": frontmatter.get(\"quality\") is None,\n        \"H04\": funnel_stage_declared(artifact_text),\n      \
+  \  \"H05\": has_specific_cta(artifact_text),\n        \"H06\": count_headline_variants(artifact_text) >= 3,\n        \"\
+  H07\": len(artifact_text.encode()) <= 8192,\n        \"H08\": no_unmarked_superlatives(artifact_text),\n    }\n    return\
+  \ all(hard_gates.values()), hard_gates"
 audit_trail: 'Each evaluation logs:
 
   - Gate ID and result (pass/fail)
@@ -84,3 +90,16 @@ audit_trail: 'Each evaluation logs:
 
 
   Retention: logs kept in `N02_marketing/output/` per mission.'
+common_failure_patterns: '| Failure | Gate | Most Common Cause | Fix |
+
+  |---------|------|------------------|-----|
+
+  | quality: 8.x set | H03 | Self-scoring after generation | Set `quality: null` always |
+
+  | CTA = "Click here" | H05 | Default phrasing used | Rewrite: "[Verb] my [benefit]" |
+
+  | Only 1 headline | H06 | Single variant produced | Generate 3 variants minimum |
+
+  | No funnel stage | H04 | Stage not declared | Add funnel_stage line to output header |
+
+  | Superlative without proof | H08 | "Best" / "The only" used | Add [PROOF NEEDED] or rewrite to specific claim |'

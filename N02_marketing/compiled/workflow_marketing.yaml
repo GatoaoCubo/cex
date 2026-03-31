@@ -1,9 +1,9 @@
 id: p12_wf_marketing_campaign
 kind: workflow
 pillar: P12
-version: 2.0.0
+version: 3.0.0
 created: 2026-03-30
-updated: 2026-03-30
+updated: 2026-03-31
 author: n02_marketing
 title: Marketing Copy Production Workflows
 steps_count: 12
@@ -22,7 +22,7 @@ signals: '| Signal | Emitter | Meaning |
 
   | marketing_copy_error | n02-marketing-hub | Unrecoverable failure, escalate to N07 |'
 domain: copywriting_and_campaigns
-quality: 8.9
+quality: null
 tags:
 - workflow
 - marketing
@@ -38,18 +38,23 @@ overview: Three operational workflows for N02. Each produces committed, compiled
 workflow_1_ad_campaign: 'Goal: Produce complete ad creative set for one campaign (Facebook/Google/LinkedIn) Input required:
   Product name, audience segment, key benefit, budget range, campaign objective Output: Campaign brief + 3 ad variants per
   format (image/video/carousel) + copy deck'
-steps: "Step 1: SEQUENCE PLAN [n02-marketing-hub]\n  - Input: goal type (nurture | cold | cart | re-engagement)\n  - Action:\
-  \ Select skeleton from KC, map each email to objective\n  - Output: email_plan_{mission}.md\n  - Signal: plan_complete\n\
-  \nStep 2: EMAIL COPY [n02-marketing-hub]\n  - For each email (1–5):\n    - Write subject line (3 variants, select best by\
-  \ curiosity gap)\n    - Write preview text (40–90 chars)\n    - Write email body (formula-matched per email type)\n    -\
-  \ Write CTA (specific + benefit-first)\n  - Output: email_sequence_{mission}.md\n  - Depends on: Step 1\n  - Signal: copy_complete\n\
-  \nStep 3: COMPILE + COMMIT [n02-marketing-hub]\n  - Compile sequence file\n  - Commit: git commit -m \"[N02] email sequence\
-  \ — {mission}\"\n  - Signal: marketing_copy_complete\n\n---"
+steps: "Step 1: VOICE EXTRACT [n02-marketing-hub]\n  - If samples provided: analyze tone, vocabulary, energy, person dimensions\n\
+  \  - If no samples: build from target tone description alone\n  - Score each dimension 1–5: Formal↔Casual, Technical↔Plain,\
+  \ 3rd↔1st, Calm↔Bold\n  - Output: voice_dimensions_{mission}.md\n\nStep 2: VOICE CARD [n02-marketing-hub]\n  - Write: 5\
+  \ signature phrases the brand says\n  - Write: 5 banned words/phrases the brand never says\n  - Write: persona anchor (brand\
+  \ as a person: age, job, how they talk)\n  - Write: 3 before/after examples showing voice applied to weak copy\n  - Write:\
+  \ voice flex rules (when voice can adapt, when it must hold)\n  - Output: brand_voice_card_{mission}.md\n\nStep 3: COMPILE\
+  \ + COMMIT [n02-marketing-hub]\n  - Compile voice card\n  - Commit: git commit -m \"[N02] brand voice card — {mission}\"\
+  \n  - Signal: marketing_copy_complete\n\n---"
 workflow_2_landing_page_copy: 'Goal: Produce full landing page copy for a product or offer Input required: Product, audience,
   offer, primary CTA, optional testimonials Output: Complete LP copy file with all sections'
 workflow_3_email_sequence: 'Goal: Produce a 5-email nurture or cold outreach sequence Input required: Audience, goal (nurture/cold/cart/re-engagement),
   product/offer Output: 5 emails with subject lines, preview text, and body copy'
+workflow_4_brand_voice_card: 'Goal: Define and document a brand''s writing voice for consistent copy production Input required:
+  Brand name, brand description, 2–3 copy samples (or NONE), target tone description Output: Brand voice card with tone scores,
+  signature phrases, banned words, persona anchor'
 error_handling:
 - 'Step fails: retry once with revised prompt; if still fail, signal `marketing_copy_error` to N07'
 - 'Quality gate fails (score < 8.0): return to copy step, apply F6 retry, max 2 revisions'
 - 'MCP unavailable: proceed with formula-based approach from KC; note in output'
+- 'No brand voice card: write in neutral professional tone; flag "[BRAND VOICE CARD RECOMMENDED]" at top'

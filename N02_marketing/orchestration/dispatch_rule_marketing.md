@@ -2,12 +2,12 @@
 id: p12_dr_marketing
 kind: dispatch_rule
 pillar: P12
-version: 2.0.0
+version: 3.0.0
 created: 2026-03-30
-updated: 2026-03-30
+updated: 2026-03-31
 author: n02_marketing
 domain: copywriting_and_campaigns
-quality: 8.9
+quality: null
 tags: [dispatch_rule, marketing, N02, routing]
 tldr: Route to N02 when the task requires copy, ads, headlines, CTAs, email sequences, landing pages, or brand voice.
 scope: marketing_and_creative
@@ -73,7 +73,25 @@ ELIF n02-marketing-hub unavailable:
     escalate → n07-orchestrator
 ```
 
+## Confidence Calibration
+
+| Signal | Confidence Boost |
+|--------|----------------|
+| User says "write copy for..." | +0.30 |
+| Task contains product name + audience + benefit | +0.20 |
+| Channel mentioned (email, ad, landing page) | +0.15 |
+| Portuguese copy keywords (anuncio, campanha, redação) | +0.25 |
+| Task is statistical/analytical in nature | −0.50 (route N04) |
+
 ## Fallback Policy
 
 If `n02-marketing-hub` is unavailable: escalate to `n07-orchestrator` with task description.
 N07 will either retry N02 or provide manual handoff instructions.
+
+## Dispatch Command
+
+```bash
+bash _spawn/dispatch.sh solo n02 "task description"
+# or for batch:
+bash _spawn/dispatch.sh grid MISSION_NAME
+```

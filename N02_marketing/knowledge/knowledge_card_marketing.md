@@ -3,12 +3,12 @@ id: p01_kc_marketing_nucleus
 kind: knowledge_card
 pillar: P01
 title: Marketing & Copywriting — Core Knowledge Card
-version: 2.0.0
+version: 3.0.0
 created: 2026-03-30
-updated: 2026-03-30
+updated: 2026-03-31
 author: n02_marketing
 domain: copywriting_and_campaigns
-quality: 9.0
+quality: null
 tags: [knowledge_card, marketing, copywriting, campaigns, N02]
 tldr: Distilled copywriting formulas, CTA patterns, headline frameworks, funnel stages — operational knowledge for N02.
 when_to_use: Load before any copy-writing task. Reference formulas, then adapt to product/audience.
@@ -149,8 +149,38 @@ For each client/product: score each dimension 1–5. Document 3 banned words + 3
 → [Readability score >= 60] → [Brand voice match] → [Publish]
 ```
 
+## Ad Copy Character Limits (Platform Reference)
+
+| Platform | Headline | Primary Text | Description |
+|----------|---------|-------------|-------------|
+| Facebook/Instagram | 40 chars | 125 chars | 30 chars |
+| Google Search | 30 chars × 3 | — | 90 chars × 2 |
+| LinkedIn | — | 150 chars | — |
+| Twitter/X | — | 280 chars | — |
+
+## Psychological Triggers (use 1 per piece)
+
+| Trigger | Application | Example |
+|---------|------------|---------|
+| Specificity | Numbers beat vague claims | "Saves 3 hours" not "saves time" |
+| Social proof | Volume or authority | "Used by 12,000 marketers" |
+| Loss aversion | Frame as avoiding cost | "Stop losing leads to weak CTAs" |
+| Urgency | Deadline or scarcity | "Closes Friday" / "Only 3 spots left" |
+| Curiosity gap | Promise + withhold | "The one word that doubled our CTR" |
+| Identity shift | Become who they want to be | "Write like a pro. Ship like a machine." |
+
+## Readability Targets
+
+| Audience | Flesch Score | Avg Sentence | Passive Voice |
+|----------|-------------|-------------|--------------|
+| B2C (consumer) | >= 65 | <= 14 words | < 5% |
+| B2B (professional) | >= 50 | <= 18 words | < 10% |
+| Executive/C-suite | >= 40 | <= 20 words | < 15% |
+
 ## Golden Rules
 
-- ALWAYS: identify funnel stage → select formula → write hook first
+- ALWAYS: identify funnel stage → select formula → write hook first → benefit stack → CTA → TEST note
 - NEVER: start with the product. Start with the reader.
 - ENSURE: every CTA names the specific action AND the specific benefit
+- PRODUCE: minimum 3 headline variants on every task — label V1, V2, V3; mark ★ recommended
+- VERIFY: Flesch score before delivery; fix if below threshold for audience type

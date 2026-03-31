@@ -1,12 +1,12 @@
 id: p12_dr_marketing
 kind: dispatch_rule
 pillar: P12
-version: 2.0.0
+version: 3.0.0
 created: 2026-03-30
-updated: 2026-03-30
+updated: 2026-03-31
 author: n02_marketing
 domain: copywriting_and_campaigns
-quality: 8.9
+quality: null
 tags:
 - dispatch_rule
 - marketing
@@ -85,5 +85,23 @@ keyword_rationale: 'Keywords cover: direct copy requests, channel-specific writi
 routing_logic: "IF task.keywords ∩ dispatch_keywords != ∅ AND confidence >= 0.70:\n    route → n02-marketing-hub (claude,\
   \ sonnet, anthropic_max)\nELIF confidence < 0.70:\n    request clarification → ask \"is this a copy/creative task?\"\nELIF\
   \ n02-marketing-hub unavailable:\n    escalate → n07-orchestrator"
+confidence_calibration: '| Signal | Confidence Boost |
+
+  |--------|----------------|
+
+  | User says "write copy for..." | +0.30 |
+
+  | Task contains product name + audience + benefit | +0.20 |
+
+  | Channel mentioned (email, ad, landing page) | +0.15 |
+
+  | Portuguese copy keywords (anuncio, campanha, redação) | +0.25 |
+
+  | Task is statistical/analytical in nature | −0.50 (route N04) |'
 fallback_policy: 'If `n02-marketing-hub` is unavailable: escalate to `n07-orchestrator` with task description. N07 will either
   retry N02 or provide manual handoff instructions.'
+dispatch_command: 'bash _spawn/dispatch.sh solo n02 "task description"
+
+  # or for batch:
+
+  bash _spawn/dispatch.sh grid MISSION_NAME'

@@ -1,9 +1,9 @@
 id: p03_ap_generate_marketing_strategy
 kind: action_prompt
 pillar: P03
-version: 2.0.0
+version: 3.0.0
 created: 2026-03-30
-updated: 2026-03-30
+updated: 2026-03-31
 author: n02_marketing
 title: N02 Action Prompts — Marketing Copy Quick Execution
 action: Execute copy task directly with minimal input
@@ -25,13 +25,17 @@ edge_cases: '| Situation | Action |
 
   | Copy exceeds word limit | Trim benefits block; keep hook and CTA intact |
 
-  | Conflicting CTAs requested | Pick ONE; note the choice and reason |'
+  | Conflicting CTAs requested | Pick ONE; note the choice and reason |
+
+  | B2B vs B2C tone conflict | Confirm audience type; B2B aims Flesch >= 50, B2C aims Flesch >= 65 |
+
+  | No competitor examples | Proceed with formula-based approach; skip teardown step |'
 constraints:
 - NEVER write generic CTAs — always specific + benefit-first
 - ALWAYS produce 3 headline variants minimum
 - NEVER skip funnel stage identification
 domain: copywriting_and_campaigns
-quality: 8.9
+quality: null
 tags:
 - action_prompt
 - marketing
@@ -183,4 +187,15 @@ validation: '| Check | Rule |
 
   | A/B TEST note | Required at end of every output |
 
-  | Word limits | Respected per channel (social < 150, email < 250 body, LP hero < 100 subhead) |'
+  | Word limits | Respected per channel (social < 150, email < 250 body, LP hero < 100 subhead) |
+
+
+  ---'
+action_6_social_media_caption_pack: "Use when: Need native posts for multiple platforms from a single brief.\n\nTASK: Write\
+  \ social media captions for 3 platforms.\nPRODUCT: [name + one-sentence description]\nAUDIENCE: [who follows this account]\n\
+  POST GOAL: [awareness | engagement | conversion]\nKEY MESSAGE: [single idea this post communicates]\nBRAND VOICE: [tone\
+  \ notes]\n\nDELIVER for each platform:\nInstagram:\n  - Caption (hook line + 3–5 sentence body + CTA + line break + hashtags)\n\
+  \  - Hook variant (alternate first line for A/B test)\n  - 10 hashtags (3 broad + 4 niche + 3 branded)\n\nLinkedIn:\n  -\
+  \ Post (hook line + insight + 3 bullets or story + soft CTA)\n  - Character count: aim 900–1,200 chars\n\nX/Twitter:\n \
+  \ - Single tweet (< 280 chars, hook + CTA or curiosity gap)\n  - Thread option: tweet 1 (hook) + tweets 2–4 (points) + tweet\
+  \ 5 (CTA)\n\nTEST: which platform/variant to test first and why\n\n---"

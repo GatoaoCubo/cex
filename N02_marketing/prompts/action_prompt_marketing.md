@@ -2,9 +2,9 @@
 id: p03_ap_generate_marketing_strategy
 kind: action_prompt
 pillar: P03
-version: 2.0.0
+version: 3.0.0
 created: 2026-03-30
-updated: 2026-03-30
+updated: 2026-03-31
 author: n02_marketing
 title: N02 Action Prompts — Marketing Copy Quick Execution
 action: Execute copy task directly with minimal input
@@ -25,7 +25,7 @@ constraints:
   - ALWAYS produce 3 headline variants minimum
   - NEVER skip funnel stage identification
 domain: copywriting_and_campaigns
-quality: 8.9
+quality: null
 tags: [action_prompt, marketing, copy, N02, quick_execution]
 tldr: 5 ready-to-run N02 action prompts — ad copy, headline, landing page hero, email, brand voice card.
 density_score: 0.91
@@ -165,6 +165,39 @@ DELIVER:
 | A/B TEST note | Required at end of every output |
 | Word limits | Respected per channel (social < 150, email < 250 body, LP hero < 100 subhead) |
 
+---
+
+## Action 6: Social Media Caption Pack
+
+**Use when**: Need native posts for multiple platforms from a single brief.
+
+```
+TASK: Write social media captions for 3 platforms.
+PRODUCT: [name + one-sentence description]
+AUDIENCE: [who follows this account]
+POST GOAL: [awareness | engagement | conversion]
+KEY MESSAGE: [single idea this post communicates]
+BRAND VOICE: [tone notes]
+
+DELIVER for each platform:
+Instagram:
+  - Caption (hook line + 3–5 sentence body + CTA + line break + hashtags)
+  - Hook variant (alternate first line for A/B test)
+  - 10 hashtags (3 broad + 4 niche + 3 branded)
+
+LinkedIn:
+  - Post (hook line + insight + 3 bullets or story + soft CTA)
+  - Character count: aim 900–1,200 chars
+
+X/Twitter:
+  - Single tweet (< 280 chars, hook + CTA or curiosity gap)
+  - Thread option: tweet 1 (hook) + tweets 2–4 (points) + tweet 5 (CTA)
+
+TEST: which platform/variant to test first and why
+```
+
+---
+
 ## Edge Cases
 
 | Situation | Action |
@@ -173,3 +206,5 @@ DELIVER:
 | No funnel stage specified | Default to consideration; note assumption at top of output |
 | Copy exceeds word limit | Trim benefits block; keep hook and CTA intact |
 | Conflicting CTAs requested | Pick ONE; note the choice and reason |
+| B2B vs B2C tone conflict | Confirm audience type; B2B aims Flesch >= 50, B2C aims Flesch >= 65 |
+| No competitor examples | Proceed with formula-based approach; skip teardown step |

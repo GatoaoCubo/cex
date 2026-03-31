@@ -2,9 +2,9 @@ id: p07_sr_marketing_nucleus
 kind: scoring_rubric
 pillar: P07
 title: 'Rubric: Marketing Copy Quality'
-version: 2.0.0
+version: 3.0.0
 created: 2026-03-30
-updated: 2026-03-30
+updated: 2026-03-31
 author: n02_marketing
 framework: Conversion Copy Evaluation
 target_kinds:
@@ -32,7 +32,7 @@ automation_status: '| Dimension | Automation | Tool |
 
   | A/B Coverage | Automated | Count variants in output file |'
 domain: copywriting_and_campaigns
-quality: 9.0
+quality: null
 tags:
 - scoring_rubric
 - marketing
@@ -107,3 +107,16 @@ revision_instructions_by_dimension: '| Dimension scores < 7 | Revision Action |
   | Brand Voice Fit | Re-read brand voice card. Replace 3 words that feel off-brand. |
 
   | A/B Coverage | Generate 2 more headline variants using different formulas (AIDA vs PAS). |'
+dimension_weight_rationale:
+- 'Hook (30%): If the hook fails, no one reads the rest — highest weight.'
+- 'Conversion Clarity (25%): The CTA is the conversion moment; vague CTAs lose 20–30% clicks.'
+- 'Readability (20%): Dense copy loses mobile readers; Flesch < 50 correlates with 40% drop in scroll depth.'
+- 'Brand Voice (15%): Voice mismatches erode trust; weight lower than conversion because neutral voice still converts.'
+- 'A/B Coverage (10%): Variants enable testing; weight lowest because quality of variants matters more than count.'
+peer_review_protocol:
+- Scorer reads deliverable cold (no context from requester)
+- Scores each dimension independently before reading other dimensions
+- Writes 1-sentence rationale per dimension
+- Flags any [PROOF NEEDED] or [STAT NEEDED] placeholders found
+- Notes top 1 revision action if score < 8.0
+- 'Applies score to frontmatter: `quality: {score}` (NEVER self-applied by N02)'

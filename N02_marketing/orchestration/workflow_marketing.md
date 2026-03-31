@@ -2,9 +2,9 @@
 id: p12_wf_marketing_campaign
 kind: workflow
 pillar: P12
-version: 2.0.0
+version: 3.0.0
 created: 2026-03-30
-updated: 2026-03-30
+updated: 2026-03-31
 author: n02_marketing
 title: Marketing Copy Production Workflows
 steps_count: 12
@@ -15,7 +15,7 @@ retry_policy: per_step
 depends_on: []
 signals: [marketing_copy_complete, marketing_copy_error]
 domain: copywriting_and_campaigns
-quality: 8.9
+quality: null
 tags: [workflow, marketing, copywriting, N02, campaign, landing_page, email]
 tldr: 3 production workflows — ad campaign (5 steps), landing page (4 steps), email sequence (3 steps) — all N02 executed.
 density_score: 0.90
@@ -144,11 +144,45 @@ Step 3: COMPILE + COMMIT [n02-marketing-hub]
 
 ---
 
+---
+
+## Workflow 4: Brand Voice Card
+
+**Goal**: Define and document a brand's writing voice for consistent copy production
+**Input required**: Brand name, brand description, 2–3 copy samples (or NONE), target tone description
+**Output**: Brand voice card with tone scores, signature phrases, banned words, persona anchor
+
+### Steps
+
+```
+Step 1: VOICE EXTRACT [n02-marketing-hub]
+  - If samples provided: analyze tone, vocabulary, energy, person dimensions
+  - If no samples: build from target tone description alone
+  - Score each dimension 1–5: Formal↔Casual, Technical↔Plain, 3rd↔1st, Calm↔Bold
+  - Output: voice_dimensions_{mission}.md
+
+Step 2: VOICE CARD [n02-marketing-hub]
+  - Write: 5 signature phrases the brand says
+  - Write: 5 banned words/phrases the brand never says
+  - Write: persona anchor (brand as a person: age, job, how they talk)
+  - Write: 3 before/after examples showing voice applied to weak copy
+  - Write: voice flex rules (when voice can adapt, when it must hold)
+  - Output: brand_voice_card_{mission}.md
+
+Step 3: COMPILE + COMMIT [n02-marketing-hub]
+  - Compile voice card
+  - Commit: git commit -m "[N02] brand voice card — {mission}"
+  - Signal: marketing_copy_complete
+```
+
+---
+
 ## Error Handling
 
 - **Step fails**: retry once with revised prompt; if still fail, signal `marketing_copy_error` to N07
 - **Quality gate fails** (score < 8.0): return to copy step, apply F6 retry, max 2 revisions
 - **MCP unavailable**: proceed with formula-based approach from KC; note in output
+- **No brand voice card**: write in neutral professional tone; flag "[BRAND VOICE CARD RECOMMENDED]" at top
 
 ## Signals
 

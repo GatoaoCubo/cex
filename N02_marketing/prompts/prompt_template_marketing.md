@@ -3,9 +3,9 @@ id: p03_pt_marketing_message
 kind: prompt_template
 pillar: P03
 title: Marketing Copy Production Template
-version: 2.0.0
+version: 3.0.0
 created: 2026-03-30
-updated: 2026-03-30
+updated: 2026-03-31
 author: n02_marketing
 variables:
   - name: product_name
@@ -56,7 +56,7 @@ variables:
 variable_syntax: mustache
 composable: true
 domain: copywriting_and_campaigns
-quality: 9.0
+quality: null
 tags: [prompt_template, marketing, copy, N02, P03]
 tldr: Universal copy production template — product + audience + funnel + formula → persuasive copy with A/B variants.
 keywords: [copy, ad, headline, CTA, funnel, formula, AIDA, PAS, email, landing_page]
@@ -146,6 +146,30 @@ Alternate: ...
 [one sentence on priority test]
 ```
 
+## Formula Expansion Reference
+
+When `{{formula}}` = AIDA, expand body structure as:
+```
+ATTENTION: [Bold claim or question — reader's desire or fear, 1 sentence]
+INTEREST: [Develop the problem or opportunity — why it matters now, 2–3 sentences]
+DESIRE: [Transformation — what life looks like after the solution, benefit stack, 2–3 sentences]
+ACTION: [CTA — specific + benefit-first, 1 sentence]
+```
+
+When `{{formula}}` = PAS, expand body structure as:
+```
+PROBLEM: [Name exact pain — reader already feels this, 1–2 sentences]
+AGITATE: [Deepen pain — consequences, missed opportunities, cost of inaction, 2–3 sentences]
+SOLUTION: [Present product as relief — not features, transformation, 2–3 sentences]
+```
+
+When `{{formula}}` = BAB, expand body structure as:
+```
+BEFORE: [Current painful state — reader's reality right now, 1–2 sentences]
+AFTER: [Desired future state — what they want, vivid and specific, 1–2 sentences]
+BRIDGE: [Your product/service as the mechanism from Before to After, 2–3 sentences]
+```
+
 ## Quality Gates Applied
 
 | Gate | Check |
@@ -154,6 +178,7 @@ Alternate: ...
 | H06 | >= 3 headline variants with 4U scores |
 | S01 | Hook opens in first 10 words |
 | S02 | CTA names benefit AND action |
+| H04 | Funnel stage declared in output header |
 
 ## Filled Example
 

@@ -2,9 +2,9 @@
 id: p08_ac_marketingnucleus
 kind: agent_card
 pillar: P08
-version: 2.0.0
+version: 3.0.0
 created: 2026-03-30
-updated: 2026-03-30
+updated: 2026-03-31
 author: n02_marketing
 name: n02-marketing-hub
 role: Marketing & Creative Nucleus — conversion copywriter for ads, landing pages, email sequences, brand voice, and social media
@@ -41,7 +41,7 @@ subscription_auth: anthropic_max
 mcp_config: .claude/settings.json
 flags: []
 domain: copywriting_and_campaigns
-quality: 8.9
+quality: null
 tags: [agent_card, marketing, N02, copywriting, sonnet]
 tldr: N02 deployment spec — claude-sonnet-4-6 on Anthropic Max, zero cost, markitdown + fetch MCPs, specializes in conversion copy.
 ---
@@ -92,8 +92,11 @@ Do **NOT** route to N02:
 
 - `NEVER` write unverifiable superlatives without `[PROOF NEEDED]` tag
 - `NEVER` override brand voice if a voice card is provided
-- `ALWAYS` include A/B variants (minimum 3) for headlines and CTAs
+- `NEVER` write generic CTAs ("Click here", "Learn more") — always specific + benefit-first
+- `NEVER` produce copy without declaring funnel stage (awareness/consideration/decision)
+- `ALWAYS` include A/B variants (minimum 3 headlines) for all copy deliverables
 - `ALWAYS` signal completion: `write_signal('n02', 'complete', score, mission)`
+- `ALWAYS` end every deliverable with a TEST note (what to A/B test first)
 
 ## Scaling & Monitoring
 
@@ -102,3 +105,16 @@ Do **NOT** route to N02:
 - Memory: 2048 MB
 - Signal on complete: YES — writes to `.cex/runtime/signals/`
 - Health check: `python _tools/cex_doctor.py`
+
+## Copy Output Checklist (run before signaling complete)
+
+```
+[ ] Funnel stage declared at top of deliverable
+[ ] >= 3 headline variants present (V1, V2, V3; ★ recommended marked)
+[ ] CTA is specific + benefit-first (not "Click here" / "Learn more")
+[ ] Hook appears in first 10 words
+[ ] Readability check: Flesch >= 60 (B2C) or >= 40 (B2B)
+[ ] No unverified superlatives (or [PROOF NEEDED] tagged)
+[ ] TEST note present at end of deliverable
+[ ] Brand voice card honored (if provided)
+```
