@@ -902,10 +902,72 @@ class EightFRunner:
                 self._log("F7", f"FAILED after {max_retries} retries: {issues}")
                 break
 
+    # -- Learning Record -----------------------------------------------------
+
+    def _write_learning_record(self):
+        """Capture build outcome as learning_record for builder improvement."""
+        import datetime
+        v = self.state.verdict
+        if not v:
+            return
+        record = {
+            "timestamp": datetime.datetime.now().isoformat(),
+            "kind": self.state.kind,
+            "intent": self.state.intent[:100],
+            "passed": v.get("passed", False),
+            "retries": v.get("retries", 0),
+            "gates_passed": sum(1 for g in v.get("hard_gates", []) if g.get("passed")),
+            "gates_total": len(v.get("hard_gates", [])),
+            "issues": v.get("issues", []),
+            "timing_ms": sum(self.state.timings.values()),
+        }
+
+        # Write to .cex/learning_records/
+        lr_dir = CEX_ROOT / ".cex" / "learning_records"
+        lr_dir.mkdir(parents=True, exist_ok=True)
+        ts = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+        lr_path = lr_dir / f"lr_{self.state.kind}_{ts}.json"
+
+        import json
+        lr_path.write_text(json.dumps(record, indent=2, ensure_ascii=False), encoding="utf-8")
+        self._log("LR", f"learning record saved to {lr_path.name}")
+
+        # Append summary to builder's bld_memory if exists
+        if self.state.builder_dir:
+            mem_files = list(self.state.builder_dir.glob("bld_memory_*.md"))
+            if mem_files:
+                mem_path = mem_files[0]
+                outcome = "PASS" if v.get("passed") else "FAIL"
+                issues_str = "; ".join(v.get("issues", []))[:100]
+                entry = (
+                    f"\n- [{ts}] {outcome} kind={self.state.kind} "
+                    f"retries={v.get('retries', 0)} "
+                    f"gates={record['gates_passed']}/{record['gates_total']}"
+                )
+                if issues_str:
+                    entry += f" issues=[{issues_str}]"
+
+                content = mem_path.read_text(encoding="utf-8")
+                # Append under ## Production Log section (create if missing)
+                if "## Production Log" not in content:
+                    content += "\n\n## Production Log\n"
+                content += entry + "\n"
+
+                # Check size limit (4096B for builder ISOs)
+                if len(content.encode("utf-8")) <= 4096:
+                    mem_path.write_text(content, encoding="utf-8")
+                    self._log("LR", f"appended to {mem_path.name}")
+                else:
+                    self._log("LR", f"bld_memory at size limit, skipped append")
+
     # -- F8 COLLABORATE -----------------------------------------------------
 
     def f8_collaborate(self):
         """Save artifact to file, compile -> state.result."""
+        # Write learning record (pre-save, captures build outcome regardless)
+        if not self.dry_run:
+            self._write_learning_record()
+
         if self.dry_run:
             # In dry-run, just report the prompt
             out_path = None
