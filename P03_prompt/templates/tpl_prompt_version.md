@@ -3,12 +3,59 @@ id: p03_prompt_version
 kind: prompt_version
 pillar: P03
 version: 1.0.0
+title: "Template — Prompt Version"
+tags: [template, prompt, version, evolution, regression]
+tldr: "Tracks prompt evolution with version numbering, change log, A/B test results, and rollback instructions. Prevents prompt regression."
+quality: null
 ---
 
-# prompt_version
+# Prompt Version: [PROMPT_ID] v[X.Y.Z]
 
-## Purpose
+## Version History
 
-## Configuration
+| Version | Date | Change | Impact |
+|---------|------|--------|--------|
+| 1.0.0 | [YYYY-MM-DD] | Initial release | Baseline |
+| 1.1.0 | [YYYY-MM-DD] | [CHANGE_DESCRIPTION] | [METRIC_DELTA] |
+| 1.2.0 | [YYYY-MM-DD] | [CHANGE_DESCRIPTION] | [METRIC_DELTA] |
 
-## Boundary
+## Current Version: v[X.Y.Z]
+
+### System Prompt
+```
+[CURRENT_SYSTEM_PROMPT_TEXT]
+```
+
+### Key Parameters
+| Parameter | Value | Previous | Reason for Change |
+|-----------|-------|----------|--------------------|
+| temperature | [0.0-1.0] | [PREV] | [WHY] |
+| max_tokens | [N] | [PREV] | [WHY] |
+| model | [MODEL] | [PREV] | [WHY] |
+
+## Change Log (v[X.Y.Z])
+- **What changed**: [DESCRIPTION of prompt modification]
+- **Why**: [HYPOTHESIS — what problem this solves]
+- **Evidence**: [A/B test results, quality score delta, user feedback]
+
+## Evaluation Metrics
+
+| Metric | v[PREV] | v[CURRENT] | Delta |
+|--------|---------|------------|-------|
+| Quality score | [N.N] | [N.N] | [+/-] |
+| Gate pass rate | [N%] | [N%] | [+/-] |
+| Retry rate | [N%] | [N%] | [+/-] |
+| Latency (p50) | [Nms] | [Nms] | [+/-] |
+
+## Rollback
+If regression detected:
+1. Revert to v[PREV]: `git checkout [COMMIT] -- [PROMPT_FILE]`
+2. Redeploy: [DEPLOY_COMMAND]
+3. Monitor: Check metrics for 24h
+4. Document: Add regression note to version history
+
+## Quality Gate
+- [ ] Version follows semver (major.minor.patch)
+- [ ] Change log explains WHAT and WHY
+- [ ] At least 1 metric tracked between versions
+- [ ] Rollback procedure documented
