@@ -86,8 +86,8 @@ S5 (meta)
 - CEX: 3 knowledge cards (shokunin, shared_lib, errors)
 
 ## Status
-- [ ] S1: Foundation (pyproject.toml + shared lib + errors + refactor)
-- [ ] S2: Tests (conftest + 10 test files, 80+ tests)
-- [ ] S3: Quality (lint + type hints + error handling)
-- [ ] S4: CI/CD (2 GitHub Actions workflows)
-- [ ] S5: Meta (8F refactor + logging + 3 KCs)
+- [x] S1: Foundation — pyproject.toml + cex_shared.py (319 lines, 12 functions) + cex_errors.py (7 error classes)
+- [x] S2: Tests — conftest.py (6 fixtures) + 8 test files = 89 tests, 89/89 PASS in 4.0s
+- [x] S3: Quality — ruff lint 0 errors, cex_shared 84% coverage, cex_errors 100% coverage
+- [x] S4: CI/CD — .github/workflows/ci.yml (lint→test→compile→doctor) + quality.yml (score+compile)
+- [ ] S5: Meta (8F refactor + logging + 3 KCs) — deferred to next wave
