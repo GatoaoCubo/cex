@@ -77,6 +77,32 @@ try:
 except ImportError:
     _TOKEN_BUDGET_AVAILABLE = False
 
+try:
+    from cex_memory import get_injection_context as _memory_inject
+    _MEMORY_AVAILABLE = True
+except ImportError:
+    _MEMORY_AVAILABLE = False
+
+try:
+    from cex_output_formatter import validate_frontmatter as _validate_fm
+    _FORMATTER_AVAILABLE = True
+except ImportError:
+    _FORMATTER_AVAILABLE = False
+
+try:
+    from cex_prompt_optimizer import suggest_improvements as _suggest_improvements
+    _OPTIMIZER_AVAILABLE = True
+except ImportError:
+    _OPTIMIZER_AVAILABLE = False
+
+try:
+    from cex_quality_monitor import quality_report as _quality_report
+    from cex_quality_monitor import save_snapshot as _save_snapshot
+    from cex_quality_monitor import scan_artifacts as _scan_artifacts
+    _MONITOR_AVAILABLE = True
+except ImportError:
+    _MONITOR_AVAILABLE = False
+
 # Load .env for API keys
 for _ep in [CEX_ROOT / ".env", CEX_ROOT.parent / "organization-core" / ".env"]:
     if _ep.exists():
@@ -360,6 +386,16 @@ class EightFRunner:
         # Schema boundary
         identity["kind_boundary"] = self.state.constraints.get("boundary", "")
 
+        # Prompt optimizer: improvement hints from learning records
+        if _OPTIMIZER_AVAILABLE:
+            try:
+                hints = _suggest_improvements(self.state.kind)
+                if hints:
+                    identity["optimizer_hints"] = hints
+                    self._log("F2", f"prompt optimizer: {len(hints)} hints")
+            except Exception as e:
+                self._log("F2", f"prompt optimizer unavailable: {e}")
+
         self.state.identity = identity
         self._log("F2", f"identity: {list(identity.keys())}")
 
@@ -427,7 +463,17 @@ class EightFRunner:
             knowledge["domain_context"] = self.state.context
             self._log("F3", f"domain context injected ({len(self.state.context)} chars)")
 
-        # 8. Semantic retrieval (TF-IDF similar artifacts)
+        # 8. Build memory injection (past performance for this kind)
+        if _MEMORY_AVAILABLE:
+            try:
+                mem_context = _memory_inject(self.state.kind)
+                if mem_context and mem_context.strip():
+                    knowledge["build_memory"] = mem_context
+                    self._log("F3", f"build memory injected ({len(mem_context)} chars)")
+            except Exception as e:
+                self._log("F3", f"build memory unavailable: {e}")
+
+        # 9. Semantic retrieval (TF-IDF similar artifacts)
         if _RETRIEVER_AVAILABLE:
             try:
                 idx = load_retriever_index()
@@ -612,6 +658,10 @@ class EightFRunner:
             knowledge_parts.append(f"## Memory (Past Learnings)\n\n{k['memory']}")
         if k.get("domain_context"):
             knowledge_parts.append("## Domain Context\n\n" + k["domain_context"])
+        if k.get("build_memory"):
+            knowledge_parts.append(
+                "## Build Memory (past performance)\n\n" + k["build_memory"]
+            )
         if k.get("semantic_matches"):
             knowledge_parts.append(
                 "## Similar Artifacts (semantic retrieval)\n\n" + k["semantic_matches"]
@@ -646,6 +696,15 @@ class EightFRunner:
                     "distinct and adds value."
                 )
             sections.append("# TOOLS\n\n" + "\n".join(tool_lines))
+
+        # 5c. OPTIMIZER HINTS (from F2 prompt_optimizer)
+        hints = self.state.identity.get("optimizer_hints", [])
+        if hints:
+            sections.append(
+                "# OPTIMIZER HINTS\n\n"
+                "Based on past builds, pay attention to:\n"
+                + "\n".join(f"- {h}" for h in hints)
+            )
 
         # 6. INSTRUCTION (bld_instruction body)
         bdir = self.state.builder_dir
@@ -786,17 +845,31 @@ class EightFRunner:
             _gate("H06", "body <= max_bytes", body_size <= int(max_bytes) if max_bytes else True,
                   f"H06: Body {body_size} bytes > max {max_bytes} bytes")
 
+            # Output formatter validation (jsonschema-based, soft — non-blocking)
+            soft_warnings: list[str] = []
+            if _FORMATTER_AVAILABLE and fm:
+                try:
+                    fm_results = _validate_fm(fm, self.state.kind)
+                    for r in fm_results:
+                        if not r.get("passed"):
+                            soft_warnings.append(f"S_{r['rule']}: {r['message']}")
+                    self._log("F7", f"formatter: {len(fm_results)} rules, {len(soft_warnings)} warnings")
+                except Exception as e:
+                    self._log("F7", f"formatter unavailable: {e}")
+
             all_passed = all(g["passed"] for g in hard_gates)
 
             if all_passed:
                 self.state.verdict = {
                     "passed": True,
                     "hard_gates": hard_gates,
+                    "soft_warnings": soft_warnings,
                     "issues": [],
                     "feedback": "",
                     "retries": retries,
                 }
-                self._log("F7", f"PASSED all {len(hard_gates)} hard gates (retries={retries})")
+                self._log("F7", f"PASSED all {len(hard_gates)} hard gates (retries={retries})"
+                           + (f", {len(soft_warnings)} soft warnings" if soft_warnings else ""))
                 break
 
             # Gates failed
@@ -940,11 +1013,27 @@ class EightFRunner:
                 except Exception as e:
                     self._log("F8", f"auto-commit skipped: {e}")
 
+            # Quality monitor: track build in snapshot
+            monitored = False
+            if _MONITOR_AVAILABLE and self.state.verdict.get("passed"):
+                try:
+                    _save_snapshot([{
+                        "path": str(out_path),
+                        "kind": self.state.kind,
+                        "pillar": self.state.pillar,
+                        "score": 8.0,  # baseline; peer review adjusts later
+                    }])
+                    monitored = True
+                    self._log("F8", "quality snapshot updated")
+                except Exception as e:
+                    self._log("F8", f"quality monitor skipped: {e}")
+
             self.state.result = {
                 "path": str(out_path),
                 "compiled": compiled,
                 "indexed": indexed,
                 "committed": committed,
+                "monitored": monitored,
                 "mode": "execute",
             }
 
@@ -1021,6 +1110,8 @@ def print_banner(state: RunState, elapsed_ms: float) -> None:
     k_parts = [label for key, label in [("kc_builder", "builder-KC"), ("few_shots", "examples"), ("memory", "memory")] if k.get(key)]
     if k.get("kc_domains"):
         k_parts.insert(1, f"{len(k['kc_domains'])} KCs")
+    if k.get("build_memory"):
+        k_parts.append("memory")
     if k.get("semantic_matches"):
         k_parts.append("retriever")
     if k_parts:
