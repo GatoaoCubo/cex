@@ -10,7 +10,7 @@ author: n07_admin
 domain: commercial-monetization
 tags: [mission, content-monetization, N06, billing, credits, courses]
 tldr: "5-phase mission to distill 4,409 lines of production billing/credits/courses code into a reusable content-monetization-builder. N06 superintends."
-quality: null
+quality: 8.7
 ---
 
 # Mission: Content Monetization Builder
