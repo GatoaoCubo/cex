@@ -2,28 +2,75 @@
 id: ex_prompt_template_aida
 kind: prompt_template
 pillar: P03
-title: AIDA Copywriting Template
-tags: [prompt, aida, copywriting, template]
+title: "AIDA Copywriting Template"
+tags: [prompt, aida, copywriting, template, marketing]
+tldr: "AIDA (Attention→Interest→Desire→Action) prompt template for generating marketing copy. Includes variable slots, tone controls, and quality constraints."
 references:
   - tpl_prompt_template
   - ex_agent_copywriter
   - ex_quality_gate_copy
+quality: null
 ---
 
 # AIDA Copywriting Template
 
-> Skeleton: prompt_template kind
+## Purpose
+Generates marketing copy following the classic AIDA framework. Used by N02 (Marketing) agents for social posts, ads, landing pages, and email campaigns.
 
+## Template
 ```
-Attention: {{hook}} — grab in 3 seconds
-Interest: {{benefit}} — why they should care
-Desire: {{proof}} — evidence it works
-Action: {{cta}} — what to do NOW
+You are a conversion-focused copywriter. Write copy using the AIDA framework.
+
+## ATTENTION (1 line)
+{{hook}} — grab attention in 3 seconds. Use a surprising stat, bold claim, or question.
+
+## INTEREST (2-3 lines)
+{{benefit}} — explain why the reader should care. Focus on their problem, not your product.
+
+## DESIRE (2-3 lines)
+{{proof}} — provide evidence: testimonial, data point, case study, or before/after.
+
+## ACTION (1 line)
+{{cta}} — tell them exactly what to do NOW. One clear action, urgency optional.
+
+## Constraints
+- Total length: {{max_words}} words (default: 150)
+- Tone: {{tone}} (professional | casual | urgent | playful)
+- Language: {{language}} (default: same as input)
+- NO: clickbait, false claims, all-caps, excessive emojis
 ```
 
-## Links
+## Variable Reference
 
-- Used by: [[ex_agent_copywriter]]
-- Validated by: [[ex_quality_gate_copy]]
-- Template: [[tpl_prompt_template]]
-- Function: REASON (how the AI thinks)
+| Variable | Type | Required | Default | Example |
+|----------|------|----------|---------|---------|
+| hook | string | yes | — | "73% of founders skip this step" |
+| benefit | string | yes | — | "Save 10h/week on content creation" |
+| proof | string | yes | — | "Used by 500+ SaaS companies" |
+| cta | string | yes | — | "Start your free trial →" |
+| max_words | int | no | 150 | 100, 200, 300 |
+| tone | enum | no | professional | casual, urgent, playful |
+| language | string | no | auto | pt-BR, en, es |
+
+## Example Output
+> **73% of founders post without a strategy.** (Attention)
+> Your competitors have a content calendar, brand voice guide, and posting schedule. You have a "I should post something today" feeling. (Interest)
+> Our clients went from 3 random posts/month to 20 strategic ones — and saw 4x engagement. Here's what changed. (Desire)
+> **Start your free content audit →** (Action)
+
+## Evaluation Criteria (7D rubric)
+| Dimension | Check |
+|-----------|-------|
+| Hook strength | Opens with surprise, not generic |
+| Benefit clarity | Reader understands value in 1 sentence |
+| Proof credibility | Specific number, name, or result |
+| CTA clarity | One action, no ambiguity |
+| Tone consistency | Matches specified tone throughout |
+| Length | Within ±10% of max_words |
+| Authenticity | No false claims or manipulative tactics |
+
+## Quality Gate
+- [ ] All 4 AIDA sections present
+- [ ] Variables populated (no `{{placeholders}}` in output)
+- [ ] Length within max_words ±10%
+- [ ] CTA is a single clear action
