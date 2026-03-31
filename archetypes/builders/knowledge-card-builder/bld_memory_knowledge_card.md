@@ -45,3 +45,8 @@ Body size constraints: minimum 200 bytes (4+ sections with 3+ lines each), maxim
 - Internal paths in any field — validator H09 rejects, breaks portability.
 - Self-referencing tldr: "This card describes caching" — tldr must be the direct fact, not a description of the card.
 ## Context
+
+
+## Production Log
+
+- [20260331_214115] PASS kind=knowledge_card retries=0 gates=6/6
