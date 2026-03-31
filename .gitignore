@@ -1,32 +1,41 @@
+# === CEX .gitignore ===
 
-!_config/README.md
-!_config/gdrive.yaml
-# Google Drive credentials (secrets)
+# Python
 __pycache__/
+*.pyc
+
+# Secrets
+.env
 _config/*.credentials
 _config/client_secret.json
 _config/token.json
 
-# Regenerable index
-.cex/index.db
-
-# === CEX Cleanup 2026-03-28 ===
-# Proof artifacts (8.5MB rebuild prompts — ephemeral)
-_tools/proof/
-
-# IDE configs
+# IDE
 .obsidian/
 .cursorrules
 .windsurfrules
+.vscode/
 
-# Runtime caches
+# Regenerable
 .cex/index.db
-__pycache__/
-*.pyc
+
+# Research artifacts (8.5MB — ephemeral)
+_tools/proof/
+
+# Legacy / stale
 _archive/
-.env
 .cex_signals/
+_ops/
+.githooks/
 
-
-# Runtime ephemeral (handoffs, signals, pids, locks)
+# Runtime ephemeral
 .cex/runtime/
+
+# Media (not useful for LLM)
+_docs/*.mp4
+_docs/*.mp3
+_docs/*.srt
+
+# Platform
+Thumbs.db
+.DS_Store
