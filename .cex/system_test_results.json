@@ -1,0 +1,280 @@
+{
+  "timestamp": "2026-03-31T10:01:33.472950",
+  "pass": 53,
+  "fail": 1,
+  "skip": 0,
+  "total": 54,
+  "elapsed_s": 98.2,
+  "tests": [
+    {
+      "name": "tool:cex_8f_motor.py",
+      "status": "PASS",
+      "detail": "40091B"
+    },
+    {
+      "name": "tool:cex_8f_runner.py",
+      "status": "PASS",
+      "detail": "51807B"
+    },
+    {
+      "name": "tool:cex_intent.py",
+      "status": "PASS",
+      "detail": "17115B"
+    },
+    {
+      "name": "tool:cex_compile.py",
+      "status": "PASS",
+      "detail": "11339B"
+    },
+    {
+      "name": "tool:cex_doctor.py",
+      "status": "PASS",
+      "detail": "15644B"
+    },
+    {
+      "name": "tool:cex_index.py",
+      "status": "PASS",
+      "detail": "10840B"
+    },
+    {
+      "name": "tool:cex_feedback.py",
+      "status": "PASS",
+      "detail": "14194B"
+    },
+    {
+      "name": "tool:cex_hooks.py",
+      "status": "PASS",
+      "detail": "10707B"
+    },
+    {
+      "name": "tool:cex_score.py",
+      "status": "PASS",
+      "detail": "6970B"
+    },
+    {
+      "name": "tool:cex_materialize.py",
+      "status": "PASS",
+      "detail": "5899B"
+    },
+    {
+      "name": "tool:signal_writer.py",
+      "status": "PASS",
+      "detail": "1153B"
+    },
+    {
+      "name": "doctor:pass_count",
+      "status": "PASS",
+      "detail": "98/98 PASS"
+    },
+    {
+      "name": "doctor:zero_warn",
+      "status": "PASS",
+      "detail": "0 WARN"
+    },
+    {
+      "name": "doctor:zero_fail",
+      "status": "PASS",
+      "detail": "0 FAIL"
+    },
+    {
+      "name": "compile:all",
+      "status": "PASS",
+      "detail": "245/245"
+    },
+    {
+      "name": "builders:count",
+      "status": "PASS",
+      "detail": "99 builders"
+    },
+    {
+      "name": "builders:13_isos",
+      "status": "PASS",
+      "detail": "all 13 ISOs"
+    },
+    {
+      "name": "nucleus:N01_intelligence",
+      "status": "PASS",
+      "detail": "14 artifacts (min 11)"
+    },
+    {
+      "name": "nucleus:N02_marketing",
+      "status": "PASS",
+      "detail": "10 artifacts (min 10)"
+    },
+    {
+      "name": "nucleus:N03_engineering",
+      "status": "PASS",
+      "detail": "34 artifacts (min 34)"
+    },
+    {
+      "name": "nucleus:N04_knowledge",
+      "status": "PASS",
+      "detail": "12 artifacts (min 12)"
+    },
+    {
+      "name": "nucleus:N05_operations",
+      "status": "PASS",
+      "detail": "9 artifacts (min 9)"
+    },
+    {
+      "name": "nucleus:N06_commercial",
+      "status": "PASS",
+      "detail": "9 artifacts (min 9)"
+    },
+    {
+      "name": "nucleus:N07_admin",
+      "status": "PASS",
+      "detail": "13 artifacts (min 13)"
+    },
+    {
+      "name": "quality:zero_null",
+      "status": "PASS",
+      "detail": "0 quality:null remaining"
+    },
+    {
+      "name": "quality:scored",
+      "status": "PASS",
+      "detail": "102 artifacts with quality score"
+    },
+    {
+      "name": "subagents:count",
+      "status": "PASS",
+      "detail": "101 sub-agents"
+    },
+    {
+      "name": "subagents:materializer",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "hooks:validate_all",
+      "status": "PASS",
+      "detail": "0 errors"
+    },
+    {
+      "name": "hooks:git_precommit",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "boot:n01",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "boot:n02",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "boot:n03",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "boot:n04",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "boot:n05",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "boot:n06",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "spawn:spawn_solo.ps1",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "spawn:spawn_grid.ps1",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "spawn:spawn_monitor.ps1",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "spawn:spawn_stop.ps1",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "dispatch:dispatch.sh",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "runtime:handoffs",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "runtime:signals",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "runtime:pids",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "registry:kinds_meta",
+      "status": "PASS",
+      "detail": "99 kinds registered"
+    },
+    {
+      "name": "runner:dryrun_runs",
+      "status": "PASS",
+      "detail": "exit=0"
+    },
+    {
+      "name": "runner:has_f1",
+      "status": "PASS",
+      "detail": "F1 CONSTRAIN found"
+    },
+    {
+      "name": "runner:has_f6",
+      "status": "PASS",
+      "detail": "F6 PRODUCE found"
+    },
+    {
+      "name": "runner:has_prompt",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "runner:execute_pass",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "name": "runner:learning_record",
+      "status": "PASS",
+      "detail": "1 records"
+    },
+    {
+      "name": "kc:count",
+      "status": "PASS",
+      "detail": "99/98 kind KCs"
+    },
+    {
+      "name": "git:clean",
+      "status": "FAIL",
+      "detail": "5 dirty files"
+    },
+    {
+      "name": "git:has_commits",
+      "status": "PASS",
+      "detail": "03b5999 [N07] Fase 9 â€” feedback loop + learning records"
+    }
+  ]
+}
