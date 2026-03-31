@@ -1,63 +1,69 @@
----  
-id: p01_kc_system_testing_patterns  
-kind: knowledge_card  
-pillar: P01  
-title: "System Testing Patterns"  
-version: "1.0.0"  
-created: "2023-10-01"  
-updated: "2023-10-01"  
-author: "knowledge-card-builder"  
-domain: Software Testing  
-quality: null  
-tags: [system_testing, software_testing, testing_patterns, QA, engineering]  
-tldr: "Key patterns in system testing optimize coverage and efficiency."  
-when_to_use: "When looking to improve system testing strategies."  
-keywords: [system_testing, test_patterns, QA_methods]  
-long_tails:  
-  - Using system testing patterns for software reliability  
-  - Effective patterns for system testing in complex environments  
-axioms:  
-  - ALWAYS document and standardize testing patterns for consistent execution  
-  - NEVER skip the evaluation of patterns based on test outcomes  
-linked_artifacts:  
-  primary: null  
-  related: []  
-density_score: 0.85  
-data_source: "https://example.com/system-testing-patterns"  
+---
+id: p01_kc_system_testing_patterns
+kind: knowledge_card
+pillar: P01
+title: "System Testing Patterns"
+version: "1.0.0"
+created: "2023-10-05"
+updated: "2023-10-05"
+author: "knowledge-card-builder"
+domain: "Software Testing"
+quality: null
+tags: [system_testing, testing_patterns, software_testing, knowledge]
+tldr: "Comprehensive guide to system testing patterns for effective QA processes."
+when_to_use: "During system testing of integrated software applications."
+keywords: [system testing, test cases, test suites]
+long_tails:
+  - How to apply system testing patterns in enterprise software
+  - System testing best practices and strategies
+axioms:
+  - ALWAYS document each test case with precise expected results.
+  - NEVER execute system tests without prior unit testing.
+linked_artifacts:
+  primary: null
+  related: []
+density_score: 0.85
+data_source: "https://www.softwaretestinghelp.com/system-testing-process/"
 
----  
+---
 
-## Quick Reference  
-topic: system_testing_patterns  
-scope: Key patterns to enhance software system testing  
-owner: knowledge-card-builder  
-criticality: high  
+# System Testing Patterns
 
-## Key Concepts  
-- **High-Level Test Automation**: Use robust frameworks to automate repetitive tests.  
-- **End-to-End Workflow Testing**: Test entire business processes for real-world reliability.  
-- **Boundary Testing**: Verify application behavior at the operational limits.  
+## Quick Reference
+```yaml
+topic: System Testing Patterns
+scope: Develop, structure, and apply system testing methods
+owner: QA Specialist
+criticality: high
+```
 
-## Strategy Phases  
-1. **Identify Patterns**: Evaluate existing processes to select applicable patterns.  
-2. **Implement Frameworks**: Integrate patterns into test automation tools.  
-3. **Monitor Outcomes**: Record test results to refine testing strategies.  
+## Key Concepts
+- **Test Cases**: Documented scenarios with input and expected output to verify software functionality.
+- **Test Suites**: Collection of related test cases executed together to cover broader system areas.
+- **Test Scenarios**: High-level ideas describing what to test, serving as a basis for creating test cases.
 
-## Golden Rules  
-- STANDARDIZE: Document testing processes for repeatability.  
-- EVALUATE: Continuously assess the impact of patterns on software quality.  
-- ADAPT: Tailor patterns to the unique demands of the system under test.  
+## Strategy Phases
+1. **Design Phase**: Create comprehensive test cases based on requirements.
+2. **Execution Phase**: Run test cases and record outcomes rigorously.
+3. **Evaluation Phase**: Analyze results to identify defects and ensure coverage.
 
-## Flow  
-[Requirements] -> [Select Pattern] -> [Apply Pattern] -> [Analyze Results]  
+## Golden Rules
+- VERIFY: Each test case should align with a specific functional requirement.
+- PRIORITIZE: Continuously prioritize critical tests based on risk assessment.
+- DOCUMENT: Thoroughly document each test's setup, execution, and teardown procedures.
 
-## Comparativo  
-| Aspect         | High-Level Automation | End-to-End Testing |  
-|----------------|----------------------|--------------------|  
-| Scope          | Repetitive tasks     | Entire processes   |  
-| Coverage       | Narrow               | Broad              |  
-| Complexity     | Lower                | Higher             |  
+## Flow
+```text
+[Identify Requirements] -> [Design Test Cases] -> [Execute Tests] -> [Evaluate Outcomes]
+```
 
-## References  
-- Related artifact: None  
-- Source: https://example.com/system-testing-patterns
+## Comparativo
+| Feature       | Manual Testing | Automated Testing |
+|---------------|----------------|-------------------|
+| Speed         | Slow           | Fast              |
+| Scalability   | Limited        | High              |
+| Accuracy      | Variable       | Consistent        |
+
+## References
+- Related artifact: Not available
+- Source: https://www.softwaretestinghelp.com/system-testing-process/
