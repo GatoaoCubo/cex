@@ -1,15 +1,15 @@
 {
-  "timestamp": "2026-03-31T16:36:19.840080",
-  "pass": 53,
-  "fail": 1,
+  "timestamp": "2026-03-31T18:13:05.773419",
+  "pass": 51,
+  "fail": 3,
   "skip": 0,
   "total": 54,
-  "elapsed_s": 41.4,
+  "elapsed_s": 38.8,
   "tests": [
     {
       "name": "tool:cex_8f_motor.py",
       "status": "PASS",
-      "detail": "40091B"
+      "detail": "49464B"
     },
     {
       "name": "tool:cex_8f_runner.py",
@@ -44,7 +44,7 @@
     {
       "name": "tool:cex_hooks.py",
       "status": "PASS",
-      "detail": "10392B"
+      "detail": "15530B"
     },
     {
       "name": "tool:cex_score.py",
@@ -63,13 +63,13 @@
     },
     {
       "name": "doctor:pass_count",
-      "status": "PASS",
-      "detail": "103/98+ PASS"
+      "status": "FAIL",
+      "detail": "77/98+ PASS"
     },
     {
       "name": "doctor:zero_warn",
-      "status": "PASS",
-      "detail": "0 WARN"
+      "status": "FAIL",
+      "detail": "28 WARN"
     },
     {
       "name": "doctor:zero_fail",
@@ -84,7 +84,7 @@
     {
       "name": "builders:count",
       "status": "PASS",
-      "detail": "104 builders"
+      "detail": "106 builders"
     },
     {
       "name": "builders:13_isos",
@@ -229,7 +229,7 @@
     {
       "name": "registry:kinds_meta",
       "status": "PASS",
-      "detail": "100 kinds registered"
+      "detail": "104 kinds registered"
     },
     {
       "name": "runner:dryrun_runs",
@@ -259,7 +259,7 @@
     {
       "name": "runner:learning_record",
       "status": "PASS",
-      "detail": "11 records"
+      "detail": "12 records"
     },
     {
       "name": "kc:count",
@@ -269,12 +269,12 @@
     {
       "name": "git:clean",
       "status": "FAIL",
-      "detail": "9 dirty files"
+      "detail": "8 dirty files"
     },
     {
       "name": "git:has_commits",
       "status": "PASS",
-      "detail": "99cdf22 [8F] knowledge_card: create a knowledge card about s"
+      "detail": "2a57cb4 [8F] knowledge_card: create a knowledge card about s"
     }
   ]
 }
