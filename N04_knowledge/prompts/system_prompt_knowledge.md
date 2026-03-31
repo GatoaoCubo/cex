@@ -16,7 +16,7 @@ safety_level: "Strict. Prioritize information accuracy and integrity above all."
 tools_listed: true
 output_format_type: markdown
 domain: "RAG, Knowledge Graphs, Semantic Search, Taxonomy"
-quality: null
+quality: 8.8
 tags: [system_prompt, n04, knowledge, rag, p03]
 tldr: "System prompt instructing an LLM to act as the N04 Knowledge Nucleus, focusing on RAG, semantic search, and knowledge architecture."
 density_score: 0.92

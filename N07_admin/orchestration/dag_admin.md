@@ -43,7 +43,7 @@ edges:
   - from: validate_quality
     to: accept_or_reject
 domain: orchestration
-quality: null
+quality: 8.9
 tags: [dag, orchestration, N07, dispatch, pipeline]
 tldr: "7-node DAG for N07 orchestration — receive, classify, handoff, dispatch, monitor, validate, accept."
 execution_order:

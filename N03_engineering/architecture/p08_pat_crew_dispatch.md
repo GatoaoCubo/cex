@@ -7,7 +7,7 @@ created: "2026-03-30"
 updated: "2026-03-30"
 author: "pattern-builder"
 domain: "orchestration"
-quality: null
+quality: 8.9
 tags: [pattern, crew, dispatch, orchestration, quality-assurance, multi-agent]
 tldr: "Spawn builder+validator sub-agents in sequence per artifact; orchestrator accepts, revises, or rebuilds based on validator result."
 name: "Crew Dispatch"

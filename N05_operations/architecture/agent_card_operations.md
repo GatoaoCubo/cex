@@ -36,7 +36,7 @@ runtime: codex
 mcp_config_file: .mcp-n05.json
 flags: ["--dangerously-skip-permissions", "--model", "gpt-5.4"]
 domain: operations-engineering
-quality: null
+quality: 8.8
 tags: [agent_card, N05, codex, operations, devops]
 tldr: Deployment spec for the operations nucleus running on Codex with execution-first tooling for review, tests, debug, and CI/CD.
 density_score: 0.9

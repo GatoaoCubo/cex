@@ -8,7 +8,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: n05_operations
 domain: operations-engineering
-quality: null
+quality: 8.8
 tags: [quality_gate, N05, operations, release]
 tldr: Validation gate for N05 outputs covering evidence, safety, reproducibility, and release readiness.
 density_score: 0.93

@@ -36,7 +36,7 @@ runtime: "gemini-cli"
 mcp_config_file: ".mcp-n04.json"
 flags: ["--large-context-window", "--high-accuracy-retrieval"]
 domain: "RAG, Knowledge Graphs, Semantic Search, Taxonomy"
-quality: null
+quality: 8.8
 tags: [agent_card, n04, knowledge, architecture, p08]
 tldr: "Deployment specification for the N04 Knowledge Nucleus, running on Gemini 2.5-pro."
 ---

@@ -1,50 +1,66 @@
 ---
-I'm here to configure an `embedding_config` specifically tailored for your use case. Let's proceed with creating an optimal configuration for your embedding model:
-
----
-
-```yaml
-id: p01_emb_nomic_library
+id: n01_emb_intelligence_config
 kind: embedding_config
 pillar: P01
-version: "1.0.0"
-created: "2023-10-01"
-updated: "2023-10-01"
-author: "embedding-config-builder"
-model_name: "nomic-embed-text"
-provider: "ollama"
+title: "Embedding Config for N01 Intelligence RAG"
+version: "2.0.0"
+created: "2026-03-30"
+updated: "2026-03-31"
+author: "N07_peer_review"
+model_name: "text-embedding-004"
+provider: "Google"
 dimensions: 768
 chunk_size: 512
-overlap: 50
-tokenizer: "nomic-bert"
-distance_metric: "cosine"
-batch_size: 32
-normalize: true
-max_tokens: 8192
-cost_per_1m_tokens: null
-domain: "knowledge-retrieval"
-quality: null
-tags: [embedding, ollama, nomic]
-tldr: "nomic-embed-text configured for effective local deployment: 768 dimensions, cosine similarity."
-```
+chunk_overlap: 64
+quality: 8.9
+tags: [embedding, config, n01, rag, intelligence, vector, google]
+tldr: "text-embedding-004 at 768 dimensions for N01 Intelligence RAG — optimized for research papers, market reports, and technical documentation."
+density_score: 0.88
 ---
 
----
+## Purpose
 
-## Model
-The embedding model chosen is `nomic-embed-text` provided by Ollama. It is local, offers 768 dimensions, and is optimized for privacy-conscious tasks with zero cost to operationalize.
+Defines the vector embedding model and chunking strategy for all documents ingested into the **N01 Intelligence Nucleus** knowledge base. This configuration drives the accuracy and relevance of N01's Retrieval-Augmented Generation (RAG) capabilities across research papers, competitor analyses, and market reports.
 
-## Chunking
-Chunks are sized at 512 tokens with a 50-token overlap, utilizing the `nomic-bert` tokenizer. This configuration is designed to handle paragraph-level retrieval tasks efficiently.
+## Model Selection
 
-## Performance
-Configured for local deployment with Ollama. Latency is low (~50ms per batch), and throughput is competitive at ~1000 chunks per minute. No costs are incurred as it functions independently of API calls.
+| Parameter | Value | Rationale |
+|-----------|-------|-----------|
+| Model | `text-embedding-004` | Top-tier MTEB performance, native Gemini integration |
+| Provider | Google | Same ecosystem as N01's LLM (gemini-2.5-pro) |
+| Dimensions | 768 | Rich semantic representation, efficient for large-scale search |
+| Distance Metric | cosine | Standard for normalized embeddings |
+| Max Tokens | 8192 | Handles long academic abstracts without truncation |
+| Batch Size | 32 | Optimal throughput for bulk ingestion |
+| Normalize | true | Required for cosine similarity |
+
+## Chunking Strategy
+
+| Parameter | Value | Rationale |
+|-----------|-------|-----------|
+| Chunk Size | 512 tokens | Balance between contextual richness and vector specificity |
+| Overlap | 64 tokens | Preserves semantic continuity at chunk boundaries |
+| Tokenizer | nomic-bert | Consistent token counting across ingestion pipeline |
+
+**Design rationale**: Research papers contain dense, interconnected concepts. A 512-token chunk captures full paragraphs while remaining specific enough for precise retrieval. The 64-token overlap (12.5%) prevents information loss at boundaries — critical when a key finding spans two chunks.
+
+## Domain-Specific Tuning
+
+N01 ingests three primary document types with different characteristics:
+
+1. **Research Papers** (arXiv, JSTOR): Dense academic prose, formulas, citations. Chunk at paragraph boundaries when possible.
+2. **Market Reports** (industry analysts): Structured sections with tables and charts. Chunk at section headers.
+3. **Competitor Docs** (product pages, press releases): Marketing-heavy, shorter. Smaller effective chunks (256-384 tokens).
+
+## Performance Expectations
+
+| Metric | Target |
+|--------|--------|
+| Latency per batch | < 100ms (Google API) |
+| Throughput | ~2000 chunks/min |
+| Recall@10 | > 0.85 for research queries |
+| Cost | ~$0.00013 per 1K tokens |
 
 ## Integration
-Deploy this configuration for semantic vector search by using Ollama’s local API calls. Ideal for projects needing cost-effective and reliable embedding solutions.
 
-## References
-- Nomic AI model documentation
-- Ollama local library specs
-
-This `embedding_config` is set specifically for a local setup with privacy considerations, ensuring it aligns with dimension and retrieval-specific requirements.
+Deployed via Google's Vertex AI or direct API. Vectors stored in local FAISS index for development, with Pinecone/Weaviate as production targets. Compatible with N04 Knowledge Nucleus retrieval pipeline.

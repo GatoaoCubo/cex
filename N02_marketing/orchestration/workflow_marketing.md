@@ -15,7 +15,7 @@ retry_policy: per_step
 depends_on: []
 signals: [marketing_copy_complete, marketing_copy_error]
 domain: copywriting_and_campaigns
-quality: null
+quality: 8.9
 tags: [workflow, marketing, copywriting, N02, campaign, landing_page, email]
 tldr: 3 production workflows — ad campaign (5 steps), landing page (4 steps), email sequence (3 steps) — all N02 executed.
 density_score: 0.90

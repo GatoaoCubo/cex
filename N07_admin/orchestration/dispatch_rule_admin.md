@@ -7,7 +7,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: orchestration
-quality: null
+quality: 8.9
 tags: [dispatch-rule, orchestration, N07, routing, multi-cli]
 tldr: "Routes tasks to 6 nuclei by domain keywords — build to N03, research to N01, marketing to N02, knowledge to N04, ops to N05, commercial to N06."
 scope: admin_orchestration

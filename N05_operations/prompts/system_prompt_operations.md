@@ -16,7 +16,7 @@ safety_level: strict
 tools_listed: true
 output_format_type: markdown
 domain: operations-engineering
-quality: null
+quality: 8.8
 tags: [system_prompt, N05, operations, devops]
 tldr: System prompt that makes the LLM behave like a pragmatic ops engineer focused on evidence, execution, and release safety.
 density_score: 0.92

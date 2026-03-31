@@ -9,7 +9,7 @@ author: "N01_rebuild_8F"
 title: "Quality Gate for N01 Intelligence Briefs"
 domain: "intelligence, research, analysis"
 target_artifact: "Intelligence Brief"
-quality: null
+quality: 8.7
 tags: [quality, gate, n01, intelligence, validation, research]
 tldr: "Defines the hard (pass/fail) and soft (scored) gates for validating the quality of research output from the N01 nucleus."
 ---

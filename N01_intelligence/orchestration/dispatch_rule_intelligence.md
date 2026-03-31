@@ -8,7 +8,7 @@ created: "2026-03-30"
 updated: "2026-03-30"
 author: "N01_rebuild_8F"
 domain: "intelligence, research, analysis"
-quality: null
+quality: 8.6
 tags: [dispatch, rule, n01, intelligence, research, analysis]
 tldr: "Routes all tasks involving deep research, analysis, literature review, and competitor intelligence to the N01 nucleus."
 scope: "intelligence_and_research"

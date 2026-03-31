@@ -7,7 +7,7 @@ created: "2024-03-30"
 updated: "2024-03-30"
 author: "N04 Knowledge Nucleus"
 domain: "Knowledge Artifacts (KCs, Strategies, etc.)"
-quality: null
+quality: 8.8
 tags: [quality-gate, n04, knowledge, feedback, p11]
 tldr: "A set of automated checks to ensure all N04 artifacts meet structural, semantic, and connectivity requirements before integration."
 density_score: 0.94

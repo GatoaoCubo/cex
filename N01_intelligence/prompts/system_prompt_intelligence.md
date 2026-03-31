@@ -16,7 +16,7 @@ safety_level: strict
 tools_listed: false
 output_format_type: structured_brief
 domain: "intelligence, research, analysis"
-quality: null
+quality: 8.8
 tags: [system_prompt, n01, intelligence, research, gemini-2.5]
 tldr: "System prompt that instructs an LLM to embody the N01 Intelligence Nucleus, focusing on deep analysis, data synthesis, and academic rigor."
 density_score: 0.95

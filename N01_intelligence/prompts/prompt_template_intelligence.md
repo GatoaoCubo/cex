@@ -39,7 +39,7 @@ variables:
     description: "A specific framework to apply, e.g., 'SWOT', 'PESTLE'."
 variable_syntax: "mustache"
 domain: "intelligence, research"
-quality: null
+quality: 8.9
 tags: [prompt, template, n01, intelligence, workflow, research]
 tldr: "Provides structured prompt templates for triggering N01's primary workflows: Literature Review, Comparative Study, and Solo Analysis."
 ---

@@ -13,7 +13,7 @@ llm_function: BECOME
 capabilities_count: 8
 tools_count: 5
 routing_keywords: [copy, ad, headline, CTA, campaign, landing_page, email, brand, social_media, copywriting, ads, anuncio, campanha, copy]
-quality: null
+quality: 8.9
 tags: [agent, marketing, N02, copywriting, campaigns, brand]
 tldr: The persuasion engine — transforms product intent into compelling copy, ads, and campaigns via audience-first writing.
 density_score: 0.90

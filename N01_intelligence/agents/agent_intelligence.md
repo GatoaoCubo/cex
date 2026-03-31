@@ -14,7 +14,7 @@ capabilities_count: 6
 tools_count: 0 # Placeholder for future tools
 iso_files_count: 10
 routing_keywords: [research, market analysis, competitor intelligence, papers, benchmarks, trend detection, RAG]
-quality: null
+quality: 8.8
 tags: [agent, n01, intelligence, research, gemini-2.5, 8F]
 tldr: "Core Intelligence Nucleus (N01) agent, powered by Gemini 2.5-pro. Specializes in deep research, market/competitor analysis, and large-scale document synthesis."
 ---

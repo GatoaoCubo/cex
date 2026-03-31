@@ -8,7 +8,7 @@ created: "2026-03-30"
 updated: "2026-03-30"
 author: "N01_rebuild_8F"
 domain: "intelligence, research, analysis, competitors"
-quality: null
+quality: 8.8
 tags: [knowledge, n01, intelligence, research, analysis, competitors, papers]
 tldr: "Core knowledge definition for the N01 Intelligence Nucleus, covering research methodologies, analysis techniques, and key data source types."
 when_to_use: "As a foundational knowledge layer for any task involving deep research, competitive analysis, or literature review."

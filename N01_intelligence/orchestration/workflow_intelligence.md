@@ -8,7 +8,7 @@ updated: "2026-03-30"
 author: "N01_rebuild_8F"
 title: "N01 Intelligence Analysis Workflows"
 domain: "intelligence, research, analysis"
-quality: null
+quality: 8.8
 tags: [workflow, n01, intelligence, research, analysis, orchestration]
 tldr: "Defines the primary research and analysis workflows for the N01 nucleus, including literature review, comparative study, and solo analysis."
 agent_nodes: [n01_intelligence]

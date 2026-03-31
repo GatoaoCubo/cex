@@ -13,7 +13,7 @@ llm_function: BECOME
 capabilities_count: 8
 tools_count: 6
 routing_keywords: [pricing, curso, funnel, monetizar, receita, conversão, upsell, checkout, oferta, venda]
-quality: null
+quality: 8.9
 tags: [agent, commercial, N06, monetization, pricing, courses, funnels]
 tldr: Transforms revenue intent into validated pricing strategies, course structures, and sales funnels via 8F pipeline.
 density_score: 0.90

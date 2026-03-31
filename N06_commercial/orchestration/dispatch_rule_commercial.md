@@ -7,7 +7,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: n06_commercial
 domain: commercial-monetization
-quality: null
+quality: 8.9
 tags: [dispatch, commercial, N06, pricing, funnels, monetization]
 tldr: Route tasks related to pricing strategy, online courses, sales funnels, and revenue monetization to N06.
 scope: commercial-monetization

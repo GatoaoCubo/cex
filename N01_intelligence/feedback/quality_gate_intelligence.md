@@ -8,7 +8,7 @@ created: "2023-10-05"
 updated: "2023-10-05"
 author: "quality-gate-builder"
 domain: "research"
-quality: null
+quality: 8.7
 tags: [quality-gate, research, evaluation]
 tldr: "Gate for ensuring high-quality research outputs before acceptance into the pool."
 density_score: 0.95

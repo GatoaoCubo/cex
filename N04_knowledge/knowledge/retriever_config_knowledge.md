@@ -11,7 +11,7 @@ store_type: "vector_db"
 search_type: "similarity"
 top_k: 5
 score_threshold: 0.75
-quality: null
+quality: 8.8
 tags: [retriever, config, n04, knowledge, rag, p01]
 tldr: "Defines the default vector similarity search retriever for N04, configured with a top_k of 5 and a score threshold of 0.75."
 density_score: 0.94

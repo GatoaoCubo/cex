@@ -13,7 +13,7 @@ llm_function: BECOME
 capabilities_count: 9
 tools_count: 10
 routing_keywords: [code-review, testing, debug, deploy, ci-cd, pipeline, rollback, observability, infra]
-quality: null
+quality: 9.0
 tags: [agent, N05, operations, devops, ci-cd]
 tldr: Operations and DevOps nucleus for code review, testing, debugging, deployment, CI/CD, infrastructure, and monitoring.
 density_score: 0.91

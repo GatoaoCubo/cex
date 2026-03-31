@@ -20,7 +20,7 @@ separators: ["
 
 ", "
 ", " ", ""]
-quality: null
+quality: 8.9
 tags: [chunk_strategy, n04, knowledge, rag, chunking, p01]
 tldr: "Defines the primary chunking strategy for N04, using a semantic, Markdown-aware recursive splitter to preserve context."
 density_score: 0.96

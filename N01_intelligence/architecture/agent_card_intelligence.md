@@ -7,7 +7,7 @@ version: "1.0.0"
 created: "2026-03-30"
 updated: "2026-03-30"
 author: "N01_rebuild_8F"
-quality: null
+quality: 8.7
 tags: [agent_card, deployment, n01, intelligence, gemini-2.5]
 tldr: "Deployment specification for the N01 Intelligence Nucleus, detailing its model, tools, and operational parameters."
 ---

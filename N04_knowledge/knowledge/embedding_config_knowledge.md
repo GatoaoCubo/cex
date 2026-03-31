@@ -7,7 +7,7 @@ created: "2024-03-30"
 updated: "2024-03-30"
 author: "N04 Knowledge Nucleus"
 domain: "RAG, Semantic Search, Vector Embeddings"
-quality: null
+quality: 8.9
 tags: [embedding, config, n04, knowledge, rag, p01]
 tldr: "Defines the embedding model configurations for N04, led by text-embedding-3-large and nomic-embed-text-v1.5 as a secondary."
 density_score: 0.95

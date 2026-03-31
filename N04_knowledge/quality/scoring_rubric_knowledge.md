@@ -16,7 +16,7 @@ threshold_publish: 9.0
 threshold_review: 7.5
 automation_status: "llm_assisted"
 domain: "RAG, Knowledge Graphs, Semantic Search, Taxonomy"
-quality: null
+quality: 8.9
 tags: [scoring-rubric, n04, knowledge, quality, evals, p07]
 tldr: "The scoring rubric used to evaluate the soft gates (Atomicity, Connectivity, Discoverability, Clarity) for N04 artifacts."
 density_score: 0.95

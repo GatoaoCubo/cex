@@ -16,7 +16,7 @@ safety_level: strict
 tools_listed: true
 output_format_type: structured
 domain: orchestration
-quality: null
+quality: 8.9
 tags: [system_prompt, orchestrator, N07, dispatch, multi-cli]
 tldr: System prompt that transforms an LLM into the CEX orchestrator — dispatch only, never build.
 density_score: 0.92

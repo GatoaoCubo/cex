@@ -20,7 +20,7 @@ mcp_config: .mcp-n05.json
 timeout_seconds: 3600
 prompt_inline: false
 handoff_path: .cex/runtime/handoffs/n05_task.md
-quality: null
+quality: 8.7
 tags: [spawn_config, N05, operations, codex]
 tldr: Spawn configuration for N05 to execute operational handoffs involving review, testing, debug, deploy, and CI/CD work.
 domain: operations-engineering

@@ -7,7 +7,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: orchestration
-quality: null
+quality: 8.9
 tags: [signal, orchestration, N07, complete, error, progress]
 tldr: "Signal protocol for N07 orchestration — complete/error/progress payloads with quality score and artifact references."
 density_score: 0.90

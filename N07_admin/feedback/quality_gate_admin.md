@@ -8,7 +8,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: orchestration
-quality: null
+quality: 8.9
 tags: [quality-gate, orchestration, N07, validation]
 tldr: "Quality gates for N07 orchestration — signal received, quality >= 8.0, doctor pass, compile success, git committed."
 density_score: 0.90

@@ -7,7 +7,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: n02_marketing
 domain: copywriting_and_campaigns
-quality: null
+quality: 8.9
 tags: [dispatch_rule, marketing, N02, routing]
 tldr: Route to N02 when the task requires copy, ads, headlines, CTAs, email sequences, landing pages, or brand voice.
 scope: marketing_and_creative

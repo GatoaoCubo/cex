@@ -8,7 +8,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: n05_operations
 domain: operations-engineering
-quality: null
+quality: 8.9
 tags: [knowledge_card, N05, operations, ci-cd, deploy]
 tldr: Distilled operational doctrine for code review, testing, debugging, deployment, CI/CD, infrastructure, and monitoring.
 when_to_use: When a task requires execution safety, reproducibility, test evidence, pipeline diagnosis, or release governance.

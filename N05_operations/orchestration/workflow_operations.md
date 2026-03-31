@@ -13,7 +13,7 @@ error_recovery: retry_then_escalate
 max_retries: 2
 timeout_ms: 3600000
 spawn_delay_ms: 1000
-quality: null
+quality: 8.7
 tags: [workflow, N05, operations, ci-cd, deploy]
 tldr: Five-step workflow for code review, test execution, debugging, and deploy-safe delivery under operational constraints.
 density_score: 0.94

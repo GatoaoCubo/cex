@@ -11,7 +11,7 @@ mission: admin_operations
 autonomy: full
 quality_target: 9.0
 domain: orchestration
-quality: null
+quality: 9.0
 tags: [handoff, orchestration, N07, template, dispatch]
 tldr: "Handoff template and protocol for N07 — required fields, structure, commit convention, and signal instructions."
 dependencies: []

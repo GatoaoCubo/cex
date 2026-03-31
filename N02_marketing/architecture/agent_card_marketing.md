@@ -41,7 +41,7 @@ subscription_auth: anthropic_max
 mcp_config: .claude/settings.json
 flags: []
 domain: copywriting_and_campaigns
-quality: null
+quality: 8.9
 tags: [agent_card, marketing, N02, copywriting, sonnet]
 tldr: N02 deployment spec — claude-sonnet-4-6 on Anthropic Max, zero cost, markitdown + fetch MCPs, specializes in conversion copy.
 ---

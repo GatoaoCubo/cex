@@ -7,7 +7,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: n05_operations
 domain: operations-engineering
-quality: null
+quality: 8.6
 tags: [dispatch, N05, operations, devops]
 tldr: Route execution-heavy coding tasks to N05 when the user needs review, tests, debugging, deployment, CI/CD, infrastructure, or monitoring work.
 scope: operations

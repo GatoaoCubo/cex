@@ -7,7 +7,7 @@ created: "2024-03-30"
 updated: "2024-03-30"
 author: "N04 Knowledge Nucleus"
 domain: "RAG, Knowledge Graphs, Semantic Search, Taxonomy"
-quality: null
+quality: 8.7
 tags: [dispatch, n04, knowledge, orchestration, p12]
 tldr: "Routes all tasks related to knowledge architecture, RAG, and semantic search to the N04 Knowledge Nucleus."
 scope: "CEX-wide knowledge retrieval and management tasks."

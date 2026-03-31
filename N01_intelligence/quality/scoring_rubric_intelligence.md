@@ -14,7 +14,7 @@ total_weight: 100
 threshold_publish: 8.0
 threshold_review: 7.0
 domain: "intelligence, research, analysis"
-quality: null
+quality: 8.9
 tags: [scoring, rubric, n01, intelligence, quality, eval]
 tldr: "Defines the 4-dimension scoring rubric for N01's soft quality gates: Clarity, Synthesis, Source Quality, and Actionability."
 linked_artifacts:

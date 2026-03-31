@@ -16,7 +16,7 @@ depends_on": ["n04_chunk_strategy_knowledge", "n04_embedding_config_knowledge"]
 signals: [ingestion_complete, indexing_complete, authoring_complete, taxonomy_updated, error]
 spawn_configs": []
 domain: "RAG, Knowledge Graphs, Semantic Search, Taxonomy"
-quality: null
+quality: 8.9
 tags: [workflow, n04, knowledge, orchestration, p12]
 tldr: "Defines the core workflows for the N04 Knowledge Nucleus: Ingestion/Indexing, KC Authoring, and Taxonomy Maintenance."
 density_score: 0.93

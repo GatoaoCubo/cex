@@ -14,7 +14,7 @@ capabilities_count: 4
 tools_count: 4
 iso_files_count: 12
 routing_keywords": [knowledge, rag, indexing, embeddings, taxonomy, retrieval, documentation]
-quality: null
+quality: 8.8
 tags": [agent, n04, knowledge, rag, p01]
 tldr: "Core agent for the CEX knowledge lifecycle, managing ingestion, semantic indexing, Retrieval-Augmented Generation (RAG), and taxonomy."
 density_score: 0.90

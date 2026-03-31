@@ -8,7 +8,7 @@ created: "2024-03-30"
 updated: "2024-03-30"
 author: "N04 Knowledge Nucleus"
 domain: "RAG, Semantic Search, Knowledge Architecture"
-quality: null
+quality: 8.9
 tags: [knowledge, rag, semantic_search, embeddings, taxonomy, p01]
 tldr: "A dense summary of the principles for building modern knowledge systems, centered on the RAG pipeline, semantic indexing, and knowledge graphs."
 when_to_use: "As a foundational reference for designing, building, or evaluating AI-centric knowledge systems."
