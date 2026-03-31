@@ -3,56 +3,62 @@ kind: knowledge_card
 pillar: P01
 title: System Testing Patterns
 version: 1.0.0
-created: 2023-11-01
-updated: 2023-11-01
-author: Knowledge Distillation Specialist
+created: '2023-10-05'
+updated: '2023-10-05'
+author: knowledge-card-builder
 domain: Software Testing
 quality: null
 tags:
 - system_testing
 - testing_patterns
-- software_quality
+- software_testing
 - knowledge
-tldr: Outlines types and applications of system testing patterns, enhancing QA.
-when_to_use: When designing or improving system testing strategies.
+tldr: Comprehensive guide to system testing patterns for effective QA processes.
+when_to_use: During system testing of integrated software applications.
 keywords:
 - system testing
-- testing patterns
-- QA
+- test cases
+- test suites
 long_tails:
-- How to apply system testing patterns for better software quality
-- Examples of effective system testing strategies
+- How to apply system testing patterns in enterprise software
+- System testing best practices and strategies
 axioms:
-- ALWAYS analyze project requirements before selecting testing patterns
+- ALWAYS document each test case with precise expected results.
+- NEVER execute system tests without prior unit testing.
 linked_artifacts:
   primary: null
   related: []
 density_score: 0.85
-data_source: https://www.softwaretestingmaterial.com/system-testing/
-quick_reference: 'topic: System Testing Patterns scope: Detailed patterns and methodologies for enhancing software quality
-  assurance through systematic and structured testing processes. owner: Knowledge Distillation Specialist criticality: high'
+data_source: https://www.softwaretestinghelp.com/system-testing-process/
+quick_reference: 'topic: System Testing Patterns
+
+  scope: Develop, structure, and apply system testing methods
+
+  owner: QA Specialist
+
+  criticality: high'
 key_concepts:
-- 'Scenario Testing: Simulate real-world use cases for application robustness.'
-- 'Smoke Testing: Initial testing to catch major failures before deeper checks.'
-- 'Regression Testing: Verifies new code changes have not disrupted existing functionality.'
+- 'Test Cases: Documented scenarios with input and expected output to verify software functionality.'
+- 'Test Suites: Collection of related test cases executed together to cover broader system areas.'
+- 'Test Scenarios: High-level ideas describing what to test, serving as a basis for creating test cases.'
 strategy_phases:
-- 'Identify Needs: Determine project-specific testing requirements.'
-- 'Design Patterns: Choose appropriate testing approaches like scenario or smoke.'
-- 'Implement and Monitor: Execute tests and continuously assess test coverage.'
+- 'Design Phase: Create comprehensive test cases based on requirements.'
+- 'Execution Phase: Run test cases and record outcomes rigorously.'
+- 'Evaluation Phase: Analyze results to identify defects and ensure coverage.'
 golden_rules:
-- ALWAYS start with smoke testing to identify major issues early.
-- NEVER skip regression testing after code alterations, regardless of size.
-- IF possible, automate repetitive tests for efficiency.
-flow: '[Identify Requirements] -> [Design Tests] -> [Execute Tests] -> [Assess Results]'
-comparativo: '| Pattern | Time Efficiency | Coverage Depth |
+- 'VERIFY: Each test case should align with a specific functional requirement.'
+- 'PRIORITIZE: Continuously prioritize critical tests based on risk assessment.'
+- 'DOCUMENT: Thoroughly document each test''s setup, execution, and teardown procedures.'
+flow: '[Identify Requirements] -> [Design Test Cases] -> [Execute Tests] -> [Evaluate Outcomes]'
+comparativo: '| Feature       | Manual Testing | Automated Testing |
 
-  |---------|----------------|----------------|
+  |---------------|----------------|-------------------|
 
-  | Smoke | Fast | Shallow |
+  | Speed         | Slow           | Fast              |
 
-  | Scenario | Moderate | Deep |
+  | Scalability   | Limited        | High              |
 
-  | Regression | Slow | Comprehensive |'
+  | Accuracy      | Variable       | Consistent        |'
 references:
-- 'Related artifact: None'
-- 'Source: https://www.softwaretestingmaterial.com/system-testing/'
+- 'Related artifact: Not available'
+- 'Source: https://www.softwaretestinghelp.com/system-testing-process/'
