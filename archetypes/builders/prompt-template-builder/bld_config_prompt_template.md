@@ -9,8 +9,17 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: builder
 tags: [config, prompt-template, P03, naming, constraints]
+effort: medium
+max_turns: 25
+disallowed_tools: []
+fork_context: null
+hooks:
+  pre_build: null
+  post_build: null
+  on_error: null
+  on_quality_fail: null
+permission_scope: nucleus
 ---
-
 # Config — prompt-template-builder
 ## Naming Convention
 **Pattern**: `p03_pt_{topic_slug}.md`

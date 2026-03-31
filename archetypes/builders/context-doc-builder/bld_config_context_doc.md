@@ -4,8 +4,17 @@ id: bld_config_context_doc
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Runtime configuration constraints for context_doc production
+effort: medium
+max_turns: 25
+disallowed_tools: []
+fork_context: null
+hooks:
+  pre_build: null
+  post_build: null
+  on_error: null
+  on_quality_fail: null
+permission_scope: nucleus
 ---
-
 # Config: context_doc
 ## Naming Rules
 | Rule | Pattern | Example |

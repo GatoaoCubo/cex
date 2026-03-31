@@ -5,8 +5,17 @@ pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming conventions, file paths, size limits, operational constraints
 pattern: CONFIG restricts SCHEMA, never contradicts it
+effort: low
+max_turns: 25
+disallowed_tools: [Write, BashTool]
+fork_context: inline
+hooks:
+  pre_build: null
+  post_build: null
+  on_error: null
+  on_quality_fail: null
+permission_scope: restricted
 ---
-
 # Config: output_validator Production Rules
 ## Naming Convention
 | Scope | Convention | Example |

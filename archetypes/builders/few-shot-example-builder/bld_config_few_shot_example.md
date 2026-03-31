@@ -4,8 +4,17 @@ id: bld_config_few_shot_example
 pillar: P09
 llm_function: CONSTRAIN
 purpose: File system and operational configuration for few_shot_example artifacts
+effort: medium
+max_turns: 25
+disallowed_tools: []
+fork_context: null
+hooks:
+  pre_build: null
+  post_build: null
+  on_error: null
+  on_quality_fail: null
+permission_scope: nucleus
 ---
-
 # Config: few_shot_example
 ## File Naming
 | Component | Rule | Example |

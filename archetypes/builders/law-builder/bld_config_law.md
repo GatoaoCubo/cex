@@ -8,8 +8,17 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: builder_agent
 tags: [config, law-builder, naming, paths, P08]
+effort: medium
+max_turns: 25
+disallowed_tools: []
+fork_context: null
+hooks:
+  pre_build: null
+  post_build: null
+  on_error: null
+  on_quality_fail: null
+permission_scope: nucleus
 ---
-
 # law-builder — CONFIG
 ## Naming Convention
 | Scope | Convention | Example |

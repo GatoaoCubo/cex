@@ -5,8 +5,17 @@ pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming conventions, file paths, size limits, operational constraints for social publisher
 pattern: CONFIG restricts SCHEMA, never contradicts it
+effort: medium
+max_turns: 25
+disallowed_tools: []
+fork_context: null
+hooks:
+  pre_build: null
+  post_build: null
+  on_error: null
+  on_quality_fail: null
+permission_scope: nucleus
 ---
-
 # Config: social_publisher Production Rules
 
 ## Naming Convention

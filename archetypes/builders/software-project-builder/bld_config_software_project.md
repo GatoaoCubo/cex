@@ -12,8 +12,17 @@ quality: 8.7
 tags: [builder, config, software-project, defaults]
 tldr: "Default configuration: Python 3.12, hatchling, ruff, pytest, Docker multi-stage, Railway deploy, GitHub Actions CI. All overridable via instance config."
 density_score: 0.88
+effort: medium
+max_turns: 25
+disallowed_tools: []
+fork_context: null
+hooks:
+  pre_build: null
+  post_build: null
+  on_error: null
+  on_quality_fail: null
+permission_scope: nucleus
 ---
-
 # Config
 
 ## Defaults

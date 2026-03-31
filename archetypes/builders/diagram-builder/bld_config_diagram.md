@@ -4,8 +4,17 @@ id: diagram-builder-config
 kind: config
 builder: diagram-builder
 version: 1.0.0
+effort: medium
+max_turns: 25
+disallowed_tools: []
+fork_context: null
+hooks:
+  pre_build: null
+  post_build: null
+  on_error: null
+  on_quality_fail: null
+permission_scope: nucleus
 ---
-
 # diagram-builder — CONFIG
 ## Naming Conventions
 | Scope | Convention | Example |

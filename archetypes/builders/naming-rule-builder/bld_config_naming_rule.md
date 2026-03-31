@@ -5,8 +5,17 @@ llm_function: CONSTRAIN
 kind: config
 domain: naming_rule
 version: 1.0.0
+effort: medium
+max_turns: 25
+disallowed_tools: []
+fork_context: null
+hooks:
+  pre_build: null
+  post_build: null
+  on_error: null
+  on_quality_fail: null
+permission_scope: nucleus
 ---
-
 # Config — Naming Rule Builder
 ## Artifact Naming
 | Config | Value |

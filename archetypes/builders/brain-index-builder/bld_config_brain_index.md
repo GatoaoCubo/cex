@@ -5,8 +5,17 @@ pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for brain_index production
 pattern: CONFIG restricts SCHEMA, never contradicts
+effort: high
+max_turns: 25
+disallowed_tools: []
+fork_context: fork
+hooks:
+  pre_build: null
+  post_build: null
+  on_error: null
+  on_quality_fail: null
+permission_scope: global
 ---
-
 # Config: brain_index Production Rules
 ## Naming
 | Scope | Convention | Example |

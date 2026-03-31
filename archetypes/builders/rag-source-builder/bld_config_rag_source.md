@@ -4,8 +4,17 @@ id: bld_config_rag_source
 pillar: P09
 llm_function: CONSTRAIN
 version: 1.0.0
+effort: medium
+max_turns: 25
+disallowed_tools: []
+fork_context: null
+hooks:
+  pre_build: null
+  post_build: null
+  on_error: null
+  on_quality_fail: null
+permission_scope: nucleus
 ---
-
 # Config: rag_source
 ## File Naming
 | Component | Rule | Example |

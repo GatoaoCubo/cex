@@ -11,8 +11,17 @@ llm_function: CONSTRAIN
 quality: null
 tags: [config, document_loader, ingestion, P04]
 tldr: "Production rules for document_loader: naming, paths, size limits, and enum definitions."
+effort: medium
+max_turns: 25
+disallowed_tools: []
+fork_context: null
+hooks:
+  pre_build: null
+  post_build: null
+  on_error: null
+  on_quality_fail: null
+permission_scope: nucleus
 ---
-
 # Config: document_loader Production Rules
 
 ## Naming Convention

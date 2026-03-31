@@ -11,8 +11,17 @@ domain: data_platform
 quality: null
 tags: [builder, supabase, data-layer, config, defaults]
 density_score: 0.89
+effort: high
+max_turns: 25
+disallowed_tools: []
+fork_context: null
+hooks:
+  pre_build: null
+  post_build: null
+  on_error: null
+  on_quality_fail: null
+permission_scope: nucleus
 ---
-
 # Builder Config
 
 ## Default Values

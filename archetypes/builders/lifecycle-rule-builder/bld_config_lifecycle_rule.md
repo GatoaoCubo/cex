@@ -5,8 +5,17 @@ pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for lifecycle_rule production
 pattern: CONFIG restricts SCHEMA, never contradicts
+effort: medium
+max_turns: 25
+disallowed_tools: []
+fork_context: null
+hooks:
+  pre_build: null
+  post_build: null
+  on_error: null
+  on_quality_fail: null
+permission_scope: nucleus
 ---
-
 # Config: lifecycle_rule Production Rules
 ## Naming
 | Scope | Convention | Example |

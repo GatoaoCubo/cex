@@ -10,6 +10,16 @@ author: builder_agent
 quality: null
 tags: [config, webhook, P04, naming, constraints, enums]
 tldr: "Runtime config: naming convention, size limit, direction enum, signature enum, event naming patterns per provider."
+effort: medium
+max_turns: 25
+disallowed_tools: []
+fork_context: null
+hooks:
+  pre_build: null
+  post_build: null
+  on_error: null
+  on_quality_fail: null
+permission_scope: nucleus
 ---
 # Config: webhook
 ## Naming Convention

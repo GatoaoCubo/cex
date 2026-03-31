@@ -9,6 +9,16 @@ updated: 2026-03-28
 author: builder_agent
 quality: null
 tags: [config, retriever, P06, naming, constraints, RAG]
+effort: medium
+max_turns: 25
+disallowed_tools: []
+fork_context: null
+hooks:
+  pre_build: null
+  post_build: null
+  on_error: null
+  on_quality_fail: null
+permission_scope: nucleus
 ---
 # Config: retriever Production Rules
 
