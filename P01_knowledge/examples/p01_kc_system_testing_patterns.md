@@ -1,64 +1,62 @@
----  
-id: p01_kc_system_testing_patterns  
-kind: knowledge_card  
-pillar: P01  
-title: "System Testing Patterns"  
-version: "1.0.0"  
-created: "2023-10-15"  
-updated: "2023-10-15"  
-author: "knowledge-card-builder"  
-domain: "Software Testing"  
-quality: null  
-tags: [system testing, software testing, testing patterns, QA]  
-tldr: "Overview of systematic patterns applied in system testing to ensure quality and functionality."  
-when_to_use: "Use during system test design or evaluation for improving quality assurance."  
-keywords: [testing patterns, system QA, software testing]  
-long_tails:  
-  - "How to apply functional testing patterns in software QA?"  
-  - "Examples of load testing tools in system testing."  
-axioms:  
-  - ALWAYS define clear system specifications before testing.  
-linked_artifacts:  
-  primary: null  
-  related: []  
-density_score: 0.85  
-data_source: "https://example.com/system_testing_patterns"  
----  
+---
+id: p01_kc_system_testing_patterns
+kind: knowledge_card
+pillar: P01
+title: "System Testing Patterns"
+version: "1.0.0"
+created: "2023-10-09"
+updated: "2023-10-09"
+author: "knowledge-card-builder"
+domain: "Software Engineering"
+quality: null
+tags: [system testing, testing patterns, software quality, test automation]
+tldr: "Overview of system testing patterns like smoke, sanity, and regression for software quality."
+when_to_use: "When planning system testing strategies for comprehensive test coverage."
+keywords: [system testing, smoke testing, regression testing]
+long_tails:
+  - How to apply smoke testing in continuous integration
+  - Benefits of regression testing in software rollouts
+axioms:
+  - ALWAYS ensure test patterns align with testing objectives
+linked_artifacts:
+  primary: null
+  related: []
+density_score: 0.85
+data_source: "https://softwaretestingfundamentals.com/types-of-software-testing/"
 
-## Quick Reference  
-```yaml  
-topic: System Testing Patterns  
-scope: System testing for ensuring software quality  
-owner: Testing Team  
-criticality: medium  
-```  
+---
 
-## Key Concepts  
-- **Functional Testing**: Validates software against functional requirements.  
-- **Load Testing**: Assesses software behavior under expected concurrent user load.  
-- **Stress Testing**: Determines limits by pushing beyond normal operational capacity.  
+## Quick Reference
+topic: system_testing_patterns
+scope: Software testing patterns and strategies
+owner: knowledge-card-builder
+criticality: high
 
-## Strategy Phases  
-1. **Identify Requirements**: Gather functional specifications and performance metrics.  
-2. **Select Tools**: Choose appropriate testing tools (e.g., JMeter, Selenium).  
-3. **Conduct Tests**: Execute tests and analyze results for compliance and performance.  
+## Key Concepts
+- **Smoke Testing**: Verifies basic functionality without detailed examination.
+- **Sanity Testing**: Confirms that recent changes work without further disrupting existing features.
+- **Regression Testing**: Ensures new changes don't break existing features.
 
-## Golden Rules  
-- ALWAYS document test cases before execution.  
-- NEVER ignore test failures; analyze and address them promptly.  
-- IF system specifications change, THEN update test cases accordingly.  
+## Strategy Phases
+1. **Identify Patterns**: Select appropriate testing patterns based on project needs.
+2. **Implement Tests**: Develop tests using the chosen patterns to cover all functionalities.
+3. **Monitor Results**: Analyze test outcomes to improve future testing strategies.
 
-## Flow  
-```text  
-[Input] -> [Identify Requirements] -> [Select Tools] -> [Conduct Tests] -> [Output]  
-```  
+## Golden Rules
+- Use **smoke tests** to quickly validate critical paths.
+- Apply **sanity tests** after minor bug fixes or tweaks.
+- Conduct **regression tests** before major releases.
 
-## Comparativo  
-| Aspect               | Functional Testing | Load Testing |  
-|----------------------|--------------------|--------------|  
-| Purpose              | Validate functionality | Performance under load |  
-| Tools                | Selenium, QTP      | JMeter, LoadRunner |  
-| Outcomes             | Pass/Fail          | Response times, throughput |  
+## Flow
+[Code Change] -> [Select Pattern] -> [Apply Test] -> [Analyze Results]
 
-## References  
-- Source: https://example.com/system_testing_patterns
+## Comparativo
+| Pattern Type     | Purpose                      | Frequency            |
+|------------------|------------------------------|----------------------|
+| Smoke Testing    | Basic functionality check    | On each build        |
+| Sanity Testing   | Verify specific fixes        | Post-bug fix         |
+| Regression Testing | Ensure no new bugs introduced | Pre-release cycle    |
+
+## References
+- Related artifact: null
+- Source: https://softwaretestingfundamentals.com/types-of-software-testing/
