@@ -65,3 +65,11 @@ brain_query("notifier rate limit {provider}")
 - Skipping brain_query -> duplicate artifacts with conflicting ids
 - Skipping validate -> broken artifacts reach pool
 - Writing to wrong path -> artifact not discoverable
+
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |

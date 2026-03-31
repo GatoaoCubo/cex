@@ -23,6 +23,14 @@ purpose: Tools and APIs available for memory_summary production
 | TAXONOMY | archetypes/TAXONOMY_LAYERS.yaml | Layer position, runtime layer |
 | LangChain docs | https://python.langchain.com/docs/modules/memory/ | ConversationSummaryMemory patterns |
 | Zep docs | https://docs.getzep.com/concepts/memory | Server-side summarization API |
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation
 No automated validator exists yet. Manually check each QUALITY_GATES.md gate against
 the produced artifact. Key checks: YAML parses, id pattern `^p10_ms_`, source_type enum valid,

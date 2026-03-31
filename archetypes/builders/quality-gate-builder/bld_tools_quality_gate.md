@@ -19,3 +19,11 @@ purpose: Tools available for quality_gate production
 | CEX Quality Gate | P11_feedback/examples/p11_qg_cex_quality.md | Pre-commit |
 | Shokunin Pool Gate | P11_feedback/examples/p11_qg_shokunin_pool.md | Pool entry |
 | TDD Compliance | P11_feedback/examples/p11_qg_tdd_compliance.md | Testing |
+
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |

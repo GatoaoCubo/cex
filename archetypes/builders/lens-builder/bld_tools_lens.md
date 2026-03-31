@@ -21,6 +21,14 @@ purpose: Tools and APIs available for lens production
 | SEED_BANK | archetypes/SEED_BANK.yaml | P02_lens seeds |
 | TAXONOMY | archetypes/TAXONOMY_LAYERS.yaml | Layer position, overlaps |
 | Existing pool | pool/ (brain_query) | Existing lenses |
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation
 No automated validator exists yet for lenses.
 Manually check each QUALITY_GATES.md gate against produced artifact:

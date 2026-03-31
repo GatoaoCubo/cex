@@ -29,6 +29,14 @@ purpose: Tools and APIs available for audio_tool production
 | Azure | *.cognitiveservices.azure.com | azure_neural_hd, azure_whisper | input + output |
 | Deepgram | api.deepgram.com/v1 | deepgram_nova_2, deepgram_nova_2_medical | input |
 | AssemblyAI | api.assemblyai.com/v2 | assemblyai_best, assemblyai_nano | input |
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation
 No automated validator exists yet. Manually check each QUALITY_GATES.md gate against
 the produced artifact. Key checks: YAML parses, id pattern `p04_audio_*`, direction valid enum,

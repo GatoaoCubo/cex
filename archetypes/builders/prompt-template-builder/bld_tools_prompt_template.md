@@ -63,3 +63,11 @@ Use during VALIDATE phase to patch specific fields (quality score, updated date,
 | KNOWLEDGE.md | Industry implementations, syntax tiers | When choosing variable_syntax |
 | MEMORY.md | Common mistakes, anti-patterns | When stuck or producing a variant |
 | pool p03_pt_* files | Reference examples | When uncertain about style |
+
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |

@@ -22,6 +22,14 @@ purpose: Tools and APIs available for plugin production
 | Existing plugins | P04_tools/examples/p04_plug_*.md | Real plugin artifacts |
 | Interface patterns | CEX interface definitions | Contract references |
 | Plugin architecture | Martin Fowler plugin patterns | Design guidance |
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation
 No automated validator exists yet. Check each QUALITY_GATES.md gate manually.
 Key checks: YAML parses, id pattern match, kind == plugin, quality == null,

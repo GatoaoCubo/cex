@@ -82,3 +82,11 @@ Hotmart Club (native), Teachable, Thinkific, DS24 member area, Custom LMS.
 | Kind KC | P01_knowledge/library/kind/ | Domain knowledge |
 | Examples | P04_tools/examples/ | Reference configs |
 | SEED_BANK | archetypes/SEED_BANK.yaml | Builder seeds |
+
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |

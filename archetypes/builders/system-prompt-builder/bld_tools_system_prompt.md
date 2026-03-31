@@ -23,6 +23,14 @@ purpose: Tools and APIs available for system_prompt production
 | Rules files | .claude/rules/*.md | 10 operational rule sets |
 | SEED_BANK | archetypes/SEED_BANK.yaml | Seeds for P03_system_prompt |
 | TAXONOMY | archetypes/TAXONOMY_LAYERS.yaml | Layer position, overlaps |
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | BashTool | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation
 No automated validator exists yet. Manually check each QUALITY_GATES.md gate against
 the produced artifact. Key checks: YAML parses, id pattern, rules_count match,

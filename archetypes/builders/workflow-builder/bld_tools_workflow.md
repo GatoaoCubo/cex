@@ -23,6 +23,14 @@ purpose: Tools and APIs available for workflow production
 | Satellite PRIMEs | records/agent_nodes/*/PRIME_*.md | Satellite capabilities and routing |
 | SEED_BANK | archetypes/SEED_BANK.yaml | Seeds for P12_workflow |
 | TAXONOMY | archetypes/TAXONOMY_LAYERS.yaml | Layer position, overlaps |
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation
 No automated validator exists yet. Manually check each QUALITY_GATES.md gate against
 the produced artifact. Key checks: YAML parses, id pattern, steps_count match,

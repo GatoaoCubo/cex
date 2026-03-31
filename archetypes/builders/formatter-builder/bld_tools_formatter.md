@@ -22,6 +22,14 @@ purpose: Tools and APIs available for formatter production
 | Existing formatters | P05_output/examples/p05_fmt_*.md | Real formatter artifacts |
 | Mustache spec | mustache.github.io | Template syntax reference |
 | Jinja2 docs | jinja.palletsprojects.com | Template syntax reference |
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation
 No automated validator exists yet. Check each QUALITY_GATES.md gate manually.
 Key checks: YAML parses, id pattern match, kind == formatter, quality == null,

@@ -28,6 +28,14 @@ Key checks to run manually before output:
 - Range validity: min 0-59, hour 0-23, dom 1-31, month 1-12, dow 0-7
 - Step syntax: `*/N` valid; `N/M` valid; named months (JAN-DEC) and days (MON-SUN) valid
 - Next-fire sanity: compute next 3 execution times and confirm they match intent
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation
 No automated validator exists yet. Manually check each QUALITY_GATES.md gate against
 the produced artifact. Key checks: YAML parses, id pattern matches `^p12_sc_`, cron

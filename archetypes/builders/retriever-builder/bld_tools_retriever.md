@@ -34,6 +34,14 @@ tags: [tools, retriever, P08, RAG, vector-search]
 | bld_examples_retriever.md | Golden + anti-example with gate annotations | Reference when uncertain |
 | records/pool/ (p04_retr_*.md) | Existing production artifacts | Dedup + pattern mining |
 
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation (manual gate checks without tooling)
 
 ```

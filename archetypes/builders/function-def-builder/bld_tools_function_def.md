@@ -23,6 +23,14 @@ purpose: Tools and APIs available for function_def production
 | TAXONOMY | archetypes/TAXONOMY_LAYERS.yaml | Layer position, runtime layer |
 | OpenAI Docs | platform.openai.com/docs/guides/function-calling | Provider reference |
 | Anthropic Docs | docs.anthropic.com/en/docs/build-with-claude/tool-use | Provider reference |
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation
 No automated validator exists yet. Manually check each QUALITY_GATES.md gate against
 the produced artifact. Key checks: YAML parses, id pattern, parameters is valid JSON Schema,

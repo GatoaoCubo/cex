@@ -67,3 +67,11 @@ purpose: Tools, APIs, and data sources available for research pipeline
 | Reasoning | gpt-5-mini / claude-sonnet | Complex analysis |
 | Social volume | gemini-2.5-flash | High volume, low cost |
 | CRITIC verify | o4-mini | Thinking model catches errors |
+
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | Write, Edit | Explicitly blocked |
+| EFFECTIVE | Bash, Glob, Grep, Read | ALLOWED minus DENIED |

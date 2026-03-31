@@ -21,6 +21,14 @@ purpose: Tools and APIs available for client production
 | SEED_BANK | archetypes/SEED_BANK.yaml | Seeds for P04_client |
 | TAXONOMY | archetypes/TAXONOMY_LAYERS.yaml | Layer position, runtime layer |
 | API Docs | Target API documentation | Endpoints, auth, rate limits |
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation
 No automated validator exists yet. Manually check each QUALITY_GATES.md gate against
 the produced artifact. Key checks: YAML parses, id pattern, endpoints list matches body,

@@ -23,6 +23,14 @@ purpose: Tools and APIs available for embedding_config production
 | MTEB Leaderboard | huggingface.co/spaces/mteb/leaderboard | Model quality comparison |
 | Ollama Library | ollama.com/library | Local model specs |
 | OpenAI Embeddings | platform.openai.com/docs/guides/embeddings | API model specs |
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation
 No automated validator exists yet for embedding_configs.
 Manually check each QUALITY_GATES.md gate against produced artifact:

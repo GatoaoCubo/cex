@@ -30,6 +30,14 @@ purpose: Tools and APIs available for reward_signal production
 | critique | Human evaluation of critique quality and revision improvement | Improvement rate >= 60% |
 | comparative | Kendall's tau between model ranking and human ranking | >= 0.65 |
 | implicit | Correlation of implicit signal with explicit human rating | >= 0.60 |
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation
 No automated validator exists yet. Manually check each QUALITY_GATES.md gate against
 the produced artifact. Key checks: YAML parses, id pattern, signal_type enum value,

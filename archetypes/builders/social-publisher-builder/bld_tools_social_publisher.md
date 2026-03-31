@@ -51,3 +51,11 @@ purpose: Tools and APIs available for social publisher production and runtime
 | P04 schema | P04_tools/_schema.yaml | Field definitions for cli_tool |
 | Social KC | P01_knowledge/library/kind/kc_cli_tool.md | cli_tool knowledge |
 | Platform docs | External | API limits, formats, best practices |
+
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |

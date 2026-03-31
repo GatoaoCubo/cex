@@ -72,3 +72,11 @@ density_score: 0.91
 - [ ] SDK installed: language-specific package
 - [ ] Types generated: `supabase gen types typescript`
 - [ ] Secrets set: all edge function env vars configured
+
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |

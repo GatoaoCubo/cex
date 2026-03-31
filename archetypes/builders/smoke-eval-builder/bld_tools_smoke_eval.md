@@ -20,6 +20,14 @@ purpose: Tools available for smoke_eval production
 | CEX Examples | P07_evals/examples/ | Existing smoke_eval artifacts |
 | Builder QG files | archetypes/builders/*/QUALITY_GATES.md | Gate refs for checks |
 | SEED_BANK | archetypes/SEED_BANK.yaml | P07_smoke_eval seeds |
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation
 Manually check each QUALITY_GATES.md gate against produced artifact.
 - [ ] YAML parses

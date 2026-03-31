@@ -31,6 +31,14 @@ purpose: Tools and APIs available for enum_def production
 | GraphQL | API schema definition | June 2018 spec |
 | TypeScript | Static type checking | 5.x |
 
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation
 No automated validator exists yet. Manually check each QUALITY_GATES.md gate against
 the produced artifact. Key checks: YAML parses, id pattern `^p06_enum_[a-z][a-z0-9_]+$`,

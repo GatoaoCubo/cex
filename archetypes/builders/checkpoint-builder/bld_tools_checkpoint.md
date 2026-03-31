@@ -21,6 +21,14 @@ purpose: Tools and APIs available for checkpoint production
 | SEED_BANK | archetypes/SEED_BANK.yaml | Seeds for P12_checkpoint |
 | TAXONOMY | archetypes/TAXONOMY_LAYERS.yaml | Layer position, runtime layer |
 | Workflow artifacts | P12_orchestration/examples/p12_wf_*.md | workflow_ref lookup |
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation
 No automated validator exists yet. Manually check each QUALITY_GATES.md gate against
 the produced artifact. Key checks: YAML parses, id pattern `p12_ck_`, workflow_ref non-empty,

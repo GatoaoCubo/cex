@@ -51,3 +51,11 @@ Use to: find existing maps (avoid duplicates), find sibling agent_cards for comp
 [ ] Dependencies with failure impact (S09)
 [ ] keywords len >= 2 (S10)
 ```
+
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |

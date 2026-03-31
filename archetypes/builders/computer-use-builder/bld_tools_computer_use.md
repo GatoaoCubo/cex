@@ -21,6 +21,14 @@ purpose: Tools and APIs available for computer_use production
 | SEED_BANK | archetypes/SEED_BANK.yaml | Seeds for P04_computer_use |
 | TAXONOMY | archetypes/TAXONOMY_LAYERS.yaml | Layer position, runtime layer |
 | Anthropic Docs | docs.anthropic.com/en/docs/agents-and-tools/computer-use | Provider reference |
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation
 No automated validator exists yet. Manually check each QUALITY_GATES.md gate against
 the produced artifact. Key checks: YAML parses, id pattern, resolution WxH format,

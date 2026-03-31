@@ -21,6 +21,14 @@ purpose: Tools available for guardrail production
 | CEX Laws | records/framework/docs/LAWS_v3_PRACTICAL.md | Operational laws (boundary reference) |
 | OWASP LLM Top 10 | owasp.org | Security risk categories |
 | SEED_BANK | archetypes/SEED_BANK.yaml | P11_guardrail seeds |
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation
 Manually check each QUALITY_GATES.md gate against produced artifact.
 - [ ] YAML parses

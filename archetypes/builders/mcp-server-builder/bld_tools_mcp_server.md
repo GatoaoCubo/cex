@@ -22,6 +22,14 @@ purpose: Tools and APIs available for mcp_server production
 | TAXONOMY | archetypes/TAXONOMY_LAYERS.yaml | Layer position, runtime layer |
 | MCP Spec | https://modelcontextprotocol.io/ | Transport, tool schema, resource URIs |
 | Anthropic MCP docs | https://docs.anthropic.com/en/docs/agents-and-tools/mcp | Auth, transports |
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation
 No automated validator exists yet. Manually check each QUALITY_GATES.md gate against
 the produced artifact. Key checks: YAML parses, id pattern, tools_provided matches body,

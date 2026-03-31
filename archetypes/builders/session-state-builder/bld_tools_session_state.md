@@ -18,6 +18,14 @@ purpose: Tools and runtime surfaces relevant to session_state production
 | P10 schema | `P10_memory/_schema.yaml` | naming, machine format, limits |
 | Session template | `P10_memory/templates/tpl_session_state.md` | human reference |
 | Compiled output | `P10_memory/compiled/p10_ss_{session}.yaml` | production target |
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation
 Until a generic validator exists, validate manually:
 - filename matches `p10_ss_{session}.yaml`

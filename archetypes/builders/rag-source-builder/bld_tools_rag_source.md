@@ -24,6 +24,14 @@ version: 1.0.0
 | Kind schema | P01_knowledge/_schema.yaml | Required fields, constraints, naming rules |
 | Existing rag_sources | P01_knowledge/examples/p01_rs_*.md | Duplicate check, style reference |
 | CEX domain taxonomy | records/domains/ [PLANNED] | Validate domain value |
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation (until validate_artifact.py ships)
 1. Parse frontmatter manually — confirm all required fields present
 2. Check id pattern with regex: `^p01_rs_[a-z][a-z0-9_]+$`

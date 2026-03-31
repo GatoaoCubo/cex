@@ -52,3 +52,11 @@ forge(artifact, path="P04/webhooks/p04_webhook_{event_slug}.md")
 - Do not call `forge` before `validate` passes
 - Do not skip `brain_query` when provider is known (Stripe/GitHub/Slack) — a payload schema may already exist
 - Do not call `validate` on partial drafts — complete frontmatter first
+
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |

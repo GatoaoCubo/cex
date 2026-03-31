@@ -21,6 +21,14 @@ purpose: Tools available for e2e_eval production
 | Workflow definitions | P12_orchestration/ | Pipeline definitions to test |
 | Builder QG files | archetypes/builders/*/QUALITY_GATES.md | Gate refs for assertions |
 | SEED_BANK | archetypes/SEED_BANK.yaml | P07_e2e_eval seeds |
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation
 Manually check each QUALITY_GATES.md gate against produced artifact.
 - [ ] YAML parses

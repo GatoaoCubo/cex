@@ -32,6 +32,14 @@ brain_query "base_type constraints {domain}" # Find constraint patterns in domai
 brain_query "composition union {type_name}"  # Find union/intersection patterns
 ```
 Always run before composing — prevents duplicate type_def creation.
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation Checklist
 Run these checks before finalizing output (no tool required):
 - [ ] `id` matches `^p06_td_[a-z][a-z0-9_]*$`

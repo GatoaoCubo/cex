@@ -82,3 +82,11 @@ density_score: 0.89
 | cex_score | Quality scoring |
 | cex_hooks | Pre-commit validation |
 | cex_system_test | Full system test |
+
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |

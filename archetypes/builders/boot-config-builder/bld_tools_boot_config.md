@@ -22,6 +22,14 @@ purpose: Tools and APIs available for boot_config production
 | TAXONOMY | archetypes/TAXONOMY_LAYERS.yaml | Layer position (runtime), overlaps |
 | Provider Docs | Per provider | Runtime limits, flags, tools |
 | agent-builder | archetypes/builders/agent-builder/ | Agent identity reference |
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation
 No automated validator exists yet. Check each QUALITY_GATES.md gate manually.
 Key checks: YAML parses, id pattern match, kind == boot_config, quality == null,

@@ -38,6 +38,14 @@ brain_query("knowledge card about {topic}")
 | CEX Examples | P01_knowledge/examples/ | 63+ real KCs |
 | CEX Template | P01_knowledge/templates/tpl_knowledge_card.md | Fillable template |
 | CEX Pool | records/pool/ (source repository) | 1957+ published artifacts |
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation
 validate_kc.py is ACTIVE — always run before committing.
 No manual gate-checking needed (unlike model-card-builder).

@@ -21,6 +21,14 @@ purpose: Tools available for lifecycle_rule production
 | SEED_BANK | archetypes/SEED_BANK.yaml | P11_lifecycle_rule seeds |
 | TAXONOMY_LAYERS | archetypes/TAXONOMY_LAYERS.yaml | Position and overlap info |
 | Quality Gates | archetypes/builders/quality-gate-builder/ | Reference for gate integration |
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation
 Manually check each QUALITY_GATES.md gate against produced artifact.
 - [ ] YAML parses

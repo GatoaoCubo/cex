@@ -20,6 +20,14 @@ purpose: Tools and APIs available for output_validator production
 | CEX Examples | P05_output/examples/ | Real output_validator artifacts |
 | SEED_BANK | archetypes/SEED_BANK.yaml | Seeds for P05_output_validator |
 | TAXONOMY | archetypes/TAXONOMY_LAYERS.yaml | Layer position, runtime layer |
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | Write, BashTool | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read | ALLOWED minus DENIED |
+
 ## Interim Validation
 No automated validator exists yet. Manually check each QUALITY_GATES.md gate against
 the produced artifact. Key checks: YAML parses, id pattern, required fields present,

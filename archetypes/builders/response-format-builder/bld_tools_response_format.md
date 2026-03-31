@@ -22,6 +22,14 @@ purpose: Tools available for response_format production
 | SEED_BANK | archetypes/SEED_BANK.yaml | P05_output_schema seeds |
 | OpenAI docs | https://platform.openai.com/docs | Structured output patterns |
 | Anthropic docs | https://docs.anthropic.com | Tool use output patterns |
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation
 Manually check each QUALITY_GATES.md gate against produced artifact.
 - [ ] YAML parses

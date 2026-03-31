@@ -25,3 +25,11 @@ purpose: Tools available for bugloop production
 - Without MCP: manually inspect P11_feedback/examples/ for existing bugloops
 - validate_artifact.py is PLANNED: until available, use QUALITY_GATES.md checklist manually
 - signal_writer.py: reference its interface when defining escalation.target="signal_bus"
+
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |

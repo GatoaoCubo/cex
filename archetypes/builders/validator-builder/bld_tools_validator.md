@@ -22,6 +22,14 @@ purpose: Tools and APIs available for validator production
 | TAXONOMY | archetypes/TAXONOMY_LAYERS.yaml | Layer position, overlaps |
 | Existing validators | pool/ (brain_query) | Patterns to follow |
 | JSON Schema spec | https://json-schema.org/ | Operator/condition patterns |
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation
 No automated validator exists yet for validators.
 Manually check each QUALITY_GATES.md gate against produced artifact:

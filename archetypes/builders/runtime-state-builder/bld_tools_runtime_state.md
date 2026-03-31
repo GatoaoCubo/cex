@@ -20,6 +20,14 @@ purpose: Tools available for runtime_state production
 | CEX Examples | P10_memory/examples/ | Existing runtime_state artifacts |
 | SEED_BANK | archetypes/SEED_BANK.yaml | P10_mental_model seeds (runtime_state equivalent) |
 | Agent PRIMEs | records/agent_nodes/{name}/PRIME_{NAME}.md | Agent identity for state derivation |
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation
 Manually check each QUALITY_GATES.md gate against produced artifact.
 - [ ] YAML parses

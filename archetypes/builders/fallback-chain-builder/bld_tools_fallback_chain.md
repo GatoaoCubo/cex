@@ -21,6 +21,14 @@ purpose: Tools and APIs available for fallback_chain production
 | TAXONOMY | archetypes/TAXONOMY_LAYERS.yaml | Layer position, overlaps |
 | Model Cards | P02_model/examples/p02_mc_*.md | Model specs, pricing, capabilities |
 | LiteLLM | docs.litellm.ai/docs/set_keys | Provider model identifiers |
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation
 No automated validator exists yet. Check each QUALITY_GATES.md gate manually.
 Key checks: YAML parses, id pattern match, kind == fallback_chain, quality == null,

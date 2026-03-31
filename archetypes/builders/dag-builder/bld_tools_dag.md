@@ -19,6 +19,14 @@ purpose: Tools and runtime surfaces relevant to dag production
 | P12 schema | `P12_orchestration/_schema.yaml` | naming, machine format, limits |
 | DAG template | `P12_orchestration/templates/tpl_dag.md` | human reference |
 | Compiled output | `P12_orchestration/compiled/p12_dag_{pipeline}.yaml` | production target |
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation
 Until a generic validator exists, validate manually:
 - filename matches `p12_dag_{pipeline}.yaml`

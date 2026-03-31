@@ -37,3 +37,11 @@ diagram-builder is self-contained. All required knowledge is in:
 - KNOWLEDGE.md (patterns and boundaries)
 - OUTPUT_TEMPLATE.md (structure)
 brain_query is enhancement only — builder functions without it.
+
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |

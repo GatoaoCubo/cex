@@ -21,6 +21,14 @@ purpose: Tools and APIs available for interface production
 | SEED_BANK | archetypes/SEED_BANK.yaml | P06_interface seeds |
 | TAXONOMY | archetypes/TAXONOMY_LAYERS.yaml | Layer position, overlaps |
 | OpenAPI Spec | https://spec.openapis.org/oas/latest.html | Method/contract patterns |
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation
 No automated validator exists yet for interfaces.
 Manually check each QUALITY_GATES.md gate against produced artifact:

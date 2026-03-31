@@ -22,6 +22,14 @@ purpose: Tools and APIs available for mental_model (P02) production
 | SEED_BANK | archetypes/SEED_BANK.yaml | Seeds for P02_mental_model |
 | TAXONOMY | archetypes/TAXONOMY_LAYERS.yaml | P02/P10 overlap, layer position |
 | agent-builder | archetypes/builders/agent-builder/ | Agent identity reference |
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation
 No automated validator exists yet. Check each QUALITY_GATES.md gate manually.
 Key checks: YAML parses, id pattern match, kind == mental_model, pillar == P02 (not P10),

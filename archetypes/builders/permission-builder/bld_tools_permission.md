@@ -20,6 +20,14 @@ purpose: Tools available for permission production
 | CEX Examples | P09_config/examples/ | Existing permission artifacts |
 | SEED_BANK | archetypes/SEED_BANK.yaml | P09_permission seeds |
 | RBAC Patterns | NIST RBAC standard | Role hierarchy best practices |
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation
 Manually check each QUALITY_GATES.md gate against produced artifact.
 - [ ] YAML parses

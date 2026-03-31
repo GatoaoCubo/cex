@@ -51,3 +51,11 @@ Glob: pattern="archetypes/builders/naming-rule-builder/*.md"
 | `SCHEMA.md` | Field definitions and constraints | Always — source of truth |
 | `OUTPUT_TEMPLATE.md` | Output structure | Always — derive final artifact |
 | `KNOWLEDGE.md` | Industry naming standards | When establishing case style or pattern base |
+
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |

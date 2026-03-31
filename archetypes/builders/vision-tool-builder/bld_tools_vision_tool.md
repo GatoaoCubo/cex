@@ -29,6 +29,14 @@ purpose: Tools and APIs available for vision_tool production
 | azure_computer_vision | API (cloud) | base64, url | ocr, object_detection, scene_description, face_detection | Azure CV v4; OCR optimized for documents |
 | tesseract | Local (binary) | file_path, buffer | text_extraction, layout_detection | Open source; no API key; supports 100+ languages |
 | doctr | Local (Python) | file_path, buffer, base64 | text_extraction, table_extraction, layout_detection | Deep learning OCR; GPU-accelerated; high accuracy |
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation
 No automated validator exists yet. Manually check each QUALITY_GATES.md gate against
 the produced artifact. Key checks: YAML parses, id pattern matches p04_vision_, capabilities

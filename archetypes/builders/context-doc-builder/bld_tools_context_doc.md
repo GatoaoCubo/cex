@@ -28,6 +28,14 @@ brain_query("system_prompt [domain] inject")
 | Seed bank | `cex/P01_knowledge/SEED_BANK.yaml` | Domain seed words |
 | Examples | `cex/P01_knowledge/examples/` | Reference context_docs |
 | Output template | `OUTPUT_TEMPLATE.md` (this builder) | Structural skeleton |
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation (until validate_artifact.py ships)
 Manual gate check against QUALITY_GATES.md:
 1. YAML parse check: paste frontmatter into YAML linter

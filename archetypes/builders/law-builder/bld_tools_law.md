@@ -38,6 +38,14 @@ brain_query("quality gate law enforcement compliance")
 ```
 Mark as `CONDITIONAL` — brain_query requires Ollama running locally with nomic-embed-text model.
 Fallback when MCP unavailable: grep `records/framework/docs/LAWS_v3_PRACTICAL.md` for existing numbers.
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation (No Automated Validator Yet)
 Until `validate_artifact.py` is built:
 1. Manually parse YAML frontmatter (copy to YAML linter)

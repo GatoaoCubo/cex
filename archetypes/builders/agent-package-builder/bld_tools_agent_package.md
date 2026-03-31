@@ -25,6 +25,14 @@ purpose: Tools and APIs available for agent_package production
 | SEED_BANK | archetypes/SEED_BANK.yaml | Seeds for P02_agent_package |
 | TAXONOMY | archetypes/TAXONOMY_LAYERS.yaml | Layer position (spec), overlaps |
 | agent-builder | archetypes/builders/agent-builder/ | Upstream: agent definition reference |
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation
 No automated validator exists yet. Check each QUALITY_GATES.md gate manually.
 Key checks: YAML parses, id pattern match, kind == agent_package, quality == null,

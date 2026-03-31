@@ -37,6 +37,14 @@ purpose: Tools and APIs available for llm_judge production
 | claude-3-5-sonnet-20241022 | Anthropic | Nuanced criteria, long contexts |
 | claude-3-haiku-20240307 | Anthropic | Fast low-cost screening judges |
 | gemini-1.5-pro | Google | Multimodal evals, cross-family bias reduction |
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation
 No automated validator exists yet. Manually check each QUALITY_GATES.md gate against
 the produced artifact. Key checks: YAML parses, id pattern `p07_judge_`, criteria list

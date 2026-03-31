@@ -22,6 +22,14 @@ purpose: Tools and APIs available for pattern production
 | Existing patterns | P08_architecture/examples/ | Reference artifacts |
 | GoF Patterns | Design Patterns (Gamma et al. 1994) | Classical pattern catalog |
 | POSA Patterns | Pattern-Oriented Software Architecture | Distributed system patterns |
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation
 No automated validator exists yet. Manually check each QUALITY_GATES.md gate:
 - [ ] YAML frontmatter parses without error

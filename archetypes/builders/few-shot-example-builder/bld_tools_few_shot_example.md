@@ -36,3 +36,11 @@ purpose: Tools available to few-shot-example-builder
 2. Compose using OUTPUT_TEMPLATE.md
 3. Manual checklist against QUALITY_GATES.md
 4. Peer review if score uncertain
+
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |

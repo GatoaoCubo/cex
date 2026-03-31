@@ -30,6 +30,14 @@ brain_query("agent for {task_keywords}")    # confirm correct agent_node target
 ```
 Do NOT call brain_query if MCP is not available in current runtime.
 Fall back to KNOWLEDGE.md routing table for agent_node selection.
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation (without validator tool)
 Validate manually before output:
 - filename matches `p12_dr_{scope}.yaml`

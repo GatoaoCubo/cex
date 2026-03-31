@@ -20,6 +20,14 @@ purpose: Tools and runtime surfaces relevant to signal production
 | P12 schema | `P12_orchestration/_schema.yaml` | naming, machine format, limits |
 | Signal template | `P12_orchestration/templates/tpl_signal.md` | human reference for event payload |
 | Validation example | `P06_schema/examples/p06_vs_signal_completion.md` | downstream consumer expectation |
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation
 Until a generic validator exists, validate manually:
 - filename matches `p12_sig_{event}.json`

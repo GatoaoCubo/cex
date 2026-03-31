@@ -23,6 +23,14 @@ purpose: Tools and APIs available for agent_card production
 | PRIME files | records/agent_nodes/{name}/PRIME_{NAME}.md | Existing agent_node definitions |
 | MCP configs | .mcp-{sat}.json | Per-agent_node MCP server configs |
 | Spawn scripts | records/framework/powershell/spawn_*.ps1 | Boot and spawn patterns |
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation
 No automated validator exists yet for agent_cards.
 Manually check each QUALITY_GATES.md gate against produced artifact:

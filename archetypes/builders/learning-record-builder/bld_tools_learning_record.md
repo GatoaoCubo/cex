@@ -22,6 +22,14 @@ purpose: Tools and APIs available for learning_record production
 | Seed Bank | archetypes/SEED_BANK.yaml | Seeds: topic, outcome, pattern, score |
 | Learning memory | records/core/learning/memory/ | Existing patterns |
 | Signal history | .claude/signals/ | Satellite completion signals |
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation
 No automated validator exists yet. Manually check each QUALITY_GATES.md gate:
 - [ ] YAML frontmatter parses without error

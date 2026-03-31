@@ -20,6 +20,14 @@ purpose: Tools and runtime surfaces relevant to handoff production
 | Handoff template | `P12_orchestration/templates/tpl_handoff.md` | human reference |
 | Handoff directory | `.claude/handoffs/` | primary output location |
 | Compiled output | `P12_orchestration/compiled/p12_ho_{task}.md` | secondary output |
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation
 Until a generic validator exists, validate manually:
 - filename matches `p12_ho_{task}.md`

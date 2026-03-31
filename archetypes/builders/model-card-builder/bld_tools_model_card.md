@@ -25,6 +25,14 @@ purpose: Tools and APIs available for model_card production
 | Google pricing | https://ai.google.dev/pricing | Gemini pricing |
 | LiteLLM registry | https://github.com/BerriAI/litellm | 2593 models JSON |
 | HuggingFace API | https://huggingface.co/api/models/{id} | Model metadata |
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation (until validate_artifact.py exists)
 Manually check each QUALITY_GATES.md gate against produced artifact.
 All 10 HARD gates must pass. SOFT gates contribute to score.

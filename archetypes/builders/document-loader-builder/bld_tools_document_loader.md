@@ -32,6 +32,14 @@ tldr: "Tools and data sources available to document_loader-builder during artifa
 | LangChain docs | 250+ loader implementations, splitter classes | https://python.langchain.com/docs/integrations/document_loaders/ |
 | Unstructured.io | Auto-format detection, partition functions | https://unstructured-io.github.io/unstructured/ |
 
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
 ## Interim Validation (Manual)
 When validate_artifact.py is unavailable:
 1. Copy frontmatter block into a YAML linter (yamllint.com) — must parse with zero errors.
