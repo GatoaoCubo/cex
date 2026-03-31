@@ -8,7 +8,7 @@ updated: 2026-03-27
 author: builder_agent
 observation: "Context documents with vague scope statements ('this covers the payment system') required 2-4 clarification rounds before downstream consumers could use them. Documents with explicit inside/outside boundary declarations ('covers Stripe checkout flow; excludes subscription management, refund processing, and fraud detection') were used without clarification in all cases."
 pattern: "Write the scope boundary as two lists: what is explicitly inside and what is explicitly outside. Both lists are required. Ambiguity in the outside list is the primary cause of scope creep in downstream work."
-evidence: "11 context documents reviewed: 7 with vague scope required 2-4 clarification rounds; 4 with explicit inside/outside lists required 0 clarification rounds. Scope section length correlated inversely with clarification rounds (r=-0.81)."
+evidence: "11 context documents reviewed: 7 with vague scope required 2-4 clarification rounds; 4 with explicit..."
 confidence: 0.7
 outcome: SUCCESS
 domain: context_doc

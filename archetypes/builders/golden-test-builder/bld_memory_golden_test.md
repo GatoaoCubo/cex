@@ -8,7 +8,7 @@ updated: 2026-03-27
 author: builder_agent
 observation: "Golden tests built from artifacts scoring 9.4 or below fail the quality_threshold >= 9.5 gate. Truncated golden_output fields with ellipsis cause test instability — partial outputs cannot be used as reference. Rationale written as prose ('it's a good example') without gate IDs provides no actionable pass/fail signal. Producer self-approving as reviewer undermines the independence requirement. Golden tests confused with few_shot_example (P01) — golden tests evaluate quality, examples teach format."
 pattern: "Source artifact must score >= 9.5 before being nominated as a golden test candidate. golden_output must be the complete artifact with no truncation. Rationale maps explicitly to gate IDs (H01-H10, S01-S10) stating which gate each section of the output satisfies. Producer and reviewer must be different roles — producer cannot self-approve. quality field is always null (self-scoring rejected). quality_threshold is always >= 9.5."
-evidence: "9 golden test artifacts validated. 100% of golden_output truncated with '...' caused test instability in regression runs. Rationale with explicit gate IDs reduced reviewer time by ~50% vs prose rationale. All producer-self-approved tests were rejected and required external review before pool admission."
+evidence: "9 golden test artifacts validated. 100% of golden_output truncated with '...' ca..."
 confidence: 0.75
 outcome: SUCCESS
 domain: golden_test

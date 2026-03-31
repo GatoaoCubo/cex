@@ -24,15 +24,6 @@ tldr: "Write PID after ready, trap signals to drain work, expose meaningful heal
 impact_score: 7.5
 decay_rate: 0.05
 agent_node: edison
-keywords:
-  - daemon
-  - background process
-  - SIGTERM
-  - PID file
-  - health check
-  - restart policy
-  - resource limits
-  - signal handler
 memory_scope: project
 observation_types: [user, feedback, project, reference]
 ---

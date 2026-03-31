@@ -8,7 +8,7 @@ updated: 2026-03-27
 author: builder_agent
 observation: "Guardrails with subjective rules ('be careful with sensitive data') are unenforceable — enforcement logic cannot match against vague conditions. Missing bypass policy on critical guardrails causes incident escalation with no resolution path. Invalid severity values ('important', 'danger') and invalid enforcement values ('stop', 'prevent') fail schema validation on every build. Guardrails conflated with permissions (access control) grow to cover both and become unmanageable. Low-severity guardrails enforced with block create alert fatigue and get disabled."
 pattern: "Rules must be concrete and matchable: specify exact patterns, field names, operation types, or value ranges that trigger the guardrail. Severity is one of four values: critical/high/medium/low. Enforcement matches severity: critical+high use block (pre-exec hook or output filter), medium uses warn (monitoring alert), low uses log (audit trail). Every guardrail — including critical — documents a bypass policy for emergency override. Guardrail controls safety behavior; permission controls access. Separate artifacts for each."
-evidence: "10 guardrail artifacts reviewed. Subjective rules required rework to concrete form in 6 of 10. Missing bypass policy implicated in 2 incident post-mortems where on-call engineers had no override path. Enforcement mismatched to severity (low-severity block) caused 3 disable events due to alert fatigue."
+evidence: "10 guardrail artifacts reviewed. Subjective rules required rework to concrete form in 6 of 10. Missi..."
 confidence: 0.75
 outcome: SUCCESS
 domain: guardrail

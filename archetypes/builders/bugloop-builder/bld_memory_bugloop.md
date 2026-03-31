@@ -8,7 +8,7 @@ updated: 2026-03-27
 author: builder_agent
 observation: "Automated fix loops with a single confidence threshold applied uniformly to all failure types triggered incorrect auto-fixes on 34% of probabilistic failures. Separating trigger classification from fix application reduced incorrect auto-fix rate to 8% across 6 test suites (214 failures processed)."
 pattern: "Classify failure type before applying any fix. Auto-fix only deterministic failures at confidence >= 0.85. Escalate probabilistic failures regardless of confidence score. Vary fix strategy on each retry attempt."
-evidence: "6 suites, 214 failures: auto-fix success 91% on deterministic triggers, 23% on probabilistic triggers when mistakenly auto-fixed. Rollback policy kept repository green in 100% of failed auto-fix attempts."
+evidence: "6 suites, 214 failures: auto-fix success 91% on deterministic triggers, 23% on p..."
 confidence: 0.7
 outcome: SUCCESS
 domain: bugloop

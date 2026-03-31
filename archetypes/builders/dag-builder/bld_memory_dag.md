@@ -24,15 +24,6 @@ tldr: "Declare nodes and edges, validate no cycles, embed topological order and 
 impact_score: 7.5
 decay_rate: 0.05
 agent_node: edison
-keywords:
-  - DAG
-  - directed acyclic graph
-  - topological sort
-  - cycle detection
-  - dependency graph
-  - critical path
-  - fan-out
-  - fan-in
 memory_scope: project
 observation_types: [user, feedback, project, reference]
 ---

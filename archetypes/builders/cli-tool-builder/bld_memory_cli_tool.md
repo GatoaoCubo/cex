@@ -8,7 +8,7 @@ updated: 2026-03-27
 author: builder_agent
 observation: "CLI tools without declared exit codes forced callers to parse stdout for success/failure signals, causing silent failures in 4 out of 7 automation pipelines reviewed. Tools with semantic exit codes (0=success, 1=user error, 2=system error, 3=partial) composed correctly in every case."
 pattern: "Declare exit codes explicitly in the spec with semantic meaning. Use kebab-case flags. Mirror the commands list in frontmatter exactly to body section names. Keep body under 1024 bytes."
-evidence: "7 automation pipelines: 4 failed silently without semantic exit codes; 0 silent failures after exit codes were added. Flag naming drift (underscores vs kebab) caused parser failures in 3 integrations."
+evidence: "7 automation pipelines: 4 failed silently without semantic exit codes; 0 silent failures after exit ..."
 confidence: 0.7
 outcome: SUCCESS
 domain: cli_tool

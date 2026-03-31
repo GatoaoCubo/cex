@@ -8,7 +8,7 @@ updated: 2026-03-27
 author: builder_agent
 observation: "Hooks configured as blocking:true with timeout >10000ms cause host freezes during tool execution. Async hooks that emit signals work reliably for logging and metrics. Pre-tool-use hooks used for permission guards must complete in <1000ms or risk user-visible latency. Hooks containing business logic instead of interception logic become maintenance liabilities. Missing error_handling declarations cause unhandled exceptions to crash the host process."
 pattern: "Blocking hooks must have timeout <=10000ms (hard limit 30000ms system-wide). Hooks that do not need to gate execution must be async (blocking:false). Every hook requires an error_handling field — hooks that fail must not crash the host. Hooks intercept and augment; they do not implement business logic. script_path is required; a hook without it cannot execute."
-evidence: "Hook timeout violations detected in 3 of 8 early productions (blocking:true with 15000-30000ms). Async logging hooks showed zero host impact across 50+ executions. Pre-tool-use guards over 1000ms caused measurable latency in 4 test sessions. Hooks without error_handling caused 2 host crashes in integration testing."
+evidence: "Hook timeout violations detected in 3 of 8 early productions (blocking:true with 15000-30000ms). Asy..."
 confidence: 0.75
 outcome: SUCCESS
 domain: hook

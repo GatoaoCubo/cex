@@ -24,16 +24,6 @@ tldr: "Match dimensions to model, set chunk at 65% of context window, overlap at
 impact_score: 8.0
 decay_rate: 0.06
 agent_node: edison
-keywords:
-  - embedding
-  - vector
-  - chunk size
-  - overlap
-  - cosine similarity
-  - distance metric
-  - normalization
-  - tokenizer
-  - dimensions
 memory_scope: project
 observation_types: [user, feedback, project, reference]
 ---

@@ -24,15 +24,6 @@ tldr: "UPPER_SNAKE_CASE names, explicit types and sensitivity markers, document 
 impact_score: 7.5
 decay_rate: 0.04
 agent_node: edison
-keywords:
-  - environment variables
-  - env config
-  - secrets
-  - sensitivity
-  - type validation
-  - override precedence
-  - UPPER_SNAKE_CASE
-  - defaults
 memory_scope: project
 observation_types: [user, feedback, project, reference]
 ---

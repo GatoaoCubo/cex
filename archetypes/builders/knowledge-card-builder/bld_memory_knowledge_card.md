@@ -8,7 +8,7 @@ updated: 2026-03-27
 author: builder_agent
 observation: "Knowledge cards with body density below 0.80 (ratio of informative content to total words) fail the density gate and require rewrite. Bullets over 80 characters are caught by validator and force reformatting. Filler phrases ('this document describes', 'it is worth noting') consume tokens without adding information and are the primary cause of low density scores. Axioms written as observations ('caching improves performance') instead of rules ('ALWAYS declare cache TTL, NEVER cache without expiry') are rejected by S18. Cards referencing internal system paths fail H09."
 pattern: "Achieve density >= 0.80 by: replacing prose paragraphs with bullet lists, replacing descriptions with comparison tables, removing all transition sentences, ensuring each bullet contains exactly one fact. Axioms must be ALWAYS/NEVER imperatives, not observations. Quality field must be null — scoring is external. Body size 200 bytes minimum, 5KB maximum. No internal paths in any field."
-evidence: "11 knowledge card productions: 6 failed first density check (avg density 0.64). After applying bullet+table conversion, avg density reached 0.83. Axiom format errors in 4 of 11 (observation format instead of ALWAYS/NEVER). H09 path violations in 2 early productions. Quality set to a number in 3 early productions (validator rejections)."
+evidence: "11 knowledge card productions: 6 failed first density check (avg density 0.64). After applying bulle..."
 confidence: 0.75
 outcome: SUCCESS
 domain: knowledge_card

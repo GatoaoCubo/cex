@@ -24,15 +24,6 @@ tldr: "Chain stages with explicit data lineage, assert at each boundary, scale t
 impact_score: 7.5
 decay_rate: 0.05
 agent_node: edison
-keywords:
-  - end-to-end evaluation
-  - pipeline testing
-  - integration test
-  - stage assertion
-  - data fixture
-  - timeout
-  - cleanup
-  - test isolation
 memory_scope: project
 observation_types: [user, feedback, project, reference]
 ---
