@@ -59,6 +59,24 @@ from cex_shared import load_yaml
 from cex_shared import strip_frontmatter as _shared_strip_frontmatter
 from cex_shared import write_learning_record as _shared_write_learning_record
 
+# --- Optional tools (degrade gracefully) ---
+try:
+    from cex_retriever import (
+        find_examples_for_kind,
+    )
+    from cex_retriever import (
+        load_index as load_retriever_index,
+    )
+    _RETRIEVER_AVAILABLE = True
+except ImportError:
+    _RETRIEVER_AVAILABLE = False
+
+try:
+    from cex_token_budget import count_tokens
+    _TOKEN_BUDGET_AVAILABLE = True
+except ImportError:
+    _TOKEN_BUDGET_AVAILABLE = False
+
 # Load .env for API keys
 for _ep in [CEX_ROOT / ".env", CEX_ROOT.parent / "organization-core" / ".env"]:
     if _ep.exists():
@@ -409,6 +427,29 @@ class EightFRunner:
             knowledge["domain_context"] = self.state.context
             self._log("F3", f"domain context injected ({len(self.state.context)} chars)")
 
+        # 8. Semantic retrieval (TF-IDF similar artifacts)
+        if _RETRIEVER_AVAILABLE:
+            try:
+                idx = load_retriever_index()
+                if idx:
+                    similar = find_examples_for_kind(
+                        kind=self.state.kind,
+                        intent=self.state.intent,
+                        index=idx,
+                        top_k=3,
+                    )
+                    if similar:
+                        parts = []
+                        for s in similar:
+                            parts.append(
+                                f"- **{s['title']}** (kind={s['kind']}, "
+                                f"score={s['score']:.3f}): {s.get('tldr', '')[:150]}"
+                            )
+                        knowledge["semantic_matches"] = "\n".join(parts)
+                        self._log("F3", f"retriever: {len(similar)} semantic matches")
+            except Exception as e:
+                self._log("F3", f"retriever unavailable: {e}")
+
         self.state.knowledge = knowledge
         self._log("F3", f"knowledge: {list(knowledge.keys())}")
 
@@ -571,6 +612,10 @@ class EightFRunner:
             knowledge_parts.append(f"## Memory (Past Learnings)\n\n{k['memory']}")
         if k.get("domain_context"):
             knowledge_parts.append("## Domain Context\n\n" + k["domain_context"])
+        if k.get("semantic_matches"):
+            knowledge_parts.append(
+                "## Similar Artifacts (semantic retrieval)\n\n" + k["semantic_matches"]
+            )
         if knowledge_parts:
             sections.append("# KNOWLEDGE\n\n" + "\n\n".join(knowledge_parts))
 
@@ -645,11 +690,17 @@ class EightFRunner:
 
         prompt = "\n\n---\n\n".join(sections)
 
+        # Token budget analysis (if available)
+        token_count = len(prompt.split())  # fallback: word count
+        if _TOKEN_BUDGET_AVAILABLE:
+            token_count = count_tokens(prompt)
+            self._log("F6", f"prompt: {token_count:,} tokens (tiktoken)")
+
         if self.dry_run:
             self.state.artifact = prompt
-            self._log("F6", f"dry-run prompt composed ({len(prompt.split())} words)")
+            self._log("F6", f"dry-run prompt composed ({token_count:,} tokens)")
         else:
-            self._log("F6", f"executing prompt ({len(prompt.split())} words)...")
+            self._log("F6", f"executing prompt ({token_count:,} tokens)...")
             response = execute_prompt(prompt)
             self.state.artifact = response
             self._log("F6", f"LLM response received ({len(response)} chars)")
@@ -970,6 +1021,8 @@ def print_banner(state: RunState, elapsed_ms: float) -> None:
     k_parts = [label for key, label in [("kc_builder", "builder-KC"), ("few_shots", "examples"), ("memory", "memory")] if k.get(key)]
     if k.get("kc_domains"):
         k_parts.insert(1, f"{len(k['kc_domains'])} KCs")
+    if k.get("semantic_matches"):
+        k_parts.append("retriever")
     if k_parts:
         lines.append(f"  Knowledge: {', '.join(k_parts)}")
     if state.artifact:
