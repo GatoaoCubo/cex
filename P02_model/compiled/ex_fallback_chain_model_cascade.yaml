@@ -1,18 +1,82 @@
 id: p02_fb_model_cascade
 kind: fallback_chain
 pillar: P02
-chain: 'opus > sonnet > haiku. Never skip. Trigger: timeout or error.'
+title: Model Cascade Fallback Chain
+chain:
+- model: opus
+  timeout: 30
+  max_retries: 1
+- model: sonnet
+  timeout: 15
+  max_retries: 1
+- model: haiku
+  timeout: 5
+  max_retries: 2
 timeout_per_step: varies
-quality: 9.0
+trigger_conditions:
+- timeout
+- rate_limit
+- 5xx_error
+- context_overflow
 tags:
 - fallback
 - cascade
-timing: '| Step | Timeout | Cost |
+- model
+- cost-optimization
+tldr: 'Model cascade: opus→sonnet→haiku with cost-optimized fallback on timeout, rate limit, or error.'
+quality: null
+chain_logic: "Request → opus (30s) ──timeout/error──→ sonnet (15s) ──timeout/error──→ haiku (5s)\n                 │     \
+  \                       │                            │\n                 ▼                            ▼                \
+  \            ▼\n              SUCCESS                     SUCCESS                      SUCCESS\n\nRule: Never skip a tier.\
+  \ Escalation is strictly sequential.\nTrigger conditions: timeout, HTTP 5xx, rate limit (429), context window overflow."
+cost_performance_matrix: '| Step | Model | Timeout | Input $/1M tok | Output $/1M tok | Relative Cost | Typical Latency |
 
-  |------|---------|------|
+  |------|-------|---------|-----------------|-----------------|---------------|-----------------|
 
-  | opus | 30s | 100% |
+  | 1 | opus | 30s | $15.00 | $75.00 | 100% | 8-25s |
 
-  | sonnet | 15s | 25% |
+  | 2 | sonnet | 15s | $3.00 | $15.00 | 20% | 3-10s |
 
-  | haiku | 5s | 5% |'
+  | 3 | haiku | 5s | $0.25 | $1.25 | ~2% | 0.5-3s |'
+trigger_decision_table: '| Condition | Action | Metadata Passed |
+
+  |-----------|--------|-----------------|
+
+  | Response received within timeout | Return response | `model_used`, `latency_ms` |
+
+  | Timeout exceeded | Cascade to next tier | `original_model`, `timeout_reason` |
+
+  | HTTP 429 (rate limit) | Cascade to next tier | `retry_after`, `rate_limit_tier` |
+
+  | HTTP 5xx (server error) | Retry once, then cascade | `error_code`, `retry_count` |
+
+  | Context overflow (>200K tokens) | Skip to haiku (smaller context) | `token_count`, `truncated` |
+
+  | All tiers exhausted | Return error with full trace | `cascade_trace`, `total_latency` |'
+implementation_pattern: "async def cascade_request(prompt: str, chain: list[dict]) -> dict:\n    trace = []\n    for step\
+  \ in chain:\n        model, timeout = step[\"model\"], step[\"timeout\"]\n        try:\n            response = await llm_call(prompt,\
+  \ model=model, timeout=timeout)\n            return {\"response\": response, \"model_used\": model, \"trace\": trace}\n\
+  \        except (TimeoutError, RateLimitError, ServerError) as e:\n            trace.append({\"model\": model, \"error\"\
+  : type(e).name, \"elapsed\": e.elapsed})\n            continue\n    raise CascadeExhaustedError(trace=trace)"
+monitoring_metrics: '| Metric | Alert Threshold | Dashboard |
+
+  |--------|----------------|-----------|
+
+  | Cascade rate (% requests falling to tier 2+) | > 15% over 5min | `cex/fallback/cascade_rate` |
+
+  | Full exhaustion rate | > 2% over 10min | `cex/fallback/exhaustion_rate` |
+
+  | Cost savings vs opus-only | Track weekly | `cex/fallback/cost_savings` |
+
+  | P95 latency with cascade | > 45s | `cex/fallback/p95_latency` |'
+when_to_use: '| Scenario | Recommended Chain | Rationale |
+
+  |----------|-------------------|-----------|
+
+  | Production artifact generation | opus→sonnet→haiku | Quality-first, cost as fallback |
+
+  | Interactive chat / low latency | sonnet→haiku | Speed-first, skip opus |
+
+  | Batch processing (1000+ items) | haiku only | Cost-first, volume workload |
+
+  | Critical reasoning tasks | opus (no fallback) | Quality cannot degrade |'

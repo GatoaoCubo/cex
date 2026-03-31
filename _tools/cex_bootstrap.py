@@ -66,7 +66,8 @@ def run_nucleus_builder(nucleus, name, domain, kinds, dry_run=False):
         "--name", name,
         "--domain", domain,
         "--kinds",
-    ] + kinds
+        *kinds,
+    ]
 
     if dry_run:
         cmd.append("--dry-run")
@@ -92,7 +93,7 @@ def level2_expand(nuclei, dry_run=False):
         results[nuc] = success
 
     print(f"\n{'='*60}")
-    print(f"  LEVEL 2 EXPANSION SUMMARY")
+    print("  LEVEL 2 EXPANSION SUMMARY")
     print(f"{'='*60}")
     for nuc, ok in results.items():
         info = EXPANSION_MAP[nuc]
@@ -102,14 +103,83 @@ def level2_expand(nuclei, dry_run=False):
     print(f"\n  Total: {total} artifacts attempted")
 
 
+def _scan_below_target(nuclei, target):
+    """Find artifacts scoring below target in given nuclei."""
+    sys.path.insert(0, str(CEX_ROOT / "_tools"))
+    from cex_score import score_artifact
+
+    NUC_DIRS = {
+        "N01": "N01_intelligence", "N02": "N02_marketing", "N03": "N03_engineering",
+        "N04": "N04_knowledge", "N05": "N05_operations", "N06": "N06_commercial",
+        "N07": "N07_admin",
+    }
+    below = []
+    for nuc in nuclei:
+        nuc_dir = CEX_ROOT / NUC_DIRS.get(nuc, "")
+        if not nuc_dir.exists():
+            continue
+        for md in sorted(nuc_dir.rglob("*.md")):
+            if "compiled" in str(md) or md.name == "README.md" or "_schema" in md.name:
+                continue
+            score, _ = score_artifact(str(md))
+            if 0 < score < target:
+                below.append({"path": str(md), "score": score, "nucleus": nuc})
+    return below
+
+
 def level3_quality_spiral(nuclei, target=8.0, dry_run=False):
-    """Level 3: PRIDE loop -- rebuild anything below target."""
-    print(f"\n  LEVEL 3: Quality spiral (target={target})")
-    print(f"  TODO: Requires cex_doctor.py --score (not yet implemented)")
-    print(f"  When implemented:")
-    print(f"    1. Doctor scores all artifacts in target nuclei")
-    print(f"    2. Any artifact below {target} gets rebuilt via 8F Runner")
-    print(f"    3. Repeat until all meet target or max 3 iterations")
+    """Level 3: PRIDE loop -- score all artifacts, rebuild below target, repeat."""
+    max_iterations = 3
+    print(f"\n  LEVEL 3: Quality spiral (target={target}, max_iter={max_iterations})")
+
+    for iteration in range(1, max_iterations + 1):
+        below = _scan_below_target(nuclei, target)
+        if not below:
+            print(f"\n  Iteration {iteration}: All artifacts >= {target}. Spiral complete.")
+            break
+
+        print(f"\n  Iteration {iteration}: {len(below)} artifact(s) below {target}")
+        for item in below:
+            print(f"    {item['score']:.1f}  {item['path']}")
+
+        if dry_run:
+            print(f"\n  DRY-RUN: Would rebuild {len(below)} artifact(s)")
+            break
+
+        rebuilt = 0
+        for item in below:
+            md_path = Path(item["path"])
+            # Read existing artifact to extract kind for 8F rebuild
+            text = md_path.read_text(encoding="utf-8")
+            from cex_shared import parse_frontmatter
+            fm = parse_frontmatter(text)
+            if not fm or "kind" not in fm:
+                print(f"    SKIP (no frontmatter): {md_path.name}")
+                continue
+
+            kind = fm["kind"]
+            title = fm.get("title", md_path.stem)
+            intent = f"enrich {kind}: {title}"
+            output_dir = str(md_path.parent)
+
+            cmd = [
+                sys.executable, str(CEX_ROOT / "_tools" / "cex_8f_runner.py"),
+                intent, "--kind", kind, "--execute",
+                "--output-dir", output_dir,
+            ]
+            print(f"    REBUILD: {md_path.name} (kind={kind}, score={item['score']:.1f})")
+            result = subprocess.run(cmd, cwd=str(CEX_ROOT), capture_output=True, timeout=120)
+            if result.returncode == 0:
+                rebuilt += 1
+
+        print(f"\n  Iteration {iteration}: Rebuilt {rebuilt}/{len(below)} artifact(s)")
+        if rebuilt == 0:
+            print("  No artifacts rebuilt — stopping spiral.")
+            break
+
+    # Final summary
+    remaining = _scan_below_target(nuclei, target) if not dry_run else below
+    print(f"\n  SPIRAL SUMMARY: {len(remaining)} artifact(s) still below {target}")
 
 
 def main():
