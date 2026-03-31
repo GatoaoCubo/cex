@@ -3,66 +3,62 @@ id: p01_kc_system_testing_patterns
 kind: knowledge_card
 pillar: P01
 title: "System Testing Patterns"
-version: "1.0.0"
-created: "2023-10-10"
-updated: "2023-10-10"
+version: 1.0.0
+created: 2023-11-01
+updated: 2023-11-01
 author: "Knowledge Distillation Specialist"
-domain: "Software Testing"
+domain: Software Testing
 quality: null
-tags: [system-testing, software-testing, testing-patterns, quality-assurance, knowledge]
-tldr: "Overview of key system testing patterns for comprehensive coverage and efficiency."
-when_to_use: "Designing or evaluating system testing processes for comprehensive coverage and efficiency."
-keywords: [system-testing, testing-patterns, quality-assurance]
+tags: [system_testing, testing_patterns, software_quality, knowledge]
+tldr: "Outlines types and applications of system testing patterns, enhancing QA."
+when_to_use: "When designing or improving system testing strategies."
+keywords: [system testing, testing patterns, QA]
 long_tails:
-  - Examples of system testing patterns in software development
-  - Best practices for applying system testing patterns
+  - How to apply system testing patterns for better software quality
+  - Examples of effective system testing strategies
 axioms:
-  - ALWAYS ensure system testing covers all critical paths before release
+  - ALWAYS analyze project requirements before selecting testing patterns
 linked_artifacts:
   primary: null
   related: []
 density_score: 0.85
-data_source: "https://example.com/system-testing-patterns"
+data_source: "https://www.softwaretestingmaterial.com/system-testing/"
 
 ---
 
 # System Testing Patterns
 
 ## Quick Reference
-```yaml
-topic: system_testing_patterns
-scope: Application in software testing for quality assurance
+topic: System Testing Patterns
+scope: Detailed patterns and methodologies for enhancing software quality assurance through systematic and structured testing processes.
 owner: Knowledge Distillation Specialist
 criticality: high
-```
 
 ## Key Concepts
-- **Test Case Design**: Use techniques like boundary value analysis for effective coverage.
-- **Automation**: Implement continuous integration with test automation for speed.
-- **Regression Testing**: Regularly reevaluate system after changes to ensure ongoing stability.
+- **Scenario Testing**: Simulate real-world use cases for application robustness.
+- **Smoke Testing**: Initial testing to catch major failures before deeper checks.
+- **Regression Testing**: Verifies new code changes have not disrupted existing functionality.
 
 ## Strategy Phases
-1. **Planning**: Define clear objectives and select appropriate testing patterns.
-2. **Design**: Develop test cases focusing on critical system components.
-3. **Execution**: Conduct tests and capture results for analysis.
+1. **Identify Needs**: Determine project-specific testing requirements.
+2. **Design Patterns**: Choose appropriate testing approaches like scenario or smoke.
+3. **Implement and Monitor**: Execute tests and continuously assess test coverage.
 
 ## Golden Rules
-- Plan tests with explicit coverage goals
-- Automate tests where possible to save time and resources
-- Regularly update test suites to reflect changes in system functionality
+- ALWAYS start with smoke testing to identify major issues early.
+- NEVER skip regression testing after code alterations, regardless of size.
+- IF possible, automate repetitive tests for efficiency.
 
 ## Flow
-```
-[Requirements] -> [Test Planning] -> [Test Execution] -> [Test Evaluation] -> [Feedback]
-```
+[Identify Requirements] -> [Design Tests] -> [Execute Tests] -> [Assess Results]
 
 ## Comparativo
-| Pattern         | Advantages                                  | Disadvantages                              |
-|-----------------|---------------------------------------------|--------------------------------------------|
-| Boundary Value  | High coverage with minimal test cases       | May not test all possible input combinations|
-| Automation      | Fast execution, saves time                  | High initial setup cost                     |
-| Regression      | Ensures changes do not introduce new issues | Can be time-consuming without automation    |
+| Pattern | Time Efficiency | Coverage Depth |
+|---------|----------------|----------------|
+| Smoke | Fast | Shallow |
+| Scenario | Moderate | Deep |
+| Regression | Slow | Comprehensive |
 
 ## References
-- Related artifact: [p01_kc_automated_testing_methods]
-- Source: https://example.com/system-testing-patterns
+- Related artifact: None
+- Source: https://www.softwaretestingmaterial.com/system-testing/
