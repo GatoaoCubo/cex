@@ -1,64 +1,75 @@
 ---
+
 id: p01_kc_system_testing_patterns
 kind: knowledge_card
 pillar: P01
 title: "System Testing Patterns"
 version: "1.0.0"
-created: "2023-10-20"
-updated: "2023-10-20"
-author: "John Doe"
+created: "2023-10-01"
+updated: "2023-10-01"
+author: "Knowledge Distillation Specialist"
 domain: "Software Testing"
 quality: null
-tags: [system_testing, design_patterns, quality_assurance, knowledge]
-tldr: "System testing patterns ensure comprehensive verification of system functionality against requirements in realistic environments."
-when_to_use: "When designing or evaluating comprehensive system tests to ensure full coverage and alignment with user requirements."
-keywords: [system_testing, design_patterns, quality_assurance]
+tags: [system_testing, testing_patterns, software_development, knowledge]
+tldr: "System testing patterns optimize integration and functionality checks, ensuring high software quality."
+when_to_use: "When planning or executing system-level testing for software integration."
+keywords: [test-automation, regression-testing, load-testing]
 long_tails:
-  - How to implement data-driven testing in system tests
-  - Comparative analysis of automation tools for system testing
+  - How to implement test automation in system testing
+  - Benefits of load testing for scalable system performance
 axioms:
-  - ALWAYS prioritize end-to-end testing for integrated systems
+  - ALWAYS automate repetitive tests to reduce manual effort.
+  - NEVER skip regression testing after major code changes.
 linked_artifacts:
   primary: null
   related: []
 density_score: 0.85
-data_source: "https://example.com/system_testing_patterns"
+data_source: "https://example.com/system-testing-patterns"
 
 ---
 
 ## Quick Reference
+
 ```yaml
 topic: System Testing Patterns
-scope: Comprehensive system testing
-owner: John Doe
+scope: Ensuring integration and functionality across system components
+owner: Testing Team
 criticality: high
 ```
 
 ## Key Concepts
-- **Test Automation Pattern**: Utilizes automation for repetitive test execution.
-- **Data-Driven Testing Pattern**: Uses data sets for various test scenarios.
-- **End-to-End Testing Pattern**: Covers full workflow testing from start to finish.
+
+- **Test Automation**: Streamlines testing by automatically executing repetitive tests, allowing rapid feedback and frequent validations.
+- **Regression Testing**: Validates that recent code changes haven’t adversely affected the existing functionality.
+- **Load Testing**: Assesses system performance under expected load conditions to ensure stability and responsiveness.
 
 ## Strategy Phases
-1. **Identification**: Determine critical workflows to test comprehensively.
-2. **Design**: Develop test scripts aligning with identified patterns.
-3. **Execution**: Conduct tests in environments simulating real conditions.
+
+1. **Identify Testing Needs**: Evaluate which application areas require rigorous testing to maintain quality.
+2. **Implement Automation Tools**: Utilize tools like Selenium or JUnit to support efficient test execution.
+3. **Conduct Load Testing**: Use tools like Apache JMeter to simulate high-traffic conditions and identify bottlenecks.
 
 ## Golden Rules
-- ALWAYS incorporate data-driven testing for versatile scenarios.
-- NEVER ignore edge cases in end-to-end testing.
-- PRIORITIZE automation to improve test efficiency.
+
+- CONSISTENTLY automate tests for greater efficiency and accuracy.
+- PERIODICALLY run regression tests to catch integration issues early.
+- OPTIMIZE load tests to simulate real-world conditions as closely as possible.
 
 ## Flow
+
 ```
-[Input Data] -> [Test Script Design] -> [Execution] -> [Validation of Results]
+[Identify Needs] -> [Implement Tests] -> [Execute and Analyze] -> [Refine Approaches]
 ```
 
 ## Comparativo
-| Dimension | Option A | Option B |
-|-----------|----------|----------|
-| Automation | High | Low |
-| Coverage | Comprehensive | Limited |
+
+| Pattern          | Feature Automated | Dependency Management |
+|------------------|------------------|----------------------|
+| Test Automation  | High             | Toolchains required  |
+| Regression Testing | Medium         | Iterative test plans |
+| Load Testing     | Low              | Virtual user scenarios |
 
 ## References
-- Source: https://example.com/system_testing_patterns
+
+- Related artifact: none
+- Source: https://example.com/system-testing-patterns
