@@ -29,3 +29,17 @@ id: bld_norms
 10. **SCHEMA.md flags/enums**: use GENERIC values, not runtime-specific (no --dangerously-skip-permissions)
 11. **EXAMPLES.md golden IDs**: use CEX-universal patterns, minimize framework-specific director names
 12. **COLLABORATION.md cross-refs**: if builder A refs builder B, builder B MUST ref builder A
+
+## Universal Schema Rules (v1.0)
+
+13. **MANIFEST.md keywords**: 4-8 terms in frontmatter, extracted from ## Routing body
+14. **MANIFEST.md triggers**: 2-4 natural language phrases in frontmatter
+15. **MANIFEST.md geo_description**: >= 50 chars, 3 layers (L1=what, L2=how, L3=when)
+16. **MEMORY.md memory_scope**: must be user | project | local (default: project)
+17. **MEMORY.md observation_types**: must be [user, feedback, project, reference] — never alter
+18. **MEMORY.md observation**: each observation MUST have type: field matching one of 4 types
+19. **CONFIG.md effort**: must be low | medium | high | max (default: medium)
+20. **CONFIG.md max_turns**: integer 1-100 (default: 25)
+21. **CONFIG.md disallowed_tools**: list of blocked tools (empty list = all allowed)
+22. **CONFIG.md permission_scope**: must be nucleus | pillar | global | restricted (default: nucleus)
+23. **TOOLS.md Tool Permissions**: ## Tool Permissions section required with ALLOWED/DENIED/EFFECTIVE
