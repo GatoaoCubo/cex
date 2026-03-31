@@ -10,8 +10,11 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: builder
 tags: [kind-builder, runtime-state, P10, specialist, runtime, memory]
+keywords: [runtime-state, mental-model, agent-state, routing, decisions, priorities, heuristics, state-machine]
+triggers: ["define agent runtime state", "what decisions does this agent make", "create runtime mental model"]
+geo_description: >
+  L1: Especialista em construir runtime_states — estados mentais variaveis que agentes. L2: Definir estado mental de agente com routing rules e decision trees. L3: When user needs to create, build, or scaffold runtime state.
 ---
-
 # runtime-state-builder
 ## Identity
 Especialista em construir runtime_states — estados mentais variaveis que agentes acumulam durante sessoes de runtime.

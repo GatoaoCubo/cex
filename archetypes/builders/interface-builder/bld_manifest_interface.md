@@ -10,8 +10,11 @@ created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
 tags: [kind-builder, interface, P06, specialist, integration]
+keywords: [interface, contract, integration, api, methods, bilateral, interop, agent-to-agent]
+triggers: ["define integration contract between agents", "what is the API between X and Y", "create interface for agent communication"]
+geo_description: >
+  L1: Especialista em construir interfaces — contratos bilaterais de integracao entre . L2: Definir contratos bilaterais com methods, input e output tipados. L3: When user needs to create, build, or scaffold interface.
 ---
-
 # interface-builder
 ## Identity
 Especialista em construir interfaces — contratos bilaterais de integracao entre agentes.

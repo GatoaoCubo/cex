@@ -10,8 +10,11 @@ created: 2026-03-31
 updated: 2026-03-31
 author: builder_agent
 tags: [effort-profile, P09, effort-profile, type-builder]
+keywords: [effort, thinking, model, haiku, sonnet, opus, low, medium]
+triggers: ["create effort profile", "define effort profile", "build effort profile config"]
+geo_description: >
+  L1: Especialista em construir effort_profile artifacts — effort and thinking level c. L2: Definir effort_profile com todos os campos obrigatorios do schema. L3: When user needs to create, build, or scaffold effort profile.
 ---
-
 # effort-profile-builder
 ## Identity
 Especialista em construir effort_profile artifacts — effort and thinking level configuration for builder execution.

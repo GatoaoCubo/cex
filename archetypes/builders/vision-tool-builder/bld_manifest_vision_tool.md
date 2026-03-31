@@ -10,8 +10,11 @@ created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
 tags: [kind-builder, vision-tool, P04, tools, image, ocr, screenshot]
+keywords: [vision, image, ocr, screenshot, photo, picture, scan, detect]
+triggers: ["create vision tool", "define image analyzer", "build OCR tool", "wrap screenshot reader"]
+geo_description: >
+  L1: Especialista em construir vision_tool artifacts — ferramentas de analise visual . L2: Definir ferramenta de visao com input_types e capabilities declaradas. L3: When user needs to create, build, or scaffold vision tool.
 ---
-
 # vision-tool-builder
 ## Identity
 Especialista em construir vision_tool artifacts — ferramentas de analise visual que processam

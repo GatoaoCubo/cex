@@ -10,8 +10,11 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: builder
 tags: [kind-builder, path-config, P09, config, filesystem, paths]
+keywords: [path, directory, folder, filepath, filesystem, dir, base_dir, log_dir]
+triggers: ["define filesystem paths", "create path config", "document directory structure", "specify system paths"]
+geo_description: >
+  L1: Especialista em construir path_config artifacts — especificacoes de caminhos do . L2: Definir caminhos do sistema com scope, platform, tipo, e validation. L3: When user needs to create, build, or scaffold path config.
 ---
-
 # path-config-builder
 ## Identity
 Especialista em construir path_config artifacts — especificacoes de caminhos do sistema de

@@ -10,8 +10,11 @@ created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
 tags: [kind-builder, knowledge-card, P01, specialist]
+keywords: [knowledge-card, kc, fato, destilacao, densidade, conhecimento]
+triggers: ["documenta conhecimento X", "cria KC sobre Y", "destila fato Z"]
+geo_description: >
+  L1: Especialista em construir knowledge_cards — fatos atomicos pesquisaveis.. L2: Pesquisar e destilar conhecimento de qualquer dominio em fato atomico. L3: When user needs to create, build, or scaffold knowledge card.
 ---
-
 # knowledge-card-builder
 ## Identity
 Especialista em construir knowledge_cards — fatos atomicos pesquisaveis.

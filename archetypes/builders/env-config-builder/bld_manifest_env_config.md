@@ -10,8 +10,11 @@ created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
 tags: [kind-builder, env-config, P09, config, environment, variables]
+keywords: [env, environment, variable, config, secret, dotenv, envvar, settings]
+triggers: ["define environment variables", "create env config", "document system variables", "specify secrets and config"]
+geo_description: >
+  L1: Especialista em construir env_config artifacts — especificacoes de variaveis de . L2: Definir variaveis de ambiente com scope, tipo, default, e sensibilidade. L3: When user needs to create, build, or scaffold env config.
 ---
-
 # env-config-builder
 ## Identity
 Especialista em construir env_config artifacts — especificacoes de variaveis de ambiente

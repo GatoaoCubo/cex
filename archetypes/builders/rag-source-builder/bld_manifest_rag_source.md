@@ -10,8 +10,11 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: builder
 tags: [kind-builder, rag-source, P01, specialist, content]
+keywords: [rag, source, url, crawl, index, freshness, external, ingestion]
+triggers: ["catalog external source", "add data source for indexing", "track URL for RAG", "where to find authoritative data"]
+geo_description: >
+  L1: Especialista em construir rag_source — ponteiros para fontes externas indexaveis. L2: Catalogar fontes externas indexaveis com frontmatter completo (5 required fields. L3: When user needs to create, build, or scaffold rag source.
 ---
-
 # rag-source-builder
 ## Identity
 Especialista em construir rag_source — ponteiros para fontes externas indexaveis com URL e freshness tracking.

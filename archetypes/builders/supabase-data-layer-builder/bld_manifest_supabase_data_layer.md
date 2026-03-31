@@ -11,8 +11,11 @@ domain: data_platform
 quality: null
 tags: [builder, supabase, data-layer, manifest, capabilities]
 density_score: 0.90
+keywords: ["data platform", data-layer, builder, capabilities, supabase, manifest]
+triggers: ["create data platform", "build data platform artifact"]
+geo_description: >
+  L1: | Field | Value |. L2: RLS on every table with user data. L3: When user needs to create, build, or scaffold data platform.
 ---
-
 # Builder Manifest
 
 ## Identity

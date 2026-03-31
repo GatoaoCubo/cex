@@ -10,8 +10,11 @@ updated: 2026-03-26
 author: codex
 parent: null
 tags: [kind-builder, dispatch_rule, P12, orchestration, routing, specialist]
+keywords: [dispatch, route, routing, roteamento, keyword, agent_node, scope, despacho]
+triggers: ["cria regra de dispatch", "roteia keywords para agent_node", "define quem recebe tarefa"]
+geo_description: >
+  L1: Especialista em construir `dispatch_rule` de P12: regras de despacho que mapeiam. L2: Produzir dispatch_rules com campos minimos e naming P12 corretos. L3: When user needs to create, build, or scaffold dispatch rule.
 ---
-
 # dispatch-rule-builder
 ## Identity
 Especialista em construir `dispatch_rule` de P12: regras de despacho que mapeiam

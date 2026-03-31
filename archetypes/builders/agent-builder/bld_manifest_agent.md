@@ -10,8 +10,11 @@ created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
 tags: [kind-builder, agent, P02, specialist, identity, capabilities, agent-package]
+keywords: [agent, persona, capabilities, identity, agent_node, iso-vectorstore, agent-creation, boot]
+triggers: ["create agent definition", "build agent with capabilities", "define agent persona and tools"]
+geo_description: >
+  L1: Especialista em construir `agent` artifacts — definicoes completas de agente (pe. L2: Pesquisar dominio do agente-alvo para definir persona, capabilities, e constrain. L3: When user needs to create, build, or scaffold agent.
 ---
-
 # agent-builder
 ## Identity
 Especialista em construir `agent` artifacts — definicoes completas de agente (persona + capabilities + iso_vectorstore).

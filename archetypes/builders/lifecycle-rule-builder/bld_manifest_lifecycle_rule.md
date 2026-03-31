@@ -2,8 +2,11 @@
 kind: manifest
 id: bld_manifest_lifecycle_rule
 pillar: P00
+keywords: [lifecycle-rule, freshness, archive, promote, demote, expiry, sunset, review-cycle]
+triggers: ["define lifecycle rule", "when should this artifact expire", "create freshness policy"]
+geo_description: >
+  L1: Especialista em construir lifecycle_rules — regras declarativas de ciclo de vida. L2: Definir regras de ciclo de vida com estados, transicoes e triggers temporais. L3: When user needs to create, build, or scaffold bld manifest lifecycle rule.
 ---
-
 ```yaml
 id: lifecycle-rule-builder
 kind: type_builder

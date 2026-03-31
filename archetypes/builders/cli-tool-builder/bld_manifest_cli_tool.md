@@ -10,8 +10,11 @@ created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
 tags: [kind-builder, cli-tool, P04, tools, command-line, terminal]
+keywords: [cli, tool, command, terminal, flag, arg, bash, shell]
+triggers: ["create CLI tool", "define command-line tool", "build terminal utility", "wrap script as tool"]
+geo_description: >
+  L1: Especialista em construir cli_tool artifacts — ferramentas de linha de comando p. L2: Definir ferramenta CLI com commands, flags, e args. L3: When user needs to create, build, or scaffold cli tool.
 ---
-
 # cli-tool-builder
 ## Identity
 Especialista em construir cli_tool artifacts — ferramentas de linha de comando pontuais

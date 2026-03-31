@@ -10,8 +10,11 @@ created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
 tags: [kind-builder, instruction, P03, specialist, steps, recipe]
+keywords: [instruction, steps, recipe, how-to, procedure, runbook, execution, prerequisites]
+triggers: ["create step-by-step instruction", "write execution recipe for task", "build operational runbook"]
+geo_description: >
+  L1: Especialista em construir instructions — receitas operacionais passo-a-passo par. L2: Decompor tarefas complexas em steps atomicos e sequenciais. L3: When user needs to create, build, or scaffold instruction.
 ---
-
 # instruction-builder
 ## Identity
 Especialista em construir instructions — receitas operacionais passo-a-passo para

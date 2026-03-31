@@ -10,8 +10,11 @@ created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
 tags: [kind-builder, browser-tool, P04, tools, dom, playwright, scraper, automation]
+keywords: [browser, dom, playwright, scrape, navigate, click, screenshot, puppeteer]
+triggers: ["create browser tool", "define scraper", "build DOM extractor", "wrap playwright automation"]
+geo_description: >
+  L1: Especialista em construir browser_tool artifacts — ferramentas de automacao de b. L2: Definir ferramenta de browser com engine e actions especificos. L3: When user needs to create, build, or scaffold browser tool.
 ---
-
 # browser-tool-builder
 ## Identity
 Especialista em construir browser_tool artifacts — ferramentas de automacao de browser que

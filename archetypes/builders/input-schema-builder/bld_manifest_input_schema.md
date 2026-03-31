@@ -10,8 +10,11 @@ created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
 tags: [kind-builder, input-schema, P06, specialist, contract]
+keywords: [input-schema, input, contract, entry, fields, required, defaults, coercion]
+triggers: ["define input contract for this agent", "what data does X need", "create entry schema"]
+geo_description: >
+  L1: Especialista em construir input_schemas — contratos unilaterais de entrada.. L2: Definir contratos de entrada com fields tipados e constraints. L3: When user needs to create, build, or scaffold input schema.
 ---
-
 # input-schema-builder
 ## Identity
 Especialista em construir input_schemas — contratos unilaterais de entrada.

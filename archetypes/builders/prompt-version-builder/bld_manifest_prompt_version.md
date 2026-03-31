@@ -10,8 +10,11 @@ created: 2026-03-29
 updated: 2026-03-29
 author: builder_agent
 tags: [prompt-version, P03, prompt-version, type-builder]
+keywords: ["prompt version", prompt-version, P03, prompt, version]
+triggers: ["create prompt version", "define prompt version", "build prompt version config"]
+geo_description: >
+  L1: Especialista em construir prompt_version artifacts — versioned prompt snapshots . L2: Definir prompt_version com todos os campos obrigatorios do schema. L3: When user needs to create, build, or scaffold prompt version.
 ---
-
 # prompt-version-builder
 ## Identity
 Especialista em construir prompt_version artifacts — versioned prompt snapshots for tracking and rollback.

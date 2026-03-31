@@ -10,8 +10,11 @@ created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
 tags: [kind-builder, agent-card, P08, specialist, architecture]
+keywords: [agent_node, spec, architecture, role, model, mcp, boot, dispatch]
+triggers: ["define a new agent_node", "spec this agent_node", "document agent_node architecture"]
+geo_description: >
+  L1: Especialista em construir agent_cards — especificacoes completas de satelites au. L2: Especificar satelites com role, model, MCPs e domain completos. L3: When user needs to create, build, or scaffold agent card.
 ---
-
 # agent-card-builder
 ## Identity
 Especialista em construir agent_cards — especificacoes completas de satelites autonomos.

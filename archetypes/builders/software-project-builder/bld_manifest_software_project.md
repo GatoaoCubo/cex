@@ -12,8 +12,11 @@ quality: 8.8
 tags: [builder, manifest, software-project, capabilities]
 tldr: "Capability manifest: 8 verticals (scaffold, implement, test, lint, docker, ci, deploy, review), 12 platform KCs consumed, 23 CEX tools available, 3 output modes (CLI, API, pipeline)."
 density_score: 0.89
+keywords: [software-engineering, manifest, software-project, builder, capabilities]
+triggers: ["create software-engineering", "build software-engineering artifact"]
+geo_description: >
+  L1: | Vertical | What It Does | Depends On |. L2: Max project complexity: 20 files. L3: When user needs to create, build, or scaffold software engineering.
 ---
-
 # Software Project Builder — Manifest
 
 ## Capabilities

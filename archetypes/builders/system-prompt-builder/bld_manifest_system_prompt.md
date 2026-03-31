@@ -10,8 +10,11 @@ created: 2026-03-26
 updated: 2026-03-26
 author: builder
 tags: [kind-builder, system-prompt, P03, specialist, identity, persona]
+keywords: [system-prompt, persona, identity, rules, always-never, agent-creation, system-message]
+triggers: ["create system prompt for agent", "define agent persona and rules", "build identity prompt"]
+geo_description: >
+  L1: Especialista em construir system_prompts — prompts de sistema que definem identi. L2: Pesquisar dominio do agente-alvo para definir persona e expertise. L3: When user needs to create, build, or scaffold system prompt.
 ---
-
 # system-prompt-builder
 ## Identity
 Especialista em construir system_prompts — prompts de sistema que definem identidade,

@@ -10,8 +10,11 @@ created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
 tags: [kind-builder, lens, P02, specialist, perspective]
+keywords: [lens, perspective, filter, viewpoint, bias, focus, interpretation, analysis]
+triggers: ["create a lens for X domain", "add perspective filter", "define analysis viewpoint"]
+geo_description: >
+  L1: Especialista em construir lenses — perspectivas especializadas aplicadas a artef. L2: Definir perspectivas com foco, filtros e bias declarados. L3: When user needs to create, build, or scaffold lens.
 ---
-
 # lens-builder
 ## Identity
 Especialista em construir lenses — perspectivas especializadas aplicadas a artefatos.

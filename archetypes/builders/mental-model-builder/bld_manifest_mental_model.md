@@ -10,8 +10,11 @@ created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
 tags: [kind-builder, mental-model, P02, specialist, routing, decision-tree, cognitive-map]
+keywords: [mental-model, routing, decision-tree, cognitive-map, heuristics, priorities, domain-map, agent-blueprint]
+triggers: ["create mental model for agent", "define routing rules and decisions", "build cognitive map for agent"]
+geo_description: >
+  L1: Especialista em construir `mental_model` (P02) artifacts — mapas cognitivos de d. L2: Produzir mental_model (P02) com frontmatter completo (14 required + 9 recommende. L3: When user needs to create, build, or scaffold mental model.
 ---
-
 # mental-model-builder
 ## Identity
 Especialista em construir `mental_model` (P02) artifacts — mapas cognitivos de design-time

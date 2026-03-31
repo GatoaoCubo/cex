@@ -10,8 +10,11 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: builder
 tags: [kind-builder, router, P02, specialist, routing, dispatch]
+keywords: [router, routing, dispatch, route-table, task-assignment, agent_node-routing, load-balance, confidence]
+triggers: ["create routing rules", "build router for task dispatch", "define route table for agent_nodes"]
+geo_description: >
+  L1: Especialista em construir `router` — logica de roteamento task-to-agent_node com. L2: Analisar dominios de task e requisitos de roteamento para desenhar route tables. L3: When user needs to create, build, or scaffold router.
 ---
-
 # router-builder
 ## Identity
 Especialista em construir `router` — logica de roteamento task-to-agent_node com route tables,

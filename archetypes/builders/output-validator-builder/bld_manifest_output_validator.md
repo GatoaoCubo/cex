@@ -10,8 +10,11 @@ created: 2026-03-29
 updated: 2026-03-29
 author: builder_agent
 tags: [output-validator, P05, output-validator, type-builder]
+keywords: ["output validator", output-validator, P05, output, validator]
+triggers: ["create output validator", "define output validator", "build output validator config"]
+geo_description: >
+  L1: Especialista em construir output_validator artifacts — post-LLM output validatio. L2: Definir output_validator com todos os campos obrigatorios do schema. L3: When user needs to create, build, or scaffold output validator.
 ---
-
 # output-validator-builder
 ## Identity
 Especialista em construir output_validator artifacts — post-LLM output validation and correction.

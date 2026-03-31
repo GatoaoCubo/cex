@@ -10,8 +10,11 @@ created: 2026-03-26
 updated: 2026-03-26
 author: orchestrator
 tags: [kind-builder, model-card, P02, specialist]
+keywords: [model-card, model, llm-spec, pricing, capabilities, provider]
+triggers: ["documenta modelo X", "qual modelo usar", "spec do LLM"]
+geo_description: >
+  L1: Especialista em construir model_cards — specs tecnicas de LLMs.. L2: Pesquisar specs de qualquer LLM (pricing, context, features). L3: When user needs to create, build, or scaffold model card.
 ---
-
 # model-card-builder
 ## Identity
 Especialista em construir model_cards — specs tecnicas de LLMs.

@@ -10,8 +10,11 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: builder
 tags: [kind-builder, scoring-rubric, P07, specialist, governance, evaluation]
+keywords: [scoring-rubric, rubric, evaluation-criteria, dimensions, weights, grading]
+triggers: ["define scoring criteria", "how to evaluate quality", "create evaluation rubric"]
+geo_description: >
+  L1: Especialista em construir scoring_rubrics — frameworks de avaliacao com dimensoe. L2: Projetar frameworks de avaliacao com dimensoes e pesos balanceados. L3: When user needs to create, build, or scaffold scoring rubric.
 ---
-
 # scoring-rubric-builder
 ## Identity
 Especialista em construir scoring_rubrics — frameworks de avaliacao com dimensoes ponderadas, thresholds por tier, e calibracao.

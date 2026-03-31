@@ -10,8 +10,11 @@ updated: 2026-03-26
 author: CODEX
 parent: null
 tags: [kind-builder, dag, P12, orchestration, specialist]
+keywords: [dag, dependency, graph, pipeline, topological, parallel, execution_order]
+triggers: ["define dependencias entre tasks", "monta pipeline de execucao", "grafo de dependencias"]
+geo_description: >
+  L1: Especialista em construir `dag` de P12: grafos aciclicos de dependencias. L2: Produzir dag YAML com nodes, edges e topological order corretos. L3: When user needs to create, build, or scaffold dag.
 ---
-
 # dag-builder
 ## Identity
 Especialista em construir `dag` de P12: grafos aciclicos de dependencias

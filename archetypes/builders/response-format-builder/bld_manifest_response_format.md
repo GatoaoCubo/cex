@@ -10,8 +10,11 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: builder
 tags: [kind-builder, response-format, P05, specialist, spec, output]
+keywords: [response-format, output-format, structured-output, json-mode, how-to-respond, output-structure]
+triggers: ["how should the LLM format its response", "define output structure", "create response format"]
+geo_description: >
+  L1: Especialista em construir response_formats — formatos de resposta injetados no p. L2: Projetar formatos de resposta com sections, fields, e examples. L3: When user needs to create, build, or scaffold response format.
 ---
-
 # response-format-builder
 ## Identity
 Especialista em construir response_formats — formatos de resposta injetados no prompt do LLM para guiar como o agente estrutura seu output.

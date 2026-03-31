@@ -10,8 +10,11 @@ created: 2026-03-29
 updated: 2026-03-29
 author: builder_agent
 tags: [handoff-protocol, P02, handoff-protocol, type-builder]
+keywords: ["handoff protocol", handoff-protocol, P02, handoff, protocol]
+triggers: ["create handoff protocol", "define handoff protocol", "build handoff protocol config"]
+geo_description: >
+  L1: Especialista em construir handoff_protocol artifacts — agent-to-agent handoff an. L2: Definir handoff_protocol com todos os campos obrigatorios do schema. L3: When user needs to create, build, or scaffold handoff protocol.
 ---
-
 # handoff-protocol-builder
 ## Identity
 Especialista em construir handoff_protocol artifacts — agent-to-agent handoff and context transfer.

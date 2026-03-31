@@ -10,8 +10,11 @@ updated: 2026-03-26
 author: CODEX
 parent: null
 tags: [kind-builder, handoff, P12, orchestration, specialist]
+keywords: [handoff, delegation, dispatch, task, context, scope_fence, commit]
+triggers: ["delega tarefa para satelite", "cria instrucao de handoff", "prepara execucao remota"]
+geo_description: >
+  L1: Especialista em construir `handoff` de P12: instrucoes completas de delegacao. L2: Produzir handoff markdown com campos obrigatorios e naming P12 corretos. L3: When user needs to create, build, or scaffold handoff.
 ---
-
 # handoff-builder
 ## Identity
 Especialista em construir `handoff` de P12: instrucoes completas de delegacao

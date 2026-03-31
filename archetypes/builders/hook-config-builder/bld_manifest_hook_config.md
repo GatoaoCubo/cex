@@ -10,8 +10,11 @@ created: 2026-03-31
 updated: 2026-03-31
 author: builder_agent
 tags: [hook-config, P04, hook-config, type-builder]
+keywords: ["hook config", hook-config, P04, hook, lifecycle, pre-build, post-build, on-error]
+triggers: ["create hook config", "define hook config", "build hook lifecycle config"]
+geo_description: >
+  L1: Especialista em construir hook_config artifacts — hook lifecycle configuration f. L2: Definir hook_config com todos os campos obrigatorios do schema. L3: When user needs to create, build, or scaffold hook config.
 ---
-
 # hook-config-builder
 ## Identity
 Especialista em construir hook_config artifacts — hook lifecycle configuration for builder execution.

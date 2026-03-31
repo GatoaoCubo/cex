@@ -10,8 +10,11 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: builder
 tags: [kind-builder, spawn-config, P12, specialist, orchestration, agent_node]
+keywords: [spawn, config, agent_node, solo, grid, continuous, terminal, deploy]
+triggers: ["create spawn config for agent_node", "configure grid spawn", "build solo spawn definition"]
+geo_description: >
+  L1: Especialista em construir `spawn_config` — configuracoes de spawn de satelites. L2: Produzir spawn_config com frontmatter completo (19 campos). L3: When user needs to create, build, or scaffold spawn config.
 ---
-
 # spawn-config-builder
 ## Identity
 Especialista em construir `spawn_config` — configuracoes de spawn de satelites

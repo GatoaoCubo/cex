@@ -10,8 +10,11 @@ created: 2026-03-26
 updated: 2026-03-26
 author: system
 tags: [kind-builder, optimizer, P11, specialist, governance]
+keywords: [optimizer, optimize, metric, action, threshold, tune, prune, scale]
+triggers: ["create optimizer", "optimize process", "metric > action", "tune pipeline"]
+geo_description: >
+  L1: Especialista em construir optimizers — artefatos que definem o ciclo metric>acti. L2: Definir targets de otimizacao com metricas concretas e direcao (minimize/maximiz. L3: When user needs to create, build, or scaffold optimizer.
 ---
-
 # optimizer-builder
 ## Identity
 Especialista em construir optimizers — artefatos que definem o ciclo metric>action para

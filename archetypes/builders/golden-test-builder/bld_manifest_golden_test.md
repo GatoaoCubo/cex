@@ -10,8 +10,11 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: builder_agent
 tags: [kind-builder, golden-test, P07, specialist, governance]
+keywords: [golden-test, golden, reference-test, calibration, quality-baseline, evaluation]
+triggers: ["create golden test", "calibrate evaluation", "reference example for quality"]
+geo_description: >
+  L1: Especialista em construir golden_tests — casos de teste referencia quality 9.5+ . L2: Selecionar artefatos quality 9.5+ como candidatos a golden. L3: When user needs to create, build, or scaffold golden test.
 ---
-
 # golden-test-builder
 ## Identity
 Especialista em construir golden_tests — casos de teste referencia quality 9.5+ para calibrar avaliacao de artefatos.

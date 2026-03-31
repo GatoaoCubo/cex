@@ -10,8 +10,11 @@ created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
 tags: [kind-builder, glossary-entry, P01, specialist, terminology]
+keywords: [glossary, term, definition, terminology, synonym, abbreviation, lexicon]
+triggers: ["define this term", "what does X mean in our system", "add glossary entry"]
+geo_description: >
+  L1: Especialista em construir glossary_entries — definicoes curtas de termos do domi. L2: Definir termos com definicoes concisas (max 3 linhas). L3: When user needs to create, build, or scaffold glossary entry.
 ---
-
 # glossary-entry-builder
 ## Identity
 Especialista em construir glossary_entries — definicoes curtas de termos do dominio.

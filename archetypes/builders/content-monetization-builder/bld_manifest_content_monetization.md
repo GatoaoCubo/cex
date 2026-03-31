@@ -10,8 +10,11 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 tags: [kind-builder, content-monetization, P04, billing, checkout, courses, pricing, credits]
+keywords: [monetizar, billing, checkout, curso, pricing, credits, payment, stripe]
+triggers: ["monetization config", "pricing strategy", "credit system", "checkout flow"]
+geo_description: >
+  L1: Especialista em construir configs de monetização de conteúdo: pricing, billing, . L2: Projetar pipeline 9-stage: PARSE→PRICING→CREDITS→CHECKOUT→COURSES→ADS→EMAILS→VAL. L3: When user needs to create, build, or scaffold content monetization.
 ---
-
 # content-monetization-builder
 
 ## Identity

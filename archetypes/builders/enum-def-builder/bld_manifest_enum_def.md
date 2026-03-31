@@ -10,8 +10,11 @@ created: 2026-03-29
 updated: 2026-03-29
 author: builder_agent
 tags: [kind-builder, enum-def, P06, schema, enumeration, finite-values]
+keywords: [enum, enumeration, values, options, choices, status, state, category]
+triggers: ["create enum", "define allowed values", "build enumeration", "list valid options"]
+geo_description: >
+  L1: Especialista em construir enum_def artifacts — enumeracoes reutilizaveis com con. L2: Definir enumeracao com values finitos e nomeados. L3: When user needs to create, build, or scaffold enum def.
 ---
-
 # enum-def-builder
 ## Identity
 Especialista em construir enum_def artifacts — enumeracoes reutilizaveis com conjuntos

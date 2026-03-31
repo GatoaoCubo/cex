@@ -10,8 +10,11 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: builder
 tags: [kind-builder, parser, P05, specialist, extraction, structured-data]
+keywords: [parser, extraction, parse, regex, structured-data, normalize, transform, scrape]
+triggers: ["create parser for output", "build extractor for JSON response", "define parser for log format"]
+geo_description: >
+  L1: Especialista em construir `parser` — extratores de dados estruturados a partir d. L2: Analisar formatos de input e definir extraction rules para dados estruturados. L3: When user needs to create, build, or scaffold parser.
 ---
-
 # parser-builder
 ## Identity
 Especialista em construir `parser` — extratores de dados estruturados a partir de saida bruta

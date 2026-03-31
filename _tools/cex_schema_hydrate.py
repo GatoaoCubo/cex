@@ -136,8 +136,10 @@ def _yaml_scalar(v) -> str:
     if isinstance(v, int):
         return str(v)
     if isinstance(v, str):
-        if any(c in v for c in "[]{},:\"'"):
-            return f'"{v}"'
+        # Quote if contains special chars or spaces (safer for triggers/keywords)
+        if any(c in v for c in "[]{},:\"' "):
+            escaped = v.replace('"', '\\"')
+            return f'"{escaped}"'
         return v
     return str(v)
 
@@ -152,7 +154,7 @@ def reassemble(raw_fm: str, body: str) -> str:
 # ---------------------------------------------------------------------------
 
 KW_RE = re.compile(r"keywords:\s*\[([^\]]*)\]", re.IGNORECASE)
-TRIGGER_RE = re.compile(r'triggers?:\s*["\']?(.+)', re.IGNORECASE)
+TRIGGER_RE = re.compile(r'triggers?:\s*(.+)', re.IGNORECASE)
 
 
 def extract_keywords_from_body(body: str) -> list[str]:

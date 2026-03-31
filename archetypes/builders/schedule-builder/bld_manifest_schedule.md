@@ -10,8 +10,11 @@ created: 2026-03-29
 updated: 2026-03-29
 author: builder_agent
 tags: [kind-builder, schedule, P12, orchestration, cron, temporal-trigger]
+keywords: [schedule, cron, trigger, interval, timer, temporal, recurring, workflow-start]
+triggers: ["create schedule", "define cron job", "set up recurring trigger", "schedule workflow run"]
+geo_description: >
+  L1: Especialista em construir schedule artifacts — definicoes de gatilhos temporais . L2: Definir schedule com trigger_type (cron, interval, event, manual, one_shot). L3: When user needs to create, build, or scaffold schedule.
 ---
-
 # schedule-builder
 ## Identity
 Especialista em construir schedule artifacts — definicoes de gatilhos temporais que

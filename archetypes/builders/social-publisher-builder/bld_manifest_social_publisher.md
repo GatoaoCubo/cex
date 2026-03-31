@@ -10,8 +10,11 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 tags: [kind-builder, social-publisher, P04, automation, social-media, scheduling, api]
+keywords: [social-media, auto-posting, instagram, facebook, tiktok, linkedin, ayrshare, postiz]
+triggers: ["create social publisher", "auto-posting system", "social media automation", "posting pipeline"]
+geo_description: >
+  L1: Especialista em construir sistemas de auto-posting para redes sociais. Destila u. L2: Projetar pipeline de 10 passos: LOAD > FETCH > SELECT > GENERATE > OPTIMIZE > HA. L3: When user needs to create, build, or scaffold social publisher.
 ---
-
 # social-publisher-builder
 
 ## Identity

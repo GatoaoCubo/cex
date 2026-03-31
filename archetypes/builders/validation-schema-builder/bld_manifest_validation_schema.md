@@ -10,8 +10,11 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: builder
 tags: [kind-builder, validation-schema, P06, specialist, spec, post-generation]
+keywords: [validation-schema, output-validation, post-generation, contract, field-check, schema-enforcement]
+triggers: ["validate output after generation", "what fields must the output have", "create post-generation contract"]
+geo_description: >
+  L1: Especialista em construir validation_schemas — contratos de validacao pos-geraca. L2: Projetar contratos de validacao com fields, types, e constraints estruturados. L3: When user needs to create, build, or scaffold validation schema.
 ---
-
 # validation-schema-builder
 ## Identity
 Especialista em construir validation_schemas — contratos de validacao pos-geracao que o SISTEMA aplica automaticamente (o LLM nao ve).

@@ -10,8 +10,11 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: builder_agent
 tags: [kind-builder, e2e-eval, P07, specialist, governance]
+keywords: [e2e-eval, end-to-end, pipeline-test, integration-test, acceptance-test, regression-test]
+triggers: ["test this pipeline", "verify end-to-end flow", "integration test for"]
+geo_description: >
+  L1: Especialista em construir e2e_evals — testes end-to-end que verificam pipelines . L2: Produzir e2e_eval com stages, data_fixtures e expected_output completo. L3: When user needs to create, build, or scaffold e2e eval.
 ---
-
 # e2e-eval-builder
 ## Identity
 Especialista em construir e2e_evals — testes end-to-end que verificam pipelines completos do input ao output final.

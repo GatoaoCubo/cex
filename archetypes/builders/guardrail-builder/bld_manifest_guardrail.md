@@ -10,8 +10,11 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: builder_agent
 tags: [kind-builder, guardrail, P11, specialist, governance, safety]
+keywords: [guardrail, safety, security-boundary, restriction, constraint, protection]
+triggers: ["define safety guardrail", "what restrictions apply", "create security boundary"]
+geo_description: >
+  L1: Especialista em construir guardrails — restricoes de seguranca e safety boundari. L2: Definir restricoes de seguranca com enforcement concreto. L3: When user needs to create, build, or scaffold guardrail.
 ---
-
 # guardrail-builder
 ## Identity
 Especialista em construir guardrails — restricoes de seguranca e safety boundaries aplicadas a agentes e artefatos.

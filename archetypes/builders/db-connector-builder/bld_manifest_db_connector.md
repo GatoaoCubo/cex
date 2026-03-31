@@ -10,8 +10,11 @@ created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
 tags: [kind-builder, connector, P04, tools, integration, bidirectional]
+keywords: [connector, integration, bidirectional, sync, service, webhook, transform, mapping]
+triggers: ["create service connector", "build bidirectional integration", "define two-way sync", "bridge external service"]
+geo_description: >
+  L1: Especialista em construir connector artifacts — conectores bidirecionais de serv. L2: Definir conector bidirecional com service name, protocol, e auth strategy. L3: When user needs to create, build, or scaffold connector.
 ---
-
 # db-connector-builder
 ## Identity
 Especialista em construir connector artifacts — conectores bidirecionais de servicos

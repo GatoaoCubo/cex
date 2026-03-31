@@ -10,8 +10,11 @@ created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
 tags: [kind-builder, mcp-server, P04, tools, infrastructure, transport]
+keywords: [mcp, server, tools, resources, transport, stdio, sse, http]
+triggers: ["create MCP server", "define tools for agent", "build MCP provider", "expose tools via MCP"]
+geo_description: >
+  L1: Especialista em construir mcp_server artifacts — servidores MCP (Model Context P. L2: Definir servidor MCP com transport correto (stdio/SSE/HTTP). L3: When user needs to create, build, or scaffold mcp server.
 ---
-
 # mcp-server-builder
 ## Identity
 Especialista em construir mcp_server artifacts — servidores MCP (Model Context Protocol)

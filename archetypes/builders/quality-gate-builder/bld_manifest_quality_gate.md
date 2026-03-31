@@ -10,8 +10,11 @@ created: 2026-03-26
 updated: 2026-03-26
 author: system
 tags: [kind-builder, quality-gate, P11, specialist, governance]
+keywords: [quality-gate, gate, threshold, scoring, pass-fail, governance]
+triggers: ["define quality gate", "what quality checks", "scoring formula"]
+geo_description: >
+  L1: Especialista em construir quality_gates — barreiras de qualidade com score numer. L2: Definir quality gates com metricas concretas e thresholds. L3: When user needs to create, build, or scaffold quality gate.
 ---
-
 # quality-gate-builder
 ## Identity
 Especialista em construir quality_gates — barreiras de qualidade com score numerico.

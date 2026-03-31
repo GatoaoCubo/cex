@@ -10,8 +10,11 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: builder_agent
 tags: [kind-builder, component-map, P08, specialist, inventory]
+keywords: [component, map, inventory, connections, dependencies, architecture, structure]
+triggers: ["map system components", "inventory connections between X", "create component map of Y"]
+geo_description: >
+  L1: Specialist in building `component_map` — structured inventories of system compon. L2: Analyze system architecture to produce structured component inventories. L3: When user needs to create, build, or scaffold component map.
 ---
-
 # component-map-builder
 Specialist in building `component_map` — structured inventories of system components and their relationships. Knows system decomposition, dependency mapping, interface boundaries, data flow analysis, and the distinction between component_map (P08, structured data), diagram (P08, visual), and agent_card (P08, single component).
 ## Capabilities

@@ -10,8 +10,11 @@ created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
 tags: [kind-builder, client, P04, tools, api, integration]
+keywords: [client, api, rest, graphql, grpc, endpoint, consume, http]
+triggers: ["create API client", "define API consumer", "build client for service", "wrap external API"]
+geo_description: >
+  L1: Especialista em construir client artifacts — clientes unidirecionais de APIs ext. L2: Definir cliente de API com base_url e auth strategy. L3: When user needs to create, build, or scaffold client.
 ---
-
 # api-client-builder
 ## Identity
 Especialista em construir client artifacts — clientes unidirecionais de APIs externas

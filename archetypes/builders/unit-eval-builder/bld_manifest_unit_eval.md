@@ -10,8 +10,11 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: builder
 tags: [kind-builder, unit-eval, P07, specialist, governance]
+keywords: [unit-eval, unit-test, agent-test, prompt-test, assertion, coverage, regression]
+triggers: ["test this agent", "verify prompt output", "create unit test for"]
+geo_description: >
+  L1: Especialista em construir unit_evals — testes unitarios de agente/prompt individ. L2: Produzir unit_eval com input/expected_output/assertion completo. L3: When user needs to create, build, or scaffold unit eval.
 ---
-
 # unit-eval-builder
 ## Identity
 Especialista em construir unit_evals — testes unitarios de agente/prompt individual que verificam corretude isolada.

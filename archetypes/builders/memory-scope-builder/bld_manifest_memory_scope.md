@@ -10,8 +10,11 @@ created: 2026-03-29
 updated: 2026-03-29
 author: builder_agent
 tags: [memory-scope, P02, memory-scope, type-builder]
+keywords: ["memory scope", memory-scope, P02, memory, scope]
+triggers: ["create memory scope", "define memory scope", "build memory scope config"]
+geo_description: >
+  L1: Especialista em construir memory_scope artifacts — agent memory configuration an. L2: Definir memory_scope com todos os campos obrigatorios do schema. L3: When user needs to create, build, or scaffold memory scope.
 ---
-
 # memory-scope-builder
 ## Identity
 Especialista em construir memory_scope artifacts — agent memory configuration and scope.

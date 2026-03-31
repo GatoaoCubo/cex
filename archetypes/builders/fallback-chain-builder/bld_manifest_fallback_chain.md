@@ -10,8 +10,11 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: builder_agent
 tags: [kind-builder, fallback-chain, P02, specialist, resilience, degradation]
+keywords: [fallback, chain, degradation, resilience, model-fallback, circuit-breaker, retry, timeout]
+triggers: ["create fallback chain", "build model degradation sequence", "define fallback from opus to haiku"]
+geo_description: >
+  L1: Especialista em construir `fallback_chain` — sequencias de degradacao graceful d. L2: Analisar requisitos de resiliencia para desenhar sequencias de fallback modelo-a. L3: When user needs to create, build, or scaffold fallback chain.
 ---
-
 # fallback-chain-builder
 ## Identity
 Especialista em construir `fallback_chain` — sequencias de degradacao graceful de modelo

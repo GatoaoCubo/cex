@@ -10,8 +10,11 @@ created: 2026-03-29
 updated: 2026-03-29
 author: builder_agent
 tags: [retriever-config, P01, retriever-config, type-builder]
+keywords: ["retriever config", retriever-config, P01, retriever, config]
+triggers: ["create retriever config", "define retriever config", "build retriever config config"]
+geo_description: >
+  L1: Especialista em construir retriever_config artifacts — retrieval configuration f. L2: Definir retriever_config com todos os campos obrigatorios do schema. L3: When user needs to create, build, or scaffold retriever config.
 ---
-
 # retriever-config-builder
 ## Identity
 Especialista em construir retriever_config artifacts — retrieval configuration for RAG search.

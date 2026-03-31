@@ -10,8 +10,11 @@ created: 2026-03-29
 updated: 2026-03-29
 author: builder_agent
 tags: [constraint-spec, P03, constraint-spec, type-builder]
+keywords: ["constraint spec", constraint-spec, P03, constraint, spec]
+triggers: ["create constraint spec", "define constraint spec", "build constraint spec config"]
+geo_description: >
+  L1: Especialista em construir constraint_spec artifacts — constrained LLM generation. L2: Definir constraint_spec com todos os campos obrigatorios do schema. L3: When user needs to create, build, or scaffold constraint spec.
 ---
-
 # constraint-spec-builder
 ## Identity
 Especialista em construir constraint_spec artifacts — constrained LLM generation rules.

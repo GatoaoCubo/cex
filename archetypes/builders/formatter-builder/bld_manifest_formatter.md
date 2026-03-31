@@ -10,8 +10,11 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: builder_agent
 tags: [kind-builder, formatter, P05, specialist, output-format, presentation]
+keywords: [formatter, format, output, pretty-print, template, serialize, render, display]
+triggers: ["format output as markdown", "build formatter for JSON display", "create table formatter"]
+geo_description: >
+  L1: Especialista em construir `formatter` — transformadores de formato de saida que . L2: Analisar dados de entrada e definir regras de transformacao para formato de said. L3: When user needs to create, build, or scaffold formatter.
 ---
-
 # formatter-builder
 ## Identity
 Especialista em construir `formatter` — transformadores de formato de saida que convertem dados

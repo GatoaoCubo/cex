@@ -10,6 +10,10 @@ created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
 tags: [kind-builder, retriever, P04, tools, vector-search, RAG, embedding, hybrid-search]
+keywords: [retriever, vector, embedding, similarity, RAG, search, hybrid, BM25]
+triggers: ["create retriever", "build retriever artifact"]
+geo_description: >
+  L1: Specialist in building retriever artifacts — vector/keyword/hybrid search over l. L2: Define vector store connection with embedding model and similarity metric. L3: When user needs to create, build, or scaffold retriever.
 ---
 # retriever-builder
 

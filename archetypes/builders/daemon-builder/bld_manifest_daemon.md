@@ -10,8 +10,11 @@ created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
 tags: [kind-builder, daemon, P04, tools, background, persistent]
+keywords: [daemon, background, process, persistent, schedule, cron, service, watcher]
+triggers: ["create background process", "define persistent daemon", "build watcher service", "run scheduled background task"]
+geo_description: >
+  L1: Especialista em construir daemon artifacts — processos background persistentes q. L2: Definir processo background com schedule e restart policy. L3: When user needs to create, build, or scaffold daemon.
 ---
-
 # daemon-builder
 ## Identity
 Especialista em construir daemon artifacts — processos background persistentes que

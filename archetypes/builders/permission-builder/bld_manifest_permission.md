@@ -10,8 +10,11 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: builder
 tags: [kind-builder, permission, P09, specialist, governance, access-control]
+keywords: [permission, access, read, write, execute, role, acl, rbac]
+triggers: ["define access permission", "who can read/write", "create access control rule"]
+geo_description: >
+  L1: Especialista em construir permissions — regras de controle de acesso (read/write. L2: Definir regras de acesso com scope, roles, e granularidade. L3: When user needs to create, build, or scaffold permission.
 ---
-
 # permission-builder
 ## Identity
 Especialista em construir permissions — regras de controle de acesso (read/write/execute) aplicadas a agentes, artefatos e recursos.

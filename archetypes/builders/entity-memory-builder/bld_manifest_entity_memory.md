@@ -10,8 +10,11 @@ created: 2026-03-29
 updated: 2026-03-29
 author: builder_agent
 tags: [kind-builder, entity-memory, P10, memory, entity, attributes, relationships]
+keywords: [entity, memory, person, tool, concept, attributes, facts, relationships]
+triggers: ["store entity facts", "remember tool details", "track person attributes", "entity knowledge card"]
+geo_description: >
+  L1: Especialista em construir entity_memory artifacts — registros estruturados de fa. L2: Extrair e estruturar fatos sobre uma entidade como key-value attributes. L3: When user needs to create, build, or scaffold entity memory.
 ---
-
 # entity-memory-builder
 ## Identity
 Especialista em construir entity_memory artifacts — registros estruturados de fatos sobre

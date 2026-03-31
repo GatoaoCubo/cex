@@ -10,8 +10,11 @@ created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
 tags: [kind-builder, action-prompt, P03, specialist, task, execution]
+keywords: [action-prompt, task-prompt, execution-prompt, input-output, user-prompt, task-focused]
+triggers: ["create action prompt for task", "build task prompt with defined I/O", "write execution prompt"]
+geo_description: >
+  L1: Especialista em construir action_prompts — prompts de acao task-focused com inpu. L2: Definir prompts de acao com input/output contracts claros. L3: When user needs to create, build, or scaffold action prompt.
 ---
-
 # action-prompt-builder
 ## Identity
 Especialista em construir action_prompts — prompts de acao task-focused com input/output

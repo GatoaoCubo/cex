@@ -10,8 +10,11 @@ created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
 tags: [kind-builder, boot-config, P02, specialist, initialization, provider]
+keywords: [boot-config, initialization, provider, bootstrap, startup, config, flags, mcp-config]
+triggers: ["configure boot for claude provider", "create initialization config", "set up agent bootstrap parameters"]
+geo_description: >
+  L1: Especialista em construir `boot_config` artifacts — configuracoes de inicializac. L2: Produzir boot_config com frontmatter completo (15 campos required + 7 recommende. L3: When user needs to create, build, or scaffold boot config.
 ---
-
 # boot-config-builder
 ## Identity
 Especialista em construir `boot_config` artifacts — configuracoes de inicializacao

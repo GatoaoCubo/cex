@@ -10,8 +10,11 @@ created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
 tags: [kind-builder, audio-tool, P04, tools, speech, tts, stt, voice]
+keywords: [audio, speech, voice, tts, stt, whisper, transcribe, synthesize]
+triggers: ["create audio tool", "define speech tool", "build TTS", "wrap transcription service"]
+geo_description: >
+  L1: Especialista em construir audio_tool artifacts — ferramentas que processam input. L2: Definir ferramenta de audio com direction e models. L3: When user needs to create, build, or scaffold audio tool.
 ---
-
 # audio-tool-builder
 ## Identity
 Especialista em construir audio_tool artifacts — ferramentas que processam input e output

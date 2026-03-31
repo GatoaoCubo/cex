@@ -10,8 +10,11 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: builder_agent
 tags: [kind-builder, context-doc, P01, specialist, content]
+keywords: [context, domain, scope, background, hydration, onboarding, planning]
+triggers: ["create domain context", "background for prompt", "what context does this domain need", "onboarding document"]
+geo_description: >
+  L1: Especialista em construir context_doc — documentos de contexto de dominio para h. L2: Produzir context_doc com frontmatter completo e todos os campos obrigatorios. L3: When user needs to create, build, or scaffold context doc.
 ---
-
 # context-doc-builder
 ## Identity
 Especialista em construir context_doc — documentos de contexto de dominio para hidratar prompts.

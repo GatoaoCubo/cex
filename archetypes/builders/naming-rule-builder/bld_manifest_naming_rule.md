@@ -10,8 +10,11 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: builder
 tags: [kind-builder, naming-rule, P05, specialist, convention]
+keywords: ["naming rule", naming-rule, convention, P05]
+triggers: ["create naming rule", "build naming rule artifact"]
+geo_description: >
+  L1: Specialist builder for the `naming_rule` kind (P05). Activates when a naming con. L2: Define scope-bound naming patterns using regex or glob notation. L3: When user needs to create, build, or scaffold naming rule.
 ---
-
 # Naming Rule Builder — MANIFEST
 ## Identity
 Specialist builder for the `naming_rule` kind (P05). Activates when a naming convention for CEX artifacts, files, variables, or any nameable entity must be formally defined. Operates under `BECOME` mode: the LLM fully adopts the persona of a naming architect.

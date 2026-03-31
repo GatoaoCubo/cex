@@ -10,8 +10,11 @@ created: 2026-03-26
 updated: 2026-03-26
 author: builder
 tags: [kind-builder, validator, P06, specialist, governance]
+keywords: [validator, validation, pre-commit, rule, check, constraint, pass-fail]
+triggers: ["define validation rule", "what should be checked before commit", "create pre-commit validator"]
+geo_description: >
+  L1: Especialista em construir validators — regras de validacao tecnica pass/fail.. L2: Definir regras de validacao com conditions estruturadas (field/operator/value). L3: When user needs to create, build, or scaffold validator.
 ---
-
 # validator-builder
 ## Identity
 Especialista em construir validators — regras de validacao tecnica pass/fail.

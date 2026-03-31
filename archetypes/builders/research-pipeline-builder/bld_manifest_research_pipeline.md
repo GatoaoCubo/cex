@@ -10,8 +10,11 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 tags: [kind-builder, research-pipeline, P04, STORM, CRAG, CRITIC, multi-model, intelligence]
+keywords: [research, pesquisa, mercado, concorrente, competitor, STORM, CRAG, market-intelligence]
+triggers: ["research pipeline", "pesquisa de mercado", "analise competitiva", "market intelligence"]
+geo_description: >
+  L1: Especialista em construir pipelines de pesquisa de mercado baseados em STORM+CRA. L2: Projetar pipeline 7-stage: INTENT → PLAN(STORM) → RETRIEVE(CRAG) → RESOLVE → SCO. L3: When user needs to create, build, or scaffold research pipeline.
 ---
-
 # research-pipeline-builder
 
 ## Identity

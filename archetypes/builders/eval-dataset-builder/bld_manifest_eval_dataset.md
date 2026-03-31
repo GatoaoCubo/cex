@@ -10,8 +10,11 @@ created: 2026-03-29
 updated: 2026-03-29
 author: builder_agent
 tags: [kind-builder, eval-dataset, P07, evals, test-cases, dataset]
+keywords: [eval, dataset, test-cases, evaluation, splits, schema, braintrust, langsmith]
+triggers: ["create eval dataset", "define test case collection", "build evaluation dataset", "curate LLM test cases"]
+geo_description: >
+  L1: Especialista em construir eval_dataset artifacts — colecoes curadas de test case. L2: Definir colecao de test cases com schema input/expected_output/metadata. L3: When user needs to create, build, or scaffold eval dataset.
 ---
-
 # eval-dataset-builder
 ## Identity
 Especialista em construir eval_dataset artifacts — colecoes curadas de test cases para

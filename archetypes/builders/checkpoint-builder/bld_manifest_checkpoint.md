@@ -10,8 +10,11 @@ created: 2026-03-29
 updated: 2026-03-29
 author: builder_agent
 tags: [kind-builder, checkpoint, P12, orchestration, workflow, resume, state]
+keywords: [checkpoint, workflow, state, resume, snapshot, persist, ttl, chain]
+triggers: ["create checkpoint", "save workflow state", "define resume point", "snapshot workflow step"]
+geo_description: >
+  L1: Especialista em construir checkpoint artifacts — snapshots de estado de workflow. L2: Definir checkpoint com workflow_ref, step, e state serializado. L3: When user needs to create, build, or scaffold checkpoint.
 ---
-
 # checkpoint-builder
 ## Identity
 Especialista em construir checkpoint artifacts — snapshots de estado de workflow em um

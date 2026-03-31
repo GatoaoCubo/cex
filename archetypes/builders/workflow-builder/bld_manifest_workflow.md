@@ -10,8 +10,11 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: builder
 tags: [kind-builder, workflow, P12, specialist, orchestration, multi-step]
+keywords: [workflow, orchestration, multi-step, wave, parallel, sequential, mission, pipeline]
+triggers: ["create workflow for mission", "build multi-agent_node orchestration", "design step-by-step agent flow"]
+geo_description: >
+  L1: Especialista em construir `workflow` — fluxos de trabalho com steps sequenciais . L2: Decompor missoes complexas em steps com agentes e dependencias. L3: When user needs to create, build, or scaffold workflow.
 ---
-
 # workflow-builder
 ## Identity
 Especialista em construir `workflow` — fluxos de trabalho com steps sequenciais e/ou

@@ -10,8 +10,11 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: builder_agent
 tags: [kind-builder, axiom, P10, specialist, memory]
+keywords: [axiom, regra-fundamental, imutavel, verdade, principio, invariante]
+triggers: ["define axiom X", "formalize fundamental rule Y", "document immutable truth Z"]
+geo_description: >
+  L1: Especialista em construir axioms — regras fundamentais imutaveis do sistema.. L2: Identificar e formalizar regras fundamentais imutaveis de qualquer dominio. L3: When user needs to create, build, or scaffold axiom.
 ---
-
 # axiom-builder
 ## Identity
 Especialista em construir axioms — regras fundamentais imutaveis do sistema.

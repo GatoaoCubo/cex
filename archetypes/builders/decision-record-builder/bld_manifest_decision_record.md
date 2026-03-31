@@ -10,8 +10,11 @@ created: 2026-03-29
 updated: 2026-03-29
 author: builder_agent
 tags: [kind-builder, decision-record, P08, architecture, ADR, adr-tools]
+keywords: [ADR, decision, architecture, record, tradeoff, proposed, accepted, superseded]
+triggers: ["create ADR", "document architecture decision", "record design choice", "write decision record"]
+geo_description: >
+  L1: Especialista em construir decision_record artifacts — Architecture Decision Reco. L2: Definir ADR com titulo, status, contexto, decisao, consequencias e opcoes. L3: When user needs to create, build, or scaffold decision record.
 ---
-
 # decision-record-builder
 ## Identity
 Especialista em construir decision_record artifacts — Architecture Decision Records (ADRs)

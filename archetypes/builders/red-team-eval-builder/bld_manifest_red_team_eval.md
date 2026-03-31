@@ -10,8 +10,11 @@ created: 2026-03-29
 updated: 2026-03-29
 author: builder_agent
 tags: [kind-builder, red-team-eval, P07, evals, adversarial, safety, llm-security]
+keywords: ["red team", adversarial, jailbreak, "prompt injection", "PII leak", toxicity, bias, safety]
+triggers: ["create red team eval", "adversarial test config", "define jailbreak eval", "build safety evaluation"]
+geo_description: >
+  L1: Especialista em construir red_team_eval artifacts — configuracoes de avaliacao a. L2: Definir configuracao de avaliacao adversarial com attack_types concretos. L3: When user needs to create, build, or scaffold red team eval.
 ---
-
 # red-team-eval-builder
 ## Identity
 Especialista em construir red_team_eval artifacts — configuracoes de avaliacao adversarial

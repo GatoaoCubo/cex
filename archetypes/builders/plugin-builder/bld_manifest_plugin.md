@@ -10,8 +10,11 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: builder
 tags: [kind-builder, plugin, P04, specialist, extension, modular]
+keywords: [plugin, extension, modular, pluggable, addon, integrate, extend, api-surface]
+triggers: ["create plugin for system extension", "build pluggable module", "define extensible component"]
+geo_description: >
+  L1: Especialista em construir `plugin` — extensoes plugaveis ao sistema com interfac. L2: Analisar requisitos de extensibilidade e definir interface contracts. L3: When user needs to create, build, or scaffold plugin.
 ---
-
 # plugin-builder
 ## Identity
 Especialista em construir `plugin` — extensoes plugaveis ao sistema com interface contract,

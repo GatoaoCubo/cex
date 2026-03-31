@@ -10,8 +10,11 @@ created: 2026-03-29
 updated: 2026-03-29
 author: builder_agent
 tags: [chunk-strategy, P01, chunk-strategy, type-builder]
+keywords: ["chunk strategy", chunk-strategy, P01, chunk, strategy]
+triggers: ["create chunk strategy", "define chunk strategy", "build chunk strategy config"]
+geo_description: >
+  L1: Especialista em construir chunk_strategy artifacts — text chunking and splitting. L2: Definir chunk_strategy com todos os campos obrigatorios do schema. L3: When user needs to create, build, or scaffold chunk strategy.
 ---
-
 # chunk-strategy-builder
 ## Identity
 Especialista em construir chunk_strategy artifacts — text chunking and splitting for RAG pipelines.

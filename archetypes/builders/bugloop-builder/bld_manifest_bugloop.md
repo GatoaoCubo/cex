@@ -10,8 +10,11 @@ created: 2026-03-26
 updated: 2026-03-26
 author: orchestrator
 tags: [kind-builder, bugloop, P11, specialist, governance, feedback]
+keywords: [bugloop, detect-fix-verify, auto-fix, correction-cycle, test-failure, regression]
+triggers: ["create bugloop", "auto fix cycle", "detect and fix", "correction loop"]
+geo_description: >
+  L1: Especialista em construir bugloops — ciclos automaticos de correcao (detect > fi. L2: Definir detection patterns com triggers concretos (regex, test failure signature. L3: When user needs to create, build, or scaffold bugloop.
 ---
-
 # bugloop-builder
 ## Identity
 Especialista em construir bugloops — ciclos automaticos de correcao (detect > fix > verify).

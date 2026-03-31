@@ -10,8 +10,11 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: builder_agent
 tags: [kind-builder, chain, P03, specialist, pipeline, sequential]
+keywords: [chain, pipeline, sequential, prompt-chain, multi-step, composition, LLMChain]
+triggers: ["create prompt chain for pipeline", "build sequential prompt flow", "design multi-step prompt chain"]
+geo_description: >
+  L1: Especialista em construir `chain` — sequencias de prompts encadeados onde output. L2: Decompor tarefas complexas em steps atomicos de prompt (1 step = 1 LLM call). L3: When user needs to create, build, or scaffold chain.
 ---
-
 # chain-builder
 ## Identity
 Especialista em construir `chain` — sequencias de prompts encadeados onde output A

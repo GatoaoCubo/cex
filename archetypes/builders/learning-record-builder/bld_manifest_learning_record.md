@@ -10,8 +10,11 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: builder_agent
 tags: [kind-builder, learning-record, P10, specialist, memory]
+keywords: [learning, aprendizado, experiencia, pattern, anti-pattern, retrospective]
+triggers: ["registra aprendizado X", "documenta o que deu certo em Y", "capture learning from Z"]
+geo_description: >
+  L1: Especialista em construir learning_records — registros de aprendizado persistent. L2: Capturar experiencias de sucesso e falha como registros estruturados. L3: When user needs to create, build, or scaffold learning record.
 ---
-
 # learning-record-builder
 ## Identity
 Especialista em construir learning_records — registros de aprendizado persistentes.

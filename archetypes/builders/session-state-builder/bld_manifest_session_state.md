@@ -10,8 +10,11 @@ created: 2026-03-26
 updated: 2026-03-26
 author: CODEX
 tags: [kind-builder, session-state, P10, memory, specialist]
+keywords: [session, snapshot, state, checkpoint, ephemeral, context_window, tokens]
+triggers: ["captura estado da sessao", "snapshot de contexto atual", "registra checkpoint"]
+geo_description: >
+  L1: Especialista em construir `session_state` de P10: snapshots efemeros de sessao. L2: Produzir session_state YAML com campos minimos e naming P10 corretos. L3: When user needs to create, build, or scaffold session state.
 ---
-
 # session-state-builder
 ## Identity
 Especialista em construir `session_state` de P10: snapshots efemeros de sessao

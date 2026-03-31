@@ -10,8 +10,11 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: builder_agent
 tags: [kind-builder, hook, P04, specialist, event, lifecycle]
+keywords: [hook, trigger, event, pre, post, lifecycle, callback, intercept]
+triggers: ["create hook for tool events", "build pre-processing hook", "define post-stop hook"]
+geo_description: >
+  L1: Especialista em construir `hook` — gatilhos de pre/post processing executaveis e. L2: Analisar eventos do sistema e definir trigger configurations. L3: When user needs to create, build, or scaffold hook.
 ---
-
 # hook-builder
 ## Identity
 Especialista em construir `hook` — gatilhos de pre/post processing executaveis em eventos
