@@ -1,0 +1,206 @@
+---
+id: p01_kc_content_monetization
+kind: knowledge_card
+pillar: P01
+title: Content Monetization — Billing, Credits, Courses & Checkout
+version: 1.0.0
+created: 2026-03-31
+updated: 2026-03-31
+author: n06_commercial
+domain: content-monetization
+quality: null
+tags: [content-monetization, billing, credits, checkout, courses, PIX, MercadoPago, Stripe, N06]
+tldr: Distilled knowledge for N06 content monetization pipeline — BRL credit wallet, payment providers, course LLM generation, ad validation, email automation, and ERP sync.
+when_to_use: When implementing or reasoning about content monetization flows involving billing, credits, course generation, checkout, ad validation, or ERP integration.
+keywords: [monetização, billing, créditos, checkout, PIX, assinatura, curso, geração de curso, anúncio, email]
+long_tails:
+  - "Como integrar MercadoPago PIX com sistema de créditos em BRL centavos"
+  - "Pipeline LLM sequencial para geração de curso: outline→módulo→sales page→email"
+  - "Sistema de wallet prepago com PIPELINE_COSTS por operação"
+  - "Checkout com Stripe vs MercadoPago — modo LIVE/TEST/MOCK"
+  - "Validação de anúncios com detecção de fabricação e confidence scoring"
+axioms:
+  - "ALWAYS store credit balances in BRL centavos (integer) — float rounding causes billing drift."
+  - "NEVER charge credits before consuming the service — consume+refund pattern prevents double-spend."
+  - "ALWAYS implement MOCK mode for all payment providers — eliminates test card debt in staging."
+  - "NEVER hardcode pipeline costs — reference PIPELINE_COSTS dict, never inline integers."
+linked_artifacts:
+  primary: p04_fn_content_monetization
+  related:
+    - p12_dr_content_monetization
+    - p12_wf_content_monetization
+    - p01_kc_stripe_patterns
+    - p01_kc_credit_system_design
+    - p01_kc_course_generation
+    - p01_kc_ad_validation
+    - p01_kc_email_automation
+    - p01_kc_mercadopago_pix
+    - p01_kc_pricing_strategy
+    - p01_kc_erp_integration
+density_score: null
+data_source: codexa-core (billing_executor, credit_system, cursos_executor, erp_connector, anuncio_validator, email_templates, mercadopago_executor)
+---
+
+# Content Monetization — Billing, Credits, Courses & Checkout
+
+## Quick Reference
+
+```yaml
+domain: content-monetization
+nucleus: N06
+pipeline: PARSE→PRICING→CREDITS→CHECKOUT→COURSES→ADS→EMAILS→VALIDATE→DEPLOY
+providers: [stripe, mercadopago]
+currency: BRL centavos (integer)
+modes: [LIVE, TEST, MOCK]
+credit_unit: centavo BRL (1 BRL = 100 créditos)
+```
+
+## Conceitos-Chave
+
+### Credit Wallet (BRL Centavos)
+Prepaid wallet where all values are stored as integer centavos to avoid float rounding errors.
+- `add_credits(user_id, amount_centavos, idempotency_key)` — top-up with dedup key
+- `consume(user_id, operation, idempotency_key)` — deduct PIPELINE_COSTS[operation]
+- `refund(user_id, operation, idempotency_key)` — rollback on downstream failure
+- `check_sufficient(user_id, operation)` — gate before execution, NOT after
+
+### PIPELINE_COSTS Reference
+| Operation | Cost (centavos) | Margin (cost-plus) |
+|-----------|----------------|-------------------|
+| PESQUISA  | 75             | 44% over API cost |
+| ANUNCIO   | 50             | 55% over API cost |
+| FOTO      | 100            | 47% over API cost |
+| FULL      | 200            | bundle discount   |
+
+### Payment Modes (BillingExecutor)
+| Mode | Behavior | Use Case |
+|------|----------|----------|
+| LIVE | Real charges, real webhooks | Production |
+| TEST | Stripe test mode / MP sandbox | QA |
+| MOCK | In-memory, no API calls | Dev/CI |
+
+Mode auto-detected from env vars — never hardcode.
+
+### Pack Architecture
+Default packs with tiered discount:
+| Pack | BRL | Credits | Bonus |
+|------|-----|---------|-------|
+| Starter | R$5 | 500 | 0% |
+| Standard | R$20 | 2100 | 5% |
+| Pro | R$60 | 6600 | 10% |
+
+PIX always available for purchase_pack_pix (MercadoPago) — lower friction than card for BR market.
+
+## Strategy Phases (Pipeline)
+
+### PARSE
+- Extract intent: product_type, target_audience, monetization_goal
+- Resolve payment_provider from config (default: mercadopago for BRL)
+- Validate required fields
+
+### PRICING
+- Load PIPELINE_COSTS for estimated operation count
+- Apply pricing_tier logic (free/pro/enterprise)
+- Calculate expected credit consumption
+
+### CREDITS
+- `check_sufficient(user_id, estimated_cost)`
+- On insufficient: return checkout_url for pack purchase
+- On sufficient: lock credits (idempotency_key = session_id)
+
+### CHECKOUT
+- Stripe: `create_checkout_session(product, price_id, customer_id)`
+- MercadoPago: `create_preference(title, unit_price, payer_email)` → PIX/boleto/card
+- Webhook on `checkout.session.completed` / IPN payment.approved
+- Idempotent: event_id as idempotency key prevents double-credit
+
+### COURSES (LLM Sequential Chain)
+```
+outline(topic, audience) → ModuleOutput × N → SalesPageOutput → EmailSequenceOutput
+```
+Each step validates Pydantic model. Mock fallback if LLM quota exceeded.
+
+### ADS
+- `AnuncioValidator.validate(ad_content, product_facts)`
+- FABRICATION_PATTERNS regex scan → confidence_score
+- Retry-with-sections if score < 0.7: regenerate flagged sections only
+
+### EMAILS
+- `TEMPLATES[email_type]` dict lookup → personalize with BRL formatting
+- Transactional (purchase confirmation, credit alert) vs marketing (launch sequence)
+- BRL: `f"R${amount/100:,.2f}"` — always display from centavos
+
+### VALIDATE → DEPLOY
+- Final gate: pricing margins > 30%, mock fallback exists, webhook idempotent
+- Deploy: write monetization_config to instance, signal N06 complete
+
+## Regras de Ouro
+
+1. Centavos never floats. All credit math is integer arithmetic — no rounding bugs.
+2. Idempotency everywhere. Every billing call carries a unique key — double-webhooks are safe.
+3. Mock is mandatory. Every payment path has a MOCK mode — no real charges in CI.
+4. Consume before claim. Check balance → lock → execute → confirm. Never execute then charge.
+5. Course generation is sequential. Each LLM step validates Pydantic output before passing to next.
+6. Fabrication detection is non-negotiable. All ad content passes confidence_score >= 0.7.
+7. PIX for BR market. Always offer PIX as default — 40% lower abandonment than card for BR.
+
+## Visual Flow
+
+```
+[intent]
+    │
+    ▼
+[PARSE] ──── payment_provider, product_type, audience
+    │
+    ▼
+[PRICING] ── tier resolution, cost estimation
+    │
+    ▼
+[CREDITS] ── check_sufficient → lock
+    │         ▼ (insufficient)
+    │     [CHECKOUT] ── PIX/Stripe session
+    │
+    ▼
+[COURSES] ── outline→module→sales_page→emails (sequential LLM chain)
+    │
+    ▼
+[ADS] ────── validate, confidence_score >= 0.7
+    │
+    ▼
+[EMAILS] ── templates, BRL formatting
+    │
+    ▼
+[VALIDATE] ─ gates: margin, mock, idempotent
+    │
+    ▼
+[DEPLOY] ─── monetization_config saved, signal sent
+```
+
+## Comparativo de Providers
+
+| Dimension | Stripe | MercadoPago |
+|-----------|--------|-------------|
+| Market | Internacional | Brasil/LATAM |
+| PIX | Não | Sim (nativo) |
+| Boleto | Não | Sim |
+| Webhook | `checkout.session.completed` | IPN payment.approved |
+| Test mode | Test key + test cards | Sandbox environment |
+| Preapproval | Subscriptions API | Preapproval API |
+| Currency | USD/multi | BRL native |
+| Best for | SaaS internacional | E-commerce/infoproduto BR |
+
+## Artefatos Relacionados
+
+| Artifact | ID | Purpose |
+|----------|----|---------|
+| knowledge_card | p01_kc_stripe_patterns | Stripe checkout, webhooks, idempotency |
+| knowledge_card | p01_kc_credit_system_design | Wallet, centavos, pipeline costs |
+| knowledge_card | p01_kc_course_generation | LLM sequential chain, Pydantic models |
+| knowledge_card | p01_kc_ad_validation | Fabrication detection, confidence scoring |
+| knowledge_card | p01_kc_email_automation | Template dict, BRL formatting |
+| knowledge_card | p01_kc_mercadopago_pix | PIX, IPN, HMAC-SHA256 |
+| knowledge_card | p01_kc_pricing_strategy | Cost-plus margins, pack discounts |
+| knowledge_card | p01_kc_erp_integration | BaseLinker sync, Bling v3, OAuth2 |
+| function_def   | p04_fn_content_monetization | Tool callable by LLM |
+| dispatch_rule  | p12_dr_content_monetization | Routing keywords → builder |
+| workflow       | p12_wf_content_monetization | Full execution flow |
