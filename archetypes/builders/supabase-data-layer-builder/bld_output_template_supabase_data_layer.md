@@ -1,0 +1,112 @@
+---
+id: bld_output_template_supabase_data_layer
+kind: output_template
+pillar: P03
+title: "Output Template — Supabase Data Layer Config"
+version: 1.0.0
+created: 2026-03-31
+updated: 2026-03-31
+author: n04_knowledge
+domain: data_platform
+quality: null
+tags: [builder, supabase, data-layer, output-template, config]
+density_score: 0.87
+---
+
+# Output Template
+
+## Config YAML Structure
+```yaml
+# Supabase Data Layer Config — [VERTICAL] — [TIER]
+identidade:
+  empresa: "[EMPRESA]"
+  vertical: "[ecommerce|saas|marketplace|content|custom]"
+  regiao: "[REGIAO]"
+  tier: "[free|pro|team|enterprise]"
+
+projeto:
+  project_ref: "[REF]"
+  url: "https://[REF].supabase.co"
+
+database:
+  schemas: [public]
+  extensions: [pgvector, pg_cron]
+  migrations_dir: "supabase/migrations/"
+
+auth:
+  providers: [email]
+  mfa: false
+  custom_claims: [org_id, role]
+
+rls:
+  multi_tenant_column: org_id
+  patterns: []
+
+storage:
+  buckets: []
+
+realtime:
+  habilitado: false
+  postgres_changes: []
+
+vectors:
+  habilitado: false
+
+edge_functions:
+  functions: []
+
+integracao_cex:
+  mcp_habilitado: false
+
+budget:
+  alertas: []
+```
+
+## Migration SQL Template
+```sql
+-- Migration: [YYYYMMDD]_[description].sql
+-- Vertical: [VERTICAL] | Tier: [TIER]
+
+-- Extensions
+CREATE EXTENSION IF NOT EXISTS "pgvector";
+CREATE EXTENSION IF NOT EXISTS "pg_cron";
+
+-- Core tables
+CREATE TABLE IF NOT EXISTS organizations (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  name TEXT NOT NULL,
+  plan TEXT DEFAULT 'free',
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS memberships (
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
+  org_id UUID REFERENCES organizations(id) ON DELETE CASCADE,
+  role TEXT DEFAULT 'member',
+  UNIQUE(user_id, org_id)
+);
+
+-- [VERTICAL-SPECIFIC TABLES HERE]
+
+-- RLS
+ALTER TABLE organizations ENABLE ROW LEVEL SECURITY;
+ALTER TABLE memberships ENABLE ROW LEVEL SECURITY;
+
+-- Policies
+CREATE POLICY "org_member" ON organizations
+  FOR ALL USING (id = (auth.jwt()->'app_metadata'->>'org_id')::uuid);
+
+-- Indexes
+CREATE INDEX idx_memberships_user ON memberships(user_id);
+CREATE INDEX idx_memberships_org ON memberships(org_id);
+```
+
+## Output Checklist
+- [ ] Config YAML with ALL sections filled
+- [ ] Migration SQL with RLS on every table
+- [ ] Indexes on all FK + RLS columns
+- [ ] Storage bucket policies defined
+- [ ] Realtime publications configured (if enabled)
+- [ ] Edge function scaffolds (if enabled)
+- [ ] MCP config (if enabled)
+- [ ] Tier limits documented in comments
