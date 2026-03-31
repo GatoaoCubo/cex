@@ -1,4 +1,4 @@
-"""Runtime Evolution smoke tests — 10 tests covering all Phase 1-3 features.
+"""Runtime Evolution smoke tests — 11 tests covering all Phase 1-3 features.
 
 Tests:
   1. Memory scanner returns correct headers
@@ -11,6 +11,7 @@ Tests:
   8. Permission scope blocks out-of-scope path
   9. Fork execution produces output metadata
   10. Memory update appends + decays + prunes
+  11. Turn counter enforces max_turns budget
 """
 
 import sys
@@ -338,3 +339,58 @@ High conf observation
     pruned_content, pruned_fm, pruned_count = prune_low_confidence(body_with_low, fm4)
     assert pruned_count >= 1  # Low conf observation pruned
     assert "0.80" in pruned_content
+
+
+# ---------------------------------------------------------------------------
+# Test 11: Turn counter enforces max_turns budget
+# ---------------------------------------------------------------------------
+
+
+def test_turn_counter_enforces_max_turns():
+    """TurnCounter tracks turns and signals exhaustion."""
+    from cex_8f_motor import TurnCounter
+
+    tc = TurnCounter()
+
+    # Register with budget of 5
+    tc.register("test-builder", max_turns=5)
+
+    # First 2 turns: no warning
+    r1 = tc.increment("test-builder")
+    assert r1["current"] == 1
+    assert r1["remaining"] == 4
+    assert not r1["exhausted"]
+    assert r1["warning"] is None
+
+    r2 = tc.increment("test-builder")
+    assert r2["current"] == 2
+    assert not r2["exhausted"]
+
+    # Turn 3: remaining=2, should warn BUDGET_LOW
+    tc.increment("test-builder")  # 3
+    r4 = tc.increment("test-builder")  # 4
+    assert r4["remaining"] == 1
+    assert "TURN_BUDGET_LOW" in (r4["warning"] or "")
+
+    # Turn 5: exhausted
+    r5 = tc.increment("test-builder")
+    assert r5["current"] == 5
+    assert r5["exhausted"]
+    assert r5["remaining"] == 0
+    assert "TURN_BUDGET_EXHAUSTED" in r5["warning"]
+
+    # Status check without incrementing
+    status = tc.status("test-builder")
+    assert status["current"] == 5
+    assert status["exhausted"]
+
+    # Reset
+    tc.reset("test-builder")
+    status2 = tc.status("test-builder")
+    assert status2["current"] == 0
+    assert not status2["exhausted"]
+
+    # Auto-register on unknown builder
+    r_auto = tc.increment("unknown-builder")
+    assert r_auto["max_turns"] == 25
+    assert r_auto["current"] == 1

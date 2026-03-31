@@ -33,6 +33,96 @@ from pathlib import Path
 _memory_select = None
 _memory_scanner = None
 
+
+# ---------------------------------------------------------------------------
+# Turn Counter — Runtime Evolution Phase 3C
+# ---------------------------------------------------------------------------
+
+
+class TurnCounter:
+    """Track agentic turns per builder execution.
+
+    Each builder has a max_turns budget (from bld_config). The counter
+    increments on each agentic turn and raises TurnBudgetExceeded when
+    the budget is exhausted.
+
+    Usage:
+        counter = TurnCounter()
+        counter.register("agent-builder", max_turns=25)
+        for each_turn:
+            result = counter.increment("agent-builder")
+            if result["exhausted"]:
+                # stop, return partial + warning
+                break
+    """
+
+    def __init__(self):
+        self._counters: dict[str, dict] = {}
+
+    def register(self, builder_id: str, max_turns: int | None = None) -> None:
+        """Register a builder with its turn budget."""
+        self._counters[builder_id] = {
+            "max_turns": max_turns or 25,
+            "current": 0,
+            "exhausted": False,
+        }
+
+    def increment(self, builder_id: str) -> dict:
+        """Increment turn count. Returns status dict.
+
+        Returns:
+            {"current": int, "max_turns": int, "exhausted": bool,
+             "remaining": int, "warning": str | None}
+        """
+        if builder_id not in self._counters:
+            self.register(builder_id)
+
+        entry = self._counters[builder_id]
+        entry["current"] += 1
+        remaining = entry["max_turns"] - entry["current"]
+        exhausted = entry["current"] >= entry["max_turns"]
+        entry["exhausted"] = exhausted
+
+        warning = None
+        if exhausted:
+            warning = (
+                f"TURN_BUDGET_EXHAUSTED: {builder_id} used "
+                f"{entry['current']}/{entry['max_turns']} turns. "
+                f"Returning partial result."
+            )
+        elif remaining <= 3:
+            warning = (
+                f"TURN_BUDGET_LOW: {builder_id} has {remaining} turns "
+                f"remaining ({entry['current']}/{entry['max_turns']})."
+            )
+
+        return {
+            "builder_id": builder_id,
+            "current": entry["current"],
+            "max_turns": entry["max_turns"],
+            "remaining": max(0, remaining),
+            "exhausted": exhausted,
+            "warning": warning,
+        }
+
+    def status(self, builder_id: str) -> dict | None:
+        """Get current status without incrementing."""
+        return self._counters.get(builder_id)
+
+    def all_status(self) -> dict:
+        """Get status of all registered builders."""
+        return dict(self._counters)
+
+    def reset(self, builder_id: str) -> None:
+        """Reset counter for a builder."""
+        if builder_id in self._counters:
+            self._counters[builder_id]["current"] = 0
+            self._counters[builder_id]["exhausted"] = False
+
+
+# Global turn counter instance (shared across motor execution)
+turn_counter = TurnCounter()
+
 try:
     import yaml
 except ImportError:
@@ -1096,6 +1186,15 @@ def generate_output(
         "multi_object": parsed["multi_object"],
     }
 
+    # Register turn budgets for all active builders
+    turn_budgets = {}
+    for fn in ordered:
+        for b in fn["builders"]:
+            if b["active"]:
+                mt = b.get("max_turns") or 25
+                turn_counter.register(b["id"], mt)
+                turn_budgets[b["id"]] = mt
+
     return {
         "intent": intent,
         "parsed": parsed_output,
@@ -1103,6 +1202,7 @@ def generate_output(
         "functions": ordered,
         "total_builders": total_active,
         "estimated_tokens": total_tokens,
+        "turn_budgets": turn_budgets,
         "warnings": warnings,
     }
 
