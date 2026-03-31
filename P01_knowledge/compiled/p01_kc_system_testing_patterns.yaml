@@ -1,97 +1,58 @@
 id: p01_kc_system_testing_patterns
 kind: knowledge_card
 pillar: P01
-title: System Testing Patterns for Complex Distributed Systems
+title: System Testing Patterns
 version: 1.0.0
-created: '2024-12-19'
-updated: '2024-12-19'
-author: knowledge-card-builder
-domain: software_testing
+created: 2023-11-01
+updated: 2023-11-01
+author: Knowledge Distillation Specialist
+domain: Software Testing
 quality: null
 tags:
-- system-testing
-- testing-patterns
-- integration-testing
-- e2e-testing
-- test-automation
-tldr: 'Architectural patterns for system testing: environment parity, contract testing, test data builders, chaos engineering
-  with concrete implementation strategies'
-when_to_use: When designing end-to-end test strategies, validating distributed system behavior, or establishing comprehensive
-  testing pipelines
+- system_testing
+- testing_patterns
+- software_quality
+- knowledge
+tldr: Outlines types and applications of system testing patterns, enhancing QA.
+when_to_use: When designing or improving system testing strategies.
 keywords:
-- smoke-tests
-- regression-testing
-- chaos-engineering
-- contract-testing
-- test-environments
+- system testing
+- testing patterns
+- QA
 long_tails:
-- How to implement chaos engineering for distributed system testing
-- Test data builder patterns for complex integration scenarios
-- Environment parity strategies for reliable system testing
+- How to apply system testing patterns for better software quality
+- Examples of effective system testing strategies
 axioms:
-- ALWAYS test in production-like environments with realistic data volumes
-- NEVER rely solely on unit tests for distributed system validation
-- IF system has external dependencies THEN implement contract testing
+- ALWAYS analyze project requirements before selecting testing patterns
 linked_artifacts:
   primary: null
   related: []
 density_score: 0.85
-data_source: https://martinfowler.com/articles/practical-test-pyramid.html
-quick_reference: 'topic: system_testing_patterns
-
-  scope: End-to-end validation patterns for distributed architectures
-
-  owner: testing-engineering
-
-  criticality: high'
+data_source: https://www.softwaretestingmaterial.com/system-testing/
+quick_reference: 'topic: System Testing Patterns scope: Detailed patterns and methodologies for enhancing software quality
+  assurance through systematic and structured testing processes. owner: Knowledge Distillation Specialist criticality: high'
 key_concepts:
-- 'Environment Parity: Production-like test environments (90%+ config match)'
-- 'Test Data Builders: Programmatic test data generation with realistic relationships'
-- 'Contract Testing: API boundary validation using consumer-driven contracts'
-- 'Chaos Engineering: Controlled failure injection to validate system resilience'
-- 'Smoke Tests: Critical path validation in <5 minutes post-deployment'
+- 'Scenario Testing: Simulate real-world use cases for application robustness.'
+- 'Smoke Testing: Initial testing to catch major failures before deeper checks.'
+- 'Regression Testing: Verifies new code changes have not disrupted existing functionality.'
 strategy_phases:
-- 'Environment Setup: Clone production topology, sanitize data, match versions'
-- 'Test Data Generation: Build realistic datasets with referential integrity'
-- 'Contract Validation: Verify API contracts between service boundaries'
-- 'Failure Simulation: Inject network, CPU, memory, and service failures'
-- 'Performance Baseline: Establish SLA thresholds under realistic load'
+- 'Identify Needs: Determine project-specific testing requirements.'
+- 'Design Patterns: Choose appropriate testing approaches like scenario or smoke.'
+- 'Implement and Monitor: Execute tests and continuously assess test coverage.'
 golden_rules:
-- 'ISOLATE: each test owns its data, no shared state between tests'
-- 'PARALLELIZE: run independent test suites concurrently for faster feedback'
-- 'MONITOR: capture system metrics during tests, not just pass/fail'
-- 'CLEANUP: tear down test data and infrastructure after execution'
-flow: "[Deploy] -> [Smoke Tests] -> [Integration Suite] -> [Chaos Tests] -> [Performance Validation] -> [Report]\n    |  \
-  \         |                    |                   |                     |\n   <2min      <5min              <30min    \
-  \         <60min              <90min"
-pattern_comparison: '| Pattern | Execution Time | Failure Detection | Infrastructure Cost |
+- ALWAYS start with smoke testing to identify major issues early.
+- NEVER skip regression testing after code alterations, regardless of size.
+- IF possible, automate repetitive tests for efficiency.
+flow: '[Identify Requirements] -> [Design Tests] -> [Execute Tests] -> [Assess Results]'
+comparativo: '| Pattern | Time Efficiency | Coverage Depth |
 
-  |---------|---------------|-------------------|-------------------|
+  |---------|----------------|----------------|
 
-  | Smoke Tests | 2-5 min | Critical path breaks | Low |
+  | Smoke | Fast | Shallow |
 
-  | Integration Tests | 15-30 min | Service boundary issues | Medium |
+  | Scenario | Moderate | Deep |
 
-  | Chaos Engineering | 30-60 min | Resilience gaps | High |
-
-  | Load Testing | 60-120 min | Performance degradation | High |'
-implementation_strategies: '| Tool Category | Example Tools | Use Case |
-
-  |---------------|---------------|----------|
-
-  | Test Orchestration | TestContainers, Docker Compose | Environment provisioning |
-
-  | Contract Testing | Pact, Spring Cloud Contract | API boundary validation |
-
-  | Chaos Engineering | Chaos Monkey, Litmus, Gremlin | Failure injection |
-
-  | Data Generation | Factory Bot, Faker, Bogus | Realistic test datasets |'
-anti_patterns:
-- 'Shared Test Data: Multiple tests modifying same records causes flakiness'
-- 'Environment Drift: Test environment diverges from production over time'
-- 'Happy Path Only: Testing only success scenarios misses edge cases'
-- 'Brittle Selectors: UI tests break on minor layout changes'
+  | Regression | Slow | Comprehensive |'
 references:
-- 'Source: https://martinfowler.com/articles/practical-test-pyramid.html'
-- 'Related: https://principlesofchaos.org/ (chaos engineering principles)'
-- 'Tool: https://testcontainers.org/ (environment provisioning)'
+- 'Related artifact: None'
+- 'Source: https://www.softwaretestingmaterial.com/system-testing/'
