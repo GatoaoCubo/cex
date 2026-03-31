@@ -26,6 +26,9 @@ except ImportError:
 
 CEX_ROOT = Path(__file__).resolve().parent.parent
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from cex_shared import parse_frontmatter as _shared_parse_frontmatter
+
 SCAN_DIRS = [
     "P01_knowledge",
     "P02_model",
@@ -70,13 +73,7 @@ def parse_frontmatter(path: Path) -> dict | None:
         text = path.read_text(encoding="utf-8", errors="ignore")
     except Exception:
         return None
-    if not text.startswith("---"):
-        return None
-    try:
-        end = text.index("---", 3)
-        return yaml.safe_load(text[3:end])
-    except (ValueError, yaml.YAMLError):
-        return None
+    return _shared_parse_frontmatter(text)
 
 
 def calc_density(path: Path) -> float:

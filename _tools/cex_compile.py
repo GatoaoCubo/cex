@@ -10,6 +10,9 @@ from pathlib import Path
 
 import yaml
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from cex_shared import split_frontmatter as _shared_split_frontmatter
+
 
 class CEXEncoder(json.JSONEncoder):
     """JSON encoder that handles date/datetime from YAML frontmatter."""
@@ -40,12 +43,7 @@ LP_DIRS = [
 
 def parse_frontmatter(text: str) -> tuple[dict, str]:
     """Extract YAML frontmatter and body from markdown text."""
-    match = re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", text, re.DOTALL)
-    if not match:
-        return {}, text
-    fm = yaml.safe_load(match.group(1)) or {}
-    body = match.group(2)
-    return fm, body
+    return _shared_split_frontmatter(text)
 
 
 def load_schema(lp_dir: Path) -> dict:

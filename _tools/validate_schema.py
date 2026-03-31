@@ -1,13 +1,9 @@
-import sys
-
-if hasattr(sys.stdout, "reconfigure"):
-    sys.stdout.reconfigure(encoding="utf-8")
-if hasattr(sys.stderr, "reconfigure"):
-    sys.stderr.reconfigure(encoding="utf-8")
 #!/usr/bin/env python3
 """CEX Schema Validator — validates each P*/_schema.yaml for structural integrity."""
 
 import sys
+if hasattr(sys.stdout, "reconfigure"): sys.stdout.reconfigure(encoding="utf-8")
+if hasattr(sys.stderr, "reconfigure"): sys.stderr.reconfigure(encoding="utf-8")
 import yaml
 from pathlib import Path
 

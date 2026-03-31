@@ -1,9 +1,3 @@
-import sys
-
-if hasattr(sys.stdout, "reconfigure"):
-    sys.stdout.reconfigure(encoding="utf-8")
-if hasattr(sys.stderr, "reconfigure"):
-    sys.stderr.reconfigure(encoding="utf-8")
 #!/usr/bin/env python3
 """
 cex_crew_runner.py -- Crew Runner: Lightweight DAG Executor for CEX
@@ -31,6 +25,10 @@ Full pipeline:
   python cex_8f_motor.py --intent "cria agente de vendas" --output /tmp/plan.json
   python cex_crew_runner.py --plan /tmp/plan.json --output-dir /tmp/crew_out/
 """
+
+import sys
+if hasattr(sys.stdout, "reconfigure"): sys.stdout.reconfigure(encoding="utf-8")
+if hasattr(sys.stderr, "reconfigure"): sys.stderr.reconfigure(encoding="utf-8")
 
 import json
 import argparse

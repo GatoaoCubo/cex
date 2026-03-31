@@ -112,18 +112,9 @@ def build_kinds(nucleus, kinds, dry_run=False):
 
 
 def write_signal(nucleus, cycle, status, details=None):
-    """Write completion signal."""
-    ts = datetime.now().strftime("%Y%m%d_%H%M%S")
-    signal = {
-        "nucleus": nucleus,
-        "cycle": cycle,
-        "status": status,
-        "timestamp": ts,
-        "details": details or {},
-    }
-    sig_file = SIGNAL_DIR / f"{nucleus}_cycle{cycle}_{ts}.json"
-    sig_file.write_text(json.dumps(signal, indent=2), encoding="utf-8")
-    return sig_file
+    """Write completion signal (delegates to signal_writer)."""
+    from signal_writer import write_signal as _sw
+    return _sw(nucleus, status=status, mission=f"cycle{cycle}", **details or {})
 
 
 def main():

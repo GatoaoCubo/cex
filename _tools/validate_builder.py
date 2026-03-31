@@ -25,6 +25,9 @@ from typing import Any
 
 import yaml
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from cex_shared import split_frontmatter as _shared_split_frontmatter
+
 # -- Constants ----------------------------------------------------------------
 
 EXPECTED_KINDS = [
@@ -121,15 +124,8 @@ def expected_filename(kind: str, topic: str) -> str:
 
 
 def parse_frontmatter(text: str) -> tuple[dict[str, Any] | None, str]:
-    if not text.startswith("---"):
-        return None, text
-    parts = text.split("---", 2)
-    if len(parts) < 3:
-        return None, text
-    try:
-        return yaml.safe_load(parts[1]) or {}, parts[2].strip()
-    except yaml.YAMLError:
-        return None, text
+    fm, body = _shared_split_frontmatter(text)
+    return (fm if fm else None), body
 
 
 def calc_density(text: str) -> float:

@@ -1,9 +1,3 @@
-import sys
-
-if hasattr(sys.stdout, "reconfigure"):
-    sys.stdout.reconfigure(encoding="utf-8")
-if hasattr(sys.stderr, "reconfigure"):
-    sys.stderr.reconfigure(encoding="utf-8")
 #!/usr/bin/env python3
 """
 cex_forge.py — O Forjador Universal CEX
@@ -23,9 +17,12 @@ Uso:
   python cex_forge.py --list-types --lp P01     # tipos do LP
 """
 
+import sys
+if hasattr(sys.stdout, "reconfigure"): sys.stdout.reconfigure(encoding="utf-8")
+if hasattr(sys.stderr, "reconfigure"): sys.stderr.reconfigure(encoding="utf-8")
+
 import argparse
 import os
-import sys
 import re
 from pathlib import Path
 

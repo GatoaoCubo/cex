@@ -1,9 +1,3 @@
-import sys
-
-if hasattr(sys.stdout, "reconfigure"):
-    sys.stdout.reconfigure(encoding="utf-8")
-if hasattr(sys.stderr, "reconfigure"):
-    sys.stderr.reconfigure(encoding="utf-8")
 #!/usr/bin/env python3
 """
 cex_8f_motor.py -- Motor 8F: Intent -> Execution Plan
@@ -23,6 +17,10 @@ Usage:
   python cex_8f_motor.py --intent "cria agente" --output plan.json
   python cex_8f_motor.py --test
 """
+
+import sys
+if hasattr(sys.stdout, "reconfigure"): sys.stdout.reconfigure(encoding="utf-8")
+if hasattr(sys.stderr, "reconfigure"): sys.stderr.reconfigure(encoding="utf-8")
 
 import json
 import re
