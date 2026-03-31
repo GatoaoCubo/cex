@@ -2,9 +2,9 @@ id: p03_pt_commercial_nucleus
 kind: prompt_template
 pillar: P03
 title: Commercial Nucleus Prompt Templates
-version: 2.0.0
+version: 3.0.0
 created: 2026-03-30
-updated: 2026-03-30
+updated: 2026-03-31
 author: n06_commercial
 variables:
 - name: product_name
@@ -37,10 +37,15 @@ variables:
   required: false
   default: null
   description: Where traffic enters the funnel (Instagram, YouTube, Google, cold email).
+- name: audience_size
+  type: string
+  required: false
+  default: null
+  description: Estimated reachable audience size for revenue model projections.
 variable_syntax: mustache
 composable: true
 domain: commercial-monetization
-quality: 8.9
+quality: null
 tags:
 - prompt_template
 - commercial
@@ -49,8 +54,9 @@ tags:
 - course
 - funnel
 - upsell
-tldr: Four reusable N06 templates — Pricing Strategy, Course Outline, Funnel Build, and Upsell Sequence.
-density_score: 0.88
+- revenue-model
+tldr: Five reusable N06 templates — Pricing Strategy, Course Outline, Funnel Build, Upsell Sequence, and Revenue Model.
+density_score: 0.91
 template_1_pricing_strategy: "Use when: You need to price a digital product or course.\n\nDesign a 3-tier pricing strategy\
   \ for {{product_name}}.\n\nTARGET AUDIENCE: {{target_audience}}\nTRANSFORMATION: {{transformation}}\nPLATFORM: {{platform}}\n\
   {{#price_range}}PRICE ANCHOR: {{price_range}}{{/price_range}}\n\nDeliverables:\n1. Transformation Value Assessment — quantify\
@@ -85,11 +91,23 @@ template_4_upsell_sequence: "Use when: You need to maximize LTV after the first 
   \   - Done-for-you / implementation layer\n   - Price (2-3x base price)\n   - Expected take rate: [%]\n\n4. DOWNSELL (shown\
   \ after OTO1 decline):\n   - Stripped-down version OR payment plan version\n   - Price (30-40% of OTO1)\n   - Expected conversion\
   \ of declinees: [%]\n\n5. LTV PROJECTION:\n   - AOV = Base + (Bump × take%) + (OTO1 × take%) + (OTO2 × take%)\n   - LTV\
-  \ = AOV × [repeat purchase or subscription factor]\n\n---"
+  \ = AOV × [repeat purchase or subscription factor]\n\n---\n\n---"
+template_5_revenue_model: "Use when: You need to project revenue scenarios before a launch or pricing decision.\n\nBuild a\
+  \ revenue model for {{product_name}}.\n\nTARGET AUDIENCE: {{target_audience}}\nTRANSFORMATION: {{transformation}}\nBASE\
+  \ PRICE: {{price_range}}\nPLATFORM: {{platform}}\n{{#audience_size}}REACHABLE AUDIENCE: {{audience_size}}{{/audience_size}}\n\
+  \nDeliverables:\n\n1. UNIT ECONOMICS (per sale):\n   - Base price\n   - Order bump price + take rate → contribution\n  \
+  \ - OTO1 price + take rate → contribution\n   - OTO2 price + take rate → contribution\n   - AOV = Base + (Bump × %) + (OTO1\
+  \ × %) + (OTO2 × %)\n\n2. REVENUE SCENARIOS:\n   | Scenario | Sales | AOV | Revenue |\n   |----------|-------|-----|---------|\n\
+  \   | Conservative | [X] | [AOV] | [R$] |\n   | Realistic | [X] | [AOV] | [R$] |\n   | Optimistic | [X] | [AOV] | [R$] |\n\
+  \n3. FUNNEL MATH (show conversion chain):\n   Audience → TOFU reach ([X%]) → MOFU opt-ins ([X%]) → BOFU clicks ([X%]) →\
+  \ Sales ([X%]) = [N] buyers\n\n4. LTV PROJECTION:\n   - LTV = AOV × Purchase Frequency × Customer Lifespan\n   - Target:\
+  \ LTV >= 3x AOV\n\n5. CAC CEILING:\n   - Max acceptable CAC = 30% of AOV = R$[X]\n   - Required ROAS to break even: [X]x\n\
+  \n---"
 composability: 'These templates chain naturally for a product launch:
 
 
-  Template 2 (Course Outline) → Template 1 (Pricing Strategy) → Template 3 (Funnel Build) → Template 4 (Upsell Sequence)
+  Template 2 (Course Outline) → Template 1 (Pricing Strategy) → Template 5 (Revenue Model) → Template 3 (Funnel Build) → Template
+  4 (Upsell Sequence)
 
 
   Run in sequence or dispatch to N06 via grid for parallel execution.'

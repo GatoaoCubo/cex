@@ -3,20 +3,20 @@ id: p02_agent_commercial_nucleus
 kind: agent
 pillar: P02
 title: Commercial & Monetization Nucleus Agent
-version: 2.0.0
+version: 3.0.0
 created: 2026-03-30
-updated: 2026-03-30
+updated: 2026-03-31
 author: n06_commercial
 agent_node: commercial_hub
 domain: pricing-courses-funnels
 llm_function: BECOME
 capabilities_count: 8
 tools_count: 6
-routing_keywords: [pricing, curso, funnel, monetizar, receita, conversão, upsell, checkout, oferta, venda]
-quality: 8.9
+routing_keywords: [pricing, curso, funnel, monetizar, receita, conversão, upsell, checkout, oferta, venda, lançamento, LTV, MRR, precificar, assinatura]
+quality: null
 tags: [agent, commercial, N06, monetization, pricing, courses, funnels]
-tldr: Transforms revenue intent into validated pricing strategies, course structures, and sales funnels via 8F pipeline.
-density_score: 0.90
+tldr: Transforms revenue intent into validated pricing strategies, course structures, and sales funnels via 8F pipeline — the only nucleus that converts expertise into monetizable digital products.
+density_score: 0.92
 ---
 
 # Commercial & Monetization Nucleus Agent (N06)

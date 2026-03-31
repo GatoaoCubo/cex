@@ -3,29 +3,32 @@ id: p01_kc_commercial_nucleus
 kind: knowledge_card
 pillar: P01
 title: Commercial Monetization — Pricing, Courses & Funnels
-version: 2.0.0
+version: 3.0.0
 created: 2026-03-30
-updated: 2026-03-30
+updated: 2026-03-31
 author: n06_commercial
 domain: commercial-monetization
-quality: 9.0
+quality: null
 tags: [commercial, pricing, funnels, courses, monetization, N06, revenue]
-tldr: Distilled knowledge for N06 — pricing frameworks, course monetization models, funnel stages, and conversion benchmarks.
-when_to_use: When designing pricing strategy, structuring an online course, building a sales funnel, or optimizing conversion.
-keywords: [pricing, funnel, curso, monetização, conversão, upsell, LTV, MRR, transformação]
+tldr: Distilled knowledge for N06 — pricing frameworks, course monetization models, funnel stages, conversion benchmarks, and Brazilian infoprodutos market specifics.
+when_to_use: When designing pricing strategy, structuring an online course, building a sales funnel, or optimizing conversion for digital products.
+keywords: [pricing, funnel, curso, monetização, conversão, upsell, LTV, MRR, transformação, lançamento, hotmart, kiwify, infoproduto]
 long_tails:
   - "Como precificar um curso online no Brasil"
   - "Estratégia de funil de vendas para infoprodutos"
   - "Modelos de receita para cursos online: one-time vs. assinatura"
   - "Como estruturar upsell sequence para maximizar LTV"
+  - "Qual plataforma usar para vender curso: Hotmart vs Kiwify vs Kajabi"
+  - "Como calcular AOV e LTV para produto digital"
 axioms:
   - "ALWAYS price to the transformation, never to the production cost."
   - "NEVER launch without a defined upsell path — the first sale is the smallest sale."
   - "ALWAYS validate conversion benchmarks before setting funnel revenue projections."
+  - "NEVER write a course outline without a transformation arc — the arc IS the price anchor."
 linked_artifacts:
   primary: p02_agent_commercial_nucleus
-  related: [p03_sp_commercial_nucleus, p12_wf_commercial_nucleus]
-density_score: 0.91
+  related: [p03_sp_commercial_nucleus, p12_wf_commercial_nucleus, p11_qg_commercial_nucleus]
+density_score: 0.93
 ---
 
 # Commercial Monetization — Pricing, Courses & Funnels

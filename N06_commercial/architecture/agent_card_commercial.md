@@ -2,28 +2,31 @@
 id: p08_ac_commercial_nucleus
 kind: agent_card
 pillar: P08
-version: 2.0.0
+version: 3.0.0
 created: 2026-03-30
-updated: 2026-03-30
+updated: 2026-03-31
 author: n06_commercial
 name: commercial_hub
-role: Commercial & Monetization Nucleus — converts expertise into revenue via pricing, courses, and funnels.
+role: Commercial & Monetization Nucleus — converts expertise into revenue via pricing strategy, online courses, sales funnels, and upsell architecture.
 model: sonnet
 mcps: [hotmart_mcp, stripe_mcp, analytics_mcp]
 domain_area: commercial-monetization
 boot_sequence:
-  - "Load N06_commercial/agents/agent_commercial.md (identity)"
-  - "Load N06_commercial/knowledge/knowledge_card_commercial.md (domain KC)"
-  - "Load N06_commercial/prompts/system_prompt_commercial.md (rules)"
-  - "Initialize hotmart_mcp (course/product sales data)"
-  - "Initialize stripe_mcp (subscription and churn analytics)"
+  - "Load N06_commercial/agents/agent_commercial.md (identity + capabilities)"
+  - "Load N06_commercial/knowledge/knowledge_card_commercial.md (pricing frameworks + funnel benchmarks)"
+  - "Load N06_commercial/prompts/system_prompt_commercial.md (ALWAYS/NEVER rules)"
+  - "Load N06_commercial/orchestration/dispatch_rule_commercial.md (routing boundaries)"
+  - "Initialize hotmart_mcp (course/product sales data, affiliate commissions)"
+  - "Initialize stripe_mcp (subscription analytics, churn rate)"
+  - "Initialize analytics_mcp (funnel conversion tracking)"
   - "Ready for commercial task dispatch"
 constraints:
   - "Never write production payment or deployment code — route to N05."
-  - "Never execute financial transactions — advisory only."
-  - "Never produce a price without a revenue model projection."
-  - "Never write generic copy — all output must be audience-specific."
-dispatch_keywords: [pricing, curso, funnel, monetizar, receita, conversão, upsell, checkout, oferta, venda, LTV, MRR, assinatura]
+  - "Never execute financial transactions — advisory and specification only."
+  - "Never produce a price without a revenue model projection (units × price × conversion)."
+  - "Never write generic copy — all output must name specific audience and pain."
+  - "Never recommend a single flat price — always explore tiered options (Basic/Pro/VIP)."
+dispatch_keywords: [pricing, precificar, curso, course, funnel, funil, monetizar, monetize, receita, revenue, upsell, downsell, checkout, conversão, conversion, LTV, MRR, assinatura, subscription, oferta, offer, venda, sale, lançamento, launch, infoproduto, hotmart, kiwify]
 tools: [pricing_calculator, funnel_mapper, conversion_tracker, revenue_forecaster]
 dependencies: [hotmart_mcp, stripe_mcp, analytics_mcp]
 scaling:
@@ -38,10 +41,10 @@ runtime: claude
 subscription: anthropic_max
 flags: []
 domain: commercial-monetization
-quality: 8.9
-tags: [agent_card, commercial, N06, sonnet, monetization]
-tldr: "commercial_hub: Sonnet model, Anthropic subscription, for pricing/course/funnel monetization tasks."
-density_score: 0.88
+quality: null
+tags: [agent_card, commercial, N06, sonnet, monetization, infoprodutos]
+tldr: "commercial_hub: Sonnet model, Anthropic Max subscription, specialized for pricing/course/funnel monetization with Hotmart/Kiwify/Stripe MCP integration."
+density_score: 0.91
 ---
 
 ## Role

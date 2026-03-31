@@ -2,21 +2,21 @@
 id: p12_wf_commercial_nucleus
 kind: workflow
 pillar: P12
-version: 2.0.0
+version: 3.0.0
 created: 2026-03-30
-updated: 2026-03-30
+updated: 2026-03-31
 author: n06_commercial
 title: Commercial Nucleus Workflows
-steps_count: 12
+steps_count: 13
 execution_mode: sequential
 error_recovery: retry
 max_retries: 2
 timeout_ms: 1800000
 spawn_delay_ms: 3000
-quality: 8.9
-tags: [workflow, commercial, N06, course-launch, pricing-strategy, funnel-build]
-tldr: Three core N06 workflows — Course Launch, Pricing Strategy, and Funnel Build — each with defined steps, signals, and outputs.
-density_score: 0.90
+quality: null
+tags: [workflow, commercial, N06, course-launch, pricing-strategy, funnel-build, upsell-sequence]
+tldr: Three core N06 workflows — Course Launch (5 steps), Pricing Strategy (4 steps), Funnel Build (4 steps) — each with defined steps, signals, and outputs.
+density_score: 0.92
 ---
 
 # Commercial Nucleus Workflows

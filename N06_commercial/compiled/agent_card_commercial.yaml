@@ -1,9 +1,9 @@
 id: p08_ac_commercial_nucleus
 kind: agent_card
 pillar: P08
-version: 2.0.0
+version: 3.0.0
 created: 2026-03-30
-updated: 2026-03-30
+updated: 2026-03-31
 author: n06_commercial
 name: commercial_hub
 role: 'The `commercial_hub` agent card defines the deployment spec for N06 Commercial Nucleus. It handles all revenue-facing
@@ -32,18 +32,33 @@ constraints:
 - Never recommend a single flat price — always explore tiered options
 dispatch_keywords:
 - pricing
+- precificar
 - curso
+- course
 - funnel
+- funil
 - monetizar
+- monetize
 - receita
-- conversão
+- revenue
 - upsell
+- downsell
 - checkout
-- oferta
-- venda
+- conversão
+- conversion
 - LTV
 - MRR
 - assinatura
+- subscription
+- oferta
+- offer
+- venda
+- sale
+- lançamento
+- launch
+- infoproduto
+- hotmart
+- kiwify
 tools:
 - pricing_calculator
 - funnel_mapper
@@ -65,15 +80,17 @@ runtime: claude
 subscription: anthropic_max
 flags: []
 domain: commercial-monetization
-quality: 8.9
+quality: null
 tags:
 - agent_card
 - commercial
 - N06
 - sonnet
 - monetization
-tldr: 'commercial_hub: Sonnet model, Anthropic subscription, for pricing/course/funnel monetization tasks.'
-density_score: 0.88
+- infoprodutos
+tldr: 'commercial_hub: Sonnet model, Anthropic Max subscription, specialized for pricing/course/funnel monetization with Hotmart/Kiwify/Stripe
+  MCP integration.'
+density_score: 0.91
 model_subscription:
 - 'Model: `claude-sonnet` — selected for persuasive copywriting, structured reasoning, and creative commercial strategy'
 - 'Subscription: Anthropic Max (zero API cost, subscription-based)'

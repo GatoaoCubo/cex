@@ -3,15 +3,15 @@ id: p11_qg_commercial_nucleus
 kind: quality_gate
 pillar: P11
 title: Gate — Commercial Nucleus Output
-version: 2.0.0
+version: 3.0.0
 created: 2026-03-30
-updated: 2026-03-30
+updated: 2026-03-31
 author: n06_commercial
 domain: commercial-monetization
-quality: 8.9
+quality: null
 tags: [quality-gate, commercial, N06, pricing, funnels, conversion]
-tldr: Pre-output gate for N06 artifacts — ensures pricing has rationale, copy is audience-specific, and funnels have conversion benchmarks.
-density_score: 0.89
+tldr: Pre-output gate for N06 artifacts — ensures pricing has rationale, copy is audience-specific, funnels have conversion benchmarks, and upsells are defined.
+density_score: 0.91
 ---
 
 ## Definition

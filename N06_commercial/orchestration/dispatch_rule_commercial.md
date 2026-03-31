@@ -2,16 +2,16 @@
 id: p12_dr_commercial_nucleus
 kind: dispatch_rule
 pillar: P12
-version: 2.0.0
+version: 3.0.0
 created: 2026-03-30
-updated: 2026-03-30
+updated: 2026-03-31
 author: n06_commercial
 domain: commercial-monetization
-quality: 8.9
-tags: [dispatch, commercial, N06, pricing, funnels, monetization]
-tldr: Route tasks related to pricing strategy, online courses, sales funnels, and revenue monetization to N06.
+quality: null
+tags: [dispatch, commercial, N06, pricing, funnels, monetization, infoprodutos]
+tldr: Route tasks related to pricing strategy, online courses, sales funnels, revenue monetization, and infoprodutos market to N06.
 scope: commercial-monetization
-keywords: [pricing, precificar, preço, price, curso, course, funil, funnel, monetizar, monetize, receita, revenue, upsell, downsell, checkout, conversão, conversion, LTV, MRR, assinatura, subscription, oferta, offer, venda, sale, lançamento, launch]
+keywords: [pricing, precificar, preço, price, curso, course, funil, funnel, monetizar, monetize, receita, revenue, upsell, downsell, checkout, conversão, conversion, LTV, MRR, assinatura, subscription, oferta, offer, venda, sale, lançamento, launch, infoproduto, hotmart, kiwify, kajabi, teachable, copywriting_vendas, VSL, order_bump, OTO]
 agent_node: commercial_hub
 model: sonnet
 priority: 9

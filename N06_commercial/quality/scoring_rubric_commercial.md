@@ -3,9 +3,9 @@ id: p07_sr_commercial_evaluation
 kind: scoring_rubric
 pillar: P07
 title: Rubric — Commercial Output Evaluation
-version: 2.0.0
+version: 3.0.0
 created: 2026-03-30
-updated: 2026-03-30
+updated: 2026-03-31
 author: n06_commercial
 framework: Commercial Output Evaluation
 target_kinds: [pricing_strategy, course_outline, funnel_copy, upsell_sequence, revenue_model]
@@ -16,10 +16,10 @@ threshold_publish: 8.0
 threshold_review: 7.0
 automation_status: semi-automated
 domain: commercial-monetization
-quality: 8.9
+quality: null
 tags: [scoring-rubric, commercial, N06, pricing, funnels, conversion]
-tldr: 5-dimension rubric for N06 output — Offer Clarity, Pricing Logic, Funnel Coherence, Copy Persuasion, Revenue Potential.
-density_score: 0.91
+tldr: 5-dimension rubric for N06 output — Offer Clarity (25%), Pricing Logic (25%), Funnel Coherence (20%), Copy Persuasion (20%), Revenue Potential (10%).
+density_score: 0.92
 ---
 
 ## Framework Overview
