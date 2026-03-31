@@ -2,100 +2,123 @@
 id: p01_kc_system_testing_patterns
 kind: knowledge_card
 pillar: P01
-title: "System Testing Patterns for Complex Distributed Systems"
+title: "System Testing Patterns for Distributed Systems"
 version: "1.0.0"
 created: "2024-12-19"
 updated: "2024-12-19"
 author: "knowledge-card-builder"
-domain: software_testing
+domain: "software_testing"
 quality: null
-tags: [system-testing, testing-patterns, integration-testing, e2e-testing, test-automation]
-tldr: "Architectural patterns for system testing: environment parity, contract testing, test data builders, chaos engineering with concrete implementation strategies"
-when_to_use: "When designing end-to-end test strategies, validating distributed system behavior, or establishing comprehensive testing pipelines"
-keywords: [smoke-tests, regression-testing, chaos-engineering, contract-testing, test-environments]
+tags: [system-testing, integration-testing, distributed-systems, qa-patterns, testing-strategy]
+tldr: "Essential patterns for system testing: contract, smoke, canary, shadow, chaos testing with implementation triggers and tooling examples"
+when_to_use: "When designing system test strategies, validating service integrations, or implementing testing automation pipelines"
+keywords: [contract-testing, smoke-testing, canary-deployment, chaos-engineering]
 long_tails:
-  - How to implement chaos engineering for distributed system testing
-  - Test data builder patterns for complex integration scenarios
-  - Environment parity strategies for reliable system testing
+  - "How to implement contract testing between microservices"
+  - "When to use shadow testing vs canary testing in production"
+  - "System testing patterns for CI/CD pipeline integration"
 axioms:
-  - ALWAYS test in production-like environments with realistic data volumes
-  - NEVER rely solely on unit tests for distributed system validation
-  - IF system has external dependencies THEN implement contract testing
+  - "ALWAYS test critical paths with smoke tests after deployment"
+  - "NEVER deploy without contract validation between service boundaries"
+  - "IF testing in production THEN use shadow/canary patterns for safety"
 linked_artifacts:
   primary: null
   related: []
-density_score: 0.85
+density_score: 0.87
 data_source: "https://martinfowler.com/articles/practical-test-pyramid.html"
-
 ---
 
-# System Testing Patterns for Complex Distributed Systems
+# System Testing Patterns for Distributed Systems
 
 ## Quick Reference
 ```yaml
 topic: system_testing_patterns
-scope: End-to-end validation patterns for distributed architectures
-owner: testing-engineering
+scope: Distributed systems, microservices, CI/CD integration
+owner: qa_engineering
 criticality: high
 ```
 
 ## Key Concepts
 
-- **Environment Parity**: Production-like test environments (90%+ config match)
-- **Test Data Builders**: Programmatic test data generation with realistic relationships
-- **Contract Testing**: API boundary validation using consumer-driven contracts
-- **Chaos Engineering**: Controlled failure injection to validate system resilience
-- **Smoke Tests**: Critical path validation in <5 minutes post-deployment
+### Contract Testing
+- **Purpose**: API boundary validation between services
+- **Tools**: Pact, Spring Cloud Contract, Postman Contract Testing
+- **Trigger**: Service API changes, dependency updates
+- **Success**: 100% contract compatibility across service versions
+
+### Smoke Testing
+- **Purpose**: Critical path verification post-deployment
+- **Coverage**: 5-10 essential user journeys, <5min execution
+- **Trigger**: Every deployment to staging/production
+- **Tools**: Cypress, Playwright, TestCafe for web; REST Assured for APIs
+
+### Canary Testing
+- **Purpose**: Progressive rollout validation with real traffic
+- **Pattern**: 5% -> 25% -> 50% -> 100% traffic split
+- **Metrics**: Error rate <0.1%, latency P95 <500ms, success rate >99.9%
+- **Tools**: Istio, Linkerd, AWS App Mesh, Argo Rollouts
 
 ## Strategy Phases
 
-1. **Environment Setup**: Clone production topology, sanitize data, match versions
-2. **Test Data Generation**: Build realistic datasets with referential integrity
-3. **Contract Validation**: Verify API contracts between service boundaries
-4. **Failure Simulation**: Inject network, CPU, memory, and service failures
-5. **Performance Baseline**: Establish SLA thresholds under realistic load
+1. **Risk Assessment**: Identify critical paths, failure impact, rollback cost
+2. **Pattern Selection**: Match testing patterns to risk level and deployment frequency
+3. **Tool Integration**: Embed patterns into CI/CD pipeline stages
+4. **Metrics Definition**: Set success/failure thresholds for automated decisions
+5. **Monitoring Setup**: Real-time dashboards for test execution and system health
 
 ## Golden Rules
 
-- ISOLATE: each test owns its data, no shared state between tests
-- PARALLELIZE: run independent test suites concurrently for faster feedback
-- MONITOR: capture system metrics during tests, not just pass/fail
-- CLEANUP: tear down test data and infrastructure after execution
+- Test pyramid: 70% unit, 20% integration, 10% system/e2e
+- Fail fast: Run smoke tests before expensive integration tests
+- Production safety: Use canary/shadow for high-risk changes
+- Contract first: Validate API contracts before integration testing
+- Monitor everything: Test execution time, flakiness, coverage gaps
 
 ## Flow
 ```text
-[Deploy] -> [Smoke Tests] -> [Integration Suite] -> [Chaos Tests] -> [Performance Validation] -> [Report]
-    |           |                    |                   |                     |
-   <2min      <5min              <30min             <60min              <90min
+[Code Commit] -> [Unit Tests] -> [Contract Tests] -> [Integration Tests]
+                                                           |
+[Smoke Tests] <- [Deploy to Staging] <- [Security Tests] <-+
+     |
+[Canary Deploy] -> [Shadow Testing] -> [Full Production] -> [Chaos Tests]
 ```
 
-## Pattern Comparison
+## Pattern Selection Matrix
 
-| Pattern | Execution Time | Failure Detection | Infrastructure Cost |
-|---------|---------------|-------------------|-------------------|
-| Smoke Tests | 2-5 min | Critical path breaks | Low |
-| Integration Tests | 15-30 min | Service boundary issues | Medium |
-| Chaos Engineering | 30-60 min | Resilience gaps | High |
-| Load Testing | 60-120 min | Performance degradation | High |
+| Risk Level | Pattern | Execution Time | Cost | When to Use |
+|------------|---------|---------------|------|-------------|
+| Low | Smoke | 2-5 min | $ | Every deployment |
+| Medium | Contract + Integration | 10-20 min | $$ | API changes |
+| High | Canary + Shadow | 30-60 min | $$$ | Major releases |
+| Critical | Full E2E + Chaos | 2-4 hours | $$$$ | Monthly validation |
 
-## Implementation Strategies
+## Implementation Triggers
 
-| Tool Category | Example Tools | Use Case |
-|---------------|---------------|----------|
-| Test Orchestration | TestContainers, Docker Compose | Environment provisioning |
-| Contract Testing | Pact, Spring Cloud Contract | API boundary validation |
-| Chaos Engineering | Chaos Monkey, Litmus, Gremlin | Failure injection |
-| Data Generation | Factory Bot, Faker, Bogus | Realistic test datasets |
+### Contract Testing
+- **Pre-deployment**: API schema changes, version bumps
+- **Continuous**: Nightly compatibility checks across service matrix
+- **Tools**: `pact-broker verify`, `spring-cloud-contract test`
+
+### Shadow Testing
+- **Production traffic**: Replay 1-10% traffic to new version
+- **Zero user impact**: Compare responses, log differences
+- **Tools**: GoReplay, Diffy, Istio traffic mirroring
+
+### Chaos Engineering
+- **Scheduled**: Weekly failure injection during low-traffic periods
+- **Patterns**: Service shutdown, network partition, resource exhaustion
+- **Tools**: Chaos Monkey, Litmus, Gremlin, Chaos Toolkit
 
 ## Anti-Patterns
 
-- **Shared Test Data**: Multiple tests modifying same records causes flakiness
-- **Environment Drift**: Test environment diverges from production over time
-- **Happy Path Only**: Testing only success scenarios misses edge cases
-- **Brittle Selectors**: UI tests break on minor layout changes
+| Anti-Pattern | Problem | Solution |
+|-------------|---------|----------|
+| E2E everywhere | Slow, flaky, expensive | Follow test pyramid ratios |
+| Production-only testing | High blast radius | Use staging + canary patterns |
+| Manual smoke tests | Deployment bottleneck | Automate critical path validation |
+| No contract testing | Integration surprises | API-first development with contracts |
 
 ## References
-
 - Source: https://martinfowler.com/articles/practical-test-pyramid.html
-- Related: https://principlesofchaos.org/ (chaos engineering principles)
-- Tool: https://testcontainers.org/ (environment provisioning)
+- Pattern catalog: https://microservices.io/patterns/testing/
+- Chaos engineering: https://principlesofchaos.org/
