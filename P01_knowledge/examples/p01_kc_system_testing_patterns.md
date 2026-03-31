@@ -2,68 +2,65 @@
 id: p01_kc_system_testing_patterns
 kind: knowledge_card
 pillar: P01
-title: "System Testing Patterns"
+title: "System Testing Patterns in Software Engineering"
 version: "1.0.0"
-created: "2023-10-05"
-updated: "2023-10-05"
+created: "2023-10-06"
+updated: "2023-10-06"
 author: "knowledge-card-builder"
-domain: "Software Testing"
+domain: Software Engineering
 quality: null
-tags: [system_testing, testing_patterns, software_testing, knowledge]
-tldr: "Comprehensive guide to system testing patterns for effective QA processes."
-when_to_use: "During system testing of integrated software applications."
-keywords: [system testing, test cases, test suites]
+tags: [system-testing, patterns, software-engineering, knowledge]
+tldr: "System testing patterns standardize approaches to validate integrated software against specified requirements."
+when_to_use: "When testing end-to-end functionality of a software system in an integrated environment."
+keywords: [system-testing, black-box, end-to-end, usability]
 long_tails:
-  - How to apply system testing patterns in enterprise software
-  - System testing best practices and strategies
+  - How to implement black-box testing in integrated systems
+  - Combining usability and end-to-end testing for software validation
 axioms:
-  - ALWAYS document each test case with precise expected results.
-  - NEVER execute system tests without prior unit testing.
+  - ALWAYS ensure system requirements are met through comprehensive testing.
 linked_artifacts:
   primary: null
   related: []
-density_score: 0.85
-data_source: "https://www.softwaretestinghelp.com/system-testing-process/"
+density_score: 0.83
+data_source: "https://www.softwaretestinghelp.com/system-testing/"
 
 ---
-
-# System Testing Patterns
 
 ## Quick Reference
 ```yaml
 topic: System Testing Patterns
-scope: Develop, structure, and apply system testing methods
-owner: QA Specialist
+scope: Software testing methodologies for complete systems
+owner: knowledge-card-builder
 criticality: high
 ```
 
 ## Key Concepts
-- **Test Cases**: Documented scenarios with input and expected output to verify software functionality.
-- **Test Suites**: Collection of related test cases executed together to cover broader system areas.
-- **Test Scenarios**: High-level ideas describing what to test, serving as a basis for creating test cases.
+- **Black-Box Testing**: Tests based on requirements and functionality without internal code inspection.
+- **End-to-End Testing**: Validates the system flow from start to finish in a real-world scenario.
+- **Usability Testing**: Evaluates the user interface and user experience to ensure user-friendliness.
 
 ## Strategy Phases
-1. **Design Phase**: Create comprehensive test cases based on requirements.
-2. **Execution Phase**: Run test cases and record outcomes rigorously.
-3. **Evaluation Phase**: Analyze results to identify defects and ensure coverage.
+1. **Identify Requirements**: Determine system specifications and performance criteria.
+2. **Select Testing Pattern**: Choose suitable patterns based on requirements and scenarios.
+3. **Execute Tests**: Run tests and evaluate results against expected outcomes.
 
 ## Golden Rules
-- VERIFY: Each test case should align with a specific functional requirement.
-- PRIORITIZE: Continuously prioritize critical tests based on risk assessment.
-- DOCUMENT: Thoroughly document each test's setup, execution, and teardown procedures.
+- ALWAYS validate the system as a whole in a production-like environment.
+- NEVER skip usability testing when user interaction is critical.
+- Combine multiple testing patterns for comprehensive coverage.
 
 ## Flow
-```text
-[Identify Requirements] -> [Design Test Cases] -> [Execute Tests] -> [Evaluate Outcomes]
+```
+[Requirements] -> [Select Pattern] -> [Execute Test] -> [Evaluate Results]
 ```
 
 ## Comparativo
-| Feature       | Manual Testing | Automated Testing |
-|---------------|----------------|-------------------|
-| Speed         | Slow           | Fast              |
-| Scalability   | Limited        | High              |
-| Accuracy      | Variable       | Consistent        |
+| Pattern Type | Black-Box Testing | End-to-End Testing | Usability Testing |
+|--------------|-------------------|--------------------|------------------|
+| Focus | Functional correctness | System flow | User experience |
+| Use Cases | APIs, UI elements | Full application | Interface design |
+| Approach | Input/output validation | Scenario simulation | User interaction |
 
 ## References
-- Related artifact: Not available
-- Source: https://www.softwaretestinghelp.com/system-testing-process/
+- Source: https://www.softwaretestinghelp.com/system-testing/
+- Related artifact: null
