@@ -1,1 +1,23 @@
-{"mcpServers": {}}
+{
+  "mcpServers": {
+    "supabase": {
+      "command": "npx",
+      "args": ["-y", "@supabase/mcp-server-supabase", "--access-token", "[SUPABASE_ACCESS_TOKEN]"]
+    },
+    "postgres": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-server-postgres", "postgresql://postgres:[PASSWORD]@db.[PROJECT_REF].supabase.co:5432/postgres"]
+    },
+    "fetch": {
+      "command": "uvx",
+      "args": ["mcp-server-fetch", "--ignore-robots-txt"]
+    },
+    "firecrawl": {
+      "command": "npx",
+      "args": ["-y", "firecrawl-mcp"],
+      "env": {
+        "FIRECRAWL_API_KEY": "[FIRECRAWL_API_KEY]"
+      }
+    }
+  }
+}
