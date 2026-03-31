@@ -992,9 +992,14 @@ class EightFRunner:
             out_dir = Path(out_dir)
             out_dir.mkdir(parents=True, exist_ok=True)
 
-            # Generate filename from intent
-            slug = re.sub(r"[^a-z0-9]+", "_", self.state.intent.lower()).strip("_")[:40]
-            filename = f"{self.state.pillar.lower()}_{self.state.kind}_{slug}.md"
+            # Generate filename: try to extract id from artifact, fallback to intent slug
+            fm_pre = extract_frontmatter_dict(self.state.artifact)
+            artifact_id = fm_pre.get("id", "") if fm_pre else ""
+            if artifact_id and re.match(r"^[a-z0-9_]+$", str(artifact_id)):
+                filename = f"{artifact_id}.md"
+            else:
+                slug = re.sub(r"[^a-z0-9]+", "_", self.state.intent.lower()).strip("_")[:40]
+                filename = f"{self.state.pillar.lower()}_{self.state.kind}_{slug}.md"
             out_path = out_dir / filename
 
             # Clean code fences from LLM output
