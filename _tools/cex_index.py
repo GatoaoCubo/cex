@@ -8,8 +8,10 @@ import re
 import sqlite3
 import sys
 import time
-import yaml
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from cex_shared import parse_frontmatter as _shared_parse_frontmatter
 
 ROOT = Path(__file__).resolve().parent.parent
 DB_DIR = ROOT / ".cex"
@@ -21,17 +23,8 @@ WIKILINK_RE = re.compile(r"\[\[([^\]]+)\]\]")
 
 
 def parse_frontmatter(text: str) -> dict:
-    """Extract YAML frontmatter from --- delimited block."""
-    if not text.startswith("---"):
-        return {}
-    end = text.find("---", 3)
-    if end == -1:
-        return {}
-    try:
-        data = yaml.safe_load(text[3:end])
-        return data if isinstance(data, dict) else {}
-    except yaml.YAMLError:
-        return {}
+    """Extract YAML frontmatter from --- delimited block (delegates to cex_shared)."""
+    return _shared_parse_frontmatter(text) or {}
 
 
 def extract_wikilinks(text: str) -> list[str]:

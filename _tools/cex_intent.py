@@ -30,13 +30,14 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from cex_8f_motor import (
     CEX_ROOT,
     OBJECT_TO_KINDS,
-    parse_intent,
     classify_objects,
-    load_builder_map,
-    load_kc_library,
     fan_out,
     generate_output,
+    load_builder_map,
+    load_kc_library,
+    parse_intent,
 )
+from cex_shared import find_builder_dir
 
 # ---------------------------------------------------------------------------
 # Constants
@@ -72,26 +73,7 @@ ALL_ISO_PREFIXES = [
 ]
 
 
-# ---------------------------------------------------------------------------
-# Builder Discovery
-# ---------------------------------------------------------------------------
-
-
-def find_builder_dir(kind: str) -> Path | None:
-    """Find builder directory for a CEX kind.
-
-    Tries: {kind}-builder, then scans for partial match.
-    """
-    slug = kind.replace("_", "-")
-    direct = BUILDERS_ROOT / f"{slug}-builder"
-    if direct.exists():
-        return direct
-
-    # Scan for partial match
-    for d in BUILDERS_ROOT.iterdir():
-        if d.is_dir() and slug in d.name:
-            return d
-    return None
+# find_builder_dir imported from cex_shared
 
 
 def load_builder_iso(builder_dir: Path, prefix: str, kind_slug: str) -> str | None:
@@ -245,7 +227,7 @@ def list_kinds():
     """Print all available kinds grouped by pillar."""
     by_pillar: dict[str, list[tuple[str, str]]] = {}
     seen = set()
-    for keyword, kinds_list in sorted(OBJECT_TO_KINDS.items()):
+    for _keyword, kinds_list in sorted(OBJECT_TO_KINDS.items()):
         for kind, pillar, fn in kinds_list:
             key = (kind, pillar)
             if key not in seen:

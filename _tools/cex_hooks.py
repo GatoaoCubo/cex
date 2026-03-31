@@ -21,9 +21,12 @@ Usage:
 
 import os
 import re
-import sys
 import subprocess
+import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from cex_shared import parse_frontmatter
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
@@ -40,21 +43,6 @@ PILLAR_PATTERN = re.compile(r"^P\d{2}$")
 # Nucleus artifact directories
 NUCLEUS_DIRS = [d for d in CEX_ROOT.iterdir()
                 if d.is_dir() and re.match(r"N\d{2}_", d.name)]
-
-
-def parse_frontmatter(content: str) -> dict | None:
-    """Parse YAML frontmatter from content. Returns dict or None if invalid."""
-    content = content.strip()
-    if not content.startswith("---"):
-        return None
-    end = content.find("---", 3)
-    if end < 0:
-        return None
-    try:
-        import yaml
-        return yaml.safe_load(content[3:end]) or {}
-    except Exception:
-        return None
 
 
 def validate_artifact(path: str, content: str = None) -> list[dict]:
