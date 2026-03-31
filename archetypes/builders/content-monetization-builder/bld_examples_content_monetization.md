@@ -70,6 +70,83 @@ emails: { provider: resend, api_key_env: RESEND_API_KEY, sequences: [{ name: onb
 validation: { margin_check: true, webhook_test: true, mock_before_live: true }
 ```
 
+## Golden Example — EU Infoproduct (Digistore24)
+INPUT: "Online coaching program, Digistore24, DACH market"
+```yaml
+identity: { empresa: "MindsetPro", domain: coaching, currency: EUR, currency_unit: cents, country: EU }
+pricing:
+  strategy: tiered
+  floor_margin_pct: 0.65
+  tiers:
+    - { name: starter, price_monthly: 4900, features: [course_basic, community] }
+    - { name: premium, price_monthly: 14900, features: [course_basic, course_advanced, community, live_calls, certificate] }
+    - { name: vip, price_monthly: 49900, features: [all_courses, community, live_calls, certificate, mentoring_1on1] }
+checkout:
+  provider: digistore24
+  api_key_env: DS24_API_KEY
+  ipn_url: "https://api.mindsetpro.de/webhooks/ds24"
+  ipn_passphrase_env: DS24_IPN_PASSPHRASE
+  ipn_format: form-encoded
+  ipn_response: "OK"
+  signature: sha512
+  idempotency: true
+  mock_mode: true
+  payment_methods:
+    DE: [sepa, sofort, cards, paypal]
+    NL: [ideal, cards, paypal]
+    US: [cards, paypal]
+  languages: [de, en, es, fr]
+  merchant_of_record: ds24
+affiliates:
+  enabled: true
+  commission_pct: 0.50
+  marketplace_listed: true
+  promo_tools: true
+compliance:
+  gdpr_dpa: true
+  double_optin: true
+  impressum_url: "https://mindsetpro.de/impressum"
+  widerrufsrecht: "14-day cooling-off, digital waiver with consent"
+  eu_vat: "handled by DS24 as Merchant of Record"
+  cookie_consent: cookiebot
+validation: { margin_check: true, webhook_test: true, mock_before_live: true }
+```
+WHY GOOD: DS24-native, EUR pricing, sha512 IPN with "OK" response, per-country payment methods, GDPR+Impressum+Widerrufsrecht, DS24 as MoR handles VAT, affiliate marketplace enabled.
+
+## Golden Example — Multi-Platform (Hotmart BR + DS24 INT)
+INPUT: "Sell course in BR and EU simultaneously"
+```yaml
+identity: { empresa: "GlobalEdu", domain: education, currencies: [BRL, EUR], regions: [BR, EU] }
+pricing:
+  strategy: tiered
+  floor_margin_pct: 0.55
+  tiers:
+    - { name: essencial, price_brl: 19700, price_eur: 3900, features: [course_core] }
+    - { name: completo, price_brl: 49700, price_eur: 9900, features: [course_core, mentoria, certificate] }
+checkout:
+  platforms:
+    hotmart:
+      product_id_env: HOTMART_PRODUCT_ID
+      token_env: HOTMART_TOKEN
+      webhook_url: "https://api.globaledu.com/webhooks/hotmart"
+      webhook_secret_env: HOTMART_HOTTOK
+      signature: sha256_hmac
+      format: json
+    digistore24:
+      product_id_env: DS24_PRODUCT_ID
+      api_key_env: DS24_API_KEY
+      ipn_url: "https://api.globaledu.com/webhooks/ds24"
+      ipn_passphrase_env: DS24_IPN_PASSPHRASE
+      signature: sha512
+      format: form-encoded
+      response: "OK"
+  routing: "geo-detect → BR=hotmart, EU/INT=ds24"
+  idempotency: true
+  mock_mode: true
+validation: { margin_check: true, webhook_test: true, mock_before_live: true }
+```
+WHY GOOD: Dual-platform, geo-routed checkout, both webhook formats handled, EUR+BRL pricing.
+
 ## Anti-Example
 ```yaml
 price: 49.90         # FAIL: float not centavos
@@ -78,4 +155,7 @@ margin: unknown      # FAIL: no floor margin
 webhook: none        # FAIL: no webhook
 mock_mode: false     # FAIL: live in dev
 overdraft: unlimited # FAIL: no policy
+ds24_response: "{}"  # FAIL: DS24 IPN must respond "OK" not JSON
+ds24_format: json    # FAIL: DS24 IPN is form-encoded not JSON
+hotmart_only: true   # FAIL: single-platform lock-in, no international reach
 ```

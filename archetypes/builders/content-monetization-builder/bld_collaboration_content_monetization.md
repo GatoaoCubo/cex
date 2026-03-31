@@ -23,9 +23,21 @@ I produce monetization architecture + config schema so downstream builders imple
 2. content-monetization-builder → "9-stage monetization config (pricing→deploy)"
 3. prompt-template-builder     → "email templates, course descriptions, ad copy briefs"
 4. cli-tool-builder            → "checkout orchestrator + credit tracker CLI"
-5. api-client-builder          → "Stripe/Hotmart/email provider clients"
+5. api-client-builder          → "Stripe/Hotmart/DS24/email provider clients"
 6. spawn-config-builder        → "cron: credit refresh, email scheduler, ad sync"
 ```
+
+### Crew: "Multi-Platform Launch" (NEW — Hotmart BR + DS24 INT)
+```
+1. research-pipeline-builder    → "platform research: Hotmart API, DS24 API, compliance"
+2. content-monetization-builder → "dual-platform config: Hotmart(BR) + DS24(INT)"
+3. api-client-builder           → "Hotmart webhook handler (JSON/sha256) + DS24 IPN handler (form/sha512)"
+4. prompt-template-builder      → "sales page copy (PT-BR + EN/DE), email sequences"
+5. cli-tool-builder             → "multi-platform checkout router (geo-detect → provider)"
+6. formatter-builder            → "landing pages: BR variant + INT variant"
+7. social-publisher-builder     → "launch campaigns: Meta(BR) + Google(INT)"
+```
+Launch flow: research → build configs → implement handlers → write copy → deploy pages → launch campaigns
 
 ### Crew: "Infoproduct Launch"
 ```
@@ -48,16 +60,17 @@ I produce monetization architecture + config schema so downstream builders imple
 |---------------|------|--------|
 | User / N07 | Monetization requirements | Mission handoff .md |
 | research-pipeline-builder | Competitor pricing data | JSON + signal |
-| knowledge-card-builder | Platform KCs (Stripe, Hotmart) | KC artifact |
+| knowledge-card-builder | Platform KCs (Hotmart API, DS24 API, compliance) | KC artifact |
+| N01_intelligence | Platform research (kc_hotmart_*, kc_digistore24_*, kc_content_platform_*) | 8 KCs |
 
 | I send to | Data | Format |
 |----------|------|--------|
-| N02_marketing | Pricing for copy (tier names, features, prices) | Config YAML + signal |
-| N04_knowledge | Credit system docs for knowledge base | Architecture .md |
-| cli-tool-builder | Checkout + credit pipeline spec | Architecture .md |
-| api-client-builder | Provider API specs for client code | Tools .md |
-| prompt-template-builder | Email sequence briefs + course outlines | Config YAML |
-| spawn-config-builder | Cron schedules (credit refresh, email) | Config .md |
+| N02_marketing | Pricing for copy (tier names, features, prices, both currencies) | Config YAML + signal |
+| N04_knowledge | Credit system + multi-platform docs for knowledge base | Architecture .md |
+| cli-tool-builder | Dual checkout pipeline spec (Hotmart JSON + DS24 form-encoded) | Architecture .md |
+| api-client-builder | Provider API specs: Hotmart REST + DS24 REST + IPN handler | Tools .md |
+| prompt-template-builder | Email sequence briefs + course outlines (PT-BR + EN/DE) | Config YAML |
+| spawn-config-builder | Cron schedules (credit refresh, email, webhook health check) | Config .md |
 
 ## Nucleus Routing
 | Phase | Nucleus | Why |

@@ -48,13 +48,39 @@ pattern: CONFIG derives from this. TEMPLATE renders this.
 ### checkout (required)
 | Field | Type | Required | Default |
 |-------|------|----------|---------|
-| provider | enum(stripe,hotmart,kiwify,monetizze,eduzz) | YES | "stripe" |
+| provider | enum(stripe,hotmart,kiwify,monetizze,eduzz,digistore24) | YES | "stripe" |
 | webhook_url | string (URL) | YES | - |
 | webhook_secret_env | string (ENV_VAR) | YES | "CHECKOUT_WEBHOOK_SECRET" |
 | idempotency | boolean | YES | true |
 | success_redirect | string (URL) | YES | - |
 | cancel_redirect | string (URL) | YES | - |
 | mock_mode | boolean | NO | true |
+
+### checkout_ds24 (required when provider=digistore24)
+| Field | Type | Required | Default |
+|-------|------|----------|---------|
+| ds24_product_id | string | YES | - |
+| ds24_api_key_env | string (ENV_VAR) | YES | "DS24_API_KEY" |
+| ipn_url | string (URL) | YES | - |
+| ipn_passphrase_env | string (ENV_VAR) | YES | "DS24_IPN_PASSPHRASE" |
+| ipn_format | const("form-encoded") | YES | "form-encoded" |
+| ipn_response | const("OK") | YES | "OK" |
+| signature_algo | const("sha512") | YES | "sha512" |
+| merchant_of_record | enum(ds24,self) | YES | "ds24" |
+| eu_vat_included | boolean | YES | true |
+| languages | list[enum(de,en,es,fr,it,nl,pl)] | NO | ["de","en"] |
+| payment_methods | map[country_code, list[string]] | NO | - |
+
+### checkout_hotmart (required when provider=hotmart)
+| Field | Type | Required | Default |
+|-------|------|----------|---------|
+| hotmart_product_id | string | YES | - |
+| hotmart_token_env | string (ENV_VAR) | YES | "HOTMART_TOKEN" |
+| hottok_env | string (ENV_VAR) | YES | "HOTMART_HOTTOK" |
+| webhook_format | const("json") | YES | "json" |
+| signature_algo | const("sha256_hmac") | YES | "sha256_hmac" |
+| affiliate_enabled | boolean | NO | false |
+| affiliate_commission_pct | float (0.0-1.0) | NO | 0.40 |
 
 ### courses (optional)
 | Field | Type | Required | Default |

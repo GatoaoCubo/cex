@@ -18,7 +18,15 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 6. Identify payment providers available in the target market:
    - Global: Stripe (cards + subscriptions + usage billing)
    - BR infoproducts: Hotmart, Kiwify, Monetizze, Eduzz (checkout pages + affiliates)
-7. Define email provider: Resend (dev-friendly), SendGrid (scale), SES (cost), Mailchimp (no-code)
+   - INT infoproducts: Digistore24 (EU leader, Merchant of Record, auto EU VAT)
+   - Platform pair strategy: Hotmart (BR/LATAM) + Digistore24 (EU/DACH/INT)
+7. For Hotmart: set up OAuth2 bearer token, webhook with sha256 HMAC (X-Hotmart-Hottok)
+8. For Digistore24: set up API key (X-DS-API-KEY header), IPN with sha512 verification
+   - DS24 IPN: POST form-encoded (NOT JSON), response must be exact string "OK"
+   - DS24 sandbox: create test product, test IPN endpoint, verify "OK" response
+   - DS24 features: 7 native languages (DE,EN,ES,FR,IT,NL,PL), per-country payment methods
+   - DS24 as Merchant of Record: handles EU VAT collection/remittance automatically
+9. Define email provider: Resend (dev-friendly), SendGrid (scale), SES (cost), Mailchimp (no-code)
 8. Define ad platforms: Meta Ads (B2C), Google Ads (intent), LinkedIn Ads (B2B), TikTok Ads (gen-z)
 9. Check existing content_monetization artifacts to avoid config overlap
 
@@ -30,18 +38,24 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 5. Write PRICING stage: define strategy and tiers
    - Choose strategy: freemium (free + paid), tiered (good/better/best), usage (pay-per-use),
      credit_pack (prepaid bundles), hybrid (tier + overage credits)
-   - Define tiers: name, monthly price (centavos), yearly price, credits included, features
+   - Define tiers: name, monthly price (centavos/cents), yearly price, credits included, features
    - Set floor_margin_pct >= 0.30 — calculate: (price - pipeline_cost) / price >= 0.30
    - Optional: trial_days (7-30), annual discount (typically 2 months free)
+   - Multi-currency: BRL for Hotmart/BR, EUR for DS24/INT, USD for global fallback
+   - PPP: consider Purchasing Power Parity — lower pricing tiers for emerging markets
 6. Write CREDITS stage: map pipeline operations to credit costs
    - Each operation: name, credit cost, underlying cost (LLM tokens, API, compute)
    - Define packs for pay-as-you-go users: name, credits, price
    - Set overdraft_policy: block (safest), notify_then_block, allow_negative (risky)
-7. Write CHECKOUT stage: payment provider integration
-   - Provider config: API key env var, webhook URL, webhook secret env var
-   - Webhook handling: idempotency_key dedup, signature verification, event mapping
-   - Redirects: success URL, cancel URL
-   - Mock mode: true by default, false only after validation
+7. Write CHECKOUT stage: payment provider integration (multi-platform)
+   - Platform A (Hotmart/BR): HOTMART_TOKEN env var, webhook URL, HOTMART_HOTTOK secret
+     - Webhook: JSON payload, sha256 HMAC signature, idempotency via transaction_id
+     - Events: PURCHASE_COMPLETE, PURCHASE_CANCELED, PURCHASE_REFUNDED, PURCHASE_CHARGEBACK
+   - Platform B (Digistore24/INT): DS24_API_KEY env var, IPN URL, DS24_IPN_PASSPHRASE
+     - IPN: form-encoded payload (NOT JSON), sha512 signature verification
+     - Response: body must be exact string "OK" — DS24 retries until "OK" received
+     - Events: on_payment, on_refund, on_chargeback, on_rebill_resumed, on_rebill_cancelled
+   - Both platforms: idempotency_key dedup, success/cancel redirects, mock mode true by default
 8. Write COURSES stage (if applicable):
    - Module structure: title, lessons (title + type + duration), drip_days
    - Certification: completion_threshold (default 0.80), certificate template

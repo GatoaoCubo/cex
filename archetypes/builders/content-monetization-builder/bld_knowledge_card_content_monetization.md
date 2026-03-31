@@ -39,16 +39,49 @@ subscriptions, credit packs, or hybrid models. Three pillars: **pricing strategy
 - **Eduzz**: BR, digital products + physical, Sun (course platform)
 
 ## Platform KC Pointers
+
+### Core Platforms (Tier 1)
 | Platform | KC Reference | Key Strength |
 |----------|-------------|--------------|
-| Stripe | kc_stripe_billing | Global, API-first, usage billing |
-| Hotmart | kc_hotmart_checkout | BR infoproducts, affiliate network |
-| Kiwify | kc_kiwify_checkout | BR, low fees, simple integration |
-| Monetizze | kc_monetizze_checkout | BR, health/finance niches |
-| Eduzz | kc_eduzz_checkout | BR, digital+physical hybrid |
-| Resend | kc_resend_email | Dev-friendly transactional email |
-| Meta Ads | kc_meta_ads | B2C awareness, pixel tracking |
-| Google Ads | kc_google_ads | Intent capture, search/shopping |
+| Hotmart API | kc_hotmart_api | BR leader, REST API, OAuth2, webhook (JSON, sha256) |
+| Hotmart Club | kc_hotmart_club | Native member area, course delivery, drip content |
+| Hotmart Marketplace | kc_hotmart_marketplace | 500K+ affiliates, BR/LATAM reach |
+| Digistore24 API | kc_digistore24_api | EU leader, REST API, Merchant of Record, auto VAT |
+| Digistore24 IPN | kc_digistore24_ipn | form-encoded IPN, sha512, respond "OK", 8 event types |
+| Digistore24 Marketplace | kc_digistore24_marketplace | EU affiliates, multi-language, per-country payments |
+
+### Compliance & Comparison
+| Topic | KC Reference | Key Strength |
+|-------|-------------|--------------|
+| EU Compliance | kc_content_platform_compliance | GDPR, EU VAT, Widerrufsrecht, Impressum, cookies |
+| Platform Comparison | kc_content_platform_comparison | Hotmart vs DS24 vs Teachable vs Kiwify cross-comparison |
+
+### Supporting Platforms
+| Platform | KC Reference | Key Strength |
+|----------|-------------|--------------|
+| Stripe | kc_stripe_patterns | Global, API-first, usage billing |
+| Kiwify | (pending) | BR, low fees, simple integration |
+| Monetizze | (pending) | BR, health/finance niches |
+| Eduzz | (pending) | BR, digital+physical hybrid |
+| Resend | (pending) | Dev-friendly transactional email |
+| Meta Ads | (pending) | B2C awareness, pixel tracking |
+| Google Ads | (pending) | Intent capture, search/shopping |
+
+## Multi-Platform Strategy
+| Aspect | Hotmart (BR) | Digistore24 (INT) |
+|--------|-------------|-------------------|
+| Primary market | BR / LATAM | EU / DACH / Global |
+| Currency | BRL | EUR (multi-currency) |
+| Merchant of Record | Seller | DS24 (handles EU VAT) |
+| Affiliate network | Hotmart Marketplace (500K+) | DS24 Marketplace |
+| Webhook format | JSON | form-encoded |
+| Signature | sha256 HMAC | sha512 hash |
+| Member area | Hotmart Club | DS24 member or external |
+| Languages | PT-BR | DE, EN, ES, FR, IT, NL, PL |
+| Tier strategy | T1 for BR | T1 for INT |
+
+**Recommended pairing**: Hotmart (BR/LATAM) + Digistore24 (EU/INT) for maximum reach.
+T2 additions if mass niche: +Udemy, +ClickBank.
 
 ## Anti-Patterns
 | Anti-Pattern | Why It Fails |
@@ -61,6 +94,11 @@ subscriptions, credit packs, or hybrid models. Three pillars: **pricing strategy
 | Unlimited credits on free tier | Free users consume expensive LLM calls — margin collapses |
 | No overdraft policy | Users go negative, dispute charges, support overload |
 | Time-only email triggers | Misses behavioral signals — user who used feature X is warmer |
+| DS24 IPN parsed as JSON | DS24 sends form-encoded — JSON parsing silently fails |
+| DS24 response != "OK" | DS24 retries indefinitely until exact "OK" body received |
+| Hotmart-only for INT | Hotmart has weak INT reach — DS24 dominates EU/DACH |
+| Ignoring EU compliance | GDPR + Widerrufsrecht mandatory for DS24 sales, legal risk |
+| Self-handling EU VAT | DS24 as MoR handles it — self-registration is unnecessary overhead |
 
 ## 9-Stage Pipeline
 | Stage | Name | Input | Output |

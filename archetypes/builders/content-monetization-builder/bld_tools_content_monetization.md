@@ -9,10 +9,40 @@ purpose: Tools, APIs, and data sources for content monetization pipeline
 # Tools: content-monetization-builder
 
 ## Payment Providers
+
+### Platform A — Hotmart (BR)
+| Aspect | Detail |
+|--------|--------|
+| API Base | https://developers.hotmart.com/docs/en/ |
+| Auth | OAuth2 Bearer token (client_credentials) → HOTMART_TOKEN |
+| Endpoints | /payments/api/v1/sales, /club/api/v1/modules, /affiliation |
+| Webhook | JSON, sha256 HMAC via X-Hotmart-Hottok header |
+| Events | PURCHASE_COMPLETE, PURCHASE_CANCELED, PURCHASE_REFUNDED, PURCHASE_CHARGEBACK, SUBSCRIPTION_CANCELLATION, SWITCH_PLAN |
+| Sandbox | hotmart.com/developer (test environment) |
+| Cost | varies by product category |
+| Market | BR/LATAM infoproducts, 500K+ affiliates |
+| Member area | Hotmart Club (native course delivery) |
+
+### Platform B — Digistore24 (International)
+| Aspect | Detail |
+|--------|--------|
+| API Base | https://www.digistore24.com/api/v1/ |
+| Auth | API key via X-DS-API-KEY header → DS24_API_KEY |
+| Endpoints | /products, /purchases, /affiliates, /transactions |
+| IPN | form-encoded (NOT JSON), sha512 signature (DS24_IPN_PASSPHRASE) |
+| IPN Response | body must be exact string "OK" (not JSON, not HTML) |
+| Events | on_payment, on_refund, on_chargeback, on_rebill_resumed, on_rebill_cancelled, on_affiliatelink, on_invoice_created, on_payment_missed |
+| Sandbox | DS24 test product mode |
+| Cost | varies, DS24 is Merchant of Record |
+| Market | EU/DACH dominant, EUR, auto EU VAT |
+| Languages | 7 native: DE, EN, ES, FR, IT, NL, PL |
+| Payment methods | SEPA+Sofort (DE), iDEAL (NL), cards+PayPal (global) |
+| Member area | DS24 member area or external redirect |
+
+### Other Providers
 | Provider | API | Auth | Cost | Market |
 |----------|-----|------|------|--------|
 | Stripe | REST + webhooks | STRIPE_SECRET_KEY | 2.9% + $0.30/tx | Global |
-| Hotmart | REST v2 | HOTMART_TOKEN | varies by product | BR infoproducts |
 | Kiwify | REST | KIWIFY_API_KEY | 8.99% per sale | BR infoproducts |
 | Monetizze | REST | MONETIZZE_TOKEN | varies | BR health/finance |
 | Eduzz | REST | EDUZZ_API_KEY | varies | BR digital+physical |
