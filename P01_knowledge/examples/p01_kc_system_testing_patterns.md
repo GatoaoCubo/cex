@@ -1,65 +1,64 @@
----  
-id: p01_kc_system_testing_patterns  
-kind: knowledge_card  
-pillar: P01  
-title: "System Testing Patterns"  
-version: "1.0.0"  
-created: "2023-11-01"  
-updated: "2023-11-01"  
-author: "knowledge-card-builder"  
-domain: "Software Testing"  
-quality: null  
-tags: [system-testing, testing-patterns, software-testing, pattern-recognition, knowledge]  
-tldr: "System testing patterns evaluate software systems comprehensively to detect and correct systemic errors before deployment."  
-when_to_use: "During system testing phase to validate end-to-end functionalities and discover integration issues."  
-keywords: [system-testing, smoke-testing, load-testing]  
-long_tails:  
-  - "How to apply smoke testing in software development"  
-  - "System testing patterns for agile environments"  
-axioms:  
-  - "ALWAYS integrate regression testing to catch new errors."  
-linked_artifacts:  
-  primary: null  
-  related: []  
-density_score: 0.88  
-data_source: "https://www.softwaretestinghelp.com/system-testing"  
+---
+id: p01_kc_system_testing_patterns
+kind: knowledge_card
+pillar: P01
+title: "System Testing Patterns"
+version: "1.0.0"
+created: "2023-10-20"
+updated: "2023-10-20"
+author: "John Doe"
+domain: "Software Testing"
+quality: null
+tags: [system_testing, design_patterns, quality_assurance, knowledge]
+tldr: "System testing patterns ensure comprehensive verification of system functionality against requirements in realistic environments."
+when_to_use: "When designing or evaluating comprehensive system tests to ensure full coverage and alignment with user requirements."
+keywords: [system_testing, design_patterns, quality_assurance]
+long_tails:
+  - How to implement data-driven testing in system tests
+  - Comparative analysis of automation tools for system testing
+axioms:
+  - ALWAYS prioritize end-to-end testing for integrated systems
+linked_artifacts:
+  primary: null
+  related: []
+density_score: 0.85
+data_source: "https://example.com/system_testing_patterns"
 
----  
+---
 
-## Quick Reference  
-```yaml  
-topic: system_testing_patterns  
-scope: Comprehensive evaluation in software testing  
-owner: knowledge-card-builder  
-criticality: high  
-```  
+## Quick Reference
+```yaml
+topic: System Testing Patterns
+scope: Comprehensive system testing
+owner: John Doe
+criticality: high
+```
 
-## Key Concepts  
-- **Smoke Testing**: Initial test used to determine if a software build is stable.  
-- **Regression Testing**: Ensures new changes have not adversely affected existing features.  
-- **Load Testing**: Determines system behavior under expected load conditions.
+## Key Concepts
+- **Test Automation Pattern**: Utilizes automation for repetitive test execution.
+- **Data-Driven Testing Pattern**: Uses data sets for various test scenarios.
+- **End-to-End Testing Pattern**: Covers full workflow testing from start to finish.
 
-## Strategy Phases  
-1. **Preparation**: Set up environment and define testing goals.  
-2. **Execution**: Conduct tests systematically according to plan.  
-3. **Analysis**: Evaluate results and identify areas for improvement.  
+## Strategy Phases
+1. **Identification**: Determine critical workflows to test comprehensively.
+2. **Design**: Develop test scripts aligning with identified patterns.
+3. **Execution**: Conduct tests in environments simulating real conditions.
 
-## Golden Rules  
-- Ensure environment parity between test and production.  
-- Automate tests wherever possible to increase efficiency.  
-- Focus on critical path scenarios to prioritize testing efforts.  
+## Golden Rules
+- ALWAYS incorporate data-driven testing for versatile scenarios.
+- NEVER ignore edge cases in end-to-end testing.
+- PRIORITIZE automation to improve test efficiency.
 
-## Flow  
-```text  
-[Setup] -> [Execute Tests] -> [Analyze Results] -> [Improve]  
-```  
+## Flow
+```
+[Input Data] -> [Test Script Design] -> [Execution] -> [Validation of Results]
+```
 
-## Comparativo  
-| Testing Type   | Smoke Testing        | Load Testing         |  
-|----------------|----------------------|----------------------|  
-| Purpose        | Initial stability    | Performance evaluation|  
-| Frequency      | Frequent and short   | Less frequent, detailed|  
+## Comparativo
+| Dimension | Option A | Option B |
+|-----------|----------|----------|
+| Automation | High | Low |
+| Coverage | Comprehensive | Limited |
 
-## References  
-- Source: https://www.softwaretestinghelp.com/system-testing  
-- Related methodology: Agile software development practices
+## References
+- Source: https://example.com/system_testing_patterns
