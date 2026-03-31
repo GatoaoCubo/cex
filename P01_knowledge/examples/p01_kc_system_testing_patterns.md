@@ -2,123 +2,67 @@
 id: p01_kc_system_testing_patterns
 kind: knowledge_card
 pillar: P01
-title: "System Testing Patterns for Distributed Systems"
+title: "System Testing Patterns"
 version: "1.0.0"
-created: "2024-12-19"
-updated: "2024-12-19"
-author: "knowledge-card-builder"
-domain: "software_testing"
+created: "2023-10-10"
+updated: "2023-10-10"
+author: "Knowledge Distillation Specialist"
+domain: "Software Testing"
 quality: null
-tags: [system-testing, integration-testing, distributed-systems, qa-patterns, testing-strategy]
-tldr: "Essential patterns for system testing: contract, smoke, canary, shadow, chaos testing with implementation triggers and tooling examples"
-when_to_use: "When designing system test strategies, validating service integrations, or implementing testing automation pipelines"
-keywords: [contract-testing, smoke-testing, canary-deployment, chaos-engineering]
+tags: [system-testing, software-testing, testing-patterns, quality-assurance, knowledge]
+tldr: "Overview of key system testing patterns for comprehensive coverage and efficiency."
+when_to_use: "Designing or evaluating system testing processes for comprehensive coverage and efficiency."
+keywords: [system-testing, testing-patterns, quality-assurance]
 long_tails:
-  - "How to implement contract testing between microservices"
-  - "When to use shadow testing vs canary testing in production"
-  - "System testing patterns for CI/CD pipeline integration"
+  - Examples of system testing patterns in software development
+  - Best practices for applying system testing patterns
 axioms:
-  - "ALWAYS test critical paths with smoke tests after deployment"
-  - "NEVER deploy without contract validation between service boundaries"
-  - "IF testing in production THEN use shadow/canary patterns for safety"
+  - ALWAYS ensure system testing covers all critical paths before release
 linked_artifacts:
   primary: null
   related: []
-density_score: 0.87
-data_source: "https://martinfowler.com/articles/practical-test-pyramid.html"
+density_score: 0.85
+data_source: "https://example.com/system-testing-patterns"
+
 ---
 
-# System Testing Patterns for Distributed Systems
+# System Testing Patterns
 
 ## Quick Reference
 ```yaml
 topic: system_testing_patterns
-scope: Distributed systems, microservices, CI/CD integration
-owner: qa_engineering
+scope: Application in software testing for quality assurance
+owner: Knowledge Distillation Specialist
 criticality: high
 ```
 
 ## Key Concepts
-
-### Contract Testing
-- **Purpose**: API boundary validation between services
-- **Tools**: Pact, Spring Cloud Contract, Postman Contract Testing
-- **Trigger**: Service API changes, dependency updates
-- **Success**: 100% contract compatibility across service versions
-
-### Smoke Testing
-- **Purpose**: Critical path verification post-deployment
-- **Coverage**: 5-10 essential user journeys, <5min execution
-- **Trigger**: Every deployment to staging/production
-- **Tools**: Cypress, Playwright, TestCafe for web; REST Assured for APIs
-
-### Canary Testing
-- **Purpose**: Progressive rollout validation with real traffic
-- **Pattern**: 5% -> 25% -> 50% -> 100% traffic split
-- **Metrics**: Error rate <0.1%, latency P95 <500ms, success rate >99.9%
-- **Tools**: Istio, Linkerd, AWS App Mesh, Argo Rollouts
+- **Test Case Design**: Use techniques like boundary value analysis for effective coverage.
+- **Automation**: Implement continuous integration with test automation for speed.
+- **Regression Testing**: Regularly reevaluate system after changes to ensure ongoing stability.
 
 ## Strategy Phases
-
-1. **Risk Assessment**: Identify critical paths, failure impact, rollback cost
-2. **Pattern Selection**: Match testing patterns to risk level and deployment frequency
-3. **Tool Integration**: Embed patterns into CI/CD pipeline stages
-4. **Metrics Definition**: Set success/failure thresholds for automated decisions
-5. **Monitoring Setup**: Real-time dashboards for test execution and system health
+1. **Planning**: Define clear objectives and select appropriate testing patterns.
+2. **Design**: Develop test cases focusing on critical system components.
+3. **Execution**: Conduct tests and capture results for analysis.
 
 ## Golden Rules
-
-- Test pyramid: 70% unit, 20% integration, 10% system/e2e
-- Fail fast: Run smoke tests before expensive integration tests
-- Production safety: Use canary/shadow for high-risk changes
-- Contract first: Validate API contracts before integration testing
-- Monitor everything: Test execution time, flakiness, coverage gaps
+- Plan tests with explicit coverage goals
+- Automate tests where possible to save time and resources
+- Regularly update test suites to reflect changes in system functionality
 
 ## Flow
-```text
-[Code Commit] -> [Unit Tests] -> [Contract Tests] -> [Integration Tests]
-                                                           |
-[Smoke Tests] <- [Deploy to Staging] <- [Security Tests] <-+
-     |
-[Canary Deploy] -> [Shadow Testing] -> [Full Production] -> [Chaos Tests]
+```
+[Requirements] -> [Test Planning] -> [Test Execution] -> [Test Evaluation] -> [Feedback]
 ```
 
-## Pattern Selection Matrix
-
-| Risk Level | Pattern | Execution Time | Cost | When to Use |
-|------------|---------|---------------|------|-------------|
-| Low | Smoke | 2-5 min | $ | Every deployment |
-| Medium | Contract + Integration | 10-20 min | $$ | API changes |
-| High | Canary + Shadow | 30-60 min | $$$ | Major releases |
-| Critical | Full E2E + Chaos | 2-4 hours | $$$$ | Monthly validation |
-
-## Implementation Triggers
-
-### Contract Testing
-- **Pre-deployment**: API schema changes, version bumps
-- **Continuous**: Nightly compatibility checks across service matrix
-- **Tools**: `pact-broker verify`, `spring-cloud-contract test`
-
-### Shadow Testing
-- **Production traffic**: Replay 1-10% traffic to new version
-- **Zero user impact**: Compare responses, log differences
-- **Tools**: GoReplay, Diffy, Istio traffic mirroring
-
-### Chaos Engineering
-- **Scheduled**: Weekly failure injection during low-traffic periods
-- **Patterns**: Service shutdown, network partition, resource exhaustion
-- **Tools**: Chaos Monkey, Litmus, Gremlin, Chaos Toolkit
-
-## Anti-Patterns
-
-| Anti-Pattern | Problem | Solution |
-|-------------|---------|----------|
-| E2E everywhere | Slow, flaky, expensive | Follow test pyramid ratios |
-| Production-only testing | High blast radius | Use staging + canary patterns |
-| Manual smoke tests | Deployment bottleneck | Automate critical path validation |
-| No contract testing | Integration surprises | API-first development with contracts |
+## Comparativo
+| Pattern         | Advantages                                  | Disadvantages                              |
+|-----------------|---------------------------------------------|--------------------------------------------|
+| Boundary Value  | High coverage with minimal test cases       | May not test all possible input combinations|
+| Automation      | Fast execution, saves time                  | High initial setup cost                     |
+| Regression      | Ensures changes do not introduce new issues | Can be time-consuming without automation    |
 
 ## References
-- Source: https://martinfowler.com/articles/practical-test-pyramid.html
-- Pattern catalog: https://microservices.io/patterns/testing/
-- Chaos engineering: https://principlesofchaos.org/
+- Related artifact: [p01_kc_automated_testing_methods]
+- Source: https://example.com/system-testing-patterns
