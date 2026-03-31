@@ -721,8 +721,15 @@ class EightFRunner:
             f"**Verb**: {self.parsed.get('verb', 'cria')}"
             f" ({self.parsed.get('verb_action', 'create')})",
             "**Quality**: set quality: null (NEVER self-score)",
-            "**OUTPUT FORMAT**: Start with --- then YAML frontmatter"
-            " then --- then body in Markdown. No code fences.",
+            "",
+            "## CRITICAL OUTPUT RULES",
+            "1. Output ONLY the artifact. NO preamble, NO explanation, NO tool calls.",
+            "2. Start your response with exactly `---` on the first line.",
+            "3. Then YAML frontmatter fields (id, kind, pillar, title, etc).",
+            "4. Then `---` to close frontmatter.",
+            "5. Then Markdown body with ## sections.",
+            "6. Do NOT wrap in code fences (no ```yaml or ```markdown).",
+            "7. Do NOT include any text before the opening `---`.",
         ]
         sections.append("# TASK\n\n" + "\n".join(task_lines))
 
@@ -745,12 +752,51 @@ class EightFRunner:
             self.state.artifact = response
             self._log("F6", f"LLM response received ({len(response)} chars)")
 
+    # -- helpers: clean LLM output ------------------------------------------
+
+    def _clean_llm_output(self, text: str) -> str:
+        """Strip preamble, code fences, and tool calls from LLM output."""
+        t = text.strip()
+
+        # Strip everything before first --- (preamble, tool calls, etc.)
+        idx = t.find("---\n")
+        if idx > 0:
+            t = t[idx:]
+        elif idx < 0:
+            # Try --- at very start
+            if not t.startswith("---"):
+                # Look for YAML-like content after any preamble
+                for marker in ["---\r\n", "---\n", "\n---"]:
+                    pos = t.find(marker)
+                    if pos >= 0:
+                        t = t[pos:].lstrip("\n\r")
+                        break
+
+        # Strip code fences wrapping the whole thing
+        bt = chr(96) * 3
+        if t.startswith(bt):
+            nl = t.find(chr(10))
+            if nl > 0:
+                t = t[nl + 1:]
+            close = t.rfind(bt)
+            if close > 0:
+                t = t[:close].strip()
+
+        # Ensure starts with ---
+        if not t.startswith("---"):
+            t = "---\n" + t
+
+        return t
+
     # -- F7 GOVERN ----------------------------------------------------------
 
     def f7_govern(self):
         """Validate artifact against 6 hard gates. Retry via F6 if fails (max 2)."""
         max_retries = 2
         retries = 0
+
+        # Clean LLM output before validation
+        self.state.artifact = self._clean_llm_output(self.state.artifact)
 
         while True:
             artifact = self.state.artifact
@@ -842,6 +888,8 @@ class EightFRunner:
                 self._timed(
                     f"F6.retry{retries}", lambda fb=feedback: self.f6_produce(retry_feedback=fb)
                 )
+                # Clean output after retry
+                self.state.artifact = self._clean_llm_output(self.state.artifact)
             else:
                 # Max retries exhausted -> save as draft with issues
                 self.state.verdict = {
