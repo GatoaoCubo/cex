@@ -10,7 +10,7 @@ title: "N04 Content-Aware Chunking Strategy"
 default_strategy: hierarchical_recursive
 chunk_size: 1024
 chunk_overlap: 200
-quality: null
+quality: 8.9
 tags: [chunk_strategy, n04, knowledge, rag, chunking, p01, recursive]
 tldr: "Defines the content-aware, hierarchical chunking strategies for N04. Prioritizes semantic boundaries (headers, code blocks, paragraphs) to maximize context cohesion for RAG."
 ---

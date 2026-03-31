@@ -38,7 +38,7 @@ runtime: codex
 mcp_config_file: .mcp-n05.json
 flags: ["--dangerously-skip-permissions", "--model", "gpt-5.4", "--reasoning-effort", "high"]
 domain: operations-engineering
-quality: null
+quality: 8.8
 tags: [agent_card, N05, codex, operations, devops, deployment]
 tldr: Runtime and deployment contract for the N05 execution nucleus on Codex, optimized for repo-facing operational work with validation and rollback discipline.
 density_score: 0.95

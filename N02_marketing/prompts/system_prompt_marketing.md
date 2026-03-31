@@ -16,7 +16,7 @@ safety_level: standard
 tools_listed: true
 output_format_type: markdown
 domain: copywriting_and_campaigns
-quality: null
+quality: 9.0
 tags: [system_prompt, marketing, copywriting, N02, P03]
 tldr: System prompt that turns LLM into conversion copywriter — audience-first, CTA-always, A/B-variant output.
 density_score: 0.88

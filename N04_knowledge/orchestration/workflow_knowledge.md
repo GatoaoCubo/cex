@@ -13,7 +13,7 @@ timeout_seconds: 3600
 retry_policy: "fixed_backoff"
 depends_on: [n04_chunk_strategy_knowledge, n04_embedding_config_knowledge, n04_rag_source_knowledge]
 signals: [ingestion_complete, indexing_complete, authoring_complete, taxonomy_updated, error]
-quality: null
+quality: 8.9
 tags: [workflow, n04, knowledge, orchestration, p12, ingestion, authoring, taxonomy]
 tldr: "Defines the 3 core, repeatable workflows for the N04 Nucleus: (1) RAG Ingestion & Indexing, (2) Knowledge Card Authoring, and (3) Taxonomy Governance."
 ---

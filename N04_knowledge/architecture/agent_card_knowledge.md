@@ -26,7 +26,7 @@ constraints:
 dispatch_keywords: [knowledge, rag, indexing, embeddings, taxonomy, retrieval, documentation, search, find, explain, chunking, consolidate]
 tools: [chunk_optimizer, semantic_search, knowledge_graph_builder, consolidator]
 dependencies: [N03_engineering, P01_knowledge]
-quality: null
+quality: 8.9
 tags: [agent_card, n04, knowledge, architecture, p08, gemini]
 tldr: "Deployment and operational spec for N04, the Knowledge Nucleus agent, running on Gemini 2.5-pro with a 1M context window."
 ---

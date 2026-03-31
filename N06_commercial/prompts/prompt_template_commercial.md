@@ -46,7 +46,7 @@ variables:
 variable_syntax: mustache
 composable: true
 domain: commercial-monetization
-quality: null
+quality: 8.9
 tags: [prompt_template, commercial, N06, pricing, course, funnel, upsell, revenue-model]
 tldr: Five reusable N06 templates — Pricing Strategy, Course Outline, Funnel Build, Upsell Sequence, and Revenue Model.
 density_score: 0.91

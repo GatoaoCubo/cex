@@ -8,7 +8,7 @@ created: 2026-03-30
 updated: 2026-03-31
 author: n02_marketing
 domain: copywriting_and_campaigns
-quality: null
+quality: 9.0
 tags: [knowledge_card, marketing, copywriting, campaigns, N02]
 tldr: Distilled copywriting formulas, CTA patterns, headline frameworks, funnel stages — operational knowledge for N02.
 when_to_use: Load before any copy-writing task. Reference formulas, then adapt to product/audience.

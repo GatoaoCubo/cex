@@ -16,7 +16,7 @@ safety_level: standard
 tools_listed: true
 output_format_type: markdown
 domain: commercial
-quality: null
+quality: 8.8
 tags: [system_prompt, commercial, N06, pricing, funnels, monetization]
 tldr: System prompt for N06 — 12 ALWAYS/NEVER rules for pricing strategy, course monetization, funnel design, and Brazilian infoprodutos market specifics
 density_score: 0.91

@@ -16,7 +16,7 @@ threshold_publish: 8.0
 threshold_review: 7.0
 automation_status: semi-automated
 domain: commercial-monetization
-quality: null
+quality: 8.9
 tags: [scoring-rubric, commercial, N06, pricing, funnels, conversion]
 tldr: 5-dimension rubric for N06 output — Offer Clarity (25%), Pricing Logic (25%), Funnel Coherence (20%), Copy Persuasion (20%), Revenue Potential (10%).
 density_score: 0.92

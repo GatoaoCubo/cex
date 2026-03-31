@@ -7,7 +7,7 @@ version: "1.0.0"
 created: "2026-03-31"
 updated: "2026-03-31"
 author: "N01_rebuild_8F"
-quality: null
+quality: 8.8
 tags: [workflow, orchestration, n01, research, analysis]
 tldr: "Defines the structured, multi-step workflows for the N01 agent, covering literature reviews, comparative analysis, and trend analysis."
 agent_node: "n01_intelligence"

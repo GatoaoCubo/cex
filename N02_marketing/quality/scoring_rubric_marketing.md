@@ -16,7 +16,7 @@ threshold_publish: 8.0
 threshold_review: 7.0
 automation_status: semi-automated
 domain: copywriting_and_campaigns
-quality: null
+quality: 9.0
 tags: [scoring_rubric, marketing, copy, N02, P07]
 tldr: 5-dimension copy rubric — hook strength 30%, conversion clarity 25%, readability 20%, brand fit 15%, A/B coverage 10%
 density_score: 0.88

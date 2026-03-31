@@ -7,7 +7,7 @@ version: "1.0.0"
 created: "2026-03-31"
 updated: "2026-03-31"
 author: "N01_rebuild_8F"
-quality: null
+quality: 8.9
 tags: [scoring, rubric, quality, eval, n01, research]
 tldr: "Provides the detailed 5-dimension scoring rubric for evaluating the quality of Intelligence Briefs from the N01 agent, covering synthesis, evidence, actionability, clarity, and objectivity."
 target_artifact_type: "IntelligenceBrief"

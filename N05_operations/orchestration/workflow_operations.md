@@ -13,7 +13,7 @@ error_recovery: retry_then_checkpoint_then_escalate
 max_retries: 2
 timeout_ms: 5400000
 spawn_delay_ms: 1000
-quality: null
+quality: 8.7
 tags: [workflow, N05, operations, testing, ci-cd, deployment]
 tldr: End-to-end execution workflow for review, test, debug, CI/CD repair, and release validation with checkpoints and signal discipline.
 density_score: 0.97

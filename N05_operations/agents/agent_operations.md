@@ -16,7 +16,7 @@ routing_keywords: [review, code-review, testing, pytest, debug, deploy, ci, cd, 
 tags: [agent, nucleus, N05, operations, devops, ci-cd, deployment]
 tldr: N05 is the execution nucleus for review, test, debug, release, CI/CD, and infrastructure verification where evidence, rollback, and runtime safety matter more than narration.
 density_score: 0.96
-quality: null
+quality: 9.0
 linked_artifacts:
   primary: workflow_operations
   related: [system_prompt_operations, quality_gate_operations, checkpoint_operations, spawn_config_operations]

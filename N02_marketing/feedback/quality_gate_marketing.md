@@ -8,7 +8,7 @@ created: 2026-03-30
 updated: 2026-03-31
 author: n02_marketing
 domain: copywriting_and_campaigns
-quality: null
+quality: 8.9
 tags: [quality_gate, marketing, copy, N02, P11]
 tldr: 8 HARD gates (frontmatter, structure, CTA, A/B variants) + 5 SOFT dimensions for marketing copy — threshold 8.0
 density_score: 0.89

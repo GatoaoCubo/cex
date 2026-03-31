@@ -8,7 +8,7 @@ created: 2026-03-30
 updated: 2026-03-31
 author: n06_commercial
 domain: commercial-monetization
-quality: null
+quality: 8.9
 tags: [quality-gate, commercial, N06, pricing, funnels, conversion]
 tldr: Pre-output gate for N06 artifacts — ensures pricing has rationale, copy is audience-specific, funnels have conversion benchmarks, and upsells are defined.
 density_score: 0.91

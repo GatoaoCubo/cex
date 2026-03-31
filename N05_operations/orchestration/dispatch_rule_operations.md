@@ -7,7 +7,7 @@ created: 2026-03-30
 updated: 2026-03-31
 author: n05_operations
 domain: operations-engineering
-quality: null
+quality: 8.7
 tags: [dispatch_rule, N05, operations, devops, routing]
 tldr: Route execution-heavy repository tasks to N05 when the answer depends on code inspection, testing, debugging, deploy safety, CI/CD, or infrastructure validation.
 scope: operations

@@ -25,7 +25,7 @@ constraints:
   - ALWAYS produce 3 headline variants minimum
   - NEVER skip funnel stage identification
 domain: copywriting_and_campaigns
-quality: null
+quality: 8.9
 tags: [action_prompt, marketing, copy, N02, quick_execution]
 tldr: 5 ready-to-run N02 action prompts — ad copy, headline, landing page hero, email, brand voice card.
 density_score: 0.91

@@ -8,7 +8,7 @@ created: "2026-03-31"
 updated: "2026-03-31"
 author: "N01_rebuild_8F"
 domain: "research, analysis, intelligence, synthesis, competitors, papers, benchmarks"
-quality: null
+quality: 8.8
 tags: [knowledge, n01, research, synthesis, intelligence, analysis]
 tldr: "Defines the core knowledge base for the N01 Research Nucleus, detailing its expert methodologies in research, analysis frameworks, source evaluation, and intelligence synthesis."
 when_to_use: "As a foundational knowledge layer for any task requiring deep research, competitive analysis, literature review, or strategic foresight."

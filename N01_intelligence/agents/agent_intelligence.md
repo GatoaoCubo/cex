@@ -18,7 +18,7 @@ capabilities:
   - "Competitor Intelligence"
   - "Benchmark Analysis"
 tools: []
-quality: null
+quality: 8.7
 tags: [agent, n01, research, intelligence, gemini-2.5-pro]
 tldr: "The core Research & Intelligence Nucleus (N01). A specialized agent powered by Gemini 2.5-pro, focused on deep research, large-scale document analysis, and competitor intelligence."
 ---

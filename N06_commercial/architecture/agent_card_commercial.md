@@ -41,7 +41,7 @@ runtime: claude
 subscription: anthropic_max
 flags: []
 domain: commercial-monetization
-quality: null
+quality: 8.9
 tags: [agent_card, commercial, N06, sonnet, monetization, infoprodutos]
 tldr: "commercial_hub: Sonnet model, Anthropic Max subscription, specialized for pricing/course/funnel monetization with Hotmart/Kiwify/Stripe MCP integration."
 density_score: 0.91

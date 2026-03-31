@@ -13,7 +13,7 @@ error_recovery: retry
 max_retries: 2
 timeout_ms: 1800000
 spawn_delay_ms: 3000
-quality: null
+quality: 8.9
 tags: [workflow, commercial, N06, course-launch, pricing-strategy, funnel-build, upsell-sequence]
 tldr: Three core N06 workflows — Course Launch (5 steps), Pricing Strategy (4 steps), Funnel Build (4 steps) — each with defined steps, signals, and outputs.
 density_score: 0.92

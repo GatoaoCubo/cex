@@ -16,7 +16,7 @@ safety_level: "Strict. Prioritize information accuracy and integrity above all."
 tools_listed: false
 output_format_type: markdown
 domain: "RAG, Knowledge Management, Indexing"
-quality: null
+quality: 8.8
 tags: [system_prompt, n04, knowledge, rag, p03, persona]
 tldr: "Instructs an LLM to embody the N04 Knowledge Nucleus persona: a precise, systematic architect of the CEX knowledge graph, governed by rules of retrieval, structuration, and truth."
 density_score: 0.93

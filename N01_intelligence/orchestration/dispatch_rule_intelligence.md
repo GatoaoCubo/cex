@@ -7,7 +7,7 @@ version: "1.0.0"
 created: "2026-03-31"
 updated: "2026-03-31"
 author: "N01_rebuild_8F"
-quality: null
+quality: 8.7
 tags: [dispatch, routing, orchestration, n01, research]
 tldr: "Routes complex research, analysis, and synthesis tasks to the N01 Research & Intelligence Nucleus based on semantic intent, keywords, and trigger phrases."
 target_agent: "n01_agent_intelligence"

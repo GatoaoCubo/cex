@@ -8,7 +8,7 @@ created: 2026-03-30
 updated: 2026-03-31
 author: n05_operations
 domain: operations-engineering
-quality: null
+quality: 8.9
 tags: [knowledge_card, N05, operations, devops, testing, deploy]
 tldr: Distilled doctrine for operational work where code review, tests, debugging, CI/CD, deployment, and monitoring must be grounded in evidence.
 when_to_use: When the request requires repository execution, release gating, runtime diagnosis, pipeline repair, or deployment-safe validation.

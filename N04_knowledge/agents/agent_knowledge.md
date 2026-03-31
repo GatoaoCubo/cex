@@ -16,7 +16,7 @@ routing_keywords: [knowledge, rag, indexing, embeddings, taxonomy, retrieval, do
 tags: [agent, n04, knowledge, rag, p01, taxonomy, indexing]
 tldr: "Manages the CEX knowledge lifecycle via RAG, semantic indexing, and taxonomy. Transforms raw data into a queryable, high-fidelity knowledge graph."
 density_score: 0.91
-quality: null
+quality: 8.9
 ---
 
 # N04 Knowledge Nucleus Agent

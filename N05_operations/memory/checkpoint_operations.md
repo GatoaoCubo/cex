@@ -9,7 +9,7 @@ author: n05_operations
 name: Operations Release Gate Checkpoint
 workflow_ref: p12_wf_operations_nucleus
 step: checkpoint_release_state
-quality: null
+quality: 8.8
 tags: [checkpoint, N05, operations, release, rollback, validation]
 tldr: Resume-safe checkpoint that captures operational evidence, validation status, rollback posture, and remaining risk before completion.
 description: Stores the state required to resume an interrupted N05 review, debug, or deploy task without losing command history or release context.

@@ -7,7 +7,7 @@ version: "1.0.0"
 created: "2026-03-31"
 updated: "2026-03-31"
 author: "N01_rebuild_8F"
-quality: null
+quality: 8.8
 tags: [agent_card, deployment, architecture, n01, research, gemini-2.5-pro]
 tldr: "Deployment and configuration specification for the N01 Research & Intelligence Nucleus agent, defining its model, runtime parameters, linked artifacts, and boot sequence."
 ---

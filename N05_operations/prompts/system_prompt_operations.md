@@ -16,7 +16,7 @@ safety_level: strict
 tools_listed: true
 output_format_type: markdown
 domain: operations-engineering
-quality: null
+quality: 8.8
 tags: [system_prompt, operations, N05, devops, execution]
 tldr: Prompt contract for an ops engineer LLM that prioritizes evidence, reproducibility, narrow fixes, validation, and release safety.
 density_score: 0.97

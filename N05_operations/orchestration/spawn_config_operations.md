@@ -20,7 +20,7 @@ mcp_config: .mcp-n05.json
 timeout_seconds: 5400
 prompt_inline: false
 handoff_path: .cex/runtime/handoffs/n05_task.md
-quality: null
+quality: 8.7
 tags: [spawn_config, N05, operations, codex, ci-cd]
 tldr: Spawn contract for N05 on Codex with mandatory handoff-first behavior and enough runtime budget for review, test, debug, and deploy validation loops.
 domain: operations-engineering

@@ -15,7 +15,7 @@ threshold_golden: 9.5
 threshold_publish: 9.0
 threshold_review: 7.5
 automation_status: llm_assisted
-quality: null
+quality: 8.9
 tags: [scoring_rubric, n04, knowledge, quality, evals, p07]
 tldr: "The 4-dimension scoring rubric for the soft gates (S1-S4) of the N04 Knowledge Quality Gate, evaluating atomicity, connectivity, discoverability, and clarity."
 calibration_set: [n04_kc_knowledge_management]

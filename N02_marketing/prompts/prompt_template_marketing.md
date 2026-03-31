@@ -56,7 +56,7 @@ variables:
 variable_syntax: mustache
 composable: true
 domain: copywriting_and_campaigns
-quality: null
+quality: 9.0
 tags: [prompt_template, marketing, copy, N02, P03]
 tldr: Universal copy production template — product + audience + funnel + formula → persuasive copy with A/B variants.
 keywords: [copy, ad, headline, CTA, funnel, formula, AIDA, PAS, email, landing_page]

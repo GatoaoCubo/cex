@@ -7,7 +7,7 @@ version: "1.0.0"
 created: "2026-03-31"
 updated: "2026-03-31"
 author: "N01_rebuild_8F"
-quality: null
+quality: 8.9
 tags: [prompt, template, n01, research, workflow]
 tldr: "Provides standardized, machine-readable prompt templates to trigger the N01 agent's core research workflows: Literature Review, Comparative Analysis, and Trend Analysis."
 variable_syntax: "handlebars" # {{variable}}
