@@ -2,44 +2,62 @@
 id: n01_dr_intelligence
 kind: dispatch_rule
 pillar: P12
-title: "Dispatch Rule for N01 Intelligence Nucleus"
-version: "2.0.0"
-created: "2026-03-30"
-updated: "2026-03-30"
+title: "Dispatch Rule: N01 Research & Intelligence"
+version: "1.0.0"
+created: "2026-03-31"
+updated: "2026-03-31"
 author: "N01_rebuild_8F"
-domain: "intelligence, research, analysis"
-quality: 8.6
-tags: [dispatch, rule, n01, intelligence, research, analysis]
-tldr: "Routes all tasks involving deep research, analysis, literature review, and competitor intelligence to the N01 nucleus."
-scope: "intelligence_and_research"
-keywords:
-  - research
-  - analysis
-  - competitor
-  - intelligence
-  - papers
-  - trends
-  - summarize
-  - benchmark
-  - RAG
-  - "literature review"
-  - "market analysis"
-agent_node: "n01_intelligence"
-priority: 9
-confidence_threshold: 0.80
-fallback: "n04_knowledge"
-routing_strategy: "semantic_match"
+quality: null
+tags: [dispatch, routing, orchestration, n01, research]
+tldr: "Routes complex research, analysis, and synthesis tasks to the N01 Research & Intelligence Nucleus based on semantic intent, keywords, and trigger phrases."
+target_agent: "n01_agent_intelligence"
+priority: 10 # Highest priority for specialist tasks
+confidence_threshold: 0.85 # Requires a strong semantic match
+fallback_agent: "n04_knowledge"
 ---
-## Purpose
-This rule directs all complex analytical, research, and synthesis tasks to the **N01 Intelligence Nucleus**. As the designated specialist engine for deep analysis, N01 is powered by Gemini 2.5-pro and is optimized for understanding and synthesizing vast amounts of information from technical and academic sources.
 
-## Keyword Rationale
-The keywords are carefully selected to create a high-fidelity filter for N01's core competencies. They cover the full spectrum of its capabilities:
-- **Academic Research**: `papers`, `literature review`, `RAG`, `summarize`
-- **Market & Competitor Intelligence**: `market analysis`, `competitor`, `trends`, `benchmark`
-- **Core Function**: `research`, `analysis`, `intelligence`
+## 1. PURPOSE
+This rule identifies and routes tasks that require deep, analytical research and synthesis to the **N01 Research & Intelligence Nucleus**. The goal is to ensure that complex, long-running analytical jobs are handled by the appropriate specialist agent (Gemini 2.5-pro, 1M context) instead of a generalist agent.
 
-This ensures that only tasks requiring deep synthesis and domain-specific analytical frameworks are routed to this specialist.
+## 2. ROUTING STRATEGY: HIERARCHICAL
+Routing is determined by a hierarchical evaluation:
+1.  **Trigger Phrase Match**: Highest weight. Direct match to common N01 tasks.
+2.  **Semantic Intent Analysis**: The core of the strategy. The system evaluates if the user's underlying goal is research and synthesis.
+3.  **Keyword Match**: Lowest weight. Used as a supporting signal.
 
-## Fallback Logic
-If the N01 agent is unavailable, or if the initial query has a semantic match score below the `confidence_threshold` of 0.80, the task is automatically routed to the **n04_knowledge** nucleus. N04 is a generalist agent capable of providing broader, less specialized answers, ensuring that the user's request is always handled, even if the specialist is not the best fit.
+## 3. TRIGGER PHRASES (HIGH CONFIDENCE)
+If the prompt starts with or contains these phrases, route to N01 with high confidence:
+- "Research the state of..."
+- "Analyze the competitive landscape of..."
+- "Provide a literature review on..."
+- "Summarize the key findings from these papers..."
+- "Benchmark X against Y on..."
+- "Create a trend report for..."
+- "Conduct a competitor analysis of..."
+
+## 4. CORE KEYWORDS (MEDIUM CONFIDENCE)
+Presence of these keywords strongly suggests N01 is the correct agent:
+- `research`
+- `analysis`
+- `competitor`
+- `intelligence`
+- `papers`
+- `trends`
+- `summarize` (in the context of long documents)
+- `benchmark`
+- `RAG`
+- `literature review`
+- `market analysis`
+- `synthesis`
+- `findings`
+
+## 5. EXCLUSION CRITERIA (ANTI-PATTERNS)
+Even if keywords match, **DO NOT** route to N01 if the query is:
+- A simple, factual question ("What is X?").
+- A request to write code ("Write a Python script for...").
+- A request for creative content ("Write a poem about...").
+- A request for operational action ("Restart the server.").
+- A request for real-time information ("What's the weather?").
+
+## 6. FALLBACK LOGIC
+If the routing confidence score is below the `confidence_threshold` (0.85), or if the N01 agent is offline or at capacity, the task MUST be routed to the `n04_knowledge` nucleus. N04 serves as the general-purpose knowledge agent and can handle broader, less specialized queries, ensuring system resilience.

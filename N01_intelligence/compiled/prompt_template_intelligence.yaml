@@ -2,147 +2,96 @@ id: n01_pt_intelligence_workflows
 kind: prompt_template
 pillar: P03
 title: Prompt Templates for N01 Intelligence Workflows
-version: 2.0.0
-created: '2026-03-30'
-updated: '2026-03-30'
+version: 1.0.0
+created: '2026-03-31'
+updated: '2026-03-31'
 author: N01_rebuild_8F
-variables:
-- name: research_type
-  type: string
-  required: true
-  description: 'Must be one of: LITERATURE_REVIEW, COMPARATIVE_STUDY, SOLO_ANALYSIS'
-- name: topic
-  type: string
-  description: The central topic for the research (used in Lit Review, Solo Analysis).
-- name: key_question
-  type: string
-  required: true
-  description: The primary question the research aims to answer.
-- name: source_types
-  type: list
-  description: Preferred source types, e.g., 'peer-reviewed papers', 'patents'.
-- name: subject_a
-  type: string
-  description: The first subject for a comparative study.
-- name: subject_b
-  type: string
-  description: The second subject for a comparative study.
-- name: comparison_aspects
-  type: list
-  description: Aspects to compare, e.g., 'price', 'performance', 'market share'.
-- name: document_to_analyze
-  type: string
-  description: A specific document/URL for deep-dive analysis.
-- name: analytical_framework
-  type: string
-  description: A specific framework to apply, e.g., 'SWOT', 'PESTLE'.
-variable_syntax: mustache
-domain: intelligence, research
-quality: 8.9
+quality: null
 tags:
 - prompt
 - template
 - n01
-- intelligence
-- workflow
 - research
-tldr: 'Provides structured prompt templates for triggering N01''s primary workflows: Literature Review, Comparative Study,
-  and Solo Analysis.'
-purpose: This artifact provides structured templates to initiate the core workflows of the N01 Intelligence Nucleus. Using
-  these templates ensures that all necessary parameters are provided, allowing the agent to select the correct workflow path
-  and execute the research task efficiently.
-variables_table: '| Name | Type | Required | Description |
+- workflow
+tldr: 'Provides standardized, machine-readable prompt templates to trigger the N01 agent''s core research workflows: Literature
+  Review, Comparative Analysis, and Trend Analysis.'
+variable_syntax: handlebars
+1_purpose: This artifact provides standardized, structured prompt templates for initiating the core workflows of the N01 Research
+  & Intelligence Nucleus. Using these templates ensures that all necessary parameters are provided to the orchestration engine,
+  allowing it to reliably select the correct workflow and execute the task with high precision.
+2_template_variables: '| Variable               | Type         | Required | Description                                                                                             |
 
-  |---|---|---|---|
+  |------------------------|--------------|----------|---------------------------------------------------------------------------------------------------------|
 
-  | `research_type` | string | true | Must be one of: `LITERATURE_REVIEW`, `COMPARATIVE_STUDY`, `SOLO_ANALYSIS`. |
+  | `research_type`        | String       | Yes  | The type of workflow to execute. Must be one of: `LITERATURE_REVIEW`, `COMPARATIVE_ANALYSIS`,
+  `TREND_ANALYSIS`. |
 
-  | `topic` | string | varies | The central topic for the research. |
+  | `primary_question`     | String       | Yes  | The central, high-level question the research must answer.                                              |
 
-  | `key_question`| string | true | The primary question the research aims to answer. |
+  | `topic`                | String       | Varies   | The main subject or area of interest (for Literature Review, Trend
+  Analysis).                           |
 
-  | `source_types`| list | false | Preferred source types (e.g., ''peer-reviewed papers'', ''patents''). |
+  | `subjects`             | String Array | Varies   | A list of two or more items to be compared (for Comparative Analysis).                                  |
 
-  | `subject_a` | string | varies | The first subject for a comparative study. |
+  | `comparison_criteria`  | String Array | Varies   | The specific, objective criteria to use for comparison.                                                 |
 
-  | `subject_b` | string | varies | The second subject for a comparative study. |
+  | `time_horizon`         | String       | Varies   | The time period to focus on, e.g., "last 2 years", "2020-2025" (for
+  Trend Analysis).                  |
 
-  | `comparison_aspects` | list | varies | Aspects to compare (e.g., ''price'', ''performance''). |
+  | `data_sources`         | String Array | No       | A list of preferred data sources or document IDs to be used.                                            |
 
-  | `document_to_analyze` | string | false | A specific document/URL for deep-dive analysis. |
-
-  | `analytical_framework`| string | false | A specific framework to apply (e.g., ''SWOT'', ''PESTLE''). |
+  | `analytical_framework` | String       | No       | A specific framework to apply, e.g., "PESTLE", "Porter''s Five Forces".                                  |
 
 
   ---'
-template_1_literature_review: 'This template triggers a systematic review of literature on a given topic.
+3_templates: ''
+template_a_literature_review: "Triggers a systematic review of literature on a given topic to answer a specific question.\n\
+  ---\nresearch_type: \"LITERATURE_REVIEW\"\ntopic: \"{{topic}}\"\nprimary_question: \"{{primary_question}}\"\n{{#if data_sources}}\n\
+  data_sources:\n  {{#each data_sources}}- \"{{this}}\"\n  {{/each}}\n{{/if}}\n---\nExample:\n---\nresearch_type: \"LITERATURE_REVIEW\"\
+  \ntopic: \"Solid-State Batteries\"\nprimary_question: \"What are the primary technical obstacles preventing the mass commercialization\
+  \ of solid-state batteries as of early 2026?\"\ndata_sources:\n  - \"doc_id:arxiv_2512.01234\"\n  - \"doc_id:ieee_56789\"\
+  \n---"
+template_b_comparative_analysis: "Triggers a head-to-head benchmark of two or more subjects against defined criteria.\n---\n\
+  research_type: \"COMPARATIVE_ANALYSIS\"\nprimary_question: \"How do the following subjects compare on the specified criteria?\"\
+  \nsubjects:\n  {{#each subjects}}- \"{{this}}\"\n  {{/each}}\ncomparison_criteria:\n  {{#each comparison_criteria}}- \"\
+  {{this}}\"\n  {{/each}}\n---\nExample:\n---\nresearch_type: \"COMPARATIVE_ANALYSIS\"\nprimary_question: \"How do the leading\
+  \ open-source LLMs compare in terms of performance, architecture, and licensing?\"\nsubjects:\n  - \"Llama 3 70B\"\n  -\
+  \ \"Mistral Large\"\n  - \"Jamba\"\ncomparison_criteria:\n  - \"Reported MMLU Score\"\n  - \"Model Architecture (e.g., MoE)\"\
+  \n  - \"Context Window Size (tokens)\"\n  - \"Commercial Use License Terms\"\n---"
+template_c_trend_analysis: 'Triggers an analysis of patterns, momentum, and future projections for a topic over a specific
+  time horizon.
 
+  ---
 
-  Research Type: {{research_type}}
+  research_type: "TREND_ANALYSIS"
 
-  Topic: {{topic}}
+  topic: "{{topic}}"
 
-  Key Question: {{key_question}}
+  primary_question: "{{primary_question}}"
 
-  {{#source_types}}
+  time_horizon: "{{time_horizon}}"
 
-  Source Types:
+  {{#if analytical_framework}}
 
-  {{#source_types}}
+  analytical_framework: "{{analytical_framework}}"
 
-  - {{.}}
+  {{/if}}
 
-  {{/source_types}}
+  ---
 
-  {{/source_types}}'
-example_literature_review: "Variables:\nresearch_type: \"LITERATURE_REVIEW\"\ntopic: \"Graphene-based supercapacitors\"\n\
-  key_question: \"What are the latest advancements in energy density and lifecycle of graphene supercapacitors reported in\
-  \ the last 2 years?\"\nsource_types:\n  - \"peer-reviewed papers\"\n  - \"patents\"\n---"
-template_2_comparative_study: 'This template triggers a head-to-head comparison of two or more subjects.
+  Example:
 
+  ---
 
-  Research Type: {{research_type}}
+  research_type: "TREND_ANALYSIS"
 
-  Subject A: {{subject_a}}
+  topic: "AI in Drug Discovery"
 
-  Subject B: {{subject_b}}
+  primary_question: "What is the investment trend and velocity for AI in drug discovery, and which sub-fields are seeing the
+  most momentum?"
 
-  Key Question: {{key_question}}
+  time_horizon: "2023-2026"
 
-  Comparison Aspects:
+  analytical_framework: "Kinetic Analysis"
 
-  {{#comparison_aspects}}
-
-  - {{.}}
-
-  {{/comparison_aspects}}'
-example_comparative_study: "Variables:\nresearch_type: \"COMPARATIVE_STUDY\"\nsubject_a: \"OpenAI GPT-4\"\nsubject_b: \"Google\
-  \ Gemini 1.5 Pro\"\nkey_question: \"How do the two models compare in terms of reasoning capabilities on the MMLU benchmark?\"\
-  \ncomparison_aspects:\n  - \"Reported MMLU score\"\n  - \"Performance on sub-tasks (e.g., math, history, law)\"\n  - \"\
-  Architectural differences that may influence performance\"\n---"
-template_3_solo_analysis: 'This template triggers a deep-dive analysis of a single topic, subject, or document.
-
-
-  Research Type: {{research_type}}
-
-  Subject: {{topic}}
-
-  {{#document_to_analyze}}
-
-  Document to Analyze: {{document_to_analyze}}
-
-  {{/document_to_analyze}}
-
-  Analytical Framework: {{analytical_framework}}
-
-  Key Question: {{key_question}}'
-example_solo_analysis: 'Variables:
-
-  research_type: "SOLO_ANALYSIS"
-
-  topic: "Tesla, Inc."
-
-  analytical_framework: "SWOT"
-
-  key_question: "What are the current Strengths, Weaknesses, Opportunities, and Threats for Tesla in the context of the 2025
-  EV market?"'
+  ---'

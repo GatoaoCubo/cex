@@ -3,135 +3,112 @@ id: n01_pt_intelligence_workflows
 kind: prompt_template
 pillar: P03
 title: "Prompt Templates for N01 Intelligence Workflows"
-version: "2.0.0"
-created: "2026-03-30"
-updated: "2026-03-30"
+version: "1.0.0"
+created: "2026-03-31"
+updated: "2026-03-31"
 author: "N01_rebuild_8F"
-variables:
-  - name: "research_type"
-    type: "string"
-    required: true
-    description: "Must be one of: LITERATURE_REVIEW, COMPARATIVE_STUDY, SOLO_ANALYSIS"
-  - name: "topic"
-    type: "string"
-    description: "The central topic for the research (used in Lit Review, Solo Analysis)."
-  - name: "key_question"
-    type: "string"
-    required: true
-    description: "The primary question the research aims to answer."
-  - name: "source_types"
-    type: "list"
-    description: "Preferred source types, e.g., 'peer-reviewed papers', 'patents'."
-  - name: "subject_a"
-    type: "string"
-    description: "The first subject for a comparative study."
-  - name: "subject_b"
-    type: "string"
-    description: "The second subject for a comparative study."
-  - name: "comparison_aspects"
-    type: "list"
-    description: "Aspects to compare, e.g., 'price', 'performance', 'market share'."
-  - name: "document_to_analyze"
-    type: "string"
-    description: "A specific document/URL for deep-dive analysis."
-  - name: "analytical_framework"
-    type: "string"
-    description: "A specific framework to apply, e.g., 'SWOT', 'PESTLE'."
-variable_syntax: "mustache"
-domain: "intelligence, research"
-quality: 8.9
-tags: [prompt, template, n01, intelligence, workflow, research]
-tldr: "Provides structured prompt templates for triggering N01's primary workflows: Literature Review, Comparative Study, and Solo Analysis."
+quality: null
+tags: [prompt, template, n01, research, workflow]
+tldr: "Provides standardized, machine-readable prompt templates to trigger the N01 agent's core research workflows: Literature Review, Comparative Analysis, and Trend Analysis."
+variable_syntax: "handlebars" # {{variable}}
 ---
 
-## Purpose
-This artifact provides structured templates to initiate the core workflows of the **N01 Intelligence Nucleus**. Using these templates ensures that all necessary parameters are provided, allowing the agent to select the correct workflow path and execute the research task efficiently.
+## 1. PURPOSE
+This artifact provides standardized, structured prompt templates for initiating the core workflows of the **N01 Research & Intelligence Nucleus**. Using these templates ensures that all necessary parameters are provided to the orchestration engine, allowing it to reliably select the correct workflow and execute the task with high precision.
 
-## Variables Table
-| Name | Type | Required | Description |
-|---|---|---|---|
-| `research_type` | string | true | Must be one of: `LITERATURE_REVIEW`, `COMPARATIVE_STUDY`, `SOLO_ANALYSIS`. |
-| `topic` | string | varies | The central topic for the research. |
-| `key_question`| string | true | The primary question the research aims to answer. |
-| `source_types`| list | false | Preferred source types (e.g., 'peer-reviewed papers', 'patents'). |
-| `subject_a` | string | varies | The first subject for a comparative study. |
-| `subject_b` | string | varies | The second subject for a comparative study. |
-| `comparison_aspects` | list | varies | Aspects to compare (e.g., 'price', 'performance'). |
-| `document_to_analyze` | string | false | A specific document/URL for deep-dive analysis. |
-| `analytical_framework`| string | false | A specific framework to apply (e.g., 'SWOT', 'PESTLE'). |
+## 2. TEMPLATE VARIABLES
+| Variable               | Type         | Required | Description                                                                                             |
+|------------------------|--------------|----------|---------------------------------------------------------------------------------------------------------|
+| `research_type`        | String       | **Yes**  | The type of workflow to execute. Must be one of: `LITERATURE_REVIEW`, `COMPARATIVE_ANALYSIS`, `TREND_ANALYSIS`. |
+| `primary_question`     | String       | **Yes**  | The central, high-level question the research must answer.                                              |
+| `topic`                | String       | Varies   | The main subject or area of interest (for Literature Review, Trend Analysis).                           |
+| `subjects`             | String Array | Varies   | A list of two or more items to be compared (for Comparative Analysis).                                  |
+| `comparison_criteria`  | String Array | Varies   | The specific, objective criteria to use for comparison.                                                 |
+| `time_horizon`         | String       | Varies   | The time period to focus on, e.g., "last 2 years", "2020-2025" (for Trend Analysis).                  |
+| `data_sources`         | String Array | No       | A list of preferred data sources or document IDs to be used.                                            |
+| `analytical_framework` | String       | No       | A specific framework to apply, e.g., "PESTLE", "Porter's Five Forces".                                  |
 
 ---
-## Template 1: Literature Review
-This template triggers a systematic review of literature on a given topic.
 
+## 3. TEMPLATES
+
+### **Template A: Literature Review**
+Triggers a systematic review of literature on a given topic to answer a specific question.
 ```prompt
-Research Type: {{research_type}}
-Topic: {{topic}}
-Key Question: {{key_question}}
-{{#source_types}}
-Source Types:
-{{#source_types}}
-- {{.}}
-{{/source_types}}
-{{/source_types}}
-```
-
-### Example (Literature Review)
-**Variables**:
-```yaml
+---
 research_type: "LITERATURE_REVIEW"
-topic: "Graphene-based supercapacitors"
-key_question: "What are the latest advancements in energy density and lifecycle of graphene supercapacitors reported in the last 2 years?"
-source_types:
-  - "peer-reviewed papers"
-  - "patents"
-```
+topic: "{{topic}}"
+primary_question: "{{primary_question}}"
+{{#if data_sources}}
+data_sources:
+  {{#each data_sources}}- "{{this}}"
+  {{/each}}
+{{/if}}
 ---
-## Template 2: Comparative Study
-This template triggers a head-to-head comparison of two or more subjects.
-
-```prompt
-Research Type: {{research_type}}
-Subject A: {{subject_a}}
-Subject B: {{subject_b}}
-Key Question: {{key_question}}
-Comparison Aspects:
-{{#comparison_aspects}}
-- {{.}}
-{{/comparison_aspects}}
 ```
-
-### Example (Comparative Study)
-**Variables**:
+**Example:**
 ```yaml
-research_type: "COMPARATIVE_STUDY"
-subject_a: "OpenAI GPT-4"
-subject_b: "Google Gemini 1.5 Pro"
-key_question: "How do the two models compare in terms of reasoning capabilities on the MMLU benchmark?"
-comparison_aspects:
-  - "Reported MMLU score"
-  - "Performance on sub-tasks (e.g., math, history, law)"
-  - "Architectural differences that may influence performance"
-```
 ---
-## Template 3: Solo Analysis
-This template triggers a deep-dive analysis of a single topic, subject, or document.
-
-```prompt
-Research Type: {{research_type}}
-Subject: {{topic}}
-{{#document_to_analyze}}
-Document to Analyze: {{document_to_analyze}}
-{{/document_to_analyze}}
-Analytical Framework: {{analytical_framework}}
-Key Question: {{key_question}}
+research_type: "LITERATURE_REVIEW"
+topic: "Solid-State Batteries"
+primary_question: "What are the primary technical obstacles preventing the mass commercialization of solid-state batteries as of early 2026?"
+data_sources:
+  - "doc_id:arxiv_2512.01234"
+  - "doc_id:ieee_56789"
+---
 ```
 
-### Example (Solo Analysis)
-**Variables**:
+### **Template B: Comparative Analysis**
+Triggers a head-to-head benchmark of two or more subjects against defined criteria.
+```prompt
+---
+research_type: "COMPARATIVE_ANALYSIS"
+primary_question: "How do the following subjects compare on the specified criteria?"
+subjects:
+  {{#each subjects}}- "{{this}}"
+  {{/each}}
+comparison_criteria:
+  {{#each comparison_criteria}}- "{{this}}"
+  {{/each}}
+---
+```
+**Example:**
 ```yaml
-research_type: "SOLO_ANALYSIS"
-topic: "Tesla, Inc."
-analytical_framework: "SWOT"
-key_question: "What are the current Strengths, Weaknesses, Opportunities, and Threats for Tesla in the context of the 2025 EV market?"
+---
+research_type: "COMPARATIVE_ANALYSIS"
+primary_question: "How do the leading open-source LLMs compare in terms of performance, architecture, and licensing?"
+subjects:
+  - "Llama 3 70B"
+  - "Mistral Large"
+  - "Jamba"
+comparison_criteria:
+  - "Reported MMLU Score"
+  - "Model Architecture (e.g., MoE)"
+  - "Context Window Size (tokens)"
+  - "Commercial Use License Terms"
+---
+```
+
+### **Template C: Trend Analysis**
+Triggers an analysis of patterns, momentum, and future projections for a topic over a specific time horizon.
+```prompt
+---
+research_type: "TREND_ANALYSIS"
+topic: "{{topic}}"
+primary_question: "{{primary_question}}"
+time_horizon: "{{time_horizon}}"
+{{#if analytical_framework}}
+analytical_framework: "{{analytical_framework}}"
+{{/if}}
+---
+```
+**Example:**
+```yaml
+---
+research_type: "TREND_ANALYSIS"
+topic: "AI in Drug Discovery"
+primary_question: "What is the investment trend and velocity for AI in drug discovery, and which sub-fields are seeing the most momentum?"
+time_horizon: "2023-2026"
+analytical_framework: "Kinetic Analysis"
+---
 ```

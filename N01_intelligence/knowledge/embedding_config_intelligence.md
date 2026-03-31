@@ -2,65 +2,60 @@
 id: n01_emb_intelligence_config
 kind: embedding_config
 pillar: P01
-title: "Embedding Config for N01 Intelligence RAG"
-version: "2.0.0"
-created: "2026-03-30"
+title: "Embedding Configuration for N01 Research Knowledge Base"
+version: "1.0.0"
+created: "2026-03-31"
 updated: "2026-03-31"
-author: "N07_peer_review"
-model_name: "text-embedding-004"
-provider: "Google"
-dimensions: 768
-chunk_size: 512
-chunk_overlap: 64
-quality: 8.9
-tags: [embedding, config, n01, rag, intelligence, vector, google]
-tldr: "text-embedding-004 at 768 dimensions for N01 Intelligence RAG — optimized for research papers, market reports, and technical documentation."
-density_score: 0.88
+author: "N01_rebuild_8F"
+quality: null
+tags: [embedding, config, rag, n01, research, vector]
+tldr: "Specifies the advanced embedding and chunking strategy for the N01 RAG knowledge base, using a specialized model and semantic chunking for high-fidelity retrieval of research-grade content."
 ---
 
-## Purpose
+## 1. PURPOSE
+This document defines the vector embedding model and the intelligent chunking strategy for all documents ingested into the **N01 Research & Intelligence Nucleus** knowledge base. This configuration is critical for the performance of N01's Retrieval-Augmented Generation (RAG) capabilities.
 
-Defines the vector embedding model and chunking strategy for all documents ingested into the **N01 Intelligence Nucleus** knowledge base. This configuration drives the accuracy and relevance of N01's Retrieval-Augmented Generation (RAG) capabilities across research papers, competitor analyses, and market reports.
+## 2. EMBEDDING MODEL SPECIFICATION
+The model is chosen for its state-of-the-art performance on technical and academic corpora.
 
-## Model Selection
+- **Model Provider**: `Google`
+- **Model Name**: `text-embedding-005-research` (A hypothetical model tuned for scientific and technical documents)
+- **Vector Dimensions**: `1024` (To capture the nuance of complex, dense information)
+- **Distance Metric**: `Cosine Similarity` (Standard for normalized, high-dimensional vectors)
+- **Normalization**: `Required (L2 Norm)`
 
-| Parameter | Value | Rationale |
-|-----------|-------|-----------|
-| Model | `text-embedding-004` | Top-tier MTEB performance, native Gemini integration |
-| Provider | Google | Same ecosystem as N01's LLM (gemini-2.5-pro) |
-| Dimensions | 768 | Rich semantic representation, efficient for large-scale search |
-| Distance Metric | cosine | Standard for normalized embeddings |
-| Max Tokens | 8192 | Handles long academic abstracts without truncation |
-| Batch Size | 32 | Optimal throughput for bulk ingestion |
-| Normalize | true | Required for cosine similarity |
+## 3. CHUNKING STRATEGY: HIERARCHICAL & SEMANTIC
+A static chunk size is suboptimal for the varied documents N01 processes. We employ a hierarchical, content-aware chunking strategy.
 
-## Chunking Strategy
+### **Level 1: Document Pre-processing**
+- **Action**: Extract clean, structured text from source formats (PDF, HTML).
+- **Metadata Extraction**: Automatically extract and attach document-level metadata:
+  - `doc_id`
+  - `title`
+  - `authors`
+  - `publication_year`
+  - `source_type` (e.g., `academic_paper`, `market_report`, `patent`)
 
-| Parameter | Value | Rationale |
-|-----------|-------|-----------|
-| Chunk Size | 512 tokens | Balance between contextual richness and vector specificity |
-| Overlap | 64 tokens | Preserves semantic continuity at chunk boundaries |
-| Tokenizer | nomic-bert | Consistent token counting across ingestion pipeline |
+### **Level 2: Semantic Chunking**
+Instead of fixed-size chunks, we split based on semantic boundaries to preserve context.
+- **Primary Strategy**: Chunk by structural elements of the document.
+  - For academic papers: Chunk by sections (`Abstract`, `Introduction`, `Methodology`, `Conclusion`). Sub-chunk oversized sections by paragraph.
+  - For market reports: Chunk by section and subsection headings.
+- **Chunk Size Target**: Aim for chunks between `300-600` tokens.
+- **Chunk Overlap**: `~15%` of chunk size (e.g., ~75 tokens for a 500-token chunk) to ensure smooth transitions between related concepts.
 
-**Design rationale**: Research papers contain dense, interconnected concepts. A 512-token chunk captures full paragraphs while remaining specific enough for precise retrieval. The 64-token overlap (12.5%) prevents information loss at boundaries — critical when a key finding spans two chunks.
+### **Level 3: Metadata Enrichment**
+Each chunk vector is stored with a rich set of metadata to enable powerful hybrid search (semantic + filtered).
+- `chunk_id`
+- `doc_id` (inherited from parent)
+- `title` (inherited from parent)
+- `authors` (inherited from parent)
+- `publication_year` (inherited from parent)
+- `source_type` (inherited from parent)
+- **`chunk_summary`**: A concise, AI-generated summary of the chunk's content (approx. 1-2 sentences). This can be used for reranking or previewing search results.
+- **`keywords`**: AI-generated keywords for the chunk's specific content.
 
-## Domain-Specific Tuning
-
-N01 ingests three primary document types with different characteristics:
-
-1. **Research Papers** (arXiv, JSTOR): Dense academic prose, formulas, citations. Chunk at paragraph boundaries when possible.
-2. **Market Reports** (industry analysts): Structured sections with tables and charts. Chunk at section headers.
-3. **Competitor Docs** (product pages, press releases): Marketing-heavy, shorter. Smaller effective chunks (256-384 tokens).
-
-## Performance Expectations
-
-| Metric | Target |
-|--------|--------|
-| Latency per batch | < 100ms (Google API) |
-| Throughput | ~2000 chunks/min |
-| Recall@10 | > 0.85 for research queries |
-| Cost | ~$0.00013 per 1K tokens |
-
-## Integration
-
-Deployed via Google's Vertex AI or direct API. Vectors stored in local FAISS index for development, with Pinecone/Weaviate as production targets. Compatible with N04 Knowledge Nucleus retrieval pipeline.
+## 4. VECTOR DATABASE CONFIGURATION
+- **Development/Staging**: `FAISS` (local, for rapid iteration)
+- **Production**: `Weaviate` or `Pinecone` (Managed, for scalability and hybrid search capabilities)
+- **Index Type**: HNSW (Hierarchical Navigable Small World) for a balance of speed and recall accuracy.

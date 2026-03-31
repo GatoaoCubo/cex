@@ -1,57 +1,60 @@
-id: n01_rs_academic_feeds
+id: n01_rs_intelligence_sources
 kind: rag_source
 pillar: P01
-title: RAG Sources for N01 Intelligence Nucleus
+title: RAG Source Configuration for N01 Intelligence Nucleus
 version: 1.0.0
-created: '2026-03-30'
-updated: '2026-03-30'
+created: '2026-03-31'
+updated: '2026-03-31'
 author: N01_rebuild_8F
-domain: intelligence, research, analysis, academic, financial
-quality: 8.7
+quality: null
 tags:
 - rag
 - source
-- n01
-- memory
 - knowledge
-- vector
+- n01
+- research
 - ingestion
-tldr: Defines the primary academic and technical data sources for N01's RAG knowledge base, including arXiv, JSTOR, and SEC
-  EDGAR.
-purpose: This document lists and configures the external data sources that are to be ingested, indexed, and made available
-  for retrieval by the N01 Intelligence Nucleus RAG system. This forms the foundation of N01's world knowledge.
-ingestion_retrieval_strategy: '- Ingestion: Sources are checked for updates based on their `update_frequency`. New documents
-  are downloaded, chunked according to `n01_emb_text_embedding_4`, and vectorized.
-
-  - Retrieval: The primary retrieval method is a hybrid search, combining dense vector similarity search (for semantic relevance)
-  with keyword filtering (for precision on specific terms). The retriever is configured by `p01_retr_cfg.md`.
-
-
-  ---'
-primary_sources: 'This is a living list of high-priority sources for ingestion.
-
-
-  | Name | Type | Access Point | Update Frequency | Description |
-
-  |---|---|---|---|---|
-
-  | arXiv | Pre-print Archive | `s3://arxiv/` (bulk) | Daily | Access to the latest research in physics, mathematics, computer
-  science, and more. Critical for state-of-the-art technical knowledge. |
-
-  | JSTOR | Journal Archive | `https://api.jstor.org/` | Weekly | Comprehensive archive of academic journals across a wide
-  range of disciplines. Essential for foundational research. |
-
-  | SEC EDGAR | Financial Filings | `https://www.sec.gov/edgar/bulk-data` | Daily | Access to all company filings (10-K, 10-Q,
-  8-K), providing ground-truth for competitor and market analysis. |
-
-  | USPTO Patents | Patent Database | Bulk download via USPTO website | Weekly | Full text of granted patents and applications.
-  Key for tracking innovation and intellectual property trends. |
-
-  | PubMed Central| Biomedical Papers | `https://ftp.ncbi.nlm.nih.gov/pub/pmc/` | Daily | Free full-text archive of biomedical
-  and life sciences journal literature. |
-
-
-  ---'
-future_sources:
-- 'Semantic Scholar: API access for citation graphs and paper recommendations.'
-- 'DBLP: Computer science bibliography for author and publication tracking.'
+tldr: Defines the tiered data sources, ingestion policies, and update frequencies for the N01 Research Nucleus RAG knowledge
+  base.
+1_purpose: This document specifies the authoritative data sources that form the knowledge base for the N01 agent's Retrieval-Augmented
+  Generation (RAG) capabilities. The selection, tiering, and ingestion policies are designed to maximize the relevance, accuracy,
+  and credibility of N01's analytical outputs.
+2_ingestion_embedding:
+- 'Embedding Configuration: All sources are processed according to `n01_emb_intelligence_config`.'
+- 'Ingestion Pipeline: A dedicated pipeline monitors each source, downloads new/updated documents, performs semantic chunking,
+  generates embeddings, and upserts the vectors and metadata into the production vector database.'
+3_source_tiers: Sources are categorized into tiers that reflect their credibility and intended use, directly informing the
+  `Evidence Quality` dimension in the scoring rubric.
+tier_1_foundational_high_credibility_scientific_research:
+- 'Description: The most authoritative sources for scientific and technical facts.'
+- 'Update Frequency: Daily'
+- 'Sources:'
+- '`arXiv`: Access to pre-print articles across STEM fields for state-of-the-art research.'
+- '`PubMed Central`: Comprehensive database of biomedical and life sciences journal literature.'
+- '`JSTOR`: Archive of foundational, peer-reviewed academic journals across multiple disciplines.'
+tier_2_official_corporate_regulatory_data:
+- 'Description: Primary sources for competitor intelligence, financial performance, and intellectual property.'
+- 'Update Frequency: Daily'
+- 'Sources:'
+- '`SEC EDGAR`: Corporate filings (10-K, 10-Q) for U.S. public companies. Critical for financial and strategic analysis.'
+- '`USPTO Bulk Data`: Granted patents and patent applications from the U.S. Patent and Trademark Office. Key for tracking
+  innovation.'
+tier_3_reputable_market_industry_analysis:
+- 'Description: High-quality secondary sources that provide context and expert analysis on market trends. Requires careful
+  source evaluation.'
+- 'Update Frequency: Weekly'
+- 'Sources:'
+- '`[INTERNAL] Market Research Subscriptions`: A placeholder for licensed reports from firms like Gartner, Forrester, etc.
+  (Requires secure ingestion).'
+- '`[INTERNAL] Conference Proceedings`: Papers and presentations from top-tier industry conferences (e.g., NeurIPS, ICML).'
+tier_4_high_quality_web_content_future:
+- 'Description: A planned expansion to include high-signal web data. Requires robust filtering to maintain quality.'
+- 'Update Frequency: Continuous (via a dedicated crawler)'
+- 'Potential Sources:'
+- '`Reputable Technical Blogs`: (e.g., AI-centric blogs from major tech companies).'
+- '`Select Industry News Outlets`: (e.g., Reuters, Bloomberg for tech/finance news).'
+4_freshness_retention_policy:
+- 'Staleness Check: The ingestion pipeline continuously monitors sources based on their defined update frequency.'
+- 'Alerting: If a source fails to update for more than 2x its frequency period, an alert is sent to the N05 Operations Nucleus.'
+- 'Retention: All versions of documents are retained. Vectors are tagged with the ingestion date to allow for time-bound queries
+  (e.g., "summarize findings based on sources available before 2025").'

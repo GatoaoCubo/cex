@@ -1,71 +1,61 @@
 id: n01_ac_intelligence
 kind: agent_card
 pillar: P08
-title: N01 Intelligence Nucleus - Deployment Card
+title: 'Agent Card: N01 Research & Intelligence Nucleus'
 version: 1.0.0
-created: '2026-03-30'
-updated: '2026-03-30'
+created: '2026-03-31'
+updated: '2026-03-31'
 author: N01_rebuild_8F
-quality: 8.7
+quality: null
 tags:
 - agent_card
 - deployment
+- architecture
 - n01
-- intelligence
-- gemini-2.5
-tldr: Deployment specification for the N01 Intelligence Nucleus, detailing its model, tools, and operational parameters.
-identity:
-- 'Name: N01 Intelligence Nucleus'
-- 'Domain: `intelligence, research, market analysis, competitor intelligence, papers, benchmarks`'
-- 'Role: `Chief Intelligence Analyst`'
-model_config:
-- 'Model: `gemini-2.5-pro`'
-- 'Provider: `Google`'
+- research
+- gemini-2.5-pro
+tldr: Deployment and configuration specification for the N01 Research & Intelligence Nucleus agent, defining its model, runtime
+  parameters, linked artifacts, and boot sequence.
+1_agent_identity:
+- 'Agent ID: `n01_agent_intelligence`'
+- 'Name: N01 Research & Intelligence Nucleus'
+- 'Domain: `research, market analysis, competitor intelligence, papers, benchmarks`'
+- 'Role: `Expert Researcher and Intelligence Analyst`'
+2_model_configuration:
+- 'Model Provider: `Google`'
+- 'Model Name: `gemini-2.5-pro`'
 - 'Context Window: `1,048,576 tokens`'
-- 'Temperature: `0.2` (Optimized for analytical precision and factuality)'
-- 'Subscription: `Google CEX Enterprise Tier`'
-tools: "A list of MCP (Meta-Cognitive Primitive) servers and function definitions available to the agent.\n- MCP Servers (Future):\n\
-  \  - `google_scholar_mcp`\n  - `arxiv_mcp`\n  - `web_search_mcp`\n  - `markitdown_mcp`\n- Function Definitions (Future):\n\
-  \  - `semantic_search`\n  - `citation_graph_builder`\n  - `document_summarizer`"
-dispatch_keywords: 'Keywords that route tasks to this agent.
+- 'Optimal Temperature: `0.25` (tuned for high-fidelity, evidence-based reasoning and synthesis)'
+- 'Subscription Tier: `CEX Enterprise Account`'
+3_runtime_artifacts: 'This agent is a composition of the following artifacts which MUST be loaded at runtime:
 
-  - `research`
+  - Agent Definition: `n01_agent_intelligence`
 
-  - `analysis`
+  - System Prompt: `n01_sp_intelligence`
 
-  - `competitor`
+  - Domain Knowledge: `n01_kc_intelligence_domain`
 
-  - `intelligence`
+  - Dispatch Rule: `n01_dispatch_rule_intelligence`
 
-  - `papers`
-
-  - `trends`
-
-  - `summarize`
-
-  - `benchmark`
-
-  - `RAG`
-
-  - `literature review`
-
-  - `market analysis`'
-boot_sequence:
-- 'Load System Prompt: Inject `n01_sp_intelligence` to establish core identity and rules.'
-- 'Load Knowledge Card: Inject `n01_kc_intelligence_domain` for domain awareness.'
-- 'Initialize Memory: Attach to the vectorstore defined in `n01_rag_source_intelligence`.'
-- 'Activate Dispatch Rule: Listen for requests matching keywords based on `n01_dispatch_rule_intelligence`.'
-constraints:
+  - RAG Configuration: `n01_rag_source_intelligence`'
+4_future_toolchain_mcps_functions: "The following tools are designed for N01 but are pending implementation:\n- MCP Servers:\n\
+  \  - `google_scholar_mcp`: For searching and retrieving academic papers.\n  - `arxiv_mcp`: For accessing pre-print scientific\
+  \ articles.\n  - `sec_edgar_mcp`: For fetching corporate financial filings.\n  - `high_quality_web_search_mcp`: For targeted\
+  \ searches on reputable news and industry sites.\n- Local Functions:\n  - `semantic_search`: To run vector search against\
+  \ the RAG knowledge base.\n  - `citation_graph`: To analyze citation networks between papers.\n  - `advanced_summarizer`:\
+  \ To create summaries of various lengths and complexities."
+5_boot_sequence:
+- 'Instantiate Agent: Create an instance of `n01_agent_intelligence`.'
+- 'Load Persona: Inject the `n01_sp_intelligence` system prompt to establish identity and operational rules.'
+- 'Load Knowledge: Inject the `n01_kc_intelligence_domain` knowledge card to provide domain context and methodologies.'
+- 'Mount Vectorstore: Connect to the RAG vector database specified in `n01_rag_source_intelligence`.'
+- 'Arm Dispatch: Activate the agent to listen for incoming requests that match the criteria in `n01_dispatch_rule_intelligence`.'
+6_operational_constraints_guarantees:
 - 'Hard Constraints:'
-- Must not answer requests outside of the defined `knowledge_boundary` in the system prompt.
-- All analytical claims must have a traceable source.
-- Output must conform to the `Intelligence Brief` format.
-- 'Soft Constraints:'
-- Prefer primary, peer-reviewed sources over secondary commentary.
-- Generate responses with a confidence score for ambiguous conclusions.
-scaling_monitoring:
-- 'Scaling Config: Default of 1 replica. Enable vertical scaling based on queue depth for large document analysis tasks.'
-- 'Monitoring Spec:'
-- Track token usage per query.
-- Log source retrieval success/failure rates.
-- Monitor average confidence scores per task type.
+- The agent MUST NOT respond to requests outside the defined `knowledge_boundary`.
+- All analytical claims MUST have a verifiable source citation.
+- The output MUST conform to the structured `Intelligence Brief` format.
+- 'Guarantees:'
+- High-fidelity analysis based on provided sources.
+- Explicitly states confidence levels for judgments.
+- Identifies and lists information gaps.

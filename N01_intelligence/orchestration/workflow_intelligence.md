@@ -2,97 +2,97 @@
 id: n01_wf_intelligence
 kind: workflow
 pillar: P12
-version: "2.0.0"
-created: "2026-03-30"
-updated: "2026-03-30"
+title: "N01 Standard Operating Workflows for Intelligence Analysis"
+version: "1.0.0"
+created: "2026-03-31"
+updated: "2026-03-31"
 author: "N01_rebuild_8F"
-title: "N01 Intelligence Analysis Workflows"
-domain: "intelligence, research, analysis"
-quality: 8.8
-tags: [workflow, n01, intelligence, research, analysis, orchestration]
-tldr: "Defines the primary research and analysis workflows for the N01 nucleus, including literature review, comparative study, and solo analysis."
-agent_nodes: [n01_intelligence]
-timeout: 10800 # 3 hours
-retry_policy: "per_step"
-steps_count: 4 # Max path length
-execution: "conditional"
+quality: null
+tags: [workflow, orchestration, n01, research, analysis]
+tldr: "Defines the structured, multi-step workflows for the N01 agent, covering literature reviews, comparative analysis, and trend analysis."
+agent_node: "n01_intelligence"
+timeout_seconds: 7200 # 2 hours
+max_retries: 2
 ---
 
-## Purpose
-This document orchestrates the structured, multi-step processes used by the **N01 Intelligence Nucleus** to execute its core research tasks. The workflow is conditional, branching based on the `research_type` specified in the initial user request. This ensures a tailored, efficient, and rigorous approach for each distinct analytical challenge.
+## 1. WORKFLOW OVERVIEW
+This document defines the primary operational workflows for the **N01 Research & Intelligence Nucleus**. These are not linear scripts but conditional paths that adapt based on the `research_type` of the user's request.
 
-## Workflow Types
-The workflow is triggered by a `research_type` parameter, which can be one of the following:
-- **`LITERATURE_REVIEW`**: For synthesizing knowledge on a specific topic from a wide range of academic or technical sources.
-- **`COMPARATIVE_STUDY`**: For benchmarking two or more subjects (e.g., products, companies, technologies) against a set of defined criteria.
-- **`SOLO_ANALYSIS`**: For conducting a deep-dive analysis into a single subject, document, or dataset.
-
----
-## Steps
-
-### **Step 1: Deconstruct & Plan (All Types)**
-- **Agent**: `n01_intelligence`
-- **Action**: Parse the user request to identify the `research_type` and key entities. Formulate a structured research plan, including sources to consult and analytical frameworks to apply.
-- **Input**: User Query (`text`, `research_type`)
-- **Output**: `research_plan.json`
-- **Signal**: `plan_complete`
+**Supported `research_type` values:**
+- `LITERATURE_REVIEW`: Synthesizing knowledge from a body of academic or technical documents.
+- `COMPARATIVE_ANALYSIS`: Benchmarking two or more subjects (products, companies, etc.) against a set of criteria.
+- `TREND_ANALYSIS`: Identifying and analyzing patterns, momentum, and trajectories in data over time.
 
 ---
+
+## 2. META-WORKFLOW (ALL TYPES)
+
+### **Step 0: Deconstruct & Plan**
+- **Description**: The initial, mandatory step for all research tasks. The agent interprets the user's goal, identifies the correct workflow path, and creates a detailed execution plan.
+- **Input**: `User_Query`
+- **Action**:
+    1.  Identify `research_type` (`LITERATURE_REVIEW`, `COMPARATIVE_ANALYSIS`, or `TREND_ANALYSIS`).
+    2.  Extract key entities, research questions, and constraints.
+    3.  Formulate a step-by-step `Research_Plan.json`.
+- **Output**: `Research_Plan.json`, `Selected_Workflow_Path`
+
+### **Final Step: Synthesize & Report**
+- **Description**: The final, mandatory step. The agent takes the structured output from the specific workflow path and synthesizes it into the final deliverable.
+- **Input**: `Structured_Analysis_Output` (from a completed workflow path)
+- **Action**:
+    1.  Validate the structured output against quality gates.
+    2.  Draft the `Intelligence_Brief.md` per the system prompt's format.
+    3.  Populate Executive Summary, Detailed Analysis, Gaps, and Appendix.
+- **Output**: `Final_Report.md` (the Intelligence Brief)
+
+---
+
+## 3. WORKFLOW PATHS
+
 ### **Path A: Literature Review**
 
-#### **Step 2A: Source Identification & Retrieval**
-- **Agent**: `n01_intelligence`
-- **Action**: Execute the research plan to query RAG sources (`n01_rag_source_intelligence`) and external tools (e.g., `google_scholar_mcp`) for relevant documents.
-- **Input**: `research_plan.json`
-- **Output**: `retrieved_sources_corpus`
-- **Depends on**: Step 1
+#### **Step A1: Source Aggregation**
+- **Depends On**: Step 0
+- **Input**: `Research_Plan.json`
+- **Action**: Execute queries against RAG sources and future MCPs (e.g., ArXiv, Scholar) to gather all relevant documents.
+- **Output**: `Corpus.zip` (A collection of source documents)
 
-#### **Step 3A: Thematic Synthesis**
-- **Agent**: `n01_intelligence`
-- **Action**: Read the entire `retrieved_sources_corpus`. Identify, analyze, and cluster key themes, arguments, and data points across all sources.
-- **Input**: `retrieved_sources_corpus`
-- **Output**: `synthesized_themes.md`
-- **Depends on**: Step 2A
+#### **Step A2: Thematic Synthesis**
+- **Depends On**: Step A1
+- **Input**: `Corpus.zip`
+- **Action**: Ingest and analyze the entire corpus. Identify, tag, and cluster core themes, arguments, evidence, and contradictions across all sources.
+- **Output**: `Structured_Analysis_Output.json` (A map of themes to supporting evidence and citations)
 
----
-### **Path B: Comparative Study**
+### **Path B: Comparative Analysis**
 
-#### **Step 2B: Define Comparison Criteria**
-- **Agent**: `n01_intelligence`
-- **Action**: Based on the research plan, establish a clear, objective set of criteria for comparison (e.g., features, pricing, performance metrics, market share).
-- **Input**: `research_plan.json`
-- **Output**: `comparison_matrix_template.json`
-- **Depends on**: Step 1
+#### **Step B1: Establish Benchmarking Matrix**
+- **Depends On**: Step 0
+- **Input**: `Research_Plan.json`
+- **Action**: Define a precise, objective, and justifiable set of comparison criteria. Create a blank `Comparison_Matrix.json` template.
+- **Output**: `Comparison_Matrix_Template.json`
 
-#### **Step 3B: Data Extraction (per Subject)**
-- **Agent**: `n01_intelligence`
-- **Action**: For each subject in the comparison, gather data corresponding to the defined criteria. This step may run in parallel for each subject.
-- **Input**: `research_plan.json`, `comparison_matrix_template.json`
-- **Output**: `filled_comparison_matrix.json`
-- **Depends on**: Step 2B
+#### **Step B2: Data Extraction per Subject**
+- **Depends On**: Step B1
+- **Input**: `Research_Plan.json`, `Comparison_Matrix_Template.json`
+- **Action**: For each subject being compared, systematically extract the required data points from sources to fill a copy of the matrix. This step can be parallelized.
+- **Output**: `Filled_Matrices.json[]` (An array of filled matrices, one for each subject)
 
----
-### **Path C: Solo Analysis**
+#### **Step B3: Normalize & Compare**
+- **Depends On**: Step B2
+- **Input**: `Filled_Matrices.json[]`
+- **Action**: Consolidate the filled matrices. Normalize data where necessary (e.g., currency, units). Generate a comparative summary with key differences and insights.
+- **Output**: `Structured_Analysis_Output.json` (Contains the final comparison table and summary insights)
 
-#### **Step 2C: Deep Dive Data Extraction**
-- **Agent**: `n01_intelligence`
-- **Action**: Perform an exhaustive information extraction on the single subject or document.
-- **Input**: `research_plan.json`
-- **Output**: `extracted_data.json`
-- **Depends on**: Step 1
+### **Path C: Trend Analysis**
 
-#### **Step 3C: Framework Application**
-- **Agent**: `n01_intelligence`
-- **Action**: Apply relevant analytical frameworks (e.g., SWOT, PESTLE) to the extracted data to structure the analysis.
-- **Input**: `extracted_data.json`
-- **Output**: `analyzed_framework_output.md`
-- **Depends on**: Step 2C
+#### **Step C1: Time-Series Data Extraction**
+- **Depends On**: Step 0
+- **Input**: `Research_Plan.json`
+- **Action**: Extract time-stamped data points, events, and metrics from the source material.
+- **Output**: `Time_Series_Data.json`
 
----
-### **Step 4: Generate Intelligence Brief (All Types)**
-- **Agent**: `n01_intelligence`
-- **Action**: Consolidate all intermediate outputs (`synthesized_themes`, `filled_comparison_matrix`, `analyzed_framework_output`) into a final, structured `Intelligence Brief` as defined in the system prompt.
-- **Input**: Output from Step 3 (A, B, or C)
-- **Output**: `final_intelligence_brief.md`
-- **Signal**: `workflow_complete`
-- **Depends on**: Step 3 (A, B, or C)
+#### **Step C2: Signal & Vector Analysis**
+- **Depends On**: Step C1
+- **Input**: `Time_Series_Data.json`
+- **Action**: Analyze the time-series data to identify key vectors (direction, velocity, acceleration) of change. Identify leading and lagging indicators.
+- **Output**: `Structured_Analysis_Output.json` (A summary of key trends, their momentum, and a forecast with confidence intervals)

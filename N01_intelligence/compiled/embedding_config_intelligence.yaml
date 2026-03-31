@@ -1,41 +1,71 @@
-id: n01_emb_text_embedding_4
+id: n01_emb_intelligence_config
 kind: embedding_config
 pillar: P01
-title: Embedding Config for N01 RAG
+title: Embedding Configuration for N01 Research Knowledge Base
 version: 1.0.0
-created: '2026-03-30'
-updated: '2026-03-30'
+created: '2026-03-31'
+updated: '2026-03-31'
 author: N01_rebuild_8F
-model_name: text-embedding-004
-provider: Google
-dimensions: 768
-chunk_size: 512
-chunk_overlap: 64
-quality: 8.5
+quality: null
 tags:
 - embedding
 - config
-- n01
 - rag
-- memory
+- n01
+- research
 - vector
-tldr: Specifies the text-embedding-004 model with 768 dimensions for N01's RAG knowledge base.
-purpose: This document defines the standard vector embedding model and chunking strategy for all documents ingested into the
-  N01 Intelligence Nucleus knowledge base. This configuration is critical for the performance and accuracy of its Retrieval-Augmented
-  Generation (RAG) capabilities.
-model_rationale:
-- 'Model: `text-embedding-004`'
-- 'Provider: Google'
-- 'Reasoning: As of its release, `text-embedding-004` is a state-of-the-art model offering top-tier performance on the MTEB
-  (Massive Text Embedding Benchmark). Its 768 dimensions provide a rich semantic representation while remaining efficient
-  for large-scale vector search operations. Native integration with the `gemini-2.5-pro` model ensures optimal compatibility
-  and performance.'
-chunking_strategy:
-- 'Chunk Size: `512 tokens`'
-- 'Overlap: `64 tokens`'
-- 'Reasoning: A chunk size of 512 tokens is chosen as an optimal balance between two competing needs:'
-- 'Contextual Richness: Chunks must be large enough to contain complete semantic units (paragraphs, concepts).'
-- 'Vector Specificity: Chunks must be small enough so that the resulting vector accurately represents a specific piece of
-  information.'
-- The 64-token overlap ensures that semantic context is not lost at the boundaries between chunks, improving the retriever's
-  ability to find relevant passages that span across chunk divisions.
+tldr: Specifies the advanced embedding and chunking strategy for the N01 RAG knowledge base, using a specialized model and
+  semantic chunking for high-fidelity retrieval of research-grade content.
+1_purpose: This document defines the vector embedding model and the intelligent chunking strategy for all documents ingested
+  into the N01 Research & Intelligence Nucleus knowledge base. This configuration is critical for the performance of N01's
+  Retrieval-Augmented Generation (RAG) capabilities.
+2_embedding_model_specification: 'The model is chosen for its state-of-the-art performance on technical and academic corpora.
+
+
+  - Model Provider: `Google`
+
+  - Model Name: `text-embedding-005-research` (A hypothetical model tuned for scientific and technical documents)
+
+  - Vector Dimensions: `1024` (To capture the nuance of complex, dense information)
+
+  - Distance Metric: `Cosine Similarity` (Standard for normalized, high-dimensional vectors)
+
+  - Normalization: `Required (L2 Norm)`'
+3_chunking_strategy_hierarchical_semantic: A static chunk size is suboptimal for the varied documents N01 processes. We employ
+  a hierarchical, content-aware chunking strategy.
+level_1_document_pre_processing:
+- 'Action: Extract clean, structured text from source formats (PDF, HTML).'
+- 'Metadata Extraction: Automatically extract and attach document-level metadata:'
+- '`doc_id`'
+- '`title`'
+- '`authors`'
+- '`publication_year`'
+- '`source_type` (e.g., `academic_paper`, `market_report`, `patent`)'
+level_2_semantic_chunking: "Instead of fixed-size chunks, we split based on semantic boundaries to preserve context.\n- Primary\
+  \ Strategy: Chunk by structural elements of the document.\n  - For academic papers: Chunk by sections (`Abstract`, `Introduction`,\
+  \ `Methodology`, `Conclusion`). Sub-chunk oversized sections by paragraph.\n  - For market reports: Chunk by section and\
+  \ subsection headings.\n- Chunk Size Target: Aim for chunks between `300-600` tokens.\n- Chunk Overlap: `~15%` of chunk\
+  \ size (e.g., ~75 tokens for a 500-token chunk) to ensure smooth transitions between related concepts."
+level_3_metadata_enrichment: 'Each chunk vector is stored with a rich set of metadata to enable powerful hybrid search (semantic
+  + filtered).
+
+  - `chunk_id`
+
+  - `doc_id` (inherited from parent)
+
+  - `title` (inherited from parent)
+
+  - `authors` (inherited from parent)
+
+  - `publication_year` (inherited from parent)
+
+  - `source_type` (inherited from parent)
+
+  - `chunk_summary`: A concise, AI-generated summary of the chunk''s content (approx. 1-2 sentences). This can be used for
+  reranking or previewing search results.
+
+  - `keywords`: AI-generated keywords for the chunk''s specific content.'
+4_vector_database_configuration:
+- 'Development/Staging: `FAISS` (local, for rapid iteration)'
+- 'Production: `Weaviate` or `Pinecone` (Managed, for scalability and hybrid search capabilities)'
+- 'Index Type: HNSW (Hierarchical Navigable Small World) for a balance of speed and recall accuracy.'

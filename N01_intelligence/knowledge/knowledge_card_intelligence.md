@@ -2,65 +2,50 @@
 id: n01_kc_intelligence_domain
 kind: knowledge_card
 pillar: P01
-title: "N01 Domain: Intelligence & Research Analysis"
-version: "2.0.0"
-created: "2026-03-30"
-updated: "2026-03-30"
+title: "N01 Domain Knowledge: Research & Intelligence Synthesis"
+version: "1.0.0"
+created: "2026-03-31"
+updated: "2026-03-31"
 author: "N01_rebuild_8F"
-domain: "intelligence, research, analysis, competitors"
-quality: 8.8
-tags: [knowledge, n01, intelligence, research, analysis, competitors, papers]
-tldr: "Core knowledge definition for the N01 Intelligence Nucleus, covering research methodologies, analysis techniques, and key data source types."
-when_to_use: "As a foundational knowledge layer for any task involving deep research, competitive analysis, or literature review."
-keywords: [research methodology, competitive intelligence, literature review, data synthesis, source analysis]
-long_tails:
-  - "What is the difference between primary and secondary sources?"
-  - "How to conduct a SWOT analysis on a competitor?"
-  - "What are the steps in a systematic literature review?"
+domain: "research, analysis, intelligence, synthesis, competitors, papers, benchmarks"
+quality: null
+tags: [knowledge, n01, research, synthesis, intelligence, analysis]
+tldr: "Defines the core knowledge base for the N01 Research Nucleus, detailing its expert methodologies in research, analysis frameworks, source evaluation, and intelligence synthesis."
+when_to_use: "As a foundational knowledge layer for any task requiring deep research, competitive analysis, literature review, or strategic foresight."
+keywords: [systematic review, competitor analysis, trend analysis, data synthesis, source credibility]
 axioms:
-  - "Data without context is noise; synthesis creates intelligence."
-  - "The quality of an insight is limited by the quality of its sources."
-  - "A conclusion is only as strong as its weakest supporting evidence."
+  - "Intelligence is synthesized insight, not just collected data."
+  - "The quality of an analysis is bounded by the rigor of its methodology and the quality of its sources."
+  - "Every conclusion must be defensible and directly traceable to evidence."
 linked_artifacts:
-  primary: "n01_agent_intelligence"
-  related: ["n01_sp_intelligence", "n01_rag_source_intelligence"]
-density_score: 0.92
-data_source: "Internal synthesis of best practices in academic and market research."
+  - "n01_agent_intelligence"
+  - "n01_sp_intelligence"
+  - "n01_rag_source_intelligence"
 ---
 
-## Core Research Methodologies
-A list of methods N01 is an expert in.
-- **Systematic Literature Review**: A structured approach to locate, appraise, and synthesize all available evidence for a specific question.
-- **Competitor SWOT Analysis**: Framework for identifying and analyzing the Strengths, Weaknesses, Opportunities, and Threats of market competitors.
-- **Market Trend Analysis**: The process of analyzing data over time to identify consistent patterns or trends in a market.
-- **Technology Benchmarking**: A systematic comparison of selected technologies or products against a defined standard.
-- **Thematic Synthesis**: A method for identifying and analyzing patterns or themes across qualitative data.
+## 1. Core Research Methodologies
+N01 is an expert in the application of the following rigorous research methodologies:
 
-## Key Information Sources
-The types of sources N01 uses for analysis, ordered by general preference.
-1.  **Primary Research**: Peer-reviewed articles from academic journals (e.g., arXiv, JSTOR, IEEE Xplore), original government reports.
-2.  **Financial & Corporate Filings**: Official documentation filed with regulatory bodies (e.g., SEC EDGAR database).
-3.  **Patent Databases**: Technical specifications and legal claims from patent offices (e.g., USPTO, EPO).
-4.  **Reputable Market Research**: Reports from established analyst firms (e.g., Gartner, Forrester, IDC).
-5.  **Technical Documentation**: Official product documentation, whitepapers, and developer guides.
-6.  **Secondary Sources**: Credible industry news outlets and conference proceedings.
+- **Systematic Literature Review (SLR)**: A highly structured, repeatable methodology to identify, appraise, and synthesize all relevant studies on a specific topic. Includes defining protocols, search strings, inclusion/exclusion criteria, and quality assessment.
+- **Competitor Intelligence & Analysis**: Goes beyond a simple SWOT. Involves gathering data on competitor products, strategy, financials, and market positioning to model their likely future actions and identify strategic threats or opportunities.
+- **Market & Trend Analysis**: Utilizes quantitative and qualitative data to identify and forecast market shifts, technological trends, and changes in customer behavior. Involves time-series analysis and signal detection.
+- **Technology Benchmarking & Auditing**: A systematic, evidence-based process for comparing technologies, products, or processes against established standards or competitors. Focuses on objective, measurable criteria.
+- **Thematic & Qualitative Synthesis**: A method for analyzing and identifying dominant themes, patterns, and concepts across a body of qualitative data (e.g., interview transcripts, open-ended survey responses, reports).
 
-## Analysis & Synthesis Frameworks
-Mental models applied during analysis to structure insights.
-- **PESTLE Analysis**: (Political, Economic, Social, Technological, Legal, Environmental) for understanding external market forces.
-- **Porter's Five Forces**: For analyzing industry structure and competitive intensity.
-- **First-Principles Thinking**: Deconstructing complex problems into their most basic, foundational elements.
+## 2. Analytical & Synthesis Frameworks
+N01 applies these mental models to structure information and derive higher-level intelligence:
 
-## Hierarchy of Evidence
-A visual representation of source credibility used to weigh evidence during synthesis.
-```text
-[Tier 1: Highest] Peer-Reviewed Scientific Papers, Controlled Trials
-       |
-[Tier 2: High]    Official Govt. Reports, Corporate Financial Filings
-       |
-[Tier 3: Moderate] Conference Papers, Market Research Reports, Patents
-       |
-[Tier 4: Lower]   Technical Whitepapers, Reputable News Journalism
-       |
-[Tier 5: Lowest]  Blog Posts, Opinion Articles, Unverified Sources
-```
+- **First-Principles Thinking**: Deconstructing a problem to its most fundamental, axiomatic truths to enable novel solutions and insights.
+- **Analysis of Competing Hypotheses (ACH)**: A structured analytical technique to identify and evaluate a comprehensive set of alternative hypotheses to avoid common analytical pitfalls.
+- **Porter's Five Forces**: A framework for analyzing the competitive structure and attractiveness of an industry.
+- **PESTLE Analysis**: A macro-environmental framework for understanding the impact of Political, Economic, Social, Technological, Legal, and Environmental factors.
+- **Kinetic Analysis**: Assessing the momentum, velocity, and trajectory of trends and competitors, not just their current state.
+
+## 3. Hierarchy of Evidence (Source Credibility Model)
+N01 uses a strict hierarchy to weigh the credibility of information sources during synthesis. All sources are not created equal.
+
+- **Tier 1 (Highest Credibility)**: Peer-reviewed scientific papers (especially systematic reviews and meta-analyses), randomized controlled trials, official government statistics.
+- **Tier 2 (High Credibility)**: Official corporate filings (e.g., SEC 10-K/10-Q), patent filings from major offices (USPTO, EPO), audited financial reports.
+- **Tier 3 (Moderate Credibility)**: Papers from respected academic conferences, reports from top-tier market research firms (e.g., Gartner, Forrester), technical whitepapers with reproducible data.
+- **Tier 4 (Lower Credibility)**: Reputable industry journalism, presentations from industry experts, unreviewed pre-print articles (e.g., from arXiv).
+- **Tier 5 (Lowest Credibility/For Directional Indication Only)**: Opinion pieces, blog posts, marketing materials, unverified social media claims.

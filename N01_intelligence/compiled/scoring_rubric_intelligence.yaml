@@ -1,72 +1,93 @@
 id: n01_sr_intelligence
 kind: scoring_rubric
 pillar: P07
-title: Scoring Rubric for N01 Intelligence Briefs
-version: 2.0.0
-created: '2026-03-30'
-updated: '2026-03-30'
+title: 'Scoring Rubric: N01 Intelligence Brief Quality'
+version: 1.0.0
+created: '2026-03-31'
+updated: '2026-03-31'
 author: N01_rebuild_8F
-framework: N01 Intelligence Brief Quality
-target_kinds:
-- Intelligence Brief
-dimensions_count: 4
-total_weight: 100
-threshold_publish: 8.0
-threshold_review: 7.0
-domain: intelligence, research, analysis
-quality: 8.9
+quality: null
 tags:
 - scoring
 - rubric
-- n01
-- intelligence
 - quality
 - eval
-tldr: 'Defines the 4-dimension scoring rubric for N01''s soft quality gates: Clarity, Synthesis, Source Quality, and Actionability.'
-linked_artifacts:
-  primary: n01_qg_intelligence
-purpose: This scoring rubric provides a detailed, quantitative guide for evaluating the four Soft Gates defined in `n01_qg_intelligence`.
-  It is used by human reviewers and LLM-as-a-judge models to ensure a consistent and objective measure of quality for all
-  `Intelligence Brief` artifacts produced by the N01 nucleus.
-dimensions: 'The final score is a weighted average of the following four dimensions, each rated on a scale of 0-10.
+- n01
+- research
+tldr: Provides the detailed 5-dimension scoring rubric for evaluating the quality of Intelligence Briefs from the N01 agent,
+  covering synthesis, evidence, actionability, clarity, and objectivity.
+target_artifact_type: IntelligenceBrief
+pass_threshold: 8.0
+dimensions:
+- Depth of Synthesis
+- Evidence Quality
+- Strategic Actionability
+- Clarity & Precision
+- Rigor & Objectivity
+1_purpose: This rubric provides the detailed, quantitative framework for the Soft Gates defined in `n01_qg_intelligence`.
+  It is used by automated evaluators (LLM-as-a-judge) and human reviewers to ensure a consistent, objective, and rigorous
+  quality score for every `IntelligenceBrief` produced by N01.
+2_scoring_dimensions: 'The final score is a weighted average of five dimensions, each rated on a scale of 1 to 10.
 
 
-  | Dimension                 | Weight | Score 9-10 (Excellent)                                                                       |
-  Score 5-6 (Average)                                                                     | Score 1-2 (Poor)                                                                       |
+  | ID  | Dimension                  | Weight | Description                                                                                             |
 
-  |---------------------------|--------|----------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
+  |-----|----------------------------|--------|---------------------------------------------------------------------------------------------------------|
 
-  | Clarity & Conciseness | 30%    | Key judgements are sharp and instantly understandable. Language is precise. No wasted
-  words.   | Main points are understandable but require some effort. Contains mild jargon or verbosity. | The text is confusing,
-  ambiguous, or overly verbose. Key insights are buried.         |
+  | `D1`| Depth of Synthesis     | 30%    | Evaluates the ability to create novel insights by connecting disparate information,
+  not just summarizing. |
 
-  | Depth of Synthesis    | 30%    | Connects multiple, disparate data points to reveal a novel insight not obvious from any
-  single source. | Summarizes and groups related information from sources, but draws limited new conclusions.  | Primarily
-  paraphrases or lists facts from sources with no new synthesis.               |
+  | `D2`| Evidence Quality       | 25%    | Assesses the credibility of the sources used, based on the `Hierarchy of Evidence`
+  model.                 |
 
-  | Source Quality        | 20%    | Analysis is overwhelmingly based on primary, peer-reviewed, or high-authority sources.       |
-  A mix of high- and low-quality sources is used. Over-reliance on secondary commentary.  | Analysis relies on blogs, opinion
-  pieces, or unverified sources. Citations are weak.   |
+  | `D3`| Strategic Actionability| 20%    | Measures how well the analysis informs a decision, highlights a risk, or reveals
+  an opportunity.        |
 
-  | Actionability         | 20%    | Key judgements directly inform a strategic decision, highlight a clear risk, or reveal
-  a tangible opportunity. | Insights are interesting but lack a clear "so what?" for decision-making.               | The
-  analysis is purely descriptive and provides no basis for taking action.           |'
-scoring_calculation: 'The final quality score is calculated as a weighted sum: `Score = (Clarity  0.3) + (Synthesis  0.3)
-  + (Source Quality  0.2) + (Actionability  0.2)`'
-example:
-- 'Clarity: 9/10'
-- 'Synthesis: 8/10'
-- 'Source Quality: 7/10'
-- 'Actionability: 8/10'
-- 'Final Score: `(9  0.3) + (8  0.3) + (7  0.2) + (8  0.2) = 2.7 + 2.4 + 1.4 + 1.6 = 8.1`'
-tier_thresholds_actions: 'This rubric maps directly to the actions defined in `n01_qg_intelligence`.
+  | `D4`| Clarity & Precision    | 15%    | Judges the language for being unambiguous, concise, and effective at communicating
+  complex ideas.       |
 
-  | Tier    | Score | Action                 |
+  | `D5`| Rigor & Objectivity    | 10%    | Assesses the neutrality of the tone and the logical soundness of the analytical
+  arguments.              |
 
-  |---------|-------|------------------------|
 
-  | PUBLISH | >= 8.0| `ACCEPT`               |
+  ---'
+3_detailed_rubric: ''
+d1_depth_of_synthesis_30:
+- 'Score 9-10 (Exceptional): The analysis reveals non-obvious, second-order insights by weaving together multiple, disparate
+  sources. It identifies the "why" behind the "what."'
+- 'Score 5-7 (Adequate): The analysis correctly groups related information and draws simple, first-order conclusions. It summarizes
+  well but generates limited new insight.'
+- 'Score 1-2 (Insufficient): The output is a simple list or paraphrase of facts from the sources. There is no meaningful synthesis.'
+d2_evidence_quality_25:
+- 'Score 9-10 (Excellent): Over 80% of citations refer to Tier 1 or Tier 2 sources (e.g., peer-reviewed papers, SEC filings).
+  The best available evidence is used.'
+- 'Score 5-7 (Acceptable): A mix of source tiers is used. May rely on some Tier 3-4 sources (e.g., conference papers, news)
+  where better evidence was available.'
+- 'Score 1-2 (Poor): The analysis overwhelmingly relies on Tier 5 sources (e.g., blogs, opinion pieces) or fails to use the
+  most credible sources provided.'
+d3_strategic_actionability_20:
+- 'Score 9-10 (Highly Actionable): The `Executive Summary` clearly articulates the strategic implications ("so what?"). The
+  insights can be directly used to make a specific decision.'
+- 'Score 5-7 (Somewhat Actionable): The analysis is interesting and informative, but the link to strategic decisions is vague
+  or requires significant interpretation.'
+- 'Score 1-2 (Not Actionable): The analysis is purely descriptive or academic. It does not provide a basis for any concrete
+  action.'
+d4_clarity_precision_15:
+- 'Score 9-10 (Outstanding): The language is precise, unambiguous, and economical. Complex ideas are explained with exceptional
+  clarity.'
+- 'Score 5-7 (Clear): The meaning is generally clear, but the text could be more concise or precise. May contain minor jargon.'
+- 'Score 1-2 (Unclear): The text is confusing, verbose, or uses ambiguous language, hindering comprehension.'
+d5_rigor_objectivity_10: '- Score 9-10 (Highly Rigorous): The tone is completely neutral and dispassionate. Analytical claims
+  are logically sound and free from cognitive biases. Confidence levels are well-justified.
 
-  | REVIEW  | >= 7.0| `ACCEPT_WITH_WARNING`  |
+  - Score 5-7 (Mostly Objective): The tone is largely neutral, but with occasional, subtle use of leading or biased language.
 
-  | REJECT  | < 7.0 | `REJECT`               |'
+  - Score 1-2 (Biased): The analysis uses emotionally loaded language, advocates for a position, or contains logical fallacies.
+
+
+  ---'
+4_final_score_calculation: '`Final Score = (D1  0.30) + (D2  0.25) + (D3  0.20) + (D4  0.15) + (D5 * 0.10)`
+
+  - `>= 8.0`: ACCEPT
+
+  - `< 8.0`: FLAG_FOR_REVIEW'
