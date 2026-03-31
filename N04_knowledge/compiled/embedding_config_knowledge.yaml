@@ -1,12 +1,14 @@
 id: n04_ec_knowledge
 kind: embedding_config
 pillar: P01_knowledge
-version: 2.0.0
-created: '2024-03-30'
-updated: '2024-03-30'
-author: N04 Knowledge Nucleus
-domain: RAG, Semantic Search, Vector Embeddings
-quality: 8.9
+version: 3.0.0
+created: 2026-03-31
+updated: 2026-03-31
+author: n04_knowledge_nucleus
+title: N04 Embedding Model Configuration
+models_count: 2
+default_model_id: google-text-embedding-004
+quality: null
 tags:
 - embedding
 - config
@@ -14,42 +16,13 @@ tags:
 - knowledge
 - rag
 - p01
-tldr: Defines the embedding model configurations for N04, led by text-embedding-3-large and nomic-embed-text-v1.5 as a secondary.
-density_score: 0.95
+- google
+tldr: Specifies the embedding model configurations for N04, establishing 'google/text-embedding-004' as the primary model
+  and 'jinaai/jina-embeddings-v2-base-en' as the secondary.
 1_overview: This document specifies the configurations for the embedding models used by the N04 Knowledge Nucleus. The choice
   of embedding model is critical for the performance of semantic search and the overall RAG pipeline. This configuration defines
-  a primary, high-performance model and a secondary, balanced model. ---
-2_primary_model_text_embedding_3_large: '- Provider: OpenAI
-
-  - Dimensions: `3072`
-
-  - Distance Metric: `Cosine Similarity`
-
-  - Normalize: `True`
-
-  - Cost per 1M Tokens: `$0.13` (as of Q1 2024)
-
-  - Use Case: Default for all new ingestions. This is the state-of-the-art model for semantic representation. Its high dimensionality
-  allows it to capture nuanced meaning, making it ideal for the CEX knowledge base where accuracy is paramount.
-
-
-  | Parameter | Value | Rationale |
-
-  | :--- | :--- | :--- |
-
-  | `model_name` | `text-embedding-3-large` | State-of-the-art performance for semantic retrieval tasks. |
-
-  | `provider` | `OpenAI` | The official provider of the model via API. |
-
-  | `dimensions` | `3072` | High dimensionality captures more semantic detail. |
-
-  | `distance_metric`| `cosine` | Industry standard for comparing normalized vectors. |
-
-  | `normalize` | `true` | Required for accurate cosine similarity and efficient search with dot product. |
-
-
-  ---'
-3_secondary_model_nomic_embed_text_v1_5: '- Provider: Nomic (via Hugging Face or API)
+  a primary, high-performance model from Google and a secondary, high-performance open-source model. ---
+2_primary_model_google_text_embedding_004: '- Provider: Google
 
   - Dimensions: `768`
 
@@ -57,34 +30,67 @@ density_score: 0.95
 
   - Normalize: `True`
 
-  - Cost per 1M Tokens: `~ $0.02` (API) or `Free` (self-hosted)
+  - Cost: Managed via Google Cloud subscription.
 
-  - Use Case: Batch processing, cost-sensitive tasks, or offline environments. While not as powerful as the primary model,
-  Nomic''s model offers an excellent balance of performance and cost-efficiency. It can be self-hosted, making it ideal for
-  private data.
+  - Use Case: Default for all CEX ingestions. As the latest generation of Google''s embedding models, it provides state-of-the-art
+  performance tailored for the Gemini family of models. Its native integration within the Google ecosystem makes it the canonical
+  choice.
 
 
   | Parameter | Value | Rationale |
 
   | :--- | :--- | :--- |
 
-  | `model_name` | `nomic-embed-text-v1.5`| Best-in-class open-weights model with a large context length. |
+  | `model_id` | `google/text-embedding-004` | SOTA performance and native integration with the CEX Gemini-based architecture.
+  |
 
-  | `provider` | `Nomic / HuggingFace` | Can be accessed via API or hosted locally. |
+  | `provider` | `Google` | The official provider of the model via Vertex AI API. |
 
-  | `dimensions` | `768` | Standard dimension size, offering a good trade-off. |
+  | `dimensions` | `768` | Standard, effective dimension size. |
+
+  | `distance_metric`| `cosine` | Industry standard for comparing normalized vectors. |
+
+  | `normalize` | `true` | Required for accurate cosine similarity and efficient search. |
+
+
+  ---'
+3_secondary_model_jinaai_jina_embeddings_v2_base_en: '- Provider: Hugging Face / Self-Hosted
+
+  - Dimensions: `768`
+
+  - Distance Metric: `Cosine Similarity`
+
+  - Normalize: `True`
+
+  - License: Apache 2.0
+
+  - Use Case: Batch processing, offline environments, or for tasks requiring an open-source, auditable model. Jina v2 is a
+  top-performing open-source model with a large context length, making it a powerful and flexible alternative.
+
+
+  | Parameter | Value | Rationale |
+
+  | :--- | :--- | :--- |
+
+  | `model_id` | `jinaai/jina-embeddings-v2-base-en`| Best-in-class open-source model with a permissive license and excellent
+  performance. |
+
+  | `provider` | `HuggingFace` | Can be accessed via API or hosted locally for private data contexts. |
+
+  | `dimensions` | `768` | Standard dimension size, matching the primary model for easier interchangeability. |
 
   | `distance_metric`| `cosine` | Standard for comparing normalized vectors. |
 
   | `normalize` | `true` | Ensures vectors are on the unit sphere for comparison. |'
 4_selection_routing_logic: 'The `embedding_apis` MCP will route requests based on the following logic:
 
-  1.  Default: All standard ingestion workflows will use the Primary Model (`text-embedding-3-large`).
+  1.  Default: All standard ingestion workflows will use the Primary Model (`google/text-embedding-004`).
 
   2.  Explicit Request: An agent can explicitly request the Secondary Model for a specific task by providing a `use_secondary_model:
-  true` flag.
+  true` flag in its request.
 
-  3.  Cost-Saving Mode: If the CEX system is configured for a low-cost operational mode, all embedding tasks will automatically
-  fall back to the Secondary Model.'
-5_integration: This configuration is a direct dependency of the Generate Embeddings step in the `Document Ingestion & Indexing`
-  workflow. The chosen model's output vector size (`dimensions`) also dictates the schema of the target `vector_db` MCP.
+  3.  Private Data Context: If an ingestion source is flagged as `private: true`, the system will automatically use the self-hosted
+  instance of the Secondary Model to ensure data does not leave the CEX environment.'
+5_integration: 'This configuration is a direct dependency of the Generate Embeddings step in the `WF-01: RAG Ingestion & Indexing`
+  workflow. The chosen model''s output vector size (`dimensions`) dictates the schema of the target `vector_db` MCP. Any change
+  to the dimensionality of the default model requires a full re-indexing of the knowledge base.'

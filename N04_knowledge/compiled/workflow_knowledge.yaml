@@ -1,66 +1,68 @@
 id: n04_wf_knowledge
 kind: workflow
 pillar: P12_orchestration
-version: 2.0.0
-created: '2024-03-30'
-updated: '2024-03-30'
-author: N04 Knowledge Nucleus
-title: N04 Knowledge Nucleus Workflows
-steps_count: 5
-execution: sequential
-agent_nodes":
-- N04
-timeout: 3600000
+version: 3.0.0
+created: 2026-03-31
+updated: 2026-03-31
+author: n04_knowledge_nucleus
+title: N04 Core Knowledge Workflows
+workflows_count: 3
+agent_nodes:
+- N04_knowledge
+timeout_seconds: 3600
 retry_policy: fixed_backoff
-depends_on":
+depends_on:
 - n04_chunk_strategy_knowledge
 - n04_embedding_config_knowledge
+- n04_rag_source_knowledge
 signals:
 - ingestion_complete
 - indexing_complete
 - authoring_complete
 - taxonomy_updated
 - error
-spawn_configs": []
-domain: RAG, Knowledge Graphs, Semantic Search, Taxonomy
-quality: 8.9
+quality: null
 tags:
 - workflow
 - n04
 - knowledge
 - orchestration
 - p12
-tldr: 'Defines the core workflows for the N04 Knowledge Nucleus: Ingestion/Indexing, KC Authoring, and Taxonomy Maintenance.'
-density_score: 0.93
-purpose: This document outlines the three primary, repeatable workflows orchestrated by the N04 Knowledge Nucleus. These workflows
-  represent the core operational loops for maintaining the CEX knowledge base. ---
-1_workflow_document_ingestion_indexing: "This is the primary workflow for adding new, unstructured information to the knowledge\
-  \ base.\n\nDiagram:\ngraph TD\n    A[Start: New Document Source] --> B{1. Load Document};\n    B --> C{2. Apply Chunking\
-  \ Strategy};\n    C --> D{3. Generate Embeddings};\n    D --> E{4. Store in Vector DB};\n    E --> F[End: Document Indexed];\n\
-  \nSteps:\n1.  Load Document:\n    -   Action: Use the appropriate `document_loader` MCP to load the raw text from a source\
-  \ (e.g., Markdown file, website, PDF).\n    -   Input: Document URI.\n    -   Output: Raw text content.\n    -   Depends\
-  \ on: `n04_rag_source_knowledge` for loader configuration.\n2.  Apply Chunking Strategy:\n    -   Action: Segment the raw\
-  \ text into semantically meaningful chunks based on the rules defined in the chunking strategy artifact.\n    -   Input:\
-  \ Raw text content.\n    -   Output: A list of text chunks.\n    -   Depends on: `n04_chunk_strategy_knowledge`.\n3.  Generate\
-  \ Embeddings:\n    -   Action: For each text chunk, call the `embedding_apis` MCP to generate a vector embedding.\n    -\
-  \   Input: A list of text chunks.\n    -   Output: A list of vector embeddings corresponding to each chunk.\n    -   Depends\
-  \ on: `n04_embedding_config_knowledge`.\n4.  Store in Vector DB:\n    -   Action: Store the chunks and their corresponding\
-  \ embeddings in the `vector_db` MCP. Include metadata (e.g., source URI, taxonomy tags).\n    -   Input: Chunks, embeddings,\
-  \ and metadata.\n    -   Output: Confirmation of successful storage.\n    -   Signal: `indexing_complete`.\n\n---"
-2_workflow_knowledge_card_kc_authoring_integration: "This workflow describes how a canonical piece of knowledge (a KC) is\
-  \ created and integrated into the knowledge graph.\n\nDiagram:\ngraph TD\n    A[Start: Author New KC] --> B{1. Validate\
-  \ KC Schema};\n    B --> C{2. Index KC Content};\n    C --> D{3. Update Knowledge Graph};\n    D --> E[End: KC Integrated];\n\
-  \nSteps:\n1.  Validate KC Schema:\n    -   Action: When a new KC markdown file is created, run `cex_compile.py` to validate\
-  \ its frontmatter against the `knowledge_card` schema.\n    -   Input: KC markdown file path.\n    -   Output: Success or\
-  \ validation error.\n2.  Index KC Content:\n    -   Action: Execute the Document Ingestion & Indexing workflow on the new\
-  \ KC itself. KCs are first-class citizens of the knowledge base and must be searchable.\n    -   Input: KC markdown file\
-  \ path.\n    -   Output: KC content is now searchable via semantic search.\n3.  Update Knowledge Graph:\n    -   Action:\
-  \ Parse the KC's `id` and `linked_artifacts`. Update the graph database by adding the new KC as a node and creating edges\
-  \ based on its links.\n    -   Input: Compiled KC YAML data.\n    -   Output: Updated knowledge graph.\n    -   Signal:\
-  \ `authoring_complete`.\n\n---"
-3_workflow_taxonomy_graph_maintenance: "This workflow is triggered when the CEX taxonomy is updated, ensuring the knowledge\
-  \ graph remains consistent.\n\nSteps:\n1.  Detect Taxonomy Change:\n    -   Trigger: A change is committed to the `TAXONOMY_LAYERS.yaml`\
-  \ file.\n2.  Re-evaluate KC Tags:\n    -   Action: For each KC in the knowledge base, re-evaluate its `tags` against the\
-  \ new taxonomy. Suggest or apply updates where classifications have changed.\n3.  Rebuild Graph Edges:\n    -   Action:\
-  \ If taxonomy changes affect structural relationships, trigger a partial or full rebuild of the knowledge graph edges to\
-  \ reflect the new hierarchy.\n    -   Signal: `taxonomy_updated`."
+- ingestion
+- authoring
+- taxonomy
+tldr: 'Defines the 3 core, repeatable workflows for the N04 Nucleus: (1) RAG Ingestion & Indexing, (2) Knowledge Card Authoring,
+  and (3) Taxonomy Governance.'
+purpose: This document specifies the three primary, repeatable workflows orchestrated by the N04 Knowledge Nucleus. These
+  are the core operational processes for building, integrating, and maintaining the CEX knowledge base. ---
+1_workflow_rag_ingestion_indexing: "The process for adding new, unstructured information to the CEX knowledge base and making\
+  \ it retrievable.\n\n- Trigger: A new data source is registered in `n04_rag_source_knowledge` or a manual run is initiated.\n\
+  - Goal: To transform raw data into queryable, vectorized chunks.\n\ngraph TD\n    subgraph WF-01: Ingestion\n        A[Start:\
+  \ Source URI] --> B{1. Load};\n        B --> C{2. Chunk};\n        C --> D{3. Embed};\n        D --> E{4. Store};\n    end\n\
+  \    E --> F[End: Indexed];\n\n| Step | Action | Description | Dependencies | Signal |\n| :--- | :--- | :--- |:--- | :---\
+  \ |\n| 1. Load | Use `document_loader` MCP. | Load the raw text and metadata from the source URI (e.g., git repo, URL).\
+  \ | `n04_rag_source_knowledge` | - |\n| 2. Chunk | Apply chunking strategy. | Segment the raw text into semantically coherent\
+  \ chunks based on content type. | `n04_chunk_strategy_knowledge` | - |\n| 3. Embed| Call `embedding_apis` MCP. | Generate\
+  \ a vector embedding for each chunk to capture its semantic meaning. | `n04_embedding_config_knowledge` | - |\n| 4. Store\
+  \ | Write to `vector_db` MCP. | Store chunks, embeddings, and metadata in the vector database for retrieval. | - | `indexing_complete`\
+  \ |\n\n---"
+2_workflow_knowledge_card_kc_lifecycle: "The process for creating, validating, and integrating a canonical Knowledge Card\
+  \ into the CEX ecosystem.\n\n- Trigger: A new Markdown file with `kind: knowledge_card` is committed.\n- Goal: To validate,\
+  \ index, and link a new KC into the Knowledge Graph.\n\ngraph TD\n    subgraph WF-02: KC Lifecycle\n        A[Start: KC\
+  \ committed] --> B{1. Validate};\n        B --> C{2. Index};\n        C --> D{3. Link};\n    end\n    D --> E[End: Integrated];\n\
+  \n| Step | Action | Description | Dependencies | Signal |\n| :--- | :--- | :--- |:--- | :--- |\n| 1. Validate| Run `cex_compile.py`.\
+  \ | Validate the KC's frontmatter against the `knowledge_card` schema. A failure here halts the workflow and raises an error.\
+  \ | `P06_schema/knowledge_card.yaml` | `error` (on fail) |\n| 2. Index | Execute WF-01. | Run the RAG Ingestion & Indexing\
+  \ workflow on the KC itself. KCs must be searchable content. | WF-01 | - |\n| 3. Link | Update graph database. | Parse the\
+  \ compiled KC. Add the KC as a node and its `linked_artifacts` as edges in the CEX Knowledge Graph. | - | `authoring_complete`\
+  \ |\n\n---"
+3_workflow_taxonomy_governance: "The process for maintaining the integrity of the knowledge base when the master taxonomy\
+  \ changes.\n\n- Trigger: A commit is made to `archetypes/TAXONOMY_LAYERS.yaml`.\n- Goal: To ensure all knowledge artifacts\
+  \ align with the updated taxonomy.\n\ngraph TD\n    subgraph WF-03: Taxonomy Governance\n        A[Start: Taxonomy updated]\
+  \ --> B{1. Identify Affected};\n        B --> C{2. Propose Changes};\n        C --> D{3. Audit Graph};\n    end\n    D -->\
+  \ E[End: Aligned];\n\n| Step | Action | Description | Dependencies | Signal |\n| :--- | :--- | :--- |:--- | :--- |\n| 1.\
+  \ Identify Affected| Scan all KCs. | Scan all artifacts in the knowledge base and identify any with tags or paths that are\
+  \ now invalid under the new taxonomy. | `TAXONOMY_LAYERS.yaml` | - |\n| 2. Propose Changes| Create update plan. | Generate\
+  \ a plan of proposed changes, such as tag migrations or KC refactoring, to align artifacts with the new structure. | - |\
+  \ - |\n| 3. Audit Graph | Validate graph edges. | Re-validate all edges in the Knowledge Graph to ensure they still conform\
+  \ to the hierarchical rules of the new taxonomy. | - | `taxonomy_updated`|"

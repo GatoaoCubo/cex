@@ -1,81 +1,90 @@
 id: n04_qg_knowledge
 kind: quality_gate
-pillar: P11_feedback
-version: 2.0.0
-created: '2024-03-30'
-updated: '2024-03-30'
-author: N04 Knowledge Nucleus
-domain: Knowledge Artifacts (KCs, Strategies, etc.)
-quality: 8.8
+pillar: P07_evals
+version: 3.0.0
+created: 2026-03-31
+updated: 2026-03-31
+author: n04_knowledge_nucleus
+title: N04 Knowledge Artifact Quality Gate
+gates_count: 9
+target_kinds:
+- knowledge_card
+- chunk_strategy
+- embedding_config
+- rag_source
+- retriever_config
+linked_artifacts:
+  primary:
+  - n04_sr_knowledge
+quality: null
 tags:
 - quality-gate
 - n04
 - knowledge
-- feedback
-- p11
-tldr: A set of automated checks to ensure all N04 artifacts meet structural, semantic, and connectivity requirements before
-  integration.
-density_score: 0.94
-1_definition: 'This quality gate is applied to all artifacts within the `N04_knowledge` fractal before they can be considered
-  "complete". It ensures every piece of knowledge architecture is sound, discoverable, and integrated.
+- evals
+- p07
+tldr: Defines the 9 quality gates (5 Hard, 4 Soft) for all N04-domain knowledge artifacts, ensuring structural integrity,
+  atomicity, and discoverability.
+1_overview: 'This document defines the official set of quality gates that all knowledge artifacts within the N04 domain must
+  pass before they can be published and integrated into the CEX knowledge base. The system is divided into two distinct types
+  of checks: Hard Gates and Soft Gates.
 
 
-  | Property | Value |
+  -   Hard Gates (H1-H5): These are absolute, binary (pass/fail) checks that are fully automated. An artifact failing any
+  hard gate is immediately rejected and cannot proceed.
 
-  | :--- | :--- |
-
-  | Metric | `artifact_integrity_score` |
-
-  | Threshold | `0.90` |
-
-  | Operator | `>=` |
-
-  | Scope | All artifacts in `N04_knowledge/` on commit. |'
-2_hard_gates_automated_blocking: 'These gates are non-negotiable. A failure in any hard gate will block the artifact''s integration
-  and fail the process. They are executed by the `cex_compile.py` script.
+  -   Soft Gates (S1-S4): These are nuanced, qualitative checks that are evaluated using the associated `n04_sr_knowledge`
+  scoring rubric. The resulting score determines if an artifact is published, requires review, or is rejected.'
+2_hard_gates_structural_schema_integrity: 'These gates are executed automatically on commit or via `cex_doctor.py`. Failure
+  is not permitted.
 
 
-  | Gate ID | Description | Failure Condition |
+  | Gate ID | Name | Description | Automation |
 
-  | :--- | :--- | :--- |
+  | :--- | :--- | :--- |:--- |
 
-  | H01 | Valid Schema | Artifact frontmatter does not parse correctly against its `kind`. |
+  | H1 | Valid Frontmatter | The artifact''s frontmatter must be valid YAML and parse without errors. All required fields
+  for its `kind` must be present. | Fully Automated |
 
-  | H02 | ID Integrity | `id` does not match the file''s pillar and name. |
+  | H2 | Valid Kind & Pillar | The `kind` must be a registered CEX kind, and the `pillar` must be a valid P-level pillar from
+  the taxonomy. | Fully Automated |
 
-  | H03 | Author Ownership | `author` is not `N04 Knowledge Nucleus`. |
+  | H3 | Unique ID | The `id` field must be unique across all artifacts in the CEX ecosystem. | Fully Automated |
 
-  | H04 | Null Quality | `quality` field is not `null` (N04 does not self-score). |
+  | H4 | Valid Taxonomy Tags | All entries in the `tags` list must be valid, registered tags within the CEX master taxonomy.
+  | Fully Automated |
 
-  | H05 | TLDR Exists | `tldr` field is empty or missing. |
-
-  | H06 | Tags Exist | `tags` array is empty or missing. |
-
-  | H07 | KC Axioms | If `kind: knowledge_card`, the `axioms` list is empty. |
-
-  | H08 | KC Links | If `kind: knowledge_card`, the `linked_artifacts` section is missing. |'
-3_soft_gates_scored_weighted: 'These gates measure the quality and "good citizenship" of an artifact. The final score is a
-  weighted average of these metrics.
+  | H5 | No Placeholder Content| Key fields like `tldr` and `title` must not contain generic placeholder text (e.g., "...",
+  "TBD", "Lorem Ipsum"). | Fully Automated |'
+3_soft_gates_semantic_relational_quality: 'These gates are evaluated by an LLM-assisted scorer using the `n04_sr_knowledge`
+  rubric. The combined weighted score determines the final quality level.
 
 
-  | Gate ID | Description | Max Penalty | Weight | Rationale |
+  | Gate ID | Name | Description | Scored By |
 
-  | :--- | :--- | :--- | :--- | :--- |
+  | :--- | :--- | :--- | :--- |
 
-  | S01 | Atomicity | `0.3` | 40% | Is the artifact focused on a single, well-defined concept? (Crucial for retrieval). |
+  | S1 | Atomicity | Does the artifact represent a single, cohesive, and self-contained concept? (Weight: 40%) | `n04_sr_knowledge`
+  |
 
-  | S02 | Connectivity | `0.2` | 30% | Does the artifact link to related concepts, creating a connected graph? |
+  | S2 | Connectivity | Is the artifact well-integrated into the Knowledge Graph via the `linked_artifacts` field? (Weight:
+  30%) | `n04_sr_knowledge` |
 
-  | S03 | Discoverability| `0.2` | 20% | Are `keywords` and `long_tails` specific and comprehensive? |
+  | S3 | Discoverability| Is the metadata (`keywords`, `long_tails`, `tldr`) high-quality and representative of the content?
+  (Weight: 20%) | `n04_sr_knowledge` |
 
-  | S04 | Clarity | `0.1` | 10% | Is the content unambiguous and easy for another agent to parse? |'
-4_scoring_formula: '`artifact_integrity_score = 1.0 - (S01_penalty  0.40) - (S02_penalty  0.30) - (S03_penalty  0.20) - (S04_penalty  0.10)`
-
-
-  - Evaluation: The scoring logic is implemented in a future `n04_quality_scorer` tool, which uses an LLM to assess the artifact
-  against the soft gate criteria.'
-5_bypass_audit_policy:
-- 'Bypass: No bypass is permitted for Hard Gates. Soft Gate scores below the threshold can be overridden by the N01 or N05
-  Nuclei with a logged justification.'
-- 'Audit: Every gate evaluation (pass or fail) for every artifact is logged. The log includes the timestamp, artifact ID,
-  gate ID, status, and any penalty applied. Logs are retained for 365 days.'
+  | S4 | Clarity | Is the content''s language and structure precise, unambiguous, and easy to parse for another agent? (Weight:
+  10%) | `n04_sr_knowledge` |'
+4_execution_enforcement:
+- 'Trigger: This quality gate is automatically triggered by a `git pre-commit` hook for any changes within the `N04_knowledge/`
+  directory.'
+- 'Process:'
+- The `cex_hooks.py` script executes the 5 Hard Gates. If any fail, the commit is rejected with an error message indicating
+  the failed gate.
+- If Hard Gates pass, the script calls the `n04_quality_scorer` tool (LLM-assisted) to evaluate the 4 Soft Gates using the
+  rubric.
+- The final weighted score is calculated.
+- '`score >= 9.0`: Artifact is published.'
+- '`7.5 <= score < 9.0`: Artifact is marked for review.'
+- '`score < 7.5`: Commit is rejected.'
+- 'Manual Execution: The gate can be run manually on any file or directory using `python _tools/cex_doctor.py --gate n04_qg_knowledge`.'

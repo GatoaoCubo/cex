@@ -2,56 +2,71 @@
 id: n04_dr_knowledge
 kind: dispatch_rule
 pillar: P12_orchestration
-version: "2.0.0"
-created: "2024-03-30"
-updated: "2024-03-30"
-author: "N04 Knowledge Nucleus"
-domain: "RAG, Knowledge Graphs, Semantic Search, Taxonomy"
-quality: 8.7
-tags: [dispatch, n04, knowledge, orchestration, p12]
-tldr: "Routes all tasks related to knowledge architecture, RAG, and semantic search to the N04 Knowledge Nucleus."
+version: 3.0.0
+created: 2026-03-31
+updated: 2026-03-31
+author: n04_knowledge_nucleus
+domain: "Knowledge Architecture, RAG, Semantic Indexing"
+quality: null
+tags: [dispatch, n04, knowledge, orchestration, p12, routing]
+tldr: "Routes tasks involving knowledge architecture, RAG, indexing, and semantic search to the N04 Knowledge Nucleus, based on a hybrid semantic and keyword match."
 scope: "CEX-wide knowledge retrieval and management tasks."
-keywords": [knowledge, rag, index, search, distill, taxonomy, embed, chunk, find, what is, how does, explain, document]
-agent_node: "n04_knowledge_nucleus"
-model: "gemini-2.5-pro"
+keywords: [knowledge, rag, indexing, embeddings, taxonomy, retrieval, documentation, search, find, explain, chunking, consolidate, distill, what is, how does, document]
+agent_node: N04_knowledge
 priority: 10
-confidence_threshold: 0.85
-fallback: "n01_intelligence"
+confidence_threshold: 0.90
+fallback: N01_intelligence
 conditions:
-  - "intent in ['query', 'build', 'architect', 'manage']"
-  - "domain in ['knowledge', 'data', 'information']"
-load_balance: false
+  - "intent in ['query', 'architect', 'manage', 'organize', 'find']"
+  - "domain in ['knowledge', 'data', 'information', 'taxonomy', 'retrieval']"
 routing_strategy: "semantic_keyword_match"
 ---
 
 # N04 Knowledge Nucleus Dispatch Rule
 
 ## 1. Purpose
-This rule directs all incoming tasks related to the CEX knowledge base, information architecture, and Retrieval-Augmented Generation (RAG) to the **N04 Knowledge Nucleus**. As the specialized agent for this domain, N04 has the necessary tools and capabilities to handle these requests with the highest fidelity.
+This rule ensures that all incoming tasks related to the CEX knowledge base, information architecture, and Retrieval-Augmented Generation (RAG) are precisely routed to the **N04 Knowledge Nucleus**. This guarantees that domain-specific requests are handled by the agent with the correct specialized capabilities.
 
-## 2. Routing Strategy: `semantic_keyword_match`
-The dispatch system employs a hybrid strategy. It first performs a fast check for the presence of high-signal keywords. If matched, it then uses a lightweight semantic model to confirm the user's *intent* aligns with N04's core functions before routing.
+## 2. Routing Logic
+The dispatch system employs a high-precision hybrid strategy to minimize false positives and ensure correct routing.
 
-### 2.1. Keywords
-The keyword set is designed to be comprehensive, capturing verbs and nouns associated with knowledge management.
+| Step | Method | Description |
+| :--- | :--- | :--- |
+| **1. Fast Match** | Keyword Scan | The incoming request is scanned for the presence of one or more high-signal keywords from the trigger set. If no keywords are found, the rule is skipped. |
+| **2. Deep Match** | Semantic Analysis | If keywords are present, a lightweight semantic model analyzes the request's vector to classify its **intent** and **domain**. |
+| **3. Condition Check**| Boolean Logic | The classified intent and domain are checked against the mandatory conditions defined below. |
+| **4. Confidence Gate**| Threshold Check | If all conditions pass, the semantic similarity score is compared against the `confidence_threshold`. If it passes, the task is dispatched to N04. |
 
-- **Core Domain**: `knowledge`, `rag`, `taxonomy`, `search`, `index`
-- **Actions**: `find`, `explain`, `distill`, `embed`, `chunk`
-- **Entities**: `document`, `source`, `information`, `data`
-- **Interrogatives**: `what is`, `how does` (often signal a knowledge query)
 
-### 2.2. Conditions
-To prevent false positives, the following conditions must also be met:
-- The user's intent should be classifiable as `query` (seeking info), `build` (designing a knowledge structure), `architect` (same as build), or `manage` (organizing info).
-- The domain of the query should relate to `knowledge`, `data`, or `information`.
+## 3. Trigger Definition
 
-## 3. Priority & Confidence
-- **Priority**: `10` (Maximum)
-  - **Rationale**: Correctly routing knowledge queries is fundamental to the operation of all other agents. A high-quality information backbone is non-negotiable.
-- **Confidence Threshold**: `0.85`
-  - **Rationale**: A high threshold ensures that only tasks with a strong semantic match are routed to N04. Ambiguous queries are better handled by a generalist.
+### 3.1. High-Signal Keywords
+This set captures the core vocabulary of the N04 domain.
 
-## 4. Fallback Logic
-If the confidence score is below `0.85`, or if N04 is offline or at maximum capacity, the task is routed to **N01_intelligence**.
+- **Core Concepts**: `knowledge`, `rag`, `taxonomy`, `search`, `index`, `embeddings`, `retrieval`
+- **Actions**: `find`, `explain`, `distill`, `embed`, `chunk`, `consolidate`, `document`
+- **Interrogatives**: `what is`, `how does`, `explain` (signals a knowledge query)
 
-- **Rationale**: N01, as the general intelligence nucleus, has the broad reasoning capability to understand the user's ambiguous request, clarify it, or route it to the appropriate specialist (which may still be N04 after clarification). This prevents routing failures and ensures the user's request is always handled.
+### 3.2. Mandatory Conditions
+To be routed to N04, the request must satisfy a condition from both `intent` AND `domain` classifications.
+
+- **Allowed Intents**:
+  - `query`: The user is asking for information.
+  - `architect`: The user wants to design a knowledge structure.
+  - `manage`/`organize`: The user wants to modify or structure information.
+  - `find`: A direct command to retrieve something.
+- **Allowed Domains**:
+  - `knowledge`
+  - `data`/`information`
+  - `taxonomy`
+  - `retrieval`
+
+**Example:** "Find the documentation on the RAG retrieval strategy" passes because `find` is an allowed intent, `documentation` and `retrieval` are keywords, and the domain is `knowledge`.
+
+## 4. Governance
+- **Priority**: `10` (System Critical)
+  - **Rationale**: The integrity of the knowledge pipeline is foundational for all other CEX operations. Correctly routing these requests is of maximal importance.
+- **Confidence Threshold**: `0.90`
+  - **Rationale**: A high threshold ensures that only tasks with a very strong semantic match are routed to N04. This prevents the specialist agent from being occupied with ambiguous or out-of-scope requests.
+- **Fallback Node**: `N01_intelligence`
+  - **Rationale**: If the confidence score is `< 0.90`, or if N04 is offline or at maximum capacity, the task is routed to the **N01 Intelligence Nucleus**. N01's generalist capabilities allow it to clarify the user's intent and re-route if necessary, ensuring no request is dropped.
