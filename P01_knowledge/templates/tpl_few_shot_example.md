@@ -1,30 +1,44 @@
 ---
-# TEMPLATE: Few-Shot Example (P01 Knowledge)
-# Valide contra P01_knowledge/_schema.yaml (types.few_shot_example)
-# Max 1024 bytes
-
-id: p01_fse_{{TOPIC_SLUG}}
+id: "p01_fse_{{TOPIC_SLUG}}"
 kind: few_shot_example
 pillar: P01
-title: "{{EXAMPLE_TITLE}}"
-input: {{INPUT_SUMMARY}}
-output: {{OUTPUT_SUMMARY}}
-quality: {{QUALITY_7_TO_10}}
+version: 1.0.0
+title: Template - Few Shot Example
+tags: [template, few-shot, example, prompt, icl]
+tldr: Input-output pair for in-context learning. Shows LLM what good output looks like.
+quality: null
 ---
 
-# Few-Shot Example: {{EXAMPLE_TITLE}}
+# Few Shot Example: [NAME]
 
-## Input
-```text
-{{REALISTIC_INPUT_EXAMPLE}}
+## Purpose
+[WHAT this few_shot_example does]
+## Schema
+```yaml
+target_kind: [WHAT_KIND_THIS_EXEMPLIFIES]
+input: "[SAMPLE_INPUT]"
+output: "[EXPECTED_OUTPUT]"
 ```
-
-## Output
-```text
-{{REALISTIC_OUTPUT_EXAMPLE}}
+## Example Pair
+### Input
 ```
-
-## Why It Works
-- Signal preserved: {{WHY_OUTPUT_MATCHES_INPUT}}
-- Constraint honored: {{WHAT_RULE_WAS_RESPECTED}}
-- Reuse hint: {{WHEN_TO_REUSE_THIS_PATTERN}}
+[NATURAL_LANGUAGE_REQUEST]
+```
+### Expected Output
+```
+[COMPLETE_ARTIFACT — full valid output with frontmatter]
+```
+## Selection Criteria
+| Criterion | Requirement |
+|-----------|-------------|
+| Relevance | Same kind as target |
+| Quality | Score >= 8.5 |
+| Diversity | Cover different use cases |
+| Size | <= 2000 tokens (context budget) |
+## Usage in 8F
+Injected during F3 (INJECT). 2-3 examples per kind is optimal.
+## Quality Gate
+- [ ] Input is natural language
+- [ ] Output is a complete valid artifact
+- [ ] Output passes F7 gates
+- [ ] Example is representative of common use

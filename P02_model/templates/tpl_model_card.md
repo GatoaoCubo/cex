@@ -1,41 +1,46 @@
 ---
-# TEMPLATE: Model Card (P02 Model)
-# Valide contra P02_model/_schema.yaml (types.model_card)
-# Max 2048 bytes
-
-id: p02_mc_[model_slug]
-model_name: [nome_do_modelo]
-provider: [openai|anthropic|google|local]
-context_window: [numero_de_tokens]
-pricing: [input_x_output_ou_flat_rate]
+id: "p02_mc_[model_slug]"
+version: 1.0.0
+title: Template - Unknown
+tags: [template, model-card, llm, config, selection]
+tldr: Documents LLM capabilities, costs, limits, and recommended use cases for informed model selection.
+quality: null
+model_name: ['nome_do_modelo']
+provider: ['openai|anthropic|google|local']
+context_window: ['numero_de_tokens']
+pricing: ['input_x_output_ou_flat_rate']
 ---
 
-# Model Card: [nome_do_modelo]
+# Unknown: [NAME]
 
-## Model Name
-<!-- INSTRUCAO: nome comercial e versao exata. -->
-- Name: [nome_do_modelo]
-- Alias: [apelido_ou_family]
-
-## Provider
-<!-- INSTRUCAO: ambiente, endpoint ou stack principal. -->
-- Provider: [provider]
-- Endpoint class: [api|chat|responses|local]
-
-## Context Window
-<!-- INSTRUCAO: numero e impacto pratico. -->
-- Max context: [numero_de_tokens]
-- Recommended working window: [janela_util]
-
-## Pricing
-<!-- INSTRUCAO: input/output/cache se aplicavel. -->
-| Metric | Value |
-|--------|-------|
-| Input | [preco_input] |
-| Output | [preco_output] |
-| Cache | [preco_cache_or_na] |
-
+## Purpose
+[WHAT this unknown does]
+## Model Identity
+| Field | Value |
+|-------|-------|
+| Provider | [anthropic | openai | google | local] |
+| Model | [MODEL_NAME] |
+| Context window | [N tokens] |
+| Output max | [N tokens] |
 ## Capabilities
-<!-- INSTRUCAO: somente capacidades relevantes para selecao operacional. -->
-- Strong at: [capacidade_1], [capacidade_2]
-- Weak at: [limite_1], [limite_2]
+| Task | Quality | Speed | Cost |
+|------|---------|-------|------|
+| Coding | [excellent/good/fair] | [fast/med/slow] | [$N/1M] |
+| Analysis | [excellent/good/fair] | [fast/med/slow] | [$N/1M] |
+| Creative | [excellent/good/fair] | [fast/med/slow] | [$N/1M] |
+| Tool use | [excellent/good/fair] | [fast/med/slow] | [$N/1M] |
+## Recommended Use
+- **Best for**: [PRIMARY_USE_CASE]
+- **Good for**: [SECONDARY_USE_CASE]
+- **Avoid for**: [WHEN_NOT_TO_USE]
+## Cost
+```yaml
+input_cost_per_1m: [N.NN]
+output_cost_per_1m: [N.NN]
+rate_limit_rpm: [N]
+```
+## Quality Gate
+- [ ] Context window documented
+- [ ] At least 3 capabilities rated
+- [ ] Cost documented
+- [ ] Use case recommendations present

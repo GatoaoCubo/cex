@@ -5,6 +5,11 @@ input: "criar agente de SEO para marketplace"
 output: "agent spec + 10 ISO files + handoff dispatch via builder_agent"
 quality: 9.0
 ---
+tldr: "Shows how to create an agent artifact using the 8F pipeline with a concrete input-output pair."
+quality: null
+tldr: "Shows how to create an agent artifact using the 8F pipeline with a concrete input-output pair."
+quality: null
+---
 
 # Few-Shot: Agent Creation
 

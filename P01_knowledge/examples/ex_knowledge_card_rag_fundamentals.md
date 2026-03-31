@@ -8,6 +8,12 @@ references:
   - tpl_knowledge_card
   - bld_knowledge_card_knowledge_card
   - ex_knowledge_card_prompt_caching
+quality: null
+---
+tldr: "Knowledge card covering RAG fundamentals: retrieval, augmentation, generation, and evaluation patterns."
+quality: null
+tldr: "Knowledge card covering RAG fundamentals: retrieval, augmentation, generation, and evaluation patterns."
+quality: null
 ---
 
 # RAG Fundamentals

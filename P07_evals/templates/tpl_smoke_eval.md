@@ -1,31 +1,36 @@
 ---
-# TEMPLATE: Smoke Eval (P07 Evals)
-# Valide contra P07_evals/_schema.yaml (types.smoke_eval)
-# Max 3072 bytes
-
-id: p07_se_{{SCOPE_SLUG}}
+id: "p07_se_{{SCOPE_SLUG}}"
 kind: smoke_eval
 pillar: P07
-title: "Smoke Eval: {{SCOPE_NAME}}"
-quality: {{QUALITY_8_TO_10}}
+version: 1.0.0
+title: Template - Smoke Eval
+tags: [template, smoke, eval, sanity, quick]
+tldr: Fast sanity check (<30s) that catches obvious regressions. Syntax, import, basic function, output format.
+quality: null
 ---
 
-# Smoke Eval: {{SCOPE_NAME}}
+# Smoke Eval: [NAME]
 
-## Goal
-{{FAST_SANITY_CHECK_FOR_THE_CRITICAL_PATH}}
-
-## Setup
-- Target: {{TARGET_UNDER_TEST}}
-- Max duration: {{UNDER_30_SECONDS}}
-- Preconditions: {{PRECONDITION}}
-
-## Execute
-1. {{STEP_1}}
-2. {{STEP_2}}
-3. {{STEP_3}}
-
-## Assert
-- {{ASSERTION_1}}
-- {{ASSERTION_2}}
-- {{ASSERTION_3}}
+## Purpose
+[WHAT this smoke_eval does]
+## Checks
+| Check | What | Pass | Time |
+|-------|------|------|------|
+| syntax | .py files compile | 0 errors | <2s |
+| import | Main module loads | No ImportError | <5s |
+| function | Core fn returns | Non-null | <10s |
+| format | Output matches schema | Valid | <5s |
+## Execution
+```bash
+python -m pytest tests/ -m smoke --timeout=30 --fail-fast
+```
+## When to Run
+- Before every commit (pre-commit)
+- First CI step
+- After dependency update
+- After config change
+## Quality Gate
+- [ ] Total < 30s
+- [ ] No external deps (DB, API)
+- [ ] Catches syntax + import + format
+- [ ] fail_fast=true

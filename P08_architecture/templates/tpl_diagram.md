@@ -1,30 +1,44 @@
 ---
-# TEMPLATE: Diagram (P08 Architecture)
-# Valide contra P08_architecture/_schema.yaml (types.diagram)
-# Max 4096 bytes
-
-id: p08_diag_{{SCOPE_SLUG}}
+id: "p08_diag_{{SCOPE_SLUG}}"
 kind: diagram
 pillar: P08
-title: "Diagram: {{SCOPE_NAME}}"
-quality: {{QUALITY_8_TO_10}}
+version: 1.0.0
+title: Template - Diagram
+tags: [template, diagram, visual, mermaid, ascii]
+tldr: Visual diagram (Mermaid or ASCII) showing structure, data flow, or sequences. Embedded in markdown.
+quality: null
 ---
 
-# Diagram: {{SCOPE_NAME}}
+# Diagram: [NAME]
 
 ## Purpose
-{{ONE_SENTENCE_ON_WHAT_THIS_ARCHITECTURE_VIEW_SHOWS}}
-
-## Diagram
+[WHAT this diagram does]
+## Diagram Types
+| Type | Syntax | Best For |
+|------|--------|----------|
+| Flowchart | `graph TD` | Process flow |
+| Sequence | `sequenceDiagram` | API calls |
+| Class | `classDiagram` | Data models |
+| State | `stateDiagram-v2` | Lifecycle |
+## Example
 ```mermaid
-flowchart LR
-    A[{{COMPONENT_A}}] --> B[{{COMPONENT_B}}]
-    B --> C[{{COMPONENT_C}}]
-    B --> D[{{COMPONENT_D}}]
-    C --> E[{{OUTCOME}}]
+graph LR
+    A[Intent] --> B[F1]
+    B --> C[F2]
+    C --> D[F3]
+    D --> E[F6]
+    E --> F{F7}
+    F -->|pass| G[F8]
+    F -->|fail| E
 ```
-
-## Reading Notes
-- Entry point: {{ENTRY_POINT}}
-- Shared dependency: {{SHARED_COMPONENT}}
-- Failure hotspot: {{RISK_AREA}}
+## ASCII Fallback
+```
+Intent -> [F1] -> [F2] -> [F3] -> [F6] -> [F7] -> [F8]
+                                     ^       |fail
+                                     +-------+
+```
+## Quality Gate
+- [ ] Diagram has title
+- [ ] Arrows are labeled
+- [ ] Both Mermaid + ASCII provided
+- [ ] Matches textual description

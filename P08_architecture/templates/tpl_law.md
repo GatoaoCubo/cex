@@ -1,28 +1,38 @@
 ---
-# TEMPLATE: Law (P08 Architecture)
-# Valide contra P08_architecture/_schema.yaml (types.law)
-# Max 3072 bytes
-
-id: p08_law_{{NUMBER}}
+id: "p08_law_{{NUMBER}}"
 kind: law
 pillar: P08
-title: "LAW {{NUMBER}}: {{LAW_NAME}}"
-quality: {{QUALITY_8_TO_10}}
+version: 1.0.0
+title: Template - Law
+tags: [template, law, principle, architecture, invariant]
+tldr: "Architectural law: stronger than guideline, MUST be followed. Violations are bugs."
+quality: null
 ---
 
-# LAW {{NUMBER}}: {{LAW_NAME}}
+# Law: [NAME]
 
+## Purpose
+[WHAT this law does]
 ## Statement
-{{ONE_IMMUTABLE_OPERATIONAL_RULE}}
-
-## Why It Exists
-- Context: {{WHAT_PROBLEM_THIS_PREVENTS}}
-- Risk: {{WHAT_BREAKS_IF_IGNORED}}
-
+> **[LAW — imperative, unambiguous, one sentence]**
+## Rationale
+[WHY — what property it preserves, what breaks if violated]
 ## Enforcement
-1. {{ENFORCEMENT_MECHANISM_1}}
-2. {{ENFORCEMENT_MECHANISM_2}}
-3. {{ENFORCEMENT_MECHANISM_3}}
-
-## Exceptions
-- Allowed only when: {{STRICT_EXCEPTION_RULE}}
+| Method | Tool | When |
+|--------|------|------|
+| Static | [TOOL] | Every commit |
+| Review | Checklist | Every PR |
+| Runtime | [ASSERT] | On startup |
+## Violations
+| Pattern | Consequence | Fix |
+|---------|------------|-----|
+| [VIOLATION_1] | [BREAKS_X] | [HOW] |
+| [VIOLATION_2] | [BREAKS_Y] | [HOW] |
+## Relationships
+- **Depends on**: [OTHER_LAW]
+- **Supports**: [PROPERTY — modularity, testability]
+## Quality Gate
+- [ ] Statement is 1 sentence
+- [ ] Enforcement method identified
+- [ ] >= 1 violation example
+- [ ] Rationale explains consequences

@@ -1,28 +1,38 @@
 ---
-# TEMPLATE: Component Map (P08 Architecture)
-# Valide contra P08_architecture/_schema.yaml (types.component_map)
-# Max 3072 bytes
-
-id: p08_cmap_{{SCOPE_SLUG}}
+id: "p08_cmap_{{SCOPE_SLUG}}"
 kind: component_map
 pillar: P08
-title: "Component Map: {{SCOPE_NAME}}"
-quality: {{QUALITY_8_TO_10}}
+version: 1.0.0
+title: Template - Component Map
+tags: [template, component, map, architecture, deps]
+tldr: Visual map of system components, technologies, responsibilities, and data flow between them.
+quality: null
 ---
 
-# Component Map: {{SCOPE_NAME}}
+# Component Map: [NAME]
 
+## Purpose
+[WHAT this component_map does]
 ## Components
-| Component | Responsibility | Depends On |
-|-----------|----------------|------------|
-| {{COMPONENT_1}} | {{RESPONSIBILITY_1}} | {{DEPENDENCY_1}} |
-| {{COMPONENT_2}} | {{RESPONSIBILITY_2}} | {{DEPENDENCY_2}} |
-| {{COMPONENT_3}} | {{RESPONSIBILITY_3}} | {{DEPENDENCY_3}} |
-
-## Interfaces
-- {{COMPONENT_1}} -> {{COMPONENT_2}}: {{INTERFACE_RULE}}
-- {{COMPONENT_2}} -> {{COMPONENT_3}}: {{INTERFACE_RULE}}
-
-## Change Impact
-- Safe to change alone: {{COMPONENT_SAFE}}
-- Requires coordination: {{COMPONENT_RISKY}}
+| Component | Technology | Responsibility |
+|-----------|-----------|---------------|
+| [COMP_1] | [TECH] | [WHAT_IT_DOES] |
+| [COMP_2] | [TECH] | [WHAT_IT_DOES] |
+| [COMP_3] | [TECH] | [WHAT_IT_DOES] |
+## Diagram
+```
+[COMP_1] --HTTP--> [COMP_2] --SQL--> [COMP_3]
+    ^                   |
+    +-----Signal--------+
+```
+## Dependencies
+| From | To | Protocol | Critical |
+|------|------|----------|---------|
+| API | Database | SQL/TCP | Yes |
+| API | Cache | Redis | No |
+| Worker | Queue | AMQP | Yes |
+## Quality Gate
+- [ ] Every component has tech + responsibility
+- [ ] Data flow shows direction
+- [ ] Dependencies include protocol
+- [ ] Criticality assessed

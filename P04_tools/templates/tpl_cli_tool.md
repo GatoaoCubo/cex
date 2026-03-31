@@ -1,30 +1,40 @@
 ---
-# TEMPLATE: CLI Tool (P04 Tools)
-# Valide contra P04_tools/_schema.yaml (types.cli_tool)
-# Max 1024 bytes
-
-id: p04_cli_{{TOOL_SLUG}}
+id: "p04_cli_{{TOOL_SLUG}}"
 kind: cli_tool
 pillar: P04
-title: "CLI Tool: {{TOOL_NAME}}"
-quality: {{QUALITY_7_TO_10}}
+version: 1.0.0
+title: Template - Cli Tool
+tags: [template, cli, tool, typer, command-line]
+tldr: CLI tool with commands, args, options, and Rich output. Built with Typer for modern Python CLI.
+quality: null
 ---
 
-# CLI Tool: {{TOOL_NAME}}
+# Cli Tool: [NAME]
 
 ## Purpose
-{{ONE_SENTENCE_ON_WHAT_THIS_COMMAND_DOES}}
-
-## Usage
-```bash
-{{TOOL_NAME}} {{COMMAND}} {{FLAGS}}
+[WHAT this cli_tool does]
+## Configuration
+```yaml
+name: "[CLI_NAME]"
+framework: [typer | click | argparse]
+entry_point: "[package.cli:app]"
 ```
-
-## Inputs / Outputs
-- Input: {{EXPECTED_INPUT}}
-- Output: {{EXPECTED_OUTPUT}}
-- Exit codes: {{EXIT_CODE_RULES}}
-
-## Guardrails
-- Safe default: {{DEFAULT_BEHAVIOR}}
-- Dangerous flag: {{FLAG_TO_AVOID_OR_CONFIRM}}
+## Commands
+| Command | Args | Options | Description |
+|---------|------|---------|-------------|
+| run | input (req) | --output, --verbose | Execute main task |
+| list | -- | --kind, --limit | List artifacts |
+| score | path (req) | --apply, --dry-run | Score artifact |
+## Output
+- `rich.console.Console` for color
+- `rich.table.Table` for structured data
+- `--json` flag for machine-readable
+## Error Handling
+- Invalid args: Typer auto-validates + help
+- File not found: Rich error panel
+- Exit codes: 0=ok, 1=error, 2=validation
+## Quality Gate
+- [ ] Entry point in pyproject.toml
+- [ ] --help on all commands
+- [ ] Exit codes documented
+- [ ] --json flag supported

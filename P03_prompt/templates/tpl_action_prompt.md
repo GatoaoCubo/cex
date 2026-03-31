@@ -1,39 +1,41 @@
 ---
-# TEMPLATE: Action Prompt (P03 Prompt)
-# Preencha todas as {{VARIAVEIS}} antes de usar
-# Valide contra P03_prompt/_schema.yaml (types.action_prompt)
-# Max 2048 bytes
-
-id: p03_ap_{{ACTION_SLUG}}
+id: "p03_ap_"PLACEHOLDER""
 kind: action_prompt
-action: {{ACTION_NAME}}
-input_required: [{{INPUT_1}}, {{INPUT_2}}, {{INPUT_3}}]
-output_expected: {{OUTPUT_FORMAT_ESPECIFICO}}
+version: 1.0.0
+title: Template - Action Prompt
+tags: [template, action, prompt, tool-use, execution]
+tldr: Prompt that triggers tool calls. Defines trigger patterns, action mapping, param extraction, confirmation.
+quality: null
+action: PLACEHOLDER
+input_required: ['PLACEHOLDER', 'PLACEHOLDER', 'PLACEHOLDER']
+output_expected: PLACEHOLDER
 ---
 
-# Action Prompt: {{ACTION_NAME}}
+# Action Prompt: [NAME]
 
 ## Purpose
-{{O_QUE_ESTA_ACAO_EXECUTA_EM_1_LINHA}}.
-
-## Input
+[WHAT this action_prompt does]
+## Trigger Patterns
 ```yaml
-{{INPUT_1}}: {{EXEMPLO_CONCRETO}}
-{{INPUT_2}}: {{EXEMPLO_CONCRETO}}
-{{INPUT_3}}: {{EXEMPLO_CONCRETO}}
+patterns:
+  - "create {kind} about {topic}"
+  - "build {kind} for {domain}"
+  - "list {kind}"
+  - "score {path}"
 ```
-
-## Execution
-1. {{PASSO_1_COM_CRITERIO_DE_ENTRADA}}
-2. {{PASSO_2_COM_TRANSFORMACAO_OBSERVAVEL}}
-3. {{PASSO_3_COM_CHECK_DE_QUALIDADE}}
-
-## Output
-```text
-{{OUTPUT_FORMAT_ESPECIFICO}}
-```
-
-## Validation
-- {{CRITERIO_MENSURAVEL_1}}
-- {{CRITERIO_MENSURAVEL_2}}
-- {{CRITERIO_MENSURAVEL_3}}
+## Action Mapping
+| Pattern | Action | Parameters |
+|---------|--------|-----------|
+| "create {kind}" | create_artifact | kind, topic |
+| "build {kind}" | build_artifact | kind, domain |
+| "list {kind}" | list_artifacts | kind, filter |
+| "score {path}" | score_artifact | path |
+## Confirmation Rules
+- **Destructive** (delete, overwrite): Always confirm
+- **Creative** (create, generate): Execute immediately
+- **Query** (list, score): Execute immediately
+## Quality Gate
+- [ ] At least 2 trigger patterns
+- [ ] Actions map to real tools
+- [ ] Parameters extractable from NL
+- [ ] Destructive actions need confirmation

@@ -1,28 +1,39 @@
 ---
-# TEMPLATE: Daemon (P04 Tools)
-# Valide contra P04_tools/_schema.yaml (types.daemon)
-# Max 1024 bytes
-
-id: p04_daemon_{{NAME_SLUG}}
+id: "p04_daemon_{{NAME_SLUG}}"
 kind: daemon
 pillar: P04
-title: "Daemon: {{DAEMON_NAME}}"
-quality: {{QUALITY_7_TO_10}}
+version: 1.0.0
+title: Template - Daemon
+tags: [template, daemon, background, service, worker]
+tldr: "Long-running background service: startup, shutdown, health check, signal handling, restart policy."
+quality: null
 ---
 
-# Daemon: {{DAEMON_NAME}}
+# Daemon: [NAME]
 
-## Runtime
-- Trigger: {{cron|queue|watcher}}
-- Interval: {{INTERVAL}}
-- Owner: {{OWNER}}
-
-## Loop
-1. {{READ_INPUT}}
-2. {{PROCESS_WORK}}
-3. {{EMIT_STATE}}
-
-## Safety
-- Healthcheck: {{HEALTHCHECK_SIGNAL}}
-- Restart policy: {{RESTART_POLICY}}
-- Stop condition: {{STOP_CONDITION}}
+## Purpose
+[WHAT this daemon does]
+## Configuration
+```yaml
+name: "[DAEMON_NAME]"
+type: [worker | watcher | scheduler | server]
+health_interval_s: [30]
+pid_file: "[/var/run/daemon.pid]"
+```
+## Lifecycle
+| Phase | Action | Signal |
+|-------|--------|--------|
+| Start | Init resources, begin loop | -- |
+| Health | Verify connectivity | -- |
+| Reload | Re-read config | SIGHUP |
+| Stop | Finish task, cleanup | SIGTERM |
+| Kill | Immediate stop | SIGKILL |
+## Restart Policy
+- **Crash**: Auto-restart after 5s, max 3 retries
+- **OOM**: Restart + increase memory
+- **Unresponsive**: Kill after 60s no health
+## Quality Gate
+- [ ] PID file prevents duplicates
+- [ ] Graceful SIGTERM handling
+- [ ] Health check endpoint
+- [ ] Max restart limit set

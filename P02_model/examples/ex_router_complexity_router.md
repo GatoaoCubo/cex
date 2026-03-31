@@ -10,6 +10,11 @@ fallback: cloud
 quality: 9.0
 tags: [router, complexity, scoring]
 ---
+tldr: "Routes requests by complexity: simple to haiku, medium to sonnet, complex to opus."
+quality: null
+tldr: "Routes requests by complexity: simple to haiku, medium to sonnet, complex to opus."
+quality: null
+---
 
 # Router: complexity
 

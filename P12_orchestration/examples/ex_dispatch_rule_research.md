@@ -9,6 +9,12 @@ references:
   - ex_chain_research_pipeline
   - ex_agent_copywriter
   - ex_skill_web_scraper
+quality: null
+---
+tldr: "Dispatch rule: routes research intents to N01 with STORM+CRAG pipeline config."
+quality: null
+tldr: "Dispatch rule: routes research intents to N01 with STORM+CRAG pipeline config."
+quality: null
 ---
 
 # Research Task Routing

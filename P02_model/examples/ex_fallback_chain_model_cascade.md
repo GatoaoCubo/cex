@@ -10,6 +10,11 @@ timeout_per_step: varies
 quality: 9.0
 tags: [fallback, cascade]
 ---
+tldr: "Model cascade: opus for complex, sonnet for standard, haiku for simple. Cost-optimized fallback."
+quality: null
+tldr: "Model cascade: opus for complex, sonnet for standard, haiku for simple. Cost-optimized fallback."
+quality: null
+---
 
 # Fallback: model_cascade
 

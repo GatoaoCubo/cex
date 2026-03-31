@@ -1,27 +1,40 @@
 ---
-# TEMPLATE: Lifecycle Rule (P11 Feedback)
-# Valide contra P11_feedback/_schema.yaml (types.lifecycle_rule)
-# Max 4096 bytes
-
-id: p11_lc_{{RULE_SLUG}}
+id: "p11_lc_{{RULE_SLUG}}"
 kind: lifecycle_rule
 pillar: P11
-title: "Lifecycle Rule: {{RULE_NAME}}"
-quality: {{QUALITY_8_TO_10}}
+version: 1.0.0
+title: Template - Lifecycle Rule
+tags: [template, lifecycle, rule, retention, cleanup]
+tldr: When artifacts are created, updated, archived, deleted. Controls retention and versioning.
+quality: null
 ---
 
-# Lifecycle Rule: {{RULE_NAME}}
+# Lifecycle Rule: [NAME]
 
-## Scope
-- Artifact: {{ARTIFACT_TYPE}}
-- State flow: {{draft -> active -> archived}}
-- Trigger: {{FRESHNESS_OR_EVENT}}
-
-## Rules
-1. {{PROMOTE_RULE}}
-2. {{ARCHIVE_RULE}}
-3. {{DELETE_OR_REVIEW_RULE}}
-
-## Evidence
-- Metric used: {{METRIC}}
-- Owner: {{OWNER}}
+## Purpose
+[WHAT this lifecycle_rule does]
+## Stages
+| Stage | Trigger | Action |
+|-------|---------|--------|
+| Create | F8 complete | Save .md + compile |
+| Update | Re-run 8F | Overwrite + version bump |
+| Review | Peer score | Set quality |
+| Archive | Unused > N days | Move to archive |
+| Delete | Manual/policy | Remove + log |
+## Retention
+| Type | Active | Archive | Delete |
+|------|--------|---------|--------|
+| Builders | Forever | Never | Never |
+| KCs | Forever | Never | On deprecation |
+| Runtime state | 24h | 7d | After 7d |
+| Learning records | 90d | 1y | After 1y |
+| Signals | 24h | -- | After 24h |
+## Versioning
+- **Major**: Breaking schema change
+- **Minor**: Content enrichment
+- **Patch**: Typo fixes
+## Quality Gate
+- [ ] Every type has retention period
+- [ ] Archive before delete
+- [ ] Semver versioning
+- [ ] Cleanup automated

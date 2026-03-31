@@ -9,6 +9,12 @@ references:
   - bld_system_prompt_agent
   - ex_knowledge_card_rag_fundamentals
   - ex_prompt_template_aida
+quality: null
+---
+tldr: "Copywriter agent configuration: persona, tone, constraints, and AIDA framework for marketing copy."
+quality: null
+tldr: "Copywriter agent configuration: persona, tone, constraints, and AIDA framework for marketing copy."
+quality: null
 ---
 
 # Copywriter Agent
