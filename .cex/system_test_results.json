@@ -1,10 +1,10 @@
 {
-  "timestamp": "2026-03-31T18:45:11.736565",
-  "pass": 53,
-  "fail": 1,
+  "timestamp": "2026-03-31T18:45:55.632818",
+  "pass": 54,
+  "fail": 0,
   "skip": 0,
   "total": 54,
-  "elapsed_s": 37.6,
+  "elapsed_s": 37.8,
   "tests": [
     {
       "name": "tool:cex_8f_motor.py",
@@ -259,7 +259,7 @@
     {
       "name": "runner:learning_record",
       "status": "PASS",
-      "detail": "16 records"
+      "detail": "17 records"
     },
     {
       "name": "kc:count",
@@ -268,13 +268,13 @@
     },
     {
       "name": "git:clean",
-      "status": "FAIL",
-      "detail": "5 dirty files"
+      "status": "PASS",
+      "detail": "4 dirty files"
     },
     {
       "name": "git:has_commits",
       "status": "PASS",
-      "detail": "445f0ac [8F] knowledge_card: create a knowledge card about s"
+      "detail": "e8e91d7 [8F] knowledge_card: create a knowledge card about s"
     }
   ]
 }
