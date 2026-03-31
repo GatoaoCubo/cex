@@ -1,0 +1,11 @@
+{
+  "timestamp": "2026-03-31T13:22:02.247660",
+  "kind": "knowledge_card",
+  "intent": "create a knowledge card about system testing patterns",
+  "passed": true,
+  "retries": 0,
+  "gates_passed": 6,
+  "gates_total": 6,
+  "issues": [],
+  "timing_ms": 41186.6
+}

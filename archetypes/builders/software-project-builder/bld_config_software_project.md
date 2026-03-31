@@ -1,0 +1,75 @@
+---
+id: bld_sp_config_software_project
+kind: config
+pillar: P09
+title: "Config — Software Project Builder"
+version: 1.0.0
+created: 2026-03-31
+updated: 2026-03-31
+author: n03_engineering
+domain: software-engineering
+quality: 8.7
+tags: [builder, config, software-project, defaults]
+tldr: "Default configuration: Python 3.12, hatchling, ruff, pytest, Docker multi-stage, Railway deploy, GitHub Actions CI. All overridable via instance config."
+density_score: 0.88
+---
+
+# Config
+
+## Defaults
+
+```yaml
+python_version: "3.12"
+build_backend: hatchling
+line_length: 100
+test_framework: pytest
+test_coverage_minimum: 60
+lint_tool: ruff
+type_checker: mypy
+formatter: ruff
+container: docker-multi-stage
+deploy_target: railway
+ci_provider: github-actions
+package_manager: uv
+```
+
+## Override via Instance Config
+
+```yaml
+# _instances/{name}/N03_engineering/software_project_config.md
+project_name: my-app
+project_type: api_service  # cli_tool | api_service | pipeline_runner
+python_version: "3.11"     # Override default
+deploy_target: render      # Override railway
+extra_deps:
+  - celery>=5.3
+  - asyncpg>=0.29
+features:
+  - auth
+  - cache
+  - rate_limit
+  - webhooks
+```
+
+## Environment Variables Pattern
+
+```
+# .env.example (template)
+APP_DATABASE_URL=postgresql://user:pass@localhost:5432/dbname
+APP_REDIS_URL=redis://localhost:6379/0
+APP_API_KEYS=dev-key-123
+APP_DEBUG=false
+APP_LOG_LEVEL=info
+APP_WORKERS=4
+```
+
+## Feature Flags
+
+| Feature | Default | Adds |
+|---------|---------|------|
+| auth | off | APIKeyMiddleware, JWT handler |
+| cache | off | Redis client, cache middleware |
+| rate_limit | off | TenantRateLimitMiddleware |
+| webhooks | off | Webhook routes, signature verification |
+| celery | off | Worker, beat, Redis broker |
+| monitoring | off | Prometheus metrics, health detail |

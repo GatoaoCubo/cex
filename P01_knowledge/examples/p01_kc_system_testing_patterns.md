@@ -1,112 +1,120 @@
 ---
 id: p01_kc_system_testing_patterns
 kind: knowledge_card
+kc_type: domain_kc
 pillar: P01
-title: "System Testing Patterns for Multi-Layer Application Validation"
-version: "1.0.0"
-created: "2024-12-19"
-updated: "2024-12-19"
-author: "knowledge-card-builder"
+version: 1.0.0
+created: 2024-12-19
+updated: 2024-12-19
+title: "System Testing Patterns for Distributed Applications"
 domain: software_testing
-quality: null
-tags: [system-testing, test-patterns, integration, end-to-end, testing-strategy]
-tldr: "Four core system testing patterns: smoke tests (critical path), user journey (E2E workflow), chaos testing (failure modes), performance baseline (regression detection)"
-when_to_use: "When designing comprehensive system test suites that validate complete application behavior across all integration layers"
-keywords: [smoke-testing, user-journey, chaos-engineering, performance-baseline]
+subdomain: system_testing
+tags: [testing, system-testing, integration, e2e, chaos-engineering, contract-testing]
+tldr: "Test pyramid (70% unit, 20% integration, 10% e2e), contract testing for service boundaries, chaos engineering for resilience, smoke tests for deploy confidence"
+when_to_use: "When designing testing strategy for microservices, validating distributed system reliability, or establishing CI/CD quality gates"
+keywords: [test-pyramid, contract-testing, chaos-engineering, smoke-testing]
 long_tails:
-  - How to implement smoke tests for microservice deployments
-  - User journey testing with cross-system data dependencies
-  - Chaos engineering patterns for production resiliency validation
+  - How to implement contract testing between microservices
+  - Chaos engineering patterns for production resilience testing
+  - System testing strategy for distributed applications
 axioms:
-  - ALWAYS test critical user paths within 5 minutes of deployment
-  - NEVER mock external dependencies in true system tests
-  - IF system test takes >30min THEN split into focused test suites
+  - ALWAYS follow test pyramid ratios to optimize cost and speed
+  - NEVER skip contract tests when services have external dependencies
+  - ALWAYS run smoke tests before production deployment
 linked_artifacts:
   primary: null
   related: []
 density_score: 0.87
 data_source: "https://martinfowler.com/articles/practical-test-pyramid.html"
+quality: null
+author: knowledge-card-builder
 
 ---
 
-# System Testing Patterns for Multi-Layer Application Validation
+# System Testing Patterns for Distributed Applications
 
 ## Quick Reference
 ```yaml
 topic: system_testing_patterns
-scope: Multi-layer application validation (API, DB, UI, external services)
-owner: test-architects
+scope: Integration, E2E, contract, chaos, smoke testing strategies
+owner: knowledge-card-builder
 criticality: high
 ```
 
 ## Key Concepts
 
-### Smoke Test Pattern
-- **Purpose**: Validate critical user paths post-deployment (5-15 min execution)
-- **Scope**: Happy path only, core business functions, infrastructure health
-- **Implementation**: Health endpoints + 3-5 key workflows + database connectivity
-- **Success Criteria**: 100% pass rate, <5min execution, zero external dependencies
+### Test Pyramid Distribution
+- **Unit Tests**: 70% coverage, <10ms execution, isolated components
+- **Integration Tests**: 20% coverage, <1s execution, service boundaries
+- **E2E Tests**: 10% coverage, <30s execution, critical user paths
+- **Cost Ratio**: Unit (1x) → Integration (10x) → E2E (100x)
 
-### User Journey Pattern  
-- **Purpose**: End-to-end business workflow validation with real data flows
-- **Scope**: Complete user scenarios across system boundaries (login->action->result)
-- **Data Strategy**: Isolated test data per journey, automatic cleanup post-run
-- **Integration Points**: Auth, payment, notification, third-party APIs
+### Contract Testing Framework
+- **Producer Contract**: API schema, response format, error codes
+- **Consumer Contract**: Expected request format, response handling
+- **Tools**: Pact (polyglot), Spring Cloud Contract (JVM), Postman
+- **Validation**: Provider verification against consumer expectations
 
-### Chaos Testing Pattern
-- **Purpose**: Validate system resilience under dependency failures
-- **Techniques**: Service shutdown, network partition, resource exhaustion, latency injection
-- **Automation**: Chaos Monkey, Gremlin, or custom failure injection
-- **Metrics**: Recovery time, data consistency, user experience degradation
-
-### Performance Baseline Pattern
-- **Purpose**: Detect performance regressions via load characterization
-- **Metrics**: P95 response time, throughput (RPS), resource utilization
-- **Thresholds**: <10% regression from baseline, <2sec P95 for critical paths
-- **Tools Integration**: JMeter, k6, Grafana dashboards, CI/CD gates
+### Chaos Engineering Principles
+- **Failure Injection**: Network partitions, service crashes, resource exhaustion
+- **Blast Radius**: Start small (1% traffic), expand gradually
+- **Recovery Time**: Measure MTTR, validate circuit breakers
+- **Tools**: Chaos Monkey, Litmus, Gremlin
 
 ## Strategy Phases
 
-1. **Assess**: Map critical user workflows and failure scenarios
-2. **Isolate**: Create dedicated test environment with production-like data
-3. **Automate**: Build CI/CD pipeline integration with pass/fail gates
-4. **Monitor**: Track test execution metrics and system behavior
-5. **Iterate**: Expand coverage based on production incidents
+1. **Assessment**: Audit existing test coverage, identify gaps in pyramid
+2. **Foundation**: Build unit test suite targeting 70% code coverage
+3. **Integration**: Add service boundary tests, database interactions
+4. **Contracts**: Define producer-consumer agreements between services
+5. **Chaos**: Implement failure scenarios in staging environment
+6. **Smoke**: Create deploy-time health checks for critical paths
 
 ## Golden Rules
 
-- Test real integrations — avoid mocking external services in system tests
-- Maintain test data independence — each test creates/destroys own data
-- Keep smoke tests under 5 minutes — longer tests delay deployment feedback
-- Fail fast on system test failures — they indicate real production risks
+- PYRAMID: Maintain 70-20-10 ratio to balance speed and confidence
+- ISOLATION: Each test tier validates different failure modes
+- CONTRACTS: Define service boundaries before implementation
+- CHAOS: Test failure modes you expect to see in production
+- SMOKE: Validate deployment within 5 minutes of release
 
-## Flow
-```text
-[Deployment] -> [Smoke Tests] -> [User Journeys] -> [Chaos Tests] -> [Performance] -> [Production Release]
-                      |              |               |              |
-                   FAIL: Block    FAIL: Block    FAIL: Alert    FAIL: Block
-```
+## Testing Pattern Matrix
 
-## Implementation Patterns
+| Pattern | Scope | Duration | Frequency | Failure Detection |
+|---------|-------|----------|-----------|------------------|
+| Unit | Component | <10ms | Every commit | Logic errors |
+| Integration | Service | <1s | Pre-merge | Interface bugs |
+| Contract | API boundary | <5s | Daily | Breaking changes |
+| E2E | User journey | <30s | Release | Workflow failures |
+| Chaos | System resilience | <10min | Weekly | Cascade failures |
+| Smoke | Critical path | <5min | Post-deploy | Deploy issues |
 
-| Pattern Type | Test Environment | Data Strategy | Execution Trigger |
-|-------------|------------------|---------------|-------------------|
-| Smoke | Production-like | Static fixtures | Every deployment |
-| User Journey | Isolated staging | Dynamic generation | Nightly + pre-release |
-| Chaos | Production subset | Live data (safe) | Weekly scheduled |
-| Performance | Load test env | Production clone | Release candidate |
+## Implementation Checklist
+
+### Contract Testing Setup
+- [ ] Define API contracts using OpenAPI/JSON Schema
+- [ ] Set up Pact broker for contract sharing
+- [ ] Configure provider verification in CI pipeline
+- [ ] Add contract evolution rules (backwards compatibility)
+
+### Chaos Engineering Rollout
+- [ ] Start with non-production environments
+- [ ] Define steady-state metrics (latency, error rate, throughput)
+- [ ] Create runbooks for each failure scenario
+- [ ] Automate recovery validation
 
 ## Anti-Patterns
 
 | Anti-Pattern | Problem | Solution |
 |-------------|---------|----------|
-| Over-mocking | Hides integration failures | Test real service boundaries |
-| UI-dependent assertions | Brittle, slow execution | API-level validation priority |
-| Environment coupling | Tests fail due to config | Environment-agnostic test data |
-| Single-threaded execution | Slow feedback loops | Parallel test execution |
+| Ice Cream Cone | Too many E2E tests | Invert pyramid, focus on unit tests |
+| Testing Trophy | No integration layer | Add service boundary tests |
+| Happy Path Only | Missing edge cases | Include error scenarios |
+| Manual Smoke | Deployment bottleneck | Automate critical path validation |
 
 ## References
 
-- Source: https://martinfowler.com/articles/practical-test-pyramid.html
-- Chaos Engineering: https://principlesofchaos.org/
-- Performance Testing Guide: https://k6.io/docs/testing-guides/
+- Martin Fowler Test Pyramid: https://martinfowler.com/articles/practical-test-pyramid.html
+- Pact Contract Testing: https://pact.io/
+- Chaos Engineering Principles: https://principlesofchaos.org/
+- Google Testing Blog: https://testing.googleblog.com/

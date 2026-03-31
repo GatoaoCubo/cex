@@ -4,6 +4,10 @@
       "command": "cmd",
       "args": ["/c", "npx", "-y", "@anthropic/mcp-server-github"],
       "env": { "GITHUB_TOKEN": "${GITHUB_TOKEN}" }
+    },
+    "fetch": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@anthropic/mcp-server-fetch"]
     }
   }
 }
