@@ -1,10 +1,10 @@
 {
-  "timestamp": "2026-03-31T10:01:33.472950",
-  "pass": 53,
-  "fail": 1,
-  "skip": 0,
-  "total": 54,
-  "elapsed_s": 98.2,
+  "timestamp": "2026-03-31T10:14:29.339377",
+  "pass": 52,
+  "fail": 0,
+  "skip": 1,
+  "total": 53,
+  "elapsed_s": 11.6,
   "tests": [
     {
       "name": "tool:cex_8f_motor.py",
@@ -14,7 +14,7 @@
     {
       "name": "tool:cex_8f_runner.py",
       "status": "PASS",
-      "detail": "51807B"
+      "detail": "55865B"
     },
     {
       "name": "tool:cex_intent.py",
@@ -94,7 +94,7 @@
     {
       "name": "nucleus:N01_intelligence",
       "status": "PASS",
-      "detail": "14 artifacts (min 11)"
+      "detail": "15 artifacts (min 11)"
     },
     {
       "name": "nucleus:N02_marketing",
@@ -134,7 +134,7 @@
     {
       "name": "quality:scored",
       "status": "PASS",
-      "detail": "102 artifacts with quality score"
+      "detail": "103 artifacts with quality score"
     },
     {
       "name": "subagents:count",
@@ -252,14 +252,9 @@
       "detail": ""
     },
     {
-      "name": "runner:execute_pass",
-      "status": "PASS",
-      "detail": "PASS"
-    },
-    {
-      "name": "runner:learning_record",
-      "status": "PASS",
-      "detail": "1 records"
+      "name": "runner:execute",
+      "status": "SKIP",
+      "detail": "skipped in --quick mode"
     },
     {
       "name": "kc:count",
@@ -268,13 +263,13 @@
     },
     {
       "name": "git:clean",
-      "status": "FAIL",
-      "detail": "5 dirty files"
+      "status": "PASS",
+      "detail": "1 dirty files"
     },
     {
       "name": "git:has_commits",
       "status": "PASS",
-      "detail": "03b5999 [N07] Fase 9 â€” feedback loop + learning records"
+      "detail": "339199c [AUTO] cycle: 1/1 actions, 0 gaps remaining"
     }
   ]
 }
