@@ -101,9 +101,9 @@ anti_patterns:
 - Satellite com 0 agentes (container vazio, sem capacidade)
 - Compartilhar MCPs entre agent_nodes (acoplamento, boot lento)
 code: "<!-- lang: python | purpose: agent_node instantiation -->\nagent_node = Satellite(\n    name=\"shaka\",\n    domain=\"\
-  market_research\",\n    model=\"sonnet\",\n    mcps=[\"firecrawl\", \"brain\"],\n    prime=\"PRIME_research_agent.md\",\n    mental_model=\"\
-  mental_model.yaml\",\n    agents=load_agents(\"shaka\", count=45),\n)\n# BECOME: prime + mental_model configuram identidade\n\
-  # CALL: mcps definem ferramentas disponiveis\n# L4: 12/12 LPs preenchidos = agent_node completo"
+  market_research\",\n    model=\"sonnet\",\n    mcps=[\"firecrawl\", \"brain\"],\n    prime=\"PRIME_research_agent.md\",\n\
+  \    mental_model=\"mental_model.yaml\",\n    agents=load_agents(\"shaka\", count=45),\n)\n# BECOME: prime + mental_model\
+  \ configuram identidade\n# CALL: mcps definem ferramentas disponiveis\n# L4: 12/12 LPs preenchidos = agent_node completo"
 references:
 - 'source: https://arxiv.org/abs/2308.00352'
 - 'source: https://arxiv.org/abs/2303.17760'

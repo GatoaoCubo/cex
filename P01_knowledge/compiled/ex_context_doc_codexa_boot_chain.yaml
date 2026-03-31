@@ -1,8 +1,8 @@
 id: p01_ctx_organization_boot_chain
 kind: context_doc
 domain: architecture
-scope: Sequencia deterministica de 8 camadas que inicializa qualquer sessao organization, de variavel de ambiente ate execucao de
-  tarefa.
+scope: Sequencia deterministica de 8 camadas que inicializa qualquer sessao organization, de variavel de ambiente ate execucao
+  de tarefa.
 current_state: 'L0 ENV        .env (API keys) + organization_SATELLITE env var
 
   L1 BOOT       boot/{sat}.cmd — set CLAUDECODE= | model | MCP config

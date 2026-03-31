@@ -39,8 +39,8 @@ density_score: null
 data_source: https://arxiv.org/abs/2308.00352
 summary: 'Cortex Enterprise eh um cerebro empresarial modular baseado em LLM. Arquitetura: orquestrador central (CEO cognitivo)
   que roteia mas NUNCA executa + N agent_nodes verticalizados com autonomia total no seu dominio. Cada organizacao instancia
-  seu Cortex[X]. organization eh a implementacao de referencia com 7 agent_nodes e 284 agentes. O sistema exibe 5 propriedades emergentes:
-  bootstrapping, metacircularidade, scaffolding cognitivo, arquitetura fractal e auto-correcao distribuida.'
+  seu Cortex[X]. organization eh a implementacao de referencia com 7 agent_nodes e 284 agentes. O sistema exibe 5 propriedades
+  emergentes: bootstrapping, metacircularidade, scaffolding cognitivo, arquitetura fractal e auto-correcao distribuida.'
 spec: '| Componente | Funcao | Regra |
 
   |------------|--------|-------|

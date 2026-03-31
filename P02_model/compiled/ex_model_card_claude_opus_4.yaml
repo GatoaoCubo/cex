@@ -53,7 +53,7 @@ when_to_use: '| Scenario | Use Opus? |
   | Simple text formatting or copy | NO (use haiku, 5% cost) |
 
   | Research and analysis | NO (use sonnet, 25% cost) |'
-organization_agent_node_mapping:
+organization_satellite_mapping:
 - 'builder_agent (build): opus — code complexity demands reasoning depth'
 - 'operations_agent (execute): opus — deployment requires zero-error precision'
 - 'orchestrator (orchestrate): opus — routing decisions affect all agent_nodes'

@@ -38,6 +38,6 @@ components: '| Component | Path | Depends On | Used By |
   | Handoffs | .claude/handoffs/ | filesystem | orchestrator -> Satellites |
 
   | Signals | .claude/signals/ | filesystem | Satellites -> orchestrator |'
-data_flow: "USER -> orchestrator -> handoffs/ -> spawn -> SATELLITE -> signals/ -> orchestrator\n                                    \
-  \       |\n                                    brain_query (MCP)\n                                           |\n       \
-  \                             Pool + Agents + Skills"
+data_flow: "USER -> orchestrator -> handoffs/ -> spawn -> SATELLITE -> signals/ -> orchestrator\n                        \
+  \                   |\n                                    brain_query (MCP)\n                                         \
+  \  |\n                                    Pool + Agents + Skills"

@@ -13,8 +13,8 @@ tags:
 - spawn
 - constraints
 - bsod
-tldr: 'Spawn rules: max 3 agent_nodes + orchestrator (BSOD at 4), 5s between terminals, -p flag mandatory for TSP, inline prompt
-  < 200 chars'
+tldr: 'Spawn rules: max 3 agent_nodes + orchestrator (BSOD at 4), 5s between terminals, -p flag mandatory for TSP, inline
+  prompt < 200 chars'
 max_bytes: 512
 density_score: 0.91
 source: organization-core/.claude/rules/boot-autonomy-flags.md + MEMORY.md constraints

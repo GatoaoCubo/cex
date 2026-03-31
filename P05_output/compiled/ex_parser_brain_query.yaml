@@ -15,9 +15,9 @@ tags:
 - extraction
 purpose: Extracts ranked knowledge chunks from raw brain_query MCP tool output. Converts JSON response with scores and metadata
   into structured markdown sections for agent_node consumption.
-input: "{\n  \"results\": [\n    {\"text\": \"chunk content...\", \"score\": 0.87, \"source\": \"KC_knowledge_agent_069.md\", \"section\"\
-  : \"Strategy\"},\n    {\"text\": \"another chunk...\", \"score\": 0.72, \"source\": \"KC_builder_agent_029.md\", \"section\": \"\
-  Patterns\"}\n  ],\n  \"query\": \"agent orchestration patterns\",\n  \"method\": \"hybrid\"\n}"
+input: "{\n  \"results\": [\n    {\"text\": \"chunk content...\", \"score\": 0.87, \"source\": \"KC_knowledge_agent_069.md\"\
+  , \"section\": \"Strategy\"},\n    {\"text\": \"another chunk...\", \"score\": 0.72, \"source\": \"KC_builder_agent_029.md\"\
+  , \"section\": \"Patterns\"}\n  ],\n  \"query\": \"agent orchestration patterns\",\n  \"method\": \"hybrid\"\n}"
 extraction_rules:
 - Filter results with score >= 0.5 (below = noise)
 - Group by source file (deduplicate same-file chunks)

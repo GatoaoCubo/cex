@@ -45,9 +45,9 @@ monitor_commands: '# Check how many signals received:
   # Stop all:
 
   powershell -File records/framework/powershell/spawn_stop.ps1'
-handoff_queue_example_cex7_10_pytha_tasks: ".claude/handoffs/\n  CEX7_batch_1_pytha.md   # spawned immediately (slot 1)\n\
-  \  CEX7_batch_2_pytha.md   # spawned when slot 1 completes\n  CEX7_batch_3_pytha.md   # spawned when slot 1 completes again\n\
-  \  ...\n  CEX7_batch_10_pytha.md  # final batch"
+handoff_queue_example_cex7_10_knowledge_agent_tasks: ".claude/handoffs/\n  CEX7_batch_1_pytha.md   # spawned immediately (slot\
+  \ 1)\n  CEX7_batch_2_pytha.md   # spawned when slot 1 completes\n  CEX7_batch_3_pytha.md   # spawned when slot 1 completes\
+  \ again\n  ...\n  CEX7_batch_10_pytha.md  # final batch"
 measured_results:
 - 'ISOFIX mission: 7 batches, 1 slot → 1.6x speedup vs static waves'
 - 'CBTEST: 3 mixed agent_nodes (research_agent+builder_agent+knowledge_agent) → zero git lock contention'

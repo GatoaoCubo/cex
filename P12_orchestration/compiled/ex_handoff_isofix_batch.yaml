@@ -22,8 +22,8 @@ seeds: '`iso, vectorstore, agent, manifest, instructions, architecture, completi
 tarefas: ''
 step_1_audit_existing_isos: 'Para cada agent (generated, tool-builder, tool-shed, agent_factory, voice, curso, mentor_humano,
   scout, access_control_auditor): contar ISOs existentes, listar tipos faltantes.'
-step_2_generate_missing_isos: 'Ler README.md do agent para entender dominio. Usar `ISO_builder_agent_303_OUTPUT_TEMPLATE.md` como
-  referencia. Gerar ISOs faltantes ate completar 10 por agent. Naming: `ISO_{AGENT_UPPER}{ORDINAL}{TYPE}.md`.'
+step_2_generate_missing_isos: 'Ler README.md do agent para entender dominio. Usar `ISO_builder_agent_303_OUTPUT_TEMPLATE.md`
+  como referencia. Gerar ISOs faltantes ate completar 10 por agent. Naming: `ISO_{AGENT_UPPER}{ORDINAL}{TYPE}.md`.'
 step_3_validate_completeness: Verificar que cada agent tem >= 10 ISOs. Listar any gaps remaining.
 scope_fence:
 - 'SOMENTE: `records/agents/*/iso_vectorstore/`'

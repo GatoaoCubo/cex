@@ -32,8 +32,8 @@ when_to_use: '| Cenario | Usar? |
   | Transformar dados (ETL) | NAO -> use builder agent |
 
   | Monitorar metricas de sistema (CPU, RAM) | NAO -> use monitor-agent |'
-overview: data-validator e o agente de validacao de qualidade de dados do organization. Atua quando dados entram ou saem de pipelines
-  (ETL, API, scraping) e entrega relatorios de qualidade com score por dimensao e lista de violacoes acionaveis.
+overview: data-validator e o agente de validacao de qualidade de dados do organization. Atua quando dados entram ou saem de
+  pipelines (ETL, API, scraping) e entrega relatorios de qualidade com score por dimensao e lista de violacoes acionaveis.
 architecture: "[Data Source] -> [Schema Validator] -> [Statistical Checker] -> [Business Rules] -> [Report + Score]\n    \
   \                   |                       |                       |\n                 [JSON Schema]          [Distribution]\
   \          [Custom Rules]\n                 [Type Check]           [Outlier Z>3]           [Null Policy]"

@@ -65,8 +65,8 @@ anti_patterns:
 - 'Spawn > 3 satelites simultaneos: BSOD risk no Windows'
 - 'DAG com ciclo: deadlock garantido'
 - 'Workflow sem error handling: falha em 1 step mata todo o pipeline'
-application: No organization, P12 manifesta como spawn_solo.ps1/spawn_grid.ps1, signal_writer.py, e .claude/handoffs/. Este proprio
-  handoff (META3_edison.md) eh uma instancia de P12 handoff. Grid continuous testado com 1.6x speedup em 7 batches.
+application: No organization, P12 manifesta como spawn_solo.ps1/spawn_grid.ps1, signal_writer.py, e .claude/handoffs/. Este
+  proprio handoff (META3_edison.md) eh uma instancia de P12 handoff. Grid continuous testado com 1.6x speedup em 7 batches.
 references:
 - P12_orchestration/_schema.yaml (fonte de verdade)
 - records/framework/powershell/spawn_*.ps1 (spawn implementations)

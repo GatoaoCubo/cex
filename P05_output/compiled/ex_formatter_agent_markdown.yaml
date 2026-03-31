@@ -19,8 +19,8 @@ density_score: 0.88
 source: organization-core/records/agents/*/iso_vectorstore/ISO_*_OUTPUT_TEMPLATE.md
 linked_artifacts:
   schema: p06_is_quality_audit
-purpose: Defines how organization agents format their markdown output. All ISO OUTPUT_TEMPLATE files follow this formatter. Ensures
-  human-readable + machine-parseable outputs with consistent structure.
+purpose: Defines how organization agents format their markdown output. All ISO OUTPUT_TEMPLATE files follow this formatter.
+  Ensures human-readable + machine-parseable outputs with consistent structure.
 structure: '[HEADER: identity + metadata]
 
   [EXECUTIVE SUMMARY: tldr + key_findings]

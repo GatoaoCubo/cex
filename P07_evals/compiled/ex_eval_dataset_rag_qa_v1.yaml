@@ -24,11 +24,11 @@ tags:
 - ground-truth
 purpose: Ground-truth dataset for evaluating organization's RAG pipeline (brain_query -> context retrieval -> answer generation).
   500 human-verified question-answer pairs drawn from real knowledge cards, pool artifacts, and agent_node documentation.
-dataset_schema: "# Each record follows this structure:\n- question: \"What embedding model does organization use for vector search?\"\
-  \n  answer: \"nomic-embed-text via Ollama, producing 768-dim vectors at ~10ms/query locally\"\n  context: \"KC_EMBED_001:\
-  \ organization uses nomic-embed-text through Ollama for local embedding generation. Dimensions: 768. Latency: ~10ms per query.\"\
-  \n  source: \"p01_kc_embedding_config_nomic\"\n  difficulty: \"easy\"        # easy | medium | hard\n  category: \"infrastructure\"\
-  \ # infrastructure | agent | workflow | config | marketing"
+dataset_schema: "# Each record follows this structure:\n- question: \"What embedding model does organization use for vector\
+  \ search?\"\n  answer: \"nomic-embed-text via Ollama, producing 768-dim vectors at ~10ms/query locally\"\n  context: \"\
+  KC_EMBED_001: organization uses nomic-embed-text through Ollama for local embedding generation. Dimensions: 768. Latency:\
+  \ ~10ms per query.\"\n  source: \"p01_kc_embedding_config_nomic\"\n  difficulty: \"easy\"        # easy | medium | hard\n\
+  \  category: \"infrastructure\" # infrastructure | agent | workflow | config | marketing"
 split_strategy: '| Split | Size | Purpose | Selection Criteria |
 
   |-------|------|---------|-------------------|

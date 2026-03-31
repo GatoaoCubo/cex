@@ -19,8 +19,8 @@ tags:
 - budget
 - queue
 - cost-control
-overview: Enforces Anthropic API Tier 2 rate limits across all organization agent_nodes. When limits approach, requests queue instead
-  of failing. Daily budget cap of $50 prevents runaway costs from autonomous agent_node loops.
+overview: Enforces Anthropic API Tier 2 rate limits across all organization agent_nodes. When limits approach, requests queue
+  instead of failing. Daily budget cap of $50 prevents runaway costs from autonomous agent_node loops.
 tier_2_limits_anthropic: '| Limit | Value | Scope | Reset |
 
   |-------|-------|-------|-------|
@@ -41,7 +41,7 @@ model_specific_token_costs: '| Model | Input (per 1M) | Output (per 1M) | Typica
   | claude-sonnet-4-6 | $3.00 | $15.00 | $0.024 (3K in, 1K out) |
 
   | claude-haiku-4-5 | $0.80 | $4.00 | $0.0064 (3K in, 1K out) |'
-budget_allocation_by_agent_node: '| Satellite | Model | Daily Budget | Typical RPM | Rationale |
+budget_allocation_by_satellite: '| Satellite | Model | Daily Budget | Typical RPM | Rationale |
 
   |-----------|-------|-------------|-------------|-----------|
 
@@ -65,9 +65,9 @@ escalation_strategy: "escalation:\n  strategy: queue\n  levels:\n    - trigger: 
   \      action: queue_requests\n      queue_max: 500\n      queue_timeout: 30s\n      message: \"Queueing requests — RPM\
   \ at {{current}}/1000\"\n\n    - trigger: tpm >= 90%      # 72K+ TPM\n      action: downgrade_model\n      from: opus-4-6\n\
   \      to: sonnet-4-6\n      message: \"TPM pressure — downgrading non-critical to sonnet\"\n\n    - trigger: daily_budget\
-  \ >= 80%  # $40+\n      action: restrict_to_essential\n      allowed: [orchestrator, operations_agent]\n      message: \"Budget 80% — only\
-  \ orchestration and deploy allowed\"\n\n    - trigger: daily_budget >= 95%  # $47.50+\n      action: hard_stop\n      message:\
-  \ \"Budget exhausted — all API calls blocked until reset\"\n      alert: slack"
+  \ >= 80%  # $40+\n      action: restrict_to_essential\n      allowed: [orchestrator, operations_agent]\n      message: \"\
+  Budget 80% — only orchestration and deploy allowed\"\n\n    - trigger: daily_budget >= 95%  # $47.50+\n      action: hard_stop\n\
+  \      message: \"Budget exhausted — all API calls blocked until reset\"\n      alert: slack"
 rate_limiter_implementation: "import time\nfrom collections import deque\nfrom threading import Lock\n\nclass AnthropicRateLimiter:\n\
   \    def init(self, rpm: int = 1000, tpm: int = 80000, daily_budget: float = 50.0):\n        self.rpm = rpm\n        self.tpm\
   \ = tpm\n        self.daily_budget = daily_budget\n\n        self._request_times = deque()\n        self._token_counts =\

@@ -23,11 +23,11 @@ linked_artifacts:
   law: p08_law_shokunin
 hard_prohibitions: "stella_never:\n  - execute_directly: \"orchestrator routes tasks — never executes code, research, or builds\"\
   \n  - tsp_manager: \"tsp_manager.py is deprecated — invisible window, cannot kill claude.exe\"\n  - temp_handoffs: \".claude/temp/\
-  \ is gitignored — commits will fail silently\"\n  - exceed_3_agent_nodes: \"4+ concurrent agent_nodes = BSOD risk\"\n  - tasks_over_30min_in_3_sats:\
-  \ \"RAM limit — use sequential waves instead\""
-decision_gate: "User request received:\n  → Is this a task orchestrator should execute directly? NO → ALWAYS dispatch\n  → Is this\
-  \ research? → research_agent\n  → Is this building/coding? → builder_agent\n  → Is this knowledge/docs? → knowledge_agent\n  → Is this deploy/test?\
-  \ → operations_agent\n  → Is this marketing? → marketing_agent\n  → Is this monetization? → commercial_agent"
+  \ is gitignored — commits will fail silently\"\n  - exceed_3_agent_nodes: \"4+ concurrent agent_nodes = BSOD risk\"\n  -\
+  \ tasks_over_30min_in_3_sats: \"RAM limit — use sequential waves instead\""
+decision_gate: "User request received:\n  → Is this a task orchestrator should execute directly? NO → ALWAYS dispatch\n  →\
+  \ Is this research? → research_agent\n  → Is this building/coding? → builder_agent\n  → Is this knowledge/docs? → knowledge_agent\n\
+  \  → Is this deploy/test? → operations_agent\n  → Is this marketing? → marketing_agent\n  → Is this monetization? → commercial_agent"
 spawn_validation: "before_spawn:\n  - count_active_agent_nodes: \"Must be < 3 before spawning\"\n  - check_handoff_location:\
   \ \".claude/handoffs/ (NOT .claude/temp/)\"\n  - verify_inline_prompt_length: \"< 200 chars\"\n  - confirm_with_user: \"\
   Show agent_node table + Confirma? (sim/ajustar)\""

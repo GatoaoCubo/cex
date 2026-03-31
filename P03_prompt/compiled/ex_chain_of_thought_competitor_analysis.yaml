@@ -8,7 +8,7 @@ task: Analisar um concorrente direto no marketplace e recomendar estrategia de d
   por 5 estagios metacognitivos antes de produzir a resposta final.
 reasoning_cue: Antes de responder, passe por EXATAMENTE 5 estagios de raciocinio. Cada estagio deve ser explicito e rotulado.
   NAO pule estagios. NAO combine estagios. O raciocinio deve ser visivel para auditoria.
-metacognitive_5_stage_protocol_kc_edison_024: 'Stage 1 — UNDERSTAND: Decomponha o problema
+metacognitive_5_stage_protocol_kc_builder_agent_024: 'Stage 1 — UNDERSTAND: Decomponha o problema
 
   <understand>
 

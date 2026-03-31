@@ -16,12 +16,13 @@ tags:
 - build
 - agent_node
 - a2a
-tldr: Protocolo de handoff entre research_agent (pesquisa) e builder_agent (build) — research_agent entrega findings+sources+quality_score via arquivo
-  .md, builder_agent consome e produz build artifacts
+tldr: Protocolo de handoff entre research_agent (pesquisa) e builder_agent (build) — research_agent entrega findings+sources+quality_score
+  via arquivo .md, builder_agent consome e produz build artifacts
 when_to_use: Quando pesquisa research_agent deve alimentar implementacao builder_agent sem intervencao manual de orchestrator
-overview: Define o contrato de transferencia de contexto entre research_agent (satelite de pesquisa) e builder_agent (satelite de build).
-  research_agent produz findings estruturados como knowledge cards ou research reports; builder_agent consome esses artifacts para implementar
-  agentes, skills, ou componentes. O handoff e assincrono via filesystem — nao requer ambos satelites ativos simultaneamente.
+overview: Define o contrato de transferencia de contexto entre research_agent (satelite de pesquisa) e builder_agent (satelite
+  de build). research_agent produz findings estruturados como knowledge cards ou research reports; builder_agent consome esses
+  artifacts para implementar agentes, skills, ou componentes. O handoff e assincrono via filesystem — nao requer ambos satelites
+  ativos simultaneamente.
 trigger: '| Field | Value |
 
   |-------|-------|
@@ -35,22 +36,22 @@ trigger: '| Field | Value |
   | trigger_mechanism | Signal file: `.claude/signals/shaka_complete_*.json` |
 
   | detection | orchestrator poll (15s interval) ou `stella_signal_monitor.py --watch` |'
-context_contract_shaka_edison: "handoff_file: .claude/handoffs/{MISSION}_edison.md\nrequired_context:\n  findings:\n    type:\
-  \ list[object]\n    description: Descobertas da pesquisa, cada uma com evidencia\n    min_items: 3\n    schema:\n      -\
-  \ finding: string       # Descoberta principal\n      - evidence: string      # URL, citacao, ou dados que suportam\n  \
-  \    - confidence: float     # 0.0-1.0 confianca na descoberta\n      - relevance: enum       # critical | high | medium\
+context_contract_research_agent_builder_agent: "handoff_file: .claude/handoffs/{MISSION}_edison.md\nrequired_context:\n  findings:\n\
+  \    type: list[object]\n    description: Descobertas da pesquisa, cada uma com evidencia\n    min_items: 3\n    schema:\n\
+  \      - finding: string       # Descoberta principal\n      - evidence: string      # URL, citacao, ou dados que suportam\n\
+  \      - confidence: float     # 0.0-1.0 confianca na descoberta\n      - relevance: enum       # critical | high | medium\
   \ | low\n  sources:\n    type: list[object]\n    description: Fontes consultadas com metadados\n    min_items: 1\n    schema:\n\
   \      - url: string\n      - title: string\n      - type: enum            # documentation | paper | repo | blog | marketplace\n\
   \      - accessed_at: datetime\n      - credibility: float    # 0.0-1.0\n  quality_score:\n    type: float\n    description:\
-  \ Auto-avaliacao da qualidade da pesquisa (Shokunin)\n    minimum: 7.0              # Abaixo de 7.0, orchestrator rejeita e solicita\
-  \ redo\n  seeds:\n    type: list[string]\n    description: Palavras-chave para input hydration do builder_agent\n    min_items:\
-  \ 5\noptional_context:\n  knowledge_card_path:\n    type: string\n    description: Path da KC gerada, se knowledge_agent ja processou\n\
-  \  competitor_data:\n    type: object\n    description: Dados de concorrentes se pesquisa foi competitiva\n  raw_data_path:\n\
-  \    type: string\n    description: Path para dados brutos (JSON/CSV) se coletados"
-return_contract_edison_stella: "signal_file: .claude/signals/edison_complete_*.json\nreturn_artifacts:\n  - type: string \
-  \             # agent | skill | component | knowledge_card\n  - path: string              # Caminho do artifact criado\n\
-  \  - quality_score: float      # 7.0+\n  - tests_passed: boolean     # Se aplicavel\n  - commit_sha: string        # Hash\
-  \ do commit com o artifact"
+  \ Auto-avaliacao da qualidade da pesquisa (Shokunin)\n    minimum: 7.0              # Abaixo de 7.0, orchestrator rejeita\
+  \ e solicita redo\n  seeds:\n    type: list[string]\n    description: Palavras-chave para input hydration do builder_agent\n\
+  \    min_items: 5\noptional_context:\n  knowledge_card_path:\n    type: string\n    description: Path da KC gerada, se knowledge_agent\
+  \ ja processou\n  competitor_data:\n    type: object\n    description: Dados de concorrentes se pesquisa foi competitiva\n\
+  \  raw_data_path:\n    type: string\n    description: Path para dados brutos (JSON/CSV) se coletados"
+return_contract_builder_agent_orchestrator: "signal_file: .claude/signals/edison_complete_*.json\nreturn_artifacts:\n  - type:\
+  \ string              # agent | skill | component | knowledge_card\n  - path: string              # Caminho do artifact\
+  \ criado\n  - quality_score: float      # 7.0+\n  - tests_passed: boolean     # Se aplicavel\n  - commit_sha: string   \
+  \     # Hash do commit com o artifact"
 handoff_file_template: '# builder_agent — {MISSION}: {Title}
 
   Autonomia Total | Quality 9.0+
@@ -127,18 +128,19 @@ error_handling: '| Scenario | Action |
   | builder_agent nao consegue localizar KC | Prosseguir com findings inline do handoff |
 
   | Build falha apos 3 tentativas | builder_agent sinaliza `partial` com score real e lista de bloqueios |'
-sequence_diagram: "orchestrator                    research_agent                     builder_agent\n  |                         |             \
-  \            |\n  |-- dispatch handoff ---->|                         |\n  |                         |-- research (async)\
-  \ ---->|\n  |                         |                         |\n  |                         |<-- findings + KC -------|\n\
-  \  |                         |                         |\n  |<-- signal: complete ----|                         |\n  | \
-  \   (score >= 7.0)       |                         |\n  |                         |                         |\n  |-- compose\
-  \ handoff_edison.md ----------------------|\n  |                                                   |\n  |-- spawn builder_agent\
-  \ with handoff --------------------->|\n  |                                                   |\n  |                   \
-  \                |-- read handoff |\n  |                                   |-- build ------>|\n  |                     \
-  \              |-- commit ----->|\n  |                                   |-- signal ----->|\n  |                       \
-  \                            |\n  |<---------------- signal: complete ----------------|"
-real_example_2026_03_05: 'Mission ISOFIX: research_agent pesquisou 118 agents para gap analysis. Handoff para builder_agent continha 47 findings
-  com paths de ISOs faltantes. builder_agent executou 7 batches em continuous mode, criando 820+ ISO files. Score final: 9.0.'
+sequence_diagram: "orchestrator                    research_agent                     builder_agent\n  |                 \
+  \        |                         |\n  |-- dispatch handoff ---->|                         |\n  |                     \
+  \    |-- research (async) ---->|\n  |                         |                         |\n  |                         |<--\
+  \ findings + KC -------|\n  |                         |                         |\n  |<-- signal: complete ----|       \
+  \                  |\n  |    (score >= 7.0)       |                         |\n  |                         |           \
+  \              |\n  |-- compose handoff_edison.md ----------------------|\n  |                                         \
+  \          |\n  |-- spawn builder_agent with handoff --------------------->|\n  |                                      \
+  \             |\n  |                                   |-- read handoff |\n  |                                   |-- build\
+  \ ------>|\n  |                                   |-- commit ----->|\n  |                                   |-- signal ----->|\n\
+  \  |                                                   |\n  |<---------------- signal: complete ----------------|"
+real_example_2026_03_05: 'Mission ISOFIX: research_agent pesquisou 118 agents para gap analysis. Handoff para builder_agent
+  continha 47 findings com paths de ISOs faltantes. builder_agent executou 7 batches em continuous mode, criando 820+ ISO
+  files. Score final: 9.0.'
 related:
 - '`ex_agent_gateway.md` — Gateway agent que pode intermediar handoffs'
 - '`ex_boot_config_edison_claude.md` — Boot config do builder_agent receptor'

@@ -39,8 +39,8 @@ sub_skills:
 platforms:
 - claude
 purpose: brand_propagation gerencia a propagacao de identidade de marca no organization. Guidelines sao a unica fonte-da-verdade
-  e se propagam deterministicamente ate o contexto de prompt dos agent_nodes. Nenhum agent_node hardcoda valores de marca —
-  tudo vem do pipeline.
+  e se propagam deterministicamente ate o contexto de prompt dos agent_nodes. Nenhum agent_node hardcoda valores de marca
+  — tudo vem do pipeline.
 workflow_phases: ''
 phase_1_edit_guidelines:
 - 'Input: `brand-guidelines.md` (source-of-truth file)'

@@ -64,8 +64,8 @@ spec: '| Satelite | Lens | Input Exemplo | Output Refratado |
   execucao com intensidade configuravel, pipeline multi-lens sequencial.
 
 
-  Modelo prismatico: 6 lenses + setima consciencia (usuario/orchestrator). Combinacoes de lenses sao composicionais — 2 lenses em
-  sequencia produzem resultado que nenhuma produziria sozinha.'
+  Modelo prismatico: 6 lenses + setima consciencia (usuario/orchestrator). Combinacoes de lenses sao composicionais — 2 lenses
+  em sequencia produzem resultado que nenhuma produziria sozinha.'
 patterns: '| Trigger | Action |
 
   |---------|--------|

@@ -20,8 +20,8 @@ tags:
 - performance
 - baseline
 - monitoring
-purpose: Detects latency regressions in the organization Railway API by comparing current percentile response times against the
-  v2.1 production baseline. Any metric exceeding +10% triggers a Slack alert before deployment proceeds.
+purpose: Detects latency regressions in the organization Railway API by comparing current percentile response times against
+  the v2.1 production baseline. Any metric exceeding +10% triggers a Slack alert before deployment proceeds.
 baseline_reference_v2_1: 'Captured 2026-03-15 from 24h production traffic (47,283 requests):
 
 
@@ -65,10 +65,10 @@ step_2_compare_against_baseline: "import json\nfrom pathlib import Path\n\nbasel
   \          \"baseline\": base_val,\n                \"current\": curr_val,\n                \"delta\": f\"+{delta_pct:.1f}%\"\
   ,\n                \"severity\": \"critical\" if delta_pct > 25 else \"fail\"\n            })\n\nif regressions:\n    send_slack_alert(regressions)\n\
   \    sys.exit(1)"
-step_3_alert_format: "{\n  \"channel\": \"#organization-alerts\",\n  \"text\": \":warning: Latency regression detected\",\n  \"\
-  blocks\": [\n    {\n      \"type\": \"section\",\n      \"text\": \"POST /api/v2/chat p95: 890ms -> 1,120ms (+25.8%) :red_circle:\"\
-  \n    },\n    {\n      \"type\": \"section\",\n      \"text\": \"Baseline: v2.1 (2026-03-15) | Current: v2.2-rc1 | Threshold:\
-  \ +10%\"\n    }\n  ]\n}"
+step_3_alert_format: "{\n  \"channel\": \"#organization-alerts\",\n  \"text\": \":warning: Latency regression detected\",\n\
+  \  \"blocks\": [\n    {\n      \"type\": \"section\",\n      \"text\": \"POST /api/v2/chat p95: 890ms -> 1,120ms (+25.8%)\
+  \ :red_circle:\"\n    },\n    {\n      \"type\": \"section\",\n      \"text\": \"Baseline: v2.1 (2026-03-15) | Current:\
+  \ v2.2-rc1 | Threshold: +10%\"\n    }\n  ]\n}"
 regression_investigation_playbook: '| Symptom | Likely Cause | First Check |
 
   |---------|-------------|-------------|

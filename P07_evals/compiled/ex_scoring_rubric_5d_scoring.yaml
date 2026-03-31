@@ -20,8 +20,8 @@ source: organization-core/records/framework/docs/LAWS_v3_PRACTICAL.md (LAW 13 Sh
 linked_artifacts:
   gate: p11_qg_cex_quality
   validator: p06_val_quality_score
-overview: The 5D framework evaluates all organization pool artifacts on 5 dimensions. Final score = weighted average. Used by quality
-  gates before pool writes and during golden promotion.
+overview: The 5D framework evaluates all organization pool artifacts on 5 dimensions. Final score = weighted average. Used
+  by quality gates before pool writes and during golden promotion.
 dimensions: '| Dim | Name | Weight | Definition |
 
   |-----|------|--------|------------|

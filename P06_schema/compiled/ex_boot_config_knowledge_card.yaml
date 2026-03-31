@@ -127,7 +127,7 @@ anti_exemplo_o_que_nao_produzir: '---
 
   title: "Caching"          # FAIL: < 5 chars
 
-  author: orchestrator            # FAIL: roteou, nao produziu
+  author: orchestrator      # FAIL: routed, did not produce
 
   quality: 9.5              # FAIL: auto-atribuido
 

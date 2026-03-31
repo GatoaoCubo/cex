@@ -13,8 +13,8 @@ tags:
 - tracking
 - ephemeral
 schema: "session_id: \"stella_2026-03-24T20:00\"\nactive_dispatches:\n  - agent_node: edison\n    task: \"P04 examples from\
-  \ real artifacts\"\n    started: \"2026-03-24T19:45:00Z\"\n    status: running\n    pid: 14624\n  - agent_node: shaka\n \
-  \   task: \"Market research pet toys\"\n    started: \"2026-03-24T19:50:00Z\"\n    status: complete\n    signal: \".claude/signals/shaka_complete_9.0.json\"\
+  \ real artifacts\"\n    started: \"2026-03-24T19:45:00Z\"\n    status: running\n    pid: 14624\n  - agent_node: shaka\n\
+  \    task: \"Market research pet toys\"\n    started: \"2026-03-24T19:50:00Z\"\n    status: complete\n    signal: \".claude/signals/shaka_complete_9.0.json\"\
   \nwaves_completed: 1\ntotal_dispatches: 5\nlast_monitor_check: \"2026-03-24T20:02:00Z\""
 lifecycle:
 - 'Created: on first dispatch in session'

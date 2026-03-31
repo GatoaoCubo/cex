@@ -19,9 +19,9 @@ tags:
 tldr: Retriever hibrido que combina BM25 keyword search (0.3) com FAISS dense search (0.7) e reranker Cohere v3 para top_k=5
   final — usado no organization Brain MCP
 when_to_use: Qualquer busca no Brain MCP que precise alta recall em corpus tecnico misto (knowledge cards, agents, skills)
-overview: Configuracao do retriever hibrido usado pelo organization Brain MCP (`brain_query`). Combina BM25 para termos exatos (nomes
-  de agentes, siglas, comandos) com busca densa FAISS/nomic-embed-text para similaridade semantica. Cohere Rerank v3 faz re-ranking
-  final para maximizar precisao no top_k=5.
+overview: Configuracao do retriever hibrido usado pelo organization Brain MCP (`brain_query`). Combina BM25 para termos exatos
+  (nomes de agentes, siglas, comandos) com busca densa FAISS/nomic-embed-text para similaridade semantica. Cohere Rerank v3
+  faz re-ranking final para maximizar precisao no top_k=5.
 parameters: '| Param | Value | Rationale |
 
   |-------|-------|-----------|

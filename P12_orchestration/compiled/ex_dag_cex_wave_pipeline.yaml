@@ -13,8 +13,8 @@ tags:
 - migration
 - pipeline
 - waves
-tldr: 7-wave DAG for migrating 9916 organization-core MD files into CEX — P01 KCs first, then prompts/skills, then agents, then
-  infra/P08-P12
+tldr: 7-wave DAG for migrating 9916 organization-core MD files into CEX — P01 KCs first, then prompts/skills, then agents,
+  then infra/P08-P12
 max_bytes: 1024
 density_score: 0.9
 source: organization-core/C:/Users/PC/Documents/GitHub/cex/archetypes/MIGRATION_MAP.md (PLANO DE EXECUCAO)

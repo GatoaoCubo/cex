@@ -19,9 +19,9 @@ prompt: "You are a task decomposition planner. Given a goal, produce an executio
   \ SATELLITES: {{agent_node_list}}\n\nOUTPUT FORMAT:\nsteps:\n  - id: 1\n    action: \"what to do\"\n    agent_node: \"who\
   \ does it\"\n    depends_on: []\n    success: \"how to verify\"\n    estimated_time: \"Xm\""
 example_i_o: "Input: \"Research pet toy market and create ad campaign\"\nOutput:\nsteps:\n  - id: 1\n    action: \"Research\
-  \ pet toy market size, competitors, trends\"\n    agent_node: research_agent\n    depends_on: []\n    success: \"KC with 5+ competitors,\
-  \ market size, trends\"\n    estimated_time: \"15m\"\n  - id: 2\n    action: \"Create ad copy + titles for top 3 products\"\
-  \n    agent_node: marketing_agent\n    depends_on: [1]\n    success: \"3 ad sets with headline, body, CTA\"\n    estimated_time: \"\
-  10m\""
+  \ pet toy market size, competitors, trends\"\n    agent_node: research_agent\n    depends_on: []\n    success: \"KC with\
+  \ 5+ competitors, market size, trends\"\n    estimated_time: \"15m\"\n  - id: 2\n    action: \"Create ad copy + titles for\
+  \ top 3 products\"\n    agent_node: marketing_agent\n    depends_on: [1]\n    success: \"3 ad sets with headline, body,\
+  \ CTA\"\n    estimated_time: \"10m\""
 difference_from_chain: A chain (P03) EXECUTES steps sequentially (output A -> input B). A planner GENERATES the plan — which
   steps, what order, who does what. The planner output BECOMES the input for a workflow (P12) or chain.

@@ -43,8 +43,8 @@ phase_2_extract: 'Input: Screenshots + HTML pages Action: HTML parser extrai des
   W3C DTCG tokens raw'
 phase_3_transform: 'Input: DTCG tokens raw Action: Style Dictionary transforma para formato target Output: `tailwind.config.js`,
   CSS custom properties, SCSS vars'
-phase_4_build_opcional: 'Input: Tokens + component patterns Action: builder_agent gera React/Vue components usando tokens Output:
-  Component library'
+phase_4_build_opcional: 'Input: Tokens + component patterns Action: builder_agent gera React/Vue components usando tokens
+  Output: Component library'
 phase_5_validate: 'Input: Original screenshots + generated output Action: ODiff compara pixel-perfect Output: Diff report
   com delta scores'
 usage: '# Full extraction from URL

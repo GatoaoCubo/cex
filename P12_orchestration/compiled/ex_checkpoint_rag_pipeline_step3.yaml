@@ -45,15 +45,16 @@ pipeline_rag_ingest_5_steps: 'Step 1: CRAWL      -> Coletar documentos de source
   Step 5: VALIDATE   -> Verificar retrieval accuracy'
 checkpoint_state: "checkpoint:\n  id: p12_ckpt_rag_pipeline_step3\n  workflow_ref: rag_ingest_pipeline\n  step: \"3_embed\"\
   \n  created_at: \"2026-03-29T03:47:22Z\"\n  resumable: true\n\n  state:\n    docs_processed: 847\n    docs_failed: 3\n \
-  \   docs_total: 850\n\n    failed_docs:\n      - id: \"KC_research_agent_042\"\n        error: \"OllamaConnectionError: timeout after\
-  \ 30s\"\n        retries: 3\n      - id: \"KC_knowledge_agent_089\"\n        error: \"TokenLimitExceeded: 32768 > 8192 max_tokens\"\
-  \n        retries: 1\n      - id: \"KC_marketing_agent_BROKEN\"\n        error: \"UTF8DecodeError: invalid byte 0xff at position 2847\"\
-  \n        retries: 1\n\n    embeddings_generated:\n      count: 847\n      model: \"nomic-embed-text\"\n      dimensions:\
-  \ 768\n      storage: \"records/core/brain/faiss_index/pending_vectors.npy\"\n\n    pipeline_metadata:\n      started_at:\
-  \ \"2026-03-29T02:00:00Z\"\n      step3_completed_at: \"2026-03-29T03:47:22Z\"\n      elapsed_seconds: 6442\n      memory_peak_mb:\
-  \ 2847\n\n  resume_instructions:\n    next_step: \"4_index\"\n    skip_steps: [1, 2, 3]\n    input_artifact: \"pending_vectors.npy\"\
-  \n    retry_failed: true  # re-attempt failed docs in next run\n\n  rollback:\n    safe_to_rollback: true\n    rollback_action:\
-  \ \"rm pending_vectors.npy\"\n    note: \"FAISS index not yet modified — safe to discard\""
+  \   docs_total: 850\n\n    failed_docs:\n      - id: \"KC_research_agent_042\"\n        error: \"OllamaConnectionError:\
+  \ timeout after 30s\"\n        retries: 3\n      - id: \"KC_knowledge_agent_089\"\n        error: \"TokenLimitExceeded:\
+  \ 32768 > 8192 max_tokens\"\n        retries: 1\n      - id: \"KC_marketing_agent_BROKEN\"\n        error: \"UTF8DecodeError:\
+  \ invalid byte 0xff at position 2847\"\n        retries: 1\n\n    embeddings_generated:\n      count: 847\n      model:\
+  \ \"nomic-embed-text\"\n      dimensions: 768\n      storage: \"records/core/brain/faiss_index/pending_vectors.npy\"\n\n\
+  \    pipeline_metadata:\n      started_at: \"2026-03-29T02:00:00Z\"\n      step3_completed_at: \"2026-03-29T03:47:22Z\"\n\
+  \      elapsed_seconds: 6442\n      memory_peak_mb: 2847\n\n  resume_instructions:\n    next_step: \"4_index\"\n    skip_steps:\
+  \ [1, 2, 3]\n    input_artifact: \"pending_vectors.npy\"\n    retry_failed: true  # re-attempt failed docs in next run\n\
+  \n  rollback:\n    safe_to_rollback: true\n    rollback_action: \"rm pending_vectors.npy\"\n    note: \"FAISS index not\
+  \ yet modified — safe to discard\""
 exemplo_pratico: "Cenario: Pipeline rodando as 2h da manha (cron). Ollama cai no meio do step 3.\n\nSem checkpoint: Pipeline\
   \ inteiro recomeca — re-crawl 850 docs, re-parse, re-embed tudo. ~2h desperdicadas.\n\nCom checkpoint: Ao reiniciar:\nckpt\
   \ = load_checkpoint(\"p12_ckpt_rag_pipeline_step3\")\n\nif ckpt and ckpt[\"resumable\"]:\n    # Skip steps 1-3, start from\

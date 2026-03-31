@@ -3,13 +3,13 @@ kind: router_prompt
 pillar: P03
 title: Router Prompt for organization Satellite Task Dispatch
 routes: ''
-fallback: builder_agent (builder generico) — quando a tarefa nao mapeia claramente para nenhum dominio especializado, builder_agent e o
-  satelite mais versatil por usar opus e ter capacidade de construcao ampla.
+fallback: builder_agent (builder generico) — quando a tarefa nao mapeia claramente para nenhum dominio especializado, builder_agent
+  e o satelite mais versatil por usar opus e ter capacidade de construcao ampla.
 quality: 9.0
 objective: Classificar a tarefa do usuario e rotear para o satelite organization mais adequado. O router deve analisar keywords,
   contexto semantico e tipo de entregavel esperado para determinar o satelite correto com score de confianca. Se confianca
   < threshold, usar fallback.
-shaka_research: 'Modelo: sonnet | Dominio: Pesquisa e analise de mercado
+research_agent_research: 'Modelo: sonnet | Dominio: Pesquisa e analise de mercado
 
   Keywords: pesquisar, mercado, concorrente, scrape, analise, benchmark, tendencia, dados, comparar, fornecedor
 
@@ -18,7 +18,7 @@ shaka_research: 'Modelo: sonnet | Dominio: Pesquisa e analise de mercado
   Entregavel tipico: relatorio de pesquisa, analise comparativa, dados estruturados
 
   Exemplo: "Pesquisa os top 5 concorrentes de pet shop no Mercado Livre"'
-lily_marketing: 'Modelo: sonnet | Dominio: Marketing e conteudo
+marketing_agent_marketing: 'Modelo: sonnet | Dominio: Marketing e conteudo
 
   Keywords: anuncio, marketing, copy, titulo, vender, campanha, criativo, headline, CTA, post, social media
 
@@ -27,7 +27,7 @@ lily_marketing: 'Modelo: sonnet | Dominio: Marketing e conteudo
   Entregavel tipico: textos de anuncio, campanhas, copys, titulos otimizados
 
   Exemplo: "Cria 5 titulos de anuncio para cama box casal com frete gratis"'
-edison_build: 'Modelo: opus | Dominio: Construcao e codigo
+builder_agent_build: 'Modelo: opus | Dominio: Construcao e codigo
 
   Keywords: criar, build, codigo, componente, hook, template, implementar, desenvolver, feature, refatorar, fix
 
@@ -36,7 +36,7 @@ edison_build: 'Modelo: opus | Dominio: Construcao e codigo
   Entregavel tipico: codigo, componentes, templates, configuracoes
 
   Exemplo: "Implementa um hook de validacao de schema para os agents"'
-pytha_knowledge: 'Modelo: sonnet | Dominio: Conhecimento e documentacao
+knowledge_agent_knowledge: 'Modelo: sonnet | Dominio: Conhecimento e documentacao
 
   Keywords: conhecimento, documentar, indexar, embedding, organizar, catalogar, wiki, knowledge, card
 
@@ -45,7 +45,7 @@ pytha_knowledge: 'Modelo: sonnet | Dominio: Conhecimento e documentacao
   Entregavel tipico: knowledge cards, documentacao, indices, taxonomias
 
   Exemplo: "Documenta o fluxo de autenticacao JWT da API em uma knowledge card"'
-atlas_execute: 'Modelo: opus | Dominio: Execucao e infraestrutura
+operations_agent_execute: 'Modelo: opus | Dominio: Execucao e infraestrutura
 
   Keywords: executar, testar, debug, validar, deploy, migrar, database, railway, infra, pipeline, CI/CD
 
@@ -54,7 +54,7 @@ atlas_execute: 'Modelo: opus | Dominio: Execucao e infraestrutura
   Entregavel tipico: deploy realizado, testes executados, migrations aplicadas
 
   Exemplo: "Roda os testes de integracao e faz deploy da API no Railway"'
-york_monetize: 'Modelo: sonnet | Dominio: Monetizacao e cursos
+commercial_agent_monetize: 'Modelo: sonnet | Dominio: Monetizacao e cursos
 
   Keywords: curso, monetizar, preco, hotmart, funil, landing page, checkout, vender curso, produto digital
 
@@ -69,9 +69,11 @@ step_1_keyword_match: 'Para cada route, contar keywords presentes na tarefa do u
   keyword_scores = {route: count / total_keywords_in_route para cada route}'
 step_2_semantic_analysis: 'Analisar o VERBO principal e o OBJETO da tarefa:
 
-  - VERBO indica acao (pesquisar=research_agent, criar=builder_agent, vender=marketing_agent, documentar=knowledge_agent, executar=operations_agent, monetizar=commercial_agent)
+  - VERBO indica acao (pesquisar=research_agent, criar=builder_agent, vender=marketing_agent, documentar=knowledge_agent,
+  executar=operations_agent, monetizar=commercial_agent)
 
-  - OBJETO indica dominio (mercado=research_agent, anuncio=marketing_agent, codigo=builder_agent, knowledge=knowledge_agent, deploy=operations_agent, curso=commercial_agent)
+  - OBJETO indica dominio (mercado=research_agent, anuncio=marketing_agent, codigo=builder_agent, knowledge=knowledge_agent,
+  deploy=operations_agent, curso=commercial_agent)
 
   semantic_score = match_strength(verbo)  0.6 + match_strength(objeto)  0.4'
 step_3_combined_score: confidence = keyword_score  0.4 + semantic_score  0.6
@@ -85,13 +87,17 @@ disambiguation_rules: '| Conflito | Resolucao | Razao |
 
   |----------|-----------|-------|
 
-  | research_agent vs marketing_agent (pesquisar + marketing) | research_agent primeiro, marketing_agent depois | Pesquisa informa o marketing |
+  | research_agent vs marketing_agent (pesquisar + marketing) | research_agent primeiro, marketing_agent depois | Pesquisa
+  informa o marketing |
 
-  | builder_agent vs operations_agent (criar + deploy) | builder_agent build, operations_agent deploy | Separar construcao de operacao |
+  | builder_agent vs operations_agent (criar + deploy) | builder_agent build, operations_agent deploy | Separar construcao
+  de operacao |
 
-  | knowledge_agent vs research_agent (documentar + pesquisar) | Se fonte externa: research_agent. Se interna: knowledge_agent | Direcao do conhecimento |
+  | knowledge_agent vs research_agent (documentar + pesquisar) | Se fonte externa: research_agent. Se interna: knowledge_agent
+  | Direcao do conhecimento |
 
-  | marketing_agent vs commercial_agent (vender + monetizar) | Se conteudo/copy: marketing_agent. Se produto digital/curso: commercial_agent | Tipo de entregavel |'
+  | marketing_agent vs commercial_agent (vender + monetizar) | Se conteudo/copy: marketing_agent. Se produto digital/curso:
+  commercial_agent | Tipo de entregavel |'
 output_format: '## Route Decision
 
 

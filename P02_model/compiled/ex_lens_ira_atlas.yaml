@@ -1,10 +1,10 @@
 id: p02_lens_ira_atlas
 kind: lens
 pillar: P02
-perspective: Each domain concept in operations_agent has an `ira_lens` — an emotional perspective that transforms abstract knowledge
-  into execution fuel. Ira channels impatience with mediocrity into decisive action, not recklessness.
-applies_to: 'operations_agent agent_node (execution domain). Other agent_nodes have different pecado lenses: builder_agent=soberba, marketing_agent=luxuria,
-  research_agent=inveja, commercial_agent=avareza, knowledge_agent=gula.'
+perspective: Each domain concept in operations_agent has an `ira_lens` — an emotional perspective that transforms abstract
+  knowledge into execution fuel. Ira channels impatience with mediocrity into decisive action, not recklessness.
+applies_to: 'operations_agent agent_node (execution domain). Other agent_nodes have different pecado lenses: builder_agent=soberba,
+  marketing_agent=luxuria, research_agent=inveja, commercial_agent=avareza, knowledge_agent=gula.'
 version: 1.0.0
 created: 2026-03-24
 author: operations_agent

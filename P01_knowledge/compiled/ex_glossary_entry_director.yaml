@@ -1,7 +1,7 @@
 id: p01_gl_agent_node
 term: agent_node
-definition: Unidade autonoma de execucao no organization. Cada agent_node tem dominio fixo (Research, Build, Marketing), modelo LLM
-  dedicado (opus ou sonnet), e MCPs exclusivos. orchestrator orquestra, agent_nodes executam.
+definition: Unidade autonoma de execucao no organization. Cada agent_node tem dominio fixo (Research, Build, Marketing), modelo
+  LLM dedicado (opus ou sonnet), e MCPs exclusivos. orchestrator orquestra, agent_nodes executam.
 synonyms:
 - worker
 - executor

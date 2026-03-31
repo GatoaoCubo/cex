@@ -19,8 +19,8 @@ tags:
 - content-filter
 tldr: Validator pos-LLM que checa toxicidade (Perspective API) e PII (regex + spaCy NER) em output antes de entregar ao usuario
   — on_fail=retry_with_warning, max_retries=2
-when_to_use: Qualquer agente organization que gera texto user-facing — especialmente copy de marketing, respostas de chatbot, e
-  conteudo publicavel em redes sociais
+when_to_use: Qualquer agente organization que gera texto user-facing — especialmente copy de marketing, respostas de chatbot,
+  e conteudo publicavel em redes sociais
 overview: Validator de duas camadas que intercepta output do LLM antes de entregar ao usuario ou publicar. Camada 1 detecta
   conteudo toxico (hate speech, profanity, harassment) via Perspective API. Camada 2 detecta PII (CPF, email, telefone, endereco)
   via regex patterns + spaCy NER. Se qualquer check falhar, retry com warning injetado no prompt; apos max_retries, retornar

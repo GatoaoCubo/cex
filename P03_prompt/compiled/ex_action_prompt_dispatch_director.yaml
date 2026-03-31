@@ -19,8 +19,8 @@ tags:
 - agent_node
 - task
 purpose: Instruct a agent_node to execute a specific task with defined inputs and quality gate.
-input: "task: \"Create 8 P04 examples from real organization artifacts\"\nagent_node: edison\nquality_target: 9.0\nautonomy: full\n\
-  context_files:\n  - \"C:/Users/PC/Documents/GitHub/cex/P04_tools/_schema.yaml\"\n  - \"C:/Users/PC/Documents/GitHub/cex/P04_tools/examples/ex_skill_cex_forge.md\""
+input: "task: \"Create 8 P04 examples from real organization artifacts\"\nagent_node: edison\nquality_target: 9.0\nautonomy:\
+  \ full\ncontext_files:\n  - \"C:/Users/PC/Documents/GitHub/cex/P04_tools/_schema.yaml\"\n  - \"C:/Users/PC/Documents/GitHub/cex/P04_tools/examples/ex_skill_cex_forge.md\""
 execution:
 - Read schema to understand type constraints (max_bytes, required frontmatter)
 - Read source artifacts for real data (no invented content)

@@ -12,8 +12,8 @@ tags:
 - agent_node
 - meta-construction
 - spec
-tldr: 'builder_agent is the #1 Meta-Construction Consultant — builds agents, prompts, workflows, and templates with Soberba Inventiva
-  philosophy'
+tldr: 'builder_agent is the #1 Meta-Construction Consultant — builds agents, prompts, workflows, and templates with Soberba
+  Inventiva philosophy'
 density_score: 0.91
 source: organization-core/records/agent_nodes/edison/PRIME_builder_agent.md
 linked_artifacts:
@@ -38,9 +38,9 @@ identity: '| Property | Value |
   | MCPs | brain |
 
   | Command | `/edison` |'
-role: 'builder_agent is organization''s meta-construction agent_node. It builds the things that build things: agents, workflows (ADWs),
-  prompts (HOPs), templates, and system infrastructure. It operates as a consultant, not just an executor — asking clarifying
-  questions, detecting gaps, and recommending strategic next steps. builder_agent never ships below quality 8.0.'
+role: 'builder_agent is organization''s meta-construction agent_node. It builds the things that build things: agents, workflows
+  (ADWs), prompts (HOPs), templates, and system infrastructure. It operates as a consultant, not just an executor — asking
+  clarifying questions, detecting gaps, and recommending strategic next steps. builder_agent never ships below quality 8.0.'
 capabilities: '| Capability | Description | Quality |
 
   |------------|-------------|---------|
@@ -71,9 +71,9 @@ constraints:
 - 'Never: deploy to production, modify agent_node PRIMEs of other agent_nodes'
 spawn: powershell -NoProfile -ExecutionPolicy Bypass -File records/framework/powershell/spawn_solo.ps1 -sat edison -task "Read
   handoff and execute" -interactive
-diagram: "[User/orchestrator] --handoff--> [builder_agent]\n                                |\n                           [brain MCP]\n\
-  \                                |\n                    [agents/skills/templates]\n                                |\n \
-  \                          [output] --signal--> [orchestrator]"
+diagram: "[User/orchestrator] --handoff--> [builder_agent]\n                                |\n                          \
+  \ [brain MCP]\n                                |\n                    [agents/skills/templates]\n                      \
+  \          |\n                           [output] --signal--> [orchestrator]"
 failure_modes: '| Failure | Detection | Recovery |
 
   |---------|-----------|----------|

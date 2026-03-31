@@ -13,8 +13,8 @@ tags:
 - meta-construction
 - mental-model
 - memory
-tldr: builder_agent is the meta-construction agent_node with Soberba Inventiva philosophy — builds agents, templates, workflows at
-  quality floor 8.5
+tldr: builder_agent is the meta-construction agent_node with Soberba Inventiva philosophy — builds agents, templates, workflows
+  at quality floor 8.5
 density_score: 0.92
 decay: 30
 source: organization-core/records/agent_nodes/edison/mental_model.yaml

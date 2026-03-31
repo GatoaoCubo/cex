@@ -62,8 +62,8 @@ anti_patterns:
 - 'Boot config hardcoded para 1 provider: perde portabilidade'
 - 'Mental model sem decision_tree: routing fica ambiguo'
 - 'ISO com < 10 files: classificado como sub-baseline'
-application: organization opera 118 agentes com ISO completo, todos geraveis via forge P02. O sistema agent_package permite que qualquer
-  agente rode em claude, cursor, windsurf ou codex sem alteracao de prompt.
+application: organization opera 118 agentes com ISO completo, todos geraveis via forge P02. O sistema agent_package permite
+  que qualquer agente rode em claude, cursor, windsurf ou codex sem alteracao de prompt.
 references:
 - P02_model/_schema.yaml (fonte de verdade)
 - records/agents/ (118 agentes com ISO completo)

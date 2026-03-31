@@ -73,7 +73,8 @@ when_not_to_use: '| Cenario | Por que NAO | Use em vez |
 
   | Deploy, infra, database ops | Fora do dominio research | operations_agent (gateway-agent) |
 
-  | Indexar/catalogar conhecimento existente | Pesquisa descobre, nao organiza | knowledge_agent (indexer-agent, mentor-agent) |'
+  | Indexar/catalogar conhecimento existente | Pesquisa descobre, nao organiza | knowledge_agent (indexer-agent, mentor-agent)
+  |'
 common_issues: '| Problema | Causa | Solucao |
 
   |----------|-------|---------|

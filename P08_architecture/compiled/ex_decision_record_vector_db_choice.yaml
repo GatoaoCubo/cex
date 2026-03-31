@@ -3,8 +3,8 @@ kind: decision_record
 pillar: P08
 title: 'ADR-007: Choose Qdrant over Pinecone for Vector Database'
 status: Accepted — 2026-03-29
-context: 'organization''s brain_query currently uses FAISS for vector search (140MB index, ~1,957 pool artifacts). This works for
-  local development but has limitations:
+context: 'organization''s brain_query currently uses FAISS for vector search (140MB index, ~1,957 pool artifacts). This works
+  for local development but has limitations:
 
 
   1. No persistence — index must be rebuilt on every fresh clone (~20 min)
@@ -116,8 +116,8 @@ option_d_keep_faiss_bm25: '| Aspect | Assessment |
 
   | Concern | All 4 original problems remain unsolved. |'
 implementation_plan: "Phase 1 (Week 1): Deploy Qdrant on Railway\n  - Docker image: qdrant/qdrant:v1.8.4\n  - Collection:\
-  \ organization_brain, 768-dim, cosine distance\n  - Initial load: migrate FAISS index -> Qdrant collection\n\nPhase 2 (Week 2):\
-  \ Integrate with brain_query\n  - Replace hybrid_search() to call Qdrant instead of FAISS+BM25\n  - Add metadata filters:\
+  \ organization_brain, 768-dim, cosine distance\n  - Initial load: migrate FAISS index -> Qdrant collection\n\nPhase 2 (Week\
+  \ 2): Integrate with brain_query\n  - Replace hybrid_search() to call Qdrant instead of FAISS+BM25\n  - Add metadata filters:\
   \ pillar, agent_node, quality, kind\n  - Benchmark: must match or beat current 88% top-3 accuracy\n\nPhase 3 (Week 3): Real-time\
   \ sync\n  - On KC create/update: upsert to Qdrant via post-commit hook\n  - Remove build_indexes_ollama.py rebuild requirement\n\
   \  - Add health check to /api/v2/health"

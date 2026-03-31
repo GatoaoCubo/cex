@@ -21,5 +21,5 @@ extraction_plan:
 - Enrich with GitHub API metadata (stars, language, last_updated)
 - Classify into organization domains and quality tiers
 output: "items:\n  - name: \"langchain\"\n    url: \"https://github.com/langchain-ai/langchain\"\n    description: \"Building\
-  \ LLM apps\"\n    stars: 82000\n    category: \"frameworks\"\n    organization_domain: \"build\"\n    tier: \"gold\"\n\nTiers:\
-  \ gold (>10K stars, active), silver (>1K), bronze (<1K or stale)."
+  \ LLM apps\"\n    stars: 82000\n    category: \"frameworks\"\n    organization_domain: \"build\"\n    tier: \"gold\"\n\n\
+  Tiers: gold (>10K stars, active), silver (>1K), bronze (<1K or stale)."
