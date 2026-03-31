@@ -1,0 +1,11 @@
+{
+  "timestamp": "2026-03-31T11:14:44.467879",
+  "kind": "knowledge_card",
+  "intent": "principais fontes de dados para pesquisa de mercado pet no Brasil com custos e rate limits",
+  "passed": true,
+  "retries": 0,
+  "gates_passed": 6,
+  "gates_total": 6,
+  "issues": [],
+  "timing_ms": 55868.8
+}
