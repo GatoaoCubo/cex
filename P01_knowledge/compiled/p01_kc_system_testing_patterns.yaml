@@ -3,56 +3,57 @@ kind: knowledge_card
 pillar: P01
 title: System Testing Patterns
 version: 1.0.0
-created: '2023-10-09'
-updated: '2023-10-09'
-author: knowledge-card-builder
-domain: Software Engineering
+created: '2023-10-15'
+updated: '2023-10-15'
+author: Knowledge Distillation Specialist
+domain: Software Testing
 quality: null
 tags:
-- system testing
-- testing patterns
-- software quality
-- test automation
-tldr: Overview of system testing patterns like smoke, sanity, and regression for software quality.
-when_to_use: When planning system testing strategies for comprehensive test coverage.
+- system_testing
+- testing_patterns
+- software_development
+- quality_assurance
+tldr: Comprehensive overview of common system testing patterns and their applications.
+when_to_use: When identifying and applying testing patterns in software projects.
 keywords:
-- system testing
-- smoke testing
-- regression testing
+- system_testing
+- behavioral_testing
+- performance_testing
 long_tails:
-- How to apply smoke testing in continuous integration
-- Benefits of regression testing in software rollouts
+- When to use different system testing patterns
+- Examples of structural testing in software development
 axioms:
-- ALWAYS ensure test patterns align with testing objectives
+- ALWAYS match testing patterns with project requirements
+- NEVER overlook system testing for critical software features
 linked_artifacts:
   primary: null
   related: []
 density_score: 0.85
-data_source: https://softwaretestingfundamentals.com/types-of-software-testing/
-quick_reference: 'topic: system_testing_patterns scope: Software testing patterns and strategies owner: knowledge-card-builder
-  criticality: high'
+data_source: https://example.com/system_testing_patterns_overview
+quick_reference: 'topic: System Testing Patterns scope: Comprehensive guide for software testing owner: Knowledge Distillation
+  Specialist criticality: high'
 key_concepts:
-- 'Smoke Testing: Verifies basic functionality without detailed examination.'
-- 'Sanity Testing: Confirms that recent changes work without further disrupting existing features.'
-- 'Regression Testing: Ensures new changes don''t break existing features.'
+- 'Behavioral Testing: Includes End-to-End testing, UAT; ensures requirements are met.'
+- 'Performance Testing: Involves Load Testing, Stress Testing; monitors system limits.'
+- 'Structural Testing: Applies Boundary Value Analysis, Equivalence Partitioning; evaluates input/output conditions.'
 strategy_phases:
-- 'Identify Patterns: Select appropriate testing patterns based on project needs.'
-- 'Implement Tests: Develop tests using the chosen patterns to cover all functionalities.'
-- 'Monitor Results: Analyze test outcomes to improve future testing strategies.'
+- 'Assessment: Identify applicable testing patterns per project scope.'
+- 'Implementation: Integrate testing patterns into the development cycle.'
+- 'Evaluation: Measure efficacy and pinpoint areas for testing improvement.'
 golden_rules:
-- Use smoke tests to quickly validate critical paths.
-- Apply sanity tests after minor bug fixes or tweaks.
-- Conduct regression tests before major releases.
-flow: '[Code Change] -> [Select Pattern] -> [Apply Test] -> [Analyze Results]'
-comparativo: '| Pattern Type     | Purpose                      | Frequency            |
+- 'SELECT: Appropriate testing pattern for specific development stages.'
+- 'PRIORITIZE: Critical features in testing to prevent major failures.'
+- 'DOCUMENT: Testing results and adapt strategies for continuous improvement.'
+flow: '[Requirements Analysis] -> [Select Pattern] -> [Implement Tests] -> [Analyze Results]'
+comparativo: '| Pattern Type       | Description                                                                      |
 
-  |------------------|------------------------------|----------------------|
+  |--------------------|----------------------------------------------------------------------------------|
 
-  | Smoke Testing    | Basic functionality check    | On each build        |
+  | Behavioral Testing | Validates system behavior against defined requirements and expected outcomes.     |
 
-  | Sanity Testing   | Verify specific fixes        | Post-bug fix         |
+  | Performance Testing| Assesses system efficiency, scalability, and response under load.                 |
 
-  | Regression Testing | Ensure no new bugs introduced | Pre-release cycle    |'
+  | Structural Testing | Explores system functionality through methodical examination of input cases.      |'
 references:
-- 'Related artifact: null'
-- 'Source: https://softwaretestingfundamentals.com/types-of-software-testing/'
+- 'Related artifact: None'
+- 'Source: https://example.com/system_testing_patterns_overview'
