@@ -51,7 +51,7 @@ layers:
 
   runtime:
     description: "Executam em runtime — estado efemero ou persistente"
-    count: 29
+    count: 32
     kinds:
       - agent               # P02 — entidade executora (persona + capabilities)
       - router              # P02 — regra de roteamento (task→satellite)
@@ -82,6 +82,9 @@ layers:
       - dispatch_rule       # P12 — regra de despacho (keyword→satellite)
       - bugloop             # P11 — ciclo de correcao automatica
       - optimizer           # P11 — otimizador de processo (metric→action)
+      - memory_scope        # P10 — configuracao de escopo de memoria por builder
+      - effort_profile      # P09 — perfil de esforco/thinking por builder
+      - hook_config         # P04 — configuracao de hooks lifecycle por builder
 
   governance:
     description: "Qualidade, seguranca, evolucao — regras de melhoria"
@@ -188,6 +191,21 @@ overlaps:
     resolution: "Manter separados — signal eh dado, dispatch_rule eh logica"
     severity: low
 
+  - pair: [memory_scope, learning_record]
+    boundary: "memory_scope = CONFIG de como memoria funciona; learning_record = CONTEUDO da memoria"
+    resolution: "Manter separados — memory_scope P10 config, learning_record P10 content"
+    severity: medium
+
+  - pair: [effort_profile, runtime_rule]
+    boundary: "effort_profile = QUAL modelo/thinking usar; runtime_rule = QUANDO/COMO executar"
+    resolution: "Manter separados — effort_profile P09 model selection, runtime_rule P09 execution"
+    severity: medium
+
+  - pair: [hook_config, hook]
+    boundary: "hook_config = DECLARACAO de quais hooks; hook = IMPLEMENTACAO do hook"
+    resolution: "Manter separados — hook_config P04 declaration, hook P04 implementation"
+    severity: medium
+
 v2_proposals:
   fusions:
     - from: [output_schema_P05, output_schema_P06]
@@ -230,6 +248,6 @@ v2_proposals:
     - type: output_schema_P05
       reason: "Resolver overlap — renomear para output_format"
 
-# Totals check: SPEC(17) + CONTENT(8) + PROMPT(5) + RUNTIME(29) + GOVERNANCE(10) = 69
+# Totals check: SPEC(17) + CONTENT(8) + PROMPT(5) + RUNTIME(32) + GOVERNANCE(10) = 72
 # Core 24: SPEC(4) + CONTENT(5) + PROMPT(4) + RUNTIME(6) + GOVERNANCE(5) = 24
-# Extensions: 69 - 24 = 45
+# Extensions: 72 - 24 = 48

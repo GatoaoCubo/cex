@@ -28,6 +28,7 @@ director: P08_architecture/templates/tpl_director.md
 dispatch_rule: null
 document_loader: P04_tools/templates/tpl_document_loader.md
 e2e_eval: P07_evals/templates/tpl_e2e_eval.md
+effort_profile: null
 embedding_config: null
 entity_memory: P10_memory/templates/tpl_entity_memory.md
 enum_def: P06_schema/templates/tpl_enum_def.md
@@ -44,6 +45,7 @@ guardrail: null
 handoff: P12_orchestration/templates/tpl_handoff.md
 handoff_protocol: P02_model/templates/tpl_handoff_protocol.md
 hook: null
+hook_config: null
 input_schema: P06_schema/templates/tpl_input_schema.md
 instruction: P03_prompt/templates/tpl_instruction.md
 interface: null

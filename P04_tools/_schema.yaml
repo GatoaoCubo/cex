@@ -267,3 +267,28 @@ kinds:
     constraints:
       max_bytes: 1024
     llm_function: GOVERN
+
+  hook_config:
+    description: Hook lifecycle configuration for builder execution
+    boundary: hook_config = DECLARACAO de quais hooks; hook = IMPLEMENTACAO do hook
+    layer: content
+    core: false
+    machine_format: yaml
+    naming: p04_hook_config_{{topic}}.md + .yaml
+    constraints:
+      max_bytes: 4096
+      density_min: 0.8
+      quality_min: 7.0
+    frontmatter_required:
+    - id
+    - kind
+    - pillar
+    - title
+    - version
+    - created
+    - updated
+    - author
+    - domain
+    - quality
+    - tags
+    - tldr
