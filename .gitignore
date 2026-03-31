@@ -39,3 +39,6 @@ _docs/*.srt
 # Platform
 Thumbs.db
 .DS_Store
+nul
+.cex/temp/
+boot/n01-claude.cmd
