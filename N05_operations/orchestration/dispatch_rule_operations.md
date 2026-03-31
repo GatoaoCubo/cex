@@ -2,42 +2,65 @@
 id: p12_dr_operations_nucleus
 kind: dispatch_rule
 pillar: P12
-version: 2.0.0
+version: 3.0.0
 created: 2026-03-30
-updated: 2026-03-30
+updated: 2026-03-31
 author: n05_operations
 domain: operations-engineering
-quality: 8.6
-tags: [dispatch, N05, operations, devops]
-tldr: Route execution-heavy coding tasks to N05 when the user needs review, tests, debugging, deployment, CI/CD, infrastructure, or monitoring work.
+quality: null
+tags: [dispatch_rule, N05, operations, devops, routing]
+tldr: Route execution-heavy repository tasks to N05 when the answer depends on code inspection, testing, debugging, deploy safety, CI/CD, or infrastructure validation.
 scope: operations
-keywords: [review, code-review, testar, test, pytest, debug, bug, failing, deploy, release, ci, cd, pipeline, docker, logs, rollback, monitor]
+keywords: [review, code-review, reviewer, test, testar, pytest, flaky, failing, debug, bug, traceback, deploy, release, ci, cd, pipeline, workflow, docker, logs, rollback, monitor]
 agent_node: operations_nucleus
 model: gpt-5.4
 priority: 9
-confidence_threshold: 0.78
+confidence_threshold: 0.82
 fallback: builder_hub
-routing_strategy: keyword_plus_intent
+routing_strategy: intent_plus_execution_requirement
 ---
 
 # Operations Dispatch Rule
 
 ## Purpose
 
-Send tasks to N05 when the user expects the agent to inspect code, run or fix tests, diagnose failures, harden pipelines, validate deploys, or reason about runtime behavior with operational evidence.
+Dispatch to N05 when the user needs an answer grounded in repository execution,
+runtime evidence, release safety, or delivery-system diagnosis.
 
-## Positive Routing Signals
+## Route To N05 When
 
-- The request mentions failing tests, flaky CI, debugging, logs, stack traces, containers, release readiness, rollout, rollback, or monitoring.
-- The task requires shell execution, build/test commands, or repo-level validation instead of pure artifact authoring.
-- The user asks for a review and the likely output is findings, risks, and missing validation.
+- The task requires running tests, builds, linters, containers, or validation commands.
+- The user asks for code review, especially with risk analysis, blockers, or missing tests.
+- The task involves debugging a failure, reproducing a bug, or reading traces/logs.
+- CI/CD is red, unstable, or suspected to be misconfigured.
+- Deployment readiness, rollback planning, or environment compatibility must be assessed.
+- Infra, Docker, health checks, observability, or startup sequencing are part of the problem.
 
-## Negative Routing Signals
+## Strong Positive Signals
 
-- Requests focused on creating new knowledge artifacts without execution urgency route to N03.
-- Research-heavy requests without direct repo execution route to N01.
-- Commercial or persuasive writing requests route to N06.
+- "review this diff"
+- "fix failing tests"
+- "debug this bug"
+- "pipeline is broken"
+- "validate this deploy"
+- "check docker/compose"
+- "is this safe to release?"
+- "why is CI flaky?"
 
-## Fallback Logic
+## Do Not Route To N05 When
 
-Fallback to `builder_hub` only when the task is primarily artifact construction rather than execution. If intent is mixed, N05 keeps ownership of the operational portion and leaves artifact synthesis to the fallback only when necessary.
+- The primary work is authoring or redesigning artifacts without execution pressure
+- The task is research-heavy and not tied to repository behavior
+- The request is commercial, persuasive, or pricing-oriented
+
+## Mixed-Intent Policy
+
+If the request includes both artifact synthesis and operational execution:
+
+- N05 owns the execution, review, test, debug, and deploy portions.
+- `builder_hub` is fallback only for pure artifact construction that does not depend on runtime evidence.
+
+## Decision Rule
+
+If answering correctly requires touching the actual repo state or proving runtime
+behavior, dispatch to N05.
