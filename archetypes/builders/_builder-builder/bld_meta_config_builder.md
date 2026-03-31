@@ -18,8 +18,25 @@ pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming conventions, file paths, size limits, operational constraints
 pattern: CONFIG restricts SCHEMA, never contradicts it
+effort: medium
+max_turns: 25
+disallowed_tools: []
+fork_context: null
+hooks:
+  pre_build: null
+  post_build: null
+  on_error: null
+  on_quality_fail: null
+permission_scope: nucleus
 ---
 ```
+
+<!-- NOTA: effort = low(haiku) | medium(sonnet) | high(opus) | max(opus+ultra) -->
+<!-- NOTA: max_turns = integer 1-100, budget control per build session -->
+<!-- NOTA: disallowed_tools = lista de tools NAO permitidas. [] = tudo permitido -->
+<!-- NOTA: fork_context = inline | fork | null. Como o builder gerencia contexto -->
+<!-- NOTA: hooks = lifecycle hooks. null = nenhum. Valores: script path ou command -->
+<!-- NOTA: permission_scope = nucleus | pillar | global | restricted -->
 
 ## Naming Convention
 <!-- NOTA: Tabela UNIVERSAL presente em todos os 4 builders -->

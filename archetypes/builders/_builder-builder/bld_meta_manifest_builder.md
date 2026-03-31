@@ -31,8 +31,16 @@ created: "{{YYYY-MM-DD}}"
 updated: "{{YYYY-MM-DD}}"
 author: {{author}}
 tags: [kind-builder, {{type_name_kebab}}, {{lp}}, specialist]
+keywords: [{{keyword_1}}, {{keyword_2}}, {{keyword_3}}, {{keyword_4}}]
+triggers: ["{{trigger_phrase_1}}", "{{trigger_phrase_2}}"]
+geo_description: >
+  L1: {{what_it_does}}. L2: {{how_it_does_it}}. L3: {{when_to_use_it}}.
 ---
 ```
+
+<!-- NOTA: keywords = 4-8 termos de routing/search. Extrair do ## Routing body existente -->
+<!-- NOTA: triggers = 2-4 frases naturais que ativam este builder -->
+<!-- NOTA: geo_description = 3 camadas semanticas (L1=o que, L2=como, L3=quando). Min 50 chars -->
 
 ## Identity
 Especialista em construir `{{type_name}}` — {{one_line_description}}.
@@ -50,10 +58,13 @@ Especialista em construir `{{type_name}}` — {{one_line_description}}.
 <!-- NOTA: {{hard_count}}/{{soft_count}} = definir em QUALITY_GATES.md -->
 
 ## Routing
+<!-- CANONICAL SOURCE: frontmatter keywords + triggers + geo_description -->
+<!-- Body section below is DERIVED from frontmatter for human readability -->
 keywords: [{{keyword_1}}, {{keyword_2}}, {{keyword_3}}, {{keyword_4}}]
 triggers: "{{trigger_phrase_1}}", "{{trigger_phrase_2}}", "{{trigger_phrase_3}}"
 <!-- NOTA: keywords = 4-8 termos que ativam este builder via brain_query -->
 <!-- NOTA: triggers = 2-3 frases naturais que um user diria -->
+<!-- NOTA: Manter body sincronizado com frontmatter. Frontmatter = source of truth -->
 
 ## Crew Role
 In a crew, I handle {{ROLE_CAPS}}.

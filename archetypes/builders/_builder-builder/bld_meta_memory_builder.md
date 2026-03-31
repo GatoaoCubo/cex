@@ -19,7 +19,29 @@ pillar: P10
 llm_function: INJECT
 purpose: What the builder remembers between production sessions
 pattern: stateless per invocation, but carries accumulated patterns
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
+```
+
+<!-- NOTA: memory_scope = user (~/.claude/) | project (.claude/) | local (.claude/local/) -->
+<!-- NOTA: observation_types = taxonomia fixa de 4 tipos. NUNCA alterar ordem ou remover -->
+<!-- Decay rules: user=0.03/dia, feedback=0.00 (NUNCA), project=0.05/dia, reference=0.01/dia -->
+
+## Observation Format (universal)
+<!-- NOTA: Cada observacao DEVE seguir este formato. type: eh OBRIGATORIO -->
+<!-- Tipos validos: user | feedback | project | reference -->
+
+```
+### Observation N (YYYY-MM-DD)
+- type: user | feedback | project | reference
+- observation: "o que foi aprendido"
+- pattern: "regra generalizavel"
+- evidence: "dados que suportam"
+- confidence: 0.0-1.0
+- outcome: SUCCESS | PARTIAL | FAILURE
+- session: session_id
+- tags: [tag1, tag2]
 ```
 
 ## Accumulated Patterns (update after each production)

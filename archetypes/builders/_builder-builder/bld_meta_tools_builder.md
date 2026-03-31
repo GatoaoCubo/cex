@@ -55,6 +55,20 @@ purpose: Tools and APIs available for {{type_name}} production
 
 <!-- NOTA: {{lp_dir}} = P01_knowledge, P02_model, P11_feedback, P12_orchestration, etc. -->
 
+## Tool Permissions
+<!-- NOTA: Secao OBRIGATORIA em todo bld_tools. DENIED > ALLOWED quando conflito -->
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | {{allowed_tools_list}} | Explicitly permitted |
+| DENIED | {{denied_tools_list}} | Explicitly blocked |
+| EFFECTIVE | {{effective_tools_list}} | ALLOWED minus DENIED |
+
+<!-- NOTA: ALLOWED = tools que o builder pode usar -->
+<!-- NOTA: DENIED = tools bloqueadas (de bld_config.disallowed_tools) -->
+<!-- NOTA: EFFECTIVE = resultado final. DENIED sempre vence conflito -->
+<!-- NOTA: Se disallowed_tools = [], entao DENIED = vazio e EFFECTIVE = ALLOWED -->
+
 ## Interim Validation
 <!-- NOTA: Fallback quando o validador automatico nao existe -->
 <!-- Padrao UNIVERSAL: -->
