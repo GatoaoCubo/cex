@@ -1,0 +1,114 @@
+id: p01_kc_social_publisher
+kind: knowledge_card
+type: kind
+pillar: P04
+title: Social Publisher — Deep Knowledge for social_publisher
+version: 1.0.0
+created: 2026-03-31
+updated: 2026-03-31
+author: builder_agent
+domain: social_publisher
+quality: null
+tags:
+- social_publisher
+- P04
+- PRODUCE
+- kind-kc
+- social-media
+- automation
+tldr: 10-stage auto-posting pipeline (LOAD>FETCH>SELECT>GENERATE>OPTIMIZE>HASHTAGS>PUBLISH>LOG>NOTIFY>ROTATE) that transforms
+  content into platform-optimized social posts with scheduling and analytics
+when_to_use: Building, reviewing, or reasoning about social_publisher artifacts
+keywords:
+- social_publisher
+- social_media
+- auto_posting
+- scheduling
+- instagram
+- linkedin
+- twitter
+feeds_kinds:
+- social_publisher
+density_score: null
+spec: 'kind: social_publisher
+
+  pillar: P04
+
+  llm_function: PRODUCE
+
+  max_bytes: 5120
+
+  naming: p04_sp_{{name}}.md
+
+  core: false'
+what_it_is: 'A social_publisher is a 10-stage automated posting pipeline that transforms source content into platform-optimized
+  social media posts. Stages: LOAD (ingest content), FETCH (pull platform context/trends), SELECT (choose content piece +
+  platform), GENERATE (create post copy), OPTIMIZE (platform-specific formatting), HASHTAGS (research + attach tags), PUBLISH
+  (post via API), LOG (record result), NOTIFY (alert on success/failure), ROTATE (schedule next batch). It is NOT a notifier
+  (which sends alerts to users, not public posts) nor a schedule (which defines timing, not content generation). The social_publisher
+  answers "how does content become social posts?" — notifier answers "how do I alert someone?" and schedule answers "when
+  does something run?".'
+cross_framework_map: '| Framework/Provider | Class/Concept | Notes |
+
+  |---|---|---|
+
+  | Buffer | Queue + Publish + Analytics | PUBLISH+LOG+ROTATE stages |
+
+  | Hootsuite | Composer + Scheduler + Analytics | GENERATE+PUBLISH+LOG pipeline |
+
+  | Later | Media Library + Calendar + Linkin.bio | LOAD+SELECT+PUBLISH with visual-first |
+
+  | Meta Business Suite | Creator Studio + Scheduler | Native PUBLISH+LOG for Instagram/Facebook |
+
+  | Typefully | Thread composer + scheduling | Twitter/X focused GENERATE+OPTIMIZE+PUBLISH |
+
+  | Zapier + Make | Trigger -> Format -> Post | Automation-based LOAD+GENERATE+PUBLISH |'
+key_parameters: '| Parameter | Type | Default | Tradeoff |
+
+  |---|---|---|---|
+
+  | platforms | list[str] | required | instagram, linkedin, twitter, tiktok, youtube |
+
+  | content_source | str | required | RSS, CMS, manual, knowledge_card pool |
+
+  | posting_frequency | str | daily | More frequent = more reach but content fatigue |
+
+  | optimization_level | str | basic | basic / platform_native / ai_rewrite |
+
+  | hashtag_strategy | str | trending | trending / niche / branded / mixed |'
+patterns: '| Pattern | When to Use | Example |
+
+  |---|---|---|
+
+  | Content repurposing pipeline | One source, many platforms | Blog post -> Twitter thread + LinkedIn post + IG carousel
+  |
+
+  | Trend-responsive posting | Maximize engagement | FETCH trending topics; GENERATE timely content |
+
+  | Evergreen rotation | Consistent posting without new content | ROTATE through top-performing past posts |
+
+  | A/B post testing | Optimize copy/format | GENERATE 2 variants; PUBLISH to segments; LOG winner |'
+anti_patterns: '| Anti-Pattern | Why It Fails | Fix |
+
+  |---|---|---|
+
+  | Same copy everywhere | Platform mismatch kills engagement | OPTIMIZE per platform (280 chars Twitter vs 3000 LinkedIn)
+  |
+
+  | No LOG stage | Cannot measure or improve | Log impressions, clicks, engagement per post |
+
+  | Manual hashtags | Stale tags, missed trends | Use HASHTAGS stage with trend API or AI research |'
+integration_graph: "[content_source] --> [LOAD] --> [FETCH] --> [SELECT]\n                                               |\n\
+  \                   [NOTIFY] <-- [LOG] <-- [PUBLISH] <-- [HASHTAGS] <-- [OPTIMIZE] <-- [GENERATE]\n                    \
+  \  |\n                   [ROTATE] --> [next cycle]"
+decision_tree:
+- IF need user-facing alerts (Slack, email, SMS) THEN use notifier
+- IF need time-based trigger only THEN use schedule
+- IF need ad campaign management THEN use content_monetization
+- IF need automated social media posting pipeline THEN social_publisher
+- 'DEFAULT: social_publisher when content needs to reach social platforms automatically'
+quality_criteria:
+- 'GOOD: At least 2 platforms; content_source defined; PUBLISH stage with API integration'
+- 'GREAT: All 10 stages; per-platform OPTIMIZE; hashtag research; A/B testing; analytics LOG with engagement tracking; ROTATE
+  with evergreen strategy'
+- 'FAIL: No platform optimization; missing LOG; no PUBLISH API integration; hardcoded hashtags'
