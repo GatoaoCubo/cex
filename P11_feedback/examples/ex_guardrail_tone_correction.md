@@ -2,21 +2,66 @@
 id: ex_feedback_tone_correction
 kind: feedback
 pillar: P11
-title: Tone Correction Feedback
-tags: [feedback, tone, correction]
+title: "Example — Tone Correction Feedback"
+tags: [feedback, tone, correction, guardrail, learning]
+tldr: "User corrects agent tone from too-formal to casual. Triggers constraint update, learning record, and future tone adjustment. Shows the feedback→learning loop."
 references:
   - tpl_feedback
   - ex_agent_copywriter
+quality: null
 ---
 
 # Tone Correction Feedback
 
-> Skeleton: feedback kind (user correction)
+## Trigger Event
+User said: *"Muito formal, não gostei. Fala mais natural."*
 
-User said: "too formal, didn't like it"
-Action: update constraint — avoid "acquire", "verify", "hereby"
-Impact: next compilation uses corrected tone.
+## Feedback Analysis
 
-## Links
+| Dimension | Before | After |
+|-----------|--------|-------|
+| Tone | Corporate formal | Conversational casual |
+| Vocabulary | "adquirir", "verificar", "destarte" | "comprar", "checar", "então" |
+| Sentence length | 25+ words average | 12-15 words average |
+| Voice | Passive ("foi verificado") | Active ("a gente checou") |
 
-- Corrects: [[ex_agent_copywriter]]
+## Actions Triggered
+
+### 1. Constraint Update
+```yaml
+# Added to bld_config for this instance
+tone_constraints:
+  avoid: ["adquirir", "verificar", "destarte", "outrossim", "hereby"]
+  prefer: ["comprar", "checar", "então", "tipo", "olha"]
+  max_sentence_words: 18
+  voice: active
+  formality: casual
+```
+
+### 2. Learning Record
+```json
+{
+  "type": "tone_correction",
+  "source": "user_feedback",
+  "before": "formal",
+  "after": "casual",
+  "specific_words_rejected": ["adquirir", "verificar"],
+  "timestamp": "2026-03-31T10:00:00Z",
+  "confidence": 0.95
+}
+```
+
+### 3. Memory Update
+Next compilation reads `bld_memory` ISO which now includes:
+> "User prefers casual tone. Avoid formal Portuguese. Use active voice."
+
+## Impact Measurement
+- Next 5 outputs scored by user: 4/5 "liked", 1/5 "neutral"
+- Tone formality score (automated): dropped from 0.8 → 0.3
+- Engagement: +40% on social posts after tone change
+
+## Quality Gate
+- [ ] Feedback captured with specific examples (not just "too formal")
+- [ ] Constraint update is actionable (word lists, not vague)
+- [ ] Learning record stored for future reference
+- [ ] Impact measured on subsequent outputs
