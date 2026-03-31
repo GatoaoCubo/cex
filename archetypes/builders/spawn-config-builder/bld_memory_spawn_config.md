@@ -4,8 +4,9 @@ id: bld_memory_spawn_config
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for spawn_config artifact generation
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 # Memory: spawn-config-builder
 ## Summary
 Spawn configs define how autonomous agent_nodes are launched: CLI flags, MCP profiles, timeout policies, and handoff file references. The critical production lesson is prompt size limits — inline prompts exceeding 200 characters cause hangs in non-interactive mode. Complex task descriptions must be offloaded to handoff files referenced by the spawn config. The second lesson is MCP profile isolation: agent_nodes sharing MCP configs cause connection conflicts when spawned concurrently.

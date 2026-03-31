@@ -18,8 +18,9 @@ impact_score: 7.5
 decay_rate: 0.05
 agent_node: edison
 keywords: [bug detection, fix loop, confidence threshold, escalation, rollback, verification suite, deterministic, probabilistic]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 Automated bug-fix loops fail disproportionately when a single confidence threshold drives fix application without first classifying the failure type. Deterministic failures (syntax error, missing import, missing file) are reliably auto-fixable. Probabilistic failures (logic error, assertion mismatch, intermittent failure) require either manual review or a conservative retry with distinct strategies before escalating.
 The core learning: confidence score alone is insufficient. A logic error can produce a high-confidence detection while remaining fundamentally unsafe to auto-fix.

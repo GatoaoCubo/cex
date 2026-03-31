@@ -18,8 +18,9 @@ impact_score: 7.5
 decay_rate: 0.05
 agent_node: edison
 keywords: [cli tool, exit codes, flag naming, command structure, composability, output format, config override]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 CLI tools are consumed programmatically as often as interactively. The difference between a tool that composes well in a pipeline and one that does not comes down to two decisions made at spec time: exit code semantics and flag naming convention. Both are invisible during happy-path use and catastrophic on failure if undefined.
 A tool that returns exit code 0 on both success and partial success, or that names flags with underscores internally while the spec says kebab-case, will cause silent failures that are expensive to diagnose in automated environments.

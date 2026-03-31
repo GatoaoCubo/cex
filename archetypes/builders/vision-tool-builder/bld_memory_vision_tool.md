@@ -18,8 +18,9 @@ impact_score: 8.0
 decay_rate: 0.04
 agent_node: edison
 keywords: [vision tool, confidence threshold, supported formats, providers, capabilities, ocr, object detection]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 Vision tools are consumed by data pipelines where low-confidence detections are indistinguishable from correct results unless filtered at the spec level. The two most common causes of vision tool integration failure are: (1) undeclared confidence_threshold producing noisy output, and (2) missing supported_formats causing callers to send incompatible image types.
 The difference between a vision tool that composes well and one that silently corrupts data comes down to three decisions made at spec time: confidence threshold, supported formats, and provider declaration. All three are invisible during happy-path use and catastrophic on failure.

@@ -18,8 +18,9 @@ impact_score: 7.5
 decay_rate: 0.05
 agent_node: edison
 keywords: [agent_package, portable, manifest, tier, lp_mapping, system_instruction, token_budget, file_inventory, hardcoded_paths]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 ISO packages make artifacts portable across environments and LLM providers. The two most common failures are hardcoded absolute paths (breaking portability) and tier/file-count mismatches (breaking validation). Both are detectable at authoring time with a two-step check: path scan and file count.
 ## Pattern

@@ -18,8 +18,9 @@ impact_score: 8.0
 decay_rate: 0.05
 agent_node: edison
 keywords: [function definition, json schema, tool calling, parameters, description, provider compatibility, nesting, enum]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 Function definitions live or die by their description field. The LLM reads the description to decide whether to call the function — a vague or missing description means the LLM either picks the wrong function or invents parameters. Parameter schema accuracy drops sharply with nesting depth beyond 2 levels.
 ## Pattern

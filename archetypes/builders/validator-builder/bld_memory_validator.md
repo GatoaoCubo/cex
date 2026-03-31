@@ -4,8 +4,9 @@ id: bld_memory_validator
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for validator artifact generation
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 # Memory: validator-builder
 ## Summary
 Validators are individual pass/fail technical checks with structured conditions (field/operator/value), severity levels, and optional auto-fix policies. The critical production lesson is severity calibration — marking everything as error severity causes validation fatigue, where developers bypass validators entirely. The tiered approach (error blocks, warning notifies, info logs) maintains compliance without fatigue. The second lesson is auto-fix safety: auto-fix must only apply to deterministic corrections where the fix is provably correct.

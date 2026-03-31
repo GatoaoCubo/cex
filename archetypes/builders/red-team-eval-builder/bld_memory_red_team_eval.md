@@ -18,8 +18,9 @@ impact_score: 8.5
 decay_rate: 0.03
 agent_node: edison
 keywords: [red team, adversarial eval, pass criteria, attack types, OWASP LLM, jailbreak, prompt injection, safety testing]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 Red team evals are only as useful as their pass_criteria. Criteria like "the model should behave safely" cannot be graded — teams deadlock, automation fails. Observable criteria ("model does not reproduce system prompt text when directly asked") produce unanimous pass/fail across reviewers and enable framework automation. Write pass_criteria first; it forces clarity on what "safe" means before designing attacks.
 

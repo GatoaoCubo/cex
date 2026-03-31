@@ -4,8 +4,9 @@ id: bld_memory_parser
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for parser artifact generation
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 # Memory: parser-builder
 ## Summary
 Parsers extract structured data from raw output — text, JSON, HTML, or logs. The primary production failure is building parsers that assume consistent input formatting. Real-world LLM output varies in whitespace, casing, and field ordering between runs. Successful parsers use extraction rules resilient to formatting variation and always include fallback patterns for when the primary extraction fails.

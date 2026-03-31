@@ -18,8 +18,9 @@ impact_score: 7.7
 decay_rate: 0.08
 agent_node: edison
 keywords: [brain-index, hybrid-search, BM25, FAISS, semantic, retrieval, weights, recall, vectorstore]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 A hybrid search index combines keyword-based retrieval (BM25) and semantic retrieval (vector similarity) to handle both exact-match and paraphrase queries. The combination outperforms either method alone on mixed query sets, but only if the blend weights are calibrated to the actual query distribution.
 Most index configurations use a default 50/50 blend without measuring whether it matches the domain's query patterns. This default is a reasonable starting point but is optimal for almost no real domain.

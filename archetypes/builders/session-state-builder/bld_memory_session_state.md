@@ -4,8 +4,9 @@ id: bld_memory_session_state
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for session_state artifact generation
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 # Memory: session-state-builder
 ## Summary
 Session states are ephemeral snapshots of an agent's current context during execution — token usage, active tasks, checkpoints, and working memory. The critical production lesson is that session states must never persist beyond the session that created them. Leaked session state causes agents to resume with stale context from previous runs, leading to confusing behavior. The second lesson is checkpoint design: checkpoints without recovery instructions are useless — knowing where you were without knowing how to resume provides no value.

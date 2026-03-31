@@ -18,8 +18,9 @@ impact_score: 7.6
 decay_rate: 0.06
 agent_node: edison
 keywords: [benchmark, baseline, target, measurement, reproducibility, variance, metrics, quantitative]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 A benchmark is only as useful as it is reproducible. Reproducibility requires three things: a defined measurement methodology, a baseline from a known state, and a target expressed relative to that baseline. Benchmarks that skip any of these three components produce scores that cannot be compared across runs, operators, or system versions.
 The most common shortcut is defining the target first ("we want 95% accuracy") without first measuring what the current system achieves. This produces benchmarks that are aspirational rather than diagnostic.

@@ -4,8 +4,9 @@ id: bld_memory_permission
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for permission artifact generation
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 # Memory: permission-builder
 ## Summary
 Permissions define access control rules: who can read, write, or execute what resources. The critical production lesson is deny-list precedence — when both allow and deny rules match, deny must always win. Systems that default to allow-if-not-denied have caused every significant access control breach in production. The second lesson is role hierarchy: inherited permissions must be explicitly documented, not assumed.

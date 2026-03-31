@@ -9,6 +9,8 @@ updated: 2026-03-28
 author: builder_agent
 quality: null
 tags: [memory, retriever, P12, RAG, anti-patterns, lessons]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
 # Memory: retriever-builder
 

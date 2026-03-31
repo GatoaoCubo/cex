@@ -18,8 +18,9 @@ impact_score: 7.5
 decay_rate: 0.05
 agent_node: edison
 keywords: [connector, bidirectional, webhook, idempotency, health check, protocol, auth, data mapping, rate limit, transform]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 A client makes outbound calls only. A connector makes outbound calls and receives inbound calls (webhooks, callbacks, event streams). This creates two failure modes unique to connectors: duplicate processing from webhook retries, and silent failure when the inbound endpoint goes offline. Building a client when a connector is needed forces idempotency and health monitoring to be retrofitted — consistently more expensive than specifying them upfront.
 ## Pattern

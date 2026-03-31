@@ -33,8 +33,9 @@ keywords:
   - override precedence
   - UPPER_SNAKE_CASE
   - defaults
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 Environment configuration failures fall into two categories: security failures (secrets exposed because sensitivity was not marked) and reliability failures (services crash on startup because types are wrong or required variables are missing). A five-field variable specification and explicit sensitivity section address both categories systematically.
 ## Pattern

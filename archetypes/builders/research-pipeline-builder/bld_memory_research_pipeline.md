@@ -17,8 +17,9 @@ tldr: "STORM 5-perspective planning = 25-35x more retrieval. CRAG at 0.7 thresho
 impact_score: 9.2
 decay_rate: 0.02
 keywords: [research, STORM, CRAG, CRITIC, multi-model, retrieval, quality-gate]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 # Learning: research_pipeline
 
 ## Key Insight

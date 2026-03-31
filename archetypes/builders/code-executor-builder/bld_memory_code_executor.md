@@ -18,8 +18,9 @@ impact_score: 8.5
 decay_rate: 0.05
 agent_node: edison
 keywords: [code executor, sandbox, docker, e2b, timeout, network access, resource limits, isolation, security]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 Code executors are the highest-risk P04 kind because they run arbitrary code. The difference between a safe executor and a dangerous one comes down to three mandatory constraints: timeout (prevents resource exhaustion), network policy (prevents data exfiltration), and sandbox type (prevents host access). All three must be explicit in the spec.
 ## Pattern

@@ -18,8 +18,9 @@ impact_score: 7.5
 decay_rate: 0.05
 agent_node: edison
 keywords: [context document, scope boundary, domain scoping, stakeholders, constraints, assumptions, inside outside, clarification]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 A context document's job is eliminating ambiguity about what a piece of work covers. The outside list in the scope section is more valuable than the inside list: consumers know what the work covers from the title; what they need — and almost never get explicitly — is what it does not cover. A missing or vague outside list causes downstream consumers to fill the gap with assumptions that diverge into scope creep, rework, or integration failures.
 ## Pattern

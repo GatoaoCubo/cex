@@ -18,8 +18,9 @@ impact_score: 7.5
 decay_rate: 0.05
 agent_node: edison
 keywords: [prompt version, sequential, branching, optimized, rollback]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 Prompt version — immutable snapshot of a prompt at a point in time with metrics and lineage. The difference between a useful prompt_version and a useless one is concrete values
 with rationale versus placeholder text.

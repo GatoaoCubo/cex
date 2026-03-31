@@ -4,8 +4,9 @@ id: bld_memory_plugin
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for plugin artifact generation
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 # Memory: plugin-builder
 ## Summary
 Plugins are modular extensions with interface contracts, lifecycle management, and API surfaces that extend system capabilities without modifying core code. The critical production lesson is lifecycle completeness — plugins that define load and enable but omit disable and unload create resource leaks and zombie processes. Every lifecycle hook must have its inverse. The second lesson is isolation: plugins must declare their isolation level to prevent one plugin's failure from cascading to others.

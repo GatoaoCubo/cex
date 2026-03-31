@@ -18,8 +18,9 @@ impact_score: 7.5
 decay_rate: 0.05
 agent_node: edison
 keywords: [handoff protocol, fire-and-forget, request-response, streaming, escalation]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 Handoff protocol — trigger conditions, context passed, return contract between agents. The difference between a useful handoff_protocol and a useless one is concrete values
 with rationale versus placeholder text.

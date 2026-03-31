@@ -4,8 +4,9 @@ id: bld_memory_prompt_template
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for prompt_template artifact generation
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 # Memory: prompt-template-builder
 ## Summary
 Prompt templates are reusable molds with variable slots that generate distinct prompts when filled. The critical production insight is separating structure from content — templates define the shape, variable values provide the substance. The most common failure is embedding fixed content into what should be a variable slot, creating a template that looks reusable but produces only one useful output. The second lesson is variable typing: untyped variables accept any value, including values that break the prompt logic.

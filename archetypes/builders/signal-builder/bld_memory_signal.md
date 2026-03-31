@@ -4,8 +4,9 @@ id: bld_memory_signal
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for signal artifact generation
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 # Memory: signal-builder
 ## Summary
 Signals are atomic JSON events exchanged between agents: completion, error, progress, and heartbeat notifications. The critical production lesson is payload minimalism — signals must carry the minimum data needed for the consumer to act. Oversized signals clog event channels and break consumers that expect fixed-size payloads. The second lesson is timestamp precision: signals without ISO 8601 timestamps with timezone are unorderable in distributed systems where agents run on different machines.

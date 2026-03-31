@@ -15,8 +15,9 @@ confidence: 0.85
 quality: null
 tags: [learning_record, document_loader, chunking, metadata, RAG, P04]
 tldr: "Key lessons from document_loader builds: overlap is mandatory, metadata is non-negotiable, parser choice drives quality."
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 Chunk strategy and metadata preservation are the two highest-leverage decisions in
 document_loader design. A loader with wrong chunk_strategy or missing source metadata

@@ -18,8 +18,9 @@ impact_score: 8.0
 decay_rate: 0.05
 agent_node: edison
 keywords: [api client, retry, backoff, pagination, rate limiting, auth, error handling, timeout, serialization]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 An API client spec that omits retry and pagination strategy is a spec for a demo, not a production integration. Both are invisible in happy-path testing and catastrophic at scale. Silent pagination truncation is the most insidious: the client appears to work, returns data, but silently drops records after the first page.
 The second most common failure is the retry storm: a client that retries 429 (rate limited) responses immediately and aggressively, converting a temporary rate limit into a permanent ban.

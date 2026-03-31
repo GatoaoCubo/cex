@@ -12,8 +12,9 @@ quality: 8.7
 tags: [builder, memory, software-project, learnings]
 tldr: "Learnings from codexa-core (145K lines): CORS must be outermost middleware, env vars before imports, multi-stage Docker cuts 600MB, pytest markers save CI time, Railway rollback is instant."
 density_score: 0.89
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 # Memory — Learnings
 
 ## From codexa-core (Production)

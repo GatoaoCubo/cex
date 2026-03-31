@@ -18,8 +18,9 @@ impact_score: 8.0
 decay_rate: 0.04
 agent_node: edison
 keywords: [audio tool, STT, TTS, direction, language codes, BCP-47, model naming, format, sample rate, streaming]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 Audio tools are consumed by voice interfaces, content pipelines, and agents that select STT or TTS paths at runtime. The difference between a tool that routes correctly and one that causes silent format mismatches comes down to three decisions made at spec time: direction declaration, BCP-47 language codes, and explicit model identifiers matching provider documentation.
 A tool that omits direction (or uses a non-enum value), lists languages as free text, or uses model names that differ from the provider API (e.g., "GPT-4o" for audio, "Whisper" instead of "whisper_large_v3") will cause integration failures that are expensive to diagnose.

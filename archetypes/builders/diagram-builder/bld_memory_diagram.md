@@ -33,8 +33,9 @@ keywords:
   - legend
   - annotation
   - zoom level
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 Architecture diagrams fail to communicate when symbols are ambiguous, notation is inconsistent, or scope is too broad. A four-step production process - choose notation and zoom, draw labeled components, add legend, add annotations - produces diagrams that readers interpret correctly on first read without author assistance.
 ## Pattern

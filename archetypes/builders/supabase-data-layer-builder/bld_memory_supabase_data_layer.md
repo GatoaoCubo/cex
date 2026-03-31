@@ -11,8 +11,9 @@ domain: data_platform
 quality: null
 tags: [builder, supabase, data-layer, memory, learnings]
 density_score: 0.85
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 # Builder Memory
 
 ## Summary

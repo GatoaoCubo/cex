@@ -18,8 +18,9 @@ impact_score: 8.5
 decay_rate: 0.03
 agent_node: edison
 keywords: [rate limit, rpm, tpm, budget cap, alert threshold, retry after, provider tier, 429, token bucket, concurrent]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 Rate limit configs are only as good as the accuracy of their numbers. A config with fictional limits creates a false sense of capacity — the runtime enforces the wrong ceiling, and real provider 429s arrive unexpectedly. The second most common failure is missing budget alerts: without alert_threshold, the first signal of overspend is the billing invoice.
 

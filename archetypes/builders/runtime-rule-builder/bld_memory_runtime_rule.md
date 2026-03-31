@@ -4,8 +4,9 @@ id: bld_memory_runtime_rule
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for runtime_rule artifact generation
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 # Memory: runtime-rule-builder
 ## Summary
 Runtime rules specify technical behavior parameters: timeouts, retry strategies, rate limits, concurrency caps, and circuit breaker thresholds. The critical production lesson is that retry strategies without backoff cause thundering herd problems — when a service recovers from an outage, all waiting clients retry simultaneously, causing immediate re-failure. The second lesson is that circuit breakers need explicit recovery probes, not just time-based resets.

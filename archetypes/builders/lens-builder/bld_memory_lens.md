@@ -4,8 +4,9 @@ id: bld_memory_lens
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for lens artifact generation
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 # Memory: lens-builder
 ## Summary
 Lenses are specialized perspective filters applied to artifacts — they define how to look at something, not what to do about it. The most frequent production error is conflating a lens with an agent: lenses have no capabilities, no tools, no execution. They declare a viewpoint with explicit bias, focus scope, and interpretation weight. Successful lenses make their bias transparent rather than hiding it.

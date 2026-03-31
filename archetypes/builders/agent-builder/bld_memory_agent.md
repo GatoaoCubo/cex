@@ -18,8 +18,9 @@ impact_score: 8.0
 decay_rate: 0.05
 agent_node: edison
 keywords: [agent, persona, capabilities, iso-files, architecture, manifest, instructions, vectorstore]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 An agent definition has two orthogonal concerns: who the agent is (persona, reasoning style, communication norms) and what the agent can do (tools, actions, decision protocols). These concerns appear related but evolve at different rates. Persona is stable; capabilities change as new tools become available or existing tools are deprecated.
 The 10-file iso_vectorstore structure enforces this separation physically. MANIFEST holds identity. INSTRUCTIONS holds execution protocol. Individual ISO files hold domain-specific capability definitions. This structure is not bureaucratic overhead - it is the mechanism that allows agents to be updated without persona drift.

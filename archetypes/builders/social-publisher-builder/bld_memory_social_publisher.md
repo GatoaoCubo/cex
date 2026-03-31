@@ -17,8 +17,9 @@ tldr: "Config-driven beats hardcoded. 9352 lines → 150 YAML + 400 universal Py
 impact_score: 9.0
 decay_rate: 0.03
 keywords: [social-publisher, config, reusability, pipeline, automation, anti-pattern]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 # Learning: social_publisher
 
 ## Key Insight

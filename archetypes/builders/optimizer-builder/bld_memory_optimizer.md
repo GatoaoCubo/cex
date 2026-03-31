@@ -4,8 +4,9 @@ id: bld_memory_optimizer
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for optimizer artifact generation
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 # Memory: optimizer-builder
 ## Summary
 Optimizers define the continuous metric-to-action cycle: when a metric crosses a threshold, a specific action fires. The critical production lesson is threshold ordering — trigger, target, and critical thresholds must be correctly ordered relative to the optimization direction (minimize: critical < trigger < target; maximize: critical > trigger > target). Reversed thresholds cause actions to fire at the wrong time or never fire at all.

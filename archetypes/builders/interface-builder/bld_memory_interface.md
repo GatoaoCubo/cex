@@ -18,8 +18,9 @@ impact_score: 7.5
 decay_rate: 0.05
 agent_node: edison
 keywords: [interface, contract, provider, consumer, versioning, backward_compatible, deprecation, method, bilateral]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 Interfaces define bilateral contracts between a provider and a consumer. The most damaging failure is treating an interface as unilateral — defining only one party. The second most damaging failure is incrementing a version number without declaring what happens to old methods. Both failures cause breaking changes that are expensive to debug after deployment.
 ## Pattern

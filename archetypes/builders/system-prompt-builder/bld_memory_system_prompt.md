@@ -4,8 +4,9 @@ id: bld_memory_system_prompt
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for system_prompt artifact generation
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 # Memory: system-prompt-builder
 ## Summary
 System prompts define agent identity: persona, ALWAYS/NEVER rules, knowledge boundaries, and output format. The critical production lesson is that ALWAYS/NEVER rules must include brief justification — rules without rationale get ignored when they conflict with task instructions because the agent cannot weigh their importance. The second lesson is knowledge boundary definition: agents without explicit boundaries hallucinate expertise in domains they should defer to other agents.

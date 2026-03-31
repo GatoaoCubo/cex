@@ -10,6 +10,8 @@ author: builder_agent
 quality: null
 tags: [memory, webhook, P06, learning, patterns, anti-patterns]
 tldr: "Learned patterns from webhook artifact production: security invariants, delivery guarantees, idempotency discipline."
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
 # Memory: webhook-builder
 ## Critical Invariants (learned from failures)

@@ -18,8 +18,9 @@ impact_score: 7.0
 decay_rate: 0.04
 agent_node: edison
 keywords: [glossary, definition, synonym, abbreviation, disambiguation, conciseness, term, cross_pillar, knowledge_card]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 A glossary entry defines one term in 3 lines maximum. Line 1 states what it is. Line 2 scopes it or gives a concrete example. Line 3 disambiguates it from the term most commonly confused with it. Anything beyond 3 lines is a knowledge_card, not a glossary entry.
 ## Pattern

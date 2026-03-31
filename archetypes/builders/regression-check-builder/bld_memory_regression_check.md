@@ -18,8 +18,9 @@ impact_score: 8.0
 decay_rate: 0.03
 agent_node: edison
 keywords: [regression check, baseline ref, threshold, metrics, comparison, Braintrust, Promptfoo, LangSmith, DeepEval, fail action]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 Regression checks are only as reliable as their baseline reference. A check pointing to "the previous version" becomes irreproducible after deployment rotation — experiment IDs and version tags are stable references that survive deployment cycles. The second failure mode is aggregation masking: a composite score can improve while individual dimensions regress (e.g., +8% fluency / -12% factual accuracy nets positive). Per-metric thresholds with directional sensitivity catch what aggregation hides.
 

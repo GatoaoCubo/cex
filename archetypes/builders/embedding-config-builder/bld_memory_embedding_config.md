@@ -34,8 +34,9 @@ keywords:
   - normalization
   - tokenizer
   - dimensions
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 Embedding pipeline misconfiguration produces incorrect similarity rankings that appear to work until retrieval quality is measured quantitatively. The four critical decisions - model/dimensions pairing, chunk size, overlap, and distance metric with normalization - interact: a correct choice in one dimension can be undermined by a wrong choice in another.
 ## Pattern

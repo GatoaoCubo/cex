@@ -4,8 +4,9 @@ id: bld_memory_mental_model
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for mental_model artifact generation
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 # Memory: mental-model-builder
 ## Summary
 Mental models are design-time cognitive maps defining how an agent routes tasks, makes decisions, and prioritizes work. The most impactful production lesson is that routing rules must have confidence thresholds — rules without thresholds trigger on partial keyword matches, causing misroutes. Decision trees need explicit else/fallback branches; agents with incomplete trees silently drop tasks that match no branch.

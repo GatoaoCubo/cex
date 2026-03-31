@@ -4,8 +4,9 @@ id: bld_memory_validation_schema
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for validation_schema artifact generation
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 # Memory: validation-schema-builder
 ## Summary
 Validation schemas are post-generation contracts that the system applies automatically — the LLM never sees them. The critical distinction from response formats (P05) is visibility: response formats are injected into the prompt (LLM sees), validation schemas are applied after generation (system enforces). Confusing these causes either redundant checking or enforcement gaps. The second lesson is on_failure behavior: schemas that only reject without auto_fix options waste regeneration cycles on trivially fixable issues.

@@ -18,8 +18,9 @@ impact_score: 7.5
 decay_rate: 0.04
 agent_node: edison
 keywords: [feature_flag, rollout_percentage, kill_switch, default_state, category, expires, lifecycle, gradual_rollout]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 Feature flags enable gradual rollout and emergency disable without code deployment. The builder must enforce four category types, integer rollout percentages, expiration dates, and kill switch documentation or flags become permanent liabilities that no one knows how to safely disable.
 ## Pattern

@@ -18,8 +18,9 @@ impact_score: 8.5
 decay_rate: 0.03
 agent_node: edison
 keywords: [secret config, rotation policy, access pattern, lease duration, vault, kubernetes secrets, aws secrets manager, encryption, audit log, credential management]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 Secret configs are consumed by agents at runtime under time pressure — a stale credential or misconfigured access pattern causes silent failures that are expensive to diagnose. Three decisions made at spec time determine safety: rotation method explicitness, access pattern precision, and audit logging.
 

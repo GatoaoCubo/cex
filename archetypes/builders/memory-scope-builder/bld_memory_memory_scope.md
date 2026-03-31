@@ -18,8 +18,9 @@ impact_score: 7.5
 decay_rate: 0.05
 agent_node: edison
 keywords: [memory scope, ephemeral, session-scoped, long-term, shared]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 Memory scope config — which memory types an agent uses, backends, TTL, and isolation boundaries. The difference between a useful memory_scope and a useless one is concrete values
 with rationale versus placeholder text.

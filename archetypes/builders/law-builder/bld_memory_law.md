@@ -4,8 +4,9 @@ id: bld_memory_law
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for law artifact generation
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 # Memory: law-builder
 ## Summary
 Building law artifacts requires extreme precision in distinguishing inviolable operational mandates from flexible guidelines. The most common failure mode is producing rules that read like suggestions rather than enforceable mandates. Successful law artifacts always include a concrete enforcement mechanism and explicit exception protocol — without these, the artifact degrades into an instruction.

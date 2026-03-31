@@ -18,8 +18,9 @@ impact_score: 8.0
 decay_rate: 0.05
 agent_node: edison
 keywords: [search tool, web search, semantic search, tavily, serper, brave, exa, max results, cost, api key, rate limit]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 Search tools are the primary way agents access current information, and they are the most likely P04 kind to generate unexpected costs. The three load-bearing constraints are: max_results (prevents token waste), cost_per_query (enables budget tracking), and API key security (prevents credential exposure).
 ## Pattern

@@ -18,8 +18,9 @@ impact_score: 7.5
 decay_rate: 0.05
 agent_node: edison
 keywords: [hook config, pre-build, post-build, on-error, quality-fail, lifecycle, event]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 Hook lifecycle configuration — declares which hooks fire at each build phase. The difference between a useful hook_config and a useless one is clean declaration
 with conditions versus embedded implementation code.

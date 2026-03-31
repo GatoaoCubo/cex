@@ -4,8 +4,9 @@ id: bld_memory_smoke_eval
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for smoke_eval artifact generation
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 # Memory: smoke-eval-builder
 ## Summary
 Smoke evals are fast sanity checks (under 30 seconds) that verify basic component functionality before deeper testing. The critical production lesson is strict timeout enforcement — a smoke eval that takes 60 seconds defeats its purpose as a fast-fail gate. The second lesson is critical path selection: smoke evals must test the minimum set of operations that, if broken, indicate the component is fundamentally non-functional. Testing non-critical paths wastes the tight time budget.

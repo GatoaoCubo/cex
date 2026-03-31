@@ -18,8 +18,9 @@ impact_score: 7.5
 decay_rate: 0.05
 agent_node: edison
 keywords: [output validator, schema validation, regex check, llm-as-judge, fix-and-retry]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 Output validator — checks and corrective actions applied to LLM output AFTER generation. The difference between a useful output_validator and a useless one is concrete values
 with rationale versus placeholder text.

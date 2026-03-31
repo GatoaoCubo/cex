@@ -17,8 +17,9 @@ tldr: "Config-driven monetization: 2-3 dev hours → 5 min for pricing changes. 
 impact_score: 8.5
 decay_rate: 0.03
 keywords: [monetization, pricing, credits, checkout, config, margin, webhook, courses]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 Content monetization has two orthogonal concerns: business logic (what to charge, how
 credits work, what triggers an email) and technical integration (which payment API, which

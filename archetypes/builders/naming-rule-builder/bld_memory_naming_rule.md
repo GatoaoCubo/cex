@@ -4,8 +4,9 @@ id: bld_memory_naming_rule
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for naming_rule artifact generation
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 # Memory: naming-rule-builder
 ## Summary
 Naming rules formalize how artifacts, files, variables, and identifiers are named within a given scope. The critical production insight is that naming rules must be machine-validatable — a regex or glob pattern that can be checked automatically. Rules expressed only in prose ("use descriptive names") fail validation gates and provide no enforcement value. The second lesson is scope precision: a naming rule without explicit scope boundaries gets applied to unintended domains.

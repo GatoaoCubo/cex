@@ -33,8 +33,9 @@ keywords:
   - restart policy
   - resource limits
   - signal handler
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 Long-running background processes fail in predictable ways: premature PID files mislead supervisors, missing signal handlers corrupt state, and shallow health checks hide real degradation. A three-layer design - startup barrier, signal fence, health probe - eliminates the most common failure modes without adding significant complexity.
 ## Pattern

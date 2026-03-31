@@ -4,8 +4,9 @@ id: bld_memory_model_card
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for model_card artifact generation
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 # Memory: model-card-builder
 ## Summary
 Model cards document LLM technical specifications: capabilities, pricing, context windows, and feature booleans. The primary production challenge is data freshness — LLM providers update pricing and capabilities frequently, so cards require explicit last_verified dates and source URLs. The second challenge is capability booleans: features like vision or function calling must be binary true/false, not qualified with partial support.

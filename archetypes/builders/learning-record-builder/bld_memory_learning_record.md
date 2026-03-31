@@ -4,8 +4,9 @@ id: bld_memory_learning_record
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for learning_record artifact generation
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 # Memory: learning-record-builder
 ## Summary
 Learning records capture lived operational experience with structured observation-pattern-evidence pipelines. The critical production insight is that observation must contain only raw facts — injecting interpretation into the observation field corrupts the entire pipeline. Confidence calibration against the observation count scale is the second most common failure: builders default to 0.8-0.9 even for single observations.

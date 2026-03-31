@@ -4,8 +4,9 @@ id: bld_memory_runtime_state
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for runtime_state artifact generation
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 # Memory: runtime-state-builder
 ## Summary
 Runtime states capture the mutable cognitive state that agents accumulate during execution: routing heuristics, tool preferences, priority adjustments, and decision tree refinements. The critical production distinction is from mental models (P02, design-time, immutable during execution) — runtime states evolve within a session based on observations and outcomes. The second lesson is persistence scope: most runtime state is session-scoped, but some state must persist across sessions to accumulate learning.

@@ -18,8 +18,9 @@ impact_score: 7.5
 decay_rate: 0.05
 agent_node: edison
 keywords: [effort, thinking, model, haiku, sonnet, opus, low, medium, high, max]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 Effort and thinking level configuration for builder execution — maps builder to model and reasoning depth.
 The difference between a useful effort_profile and a useless one is concrete model/thinking pairs with rationale versus placeholder text.

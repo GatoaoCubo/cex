@@ -18,8 +18,9 @@ impact_score: 7.5
 decay_rate: 0.05
 agent_node: edison
 keywords: [meta-builder, construction, schema, protocol, archetype, recursive, builder]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 
 Building builders differs from building artifacts directly because the builder itself is not the final product - the artifacts it generates are. This indirection creates a failure mode where the builder author optimizes for their own understanding of the domain rather than for the reproducibility of outputs by others (or by automated systems).

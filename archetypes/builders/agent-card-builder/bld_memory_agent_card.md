@@ -4,8 +4,9 @@ id: bld_memory_director
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for agent_card artifact generation
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 # Memory: agent-card-builder
 ## Summary
 Satellite specs define complete autonomous processing units: role, LLM model, MCP servers, boot sequences, constraints, and dispatch rules. The critical production lesson is that boot sequence ordering matters — MCP connections must be established before any tool-dependent step runs. A single out-of-order boot step causes silent tool failures that manifest only at task execution time. The second lesson is constraint completeness: agent_nodes without explicit resource limits (max concurrent tasks, memory ceiling, timeout) consume unbounded resources.

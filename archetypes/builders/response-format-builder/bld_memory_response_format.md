@@ -4,8 +4,9 @@ id: bld_memory_response_format
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for response_format artifact generation
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 # Memory: response-format-builder
 ## Summary
 Response formats are injected into the LLM prompt to guide how the agent structures its output. The critical distinction from validation schemas is visibility: the LLM sees response formats during generation, while validation schemas are applied post-generation by the system. Confusing these two causes either redundant enforcement (format + schema checking the same thing) or gaps (neither checking). The second lesson is injection point selection: system_prompt injection persists across turns, user_message injection applies to one turn only.

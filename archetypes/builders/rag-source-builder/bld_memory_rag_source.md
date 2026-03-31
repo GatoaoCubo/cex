@@ -4,8 +4,9 @@ id: bld_memory_rag_source
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for rag_source artifact generation
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 # Memory: rag-source-builder
 ## Summary
 RAG sources are lightweight pointers to external data — URLs with freshness tracking, reliability scoring, and crawl scheduling. The critical production lesson is that RAG sources must never contain content, only metadata about where content lives. The moment content is embedded, the artifact becomes a knowledge card, not a source pointer. The second lesson is freshness: sources without last_checked dates and re-check schedules become stale silently.

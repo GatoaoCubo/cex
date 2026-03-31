@@ -18,8 +18,9 @@ impact_score: 8.0
 decay_rate: 0.03
 agent_node: edison
 keywords: [memory summary, retention policy, entity retention, action items, freshness decay, compression method, multi-session, hybrid]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 Memory summaries fail silently when retention policies are implicit. The difference between preserving agent commitments across sessions and losing them comes down to two spec-time decisions: whether action items are explicitly declared as retained, and whether the compression method preserves their exact phrasing.
 

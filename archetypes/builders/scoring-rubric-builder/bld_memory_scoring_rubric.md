@@ -4,8 +4,9 @@ id: bld_memory_scoring_rubric
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for scoring_rubric artifact generation
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 # Memory: scoring-rubric-builder
 ## Summary
 Scoring rubrics define evaluation frameworks with weighted dimensions, tier thresholds, and calibration examples. The critical production lesson is weight balancing — dimensions must sum to exactly 100%, and no single dimension should exceed 40% weight or it dominates the total score regardless of other dimensions. The second lesson is calibration: rubrics without golden test examples produce inconsistent scores between evaluators, with inter-rater variance exceeding 2.0 points on a 10-point scale.

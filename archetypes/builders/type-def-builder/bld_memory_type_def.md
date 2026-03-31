@@ -4,8 +4,9 @@ id: bld_memory_type_def
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for type_def artifact generation
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 # Memory: type-def-builder
 ## Summary
 Type definitions declare reusable data types with base types, constraints, composition rules, and serialization specs. The critical production lesson is constraint completeness — a type without constraints accepts any value of its base type, which is rarely the intent. The second lesson is composition clarity: union types must include discriminator fields, otherwise consumers cannot determine which variant they received without brittle duck-typing.

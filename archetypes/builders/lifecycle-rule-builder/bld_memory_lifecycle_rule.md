@@ -4,8 +4,9 @@ id: bld_memory_lifecycle_rule
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for lifecycle_rule artifact generation
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 # Memory: lifecycle-rule-builder
 ## Summary
 Lifecycle rules define when artifacts change state: creation, review, promotion, deprecation, sunset. The primary production failure is defining transitions without concrete trigger conditions — "review periodically" is not a lifecycle rule; "review when score drops below 7.0 or age exceeds 90 days" is. Every transition needs a measurable trigger, a responsible owner, and a target state.

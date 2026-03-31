@@ -18,8 +18,9 @@ impact_score: 8.0
 decay_rate: 0.04
 agent_node: edison
 keywords: [checkpoint, workflow state, ttl, resume, state minimization, chain, rollback, orphan]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 Checkpoints are only useful if they can be found and restored. Three properties make or break checkpoint utility: TTL enforcement (prevents orphan accumulation), workflow_ref presence (enables association during incident recovery), and state minimization (determines restore speed). The most expensive failure is a checkpoint that exists but cannot be used — correct id and step, but missing workflow_ref blocks recovery tooling.
 

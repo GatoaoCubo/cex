@@ -18,8 +18,9 @@ impact_score: 7.0
 decay_rate: 0.05
 agent_node: edison
 keywords: [input_schema, validation, required, optional, default, coercion, type, error_message, contract]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 Input schemas define the contract between a caller and a component. The most common failure mode is semantic confusion between required and optional: a required field with a default is a contradiction, and an optional field without a default creates None propagation bugs. Getting these two rules right eliminates the majority of runtime validation failures.
 ## Pattern

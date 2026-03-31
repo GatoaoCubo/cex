@@ -4,8 +4,9 @@ id: bld_memory_router
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for router artifact generation
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 # Memory: router-builder
 ## Summary
 Routers contain task-to-destination routing logic with route tables, confidence thresholds, and fallback policies. The critical production lesson is that every route table must have a default/fallback route — without one, unmatched tasks are silently dropped. The second lesson is confidence threshold calibration: thresholds set too low cause false matches (wrong destination), thresholds set too high cause excessive fallback usage (overloading the default handler).

@@ -4,8 +4,9 @@ id: bld_memory_pattern
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for pattern artifact generation
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 # Memory: pattern-builder
 ## Summary
 Patterns document reusable architecture solutions with named problem-solution pairs. The critical production insight is that patterns must be genuinely reusable — if a solution has been applied only once, it is a case study, not a pattern. The second lesson is that forces and consequences must be balanced: every benefit claimed in consequences should trace back to a force it resolves.

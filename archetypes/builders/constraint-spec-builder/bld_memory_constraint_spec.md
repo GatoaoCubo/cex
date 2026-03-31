@@ -18,8 +18,9 @@ impact_score: 7.5
 decay_rate: 0.05
 agent_node: edison
 keywords: [constraint spec, regex, enum/choice, json schema, grammar (cfg)]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 Constraint spec — rules that govern the LLM decoder during generation (grammar, regex, enum, schema). The difference between a useful constraint_spec and a useless one is concrete values
 with rationale versus placeholder text.

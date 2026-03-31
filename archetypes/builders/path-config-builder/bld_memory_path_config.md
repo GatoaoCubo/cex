@@ -4,8 +4,9 @@ id: bld_memory_path_config
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for path_config artifact generation
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 # Memory: path-config-builder
 ## Summary
 Path configs specify filesystem paths with platform awareness, validation rules, and directory hierarchies. The critical production lesson is platform separator handling — paths must work on both Windows (backslash) and Unix (forward slash) without manual conversion. The second lesson is that relative paths without an explicit base resolution rule are ambiguous and break when the working directory changes.

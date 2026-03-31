@@ -18,8 +18,9 @@ impact_score: 7.5
 decay_rate: 0.05
 agent_node: edison
 keywords: [guardrail, severity, enforcement, block, warn, log, bypass_policy, concrete_rule, safety, access_control]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 A guardrail defines safety restrictions with concrete, matchable rules and explicit enforcement. Its value comes from being unambiguous — the enforcement layer must be able to evaluate whether a given input or output triggers the rule. Severity classification drives enforcement mode, and every guardrail must document how it can be bypassed in an emergency.
 ## Pattern

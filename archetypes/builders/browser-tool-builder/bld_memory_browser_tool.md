@@ -18,8 +18,9 @@ impact_score: 8.0
 decay_rate: 0.04
 agent_node: edison
 keywords: [browser tool, selector fallback, playwright, timeout, action structure, stealth, headless, DOM extraction]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 Browser automation tools are consumed by agents and pipelines that cannot gracefully handle silent extraction failures. The difference between a resilient browser_tool and a brittle one comes down to two spec-time decisions: selector fallback chain and timeout declaration. Both are invisible during happy-path execution and catastrophic on failure if undefined.
 A tool that targets `.price-current` as its only price selector will silently return null after any frontend CSS refactor. A tool with no timeout will hang indefinitely in CI environments where network conditions are unpredictable.

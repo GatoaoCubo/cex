@@ -18,8 +18,9 @@ impact_score: 7.5
 decay_rate: 0.05
 agent_node: edison
 keywords: [component map, architecture mapping, orphan detection, connection direction, data flow, dependency, scope boundary, ownership]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 A component map's value is making hidden dependencies visible. Orphan components — listed in the component table but absent from connections — destroy that value. Orphans signal either truly isolated components (rare, annotate explicitly) or omitted connections (common, dangerous).
 The second most common failure is undirected connections ("A relates to B"): structural information without operational information. Direction is what makes a map reasoned from vs. merely looked at.

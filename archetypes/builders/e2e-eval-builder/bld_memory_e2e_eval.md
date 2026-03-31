@@ -33,8 +33,9 @@ keywords:
   - timeout
   - cleanup
   - test isolation
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 End-to-end pipeline evaluations fail to catch real bugs when stages are disconnected, assertions only appear at the final output, or timeout values are borrowed from unit tests. A well-structured e2e eval specifies data lineage through the pipeline, asserts correctness at every stage boundary, scales timeouts to pipeline depth, and restores environment state after each run.
 ## Pattern

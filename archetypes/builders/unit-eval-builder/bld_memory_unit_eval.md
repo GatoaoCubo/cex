@@ -4,8 +4,9 @@ id: bld_memory_unit_eval
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for unit_eval artifact generation
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 # Memory: unit-eval-builder
 ## Summary
 Unit evals test individual agent or prompt correctness in isolation with specific input-expected_output-assertion triples. The critical production lesson is isolation completeness — unit evals that depend on external state (database content, API availability, other agents) are integration tests mislabeled as unit tests. They fail intermittently and erode trust in the test suite. The second lesson is assertion specificity: assertions that check "output contains keyword" miss structural and semantic failures.

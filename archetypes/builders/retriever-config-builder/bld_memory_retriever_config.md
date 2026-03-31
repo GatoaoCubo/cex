@@ -18,8 +18,9 @@ impact_score: 7.5
 decay_rate: 0.05
 agent_node: edison
 keywords: [retriever config, dense-only, sparse-only, hybrid, reranked]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 Retrieval parameters — how to search and rank chunks from a vector/hybrid store. The difference between a useful retriever_config and a useless one is concrete values
 with rationale versus placeholder text.

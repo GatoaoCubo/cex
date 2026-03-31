@@ -18,8 +18,9 @@ impact_score: 8.0
 decay_rate: 0.03
 agent_node: edison
 keywords: [ADR, architecture decision, context, consequences, options, status, supersede, rationale]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 ADRs fail in two ways: never written, or written incompletely. The second is more insidious — a reader finds an ADR and trusts it without realizing the rationale is incomplete or context has changed. The context section is the most load-bearing field: it answers whether to still follow the decision, or whether the situation has changed.
 

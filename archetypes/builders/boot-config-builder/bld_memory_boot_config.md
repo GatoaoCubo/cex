@@ -18,8 +18,9 @@ impact_score: 7.4
 decay_rate: 0.10
 agent_node: edison
 keywords: [boot-config, provider, identity-block, context-window, tokens, timeout, tools, MCP]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 Boot configuration defines how an AI system initializes: identity, constraints, available tools, and provider-specific parameters. The highest-risk design decision is whether to use shared configuration blocks across providers or per-provider blocks. Shared blocks appear to reduce duplication but create hidden compatibility mismatches.
 Provider constraint differences (context window: 8K vs 200K, timeout: 30s vs 300s, tool calling formats) mean that a value valid for one provider silently violates another. Per-provider blocks make these differences explicit and auditable.

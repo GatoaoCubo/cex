@@ -33,8 +33,9 @@ keywords:
   - model selection
   - priority
   - executor
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 Routing rules that match tasks to executors fail in two directions: too narrow (low recall, tasks fall through to default) or too broad (low precision, wrong executor receives tasks). A disciplined keyword set, calibrated confidence threshold, and distinct fallback executor together achieve high recall and precision with a safety net for every miss.
 ## Pattern

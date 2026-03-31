@@ -18,8 +18,9 @@ impact_score: 7.5
 decay_rate: 0.04
 agent_node: edison
 keywords: [few_shot, format_teaching, difficulty_calibration, output_demonstration, input_specificity, edge_case, explanation]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 Few-shot examples teach a model what format to produce, not what content to generate. The output field must be an actual demonstration of the target format. Difficulty must be calibrated across a set — easy examples establish the baseline, medium ones show variation, hard ones handle edge cases. The body limit is 1024 bytes, the tightest in the P01 pillar.
 ## Pattern

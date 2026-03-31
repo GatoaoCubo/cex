@@ -4,8 +4,9 @@ id: bld_memory_workflow
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for workflow artifact generation
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 # Memory: workflow-builder
 ## Summary
 Workflows orchestrate multi-step execution with sequential and parallel agents, signals, and dependency resolution. The critical production lesson is dependency explicitness — implicit dependencies between steps cause race conditions in parallel execution. Every data dependency between steps must be declared as an explicit edge in the workflow graph. The second lesson is error recovery: workflows without per-step error handling abort entirely on the first failure, wasting all completed work.

@@ -4,8 +4,9 @@ id: bld_memory_mcp_server
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for mcp_server artifact generation
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 # Memory: mcp-server-builder
 ## Summary
 MCP server artifacts define how tools and resources are exposed to LLM agents via the Model Context Protocol. The critical production lesson is transport selection: stdio for local single-process, SSE for streaming over HTTP, HTTP for stateless request-response. Choosing the wrong transport causes silent failures — stdio servers cannot serve multiple concurrent agents, and SSE servers require persistent connections that some proxies terminate.

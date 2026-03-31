@@ -18,8 +18,9 @@ impact_score: 7.5
 decay_rate: 0.05
 agent_node: edison
 keywords: [enum, enumeration, values, descriptions, extensible, deprecated, naming, JSON Schema, Pydantic, Zod, GraphQL, TypeScript]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 Enumerations appear simple but consumer misuse concentrates in two spec-time decisions: whether each value has a clear description, and whether the set is declared open or closed. A value named `inactive` without a description will be confused with `archived`, `deprecated`, and `disabled`. An enum without `extensible` forces consumers to guess whether exhaustive match is safe — guessing wrong causes runtime panics in strongly-typed languages.
 ## Pattern

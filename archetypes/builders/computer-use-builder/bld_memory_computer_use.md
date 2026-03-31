@@ -18,8 +18,9 @@ impact_score: 8.0
 decay_rate: 0.05
 agent_node: edison
 keywords: [computer use, screen control, screenshot, coordinates, resolution, safety, mouse, keyboard, gui automation]
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 ## Summary
 Computer use tools are the most visually dependent P04 kind — the LLM literally cannot act without seeing the screen. The observe-act loop (screenshot -> interpret -> act) is not optional; skipping screenshots causes the LLM to act on stale information, resulting in clicks on wrong coordinates, invisible elements, or changed layouts.
 ## Pattern

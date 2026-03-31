@@ -4,8 +4,9 @@ id: bld_memory_quality_gate
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for quality_gate artifact generation
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
-
 # Memory: quality-gate-builder
 ## Summary
 Quality gates are pass/fail barriers with numeric scoring that artifacts must clear before shipping. The critical production lesson is the HARD/SOFT distinction: HARD gates block (fail = reject), SOFT gates score (low = penalty but not rejection). Mixing these causes either false rejections (SOFT treated as HARD) or quality leaks (HARD treated as SOFT). The second lesson is that scoring formulas must have weights summing to exactly 100% — weights that sum to more or less create score inflation or deflation.
