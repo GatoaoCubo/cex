@@ -63,21 +63,8 @@ purpose: Tools, APIs, and data sources for content monetization pipeline
 | TikTok Ads | Marketing API | TIKTOK_ACCESS_TOKEN | R$50/day | Gen-Z, viral content |
 | LinkedIn Ads | Marketing API | LINKEDIN_TOKEN | $10/day | B2B, professional |
 
-## LLM Cost Reference (for credit pricing)
-| Model | Input $/1K tok | Output $/1K tok | Best For |
-|-------|---------------|-----------------|----------|
-| Claude Sonnet 4 | $0.003 | $0.015 | Content generation |
-| GPT-4o-mini | $0.00015 | $0.0006 | Classification, extraction |
-| Gemini 2.5 Flash | $0.00015 | $0.0035 | Bulk processing |
-| Claude Opus 4 | $0.015 | $0.075 | Complex reasoning |
-
 ## Course Platforms
-| Platform | Integration | Auth | Features |
-|----------|------------|------|----------|
-| Hotmart Club | Hotmart API | HOTMART_TOKEN | Native to Hotmart checkout |
-| Teachable | REST API | TEACHABLE_API_KEY | Standalone, customizable |
-| Thinkific | REST API | THINKIFIC_API_KEY | Standalone, communities |
-| Custom LMS | Direct DB | DB connection | Full control, self-hosted |
+Hotmart Club (native), Teachable, Thinkific, DS24 member area, Custom LMS.
 
 ## CEX Production Tools
 | Tool | Purpose | When |

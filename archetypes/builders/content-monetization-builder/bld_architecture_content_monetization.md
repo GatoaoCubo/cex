@@ -57,64 +57,36 @@ config ──► parser ──► pricing_engine
 | validation_engine | S8 | full config | all providers (mock) |
 | deploy_cutover | S9 | validated config | production env |
 
-## Multi-Platform Webhook Flows
-
-### Platform A — Hotmart (BR)
-```
-Hotmart → POST JSON → webhook_handler_hotmart
-  → verify sha256 HMAC (X-Hotmart-Hottok header)
-  → parse JSON body → extract event type
-  → events: PURCHASE_COMPLETE, PURCHASE_CANCELED, PURCHASE_REFUNDED,
-            PURCHASE_CHARGEBACK, SUBSCRIPTION_CANCELLATION, SWITCH_PLAN
-  → dedup via idempotency_key (transaction_id)
-  → provision/revoke access → acknowledge 200 OK
-```
-
-### Platform B — Digistore24 (International)
-```
-Digistore24 → POST form-encoded (NOT JSON) → webhook_handler_ds24
-  → verify sha512 hash (ipn_passphrase + payload fields)
-  → parse form-encoded body → extract event_name
-  → events: on_payment, on_refund, on_chargeback, on_rebill_resumed,
-            on_rebill_cancelled, on_affiliatelink, on_invoice_created, on_payment_missed
-  → dedup via idempotency_key (order_id)
-  → provision/revoke access → respond with exact body "OK" (not JSON, not HTML)
-  → CRITICAL: DS24 retries if response != "OK"
-```
-
-### Platform Comparison
+## Multi-Platform Webhook Comparison
 | Aspect | Hotmart (BR) | Digistore24 (INT) |
 |--------|-------------|-------------------|
-| Payload format | JSON | form-encoded |
-| Signature | sha256 HMAC | sha512 hash |
-| Auth header | X-Hotmart-Hottok | ipn_passphrase in payload |
+| Format | JSON | form-encoded (NOT JSON) |
+| Signature | sha256 HMAC (X-Hotmart-Hottok) | sha512 hash (ipn_passphrase) |
 | Response | HTTP 200 (any body) | body must be exact "OK" |
-| Retry behavior | exponential backoff | retries until "OK" received |
-| Merchant of Record | seller | DS24 (handles EU VAT) |
+| Events | PURCHASE_COMPLETE, _CANCELED, _REFUNDED, _CHARGEBACK | on_payment, on_refund, on_chargeback, on_rebill_* |
+| Idempotency key | transaction_id | order_id |
+| MoR | seller | DS24 (handles EU VAT) |
 | Currency | BRL | EUR (multi-currency) |
-| Affiliate tracking | via Hotmart Marketplace | via DS24 Marketplace |
 
 ## Dependency Graph
 ```
-knowledge_card ──produces──► content_monetization ──consumed_by──► checkout_flow
-research_pipeline ──feeds──► content_monetization ──consumed_by──► email_automation
-social_publisher ──feeds──► content_monetization ──consumed_by──► ad_campaign
-prompt_template ──produces──► content_monetization ──consumed_by──► course_platform
+knowledge_card ──► content_monetization ──► checkout_flow
+research_pipeline ──► content_monetization ──► email_automation
+social_publisher ──► content_monetization ──► ad_campaign
 ```
 
 ## Position in CEX
 | Layer | Location |
 |-------|----------|
-| Template + Examples | P04_tools/{templates,examples}/ |
-| Nucleus instance | N06_commercial/{tools,knowledge,orchestration}/ |
-| Company config | _instances/{co}/N06_commercial/ |
+| Templates | P04_tools/{templates,examples}/ |
+| Nucleus | N06_commercial/ |
+| Instance | _instances/{co}/N06_commercial/ |
 
-## Boundary Table
-| This Builder | Other Builder |
-|-------------|---------------|
-| Pricing strategy + config schema | Python checkout code → cli-tool-builder |
-| Credit system design | Credit API implementation → api-client-builder |
-| Course structure + modules | Course platform deployment → spawn-config-builder |
-| Ad campaign architecture | Ad copy + creatives → social-publisher-builder |
-| Email sequence triggers | Email template copy → prompt-template-builder |
-| Margin validation logic | Accounting/ERP integration → db-connector-builder |
+## Boundaries
+| This Builder | Delegates To |
+|-------------|-------------|
+| Pricing + config schema | checkout code → cli-tool-builder |
+| Credit system design | credit API → api-client-builder |
+| Course structure | platform deploy → spawn-config-builder |
+| Ad campaign arch | ad copy → social-publisher-builder |
+| Email triggers | email copy → prompt-template-builder |

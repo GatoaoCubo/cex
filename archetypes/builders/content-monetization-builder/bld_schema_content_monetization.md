@@ -36,12 +36,8 @@ pattern: CONFIG derives from this. TEMPLATE renders this.
 ### credits (required)
 | Field | Type | Required | Default |
 |-------|------|----------|---------|
-| unit_name | string | YES | "credit" |
-| pipeline_costs | map[string,integer] | YES | {research: 50, publish: 10} |
-| packs | list[pack_object] | NO | - |
-| pack.name | string | YES | "starter_pack" |
-| pack.credits | integer | YES | 500 |
-| pack.price | integer (centavos) | YES | 2990 |
+| pipeline_costs | map[string,int] | YES | {research: 50} |
+| packs | list[pack] | NO | - |
 | overdraft_policy | enum(block,notify_then_block,allow_negative) | YES | "block" |
 | rollover | boolean | NO | false |
 
@@ -56,31 +52,27 @@ pattern: CONFIG derives from this. TEMPLATE renders this.
 | cancel_redirect | string (URL) | YES | - |
 | mock_mode | boolean | NO | true |
 
-### checkout_ds24 (required when provider=digistore24)
-| Field | Type | Required | Default |
-|-------|------|----------|---------|
-| ds24_product_id | string | YES | - |
-| ds24_api_key_env | string (ENV_VAR) | YES | "DS24_API_KEY" |
-| ipn_url | string (URL) | YES | - |
-| ipn_passphrase_env | string (ENV_VAR) | YES | "DS24_IPN_PASSPHRASE" |
-| ipn_format | const("form-encoded") | YES | "form-encoded" |
-| ipn_response | const("OK") | YES | "OK" |
-| signature_algo | const("sha512") | YES | "sha512" |
-| merchant_of_record | enum(ds24,self) | YES | "ds24" |
-| eu_vat_included | boolean | YES | true |
-| languages | list[enum(de,en,es,fr,it,nl,pl)] | NO | ["de","en"] |
-| payment_methods | map[country_code, list[string]] | NO | - |
+### checkout_ds24 (when provider=digistore24)
+| Field | Type | Default |
+|-------|------|---------|
+| ds24_product_id | string | - |
+| ds24_api_key_env | ENV_VAR | "DS24_API_KEY" |
+| ipn_url | URL | - |
+| ipn_passphrase_env | ENV_VAR | "DS24_IPN_PASSPHRASE" |
+| ipn_format | const | "form-encoded" |
+| ipn_response | const | "OK" |
+| signature_algo | const | "sha512" |
+| merchant_of_record | enum(ds24,self) | "ds24" |
+| eu_vat_included | boolean | true |
 
-### checkout_hotmart (required when provider=hotmart)
-| Field | Type | Required | Default |
-|-------|------|----------|---------|
-| hotmart_product_id | string | YES | - |
-| hotmart_token_env | string (ENV_VAR) | YES | "HOTMART_TOKEN" |
-| hottok_env | string (ENV_VAR) | YES | "HOTMART_HOTTOK" |
-| webhook_format | const("json") | YES | "json" |
-| signature_algo | const("sha256_hmac") | YES | "sha256_hmac" |
-| affiliate_enabled | boolean | NO | false |
-| affiliate_commission_pct | float (0.0-1.0) | NO | 0.40 |
+### checkout_hotmart (when provider=hotmart)
+| Field | Type | Default |
+|-------|------|---------|
+| hotmart_product_id | string | - |
+| hotmart_token_env | ENV_VAR | "HOTMART_TOKEN" |
+| hottok_env | ENV_VAR | "HOTMART_HOTTOK" |
+| webhook_format | const | "json" |
+| signature_algo | const | "sha256_hmac" |
 
 ### courses (optional)
 | Field | Type | Required | Default |
@@ -94,36 +86,22 @@ pattern: CONFIG derives from this. TEMPLATE renders this.
 | completion_threshold | float (0.0-1.0) | NO | 0.80 |
 
 ### ads (optional)
-| Field | Type | Required | Default |
-|-------|------|----------|---------|
-| enabled | boolean | YES | false |
-| platforms | list[enum(meta,google,tiktok,linkedin)] | COND | - |
-| monthly_budget | integer (centavos) | COND | - |
-| target_cpa | integer (centavos) | NO | - |
-| pixel_env | string (ENV_VAR) | COND | "META_PIXEL_ID" |
+| Field | Type | Default |
+|-------|------|---------|
+| platforms | list[enum(meta,google,tiktok,linkedin)] | - |
+| monthly_budget | int (centavos) | - |
+| pixel_env | ENV_VAR | "META_PIXEL_ID" |
 
 ### emails (optional)
-| Field | Type | Required | Default |
-|-------|------|----------|---------|
-| provider | enum(resend,sendgrid,ses,mailchimp) | COND | "resend" |
-| api_key_env | string (ENV_VAR) | COND | "EMAIL_API_KEY" |
-| sequences | list[sequence_object] | COND | - |
-| sequence.name | string | YES | "onboarding" |
-| sequence.trigger | string | YES | "signup" |
-| sequence.emails | list[email_step] | YES | - |
+| Field | Type | Default |
+|-------|------|---------|
+| provider | enum(resend,sendgrid,ses,mailchimp) | "resend" |
+| api_key_env | ENV_VAR | "EMAIL_API_KEY" |
+| sequences | list[sequence] | - |
 
 ### validation (required)
-| Field | Type | Required | Default |
-|-------|------|----------|---------|
-| margin_check | boolean | YES | true |
-| webhook_test | boolean | YES | true |
-| mock_before_live | boolean | YES | true |
+margin_check: true, webhook_test: true, mock_before_live: true
 
-## Validation Rules
-1. All price fields in centavos/cents — NEVER decimals
-2. floor_margin_pct >= 0.30 (30% minimum margin)
-3. API keys/secrets: NEVER plaintext → always ENV_VAR (SCREAMING_SNAKE_CASE)
-4. webhook_secret_env must end with _SECRET or _KEY
-5. credits.pipeline_costs values must be positive integers
-6. tiers must have at least 1 entry (free tier counts)
-7. mock_mode: true in dev/staging, false only in production
+## Rules
+1. Prices in centavos/cents (integers). 2. floor_margin >= 0.30.
+3. Secrets: ENV_VAR only. 4. mock_mode: true in dev. 5. Min 1 tier.

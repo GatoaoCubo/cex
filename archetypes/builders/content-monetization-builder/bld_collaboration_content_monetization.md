@@ -27,24 +27,20 @@ I produce monetization architecture + config schema so downstream builders imple
 6. spawn-config-builder        → "cron: credit refresh, email scheduler, ad sync"
 ```
 
-### Crew: "Multi-Platform Launch" (NEW — Hotmart BR + DS24 INT)
+### Crew: "Multi-Platform Launch" (Hotmart BR + DS24 INT)
 ```
-1. research-pipeline-builder    → "platform research: Hotmart API, DS24 API, compliance"
+1. research-pipeline-builder    → "platform research: Hotmart+DS24 API, compliance"
 2. content-monetization-builder → "dual-platform config: Hotmart(BR) + DS24(INT)"
-3. api-client-builder           → "Hotmart webhook handler (JSON/sha256) + DS24 IPN handler (form/sha512)"
-4. prompt-template-builder      → "sales page copy (PT-BR + EN/DE), email sequences"
-5. cli-tool-builder             → "multi-platform checkout router (geo-detect → provider)"
-6. formatter-builder            → "landing pages: BR variant + INT variant"
-7. social-publisher-builder     → "launch campaigns: Meta(BR) + Google(INT)"
+3. api-client-builder           → "Hotmart webhook (JSON/sha256) + DS24 IPN (form/sha512)"
+4. prompt-template-builder      → "copy (PT-BR + EN/DE), email sequences"
+5. cli-tool-builder             → "checkout router (geo-detect → provider)"
 ```
-Launch flow: research → build configs → implement handlers → write copy → deploy pages → launch campaigns
 
 ### Crew: "Infoproduct Launch"
 ```
 1. content-monetization-builder → "pricing + checkout + course structure"
 2. social-publisher-builder     → "launch campaign posts"
 3. prompt-template-builder      → "sales page copy + email sequences"
-4. formatter-builder            → "landing page template"
 ```
 
 ### Crew: "SaaS Credit System"
@@ -82,10 +78,4 @@ Launch flow: research → build configs → implement handlers → write copy �
 | Knowledge docs | N04 (knowledge) | Platform KCs, credit system docs |
 
 ## Relationship to Social Publisher
-```
-Content Monetization (PRICING)      Social Publisher (AWARENESS)
-  price → checkout → deliver  →→→    generate → schedule → publish
-  N06_commercial                     N02_marketing
-  Billing + Credits + Courses        Calendar + API + Rotation
-```
-Together: MONETIZE content → PROMOTE via social → CONVERT via checkout → RETAIN via email.
+MONETIZE (this) → PROMOTE (social-publisher) → CONVERT (checkout) → RETAIN (email).
