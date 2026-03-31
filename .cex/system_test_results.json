@@ -1,10 +1,10 @@
 {
-  "timestamp": "2026-03-31T10:28:27.778181",
+  "timestamp": "2026-03-31T12:09:03.741024",
   "pass": 52,
-  "fail": 0,
-  "skip": 1,
-  "total": 53,
-  "elapsed_s": 11.2,
+  "fail": 2,
+  "skip": 0,
+  "total": 54,
+  "elapsed_s": 63.3,
   "tests": [
     {
       "name": "tool:cex_8f_motor.py",
@@ -68,8 +68,8 @@
     },
     {
       "name": "doctor:zero_warn",
-      "status": "PASS",
-      "detail": "0 WARN"
+      "status": "FAIL",
+      "detail": "3 WARN"
     },
     {
       "name": "doctor:zero_fail",
@@ -79,12 +79,12 @@
     {
       "name": "compile:all",
       "status": "PASS",
-      "detail": "245/245"
+      "detail": "257/257"
     },
     {
       "name": "builders:count",
       "status": "PASS",
-      "detail": "99 builders"
+      "detail": "102 builders"
     },
     {
       "name": "builders:13_isos",
@@ -94,12 +94,12 @@
     {
       "name": "nucleus:N01_intelligence",
       "status": "PASS",
-      "detail": "15 artifacts (min 11)"
+      "detail": "20 artifacts (min 11)"
     },
     {
       "name": "nucleus:N02_marketing",
       "status": "PASS",
-      "detail": "10 artifacts (min 10)"
+      "detail": "14 artifacts (min 10)"
     },
     {
       "name": "nucleus:N03_engineering",
@@ -109,7 +109,7 @@
     {
       "name": "nucleus:N04_knowledge",
       "status": "PASS",
-      "detail": "12 artifacts (min 12)"
+      "detail": "18 artifacts (min 12)"
     },
     {
       "name": "nucleus:N05_operations",
@@ -124,22 +124,22 @@
     {
       "name": "nucleus:N07_admin",
       "status": "PASS",
-      "detail": "13 artifacts (min 13)"
+      "detail": "14 artifacts (min 13)"
     },
     {
       "name": "quality:zero_null",
-      "status": "PASS",
-      "detail": "0 quality:null remaining"
+      "status": "FAIL",
+      "detail": "9 quality:null remaining"
     },
     {
       "name": "quality:scored",
       "status": "PASS",
-      "detail": "103 artifacts with quality score"
+      "detail": "110 artifacts with quality score"
     },
     {
       "name": "subagents:count",
       "status": "PASS",
-      "detail": "101 sub-agents"
+      "detail": "104 sub-agents"
     },
     {
       "name": "subagents:materializer",
@@ -252,9 +252,14 @@
       "detail": ""
     },
     {
-      "name": "runner:execute",
-      "status": "SKIP",
-      "detail": "skipped in --quick mode"
+      "name": "runner:execute_pass",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "name": "runner:learning_record",
+      "status": "PASS",
+      "detail": "3 records"
     },
     {
       "name": "kc:count",
@@ -264,12 +269,12 @@
     {
       "name": "git:clean",
       "status": "PASS",
-      "detail": "0 dirty files"
+      "detail": "2 dirty files"
     },
     {
       "name": "git:has_commits",
       "status": "PASS",
-      "detail": "87950e8 [N07] repo consolidation â€” clean stale dirs, fill "
+      "detail": "e55c4e6 [8F] knowledge_card: create a knowledge card about s"
     }
   ]
 }
