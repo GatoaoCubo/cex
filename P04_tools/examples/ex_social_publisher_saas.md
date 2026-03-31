@@ -1,0 +1,88 @@
+---
+id: ex_social_publisher_saas
+kind: cli_tool
+pillar: P04
+title: "Social Publisher — B2B SaaS (Professional Niche)"
+version: 1.0.0
+created: 2026-03-31
+author: social-publisher-builder
+domain: social_publisher
+quality: 8.7
+tags: [social-publisher, example, saas, b2b, linkedin, twitter]
+tldr: "Config for B2B SaaS — LinkedIn+Twitter, CMS API catalog, thought-leadership content strategy with business-hours posting."
+density_score: 0.88
+---
+
+# Social Publisher — B2B SaaS
+
+## About
+Config for a B2B SaaS analytics platform. LinkedIn and Twitter focused, with thought-leadership content and data-driven case studies. Business-hours posting aligned to US Eastern timezone.
+
+## Config
+```yaml
+identity:
+  empresa: "CloudMetrics"
+  handle: "@cloudmetrics"
+  nicho: saas
+  tom: "professional, data-driven, authoritative"
+  persona: "Alex"
+  bio: "Real-time analytics for modern engineering teams 📊"
+
+platforms: [linkedin, twitter]
+
+schedule:
+  timezone: "US/Eastern"
+  calendar:
+    monday:    { type: educational, time: "09:00" }
+    tuesday:   { type: product, time: "10:00" }
+    wednesday: { type: tips, time: "09:00" }
+    thursday:  { type: educational, time: "10:00" }
+    friday:    { type: trend, time: "09:00" }
+    saturday:  { type: educational, time: "10:00" }
+    sunday:    { type: tips, time: "11:00" }
+
+content_mix:
+  product: 25
+  educational: 40
+  tips: 25
+  trends: 10
+
+catalog:
+  type: api
+  url_env: CMS_API_URL
+  key_env: CMS_API_KEY
+  table: blog_posts
+  cooldown_days: 7
+
+publisher:
+  type: postiz
+  base_url_env: POSTIZ_URL
+  api_key_env: POSTIZ_API_KEY
+  batch_size: 2
+  retry:
+    max: 3
+    backoff: exponential
+    base_seconds: 60
+
+hashtags:
+  brand: ["cloudmetrics", "realtimeanalytics"]
+  niche: ["devtools", "observability", "dataengineering", "saas"]
+  max_per_post: 5
+
+notifications:
+  type: slack
+  webhook_env: SLACK_WEBHOOK_URL
+
+cron:
+  type: crontab
+  interval: daily
+```
+
+## Niche Notes
+- **LinkedIn dominance**: B2B audience is on LinkedIn 9-11am; Twitter supplements with quick takes
+- **High educational %** (40): SaaS buyers research before purchase → thought leadership builds trust
+- **Low product %** (25): direct promotion on LI/TW feels spammy → wrap in case studies
+- **Long cooldown** (7 days): B2B content has longer shelf life, reposting feels repetitive
+- **Postiz (self-hosted)**: SaaS companies prefer self-hosted for data control and no vendor lock-in
+- **Twitter brevity**: 280 chars forces punchy, data-driven hooks ("We analyzed 10M events...")
+- **Weekend posting** (Sat/Sun reduced): B2B engagement drops 60% on weekends
