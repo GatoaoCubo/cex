@@ -12,6 +12,7 @@ references:
 - ex_chain_research_pipeline
 - ex_agent_copywriter
 - ex_skill_web_scraper
+quality: null
 links:
 - 'Routes to: [[ex_chain_research_pipeline]]'
 - 'Uses: [[ex_skill_web_scraper]]'

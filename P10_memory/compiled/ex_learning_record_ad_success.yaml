@@ -11,6 +11,7 @@ references:
 - tpl_learning_record
 - ex_agent_copywriter
 - ex_quality_gate_copy
+quality: null
 links:
 - 'Agent: [[ex_agent_copywriter]]'
 - 'Gate used: [[ex_quality_gate_copy]]'

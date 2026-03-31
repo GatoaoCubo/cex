@@ -53,6 +53,14 @@ from cex_8f_motor import (
     generate_output,
 )
 from cex_intent import execute_prompt
+from cex_shared import (
+    find_builder_dir as _shared_find_builder_dir,
+    load_iso as _shared_load_iso,
+    strip_frontmatter as _shared_strip_frontmatter,
+    extract_frontmatter_dict as _shared_extract_frontmatter_dict,
+    load_yaml,
+    BUILDER_DIR as _SHARED_BUILDER_DIR,
+)
 
 # Load .env for API keys
 for _ep in [CEX_ROOT / ".env", CEX_ROOT.parent / "organization-core" / ".env"]:
@@ -151,82 +159,15 @@ class RunState:
 # ---------------------------------------------------------------------------
 
 
-def find_builder_dir(kind: str) -> Path | None:
-    """Locate builder directory for a CEX kind."""
-    slug = kind.replace("_", "-")
-    direct = BUILDER_DIR / f"{slug}-builder"
-    if direct.exists():
-        return direct
-    # Partial match fallback
-    for d in BUILDER_DIR.iterdir():
-        if d.is_dir() and slug in d.name:
-            return d
-    return None
-
-
-def load_iso(builder_dir: Path, prefix: str, kind_slug: str) -> str:
-    """Read a single builder ISO file. Returns content or empty string."""
-    target = builder_dir / f"{prefix}_{kind_slug}.md"
-    if target.exists():
-        return target.read_text(encoding="utf-8")
-    # Fallback: any file matching prefix
-    for f in builder_dir.glob(f"{prefix}_*.md"):
-        return f.read_text(encoding="utf-8")
-    return ""
-
-
-def strip_frontmatter(text: str) -> str:
-    """Remove YAML frontmatter from markdown text."""
-    if text.startswith("---"):
-        end = text.find("---", 3)
-        if end > 0:
-            return text[end + 3 :].strip()
-    return text
-
-
-def extract_frontmatter_dict(text: str) -> dict:
-    """Parse YAML frontmatter into a dict. Handles code fences and bare YAML."""
-    t = text.strip()
-    bt = chr(96) * 3
-    # Case 1: code-fenced YAML (LLM wraps in ```yaml ... ```)
-    if t.startswith(bt):
-        nl = t.find(chr(10))
-        if nl > 0:
-            t = t[nl + 1 :]
-        close = t.find(bt)
-        if close > 0:
-            yaml_part = t[:close].strip()
-            body_part = t[close + 3 :].strip()
-            t = "---" + chr(10) + yaml_part + chr(10) + "---" + chr(10) + body_part
-    # Case 2: bare YAML (no --- delimiters, first line has "key:")
-    if not t.startswith("---") and t and ":" in t.split(chr(10))[0]:
-        lines = t.split(chr(10))
-        for i, ln in enumerate(lines):
-            if ln.startswith("#") or (i > 3 and ln.strip() == ""):
-                t = (
-                    "---"
-                    + chr(10)
-                    + chr(10).join(lines[:i])
-                    + chr(10)
-                    + "---"
-                    + chr(10)
-                    + chr(10).join(lines[i:])
-                )
-                break
-    # Case 3: standard --- delimiters
-    if not t.startswith("---"):
-        return {}
-    end = t.find("---", 3)
-    if end < 0:
-        return {}
-    try:
-        return yaml.safe_load(t[3:end]) or {}
-    except yaml.YAMLError:
-        return {}
+# Delegates to cex_shared (single source of truth)
+find_builder_dir = _shared_find_builder_dir
+load_iso = _shared_load_iso
+strip_frontmatter = _shared_strip_frontmatter
+extract_frontmatter_dict = _shared_extract_frontmatter_dict
 
 
 def load_pillar_schema(pillar: str) -> dict:
-    """Load _schema.yaml for a pillar and return the full schema dict."""
+    """Load _schema.yaml for a pillar."""
     dir_name = PILLAR_DIRS.get(pillar)
     if not dir_name:
         return {}
@@ -234,17 +175,14 @@ def load_pillar_schema(pillar: str) -> dict:
     if not schema_path.exists():
         return {}
     try:
-        with open(schema_path, "r", encoding="utf-8") as f:
-            return yaml.safe_load(f) or {}
-    except yaml.YAMLError:
+        return load_yaml(schema_path)
+    except Exception:
         return {}
 
 
 def load_kind_schema(kind: str, pillar: str) -> dict:
     """Extract kind-specific constraints from pillar _schema.yaml."""
-    schema = load_pillar_schema(pillar)
-    kinds = schema.get("kinds", {})
-    return kinds.get(kind, {})
+    return load_pillar_schema(pillar).get("kinds", {}).get(kind, {})
 
 
 # ---------------------------------------------------------------------------
@@ -1156,96 +1094,96 @@ def list_kinds():
 
 
 def print_banner(state: RunState, elapsed_ms: float):
-    """Print run summary banner."""
-    print(f"\n{'=' * 70}")
-    print("  CEX 8F Runner -- Stateful Artifact Pipeline")
-    print(f"{'=' * 70}")
-    print(f"  Intent:      {state.intent}")
-    print(f"  Kind:        {state.kind}")
-    print(f"  Pillar:      {state.pillar}")
-    print(f"  Builder:     {state.builder_dir or 'NONE'}")
-    print(f"  Mode:        {'DRY-RUN' if state.result.get('mode') == 'dry-run' else 'EXECUTE'}")
+    """Print compact run summary."""
+    sep = "=" * 70
+    mode = "DRY-RUN" if state.result.get("mode") == "dry-run" else "EXECUTE"
+    print(f"\n{sep}\n  CEX 8F Runner | {state.kind} | {state.pillar} | {mode}\n{sep}")
+    print(f"  Intent:  {state.intent}")
+    print(f"  Builder: {state.builder_dir or 'NONE'}")
 
-    # Constraints summary
+    # Constraints
     c = state.constraints
-    parts = []
-    if c.get("max_bytes"):
-        parts.append(f"max={c['max_bytes']}b")
-    if c.get("id_pattern"):
-        parts.append(f"id=/{c['id_pattern']}/")
+    c_parts = [f"max={c['max_bytes']}b" for _ in [1] if c.get("max_bytes")]
     if c.get("frontmatter_required"):
-        parts.append(f"fm={len(c['frontmatter_required'])} fields")
-    if parts:
-        print(f"  Constraints: {', '.join(parts)}")
+        c_parts.append(f"fm={len(c['frontmatter_required'])} fields")
+    if c_parts:
+        print(f"  Constrain: {', '.join(c_parts)}")
 
-    # Knowledge summary
+    # Knowledge
     k = state.knowledge
-    kc_count = len(k.get("kc_domains", []))
-    kc_parts = []
-    if k.get("kc_builder"):
-        kc_parts.append("builder-KC")
-    if kc_count:
-        kc_parts.append(f"{kc_count} domain-KCs")
-    if k.get("few_shots"):
-        kc_parts.append("examples")
-    if k.get("memory"):
-        kc_parts.append("memory")
-    if k.get("architecture"):
-        kc_parts.append("architecture")
-    print(f"  Knowledge:   {', '.join(kc_parts) if kc_parts else 'none'}")
+    k_parts = []
+    if k.get("kc_builder"): k_parts.append("builder-KC")
+    if k.get("kc_domains"): k_parts.append(f"{len(k['kc_domains'])} KCs")
+    if k.get("few_shots"): k_parts.append("examples")
+    if k.get("memory"): k_parts.append("memory")
+    if k_parts:
+        print(f"  Knowledge: {', '.join(k_parts)}")
 
-    # Tools (F5)
-    tr = state.tool_results
-    if tr:
-        t_count = len(tr.get("tools_available", []))
-        e_count = len(tr.get("existing_artifacts", []))
-        print(f"  Tools:       {t_count} available, {e_count} existing artifacts")
-
-    # Reasoning (F4)
-    r = state.reasoning
-    if r:
-        model = r.get("model_used", "?")
-        plan_len = len(r.get("plan", "").split())
-        print(f"  Reasoning:   {plan_len} words (model={model})")
-
-    # Artifact
+    # Artifact + Verdict
     if state.artifact:
-        words = len(state.artifact.split())
-        sections = state.artifact.count("\n# ")
-        print(f"  Artifact:    {words} words, {sections} sections")
-
-    # Verdict (F7)
+        print(f"  Artifact: {len(state.artifact.split())} words")
     v = state.verdict
     if v:
-        passed = v.get("passed")
-        gates_total = len(v.get("hard_gates", []))
-        gates_ok = sum(1 for g in v.get("hard_gates", []) if g.get("passed"))
-        retries = v.get("retries", 0)
-        status = "PASS" if passed else "FAIL"
-        print(f"  Verdict:     {status} ({gates_ok}/{gates_total} gates, {retries} retries)")
+        g = v.get("hard_gates", [])
+        ok = sum(1 for x in g if x.get("passed"))
+        status = "PASS" if v.get("passed") else "FAIL"
+        print(f"  Verdict:  {status} ({ok}/{len(g)} gates, {v.get('retries', 0)} retries)")
         for issue in v.get("issues", []):
             print(f"    ! {issue}")
 
-    # Output
     if state.result.get("path"):
-        print(f"  Output:      {state.result['path']}")
-
-    # Timing
+        print(f"  Output:   {state.result['path']}")
     if state.timings:
-        timing_str = " | ".join(f"{k}={v}ms" for k, v in state.timings.items())
-        print(f"  Timing:      {timing_str} | total={elapsed_ms:.0f}ms")
-
-    # Errors
-    if state.errors:
-        for err in state.errors:
-            print(f"  ! ERROR: {err}")
-
-    print(f"{'=' * 70}\n")
+        print(f"  Timing:   {' | '.join(f'{k}={v}ms' for k, v in state.timings.items())} | total={elapsed_ms:.0f}ms")
+    for err in state.errors:
+        print(f"  ! ERROR: {err}")
+    print(sep)
 
 
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
+
+
+NUC_DIRS = {
+    "N01": "N01_intelligence", "N02": "N02_marketing", "N03": "N03_engineering",
+    "N04": "N04_knowledge", "N05": "N05_operations", "N06": "N06_commercial",
+    "N07": "N07_admin",
+}
+NUC_DOMAINS = {
+    "N01": "research, intelligence, papers, benchmarks",
+    "N02": "copywriting, ads, campaigns, social media",
+    "N03": "meta-construction, 8F pipeline, scaffolding",
+    "N04": "RAG, embeddings, chunking, taxonomy",
+    "N05": "testing, CI/CD, deployment, monitoring",
+    "N06": "pricing, sales funnels, monetization",
+    "N07": "orchestration, dispatch, quality validation",
+}
+KIND_TO_SUBDIR = {
+    "agent": "agents", "knowledge_card": "knowledge", "dispatch_rule": "orchestration",
+    "workflow": "orchestration", "quality_gate": "feedback", "embedding_config": "knowledge",
+    "rag_source": "knowledge", "chunk_strategy": "knowledge", "retriever_config": "knowledge",
+    "checkpoint": "memory", "spawn_config": "orchestration", "prompt_template": "prompts",
+    "action_prompt": "prompts", "system_prompt": "prompts", "scoring_rubric": "quality",
+    "signal": "orchestration", "dag": "orchestration", "handoff": "orchestration",
+    "fallback_chain": "agents", "pattern": "architecture", "agent_card": "architecture",
+}
+
+
+def _resolve_nucleus(nucleus: str, kind_override: str | None, intent: str) -> tuple[str, str]:
+    """Resolve nucleus output dir and domain context."""
+    nuc = nucleus.upper()
+    if nuc not in NUC_DIRS:
+        return "", ""
+    kind_for_dir = kind_override or ""
+    if not kind_for_dir:
+        parsed = parse_intent(intent)
+        if parsed.get("objects"):
+            kind_for_dir = parsed["objects"][0]
+    subdir = KIND_TO_SUBDIR.get(kind_for_dir, "artifacts")
+    output_dir = str(CEX_ROOT / NUC_DIRS[nuc] / subdir)
+    ctx = f"Nucleus: {nuc} ({NUC_DIRS[nuc]}). Domain: {NUC_DOMAINS.get(nuc, '')}. All content must be specific to this nucleus domain."
+    return output_dir, ctx
 
 
 def main():
@@ -1297,43 +1235,13 @@ Examples:
     context = args.context or ""
     dry_run = not args.execute
 
-    # Nucleus support: resolve output dir + inject nucleus context
+    # Nucleus support
     if args.nucleus:
-        nuc = args.nucleus.upper()
-        nuc_dirs = {
-            "N01": "N01_intelligence", "N02": "N02_marketing", "N03": "N03_engineering",
-            "N04": "N04_knowledge", "N05": "N05_operations", "N06": "N06_commercial",
-            "N07": "N07_admin",
-        }
-        nuc_domains = {
-            "N01": "research, market analysis, competitor intelligence, papers, benchmarks",
-            "N02": "copywriting, ads, campaigns, brand voice, social media, CTAs",
-            "N03": "meta-construction, 8F pipeline, artifact building, scaffolding",
-            "N04": "RAG, embeddings, chunking, knowledge cards, retrieval, taxonomy",
-            "N05": "code review, testing, CI/CD, deployment, infrastructure, monitoring",
-            "N06": "pricing, courses, sales funnels, monetization, conversion",
-            "N07": "orchestration, dispatch, monitoring, quality validation, handoffs",
-        }
-        if nuc in nuc_dirs:
-            # Set output dir to nucleus subdir based on kind
-            kind_to_subdir = {
-                "agent": "agents", "agent_card": "architecture", "system_prompt": "prompts",
-                "knowledge_card": "knowledge", "dispatch_rule": "orchestration",
-                "workflow": "orchestration", "quality_gate": "feedback",
-                "scoring_rubric": "quality", "prompt_template": "prompts",
-                "action_prompt": "prompts", "embedding_config": "knowledge",
-                "rag_source": "knowledge", "chunk_strategy": "knowledge",
-                "retriever_config": "knowledge", "checkpoint": "memory",
-                "spawn_config": "orchestration", "signal": "orchestration",
-                "dag": "orchestration", "handoff": "orchestration",
-                "fallback_chain": "agents", "pattern": "architecture",
-            }
-            kind_for_dir = args.kind or (parse_intent(intent)["objects"][0] if parse_intent(intent)["objects"] else "")
-            subdir = kind_to_subdir.get(kind_for_dir, "artifacts")
-            if not args.output_dir:
-                args.output_dir = str(CEX_ROOT / nuc_dirs[nuc] / subdir)
-            if not context:
-                context = f"Nucleus: {nuc} ({nuc_dirs[nuc]}). Domain: {nuc_domains.get(nuc, '')}. All content must be specific to this nucleus domain."
+        output_dir, nuc_context = _resolve_nucleus(args.nucleus, args.kind, intent)
+        if not args.output_dir:
+            args.output_dir = output_dir
+        if not context:
+            context = nuc_context
 
     # Multi-kind detection: if Motor classifies multiple kinds, run each
     parsed = parse_intent(intent)

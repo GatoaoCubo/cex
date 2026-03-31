@@ -12,6 +12,7 @@ references:
 - bld_system_prompt_agent
 - ex_knowledge_card_rag_fundamentals
 - ex_prompt_template_aida
+quality: null
 links:
 - 'Builder: [[bld_system_prompt_agent]]'
 - 'Template: [[tpl_agent]]'
