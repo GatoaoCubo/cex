@@ -898,5 +898,23 @@
     "max_bytes": 5120,
     "naming": "p04_cm_{{name}}.md",
     "pillar": "P04"
+  },
+  "research_pipeline": {
+    "boundary": "Pipeline de pesquisa multi-fonte STORM+CRAG+CRITIC. NAO eh retriever (busca local) nem search_tool (busca web simples).",
+    "core": false,
+    "description": "Motor de pesquisa 7-stage: INTENT>PLAN>RETRIEVE>RESOLVE>SCORE>SYNTHESIZE>VERIFY",
+    "llm_function": "PRODUCE",
+    "max_bytes": 5120,
+    "naming": "p04_rp_{{name}}.md",
+    "pillar": "P04"
+  },
+  "social_publisher": {
+    "boundary": "Pipeline de auto-posting em redes sociais. NAO eh notifier (alertas pontuais) nem schedule (agendamento generico).",
+    "core": false,
+    "description": "Agente de publicacao automatica: LOAD>FETCH>SELECT>GENERATE>OPTIMIZE>HASHTAGS>PUBLISH>LOG>NOTIFY>ROTATE",
+    "llm_function": "PRODUCE",
+    "max_bytes": 5120,
+    "naming": "p04_sp_{{name}}.md",
+    "pillar": "P04"
   }
 }
