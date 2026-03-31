@@ -34,28 +34,21 @@ select = ["E", "W", "F", "I", "B", "UP"]
 ```
 
 ```python
-# src/cex_scorer/cli.py
-import typer; from rich.console import Console
+# cli.py — Typer+Rich entry point
 app = typer.Typer(help="Score CEX artifacts")
-console = Console()
-
 @app.command()
 def score(path: str, verbose: bool = False):
-    from .scorer import score_artifact
     result = score_artifact(path)
     color = "green" if result.score >= 8.0 else "yellow"
-    console.print(f"[{color}]{result.score:.1f}[/{color}] {path}")
-    if verbose:
-        for note in result.notes: console.print(f"  {note}")
+    Console().print(f"[{color}]{result.score:.1f}[/{color}] {path}")
 ```
 
 ```python
-# tests/conftest.py
-import pytest; from pathlib import Path
+# conftest.py — pytest fixtures
 @pytest.fixture
 def sample_artifact(tmp_path):
     f = tmp_path / "test.md"
-    f.write_text("---\nid: test\nkind: knowledge_card\npillar: P01\nquality: null\n---\n# Test\nContent here.")
+    f.write_text("---\nid: t\nkind: knowledge_card\npillar: P01\nquality: null\n---\n# T\nBody.")
     return str(f)
 ```
 
@@ -74,40 +67,31 @@ product-api = "product_api.cli:main"
 ```
 
 ```python
-# src/product_api/models.py
-from pydantic import BaseModel, Field
+# models.py — Pydantic V2 with Field constraints
 class Product(BaseModel):
     model_config = {"from_attributes": True}
     id: str
     name: str = Field(..., min_length=1, max_length=300)
     price: float = Field(..., gt=0)
     sku: str = Field(..., pattern=r'^[A-Z0-9-]{3,20}$')
-
-# src/product_api/config.py
-from pydantic_settings import BaseSettings
+# config.py — BaseSettings with env_prefix
 class Settings(BaseSettings):
     model_config = {"env_prefix": "APP_"}
     database_url: str
-    api_keys: str = ""
     debug: bool = False
 ```
 
 ```dockerfile
-# Dockerfile
 FROM python:3.12-slim AS builder
 WORKDIR /build
-RUN python -m venv /opt/venv
-ENV PATH="/opt/venv/bin:$PATH"
 COPY requirements.txt .
-RUN pip install -r requirements.txt
-
+RUN pip install --no-cache-dir -r requirements.txt
 FROM python:3.12-slim
 RUN useradd --uid 1000 appuser
-COPY --from=builder /opt/venv /opt/venv
-ENV PATH="/opt/venv/bin:$PATH"
+COPY --from=builder /usr/local /usr/local
 COPY --chown=appuser src/ ./src/
 USER appuser
-CMD ["uvicorn", "product_api.api.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "product_api.api.main:app", "--host", "0.0.0.0"]
 ```
 
 ## Example 3: Pipeline Runner
@@ -115,52 +99,31 @@ CMD ["uvicorn", "product_api.api.main:app", "--host", "0.0.0.0", "--port", "8000
 **Intent**: "Build a pipeline runner for research processing"
 
 ```python
-# src/research_runner/pipeline.py
-from dataclasses import dataclass
-from typing import Any
-
+# pipeline.py — Stage-based like CEX 8F
 @dataclass
 class StageResult:
-    stage: str
-    success: bool
-    data: dict
-    error: str | None = None
-
+    stage: str; success: bool; data: dict; error: str | None = None
 class Stage:
     name: str = "base"
-    async def execute(self, state: dict) -> StageResult:
-        raise NotImplementedError
-
+    async def execute(self, state: dict) -> StageResult: raise NotImplementedError
 class IntentStage(Stage):
     name = "intent"
     async def execute(self, state):
-        query = state["input"]["query"]
-        return StageResult(self.name, True, {"intent": parse(query)})
-
-class RetrieveStage(Stage):
-    name = "retrieve"
-    async def execute(self, state):
-        sources = await fetch_sources(state["intent"])
-        return StageResult(self.name, True, {"sources": sources})
-
+        return StageResult(self.name, True, {"intent": parse(state["input"]["query"])})
 class Pipeline:
-    def __init__(self, stages: list[Stage]):
-        self.stages = stages
-
+    def __init__(self, stages: list[Stage]): self.stages = stages
     async def run(self, input_data: dict) -> dict:
         state = {"input": input_data, "stages": []}
         for stage in self.stages:
             result = await stage.execute(state)
             state["stages"].append(result)
             state[result.stage] = result.data
-            if not result.success:
-                state["error"] = result.error
-                break
+            if not result.success: break
         return state
 ```
 
 ```yaml
-# .github/workflows/ci.yml
+# ci.yml — lint→test→build
 name: CI
 on: [push, pull_request]
 jobs:
@@ -169,8 +132,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-        with: { python-version: '3.12', cache: 'pip' }
+        with: { python-version: '3.12' }
       - run: pip install -e ".[dev]"
-      - run: ruff check .
-      - run: pytest --cov --cov-report=xml -m "not slow"
+      - run: ruff check . && pytest --cov -m "not slow"
 ```

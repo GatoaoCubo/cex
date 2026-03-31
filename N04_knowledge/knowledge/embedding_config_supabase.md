@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n04_knowledge
 domain: data_platform
-quality: null
+quality: 8.9
 tags: [embedding-config, supabase, pgvector, dimensions, hnsw, N04]
 tldr: "pgvector embedding config: VECTOR(1536) default, HNSW index, cosine distance, match_documents() function, multi-tenant via RLS"
 density_score: 0.91

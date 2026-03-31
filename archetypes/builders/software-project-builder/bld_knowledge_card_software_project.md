@@ -19,64 +19,39 @@ density_score: 0.91
 ## 3 Project Archetypes
 
 ### 1. CLI Tool (Typer + Rich)
-
 ```python
-# src/myapp/cli.py
-import typer
-from rich.console import Console
-
 app = typer.Typer(help="My CLI tool")
 console = Console()
-
 @app.command()
 def run(input: str, output: str = "result.json", verbose: bool = False):
     """Execute the pipeline."""
-    if verbose: console.print("[bold]Starting...[/bold]")
     result = process(input)
     Path(output).write_text(json.dumps(result))
     console.print(f"[green]Done[/green]: {output}")
-
-if __name__ == "__main__": app()
 ```
-
-**Entry point**: `[project.scripts] myapp = "myapp.cli:app"`
-
+Entry point: `[project.scripts] myapp = "myapp.cli:app"`
 ### 2. API Service (FastAPI + Pydantic)
-
 ```python
-# src/myapp/api/main.py
 app = FastAPI(title="My API", version="1.0.0")
 app.add_middleware(CORSMiddleware, ...)
 app.include_router(v1_router)
-
 @app.get("/health")
 async def health(): return {"status": "healthy", "version": "1.0.0"}
 ```
-
-**Stack**: FastAPI + Pydantic + asyncpg + Redis + Celery
-
+Stack: FastAPI + Pydantic + asyncpg + Redis + Celery
 ### 3. Pipeline Runner (Stage-based)
-
 ```python
-# src/myapp/pipeline.py
 class Pipeline:
     def __init__(self, config):
-        self.stages = [
-            ParseStage(config),
-            TransformStage(config),
-            ValidateStage(config),
-            OutputStage(config),
-        ]
-
+        self.stages = [ParseStage, TransformStage, ValidateStage, OutputStage]
     async def run(self, input_data):
         state = {"input": input_data}
-        for stage in self.stages:
-            state = await stage.execute(state)
+        for stage_cls in self.stages:
+            state = await stage_cls(self.config).execute(state)
             if state.get("error"): break
         return state
 ```
-
-**Pattern**: Each stage is a class with `execute(state) → state`. Like CEX 8F.
+Pattern: Each stage has `execute(state) → state`. Mirrors CEX 8F pipeline.
 
 ## Tech Stack Decisions
 

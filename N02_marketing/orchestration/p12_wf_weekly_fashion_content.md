@@ -16,7 +16,7 @@ depends_on: []
 signals: [content_ready, published, error]
 spawn_configs: [p12_spawn_trends_analyst, p12_spawn_content_writer, p12_spawn_visual_creator]
 domain: "copywriting"
-quality: null
+quality: 8.7
 tags: [workflow, fashion, content, weekly, automation]
 tldr: "6-step weekly fashion content workflow: trend analysis, educational content creation, visual design, and multi-channel publishing"
 density_score: 0.92

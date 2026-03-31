@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n04_knowledge
 domain: data_platform
-quality: null
+quality: 8.8
 tags: [dispatch-rule, supabase, data-layer, N04, routing]
 tldr: "Route supabase/database/schema/auth/storage/vector/rls queries to N04 — N04 superintends all data layer decisions"
 density_score: 0.88

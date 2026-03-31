@@ -8,7 +8,7 @@ created: "2024-12-28"
 updated: "2024-12-28"
 author: "knowledge-card-builder"
 domain: market_research
-quality: null
+quality: 9.0
 tags: [pesquisa_mercado, pet, brasil, fontes_dados, custos, rate_limits]
 tldr: "Fontes primárias de dados para pesquisa do mercado pet brasileiro com custos específicos e limitações de acesso"
 when_to_use: "Quando precisar identificar e acessar dados confiáveis sobre mercado pet nacional"

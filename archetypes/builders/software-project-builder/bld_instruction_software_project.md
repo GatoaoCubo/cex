@@ -18,131 +18,39 @@ density_score: 0.92
 
 ## Build Pipeline (9 Steps)
 
-### Step 1: PARSE (Intent → Project Spec)
-
-**Input**: Natural language intent + builder ISOs + instance config
-**Output**: Structured project specification
-
-```yaml
-project:
-  name: my-pipeline
-  type: cli_tool | api_service | pipeline_runner
-  python: "3.12"
-  dependencies: [pydantic, httpx, typer]
-  features: [auth, cache, retry]
-```
-
-### Step 2: SCAFFOLD (Spec → Directory Structure)
-
-**Input**: Project spec
-**Output**: pyproject.toml + directory tree
-
-```
-Generate:
-  pyproject.toml     # From kc_python_project_structure
-  src/{name}/        # Source package
-    __init__.py
-    __version__.py
-    config.py        # Pydantic BaseSettings
-  tests/
-    conftest.py      # From kc_pytest_patterns
-  .env.example       # Template env vars
-```
-
-**Gate**: pyproject.toml must have [build-system], [project], [tool.ruff], [tool.pytest]
-
-### Step 3: IMPLEMENT (Scaffold → Business Logic)
-
-**Input**: Scaffolded project + builder ISOs (architecture, instruction)
-**Output**: Core implementation files
-
-```
-If CLI tool:     src/{name}/cli.py (Typer)
-If API service:  src/{name}/api/main.py (FastAPI) + routes/ + middleware/
-If pipeline:     src/{name}/pipeline.py (stage executor)
-```
-
-Apply patterns from: kc_fastapi_patterns, kc_pydantic_patterns, kc_error_handling_python
-
-**Gate**: All .py files must have valid syntax (`python -m py_compile`)
-
-### Step 4: TEST (Implementation → Test Suite)
-
-**Input**: Implementation files
-**Output**: Test files with fixtures
-
-```
-tests/
-  conftest.py          # Shared fixtures (TestClient, auth, sample data)
-  test_{module}.py     # Per-module tests
-  test_integration.py  # Cross-module tests
-```
-
-Apply patterns from: kc_pytest_patterns (markers, parametrize, coverage)
-
-**Gate**: `pytest --collect-only` must find >0 tests
-
-### Step 5: LINT (Code → Clean Code)
-
-**Input**: All .py files
-**Output**: Ruff + mypy config in pyproject.toml
-
-```toml
-[tool.ruff]           # From kc_ruff_uv
-[tool.ruff.lint]
-[tool.mypy]           # Type checking config
-```
-
+### Step 1: PARSE (F1) — Intent → Project Spec
+**Input**: Intent + ISOs + config → **Output**: `{name, type, python, deps, features}` YAML
+**Gate**: type ∈ {cli_tool, api_service, pipeline_runner}
+### Step 2: SCAFFOLD (F2) — Spec → Directory
+**Output**: pyproject.toml + `src/{name}/` + `tests/conftest.py` + `.env.example`
+**Gate**: pyproject.toml has [build-system], [project], [tool.ruff], [tool.pytest]
+### Step 3: IMPLEMENT (F3) — Scaffold → Business Logic
+**Output per archetype**:
+- CLI tool: `cli.py` (Typer+Rich) — apply kc_pydantic_patterns
+- API service: `api/main.py` (FastAPI) + routes/ + middleware/ — apply kc_fastapi_patterns
+- Pipeline: `pipeline.py` (stage executor) — apply kc_error_handling_python
+**Gate**: `python -m py_compile` on all .py
+### Step 4: TEST (F4) — Implementation → Test Suite
+**Output**: `conftest.py` (fixtures) + `test_{module}.py` + `test_integration.py`
+Apply kc_pytest_patterns: markers, parametrize, coverage ≥60%.
+**Gate**: `pytest --collect-only` finds >0 tests
+### Step 5: LINT (F5) — Code → Clean Code
+**Output**: Ruff + mypy config in pyproject.toml (from kc_ruff_uv)
 **Gate**: `ruff check .` returns 0 errors
-
-### Step 6: DOCKER (Project → Container)
-
-**Input**: Project with all code
-**Output**: Dockerfile + docker-compose.yml + .dockerignore
-
-Apply patterns from: kc_docker_patterns (multi-stage, non-root, healthcheck)
-
-**Gate**: `docker build .` succeeds (if Docker available)
-
-### Step 7: CI (Project → GitHub Actions)
-
-**Input**: Project config (test framework, deploy target)
-**Output**: .github/workflows/ci.yml
-
-Apply patterns from: kc_github_actions (lint→test→build, cache, matrix)
-
-**Gate**: YAML is valid, jobs reference correct commands
-
-### Step 8: DEPLOY (Project → Deploy Config)
-
-**Input**: Deploy target (Railway, Render, Docker)
-**Output**: railway.toml | render.yaml | Procfile
-
-Apply patterns from: kc_deploy_paas
-
-**Gate**: Health check path configured, start command correct
-
-### Step 9: REVIEW (Project → Quality Report)
-
-**Input**: Complete project
-**Output**: Quality report (7D rubric)
-
-Apply patterns from: kc_code_review (7-dimension rubric)
-
+### Step 6: DOCKER (F6) — Project → Container
+**Output**: Dockerfile (multi-stage, non-root, healthcheck) + compose + .dockerignore
+Apply kc_docker_patterns. **Gate**: valid Dockerfile syntax
+### Step 7: CI (F7) — Project → GitHub Actions
+**Output**: `.github/workflows/ci.yml` (lint→test→build, cache, matrix)
+Apply kc_github_actions. **Gate**: valid YAML, correct job refs
+### Step 8: DEPLOY (F8) — Project → Deploy Config
+**Output**: railway.toml | render.yaml | Procfile — apply kc_deploy_paas
+**Gate**: Health check + start command configured
+### Step 9: REVIEW (F8b) — Quality Report (7D rubric)
+Correctness · Security · Performance · Readability · Tests · Docs · Architecture
+Apply kc_code_review. Each dimension: ✅/⚠️/❌ with 1-line rationale.
+## Pipeline Map
 ```
-## Project Quality Report
-- Correctness:  ✅ All logic implements spec
-- Security:     ✅ No hardcoded secrets, auth on all endpoints
-- Performance:  ✅ No N+1, bounded operations
-- Readability:  ✅ Clear naming, small functions
-- Tests:        ✅ Coverage > 60%, markers set
-- Documentation: ✅ README, docstrings, .env.example
-- Architecture:  ✅ Follows src layout, clean deps
-```
-
-## Quick Reference
-
-```
-PARSE → SCAFFOLD → IMPLEMENT → TEST → LINT → DOCKER → CI → DEPLOY → REVIEW
-  F1       F2         F3        F4     F5      F6     F7     F8       F8
+PARSE→SCAFFOLD→IMPLEMENT→TEST→LINT→DOCKER→CI→DEPLOY→REVIEW
+ F1      F2       F3       F4   F5    F6    F7   F8    F8b
 ```

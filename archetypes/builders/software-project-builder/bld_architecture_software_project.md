@@ -69,70 +69,23 @@ src/{package}/
 └── __init__.py
 ```
 
-## Dependency Injection (FastAPI)
+## DI + Config
 
 ```python
-# src/{package}/api/deps.py
-from functools import lru_cache
-from ..infra.db import Database
-from ..infra.config import Settings
-
-@lru_cache
-def get_settings() -> Settings:
-    return Settings()
-
-async def get_db(settings: Settings = Depends(get_settings)) -> Database:
-    return Database(settings.database_url)
-```
-
-## Config Pattern
-
-```python
-# src/{package}/infra/config.py
-from pydantic_settings import BaseSettings
-
-class Settings(BaseSettings):
-    model_config = {"env_prefix": "APP_", "env_file": ".env"}
-
-    # Required
-    database_url: str
-
-    # Optional with defaults
-    redis_url: str = "redis://localhost:6379/0"
-    log_level: str = "info"
-    workers: int = 4
-    debug: bool = False
-
-    # Feature flags
-    enable_cache: bool = True
-    enable_rate_limit: bool = True
+# deps.py — @lru_cache settings, Depends(get_db)
+# config.py — BaseSettings(env_prefix="APP_", env_file=".env")
+#   Required: database_url | Optional: redis_url, log_level, workers, debug
 ```
 
 ## Error Flow
 
-```
-Domain raises AppError (business logic failure)
-  → Infrastructure catches DB/HTTP errors → wraps in AppError
-    → Interface catches AppError → returns HTTP response
-      → Middleware catches unhandled → returns 500
-```
+Domain raises AppError → Infra wraps DB/HTTP errors → Interface returns HTTP → Middleware catches unhandled → 500.
 
-## Testing Strategy
+## Testing
 
-```
-tests/
-├── test_domain/        # Unit tests (fast, no I/O)
-│   └── test_services.py
-├── test_infra/         # Integration tests (needs DB/cache)
-│   └── test_db.py
-├── test_api/           # API tests (TestClient)
-│   └── test_routes.py
-└── conftest.py         # Shared fixtures
-```
-
-| Layer | Test Type | Speed | External Deps |
-|-------|-----------|-------|---------------|
+| Layer | Test Type | Speed | Deps |
+|-------|-----------|-------|------|
 | Domain | Unit | <1s | None |
-| Infra | Integration | 1-10s | DB, Redis |
-| Interface | API | 1-5s | TestClient (in-process) |
-| Deploy | E2E | 10-60s | Docker, HTTP |
+| Infra | Integration | 1-10s | DB |
+| Interface | API | 1-5s | TestClient |
+| Deploy | E2E | 10-60s | Docker |

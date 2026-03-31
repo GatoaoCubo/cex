@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n04_knowledge
 domain: data_platform
-quality: null
+quality: 8.8
 tags: [tool, supabase, data-layer, provisioning, N04, cli]
 tldr: "CLI tool para N04 provisionar data layer Supabase completo a partir de config YAML — schema, RLS, storage, realtime, vectors, edge functions"
 density_score: 0.89
