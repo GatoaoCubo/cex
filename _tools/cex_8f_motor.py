@@ -325,6 +325,123 @@ COMPLEX_BUILDERS = frozenset(
 META_BUILDERS = frozenset(["_builder-builder"])
 
 
+# ---------------------------------------------------------------------------
+# Effort-Aware Dispatch (Phase 2A — Runtime Evolution)
+# ---------------------------------------------------------------------------
+
+EFFORT_TO_MODEL = {
+    "low": "claude-haiku-4-5-20251001",
+    "medium": "claude-sonnet-4-20250514",
+    "high": "claude-opus-4-20250514",
+    "max": "claude-opus-4-20250514",  # + extended thinking at runtime
+}
+
+EFFORT_TO_MAX_TOKENS = {
+    "low": 4000,
+    "medium": 8000,
+    "high": 16000,
+    "max": 32000,
+}
+
+
+def resolve_effort_model(effort: str, crew_override: str | None = None) -> dict:
+    """Map effort level to LLM model and token budget.
+
+    Args:
+        effort: low | medium | high | max
+        crew_override: If set by crew runner, overrides effort level.
+
+    Returns:
+        {"model": str, "max_tokens": int, "extended_thinking": bool}
+    """
+    level = crew_override or effort or "medium"
+    level = level.lower()
+    return {
+        "model": EFFORT_TO_MODEL.get(level, EFFORT_TO_MODEL["medium"]),
+        "max_tokens": EFFORT_TO_MAX_TOKENS.get(level, EFFORT_TO_MAX_TOKENS["medium"]),
+        "extended_thinking": level == "max",
+        "effort_level": level,
+    }
+
+
+# ---------------------------------------------------------------------------
+# Permission Scope Enforcement (Phase 2D — Runtime Evolution)
+# ---------------------------------------------------------------------------
+
+
+def check_permission_scope(
+    builder_id: str, target_path: str, permission_scope: str | None
+) -> tuple[bool, str]:
+    """Check if a builder can access a given path based on its permission scope.
+
+    Scopes:
+        nucleus: only N0X/ of the builder's nucleus
+        pillar: any N0X/ in the same pillar
+        global: any path
+        restricted: only archetypes/builders/{builder}/
+
+    Returns:
+        (allowed: bool, reason: str)
+    """
+    if not permission_scope or permission_scope == "global":
+        return True, "global scope"
+
+    target = target_path.replace("\\", "/").lower()
+
+    if permission_scope == "restricted":
+        allowed_prefix = f"archetypes/builders/{builder_id}/".lower()
+        if target.startswith(allowed_prefix):
+            return True, "within restricted scope"
+        return False, f"restricted scope: only {allowed_prefix}"
+
+    if permission_scope == "nucleus":
+        # Derive nucleus from builder config or default to N03
+        config = _load_builder_config(builder_id)
+        nucleus_prefix = "n03_"  # default
+        pillar = config.get("pillar", "")
+        # Try to infer nucleus from pillar or builder convention
+        if re.match(r"N\d{2}_", target):
+            nucleus_prefix = target[:4].lower()
+        if target.startswith(nucleus_prefix):
+            return True, f"within nucleus scope ({nucleus_prefix})"
+        return False, f"nucleus scope: only {nucleus_prefix}*"
+
+    if permission_scope == "pillar":
+        config = _load_builder_config(builder_id)
+        pillar = config.get("pillar", "")
+        if not pillar:
+            return True, "no pillar constraint"
+        # Allow any path within any nucleus for the same pillar
+        # Also allow archetypes/builders/
+        if target.startswith("archetypes/"):
+            return True, "archetypes always accessible"
+        return True, f"pillar scope ({pillar})"
+
+    return True, "unknown scope, allowing"
+
+
+# ---------------------------------------------------------------------------
+# Tool Deny-List Enforcement (Phase 2B — Runtime Evolution)
+# ---------------------------------------------------------------------------
+
+
+def check_tool_allowed(tool_name: str, denied_tools: list[str] | None) -> tuple[bool, str]:
+    """Check if a tool is allowed for a builder.
+
+    Returns:
+        (allowed: bool, reason: str)
+    """
+    if not denied_tools:
+        return True, "no deny list"
+
+    tool_lower = tool_name.lower()
+    for denied in denied_tools:
+        if denied.lower() == tool_lower:
+            return False, f"tool '{tool_name}' is in deny list"
+
+    return True, "not in deny list"
+
+
 def estimate_tokens(builder_id: str) -> int:
     """Estimate token cost for a builder execution."""
     if builder_id in META_BUILDERS:
@@ -846,11 +963,17 @@ def fan_out(
             # Load builder config (effort, hooks, permissions, etc.)
             config = _load_builder_config(bid)
             if config:
-                b["effort"] = config.get("effort", "medium")
+                effort = config.get("effort", "medium")
+                b["effort"] = effort
                 b["max_turns"] = config.get("max_turns")
                 b["permission_scope"] = config.get("permission_scope")
                 b["fork_context"] = config.get("fork_context")
                 b["hooks"] = config.get("hooks")
+                # Resolve effort -> model mapping
+                effort_info = resolve_effort_model(effort)
+                b["model"] = effort_info["model"]
+                b["model_max_tokens"] = effort_info["max_tokens"]
+                b["extended_thinking"] = effort_info["extended_thinking"]
                 # Merge deny lists
                 config_denied = set(config.get("disallowed_tools") or [])
                 tools_denied = _load_builder_tools_denied(bid)

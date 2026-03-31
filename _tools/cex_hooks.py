@@ -45,6 +45,157 @@ NUCLEUS_DIRS = [d for d in CEX_ROOT.iterdir()
                 if d.is_dir() and re.match(r"N\d{2}_", d.name)]
 
 
+# ---------------------------------------------------------------------------
+# Builder Lifecycle Hooks (Phase 2C — Runtime Evolution)
+# ---------------------------------------------------------------------------
+
+
+def hook_validate_inputs(builder_id: str, input_data: dict) -> dict:
+    """Built-in pre_build hook: validate required frontmatter fields exist."""
+    issues = []
+    fm = input_data.get("frontmatter", {})
+    for field in REQUIRED_FM:
+        if field not in fm:
+            issues.append(f"Missing required field: {field}")
+    return {
+        "proceed": len(issues) == 0,
+        "modified_input": input_data,
+        "issues": issues,
+    }
+
+
+def hook_compile_and_index(builder_id: str, output_data: dict) -> dict:
+    """Built-in post_build hook: compile artifact + rebuild index."""
+    path = output_data.get("path", "")
+    if not path:
+        return {"accept": True, "modified_output": output_data}
+
+    ok, msg = compile_artifact(path)
+    output_data["compiled"] = ok
+    output_data["compile_msg"] = msg
+
+    # Try index rebuild
+    index_script = CEX_ROOT / "_tools" / "cex_index.py"
+    if index_script.exists():
+        try:
+            subprocess.run(
+                [sys.executable, str(index_script)],
+                capture_output=True, text=True, timeout=30
+            )
+            output_data["indexed"] = True
+        except Exception:
+            output_data["indexed"] = False
+
+    return {"accept": True, "modified_output": output_data}
+
+
+def hook_log_quality_failure(builder_id: str, score: float, gates_failed: list[str]) -> dict:
+    """Built-in on_quality_fail hook: log failure to learning records."""
+    import json as _json
+    import time as _time
+
+    lr_dir = CEX_ROOT / ".cex" / "learning_records"
+    lr_dir.mkdir(parents=True, exist_ok=True)
+
+    record = {
+        "timestamp": _time.strftime("%Y-%m-%dT%H:%M:%S"),
+        "builder_id": builder_id,
+        "event": "quality_failure",
+        "score": score,
+        "gates_failed": gates_failed,
+    }
+    fname = f"qf_{builder_id}_{_time.strftime('%Y%m%d_%H%M%S')}.json"
+    try:
+        (lr_dir / fname).write_text(
+            _json.dumps(record, ensure_ascii=False, indent=2), encoding="utf-8"
+        )
+    except OSError:
+        pass
+
+    return {"retry": score >= 5.0, "feedback": f"Score {score:.1f}, failed: {', '.join(gates_failed)}"}
+
+
+def hook_retry_with_feedback(builder_id: str, score: float, gates_failed: list[str]) -> dict:
+    """Built-in on_quality_fail hook: retry with structured feedback."""
+    feedback_lines = [
+        f"Quality score {score:.1f} is below threshold.",
+        f"Failed gates: {', '.join(gates_failed)}" if gates_failed else "",
+        "Focus on:",
+    ]
+    for gate in gates_failed[:3]:
+        if gate.startswith("H01"):
+            feedback_lines.append("  - Fix YAML frontmatter (must parse cleanly)")
+        elif gate.startswith("H02"):
+            feedback_lines.append("  - Fix id field (must match pattern)")
+        elif gate.startswith("H03"):
+            feedback_lines.append("  - Fix kind field (must match target)")
+        elif gate.startswith("H04"):
+            feedback_lines.append("  - Set quality: null (never self-score)")
+        else:
+            feedback_lines.append(f"  - Address {gate}")
+
+    return {
+        "retry": True,
+        "feedback": "\n".join(line for line in feedback_lines if line),
+    }
+
+
+# Registry of built-in hook functions
+BUILTIN_HOOKS = {
+    "validate_inputs": hook_validate_inputs,
+    "compile_and_index": hook_compile_and_index,
+    "log_quality_failure": hook_log_quality_failure,
+    "retry_with_feedback": hook_retry_with_feedback,
+}
+
+
+def execute_hook(hook_name: str | None, hook_type: str, **kwargs) -> dict | None:
+    """Execute a named hook function.
+
+    Args:
+        hook_name: Name of the hook function (from bld_config.hooks), or None to skip.
+        hook_type: One of pre_build, post_build, on_error, on_quality_fail.
+        **kwargs: Arguments passed to the hook function.
+
+    Returns:
+        Hook result dict, or None if hook is null/skipped.
+    """
+    if not hook_name:
+        return None
+
+    func = BUILTIN_HOOKS.get(hook_name)
+    if not func:
+        return {"error": f"Unknown hook: {hook_name}"}
+
+    try:
+        return func(**kwargs)
+    except Exception as e:
+        return {"error": f"Hook '{hook_name}' failed: {e}"}
+
+
+def run_builder_hooks(hooks_config: dict | None, hook_type: str, **kwargs) -> dict | None:
+    """Run the appropriate hook from a builder's hooks config.
+
+    Args:
+        hooks_config: The hooks dict from bld_config (pre_build, post_build, etc.)
+        hook_type: Which hook to run.
+        **kwargs: Arguments for the hook.
+
+    Returns:
+        Hook result, or None if no hook configured.
+    """
+    if not hooks_config or not isinstance(hooks_config, dict):
+        return None
+
+    hook_name = hooks_config.get(hook_type)
+    return execute_hook(hook_name, hook_type, **kwargs)
+
+
+# ---------------------------------------------------------------------------
+# Artifact Validation
+# ---------------------------------------------------------------------------
+
+
 def validate_artifact(path: str, content: str = None) -> list[dict]:
     """Validate a single artifact. Returns list of {level, code, msg}."""
     issues = []
