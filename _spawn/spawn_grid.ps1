@@ -151,7 +151,7 @@ while ($active.Count -gt 0 -or $queue.Count -gt 0) {
 
         # Stuck detection
         $age = ((Get-Date) - $spawnTime).TotalSeconds
-        if ($age -gt 900) {
+        if ($age -gt 5400) {  # 90min stuck threshold (was 900s=15min)
             Write-Output "[$($nucleus.ToUpper())] STUCK (${age}s)"
             $toRemove += $nucleus
         }
