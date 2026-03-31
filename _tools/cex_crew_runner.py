@@ -55,6 +55,7 @@ DEFAULT_QUALITY_GATE = 7.0
 MAX_RETRIES = 2
 LLM_MODEL = "claude-sonnet-4-20250514"
 LLM_MAX_TOKENS = 8000
+FORK_OUTPUT_DIR = CEX_ROOT / ".cex" / "temp" / "fork_outputs"
 
 
 # ---------------------------------------------------------------------------
@@ -302,6 +303,117 @@ class CrewRunner:
         """Filter to only active builders in a step."""
         return [b for b in step.get("builders", []) if b.get("active")]
 
+    def _resolve_fork_context(self, builder: dict) -> str:
+        """Determine execution mode for a builder based on fork_context.
+
+        Returns: "fork" | "inline"
+        """
+        fc = builder.get("fork_context")
+        if fc == "fork":
+            return "fork"
+        if fc == "inline" or fc is None:
+            return "inline"
+        # null -> runtime decides based on complexity
+        return "inline"  # default to inline
+
+    def _resolve_model(self, builder: dict) -> tuple[str, int]:
+        """Resolve LLM model and max_tokens from builder effort config.
+
+        Returns: (model_id, max_tokens)
+        """
+        model = builder.get("model", LLM_MODEL)
+        max_tokens = builder.get("model_max_tokens", LLM_MAX_TOKENS)
+        return model, max_tokens
+
+    def _check_max_turns(self, builder_id: str, state: RunState) -> tuple[bool, int]:
+        """Check if builder has exceeded max_turns. Returns (allowed, turns_used)."""
+        turns_key = f"_turns_{builder_id}"
+        turns_used = state.retry_counts.get(turns_key, 0)
+        # Find max_turns from plan's builder entries
+        max_turns = None
+        for fn in self.functions:
+            for b in fn.get("builders", []):
+                if b["id"] == builder_id and b.get("max_turns"):
+                    max_turns = b["max_turns"]
+                    break
+        if max_turns and turns_used >= max_turns:
+            return False, turns_used
+        # Increment
+        state.retry_counts[turns_key] = turns_used + 1
+        return True, turns_used + 1
+
+    def _check_tool_allowed(self, tool_name: str, builder: dict) -> tuple[bool, str]:
+        """Check if a tool is allowed for a builder."""
+        denied = builder.get("denied_tools", [])
+        if not denied:
+            return True, "no deny list"
+        if tool_name.lower() in [d.lower() for d in denied]:
+            return False, f"tool '{tool_name}' is denied for builder '{builder['id']}'"
+        return True, "allowed"
+
+    def _execute_forked(
+        self, builder: dict, prompt: str, model: str, max_tokens: int, output_dir: Path | None
+    ) -> BuilderOutput:
+        """Execute a builder in a forked sub-process (isolated context).
+
+        The forked builder:
+        - Inherits: builder ISOs + selected memory + query context
+        - Does NOT inherit: context of other builders in the crew
+        - Result returns via output file
+        """
+        bid = builder["id"]
+        FORK_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+        fork_file = FORK_OUTPUT_DIR / f"fork_{bid}_{datetime.now().strftime('%H%M%S')}.md"
+        prompt_file = FORK_OUTPUT_DIR / f"fork_{bid}_prompt.md"
+
+        # Write prompt to file for subprocess
+        prompt_file.write_text(prompt, encoding="utf-8")
+
+        try:
+            import anthropic
+            client = anthropic.Anthropic()
+            response = client.messages.create(
+                model=model,
+                max_tokens=max_tokens,
+                messages=[{"role": "user", "content": prompt}],
+            )
+            content = response.content[0].text
+            fork_file.write_text(content, encoding="utf-8")
+
+            import re as _re
+            score_m = _re.search(r"(?:quality|score)[\s:]*(\d+\.?\d*)", content.lower())
+            score = float(score_m.group(1)) if score_m else 7.0
+
+            return BuilderOutput(
+                builder_id=bid,
+                content=content,
+                quality_score=score,
+                metadata={
+                    "mode": "fork",
+                    "model": model,
+                    "fork_output": str(fork_file),
+                },
+                status="complete",
+            )
+        except ImportError:
+            # No SDK — write prompt as dry-run fork
+            fork_file.write_text(f"[FORK-DRY-RUN] {bid}\n{prompt[:500]}", encoding="utf-8")
+            return BuilderOutput(
+                builder_id=bid,
+                content=f"[FORK-DRY-RUN] Prompt saved to {fork_file}",
+                quality_score=0.0,
+                metadata={"mode": "fork-dry-run", "fork_output": str(fork_file)},
+                status="complete",
+            )
+        except Exception as e:
+            return BuilderOutput(
+                builder_id=bid,
+                content=f"[FORK-ERROR] {e}",
+                quality_score=0.0,
+                metadata={"mode": "fork", "error": str(e)},
+                status="failed",
+            )
+
     # --- Dry-Run Execution ---
 
     def execute_step_dry_run(
@@ -382,9 +494,30 @@ class CrewRunner:
 
         for builder in active:
             bid = builder["id"]
+
+            # Max turns check
+            allowed, turns = self._check_max_turns(bid, state)
+            if not allowed:
+                out = BuilderOutput(
+                    builder_id=bid,
+                    content=f"[MAX-TURNS] Builder '{bid}' reached max_turns limit ({turns})",
+                    quality_score=0.0,
+                    metadata={"turns_used": turns, "max_turns_exceeded": True},
+                    status="degraded",
+                )
+                state.warnings.append(f"{bid}: max_turns exceeded ({turns})")
+                results.append(out)
+                continue
+
             retries = state.retry_counts.get(bid, 0)
             retry_feedback = ""
             out = None
+
+            # Resolve model from effort config
+            model, max_tokens = self._resolve_model(builder)
+
+            # Check fork context
+            fork_mode = self._resolve_fork_context(builder)
 
             while retries <= MAX_RETRIES:
                 prompt = compose_prompt(
@@ -398,12 +531,25 @@ class CrewRunner:
                     retry_feedback=retry_feedback,
                 )
 
+                # Fork execution path
+                if fork_mode == "fork":
+                    out = self._execute_forked(builder, prompt, model, max_tokens, output_dir)
+                    if out.quality_score >= DEFAULT_QUALITY_GATE or out.status == "failed":
+                        break
+                    retries += 1
+                    state.retry_counts[bid] = retries
+                    retry_feedback = f"Fork score {out.quality_score:.1f} < gate. Retry {retries + 1}."
+                    if retries > MAX_RETRIES:
+                        out.status = "degraded"
+                    continue
+
+                # Inline execution path (original)
                 try:
                     import re
 
                     response = client.messages.create(
-                        model=LLM_MODEL,
-                        max_tokens=LLM_MAX_TOKENS,
+                        model=model,
+                        max_tokens=max_tokens,
                         messages=[{"role": "user", "content": prompt}],
                     )
                     content = response.content[0].text
