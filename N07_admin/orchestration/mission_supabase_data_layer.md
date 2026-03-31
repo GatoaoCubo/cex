@@ -22,6 +22,8 @@ density_score: 0.95
 
 ## Overview
 Distill complete Supabase platform knowledge (12 modules) into typed CEX artifacts.
+N04 (Knowledge) is the SUPERINTENDENT — defines schemas, RLS, policies, data flow.
+All other nuclei (N01-N06) CONSUME the Supabase that N04 structures.
 Builder is GENERIC — any company [x] fills a config YAML to get full data layer.
 
 ## Scope
@@ -29,7 +31,8 @@ Builder is GENERIC — any company [x] fills a config YAML to get full data laye
 |-----------|-------|
 | Artifacts | 36 total |
 | Phases | 5 (F0-F4) |
-| Nucleus | N04 (knowledge) — sole owner |
+| Superintendent | N04 (knowledge) — owns data layer structure |
+| Consumers | N01 (research), N02 (content), N03 (migrations), N05 (ops), N06 (CRM) |
 | Builder ISOs | 13 |
 | Platform KCs | 12 (1 per Supabase module) |
 | Examples | 4 verticals (ecommerce, saas, marketplace, content) |
