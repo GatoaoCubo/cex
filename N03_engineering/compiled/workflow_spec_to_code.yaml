@@ -1,0 +1,47 @@
+id: p12_wf_spec_to_code
+kind: workflow
+pillar: P12
+title: Workflow — Spec to Code
+version: 1.0.0
+created: 2026-03-31
+updated: 2026-03-31
+author: n03_engineering
+domain: software-engineering
+quality: 8.8
+tags:
+- workflow
+- spec-to-code
+- n03
+- implementation
+tldr: '7-step workflow transforming CEX builder specs into executable Python projects: load spec → resolve deps → scaffold
+  → implement → test → validate → package.'
+density_score: 0.9
+trigger: "trigger: \"implement [X] in Python\" | handoff from N01/N02/N04/N06\ninput:\n  builder_dir: archetypes/builders/{kind}-builder/\n\
+  \  instance_config: instances/{name}/N0X*/{kind}_config.md\n  output_dir: projects/{kind}/"
+steps: ''
+step_1_load_spec_2min: "action: Read builder ISOs + instance config\nreads:\n  - bld_instruction_{kind}.md    # Pipeline steps\n\
+  \  - bld_architecture_{kind}.md   # Layer structure\n  - bld_config_{kind}.md         # Default settings\n  - bld_schema_{kind}.md\
+  \         # Data models\n  - bld_error_handling_{kind}.md # Error patterns\n  - instance_config.md           # Company-specific\
+  \ settings\noutput: structured_spec"
+step_2_resolve_dependencies_1min: "action: Map spec requirements to Python packages\nreads:\n  - bld_tools_{kind}.md     \
+  \     # Tool requirements\n  - kc_python_project_structure  # Packaging patterns\noutput:\n  python_version: \"3.12\"\n\
+  \  dependencies: [pydantic, httpx, ...]\n  dev_deps: [pytest, ruff, mypy]\n  project_type: cli_tool | api_service | pipeline_runner"
+step_3_scaffold_3min: "action: Generate project skeleton\nreads:\n  - bld_output_template_software_project.md\n  - kc_python_project_structure\n\
+  produces:\n  - pyproject.toml\n  - src/{package}/init.py\n  - src/{package}/config.py\n  - tests/conftest.py\n  - .env.example\n\
+  \  - README.md"
+step_4_implement_15min: "action: Generate business logic from spec\nreads:\n  - bld_instruction_{kind}.md    # Stage order\n\
+  \  - bld_architecture_{kind}.md   # Layer structure\n  - kc_fastapi_patterns          # If API mode\n  - kc_pydantic_patterns\
+  \         # Data models\n  - kc_error_handling_python     # Error patterns\nproduces:\n  - src/{package}/pipeline.py   \
+  \ # Or api/main.py, cli.py\n  - src/{package}/models.py\n  - src/{package}/errors.py\n  - src/{package}/core/*.py"
+step_5_test_5min: "action: Generate test suite\nreads:\n  - bld_examples_{kind}.md       # Test scenarios\n  - kc_pytest_patterns\
+  \           # Fixtures, parametrize\nproduces:\n  - tests/test_core.py\n  - tests/test_pipeline.py       # Or test_api.py,\
+  \ test_cli.py\n  - tests/test_integration.py\ngate: pytest --collect-only finds ≥3 tests"
+step_6_validate_3min: "action: Run quality gates\nchecks:\n  - python -m py_compile (all .py)\n  - ruff check . (lint)\n \
+  \ - pytest --collect-only (tests exist)\n  - secret scan (no hardcoded keys)\ngate: All 4 checks pass\nretry: max 2 if any\
+  \ fail"
+step_7_package_3min: "action: Add deploy infrastructure\nreads:\n  - kc_docker_patterns\n  - kc_github_actions\n  - kc_deploy_paas\n\
+  produces:\n  - Dockerfile\n  - docker-compose.yml\n  - .github/workflows/ci.yml\n  - railway.toml | render.yaml\nsignal:\
+  \ completion to N07"
+total_time_30min_per_project: ''
+failure_escalation: "Step fail → retry (max 2)\n  → still fail → simplify (reduce scope)\n    → still fail → DRAFT + signal\
+  \ N07"

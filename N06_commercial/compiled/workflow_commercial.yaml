@@ -12,7 +12,7 @@ error_recovery: retry
 max_retries: 2
 timeout_ms: 1800000
 spawn_delay_ms: 3000
-quality: null
+quality: 8.9
 tags:
 - workflow
 - commercial

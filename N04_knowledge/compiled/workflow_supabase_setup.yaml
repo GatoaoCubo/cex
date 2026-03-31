@@ -1,0 +1,89 @@
+id: p12_wf_supabase_setup
+kind: workflow
+pillar: P12
+title: Workflow — Supabase New Project Setup
+version: 1.0.0
+created: 2026-03-31
+updated: 2026-03-31
+author: n04_knowledge
+domain: data_platform
+quality: 8.8
+tags:
+- workflow
+- supabase
+- setup
+- data-layer
+- N04
+tldr: '7-step workflow: config intake → schema design → RLS → modules → edge functions → deploy → verify. N04 superintends,
+  N03 deploys.'
+steps_count: 7
+execution: sequential
+depends_on: []
+signals:
+- schema_ready
+- rls_applied
+- deployed
+- verified
+density_score: 0.9
+purpose: End-to-end workflow for N04 to set up a complete Supabase data layer from a company config YAML. Produces migration
+  SQL, RLS policies, and module configs.
+steps: ''
+step_1_config_intake_n04:
+- 'Action: Load and validate company config YAML'
+- 'Input: Config file path'
+- 'Output: Validated config object'
+- 'Checks: All required sections present, tier matches features, no hardcoded data'
+- 'Signal: config_validated'
+step_2_schema_design_n04:
+- 'Action: Generate CREATE TABLE + indexes for all tables'
+- 'Input: Validated config (database section)'
+- 'Output: `migrations/001_schema.sql`'
+- 'Checks: org_id column on shared tables, indexes on FKs + sort columns'
+- 'Signal: schema_ready'
+step_3_rls_policies_n04:
+- 'Action: Generate ENABLE RLS + CREATE POLICY for every table'
+- 'Input: Config (rls section + table definitions)'
+- 'Output: `migrations/002_rls.sql`'
+- 'Checks: Every user-data table has RLS, patterns match JWT claims'
+- 'Signal: rls_applied'
+step_4_module_configuration_n04:
+- 'Action: Configure Storage, Realtime, Vectors, Auth per config'
+- 'Input: Config (storage, realtime, vectors, auth sections)'
+- 'Output: `migrations/003_modules.sql` + bucket configs'
+- 'Checks: Tier-appropriate features only, pgvector index if >1K rows'
+- 'Signal: modules_configured'
+step_5_edge_functions_n04_n03:
+- 'Action: Scaffold edge functions, set secrets'
+- 'Input: Config (edge_functions section)'
+- 'Output: `functions/{name}/index.ts` + secrets list'
+- 'Checks: CORS headers present, secrets not hardcoded'
+- 'Signal: functions_ready'
+step_6_deploy_n03:
+- 'Action: Apply migrations and deploy functions'
+- 'Input: All migration files + function scaffolds'
+- 'Output: Applied schema on Supabase project'
+- 'Commands: `supabase db push` + `supabase functions deploy`'
+- 'Signal: deployed'
+step_7_verify_n04_n05:
+- 'Action: Test RLS isolation, API endpoints, realtime channels'
+- 'Input: Deployed project'
+- 'Output: Verification report'
+- 'Checks: Tenant A cannot see tenant B data, API returns correct data'
+- 'Signal: verified'
+dependencies:
+- Supabase CLI installed and linked to project
+- Company config YAML filled with real values
+- Access token for Supabase project (service_role for migrations)
+error_recovery: '| Step | Error | Recovery |
+
+  |------|-------|----------|
+
+  | 1 | Invalid config | Return validation errors, fix config |
+
+  | 2 | Schema conflict | `supabase db diff` to find conflicts |
+
+  | 3 | RLS recursion | Simplify policy, use JWT claims instead |
+
+  | 6 | Migration fails | Fix SQL, `db reset` local, retry push |
+
+  | 7 | RLS leak | Add missing policy, re-deploy |'

@@ -1,0 +1,108 @@
+id: p12_wf_builder_8f_pipeline
+kind: workflow
+pillar: P12
+title: 8F Construction Pipeline
+version: 2.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: builder_agent
+steps_count: 9
+execution: sequential
+agent_nodes:
+- builder_nucleus
+timeout: 120
+retry_policy: per_step
+depends_on: []
+signals:
+- 'On step complete: Each step emits named signal'
+- 'On workflow complete: complete signal with quality score'
+- 'On error: error signal with step number and failure reason'
+domain: meta-construction
+quality: 9.0
+tags:
+- workflow
+- 8F
+- pipeline
+- N03
+tldr: The 8F pipeline as an executable workflow -- 9 steps from intent to indexed artifact.
+density_score: 0.9
+purpose: Transforms human intent into a validated, compiled, indexed CEX artifact. This workflow IS the core of N03 -- every
+  artifact in the entire taxonomy is produced by running these 9 steps.
+steps: ''
+step_1_parse_intent_cex_8f_motor_py:
+- 'Input: user_text (natural language string)'
+- 'Action: Classify intent into verb + objects + kinds'
+- 'Output: classified_kinds list with (kind, pillar, function) tuples'
+- 'Signal: intent_parsed'
+- 'Depends: none'
+- 'Failure: If 0 kinds resolved, suggest closest matches'
+step_2_load_constraints_runner_f1:
+- 'Input: kind name from Step 1'
+- 'Action: Read _schema.yaml + kinds_meta.json'
+- 'Output: max_bytes, naming convention, required frontmatter fields'
+- 'Signal: constrained'
+- 'Depends: Step 1'
+step_3_load_identity_runner_f2:
+- 'Input: kind name'
+- 'Action: Load builder ISOs from archetypes/builders/{{kind}}-builder/'
+- 'Output: Builder system prompt (manifest + instructions + architecture)'
+- 'Signal: identity_loaded'
+- 'Depends: Step 2'
+step_4_inject_knowledge_runner_f3:
+- 'Input: kind name'
+- 'Action: Load kc_{{kind}}.md + builder KC + domain KCs + examples'
+- 'Output: Knowledge context (up to 7KB budget)'
+- 'Signal: knowledge_injected'
+- 'Depends: Step 3'
+step_5_reason_plan_runner_f4:
+- 'Input: Constraints + identity + knowledge'
+- 'Action: LLM plans construction (sections, references, approach)'
+- 'Output: Construction plan (100-200 words)'
+- 'Signal: plan_ready'
+- 'Depends: Step 4'
+- 'Temperature: 0.3'
+step_6_load_tools_runner_f5:
+- 'Input: kind name'
+- 'Action: Parse bld_tools, scan for existing similar artifacts'
+- 'Output: Available tools list + existing artifact warnings'
+- 'Signal: tools_ready'
+- 'Depends: Step 5'
+step_7_produce_artifact_runner_f6:
+- 'Input: Plan + tools + knowledge + constraints'
+- 'Action: LLM generates complete artifact (frontmatter + body)'
+- 'Output: Artifact markdown text'
+- 'Signal: artifact_produced'
+- 'Depends: Step 6'
+- 'Temperature: 0.7'
+- 'Retry: Up to 2x on quality failure (Step 8 feedback)'
+step_8_validate_runner_f7:
+- 'Input: Artifact text + constraints'
+- 'Action: Run quality gates H01-H07'
+- 'Output: pass/fail + score + issue list'
+- 'Signal: validated'
+- 'Depends: Step 7'
+- 'On soft fail: Return to Step 7 with issues (max 2 retries)'
+- 'On hard fail: Abort with error signal'
+step_9_save_compile_index_runner_f8:
+- 'Input: Validated artifact'
+- 'Action: Write .md, run cex_compile.py, run cex_index.py'
+- 'Output: File path + compiled flag + indexed flag'
+- 'Signal: complete'
+- 'Depends: Step 8'
+quality_gates_step_8_detail: '| Gate | Check | Severity |
+
+  |------|-------|----------|
+
+  | H01 | Valid YAML frontmatter with required fields | HARD |
+
+  | H02 | Kind matches requested kind | HARD |
+
+  | H03 | Naming follows convention | WARN |
+
+  | H04 | References resolve | WARN |
+
+  | H05 | Density >= 0.80 | SOFT |
+
+  | H06 | Size <= max_bytes | SOFT |
+
+  | H07 | Schema required fields present | HARD |'

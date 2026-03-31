@@ -6,7 +6,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: orchestration
-quality: null
+quality: 8.9
 tags:
 - dispatch-rule
 - orchestration
@@ -131,4 +131,4 @@ fallback_logic:
 - 'If no rule matches above 0.70 confidence: ask human for clarification'
 - 'If multiple rules match: highest priority wins'
 - 'If equal priority: prefer the rule with more keyword hits'
-- 'If N07 cannot classify: log to `_ops/signals/` as `dispatch_ambiguous` and wait'
+- 'If N07 cannot classify: log to `.cex/runtime/signals/` as `dispatch_ambiguous` and wait'

@@ -65,7 +65,7 @@ runtime: claude
 subscription: anthropic_max
 flags: []
 domain: commercial-monetization
-quality: null
+quality: 8.9
 tags:
 - agent_card
 - commercial

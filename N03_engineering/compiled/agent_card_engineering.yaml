@@ -1,0 +1,57 @@
+id: p08_ac_builder_nucleus
+kind: agent_card
+pillar: P08
+title: Agent Card -- Builder Nucleus
+version: 2.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: builder_agent
+domain: meta-construction
+quality: 9.0
+tags:
+- agent-card
+- builder
+- N03
+tldr: Deployment spec -- capabilities matrix, resource needs, SLA, failure modes.
+density_score: 0.88
+summary: '| Field | Value |
+
+  |-------|-------|
+
+  | Name | Builder Nucleus (N03) |
+
+  | Domain | Meta-construction |
+
+  | Model | opus default, sonnet/haiku by complexity |
+
+  | Input | Natural language or explicit kind |
+
+  | Output | Validated artifact (.md + .yaml) |
+
+  | Latency | 10-120s per artifact |
+
+  | Quality SLA | >= 8.0 on all outputs |'
+capabilities: '| Capability | Level |
+
+  |------------|-------|
+
+  | Single artifact build | Expert (99/99 kinds) |
+
+  | Multi-kind crew | Advanced (235 crews) |
+
+  | Nucleus bootstrap | Advanced (7+ sequential) |
+
+  | Kind registration | Expert (4-file atomic) |
+
+  | Quality validation | Expert (7 gates) |'
+failure_modes: '| Mode | Detection | Recovery |
+
+  |------|-----------|----------|
+
+  | Kind not found | Motor empty | Suggest closest |
+
+  | Builder missing | F2 load fail | Doctor report |
+
+  | Quality < 8.0 | F7 reject | Retry 2x then abort |
+
+  | Timeout | Process killed | Error signal |'

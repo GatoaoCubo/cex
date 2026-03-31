@@ -1,0 +1,78 @@
+id: p01_embedding_config_supabase
+kind: embedding_config
+pillar: P01
+title: Embedding Config — pgvector in Supabase
+version: 1.0.0
+created: 2026-03-31
+updated: 2026-03-31
+author: n04_knowledge
+domain: data_platform
+quality: 8.9
+tags:
+- embedding-config
+- supabase
+- pgvector
+- dimensions
+- hnsw
+- N04
+tldr: 'pgvector embedding config: VECTOR(1536) default, HNSW index, cosine distance, match_documents() function, multi-tenant
+  via RLS'
+density_score: 0.91
+default_configuration: "extension: pgvector\nversion: \"0.7+\"\ncolumn_type: \"VECTOR(1536)\"\nindex_type: hnsw\nindex_params:\n\
+  \  m: 16\n  ef_construction: 64\ndistance_function: cosine\noperator: \"<=> (vector_cosine_ops)\""
+model_dimension_mapping: '| Model | Dimensions | Column | Index Ops |
+
+  |-------|-----------|--------|-----------|
+
+  | text-embedding-3-small | 1536 | VECTOR(1536) | vector_cosine_ops |
+
+  | text-embedding-3-large | 3072 | VECTOR(3072) | vector_cosine_ops |
+
+  | nomic-embed-text | 768 | VECTOR(768) | vector_cosine_ops |
+
+  | Cohere embed-v3 | 1024 | VECTOR(1024) | vector_cosine_ops |'
+index_selection: '| Rows | Index | Build | Query | Recall |
+
+  |------|-------|-------|-------|--------|
+
+  | <1K | None (brute force) | 0 | Slow | 100% |
+
+  | 1K-100K | IVFFlat | Fast | Medium | ~95% |
+
+  | >1K | HNSW | Slow | Fast | ~98% |'
+setup_sql: "-- Enable\nCREATE EXTENSION IF NOT EXISTS vector;\n\n-- Table\nCREATE TABLE documents (\n  id BIGSERIAL PRIMARY\
+  \ KEY,\n  content TEXT NOT NULL,\n  metadata JSONB DEFAULT '{}',\n  embedding VECTOR(1536),\n  created_at TIMESTAMPTZ DEFAULT\
+  \ NOW()\n);\n\n-- Index\nCREATE INDEX idx_documents_embedding\n  ON documents USING hnsw (embedding vector_cosine_ops)\n\
+  \  WITH (m = 16, ef_construction = 64);\n\n-- RLS\nALTER TABLE documents ENABLE ROW LEVEL SECURITY;\nCREATE POLICY \"org_scoped\"\
+  \ ON documents\n  FOR ALL USING (\n    (metadata->>'org_id') = (auth.jwt()->'app_metadata'->>'org_id')\n  );\n\n-- Search\
+  \ function\nCREATE OR REPLACE FUNCTION match_documents(\n  query_embedding VECTOR(1536),\n  match_threshold FLOAT DEFAULT\
+  \ 0.78,\n  match_count INT DEFAULT 10\n) RETURNS TABLE (id BIGINT, content TEXT, metadata JSONB, similarity FLOAT)\nLANGUAGE\
+  \ sql STABLE AS $$\n  SELECT id, content, metadata,\n    1 - (embedding <=> query_embedding) AS similarity\n  FROM documents\n\
+  \  WHERE 1 - (embedding <=> query_embedding) > match_threshold\n  ORDER BY embedding <=> query_embedding\n  LIMIT match_count;\n\
+  $$;"
+tuning_parameters: '| Parameter | Default | Tradeoff |
+
+  |-----------|---------|----------|
+
+  | m (HNSW) | 16 | Higher = better recall, more memory |
+
+  | ef_construction | 64 | Higher = better index, slower build |
+
+  | ef_search | 40 | Higher = better recall, slower query |
+
+  | match_threshold | 0.78 | Higher = more precise, fewer results |
+
+  | match_count | 10 | Higher = more context, more tokens |
+
+  | chunk_size | 500 tokens | Larger = more context, less precise |
+
+  | chunk_overlap | 50 tokens | More = smoother boundaries, redundancy |'
+distance_functions: '| Function | Operator | When |
+
+  |----------|----------|------|
+
+  | Cosine | `<=>` | Default for text embeddings |
+
+  | Inner product | `<#>` | MRL/matryoshka embeddings |
+
+  | L2 (Euclidean) | `<->` | Image embeddings, spatial |'

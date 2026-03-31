@@ -20,7 +20,7 @@ threshold_publish: 9.0
 threshold_review: 7.5
 automation_status: llm_assisted
 domain: RAG, Knowledge Graphs, Semantic Search, Taxonomy
-quality: null
+quality: 8.9
 tags:
 - scoring-rubric
 - n04

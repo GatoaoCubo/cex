@@ -1,0 +1,54 @@
+id: p01_rag_source_supabase
+kind: rag_source
+pillar: P01
+title: RAG Source — Supabase pgvector as Embedding Backend
+version: 1.0.0
+created: 2026-03-31
+updated: 2026-03-31
+author: n04_knowledge
+domain: data_platform
+quality: 8.8
+tags:
+- rag-source
+- supabase
+- pgvector
+- embeddings
+- semantic-search
+- N04
+tldr: pgvector in Supabase replaces external vector DBs — same PostgreSQL, RLS-scoped, HNSW indexed, multi-tenant RAG ready
+density_score: 0.89
+why_pgvector_over_external_vector_dbs: '| Aspect | pgvector (Supabase) | Pinecone | Weaviate |
+
+  |--------|-------------------|----------|----------|
+
+  | Extra infra | None (same PG) | Separate service | Separate service |
+
+  | Cost | Included in Supabase | USD 70+/mo | USD 25+/mo |
+
+  | RLS/multi-tenant | Native (same RLS) | Application-level | Namespace-based |
+
+  | SQL joins | Direct (same DB) | Impossible | Impossible |
+
+  | Hybrid search | BM25 + vector in 1 query | Vector only | Vector + BM25 separate |'
+connection_config: "rag_backend: supabase_pgvector\nconnection:\n  host: \"db.[PROJECT_REF].supabase.co\"\n  port: 5432\n\
+  \  database: postgres\n  pooler: \"aws-0-[REGION].pooler.supabase.com:6543\"\nembedding:\n  model: text-embedding-3-small\n\
+  \  dimensions: 1536\n  distance: cosine\nindex:\n  type: hnsw\n  params: {m: 16, ef_construction: 64}\ntables:\n  - name:\
+  \ documents\n    content_column: content\n    embedding_column: embedding\n    metadata_column: metadata\n    rls: org_member\n\
+  search:\n  function: match_documents\n  threshold: 0.78\n  max_results: 10"
+ingestion_pipeline: "[Source Document] → chunk (500 tokens, 50 overlap)\n    → embed (text-embedding-3-small)\n    → INSERT\
+  \ INTO documents (content, metadata, embedding)\n    → HNSW index auto-updates"
+retrieval_pipeline: "[User Query] → embed query\n    → SELECT * FROM match_documents(query_embedding, 0.78, 10)\n    → RLS\
+  \ filters by org_id automatically\n    → Return top-k chunks with similarity scores\n    → Inject into LLM context"
+multi_tenant_rag: "-- Embeddings are org-scoped via RLS\nCREATE POLICY \"org_rag\" ON documents\n  FOR SELECT USING (\n  \
+  \  (metadata->>'org_id') = (auth.jwt()->'app_metadata'->>'org_id')\n  );\n-- Company A's RAG never sees Company B's documents"
+monitoring: '| Metric | Query | Target |
+
+  |--------|-------|--------|
+
+  | Index size | `SELECT pg_relation_size(''documents_embedding_idx'')` | <1GB |
+
+  | Query latency | `EXPLAIN ANALYZE SELECT * FROM match_documents(...)` | <100ms |
+
+  | Recall | Test with known-answer queries | >95% |
+
+  | Table size | `SELECT pg_total_relation_size(''documents'')` | Within tier |'

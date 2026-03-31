@@ -19,7 +19,7 @@ safety_level: standard
 tools_listed: true
 output_format_type: markdown
 domain: commercial
-quality: null
+quality: 8.8
 tags:
 - system_prompt
 - commercial

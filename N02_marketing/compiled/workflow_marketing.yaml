@@ -22,7 +22,7 @@ signals: '| Signal | Emitter | Meaning |
 
   | marketing_copy_error | n02-marketing-hub | Unrecoverable failure, escalate to N07 |'
 domain: copywriting_and_campaigns
-quality: null
+quality: 8.9
 tags:
 - workflow
 - marketing

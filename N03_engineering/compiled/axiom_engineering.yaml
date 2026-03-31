@@ -1,0 +1,46 @@
+id: p02_ax_builder_nucleus
+kind: axiom
+pillar: P02
+title: Axioms -- Builder Nucleus
+version: 1.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: builder_agent
+domain: meta-construction
+quality: 9.0
+tags:
+- axiom
+- builder
+- N03
+- invariants
+tldr: 10 immutable truths governing all artifact construction. Violations are hard failures.
+density_score: 0.95
+ax01_frontmatter_is_identity: 'Every CEX artifact has YAML frontmatter with minimum: id, kind, pillar, title, version, created,
+  updated, author, quality, tags, tldr. Without frontmatter, it is not an artifact.'
+ax02_one_kind_one_pillar: Every kind belongs to exactly 1 of 12 pillars. No kind spans pillars. If it seems to, it is two
+  kinds.
+ax03_one_kind_one_function: Every kind exercises exactly 1 of 8 LLM functions (BECOME, INJECT, REASON, CALL, PRODUCE, CONSTRAIN,
+  GOVERN, COLLABORATE).
+ax04_quality_floor_is_8_0: Minimum for publication is 8.0. Below = redo. Golden = 9.5. Not negotiable.
+ax05_compiled_derives_from_source: .yaml in compiled/ are derived views of .md sources. The .md is truth. Never edit compiled/
+  directly.
+ax06_pipeline_is_sequential: 8F runs F1-F8 in order. Skip is allowed. Reorder is not. F7 GOVERN always follows F6 PRODUCE.
+ax07_builders_are_complete: 'Each builder = 13 ISOs. None optional: manifest, quick_start, prime, instructions, architecture,
+  output_template, examples, error_handling, upload_kit, system_instruction, schema, knowledge_card, collaboration.'
+ax08_no_proprietary_references: No artifact references a specific company, product, or framework. CEX is universal. Generic
+  terms only.
+ax09_constructor_specifies_never_executes: The builder defines WHAT to build and HOW to validate. Never deploys or monitors.
+  N03 builds, N05 operates.
+ax10_kinds_meta_json_is_truth: .cex/kinds_meta.json is the single source of truth for what kinds exist, their pillar, function,
+  and constraints.
+enforcement: '| Axiom | Check | Severity |
+
+  |-------|-------|----------|
+
+  | AX01, AX02, AX03, AX07, AX10 | cex_doctor.py + Runner.F7 | HARD FAIL |
+
+  | AX04, AX05, AX06 | Runner.F7 quality gates | SOFT FAIL (retry) |
+
+  | AX08 | grep across tracked files | 0 violations required |
+
+  | AX09 | Architectural (human review) | Design constraint |'

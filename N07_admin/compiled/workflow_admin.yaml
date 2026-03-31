@@ -21,13 +21,13 @@ retry_policy: per_step
 depends_on:
 - dispatch_rule_admin
 signals:
-- 'On step complete: nucleus emits signal to `_ops/signals/{nucleus}_complete.json`'
+- 'On step complete: nucleus emits signal to `.cex/runtime/signals/{nucleus}_complete.json`'
 - 'On workflow complete: N07 emits `write_signal(''n07'', ''complete'', score, ''mission'')`'
 - 'On error: nucleus emits error signal, N07 reads and decides (retry/escalate)'
 spawn_configs:
 - spawn_config_admin
 domain: orchestration
-quality: null
+quality: 8.9
 tags:
 - workflow
 - orchestration
@@ -44,7 +44,7 @@ step_1_write_handoff_orchestrator:
 - 'Agent: N07 orchestrator'
 - 'Action: Write handoff file with task, context, scope fence, commit convention'
 - 'Input: Human intent + routing classification'
-- 'Output: `ops/handoffs/_active/{mission}{nucleus}.md`'
+- 'Output: `.cex/runtime/handoffs/{mission}_{nucleus}.md`'
 - 'Signal: none (internal step)'
 - 'Depends on: none'
 step_2_dispatch_builder_orchestrator:
@@ -52,12 +52,12 @@ step_2_dispatch_builder_orchestrator:
 - 'Action: Launch builder in new terminal'
 - 'Input: Handoff file path'
 - 'Output: Builder process running in new window'
-- 'Command: `bash _spawn/dispatch.sh solo {nucleus} "Leia _ops/handoffs/_active/{file} e execute."`'
+- 'Command: `bash _spawn/dispatch.sh solo {nucleus} "Leia .cex/runtime/handoffs/{file} e execute."`'
 - 'Signal: none (builder emits signal on completion)'
 - 'Depends on: Step 1'
 step_3_monitor_signal_orchestrator:
 - 'Agent: N07 orchestrator'
-- 'Action: Poll `_ops/signals/` for builder completion signal'
+- 'Action: Poll `.cex/runtime/signals/` for builder completion signal'
 - 'Input: Expected signal from target nucleus'
 - 'Output: Signal JSON with status and quality score'
 - 'Command: `bash _spawn/dispatch.sh status`'
@@ -80,7 +80,7 @@ step_5_accept_or_feedback_orchestrator:
 - 'Depends on: Step 4'
 workflow_b_grid_static: Up to 6 parallel builders, one handoff per nucleus, all launch simultaneously.
 preparation:
-- Write N handoff files to `ops/handoffs/_active/{mission}{nucleus}_{seq}.md`
+- Write N handoff files to `.cex/runtime/handoffs/{mission}{nucleus}{seq}.md`
 - 'Launch grid: `bash _spawn/dispatch.sh grid {MISSION_NAME}`'
 - Grid reads handoffs, spawns one builder per nucleus in parallel windows
 - Each builder runs independently, commits, and signals on completion

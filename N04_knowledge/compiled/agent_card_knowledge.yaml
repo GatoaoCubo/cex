@@ -61,7 +61,7 @@ flags:
 - --large-context-window
 - --high-accuracy-retrieval
 domain: RAG, Knowledge Graphs, Semantic Search, Taxonomy
-quality: null
+quality: 8.8
 tags:
 - agent_card
 - n04

@@ -7,7 +7,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: orchestration
-quality: null
+quality: 8.9
 tags:
 - quality-gate
 - orchestration
@@ -27,7 +27,7 @@ definition: '| Property | Value |
 
   | Scope | All artifacts dispatched by N07 to builders |'
 checklist_hard_gates_all_must_pass:
-- '[ ] H01: Signal received — builder emitted completion signal to `_ops/signals/`'
+- '[ ] H01: Signal received — builder emitted completion signal to `.cex/runtime/signals/`'
 - '[ ] H02: Quality score >= 8.0 — reported by builder in signal payload'
 - '[ ] H03: Git committed — builder committed changes before signaling'
 - '[ ] H04: Compile success — `python _tools/cex_compile.py {path}` produces valid YAML'
@@ -74,7 +74,7 @@ quality_tiers: '| Tier | Score | Action |
   | REJECT | < 7.0 | Full rebuild |'
 bypass_policy:
 - 'Who may override: admin only (N07 operator)'
-- 'Conditions: documented justification required, logged to `_ops/signals/`'
+- 'Conditions: documented justification required, logged to `.cex/runtime/signals/`'
 - 'Audit: bypass events recorded as signals with `status: bypass` and reason field'
 validation_commands: '# Compile check
 
@@ -93,7 +93,7 @@ validation_commands: '# Compile check
 
   # Signal check
 
-  ls ops/signals/{nucleus}*.json'
+  ls .cex/runtime/signals/{nucleus}_*.json'
 references:
 - 'Doctor tool: _tools/cex_doctor.py'
 - 'Compile tool: _tools/cex_compile.py'

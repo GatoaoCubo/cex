@@ -32,7 +32,7 @@ automation_status: '| Dimension | Automation | Tool |
 
   | A/B Coverage | Automated | Count variants in output file |'
 domain: copywriting_and_campaigns
-quality: null
+quality: 9.0
 tags:
 - scoring_rubric
 - marketing

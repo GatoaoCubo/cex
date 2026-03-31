@@ -40,7 +40,7 @@ variables:
 variable_syntax: mustache
 composable: true
 domain: commercial-monetization
-quality: null
+quality: 8.9
 tags:
 - prompt_template
 - commercial

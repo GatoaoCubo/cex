@@ -1,0 +1,69 @@
+id: p11_qg_builder_nucleus
+kind: quality_gate
+pillar: P11
+title: Quality Gate -- Builder Nucleus
+version: 2.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: builder_agent
+domain: meta-construction
+quality: 9.0
+tags:
+- quality-gate
+- builder
+- N03
+- validation
+tldr: 7 gates that validate every artifact before publication. HARD = instant reject. SOFT = retry allowed.
+density_score: 0.92
+purpose: Every artifact produced by the 8F pipeline passes through these 7 gates at Step 8 (F7 GOVERN). No artifact reaches
+  publication without passing.
+gates: ''
+h01_frontmatter_integrity_hard_fail:
+- Valid YAML between --- delimiters
+- 'Required fields present: id, kind, pillar, title, version, created, updated, author, quality, tags, tldr'
+- No duplicate keys
+- id follows naming convention from kinds_meta.json
+h02_kind_match_hard_fail:
+- Frontmatter kind field matches the requested kind
+- kind exists in .cex/kinds_meta.json
+- pillar matches the pillar registered for that kind
+h03_naming_convention_warn:
+- Filename follows {{pillar}}{{kind}}{{topic}}.md pattern
+- id field follows same pattern
+- Topic slug is lowercase, hyphenated or underscored
+h04_reference_resolution_warn:
+- All [[wikilinks]] resolve to existing files
+- All file paths mentioned exist in the repo
+- Cross-references to other kinds use correct naming
+h05_density_check_soft_fail:
+- content_lines / total_lines >= 0.80
+- No lorem ipsum, no placeholder text, no TODO markers
+- Every section has substantive content
+h06_size_constraint_soft_fail:
+- Total bytes <= max_bytes from kinds_meta.json
+- 'If exceeded: retry with instruction to compress (remove redundancy, tighten prose)'
+- Max 2 retries before escalating to HARD FAIL
+h07_schema_compliance_hard_fail:
+- All fields from _schema.yaml frontmatter_required are present
+- Field types match expected (string, int, list, etc.)
+- Constraints from schema (density_min, quality_min) are met
+severity_matrix: '| Severity | Action | Retry? | Gates |
+
+  |----------|--------|--------|-------|
+
+  | HARD FAIL | Reject immediately, log error | No | H01, H02, H07 |
+
+  | SOFT FAIL | Return to F6 with issues | Yes (max 2) | H05, H06 |
+
+  | WARN | Log warning, allow publication | N/A | H03, H04 |'
+thresholds: '| Tier | Score | Action |
+
+  |------|-------|--------|
+
+  | GOLDEN | >= 9.5 | Publish as reference example |
+
+  | PUBLISH | >= 8.0 | Standard publication |
+
+  | REVIEW | >= 7.0 | Needs manual review |
+
+  | REJECT | < 7.0 | Redo from scratch |'

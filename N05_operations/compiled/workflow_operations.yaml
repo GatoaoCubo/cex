@@ -12,7 +12,7 @@ error_recovery: retry_then_escalate
 max_retries: 2
 timeout_ms: 3600000
 spawn_delay_ms: 1000
-quality: null
+quality: 8.7
 tags:
 - workflow
 - N05

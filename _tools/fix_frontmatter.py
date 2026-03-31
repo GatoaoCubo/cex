@@ -10,7 +10,8 @@ import re
 import sys
 from pathlib import Path
 
-BUILDERS_DIR = Path("C:/Users/PC/Documents/GitHub/cex/archetypes/builders")
+CEX_ROOT = Path(__file__).resolve().parent.parent
+BUILDERS_DIR = CEX_ROOT / "archetypes" / "builders"
 
 
 def derive_topic_from_dir(dirpath: Path) -> str | None:

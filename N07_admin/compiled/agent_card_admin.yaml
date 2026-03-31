@@ -19,7 +19,7 @@ boot_sequence:
 - Load system prompt from `N07_admin/prompts/system_prompt_admin.md` (~2s)
 - Verify `_spawn/dispatch.sh` exists and is executable (~1s)
 - Load routing rules from `N07_admin/orchestration/dispatch_rule_admin.md` (~1s)
-- 'Verify `_ops/` directory structure: handoffs/_active, handoffs/_done, signals (~1s)'
+- 'Verify `.cex/runtime/` directory structure: handoffs, signals, pids (~1s)'
 - Ready — total boot time ~5s
 constraints: ''
 dispatch_keywords:
@@ -54,7 +54,7 @@ flags:
 - xhigh-thinking
 - interactive
 domain: orchestration
-quality: null
+quality: 9.0
 tags:
 - agent_card
 - orchestrator

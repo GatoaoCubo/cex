@@ -10,7 +10,7 @@ mission: admin_operations
 autonomy: full
 quality_target: 9.0
 domain: orchestration
-quality: null
+quality: 9.0
 tags:
 - handoff
 - orchestration
@@ -112,22 +112,22 @@ handoff_rules:
 - Scope fence is mandatory — builders must not touch files outside their scope
 - Commit before pause — builders must commit and signal before any interruption
 - Signal on complete — every handoff must specify the exact signal command
-file_naming: 'Pattern: `ops/handoffs/_active/{mission}{nucleus}_{seq}.md`
+file_naming: 'Pattern: `.cex/runtime/handoffs/{mission}{nucleus}{seq}.md`
 
 
   Examples:
 
-  - `_ops/handoffs/_active/bootstrap_f1_n03_01.md`
+  - `.cex/runtime/handoffs/bootstrap_f1_n03_01.md`
 
-  - `_ops/handoffs/_active/research_market_n01_01.md`
+  - `.cex/runtime/handoffs/research_market_n01_01.md`
 
-  - `_ops/handoffs/_active/deploy_v2_n05_01.md`'
+  - `.cex/runtime/handoffs/deploy_v2_n05_01.md`'
 lifecycle:
-- N07 writes handoff to `_ops/handoffs/_active/`
+- N07 writes handoff to `.cex/runtime/handoffs/`
 - Builder reads handoff, executes tasks
 - Builder commits and signals
 - N07 validates quality
-- 'If accepted: move handoff to `_ops/handoffs/_done/`'
+- 'If accepted: move handoff to `_instances/codexa/N07_admin/archive/`'
 - 'If rejected: update handoff with feedback, re-dispatch'
 example_bootstrap_f1_handoff: '# N03 Task: Rebuild N07 Orchestrator
 

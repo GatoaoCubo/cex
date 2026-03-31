@@ -26,7 +26,7 @@ nodes: '| ID | Label | Agent | Type |
 edges: "receive_intent --> classify_domain --> write_handoff --> dispatch_builder\n    --> monitor_signals --> validate_quality\
   \ --> accept_or_reject"
 domain: orchestration
-quality: null
+quality: 8.9
 tags:
 - dag
 - orchestration
@@ -53,7 +53,7 @@ topological_order:
 - '`classify_domain` — match keywords to routing rules, select target nucleus'
 - '`write_handoff` — produce handoff.md with task, context, scope, commit, signal'
 - '`dispatch_builder` — execute `bash _spawn/dispatch.sh solo {nucleus} "task"`'
-- '`monitor_signals` — poll `_ops/signals/` for completion or error signal'
+- '`monitor_signals` — poll `.cex/runtime/signals/` for completion or error signal'
 - '`validate_quality` — check builder output quality score against 8.0 threshold'
 - '`accept_or_reject` — if quality >= 8.0: accept. Else: write feedback, re-dispatch'
 parallel_groups: 'Wave 0: [receive_intent] Wave 1: [classify_domain] Wave 2: [write_handoff] Wave 3: [dispatch_builder] Wave

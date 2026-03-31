@@ -24,7 +24,7 @@ spawn_configs:
 - p12_spawn_content_writer
 - p12_spawn_visual_creator
 domain: copywriting
-quality: null
+quality: 8.7
 tags:
 - workflow
 - fashion

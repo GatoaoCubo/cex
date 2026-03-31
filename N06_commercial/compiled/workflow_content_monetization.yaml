@@ -1,0 +1,133 @@
+id: p12_wf_content_monetization
+kind: workflow
+pillar: P12
+version: 1.0.0
+created: 2026-03-31
+updated: 2026-03-31
+author: n06_commercial
+title: Content Monetization Workflow
+steps_count: 9
+execution_mode: sequential
+error_recovery: '| Step | Failure | Recovery |
+
+  |------|---------|----------|
+
+  | CREDITS | Insufficient balance | Pause; emit checkout_required; resume on payment.approved |
+
+  | CHECKOUT | Provider 5xx | Retry ×3 with backoff; fallback to mock on 3rd failure |
+
+  | COURSES | LLM quota exceeded | Mock fallback — return stub Pydantic objects |
+
+  | ADS | confidence < 0.7 | Retry-with-sections ×2; if still failing → flag for human review |
+
+  | VALIDATE | Gate failure | Return validation_report with failed gates; no deploy |'
+max_retries: 2
+timeout_minutes: 30
+quality: 8.9
+tags:
+- workflow
+- content-monetization
+- billing
+- credits
+- courses
+- checkout
+- ads
+- emails
+- N06
+tldr: Full 9-step content monetization workflow — PARSE through DEPLOY — with credit gating, PIX checkout, LLM course generation,
+  ad validation, and email dispatch.
+density_score: null
+step_1_parse: "Agent: N06 (content_monetization_builder)\nAction: Extract product descriptor, audience, monetization goal,\
+  \ and provider config from raw intent.\nInput: raw_intent (string or structured payload)\nOutput: `parsed_intent.yaml` —\
+  \ `{product_name, category, audience, payment_provider, currency, pipeline_steps}`\nSignal: `monetization_parsed`\nTimeout:\
+  \ 2 minutes\n\noutput_schema:\n  product_name: string\n  category: enum [course, ebook, saas, ecommerce]\n  audience: string\n\
+  \  payment_provider: enum [stripe, mercadopago, mock]\n  currency: enum [BRL, USD]\n  pricing_tier: enum [free, pro, enterprise]\n\
+  \n---"
+step_2_pricing: "Agent: N06\nAction: Load PIPELINE_COSTS, apply pricing_tier rules, estimate total credit consumption, resolve\
+  \ pack recommendation.\nInput: `parsed_intent.yaml`\nOutput: `pricing_config.yaml` — `{estimated_credits, recommended_pack,\
+  \ tier_prices, margin_check}`\nSignal: `pricing_resolved`\nDepends on: Step 1\n\npipeline_costs:\n  PESQUISA: 75   # centavos\
+  \ BRL\n  ANUNCIO: 50\n  FOTO: 100\n  FULL: 200\nmargin_check: cost_plus > 30%  # gate — fail if margin below threshold\n\
+  \n---"
+step_3_credits: 'Agent: N06
+
+  Action: Call `check_sufficient(user_id, estimated_cost)`. If sufficient → lock credits with idempotency_key. If insufficient
+  → generate checkout URL for pack purchase and PAUSE workflow.
+
+  Input: `pricing_config.yaml` + user_id
+
+  Output: `credit_lock.yaml` — `{locked: bool, balance_before, idempotency_key}` OR `checkout_url` (pack purchase)
+
+  Signal: `credits_locked` OR `checkout_required`
+
+  Depends on: Step 2
+
+
+  Branch logic:
+
+  - Sufficient → continue to Step 4
+
+  - Insufficient → emit `checkout_required` signal → Step 4 (CHECKOUT for pack)
+
+
+  ---'
+step_4_checkout: "Agent: N06\nAction: Create payment session for product OR credit pack, depending on credit_lock branch.\n\
+  Input: `pricing_config.yaml` + provider config\nOutput: `checkout_session.yaml` — `{checkout_url, session_id, provider,\
+  \ amount_centavos, idempotency_key}`\nSignal: `checkout_created`\nDepends on: Step 3\n\nProvider logic:\nmercadopago:\n\
+  \  - create_preference(title, unit_price_centavos, payer_email)\n  - PIX → immediate; boleto → 3 days; card → installments\n\
+  \  - webhook: IPN payment.approved → x-signature HMAC-SHA256 verify\n\nstripe:\n  - create_checkout_session(price_id, customer_id,\
+  \ mode)\n  - webhook: checkout.session.completed\n  - idempotency_key = session_id\n\nmock:\n  - Returns fake checkout_url\
+  \ immediately\n  - No API calls — safe for dev/CI\n\n---"
+step_5_courses: "Agent: N06\nAction: Execute sequential LLM chain: outline → modules × N → sales_page → email_sequence.\n\
+  Input: `parsed_intent.yaml`\nOutput: `course_artifacts/` — `{outline.yaml, modules/*.yaml, sales_page.md, email_sequence.yaml}`\n\
+  Signal: `courses_generated`\nDepends on: Step 3 (credits locked)\nTimeout: 15 minutes (LLM chain is slowest step)\n\nllm_chain:\n\
+  \  step_1: OutlineOutput   # title, modules[], target_audience, transformation_arc\n  step_2: ModuleOutput    # per module:\
+  \ title, lessons[], duration_minutes, key_outcomes\n  step_3: SalesPageOutput # headline, pain_agitation, mechanism, proof,\
+  \ offer, cta\n  step_4: EmailSequenceOutput  # subject_lines[], bodies[], send_days[]\n\nmock_fallback: true  # If LLM quota\
+  \ exceeded → return stub Pydantic objects\npydantic_validation: strict  # Each step validates output schema before passing\
+  \ to next\n\n---"
+step_6_ads: "Agent: N06\nAction: Validate ad content against product facts. Run FABRICATION_PATTERNS regex. Score confidence.\
+  \ Retry flagged sections if score < 0.7.\nInput: `course_artifacts/sales_page.md` + product_facts\nOutput: `validated_ads.yaml`\
+  \ — `{ad_copies[], confidence_scores[], validation_report}`\nSignal: `ads_validated`\nDepends on: Step 5\nMax retries: 2\
+  \ (retry-with-sections on score < 0.7)\n\nvalidation_gates:\n  confidence_min: 0.7\n  fabrication_check: true  # FABRICATION_PATTERNS\
+  \ regex scan\n  factual_accuracy: product_facts_match\nretry_strategy: regenerate_flagged_sections  # Not full retry — only\
+  \ low-score sections\n\n---"
+step_7_emails: "Agent: N06\nAction: Render email templates from `TEMPLATES` dict. Apply BRL formatting. Queue transactional\
+  \ + marketing sequences.\nInput: `course_artifacts/email_sequence.yaml` + user_profile\nOutput: `email_queue.yaml` — `{emails[],\
+  \ types[], scheduled_at[], brl_formatted: true}`\nSignal: `emails_queued`\nDepends on: Step 5\n\ntemplate_types:\n  transactional:\
+  \ [purchase_confirmation, credit_alert, checkout_expired]\n  marketing: [launch_sequence, abandoned_cart, upsell_offer]\n\
+  brl_format: \"R${amount/100:,.2f}\"  # Always display from centavos\npersonalization: [user_name, product_name, checkout_url,\
+  \ credit_balance]\n\n---"
+step_8_validate: "Agent: N06\nAction: Run quality gates. Block deployment if any gate fails.\nInput: All previous step outputs\n\
+  Output: `validation_report.yaml` — `{gates_passed, gates_failed, deploy_approved: bool}`\nSignal: `validation_complete`\n\
+  Depends on: Steps 2, 4, 6, 7\n\ngates:\n  pricing_margin_above_30pct: true   # PIPELINE_COSTS margin check\n  mock_fallback_exists:\
+  \ true         # Every payment path has mock mode\n  webhook_idempotent: true           # event_id as idempotency key verified\n\
+  \  ad_confidence_above_07: true       # All ads passed validation\n  pydantic_models_valid: true        # All course artifacts\
+  \ schema-valid\n  brl_formatting_correct: true       # No floats in credit/price display\n\n---"
+step_9_deploy: "Agent: N06\nAction: Save monetization_config to instance. Emit signal. Archive run artifacts.\nInput: `validation_report.yaml`\
+  \ (deploy_approved=true)\nOutput: `_instances/codexa/N06_commercial/content_monetization_config.md`\nSignal: `monetization_deployed`\
+  \ → `.cex/runtime/signals/n06_monetization.json`\nDepends on: Step 8 (deploy_approved=true)\n\nactions:\n  - save: _instances/codexa/N06_commercial/content_monetization_config.md\n\
+  \  - compile: python _tools/cex_compile.py {path}\n  - signal: write_signal('n06', 'monetization_deployed', score)\n  -\
+  \ git: add + commit \"[N06] monetization deployed: {product_name}\"\n\n---"
+workflow_signals: '| Signal | File | Meaning |
+
+  |--------|------|---------|
+
+  | `monetization_parsed` | `.cex/runtime/signals/n06_parse.json` | Intent parsed |
+
+  | `pricing_resolved` | `.cex/runtime/signals/n06_pricing.json` | Costs estimated |
+
+  | `credits_locked` | `.cex/runtime/signals/n06_credits.json` | Balance sufficient |
+
+  | `checkout_required` | `.cex/runtime/signals/n06_checkout_req.json` | Pack purchase needed |
+
+  | `checkout_created` | `.cex/runtime/signals/n06_checkout.json` | Payment session ready |
+
+  | `courses_generated` | `.cex/runtime/signals/n06_courses.json` | LLM chain complete |
+
+  | `ads_validated` | `.cex/runtime/signals/n06_ads.json` | Confidence >= 0.7 |
+
+  | `emails_queued` | `.cex/runtime/signals/n06_emails.json` | Queue ready |
+
+  | `validation_complete` | `.cex/runtime/signals/n06_validation.json` | Gates passed |
+
+  | `monetization_deployed` | `.cex/runtime/signals/n06_monetization.json` | Config deployed |'

@@ -30,6 +30,7 @@ _ops/
 
 # Runtime ephemeral
 .cex/runtime/
+.cex/learning_records/
 
 # Media (not useful for LLM)
 _docs/*.mp4

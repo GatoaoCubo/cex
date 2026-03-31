@@ -1,0 +1,61 @@
+id: p12_dr_builder_nucleus
+kind: dispatch_rule
+pillar: P12
+title: Dispatch Rule -- Builder Nucleus
+version: 2.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: builder_agent
+domain: meta-construction
+quality: 9.0
+tags:
+- dispatch-rule
+- builder
+- N03
+tldr: Routes construction tasks to N03 via keyword matching and confidence scoring.
+density_score: 0.88
+scope: construction
+keywords:
+- build
+- create
+- construct
+- design
+- scaffold
+- generate
+- forge
+- construir
+- criar
+- gerar
+priority: 8
+confidence_threshold: 0.7
+fallback: If confidence < 0.70 and no other nucleus matches, route to N03 with clarification. Builder is safest default for
+  ambiguous make intents.
+routing_strategy: keyword_match
+routing_keywords: '| Keywords | Language | Confidence |
+
+  |----------|----------|------------|
+
+  | build, create, construct, make | EN | 0.90 |
+
+  | design, scaffold, generate, forge | EN | 0.85 |
+
+  | artifact, kind, template, component | EN | 0.80 |
+
+  | construir, criar, gerar, montar | PT | 0.85 |'
+decision_matrix: '| Signal | Route | Conf |
+
+  |--------|-------|------|
+
+  | create a [kind] | N03 direct | 0.95 |
+
+  | build [thing] for [domain] | N03 via Motor | 0.85 |
+
+  | scaffold nucleus | N03 nucleus_builder | 0.90 |
+
+  | register new kind | N03 kind_register | 0.90 |
+
+  | deploy [thing] | NOT N03 -> N05 | 0.00 |
+
+  | research [topic] | NOT N03 -> N01 | 0.00 |
+
+  | write copy for | NOT N03 -> N02 | 0.00 |'

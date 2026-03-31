@@ -1,0 +1,47 @@
+id: p04_tool_software_project
+kind: cli_tool
+pillar: P04
+title: Software Project Tool — N03 CLI
+version: 1.0.0
+created: 2026-03-31
+updated: 2026-03-31
+author: n03_engineering
+domain: software-engineering
+quality: 8.8
+tags:
+- cli-tool
+- software-project
+- scaffold
+- test
+- deploy
+- n03
+tldr: 'CLI tool for N03 software project operations: scaffold (new project), implement (spec→code), test (run pytest), lint
+  (ruff+mypy), docker (build container), deploy (railway/render), review (PR check).'
+density_score: 0.89
+commands: ''
+scaffold_create_new_project: "python -m n03_tools.software_project scaffold \\\n  --name my-pipeline \\\n  --type pipeline_runner\
+  \ \\\n  --python 3.12 \\\n  --deps \"pydantic,httpx,typer\"\n\nOutput: pyproject.toml + src/ + tests/ + Dockerfile + .github/"
+implement_transform_spec_into_code: "python -m n03_tools.software_project implement \\\n  --builder archetypes/builders/research-pipeline-builder/\
+  \ \\\n  --config _instances/codexa/N01_intelligence/research_pipeline_config.md \\\n  --output ./projects/research-pipeline/\n\
+  \nInput: Builder ISOs + instance config\nOutput: Complete Python project with all code"
+test_run_project_tests: "python -m n03_tools.software_project test \\\n  --project ./projects/research-pipeline/ \\\n  --markers\
+  \ \"not slow\" \\\n  --coverage"
+lint_check_code_quality: "python -m n03_tools.software_project lint \\\n  --project ./projects/research-pipeline/ \\\n  --fix\
+  \  # Auto-fix issues"
+docker_build_container: "python -m n03_tools.software_project docker \\\n  --project ./projects/research-pipeline/ \\\n  --tag\
+  \ research-pipeline:latest"
+deploy_deploy_to_paas: "python -m n03_tools.software_project deploy \\\n  --project ./projects/research-pipeline/ \\\n  --target\
+  \ railway \\\n  --environment staging"
+review_check_project_quality: "python -m n03_tools.software_project review \\\n  --project ./projects/research-pipeline/ \\\
+  \n  --rubric 7d  # 7-dimension review"
+integration_with_8f_pipeline: "Intent: \"implement research pipeline in Python\"\n  → F1 CONSTRAIN: load project schema\n\
+  \  → F2 BECOME: software project builder identity\n  → F3 INJECT: builder ISOs + platform KCs + instance config\n  → F4\
+  \ REASON: plan project structure\n  → F5 CALL: identify tools (pytest, ruff, docker, railway)\n  → F6 PRODUCE: generate\
+  \ project files\n  → F7 GOVERN: 8 quality gates (syntax, tests, lint, secrets, docker, ci, health, deps)\n  → F8 COLLABORATE:\
+  \ save + commit + signal"
+dependencies:
+- Python ≥ 3.10
+- hatch, uv, ruff, mypy, pytest (for project building)
+- docker (for container building)
+- '@railway/cli (for Railway deploy)'
+- '@anthropic/mcp-server-github (for PR review)'

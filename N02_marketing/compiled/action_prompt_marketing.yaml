@@ -31,7 +31,7 @@ constraints:
 - ALWAYS produce 3 headline variants minimum
 - NEVER skip funnel stage identification
 domain: copywriting_and_campaigns
-quality: null
+quality: 8.9
 tags:
 - action_prompt
 - marketing

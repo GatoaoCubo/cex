@@ -1,0 +1,46 @@
+id: p12_wf_code_review
+kind: workflow
+pillar: P12
+title: Workflow — Code Review
+version: 1.0.0
+created: 2026-03-31
+updated: 2026-03-31
+author: n03_engineering
+domain: software-engineering
+quality: 8.8
+tags:
+- workflow
+- code-review
+- n03
+- github
+- pull-request
+tldr: '5-step code review workflow: fetch PR → analyze diff → apply 7D rubric → write inline comments → submit review decision.
+  Uses GitHub MCP for all operations.'
+density_score: 0.89
+trigger: "trigger: \"review PR #N\" | \"review latest PRs\" | automated (PR opened)\ninput:\n  repo: owner/repo\n  pr_number:\
+  \ N (optional — if omitted, review all open PRs)"
+steps: ''
+step_1_fetch_pr_details_30s: "action: Get PR metadata + diff\nmcp_calls:\n  - github_get_pull_request(repo, pr_number)\n \
+  \ - github_get_pull_request_diff(repo, pr_number)\n  - github_list_commits(repo, pr_number)\noutput:\n  title, description,\
+  \ author, files_changed, additions, deletions, diff"
+step_2_analyze_diff_2min: "action: Parse diff, identify changes by category\nanalysis:\n  - files_added: list of new files\n\
+  \  - files_modified: list of changed files\n  - files_deleted: list of removed files\n  - change_categories: [logic, tests,\
+  \ config, docs, deps]\n  - pr_size: small (<100) | medium (100-500) | large (500-1000) | xl (>1000)\n  - breaking_changes:\
+  \ boolean"
+step_3_apply_7d_rubric_3min: "action: Score each dimension\nreads:\n  - kc_code_review (7-dimension rubric)\n  - kc_security_practices\
+  \ (security checks)\n  - kc_error_handling_python (error patterns)\ndimensions:\n  correctness: { weight: 25%, checks: [logic,\
+  \ edge_cases, null_handling] }\n  security: { weight: 20%, checks: [injection, auth, secrets, xss] }\n  performance: { weight:\
+  \ 15%, checks: [n_plus_1, unbounded, memory] }\n  readability: { weight: 15%, checks: [naming, function_size, comments]\
+  \ }\n  tests: { weight: 10%, checks: [coverage, edge_cases, mocks] }\n  documentation: { weight: 10%, checks: [docstrings,\
+  \ readme, api_docs] }\n  architecture: { weight: 5%, checks: [layer_violation, circular_deps, patterns] }\noutput:\n  scores:\
+  \ { correctness: 8, security: 9, ... }\n  overall: 8.3\n  issues: [{ file, line, dimension, severity, message, suggestion\
+  \ }]"
+step_4_write_comments_2min: "action: Create inline comments for each issue\nmcp_calls:\n  - github_add_comment(repo, pr_number,\
+  \ file, line, comment)\ncomment_format: |\n  [{dimension}] {severity}: {message}\n  \n  Suggestion: {suggestion}\n  \n \
+  \ Reference: {kc_or_pattern}"
+step_5_submit_review_30s: "action: Submit overall review\nmcp_calls:\n  - github_create_review(repo, pr_number, event, body)\n\
+  decision_matrix:\n  overall >= 8.0: APPROVE\n  overall >= 6.0: COMMENT (suggestions, no blocking)\n  overall >= 4.0: REQUEST_CHANGES\
+  \ (specific fixes required)\n  overall < 4.0: REQUEST_CHANGES (major redesign needed)\nbody: |\n  ## Code Review — {overall}/10\n\
+  \  \n  | Dimension | Score |\n  |-----------|-------|\n  | Correctness | {scores.correctness}/10 |\n  | Security | {scores.security}/10\
+  \ |\n  | ... | ... |\n  \n  ### Issues Found: {issue_count}\n  ### Summary: {decision_reason}"
+total_time_8min_per_pr: ''

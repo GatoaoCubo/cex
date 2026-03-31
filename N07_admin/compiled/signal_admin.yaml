@@ -6,7 +6,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: orchestration
-quality: null
+quality: 8.9
 tags:
 - signal
 - orchestration
@@ -74,7 +74,8 @@ consumer_contract:
 - MAY process optional fields, ignoring absent ones
 - MUST NOT assume signal contains routing or execution instructions
 - 'MUST treat `quality_score: null` as "not yet evaluated"'
-signal_file_location: 'Signals are written to `_ops/signals/` with naming: `{nucleus}{status}{timestamp}.json` Example: `n03_complete_20260330T140000.json`'
+signal_file_location: 'Signals are written to `.cex/runtime/signals/` with naming: `{nucleus}{status}{timestamp}.json` Example:
+  `n03_complete_20260330T140000.json`'
 orchestrator_signal_handling: 'N07 reads signals to:
 
   1. Detect builder completion — validate quality

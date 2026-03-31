@@ -1,0 +1,55 @@
+id: p05_rf_builder_artifact
+kind: response_format
+pillar: P05
+title: Response Format -- CEX Artifact
+version: 2.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: builder_agent
+domain: meta-construction
+quality: 9.0
+tags:
+- response-format
+- builder
+- N03
+tldr: Output format for all artifacts -- YAML frontmatter + Markdown body with open variables.
+density_score: 0.88
+structure: 'Every artifact follows:
+
+  1. YAML frontmatter between --- delimiters
+
+  2. Structured markdown body per builder output template'
+required_frontmatter_fields: '| Field | Rule |
+
+  |-------|------|
+
+  | id | lowercase, underscored, pillar-prefixed |
+
+  | kind | must match kinds_meta.json entry |
+
+  | pillar | P01-P12 |
+
+  | title | descriptive, human-readable |
+
+  | version | semver (major.minor.patch) |
+
+  | created | ISO date |
+
+  | updated | ISO date |
+
+  | author | agent name or human |
+
+  | quality | float 0-10 or null |
+
+  | tags | lowercase list, max 10 |
+
+  | tldr | one sentence, max 120 chars |'
+body_rules:
+- Sections from bld_output_template for the kind
+- Tables for structured data
+- Lists for enumerable items
+- No filler, no placeholder text
+- Density >= 0.80
+- Size <= max_bytes from kinds_meta.json
+- Use {{open_variables}} for consumer-filled values
+naming: 'File: {pillar_lower}{kind}{topic}.md Compiled: {kind}_{topic}.yaml'

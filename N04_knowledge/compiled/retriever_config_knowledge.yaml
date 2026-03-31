@@ -10,7 +10,7 @@ store_type: vector_db
 search_type: similarity
 top_k: 5
 score_threshold: 0.75
-quality: null
+quality: 8.8
 tags:
 - retriever
 - config

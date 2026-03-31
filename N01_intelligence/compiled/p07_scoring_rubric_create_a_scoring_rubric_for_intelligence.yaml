@@ -18,7 +18,7 @@ threshold_publish: 8.0
 threshold_review: 7.0
 automation_status: semi-automated
 domain: research
-quality: null
+quality: 8.9
 tags:
 - scoring-rubric
 - intelligence

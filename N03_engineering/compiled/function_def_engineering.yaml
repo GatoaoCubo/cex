@@ -1,0 +1,22 @@
+id: p04_fd_builder_toolkit
+kind: function_def
+pillar: P04
+title: Function Definitions -- Builder Toolkit
+version: 1.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: builder_agent
+domain: meta-construction
+quality: 9.0
+tags:
+- function-def
+- builder
+- N03
+- tools
+tldr: 10 callable functions in the builder pipeline -- motor, runner, compiler, doctor, forge, indexer, feedback, register,
+  nucleus, validate.
+density_score: 0.9
+invocation_pattern: 'All tools follow: python _tools/{script} [args] All return exit code 0 on success, non-zero on failure.
+  All write structured output to stdout (JSON or human-readable).'
+composition: 'The 8F Runner (F02) internally calls F03-F06-F10 in sequence. For full artifact creation: F01 > F02 (which runs
+  F1-F8 internally). For batch: F05 calls F02 in parallel. For nucleus: F09 calls F02 sequentially for each kind.'

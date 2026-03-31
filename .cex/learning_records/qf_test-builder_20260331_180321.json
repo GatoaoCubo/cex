@@ -1,9 +1,0 @@
-{
-  "timestamp": "2026-03-31T18:03:21",
-  "builder_id": "test-builder",
-  "event": "quality_failure",
-  "score": 4.0,
-  "gates_failed": [
-    "H02"
-  ]
-}

@@ -21,7 +21,7 @@ safety_level: standard
 tools_listed: true
 output_format_type: markdown
 domain: copywriting_and_campaigns
-quality: null
+quality: 8.9
 tags:
 - system_prompt
 - marketing

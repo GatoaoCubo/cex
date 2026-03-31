@@ -23,7 +23,7 @@ signals:
 - error
 spawn_configs": []
 domain: RAG, Knowledge Graphs, Semantic Search, Taxonomy
-quality: null
+quality: 8.9
 tags:
 - workflow
 - n04

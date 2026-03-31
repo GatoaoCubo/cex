@@ -1,0 +1,62 @@
+id: p02_bc_builder_nucleus
+kind: boot_config
+pillar: P02
+title: Boot Config -- Builder Nucleus
+version: 2.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: builder_agent
+domain: meta-construction
+quality: 9.0
+tags:
+- boot-config
+- builder
+- N03
+tldr: Initialization config -- env vars, paths, model defaults, feature flags.
+density_score: 0.88
+environment_variables: '| Variable | Required | Default | Description |
+
+  |----------|----------|---------|-------------|
+
+  | CEX_ROOT | no | auto-detect | Path to CEX repo |
+
+  | ANTHROPIC_API_KEY | yes (for LLM) | none | API key |
+
+  | CEX_MODEL | no | opus | Default model |
+
+  | CEX_DRY_RUN | no | false | Global dry-run |
+
+  | CEX_QUALITY_MIN | no | 8.0 | Quality floor |
+
+  | CEX_MAX_RETRIES | no | 2 | Max F6-F7 cycles |'
+paths: '| Path | Purpose |
+
+  |------|---------|
+
+  | .cex/kinds_meta.json | Kind registry |
+
+  | archetypes/builders/ | Builder ISOs |
+
+  | archetypes/TYPE_TO_TEMPLATE.yaml | Kind-template map |
+
+  | P01_knowledge/library/kind/ | Kind KCs |
+
+  | _tools/ | Pipeline scripts |'
+feature_flags: '| Flag | Default | Effect |
+
+  |------|---------|--------|
+
+  | auto_compile | true | Compile after build |
+
+  | auto_index | true | Index after build |
+
+  | strict_density | false | 0.85 instead of 0.80 |
+
+  | crew_mode | false | Multi-kind crews |'
+startup:
+- Detect CEX_ROOT
+- Verify kinds_meta.json
+- Count builders
+- Check API key if not dry-run
+- Load mental_model
+- Ready

@@ -1,0 +1,96 @@
+id: p01_fse_meta_builder_recipe
+kind: few_shot_example
+pillar: P01
+title: Few-Shot Example -- The Meta-Builder Recipe
+version: 1.0.0
+created: 2026-03-30
+updated: 2026-03-30
+author: builder_agent
+domain: meta-construction
+quality: 9.0
+tags:
+- few-shot-example
+- meta-builder
+- agent-factory
+- recipe
+- how-to
+tldr: Complete worked example of building an agent from intent to published artifact. Shows every 8F step, every decision,
+  every validation. The reference build.
+density_score: 0.92
+input: 'User intent: "I need an agent that reviews code for security vulnerabilities"'
+f1_constrain_load_schema: 'resolved_kind: agent
+
+  target_pillar: P02
+
+  schema: P02_agents/_schema.yaml
+
+  max_bytes: 8192
+
+  naming: "{kind}_{domain}.md"
+
+  required_frontmatter: [id, kind, pillar, title, version, created, author, domain, quality, tags, tldr]'
+f2_become_load_identity: 'identity: N03 Builder Nucleus
+
+  axioms: [AX01-frontmatter-required, AX03-one-kind-one-pillar, AX06-quality-floor-8.0]
+
+  role: Meta-construction consultant
+
+  quality_floor: 8.5'
+f3_inject_load_knowledge: "Loaded:\n  - archetypes/builders/agent-builder/ISO_agent_001_MANIFEST.md\n  - archetypes/builders/agent-builder/ISO_agent_002_INSTRUCTIONS.md\n\
+  \  - archetypes/builders/agent-builder/ISO_agent_003_EXAMPLES.md\n  - P01_knowledge/library/kind/kc_agent.md\n  - 3 existing\
+  \ agent examples from examples/\n  - Construction Triad pattern (Template-First: search existing)\n\nTemplate-First result:\
+  \ Found 2 similar agents (similarity: 0.72, 0.54)\n  -> ADAPT mode: use highest match as starting structure"
+f4_reason_plan: "Plan:\n  1. Adapt existing agent structure (0.72 match)\n  2. Specialize for security domain\n  3. Define\
+  \ capabilities: SAST, dependency audit, secret detection\n  4. Define tools: grep, semgrep, git log\n  5. Define quality:\
+  \ security-specific rubric\n  6. Target score: 9.0+ (meta-construction floor)"
+f5_call_available_tools: "Tools available:\n  - cex_compile.py (post-save compilation)\n  - cex_doctor.py (validation)\n \
+  \ - cex_index.py (re-index after save)\n  - signal_writer.py (completion signal)"
+f6_produce_generate: "---\nid: p02_agent_security_code_reviewer\nkind: agent\npillar: P02\ntitle: Security Code Review Agent\n\
+  version: 1.0.0\ncreated: 2026-03-30\nauthor: builder_agent\ndomain: security\nquality: 9.0\ntags: [agent, security, code-review,\
+  \ SAST, vulnerability]\ntldr: Reviews code for security vulnerabilities using SAST patterns,\n  dependency auditing, and\
+  \ secret detection. Reports with severity scores.\ndensity_score: 0.88\n---\n\n# Security Code Review Agent\n\n## Capabilities\n\
+  \n| Capability | Method | Tools |\n|------------|--------|-------|\n| Static analysis | Pattern matching against known vuln\
+  \ signatures | semgrep, grep |\n| Dependency audit | Check versions against CVE database | pip-audit, npm-audit |\n| Secret\
+  \ detection | Scan for hardcoded keys, tokens, passwords | trufflehog, grep |\n| Git history | Review commits for accidentally\
+  \ committed secrets | git log, git diff |\n\n## Workflow\n\n1. Receive code path or diff\n2. Run SAST scan (pattern matching)\n\
+  3. Run dependency audit\n4. Run secret detection\n5. Aggregate findings with severity (CRITICAL/HIGH/MEDIUM/LOW)\n6. Generate\
+  \ report with fix recommendations\n\n## Quality Gate\n\n| Check | Threshold |\n|-------|-----------|\n| False positive rate\
+  \ | < 10% |\n| Coverage | > 80% of known vulnerability patterns |\n| Report clarity | Actionable fixes, not just warnings\
+  \ |"
+f7_govern_validate_12lp: "12LP Results:\n  1. Frontmatter: PASS (all fields present)\n  2. Kind Match: PASS (agent)\n  3.\
+  \ Pillar Alignment: PASS (P02)\n  4. Schema Compliance: PASS (capabilities, workflow, quality)\n  5. Density: PASS (0.88)\n\
+  \  6. Completeness: PASS (no TODOs)\n  7. Uniqueness: PASS (no duplicate)\n  8. References: PASS (no external refs)\n  9.\
+  \ Boundary: PASS (agent only, no workflow bleed)\n  10. Size: PASS (2.1KB < 8KB max)\n  11. Naming: PASS (agent_security_code_reviewer.md)\n\
+  \  12. Self-Test: PASS (a stranger could use this)\n\n5D Score: D1=9 D2=9 D3=9 D4=9 D5=8 = 8.85\nTier: PUBLISH (>= 8.0)"
+f8_collaborate_save_signal: '# Save
+
+  write to: N0x_domain/agents/agent_security_code_reviewer.md
+
+
+  # Compile
+
+  python _tools/cex_compile.py N0x_domain/agents/agent_security_code_reviewer.md
+
+
+  # Re-index
+
+  python _tools/cex_index.py
+
+
+  # Commit
+
+  git add -A && git commit -m "[N03] agent: security code reviewer (5D: 8.85)"
+
+
+  # Signal
+
+  python -c "from _tools.signal_writer import write_signal; write_signal(''n03'', ''complete'', 8.85)"'
+key_decisions_made: '| Decision | Tree Used | Choice | Why |
+
+  |----------|-----------|--------|-----|
+
+  | Template vs Custom | D_003 | ADAPT (0.72 match) | High similarity, adapt faster |
+
+  | Refactor vs Deliver | D_001 | DELIVER at 8.85 | Above 8.5 floor, specific, clear |
+
+  | Repository vs Local | D_004 | REPOSITORY | Score >= 8.0 |'
