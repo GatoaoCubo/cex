@@ -659,6 +659,28 @@ def classify_objects(objects: list[str]) -> list[dict]:
                 )
                 seen_kinds.add(kind)
 
+    # A4: fallback — use cex_query.py keyword search when OBJECT_TO_KINDS has no match
+    if not classified:
+        try:
+            from cex_query import query_builders
+            query_text = " ".join(objects)
+            hits = query_builders(query_text, top_k=3)
+            for hit in hits:
+                kind = hit.get("kind", "")
+                if kind and kind not in seen_kinds:
+                    classified.append(
+                        {
+                            "object": hit.get("builder_id", kind),
+                            "kind": kind,
+                            "pillar": hit.get("pillar", "P01"),
+                            "primary_function": "BECOME",
+                            "source": "query_fallback",
+                        }
+                    )
+                    seen_kinds.add(kind)
+        except ImportError:
+            pass
+
     if not classified:
         classified.append(
             {

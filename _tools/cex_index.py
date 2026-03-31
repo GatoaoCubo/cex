@@ -20,6 +20,7 @@ DB_PATH = DB_DIR / "index.db"
 SKIP_DIRS = {".git", ".obsidian", "__pycache__", "node_modules", ".cex"}
 
 WIKILINK_RE = re.compile(r"\[\[([^\]]+)\]\]")
+BODY_KEYWORDS_RE = re.compile(r"^keywords:\s*\[([^\]]+)\]", re.MULTILINE)
 
 
 def parse_frontmatter(text: str) -> dict:
@@ -106,6 +107,11 @@ def index_file(filepath: Path, root: Path) -> tuple[dict, list[tuple]]:
     keywords = fm.get("keywords", [])
     if isinstance(keywords, str):
         keywords = [k.strip() for k in keywords.split(",")]
+    # A2: fallback — extract keywords from body ## Routing section if frontmatter empty
+    if not keywords and "bld_manifest" in rel:
+        body_match = BODY_KEYWORDS_RE.search(text)
+        if body_match:
+            keywords = [k.strip() for k in body_match.group(1).split(",")]
     axioms = fm.get("axioms", [])
     if isinstance(axioms, str):
         axioms = [a.strip() for a in axioms.split(",")]
