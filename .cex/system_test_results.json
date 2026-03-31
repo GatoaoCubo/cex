@@ -1,10 +1,10 @@
 {
-  "timestamp": "2026-03-31T10:14:29.339377",
+  "timestamp": "2026-03-31T10:28:27.778181",
   "pass": 52,
   "fail": 0,
   "skip": 1,
   "total": 53,
-  "elapsed_s": 11.6,
+  "elapsed_s": 11.2,
   "tests": [
     {
       "name": "tool:cex_8f_motor.py",
@@ -264,12 +264,12 @@
     {
       "name": "git:clean",
       "status": "PASS",
-      "detail": "1 dirty files"
+      "detail": "0 dirty files"
     },
     {
       "name": "git:has_commits",
       "status": "PASS",
-      "detail": "339199c [AUTO] cycle: 1/1 actions, 0 gaps remaining"
+      "detail": "87950e8 [N07] repo consolidation â€” clean stale dirs, fill "
     }
   ]
 }
