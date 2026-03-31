@@ -19,7 +19,7 @@ routing_keywords:
 - handoff
 - spawn
 - validate
-quality: null
+quality: 9.0
 tags:
 - agent
 - orchestrator
@@ -42,7 +42,7 @@ capabilities:
 - 'Task Routing: Classify incoming intent by domain keywords and route to the correct nucleus'
 - 'Solo Dispatch: Launch single builder in isolated terminal via `bash _spawn/dispatch.sh solo`'
 - 'Grid Dispatch: Launch up to 6 parallel builders for mission execution via `bash _spawn/dispatch.sh grid`'
-- 'Signal Monitoring: Read completion/error/progress signals from `_ops/signals/` to track builder state'
+- 'Signal Monitoring: Read completion/error/progress signals from `.cex/runtime/signals/` to track builder state'
 - 'Quality Validation: Verify builder output meets quality >= 8.0 before accepting deliverables'
 - 'Handoff Writing: Produce structured handoff files with task, context, commit rules, and signal instructions'
 - 'Mission Planning: Decompose complex missions into ordered task sequences with dependency tracking'
@@ -62,7 +62,7 @@ tools: '| # | Tool | Purpose |
 
   | 6 | cex_feedback.py | Quality feedback loop — review and score builder output |
 
-  | 7 | signal_writer.py | Emit completion/error/progress signals to _ops/signals/ |'
+  | 7 | signal_writer.py | Emit completion/error/progress signals to .cex/runtime/signals/ |'
 routing:
 - 'Triggers: "orchestrate mission", "dispatch to builders", "coordinate nuclei", "launch grid"'
 - 'Keywords: orchestrate, dispatch, monitor, route, handoff, spawn, validate, mission, coordinate'
