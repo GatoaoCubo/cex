@@ -5,47 +5,53 @@ pillar: P05
 version: "1.0.0"
 created: "2026-04-01"
 updated: "2026-04-01"
-author: "builder_agent"
+author: "formatter-builder"
 target_format: "markdown"
 input_type: "structured_data"
-rule_count: 7
+rule_count: 6
 domain: "creation_reporting"
 quality: 8.9
-tags: [formatter, markdown, creation, report, P05, dashboard]
-tldr: "Formats creation process data into structured Markdown reports with status, timing, quality metrics and artifact details"
+tags: [formatter, creation, report, markdown, P05, activity]
+title: "Creation Report Formatter"
+tldr: "Formats creation activity data into structured Markdown reports with quality scores, artifact status, and execution metrics"
 template_engine: "string_format"
 pretty_print: true
 escaping: "none"
 encoding: "utf8"
 locale: "pt-BR"
 streaming: false
-keywords: [creation-report, markdown-formatter, process-dashboard, build-status]
+keywords: [creation-report, activity-summary, quality-dashboard, artifact-status]
 density_score: 0.89
 ---
+# Creation Report Formatter
+
 ## Formatting Rules
 | Name | Input Field | Transform | Pattern | Options |
 |------|-------------|-----------|---------|---------|
-| artifact_name | name | stringify | `**{value}**` | max_length: 50, truncate: ellipsis |
-| status_badge | status | stringify | `🟢 {value}` if success else `🔴 {value}` | uppercase: true |
-| timestamp_col | created_at | date_format | `{value:%Y-%m-%d %H:%M:%S}` | timezone: UTC |
-| quality_score | quality | number_format | `{value:.1f}/10.0` | color_code: green if >= 8.0 else red |
-| duration_col | duration_ms | stringify | `{value}ms` if < 1000 else `{value/1000:.1f}s` | unit_convert: true |
-| pillar_tag | pillar | stringify | `[{value}]` | bracket_style: square |
-| error_msg | error | stringify | `❌ {value}` | max_length: 80, truncate: ellipsis |
+| activity_header | activity_name | stringify | `# {value}` | uppercase: false |
+| quality_badge | quality_score | number_format | `**Quality: {value:.1f}/10.0**` | color_threshold: 8.0 |
+| status_indicator | status | stringify | `**Status:** {value}` | uppercase: true, color_map: true |
+| artifact_list | artifacts | tabulate | `- [{name}]({path}) — {description}` | bullet_style: dash |
+| timestamp_format | created_at | date_format | `*Created: {value:%Y-%m-%d %H:%M}*` | locale: pt-BR, timezone: UTC |
+| metrics_table | execution_metrics | tabulate | `| {metric} | {value} | {unit} |` | headers: true, align: right |
 
 ## Input Specification
 Type: structured_data
-Structure: creation process records with name, status, timestamps, quality metrics, pillar assignment and error details.
+Structure: creation activity object with name, quality score, status, artifacts list, timestamps, and execution metrics.
 Example:
 ```json
 {
-  "name": "p02_agent_task_scheduler",
-  "status": "completed",
+  "activity_name": "Build Knowledge Card for React Patterns",
+  "quality_score": 8.7,
+  "status": "complete",
+  "artifacts": [
+    {"name": "kc_react_patterns", "path": "P01_knowledge/kc_react_patterns.md", "description": "React component patterns and best practices"}
+  ],
   "created_at": "2026-04-01T20:05:38Z",
-  "quality": 8.7,
-  "duration_ms": 2340,
-  "pillar": "P02",
-  "error": null
+  "execution_metrics": [
+    {"metric": "Duration", "value": 12.3, "unit": "minutes"},
+    {"metric": "Token Count", "value": 4567, "unit": "tokens"}
+  ]
 }
 ```
 
@@ -53,44 +59,46 @@ Example:
 Format: markdown
 Example:
 ```markdown
-## Creation Report
+# Build Knowledge Card for React Patterns
 
-| Artifact | Status | Created | Quality | Duration | Pillar |
-|----------|--------|---------|---------|----------|--------|
-| **p02_agent_task_scheduler** | 🟢 COMPLETED | 2026-04-01 20:05:38 | 8.7/10.0 | 2.3s | [P02] |
+**Quality: 8.7/10.0** | **Status: COMPLETE**
 
-### Summary
-- **Total artifacts**: 1
-- **Completed**: 1
-- **Failed**: 0
-- **Average quality**: 8.7/10.0
+## Artifacts
+- [kc_react_patterns](P01_knowledge/kc_react_patterns.md) — React component patterns and best practices
+
+## Execution Metrics
+| Metric | Value | Unit |
+|--------|--------|------|
+| Duration | 12.3 | minutes |
+| Token Count | 4567 | tokens |
+
+*Created: 2026-04-01 20:05*
 ```
 
 ## Template
 Engine: string_format
-```markdown
-## Creation Report
+```text
+# {activity_name}
 
-| Artifact | Status | Created | Quality | Duration | Pillar |
-|----------|--------|---------|---------|----------|--------|
-{rows}
+{quality_badge} | {status_indicator}
 
-### Summary
-- **Total artifacts**: {total_count}
-- **Completed**: {completed_count}
-- **Failed**: {failed_count}
-- **Average quality**: {avg_quality:.1f}/10.0
+## Artifacts
+{artifact_list}
+
+## Execution Metrics
+{metrics_table}
+
+{timestamp_format}
 ```
 
 ## Edge Cases
-- Null values: render as `–` placeholder in table cells
-- Empty strings: render as `–` placeholder  
-- Special characters: pipe `|` escaped as `\|` in Markdown table cells
-- Overflow: truncate artifact names and error messages with ellipsis
-- Zero duration: display as `<1ms` for sub-millisecond operations
-- Missing quality: render as `N/A` instead of numeric score
+- Null quality_score: render as `**Quality: N/A**`
+- Empty artifacts array: render as `*No artifacts generated*`
+- Missing execution_metrics: omit entire Execution Metrics section
+- Special characters in artifact names: escape brackets `[]` as `\[\]` in Markdown links
+- Long activity names: truncate at 80 characters with ellipsis
 
 ## References
-- Markdown table specification (CommonMark)
-- ISO 8601 timestamp formatting
-- UTF-8 emoji rendering guidelines
+- Markdown specification: CommonMark 0.30
+- ISO 8601 date formatting for timestamps
+- CEX quality scoring system (0-10 scale)
