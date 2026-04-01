@@ -19,7 +19,7 @@ tldr: "Gates ensuring skill files define a specific trigger, two or more typed w
 ---
 
 ## Definition
-A skill is a reusable capability: a named sequence of phases that can be invoked by a trigger and composed with other skills. A skill passes this gate when the trigger is specific enough to avoid false activations, each phase has typed input and output, error handling is defined at the phase level (not just globally), and the skill makes no claims about being an agent — it is a procedure, not an identity.
+A skill is a reusable capability: a named sequence of phases invoked by a trigger and composed with other skills. Passes when trigger is specific, each phase has typed I/O, error handling is per-phase, and the skill makes no agent identity claims.
 ## HARD Gates
 Failure on any HARD gate = immediate REJECT regardless of score.
 | ID  | Check | Rationale |

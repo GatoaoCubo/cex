@@ -8,7 +8,7 @@ created: 2026-04-01
 author: n07_admin
 domain: brand-configuration-layer
 quality_target: 9.0
-status: SPEC
+status: EXECUTED
 scope: N06_commercial
 depends_on: spec_n06_brand_verticalization
 tags: [spec, n06, brand, output, schemas, quality-gates, orchestration]

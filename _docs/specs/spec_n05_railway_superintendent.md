@@ -8,7 +8,7 @@ created: 2026-04-01
 author: n07_admin
 domain: operations-engineering
 quality_target: 9.0
-status: SPEC
+status: EXECUTED
 scope: N05_operations
 tags: [spec, n05, railway, backend, fastapi, postgresql, deploy]
 tldr: N05 evolui de DevOps generico para Railway Backend Superintendent com dados reais.

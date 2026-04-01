@@ -8,7 +8,7 @@ created: 2026-04-01
 author: n07_admin
 domain: frontend-visual-engineering
 quality_target: 9.0
-status: SPEC
+status: EXECUTED
 scope: N02_marketing
 tags: [spec, n02, frontend, html, css, tailwind, design-system, visual]
 tldr: N02 evolui de copywriter para Visual Frontend Engineer com HTML production-ready.
