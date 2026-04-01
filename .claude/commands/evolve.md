@@ -1,55 +1,51 @@
 You are N07, the orchestrator. The user wants to autonomously improve artifacts.
 
-## What /evolve does
+## Two Modes
 
-Runs the AutoResearch pattern on CEX artifacts:
-- **One artifact, one metric, iterate until quality threshold**
-- Keep improvements (git commit), discard failures (git restore)
-- Log every experiment to `.cex/experiments/results.tsv`
-
-## Execution
-
-### 1. Parse intent
-
-Determine what to evolve:
-- If user specified a file: `cex_evolve.py single <file> --target 9.0`
-- If user said "all" or "sweep": `cex_evolve.py sweep --target 8.5`
-- If user specified a prompt: `cex_evolve.py prompt <file>`
-
-### 2. Run the loop
+### Mode 1: TRUE AutoResearch (agent mode)
+Karpathy pattern — an LLM agent reads `program.md`, modifies the target artifact,
+and runs experiments autonomously. The agent generates creative hypotheses.
+The metric (`cex_score.py`) is immutable. Keep/discard via git.
 
 ```bash
-# Single artifact
-python _tools/cex_evolve.py single <file> --target 9.0 --max-rounds 5
+# Spawn an LLM agent to evolve one artifact (runs until interrupted)
+python _tools/cex_evolve.py agent <file>
+python _tools/cex_evolve.py agent <file> --provider codex
+python _tools/cex_evolve.py agent <file> --provider gemini
+```
 
-# All quality:null artifacts
-python _tools/cex_evolve.py sweep --target 8.5 --max-rounds 3
+The agent reads `program.md` in the repo root. That file contains:
+- The experiment loop protocol
+- What the agent can/cannot modify
+- Quality dimensions and strategy tips
+- The "NEVER STOP" instruction
 
-# Show history
+**This is the real AutoResearch.** The LLM is the researcher.
+
+### Mode 2: Heuristic Fallback (no LLM, fast batch)
+Python-only mechanical fixes. Useful when LLM budget is limited.
+Does NOT generate creative improvements — only frontmatter, whitespace, filler removal.
+
+```bash
+python _tools/cex_evolve.py single <file> --target 9.0
+python _tools/cex_evolve.py sweep --target 8.5
 python _tools/cex_evolve.py report
 ```
 
-### 3. Report results
+## When to Use Which
 
-After evolution completes, report:
-- Files improved (keep count)
-- Files unchanged (discard count)
-- Files that crashed (crash count)
-- Final quality vs. baseline
+| Situation | Mode | Why |
+|-----------|------|-----|
+| Improve one important artifact deeply | `agent` | LLM generates real hypotheses |
+| Score 300 builder specs | `sweep` | No LLM needed for batch scoring |
+| Post-mission cleanup | `sweep` | Fast, mechanical |
+| User says "make this better" | `agent` | Creative improvement needs LLM |
+| User is AFK for hours | `agent` | Runs indefinitely |
 
-### 4. Consolidate
+## The 3-File Architecture (Karpathy)
 
-Run standard post-change validation:
-```bash
-python _tools/cex_compile.py --all
-python _tools/cex_doctor.py
-```
-
-## The AutoResearch pattern (Karpathy)
-
-3-file architecture:
-- `program.md` (goals) → CLAUDE.md + quality gates
-- `train.py` (modifiable) → the target artifact
-- `prepare.py` (metric) → cex_score.py + cex_compile.py
-
-Loop: modify → run → measure → keep or discard. Never stop.
+| File | Role | Who writes | Who modifies |
+|------|------|-----------|-------------|
+| `program.md` | Experiment loop instructions | Human | Nobody (read-only) |
+| Target artifact | The file being improved | Agent | Agent only |
+| `cex_score.py` | The metric | Human | Nobody (immutable) |

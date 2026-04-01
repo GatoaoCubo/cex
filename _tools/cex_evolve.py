@@ -1,27 +1,37 @@
 #!/usr/bin/env python3
 """
-cex_evolve.py — Autonomous Experiment Loop (AutoResearch pattern)
+cex_evolve.py — Autonomous Experiment Loop (Karpathy AutoResearch pattern)
 
-Inspired by Karpathy's AutoResearch: give the system one artifact, one metric,
-and let it run experiments autonomously. Keep what improves, discard what doesn't.
+Two modes:
+  agent   — TRUE AutoResearch: spawns an LLM agent with program.md to
+            modify one artifact autonomously. The AGENT hypothesizes,
+            modifies, and the METRIC (cex_score.py) is immutable.
+            This is the real Karpathy pattern.
 
-3-file architecture (mapped to CEX):
-  program.md  → CLAUDE.md + builder specs + quality gates (human goals)
-  train.py    → The target artifact being evolved (agent modifies)
-  prepare.py  → cex_score.py + cex_compile.py + cex_doctor.py (immutable metric)
+  heuristic — Fast fallback: Python heuristics (no LLM) do mechanical
+              fixes (frontmatter, whitespace, filler). Useful for batch
+              scoring when LLM budget is limited.
+
+3-file architecture (Karpathy original):
+  program.md  → instructions for the LLM agent (human-written, read-only)
+  target file → the ONE artifact the agent modifies
+  cex_score.py + cex_compile.py → immutable metric (agent cannot touch)
 
 Modes:
-  single <file>          — Evolve one artifact until quality >= threshold
-  sweep                  — Evolve all quality:null artifacts
-  prompt <file>          — Evolve a system prompt by measuring output quality
+  agent <file>           — TRUE AutoResearch: LLM agent evolves artifact
+  single <file>          — Heuristic mode: Python-only improvements
+  sweep                  — Heuristic sweep on all quality:null
   report                 — Show experiment history
 
 Usage:
-  python _tools/cex_evolve.py single N01_intelligence/agents/agent_intelligence.md
-  python _tools/cex_evolve.py single N01_intelligence/agents/agent_intelligence.md --target 9.0 --max-rounds 10
+  # True AutoResearch (LLM in the loop):
+  python _tools/cex_evolve.py agent N01_intelligence/agents/agent_intelligence.md
+  python _tools/cex_evolve.py agent N01_intelligence/agents/agent_intelligence.md --provider claude
+
+  # Heuristic fallback (no LLM, fast batch):
+  python _tools/cex_evolve.py single N01_intelligence/agents/agent_intelligence.md --target 9.0
   python _tools/cex_evolve.py sweep --target 8.5 --max-rounds 3
   python _tools/cex_evolve.py report
-  python _tools/cex_evolve.py prompt N01_intelligence/prompts/system_prompt_intelligence.md
 """
 
 import sys
@@ -473,6 +483,87 @@ def show_report():
 
 
 # ============================================================
+# AGENT MODE — True AutoResearch (LLM in the loop)
+# ============================================================
+
+def evolve_agent(filepath: Path, provider: str = "claude"):
+    """
+    TRUE AutoResearch: spawn an LLM agent with program.md to evolve one artifact.
+
+    This is the Karpathy pattern:
+    - program.md tells the agent WHAT to do (read-only)
+    - The agent modifies the target file (creative hypotheses)
+    - cex_score.py measures the result (immutable metric)
+    - The agent keeps or discards based on the metric
+    - NEVER STOPS until interrupted
+
+    Provider-agnostic: works with claude, codex, gemini, pi.
+    """
+    fp = Path(filepath)
+    if not fp.exists():
+        print(f"[ERROR] File not found: {fp}")
+        return
+
+    program = CEX_ROOT / "program.md"
+    if not program.exists():
+        print(f"[ERROR] program.md not found at {program}")
+        print("  This file contains the experiment loop instructions for the LLM agent.")
+        return
+
+    # Build the prompt: program.md + target file path + baseline score
+    baseline_score = score_artifact(fp)
+    baseline_text = f"Baseline score: {baseline_score or 'null'}"
+
+    prompt = f"""Read program.md in the repo root. Your target artifact is: {fp}
+
+{baseline_text}
+
+Begin the experiment loop now. Do NOT ask me anything. Just start."""
+
+    print(f"\n{'='*60}")
+    print(f"[AGENT MODE] Spawning {provider} with program.md")
+    print(f"  Target:   {fp}")
+    print(f"  Baseline: {baseline_score or 'null'}")
+    print(f"  Provider: {provider}")
+    print(f"  Protocol: program.md (Karpathy AutoResearch)")
+    print(f"{'='*60}")
+    print(f"\n  The agent will run autonomously. Ctrl+C to stop.\n")
+
+    # Provider-agnostic spawn
+    if provider == "claude":
+        cmd = ["claude", "-p", prompt, "--allowedTools",
+               "Edit", "Write", "Bash", "Read"]
+    elif provider == "codex":
+        cmd = ["codex", "exec", prompt]
+    elif provider == "gemini":
+        cmd = ["gemini", "-p", prompt]
+    elif provider == "pi":
+        cmd = ["pi", prompt]
+    else:
+        print(f"[ERROR] Unknown provider: {provider}. Use: claude, codex, gemini, pi")
+        return
+
+    try:
+        # Run interactively — the agent takes over
+        result = subprocess.run(cmd, timeout=3600)  # 1 hour max
+        print(f"\n[AGENT] Exited with code {result.returncode}")
+    except subprocess.TimeoutExpired:
+        print("\n[AGENT] 1 hour timeout reached. Stopping.")
+    except FileNotFoundError:
+        print(f"\n[ERROR] '{provider}' CLI not found. Install it or use a different --provider.")
+        print(f"  Alternatives: claude, codex, gemini, pi")
+    except KeyboardInterrupt:
+        print(f"\n[AGENT] Interrupted by user. Checking results...")
+
+    # Post-run: show what happened
+    final_score = get_current_quality(fp)
+    print(f"\n  Final score: {final_score or 'null'} (was: {baseline_score or 'null'})")
+    if final_score and baseline_score and final_score > baseline_score:
+        print(f"  Improvement: +{final_score - baseline_score:.1f}")
+    show_report()
+
+
+# ============================================================
 # CLI
 # ============================================================
 
@@ -483,7 +574,20 @@ def main():
 
     mode = sys.argv[1]
 
-    if mode == "single":
+    if mode == "agent":
+        # TRUE AutoResearch — LLM agent with program.md
+        if len(sys.argv) < 3:
+            print("Usage: cex_evolve.py agent <file> [--provider claude|codex|gemini|pi]")
+            return
+        filepath = Path(sys.argv[2])
+        provider = "claude"
+        for i, arg in enumerate(sys.argv[3:], 3):
+            if arg == "--provider" and i + 1 < len(sys.argv):
+                provider = sys.argv[i + 1]
+        evolve_agent(filepath, provider=provider)
+
+    elif mode == "single":
+        # Heuristic fallback — no LLM
         if len(sys.argv) < 3:
             print("Usage: cex_evolve.py single <file> [--target N] [--max-rounds N]")
             return
@@ -498,6 +602,7 @@ def main():
         evolve_single(filepath, target=target, max_rounds=max_rounds)
 
     elif mode == "sweep":
+        # Heuristic batch — no LLM
         target = 8.5
         max_rounds = 3
         for i, arg in enumerate(sys.argv[2:], 2):
@@ -510,14 +615,12 @@ def main():
     elif mode == "report":
         show_report()
 
-    elif mode == "prompt":
-        if len(sys.argv) < 3:
-            print("Usage: cex_evolve.py prompt <system_prompt.md>")
-            return
-        print("[TODO] Prompt evolution requires LLM integration. Use /evolve command for now.")
-
     else:
-        print(f"Unknown mode: {mode}. Use: single, sweep, prompt, report")
+        print(f"Unknown mode: {mode}. Use: agent, single, sweep, report")
+        print(f"\n  agent  = TRUE AutoResearch (LLM in the loop, program.md)")
+        print(f"  single = Heuristic fallback (Python-only, fast)")
+        print(f"  sweep  = Heuristic batch (all quality:null)")
+        print(f"  report = Experiment history")
 
 
 if __name__ == "__main__":
