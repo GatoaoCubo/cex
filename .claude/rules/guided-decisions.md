@@ -1,0 +1,84 @@
+---
+glob: "**"
+alwaysApply: true
+description: "Guided Decision Protocol — the balance between co-pilot and autonomous execution"
+---
+
+# Guided Decision Protocol (GDP)
+
+**As mandatory as 8F. 8F controls HOW to build. GDP controls WHO decides WHAT.**
+
+## The Two Modes
+
+```
+┌─────────────────────────────────────────────────────┐
+│              CEX Operating Modes                     │
+│                                                      │
+│  CO-PILOT (user present)    AUTONOMOUS (dispatched)  │
+│  ├─ /init                   ├─ /grid                 │
+│  ├─ /mission (interactive)  ├─ solo dispatch         │
+│  ├─ /build (conversational) ├─ 8F pipeline           │
+│  │                          │                        │
+│  │  GDP ACTIVE              │  GDP OFF               │
+│  │  Present options          │  Read manifest          │
+│  │  Wait for user            │  Use decisions          │
+│  │  Write manifest           │  Execute autonomously   │
+│  └──────────┬───────────────┘                        │
+│              │                                        │
+│              ▼                                        │
+│     .cex/runtime/decisions/                           │
+│     decision_manifest.yaml                            │
+│     (the bridge between modes)                        │
+└─────────────────────────────────────────────────────┘
+```
+
+## Rule 1: GDP BEFORE dispatch
+
+Before ANY `/mission` or `/grid` that spawns nuclei:
+1. Identify what SUBJECTIVE decisions the mission requires
+2. Present them as Decision Points (see `skill_guided_decisions.md`)
+3. Collect answers into `decision_manifest.yaml`
+4. THEN dispatch with the manifest
+
+## Rule 2: Manifest carries decisions to nuclei
+
+Every handoff file written by dispatch MUST include:
+```
+## DECISIONS (from user)
+See: .cex/runtime/decisions/decision_manifest.yaml
+```
+
+Nuclei read the manifest. They do NOT re-ask the user.
+They do NOT assume different answers.
+The manifest is the SINGLE SOURCE OF TRUTH for subjective decisions.
+
+## Rule 3: Nuclei are FULLY AUTONOMOUS after dispatch
+
+Once dispatched with a manifest:
+- Nucleus reads manifest → knows all decisions
+- Executes 8F pipeline → no questions asked
+- If manifest doesn't cover an edge case → use ★ Recommended + flag it
+- Commit, signal, done
+
+A dispatched nucleus NEVER asks the user anything.
+A dispatched nucleus NEVER contradicts the manifest.
+
+## Rule 4: No manifest = co-pilot mode
+
+If a nucleus starts WITHOUT a manifest (direct conversation):
+- GDP is ACTIVE
+- Present Decision Points for subjective choices
+- Build the manifest as you go
+- Execute after all DPs are resolved
+
+## When to trigger GDP (quick check)
+
+| Situation | GDP? | Why |
+|-----------|------|-----|
+| User says `/init` | YES | Brand identity is 100% subjective |
+| User says `/mission build landing page` | YES | Layout, tone, CTA, colors need decisions |
+| User says `/build kc_react_patterns` | NO | Knowledge card is factual, not subjective |
+| User says `/grid BRAND_LAUNCH` | YES before grid | Grid needs manifest FIRST |
+| N03 runs 8F autonomously | NO | Already has manifest from dispatch |
+| User asks "fix this bug" | NO | Mechanical, one correct answer |
+| User asks "write copy for my product" | YES | Tone, audience, CTA are subjective |

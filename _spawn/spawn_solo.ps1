@@ -38,6 +38,20 @@ New-Item -ItemType Directory -Force -Path "$runtimeDir\handoffs","$runtimeDir\si
 # Write handoff if task provided
 if ($task) {
     $handoffPath = "$runtimeDir\handoffs\${nucleus}_task.md"
+    # Check if decision manifest exists
+    $manifestPath = "$runtimeDir\decisions\decision_manifest.yaml"
+    $manifestBlock = ""
+    if (Test-Path $manifestPath) {
+        $manifestBlock = @"
+
+## DECISIONS (from user — DO NOT re-ask)
+Read: .cex/runtime/decisions/decision_manifest.yaml
+All subjective decisions were already made with the user.
+Execute using those decisions. Do NOT override them.
+If a decision is missing, use recommended default and flag it.
+"@
+    }
+
     @"
 # $upper Task
 **Autonomia Total** | **Quality 9.0+**
@@ -45,6 +59,7 @@ if ($task) {
 
 ## TAREFA
 $task
+$manifestBlock
 
 ## COMMIT
 git add -A

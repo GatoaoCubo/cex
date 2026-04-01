@@ -38,15 +38,21 @@ Check `CEX_NUCLEUS`. N07 = Orchestrator. N03 = Builder. Not set = read and decid
 | **Kind registry** | `.cex/kinds_meta.json` (99 kinds) |
 | **Nucleus fractals** | `N{01-07}_*/` (13 subdirs each, mirrors 12 pillars) |
 | **Boot scripts** | `boot/cex.cmd` (N07) · `boot/n0{1-6}.cmd` |
-| **Runtime** | `.cex/runtime/{handoffs,signals,pids}/` |
+| **Decision manifest** | `.cex/runtime/decisions/decision_manifest.yaml` |
+| **GDP skill** | `archetypes/builders/_shared/skill_guided_decisions.md` |
+| **Runtime** | `.cex/runtime/{handoffs,signals,pids,decisions}/` |
 | **Learning records** | `.cex/learning_records/` |
 | **Session state** | `.cex/runtime/` (handoffs, signals, archive) |
 
-## 3 Rules
+## 4 Rules
 
 1. **8F is mandatory.** Every artifact passes F1→F8. No exceptions.
-2. **N07 never builds.** Dispatch via `bash _spawn/dispatch.sh`. Always.
-3. **quality: null.** Never self-score. Peer-review assigns quality.
+2. **GDP before dispatch.** Subjective decisions → ask user first → write manifest → THEN execute autonomously.
+3. **N07 never builds.** Dispatch via `bash _spawn/dispatch.sh`. Always.
+4. **quality: null.** Never self-score. Peer-review assigns quality.
+
+> **GDP (Guided Decision Protocol)**: User decides WHAT (tone, audience, style). LLM decides HOW (files, pipeline, structure).
+> See `.claude/rules/guided-decisions.md` and `archetypes/builders/_shared/skill_guided_decisions.md`.
 
 ## Commands
 
