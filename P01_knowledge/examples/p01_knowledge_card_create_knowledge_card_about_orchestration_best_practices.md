@@ -58,6 +58,13 @@ criticality: high
 - BACKUP persistent volumes before major updates
 - MONITOR resource utilization at 70% triggers scaling events
 
+## Anti-Patterns
+- **No Resource Limits**: Containers consume all node memory causing OOMKilled cascades
+- **Missing Readiness Probes**: Traffic routed to starting pods causing 502 errors
+- **Recreate Strategy**: All pods killed simultaneously causing total downtime
+- **Single Replica**: No redundancy during node failures or updates
+- **Root Filesystem**: Containers run as root creating security vulnerabilities
+
 ## Flow
 ```text
 [Manifest] -> [Scheduler] -> [Node Selection] -> [Pod Creation]
