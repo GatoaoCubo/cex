@@ -19,7 +19,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "cex-tools"
-version = "1.0.0"
+version = "10.0.0"
 description = "CEX 8F pipeline toolchain — 23 Python tools for typed knowledge construction"
 requires-python = ">=3.10"
 dependencies = [

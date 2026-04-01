@@ -947,5 +947,86 @@
       "p04_skill_code_review"
     ],
     "schema_ref": "archetypes/builders/skill-builder/bld_schema_skill.md"
+  },
+  "model_provider": {
+    "pillar": "P02",
+    "description": "LLM provider adapter (Claude, GPT, Gemini, Ollama, OpenRouter, LiteLLM)",
+    "layer": "runtime",
+    "core": true,
+    "sdk_module": "cex_sdk.models.providers",
+    "llm_function": "CALL",
+    "added_version": "10.0.0"
+  },
+  "toolkit": {
+    "pillar": "P04",
+    "description": "Collection of callable tools with auto JSON Schema",
+    "layer": "runtime",
+    "core": true,
+    "sdk_module": "cex_sdk.tools.toolkit",
+    "llm_function": "CALL",
+    "added_version": "10.0.0"
+  },
+  "workflow_primitive": {
+    "pillar": "P12",
+    "description": "Workflow execution primitive (Step, Parallel, Loop, Condition, Router)",
+    "layer": "runtime",
+    "core": true,
+    "sdk_module": "cex_sdk.workflow",
+    "llm_function": "PRODUCE",
+    "added_version": "10.0.0"
+  },
+  "reasoning_trace": {
+    "pillar": "P03",
+    "description": "Structured chain-of-thought reasoning with confidence scores",
+    "layer": "runtime",
+    "core": true,
+    "sdk_module": "cex_sdk.reasoning.step",
+    "llm_function": "REASON",
+    "added_version": "10.0.0"
+  },
+  "compression_config": {
+    "pillar": "P10",
+    "description": "Context compression configuration for tool outputs",
+    "layer": "runtime",
+    "core": false,
+    "sdk_module": "cex_sdk.memory.compression",
+    "llm_function": "INJECT",
+    "added_version": "10.0.0"
+  },
+  "trace_config": {
+    "pillar": "P07",
+    "description": "Trace/span configuration for 8F pipeline observability",
+    "layer": "runtime",
+    "core": false,
+    "sdk_module": "cex_sdk.tracing.exporter",
+    "llm_function": "GOVERN",
+    "added_version": "10.0.0"
+  },
+  "session_backend": {
+    "pillar": "P10",
+    "description": "Per-user session state persistence backend",
+    "layer": "runtime",
+    "core": false,
+    "sdk_module": "cex_sdk.session.base",
+    "llm_function": "INJECT",
+    "added_version": "10.0.0"
+  },
+  "embedder_provider": {
+    "pillar": "P01",
+    "description": "Text embedding provider for vector search",
+    "layer": "runtime",
+    "core": true,
+    "sdk_module": "cex_sdk.knowledge.embedder",
+    "llm_function": "INJECT",
+    "added_version": "10.0.0"
+  },
+  "vectordb_backend": {
+    "pillar": "P01",
+    "description": "Vector database backend for similarity search",
+    "layer": "runtime",
+    "core": true,
+    "sdk_module": "cex_sdk.vectordb",
+    "llm_function": "INJECT",
+    "added_version": "10.0.0"
   }
 }

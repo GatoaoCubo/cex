@@ -25,6 +25,10 @@ class FixedChunking(ChunkingStrategy):
                 content=text[start:end],
                 meta_data={**document.meta_data, "chunk_index": i, "strategy": "fixed"},
             ))
-            start = end - self.chunk_overlap
+            # Advance by at least 1 char to avoid infinite loops
+            advance = max(end - self.chunk_overlap, start + 1)
+            if advance >= len(text):
+                break
+            start = advance
             i += 1
         return chunks

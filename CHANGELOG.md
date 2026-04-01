@@ -5,15 +5,42 @@ Format follows [Keep a Changelog](https://keepachangelog.com/).
 
 ---
 
-## [Unreleased] — v7.0.0 Runtime Foundation (Planned)
+## [10.0.0] - 2026-04-01 — Runtime Assimilation (Agno → CEX)
 
-### Planned (Agno Assimilation — Phase 1)
-- `cex_sdk/models/` — Model provider SDK (Claude, GPT, Gemini, Ollama, OpenRouter, LiteLLM)
+### Added — Phase 1: Runtime Foundation (v7.x)
+- `cex_sdk/models/` — Model ABC + 6 providers (Claude, GPT, Gemini, Ollama, OpenRouter, LiteLLM)
+- `cex_sdk/models/message.py` — Message dataclass for LLM conversations
+- `cex_sdk/models/response.py` — ModelResponse + ToolExecution
+- `cex_sdk/models/metrics.py` — Token/cost/timing metrics (RunMetrics, MessageMetrics)
+- `cex_sdk/models/structured.py` — Pydantic structured output parsing (4 strategies)
 - `cex_sdk/tools/` — Toolkit framework + Function auto-schema + @cex_tool decorator
-- `cex_sdk/guardrails/` — PII detection, prompt injection, moderation (absorvido do Agno)
-- `cex_sdk/models/structured.py` — Pydantic structured output for LLM responses
-- New kinds: model_provider, toolkit, guardrail
-- See: `_docs/ASSIMILATION_PLAN.md` for full 4-phase roadmap (v7→v10)
+- `cex_sdk/guardrails/` — PII detection (US+BR), prompt injection (EN+PT), BaseGuardrail ABC
+
+### Added — Phase 2: Knowledge Pipeline (v8.x)
+- `cex_sdk/knowledge/reader/` — 5 readers (markdown, PDF, CSV, JSON, web)
+- `cex_sdk/knowledge/chunking/` — 4 strategies (fixed, recursive, markdown, base)
+- `cex_sdk/knowledge/embedder/` — 2 providers (OpenAI, Ollama) + ABC
+- `cex_sdk/vectordb/` — ChromaDB backend + VectorDb ABC
+- `cex_sdk/knowledge/reranker/` — Cohere reranker + ABC
+
+### Added — Phase 3: Execution Engine (v9.x)
+- `cex_sdk/workflow/` — 5 primitives (Step, Parallel, Loop, Condition, Router) + Workflow orchestrator
+- `cex_sdk/memory/manager.py` — LLM-powered memory extraction (6 memory types)
+- `cex_sdk/memory/compression.py` — Context compression manager
+- `cex_sdk/eval/base.py` — BaseEval (pre_check/post_check) + QualityGateEval
+- `cex_sdk/reasoning/step.py` — ReasoningStep + ReasoningTrace with GDP integration
+
+### Added — Phase 4: Integrations (v10.x)
+- `cex_sdk/tools/mcp/client.py` — MCP bridge (MCPTools)
+- `cex_sdk/tools/builtin/` — 4 tool kits (file, shell, python, web)
+- `cex_sdk/tracing/exporter.py` — Trace/Span/TraceExporter for 8F observability
+- `cex_sdk/session/base.py` — Per-user session state persistence
+
+### Stats
+- 78 Python files, 4504 lines absorbed from Agno patterns
+- 46 integrity tests (100% passing)
+- Source: https://github.com/agno-agi/agno (MPL-2.0)
+- See: `_docs/ASSIMILATION_PLAN.md` for full roadmap
 - See: `_docs/AGNO_vs_CEX_ANALYSIS.md` for competitive analysis
 
 ---

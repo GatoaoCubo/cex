@@ -1,0 +1,79 @@
+﻿[2026-04-01 19:54:11] [INFO] ============================================================
+[2026-04-01 19:54:11] [INFO]   CEX OVERNIGHT FLYWHEEL
+[2026-04-01 19:54:11] [INFO] ============================================================
+[2026-04-01 19:54:11] [INFO] Started: 2026-04-01T19:54:11.8425307-03:00
+[2026-04-01 19:54:11] [INFO] Budget:  500000 tokens
+[2026-04-01 19:54:11] [INFO] Target:  9
+[2026-04-01 19:54:11] [INFO] Thresh:  8.5
+[2026-04-01 19:54:11] [INFO] Cycles:  max 1
+[2026-04-01 19:54:11] [INFO] Phase:   bootstrap
+[2026-04-01 19:54:11] [INFO] DryRun:  True
+[2026-04-01 19:54:11] [INFO] Log:     C:\Users\PC\Documents\GitHub\cex\.cex\overnight\overnight_20260401_195411.log
+[2026-04-01 19:54:11] [INFO] 
+[2026-04-01 19:54:11] [INFO] ============================================================
+[2026-04-01 19:54:11] [INFO]   FLYWHEEL CYCLE 1 / 1
+[2026-04-01 19:54:11] [INFO] ============================================================
+[2026-04-01 19:54:11] [INFO] Budget remaining: 500000 tokens
+[2026-04-01 19:54:11] [INFO] ============================================================
+[2026-04-01 19:54:11] [INFO]   PHASE 1: BOOTSTRAP
+[2026-04-01 19:54:11] [INFO] ============================================================
+[2026-04-01 19:54:11] [INFO] N03 (Builder Architect): 0 artifacts. Bootstrapping...
+[2026-04-01 19:54:11] [SKIP]   N03/agent: done in previous run. Skip.
+[2026-04-01 19:54:11] [SKIP]   N03/system_prompt: done in previous run. Skip.
+[2026-04-01 19:54:11] [SKIP]   N03/knowledge_card: done in previous run. Skip.
+[2026-04-01 19:54:11] [SKIP]   N03/agent_card: done in previous run. Skip.
+[2026-04-01 19:54:11] [SKIP]   N03/workflow: done in previous run. Skip.
+[2026-04-01 19:54:11] [SKIP]   N03/quality_gate: done in previous run. Skip.
+[2026-04-01 19:54:11] [SKIP]   N03/scoring_rubric: done in previous run. Skip.
+[2026-04-01 19:54:11] [SKIP]   N03/dispatch_rule: done in previous run. Skip.
+[2026-04-01 19:54:11] [SKIP]   N03/schema: done in previous run. Skip.
+[2026-04-01 19:54:11] [SKIP]   N03/output_template: done in previous run. Skip.
+[2026-04-01 19:54:11] [SKIP]   N03/prompt_template: done in previous run. Skip.
+[2026-04-01 19:54:11] [INFO] N05 (DevOps Engineer): 0 artifacts. Bootstrapping...
+[2026-04-01 19:54:11] [SKIP]   N05/agent: done in previous run. Skip.
+[2026-04-01 19:54:11] [SKIP]   N05/system_prompt: done in previous run. Skip.
+[2026-04-01 19:54:11] [SKIP]   N05/knowledge_card: done in previous run. Skip.
+[2026-04-01 19:54:11] [SKIP]   N05/agent_card: done in previous run. Skip.
+[2026-04-01 19:54:11] [SKIP]   N05/workflow: done in previous run. Skip.
+[2026-04-01 19:54:12] [SKIP]   N05/quality_gate: done in previous run. Skip.
+[2026-04-01 19:54:12] [SKIP]   N05/scoring_rubric: done in previous run. Skip.
+[2026-04-01 19:54:12] [SKIP]   N05/dispatch_rule: done in previous run. Skip.
+[2026-04-01 19:54:12] [SKIP]   N05/schema: done in previous run. Skip.
+[2026-04-01 19:54:12] [SKIP]   N05/output_template: done in previous run. Skip.
+[2026-04-01 19:54:12] [SKIP]   N05/prompt_template: done in previous run. Skip.
+[2026-04-01 19:54:12] [INFO] N06 (Brand Architect): 0 artifacts. Bootstrapping...
+[2026-04-01 19:54:12] [SKIP]   N06/agent: done in previous run. Skip.
+[2026-04-01 19:54:12] [SKIP]   N06/system_prompt: done in previous run. Skip.
+[2026-04-01 19:54:12] [SKIP]   N06/knowledge_card: done in previous run. Skip.
+[2026-04-01 19:54:12] [SKIP]   N06/agent_card: done in previous run. Skip.
+[2026-04-01 19:54:12] [SKIP]   N06/workflow: done in previous run. Skip.
+[2026-04-01 19:54:12] [SKIP]   N06/quality_gate: done in previous run. Skip.
+[2026-04-01 19:54:12] [SKIP]   N06/scoring_rubric: done in previous run. Skip.
+[2026-04-01 19:54:12] [SKIP]   N06/dispatch_rule: done in previous run. Skip.
+[2026-04-01 19:54:12] [SKIP]   N06/schema: done in previous run. Skip.
+[2026-04-01 19:54:12] [SKIP]   N06/output_template: done in previous run. Skip.
+[2026-04-01 19:54:12] [SKIP]   N06/prompt_template: done in previous run. Skip.
+[2026-04-01 19:54:12] [INFO] N07 (Mission Control): 0 artifacts. Bootstrapping...
+[2026-04-01 19:54:12] [SKIP]   N07/agent: done in previous run. Skip.
+[2026-04-01 19:54:12] [SKIP]   N07/system_prompt: done in previous run. Skip.
+[2026-04-01 19:54:12] [SKIP]   N07/knowledge_card: done in previous run. Skip.
+[2026-04-01 19:54:12] [SKIP]   N07/agent_card: done in previous run. Skip.
+[2026-04-01 19:54:12] [SKIP]   N07/workflow: done in previous run. Skip.
+[2026-04-01 19:54:12] [SKIP]   N07/quality_gate: done in previous run. Skip.
+[2026-04-01 19:54:12] [SKIP]   N07/scoring_rubric: done in previous run. Skip.
+[2026-04-01 19:54:12] [SKIP]   N07/dispatch_rule: done in previous run. Skip.
+[2026-04-01 19:54:12] [SKIP]   N07/schema: done in previous run. Skip.
+[2026-04-01 19:54:12] [SKIP]   N07/output_template: done in previous run. Skip.
+[2026-04-01 19:54:12] [SKIP]   N07/prompt_template: done in previous run. Skip.
+[2026-04-01 19:54:12] [INFO] Bootstrap complete. 77 artifacts created.
+[2026-04-01 19:54:12] [INFO] Artifacts still below target: 158
+[2026-04-01 19:54:12] [INFO] 
+[2026-04-01 19:54:17] [INFO] ============================================================
+[2026-04-01 19:54:17] [INFO]   OVERNIGHT COMPLETE
+[2026-04-01 19:54:17] [INFO] ============================================================
+[2026-04-01 19:54:17] [INFO] Cycles:    1
+[2026-04-01 19:54:17] [INFO] Created:   77
+[2026-04-01 19:54:17] [INFO] Evolved:   221
+[2026-04-01 19:54:17] [INFO] Tokens:    0 / 500000
+[2026-04-01 19:54:17] [INFO] Duration:  0.6h
+[2026-04-01 19:54:17] [INFO] Log:       C:\Users\PC\Documents\GitHub\cex\.cex\overnight\overnight_20260401_195411.log

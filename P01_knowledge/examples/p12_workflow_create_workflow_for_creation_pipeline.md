@@ -1,0 +1,80 @@
+---
+id: p12_wf_creation_pipeline
+kind: workflow
+pillar: P12
+version: "1.0.0"
+created: "2026-04-01"
+updated: "2026-04-01"
+author: "workflow-builder"
+title: "Creation Pipeline Workflow"
+steps_count: 5
+execution: sequential
+agent_nodes: [research_agent, orchestrator, builder_agent, validator_agent]
+timeout: 3600
+retry_policy: per_step
+depends_on: []
+signals: [complete, error, step_complete]
+spawn_configs: [p12_spawn_research_solo, p12_spawn_builder_solo, p12_spawn_validator_solo]
+domain: "creation"
+quality: 8.8
+tags: [workflow, creation, pipeline, orchestration, multi-agent]
+tldr: "5-step sequential creation workflow: research context, plan specifications, build artifacts, validate quality, publish results"
+density_score: 0.92
+---
+## Purpose
+Orchestrates end-to-end artifact creation through research, planning, building, validation, and publishing phases. Takes a creation intent as input and produces high-quality artifacts with proper validation and documentation. Each step builds on previous outputs to ensure coherent, well-researched, and validated deliverables.
+
+## Steps
+
+### Step 1: Research Context [research_agent]
+- **Agent**: research_agent (N01)
+- **Action**: Gather domain knowledge, existing patterns, and reference materials for the creation intent
+- **Input**: Creation intent specification from handoff file
+- **Output**: Knowledge cards and research brief committed to records/pool/
+- **Signal**: research_complete with context quality score
+- **Depends on**: none (initial step)
+
+### Step 2: Plan Specifications [orchestrator]
+- **Agent**: orchestrator (N07)
+- **Action**: Create detailed specifications and blueprints based on research findings
+- **Input**: Knowledge cards and research brief from Step 1
+- **Output**: Specification document with requirements, structure, and success criteria
+- **Signal**: planning_complete with specification quality score
+- **Depends on**: Step 1
+
+### Step 3: Build Artifacts [builder_agent]
+- **Agent**: builder_agent (N03)
+- **Action**: Create artifacts following specifications using research context and domain knowledge
+- **Input**: Specifications from Step 2 and knowledge context from Step 1
+- **Output**: Complete artifacts with proper frontmatter and structured content
+- **Signal**: build_complete with artifact quality score
+- **Depends on**: Steps 1, 2
+
+### Step 4: Validate Quality [validator_agent]
+- **Agent**: validator_agent (N05)
+- **Action**: Run quality gates, validate against specifications, and verify completeness
+- **Input**: Built artifacts from Step 3 and specifications from Step 2
+- **Output**: Quality report with scores and any required improvements
+- **Signal**: validation_complete with final quality assessment
+- **Depends on**: Steps 2, 3
+
+### Step 5: Publish Results [orchestrator]
+- **Agent**: orchestrator (N07)
+- **Action**: Finalize artifacts, compile to YAML, commit changes, and archive handoffs
+- **Input**: Validated artifacts and quality report from Step 4
+- **Output**: Published artifacts with compilation, git commit, and archived workflow state
+- **Signal**: workflow_complete with final delivery confirmation
+- **Depends on**: Step 4
+
+## Dependencies
+- Creation intent must be specified in handoff file before workflow starts
+- Research_agent spawn configuration must be available for knowledge gathering
+- Builder_agent spawn configuration must reference appropriate builder for the creation type
+- Validator_agent must have access to quality gates and validation criteria
+- Git repository must be accessible for committing final artifacts
+
+## Signals
+- **On step complete**: {agent}_complete signal emitted with quality score (see signal-builder)
+- **On workflow complete**: workflow_complete signal with aggregated quality and artifact locations
+- **On error**: {agent}_error signal, retry failed step once, then escalate to orchestrator
+- **Progress tracking**: step_complete signal after each phase for monitoring and handoff coordination

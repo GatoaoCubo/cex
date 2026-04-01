@@ -392,15 +392,39 @@ class CrewRunner:
         prompt_file.write_text(prompt, encoding="utf-8")
 
         try:
-            # Use claude CLI (subscription auth) instead of API
-            result = subprocess.run(
-                ["claude", "-p", "--model", model, "--no-chrome"],
-                input=prompt, capture_output=True, text=True,
-                timeout=120, cwd=str(ROOT), encoding="utf-8",
-            )
-            if result.returncode != 0:
-                raise RuntimeError(f"claude -p exit {result.returncode}: {result.stderr[:300]}")
-            content = result.stdout
+            # --- [1] Claude CLI first (uses subscription, zero cost) ---
+            content = None
+            try:
+                result = subprocess.run(
+                    ["claude", "-p", "--model", model, "--no-chrome"],
+                    input=prompt, capture_output=True, text=True,
+                    timeout=120, cwd=str(ROOT), encoding="utf-8",
+                )
+                if result.returncode == 0 and result.stdout.strip():
+                    content = result.stdout
+            except FileNotFoundError:
+                pass  # CLI not available, try SDK
+
+            # --- [2] SDK fallback (only if CLI failed AND CEX_USE_API=1) ---
+            if not content and os.environ.get("CEX_USE_API", "0") == "1":
+                try:
+                    sdk_root = str(Path(__file__).resolve().parent.parent)
+                    if sdk_root not in sys.path:
+                        sys.path.insert(0, sdk_root)
+                    from cex_sdk.models.message import Message as SDKMessage
+                    from cex_sdk.models.providers.anthropic import Claude as SDKClaude
+                    sdk_model = SDKClaude(id=model, max_tokens=max_tokens)
+                    response = sdk_model.invoke([SDKMessage(role="user", content=prompt)])
+                    if response.content:
+                        content = response.content
+                        usage = response.response_usage
+                        if usage:
+                            print(f"  [SDK-API] {bid}: in={usage.input_tokens} out={usage.output_tokens}", file=sys.stderr)
+                except Exception:
+                    pass
+
+            if not content:
+                raise RuntimeError("No LLM provider available (CLI failed, API disabled)")
             fork_file.write_text(content, encoding="utf-8")
 
             import re as _re

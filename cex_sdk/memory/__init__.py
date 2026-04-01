@@ -1,13 +1,14 @@
 """
 cex_sdk.memory — Intelligent Memory System
 
+CEX version: 10.0.0 | Pillar: P10 (Memory) | 8F: INJECT (F3)
 Absorbed from: agno/memory/ + agno/learn/
-CEX version: 9.2.0
-Pillar: P10 (Memory)
-8F function: INJECT (F3)
 
-Components:
-  - MemoryManager: LLM-powered memory extraction
-  - CompressionManager: context window optimization
-  - LearningMachine: 6 memory stores (user profile, entity, session, knowledge, decisions)
+Usage:
+  from cex_sdk.memory import MemoryManager, CompressionManager
 """
+
+from cex_sdk.memory.compression import CompressionManager
+from cex_sdk.memory.manager import LearningMode, MemoryEntry, MemoryManager
+
+__all__ = ["MemoryManager", "MemoryEntry", "LearningMode", "CompressionManager"]

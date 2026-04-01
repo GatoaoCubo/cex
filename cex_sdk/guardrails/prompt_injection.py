@@ -15,11 +15,17 @@ from cex_sdk.guardrails.base import BaseGuardrail, InputGuardrailError
 
 # Default injection patterns (EN + PT-BR)
 DEFAULT_PATTERNS = [
-    # English
+    # English — core injection patterns
     "ignore previous instructions",
+    "ignore all previous instructions",
     "ignore your instructions",
+    "ignore all instructions",
+    "ignore the above",
+    "disregard previous",
+    "disregard all previous",
     "you are now a",
     "forget everything above",
+    "forget your instructions",
     "developer mode",
     "override safety",
     "disregard guidelines",
@@ -34,9 +40,13 @@ DEFAULT_PATTERNS = [
     "admin override",
     "root access",
     "forget everything",
-    # Portuguese
+    "do not follow",
+    "new instructions",
+    # Portuguese — BR injection patterns
     "ignore instruções anteriores",
+    "ignore todas as instruções",
     "esqueça tudo acima",
+    "esqueça suas instruções",
     "modo desenvolvedor",
     "finja que você é",
     "ignore as regras",
@@ -45,6 +55,8 @@ DEFAULT_PATTERNS = [
     "modo administrador",
     "acesso root",
     "ignore as diretrizes",
+    "desconsidere tudo",
+    "novas instruções",
 ]
 
 

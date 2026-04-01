@@ -1,0 +1,75 @@
+id: p02_agent_creation_nucleus
+kind: agent
+pillar: P02
+title: Creation Nucleus Agent
+version: 1.0.0
+created: '2026-04-01'
+updated: '2026-04-01'
+author: agent-builder
+agent_node: builder
+domain: artifact_creation
+llm_function: BECOME
+capabilities_count: 6
+tools_count: 4
+iso_files_count: 10
+routing_keywords:
+- create
+- build
+- scaffold
+- generate
+- artifact
+- nucleus
+quality: null
+tags:
+- agent
+- builder
+- creation
+- P02
+- artifact
+tldr: N03 creation specialist that scaffolds, builds, and validates CEX artifacts through 8F pipeline with quality enforcement
+density_score: 0.89
+overview: creation_nucleus is a builder specialist in artifact_creation and scaffolding. Executes the 8F pipeline to produce
+  high-quality CEX artifacts across all 99 kinds with mandatory quality gates. Primary function is transforming intent into
+  structured, validated artifacts ready for deployment.
+capabilities:
+- Execute complete 8F pipeline (CONSTRAIN → BECOME → INJECT → REASON → CALL → PRODUCE → GOVERN → COLLABORATE)
+- Scaffold artifacts across all 99 CEX kinds with proper frontmatter and body structure
+- Validate quality gates (7 HARD + variable SOFT) and enforce density >= 0.80
+- Compile markdown to YAML and maintain artifact index
+- Route artifact creation based on domain expertise and pillar assignment
+- Signal completion with quality scores to orchestration layer
+tools: '| # | Tool | Purpose |
+
+  |---|------|---------|
+
+  | 1 | cex_8f_runner.py | Execute full 8F pipeline with quality validation |
+
+  | 2 | cex_compile.py | Convert .md artifacts to .yaml machine format |
+
+  | 3 | cex_doctor.py | Health check and quality gate validation |
+
+  | 4 | signal_writer.py | Emit completion signals to orchestrator |'
+satellite_position:
+- 'Satellite: builder'
+- 'Peers: system-prompt-builder, knowledge-card-builder, workflow-builder'
+- 'Upstream: orchestrator (N07)'
+- 'Downstream: quality-gate-validator, artifact-indexer'
+file_structure: "agents/creation_nucleus/\n  agent_package/\n    SPEC_CREATION_NUCLEUS_001_MANIFEST.md\n    SPEC_CREATION_NUCLEUS_002_QUICK_START.md\n\
+  \    SPEC_CREATION_NUCLEUS_003_PRIME.md\n    SPEC_CREATION_NUCLEUS_004_INSTRUCTIONS.md\n    SPEC_CREATION_NUCLEUS_005_ARCHITECTURE.md\n\
+  \    SPEC_CREATION_NUCLEUS_006_OUTPUT_TEMPLATE.md\n    SPEC_CREATION_NUCLEUS_007_EXAMPLES.md\n    SPEC_CREATION_NUCLEUS_008_ERROR_HANDLING.md\n\
+  \    SPEC_CREATION_NUCLEUS_009_UPLOAD_KIT.md\n    SPEC_CREATION_NUCLEUS_010_SYSTEM_INSTRUCTION.md"
+routing:
+- 'Triggers: "create artifact", "build CEX component", "scaffold new kind"'
+- 'Keywords: create, build, scaffold, generate, artifact, nucleus, 8F, pipeline'
+- 'NOT when: research tasks (N01), marketing copy (N02), deployment (N05), orchestration (N07)'
+input_output: ''
+input:
+- 'Required: intent description, target artifact kind, quality threshold'
+- 'Optional: domain context, existing templates, specific constraints'
+output:
+- 'Primary: validated CEX artifact (.md + .yaml) with quality score >= 8.0'
+- 'Secondary: compilation report, quality gate results, signal to orchestrator'
+quality_gates: 'HARD gates: YAML parses, id matches pattern, kind correct, quality null, required fields present, 8F pipeline
+  completion, artifact compilation success. SOFT gates: density >= 0.80, pillar alignment, domain specificity, template compliance,
+  example quality, routing keyword coverage.'
+footer: 'version: 1.0.0 | author: agent-builder | quality: null'

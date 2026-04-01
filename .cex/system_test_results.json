@@ -1,30 +1,30 @@
 {
-  "timestamp": "2026-03-31T19:06:31.839875",
-  "pass": 53,
-  "fail": 1,
-  "skip": 0,
-  "total": 54,
-  "elapsed_s": 73.8,
+  "timestamp": "2026-04-01T19:06:59.260905",
+  "pass": 48,
+  "fail": 4,
+  "skip": 1,
+  "total": 53,
+  "elapsed_s": 14.8,
   "tests": [
     {
       "name": "tool:cex_8f_motor.py",
       "status": "PASS",
-      "detail": "53820B"
+      "detail": "53810B"
     },
     {
       "name": "tool:cex_8f_runner.py",
       "status": "PASS",
-      "detail": "51335B"
+      "detail": "50109B"
     },
     {
       "name": "tool:cex_intent.py",
       "status": "PASS",
-      "detail": "16588B"
+      "detail": "19411B"
     },
     {
       "name": "tool:cex_compile.py",
       "status": "PASS",
-      "detail": "11339B"
+      "detail": "11304B"
     },
     {
       "name": "tool:cex_doctor.py",
@@ -39,7 +39,7 @@
     {
       "name": "tool:cex_feedback.py",
       "status": "PASS",
-      "detail": "14194B"
+      "detail": "14162B"
     },
     {
       "name": "tool:cex_hooks.py",
@@ -54,7 +54,7 @@
     {
       "name": "tool:cex_materialize.py",
       "status": "PASS",
-      "detail": "5899B"
+      "detail": "5903B"
     },
     {
       "name": "tool:signal_writer.py",
@@ -63,43 +63,43 @@
     },
     {
       "name": "doctor:pass_count",
-      "status": "PASS",
-      "detail": "105/98+ PASS"
+      "status": "FAIL",
+      "detail": "49/98+ PASS"
     },
     {
       "name": "doctor:zero_warn",
-      "status": "PASS",
-      "detail": "0 WARN"
+      "status": "FAIL",
+      "detail": "57 WARN"
     },
     {
       "name": "doctor:zero_fail",
-      "status": "PASS",
-      "detail": "0 FAIL"
+      "status": "FAIL",
+      "detail": "1 FAIL"
     },
     {
       "name": "compile:all",
       "status": "PASS",
-      "detail": "264/264"
+      "detail": "265/265"
     },
     {
       "name": "builders:count",
       "status": "PASS",
-      "detail": "106 builders"
+      "detail": "107 builders"
     },
     {
       "name": "builders:13_isos",
       "status": "PASS",
-      "detail": "all 13 ISOs"
+      "detail": "all 13 specs"
     },
     {
       "name": "nucleus:N01_intelligence",
       "status": "PASS",
-      "detail": "20 artifacts (min 11)"
+      "detail": "34 artifacts (min 11)"
     },
     {
       "name": "nucleus:N02_marketing",
       "status": "PASS",
-      "detail": "14 artifacts (min 10)"
+      "detail": "36 artifacts (min 10)"
     },
     {
       "name": "nucleus:N03_engineering",
@@ -109,37 +109,37 @@
     {
       "name": "nucleus:N04_knowledge",
       "status": "PASS",
-      "detail": "18 artifacts (min 12)"
+      "detail": "33 artifacts (min 12)"
     },
     {
       "name": "nucleus:N05_operations",
       "status": "PASS",
-      "detail": "9 artifacts (min 9)"
+      "detail": "28 artifacts (min 9)"
     },
     {
       "name": "nucleus:N06_commercial",
       "status": "PASS",
-      "detail": "13 artifacts (min 9)"
+      "detail": "40 artifacts (min 9)"
     },
     {
       "name": "nucleus:N07_admin",
       "status": "PASS",
-      "detail": "18 artifacts (min 13)"
+      "detail": "30 artifacts (min 13)"
     },
     {
       "name": "quality:zero_null",
       "status": "PASS",
-      "detail": "1 quality:null (awaiting peer review)"
+      "detail": "0 quality:null (awaiting peer review)"
     },
     {
       "name": "quality:scored",
       "status": "PASS",
-      "detail": "132 artifacts with quality score"
+      "detail": "243 artifacts with quality score"
     },
     {
       "name": "subagents:count",
       "status": "PASS",
-      "detail": "108 sub-agents"
+      "detail": "109 sub-agents"
     },
     {
       "name": "subagents:materializer",
@@ -229,7 +229,7 @@
     {
       "name": "registry:kinds_meta",
       "status": "PASS",
-      "detail": "104 kinds registered"
+      "detail": "114 kinds registered"
     },
     {
       "name": "runner:dryrun_runs",
@@ -252,14 +252,9 @@
       "detail": ""
     },
     {
-      "name": "runner:execute_pass",
-      "status": "PASS",
-      "detail": "PASS"
-    },
-    {
-      "name": "runner:learning_record",
-      "status": "PASS",
-      "detail": "22 records"
+      "name": "runner:execute",
+      "status": "SKIP",
+      "detail": "skipped in --quick mode"
     },
     {
       "name": "kc:count",
@@ -269,12 +264,12 @@
     {
       "name": "git:clean",
       "status": "FAIL",
-      "detail": "5 dirty files"
+      "detail": "18 dirty files"
     },
     {
       "name": "git:has_commits",
       "status": "PASS",
-      "detail": "f8fd134 [8F] knowledge_card: create a knowledge card about s"
+      "detail": "b1aae61 [N07] review+fix: program.md universal, agent tests,"
     }
   ]
 }

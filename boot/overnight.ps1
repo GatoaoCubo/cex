@@ -43,10 +43,18 @@ param(
     [float]$TargetScore = 9.0,
     [float]$Threshold = 8.5,
     [int]$MaxCycles = 50,
-    [ValidateSet("all", "bootstrap", "evolve", "cycle")]
+    [ValidateSet("all", "bootstrap", "evolve", "cycle", "farm")]
     [string]$Phase = "all",
-    [switch]$DryRun
+    [switch]$DryRun,
+    [switch]$Farm
 )
+
+# Farm mode: no budget limit, infinite cycles, all phases + knowledge mining
+if ($Farm) {
+    $MaxTokens = [int]::MaxValue
+    $MaxCycles = [int]::MaxValue
+    $Phase = "farm"
+}
 
 # ============================================================
 # CONFIG
@@ -456,6 +464,171 @@ function Invoke-Cycle {
 }
 
 # ============================================================
+# PHASE 4: FARM -- Mine knowledge until rate-limited
+# ============================================================
+
+# Knowledge domains to farm (expands with each cycle)
+$FARM_TOPICS = @(
+    # Per-nucleus deep dives
+    @{ nucleus = "N01"; topics = @(
+        "create knowledge card about competitive intelligence OSINT techniques"
+        "create knowledge card about market research data triangulation"
+        "create knowledge card about trend detection with time series analysis"
+        "create knowledge card about source credibility scoring frameworks"
+        "create schema contract for benchmark comparison data model"
+        "create output template for weekly market intelligence brief"
+    )}
+    @{ nucleus = "N02"; topics = @(
+        "create knowledge card about conversion copywriting frameworks"
+        "create knowledge card about brand voice consistency across channels"
+        "create knowledge card about A/B testing for content optimization"
+        "create knowledge card about SEO content strategy for e-commerce"
+        "create output template for social media content calendar"
+        "create schema contract for campaign performance metrics"
+    )}
+    @{ nucleus = "N03"; topics = @(
+        "create knowledge card about prompt engineering best practices"
+        "create knowledge card about multi-agent orchestration patterns"
+        "create knowledge card about artifact quality evaluation methods"
+        "create knowledge card about LLM output parsing and validation"
+        "create schema contract for builder specification format"
+        "create output template for artifact creation report"
+    )}
+    @{ nucleus = "N04"; topics = @(
+        "create knowledge card about RAG chunking strategies comparison"
+        "create knowledge card about vector embedding model selection"
+        "create knowledge card about knowledge graph construction from documents"
+        "create knowledge card about fine-tuning dataset preparation"
+        "create knowledge card about Supabase pgvector setup for RAG"
+        "create schema contract for training dataset quality metrics"
+    )}
+    @{ nucleus = "N05"; topics = @(
+        "create knowledge card about CI/CD pipeline for LLM applications"
+        "create knowledge card about Python testing strategies for AI agents"
+        "create knowledge card about Docker containerization for AI services"
+        "create knowledge card about API rate limiting and retry patterns"
+        "create schema contract for deployment configuration"
+        "create output template for system health dashboard"
+    )}
+    @{ nucleus = "N06"; topics = @(
+        "create knowledge card about brand archetype theory and application"
+        "create knowledge card about visual identity system design"
+        "create knowledge card about pricing strategy for digital products"
+        "create knowledge card about customer persona development"
+        "create schema contract for brand audit scorecard"
+        "create output template for brand book chapter"
+    )}
+    @{ nucleus = "N07"; topics = @(
+        "create knowledge card about multi-agent task decomposition"
+        "create knowledge card about autonomous agent error recovery"
+        "create knowledge card about inter-agent communication protocols"
+        "create knowledge card about agent performance monitoring"
+        "create schema contract for mission execution plan"
+        "create output template for orchestration status dashboard"
+    )}
+)
+
+$RATE_LIMIT_BACKOFF = 60  # seconds to wait after rate limit
+
+function Invoke-Farm {
+    param($State)
+
+    Write-Banner "PHASE 4: FARM (mining knowledge until rate-limited)"
+
+    # Track what we've farmed
+    if (-not $State.PSObject.Properties['farmed']) {
+        $State | Add-Member -NotePropertyName 'farmed' -NotePropertyValue @() -Force
+    }
+    if (-not $State.PSObject.Properties['rate_limited_at']) {
+        $State | Add-Member -NotePropertyName 'rate_limited_at' -NotePropertyValue $null -Force
+    }
+    if (-not $State.PSObject.Properties['farm_cycle']) {
+        $State | Add-Member -NotePropertyName 'farm_cycle' -NotePropertyValue 0 -Force
+    }
+
+    $State.farm_cycle++
+    $farmed = 0
+    $rateLimited = $false
+
+    foreach ($group in $FARM_TOPICS) {
+        $nKey = $group.nucleus
+
+        foreach ($intent in $group.topics) {
+            # Skip if already farmed
+            $farmKey = "${nKey}_$($intent.GetHashCode())"
+            if ($State.farmed -contains $farmKey) {
+                continue
+            }
+
+            if ($DryRun) {
+                Write-Log "  [DRY-RUN] Would farm: $intent" "DRY"
+                continue
+            }
+
+            Write-Log "  FARM ${nKey}: $($intent.Substring(0, [math]::Min(60, $intent.Length)))..."
+
+            try {
+                $sw = [System.Diagnostics.Stopwatch]::StartNew()
+                $result = & $PYTHON "$CEX_ROOT\_tools\cex_run.py" $intent --execute 2>&1 | Out-String
+                $sw.Stop()
+
+                # Detect rate limit (Claude returns error)
+                if ($result -match 'rate.?limit|429|too many|overloaded|capacity') {
+                    Write-Log "  RATE LIMITED. Backing off ${RATE_LIMIT_BACKOFF}s..." "WARN"
+                    $State.rate_limited_at = (Get-Date -Format o)
+                    Save-State $State
+                    Start-Sleep -Seconds $RATE_LIMIT_BACKOFF
+
+                    # Retry once after backoff
+                    $result = & $PYTHON "$CEX_ROOT\_tools\cex_run.py" $intent --execute 2>&1 | Out-String
+                    if ($result -match 'rate.?limit|429|too many|overloaded|capacity') {
+                        Write-Log "  Still rate-limited. Switching to heuristic work..." "WARN"
+                        $rateLimited = $true
+                        break
+                    }
+                }
+
+                $savedRx = 'Saved:\s*(\S+\.md)'
+                $savedFile = ""
+                if ($result -match $savedRx) { $savedFile = $Matches[1] }
+
+                if ($result -match 'Quality gate.*PASS') {
+                    $farmed++
+                    $State.artifacts_created++
+                    $State.farmed += $farmKey
+                    $elapsed = [math]::Round($sw.Elapsed.TotalSeconds)
+                    Write-Log "  OK Farmed -> $savedFile (${elapsed}s)" "OK"
+                } elseif ($savedFile) {
+                    $farmed++
+                    $State.artifacts_created++
+                    $State.farmed += $farmKey
+                    Write-Log "  WARN Farmed -> $savedFile (gate unknown)" "WARN"
+                } else {
+                    Write-Log "  FAIL Farm failed: no artifact saved" "ERROR"
+                }
+
+                Save-State $State
+                Start-Sleep -Seconds 2
+
+            } catch {
+                Write-Log "  FAIL Farm error: $($_.Exception.Message)" "ERROR"
+            }
+        }
+
+        if ($rateLimited) { break }
+    }
+
+    # If rate limited, do free heuristic work while waiting
+    if ($rateLimited) {
+        Write-Log "  Rate-limited. Running free heuristic evolve while waiting..." "INFO"
+        $State = Invoke-Evolve $State
+    }
+
+    Write-Log "Farm cycle $($State.farm_cycle) complete. $farmed new artifacts mined."
+    return $State
+}
+
+# ============================================================
 # MAIN LOOP
 # ============================================================
 
@@ -507,20 +680,25 @@ function Main {
             Write-Log "Budget remaining: $($MaxTokens - $script:TokensUsed) tokens"
 
             # Phase 1: Bootstrap
-            if ($Phase -eq "all" -or $Phase -eq "bootstrap") {
+            if ($Phase -eq "all" -or $Phase -eq "bootstrap" -or $Phase -eq "farm") {
                 $state = Invoke-Bootstrap $state
                 if (!(Test-Budget)) { break }
             }
 
             # Phase 2: Evolve
-            if ($Phase -eq "all" -or $Phase -eq "evolve") {
+            if ($Phase -eq "all" -or $Phase -eq "evolve" -or $Phase -eq "farm") {
                 $state = Invoke-Evolve $state
                 if (!(Test-Budget)) { break }
             }
 
             # Phase 3: Auto cycle
-            if ($Phase -eq "all" -or $Phase -eq "cycle") {
+            if ($Phase -eq "all" -or $Phase -eq "cycle" -or $Phase -eq "farm") {
                 $state = Invoke-Cycle $state
+            }
+
+            # Phase 4: Farm (mine new knowledge)
+            if ($Phase -eq "farm") {
+                $state = Invoke-Farm $state
             }
 
             # Check if there's still work to do

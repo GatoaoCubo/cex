@@ -20,6 +20,6 @@ Usage:
   from cex_sdk.workflow import Workflow, Step, Parallel
 """
 
-__version__ = "7.0.0-dev"
+__version__ = "10.0.0"
 __agno_source__ = "https://github.com/agno-agi/agno"
 __absorbed_date__ = "2026-04-01"
