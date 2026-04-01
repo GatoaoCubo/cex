@@ -8,197 +8,181 @@ created: "2026-04-01"
 updated: "2026-04-01"
 author: prompt-template-builder
 variables:
-  - name: task_description
+  - name: task_goal
     type: string
     required: true
     default: null
-    description: The main task or goal that needs orchestration across nuclei
+    description: The primary objective or goal to be accomplished through orchestration
   - name: target_nuclei
     type: list
     required: true
     default: null
-    description: List of nuclei that should participate in this orchestration
-  - name: priority
+    description: List of nuclei (N01-N07) that will participate in executing this task
+  - name: priority_level
     type: string
     required: false
     default: "medium"
-    description: Task priority level (low, medium, high, urgent)
+    description: Task priority level (low, medium, high, critical)
   - name: deadline
     type: string
     required: false
     default: null
-    description: Target completion date in YYYY-MM-DD format
-  - name: success_criteria
-    type: list
-    required: true
-    default: null
-    description: Measurable outcomes that define successful completion
+    description: Target completion date or timeline constraint
   - name: dependencies
     type: list
     required: false
     default: []
-    description: Other tasks or artifacts this orchestration depends on
-  - name: stakeholder
-    type: string
+    description: List of prerequisite tasks or resources that must be available
+  - name: success_criteria
+    type: list
     required: true
     default: null
-    description: Who requested this orchestration or owns the outcome
-  - name: resources
-    type: list
+    description: Measurable criteria that define successful task completion
+  - name: resource_constraints
+    type: object
     required: false
-    default: []
-    description: Available resources, constraints, or special requirements
+    default: {}
+    description: Budget, time, or capacity limitations affecting task execution
+  - name: coordination_mode
+    type: string
+    required: false
+    default: "parallel"
+    description: Execution mode (parallel, sequential, hybrid)
 variable_syntax: "mustache"
 composable: false
 domain: orchestration
 quality: 9.0
-tags: [orchestration, dispatch, multi-nucleus, coordination, prompt-template]
-tldr: "Structures orchestration requests for N07 to dispatch tasks across multiple nuclei with clear success criteria."
-keywords: [orchestration, dispatch, nuclei, coordination, multi-agent, task-routing]
+tags: [orchestration, task-dispatch, coordination, nuclei]
+tldr: "Generates structured orchestration instructions for multi-nucleus task execution with clear goals and coordination."
+keywords: [orchestration, dispatch, nuclei, coordination, task, parallel]
 density_score: null
 ---
 # Orchestration Task Dispatch Template
 
 ## Purpose
-
-Produces structured orchestration requests for N07 (Orchestrator) to dispatch complex tasks across multiple nuclei. Reuse scope: any multi-step goal requiring coordination between different domain specialists (research, marketing, knowledge, operations, commercial). Invoke once per orchestration cycle; vary task parameters to produce distinct coordination plans from the same mold.
+Produces structured orchestration instructions for coordinating multi-nucleus task execution within the CEX system. Reuse scope: any complex task requiring coordination between multiple specialized nuclei (N01-N07). Invoke once per orchestration goal; vary task parameters to produce distinct dispatch instructions from the same template structure.
 
 ## Variables Table
-
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| task_description | string | true | null | The main task or goal that needs orchestration across nuclei |
-| target_nuclei | list | true | null | List of nuclei that should participate in this orchestration |
-| priority | string | false | "medium" | Task priority level (low, medium, high, urgent) |
-| deadline | string | false | null | Target completion date in YYYY-MM-DD format |
-| success_criteria | list | true | null | Measurable outcomes that define successful completion |
-| dependencies | list | false | [] | Other tasks or artifacts this orchestration depends on |
-| stakeholder | string | true | null | Who requested this orchestration or owns the outcome |
-| resources | list | false | [] | Available resources, constraints, or special requirements |
+| task_goal | string | true | null | The primary objective or goal to be accomplished through orchestration |
+| target_nuclei | list | true | null | List of nuclei (N01-N07) that will participate in executing this task |
+| priority_level | string | false | "medium" | Task priority level (low, medium, high, critical) |
+| deadline | string | false | null | Target completion date or timeline constraint |
+| dependencies | list | false | [] | List of prerequisite tasks or resources that must be available |
+| success_criteria | list | true | null | Measurable criteria that define successful task completion |
+| resource_constraints | object | false | {} | Budget, time, or capacity limitations affecting task execution |
+| coordination_mode | string | false | "parallel" | Execution mode (parallel, sequential, hybrid) |
 
 ## Template Body
-
 ```
-# ORCHESTRATION REQUEST
+You are the N07 Orchestrator coordinating a multi-nucleus task execution.
 
-## Task Overview
-**Goal**: {{task_description}}
-**Stakeholder**: {{stakeholder}}
-**Priority**: {{priority}}
-{{#deadline}}**Deadline**: {{deadline}}{{/deadline}}
+TASK GOAL: {{task_goal}}
 
-## Nucleus Coordination
-**Target Nuclei**: {{#target_nuclei}}{{.}}, {{/target_nuclei}}
+EXECUTION PARAMETERS:
+- Target Nuclei: {{target_nuclei}}
+- Priority Level: {{priority_level}}
+- Coordination Mode: {{coordination_mode}}
+- Deadline: {{deadline}}
 
-Route this orchestration across the specified nuclei with the following distribution:
-- Each nucleus should focus on their domain expertise
-- Maintain consistent handoff protocols between nuclei
-- Ensure all dependencies are resolved before downstream tasks begin
+DEPENDENCIES:
+{{#dependencies}}
+- {{.}}
+{{/dependencies}}
 
-## Success Definition
-The orchestration is complete when ALL of the following criteria are met:
+SUCCESS CRITERIA:
 {{#success_criteria}}
 - {{.}}
 {{/success_criteria}}
 
-## Dependencies & Constraints
-{{#dependencies}}
-**Dependencies**: 
-{{#dependencies}}
+RESOURCE CONSTRAINTS:
+{{#resource_constraints}}
 - {{.}}
-{{/dependencies}}
-{{/dependencies}}
+{{/resource_constraints}}
 
-{{#resources}}
-**Available Resources**:
-{{#resources}}
-- {{.}}
-{{/resources}}
-{{/resources}}
+ORCHESTRATION INSTRUCTIONS:
+1. Validate all dependencies are satisfied before initiating dispatch
+2. Create handoff files for each target nucleus in .cex/runtime/handoffs/
+3. Execute coordination mode: {{coordination_mode}}
+4. Monitor progress via signals in .cex/runtime/signals/
+5. Consolidate results when all nuclei complete their assignments
+6. Validate against success criteria before marking task complete
 
-## Execution Instructions
-1. Parse this request and identify specific sub-tasks for each target nucleus
-2. Create handoff files for each nucleus in `.cex/runtime/handoffs/`
-3. Execute dispatch via `bash _spawn/dispatch.sh grid ORCHESTRATION_{{priority}}`
-4. Monitor progress through signals in `.cex/runtime/signals/`
-5. Consolidate results when all nuclei signal completion
-6. Validate against success criteria before marking complete
+HANDOFF STRUCTURE for each nucleus:
+- Task context and specific responsibilities
+- Input data and parameters
+- Expected outputs and quality gates
+- Inter-nucleus coordination points
+- Success criteria relevant to this nucleus
 
-**Guidance for N07**: Apply Guided Decision Protocol (GDP) if any subjective choices need stakeholder input before dispatch.
+Monitor completion signals and initiate consolidation when all nuclei report task completion.
 ```
 
 ## Quality Gates
-
 | Gate | Status | Notes |
-|------|--------|--------|
+|------|--------|-------|
 | H01 | PASS | Frontmatter parses as valid YAML |
-| H02 | PASS | ID `p03_pt_orchestration_task_dispatch` matches pattern `^p03_pt_[a-z][a-z0-9_]+$` |
-| H03 | PASS | All 8 template variables declared and appear in body |
-| H04 | PASS | No undeclared variables used in template body |
-| H05 | PASS | File size under 8192 bytes |
-| H06 | PASS | Variable syntax consistently uses mustache tier-1 |
-| H07 | PASS | All required frontmatter fields present |
-| H08 | PASS | Kind field equals `prompt_template` |
+| H02 | PASS | id matches p03_pt_orchestration_task_dispatch pattern |
+| H03 | PASS | id equals filename stem |
+| H04 | PASS | kind equals literal prompt_template |
+| H05 | PASS | quality is null at authoring time |
+| H06 | PASS | All required frontmatter fields present |
+| H07 | PASS | Body contains {{variable}} placeholders |
+| H08 | PASS | All template variables declared in Variables section |
 
 ## Examples
-
-### Variables
+### Variables:
 ```yaml
-task_description: "Launch comprehensive brand identity system for TechFlow SaaS platform"
+task_goal: "Create comprehensive brand identity system for new product launch"
 target_nuclei: ["N02", "N03", "N06"]
-priority: "high" 
+priority_level: "high"
 deadline: "2026-04-15"
-success_criteria:
-  - "Complete brand guide with logo, colors, typography published"
-  - "Landing page deployed with new brand identity"
-  - "Pricing strategy aligned with brand positioning"
-stakeholder: "CMO Sarah Chen"
-dependencies: ["market_research_report", "competitor_analysis"]
-resources: ["$15K design budget", "Brand consultant available", "Development team allocated"]
+dependencies: ["Market research completed", "Product specifications finalized"]
+success_criteria: ["Brand guidelines documented", "Visual assets created", "Pricing strategy defined"]
+resource_constraints: {"budget": 15000, "team_capacity": "3 FTE"}
+coordination_mode: "sequential"
 ```
 
-### Rendered Output
+### Rendered Output:
 ```
-# ORCHESTRATION REQUEST
+You are the N07 Orchestrator coordinating a multi-nucleus task execution.
 
-## Task Overview
-**Goal**: Launch comprehensive brand identity system for TechFlow SaaS platform
-**Stakeholder**: CMO Sarah Chen
-**Priority**: high
-**Deadline**: 2026-04-15
+TASK GOAL: Create comprehensive brand identity system for new product launch
 
-## Nucleus Coordination
-**Target Nuclei**: N02, N03, N06, 
+EXECUTION PARAMETERS:
+- Target Nuclei: N02, N03, N06
+- Priority Level: high
+- Coordination Mode: sequential
+- Deadline: 2026-04-15
 
-Route this orchestration across the specified nuclei with the following distribution:
-- Each nucleus should focus on their domain expertise
-- Maintain consistent handoff protocols between nuclei
-- Ensure all dependencies are resolved before downstream tasks begin
+DEPENDENCIES:
+- Market research completed
+- Product specifications finalized
 
-## Success Definition
-The orchestration is complete when ALL of the following criteria are met:
-- Complete brand guide with logo, colors, typography published
-- Landing page deployed with new brand identity
-- Pricing strategy aligned with brand positioning
+SUCCESS CRITERIA:
+- Brand guidelines documented
+- Visual assets created
+- Pricing strategy defined
 
-## Dependencies & Constraints
+RESOURCE CONSTRAINTS:
+- budget: 15000
+- team_capacity: 3 FTE
 
-**Dependencies**: 
-- market_research_report
-- competitor_analysis
+ORCHESTRATION INSTRUCTIONS:
+1. Validate all dependencies are satisfied before initiating dispatch
+2. Create handoff files for each target nucleus in .cex/runtime/handoffs/
+3. Execute coordination mode: sequential
+4. Monitor progress via signals in .cex/runtime/signals/
+5. Consolidate results when all nuclei complete their assignments
+6. Validate against success criteria before marking task complete
 
-**Available Resources**:
-- $15K design budget
-- Brand consultant available
-- Development team allocated
+HANDOFF STRUCTURE for each nucleus:
+- Task context and specific responsibilities
+- Input data and parameters
+- Expected outputs and quality gates
+- Inter-nucleus coordination points
+- Success criteria relevant to this nucleus
 
-## Execution Instructions
-1. Parse this request and identify specific sub-tasks for each target nucleus
-2. Create handoff files for each nucleus in `.cex/runtime/handoffs/`
-3. Execute dispatch via `bash _spawn/dispatch.sh grid ORCHESTRATION_high`
-4. Monitor progress through signals in `.cex/runtime/signals/`
-5. Consolidate results when all nuclei signal completion
-6. Validate against success criteria before marking complete
-
-**Guidance for N07**: Apply Guided Decision Protocol (GDP) if any subjective choices need stakeholder input before dispatch.
+Monitor completion signals and initiate consolidation when all nuclei report task completion.
 ```
