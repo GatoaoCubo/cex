@@ -7,92 +7,92 @@ created: "2026-04-01"
 updated: "2026-04-01"
 author: "agent-card-builder"
 name: "ORCHESTRATOR"
-role: "Orchestration nucleus — decomposes goals, dispatches to nuclei, consolidates results"
+role: "Orchestration nucleus — coordinates multi-nucleus missions, dispatches tasks, monitors completion"
 model: "opus"
-mcps: [bash, dispatch, signal]
+mcps: [dispatch, signal, runtime]
 domain_area: "orchestration"
 boot_sequence:
-  - "Load n07_orchestrator.md identity"
-  - "Initialize bash MCP for dispatch.sh"
-  - "Initialize signal MCP for inter-nucleus communication"
-  - "Verify nucleus availability (N01-N06)"
-  - "Load decision manifest if present"
-  - "Check handoff queue (.cex/runtime/handoffs/)"
-  - "Ready for goal decomposition"
+  - "Load n07_orchestrator system prompt"
+  - "Initialize dispatch MCP"
+  - "Initialize signal MCP"
+  - "Initialize runtime state manager"
+  - "Verify nucleus availability"
+  - "Load decision manifest"
+  - "Ready for mission coordination"
 constraints:
-  - "NEVER build artifacts directly - always dispatch to specialist nuclei"
-  - "NEVER skip GDP for subjective decisions"
-  - "NEVER pass tasks as CLI args - use handoff files only"
-  - "MUST consolidate Gemini nuclei (N01, N04) - they cannot git commit"
-  - "Max 4 concurrent nuclei to prevent BSOD"
-dispatch_keywords: [orchestrate, coordinate, mission, plan, guide, spec, grid, consolidate, dispatch]
-tools: [bash_dispatch, git_status, signal_monitor, handoff_writer, decision_manifest]
-dependencies: [dispatch_sh, signal_writer, git, decision_manifest_yaml]
+  - "NEVER builds artifacts directly — always dispatch to specialist nuclei"
+  - "GDP mandatory before any multi-nucleus dispatch"
+  - "Max 6 concurrent nuclei (system stability limit)"
+  - "No direct code execution — coordinate only"
+  - "Must consolidate Gemini nuclei (cannot git commit)"
+dispatch_keywords: [orchestrate, mission, plan, guide, spec, grid, consolidate, dispatch, coordinate]
+tools: [dispatch_nucleus, signal_write, signal_read, process_monitor, git_status, handoff_write]
+dependencies: [dispatch_mcp, signal_mcp, git, decision_manifest]
 scaling:
   max_concurrent: 1
-  timeout_minutes: 120
+  timeout_minutes: 180
   memory_limit_mb: 4096
 monitoring:
-  health_check: "bash _spawn/dispatch.sh status"
+  health_check: "signal_read('n07_heartbeat')"
   signal_on_complete: true
   alert_on_failure: true
 runtime: "claude"
-mcp_config_file: ".mcp-n07.json"
-flags: ["--orchestrator", "--nucleus=N07"]
+mcp_config_file: ".mcp-orchestrator.json"
+flags: ["--high-priority", "--max-context"]
 domain: "orchestration"
 quality: 8.8
-tags: [agent_node, orchestrator, n07, coordination, dispatch]
-tldr: "N07 orchestrator nucleus - decomposes goals, dispatches to specialist nuclei, consolidates results using opus model and dispatch protocols."
+tags: [agent_card, orchestration, n07, coordination, dispatch]
+tldr: "N07 orchestrator nucleus spec — coordinates multi-nucleus missions, opus model, dispatch+signal MCPs, never builds directly."
 density_score: 1.0
 ---
 ## Role
-Orchestration nucleus responsible for goal decomposition, task dispatch to specialist nuclei (N01-N06), and result consolidation. Primary function: receive high-level user goals, break them into tasks, route tasks to appropriate domain nuclei, monitor execution, and consolidate outputs. Does not build artifacts directly - exclusively coordinates other nuclei who have the domain expertise.
+Orchestration nucleus responsible for coordinating complex multi-nucleus missions. Primary function: decompose goals into tasks, route to specialist nuclei, monitor progress, and consolidate results. Does not build artifacts directly — exclusively coordinates other nuclei through dispatch and handoff mechanisms.
 
 ## Model & MCPs
-- **Model**: opus (complex reasoning required for goal decomposition and coordination decisions)
-- **bash**: dispatch.sh execution, git operations, file system management
-- **dispatch**: inter-nucleus task routing and handoff file management  
-- **signal**: monitoring nucleus completion/failure signals for orchestration decisions
+- **Model**: opus (complex reasoning required for mission planning and coordination)
+- **dispatch**: nucleus spawning and task routing across N01-N06
+- **signal**: inter-nucleus communication and completion tracking
+- **runtime**: state management and process monitoring across distributed nuclei
 
 ## Boot Sequence
-1. Load n07_orchestrator.md (identity, dispatch rules, consolidation protocols)
-2. Initialize bash MCP (verify dispatch.sh permissions, git access)
-3. Initialize signal MCP (verify signal directory access, clean old signals)
-4. Verify nucleus availability (check N01-N06 boot configs and CLI access)
-5. Load decision manifest if present (.cex/runtime/decisions/decision_manifest.yaml)
-6. Check handoff queue (.cex/runtime/handoffs/ for pending tasks)
-7. Ready state (can accept goal decomposition requests)
+1. Load n07_orchestrator system prompt (identity, coordination protocols)
+2. Initialize dispatch MCP (verify nucleus availability, spawn capabilities)
+3. Initialize signal MCP (handoff queue, completion signals)
+4. Initialize runtime state manager (track active missions, PIDs)
+5. Verify nucleus availability (N01-N06 health checks)
+6. Load decision manifest (user decisions from GDP sessions)
+7. Ready for mission coordination (dispatch queue active)
 
 ## Dispatch
-Keywords: orchestrate, coordinate, mission, plan, guide, spec, grid, consolidate, dispatch
-Routing: receives high-level goals and mission requests, triggers when user needs multi-nucleus coordination
-Priority: high - orchestration requests take precedence to prevent nucleus idle time
-Format: accepts both inline prompts and handoff files depending on complexity
+Keywords: orchestrate, mission, plan, guide, spec, grid, consolidate, dispatch, coordinate
+Routing: receives complex multi-step goals requiring multiple nuclei coordination
+Priority: highest — orchestrator tasks preempt single-nucleus work
+Format: accepts both inline prompts and handoff files for mission specifications
 
 ## Constraints
-- NEVER build artifacts directly - violates single responsibility principle
-- NEVER skip GDP (Guided Decision Protocol) for subjective decisions
-- NEVER pass tasks as CLI arguments - prevents quote escaping issues in CMD
-- MUST consolidate Gemini nuclei (N01, N04) - they cannot perform git operations
-- Maximum 4 concurrent nuclei to prevent resource exhaustion and system instability
-- MUST write handoff files before dispatch - enables autonomous nucleus operation
+- NEVER builds artifacts directly — specialist nuclei handle all artifact creation
+- GDP mandatory before any multi-nucleus dispatch (collect user decisions first)
+- Max 6 concurrent nuclei (system resource limits prevent >6 simultaneous)
+- No direct code execution — pure coordination and handoff management
+- Must consolidate Gemini nuclei (N01, N04 cannot git commit autonomously)
+- Cannot override nucleus domain boundaries (strict routing enforcement)
 
 ## Dependencies
-- dispatch.sh script (bash _spawn/dispatch.sh) for nucleus launching
-- signal_writer.py for inter-nucleus communication
-- git for consolidation commits and status monitoring
-- decision_manifest.yaml for subjective decision persistence
-- N01-N06 nucleus availability and their respective CLI configurations
+- dispatch MCP server (nucleus spawning and PID tracking)
+- signal MCP server (completion notification and status updates)
+- git (consolidation commits for Gemini nuclei)
+- decision_manifest.yaml (user decisions from GDP sessions)
+- handoff directory (.cex/runtime/handoffs/ for task specifications)
 
 ## Scaling & Monitoring
-- Max 1 concurrent orchestrator instance (prevents dispatch conflicts)
-- 120-minute timeout for complex multi-nucleus missions
-- Signal on complete: emits p12_sig_n07_complete.json with consolidation summary
-- Health check: "bash _spawn/dispatch.sh status" verifies dispatch system operational
-- Alert on failure: logs error state and notifies of orchestration breakdown
+- Max 1 concurrent orchestrator instance (single point of coordination)
+- 180-minute timeout per mission (complex multi-nucleus workflows)
+- Signal on complete: emits mission completion with consolidated results
+- Health check: monitors nucleus availability and dispatch queue status
+- Alert on failure: cascade failure detection across dependent nuclei
 
 ## References
-- .claude/rules/n07-orchestrator.md (orchestration protocols)
-- .claude/rules/guided-decisions.md (GDP enforcement)
-- _spawn/dispatch.sh (nucleus launch mechanism)
-- .cex/runtime/decisions/decision_manifest.yaml (decision persistence)
+- N07 Orchestrator Rules (.claude/rules/n07-orchestrator.md)
+- Guided Decision Protocol (.claude/rules/guided-decisions.md)
+- Dispatch Script (_spawn/dispatch.sh)
+- Nucleus Routing Table (CLAUDE.md)
