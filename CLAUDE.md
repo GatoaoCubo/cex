@@ -54,19 +54,36 @@ Check `CEX_NUCLEUS`. N07 = Orchestrator. N03 = Builder. Not set = read and decid
 > **GDP (Guided Decision Protocol)**: User decides WHAT (tone, audience, style). LLM decides HOW (files, pipeline, structure).
 > See `.claude/rules/guided-decisions.md` and `archetypes/builders/_shared/skill_guided_decisions.md`.
 
+## The Workflow
+
+```
+/plan → /guide → /spec → /grid → /consolidate
+  │        │        │       │         │
+  │        │        │       │         └→ verify + score + clean
+  │        │        │       └→ dispatch nuclei (autonomous)
+  │        │        └→ PSPEC blueprint (exact artifacts)
+  │        └→ decisions with user (co-pilot)
+  └→ decompose goal into tasks
+```
+
+User decides WHAT → LLM builds HOW → verify together.
+
 ## Commands
 
 | Command | Purpose |
 |---------|---------|
 | `/init` | **First run**: configure CEX for your brand (~2 min) |
+| `/plan <goal>` | Decompose goal → tasks, nuclei, dependencies |
 | `/guide [goal]` | **Co-pilot**: ask me before building — guided decisions |
-| `/build <intent>` | Create artifact via 8F pipeline |
+| `/spec [plan]` | Create PSPEC blueprint from plan + decisions |
+| `/grid [spec]` | Execute spec — autonomous dispatch to nuclei |
+| `/build <intent>` | Build single artifact via 8F pipeline |
 | `/validate [file\|all]` | Check artifact quality |
-| `/dispatch <nucleus> <task>` | Send task to nucleus builder |
-| `/mission <goal>` | Decompose goal → build artifacts |
+| `/dispatch <nucleus> <task>` | Send task to single nucleus |
+| `/mission <goal>` | **Shortcut**: plan+guide+spec+grid+consolidate in one |
 | `/status` | System health dashboard |
 | `/doctor` | Full diagnostics |
-| `/consolidate` | Post-dispatch cleanup |
+| `/consolidate` | Post-dispatch: verify + score + clean |
 
 ## Tools (run with `--help`)
 

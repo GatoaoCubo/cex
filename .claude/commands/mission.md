@@ -1,10 +1,13 @@
 ---
-description: "Execute a mission — co-pilot decisions first, then autonomous execution. Usage: /mission <goal>"
+description: "Full lifecycle shortcut — plan+guide+spec+grid+consolidate in one. Usage: /mission <goal>"
 ---
 
-# /mission — From Co-pilot to Autonomous
+# /mission — The Full Lifecycle
 
-Two phases: DECIDE with the user, then EXECUTE without them.
+Shortcut that runs the entire workflow: `/plan` → `/guide` → `/spec` → `/grid` → `/consolidate`.
+
+For granular control, run each command separately.
+For "just do everything", use `/mission`.
 
 ## Phase 1: GDP — Guided Decisions (co-pilot)
 
