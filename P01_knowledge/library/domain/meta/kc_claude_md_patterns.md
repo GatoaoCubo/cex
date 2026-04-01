@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: meta
-quality: null
+quality: 8.7
 tags: [claude-md, system-prompt, meta, project-context, memory]
 tldr: "CLAUDE.md is the system prompt that persists. Patterns: identity section, pointers table, rules count, brand injection, status dashboard."
 when_to_use: "Designing or maintaining CLAUDE.md for any Claude Code project"

@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: anti_patterns
-quality: null
+quality: 8.6
 tags: [anti-pattern, isolated, sessions, continuity, handoff]
 tldr: "Sessions that don't share state. Each starts from zero. No learning carries over. Fix: shared filesystem, signals, handoffs."
 when_to_use: "Designing multi-session or multi-agent workflows"

@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: frameworks
-quality: null
+quality: 8.6
 tags: [framework, architecture, llm]
 tldr: "How to sequence multi-step workflows: DAG dependencies, wave execution, signal-based coordination, error handling."
 keywords: [orchestration, workflow, dag, sequencing, dependencies]

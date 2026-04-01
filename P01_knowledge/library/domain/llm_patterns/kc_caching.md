@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: llm_patterns
-quality: null
+quality: 8.7
 tags: [caching, performance, cost, latency, prompt-cache]
 tldr: "Cache LLM responses to reduce cost and latency. Exact match, semantic, prefix caching. Trade-off: freshness vs speed."
 when_to_use: "Optimizing cost or latency in production LLM systems"

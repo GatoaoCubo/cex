@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: anti_patterns
-quality: null
+quality: 8.6
 tags: [anti-pattern, catalog, llm, agent, pitfalls]
 tldr: "Catalog of common LLM agent mistakes: over-autonomy, prompt bloat, jargon dependency, self-scoring, single-point-of-failure."
 when_to_use: "Reviewing agent system design for common pitfalls"

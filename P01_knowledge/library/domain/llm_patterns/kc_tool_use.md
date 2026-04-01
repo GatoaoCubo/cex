@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: llm_patterns
-quality: null
+quality: 8.7
 tags: [tool-use, function-calling, mcp, api, agentic]
 tldr: "LLMs call external tools via structured definitions. Universal: define schema → LLM decides → runtime executes → LLM synthesizes."
 when_to_use: "When building agentic systems that interact with external APIs, databases, or tools"

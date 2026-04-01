@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: frameworks
-quality: null
+quality: 8.6
 tags: [framework, architecture, llm]
 tldr: "System invariants that must ALWAYS hold. 8F mandatory, quality:null on creation, N07 never builds, GDP before dispatch."
 keywords: [laws, invariants, constraints, non-negotiable, rules]

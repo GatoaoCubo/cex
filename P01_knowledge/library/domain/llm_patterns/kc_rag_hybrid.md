@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: llm_patterns
-quality: null
+quality: 8.7
 tags: [rag, retrieval, hybrid, embedding, knowledge-base]
 tldr: "Combine retrieval (search knowledge base) with generation (LLM). Hybrid RAG: TF-IDF for structure + embeddings for semantics. Chunking strategies matter."
 when_to_use: "Building knowledge-aware LLM systems with external data sources"

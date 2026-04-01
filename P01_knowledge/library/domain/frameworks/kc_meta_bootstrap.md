@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: frameworks
-quality: null
+quality: 8.6
 tags: [framework, architecture, llm]
 tldr: "How to bootstrap a system that needs itself to exist. Seed with minimal core, then use the system to extend itself."
 keywords: [bootstrap, meta, self-building, chicken-egg]

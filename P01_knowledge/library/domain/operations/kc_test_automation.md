@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: operations
-quality: null
+quality: 8.6
 tags: [testing, automation, pytest, tdd, quality-assurance]
 tldr: "Test LLM systems at 3 levels: unit (tool functions), integration (pipeline chains), behavioral (output quality). pytest as universal runner."
 when_to_use: "Establishing test coverage for agent tools and workflows"

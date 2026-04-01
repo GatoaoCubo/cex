@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: anti_patterns
-quality: null
+quality: 8.6
 tags: [anti-pattern, context-window, memory, session]
 tldr: "Don't rely on conversation history as the only state. Context windows overflow, sessions end, models change. Persist state to files."
 when_to_use: "Designing agent memory and state management"

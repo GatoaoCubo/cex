@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: operations
-quality: null
+quality: 8.7
 tags: [zero-touch, automation, ops, autonomous, deploy]
 tldr: "Operations that require zero human intervention: auto-detect → auto-diagnose → auto-fix → auto-verify. The goal of mature agent systems."
 when_to_use: "Designing fully autonomous operational workflows"

@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: frameworks
-quality: null
+quality: 8.5
 tags: [framework, architecture, llm]
 tldr: "Raw user input is incomplete. Hydrate with brand, memory, KC context before any nucleus processes it."
 keywords: [hydration, enrichment, context-injection, preprocessing]

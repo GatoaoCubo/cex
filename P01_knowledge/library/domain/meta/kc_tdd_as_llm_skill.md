@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: meta
-quality: null
+quality: 8.7
 tags: [tdd, testing, llm, skill, red-green-refactor]
 tldr: "LLMs can follow TDD: write test first (red), generate code to pass (green), refactor. Tests as specification. Especially effective for tool development."
 when_to_use: "Teaching LLM agents to write reliable code via test-first approach"

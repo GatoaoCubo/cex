@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: llm_patterns
-quality: null
+quality: 8.8
 tags: [cot, reasoning, prompting, llm, step-by-step]
 tldr: "Step-by-step reasoning in prompts improves accuracy on math, logic, and multi-step tasks. Zero-shot CoT vs few-shot CoT."
 when_to_use: "When the task requires multi-step reasoning, planning, or decomposition"

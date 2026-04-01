@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: operations
-quality: null
+quality: 8.7
 tags: [error-recovery, resilience, retry, fallback, circuit-breaker]
 tldr: "Retry with backoff, circuit breaker, fallback chains, graceful degradation. Agents must recover from errors without crashing the workflow."
 when_to_use: "Building resilient agent systems that handle failures gracefully"

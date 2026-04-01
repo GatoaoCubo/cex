@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: anti_patterns
-quality: null
+quality: 8.6
 tags: [anti-pattern, file-storage, context-window, cost]
 tldr: "Don't dump entire files into LLM context. Use retrieval + relevant excerpts. Full-file injection wastes tokens, increases cost, decreases accuracy."
 when_to_use: "Reviewing prompt design for token efficiency"

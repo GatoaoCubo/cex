@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: llm_patterns
-quality: null
+quality: 8.7
 tags: [autonomy, agent, react, plan-execute, reflexion]
 tldr: "Autonomy levels L0-L4. ReAct (reason+act), plan-execute, reflexion. CEX maps: /guide=L2, /grid=L3, auto-workflows=L4."
 when_to_use: "Designing agent systems with varying degrees of human oversight"

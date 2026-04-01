@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: llm_patterns
-quality: null
+quality: 8.7
 tags: [self-healing, error-recovery, retry, resilience]
 tldr: "LLM detects own errors, retries with corrections, learns from failures. Generate → validate → fix → retry (max N)."
 when_to_use: "Building autonomous agents that must recover from errors without human intervention"

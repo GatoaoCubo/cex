@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: frameworks
-quality: null
+quality: 8.6
 tags: [framework, architecture, llm]
 tldr: "Each nucleus has a bounded context. N01 does research, not code. N05 deploys, not designs. Scoping prevents god-agents."
 keywords: [scoping, context, boundaries, nucleus, separation]

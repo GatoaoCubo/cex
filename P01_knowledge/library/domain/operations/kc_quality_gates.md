@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: operations
-quality: null
+quality: 8.7
 tags: [quality-gate, validation, checkpoint, cicd, governance]
 tldr: "Automated checkpoints that block progression if quality criteria aren't met. Compile gate, doctor gate, test gate, review gate."
 when_to_use: "Implementing quality enforcement in artifact production or deployment pipelines"

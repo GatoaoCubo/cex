@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: llm_patterns
-quality: null
+quality: 8.7
 tags: [open-variable, mustache, templating, brand, injection]
 tldr: "Use {{VARIABLE}} placeholders in prompts and configs. Fill at runtime from context (brand, user, environment). Separates structure from content."
 when_to_use: "Building multi-tenant or brand-aware LLM systems"

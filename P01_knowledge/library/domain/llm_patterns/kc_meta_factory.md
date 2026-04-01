@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: llm_patterns
-quality: null
+quality: 8.7
 tags: [meta, factory, builder, bootstrap, self-referential]
 tldr: "A builder that produces other builders. Template + kind definition → specialized agent. CEX _builder-builder, AutoGPT agent-creator."
 when_to_use: "System has >10 specialist agents with shared structure but different domains"

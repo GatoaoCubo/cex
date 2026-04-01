@@ -13,7 +13,7 @@ quality: 8.5
 tldr: "Knowledge card covering RAG fundamentals: retrieval, augmentation, generation, and evaluation patterns."
 quality: 8.5
 tldr: "Knowledge card covering RAG fundamentals: retrieval, augmentation, generation, and evaluation patterns."
-quality: null
+quality: 8.5
 ---
 
 # RAG Fundamentals

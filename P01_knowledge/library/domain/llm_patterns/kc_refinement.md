@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: llm_patterns
-quality: null
+quality: 8.6
 tags: [refinement, iteration, multi-pass, quality]
 tldr: "First draft is never final. Generate → critique → revise per dimension. Structure pass, accuracy pass, voice pass, polish pass."
 when_to_use: "Long-form content, brand-sensitive output, technical documentation"

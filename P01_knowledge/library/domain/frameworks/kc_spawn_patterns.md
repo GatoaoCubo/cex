@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: frameworks
-quality: null
+quality: 8.5
 tags: [framework, architecture, llm]
 tldr: "Patterns for launching parallel agent processes: solo (1 nucleus), grid (up to 6), wave (sequential groups)."
 keywords: [spawn, process, multi-agent, parallel, grid]

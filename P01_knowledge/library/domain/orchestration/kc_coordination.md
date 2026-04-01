@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: orchestration
-quality: null
+quality: 8.7
 tags: [coordination, multi-agent, orchestration, consensus, handoff]
 tldr: "How multiple LLM agents coordinate: orchestrator pattern, blackboard, market-based, pipeline, consensus. CEX uses orchestrator (N07) + shared filesystem."
 when_to_use: "Designing systems where multiple agents must work together on shared goals"

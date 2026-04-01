@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: llm_patterns
-quality: null
+quality: 8.7
 tags: [universal, provider-agnostic, claude, gpt, gemini, llama]
 tldr: "Design for any LLM: use text in/out as primitive, structured output as JSON, tool use via MCP, avoid provider-specific features as core dependencies."
 when_to_use: "Building systems that must work across Claude, GPT, Gemini, Llama, or future models"

@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: frameworks
-quality: null
+quality: 8.6
 tags: [framework, architecture, llm]
 tldr: "Multi-layer validation: schema (compile), structural (doctor), behavioral (tests), quality (score), brand (audit)."
 keywords: [qa, validation, gates, checklist, automated]

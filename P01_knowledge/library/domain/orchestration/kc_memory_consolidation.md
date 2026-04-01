@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: orchestration
-quality: null
+quality: 8.7
 tags: [memory, consolidation, learning, long-term, knowledge-management]
 tldr: "Short-term (session) → working (handoff) → long-term (KC/learning record). Consolidate learnings across sessions into persistent knowledge."
 when_to_use: "Designing agent memory systems that persist across sessions"

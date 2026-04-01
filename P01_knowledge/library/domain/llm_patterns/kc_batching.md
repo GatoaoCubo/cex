@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: llm_patterns
-quality: null
+quality: 8.6
 tags: [batching, parallel, bulk, throughput, fan-out]
 tldr: "Process multiple LLM calls in parallel or batch. Fan-out/fan-in for throughput. Batch APIs for cost. Grid dispatch for agent systems."
 when_to_use: "Processing multiple artifacts, queries, or tasks that don't depend on each other"

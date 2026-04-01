@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: orchestration
-quality: null
+quality: 8.7
 tags: [enterprise, scaling, orchestration, governance, compliance]
 tldr: "Patterns for scaling agent systems: RBAC, audit trails, rate limiting, cost controls, compliance gates. From solo to team to enterprise."
 when_to_use: "Scaling an agent system beyond single-user to team or enterprise deployment"
