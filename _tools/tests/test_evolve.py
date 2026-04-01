@@ -21,6 +21,8 @@ from cex_evolve import (
     init_results,
     log_result,
     evolve_agent,
+    evolve_auto,
+    _parse_agent_response,
     RESULTS_DIR,
 )
 
@@ -316,87 +318,173 @@ class TestEvolveSingleIntegration:
 
 
 # ============================================================
-# Agent mode tests (mocked subprocess — no real LLM calls)
+# _parse_agent_response tests
+# ============================================================
+
+class TestParseAgentResponse:
+    def test_parses_hypothesis_and_content(self):
+        """Extracts hypothesis line and file content."""
+        response = """HYPOTHESIS: added anti-pattern section
+
+---
+id: test
+kind: schema
+---
+
+# Test
+
+Content here."""
+        hypothesis, content = _parse_agent_response(response)
+        assert hypothesis == "added anti-pattern section"
+        assert content.startswith("---")
+        assert "# Test" in content
+
+    def test_handles_bare_frontmatter(self):
+        """If no HYPOTHESIS line, detects frontmatter directly."""
+        response = """---
+id: test
+kind: schema
+---
+
+# Test"""
+        hypothesis, content = _parse_agent_response(response)
+        assert content.startswith("---")
+        assert "direct modification" in hypothesis
+
+    def test_handles_code_block_wrapped(self):
+        """Extracts content from markdown code blocks."""
+        response = """HYPOTHESIS: reformatted tables
+
+```markdown
+---
+id: test
+---
+# Content
+```"""
+        hypothesis, content = _parse_agent_response(response)
+        assert hypothesis == "reformatted tables"
+        assert content.startswith("---")
+
+    def test_handles_empty_response(self):
+        """Returns empty on empty/None input."""
+        assert _parse_agent_response("") == ("", "")
+        assert _parse_agent_response(None) == ("", "")
+
+    def test_handles_code_block_no_hypothesis(self):
+        """Extracts from code block even without HYPOTHESIS line."""
+        response = """Here is the improved version:
+
+```markdown
+---
+id: improved
+---
+# Better
+```"""
+        hypothesis, content = _parse_agent_response(response)
+        assert "---" in content
+
+
+# ============================================================
+# Agent mode tests (mocked SDK — no real LLM calls)
 # ============================================================
 
 class TestEvolveAgent:
-    def test_file_not_found(self, tmp_path, capsys):
-        """Agent mode prints error for missing file."""
-        evolve_agent(tmp_path / "ghost.md")
-        out = capsys.readouterr().out
-        assert "ERROR" in out
-        assert "not found" in out
+    def test_file_not_found(self, tmp_path):
+        """Agent mode returns error for missing file."""
+        result = evolve_agent(tmp_path / "ghost.md")
+        assert result["status"] == "error"
 
-    def test_program_md_missing(self, sample_artifact, monkeypatch, capsys):
-        """Agent mode prints error when program.md doesn't exist."""
-        import cex_evolve
-        monkeypatch.setattr(cex_evolve, "CEX_ROOT", sample_artifact.parent)
-        evolve_agent(sample_artifact)
-        out = capsys.readouterr().out
-        assert "ERROR" in out
-        assert "program.md" in out
+    @patch("cex_evolve._get_execute_prompt")
+    @patch("cex_evolve.score_artifact", return_value=9.5)
+    def test_skips_already_at_target(self, mock_score, mock_get_ep, sample_artifact):
+        """Agent mode skips files already at target score."""
+        mock_get_ep.return_value = MagicMock()  # import succeeds but never called
+        result = evolve_agent(sample_artifact, target=9.0, verbose=False)
+        assert result["status"] == "skip"
+        assert result["tokens_used"] == 0
+        # execute_prompt itself should never be called (the returned function)
+        mock_get_ep.return_value.assert_not_called()
 
-    @patch("cex_evolve.subprocess.run")
-    def test_spawns_claude_by_default(self, mock_run, sample_artifact, capsys):
-        """Agent mode spawns claude CLI with inlined program.md."""
-        # Create program.md in CEX_ROOT
-        import cex_evolve
-        prog = Path(cex_evolve.CEX_ROOT) / "program.md"
-        if not prog.exists():
-            pytest.skip("program.md not in CEX_ROOT")
-        mock_run.return_value = MagicMock(returncode=0)
-        evolve_agent(sample_artifact, provider="claude")
-        assert mock_run.called
-        cmd = mock_run.call_args[0][0]
-        assert cmd[0] == "claude"
-        assert "-p" in cmd
-        # prompt should contain program.md content inlined
-        prompt_idx = cmd.index("-p") + 1
-        assert "NEVER STOP" in cmd[prompt_idx]
-        assert str(sample_artifact) in cmd[prompt_idx]
+    @patch("cex_evolve.git_commit_keep")
+    @patch("cex_evolve.validate_artifact", return_value=True)
+    @patch("cex_evolve.score_artifact")
+    @patch("cex_evolve._get_execute_prompt")
+    def test_keep_on_improvement(self, mock_get_ep, mock_score, mock_validate,
+                                  mock_commit, sample_artifact):
+        """Agent mode keeps changes that improve score."""
+        mock_score.side_effect = [7.0, 8.5]  # baseline=7, after=8.5
+        mock_ep = MagicMock(return_value="HYPOTHESIS: added examples\n\n---\nid: test\nkind: schema\n---\n# Better")
+        mock_get_ep.return_value = mock_ep
 
-    @patch("cex_evolve.subprocess.run")
-    def test_spawns_codex(self, mock_run, sample_artifact, capsys):
-        """Agent mode can spawn codex."""
-        import cex_evolve
-        prog = Path(cex_evolve.CEX_ROOT) / "program.md"
-        if not prog.exists():
-            pytest.skip("program.md not in CEX_ROOT")
-        mock_run.return_value = MagicMock(returncode=0)
-        evolve_agent(sample_artifact, provider="codex")
-        cmd = mock_run.call_args[0][0]
-        assert cmd[0] == "codex"
+        result = evolve_agent(sample_artifact, target=9.0, max_rounds=1,
+                              budget_tokens=100000, verbose=False)
+        assert result["quality"] == 8.5
+        assert result["tokens_used"] > 0
+        mock_commit.assert_called_once()
 
-    @patch("cex_evolve.subprocess.run")
-    def test_spawns_gemini(self, mock_run, sample_artifact, capsys):
-        """Agent mode can spawn gemini."""
-        import cex_evolve
-        prog = Path(cex_evolve.CEX_ROOT) / "program.md"
-        if not prog.exists():
-            pytest.skip("program.md not in CEX_ROOT")
-        mock_run.return_value = MagicMock(returncode=0)
-        evolve_agent(sample_artifact, provider="gemini")
-        cmd = mock_run.call_args[0][0]
-        assert cmd[0] == "gemini"
+    @patch("cex_evolve.git_restore")
+    @patch("cex_evolve.validate_artifact", return_value=True)
+    @patch("cex_evolve.score_artifact")
+    @patch("cex_evolve._get_execute_prompt")
+    def test_discard_on_no_improvement(self, mock_get_ep, mock_score, mock_validate,
+                                       mock_restore, sample_artifact):
+        """Agent mode discards changes that don't improve score."""
+        mock_score.side_effect = [7.0, 6.5]  # baseline=7, after=6.5 (worse)
+        mock_ep = MagicMock(return_value="HYPOTHESIS: tried something\n\n---\nid: test\n---\n# Worse")
+        mock_get_ep.return_value = mock_ep
 
-    def test_unknown_provider(self, sample_artifact, capsys):
-        """Agent mode prints error for unknown provider."""
-        import cex_evolve
-        prog = Path(cex_evolve.CEX_ROOT) / "program.md"
-        if not prog.exists():
-            pytest.skip("program.md not in CEX_ROOT")
-        evolve_agent(sample_artifact, provider="llama-local")
-        out = capsys.readouterr().out
-        assert "Unknown provider" in out
+        result = evolve_agent(sample_artifact, target=9.0, max_rounds=1,
+                              budget_tokens=100000, verbose=False)
+        assert result["quality"] == 7.0  # stays at baseline
+        mock_restore.assert_called()
 
-    @patch("cex_evolve.score_artifact", return_value=8.0)
-    @patch("cex_evolve.subprocess.run", side_effect=FileNotFoundError)
-    def test_missing_cli(self, mock_run, mock_score, sample_artifact, capsys):
-        """Agent mode handles missing CLI binary gracefully."""
-        import cex_evolve
-        prog = Path(cex_evolve.CEX_ROOT) / "program.md"
-        if not prog.exists():
-            pytest.skip("program.md not in CEX_ROOT")
-        evolve_agent(sample_artifact, provider="claude")
-        out = capsys.readouterr().out
-        assert "not found" in out
+    @patch("cex_evolve.validate_artifact", return_value=True)
+    @patch("cex_evolve.score_artifact", return_value=5.0)
+    @patch("cex_evolve._get_execute_prompt")
+    def test_budget_stops_loop(self, mock_get_ep, mock_score, mock_validate, sample_artifact):
+        """Agent mode stops when budget is exhausted."""
+        # Response is ~50 chars → estimated ~12 tokens. Prompt is ~1000 chars → ~250 tokens.
+        # Total per round ≈ 262 tokens. Budget=100 → first round uses budget, second check stops.
+        mock_ep = MagicMock(return_value="HYPOTHESIS: small change\n\n---\nid: x\n---\n# X")
+        mock_get_ep.return_value = mock_ep
+
+        result = evolve_agent(sample_artifact, target=9.0, max_rounds=100,
+                              budget_tokens=100, verbose=False)
+        # Should stop very quickly (1-2 rounds max before budget exhausted)
+        assert result["rounds"] <= 2
+
+    @patch("cex_evolve._get_execute_prompt", side_effect=ImportError("no cex_intent"))
+    def test_handles_missing_sdk(self, mock_get_ep, sample_artifact):
+        """Agent mode returns error if execute_prompt not available."""
+        result = evolve_agent(sample_artifact, verbose=False)
+        assert result["status"] == "error"
+
+
+# ============================================================
+# Auto mode tests (hybrid: heuristic + agent)
+# ============================================================
+
+class TestEvolveAuto:
+    @patch("cex_evolve.evolve_single")
+    def test_heuristic_only_above_threshold(self, mock_single, sample_artifact):
+        """Auto mode uses heuristic-only when score >= threshold."""
+        mock_single.return_value = {"status": "complete", "quality": 9.0, "rounds": 1}
+        result = evolve_auto(sample_artifact, threshold=8.5, verbose=False)
+        assert result["mode_used"] == "heuristic"
+        assert result["tokens_used"] == 0
+
+    @patch("cex_evolve.evolve_agent")
+    @patch("cex_evolve.evolve_single")
+    def test_triggers_agent_below_threshold(self, mock_single, mock_agent, sample_artifact):
+        """Auto mode triggers agent when heuristic score < threshold."""
+        mock_single.return_value = {"status": "complete", "quality": 7.0, "rounds": 2}
+        mock_agent.return_value = {"status": "complete", "quality": 8.8, "tokens_used": 5000, "delta": 1.8}
+        result = evolve_auto(sample_artifact, threshold=8.5, verbose=False)
+        assert result["mode_used"] == "agent"
+        assert result["tokens_used"] == 5000
+        mock_agent.assert_called_once()
+
+    def test_missing_file(self, tmp_path):
+        """Auto mode returns error for missing file."""
+        result = evolve_auto(tmp_path / "ghost.md", verbose=False)
+        assert result["status"] == "error"

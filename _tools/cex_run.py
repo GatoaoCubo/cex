@@ -290,16 +290,25 @@ def post_process(artifact_path: Path, builder_id: str, intent: str,
         if verbose:
             print(f"  Compile:  ❌ {e}")
 
-    # Evolve (AutoResearch: score + improve in one pass)
+    # Evolve (AutoResearch: heuristic free + agent via SDK if score < threshold)
     try:
-        from _tools.cex_evolve import evolve_single
-        ev = evolve_single(Path(artifact_path), target=8.5, max_rounds=2, verbose=False)
+        from _tools.cex_evolve import evolve_auto
+        ev = evolve_auto(
+            Path(artifact_path),
+            threshold=8.5,          # heuristic-only above this
+            agent_budget=30000,     # max tokens for agent mode
+            agent_target=9.0,       # agent tries to reach this
+            agent_max_rounds=5,     # max LLM calls per artifact
+            verbose=False,
+        )
         results["evolved"] = ev
         results["scored"] = True
         if verbose:
             q = ev.get("quality", "?")
-            rounds = ev.get("rounds", 0)
-            print(f"  Evolve:   q={q} ({rounds} rounds, {ev.get('status', '?')})")
+            mode = ev.get("mode_used", "?")
+            tokens = ev.get("tokens_used", 0)
+            tok_str = f", {tokens:,} tokens" if tokens > 0 else ""
+            print(f"  Evolve:   q={q} (mode={mode}{tok_str})")
     except Exception:
         # Fallback to plain scoring if evolve fails
         try:

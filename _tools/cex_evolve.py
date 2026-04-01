@@ -2,34 +2,36 @@
 """
 cex_evolve.py — Autonomous Experiment Loop (Karpathy AutoResearch pattern)
 
-Two modes:
-  agent   — TRUE AutoResearch: spawns an LLM agent with program.md to
-            modify one artifact autonomously. The AGENT hypothesizes,
-            modifies, and the METRIC (cex_score.py) is immutable.
-            This is the real Karpathy pattern.
+Three modes:
+  agent   — TRUE AutoResearch via SDK: Python controls the loop, LLM
+            generates creative hypotheses via execute_prompt(). Budget-
+            tracked, provider-agnostic, no subprocess spawning.
+            This is the Karpathy pattern done right.
+
+  auto    — Hybrid post-hook: heuristic pass (free) + agent mode only
+            if score < threshold. Designed to be called automatically
+            after every artifact creation. Smart budget usage.
 
   heuristic — Fast fallback: Python heuristics (no LLM) do mechanical
               fixes (frontmatter, whitespace, filler). Useful for batch
               scoring when LLM budget is limited.
 
 3-file architecture (Karpathy original):
-  program.md  → instructions for the LLM agent (human-written, read-only)
-  target file → the ONE artifact the agent modifies
-  cex_score.py + cex_compile.py → immutable metric (agent cannot touch)
-
-Modes:
-  agent <file>           — TRUE AutoResearch: LLM agent evolves artifact
-  single <file>          — Heuristic mode: Python-only improvements
-  sweep                  — Heuristic sweep on all quality:null
-  report                 — Show experiment history
+  program.md  → strategy hints for the LLM (human-written, read-only)
+  target file → the ONE artifact the LLM improves per round
+  cex_score.py + cex_compile.py → immutable metric (never touched)
 
 Usage:
-  # True AutoResearch (LLM in the loop):
-  python _tools/cex_evolve.py agent N01_intelligence/agents/agent_intelligence.md
-  python _tools/cex_evolve.py agent N01_intelligence/agents/agent_intelligence.md --provider claude
+  # True AutoResearch via SDK (budget-tracked):
+  python _tools/cex_evolve.py agent <file>
+  python _tools/cex_evolve.py agent <file> --budget 50000 --target 9.0
+
+  # Hybrid auto-hook (heuristic + agent if needed):
+  python _tools/cex_evolve.py auto <file>
+  python _tools/cex_evolve.py auto <file> --threshold 8.5
 
   # Heuristic fallback (no LLM, fast batch):
-  python _tools/cex_evolve.py single N01_intelligence/agents/agent_intelligence.md --target 9.0
+  python _tools/cex_evolve.py single <file> --target 9.0
   python _tools/cex_evolve.py sweep --target 8.5 --max-rounds 3
   python _tools/cex_evolve.py report
 """
@@ -483,94 +485,364 @@ def show_report():
 
 
 # ============================================================
-# AGENT MODE — True AutoResearch (LLM in the loop)
+# AGENT MODE — True AutoResearch via SDK (Python controls, LLM thinks)
 # ============================================================
 
-def evolve_agent(filepath: Path, provider: str = "claude"):
+def _get_execute_prompt():
+    """Import execute_prompt from cex_intent.py (the single SDK gateway)."""
+    tools_dir = str(Path(__file__).resolve().parent)
+    if tools_dir not in sys.path:
+        sys.path.insert(0, tools_dir)
+    from cex_intent import execute_prompt
+    return execute_prompt
+
+
+def _load_strategy_hints() -> str:
+    """Load program.md strategy hints (optional, not required)."""
+    program = CEX_ROOT / "program.md"
+    if not program.exists():
+        return ""
+    text = program.read_text(encoding="utf-8")
+    # Extract just the Strategy and Quality Dimensions sections
+    lines = text.split("\n")
+    relevant = []
+    capture = False
+    for line in lines:
+        if line.startswith("## Quality Dimensions") or line.startswith("## Strategy"):
+            capture = True
+        elif line.startswith("## ") and capture:
+            capture = False
+        if capture:
+            relevant.append(line)
+    return "\n".join(relevant) if relevant else text[:2000]
+
+
+def evolve_agent(filepath: Path, budget_tokens: int = 50000,
+                 target: float = 9.0, max_rounds: int = 10,
+                 verbose: bool = True) -> dict:
     """
-    TRUE AutoResearch: spawn an LLM agent with program.md to evolve one artifact.
+    TRUE AutoResearch via SDK — Python controls the loop, LLM generates hypotheses.
 
-    This is the Karpathy pattern:
-    - program.md tells the agent WHAT to do (read-only)
-    - The agent modifies the target file (creative hypotheses)
-    - cex_score.py measures the result (immutable metric)
-    - The agent keeps or discards based on the metric
-    - NEVER STOPS until interrupted
+    Architecture:
+    - Python reads the artifact, sends it to LLM via execute_prompt()
+    - LLM returns ONE hypothesis + modified content (structured)
+    - Python applies the change, scores it, keeps/discards via git
+    - Budget tracked via cumulative token count from SDK metrics
+    - Loop stops when: target reached, budget exhausted, or max_rounds hit
 
-    Provider-agnostic: works with claude, codex, gemini, pi.
+    Goes through execute_prompt() → SDK cascade → tracked, budget-aware.
+    No subprocess spawning. No CLI dependency. Works with any configured provider.
+
+    Returns dict with: status, quality, rounds, tokens_used
     """
     fp = Path(filepath)
     if not fp.exists():
         print(f"[ERROR] File not found: {fp}")
-        return
+        return {"status": "error", "quality": 0, "rounds": 0, "tokens_used": 0}
 
-    program = CEX_ROOT / "program.md"
-    if not program.exists():
-        print(f"[ERROR] program.md not found at {program}")
-        print("  This file contains the experiment loop instructions for the LLM agent.")
-        return
-
-    # Build the prompt: INLINE program.md content + target + baseline
-    baseline_score = score_artifact(fp)
-    program_text = program.read_text(encoding="utf-8")
-
-    prompt = f"""You are an autonomous researcher. Follow these instructions EXACTLY.
-
-<protocol>
-{program_text}
-</protocol>
-
-Your target artifact is: {fp}
-Baseline score: {baseline_score or 'null'}
-
-Begin the experiment loop NOW. Do NOT ask me anything. Just start with Setup step 2."""
-
-    print(f"\n{'='*60}")
-    print(f"[AGENT MODE] Spawning {provider} with program.md inlined")
-    print(f"  Target:   {fp}")
-    print(f"  Baseline: {baseline_score or 'null'}")
-    print(f"  Provider: {provider}")
-    print(f"  Prompt:   {len(prompt)} chars ({len(program_text)} from program.md)")
-    print(f"{'='*60}")
-    print(f"\n  The agent will run autonomously. Ctrl+C to stop.\n")
-
-    # Provider-agnostic spawn
-    if provider == "claude":
-        cmd = ["claude", "-p", prompt, "--allowedTools",
-               "Edit", "Write", "Bash", "Read"]
-    elif provider == "codex":
-        cmd = ["codex", "exec", prompt]
-    elif provider == "gemini":
-        cmd = ["gemini", "-p", prompt]
-    elif provider == "pi":
-        cmd = ["pi", prompt]
-    else:
-        print(f"[ERROR] Unknown provider: {provider}. Use: claude, codex, gemini, pi")
-        return
-
+    # Get the SDK gateway
     try:
-        # Run interactively — the agent takes over
-        result = subprocess.run(cmd, timeout=3600)  # 1 hour max
-        print(f"\n[AGENT] Exited with code {result.returncode}")
-    except subprocess.TimeoutExpired:
-        print("\n[AGENT] 1 hour timeout reached. Stopping.")
-    except FileNotFoundError:
-        print(f"\n[ERROR] '{provider}' CLI not found. Install it or use a different --provider.")
-        print(f"  Alternatives: claude, codex, gemini, pi")
-    except KeyboardInterrupt:
-        print(f"\n[AGENT] Interrupted by user. Checking results...")
+        execute_prompt = _get_execute_prompt()
+    except ImportError as e:
+        print(f"[ERROR] Cannot import execute_prompt: {e}")
+        return {"status": "error", "quality": 0, "rounds": 0, "tokens_used": 0}
 
-    # Post-run: show what happened
-    final_score = get_current_quality(fp)
-    print(f"\n  Final score: {final_score or 'null'} (was: {baseline_score or 'null'})")
-    if final_score and baseline_score and final_score > baseline_score:
-        print(f"  Improvement: +{final_score - baseline_score:.1f}")
-    show_report()
+    # Baseline
+    baseline_quality = score_artifact(fp) or 0.0
+    baseline_density = compute_density(fp)
+    strategy_hints = _load_strategy_hints()
+    tokens_used = 0
+    best_quality = baseline_quality
+
+    if baseline_quality >= target:
+        if verbose:
+            print(f"  ✅ Already at {baseline_quality} (>= {target}). Skipping.")
+        log_result(str(fp), 0, baseline_quality, baseline_density, "skip", "already at target")
+        return {"status": "skip", "quality": baseline_quality, "rounds": 0, "tokens_used": 0}
+
+    if verbose:
+        print(f"\n{'='*60}")
+        print(f"[AGENT MODE via SDK] AutoResearch")
+        print(f"  Target:   {fp}")
+        print(f"  Baseline: {baseline_quality}")
+        print(f"  Target:   {target}")
+        print(f"  Budget:   {budget_tokens:,} tokens")
+        print(f"  Rounds:   max {max_rounds}")
+        print(f"{'='*60}")
+
+    rounds_run = 0
+    experiment_log = []  # track what worked/failed for context
+
+    for round_num in range(1, max_rounds + 1):
+        rounds_run = round_num
+
+        # Budget check BEFORE calling LLM
+        if tokens_used >= budget_tokens:
+            if verbose:
+                print(f"\n  💰 Budget exhausted ({tokens_used:,}/{budget_tokens:,} tokens)")
+            break
+
+        remaining_budget = budget_tokens - tokens_used
+        content = fp.read_text(encoding="utf-8")
+        density = compute_density(fp)
+
+        # Build prompt — LLM sees artifact + history + strategy
+        history_summary = ""
+        if experiment_log:
+            recent = experiment_log[-5:]  # last 5 experiments
+            history_lines = [f"  R{e['round']}: {e['status']} ({e['description']})" for e in recent]
+            history_summary = f"\n\nExperiment history (don't repeat failed ideas):\n" + "\n".join(history_lines)
+
+        prompt = f"""You are an autonomous researcher improving a markdown artifact.
+Your job: suggest ONE specific improvement and return the COMPLETE modified file.
+
+## Current artifact ({fp.name})
+Score: {best_quality}/10 | Density: {density} | Target: {target}
+
+```markdown
+{content}
+```
+{history_summary}
+
+{f"## Strategy hints{chr(10)}{strategy_hints}" if strategy_hints else ""}
+
+## Rules
+1. Return ONLY the complete modified file content (no explanation before/after)
+2. Make ONE specific change per round (not multiple)
+3. Keep all YAML frontmatter fields (don't remove any)
+4. The `kind:` field must NOT change
+5. Stay between 800-4096 bytes for the total file
+6. Focus on: density (tables > prose), structure (## headings), actionability (examples, anti-patterns)
+
+## Your response format
+First line: HYPOTHESIS: <one-line description of what you're changing>
+Then a blank line, then the COMPLETE file content (including --- frontmatter ---).
+Nothing else."""
+
+        if verbose:
+            print(f"\n  --- Round {round_num}/{max_rounds} (budget: {remaining_budget:,} remaining) ---")
+
+        # Call LLM via SDK gateway
+        try:
+            response_text = execute_prompt(prompt)
+        except SystemExit:
+            if verbose:
+                print(f"  ❌ No LLM provider available. Stopping.")
+            break
+        except Exception as e:
+            if verbose:
+                print(f"  ❌ LLM error: {e}")
+            log_result(str(fp), round_num, best_quality, density, "crash", f"llm_error: {e}")
+            continue
+
+        # Track tokens (best effort — depends on SDK metrics being printed to stderr)
+        # Conservative estimate if SDK doesn't report: ~4 chars per token
+        estimated_tokens = (len(prompt) + len(response_text)) // 4
+        tokens_used += estimated_tokens
+
+        # Parse response: extract hypothesis and content
+        hypothesis, new_content = _parse_agent_response(response_text)
+
+        if not new_content:
+            if verbose:
+                print(f"  ⚠️  Could not parse response. Skipping round.")
+            log_result(str(fp), round_num, best_quality, density, "crash", "unparseable response")
+            experiment_log.append({"round": round_num, "status": "crash", "description": "unparseable"})
+            continue
+
+        if verbose:
+            print(f"  Hypothesis: {hypothesis}")
+
+        # Apply change
+        fp.write_text(new_content, encoding="utf-8")
+
+        # Validate (compile check)
+        if not validate_artifact(fp):
+            if verbose:
+                print(f"  ❌ Compile failed. Reverting.")
+            git_restore(fp)
+            log_result(str(fp), round_num, 0, 0, "crash", f"compile fail: {hypothesis}")
+            experiment_log.append({"round": round_num, "status": "crash", "description": hypothesis})
+            continue
+
+        # Score (immutable metric)
+        new_density = compute_density(fp)
+        new_quality = score_artifact(fp) or best_quality
+
+        if verbose:
+            print(f"  Result: quality={new_quality}, density={new_density}")
+
+        # Keep or discard
+        if new_quality > best_quality:
+            best_quality = new_quality
+            git_commit_keep(fp, f"[evolve] {fp.name}: {hypothesis} (q={new_quality})")
+            log_result(str(fp), round_num, new_quality, new_density, "keep", hypothesis)
+            experiment_log.append({"round": round_num, "status": "keep", "description": hypothesis})
+            if verbose:
+                print(f"  ✅ KEEP ({new_quality})")
+            if new_quality >= target:
+                if verbose:
+                    print(f"  🎯 Target {target} reached!")
+                break
+        else:
+            git_restore(fp)
+            log_result(str(fp), round_num, new_quality, new_density, "discard", hypothesis)
+            experiment_log.append({"round": round_num, "status": "discard", "description": hypothesis})
+            if verbose:
+                print(f"  ↩️  DISCARD ({new_quality} <= {best_quality})")
+
+    result = {
+        "status": "complete",
+        "quality": best_quality,
+        "rounds": rounds_run,
+        "tokens_used": tokens_used,
+        "improved": best_quality > baseline_quality,
+        "delta": round(best_quality - baseline_quality, 1),
+    }
+
+    if verbose:
+        print(f"\n{'='*60}")
+        print(f"[AGENT COMPLETE]")
+        print(f"  Quality: {baseline_quality} → {best_quality} (Δ{result['delta']:+.1f})")
+        print(f"  Rounds:  {rounds_run}/{max_rounds}")
+        print(f"  Tokens:  {tokens_used:,}/{budget_tokens:,}")
+        print(f"{'='*60}")
+
+    return result
+
+
+def _parse_agent_response(response: str) -> tuple[str, str]:
+    """Parse LLM response into (hypothesis, file_content).
+
+    Expected format:
+      HYPOTHESIS: <description>
+      <blank line>
+      <complete file content>
+    """
+    if not response or not response.strip():
+        return "", ""
+
+    lines = response.strip().split("\n")
+    hypothesis = "unknown improvement"
+    content_start = 0
+
+    # Find HYPOTHESIS line
+    for i, line in enumerate(lines):
+        if line.strip().upper().startswith("HYPOTHESIS:"):
+            hypothesis = line.split(":", 1)[1].strip()
+            content_start = i + 1
+            break
+
+    # Skip blank lines after hypothesis
+    while content_start < len(lines) and not lines[content_start].strip():
+        content_start += 1
+
+    content = "\n".join(lines[content_start:]).strip()
+
+    # If no HYPOTHESIS found, treat entire response as content
+    if content_start == 0:
+        # Try to detect if response starts with frontmatter
+        if response.strip().startswith("---"):
+            return "direct modification", response.strip()
+        # Otherwise it might be wrapped in code blocks
+        if "```" in response:
+            import re
+            match = re.search(r"```(?:markdown)?\n(.*?)```", response, re.DOTALL)
+            if match:
+                return "direct modification", match.group(1).strip()
+
+    # Strip code block wrapper if present
+    if content.startswith("```") and content.endswith("```"):
+        content = content.split("\n", 1)[1] if "\n" in content else content[3:]
+        content = content.rsplit("```", 1)[0].strip()
+
+    return hypothesis, content
+
+
+# ============================================================
+# AUTO MODE — Hybrid post-hook (heuristic + agent if needed)
+# ============================================================
+
+def evolve_auto(filepath: Path, threshold: float = 8.5,
+                agent_budget: int = 30000, agent_target: float = 9.0,
+                agent_max_rounds: int = 5, verbose: bool = True) -> dict:
+    """
+    Hybrid AutoResearch post-hook: heuristic pass (free) + agent if needed.
+
+    Designed to be called automatically after every artifact creation.
+    Flow:
+      1. Heuristic pass (Python-only, 0 tokens) — frontmatter, whitespace, filler
+      2. Score via cex_score.py
+      3. If score >= threshold → done (zero LLM cost)
+      4. If score < threshold → spawn agent mode via SDK (budget-capped)
+
+    This is the "Hybrid F" strategy — smart budget, automatic trigger.
+
+    Returns dict with: status, quality, mode_used, tokens_used
+    """
+    fp = Path(filepath)
+    if not fp.exists():
+        return {"status": "error", "quality": 0, "mode_used": "none", "tokens_used": 0}
+
+    if verbose:
+        print(f"\n[AUTO] {fp.name}")
+
+    # Step 1: Heuristic pass (free)
+    heuristic_result = evolve_single(fp, target=threshold, max_rounds=3, verbose=False)
+    post_heuristic_quality = heuristic_result.get("quality", 0)
+
+    if verbose:
+        print(f"  Heuristic: q={post_heuristic_quality} (status={heuristic_result['status']})")
+
+    # Step 2: Check if good enough
+    if post_heuristic_quality >= threshold:
+        if verbose:
+            print(f"  ✅ Above threshold ({threshold}). No LLM needed.")
+        return {
+            "status": "complete",
+            "quality": post_heuristic_quality,
+            "mode_used": "heuristic",
+            "tokens_used": 0,
+        }
+
+    # Step 3: Agent mode via SDK (budget-capped)
+    if verbose:
+        print(f"  ⚡ Score {post_heuristic_quality} < {threshold}. Spawning agent mode...")
+
+    agent_result = evolve_agent(
+        fp,
+        budget_tokens=agent_budget,
+        target=agent_target,
+        max_rounds=agent_max_rounds,
+        verbose=verbose,
+    )
+
+    return {
+        "status": agent_result.get("status", "error"),
+        "quality": agent_result.get("quality", post_heuristic_quality),
+        "mode_used": "agent" if agent_result.get("tokens_used", 0) > 0 else "heuristic",
+        "tokens_used": agent_result.get("tokens_used", 0),
+        "delta": agent_result.get("delta", 0),
+    }
 
 
 # ============================================================
 # CLI
 # ============================================================
+
+def _parse_cli_args(argv: list, start: int = 3) -> dict:
+    """Parse --key value pairs from argv."""
+    args = {}
+    i = start
+    while i < len(argv):
+        if argv[i].startswith("--") and i + 1 < len(argv):
+            key = argv[i][2:].replace("-", "_")
+            args[key] = argv[i + 1]
+            i += 2
+        else:
+            i += 1
+    return args
+
 
 def main():
     if len(sys.argv) < 2 or sys.argv[1] in ("-h", "--help"):
@@ -580,16 +852,34 @@ def main():
     mode = sys.argv[1]
 
     if mode == "agent":
-        # TRUE AutoResearch — LLM agent with program.md
+        # TRUE AutoResearch via SDK — Python controls, LLM thinks
         if len(sys.argv) < 3:
-            print("Usage: cex_evolve.py agent <file> [--provider claude|codex|gemini|pi]")
+            print("Usage: cex_evolve.py agent <file> [--budget N] [--target N] [--max-rounds N]")
             return
         filepath = Path(sys.argv[2])
-        provider = "claude"
-        for i, arg in enumerate(sys.argv[3:], 3):
-            if arg == "--provider" and i + 1 < len(sys.argv):
-                provider = sys.argv[i + 1]
-        evolve_agent(filepath, provider=provider)
+        args = _parse_cli_args(sys.argv)
+        evolve_agent(
+            filepath,
+            budget_tokens=int(args.get("budget", 50000)),
+            target=float(args.get("target", 9.0)),
+            max_rounds=int(args.get("max_rounds", 10)),
+        )
+
+    elif mode == "auto":
+        # Hybrid post-hook: heuristic + agent if needed
+        if len(sys.argv) < 3:
+            print("Usage: cex_evolve.py auto <file> [--threshold N] [--budget N] [--target N]")
+            return
+        filepath = Path(sys.argv[2])
+        args = _parse_cli_args(sys.argv)
+        result = evolve_auto(
+            filepath,
+            threshold=float(args.get("threshold", 8.5)),
+            agent_budget=int(args.get("budget", 30000)),
+            agent_target=float(args.get("target", 9.0)),
+            agent_max_rounds=int(args.get("max_rounds", 5)),
+        )
+        print(f"\n  Result: {json.dumps(result, indent=2)}")
 
     elif mode == "single":
         # Heuristic fallback — no LLM
@@ -597,33 +887,29 @@ def main():
             print("Usage: cex_evolve.py single <file> [--target N] [--max-rounds N]")
             return
         filepath = Path(sys.argv[2])
-        target = 9.0
-        max_rounds = 5
-        for i, arg in enumerate(sys.argv[3:], 3):
-            if arg == "--target" and i + 1 < len(sys.argv):
-                target = float(sys.argv[i + 1])
-            if arg == "--max-rounds" and i + 1 < len(sys.argv):
-                max_rounds = int(sys.argv[i + 1])
-        evolve_single(filepath, target=target, max_rounds=max_rounds)
+        args = _parse_cli_args(sys.argv)
+        evolve_single(
+            filepath,
+            target=float(args.get("target", 9.0)),
+            max_rounds=int(args.get("max_rounds", 5)),
+        )
 
     elif mode == "sweep":
         # Heuristic batch — no LLM
-        target = 8.5
-        max_rounds = 3
-        for i, arg in enumerate(sys.argv[2:], 2):
-            if arg == "--target" and i + 1 < len(sys.argv):
-                target = float(sys.argv[i + 1])
-            if arg == "--max-rounds" and i + 1 < len(sys.argv):
-                max_rounds = int(sys.argv[i + 1])
-        evolve_sweep(target=target, max_rounds=max_rounds)
+        args = _parse_cli_args(sys.argv, start=2)
+        evolve_sweep(
+            target=float(args.get("target", 8.5)),
+            max_rounds=int(args.get("max_rounds", 3)),
+        )
 
     elif mode == "report":
         show_report()
 
     else:
-        print(f"Unknown mode: {mode}. Use: agent, single, sweep, report")
-        print(f"\n  agent  = TRUE AutoResearch (LLM in the loop, program.md)")
-        print(f"  single = Heuristic fallback (Python-only, fast)")
+        print(f"Unknown mode: {mode}. Use: agent, auto, single, sweep, report")
+        print(f"\n  agent  = TRUE AutoResearch via SDK (budget-tracked)")
+        print(f"  auto   = Hybrid: heuristic (free) + agent if score < threshold")
+        print(f"  single = Heuristic only (Python, no LLM)")
         print(f"  sweep  = Heuristic batch (all quality:null)")
         print(f"  report = Experiment history")
 
