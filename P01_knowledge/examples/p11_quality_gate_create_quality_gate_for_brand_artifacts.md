@@ -8,71 +8,60 @@ created: "2026-04-01"
 updated: "2026-04-01"
 author: "quality-gate-builder"
 domain: "brand"
-target_kind: "brand_config,brand_template,brand_guideline"
-delivery_threshold: 8.0
-bypass_policy: "owner"
-dimensions: ["consistency", "completeness", "visual_coherence", "voice_alignment", "legal_compliance", "implementation"]
-quality: 8.9
-tags: [quality-gate, brand, governance, consistency, guidelines]
-tldr: "Pre-publish gate for brand artifacts: ensures brand consistency, completeness, and implementation readiness with 8.0+ score threshold."
+quality: 0.0
+tags: [quality-gate, brand, identity, consistency, compliance]
+tldr: "Quality gate for brand artifacts: ensures brand consistency, legal compliance, and implementation clarity >= 8.5"
 density_score: 0.88
+when_to_use: "Apply before publishing any brand_config, style_guide, logo_spec, voice_guide, or visual_identity artifact to ensure brand pool compliance"
 ---
+
 ## Definition
 | Property | Value |
 |----------|-------|
-| Metric | weighted_brand_score |
-| Threshold | 8.0 |
+| Metric | brand_quality_score |
+| Threshold | 8.5 |
 | Operator | >= |
-| Scope | All brand-related artifacts before pool integration or external publication |
+| Scope | All brand-related artifacts (brand_config, style_guide, logo_spec, voice_guide, visual_identity) |
 
-## HARD Gates
-All gates must pass. Single failure blocks delivery regardless of soft score.
-
+## HARD Gates (ALL must pass)
 | ID | Criterion | Failure Action |
 |----|-----------|----------------|
 | H01 | YAML frontmatter parses without error | block |
-| H02 | ID matches pattern `p11_qg_*` or domain-specific namespace | block |
+| H02 | ID matches pattern `p06_brand_*` or contains `brand` in domain | block |
 | H03 | ID equals filename stem exactly | block |
-| H04 | Kind field matches expected artifact type | block |
+| H04 | Kind field matches expected brand artifact type | block |
 | H05 | Quality field is null at authoring time | block |
 | H06 | All required frontmatter fields present and non-empty | block |
-| H07 | Brand config reference present and valid | block |
-| H08 | No conflicting brand directives within artifact | block |
+| H07 | Brand colors defined with hex codes and accessibility ratings | block |
+| H08 | Brand voice/tone documented with specific examples | block |
+| H09 | Legal disclaimer and trademark usage guidelines present | block |
+| H10 | Implementation instructions provided for each brand element | block |
 
-## SOFT Gates
-Weighted scoring dimensions contributing to final quality score.
-
-| ID | Criterion | Weight | Scoring Method |
+## SOFT Scoring (weighted dimensions)
+| ID | Dimension | Weight | Scoring Method |
 |----|-----------|--------|----------------|
-| S01 | Brand consistency with `.cex/brand/brand_config.yaml` | 1.0 | graduated |
-| S02 | Completeness of required brand elements (colors, fonts, voice) | 1.0 | graduated |
-| S03 | Visual coherence across all brand touchpoints | 1.0 | graduated |
-| S04 | Voice and tone alignment with brand personality | 1.0 | graduated |
-| S05 | Legal compliance (trademark usage, copyright notices) | 1.0 | binary |
-| S06 | Implementation readiness with actionable guidelines | 0.5 | graduated |
-| S07 | Cross-platform compatibility considerations | 0.5 | graduated |
+| S01 | Brand consistency across all elements | 25% | graduated |
+| S02 | Implementation clarity and actionability | 20% | graduated |
+| S03 | Visual coherence and design system integrity | 20% | graduated |
+| S04 | Legal compliance and trademark protection | 15% | binary |
+| S05 | Accessibility standards (WCAG 2.1 AA minimum) | 10% | graduated |
+| S06 | Documentation quality and completeness | 10% | graduated |
 
-## Scoring Formula
-```
-aggregate_score = (S01*1.0 + S02*1.0 + S03*1.0 + S04*1.0 + S05*1.0 + S06*0.5 + S07*0.5) / 6.0
-final_score = all_hard_gates_pass ? aggregate_score * 10 : 0
-```
-Weight total: 6.0. Pass condition: all HARD gates pass AND aggregate_score >= 0.80
+**Scoring Formula**: `aggregate_score = SUM(gate_score * weight for each SOFT gate)`
+**PASS condition**: all HARD gates pass AND aggregate_score >= 8.5
 
 ## Actions
 | Outcome | Consequence |
 |---------|-------------|
-| GOLDEN (>= 9.5) | Publish to brand pool as reference standard; use for onboarding templates |
-| PUBLISH (>= 8.0) | Approve for production use; integrate into brand system |
-| REVIEW (>= 7.0) | Return with dimension feedback; one revision cycle permitted |
-| REJECT (< 7.0) | Block from brand pool; requires substantial rework before re-evaluation |
+| PASS (>= 8.5) | Artifact proceeds to brand pool; becomes enforceable brand standard |
+| REVIEW (7.0-8.4) | Return to brand team with specific dimension feedback; one revision cycle |
+| FAIL (< 7.0) | Block from brand pool; full brand audit and rewrite required |
+| BYPASS | Requires CMO approval and temporary 30-day exemption with audit trail |
 
 ## Bypass Policy
-| Field | Specification |
-|-------|---------------|
-| **Condition** | Emergency brand update required for legal compliance or crisis response |
-| **Approver** | Brand owner or designated brand steward with written authorization |
-| **Audit Log** | Record in `.cex/runtime/audits/brand_bypasses.md` with timestamp, approver signature, and business justification |
-| **Expiry** | 72 hours from bypass activation; artifact must achieve full compliance within window |
-
-**Non-bypassable gates**: H01 (YAML validity), H05 (quality null), H07 (brand config reference) - these ensure basic structural integrity and prevent self-scoring violations.
+| Field | Value |
+|-------|-------|
+| Who may override | Chief Marketing Officer or Brand Director only |
+| Conditions | Emergency rebrand, legal requirement change, or acquisition integration within 30 days |
+| Audit requirement | Log in `.cex/runtime/brand_bypasses.md` with date, approver, reason, and expiry |
+| Non-bypassable | H05 (quality null), H07 (brand colors), H09 (legal compliance) |
