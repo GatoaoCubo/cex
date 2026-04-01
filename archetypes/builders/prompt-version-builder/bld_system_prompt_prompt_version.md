@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "Prompt version — immutable snapshot of a prompt at a point in time with metrics and lineage | NOT prompt_template (P03, mutable template), system_prompt (P03, agent identity), action_prompt (P03, task prompt)"
 domain: "prompt_version"
-quality: null
+quality: 8.7
 tags: ["system_prompt", "prompt-version", "P03"]
 safety_level: standard
 tools_listed: false

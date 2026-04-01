@@ -1,0 +1,99 @@
+id: p03_ins_smoke_eval_builder
+kind: instruction
+pillar: P03
+version: 1.0.0
+created: 2026-03-27
+updated: 2026-03-27
+author: instruction-builder
+title: Smoke Eval Builder Instructions
+target: smoke-eval-builder agent
+phases_count: 3
+prerequisites:
+- Scope to test is identified (agent, service, pipeline, or component name)
+- At least one critical-path check can be described
+- Execution environment prerequisites are known (services, configs, env vars)
+- Total expected runtime is under 30 seconds
+validation_method: checklist
+domain: smoke_eval
+quality: null
+tags:
+- instruction
+- smoke-eval
+- testing
+- sanity-check
+- P07
+idempotent: true
+atomic: true
+rollback: Delete generated smoke_eval file and restart from Phase 1
+dependencies: []
+logging: true
+tldr: Build a smoke_eval with a critical-path check sequence, binary assertions, 30s timeout, and fast-fail — does the component
+  work at all?
+density_score: 0.85
+context: 'The smoke-eval-builder produces `smoke_eval` artifacts — fast sanity tests that verify
+
+  whether a component''s critical path is functional. A smoke_eval answers one question:
+
+  "does this component work at all?" It is not a correctness test (unit_eval), not a
+
+  pipeline test (e2e_eval), and not a performance measurement (benchmark). It fails fast
+
+  on the first broken check, keeping total runtime under 30 seconds.
+
+  Input contract:
+
+  - `{{scope}}`: what is being tested (e.g. `research-agent`, `ingest-pipeline`, `auth-service`)
+
+  - `{{critical_path_raw}}`: free-text description of the minimum viable check sequence
+
+  - `{{prerequisites_raw}}`: comma-separated environment requirements before running
+
+  - `{{frequency}}`: how often this smoke runs (e.g. `on_deploy`, `hourly`, `pre_merge`)
+
+  Output contract: A single `smoke_eval` YAML/Markdown file with frontmatter, a
+
+  `critical_path` ordered check list, binary assertions with expected values, strict
+
+  timeout (<= 30 seconds), `fast_fail: true`, and a prerequisites list.
+
+  Boundaries:
+
+  - Smoke_eval verifies "does it work at all" — not "is it correct in all cases".
+
+  - Deep correctness checks belong in unit_eval artifacts.
+
+  - Multi-component pipeline validation belongs in e2e_eval artifacts.
+
+  - Throughput and latency measurement belongs in benchmark artifacts.
+
+  - Total runtime must be < 30 seconds — any check exceeding this is out of scope.'
+phases: ''
+phase_1_identify_critical_path: "Primary action: Determine the shortest sequence of checks that proves the component\nis alive\
+  \ and functional, discarding everything non-essential.\nINPUT: scope, critical_path_raw, prerequisites_raw\n1. Characterize\
+  \ the scope:\n   scope_profile = {\n     name: {{scope}},\n     type: \"agent\" | \"service\" | \"pipeline\" | \"component\"\
+  ,\n     entry_point: how the component is invoked or reached,\n     observable_output: what a healthy response looks like\n\
+  \   }\n2. Extract critical path from critical_path_raw:\n   Parse into ordered check steps.\n   For each step candidate:\n\
+  \     - Is it verifiable in < 5 seconds?           -> include\n     - Does it prove a fundamental capability?     -> include\n\
+  \     - Is it a nice-to-have or edge case?          -> exclude\n     - Does it depend on external network calls?   -> flag\
+  \ as \"external\" (may be fragile)\n   critical_path = ordered list of included steps (aim for 3-7 steps)\n3. Assign runtime\
+  \ estimate per step:\n   step_time_s = estimated seconds to execute\n   ASSERT sum(step_time_s) < 30\n   If sum >= 30: remove\
+  \ the slowest non-critical step until sum < 30.\n4. Parse prerequisites_raw:\n   prerequisites = [\n     {name: requirement_name,\
+  \ type: \"env_var\" | \"service\" | \"file\" | \"config\",\n      check: how to verify it exists}\n   ]\nOUTPUT: scope_profile{},\
+  \ critical_path[] (3-7 steps, sum < 30s), prerequisites[]\nVerification: `critical_path` has 3-7 steps. Estimated total\
+  \ runtime < 30 seconds."
+phase_2_define_assertions: "Primary action: For each critical path step, write a binary assertion with an\nexpected value\
+  \ that can be evaluated as pass or fail with no ambiguity.\nINPUT: critical_path[], scope_profile\n1. Assertion rules (all\
+  \ assertions must follow these):\n   - Binary: result is either PASS or FAIL — no partial credit\n   - Observable: the check\
+  \ examines a concrete output, not a subjective quality\n   - Specific: expected value is a concrete string, integer, boolean,\
+  \ or status code\n   - Fast: each assertion evaluates in <= 5 seconds\n2. For each step in critical_path:\n   assertion\
+  \ = {\n     step_id: \"check_{N}\",\n     description: what is being checked (imperative sentence),\n     command_or_action:\
+  \ how to execute the check,\n     expected: concrete expected value (string, int, bool, or status pattern),\n     actual_field:\
+  \ where to read the actual value from,\n     pass_condition: \"actual == expected\" | \"actual contains expected\" | \"\
+  actual > 0\"\n   }\n3. Determine failure behavior:\n   fast_fail: true  # abort on first FAIL — do not continue to remaining\
+  \ checks\n   on_fail_message: \"{step_id}: expected {{expected}}, got {{actual}}\"\n4. Assign severity to each check:\n\
+  \   \"critical\":  failure here means the component cannot function at all\n   \"warning\":   failure here means degraded\
+  \ but not completely broken\nOUTPUT: assertions[] (one per critical_path step), fast_fail=true,\n        failure_message_template\n\
+  Verification: every step has exactly one binary assertion. Every expected value is\nconcrete (not \"should be non-null\"\
+  \ — use a specific value). `fast_fail` is `true`."
+phase_3_assemble_artifact_and_validate: 'Primary action: Combine all phase outputs into the final smoke_eval file and run
+  quality gates.'

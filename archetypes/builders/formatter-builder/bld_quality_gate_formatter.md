@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: "formatter — output transformation rules converting structured data to readable or consumable representations"
-quality: null
+quality: 8.8
 tags: [quality-gate, formatter, output-format, transformation, P11]
 tldr: "Validates formatter artifacts: transform rule completeness, escaping strategy, null-field handling, and output example presence."
 density_score: 0.91

@@ -13,7 +13,7 @@ rules_count: 14
 tone: technical
 knowledge_boundary: "Timeout strategies, retry algorithms (fixed/exponential/jitter), rate limiting (token bucket/sliding window/leaky bucket), concurrency limits, circuit breaker patterns (Nygard 2007), bulkhead isolation, fallback on rule trigger | Does NOT: define artifact lifecycle rules (lifecycle_rule P11), write inviolable system laws (law P08), specify safety guardrails (guardrail P11), configure environment variables (env_config P09), define feature flags (feature_flag P09)"
 domain: runtime_rule
-quality: null
+quality: 8.7
 tags: [system_prompt, runtime_rule, P09]
 safety_level: standard
 tools_listed: false

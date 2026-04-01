@@ -13,7 +13,7 @@ rules_count: 15
 tone: technical
 knowledge_boundary: "bilateral API contracts, method signatures, input/output schemas, versioning, backward compatibility, deprecation policies, mock specifications; NOT unilateral input schemas, validation rule engines, or runtime signals"
 domain: "interface"
-quality: null
+quality: 8.8
 tags: ["system_prompt", "interface", "contract", "integration"]
 safety_level: standard
 tools_listed: false

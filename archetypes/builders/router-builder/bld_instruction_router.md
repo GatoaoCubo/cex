@@ -15,7 +15,7 @@ prerequisites:
   - "Patterns or signals that distinguish each destination are known or inferable"
 validation_method: checklist
 domain: router
-quality: null
+quality: 8.8
 tags: [instruction, router, P02, routing, dispatch, route-table]
 idempotent: true
 atomic: false

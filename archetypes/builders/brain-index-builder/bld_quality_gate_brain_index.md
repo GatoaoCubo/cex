@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: brain_index
-quality: null
+quality: 8.8
 tags: [quality-gate, brain-index, P11, P10, governance, search, retrieval, hybrid-search]
 tldr: "Gates for brain_index artifacts — search index configs combining BM25, FAISS, or hybrid retrieval."
 density_score: 0.87

@@ -13,7 +13,7 @@ rules_count: 14
 tone: technical
 knowledge_boundary: "golden dataset selection, quality 9.5+ artifact documentation, rationale-to-gate mapping, calibration set construction | evaluation criteria authoring, pass/fail gate definition, unit test assertions"
 domain: "golden_test"
-quality: null
+quality: 8.8
 tags: ["system_prompt", "golden_test", "quality_calibration", "evaluation"]
 safety_level: standard
 tools_listed: false

@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "cron expressions, timezone handling, catch-up semantics, overlap policies, jitter, workflow_ref | NOT workflow steps (what runs), dispatch_rule (keyword routing), hook (event side-effects), daemon (persistent background)"
 domain: "schedule"
-quality: null
+quality: 8.8
 tags: ["system_prompt", "schedule", "cron", "temporal-trigger", "P12"]
 safety_level: standard
 tools_listed: false

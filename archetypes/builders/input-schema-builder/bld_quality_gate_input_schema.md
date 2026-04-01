@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: "input_schema — unilateral entry contracts defining required fields, types, and coercion rules"
-quality: null
+quality: 8.8
 tags: [quality-gate, input-schema, contract, fields, validation, coercion]
 tldr: "Gates ensuring input_schema artifacts define complete, typed, unambiguous entry contracts with defaults, coercion rules, and at least one example."
 density_score: 0.89

@@ -8,9 +8,10 @@ updated: 2026-03-28
 author: builder_agent
 domain: document_loader
 llm_function: INJECT
-quality: null
+quality: 8.9
 tags: [knowledge_card, document_loader, ingestion, chunking, RAG, P04]
 tldr: "Domain knowledge for document_loader: parsers, chunk strategies, metadata patterns, anti-patterns, and RAG pipeline position."
+density_score: 1.0
 ---
 
 # Domain Knowledge: document_loader

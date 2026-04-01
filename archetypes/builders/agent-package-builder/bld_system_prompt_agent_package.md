@@ -13,7 +13,7 @@ rules_count: 15
 tone: technical
 knowledge_boundary: "agent_package manifest, tier compliance (minimal/standard/complete/whitelabel), LP pillar mapping, portability enforcement, file inventory, system_instruction token budgeting; NOT agent definition, boot configuration, or system prompt authoring"
 domain: "agent_package"
-quality: null
+quality: 8.8
 tags: ["system_prompt", "agent_package", "packaging", "portable"]
 safety_level: standard
 tools_listed: false

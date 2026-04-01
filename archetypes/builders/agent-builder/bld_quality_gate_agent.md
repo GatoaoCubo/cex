@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: agent
-quality: null
+quality: 8.8
 tags: [quality-gate, agent, P11, P02, governance, identity, agent-package]
 tldr: "Gates for agent artifacts — persona + capabilities + agent_package packages ready for deploy."
 density_score: 0.90

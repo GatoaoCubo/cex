@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: builder_agent
 domain: lens
-quality: null
+quality: 8.8
 tags: [quality-gate, lens, perspective, P02, filter]
 tldr: "Quality gate for lens artifacts: enforces declared bias, scoped focus, and explicit applies_to list."
 density_score: 0.85

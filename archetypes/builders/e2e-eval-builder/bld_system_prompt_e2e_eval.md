@@ -13,7 +13,7 @@ rules_count: 12
 tone: technical
 knowledge_boundary: "e2e pipeline tests, stage definitions, data fixtures, intermediate assertions, expected output validation, environment and cleanup specs | NOT unit tests per agent, smoke tests, performance benchmarks, golden tests"
 domain: "e2e_eval"
-quality: null
+quality: 8.8
 tags: ["system_prompt", "e2e_eval", "testing", "governance", "P07"]
 safety_level: standard
 tools_listed: false

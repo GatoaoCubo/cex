@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n04_knowledge
 domain: data_platform
-quality: null
+quality: 8.9
 tags: [builder, supabase, data-layer, manifest, capabilities]
 density_score: 0.90
 keywords: ["data platform", data-layer, builder, capabilities, supabase, manifest]

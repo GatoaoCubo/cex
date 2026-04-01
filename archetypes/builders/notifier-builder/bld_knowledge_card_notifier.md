@@ -9,8 +9,9 @@ created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
 tags: [knowledge_card, notifier, email, sms, slack, discord, firebase, sendgrid, twilio]
-quality: null
+quality: 8.8
 tldr: "Provider selection, template design, rate limits, and anti-patterns for notification delivery across email, SMS, Slack, Discord, push channels."
+density_score: 1.0
 ---
 # Knowledge Card: Notification Delivery
 

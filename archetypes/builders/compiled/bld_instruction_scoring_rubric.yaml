@@ -1,0 +1,70 @@
+id: p03_ins_scoring_rubric_builder
+kind: instruction
+pillar: P03
+version: 1.0.0
+created: 2026-03-27
+updated: 2026-03-27
+author: instruction-builder
+title: Scoring Rubric Builder Instructions
+target: scoring-rubric-builder agent
+phases_count: 4
+prerequisites:
+- Artifact kind to be evaluated is named (e.g. "skill", "agent", "agent_card")
+- At least one quality dimension is identified (e.g. correctness, completeness)
+- Weights must sum to exactly 100
+- Tier thresholds are defined or can be derived (e.g. master >= 9.5, skilled >= 8.0)
+validation_method: checklist
+domain: scoring_rubric
+quality: null
+tags:
+- instruction
+- scoring-rubric
+- evaluation
+- governance
+- P07
+idempotent: true
+atomic: false
+rollback: Delete generated scoring_rubric file and restart from Phase 1
+dependencies: []
+logging: true
+tldr: Design a weighted evaluation framework with dimensions, per-tier thresholds, concrete scoring criteria, and calibration
+  guidance.
+density_score: 0.88
+context: "The scoring-rubric-builder produces `scoring_rubric` artifacts — structured evaluation\nframeworks used to measure\
+  \ the quality of a specific artifact kind. A scoring_rubric defines\nweighted dimensions, numeric thresholds per quality\
+  \ tier, concrete scoring criteria at each\nscale point, and an automation status for each dimension.\nInput contract:\n\
+  - `{{artifact_kind}}`: the kind being evaluated (e.g. `skill`, `agent`, `agent_card`)\n- `{{dimensions_raw}}`: comma-separated\
+  \ quality dimensions to evaluate\n- `{{tier_map}}`: tier names with numeric thresholds\n  (e.g. `master:9.5, skilled:8.0,\
+  \ learning:7.0, rejected:<7.0`)\n- `{{golden_tests_available}}`: boolean — whether reference examples exist for calibration\n\
+  - `{{automation_target}}`: desired level (`manual`, `semi-automated`, `automated`)\nOutput contract: A single `scoring_rubric`\
+  \ Markdown file with YAML frontmatter,\nweighted dimension table, per-dimension scoring scales, tier thresholds, and calibration\
+  \ notes.\nBoundaries:\n- Handles evaluation criteria design only.\n- Reference examples for calibration belong in golden_test\
+  \ artifacts.\n- Binary pass/fail barriers belong in quality_gate artifacts.\n- Performance benchmarks (throughput, latency)\
+  \ belong in benchmark artifacts."
+phases: ''
+phase_1_analyze_artifact_kind_and_dimensions: "Primary action: Understand what quality means for `{{artifact_kind}}` and decompose\n\
+  it into measurable, non-overlapping dimensions.\nINPUT: artifact_kind, dimensions_raw\n1. Characterize the artifact kind:\n\
+  \   artifact_profile = {\n     kind: {{artifact_kind}},\n     primary_consumer: \"human\" | \"machine\" | \"both\",\n  \
+  \   output_type: \"text\" | \"code\" | \"data\" | \"config\",\n     correctness_verifiable: true | false\n   }\n2. Parse\
+  \ and expand dimensions_raw into dimension_list:\n   for each dimension in dimensions_raw.split(\",\"):\n     dimension_entry\
+  \ = {\n       name: dimension.strip(),\n       description: one-sentence definition,\n       measurability: \"objective\"\
+  \ | \"subjective\" | \"semi-objective\",\n       automation_feasibility: \"high\" | \"medium\" | \"low\"\n     }\n3. Validate\
+  \ non-overlap:\n   for each pair (d1, d2) in dimension_list:\n     if d1 and d2 measure the same thing: merge or rename\n\
+  4. Enforce coverage floor:\n   required = [\"correctness\", \"completeness\", \"clarity\"]\n   for each missing in required\
+  \ - dimension_list.names:\n     add with default one-sentence definition\nOUTPUT: artifact_profile{}, dimension_list[] (>=\
+  \ 3 dimensions, non-overlapping)\nVerification: `dimension_list` has >= 3 entries. No two dimensions share identical\ndescriptions."
+phase_2_assign_weights_and_define_tiers: "Primary action: Distribute the 100-point weight budget across dimensions and define\n\
+  numeric thresholds for each quality tier.\nINPUT: dimension_list[], tier_map, artifact_profile\n1. Weight allocation:\n\
+  \   if artifact_profile.correctness_verifiable == true:\n     correctness_weight >= 30\n   Distribute remaining weight by\
+  \ measurability:\n     \"objective\" dimensions receive higher weight\n     \"subjective\" dimensions receive lower weight\n\
+  \   ASSERT sum(all weights) == 100  # hard requirement\n2. Tier threshold definition from tier_map:\n   tiers = []\n   for\
+  \ each (tier_name, min_score) in tier_map:\n     tiers.append({\n       name: tier_name,\n       min_score: min_score,\n\
+  \       label: descriptive label,\n       action: what happens at this tier (e.g. \"promote\", \"reject with feedback\"\
+  )\n     })\n   Sort tiers by min_score descending.\n   Verify no gaps or overlaps between adjacent tier ranges.\n3. Per-dimension\
+  \ automation status:\n   for each dimension in dimension_list:\n     if automation_feasibility == \"high\":   status = \"\
+  automated\"\n     elif automation_feasibility == \"medium\": status = \"semi-automated\"\n     else:                   \
+  \                 status = \"manual\"\n   Document any gap between dimension status and {{automation_target}}.\nOUTPUT:\
+  \ weighted_dimensions[] (sum == 100), tier_thresholds[], automation_map{}\nVerification: weights sum exactly to 100. Each\
+  \ tier has a distinct, non-overlapping range."
+phase_3_define_scoring_scales: 'Primary action: For each dimension, write concrete, discriminating criteria at each key score
+  point on the chosen scale.'

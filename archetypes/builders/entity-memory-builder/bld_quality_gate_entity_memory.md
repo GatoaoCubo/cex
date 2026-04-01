@@ -8,7 +8,7 @@ created: "2026-03-29"
 updated: "2026-03-29"
 author: "builder_agent"
 domain: "entity memory — structured facts about named entities (people, tools, concepts, organizations, projects, services)"
-quality: null
+quality: 8.8
 tags: [quality-gate, entity-memory, P10, memory, entity, attributes]
 tldr: "Pass/fail gate for entity_memory artifacts: entity_type validity, non-empty attributes, update_policy, confidence scoring, and relationship integrity."
 density_score: 0.90

@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "Retrieval parameters — how to search and rank chunks from a vector/hybrid store | NOT embedding_config (vector model), chunk_strategy (splitting), knowledge_card (content), brain_index (index infra)"
 domain: "retriever_config"
-quality: null
+quality: 8.7
 tags: ["system_prompt", "retriever-config", "P01"]
 safety_level: standard
 tools_listed: false

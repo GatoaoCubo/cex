@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "Web/semantic/hybrid search providers, query parameters, result ranking, filtering | NOT retriever (local vector store), document_loader (file ingestion), browser_tool (web navigation)"
 domain: "search_tool"
-quality: null
+quality: 8.7
 tags: ["system_prompt", "search_tool", "web_search", "semantic_search", "tools"]
 safety_level: standard
 tools_listed: false

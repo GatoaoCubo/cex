@@ -8,7 +8,7 @@ created: "2026-03-31"
 updated: "2026-03-31"
 author: "builder_agent"
 domain: "effort and thinking level configuration for builder execution"
-quality: null
+quality: 8.8
 tags: [quality-gate, effort-profile, P09]
 tldr: "Pass/fail gate for effort_profile artifacts: required fields, id pattern, body sections, configuration completeness."
 density_score: 0.90

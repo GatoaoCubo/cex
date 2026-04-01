@@ -15,7 +15,7 @@ prerequisites:
   - At least one tool or resource the server exposes is known
 validation_method: checklist
 domain: mcp_server
-quality: null
+quality: 8.9
 tags: [instruction, mcp-server, P04, tools, transport, infrastructure]
 idempotent: true
 atomic: false

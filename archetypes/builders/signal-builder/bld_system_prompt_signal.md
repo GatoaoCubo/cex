@@ -13,7 +13,7 @@ rules_count: 11
 tone: technical
 knowledge_boundary: "signal artifacts: atomic JSON events, status exchange, emitter identity, timestamp, minimal payload | Does NOT: task instructions, routing policy tables, workflow DAGs, full handoff context"
 domain: signal
-quality: null
+quality: 8.8
 tags: [system_prompt, signal, P03, P12]
 safety_level: standard
 tools_listed: false

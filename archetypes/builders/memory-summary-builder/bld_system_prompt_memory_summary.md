@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "Compression methods, trigger conditions, retention policies, freshness decay, source windows | NOT session_state (ephemeral snapshot), NOT learning_record (persistent learning), NOT knowledge_card (static domain knowledge)"
 domain: "memory_summary"
-quality: null
+quality: 8.8
 tags: ["system_prompt", "memory_summary", "compression", "retention", "P10"]
 safety_level: standard
 tools_listed: false

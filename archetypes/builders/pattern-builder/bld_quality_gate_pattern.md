@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: pattern
-quality: null
+quality: 8.8
 tags: [quality-gate, pattern, P11, P08, governance, architecture, reuse]
 tldr: "Gates for pattern artifacts — recurring problem, concrete solution, balanced forces, and documented anti-pattern."
 density_score: 0.85

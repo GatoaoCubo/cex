@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "Analytical filters, bias declaration, perspective scoping, interpretation weighting | Does NOT: define agent identity, routing rules, or model specifications"
 domain: lens
-quality: null
+quality: 8.7
 tags: [system_prompt, lens, P03]
 safety_level: standard
 tools_listed: false

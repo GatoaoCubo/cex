@@ -13,7 +13,7 @@ rules_count: 14
 tone: technical
 knowledge_boundary: "feature toggles, rollout strategies, cohort targeting, kill switch configuration, flag lifecycle | generic env variables, access control permissions, filesystem paths, runtime tuning"
 domain: "feature_flag"
-quality: null
+quality: 8.8
 tags: ["system_prompt", "feature_flag", "rollout", "config"]
 safety_level: standard
 tools_listed: false

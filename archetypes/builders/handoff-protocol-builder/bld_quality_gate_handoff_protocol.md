@@ -8,7 +8,7 @@ created: "2026-03-29"
 updated: "2026-03-29"
 author: "builder_agent"
 domain: "agent-to-agent handoff and context transfer"
-quality: null
+quality: 8.8
 tags: [quality-gate, handoff-protocol, P02]
 tldr: "Pass/fail gate for handoff_protocol artifacts: required fields, id pattern, body sections, parameter completeness."
 density_score: 0.90

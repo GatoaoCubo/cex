@@ -15,7 +15,7 @@ prerequisites:
   - The operations requiring control are known (read, write, execute, or a subset)
 validation_method: checklist
 domain: permission
-quality: null
+quality: 8.8
 tags:
   - instruction
   - permission

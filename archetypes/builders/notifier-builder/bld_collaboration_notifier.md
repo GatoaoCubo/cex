@@ -9,8 +9,9 @@ created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
 tags: [collaboration, notifier, P04, crew, dependencies]
-quality: null
+quality: 8.7
 tldr: "notifier-builder is PUSH DELIVERY SPECIALIST. Depends on: webhook-builder (events trigger notifications). Used by: instruction-builder, agent-builder, code-gen."
+density_score: 1.0
 ---
 # Collaboration: notifier-builder
 

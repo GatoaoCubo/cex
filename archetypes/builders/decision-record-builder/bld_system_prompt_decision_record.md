@@ -13,7 +13,7 @@ rules_count: 10
 tone: analytical
 knowledge_boundary: "ADR format, status lifecycle, context/decision/consequences structure, options analysis | NOT laws (inviolable rules), patterns (reusable prescriptions), diagrams (visual), knowledge cards (reference)"
 domain: "decision_record"
-quality: null
+quality: 8.8
 tags: ["system_prompt", "decision_record", "architecture", "ADR", "P08"]
 safety_level: standard
 tools_listed: false

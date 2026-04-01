@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "Effort and thinking level configuration for builder execution | NOT runtime_rule (execution rules), env_config (environment vars), model_card (model specs)"
 domain: "effort_profile"
-quality: null
+quality: 8.7
 tags: ["system_prompt", "effort-profile", "P09"]
 safety_level: standard
 tools_listed: false

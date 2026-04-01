@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: "golden_test — reference quality calibration cases scoring 9.5+ with rationale mapped to evaluation gates"
-quality: null
+quality: 8.8
 tags: [quality-gate, golden-test, calibration, evaluation, quality-baseline, P11]
 tldr: "Validates golden_test artifacts: verified 9.5+ source quality, rationale-to-gate mapping, and non-self-referential target kind."
 density_score: 0.93

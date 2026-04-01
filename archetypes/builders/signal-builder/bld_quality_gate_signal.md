@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: builder
 domain: signal
-quality: null
+quality: 8.8
 density_score: 0.85
 tags:
   - quality-gate

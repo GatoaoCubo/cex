@@ -16,7 +16,7 @@ prerequisites:
   - Target LLM model family is known (e.g. opus, sonnet, haiku)
 validation_method: checklist
 domain: agent_card
-quality: null
+quality: 8.8
 tags: [instruction, agent-card, architecture, P08]
 idempotent: true
 atomic: false

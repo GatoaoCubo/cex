@@ -9,10 +9,11 @@ created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
 tags: [memory, notifier, P04, patterns, learning]
-quality: null
+quality: 8.7
 tldr: "Key learnings: rate_limit prevents provider bans, priority routing prevents alert fatigue, template_vars prevent runtime formatting errors."
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+density_score: 0.83
 ---
 # Memory: notifier-builder Learnings
 

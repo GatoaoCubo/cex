@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: "command-line tool definition — point-in-time executables with declared commands, flags, and exit codes"
-quality: null
+quality: 8.8
 tags: [quality-gate, cli-tool, P04, command-line, exit-codes, output-format]
 tldr: "Pass/fail gate for cli_tool artifacts: command completeness, exit code semantics, output format declaration, and flag documentation."
 density_score: 0.90

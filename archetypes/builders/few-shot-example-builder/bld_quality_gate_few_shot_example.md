@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: "few_shot_example — input/output pairs that teach format to LLMs via in-context prompt engineering"
-quality: null
+quality: 8.8
 tags: [quality-gate, few-shot-example, prompt-engineering, format-teaching, P11]
 tldr: "Validates few_shot_example artifacts: input/output completeness, format demonstration clarity, and byte-size constraint."
 density_score: 0.90

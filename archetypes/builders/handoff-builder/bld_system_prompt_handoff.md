@@ -13,7 +13,7 @@ rules_count: 14
 tone: technical
 knowledge_boundary: "handoff structure, scope fencing, commit conventions, delegation contracts; NOT execution runtime, dependency graphs, routing policy, or status reporting"
 domain: "handoff"
-quality: null
+quality: 8.8
 tags: ["system_prompt", "handoff", "orchestration", "delegation"]
 safety_level: standard
 tools_listed: false

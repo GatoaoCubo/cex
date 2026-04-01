@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "Memory scope config — which memory types an agent uses, backends, TTL, and isolation boundaries | NOT session_state (P10, runtime state), brain_index (P10, search index), learning_record (P10, pattern storage)"
 domain: "memory_scope"
-quality: null
+quality: 8.7
 tags: ["system_prompt", "memory-scope", "P02"]
 safety_level: standard
 tools_listed: false

@@ -8,7 +8,7 @@ created: "2026-03-29"
 updated: "2026-03-29"
 author: "builder_agent"
 domain: "constrained LLM generation rules"
-quality: null
+quality: 8.8
 tags: [quality-gate, constraint-spec, P03]
 tldr: "Pass/fail gate for constraint_spec artifacts: required fields, id pattern, body sections, parameter completeness."
 density_score: 0.90

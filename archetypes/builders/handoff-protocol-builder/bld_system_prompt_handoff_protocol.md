@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "Handoff protocol — trigger conditions, context passed, return contract between agents | NOT dispatch_rule (P12, keyword routing), workflow (P12, multi-step orchestration), router (P02, task routing)"
 domain: "handoff_protocol"
-quality: null
+quality: 8.7
 tags: ["system_prompt", "handoff-protocol", "P02"]
 safety_level: standard
 tools_listed: false

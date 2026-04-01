@@ -1,0 +1,67 @@
+id: bld_output_template_document_loader
+kind: output_template
+pillar: P04
+version: 1.0.0
+created: 2026-03-28
+updated: 2026-03-28
+author: builder_agent
+domain: document_loader
+llm_function: GENERATE
+quality: null
+tags:
+- output_template
+- document_loader
+- ingestion
+- chunking
+- P04
+tldr: Fillable template for document_loader artifacts. Replace all {{vars}} with concrete values.
+density_score: 1.0
+frontmatter_template: "---\nid: p04_loader_{{format_slug}}\nkind: document_loader\npillar: P04\nversion: 1.0.0\ncreated: {{YYYY-MM-DD}}\n\
+  updated: {{YYYY-MM-DD}}\nauthor: {{author}}\nname: \"{{Human Readable Loader Name}}\"\nformats_supported:\n  - {{mime_type_1}}\n\
+  \  - {{mime_type_2}}\nchunk_strategy: {{fixed|recursive|semantic|sentence|paragraph}}\noutput_format: {{langchain_doc|llamaindex_node|haystack_doc|raw_dict}}\n\
+  chunk_size: {{int_tokens}}\noverlap: {{int_tokens}}\nencoding: {{utf-8|auto-detect}}\nquality: null\ntags: [document_loader,\
+  \ {{format_tag}}, {{domain_tag}}, P04]\ntldr: \"{{<=160 char summary of what formats, chunk strategy, and output}}\"\ndescription:\
+  \ \"{{<=200 char description of use case and pipeline role}}\"\nmetadata_fields:\n  - source\n  - {{format_specific_field_1}}\n\
+  \  - {{format_specific_field_2}}\n---"
+body_template: '## Overview
+
+  {{2-3 sentences: what file formats this loader handles, primary use case (e.g., PDF ingestion
+
+  for legal document RAG), and pipeline position (stage 1: raw file -> chunked Documents).}}
+
+
+  ## Formats
+
+  | Format | MIME Type | Parser | Limitations |
+
+  |--------|-----------|--------|-------------|
+
+  | {{format_name}} | {{mime_type}} | {{parser_library}} | {{known_limits}} |
+
+  | {{format_name}} | {{mime_type}} | {{parser_library}} | {{known_limits}} |
+
+
+  ## Chunking
+
+  - Strategy: {{chunk_strategy}}
+
+  - Chunk size: {{chunk_size}} tokens
+
+  - Overlap: {{overlap}} tokens
+
+  - Boundary rule: {{how boundaries are respected, e.g., "never split mid-sentence"}}
+
+  - Splitter: {{LangChain class or equivalent, e.g., RecursiveCharacterTextSplitter}}
+
+
+  ## Metadata
+
+  | Field | Type | Source | Notes |
+
+  |-------|------|--------|-------|
+
+  | source | string | file path or URL | Required — provenance for every chunk |
+
+  | {{field}} | {{type}} | {{how extracted}} | {{notes}} |
+
+  | {{field}} | {{type}} | {{how extracted}} | {{notes}} |'

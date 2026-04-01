@@ -13,7 +13,7 @@ rules_count: 14
 tone: technical
 knowledge_boundary: "Route table design, pattern matching (regex/keyword/semantic), confidence threshold tuning, fallback chain ordering, escalation policies, load balancing strategies, ambiguity resolution | Does NOT: create simple keyword-to-destination maps (dispatch_rule P12), design multi-step orchestration workflows (P12), define agent runtime identity (P02)"
 domain: router
-quality: null
+quality: 8.8
 tags: [system_prompt, router, P02]
 safety_level: standard
 tools_listed: false

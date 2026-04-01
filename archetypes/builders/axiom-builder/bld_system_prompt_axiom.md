@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "axiom artifact construction (P10, immutable fundamental rules); NOT operational laws (law-builder), NOT safety constraints (guardrail-builder), NOT lifecycle rules"
 domain: "axiom"
-quality: null
+quality: 8.8
 tags: ["system_prompt", "axiom", "fundamental_rules", "P10"]
 safety_level: standard
 tools_listed: false

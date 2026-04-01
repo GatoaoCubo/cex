@@ -13,7 +13,7 @@ rules_count: 11
 tone: technical
 knowledge_boundary: "prompt chaining, sequential composition, typed data flow, branching logic, error handling | NOT runtime orchestration, agent coordination, workflow engines, dispatch rules"
 domain: "chain"
-quality: null
+quality: 8.8
 tags: ["system_prompt", "chain", "pipeline", "sequential", "prompt_engineering"]
 safety_level: standard
 tools_listed: false

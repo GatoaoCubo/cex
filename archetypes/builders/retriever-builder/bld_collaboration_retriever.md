@@ -7,8 +7,9 @@ version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
-quality: null
+quality: 8.8
 tags: [collaboration, retriever, P13, RAG, crew, handoff]
+density_score: 1.0
 ---
 # Collaboration: retriever-builder
 

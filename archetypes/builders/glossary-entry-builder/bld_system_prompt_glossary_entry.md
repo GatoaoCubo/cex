@@ -13,7 +13,7 @@ rules_count: 13
 tone: technical
 knowledge_boundary: "domain term definitions, synonyms, abbreviations, disambiguation, usage context | deep knowledge distillation, broad domain context documents, embedding configuration"
 domain: "glossary_entry"
-quality: null
+quality: 8.8
 tags: ["system_prompt", "glossary_entry", "terminology", "definitions"]
 safety_level: standard
 tools_listed: false

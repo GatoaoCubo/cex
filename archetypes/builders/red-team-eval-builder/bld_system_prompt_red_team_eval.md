@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "Adversarial attack types, jailbreak patterns, prompt injection, PII leak, toxicity/bias testing, OWASP LLM Top 10, Promptfoo redteam, Garak, Patronus AI, DeepEval | NOT e2e_eval (functional test), unit_eval (isolated correctness), guardrail (P11 runtime boundary), smoke_eval (sanity check)"
 domain: "red_team_eval"
-quality: null
+quality: 8.8
 tags: ["system_prompt", "red_team_eval", "adversarial", "safety", "llm-security"]
 safety_level: elevated
 tools_listed: false

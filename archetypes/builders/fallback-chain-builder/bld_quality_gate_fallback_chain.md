@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: "fallback_chain — model degradation sequences with timeouts, circuit breakers, and cost controls"
-quality: null
+quality: 8.8
 tags: [quality-gate, fallback-chain, resilience, model-degradation, P11]
 tldr: "Validates fallback_chain artifacts: step sequence integrity, timeout/threshold coverage, and cost-aware degradation design."
 density_score: 0.92

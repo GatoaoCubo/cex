@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: social_publisher
-quality: null
+quality: 8.9
 tags: [quality-gate, social-publisher, P11, automation, governance]
 tldr: "Gates for social publisher artifacts — config completeness, pipeline coverage, security, and reusability."
 density_score: 0.90

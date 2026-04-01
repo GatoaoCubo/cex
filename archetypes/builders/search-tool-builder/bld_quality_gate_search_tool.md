@@ -8,7 +8,7 @@ created: "2026-03-28"
 updated: "2026-03-28"
 author: "builder_agent"
 domain: "Web, semantic, and hybrid search tools that connect LLM agents to external search services"
-quality: null
+quality: 8.8
 tags: [quality-gate, search-tool, P04, web-search, semantic-search, provider]
 tldr: "Pass/fail gate for search_tool artifacts: provider specification, max_results, result structure, cost documentation, and API key security."
 density_score: 0.90

@@ -16,7 +16,7 @@ prerequisites:
   - Session start timestamp is available in ISO 8601 format
 validation_method: checklist
 domain: session_state
-quality: null
+quality: 8.7
 tags: [instruction, session-state, memory, ephemeral, P10]
 idempotent: false
 atomic: true

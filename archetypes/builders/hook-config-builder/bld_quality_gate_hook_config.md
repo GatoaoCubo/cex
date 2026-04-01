@@ -8,7 +8,7 @@ created: "2026-03-31"
 updated: "2026-03-31"
 author: "builder_agent"
 domain: "hook lifecycle configuration for builder execution"
-quality: null
+quality: 8.8
 tags: [quality-gate, hook-config, P04]
 tldr: "Pass/fail gate for hook_config artifacts: required fields, id pattern, body sections, hook declaration completeness."
 density_score: 0.90

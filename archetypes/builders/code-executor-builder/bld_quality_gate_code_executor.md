@@ -8,7 +8,7 @@ created: "2026-03-28"
 updated: "2026-03-28"
 author: "builder_agent"
 domain: "Sandboxed code execution environments with isolation, language support, resource limits, and timeout policies"
-quality: null
+quality: 8.8
 tags: [quality-gate, code-executor, P04, sandbox, isolation, timeout]
 tldr: "Pass/fail gate for code_executor artifacts: sandbox isolation, timeout policy, language listing, resource limits, and network access declaration."
 density_score: 0.90

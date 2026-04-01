@@ -13,7 +13,7 @@ rules_count: 12
 tone: technical
 knowledge_boundary: "agent_card artifacts: role, LLM model, MCPs, boot sequence, dispatch rules, constraints, scaling | Does NOT: agent identity files (P02), boot_config per provider, pattern documentation"
 domain: agent_card
-quality: null
+quality: 8.8
 tags: [system_prompt, agent_card, P03, P08]
 safety_level: standard
 tools_listed: false

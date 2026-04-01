@@ -8,7 +8,7 @@ created: "2026-03-29"
 updated: "2026-03-29"
 author: "builder_agent"
 domain: "enumeration definition — finite named value sets with per-value descriptions and framework representations"
-quality: null
+quality: 8.8
 tags: [quality-gate, enum-def, P06, enumeration, finite-values, schema]
 tldr: "Pass/fail gate for enum_def artifacts: value completeness, per-value descriptions, extensibility declaration, and framework representation accuracy."
 density_score: 0.90

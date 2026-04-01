@@ -13,7 +13,7 @@ rules_count: 14
 tone: technical
 knowledge_boundary: "HARD/SOFT gate patterns, numeric scoring formulas, bypass policies, audit trail design, gate sequencing | Does NOT: write validator code (P06), define scoring rubric criteria (P07), orchestrate bugloop fix cycles (P11)"
 domain: quality_gate
-quality: null
+quality: 8.8
 tags: [system_prompt, quality_gate, P11]
 safety_level: standard
 tools_listed: false

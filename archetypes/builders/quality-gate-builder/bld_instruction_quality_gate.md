@@ -15,7 +15,7 @@ prerequisites:
   - "Delivery threshold is known or can be inferred (numeric score 0.0-1.0)"
 validation_method: checklist
 domain: quality_gate
-quality: null
+quality: 8.8
 tags: [instruction, quality-gate, P11, governance, scoring, threshold]
 idempotent: true
 atomic: false

@@ -13,7 +13,7 @@ rules_count: 12
 tone: technical
 knowledge_boundary: "RBAC, ABAC, ACL patterns, role hierarchy, deny-overrides-allow, allow/deny lists, audit trail events, access escalation | Does NOT: define safety guardrails, set operational laws, score quality, toggle feature flags"
 domain: permission
-quality: null
+quality: 8.8
 tags: [system_prompt, permission, P03]
 safety_level: standard
 tools_listed: false

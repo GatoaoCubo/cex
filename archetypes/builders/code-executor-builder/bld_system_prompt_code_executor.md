@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "Sandboxed code execution, Docker/E2B/WASM runtimes, isolation levels, resource limits, timeouts | NOT cli_tool (terminal commands), daemon (persistent process), mcp_server (protocol)"
 domain: "code_executor"
-quality: null
+quality: 8.7
 tags: ["system_prompt", "code_executor", "sandbox", "runtime", "tools"]
 safety_level: elevated
 tools_listed: false

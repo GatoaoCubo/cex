@@ -8,7 +8,7 @@ created: "2026-03-28"
 updated: "2026-03-28"
 author: "builder_agent"
 domain: "JSON Schema function definitions callable by LLMs via tool_use/function_calling"
-quality: null
+quality: 8.8
 tags: [quality-gate, function-def, P04, json-schema, tool-calling, parameters]
 tldr: "Pass/fail gate for function_def artifacts: valid JSON Schema parameters, LLM-facing description, return type, and provider compatibility."
 density_score: 0.90

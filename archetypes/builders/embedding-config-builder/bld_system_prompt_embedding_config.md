@@ -13,7 +13,7 @@ rules_count: 12
 tone: technical
 knowledge_boundary: "embedding model configuration, vector dimensions, chunk size and overlap, distance metrics, tokenizers, batch sizes, normalization, provider cost | NOT brain index configuration, source indexing, knowledge distillation, query re-ranking"
 domain: "embedding_config"
-quality: null
+quality: 8.8
 tags: ["system_prompt", "embedding_config", "vector", "rag", "P01"]
 safety_level: standard
 tools_listed: false

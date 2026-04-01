@@ -15,7 +15,7 @@ prerequisites:
   - "Persistence scope is known: within-session (ephemeral) or cross-session (persistent)"
 validation_method: checklist
 domain: runtime_state
-quality: null
+quality: 8.8
 tags: [instruction, runtime-state, P10, agent-state, routing, heuristics, state-machine]
 idempotent: true
 atomic: false

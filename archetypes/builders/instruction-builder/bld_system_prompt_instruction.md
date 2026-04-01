@@ -13,7 +13,7 @@ rules_count: 15
 tone: technical
 knowledge_boundary: "step decomposition, prerequisites, validation criteria, rollback procedures, idempotency, atomicity, execution ordering; NOT agent identity, action prompts with I/O contracts, or multi-agent workflow orchestration"
 domain: "instruction"
-quality: null
+quality: 8.8
 tags: ["system_prompt", "instruction", "steps", "recipe"]
 safety_level: standard
 tools_listed: false

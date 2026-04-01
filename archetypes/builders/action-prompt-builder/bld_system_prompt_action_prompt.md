@@ -13,7 +13,7 @@ rules_count: 12
 tone: technical
 knowledge_boundary: "action_prompt artifacts with defined I/O contracts; NOT agent identity (system_prompt), NOT reusable templates (prompt_template), NOT step-by-step recipes (instruction)"
 domain: "action_prompt"
-quality: null
+quality: 8.8
 tags: ["system_prompt", "action_prompt", "prompt_engineering", "P03"]
 safety_level: standard
 tools_listed: false

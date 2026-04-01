@@ -13,7 +13,7 @@ rules_count: 11
 tone: technical
 knowledge_boundary: "benchmark artifact construction (P07, quantitative performance measurement); NOT quality criteria design (scoring_rubric), NOT correctness testing (unit_eval), NOT reference examples (golden_test)"
 domain: "benchmark"
-quality: null
+quality: 8.8
 tags: ["system_prompt", "benchmark", "performance_measurement", "P07"]
 safety_level: standard
 tools_listed: false

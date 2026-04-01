@@ -15,7 +15,7 @@ prerequisites:
   - Optimization direction is known (minimize or maximize)
 validation_method: checklist
 domain: optimizer
-quality: null
+quality: 8.6
 tags:
   - instruction
   - optimizer

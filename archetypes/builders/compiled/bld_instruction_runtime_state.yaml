@@ -1,0 +1,88 @@
+id: p03_ins_runtime_state
+kind: instruction
+pillar: P10
+version: 1.0.0
+created: 2026-03-27
+updated: 2026-03-27
+author: instruction-builder
+title: Runtime State Builder Instructions
+target: runtime-state-builder agent
+phases_count: 4
+prerequisites:
+- The agent whose runtime state needs definition is identified by name
+- The agent's decision points during execution are known or can be mapped
+- 'Persistence scope is known: within-session (ephemeral) or cross-session (persistent)'
+validation_method: checklist
+domain: runtime_state
+quality: null
+tags:
+- instruction
+- runtime-state
+- P10
+- agent-state
+- routing
+- heuristics
+- state-machine
+idempotent: true
+atomic: false
+rollback: Delete the produced state file. No agent behavior changes until the state is loaded at runtime.
+dependencies: []
+logging: true
+tldr: Define the routing rules, priorities, heuristics, and decision tree an agent uses at runtime — the variable mental state
+  accumulated during sessions.
+density_score: 0.91
+context: 'A runtime_state captures the variable mental state an agent accumulates and consults during execution. It is distinct
+  from an agent''s design-time identity (mental_model) and from ephemeral in-flight snapshots (session_state). A runtime_state
+  contains routing rules that change based on experience, priority orderings, decision heuristics for ambiguous situations,
+  and the domain map the agent navigates.
+
+  Inputs
+
+  | Field | Type | Description |
+
+  |---|---|---|
+
+  | `agent` | string | The agent whose state is being defined (e.g. `rag-source-builder`, `router-builder`) |
+
+  | `persistence_scope` | enum | `within_session` (reset each session) \| `cross_session` (persists across sessions) |
+
+  | `domain_map` | list | Domains this agent covers at runtime (e.g. `[llm_providers, benchmarks, tooling]`) |
+
+  | `decision_points` | list | Key decision junctions the agent encounters during execution |
+
+  Output
+
+  A single `.md` file with YAML frontmatter (17 required + 4 recommended fields) + body sections defining: routing_rules,
+  decision_tree, priorities, heuristics, domain_map, tools_available, constraints, fallback, and update_triggers.
+
+  Boundary rules
+
+  - runtime_state = variable state the agent builds and consults during runtime (this builder)
+
+  - mental_model = design-time identity, values, and personality (different builder)
+
+  - session_state = ephemeral snapshot of a single in-flight conversation (different builder)
+
+  - learning_record = accumulated cross-session improvement patterns (different builder)'
+phases: ''
+phase_1_research_decision_mapping: "Map the agent's runtime decision landscape before writing.\nFOR the named agent:\n  identify\
+  \ decision points:\n    routing decisions:  \"should I proceed or route this to another builder?\"\n    format decisions:\
+  \   \"which output structure fits this input?\"\n    scope decisions:    \"is this within my domain or a boundary case?\"\
+  \n    tool decisions:     \"which tool best serves this step?\"\n  FOR each decision point:\n    map the branch conditions\
+  \ (IF x THEN y ELSE z)\n    identify what signals trigger each branch (input features, context flags)\n    note what happens\
+  \ at each leaf (action, route, error)\n  priorities: what does this agent optimize for, in strict order?\n    example: correctness\
+  \ > completeness > brevity > speed\n  heuristics: rules of thumb for situations where the decision tree is ambiguous\n \
+  \   example: \"when domain is unclear, prefer the narrower scope over the broader\"\n  tools_available: which tools can\
+  \ this agent invoke during execution?\n    list tool names + one-line description of when each is used\n  constraints: what\
+  \ limits apply to this agent's runtime behavior?\n    example: max retries, forbidden actions, required audit steps\n  update_triggers:\
+  \ what events cause this state to be updated?\n    example: \"after each successful artifact delivery\", \"on schema version\
+  \ change\"\nCheck brain_query [IF MCP] for existing runtime_states for the same agent.\nGenerate state_slug: snake_case,\
+  \ matches agent name pattern.\nDeliverable: decision map with branches, priorities, heuristics, and update triggers."
+phase_2_classify_boundary_check: "Confirm the artifact belongs to `runtime_state` and not a sibling kind.\nIF the artifact\
+  \ defines the agent's identity, personality, or design-time values:\n  RETURN \"Route to mental-model-builder — that defines\
+  \ what the agent IS, not its runtime state.\"\nIF the artifact captures a snapshot of a single in-flight conversation:\n\
+  \  RETURN \"Route to session-state-builder — that is ephemeral, not accumulated state.\"\nIF the artifact records patterns\
+  \ learned across many sessions for future improvement:\n  RETURN \"Route to learning-record-builder.\"\nIF the artifact\
+  \ defines routing, decision logic, priorities, and heuristics that the\n  agent consults and may update during execution:\n\
+  \  PROCEED as runtime_state\nDeliverable: confirmed `kind: runtime_state` with one-line justification."
+phase_3_compose_build_the_state_artifact: Assemble frontmatter and body following SCHEMA.md and OUTPUT_TEMPLATE.md.

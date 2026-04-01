@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n04_knowledge
 domain: data_platform
-quality: null
+quality: 8.8
 tags: [builder, supabase, data-layer, config, defaults]
 density_score: 0.89
 effort: high

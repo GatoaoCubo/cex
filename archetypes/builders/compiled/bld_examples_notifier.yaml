@@ -1,0 +1,65 @@
+kind: examples
+id: bld_examples_notifier
+pillar: P04
+llm_function: DEMONSTRATE
+purpose: Golden and anti-pattern examples for notifier artifacts
+version: 1.0.0
+created: 2026-03-28
+updated: 2026-03-28
+author: builder_agent
+tags:
+- examples
+- notifier
+- P04
+- golden
+- anti-pattern
+quality: null
+tldr: 'Golden: Slack deploy alert notifier (all gates pass, score 9.2). Anti: minimal email notifier (H05/H07/S02 fail).'
+density_score: 1.0
+golden_slack_deploy_status_notifier: "---\nid: p04_notify_slack_deploy\nkind: notifier\npillar: P04\nversion: 1.0.0\ncreated:\
+  \ 2026-03-28\nupdated: 2026-03-28\nauthor: builder_agent\nname: \"Slack Deploy Status Notifier\"\nchannel: slack\ntemplate:\
+  \ \"deploy_status_block\"\npriority: high\nprovider: \"Slack API\"\nrate_limit:\n  max_per_minute: 10\n  max_per_hour: 100\n\
+  retry_policy:\n  max_attempts: 3\n  backoff: exponential\ntemplate_vars: [service_name, version, environment, status, actor]\n\
+  delivery_guarantee: at_least_once\nquality: null\ntags: [notifier, slack, deploy, cicd]\ntldr: \"Slack notifier for CI/CD\
+  \ deploy events. Delivers to #deployments channel with status, version, and actor.\"\ndescription: \"Sends deploy status\
+  \ (success/failure/rollback) to Slack #deployments channel via Block Kit with color-coded severity.\"\n---\n\n## Overview\n\
+  Delivers CI/CD deployment status notifications to Slack #deployments channel via\nSlack API Block Kit. Used by deploy pipeline\
+  \ on every deploy event (success, failure,\nrollback). High priority ensures delivery within 2 minutes.\n\n## Template\n\
+  Pattern: `[{{status}}] {{service_name}} v{{version}} -> {{environment}} by {{actor}}`\n\nVariables:\n- `service_name`: deployed\
+  \ service identifier (e.g. \"api\", \"worker\")\n- `version`: semver or git SHA (e.g. \"1.4.2\", \"a3f9c1\")\n- `environment`:\
+  \ target env (production, staging)\n- `status`: deploy outcome (success, failure, rollback)\n- `actor`: triggering user\
+  \ or CI bot\n\nExamples by priority:\n- critical: `[FAILURE] api v1.4.2 -> production by ci-bot — ROLLBACK TRIGGERED`\n\
+  - high: `[SUCCESS] api v1.4.2 -> production by alice`\n- normal: `[STARTED] worker v2.1.0 -> staging by bob`\n\n## Delivery\n\
+  - rate_limit: 10/min, 100/hr\n- retry: 3x exponential backoff (1s, 2s, 4s)\n- guarantee: at_least_once\n- on_failure: log\
+  \ to dead-letter queue, alert #ops-alerts\n\n## Configuration\n- endpoint: `https://slack.com/api/chat.postMessage`\n- auth:\
+  \ `SLACK_BOT_TOKEN`\n- channel_id: `#deployments`\n\nWHY GOLDEN: H01-H10 all pass. S01-S12 all >= 0.8. Template has vars,\
+  \ examples per priority,\nrate_limit, retry, delivery_guarantee, provider, auth env var, boundary clear (push, not HTTP).\n\
+  \n---"
+anti_pattern_broken_email_notifier: '---
+
+  id: notify_email
+
+  kind: notifier
+
+  channel: email
+
+  ---
+
+  Send email when user signs up.
+
+
+  FAILURES:
+
+  - H02 FAIL: id `notify_email` does not match `^p04_notify_[a-z][a-z0-9_]+$`
+
+  - H04 FAIL: quality field missing (must be null)
+
+  - H05 FAIL: pillar, name, template, priority all absent
+
+  - H07 FAIL: template field not defined
+
+  - S02 FAIL: no template example, no vars listed
+
+  - S04 FAIL: no rate_limit — will cause SendGrid account suspension under load
+
+  - S05 FAIL: no retry_policy — transactional emails silently dropped on failure'

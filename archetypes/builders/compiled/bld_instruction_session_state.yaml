@@ -1,0 +1,99 @@
+id: p03_ins_session_state_builder
+kind: instruction
+pillar: P03
+version: 1.0.0
+created: 2026-03-27
+updated: 2026-03-27
+author: instruction-builder
+title: Session State Builder Instructions
+target: session-state-builder agent
+phases_count: 3
+prerequisites:
+- Agent or agent_node name is known (non-empty string)
+- Session identifier is available (unique per execution context)
+- Current session status is known (active, paused, completed, or aborted)
+- Session start timestamp is available in ISO 8601 format
+validation_method: checklist
+domain: session_state
+quality: null
+tags:
+- instruction
+- session-state
+- memory
+- ephemeral
+- P10
+idempotent: false
+atomic: true
+rollback: null — session_state is ephemeral; discard and recapture if invalid
+dependencies: []
+logging: true
+tldr: Capture an agent's ephemeral session snapshot with context, resource usage, and checkpoints — under 3072 bytes, no persistence
+  across sessions.
+density_score: 0.87
+context: 'The session-state-builder produces `session_state` artifacts — ephemeral YAML snapshots
+
+  that capture an agent''s momentary execution state during a live session. A session_state
+
+  records what the agent is currently doing, what resources it has consumed, and where
+
+  recovery checkpoints exist if the session is interrupted.
+
+  Input contract:
+
+  - `{{agent_name}}`: the agent or agent_node being snapshotted (e.g. `build-sat`, `research-agent`)
+
+  - `{{session_id}}`: unique identifier for this execution context (e.g. `sess_20260327_001`)
+
+  - `{{session_status}}`: one of `active`, `paused`, `completed`, `aborted`
+
+  - `{{started_at}}`: ISO 8601 timestamp of session start
+
+  - `{{context_data}}`: optional free-text description of current tasks and state
+
+  Output contract: A single `session_state` YAML file named `p10_ss_{{session_slug}}.yaml`,
+
+  under 3072 bytes, with required frontmatter and three body sections: Active Context,
+
+  Resource Usage, and Checkpoints.
+
+  Boundaries:
+
+  - session_state is ephemeral — it captures a moment, not accumulated history.
+
+  - Accumulated learning across sessions belongs in a learning_record artifact.
+
+  - Persistent runtime state that outlasts a session belongs in a runtime_state artifact.
+
+  - Search indexes and knowledge bases are separate artifacts entirely.
+
+  - Absent optional fields must be omitted, not filled with placeholder values.'
+phases: ''
+phase_1_capture: "Primary action: Collect all observable facts about the current session state before\nwriting any YAML.\n\
+  INPUT: agent_name, session_id, session_status, started_at, context_data\n1. Derive session_slug for the filename:\n   session_slug\
+  \ = session_id.lower().replace(\" \", \"\").replace(\"-\", \"\")\n   Verify slug matches pattern: ^[a-z][a-z0-9_]+$\n2.\
+  \ Resolve session_status to one of the four valid values:\n   active    -> agent is currently executing\n   paused    ->\
+  \ agent is waiting for external input or resource\n   completed -> agent finished all assigned work\n   aborted   -> session\
+  \ terminated before completion\n3. Extract current tasks from context_data (if provided):\n   current_tasks = list of task\
+  \ descriptions the agent is mid-execution on\n   if context_data is empty: current_tasks = []\n4. Estimate resource usage\
+  \ from available signals:\n   tokens_used: integer or null\n   tools_invoked: list of tool names or []\n   elapsed_seconds:\
+  \ integer or null\n   error_count: integer, default 0\n5. Identify recovery checkpoints (if any):\n   checkpoint = {\n \
+  \    label: short name (e.g. \"after_phase_2\"),\n     description: what was completed up to this point,\n     resumable:\
+  \ true | false\n   }\n   checkpoints = [] if none exist\nOUTPUT: session_slug, session_status, current_tasks[], resource_usage{},\n\
+  \        checkpoints[]\nVerification: `session_slug` matches naming pattern. `session_status` is one of four\nvalid values."
+phase_2_compose: "Primary action: Assemble the captured data into a valid session_state YAML artifact\nfollowing the schema\
+  \ exactly.\nINPUT: all outputs from Phase 1, agent_name, session_id, started_at\n1. Set filename: p10_ss_{{session_slug}}.yaml\n\
+  2. Assemble frontmatter (required fields):\n   id: p10_ss_{{session_slug}}\n   kind: session_state\n   pillar: P10\n   version:\
+  \ 1.0.0\n   agent: {{agent_name}}\n   session_id: {{session_id}}\n   status: {{session_status}}\n   started_at: {{started_at}}\n\
+  \   captured_at: current ISO 8601 timestamp\n   quality: null\n3. Write Active Context section:\n   List current_tasks as\
+  \ bullet items.\n   If current_tasks is empty: write \"No active tasks — session is {{session_status}}.\"\n4. Write Resource\
+  \ Usage section:\n   Emit only fields with known values. Omit fields where value is null unless\n   null is the correct\
+  \ documented value (e.g. tokens_used: null is valid when\n   token counting is unavailable).\n   resource_usage:\n     tokens_used:\
+  \ {{tokens_used}}\n     tools_invoked: {{tools_invoked}}\n     elapsed_seconds: {{elapsed_seconds}}\n     error_count: {{error_count}}\n\
+  5. Write Checkpoints section:\n   If checkpoints is non-empty: emit as YAML list with label, description, resumable.\n \
+  \  If checkpoints is empty: write \"checkpoints: []\"\n6. Size check:\n   Estimate byte count of assembled YAML.\n   If\
+  \ estimate > 3072 bytes:\n     Truncate current_tasks to the 3 most recent items.\n     Truncate tools_invoked to the 10\
+  \ most recent entries.\n     Re-estimate. If still > 3072: remove optional narrative fields.\nOUTPUT: session_state YAML\
+  \ content (assembled, not yet validated)\nVerification: file is named `p10_ss_{{session_slug}}.yaml`. Estimated size <=\
+  \ 3072 bytes."
+phase_3_validate: 'Primary action: Run all quality gates against the assembled artifact and output the final file only if
+  all HARD gates pass.'

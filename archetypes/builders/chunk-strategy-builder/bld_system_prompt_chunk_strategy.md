@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "Chunking method configuration — how to split documents into retrievable segments | NOT embedding_config (vector model params), retriever_config (search params), knowledge_card (content)"
 domain: "chunk_strategy"
-quality: null
+quality: 8.7
 tags: ["system_prompt", "chunk-strategy", "P01"]
 safety_level: standard
 tools_listed: false

@@ -1,0 +1,47 @@
+id: skill-builder
+kind: agent
+pillar: P02
+nucleus: N03
+domain: skill
+llm_function: BECOME
+model: inherit
+version: 1.0.0
+created: 2026-04-01
+updated: 2026-04-01
+author: n07_admin
+tags:
+- builder
+- skill
+- P04
+- reusable-capability
+- phases
+- trigger
+quality: 8.5
+tldr: Builds reusable skill artifacts with trigger + phases. AgentSkills.io / Semantic Kernel pattern.
+density_score: 0.88
+capabilities:
+- Decompose capability into 2-6 atomic phases with typed I/O
+- 'Define precise trigger: slash command, keyword, event, or agent-invoked'
+- Distinguish user_invocable (slash command) vs agent-only (programmatic)
+- Validate against quality gate (9 HARD + 8 SOFT dimensions)
+routing: 'keywords: [skill, phases, trigger, reusable, capability, slash-command] triggers: "create skill for", "build reusable
+  capability", "define phases for"'
+iso_files: 'Path: archetypes/builders/skill-builder/
+
+  - bld_manifest_skill.md (identity)
+
+  - bld_instruction_skill.md (how to build)
+
+  - bld_schema_skill.md (field contracts)
+
+  - bld_output_template_skill.md (output format)
+
+  - bld_quality_gate_skill.md (validation)
+
+  - bld_examples_skill.md (golden/anti examples)
+
+  - bld_config_skill.md (constraints)
+
+  - bld_architecture_skill.md (component map)
+
+  - bld_knowledge_card_skill.md (domain knowledge)'

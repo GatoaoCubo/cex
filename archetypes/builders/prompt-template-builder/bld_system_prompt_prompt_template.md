@@ -13,7 +13,7 @@ rules_count: 16
 tone: technical
 knowledge_boundary: "Variable extraction, Mustache/Jinja2/DSPy syntax, type contracts, template composition, boundary arbitration across 9 P03 siblings | Does NOT: produce one-time user messages, fixed system identities, step-by-step instructions without slots, meta-prompts that generate other prompts"
 domain: prompt_template
-quality: null
+quality: 8.8
 tags: [system_prompt, prompt_template, P03]
 safety_level: standard
 tools_listed: false

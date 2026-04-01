@@ -8,7 +8,7 @@ updated: 2026-03-28
 author: builder_agent
 domain: document_loader
 llm_function: CONSTRAIN
-quality: null
+quality: 8.8
 tags: [config, document_loader, ingestion, P04]
 tldr: "Production rules for document_loader: naming, paths, size limits, and enum definitions."
 effort: medium
@@ -21,6 +21,7 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+density_score: 1.0
 ---
 # Config: document_loader Production Rules
 

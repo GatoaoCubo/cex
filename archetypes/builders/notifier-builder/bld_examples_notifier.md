@@ -9,8 +9,9 @@ created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
 tags: [examples, notifier, P04, golden, anti-pattern]
-quality: null
+quality: 8.8
 tldr: "Golden: Slack deploy alert notifier (all gates pass, score 9.2). Anti: minimal email notifier (H05/H07/S02 fail)."
+density_score: 1.0
 ---
 # Examples: notifier
 

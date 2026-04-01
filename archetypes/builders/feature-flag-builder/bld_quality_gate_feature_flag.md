@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: "feature_flag — on/off toggles with rollout percentage, cohort targeting, and kill switch behavior"
-quality: null
+quality: 8.8
 tags: [quality-gate, feature-flag, toggle, rollout, P11]
 tldr: "Validates feature_flag artifacts: toggle semantics, rollout strategy completeness, and kill switch safety."
 density_score: 0.91

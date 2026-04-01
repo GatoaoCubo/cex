@@ -13,7 +13,7 @@ rules_count: 11
 tone: technical
 knowledge_boundary: "Reusable solution documentation, problem/solution/forces/consequences/applicability, GoF/POSA/EIP/distributed patterns, anti-patterns, cross-references | Does NOT: define inviolable laws, produce visual diagrams, map components, define executable workflows"
 domain: pattern
-quality: null
+quality: 8.8
 tags: [system_prompt, pattern, P03]
 safety_level: standard
 tools_listed: false

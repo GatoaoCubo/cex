@@ -7,8 +7,9 @@ version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
-quality: null
+quality: 8.9
 tags: [architecture, retriever, P10, RAG, vector-search, component-map]
+density_score: 1.0
 ---
 # Architecture: retriever
 

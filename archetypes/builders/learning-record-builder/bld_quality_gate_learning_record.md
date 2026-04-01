@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: builder_agent
 domain: learning_record
-quality: null
+quality: 8.8
 tags: [quality-gate, learning-record, experience-capture, P10, retrospective]
 tldr: "Quality gate for learning_record artifacts: enforces outcome classification, impact score, and reproducible context."
 density_score: 0.85

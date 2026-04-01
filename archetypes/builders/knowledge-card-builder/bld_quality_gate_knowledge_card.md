@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: "knowledge_card — atomic searchable facts with high information density"
-quality: null
+quality: 8.8
 tags: [quality-gate, knowledge-card, density, fact, distillation, searchability]
 tldr: "Gates ensuring knowledge_card artifacts contain concrete atomic facts with density >= 0.8, semantic frontmatter, and file size <= 5KB."
 density_score: 0.94

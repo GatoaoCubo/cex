@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: path_config
-quality: null
+quality: 8.8
 tags: [quality-gate, path-config, P11, P09, governance, filesystem]
 tldr: "Gates for path_config artifacts — portable paths catalog with platform spec, expandable variables, and creation order."
 density_score: 0.85

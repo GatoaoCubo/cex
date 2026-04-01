@@ -9,8 +9,9 @@ version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
-quality: null
+quality: 8.7
 tags: [output_template, retriever, P05, vector-search, RAG]
+density_score: 1.0
 ---
 # Output Template: retriever
 

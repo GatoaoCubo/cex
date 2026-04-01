@@ -1,0 +1,99 @@
+id: p03_ins_signal_builder
+kind: instruction
+pillar: P03
+version: 1.0.0
+created: 2026-03-27
+updated: 2026-03-27
+author: instruction-builder
+title: Signal Builder Instructions
+target: signal-builder agent
+phases_count: 3
+prerequisites:
+- Event type is known (complete, error, or progress)
+- Emitting agent or agent_node name is identified
+- Event slug is defined (e.g. "build_complete", "research_error")
+- Timestamp is available or can be generated
+validation_method: checklist
+domain: signal
+quality: null
+tags:
+- instruction
+- signal
+- orchestration
+- P12
+idempotent: false
+atomic: true
+rollback: null — signals are fire-and-forget; discard and re-emit if invalid
+dependencies: []
+logging: true
+tldr: Emit an atomic JSON signal payload for complete, error, or progress events — under 4096 bytes, machine-friendly, no
+  routing logic included.
+density_score: 0.86
+context: 'The signal-builder produces `signal` artifacts — minimal JSON payloads representing atomic
+
+  status events emitted between agents or agent_nodes. A signal answers exactly three questions:
+
+  what happened, who emitted it, and when. Signals are consumed by orchestrators and monitoring
+
+  systems; they are not instructions, routing policies, or handoffs.
+
+  Input contract:
+
+  - `{{event_slug}}`: snake_case event name (e.g. `build_complete`, `research_error`)
+
+  - `{{emitter}}`: name of the emitting agent or agent_node (e.g. `build-sat`, `research-agent`)
+
+  - `{{status}}`: one of `complete`, `error`, `progress`
+
+  - `{{timestamp}}`: ISO 8601 datetime of the event
+
+  - `{{metadata_raw}}`: optional free-text of additional context to include
+
+  Output contract: A single `signal` JSON file named `p12_sig_{{event_slug}}.json`,
+
+  under 4096 bytes, with required fields and optional metadata. No routing logic, no
+
+  instructions, no narrative prose.
+
+  Boundaries:
+
+  - A signal is atomic — one event, one payload, one file.
+
+  - Full task instructions belong in a handoff artifact.
+
+  - Routing policy (which agent handles what) belongs in a dispatch_rule artifact.
+
+  - Multi-step workflows and DAGs are not signals.
+
+  - Optional metadata must remain compact — no embedded documents.'
+phases: ''
+phase_1_classify: "Primary action: Confirm this is a runtime event and determine the minimum required\npayload before writing\
+  \ any JSON.\nINPUT: event_slug, emitter, status, timestamp, metadata_raw\n1. Confirm this is a runtime event, not an instruction\
+  \ or routing rule:\n   Is it reporting something that already happened or is happening? -> signal\n   Is it telling an agent\
+  \ what to do next?                         -> NOT a signal\n   Is it defining how tasks get routed?                    \
+  \        -> NOT a signal\n2. Validate event_slug:\n   Must match pattern: ^[a-z][a-z0-9_]+$\n   Must be descriptive: \"\
+  {emitter}_{status}\" pattern preferred\n   Examples: \"build_complete\", \"research_error\", \"ingest_progress\"\n3. Validate\
+  \ status value:\n   complete  -> terminal success event\n   error     -> terminal failure event\n   progress  -> non-terminal\
+  \ update (use sparingly — only for long-running ops)\n4. Parse metadata_raw into optional_fields:\n   Extract only machine-friendly\
+  \ key-value pairs.\n   Discard prose, instructions, or routing logic.\n   Convert any numeric strings to numbers.\n   Keep\
+  \ only fields that help automation (scores, counts, paths, error codes).\n   Reject fields that duplicate required fields\
+  \ (emitter, status, timestamp).\n5. Compute target_consumer from event context:\n   if status == \"complete\" or \"error\"\
+  : consumer is likely an orchestrator\n   if status == \"progress\":            consumer is likely a monitoring system\n\
+  OUTPUT: validated_slug, validated_status, optional_fields{}, target_consumer\nVerification: `validated_slug` matches naming\
+  \ pattern. `validated_status` is one of\nthree valid values. `optional_fields` contains no instructions or routing logic."
+phase_2_compose: "Primary action: Assemble the minimum valid JSON payload with required fields first,\noptional fields appended\
+  \ only if compact and relevant.\nINPUT: validated_slug, emitter, validated_status, timestamp, optional_fields\n1. Set filename:\
+  \ p12_sig_{{event_slug}}.json\n2. Assemble required fields (always present):\n   {\n     \"id\": \"p12_sig_{{event_slug}}\"\
+  ,\n     \"kind\": \"signal\",\n     \"pillar\": \"P12\",\n     \"emitter\": \"{{emitter}}\",\n     \"status\": \"{{validated_status}}\"\
+  ,\n     \"timestamp\": \"{{timestamp}}\",\n     \"quality\": null\n   }\n3. Append optional fields (only if each meets ALL\
+  \ criteria):\n   - Value is machine-friendly (lowercase enum, number, ISO timestamp, or short string)\n   - Value adds information\
+  \ not derivable from required fields\n   - Adding it does not push total payload over 4096 bytes\n   Common valid optional\
+  \ fields:\n     \"score\":       numeric quality indicator (0.0 - 10.0)\n     \"duration_s\":  execution time in seconds\
+  \ (integer)\n     \"task_id\":     identifier of the task that generated this signal\n     \"error_code\":  short string\
+  \ error classifier (e.g. \"timeout\", \"validation_failed\")\n     \"items_count\": integer count of processed items\n \
+  \    \"artifact_id\": identifier of the artifact produced\n4. Size check:\n   Estimate JSON byte count (minified).\n   If\
+  \ > 4096 bytes: remove optional fields one by one (lowest value first)\n   until size <= 4096 bytes.\nOUTPUT: signal JSON\
+  \ content (assembled, not yet validated)\nVerification: required fields all present. Estimated minified size <= 4096 bytes.\n\
+  No field contains prose, instructions, or routing logic."
+phase_3_validate: 'Primary action: Run all quality gates against the assembled JSON and output the final file only if all
+  HARD gates pass.'

@@ -15,7 +15,7 @@ prerequisites:
   - "Domain of the template is identifiable (e.g. research, code, marketing, knowledge)"
 validation_method: checklist
 domain: prompt_template
-quality: null
+quality: 8.8
 tags: [instruction, prompt-template, P03, parameterization, reusable]
 idempotent: true
 atomic: false

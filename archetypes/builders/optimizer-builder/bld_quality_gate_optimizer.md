@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: optimizer
-quality: null
+quality: 8.8
 tags: [quality-gate, optimizer, P11, governance, performance, continuous-improvement]
 tldr: "Gates for optimizer artifacts — metric direction, threshold ordering, and automatable action definitions."
 density_score: 0.85

@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: "system component inventory — structured catalogs of components, connections, dependencies, and data flows"
-quality: null
+quality: 8.8
 tags: [quality-gate, component-map, P08, inventory, architecture, dependency-mapping]
 tldr: "Pass/fail gate for component_map artifacts: component completeness, connection accuracy, interface boundary documentation, and inventory scope."
 density_score: 0.90

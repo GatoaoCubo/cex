@@ -8,9 +8,10 @@ updated: 2026-03-28
 author: builder_agent
 domain: document_loader
 llm_function: INJECT
-quality: null
+quality: 8.9
 tags: [architecture, document_loader, ingestion, chunking, RAG, P04]
 tldr: "Component map, dependency graph, and boundary table for document_loader artifacts."
+density_score: 1.0
 ---
 
 # Architecture: document_loader

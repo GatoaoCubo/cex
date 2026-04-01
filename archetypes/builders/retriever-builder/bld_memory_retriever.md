@@ -7,10 +7,11 @@ version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
-quality: null
+quality: 8.8
 tags: [memory, retriever, P12, RAG, anti-patterns, lessons]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+density_score: 1.0
 ---
 # Memory: retriever-builder
 

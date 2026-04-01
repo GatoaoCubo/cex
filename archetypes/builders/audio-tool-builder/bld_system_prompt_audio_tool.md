@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "Audio direction (STT/TTS/analysis), models (Whisper/ElevenLabs/Google/Azure/Deepgram/AssemblyAI), formats (mp3/wav/ogg/flac/webm), languages (BCP-47) | NOT vision_tool (visual), NOT notifier (message delivery), NOT cli_tool (terminal)"
 domain: "audio_tool"
-quality: null
+quality: 8.8
 tags: ["system_prompt", "audio_tool", "speech", "tts", "stt"]
 safety_level: standard
 tools_listed: false

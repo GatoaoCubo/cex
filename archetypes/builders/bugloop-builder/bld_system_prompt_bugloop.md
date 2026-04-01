@@ -13,7 +13,7 @@ rules_count: 14
 tone: technical
 knowledge_boundary: "detection triggers, fix strategies, verification suites, escalation thresholds, rollback policies | NOT quality gates, scoring rubrics, optimizer cycles, guardrails, lifecycle rules"
 domain: "bugloop"
-quality: null
+quality: 8.7
 tags: ["system_prompt", "bugloop", "correction_cycle", "governance"]
 safety_level: standard
 tools_listed: false

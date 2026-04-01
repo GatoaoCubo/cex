@@ -1,0 +1,56 @@
+id: bld_instruction_document_loader
+kind: instruction
+pillar: P04
+version: 1.0.0
+created: 2026-03-28
+updated: 2026-03-28
+author: builder_agent
+domain: document_loader
+llm_function: EXECUTE
+quality: null
+tags:
+- instruction
+- document_loader
+- ingestion
+- chunking
+- P04
+tldr: '3-phase pipeline to produce a valid document_loader artifact: Research formats -> Compose spec -> Validate gates.'
+density_score: 0.86
+phase_1_research:
+- Identify all file formats the loader must handle — collect MIME types, not extensions.
+- 'For each format, select parser library: PDF->PyPDF2/pdfplumber/Unstructured; HTML->BeautifulSoup/trafilatura; CSV->pandas;
+  DOCX->python-docx; MD->markdown-it; JSON->stdlib; PPTX->python-pptx; XLSX->openpyxl.'
+- 'Determine chunk_strategy based on content structure: narrative->sentence/paragraph; structured->recursive; uniform batches->fixed;
+  topic-aware->semantic.'
+- 'Set chunk_size and overlap: default 512 tokens / 64 overlap; adjust for context window of target LLM.'
+- 'List all metadata to preserve: at minimum source (file path/url), format, page/line number, section heading, author where
+  available.'
+- 'Identify encoding risks: binary PDFs, Latin-1 legacy CSVs, UTF-16 Word docs — plan detection and fallback.'
+- 'Confirm output_format required by downstream: LangChain Document, LlamaIndex Node, Haystack Document, or raw dict.'
+- Check CEX pool for existing loaders that cover same formats — avoid duplicate artifacts.
+- Validate format list has no overlap with retriever or search_tool domains.
+- 'Note any format-specific limitations: scanned PDFs need OCR, HTML needs boilerplate stripping, CSV needs delimiter detection.'
+phase_2_compose:
+- Read bld_schema_document_loader.md — internalize all required fields and constraints.
+- 'Generate id: `p04_loader_{format_slug}` where format_slug is the primary format (e.g., pdf, html, csv_tabular).'
+- 'Write frontmatter: id, kind, pillar, version, created, updated, author, name, formats_supported (MIME list), chunk_strategy,
+  output_format, quality: null, tags, tldr, metadata_fields, chunk_size, overlap, encoding.'
+- 'Write `## Overview`: 2-3 sentences on what formats, primary use case, pipeline stage (stage 1 of RAG).'
+- 'Write `## Formats`: table with columns Format | MIME Type | Parser | Limitations — one row per format.'
+- 'Write `## Chunking`: chunk_strategy name, chunk_size, overlap, boundary handling rule, splitter class reference.'
+- 'Write `## Metadata`: table of extracted fields — Field | Type | Source | Notes — include source provenance always.'
+- Verify total body stays under 2048 bytes — trim descriptions before removing required fields.
+- Confirm tags include "document_loader" and at least 2 domain tags.
+- 'Set quality: null — never self-score.'
+phase_3_validate:
+- Parse frontmatter block as YAML — must be error-free (H01).
+- Verify id matches regex `^p04_loader_[a-z][a-z0-9_]+$` (H02).
+- Confirm id equals filename stem (H03).
+- Confirm kind equals literal "document_loader" (H04).
+- Confirm quality is null (H05).
+- 'Check all required fields present: id, kind, pillar, version, created, updated, author, name, formats_supported, chunk_strategy,
+  output_format (H06).'
+- Verify formats_supported is non-empty list of MIME types (H07).
+- 'Verify chunk_strategy is one of: fixed, recursive, semantic, sentence, paragraph (H08).'
+- 'Verify output_format is one of: langchain_doc, llamaindex_node, haystack_doc, raw_dict (H09).'
+- Count body bytes — must be <= 2048 (H10).

@@ -16,7 +16,7 @@ prerequisites:
   - "Handoff file path or inline prompt is available"
 validation_method: checklist
 domain: spawn_config
-quality: null
+quality: 8.8
 tags: [instruction, spawn-config, orchestration, director, P12]
 idempotent: true
 atomic: false

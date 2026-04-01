@@ -1,0 +1,92 @@
+id: p03_ins_prompt_template
+kind: instruction
+pillar: P03
+version: 1.0.0
+created: 2026-03-27
+updated: 2026-03-27
+author: instruction-builder
+title: Prompt Template Builder Instructions
+target: prompt-template-builder agent
+phases_count: 4
+prerequisites:
+- Input describes a prompt with at least one dynamic slot (a value that changes per invocation)
+- Target rendering engine is known or inferable (mustache, bracket, jinja2, langchain, dspy)
+- Domain of the template is identifiable (e.g. research, code, marketing, knowledge)
+validation_method: checklist
+domain: prompt_template
+quality: null
+tags:
+- instruction
+- prompt-template
+- P03
+- parameterization
+- reusable
+idempotent: true
+atomic: false
+rollback: Delete the produced .md file. No side effects — templates are inert until rendered.
+dependencies: []
+logging: true
+tldr: Extract variable slots, compose a reusable mustache template with full frontmatter, validate all 8 HARD gates, then
+  deliver.
+density_score: 0.93
+context: 'A prompt_template is a reusable mold: a prompt body where dynamic values are represented as named placeholders (`{{variable}}`).
+  The same template produces many distinct prompts by substituting different values at invocation time. This builder operates
+  at the prompt layer — above identity definitions (system_prompt) and below live execution.
+
+  Inputs
+
+  | Field | Type | Description |
+
+  |---|---|---|
+
+  | `raw_prompt` | string | The prompt or prompt sketch provided by the caller |
+
+  | `target_engine` | string | `mustache` (default) or `bracket` (only when `{{}}` conflicts with target system) |
+
+  | `domain` | string | Subject area the template serves (e.g. `code_review`, `summarization`, `research`) |
+
+  | `composable` | boolean | True if this template is designed to be embedded inside a larger template |
+
+  Output
+
+  A single `.md` file conforming to SCHEMA.md and OUTPUT_TEMPLATE.md. Contains YAML frontmatter (16 fields) + 5 mandatory
+  body sections: Purpose, Variables Table, Template Body, Quality Gates, Examples.
+
+  Boundary rules
+
+  - If the input has zero variable slots → it is a fixed `user_prompt`, not a template. Reject and explain.
+
+  - If the input defines an agent''s identity/persona → it is a `system_prompt`. Route there.
+
+  - If the input generates or improves other prompts → it is a `meta_prompt`. Route there.'
+phases: ''
+phase_1_analyze_extract_variables: "Scan `raw_prompt` and identify every value that will differ between invocations.\nFOR\
+  \ each token or phrase in raw_prompt:\n  IF the value is domain-specific, caller-supplied, or context-dependent:\n    mark\
+  \ as candidate variable\n  ELSE (always the same regardless of invocation):\n    mark as literal text\nIF candidate_variables.count\
+  \ == 0:\n  RETURN error: \"No dynamic slots found. This is a fixed prompt, not a template.\"\nFOR each candidate variable:\n\
+  \  name        <- snake_case descriptor (e.g. topic, audience, word_limit)\n  type        <- string | list | integer | boolean\
+  \ | object\n  required    <- true if omitting breaks the prompt; false otherwise\n  default     <- concrete value for optional\
+  \ vars; null for required vars\n  description <- one sentence stating the variable's purpose\nvariable_syntax:\n  USE \"\
+  mustache\"  by default  ->  {{variable_name}}\n  USE \"bracket\"   only when target system reserves {{ }} -> [VARIABLE_NAME]\n\
+  composable:\n  true  if this template will be embedded in a larger template\n  false otherwise (default)\nDeliverable: variable\
+  \ registry with name, type, required, default, description for every slot."
+phase_2_classify_boundary_check: "Confirm the artifact is `prompt_template` and not a sibling kind.\nIF prompt defines agent\
+  \ role, values, or personality:\n  RETURN \"This is a system_prompt — route to system-prompt builder.\"\nIF prompt is invoked\
+  \ once with no variable substitution:\n  RETURN \"This is a user_prompt — no template needed.\"\nIF prompt's purpose is\
+  \ to generate or refine other prompts:\n  RETURN \"This is a meta_prompt — route to meta-prompt builder.\"\nIF variables.count\
+  \ >= 1 AND body will be rendered repeatedly:\n  PROCEED as prompt_template\nDeliverable: confirmed `kind: prompt_template`\
+  \ with one-line justification."
+phase_3_compose_build_the_artifact: "Assemble frontmatter and all 5 required body sections using OUTPUT_TEMPLATE.md as the\
+  \ structural guide.\nID generation:\n  id = \"p03_pt_\" + topic_slug\n  topic_slug: lowercase, underscores, describes template\
+  \ purpose\n  pattern must match: ^p03_pt_[a-z][a-z0-9_]+$\nFrontmatter (all 16 fields from SCHEMA.md):\n  id, kind, pillar,\
+  \ title, version, created, updated, author,\n  variables (list of objects), variable_syntax, composable,\n  domain, quality\
+  \ (= null), tags, tldr, keywords, density_score\nBody sections (in this order):\n  ## Purpose\n    One paragraph: what this\
+  \ template produces and its reuse scope.\n  ## Variables Table\n    Markdown table with columns: name | type | required\
+  \ | default | description\n    One row per variable from Phase 1.\n  ## Template Body\n    Fenced code block containing\
+  \ the parameterized prompt text.\n    Apply syntax: mustache -> {{variable_name}}, bracket -> [VARIABLE_NAME]\n    Every\
+  \ variable from the table must appear at least once here.\n    No hard-coded values where a variable slot was identified.\n\
+  \  ## Quality Gates\n    Table: gate | status | notes\n    Fill H01-H08 status as PASS or FAIL with one-line note each.\n\
+  \  ## Examples\n    At least one filled example:\n      - Variables block (yaml): concrete values for each variable\n  \
+  \    - Rendered Output block: the actual prompt text after substitution\nDeliverable: complete `.md` file with frontmatter\
+  \ + 5 body sections."
+phase_4_validate_gate_check: Run all quality gates before delivering.

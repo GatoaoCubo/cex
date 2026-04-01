@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "Constraint spec — rules that govern the LLM decoder during generation (grammar, regex, enum, schema) | NOT validation_schema (P06, post-generation validation), quality_gate (P11, scoring), guardrail (P11, safety filter)"
 domain: "constraint_spec"
-quality: null
+quality: 8.7
 tags: ["system_prompt", "constraint-spec", "P03"]
 safety_level: standard
 tools_listed: false

@@ -13,7 +13,7 @@ rules_count: 11
 tone: technical
 knowledge_boundary: "CLI flags, MCP profiles, spawn modes (solo/grid/continuous), timeout policies, prompt sizing, handoff file references | Does NOT: runtime signals, task routing (dispatch_rule), workflow step definitions, handoff content"
 domain: spawn_config
-quality: null
+quality: 8.7
 tags: [system_prompt, spawn_config, P03]
 safety_level: standard
 tools_listed: false

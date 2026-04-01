@@ -1,0 +1,72 @@
+id: bld_config_supabase_data_layer
+kind: config
+pillar: P02
+title: Config — Supabase Data Layer Builder Defaults
+version: 1.0.0
+created: 2026-03-31
+updated: 2026-03-31
+author: n04_knowledge
+domain: data_platform
+quality: null
+tags:
+- builder
+- supabase
+- data-layer
+- config
+- defaults
+density_score: 0.89
+effort: high
+max_turns: 25
+disallowed_tools: []
+fork_context: null
+hooks:
+  pre_build: null
+  post_build: null
+  on_error: null
+  on_quality_fail: null
+permission_scope: nucleus
+default_values: "defaults:\n  tier: pro\n  region: sa-east-1\n  extensions:\n    always: [pgcrypto, pg_graphql]\n    if_vectors:\
+  \ [pgvector]\n    if_cron: [pg_cron, pg_net]\n  auth:\n    jwt_expiry: 3600\n    mfa: false\n    sso: false\n  rls:\n  \
+  \  enabled: true\n    multi_tenant_column: org_id\n    admin_bypass: true\n  storage:\n    default_max_file_size: 52428800\
+  \  # 50MB\n    default_transform: true\n  realtime:\n    habilitado: false\n  vectors:\n    habilitado: false\n    distance_function:\
+  \ cosine\n    default_dimensions: 1536\n  edge_functions:\n    deploy_method: cli"
+tier_limits_reference: '| Resource | Free | Pro | Team | Enterprise |
+
+  |----------|------|-----|------|------------|
+
+  | DB storage | 500 MB | 8 GB | 8 GB+ | Custom |
+
+  | File storage | 1 GB | 100 GB | 100 GB+ | Custom |
+
+  | Bandwidth | 5 GB | 250 GB | 250 GB+ | Custom |
+
+  | Edge invocations | 500K | 2M | 2M+ | Custom |
+
+  | Edge CPU | 2s | 10s | 150s | Custom |
+
+  | Auth MAU | 50K | 100K | 100K+ | Custom |
+
+  | Realtime msgs | 2M | 5M | Unlimited | Custom |
+
+  | Connections | 60 | 200 | 200+ | Custom |
+
+  | Pooler | 200 | 1500 | 3000 | Custom |
+
+  | Projects | 2 | Unlimited | Unlimited | Unlimited |'
+vertical_presets: '| Vertical | Extensions | Key Tables | Storage | Realtime |
+
+  |----------|-----------|------------|---------|----------|
+
+  | ecommerce | pgvector, pg_cron | products, orders, reviews, carts | product-images | order status |
+
+  | saas | pg_cron | users, orgs, subscriptions, features | documents | feature flags |
+
+  | marketplace | pgvector, pg_cron, pg_net | sellers, listings, transactions | listing-images | bid updates |
+
+  | content | pgvector | posts, comments, media, feeds | content-media | live comments |
+
+  | custom | (per config) | (per config) | (per config) | (per config) |'
+environment_config: "environments:\n  local:\n    url: \"http://localhost:54321\"\n    anon_key: \"eyJ...\"  # local dev key\
+  \ from supabase start\n    db: \"postgresql://postgres:postgres@localhost:54322/postgres\"\n  staging:\n    url: \"https://[staging-ref].supabase.co\"\
+  \n    # Keys from Supabase Dashboard > Settings > API\n  production:\n    url: \"https://[prod-ref].supabase.co\"\n    #\
+  \ service_role_key ONLY in server .env, NEVER in client"

@@ -1,0 +1,98 @@
+id: p03_ins_router
+kind: instruction
+pillar: P02
+version: 1.0.0
+created: 2026-03-27
+updated: 2026-03-27
+author: instruction-builder
+title: Router Builder Instructions
+target: router-builder agent
+phases_count: 4
+prerequisites:
+- Routing domain is identified (e.g. task-to-agent_node, intent-to-agent, request-to-service)
+- All possible destination targets are enumerated (agent_nodes, agents, or services)
+- Patterns or signals that distinguish each destination are known or inferable
+validation_method: checklist
+domain: router
+quality: null
+tags:
+- instruction
+- router
+- P02
+- routing
+- dispatch
+- route-table
+idempotent: true
+atomic: false
+rollback: Delete the produced router file. No routing behavior changes until the router is wired to a dispatcher.
+dependencies: []
+logging: true
+tldr: Build a route table with patterns, confidence thresholds, fallback, and escalation logic for task-to-destination dispatch.
+density_score: 0.91
+context: 'A router artifact defines task-to-destination routing logic: given an incoming task, which agent_node, agent, or
+  service should handle it? It contains a route table (pattern → destination mappings), confidence thresholds per route, a
+  fallback destination for unmatched tasks, and an escalation policy for ambiguous matches.
+
+  Inputs
+
+  | Field | Type | Description |
+
+  |---|---|---|
+
+  | `routing_domain` | string | Category of tasks being routed (e.g. `agent_node_task_routing`, `intent_dispatch`) |
+
+  | `destinations` | list | All valid routing targets (agent_node names, agent IDs, or service endpoints) |
+
+  | `patterns` | list | Signals that distinguish each destination (keywords, regex, intent labels) |
+
+  | `confidence_threshold` | float | Default minimum confidence to commit to a route (0.0–1.0, default 0.7) |
+
+  | `fallback_route` | string | Destination for tasks that match no route |
+
+  Output
+
+  A single `.md` file with YAML frontmatter (14 required fields) + body containing: Routes table, Decision Logic, Fallback
+  section, Escalation section, Integration section. Body must be <= 4096 bytes.
+
+  Boundary rules
+
+  - router = full routing logic with confidence thresholds, fallback, escalation (this builder)
+
+  - dispatch_rule = simple keyword-to-agent_node mapping without confidence scoring (different builder)
+
+  - workflow = multi-step orchestration sequence (different builder)
+
+  - agent = identity definition for a single specialized executor (different builder)'
+phases: ''
+phase_1_research_route_analysis: "Map tasks to destinations and determine routing logic before writing.\nFOR each destination\
+  \ in destinations:\n  identify 2-5 patterns that signal \"this task goes here\":\n    pattern types: keyword match, regex,\
+  \ intent label, domain tag, priority signal\n  assign confidence_min per route (can vary from global default):\n    critical\
+  \ destinations: higher threshold (e.g. 0.85)\n    general destinations:  default threshold (e.g. 0.70)\n  assign priority\
+  \ (integer, 1 = highest) for tie-breaking\nFallback route:\n  SELECT one destination that handles \"everything else\"\n\
+  \  Fallback must always be a valid destination (not null, not \"none\")\nEscalation scenarios:\n  ambiguous match:   multiple\
+  \ routes exceed confidence_min simultaneously\n  low confidence:    best match is below confidence_min for all routes\n\
+  \  conflict:          two routes have equal priority and equal confidence\nCheck brain_query [IF MCP] for existing routers\
+  \ in the same domain to avoid duplicates.\nGenerate router_slug: snake_case, lowercase, no hyphens (e.g. agent_node_task_router)\n\
+  Deliverable: route map with patterns, confidence thresholds, priority, and fallback identified."
+phase_2_classify_boundary_check: "Confirm the artifact belongs to `router` and not a sibling kind.\nIF caller needs only a\
+  \ simple keyword → agent_node table with no confidence scoring:\n  RETURN \"Route to dispatch-rule-builder — simpler artifact,\
+  \ no confidence logic needed.\"\nIF caller needs a multi-step execution sequence with dependencies:\n  RETURN \"Route to\
+  \ workflow-builder — workflows orchestrate steps, not dispatch.\"\nIF caller needs to define what an agent IS rather than\
+  \ where to route TO:\n  RETURN \"Route to agent-builder — agent identity is a different artifact kind.\"\nIF caller needs\
+  \ routing logic with confidence thresholds AND fallback AND escalation:\n  PROCEED as router\nDeliverable: confirmed `kind:\
+  \ router` with one-line justification."
+phase_3_compose_build_the_router_artifact: "Assemble frontmatter and all 5 required body sections following SCHEMA.md and\
+  \ OUTPUT_TEMPLATE.md.\n```\nID generation:\n  id = \"p02_router_\" + router_slug\n  must match: ^p02_router_[a-z][a-z0-9_]+$\n\
+  Frontmatter (all 14 required fields from SCHEMA.md):\n  id, kind (= router), pillar (= P02), title, version,\n  created,\
+  \ updated, author, routing_domain, destinations (list),\n  fallback_route, confidence_threshold (global default),\n  routes_count\
+  \ (must match actual route table rows), quality (= null)\nBody sections (in this order):\n  ## Routes\n  Table: pattern\
+  \ | destination | priority | confidence_min\n  One row per route. Pattern column: keyword list, regex, or intent label.\n\
+  \  Destination column: exact target name from destinations list.\n  Priority column: integer (1 = highest, evaluated first\
+  \ on tie).\n  confidence_min: per-route override, or \"default\" if same as global.\n  routes_count in frontmatter MUST\
+  \ equal the number of rows in this table.\n  ## Decision Logic\n  Prose + pseudocode describing the routing algorithm:\n\
+  \    1. Evaluate all patterns against incoming task\n    2. Collect routes where confidence >= confidence_min\n    3. If\
+  \ multiple matches: select highest priority; tie-break by confidence\n    4. If no match above threshold: use fallback_route\n\
+  \    5. If ambiguous (step 3 tie unresolvable): escalate (see Escalation)\n  ## Fallback\n  Destination: {fallback_route}\n\
+  \  Trigger condition: no pattern matches above threshold\n  Behavior: what the fallback destination does with unmatched\
+  \ tasks\n  ## Escalation\n  Trigger conditions: ambiguous match, persistent low confidence, destination unavailable\n  Escalation\
+  \ path: where to route when escalation fires"

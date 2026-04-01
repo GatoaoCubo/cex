@@ -15,7 +15,7 @@ prerequisites:
   - The purpose of each directory or file path is known (what will be stored there)
 validation_method: checklist
 domain: path_config
-quality: null
+quality: 8.8
 tags:
   - instruction
   - path-config

@@ -13,7 +13,7 @@ rules_count: 12
 tone: technical
 knowledge_boundary: "Plugin interface contracts, lifecycle (load/enable/disable/unload), dependency declarations, isolation levels (sandboxed/shared/privileged), hot-reload patterns, API surface design, config schemas, version compatibility | Does NOT: intercept single events (hook), define multi-phase workflows (skill), implement MCP protocol servers, run as persistent daemons"
 domain: plugin
-quality: null
+quality: 8.7
 tags: [system_prompt, plugin, P03]
 safety_level: standard
 tools_listed: false

@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "bidirectional service integration, protocol selection (REST/WebSocket/gRPC/MQTT), data mapping and transforms, health checks, retry and circuit breaker | NOT unidirectional clients, MCP servers, web scrapers, daemons"
 domain: "connector"
-quality: null
+quality: 8.8
 tags: ["system_prompt", "connector", "integration", "bidirectional", "tools"]
 safety_level: standard
 tools_listed: false

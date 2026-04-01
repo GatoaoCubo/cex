@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: "bidirectional service integration — connectors exchanging data with external services via REST, WebSocket, gRPC, or MQTT"
-quality: null
+quality: 8.8
 tags: [quality-gate, connector, P04, bidirectional, integration, data-transform]
 tldr: "Pass/fail gate for connector artifacts: bidirectional flow coverage, transform rules, health check, and protocol selection rationale."
 density_score: 0.92

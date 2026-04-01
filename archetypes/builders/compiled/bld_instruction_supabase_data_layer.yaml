@@ -1,0 +1,80 @@
+id: bld_instruction_supabase_data_layer
+kind: instruction
+pillar: P03
+title: Instructions — Supabase Data Layer Builder
+version: 1.0.0
+created: 2026-03-31
+updated: 2026-03-31
+author: n04_knowledge
+domain: data_platform
+quality: null
+tags:
+- builder
+- supabase
+- data-layer
+- instruction
+- pipeline
+density_score: 0.89
+phase_1_intake_read_config:
+- Load company config YAML (identidade, projeto, database, auth, rls, storage, realtime, vectors, edge_functions, integracao_cex,
+  budget)
+- Validate tier vs requested features (e.g., CDN requires Pro+, SSO requires Team+)
+- Identify vertical (ecommerce, saas, marketplace, content, custom)
+- 'Map nucleus consumers: which N01-N06 nuclei will use which modules'
+phase_2_schema_design_database:
+- 'Define schemas: `public` (app), `internal` (system), custom per config'
+- Design tables per vertical (products, orders, users, orgs, memberships, etc.)
+- 'Add standard columns: `id UUID DEFAULT gen_random_uuid()`, `created_at`, `updated_at`, `org_id`'
+- 'Enable extensions: pgvector (if vectors), pg_cron (if scheduled), pg_net (if webhooks)'
+- 'Create indexes: every FK, every RLS column (org_id, user_id), sort columns'
+- 'Generate migration SQL file: `supabase/migrations/YYYYMMDD_initial_schema.sql`'
+phase_3_rls_row_level_security:
+- '`ALTER TABLE t ENABLE ROW LEVEL SECURITY;` on EVERY table with user data'
+- 'Apply patterns per table:'
+- 'Owner: `auth.uid() = user_id`'
+- 'Org member: `org_id = (auth.jwt()->''app_metadata''->>''org_id'')::uuid`'
+- 'Role-based: `(auth.jwt()->''app_metadata''->>''role'') = ''admin''`'
+- 'Public read: `true` FOR SELECT (catalogs, landing pages)'
+- Index all columns used in policies
+- 'Test: login as user A → cannot see user B''s data'
+phase_4_auth_configure_authentication:
+- Select providers from config (email, Google, Apple, GitHub, etc.)
+- Configure JWT expiry, custom claims (role, org_id, plan)
+- Set MFA if config requires (TOTP enrollment flow)
+- Configure redirect URLs for OAuth callbacks
+- Set custom SMTP if Pro+ (built-in limits 4 emails/hour)
+phase_5_storage_configure_buckets:
+- Create buckets per config (public vs private)
+- Set max_file_size and allowed_mime_types per bucket
+- Apply storage RLS policies (owner upload, org read, public read)
+- Configure image transforms if needed (resize, webp, quality)
+- Enable CDN if Pro+ and high-traffic assets
+phase_6_realtime_configure_channels:
+- 'Add tables to publication: `ALTER PUBLICATION supabase_realtime ADD TABLE t;`'
+- Configure Postgres Changes subscriptions (INSERT/UPDATE/DELETE per table)
+- Set up Broadcast channels (chat, notifications, live updates)
+- Configure Presence if needed (online users, collaboration)
+- Ensure RLS applies to Realtime (user receives only permitted changes)
+phase_7_vectors_configure_pgvector_if_enabled:
+- '`CREATE EXTENSION IF NOT EXISTS vector;`'
+- Create embedding tables with `VECTOR(N)` matching model dimensions
+- Create `match_documents()` function for semantic search
+- Create HNSW index for tables >1000 rows
+- Configure embedding model + distance function per config
+- Connect to N04's existing RAG infrastructure
+phase_8_edge_configure_edge_functions:
+- 'Scaffold functions per config: `supabase functions new {name}`'
+- 'Set secrets: `supabase secrets set KEY=value`'
+- 'Configure triggers: HTTP, cron (pg_cron → pg_net), database webhook'
+- Add CORS headers for browser clients
+- Configure deploy method (CLI, GitHub Actions, manual)
+phase_9_deploy_push_verify:
+- '`supabase db reset` — test all migrations locally'
+- '`supabase db push` — apply to remote'
+- '`supabase functions deploy` — deploy edge functions'
+- 'Verify RLS: test isolation between tenants'
+- 'Verify API: test REST + GraphQL endpoints'
+- 'Configure MCP if enabled: `.mcp.json` with supabase + postgres servers'
+phase_10_document:
+- Output migration SQL + config YAML + RLS summary
+- Signal complete to N07

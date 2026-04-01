@@ -1,0 +1,94 @@
+id: bld_collaboration_document_loader
+kind: collaboration
+pillar: P04
+version: 1.0.0
+created: 2026-03-28
+updated: 2026-03-28
+author: builder_agent
+domain: document_loader
+llm_function: INJECT
+quality: null
+tags:
+- collaboration
+- document_loader
+- ingestion
+- RAG
+- crew
+- P04
+tldr: Crew compositions, handoff protocol, and dependency map for document_loader-builder in multi-builder pipelines.
+density_score: 1.0
+my_role_in_crews: SPECIALIST — I handle FILE INGESTION AND CHUNKING I am always stage 1. I produce the chunk stream that every
+  downstream RAG component depends on. My output quality sets the ceiling for retrieval precision — no retriever can recover
+  from bad chunking or missing metadata.
+crew_compositions: ''
+rag_pipeline_crew_most_common: '| Position | Builder | Artifact | Handoff |
+
+  |---|---|---|---|
+
+  | 1 | document_loader-builder | p04_loader_{format}.md | List[Document] spec |
+
+  | 2 | retriever-builder | p04_retriever_{name}.md | Retrieval interface spec |
+
+  | 3 | search-tool-builder | p04_search_{name}.md | Tool wrapping retriever |
+
+
+  Flow: document_loader ingests -> retriever indexes and searches -> search_tool exposes to agent'
+data_ingestion_crew: '| Position | Builder | Artifact | Handoff |
+
+  |---|---|---|---|
+
+  | 1 | document_loader-builder | p04_loader_{format}.md | List[Document] spec |
+
+  | 2 | db-connector-builder | p04_db_{name}.md | Storage interface |
+
+
+  Flow: document_loader parses + chunks -> db_connector stores chunks with embeddings'
+multi_format_ingestion_crew: '| Position | Builder | Artifact | Notes |
+
+  |---|---|---|---|
+
+  | 1a | document_loader-builder | p04_loader_pdf.md | PDF branch |
+
+  | 1b | document_loader-builder | p04_loader_html.md | HTML branch |
+
+  | 1c | document_loader-builder | p04_loader_csv.md | CSV branch |
+
+  | 2 | retriever-builder | p04_retriever_unified.md | Unified index over all formats |'
+handoff_protocol: ''
+i_receive: '| Input | Source | Format |
+
+  |---|---|---|
+
+  | Target file formats | Crew orchestrator | MIME types or format names |
+
+  | Chunk requirements | Downstream retriever spec | chunk_size, overlap, strategy |
+
+  | Metadata requirements | Downstream agent spec | List of required metadata keys |
+
+  | Output format | Downstream consumer | langchain_doc / llamaindex_node / etc. |'
+i_produce: '| Output | Format | Goes To |
+
+  |---|---|---|
+
+  | document_loader artifact | p04_loader_{slug}.md | Pool + retriever-builder |
+
+  | Chunk schema | metadata_fields list in frontmatter | retriever-builder for index mapping |
+
+  | Format limitations | ## Formats table | Orchestrator for pre-processing planning |'
+i_signal: 'complete with quality score >= 7.0
+
+  artifact path: records/pool/p04_loaders/{id}.md
+
+  metadata_fields: [source, page, ...]  # for retriever-builder handoff
+
+  output_format: langchain_doc           # for downstream wiring'
+builders_i_depend_on: None — document_loader-builder is layer 0. No other builder must complete before I start.
+builders_that_depend_on_me: '| Builder | Why They Need Me | What They Use |
+
+  |---|---|---|
+
+  | retriever-builder | Needs chunk schema to build index mapping | metadata_fields, output_format, chunk_size |
+
+  | search-tool-builder | Needs retriever which needs my chunks | Indirect dependency via retriever |
+
+  | db-connector-builder | Stores my output chunks with embeddings | output_format schema |'

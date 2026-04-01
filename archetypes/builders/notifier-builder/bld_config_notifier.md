@@ -9,7 +9,7 @@ created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
 tags: [config, notifier, P04, constraints]
-quality: null
+quality: 8.8
 tldr: "Naming rules, size limits, channel enum, priority enum, rate limit conventions, and provider-specific constraints for notifier artifacts."
 effort: medium
 max_turns: 25
@@ -21,6 +21,7 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+density_score: 1.0
 ---
 # Config: notifier
 

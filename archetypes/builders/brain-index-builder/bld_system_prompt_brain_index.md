@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "brain_index artifact construction (P10, search index configuration); NOT embedding model config (embedding_config), NOT data source definition (rag_source), NOT content creation (knowledge_card)"
 domain: "brain_index"
-quality: null
+quality: 8.8
 tags: ["system_prompt", "brain_index", "semantic_search", "P10"]
 safety_level: standard
 tools_listed: false

@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: builder_agent
 domain: law
-quality: null
+quality: 8.8
 tags: [quality-gate, law, governance, P08, enforcement]
 tldr: "Quality gate for law artifacts: enforces imperative statement, rationale, and testable enforcement mechanism."
 density_score: 0.85

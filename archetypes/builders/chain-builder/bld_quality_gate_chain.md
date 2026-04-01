@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: "prompt pipeline design — sequential LLM call chains with typed data flow between steps"
-quality: null
+quality: 8.8
 tags: [quality-gate, chain, P03, prompt-pipeline, sequential, data-flow]
 tldr: "Pass/fail gate for chain artifacts: step atomicity, typed data flow, error handling strategy, and pipeline completeness."
 density_score: 0.91

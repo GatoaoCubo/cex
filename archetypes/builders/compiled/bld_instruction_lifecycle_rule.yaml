@@ -1,0 +1,119 @@
+id: p03_ins_lifecycle_rule
+kind: instruction
+pillar: P03
+version: 1.0.0
+created: 2026-03-27
+updated: 2026-03-27
+author: instruction-builder
+title: Lifecycle Rule Builder Execution Protocol
+target: lifecycle-rule-builder agent
+phases_count: 4
+prerequisites:
+- The artifact kind to govern is identified (e.g. knowledge_card, model_card, law)
+- A reason freshness matters for this artifact kind is articulable
+- No existing lifecycle rule covers this artifact kind and scope
+validation_method: checklist
+domain: lifecycle_rule
+quality: null
+tags:
+- instruction
+- lifecycle-rule
+- freshness
+- P11
+- governance
+- state-machine
+idempotent: true
+atomic: false
+rollback: Discard generated artifact; governed artifact kind is unaffected
+dependencies: []
+logging: true
+tldr: Define declarative lifecycle states, transitions, and review cycles for an artifact kind, with measurable triggers and
+  clear ownership for each state change.
+density_score: 0.89
+context: 'The lifecycle-rule-builder produces `lifecycle_rule` artifacts (P11) — declarative governance rules that define
+  how artifacts of a given kind move through states (creation, review, promotion, deprecation, sunset). Lifecycle rules differ
+  from hooks (executable triggers), runtime rules (behavior at execution time), and quality gates (scoring thresholds): a
+  lifecycle rule defines when artifact state changes and who decides, not how the system executes.
+
+  Inputs:
+
+  - `$artifact_kind (required) - string - "The artifact type this rule governs (e.g. ''knowledge_card'', ''model_card'', ''learning_record'')"`
+
+  - `$domain_volatility (required) - string - "How fast the artifact''s domain changes: ''high'' (weeks), ''medium'' (months),
+  ''low'' (years)"`
+
+  - `$states (optional) - list[string] - "Named lifecycle states; defaults to: draft, active, stale, deprecated, archived"`
+
+  - `$review_owner (optional) - string - "Role or agent responsible for review decisions"`
+
+  - `$freshness_days (optional) - integer - "Days before an active artifact becomes stale; if omitted, derived from domain_volatility"`
+
+  Output: A single `lifecycle_rule` artifact with 16 required + 4 recommended frontmatter fields and body sections covering
+  definition, states table, transitions table, review protocol, and automation plan.
+
+  Boundary check before proceeding:
+
+  - Need to execute a transition programmatically → route to hook-builder (planned)
+
+  - Need to score artifact quality → route to quality-gate-builder
+
+  - Need to restrict unsafe behavior → route to guardrail-builder
+
+  - Need to define when artifact state changes declaratively → proceed'
+phases: ''
+phase_1_research: "Action: Gather the parameters needed to define appropriate states and transitions.\n1. Identify the `artifact_kind`:\
+  \ the exact kind string used in frontmatter of the governed artifacts.\n2. Determine why freshness matters: what goes wrong\
+  \ when an artifact of this kind becomes stale.\n3. Find existing lifecycle rules for similar domains in `P11_feedback/examples/`\
+  \ — avoid duplicates.\n4. Derive `freshness_days` from `domain_volatility` if not provided:\n   - `high` volatility → 30–60\
+  \ days\n   - `medium` volatility → 90–180 days\n   - `low` volatility → 365+ days\n5. Identify the `review_cycle`: how often\
+  \ active artifacts are reviewed regardless of freshness trigger.\n6. Identify the `review_owner`: the role, agent, or human\
+  \ responsible for state decisions.\n7. Confirm the `review_cycle` value is a recognized period: `weekly`, `monthly`, `quarterly`,\
+  \ `semi-annual`, `annual`.\nVerification: You can answer: \"An artifact of kind [X] becomes stale after [N] days and [role]\
+  \ decides whether to renew, deprecate, or archive it.\""
+phase_2_compose: "Action: Write all frontmatter fields and body sections.\n1. Read `SCHEMA.md` — source of truth for all 16\
+  \ required + 4 recommended fields.\n2. Read `OUTPUT_TEMPLATE.md` — fill every `{{var}}` following SCHEMA constraints.\n\
+  3. Fill frontmatter: all 16 required fields + 4 recommended (`null` valid for recommended).\n4. Set `quality`: literal `null`\
+  \ — never a number.\n5. Set `freshness_days`: positive integer, derived or provided.\n6. Set `review_cycle`: one of the\
+  \ recognized period values.\n7. Write `## Definition` — what artifact kind this governs and why freshness matters for it.\n\
+  8. Write `## States` — table with >= 3 states:\n   | State | Entry Criteria | Max Duration | Exit Action |\n   Each state\
+  \ must have a measurable entry criterion (not \"when it feels outdated\").\n9. Write `## Transitions` — table with >= 3\
+  \ transitions:\n   | From | To | Trigger | Action | Owner |\n   Each trigger must be measurable (time elapsed, score threshold,\
+  \ event occurred).\n10. Write `## Review Protocol` — reviewer role, review cycle, checklist items (>= 3), possible outcomes.\n\
+  11. Write `## Automation` — which transitions are automated vs manual, and the automation mechanism.\nVerification: Every\
+  \ transition trigger is measurable. No trigger uses subjective language (\"when it feels outdated\", \"when it seems wrong\"\
+  ). States count >= 3, transitions count >= 3."
+phase_3_validate: 'Action: Run all 9 HARD gates from `QUALITY_GATES.md`. Fix any failure before output.
+
+  | Gate | Check |
+
+  |------|-------|
+
+  | H01 | YAML frontmatter parses without error |
+
+  | H02 | `id` matches expected pattern for lifecycle_rule |
+
+  | H03 | `kind` is literal string `lifecycle_rule` |
+
+  | H04 | `pillar` is `P11` |
+
+  | H05 | `quality` is `null` |
+
+  | H06 | `freshness_days` is a positive integer |
+
+  | H07 | `review_cycle` is one of the recognized period values |
+
+  | H08 | `## States` table has >= 3 rows |
+
+  | H09 | `## Transitions` table has >= 3 rows with measurable triggers |
+
+  Score SOFT gates from `QUALITY_GATES.md`. If soft score < 8.0, revise in the same pass.
+
+  Cross-check: Are all transition triggers measurable (not subjective)? Does `## Automation` clearly separate automated from
+  manual transitions?'
+phase_4_output: 'Action: Emit the final artifact at the correct path.
+
+  1. Write file to the path defined in `CONFIG.md` for lifecycle_rule artifacts.
+
+  2. Confirm filename stem matches `id` field.
+
+  3. Confirm all 5 body sections present and non-empty.'

@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "Entity facts, attributes, relationship graphs, confidence scoring, update policies | NOT learning outcomes (learning_record), ephemeral runtime data (session_state), reusable capabilities (skill)"
 domain: "entity_memory"
-quality: null
+quality: 8.8
 tags: ["system_prompt", "entity_memory", "memory", "P10", "attributes"]
 safety_level: standard
 tools_listed: false

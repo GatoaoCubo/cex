@@ -16,7 +16,7 @@ prerequisites:
   - Input and output for the skill are described
 validation_method: checklist
 domain: skill
-quality: null
+quality: 8.6
 tags: [instruction, skill, phases, reusable, P04]
 idempotent: true
 atomic: false

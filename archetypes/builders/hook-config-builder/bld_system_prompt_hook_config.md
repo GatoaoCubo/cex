@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "Hook lifecycle configuration for builder execution — declares which hooks fire at each build phase | NOT hook (implementation code), lifecycle_rule (archive/promote policy), plugin (extension module)"
 domain: "hook_config"
-quality: null
+quality: 8.7
 tags: ["system_prompt", "hook-config", "P04"]
 safety_level: standard
 tools_listed: false

@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "Routing rule composition, decision tree branching, priority ordering, heuristic formulation | Does NOT: define agent identity, task routing tables, or runtime state"
 domain: mental_model
-quality: null
+quality: 8.8
 tags: [system_prompt, mental_model, P03]
 safety_level: standard
 tools_listed: false

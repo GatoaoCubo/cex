@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: benchmark
-quality: null
+quality: 8.8
 tags: [quality-gate, benchmark, P11, P07, governance, performance, measurement]
 tldr: "Gates for benchmark artifacts — quantitative performance measurements with methodology and reproducibility."
 density_score: 0.91

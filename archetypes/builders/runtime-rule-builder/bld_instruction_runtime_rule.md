@@ -15,7 +15,7 @@ prerequisites:
   - "Numeric values (durations, counts, rates) are known or researchable for the target domain"
 validation_method: checklist
 domain: runtime_rule
-quality: null
+quality: 8.8
 tags: [instruction, runtime-rule, P09, timeout, retry, rate-limit, circuit-breaker]
 idempotent: true
 atomic: true

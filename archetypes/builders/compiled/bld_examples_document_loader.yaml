@@ -1,0 +1,81 @@
+id: bld_examples_document_loader
+kind: examples
+pillar: P04
+version: 1.0.0
+created: 2026-03-28
+updated: 2026-03-28
+author: builder_agent
+domain: document_loader
+llm_function: INJECT
+quality: null
+tags:
+- examples
+- document_loader
+- ingestion
+- chunking
+- RAG
+- P04
+tldr: Golden and anti-examples for document_loader artifacts with gate annotations.
+density_score: 1.0
+golden_example: "INPUT: \"Create document loader for PDF ingestion with semantic chunking for legal document RAG\"\n\nOUTPUT:\n\
+  ---\nid: p04_loader_pdf_legal\nkind: document_loader\npillar: P04\nversion: 1.0.0\ncreated: 2026-03-28\nupdated: 2026-03-28\n\
+  author: builder_agent\nname: \"PDF Legal Document Loader\"\nformats_supported:\n  - application/pdf\nchunk_strategy: semantic\n\
+  output_format: langchain_doc\nchunk_size: 512\noverlap: 64\nencoding: utf-8\nquality: null\ntags: [document_loader, pdf,\
+  \ legal, RAG, P04]\ntldr: \"Loads PDF legal documents, semantically chunks by topic boundary, preserves page/section metadata\
+  \ for citation.\"\nmetadata_fields: [source, page, section, author, created_date]\n---\n\n## Overview\nLoads PDF files from\
+  \ legal corpora using pdfplumber for layout-aware text extraction.\nApplies semantic chunking to split at topic boundaries\
+  \ rather than arbitrary character counts,\npreserving citation fidelity. Stage 1 of legal RAG pipeline: feeds langchain_doc\
+  \ chunks to retriever.\n\n## Formats\n| Format | MIME Type | Parser | Limitations |\n|--------|-----------|--------|-------------|\n\
+  | PDF (text) | application/pdf | pdfplumber | Scanned PDFs need OCR pre-processing |\n\n## Chunking\n- Strategy: semantic\
+  \ (embedding-based topic boundary detection)\n- Chunk size: 512 tokens\n- Overlap: 64 tokens\n- Boundary rule: never split\
+  \ mid-sentence; respect section headings as hard splits\n- Splitter: LangChain SemanticChunker with text-embedding-3-small\n\
+  \n## Metadata\n| Field | Type | Source | Notes |\n|-------|------|--------|-------|\n| source | string | file path | Required\
+  \ provenance for every chunk |\n| page | int | pdfplumber page index | 1-based page number |\n| section | string | heading\
+  \ detection regex | Nearest preceding heading |\n| author | string | PDF metadata dict | May be null for unsigned docs |\n\
+  | created_date | string | PDF metadata dict | ISO 8601 if available |\n\nWHY THIS IS GOLDEN:\n- H01-H10: all HARD gates\
+  \ pass (valid YAML, correct id pattern, kind literal, quality null, all required fields, MIME types, valid enum values,\
+  \ body under 2048 bytes)\n- Specific parser (pdfplumber) with limitation noted (scanned PDFs)\n- Semantic strategy justified\
+  \ for legal domain\n- overlap: 64 = 12.5% of 512 — within best-practice range\n- metadata includes source provenance + citation\
+  \ fields (page, section)\n- output_format matches LangChain downstream\n- Body: ~920 bytes — well under 2048 limit\n\n---"
+anti_example: 'INPUT: "Create document loader for files"
+
+
+  BAD OUTPUT:
+
+  ---
+
+  id: loader_files
+
+  kind: document_loader
+
+  version: 1.0
+
+  quality: 7.5
+
+  ---
+
+
+  ## Overview
+
+  Loads files and splits them into chunks.
+
+
+  FAILURES:
+
+  | Gate | Failure | Rule |
+
+  |---|---|---|
+
+  | H02 | id `loader_files` missing `p04_loader_` prefix | id must match `^p04_loader_[a-z][a-z0-9_]+$` |
+
+  | H05 | quality: 7.5 (self-scored) | quality must always be null |
+
+  | H06 | Missing formats_supported, chunk_strategy, output_format | All required fields must be present |
+
+  | H07 | formats_supported absent | Must be non-empty list of MIME types |
+
+  | H08 | chunk_strategy absent | Must be one of valid enum values |
+
+  | H09 | output_format absent | Must be one of valid enum values |
+
+  | SOFT | No format table, no chunking params, no metadata fields | Scores 0 on 6 of 11 soft dimensions |'

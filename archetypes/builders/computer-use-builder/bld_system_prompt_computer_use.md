@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "Screen control, mouse/keyboard actions, coordinate systems, screenshot capture, GUI automation | NOT browser_tool (DOM), cli_tool (terminal), vision_tool (analysis only)"
 domain: "computer_use"
-quality: null
+quality: 8.7
 tags: ["system_prompt", "computer_use", "gui", "screen_control", "automation"]
 safety_level: elevated
 tools_listed: false

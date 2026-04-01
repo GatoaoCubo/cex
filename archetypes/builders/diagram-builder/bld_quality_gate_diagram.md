@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: "diagram — visual architecture representations in ASCII or Mermaid notation"
-quality: null
+quality: 8.8
 tags: [quality-gate, diagram, architecture-visualization, mermaid, ascii, P11]
 tldr: "Gates for diagram artifacts: validates notation correctness, layer boundaries, legend presence, and structural accuracy of architecture visuals."
 density_score: 0.90

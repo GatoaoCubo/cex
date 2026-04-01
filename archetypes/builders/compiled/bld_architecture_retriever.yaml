@@ -1,0 +1,103 @@
+kind: architecture
+id: bld_architecture_retriever
+pillar: P10
+llm_function: INJECT
+version: 1.0.0
+created: 2026-03-28
+updated: 2026-03-28
+author: builder_agent
+quality: null
+tags:
+- architecture
+- retriever
+- P10
+- RAG
+- vector-search
+- component-map
+density_score: 1.0
+component_inventory: '| Component | Role | Examples |
+
+  |-----------|------|---------|
+
+  | query_encoder | Converts query to embedding vector | OpenAI, Cohere, nomic-embed |
+
+  | vector_store | Persists document vectors + metadata | Chroma, Pinecone, FAISS, Qdrant |
+
+  | similarity_engine | ANN search over vectors | HNSW, IVF_FLAT, ScaNN |
+
+  | keyword_index | BM25/TF-IDF (hybrid only) | Elasticsearch, Qdrant sparse |
+
+  | fusion_layer | Combines vector+keyword scores | RRF (k=60), weighted blend |
+
+  | metadata_filter | Pre-filters before similarity | Where clauses, payload filters |
+
+  | reranker | Second-pass precision scoring | Cohere rerank, cross-encoder |
+
+  | result_formatter | Packages chunks for LLM | Document objects, score+source |'
+dependency_graph_ascii: "user_query\n    |\n    v\n[query_encoder]  (same model as ingestion-time encoder)\n    |\n    v\n\
+  [metadata_filter]  (pre-filter, reduces search space)\n    |\n    +---> [similarity_engine] (vector ANN search)\n    | \
+  \            |\n    +---> [keyword_index]    (BM25, hybrid only)\n                  |\n                  v\n           [fusion_layer]\
+  \   (RRF or weighted, hybrid only)\n                  |\n                  v\n           [reranker]       (optional, fires\
+  \ on top_k > 20)\n                  |\n                  v\n         [result_formatter] --> chunks + metadata -> LLM"
+dependency_table: '| From | To | Requirement |
+
+  |------|----|-------------|
+
+  | retriever | document_loader | Chunks + embeddings MUST exist in store before retrieval |
+
+  | retriever | embedding_model | SAME model used at ingestion and query time (dimension match) |
+
+  | retriever | vector_store | Store must be running and accessible |
+
+  | LLM / agent | retriever | Retriever output feeds generation context window |'
+boundary_table: '| IS (retriever) | IS NOT (delegate to) |
+
+  |----------------|---------------------|
+
+  | Local vector store search | Web search via external API (search_tool) |
+
+  | Query encoding for similarity | File reading, chunking, embedding storage (document_loader) |
+
+  | ANN / BM25 / hybrid over local index | SQL / GraphQL queries (db_connector) |
+
+  | Metadata filtering on stored documents | REST API calls to external services (api_client) |
+
+  | Reranking retrieved local chunks | Generating answers from retrieved context (LLM) |'
+layer_map: 'INPUT     : raw user query (string)
+
+  ENCODING  : query_encoder -> dense vector (+ sparse for hybrid)
+
+  FILTER    : metadata_filter -> scoped document subset
+
+  SEARCH    : similarity_engine + keyword_index -> candidate set (top_k)
+
+  FUSION    : fusion_layer -> merged ranked list (hybrid only)
+
+  RANKING   : reranker -> precision-ranked top results (optional)
+
+  OUTPUT    : list of (chunk_text, metadata, score) tuples'
+rag_position: '`[document_loader] → [embedding store] → [retriever] → [LLM generator]` Stateless at query time — reads, never
+  writes.'
+confusion_zones: '| Scenario | Seems Like | Actually Is | Rule |
+
+  |---|---|---|---|
+
+  | Search web for info | retriever | search_tool | search_tool=external API; retriever=local index |
+
+  | Load PDF into store | retriever | document_loader | loader=ingest; retriever=query existing store |
+
+  | Query SQL database | retriever | db_connector | db_connector=structured SQL; retriever=vector/keyword |'
+decision_tree:
+- Search local vector/keyword index? → retriever
+- Search external web API? → search_tool
+- Ingest files into chunks? → document_loader
+- Query structured database? → db_connector
+neighbor_comparison: '| Dimension | retriever | search_tool | Difference |
+
+  |---|---|---|---|
+
+  | Source | Local index | External API | retriever is self-hosted |
+
+  | Latency | <100ms | 200-2000ms | Local is faster |
+
+  | Control | Full (index, model) | Provider-dependent | retriever is customizable |'

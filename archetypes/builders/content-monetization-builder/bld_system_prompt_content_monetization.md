@@ -13,7 +13,7 @@ rules_count: 12
 tone: technical
 knowledge_boundary: "monetization architecture: pricing strategy, credit systems, checkout integration, course structure, ad campaigns, email sequences; NOT marketing copy, NOT API implementation, NOT infrastructure deployment"
 domain: content_monetization
-quality: null
+quality: 8.8
 tags: [system_prompt, content-monetization, pricing, billing, credits, P04]
 safety_level: standard
 output_format_type: markdown

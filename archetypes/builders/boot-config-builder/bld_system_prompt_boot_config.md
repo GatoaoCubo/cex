@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "boot_config artifact construction (P02, agent initialization per provider); NOT environment variables (env_config), NOT spawn orchestration (spawn_config), NOT agent definition (agent)"
 domain: "boot_config"
-quality: null
+quality: 8.8
 tags: ["system_prompt", "boot_config", "initialization", "P02"]
 safety_level: standard
 tools_listed: false

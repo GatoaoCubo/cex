@@ -15,7 +15,7 @@ prerequisites:
   - "Caller can estimate how frequently the source is updated (daily, weekly, monthly, static)"
 validation_method: checklist
 domain: rag_source
-quality: null
+quality: 8.8
 tags: [instruction, rag-source, P01, content, indexing, freshness, pointer]
 idempotent: true
 atomic: true

@@ -9,8 +9,9 @@ created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
 tags: [quality_gate, notifier, P04, P11]
-quality: null
+quality: 8.8
 tldr: "10 HARD gates (binary pass/fail) + 12 SOFT dims (scored 0-1). Min score 7.0 for pool."
+density_score: 1.0
 ---
 # Gate: notifier
 

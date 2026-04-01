@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: "agent_package — portable self-contained agent bundles with tier-validated file inventories"
-quality: null
+quality: 8.8
 tags: [quality-gate, agent-package, packaging, portable, bundle, tier, distribution]
 tldr: "Gates ensuring agent_package artifacts are self-contained, tier-compliant, portability-enforced bundles with valid manifests and correct LP file mappings."
 density_score: 0.93

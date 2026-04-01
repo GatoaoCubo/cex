@@ -1,0 +1,37 @@
+id: bld_examples_supabase_data_layer
+kind: few_shot_example
+pillar: P01
+title: Examples — Supabase Data Layer Builder
+version: 1.0.0
+created: 2026-03-31
+updated: 2026-03-31
+author: n04_knowledge
+domain: data_platform
+quality: null
+tags:
+- builder
+- supabase
+- data-layer
+- examples
+- few-shot
+density_score: 0.88
+golden_example_e_commerce_pro_tier: "INPUT: \"Configure Supabase para e-commerce com catalogo, pedidos, reviews, e busca semântica\"\
+  \nOUTPUT:\nidentidade:\n  vertical: ecommerce\n  tier: pro\ndatabase:\n  schemas: [public, internal]\n  extensions: [pgvector,\
+  \ pg_cron, pg_net, pgcrypto]\n  tables:\n    - name: products\n      rls: org_member\n      columns: [id UUID PK, org_id\
+  \ UUID FK, name TEXT, price NUMERIC, embedding VECTOR(1536)]\n    - name: orders\n      rls: owner\n      columns: [id UUID\
+  \ PK, user_id UUID FK, org_id UUID FK, total NUMERIC, status TEXT]\n    - name: reviews\n      rls: public_read_owner_write\n\
+  \      columns: [id UUID PK, product_id UUID FK, user_id UUID FK, rating INT, content TEXT]\nauth:\n  providers: [email,\
+  \ google, apple]\n  custom_claims: [org_id, role]\nrls:\n  multi_tenant_column: org_id\n  patterns:\n    - nome: org_member\n\
+  \      policy: \"org_id = (auth.jwt()->'app_metadata'->>'org_id')::uuid\"\n    - nome: owner\n      policy: \"user_id =\
+  \ auth.uid()\"\nstorage:\n  buckets:\n    - nome: product-images\n      publico: true\n      max_file_size: 10485760\n \
+  \     allowed_mime_types: [image/jpeg, image/png, image/webp]\n      transform: true\nvectors:\n  habilitado: true\n  embedding_model:\
+  \ text-embedding-3-small\n  dimensions: 1536\n  search_function: match_products\nWHY GOLDEN: RLS on every table, multi-tenant\
+  \ via org_id, pgvector for search, tier-appropriate features, no hardcoded data."
+anti_example_hardcoded_no_rls: "INPUT: \"Configure Supabase para minha loja ACME\"\nBAD OUTPUT:\nidentidade:\n  empresa: \"\
+  ACME Store\"\n  tier: enterprise\ndatabase:\n  tables:\n    - name: products\n      # No RLS defined\nauth:\n  providers:\
+  \ [email]\n  service_role_key: \"eyJhbGciOiJIUzI1NiIs...\"\nstorage:\n  buckets:\n    - nome: uploads\n      publico: true\n\
+  \      allowed_mime_types: [\"/\"]\nFAILURES:\n1. Hardcoded company name \"ACME Store\"\n2. No RLS on products table\n3.\
+  \ service_role_key exposed in config\n4. Enterprise tier without justification\n5. Public bucket accepts any mime type\n\
+  6. No multi-tenant column"
+edge_case_free_tier_minimal: 'INPUT: "MVP com Supabase Free — auth + basic CRUD" OUTPUT: Config with only Free-tier features,
+  no CDN, no PITR, no SSO, 500MB DB limit noted, 2 project limit noted. RLS still mandatory.'

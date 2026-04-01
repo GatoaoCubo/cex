@@ -11,7 +11,7 @@ created: 2026-04-01
 updated: 2026-04-01
 author: n07_admin
 tags: [builder, skill, P04, reusable-capability, phases, trigger]
-quality: null
+quality: 8.5
 tldr: Builds reusable skill artifacts with trigger + phases. AgentSkills.io / Semantic Kernel pattern.
 density_score: 0.88
 ---

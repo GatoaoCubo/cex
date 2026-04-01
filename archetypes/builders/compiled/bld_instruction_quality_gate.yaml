@@ -1,0 +1,98 @@
+id: p03_ins_quality_gate
+kind: instruction
+pillar: P11
+version: 1.0.0
+created: 2026-03-27
+updated: 2026-03-27
+author: instruction-builder
+title: Quality Gate Builder Instructions
+target: quality-gate-builder agent
+phases_count: 4
+prerequisites:
+- Caller has identified the artifact kind being gated (e.g. prompt_template, router, response_format)
+- At least one quality dimension is named (e.g. completeness, correctness, structural validity)
+- Delivery threshold is known or can be inferred (numeric score 0.0-1.0)
+validation_method: checklist
+domain: quality_gate
+quality: null
+tags:
+- instruction
+- quality-gate
+- P11
+- governance
+- scoring
+- threshold
+idempotent: true
+atomic: false
+rollback: Delete produced gate file. No downstream effects until the gate is wired to a delivery pipeline.
+dependencies: []
+logging: true
+tldr: Define HARD block gates and SOFT scoring gates with numeric thresholds for a target artifact kind, then validate the
+  gate spec internally.
+density_score: 0.91
+context: 'A quality_gate is a pass/fail or scored checkpoint applied to an artifact before it is accepted downstream. HARD
+  gates are binary blockers — a single failure prevents delivery. SOFT gates contribute to a weighted aggregate score; if
+  the score falls below the delivery threshold, the artifact is rejected. This builder produces gate specifications, not executable
+  validator code.
+
+  Inputs
+
+  | Field | Type | Description |
+
+  |---|---|---|
+
+  | `artifact_kind` | string | The kind being gated (e.g. `prompt_template`, `router`, `response_format`) |
+
+  | `dimensions` | list | Quality dimensions to evaluate (e.g. `completeness`, `correctness`, `safety`) |
+
+  | `delivery_threshold` | float | Minimum acceptable soft-gate aggregate score (0.0–1.0) |
+
+  | `bypass_policy` | string | Who may override a gate failure: `none`, `owner`, or `admin` |
+
+  Output
+
+  A single `.md` file with YAML frontmatter + body containing: HARD gate table, SOFT gate table with weights, aggregate scoring
+  formula, and bypass policy. Weights across all SOFT gates must sum to 1.0.
+
+  Boundary rules
+
+  - quality_gate = pass/fail specification for artifact acceptance (this builder)
+
+  - validation_schema = executable code that validates artifact structure post-generation (different builder)
+
+  - rubric = criteria for human scoring panels (different builder)
+
+  - lifecycle_rule = when to promote, retire, or deprecate an artifact (different builder)'
+phases: ''
+phase_1_research_dimension_mapping: "Map each quality dimension to concrete, objectively verifiable checks.\nFOR each dimension\
+  \ in dimensions:\n  identify 1-3 concrete checks that are objectively verifiable\n  classify each check:\n    HARD if: binary\
+  \ outcome only (present/absent, valid/invalid, correct/incorrect)\n             AND failure would make the artifact non-functional\
+  \ or misleading\n    SOFT if: gradable (partial credit exists)\n             OR contributes to overall quality without blocking\
+  \ basic utility\n  assign weight to each SOFT gate\n  NOTE: all SOFT gate weights must sum to exactly 1.0\nIF no dimensions\
+  \ provided, infer from artifact_kind using standard set:\n  structural:   schema validity, required fields present\n  semantic:\
+  \     content correctness, boundary adherence\n  operational:  usability, completeness of examples, actionability\nResearch\
+  \ existing gates for similar artifact kinds to calibrate thresholds.\nIdentify industry-standard thresholds for the domain\
+  \ where applicable.\nDeliverable: classified list of HARD checks and SOFT checks with weights."
+phase_2_classify_boundary_check: "Confirm this artifact belongs to `quality_gate` and not a sibling kind.\nIF caller wants\
+  \ executable code that validates artifact structure:\n  RETURN \"Route to validation-schema-builder — produces code, not\
+  \ a gate spec.\"\nIF caller wants criteria for human scoring panels or review committees:\n  RETURN \"Route to rubric-builder\
+  \ — rubrics serve human reviewers.\"\nIF caller wants lifecycle rules (when to retire, promote, deprecate):\n  RETURN \"\
+  Route to lifecycle-rule-builder.\"\nIF caller wants runtime behavior limits (timeout, retry, rate limit):\n  RETURN \"Route\
+  \ to runtime-rule-builder.\"\nIF caller wants HARD+SOFT gate spec with numeric delivery threshold:\n  PROCEED as quality_gate\n\
+  Deliverable: confirmed `kind: quality_gate` with one-line justification."
+phase_3_compose_build_the_gate_specification: "Assemble frontmatter and body following SCHEMA.md and OUTPUT_TEMPLATE.md.\n\
+  ID generation:\n  id = \"p11_qg_\" + artifact_kind_slug\n  pattern must match valid quality_gate id format\nFrontmatter\
+  \ (required fields):\n  id, kind (= quality_gate), pillar (= P11), title, version,\n  created, updated, author, target_kind,\
+  \ delivery_threshold,\n  bypass_policy, dimensions, quality (= null), tags\nBody structure:\n  ## Definition\n  Table: metric\
+  \ | threshold | operator | scope\n  One row per top-level quality dimension.\n  ## HARD Gates\n  Table: ID | Criterion |\
+  \ Failure Action\n  Rows: H01, H02, ... (sequential, no gaps)\n  Each criterion: objectively verifiable, no subjective adjectives\
+  \ alone.\n  Failure action: always \"block\" for HARD gates.\n  Minimum: 2 HARD gates required.\n  ## SOFT Gates\n  Table:\
+  \ ID | Criterion | Weight | Scoring Method\n  Rows: S01, S02, ... (sequential, no gaps)\n  Scoring method: \"binary\" (0\
+  \ or weight) or \"graduated\" (partial credit)\n  Weights: must sum to exactly 1.0\n  Minimum: 3 SOFT gates required.\n\
+  \  ## Scoring Formula\n  aggregate_score = SUM(gate_score * weight for each SOFT gate)\n  PASS condition: all HARD gates\
+  \ pass AND aggregate_score >= {delivery_threshold}\n  State formula explicitly — do not leave it implicit.\n  ## Actions\n\
+  \  Table: outcome | consequence\n  PASS: artifact proceeds to delivery/pool\n  FAIL: artifact returned with gate failure\
+  \ details\n  ## Bypass Policy\n  Who may override: {none | owner | admin}\n  Conditions for bypass: explicit criteria (not\
+  \ vague)\n  Audit requirement: what must be logged when bypass is used\nDeliverable: complete `.md` file with frontmatter\
+  \ + 5 body sections."
+phase_4_validate_gate_the_gate_spec: Apply meta-checks to the gate spec itself before delivering.

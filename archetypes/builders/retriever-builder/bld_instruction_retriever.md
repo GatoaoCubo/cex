@@ -9,8 +9,9 @@ version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
-quality: null
+quality: 8.8
 tags: [instruction, retriever, P03, RAG, vector-search]
+density_score: 0.86
 ---
 # Instructions: How to Produce a retriever
 

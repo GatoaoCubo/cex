@@ -13,7 +13,7 @@ rules_count: 11
 tone: technical
 knowledge_boundary: "Operational governance, rule enforcement, exception handling, violation protocols | Does NOT: write patterns, diagrams, instructions, guardrails, or axioms"
 domain: law
-quality: null
+quality: 8.8
 tags: [system_prompt, law, P03]
 safety_level: standard
 tools_listed: false

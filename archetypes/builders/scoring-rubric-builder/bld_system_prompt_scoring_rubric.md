@@ -13,7 +13,7 @@ rules_count: 11
 tone: technical
 knowledge_boundary: "scoring_rubric artifacts: weighted dimensions, tier thresholds, calibration sets, automation status | Does NOT: golden-test reference examples, quality-gate pass/fail barriers, benchmark performance metrics"
 domain: scoring_rubric
-quality: null
+quality: 8.8
 tags: [system_prompt, scoring_rubric, P03, P07]
 safety_level: standard
 tools_listed: false

@@ -1,0 +1,80 @@
+kind: collaboration
+id: bld_collaboration_retriever
+pillar: P13
+llm_function: INJECT
+version: 1.0.0
+created: 2026-03-28
+updated: 2026-03-28
+author: builder_agent
+quality: null
+tags:
+- collaboration
+- retriever
+- P13
+- RAG
+- crew
+- handoff
+density_score: 1.0
+my_role_in_crews: 'SPECIALIST — I handle VECTOR/HYBRID SEARCH DEFINITION. I own: store_type, embedding_model, similarity_metric,
+  search_type, top_k, reranker, metadata_filters, namespace. I do NOT own: web search (search-tool-builder), file ingestion
+  (document-loader-builder), SQL queries (db-connector-builder), REST calls (api-client-builder).'
+crew_compositions: ''
+rag_pipeline_most_common:
+- 'document-loader-builder: defines chunking strategy, embedding storage'
+- 'retriever-builder: defines how to query what was stored'
+- 'agent-builder: orchestrates retrieval + generation'
+- 'Dependency: retriever MUST know store_type and embedding_model from document-loader output'
+knowledge_system:
+- 'knowledge-card-builder: structures domain knowledge'
+- 'retriever-builder: provides search interface over knowledge store'
+hybrid_augmented_rag:
+- 'retriever-builder: local knowledge (private docs)'
+- 'search-tool-builder: live web search (public information)'
+- 'fusion-builder: merges local + web results'
+evaluation_crew:
+- 'benchmark-builder: defines BEIR-style eval dataset'
+- 'e2e-eval-builder: runs recall@k, MRR, NDCG metrics'
+handoff_protocol: ''
+i_receive_from_document_loader_builder: 'store_type: chroma          # which backend was used for ingestion
+
+  embedding_model: text-embedding-3-small  # MUST match retriever exactly
+
+  collection_name: my_docs    # namespace to query
+
+  chunk_size: 512             # for context window planning
+
+  metadata_schema: [source, date, category]  # available filter fields'
+i_produce_for_agent_builder_instruction_builder: 'retriever_id: p04_retr_{store_slug}
+
+  search_type: hybrid
+
+  top_k: 10
+
+  reranker: null | model_name
+
+  metadata_filters: [field1, field2]
+
+  sdk_reference: langchain.QdrantRetriever | llama_index.VectorStoreIndex'
+builders_i_depend_on: '| Builder | What I Need | Dependency Type |
+
+  |---------|-------------|-----------------|
+
+  | document-loader-builder | store_type, embedding_model, collection schema | HARD — must match exactly |
+
+  | embedding-config-builder | embedding model name, dimensions, provider | SOFT — can specify independently |'
+builders_that_depend_on_me: '| Builder | What They Take | Usage |
+
+  |---------|---------------|-------|
+
+  | agent-builder | retriever_id, SDK reference | Agent wires retriever into tool belt |
+
+  | instruction-builder | retrieval step spec | Instructions reference retriever by id |
+
+  | chain-builder | retriever artifact | Chain wires retriever -> generator |
+
+  | dag-builder | retriever node | DAG includes retrieval as pipeline step |
+
+  | e2e-eval-builder | retriever config | Eval harness tests retrieval quality |'
+conflict_resolution: 'If embedding_model in retriever does not match document-loader artifact: BLOCK — raise conflict before
+  producing artifact. Dimension mismatch is a silent failure that corrupts retrieval quality at runtime. Always align with
+  document-loader-builder output first.'

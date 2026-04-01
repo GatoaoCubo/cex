@@ -8,7 +8,7 @@ created: "2026-03-29"
 updated: "2026-03-29"
 author: "builder_agent"
 domain: "evaluation dataset — curated test case collections with declared schema, splits, and framework integration"
-quality: null
+quality: 8.9
 tags: [quality-gate, eval-dataset, P07, evals, splits, schema-fields]
 tldr: "Pass/fail gate for eval_dataset artifacts: schema completeness, split integrity, size declaration, and framework integration."
 density_score: 0.90

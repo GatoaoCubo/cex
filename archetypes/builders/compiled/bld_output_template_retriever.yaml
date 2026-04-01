@@ -1,0 +1,27 @@
+kind: output_template
+id: bld_output_template_retriever
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with {{vars}} that the LLM fills to produce a retriever artifact
+pattern: every field here exists in bld_schema_retriever.md
+version: 1.0.0
+created: 2026-03-28
+updated: 2026-03-28
+author: builder_agent
+quality: null
+tags:
+- output_template
+- retriever
+- P05
+- vector-search
+- RAG
+density_score: 1.0
+fill_rules:
+- id must equal filename stem exactly
+- 'store_slug: snake_case, lowercase, no hyphens (chroma, pinecone_hybrid, faiss_local)'
+- tldr <= 160 characters — count before submitting
+- body (all 4 sections) must total <= 2048 bytes
+- 'quality: null — never fill with a number'
+- tags list must include "retriever" as first tag
+- 'reranker: null if not used (do not omit the field)'
+- 'metadata_filters: empty list [] if none (do not omit the field)'

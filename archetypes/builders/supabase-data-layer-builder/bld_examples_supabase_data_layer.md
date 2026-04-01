@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n04_knowledge
 domain: data_platform
-quality: null
+quality: 8.7
 tags: [builder, supabase, data-layer, examples, few-shot]
 density_score: 0.88
 ---

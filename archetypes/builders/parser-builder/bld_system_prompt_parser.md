@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "Extraction rules for text/JSON/HTML/logs, regex patterns, JSON path, CSS selectors, XPath, LLM-based extraction, normalization pipelines, error strategies, streaming parsers | Does NOT: format output for presentation, validate content correctness, define naming conventions"
 domain: parser
-quality: null
+quality: 8.8
 tags: [system_prompt, parser, P03]
 safety_level: standard
 tools_listed: false

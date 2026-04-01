@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "Output validator — checks and corrective actions applied to LLM output AFTER generation | NOT validation_schema (P06, type/schema definition), quality_gate (P11, scoring rubric), constraint_spec (P03, decode-time constraint), guardrail (P11, safety filter)"
 domain: "output_validator"
-quality: null
+quality: 8.7
 tags: ["system_prompt", "output-validator", "P05"]
 safety_level: standard
 tools_listed: false
