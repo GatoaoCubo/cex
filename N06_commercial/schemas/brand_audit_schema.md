@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-01
 author: n06_commercial
 domain: brand-audit-validation
-quality: null
+quality: 8.9
 tags: [schema, brand, audit, scoring, consistency, n06]
 tldr: "Defines 6 audit dimensions with weights: archetype (0.25), voice (0.20), visual (0.20), positioning (0.15), narrative (0.10), config (0.10). Pass = 0.85. Tool: brand_audit.py."
 density_score: 0.93

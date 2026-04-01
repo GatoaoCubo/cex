@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-01
 author: n06_commercial
 domain: brand-audit
-quality: null
+quality: 8.9
 tags: [prompt, brand, audit, consistency, n06]
 tldr: "Scores brand consistency across 6 dimensions: archetype alignment (0.25), voice consistency (0.20), visual coherence (0.20), positioning clarity (0.15), narrative integrity (0.10), config completeness (0.10). Pass = 0.85."
 density_score: 0.93

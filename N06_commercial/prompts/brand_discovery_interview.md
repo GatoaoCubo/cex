@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-01
 author: n06_commercial
 domain: brand-discovery
-quality: null
+quality: 8.8
 tags: [prompt, brand, discovery, interview, n06]
 tldr: "12-15 question progressive interview in 3 phases: Essence (who), Audience (for whom), Expression (how). Extracts brand DNA for brand book generation."
 density_score: 0.94

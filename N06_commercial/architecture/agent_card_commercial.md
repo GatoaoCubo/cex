@@ -43,7 +43,7 @@ runtime: claude
 subscription: anthropic_max
 flags: []
 domain: brand-identity-monetization
-quality: null
+quality: 8.9
 tags: [agent_card, commercial, N06, brand, identity, monetization, sonnet]
 tldr: "brand_architect: Sonnet model, Anthropic Max subscription. Phase 1 = Brand Discovery (12-15 Qs → brand book → brand_config.yaml → propagate). Phase 2 = Revenue (pricing, funnels, courses — all brand-aligned)."
 density_score: 0.94

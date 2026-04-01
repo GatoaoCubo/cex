@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-01
 author: n06_commercial
 domain: brand-summary
-quality: null
+quality: 8.8
 tags: [output, brand, one-pager, executive, summary, n06]
 tldr: "1-page brand summary: logo + name + tagline + archetype + values + UVP + colors + fonts + ICP + transformation. Shareable to stakeholders."
 density_score: 0.92

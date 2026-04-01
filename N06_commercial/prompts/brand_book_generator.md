@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-01
 author: n06_commercial
 domain: brand-book
-quality: null
+quality: 8.8
 tags: [prompt, brand, brand-book, generator, n06]
 tldr: "Transforms Brand Discovery answers into 32-block Brand Book covering identity, positioning, voice, visual, narrative, guidelines, and validation. Uses output_brand_book.md template."
 density_score: 0.93

@@ -16,7 +16,7 @@ safety_level: standard
 tools_listed: true
 output_format_type: markdown
 domain: brand-identity-monetization
-quality: null
+quality: 8.9
 tags: [system_prompt, commercial, N06, brand, identity, monetization, brand-architect]
 tldr: "16-rule system prompt for N06 Brand Architect — brand discovery first, monetization second. All output aligned with brand_config.yaml variables."
 density_score: 0.94

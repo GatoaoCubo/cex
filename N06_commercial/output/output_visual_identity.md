@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-01
 author: n06_commercial
 domain: brand-visual
-quality: null
+quality: 8.9
 tags: [output, brand, visual, identity, colors, typography, n06]
 tldr: "Visual identity reference: color swatches (HEX+HSL+RGB), font specimens, logo usage, photography style, dark mode rules. Feeds into N03 design tokens."
 density_score: 0.93

@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-01
 author: n06_commercial
 domain: brand-config
-quality: null
+quality: 8.9
 tags: [prompt, brand, config, extractor, yaml, n06]
 tldr: "Extracts machine-readable brand_config.yaml from 32-block Brand Book. Maps blocks to 41 mustache variables across 7 sections."
 density_score: 0.93
