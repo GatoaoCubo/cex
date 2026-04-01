@@ -304,6 +304,27 @@ def build_prompt(
         sections.append(context.strip())
         sections.append("")
 
+    # Brand context injection (if brand_config.yaml exists)
+    brand_config_path = CEX_ROOT / ".cex" / "brand" / "brand_config.yaml"
+    if brand_config_path.exists():
+        try:
+            from brand_inject import load_brand_config, flatten
+            brand_cfg = load_brand_config(brand_config_path)
+            if brand_cfg:
+                flat = flatten(brand_cfg)
+                real = {k: v for k, v in flat.items()
+                        if not str(v).startswith("{{") and v
+                        and not k.startswith(("identity.", "archetype.", "voice.",
+                                              "audience.", "visual.", "positioning.",
+                                              "monetization."))}
+                if real:
+                    sections.append("## Brand Context (from .cex/brand/brand_config.yaml)")
+                    for k, v in sorted(real.items()):
+                        sections.append(f"- {k}: {v}")
+                    sections.append("")
+        except ImportError:
+            pass
+
     # Output instructions
     sections.append("## Instrucoes de Output")
     sections.append("1. Gere o artefato COMPLETO (frontmatter YAML + body Markdown)")

@@ -231,6 +231,29 @@ def compose_prompt(
     parts.append(context)
     parts.append("")
 
+    # --- Brand Context Injection ---
+    # If brand_config.yaml exists, inject relevant brand variables
+    brand_config_path = CEX_ROOT / ".cex" / "brand" / "brand_config.yaml"
+    if brand_config_path.exists():
+        try:
+            from brand_inject import load_brand_config, flatten
+            brand_cfg = load_brand_config(brand_config_path)
+            if brand_cfg:
+                flat = flatten(brand_cfg)
+                # Filter out placeholders (still {{...}})
+                real = {k: v for k, v in flat.items()
+                        if not str(v).startswith("{{") and v}
+                if real:
+                    parts.append("## Brand Context (auto-injected from .cex/brand/brand_config.yaml)")
+                    for k, v in sorted(real.items()):
+                        if not k.startswith(("identity.", "archetype.", "voice.",
+                                             "audience.", "visual.", "positioning.",
+                                             "monetization.")):
+                            parts.append(f"- {k}: {v}")
+                    parts.append("")
+        except ImportError:
+            pass  # brand_inject not available, skip silently
+
     # --- Builder Memory (per-builder, not shared) ---
     memory_block = _load_builder_memories(builder_id, intent)
     if memory_block:
