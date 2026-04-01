@@ -6,70 +6,73 @@ version: "1.0.0"
 created: "2026-04-01"
 updated: "2026-04-01"
 author: "workflow-builder"
-title: "CEX Orchestration Pipeline"
+title: "Orchestration Pipeline Workflow"
 steps_count: 4
 execution: mixed
-agent_nodes: [stella, shaka, edison, stella]
-timeout: 3600
+agent_nodes: [orchestrator, n01, n02, n03, n04, n05, n06]
+timeout: 7200
 retry_policy: per_step
 depends_on: []
-signals: [complete, error, pipeline_complete]
-spawn_configs: [p12_spawn_stella_orchestrator, p12_spawn_shaka_researcher, p12_spawn_edison_builder]
+signals: [mission_planned, nuclei_dispatched, execution_complete, pipeline_complete, error]
+spawn_configs: [p12_spawn_orchestrator_mission, p12_spawn_nucleus_solo]
 domain: "orchestration"
 quality: 8.8
-tags: [workflow, orchestration, pipeline, multi-agent]
-tldr: "4-step orchestration pipeline: decompose mission, research context, build artifacts, consolidate results with wave-based parallel execution"
-density_score: 0.92
+tags: [workflow, orchestration, pipeline, multi-nucleus]
+tldr: "4-step mixed workflow: plan mission, dispatch to nuclei, parallel execution, consolidate results with error recovery"
+density_score: 0.91
 ---
 ## Purpose
-Defines the complete CEX orchestration pipeline from mission intake to consolidated delivery. Demonstrates wave-based execution where planning is sequential, research and building run in parallel, then consolidation finalizes the pipeline. Each step emits completion signals to coordinate handoffs between orchestrator and specialist agents.
+Orchestrates complex multi-nucleus missions through planning, parallel dispatch, autonomous execution, and consolidation. This workflow enables the orchestrator to decompose missions into domain-specific tasks, route them to appropriate nuclei (N01-N06), monitor parallel execution, and consolidate results into final deliverables.
 
 ## Steps
-### Step 1: Mission Decomposition [stella]
-- **Agent**: stella (orchestrator)
-- **Action**: Parse mission goal, identify required artifacts, create handoff files for specialist agents
-- **Input**: mission goal from user request
-- **Output**: handoff files in .cex/runtime/handoffs/ and task decomposition
-- **Signal**: decomposition_complete with task count
+
+### Step 1: Mission Planning [orchestrator]
+- **Agent**: orchestrator (N07)
+- **Action**: Analyze mission goal and decompose into domain-specific tasks with nucleus routing
+- **Input**: Mission specification from handoff file
+- **Output**: Task decomposition with nucleus assignments in .cex/runtime/handoffs/
+- **Signal**: mission_planned with task count and nucleus assignments
 - **Depends on**: none
 
-### Step 2: Context Research [shaka]
-- **Agent**: shaka (research specialist)
-- **Action**: Gather domain knowledge, analyze similar artifacts, build context foundation
-- **Input**: research handoff file from Step 1
-- **Output**: knowledge cards and context brief committed to records/
-- **Signal**: research_complete with knowledge score
+### Step 2: Nucleus Dispatch [orchestrator]
+- **Agent**: orchestrator (N07)
+- **Action**: Create handoff files and launch assigned nuclei via spawn configurations
+- **Input**: Task decomposition from Step 1
+- **Output**: Active nucleus processes with handoff files
+- **Signal**: nuclei_dispatched with process IDs and handoff paths
 - **Depends on**: Step 1
 
-### Step 3: Artifact Construction [edison]
-- **Agent**: edison (build specialist)
-- **Action**: Execute 8F pipeline to produce target artifacts with quality validation
-- **Input**: build handoff file from Step 1
-- **Output**: completed artifacts with quality >= 8.0
-- **Signal**: build_complete with quality score
-- **Depends on**: Step 1
+### Step 3: Parallel Execution [multiple nuclei]
+- **Agent**: n01, n02, n03, n04, n05, n06 (domain-specific)
+- **Action**: Execute assigned tasks autonomously via 8F pipeline
+- **Input**: Domain-specific handoff files from Step 2
+- **Output**: Domain artifacts committed to respective pillars
+- **Signal**: execution_complete with quality scores per nucleus
+- **Depends on**: Step 2
 
-### Step 4: Pipeline Consolidation [stella]
-- **Agent**: stella (orchestrator)
-- **Action**: Verify outputs, archive handoffs, commit results, emit pipeline completion
-- **Input**: signals from Steps 2-3, git log, artifact quality scores
-- **Output**: consolidated commit and pipeline completion report
-- **Signal**: pipeline_complete with aggregate quality
-- **Depends on**: Steps 2, 3
+### Step 4: Results Consolidation [orchestrator]
+- **Agent**: orchestrator (N07)
+- **Action**: Collect nucleus outputs, validate quality, archive handoffs, push to remote
+- **Input**: Completed artifacts and signals from Step 3
+- **Output**: Consolidated mission deliverable with quality report
+- **Signal**: pipeline_complete with aggregate quality score
+- **Depends on**: Step 3
 
 ## Dependencies
-- Mission goal must be defined in initial user request
-- .cex/runtime/handoffs/ directory must exist for handoff file storage
-- spawn_configs for stella, shaka, and edison must be valid and accessible
-- Git repository must be initialized for commit operations
+- Mission handoff file must exist with clear goal and requirements
+- Spawn configurations for orchestrator and target nuclei must be valid
+- Target nuclei must have appropriate builder capabilities for assigned tasks
+- Git repository must be clean with no conflicting processes
 
 ## Signals
-- **On step complete**: {agent}_complete signal emitted with quality/progress data
-- **On pipeline complete**: pipeline_complete signal with aggregate metrics and success status
-- **On error**: {agent}_error signal with failure reason, per_step retry up to 1 attempt, then escalate to orchestrator
-- **Wave coordination**: Steps 2-3 run in parallel after Step 1 completion, Step 4 waits for both
+- **On mission planned**: mission_planned signal with task breakdown and nucleus routing map
+- **On nuclei dispatched**: nuclei_dispatched signal with active process tracking
+- **On parallel execution complete**: execution_complete signal with per-nucleus quality scores
+- **On workflow complete**: pipeline_complete signal with consolidated deliverable path
+- **On error**: error signal with failure point, retry per step (max 1), escalate to manual intervention
 
 ## References
-- signal-builder conventions for completion/error signal structure
-- spawn-config-builder for agent launch parameters
-- handoff protocol for inter-agent task delegation
+- Signal contracts defined by signal-builder for orchestration events
+- Spawn configurations from spawn-config-builder for nucleus launch parameters
+- 8F pipeline enforcement for autonomous nucleus execution
+- Quality gate validation for artifact acceptance criteria
