@@ -7,11 +7,11 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n06_commercial
 domain: content-monetization
-quality: 8.9
+quality: null
 tags: [dispatch_rule, content-monetization, billing, checkout, credits, PIX, N06]
 tldr: Routes billing, checkout, credit, course generation, and payment tasks to content-monetization-builder via N06.
 scope: content-monetization
-keywords: [monetizar, monetize, billing, faturamento, checkout, pagamento, payment, PIX, boleto, créditos, credits, wallet, saldo, curso, course, assinatura, subscription, plano, plan, pricing, preço, precificar, invoice, cobrança, charge, receita, revenue, MercadoPago, Stripe, geração de curso, course generation, anúncio monetizado, ads checkout, email transacional, transactional email, ERP sync, BaseLinker, pack de créditos, credit pack]
+keywords: [monetizar, monetize, billing, faturamento, checkout, pagamento, payment, PIX, boleto, créditos, credits, wallet, saldo, curso, course, assinatura, subscription, plano, plan, pricing, preço, precificar, invoice, cobrança, charge, receita, revenue, MercadoPago, Stripe, Hotmart, Digistore24, DS24, Kiwify, Monetizze, Eduzz, geração de curso, course generation, anúncio monetizado, ads checkout, email transacional, transactional email, ERP sync, BaseLinker, pack de créditos, credit pack, IPN, webhook, affiliate, afiliado, EU VAT, GDPR, Widerrufsrecht]
 agent_node: content_monetization_builder
 model: sonnet
 priority: 9
@@ -47,10 +47,12 @@ Route to `content_monetization_builder` when intent contains ANY of:
 ### Secondary Triggers (route if no higher-priority nucleus matches)
 
 - invoice, cobrança, charge, receita, revenue, wallet, saldo
-- MercadoPago, Stripe, BaseLinker, Bling
+- MercadoPago, Stripe, Hotmart, Digistore24, DS24, Kiwify, Monetizze, Eduzz
+- BaseLinker, Bling, ERP sync
 - email transacional, transactional email, email sequence
 - anúncio monetizado, ads checkout, ad billing
 - PIPELINE_COSTS, PARSE, PRICING, CREDITS
+- IPN, webhook, affiliate, afiliado, EU VAT, GDPR, Widerrufsrecht, Impressum
 
 ## Routing Decision Tree
 

@@ -21,7 +21,7 @@ parameters:
     payment_provider:
       type: string
       description: "Payment provider to use for checkout"
-      enum: [stripe, mercadopago, mock]
+      enum: [stripe, mercadopago, hotmart, digistore24, mock]
     pipeline_steps:
       type: array
       description: "Explicit pipeline steps to execute; defaults to full pipeline"
@@ -30,8 +30,8 @@ parameters:
         enum: [PARSE, PRICING, CREDITS, CHECKOUT, COURSES, ADS, EMAILS, VALIDATE, DEPLOY]
     currency:
       type: string
-      description: "Currency code; BRL uses centavos integer representation"
-      enum: [BRL, USD]
+      description: "Currency code; BRL uses centavos, EUR/USD use cents integer representation"
+      enum: [BRL, USD, EUR]
     dry_run:
       type: boolean
       description: "If true, validates config without charging credits or hitting payment APIs"
@@ -42,7 +42,7 @@ returns:
 provider_compat: [openai, anthropic, gemini]
 strict: false
 domain: content-monetization
-quality: 8.9
+quality: null
 tags: [function_def, monetization, billing, checkout, courses, credits, N06]
 tldr: "LLM-callable tool for the full 9-step content monetization pipeline — from pricing resolution to course generation to deployment."
 examples:
@@ -87,7 +87,7 @@ error_types: [insufficient_credits, payment_provider_unavailable, course_generat
       "payment_provider": {
         "type": "string",
         "description": "Provider for checkout session; use 'mock' for dev/CI",
-        "enum": ["stripe", "mercadopago", "mock"]
+        "enum": ["stripe", "mercadopago", "hotmart", "digistore24", "mock"]
       },
       "pipeline_steps": {
         "type": "array",
@@ -99,8 +99,8 @@ error_types: [insufficient_credits, payment_provider_unavailable, course_generat
       },
       "currency": {
         "type": "string",
-        "description": "BRL = centavos integer; USD = cents integer",
-        "enum": ["BRL", "USD"],
+        "description": "BRL = centavos integer; USD/EUR = cents integer",
+        "enum": ["BRL", "USD", "EUR"],
         "default": "BRL"
       },
       "dry_run": {
@@ -120,9 +120,9 @@ error_types: [insufficient_credits, payment_provider_unavailable, course_generat
 |-------|------|----------|---------|-------------|
 | product | object | yes | — | `{name, category, audience}` — drives course outline and ad content |
 | pricing_tier | string | yes | — | `free` (no checkout), `pro` (standard pack), `enterprise` (custom) |
-| payment_provider | string | yes | — | `mercadopago` for BRL/PIX; `stripe` for USD/international; `mock` for CI |
+| payment_provider | string | yes | — | `mercadopago` for BRL/PIX; `hotmart` for BR infoproducts; `digistore24` for EU/DACH; `stripe` for USD/global; `mock` for CI |
 | pipeline_steps | array | no | all 9 | Subset execution — useful for partial rerun after step failure |
-| currency | string | no | BRL | Determines centavos (BRL) vs cents (USD) representation |
+| currency | string | no | BRL | Determines centavos (BRL) vs cents (USD/EUR) representation |
 | dry_run | boolean | no | false | Returns estimated costs and config preview without side effects |
 
 ## Return Type

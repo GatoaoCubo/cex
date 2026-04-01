@@ -9,7 +9,7 @@ author: n06_commercial
 title: "Codexa Instance — N06 Content Monetization Config"
 tags: [instance, content-monetization, codexa, mercadopago, brl, pipeline-costs, N06]
 tldr: "Codexa-specific content monetization config for N06. MercadoPago primary, BRL centavos, PIPELINE_COSTS from credit_system.py, mock mode for CI."
-quality: 8.8
+quality: null
 domain: content-monetization
 instance: codexa
 ---
@@ -77,6 +77,33 @@ stripe:
   payment_methods: [card, link]
   subscription_mode: recurring
 
+# ── Hotmart Config (BR infoproducts) ─────────────────────
+hotmart:
+  mode: TEST                      # Upgrade to LIVE for BR infoproduct sales
+  token_env: HOTMART_TOKEN        # OAuth2 bearer token
+  hottok_env: HOTMART_HOTTOK      # sha256 HMAC webhook secret
+  webhook_endpoint: /webhooks/hotmart/event
+  webhook_format: json
+  signature_algo: sha256_hmac
+  idempotency_field: transaction_id
+  events: [PURCHASE_COMPLETE, PURCHASE_CANCELED, PURCHASE_REFUNDED, SUBSCRIPTION_CANCELLATION]
+  member_area: hotmart_club       # Native course delivery
+  marketplace: true               # Enable affiliate marketplace
+
+# ── Digistore24 Config (EU/INT infoproducts) ─────────────
+digistore24:
+  mode: TEST                      # Upgrade to LIVE for EU sales
+  api_key_env: DS24_API_KEY       # X-DS-API-KEY header
+  ipn_passphrase_env: DS24_IPN_PASSPHRASE  # sha512 verification
+  ipn_endpoint: /webhooks/ds24/ipn
+  ipn_format: form-encoded        # NOT JSON — DS24 sends form-encoded
+  ipn_response: "OK"              # Exact string — DS24 retries until "OK"
+  signature_algo: sha512
+  merchant_of_record: ds24        # DS24 handles EU VAT
+  eu_vat_included: true
+  languages: [de, en, es, fr, it, nl, pl]
+  events: [on_payment, on_refund, on_chargeback, on_rebill_resumed, on_rebill_cancelled]
+
 # ── BillingExecutor Modes ─────────────────────────────────
 # Source: BillingExecutor class modes
 billing_modes:
@@ -136,6 +163,15 @@ BILLING_MODE=LIVE               # LIVE | TEST | MOCK
 # Optional (USD fallback)
 STRIPE_SECRET_KEY=sk_live_...
 STRIPE_WEBHOOK_SECRET=whsec_...
+
+# Hotmart (BR infoproducts)
+HOTMART_TOKEN=...                # OAuth2 bearer token
+HOTMART_HOTTOK=...               # Webhook sha256 HMAC secret
+
+# Digistore24 (EU/INT infoproducts)
+DS24_API_KEY=...                 # X-DS-API-KEY header
+DS24_IPN_PASSPHRASE=...          # IPN sha512 verification
+DS24_SANDBOX_MODE=true           # Sandbox toggle
 
 # ERP (if enabled)
 BASELINKER_API_KEY=...

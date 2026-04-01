@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n06_commercial
 domain: content-monetization
-quality: 9.0
+quality: null
 tags: [content-monetization, billing, credits, checkout, courses, PIX, MercadoPago, Stripe, N06]
 tldr: Distilled knowledge for N06 content monetization pipeline — BRL credit wallet, payment providers, course LLM generation, ad validation, email automation, and ERP sync.
 when_to_use: When implementing or reasoning about content monetization flows involving billing, credits, course generation, checkout, ad validation, or ERP integration.
@@ -29,14 +29,14 @@ linked_artifacts:
   related:
     - p12_dr_content_monetization
     - p12_wf_content_monetization
-    - p01_kc_stripe_patterns
-    - p01_kc_credit_system_design
-    - p01_kc_course_generation
-    - p01_kc_ad_validation
-    - p01_kc_email_automation
-    - p01_kc_mercadopago_pix
-    - p01_kc_pricing_strategy
-    - p01_kc_erp_integration
+    - p01_kc_hotmart_api
+    - p01_kc_hotmart_club
+    - p01_kc_hotmart_marketplace
+    - p01_kc_digistore24_api
+    - p01_kc_digistore24_ipn
+    - p01_kc_digistore24_marketplace
+    - p01_kc_content_platform_compliance
+    - p01_kc_content_platform_comparison
 density_score: null
 data_source: codexa-core (billing_executor, credit_system, cursos_executor, erp_connector, anuncio_validator, email_templates, mercadopago_executor)
 ---
@@ -49,7 +49,7 @@ data_source: codexa-core (billing_executor, credit_system, cursos_executor, erp_
 domain: content-monetization
 nucleus: N06
 pipeline: PARSE→PRICING→CREDITS→CHECKOUT→COURSES→ADS→EMAILS→VALIDATE→DEPLOY
-providers: [stripe, mercadopago]
+providers: [stripe, mercadopago, hotmart, digistore24]
 currency: BRL centavos (integer)
 modes: [LIVE, TEST, MOCK]
 credit_unit: centavo BRL (1 BRL = 100 créditos)
@@ -178,29 +178,38 @@ Each step validates Pydantic model. Mock fallback if LLM quota exceeded.
 
 ## Comparativo de Providers
 
-| Dimension | Stripe | MercadoPago |
-|-----------|--------|-------------|
-| Market | Internacional | Brasil/LATAM |
-| PIX | Não | Sim (nativo) |
-| Boleto | Não | Sim |
-| Webhook | `checkout.session.completed` | IPN payment.approved |
-| Test mode | Test key + test cards | Sandbox environment |
-| Preapproval | Subscriptions API | Preapproval API |
-| Currency | USD/multi | BRL native |
-| Best for | SaaS internacional | E-commerce/infoproduto BR |
+| Dimension | Stripe | MercadoPago | Hotmart | Digistore24 |
+|-----------|--------|-------------|---------|-------------|
+| Market | Internacional | Brasil/LATAM | BR infoproducts | EU/DACH/Global |
+| PIX | Não | Sim (nativo) | Não (card/boleto) | Não |
+| Boleto | Não | Sim | Sim | Não |
+| Currency | USD/multi | BRL native | BRL | EUR (multi) |
+| Webhook | checkout.session.completed | IPN payment.approved | JSON, sha256 HMAC | form-encoded, sha512 |
+| IPN response | HTTP 200 | HTTP 200 | HTTP 200 | exact "OK" |
+| MoR | Seller | Seller | Seller | DS24 (auto EU VAT) |
+| Affiliates | Não | Não | Marketplace 500K+ | DS24 Marketplace |
+| Languages | EN | PT-BR | PT-BR | DE,EN,ES,FR,IT,NL,PL |
+| Best for | SaaS global | E-commerce BR | Infoproduto BR/LATAM | Infoproduto EU/DACH |
+
+**Multi-platform strategy**: MercadoPago (e-commerce BR) + Hotmart (infoproduto BR) + DS24 (infoproduto INT)
+
+## Platform KCs (Phase 2 — 8 Research KCs)
+
+| KC | ID | Focus |
+|----|----|-------|
+| Hotmart API | kc_hotmart_api | REST API, OAuth2, webhook JSON sha256 HMAC |
+| Hotmart Club | kc_hotmart_club | Native member area, course delivery, drip |
+| Hotmart Marketplace | kc_hotmart_marketplace | 500K+ affiliates, BR/LATAM reach |
+| Digistore24 API | kc_digistore24_api | REST API, Merchant of Record, auto EU VAT |
+| Digistore24 IPN | kc_digistore24_ipn | form-encoded IPN, sha512, respond "OK" |
+| Digistore24 Marketplace | kc_digistore24_marketplace | EU affiliates, multi-language |
+| Platform Compliance | kc_content_platform_compliance | GDPR, EU VAT, Widerrufsrecht, Impressum |
+| Platform Comparison | kc_content_platform_comparison | Hotmart vs DS24 vs Teachable vs Kiwify |
 
 ## Artefatos Relacionados
 
 | Artifact | ID | Purpose |
 |----------|----|---------|
-| knowledge_card | p01_kc_stripe_patterns | Stripe checkout, webhooks, idempotency |
-| knowledge_card | p01_kc_credit_system_design | Wallet, centavos, pipeline costs |
-| knowledge_card | p01_kc_course_generation | LLM sequential chain, Pydantic models |
-| knowledge_card | p01_kc_ad_validation | Fabrication detection, confidence scoring |
-| knowledge_card | p01_kc_email_automation | Template dict, BRL formatting |
-| knowledge_card | p01_kc_mercadopago_pix | PIX, IPN, HMAC-SHA256 |
-| knowledge_card | p01_kc_pricing_strategy | Cost-plus margins, pack discounts |
-| knowledge_card | p01_kc_erp_integration | BaseLinker sync, Bling v3, OAuth2 |
 | function_def   | p04_fn_content_monetization | Tool callable by LLM |
 | dispatch_rule  | p12_dr_content_monetization | Routing keywords → builder |
 | workflow       | p12_wf_content_monetization | Full execution flow |

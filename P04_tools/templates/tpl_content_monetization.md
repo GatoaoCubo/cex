@@ -9,7 +9,7 @@ author: n06_commercial
 title: "Template — Content Monetization Tool"
 tags: [template, content-monetization, billing, checkout, credits, courses, PIX, Stripe, N06]
 tldr: "Config-driven template for content monetization function_def artifacts. Covers payment_provider, currency (BRL centavos), pipeline_costs, credit packs, pricing tiers, and quality gates."
-quality: 8.9
+quality: null
 ---
 
 # Template: Content Monetization Tool
@@ -74,6 +74,18 @@ webhooks:
     event: checkout.session.completed
     verification: stripe-signature header
     idempotency_field: event_id
+  hotmart:
+    events: [PURCHASE_COMPLETE, PURCHASE_CANCELED, PURCHASE_REFUNDED, PURCHASE_CHARGEBACK]
+    verification: sha256_hmac (HOTMART_HOTTOK)
+    format: json
+    idempotency_field: transaction_id
+  digistore24:
+    events: [on_payment, on_refund, on_chargeback, on_rebill_resumed, on_rebill_cancelled]
+    verification: sha512 (DS24_IPN_PASSPHRASE)
+    format: form-encoded   # NOT JSON
+    response: "OK"         # exact string required
+    idempotency_field: order_id
+    merchant_of_record: ds24  # auto EU VAT
 ```
 
 ## Capability Table
