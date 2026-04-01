@@ -1,0 +1,21 @@
+id: p01_kc_self_healing_skill
+kind: knowledge_card
+type: domain
+pillar: P01
+title: Self-Healing Skill
+version: 1.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: patterns
+quality: null
+tags:
+- pattern
+- skill
+- llm
+tldr: Detect own errors, diagnose, fix, retry. Max 3 attempts. Escalate if unresolved. Log learning.
+keywords:
+- self-healing
+- auto-fix
+- validation-loop
+- recovery
+density_score: 0.91

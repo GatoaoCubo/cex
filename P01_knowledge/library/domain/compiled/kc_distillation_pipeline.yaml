@@ -1,0 +1,36 @@
+id: p01_kc_distillation_pipeline
+kind: knowledge_card
+type: domain
+pillar: P01
+title: Distillation Pipeline
+version: 1.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: frameworks
+quality: null
+tags:
+- framework
+- architecture
+- llm
+tldr: 'Transform raw sources into KCs through a pipeline: collect > filter > structure > compress > validate > publish.'
+keywords:
+- distillation
+- pipeline
+- raw-to-kc
+- compression
+density_score: 0.92
+pipeline_steps: "COLLECT → FILTER → STRUCTURE → COMPRESS → VALIDATE → PUBLISH\n  raw      signal    frontmatter   density\
+  \    compile    P01/\n  sources   only      + sections    >= 0.85    + doctor   library/"
+input_sources: '| Source | Example | Typical Output |
+
+  |--------|---------|---------------|
+
+  | Conversation | User explains domain | Domain KC |
+
+  | Code | Implementation patterns | Pattern KC |
+
+  | Docs | API documentation | Platform KC |
+
+  | Error log | Recurring failures | Anti-pattern KC |
+
+  | Competition | Market research | Competitive KC |'

@@ -1,0 +1,21 @@
+id: p01_kc_query_decomposition
+kind: knowledge_card
+type: domain
+pillar: P01
+title: Query Decomposition
+version: 1.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: patterns
+quality: null
+tags:
+- pattern
+- skill
+- llm
+tldr: Split complex queries into independent sub-queries. Answer each, combine into final response.
+keywords:
+- decomposition
+- sub-query
+- divide-conquer
+- complex
+density_score: 0.91

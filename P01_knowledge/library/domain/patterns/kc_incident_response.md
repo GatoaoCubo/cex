@@ -1,0 +1,25 @@
+---
+id: p01_kc_incident_response
+kind: knowledge_card
+type: domain
+pillar: P01
+title: "Incident Response"
+version: 1.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: patterns
+quality: null
+tags: [pattern, skill, llm]
+tldr: "Detect, triage, mitigate, resolve, postmortem. P1=auto-rollback, P2=auto-debug, P3=next session, P4=backlog."
+keywords: [incident, response, triage, sre, postmortem]
+density_score: 0.91
+---
+
+# Incident Response
+
+| Level | Impact | Response |
+|-------|--------|----------|
+| P1 | System down | Auto-rollback |
+| P2 | Feature broken | Auto-debug |
+| P3 | Quality degraded | Next session |
+| P4 | Cosmetic | Backlog |

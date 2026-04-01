@@ -1,0 +1,34 @@
+---
+id: p01_kc_qa_validation
+kind: knowledge_card
+type: domain
+pillar: P01
+title: "QA Validation Framework"
+version: 1.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: frameworks
+quality: null
+tags: [framework, architecture, llm]
+tldr: "Multi-layer validation: schema (compile), structural (doctor), behavioral (tests), quality (score), brand (audit)."
+keywords: [qa, validation, gates, checklist, automated]
+density_score: 0.92
+---
+
+# QA Validation Framework
+
+## Validation Layers
+| Layer | What | Tool | Blocking |
+|-------|------|------|----------|
+| Schema | YAML valid, fields present | cex_compile.py | Yes |
+| Structural | Builder complete (13 specs) | cex_doctor.py | Yes |
+| Behavioral | Functions work correctly | pytest | Yes |
+| Quality | Score >= 8.0 | cex_score.py | For publish |
+| Brand | Consistency >= 0.85 | brand_audit.py | For N06 |
+| Security | No secrets, no PII | wf_auto_security | For deploy |
+
+## When to Run
+- After every F6 PRODUCE: schema + structural
+- After every commit: behavioral (pre-commit hook)
+- Before dispatch: structural + behavioral
+- Before publish: all layers

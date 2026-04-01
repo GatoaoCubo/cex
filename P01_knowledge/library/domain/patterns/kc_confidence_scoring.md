@@ -1,0 +1,24 @@
+---
+id: p01_kc_confidence_scoring
+kind: knowledge_card
+type: domain
+pillar: P01
+title: "Confidence Scoring"
+version: 1.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: patterns
+quality: null
+tags: [pattern, skill, llm]
+tldr: "Assign confidence to LLM outputs. High 0.90+: act. Medium 0.70-0.89: flag. Low <0.70: ask user."
+keywords: [confidence, scoring, threshold, certainty]
+density_score: 0.91
+---
+
+# Confidence Scoring
+
+| Score | Action |
+|-------|--------|
+| >= 0.90 | Act autonomously |
+| 0.70-0.89 | Act, flag for review |
+| < 0.70 | Ask user |

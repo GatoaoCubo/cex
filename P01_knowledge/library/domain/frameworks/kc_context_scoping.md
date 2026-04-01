@@ -1,0 +1,33 @@
+---
+id: p01_kc_context_scoping
+kind: knowledge_card
+type: domain
+pillar: P01
+title: "Context Scoping Framework"
+version: 1.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: frameworks
+quality: null
+tags: [framework, architecture, llm]
+tldr: "Each nucleus has a bounded context. N01 does research, not code. N05 deploys, not designs. Scoping prevents god-agents."
+keywords: [scoping, context, boundaries, nucleus, separation]
+density_score: 0.92
+---
+
+# Context Scoping Framework
+
+## Nucleus Scopes
+| Nucleus | IN scope | OUT of scope |
+|---------|----------|-------------|
+| N01 | Research, analysis | Code, deploy |
+| N02 | Frontend, copy, design | Backend, infra |
+| N03 | Build artifacts | Research, deploy |
+| N04 | Documentation, knowledge | Code, sales |
+| N05 | Deploy, ops, infra | Design, content |
+| N06 | Brand, pricing, revenue | Code, research |
+| N07 | Plan, dispatch, consolidate | Build (anything) |
+
+## Cross-Scope Communication
+When a nucleus needs something out of scope: signal + handoff to correct nucleus.
+Never expand scope. Always delegate.

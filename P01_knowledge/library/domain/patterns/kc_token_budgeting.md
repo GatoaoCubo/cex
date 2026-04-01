@@ -1,0 +1,27 @@
+---
+id: p01_kc_token_budgeting
+kind: knowledge_card
+type: domain
+pillar: P01
+title: "Token Budgeting"
+version: 1.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: patterns
+quality: null
+tags: [pattern, skill, llm]
+tldr: "Allocate context window like a budget. System prompt (never trim) > task > manifest > brand > KC > examples."
+keywords: [token-budget, context-window, allocation, priority]
+density_score: 0.91
+---
+
+# Token Budgeting
+
+| Component | Priority | Trim? |
+|-----------|----------|-------|
+| System prompt | 1 | Never |
+| Task | 2 | Never |
+| Manifest | 3 | Never |
+| Brand | 4 | Last |
+| KC | 5 | If needed |
+| Examples | 6 | First |

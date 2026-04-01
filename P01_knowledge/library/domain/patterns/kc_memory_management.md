@@ -1,0 +1,25 @@
+---
+id: p01_kc_memory_management
+kind: knowledge_card
+type: domain
+pillar: P01
+title: "Memory Management"
+version: 1.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: patterns
+quality: null
+tags: [pattern, skill, llm]
+tldr: "Not everything worth remembering. Hot (session), warm (handoff), cold (KC). Filter by impact."
+keywords: [memory, tiers, persistence, forgetting, hot-warm-cold]
+density_score: 0.91
+---
+
+# Memory Management
+
+| Signal | Persist? | Where |
+|--------|----------|-------|
+| Error+fix | Yes | learning_record |
+| Pattern | Yes | KC |
+| User pref | Yes | manifest |
+| Debug output | No | ephemeral |

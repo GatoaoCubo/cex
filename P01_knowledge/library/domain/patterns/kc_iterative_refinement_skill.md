@@ -1,0 +1,26 @@
+---
+id: p01_kc_iterative_refinement_skill
+kind: knowledge_card
+type: domain
+pillar: P01
+title: "Iterative Refinement Skill"
+version: 1.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: patterns
+quality: null
+tags: [pattern, skill, llm]
+tldr: "Multi-pass improvement. Each pass targets one dimension: structure, accuracy, voice, density, format."
+keywords: [refinement, multi-pass, quality, focused-pass]
+density_score: 0.91
+---
+
+# Iterative Refinement Skill
+
+| Pass | Focus |
+|------|-------|
+| 1 | Structure (sections, flow) |
+| 2 | Accuracy (facts, refs) |
+| 3 | Voice (brand, audience) |
+| 4 | Density (no filler) |
+| 5 | Format (frontmatter, naming) |

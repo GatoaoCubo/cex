@@ -1,0 +1,44 @@
+---
+id: p01_kc_pattern_extraction
+kind: knowledge_card
+type: domain
+pillar: P01
+title: "Pattern Extraction — Mining Reusable Patterns from Code and Conversations"
+version: 1.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: patterns
+quality: null
+tags: [pattern, extraction, mining, reuse, knowledge]
+tldr: "Identify recurring solutions in code/conversations, abstract into reusable patterns. Input: N examples. Output: pattern template + when_to_use + anti-patterns."
+when_to_use: "After completing multiple similar tasks, consolidate learnings into a reusable pattern"
+keywords: [pattern-extraction, mining, abstraction, reuse, template]
+density_score: 0.91
+---
+
+# Pattern Extraction
+
+## The Process
+```
+OBSERVE: N similar solutions exist
+ABSTRACT: Remove specifics, keep structure
+NAME: Give it a memorable, searchable name
+DOCUMENT: template + when + anti-patterns + examples
+VALIDATE: Apply pattern to new case, verify it works
+```
+
+## Pattern Template
+```markdown
+# Pattern: {Name}
+## Problem: {recurring situation}
+## Solution: {abstracted approach}
+## When to Use: {conditions}
+## When NOT to Use: {counter-conditions}
+## Example: {concrete application}
+## Anti-Pattern: {common mistakes}
+```
+
+## CEX Application
+- Builder specs ARE extracted patterns (13 templates per kind)
+- KCs document domain patterns
+- Auto-evolve workflow detects pattern opportunities

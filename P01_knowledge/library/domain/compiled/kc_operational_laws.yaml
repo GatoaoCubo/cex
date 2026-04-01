@@ -1,0 +1,32 @@
+id: p01_kc_operational_laws
+kind: knowledge_card
+type: domain
+pillar: P01
+title: Operational Laws
+version: 1.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: frameworks
+quality: null
+tags:
+- framework
+- architecture
+- llm
+tldr: System invariants that must ALWAYS hold. 8F mandatory, quality:null on creation, N07 never builds, GDP before dispatch.
+keywords:
+- laws
+- invariants
+- constraints
+- non-negotiable
+- rules
+density_score: 0.92
+cex_operational_laws_4_rules:
+- 8F mandatory — every artifact passes F1-F8
+- GDP before dispatch — subjective decisions with user first
+- N07 never builds — only plans, specs, dispatches, consolidates
+- quality:null — never self-score, peer-review assigns quality
+properties_of_good_operational_laws:
+- 'Invariant: always true, no exceptions'
+- 'Testable: can verify compliance automatically'
+- 'Short: fits in working memory (max 5-7 rules)'
+- 'Justified: each exists because violating it caused real problems'

@@ -1,0 +1,20 @@
+---
+id: p01_kc_source_triangulation
+kind: knowledge_card
+type: domain
+pillar: P01
+title: "Source Triangulation"
+version: 1.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: patterns
+quality: null
+tags: [pattern, skill, llm]
+tldr: "Cross-reference 3+ sources. 3/3 agree = high confidence. 2/3 = use majority. 0/3 = flag to user."
+keywords: [triangulation, verification, cross-reference, multi-source]
+density_score: 0.91
+---
+
+# Source Triangulation
+
+Rule of Three: find claim in Source A, verify in Source B (different origin), confirm in Source C (different type).
