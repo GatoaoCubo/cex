@@ -12,7 +12,7 @@ execution_mode: sequential
 error_recovery: retry_with_mock_fallback
 max_retries: 2
 timeout_minutes: 30
-quality: null
+quality: 8.9
 tags: [workflow, content-monetization, billing, credits, courses, checkout, ads, emails, N06]
 tldr: Full 9-step content monetization workflow — PARSE through DEPLOY — with credit gating, PIX checkout, LLM course generation, ad validation, and email dispatch.
 density_score: null

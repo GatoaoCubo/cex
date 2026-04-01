@@ -42,7 +42,7 @@ returns:
 provider_compat: [openai, anthropic, gemini]
 strict: false
 domain: content-monetization
-quality: null
+quality: 8.9
 tags: [function_def, monetization, billing, checkout, courses, credits, N06]
 tldr: "LLM-callable tool for the full 9-step content monetization pipeline — from pricing resolution to course generation to deployment."
 examples:

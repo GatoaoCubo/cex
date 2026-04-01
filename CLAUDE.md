@@ -47,17 +47,28 @@ Check `CEX_NUCLEUS`. N07 = Orchestrator. N03 = Builder. Not set = read and decid
 
 | Tool | Purpose |
 |------|---------|
+| `cex_run.py` | **Unified entry**: intent → discover → plan → compose prompt |
+| `cex_8f_motor.py` | Intent parser + classifier + fan-out + plan (1385L) |
 | `cex_8f_runner.py` | Full 8F pipeline (--execute, --nucleus, --kind) |
+| `cex_crew_runner.py` | Prompt composer: ISOs + memory + context → LLM prompt (839L) |
+| `cex_query.py` | TF-IDF builder discovery (361L) |
 | `cex_auto.py` | Self-healing flywheel (scan, plan, cycle) |
 | `cex_mission.py` | Goal → decomposed artifacts |
 | `cex_batch.py` | Multi-intent processing from file |
 | `cex_compile.py` | .md → .yaml compilation (--all) |
-| `cex_doctor.py` | Builder health check (98 PASS) |
+| `cex_doctor.py` | Builder health check (105 PASS) |
 | `cex_hooks.py` | Pre/post validation + git hook |
 | `cex_score.py` | Peer review scoring (--apply) |
-| `cex_feedback.py` | Quality tracking + archive |
+| `cex_feedback.py` | Quality tracking + archive + metrics |
+| `cex_quality_monitor.py` | Quality snapshots + regression detection |
+| `cex_prompt_optimizer.py` | Builder ISO analysis + improvement suggestions |
+| `cex_retriever.py` | TF-IDF artifact similarity (2184 docs, 12K vocab) |
+| `cex_token_budget.py` | Token counting + budget allocation |
+| `cex_memory_select.py` | Relevant memory injection (keyword + LLM) |
+| `cex_memory_update.py` | Memory decay + append + prune |
+| `cex_schema_hydrate.py` | Hydrate ISOs with universal patterns |
 | `cex_materialize.py` | Builder ISOs → sub-agents |
-| `cex_system_test.py` | Full system validation (52 tests) |
+| `cex_system_test.py` | Full system validation (54 tests) |
 | `signal_writer.py` | Inter-nucleus signals |
 
 ## Quick Dispatch
