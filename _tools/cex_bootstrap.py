@@ -1,211 +1,353 @@
-#!/usr/bin/env python3
-"""CEX Bootstrap: Sin-driven self-improvement for nuclei.
+"""cex_bootstrap.py — First-run brand setup for CEX instances.
+
+When a user first clones/installs CEX, this script:
+1. Detects if .cex/brand/brand_config.yaml has real values (not template)
+2. If not → launches interactive Brand Discovery (N06)
+3. Validates the filled config
+4. Propagates brand to all nuclei
+5. Generates branded CLAUDE.md header
+6. Audits brand consistency
+
+The X in CEX is YOUR brand. This script fills it.
 
 Usage:
-    python _tools/cex_bootstrap.py --nucleus N01 --level 2
-    python _tools/cex_bootstrap.py --all --level 2 --dry-run
-    python _tools/cex_bootstrap.py --nucleus N03 --level 3 --target 9.0
+    python _tools/cex_bootstrap.py                  # interactive first-run
+    python _tools/cex_bootstrap.py --check           # just check if bootstrapped
+    python _tools/cex_bootstrap.py --from-file input.yaml  # non-interactive
+    python _tools/cex_bootstrap.py --reset           # clear brand (re-bootstrap)
 """
-import argparse
-import subprocess
 import sys
+import os
+import re
+import shutil
 from pathlib import Path
+from datetime import datetime
 
-CEX_ROOT = Path(__file__).resolve().parent.parent
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
 
-# Level 2 expansion: domain-specific kinds per nucleus
-# Names are GENERIC — user fills {{AGENT_NAME}} via seeds
-EXPANSION_MAP = {
-    "N01": {
-        "name": "{{AGENT_NAME}}", "domain": "Research", "drive": "{{DRIVE}}",
-        "kinds": ["rag_source", "embedding_config", "few_shot_example", "scoring_rubric",
-                  "prompt_template", "research_brief"],
-    },
-    "N02": {
-        "name": "{{AGENT_NAME}}", "domain": "Marketing", "drive": "{{DRIVE}}",
-        "kinds": ["prompt_template", "persona_prompt", "action_prompt", "few_shot_example",
-                  "response_format", "scoring_rubric"],
-    },
-    "N03": {
-        "name": "{{AGENT_NAME}}", "domain": "Engineering", "drive": "{{DRIVE}}",
-        "kinds": ["pattern", "scoring_rubric", "interface", "skill",
-                  "boot_config", "response_format", "learning_record"],
-    },
-    "N04": {
-        "name": "{{AGENT_NAME}}", "domain": "Knowledge", "drive": "{{DRIVE}}",
-        "kinds": ["chunk_strategy", "retriever_config", "embedding_config",
-                  "rag_source", "learning_record", "scoring_rubric"],
-    },
-    "N05": {
-        "name": "{{AGENT_NAME}}", "domain": "Operations", "drive": "{{DRIVE}}",
-        "kinds": ["spawn_config", "signal", "checkpoint", "deploy_config",
-                  "env_config", "health_check", "retry_policy"],
-    },
-    "N06": {
-        "name": "{{AGENT_NAME}}", "domain": "Commercial", "drive": "{{DRIVE}}",
-        "kinds": ["few_shot_example", "scoring_rubric", "schedule",
-                  "prompt_template", "learning_record", "response_format"],
-    },
-    "N07": {
-        "name": "{{AGENT_NAME}}", "domain": "Admin", "drive": "{{DRIVE}}",
-        "kinds": ["dag", "handoff", "signal", "spawn_config",
-                  "retry_policy", "health_check"],
-    },
-}
+try:
+    import yaml
+except ImportError:
+    import subprocess
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "pyyaml", "-q"])
+    import yaml
 
-# Build order (PRIDE first, then infra, then output)
-BUILD_ORDER = ["N03", "N04", "N01", "N05", "N07", "N02", "N06"]
+ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "_tools"))
+
+BRAND_DIR = ROOT / ".cex" / "brand"
+BRAND_CONFIG = BRAND_DIR / "brand_config.yaml"
+BRAND_TEMPLATE = BRAND_DIR / "brand_config_template.yaml"
+BRAND_LOCK = BRAND_DIR / ".bootstrapped"
+CLAUDE_MD = ROOT / "CLAUDE.md"
 
 
-def run_nucleus_builder(nucleus, name, domain, kinds, dry_run=False):
-    """Call cex_nucleus_builder.py for a nucleus."""
-    cmd = [
-        sys.executable,
-        str(CEX_ROOT / "_tools" / "cex_nucleus_builder.py"),
-        "--nucleus", nucleus,
-        "--name", name,
-        "--domain", domain,
-        "--kinds",
-        *kinds,
-    ]
-
-    if dry_run:
-        cmd.append("--dry-run")
-
-    print(f"\n{'='*60}")
-    print(f"  {nucleus} ({name}) -- {EXPANSION_MAP[nucleus]['drive']}")
-    print(f"  Kinds: {len(kinds)} -- {', '.join(kinds)}")
-    print(f"  Mode: {'DRY-RUN' if dry_run else 'EXECUTE'}")
-    print(f"{'='*60}")
-
-    result = subprocess.run(cmd, cwd=str(CEX_ROOT), capture_output=False)
-    return result.returncode == 0
+def is_bootstrapped() -> bool:
+    """Check if CEX instance has been bootstrapped with a real brand."""
+    if not BRAND_CONFIG.exists():
+        return False
+    if BRAND_LOCK.exists():
+        return True
+    # Check if config has real values (not template placeholders)
+    try:
+        with open(BRAND_CONFIG, "r", encoding="utf-8") as f:
+            config = yaml.safe_load(f) or {}
+        name = config.get("identity", {}).get("BRAND_NAME", "")
+        return bool(name) and not str(name).startswith("{{")
+    except Exception:
+        return False
 
 
-def level2_expand(nuclei, dry_run=False):
-    """Level 2: Add domain-specific kinds to each nucleus."""
-    results = {}
-    for nuc in nuclei:
-        info = EXPANSION_MAP[nuc]
-        success = run_nucleus_builder(
-            nuc, info["name"], info["domain"], info["kinds"], dry_run
+def count_placeholders(config: dict) -> int:
+    """Count remaining {{...}} placeholders in config."""
+    text = yaml.dump(config, default_flow_style=False)
+    return len(re.findall(r"\{\{[A-Z_]+\}\}", text))
+
+
+def count_filled(config: dict) -> int:
+    """Count non-placeholder, non-empty values."""
+    text = yaml.dump(config, default_flow_style=False)
+    total_values = len(re.findall(r": .+", text))
+    placeholders = len(re.findall(r"\{\{[A-Z_]+\}\}", text))
+    return total_values - placeholders
+
+
+def inject_brand_header(config: dict) -> None:
+    """Inject brand identity into CLAUDE.md header."""
+    if not CLAUDE_MD.exists():
+        return
+
+    content = CLAUDE_MD.read_text(encoding="utf-8")
+    name = config.get("identity", {}).get("BRAND_NAME", "CEX")
+    tagline = config.get("identity", {}).get("BRAND_TAGLINE", "")
+    archetype = config.get("archetype", {}).get("BRAND_ARCHETYPE", "")
+
+    # Build brand header block
+    brand_block = f"""## Brand Identity (bootstrapped)
+
+| Key | Value |
+|-----|-------|
+| **Brand** | {name} |
+| **Tagline** | {tagline} |
+| **Archetype** | {archetype} |
+| **Config** | `.cex/brand/brand_config.yaml` |
+| **Bootstrapped** | {datetime.now().strftime('%Y-%m-%d')} |
+
+> All nuclei auto-inject brand context from `brand_config.yaml` into every prompt.
+> To re-bootstrap: `python _tools/cex_bootstrap.py --reset`
+"""
+
+    # Insert after first heading, before "## Who Am I?"
+    marker = "## Who Am I?"
+    if marker in content:
+        # Remove existing brand block if present
+        content = re.sub(
+            r"## Brand Identity \(bootstrapped\).*?(?=## Who Am I\?)",
+            "",
+            content,
+            flags=re.DOTALL,
         )
-        results[nuc] = success
+        content = content.replace(marker, brand_block + "\n" + marker)
+    else:
+        # Fallback: insert after first line
+        lines = content.split("\n", 2)
+        if len(lines) >= 3:
+            content = lines[0] + "\n" + lines[1] + "\n\n" + brand_block + "\n" + lines[2]
 
-    print(f"\n{'='*60}")
-    print("  LEVEL 2 EXPANSION SUMMARY")
-    print(f"{'='*60}")
-    for nuc, ok in results.items():
-        info = EXPANSION_MAP[nuc]
-        status = "DONE" if ok else "PARTIAL"
-        print(f"  {nuc} {info['name']:8s} {info['drive']:10s} {len(info['kinds']):2d} kinds  {status}")
-    total = sum(len(EXPANSION_MAP[n]["kinds"]) for n in nuclei)
-    print(f"\n  Total: {total} artifacts attempted")
+    CLAUDE_MD.write_text(content, encoding="utf-8")
 
 
-def _scan_below_target(nuclei, target):
-    """Find artifacts scoring below target in given nuclei."""
-    sys.path.insert(0, str(CEX_ROOT / "_tools"))
-    from cex_score import score_artifact
+def update_boot_titles(config: dict) -> None:
+    """Update boot/*.cmd window titles with brand name."""
+    name = config.get("identity", {}).get("BRAND_NAME", "")
+    if not name or name.startswith("{{"):
+        return
 
-    NUC_DIRS = {
-        "N01": "N01_intelligence", "N02": "N02_marketing", "N03": "N03_engineering",
-        "N04": "N04_knowledge", "N05": "N05_operations", "N06": "N06_commercial",
-        "N07": "N07_admin",
-    }
-    below = []
-    for nuc in nuclei:
-        nuc_dir = CEX_ROOT / NUC_DIRS.get(nuc, "")
-        if not nuc_dir.exists():
+    boot_dir = ROOT / "boot"
+    for cmd_file in boot_dir.glob("*.cmd"):
+        try:
+            content = cmd_file.read_text(encoding="utf-8")
+            # Replace title lines
+            content = re.sub(
+                r"^title CEX-",
+                f"title {name}-CEX-",
+                content,
+                flags=re.MULTILINE,
+            )
+            cmd_file.write_text(content, encoding="utf-8")
+        except Exception:
             continue
-        for md in sorted(nuc_dir.rglob("*.md")):
-            if "compiled" in str(md) or md.name == "README.md" or "_schema" in md.name:
-                continue
-            score, _ = score_artifact(str(md))
-            if 0 < score < target:
-                below.append({"path": str(md), "score": score, "nucleus": nuc})
-    return below
 
 
-def level3_quality_spiral(nuclei, target=8.0, dry_run=False):
-    """Level 3: PRIDE loop -- score all artifacts, rebuild below target, repeat."""
-    max_iterations = 3
-    print(f"\n  LEVEL 3: Quality spiral (target={target}, max_iter={max_iterations})")
+def bootstrap_interactive(config: dict) -> dict:
+    """Interactive brand setup — minimal questions for quick bootstrap."""
+    print("\n" + "=" * 60)
+    print("  CEX BOOTSTRAP — The X is YOUR brand")
+    print("=" * 60)
+    print()
+    print("  CEX is a generic AI brain. This bootstrap makes it YOURS.")
+    print("  Answer a few questions to fill brand_config.yaml.")
+    print("  For full Brand Discovery, run N06 after bootstrap.")
+    print()
 
-    for iteration in range(1, max_iterations + 1):
-        below = _scan_below_target(nuclei, target)
-        if not below:
-            print(f"\n  Iteration {iteration}: All artifacts >= {target}. Spiral complete.")
-            break
+    identity = config.get("identity", {})
+    archetype_sec = config.get("archetype", {})
+    voice = config.get("voice", {})
+    audience = config.get("audience", {})
+    positioning = config.get("positioning", {})
+    monetization = config.get("monetization", {})
 
-        print(f"\n  Iteration {iteration}: {len(below)} artifact(s) below {target}")
-        for item in below:
-            print(f"    {item['score']:.1f}  {item['path']}")
+    def ask(prompt, current="", required=True):
+        default = f" [{current}]" if current and not str(current).startswith("{{") else ""
+        while True:
+            answer = input(f"  {prompt}{default}: ").strip()
+            if not answer and current and not str(current).startswith("{{"):
+                return current
+            if answer:
+                return answer
+            if not required:
+                return current
+            print("    (required — please enter a value)")
 
-        if dry_run:
-            print(f"\n  DRY-RUN: Would rebuild {len(below)} artifact(s)")
-            break
+    # Phase 1: Identity (required)
+    print("--- IDENTITY ---")
+    identity["BRAND_NAME"] = ask("Brand/company name", identity.get("BRAND_NAME", ""))
+    identity["BRAND_TAGLINE"] = ask("Tagline (10-100 chars)", identity.get("BRAND_TAGLINE", ""))
+    identity["BRAND_MISSION"] = ask("Mission (why you exist)", identity.get("BRAND_MISSION", ""))
 
-        rebuilt = 0
-        for item in below:
-            md_path = Path(item["path"])
-            # Read existing artifact to extract kind for 8F rebuild
-            text = md_path.read_text(encoding="utf-8")
-            from cex_shared import parse_frontmatter
-            fm = parse_frontmatter(text)
-            if not fm or "kind" not in fm:
-                print(f"    SKIP (no frontmatter): {md_path.name}")
-                continue
+    values_raw = ask("3-5 core values (comma-separated)", ", ".join(identity.get("BRAND_VALUES", [])))
+    identity["BRAND_VALUES"] = [v.strip() for v in values_raw.split(",") if v.strip()]
 
-            kind = fm["kind"]
-            title = fm.get("title", md_path.stem)
-            intent = f"enrich {kind}: {title}"
-            output_dir = str(md_path.parent)
+    # Phase 2: Archetype (required)
+    print("\n--- ARCHETYPE ---")
+    archetypes = "creator|hero|sage|explorer|rebel|magician|lover|caregiver|jester|ruler|innocent|everyman"
+    print(f"    Options: {archetypes}")
+    archetype_sec["BRAND_ARCHETYPE"] = ask("Primary archetype", archetype_sec.get("BRAND_ARCHETYPE", "")).lower()
 
-            cmd = [
-                sys.executable, str(CEX_ROOT / "_tools" / "cex_8f_runner.py"),
-                intent, "--kind", kind, "--execute",
-                "--output-dir", output_dir,
-            ]
-            print(f"    REBUILD: {md_path.name} (kind={kind}, score={item['score']:.1f})")
-            result = subprocess.run(cmd, cwd=str(CEX_ROOT), capture_output=True, timeout=120)
-            if result.returncode == 0:
-                rebuilt += 1
+    # Phase 3: Voice (required)
+    print("\n--- VOICE ---")
+    voice["BRAND_VOICE_TONE"] = ask("Voice tone (e.g. 'direct, technical, warm')", voice.get("BRAND_VOICE_TONE", ""))
+    try:
+        voice["BRAND_VOICE_FORMALITY"] = int(ask("Formality 1-5 (1=casual 5=formal)", str(voice.get("BRAND_VOICE_FORMALITY", 3))))
+    except ValueError:
+        voice["BRAND_VOICE_FORMALITY"] = 3
+    voice["BRAND_LANGUAGE"] = ask("Language (e.g. pt-BR, en-US)", voice.get("BRAND_LANGUAGE", "pt-BR"), required=False)
 
-        print(f"\n  Iteration {iteration}: Rebuilt {rebuilt}/{len(below)} artifact(s)")
-        if rebuilt == 0:
-            print("  No artifacts rebuilt — stopping spiral.")
-            break
+    # Phase 4: Audience (required)
+    print("\n--- AUDIENCE ---")
+    audience["BRAND_ICP"] = ask("Ideal customer (20+ chars)", audience.get("BRAND_ICP", ""))
+    audience["BRAND_TRANSFORMATION"] = ask("Transformation: From X to Y through Z", audience.get("BRAND_TRANSFORMATION", ""))
 
-    # Final summary
-    remaining = _scan_below_target(nuclei, target) if not dry_run else below
-    print(f"\n  SPIRAL SUMMARY: {len(remaining)} artifact(s) still below {target}")
+    # Phase 5: Positioning (required)
+    print("\n--- POSITIONING ---")
+    positioning["BRAND_CATEGORY"] = ask("Category (what market)", positioning.get("BRAND_CATEGORY", ""))
+    positioning["BRAND_UVP"] = ask("UVP (unique value proposition, 20+ chars)", positioning.get("BRAND_UVP", ""))
+
+    # Phase 6: Monetization (required)
+    print("\n--- MONETIZATION ---")
+    models = "subscription|one-time|credits|freemium|marketplace|hybrid"
+    print(f"    Options: {models}")
+    monetization["BRAND_PRICING_MODEL"] = ask("Pricing model", monetization.get("BRAND_PRICING_MODEL", "subscription"))
+    monetization["BRAND_CURRENCY"] = ask("Currency (BRL, USD, EUR)", monetization.get("BRAND_CURRENCY", "BRL")).upper()
+
+    config["identity"] = identity
+    config["archetype"] = archetype_sec
+    config["voice"] = voice
+    config["audience"] = audience
+    config["positioning"] = positioning
+    config["monetization"] = monetization
+
+    return config
+
+
+def run_bootstrap(config: dict, interactive: bool = True) -> bool:
+    """Execute the full bootstrap pipeline."""
+    from brand_validate import validate
+    from brand_propagate import propagate
+    from brand_audit import audit
+
+    # 1. Fill config
+    if interactive:
+        config = bootstrap_interactive(config)
+
+    # 2. Save config
+    BRAND_DIR.mkdir(parents=True, exist_ok=True)
+    with open(BRAND_CONFIG, "w", encoding="utf-8") as f:
+        f.write("# .cex/brand/brand_config.yaml\n")
+        f.write(f"# Bootstrapped: {datetime.now().isoformat()}\n")
+        f.write(f"# Brand: {config.get('identity', {}).get('BRAND_NAME', 'unknown')}\n\n")
+        yaml.dump(config, f, default_flow_style=False, allow_unicode=True, sort_keys=False)
+
+    # 3. Validate
+    result = validate(config)
+    if not result["valid"]:
+        print(f"\n  WARNING: Validation found {len(result['errors'])} errors:")
+        for e in result["errors"][:5]:
+            print(f"    - {e}")
+        print("  Config saved but may need fixes. Run N06 Brand Discovery for full setup.")
+    else:
+        print(f"\n  OK: Validation passed ({result['required_fields_filled']}/13 required fields)")
+
+    # 4. Propagate
+    prop_results = propagate(config, dry_run=False)
+    propagated = [n for n, r in prop_results.items() if r["status"] == "propagated"]
+    print(f"  OK: Brand propagated to {len(propagated)} nuclei: {', '.join(propagated)}")
+
+    # 5. Inject into CLAUDE.md
+    inject_brand_header(config)
+    print("  OK: CLAUDE.md updated with brand identity")
+
+    # 6. Update boot titles
+    update_boot_titles(config)
+    print("  OK: Boot scripts updated with brand name")
+
+    # 7. Audit
+    audit_result = audit(config)
+    print(f"  OK: Brand audit score: {audit_result['overall_score']:.3f} ({audit_result['rating']})")
+
+    # 8. Write lock file
+    BRAND_LOCK.write_text(
+        f"bootstrapped: {datetime.now().isoformat()}\n"
+        f"brand: {config.get('identity', {}).get('BRAND_NAME', '')}\n"
+        f"audit_score: {audit_result['overall_score']}\n",
+        encoding="utf-8",
+    )
+
+    brand_name = config.get("identity", {}).get("BRAND_NAME", "CEX")
+    print(f"\n  BOOTSTRAP COMPLETE")
+    print(f"  CEX is now the brain of: {brand_name}")
+    print(f"  For full Brand Discovery: boot/n06.cmd")
+    print(f"  To re-bootstrap: python _tools/cex_bootstrap.py --reset")
+    return True
 
 
 def main():
-    parser = argparse.ArgumentParser(description="CEX Bootstrap: sin-driven self-improvement")
-    parser.add_argument("--nucleus", help="Target nucleus (e.g., N01)")
-    parser.add_argument("--all", action="store_true", help="Bootstrap all nuclei")
-    parser.add_argument("--level", type=int, default=2, choices=[2, 3], help="Hydration level")
-    parser.add_argument("--target", type=float, default=8.0, help="Quality target for level 3")
-    parser.add_argument("--dry-run", action="store_true", help="Preview without LLM")
+    import argparse
+    parser = argparse.ArgumentParser(description="CEX Bootstrap — fill the X with YOUR brand")
+    parser.add_argument("--check", action="store_true", help="Check if bootstrapped")
+    parser.add_argument("--from-file", help="Non-interactive: load brand values from YAML file")
+    parser.add_argument("--reset", action="store_true", help="Clear brand and re-bootstrap")
+    parser.add_argument("--status", action="store_true", help="Show current brand status")
     args = parser.parse_args()
 
-    if not args.nucleus and not args.all:
-        parser.error("Specify --nucleus N{XX} or --all")
-
-    nuclei = BUILD_ORDER if args.all else [args.nucleus.upper()]
-
-    # Validate
-    for n in nuclei:
-        if n not in EXPANSION_MAP:
-            print(f"  ERROR: Unknown nucleus {n}")
+    if args.check:
+        if is_bootstrapped():
+            with open(BRAND_CONFIG, "r", encoding="utf-8") as f:
+                c = yaml.safe_load(f) or {}
+            name = c.get("identity", {}).get("BRAND_NAME", "unknown")
+            print(f"BOOTSTRAPPED: {name}")
+            sys.exit(0)
+        else:
+            print("NOT BOOTSTRAPPED: run python _tools/cex_bootstrap.py")
             sys.exit(1)
 
-    if args.level == 2:
-        level2_expand(nuclei, args.dry_run)
-    elif args.level == 3:
-        level3_quality_spiral(nuclei, args.target, args.dry_run)
+    if args.status:
+        if not BRAND_CONFIG.exists():
+            print("Status: NOT BOOTSTRAPPED")
+            print("  Run: python _tools/cex_bootstrap.py")
+            sys.exit(0)
+        with open(BRAND_CONFIG, "r", encoding="utf-8") as f:
+            config = yaml.safe_load(f) or {}
+        filled = count_filled(config)
+        placeholders = count_placeholders(config)
+        name = config.get("identity", {}).get("BRAND_NAME", "unknown")
+        print(f"Status: {'BOOTSTRAPPED' if is_bootstrapped() else 'PARTIAL'}")
+        print(f"  Brand: {name}")
+        print(f"  Filled values: {filled}")
+        print(f"  Placeholders remaining: {placeholders}")
+        if BRAND_LOCK.exists():
+            print(f"  Lock: {BRAND_LOCK.read_text(encoding='utf-8').strip()}")
+        sys.exit(0)
+
+    if args.reset:
+        if BRAND_LOCK.exists():
+            BRAND_LOCK.unlink()
+        if BRAND_CONFIG.exists():
+            backup = BRAND_CONFIG.with_suffix(".yaml.bak")
+            shutil.copy2(BRAND_CONFIG, backup)
+            print(f"  Backup saved: {backup}")
+        # Copy template back
+        if BRAND_TEMPLATE.exists():
+            shutil.copy2(BRAND_TEMPLATE, BRAND_CONFIG)
+        print("  Brand reset. Run bootstrap again.")
+        sys.exit(0)
+
+    # Load existing config or template
+    if args.from_file:
+        with open(args.from_file, "r", encoding="utf-8") as f:
+            config = yaml.safe_load(f) or {}
+        run_bootstrap(config, interactive=False)
+    else:
+        if BRAND_CONFIG.exists():
+            with open(BRAND_CONFIG, "r", encoding="utf-8") as f:
+                config = yaml.safe_load(f) or {}
+        elif BRAND_TEMPLATE.exists():
+            with open(BRAND_TEMPLATE, "r", encoding="utf-8") as f:
+                config = yaml.safe_load(f) or {}
+        else:
+            config = {}
+        run_bootstrap(config, interactive=True)
 
 
 if __name__ == "__main__":

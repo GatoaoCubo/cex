@@ -2,6 +2,24 @@
 
 > 99 kinds · 99 builders · 12 pillars · 7 nuclei · 8F pipeline · 101 sub-agents
 
+## Brand Identity
+
+> **Not yet bootstrapped.** Run `python _tools/cex_bootstrap.py` to fill the X.
+
+The X in CEX is a variable. Once bootstrapped, this section shows WHO this brain belongs to.
+Every nucleus reads `.cex/brand/brand_config.yaml` and auto-injects brand context into prompts.
+Bootstrap fills 13 required fields → propagates to 6 nuclei → audits consistency → done.
+
+| Key | Value |
+|-----|-------|
+| **Brand** | `{{BRAND_NAME}}` |
+| **Config** | `.cex/brand/brand_config.yaml` |
+| **Bootstrap** | `python _tools/cex_bootstrap.py` |
+| **Full Discovery** | `boot/n06.cmd` (15 questions + 32-block brand book) |
+| **Validate** | `python _tools/brand_validate.py` |
+| **Propagate** | `python _tools/brand_propagate.py` |
+| **Audit** | `python _tools/brand_audit.py` |
+
 ## Who Am I?
 
 Check `CEX_NUCLEUS`. N07 = Orchestrator. N03 = Builder. Not set = read and decide.
@@ -70,6 +88,11 @@ Check `CEX_NUCLEUS`. N07 = Orchestrator. N03 = Builder. Not set = read and decid
 | `cex_materialize.py` | Builder ISOs → sub-agents |
 | `cex_system_test.py` | Full system validation (54 tests) |
 | `signal_writer.py` | Inter-nucleus signals |
+| `cex_bootstrap.py` | **First-run**: brand setup → propagate → audit |
+| `brand_inject.py` | Replace `{{BRAND_*}}` in templates |
+| `brand_validate.py` | Validate brand_config.yaml (13 req fields) |
+| `brand_propagate.py` | Push brand context to all nuclei |
+| `brand_audit.py` | Score brand consistency (6 dimensions) |
 
 ## Quick Dispatch
 
@@ -89,7 +112,7 @@ bash _spawn/dispatch.sh stop              # kill all
 | Marketing/copy | N02 | claude | sonnet |
 | Knowledge/docs | N04 | gemini | 2.5-pro |
 | Code/test/deploy | N05 | codex | GPT |
-| Sales/pricing | N06 | claude | sonnet |
+| Brand/monetization | N06 | claude | sonnet |
 | Orchestration | N07 | pi | opus |
 
 ## Constraints
