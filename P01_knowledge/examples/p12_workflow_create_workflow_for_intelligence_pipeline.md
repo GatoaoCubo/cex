@@ -6,75 +6,62 @@ version: "1.0.0"
 created: "2026-04-01"
 updated: "2026-04-01"
 author: "workflow-builder"
-title: "Intelligence Pipeline Workflow"
-steps_count: 5
-execution: mixed
-agent_nodes: [shaka, edison, maxwell, tesla]
+title: "Intelligence Pipeline"
+steps_count: 3
+execution: sequential
+agent_nodes: [n01, n04, n07]
 timeout: 7200
 retry_policy: per_step
 depends_on: []
-signals: [collection_complete, analysis_complete, synthesis_complete, report_complete, pipeline_complete, error]
-spawn_configs: [p12_spawn_shaka_research, p12_spawn_edison_analysis, p12_spawn_maxwell_synthesis, p12_spawn_tesla_reporting]
+signals: [complete, error, intelligence_ready]
+spawn_configs: [p12_spawn_n01_research, p12_spawn_n04_analysis, p12_spawn_n07_consolidate]
 domain: "intelligence"
-quality: 8.7
-tags: [workflow, intelligence, pipeline, research, analysis]
-tldr: "5-step mixed intelligence workflow: parallel data collection, sequential analysis/synthesis, report generation with distribution"
-density_score: 0.88
+quality: 8.8
+tags: [workflow, intelligence, research, analysis, sequential]
+tldr: "3-step sequential intelligence pipeline: research data collection, analysis processing, and consolidated reporting"
+density_score: 0.91
 ---
 ## Purpose
-Orchestrates end-to-end intelligence gathering and processing pipeline. Wave 1 executes parallel data collection from multiple sources. Wave 2 performs sequential analysis, synthesis, and reporting. Designed for repeatable intelligence operations with quality gates at each stage.
+Orchestrates end-to-end intelligence gathering and analysis mission where N01 collects raw intelligence data, N04 processes findings into structured knowledge artifacts, and N07 consolidates results into actionable intelligence brief. Each step builds on previous outputs in strict sequential order to ensure data quality and analytical rigor.
 
 ## Steps
 
-### Step 1: OSINT Collection [shaka]
-- **Agent**: shaka (research specialist)
-- **Action**: Gather open-source intelligence from web sources, databases, and public repositories
-- **Input**: collection targets and keywords from mission brief
-- **Output**: raw intelligence artifacts in records/intelligence/raw/
-- **Signal**: osint_collection_complete
-- **Depends on**: none
+### Step 1: Intelligence Collection [n01]
+- **Agent**: n01 (gemini-2.5-pro)
+- **Action**: Gather intelligence data from multiple sources and produce research artifacts
+- **Input**: intelligence targets and collection requirements from handoff file
+- **Output**: research artifacts committed to N01_intelligence/ with source citations
+- **Signal**: n01_research_complete with data quality score
+- **Depends on**: none (initial step)
 
-### Step 2: HUMINT Collection [edison]
-- **Agent**: edison (analysis specialist)
-- **Action**: Collect human intelligence through surveys, interviews, and social media analysis
-- **Input**: target entities and contact lists from mission brief
-- **Output**: human intelligence reports in records/intelligence/humint/
-- **Signal**: humint_collection_complete
-- **Depends on**: none
+### Step 2: Analysis Processing [n04]
+- **Agent**: n04 (gemini-2.5-pro)
+- **Action**: Process raw intelligence into structured knowledge cards and analytical products
+- **Input**: research artifacts from Step 1, analysis framework requirements
+- **Output**: knowledge cards and analysis reports committed to N04_knowledge/
+- **Signal**: n04_analysis_complete with analytical confidence score
+- **Depends on**: Step 1
 
-### Step 3: Technical Analysis [maxwell]
-- **Agent**: maxwell (synthesis specialist)
-- **Action**: Analyze collected intelligence for patterns, threats, and opportunities
-- **Input**: raw intelligence from Steps 1-2
-- **Output**: analysis reports with confidence scores in records/intelligence/analysis/
-- **Signal**: technical_analysis_complete
-- **Depends on**: Step 1, Step 2
-
-### Step 4: Intelligence Synthesis [tesla]
-- **Agent**: tesla (reporting specialist)
-- **Action**: Synthesize analysis into actionable intelligence briefings
-- **Input**: analysis reports from Step 3
-- **Output**: executive briefings and recommendation documents
-- **Signal**: intelligence_synthesis_complete
-- **Depends on**: Step 3
-
-### Step 5: Distribution [shaka]
-- **Agent**: shaka (research specialist)
-- **Action**: Package and distribute intelligence products to stakeholders
-- **Input**: synthesized intelligence from Step 4
-- **Output**: distributed reports via secure channels, archive copies
-- **Signal**: pipeline_complete
-- **Depends on**: Step 4
+### Step 3: Intelligence Brief [n07]
+- **Agent**: n07 (opus)
+- **Action**: Consolidate analysis into executive intelligence brief with recommendations
+- **Input**: knowledge cards and analysis from Step 2, briefing requirements
+- **Output**: consolidated intelligence brief with actionable recommendations
+- **Signal**: intelligence_ready with final assessment score
+- **Depends on**: Steps 1, 2
 
 ## Dependencies
-- Mission brief with collection targets, keywords, and stakeholder list must exist
-- Access credentials for OSINT sources and databases required
-- Secure distribution channels configured and tested
-- Intelligence classification guidelines and handling procedures established
+- Intelligence collection targets must be defined in handoff file before workflow start
+- Analysis framework and briefing requirements must be specified
+- spawn_configs for N01, N04, and N07 must exist and be valid
 
 ## Signals
-- **On collection complete**: osint_collection_complete, humint_collection_complete signals from parallel collectors
-- **On analysis complete**: technical_analysis_complete signal with quality metrics
-- **On synthesis complete**: intelligence_synthesis_complete signal with briefing confidence scores
-- **On pipeline complete**: pipeline_complete signal with distribution confirmation
-- **On error**: collection_error, analysis_error, synthesis_error, or distribution_error with retry recommendations
+- **On step complete**: {nucleus}_complete signal emitted with quality scores (see signal-builder)
+- **On workflow complete**: intelligence_ready signal with consolidated assessment
+- **On error**: {nucleus}_error signal, retry per step (max 1), then escalate to orchestrator
+
+## References
+- signal-builder for completion signal specifications
+- spawn-config-builder for nucleus launch configurations
+- N01 intelligence nucleus for research capabilities
+- N04 knowledge nucleus for analysis processing
