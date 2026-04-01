@@ -7,28 +7,28 @@ created: 2026-04-01
 updated: 2026-04-01
 author: dispatch-rule-builder
 domain: orchestration
-quality: 8.5
-tags: [dispatch, orchestration, maestro, routing, coordination]
-tldr: Route orchestration, coordination, and multi-agent management tasks to maestro orchestrator
+quality: 8.6
+tags: [dispatch, orchestration, routing, coordination, N07, pipeline]
+tldr: Route orchestration, coordination, and multi-agent workflow tasks to N07 orchestrator nucleus
 scope: orchestration
-keywords: [orquestrar, orchestrate, coordenar, coordinate, dirigir, direct, despachar, dispatch, gerenciar, manage, conductor, maestro]
-agent_node: maestro
+keywords: [orchestrate, orchestration, coordinate, coordination, dispatch, despacho, manage, gerenciar, pipeline, workflow, route, rotear, grid, mission, missao, plan, planejar, sequence, sequenciar]
+agent_node: n07
 model: opus
-priority: 9
+priority: 10
 confidence_threshold: 0.75
-fallback: atlas
+fallback: human
 conditions:
-  exclude_domains: [build, research, marketing]
+  exclude_domains: [single_agent_build, knowledge_retrieval, marketing_copy]
 routing_strategy: hybrid
 density_score: 0.81
 ---
 # orchestration Dispatch Rule
 
 ## Purpose
-Routes high-level coordination, multi-agent orchestration, and task delegation workflows to the maestro orchestrator. The maestro specializes in decomposing complex goals into agent-specific tasks, managing handoffs between nuclei, and ensuring proper workflow sequencing across the CEX system.
+Routes high-level orchestration, coordination, and multi-agent workflow management tasks to the N07 orchestrator nucleus. N07 specializes in decomposing complex goals into task sequences, coordinating multiple nuclei, and managing cross-domain dependencies. This rule captures requests for workflow planning, mission execution, grid coordination, and system-level task routing.
 
 ## Keyword Rationale
-Bilingual PT/EN coverage captures both Portuguese operator commands ("orquestrar", "coordenar", "dirigir") and English task descriptions ("orchestrate", "coordinate", "manage"). Terms like "conductor" and "maestro" match leadership metaphors commonly used in orchestration contexts. "Despachar" covers the critical dispatch function while "gerenciar" handles broader management requests.
+Bilingual PT/EN coverage ensures both Portuguese operators and English documentation trigger correctly. Core orchestration terms like "orchestrate", "coordinate", "dispatch" capture direct requests. Workflow terms like "pipeline", "mission", "grid" catch CEX-specific orchestration patterns. Management verbs like "manage", "plan", "sequence" identify coordination intent. All keywords focus on multi-agent coordination rather than single-agent execution.
 
 ## Fallback Logic
-Atlas serves as fallback for general routing and coordination when maestro is unavailable. While atlas lacks maestro's specialized multi-agent orchestration capabilities, it can handle basic task routing and delegation, ensuring system continuity during orchestrator downtime.
+Falls back to human operator when N07 orchestrator is unavailable or overloaded. Orchestration decisions often require business context and priority judgment that only humans can provide. Alternative automated fallback to a general-purpose agent would risk inappropriate task decomposition or misrouted subtasks, making human intervention the safer degradation path for critical coordination workflows.
