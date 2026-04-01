@@ -1,0 +1,75 @@
+---
+id: p07_sr_brand_evaluation
+kind: scoring_rubric
+pillar: P07
+title: "Rubric: Brand Evaluation Framework"
+version: "1.0.0"
+created: "2026-04-01"
+updated: "2026-04-01"
+author: "scoring-rubric-builder"
+framework: "Brand5D"
+target_kinds: [brand_config, brand_card, brand_guidelines, brand_identity, brand_voice]
+dimensions_count: 5
+total_weight: 100
+threshold_golden: 9.5
+threshold_publish: 8.0
+threshold_review: 7.0
+automation_status: "semi-automated"
+domain: "brand"
+quality: 8.9
+tags: [scoring-rubric, brand, evaluation, identity, consistency]
+tldr: "5-dimension brand rubric: consistency 30%, authenticity 25%, differentiation 20%, clarity 15%, completeness 10%"
+density_score: 0.87
+calibration_set: [p07_gt_brand_tech_startup, p07_gt_brand_ecommerce]
+inter_rater_agreement: 0.82
+appeals_process: "Submit to N06 commercial nucleus with brand rationale for re-evaluation"
+linked_artifacts:
+  primary: "brand-config-builder"
+  related: [p11_qg_brand_config, p06_brand_identity_schema]
+---
+## Framework Overview
+
+Brand5D evaluates brand artifacts across 5 orthogonal dimensions measuring how well a brand identity translates into consistent, authentic, and differentiated market presence. Designed for brand_config, brand_card, brand_guidelines, brand_identity, and brand_voice artifacts within the CEX ecosystem. Each dimension captures a distinct aspect of brand effectiveness from internal coherence to external market positioning.
+
+## Dimensions
+
+| Dimension | Weight | Scale | Criteria | Example (10) | Example (5) |
+|-----------|--------|-------|----------|-------------|-------------|
+| Consistency | 30% | 0-10 | Brand elements align across all touchpoints, no contradictions | All colors, fonts, tone match exactly; zero conflicts | Some alignment issues; 2-3 minor inconsistencies |
+| Authenticity | 25% | 0-10 | Brand voice matches company values and founder personality | Voice perfectly reflects actual company culture and values | Generic voice that could apply to any company |
+| Differentiation | 20% | 0-10 | Brand clearly distinguishes from competitors in specific market | Unique positioning with 3+ distinct competitive advantages | Some differentiation but overlaps with 2+ competitors |
+| Clarity | 15% | 0-10 | Brand message is instantly understandable to target audience | Target audience immediately grasps value proposition | Message requires explanation or multiple readings |
+| Completeness | 10% | 0-10 | All brand elements defined: colors, fonts, voice, values, positioning | 15+ brand elements fully specified with examples | 8-10 elements defined; some gaps in specification |
+
+## Thresholds
+
+| Tier | Score | Action |
+|------|-------|--------|
+| GOLDEN | >= 9.5 | Promote to brand calibration library, reference for N06 nucleus |
+| PUBLISH | >= 8.0 | Deploy to brand_config.yaml, propagate to all nuclei |
+| REVIEW | >= 7.0 | Return with specific dimension feedback for improvement |
+| REJECT | < 7.0 | Restart brand discovery process with fresh research |
+
+## Calibration
+
+- **GOLDEN (9.7)**: p07_gt_brand_tech_startup — consistency 10.0, authenticity 9.5, differentiation 9.8, clarity 9.2, completeness 10.0. Perfect voice alignment with founder personality, unique technical positioning.
+- **PUBLISH (8.4)**: Standard enterprise brand with strong consistency (9.0), good authenticity (8.5), moderate differentiation (8.0), clear messaging (8.0), complete elements (8.5).
+- **REVIEW (7.3)**: Functional brand with consistency gaps (7.5), adequate authenticity (7.0), weak differentiation (6.5), unclear messaging (7.0), incomplete elements (8.5).
+- **REJECT (4.2)**: Inconsistent brand with major conflicts (4.0), generic voice (3.5), no differentiation (3.0), confusing message (5.0), missing core elements (5.5).
+
+## Automation
+
+| Dimension | Status | Tool |
+|-----------|--------|------|
+| Consistency | semi-automated | brand_validate.py (cross-reference checking) |
+| Authenticity | manual | Human review against company culture documentation |
+| Differentiation | semi-automated | Competitor analysis + manual positioning review |
+| Clarity | manual | Target audience comprehension testing |
+| Completeness | automated | brand_audit.py (element counting and coverage) |
+
+## References
+
+- Brand Strategy Canvas (Brand Strategist's Guide 2024)
+- Aaker's Brand Identity Model (Strategic Brand Management)
+- brand_validate.py v1.2 (CEX Brand5D implementation)
+- Competitive Positioning Framework (Harvard Business Review)
