@@ -210,33 +210,34 @@ function Invoke-Bootstrap {
             Write-Log "  Building: ${nKey}/${kind} -- $intent"
 
             if ($DryRun) {
-                Write-Log "  [DRY-RUN] Would run: cex_run.py '$intent' --kind $kind" "DRY"
+                Write-Log "  [DRY-RUN] Would run: cex_run.py '$intent' --execute" "DRY"
                 continue
             }
 
-            # Create subdirectory
-            $subPath = Join-Path $nDir $artifact.subdir
-            if (!(Test-Path $subPath)) {
-                New-Item -ItemType Directory -Path $subPath -Force | Out-Null
-            }
-
             try {
-                $result = & $PYTHON "$CEX_ROOT\_tools\cex_run.py" $intent `
-                    --kind $kind --execute 2>&1 | Out-String
+                $result = & $PYTHON "$CEX_ROOT\_tools\cex_run.py" $intent --execute 2>&1 | Out-String
 
-                # Estimate tokens from output length
-                $estTokens = [math]::Max(1000, [int]($result.Length / 4))
-                Add-Tokens $estTokens
+                # cex_run.py saves to its own path and reports it
+                $savedRx = 'Saved:\s*(\S+\.md)'
+                $artifactRx = 'Artifact created:\s*(\S+\.md)'
+                $savedFile = ""
+                if ($result -match $savedRx) { $savedFile = $Matches[1] }
+                elseif ($result -match $artifactRx) { $savedFile = $Matches[1] }
 
-                $qRx = 'quality[=:]\s*([\d\.]+)'
-                if ($result -match $qRx) {
-                    $quality = [float]$Matches[1]
-                    Write-Log "  OK Created ${nKey}/${kind} (q=$quality)" "OK"
+                if ($result -match 'Quality gate.*PASS') {
+                    $estTokens = [math]::Max(2000, [int]($result.Length / 4))
+                    Add-Tokens $estTokens
+                    Write-Log "  OK Created ${nKey}/${kind} -> $savedFile" "OK"
+                    $State.artifacts_created++
+                } elseif ($savedFile) {
+                    Add-Tokens 2000
+                    Write-Log "  WARN Created ${nKey}/${kind} -> $savedFile (gate unknown)" "WARN"
+                    $State.artifacts_created++
                 } else {
-                    Write-Log "  OK Created ${nKey}/${kind} (quality unknown)" "OK"
+                    Write-Log "  FAIL ${nKey}/${kind} -- no artifact saved" "ERROR"
+                    Write-Log "  OUTPUT: $($result.Substring(0, [math]::Min(300, $result.Length)))" "DEBUG"
                 }
 
-                $State.artifacts_created++
                 $State.bootstrap_done += $doneKey
 
             } catch {
@@ -284,8 +285,9 @@ function Invoke-Bootstrap {
             }
 
             try {
-                & $PYTHON "$CEX_ROOT\_tools\cex_run.py" $intent --kind $kind --execute 2>&1 | Out-Null
-                Add-Tokens 2000
+                $result = & $PYTHON "$CEX_ROOT\_tools\cex_run.py" $intent --execute 2>&1 | Out-String
+                $estTokens = [math]::Max(2000, [int]($result.Length / 4))
+                Add-Tokens $estTokens
                 $State.artifacts_created++
                 $State.bootstrap_done += $doneKey
                 Write-Log "  [OK] Gap filled: ${nKey}/${kind}" "OK"

@@ -23,6 +23,7 @@ if hasattr(sys.stderr, "reconfigure"):
 
 import argparse
 import json
+import os
 from pathlib import Path
 
 # Import Motor 8F
@@ -254,14 +255,22 @@ def list_kinds():
 def execute_prompt(prompt: str) -> str:
     """Send composed prompt to LLM via available provider.
 
-    Tries (in order):
-      1. Anthropic SDK (claude)
-      2. OpenAI SDK (gpt-4)
-      3. Ollama local
+    Priority: SUBSCRIPTION > LOCAL > API (pay-per-token is LAST resort).
 
+    Tries (in order):
+      1. Claude CLI  — uses Max/Pro subscription, zero extra cost
+      2. Ollama SDK  — local, free
+      3. Ollama HTTP — local fallback, free
+      4. Anthropic API — only if CEX_USE_API=1, pay-per-token
+      5. OpenAI API   — only if CEX_USE_API=1, pay-per-token
+
+    Set CEX_USE_API=1 to allow paid API calls as last resort.
     Returns the LLM response text.
     """
-    # Try claude CLI (subscription auth — no API key needed)
+    errors = {}
+    allow_paid_api = os.environ.get("CEX_USE_API", "0") == "1"
+
+    # --- [1] Claude CLI (subscription — included in Max/Pro plan) ---
     try:
         import subprocess
         result = subprocess.run(
@@ -271,22 +280,32 @@ def execute_prompt(prompt: str) -> str:
         )
         if result.returncode == 0 and result.stdout.strip():
             return result.stdout
-        cli_err = f"claude -p exit {result.returncode}: {result.stderr[:200]}"
+        errors["CLI-Claude"] = f"exit {result.returncode}: {result.stderr[:200]}"
     except FileNotFoundError:
-        cli_err = "claude CLI not in PATH"
+        errors["CLI-Claude"] = "claude CLI not in PATH"
     except Exception as e:
-        cli_err = str(e)
+        errors["CLI-Claude"] = str(e)[:120]
 
-    # Try Ollama
+    # --- [2] Ollama SDK (local, free) ---
+    try:
+        sdk_root = str(Path(__file__).resolve().parent.parent)
+        if sdk_root not in sys.path:
+            sys.path.insert(0, sdk_root)
+        from cex_sdk.models.message import Message as SDKMessage
+        from cex_sdk.models.providers.ollama import Ollama
+        model = Ollama(id="llama3.2")
+        response = model.invoke([SDKMessage(role="user", content=prompt)])
+        if response.content:
+            _log_sdk_metrics(response, "Ollama")
+            return response.content
+    except Exception as e:
+        errors["SDK-Ollama"] = str(e)[:120]
+
+    # --- [3] Ollama HTTP fallback (local, free) ---
     try:
         import urllib.request
-
         data = json.dumps(
-            {
-                "model": "llama3.2",
-                "prompt": prompt,
-                "stream": False,
-            }
+            {"model": "llama3.2", "prompt": prompt, "stream": False}
         ).encode("utf-8")
         req = urllib.request.Request(
             "http://localhost:11434/api/generate",
@@ -297,12 +316,58 @@ def execute_prompt(prompt: str) -> str:
             result = json.loads(resp.read().decode("utf-8"))
             return result.get("response", "")
     except Exception as e:
-        ollama_err = str(e)
+        errors["HTTP-Ollama"] = str(e)[:120]
+
+    # --- [4-5] Paid API providers (ONLY if CEX_USE_API=1) ---
+    if not allow_paid_api:
+        errors["API"] = "Paid APIs disabled (set CEX_USE_API=1 to allow)"
+    else:
+        try:
+            sdk_root = str(Path(__file__).resolve().parent.parent)
+            if sdk_root not in sys.path:
+                sys.path.insert(0, sdk_root)
+            from cex_sdk.models.message import Message as SDKMessage
+
+            # [4] Anthropic API
+            try:
+                from cex_sdk.models.providers.anthropic import Claude
+                model = Claude(id="claude-sonnet-4-20250514", max_tokens=8000)
+                response = model.invoke([SDKMessage(role="user", content=prompt)])
+                if response.content:
+                    _log_sdk_metrics(response, "Anthropic-API")
+                    return response.content
+            except Exception as e:
+                errors["API-Anthropic"] = str(e)[:120]
+
+            # [5] OpenAI API
+            try:
+                from cex_sdk.models.providers.openai import GPT
+                model = GPT(id="gpt-4o", max_tokens=8000)
+                response = model.invoke([SDKMessage(role="user", content=prompt)])
+                if response.content:
+                    _log_sdk_metrics(response, "OpenAI-API")
+                    return response.content
+            except Exception as e:
+                errors["API-OpenAI"] = str(e)[:120]
+        except ImportError:
+            errors["SDK"] = "cex_sdk not available"
 
     print("ERRO: Nenhum LLM provider disponivel.", file=sys.stderr)
-    print(f"  Claude CLI: {cli_err}", file=sys.stderr)
-    print(f"  Ollama: {ollama_err}", file=sys.stderr)
+    for provider, err in errors.items():
+        print(f"  {provider}: {err}", file=sys.stderr)
     sys.exit(1)
+
+
+def _log_sdk_metrics(response, provider: str) -> None:
+    """Log SDK metrics to stderr (non-blocking)."""
+    try:
+        usage = response.response_usage
+        if usage and (usage.input_tokens or usage.output_tokens):
+            tokens = f"in={usage.input_tokens} out={usage.output_tokens}"
+            dur = f" {usage.duration:.1f}s" if usage.duration else ""
+            print(f"  [SDK {provider}] {tokens}{dur}", file=sys.stderr)
+    except Exception:
+        pass
 
 
 # ---------------------------------------------------------------------------
