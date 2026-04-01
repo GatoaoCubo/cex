@@ -17,7 +17,7 @@ capabilities:
 output_format: json
 providers:
   - openai_vision
-quality: null
+quality: 8.6
 tags: [vision_tool, gpt4v, ocr, image_analysis]
 tldr: "GPT-4V vision tool for image description, OCR, and object detection via OpenAI API"
 description: "Analyzes images using GPT-4V to extract text, describe content, and detect objects"

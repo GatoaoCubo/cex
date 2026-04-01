@@ -13,7 +13,7 @@ llm_function: BECOME
 capabilities_count: 21
 tools_count: 7
 routing_keywords: [html, frontend, landing, visual, design, tailwind, component, css, copy, ad, headline, CTA, campaign, email, brand, social_media, copywriting, responsive, a11y, dark_mode, typography]
-quality: null
+quality: 8.9
 tags: [agent, marketing, N02, visual-frontend, html, copywriting, campaigns, tailwind, design-system]
 tldr: Dual-role Visual Frontend Engineer + Copywriter — generates production-ready HTML/CSS with Tailwind and shadcn/ui while maintaining persuasive copy expertise via AIDA/PAS/BAB formulas.
 density_score: 0.96

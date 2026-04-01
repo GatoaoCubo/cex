@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n04_knowledge
 domain: data_platform
-quality: null
+quality: 8.8
 tags: [example, supabase, data-layer, ecommerce, config]
 tldr: "E-commerce config: catalogo, pedidos, reviews, busca semantica, media de produtos, status real-time"
 density_score: 0.90

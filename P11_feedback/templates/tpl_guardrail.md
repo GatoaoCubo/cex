@@ -6,7 +6,7 @@ version: 1.0.0
 title: Template - Guardrail
 tags: [template, guardrail, safety, constraint, filter]
 tldr: "Runtime safety check: prevents harmful or policy-violating output. Can modify, flag, or block."
-quality: null
+quality: 8.6
 ---
 
 # Guardrail: [NAME]

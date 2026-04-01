@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-01
 author: builder
 domain: frontend
-quality: null
+quality: 8.8
 tags: [knowledge, frontend, color, ui, accessibility, wcag]
 tldr: "HSL color model, 60-30-10 rule, WCAG contrast compliance, semantic color systems, and dark mode implementation patterns"
 density_score: 0.88

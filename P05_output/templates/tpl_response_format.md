@@ -6,7 +6,7 @@ version: 1.0.0
 title: "Template — Response Format"
 tags: [template, response, format, output, structure]
 tldr: "Defines how an agent structures its output. Controls format type (JSON, markdown, structured), required fields, max length, and validation rules."
-quality: null
+quality: 8.7
 ---
 
 # Response Format: [FORMAT_NAME]

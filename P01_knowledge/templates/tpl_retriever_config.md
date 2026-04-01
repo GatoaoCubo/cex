@@ -6,7 +6,7 @@ version: 1.0.0
 title: "Template — Retriever Config"
 tags: [template, retriever, rag, search, vector]
 tldr: "Configures how the retrieval engine searches and ranks chunks. Defines search mode, top-k, reranking, filters, and fallback chains for RAG pipelines."
-quality: null
+quality: 8.8
 ---
 
 # Retriever Configuration

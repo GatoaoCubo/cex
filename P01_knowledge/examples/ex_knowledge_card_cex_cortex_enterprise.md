@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: null
+quality: 9.0
 tags: [cex, cortex-enterprise, orchestrator, ceo-cognitivo, emergent-properties, brain]
 tldr: "Cortex Enterprise eh cerebro empresarial modular: CEO cognitivo (roteia, nunca executa) + N agent_nodes verticalizados + propriedades emergentes"
 when_to_use: "Entender a arquitetura de sistema multi-agente com orquestrador central e departamentos autonomos"

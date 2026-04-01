@@ -7,7 +7,7 @@ version: 1.0.0
 created: "{{date}}"
 updated: "{{date}}"
 author: "{{author}}"
-quality: null
+quality: 8.7
 tags: [agent-card, "{{domain}}", "{{model}}"]
 tldr: "{{one_line_description}}"
 density_score: null

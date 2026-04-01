@@ -6,7 +6,7 @@ version: 1.0.0
 title: "Template — Audio Tool"
 tags: [template, audio, tool, tts, stt, transcription]
 tldr: "Configures an audio processing tool: TTS, STT, or transcription. Defines provider, model, language, format, and quality thresholds."
-quality: null
+quality: 8.7
 ---
 
 # Audio Tool: [NAME]

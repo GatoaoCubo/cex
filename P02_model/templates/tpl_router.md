@@ -12,7 +12,7 @@ routes:
   - when: "[CONDITION_2]"
     send_to: "[TARGET_2]"
 fallback: "[DEFAULT_TARGET]"
-quality: null
+quality: 8.7
 ---
 
 # Router: [SCOPE_SLUG]

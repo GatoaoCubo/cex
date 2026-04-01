@@ -6,7 +6,7 @@ version: 1.0.0
 title: "Template — LLM Judge"
 tags: [template, llm, judge, evaluation, rubric]
 tldr: "An LLM-based evaluator that scores outputs against a rubric. Defines the judge prompt, scoring dimensions, calibration method, and bias mitigation."
-quality: null
+quality: 8.7
 ---
 
 # LLM Judge: [JUDGE_NAME]

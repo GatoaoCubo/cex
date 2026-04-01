@@ -6,7 +6,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n03_builder
 domain: course_delivery
-quality: null
+quality: 8.9
 tldr: "Hotmart Club — native member area for course delivery, drip content, progress tracking, and community features."
 tags: [hotmart, club, course, member-area, drip, infoproduct, brazil]
 density_score: 0.88

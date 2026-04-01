@@ -8,7 +8,7 @@ created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
 domain: cex_taxonomy
-quality: null
+quality: 8.9
 tags: [memory, sqlite, chroma, vector-search, persistence, hybrid-search]
 tldr: "SQLite (FTS5) + Chroma (vectors) juntos dao hybrid search com 10x economia de tokens via progressive disclosure em 3 camadas"
 when_to_use: "Projetar memoria persistente para agentes LLM com busca keyword + semantica local"

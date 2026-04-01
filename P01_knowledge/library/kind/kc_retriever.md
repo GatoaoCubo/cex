@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: marketing_agent
 domain: retriever
-quality: null
+quality: 8.9
 tags: [retriever, P04, INJECT, kind-kc, RAG]
 tldr: "Searches a local embedding store, keyword index, or hybrid index and returns ranked Document chunks — the core retrieval step of any RAG pipeline"
 when_to_use: "Building, reviewing, or reasoning about retriever artifacts"

@@ -28,7 +28,7 @@ returns:
 provider_compat: [openai, anthropic, gemini, bedrock]
 strict: false
 domain: web-search
-quality: null
+quality: 8.8
 tags: [function_def, search, web, tool_use]
 tldr: "OpenAI-compatible function def for web search with query, max_results, and search_type params"
 examples:

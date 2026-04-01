@@ -6,7 +6,7 @@ version: 1.0.0
 title: "Template — Schedule"
 tags: [template, schedule, cron, automation, recurring]
 tldr: "Defines recurring automated tasks: when to run, what to execute, retry policy, and monitoring. Supports cron syntax, interval-based, and event-triggered schedules."
-quality: null
+quality: 8.7
 ---
 
 # Schedule: [SCHEDULE_NAME]

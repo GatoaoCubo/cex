@@ -8,7 +8,7 @@ created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
 domain: engineering_process
-quality: null
+quality: 9.0
 tags: [plan-driven, subagent, task-granularity, tdd, execution-plan]
 tldr: "Plans are prompts: 2-5 min tasks with exact paths, verification steps, and TDD — directly executable by sub-agents without human interpretation"
 when_to_use: "Decomposing features into sub-agent-executable tasks or reviewing plan quality before dispatch"

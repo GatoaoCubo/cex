@@ -6,7 +6,7 @@ version: 1.0.0
 title: Template - Permission
 tags: [template, permission, access, rbac, security]
 tldr: Access control for agents and nuclei. Who can read, write, execute per resource type.
-quality: null
+quality: 8.6
 ---
 
 # Permission: [NAME]

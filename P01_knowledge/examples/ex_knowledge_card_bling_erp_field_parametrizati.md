@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: execution
-quality: null
+quality: 8.9
 tags: [bling, erp, field-mapping, product, parametrization]
 tldr: "44 campos Bling V3 em 4 blocos — payload minimo de 4 campos obrigatorios, imagens via URL publica e tributacao com defaults seguros."
 when_to_use: "Mapear campos antes de criar payloads, conectores ou telas de cadastro Bling"

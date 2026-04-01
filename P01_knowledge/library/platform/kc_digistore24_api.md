@@ -6,7 +6,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n03_builder
 domain: payment_platform
-quality: null
+quality: 8.9
 tldr: "Digistore24 REST API — API key auth, product/purchase/affiliate endpoints, Merchant of Record model, EU VAT handling, and sandbox testing."
 tags: [digistore24, api, payment, eu, vat, merchant-of-record, dach]
 density_score: 0.91

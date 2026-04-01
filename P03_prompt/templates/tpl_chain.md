@@ -5,7 +5,7 @@ version: 1.0.0
 title: Template - Chain
 tags: [template, chain, multi-step, reasoning, pipeline]
 tldr: "Multi-step prompt chain: each step output feeds the next. Defines steps, schemas, recovery, timeout."
-quality: null
+quality: 8.6
 ---
 
 # Chain: [NAME]

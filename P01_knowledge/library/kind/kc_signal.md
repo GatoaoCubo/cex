@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: research_agent
 domain: signal
-quality: null
+quality: 9.0
 tags: [signal, P12, COLLABORATE, kind-kc]
 tldr: "Lightweight inter-agent event notification (complete/error/progress) enabling asynchronous coordination without polling"
 when_to_use: "Building, reviewing, or reasoning about signal artifacts"

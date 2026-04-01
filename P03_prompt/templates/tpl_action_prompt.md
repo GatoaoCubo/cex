@@ -5,7 +5,7 @@ version: 1.0.0
 title: Template - Action Prompt
 tags: [template, action, prompt, tool-use, execution]
 tldr: Prompt that triggers tool calls. Defines trigger patterns, action mapping, param extraction, confirmation.
-quality: null
+quality: 8.6
 action: PLACEHOLDER
 input_required: ['PLACEHOLDER', 'PLACEHOLDER', 'PLACEHOLDER']
 output_expected: PLACEHOLDER

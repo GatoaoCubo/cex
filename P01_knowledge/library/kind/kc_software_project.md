@@ -9,7 +9,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: builder_agent
 domain: software_project
-quality: null
+quality: 8.9
 tags: [software_project, P02, BECOME, kind-kc, project, scaffold]
 tldr: "Complete software project definition — architecture, dependencies, build config, deployment spec, and repo structure as a single artifact"
 when_to_use: "Building, reviewing, or reasoning about software_project artifacts"

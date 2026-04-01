@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: llm_engineering
-quality: null
+quality: 8.9
 tags: [claude, server-tools, code-execution, web-search, memory, api]
 tldr: "4 server tools executam na infra Anthropic sem implementacao client-side: code_execution (sandbox Python), web_search, web_fetch, memory (KV persistente)."
 when_to_use: "Integrar ferramentas server-side em workflows API ou decidir entre server tools vs client tools"

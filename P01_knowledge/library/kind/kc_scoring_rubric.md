@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: knowledge_agent
 domain: scoring_rubric
-quality: null
+quality: 9.0
 tags: [scoring_rubric, P07, GOVERN, kind-kc]
 tldr: "Multi-dimensional evaluation framework defining quality criteria with explicit anchors per dimension and score scale."
 when_to_use: "Building, reviewing, or reasoning about scoring_rubric artifacts"

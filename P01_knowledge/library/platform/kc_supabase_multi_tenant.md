@@ -9,7 +9,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n04_knowledge
 domain: data_platform
-quality: null
+quality: 9.0
 tags: [supabase, multi-tenant, rls, org-isolation, schema, platform]
 tldr: "3 estrategias multi-tenant: shared schema + RLS (simples), schema per tenant (isolamento), project per tenant (maximo). RLS com org_id + JWT claims eh o padrao mais comum."
 when_to_use: "Quando projetar isolamento de dados multi-tenant em Supabase"

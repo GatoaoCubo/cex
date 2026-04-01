@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: operations_agent
 domain: system_prompt
-quality: null
+quality: 9.0
 tags: [system_prompt, P03, BECOME, kind-kc]
 tldr: "Identity-defining prompt read first by the LLM, establishing persona, rules, output format, and behavioral boundaries"
 when_to_use: "Building, reviewing, or reasoning about system_prompt artifacts"

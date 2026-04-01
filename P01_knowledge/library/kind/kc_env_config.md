@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: commercial_agent
 domain: env_config
-quality: null
+quality: 9.0
 tags: [env_config, P09, GOVERN, kind-kc]
 tldr: "env_config is the versioned YAML spec of environment variables for a bounded scope — separating required from optional, documenting defaults, and pointing to secret_config rather than inlining credentials."
 when_to_use: "Building, reviewing, or reasoning about env_config artifacts"

@@ -8,7 +8,7 @@ created: 2026-04-01
 updated: 2026-04-01
 author: n05_operations
 domain: railway-backend-operations
-quality: null
+quality: 8.7
 tags: [output, deploy, checklist, railway, fastapi, postgresql]
 tldr: Deploy validation checklist template for Railway FastAPI backend deployments with health monitoring and rollback readiness.
 output_type: checklist

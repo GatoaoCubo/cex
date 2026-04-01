@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: fallback_chain
-quality: null
+quality: 9.0
 tags: [fallback_chain, p02, GOVERN, kind-kc]
 tldr: "Ordered model fallback sequence — when primary LLM fails or times out, cascade to next model with defined timeout per step"
 when_to_use: "Building, reviewing, or reasoning about fallback_chain artifacts"

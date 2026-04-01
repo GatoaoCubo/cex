@@ -19,7 +19,7 @@ resource_limits:
 network_access: false
 file_io: true
 persistent_session: false
-quality: null
+quality: 8.6
 tags: [code_executor, python, e2b, sandbox]
 tldr: "E2B-sandboxed Python executor for untrusted code with 30s timeout and no network access"
 description: "Runs arbitrary Python in an E2B cloud sandbox with resource limits"

@@ -7,7 +7,7 @@ title: "Template — Hook"
 tags: [template, hook, lifecycle, event, trigger]
 tldr: "A hook is a lifecycle callback triggered by system events. Runs at defined points in the 8F pipeline (pre-commit, post-build, on-error) to enforce rules or transform output."
 event: "[pre_commit | post_build | on_error | on_signal]"
-quality: null
+quality: 8.8
 ---
 
 # Hook: [NAME]

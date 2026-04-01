@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: marketing_agent
 domain: document_loader
-quality: null
+quality: 8.9
 tags: [document_loader, P04, INJECT, kind-kc]
 tldr: "Ingests raw files (PDF, HTML, CSV, DOCX) and converts them into chunked Document objects ready for embedding — the entry gate of any RAG pipeline"
 when_to_use: "Building, reviewing, or reasoning about document_loader artifacts"

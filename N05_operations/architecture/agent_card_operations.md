@@ -38,7 +38,7 @@ runtime: claude
 mcp_config_file: .mcp-n05.json
 flags: ["--model", "opus", "--reasoning-effort", "high"]
 domain: railway-backend-operations
-quality: null
+quality: 8.8
 tags: [agent_card, railway, superintendent, fastapi, postgresql, backend-ops]
 tldr: Railway Backend Superintendent deployment spec on Claude Opus with railway/postgresql MCPs for complete FastAPI lifecycle management.
 density_score: 0.95

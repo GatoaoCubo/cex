@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: research_agent
 domain: learning_record
-quality: null
+quality: 9.0
 tags: [learning_record, P10, INJECT, kind-kc]
 tldr: "Persistent record of what worked or failed in a session, accumulated across runs for agent improvement"
 when_to_use: "Building, reviewing, or reasoning about learning_record artifacts"

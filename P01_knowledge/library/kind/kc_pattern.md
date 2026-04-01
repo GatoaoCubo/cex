@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: commercial_agent
 domain: pattern
-quality: null
+quality: 9.0
 tags: [pattern, P08, INJECT, kind-kc]
 tldr: "pattern is a reusable architectural solution to a recurring problem — encoding intent, forces, structure, and explicit when_not conditions for safe application."
 when_to_use: "Building, reviewing, or reasoning about pattern artifacts"

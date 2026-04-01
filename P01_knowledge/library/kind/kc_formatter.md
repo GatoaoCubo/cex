@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: marketing_agent
 domain: formatter
-quality: null
+quality: 9.0
 tags: [formatter, P05, GOVERN, kind-kc, output]
 tldr: "Post-generation structural transformer that converts raw LLM output into a target format (Markdown, JSON, YAML, HTML) without extracting semantic data"
 when_to_use: "Building, reviewing, or reasoning about formatter artifacts"

@@ -7,7 +7,7 @@ created: 2026-03-30
 updated: 2026-04-01
 author: n02_visual_frontend_marketing
 domain: visual_frontend_engineering_and_copywriting
-quality: null
+quality: 8.9
 tags: [dispatch_rule, visual-frontend, marketing, N02, html, tailwind, routing]
 tldr: Route to N02 for HTML/CSS generation with Tailwind + shadcn/ui AND copywriting tasks — dual-role visual frontend engineer + copywriter.
 scope: visual_frontend_and_marketing_creative

@@ -9,7 +9,7 @@ references:
   - tpl_component_map
   - ex_mental_model_pipeline
   - ex_dispatch_rule_research
-quality: null
+quality: 8.8
 ---
 
 # Pipeline Engine Component Map

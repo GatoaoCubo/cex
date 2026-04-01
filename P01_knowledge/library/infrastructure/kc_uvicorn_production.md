@@ -12,7 +12,7 @@ updated: 2026-04-01
 author: builder_agent
 domain: infrastructure
 origin: manual
-quality: null
+quality: 8.7
 tags: [uvicorn, production, workers, asgi, fastapi, deployment, proxy, environment]
 tldr: "Production uvicorn configuration with optimal worker counts, host binding, environment integration, proxy header handling, and graceful shutdown patterns"
 when_to_use: "Deploying FastAPI/ASGI apps to production with proper scaling, load balancing, and reliability patterns"

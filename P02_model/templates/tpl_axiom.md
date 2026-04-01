@@ -6,7 +6,7 @@ version: 1.0.0
 title: "Template — Axiom"
 tags: [template, axiom, rule, invariant, constraint]
 tldr: "An axiom is an immutable system rule that all agents and artifacts must obey. Axioms define hard boundaries — violations trigger immediate rejection."
-quality: null
+quality: 8.7
 ---
 
 # Axiom: [AXIOM_TITLE]

@@ -8,7 +8,7 @@ version: 2.0.0
 created: 2026-03-25
 updated: 2026-03-25
 author: orchestrator
-quality: null
+quality: 8.9
 tags: [blueprint, knowledge-card, meta-template, production-mold]
 tldr: "Meta-template que define COMO gerar KCs validos — frontmatter, body, quality gates, naming"
 when_to_use: "Antes de gerar qualquer KC — este blueprint eh o molde"
@@ -169,7 +169,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: llm_engineering
-quality: null
+quality: 8.9
 tags: [prompt-caching, cost-optimization, anthropic]
 tldr: "Cache reutiliza prefixos, cortando custo 90% e latencia 85% para contextos > 1024 tokens"
 when_to_use: "Sistema LLM repete contexto longo entre chamadas"

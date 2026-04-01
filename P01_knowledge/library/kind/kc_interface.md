@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: knowledge_agent
 domain: interface
-quality: null
+quality: 8.9
 tags: [interface, P06, CONSTRAIN, kind-kc]
 tldr: "Bilateral integration contract specifying both input and output shapes between two communicating agents."
 when_to_use: "Building, reviewing, or reasoning about interface artifacts"

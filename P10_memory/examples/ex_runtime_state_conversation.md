@@ -10,7 +10,7 @@ author: "builder_agent"
 agent: "conversation-manager"
 persistence: "session"
 domain: "conversation"
-quality: null
+quality: 8.9
 tags: [runtime-state, conversation, context, session]
 tldr: "Session-scoped runtime state for conversation context: turn tracking, topic detection, memory promotion, and context window budget."
 routing_mode: "rule_based"

@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: operations_agent
 domain: code_executor
-quality: null
+quality: 8.9
 tags: [code_executor, P04, CALL, kind-kc]
 tldr: "Sandboxed runtime environment for executing LLM-generated code safely with resource limits and output capture"
 when_to_use: "Building, reviewing, or reasoning about code_executor artifacts"

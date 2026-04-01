@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: context_doc
-quality: null
+quality: 9.0
 tags: [context_doc, p01, INJECT, kind-kc]
 tldr: "Domain context injected into prompts to ground LLM reasoning — richer than glossary, looser than knowledge_card"
 when_to_use: "Building, reviewing, or reasoning about context_doc artifacts"

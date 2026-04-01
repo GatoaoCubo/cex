@@ -19,7 +19,7 @@ retry_policy:
   backoff: exponential
 template_vars: [agent_name, status, message, timestamp]
 delivery_guarantee: at_least_once
-quality: null
+quality: 8.6
 tags: [notifier, slack, alerts]
 tldr: "Slack notifier for agent status alerts via Webhook API with exponential retry"
 description: "Sends agent completion, error, and status notifications to Slack channels"

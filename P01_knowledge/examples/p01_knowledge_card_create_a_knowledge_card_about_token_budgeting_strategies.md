@@ -8,7 +8,7 @@ created: "2026-04-01"
 updated: "2026-04-01"
 author: "builder"
 domain: llm_engineering
-quality: null
+quality: 8.9
 tags: [token-budgeting, cost-optimization, context-management, llm-engineering, knowledge]
 tldr: "Token budgeting allocates context windows across content types with priority queues, achieving 40-70% cost reduction via dynamic sizing and truncation strategies"
 when_to_use: "When LLM applications hit context limits or API costs exceed budget thresholds"

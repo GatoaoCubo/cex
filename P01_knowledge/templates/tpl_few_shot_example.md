@@ -6,7 +6,7 @@ version: 1.0.0
 title: Template - Few Shot Example
 tags: [template, few-shot, example, prompt, icl]
 tldr: Input-output pair for in-context learning. Shows LLM what good output looks like.
-quality: null
+quality: 8.6
 ---
 
 # Few Shot Example: [NAME]

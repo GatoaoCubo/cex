@@ -6,7 +6,7 @@ version: 1.0.0
 title: "Template — Instruction"
 tags: [template, instruction, builder, pipeline, steps]
 tldr: "Step-by-step build instructions for a builder ISO. Maps each step to an 8F function, defines inputs/outputs/gates, and provides the execution order."
-quality: null
+quality: 8.7
 ---
 
 # Instruction: [BUILDER_NAME]

@@ -16,7 +16,7 @@ routing_keywords: [railway, deploy, fastapi, postgresql, health, rollback, migra
 tags: [agent, railway, superintendent, N05, fastapi, postgresql, backend-ops]
 tldr: Railway Backend Superintendent — absolute owner of API lifecycle on Railway platform with FastAPI, PostgreSQL, zero-downtime deploys, health monitoring, and 4-service rollback orchestration.
 density_score: 0.96
-quality: null
+quality: 9.0
 linked_artifacts:
   primary: workflow_operations
   related: [system_prompt_operations, quality_gate_operations, checkpoint_operations, spawn_config_operations]

@@ -20,7 +20,7 @@ domain_filter: true
 language: [en, pt]
 cost_per_query: "$0.01"
 rate_limit: "1000/month (free tier)"
-quality: null
+quality: 8.6
 tags: [search_tool, tavily, web, RAG]
 tldr: "Tavily web search optimized for LLM agents — returns ranked results with relevance scores"
 description: "Web search via Tavily API returning structured results for RAG and agent workflows"

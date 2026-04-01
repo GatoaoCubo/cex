@@ -6,7 +6,7 @@ version: 1.0.0
 title: Template - Db Connector
 tags: [template, database, connector, sql, pool]
 tldr: "Database connection config: URL, pool size, timeouts, query patterns. Supports PostgreSQL, SQLite, Supabase."
-quality: null
+quality: 8.6
 ---
 
 # Db Connector: [NAME]

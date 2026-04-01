@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: null
+quality: 8.9
 tags: [cex, lp01, knowledge, inject, knowledge-card, rag, embedding]
 tldr: "P01 Knowledge agrupa 6 tipos de memoria destilada que alimentam o contexto do LLM via funcao INJECT"
 when_to_use: "Classificar artefatos de conhecimento ou entender o papel de P01 na taxonomia CEX"

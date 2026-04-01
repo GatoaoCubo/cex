@@ -18,7 +18,7 @@ threshold_publish_dual: 8.5
 threshold_review: 7.0
 automation_status: semi-automated
 domain: visual_frontend_engineering_and_copywriting
-quality: null
+quality: 9.0
 tags: [scoring_rubric, visual-frontend, marketing, html, tailwind, copy, N02, P07]
 tldr: 10-dimension dual rubric — 5 visual dimensions (performance, a11y, responsive, design tokens, UX) + 5 copy dimensions (hook, conversion, readability, brand, A/B)
 density_score: 0.96

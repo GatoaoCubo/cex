@@ -8,7 +8,7 @@ created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
 domain: debugging
-quality: null
+quality: 9.0
 tags: [debugging, root-cause, systematic-process, defense-in-depth, condition-based-waiting]
 tldr: "Debugging em 4 fases (root cause, pattern, hypothesis, implementation) com lei de ferro: nenhum fix sem investigacao primeiro"
 when_to_use: "Bug encontrado — antes de qualquer tentativa de fix, seguir este processo sistematico"

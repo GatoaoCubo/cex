@@ -6,7 +6,7 @@ version: 1.0.0
 title: "Template — Notifier"
 tags: [template, notifier, alert, webhook, messaging]
 tldr: "Configures a notification channel for system events. Supports Slack, email, webhook, and console. Defines triggers, message templates, rate limits, and escalation."
-quality: null
+quality: 8.7
 ---
 
 # Notifier: [NAME]

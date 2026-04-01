@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: research_agent
 domain: session_state
-quality: null
+quality: 9.0
 tags: [session_state, P10, INJECT, kind-kc]
 tldr: "Ephemeral per-session snapshot of current task, inputs, and intermediate outputs — discarded on session end"
 when_to_use: "Building, reviewing, or reasoning about session_state artifacts"

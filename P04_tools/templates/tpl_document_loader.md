@@ -6,7 +6,7 @@ version: 1.0.0
 title: "Template — Document Loader"
 tags: [template, document, loader, parser, extraction]
 tldr: "Configures document ingestion: parsing format, text extraction, metadata extraction, and chunking handoff. Supports PDF, HTML, markdown, CSV, and DOCX."
-quality: null
+quality: 8.8
 ---
 
 # Document Loader: [NAME]

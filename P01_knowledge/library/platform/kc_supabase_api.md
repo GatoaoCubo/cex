@@ -9,7 +9,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n04_knowledge
 domain: data_platform
-quality: null
+quality: 9.0
 tags: [supabase, postgrest, graphql, rest-api, filtering, pagination, platform]
 tldr: "PostgREST gera REST API automaticamente do schema PostgreSQL; pg_graphql gera GraphQL; ambos respeitam RLS e suportam filtering, pagination, embedding"
 when_to_use: "Quando consumir dados Supabase via REST ou GraphQL em clients e servers"

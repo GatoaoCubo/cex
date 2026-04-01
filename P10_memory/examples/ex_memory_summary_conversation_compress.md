@@ -8,7 +8,7 @@ created: 2026-03-29
 updated: 2026-03-29
 author: builder_agent
 domain: memory
-quality: null
+quality: 8.9
 tags: [memory, compression, summarization, context-window, session]
 tldr: "Comprime historico de chat quando context window atinge 75%, preservando fatos-chave via summarization incremental"
 when_to_use: "Sessoes longas (>20 turnos) onde context window esta enchendo e decisoes anteriores precisam ser preservadas"

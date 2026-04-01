@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: commercial_agent
 domain: director
-quality: null
+quality: 9.0
 tags: [director, P08, ORCHESTRATE, kind-kc]
 tldr: "director is a crew orchestrator artifact that composes and coordinates multiple builders — it dispatches, sequences, and collects results without executing tasks itself."
 when_to_use: "Building, reviewing, or reasoning about director artifacts"

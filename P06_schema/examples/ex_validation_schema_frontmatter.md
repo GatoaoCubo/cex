@@ -13,7 +13,7 @@ fields_count: 8
 on_failure: "reject"
 strict: true
 domain: "frontmatter_validation"
-quality: null
+quality: 8.7
 tags: [validation-schema, frontmatter, yaml, all-kinds]
 tldr: "Validates YAML frontmatter common fields: id, kind, pillar, version, quality, tags, tldr. Rejects on parse error or missing required."
 coercion: false

@@ -6,7 +6,7 @@ version: 1.0.0
 title: "Template — Output Validator"
 tags: [template, validator, output, quality, assertion]
 tldr: "Validates LLM output against schema, content rules, and safety constraints. Defines validation pipeline: parse → schema check → content rules → safety filters."
-quality: null
+quality: 8.6
 ---
 
 # Output Validator: [NAME]

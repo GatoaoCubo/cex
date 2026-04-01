@@ -13,7 +13,7 @@ auth: api_key
 endpoints:
   - query
   - execute
-quality: null
+quality: 8.5
 tags: [db_connector, postgres, sql, data]
 tldr: "PostgreSQL connector for structured data queries via asyncpg with connection pooling"
 description: "Read/write access to PostgreSQL databases for agent data retrieval and storage"

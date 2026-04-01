@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-01
 author: shaka_research
 domain: brand-identity
-quality: null
+quality: 8.9
 tags: [brand, voice, tone, brand-voice, nngroup, content-design, governance, messaging]
 tldr: "Frameworks universais para sistemas de voz de marca: NNGroup 4D model, distincao voice/tone, matriz de canais, atributos, Do/Don't, governanca e scoring."
 density_score: null

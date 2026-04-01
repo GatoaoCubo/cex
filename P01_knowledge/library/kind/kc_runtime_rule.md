@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: commercial_agent
 domain: runtime_rule
-quality: null
+quality: 9.0
 tags: [runtime_rule, P09, GOVERN, kind-kc]
 tldr: "runtime_rule is a per-operation technical constraint governing timeouts, retry limits, and degradation behavior — scoped to specific operation types rather than provider-level rate limits."
 when_to_use: "Building, reviewing, or reasoning about runtime_rule artifacts"

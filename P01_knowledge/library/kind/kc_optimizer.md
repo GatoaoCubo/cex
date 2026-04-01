@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: research_agent
 domain: optimizer
-quality: null
+quality: 9.0
 tags: [optimizer, P11, GOVERN, kind-kc]
 tldr: "Metric-driven continuous improvement loop that adjusts prompts, parameters, or agent behavior based on measured outcomes"
 when_to_use: "Building, reviewing, or reasoning about optimizer artifacts"

@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: null
+quality: 8.9
 tags: [cex, lp06, schema, contracts, validation, grammar, blueprint]
 tldr: "P06 define 7 tipos de contrato que restringem output: de input_schema a grammar (constraint no decoder)"
 when_to_use: "Entender contratos de dados em sistemas LLM e como soft CONSTRAIN vira hard CONSTRAIN"

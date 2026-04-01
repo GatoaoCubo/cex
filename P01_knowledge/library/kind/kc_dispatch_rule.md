@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: research_agent
 domain: dispatch_rule
-quality: null
+quality: 9.0
 tags: [dispatch_rule, P12, REASON, kind-kc]
 tldr: "Keyword-to-agent_node routing rule that maps intent signals to execution targets without running the task itself"
 when_to_use: "Building, reviewing, or reasoning about dispatch_rule artifacts"

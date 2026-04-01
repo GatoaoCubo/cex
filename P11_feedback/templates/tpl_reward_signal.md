@@ -6,7 +6,7 @@ version: 1.0.0
 title: "Template — Reward Signal"
 tags: [template, reward, signal, reinforcement, feedback]
 tldr: "A scalar or structured signal indicating output quality. Drives learning: positive rewards reinforce patterns, negative rewards trigger correction. Includes source, confidence, and decay."
-quality: null
+quality: 8.8
 ---
 
 # Reward Signal: [SIGNAL_NAME]

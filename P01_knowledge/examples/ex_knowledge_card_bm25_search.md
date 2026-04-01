@@ -8,7 +8,7 @@ created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
 domain: cex_taxonomy
-quality: null
+quality: 9.0
 tags: [bm25, keyword-search, retrieval, offline-search, knowledge-base]
 tldr: "BM25 busca keyword-based em CSVs/docs locais: ~10ms, offline, sem embeddings — ideal para dados estruturados"
 when_to_use: "Implementar busca rapida em knowledge bases locais sem dependencia de embeddings ou servidor"

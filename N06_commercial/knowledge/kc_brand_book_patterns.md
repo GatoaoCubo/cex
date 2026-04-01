@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-01
 author: shaka_research
 domain: brand-identity
-quality: null
+quality: 8.8
 tags: [brand, brand-book, brand-guidelines, brand-identity, frameworks, brand-architecture]
 tldr: "Frameworks universais para construir brand books profissionais: anatomia, modelos 32-blocos, Keller, Aaker, Unilever Brand Key, scoring e exemplos world-class."
 density_score: null

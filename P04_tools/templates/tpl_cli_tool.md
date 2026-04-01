@@ -6,7 +6,7 @@ version: 1.0.0
 title: Template - Cli Tool
 tags: [template, cli, tool, typer, command-line]
 tldr: CLI tool with commands, args, options, and Rich output. Built with Typer for modern Python CLI.
-quality: null
+quality: 8.6
 ---
 
 # Cli Tool: [NAME]

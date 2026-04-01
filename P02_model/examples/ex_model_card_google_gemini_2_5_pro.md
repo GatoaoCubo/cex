@@ -36,7 +36,7 @@ pricing:
   cache_write: null
   unit: per_1M_tokens
 domain: model_selection
-quality: null
+quality: 8.8
 tags: [model-card, google, gemini-2.5, reasoning, coding]
 tldr: "Gemini 2.5 Pro - Google, 1048K ctx, $1.25/$10 per 1M at <=200K prompts, strong reasoning and multimodal analysis."
 when_to_use: "Use when long-context reasoning, multimodal analysis, or tool-enabled coding matter more than lowest latency."

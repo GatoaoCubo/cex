@@ -8,7 +8,7 @@ created: 2026-03-29
 updated: 2026-03-29
 author: builder_agent
 domain: schema
-quality: null
+quality: 8.9
 tags: [enum, llm-providers, routing, multi-provider, registry]
 tldr: "Enumeracao canonica dos 7 provedores LLM suportados para routing, config, e validacao de modelo"
 when_to_use: "Quando qualquer componente precisa referenciar um provedor LLM — usar este enum como unica fonte de verdade"

@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: operations_agent
 domain: constraint_spec
-quality: null
+quality: 9.0
 tags: [constraint_spec, P03, CONSTRAIN, kind-kc]
 tldr: "Declarative rules governing LLM decoder behavior — output format, length, vocabulary, and safety boundaries"
 when_to_use: "Building, reviewing, or reasoning about constraint_spec artifacts"

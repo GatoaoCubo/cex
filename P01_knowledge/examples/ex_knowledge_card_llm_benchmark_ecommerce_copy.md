@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: research_agent
 domain: research
-quality: null
+quality: 8.9
 tags: [llm-benchmark, ecommerce, pt-br, copywriting, pricing, json]
 tldr: "Claude Sonnet lidera qualidade PT-BR e JSON; GPT-4o lidera confiabilidade; Gemini Flash e DeepSeek vencem em custo e volume."
 when_to_use: "Escolher stack LLM para copy, catalogo ou automacao de conteudo em portugues"

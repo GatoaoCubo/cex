@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: knowledge_agent
 domain: validation_schema
-quality: null
+quality: 8.9
 tags: [validation_schema, P06, GOVERN, kind-kc]
 tldr: "Post-generation output contract applied by the system to validate LLM responses—LLM never sees it."
 when_to_use: "Building, reviewing, or reasoning about validation_schema artifacts"

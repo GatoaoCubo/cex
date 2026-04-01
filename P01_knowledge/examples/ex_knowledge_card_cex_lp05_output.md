@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: null
+quality: 8.9
 tags: [cex, lp05, output, response-format, parser, formatter]
 tldr: "P05 define COMO o LLM entrega resultados via 4 tipos: response_format, parser, formatter e naming_rule"
 when_to_use: "Entender formatos de entrega LLM e a fronteira entre geracao (P05) e validacao (P06)"

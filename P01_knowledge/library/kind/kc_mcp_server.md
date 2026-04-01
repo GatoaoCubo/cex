@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: marketing_agent
 domain: mcp_server
-quality: null
+quality: 8.9
 tags: [mcp_server, P04, CALL, kind-kc, mcp]
 tldr: "Model Context Protocol server exposing typed tools and resources over stdio/SSE — the standard plugin interface for Claude Code and any MCP-aware LLM runtime"
 when_to_use: "Building, reviewing, or reasoning about mcp_server artifacts"

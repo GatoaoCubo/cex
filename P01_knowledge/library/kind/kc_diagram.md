@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: commercial_agent
 domain: diagram
-quality: null
+quality: 8.9
 tags: [diagram, P08, INJECT, kind-kc, architecture]
 tldr: "diagram is a versioned visual representation of architecture in ASCII or Mermaid — terminal-safe, diff-friendly, and auto-decaying-resistant unlike binary image formats."
 when_to_use: "Building, reviewing, or reasoning about diagram artifacts"

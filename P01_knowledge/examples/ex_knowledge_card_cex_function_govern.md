@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: null
+quality: 8.9
 tags: [cex, llm-function, govern, quality-gate, shokunin, evals, benchmark]
 tldr: "GOVERN avalia e controla qualidade via 22 tipos (28% do CEX) — a maior funcao, Shokunin do pipeline"
 when_to_use: "Entender como LLMs garantem qualidade e a contribuicao mais original do CEX (governanca como cidadao de 1a classe)"

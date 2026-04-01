@@ -9,7 +9,7 @@ author: n05_operations
 name: Railway Deploy Checkpoint
 workflow_ref: p12_wf_railway_superintendent
 step: checkpoint_deploy_state
-quality: null
+quality: 8.8
 tags: [checkpoint, railway, deploy, postgresql, health, rollback]
 tldr: Railway deployment checkpoint capturing deploy status, health endpoints, PostgreSQL connections, and 4-service rollback readiness.
 description: Stores Railway deployment state to resume interrupted deploy workflow without losing health status or rollback coordination.

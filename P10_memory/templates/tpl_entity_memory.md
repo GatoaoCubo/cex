@@ -6,7 +6,7 @@ version: 1.0.0
 title: "Template — Entity Memory"
 tags: [template, entity, memory, knowledge-graph, persistence]
 tldr: "Tracks named entities (people, products, companies) across conversations. Stores attributes, relationships, and confidence scores for context injection."
-quality: null
+quality: 8.7
 ---
 
 # Entity Memory: [ENTITY_STORE_NAME]

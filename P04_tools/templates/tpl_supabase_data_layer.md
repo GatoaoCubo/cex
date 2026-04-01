@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n04_knowledge
 domain: data_platform
-quality: null
+quality: 8.8
 tags: [template, supabase, data-layer, config, multi-tenant]
 tldr: "Generic Supabase config template covering all 12 modules — fill [PLACEHOLDERS] for any company vertical"
 density_score: 0.88

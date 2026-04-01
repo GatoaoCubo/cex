@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-01
 author: n02_visual_frontend
 domain: frontend
-quality: null
+quality: 8.9
 tags: [schema, responsive, breakpoints, tailwind, mobile-first]
 tldr: "Mobile-first breakpoint contract — Tailwind defaults, fluid typography, grid rules."
 density_score: 0.91

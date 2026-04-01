@@ -6,7 +6,7 @@ version: 1.0.0
 title: "Template — Rate Limit Config"
 tags: [template, rate-limit, throttle, quota, api]
 tldr: "Configures request rate limiting for APIs and LLM calls. Defines limits per window, burst allowance, quota tracking, and backpressure behavior."
-quality: null
+quality: 8.7
 ---
 
 # Rate Limit Config: [SERVICE_NAME]

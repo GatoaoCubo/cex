@@ -9,7 +9,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: builder_agent
 domain: supabase_data_layer
-quality: null
+quality: 8.9
 tags: [supabase_data_layer, P04, CALL, kind-kc, database, api, rls]
 tldr: "Supabase-specific data layer config — tables, RLS policies, edge functions, storage buckets, and auth rules as a declarative artifact"
 when_to_use: "Building, reviewing, or reasoning about supabase_data_layer artifacts"

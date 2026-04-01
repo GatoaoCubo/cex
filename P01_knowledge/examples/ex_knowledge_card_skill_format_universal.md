@@ -8,7 +8,7 @@ created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
 domain: knowledge_engineering
-quality: null
+quality: 9.0
 tags: [skill-format, plugin-system, agent-skills, frontmatter, composable-skills]
 tldr: "Skills usam frontmatter YAML (name + description-trigger) + body Markdown com workflow, gates e integration — cross-platform"
 when_to_use: "Criar ou avaliar skills para agentes LLM em qualquer plataforma"

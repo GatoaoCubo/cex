@@ -3,7 +3,7 @@ id: p01_kc_nixpacks_buildpacks
 kind: knowledge_card
 pillar: P01
 domain: infrastructure
-quality: null
+quality: 8.8
 density_score: 0.88
 name: Nixpacks Buildpacks
 description: Nixpacks build system configuration, providers, auto-detection, and deployment patterns

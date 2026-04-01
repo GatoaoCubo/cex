@@ -11,7 +11,7 @@ updated: 2026-04-01
 author: knowledge-card-builder
 domain: infrastructure
 subdomain: railway-networking
-quality: null
+quality: 8.7
 tags: [railway, networking, cors, domains, proxy, rate-limit, tcp]
 tldr: "Railway platform networking features: CORS regex origins *.domain.com, private URLs service.railway.internal, TCP proxy for databases, Redis rate limiting patterns, PORT auto-binding"
 when_to_use: "Configuring Railway networking, CORS policies, service discovery, rate limiting, custom domains, or TCP-based services"

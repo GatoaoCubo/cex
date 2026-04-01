@@ -6,7 +6,7 @@ version: 1.0.0
 title: "Template - Search Tool"
 tags: [template, search, api, web, query]
 tldr: "Configures a search tool for web or knowledge base queries. Defines provider, result format, rate limits, and dedup strategy."
-quality: null
+quality: 8.7
 ---
 
 # Search Tool: [NAME]

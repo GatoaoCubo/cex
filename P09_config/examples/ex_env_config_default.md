@@ -8,7 +8,7 @@ tags: [config, env, default, variables]
 references:
   - tpl_env_config
 tldr: "Complete CEX environment configuration: model selection, API keys, quality thresholds, feature flags, and runtime settings."
-quality: null
+quality: 8.8
 ---
 
 # Default Environment Config

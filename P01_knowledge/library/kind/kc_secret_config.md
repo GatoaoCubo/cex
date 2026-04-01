@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: commercial_agent
 domain: secret_config
-quality: null
+quality: 9.0
 tags: [secret_config, P09, GOVERN, kind-kc]
 tldr: "secret_config documents the existence, storage location, and rotation schedule of credentials — never their values — providing a pointer registry that env_config references via secret_refs."
 when_to_use: "Building, reviewing, or reasoning about secret_config artifacts"

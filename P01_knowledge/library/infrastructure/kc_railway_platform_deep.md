@@ -3,7 +3,7 @@ id: p01_kc_railway_platform_deep
 kind: knowledge_card
 pillar: P01
 domain: infrastructure
-quality: null
+quality: 8.8
 density_score: 0.88
 name: Railway Platform Deep
 description: Railway PaaS deployment platform with 4-service topology, railway.toml configuration, and service orchestration

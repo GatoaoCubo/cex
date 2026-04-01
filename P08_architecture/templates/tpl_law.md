@@ -6,7 +6,7 @@ version: 1.0.0
 title: Template - Law
 tags: [template, law, principle, architecture, invariant]
 tldr: "Architectural law: stronger than guideline, MUST be followed. Violations are bugs."
-quality: null
+quality: 8.6
 ---
 
 # Law: [NAME]

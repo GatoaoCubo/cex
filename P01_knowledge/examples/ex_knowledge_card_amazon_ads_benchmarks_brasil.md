@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: research
-quality: null
+quality: 8.9
 tags: [amazon-ads, brasil, acos, cpc, roas, benchmarks]
 tldr: "BR roda com CPC e ACOS abaixo dos EUA; breakeven ACOS = margem, target saudavel = margem menos 6 pontos."
 when_to_use: "Definir metas de Amazon Ads no Brasil sem importar benchmarks americanos"

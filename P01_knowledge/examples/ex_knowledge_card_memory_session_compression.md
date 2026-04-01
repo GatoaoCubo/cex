@@ -8,7 +8,7 @@ created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
 domain: llm_memory
-quality: null
+quality: 8.9
 tags: [compression, memory-decay, agent-sdk, session-resume, memory-systems]
 tldr: "Observations accumulate per-session; Stop hook compresses them into a summary via Agent SDK resume sessions, using dual session IDs"
 when_to_use: "Building memory systems where raw observations grow unboundedly and need end-of-session compression"

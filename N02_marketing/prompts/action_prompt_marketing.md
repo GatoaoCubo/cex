@@ -27,7 +27,7 @@ constraints:
   - COPY: NEVER write generic CTAs, ALWAYS produce 3 headline variants minimum
   - DUAL: NEVER skip integration between copy and visual hierarchy
 domain: visual_frontend_engineering_and_copywriting
-quality: null
+quality: 8.9
 tags: [action_prompt, visual-frontend, marketing, html, tailwind, copy, N02, quick_execution]
 tldr: 10 ready-to-run N02 action prompts — 6 visual (landing page, components, responsive) + 4 copy (ads, headlines, emails) + dual integration.
 density_score: 0.96

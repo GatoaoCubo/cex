@@ -16,7 +16,7 @@ safety_level: standard
 tools_listed: true
 output_format_type: markdown_and_html
 domain: visual_frontend_engineering_and_copywriting
-quality: null
+quality: 9.0
 tags: [system_prompt, visual-frontend, marketing, html, tailwind, copywriting, N02, P03]
 tldr: Dual-role system prompt — generates production HTML/CSS with Tailwind + shadcn/ui AND persuasive copy with AIDA/PAS/BAB formulas.
 density_score: 0.96

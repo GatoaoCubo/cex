@@ -9,7 +9,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n04_knowledge
 domain: data_platform
-quality: null
+quality: 9.0
 tags: [supabase, pgvector, vectors, embeddings, rag, semantic-search, platform]
 tldr: "pgvector nativo no PostgreSQL: vector(1536), indexes HNSW/IVFFlat, match_documents() para semantic search, integra com OpenAI/Cohere/local embeddings"
 when_to_use: "Quando configurar embeddings, semantic search, ou RAG pipeline com Supabase"

@@ -6,7 +6,7 @@ version: 1.0.0
 title: Template - Lifecycle Rule
 tags: [template, lifecycle, rule, retention, cleanup]
 tldr: When artifacts are created, updated, archived, deleted. Controls retention and versioning.
-quality: null
+quality: 8.6
 ---
 
 # Lifecycle Rule: [NAME]

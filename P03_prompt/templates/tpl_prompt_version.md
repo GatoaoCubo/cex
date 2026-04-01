@@ -6,7 +6,7 @@ version: 1.0.0
 title: "Template — Prompt Version"
 tags: [template, prompt, version, evolution, regression]
 tldr: "Tracks prompt evolution with version numbering, change log, A/B test results, and rollback instructions. Prevents prompt regression."
-quality: null
+quality: 8.8
 ---
 
 # Prompt Version: [PROMPT_ID] v[X.Y.Z]

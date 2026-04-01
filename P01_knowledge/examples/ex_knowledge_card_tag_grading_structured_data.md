@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: research
-quality: null
+quality: 8.9
 tags: [tag-grading, structured-data, browser-automation, scraping, csr]
 tldr: "Certificados TAG exigem browser: WebFetch retorna scripts, mas JSON-LD e grades so existem no DOM renderizado."
 when_to_use: "Extrair dados de paginas que renderizam certificados via JavaScript"

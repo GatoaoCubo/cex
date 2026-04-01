@@ -6,7 +6,7 @@ version: 1.0.0
 title: "Template - Webhook"
 tags: [template, webhook, callback, http, integration]
 tldr: "Defines an HTTP webhook endpoint or callback URL. Configures method, headers, payload schema, retry policy, and signature verification."
-quality: null
+quality: 8.7
 ---
 
 # Webhook: [NAME]

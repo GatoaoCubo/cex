@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: llm_engineering
-quality: null
+quality: 8.9
 tags: [claude, models, pricing, context-window, model-selection, api]
 tldr: "3 tiers: Opus 4.6 ($5/$25 MTok, 200K/1M ctx), Sonnet 4.6 ($3/$15, balanced), Haiku 4.5 ($1/$5, fastest). Routing correto economiza 50-80%."
 when_to_use: "Selecionar modelo Claude para API calls ou configurar model router com custo otimo"

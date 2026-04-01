@@ -9,7 +9,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n04_knowledge
 domain: data_platform
-quality: null
+quality: 9.0
 tags: [supabase, auth, gotrue, rls, jwt, mfa, sso, platform]
 tldr: "Auth completo via GoTrue: 30+ providers, JWT com custom claims, MFA TOTP, SSO SAML, anonymous auth, e RLS integrado ao PostgreSQL"
 when_to_use: "Quando configurar autenticacao e autorizacao em projetos Supabase"

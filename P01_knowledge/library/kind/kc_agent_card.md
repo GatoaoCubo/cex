@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: commercial_agent
 domain: agent_card
-quality: null
+quality: 9.0
 tags: [agent_card, P08, BECOME, kind-kc]
 tldr: "agent_card is the deployment spec for an autonomous agent — encoding identity, model, tools, boot sequence, dispatch scope, and operational constraints in one versioned artifact."
 when_to_use: "Building, reviewing, or reasoning about agent_card artifacts"

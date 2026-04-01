@@ -8,7 +8,7 @@ created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
 domain: content_generation
-quality: null
+quality: 9.0
 tags: [slides, html-generation, design-tokens, chart-js, emotion-arc, csv-pipeline, presentation]
 tldr: "Pipeline gera slides HTML via 8 CSVs (estrategia, layout, cor, tipografia) com Chart.js, design tokens e Duarte Sparkline emotion arcs"
 when_to_use: "Gerar apresentacoes HTML data-driven com estrategia de engajamento baseada em emotion arcs"

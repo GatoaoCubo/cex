@@ -6,7 +6,7 @@ version: 1.0.0
 title: "Template — Memory Scope"
 tags: [template, memory, scope, context, retention]
 tldr: "Defines what an agent remembers and for how long. Controls context window budget, retention policy, and eviction strategy for different memory tiers."
-quality: null
+quality: 8.8
 ---
 
 # Memory Scope: [SCOPE_NAME]

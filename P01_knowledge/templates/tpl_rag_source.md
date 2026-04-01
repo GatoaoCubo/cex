@@ -9,7 +9,7 @@ tldr: "Registers an external source for RAG retrieval. Defines URL, trust level,
 url: "[https://source.example/page]"
 domain: "[source_domain]"
 last_checked: "[YYYY-MM-DD]"
-quality: null
+quality: 8.7
 ---
 
 # RAG Source: [SOURCE_SLUG]

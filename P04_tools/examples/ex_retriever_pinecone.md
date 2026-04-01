@@ -15,7 +15,7 @@ search_type: vector
 reranker: null
 metadata_filters: [source, pillar, kind]
 namespace: "default"
-quality: null
+quality: 8.6
 tags: [retriever, pinecone, vector, RAG]
 tldr: "Pinecone vector retriever using text-embedding-3-small with cosine similarity, top-k=10"
 description: "Searches Pinecone serverless index for semantically similar document chunks"

@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-01
 author: shaka_research
 domain: brand-identity
-quality: null
+quality: 8.9
 tags: [brand, monetization, pricing, saas, e-commerce, brasil, pix, hotmart, ltv, cac]
 tldr: "12 modelos de monetizacao, pricing psychology, mercado brasileiro (PIX/parcelamento), Hotmart/Kiwify, LTV/CAC, revenue modeling"
 density_score: null

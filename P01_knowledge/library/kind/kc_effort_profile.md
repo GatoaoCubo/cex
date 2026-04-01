@@ -9,7 +9,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: builder_agent
 domain: effort_profile
-quality: null
+quality: 9.0
 tags: [effort_profile, P09, CONSTRAIN, kind-kc, thinking, model-selection]
 tldr: "Declarative config mapping task complexity to model selection, thinking budget, and token limits — decides WHICH model and HOW MUCH thinking, not WHEN to run (that is runtime_rule)"
 when_to_use: "Building, reviewing, or reasoning about effort_profile artifacts"

@@ -6,7 +6,7 @@ version: 1.0.0
 title: "Template - Vision Tool"
 tags: [template, vision, image, ocr, analysis]
 tldr: "Configures a vision tool for image analysis, OCR, or screenshot interpretation. Defines model, resolution, cost limits, and output format."
-quality: null
+quality: 8.7
 ---
 
 # Vision Tool: [NAME]

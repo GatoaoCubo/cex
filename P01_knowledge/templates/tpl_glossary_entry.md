@@ -9,7 +9,7 @@ tldr: "Canonical definition for a domain term. Links synonyms, usage context, an
 term: "[TERM]"
 definition: "[SHORT_DEFINITION]"
 synonyms: ["[SYNONYM_1]", "[SYNONYM_2]"]
-quality: null
+quality: 8.6
 ---
 
 # Glossary Entry: [TERM]

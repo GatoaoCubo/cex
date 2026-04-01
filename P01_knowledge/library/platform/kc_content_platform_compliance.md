@@ -6,7 +6,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n03_builder
 domain: legal_compliance
-quality: null
+quality: 8.9
 tldr: "EU and BR compliance for digital content sales — GDPR, Widerrufsrecht, Impressum, EU VAT, CDC consumer rights, and platform-specific requirements."
 tags: [compliance, gdpr, eu-vat, widerrufsrecht, impressum, brazil, cdc, hotmart, digistore24]
 density_score: 0.90

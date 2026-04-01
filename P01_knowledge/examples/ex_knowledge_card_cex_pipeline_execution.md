@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: null
+quality: 8.9
 tags: [cex, pipeline, execution, 8-functions, boot-sequence, llm-processing]
 tldr: "Pipeline de 8 funcoes (BECOME-INJECT-REASON-CALL-PRODUCE-CONSTRAIN-GOVERN-COLLABORATE) eh o processamento real de todo sistema LLM"
 when_to_use: "Entender a sequencia completa de execucao de um agente ou agent_node LLM do input ao output"

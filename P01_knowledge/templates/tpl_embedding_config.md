@@ -6,7 +6,7 @@ version: 1.0.0
 title: Template - Embedding Config
 tags: [template, embedding, vector, model, config]
 tldr: "Configures embedding model for vector search: model, dimensions, chunking, batch size, runtime."
-quality: null
+quality: 8.6
 model_name: PLACEHOLDER
 dimensions: PLACEHOLDER
 chunk_size: PLACEHOLDER

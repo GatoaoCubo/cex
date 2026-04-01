@@ -12,7 +12,7 @@ color_palette: codexa_green_accent
 font_stack: [geist_variable, inter, jetbrains_mono]
 validation_rules: [zero_hardcoded_hex, consistent_spacing, proper_hierarchy]
 domain: visual_frontend_engineering
-quality: null
+quality: 8.9
 tags: [input_schema, design_tokens, codexa, visual-system, color, typography, spacing, N02]
 tldr: 3-layer design token contract — primitives (:root), semantic (CODEXA), component — zero hardcoded hex colors, consistent spacing, #50C878 accent.
 density_score: 0.96

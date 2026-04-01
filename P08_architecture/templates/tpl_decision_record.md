@@ -6,7 +6,7 @@ version: 1.0.0
 title: "Template — Architecture Decision Record"
 tags: [template, adr, decision, architecture, rationale]
 tldr: "Records an architectural decision with context, options considered, decision made, and consequences. Prevents revisiting decided questions and documents trade-offs."
-quality: null
+quality: 8.7
 ---
 
 # ADR-[NNN]: [DECISION_TITLE]

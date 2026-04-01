@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: lens
-quality: null
+quality: 9.0
 tags: [lens, p02, INJECT, kind-kc]
 tldr: "Specialized perspective overlay — adds domain expertise to an agent without creating a new agent identity"
 when_to_use: "Building, reviewing, or reasoning about lens artifacts"

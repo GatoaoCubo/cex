@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-01
 author: n02_visual_frontend
 domain: frontend
-quality: null
+quality: 8.9
 tags: [output, template, social, og-image, tailwind]
 tldr: "HTML/CSS card templates for og:image, Instagram, LinkedIn, Twitter — screenshot-renderable."
 density_score: 0.88

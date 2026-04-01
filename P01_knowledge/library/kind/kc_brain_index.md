@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: commercial_agent
 domain: brain_index
-quality: null
+quality: 9.0
 tags: [brain_index, P10, INJECT, kind-kc]
 tldr: "brain_index is the configuration spec for a semantic search index — backend (BM25/FAISS/hybrid), dimensions, hybrid alpha weight, and stale rebuild threshold — scoped to a named domain."
 when_to_use: "Building, reviewing, or reasoning about brain_index artifacts"

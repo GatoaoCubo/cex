@@ -8,7 +8,7 @@ created: "2023-10-12"
 updated: "2023-10-12"
 author: "Knowledge Distillation Specialist"
 domain: Software Testing
-quality: null
+quality: 8.8
 tags: [system_testing, testing_patterns, software_testing, knowledge]
 tldr: "System testing patterns provide structured approaches to validate software, ensuring robust performance and reliability."
 when_to_use: "Apply these patterns during the software testing phase to ensure comprehensive validation."

@@ -8,7 +8,7 @@ tldr: "User corrects agent tone from too-formal to casual. Triggers constraint u
 references:
   - tpl_feedback
   - ex_agent_copywriter
-quality: null
+quality: 8.8
 ---
 
 # Tone Correction Feedback

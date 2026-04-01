@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: boot_config
-quality: null
+quality: 9.0
 tags: [boot_config, p02, GOVERN, kind-kc]
 tldr: "Provider-specific bootstrap configuration — identity, constraints, tools, and MCPs loaded at agent initialization"
 when_to_use: "Building, reviewing, or reasoning about boot_config artifacts"

@@ -9,12 +9,12 @@ references:
   - ex_agent_copywriter
   - ex_response_format_ad_copy
   - ex_prompt_template_aida
-quality: null
+quality: 8.5
 ---
 tldr: "Quality gate for copywriting: checks tone, CTA clarity, length, and brand voice compliance."
-quality: null
+quality: 8.5
 tldr: "Quality gate for copywriting: checks tone, CTA clarity, length, and brand voice compliance."
-quality: null
+quality: 8.5
 ---
 
 # Copywriting Quality Gate

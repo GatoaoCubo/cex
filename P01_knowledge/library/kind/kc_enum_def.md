@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: knowledge_agent
 domain: enum_def
-quality: null
+quality: 8.9
 tags: [enum_def, P06, CONSTRAIN, kind-kc]
 tldr: "Finite named list of allowed literals that constrains LLM or system values to a closed set."
 when_to_use: "Building, reviewing, or reasoning about enum_def artifacts"

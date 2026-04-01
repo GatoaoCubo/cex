@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: research_agent
 domain: guardrail
-quality: null
+quality: 9.0
 tags: [guardrail, P11, CONSTRAIN, kind-kc]
 tldr: "Declarative safety boundary that blocks, flags, or rewrites outputs violating content, security, or ethics constraints"
 when_to_use: "Building, reviewing, or reasoning about guardrail artifacts"

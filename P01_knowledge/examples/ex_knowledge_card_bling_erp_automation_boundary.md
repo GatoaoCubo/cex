@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: knowledge_agent
 domain: execution
-quality: null
+quality: 8.9
 tags: [bling, automation, boundary, tiering, human-in-the-loop, erp]
 tldr: "44 campos Bling em 3 tiers: Tier1 auto via pipeline, Tier2 heuristica com override, Tier3 dados fiscais/fisicos so pelo usuario."
 when_to_use: "Definir o que o pipeline pode preencher sozinho vs o que exige confirmacao humana no Bling"

@@ -9,7 +9,7 @@ definition: "Processo Claude CLI especializado com identidade, modelo e MCPs pro
 synonyms: [worker, executor, specialist]
 tags: [glossary, agent, node, orchestration]
 tldr: "An agent_node is an autonomous execution unit in the CEX system. Each has a fixed domain, dedicated LLM model, and exclusive MCP tools."
-quality: null
+quality: 8.5
 ---
 
 # Glossary: agent_node

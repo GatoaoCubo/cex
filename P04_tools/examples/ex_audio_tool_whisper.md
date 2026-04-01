@@ -21,7 +21,7 @@ languages:
   - en
   - pt
   - es
-quality: null
+quality: 8.7
 tags: [audio_tool, whisper, stt, transcription]
 tldr: "Whisper STT tool for transcribing audio to text, supporting 50+ languages via OpenAI API"
 description: "Transcribes audio files to text using OpenAI Whisper with word-level timestamps"

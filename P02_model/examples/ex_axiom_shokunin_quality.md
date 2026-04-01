@@ -7,7 +7,7 @@ created: "2026-03-28"
 updated: "2026-03-28"
 author: "builder_agent"
 domain: "quality"
-quality: null
+quality: 8.7
 tags: [axiom, shokunin, quality, immutable]
 tldr: "All artifacts must pass quality gate >= 7.0 before pool admission. No exceptions, no manual overrides."
 rule: "No artifact enters the pool with quality score below 7.0"

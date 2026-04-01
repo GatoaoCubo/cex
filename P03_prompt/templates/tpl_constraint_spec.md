@@ -6,7 +6,7 @@ version: 1.0.0
 title: "Template — Constraint Spec"
 tags: [template, constraint, boundary, validation, rules]
 tldr: "Defines hard boundaries for artifact production. Lists required fields, size limits, naming patterns, and content rules that the 8F pipeline enforces."
-quality: null
+quality: 8.8
 ---
 
 # Constraint Spec: [CONSTRAINT_NAME]

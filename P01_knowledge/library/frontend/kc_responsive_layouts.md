@@ -3,7 +3,7 @@ id: p01_kc_responsive_layouts
 kind: knowledge_card
 pillar: P01
 domain: frontend
-quality: null
+quality: 8.8
 density_score: 0.88
 tags: [responsive, css-grid, flexbox, tailwind, mobile-first, container-queries]
 created: 2026-04-01

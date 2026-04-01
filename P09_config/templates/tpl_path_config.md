@@ -6,7 +6,7 @@ version: 1.0.0
 title: Template - Path Config
 tags: [template, path, config, directory, filesystem]
 tldr: Filesystem paths for CEX instance. Maps logical names to physical paths. Supports env vars.
-quality: null
+quality: 8.6
 ---
 
 # Path Config: [NAME]

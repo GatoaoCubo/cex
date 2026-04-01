@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: knowledge_agent
 domain: golden_test
-quality: null
+quality: 8.9
 tags: [golden_test, P07, GOVERN, kind-kc]
 tldr: "Single human-verified reference test case at quality >= 9.5 used as regression anchor for pipeline evaluation."
 when_to_use: "Building, reviewing, or reasoning about golden_test artifacts"

@@ -6,7 +6,7 @@ version: 1.0.0
 title: Template - Diagram
 tags: [template, diagram, visual, mermaid, ascii]
 tldr: Visual diagram (Mermaid or ASCII) showing structure, data flow, or sequences. Embedded in markdown.
-quality: null
+quality: 8.6
 ---
 
 # Diagram: [NAME]

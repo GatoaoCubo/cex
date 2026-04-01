@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: operations_agent
 domain: model_card
-quality: null
+quality: 8.9
 tags: [model_card, P02, GOVERN, kind-kc]
 tldr: "Structured spec of an LLM's capabilities, pricing, context window, and operational constraints for routing decisions"
 when_to_use: "Building, reviewing, or reasoning about model_card artifacts"

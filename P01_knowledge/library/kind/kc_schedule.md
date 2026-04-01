@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: research_agent
 domain: schedule
-quality: null
+quality: 8.9
 tags: [schedule, P12, GOVERN, kind-kc]
 tldr: "Temporal trigger specification (cron or interval) that initiates a workflow or agent_node task at defined times"
 when_to_use: "Building, reviewing, or reasoning about schedule artifacts"

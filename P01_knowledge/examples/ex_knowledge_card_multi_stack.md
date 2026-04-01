@@ -8,7 +8,7 @@ created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
 domain: cross_platform_development
-quality: null
+quality: 9.0
 tags: [multi-stack, design-system, cross-platform, csv-schema, adapter-pattern]
 tldr: "Unified design knowledge serves 13 tech stacks via shared core CSVs + per-stack guideline CSVs with identical schema"
 when_to_use: "Building systems that generate code or design recommendations across multiple frontend and mobile stacks"

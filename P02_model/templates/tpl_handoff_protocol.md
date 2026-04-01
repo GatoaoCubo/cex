@@ -6,7 +6,7 @@ version: 1.0.0
 title: "Template — Handoff Protocol"
 tags: [template, handoff, protocol, agent, transfer]
 tldr: "Defines how control transfers between agents or nuclei. Specifies trigger conditions, payload schema, acknowledgment rules, and failure handling for agent-to-agent handoffs."
-quality: null
+quality: 8.8
 ---
 
 # Handoff Protocol: [PROTOCOL_NAME]

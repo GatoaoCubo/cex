@@ -6,7 +6,7 @@ version: 1.0.0
 title: "Template — Checkpoint"
 tags: [template, checkpoint, state, resume, orchestration]
 tldr: "Saves pipeline state at a point-in-time for pause/resume. Captures completed steps, accumulated context, and resume instructions. Enables fault-tolerant execution."
-quality: null
+quality: 8.8
 ---
 
 # Checkpoint: [CHECKPOINT_ID]

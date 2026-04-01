@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: research_agent
 domain: quality_gate
-quality: null
+quality: 9.0
 tags: [quality_gate, P11, GOVERN, kind-kc]
 tldr: "Binary pass/fail barrier with numeric score threshold that controls artifact promotion and pipeline progression"
 when_to_use: "Building, reviewing, or reasoning about quality_gate artifacts"

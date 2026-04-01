@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: chunk_strategy
-quality: null
+quality: 9.0
 tags: [chunk_strategy, p01, CONSTRAIN, kind-kc]
 tldr: "Defines how raw text is split into retrieval-sized segments — the single highest-leverage knob in any RAG pipeline"
 when_to_use: "Building, reviewing, or reasoning about chunk_strategy artifacts"

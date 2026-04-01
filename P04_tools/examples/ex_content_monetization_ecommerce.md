@@ -9,7 +9,7 @@ author: n06_commercial
 title: "Example — Content Monetization: E-commerce (MercadoPago, BRL centavos, PIX, BaseLinker ERP)"
 tags: [example, content-monetization, ecommerce, mercadopago, pix, brl, baselinker, erp, N06]
 tldr: "E-commerce content monetization: MercadoPago + PIX, BRL centavos integer, 10% PIX discount, BaseLinker ERP sync for order/stock management."
-quality: null
+quality: 8.8
 domain: content-monetization
 use_case: ecommerce-brazil
 ---

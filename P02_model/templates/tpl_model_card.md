@@ -4,7 +4,7 @@ version: 1.0.0
 title: Template - Unknown
 tags: [template, model-card, llm, config, selection]
 tldr: Documents LLM capabilities, costs, limits, and recommended use cases for informed model selection.
-quality: null
+quality: 8.5
 model_name: ['nome_do_modelo']
 provider: ['openai|anthropic|google|local']
 context_window: ['numero_de_tokens']

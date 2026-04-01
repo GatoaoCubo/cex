@@ -6,7 +6,7 @@ version: 1.0.0
 title: "Template — Regression Check"
 tags: [template, regression, testing, monitoring, quality]
 tldr: "Detects quality regressions by comparing current outputs against known-good baselines. Runs after model updates, prompt changes, or config modifications."
-quality: null
+quality: 8.8
 ---
 
 # Regression Check: [CHECK_NAME]

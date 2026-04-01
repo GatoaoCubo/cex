@@ -8,7 +8,7 @@ created: 2026-03-30
 updated: 2026-04-01
 author: n02_visual_frontend_marketing
 domain: visual_frontend_engineering_and_copywriting
-quality: null
+quality: 9.0
 tags: [knowledge_card, visual-frontend, marketing, html, tailwind, copywriting, campaigns, N02]
 tldr: Dual-role knowledge — 10 frontend KCs (Tailwind, shadcn, a11y, responsive, typography, tokens) + copywriting formulas — for N02 Visual Frontend Engineer.
 when_to_use: Load before any visual, copy, or dual-mode task. Reference frontend KCs for HTML generation, copy formulas for persuasion, integration patterns for dual work.

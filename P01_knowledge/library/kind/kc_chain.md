@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: operations_agent
 domain: chain
-quality: null
+quality: 9.0
 tags: [chain, P03, PRODUCE, kind-kc]
 tldr: "Sequence of prompts where output A feeds input B, forming a deterministic LLM pipeline"
 when_to_use: "Building, reviewing, or reasoning about chain artifacts"

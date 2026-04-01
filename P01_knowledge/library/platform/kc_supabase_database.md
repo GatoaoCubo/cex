@@ -9,7 +9,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n04_knowledge
 domain: data_platform
-quality: null
+quality: 8.9
 tags: [supabase, postgresql, database, extensions, migrations, platform]
 tldr: "PostgreSQL 15+ gerenciado com 50+ extensions (pgvector, pg_cron, pg_net, pgjwt), migrations versionadas, e REST/GraphQL auto-gerados"
 when_to_use: "Quando configurar banco de dados Supabase para qualquer empresa"

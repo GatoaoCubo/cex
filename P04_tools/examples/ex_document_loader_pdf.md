@@ -14,7 +14,7 @@ output_format: langchain_doc
 chunk_size: 512
 overlap: 50
 encoding: utf-8
-quality: null
+quality: 8.7
 tags: [document_loader, pdf, RAG, chunking, P04]
 tldr: "PDF loader with recursive chunking at 512 tokens for RAG pipelines using PyMuPDF parser"
 description: "Ingests PDF files, extracts text with layout awareness, and produces chunked Documents"

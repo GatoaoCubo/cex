@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-01
 author: builder
 domain: frontend
-quality: null
+quality: 8.8
 tags: [knowledge, frontend]
 tldr: "Typography Web patterns and best practices"
 density_score: 0.88

@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: null
+quality: 8.9
 tags: [cex, lp04, tools, call, skill, mcp, hook, plugin]
 tldr: "P04 Tools agrupa 10 tipos de ferramenta que estendem o LLM alem de texto via funcao CALL"
 when_to_use: "Classificar artefatos de tooling ou entender como P04 conecta o LLM ao mundo externo"

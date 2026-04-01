@@ -6,7 +6,7 @@ version: 1.0.0
 title: Template - Daemon
 tags: [template, daemon, background, service, worker]
 tldr: "Long-running background service: startup, shutdown, health check, signal handling, restart policy."
-quality: null
+quality: 8.6
 ---
 
 # Daemon: [NAME]

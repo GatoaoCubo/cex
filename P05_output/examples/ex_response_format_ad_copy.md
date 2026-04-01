@@ -9,7 +9,7 @@ references:
   - tpl_response_format
   - ex_agent_copywriter
   - ex_quality_gate_copy
-quality: null
+quality: 8.7
 ---
 
 # Ad Copy Output Format

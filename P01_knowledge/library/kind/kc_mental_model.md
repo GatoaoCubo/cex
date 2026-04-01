@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: operations_agent
 domain: mental_model
-quality: null
+quality: 8.9
 tags: [mental_model, P02, BECOME, kind-kc]
 tldr: "YAML identity map encoding an agent's routing logic, decision boundaries, and personality constraints"
 when_to_use: "Building, reviewing, or reasoning about mental_model artifacts"

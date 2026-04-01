@@ -8,7 +8,7 @@ created: 2026-03-29
 updated: 2026-03-29
 author: builder_agent
 domain: feedback
-quality: null
+quality: 8.9
 tags: [reward-signal, llm-judge, quality-scoring, continuous-feedback]
 tldr: "Claude Haiku avalia cada resposta do agente em 3 criterios (accuracy, helpfulness, safety) gerando score 0.0-1.0 para feedback loop"
 when_to_use: "Quando agentes precisam de feedback continuo sobre qualidade de respostas sem human-in-the-loop"

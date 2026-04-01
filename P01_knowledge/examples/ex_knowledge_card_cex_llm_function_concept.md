@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: null
+quality: 8.9
 tags: [cex, llm-function, pipeline, execution-sequence, become-collaborate]
 tldr: "8 funcoes LLM (BECOME a COLLABORATE) descrevem o pipeline real de execucao -- sequencia, nao categorias"
 when_to_use: "Entender como LLMs processam artefatos e por que a sequencia importa"

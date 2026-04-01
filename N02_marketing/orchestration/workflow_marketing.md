@@ -15,7 +15,7 @@ retry_policy: per_step_with_mode_awareness
 depends_on: []
 signals: [visual_complete, copy_complete, dual_complete, workflow_error]
 domain: visual_frontend_engineering_and_copywriting
-quality: null
+quality: 8.9
 tags: [workflow, visual-frontend, marketing, html, tailwind, copywriting, N02, component, landing_page]
 tldr: 6 dual-role workflows — 3 visual (component, landing page, responsive), 2 copy (campaign, email), 1 dual (integrated page) — mode-aware execution.
 density_score: 0.96

@@ -6,7 +6,7 @@ version: 1.0.0
 title: "Template — Browser Tool"
 tags: [template, browser, scraping, web, automation]
 tldr: "Configures a headless browser tool for web scraping, screenshot capture, or page interaction. Defines navigation rules, extraction patterns, and rate limits."
-quality: null
+quality: 8.7
 ---
 
 # Browser Tool: [NAME]

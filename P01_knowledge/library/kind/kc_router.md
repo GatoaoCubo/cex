@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: operations_agent
 domain: router
-quality: null
+quality: 8.9
 tags: [router, P02, REASON, kind-kc]
 tldr: "Keyword-to-agent_node routing rule that maps incoming tasks to the correct execution target"
 when_to_use: "Building, reviewing, or reasoning about router artifacts"

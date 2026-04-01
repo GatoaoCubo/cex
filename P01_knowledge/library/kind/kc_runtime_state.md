@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: research_agent
 domain: runtime_state
-quality: null
+quality: 9.0
 tags: [runtime_state, P10, INJECT, kind-kc]
 tldr: "Accumulated variable state built during execution that persists between sessions — routing decisions, active task queue, counters"
 when_to_use: "Building, reviewing, or reasoning about runtime_state artifacts"

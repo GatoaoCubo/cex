@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: knowledge_agent
 domain: eval_dataset
-quality: null
+quality: 8.9
 tags: [eval_dataset, P07, GOVERN, kind-kc]
 tldr: "Versioned collection of test cases with inputs and expected outputs for systematic evaluation."
 when_to_use: "Building, reviewing, or reasoning about eval_dataset artifacts"

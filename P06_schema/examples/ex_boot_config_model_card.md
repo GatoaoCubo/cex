@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
-quality: null
+quality: 8.9
 tags: [blueprint, model-card, meta-template, production-mold, llm-spec]
 tldr: "Meta-template que define COMO gerar model_cards validos — frontmatter layered, capabilities como booleans, pricing normalizado, freshness 90d"
 when_to_use: "Antes de gerar qualquer model_card — este blueprint eh o molde"
@@ -310,7 +310,7 @@ pricing:
   cache_write: 3.75
   unit: per_1M_tokens
 domain: model_selection
-quality: null
+quality: 8.9
 tags: [model-card, anthropic, claude-4, sonnet, balanced]
 tldr: "Claude Sonnet 4 — Anthropic, 200K context, $3/$15 per 1M tokens, melhor custo-beneficio para analise e pesquisa"
 when_to_use: "Tarefas de analise, pesquisa, marketing onde opus eh overkill e haiku insuficiente"

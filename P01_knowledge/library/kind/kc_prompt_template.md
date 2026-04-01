@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: operations_agent
 domain: prompt_template
-quality: null
+quality: 9.0
 tags: [prompt_template, P03, CONSTRAIN, kind-kc]
 tldr: "Reusable prompt mold with {{variables}} that generates concrete prompts when filled with runtime data"
 when_to_use: "Building, reviewing, or reasoning about prompt_template artifacts"

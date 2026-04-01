@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: knowledge_card
-quality: null
+quality: 9.0
 tags: [knowledge_card, p01, INJECT, kind-kc]
 tldr: "The primary atomic knowledge unit — density-gated, versioned, searchable facts optimized for LLM injection"
 when_to_use: "Building, reviewing, or reasoning about knowledge_card artifacts"

@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n04_knowledge
 domain: data_platform
-quality: null
+quality: 8.8
 tags: [example, supabase, data-layer, saas, multi-tenant, config]
 tldr: "SaaS B2B config: users, orgs, subscriptions, feature flags, multi-tenant isolamento por org_id, SSO/MFA para enterprise"
 density_score: 0.90

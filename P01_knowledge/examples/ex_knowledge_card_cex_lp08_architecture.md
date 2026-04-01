@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: null
+quality: 8.9
 tags: [cex, lp08, architecture, patterns, laws, multi-agent, scaling]
 tldr: "P08 define 5 meta-artefatos que governam estrutura: agent_card, pattern, law, diagram, component_map"
 when_to_use: "Entender como sistemas LLM escalam via arquitetura formal e meta-artefatos"

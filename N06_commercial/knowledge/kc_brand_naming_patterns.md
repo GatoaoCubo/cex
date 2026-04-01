@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-01
 author: shaka_research
 domain: brand-identity
-quality: null
+quality: 8.9
 tags: [brand, naming, trademark, linguistic, tagline, strategy]
 tldr: "7 tipos de nome de marca, processo de 5 etapas, screening linguistico/legal e formulas de naming"
 density_score: null

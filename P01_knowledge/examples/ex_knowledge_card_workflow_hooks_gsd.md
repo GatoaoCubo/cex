@@ -8,7 +8,7 @@ created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
 domain: hook_engineering
-quality: null
+quality: 8.9
 tags: [hooks, workflow, advisory, context-monitor, prompt-guard, claude-code]
 tldr: "5 JS hooks enforce workflow sem bloquear — advisory via additionalContext, timeout guard, silent fail"
 when_to_use: "Projetar hooks para Claude Code que guiem agentes sem travar execucao"

@@ -6,7 +6,7 @@ version: 1.0.0
 title: "Template — Director"
 tags: [template, director, orchestration, crew, multi-agent]
 tldr: "A director coordinates a crew of builders to produce complex artifacts. Defines crew composition, task decomposition, handoff protocol, and quality aggregation."
-quality: null
+quality: 8.7
 ---
 
 # Director: [DIRECTOR_NAME]

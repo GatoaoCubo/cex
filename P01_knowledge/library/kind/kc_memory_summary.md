@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: research_agent
 domain: memory_summary
-quality: null
+quality: 9.0
 tags: [memory_summary, P10, INJECT, kind-kc]
 tldr: "LLM-compressed digest of prior session memories, injected to bootstrap context without raw history verbosity"
 when_to_use: "Building, reviewing, or reasoning about memory_summary artifacts"

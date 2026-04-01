@@ -6,7 +6,7 @@ version: 1.0.0
 title: Template - Component Map
 tags: [template, component, map, architecture, deps]
 tldr: Visual map of system components, technologies, responsibilities, and data flow between them.
-quality: null
+quality: 8.6
 ---
 
 # Component Map: [NAME]

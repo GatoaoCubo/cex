@@ -6,7 +6,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n03_builder
 domain: platform_analysis
-quality: null
+quality: 8.9
 tldr: "Cross-platform comparison — Hotmart vs Digistore24 vs Kiwify vs Teachable for content monetization across BR, EU, and global markets."
 tags: [comparison, hotmart, digistore24, kiwify, teachable, platform, monetization]
 density_score: 0.89

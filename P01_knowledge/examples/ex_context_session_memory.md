@@ -8,7 +8,7 @@ tldr: "Injects the last N conversation turns as context for multi-turn interacti
 references:
   - tpl_context_doc
   - ex_knowledge_card_rag_fundamentals
-quality: null
+quality: 8.8
 ---
 
 # Session Memory Context

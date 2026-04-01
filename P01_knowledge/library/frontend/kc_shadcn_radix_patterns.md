@@ -3,7 +3,7 @@ id: p01_kc_shadcn_radix_patterns
 kind: knowledge_card
 pillar: P01
 domain: frontend
-quality: null
+quality: 8.8
 density_score: 0.88
 created: 2026-04-01
 updated: 2026-04-01

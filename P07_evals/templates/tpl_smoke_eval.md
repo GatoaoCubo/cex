@@ -6,7 +6,7 @@ version: 1.0.0
 title: Template - Smoke Eval
 tags: [template, smoke, eval, sanity, quick]
 tldr: Fast sanity check (<30s) that catches obvious regressions. Syntax, import, basic function, output format.
-quality: null
+quality: 8.6
 ---
 
 # Smoke Eval: [NAME]

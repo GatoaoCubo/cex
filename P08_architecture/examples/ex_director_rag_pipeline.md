@@ -11,7 +11,7 @@ description: "Orchestrates the RAG pipeline: document ingestion, chunking, embed
 crew_size: 5
 execution_mode: pipeline
 domain: "rag"
-quality: null
+quality: 8.8
 tags: [director, rag, pipeline, orchestration, P08]
 tldr: "Crew director for RAG pipeline: document-loader -> parser -> embedding-config -> retriever -> prompt-template in strict sequence."
 density_score: 0.91

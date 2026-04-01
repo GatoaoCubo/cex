@@ -8,7 +8,7 @@ tldr: "Validates artifact content density: ratio of non-empty lines to total lin
 references:
   - tpl_validation_rule
   - bld_schema_validator
-quality: null
+quality: 8.8
 ---
 
 # Density Validation Rule

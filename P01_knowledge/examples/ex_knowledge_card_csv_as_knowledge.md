@@ -8,7 +8,7 @@ created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
 domain: cex_taxonomy
-quality: null
+quality: 9.0
 tags: [csv, knowledge-base, bm25, structured-data, runtime-search]
 tldr: "CSVs como knowledge base searchable via BM25 — sem banco, sem embeddings, sem servidor, ~50ms por query"
 when_to_use: "Precisar de recomendacoes contextuais baseadas em dados estruturados sem infraestrutura externa"

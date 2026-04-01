@@ -20,7 +20,7 @@ dependencies:
   - "Source code repository access"
 logging: true
 domain: "code_review"
-quality: null
+quality: 8.7
 tags: [instruction, code-review, checklist, quality]
 tldr: "6-step code review instruction: read diff, check correctness, security, style, tests, then produce structured verdict."
 density_score: 0.90

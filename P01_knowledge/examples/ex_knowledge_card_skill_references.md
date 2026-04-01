@@ -8,7 +8,7 @@ created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
 domain: knowledge_engineering
-quality: null
+quality: 9.0
 tags: [skill-references, token-efficiency, progressive-disclosure, information-architecture]
 tldr: "SKILL.md leve (workflow + quick ref) + sub-arquivos profundos (tabelas, exemplos) otimiza tokens e mantem profundidade acessivel"
 when_to_use: "Decidir como estruturar conteudo de skill entre interface leve e referencia profunda"
