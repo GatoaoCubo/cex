@@ -208,3 +208,23 @@ N07 invokes these internally. User never types them.
 /consolidate -> N07 collects, verifies, commits, pushes
 
 4 commands. Everything else autonomous. 83% standard taxonomy.
+
+---
+
+## ADDENDUM: kind:skill REGISTERED (v2.1 fix)
+
+CEX had a skill-builder (9 ISO files), 3 KCs about skills, and AgentSkills.io spec knowledge.
+But `kind: skill` was never registered in kinds_meta.json. Gap fixed:
+
+- kinds_meta.json: 104 -> 105 kinds (skill added to P04)
+- archetypes/builders/skill-builder/: 9 ISO files materialized from proof/
+- .claude/agents/skill-builder.md: agent registered (109th)
+
+**skill** is the most universal term in AI agent systems:
+Alexa Skills, Semantic Kernel Skills, AgentSkills.io, AutoGPT, Devin.
+Boundary: trigger + phases + reusable. No identity (that is agent). No orchestration (that is workflow).
+
+### Revised taxonomy score
+- 44 universal + 30 AI-domain + 13 semi + 18 invented = 105 kinds
+- skill joins universal tier (Alexa, Semantic Kernel, AgentSkills.io)
+- **84% standard taxonomy** (was 83%)

@@ -934,5 +934,18 @@
     "max_bytes": 3072,
     "naming": "p12_wf_{{name}}.md + .yaml",
     "pillar": "P12"
+  },
+  "skill": {
+    "description": "Reusable capability with trigger + phases (AgentSkills.io / Semantic Kernel pattern)",
+    "pillar": "P04",
+    "boundary": "Phased reusable capability with trigger. NOT agent (P02, has identity) or workflow (P12, orchestration steps) or action_prompt (P03, single-turn).",
+    "llm_function": "BECOME",
+    "layer": "",
+    "examples": [
+      "p04_skill_git_commit",
+      "p04_skill_web_search",
+      "p04_skill_code_review"
+    ],
+    "schema_ref": "archetypes/builders/skill-builder/bld_schema_skill.md"
   }
 }
