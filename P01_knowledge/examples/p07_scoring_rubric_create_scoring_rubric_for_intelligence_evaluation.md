@@ -1,14 +1,14 @@
 ---
-id: p07_sr_intelligence_evaluation
+id: p07_sr_5d_intelligence
 kind: scoring_rubric
 pillar: P07
-title: "Rubric: Intelligence Evaluation"
+title: "Rubric: 5D Intelligence Evaluation"
 version: "1.0.0"
 created: "2026-04-01"
 updated: "2026-04-01"
 author: "scoring-rubric-builder"
-framework: "intelligence_5d"
-target_kinds: [intelligence_brief, market_analysis, competitor_intel, research_summary]
+framework: "5D Intelligence"
+target_kinds: [intelligence_report, research_analysis, competitor_intel, market_research]
 dimensions_count: 5
 total_weight: 100
 threshold_golden: 9.5
@@ -17,58 +17,59 @@ threshold_review: 7.0
 automation_status: "semi-automated"
 domain: "intelligence"
 quality: 8.9
-tags: [scoring-rubric, intelligence, evaluation, research, analysis]
-tldr: "5-dimension intelligence rubric: accuracy 30%, completeness 25%, timeliness 20%, clarity 15%, sources 10%"
-density_score: 0.88
-calibration_set: []
+tags: [scoring-rubric, 5d, intelligence, evaluation, research]
+tldr: "5-dimension rubric for intelligence artifacts: research depth 25%, source quality 20%, analysis rigor 25%, insight generation 20%, actionability 10%"
+density_score: 0.87
+calibration_set: [p07_gt_intel_competitor_analysis, p07_gt_intel_market_trends]
 inter_rater_agreement: 0.82
-appeals_process: "Submit to N01 intelligence lead with supporting evidence for re-evaluation"
+appeals_process: "Submit to N01-intelligence with supporting sources for re-evaluation within 48h"
 linked_artifacts:
-  primary: "intelligence-brief-builder"
-  related: [p11_qg_intelligence_brief, p01_kc_intelligence_methods]
+  primary: "intelligence-report-builder"
+  related: [p11_qg_intelligence, p01_kc_research_methods, n01_intelligence_workflow]
 ---
 ## Framework Overview
 
-Intelligence evaluation framework measuring research and analytical outputs across 5 critical dimensions. Designed for intelligence briefs, market analyses, competitor intelligence, and research summaries where accuracy and actionability are paramount. Balances factual rigor (accuracy 30%) with practical utility (completeness 25%, clarity 15%) while ensuring currency (timeliness 20%) and verifiability (sources 10%).
+5D Intelligence evaluates research and analysis artifacts across five orthogonal dimensions that capture the full spectrum of intelligence quality. Designed for N01 Intelligence Nucleus outputs including competitor analysis, market research, trend reports, and strategic briefings. This rubric measures both the rigor of research methodology and the value of insights generated.
 
 ## Dimensions
 
 | Dimension | Weight | Scale | Criteria | Example (10) | Example (5) |
 |-----------|--------|-------|----------|-------------|-------------|
-| Accuracy | 30% | 0-10 | Factual correctness, no errors, claims verified against sources | All facts verified, zero factual errors, cross-referenced data points | 1-2 minor factual errors, most claims accurate |
-| Completeness | 25% | 0-10 | Coverage of key aspects, no critical gaps, addresses all stated objectives | Addresses all key questions, covers all relevant angles, anticipates follow-up needs | Covers main points but misses 1-2 important aspects |
-| Timeliness | 20% | 0-10 | Currency of information, relevance to current context, recency of sources | Data from last 30 days, addresses current market conditions | Some outdated info but core insights still relevant |
-| Clarity | 15% | 0-10 | Logical structure, actionable insights, executive summary, clear conclusions | Executive summary, bullet points, specific recommendations, logical flow | Generally clear but lacks executive summary or specific actions |
-| Sources | 10% | 0-10 | Quality and diversity of sources, proper attribution, verifiable references | 5+ diverse sources, all URLs accessible, proper citations throughout | 2-3 sources, basic attribution, some links functional |
+| Research Depth | 25% | 0-10 | Comprehensiveness of information gathering, multiple angles explored | 15+ sources across 4 categories, exhaustive coverage, contradictory views addressed | 6-8 sources from 2 categories, basic coverage, some gaps |
+| Source Quality | 20% | 0-10 | Credibility, recency, and relevance of information sources | Primary sources, peer-reviewed papers, recent data (<6mo), industry authorities | Mix of primary/secondary, mostly credible, some older data (6-18mo) |
+| Analysis Rigor | 25% | 0-10 | Logical reasoning, methodology transparency, assumptions stated | Clear methodology, assumptions explicit, logical flow, alternative scenarios considered | Basic methodology described, some assumptions stated, mostly logical |
+| Insight Generation | 20% | 0-10 | Novel connections, non-obvious patterns identified, strategic implications | 3+ novel insights, unexpected patterns, clear strategic implications with supporting evidence | 1-2 basic insights, obvious patterns, limited strategic value |
+| Actionability | 10% | 0-10 | Practical recommendations with clear next steps and measurable outcomes | Specific actions with timelines, success metrics, risk mitigation, implementation guidance | General recommendations, vague timelines, limited implementation detail |
 
 ## Thresholds
 
 | Tier | Score | Action |
 |------|-------|--------|
-| GOLDEN | >= 9.5 | Promote to intelligence library, use as training reference |
-| PUBLISH | >= 8.0 | Release to stakeholders, archive in intelligence database |
-| REVIEW | >= 7.0 | Return for revision on specific failing dimensions |
-| REJECT | < 7.0 | Restart research with additional sources and verification |
+| GOLDEN | >= 9.5 | Promote to intelligence archive as reference case, distribute to stakeholders |
+| PUBLISH | >= 8.0 | Approve for distribution, add to knowledge base |
+| REVIEW | >= 7.0 | Return with dimension-specific feedback, request targeted improvements |
+| REJECT | < 7.0 | Redo with new research scope, methodology review required |
 
 ## Calibration
 
-- **GOLDEN (9.6)**: Comprehensive competitor analysis with verified financials from SEC filings, 8 diverse sources, covers all strategic areas, actionable recommendations with timeline
-- **PUBLISH (8.3)**: Market research brief with current data, 4 quality sources, addresses key questions, clear insights but minor gaps in coverage
-- **REVIEW (7.1)**: Intelligence summary with good analysis but 2 factual errors and outdated pricing data requiring correction
-- **REJECT (5.2)**: Brief with multiple unverified claims, sources from 6+ months ago, incomplete coverage of stated objectives
+- **GOLDEN (9.7)**: Comprehensive competitor analysis with 18 primary sources, novel market positioning insights, 6-month implementation roadmap with KPIs
+- **PUBLISH (8.4)**: Market trend report with 12 quality sources, solid analysis, actionable recommendations for next quarter
+- **REVIEW (7.3)**: Basic competitor overview with 8 sources, surface-level insights, general recommendations lacking specificity
+- **REJECT (5.8)**: Superficial research with 4 secondary sources, no novel insights, recommendations too vague for implementation
 
 ## Automation
 
-| Dimension | Status | Tool |
-|-----------|--------|------|
-| Accuracy | manual | Human fact-checking against primary sources |
-| Completeness | semi-automated | Checklist validation + human gap analysis |
-| Timeliness | automated | Source date extraction + currency check |
-| Clarity | semi-automated | Structure validation + human readability review |
-| Sources | semi-automated | URL validation + citation format check |
+| Dimension | Status | Tool | Notes |
+|-----------|--------|------|-------|
+| Research Depth | semi-automated | source_counter.py + manual methodology review | Automated counting, human evaluation of comprehensiveness |
+| Source Quality | semi-automated | source_validator.py + credibility assessment | URL verification automated, credibility requires human judgment |
+| Analysis Rigor | manual | Human expert review | Logical reasoning evaluation requires domain expertise |
+| Insight Generation | manual | Human expert review | Novelty and strategic value require human assessment |
+| Actionability | semi-automated | action_parser.py + feasibility review | Action extraction automated, feasibility requires context knowledge |
 
 ## References
 
-- CIA Analytic Standards (2013)
-- Intelligence Community Directive 203
-- Sherman Kent School analytic tradecraft standards
+- Intelligence Community Assessment Standards (ODNI 2015)
+- Structured Analytic Techniques Reference Guide (CIA 2019)
+- source_validator.py v3.1 (CEX intelligence validation tools)
+- Research Quality Assessment Framework (Academic Intelligence Alliance 2024)
