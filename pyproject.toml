@@ -30,6 +30,49 @@ dependencies = [
 llm = [
     "anthropic>=0.39.0",
 ]
+# --- CEX SDK (v7.0.0+) — Runtime absorvido do Agno ---
+sdk-core = [
+    "pydantic>=2.0",
+]
+sdk-anthropic = [
+    "anthropic>=0.39.0",
+]
+sdk-openai = [
+    "openai>=1.0",
+]
+sdk-google = [
+    "google-genai>=1.0",
+]
+sdk-ollama = [
+    "ollama>=0.4.0",
+]
+sdk-litellm = [
+    "litellm>=1.0",
+]
+sdk-readers = [
+    "pymupdf>=1.24",
+    "python-docx>=1.0",
+    "beautifulsoup4>=4.12",
+]
+sdk-embeddings = [
+    "sentence-transformers>=3.0",
+]
+sdk-vectordb-chroma = [
+    "chromadb>=0.5",
+]
+sdk-vectordb-lance = [
+    "lancedb>=0.10",
+]
+sdk-mcp = [
+    "mcp>=1.0",
+]
+sdk-tracing = [
+    "opentelemetry-sdk>=1.20",
+]
+sdk-all = [
+    "cex-tools[sdk-core,sdk-anthropic,sdk-openai,sdk-google,sdk-ollama]",
+    "cex-tools[sdk-readers,sdk-embeddings,sdk-vectordb-chroma,sdk-mcp,sdk-tracing]",
+]
 dev = [
     "pytest>=7.0.0",
     "pytest-cov>=4.0.0",

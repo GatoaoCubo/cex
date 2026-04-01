@@ -54,7 +54,7 @@ def scan_system() -> dict:
     if null_files:
         for f in null_files[:10]:
             gaps.append({"type": "quality_null", "path": f, "priority": "medium",
-                         "action": f"Score artifact: python _tools/cex_score.py --apply {f}"})
+                         "action": f"Evolve+score: python _tools/cex_evolve.py single {f} --target 8.5"})
 
     # 2. Check doctor
     r = subprocess.run([sys.executable, "_tools/cex_doctor.py"], capture_output=True, text=True, timeout=30)
@@ -212,18 +212,25 @@ def execute_step(step: dict, dry_run: bool = False) -> dict:
         return result
 
     if step["type"] == "quality_null" and step.get("path"):
-        # Score the artifact
+        # AutoResearch: evolve (analyze + improve + score) in one pass
         r = subprocess.run(
-            [sys.executable, "_tools/cex_score.py", "--apply", step["path"]],
-            capture_output=True, text=True, timeout=30
+            [sys.executable, "_tools/cex_evolve.py", "single", step["path"],
+             "--target", "8.5", "--max-rounds", "2"],
+            capture_output=True, text=True, timeout=60
         )
         result["success"] = r.returncode == 0
-        result["output"] = (r.stdout + r.stderr).strip()[:200]
+        result["output"] = (r.stdout + r.stderr).strip()[-200:]
 
     elif step["type"] == "low_quality" and step.get("path"):
-        # For now, just flag for rebuild
-        result["success"] = True
-        result["note"] = f"Flagged for rebuild: {step['path']}"
+        # AutoResearch: evolve the artifact until it improves
+        r = subprocess.run(
+            [sys.executable, "_tools/cex_evolve.py", "single", step["path"],
+             "--target", "8.5", "--max-rounds", "3"],
+            capture_output=True, text=True, timeout=60
+        )
+        result["output"] = (r.stdout + r.stderr).strip()[-200:]
+        result["success"] = "KEEP" in r.stdout or "Target" in r.stdout
+        result["note"] = f"Evolved: {step['path']}" if result["success"] else f"Could not improve: {step['path']}"
 
     elif step["type"] == "missing_kind":
         # Auto-build missing artifact for nucleus

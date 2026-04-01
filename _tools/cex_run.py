@@ -290,15 +290,26 @@ def post_process(artifact_path: Path, builder_id: str, intent: str,
         if verbose:
             print(f"  Compile:  ❌ {e}")
 
-    # Score
+    # Evolve (AutoResearch: score + improve in one pass)
     try:
-        from _tools.cex_score import score_file
-        score_file(str(artifact_path), apply=True)
+        from _tools.cex_evolve import evolve_single
+        ev = evolve_single(Path(artifact_path), target=8.5, max_rounds=2, verbose=False)
+        results["evolved"] = ev
         results["scored"] = True
         if verbose:
-            print(f"  Score:    ✅ applied")
+            q = ev.get("quality", "?")
+            rounds = ev.get("rounds", 0)
+            print(f"  Evolve:   q={q} ({rounds} rounds, {ev.get('status', '?')})")
     except Exception:
-        results["scored"] = False
+        # Fallback to plain scoring if evolve fails
+        try:
+            from _tools.cex_score import score_file
+            score_file(str(artifact_path), apply=True)
+            results["scored"] = True
+            if verbose:
+                print(f"  Score:    ✅ applied (evolve fallback)")
+        except Exception:
+            results["scored"] = False
 
     # Memory update
     try:

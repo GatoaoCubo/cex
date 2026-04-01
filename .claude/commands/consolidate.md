@@ -19,16 +19,20 @@ git log --oneline -10
 powershell -Command "Get-Process claude,codex,gemini -EA SilentlyContinue | Select Id,ProcessName,CPU"
 ```
 
-### Step 2: VERIFY quality
+### Step 2: VERIFY + EVOLVE quality
 ```bash
 # Doctor health check
 python _tools/cex_doctor.py
 
-# Check for quality:null that should have been filled
-grep -r "^quality: null" {TARGET_DIR}/ --include="*.md"
+# Compile all
+python _tools/cex_compile.py --all
 
-# Verify compilation happened
-ls {TARGET_DIR}/compiled/*.yaml
+# AutoResearch: evolve any quality:null or low-quality artifacts
+# This scores AND improves in one pass (keep/discard loop)
+python _tools/cex_evolve.py sweep --target 8.5 --max-rounds 2
+
+# Verify results
+python _tools/cex_evolve.py report
 ```
 
 ### Step 3: STOP processes

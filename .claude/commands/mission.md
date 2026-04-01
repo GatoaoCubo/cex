@@ -130,13 +130,29 @@ python _tools/cex_mission.py execute "$ARGUMENTS" --complexity standard
   → Dispatch: N03 directly
 ```
 
-## Post-Execution
+## Post-Execution (auto-consolidate)
 
 After all nuclei signal complete:
 
 ```bash
+# 1. Check what landed
 bash _spawn/dispatch.sh status
+git log --oneline -10
+
+# 2. Compile everything
+python _tools/cex_compile.py --all
+
+# 3. AutoResearch: evolve all new/low artifacts (AUTOMATIC)
+# This is the Karpathy loop: score → improve → keep/discard
+python _tools/cex_evolve.py sweep --target 8.5 --max-rounds 2
+
+# 4. Doctor check
 python _tools/cex_doctor.py
+
+# 5. Commit consolidation
+git add -A && git commit -m "[N07] consolidate: mission complete"
 ```
 
+The evolve sweep runs **automatically** — user doesn't need to know about it.
+It catches quality:null artifacts, improves what it can, scores everything.
 Show user what was produced. Highlight any `auto_filled` decisions for review.

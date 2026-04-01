@@ -5,6 +5,19 @@ Format follows [Keep a Changelog](https://keepachangelog.com/).
 
 ---
 
+## [Unreleased] — v7.0.0 Runtime Foundation (Planned)
+
+### Planned (Agno Assimilation — Phase 1)
+- `cex_sdk/models/` — Model provider SDK (Claude, GPT, Gemini, Ollama, OpenRouter, LiteLLM)
+- `cex_sdk/tools/` — Toolkit framework + Function auto-schema + @cex_tool decorator
+- `cex_sdk/guardrails/` — PII detection, prompt injection, moderation (absorvido do Agno)
+- `cex_sdk/models/structured.py` — Pydantic structured output for LLM responses
+- New kinds: model_provider, toolkit, guardrail
+- See: `_docs/ASSIMILATION_PLAN.md` for full 4-phase roadmap (v7→v10)
+- See: `_docs/AGNO_vs_CEX_ANALYSIS.md` for competitive analysis
+
+---
+
 ## [6.0.0] - 2026-03-27 — Governance
 
 ### Added
