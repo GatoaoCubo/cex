@@ -1,15 +1,15 @@
 ---
-id: p07_sr_orchestration_quality
+id: p07_sr_orchestration_5d
 kind: scoring_rubric
 pillar: P07
-title: "Rubric: Orchestration Quality"
+title: "Rubric: Orchestration Evaluation"
 version: "1.0.0"
 created: "2026-04-01"
 updated: "2026-04-01"
 author: "scoring-rubric-builder"
-framework: "orchestration_quality"
-target_kinds: [workflow, mission_spec, grid_execution, orchestration_plan]
-dimensions_count: 4
+framework: "5D Orchestration"
+target_kinds: [workflow, dag, dispatcher, handoff_protocol, spawn_config]
+dimensions_count: 5
 total_weight: 100
 threshold_golden: 9.5
 threshold_publish: 8.0
@@ -17,56 +17,60 @@ threshold_review: 7.0
 automation_status: "semi-automated"
 domain: "orchestration"
 quality: 8.9
-tags: [scoring-rubric, orchestration, n07, evaluation, coordination]
-tldr: "4-dimension rubric for orchestration: coordination 30%, efficiency 25%, reliability 25%, completeness 20%"
-density_score: 0.89
-calibration_set: [p07_gt_grid_mission_complete, p07_gt_handoff_n03_agent]
+tags: [scoring-rubric, orchestration, 5d, evaluation, workflow]
+tldr: "5-dimension orchestration rubric: correctness 35%, reliability 25%, efficiency 20%, scalability 15%, maintainability 5%"
+density_score: 0.87
+calibration_set: [p12_wf_mission_pipeline, p07_gt_handoff_n03_to_n02]
 inter_rater_agreement: 0.82
 appeals_process: "Submit to N07 orchestrator with execution logs and rationale for re-evaluation"
 linked_artifacts:
   primary: "workflow-builder"
-  related: [p11_qg_orchestration, p12_wf_mission_pipeline]
+  related: [p11_qg_workflow, p12_dp_orchestration_routing, p08_ag_n07_orchestrator]
 ---
 ## Framework Overview
 
-Orchestration Quality evaluates how effectively complex multi-nucleus missions are coordinated, executed, and completed. Designed specifically for CEX orchestration artifacts including workflows, mission specs, grid executions, and orchestration plans. This rubric measures the quality of coordination between nuclei (N01-N07), resource efficiency, fault tolerance, and mission completion rates.
+5D Orchestration evaluates workflow artifacts, DAGs, dispatch rules, handoff protocols, and spawn configurations across 5 critical dimensions. Designed for mission-critical orchestration where failure cascades across multiple nuclei. Prioritizes correctness and reliability over optimization, reflecting the high cost of orchestration failures in production environments.
+
+Target artifacts: Any P12 pillar orchestration component that coordinates multiple agents, manages handoffs between nuclei, or controls execution flow in the CEX system.
 
 ## Dimensions
 
 | Dimension | Weight | Scale | Criteria | Example (10) | Example (5) |
 |-----------|--------|-------|----------|-------------|-------------|
-| Coordination | 30% | 0-10 | Handoff clarity, signal management, nucleus synchronization | All handoffs explicit with clear deliverables, signals tracked, zero coordination failures | Some handoffs unclear, occasional signal loss, 1-2 minor coordination gaps |
-| Efficiency | 25% | 0-10 | Parallel execution, resource utilization, minimal waste | 85%+ parallel execution, CPU/memory optimized, zero idle nuclei | 60% parallel execution, some resource waste, occasional idle nuclei |
-| Reliability | 25% | 0-10 | Error handling, fault tolerance, recovery mechanisms | Complete error handling, auto-recovery from failures, 99%+ success rate | Basic error handling, manual recovery needed, 85% success rate |
-| Completeness | 20% | 0-10 | Mission scope coverage, deliverable fulfillment, goal achievement | 100% of mission scope delivered, all goals achieved, zero gaps | 85% scope delivered, most goals achieved, minor gaps in deliverables |
+| Correctness | 35% | 0-10 | Execution produces expected outputs, handles all specified inputs, zero logic errors | All 15 test cases pass, handles edge cases, proper error codes | 12/15 tests pass, minor edge case failures |
+| Reliability | 25% | 0-10 | Graceful failure handling, retry mechanisms, timeout management, circuit breakers | Fails fast with clear errors, 3-tier retry with exponential backoff | Basic error handling, single retry attempt |
+| Efficiency | 20% | 0-10 | Resource utilization, execution time, parallelization, blocking minimization | 80% parallel execution, <2s latency, memory efficient | 40% parallel, 5s latency, acceptable memory |
+| Scalability | 15% | 0-10 | Performance under load, queue management, resource scaling, bottleneck identification | Handles 100+ concurrent tasks, auto-scaling, no bottlenecks | Handles 20 concurrent, manual scaling needed |
+| Maintainability | 5% | 0-10 | Code clarity, documentation, debugging support, modification ease | Self-documenting config, debug traces, modular design | Basic comments, some debug info available |
 
 ## Thresholds
 
 | Tier | Score | Action |
 |------|-------|--------|
-| GOLDEN | >= 9.5 | Promote to reference orchestration patterns, add to best practices |
-| PUBLISH | >= 8.0 | Deploy to production orchestration pool |
-| REVIEW | >= 7.0 | Return with specific dimension feedback for improvement |
-| REJECT | < 7.0 | Redesign orchestration approach, re-evaluate coordination strategy |
+| GOLDEN | >= 9.5 | Deploy to production, use as reference implementation |
+| PUBLISH | >= 8.0 | Deploy to staging, schedule production deployment |
+| REVIEW | >= 7.0 | Return with specific dimension feedback, require fixes |
+| REJECT | < 7.0 | Redo from scratch, fundamental design issues |
 
 ## Calibration
 
-- **GOLDEN (9.7)**: p07_gt_grid_mission_complete — 6 nuclei coordinated flawlessly, 92% parallel execution, zero failures, 100% scope delivered
-- **PUBLISH (8.4)**: Typical successful grid execution with clear handoffs, 75% parallel execution, 1 recoverable failure, 95% scope delivered
-- **REVIEW (7.3)**: Grid with coordination issues, 55% parallel execution, manual recovery needed, 80% scope delivered
-- **REJECT (4.2)**: Failed coordination, sequential execution, multiple failures, 40% scope delivered
+- **GOLDEN (9.8)**: p12_wf_mission_pipeline — perfect execution flow, handles 6 nuclei in parallel, comprehensive error handling, auto-recovery, <1s latency
+- **PUBLISH (8.4)**: Standard workflow with 4 nuclei, good error handling, 2s latency, manual intervention on some failures
+- **REVIEW (7.1)**: Basic workflow with 2 nuclei, minimal error handling, 5s latency, requires manual restart on failures
+- **REJECT (4.2)**: Sequential execution only, no error handling, frequent hangs, debugging impossible
 
 ## Automation
 
 | Dimension | Status | Tool |
 |-----------|--------|------|
-| Coordination | semi-automated | bash _spawn/dispatch.sh status + manual handoff review |
-| Efficiency | automated | Resource monitoring scripts, parallel execution metrics |
-| Reliability | semi-automated | Error log analysis + manual failure pattern review |
-| Completeness | manual | Human review of deliverables against mission scope |
+| Correctness | automated | cex_system_test.py --orchestration + pytest execution validation |
+| Reliability | semi-automated | Error pattern analysis + manual failure scenario review |
+| Efficiency | automated | Performance profiling via cex_token_budget.py + execution timing |
+| Scalability | manual | Load testing with increasing task volumes |
+| Maintainability | semi-automated | Code complexity metrics + manual documentation review |
 
 ## References
 
-- CEX Orchestration Patterns: N07 nucleus architecture
-- Grid Execution Logs: .cex/runtime/signals/ analysis
-- Nucleus Coordination Protocol: _spawn/dispatch.sh implementation
+- CEX Orchestration Patterns v2.1 (N07 specification)
+- Temporal Workflow Engine evaluation framework
+- Martin Fowler's Enterprise Integration Patterns
