@@ -1,55 +1,67 @@
 ---
-id: p05_fmt_engineering_reports
+id: p05_fmt_engineering_report
 kind: formatter
 pillar: P05
 version: "1.0.0"
 created: "2026-04-01"
 updated: "2026-04-01"
-author: "formatter_builder"
+author: "formatter-builder"
 target_format: "markdown"
 input_type: "structured_data"
-rule_count: 8
+rule_count: 6
 domain: "engineering_reporting"
-quality: 8.8
-tags: [formatter, engineering, reports, markdown, P05, metrics]
-tldr: "Formats engineering project data into structured Markdown reports with status, metrics, issues, and timeline sections"
+quality: 8.9
+tags: [formatter, markdown, engineering, P05, report, status]
+tldr: "Formats engineering project data into structured Markdown report with status, metrics, timeline, and team sections"
 template_engine: "string_format"
 pretty_print: true
 escaping: "none"
 encoding: "utf8"
-locale: "en-US"
+locale: "pt-BR"
 streaming: false
-keywords: [engineering-reports, project-status, metrics-display, markdown-formatter]
+keywords: [engineering-report, status-formatter, markdown-formatter, project-display]
 density_score: 0.89
 ---
-# Engineering Reports Formatter
+# Engineering Report Formatter
 
 ## Formatting Rules
 | Name | Input Field | Transform | Pattern | Options |
 |------|-------------|-----------|---------|---------|
-| status_badge | project_status | template | `## Status: {value}` | uppercase: true, badges: ["🟢 HEALTHY", "🟡 AT_RISK", "🔴 BLOCKED"] |
-| metric_display | metrics | number_format | `**{key}:** {value:,}` | group_separator: true, precision: 0 |
-| issue_count | issue_summary | template | `- **{severity}:** {count} issues` | sort_by: severity, colors: {"critical": "🔴", "high": "🟠", "medium": "🟡"} |
-| timeline_format | milestones | date_format | `- **{name}:** {date:%B %d, %Y}` | date_style: full, overdue_marker: "⚠️" |
-| team_roster | team_members | template | `- {name} ({role})` | sort_by: role, group_leads: true |
-| progress_bar | completion_pct | template | `Progress: {value}% [{bar}]` | bar_width: 20, fill_char: "█", empty_char: "░" |
-| priority_list | priorities | stringify | `{rank}. {item}` | max_items: 5, truncate: "..." |
-| blockers_alert | blockers | template | `⚠️ **BLOCKER:** {description}` | highlight: true, max_length: 80 |
+| project_header | project_name, status | template | `# {project_name}\n**Status:** {status}` | uppercase_status: true |
+| metrics_table | metrics | tabulate | `\| Metric \| Value \| Target \|\n\|-----\|-----\|-----\|\n{rows}` | precision: 2, align: right |
+| timeline_section | milestones | template | `## Timeline\n{milestone_list}` | date_format: "dd/MM/yyyy" |
+| team_section | team_members | template | `## Team\n{member_list}` | role_display: true |
+| issues_list | current_issues | template | `## Current Issues\n{issue_bullets}` | priority_sort: true |
+| summary_section | summary_data | template | `## Summary\n**Progress:** {progress}%\n**Next Steps:** {next_steps}` | progress_bar: true |
 
 ## Input Specification
 Type: structured_data
-Structure: Engineering project object containing status, metrics, issues, timeline, team, and blocker data.
+Structure: Engineering project object with name, status, metrics, milestones, team, issues, and summary fields.
 Example:
 ```json
 {
-  "project_status": "healthy",
-  "metrics": {"velocity": 23, "bugs_fixed": 14, "code_coverage": 87},
-  "issue_summary": [{"severity": "critical", "count": 0}, {"severity": "high", "count": 3}],
-  "milestones": [{"name": "Beta Release", "date": "2026-04-15", "status": "on_track"}],
-  "team_members": [{"name": "Alice Chen", "role": "Tech Lead"}, {"name": "Bob Smith", "role": "Engineer"}],
-  "completion_pct": 67,
-  "priorities": ["Fix authentication bug", "Complete API documentation"],
-  "blockers": [{"description": "Waiting on security review for deployment"}]
+  "project_name": "Sistema de Autenticação",
+  "status": "em desenvolvimento",
+  "metrics": [
+    {"name": "Cobertura de Testes", "value": 87.5, "target": 90},
+    {"name": "Performance (ms)", "value": 245, "target": 200}
+  ],
+  "milestones": [
+    {"name": "MVP", "date": "2026-04-15", "status": "em andamento"},
+    {"name": "Beta", "date": "2026-05-01", "status": "planejado"}
+  ],
+  "team_members": [
+    {"name": "Ana Silva", "role": "Tech Lead"},
+    {"name": "Carlos Santos", "role": "Backend Dev"}
+  ],
+  "current_issues": [
+    {"title": "Latência no banco", "priority": "alta"},
+    {"title": "Documentação API", "priority": "média"}
+  ],
+  "summary_data": {
+    "progress": 65,
+    "next_steps": "Implementar cache Redis"
+  }
 }
 ```
 
@@ -57,71 +69,67 @@ Example:
 Format: markdown
 Example:
 ```markdown
-## Status: 🟢 HEALTHY
+# Sistema de Autenticação
+**Status:** EM DESENVOLVIMENTO
 
-### Key Metrics
-**velocity:** 23
-**bugs_fixed:** 14
-**code_coverage:** 87
+## Metrics
+| Metric | Value | Target |
+|--------|-------|--------|
+| Cobertura de Testes | 87,50 | 90,00 |
+| Performance (ms) | 245,00 | 200,00 |
 
-### Issues Summary
-- **critical:** 0 issues
-- **high:** 🟠 3 issues
+## Timeline
+- **MVP** (15/04/2026) - em andamento
+- **Beta** (01/05/2026) - planejado
 
-### Timeline
-- **Beta Release:** April 15, 2026
+## Team
+- Ana Silva (Tech Lead)
+- Carlos Santos (Backend Dev)
 
-### Team
-- Alice Chen (Tech Lead)
-- Bob Smith (Engineer)
+## Current Issues
+- 🔴 Latência no banco (alta)
+- 🟡 Documentação API (média)
 
-### Progress
-Progress: 67% [█████████████░░░░░░░]
-
-### Current Priorities
-1. Fix authentication bug
-2. Complete API documentation
-
-### Blockers
-⚠️ **BLOCKER:** Waiting on security review for deployment
+## Summary
+**Progress:** 65% [████████████████████████████████████████████████████████████████░░░░░░░░░░░░░░░░░░░░]
+**Next Steps:** Implementar cache Redis
 ```
 
 ## Template
 Engine: string_format
-```text
-## Status: {status_badge}
+```markdown
+# {project_name}
+**Status:** {status_upper}
 
-### Key Metrics
-{metrics_section}
+## Metrics
+| Metric | Value | Target |
+|--------|-------|--------|
+{metrics_rows}
 
-### Issues Summary
-{issues_section}
+## Timeline
+{milestone_items}
 
-### Timeline
-{timeline_section}
+## Team
+{team_items}
 
-### Team
-{team_section}
+## Current Issues
+{issue_items}
 
-### Progress
-{progress_section}
-
-### Current Priorities
-{priorities_section}
-
-{blockers_section}
+## Summary
+**Progress:** {progress}% {progress_bar}
+**Next Steps:** {next_steps}
 ```
 
 ## Edge Cases
-- Null values: render as "Not available" for metrics, skip section if entire category missing
-- Empty arrays: display "None" for issues/blockers, "No milestones set" for timeline
-- Special characters: escape pipe `|` as `\|` in any table cells
-- Overflow: truncate descriptions at 80 chars with "..." for blockers, limit priorities to top 5
-- Invalid dates: display as "TBD" with validation warning
-- Missing status: default to "UNKNOWN" with 🔵 indicator
+- Null values: render as `N/A` in tables and `-` in lists
+- Empty arrays: show section header with "Nenhum item" placeholder
+- Special characters: pipe `|` escaped as `\|` in table cells
+- Number formatting: Brazilian locale (87,50 not 87.5) for decimal values
+- Date overflow: truncate milestone names at 30 chars with ellipsis
+- Progress > 100%: cap at 100% and add warning icon
 
 ## References
-- GitHub Issues API for issue severity mapping
-- Markdown specification (CommonMark) for table formatting
-- Engineering metrics standards (DORA, SPACE framework)
-- Project status conventions (RAG status indicators)
+- Markdown table specification (CommonMark)
+- Brazilian number formatting (ABNT NBR ISO 80000-1)
+- Engineering metrics best practices (DORA metrics)
+- Status reporting templates (Agile/Scrum)
