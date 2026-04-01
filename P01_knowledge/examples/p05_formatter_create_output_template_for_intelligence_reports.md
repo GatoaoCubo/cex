@@ -5,112 +5,117 @@ pillar: P05
 version: "1.0.0"
 created: "2026-04-01"
 updated: "2026-04-01"
-author: "formatter-builder"
+author: "builder_agent"
 target_format: "markdown"
 input_type: "structured_data"
-rule_count: 8
-domain: "intelligence_reporting"
+rule_count: 7
+domain: "intelligence_analysis"
 quality: 8.9
-tags: [formatter, markdown, intelligence, P05, report, analysis]
-tldr: "Formats intelligence data into structured markdown reports with threat levels, confidence scores, and actionable recommendations"
+tags: [formatter, intelligence, report, markdown, P05, analysis]
+tldr: "Formats intelligence analysis data into structured Markdown reports with executive summary, findings table, threat assessment, and source attribution"
 template_engine: "string_format"
 pretty_print: true
 escaping: "none"
 encoding: "utf8"
 locale: "en-US"
 streaming: false
-keywords: [intelligence-report, threat-analysis, markdown-formatter, research-display]
+keywords: [intelligence-report, analysis-formatter, threat-assessment, markdown-report]
 density_score: 0.89
 ---
 # Intelligence Report Formatter
 
 ## Formatting Rules
+
 | Name | Input Field | Transform | Pattern | Options |
 |------|-------------|-----------|---------|---------|
-| title_format | report_title | stringify | `# {value}` | max_length: 80, uppercase: true |
-| confidence_badge | confidence_level | stringify | `**Confidence: {value}%**` | color_code: true |
-| threat_level | threat_assessment | stringify | `🔴 **{value}**` | severity_icons: true |
-| source_cite | source_name | stringify | `*Source: {value}*` | max_length: 50, truncate: ellipsis |
-| date_format | date_collected | date_format | `**Date:** {value:%Y-%m-%d %H:%M}` | timezone: UTC |
-| region_tag | geographic_region | stringify | `📍 **Region:** {value}` | uppercase: true |
-| findings_list | key_findings | tabulate | `- {value}` | bullet_style: dash, max_items: 10 |
-| recommendations | action_items | tabulate | `{index}. **{priority}:** {value}` | numbered: true, priority_sort: true |
+| executive_summary | summary_text | stringify | `## Executive Summary\n\n{value}\n` | max_length: 500, wrap: word |
+| threat_level | threat_assessment | stringify | `**Threat Level:** {value}` | uppercase: true, color_coding: true |
+| findings_table | key_findings | tabulate | `\| Finding \| Confidence \| Impact \|\n\|------\|----------\|-------\|\n{rows}` | separator: pipe |
+| source_attribution | sources | stringify | `**Sources:** {value}` | format: numbered_list, anonymize: false |
+| confidence_score | confidence_level | number_format | `**Confidence:** {value}%` | precision: 1, range: 0-100 |
+| timestamp | report_date | date_format | `**Report Date:** {value}` | format: YYYY-MM-DD HH:mm UTC, timezone: UTC |
+| classification | security_level | stringify | `**Classification:** {value}` | uppercase: true, prefix: bracket |
 
 ## Input Specification
+
 Type: structured_data
-Structure: Intelligence data object with report metadata, threat assessment, findings, and recommendations.
+Structure: intelligence analysis object with summary, threat assessment, findings array, sources, confidence metrics, and metadata.
+
 Example:
 ```json
 {
-  "report_title": "APT29 Infrastructure Analysis",
-  "confidence_level": 85,
-  "threat_assessment": "HIGH",
-  "source_name": "OSINT Collection Beta",
-  "date_collected": "2026-04-01T20:30:00Z",
-  "geographic_region": "Eastern Europe",
+  "summary_text": "Analysis of emerging cyber threat targeting financial institutions",
+  "threat_assessment": "high",
   "key_findings": [
-    "New C2 infrastructure identified in Romania",
-    "Domain registration patterns match previous campaigns",
-    "SSL certificates share common authority"
+    {"finding": "New malware variant detected", "confidence": 85, "impact": "Critical"},
+    {"finding": "Attribution to known threat group", "confidence": 70, "impact": "High"}
   ],
-  "action_items": [
-    {"priority": "IMMEDIATE", "value": "Block identified IP ranges"},
-    {"priority": "24H", "value": "Monitor associated domains"},
-    {"priority": "WEEKLY", "value": "Update threat signatures"}
-  ]
+  "sources": ["OSINT-2024-0401", "Internal Analysis", "Partner Intelligence"],
+  "confidence_level": 78,
+  "report_date": "2026-04-01T20:55:00Z",
+  "security_level": "confidential"
 }
 ```
 
 ## Output Specification
+
 Format: markdown
 Example:
 ```markdown
-# APT29 INFRASTRUCTURE ANALYSIS
+**Classification:** [CONFIDENTIAL]
 
-**Confidence: 85%**
-🔴 **HIGH**
-*Source: OSINT Collection Beta*
-**Date:** 2026-04-01 20:30
-📍 **Region:** EASTERN EUROPE
+## Executive Summary
+
+Analysis of emerging cyber threat targeting financial institutions shows coordinated attack patterns consistent with advanced persistent threat activity.
+
+**Threat Level:** HIGH
+
+**Confidence:** 78.0%
+
+**Report Date:** 2026-04-01 20:55 UTC
 
 ## Key Findings
-- New C2 infrastructure identified in Romania
-- Domain registration patterns match previous campaigns
-- SSL certificates share common authority
 
-## Recommended Actions
-1. **IMMEDIATE:** Block identified IP ranges
-2. **24H:** Monitor associated domains
-3. **WEEKLY:** Update threat signatures
+| Finding | Confidence | Impact |
+|---------|------------|--------|
+| New malware variant detected | 85% | Critical |
+| Attribution to known threat group | 70% | High |
+
+**Sources:** 1. OSINT-2024-0401 2. Internal Analysis 3. Partner Intelligence
 ```
 
 ## Template
+
 Engine: string_format
 ```text
-{title}
+**Classification:** [{classification}]
 
-{confidence_badge}
+{executive_summary}
+
 {threat_level}
-{source_cite}
-{date_format}
-{region_tag}
+
+{confidence_score}
+
+{timestamp}
 
 ## Key Findings
-{findings_list}
 
-## Recommended Actions
-{recommendations}
+{findings_table}
+
+{source_attribution}
 ```
 
 ## Edge Cases
-- Null values: render as `[DATA NOT AVAILABLE]` in report sections
-- Empty strings: render as `[PENDING]` for status fields
-- Special characters: preserve markdown syntax, escape only pipe `|` characters
-- Overflow: truncate findings list at 10 items with `[...N more findings]` footer
-- Missing threat level: default to `⚪ **UNKNOWN**` with white circle icon
-- Invalid confidence: clamp to 0-100 range, display warning for out-of-bounds values
+
+- Null values: render as `[DATA NOT AVAILABLE]` for critical fields, omit optional fields
+- Empty findings array: render as "No key findings identified in this analysis period"
+- Special characters: pipe `|` escaped as `\|` in Markdown tables, brackets escaped in classification
+- Overflow: truncate summary at 500 words with `[TRUNCATED]` indicator
+- Invalid confidence: clamp to 0-100 range, flag out-of-range values
+- Missing classification: default to `[UNCLASSIFIED]` with warning annotation
 
 ## References
-- NIST Cybersecurity Framework: threat assessment standards
-- MITRE ATT&CK: threat intelligence formatting guidelines
-- CommonMark specification: markdown table and list rendering
+
+- Intelligence Community Directive 203: Analytic Standards
+- Markdown CommonMark Specification for table formatting
+- ISO 8601 date format for temporal data consistency
