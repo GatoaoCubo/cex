@@ -1,76 +1,155 @@
 ---
-description: "Initialize CEX for your brand. First-time setup. Usage: /init"
+description: "Initialize CEX for your brand. First-time setup. Usage: /init [folder_path]"
 ---
 
 # /init — Bootstrap Your Brand
 
 The X in CEX is YOUR brand. This command fills it.
 
-## Steps
+## Mode Detection
 
-1. Check if already bootstrapped:
-   ```bash
-   python _tools/cex_bootstrap.py --check
-   ```
+Check how the user invoked `/init`:
 
-2. If already bootstrapped, show status:
-   ```bash
-   python _tools/cex_bootstrap.py --status
-   ```
-   Ask user if they want to re-bootstrap with `--reset`.
+- `/init` (no args) → **Conversational mode**: ask questions one by one
+- `/init C:\Users\...\my_brand_stuff` → **Ingest mode**: scan folder first, then ask
+- `/init --reset` → Reset existing brand: `python _tools/cex_bootstrap.py --reset`
 
-3. If NOT bootstrapped, conduct the Brand Discovery Interview CONVERSATIONALLY:
+## Step 0: Check Status
 
-   Ask these questions ONE AT A TIME in natural language. Wait for each answer.
-
-   **Round 1 — Who are you?**
-   - "What's your company/brand name?"
-   - "In one sentence, what do you do? (this becomes your tagline)"
-   - "Why does your company exist? What problem made you start?" (mission)
-   - "What are your 3-5 core values? Things you'd never compromise."
-
-   **Round 2 — Personality**
-   - "If your brand were a person at a party, how would they talk? Formal or casual? Funny or serious?"
-   - Present the 12 Jungian archetypes as simple options and ask which fits best.
-
-   **Round 3 — For whom?**
-   - "Describe your ideal customer — not demographics, but their daily frustrations and dreams."
-   - "What changes in their life after using your product? From ___ to ___ through ___."
-
-   **Round 4 — Market**
-   - "What category are you in? What makes you different from competitors?"
-   - "How do you make money? (subscription, one-time, courses, etc.)"
-   - "What currency and market? (BRL/Brazil, USD/global, etc.)"
-
-4. After collecting answers, create a YAML file with all values and run:
-   ```bash
-   python _tools/cex_bootstrap.py --from-file /tmp/brand_answers.yaml
-   ```
-
-5. Verify:
-   ```bash
-   python _tools/brand_validate.py
-   python _tools/brand_audit.py --json
-   ```
-
-6. Tell the user: "Done! CEX is now the brain of [BRAND_NAME]. Every output from now on will use your brand voice, colors, and identity."
-
-## If user gives minimal input
-
-If user just says "/init" with a company name, ask the minimum 6 questions:
-1. Name + tagline
-2. Mission
-3. Values (3+)
-4. Archetype (present options)
-5. Ideal customer + transformation
-6. Category + pricing model + currency
-
-Fill reasonable defaults for everything else based on context.
-
-## For advanced users
-
-They can also run directly:
 ```bash
-python _tools/cex_bootstrap.py              # interactive CLI
-python _tools/cex_bootstrap.py --from-file brand.yaml  # import
+python _tools/cex_bootstrap.py --check
 ```
+
+If already bootstrapped, show status and ask if they want to update or reset.
+
+---
+
+## PATH A — Conversational Mode (no folder)
+
+Ask these questions ONE AT A TIME in natural language. Wait for each answer.
+Use casual, friendly tone. The user might not know branding terminology.
+
+**Round 1 — The basics**
+- "What's the name of your company or product?"
+- "If you had to describe what you do in one sentence — like an elevator pitch — what would it be?"
+- "What are 3 things your company would NEVER compromise on? Like core values."
+
+**Round 2 — Personality**
+- "How should your brand sound? More like a professor or a friend? More serious or fun?"
+  - From their answer, map to 5D voice scores and suggest an archetype.
+  - Present 3-4 archetype options in SIMPLE language:
+    - "The Wise Guide (Sage) — educational, trustworthy"
+    - "The Rebel (Outlaw) — bold, challenges the status quo"
+    - "The Creator — innovative, original, artistic"
+    - "The Caregiver — supportive, warm, protective"
+    - etc. (only show 3-4 most likely matches)
+
+**Round 3 — Your people**
+- "Describe your dream customer — not their age, but their daily frustrations and what they wish was different."
+- "After they use your product, what changes? Try: 'From ___ to ___ through ___'"
+
+**Round 4 — Business**
+- "What category or market are you in?"
+- "How do you make money — subscriptions, one-time sales, courses, something else?"
+- "What currency — BRL, USD?"
+
+After all answers: write YAML, bootstrap, confirm.
+
+---
+
+## PATH B — Ingest Mode (folder provided)
+
+The user has a messy folder with brand materials. Process it:
+
+### Step 1: Ingest
+
+```bash
+python _tools/brand_ingest.py "$ARGUMENTS" --for-llm
+```
+
+This scans the folder and extracts:
+- Color hex codes from CSS/HTML files
+- Font names
+- Potential brand names (by frequency)
+- Mission/vision/tagline (if found in text)
+- URLs, social handles, pricing
+- Source excerpts for context
+
+### Step 2: Read documents (if any)
+
+If `brand_ingest.py` reports documents (PDF, DOCX, PPTX):
+- Use the **markitdown** MCP tool to convert each to text
+- Extract brand signals from the converted text
+- Look for: pitch decks (positioning), brand guides (colors/fonts), proposals (ICP)
+
+### Step 3: Read images (if any)
+
+If images are found (logos, screenshots, Canva exports):
+- Describe what you see: colors, style, typography direction
+- Note potential logo files
+
+### Step 4: Present findings to user
+
+Show what you found:
+> "I scanned your 23 files and found:
+> - Brand name appears to be: **[name]** (appeared 14 times)
+> - Colors used: **#FF5733**, **#1A1A2E**, **#50C878**
+> - Font: **Inter** (in your CSS)
+> - Mission fragment: '...'
+> - Pricing: R$ 97, R$ 297 (subscription seems likely)
+>
+> Let me confirm a few things..."
+
+### Step 5: Fill gaps conversationally
+
+Ask ONLY about what wasn't found:
+- If no archetype signals → ask about personality
+- If no ICP found → ask about ideal customer
+- If no transformation → ask about before/after
+- If no values → ask about non-negotiables
+
+### Step 6: Bootstrap
+
+Write YAML from combined signals + answers:
+
+```bash
+python _tools/cex_bootstrap.py --from-file /tmp/brand_from_ingest.yaml
+```
+
+Verify:
+```bash
+python _tools/brand_validate.py
+python _tools/brand_audit.py --json
+```
+
+---
+
+## Final Confirmation
+
+Always end with:
+> "Done! CEX is now the brain of **[BRAND_NAME]**.
+> Everything I produce from now on will use your voice, colors, and identity.
+>
+> Want me to generate your full Brand Book? (32 sections, takes ~5 minutes)"
+
+If they say yes → run the N06 Brand Book workflow.
+
+---
+
+## Edge Cases
+
+**User has almost nothing**: Just a name and a vague idea.
+→ That's fine. Fill what you can, use sensible defaults, mark gaps.
+→ Suggest: "We can refine this later with `/init` again."
+
+**User has TOO MUCH**: 500 files, multiple brands.
+→ Ask: "Which brand should I focus on?" or "Which folder is the main one?"
+→ Only ingest the subfolder they point to.
+
+**User has an existing brand guide**: PDF with colors, fonts, voice.
+→ Best case. Use markitdown to read it, extract everything.
+→ This might fill 90% of brand_config.yaml automatically.
+
+**User's materials are in a foreign language**:
+→ brand_ingest.py detects language automatically.
+→ Set BRAND_LANGUAGE accordingly.

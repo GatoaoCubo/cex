@@ -93,6 +93,7 @@ Check `CEX_NUCLEUS`. N07 = Orchestrator. N03 = Builder. Not set = read and decid
 | `brand_validate.py` | Validate brand_config.yaml (13 req fields) |
 | `brand_propagate.py` | Push brand context to all nuclei |
 | `brand_audit.py` | Score brand consistency (6 dimensions) |
+| `brand_ingest.py` | Scan user's messy folder → extract brand signals |
 
 ## Quick Dispatch
 

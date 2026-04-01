@@ -4,6 +4,10 @@
       "command": "uvx",
       "args": ["mcp-server-fetch", "--ignore-robots-txt"]
     },
+    "markitdown": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "markitdown-mcp"]
+    },
     "stripe": {
       "command": "npx",
       "args": ["-y", "@anthropic/mcp-stripe"],
