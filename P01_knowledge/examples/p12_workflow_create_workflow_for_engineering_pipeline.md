@@ -9,72 +9,70 @@ author: "workflow-builder"
 title: "Engineering Pipeline Workflow"
 steps_count: 5
 execution: sequential
-agent_nodes: [builder_agent, test_agent, security_agent, deploy_agent, monitor_agent]
+agent_nodes: [reviewer, tester, builder, deployer, monitor]
 timeout: 3600
 retry_policy: per_step
 depends_on: []
-signals: [build_complete, test_complete, security_complete, deploy_complete, pipeline_complete, pipeline_error]
-spawn_configs: [p12_spawn_builder_solo, p12_spawn_test_solo, p12_spawn_security_solo, p12_spawn_deploy_solo, p12_spawn_monitor_solo]
+signals: [complete, error, pipeline_complete]
+spawn_configs: [p12_spawn_reviewer_solo, p12_spawn_tester_solo, p12_spawn_builder_solo, p12_spawn_deployer_solo, p12_spawn_monitor_solo]
 domain: "engineering"
 quality: 8.7
-tags: [workflow, engineering, pipeline, ci-cd, sequential]
-tldr: "5-step sequential engineering pipeline: build → test → security scan → deploy → monitor with per-step retry and comprehensive error handling"
-density_score: 0.92
+tags: [workflow, engineering, pipeline, sequential, ci-cd]
+tldr: "5-step sequential engineering pipeline: code review → testing → build → deploy → monitor with per-step retry and completion signals"
+density_score: 0.88
 ---
 ## Purpose
-Orchestrates a complete engineering pipeline from code build through production monitoring. Each step must complete successfully before the next begins, ensuring quality gates are enforced and failures are isolated. Supports rapid development cycles while maintaining production stability through comprehensive testing and monitoring.
+Orchestrates a complete engineering pipeline from code review through production deployment and monitoring. Each step must complete successfully before the next begins, ensuring quality gates are met at every stage. Failed steps trigger per-step retry with escalation to orchestrator on repeated failure.
 
 ## Steps
 
-### Step 1: Code Build [builder_agent]
-- **Agent**: builder_agent
-- **Action**: Compile source code, resolve dependencies, and generate build artifacts
-- **Input**: Source code changes from git repository
-- **Output**: Compiled binaries and build artifacts in dist/ directory
-- **Signal**: build_complete with build_id and artifact_paths
-- **Depends on**: none
+### Step 1: Code Review [reviewer]
+- **Agent**: reviewer (sonnet)
+- **Action**: Review code changes for quality, security, and engineering best practices
+- **Input**: git diff from feature branch, coding standards checklist
+- **Output**: review report with pass/fail decision, feedback comments
+- **Signal**: review_complete with quality score
+- **Depends on**: none (first step)
 
-### Step 2: Test Suite [test_agent]
-- **Agent**: test_agent
-- **Action**: Execute unit tests, integration tests, and generate coverage report
-- **Input**: Build artifacts from Step 1
-- **Output**: Test results with coverage metrics and junit reports
-- **Signal**: test_complete with coverage_percentage and test_status
+### Step 2: Unit Testing [tester]
+- **Agent**: tester (opus)
+- **Action**: Execute unit test suite and generate coverage report
+- **Input**: reviewed code from Step 1, existing test suite
+- **Output**: test results with pass/fail status, coverage metrics
+- **Signal**: tests_complete with coverage percentage
 - **Depends on**: Step 1
 
-### Step 3: Security Scan [security_agent]
-- **Agent**: security_agent
-- **Action**: Run SAST/DAST scans, dependency vulnerability checks, and compliance validation
-- **Input**: Build artifacts and test results from Steps 1-2
-- **Output**: Security report with vulnerability assessment and compliance status
-- **Signal**: security_complete with security_score and vulnerability_count
+### Step 3: Build [builder]
+- **Agent**: builder (opus)
+- **Action**: Compile code, generate artifacts, run static analysis
+- **Input**: tested code from Step 2, build configuration
+- **Output**: compiled artifacts, build logs, static analysis report
+- **Signal**: build_complete with artifact checksums
 - **Depends on**: Step 2
 
-### Step 4: Deploy [deploy_agent]
-- **Agent**: deploy_agent
-- **Action**: Deploy to staging environment, run smoke tests, promote to production
-- **Input**: Validated artifacts from Steps 1-3
-- **Output**: Deployed application with health checks passing
-- **Signal**: deploy_complete with deployment_url and health_status
+### Step 4: Deploy [deployer]
+- **Agent**: deployer (codex)
+- **Action**: Deploy artifacts to target environment with rollback capability
+- **Input**: built artifacts from Step 3, deployment configuration
+- **Output**: deployment status, environment health check results
+- **Signal**: deploy_complete with deployment URL
 - **Depends on**: Step 3
 
-### Step 5: Monitor [monitor_agent]
-- **Agent**: monitor_agent
-- **Action**: Initialize monitoring dashboards, set up alerts, verify metrics collection
-- **Input**: Deployed application from Step 4
-- **Output**: Active monitoring configuration with baseline metrics
-- **Signal**: pipeline_complete with monitoring_dashboard_url
+### Step 5: Monitor [monitor]
+- **Agent**: monitor (sonnet)
+- **Action**: Verify deployment health and establish monitoring baselines
+- **Input**: deployed application from Step 4, monitoring configuration
+- **Output**: health dashboard, alert configuration, baseline metrics
+- **Signal**: pipeline_complete with monitoring URLs
 - **Depends on**: Step 4
 
 ## Dependencies
-- Git repository with latest source code changes
-- Build environment with required compilers and tools
-- Test databases and mock services for integration testing
-- Security scanning tools (SonarQube, OWASP ZAP, Snyk)
-- Staging and production deployment environments
-- Monitoring infrastructure (Prometheus, Grafana, alerting)
+- Feature branch must exist with committed changes ready for review
+- Target deployment environment must be accessible and configured
+- Test suite must exist with minimum coverage thresholds defined
+- Build configuration and deployment scripts must be present in repository
 
 ## Signals
-- **On step complete**: {agent}_complete signal emitted with step-specific metrics and outputs
-- **On pipeline complete**: pipeline_complete signal with aggregate quality score and deployment details
-- **On error**: pipeline_error signal with failure details, automatic retry per step (max 1), escalate to operations team if retry fails
+- **On step complete**: {agent}_complete signal emitted with step-specific metrics (see signal-builder)
+- **On workflow complete**: pipeline_complete signal with aggregate quality score and deployment URLs
+- **On error**: {agent}_error signal with failure details, per-step retry (max 1), escalate to orchestrator on repeated failure
