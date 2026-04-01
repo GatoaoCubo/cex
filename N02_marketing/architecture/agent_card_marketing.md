@@ -1,5 +1,6 @@
 ---
 id: p08_ac_visual_frontend_marketing
+title: "Agent Card Marketing"
 kind: agent_card
 pillar: P08
 version: 4.0.0

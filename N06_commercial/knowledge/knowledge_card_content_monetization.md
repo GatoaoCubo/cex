@@ -1,5 +1,5 @@
 ---
-id: p01_kc_content_monetization
+id: n06_kc_content_monetization
 kind: knowledge_card
 pillar: P01
 title: Content Monetization — Billing, Credits, Courses & Checkout

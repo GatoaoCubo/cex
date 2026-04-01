@@ -1,5 +1,5 @@
 ---
-id: p01_kc_token_budgeting
+id: p01_ex_token_budgeting
 kind: knowledge_card
 pillar: P01
 title: "Token Budgeting Strategies for LLM Cost and Performance Control"

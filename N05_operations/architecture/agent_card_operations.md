@@ -1,5 +1,6 @@
 ---
 id: p08_ac_railway_superintendent
+title: "Agent Card Operations"
 kind: agent_card
 pillar: P08
 version: 4.0.0

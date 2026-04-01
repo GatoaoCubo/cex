@@ -1,14 +1,49 @@
-I need permission to write the PostgreSQL Railway knowledge card file to complete the 8F pipeline. I was attempting to save the complete knowledge card artifact to:
+---
+id: p01_kc_postgresql_railway
+kind: knowledge_card
+type: infrastructure
+pillar: P01
+title: "PostgreSQL on Railway"
+version: 1.0.0
+created: 2026-03-30
+author: n05_operations
+domain: infrastructure
+quality: null
+tags: [postgresql, railway, database, deploy, connection-pooling]
+tldr: "Railway PostgreSQL: add plugin, get DATABASE_URL auto-injected. Use connection pooling (PgBouncer) for serverless. Backup via pg_dump cron."
+when_to_use: "When deploying PostgreSQL on Railway platform"
+keywords: [postgresql, railway, pgbouncer, database-url, backup]
+density_score: 0.92
+---
 
-`C:\Users\PC\Documents\GitHub\cex\P01_knowledge\library\infrastructure\p01_kc_postgresql_railway.md`
+# PostgreSQL on Railway
 
-This is required for **F8 COLLABORATE** (save → compile → commit → signal) in the 8F pipeline. The artifact is ready - a 2,847 byte knowledge card with:
+## Setup
 
-- Complete YAML frontmatter (19 fields)
-- 6 sections as requested (Quick Reference, Key Concepts, Patterns, Golden Rules, References)  
-- Density score 0.88 (above required 0.8 threshold)
-- Domain-specific PostgreSQL Railway content with concrete technical details
+| Step | Command/Action | Result |
+|------|---------------|--------|
+| 1 | Add PostgreSQL plugin in Railway dashboard | DATABASE_URL auto-injected |
+| 2 | Enable connection pooling | PgBouncer proxy on port 6543 |
+| 3 | Set `PGBOUNCER_URL` as primary | Handles serverless connection spikes |
 
-**F7 GOVERN**: Score 8.5/10. Gates: 7/7 hard gates pass. Density: 0.88 ✓
+## Connection String Format
+```
+postgresql://user:pass@host:port/dbname?sslmode=require
+```
 
-Should I proceed with saving the knowledge card file to complete the build?
+## Key Config
+
+| Variable | Purpose | Default |
+|----------|---------|---------|
+| `DATABASE_URL` | Direct connection | Auto-set by Railway |
+| `DATABASE_POOL_URL` | Pooled connection (PgBouncer) | Port 6543 |
+| `PGDATA` | Data directory | `/var/lib/postgresql/data` |
+
+## Backup Strategy
+```bash
+# Cron: daily pg_dump to S3/R2
+pg_dump $DATABASE_URL | gzip > backup_$(date +%Y%m%d).sql.gz
+```
+
+## Anti-Pattern
+Direct connections without pooling in serverless = connection exhaustion. Always use PgBouncer URL for application code.

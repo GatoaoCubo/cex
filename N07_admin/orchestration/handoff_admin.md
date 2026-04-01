@@ -1,5 +1,6 @@
 ---
 id: p12_ho_admin_template
+title: "Handoff Admin"
 kind: handoff
 pillar: P12
 version: 2.0.0

@@ -1,5 +1,5 @@
 ---
-id: p01_kc_shadcn_radix_patterns
+id: n02_kc_shadcn_radix_patterns
 kind: knowledge_card
 pillar: P01
 title: shadcn/ui + Radix Primitives — Component Patterns

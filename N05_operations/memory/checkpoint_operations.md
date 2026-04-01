@@ -1,5 +1,6 @@
 ---
 id: p10_ck_railway_deploy_checkpoint
+title: "Checkpoint Operations"
 kind: checkpoint
 pillar: P10
 version: 4.0.0

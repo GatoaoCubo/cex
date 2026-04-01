@@ -1,5 +1,6 @@
 ---
 id: p04_fn_content_monetization
+title: "Content Monetization Tool"
 kind: function_def
 pillar: P04
 version: 1.0.0

@@ -1,5 +1,6 @@
 ---
 id: p12_sig_admin_orchestration
+title: "Signal Admin"
 kind: signal
 pillar: P12
 version: 2.0.0

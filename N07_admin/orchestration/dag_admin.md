@@ -1,5 +1,6 @@
 ---
 id: p12_dag_admin_orchestration
+title: "Dag Admin"
 kind: dag
 pillar: P12
 version: 2.0.0

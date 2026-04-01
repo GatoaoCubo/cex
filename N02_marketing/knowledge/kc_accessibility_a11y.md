@@ -1,5 +1,5 @@
 ---
-id: p01_kc_accessibility_a11y
+id: n02_kc_accessibility_a11y
 kind: knowledge_card
 pillar: P01
 title: "Accessibility A11Y"

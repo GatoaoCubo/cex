@@ -1,5 +1,6 @@
 ---
 id: p08_ac_admin_orchestrator
+title: "Agent Card Admin"
 kind: agent_card
 pillar: P08
 version: 2.0.0

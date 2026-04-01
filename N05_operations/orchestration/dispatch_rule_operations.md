@@ -1,5 +1,6 @@
 ---
 id: p12_dr_railway_superintendent
+title: "Dispatch Rule Operations"
 kind: dispatch_rule
 pillar: P12
 version: 4.0.0

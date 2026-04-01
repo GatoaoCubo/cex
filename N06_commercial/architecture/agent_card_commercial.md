@@ -1,5 +1,6 @@
 ---
 id: p08_ac_commercial_nucleus
+title: "Agent Card Commercial"
 kind: agent_card
 pillar: P08
 version: 4.0.0

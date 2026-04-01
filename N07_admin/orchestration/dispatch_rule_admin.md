@@ -1,5 +1,6 @@
 ---
 id: p12_dr_admin_orchestration
+title: "Dispatch Rule Admin"
 kind: dispatch_rule
 pillar: P12
 version: 2.0.0

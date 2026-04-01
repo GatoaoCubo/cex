@@ -1,5 +1,6 @@
 ---
 id: n04_rs_cex_codebase
+title: "Rag Source Knowledge"
 kind: rag_source
 pillar: P01_knowledge
 version: "2.0.0"

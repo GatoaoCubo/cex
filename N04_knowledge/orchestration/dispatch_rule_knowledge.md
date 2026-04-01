@@ -1,5 +1,6 @@
 ---
 id: n04_dr_knowledge
+title: "Dispatch Rule Knowledge"
 kind: dispatch_rule
 pillar: P12_orchestration
 version: 3.0.0

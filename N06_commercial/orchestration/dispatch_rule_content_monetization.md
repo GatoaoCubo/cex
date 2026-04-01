@@ -1,5 +1,6 @@
 ---
 id: p12_dr_content_monetization
+title: "Dispatch Rule Content Monetization"
 kind: dispatch_rule
 pillar: P12
 version: 1.0.0

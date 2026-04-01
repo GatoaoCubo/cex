@@ -1,4 +1,4 @@
-id: p01_kc_memory_persistence
+id: p01_ex_memory_persistence
 kind: knowledge_card
 pillar: P01
 title: 'Dual Persistence: SQLite + Chroma for LLM Agent Memory'

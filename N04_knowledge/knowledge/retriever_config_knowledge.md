@@ -1,5 +1,6 @@
 ---
 id: n04_rc_knowledge
+title: "Retriever Config Knowledge"
 kind: retriever_config
 pillar: P01_knowledge
 version: "2.0.0"

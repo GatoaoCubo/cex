@@ -1,5 +1,5 @@
 ---
-id: p01_kc_tailwind_patterns
+id: n02_kc_tailwind_patterns
 kind: knowledge_card
 pillar: P01
 title: Tailwind CSS — Patterns Operacionais

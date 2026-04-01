@@ -1,5 +1,5 @@
 ---
-id: p01_kc_html_component_library
+id: n02_kc_html_component_library
 kind: knowledge_card
 pillar: P01
 title: "shadcn/ui & Radix UI Component Library"
