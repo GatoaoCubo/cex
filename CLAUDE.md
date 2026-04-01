@@ -23,7 +23,7 @@ Check `CEX_NUCLEUS`. N07 = Orchestrator. N03 = Builder. Not set = read and decid
 | **Boot scripts** | `boot/cex.cmd` (N07) · `boot/n0{1-6}.cmd` |
 | **Runtime** | `.cex/runtime/{handoffs,signals,pids}/` |
 | **Learning records** | `.cex/learning_records/` |
-| **Session state** | `_instances/codexa/N07_admin/checkpoints/` |
+| **Session state** | `.cex/runtime/` (handoffs, signals, archive) |
 
 ## 3 Rules
 
