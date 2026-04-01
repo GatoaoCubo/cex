@@ -22,7 +22,7 @@ permission_scope: nucleus
 |-------|-----------|---------|
 | Package directory | `{agent_slug}/` | `scout_agent/` |
 | Manifest file | `manifest.yaml` | `scout_agent/manifest.yaml` |
-| ISO files | lowercase with underscores | `system_instruction.md` |
+| builder specs | lowercase with underscores | `system_instruction.md` |
 | Builder directory | kebab-case | `agent-package-builder/` |
 | Frontmatter fields | snake_case | `agent_name`, `files_count` |
 | Agent slug | snake_case, lowercase | `knowledge_card_builder` |

@@ -27,7 +27,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | llm_function | literal "BECOME" | REC | "BECOME" | Always BECOME for agents |
 | capabilities_count | integer | REC | - | Number of capability bullets |
 | tools_count | integer | REC | - | Number of tools listed |
-| iso_files_count | integer | REC | - | ISO files in vectorstore |
+| iso_files_count | integer | REC | - | builder specs in vectorstore |
 | routing_keywords | list[string] | REC | - | Brain search triggers |
 | density_score | float 0.80-1.00 | OPT | - | Content density |
 ## ID Pattern
@@ -36,7 +36,7 @@ Rule: id MUST equal filename stem.
 ## Body Structure (required sections)
 1. `## Overview` — one paragraph: who, domain, primary function
 2. `## Architecture` — capabilities list, tools, agent_node position
-3. `## File Structure` — iso_vectorstore listing with all ISO files
+3. `## File Structure` — agent_package listing with all builder specs
 4. `## When to Use` — triggers and routing keywords
 5. `## Input / Output` — what the agent receives and produces
 6. `## Integration` — how agent connects to agent_nodes, routers, chains
@@ -51,7 +51,7 @@ Rule: id MUST equal filename stem.
 - machine_format: yaml (frontmatter) + markdown (body)
 - id == filename stem
 - quality: null always
-- iso_vectorstore min 10 files required
+- agent_package min 10 files required
 - capabilities_count MUST match actual bullets in Architecture section
 - llm_function: BECOME (never REASON, CALL, or PRODUCE)
 - agent_node: required — no "unassigned" agents

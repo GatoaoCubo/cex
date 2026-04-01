@@ -53,17 +53,17 @@ linked_artifacts:
 ## File Structure
 ```
 agents/{{agent_slug}}/
-  iso_vectorstore/
-    ISO_{{AGENT_UPPER}}_001_MANIFEST.md
-    ISO_{{AGENT_UPPER}}_002_QUICK_START.md
-    ISO_{{AGENT_UPPER}}_003_PRIME.md
-    ISO_{{AGENT_UPPER}}_004_INSTRUCTIONS.md
-    ISO_{{AGENT_UPPER}}_005_ARCHITECTURE.md
-    ISO_{{AGENT_UPPER}}_006_OUTPUT_TEMPLATE.md
-    ISO_{{AGENT_UPPER}}_007_EXAMPLES.md
-    ISO_{{AGENT_UPPER}}_008_ERROR_HANDLING.md
-    ISO_{{AGENT_UPPER}}_009_UPLOAD_KIT.md
-    ISO_{{AGENT_UPPER}}_010_SYSTEM_INSTRUCTION.md
+  agent_package/
+    SPEC_{{AGENT_UPPER}}_001_MANIFEST.md
+    SPEC_{{AGENT_UPPER}}_002_QUICK_START.md
+    SPEC_{{AGENT_UPPER}}_003_PRIME.md
+    SPEC_{{AGENT_UPPER}}_004_INSTRUCTIONS.md
+    SPEC_{{AGENT_UPPER}}_005_ARCHITECTURE.md
+    SPEC_{{AGENT_UPPER}}_006_OUTPUT_TEMPLATE.md
+    SPEC_{{AGENT_UPPER}}_007_EXAMPLES.md
+    SPEC_{{AGENT_UPPER}}_008_ERROR_HANDLING.md
+    SPEC_{{AGENT_UPPER}}_009_UPLOAD_KIT.md
+    SPEC_{{AGENT_UPPER}}_010_SYSTEM_INSTRUCTION.md
 ```
 ## Routing
 - Triggers: {{trigger_phrase_1}}, {{trigger_phrase_2}}
@@ -78,7 +78,7 @@ agents/{{agent_slug}}/
 - Secondary: {{secondary_output_or_none}}
 ## Quality Gates
 HARD gates: YAML parses, id matches p02_agent_ pattern, kind == agent, quality == null,
-required fields present, iso_vectorstore >= 10 files, llm_function == BECOME.
+required fields present, agent_package >= 10 files, llm_function == BECOME.
 SOFT gates: tldr <= 160ch, tags >= 3, capabilities_count matches body,
 density >= 0.80, agent_node assigned, domain specific.
 ## Footer

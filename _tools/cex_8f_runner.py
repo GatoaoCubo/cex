@@ -124,7 +124,7 @@ for d in sorted(CEX_ROOT.glob("P[0-9][0-9]_*")):
         code = d.name[:3]  # e.g. "P01"
         PILLAR_DIRS[code] = d.name
 
-# ISO prefix -> function mapping
+# Builder spec prefix -> function mapping
 ISO_TO_FUNCTION = {
     "bld_schema": "F1",
     "bld_config": "F1",
@@ -560,11 +560,11 @@ class EightFRunner:
     # -- F5 CALL ------------------------------------------------------------
 
     def f5_call(self) -> None:
-        """Load bld_tools ISO, scan existing artifacts -> state.tool_results."""
+        """Load bld_tools spec, scan existing artifacts -> state.tool_results."""
         bdir = self.state.builder_dir
         tool_results = {"existing_artifacts": [], "tools_available": []}
 
-        # 1. Load bld_tools ISO and parse tools table
+        # 1. Load bld_tools spec and parse tools table
         if bdir:
             tools_text = load_iso(bdir, "bld_tools", self.kind_slug)
             if tools_text:

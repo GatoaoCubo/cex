@@ -48,15 +48,15 @@ established by _builder-builder. Reference builders: signal-builder, workflow-bu
 ### Step 1: Read References
 Read _builder-builder/BUILDER_NORMS.md, signal-builder/, and workflow-builder/.
 ### Step 2: Build session-state-builder
-Create 13 ISO files in archetypes/builders/session-state-builder/.
+Create 13 builder spec files in archetypes/builders/session-state-builder/.
 ### Step 3: Commit session-state-builder
 Run: git add archetypes/builders/session-state-builder/ && git commit
 ### Step 4: Build dag-builder
-Create 13 ISO files in archetypes/builders/dag-builder/.
+Create 13 builder spec files in archetypes/builders/dag-builder/.
 ### Step 5: Commit dag-builder
 Run: git add archetypes/builders/dag-builder/ && git commit
 ### Step 6: Build handoff-builder
-Create 13 ISO files in archetypes/builders/handoff-builder/.
+Create 13 builder spec files in archetypes/builders/handoff-builder/.
 ### Step 7: Commit handoff-builder
 Run: git add archetypes/builders/handoff-builder/ && git commit
 ## Scope Fence

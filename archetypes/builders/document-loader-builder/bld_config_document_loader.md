@@ -38,7 +38,7 @@ permission_scope: nucleus
 |---|---|
 | Artifact output | records/pool/p04_loaders/{id}.md |
 | Compiled YAML | records/pool/p04_loaders/compiled/{id}.yaml |
-| Builder ISO files | archetypes/builders/document_loader-builder/bld_*.md |
+| Builder builder specs | archetypes/builders/document_loader-builder/bld_*.md |
 | Schema reference | archetypes/builders/document_loader-builder/bld_schema_document_loader.md |
 
 ## Size Limits

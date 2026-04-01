@@ -31,8 +31,8 @@ permission_scope: nucleus
 | Artifact | Max Size | Rationale |
 |----------|---------|-----------|
 | Config YAML | 4096 bytes | Dense config, human-editable |
-| Template | 4096 bytes | Builder ISO limit |
-| Example | 4096 bytes | Builder ISO limit |
+| Template | 4096 bytes | Builder spec limit |
+| Example | 4096 bytes | Builder spec limit |
 | Instruction | 6144 bytes | Extended for 9-step pipeline |
 
 ## Pricing Constraints

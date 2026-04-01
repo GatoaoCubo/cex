@@ -24,7 +24,7 @@ OUTPUT (`p12_sig_agent_node_complete.json`):
   ],
   "artifacts_count": 13,
   "commit_hash": "abc1234",
-  "message": "13 ISO files created and validated"
+  "message": "13 builder spec files created and validated"
 }
 ```
 WHY THIS IS GOLDEN:

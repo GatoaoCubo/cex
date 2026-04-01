@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """CEX Prompt Optimizer — score, rank, and improve builder instructions.
 
-Analyzes bld_instruction ISOs against build outcomes (learning records),
+Analyzes bld_instruction specs against build outcomes (learning records),
 identifies weak performers, and generates improvement suggestions.
 
 Usage:
@@ -32,7 +32,7 @@ LEARNING_DIR = CEX_ROOT / ".cex" / "learning_records"
 
 
 def scan_builders() -> list[dict]:
-    """Scan all builder directories and score their ISO completeness."""
+    """Scan all builder directories and score their spec completeness."""
     if not BUILDERS_ROOT.exists():
         return []
 
@@ -51,7 +51,7 @@ def scan_builders() -> list[dict]:
         kind = bdir.name.replace("-builder", "").replace("-", "_")
         files = list(bdir.glob("*.md"))
 
-        # Check ISO completeness
+        # Check spec completeness
         present = set()
         for f in files:
             for prefix in iso_prefixes:
@@ -59,7 +59,7 @@ def scan_builders() -> list[dict]:
                     present.add(prefix)
                     break
 
-        # Score ISOs by content quality
+        # Score specs by content quality
         iso_scores = {}
         total_bytes = 0
         for prefix in iso_prefixes:
@@ -99,7 +99,7 @@ def _strip_fm(text: str) -> str:
 
 
 def _score_iso_content(body: str, prefix: str) -> float:
-    """Score individual ISO content quality (0-10)."""
+    """Score individual builder spec content quality (0-10)."""
     if not body.strip():
         return 0.0
 
@@ -218,7 +218,7 @@ def suggest_improvements(kind: str) -> list[str]:
     # Check instruction quality
     instr = load_iso(bdir, "bld_instruction", kind_slug)
     if not instr:
-        suggestions.append("CRITICAL: Missing bld_instruction ISO — builder has no production guide")
+        suggestions.append("CRITICAL: Missing bld_instruction spec — builder has no production guide")
     else:
         body = _strip_fm(instr)
         if len(body) < 500:
@@ -307,7 +307,7 @@ def main():
             builders.sort(key=lambda b: -b["avg_score"])
 
         print(f"\n=== Builder Analysis ({len(builders)} builders) ===\n")
-        print(f"  {'Kind':30s} {'ISOs':>5s} {'Complete':>8s} {'Score':>6s} {'Bytes':>7s}")
+        print(f"  {'Kind':30s} {'specs':>5s} {'Complete':>8s} {'Score':>6s} {'Bytes':>7s}")
         print(f"  {'-' * 60}")
         for b in builders[:args.top]:
             print(
@@ -320,7 +320,7 @@ def main():
         avg_completeness = sum(b["completeness"] for b in builders) / len(builders) if builders else 0
         avg_score = sum(b["avg_score"] for b in builders) / len(builders) if builders else 0
         print(f"\n  Avg completeness: {avg_completeness:.0%}")
-        print(f"  Avg ISO score:    {avg_score:.1f}/10")
+        print(f"  Avg spec score:    {avg_score:.1f}/10")
         return
 
     if args.analyze:
@@ -337,16 +337,16 @@ def main():
 
         print(f"\n=== Builder Analysis: {target['kind']} ===\n")
         print(f"  Directory:    {target['dir']}")
-        print(f"  ISOs:         {target['iso_count']}/13 ({target['completeness']:.0%})")
+        print(f"  specs:         {target['iso_count']}/13 ({target['completeness']:.0%})")
         print(f"  Avg Score:    {target['avg_score']:.1f}/10")
         print(f"  Total Size:   {target['total_bytes']:,} bytes")
 
         if target["missing"]:
-            print(f"\n  Missing ISOs:")
+            print(f"\n  Missing specs:")
             for m in target["missing"]:
                 print(f"    - {m}")
 
-        print(f"\n  ISO Scores:")
+        print(f"\n  Spec Scores:")
         for prefix, score in sorted(target["iso_scores"].items(), key=lambda x: x[1]):
             bar = "#" * int(score)
             status = "MISSING" if score == 0 else ""

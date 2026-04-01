@@ -25,7 +25,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 6. Write Capabilities section: 4-6 bullets, each a concrete action this agent performs
 7. Write Routing section: keywords and triggers that cause this agent to be selected
 8. Write Crew Role section: the question this agent answers, and explicit exclusions
-9. Write iso_vectorstore skeleton: list 10 minimum ISO files with correct naming convention
+9. Write agent_package skeleton: list 10 minimum builder specs with correct naming convention
 10. Set capabilities_count to match actual bullets written
 11. Check body <= 5120 bytes
 ## Phase 3: VALIDATE
@@ -33,7 +33,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 2. HARD gate: id matches `p02_agent_` pattern
 3. HARD gate: kind == agent
 4. HARD gate: quality == null
-5. HARD gate: iso_vectorstore lists >= 10 files
+5. HARD gate: agent_package lists >= 10 files
 6. HARD gate: capabilities >= 4 bullets in body
 7. HARD gate: llm_function == BECOME
 8. HARD gate: agent_node field is set (not blank)

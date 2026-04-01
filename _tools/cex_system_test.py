@@ -119,14 +119,14 @@ def test_builders():
     builders = [d for d in builder_dir.iterdir() if d.is_dir() and d.name.endswith("-builder")]
     test("builders:count", len(builders) >= 98, f"{len(builders)} builders")
 
-    # Check each has 13 ISOs
+    # Check each has 13 specs
     short_builders = []
     for b in builders:
         isos = list(b.glob("bld_*.md"))
         if len(isos) < 13:
             short_builders.append(f"{b.name}({len(isos)})")
     test("builders:13_isos", len(short_builders) == 0,
-         f"{len(short_builders)} short: {', '.join(short_builders[:5])}" if short_builders else "all 13 ISOs")
+         f"{len(short_builders)} short: {', '.join(short_builders[:5])}" if short_builders else "all 13 specs")
 
 
 def test_nuclei():

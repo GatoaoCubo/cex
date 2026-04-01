@@ -9,7 +9,7 @@ pattern: few-shot learning — LLM reads these before producing
 
 # Examples: agent-package-builder
 ## Golden Example
-INPUT: "Package the data-analyst agent as a standard ISO bundle"
+INPUT: "Package the data-analyst agent as a standard agent package bundle"
 OUTPUT:
 ```yaml
 id: p02_iso_data_analyst

@@ -3,7 +3,7 @@
 cex_intent.py -- The Steering Wheel
 Natural language intent -> governed artifact prompt.
 
-Uses Motor 8F to classify intent, loads builder ISOs + KC-Domains,
+Uses Motor 8F to classify intent, loads builder specs + KC-Domains,
 and composes a GOVERNED PROMPT ready for LLM execution.
 
 Usage:
@@ -45,7 +45,7 @@ from cex_shared import find_builder_dir
 
 BUILDERS_ROOT = CEX_ROOT / "archetypes" / "builders"
 
-# Builder ISO file prefixes in compose_prompt order
+# Builder builder spec prefixes in compose_prompt order
 # Order: system_prompt, instruction, KC-Domain (injected), schema, output_template
 COMPOSE_ORDER = [
     "bld_system_prompt",
@@ -55,7 +55,7 @@ COMPOSE_ORDER = [
     "bld_output_template",
 ]
 
-# All 13 ISO prefixes for reference
+# All 13 builder spec prefixes for reference
 ALL_ISO_PREFIXES = [
     "bld_manifest",
     "bld_system_prompt",
@@ -77,7 +77,7 @@ ALL_ISO_PREFIXES = [
 
 
 def load_builder_iso(builder_dir: Path, prefix: str, kind_slug: str) -> str | None:
-    """Load a single builder ISO file by prefix.
+    """Load a single builder builder spec by prefix.
 
     Looks for: {prefix}_{kind_slug}.md
     Falls back to any file starting with {prefix}.
@@ -93,7 +93,7 @@ def load_builder_iso(builder_dir: Path, prefix: str, kind_slug: str) -> str | No
 
 
 def load_all_builder_isos(builder_dir: Path, kind: str) -> dict[str, str]:
-    """Load all 13 builder ISOs into a dict keyed by prefix."""
+    """Load all 13 builder specs into a dict keyed by prefix."""
     kind_slug = kind.replace("-", "_")
     isos = {}
     for prefix in ALL_ISO_PREFIXES:
@@ -144,7 +144,7 @@ def compose_prompt(
     parsed: dict,
     plan: dict,
 ) -> str:
-    """Compose a GOVERNED PROMPT from builder ISOs + KC-Domain + intent.
+    """Compose a GOVERNED PROMPT from builder specs + KC-Domain + intent.
 
     Order:
       1. bld_system_prompt  — identity and role
@@ -329,7 +329,7 @@ def run_intent(
     dry_run: bool = True,
     quality: float | None = None,
 ) -> dict:
-    """Full pipeline: intent -> Motor 8F -> builder ISOs -> governed prompt."""
+    """Full pipeline: intent -> Motor 8F -> builder specs -> governed prompt."""
 
     # Step 1: Motor 8F — parse + classify
     parsed = parse_intent(intent, quality_override=quality)
@@ -364,7 +364,7 @@ def run_intent(
         print("  Tentando fallback: knowledge-card-builder", file=sys.stderr)
         builder_dir = find_builder_dir("knowledge_card")
 
-    # Step 4: Load builder ISOs
+    # Step 4: Load builder specs
     builder_isos = {}
     if builder_dir:
         builder_isos = load_all_builder_isos(builder_dir, primary_kind)
@@ -485,7 +485,7 @@ Examples:
     print(f"  Intent:    {result['intent']}")
     print(f"  Kind:      {result['kind']}")
     print(f"  Builder:   {result['builder_dir'] or 'NONE'}")
-    print(f"  ISOs:      {len(result['isos_loaded'])} loaded: {', '.join(result['isos_loaded'])}")
+    print(f"  specs:      {len(result['isos_loaded'])} loaded: {', '.join(result['isos_loaded'])}")
     print(f"  KC Domain: {'injected' if result['kc_injected'] else 'none matched'}")
     print(f"  Tokens:    ~{result['prompt_tokens']} words")
     print(f"  Mode:      {'EXECUTE' if result['executed'] else 'DRY-RUN'}")

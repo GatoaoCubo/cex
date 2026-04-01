@@ -12,7 +12,7 @@ purpose: Tools, APIs, and data sources for the meta-builder
 |------|---------|------|
 | cex_schema_hydrate.py | Hydrate universal fields | After ISO generation |
 | cex_compile.py | .md → .yaml compilation | After save |
-| cex_doctor.py | Builder health check (13 ISOs, sizes) | After build |
+| cex_doctor.py | Builder health check (13 builder specs, sizes) | After build |
 | cex_hooks.py | Pre/post validation | Before commit |
 | cex_materialize.py | Builder ISOs → sub-agent .md | After builder complete |
 | cex_score.py | 5D quality scoring | Peer review |

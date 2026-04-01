@@ -24,19 +24,19 @@ permission_scope: pillar
 | Builder directory | kebab-case | `agent-builder/` |
 | Frontmatter fields | snake_case | `agent_node`, `capabilities_count` |
 | Agent slug | snake_case, lowercase | `knowledge_card_builder`, `scout_agent` |
-| ISO files | `ISO_{AGENT_UPPER}_{NNN}_{TYPE}.md` | `ISO_SCOUT_AGENT_004_INSTRUCTIONS.md` |
+| builder specs | `SPEC_{AGENT_UPPER}_{NNN}_{TYPE}.md` | `ISO_SCOUT_AGENT_004_INSTRUCTIONS.md` |
 | Agent upper | SCREAMING_SNAKE_CASE | `KNOWLEDGE_CARD_BUILDER` |
 Rule: id MUST equal filename stem.
-Rule: ISO file NNN starts at 001 and increments without gaps.
+Rule: builder spec NNN starts at 001 and increments without gaps.
 ## File Paths
 - Output (canonical): `cex/P02_model/examples/p02_agent_{slug}.md`
 - Compiled: `cex/P02_model/compiled/p02_agent_{slug}.yaml`
-- ISO vectorstore: `agents/{slug}/iso_vectorstore/ISO_{UPPER}_{NNN}_{TYPE}.md`
+- agent package: `agents/{slug}/agent_package/SPEC_{UPPER}_{NNN}_{TYPE}.md`
 ## Size Limits (aligned with SCHEMA)
 - Body: max 5120 bytes
 - Total (frontmatter + body): ~6500 bytes
 - Density: >= 0.80
-- Per ISO file: max 4096 bytes
+- Per builder spec: max 4096 bytes
 ## Satellite Enum
 | Value | When to use |
 |-------|-------------|
@@ -48,7 +48,7 @@ Rule: ISO file NNN starts at 001 and increments without gaps.
 | executor | Execution, deploy, and infra agents |
 | monetizer | Monetization and product agents |
 | agnostic | Cross-agent_node utility agents |
-## ISO File Type Enum
+## Spec File Type Enum
 | NNN | TYPE | Pillar |
 |-----|------|--------|
 | 001 | MANIFEST | P02 |
@@ -64,6 +64,6 @@ Rule: ISO file NNN starts at 001 and increments without gaps.
 ## Body Requirements
 - Overview: 2-3 sentences, must name agent_node and domain
 - Architecture: capabilities (4-8 bullets) + tools table + agent_node position
-- File Structure: full iso_vectorstore listing with correct ISO naming
+- File Structure: full agent_package listing with correct spec naming
 - When to Use: triggers + keywords + NOT when exclusions (mandatory)
 - Common Issues: 3-5 failure modes, each with one-line remediation

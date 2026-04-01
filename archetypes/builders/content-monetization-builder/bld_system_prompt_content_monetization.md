@@ -66,7 +66,7 @@ Content monetization artifacts: YAML frontmatter + body with sections:
 - **Checkout Integration** — provider config, webhooks
 - **Course Structure** — modules, lessons, certification
 - **Quality Gates** — margin checks, webhook tests
-Max body: 4096 bytes per ISO file.
+Max body: 4096 bytes per builder spec.
 
 ## Constraints
 **In scope**: Pricing strategy, credit systems, checkout integration, course structure, ad campaign config, email sequences, margin validation, webhook design.

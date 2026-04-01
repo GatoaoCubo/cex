@@ -66,7 +66,7 @@ def scan_system() -> dict:
         stats["doctor_fail"] = int(m.group(3))
         if int(m.group(2)) > 0:
             gaps.append({"type": "doctor_warn", "priority": "high",
-                         "action": "Fix builder WARNs: check oversized ISOs"})
+                         "action": "Fix builder WARNs: check oversized specs"})
         if int(m.group(3)) > 0:
             gaps.append({"type": "doctor_fail", "priority": "critical",
                          "action": "Fix builder FAILs immediately"})

@@ -36,7 +36,7 @@ CEX_ROOT = Path(__file__).resolve().parent.parent
 META_DIR = CEX_ROOT / "archetypes"
 TYPE_MAP_PATH = META_DIR / "TYPE_TO_TEMPLATE.yaml"
 BUILDER_DIR = CEX_ROOT / "archetypes" / "builders"
-BUILDER_MAX_BYTES = 40 * 1024  # 40KB total budget for injected ISOs
+BUILDER_MAX_BYTES = 40 * 1024  # 40KB total budget for injected specs
 BUILDER_EXAMPLES_MAX = 3 * 1024  # 3KB cap for examples
 BUILDER_PRIORITY = {"knowledge_card": 1, "instruction": 2, "quality_gate": 3, "examples": 4}
 
@@ -97,35 +97,35 @@ def kind_to_builder_dir(kind: str) -> Path:
     return BUILDER_DIR / (kind.replace("_", "-") + "-builder")
 
 
-def load_builder_isos(kind: str) -> dict[str, str]:
-    """Load builder ISO files for a given kind.
+def load_builder_specs(kind: str) -> dict[str, str]:
+    """Load builder spec files for a given kind.
 
     Scans archetypes/builders/{kind}-builder/bld_*.md.
-    Returns dict mapping iso_type -> content (e.g. {"knowledge_card": "...", ...}).
+    Returns dict mapping spec_type -> content (e.g. {"knowledge_card": "...", ...}).
     """
     builder_path = kind_to_builder_dir(kind)
     if not builder_path.exists():
         return {}
 
-    isos = {}
+    specs = {}
     suffix = f"_{kind}.md"
     for f in sorted(builder_path.glob("bld_*.md")):
         name = f.name
         if not name.endswith(suffix):
             continue
-        iso_type = name[4 : -len(suffix)]  # strip "bld_" prefix and "_{kind}.md" suffix
+        spec_type = name[4 : -len(suffix)]  # strip "bld_" prefix and "_{kind}.md" suffix
         with open(f, "r", encoding="utf-8") as fh:
-            isos[iso_type] = fh.read()
-    return isos
+            specs[spec_type] = fh.read()
+    return specs
 
 
-def inject_builder_context(sections: list[str], builder_isos: dict[str, str]) -> list[str]:
-    """Append builder ISO sections. Budget: 40KB max.
+def inject_builder_context(sections: list[str], builder_specs: dict[str, str]) -> list[str]:
+    """Append builder spec sections. Budget: 40KB max.
 
     Priority: knowledge > instructions > gates > examples > rest.
     Examples truncated to 3KB.
     """
-    if not builder_isos:
+    if not builder_specs:
         return sections
 
     header_map = {
@@ -141,10 +141,10 @@ def inject_builder_context(sections: list[str], builder_isos: dict[str, str]) ->
     result = list(sections)
     total_bytes = 0
 
-    for iso_type, content in sorted(builder_isos.items(), key=sort_key):
-        header = header_map.get(iso_type, f"Builder {iso_type.replace('_', ' ').title()}")
+    for spec_type, content in sorted(builder_specs.items(), key=sort_key):
+        header = header_map.get(spec_type, f"Builder {spec_type.replace('_', ' ').title()}")
 
-        if iso_type == "examples":
+        if spec_type == "examples":
             raw = content.encode("utf-8")
             if len(raw) > BUILDER_EXAMPLES_MAX:
                 content = raw[:BUILDER_EXAMPLES_MAX].decode("utf-8", errors="ignore")
@@ -192,7 +192,7 @@ def build_prompt(
     schema: dict,
     rules: dict,
     template: str | None,
-    builder_isos: dict[str, str] | None = None,
+    builder_specs: dict[str, str] | None = None,
     builder_only: bool = False,
 ) -> str:
     lp_name = schema.get("name", lp)
@@ -288,9 +288,9 @@ def build_prompt(
             )
             sections.append("")
 
-    # Builder ISOs
-    if builder_isos:
-        sections = inject_builder_context(sections, builder_isos)
+    # Builder specs
+    if builder_specs:
+        sections = inject_builder_context(sections, builder_specs)
 
     # Seeds
     sections.append("## Seed Words")
@@ -396,12 +396,12 @@ Exemplos:
     parser.add_argument(
         "--builder",
         action="store_true",
-        help="Inject builder ISOs as context (auto-detect)",
+        help="Inject builder specs as context (auto-detect)",
     )
     parser.add_argument(
         "--builder-only",
         action="store_true",
-        help="Use ONLY builder ISOs, skip template",
+        help="Use ONLY builder specs, skip template",
     )
 
     args = parser.parse_args()
@@ -453,16 +453,16 @@ Exemplos:
     template_path = type_map.get(args.type_name)
     template = load_template(template_path) if template_path else None
 
-    # Load builder ISOs
-    builder_isos = None
+    # Load builder specs
+    builder_specs = None
     use_builder = args.builder or args.builder_only
     if use_builder:
-        builder_isos = load_builder_isos(args.type_name)
-        if builder_isos:
-            iso_count = len(builder_isos)
-            total_kb = sum(len(v.encode("utf-8")) for v in builder_isos.values()) // 1024
+        builder_specs = load_builder_specs(args.type_name)
+        if builder_specs:
+            spec_count = len(builder_specs)
+            total_kb = sum(len(v.encode("utf-8")) for v in builder_specs.values()) // 1024
             print(
-                f"Builder: {iso_count} ISOs loaded ({total_kb}KB) "
+                f"Builder: {spec_count} specs loaded ({total_kb}KB) "
                 f"from {kind_to_builder_dir(args.type_name).name}",
                 file=sys.stderr,
             )
@@ -482,7 +482,7 @@ Exemplos:
         schema,
         rules,
         template,
-        builder_isos=builder_isos,
+        builder_specs=builder_specs,
         builder_only=args.builder_only,
     )
 

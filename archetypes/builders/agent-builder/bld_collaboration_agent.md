@@ -16,7 +16,7 @@ I produce agent definitions so downstream builders can configure, package, and d
 ### Crew: "New Agent End-to-End"
 ```
   1. knowledge-card-builder -> "domain knowledge for agent expertise"
-  2. agent-builder -> "agent definition (persona + capabilities + iso_vectorstore)"
+  2. agent-builder -> "agent definition (persona + capabilities + agent_package)"
   3. instruction-builder -> "execution steps for agent tasks"
   4. boot-config-builder -> "provider-specific initialization config"
   5. agent-package-builder -> "portable deployable package"
@@ -32,7 +32,7 @@ I produce agent definitions so downstream builders can configure, package, and d
 - seeds: agent name, domain, target capabilities, agent_node assignment
 - optional: existing persona sketch, tool list, routing keywords
 ### I Produce
-- agent artifact with iso_vectorstore skeleton (10+ ISO files)
+- agent artifact with agent_package skeleton (10+ spec files)
 - committed to: `cex/P02/examples/p02_agent_{name}/`
 ### I Signal
 - signal: complete (with quality score from QUALITY_GATES)

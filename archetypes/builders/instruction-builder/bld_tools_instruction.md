@@ -18,7 +18,7 @@ purpose: Tools and APIs available for instruction production
 |--------|----------|------|
 | CEX Schema | P03_prompt/_schema.yaml | Field definitions, kinds |
 | CEX Examples | P03_prompt/examples/ | Real instruction artifacts |
-| ISO Instructions | records/agents/*/iso_vectorstore/ISO_*_INSTRUCTIONS.md | 213 existing instructions |
+| ISO Instructions | records/agents/*/agent_package/ISO_*_INSTRUCTIONS.md | 213 existing instructions |
 | Handoff files | .claude/handoffs/*.md | 255 operational handoffs (instruction-like) |
 | SEED_BANK | archetypes/SEED_BANK.yaml | Seeds for P03_instruction |
 | TAXONOMY | archetypes/TAXONOMY_LAYERS.yaml | Layer position, overlaps |

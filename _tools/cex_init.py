@@ -343,7 +343,7 @@ def generate_claude_md(dest: Path, name: str, domain: str, quality: str) -> None
 
 | Layer | Location | Contains |
 |-------|----------|----------|
-| L0 DNA | `archetypes/builders/{{type}}-builder/` | 13 ISO files per builder |
+| L0 DNA | `archetypes/builders/{{type}}-builder/` | 13 builder specs per builder |
 | L1 Schema | `P01_knowledge/` -- `P12_orchestration/` | `_schema.yaml` + `templates/` |
 | L2 Instance | `N*/` | Domain-specific instances |
 | L3 Engine | `_tools/` | CLI pipeline, validators |
@@ -396,7 +396,7 @@ def generate_cursorrules(dest: Path, name: str, domain: str, quality: str) -> No
 
 | Layer | Location | Contains |
 |-------|----------|----------|
-| L0 DNA | `archetypes/builders/{{type}}-builder/` | 13 ISO files per builder |
+| L0 DNA | `archetypes/builders/{{type}}-builder/` | 13 builder specs per builder |
 | L1 Schema | `P01_knowledge/` -- `P12_orchestration/` | `_schema.yaml` + `templates/` |
 | L2 Instance | `N*/` | Domain-specific instances |
 | L3 Engine | `_tools/` | CLI pipeline, validators |
@@ -459,7 +459,7 @@ python _tools/validate_builder.py archetypes/builders/agent-builder/
 ```
 {name}/
   archetypes/          # CODEX + builders (DNA layer)
-    builders/          # {builders} builder(s) with 13 ISO files each
+    builders/          # {builders} builder(s) with 13 builder specs each
   P01-P12/             # 12 pillars (schema + generator + templates)
   N*/                  # {len(nuclei)} nuclei (domain instances)
   _tools/              # CLI pipeline

@@ -4,7 +4,7 @@ cex_shared.py — Shared library for all CEX tools.
 Single source of truth for common operations:
   - CEX_ROOT resolution
   - YAML frontmatter parsing/stripping
-  - Builder ISO loading
+  - Builder spec loading
   - File I/O utilities
   - Signal writing
 
@@ -178,13 +178,13 @@ def find_builder_dir(kind: str) -> Path | None:
 
 
 def load_iso(builder_dir: Path, prefix: str, kind_slug: str) -> str:
-    """Read a single builder ISO file.
+    """Read a single builder builder spec.
 
     Tries exact match (prefix_kind_slug.md) first, then any file matching prefix.
 
     Args:
         builder_dir: Path to builder directory.
-        prefix: ISO prefix (e.g., 'bld_instruction').
+        prefix: Builder spec prefix (e.g., 'bld_instruction').
         kind_slug: Kind name with underscores (e.g., 'knowledge_card').
 
     Returns:
@@ -200,7 +200,7 @@ def load_iso(builder_dir: Path, prefix: str, kind_slug: str) -> str:
 
 
 def load_all_isos(builder_dir: Path, kind_slug: str) -> dict[str, str]:
-    """Load all builder ISOs for a kind.
+    """Load all builder specs for a kind.
 
     Args:
         builder_dir: Path to builder directory.

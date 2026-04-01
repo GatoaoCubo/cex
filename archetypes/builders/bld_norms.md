@@ -20,7 +20,7 @@ id: bld_norms
 - HARD gates: all must pass (YAML parses, id pattern, kind literal, quality null, required fields)
 - SOFT gates: score >= 8.0 minimum
 - Density: >= 0.80 (no filler phrases)
-- Max 4KB per ISO file
+- Max 4KB per builder spec
 
 ## Deep Review Learnings (Waves 3-4)
 

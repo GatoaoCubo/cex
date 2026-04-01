@@ -62,7 +62,7 @@ Research pipeline artifacts: YAML frontmatter + body with sections:
 - **Source Catalog** — all sources with API, rate limit, cost, quality score
 - **Config Schema** — company-specific fields
 - **Quality Gates** — CRAG thresholds, CRITIC iterations, final score
-Max body: 4096 bytes per ISO file.
+Max body: 4096 bytes per builder spec.
 
 ## Constraints
 **In scope**: Pipeline architecture, source cataloging, multi-model routing, STORM/CRAG/CRITIC patterns, config schema, quality gates, budget controls.

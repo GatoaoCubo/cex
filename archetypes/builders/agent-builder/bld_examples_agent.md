@@ -42,7 +42,7 @@ Tools: brain_query [MCP] (dedup check), validate_artifact.py [PLANNED].
 Satellite: knowledge-engine | Upstream: researcher | Downstream: brain-index-builder.
 ## File Structure
 ```
-agents/knowledge_card_builder/iso_vectorstore/
+agents/knowledge_card_builder/agent_package/
   ISO_KNOWLEDGE_CARD_BUILDER_001_MANIFEST.md
   ISO_KNOWLEDGE_CARD_BUILDER_002_QUICK_START.md
   ISO_KNOWLEDGE_CARD_BUILDER_003_PRIME.md
@@ -67,7 +67,7 @@ Receives from: researcher. Produces for: brain_index, pool (quality >= 8.0).
 WHY THIS IS GOLDEN:
 - quality: null (H05 pass) | id p02_agent_ pattern (H02 pass) | kind: agent (H04 pass)
 - 19 fields (H06 pass) | llm_function: BECOME (H07 pass) | agent_node: knowledge-engine (H08 pass)
-- iso_vectorstore 10 files (S05 pass) | capabilities_count: 5 matches body (S06 pass)
+- agent_package 10 files (S05 pass) | capabilities_count: 5 matches body (S06 pass)
 - tldr: 71ch (S01 pass) | density: 0.87 (S09 pass) | no filler (S10 pass)
 ## Anti-Example
 INPUT: "Create agent for a helper bot"
@@ -92,7 +92,7 @@ FAILURES:
 6. Missing fields: version, created, updated, author, domain, llm_function, capabilities_count, tools_count, iso_files_count, routing_keywords -> H06 FAIL
 7. tags: only 1 item, missing "agent" -> S02 FAIL
 8. tldr: 87 chars but is filler ("This is a helpful agent...") -> S10 FAIL
-9. No iso_vectorstore section in body -> S05 FAIL
+9. No agent_package section in body -> S05 FAIL
 10. No capabilities list — "can help with many things" is not a capability -> S06 FAIL
 11. Missing ## Architecture, ## File Structure, ## When to Use sections -> H09 FAIL
 12. llm_function missing (defaults are not acceptable) -> H07 FAIL

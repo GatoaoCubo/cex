@@ -9,7 +9,7 @@ Design principles (from CREW_PATTERNS_RESEARCH.md Section 5):
   - Explicit DAG (not full LangGraph/CrewAI)
   - Typed state flow (BuilderOutput, RunState)
   - JSON plan as input (Motor 8F output)
-  - Fixed token budget per builder (~7500 tokens for ISOs)
+  - Fixed token budget per builder (~7500 tokens for specs)
   - Graceful degradation: score >= 7.0 -> advance, < 7.0 -> retry, exhausted -> degrade
 
 Modes:
@@ -48,7 +48,7 @@ except ImportError:
 
 CEX_ROOT = Path(__file__).resolve().parent.parent
 BUILDER_DIR = CEX_ROOT / "archetypes" / "builders"
-BUILDER_MAX_BYTES = 30 * 1024  # 30KB total budget for builder ISO injection
+BUILDER_MAX_BYTES = 30 * 1024  # 30KB total budget for builder spec injection
 DEFAULT_QUALITY_GATE = 7.0
 MAX_RETRIES = 2
 LLM_MODEL = "claude-sonnet-4-20250514"
@@ -90,8 +90,8 @@ class RunState:
 # Builder Context Loader
 # ---------------------------------------------------------------------------
 
-# Priority order for ISO file types within a builder directory
-_ISO_PRIORITY = [
+# Priority order for builder spec file types within a builder directory
+_SPEC_PRIORITY = [
     "manifest",
     "instruction",
     "knowledge",
@@ -104,16 +104,16 @@ _ISO_PRIORITY = [
 
 
 def _iso_sort_key(filepath: Path) -> int:
-    """Sort ISO files by content priority (manifest first, examples last)."""
+    """Sort builder spec files by content priority (manifest first, examples last)."""
     name = filepath.name.lower()
-    for i, kw in enumerate(_ISO_PRIORITY):
+    for i, kw in enumerate(_SPEC_PRIORITY):
         if kw in name:
             return i
-    return len(_ISO_PRIORITY)
+    return len(_SPEC_PRIORITY)
 
 
 def load_builder_context(builder_id: str, builder_dir: Path = BUILDER_DIR) -> str:
-    """Load ISO files for a builder.
+    """Load builder spec files (bld_*.md) for a builder.
 
     Scans archetypes/builders/{builder-id}/ for .md files.
     Budget: 30KB max. Files loaded in priority order.
@@ -128,7 +128,7 @@ def load_builder_context(builder_id: str, builder_dir: Path = BUILDER_DIR) -> st
         md_files = sorted(builder_path.glob("*.md"), key=_iso_sort_key)
 
     if not md_files:
-        return f"[No ISO files found for builder '{builder_id}']"
+        return f"[No builder spec files found for builder '{builder_id}']"
 
     sections = []
     total_bytes = 0
@@ -192,11 +192,11 @@ def compose_prompt(
     builder_dir: Path = BUILDER_DIR,
     retry_feedback: str = "",
 ) -> str:
-    """Compose full prompt for a builder: ISOs + intent + prior outputs.
+    """Compose full prompt for a builder: specs + intent + prior outputs.
 
     Each builder gets:
     1. Header with execution context
-    2. Builder ISO files (capped at 30KB)
+    2. Builder spec files (capped at 30KB)
     3. Relevant prior outputs (from earlier pipeline steps)
     4. Retry feedback (if retrying after quality gate failure)
     5. Execution instructions
@@ -224,8 +224,8 @@ def compose_prompt(
     parts.append(f"- **Multi-object**: {parsed.get('multi_object', False)}")
     parts.append("")
 
-    # --- Builder ISO Context ---
-    parts.append("## Builder Context (ISO Files)")
+    # --- Builder Spec Context ---
+    parts.append("## Builder Context (Spec Files)")
     context = load_builder_context(builder_id, builder_dir)
     parts.append(context)
     parts.append("")
@@ -269,7 +269,7 @@ def compose_prompt(
     parts.append(
         f"1. You are executing builder `{builder_id}` for pipeline function `{function_name}`."
     )
-    parts.append(f"2. Follow the builder's ISO instructions precisely.")
+    parts.append(f"2. Follow the builder's spec instructions precisely.")
     parts.append(f"3. Generate the complete output artifact.")
     parts.append(
         f"4. Quality target: >= {quality_target} (no filler, no repetition, no platitudes)."
@@ -355,7 +355,7 @@ class CrewRunner:
         """Execute a builder in a forked sub-process (isolated context).
 
         The forked builder:
-        - Inherits: builder ISOs + selected memory + query context
+        - Inherits: builder specs + selected memory + query context
         - Does NOT inherit: context of other builders in the crew
         - Result returns via output file
         """

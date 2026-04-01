@@ -56,7 +56,7 @@ def generate_agent_md(kind: str, meta: dict) -> str:
 
     return f'''---
 name: {slug}-builder
-description: "Builds ONE {kind} artifact via 8F pipeline. Loads {slug}-builder ISOs. Produces draft with frontmatter + body. Never self-scores quality."
+description: "Builds ONE {kind} artifact via 8F pipeline. Loads {slug}-builder specs. Produces draft with frontmatter + body. Never self-scores quality."
 model: sonnet
 tools: Read, Write, Edit, Bash, Glob, Grep
 ---
@@ -80,8 +80,8 @@ You are a specialized builder for **{kind}** artifacts (pillar: {pillar}).
 ## How You Work
 
 1. You receive a **target name/topic** for the artifact
-2. You load builder ISOs from `archetypes/builders/{slug}-builder/`
-3. You read these ISOs in order:
+2. You load builder specs from `archetypes/builders/{slug}-builder/`
+3. You read these specs in order:
    - `bld_schema_{kind}.md` -- CONSTRAINTS (what fields, what format)
    - `bld_system_prompt_{kind}.md` -- IDENTITY (who you become)
    - `bld_instruction_{kind}.md` -- PROCESS (research > compose > validate)
@@ -104,7 +104,7 @@ You are a specialized builder for **{kind}** artifacts (pillar: {pillar}).
 
 ```
 F1 CONSTRAIN: kind={kind}, pillar={pillar}
-F2 BECOME: {slug}-builder ISOs loaded
+F2 BECOME: {slug}-builder specs loaded
 F3 INJECT: schema + examples + memory loaded
 F4 REASON: plan decided
 F5 CALL: tools ready (Read, Write, compile)

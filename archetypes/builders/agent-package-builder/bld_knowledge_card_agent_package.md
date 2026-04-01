@@ -9,7 +9,7 @@ sources: Docker OCI spec, ISO 42001 AI management, HuggingFace Model Hub, agent 
 
 # Domain Knowledge: agent_package
 ## Executive Summary
-ISO packages are self-contained, portable, LLM-agnostic bundles that encapsulate an AI agent's complete operational context. Inspired by Docker images and ISO 42001 AI management systems, each package provides everything needed to instantiate an agent on any compatible runtime. They use a tiered file system with pillar-mapped contents and quality validation. ISO packages differ from agent definitions (source), boot configs (provider-specific init), and spawn configs (orchestration params).
+agent packages are self-contained, portable, LLM-agnostic bundles that encapsulate an AI agent's complete operational context. Inspired by Docker images and ISO 42001 AI management systems, each package provides everything needed to instantiate an agent on any compatible runtime. They use a tiered file system with pillar-mapped contents and quality validation. agent packages differ from agent definitions (source), boot configs (provider-specific init), and spawn configs (orchestration params).
 ## Spec Table
 | Property | Value |
 |----------|-------|

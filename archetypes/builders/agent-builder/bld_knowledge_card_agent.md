@@ -4,26 +4,26 @@ id: bld_knowledge_card_agent
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for agent artifact production
-sources: CEX P02 schema, iso_vectorstore pattern, agentic AI literature (Anthropic, OpenAI, LangChain)
+sources: CEX P02 schema, agent_package pattern, agentic AI literature (Anthropic, OpenAI, LangChain)
 ---
 
 # Domain Knowledge: agent
 ## Executive Summary
-An agent is the core runtime identity in an agentic AI system — a persistent persona with scoped capabilities, assigned tools, and a structured file package (iso_vectorstore) that makes it portable and searchable. The agent kind defines WHO the LLM becomes when loaded. Every agent requires 10+ ISO files covering identity, instructions, examples, error handling, and deployment.
+An agent is the core runtime identity in an agentic AI system — a persistent persona with scoped capabilities, assigned tools, and a structured file package (agent_package) that makes it portable and searchable. The agent kind defines WHO the LLM becomes when loaded. Every agent requires 10+ spec files covering identity, instructions, examples, error handling, and deployment.
 ## Spec Table
 | Property | Value |
 |----------|-------|
 | Pillar | P02 (identity/model) |
 | llm_function | BECOME (identity assumption) |
-| Required ISO files | 10 minimum (MANIFEST through SYSTEM_INSTRUCTION) |
+| Required builder specs | 10 minimum (MANIFEST through SYSTEM_INSTRUCTION) |
 | Frontmatter fields | 10 required |
 | Quality gates | 7 HARD + 10 SOFT |
 | Capability bullets | 4-8 concrete, no vague entries |
-| Naming | ISO_{AGENT_UPPER}_{NNN}_{TYPE}.md |
+| Naming | SPEC_{AGENT_UPPER}_{NNN}_{TYPE}.md |
 ## Patterns
 - **BECOME function**: the LLM reads the agent definition and assumes that identity — persona, constraints, and voice
-- **ISO vectorstore structure**: 10 standardized files per agent enable consistent discovery, loading, and auditing
-| ISO File | Purpose |
+- **agent package structure**: 10 standardized files per agent enable consistent discovery, loading, and auditing
+| Spec File | Purpose |
 |----------|---------|
 | 001_MANIFEST | Identity, version, capabilities |
 | 002_QUICK_START | 5-minute onboarding |
@@ -43,14 +43,14 @@ An agent is the core runtime identity in an agentic AI system — a persistent p
 |-------------|-------------|
 | Vague capabilities ("can help with tasks") | No routing signal; brain search returns wrong agent |
 | Missing boundary list | Agent scope creep; overlaps with siblings |
-| Incomplete iso_vectorstore (<10 files) | Agent cannot be fully loaded or audited |
+| Incomplete agent_package (<10 files) | Agent cannot be fully loaded or audited |
 | Identity mixed with task instructions | Conflates WHO (agent) with WHAT (action_prompt) |
 | Over-scoped (>8 capabilities) | Agent does too much; should be split |
 ## Application
 1. Define persona: name, domain expertise, voice, constraints
 2. Scope capabilities: 4-8 concrete, verifiable bullets
 3. Map boundaries: 3-5 sibling types this agent does NOT handle
-4. Generate iso_vectorstore skeleton (10 files minimum)
+4. Generate agent_package skeleton (10 files minimum)
 5. Write routing keywords for semantic discovery
 6. Validate: every capability is testable, every boundary names a real sibling
 ## References

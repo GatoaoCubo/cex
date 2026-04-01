@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-cex_schema_hydrate.py — Hydrate builder ISOs with universal schema fields.
+cex_schema_hydrate.py — Hydrate builder specs with universal schema fields.
 
 Adds 8 universal patterns to all builders:
   - bld_manifest: keywords, triggers, geo_description (frontmatter)
@@ -203,7 +203,7 @@ def generate_geo_description(fm: dict, body: str) -> str:
 
 
 # ---------------------------------------------------------------------------
-# Hydrators (one per ISO type)
+# Hydrators (one per spec type)
 # ---------------------------------------------------------------------------
 
 class Stats:
@@ -400,7 +400,7 @@ def discover_builders(filter_list: list[str] | None = None) -> list[Path]:
 
 
 def find_iso(builder_dir: Path, prefix: str) -> Path | None:
-    """Find an ISO file by prefix in a builder directory."""
+    """Find an builder spec by prefix in a builder directory."""
     candidates = list(builder_dir.glob(f"{prefix}_*.md"))
     # For _builder-builder, skip meta files
     if builder_dir.name == "_builder-builder":
@@ -463,7 +463,7 @@ def main():
     mode.add_argument("--apply", action="store_true", help="Apply changes to files")
     p.add_argument("--builders", nargs="+", help="Specific builder dirs to process")
     p.add_argument("--iso", nargs="+", choices=["manifest", "memory", "config", "tools"],
-                   help="Specific ISO types to process")
+                   help="Specific spec types to process")
     p.add_argument("--stats", action="store_true", help="Show detailed change list")
 
     args = p.parse_args()

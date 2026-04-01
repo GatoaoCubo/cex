@@ -6,7 +6,7 @@ version: 1.0.0
 created: 2026-03-27
 updated: 2026-03-27
 author: builder_agent
-observation: "ISO packages with hardcoded absolute paths (/home/, C:\\, /Users/) fail portability checks and require rework. Tier declarations that do not match the actual file count are caught by validator but cause avoidable rework cycles. system_instruction.md files exceeding 4096 tokens create context overflow when loaded into agent sessions. LP mapping errors (inventing mappings not in the enum) cause routing failures downstream. File inventory tables missing the status column are rejected by the manifest validator."
+observation: "agent packages with hardcoded absolute paths (/home/, C:\\, /Users/) fail portability checks and require rework. Tier declarations that do not match the actual file count are caught by validator but cause avoidable rework cycles. system_instruction.md files exceeding 4096 tokens create context overflow when loaded into agent sessions. LP mapping errors (inventing mappings not in the enum) cause routing failures downstream. File inventory tables missing the status column are rejected by the manifest validator."
 pattern: "Scan for absolute paths before declaring portable:true — grep for /home/, /Users/, C:\\, records/ in all files. Tier must match file count exactly (3=minimal, 7=standard, 10=extended, 12=full). Token-budget system_instruction.md early in packaging (Phase 1) to avoid rework. LP mappings must come from the CONFIG.md enum, never invented. File inventory table must include all files with a status column."
 evidence: "9 agent_package productions: 4 had hardcoded paths caught by portability scan. 3 had tier/file-count mismatches. 2 had system_instruction over 4096 tokens (one at 6200 tokens). LP mapping errors in 2 productions caused routing failures in downstream testing. File inventory missing status column in 3 early productions."
 confidence: 0.75
@@ -22,7 +22,7 @@ memory_scope: project
 observation_types: [user, feedback, project, reference]
 ---
 ## Summary
-ISO packages make artifacts portable across environments and LLM providers. The two most common failures are hardcoded absolute paths (breaking portability) and tier/file-count mismatches (breaking validation). Both are detectable at authoring time with a two-step check: path scan and file count.
+agent packages make artifacts portable across environments and LLM providers. The two most common failures are hardcoded absolute paths (breaking portability) and tier/file-count mismatches (breaking validation). Both are detectable at authoring time with a two-step check: path scan and file count.
 ## Pattern
 Packaging workflow — execute in this order:
 1. **Manifest-first** - Create manifest.yaml before generating any other files. Declare tier, file count, and LP mappings before writing content.

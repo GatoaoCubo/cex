@@ -60,7 +60,7 @@ Social publisher artifacts: YAML frontmatter + body with sections:
 - **Config Schema** — all fields the company must fill
 - **Platform Matrix** — supported platforms with API/limits/best-times
 - **Quality Gates** — validation rules for generated posts
-Max body: 4096 bytes per ISO file.
+Max body: 4096 bytes per builder spec.
 
 ## Constraints
 **In scope**: Pipeline design, config schema, API integration patterns, content strategy, scheduling, quality gates.
