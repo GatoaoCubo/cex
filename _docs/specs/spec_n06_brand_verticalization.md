@@ -1,8 +1,8 @@
 ---
-id: pspec_n06_brand_verticalization
+id: spec_n06_brand_verticalization
 kind: constraint_spec
 pillar: P06
-title: "PSPEC N06 -- Brand Verticalization: The Missing Variable"
+title: "Spec N06 -- Brand Verticalization: The Missing Variable"
 version: 1.0.0
 created: 2026-04-01
 author: n07_admin
@@ -11,12 +11,12 @@ quality_target: 9.0
 status: SPEC
 scope: N06_commercial
 depends_on: null
-tags: [pspec, n06, brand, verticalization, mustache, brand-book, persona, identity]
+tags: [spec, n06, brand, verticalization, mustache, brand-book, persona, identity]
 tldr: "N06 evolui de Commercial generico para Brand Architect -- o nucleo que preenche a variavel {{BRAND}} que faz cada instancia CEX unica para um user/empresa."
 density_score: 0.96
 ---
 
-# PSPEC N06 -- Brand Verticalization: The Missing Variable
+# Spec N06 -- Brand Verticalization: The Missing Variable
 
 ## THE PROBLEM
 
@@ -304,7 +304,7 @@ def inject_brand(template: str, brand_config: dict) -> str:
 | 25 | _tools/brand_propagate.py | P04 | CREATE (push to all nuclei) |
 | 26 | _tools/brand_audit.py | P04 | CREATE (consistency scorer) |
 
-### Wave 4: Output + Quality + Orch -> Part 2 PSPEC
+### Wave 4: Output + Quality + Orch -> Part 2 Spec
 
 ---
 
@@ -317,7 +317,7 @@ def inject_brand(template: str, brand_config: dict) -> str:
 | Core | 10 | 0 | 0 | 10 |
 | **Total Part 1** | **17** | **3** | **6** | **26** |
 
-Part 2 (output templates, quality gates, orchestration) = separate PSPEC after Wave 2 KCs.
+Part 2 (output templates, quality gates, orchestration) = separate Spec after Wave 2 KCs.
 
 ---
 
@@ -330,7 +330,7 @@ Part 2 (output templates, quality gates, orchestration) = separate PSPEC after W
 4. CREATE 4 prompts (discovery, generator, extractor, audit)
 5. CREATE 4 tools (inject, validate, propagate, audit)
 6. CREATE 2 brand_config artifacts (schema + template)
-7. Part 2 PSPEC (output templates, quality, orchestration)
+7. Part 2 Spec (output templates, quality, orchestration)
 8. Integration test: run brand discovery -> generate config -> propagate -> verify
 ```
 

@@ -1,8 +1,8 @@
 ---
-id: pspec_n02_part2
+id: spec_n02_part2
 kind: constraint_spec
 pillar: P06
-title: PSPEC N02 Part 2 -- Schemas Output Quality Orchestration
+title: Spec N02 Part 2 -- Schemas Output Quality Orchestration
 version: 1.0.0
 created: 2026-04-01
 author: n07_admin
@@ -10,13 +10,13 @@ domain: frontend-visual-engineering
 quality_target: 9.0
 status: SPEC
 scope: N02_marketing
-depends_on: pspec_n02_visual_frontend_engineer
-tags: [pspec, n02, schemas, output, quality-gates, html, tailwind, a11y]
+depends_on: spec_n02_visual_frontend_engineer
+tags: [spec, n02, schemas, output, quality-gates, html, tailwind, a11y]
 tldr: Waves 3-4 do N02 -- schemas visuais, output templates HTML, quality gates, orchestration.
 density_score: 0.95
 ---
 
-# PSPEC N02 Part 2 -- Schemas, Output, Quality, Orchestration
+# Spec N02 Part 2 -- Schemas, Output, Quality, Orchestration
 
 ## PRE-REQUISITOS COMPLETOS
 

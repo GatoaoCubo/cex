@@ -1,8 +1,8 @@
 ---
-id: pspec_n02_visual_frontend_engineer
+id: spec_n02_visual_frontend_engineer
 kind: constraint_spec
 pillar: P06
-title: PSPEC N02 Visual Frontend Engineer
+title: Spec N02 Visual Frontend Engineer
 version: 1.0.0
 created: 2026-04-01
 author: n07_admin
@@ -10,12 +10,12 @@ domain: frontend-visual-engineering
 quality_target: 9.0
 status: SPEC
 scope: N02_marketing
-tags: [pspec, n02, frontend, html, css, tailwind, design-system, visual]
+tags: [spec, n02, frontend, html, css, tailwind, design-system, visual]
 tldr: N02 evolui de copywriter para Visual Frontend Engineer com HTML production-ready.
 density_score: 0.96
 ---
 
-# PSPEC N02 -- Visual Frontend Engineer (Lovable-killer)
+# Spec N02 -- Visual Frontend Engineer (Lovable-killer)
 
 ## 1. VISAO
 

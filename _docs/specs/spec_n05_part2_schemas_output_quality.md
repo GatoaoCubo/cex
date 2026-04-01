@@ -1,8 +1,8 @@
 ---
-id: pspec_n05_part2
+id: spec_n05_part2
 kind: constraint_spec
 pillar: P06
-title: PSPEC N05 Part 2 -- Schemas Output Quality Orchestration
+title: Spec N05 Part 2 -- Schemas Output Quality Orchestration
 version: 1.0.0
 created: 2026-04-01
 author: n07_admin
@@ -10,13 +10,13 @@ domain: operations-engineering
 quality_target: 9.0
 status: SPEC
 scope: N05_operations
-depends_on: pspec_n05_railway_superintendent
-tags: [pspec, n05, schemas, output, quality-gates, orchestration]
+depends_on: spec_n05_railway_superintendent
+tags: [spec, n05, schemas, output, quality-gates, orchestration]
 tldr: Waves 3-4 do N05 -- schemas, output templates, quality gates, orchestration.
 density_score: 0.95
 ---
 
-# PSPEC N05 Part 2 -- Schemas, Output, Quality, Orchestration
+# Spec N05 Part 2 -- Schemas, Output, Quality, Orchestration
 
 ## PRE-REQUISITOS COMPLETOS
 

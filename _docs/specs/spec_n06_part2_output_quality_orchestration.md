@@ -1,8 +1,8 @@
 ---
-id: pspec_n06_part2
+id: spec_n06_part2
 kind: constraint_spec
 pillar: P06
-title: PSPEC N06 Part 2 -- Output Templates Schemas Quality Orchestration
+title: Spec N06 Part 2 -- Output Templates Schemas Quality Orchestration
 version: 1.0.0
 created: 2026-04-01
 author: n07_admin
@@ -10,17 +10,17 @@ domain: brand-configuration-layer
 quality_target: 9.0
 status: SPEC
 scope: N06_commercial
-depends_on: pspec_n06_brand_verticalization
-tags: [pspec, n06, brand, output, schemas, quality-gates, orchestration]
+depends_on: spec_n06_brand_verticalization
+tags: [spec, n06, brand, output, schemas, quality-gates, orchestration]
 tldr: Waves 3-4 do N06 -- 32-block brand book, brand_config schema, voice guide, visual identity, quality gates, orchestration.
 density_score: 0.95
 ---
 
-# PSPEC N06 Part 2 -- Output, Schemas, Quality, Orchestration
+# Spec N06 Part 2 -- Output, Schemas, Quality, Orchestration
 
 ## PRE-REQUISITOS COMPLETOS
 
-- [x] Part 1 PSPEC (348 lines, brand_config.yaml design, 8F decomposition)
+- [x] Part 1 Spec (348 lines, brand_config.yaml design, 8F decomposition)
 - [x] Wave 2 KCs: 10 complete (7 SHAKA + 3 migrated, 180KB)
   - kc_brand_book_patterns (18KB), kc_brand_voice_systems (18KB)
   - kc_brand_archetypes (16KB), kc_brand_frameworks (22KB)

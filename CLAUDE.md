@@ -61,7 +61,7 @@ Check `CEX_NUCLEUS`. N07 = Orchestrator. N03 = Builder. Not set = read and decid
   │        │        │       │         │
   │        │        │       │         └→ verify + score + clean
   │        │        │       └→ dispatch nuclei (autonomous)
-  │        │        └→ PSPEC blueprint (exact artifacts)
+  │        │        └→ spec blueprint (exact artifacts)
   │        └→ decisions with user (co-pilot)
   └→ decompose goal into tasks
 ```
@@ -75,7 +75,7 @@ User decides WHAT → LLM builds HOW → verify together.
 | `/init` | **First run**: configure CEX for your brand (~2 min) |
 | `/plan <goal>` | Decompose goal → tasks, nuclei, dependencies |
 | `/guide [goal]` | **Co-pilot**: ask me before building — guided decisions |
-| `/spec [plan]` | Create PSPEC blueprint from plan + decisions |
+| `/spec [plan]` | Create spec blueprint from plan + decisions |
 | `/grid [spec]` | Execute spec — autonomous dispatch to nuclei |
 | `/build <intent>` | Build single artifact via 8F pipeline |
 | `/validate [file\|all]` | Check artifact quality |

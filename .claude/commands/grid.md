@@ -4,7 +4,7 @@ description: "Execute a spec — dispatch nuclei autonomously. Usage: /grid [spe
 
 # /grid — Autonomous Execution
 
-> **Input**: A `/spec` PSPEC + decision manifest
+> **Input**: A `/spec` + decision manifest
 > **What**: Dispatches nuclei to build everything in the spec
 > **Output**: Artifacts built, committed, signaled
 > **Next step**: `/consolidate`
@@ -14,7 +14,7 @@ description: "Execute a spec — dispatch nuclei autonomously. Usage: /grid [spe
 Before `/grid`, you need:
 1. ✅ A plan (`/plan` or mental model)
 2. ✅ Decisions made (`/guide` → `decision_manifest.yaml`)
-3. ✅ A spec (`/spec` → `_docs/pspecs/PSPEC_*.md`)
+3. ✅ A spec (`/spec` → `_docs/specs/spec_*.md`)
 
 If any is missing, suggest the user run that step first.
 
@@ -24,9 +24,9 @@ If any is missing, suggest the user run that step first.
 
 ```bash
 # Find the latest spec
-ls -t _docs/pspecs/PSPEC_*.md | head -1
+ls -t _docs/specs/spec_*.md | head -1
 
-# Or user specifies: /grid PSPEC_N06_BRAND
+# Or user specifies: /grid spec_n06_brand
 ```
 
 Read the spec. Extract: waves, artifact list, nucleus assignments, dependencies.
@@ -46,7 +46,7 @@ Follow the spec's wave order. Respect dependencies.
 
 ```bash
 # Wave 1 (sequential — must complete first)
-bash _spawn/dispatch.sh solo n06 "Wave 1: brand identity — see PSPEC_N06"
+bash _spawn/dispatch.sh solo n06 "Wave 1: brand identity — see spec"
 
 # Wait for signal...
 
@@ -54,7 +54,7 @@ bash _spawn/dispatch.sh solo n06 "Wave 1: brand identity — see PSPEC_N06"
 bash _spawn/dispatch.sh grid WAVE2
 
 # Wave 3 (after wave 2 completes)
-bash _spawn/dispatch.sh solo n05 "Wave 3: deploy — see PSPEC_N05"
+bash _spawn/dispatch.sh solo n05 "Wave 3: deploy — see spec"
 ```
 
 ### Step 4: Monitor
@@ -91,7 +91,7 @@ If no spawn/grid infrastructure (single session), execute waves sequentially you
 ## Grid is AUTONOMOUS
 
 Once dispatched:
-- Nuclei read the PSPEC + manifest
+- Nuclei read the spec + manifest
 - They follow 8F pipeline
 - They do NOT ask the user anything
 - They commit and signal when done

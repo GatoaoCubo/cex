@@ -1,8 +1,8 @@
 ---
-id: pspec_n05_railway_superintendent
+id: spec_n05_railway_superintendent
 kind: constraint_spec
 pillar: P06
-title: PSPEC N05 Railway Backend Superintendent
+title: Spec N05 Railway Backend Superintendent
 version: 1.0.0
 created: 2026-04-01
 author: n07_admin
@@ -10,12 +10,12 @@ domain: operations-engineering
 quality_target: 9.0
 status: SPEC
 scope: N05_operations
-tags: [pspec, n05, railway, backend, fastapi, postgresql, deploy]
+tags: [spec, n05, railway, backend, fastapi, postgresql, deploy]
 tldr: N05 evolui de DevOps generico para Railway Backend Superintendent com dados reais.
 density_score: 0.96
 ---
 
-# PSPEC N05 -- Railway Backend Superintendent
+# Spec N05 -- Railway Backend Superintendent
 
 ## 1. VISAO
 

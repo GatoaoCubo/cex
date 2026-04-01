@@ -1,8 +1,8 @@
 ---
-id: pspec_n07_operational_intelligence
+id: spec_n07_operational_intelligence
 kind: constraint_spec
 pillar: P06
-title: PSPEC N07 -- Operational Intelligence Layer
+title: Spec N07 -- Operational Intelligence Layer
 version: 2.0.0
 created: 2026-04-01
 updated: 2026-04-01
@@ -11,12 +11,12 @@ domain: orchestration-operations
 quality_target: 9.0
 status: SPEC
 scope: N07_admin
-tags: [pspec, n07, autonomous, workflows, patterns, plan, spec, grid]
+tags: [spec, n07, autonomous, workflows, patterns, plan, spec, grid]
 tldr: User needs 4 commands (/plan /spec /grid /consolidate). N07 auto-chains 14 internal workflows + 53 KCs.
 density_score: 0.97
 ---
 
-# PSPEC N07 -- Operational Intelligence Layer v2
+# Spec N07 -- Operational Intelligence Layer v2
 
 ## THE INSIGHT
 
@@ -202,8 +202,8 @@ N07 invokes these internally. User never types them.
 
 ## USER EXPERIENCE
 
-/spec "evolve N06 into brand architect" -> N07 writes PSPEC
-/plan "execute N06 PSPEC waves 1-2" -> N07 decomposes, presents plan
+/spec "evolve N06 into brand architect" -> N07 writes Spec
+/plan "execute N06 Spec waves 1-2" -> N07 decomposes, presents plan
 /grid -> N07 dispatches, monitors, auto-reviews
 /consolidate -> N07 collects, verifies, commits, pushes
 

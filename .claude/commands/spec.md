@@ -1,19 +1,19 @@
 ---
-description: "Create a detailed spec (PSPEC) from plan + decisions. Usage: /spec [plan_name]"
+description: "Create a detailed spec from plan + decisions. Usage: /spec [plan_name]"
 ---
 
 # /spec — Blueprint from Plan + Decisions
 
 > **Input**: A `/plan` + a `/guide` manifest (decisions)
-> **Output**: A PSPEC in `_docs/pspecs/` — the exact blueprint for execution
+> **Output**: A spec in `_docs/specs/` — the exact blueprint for execution
 > **Next step**: `/grid` (execute the spec)
 
-## What is a PSPEC?
+## What is a spec?
 
-A **Production Specification** — the CEX standard for "exactly what to build."
-See `_docs/pspecs/` for 7 real examples that built this entire repo.
+The CEX standard for "exactly what to build."
+See `_docs/specs/` for 7 real examples that built this entire repo.
 
-A PSPEC contains:
+A spec contains:
 - The PROBLEM (why)
 - The VISION (what)
 - The ARTIFACT LIST (every file, exact path, kind, size estimate)
@@ -37,16 +37,16 @@ cat .cex/runtime/decisions/decision_manifest.yaml
 cat .cex/brand/brand_config.yaml 2>/dev/null
 ```
 
-### Step 2: Generate PSPEC
+### Step 2: Generate spec
 
-Write to `_docs/pspecs/PSPEC_{SCOPE}_{SLUG}.md` with frontmatter:
+Write to `_docs/specs/spec_{scope}_{slug}.md` with frontmatter:
 
 ```yaml
 ---
-id: pspec_{slug}
+id: spec_{slug}
 kind: constraint_spec
 pillar: P06
-title: "PSPEC — {title}"
+title: "Spec — {title}"
 version: 1.0.0
 created: {date}
 author: n07_orchestrator
@@ -55,7 +55,7 @@ quality_target: 9.0
 status: SPEC
 scope: {nucleus or scope}
 depends_on: {list or null}
-tags: [pspec, ...]
+tags: [spec, ...]
 tldr: "{1 sentence}"
 density_score: 0.95
 ---
@@ -103,16 +103,16 @@ Include the relevant decisions from the manifest:
 
 ### Step 6: Present to user
 
-Show the PSPEC summary. Ask: "This is the blueprint. Ready to execute? Type `/grid` to start."
+Show the spec summary. Ask: "This is the blueprint. Ready to execute? Type `/grid` to start."
 
-## PSPEC is NOT execution
+## Spec is NOT execution
 
 `/spec` only SPECIFIES. It does not build, dispatch, or score.
-The PSPEC is a CONTRACT between the plan and the execution.
+The spec is a CONTRACT between the plan and the execution.
 
 ## Examples
 
-See real PSPECs that built this repo:
-- `PSPEC_N06_BRAND_VERTICALIZATION.md` (348 lines, 32 artifacts)
-- `PSPEC_N02_VISUAL_FRONTEND_ENGINEER.md` (159 lines, 14 artifacts)
-- `PSPEC_N05_RAILWAY_SUPERINTENDENT.md` (159 lines, 14 artifacts)
+See real specs that built this repo:
+- `spec_n06_brand_verticalization.md` (348 lines, 32 artifacts)
+- `spec_n02_visual_frontend.md` (159 lines, 14 artifacts)
+- `spec_n05_railway_superintendent.md` (159 lines, 14 artifacts)
