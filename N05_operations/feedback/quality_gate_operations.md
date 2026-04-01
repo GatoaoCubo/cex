@@ -1,16 +1,16 @@
 ---
-id: p11_qg_operations_nucleus
+id: p11_qg_railway_superintendent
 kind: quality_gate
 pillar: P11
-title: "Gate: Operations Nucleus"
-version: 3.0.0
-created: 2026-03-30
-updated: 2026-03-31
+title: "Gate: Railway Backend Superintendent"
+version: 4.0.0
+created: 2026-04-01
+updated: 2026-04-01
 author: n05_operations
-domain: operations-engineering
-quality: 8.8
-tags: [quality_gate, N05, operations, testing, deployment]
-tldr: Validation gate for N05 outputs covering evidence quality, runtime relevance, rollback discipline, and release-safe actionability.
+domain: railway-backend-operations
+quality: null
+tags: [quality_gate, railway, superintendent, deploy, fastapi, postgresql]
+tldr: Railway deployment validation gate covering deploy smoke tests, rollback planning, migration safety, environment contracts, health monitoring, and middleware integrity.
 density_score: 0.97
 ---
 
@@ -18,16 +18,30 @@ density_score: 0.97
 
 | Property | Value |
 |----------|-------|
-| Metric | operational_readiness_score |
-| Threshold | 0.88 |
+| Metric | railway_deployment_safety_score |
+| Threshold | 0.90 |
 | Operator | >= |
-| Scope | All N05 artifacts, reviews, test/debug outputs, deploy validations, and CI/CD remediation reports |
+| Scope | All Railway deployments, health checks, PostgreSQL operations, and 4-service topology changes |
 
-## Hard Gates
+## Railway Deployment Gates
 
 | gate_id | description | threshold | block |
 |---------|-------------|-----------|-------|
-| H01 | YAML frontmatter parses without error | 100% | true |
+| G01 | Deploy smoke test passes within 30 seconds | 30s | true |
+| G02 | Rollback plan documented for 4 services (api/frontend/dashboard/gateway) | 100% | true |
+| G03 | Database migrations tested for backward compatibility | 100% | true |
+| G04 | Environment contract validated (63 variables present) | 100% | true |
+| G05 | Health endpoints return 200 with HealthResponse JSON | 100% | true |
+| G06 | Middleware stack integrity verified (8 layers ordered correctly) | 100% | true |
+
+## Validation Criteria
+
+- **Deploy Smoke (G01)**: `/health` endpoint responds 200 within 30s of `railway up`
+- **Rollback Plan (G02)**: Blast radius assessment + recovery steps for each affected service
+- **Migration Safety (G03)**: SQL migrations tested with rollback compatibility
+- **Environment Contract (G04)**: All 63 required variables (DATABASE_URL, API keys, pool settings) validated
+- **Health Full (G05)**: HealthResponse includes status, version, uptime, database{}, cache{}
+- **Middleware Intact (G06)**: CORS→TenantRateLimit→APIKey→RLS→EndpointLimit→BodySize→Exceptions→RequestID order confirmed
 | H02 | `kind` matches the artifact file type | 100% | true |
 | H03 | `quality` is `null` in source artifact frontmatter | 100% | true |
 | H04 | Output is domain-specific to operations/devops, not generic filler | 100% | true |

@@ -1,0 +1,55 @@
+id: p06_schema_env_contract
+kind: input_schema
+pillar: P06
+title: Environment Variable Contract Schema
+version: 1.0.0
+created: 2026-04-01
+updated: 2026-04-01
+author: n05_operations
+domain: railway-backend-operations
+quality: null
+tags:
+- schema
+- environment
+- variables
+- contract
+- railway
+tldr: Schema for 63 environment variables contract validation covering DATABASE_URL, API keys, pool settings, and Railway
+  service configuration.
+schema_type: env_contract
+validation_level: strict
+purpose: Validates the complete 63-variable environment contract for Railway FastAPI backend deployments including database,
+  API keys, pool settings, and service configuration.
+required_variables_63_total: ''
+database_infrastructure_8_vars: "DATABASE_URL:\n  required: true\n  pattern: \"^postgresql://.*\"\n  description: PostgreSQL\
+  \ connection string with SSL\n\nDB_POOL_MIN:\n  type: integer\n  required: true\n  minimum: 3\n  default: 3\n\nDB_POOL_MAX:\n\
+  \  type: integer\n  required: true\n  maximum: 20\n  default: 20\n\nDB_COMMAND_TIMEOUT:\n  type: integer\n  required: true\n\
+  \  default: 60\n\nREDIS_URL:\n  required: false\n  pattern: \"^redis://.*\"\n\nPORT:\n  type: integer\n  required: true\n\
+  \  default: 8000\n\nENV:\n  type: string\n  required: true\n  enum: [\"development\", \"staging\", \"production\"]\n\nRAILWAY_ENVIRONMENT_NAME:\n\
+  \  type: string\n  required: true"
+api_keys_authentication_15_vars: "ANTHROPIC_API_KEY:\n  required: true\n  pattern: \"^sk-.*\"\n\nOPENAI_API_KEY:\n  required:\
+  \ true\n  pattern: \"^sk-.*\"\n\nGROQ_API_KEY:\n  required: false\n  pattern: \"^gsk_.*\"\n\nCEREBRAS_API_KEY:\n  required:\
+  \ false\n\nGEMINI_API_KEY:\n  required: false\n\nJWT_SECRET_KEY:\n  required: true\n  min_length: 32\n\nBCRYPT_ROUNDS:\n\
+  \  type: integer\n  default: 12"
+payment_integration_20_vars: "STRIPE_SECRET_KEY:\n  required: false\n  pattern: \"^sk_(test_|live_).*\"\n\nMERCADOPAGO_ACCESS_TOKEN:\n\
+  \  required: false\n\nBLING_CLIENT_ID:\n  required: false\n\nBLING_CLIENT_SECRET:\n  required: false\n\nE2B_API_KEY:\n \
+  \ required: false"
+rate_limiting_credits_10_vars: "RATE_LIMIT_FREE:\n  type: integer\n  default: 60\n\nRATE_LIMIT_PRO:\n  type: integer\n  default:\
+  \ 120\n\nRATE_LIMIT_BUSINESS:\n  type: integer\n  default: 300\n\nCREDIT_PESQUISA_CENTAVOS:\n  type: integer\n  default:\
+  \ 75\n\nCREDIT_ANUNCIO_CENTAVOS:\n  type: integer\n  default: 50\n\nCREDIT_FOTO_CENTAVOS:\n  type: integer\n  default: 100\n\
+  \nCREDIT_FULL_CENTAVOS:\n  type: integer\n  default: 200"
+communication_notifications_10_vars: "RESEND_API_KEY:\n  required: false\n\nWHATSAPP_TOKEN:\n  required: false\n\nSMTP_HOST:\n\
+  \  required: false\n\nSMTP_PORT:\n  type: integer\n  default: 587"
+validation_rules:
+- DATABASE_URL must be PostgreSQL format with SSL support
+- API keys must match provider-specific patterns
+- Pool settings within Railway platform limits (3-20 connections)
+- Rate limits configured per tier (free/pro/business)
+- Credit values in BRL centavos for cost tracking
+mock_mode_variables: 'For testing environments, these can be mock values:
+
+  - STRIPE_SECRET_KEY (test mode)
+
+  - MERCADOPAGO_ACCESS_TOKEN (sandbox)
+
+  - E2B_API_KEY (local execution fallback)'

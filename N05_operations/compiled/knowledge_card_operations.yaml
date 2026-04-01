@@ -1,44 +1,43 @@
-id: p01_kc_operations_nucleus
+id: p01_kc_railway_superintendent
 kind: knowledge_card
 pillar: P01
-title: Operations Nucleus Knowledge Card
-version: 3.0.0
-created: 2026-03-30
-updated: 2026-03-31
+title: Railway Backend Superintendent Knowledge Card
+version: 4.0.0
+created: 2026-04-01
+updated: 2026-04-01
 author: n05_operations
-domain: operations-engineering
+domain: railway-backend-operations
 quality: null
 tags:
 - knowledge_card
-- N05
-- operations
-- devops
-- testing
+- railway
+- superintendent
+- fastapi
+- postgresql
 - deploy
-tldr: Distilled doctrine for operational work where code review, tests, debugging, CI/CD, deployment, and monitoring must
-  be grounded in evidence.
-when_to_use: When the request requires repository execution, release gating, runtime diagnosis, pipeline repair, or deployment-safe
-  validation.
+tldr: Railway-native doctrine for FastAPI lifecycle management on Railway platform with PostgreSQL, health monitoring, and
+  4-service topology awareness.
+when_to_use: When the request requires Railway deployment, FastAPI health checks, PostgreSQL operations, or infrastructure
+  management on Railway platform.
 keywords:
-- review
-- test
-- debug
+- railway
+- superintendent
+- fastapi
+- postgresql
 - deploy
-- ci
-- cd
-- pipeline
-- docker
-- observability
+- health
 - rollback
+- nixpacks
+- uvicorn
 long_tails:
-- How should N05 classify a failing pipeline before editing code?
-- What evidence is required before declaring release readiness?
-- How should rollback and observability be represented in an operational handoff?
+- How should Railway deployments validate health endpoints before completion?
+- What 4-service coordination is required for safe rollbacks?
+- How should PostgreSQL migrations maintain backward compatibility?
 axioms:
-- Reproduce before repair.
-- Evidence beats confidence.
-- Narrow fixes reduce blast radius.
-- Release only with rollback and visibility.
+- Deploy only with railway.toml validation and health endpoints.
+- 4-service blast radius assessment required for rollbacks.
+- PostgreSQL connections via asyncpg pools with SSL.
+- Railway-native patterns over generic cloud solutions.
 linked_artifacts:
   primary: workflow_operations
   related:
@@ -46,8 +45,19 @@ linked_artifacts:
   - checkpoint_operations
   - dispatch_rule_operations
   - system_prompt_operations
+infra_kcs:
+- kc_railway_platform_deep
+- kc_railway_cli_patterns
+- kc_postgresql_railway
+- kc_nixpacks_buildpacks
+- kc_zero_downtime_deploy
+- kc_api_health_monitoring
+- kc_uvicorn_production
+- kc_railway_networking
+- kc_middleware_stack
+- kc_credit_system_railway
 density_score: 0.97
-data_source: internal://N05_operations
+data_source: internal://N05_operations + railway_platform_docs
 quick_reference: 'owner: N05
 
   focus: execution reliability and release safety

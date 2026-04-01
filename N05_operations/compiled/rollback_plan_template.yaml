@@ -1,0 +1,134 @@
+id: p05_output_rollback_plan
+kind: output_validator
+pillar: P05
+title: Railway Rollback Plan Template
+version: 1.0.0
+created: 2026-04-01
+updated: 2026-04-01
+author: n05_operations
+domain: railway-backend-operations
+quality: null
+tags:
+- output
+- rollback
+- plan
+- railway
+- 4-service
+- emergency
+tldr: Rollback plan template for Railway 4-service topology with blast radius assessment and recovery coordination.
+output_type: rollback_plan
+format: markdown
+incident_details: 'Date/Time: _ Environment: _ Triggered by: _ Impact Level: [ ] Minor [ ] Major [ ] Critical Estimated Downtime:
+  _'
+4_service_blast_radius_assessment: ''
+api_service_fastapi_backend:
+- 'Status: [ ] Affected [ ] Stable [ ] Unknown'
+- 'Issues: _'
+- 'Dependencies: Database, Cache, Auth'
+- 'Rollback Required: [ ] Yes [ ] No'
+frontend_service_react_vite:
+- 'Status: [ ] Affected [ ] Stable [ ] Unknown'
+- 'Issues: _'
+- 'Dependencies: API endpoints, CDN'
+- 'Rollback Required: [ ] Yes [ ] No'
+dashboard_service_admin:
+- 'Status: [ ] Affected [ ] Stable [ ] Unknown'
+- 'Issues: _'
+- 'Dependencies: API auth, user management'
+- 'Rollback Required: [ ] Yes [ ] No'
+gateway_service_proxy_load_balancer:
+- 'Status: [ ] Affected [ ] Stable [ ] Unknown'
+- 'Issues: _'
+- 'Dependencies: Routing rules, SSL certs'
+- 'Rollback Required: [ ] Yes [ ] No'
+rollback_execution_plan: ''
+step_1_stop_traffic_if_critical: '# Temporarily block traffic to affected services
+
+  railway env set MAINTENANCE_MODE=true'
+step_2_database_rollback_if_needed: '# Check migration status
+
+  railway connect postgres
+
+  # Execute rollback migration if required
+
+  # CRITICAL: Test in staging first'
+step_3_service_rollbacks: "# API service rollback\nrailway rollback --service api --to-deployment [DEPLOYMENT_ID]\n\n# Frontend\
+  \ rollback (if needed)  \nrailway rollback --service frontend --to-deployment [DEPLOYMENT_ID]\n\n# Dashboard rollback (if\
+  \ needed)\nrailway rollback --service dashboard --to-deployment [DEPLOYMENT_ID]\n\n# Gateway rollback (if needed)\nrailway\
+  \ rollback --service gateway --to-deployment [DEPLOYMENT_ID]"
+step_4_health_verification: '# Verify health endpoints
+
+  curl -f https://api.domain.com/health
+
+  curl -f https://dashboard.domain.com/health
+
+
+  # Check service communication
+
+  # Verify authentication flows
+
+  # Confirm database connectivity'
+step_5_traffic_restoration: '# Remove maintenance mode
+
+  railway env set MAINTENANCE_MODE=false
+
+
+  # Monitor logs for errors
+
+  railway logs --service api --tail'
+validation_checklist:
+- '[ ] Health Endpoints Responding'
+- API /health returns 200
+- Database connections active
+- Cache operational (or fallback)
+- '[ ] Service Communication'
+- Frontend → API calls working
+- Dashboard → API authentication
+- Gateway → Service routing
+- '[ ] Data Integrity'
+- Database queries successful
+- No data corruption detected
+- User sessions preserved
+- '[ ] Performance Metrics'
+- Response times within normal range
+- Error rates below threshold
+- Resource utilization stable
+recovery_time_objectives:
+- 'Critical Path Recovery: 5 minutes'
+- 'Full Service Recovery: 15 minutes'
+- 'Performance Baseline: 30 minutes'
+- 'Post-Incident Review: 24 hours'
+communication_plan: 'Internal Notifications:
+
+  - [ ] Railway superintendent notified
+
+  - [ ] Database team alerted
+
+  - [ ] Frontend team coordinated
+
+  - [ ] Stakeholders informed
+
+
+  External Communications:
+
+  - [ ] Status page updated (if applicable)
+
+  - [ ] Customer notifications (if needed)
+
+  - [ ] Support team briefed'
+post_rollback_actions: '- [ ] Incident report created
+
+  - [ ] Root cause analysis scheduled
+
+  - [ ] Monitoring alert review
+
+  - [ ] Process improvement identified
+
+
+  Rollback executed by: _
+
+  Completion time: _
+
+  Services restored: _
+
+  Follow-up required: _'

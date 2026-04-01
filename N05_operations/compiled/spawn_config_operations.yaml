@@ -1,33 +1,33 @@
-id: p12_spawn_operations_nucleus
+id: p12_spawn_railway_superintendent
 kind: spawn_config
 pillar: P12
-version: 3.0.0
-created: 2026-03-30
-updated: 2026-03-31
+version: 4.0.0
+created: 2026-04-01
+updated: 2026-04-01
 author: n05_operations
-title: Operations Nucleus Spawn Config
+title: Railway Backend Superintendent Spawn Config
 mode: solo
-agent_node: operations_nucleus
-model: gpt-5.4
+agent_node: railway_superintendent
+model: opus
 flags:
-- --dangerously-skip-permissions
 - --model
-- gpt-5.4
+- opus
 - --reasoning-effort
 - high
 mcp_config: .mcp-n05.json
-timeout_seconds: 5400
+timeout_seconds: 7200
 prompt_inline: false
 handoff_path: .cex/runtime/handoffs/n05_task.md
 quality: null
 tags:
 - spawn_config
-- N05
-- operations
-- codex
-- ci-cd
-tldr: Spawn contract for N05 on Codex with mandatory handoff-first behavior and enough runtime budget for review, test, debug,
-  and deploy validation loops.
+- railway
+- superintendent
+- opus
+- fastapi
+- postgresql
+tldr: Railway Superintendent spawn on Claude Opus with railway/postgresql MCPs for FastAPI deployment lifecycle and 4-service
+  topology management.
 domain: operations-engineering
 density_score: 0.94
 parameters: '| Parameter | Value | Rationale |

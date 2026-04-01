@@ -23,8 +23,8 @@ $grid = @{
 }
 
 $cliMap = @{
-    n01 = 'gemini'; n02 = 'claude'; n03 = 'claude'
-    n04 = 'gemini'; n05 = 'codex';  n06 = 'claude'
+    n01 = 'claude'; n02 = 'claude'; n03 = 'claude'
+    n04 = 'claude'; n05 = 'claude'; n06 = 'claude'
 }
 
 $root = Split-Path $PSScriptRoot -Parent

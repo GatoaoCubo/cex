@@ -1,36 +1,127 @@
 ---
-id: p12_wf_marketing_campaign
+id: p12_wf_visual_frontend_marketing
 kind: workflow
 pillar: P12
-version: 3.0.0
+version: 4.0.0
 created: 2026-03-30
-updated: 2026-03-31
-author: n02_marketing
-title: Marketing Copy Production Workflows
-steps_count: 12
-execution: sequential_with_branches
-agent_nodes: [n02-marketing-hub, n07-orchestrator]
-timeout: 3600000
-retry_policy: per_step
+updated: 2026-04-01
+author: n02_visual_frontend_marketing
+title: Visual Frontend + Marketing Production Workflows
+steps_count: 18
+execution: mode_branching_sequential
+agent_nodes: [n02-visual-marketing-hub, n07-orchestrator]
+timeout: 5400000
+retry_policy: per_step_with_mode_awareness
 depends_on: []
-signals: [marketing_copy_complete, marketing_copy_error]
-domain: copywriting_and_campaigns
-quality: 8.9
-tags: [workflow, marketing, copywriting, N02, campaign, landing_page, email]
-tldr: 3 production workflows — ad campaign (5 steps), landing page (4 steps), email sequence (3 steps) — all N02 executed.
-density_score: 0.90
+signals: [visual_complete, copy_complete, dual_complete, workflow_error]
+domain: visual_frontend_engineering_and_copywriting
+quality: null
+tags: [workflow, visual-frontend, marketing, html, tailwind, copywriting, N02, component, landing_page]
+tldr: 6 dual-role workflows — 3 visual (component, landing page, responsive), 2 copy (campaign, email), 1 dual (integrated page) — mode-aware execution.
+density_score: 0.96
 ---
 
-# Marketing Copy Production Workflows
+# Visual Frontend + Marketing Production Workflows
 
 ## Overview
 
-Three operational workflows for N02. Each produces committed, compiled artifacts
-with quality gate validation. All execute on `n02-marketing-hub` (claude-sonnet-4-6).
+Six operational workflows for dual-role N02. Mode detection → specialized workflow execution.
+Each produces committed, compiled artifacts with mode-appropriate quality gates.
+Executes on `n02-visual-marketing-hub` (claude-sonnet-4-6 + opus fallback).
+
+## Mode Detection & Routing
+
+```
+INPUT: intent→detect-mode→route-workflow
+
+VISUAL MODE: component, html, tailwind, responsive, design, css, layout
+COPY MODE: copy, ad, headline, email, campaign, brand_voice
+DUAL MODE: landing page + copy, integrated page, visual + persuasive
+
+WORKFLOW ROUTING:
+- detect_mode(intent) returns: VISUAL | COPY | DUAL
+- route to appropriate workflow
+- apply mode-specific quality gates
+- use mode-appropriate tools (browser MCP vs readability check)
+```
 
 ---
 
-## Workflow 1: Ad Campaign
+## VISUAL MODE Workflows
+
+### Workflow V1: Build HTML Component
+
+**Goal**: Create production-ready HTML component with Tailwind CSS and shadcn/ui patterns
+**Input required**: Component type, styling requirements, functionality specs, accessibility level
+**Output**: Complete component file with HTML, styling, and documentation
+
+#### Steps
+
+```
+Step 1: COMPONENT SPEC [n02-visual-marketing-hub]
+  - Input: component type (button, form, card, navbar, etc.)
+  - Action: Define component API, props, variants, accessibility requirements
+  - Output: component_spec_{mission}.md
+  - Signal: spec_complete
+
+Step 2: HTML STRUCTURE [n02-visual-marketing-hub]
+  - Action: Generate semantic HTML5 markup with proper ARIA labels
+  - Apply: WCAG AA compliance, keyboard navigation support
+  - Output: component_html_{mission}.md
+  - Signal: html_complete
+
+Step 3: TAILWIND STYLING [n02-visual-marketing-hub]
+  - Action: Apply utility classes, design tokens, responsive variants
+  - Ensure: zero hardcoded hex, mobile-first approach, dark mode support
+  - Output: component_styled_{mission}.md
+  - Signal: styling_complete
+
+Step 4: VALIDATE + COMPILE [n02-visual-marketing-hub]
+  - Validate: W3C HTML validator, Lighthouse audit, accessibility check
+  - Compile: python _tools/cex_compile.py
+  - Commit: git commit -m "[N02] component — {mission}"
+  - Signal: visual_complete
+```
+
+### Workflow V2: Build Landing Page
+
+**Goal**: Create complete responsive landing page with multiple sections
+**Input required**: Page purpose, sections needed, design style, responsive requirements
+**Output**: Full HTML page with optimized performance and accessibility
+
+#### Steps
+
+```
+Step 1: PAGE ARCHITECTURE [n02-visual-marketing-hub]
+  - Input: page purpose, required sections (hero, features, testimonials, etc.)
+  - Action: Define page structure, layout pattern (F/Z), breakpoint strategy
+  - Output: page_architecture_{mission}.md
+  - Signal: architecture_complete
+
+Step 2: HTML GENERATION [n02-visual-marketing-hub]
+  - Action: Generate complete HTML page with semantic structure
+  - Include: proper heading hierarchy, meta tags, accessibility features
+  - Output: landing_page_html_{mission}.md
+  - Signal: html_complete
+
+Step 3: RESPONSIVE IMPLEMENTATION [n02-visual-marketing-hub]
+  - Action: Apply mobile-first responsive classes, test breakpoints
+  - Ensure: touch-friendly interactions, readable typography scaling
+  - Output: responsive_optimized_{mission}.md
+  - Signal: responsive_complete
+
+Step 4: PERFORMANCE + COMPILE [n02-visual-marketing-hub]
+  - Validate: Lighthouse score >= 90, W3C validation, contrast check
+  - Optimize: lazy loading, proper image sizing, minimal CSS
+  - Compile + Commit: git commit -m "[N02] landing page — {mission}"
+  - Signal: visual_complete
+```
+
+---
+
+## COPY MODE Workflows
+
+### Workflow C1: Ad Campaign
 
 **Goal**: Produce complete ad creative set for one campaign (Facebook/Google/LinkedIn)
 **Input required**: Product name, audience segment, key benefit, budget range, campaign objective

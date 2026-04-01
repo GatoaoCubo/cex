@@ -1,0 +1,41 @@
+id: p06_schema_health_response
+kind: input_schema
+pillar: P06
+title: Health Check Response Schema
+version: 1.0.0
+created: 2026-04-01
+updated: 2026-04-01
+author: n05_operations
+domain: railway-backend-operations
+quality: null
+tags:
+- schema
+- health
+- response
+- monitoring
+- fastapi
+tldr: Schema for HealthResponse JSON validation covering status, version, uptime, database, and cache health indicators.
+schema_type: json_response
+validation_level: strict
+purpose: Validates /health endpoint JSON responses for Railway FastAPI applications to ensure consistent monitoring and observability
+  data structure.
+schema_definition: "health_response:\n  required: true\n  properties:\n    status:\n      type: string\n      enum: [\"healthy\"\
+  , \"degraded\", \"unhealthy\"]\n      required: true\n    version:\n      type: string\n      pattern: \"^\\\\d+\\\\.\\\\\
+  d+\\\\.\\\\d+\"\n      required: true\n    timestamp:\n      type: string\n      format: iso8601\n      required: true\n\
+  \    uptime_seconds:\n      type: integer\n      minimum: 0\n      required: true\n    environment:\n      type: string\n\
+  \      enum: [\"development\", \"staging\", \"production\"]\n      required: true\n    database:\n      type: object\n \
+  \     required: true\n      properties:\n        status: {type: string, enum: [\"connected\", \"disconnected\", \"error\"\
+  ]}\n        pool_size: {type: integer, minimum: 0}\n        active_connections: {type: integer, minimum: 0}\n        ssl_enabled:\
+  \ {type: boolean}\n    cache:\n      type: object\n      required: false\n      properties:\n        status: {type: string,\
+  \ enum: [\"connected\", \"disconnected\", \"fallback\"]}\n        hit_rate: {type: number, minimum: 0, maximum: 1}\n   \
+  \     memory_usage_mb: {type: number, minimum: 0}"
+validation_rules:
+- status must indicate current service health level
+- version must follow semantic versioning format
+- uptime_seconds tracks service restart cycles
+- database status required for PostgreSQL health
+- cache status optional for Redis/fallback scenarios
+example_valid_response: "{\n  \"status\": \"healthy\",\n  \"version\": \"1.2.3\",\n  \"timestamp\": \"2026-04-01T12:00:00Z\"\
+  ,\n  \"uptime_seconds\": 3600,\n  \"environment\": \"production\",\n  \"database\": {\n    \"status\": \"connected\",\n\
+  \    \"pool_size\": 20,\n    \"active_connections\": 5,\n    \"ssl_enabled\": true\n  },\n  \"cache\": {\n    \"status\"\
+  : \"connected\", \n    \"hit_rate\": 0.85,\n    \"memory_usage_mb\": 128\n  }\n}"

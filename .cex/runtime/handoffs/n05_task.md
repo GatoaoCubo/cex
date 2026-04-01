@@ -1,48 +1,49 @@
-# N05 Task: Rebuild Operations Nucleus — 9 Artefatos
+# N05 Task — PSPEC Railway Backend Superintendent: Rewrite Identity + Quality
 **Autonomia Total** | **Quality 9.0+**
 **REGRA: Commit e signal ANTES de qualquer pausa.**
 
 ## CONTEXTO
-Você é N05, o Operations Nucleus. Seus 9 artefatos estão com quality:null (placeholder genérico). Reconstrua TODOS com identidade REAL do seu domínio: code review, testing, debugging, deployment, CI/CD, infrastructure.
+N05 evolui de DevOps genérico para **Railway Backend Superintendent**.
+Leia a spec completa: `_docs/pspecs/PSPEC_N05_RAILWAY_SUPERINTENDENT.md`
+
+## 10 KCs JÁ CRIADOS EM
+`P01_knowledge/library/infrastructure/` — railway-platform, railway-cli, postgresql-railway, nixpacks, zero-downtime, health-monitoring, uvicorn, networking, middleware-stack, credit-system
+
+## TAREFA — Rewrite 9 existentes + Create 5 novos = 14 artefatos
+
+### Identidade (rewrite com Railway superintendent):
+1. `agents/agent_operations.md` — Railway Superintendent, 12 capabilities do F2, opus model
+2. `prompts/system_prompt_operations.md` — Persona Railway-native, deploy-first
+3. `architecture/agent_card_operations.md` — Deploy spec com postgres MCP, opus model
+
+### Quality (rewrite com 6 gates de deploy):
+4. `feedback/quality_gate_operations.md` — deploy smoke 30s, rollback 4svcs, migration safe, env 63vars, health full, middleware intact
+5. `orchestration/dispatch_rule_operations.md` — Triggers: deploy/railway/api/health/rollback/migrate/env/infrastructure
+6. `orchestration/workflow_operations.md` — Deploy workflow: verify-toml→verify-env→migrations→railway-up→health-30s→verify→monitor
+7. `orchestration/spawn_config_operations.md` — Spawn config para opus + postgres MCP
+
+### Knowledge (rewrite):
+8. `knowledge/knowledge_card_operations.md` — Rewrite com refs aos 10 infra KCs
+9. `memory/checkpoint_operations.md` — Deploy checkpoint state
+
+### CREATE novos:
+10. `schemas/railway_toml_schema.md` — Schema para railway.toml validation
+11. `schemas/health_check_schema.md` — Schema para HealthResponse
+12. `schemas/env_contract_schema.md` — Schema para env var contract (63 vars)
+13. `output/deploy_checklist_template.md` — Deploy checklist output
+14. `output/rollback_plan_template.md` — Rollback plan output
 
 ## REFERÊNCIAS
-- **Golden agent (9.0)**: `N03_engineering/agents/agent_engineering.md` — modelo de qualidade
-- **Seu fractal**: `N05_operations/` (12 subdirs)
-- **CLAUDE.md**: regras globais, 8F pipeline
-
-## SUA IDENTIDADE (use em TODOS os artefatos)
-- **Role**: Operations & DevOps Nucleus
-- **CLI**: Codex (OpenAI subscription)
-- **Domínio**: code review, testing, debugging, deployment, CI/CD, infrastructure, monitoring
-- **Capacidades**: automated testing, code quality analysis, security scanning, deploy pipelines
-- **MCPs futuros**: GitHub Actions, Docker, pytest, linters
-- **Tools futuros**: test runner, coverage reporter, dependency auditor, deploy orchestrator
-
-## 9 ARTEFATOS
-1. `agent_operations.md` — identidade completa do N05
-2. `system_prompt_operations.md` — regras para LLM ser o ops engineer
-3. `knowledge_card_operations.md` — KC destilado do domínio ops
-4. `agent_card_operations.md` — deployment spec (codex, GPT)
-5. `dispatch_rule_operations.md` — quando rotear para N05
-6. `workflow_operations.md` — workflows (code review, test suite, deploy pipeline)
-7. `quality_gate_operations.md` — gates de validação para ops output
-8. `checkpoint_operations.md` — checkpoints de deploy/release
-9. `spawn_config_operations.md` — config de spawn para N05
-
-## REGRAS
-1. Leia cada artefato existente ANTES de reescrever
-2. Mantenha frontmatter válido com quality: null (sem self-score)
-3. Conteúdo REAL e específico do domínio operations — ZERO placeholder genérico
-4. Compile cada um: `python _tools/cex_compile.py {path}`
-5. Crie dir `N05_operations/compiled/` se não existir
+- PSPEC: `_docs/pspecs/PSPEC_N05_RAILWAY_SUPERINTENDENT.md`
+- Golden agent: `N03_engineering/agents/agent_engineering.md`
+- KCs: `P01_knowledge/library/infrastructure/kc_*.md`
 
 ## COMMIT
 ```bash
-git add N05_operations/
-git commit -m "[N05] rebuild operations nucleus — 9 artefatos via 8F"
+git add -A && git commit -m "[N05] pspec: Railway Backend Superintendent — 14 artifacts"
 ```
 
 ## SIGNAL
-```bash
-python -c "from _tools.signal_writer import write_signal; write_signal('n05', 'complete', 9.0, 'FASE3')"
+```python
+python -c "from _tools.signal_writer import write_signal; write_signal('n05', 'pspec_n05_complete', 9.0)"
 ```

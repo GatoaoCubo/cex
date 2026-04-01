@@ -1,210 +1,281 @@
 ---
-id: p03_ap_generate_marketing_strategy
+id: p03_ap_visual_frontend_marketing
 kind: action_prompt
 pillar: P03
-version: 3.0.0
+version: 4.0.0
 created: 2026-03-30
-updated: 2026-03-31
-author: n02_marketing
-title: N02 Action Prompts — Marketing Copy Quick Execution
-action: Execute copy task directly with minimal input
+updated: 2026-04-01
+author: n02_visual_frontend_marketing
+title: N02 Action Prompts — Visual Frontend + Marketing Quick Execution
+action: Execute visual or copy task directly with minimal input
 input_required:
-  - "task_type: string — which copy task to run"
+  - "mode: string — VISUAL | COPY | DUAL"
+  - "task_type: string — which specific task to run"
   - "product: string — product or service name"
-  - "audience: string — target audience description"
-output_expected: Completed copy deliverable with A/B variants and TEST note
-purpose: Quick-execution prompts for the 5 most common N02 tasks — no template wiring needed, paste and run.
-steps_count: 5
-timeout: 60s
+output_expected: Production HTML/CSS with Tailwind OR copy deliverable with A/B variants OR integrated page
+purpose: Ready-to-run action prompts for dual-role N02 — 6 visual tasks + 4 copy tasks, no template setup needed.
+steps_count: 10
+timeout: 90s
 edge_cases:
+  - "No color scheme specified — default to CODEXA tokens"
+  - "No accessibility level — default to WCAG AA"
   - "No brand voice provided — use neutral professional tone"
-  - "No funnel stage specified — ask before writing or default to consideration"
-  - "Copy exceeds word limit — trim benefits block first, keep hook and CTA intact"
+  - "No funnel stage specified — default to consideration"
+  - "HTML exceeds complexity — break into smaller components"
 constraints:
-  - NEVER write generic CTAs — always specific + benefit-first
-  - ALWAYS produce 3 headline variants minimum
-  - NEVER skip funnel stage identification
-domain: copywriting_and_campaigns
-quality: 8.9
-tags: [action_prompt, marketing, copy, N02, quick_execution]
-tldr: 5 ready-to-run N02 action prompts — ad copy, headline, landing page hero, email, brand voice card.
-density_score: 0.91
+  - VISUAL: NEVER use hardcoded hex colors, ALWAYS target Lighthouse 90+, ALWAYS include dark mode
+  - COPY: NEVER write generic CTAs, ALWAYS produce 3 headline variants minimum
+  - DUAL: NEVER skip integration between copy and visual hierarchy
+domain: visual_frontend_engineering_and_copywriting
+quality: null
+tags: [action_prompt, visual-frontend, marketing, html, tailwind, copy, N02, quick_execution]
+tldr: 10 ready-to-run N02 action prompts — 6 visual (landing page, components, responsive) + 4 copy (ads, headlines, emails) + dual integration.
+density_score: 0.96
 ---
 
-# N02 Action Prompts — Marketing Copy Quick Execution
+# N02 Action Prompts — Visual Frontend + Marketing Quick Execution
 
 ## Context
 
-Five copy tasks run most often in N02. These action prompts are pre-wired — paste the
-relevant prompt into the N02 system, fill the `[BRACKETS]`, and get a complete deliverable.
-No template setup needed. Each follows 8F pipeline internally.
+Ten tasks run most often in dual-role N02. These action prompts are pre-wired — paste the
+relevant prompt, fill the `[BRACKETS]`, and get a complete deliverable.
+No template setup needed. Each follows 8F pipeline internally with visual gates OR copy gates.
 
 ---
 
-## Action 1: Write Facebook/Instagram Ad
+## VISUAL MODE Actions
 
-**Use when**: Need a paid social ad with hook, body, and CTA.
+### Action V1: Build Complete Landing Page
+
+**Use when**: Need a full production landing page with multiple sections.
 
 ```
-TASK: Write a Facebook/Instagram ad.
-PRODUCT: [product name and one-sentence description]
-AUDIENCE: [who they are, their pain or desire]
-FUNNEL STAGE: [awareness | consideration | decision]
-KEY BENEFIT: [the ONE outcome they get]
-BRAND VOICE: [casual/professional/bold — and 1–2 banned words if any]
+MODE: VISUAL
+TASK: Build a complete landing page with Tailwind CSS.
+PRODUCT: [name + what it does]
+LAYOUT: [f_pattern | z_pattern | single_column]
+SECTIONS: [hero, features, testimonials, pricing, faq, cta_final — select which to include]
+COLOR_SCHEME: [codexa | neutral | brand]
+CTA_ACTION: [start_trial | book_demo | download | buy]
 
 DELIVER:
-- 3 headline variants (V1, V2, V3 with 4U scores, mark ★ recommended)
-- Primary text (hook + PAS or AIDA body, 90–125 words)
+- Complete HTML page with semantic structure
+- Mobile-first responsive design (sm:, md:, lg: breakpoints)
+- Dark mode implementation with proper tokens
+- WCAG AA accessibility compliance
+- Tailwind utility classes only (zero hardcoded hex)
+- Lighthouse performance optimization
+- Component breakdown (which shadcn/ui patterns used)
+- TEST: visual validation checklist
+```
+
+### Action V2: Create shadcn/ui Component
+
+**Use when**: Need a reusable component following shadcn/ui patterns.
+
+```
+MODE: VISUAL
+TASK: Create a [button | card | form | dialog | dropdown | input] component.
+COMPONENT_TYPE: [specify type]
+VARIANT_COUNT: [how many style variants needed]
+PROPS: [list any specific props or configuration]
+ACCESSIBILITY: [basic | enhanced — keyboard nav, screen reader]
+
+DELIVER:
+- Base component HTML with Tailwind classes
+- All variants (primary, secondary, destructive, etc.)
+- Proper ARIA labels and accessibility features
+- Hover, focus, and active states
+- Dark mode variants
+- Usage examples (3 different contexts)
+- Component API documentation
+- TEST: accessibility and visual QA checklist
+```
+
+### Action V3: Make Component/Page Responsive
+
+**Use when**: Need to add responsive behavior to existing design.
+
+```
+MODE: VISUAL
+TASK: Add responsive design to existing HTML.
+EXISTING_HTML: [paste current HTML or describe component]
+BREAKPOINTS: [which breakpoints to target: sm | md | lg | xl | 2xl]
+PRIORITY: [mobile_first | desktop_down]
+LAYOUT_CHANGES: [describe how layout should adapt]
+
+DELIVER:
+- Responsive HTML with Tailwind breakpoint classes
+- Mobile-first methodology applied
+- Typography scaling across devices
+- Navigation patterns for mobile (hamburger, drawer, etc.)
+- Image optimization and lazy loading
+- Touch-friendly interactions on mobile
+- Responsive testing checklist
+- TEST: cross-device validation steps
+```
+
+---
+
+## COPY MODE Actions
+
+### Action C1: Optimize Headlines (10 Variants)
+
+**Use when**: Need multiple headline options for landing page, ad, or email.
+
+```
+MODE: COPY
+TASK: Generate 10 headline variants and score them.
+PRODUCT: [name]
+AUDIENCE: [description]
+FUNNEL_STAGE: [awareness | consideration | decision]
+KEY_BENEFIT: [single outcome]
+
+DELIVER:
+- 10 headline variants using these formulas:
+  - 2× AIDA hook
+  - 2× PAS opener  
+  - 2× 4U scored
+  - 2× Number + Outcome
+  - 2× "How to [benefit] without [pain]"
+- Score each: Useful/Urgent/Unique/Ultra-specific (1–3 each)
+- Top 3 ranked by total score
+- TEST: which to A/B test first and why
+```
+
+### Action C2: Write Facebook/Instagram Ad
+
+**Use when**: Need paid social ad with hook, body, and CTA.
+
+```
+MODE: COPY
+TASK: Write Facebook/Instagram ad.
+PRODUCT: [product name and description]
+AUDIENCE: [who they are, pain/desire]
+FUNNEL_STAGE: [awareness | consideration | decision]
+KEY_BENEFIT: [the ONE outcome they get]
+BRAND_VOICE: [casual/professional/bold + banned words]
+
+DELIVER:
+- 3 headline variants (V1, V2, V3 with 4U scores, ★ recommended)
+- Primary text (hook + PAS/AIDA body, 90–125 words)
 - CTA button text (2 options, specific + benefit-first)
+- Character count validation
 - TEST note (what to A/B test first)
 ```
 
 ---
 
-## Action 2: Optimize Headlines (10 Variants)
+## DUAL MODE Actions
 
-**Use when**: Need multiple headline options for an ad, email subject, or landing page.
+### Action D1: Build Landing Page with Integrated Copy
+
+**Use when**: Need complete page where copy and visual work together.
 
 ```
-TASK: Generate 10 headline variants and score them.
-PRODUCT: [name]
-AUDIENCE: [description]
-FUNNEL STAGE: [awareness | consideration | decision]
-KEY BENEFIT: [single outcome]
+MODE: DUAL
+TASK: Build landing page with integrated persuasive copy.
+PRODUCT: [name + description]
+AUDIENCE: [target visitor description]
+FUNNEL_STAGE: [awareness | consideration | decision]
+COPY_FORMULA: [AIDA | PAS | BAB]
+LAYOUT_PATTERN: [f_pattern | z_pattern]
+KEY_BENEFIT: [transformation they want]
 
 DELIVER:
-- 10 headline variants using these formulas:
-  - 2× AIDA hook
-  - 2× PAS opener
-  - 2× 4U scored
-  - 2× Number + Outcome
-  - 2× "How to [benefit] without [pain]"
-- Score each variant: Useful/Urgent/Unique/Ultra-specific (1–3 each, max 12)
-- Top 3 ranked by score
-- TEST: which to test first and why
+- Complete HTML page with embedded copy structure
+- Headlines as proper h1-h6 semantic tags
+- Copy formulas applied in visual hierarchy
+- CTAs as styled button components with hover states
+- F/Z-pattern layout supporting copy flow
+- Responsive text scaling
+- Dark mode for both visual and copy readability
+- DUAL TEST: both copy variants and visual elements
 ```
 
----
+### Action D2: Convert Copy to Styled HTML Component
 
-## Action 3: Landing Page Hero Section
-
-**Use when**: Need the above-the-fold section of a landing page.
+**Use when**: Have existing copy that needs visual implementation.
 
 ```
-TASK: Write landing page hero section.
-PRODUCT: [name + what it does in one sentence]
-AUDIENCE: [who lands on this page, what brought them here]
-OFFER: [what they get — trial, demo, download, purchase]
-KEY BENEFIT: [the transformation they care about]
-BRAND VOICE: [tone notes]
+MODE: DUAL
+TASK: Convert plain text copy into styled HTML component.
+EXISTING_COPY: [paste the copy text]
+COMPONENT_TYPE: [hero | card | email | ad_creative]
+COPY_HIERARCHY: [which parts are headlines vs body vs CTA]
+BRAND_TOKENS: [which design system to apply]
 
 DELIVER:
-- 3 headline variants (scored, ★ recommended)
-- Subheadline (1 sentence, expands headline with specificity)
-- Hero body (2–3 sentences, desire-building, no features yet)
-- Primary CTA (specific + benefit-first)
-- Secondary CTA (lower commitment — "See how it works")
-- Social proof hook (1 line: "Join X companies/people who...")
-- TEST note
+- HTML structure with copy embedded in semantic tags
+- Tailwind styling that enhances readability
+- Typography hierarchy supporting copy formula
+- Visual emphasis on key copy elements (bolding, sizing)
+- CTA transformation into button components
+- Mobile-optimized copy display
+- Copy-visual integration assessment
+- TEST: readability and conversion optimization
 ```
 
 ---
 
-## Action 4: Cold Email (5-Email Sequence)
+## Validation Checklists
 
-**Use when**: Need a B2B cold outreach or B2C nurture sequence.
+### VISUAL Mode Validation
+| Check | Rule |
+|-------|------|
+| HTML validation | W3C validator passes (0 errors) |
+| Lighthouse score | Performance >= 90 |
+| Accessibility | WCAG AA compliance (4.5:1+ contrast) |
+| Responsive design | Mobile-first breakpoints working |
+| Color tokens | Zero hardcoded hex colors (#HEXCODE prohibited) |
+| Dark mode | Proper dark: variants implemented |
+| Semantic markup | Proper HTML5 structure used |
 
-```
-TASK: Write a 5-email sequence.
-TYPE: [cold_outreach | nurture | cart_abandonment | re-engagement]
-PRODUCT: [name]
-AUDIENCE: [description — role, company type, pain]
-GOAL: [desired action at end of sequence]
-BRAND VOICE: [tone]
-
-DELIVER for each email (1–5):
-- Subject line (3 variants, mark ★ recommended)
-- Preview text (40–90 chars)
-- Body copy (formula-matched per email type from KC)
-- CTA (specific)
-- Email purpose label (hook / value / social_proof / offer / breakup)
-```
-
----
-
-## Action 5: Brand Voice Card
-
-**Use when**: Need to define or document a brand's writing voice.
-
-```
-TASK: Create a brand voice card.
-BRAND: [brand name]
-DESCRIPTION: [what they do, who they serve, 1–2 sentences]
-KNOWN EXAMPLES: [paste 2–3 samples of existing copy if available, or write NONE]
-TARGET TONE: [describe in plain words — e.g., "warm but authoritative, like a smart friend"]
-
-DELIVER:
-- Tone dimension scores (Formal←→Casual, Technical←→Plain, 3rd←→1st person, Calm←→Bold) each on 1–5 scale
-- 5 signature phrases the brand would say
-- 5 banned words/phrases the brand would never say
-- Persona anchor (describe the brand as if it were a person: age, job, how they talk)
-- 3 before/after examples: [weak copy] → [brand voice copy]
-- Usage rules (2–3 sentences on when voice can flex and when it must hold firm)
-```
-
----
-
-## Validation
-
+### COPY Mode Validation
 | Check | Rule |
 |-------|------|
 | CTA specificity | Not "Click here" / "Learn more" — must name benefit |
 | Headline variants | Minimum 3 per task |
 | Funnel stage | Declared in every deliverable |
 | A/B TEST note | Required at end of every output |
-| Word limits | Respected per channel (social < 150, email < 250 body, LP hero < 100 subhead) |
+| Word limits | Respected per channel |
+| Hook placement | First 10 words create curiosity/urgency |
+
+### DUAL Mode Validation
+| Check | Rule |
+|-------|------|
+| All visual checks | V1-V7 must pass |
+| All copy checks | C1-C6 must pass |
+| Integration quality | Copy embedded in proper visual hierarchy |
+| Semantic headlines | Headlines use h1-h6 tags, not just styling |
+| CTA components | CTAs become button elements with hover states |
 
 ---
 
-## Action 6: Social Media Caption Pack
+## Edge Cases & Troubleshooting
 
-**Use when**: Need native posts for multiple platforms from a single brief.
-
-```
-TASK: Write social media captions for 3 platforms.
-PRODUCT: [name + one-sentence description]
-AUDIENCE: [who follows this account]
-POST GOAL: [awareness | engagement | conversion]
-KEY MESSAGE: [single idea this post communicates]
-BRAND VOICE: [tone notes]
-
-DELIVER for each platform:
-Instagram:
-  - Caption (hook line + 3–5 sentence body + CTA + line break + hashtags)
-  - Hook variant (alternate first line for A/B test)
-  - 10 hashtags (3 broad + 4 niche + 3 branded)
-
-LinkedIn:
-  - Post (hook line + insight + 3 bullets or story + soft CTA)
-  - Character count: aim 900–1,200 chars
-
-X/Twitter:
-  - Single tweet (< 280 chars, hook + CTA or curiosity gap)
-  - Thread option: tweet 1 (hook) + tweets 2–4 (points) + tweet 5 (CTA)
-
-TEST: which platform/variant to test first and why
-```
-
----
-
-## Edge Cases
-
+### VISUAL Mode Edge Cases
 | Situation | Action |
 |-----------|--------|
-| No brand voice provided | Write in neutral professional tone; flag "[BRAND VOICE CARD RECOMMENDED]" |
-| No funnel stage specified | Default to consideration; note assumption at top of output |
+| No color scheme specified | Default to CODEXA design tokens |
+| Component too complex | Break into smaller sub-components |
+| Accessibility requirements unclear | Default to WCAG AA minimum |
+| No layout pattern specified | Use F-pattern for landing pages, grid for dashboards |
+| Browser compatibility needed | Use Tailwind utilities (broad support) |
+
+### COPY Mode Edge Cases
+| Situation | Action |
+|-----------|--------|
+| No brand voice provided | Write in neutral professional; flag "[BRAND VOICE CARD RECOMMENDED]" |
+| No funnel stage specified | Default to consideration; note assumption at output top |
 | Copy exceeds word limit | Trim benefits block; keep hook and CTA intact |
-| Conflicting CTAs requested | Pick ONE; note the choice and reason |
-| B2B vs B2C tone conflict | Confirm audience type; B2B aims Flesch >= 50, B2C aims Flesch >= 65 |
-| No competitor examples | Proceed with formula-based approach; skip teardown step |
+| Conflicting CTAs requested | Pick ONE; note choice and reason |
+| B2B vs B2C tone conflict | B2B aims Flesch >= 50, B2C aims Flesch >= 65 |
+
+### DUAL Mode Edge Cases
+| Situation | Action |
+|-----------|--------|
+| Copy and visual style mismatch | Adapt visual hierarchy to support copy flow |
+| Technical content in casual design | Balance: professional typography with accessible styling |
+| Long copy in mobile layout | Implement progressive disclosure, accordion patterns |
+| Multiple CTAs needed | Use primary/secondary visual hierarchy, test separately |

@@ -1,0 +1,56 @@
+id: p06_schema_railway_toml
+kind: input_schema
+pillar: P06
+title: Railway TOML Configuration Schema
+version: 1.0.0
+created: 2026-04-01
+updated: 2026-04-01
+author: n05_operations
+domain: railway-backend-operations
+quality: null
+tags:
+- schema
+- railway
+- toml
+- nixpacks
+- deployment
+tldr: Schema for railway.toml configuration validation covering buildCommand, startCommand, healthcheckPath, and nixpacks
+  settings.
+schema_type: toml_config
+validation_level: strict
+purpose: Validates railway.toml configuration files for Railway platform deployments to ensure proper buildCommand, startCommand,
+  healthcheckPath, and nixpacks settings.
+schema_definition: "railway_toml:\n  required: true\n  sections:\n    build:\n      required: true\n      properties:\n  \
+  \      builder:\n          type: string\n          enum: [\"nixpacks\", \"dockerfile\", \"buildpacks\"]\n          default:\
+  \ \"nixpacks\"\n        buildCommand:\n          type: string\n          pattern: \"^(npm|yarn|pip|python|poetry|cargo).*\"\
+  \n        watchPatterns:\n          type: array\n          items: {type: string}\n    \n    deploy:\n      required: true\
+  \  \n      properties:\n        startCommand:\n          type: string\n          required: true\n          pattern: \"^(uvicorn|gunicorn|npm|node|python).*\"\
+  \n        healthcheckPath:\n          type: string\n          required: true\n          pattern: \"^/health\"\n        healthcheckTimeout:\n\
+  \          type: integer\n          minimum: 30\n          maximum: 300\n          default: 300\n        restartPolicyType:\n\
+  \          type: string\n          enum: [\"always\", \"on_failure\", \"never\"]\n          default: \"on_failure\"\n  \
+  \      restartPolicyMaxRetries:\n          type: integer\n          minimum: 1\n          maximum: 10\n          default:\
+  \ 10"
+validation_rules:
+- buildCommand must match deployment technology (npm/pip/poetry/cargo)
+- startCommand required for uvicorn/gunicorn FastAPI applications
+- healthcheckPath must start with "/health" for monitoring
+- healthcheckTimeout between 30-300 seconds for Railway platform
+- restartPolicy configured for production resilience
+example_valid_config: '[build]
+
+  builder = "nixpacks"
+
+  buildCommand = "pip install -r requirements.txt"
+
+
+  [deploy]
+
+  startCommand = "uvicorn main:app --host 0.0.0.0 --port $PORT"
+
+  healthcheckPath = "/health"
+
+  healthcheckTimeout = 30
+
+  restartPolicyType = "on_failure"
+
+  restartPolicyMaxRetries = 3'

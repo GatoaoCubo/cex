@@ -1,23 +1,24 @@
 ---
-id: p10_ck_operations_release_gate
+id: p10_ck_railway_deploy_checkpoint
 kind: checkpoint
 pillar: P10
-version: 3.0.0
-created: 2026-03-30
-updated: 2026-03-31
+version: 4.0.0
+created: 2026-04-01
+updated: 2026-04-01
 author: n05_operations
-name: Operations Release Gate Checkpoint
-workflow_ref: p12_wf_operations_nucleus
-step: checkpoint_release_state
-quality: 8.8
-tags: [checkpoint, N05, operations, release, rollback, validation]
-tldr: Resume-safe checkpoint that captures operational evidence, validation status, rollback posture, and remaining risk before completion.
-description: Stores the state required to resume an interrupted N05 review, debug, or deploy task without losing command history or release context.
+name: Railway Deploy Checkpoint
+workflow_ref: p12_wf_railway_superintendent
+step: checkpoint_deploy_state
+quality: null
+tags: [checkpoint, railway, deploy, postgresql, health, rollback]
+tldr: Railway deployment checkpoint capturing deploy status, health endpoints, PostgreSQL connections, and 4-service rollback readiness.
+description: Stores Railway deployment state to resume interrupted deploy workflow without losing health status or rollback coordination.
 state:
-  task_scope: string
-  changed_files: list[string]
-  evidence_sources: list[string]
-  failing_surface: string
+  railway_toml_status: string
+  env_vars_validated: list[string]  
+  postgresql_health: string
+  health_endpoint_status: string
+  service_topology_state: dict
   remediation_summary: string
   validation_commands: list[string]
   validation_status: string
