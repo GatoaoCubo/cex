@@ -14,14 +14,20 @@ tags: [checkpoint, railway, deploy, postgresql, health, rollback]
 tldr: Railway deployment checkpoint capturing deploy status, health endpoints, PostgreSQL connections, and 4-service rollback readiness.
 description: Stores Railway deployment state to resume interrupted deploy workflow without losing health status or rollback coordination.
 state:
-  railway_toml_status: string
-  env_vars_validated: list[string]  
-  postgresql_health: string
-  health_endpoint_status: string
-  service_topology_state: dict
+  deploy_step: int                    # 1-10 (last completed step)
+  service_name: string                # api|frontend|dashboard|gateway
+  commit_sha: string                  # deployed git SHA
+  rollback_plan_path: string          # path to rollback plan output
+  railway_toml_status: string         # valid|invalid|unchecked
+  env_vars_validated: list[string]    # list of validated var categories
+  postgresql_health: string           # healthy|degraded|unhealthy
+  health_endpoint_status: string      # 200|503|timeout
+  service_topology_state: dict        # {api: deployed, frontend: unchanged, ...}
+  startup_checks_passed: int          # 0-14
+  middleware_layers_verified: int      # 0-8
   remediation_summary: string
   validation_commands: list[string]
-  validation_status: string
+  validation_status: string           # pending|partial|passed|blocked|failed
   rollback_notes: string
   observability_notes: string
   residual_risk: string

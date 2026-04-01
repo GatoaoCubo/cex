@@ -11,9 +11,14 @@ quality: null
 tags: [dispatch_rule, railway, superintendent, deploy, fastapi, postgresql]
 tldr: Route Railway platform tasks to N05 Railway Superintendent when the answer depends on Railway deployment, FastAPI health, PostgreSQL operations, or 4-service topology management.
 scope: railway-backend-operations
-keywords: [railway, deploy, fastapi, postgresql, health, rollback, migration, env, uvicorn, nixpacks, api-lifecycle, infrastructure, superintendent]
+keywords: [deploy, railway, backend, api, production, staging, database, migration, rollback, health, uvicorn, nixpacks, infra, scale, postgres, middleware, cors, rate-limit, fastapi, postgresql, env, api-lifecycle, infrastructure, superintendent, toml, pool, asyncpg, startup, monitoring]
 agent_node: railway_superintendent
 model: opus
+model_fallback: sonnet
+cli: claude
+mcps: [postgresql]
+receives_from: [N03, N07, N02]
+handoff_to: [N03]
 priority: 9
 confidence_threshold: 0.85
 fallback: operations_nucleus

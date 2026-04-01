@@ -33,6 +33,10 @@ density_score: 0.97
 | G04 | Environment contract validated (63 variables present) | 100% | true |
 | G05 | Health endpoints return 200 with HealthResponse JSON | 100% | true |
 | G06 | Middleware stack integrity verified (8 layers ordered correctly) | 100% | true |
+| G07 | Startup sequence completes all 14 checks (pass or fallback) | 14/14 | true |
+| G08 | API response latency p95 under threshold | < 500ms | false |
+| G09 | CORS origins whitelist includes all 4 production domains | 4 origins | true |
+| G10 | Rate limiting active with X-RateLimit headers in responses | headers present | true |
 
 ## Validation Criteria
 
@@ -42,6 +46,10 @@ density_score: 0.97
 - **Environment Contract (G04)**: All 63 required variables (DATABASE_URL, API keys, pool settings) validated
 - **Health Full (G05)**: HealthResponse includes status, version, uptime, database{}, cache{}
 - **Middleware Intact (G06)**: CORS→TenantRateLimit→APIKey→RLS→EndpointLimit→BodySize→Exceptions→RequestID order confirmed
+- **Startup Clean (G07)**: All 14 lifespan checks pass or gracefully fallback; no silent failures
+- **API Latency (G08)**: p95 response time < 500ms under normal load (soft gate, non-blocking)
+- **CORS Valid (G09)**: localhost, *.railway.app, *.codexa.com.br, staging origin whitelisted
+- **Rate Limit Active (G10)**: X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset headers present on all responses
 | H02 | `kind` matches the artifact file type | 100% | true |
 | H03 | `quality` is `null` in source artifact frontmatter | 100% | true |
 | H04 | Output is domain-specific to operations/devops, not generic filler | 100% | true |
