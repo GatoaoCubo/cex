@@ -59,6 +59,7 @@ Check `CEX_NUCLEUS`. N07 = Orchestrator. N03 = Builder. Not set = read and decid
 | Command | Purpose |
 |---------|---------|
 | `/init` | **First run**: configure CEX for your brand (~2 min) |
+| `/guide [goal]` | **Co-pilot**: ask me before building — guided decisions |
 | `/build <intent>` | Create artifact via 8F pipeline |
 | `/validate [file\|all]` | Check artifact quality |
 | `/dispatch <nucleus> <task>` | Send task to nucleus builder |

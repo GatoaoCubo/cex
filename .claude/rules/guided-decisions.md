@@ -71,10 +71,20 @@ If a nucleus starts WITHOUT a manifest (direct conversation):
 - Build the manifest as you go
 - Execute after all DPs are resolved
 
+## Explicit trigger: `/guide`
+
+The user can type `/guide` to EXPLICITLY enter co-pilot mode.
+See `.claude/commands/guide.md`.
+
+Natural language equivalents (also trigger GDP):
+- "guide me", "ask me first", "let's decide together"
+- "walk me through", "help me choose", "what do you need from me"
+
 ## When to trigger GDP (quick check)
 
 | Situation | GDP? | Why |
 |-----------|------|-----|
+| User says `/guide` | YES | Explicit trigger |
 | User says `/init` | YES | Brand identity is 100% subjective |
 | User says `/mission build landing page` | YES | Layout, tone, CTA, colors need decisions |
 | User says `/build kc_react_patterns` | NO | Knowledge card is factual, not subjective |
@@ -82,3 +92,4 @@ If a nucleus starts WITHOUT a manifest (direct conversation):
 | N03 runs 8F autonomously | NO | Already has manifest from dispatch |
 | User asks "fix this bug" | NO | Mechanical, one correct answer |
 | User asks "write copy for my product" | YES | Tone, audience, CTA are subjective |
+| User says "just do it" / "you decide" | NO | User explicitly waives GDP |
