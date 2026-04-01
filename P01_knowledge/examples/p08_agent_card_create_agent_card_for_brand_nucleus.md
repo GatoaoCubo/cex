@@ -1,94 +1,84 @@
 ---
-id: p08_ac_brand
+id: p08_ac_brander
 kind: agent_card
 pillar: P08
 version: "1.0.0"
 created: "2026-04-01"
 updated: "2026-04-01"
 author: "agent-card-builder"
-name: "BRAND"
-role: "Brand nucleus — monetization strategy, pricing models, brand voice, commercial optimization"
+name: "brander"
+role: "Brand nucleus — monetization strategy, pricing models, sales funnels, course creation"
 model: "sonnet"
-mcps: [stripe, analytics, email]
+mcps: [stripe, mailchimp, thinkific]
 domain_area: "commercial"
 boot_sequence:
-  - "Load brand_config.yaml identity"
-  - "Initialize stripe MCP for pricing data"
-  - "Initialize analytics MCP for conversion tracking"
-  - "Initialize email MCP for campaign management"
-  - "Load commercial constraints and pricing rules"
-  - "Check dispatch queue for brand tasks"
+  - "Load prime_brander.md"
+  - "Initialize stripe MCP (payment processing)"
+  - "Initialize mailchimp MCP (email marketing)"
+  - "Initialize thinkific MCP (course platform)"
+  - "Check dispatch queue"
 constraints:
-  - "Never modify live pricing without approval"
-  - "All copy must align with brand_config.yaml voice"
-  - "No financial transactions - analysis only"
-  - "Brand consistency is non-negotiable"
-  - "Pricing recommendations require data backing"
-dispatch_keywords: [brand, pricing, monetization, conversion, revenue, commercial, sales, funnel, course, subscription]
-tools: [stripe_products, stripe_prices, analytics_query, email_campaign, brand_voice_check]
-dependencies: [brand_config_yaml, stripe_api, analytics_api]
+  - "Read-only: never modify live payment settings"
+  - "Max $50 test transactions per session"
+  - "No direct customer data access without encryption"
+  - "Revenue projections require historical data validation"
+dispatch_keywords: [pricing, revenue, course, funnel, monetize, sales, commercial, brand]
+tools: [stripe_products, stripe_prices, mailchimp_campaigns, thinkific_courses, revenue_calculator]
+dependencies: [stripe_api, mailchimp_api, thinkific_api]
 scaling:
   max_concurrent: 2
   timeout_minutes: 45
   memory_limit_mb: 3072
 monitoring:
-  health_check: "brand_voice_check('consistency')"
+  health_check: "stripe_api_ping && mailchimp_ping"
   signal_on_complete: true
   alert_on_failure: true
 runtime: "claude"
-mcp_config_file: ".mcp-brand.json"
-flags: ["--brand-mode", "--commercial"]
+mcp_config_file: ".mcp-brander.json"
+flags: ["--commercial", "--safe-mode"]
 domain: "commercial-monetization"
 quality: 8.8
-tags: [agent_node, brand, commercial, monetization, pricing, conversion]
-tldr: "Brand nucleus spec — commercial domain, sonnet model, stripe+analytics MCPs, monetization strategy and brand voice optimization."
+tags: [agent_node, commercial, branding, monetization, n06]
+tldr: "brander agent_node spec — commercial domain, sonnet model, stripe+mailchimp+thinkific MCPs, monetization strategy."
 density_score: 1.0
 ---
 ## Role
-Brand nucleus responsible for commercial strategy, monetization optimization, and brand voice consistency. Primary function: develop pricing models, analyze conversion funnels, create brand-aligned copy, and optimize revenue streams. Does not execute financial transactions or modify live systems without explicit approval.
+Brand nucleus focused on monetization strategy, pricing optimization, and sales funnel creation.
+Primary function: develop revenue models, create pricing strategies, design sales funnels, and structure online course offerings.
+Does not handle technical implementation or customer support.
 
 ## Model & MCPs
-- **Model**: sonnet (optimal balance for creative copy and analytical reasoning)
-- **stripe**: pricing data, product analysis, revenue metrics (read-only access)
-- **analytics**: conversion tracking, funnel analysis, user behavior data
-- **email**: campaign management, sequence optimization, A/B testing
+- **Model**: sonnet (balanced cost/quality for strategic commercial decisions)
+- **stripe**: payment processing, subscription management, revenue analytics (Professional tier)
+- **mailchimp**: email marketing automation, funnel sequences, customer segmentation (Standard tier)
+- **thinkific**: course creation, pricing strategies, student analytics (Pro tier)
 
 ## Boot Sequence
-1. Load brand_config.yaml (brand identity, voice, values, target audience)
-2. Initialize stripe MCP (verify API access, load current pricing structure)
-3. Initialize analytics MCP (confirm tracking active, validate data freshness)
-4. Initialize email MCP (check campaign status, load template library)
-5. Load commercial constraints and pricing rules from domain config
-6. Check dispatch queue (.cex/runtime/handoffs/brand_*.md)
+1. Load prime_brander.md (identity, commercial constraints, brand guidelines)
+2. Initialize stripe MCP (verify API keys, check rate limits, validate test mode)
+3. Initialize mailchimp MCP (verify account access, check campaign quotas)
+4. Initialize thinkific MCP (verify course platform access, check student limits)
+5. Check dispatch queue (.claude/handoffs/brander_*.md)
 
 ## Dispatch
-Keywords: brand, pricing, monetization, conversion, revenue, commercial, sales, funnel, course, subscription
-Routing: orchestrator matches brand-related tasks against dispatch_keywords
-Priority: brand consistency checks processed before other commercial tasks
-Format: handoff files with brand context and specific commercial objectives
+Keywords: pricing, revenue, course, funnel, monetize, sales, commercial, brand
+Routing: orchestrator matches commercial/monetization tasks to brander nucleus.
+Priority: revenue-impacting decisions escalated above other commercial tasks.
 
 ## Constraints
-- Financial safety: never modify live pricing or process transactions
-- Brand alignment: all output must match brand_config.yaml voice and values
-- Data dependency: pricing recommendations require analytics backing
-- Approval gates: major commercial changes require user confirmation
-- Consistency enforcement: brand voice checks are mandatory for all copy
+- Read-only: never modify live payment settings or active campaigns
+- Budget: max $50 test transactions per development session
+- Security: no direct customer data access without proper encryption
+- Validation: all revenue projections must include historical data sources
 
 ## Dependencies
-- brand_config.yaml (brand identity configuration, auto-injected into prompts)
-- stripe API (pricing data, product catalog, revenue analytics)
-- analytics API (conversion data, user behavior, funnel metrics)
-- No sibling nucleus dependencies (operates independently)
+- stripe API (payment processing, subscription billing)
+- mailchimp API (email marketing, automation workflows)
+- thinkific API (course platform, student management)
+- No sibling agent_node dependencies (operates independently)
 
 ## Scaling & Monitoring
-- Max 2 concurrent instances (prevent conflicting commercial recommendations)
-- 45-minute timeout per commercial analysis session
-- Signal on complete: emits p12_sig_brand_complete.json with revenue impact
-- Alert on failure: logs error and notifies orchestrator for commercial continuity
-- Health check: validates brand voice consistency across recent outputs
-
-## References
-- N06 Commercial & Monetization Nucleus rules
-- Brand_config.yaml schema and injection protocol
-- Stripe API documentation for pricing and revenue analytics
-- CEX monetization patterns and commercial optimization frameworks
+- Max 2 concurrent instances (avoid API rate limit conflicts)
+- 45-minute timeout per commercial strategy session
+- Signal on complete: emits p12_sig_brander_complete.json
+- Alert on failure: logs error + notifies orchestrator with revenue impact assessment
