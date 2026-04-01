@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: research-intelligence
-quality: null
+quality: 8.7
 tags: [schema, n01, research, brief, input-contract]
 tldr: "Input contract for N01 research requests: question, scope, depth level, source preferences, deadline, brand context."
 density_score: 0.93
