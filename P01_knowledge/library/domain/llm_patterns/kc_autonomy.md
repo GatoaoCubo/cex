@@ -1,0 +1,57 @@
+---
+id: p01_kc_autonomy
+kind: knowledge_card
+type: domain
+pillar: P01
+title: "LLM Agent Autonomy Patterns"
+version: 1.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: llm_patterns
+quality: null
+tags: [autonomy, agent, react, plan-execute, reflexion]
+tldr: "Autonomy levels L0-L4. ReAct (reason+act), plan-execute, reflexion. CEX maps: /guide=L2, /grid=L3, auto-workflows=L4."
+when_to_use: "Designing agent systems with varying degrees of human oversight"
+keywords: [autonomy, react, agent-loop, plan-execute, reflexion, levels]
+density_score: 0.93
+---
+
+# LLM Agent Autonomy Patterns
+
+## Autonomy Levels
+
+| Level | Name | Human Role | LLM Role |
+|-------|------|-----------|----------|
+| L0 | Tool | Full control | Single call |
+| L1 | Assistant | Decides what | Multi-step in session |
+| L2 | Co-pilot | Reviews/approves | Plans + checkpoints |
+| L3 | Supervised | Monitors | Plans + executes + validates |
+| L4 | Autonomous | Intervenes on failure | Full loop |
+
+## Core Patterns
+
+### ReAct (Reason + Act)
+```
+THOUGHT → ACTION → OBSERVATION → THOUGHT → ACTION → ...
+```
+Interleaves reasoning with tool calls. Most common agent pattern.
+
+### Plan-Execute
+```
+PLAN: [step1, step2, step3]
+EXECUTE each → VALIDATE all → DONE
+```
+Upfront planning, then sequential execution.
+
+### Reflexion
+```
+ATTEMPT → EVALUATE → REFLECT → IMPROVED ATTEMPT
+```
+Self-critique and improvement between attempts.
+
+## CEX Autonomy Map
+- `/guide` = L2 co-pilot (user decides WHAT)
+- `/grid` dispatch = L3 supervised (nuclei execute, N07 monitors)
+- Auto-workflows = L4 autonomous (hydrate, review, evolve)
+- Decision Manifest = bridge from L2 to L3/L4
+- GDP = the protocol that manages level transitions

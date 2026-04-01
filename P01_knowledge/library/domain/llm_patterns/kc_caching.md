@@ -1,0 +1,41 @@
+---
+id: p01_kc_caching
+kind: knowledge_card
+type: domain
+pillar: P01
+title: "LLM Caching Strategies"
+version: 1.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: llm_patterns
+quality: null
+tags: [caching, performance, cost, latency, prompt-cache]
+tldr: "Cache LLM responses to reduce cost and latency. Exact match, semantic, prefix caching. Trade-off: freshness vs speed."
+when_to_use: "Optimizing cost or latency in production LLM systems"
+keywords: [caching, prompt-cache, semantic-cache, memoization, cost-reduction]
+density_score: 0.91
+---
+
+# LLM Caching Strategies
+
+## Cache Types
+
+| Type | Match | Speed | Use Case |
+|------|-------|-------|----------|
+| Exact | Hash of full prompt | Fastest | Repeated identical queries |
+| Prefix | First N tokens match | Fast | System prompt caching (Claude) |
+| Semantic | Embedding similarity >0.95 | Medium | FAQ, common queries |
+| Result | Hash of input → stored output | Fast | Deterministic transforms |
+
+## Provider Features
+
+| Provider | Built-in Cache |
+|----------|---------------|
+| Claude | Prompt caching (prefix, up to 90% cost reduction) |
+| GPT | No native cache (use external) |
+| Gemini | Context caching (long contexts) |
+
+## CEX Integration
+- `compiled/*.yaml` = pre-compiled templates (avoid re-parsing)
+- Builder specs loaded once per session, reused across builds
+- Brand config cached in memory after first read

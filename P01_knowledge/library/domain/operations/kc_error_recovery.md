@@ -1,0 +1,44 @@
+---
+id: p01_kc_error_recovery
+kind: knowledge_card
+type: domain
+pillar: P01
+title: "Error Recovery Patterns for LLM Agents"
+version: 1.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: operations
+quality: null
+tags: [error-recovery, resilience, retry, fallback, circuit-breaker]
+tldr: "Retry with backoff, circuit breaker, fallback chains, graceful degradation. Agents must recover from errors without crashing the workflow."
+when_to_use: "Building resilient agent systems that handle failures gracefully"
+keywords: [error-recovery, retry, circuit-breaker, fallback, graceful-degradation]
+density_score: 0.92
+---
+
+# Error Recovery Patterns
+
+## Strategy Ladder (try in order)
+
+| Level | Strategy | Example |
+|-------|----------|---------|
+| 1 | Retry with same input | Transient API error |
+| 2 | Retry with modified input | Add "Fix this error: ..." |
+| 3 | Fallback to simpler approach | Use template instead of generation |
+| 4 | Circuit breaker | Stop calling failing service |
+| 5 | Graceful degradation | Skip optional step, continue |
+| 6 | Escalate to user | "I need your help with..." |
+
+## Circuit Breaker Pattern
+```
+CLOSED (normal) → error count > threshold → OPEN (reject all calls)
+OPEN → wait cooldown → HALF-OPEN (try one)
+HALF-OPEN → success → CLOSED | failure → OPEN
+```
+
+## CEX Recovery Points
+- F7 GOVERN fail → retry F6 (max 2)
+- Compile fail → auto-fix frontmatter → retry
+- Dispatch fail → check boot file → retry
+- Test fail → auto-debug → fix → retry
+- All retries fail → escalate (wf_auto_debug → user)

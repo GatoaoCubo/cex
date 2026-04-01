@@ -1,0 +1,51 @@
+---
+id: p01_kc_universal_llm
+kind: knowledge_card
+type: domain
+pillar: P01
+title: "Universal LLM Patterns — Provider-Agnostic Design"
+version: 1.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: llm_patterns
+quality: null
+tags: [universal, provider-agnostic, claude, gpt, gemini, llama]
+tldr: "Design for any LLM: use text in/out as primitive, structured output as JSON, tool use via MCP, avoid provider-specific features as core dependencies."
+when_to_use: "Building systems that must work across Claude, GPT, Gemini, Llama, or future models"
+keywords: [universal, provider-agnostic, portability, abstraction, llm-interface]
+density_score: 0.93
+---
+
+# Universal LLM Patterns
+
+## The Primitive
+Every LLM accepts text → produces text. Build on this, not on provider-specific APIs.
+
+## Universal Capabilities (all major LLMs)
+
+| Capability | Claude | GPT | Gemini | Llama |
+|-----------|--------|-----|--------|-------|
+| Text generation | ✅ | ✅ | ✅ | ✅ |
+| System prompts | ✅ | ✅ | ✅ | ✅ |
+| JSON output | ✅ | ✅ | ✅ | ✅ |
+| Tool/function calls | ✅ | ✅ | ✅ | ✅* |
+| Image input | ✅ | ✅ | ✅ | ✅* |
+| Streaming | ✅ | ✅ | ✅ | ✅ |
+
+*Depends on hosting platform
+
+## Provider-Specific (avoid as core dependency)
+
+| Feature | Provider | Portable Alternative |
+|---------|----------|---------------------|
+| Artifacts | Claude | Write to file |
+| Prompt caching | Claude | External cache |
+| Batch API | GPT | Sequential + cache |
+| Code execution | GPT | Local subprocess |
+| Grounding | Gemini | MCP fetch + search |
+
+## CEX Design Principle
+- `claude -p` subprocess = portable (swap for `gemini`, `llm`, etc.)
+- Prompts are text files (.md) = any LLM can read them
+- No `import anthropic` in tools = zero SDK dependency
+- MCP = universal tool interface

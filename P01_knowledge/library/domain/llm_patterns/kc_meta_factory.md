@@ -1,0 +1,42 @@
+---
+id: p01_kc_meta_factory
+kind: knowledge_card
+type: domain
+pillar: P01
+title: "Meta-Factory — Builders that Build Builders"
+version: 1.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: llm_patterns
+quality: null
+tags: [meta, factory, builder, bootstrap, self-referential]
+tldr: "A builder that produces other builders. Template + kind definition → specialized agent. CEX _builder-builder, AutoGPT agent-creator."
+when_to_use: "System has >10 specialist agents with shared structure but different domains"
+keywords: [meta-factory, builder-builder, template, bootstrap, self-referential]
+density_score: 0.91
+---
+
+# Meta-Factory Pattern
+
+## The Pattern
+```
+KIND DEFINITION → META-FACTORY → SPECIALIZED BUILDER → ARTIFACTS
+```
+
+## Industry Examples
+
+| System | Meta-Factory | Produces |
+|--------|-------------|----------|
+| CEX | _builder-builder (13 meta-templates) | 105 builders |
+| AutoGPT | Agent creator | Task-specific agents |
+| CrewAI | Crew builder | Role-defined agents |
+| LangChain | Chain factory | Task-specific chains |
+
+## When to Use
+- >10 specialist agents needed
+- Agents share structural patterns
+- New agents added frequently
+- Consistency across agents matters
+
+## Anti-Pattern
+<5 agents → hand-craft. Meta-factory overhead exceeds benefit.

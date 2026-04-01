@@ -1,0 +1,41 @@
+id: p01_kc_refinement
+kind: knowledge_card
+type: domain
+pillar: P01
+title: Iterative Refinement — Multi-Pass Output Improvement
+version: 1.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: llm_patterns
+quality: null
+tags:
+- refinement
+- iteration
+- multi-pass
+- quality
+tldr: First draft is never final. Generate → critique → revise per dimension. Structure pass, accuracy pass, voice pass, polish
+  pass.
+when_to_use: Long-form content, brand-sensitive output, technical documentation
+keywords:
+- refinement
+- iteration
+- multi-pass
+- critique
+- revision
+density_score: 0.91
+the_pattern: DRAFT → PASS 1 (structure) → PASS 2 (accuracy) → PASS 3 (voice) → PASS 4 (polish) → SHIP
+when_to_use_vs_skip: '| Use | Skip |
+
+  |-----|------|
+
+  | >2000 words | Short factual answers |
+
+  | Brand-sensitive | Code (tests validate better) |
+
+  | Technical docs | Time-critical output |
+
+  | Multi-audience | Simple Q&A |'
+cex_integration:
+- 8F F6→F7→F6 = 2-pass refinement
+- '`cex_score.py` = peer-review (different LLM critiques)'
+- Brand audit = domain-specific refinement pass

@@ -1,0 +1,46 @@
+id: p01_kc_zero_touch
+kind: knowledge_card
+type: domain
+pillar: P01
+title: Zero-Touch Operations
+version: 1.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: operations
+quality: null
+tags:
+- zero-touch
+- automation
+- ops
+- autonomous
+- deploy
+tldr: 'Operations that require zero human intervention: auto-detect → auto-diagnose → auto-fix → auto-verify. The goal of
+  mature agent systems.'
+when_to_use: Designing fully autonomous operational workflows
+keywords:
+- zero-touch
+- automation
+- self-service
+- auto-remediation
+density_score: 0.91
+the_spectrum: "MANUAL → SCRIPTED → AUTOMATED → AUTONOMOUS → ZERO-TOUCH\n  ↑                                              \
+  \  ↑\n  human does everything            system does everything"
+requirements_for_zero_touch:
+- 'Detection: System knows when something is wrong'
+- 'Diagnosis: System identifies root cause'
+- 'Remediation: System applies fix'
+- 'Verification: System confirms fix worked'
+- 'Learning: System prevents recurrence'
+cex_zero_touch_mapping: '| Operation | Detection | Remediation | Verification |
+
+  |-----------|-----------|-------------|--------------|
+
+  | Build artifact | Intent parser | 8F pipeline | Doctor + compile |
+
+  | Fix error | Auto-debug | Self-healing retry | Tests pass |
+
+  | Deploy | Auto-ship | CI/CD pipeline | Health probe |
+
+  | Recover | Auto-diagnose | Auto-rollback | Doctor green |
+
+  | Evolve | Gap detector | Auto-evolve | New KC passes |'

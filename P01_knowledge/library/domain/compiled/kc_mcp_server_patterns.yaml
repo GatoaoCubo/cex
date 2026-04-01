@@ -1,0 +1,54 @@
+id: p01_kc_mcp_server_patterns
+kind: knowledge_card
+type: domain
+pillar: P01
+title: MCP Server Patterns — Tool Integration Standard
+version: 1.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: meta
+quality: null
+tags:
+- mcp
+- server
+- tool-integration
+- protocol
+- standard
+tldr: 'Model Context Protocol: universal tool integration for LLMs. Server exposes tools/resources/prompts. Client (LLM) calls
+  them. JSON-RPC over stdio.'
+when_to_use: Adding external tool capabilities to any LLM agent
+keywords:
+- mcp
+- model-context-protocol
+- tool-server
+- json-rpc
+- stdio
+density_score: 0.93
+core_architecture: "LLM (client) ←→ MCP Server ←→ External Service\n              JSON-RPC/stdio      API/DB/FS"
+three_primitives: '| Primitive | What | Example |
+
+  |-----------|------|---------|
+
+  | Tool | Callable function | `search_web(query)`, `deploy(config)` |
+
+  | Resource | Readable data | `file://docs/`, `db://users` |
+
+  | Prompt | Reusable template | `brand_discovery_interview` |'
+cex_mcp_configs: '| Nucleus | Servers | Purpose |
+
+  |---------|---------|---------|
+
+  | N01 | gemini (native) | Research via Gemini |
+
+  | N02 | markitdown, puppeteer | Read docs, browser automation |
+
+  | N05 | postgres | Database operations |
+
+  | N06 | fetch, markitdown, stripe, hotmart | Web, docs, payments |'
+config_format_mcp_n0x_json: "{\n  \"mcpServers\": {\n    \"server_name\": {\n      \"command\": \"npx\",\n      \"args\":\
+  \ [\"-y\", \"package-name\"],\n      \"env\": { \"API_KEY\": \"${API_KEY}\" }\n    }\n  }\n}"
+best_practices:
+- Environment variables for secrets (`${VAR}` not hardcoded)
+- One config per nucleus (scoped access)
+- Rate-limit tools with side effects
+- Describe tools clearly — LLM reads descriptions to decide usage

@@ -1,0 +1,34 @@
+---
+id: p01_kc_anti_file_storage
+kind: knowledge_card
+type: domain
+pillar: P01
+title: "Anti-Pattern: LLM as File Storage"
+version: 1.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: anti_patterns
+quality: null
+tags: [anti-pattern, file-storage, context-window, cost]
+tldr: "Don't dump entire files into LLM context. Use retrieval + relevant excerpts. Full-file injection wastes tokens, increases cost, decreases accuracy."
+when_to_use: "Reviewing prompt design for token efficiency"
+keywords: [anti-pattern, file-storage, token-waste, context-pollution]
+density_score: 0.91
+---
+
+# Anti-Pattern: LLM as File Storage
+
+## The Problem
+Dumping entire files (10K+ tokens) into context when the LLM only needs 200 tokens of relevant info.
+
+## Symptoms
+- Prompts >50K tokens for simple tasks
+- High API costs with no quality improvement
+- LLM "forgets" instructions buried under file dumps
+- Slow response times
+
+## Fix
+1. Retrieve relevant chunks (RAG), not whole files
+2. Summarize large files before injection
+3. Use `cex_token_budget.py` to enforce limits
+4. Place critical instructions at start AND end of prompt (primacy + recency)

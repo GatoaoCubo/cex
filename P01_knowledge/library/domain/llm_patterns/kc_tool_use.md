@@ -1,0 +1,52 @@
+---
+id: p01_kc_tool_use
+kind: knowledge_card
+type: domain
+pillar: P01
+title: "Tool Use / Function Calling"
+version: 1.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: llm_patterns
+quality: null
+tags: [tool-use, function-calling, mcp, api, agentic]
+tldr: "LLMs call external tools via structured definitions. Universal: define schema → LLM decides → runtime executes → LLM synthesizes."
+when_to_use: "When building agentic systems that interact with external APIs, databases, or tools"
+keywords: [tool-use, function-calling, mcp, api-integration, agentic]
+density_score: 0.93
+---
+
+# Tool Use / Function Calling
+
+## Universal Pattern
+```
+DEFINE → PRESENT → DECIDE → CALL → RETURN → SYNTHESIZE
+```
+
+## Provider Implementations
+
+| Provider | Mechanism | Schema Format |
+|----------|-----------|---------------|
+| Claude | tool_use blocks | JSON Schema in tools array |
+| GPT | function_calling | JSON Schema in functions array |
+| Gemini | function_declarations | OpenAPI-style schema |
+| Llama | tool_call tokens | JSON Schema (varies by host) |
+| MCP | Model Context Protocol | Standardized tool/resource/prompt |
+
+## MCP — The Universal Standard
+Abstracts tool provision across providers:
+- **Tools**: callable functions (search, calculate, deploy)
+- **Resources**: readable data (files, databases, APIs)
+- **Prompts**: reusable prompt templates
+
+## Best Practices
+1. Tool descriptions matter as much as code — LLM reads them to decide
+2. Keep params <7 — reduces hallucinated parameters
+3. Return structured JSON, not prose
+4. Error messages should be actionable, not stack traces
+5. Rate-limit tools with side effects
+
+## CEX Integration
+- `.mcp-n0X.json` configs per nucleus
+- `_tools/*.py` callable via subprocess
+- `cex_run.py` orchestrates tool chains

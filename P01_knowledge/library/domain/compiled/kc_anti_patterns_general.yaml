@@ -1,0 +1,47 @@
+id: p01_kc_anti_patterns_general
+kind: knowledge_card
+type: domain
+pillar: P01
+title: LLM Agent Anti-Patterns — General Catalog
+version: 1.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: anti_patterns
+quality: null
+tags:
+- anti-pattern
+- catalog
+- llm
+- agent
+- pitfalls
+tldr: 'Catalog of common LLM agent mistakes: over-autonomy, prompt bloat, jargon dependency, self-scoring, single-point-of-failure.'
+when_to_use: Reviewing agent system design for common pitfalls
+keywords:
+- anti-pattern
+- catalog
+- pitfalls
+- design-review
+density_score: 0.92
+catalog: '| Anti-Pattern | Problem | Fix |
+
+  |-------------|---------|-----|
+
+  | Self-scoring | LLM rates own output highly | Peer-review (different LLM or human scores) |
+
+  | Prompt bloat | System prompt >10K tokens | Layer: core identity (short) + injected context (on demand) |
+
+  | Over-autonomy | Agent makes decisions user should make | GDP: guided decisions before autonomous execution |
+
+  | Jargon lock-in | System requires learning custom vocabulary | Use industry-standard terms (spec not PSPEC) |
+
+  | God agent | One agent does everything | Nucleus separation: each agent has bounded scope |
+
+  | API key dependency | System breaks without paid API | Subscription CLI as primary (`claude -p`), API as fallback |
+
+  | Hallucination trust | Accepting LLM output without validation | F7 GOVERN: always validate before F8 COLLABORATE |
+
+  | Template rigidity | All output forced into one format | Multiple output templates per nucleus |
+
+  | Sequential bottleneck | Everything waits for one agent | Fan-out/fan-in via `/grid` |
+
+  | Knowledge amnesia | Learnings not persisted | Learning records + memory files + KCs |'

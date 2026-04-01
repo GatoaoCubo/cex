@@ -1,0 +1,40 @@
+id: p01_kc_anti_isolated_sessions
+kind: knowledge_card
+type: domain
+pillar: P01
+title: 'Anti-Pattern: Isolated Sessions'
+version: 1.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: anti_patterns
+quality: null
+tags:
+- anti-pattern
+- isolated
+- sessions
+- continuity
+- handoff
+tldr: 'Sessions that don''t share state. Each starts from zero. No learning carries over. Fix: shared filesystem, signals,
+  handoffs.'
+when_to_use: Designing multi-session or multi-agent workflows
+keywords:
+- anti-pattern
+- isolation
+- continuity
+- shared-state
+- handoff
+density_score: 0.91
+the_problem: Each session/agent starts from scratch. No memory of previous sessions. No shared state between agents. Work
+  is repeated.
+symptoms:
+- Agent re-discovers what was already known
+- Parallel agents produce contradictory output
+- No improvement over time
+- User repeats context every session
+fix:
+- Shared filesystem as state (`.cex/runtime/`, `P01_knowledge/`)
+- Signals between agents (`signal_writer.py`)
+- Handoff documents (`.cex/runtime/handoffs/`)
+- Decision manifests (`.cex/runtime/decisions/`)
+- Learning records (`.cex/learning_records/`)
+- Brand config as shared identity (`.cex/brand/brand_config.yaml`)

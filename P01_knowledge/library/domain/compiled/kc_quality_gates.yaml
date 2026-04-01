@@ -1,0 +1,47 @@
+id: p01_kc_quality_gates
+kind: knowledge_card
+type: domain
+pillar: P01
+title: Quality Gates — Automated Pass/Fail Checkpoints
+version: 1.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: operations
+quality: null
+tags:
+- quality-gate
+- validation
+- checkpoint
+- cicd
+- governance
+tldr: Automated checkpoints that block progression if quality criteria aren't met. Compile gate, doctor gate, test gate, review
+  gate.
+when_to_use: Implementing quality enforcement in artifact production or deployment pipelines
+keywords:
+- quality-gate
+- checkpoint
+- governance
+- pass-fail
+- blocking
+density_score: 0.92
+the_pattern: "PRODUCE → GATE 1 (schema) → GATE 2 (tests) → GATE 3 (review) → SHIP\n              ↓ fail              ↓ fail\
+  \            ↓ fail\n            FIX + RETRY        FIX + RETRY       FIX + RETRY"
+cex_quality_gates: '| Gate | What | Tool | Blocking? |
+
+  |------|------|------|-----------|
+
+  | Frontmatter | Required fields present | `cex_compile.py` | Yes |
+
+  | Schema | YAML structure valid | `cex_compile.py` | Yes |
+
+  | Doctor | Builder specs complete | `cex_doctor.py` | Yes (for builders) |
+
+  | Tests | pytest passes | `pytest` | Yes (for tools) |
+
+  | Density | Content density >= 0.85 | Frontmatter field | Warn |
+
+  | Quality score | Peer-review >= 8.0 | `cex_score.py` | Yes (for publish) |
+
+  | Brand audit | Brand consistency >= 0.85 | `brand_audit.py` | Yes (for N06) |'
+anti_pattern_self_scoring: 'Never let the producing LLM score its own output. Always peer-review. CEX rule: `quality: null`
+  on creation → peer scores later.'
