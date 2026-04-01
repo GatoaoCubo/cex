@@ -26,7 +26,7 @@ language:
 - pt
 cost_per_query: $0.01
 rate_limit: 1000/month (free tier)
-quality: null
+quality: 8.6
 tags:
 - search_tool
 - tavily

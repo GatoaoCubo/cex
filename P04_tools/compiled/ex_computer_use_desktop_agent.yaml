@@ -21,7 +21,7 @@ screenshot_mode: before_action
 safety_constraints:
 - Never execute commands that delete files or modify system settings
 - Block navigation to authentication pages unless explicitly instructed
-quality: null
+quality: 8.6
 tags:
 - computer_use
 - desktop

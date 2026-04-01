@@ -12,7 +12,7 @@ tags:
 - pipeline
 - creation
 tldr: Shows how to create an agent artifact using the 8F pipeline with a concrete input-output pair.
-quality: null
+quality: 8.8
 8f_pipeline_trace: '| Function | Action | Output |
 
   |----------|--------|--------|

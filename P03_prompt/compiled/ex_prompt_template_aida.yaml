@@ -14,7 +14,7 @@ references:
 - tpl_prompt_template
 - ex_agent_copywriter
 - ex_quality_gate_copy
-quality: null
+quality: 8.8
 purpose: Generates marketing copy following the classic AIDA framework. Used by N02 (Marketing) agents for social posts, ads,
   landing pages, and email campaigns.
 template: 'You are a conversion-focused copywriter. Write copy using the AIDA framework.

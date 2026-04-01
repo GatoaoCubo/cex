@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
-quality: null
+quality: 8.9
 tags:
 - blueprint
 - model-card
@@ -214,7 +214,7 @@ exemplo_minimo_valido: "---\nid: p02_mc_anthropic_sonnet_4\nkind: model_card\npi
   \  text_input: true\n  text_output: true\n  image_input: true\n  audio_input: false\n  pdf_input: true\nfeatures:\n  tool_calling:\
   \ true\n  structured_output: true\n  reasoning: true\n  prompt_caching: true\n  code_execution: true\n  web_search: false\n\
   \  fine_tunable: false\n  batch_api: true\npricing:\n  input: 3.00\n  output: 15.00\n  cache_read: 0.30\n  cache_write:\
-  \ 3.75\n  unit: per_1M_tokens\ndomain: model_selection\nquality: null\ntags: [model-card, anthropic, claude-4, sonnet, balanced]\n\
+  \ 3.75\n  unit: per_1M_tokens\ndomain: model_selection\nquality: 8.9\ntags: [model-card, anthropic, claude-4, sonnet, balanced]\n\
   tldr: \"Claude Sonnet 4 — Anthropic, 200K context, $3/$15 per 1M tokens, melhor custo-beneficio para analise e pesquisa\"\
   \nwhen_to_use: \"Tarefas de analise, pesquisa, marketing onde opus eh overkill e haiku insuficiente\"\nkeywords: [anthropic,\
   \ claude-sonnet-4, sonnet, balanced]\nlinked_artifacts:\n  primary: null\n  related: [p02_mc_anthropic_opus_4, p02_mc_anthropic_haiku_4]\n\

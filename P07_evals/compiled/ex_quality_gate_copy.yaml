@@ -12,7 +12,7 @@ references:
 - ex_agent_copywriter
 - ex_response_format_ad_copy
 - ex_prompt_template_aida
-quality: null
+quality: 8.5
 links:
 - 'Evaluates: [[ex_agent_copywriter]]'
 - 'Checks format: [[ex_response_format_ad_copy]]'

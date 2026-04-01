@@ -42,7 +42,7 @@ template_vars:
 - message
 - timestamp
 delivery_guarantee: at_least_once
-quality: null
+quality: 8.6
 tags:
 - notifier
 - slack

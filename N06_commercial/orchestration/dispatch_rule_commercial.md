@@ -1,83 +1,109 @@
 ---
-id: p12_dr_commercial_nucleus
+id: p12_dr_commercial
 kind: dispatch_rule
 pillar: P12
-version: 3.0.0
+title: "N06 Dispatch Rule — Brand + Monetization Routing"
+version: 4.0.0
 created: 2026-03-30
-updated: 2026-03-31
+updated: 2026-04-01
 author: n06_commercial
-domain: commercial-monetization
-quality: 8.9
-tags: [dispatch, commercial, N06, pricing, funnels, monetization, infoprodutos]
-tldr: Route tasks related to pricing strategy, online courses, sales funnels, revenue monetization, and infoprodutos market to N06.
-scope: commercial-monetization
-keywords: [pricing, precificar, preço, price, curso, course, funil, funnel, monetizar, monetize, receita, revenue, upsell, downsell, checkout, conversão, conversion, LTV, MRR, assinatura, subscription, oferta, offer, venda, sale, lançamento, launch, infoproduto, hotmart, kiwify, kajabi, teachable, copywriting_vendas, VSL, order_bump, OTO]
-agent_node: commercial_hub
+domain: brand-identity-monetization
+keywords: [brand, marca, identidade, brand-book, persona, arquetipo, voz, naming, tagline, posicionamento, UVP, ICP, design-tokens, paleta, pricing, curso, funnel, monetizar, receita, upsell, checkout, infoproduto, hotmart, kiwify, stripe]
 model: sonnet
-priority: 9
-confidence_threshold: 0.65
-fallback: builder_hub
-routing_strategy: keyword_match
+model_escalation: opus
+mcps: [fetch, stripe, hotmart]
+quality: null
+tags: [dispatch_rule, commercial, N06, brand, monetization, routing]
+tldr: "N06 routes brand discovery + identity + monetization. 25 keywords, dual-model (sonnet default, opus for brand-from-scratch). N06 runs FIRST on new CEX instances."
+density_score: 0.94
 ---
 
-# Commercial Nucleus Dispatch Rule
+# N06 Dispatch Rule — Brand + Monetization
 
-## Purpose
+## Priority
 
-Routes tasks related to pricing strategy, online course monetization, sales funnel design, upsell architecture, and revenue optimization to the `commercial_hub` (N06 Commercial Nucleus).
+**N06 is the FIRST nucleus to run on a new CEX instance.**
+Brand identity must exist (brand_config.yaml) before other nuclei produce branded output.
 
-## Trigger Conditions
+Priority: 10 (highest — brand blocks all other branded output)
 
-Route to N06 when the intent contains ANY of:
+## Keywords (25)
 
-### Primary Triggers (high confidence — always route to N06)
-| Keyword | Language | Intent |
-|---------|----------|--------|
-| precificar / pricing | PT/EN | Pricing design task |
-| funil de vendas / sales funnel | PT/EN | Funnel construction |
-| curso online / online course | PT/EN | Course monetization |
-| monetizar / monetize | PT/EN | Revenue generation |
-| upsell / order bump / OTO | EN/PT | Upsell architecture |
-| checkout otimizado | PT | Conversion optimization |
-| modelo de receita / revenue model | PT/EN | Revenue modeling |
-| lançamento / product launch | PT/EN | GTM planning |
+### Brand Keywords (13)
+`brand`, `marca`, `identidade`, `brand-book`, `persona`, `arquétipo`, `voz`, `naming`, `tagline`, `posicionamento`, `UVP`, `ICP`, `design-tokens`
 
-### Secondary Triggers (route if no other nucleus matches first)
-- receita, revenue, conversão, LTV, MRR, assinatura, oferta, venda
+### Monetization Keywords (12)
+`pricing`, `precificar`, `curso`, `funnel`, `funil`, `monetizar`, `receita`, `upsell`, `checkout`, `infoproduto`, `hotmart`, `kiwify`
 
-## Routing Decision Tree
+## Trigger Phrases
 
+### Brand Triggers
+- "criar brand book"
+- "descobrir identidade da marca"
+- "definir voz da marca"
+- "preencher brand_config"
+- "auditar consistência da marca"
+- "propagar marca para nucleos"
+- "selecionar arquétipo"
+- "criar paleta de cores"
+
+### Monetization Triggers
+- "precificar produto"
+- "montar funil de vendas"
+- "estruturar curso online"
+- "sequência de upsell"
+- "modelo de receita"
+- "otimizar checkout"
+- "criar página de preços"
+
+## Model Selection
+
+| Context | Model | Rationale |
+|---------|-------|-----------|
+| Brand Discovery interview | sonnet | Empathy + structured questioning |
+| Brand Book generation | sonnet | Creative + structured output |
+| Brand-from-scratch (minimal input) | opus | Deep reasoning for sparse data |
+| Brand Audit | sonnet | Systematic scoring |
+| Pricing strategy | sonnet | Analytical + persuasive |
+| Funnel copywriting | sonnet | Creative + conversion-focused |
+| Complex revenue modeling | opus | Multi-variable analysis |
+
+## Receives From
+
+| Source | What | When |
+|--------|------|------|
+| N01 Research | Market data, competitor analysis | Before brand positioning |
+| N07 Admin | New instance trigger | "Initialize brand" |
+| User | Brand discovery answers | During interview |
+
+## Hands Off To
+
+| Target | What | When |
+|--------|------|------|
+| N02 Marketing | BRAND_VOICE + BRAND_COLORS | After brand_config.yaml exists |
+| N03 Builder | BRAND_COLORS + BRAND_FONTS + BRAND_STYLE | After visual identity defined |
+| N05 Operations | BRAND_NAME + BRAND_LOGO_URL | After config propagated |
+| N04 Knowledge | BRAND_CATEGORY + BRAND_CONTENT_PILLARS | After positioning defined |
+
+## Handoff Format
+
+```yaml
+# .cex/runtime/handoffs/n06_to_n02.md
+source: N06
+target: N02
+type: brand_propagation
+payload:
+  brand_config: .cex/brand/brand_config.yaml
+  sections: [voice, visual]
+  message: "Brand Book done. Use BRAND_VOICE for all copy. Use BRAND_COLORS for all HTML."
 ```
-Is the task about pricing, courses, funnels, or monetization?
-  YES → Route to N06 (commercial_hub)
 
-Is the task about writing production code for payments?
-  YES → Route to N05 (engineering_hub) — NOT N06
+## NOT N06 (route elsewhere)
 
-Is the task about researching market size or competitors?
-  YES → Route to N01 (research_hub) — N06 uses the output
-
-Is the task about writing marketing copy for social media?
-  YES → Route to N02 (marketing_hub) — N06 handles the funnel, N02 distributes
-```
-
-## Keyword Rationale
-
-Portuguese and English keywords are included because the CEX user base is primarily Brazilian (infoprodutos market). Terms like `monetizar`, `funil`, `precificar` are direct trigger words in PT-BR commercial intent. English terms cover international/hybrid conversations.
-
-## Fallback Logic
-
-If confidence < 0.65:
-1. First check N03 Builder (can it be structured as a generic artifact?)
-2. If commercial domain confirmed but unclear artifact type: ask user to specify (pricing / course / funnel / upsell)
-3. Never silently drop a commercial task
-
-## Non-Routes (explicit exclusions)
-
-| Task | Correct Nucleus |
-|------|----------------|
-| Deploy payment gateway | N05 Engineering |
-| Write Stripe integration code | N05 Engineering |
-| Research TAM/SAM/SOM market data | N01 Research |
-| Create social media ads | N02 Marketing |
-| Index commercial knowledge base | N04 Knowledge |
+| Request | Route To | Why |
+|---------|----------|-----|
+| Deploy landing page | N05 | Infrastructure, not brand |
+| Write production code | N05 | Engineering, not strategy |
+| Research market size | N01 | Research, not brand |
+| Editorial content | N02 | Marketing copy, not identity |
+| Build UI components | N03 | Design, not brand definition |

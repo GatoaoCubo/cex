@@ -1,119 +1,90 @@
 ---
-id: p07_sr_commercial_evaluation
+id: p07_sr_commercial
 kind: scoring_rubric
 pillar: P07
-title: Rubric — Commercial Output Evaluation
-version: 3.0.0
+title: "N06 Scoring Rubric — Dual Brand + Monetization"
+version: 4.0.0
 created: 2026-03-30
-updated: 2026-03-31
+updated: 2026-04-01
 author: n06_commercial
-framework: Commercial Output Evaluation
-target_kinds: [pricing_strategy, course_outline, funnel_copy, upsell_sequence, revenue_model]
-dimensions_count: 5
-total_weight: 100
-threshold_golden: 9.5
-threshold_publish: 8.0
-threshold_review: 7.0
-automation_status: semi-automated
-domain: commercial-monetization
-quality: 8.9
-tags: [scoring-rubric, commercial, N06, pricing, funnels, conversion]
-tldr: 5-dimension rubric for N06 output — Offer Clarity (25%), Pricing Logic (25%), Funnel Coherence (20%), Copy Persuasion (20%), Revenue Potential (10%).
-density_score: 0.92
+domain: brand-identity-monetization
+max_score: 10.0
+min_pass: 8.0
+golden: 9.0
+quality: null
+tags: [scoring_rubric, commercial, N06, brand, monetization, dual]
+tldr: "Dual scoring: BRAND (archetype 0-3, voice 0-2, positioning 0-2, visual 0-2, narrative 0-1) + MONETIZATION (pricing 0-3, funnel 0-2, conversion 0-2, revenue 0-2, market 0-1). Average to 10. Min 8.0, golden 9.0."
+density_score: 0.94
 ---
 
-## Framework Overview
+# N06 Scoring Rubric — Brand + Monetization
 
-This rubric evaluates N06 commercial artifacts across five dimensions specific to revenue-generating output.
-The framework is calibrated to the infoprodutos/digital products market (primary CEX commercial domain).
+## Scoring Model
 
-## Dimensions
+N06 produces two categories of artifacts. Score is averaged:
+`final_score = (brand_score + monetization_score) / 2`
 
-| Dimension | Weight | Scale | What it Measures |
-|-----------|--------|-------|-----------------|
-| D1: Offer Clarity | 25% | 0-10 | Is the product, audience, price, and transformation unmistakably clear? |
-| D2: Pricing Logic | 25% | 0-10 | Is the price justified with value rationale, tiers, and revenue model? |
-| D3: Funnel Coherence | 20% | 0-10 | Does each funnel stage connect logically with the right artifact and CTA? |
-| D4: Copy Persuasion | 20% | 0-10 | Does the copy use proven structure (hook, agitate, reveal, proof, CTA)? |
-| D5: Revenue Potential | 10% | 0-10 | Does the artifact generate real revenue? Is the model sustainable and scalable? |
+For pure brand artifacts, use Brand rubric only.
+For pure monetization artifacts, use Monetization rubric only.
+For mixed artifacts (e.g., branded pricing page), average both.
 
-## Dimension Criteria
+## BRAND Rubric (10 points)
 
-### D1: Offer Clarity (25%)
-| Score | Description |
-|-------|-------------|
-| 10 | Audience named precisely, transformation stated as measurable outcome, offer components listed explicitly |
-| 8-9 | Clear audience + transformation, minor missing specifics (e.g., platform not named) |
-| 6-7 | General audience and transformation, some specificity gaps |
-| 4-5 | Vague audience ("business owners"), vague transformation ("improve results") |
-| 0-3 | No defined audience or transformation. Generic placeholder content. |
+| Dimension | Points | Criteria |
+|-----------|--------|----------|
+| **Archetype** | 0-3 | 0=none, 1=named but generic, 2=aligned with tone+visual, 3=deeply integrated with shadow+traits |
+| **Voice** | 0-2 | 0=no voice calibration, 1=tone described, 2=full 5D scores + do/don't + calibration phrases |
+| **Positioning** | 0-2 | 0=no UVP, 1=generic positioning, 2=specific UVP + differentiator + competitive matrix |
+| **Visual** | 0-2 | 0=no colors, 1=palette defined, 2=full palette + fonts + contrast + dark mode + psychology |
+| **Narrative** | 0-1 | 0=no story, 1=origin + mission + vision + transformation arc present |
 
-### D2: Pricing Logic (25%)
-| Score | Description |
-|-------|-------------|
-| 10 | 3-tier table + value rationale + revenue model (units × price × conversion) + psychological anchoring |
-| 8-9 | Tiers present, rationale documented, revenue model with minor gaps |
-| 6-7 | Tiers present but no rationale or revenue model |
-| 4-5 | Single flat price, no tiers, no justification |
-| 0-3 | No pricing at all, or price range without commitment |
+### Brand Score Guide
 
-### D3: Funnel Coherence (20%)
-| Score | Description |
-|-------|-------------|
-| 10 | All stages (TOFU/MOFU/BOFU) defined, conversion benchmarks per stage, artifact per stage, natural progression |
-| 8-9 | Full funnel map, benchmarks present, minor stage gaps |
-| 6-7 | 2 of 3 stages defined, missing benchmarks |
-| 4-5 | Only one stage addressed, no stage-to-stage connection |
-| 0-3 | No funnel structure. Disconnected fragments. |
+| Score | Quality |
+|-------|---------|
+| 9-10 | Exceptional — brand book is publication-ready, all 32 blocks, consistency ≥ 0.95 |
+| 8-8.9 | Strong — 18+ blocks, consistency ≥ 0.85, clear archetype alignment |
+| 7-7.9 | Adequate — core identity present but gaps in voice or visual |
+| 6-6.9 | Weak — archetype named but not integrated, voice inconsistent |
+| < 6 | Failing — fundamental identity gaps, re-run Brand Discovery |
 
-### D4: Copy Persuasion (20%)
-| Score | Description |
-|-------|-------------|
-| 10 | Hook calls out exact avatar, agitates specific pain, reveals unique mechanism, proof present, CTA with urgency |
-| 8-9 | Strong hook + structure, minor proof or urgency gap |
-| 6-7 | Some structure present but hook is generic or proof is missing |
-| 4-5 | Flat copy, no hook-agitate-reveal structure, generic CTA |
-| 0-3 | No persuasive copy structure. "Buy now" level. |
+## MONETIZATION Rubric (10 points)
 
-### D5: Revenue Potential (10%)
-| Score | Description |
-|-------|-------------|
-| 10 | Scalable model, upsell path defined, LTV > 2x AOV, projected ROAS >= 3x |
-| 8-9 | Clear revenue path, upsell defined, reasonable LTV projections |
-| 6-7 | Revenue model present but no upsell or LTV path |
-| 4-5 | One-time sale only, no recurring or upsell revenue path |
-| 0-3 | No revenue model. No path beyond initial transaction. |
+| Dimension | Points | Criteria |
+|-----------|--------|----------|
+| **Pricing** | 0-3 | 0=no price, 1=flat price only, 2=tiered with rationale, 3=tiered + anchor + psychology + projections |
+| **Funnel** | 0-2 | 0=no funnel, 1=basic TOFU/MOFU/BOFU, 2=full sequence with copy + conversion benchmarks |
+| **Conversion** | 0-2 | 0=no metrics, 1=benchmarks referenced, 2=stage-specific rates + optimization recommendations |
+| **Revenue** | 0-2 | 0=no model, 1=basic projection, 2=MRR/LTV scenarios with sensitivity analysis |
+| **Market** | 0-1 | 0=generic, 1=market-specific (BR: BRL/PIX/parcelamento, platform named) |
 
-## Scoring Formula
+### Monetization Score Guide
 
-```
-final_score = (D1 × 0.25) + (D2 × 0.25) + (D3 × 0.20) + (D4 × 0.20) + (D5 × 0.10)
-```
+| Score | Quality |
+|-------|---------|
+| 9-10 | Exceptional — implementable pricing + funnel + revenue model with projections |
+| 8-8.9 | Strong — tiered pricing, funnel stages defined, conversion benchmarks present |
+| 7-7.9 | Adequate — pricing exists but generic, funnel incomplete |
+| 6-6.9 | Weak — single price, no funnel, no revenue model |
+| < 6 | Failing — no commercial viability analysis |
+
+## Combined Scoring
+
+| Artifact Type | Rubric Used | Example |
+|---------------|-------------|---------|
+| Brand Book | Brand only | 32-block brand book |
+| brand_config.yaml | Brand only | Config file |
+| Voice Guide | Brand only | Voice calibration doc |
+| Pricing Page | Average(Brand + Monetization) | Branded pricing page |
+| Course Outline | Average(Brand + Monetization) | On-brand course structure |
+| Funnel Sequence | Average(Brand + Monetization) | Brand-voice funnel copy |
+| Revenue Model | Monetization only | MRR/LTV projection |
 
 ## Thresholds
 
-| Tier | Score | Action |
-|------|-------|--------|
-| GOLDEN | >= 9.5 | Mark as reference example. Add to calibration set. |
-| PUBLISH | >= 8.0 | Deliver to user. Proceed to F8. |
-| REVIEW | 7.0-7.9 | Return with D-gate feedback. Revise specific dimension. |
-| REJECT | < 7.0 | Return to F4 REASON. Rebuild from plan. |
-
-## Calibration Examples
-
-| Level | Score | Profile |
-|-------|-------|---------|
-| GOLDEN | 9.7 | "Curso Precificação para Designers": full 3-tier, transformation arc, VSL, upsell sequence, R$99k revenue projection validated |
-| PUBLISH | 8.3 | Course outline + pricing tiers, transformation arc defined, missing upsell sequence details |
-| REVIEW | 7.2 | Pricing tiers present but no revenue model; copy has hook but no proof section |
-| REJECT | 5.8 | Generic course outline, single flat price, no funnel, no audience specificity |
-
-## Automation
-
-| Dimension | Status | Method |
-|-----------|--------|--------|
-| D1 Offer Clarity | semi-automated | Check for audience keywords + transformation language |
-| D2 Pricing Logic | semi-automated | Detect tier table + revenue calculation pattern |
-| D3 Funnel Coherence | manual | Stage review by N06 agent |
-| D4 Copy Persuasion | semi-automated | Hook/CTA structure pattern match |
-| D5 Revenue Potential | manual | LTV/ROAS projection review |
+| Level | Score | Action |
+|-------|-------|--------|
+| Gold | 9.0+ | Publish, archive as exemplar |
+| Pass | 8.0-8.9 | Publish, note improvements |
+| Review | 7.0-7.9 | Revise weak dimensions |
+| Fail | < 7.0 | Reject, re-build |

@@ -14,7 +14,7 @@ references:
 - tpl_chain
 - ex_skill_web_scraper
 - ex_dispatch_rule_research
-quality: null
+quality: 8.8
 chain_overview: "SEARCH → FILTER → SYNTHESIZE → CITE\n  (N01)    (N01)     (N01)      (N01)"
 step_1_search: 'Prompt: "Given the query `{query}`, generate 5 search queries that cover different angles." Input: `{query:
   string, domain: string, max_sources: int}` Output: `{queries: string[], sources: {url, title, snippet}[]}` Tool: Web search

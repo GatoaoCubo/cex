@@ -13,7 +13,7 @@ tldr: User corrects agent tone from too-formal to casual. Triggers constraint up
 references:
 - tpl_feedback
 - ex_agent_copywriter
-quality: null
+quality: 8.8
 trigger_event: 'User said: "Muito formal, não gostei. Fala mais natural."'
 feedback_analysis: '| Dimension | Before | After |
 

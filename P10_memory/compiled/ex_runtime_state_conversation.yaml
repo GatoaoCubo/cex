@@ -9,7 +9,7 @@ author: builder_agent
 agent: conversation-manager
 persistence: session
 domain: conversation
-quality: null
+quality: 8.9
 tags:
 - runtime-state
 - conversation

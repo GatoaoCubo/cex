@@ -7,7 +7,7 @@ version: 2.0.0
 created: 2026-03-25
 updated: 2026-03-25
 author: orchestrator
-quality: null
+quality: 8.9
 tags:
 - blueprint
 - knowledge-card
@@ -109,7 +109,7 @@ cross_references_grafo_de_conhecimento: "linked_artifacts:\n  primary: \"{{kc qu
 headers_definem_os_chunks_de_embedding: ''
 exemplo_minimo_valido: "---\nid: p01_kc_prompt_caching_basics\nkind: knowledge_card\npillar: P01\ntitle: \"Prompt Caching\
   \ Reduces LLM Cost by 90%\"\nversion: 1.0.0\ncreated: 2026-03-25\nupdated: 2026-03-25\nauthor: builder_agent\ndomain: llm_engineering\n\
-  quality: null\ntags: [prompt-caching, cost-optimization, anthropic]\ntldr: \"Cache reutiliza prefixos, cortando custo 90%\
+  quality: 8.9\ntags: [prompt-caching, cost-optimization, anthropic]\ntldr: \"Cache reutiliza prefixos, cortando custo 90%\
   \ e latencia 85% para contextos > 1024 tokens\"\nwhen_to_use: \"Sistema LLM repete contexto longo entre chamadas\"\nkeywords:\
   \ [prompt-caching, cache-control]\nlong_tails: [\"Como configurar prompt caching na Anthropic\"]\naxioms: [\"SEMPRE coloque\
   \ conteudo estatico ANTES do dinamico\"]\nlinked_artifacts:\n  primary: p02_agent_llm_specialist\n  related: [p01_kc_rag_fundamentals]\n\

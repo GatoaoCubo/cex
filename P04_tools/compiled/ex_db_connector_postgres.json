@@ -11,7 +11,7 @@
   "protocol": "rest",
   "auth": "api_key",
   "endpoints": "",
-  "quality": null,
+  "quality": 8.5,
   "tags": [
     "db_connector",
     "postgres",

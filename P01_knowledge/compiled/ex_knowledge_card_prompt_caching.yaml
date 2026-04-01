@@ -13,7 +13,7 @@ tldr: Cache static prompt components to reduce LLM costs by 60-90%. Cache system
 references:
 - tpl_knowledge_card
 - ex_knowledge_card_rag_fundamentals
-quality: null
+quality: 8.8
 core_principle: LLM prompts have layers with different change frequencies. Cache the stable layers, recompute the dynamic
   ones.
 cache_tiers: '| Layer | 8F Function | Change Frequency | Cache? | Savings |

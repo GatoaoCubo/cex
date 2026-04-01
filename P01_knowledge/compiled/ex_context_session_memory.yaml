@@ -13,7 +13,7 @@ tldr: Injects the last N conversation turns as context for multi-turn interactio
 references:
 - tpl_context_doc
 - ex_knowledge_card_rag_fundamentals
-quality: null
+quality: 8.8
 purpose: Maintains conversational continuity by injecting recent interaction history into the agent's context window. Prevents
   the "goldfish problem" where each turn starts from zero.
 configuration: 'id: ctx_session_memory

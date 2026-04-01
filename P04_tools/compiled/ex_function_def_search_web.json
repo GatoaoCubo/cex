@@ -18,7 +18,7 @@
   ],
   "strict": false,
   "domain": "web-search",
-  "quality": null,
+  "quality": 8.8,
   "tags": [
     "function_def",
     "search",

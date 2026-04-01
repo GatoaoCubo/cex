@@ -13,7 +13,7 @@ output_format: langchain_doc
 chunk_size: 512
 overlap: 50
 encoding: utf-8
-quality: null
+quality: 8.7
 tags:
 - document_loader
 - pdf

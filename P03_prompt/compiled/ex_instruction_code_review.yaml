@@ -19,7 +19,7 @@ dependencies:
 - Source code repository access
 logging: true
 domain: code_review
-quality: null
+quality: 8.7
 tags:
 - instruction
 - code-review

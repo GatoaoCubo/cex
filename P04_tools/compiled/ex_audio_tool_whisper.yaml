@@ -37,7 +37,7 @@ languages: '| Code | Language | whisper-1 | whisper-large-v3 |
   | pt | Portuguese | high | high |
 
   | es | Spanish | high | high |'
-quality: null
+quality: 8.7
 tags:
 - audio_tool
 - whisper

@@ -11,7 +11,7 @@ capabilities: ''
 output_format: 'JSON envelope: `{"capability": "string", "results": {...}, "model": "gpt-4-vision-preview"}`'
 providers:
 - openai_vision
-quality: null
+quality: 8.6
 tags:
 - vision_tool
 - gpt4v

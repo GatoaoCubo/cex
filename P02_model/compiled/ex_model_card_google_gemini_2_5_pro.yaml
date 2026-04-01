@@ -35,7 +35,7 @@ pricing:
   cache_write: null
   unit: per_1M_tokens
 domain: model_selection
-quality: null
+quality: 8.8
 tags:
 - model-card
 - google

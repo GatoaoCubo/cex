@@ -17,7 +17,7 @@ metadata_filters:
 - pillar
 - kind
 namespace: default
-quality: null
+quality: 8.6
 tags:
 - retriever
 - pinecone

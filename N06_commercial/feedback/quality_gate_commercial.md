@@ -1,84 +1,64 @@
 ---
-id: p11_qg_commercial_nucleus
+id: p07_qg_commercial
 kind: quality_gate
-pillar: P11
-title: Gate — Commercial Nucleus Output
-version: 3.0.0
+pillar: P07
+title: "N06 Quality Gate — Brand + Monetization (14 Checks)"
+version: 4.0.0
 created: 2026-03-30
-updated: 2026-03-31
+updated: 2026-04-01
 author: n06_commercial
-domain: commercial-monetization
-quality: 8.9
-tags: [quality-gate, commercial, N06, pricing, funnels, conversion]
-tldr: Pre-output gate for N06 artifacts — ensures pricing has rationale, copy is audience-specific, funnels have conversion benchmarks, and upsells are defined.
-density_score: 0.91
+domain: brand-identity-monetization
+gate_count: 14
+pass_threshold: 12
+quality: null
+tags: [quality_gate, commercial, N06, brand, monetization]
+tldr: "14-check quality gate for N06 dual-role: 8 brand checks (config, archetype, voice, positioning, naming, book, consistency, propagation) + 6 revenue checks (pricing, funnel, transformation, platform, LTV, compliance)."
+density_score: 0.94
 ---
 
-## Definition
+# N06 Quality Gate — Brand + Monetization
 
-| Property | Value |
-|----------|-------|
-| Metric | commercial_quality_score |
-| Threshold | 0.80 (publish) / 0.95 (golden) |
-| Scope | All N06 artifacts before delivery |
-| Applies to | pricing strategy, course outline, funnel copy, upsell sequence, revenue model |
+## Brand Checks (8)
 
-## HARD Gates (block if fail)
+| # | Gate | Threshold | Required | Description |
+|---|------|-----------|----------|-------------|
+| 1 | config_complete | 13 fields | ✅ | All 13 required brand_config.yaml fields filled with non-placeholder values |
+| 2 | config_valid | schema pass | ✅ | `brand_validate.py` returns 0 errors |
+| 3 | archetype_real | 1/12 Jungian | ✅ | BRAND_ARCHETYPE is exactly one of: creator, hero, sage, explorer, rebel, magician, lover, caregiver, jester, ruler, innocent, everyman |
+| 4 | voice_5d | 5 dims scored | ✅ | All 5 voice dimensions (formality, enthusiasm, humor, warmth, authority) have integer scores 1-5 |
+| 5 | voice_consistent | within tolerance | ✅ | Voice scores across channel outputs stay within ±1 of brand_config base values |
+| 6 | positioning_unique | UVP ≠ competitor | ✅ | UVP statement does not duplicate any competitor's positioning |
+| 7 | naming_screened | domain + trademark | ❌ | Brand name checked for domain availability and trademark conflicts |
+| 8 | brand_book_18 | 18/32 blocks | ✅ | Minimum 18 of 32 brand book blocks completed |
+| 9 | brand_book_32 | 32/32 blocks | ❌ | All 32 brand book blocks completed (gold standard) |
+| 10 | consistency_score | >= 0.85 | ✅ | `brand_audit.py` overall score passes threshold |
+| 11 | uniqueness_score | >= 8.0 | ✅ | Brand uniqueness vs. competitors rated 8.0+ |
+| 12 | propagation_test | nuclei resolve | ✅ | All target nuclei can resolve their BRAND_* variables via `brand_propagate.py` |
+| 13 | visual_contrast | WCAG 4.5:1 | ✅ | Color contrast ratios meet WCAG AA standard |
+| 14 | transformation_arc | From/To/Through | ✅ | BRAND_TRANSFORMATION follows "From X to Y through Z" pattern |
 
-| gate_id | Description | Block |
-|---------|-------------|-------|
-| H01 | YAML frontmatter parses without error | true |
-| H02 | id matches pattern `^p11_qg_[a-z][a-z0-9_]+$` | true |
-| H03 | kind is exactly `quality_gate` | true |
-| H04 | quality field is null (no self-scoring) | true |
-| H05 | All required frontmatter fields present | true |
-| H06 | **Pricing artifacts**: price has explicit rationale (not just a number) | true |
-| H07 | **Copy artifacts**: audience is named specifically (not "entrepreneurs" or "people") | true |
-| H08 | **Funnel artifacts**: each stage has a conversion benchmark (%) | true |
-| H09 | **Course artifacts**: transformation arc defined (before + after student state) | true |
-| H10 | **Revenue models**: contains units × price × conversion = revenue calculation | true |
+## Pass Criteria
 
-## SOFT Gates (penalize score)
+- **Required gates**: 12 of 14 (gates 7 and 9 are optional)
+- **Minimum score**: 8.0 to publish
+- **Gold standard**: All 14 gates pass = 9.5+
 
-| gate_id | Description | Max Penalty | Weight |
-|---------|-------------|-------------|--------|
-| S01 | Offer specificity — named product, price, and audience (not generic) | -15% | 25% |
-| S02 | Persuasive force — copy uses proven structure (hook, agitate, reveal, proof, CTA) | -15% | 25% |
-| S03 | Pricing logic — tiers present, rationale documented, revenue model included | -15% | 25% |
-| S04 | Actionability — output can be implemented without additional research or guesswork | -10% | 15% |
-| S05 | Upsell path defined — every offer has at least one defined next step (upsell/cross-sell) | -10% | 10% |
+## Gate Execution
 
-## Scoring Formula
-
-```
-commercial_quality_score = (S01 × 0.25) + (S02 × 0.25) + (S03 × 0.25) + (S04 × 0.15) + (S05 × 0.10)
-PASS: all HARD gates pass AND commercial_quality_score >= 0.80
-GOLDEN: commercial_quality_score >= 0.95
+```bash
+# Run all brand checks
+python _tools/brand_validate.py           # Gates 1-2
+python _tools/brand_audit.py --verbose    # Gates 3-6, 10-11, 13-14
+python _tools/brand_propagate.py --dry-run # Gate 12
 ```
 
-## Failure Actions
+## Revenue Checks (supplementary, from original N06)
 
-| Score | Action |
-|-------|--------|
-| Any HARD gate fails | BLOCK — return to F6 with specific failure reason |
-| 0.70-0.79 | REVIEW — return with S-gate feedback for revision |
-| < 0.70 | REJECT — regenerate from F4 REASON |
-| >= 0.80 | PASS — proceed to F8 COLLABORATE |
-| >= 0.95 | GOLDEN — flag as reference example |
-
-## Common Failure Patterns
-
-| Pattern | Gate Violated | Fix |
-|---------|--------------|-----|
-| "Price around R$500-R$1000" — vague range | H06 / S03 | Give exact price with rationale |
-| "For entrepreneurs struggling with X" — generic audience | H07 / S01 | Name specific segment: "freelance designers earning R$3k/month" |
-| Funnel stage listed without conversion % | H08 / S02 | Add benchmark: "BOFU sales page: 2-5% conversion" |
-| Course outline without before/after student | H09 / S01 | Write transformation arc first |
-| Revenue model missing the math | H10 / S03 | Write: "100 sales × R$997 = R$99,700" |
-| Copy lacks urgency or social proof | S02 | Add testimonial hook or scarcity element |
-
-## Bypass Policy
-
-- Who: N07 Orchestrator only
-- Conditions: Only when output is for internal planning (not for delivery to end customer)
-- Logging: bypass must be logged to `.cex/runtime/signals/n06_gate_bypass.json` with timestamp and reason
+| # | Gate | Threshold | Description |
+|---|------|-----------|-------------|
+| R1 | pricing_rationale | present | Every price has a WHY section, not just WHAT |
+| R2 | tier_structure | 2-4 tiers | At least 2 pricing tiers defined |
+| R3 | transformation_arc | present | Course/product has clear before → after arc |
+| R4 | platform_specified | named | Deployment platform explicitly named (Hotmart, Stripe, etc.) |
+| R5 | ltv_path | defined | Every offer has upsell/downsell path for LTV |
+| R6 | compliance_br | checked | Brazilian market: BRL, PIX, parcelamento, CONAR compliance |

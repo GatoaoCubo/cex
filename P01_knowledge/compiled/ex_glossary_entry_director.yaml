@@ -17,7 +17,7 @@ tags:
 - orchestration
 tldr: An agent_node is an autonomous execution unit in the CEX system. Each has a fixed domain, dedicated LLM model, and exclusive
   MCP tools.
-quality: null
+quality: 8.5
 usage:
 - 'Context: Aparece em N07 orchestration, dispatch rules, spawn configs'
 - 'Example: "Spawnar agent_node builder_agent para executar 8F pipeline"'
