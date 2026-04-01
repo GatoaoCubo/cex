@@ -1,46 +1,198 @@
 ---
-id: p01_kc_marketing_nucleus
+id: p01_kc_visual_frontend_marketing
 kind: knowledge_card
 pillar: P01
-title: Marketing & Copywriting — Core Knowledge Card
-version: 3.0.0
+title: Visual Frontend Engineering + Marketing — Dual Knowledge Card
+version: 4.0.0
 created: 2026-03-30
-updated: 2026-03-31
-author: n02_marketing
-domain: copywriting_and_campaigns
-quality: 9.0
-tags: [knowledge_card, marketing, copywriting, campaigns, N02]
-tldr: Distilled copywriting formulas, CTA patterns, headline frameworks, funnel stages — operational knowledge for N02.
-when_to_use: Load before any copy-writing task. Reference formulas, then adapt to product/audience.
-keywords: [copywriting, AIDA, PAS, headline, CTA, funnel, landing page, email, brand voice, A/B testing]
+updated: 2026-04-01
+author: n02_visual_frontend_marketing
+domain: visual_frontend_engineering_and_copywriting
+quality: null
+tags: [knowledge_card, visual-frontend, marketing, html, tailwind, copywriting, campaigns, N02]
+tldr: Dual-role knowledge — 10 frontend KCs (Tailwind, shadcn, a11y, responsive, typography, tokens) + copywriting formulas — for N02 Visual Frontend Engineer.
+when_to_use: Load before any visual, copy, or dual-mode task. Reference frontend KCs for HTML generation, copy formulas for persuasion, integration patterns for dual work.
+keywords: [html, frontend, tailwind, shadcn, responsive, a11y, copywriting, AIDA, PAS, headline, CTA, funnel, landing page, component, visual hierarchy]
 long_tails:
-  - How to write a high-converting landing page headline
-  - AIDA vs PAS — which formula to use for cold traffic
-  - What makes a CTA convert — specificity and friction reduction
-  - How to define brand voice in 4 dimensions
+  - How to build responsive landing page with Tailwind CSS
+  - How to integrate persuasive copy into visual hierarchy
+  - WCAG AA accessibility compliance with shadcn/ui components
+  - Mobile-first responsive design patterns with Tailwind
+  - How to write high-converting headlines embedded in semantic HTML
+  - Design token architecture for consistent styling
 axioms:
-  - ALWAYS identify funnel stage before writing — awareness copy ≠ decision copy
-  - ALWAYS lead with the reader's desire, not the product's features
-  - NEVER use a vague CTA — specificity increases CTR by 20–30%
+  - ALWAYS use design tokens, NEVER hardcode hex colors (#HEXCODE prohibited)
+  - ALWAYS build mobile-first responsive with proper breakpoints
+  - ALWAYS target Lighthouse 90+ performance and WCAG AA accessibility
+  - ALWAYS identify funnel stage before writing copy
+  - ALWAYS lead with reader's desire, not product features
+  - NEVER use vague CTAs — specificity increases conversion
 linked_artifacts:
-  primary: p02_agent_marketing_nucleus
-  related: [p03_sp_marketing_nucleus, p03_pt_marketing_message]
-density_score: 0.91
-data_source: internal_distillation
+  primary: p02_agent_visual_frontend_marketing
+  related: [p03_sp_visual_frontend_marketing, p03_pt_visual_frontend_marketing]
+  frontend_kcs: [kc_tailwind_patterns, kc_shadcn_radix_patterns, kc_accessibility_a11y, kc_responsive_layouts, kc_typography_web, kc_color_theory_applied, kc_visual_hierarchy, kc_css_animation_micro, kc_email_html_responsive, kc_html_component_library]
+density_score: 0.96
+data_source: internal_distillation_and_frontend_kcs
 ---
 
-# Marketing & Copywriting — Core Knowledge Card
+# Visual Frontend Engineering + Marketing — Dual Knowledge Card
 
 ## Quick Reference
 
 ```yaml
-domain: copywriting_and_campaigns
+# Dual-Role Configuration
+domain: visual_frontend_engineering_and_copywriting
 nucleus: N02
-model: claude-sonnet-4-6
+model: claude-sonnet-4-6 (+ claude-opus-4-6 fallback for HTML-heavy)
 cli: claude (Anthropic subscription)
-core_formulas: [AIDA, PAS, BAB, 4U, FAB]
+mcps: [markitdown, puppeteer_browser]
+
+# Visual Frontend Capabilities
+frontend_stack: [tailwind_css, shadcn_ui, radix_primitives, html5_semantic]
+design_tokens: [primitives, semantic_codexa, component_level]
+typography: [geist_variable, inter, jetbrains_mono]
+responsive: [mobile_first, sm_640px, md_768px, lg_1024px, xl_1280px, 2xl_1536px]
+accessibility: [wcag_aa_minimum, 4.5_contrast_ratio, semantic_markup]
+performance: [lighthouse_90_plus, w3c_valid, lazy_loading]
+
+# Copywriting Capabilities  
+copy_formulas: [AIDA, PAS, BAB, 4U, FAB]
 funnel_stages: [awareness, consideration, decision]
-channels: [ads, email, landing_page, social, brand]
+channels: [ads, email, landing_page, social, brand, components]
+
+# Dual Integration
+modes: [VISUAL, COPY, DUAL]
+integration: [copy_in_hierarchy, semantic_headlines, styled_ctas]
+```
+
+## Frontend Knowledge Base (10 Core KCs)
+
+### Design & Layout KCs
+- **`kc_tailwind_patterns`**: Utility-first patterns, JIT mode, configuration strategies
+- **`kc_visual_hierarchy`**: F/Z-pattern layouts, typography scale, whitespace, focal points
+- **`kc_responsive_layouts`**: Mobile-first breakpoints, fluid grids, container queries
+- **`kc_typography_web`**: 3-font system (Geist+Inter+JBMono), hierarchy, readability
+
+### Component & Styling KCs
+- **`kc_shadcn_radix_patterns`**: Component composition, variant patterns, accessibility built-in
+- **`kc_html_component_library`**: Semantic markup, reusable patterns, API design
+- **`kc_color_theory_applied`**: CODEXA palette, contrast ratios, dark mode tokens
+- **`kc_css_animation_micro`**: Framer Motion patterns, hover states, transitions
+
+### Accessibility & Performance KCs
+- **`kc_accessibility_a11y`**: WCAG AA compliance, ARIA labels, keyboard navigation
+- **`kc_email_html_responsive`**: Inline CSS, client compatibility, responsive email templates
+
+### Frontend Integration Patterns
+```
+Copy → Visual Integration:
+1. Headlines → Semantic h1-h6 tags with Tailwind typography classes
+2. CTAs → Button components with hover/focus states
+3. Body copy → Proper p tags with responsive text scaling
+4. Lists → ul/ol with Tailwind list styling
+5. Forms → shadcn/ui form components with validation styling
+```
+
+## Visual Frontend Patterns
+
+### Tailwind Design Token Usage
+```css
+/* NEVER use hardcoded colors */
+❌ style="color: #50C878"
+✅ class="text-codexa-accent"
+
+/* Design token layers */
+:root { --background: white; --foreground: black; } /* Primitives */
+.codexa { --codexa-accent: #50C878; --codexa-surface-900: ...; } /* Semantic */
+.sidebar { --sidebar-background: var(--codexa-surface-900); } /* Component */
+```
+
+### Responsive Patterns (Mobile-First)
+```html
+<!-- Base styles for mobile, then add breakpoints -->
+<div class="grid gap-4 p-4 sm:gap-6 sm:p-6 lg:grid-cols-2 lg:gap-8">
+  <div class="space-y-4">
+    <!-- Content scales with device -->
+    <h1 class="text-2xl font-bold sm:text-3xl lg:text-4xl">Mobile-First Headline</h1>
+  </div>
+</div>
+```
+
+### Accessibility Essentials
+```html
+<!-- Semantic structure with ARIA -->
+<button 
+  class="bg-primary text-primary-foreground hover:bg-primary/90 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+  aria-label="Start your free trial"
+>
+  Get Started
+</button>
+
+<!-- Form accessibility -->
+<label for="email" class="text-sm font-medium">Email</label>
+<input 
+  id="email" 
+  type="email" 
+  class="border-input bg-background focus:ring-2 focus:ring-primary"
+  required
+  aria-describedby="email-error"
+>
+```
+
+### Component Composition (shadcn/ui Style)
+```typescript
+// Button variants
+const buttonVariants = {
+  variant: {
+    default: "bg-primary text-primary-foreground hover:bg-primary/90",
+    destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+    outline: "border border-input hover:bg-accent hover:text-accent-foreground",
+  },
+  size: {
+    default: "h-10 px-4 py-2",
+    sm: "h-9 rounded-md px-3",
+    lg: "h-11 rounded-md px-8",
+  }
+}
+```
+
+## DUAL Mode Integration Strategies
+
+### Copy-to-Visual Mapping
+| Copy Element | HTML Implementation | Tailwind Classes |
+|-------------|-------------------|------------------|
+| **Headlines** | h1, h2, h3 tags | `text-3xl font-bold tracking-tight` |
+| **Subheadlines** | p with emphasis | `text-xl text-muted-foreground` |
+| **CTAs** | button elements | `bg-primary text-primary-foreground hover:bg-primary/90` |
+| **Body copy** | p tags in prose | `prose prose-gray dark:prose-invert` |
+| **Bullet lists** | ul with icons | `space-y-2 text-sm` |
+
+### Visual Formula Integration
+```html
+<!-- AIDA structure in HTML -->
+<section class="container mx-auto px-4 py-16">
+  <!-- ATTENTION: Hero headline -->
+  <h1 class="text-4xl font-bold tracking-tight lg:text-5xl">
+    Stop Losing Leads to Weak Landing Pages
+  </h1>
+  
+  <!-- INTEREST: Problem development -->
+  <p class="mt-6 text-xl text-muted-foreground">
+    Every visitor that bounces is revenue walking out the door...
+  </p>
+  
+  <!-- DESIRE: Benefit stack -->
+  <div class="mt-12 grid gap-8 lg:grid-cols-3">
+    <!-- Benefits in card layout -->
+  </div>
+  
+  <!-- ACTION: CTA section -->
+  <div class="mt-16 text-center">
+    <button class="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 rounded-lg text-lg font-medium">
+      Build My High-Converting Page
+    </button>
+  </div>
+</section>
 ```
 
 ## Copywriting Formulas
@@ -141,12 +293,47 @@ For each client/product: score each dimension 1–5. Document 3 banned words + 3
 2. Quick win — teach one thing they can apply today
 3. Invitation — offer next step (trial, call, product)
 
-## Flow
+## Production Flows
 
+### VISUAL Mode Flow
+```text
+[Component intent] → [shadcn/ui pattern selection] → [HTML structure]
+→ [Tailwind styling] → [Responsive breakpoints] → [A11y implementation]
+→ [Dark mode variants] → [Lighthouse validation >= 90] → [Publish]
+```
+
+### COPY Mode Flow
 ```text
 [Audience pain/desire] → [Formula selection] → [Hook draft]
 → [Body with FAB/BAB] → [CTA specificity check] → [A/B variants]
 → [Readability score >= 60] → [Brand voice match] → [Publish]
+```
+
+### DUAL Mode Flow
+```text
+[Product + audience] → [Mode detection] → [Copy formula + layout pattern]
+→ [Copy generation] → [Visual hierarchy mapping] → [HTML implementation]
+→ [Semantic integration] → [Responsive styling] → [Dual validation]
+→ [Lighthouse + readability] → [Publish integrated page]
+```
+
+## Mode Detection Rules
+```python
+def select_mode(intent):
+    visual_keywords = ["build", "create", "html", "component", "responsive", "design"]
+    copy_keywords = ["write", "copy", "ad", "email", "headline", "campaign"]
+    
+    has_visual = any(kw in intent.lower() for kw in visual_keywords)
+    has_copy = any(kw in intent.lower() for kw in copy_keywords)
+    
+    if has_visual and has_copy:
+        return "DUAL"  # Integrated page with copy + visual
+    elif has_visual:
+        return "VISUAL"  # Component, layout, styling
+    elif has_copy:
+        return "COPY"  # Headlines, ads, email sequences
+    else:
+        return "UNCLEAR"  # Ask for clarification
 ```
 
 ## Ad Copy Character Limits (Platform Reference)
@@ -179,8 +366,33 @@ For each client/product: score each dimension 1–5. Document 3 banned words + 3
 
 ## Golden Rules
 
-- ALWAYS: identify funnel stage → select formula → write hook first → benefit stack → CTA → TEST note
-- NEVER: start with the product. Start with the reader.
-- ENSURE: every CTA names the specific action AND the specific benefit
-- PRODUCE: minimum 3 headline variants on every task — label V1, V2, V3; mark ★ recommended
-- VERIFY: Flesch score before delivery; fix if below threshold for audience type
+### Visual Frontend Rules
+- **ALWAYS**: Use design tokens, NEVER hardcode hex colors (#HEXCODE prohibited)
+- **ALWAYS**: Build mobile-first with proper breakpoints (sm:, md:, lg:, xl:, 2xl:)
+- **ALWAYS**: Target Lighthouse 90+ performance and WCAG AA accessibility  
+- **ALWAYS**: Use semantic HTML5 elements (header, main, section, article, aside)
+- **NEVER**: Output invalid HTML — validate with W3C before delivery
+- **ENSURE**: Dark mode support with proper token mapping
+- **VERIFY**: Contrast ratios >= 4.5:1 for all text-background combinations
+
+### Copywriting Rules
+- **ALWAYS**: Identify funnel stage → select formula → write hook first → benefit stack → CTA → TEST note
+- **NEVER**: Start with the product. Start with the reader's desire or pain.
+- **ENSURE**: Every CTA names the specific action AND the specific benefit
+- **PRODUCE**: Minimum 3 headline variants on every task — label V1, V2, V3; mark ★ recommended
+- **VERIFY**: Flesch score before delivery; fix if below threshold for audience type
+
+### DUAL Mode Integration Rules
+- **ALWAYS**: Map copy structure to visual hierarchy (PAS → F-pattern, AIDA → Z-pattern)
+- **ALWAYS**: Convert headlines to semantic h1-h6 tags, CTAs to button components
+- **NEVER**: Use styled divs for headlines — proper semantic markup required
+- **ENSURE**: Visual flow supports copy persuasion (F/Z-pattern aligned with formula)
+- **VERIFY**: Both visual gates (Lighthouse) AND copy gates (readability) pass
+
+### Universal Quality Standards
+- **Lighthouse Performance**: >= 90 (VISUAL and DUAL modes)
+- **WCAG Accessibility**: >= AA compliance (4.5:1 contrast minimum)
+- **Copy Readability**: Flesch >= 60 (B2C) or >= 50 (B2B)
+- **CTA Specificity**: Must name benefit + action (not "Click here" or "Learn more")
+- **A/B Variant Count**: Minimum 3 headline variants for testing
+- **Responsive Behavior**: Mobile-first approach, touch-friendly interactions

@@ -123,161 +123,132 @@ Step 4: PERFORMANCE + COMPILE [n02-visual-marketing-hub]
 
 ### Workflow C1: Ad Campaign
 
-**Goal**: Produce complete ad creative set for one campaign (Facebook/Google/LinkedIn)
-**Input required**: Product name, audience segment, key benefit, budget range, campaign objective
-**Output**: Campaign brief + 3 ad variants per format (image/video/carousel) + copy deck
+**Goal**: Produce complete ad creative set for one campaign
+**Input required**: Product name, audience segment, key benefit, campaign objective
+**Output**: Campaign brief + 3 ad variants per platform with A/B headlines and CTAs
 
-### Steps
+#### Steps
 
 ```
-Step 1: BRIEF [n02-marketing-hub]
-  - Input: product/audience/goal from handoff
-  - Action: Write campaign brief (objective, audience, key message, channels, KPIs)
+Step 1: BRIEF + HEADLINES [n02-visual-marketing-hub]
+  - Action: Write campaign brief + generate 10 headline variants with 4U scoring
+  - Select: Top 3 headlines for each platform (FB, Google, LinkedIn)
   - Output: campaign_brief_{mission}.md
   - Signal: brief_complete
 
-Step 2: AUDIENCE [n02-marketing-hub]
-  - Input: campaign brief
-  - Action: Define 3 audience segments with pain points and desire statements
-  - Output: audience_profile_{mission}.md
-  - Signal: audience_complete
-
-Step 3: HEADLINES [n02-marketing-hub]
-  - Input: audience profiles + key benefit
-  - Action: Generate 10 headline variants per segment (score with 4U formula)
-  - Top 3 per segment advance; output: headlines_{mission}.md
-  - Signal: headlines_complete
-
-Step 4: AD COPY [n02-marketing-hub]
-  - Input: top headlines + audience profiles
+Step 2: AD COPY [n02-visual-marketing-hub]
   - Action: Write full ad copy (hook + body + CTA) for each format — 3 A/B variants
+  - Apply: AIDA/PAS formula per platform best practices
   - Output: ad_copy_{mission}.md
-  - Depends on: Steps 2, 3
   - Signal: copy_complete
 
-Step 5: COMPILE + COMMIT [n02-marketing-hub]
-  - Action: Compile all artifacts, git add + commit, write signal
-  - Command: git commit -m "[N02] ad campaign copy — {mission}"
-  - Signal: marketing_copy_complete
+Step 3: COMPILE + COMMIT [n02-visual-marketing-hub]
+  - Validate: CTA specificity, readability check, A/B variant count
+  - Compile + Commit: git commit -m "[N02] ad campaign copy — {mission}"
+  - Signal: copy_complete
+```
+
+### Workflow C2: Email Sequence
+
+**Goal**: Produce 5-email sequence with subject lines and body copy
+**Input required**: Audience, goal type, product/offer
+**Output**: Complete email sequence with A/B subject line variants
+
+#### Steps
+
+```
+Step 1: SEQUENCE PLAN + COPY [n02-visual-marketing-hub]
+  - Action: Map email sequence strategy + write all 5 emails
+  - Include: subject line variants, preview text, body copy, CTAs
+  - Apply: Formula-based copy per email purpose
+  - Output: email_sequence_{mission}.md
+  - Signal: copy_complete
+
+Step 2: COMPILE + COMMIT [n02-visual-marketing-hub]  
+  - Validate: readability, CTA specificity, funnel stage flow
+  - Compile + Commit: git commit -m "[N02] email sequence — {mission}"
+  - Signal: copy_complete
 ```
 
 ---
 
-## Workflow 2: Landing Page Copy
+## DUAL MODE Workflow
 
-**Goal**: Produce full landing page copy for a product or offer
-**Input required**: Product, audience, offer, primary CTA, optional testimonials
-**Output**: Complete LP copy file with all sections
+### Workflow D1: Integrated Landing Page (Visual + Copy)
 
-### Steps
+**Goal**: Build complete landing page where copy and visual work together seamlessly
+**Input required**: Product, audience, funnel stage, copy formula, design style
+**Output**: Full HTML page with embedded persuasive copy using proper visual hierarchy
 
-```
-Step 1: RESEARCH [n02-marketing-hub]
-  - Action: If markitdown/fetch available, pull competitor LP for teardown
-  - Output: competitor_notes_{mission}.md (optional)
-  - Fallback: proceed from KC formulas if no web access
-
-Step 2: HERO SECTION [n02-marketing-hub]
-  - Action: Write headline (10 variants, top 3 selected) + subhead + hero CTA
-  - Apply: 4U formula scoring; select variant with highest score
-  - Output: lp_hero_{mission}.md
-
-Step 3: BODY COPY [n02-marketing-hub]
-  - Sections to write:
-    a. Problem/Agitate block (PAS formula — 150 words)
-    b. Solution intro (2 sentences, transformation language)
-    c. Benefits block (FAB format — 5–7 bullets)
-    d. Social proof section (3 testimonial slots with [NAME] [COMPANY] placeholders)
-    e. Objection-busting FAQ (5 questions, direct answers)
-    f. Final CTA section (urgency + benefit restatement + button copy)
-  - Output: lp_body_{mission}.md
-
-Step 4: COMPILE + COMMIT [n02-marketing-hub]
-  - Merge hero + body into lp_complete_{mission}.md
-  - Run readability check (target Flesch >= 60)
-  - Compile: python _tools/cex_compile.py
-  - Commit: git commit -m "[N02] landing page copy — {mission}"
-  - Signal: marketing_copy_complete
-```
-
----
-
-## Workflow 3: Email Sequence
-
-**Goal**: Produce a 5-email nurture or cold outreach sequence
-**Input required**: Audience, goal (nurture/cold/cart/re-engagement), product/offer
-**Output**: 5 emails with subject lines, preview text, and body copy
-
-### Steps
+#### Steps
 
 ```
-Step 1: SEQUENCE PLAN [n02-marketing-hub]
-  - Input: goal type (nurture | cold | cart | re-engagement)
-  - Action: Select skeleton from KC, map each email to objective
-  - Output: email_plan_{mission}.md
+Step 1: DUAL PLANNING [n02-visual-marketing-hub]
+  - Action: Plan copy formula integration with visual hierarchy
+  - Define: how PAS/AIDA structure maps to F/Z-pattern layout
+  - Output: dual_plan_{mission}.md
   - Signal: plan_complete
 
-Step 2: EMAIL COPY [n02-marketing-hub]
-  - For each email (1–5):
-    - Write subject line (3 variants, select best by curiosity gap)
-    - Write preview text (40–90 chars)
-    - Write email body (formula-matched per email type)
-    - Write CTA (specific + benefit-first)
-  - Output: email_sequence_{mission}.md
-  - Depends on: Step 1
-  - Signal: copy_complete
+Step 2: COPY GENERATION [n02-visual-marketing-hub]
+  - Action: Write persuasive copy following chosen formula
+  - Include: 3 headline variants, benefit blocks, CTAs
+  - Output: copy_content_{mission}.md
+  - Signal: copy_ready
 
-Step 3: COMPILE + COMMIT [n02-marketing-hub]
-  - Compile sequence file
-  - Commit: git commit -m "[N02] email sequence — {mission}"
-  - Signal: marketing_copy_complete
-```
+Step 3: VISUAL INTEGRATION [n02-visual-marketing-hub]
+  - Action: Build HTML page with copy embedded in semantic tags
+  - Ensure: headlines in h1-h6, CTAs as button components, responsive flow
+  - Apply: Tailwind styling that enhances copy readability
+  - Output: integrated_page_{mission}.md
+  - Depends on: Step 2
+  - Signal: visual_ready
 
----
-
----
-
-## Workflow 4: Brand Voice Card
-
-**Goal**: Define and document a brand's writing voice for consistent copy production
-**Input required**: Brand name, brand description, 2–3 copy samples (or NONE), target tone description
-**Output**: Brand voice card with tone scores, signature phrases, banned words, persona anchor
-
-### Steps
-
-```
-Step 1: VOICE EXTRACT [n02-marketing-hub]
-  - If samples provided: analyze tone, vocabulary, energy, person dimensions
-  - If no samples: build from target tone description alone
-  - Score each dimension 1–5: Formal↔Casual, Technical↔Plain, 3rd↔1st, Calm↔Bold
-  - Output: voice_dimensions_{mission}.md
-
-Step 2: VOICE CARD [n02-marketing-hub]
-  - Write: 5 signature phrases the brand says
-  - Write: 5 banned words/phrases the brand never says
-  - Write: persona anchor (brand as a person: age, job, how they talk)
-  - Write: 3 before/after examples showing voice applied to weak copy
-  - Write: voice flex rules (when voice can adapt, when it must hold)
-  - Output: brand_voice_card_{mission}.md
-
-Step 3: COMPILE + COMMIT [n02-marketing-hub]
-  - Compile voice card
-  - Commit: git commit -m "[N02] brand voice card — {mission}"
-  - Signal: marketing_copy_complete
+Step 4: DUAL VALIDATION + COMPILE [n02-visual-marketing-hub]
+  - Validate: BOTH visual gates (Lighthouse >= 90) AND copy gates (readability, CTA)
+  - Test: copy-visual integration quality, hierarchy supporting persuasion
+  - Compile + Commit: git commit -m "[N02] integrated landing page — {mission}"
+  - Signal: dual_complete
 ```
 
 ---
 
 ## Error Handling
 
-- **Step fails**: retry once with revised prompt; if still fail, signal `marketing_copy_error` to N07
+### Mode-Aware Error Handling
+
+**VISUAL Mode Failures**:
+- **Lighthouse < 90**: optimize images, minify CSS, retry once
+- **W3C validation errors**: fix HTML structure, retry with corrected markup  
+- **Accessibility failures**: add ARIA labels, improve contrast, fix keyboard nav
+- **Responsive failures**: adjust breakpoints, test on multiple devices
+
+**COPY Mode Failures**:
 - **Quality gate fails** (score < 8.0): return to copy step, apply F6 retry, max 2 revisions
-- **MCP unavailable**: proceed with formula-based approach from KC; note in output
-- **No brand voice card**: write in neutral professional tone; flag "[BRAND VOICE CARD RECOMMENDED]" at top
+- **Readability fails** (Flesch < target): simplify sentences, remove jargon, retry
+- **CTA too generic**: rewrite with benefit-first template, retry
+
+**DUAL Mode Failures**:
+- **Copy-visual mismatch**: realign visual hierarchy with copy structure
+- **Integration quality low**: improve semantic HTML for copy elements
+- **Either dimension fails**: apply mode-specific fixes above
+
+**Universal Failures**:
+- **Step fails completely**: retry once with revised prompt; if still fail, signal `workflow_error` to N07
+- **MCP unavailable**: proceed with local tools; browser MCP → manual validation, markitdown → formula-based KC
+- **Model upgrade needed**: switch to Opus for complex HTML tasks automatically
 
 ## Signals
 
 | Signal | Emitter | Meaning |
 |--------|---------|---------|
-| marketing_copy_complete | n02-marketing-hub | All deliverables saved, compiled, committed |
-| marketing_copy_error | n02-marketing-hub | Unrecoverable failure, escalate to N07 |
+| **visual_complete** | n02-visual-marketing-hub | HTML/CSS deliverable saved, Lighthouse validated, compiled, committed |
+| **copy_complete** | n02-visual-marketing-hub | Copy deliverable saved, readability checked, compiled, committed |
+| **dual_complete** | n02-visual-marketing-hub | Integrated page saved, both visual AND copy gates passed, committed |
+| **workflow_error** | n02-visual-marketing-hub | Unrecoverable failure in any mode, escalate to N07 |
+| **mode_detected** | n02-visual-marketing-hub | Workflow routing complete, mode identified for execution |
+
+## Quality Gate Integration
+
+- **VISUAL workflows**: Must pass V01-V09 gates (Lighthouse, W3C, a11y, responsive, tokens)
+- **COPY workflows**: Must pass C01-C05 gates (funnel stage, CTA, headlines, readability, hook)  
+- **DUAL workflows**: Must pass ALL visual + copy gates + integration quality checks (SD01-SD03)
