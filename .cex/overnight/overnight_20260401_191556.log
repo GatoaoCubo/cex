@@ -1,0 +1,189 @@
+﻿[2026-04-01 19:15:57] [INFO] ============================================================
+[2026-04-01 19:15:57] [INFO]   CEX OVERNIGHT FLYWHEEL
+[2026-04-01 19:15:57] [INFO] ============================================================
+[2026-04-01 19:15:57] [INFO] Started: 2026-04-01T19:15:57.0550423-03:00
+[2026-04-01 19:15:57] [INFO] Budget:  500000 tokens
+[2026-04-01 19:15:57] [INFO] Target:  9
+[2026-04-01 19:15:57] [INFO] Thresh:  8.5
+[2026-04-01 19:15:57] [INFO] Cycles:  max 1
+[2026-04-01 19:15:57] [INFO] Phase:   bootstrap
+[2026-04-01 19:15:57] [INFO] DryRun:  True
+[2026-04-01 19:15:57] [INFO] Log:     C:\Users\PC\Documents\GitHub\cex\.cex\overnight\overnight_20260401_191556.log
+[2026-04-01 19:15:57] [INFO] 
+[2026-04-01 19:15:57] [INFO] ============================================================
+[2026-04-01 19:15:57] [INFO]   FLYWHEEL CYCLE 1 / 1
+[2026-04-01 19:15:57] [INFO] ============================================================
+[2026-04-01 19:15:57] [INFO] Budget remaining: 500000 tokens
+[2026-04-01 19:15:57] [INFO] ============================================================
+[2026-04-01 19:15:57] [INFO]   PHASE 1: BOOTSTRAP
+[2026-04-01 19:15:57] [INFO] ============================================================
+[2026-04-01 19:15:57] [INFO] N03 (Builder Architect): 0 artifacts. Bootstrapping...
+[2026-04-01 19:15:57] [INFO]   Building: N03/agent -- create agent for creation nucleus
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create agent for creation nucleus' --kind agent
+[2026-04-01 19:15:57] [INFO]   Building: N03/system_prompt -- create system prompt for creation nucleus
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create system prompt for creation nucleus' --kind system_prompt
+[2026-04-01 19:15:57] [INFO]   Building: N03/knowledge_card -- create knowledge card about creation best practices
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create knowledge card about creation best practices' --kind knowledge_card
+[2026-04-01 19:15:57] [INFO]   Building: N03/agent_card -- create agent card for creation nucleus
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create agent card for creation nucleus' --kind agent_card
+[2026-04-01 19:15:57] [INFO]   Building: N03/workflow -- create workflow for creation pipeline
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create workflow for creation pipeline' --kind workflow
+[2026-04-01 19:15:57] [INFO]   Building: N03/quality_gate -- create quality gate for creation artifacts
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create quality gate for creation artifacts' --kind quality_gate
+[2026-04-01 19:15:57] [INFO]   Building: N03/scoring_rubric -- create scoring rubric for creation evaluation
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create scoring rubric for creation evaluation' --kind scoring_rubric
+[2026-04-01 19:15:57] [INFO]   Building: N03/dispatch_rule -- create dispatch rule for creation routing
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create dispatch rule for creation routing' --kind dispatch_rule
+[2026-04-01 19:15:57] [INFO]   Building: N03/schema -- create schema contract for creation data model
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create schema contract for creation data model' --kind schema
+[2026-04-01 19:15:57] [INFO]   Building: N03/output_template -- create output template for creation reports
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create output template for creation reports' --kind output_template
+[2026-04-01 19:15:57] [INFO]   Building: N03/prompt_template -- create prompt template for creation tasks
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create prompt template for creation tasks' --kind prompt_template
+[2026-04-01 19:15:57] [INFO] N05 (DevOps Engineer): 0 artifacts. Bootstrapping...
+[2026-04-01 19:15:57] [INFO]   Building: N05/agent -- create agent for engineering nucleus
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create agent for engineering nucleus' --kind agent
+[2026-04-01 19:15:57] [INFO]   Building: N05/system_prompt -- create system prompt for engineering nucleus
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create system prompt for engineering nucleus' --kind system_prompt
+[2026-04-01 19:15:57] [INFO]   Building: N05/knowledge_card -- create knowledge card about engineering best practices
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create knowledge card about engineering best practices' --kind knowledge_card
+[2026-04-01 19:15:57] [INFO]   Building: N05/agent_card -- create agent card for engineering nucleus
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create agent card for engineering nucleus' --kind agent_card
+[2026-04-01 19:15:57] [INFO]   Building: N05/workflow -- create workflow for engineering pipeline
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create workflow for engineering pipeline' --kind workflow
+[2026-04-01 19:15:57] [INFO]   Building: N05/quality_gate -- create quality gate for engineering artifacts
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create quality gate for engineering artifacts' --kind quality_gate
+[2026-04-01 19:15:57] [INFO]   Building: N05/scoring_rubric -- create scoring rubric for engineering evaluation
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create scoring rubric for engineering evaluation' --kind scoring_rubric
+[2026-04-01 19:15:57] [INFO]   Building: N05/dispatch_rule -- create dispatch rule for engineering routing
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create dispatch rule for engineering routing' --kind dispatch_rule
+[2026-04-01 19:15:57] [INFO]   Building: N05/schema -- create schema contract for engineering data model
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create schema contract for engineering data model' --kind schema
+[2026-04-01 19:15:57] [INFO]   Building: N05/output_template -- create output template for engineering reports
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create output template for engineering reports' --kind output_template
+[2026-04-01 19:15:57] [INFO]   Building: N05/prompt_template -- create prompt template for engineering tasks
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create prompt template for engineering tasks' --kind prompt_template
+[2026-04-01 19:15:57] [INFO] N06 (Brand Architect): 0 artifacts. Bootstrapping...
+[2026-04-01 19:15:57] [INFO]   Building: N06/agent -- create agent for brand nucleus
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create agent for brand nucleus' --kind agent
+[2026-04-01 19:15:57] [INFO]   Building: N06/system_prompt -- create system prompt for brand nucleus
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create system prompt for brand nucleus' --kind system_prompt
+[2026-04-01 19:15:57] [INFO]   Building: N06/knowledge_card -- create knowledge card about brand best practices
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create knowledge card about brand best practices' --kind knowledge_card
+[2026-04-01 19:15:57] [INFO]   Building: N06/agent_card -- create agent card for brand nucleus
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create agent card for brand nucleus' --kind agent_card
+[2026-04-01 19:15:57] [INFO]   Building: N06/workflow -- create workflow for brand pipeline
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create workflow for brand pipeline' --kind workflow
+[2026-04-01 19:15:57] [INFO]   Building: N06/quality_gate -- create quality gate for brand artifacts
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create quality gate for brand artifacts' --kind quality_gate
+[2026-04-01 19:15:57] [INFO]   Building: N06/scoring_rubric -- create scoring rubric for brand evaluation
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create scoring rubric for brand evaluation' --kind scoring_rubric
+[2026-04-01 19:15:57] [INFO]   Building: N06/dispatch_rule -- create dispatch rule for brand routing
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create dispatch rule for brand routing' --kind dispatch_rule
+[2026-04-01 19:15:57] [INFO]   Building: N06/schema -- create schema contract for brand data model
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create schema contract for brand data model' --kind schema
+[2026-04-01 19:15:57] [INFO]   Building: N06/output_template -- create output template for brand reports
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create output template for brand reports' --kind output_template
+[2026-04-01 19:15:57] [INFO]   Building: N06/prompt_template -- create prompt template for brand tasks
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create prompt template for brand tasks' --kind prompt_template
+[2026-04-01 19:15:57] [INFO] N07 (Mission Control): 0 artifacts. Bootstrapping...
+[2026-04-01 19:15:57] [INFO]   Building: N07/agent -- create agent for orchestration nucleus
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create agent for orchestration nucleus' --kind agent
+[2026-04-01 19:15:57] [INFO]   Building: N07/system_prompt -- create system prompt for orchestration nucleus
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create system prompt for orchestration nucleus' --kind system_prompt
+[2026-04-01 19:15:57] [INFO]   Building: N07/knowledge_card -- create knowledge card about orchestration best practices
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create knowledge card about orchestration best practices' --kind knowledge_card
+[2026-04-01 19:15:57] [INFO]   Building: N07/agent_card -- create agent card for orchestration nucleus
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create agent card for orchestration nucleus' --kind agent_card
+[2026-04-01 19:15:57] [INFO]   Building: N07/workflow -- create workflow for orchestration pipeline
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create workflow for orchestration pipeline' --kind workflow
+[2026-04-01 19:15:57] [INFO]   Building: N07/quality_gate -- create quality gate for orchestration artifacts
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create quality gate for orchestration artifacts' --kind quality_gate
+[2026-04-01 19:15:57] [INFO]   Building: N07/scoring_rubric -- create scoring rubric for orchestration evaluation
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create scoring rubric for orchestration evaluation' --kind scoring_rubric
+[2026-04-01 19:15:57] [INFO]   Building: N07/dispatch_rule -- create dispatch rule for orchestration routing
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create dispatch rule for orchestration routing' --kind dispatch_rule
+[2026-04-01 19:15:57] [INFO]   Building: N07/schema -- create schema contract for orchestration data model
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create schema contract for orchestration data model' --kind schema
+[2026-04-01 19:15:57] [INFO]   Building: N07/output_template -- create output template for orchestration reports
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create output template for orchestration reports' --kind output_template
+[2026-04-01 19:15:57] [INFO]   Building: N07/prompt_template -- create prompt template for orchestration tasks
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would run: cex_run.py 'create prompt template for orchestration tasks' --kind prompt_template
+[2026-04-01 19:15:57] [INFO]   Filling gap: N01/agent
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would build N01/agent
+[2026-04-01 19:15:57] [INFO]   Filling gap: N01/system_prompt
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would build N01/system_prompt
+[2026-04-01 19:15:57] [INFO]   Filling gap: N01/knowledge_card
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would build N01/knowledge_card
+[2026-04-01 19:15:57] [INFO]   Filling gap: N01/agent_card
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would build N01/agent_card
+[2026-04-01 19:15:57] [INFO]   Filling gap: N01/workflow
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would build N01/workflow
+[2026-04-01 19:15:57] [INFO]   Filling gap: N01/quality_gate
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would build N01/quality_gate
+[2026-04-01 19:15:57] [INFO]   Filling gap: N01/scoring_rubric
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would build N01/scoring_rubric
+[2026-04-01 19:15:57] [INFO]   Filling gap: N01/dispatch_rule
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would build N01/dispatch_rule
+[2026-04-01 19:15:57] [INFO]   Filling gap: N01/schema
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would build N01/schema
+[2026-04-01 19:15:57] [INFO]   Filling gap: N01/output_template
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would build N01/output_template
+[2026-04-01 19:15:57] [INFO]   Filling gap: N01/prompt_template
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would build N01/prompt_template
+[2026-04-01 19:15:57] [INFO]   Filling gap: N02/agent
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would build N02/agent
+[2026-04-01 19:15:57] [INFO]   Filling gap: N02/system_prompt
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would build N02/system_prompt
+[2026-04-01 19:15:57] [INFO]   Filling gap: N02/knowledge_card
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would build N02/knowledge_card
+[2026-04-01 19:15:57] [INFO]   Filling gap: N02/agent_card
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would build N02/agent_card
+[2026-04-01 19:15:57] [INFO]   Filling gap: N02/workflow
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would build N02/workflow
+[2026-04-01 19:15:57] [INFO]   Filling gap: N02/quality_gate
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would build N02/quality_gate
+[2026-04-01 19:15:57] [INFO]   Filling gap: N02/scoring_rubric
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would build N02/scoring_rubric
+[2026-04-01 19:15:57] [INFO]   Filling gap: N02/dispatch_rule
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would build N02/dispatch_rule
+[2026-04-01 19:15:57] [INFO]   Filling gap: N02/schema
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would build N02/schema
+[2026-04-01 19:15:57] [INFO]   Filling gap: N02/output_template
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would build N02/output_template
+[2026-04-01 19:15:57] [INFO]   Filling gap: N02/prompt_template
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would build N02/prompt_template
+[2026-04-01 19:15:57] [INFO]   Filling gap: N04/agent
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would build N04/agent
+[2026-04-01 19:15:57] [INFO]   Filling gap: N04/system_prompt
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would build N04/system_prompt
+[2026-04-01 19:15:57] [INFO]   Filling gap: N04/knowledge_card
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would build N04/knowledge_card
+[2026-04-01 19:15:57] [INFO]   Filling gap: N04/agent_card
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would build N04/agent_card
+[2026-04-01 19:15:57] [INFO]   Filling gap: N04/workflow
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would build N04/workflow
+[2026-04-01 19:15:57] [INFO]   Filling gap: N04/quality_gate
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would build N04/quality_gate
+[2026-04-01 19:15:57] [INFO]   Filling gap: N04/scoring_rubric
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would build N04/scoring_rubric
+[2026-04-01 19:15:57] [INFO]   Filling gap: N04/dispatch_rule
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would build N04/dispatch_rule
+[2026-04-01 19:15:57] [INFO]   Filling gap: N04/schema
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would build N04/schema
+[2026-04-01 19:15:57] [INFO]   Filling gap: N04/output_template
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would build N04/output_template
+[2026-04-01 19:15:57] [INFO]   Filling gap: N04/prompt_template
+[2026-04-01 19:15:57] [DRY]   [DRY-RUN] Would build N04/prompt_template
+[2026-04-01 19:15:57] [INFO] Bootstrap complete. 0 artifacts created.
+[2026-04-01 19:15:57] [INFO] Artifacts still below target: 158
+[2026-04-01 19:15:57] [INFO] 
+[2026-04-01 19:16:03] [INFO] ============================================================
+[2026-04-01 19:16:03] [INFO]   OVERNIGHT COMPLETE
+[2026-04-01 19:16:03] [INFO] ============================================================
+[2026-04-01 19:16:03] [INFO] Cycles:    1
+[2026-04-01 19:16:03] [INFO] Created:   0
+[2026-04-01 19:16:03] [INFO] Evolved:   0
+[2026-04-01 19:16:03] [INFO] Tokens:    0 / 500000
+[2026-04-01 19:16:03] [INFO] Duration:  0h
+[2026-04-01 19:16:03] [INFO] Log:       C:\Users\PC\Documents\GitHub\cex\.cex\overnight\overnight_20260401_191556.log
