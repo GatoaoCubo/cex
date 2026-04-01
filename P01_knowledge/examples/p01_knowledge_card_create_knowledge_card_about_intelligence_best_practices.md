@@ -1,0 +1,90 @@
+---
+id: p01_kc_intelligence_best_practices
+kind: knowledge_card
+pillar: P01
+title: "Intelligence Best Practices for Research and Analysis"
+version: "1.0.0"
+created: "2026-04-01"
+updated: "2026-04-01"
+author: "builder"
+domain: intelligence_research
+quality: 0.0
+tags: [intelligence, research, analysis, osint, investigation, methodology, knowledge]
+tldr: "Intelligence gathering requires 5-source minimum, 72-hour collection cycles, structured analysis with ACH methodology, and confidence scoring 0.0-1.0"
+when_to_use: "When conducting research requiring verified facts, competitive analysis, or evidence-based decision making"
+keywords: [intelligence, research, osint, analysis, sources, verification]
+long_tails:
+  - How to verify intelligence sources using triangulation
+  - Structured analytic techniques for bias reduction
+  - Open source intelligence collection methodology
+axioms:
+  - ALWAYS verify claims through minimum 3 independent sources
+  - NEVER rely on single-source intelligence for critical decisions
+  - IF confidence below 0.7 THEN flag as preliminary assessment
+linked_artifacts:
+  primary: null
+  related: [p01_kc_research_pipeline_fundamentals]
+density_score: 0.89
+data_source: "https://www.cia.gov/resources/csi/books-and-monographs/psychology-of-intelligence-analysis/"
+---
+
+# Intelligence Best Practices for Research and Analysis
+
+## Quick Reference
+```yaml
+topic: intelligence_best_practices
+scope: OSINT collection, structured analysis, bias mitigation
+owner: intelligence_analyst
+criticality: high
+```
+
+## Key Concepts
+- **Source Grading**: A1 (reliable source, confirmed info) to F6 (unreliable source, unconfirmed)
+- **Collection Cycle**: Plan → Direct → Collect → Process → Analyze → Disseminate (72h max)
+- **ACH Method**: Analysis of Competing Hypotheses with evidence matrix scoring
+- **Confidence Levels**: High (0.8-1.0), Medium (0.5-0.79), Low (0.1-0.49), Speculative (<0.1)
+
+## Strategy Phases
+1. **Requirements**: Define PIRs (Priority Intelligence Requirements) with success criteria
+2. **Collection**: Multi-source OSINT using 5+ independent channels per claim
+3. **Processing**: Raw data → structured format with source attribution
+4. **Analysis**: Apply ACH methodology with bias checks and red-team review
+5. **Production**: Confidence-scored assessments with alternative scenarios
+6. **Dissemination**: Time-bounded delivery with update triggers
+
+## Golden Rules
+- TRIANGULATE: Minimum 3 independent sources per fact claim
+- TIMESTAMP: All intelligence expires; mark collection and validity dates  
+- GRADE: Source reliability (A-F) + information credibility (1-6)
+- CAVEAT: State assumptions, gaps, and confidence levels explicitly
+- UPDATE: Intelligence degrades; refresh every 30-90 days based on volatility
+
+## Anti-Patterns
+- **Single Source Syndrome**: Acting on unverified single-source intelligence
+- **Confirmation Bias**: Cherry-picking sources that support preconceptions
+- **Recency Bias**: Over-weighting recent information vs. historical patterns
+- **Analysis Paralysis**: Endless collection without assessment deadlines
+- **False Precision**: Claiming high confidence without adequate evidence
+- **Stale Intelligence**: Using outdated information without validity checks
+
+## Flow
+```text
+[PIRs] → [Multi-Source Collection] → [Source Grading] → [ACH Analysis]
+                                                              |
+[Confidence Scoring] ← [Bias Check] ← [Evidence Matrix] ←────┘
+        |
+[Report + Caveats] → [Disseminate] → [Feedback Loop]
+```
+
+## Comparativo
+| Source Type | Reliability | Speed | Coverage | Verification |
+|-------------|------------|-------|----------|--------------|
+| HUMINT | Medium-High | Slow | Narrow | Hard |
+| OSINT | Variable | Fast | Broad | Easy |
+| SIGINT | High | Fast | Targeted | Medium |
+| Documents | High | Medium | Deep | Easy |
+
+## References
+- CIA Psychology of Intelligence Analysis: https://www.cia.gov/resources/csi/books-and-monographs/psychology-of-intelligence-analysis/
+- Structured Analytic Techniques: RAND Corp methodology guides
+- OSINT Framework: https://osintframework.com/
