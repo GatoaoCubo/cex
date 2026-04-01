@@ -1,5 +1,5 @@
 ---
-id: p11_qg_intelligence_artifacts
+id: p11_qg_intelligence
 kind: quality_gate
 pillar: P11
 title: "Gate: Intelligence Artifacts"
@@ -10,65 +10,72 @@ author: "quality-gate-builder"
 domain: "intelligence"
 quality: 8.9
 tags: [quality-gate, intelligence, research, analysis, n01]
-tldr: "Quality gate for intelligence artifacts: research depth, source verification, factual accuracy with 8.0+ threshold"
+tldr: "Quality gate for intelligence artifacts: verifies source quality, analytical rigor, and actionable insights >= 8.0"
 density_score: 0.87
 ---
 ## Definition
+A quality gate for intelligence artifacts produced by N01 nucleus, including research reports, market analyses, competitor intelligence, trend reports, and strategic assessments. Ensures high-quality research standards with verifiable sources and actionable insights.
 
 | Property | Value |
 |----------|-------|
-| Metric | intelligence_quality_score |
+| Metric | weighted_intelligence_score |
 | Threshold | 8.0 |
 | Operator | >= |
-| Scope | All intelligence artifacts (research briefs, competitor analysis, trend reports, market intelligence) before publication |
+| Scope | All intelligence artifacts before publication or strategic decision-making |
 
 ## HARD Gates
+Failure on any single gate results in immediate rejection regardless of soft scores.
 
-Failure on any single gate results in immediate rejection regardless of soft score.
-
-| ID  | Criterion | Failure Action |
-|-----|-----------|---------------|
+| ID | Criterion | Failure Action |
+|----|-----------|----------------|
 | H01 | YAML frontmatter parses without error | block |
-| H02 | ID matches pattern `{pillar}_{kind}_{slug}` | block |
+| H02 | ID follows namespace pattern (research_, analysis_, intel_) | block |
 | H03 | ID equals filename stem | block |
-| H04 | Kind field equals declared artifact type | block |
-| H05 | Quality field is null at authoring time | block |
-| H06 | All required frontmatter fields present | block |
-| H07 | Research methodology section present with >= 2 sources | block |
-| H08 | Executive summary present and <= 500 words | block |
-| H09 | Key findings section with >= 3 numbered insights | block |
-| H10 | Source attribution for all factual claims | block |
+| H04 | kind field matches intelligence artifact type | block |
+| H05 | quality field is null at authoring time | block |
+| H06 | Required frontmatter fields present and non-empty | block |
+| H07 | At least 3 credible sources cited with URLs or references | block |
+| H08 | Methodology section present explaining research approach | block |
+| H09 | Executive summary <= 200 words covering key findings | block |
+| H10 | Findings section with >= 3 distinct insights or data points | block |
 
-## SOFT Scoring
+## SOFT Gates
+Score each dimension 0-1. Final score calculated using weighted formula.
 
-Each dimension scored 0.0-1.0, multiplied by weight. Formula: `final_score = sum(dimension_score * weight) * 10`
+| ID | Criterion | Weight | Scoring Method |
+|----|-----------|--------|----------------|
+| S01 | Source credibility (academic, industry reports, primary data) | 20% | graduated |
+| S02 | Analytical depth (multiple perspectives, trend analysis, implications) | 20% | graduated |
+| S03 | Data recency (sources within 24 months, current market conditions) | 15% | binary |
+| S04 | Actionable insights (specific recommendations or strategic implications) | 15% | graduated |
+| S05 | Methodology transparency (clear research process, limitations noted) | 10% | binary |
+| S06 | Completeness of coverage (addresses key dimensions of the topic) | 10% | graduated |
+| S07 | Competitive analysis included when relevant to domain | 5% | binary |
+| S08 | Quantitative data supporting qualitative claims | 5% | binary |
 
-| ID  | Dimension | Weight | Scoring Method |
-|-----|-----------|--------|----------------|
-| S01 | Research depth | 25% | Graduated: shallow (0.0), adequate (0.5), comprehensive (0.8), exhaustive (1.0) |
-| S02 | Source quality | 20% | Binary per source: credible (1.0) or questionable (0.0), averaged across all sources |
-| S03 | Factual accuracy | 25% | Graduated: verifiable claims rate (0-100% = 0.0-1.0 score) |
-| S04 | Actionability | 15% | Binary: concrete recommendations present (1.0) or vague conclusions only (0.0) |
-| S05 | Completeness | 15% | Graduated: addresses stated scope fully (1.0), partially (0.6), minimally (0.2) |
+**Total weights: 100%**
 
-**Weight total**: 100%. **Score range**: 0.0-10.0.
+## Scoring Formula
+```
+soft_score = (S01×0.20 + S02×0.20 + S03×0.15 + S04×0.15 + S05×0.10 + S06×0.10 + S07×0.05 + S08×0.05)
+final_score = hard_gates_pass ? (soft_score × 10) : 0
+PASS condition: all HARD gates pass AND final_score >= 8.0
+```
 
 ## Actions
-
 | Tier | Threshold | Action |
 |------|-----------|--------|
-| GOLDEN | >= 9.5 | Publish to intelligence pool; flag as reference-quality research |
-| PUBLISH | >= 8.0 | Publish to pool; suitable for decision-making use |
-| REVIEW | >= 7.0 | Return to analyst with scored feedback; one revision cycle allowed |
-| REJECT | < 7.0 | Block from pool; requires substantial rework of research methodology |
+| GOLDEN | >= 9.5 | Publish to intelligence pool; mark as reference quality |
+| PUBLISH | >= 8.0 | Approve for strategic use; add to knowledge base |
+| REVIEW | >= 7.0 | Return with feedback; one revision cycle allowed |
+| REJECT | < 7.0 | Block from use; requires significant rework |
 
-## Bypass
-
+## Bypass Policy
 | Field | Value |
 |-------|-------|
-| Condition | Time-sensitive intelligence with verified high-impact findings scoring 7.5-7.9 |
-| Approver | N01 nucleus lead or intelligence pillar owner |
-| Audit log | Record in `.cex/runtime/audits/intelligence_bypasses.log` with timestamp, approver, rationale |
-| Expiry | 72 hours from bypass grant; must achieve full compliance within timeframe |
+| Condition | Time-critical intelligence with partial source verification (crisis response, urgent market events) |
+| Approver | N01 nucleus lead or intelligence chief |
+| Audit Log | Record in `.cex/runtime/decisions/intelligence_bypasses.md` with timestamp, approver, risk assessment |
+| Expiry | 7 days from bypass grant; full compliance required before expiry |
 
-**Note**: H01, H05, and H10 (source attribution) gates cannot be bypassed under any circumstances.
+Note: H01, H05, and H07 (source requirements) cannot be bypassed under any circumstances.
