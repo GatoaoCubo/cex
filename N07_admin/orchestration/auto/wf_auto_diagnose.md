@@ -8,7 +8,7 @@ created: 2026-03-31
 author: n07_orchestrator
 domain: orchestration
 trigger: health_degraded
-quality: null
+quality: 8.8
 tags: [workflow, auto, n07, diagnose, observability, sre]
 tldr: "When /doctor shows degradation (new FAILs, WARN increase, test regressions), deep-diagnose root cause and suggest fixes."
 density_score: 0.91

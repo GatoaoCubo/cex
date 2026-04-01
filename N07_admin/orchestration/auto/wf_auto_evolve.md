@@ -2,51 +2,84 @@
 id: p12_wf_auto_evolve
 kind: workflow
 pillar: P12
-title: "Auto-Evolve — Continuous learning from gaps"
-version: 1.0.0
+title: "Auto-Evolve — Autonomous Experiment Loop + Gap Fill"
+version: 2.0.0
 created: 2026-03-31
+updated: 2026-03-31
 author: n07_orchestrator
 domain: orchestration
-trigger: gap_detector_triggers
-quality: null
-tags: [workflow, auto, n07, evolve, learning, gap, mlops]
-tldr: "When a gap is detected (missing KC, weak builder, new pattern), auto-create the artifact to fill it."
-density_score: 0.91
+trigger: gap_detector_triggers OR /evolve command
+quality: 8.8
+tags: [workflow, auto, n07, evolve, autoresearch, experiment, gap, mlops]
+tldr: "Two modes: (1) AutoResearch loop — evolve existing artifacts via experiment (modify→measure→keep/discard). (2) Gap fill — detect missing artifacts and create them."
+density_score: 0.93
 ---
 
-# Auto-Evolve
+# Auto-Evolve v2 — AutoResearch + Gap Fill
 
-## Trigger
-- Doctor reports missing builder specs
-- Query returns 0 results for a kind
-- User asks about domain with no KC
-- Quality scores consistently below threshold for a nucleus
-- New kind requested that doesn't exist
+## Two Modes
 
-## Industry Pattern
-MLOps continuous learning. System improves itself by detecting and filling gaps.
+### Mode A: Experiment Loop (AutoResearch pattern)
+For **existing** artifacts. Inspired by Karpathy's AutoResearch.
 
-## Steps
+```
+LOOP (max N rounds):
+  1. Analyze weaknesses (density, frontmatter, structure)
+  2. Apply improvement (single change)
+  3. Validate (compile)
+  4. Measure (cex_score.py → quality scalar)
+  5. IF quality improved → git commit KEEP
+     IF not → git restore DISCARD
+  6. Log to .cex/experiments/results.tsv
+  7. IF quality >= target → STOP
+```
+
+**3-File Mapping**:
+| AutoResearch | CEX |
+|-------------|-----|
+| program.md (goals) | CLAUDE.md + quality_gate + scoring_rubric |
+| train.py (modifiable) | Target .md artifact |
+| prepare.py (metric) | cex_score.py + cex_compile.py (immutable) |
+
+**Tool**: `python _tools/cex_evolve.py single <file> --target 9.0`
+
+### Mode B: Gap Fill (original auto-evolve)
+For **missing** artifacts. Detect and create.
 
 | # | Action | Tool | Output |
 |---|--------|------|--------|
-| 1 | Detect gap | `cex_doctor.py`, `cex_query.py`, quality trends | Gap classification |
-| 2 | Classify priority | Impact × frequency | P1 (critical) to P3 (nice-to-have) |
-| 3 | Plan fill | Determine kind, pillar, path | Artifact plan |
-| 4 | Build artifact | 8F pipeline (in-session or dispatch) | New artifact |
-| 5 | Validate | compile + doctor | Passes checks |
-| 6 | Record evolution | `cex_memory_update.py` | Learning record |
+| 1 | Detect gap | `cex_doctor.py`, `cex_query.py` | Gap classification |
+| 2 | Classify | Impact × frequency | P1-P3 priority |
+| 3 | Plan | Determine kind, pillar, path | Artifact plan |
+| 4 | Build | 8F pipeline | New artifact |
+| 5 | Validate | compile + doctor | Pass checks |
+| 6 | Record | `cex_memory_update.py` | Learning record |
 
 ## Gap Types
 
-| Type | Detection | Fill Action |
-|------|-----------|-------------|
-| Missing KC | `cex_query.py` returns 0 | Create KC via 8F |
-| Weak builder | Doctor FAIL for kind | Create/fix missing builder specs |
-| Missing kind | User intent maps to nothing | Register in `kinds_meta.json` |
-| Stale KC | Updated date >90 days | Refresh content |
-| Missing output template | Nucleus has no outputs | Create output template |
-| Missing schema | Nucleus has no schemas | Create schema |
+| Type | Detection | Action |
+|------|-----------|--------|
+| Missing KC | `cex_query.py` returns 0 | Create KC |
+| Weak builder | Doctor FAIL | Fix builder specs |
+| Missing kind | Intent maps to nothing | Register kind |
+| Stale KC | Updated >90 days | Mode A: evolve refresh |
+| Low quality | quality < 8.0 | Mode A: evolve improve |
+| Missing output | Nucleus has 0 outputs | Mode B: create |
+
+## Commands
+```bash
+# Mode A: Evolve one artifact
+python _tools/cex_evolve.py single <file> --target 9.0
+
+# Mode A: Evolve all quality:null
+python _tools/cex_evolve.py sweep --target 8.5
+
+# Mode A: View experiment history
+python _tools/cex_evolve.py report
+
+# Mode B: Gap scan + fill
+python _tools/cex_auto.py cycle --max 5
+```
 
 ## Failure Mode
-Can't auto-create (needs user decision) → add to `.cex/runtime/plans/evolution_backlog.md` for next `/guide` session.
+Can't auto-improve (plateau or subjective) → backlog for `/guide` session.

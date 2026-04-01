@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: patterns
-quality: null
+quality: 8.4
 tags: [pattern, skill, llm]
 tldr: "Allocate context window like a budget. System prompt (never trim) > task > manifest > brand > KC > examples."
 keywords: [token-budget, context-window, allocation, priority]

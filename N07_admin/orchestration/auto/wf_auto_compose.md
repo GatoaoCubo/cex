@@ -8,7 +8,7 @@ created: 2026-03-31
 author: n07_orchestrator
 domain: orchestration
 trigger: prompt_assembly
-quality: null
+quality: 8.8
 tags: [workflow, auto, n07, compose, rag, prompt]
 tldr: "Assembles the full prompt for a nucleus: builder specs + KCs + brand + memory + task + examples. RAG prompt chaining."
 density_score: 0.93

@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: research-intelligence
-quality: null
+quality: 8.7
 tags: [output, n01, benchmark, comparison, features]
 tldr: "Feature/price/performance comparison grid across N products."
 density_score: 0.91

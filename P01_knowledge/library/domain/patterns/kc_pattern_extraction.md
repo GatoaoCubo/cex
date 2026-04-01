@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: patterns
-quality: null
+quality: 8.6
 tags: [pattern, extraction, mining, reuse, knowledge]
 tldr: "Identify recurring solutions in code/conversations, abstract into reusable patterns. Input: N examples. Output: pattern template + when_to_use + anti-patterns."
 when_to_use: "After completing multiple similar tasks, consolidate learnings into a reusable pattern"

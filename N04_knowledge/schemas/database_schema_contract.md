@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: knowledge-management
-quality: null
+quality: 8.6
 tags: [schema, n04, database, supabase, sql, tables, embedding]
 tldr: "Supabase table schemas: kcs (metadata), embeddings (vectors), search_index (FTS), audit_log (changes)."
 density_score: 0.93

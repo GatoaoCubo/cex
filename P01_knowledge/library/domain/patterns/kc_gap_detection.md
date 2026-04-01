@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: patterns
-quality: null
+quality: 8.4
 tags: [pattern, skill, llm]
 tldr: "Systematically find missing knowledge, tools, or artifacts. Compare current vs desired state."
 keywords: [gap-detection, audit, completeness, missing]

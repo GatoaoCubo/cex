@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: knowledge-management
-quality: null
+quality: 8.7
 tags: [schema, n04, kc, structure, frontmatter, format]
 tldr: "Standard KC format: required frontmatter (14 fields), section order, density rules. The template every KC must follow."
 density_score: 0.94

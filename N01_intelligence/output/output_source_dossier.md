@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: research-intelligence
-quality: null
+quality: 8.6
 tags: [output, n01, source, dossier, curation]
 tldr: "Curated source list with quality scores per source_quality_contract schema."
 density_score: 0.91

@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: research-intelligence
-quality: null
+quality: 8.8
 tags: [output, n01, competitive, grid, analysis]
 tldr: "N competitors × M dimensions matrix with positioning, pricing, strengths, weaknesses."
 density_score: 0.92

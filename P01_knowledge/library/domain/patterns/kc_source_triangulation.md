@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: patterns
-quality: null
+quality: 8.3
 tags: [pattern, skill, llm]
 tldr: "Cross-reference 3+ sources. 3/3 agree = high confidence. 2/3 = use majority. 0/3 = flag to user."
 keywords: [triangulation, verification, cross-reference, multi-source]

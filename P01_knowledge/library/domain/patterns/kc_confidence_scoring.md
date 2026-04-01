@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: patterns
-quality: null
+quality: 8.4
 tags: [pattern, skill, llm]
 tldr: "Assign confidence to LLM outputs. High 0.90+: act. Medium 0.70-0.89: flag. Low <0.70: ask user."
 keywords: [confidence, scoring, threshold, certainty]

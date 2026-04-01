@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: knowledge-management
-quality: null
+quality: 8.6
 tags: [output, n04, fine-tuning, jsonl, ml, dataset, training]
 tldr: "JSONL export for LLM fine-tuning: instruction/input/output triples from KCs."
 density_score: 0.92

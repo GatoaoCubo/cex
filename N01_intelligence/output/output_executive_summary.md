@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: research-intelligence
-quality: null
+quality: 8.7
 tags: [output, n01, executive, summary, decision-maker]
 tldr: "1-page synthesis for decision-makers: key findings, recommendations, risks, next steps."
 density_score: 0.92

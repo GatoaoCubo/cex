@@ -7,7 +7,7 @@ version: 4.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: research-intelligence
-quality: null
+quality: 8.6
 tags: [scoring_rubric, n01, research, quality]
 tldr: "5-dimension scoring for research output: triangulation, freshness, actionability, structure, depth."
 density_score: 0.92

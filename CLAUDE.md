@@ -41,6 +41,7 @@ Check `CEX_NUCLEUS`. N07 = Orchestrator. N03 = Builder. Not set = read and decid
 | **Decision manifest** | `.cex/runtime/decisions/decision_manifest.yaml` |
 | **GDP skill** | `archetypes/builders/_shared/skill_guided_decisions.md` |
 | **Runtime** | `.cex/runtime/{handoffs,signals,pids,decisions}/` |
+| **Experiment history** | `.cex/experiments/results.tsv` |
 | **Learning records** | `.cex/learning_records/` |
 | **Session state** | `.cex/runtime/` (handoffs, signals, archive) |
 
@@ -84,6 +85,7 @@ User decides WHAT → LLM builds HOW → verify together.
 | `/status` | System health dashboard |
 | `/doctor` | Full diagnostics |
 | `/consolidate` | Post-dispatch: verify + score + clean |
+| `/evolve [file\|all]` | **AutoResearch**: autonomous artifact improvement loop |
 
 ## Tools (run with `--help`)
 
@@ -118,6 +120,7 @@ User decides WHAT → LLM builds HOW → verify together.
 | `brand_propagate.py` | Push brand context to all nuclei |
 | `brand_audit.py` | Score brand consistency (6 dimensions) |
 | `brand_ingest.py` | Scan user's messy folder → extract brand signals |
+| `cex_evolve.py` | **AutoResearch loop**: evolve artifacts autonomously (keep/discard) |
 
 ## Quick Dispatch
 

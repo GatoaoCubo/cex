@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: patterns
-quality: null
+quality: 8.6
 tags: [distillation, knowledge, compression, kc, expertise]
 tldr: "Transform verbose sources (docs, conversations, code) into dense, structured KCs. Keep signal, remove noise. Target: 1-2KB that replaces 10KB+ of raw source."
 keywords: [distillation, compression, knowledge-card, signal-to-noise, density]

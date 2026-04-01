@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: research-intelligence
-quality: null
+quality: 8.6
 tags: [schema, n01, trend, detection, momentum]
 tldr: "Trend signal schema: name, category, momentum (rising/stable/declining), confidence, evidence count, timeframe, impact assessment."
 density_score: 0.92

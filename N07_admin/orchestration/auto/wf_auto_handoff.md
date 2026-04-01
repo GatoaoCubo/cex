@@ -8,7 +8,7 @@ created: 2026-03-31
 author: n07_orchestrator
 domain: orchestration
 trigger: session_end_or_overflow
-quality: null
+quality: 8.8
 tags: [workflow, auto, n07, handoff, session, context, overflow]
 tldr: "When session ends or context window fills: commit all work, write handoff with progress, archive state for next session."
 density_score: 0.93

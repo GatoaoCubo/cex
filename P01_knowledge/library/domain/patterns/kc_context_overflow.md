@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: patterns
-quality: null
+quality: 8.4
 tags: [pattern, skill, llm]
 tldr: "Detect early, compress at 50%, offload at 70%, handoff at 80%. All state persists in files."
 keywords: [context-overflow, window-limit, compression, handoff]

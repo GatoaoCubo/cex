@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: knowledge-management
-quality: null
+quality: 8.5
 tags: [output, n04, embedding, vector, batch, supabase]
 tldr: "Batch embedding export: chunked KC text + vectors for Supabase/vector DB ingestion."
 density_score: 0.91

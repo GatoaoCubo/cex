@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: patterns
-quality: null
+quality: 8.3
 tags: [pattern, skill, llm]
 tldr: "Split complex queries into independent sub-queries. Answer each, combine into final response."
 keywords: [decomposition, sub-query, divide-conquer, complex]

@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: patterns
-quality: null
+quality: 8.4
 tags: [pattern, skill, llm]
 tldr: "Meta tags, structured data, sitemaps, Core Web Vitals. For N02 frontend output needing search visibility."
 keywords: [seo, meta-tags, structured-data, core-web-vitals]

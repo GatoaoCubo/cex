@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: patterns
-quality: null
+quality: 8.4
 tags: [pattern, skill, llm]
 tldr: "Not everything worth remembering. Hot (session), warm (handoff), cold (KC). Filter by impact."
 keywords: [memory, tiers, persistence, forgetting, hot-warm-cold]

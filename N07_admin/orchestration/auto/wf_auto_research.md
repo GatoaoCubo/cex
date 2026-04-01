@@ -8,7 +8,7 @@ created: 2026-03-31
 author: n07_orchestrator
 domain: orchestration
 trigger: knowledge_gap_detected
-quality: null
+quality: 8.7
 tags: [workflow, auto, n07, research, gap, intelligence]
 tldr: "When /plan detects a knowledge gap (missing KC, unknown domain), auto-triggers N01 research before proceeding."
 density_score: 0.91

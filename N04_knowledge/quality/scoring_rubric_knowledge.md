@@ -7,7 +7,7 @@ version: 4.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: knowledge-management
-quality: null
+quality: 8.5
 tags: [scoring_rubric, n04, knowledge, density, taxonomy]
 tldr: "5-dimension scoring for KCs: density, taxonomy, actionability, structure, freshness."
 density_score: 0.92

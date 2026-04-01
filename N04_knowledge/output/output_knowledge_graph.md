@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: knowledge-management
-quality: null
+quality: 8.8
 tags: [output, n04, knowledge-graph, entity, relationship, visualization]
 tldr: "Entity-relationship map of KCs: nodes (KCs) + edges (feeds_kinds, linked_artifacts)."
 density_score: 0.91

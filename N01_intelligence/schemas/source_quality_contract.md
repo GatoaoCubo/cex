@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: research-intelligence
-quality: null
+quality: 8.6
 tags: [schema, n01, source, quality, scoring, citation]
 tldr: "Source scoring: authority (1-5), freshness, bias assessment, accessibility. Every cited source gets a quality card."
 density_score: 0.93

@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: research-intelligence
-quality: null
+quality: 8.6
 tags: [output, n01, research, brief, request]
 tldr: "Research request document — what to research, at what depth, for whom."
 density_score: 0.91

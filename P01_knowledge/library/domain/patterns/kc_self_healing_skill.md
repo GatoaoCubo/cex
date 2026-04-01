@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: patterns
-quality: null
+quality: 8.3
 tags: [pattern, skill, llm]
 tldr: "Detect own errors, diagnose, fix, retry. Max 3 attempts. Escalate if unresolved. Log learning."
 keywords: [self-healing, auto-fix, validation-loop, recovery]

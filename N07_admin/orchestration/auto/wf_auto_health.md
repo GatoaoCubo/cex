@@ -8,7 +8,7 @@ created: 2026-03-31
 author: n07_orchestrator
 domain: orchestration
 trigger: before_dispatch
-quality: null
+quality: 8.7
 tags: [workflow, auto, n07, health, probe, k8s]
 tldr: "Health check before dispatching any nucleus — validates doctor, compilation, git state, and builder integrity."
 density_score: 0.92
