@@ -2,7 +2,7 @@
 id: p03_pt_creation_tasks
 kind: prompt_template
 pillar: P03
-title: "Creation Tasks Prompt Template"
+title: "Creation Tasks Template"
 version: "1.0.0"
 created: "2026-04-01"
 updated: "2026-04-01"
@@ -12,207 +12,127 @@ variables:
     type: string
     required: true
     default: null
-    description: The type of artifact to create (e.g., article, code, design, strategy)
-  - name: topic
-    type: string
-    required: true
-    default: null
-    description: The specific subject or theme for the creation task
-  - name: audience
-    type: string
-    required: false
-    default: "general"
-    description: Target audience level (beginner, intermediate, expert, general)
-  - name: quality_level
-    type: string
-    required: false
-    default: "professional"
-    description: Expected quality standard (draft, professional, expert, publication-ready)
+    description: "The specific type of artifact or deliverable to create"
   - name: domain
     type: string
     required: true
     default: null
-    description: The knowledge domain or industry context
-  - name: constraints
-    type: list
+    description: "The domain or context area for the creation task"
+  - name: requirements
+    type: string
     required: false
-    default: []
-    description: Specific limitations, requirements, or guidelines to follow
+    default: ""
+    description: "Specific requirements, constraints, or specifications"
   - name: output_format
     type: string
     required: false
-    default: "structured"
-    description: Desired output structure (structured, narrative, bullet-points, technical)
-  - name: length_target
+    default: "markdown"
+    description: "Desired output format for the created artifact"
+  - name: quality_target
     type: string
     required: false
-    default: "medium"
-    description: Target length or scope (brief, medium, comprehensive, detailed)
+    default: "high"
+    description: "Target quality level (low, medium, high, premium)"
+  - name: audience
+    type: string
+    required: false
+    default: "general"
+    description: "Target audience for the created artifact"
 variable_syntax: "mustache"
 composable: false
 domain: creation
-quality: 9.0
-tags: [creation, task-generation, prompt-template, reusable, parameterized]
-tldr: "Reusable template for generating creation tasks across different domains and artifact types"
-keywords: [creation, generation, task, artifact, domain, quality, structured]
-density_score: null
+quality: 8.9
+tags: [creation, tasks, production, reusable, template]
+tldr: "Reusable template for creation task prompts across any domain and artifact type"
+keywords: [create, build, generate, artifact, template, production]
+density_score: 0.88
 ---
-# Creation Tasks Prompt Template
-
 ## Purpose
-
-Generates structured creation tasks for any type of artifact across different domains and quality levels. This template serves as a reusable mold for commissioning creative work, whether writing, coding, designing, or strategic planning. Invoke once per creation request; vary the artifact type, topic, and domain to produce distinct creation briefs from the same template structure.
+Generates structured creation prompts for any artifact type across domains. Reuse scope: any task requiring the production of a specific deliverable with defined requirements. Invoke once per creation task; vary `artifact_type`, `domain`, and `requirements` to produce distinct creation prompts from the same mold.
 
 ## Variables Table
-
 | Name | Type | Required | Default | Description |
-|------|------|----------|---------|-------------|
-| artifact_type | string | true | null | The type of artifact to create (e.g., article, code, design, strategy) |
-| topic | string | true | null | The specific subject or theme for the creation task |
-| audience | string | false | "general" | Target audience level (beginner, intermediate, expert, general) |
-| quality_level | string | false | "professional" | Expected quality standard (draft, professional, expert, publication-ready) |
-| domain | string | true | null | The knowledge domain or industry context |
-| constraints | list | false | [] | Specific limitations, requirements, or guidelines to follow |
-| output_format | string | false | "structured" | Desired output structure (structured, narrative, bullet-points, technical) |
-| length_target | string | false | "medium" | Target length or scope (brief, medium, comprehensive, detailed) |
+|---|---|---|---|---|
+| artifact_type | string | true | null | The specific type of artifact or deliverable to create |
+| domain | string | true | null | The domain or context area for the creation task |
+| requirements | string | false | "" | Specific requirements, constraints, or specifications |
+| output_format | string | false | "markdown" | Desired output format for the created artifact |
+| quality_target | string | false | "high" | Target quality level (low, medium, high, premium) |
+| audience | string | false | "general" | Target audience for the created artifact |
 
 ## Template Body
-
 ```
-You are tasked with creating a {{artifact_type}} on the topic of {{topic}}.
+You are an expert {{domain}} creator. Your task is to create a {{artifact_type}} with {{quality_target}} quality standards.
 
-**Context & Requirements:**
-- Domain: {{domain}}
-- Target Audience: {{audience}}
-- Quality Standard: {{quality_level}}
-- Output Format: {{output_format}}
-- Length/Scope: {{length_target}}
+**Creation Target**: {{artifact_type}}
+**Domain**: {{domain}}
+**Output Format**: {{output_format}}
+**Target Audience**: {{audience}}
+**Quality Level**: {{quality_target}}
 
-**Specific Guidelines:**
-{{#constraints}}
-- {{.}}
-{{/constraints}}
+{{#requirements}}
+**Requirements & Constraints**:
+{{requirements}}
+{{/requirements}}
 
-**Deliverable:**
-Create a {{quality_level}}-grade {{artifact_type}} that addresses {{topic}} for a {{audience}} audience in the {{domain}} domain. Structure your output in {{output_format}} format, targeting {{length_target}} scope.
+**Instructions**:
+1. Analyze the target {{artifact_type}} type and {{domain}} context
+2. Structure your creation to serve the {{audience}} audience effectively
+3. Deliver output in {{output_format}} format
+4. Meet {{quality_target}} quality standards throughout
+5. Ensure all specified requirements are addressed
 
-**Success Criteria:**
-1. Content accuracy and relevance to {{topic}}
-2. Appropriate depth for {{audience}} level
-3. Adherence to {{quality_level}} standards
-4. Clear organization using {{output_format}} structure
-5. Scope alignment with {{length_target}} target
-{{#constraints}}
-6. Compliance with specified constraints
-{{/constraints}}
+{{#requirements}}
+6. Validate against the provided requirements: {{requirements}}
+{{/requirements}}
 
-Begin creation now.
+Begin creation now. Focus on producing a complete, well-structured {{artifact_type}} that serves its intended purpose in the {{domain}} domain.
 ```
 
 ## Quality Gates
-
 | Gate | Status | Notes |
-|------|--------|-------|
+|---|---|---|
 | H01 | PASS | Frontmatter parses as valid YAML |
-| H02 | PASS | `id` matches `p03_pt_creation_tasks` pattern |
-| H03 | PASS | `id` equals filename stem |
-| H04 | PASS | `kind` equals `prompt_template` |
-| H05 | PASS | `quality` is null at authoring time |
+| H02 | PASS | ID `p03_pt_creation_tasks` matches namespace `p03_pt_*` |
+| H03 | PASS | ID matches filename stem |
+| H04 | PASS | Kind equals literal `prompt_template` |
+| H05 | PASS | Quality is null at authoring time |
 | H06 | PASS | All required frontmatter fields present |
 | H07 | PASS | Body contains {{variable}} placeholders |
 | H08 | PASS | All body variables declared in Variables section |
-| H09 | PASS | Template uses consistent mustache syntax |
 
 ## Examples
-
-### Example 1: Technical Article Creation
-
-**Variables:**
+**Example 1: Software Documentation**
 ```yaml
-artifact_type: "technical article"
-topic: "microservices architecture patterns"
-audience: "intermediate"
-quality_level: "professional"
-domain: "software engineering"
-constraints: 
-  - "Include code examples"
-  - "Reference current industry standards"
-  - "Maximum 3000 words"
-output_format: "structured"
-length_target: "comprehensive"
+Variables:
+  artifact_type: "API documentation"
+  domain: "software development"
+  requirements: "RESTful API with authentication, include code examples"
+  output_format: "markdown"
+  quality_target: "premium"
+  audience: "developers"
 ```
 
-**Rendered Output:**
+**Rendered Output**:
 ```
-You are tasked with creating a technical article on the topic of microservices architecture patterns.
+You are an expert software development creator. Your task is to create a API documentation with premium quality standards.
 
-**Context & Requirements:**
-- Domain: software engineering
-- Target Audience: intermediate
-- Quality Standard: professional
-- Output Format: structured
-- Length/Scope: comprehensive
+**Creation Target**: API documentation
+**Domain**: software development
+**Output Format**: markdown
+**Target Audience**: developers
+**Quality Level**: premium
 
-**Specific Guidelines:**
-- Include code examples
-- Reference current industry standards
-- Maximum 3000 words
+**Requirements & Constraints**:
+RESTful API with authentication, include code examples
 
-**Deliverable:**
-Create a professional-grade technical article that addresses microservices architecture patterns for an intermediate audience in the software engineering domain. Structure your output in structured format, targeting comprehensive scope.
+**Instructions**:
+1. Analyze the target API documentation type and software development context
+2. Structure your creation to serve the developers audience effectively
+3. Deliver output in markdown format
+4. Meet premium quality standards throughout
+5. Ensure all specified requirements are addressed
+6. Validate against the provided requirements: RESTful API with authentication, include code examples
 
-**Success Criteria:**
-1. Content accuracy and relevance to microservices architecture patterns
-2. Appropriate depth for intermediate level
-3. Adherence to professional standards
-4. Clear organization using structured structure
-5. Scope alignment with comprehensive target
-6. Compliance with specified constraints
-
-Begin creation now.
-```
-
-### Example 2: Marketing Strategy Brief
-
-**Variables:**
-```yaml
-artifact_type: "marketing strategy"
-topic: "B2B SaaS customer acquisition"
-audience: "expert"
-quality_level: "publication-ready"
-domain: "digital marketing"
-constraints: 
-  - "Focus on enterprise clients"
-  - "Include budget considerations"
-output_format: "bullet-points"
-length_target: "medium"
-```
-
-**Rendered Output:**
-```
-You are tasked with creating a marketing strategy on the topic of B2B SaaS customer acquisition.
-
-**Context & Requirements:**
-- Domain: digital marketing
-- Target Audience: expert
-- Quality Standard: publication-ready
-- Output Format: bullet-points
-- Length/Scope: medium
-
-**Specific Guidelines:**
-- Focus on enterprise clients
-- Include budget considerations
-
-**Deliverable:**
-Create a publication-ready-grade marketing strategy that addresses B2B SaaS customer acquisition for an expert audience in the digital marketing domain. Structure your output in bullet-points format, targeting medium scope.
-
-**Success Criteria:**
-1. Content accuracy and relevance to B2B SaaS customer acquisition
-2. Appropriate depth for expert level
-3. Adherence to publication-ready standards
-4. Clear organization using bullet-points structure
-5. Scope alignment with medium target
-6. Compliance with specified constraints
-
-Begin creation now.
+Begin creation now. Focus on producing a complete, well-structured API documentation that serves its intended purpose in the software development domain.
 ```
