@@ -261,33 +261,21 @@ def execute_prompt(prompt: str) -> str:
 
     Returns the LLM response text.
     """
-    # Try Anthropic
+    # Try claude CLI (subscription auth — no API key needed)
     try:
-        import anthropic
-
-        client = anthropic.Anthropic()
-        response = client.messages.create(
-            model="claude-sonnet-4-20250514",
-            max_tokens=8192,
-            messages=[{"role": "user", "content": prompt}],
+        import subprocess
+        result = subprocess.run(
+            ["claude", "-p", "--model", "claude-sonnet-4-20250514", "--no-chrome"],
+            input=prompt, capture_output=True, text=True,
+            timeout=120, encoding="utf-8",
         )
-        return response.content[0].text
-    except (ImportError, Exception) as e:
-        anthropic_err = str(e)
-
-    # Try OpenAI
-    try:
-        import openai
-
-        client = openai.OpenAI()
-        response = client.chat.completions.create(
-            model="gpt-4o",
-            max_tokens=8192,
-            messages=[{"role": "user", "content": prompt}],
-        )
-        return response.choices[0].message.content
-    except (ImportError, Exception) as e:
-        openai_err = str(e)
+        if result.returncode == 0 and result.stdout.strip():
+            return result.stdout
+        cli_err = f"claude -p exit {result.returncode}: {result.stderr[:200]}"
+    except FileNotFoundError:
+        cli_err = "claude CLI not in PATH"
+    except Exception as e:
+        cli_err = str(e)
 
     # Try Ollama
     try:
@@ -312,8 +300,7 @@ def execute_prompt(prompt: str) -> str:
         ollama_err = str(e)
 
     print("ERRO: Nenhum LLM provider disponivel.", file=sys.stderr)
-    print(f"  Anthropic: {anthropic_err}", file=sys.stderr)
-    print(f"  OpenAI: {openai_err}", file=sys.stderr)
+    print(f"  Claude CLI: {cli_err}", file=sys.stderr)
     print(f"  Ollama: {ollama_err}", file=sys.stderr)
     sys.exit(1)
 

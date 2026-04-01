@@ -143,25 +143,22 @@ def _select_via_llm(
     )
 
     try:
-        import anthropic
-
-        client = anthropic.Anthropic()
-        response = client.messages.create(
-            model=LLM_MODEL,
-            max_tokens=LLM_MAX_TOKENS,
-            messages=[{"role": "user", "content": prompt}],
+        import subprocess
+        result = subprocess.run(
+            ["claude", "-p", "--model", LLM_MODEL, "--no-chrome"],
+            input=prompt, capture_output=True, text=True,
+            timeout=30, encoding="utf-8",
         )
-        text = response.content[0].text.strip()
-
-        # Parse JSON array from response
-        match = re.search(r"\[[\d\s,]*\]", text)
-        if match:
-            indices = json.loads(match.group(0))
-            # Validate indices
-            valid = [i for i in indices if isinstance(i, int) and 0 <= i < len(headers)]
-            return valid[:top_k]
-    except ImportError:
-        pass  # SDK not available, fall through to keyword
+        if result.returncode == 0:
+            text = result.stdout.strip()
+            # Parse JSON array from response
+            match = re.search(r"\[[\d\s,]*\]", text)
+            if match:
+                indices = json.loads(match.group(0))
+                valid = [i for i in indices if isinstance(i, int) and 0 <= i < len(headers)]
+                return valid[:top_k]
+    except FileNotFoundError:
+        pass  # claude CLI not available, fall through to keyword
     except Exception as e:
         print(f"WARN: LLM selector failed: {e}. Falling back to keyword.", file=sys.stderr)
 

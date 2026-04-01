@@ -14,7 +14,7 @@ Design principles (from CREW_PATTERNS_RESEARCH.md Section 5):
 
 Modes:
   --dry-run  (DEFAULT): Generate prompts, save to files. No LLM calls.
-  --execute:            Call LLM via anthropic SDK, apply quality gates.
+  --execute:            Call LLM via claude CLI (subscription), apply quality gates.
 
 Usage:
   python cex_crew_runner.py --plan plan.json --output-dir out/
@@ -26,6 +26,7 @@ Full pipeline:
   python cex_crew_runner.py --plan /tmp/plan.json --output-dir /tmp/crew_out/
 """
 
+import subprocess
 import sys
 if hasattr(sys.stdout, "reconfigure"): sys.stdout.reconfigure(encoding="utf-8")
 if hasattr(sys.stderr, "reconfigure"): sys.stderr.reconfigure(encoding="utf-8")
@@ -368,14 +369,15 @@ class CrewRunner:
         prompt_file.write_text(prompt, encoding="utf-8")
 
         try:
-            import anthropic
-            client = anthropic.Anthropic()
-            response = client.messages.create(
-                model=model,
-                max_tokens=max_tokens,
-                messages=[{"role": "user", "content": prompt}],
+            # Use claude CLI (subscription auth) instead of API
+            result = subprocess.run(
+                ["claude", "-p", "--model", model, "--no-chrome"],
+                input=prompt, capture_output=True, text=True,
+                timeout=120, cwd=str(ROOT), encoding="utf-8",
             )
-            content = response.content[0].text
+            if result.returncode != 0:
+                raise RuntimeError(f"claude -p exit {result.returncode}: {result.stderr[:300]}")
+            content = result.stdout
             fork_file.write_text(content, encoding="utf-8")
 
             import re as _re
@@ -387,18 +389,18 @@ class CrewRunner:
                 content=content,
                 quality_score=score,
                 metadata={
-                    "mode": "fork",
+                    "mode": "fork-cli",
                     "model": model,
                     "fork_output": str(fork_file),
                 },
                 status="complete",
             )
-        except ImportError:
-            # No SDK — write prompt as dry-run fork
+        except FileNotFoundError:
+            # claude CLI not in PATH — dry-run fallback
             fork_file.write_text(f"[FORK-DRY-RUN] {bid}\n{prompt[:500]}", encoding="utf-8")
             return BuilderOutput(
                 builder_id=bid,
-                content=f"[FORK-DRY-RUN] Prompt saved to {fork_file}",
+                content=f"[FORK-DRY-RUN] claude CLI not found. Prompt saved to {fork_file}",
                 quality_score=0.0,
                 metadata={"mode": "fork-dry-run", "fork_output": str(fork_file)},
                 status="complete",
@@ -469,25 +471,17 @@ class CrewRunner:
         state: RunState,
         output_dir: Path | None = None,
     ) -> list[BuilderOutput]:
-        """Execute builders via LLM (anthropic SDK)."""
+        """Execute builders via claude CLI (subscription auth)."""
         fn_name = step.get("name", f"step_{step.get('position', '?')}")
         position = step.get("position", 0)
         active = self._get_active_builders(step)
         results = []
 
-        # Lazy import — only needed in execute mode
+        # Verify claude CLI is available
         try:
-            import anthropic
-
-            client = anthropic.Anthropic()
-        except ImportError:
-            print("WARN: anthropic SDK not installed. Falling back to dry-run.", file=sys.stderr)
-            return self.execute_step_dry_run(step, state, output_dir)
-        except Exception as e:
-            print(
-                f"WARN: Anthropic client init failed: {e}. Falling back to dry-run.",
-                file=sys.stderr,
-            )
+            subprocess.run(["claude", "--version"], capture_output=True, timeout=5)
+        except (FileNotFoundError, subprocess.TimeoutExpired):
+            print("WARN: claude CLI not found. Falling back to dry-run.", file=sys.stderr)
             return self.execute_step_dry_run(step, state, output_dir)
 
         for builder in active:
@@ -545,12 +539,14 @@ class CrewRunner:
                 try:
                     import re
 
-                    response = client.messages.create(
-                        model=model,
-                        max_tokens=max_tokens,
-                        messages=[{"role": "user", "content": prompt}],
+                    cli_result = subprocess.run(
+                        ["claude", "-p", "--model", model, "--no-chrome"],
+                        input=prompt, capture_output=True, text=True,
+                        timeout=120, cwd=str(ROOT), encoding="utf-8",
                     )
-                    content = response.content[0].text
+                    if cli_result.returncode != 0:
+                        raise RuntimeError(f"claude -p exit {cli_result.returncode}")
+                    content = cli_result.stdout
 
                     # Extract self-assessed quality score
                     score_m = re.search(
@@ -799,7 +795,7 @@ Examples:
         help="Generate prompts without LLM calls (DEFAULT)",
     )
     parser.add_argument(
-        "--execute", action="store_true", help="Real execution -- calls LLM via anthropic SDK"
+        "--execute", action="store_true", help="Real execution -- calls LLM via claude CLI (subscription)"
     )
 
     args = parser.parse_args()
