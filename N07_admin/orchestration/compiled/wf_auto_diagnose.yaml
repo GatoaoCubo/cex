@@ -1,0 +1,47 @@
+id: p12_wf_auto_diagnose
+kind: workflow
+pillar: P12
+title: Auto-Diagnose — Observability when health degrades
+version: 1.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: orchestration
+trigger:
+- Doctor shows more FAILs than last run
+- Test suite has new failures
+- Compilation rate drops below 100%
+- Signal from nucleus reports error
+quality: null
+tags:
+- workflow
+- auto
+- n07
+- diagnose
+- observability
+- sre
+tldr: When /doctor shows degradation (new FAILs, WARN increase, test regressions), deep-diagnose root cause and suggest fixes.
+density_score: 0.91
+industry_pattern: SRE observability — detect degradation, correlate signals, identify root cause.
+steps: '| # | Action | Tool | Output |
+
+  |---|--------|------|--------|
+
+  | 1 | Run full doctor | `cex_doctor.py` | Current state |
+
+  | 2 | Compare with baseline | Previous doctor output / git log | Delta |
+
+  | 3 | Run full test suite | `pytest _tools/tests/ -q` | Failures list |
+
+  | 4 | Check recent commits | `git log --oneline -20` | What changed |
+
+  | 5 | Correlate | Match failures to recent changes | Root cause hypothesis |
+
+  | 6 | Suggest fix | Based on correlation | Fix plan |
+
+  | 7 | Auto-fix if safe | Compile fixes, frontmatter fixes | Attempt |
+
+  | 8 | Report | Summary to user | Diagnosis report |'
+diagnosis_report_format: "━━━ Diagnosis Report ━━━\n  Status:     DEGRADED (was HEALTHY)\n  New FAILs:  2 (skill-builder,\
+  \ webhook-builder)\n  Root Cause: commit abc123 removed bld_system_prompt_skill.md\n  Suggested:  Recreate file or revert\
+  \ commit\n  Auto-fix:   Not safe (needs content, not just structure)\n━━━━━━━━━━━━━━━━━━━━━━━━"
+failure_mode: Can't determine root cause → show all signals (doctor, tests, recent commits) and let user decide.

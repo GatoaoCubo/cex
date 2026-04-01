@@ -1,0 +1,52 @@
+id: p12_wf_auto_security
+kind: workflow
+pillar: P12
+title: Auto-Security — Scan before production
+version: 1.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: orchestration
+trigger: Before any external deploy (Railway, Vercel, production push), or before publishing artifacts.
+quality: null
+tags:
+- workflow
+- auto
+- n07
+- security
+- owasp
+- vapt
+- scan
+tldr: 'Security scan before any production deploy: secrets leak, dependency audit, env validation, prompt injection check.'
+density_score: 0.91
+industry_pattern: OWASP VAPT (Vulnerability Assessment and Penetration Testing). Security gate in CI/CD.
+checks: '| # | Check | What | Tool | Severity |
+
+  |---|-------|------|------|----------|
+
+  | 1 | Secrets scan | No API keys, passwords, tokens in code | `grep -r "sk-\|STRIPE_SECRET\|password=" --include=".py" --include=".md"`
+  | CRITICAL |
+
+  | 2 | Env validation | `.env` not committed, `.env.example` exists | `git ls-files .env` | HIGH |
+
+  | 3 | Dependency audit | No known vulnerabilities | `pip audit` or `npm audit` | MEDIUM |
+
+  | 4 | MCP config check | No real credentials in `.mcp-*.json` | Check for `${VAR}` pattern | HIGH |
+
+  | 5 | Brand data check | No PII in brand_config.yaml committed | Check for CPF, email, phone | MEDIUM |
+
+  | 6 | Prompt injection | No unescaped user input in system prompts | Scan `prompts/` for `{user_input}` without sanitization
+  | HIGH |
+
+  | 7 | Git history check | No secrets in previous commits | `git log --diff-filter=A --name-only` | LOW |'
+verdicts: '| Result | Action |
+
+  |--------|--------|
+
+  | All clear | Proceed with deploy |
+
+  | MEDIUM issues | Warn, proceed if user confirms |
+
+  | HIGH issues | Block deploy, show issues, suggest fix |
+
+  | CRITICAL (secrets) | Block deploy, suggest `git filter-branch` or BFG |'
+failure_mode: Security scan tool unavailable → warn user, proceed with manual checklist.

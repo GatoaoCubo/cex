@@ -1,0 +1,49 @@
+---
+id: p12_wf_auto_rollback
+kind: workflow
+pillar: P12
+title: "Auto-Rollback — Revert on deploy/ship failure"
+version: 1.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: orchestration
+trigger: deploy_fails_health
+quality: null
+tags: [workflow, auto, n07, rollback, sre, recovery]
+tldr: "When auto-ship or deploy fails health check, automatically revert to last known good state."
+density_score: 0.91
+---
+
+# Auto-Rollback
+
+## Trigger
+Auto-ship fails at step 2 (tests) or step 3 (doctor), or external deploy fails health probe.
+
+## Industry Pattern
+SRE rollback procedure. If new version fails → revert to last known good.
+
+## Steps
+
+| # | Action | Tool | Output |
+|---|--------|------|--------|
+| 1 | Identify failure point | Ship log / error output | Which step failed |
+| 2 | Find last good commit | `git log --oneline` | Commit hash |
+| 3 | Stash current changes | `git stash` | Changes preserved |
+| 4 | Verify last good state | `cex_doctor.py` + `pytest` | Confirm it's good |
+| 5 | Report to user | Show: what failed, what was reverted | User decides next step |
+
+## Rollback Strategies
+
+| Severity | Strategy |
+|----------|----------|
+| 1 file broke tests | `git checkout {file}` — revert single file |
+| Wave broke system | `git stash` — preserve work, revert all |
+| Critical corruption | `git reset --hard {last_good}` — nuclear option |
+
+## Safeguards
+- NEVER auto-`reset --hard` without user confirmation
+- ALWAYS `git stash` before any revert (preserve work)
+- ALWAYS run doctor after rollback to confirm recovery
+
+## Failure Mode
+If rollback itself fails → stop all operations, alert user: "System in inconsistent state. Manual intervention needed."

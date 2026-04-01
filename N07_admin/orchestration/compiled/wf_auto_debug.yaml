@@ -1,0 +1,59 @@
+id: p12_wf_auto_debug
+kind: workflow
+pillar: P12
+title: Auto-Debug — Root cause analysis on execution errors
+version: 1.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: orchestration
+trigger: 'Any error during: tool execution, test run, compilation, dispatch, or 8F pipeline.'
+quality: null
+tags:
+- workflow
+- auto
+- n07
+- debug
+- rca
+- itil
+- 5whys
+tldr: 'When a tool, test, or dispatch fails, auto-diagnose: classify error, check logs, apply known fix or escalate.'
+density_score: 0.91
+industry_pattern: ITIL Incident Management + 5-Whys root cause analysis.
+steps: '| # | Action | Tool | Output |
+
+  |---|--------|------|--------|
+
+  | 1 | Capture error | stderr / exit code / traceback | Error text |
+
+  | 2 | Classify error type | Pattern matching | Category |
+
+  | 3 | Check known fixes | `learning_records/` | Prior fix if exists |
+
+  | 4 | Apply auto-fix | Depends on category | Fix attempt |
+
+  | 5 | Retry operation | Re-run failed command | Pass/fail |
+
+  | 6 | Record learning | `cex_memory_update.py` | Learning for next time |
+
+  | 7 | Escalate if unresolved | Flag to user | "Fix needed: {details}" |'
+error_categories: '| Category | Pattern | Auto-Fix |
+
+  |----------|---------|----------|
+
+  | Import error | `ModuleNotFoundError` | `pip install {module}` |
+
+  | File not found | `FileNotFoundError` | Check path, suggest correct path |
+
+  | YAML syntax | `yaml.scanner.ScannerError` | Show line, suggest fix |
+
+  | Compile fail | `cex_compile.py` exit 1 | Check frontmatter, fix common issues |
+
+  | Doctor fail | Missing builder spec | Check archetype dir, suggest creation |
+
+  | Test fail | `pytest` assertion | Show expected vs actual, check recent changes |
+
+  | Git conflict | `CONFLICT` in merge | Show conflicting files, suggest resolution |
+
+  | Dispatch fail | Spawn error | Check boot file exists, check CLI available |'
+failure_mode: 'Auto-fix fails after 2 retries → escalate to user with full context: error, diagnosis, attempted fixes, suggested
+  manual action.'

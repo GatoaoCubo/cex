@@ -1,0 +1,68 @@
+id: p12_wf_auto_handoff
+kind: workflow
+pillar: P12
+title: Auto-Handoff — Session end / context overflow management
+version: 1.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: orchestration
+trigger:
+- Session about to end (user says goodbye, timeout)
+- Context window approaching limit (>80% used)
+- 'Explicit: user says "I need to go" or "save progress"'
+quality: null
+tags:
+- workflow
+- auto
+- n07
+- handoff
+- session
+- context
+- overflow
+tldr: 'When session ends or context window fills: commit all work, write handoff with progress, archive state for next session.'
+density_score: 0.93
+industry_pattern: Shift handoff in operations. Outgoing shift documents state for incoming shift.
+steps: '| # | Action | Tool | Output |
+
+  |---|--------|------|--------|
+
+  | 1 | Commit all pending work | `git add -A && git commit` | No work lost |
+
+  | 2 | Write handoff document | Write to `.cex/runtime/handoffs/` | Progress summary |
+
+  | 3 | Write signals for any completed tasks | `signal_writer.py` | Signals for peers |
+
+  | 4 | Archive current plan state | Copy plan + manifest to archive | Recoverable |
+
+  | 5 | Update CLAUDE.md if needed | Edit brand/status sections | System prompt current |'
+handoff_document_format: '# Handoff — {timestamp}
+
+
+  ## Completed This Session
+
+  - {list of completed tasks}
+
+
+  ## In Progress
+
+  - {task}: {what''s done, what''s left}
+
+
+  ## Pending
+
+  - {tasks not started}
+
+
+  ## Files Modified
+
+  - {git diff --stat}
+
+
+  ## Next Session Start With
+
+  1. Read this handoff
+
+  2. Run /doctor
+
+  3. Continue from: {specific task}'
+failure_mode: Can't commit (conflict) → stash + write handoff anyway. Next session resolves conflict.

@@ -1,0 +1,58 @@
+id: p12_wf_auto_evolve
+kind: workflow
+pillar: P12
+title: Auto-Evolve — Continuous learning from gaps
+version: 1.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: orchestration
+trigger:
+- Doctor reports missing builder specs
+- Query returns 0 results for a kind
+- User asks about domain with no KC
+- Quality scores consistently below threshold for a nucleus
+- New kind requested that doesn't exist
+quality: null
+tags:
+- workflow
+- auto
+- n07
+- evolve
+- learning
+- gap
+- mlops
+tldr: When a gap is detected (missing KC, weak builder, new pattern), auto-create the artifact to fill it.
+density_score: 0.91
+industry_pattern: MLOps continuous learning. System improves itself by detecting and filling gaps.
+steps: '| # | Action | Tool | Output |
+
+  |---|--------|------|--------|
+
+  | 1 | Detect gap | `cex_doctor.py`, `cex_query.py`, quality trends | Gap classification |
+
+  | 2 | Classify priority | Impact × frequency | P1 (critical) to P3 (nice-to-have) |
+
+  | 3 | Plan fill | Determine kind, pillar, path | Artifact plan |
+
+  | 4 | Build artifact | 8F pipeline (in-session or dispatch) | New artifact |
+
+  | 5 | Validate | compile + doctor | Passes checks |
+
+  | 6 | Record evolution | `cex_memory_update.py` | Learning record |'
+gap_types: '| Type | Detection | Fill Action |
+
+  |------|-----------|-------------|
+
+  | Missing KC | `cex_query.py` returns 0 | Create KC via 8F |
+
+  | Weak builder | Doctor FAIL for kind | Create/fix missing builder specs |
+
+  | Missing kind | User intent maps to nothing | Register in `kinds_meta.json` |
+
+  | Stale KC | Updated date >90 days | Refresh content |
+
+  | Missing output template | Nucleus has no outputs | Create output template |
+
+  | Missing schema | Nucleus has no schemas | Create schema |'
+failure_mode: Can't auto-create (needs user decision) → add to `.cex/runtime/plans/evolution_backlog.md` for next `/guide`
+  session.

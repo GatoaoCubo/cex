@@ -1,0 +1,43 @@
+id: p12_wf_auto_hydrate
+kind: workflow
+pillar: P12
+title: Auto-Hydrate — Enrich user input before routing
+version: 1.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: orchestration
+trigger: Every user input that will be routed to a nucleus.
+quality: null
+tags:
+- workflow
+- auto
+- n07
+- hydrate
+- enrichment
+tldr: Automatically enriches raw user input with brand context, memory, and KC signals before any nucleus receives it.
+density_score: 0.92
+industry_pattern: Data enrichment (ETL extract-transform-load). Raw input is "extracted," brand/memory context is "transformed"
+  in, enriched prompt is "loaded" to nucleus.
+steps: '| # | Action | Tool | Condition |
+
+  |---|--------|------|-----------|
+
+  | 1 | Parse intent | `cex_intent.py` | Always |
+
+  | 2 | Resolve kind + pillar | `cex_8f_motor.py` F1 | Always |
+
+  | 3 | Inject brand context | `brand_inject.py` | If `brand_config.yaml` exists |
+
+  | 4 | Load decision manifest | read `decision_manifest.yaml` | If manifest exists |
+
+  | 5 | Select relevant memory | `cex_memory_select.py` | If builder memory exists |
+
+  | 6 | Select relevant KCs | `cex_query.py` | If kind KC exists |
+
+  | 7 | Compose enriched prompt | `cex_crew_runner.py compose_prompt()` | Always |
+
+  | 8 | Route to nucleus | dispatch or in-session | Always |'
+input: 'Raw user text: `"quero uma landing page"`'
+output: 'Enriched prompt with: intent classification + brand vars + memory + KC context + builder specs.'
+failure_mode: If any enrichment step fails → skip it, log warning, continue with partial context. Never block routing because
+  enrichment failed.
