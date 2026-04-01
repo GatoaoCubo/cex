@@ -4,21 +4,20 @@
 
 ## Brand Identity
 
-> **Not yet bootstrapped.** Run `python _tools/cex_bootstrap.py` to fill the X.
+> **Not yet bootstrapped.** Type `/init` or the user just needs to answer a few questions.
 
 The X in CEX is a variable. Once bootstrapped, this section shows WHO this brain belongs to.
 Every nucleus reads `.cex/brand/brand_config.yaml` and auto-injects brand context into prompts.
-Bootstrap fills 13 required fields → propagates to 6 nuclei → audits consistency → done.
 
-| Key | Value |
-|-----|-------|
-| **Brand** | `{{BRAND_NAME}}` |
-| **Config** | `.cex/brand/brand_config.yaml` |
-| **Bootstrap** | `python _tools/cex_bootstrap.py` |
-| **Full Discovery** | `boot/n06.cmd` (15 questions + 32-block brand book) |
-| **Validate** | `python _tools/brand_validate.py` |
-| **Propagate** | `python _tools/brand_propagate.py` |
-| **Audit** | `python _tools/brand_audit.py` |
+**If this section says "Not yet bootstrapped" — ASK THE USER before doing anything else.**
+See `.claude/rules/brand-bootstrap.md` for the auto-detection protocol.
+
+| How | For whom |
+|-----|----------|
+| `/init` | User types this in chat — LLM asks ~6 questions conversationally |
+| `init.cmd` | User double-clicks file in root — interactive CLI |
+| `boot/cex.cmd` | Auto-detects on first run, offers 3 choices |
+| `boot/n06.cmd` | Full 15-question Brand Discovery + 32-block Brand Book |
 
 ## Who Am I?
 
@@ -53,6 +52,7 @@ Check `CEX_NUCLEUS`. N07 = Orchestrator. N03 = Builder. Not set = read and decid
 
 | Command | Purpose |
 |---------|---------|
+| `/init` | **First run**: configure CEX for your brand (~2 min) |
 | `/build <intent>` | Create artifact via 8F pipeline |
 | `/validate [file\|all]` | Check artifact quality |
 | `/dispatch <nucleus> <task>` | Send task to nucleus builder |
