@@ -39,12 +39,13 @@ criticality: high
 ```
 
 ## Key Concepts
-| Concept | Definition | Range/Scale |
-|---------|------------|-------------|
-| Source Grading | Reliability assessment | A1 (reliable+confirmed) to F6 (unreliable+unconfirmed) |
-| Collection Cycle | 6-phase process | Plan → Direct → Collect → Process → Analyze → Disseminate (72h max) |
-| ACH Method | Structured analysis | Analysis of Competing Hypotheses with evidence matrix |
-| Confidence Levels | Assessment certainty | High (0.8-1.0), Medium (0.5-0.79), Low (0.1-0.49), Speculative (<0.1) |
+
+| Concept | Description | Application |
+|---------|-------------|-------------|
+| Source Grading | A1 (reliable source, confirmed info) to F6 (unreliable source, unconfirmed) | Grade every source before analysis |
+| Collection Cycle | Plan → Direct → Collect → Process → Analyze → Disseminate (72h max) | Complete cycle within 3 days |
+| ACH Method | Analysis of Competing Hypotheses with evidence matrix scoring | Use for complex multi-variable analysis |
+| Confidence Levels | High (0.8-1.0), Medium (0.5-0.79), Low (0.1-0.49), Speculative (<0.1) | Score every assessment |
 
 ## Strategy Phases
 1. **Requirements**: Define PIRs (Priority Intelligence Requirements) with success criteria
