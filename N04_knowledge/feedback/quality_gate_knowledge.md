@@ -1,59 +1,36 @@
 ---
-id: n04_qg_knowledge
+id: p11_qg_knowledge
 kind: quality_gate
-pillar: P11_feedback
-version: "2.0.0"
-created: "2024-03-30"
-updated: "2024-03-30"
-author: "N04 Knowledge Nucleus"
-domain: "Knowledge Artifacts (KCs, Strategies, etc.)"
-quality: 8.8
-tags: [quality-gate, n04, knowledge, feedback, p11]
-tldr: "A set of automated checks to ensure all N04 artifacts meet structural, semantic, and connectivity requirements before integration."
-density_score: 0.94
+pillar: P11
+title: "N04 Quality Gate — Knowledge Card Validation"
+version: 4.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: knowledge-management
+quality: null
+tags: [quality_gate, n04, knowledge, density, freshness, taxonomy]
+tldr: "10 checks for KCs: frontmatter complete, density >= 0.85, taxonomy valid, no duplicates, export-ready."
+density_score: 0.93
 ---
 
-# Gate: N04 Knowledge Artifact Quality
+# N04 Quality Gate
 
-## 1. Definition
-This quality gate is applied to all artifacts within the `N04_knowledge` fractal before they can be considered "complete". It ensures every piece of knowledge architecture is sound, discoverable, and integrated.
+## Hard Gates
 
-| Property | Value |
-| :--- | :--- |
-| Metric | `artifact_integrity_score` |
-| Threshold | `0.90` |
-| Operator | `>=` |
-| Scope | All artifacts in `N04_knowledge/` on commit. |
+| ID | Check | Rationale |
+|----|-------|-----------|
+| H01 | All required frontmatter fields present | Incomplete KC breaks indexing |
+| H02 | kind exists in kinds_meta.json | Invalid kind = unroutable |
+| H03 | density_score >= 0.85 | Low density = wasted tokens |
+| H04 | No duplicate KC (same id or >90% content overlap) | Duplicates pollute search |
+| H05 | Compiles successfully (cex_compile.py) | Invalid YAML = broken pipeline |
 
-## 2. Hard Gates (Automated & Blocking)
-These gates are non-negotiable. A failure in any hard gate will block the artifact's integration and fail the process. They are executed by the `cex_compile.py` script.
+## Soft Scoring
 
-| Gate ID | Description | Failure Condition |
-| :--- | :--- | :--- |
-| **H01** | **Valid Schema** | Artifact frontmatter does not parse correctly against its `kind`. |
-| **H02** | **ID Integrity** | `id` does not match the file's pillar and name. |
-| **H03** | **Author Ownership** | `author` is not `N04 Knowledge Nucleus`. |
-| **H04** | **Null Quality** | `quality` field is not `null` (N04 does not self-score). |
-| **H05** | **TLDR Exists** | `tldr` field is empty or missing. |
-| **H06** | **Tags Exist** | `tags` array is empty or missing. |
-| **H07** | **KC Axioms** | If `kind: knowledge_card`, the `axioms` list is empty. |
-| **H08** | **KC Links** | If `kind: knowledge_card`, the `linked_artifacts` section is missing. |
-
-## 3. Soft Gates (Scored & Weighted)
-These gates measure the quality and "good citizenship" of an artifact. The final score is a weighted average of these metrics.
-
-| Gate ID | Description | Max Penalty | Weight | Rationale |
-| :--- | :--- | :--- | :--- | :--- |
-| **S01** | **Atomicity** | `0.3` | 40% | Is the artifact focused on a single, well-defined concept? (Crucial for retrieval). |
-| **S02** | **Connectivity** | `0.2` | 30% | Does the artifact link to related concepts, creating a connected graph? |
-| **S03** | **Discoverability**| `0.2` | 20% | Are `keywords` and `long_tails` specific and comprehensive? |
-| **S04** | **Clarity** | `0.1` | 10% | Is the content unambiguous and easy for another agent to parse? |
-
-## 4. Scoring Formula
-`artifact_integrity_score = 1.0 - (S01_penalty * 0.40) - (S02_penalty * 0.30) - (S03_penalty * 0.20) - (S04_penalty * 0.10)`
-
-- **Evaluation**: The scoring logic is implemented in a future `n04_quality_scorer` tool, which uses an LLM to assess the artifact against the soft gate criteria.
-
-## 5. Bypass & Audit Policy
-- **Bypass**: No bypass is permitted for Hard Gates. Soft Gate scores below the threshold can be overridden by the N01 or N05 Nuclei with a logged justification.
-- **Audit**: Every gate evaluation (pass or fail) for every artifact is logged. The log includes the timestamp, artifact ID, gate ID, status, and any penalty applied. Logs are retained for 365 days.
+| # | Dimension | Weight | 1 (Poor) | 10 (Excellent) |
+|---|-----------|--------|----------|----------------|
+| 1 | Density (signal per token) | 1.0 | Filler prose | Every sentence carries info |
+| 2 | Taxonomy accuracy | 0.8 | Wrong kind/pillar | Perfect classification |
+| 3 | Freshness (<90 days) | 0.8 | >1 year old | <30 days |
+| 4 | Export-readiness (JSONL/SQL/YAML) | 0.6 | Only .md | Triple-export ready |
+| 5 | Cross-references (linked_artifacts) | 0.4 | No links | 3+ related KCs linked |

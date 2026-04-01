@@ -1,71 +1,29 @@
 ---
-id: n01_sr_intelligence
+id: p07_rubric_intelligence
 kind: scoring_rubric
 pillar: P07
-title: "Scoring Rubric: N01 Intelligence Brief Quality"
-version: "1.0.0"
-created: "2026-03-31"
-updated: "2026-03-31"
-author: "N01_rebuild_8F"
-quality: 8.9
-tags: [scoring, rubric, quality, eval, n01, research]
-tldr: "Provides the detailed 5-dimension scoring rubric for evaluating the quality of Intelligence Briefs from the N01 agent, covering synthesis, evidence, actionability, clarity, and objectivity."
-target_artifact_type: "IntelligenceBrief"
-pass_threshold: 8.0
-dimensions:
-  - "Depth of Synthesis"
-  - "Evidence Quality"
-  - "Strategic Actionability"
-  - "Clarity & Precision"
-  - "Rigor & Objectivity"
+title: "N01 Scoring Rubric — Research Quality"
+version: 4.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: research-intelligence
+quality: null
+tags: [scoring_rubric, n01, research, quality]
+tldr: "5-dimension scoring for research output: triangulation, freshness, actionability, structure, depth."
+density_score: 0.92
 ---
 
-## 1. PURPOSE
-This rubric provides the detailed, quantitative framework for the Soft Gates defined in `n01_qg_intelligence`. It is used by automated evaluators (LLM-as-a-judge) and human reviewers to ensure a consistent, objective, and rigorous quality score for every `IntelligenceBrief` produced by N01.
+# N01 Scoring Rubric
 
-## 2. SCORING DIMENSIONS
-The final score is a weighted average of five dimensions, each rated on a scale of 1 to 10.
+| Dimension | Weight | 1-3 (Weak) | 4-6 (Adequate) | 7-9 (Strong) | 10 (Exceptional) |
+|-----------|--------|-----------|----------------|--------------|-------------------|
+| Triangulation | 25% | Single source, no verification | 2 sources for key claims | 3+ sources with agreement noted | 3+ diverse sources with disagreement analysis |
+| Freshness | 20% | Data >1 year old | Data <6 months, some stale | All data <90 days | All data <30 days with trend context |
+| Actionability | 25% | Raw data, no interpretation | Some insights | Clear "so what?" per finding | Strategic recommendations with confidence |
+| Structure | 15% | Prose paragraphs | Some tables | Grids + tables + sections | Visual hierarchy, scannable, executive summary |
+| Depth | 15% | Surface scan only | Key facts covered | Analysis with context | Deep-dive with projections and edge cases |
 
-| ID  | Dimension                  | Weight | Description                                                                                             |
-|-----|----------------------------|--------|---------------------------------------------------------------------------------------------------------|
-| `D1`| **Depth of Synthesis**     | 30%    | Evaluates the ability to create novel insights by connecting disparate information, not just summarizing. |
-| `D2`| **Evidence Quality**       | 25%    | Assesses the credibility of the sources used, based on the `Hierarchy of Evidence` model.                 |
-| `D3`| **Strategic Actionability**| 20%    | Measures how well the analysis informs a decision, highlights a risk, or reveals an opportunity.        |
-| `D4`| **Clarity & Precision**    | 15%    | Judges the language for being unambiguous, concise, and effective at communicating complex ideas.       |
-| `D5`| **Rigor & Objectivity**    | 10%    | Assesses the neutrality of the tone and the logical soundness of the analytical arguments.              |
-
----
-
-## 3. DETAILED RUBRIC
-
-### **D1: Depth of Synthesis (30%)**
-- **Score 9-10 (Exceptional)**: The analysis reveals non-obvious, second-order insights by weaving together multiple, disparate sources. It identifies the "why" behind the "what."
-- **Score 5-7 (Adequate)**: The analysis correctly groups related information and draws simple, first-order conclusions. It summarizes well but generates limited new insight.
-- **Score 1-2 (Insufficient)**: The output is a simple list or paraphrase of facts from the sources. There is no meaningful synthesis.
-
-### **D2: Evidence Quality (25%)**
-- **Score 9-10 (Excellent)**: Over 80% of citations refer to Tier 1 or Tier 2 sources (e.g., peer-reviewed papers, SEC filings). The best available evidence is used.
-- **Score 5-7 (Acceptable)**: A mix of source tiers is used. May rely on some Tier 3-4 sources (e.g., conference papers, news) where better evidence was available.
-- **Score 1-2 (Poor)**: The analysis overwhelmingly relies on Tier 5 sources (e.g., blogs, opinion pieces) or fails to use the most credible sources provided.
-
-### **D3: Strategic Actionability (20%)**
-- **Score 9-10 (Highly Actionable)**: The `Executive Summary` clearly articulates the strategic implications ("so what?"). The insights can be directly used to make a specific decision.
-- **Score 5-7 (Somewhat Actionable)**: The analysis is interesting and informative, but the link to strategic decisions is vague or requires significant interpretation.
-- **Score 1-2 (Not Actionable)**: The analysis is purely descriptive or academic. It does not provide a basis for any concrete action.
-
-### **D4: Clarity & Precision (15%)**
-- **Score 9-10 (Outstanding)**: The language is precise, unambiguous, and economical. Complex ideas are explained with exceptional clarity.
-- **Score 5-7 (Clear)**: The meaning is generally clear, but the text could be more concise or precise. May contain minor jargon.
-- **Score 1-2 (Unclear)**: The text is confusing, verbose, or uses ambiguous language, hindering comprehension.
-
-### **D5: Rigor & Objectivity (10%)**
-- **Score 9-10 (Highly Rigorous)**: The tone is completely neutral and dispassionate. Analytical claims are logically sound and free from cognitive biases. Confidence levels are well-justified.
-- **Score 5-7 (Mostly Objective)**: The tone is largely neutral, but with occasional, subtle use of leading or biased language.
-- **Score 1-2 (Biased)**: The analysis uses emotionally loaded language, advocates for a position, or contains logical fallacies.
-
----
-
-## 4. FINAL SCORE CALCULATION
-`Final Score = (D1 * 0.30) + (D2 * 0.25) + (D3 * 0.20) + (D4 * 0.15) + (D5 * 0.10)`
-- **`>= 8.0`**: ACCEPT
-- **`< 8.0`**: FLAG_FOR_REVIEW
+## Score Thresholds
+- **Publish**: >= 8.0
+- **Revise**: 6.0-7.9 (specify which dimensions to improve)
+- **Reject**: < 6.0 (re-research needed)

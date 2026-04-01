@@ -1,0 +1,52 @@
+---
+id: p10_out_sql_migration
+kind: output
+pillar: P10
+title: "Output: SQL Migration"
+version: 1.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: knowledge-management
+quality: null
+tags: [output, n04, sql, migration, supabase, database]
+tldr: "Supabase migration SQL: CREATE tables + INSERT KCs + CREATE indexes."
+density_score: 0.92
+---
+
+# Output: SQL Migration
+
+## Template
+```sql
+-- Migration: {{NAME}}
+-- Generated: {{DATE}}
+-- KCs: {{COUNT}}
+
+-- 1. Create tables (if not exist)
+CREATE TABLE IF NOT EXISTS kcs (
+  id TEXT PRIMARY KEY,
+  kind TEXT NOT NULL,
+  pillar TEXT NOT NULL,
+  domain TEXT,
+  title TEXT NOT NULL,
+  tldr TEXT,
+  body TEXT NOT NULL,
+  tags TEXT[],
+  density_score FLOAT,
+  quality FLOAT,
+  created_at TIMESTAMPTZ DEFAULT now(),
+  updated_at TIMESTAMPTZ DEFAULT now()
+);
+
+-- 2. Insert KCs
+INSERT INTO kcs (id, kind, pillar, domain, title, tldr, body, tags, density_score, quality)
+VALUES
+  ('{{ID}}', '{{KIND}}', '{{PILLAR}}', '{{DOMAIN}}', '{{TITLE}}', '{{TLDR}}', '{{BODY}}', ARRAY[{{TAGS}}], {{DENSITY}}, {{QUALITY}})
+ON CONFLICT (id) DO UPDATE SET
+  body = EXCLUDED.body,
+  updated_at = now();
+
+-- 3. Create indexes
+CREATE INDEX IF NOT EXISTS idx_kcs_kind ON kcs(kind);
+CREATE INDEX IF NOT EXISTS idx_kcs_pillar ON kcs(pillar);
+CREATE INDEX IF NOT EXISTS idx_kcs_domain ON kcs(domain);
+```

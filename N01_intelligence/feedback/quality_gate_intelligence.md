@@ -1,57 +1,36 @@
 ---
-id: p11_qg_research_nucleus
+id: p11_qg_intelligence
 kind: quality_gate
 pillar: P11
-title: "Gate: Research Nucleus"
-version: "1.0.0"
-created: "2023-10-05"
-updated: "2023-10-05"
-author: "quality-gate-builder"
-domain: "research"
-quality: 8.7
-tags: [quality-gate, research, evaluation]
-tldr: "Gate for ensuring high-quality research outputs before acceptance into the pool."
-density_score: 0.95
+title: "N01 Quality Gate — Research Output Validation"
+version: 4.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: research-intelligence
+quality: null
+tags: [quality_gate, n01, research, triangulation, freshness]
+tldr: "10 checks for research output: source count, triangulation, freshness, citation format, confidence scoring, brand alignment."
+density_score: 0.93
 ---
 
-## Definition
-| Property | Value |
-|----------|-------|
-| Metric | aggregate_score |
-| Threshold | 0.8 |
-| Operator | >= |
-| Scope | All research artifacts before pool integration |
+# N01 Quality Gate
 
-## HARD Gates
-| gate_id | Description | Threshold | Block |
-|---------|-------------|-----------|-------|
-| H01 | Frontmatter parses without error | N/A | true |
-| H02 | id matches the filename stem | N/A | true |
-| H03 | kind == research | N/A | true |
-| H04 | quality field must be null | N/A | true |
-| H05 | Required fields present | 100% | true |
-| H06 | Research must not exceed size limit (4096 bytes) | 4096 bytes | true |
+## Hard Gates (fail = reject)
 
-## SOFT Gates
-| gate_id | Description | Max Penalty | Weight |
-|---------|-------------|-------------|--------|
-| S01 | Completeness of references | 0.2 | 20% |
-| S02 | Originality and innovation | 0.3 | 30% |
-| S03 | Clarity and coherence of argument | 0.2 | 20% |
-| S04 | Actionable insights and conclusions | 0.2 | 20% |
-| S05 | Compliance with ethical standards | 0.1 | 10% |
+| ID | Check | Rationale |
+|----|-------|-----------|
+| H01 | Minimum 3 sources cited per major claim | Triangulation is mandatory |
+| H02 | Every source has URL + access date | Unverifiable sources are worthless |
+| H03 | Confidence score on every key finding | Reader must know certainty level |
+| H04 | No data older than 90 days without ⚠️ warning | Stale data misleads |
+| H05 | Output follows assigned template | Consistency across deliverables |
 
-## Scoring Formula
-`aggregate_score = SUM(gate_score * weight for each SOFT gate)`
+## Soft Scoring
 
-PASS condition: all HARD gates pass AND aggregate_score >= 0.8
-
-## Bypass Policy
-- Who may override: admin
-- Conditions for bypass: For scores between 0.75 and 0.79 with additional peer review
-- Audit requirement: Must log timestamp, actor, justification, and expiry of bypass
-
-## Audit Trail
-- What is logged: Evaluation results of each gate, timestamp, evaluator ID
-- Retention Policy: Logs must be retained for a minimum of 6 months for auditing and review purposes
----
+| # | Dimension | Weight | 1 (Poor) | 10 (Excellent) |
+|---|-----------|--------|----------|----------------|
+| 1 | Source diversity (web + academic + industry) | 1.0 | All from 1 type | 3+ source types |
+| 2 | Actionable insights (not just data) | 1.0 | Raw data dump | Every finding has "so what?" |
+| 3 | Competitive grid completeness | 0.8 | Missing competitors | All major players + dimensions |
+| 4 | Visual structure (tables, grids) | 0.6 | Wall of text | Structured with tables |
+| 5 | Brand context alignment | 0.6 | Generic research | Through lens of user's market |

@@ -1,80 +1,51 @@
 ---
-id: n04_ac_knowledge
+id: p02_card_knowledge
 kind: agent_card
-pillar: P08_architecture
-version: 3.0.0
+pillar: P02
+title: "N04 Knowledge Engineer — Agent Card"
+version: 4.0.0
 created: 2026-03-31
-updated: 2026-03-31
-author: n04_knowledge_nucleus
-name: "N04 Knowledge Nucleus"
-role: "Manages the CEX knowledge lifecycle via RAG, semantic indexing, and taxonomy."
-model_family: gemini
-model_name: gemini-2.5-pro
-context_window: 1M
-provider: Google
-mcps: [vector_db, document_loaders, embedding_apis]
-boot_protocol:
-  - "1. LOAD_IDENTITY from n04_agent_knowledge"
-  - "2. LOAD_PERSONA from n04_sp_knowledge"
-  - "3. LOAD_ARTIFACTS [kcs, workflows, configs]"
-  - "4. CONNECT_MCPS [vector_db, embedding_apis]"
-  - "5. STANDBY_FOR_DISPATCH"
-constraints:
-  - "MUST operate strictly within the knowledge architecture domain."
-  - "MUST cite sources from the knowledge base for all retrieved information."
-  - "MUST prioritize retrieval accuracy and data integrity above all else."
-dispatch_keywords: [knowledge, rag, indexing, embeddings, taxonomy, retrieval, documentation, search, find, explain, chunking, consolidate]
-tools: [chunk_optimizer, semantic_search, knowledge_graph_builder, consolidator]
-dependencies: [N03_engineering, P01_knowledge]
-quality: 8.9
-tags: [agent_card, n04, knowledge, architecture, p08, gemini]
-tldr: "Deployment and operational spec for N04, the Knowledge Nucleus agent, running on Gemini 2.5-pro with a 1M context window."
+author: n07_orchestrator
+domain: knowledge-management
+quality: null
+tags: [agent_card, n04, knowledge, engineer, routing, database]
+tldr: "Knowledge Engineer routing card — 12 capabilities, triple-export (CEX+fine-tune+SQL), inter-nucleus knowledge flows."
+density_score: 0.93
 ---
 
-# Agent Card: N04 Knowledge Nucleus
+# N04 Knowledge Engineer — Agent Card
 
-## 1. Primary Role
-The N04 Knowledge Nucleus is the specialized CEX agent responsible for the end-to-end knowledge pipeline. It architects and maintains the systems for data ingestion, processing, semantic indexing, and retrieval, forming the foundation of the CEX RAG strategy. Its mandate is to transform disorganized information into a strategic, queryable asset.
+## Routing
+- **Priority**: 7
+- **Keywords**: knowledge, KC, taxonomy, classify, index, embed, database, supabase, fine-tune, ML, dataset, export, gap, freshness, stale, RAG, search
+- **Dispatch**: `bash _spawn/dispatch.sh solo n04 "task"`
 
-## 2. Model Specification
-- **Provider**: Google
-- **Model Family**: Gemini
-- **Model Name**: `gemini-2.5-pro`
-- **Context Window**: `1,000,000 tokens`
-- **Reasoning**: The model was selected for its massive context window, which is critical for large-scale document ingestion, cross-document synthesis, and complex architectural reasoning. It allows the agent to "see" and process entire repositories or books in a single pass.
+## Provider
+| Mode | Provider | When |
+|------|----------|------|
+| Structuring | Claude | Reasoning, classification, distillation |
+| Bulk ingestion | Gemini | Large document processing |
+| Fallback | Either | Rate limit on primary |
 
-## 3. Ecosystem Dependencies (Future State)
-N04's capabilities are augmented by a suite of specialized Micro-Capability Products (MCPs) and internal tools.
+## Triple-Export Architecture
+```
+KC (.md) → cex_compile.py → .yaml (CEX internal)
+KC (.md) → export_finetune → .jsonl (fine-tuning)
+KC (.md) → export_sql → SQL INSERT (Supabase)
+```
 
-| Type | Name | Purpose |
-| :--- | :--- | :--- |
-| **MCP** | `vector_db` | A dedicated vector database for storing and querying billions of embeddings at petabyte scale. |
-| **MCP** | `document_loaders`| Pluggable connectors for ingesting data from diverse sources (e.g., git, websites, Figma, Notion). |
-| **MCP** | `embedding_apis` | A managed service for generating text embeddings using various fine-tuned models. |
-| **Tool**| `semantic_search` | Performs hybrid vector/keyword search against the `vector_db` MCP. |
-| **Tool**| `knowledge_graph_builder`| Constructs and traverses the graph of interconnected Knowledge Cards. |
-| **Tool**| `chunk_optimizer` | Analyzes retrieval metrics to recommend superior chunking strategies. |
-| **Tool**| `consolidator` | Merges and deduplicates redundant information into a single canonical source. |
+## Inter-Nucleus Knowledge Flows
 
-## 4. Boot Protocol
-The agent's activation follows a strict, five-stage sequence to ensure operational readiness and integrity.
-1.  **LOAD_IDENTITY**: Ingests its core capabilities and boundaries from `n04_agent_knowledge.md`.
-2.  **LOAD_PERSONA**: Adopts the operational rules and persona from `n04_sp_knowledge.md`.
-3.  **LOAD_ARTIFACTS**: Loads its domain-specific KCs, workflows, and configurations into active memory.
-4.  **CONNECT_MCPS**: Establishes secure connections to its dependent MCPs, primarily the vector database.
-5.  **STANDBY_FOR_DISPATCH**: Enters a ready state, awaiting tasks from the CEX orchestrator and confirming successful initialization.
+| From | To N04 | What |
+|------|--------|------|
+| N01 | Research results | "Distill into KCs" |
+| N03 | New builder patterns | "Document as pattern KC" |
+| N06 | Brand knowledge | "Index brand archetypes" |
+| N07 | Gap detection | "Fill missing KCs" |
 
-## 5. Operational Parameters
-
-| Parameter | Value | Description |
-| :--- | :--- | :--- |
-| **Max Concurrency** | 5 tasks | Can handle up to 5 concurrent knowledge processing jobs (e.g., indexing runs). |
-| **Task Timeout** | 60 minutes | Long timeout to accommodate complex ingestion and indexing jobs on large datasets. |
-| **Memory Limit** | 8192 MB | Significant memory allocation for in-memory processing of large documents. |
-| **Health Check** | `self_diagnose(query='what is RAG?')` | Periodically runs a test query against the knowledge base to validate the E2E pipeline. |
-| **Monitoring** | Signal on Complete/Alert on Failure | Emits a signal to the CEX monitoring system upon successful completion or critical failure of a task. |
-
-## 6. Governance Mandates
-- **Domain Integrity**: N04's operational scope is strictly limited to knowledge architecture. It **must** hand off implementation tasks to N03 and will not engage in generative tasks outside of knowledge synthesis.
-- **Traceability**: All retrieved information must be accompanied by source links to the relevant Knowledge Card(s) or source document, ensuring 100% traceability and trust.
-- **Accuracy**: In the event of conflicting information, N04 will report the conflict rather than providing a potentially inaccurate synthesis.
+| From N04 | To | What |
+|----------|-----|------|
+| Kind KC | N03 | Builder knowledge injection |
+| Domain KC | N01 | Research context |
+| Brand KC | N06 | Brand knowledge base |
+| Fine-tune set | External | Model training data |
