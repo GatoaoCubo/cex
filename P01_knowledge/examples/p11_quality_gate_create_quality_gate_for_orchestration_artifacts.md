@@ -1,5 +1,5 @@
 ---
-id: p11_qg_orchestration
+id: p11_qg_orchestration_artifacts
 kind: quality_gate
 pillar: P11
 title: "Gate: Orchestration Artifacts"
@@ -9,80 +9,75 @@ updated: "2026-04-01"
 author: "quality-gate-builder"
 domain: "orchestration"
 quality: 8.9
-target_kind: ["workflow", "dag", "schedule", "dispatch_rule", "handoff"]
-delivery_threshold: 8.0
-bypass_policy: "admin"
-dimensions: ["completeness", "efficiency", "resilience", "traceability", "resource_awareness", "documentation"]
-tags: [quality-gate, orchestration, workflow, dispatch, P11]
-tldr: "Quality gate for orchestration artifacts: validates workflow logic, nucleus references, and execution safety with 8.0+ threshold."
-density_score: 0.91
+tags: [quality-gate, orchestration, n07, coordination, dispatch]
+tldr: "Quality gate for orchestration artifacts: validates nucleus routing, handoff structure, and signal protocols >= 8.0"
+density_score: 0.88
 ---
 ## Definition
-
-Quality gate for orchestration artifacts that coordinate multiple nuclei, manage workflows, or control task dispatch. Ensures logical consistency, executable structure, and safe resource utilization.
-
 | Property | Value |
 |----------|-------|
-| Metric | weighted_orchestration_score |
+| Metric | orchestration_score |
 | Threshold | 8.0 |
 | Operator | >= |
-| Scope | All orchestration artifacts (workflow, dag, schedule, dispatch_rule, handoff) before production deployment |
+| Scope | All orchestration artifacts (workflows, handoffs, dispatch_rules, coordination patterns) |
 
 ## HARD Gates
-
-ALL must pass. Single failure = REJECT regardless of soft score.
+Failure on any gate blocks artifact regardless of soft score.
 
 | ID  | Criterion | Failure Action |
 |-----|-----------|----------------|
-| H01 | YAML frontmatter parses without syntax errors | block |
-| H02 | `id` field matches pattern `p{NN}_*` for target pillar | block |
-| H03 | `id` field equals filename stem exactly | block |
-| H04 | `kind` field matches one of target orchestration kinds | block |
-| H05 | `quality` field is null at creation time | block |
+| H01 | Frontmatter parses as valid YAML without errors | block |
+| H02 | `id` matches pillar namespace pattern | block |
+| H03 | `id` equals filename stem exactly | block |
+| H04 | `kind` field matches expected orchestration artifact type | block |
+| H05 | `quality` field is null (no self-scoring) | block |
 | H06 | All required frontmatter fields present and non-empty | block |
-| H07 | All referenced nucleus IDs (n01-n07) exist in system registry | block |
-| H08 | Workflow contains no circular dependencies or infinite loops | block |
-| H09 | Every workflow step defines concrete action with clear success criteria | block |
-| H10 | Error handling paths defined for all failure scenarios | block |
+| H07 | Nucleus routing table present with valid N01-N07 mappings | block |
+| H08 | Handoff protocol defined with clear input/output specifications | block |
+| H09 | Signal emission points documented for coordination events | block |
+| H10 | Dispatch logic is deterministic (no ambiguous routing rules) | block |
 
 ## SOFT Gates
-
-Weighted scoring dimensions contributing to final quality score.
+Weighted dimensions contributing to quality score.
 
 | ID  | Criterion | Weight | Scoring Method |
 |-----|-----------|--------|----------------|
-| S01 | Completeness: all workflow steps documented with inputs/outputs | 0.20 | graduated |
-| S02 | Efficiency: minimal redundant steps, optimal nucleus utilization | 0.20 | graduated |
-| S03 | Resilience: graceful degradation and retry logic for failures | 0.20 | graduated |
-| S04 | Traceability: clear step naming and execution logging | 0.15 | binary |
-| S05 | Resource awareness: respects nucleus capabilities and load limits | 0.15 | graduated |
-| S06 | Documentation: clear purpose, usage examples, and dependencies | 0.10 | binary |
+| S01 | Nucleus assignment accuracy (correct domain-to-nucleus mapping) | 20% | graduated |
+| S02 | Handoff completeness (all required data flows specified) | 20% | binary |
+| S03 | Signal protocol adherence (proper event emission and handling) | 15% | graduated |
+| S04 | Coordination efficiency (minimal nucleus hops for task completion) | 15% | graduated |
+| S05 | Error handling coverage (failure modes and recovery paths defined) | 10% | binary |
+| S06 | Documentation clarity (orchestration flow is comprehensible) | 10% | graduated |
+| S07 | Dependency management (prerequisites and order dependencies explicit) | 10% | binary |
 
 ## Scoring Formula
-
 ```
-aggregate_score = SUM(gate_score * weight for each SOFT gate)
-final_score = aggregate_score * 10
-PASS condition: all HARD gates pass AND final_score >= 8.0
+aggregate_score = (
+  S01_score * 0.20 +
+  S02_score * 0.20 + 
+  S03_score * 0.15 +
+  S04_score * 0.15 +
+  S05_score * 0.10 +
+  S06_score * 0.10 +
+  S07_score * 0.10
+) * 10
 ```
 
-Weight verification: 0.20 + 0.20 + 0.20 + 0.15 + 0.15 + 0.10 = 1.00 ✓
+**Pass condition**: All HARD gates pass AND aggregate_score >= 8.0
 
 ## Actions
-
-| Outcome | Score Range | Consequence |
-|---------|-------------|-------------|
-| GOLDEN | >= 9.5 | Deploy to production; use as reference template |
-| PUBLISH | 8.0 - 9.4 | Deploy to production with standard monitoring |
-| REVIEW | 7.0 - 7.9 | Return for revision with detailed feedback |
-| REJECT | < 7.0 | Block deployment; major rework required |
+| Outcome | Consequence |
+|---------|-------------|
+| GOLDEN (>= 9.5) | Promote to reference orchestration pattern; use as template for new patterns |
+| PUBLISH (>= 8.0) | Deploy to production orchestration pool; mark as coordination-ready |
+| REVIEW (>= 7.0) | Return to author with dimensional feedback; single revision cycle allowed |
+| REJECT (< 7.0) | Block from pool; requires fundamental restructure before re-evaluation |
 
 ## Bypass Policy
-
 | Field | Value |
 |-------|-------|
-| Conditions | Experimental orchestration patterns under active research; emergency hotfix deployments with time constraints |
-| Approver | P11 pillar owner or N07 orchestrator lead |
-| Audit requirement | Record in `.cex/runtime/decisions/bypasses.md` with timestamp, approver signature, business justification, and review date |
-| Expiry | 7 days from bypass grant; must achieve full compliance before production use |
-| Non-bypassable | H01 (YAML parsing), H05 (quality null), H07 (nucleus references), H08 (circular dependencies) |
+| Conditions | Experimental orchestration pattern with unstable nucleus architecture OR emergency coordination fix |
+| Approver | N07 chief orchestrator must authorize in writing |
+| Audit requirement | Log in `.cex/runtime/decisions/bypasses.md` with date, approver, justification, and expiry |
+| Expiry | 7 days for emergency fixes, 21 days for experimental patterns |
+| Non-bypassable | H01 (YAML validity), H05 (quality null), H07 (nucleus routing) |
