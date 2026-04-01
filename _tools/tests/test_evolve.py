@@ -7,6 +7,7 @@ import json
 import tempfile
 import shutil
 from pathlib import Path
+from unittest.mock import patch, MagicMock
 
 import pytest
 
@@ -19,6 +20,7 @@ from cex_evolve import (
     apply_improvement,
     init_results,
     log_result,
+    evolve_agent,
     RESULTS_DIR,
 )
 
@@ -311,3 +313,90 @@ class TestEvolveSingleIntegration:
         from cex_evolve import evolve_single
         result = evolve_single(tmp_path / "ghost.md", target=9.0, max_rounds=1, verbose=False)
         assert result["status"] == "error"
+
+
+# ============================================================
+# Agent mode tests (mocked subprocess — no real LLM calls)
+# ============================================================
+
+class TestEvolveAgent:
+    def test_file_not_found(self, tmp_path, capsys):
+        """Agent mode prints error for missing file."""
+        evolve_agent(tmp_path / "ghost.md")
+        out = capsys.readouterr().out
+        assert "ERROR" in out
+        assert "not found" in out
+
+    def test_program_md_missing(self, sample_artifact, monkeypatch, capsys):
+        """Agent mode prints error when program.md doesn't exist."""
+        import cex_evolve
+        monkeypatch.setattr(cex_evolve, "CEX_ROOT", sample_artifact.parent)
+        evolve_agent(sample_artifact)
+        out = capsys.readouterr().out
+        assert "ERROR" in out
+        assert "program.md" in out
+
+    @patch("cex_evolve.subprocess.run")
+    def test_spawns_claude_by_default(self, mock_run, sample_artifact, capsys):
+        """Agent mode spawns claude CLI with inlined program.md."""
+        # Create program.md in CEX_ROOT
+        import cex_evolve
+        prog = Path(cex_evolve.CEX_ROOT) / "program.md"
+        if not prog.exists():
+            pytest.skip("program.md not in CEX_ROOT")
+        mock_run.return_value = MagicMock(returncode=0)
+        evolve_agent(sample_artifact, provider="claude")
+        assert mock_run.called
+        cmd = mock_run.call_args[0][0]
+        assert cmd[0] == "claude"
+        assert "-p" in cmd
+        # prompt should contain program.md content inlined
+        prompt_idx = cmd.index("-p") + 1
+        assert "NEVER STOP" in cmd[prompt_idx]
+        assert str(sample_artifact) in cmd[prompt_idx]
+
+    @patch("cex_evolve.subprocess.run")
+    def test_spawns_codex(self, mock_run, sample_artifact, capsys):
+        """Agent mode can spawn codex."""
+        import cex_evolve
+        prog = Path(cex_evolve.CEX_ROOT) / "program.md"
+        if not prog.exists():
+            pytest.skip("program.md not in CEX_ROOT")
+        mock_run.return_value = MagicMock(returncode=0)
+        evolve_agent(sample_artifact, provider="codex")
+        cmd = mock_run.call_args[0][0]
+        assert cmd[0] == "codex"
+
+    @patch("cex_evolve.subprocess.run")
+    def test_spawns_gemini(self, mock_run, sample_artifact, capsys):
+        """Agent mode can spawn gemini."""
+        import cex_evolve
+        prog = Path(cex_evolve.CEX_ROOT) / "program.md"
+        if not prog.exists():
+            pytest.skip("program.md not in CEX_ROOT")
+        mock_run.return_value = MagicMock(returncode=0)
+        evolve_agent(sample_artifact, provider="gemini")
+        cmd = mock_run.call_args[0][0]
+        assert cmd[0] == "gemini"
+
+    def test_unknown_provider(self, sample_artifact, capsys):
+        """Agent mode prints error for unknown provider."""
+        import cex_evolve
+        prog = Path(cex_evolve.CEX_ROOT) / "program.md"
+        if not prog.exists():
+            pytest.skip("program.md not in CEX_ROOT")
+        evolve_agent(sample_artifact, provider="llama-local")
+        out = capsys.readouterr().out
+        assert "Unknown provider" in out
+
+    @patch("cex_evolve.score_artifact", return_value=8.0)
+    @patch("cex_evolve.subprocess.run", side_effect=FileNotFoundError)
+    def test_missing_cli(self, mock_run, mock_score, sample_artifact, capsys):
+        """Agent mode handles missing CLI binary gracefully."""
+        import cex_evolve
+        prog = Path(cex_evolve.CEX_ROOT) / "program.md"
+        if not prog.exists():
+            pytest.skip("program.md not in CEX_ROOT")
+        evolve_agent(sample_artifact, provider="claude")
+        out = capsys.readouterr().out
+        assert "not found" in out

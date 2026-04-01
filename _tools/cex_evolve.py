@@ -510,22 +510,27 @@ def evolve_agent(filepath: Path, provider: str = "claude"):
         print("  This file contains the experiment loop instructions for the LLM agent.")
         return
 
-    # Build the prompt: program.md + target file path + baseline score
+    # Build the prompt: INLINE program.md content + target + baseline
     baseline_score = score_artifact(fp)
-    baseline_text = f"Baseline score: {baseline_score or 'null'}"
+    program_text = program.read_text(encoding="utf-8")
 
-    prompt = f"""Read program.md in the repo root. Your target artifact is: {fp}
+    prompt = f"""You are an autonomous researcher. Follow these instructions EXACTLY.
 
-{baseline_text}
+<protocol>
+{program_text}
+</protocol>
 
-Begin the experiment loop now. Do NOT ask me anything. Just start."""
+Your target artifact is: {fp}
+Baseline score: {baseline_score or 'null'}
+
+Begin the experiment loop NOW. Do NOT ask me anything. Just start with Setup step 2."""
 
     print(f"\n{'='*60}")
-    print(f"[AGENT MODE] Spawning {provider} with program.md")
+    print(f"[AGENT MODE] Spawning {provider} with program.md inlined")
     print(f"  Target:   {fp}")
     print(f"  Baseline: {baseline_score or 'null'}")
     print(f"  Provider: {provider}")
-    print(f"  Protocol: program.md (Karpathy AutoResearch)")
+    print(f"  Prompt:   {len(prompt)} chars ({len(program_text)} from program.md)")
     print(f"{'='*60}")
     print(f"\n  The agent will run autonomously. Ctrl+C to stop.\n")
 
