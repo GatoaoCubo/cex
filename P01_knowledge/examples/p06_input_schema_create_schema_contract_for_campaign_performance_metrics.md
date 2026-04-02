@@ -61,7 +61,7 @@ examples:
   - {campaign_id: "camp_001", metric_name: "CTR", time_period: {start_date: "2026-03-01", end_date: "2026-03-31"}, metric_value: 2.35, metric_type: "percentage"}
   - {campaign_id: "camp_002", metric_name: "conversion_rate", time_period: {start_date: "2026-03-15", end_date: "2026-03-31"}, metric_value: 4.2, filters: {channel: "email", audience_segment: "premium"}}
 domain: "marketing-analytics"
-quality: 8.9
+quality: 9.1
 tags: [input-schema, campaign-metrics, performance-tracking, marketing, analytics]
 tldr: "Input contract for campaign performance metrics: requires campaign_id, metric_name, time_period, and metric_value with optional type and filters."
 density_score: 0.87
