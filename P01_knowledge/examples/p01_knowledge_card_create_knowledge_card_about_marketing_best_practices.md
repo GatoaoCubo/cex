@@ -72,17 +72,23 @@ frameworks: [AIDA, Jobs-to-be-Done, PAS, Pirate Metrics (AARRR)]
 ## Flow
 
 ```text
-[Audience Research] -> [Positioning / USP]
-        |
-[Channel Selection] -> [Copy Creation (AIDA/PAS)]
-        |
-[Campaign Launch + UTM Tracking]
-        |
-[14-day Review: CAC, CTR, CVR]
-        |
-[A/B Test] -> [Scale Winners] -> [Kill Losers]
-        |
-[Quarterly LTV / Retention Audit]
+Day 1-3: [ICP Research] → [Survey 50+ customers] → [Jobs-to-be-Done interview]
+  ↓ Decision: Define 1-2 primary segments (max 3)
+Day 4-7: [Competitive Analysis] → [USP Workshop] → [Value Prop Testing]
+  ↓ Decision: Single USP that beats 3 alternatives
+Week 2: [Channel Matrix] → [Budget Allocation] → [Creative Brief]
+  ↓ Decision: 2-3 channels max for launch (focus beats spread)
+Week 3: [Copy Creation] → [Landing Page Build] → [Tracking Setup]
+  ↓ Gate: All UTM codes, pixels, goals configured
+Week 4: [Soft Launch] → [$50/day cap] → [Monitor CTR/CVR hourly]
+  ↓ Day 3 Review: CTR > 1%? CVR > 0.5%? Continue or kill
+Week 5-6: [Scale Winners] → [Kill Losers] → [A/B Test Variables]
+  ↓ Decision: Increase budget 50% for CTR > 2%, CVR > 1%
+Week 7-8: [Optimization] → [Retargeting Launch] → [Email Sequence]
+  ↓ Weekly Review: CAC < LTV/3? Churn < 5%/month?
+Month 2: [Channel Expansion] → [Lookalike Audiences] → [Referral Program]
+  ↓ Gate: Only if Month 1 CAC payback < 90 days
+Quarterly: [LTV Analysis] → [Retention Audit] → [Channel Mix Review]
 ```
 
 ## Comparativo — Channel by Funnel Stage
