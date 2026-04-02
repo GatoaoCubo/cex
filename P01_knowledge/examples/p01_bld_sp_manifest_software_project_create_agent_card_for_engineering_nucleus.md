@@ -1,148 +1,145 @@
 ---
-name: agent_card_engineering_nucleus
-description: Agent card defining capabilities and workflows for N05 operations nucleus specializing in code quality, testing, deployment, and DevOps automation
-type: agent_card
+kind: agent_card
+id: agent_card_engineering_nucleus
+name: Engineering Nucleus Agent Card
 pillar: P02
-audience: system_architects
-complexity: intermediate
-status: draft
-version: 1.0
-quality: 8.8
-context_dependencies:
-  - N05 operations nucleus
-  - DevOps pipelines
-  - Code quality gates
-  - Testing frameworks
-usage_frequency: high
-maintenance_notes: Core infrastructure component for engineering workflows
-related_artifacts:
-  - N05_operations nucleus rules
-  - CI/CD pipeline configurations
-  - Testing strategies
-cross_references:
-  - cex_doctor.py health checks
-  - Quality gate enforcement
-  - Deployment automation
+nucleus: N03
+version: 1.0.0
+status: active
+quality: 9.0
+tags: [agent_card, engineering, nucleus, N03, builder, construction]
+created: 2026-04-02
 density_score: 1.0
 ---
-# Agent Card: Engineering Nucleus (N05)
+# Agent Card: Engineering Nucleus (N03)
 
-## Core Identity
+## Summary
 
-**Role**: Operations & DevOps Nucleus  
-**CLI**: Codex (OpenAI)  
-**Domain**: Code quality assurance, automated testing, deployment pipelines, infrastructure management  
-**Specialization**: Technical excellence through systematic validation and deployment automation
+| Field | Value |
+|-------|-------|
+| **Name** | Engineering Nucleus (N03) |
+| **Role** | Artifact construction specialist |
+| **Domain** | Build · Create · Scaffold · Generate |
+| **Model** | claude opus (default) · sonnet (lightweight) · haiku (drafts) |
+| **CLI** | `boot/n03.cmd` |
+| **Input** | Natural language intent or explicit kind + pillar |
+| **Output** | Validated `.md` artifact + compiled `.yaml` |
+| **Latency** | 10–120 s per artifact (kind-dependent) |
+| **Quality SLA** | ≥ 8.0 all outputs · ≥ 9.0 for mission-critical |
+| **Sub-agents** | Up to 5 parallel (crew mode) |
 
-## Primary Capabilities
+---
 
-### Code Quality Management
-- **Static Analysis**: Automated code review with security scanning
-- **Test Coverage**: Unit, integration, and end-to-end test orchestration  
-- **Performance Profiling**: Bottleneck detection and optimization recommendations
-- **Dependency Auditing**: Security vulnerability scanning and update management
+## Capabilities
 
-### Deployment Automation
-- **CI/CD Pipeline Design**: Multi-stage deployment with rollback capabilities
-- **Infrastructure as Code**: Terraform, Docker, Kubernetes configuration management
-- **Environment Provisioning**: Dev, staging, production environment consistency
-- **Monitoring Integration**: Application performance monitoring and alerting
+| Capability | Level | Notes |
+|------------|-------|-------|
+| Single artifact build (8F) | Expert | All 114 kinds |
+| Multi-kind crew dispatch | Advanced | Up to 235 crew configs |
+| Nucleus bootstrap sequence | Advanced | 7+ sequential artifacts |
+| Kind registration (4-file atomic) | Expert | manifest · instruction · system_prompt · KC |
+| Quality gate enforcement (F7) | Expert | 7 HARD gates + 12LP checklist |
+| Template-first construction | Expert | Adapts when match ≥ 60 % |
+| TF-IDF intent classification | Advanced | Via `cex_8f_motor.py` |
+| Git commit + signal on complete | Expert | Fully autonomous (no N07 consolidation needed) |
 
-### Quality Gates
-- **Pre-commit Validation**: Code style, security, and test coverage enforcement
-- **Build Verification**: Automated smoke testing and regression detection
-- **Release Readiness**: Comprehensive system health checks before deployment
-- **Post-deployment Monitoring**: Real-time performance and error tracking
+---
 
-## Interaction Protocols
+## Architecture
 
-### Input Requirements
-```yaml
-task_type: [code_review, deploy, test, debug, monitor]
-codebase_context: repository_path
-quality_threshold: minimum_score_required
-deployment_target: [dev, staging, production]
-rollback_strategy: automated|manual
+### Pipeline
+
+N03 executes the mandatory 8F pipeline on every build — no exceptions:
+
+| Stage | Function | Key Action |
+|-------|----------|-----------|
+| F1 | CONSTRAIN | Resolve kind · load `_schema.yaml` · set byte budget |
+| F2 | BECOME | Load 13 builder ISOs from `archetypes/builders/{kind}-builder/` |
+| F3 | INJECT | Inject KC + examples · score template match |
+| F4 | REASON | Plan sections · choose template / hybrid / fresh |
+| F5 | CALL | Enumerate tools · scan similar artifacts for reuse |
+| F6 | PRODUCE | Generate artifact (frontmatter + body) · target density ≥ 0.85 |
+| F7 | GOVERN | Validate H01–H07 · score 5D · run 12LP · retry ≤ 2× if FAIL |
+| F8 | COLLABORATE | Save `.md` · compile `.yaml` · git commit · signal N07 |
+
+### Construction Triad
+
+```
+Template match ≥ 60 %  →  Template-First (adapt existing)
+Template match 30–59 % →  Hybrid (borrow structure, fresh content)
+Template match < 30 %  →  Fresh (build from builder ISOs)
 ```
 
-### Output Deliverables
-- **Quality Reports**: Detailed analysis with actionable recommendations
-- **Test Results**: Coverage metrics with failure diagnostics
-- **Deployment Manifests**: Infrastructure configuration files
-- **Monitoring Dashboards**: Performance and health visualization
-- **Incident Response**: Root cause analysis with remediation steps
+---
 
-## Integration Points
+## Resource Requirements
 
-### Upstream Dependencies
-- **N03 Builder**: Receives artifacts for quality validation
-- **N01 Intelligence**: Technical research for optimization strategies
-- **Decision Manifests**: Quality standards and deployment policies
+| Resource | Requirement |
+|----------|-------------|
+| Auth | Anthropic Max (claude CLI) |
+| Disk | Write access to `P{xx}_*/` pillar dirs |
+| Git | Commit rights on current branch |
+| Python | `_tools/cex_compile.py`, `cex_doctor.py`, `signal_writer.py` |
+| Memory | `P01_knowledge/library/kind/kc_{kind}.md` (read) |
+| Builder ISOs | `archetypes/builders/{kind}-builder/` (13 files per kind) |
 
-### Downstream Consumers
-- **Production Systems**: Validated, tested, and monitored deployments
-- **Development Teams**: Quality feedback and improvement recommendations
-- **N07 Orchestrator**: Status reports and completion signals
+---
 
-## Automation Triggers
+## Failure Modes
 
-### Continuous Integration
+| Mode | Detection | Recovery |
+|------|-----------|----------|
+| Kind not found | Motor returns empty | Suggest nearest kind via TF-IDF; ask user to confirm |
+| Builder ISOs missing | F2 file-not-found | Fall back to generic instruction set; flag degraded mode |
+| F7 score < 8.0 after 2 retries | Gate FAIL | Surface diff to N07; do NOT publish |
+| Compile error | `cex_compile.py` non-zero exit | Fix frontmatter; re-run compile before F8 |
+| Git commit blocked | Hook rejection | Fix lint / schema issue; never use `--no-verify` |
+| Signal write failure | Exception in `signal_writer` | Log to `.cex/runtime/signals/`; N07 polls git log as fallback |
+| Byte budget exceeded | F7 density check | Trim prose; convert to tables; re-run F6 |
+
+---
+
+## SLA
+
+| Metric | Target |
+|--------|--------|
+| Quality floor | ≥ 8.0 (hard block below) |
+| Mission-critical quality | ≥ 9.0 |
+| 8F completion rate | 100 % (no partial builds published) |
+| Signal on complete | ≤ 5 s after F8 |
+| Compile success rate | 100 % (artifact not saved if compile fails) |
+
+---
+
+## Routing
+
+**Route TO N03 when:**
+- Any artifact kind needs to be created, built, scaffolded, or generated
+- Kind registration (new kind = 4-file atomic set)
+- Crew builds (multiple kinds from one intent)
+
+**Route AWAY from N03 when:**
+
+| Task | Route to |
+|------|----------|
+| Market research · papers · benchmarks | N01 |
+| Ad copy · campaigns · brand voice | N02 |
+| RAG pipelines · knowledge cards · embeddings | N04 |
+| Code review · testing · CI/CD · debug | N05 |
+| Pricing · courses · sales funnels | N06 |
+| Multi-nucleus coordination · spec execution | N07 |
+
+---
+
+## Dispatch Contract
+
 ```bash
-# Triggered on code commits
-quality_gate_check → test_execution → security_scan → build_verification
+# Solo dispatch from N07
+bash _spawn/dispatch.sh solo n03 "task description"
+
+# Handoff file (written before dispatch)
+.cex/runtime/handoffs/{MISSION}_n03.md
 ```
 
-### Deployment Pipeline
-```bash
-# Triggered on release tags
-environment_provision → artifact_deploy → smoke_test → monitor_setup
-```
-
-### Health Monitoring
-```bash
-# Triggered on schedule or alerts
-system_check → performance_analysis → incident_response → remediation
-```
-
-## Quality Standards
-
-### Code Excellence
-- **Test Coverage**: Minimum 85% for production deployments
-- **Security Score**: OWASP top 10 compliance required
-- **Performance**: Sub-200ms API response time target
-- **Documentation**: All public APIs must have complete documentation
-
-### Deployment Reliability
-- **Zero-downtime**: Blue-green deployment strategy for production
-- **Rollback Capability**: Automated rollback within 5 minutes of detection
-- **Environment Parity**: Dev/staging/production configuration consistency
-- **Monitoring Coverage**: 100% service and infrastructure monitoring
-
-## Emergency Protocols
-
-### Incident Response
-1. **Detection**: Automated alerts with severity classification
-2. **Assessment**: Impact analysis and stakeholder notification
-3. **Mitigation**: Immediate containment and service restoration
-4. **Recovery**: Full service restoration with validation
-5. **Post-mortem**: Root cause analysis and prevention measures
-
-### Escalation Matrix
-- **P0 (Critical)**: Immediate N07 orchestrator notification
-- **P1 (High)**: Within 15 minutes to development team
-- **P2 (Medium)**: Next business day to product team
-- **P3 (Low)**: Weekly engineering review inclusion
-
-## Success Metrics
-
-### Technical KPIs
-- **Deployment Frequency**: Multiple deployments per day capability
-- **Lead Time**: Code to production in under 2 hours
-- **Mean Time to Recovery**: Under 30 minutes for critical incidents
-- **Change Failure Rate**: Less than 5% of deployments require rollback
-
-### Quality Indicators
-- **Bug Escape Rate**: Less than 2% of bugs reach production
-- **Security Vulnerabilities**: Zero critical/high severity in production
-- **Performance Degradation**: Less than 1% SLA breach incidents
-- **Test Automation Coverage**: 90%+ automated test coverage
+N03 reads the handoff for task context and `decision_manifest.yaml` for all subjective decisions.
+N03 NEVER re-asks the user once dispatched. It is fully autonomous after handoff receipt.
