@@ -3,151 +3,135 @@ id: p06_is_engineering_data_model
 kind: input_schema
 pillar: P06
 version: "1.0.0"
-created: "2026-04-01"
-updated: "2026-04-01"
+created: "2026-04-02"
+updated: "2026-04-02"
 author: "input-schema-builder"
-scope: "engineering system data model creation and validation"
+scope: "engineering data model creation and validation operations"
 fields:
   - name: "project_name"
     type: "string"
     required: true
     default: null
-    description: "Name of the engineering project or system"
-    error_message: "project_name is required - provide a string identifying the engineering project"
+    description: "Name of the engineering project requiring the data model"
+    error_message: "project_name is required - provide a valid project identifier"
   - name: "engineering_domain"
     type: "string"
     required: true
     default: null
-    description: "Primary engineering domain (software, mechanical, electrical, civil, aerospace)"
-    error_message: "engineering_domain is required - specify the primary engineering discipline"
+    description: "Engineering discipline: software, mechanical, electrical, civil, chemical"
+    error_message: "engineering_domain is required - specify the engineering discipline"
+  - name: "data_model_type"
+    type: "string"
+    required: true
+    default: null
+    description: "Data model architecture: relational, graph, document, time-series, hybrid"
+    error_message: "data_model_type is required - specify the data model architecture"
   - name: "requirements"
     type: "list"
-    required: false
-    default: []
-    description: "List of functional and non-functional requirements"
-    error_message: "requirements must be a list of requirement objects or strings"
-  - name: "specifications"
-    type: "object"
-    required: false
-    default: {}
-    description: "Technical specifications including performance metrics, constraints, and standards"
-    error_message: "specifications must be an object with specification details"
-  - name: "team_size"
-    type: "integer"
-    required: false
-    default: 1
-    description: "Number of engineers working on the project"
-    error_message: "team_size must be a positive integer"
-  - name: "timeline_months"
-    type: "integer"
-    required: false
-    default: 6
-    description: "Project timeline in months"
-    error_message: "timeline_months must be a positive integer"
-  - name: "budget"
-    type: "float"
-    required: false
+    required: true
     default: null
-    description: "Project budget in currency units"
-    error_message: "budget must be a positive number"
-  - name: "quality_standards"
-    type: "list"
-    required: false
-    default: ["ISO9001"]
-    description: "Quality standards and frameworks to be followed"
-    error_message: "quality_standards must be a list of standard names"
-  - name: "compliance_requirements"
+    description: "List of functional and non-functional requirements for the data model"
+    error_message: "requirements list is required - provide at least one requirement"
+  - name: "constraints"
     type: "list"
     required: false
     default: []
-    description: "Regulatory and compliance requirements"
-    error_message: "compliance_requirements must be a list of compliance items"
-  - name: "technology_stack"
+    description: "Technical constraints: performance, storage, compliance, integration limits"
+    error_message: null
+  - name: "quality_metrics"
     type: "object"
     required: false
-    default: {}
-    description: "Technologies, tools, and platforms to be used"
-    error_message: "technology_stack must be an object with technology details"
+    default: {"accuracy": 0.95, "completeness": 0.90, "consistency": 0.98}
+    description: "Quality standards: accuracy, completeness, consistency thresholds"
+    error_message: null
+  - name: "validation_rules"
+    type: "list"
+    required: false
+    default: []
+    description: "Business rules and validation constraints to enforce"
+    error_message: null
+  - name: "data_sources"
+    type: "list"
+    required: false
+    default: []
+    description: "External data sources to integrate: APIs, databases, files, sensors"
+    error_message: null
+  - name: "scale_parameters"
+    type: "object"
+    required: false
+    default: {"records": 100000, "concurrent_users": 100, "transactions_per_second": 1000}
+    description: "Expected scale: record count, user load, transaction volume"
+    error_message: null
 coercion:
   - from: "string"
-    to: "integer"
-    rule: "Parse team_size and timeline_months from string if numeric"
-  - from: "string"
-    to: "float"
-    rule: "Parse budget from string if numeric"
-  - from: "string"
     to: "list"
-    rule: "Split comma-separated strings into lists for requirements and quality_standards"
+    rule: "Convert comma-separated string to list by splitting on commas"
+  - from: "string"
+    to: "object"
+    rule: "Parse JSON string to object for quality_metrics and scale_parameters"
 examples:
-  - project_name: "Smart HVAC Control System"
+  - project_name: "SmartGrid Monitor"
+    engineering_domain: "electrical"
+    data_model_type: "time-series"
+    requirements: ["Real-time sensor data ingestion", "Historical trend analysis", "Anomaly detection"]
+    constraints: ["Sub-second response time", "99.9% availability"]
+    quality_metrics: {"accuracy": 0.99, "completeness": 0.95}
+  - project_name: "CAD Component Library"
     engineering_domain: "mechanical"
-    team_size: 4
-    timeline_months: 12
-    requirements: ["energy efficiency > 90%", "remote monitoring", "fault detection"]
-    specifications: {"max_power": "5kW", "temperature_range": "-10C to 50C"}
-    quality_standards: ["ISO14001", "ENERGY_STAR"]
-  - project_name: "Web API Gateway"
-    engineering_domain: "software"
-    team_size: 3
-    timeline_months: 8
-    requirements: ["rate limiting", "authentication", "load balancing"]
-    technology_stack: {"backend": "Node.js", "database": "PostgreSQL", "cache": "Redis"}
-domain: "engineering-systems"
-quality: 8.9
-tags: [input-schema, engineering, data-model, systems, specifications]
-tldr: "Input contract for engineering data models: requires project name and domain, optional requirements, specs, team size, timeline, budget, and standards."
+    data_model_type: "graph"
+    requirements: ["Part relationship modeling", "Version control", "Material properties"]
+    scale_parameters: {"records": 1000000, "concurrent_users": 50}
+domain: "engineering-data-modeling"
+quality: 9.1
+tags: [input-schema, engineering, data-model, schema-contract, P06]
+tldr: "Input contract for engineering data model operations: requires project name, domain, model type, and requirements list with optional constraints and metrics."
 density_score: 0.92
 ---
-## Contract Definition
-Engineering systems and projects require structured data models to capture requirements, specifications, team composition, timelines, and compliance needs. This input schema defines the contract for any system that processes engineering project data, ensuring consistent data structure across different engineering domains while maintaining flexibility for domain-specific requirements.
+# Contract Definition
+Engineering data model creation and validation operations receive structured input defining the project context, domain requirements, architectural constraints, and quality expectations. Callers provide project identification, specify the engineering discipline and data model architecture, list functional requirements, and optionally include technical constraints, quality metrics, validation rules, data sources, and scale parameters.
 
 ## Fields
 | # | Name | Type | Required | Default | Description |
 |---|------|------|----------|---------|-------------|
-| 1 | project_name | string | YES | - | Name of the engineering project or system |
-| 2 | engineering_domain | string | YES | - | Primary engineering domain (software, mechanical, electrical, civil, aerospace) |
-| 3 | requirements | list | NO | [] | List of functional and non-functional requirements |
-| 4 | specifications | object | NO | {} | Technical specifications including performance metrics, constraints, and standards |
-| 5 | team_size | integer | NO | 1 | Number of engineers working on the project |
-| 6 | timeline_months | integer | NO | 6 | Project timeline in months |
-| 7 | budget | float | NO | null | Project budget in currency units |
-| 8 | quality_standards | list | NO | ["ISO9001"] | Quality standards and frameworks to be followed |
-| 9 | compliance_requirements | list | NO | [] | Regulatory and compliance requirements |
-| 10 | technology_stack | object | NO | {} | Technologies, tools, and platforms to be used |
+| 1 | project_name | string | YES | - | Name of the engineering project requiring the data model |
+| 2 | engineering_domain | string | YES | - | Engineering discipline: software, mechanical, electrical, civil, chemical |
+| 3 | data_model_type | string | YES | - | Data model architecture: relational, graph, document, time-series, hybrid |
+| 4 | requirements | list | YES | - | List of functional and non-functional requirements for the data model |
+| 5 | constraints | list | NO | [] | Technical constraints: performance, storage, compliance, integration limits |
+| 6 | quality_metrics | object | NO | {"accuracy": 0.95, "completeness": 0.90, "consistency": 0.98} | Quality standards: accuracy, completeness, consistency thresholds |
+| 7 | validation_rules | list | NO | [] | Business rules and validation constraints to enforce |
+| 8 | data_sources | list | NO | [] | External data sources to integrate: APIs, databases, files, sensors |
+| 9 | scale_parameters | object | NO | {"records": 100000, "concurrent_users": 100, "transactions_per_second": 1000} | Expected scale: record count, user load, transaction volume |
 
 ## Coercion Rules
 | From | To | Rule |
 |------|----|------|
-| string | integer | Parse team_size and timeline_months from string if numeric |
-| string | float | Parse budget from string if numeric |
-| string | list | Split comma-separated strings into lists for requirements and quality_standards |
+| string | list | Convert comma-separated string to list by splitting on commas |
+| string | object | Parse JSON string to object for quality_metrics and scale_parameters |
 
 ## Examples
 ```json
 {
-  "project_name": "Smart HVAC Control System",
-  "engineering_domain": "mechanical",
-  "team_size": 4,
-  "timeline_months": 12,
-  "requirements": ["energy efficiency > 90%", "remote monitoring", "fault detection"],
-  "specifications": {"max_power": "5kW", "temperature_range": "-10C to 50C"},
-  "quality_standards": ["ISO14001", "ENERGY_STAR"]
+  "project_name": "SmartGrid Monitor",
+  "engineering_domain": "electrical",
+  "data_model_type": "time-series",
+  "requirements": ["Real-time sensor data ingestion", "Historical trend analysis", "Anomaly detection"],
+  "constraints": ["Sub-second response time", "99.9% availability"],
+  "quality_metrics": {"accuracy": 0.99, "completeness": 0.95}
 }
 ```
 
 ```json
 {
-  "project_name": "Web API Gateway", 
-  "engineering_domain": "software",
-  "team_size": 3,
-  "timeline_months": 8,
-  "requirements": ["rate limiting", "authentication", "load balancing"],
-  "technology_stack": {"backend": "Node.js", "database": "PostgreSQL", "cache": "Redis"}
+  "project_name": "CAD Component Library",
+  "engineering_domain": "mechanical",
+  "data_model_type": "graph",
+  "requirements": ["Part relationship modeling", "Version control", "Material properties"],
+  "scale_parameters": {"records": 1000000, "concurrent_users": 50}
 }
 ```
 
 ## References
-- ISO 15288: Systems and software engineering life cycle processes
-- IEEE 1220: Standard for Application and Management of the Systems Engineering Process
-- PMBOK Guide: Project Management Body of Knowledge
-- Engineering domain standards (IEEE, ASME, ACM, etc.)
+- ISO 10303 (STEP) for engineering data exchange standards
+- IEC 61970 (CIM) for electrical power system data modeling
+- NIST Engineering Data Management standards
