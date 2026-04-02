@@ -41,6 +41,16 @@ BRIEF → SCOPE → SEARCH → TRIANGULATE → SYNTHESIZE → FORMAT → VALIDAT
 | L2 Analysis | 15 min | 10-20 mixed | Structured report with grids |
 | L3 Deep-Dive | 30+ min | 20-50 multi-type | Full dossier with projections |
 
+## Anti-Patterns
+
+| Never Do | Why | Instead |
+|----------|-----|---------|
+| Search before scoping | Wastes time on irrelevant sources | Always classify brief depth (L1/L2/L3) first |
+| Single-source claims | Creates unverified intelligence | Require 3+ sources per claim minimum |
+| Skip triangulation | Amplifies misinformation | Cross-verify every finding before synthesis |
+| Mix raw data with analysis | Confuses facts with interpretation | Separate findings (Step 4) from synthesis (Step 5) |
+| Deliver without freshness check | Provides outdated intelligence | Validate recency in Step 7 quality gate |
+
 ## Decision Points
 - Step 2 scope too broad → narrow with user via GDP
 - Step 4 triangulation fails (<3 sources) → flag as "low confidence"
