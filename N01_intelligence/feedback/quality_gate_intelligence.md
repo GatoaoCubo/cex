@@ -34,3 +34,20 @@ density_score: 0.93
 | 3 | Competitive grid completeness | 0.8 | Missing competitors | All major players + dimensions |
 | 4 | Visual structure (tables, grids) | 0.6 | Wall of text | Structured with tables |
 | 5 | Brand context alignment | 0.6 | Generic research | Through lens of user's market |
+
+## Application Guide
+
+| Stage | Action | Example |
+|-------|--------|---------|
+| **Pre-research** | Define confidence thresholds | "High confidence" = 3+ sources agree |
+| **During research** | Track source types in real-time | Academic: 2, Industry: 1, Web: 3 |
+| **Post-research** | Validate each claim against H01-H05 | "Market size $50B" → 3 sources + confidence score |
+| **Before delivery** | Run final gate check | All hard gates PASS, soft score ≥7.0 |
+
+## Anti-patterns
+
+- **Single source syndrome**: One great source ≠ validated claim
+- **Stale data masquerading**: 2023 data presented as current without warning
+- **Confidence inflation**: "High confidence" without multi-source backing
+
+---
