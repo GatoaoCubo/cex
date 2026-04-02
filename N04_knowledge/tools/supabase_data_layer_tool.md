@@ -31,16 +31,19 @@ python _tools/supabase_data_layer.py validate --config path/to/config.yaml
 python _tools/supabase_data_layer.py plan --config path/to/config.yaml
 ```
 
-## Pipeline
-```text
-[Config YAML] → validate → plan → generate migrations
-                                 → generate RLS policies
-                                 → generate storage config
-                                 → generate realtime config
-                                 → generate edge function scaffolds
-                                 → generate MCP config
-                                 → output summary
-```
+## Pipeline Stages
+| Stage | Input | Output | Validation | Size |
+|-------|-------|--------|------------|------|
+| validate | config.yaml | schema check | JSON schema + required fields | — |
+| plan | validated config | preview report | SQL syntax + naming | ~2KB |
+| schema | database section | CREATE TABLE + indexes | foreign key integrity | ~5KB |
+| auth | auth section | provider config | OAuth redirect URLs | ~1KB |
+| rls | rls section | CREATE POLICY | policy syntax + roles | ~3KB |
+| storage | storage section | bucket creation + policies | bucket names + MIME types | ~2KB |
+| realtime | realtime section | ALTER PUBLICATION | table exists check | ~500B |
+| vectors | vectors section | extension + match function | vector dimensions | ~4KB |
+| edge_functions | edge_functions section | TypeScript scaffolds | function names + imports | ~8KB |
+| mcp | integracao_cex section | MCP server config | port conflicts | ~1KB |
 
 ## Config Sections Processed
 | Section | Output | File |
