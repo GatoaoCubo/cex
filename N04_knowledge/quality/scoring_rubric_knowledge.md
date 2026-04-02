@@ -23,6 +23,17 @@ density_score: 0.92
 | Structure | 15% | Unformatted prose | Headers + some sections | Full frontmatter + tables + sections | Template-perfect, triple-export ready |
 | Freshness | 15% | >1 year, no context | <6 months | <90 days, versioned | Current + trend context + update plan |
 
+## Quick Reference
+
+**30-second scoring checklist**:
+- [ ] **Density**: More tables than paragraphs? No filler words? → 7+
+- [ ] **Taxonomy**: Correct `kind:` field? Domain-specific? → 7+
+- [ ] **Actionability**: Has "when to use" + "when NOT to use"? → 7+
+- [ ] **Structure**: Complete frontmatter + `##` sections + tables? → 7+
+- [ ] **Freshness**: <90 days old? Version number? → 7+
+
+**Decision tree**: 5×Yes = 9+, 4×Yes = 8+, 3×Yes = 7+, <3×Yes = revise
+
 ## Usage Guidelines
 
 **When to apply**: Score every knowledge card before publication. Use during peer review cycles.
