@@ -23,6 +23,16 @@ density_score: 0.92
 | Structure | 15% | Prose paragraphs | Some tables | Grids + tables + sections | Visual hierarchy, scannable, executive summary |
 | Depth | 15% | Surface scan only | Key facts covered | Analysis with context | Deep-dive with projections and edge cases |
 
+## Scoring Examples
+
+| Dimension | Score 3 Example | Score 7 Example | Score 10 Example |
+|-----------|-----------------|-----------------|-------------------|
+| **Triangulation** | "OpenAI revenue is $1B (per TechCrunch)" | "OpenAI revenue $1B (TechCrunch, Reuters, Bloomberg agree)" | "OpenAI revenue $1B (TC/Reuters agree, Anthropic disputes timing)" |
+| **Freshness** | "2023 AI market was $50B" | "Q3 2025 AI market hit $120B" | "Jan 2026: AI market $140B, up 15% from Dec" |
+| **Actionability** | "Claude usage is growing" | "Claude grew 40% → adoption accelerating" | "Claude 40% growth → invest in competitor analysis, ETA Q2" |
+| **Structure** | Wall of text paragraphs | Key findings in bullets + table | Executive summary + visual grid + appendix |
+| **Depth** | "AI coding tools popular" | "GitHub Copilot has 1M users, 30% productivity gain" | "Copilot 1M users, 30% gain, but 60% churn in enterprise" |
+
 ## Usage Guidelines
 
 **When to use**: Research briefs, competitor analysis, market reports, intelligence summaries
