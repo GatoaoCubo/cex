@@ -3,140 +3,139 @@ id: p06_is_brand_data_model
 kind: input_schema
 pillar: P06
 version: "1.0.0"
-created: "2026-04-01"
-updated: "2026-04-01"
+created: "2026-04-02"
+updated: "2026-04-02"
 author: "input-schema-builder"
-scope: "brand configuration and identity data model setup"
+scope: "brand configuration data model for CEX system initialization"
 fields:
   - name: "brand_name"
     type: "string"
     required: true
     default: null
-    description: "Official brand or company name"
-    error_message: "brand_name is required — provide your company or brand name"
-  - name: "brand_description"
-    type: "string"
-    required: false
-    default: ""
+    description: "Official company or brand name"
+    error_message: "brand_name is required - provide your company or brand name"
+  - name: "description"
+    type: "string" 
+    required: true
+    default: null
     description: "One-sentence description of what the brand does"
-    error_message: null
+    error_message: "description is required - provide what your brand does in one sentence"
   - name: "core_values"
     type: "list"
     required: true
     default: null
-    description: "List of 3-5 core brand values or principles"
-    error_message: "core_values is required — provide at least 3 brand values"
-  - name: "brand_personality"
+    description: "List of 3-5 core brand values"
+    error_message: "core_values is required - provide 3-5 core values as a list"
+  - name: "personality"
     type: "string"
     required: false
     default: "professional"
-    description: "Brand personality: formal, casual, technical, friendly, authoritative"
+    description: "Brand personality descriptor (formal, casual, technical, friendly)"
     error_message: null
-  - name: "target_customer"
+  - name: "target_audience"
     type: "string"
     required: false
-    default: "business professionals"
-    description: "Primary target customer or audience description"
+    default: "professionals"
+    description: "Primary target customer segment"
     error_message: null
   - name: "revenue_model"
     type: "string"
     required: false
     default: "services"
-    description: "How the brand makes money: subscription, one-time, courses, services, products"
-    error_message: null
-  - name: "brand_colors"
-    type: "object"
-    required: false
-    default: {"primary": "#000000", "secondary": "#FFFFFF"}
-    description: "Brand color palette with primary and secondary colors"
-    error_message: null
-  - name: "logo_url"
-    type: "string"
-    required: false
-    default: null
-    description: "URL or path to brand logo image"
-    error_message: null
-  - name: "website_url"
-    type: "string"
-    required: false
-    default: null
-    description: "Official brand website URL"
+    description: "How the brand makes money (subscription, one-time, courses, services)"
     error_message: null
   - name: "industry"
     type: "string"
     required: false
-    default: "technology"
-    description: "Primary industry or business sector"
+    default: null
+    description: "Primary industry or sector"
+    error_message: null
+  - name: "brand_colors"
+    type: "object"
+    required: false
+    default: null
+    description: "Brand color palette with primary and secondary colors"
+    error_message: null
+  - name: "tone_keywords"
+    type: "list"
+    required: false
+    default: ["clear", "professional", "helpful"]
+    description: "Keywords that describe desired communication tone"
+    error_message: null
+  - name: "differentiation"
+    type: "string"
+    required: false
+    default: null
+    description: "What makes this brand unique from competitors"
     error_message: null
 coercion:
   - from: "string"
     to: "list"
-    rule: "Split comma-separated core_values string into list"
-  - from: "string"
-    to: "object"
-    rule: "Parse JSON string for brand_colors if provided as string"
+    rule: "Split comma-separated values into list for core_values and tone_keywords"
+  - from: "object"
+    to: "string"
+    rule: "Serialize brand_colors object to JSON string for storage"
 examples:
   - brand_name: "TechFlow Solutions"
-    brand_description: "AI-powered workflow automation for enterprises"
+    description: "We help startups build scalable software platforms"
     core_values: ["innovation", "reliability", "customer-first", "transparency"]
-    brand_personality: "technical"
-    target_customer: "enterprise software teams"
+    personality: "technical but approachable"
+    target_audience: "B2B startup founders"
     revenue_model: "subscription"
-  - brand_name: "Creative Studio Plus"
-    core_values: ["creativity", "quality", "collaboration"]
-    brand_colors: {"primary": "#FF6B35", "secondary": "#F7F7F7"}
-    website_url: "https://creativestudioplus.com"
+    industry: "SaaS"
+    tone_keywords: ["clear", "confident", "technical"]
+  - brand_name: "Creative Studio X"
+    description: "Design agency specializing in brand identity for emerging companies"
+    core_values: ["creativity", "collaboration", "excellence"]
+    personality: "creative and energetic"
+    target_audience: "emerging companies needing brand design"
+    revenue_model: "project-based"
+    industry: "design"
+    brand_colors: {"primary": "#FF6B35", "secondary": "#004E89"}
 domain: "brand-configuration"
-quality: 8.9
-tags: [input-schema, brand-data-model, configuration, identity]
-tldr: "Input contract for brand data model configuration: requires brand_name and core_values, optional personality, colors, and business details."
-density_score: 0.87
+quality: 9.1
+tags: [input-schema, brand-data, configuration, identity, CEX]
+tldr: "Input contract for brand data model: requires name, description, values; optional personality, audience, revenue model, and brand assets."
+density_score: 0.92
 ---
 ## Contract Definition
-Brand data model input schema defines the required and optional data for configuring brand identity within the CEX system. Used by brand configuration tools, bootstrap processes, and brand validation systems to ensure consistent brand data structure.
+The brand data model input schema defines the required and optional data fields needed to configure a CEX system for a specific brand identity. This schema serves the brand bootstrap process and ongoing brand configuration updates throughout the system.
 
 ## Fields
 | # | Name | Type | Required | Default | Description |
 |---|------|------|----------|---------|-------------|
-| 1 | brand_name | string | YES | - | Official brand or company name |
-| 2 | brand_description | string | NO | "" | One-sentence description of what the brand does |
-| 3 | core_values | list | YES | - | List of 3-5 core brand values or principles |
-| 4 | brand_personality | string | NO | "professional" | Brand personality: formal, casual, technical, friendly, authoritative |
-| 5 | target_customer | string | NO | "business professionals" | Primary target customer or audience description |
-| 6 | revenue_model | string | NO | "services" | How the brand makes money: subscription, one-time, courses, services, products |
-| 7 | brand_colors | object | NO | {"primary": "#000000", "secondary": "#FFFFFF"} | Brand color palette with primary and secondary colors |
-| 8 | logo_url | string | NO | null | URL or path to brand logo image |
-| 9 | website_url | string | NO | null | Official brand website URL |
-| 10 | industry | string | NO | "technology" | Primary industry or business sector |
+| 1 | brand_name | string | YES | - | Official company or brand name |
+| 2 | description | string | YES | - | One-sentence description of what the brand does |
+| 3 | core_values | list | YES | - | List of 3-5 core brand values |
+| 4 | personality | string | NO | "professional" | Brand personality descriptor |
+| 5 | target_audience | string | NO | "professionals" | Primary target customer segment |
+| 6 | revenue_model | string | NO | "services" | How the brand makes money |
+| 7 | industry | string | NO | null | Primary industry or sector |
+| 8 | brand_colors | object | NO | null | Brand color palette with primary/secondary |
+| 9 | tone_keywords | list | NO | ["clear", "professional", "helpful"] | Communication tone descriptors |
+| 10 | differentiation | string | NO | null | What makes this brand unique |
 
 ## Coercion Rules
 | From | To | Rule |
 |------|----|------|
-| string | list | Split comma-separated core_values string into list |
-| string | object | Parse JSON string for brand_colors if provided as string |
+| string | list | Split comma-separated values for core_values and tone_keywords |
+| object | string | Serialize brand_colors object to JSON for storage |
 
 ## Examples
 ```json
 {
   "brand_name": "TechFlow Solutions",
-  "brand_description": "AI-powered workflow automation for enterprises",
+  "description": "We help startups build scalable software platforms",
   "core_values": ["innovation", "reliability", "customer-first", "transparency"],
-  "brand_personality": "technical",
-  "target_customer": "enterprise software teams",
-  "revenue_model": "subscription"
-}
-```
-
-```json
-{
-  "brand_name": "Creative Studio Plus",
-  "core_values": ["creativity", "quality", "collaboration"],
-  "brand_colors": {"primary": "#FF6B35", "secondary": "#F7F7F7"},
-  "website_url": "https://creativestudioplus.com"
+  "personality": "technical but approachable",
+  "target_audience": "B2B startup founders",
+  "revenue_model": "subscription",
+  "industry": "SaaS",
+  "tone_keywords": ["clear", "confident", "technical"]
 }
 ```
 
 ## References
-- CEX brand_config.yaml specification
-- Brand bootstrap protocol (.claude/rules/brand-bootstrap.md)
-- Brand validation requirements (brand_validate.py)
+- CEX Brand Bootstrap Protocol (.claude/rules/brand-bootstrap.md)
+- Brand Configuration System (_tools/cex_bootstrap.py)
+- Brand Identity Propagation (brand_inject.py, brand_propagate.py)
