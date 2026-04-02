@@ -35,6 +35,45 @@ density_score: 0.93
 | 4 | Export-readiness (JSONL/SQL/YAML) | 0.6 | Only .md | Triple-export ready |
 | 5 | Cross-references (linked_artifacts) | 0.4 | No links | 3+ related KCs linked |
 
+## Validation Workflow
+
+**Step 1: Pre-validation**
+```bash
+# Check file exists and is readable
+ls -la path/to/kc.md
+# Verify in correct directory
+pwd | grep -E "(P01_knowledge|library)"
+```
+
+**Step 2: Hard Gate Validation**
+```bash
+# H01-H05 automated check
+python _tools/cex_doctor.py --check-kc path/to/kc.md
+# Manual frontmatter review
+head -20 path/to/kc.md | grep -E "^(id|kind|title|when_to_use):"
+```
+
+**Step 3: Compilation Test**
+```bash
+# H05 verification
+python _tools/cex_compile.py path/to/kc.md
+# Check output exists
+ls compiled/ | grep $(basename path/to/kc.md .md).yaml
+```
+
+**Step 4: Duplicate Detection**
+```bash
+# H04 verification
+python _tools/cex_query.py --find-duplicates --threshold 0.9
+python _tools/cex_retriever.py --similar path/to/kc.md --top 3
+```
+
+**Step 5: Soft Scoring**
+- Manually review density (tables vs prose ratio)
+- Check taxonomy against `.cex/kinds_meta.json`
+- Verify freshness in frontmatter `created` field
+- Test export with `cex_compile.py --format all`
+
 ## Usage Guidelines
 
 **When to apply:**
