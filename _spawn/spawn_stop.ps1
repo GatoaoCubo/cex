@@ -1,35 +1,92 @@
-# CEX Spawn Stop v2.0 — Multi-CLI: claude + codex + gemini
+param(
+    [switch]$DryRun,
+    [switch]$Quiet
+)
+
 $root = Split-Path $PSScriptRoot -Parent
 $pidFile = "$root\.cex\runtime\pids\spawn_pids.txt"
 $stopped = 0
+$killedPids = [System.Collections.ArrayList]@()
 
-# Step 1: Kill CMDs by PID
+function Log($msg) {
+    if (-not $Quiet) { Write-Output $msg }
+}
+
+function Kill-Tree([int]$TargetPid, [string]$Tag) {
+    $kids = Get-CimInstance Win32_Process -EA SilentlyContinue |
+        Where-Object { $PSItem.ParentProcessId -eq $TargetPid }
+    foreach ($k in $kids) { Kill-Tree $k.ProcessId "$Tag>$($k.Name)" }
+    $p = Get-Process -Id $TargetPid -EA SilentlyContinue
+    if ($p) {
+        if ($DryRun) { Log "  [DRY] Would kill PID:$TargetPid $($p.ProcessName) $Tag" }
+        else         { Stop-Process -Id $TargetPid -Force -EA SilentlyContinue; Log "  Killed PID:$TargetPid $($p.ProcessName) $Tag" }
+        $script:stopped++
+        [void]$script:killedPids.Add($TargetPid)
+    }
+}
+
+Log "=== CEX Spawn Stop v3.0 ==="
+Log ""
+
+# --- STEP 1: Kill by PID file ---
+Log "[STEP 1] PID file"
 if (Test-Path $pidFile) {
-    $lines = Get-Content $pidFile
-    foreach ($line in $lines) {
+    foreach ($line in (Get-Content $pidFile)) {
         $parts = $line.Trim().Split(' ')
-        if ($parts.Count -ge 2) {
-            $procId = [int]$parts[0]
-            $nucleus = $parts[1].ToUpper()
-            $cli = if ($parts.Count -ge 3) { $parts[2] } else { 'claude' }
-            Stop-Process -Id $procId -Force -EA SilentlyContinue
-            Write-Output "[$nucleus] CMD PID:$procId ($cli) stopped"
-            $stopped++
-        }
+        if ($parts.Count -lt 2) { continue }
+        $id = [int]$parts[0]; $nuc = $parts[1].ToUpper()
+        $alive = Get-Process -Id $id -EA SilentlyContinue
+        if ($alive) { Log "  [$nuc] killing CMD PID:$id + children"; Kill-Tree $id $nuc }
+        else        { Log "  [$nuc] PID:$id already dead" }
     }
-    Remove-Item $pidFile -Force -EA SilentlyContinue
-} else {
-    Write-Output "[INFO] No spawn_pids.txt found"
+    if (-not $DryRun) { Set-Content $pidFile "" -Encoding UTF8 }
 }
+else { Log "  No PID file" }
 
-# Step 2: Kill orphan processes (all 3 CLIs)
-foreach ($procName in @('claude','codex','gemini')) {
-    $procs = Get-Process $procName -EA SilentlyContinue
-    foreach ($p in $procs) {
-        Stop-Process -Id $p.Id -Force -EA SilentlyContinue
-        Write-Output "[ORPHAN] $procName.exe PID:$($p.Id) killed"
-        $stopped++
+# --- STEP 2: Kill by window title (catches relaunched / untracked) ---
+Log ""
+Log "[STEP 2] Window titles"
+$wins = @(Get-Process cmd -EA SilentlyContinue |
+    Where-Object { $PSItem.MainWindowTitle -match 'CEX-N0[1-7]' })
+foreach ($w in $wins) {
+    if ($w.Id -notin $killedPids) {
+        Log "  Found '$($w.MainWindowTitle)' PID:$($w.Id)"; Kill-Tree $w.Id "title"
     }
 }
+if ($wins.Count -eq 0) { Log "  No CEX windows found" }
 
-Write-Output "[STOP] $stopped processes terminated."
+# --- STEP 3: Orphan CLI processes ---
+Log ""
+Log "[STEP 3] Orphan scan"
+$found = $false
+
+foreach ($p in @(Get-Process "claude" -EA SilentlyContinue | Where-Object { $PSItem.Id -notin $killedPids })) {
+    Log "  [ORPHAN] claude.exe PID:$($p.Id)"
+    if (-not $DryRun) { Stop-Process -Id $p.Id -Force -EA SilentlyContinue }
+    $script:stopped++; $found = $true
+}
+
+foreach ($p in @(Get-Process "codex" -EA SilentlyContinue | Where-Object { $PSItem.Id -notin $killedPids })) {
+    Log "  [ORPHAN] codex.exe PID:$($p.Id)"
+    if (-not $DryRun) { Stop-Process -Id $p.Id -Force -EA SilentlyContinue }
+    $script:stopped++; $found = $true
+}
+
+$geminiNodes = @(Get-CimInstance Win32_Process -EA SilentlyContinue |
+    Where-Object { $PSItem.Name -eq "node.exe" -and $PSItem.CommandLine -match "gemini" -and $PSItem.ProcessId -notin $killedPids })
+foreach ($p in $geminiNodes) {
+    Log "  [ORPHAN] node.exe (gemini) PID:$($p.ProcessId)"
+    if (-not $DryRun) { Stop-Process -Id $p.ProcessId -Force -EA SilentlyContinue }
+    $script:stopped++; $found = $true
+}
+
+if (-not $found) { Log "  No orphans" }
+
+# --- SUMMARY ---
+Log ""
+if ($DryRun) { Log "[STOP] DRY-RUN: would have killed $stopped processes" }
+else          { Log "[STOP] $stopped processes terminated" }
+
+$statusFile = "$root\.cex\runtime\grid_status.json"
+@{ action="stop"; stopped=$stopped; dry_run=$DryRun.IsPresent; timestamp=(Get-Date -Format o) } |
+    ConvertTo-Json | Set-Content $statusFile -Encoding UTF8
