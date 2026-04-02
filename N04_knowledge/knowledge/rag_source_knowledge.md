@@ -34,9 +34,14 @@ This RAG source encompasses the entire local CEX project directory, with a speci
     - `**/.git/**`
 
 ## 3. Freshness & Update Policy
-- **Re-check Interval**: Real-time.
-- **Trigger**: This source is re-indexed via a `git` pre-commit hook. Any time a `.md` file is modified and committed, the hook triggers the **Document Ingestion & Indexing** workflow for that specific file.
-- **Rationale**: This ensures the searchable knowledge base is always in perfect sync with the committed state of the codebase, eliminating staleness for internal documentation.
+
+| Aspect | Details |
+|--------|---------|
+| **Re-check Interval** | Real-time |
+| **Trigger Method** | Git pre-commit hook on `.md` file modifications |
+| **Update Process** | Document Ingestion & Indexing workflow for specific modified file |
+| **Sync Guarantee** | Perfect alignment between committed codebase state and searchable knowledge base |
+| **Staleness Risk** | Eliminated for internal documentation |
 
 ## 4. Reliability & Authority
 - **Reliability**: `High`. As the direct output of the CEX nuclei, these documents are considered canonical, authoritative sources of information.
