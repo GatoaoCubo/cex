@@ -1,0 +1,537 @@
+id: n03_output_monetization_architecture
+kind: output
+pillar: P05
+title: Monetization Technical Architecture — CEX Public + Paid Course + FT Model
+version: 1.0.0
+created: 2026-04-02
+author: n03_builder
+domain: engineering
+quality: null
+tags:
+- monetization
+- architecture
+- distribution
+- ci-cd
+- security
+- public-repo
+- course
+- fine-tune
+tldr: 'End-to-end technical blueprint: MIT repo prep, cex-brain GGUF distribution, hybrid course platform, CI/CD, security,
+  and effort estimates.'
+density_score: 0.93
+executive_summary: 'Three revenue pillars:
+
+
+  | Pillar | Asset | Price | Delivery |
+
+  |--------|-------|-------|----------|
+
+  | Open | CEX repo (MIT) | Free | GitHub public |
+
+  | Builder | Curso track 2 | R$497 | Lemon Squeezy + content site |
+
+  | Master | Curso track 3 + cex-brain:14b | R$997 | Lemon Squeezy + gated download |
+
+
+  ---'
+1_repo_preparation_for_public_release: ''
+1_1_what_must_be_cleaned: '| Category | Current State | Action |
+
+  |----------|--------------|--------|
+
+  | Secrets | `.env` in `.gitignore` ✅ | Verify `git log -- .env` shows no real keys. Run `git filter-repo` if ANY key was
+  ever committed with real values |
+
+  | .env.example | 87 keys, all blank ✅ | Keep as-is — documents the ecosystem |
+
+  | Hardcoded paths | `C:\Users\PC` scanned — 0 hits in `_tools/`, `boot/`, `.claude/` | ✅ Clean |
+
+  | Personal data | Git author "Gato³ ao Cubo" | Decide: keep (personal brand) or anonymize before public |
+
+  | API key refs in code | `cex_boot_gen.py`, `cex_kc_index.py` reference env vars | ✅ They read from `os.environ`, not hardcoded
+  — safe |
+
+  | Runtime dirs | `.cex/runtime/`, `.cex/learning_records/`, `.cex/temp/` | Already in `.gitignore` ✅ |
+
+  | _config/ | Currently empty (deleted) | `.gitignore` has `_config/*.credentials` — keep the rule |
+
+  | _archive/ | In `.gitignore` ✅ | Will not leak |
+
+  | Proof artifacts | `_tools/proof/` (8.5MB) | Already in `.gitignore` ✅ |'
+1_2_gitignore_audit: 'Current `.gitignore` is solid. Add these before going public:
+
+
+  # === Additional for public release ===
+
+
+  # User brand config (private by default)
+
+  .cex/brand/brand_config.yaml
+
+
+  # User experiment data
+
+  .cex/experiments/results.tsv
+
+  .cex/overnight/
+
+
+  # IDE settings (already have .vscode/)
+
+  .idea/
+
+
+  # OS files (already have Thumbs.db, .DS_Store)
+
+  *.swp
+
+  *~
+
+
+  # Python venv
+
+  .venv/
+
+  venv/'
+1_3_readme_md_vs_claude_md: '| File | Audience | Content |
+
+  |------|----------|---------|
+
+  | `README.md` (NEW) | GitHub visitors, students, contributors | What CEX is, quickstart, architecture diagram, course link
+  |
+
+  | `CLAUDE.md` | LLM agents working inside the repo | Internal rules, nucleus routing, 8F pipeline — stays as-is |
+
+
+  README.md structure:
+
+
+  # CEX — Typed Knowledge System for LLM Agents
+
+  > 114 kinds · 12 pillars · 8 nuclei · 8F pipeline
+
+
+  ## What is CEX?
+
+  [2 paragraphs + architecture diagram]
+
+
+  ## Quickstart
+
+  git clone → python cex_setup.py → /init
+
+
+  ## Course
+
+  [3 tiers table + Lemon Squeezy link]
+
+
+  ## Architecture
+
+  [Mermaid diagram of pillars + nuclei]
+
+
+  ## Contributing
+
+  [link to CONTRIBUTING.md]
+
+
+  ## License
+
+  MIT'
+1_4_first_run_onboarding: "Current flow: user clones → runs `python _tools/cex_init.py` → answers 5 questions → scaffolds.\n\
+  \nImprovement: `cex_setup.py` (new, root-level)\n\n#!/usr/bin/env python3\n\"\"\"CEX Setup — One command to get started.\n\
+  \nUsage:\n    python cex_setup.py          # Interactive\n    python cex_setup.py --check  # Verify deps only\n\"\"\"\n\
+  import subprocess, sys, shutil\nfrom pathlib import Path\n\nDEPS = {\n    \"python\": (\"python --version\", \"3.10+\"),\n\
+  \    \"pyyaml\": (\"python -c 'import yaml'\", \"pip install pyyaml\"),\n    \"git\": (\"git --version\", \"https://git-scm.com\"\
+  ),\n}\n\nOPTIONAL = {\n    \"ollama\": (\"ollama --version\", \"https://ollama.ai\"),\n    \"ruff\": (\"ruff --version\"\
+  , \"pip install ruff\"),\n}\n\ndef check(name, cmd, fix):\n    try:\n        subprocess.run(cmd.split(), capture_output=True,\
+  \ check=True)\n        print(f\"  ✓ {name}\")\n        return True\n    except (subprocess.CalledProcessError, FileNotFoundError):\n\
+  \        print(f\"  ✗ {name} — {fix}\")\n        return False\n\ndef main():\n    print(\"CEX Setup\\n\")\n    print(\"\
+  Required:\")\n    ok = all(check(n, c, f) for n, (c, f) in DEPS.items())\n    print(\"\\nOptional:\")\n    for n, (c, f)\
+  \ in OPTIONAL.items():\n        check(n, c, f)\n\n    if not ok:\n        print(\"\\n✗ Fix required deps above, then re-run.\"\
+  )\n        sys.exit(1)\n\n    print(\"\\n✓ All required deps OK.\")\n    print(\"\\nNext: python _tools/cex_init.py\")\n\
+  \    print(\"  or: type /init in Claude Code\\n\")\n\nif name == \"main\":\n    main()\n\n---"
+2_cex_brain_distribution_architecture: ''
+2_1_gguf_generation_pipeline: "┌─────────────┐    ┌──────────────┐    ┌────────────┐    ┌──────────┐    ┌─────────┐\n│ Export\
+  \ Data  │───▶│ Train QLoRA  │───▶│   Merge    │───▶│ Quantize │───▶│  GGUF   │\n│ (cex corpus) │    │ (Unsloth)    │   \
+  \ │ (base+LoRA)│    │ (Q5_K_M) │    │ (upload) │\n└─────────────┘    └──────────────┘    └────────────┘    └──────────┘\
+  \    └─────────┘\n       │                  │                   │                │              │\n  cex_finetune.py   \
+  \ unsloth/trl         merge_lora.py    llama.cpp     upload.py\n  → JSONL              4-bit             → full model  \
+  \    → GGUF         → HF Hub\n  ~50K examples        A100/H100         ~28GB fp16        ~10GB Q5       + Ollama\n\nStep-by-step:\n\
+  \n| Step | Tool | Input | Output | Time (est.) |\n|------|------|-------|--------|-------------|\n| 1. Export training data\
+  \ | `cex_finetune_export.py` (NEW) | All .md + .yaml in repo | `train.jsonl` (~50K pairs) | 5 min |\n| 2. QLoRA fine-tune\
+  \ | Unsloth + TRL | `train.jsonl` + Qwen3-14B base | LoRA adapter (~200MB) | 2-4h (A100) |\n| 3. Merge | `merge_lora_to_base.py`\
+  \ | Base + adapter | Full fp16 (~28GB) | 10 min |\n| 4. Quantize | `llama-cpp-python` / `llama.cpp` | fp16 model | GGUF\
+  \ Q5_K_M (~10GB) | 15 min |\n| 5. Upload | `huggingface_hub` Python | GGUF file | HF Hub gated repo | 20 min |"
+2_2_hosting_options: '| Option | Pros | Cons | Cost | Recommendation |
+
+  |--------|------|------|------|---------------|
+
+  | HuggingFace Hub (gated) | Free hosting, CDN, versioning, gating API | Manual approval OR webhook | Free | ★ Primary |
+
+  | Ollama Registry | Native `ollama pull`, seamless UX | No gating — anyone can pull | Free | Public models only |
+
+  | S3 + CloudFront | Full control, temp links | Infra cost, maintenance | ~$5/mo | Backup |'
+2_3_license_key_verification_recommended_option_a: "┌──────────┐    ┌─────────────────┐    ┌──────────────┐    ┌──────────────┐\n\
+  │  Student  │───▶│  Lemon Squeezy  │───▶│   Webhook    │───▶│  Verify API  │\n│  buys     │    │  checkout       │    │\
+  \  (Railway)   │    │  (FastAPI)   │\n└──────────┘    └─────────────────┘    └──────────────┘    └──────────────┘\n    \
+  \                                          │                     │\n                                              ▼    \
+  \                 ▼\n                                       Store license_key     GET /download?key=xxx\n              \
+  \                         in Supabase           → verify key\n                                                         \
+  \    → return temp S3 URL\n                                                             → expire in 24h\n\nOption A: Lemon\
+  \ Squeezy webhook → temp download link\n\n# verify_api.py — FastAPI endpoint on Railway\nfrom fastapi import FastAPI, HTTPException\n\
+  from datetime import datetime, timedelta\nimport boto3, hashlib\n\napp = FastAPI()\n\n@app.get(\"/download\")\nasync def\
+  \ download(key: str):\n    # 1. Verify license with Lemon Squeezy API\n    license = await verify_lemon_squeezy(key)\n \
+  \   if not license or not license[\"valid\"]:\n        raise HTTPException(403, \"Invalid license key\")\n\n    # 2. Generate\
+  \ presigned S3 URL (24h TTL)\n    s3 = boto3.client(\"s3\")\n    url = s3.generate_presigned_url(\n        \"get_object\"\
+  ,\n        Params={\"Bucket\": \"cex-models\", \"Key\": \"cex-brain-14b-q5.gguf\"},\n        ExpiresIn=86400,\n    )\n \
+  \   return {\"download_url\": url, \"expires_in\": \"24h\", \"size_gb\": 10.2}\n\nWhy Option A over B and C:\n\n| Criterion\
+  \ | A (webhook+temp) | B (Modelfile key) | C (HF gated) |\n|-----------|:-:|:-:|:-:|\n| Automation | ✓ Fully automatic |\
+  \ ✗ Manual header hack | ✗ Manual approval |\n| UX | ✓ Click → download | ✗ Edit Modelfile | ✗ Wait for approval |\n| Piracy\
+  \ resistance | ✓ Temp link expires | ✗ Key visible in file | ✗ Once approved, forever |\n| Implementation | Medium | Complex\
+  \ | Easy |"
+2_4_size_feasibility: '| Model | Quantization | Size | Download @ 50Mbps | Viable? |
+
+  |-------|-------------|------|-------------------|---------|
+
+  | Qwen3-14B | Q5_K_M | ~10.2 GB | ~28 min | ✓ Yes |
+
+  | Qwen3-14B | Q4_K_M | ~8.4 GB | ~23 min | ✓ Yes (faster) |
+
+  | Qwen3-14B | Q8_0 | ~14.8 GB | ~40 min | ⚠ Borderline |
+
+
+  Recommendation: Ship Q5_K_M as default. Offer Q4_K_M as "lite" variant for users with slower connections.
+
+
+  ---'
+3_course_platform_architecture: ''
+3_1_tech_stack_decision: '┌─────────────────────────────────────────────────────────┐
+
+  │                    COURSE DELIVERY                       │
+
+  │                                                          │
+
+  │  ┌─────────────┐   ┌──────────────┐   ┌──────────────┐ │
+
+  │  │   Lemon     │   │   Content    │   │   Video      │ │
+
+  │  │   Squeezy   │   │   Site       │   │   Host       │ │
+
+  │  │             │   │              │   │              │ │
+
+  │  │  Checkout   │   │  Astro SSG   │   │  YouTube     │ │
+
+  │  │  Licenses   │   │  + MDX       │   │  Unlisted    │ │
+
+  │  │  Webhooks   │   │  on Vercel   │   │              │ │
+
+  │  │  5% fee     │   │  Free tier   │   │  Free        │ │
+
+  │  └──────┬──────┘   └──────┬───────┘   └──────┬───────┘ │
+
+  │         │                 │                   │          │
+
+  │         ▼                 ▼                   ▼          │
+
+  │    license_key      gated routes         embed links     │
+
+  │    verification     (middleware)         (no listing)     │
+
+  └─────────────────────────────────────────────────────────┘'
+3_2_content_delivery_comparison: '| Component | Option A (★ Recommended) | Option B | Option C |
+
+  |-----------|-------------------------|----------|----------|
+
+  | Checkout | Lemon Squeezy | Stripe + custom | Hotmart |
+
+  | Text content | Astro SSG + MDX on Vercel | GitHub Wiki | Notion |
+
+  | Video | YouTube unlisted | Vimeo OTT ($20/mo) | Self-hosted |
+
+  | Exercises | CEX checkpoint files | Google Forms | Custom app |
+
+  | Cost | ~$0/mo (LS fee on sales) | ~$20/mo minimum | 20% of sales |
+
+
+  Why Astro + MDX:
+
+  - Markdown-native (write course in the same format as CEX artifacts)
+
+  - Static site = zero server cost (Vercel free tier)
+
+  - Gated routes via middleware checking Lemon Squeezy license
+
+  - MDX allows interactive code blocks, live CEX artifact previews'
+3_3_video_delivery: '| Platform | Cost | DRM? | Embed? | Recommendation |
+
+  |----------|------|------|--------|---------------|
+
+  | YouTube unlisted | Free | No | Yes | ★ MVP (launch fast) |
+
+  | Vimeo OTT | $20/mo | Yes | Yes | V2 (if piracy is a concern) |
+
+  | Bunny Stream | $5/mo | Token auth | Yes | V2 alternative |
+
+  | Self-hosted (S3) | ~$3/mo | Signed URLs | Custom | Overkill |
+
+
+  MVP decision: YouTube unlisted. Piracy risk is low for niche educational content. Migrate to Vimeo/Bunny only if leaks become
+  a measurable problem.'
+3_4_exercise_verification: 'Students verify completion by running CEX itself:
+
+
+  # Student completes Module 3 exercise → builds a knowledge_card
+
+  python _tools/cex_8f_runner.py --kind knowledge_card --execute
+
+
+  # Checkpoint: student exports their artifact hash
+
+  python _tools/cex_checkpoint.py --module 3 --export
+
+  # Output: checkpoint_m03_a1b2c3d4.json
+
+
+  # Upload checkpoint to course site for verification
+
+  # (Site verifies: correct kind, valid frontmatter, quality >= 7.0)
+
+
+  `cex_checkpoint.py` (NEW — ~100 lines):
+
+  - Reads student''s built artifact
+
+  - Validates frontmatter + quality gates
+
+  - Generates signed hash (module_id + artifact_id + student_key)
+
+  - Exports JSON that the course site can verify
+
+
+  ---'
+4_ci_cd_for_the_product: ''
+4_1_public_repo_pipeline: "# .github/workflows/ci.yaml\nname: CEX CI\non: [push, pull_request]\n\njobs:\n  lint:\n    runs-on:\
+  \ ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-python@v5\n        with: { python-version:\
+  \ \"3.12\" }\n      - run: pip install ruff\n      - run: ruff check _tools/\n      - run: ruff format --check _tools/\n\
+  \n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-python@v5\n\
+  \        with: { python-version: \"3.12\" }\n      - run: pip install -e \".[dev]\"\n      - run: pytest _tools/tests/ -m\
+  \ \"not slow\"\n\n  doctor:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-python@v5\n\
+  \        with: { python-version: \"3.12\" }\n      - run: pip install pyyaml\n      - run: python _tools/cex_doctor.py --ci\n\
+  \      # Fails if any builder is broken\n\n  system-test:\n    runs-on: ubuntu-latest\n    needs: [lint, test]\n    steps:\n\
+  \      - uses: actions/checkout@v4\n      - uses: actions/setup-python@v5\n        with: { python-version: \"3.12\" }\n\
+  \      - run: pip install pyyaml\n      - run: python _tools/cex_system_test.py"
+4_2_versioning_strategy: 'v1.0.0        ← Course "Builder Track" launches, references this tag
+
+  v1.1.0        ← New kinds added, course Module 7 references this
+
+  v1.1.1        ← Bug fix, no course impact
+
+  v2.0.0        ← Breaking change (schema migration), Course V2
+
+
+  Tags: git tag -a v1.0.0 -m "Builder Track launch"
+
+
+  | Rule | Implementation |
+
+  |------|---------------|
+
+  | Course references pinned tags, not `main` | `git clone --branch v1.0.0` in course instructions |
+
+  | New features land on `main` first | Students on older tags still work |
+
+  | Breaking changes bump major version | Course updates reference new tag |
+
+  | `CHANGELOG.md` auto-generated | `python _tools/changelog_gen.py` before each release |'
+4_3_course_content_updates: 'course-content/           # Separate repo (private)
+
+  ├── modules/
+
+  │   ├── m01-foundations/   # Track 1 (free)
+
+  │   ├── m02-first-build/
+
+  │   ├── m03-8f-deep/      # Track 2 (Builder, R$497)
+
+  │   └── ...
+
+  ├── astro.config.mjs
+
+  ├── src/
+
+  │   ├── middleware.ts      # Lemon Squeezy license check
+
+  │   └── pages/
+
+  └── package.json
+
+
+  Course content lives in a separate private repo — never mixed with the MIT-licensed CEX repo.
+
+
+  ---'
+5_security_and_compliance: ''
+5_1_mit_license_implications: '| Permits | Does NOT Protect |
+
+  |---------|------------------|
+
+  | Commercial use | Your brand name (trademark it separately) |
+
+  | Modification | Your course content (separate repo, not MIT) |
+
+  | Distribution | Your fine-tuned model (separate license) |
+
+  | Private use | Against someone reselling the course (but they can fork the repo) |
+
+
+  Action items:
+
+  - ✅ MIT license already present (`LICENSE` file)
+
+  - Register "CEX" as trademark (optional, low priority)
+
+  - Course content in private repo with "All Rights Reserved" header
+
+  - cex-brain model: dual license — GGUF file under "CEX Model License" (derivative OK, redistribution NO)'
+5_2_data_privacy_lgpd_gdpr: '| Data Point | Where | Risk | Mitigation |
+
+  |------------|-------|------|------------|
+
+  | Brand config from `/init` | Local only (`.cex/brand/`) | None — never leaves user''s machine | ✅ Already safe |
+
+  | Student email | Lemon Squeezy | Medium — LS is data processor | Add DPA link, privacy policy on checkout |
+
+  | Course progress | Checkpoint files (local) | None — local JSON | ✅ Already safe |
+
+  | License keys | Supabase (verify API) | Low — keys are not PII | Store hashed, TTL 1 year |
+
+
+  Required documents:
+
+  1. Privacy Policy (course site footer)
+
+  2. Terms of Service (Lemon Squeezy checkout)
+
+  3. Data Processing Agreement reference (Lemon Squeezy provides this)'
+5_3_base_model_license_audit: '| Model | License | Commercial Use? | Redistribution? | FT Derivative? |
+
+  |-------|---------|:---:|:---:|:---:|
+
+  | Qwen3-14B | Apache 2.0 | ✓ Yes | ✓ Yes | ✓ Yes |
+
+  | Llama 3.1-8B | Meta Community | ✓ Yes (under 700M MAU) | ✓ Yes | ✓ Yes |
+
+  | Mistral-7B | Apache 2.0 | ✓ Yes | ✓ Yes | ✓ Yes |
+
+
+  Qwen3 is the safest choice — Apache 2.0 has no MAU limits, no special clauses. Fine-tuning and selling the derivative is
+  explicitly permitted. Must include Apache 2.0 notice in the GGUF distribution.
+
+
+  ---'
+6_effort_estimate: ''
+6_1_task_breakdown: '| # | Task | Category | Hours | Automated? | Depends On |
+
+  |---|------|----------|:-----:|:----------:|:----------:|
+
+  | 1 | `.gitignore` additions | Repo prep | 0.5 | — | — |
+
+  | 2 | `git filter-repo` audit (verify no leaked keys) | Repo prep | 1 | Partial | — |
+
+  | 3 | `README.md` public | Repo prep | 3 | — | — |
+
+  | 4 | `cex_setup.py` (installer) | Repo prep | 2 | — | — |
+
+  | 5 | `CONTRIBUTING.md` | Repo prep | 1 | — | — |
+
+  | 6 | `cex_finetune_export.py` (training data export) | Model | 4 | — | — |
+
+  | 7 | QLoRA fine-tune run | Model | 6 | Script | 6 |
+
+  | 8 | GGUF quantization + upload | Model | 2 | Script | 7 |
+
+  | 9 | Verify API (FastAPI + S3 presigned) | Model | 6 | — | — |
+
+  | 10 | Lemon Squeezy integration (checkout + webhook) | Platform | 4 | — | — |
+
+  | 11 | Astro course site scaffold | Platform | 8 | — | — |
+
+  | 12 | License middleware (gated routes) | Platform | 3 | — | 10 |
+
+  | 13 | Module 1-3 content (Foundations — free) | Content | 12 | — | 11 |
+
+  | 14 | Module 4-7 content (Builder — R$497) | Content | 20 | — | 11 |
+
+  | 15 | Module 8-10 content (Master — R$997) | Content | 16 | — | 14 |
+
+  | 16 | Video recording + editing (10 modules) | Content | 30 | — | 13-15 |
+
+  | 17 | `cex_checkpoint.py` (exercise verification) | Platform | 3 | — | — |
+
+  | 18 | GitHub Actions CI/CD | Repo prep | 2 | — | — |
+
+  | 19 | Privacy Policy + ToS | Legal | 2 | Template | — |
+
+  | 20 | Launch landing page | Marketing | 4 | — | 10 |
+
+  | | TOTAL | | 122.5h | | |'
+6_2_mvp_builder_track_launch_minimum_viable: '| Task | Hours | Priority |
+
+  |------|:-----:|:--------:|
+
+  | `.gitignore` + `git filter-repo` audit | 1.5 | P0 |
+
+  | `README.md` + `cex_setup.py` | 5 | P0 |
+
+  | GitHub Actions CI | 2 | P0 |
+
+  | Lemon Squeezy checkout | 4 | P0 |
+
+  | Astro site + license middleware | 11 | P0 |
+
+  | Modules 1-7 text content | 32 | P0 |
+
+  | Video (modules 1-7) | 21 | P1 |
+
+  | `cex_finetune_export.py` + FT run + GGUF | 12 | P1 |
+
+  | Verify API | 6 | P1 |
+
+  | Privacy/ToS | 2 | P0 |
+
+  | MVP TOTAL | 96.5h | |
+
+
+  Timeline estimate at 4h/day: ~24 working days (~5 weeks)'
+6_3_what_can_be_automated_via_cex_itself: '| Task | How |
+
+  |------|-----|
+
+  | README.md generation | `/build output readme_public` → N03 builds from CLAUDE.md |
+
+  | CONTRIBUTING.md | `/build output contributing_guide` |
+
+  | Training data export | `cex_finetune_export.py` scans all artifacts programmatically |
+
+  | CI workflow | Template from N05 operations |
+
+  | Changelog | `python _tools/changelog_gen.py` (already exists) |
+
+  | Landing page copy | `/dispatch n02 "landing page for CEX course"` |
+
+
+  ---'
+architecture_diagram: "                         ┌─────────────────────────┐\n                         │      STUDENT FLOW\
+  \        │\n                         └────────────┬────────────┘\n                                      │\n            \
+  \        ┌─────────────────┼─────────────────┐\n                    ▼                 ▼                  ▼\n           \
+  \ ┌──────────────┐  ┌────────────┐  ┌───────────────┐\n            │  GitHub      │  │  Course    │  │  cex-brain    │\n\
+  \            │  (public)    │  │  Site      │  │  Download     │\n            │              │  │  (Astro)   │  │  (FastAPI)\
+  \    │\n            │  MIT repo    │  │  Vercel    │  │  Railway      │\n            │  /init free  │  │  gated     │  │\
+  \  gated        │\n            └──────┬───────┘  └─────┬──────┘  └──────┬────────┘\n                   │               \
+  \ │                 │\n                   │         ┌──────┴──────┐          │\n                   │         │   Lemon \
+  \    │          │\n                   │         │   Squeezy   │──────────┘\n                   │         │   (payment) │\
+  \  webhook → license verify\n                   │         └─────────────┘\n                   │\n        ┌──────────┴──────────┐\n\
+  \        │  Student's machine  │\n        │                     │\n        │  CEX repo (cloned)  │\n        │  + cex-brain\
+  \ GGUF   │\n        │  + Ollama runtime   │\n        │  + /init → branded  │\n        └─────────────────────┘"
