@@ -38,13 +38,14 @@ owner: knowledge-card-builder
 criticality: high
 ```
 
-## Key Concepts
-- **Authority Score**: Domain expertise + publication track record (0-100 scale)
-- **Transparency Index**: Editorial policies + funding disclosure + correction practices (0-1.0 scale)
-- **Accuracy Rate**: Verified claims / total assessable claims over 12-month window
-- **Bias Coefficient**: Left-right political lean (-1.0 to +1.0) + sensationalism factor (0-1.0)
-- **Source Triangulation**: Cross-validation with 3+ independent high-credibility sources
-- **Temporal Decay**: Recent performance weighted 3x higher than 2+ year old data
+## Calculation Formulas
+| Component | Formula | Range | Example |
+|-----------|---------|-------|---------|
+| Authority Score | (Domain_Expertise × 0.6) + (Publication_Track × 0.4) | 0-100 | (85 × 0.6) + (72 × 0.4) = 79.8 |
+| Accuracy Rate | Verified_Claims ÷ Total_Claims × 100 | 0-100% | 87/100 × 100 = 87% |
+| Transparency Index | (Editorial_Policy + Funding_Disclosure + Correction_Practice) ÷ 3 | 0-1.0 | (0.9 + 0.7 + 0.8) ÷ 3 = 0.8 |
+| Bias Coefficient | Political_Lean + (Sensationalism × 0.5) | -1.5 to +1.5 | -0.3 + (0.4 × 0.5) = -0.1 |
+| Temporal Weight | Recent_6mo × 3 + Year_1 × 2 + Year_2+ × 1 | N/A | (85 × 3) + (78 × 2) + (72 × 1) = 483 |
 
 ## Strategy Phases
 1. **Baseline Assessment**: Domain authority + publication history + editorial standards (40% weight)
