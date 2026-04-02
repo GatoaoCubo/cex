@@ -69,6 +69,19 @@ CREATE TABLE kc_audit_log (
 );
 ```
 
+## Constraints & Validation
+
+| Table | Field | Constraint | Reason |
+|-------|-------|-----------|--------|
+| `kcs` | `id` | `LIKE 'kc_%'` | Enforce KC naming convention |
+| `kcs` | `pillar` | `CHECK (pillar ~ '^P[0-9]{2}$')` | Validate P01-P12 format |
+| `kcs` | `density_score` | `CHECK (density_score >= 0 AND density_score <= 1)` | Score must be 0-1 range |
+| `kcs` | `quality` | `CHECK (quality >= 0 AND quality <= 10)` | Quality must be 0-10 range |
+| `kcs` | `body` | `CHECK (length(body) >= 100)` | Minimum content requirement |
+| `embeddings` | `chunk_index` | `CHECK (chunk_index >= 0)` | No negative chunk indices |
+| `embeddings` | `chunk_text` | `CHECK (length(chunk_text) <= 8000)` | Max token limit for embedding |
+| `audit_log` | `action` | `CHECK (action IN ('create', 'update', 'archive', 'delete'))` | Valid action types only |
+
 ## Table Relationships
 
 | Query Pattern | Tables | SQL Example |
