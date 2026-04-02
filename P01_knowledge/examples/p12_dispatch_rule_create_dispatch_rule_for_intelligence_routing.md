@@ -7,7 +7,7 @@ created: 2026-04-01
 updated: 2026-04-01
 author: dispatch-rule-builder
 domain: intelligence
-quality: 8.5
+quality: 9.0
 tags: [dispatch, intelligence, research, analysis, n01]
 tldr: Route intelligence analysis and research tasks to N01 intelligence nucleus
 scope: intelligence
