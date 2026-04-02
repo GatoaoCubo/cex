@@ -33,6 +33,22 @@ This document defines the standard vector embedding model and chunking strategy 
     2.  **Vector Specificity**: Chunks must be small enough so that the resulting vector accurately represents a specific piece of information.
 - The 64-token overlap ensures that semantic context is not lost at the boundaries between chunks, improving the retriever's ability to find relevant passages that span across chunk divisions.
 
+## Performance Benchmarks
+
+| Metric | Target | Validation Method |
+|--------|--------|-------------------|
+| Embedding latency | < 200ms per chunk | `time.time()` around embed call |
+| Retrieval accuracy | > 85% @ k=5 | Manual eval on 50 test queries |
+| Vector similarity | > 0.7 for duplicates | Cosine similarity on known pairs |
+| Memory usage | < 2GB for 10K docs | `psutil.memory_info()` |
+| Index build time | < 5min for 1K docs | End-to-end pipeline timing |
+
+**Validation Commands:**
+```bash
+python _tools/embedding_benchmark.py --config n01_emb_text_embedding_4
+python _tools/rag_accuracy_test.py --threshold 0.85
+```
+
 ## Usage Guidelines
 
 **When to Use:**
