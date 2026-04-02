@@ -2,60 +2,55 @@
 id: p05_fmt_creation_reports
 kind: formatter
 pillar: P05
+title: "Creation Reports Formatter"
 version: "1.0.0"
 created: "2026-04-02"
 updated: "2026-04-02"
-author: "formatter-builder"
+author: "builder_agent"
 target_format: "markdown"
 input_type: "structured_data"
-rule_count: 6
+rule_count: 8
 domain: "creation_reporting"
 quality: 9.1
-tags: [formatter, markdown, creation, reports, P05, artifacts]
-tldr: "Formats creation activity data into structured Markdown reports with artifact summaries, quality metrics, and progress tracking"
+tags: [formatter, creation, reports, markdown, P05]
+tldr: "Formats creation activity data into structured Markdown reports with metrics, timelines, and status summaries"
 template_engine: "string_format"
 pretty_print: true
 escaping: "none"
 encoding: "utf8"
 locale: "pt-BR"
 streaming: false
-keywords: [creation-reports, artifact-summary, quality-metrics, progress-formatter]
-density_score: 0.86
+keywords: [creation-reports, activity-formatter, markdown-reports, creation-metrics]
+density_score: 0.89
 ---
 # Creation Reports Formatter
 
 ## Formatting Rules
 | Name | Input Field | Transform | Pattern | Options |
 |------|-------------|-----------|---------|---------|
-| artifact_name | artifact_id | stringify | `**{value}**` | max_length: 60, truncate: ellipsis |
-| quality_badge | quality_score | number_format | `🎯 {value:.1f}/10` | color_threshold: 8.0 |
-| status_icon | status | stringify | `{icon} {value}` | icon_map: completed=✅, progress=🔄, failed=❌ |
-| creation_date | created | date_format | `📅 {value:%d/%m/%Y}` | locale: pt-BR |
-| author_info | author | stringify | `👤 {value}` | max_length: 20, truncate: ellipsis |
-| pillar_tag | pillar | stringify | `📂 {value}` | uppercase: true |
+| title_format | project_title | stringify | `# {value}` | max_length: 80, case: title |
+| date_format | creation_date | date_format | `**Criado:** {value:%d/%m/%Y às %H:%M}` | locale: pt-BR, timezone: America/Sao_Paulo |
+| status_format | status | stringify | `**Status:** {value}` | uppercase: true, badge: true |
+| count_format | artifact_count | number_format | `**Artefatos:** {value} criados` | locale: pt-BR, unit: items |
+| quality_format | avg_quality | number_format | `**Qualidade Média:** {value:.1f}/10.0` | precision: 1, range: 0-10 |
+| duration_format | elapsed_time | stringify | `**Duração:** {value}` | unit: auto, round: minutes |
+| creator_format | creator_name | stringify | `**Criador:** {value}` | link: true, max_length: 50 |
+| progress_format | completion_pct | number_format | `**Progresso:** {value:.0f}%` | format: percentage, bar: true |
 
 ## Input Specification
 Type: structured_data
-Structure: List of creation activity objects containing artifact metadata, quality scores, timestamps, and authorship information.
+Structure: creation activity object with project metadata, timing, quality metrics, and progress tracking.
 Example:
 ```json
 {
-  "artifacts": [
-    {
-      "artifact_id": "p01_kc_react_patterns",
-      "quality_score": 8.7,
-      "status": "completed",
-      "created": "2026-04-02T10:30:00",
-      "author": "knowledge-builder",
-      "pillar": "P01",
-      "domain": "frontend_development"
-    }
-  ],
-  "summary": {
-    "total_artifacts": 5,
-    "avg_quality": 8.4,
-    "completion_rate": 0.8
-  }
+  "project_title": "Sistema de Conhecimento CEX",
+  "creation_date": "2026-04-02T10:30:00",
+  "status": "em_progresso",
+  "artifact_count": 42,
+  "avg_quality": 8.7,
+  "elapsed_time": "2h 30m",
+  "creator_name": "N03 Builder",
+  "completion_pct": 75.5
 }
 ```
 
@@ -63,44 +58,41 @@ Example:
 Format: markdown
 Example:
 ```markdown
-# Creation Report - 2026-04-02
+# Sistema de Conhecimento CEX
 
-## Summary
-- **Total Artifacts**: 5
-- **Average Quality**: 8.4/10
-- **Completion Rate**: 80%
-
-## Artifacts Created
-
-### **p01_kc_react_patterns**
-🎯 8.7/10 | ✅ completed | 📅 02/04/2026 | 👤 knowledge-builder | 📂 P01
-
-### **p02_agent_content_creator**  
-🎯 9.2/10 | ✅ completed | 📅 02/04/2026 | 👤 agent-builder | 📂 P02
+**Criado:** 02/04/2026 às 10:30
+**Status:** EM_PROGRESSO
+**Artefatos:** 42 criados
+**Qualidade Média:** 8.7/10.0
+**Duração:** 2h 30m
+**Criador:** N03 Builder
+**Progresso:** 76%
 ```
 
 ## Template
 Engine: string_format
 ```text
-# Creation Report - {date}
+{title}
 
-## Summary
-- **Total Artifacts**: {total_artifacts}
-- **Average Quality**: {avg_quality:.1f}/10
-- **Completion Rate**: {completion_rate:.0%}
-
-## Artifacts Created
-
-{artifact_rows}
+{date}
+{status}
+{count}
+{quality}
+{duration}
+{creator}
+{progress}
 ```
 
 ## Edge Cases
-- Null quality scores: render as `⚪ N/A` instead of numeric badge
-- Empty author field: render as `👤 System` placeholder
-- Status not in icon map: render as `❓ {status}` with unknown icon
-- Date parsing errors: render as `📅 Invalid Date` fallback
+- Null values: render as `**Campo:** Não informado`
+- Empty strings: render as `**Campo:** -`
+- Special characters: pipe `|` escaped as `\|` in table contexts
+- Overflow: truncate title at 80 chars with `...`, creator at 50 chars
+- Invalid dates: render as `**Criado:** Data inválida`
+- Quality out of range: clamp to 0.0-10.0 range
+- Negative duration: render as `**Duração:** Calculando...`
 
 ## References
-- Markdown specification: CommonMark 0.30
-- Date formatting: Python strftime patterns
-- Unicode icons: GitHub emoji shortcodes standard
+- Markdown CommonMark specification for formatting
+- ISO 8601 date formatting standards
+- Brazilian Portuguese locale formatting (ABNT NBR 14724)
