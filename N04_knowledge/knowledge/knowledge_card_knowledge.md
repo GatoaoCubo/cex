@@ -36,8 +36,7 @@ data_source: "Distilled from first principles of information theory, data archit
 # KC: The CEX Knowledge Lifecycle
 
 ## Quick Reference
----
-yaml
+```yaml
 topic: The CEX Knowledge Lifecycle
 scope: The architectural framework for transforming raw information into a high-fidelity, queryable knowledge graph for AI agents.
 owner: N04 Knowledge Nucleus
@@ -92,3 +91,13 @@ The most robust approach combines multiple techniques:
 2.  **EMBED FOR MEANING**: The embedding model is the heart of the system. It must be chosen and managed as a critical piece of infrastructure.
 3.  **STRUCTURE FOR DISCOVERY**: Build the taxonomy and knowledge graph relentlessly. An unstructured vector store is a liability.
 4.  **ITERATE ON RETRIEVAL**: The quality of the entire RAG system is a direct function of retrieval performance. This must be continuously evaluated, measured, and improved. The loop must close.
+
+## 5. Anti-Patterns: What NOT to Do
+
+| Anti-Pattern | Why It Fails | Better Approach |
+| :--- | :--- | :--- |
+| **Uniform chunking** | Fixed-size chunks break semantic boundaries | Content-aware chunking by logical units |
+| **Embedding model drift** | Changing models breaks vector consistency | Version lock embeddings, migrate systematically |
+| **Pure keyword search** | Misses semantic similarity, brittle to wording | Hybrid semantic + keyword retrieval |
+| **No taxonomy structure** | Vector search without filtering = noise | Build hierarchical taxonomy first |
+| **One-shot ingestion** | Knowledge becomes stale, no feedback loop | Continuous ingestion with quality monitoring |
