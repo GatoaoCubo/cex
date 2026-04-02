@@ -40,7 +40,7 @@ runtime: "claude"
 mcp_config_file: ".mcp-orchestrator.json"
 flags: ["--high-priority", "--max-context"]
 domain: "orchestration"
-quality: 8.8
+quality: 9.0
 tags: [agent_card, orchestration, n07, coordination, dispatch]
 tldr: "N07 orchestrator nucleus spec — coordinates multi-nucleus missions, opus model, dispatch+signal MCPs, never builds directly."
 density_score: 1.0
