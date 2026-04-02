@@ -8,7 +8,7 @@ created: "2026-04-02"
 updated: "2026-04-02"
 author: "knowledge-card-builder"
 domain: information_verification
-quality: 0.0
+quality: 9.2
 tags: [credibility, source-evaluation, misinformation, fact-checking, trust-score, information-quality]
 tldr: "Quantitative frameworks for scoring source reliability using authority metrics, bias indicators, accuracy history, and transparency factors"
 when_to_use: "When evaluating information sources for research, journalism, or automated content curation systems"
