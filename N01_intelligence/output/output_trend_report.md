@@ -22,26 +22,32 @@ density_score: 0.91
 
 ## Trends Detected
 
-### 1. {{TREND_NAME}} {{MOMENTUM_EMOJI}}
-- **Momentum**: {{rising|stable|declining}}
-- **Confidence**: {{SCORE}} ({{evidence_count}} data points)
-- **Impact**: {{high|medium|low}}
-- **Evidence**: {{KEY_EVIDENCE}}
-- **So what?**: {{ACTIONABLE_INSIGHT}}
+### 1. {{TREND_NAME}} {{📈|📊|📉}}
+- **Momentum**: {{rising|stable|declining}} ({{%_change}} over {{period}})
+- **Confidence**: {{0.1-1.0}} ({{evidence_count}} data points, {{source_diversity}} sources)
+- **Impact**: {{high|medium|low}} (affects {{audience_size}} {{audience_type}})
+- **Evidence**: {{quantified_metrics}} + {{qualitative_signals}}
+- **So what?**: {{specific_action}} by {{timeframe}} or {{risk/opportunity}}
 
-### 2. {{TREND_NAME}} {{MOMENTUM_EMOJI}}
-(same structure)
+### 2. {{TREND_NAME}} {{📈|📊|📉}}
+- **Momentum**: {{rising|stable|declining}} ({{%_change}} over {{period}})
+- **Confidence**: {{0.1-1.0}} ({{evidence_count}} data points, {{source_diversity}} sources)
+- **Impact**: {{high|medium|low}} (affects {{audience_size}} {{audience_type}})
+- **Evidence**: {{quantified_metrics}} + {{qualitative_signals}}
+- **So what?**: {{specific_action}} by {{timeframe}} or {{risk/opportunity}}
 
 ## Trend Matrix
 
-| Trend | Momentum | Confidence | Impact | Action |
-|-------|----------|-----------|--------|--------|
-| {{NAME}} | 📈/📊/📉 | {{SCORE}} | H/M/L | {{ACTION}} |
+| Trend | Momentum | Confidence | Impact | Action Required |
+|-------|----------|-----------|--------|-----------------|
+| {{NAME}} | 📈/📊/📉 {{%}} | {{0.1-1.0}} | H/M/L | {{verb}} {{target}} by {{date}} |
+| {{NAME}} | 📈/📊/📉 {{%}} | {{0.1-1.0}} | H/M/L | {{verb}} {{target}} by {{date}} |
 
 ## Projections (6-12 months)
-- {{PROJECTION_1}}
-- {{PROJECTION_2}}
+- **{{trend_1}}**: {{current_state}} → {{projected_state}} ({{probability}}%)
+- **{{trend_2}}**: {{current_state}} → {{projected_state}} ({{probability}}%)
+- **Wildcards**: {{low_probability_high_impact_scenarios}}
 
 ## Sources
-{{CITATIONS}}
+{{CITATION_FORMAT}}: [Title](URL) - {{data_type}}, {{sample_size}}, {{date}}
 ```
