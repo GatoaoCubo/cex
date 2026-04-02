@@ -592,7 +592,7 @@ def score_artifact(path, hybrid: bool = False) -> tuple[float, str]:
         # Fast structural-only path (original behavior)
         raw, notes = score_structural(str(path))
         if "MISSING" in notes:
-            return (0.0, "file not found")
+            return (0.0, "MISSING")
         if "NO_FRONTMATTER" in notes:
             return (round(raw * 0.5, 1), "no frontmatter")
         score = 8.0 + (raw / 10.0) * 1.3
