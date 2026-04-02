@@ -3,76 +3,101 @@ id: p12_wf_orchestration_pipeline
 kind: workflow
 pillar: P12
 version: "1.0.0"
-created: "2026-04-01"
-updated: "2026-04-01"
+created: "2026-04-02"
+updated: "2026-04-02"
 author: "workflow-builder"
-title: "Orchestration Pipeline Workflow"
-steps_count: 4
+title: "Orchestration Pipeline"
+steps_count: 5
 execution: mixed
 agent_nodes: [orchestrator, n01, n02, n03, n04, n05, n06]
 timeout: 7200
 retry_policy: per_step
 depends_on: []
-signals: [mission_planned, nuclei_dispatched, execution_complete, pipeline_complete, error]
-spawn_configs: [p12_spawn_orchestrator_mission, p12_spawn_nucleus_solo]
+signals: [complete, error]
+spawn_configs: [p12_spawn_n03_solo_build, p12_spawn_n01_solo_research, p12_spawn_n02_solo_marketing, p12_spawn_n04_solo_knowledge, p12_spawn_n05_solo_ops, p12_spawn_n06_solo_commercial]
 domain: "orchestration"
-quality: 8.8
-tags: [workflow, orchestration, pipeline, multi-nucleus]
-tldr: "4-step mixed workflow: plan mission, dispatch to nuclei, parallel execution, consolidate results with error recovery"
+quality: 9.0
+tags: [workflow, orchestration, pipeline, multi-nucleus, gdp, mission]
+tldr: "5-step mixed workflow: plan mission → gather decisions → generate spec → dispatch nuclei in parallel waves → consolidate results"
 density_score: 0.91
 ---
 ## Purpose
-Orchestrates complex multi-nucleus missions through planning, parallel dispatch, autonomous execution, and consolidation. This workflow enables the orchestrator to decompose missions into domain-specific tasks, route them to appropriate nuclei (N01-N06), monitor parallel execution, and consolidate results into final deliverables.
+
+Defines the end-to-end orchestration pipeline executed by N07 for any multi-nucleus mission. The workflow enforces GDP before dispatch (subjective decisions resolved before autonomous execution begins), fans out tasks to domain-specific nuclei in parallel waves, and consolidates outputs into a verified, committed deliverable. Steps 1–3 are strictly sequential (each step's output is the next step's input). Step 4 fans out to up to six nuclei in parallel waves. Step 5 runs only after all dispatched nuclei emit completion signals.
 
 ## Steps
 
 ### Step 1: Mission Planning [orchestrator]
-- **Agent**: orchestrator (N07)
-- **Action**: Analyze mission goal and decompose into domain-specific tasks with nucleus routing
-- **Input**: Mission specification from handoff file
-- **Output**: Task decomposition with nucleus assignments in .cex/runtime/handoffs/
-- **Signal**: mission_planned with task count and nucleus assignments
+- **Agent**: orchestrator (N07, opus)
+- **Action**: Decompose the mission goal into discrete domain tasks and assign each to the appropriate nucleus (N01–N06) using the routing table
+- **Input**: Mission goal string from user or handoff file at `.cex/runtime/handoffs/{MISSION}_n07.md`
+- **Output**: Task decomposition written to `.cex/runtime/handoffs/{MISSION}_{nucleus}.md` for each assigned nucleus; `mission_planned` signal with task count
+- **Signal**: `mission_planned`
 - **Depends on**: none
+- **On failure**: abort
+- **Timeout**: 300s
 
-### Step 2: Nucleus Dispatch [orchestrator]
-- **Agent**: orchestrator (N07)
-- **Action**: Create handoff files and launch assigned nuclei via spawn configurations
-- **Input**: Task decomposition from Step 1
-- **Output**: Active nucleus processes with handoff files
-- **Signal**: nuclei_dispatched with process IDs and handoff paths
+### Step 2: Guided Decision Protocol [orchestrator]
+- **Agent**: orchestrator (N07, opus)
+- **Action**: Identify all subjective decision points in the mission (tone, audience, style, format), present them to the user as Decision Points, collect answers, and write `decision_manifest.yaml`
+- **Input**: Task decomposition from Step 1; user in co-pilot session
+- **Output**: `.cex/runtime/decisions/decision_manifest.yaml` with all resolved Decision Points; `decisions_committed` signal
+- **Signal**: `decisions_committed`
 - **Depends on**: Step 1
+- **On failure**: abort (manifest is required; no autonomous execution without it)
+- **Timeout**: 600s
 
-### Step 3: Parallel Execution [multiple nuclei]
-- **Agent**: n01, n02, n03, n04, n05, n06 (domain-specific)
-- **Action**: Execute assigned tasks autonomously via 8F pipeline
-- **Input**: Domain-specific handoff files from Step 2
-- **Output**: Domain artifacts committed to respective pillars
-- **Signal**: execution_complete with quality scores per nucleus
-- **Depends on**: Step 2
+### Step 3: Spec Generation [orchestrator]
+- **Agent**: orchestrator (N07, opus)
+- **Action**: Synthesize task decomposition and decision manifest into a spec blueprint — exact artifact IDs, pillar assignments, quality targets, and inter-artifact dependencies
+- **Input**: Handoff files from Step 1; `decision_manifest.yaml` from Step 2
+- **Output**: Spec file at `.cex/runtime/specs/{MISSION}_spec.md` listing all artifacts to produce; `spec_ready` signal
+- **Signal**: `spec_ready`
+- **Depends on**: Steps 1, 2
+- **On failure**: abort
+- **Timeout**: 300s
 
-### Step 4: Results Consolidation [orchestrator]
-- **Agent**: orchestrator (N07)
-- **Action**: Collect nucleus outputs, validate quality, archive handoffs, push to remote
-- **Input**: Completed artifacts and signals from Step 3
-- **Output**: Consolidated mission deliverable with quality report
-- **Signal**: pipeline_complete with aggregate quality score
+### Step 4: Nucleus Dispatch — Parallel Execution Wave [n01–n06]
+- **Agent**: assigned nucleus per task (N01=research, N02=marketing, N03=build, N04=knowledge, N05=ops, N06=commercial)
+- **Action**: Each nucleus reads its handoff file and `decision_manifest.yaml`, executes the full 8F pipeline for its assigned artifacts, commits outputs, and emits a completion signal
+- **Input**: Per-nucleus handoff at `.cex/runtime/handoffs/{MISSION}_{nucleus}.md`; `decision_manifest.yaml`
+- **Output**: Committed artifacts in `N0x_*/` directories; `{nucleus}_complete` signal with quality scores per nucleus
+- **Signal**: `{nucleus}_complete` (one per active nucleus; wave completes when all active nuclei signal)
 - **Depends on**: Step 3
+- **On failure**: retry (per_step, max 1); if retry fails → skip failed nucleus and flag in consolidation report
+- **Timeout**: 5400s (90 min; covers up to six parallel nuclei)
+
+### Step 5: Consolidation [orchestrator]
+- **Agent**: orchestrator (N07, opus)
+- **Action**: Verify all nucleus outputs with `cex_doctor.py`, commit Gemini nucleus files (N01/N04 cannot git), score artifacts with `cex_score.py`, archive handoffs, and push final state
+- **Input**: `{nucleus}_complete` signals from Step 4; `git log`; nucleus output directories
+- **Output**: Consolidation report at `.cex/runtime/archive/{MISSION}_consolidation.md`; `workflow_complete` signal with aggregate quality; archived handoffs
+- **Signal**: `workflow_complete`
+- **Depends on**: Step 4
+- **On failure**: retry (max 1); partial failure logged but does not block archive
+- **Timeout**: 600s
 
 ## Dependencies
-- Mission handoff file must exist with clear goal and requirements
-- Spawn configurations for orchestrator and target nuclei must be valid
-- Target nuclei must have appropriate builder capabilities for assigned tasks
-- Git repository must be clean with no conflicting processes
+
+- Handoff file must exist at `.cex/runtime/handoffs/{MISSION}_n07.md` before workflow starts
+- `.cex/runtime/decisions/` directory must be writable (Step 2 writes manifest)
+- All referenced `spawn_configs` must be valid and present in `P12_orchestration/`
+- Active nuclei (N01–N06) must be launchable via `bash _spawn/dispatch.sh solo|grid`
+- N07 must have git credentials; Gemini nuclei (N01, N04) commit via N07 consolidation in Step 5
 
 ## Signals
-- **On mission planned**: mission_planned signal with task breakdown and nucleus routing map
-- **On nuclei dispatched**: nuclei_dispatched signal with active process tracking
-- **On parallel execution complete**: execution_complete signal with per-nucleus quality scores
-- **On workflow complete**: pipeline_complete signal with consolidated deliverable path
-- **On error**: error signal with failure point, retry per step (max 1), escalate to manual intervention
+
+- **`mission_planned`** — emitted by orchestrator after Step 1; payload: `{task_count, nucleus_assignments}`
+- **`decisions_committed`** — emitted by orchestrator after Step 2; payload: `{decision_points_count, manifest_path}`
+- **`spec_ready`** — emitted by orchestrator after Step 3; payload: `{artifact_count, spec_path}`
+- **`{nucleus}_complete`** — emitted by each active nucleus after Step 4; payload: `{nucleus_id, artifacts_committed, quality_scores}`; Gemini nuclei signal is emitted by N07 during Step 5 consolidation
+- **`workflow_complete`** — emitted by orchestrator after Step 5; payload: `{total_artifacts, avg_quality, failed_steps, archive_path}`
+- **On error**: `{nucleus}_error` emitted on step failure; orchestrator retries once then skips and flags in consolidation report
 
 ## References
-- Signal contracts defined by signal-builder for orchestration events
-- Spawn configurations from spawn-config-builder for nucleus launch parameters
-- 8F pipeline enforcement for autonomous nucleus execution
-- Quality gate validation for artifact acceptance criteria
+
+- Signal conventions: `signal-builder` (P12)
+- Spawn configuration: `spawn-config-builder` (P12)
+- Decision manifest: `.cex/runtime/decisions/decision_manifest.yaml`
+- Dispatch command: `bash _spawn/dispatch.sh solo|grid`
+- Consolidation protocol: `.claude/rules/n07-orchestrator.md` § Consolidate Protocol
