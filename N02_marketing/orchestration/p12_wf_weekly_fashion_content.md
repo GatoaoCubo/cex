@@ -27,53 +27,66 @@ density_score: 0.92
 Automates weekly fashion content production combining trend analysis with educational content for e-commerce conversion. Produces blog posts, social content, and email campaigns that balance trend awareness with practical styling education.
 
 ## Steps
+
 ### Step 1: Trend Research [fashion_trends]
-- **Agent**: fashion_trends (claude-3-sonnet)
-- **Action**: Analyze fashion platforms, social signals, and trend data
-- **Input**: Weekly trend monitoring brief
-- **Output**: Trend analysis report with 5 top trends
-- **Signal**: trends_analyzed
-- **Depends on**: none
+| Field | Value |
+|-------|-------|
+| **Agent** | fashion_trends (claude-3-sonnet) |
+| **Action** | Analyze fashion platforms, social signals, and trend data |
+| **Input** | Weekly trend monitoring brief |
+| **Output** | Trend analysis report with 5 top trends |
+| **Signal** | trends_analyzed |
+| **Depends on** | none |
 
 ### Step 2: Inventory Check [content_creator]
-- **Agent**: content_creator (gpt-4)
-- **Action**: Match trends to available inventory, identify featured products
-- **Input**: Trend report from Step 1, current inventory data
-- **Output**: Product-trend mapping with stock levels
-- **Signal**: inventory_mapped
-- **Depends on**: Step 1
+| Field | Value |
+|-------|-------|
+| **Agent** | content_creator (gpt-4) |
+| **Action** | Match trends to available inventory, identify featured products |
+| **Input** | Trend report from Step 1, current inventory data |
+| **Output** | Product-trend mapping with stock levels |
+| **Signal** | inventory_mapped |
+| **Depends on** | Step 1 |
 
 ### Step 3: Educational Content [content_creator]
-- **Agent**: content_creator (gpt-4)
-- **Action**: Create styling guides, sizing tips, care instructions
-- **Input**: Product categories and customer FAQ data
-- **Output**: 3 educational blog posts with CTAs
-- **Signal**: educational_ready
-- **Depends on**: none
+| Field | Value |
+|-------|-------|
+| **Agent** | content_creator (gpt-4) |
+| **Action** | Create styling guides, sizing tips, care instructions |
+| **Input** | Product categories and customer FAQ data |
+| **Output** | 3 educational blog posts with CTAs |
+| **Signal** | educational_ready |
+| **Depends on** | none |
 
 ### Step 4: Trend Content [content_creator]
-- **Agent**: content_creator (gpt-4)
-- **Action**: Write trend-focused posts and social captions
-- **Input**: Inventory mapping from Step 2
-- **Output**: 5 trend posts with product links
-- **Signal**: trend_content_ready
-- **Depends on**: Step 2
+| Field | Value |
+|-------|-------|
+| **Agent** | content_creator (gpt-4) |
+| **Action** | Write trend-focused posts and social captions |
+| **Input** | Inventory mapping from Step 2 |
+| **Output** | 5 trend posts with product links |
+| **Signal** | trend_content_ready |
+| **Depends on** | Step 2 |
 
 ### Step 5: Visual Assets [visual_designer]
-- **Agent**: visual_designer (claude-3-haiku)
-- **Action**: Generate social graphics, outfit layouts, size guides
-- **Input**: All content from Steps 3-4
-- **Output**: 20 visual assets for multi-channel use
-- **Signal**: visuals_complete
-- **Depends on**: Steps 3, 4
+| Field | Value |
+|-------|-------|
+| **Agent** | visual_designer (claude-3-haiku) |
+| **Action** | Generate social graphics, outfit layouts, size guides |
+| **Input** | All content from Steps 3-4 |
+| **Output** | 20 visual assets for multi-channel use |
+| **Signal** | visuals_complete |
+| **Depends on** | Steps 3, 4 |
 
 ### Step 6: Publishing [content_creator]
-- **Agent**: content_creator (gpt-4)
-- **Action**: Schedule and publish across blog, Instagram, email
-- **Input**: Content and visuals from Steps 3-5
-- **Output**: Published content with analytics tracking
-- **Signal**: content_published
-- **Depends on**: Step 5
+| Field | Value |
+|-------|-------|
+| **Agent** | content_creator (gpt-4) |
+| **Action** | Schedule and publish across blog, Instagram, email |
+| **Input** | Content and visuals from Steps 3-5 |
+| **Output** | Published content with analytics tracking |
+| **Signal** | content_published |
+| **Depends on** | Step 5 |
 
 ## Usage Guidelines
 
