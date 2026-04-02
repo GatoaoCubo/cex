@@ -1,0 +1,282 @@
+kind: prompt_template
+pillar: P05
+title: Email Sequence Templates — Marketing Campaigns
+version: 1.0.0
+created: 2026-04-02
+author: n02_marketing
+domain: email_marketing
+quality: null
+tags:
+- template
+- email
+- sequence
+- automation
+- nurture
+- N02
+tldr: Complete email sequence templates for different campaign types — welcome series, product launch, re-engagement, and
+  sales funnels.
+sequence_types:
+- welcome
+- launch
+- nurture
+- sales
+- reactivation
+1_welcome_sequence_5_email_series: ''
+email_1_welcome_expectation_setting: "Send: Immediately after signup  \nSubject: Welcome to [BRAND] - here's what happens\
+  \ next  \n\nHi [FIRST_NAME],\n\nWelcome to [BRAND_NAME]! I'm [SENDER_NAME], and I'm excited to help you [MAIN_BENEFIT].\n\
+  \nHere's what you can expect over the next few days:\n\n→ Tomorrow: [SPECIFIC_VALUE_1]\n→ Day 3: [SPECIFIC_VALUE_2] \n→\
+  \ Day 5: [SPECIFIC_VALUE_3]\n\nBut first, can you do me a quick favor? Hit reply and tell me:\nWhat's your biggest challenge\
+  \ with [PROBLEM_AREA] right now?\n\nI read every response and often create content based on what I hear.\n\nTalk soon,\n\
+  [SIGNATURE]\n\nP.S. Make sure to add my email to your contacts so my messages don't end up in spam!"
+email_2_quick_win_social_proof: "Send: 24 hours after email 1  \nSubject: Quick win: [SPECIFIC_RESULT] in [TIMEFRAME]\n\n\
+  Hi [FIRST_NAME],\n\nYesterday I asked about your biggest [PROBLEM_AREA] challenge.\n\nWhile I'm reading through responses\
+  \ (seriously, some great questions!), here's something you can implement today:\n\n[QUICK_WIN_STRATEGY]\n\nThis simple change\
+  \ helped [CUSTOMER_NAME] [SPECIFIC_RESULT] in just [TIMEFRAME].\n\nHere's exactly how to do it:\n1. [STEP_1]\n2. [STEP_2]\
+  \ \n3. [STEP_3]\n\nTry it out and let me know how it goes!\n\nBest,\n[SIGNATURE]\n\nP.S. Tomorrow I'll share the [NEXT_VALUE_PROMISE]\
+  \ - keep an eye out!"
+email_3_behind_the_scenes_story: 'Send: 48 hours after email 2
+
+  Subject: The mistake that changed everything
+
+
+  Hi [FIRST_NAME],
+
+
+  Three years ago, I made a costly mistake...
+
+
+  [PERSONAL_STORY_SETUP - challenge you faced]
+
+
+  The worst part? I was doing everything the "experts" said to do.
+
+
+  But that failure taught me [KEY_INSIGHT].
+
+
+  Now, [CURRENT_SUCCESS_METRIC].
+
+
+  The lesson? [INSIGHT_APPLIED_TO_READER]
+
+
+  That''s exactly what I help people like you do with [SOLUTION/SERVICE].
+
+
+  Speaking of which - have you tried yesterday''s [QUICK_WIN_REFERENCE]? Hit reply and let me know!
+
+
+  [SIGNATURE]'
+email_4_value_heavy_resource: "Send: 72 hours after email 3  \nSubject: Free resource: [SPECIFIC_OUTCOME]\n\nHi [FIRST_NAME],\n\
+  \nYou've been with us for almost a week now, so I wanted to share something special.\n\nI've put together [RESOURCE_TYPE]\
+  \ that shows you exactly how to [SPECIFIC_OUTCOME].\n\nInside you'll discover:\n✓ [BENEFIT_1]\n✓ [BENEFIT_2]  \n✓ [BENEFIT_3]\n\
+  ✓ Plus [BONUS_ELEMENT]\n\n[Download it here: LINK]\n\nThis is the same [RESOURCE_TYPE] that helped [SOCIAL_PROOF_EXAMPLE].\n\
+  \nQuestions? Just hit reply - I read every email.\n\n[SIGNATURE]"
+email_5_soft_introduction_to_paid_solution: 'Send: 96 hours after email 4
+
+  Subject: How [SUCCESSFUL_CUSTOMER] got [IMPRESSIVE_RESULT]
+
+
+  Hi [FIRST_NAME],
+
+
+  I want to tell you about [CUSTOMER_NAME].
+
+
+  When they first reached out, they were struggling with [RELATABLE_PROBLEM].
+
+
+  Sound familiar?
+
+
+  Over the next [TIMEFRAME], here''s what happened:
+
+  • [RESULT_1]
+
+  • [RESULT_2]
+
+  • [RESULT_3]
+
+
+  How did they do it?
+
+
+  They used the same system I teach in [PRODUCT/SERVICE_NAME].
+
+
+  Now, I''m not saying [PRODUCT/SERVICE_NAME] is for everyone.
+
+
+  But if you''re serious about [DESIRED_OUTCOME] and willing to [REQUIRED_COMMITMENT], it might be exactly what you need.
+
+
+  [Learn more here: LINK]
+
+
+  Questions? Hit reply - I''m here to help.
+
+
+  [SIGNATURE]
+
+
+  P.S. [CUSTOMER_NAME] said the best part was [SPECIFIC_BENEFIT]. What would be most valuable for you?'
+2_product_launch_sequence_6_email_series: ''
+pre_launch_email_1_announcement: "Subject: Something big is coming...\n\nHi [FIRST_NAME],\n\nI've been working on something\
+  \ for the past [TIMEFRAME] that I think you're going to love.\n\nIt's called [PRODUCT_NAME], and it's designed to help you\
+  \ [MAIN_BENEFIT].\n\nHere's a sneak peek: [TEASER_DETAILS]\n\nI'll be sharing more details over the next few days, including:\n\
+  • What exactly it includes\n• How it works  \n• Real results from beta users\n• Special pricing for early access\n\nKeep\
+  \ an eye on your inbox - launch day is [DATE]!\n\n[SIGNATURE]"
+pre_launch_email_2_behind_the_scenes: "Subject: Why I created [PRODUCT_NAME]\n\nHi [FIRST_NAME],\n\nYesterday I told you about\
+  \ [PRODUCT_NAME] - my new [PRODUCT_TYPE].\n\nToday I want to share WHY I created it.\n\n[ORIGIN_STORY - problem you observed,\
+  \ gap in market, customer requests]\n\nAfter helping [NUMBER] people with [PROBLEM_AREA], I kept hearing the same challenges:\n\
+  • [COMMON_CHALLENGE_1]\n• [COMMON_CHALLENGE_2]  \n• [COMMON_CHALLENGE_3]\n\nThat's when I realized: people need [SOLUTION_APPROACH].\n\
+  \nSo I spent [TIMEFRAME] creating exactly that.\n\n[PRODUCT_NAME] includes:\n→ [COMPONENT_1]\n→ [COMPONENT_2]  \n→ [COMPONENT_3]\n\
+  \nLaunch day is [DATE] - I can't wait to share it with you!\n\n[SIGNATURE]"
+launch_day_email_open_cart: 'Subject: 🚀 [PRODUCT_NAME] is here!
+
+
+  Hi [FIRST_NAME],
+
+
+  It''s finally here!
+
+
+  [PRODUCT_NAME] is now available, and I''m incredibly excited to share it with you.
+
+
+  Here''s everything you get:
+
+  ✓ [DETAILED_COMPONENT_1]
+
+  ✓ [DETAILED_COMPONENT_2]
+
+  ✓ [DETAILED_COMPONENT_3]
+
+  ✓ [BONUS_1]
+
+  ✓ [BONUS_2]
+
+
+  Total value: $[TOTAL_VALUE]
+
+  Your price today: $[LAUNCH_PRICE]
+
+
+  Plus, you''re protected by my [GUARANTEE_TERMS].
+
+
+  [Get [PRODUCT_NAME] now: LINK]
+
+
+  Questions? Hit reply - I''m here to help!
+
+
+  [SIGNATURE]
+
+
+  P.S. Launch week pricing ends [END_DATE]. After that, the price goes up to $[REGULAR_PRICE].'
+3_re_engagement_sequence_3_email_series: ''
+email_1_we_miss_you: 'Subject: Did I do something wrong?
+
+
+  Hi [FIRST_NAME],
+
+
+  I noticed you haven''t opened my emails in a while.
+
+
+  Did I do something wrong?
+
+
+  Maybe I''ve been sending too many emails? Or perhaps the content isn''t relevant to where you are right now?
+
+
+  I''d love to make this better.
+
+
+  Can you take 30 seconds to let me know:
+
+  1. What would make these emails more valuable for you?
+
+  2. How often would you like to hear from me?
+
+  3. What topics interest you most?
+
+
+  [Quick feedback form: LINK]
+
+
+  Or just hit reply and let me know.
+
+
+  I read every response.
+
+
+  [SIGNATURE]'
+email_2_last_attempt: 'Subject: Last email (unless you want me to stay)
+
+
+  Hi [FIRST_NAME],
+
+
+  This is probably my last email to you.
+
+
+  I hate to see you go, but I respect that your inbox is sacred space.
+
+
+  Before I remove you from my list, I wanted to share one last thing:
+
+
+  [VALUABLE_RESOURCE or SPECIAL_OFFER]
+
+
+  If you found value in this, [STAY_SUBSCRIBED_LINK].
+
+
+  If not, no hard feelings - you''ll be automatically removed after [TIMEFRAME].
+
+
+  Either way, I wish you all the best with [THEIR_GOALS]!
+
+
+  [SIGNATURE]'
+email_3_goodbye_with_win_back_offer: 'Subject: Goodbye (and thank you)
+
+
+  Hi [FIRST_NAME],
+
+
+  This is it - my final email to you.
+
+
+  Thank you for letting me be part of your journey, even briefly.
+
+
+  As a parting gift, here''s [FINAL_VALUABLE_RESOURCE] - no strings attached.
+
+
+  [RESOURCE_LINK]
+
+
+  If you ever change your mind, you can resubscribe anytime at [RESUBSCRIBE_LINK].
+
+
+  Until then, wishing you massive success!
+
+
+  [SIGNATURE]
+
+
+  P.S. If you know someone who might benefit from [MAIN_VALUE_PROPOSITION], feel free to send them to [SIGNUP_LINK].'
+usage_guidelines: ''
+personalization_variables: "required_variables:\n  - FIRST_NAME\n  - BRAND_NAME  \n  - MAIN_BENEFIT\n  - SENDER_NAME\n  \n\
+  optional_variables:\n  - COMPANY_NAME\n  - LAST_PURCHASE\n  - SIGNUP_SOURCE\n  - ENGAGEMENT_LEVEL"
+timing_recommendations: "welcome_sequence:\n  email_1: \"0 hours (immediately)\"\n  email_2: \"24 hours\"  \n  email_3: \"\
+  48 hours\"\n  email_4: \"72 hours\"\n  email_5: \"96 hours\"\n  \nlaunch_sequence:\n  pre_1: \"7 days before launch\"\n\
+  \  pre_2: \"3 days before launch\"\n  launch: \"Launch day\"\n  reminder_1: \"24 hours later\"\n  reminder_2: \"48 hours\
+  \ later\"  \n  final: \"72 hours later\""
+a_b_testing_recommendations: "test_elements:\n  subject_lines:\n    - \"Personalized vs generic\"\n    - \"Question vs statement\"\
+  \ \n    - \"Benefit vs curiosity\"\n    \n  call_to_actions:\n    - \"Action-specific vs benefit-focused\"\n    - \"Button\
+  \ vs text link\"\n    - \"Urgency vs no urgency\"\n    \n  email_length:\n    - \"Short (100-200 words) vs long (300-500\
+  \ words)\"\n    - \"Single focus vs multiple points\""

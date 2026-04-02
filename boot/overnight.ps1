@@ -165,7 +165,7 @@ $script:CreditsDepleted = $false
 
 function Test-Budget {
     if ($script:CreditsDepleted) {
-        Write-Log "CREDITS DEPLETED — stopping all LLM calls" "FATAL"
+        Write-Log "CREDITS DEPLETED -- stopping all LLM calls" "FATAL"
         return $false
     }
     if ($script:TokensUsed -ge $MaxTokens) {
@@ -412,7 +412,7 @@ function Invoke-Evolve {
         if ($State.evolve_tried.ContainsKey($triedKey)) {
             $lastScore = $State.evolve_tried[$triedKey]
             if ($lastScore -eq $score) {
-                continue  # silently skip — already tried, same score
+                continue  # silently skip -- already tried, same score
             }
         }
 
@@ -621,7 +621,7 @@ function Invoke-Farm {
                 $result = & $PYTHON "$CEX_ROOT\_tools\cex_run.py" $intent --execute 2>&1 | Out-String
                 $sw.Stop()
 
-                # Detect credit depletion (fatal — stop entirely)
+                # Detect credit depletion (fatal -- stop entirely)
                 if (Test-CreditError $result) { return $State }
 
                 # Detect rate limit (Claude returns error)

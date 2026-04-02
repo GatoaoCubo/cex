@@ -44,21 +44,21 @@ No single LLM is best at everything:
 
 ## Boot Commands
 
-| Nucleus | Command |
-|---------|---------|
-| N07 | boot\cex.cmd (pi + opus xhigh) |
-| N03 | boot
-03.cmd (claude opus) |
-| N05 | boot
-05.cmd (codex full-auto) |
-| N04 | boot
-04.cmd (gemini 2.5-pro yolo) |
-| N01 | boot
-01.cmd (gemini 2.5-pro yolo) |
-| N02 | boot
-02.cmd (claude sonnet) |
-| N06 | boot
-06.cmd (claude sonnet) |
+Boot scripts are **generated** from `.cex/config/nucleus_models.yaml`:
+```bash
+python _tools/cex_boot_gen.py          # regenerate all
+python _tools/cex_boot_gen.py --show   # show current matrix
+```
+
+| Nucleus | Command | Generated from config |
+|---------|---------|----------------------|
+| N07 | boot\cex.cmd | n07.cli + n07.model |
+| N01 | boot\n01.cmd | n01.cli + n01.model |
+| N02 | boot\n02.cmd | n02.cli + n02.model |
+| N03 | boot\n03.cmd | n03.cli + n03.model |
+| N04 | boot\n04.cmd | n04.cli + n04.model |
+| N05 | boot\n05.cmd | n05.cli + n05.model |
+| N06 | boot\n06.cmd | n06.cli + n06.model |
 
 ## Spawn Commands (from N07)
 

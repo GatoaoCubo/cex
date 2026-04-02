@@ -1,0 +1,130 @@
+kind: prompt_template
+pillar: P03
+title: Brand Voice Templates — Tone & Messaging Calibration
+version: 1.0.0
+created: 2026-04-02
+author: n02_marketing
+domain: brand_voice_copywriting
+quality: null
+tags:
+- prompt_template
+- brand_voice
+- tone
+- messaging
+- audience
+- N02
+tldr: Brand voice calibration templates for different audiences, channels, and funnel stages — ensures consistent brand personality
+  across all marketing copy.
+voice_dimensions:
+- tone
+- formality
+- personality
+- energy
+- perspective
+1_voice_dimension_framework: ''
+core_brand_voice_variables: "brand_voice_config:\n  tone:\n    scale: \"professional ←→ conversational ←→ casual\"\n    position:\
+  \ \"{{BRAND_TONE_POSITION | default: '60% conversational'}}\"\n    \n  formality:\n    scale: \"formal ←→ semi-formal ←→\
+  \ informal\"  \n    position: \"{{BRAND_FORMALITY | default: '70% semi-formal'}}\"\n    \n  personality:\n    primary: \"\
+  {{BRAND_PERSONALITY_PRIMARY | default: 'confident'}}\"  # confident | humble | bold | thoughtful\n    secondary: \"{{BRAND_PERSONALITY_SECONDARY\
+  \ | default: 'helpful'}}\"  # helpful | witty | authoritative | friendly\n    \n  energy:\n    level: \"{{BRAND_ENERGY_LEVEL\
+  \ | default: 'moderate'}}\"  # calm | moderate | energetic | high-intensity\n    expression: \"{{BRAND_ENERGY_EXPRESSION\
+  \ | default: 'steady'}}\"  # steady | bursts | building | varied\n    \n  perspective:\n    person: \"{{BRAND_PERSON | default:\
+  \ '2nd_person'}}\"  # 1st (we) | 2nd (you) | 3rd (customers)\n    relationship: \"{{BRAND_RELATIONSHIP | default: 'peer'}}\"\
+  \  # expert | peer | guide | coach\n\n---"
+2_audience_specific_voice_adaptations: ''
+b2b_professional_audience: "b2b_professional_voice:\n  tone_adjustment: \"+20% professional, +10% authoritative\"\n  language_preferences:\n\
+  \    vocabulary: \"Industry terminology acceptable, avoid overly casual\"\n    sentence_structure: \"Slightly longer sentences,\
+  \ complex ideas welcome\"\n    examples: \"Business case studies, ROI-focused, data-driven\"\n    \n  messaging_framework:\n\
+  \    opening_style: \"Industry insight or business challenge\"\n    benefit_focus: \"Efficiency, cost savings, competitive\
+  \ advantage\"\n    proof_format: \"Case studies, statistics, testimonials from similar businesses\"\n    cta_style: \"Professional\
+  \ action-oriented (Schedule demo, Get proposal)\"\n    \n  template_example: |\n    \"For [INDUSTRY] leaders managing [CHALLENGE],\
+  \ [SOLUTION] delivers [SPECIFIC_OUTCOME].\n    \n    Companies like [CUSTOMER_EXAMPLE] have seen [QUANTIFIED_RESULT] in\
+  \ just [TIMEFRAME].\n    \n    [CTA: Get your custom ROI analysis]\""
+b2c_consumer_audience: "b2c_consumer_voice:\n  tone_adjustment: \"+30% conversational, +20% relatable\"\n  language_preferences:\n\
+  \    vocabulary: \"Simple, everyday language, emotional resonance\"\n    sentence_structure: \"Shorter sentences, easy scanning\"\
+  \n    examples: \"Personal stories, lifestyle benefits, transformation\"\n    \n  messaging_framework:\n    opening_style:\
+  \ \"Personal question or relatable scenario\"\n    benefit_focus: \"Lifestyle improvement, emotional satisfaction, convenience\"\
+  \n    proof_format: \"Customer stories, before/after, social proof\"\n    cta_style: \"Benefit-focused (Start feeling better\
+  \ today, Get instant access)\"\n    \n  template_example: |\n    \"Tired of [RELATABLE_PROBLEM]? You're not alone.\n   \
+  \ \n    [CUSTOMER_NAME] felt the same way until they discovered [SOLUTION].\n    \n    Now they're [POSITIVE_OUTCOME] and\
+  \ couldn't be happier.\n    \n    [CTA: Start your transformation today]\""
+technical_developer_audience: "technical_audience_voice:\n  tone_adjustment: \"+40% technical precision, +20% direct\"\n \
+  \ language_preferences:\n    vocabulary: \"Technical accuracy critical, industry jargon expected\"\n    sentence_structure:\
+  \ \"Precise, logical flow, specifications welcome\"\n    examples: \"Code snippets, architecture diagrams, implementation\
+  \ details\"\n    \n  messaging_framework:\n    opening_style: \"Technical problem or inefficiency statement\"\n    benefit_focus:\
+  \ \"Performance, scalability, maintainability, developer experience\"\n    proof_format: \"Benchmarks, technical specs,\
+  \ community adoption\"\n    cta_style: \"Action-specific (View documentation, Try the API, Download SDK)\"\n    \n  template_example:\
+  \ |\n    \"[TECHNICAL_CHALLENGE] is slowing down your development cycle.\n    \n    [SOLUTION] reduces [SPECIFIC_METRIC]\
+  \ by [PERCENTAGE] while maintaining [QUALITY_STANDARD].\n    \n    Join [NUMBER] developers already using [PRODUCT] in production.\n\
+  \    \n    [CTA: Start with our 5-minute quickstart]\"\n\n---"
+3_channel_specific_voice_calibration: ''
+email_marketing_voice: "email_voice_settings:\n  subject_lines:\n    tone: \"{{BRAND_EMAIL_SUBJECT_TONE | default: 'curiosity-driven'}}\"\
+  \  # benefit-focused | curiosity-driven | direct\n    length: \"{{BRAND_EMAIL_SUBJECT_LENGTH | default: '30-50_chars'}}\"\
+  \n    personalization: \"{{BRAND_EMAIL_PERSONALIZATION | default: 'first_name'}}\"\n    \n  body_copy:\n    greeting: \"\
+  {{BRAND_EMAIL_GREETING | default: 'Hi [FIRST_NAME]'}}\"  # Hi | Hey | Hello | [FIRST_NAME]\n    tone_shift: \"+10% personal,\
+  \ +15% conversational\"\n    paragraph_length: \"2-4 sentences maximum\"\n    closing: \"{{BRAND_EMAIL_CLOSING | default:\
+  \ 'Best'}}\"  # Best | Cheers | Thanks | [SENDER_NAME]\n    \n  template_structure: |\n    \"[GREETING],\n    \n    [HOOK\
+  \ - personal or relevant opening]\n    \n    [VALUE - main message or content]\n    \n    [CTA - clear next step]\n    \n\
+  \    [CLOSING],\n    [SENDER_NAME]\n    \n    P.S. [ADDITIONAL_VALUE or URGENCY]\""
+social_media_voice: "social_media_voice:\n  platform_adaptations:\n    linkedin:\n      tone_adjustment: \"+20% professional,\
+  \ +10% thought-leadership\"\n      content_style: \"Industry insights, professional growth, business value\"\n      hashtag_strategy:\
+  \ \"{{BRAND_LINKEDIN_HASHTAGS | default: '3-5_industry_specific'}}\"\n      \n    instagram:\n      tone_adjustment: \"\
+  +40% visual-storytelling, +30% lifestyle\"\n      content_style: \"Behind-scenes, visual stories, lifestyle integration\"\
+  \ \n      hashtag_strategy: \"{{BRAND_INSTAGRAM_HASHTAGS | default: '10-15_mixed'}}\"\n      \n    twitter_x:\n      tone_adjustment:\
+  \ \"+50% conversational, +20% timely\"\n      content_style: \"Quick insights, industry commentary, real-time engagement\"\
+  \n      hashtag_strategy: \"{{BRAND_TWITTER_HASHTAGS | default: '1-3_trending'}}\"\n      \n  universal_guidelines:\n  \
+  \  response_time: \"Within 2 hours during business hours\"\n    engagement_style: \"{{BRAND_SOCIAL_ENGAGEMENT | default:\
+  \ 'helpful_and_genuine'}}\"\n    controversy_handling: \"{{BRAND_CONTROVERSY_APPROACH | default: 'acknowledge_and_redirect'}}\""
+advertising_copy_voice: "advertising_voice:\n  attention_getting:\n    hook_style: \"{{BRAND_AD_HOOK_STYLE | default: 'problem_agitation'}}\"\
+  \  # curiosity_gap | problem_agitation | benefit_promise\n    urgency_level: \"{{BRAND_AD_URGENCY | default: 'moderate'}}\"\
+  \  # low | moderate | high\n    \n  persuasion_approach:\n    proof_preference: \"{{BRAND_AD_PROOF | default: 'social_statistics'}}\"\
+  \  # social_proof | statistics | authority | testimonials\n    objection_handling: \"{{BRAND_AD_OBJECTIONS | default: 'address_directly'}}\"\
+  \  # address_directly | implicit_reassurance | ignore\n    \n  channel_specifics:\n    facebook_ads:\n      tone: \"+20%\
+  \ social, +15% storytelling\"\n      format: \"Hook → Story → Offer → CTA\"\n      \n    google_ads:\n      tone: \"+30%\
+  \ direct, +20% benefit-focused\"\n      format: \"Benefit → Proof → CTA\"\n      \n    linkedin_ads:\n      tone: \"+25%\
+  \ professional, +15% authority\"\n      format: \"Industry insight → Solution → CTA\"\n\n---"
+4_funnel_stage_voice_progression: ''
+awareness_stage_voice: "awareness_voice:\n  primary_goal: \"Stop the scroll, create interest\"\n  tone_characteristics: \"\
+  Intriguing, educational, non-threatening\"\n  \n  messaging_approach:\n    problem_identification: \"Help them recognize\
+  \ challenge they face\"\n    education_focus: \"Provide valuable insights without selling\"\n    trust_building: \"Establish\
+  \ credibility and expertise\"\n    \n  copy_formulas: \"AIDA (Attention + Interest focus)\"\n  cta_style: \"Soft (Learn\
+  \ more, Discover, Explore)\"\n  \n  template: |\n    \"[ATTENTION_GRABBING_STAT or QUESTION]\n    \n    [INSIGHT that reframes\
+  \ their thinking]\n    \n    [VALUE_CONTENT that helps immediately]\n    \n    [SOFT_CTA to continue learning]\""
+consideration_stage_voice: "consideration_voice:\n  primary_goal: \"Build preference, address objections\"\n  tone_characteristics:\
+  \ \"Confident, helpful, comparison-friendly\"\n  \n  messaging_approach:\n    solution_positioning: \"Present your approach\
+  \ vs alternatives\"\n    benefit_stacking: \"Layer multiple value propositions\"\n    risk_reduction: \"Address concerns\
+  \ and objections\"\n    \n  copy_formulas: \"PAS (Problem + Agitation + Solution) or BAB (Before + After + Bridge)\"\n \
+  \ cta_style: \"Medium pressure (See how, Compare options, Try free)\"\n  \n  template: |\n    \"Looking for [SOLUTION_CATEGORY]?\
+  \ Here's what sets [BRAND] apart:\n    \n    ✓ [UNIQUE_ADVANTAGE_1]\n    ✓ [UNIQUE_ADVANTAGE_2]  \n    ✓ [UNIQUE_ADVANTAGE_3]\n\
+  \    \n    Plus, [RISK_REDUCER like guarantee or trial]\n    \n    [MEDIUM_PRESSURE_CTA]\""
+decision_stage_voice: "decision_voice:\n  primary_goal: \"Remove final objections, drive action\"\n  tone_characteristics:\
+  \ \"Confident, urgent, reassuring\"\n  \n  messaging_approach:\n    urgency_creation: \"Time-sensitive reasons to act now\"\
+  \n    final_objection_handling: \"Address last hesitations\"\n    action_simplification: \"Make next step easy and clear\"\
+  \n    \n  copy_formulas: \"Offer + Urgency + Guarantee + Strong CTA\"\n  cta_style: \"Strong action (Buy now, Start today,\
+  \ Get instant access)\"\n  \n  template: |\n    \"Ready to [ACHIEVE_DESIRED_OUTCOME]?\n    \n    [COMPELLING_OFFER with\
+  \ clear value]\n    \n    [URGENCY_ELEMENT - limited time/quantity/bonus]\n    \n    [GUARANTEE or RISK_REVERSAL]\n    \n\
+  \    [STRONG_CTA_WITH_URGENCY]\"\n\n---"
+5_voice_quality_assurance: ''
+voice_consistency_checklist: "consistency_audit:\n  tone_alignment:\n    - \"Does copy match brand tone position on scale?\"\
+  \n    - \"Is formality level appropriate for audience?\"\n    - \"Does personality come through in word choice?\"\n    \n\
+  \  audience_appropriateness:\n    - \"Language complexity matches audience sophistication?\"\n    - \"Examples and references\
+  \ resonate with target?\"\n    - \"Cultural sensitivity and inclusivity maintained?\"\n    \n  channel_optimization:\n \
+  \   - \"Format optimized for channel constraints?\"\n    - \"Engagement style matches platform norms?\"\n    - \"CTA strength\
+  \ appropriate for channel context?\""
+voice_testing_framework: "voice_testing:\n  a_b_test_scenarios:\n    - \"Formal vs conversational tone\"\n    - \"Expert vs\
+  \ peer positioning\"\n    - \"Feature-focused vs benefit-focused language\"\n    - \"Direct vs storytelling approach\"\n\
+  \    \n  measurement_criteria:\n    primary: \"Engagement rate (CTR, open rate, etc.)\"\n    secondary: \"Brand perception\
+  \ survey responses\"\n    qualitative: \"Customer feedback and comments analysis\"\n\n---"
+6_dynamic_voice_adaptation: ''
+contextual_voice_modifiers: "situational_adjustments:\n  crisis_communication:\n    tone_shift: \"+40% empathetic, +30% direct,\
+  \ -20% promotional\"\n    messaging_focus: \"Acknowledgment, support, clear action steps\"\n    \n  product_launch:\n  \
+  \  tone_shift: \"+30% excited, +20% confident, +10% urgent\"\n    messaging_focus: \"Innovation, benefits, early adopter\
+  \ advantage\"\n    \n  customer_service:\n    tone_shift: \"+50% helpful, +30% patient, +20% solution-focused\"\n    messaging_focus:\
+  \ \"Understanding, resolution, relationship preservation\"\n    \n  seasonal_campaigns:\n    holiday_periods: \"+20% celebratory,\
+  \ +15% urgent (gift-giving)\"\n    new_year: \"+25% motivational, +20% fresh-start\"\n    summer: \"+20% relaxed, +15% lifestyle-focused\""
+personalization_variables: "dynamic_personalization:\n  customer_lifecycle:\n    new_subscriber: \"Welcome tone, educational\
+  \ focus\"\n    engaged_customer: \"Peer tone, advanced content\"\n    at_risk_customer: \"Concerned tone, value reinforcement\"\
+  \n    \n  behavioral_triggers:\n    high_engagement: \"Insider tone, exclusive content\"\n    low_engagement: \"Re-engagement\
+  \ tone, simplified messaging\"\n    purchase_intent: \"Confident tone, decision support\"\n\nThis brand voice template system\
+  \ ensures consistent, audience-appropriate messaging across all marketing touchpoints while maintaining the flexibility\
+  \ to optimize for different contexts and objectives."

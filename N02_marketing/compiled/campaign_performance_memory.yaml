@@ -1,0 +1,92 @@
+kind: memory_summary
+pillar: P10
+title: Campaign Performance Memory
+version: 1.0.0
+created: 2026-04-02
+author: n02_marketing
+domain: performance_tracking
+quality: null
+tags:
+- memory
+- performance
+- campaigns
+- conversion
+- A/B-testing
+- N02
+tldr: Tracks campaign performance, copy effectiveness, and conversion insights to improve future marketing efforts.
+scope: marketing_performance_learning
+campaign_history_log: ''
+template_entry: "campaign_id: \"YYYY-MM-DD_channel_goal\"\ndate: \"2026-MM-DD\"\nchannel: \"email | social | ads | landing_page\"\
+  \ngoal: \"awareness | consideration | conversion\"\ncopy_formula: \"AIDA | PAS | BAB | FAB\"\naudience_segment: \"target_description\"\
+  \n\nperformance:\n  impressions: 0\n  clicks: 0  \n  conversions: 0\n  ctr: 0.0  # click-through rate\n  cvr: 0.0  # conversion\
+  \ rate\n  cost_per_conversion: 0.0\n  \ncopy_elements:\n  headline: \"actual headline used\"\n  hook: \"opening line or\
+  \ attention grabber\"\n  cta: \"call to action text\"\n  \ninsights:\n  what_worked: []\n  what_failed: []\n  audience_response:\
+  \ \"\"\n  unexpected_results: \"\"\n  \nnext_iteration:\n  changes_planned: []\n  hypothesis: \"\""
+high_performance_copy_patterns: ''
+email_subject_lines_high_ctr: "high_performers:\n  - pattern: \"[STAT] + specific benefit + question\"\n    example: \"47%\
+  \ faster results - ready to try?\"\n    ctr: 0.34\n    context: \"B2B productivity tool\"\n    \n  - pattern: \"Personal\
+  \ story + lesson learned\"  \n    example: \"I failed at lead gen for 3 months (here's what I learned)\"\n    ctr: 0.28\n\
+  \    context: \"Marketing agency newsletter\"\n    \n  - pattern: \"Countdown + specific outcome\"\n    example: \"3 days\
+  \ left: Double your conversions by Friday\"\n    ctr: 0.31\n    context: \"Course promotion\""
+ad_headlines_high_ctr: "facebook_ads:\n  winning_pattern: \"Problem + Agitation + Solution tease\"\n  example: \"Tired of\
+  \ boring websites? Here's how [Company] got 150% more leads\"\n  avg_ctr: 0.045\n  \ngoogle_ads:  \n  winning_pattern: \"\
+  Specific benefit + Proof + CTA\"\n  example: \"Get 23% More Sales | 500+ Happy Clients | Try Free\"\n  avg_ctr: 0.032\n\
+  \  \nlinkedin_ads:\n  winning_pattern: \"Industry insight + Challenge + Resource\"\n  example: \"87% of B2B buyers research\
+  \ vendors online. Is your content ready?\"\n  avg_ctr: 0.021"
+landing_page_elements_high_cvr: "hero_sections:\n  winning_headline_pattern: \"Outcome + Timeline + Social proof hint\"\n\
+  \  example: \"Get 40% more leads in 30 days (like 1,200+ agencies already do)\"\n  avg_cvr: 0.12\n  \ncta_buttons:\n  high_performing:\
+  \ \n    - \"Start my free trial\"  # CVR: 0.08\n    - \"Get instant access\"   # CVR: 0.07  \n    - \"Claim my spot\"  \
+  \      # CVR: 0.075\n  low_performing:\n    - \"Learn more\"          # CVR: 0.02\n    - \"Click here\"          # CVR:\
+  \ 0.015\n    - \"Submit\"              # CVR: 0.018"
+audience_insights: ''
+segment_response_patterns: "b2b_saas:\n  responds_to: \"Data-driven claims, ROI focus, time-saving benefits\"\n  avoid: \"\
+  Emotional appeals, lifestyle imagery, personal testimonials\"\n  best_times: \"Tuesday-Thursday, 10AM-2PM EST\"\n  preferred_channels:\
+  \ \"LinkedIn, email, search ads\"\n  \nb2c_ecommerce:\n  responds_to: \"Emotional triggers, social proof, urgency/scarcity\"\
+  \  \n  avoid: \"Heavy technical details, lengthy explanations\"\n  best_times: \"Evenings, weekends, lunch hours\"\n  preferred_channels:\
+  \ \"Facebook, Instagram, display ads\"\n  \nonline_courses:\n  responds_to: \"Transformation stories, skill-specific outcomes,\
+  \ authority positioning\"\n  avoid: \"Generic benefits, hard sales, overwhelming information\"\n  best_times: \"Sunday evenings,\
+  \ early mornings\"\n  preferred_channels: \"Email, YouTube, content marketing\""
+demographic_copy_preferences: "millennials_25_35:\n  tone: \"Casual but professional, authenticity valued\"\n  triggers: \"\
+  Career advancement, work-life balance, authenticity\"\n  language: \"Conversational, avoid corporate jargon\"\n  \ngen_x_35_50:\n\
+  \  tone: \"Professional, results-focused, respect for time\"  \n  triggers: \"Efficiency, proven results, family considerations\"\
+  \n  language: \"Clear, direct, benefit-focused\"\n  \nboomers_50_plus:\n  tone: \"Respectful, thorough, trust-building\"\
+  \n  triggers: \"Security, reliability, customer service\"\n  language: \"Detailed explanations, traditional sales approach\""
+a_b_testing_learnings: ''
+headline_testing_results: "test_pattern: \"Benefit vs Feature vs Question\"\nsample_size: 10000\nresults:\n  benefit_headlines:\
+  \ \n    cvr: 0.045\n    example: \"Double your sales in 30 days\"\n  feature_headlines:\n    cvr: 0.023  \n    example:\
+  \ \"AI-powered sales automation platform\"\n  question_headlines:\n    cvr: 0.038\n    example: \"What if you could close\
+  \ 50% more deals?\"\n    \ninsight: \"Benefit headlines outperform by 96%, but questions work well for problem-aware audiences\""
+cta_testing_results: "button_color_tests:\n  - color: \"Orange\" | cvr: 0.067 | context: \"B2B landing page\"\n  - color:\
+  \ \"Green\" | cvr: 0.052 | context: \"E-commerce checkout\"  \n  - color: \"Red\" | cvr: 0.071 | context: \"Urgency-driven\
+  \ offer\"\n  \nbutton_text_tests:\n  action_specific: \"Get my free audit\" | cvr: 0.078\n  benefit_focused: \"Start growing\
+  \ today\" | cvr: 0.065  \n  urgency_driven: \"Claim limited spot\" | cvr: 0.059\n  generic: \"Click here\" | cvr: 0.021"
+email_testing_results: "send_time_optimization:\n  b2b_best: \"Tuesday 10AM EST\" | open_rate: 0.34\n  b2c_best: \"Sunday\
+  \ 7PM local\" | open_rate: 0.28\n  ecommerce_best: \"Friday 12PM local\" | open_rate: 0.31\n  \nsubject_line_length:\n \
+  \ optimal_range: \"30-50 characters\"\n  performance_by_length:\n    - \"20-30 chars\": 0.22 # Lower open rates\n    - \"\
+  30-50 chars\": 0.31 # Optimal range  \n    - \"50-70 chars\": 0.26 # Decent performance\n    - \"70+ chars\": 0.19   # Poor\
+  \ performance (mobile truncation)"
+copy_formula_effectiveness: ''
+formula_performance_by_context: "AIDA:\n  best_for: \"Cold audiences, awareness campaigns\"  \n  avg_conversion: 0.035\n \
+  \ channels: \"Facebook ads, display ads, cold email\"\n  \nPAS:\n  best_for: \"Problem-aware audiences, pain-focused campaigns\"\
+  \n  avg_conversion: 0.048  \n  channels: \"Google search ads, warm email, landing pages\"\n  \nBAB:\n  best_for: \"Transformation-focused,\
+  \ before/after stories\"\n  avg_conversion: 0.052\n  channels: \"Case studies, testimonial campaigns, course sales\"\n \
+  \ \nFAB:\n  best_for: \"Feature-rich products, technical audiences\"\n  avg_conversion: 0.029\n  channels: \"Product pages,\
+  \ SaaS demos, B2B content\""
+seasonal_trend_patterns: ''
+seasonal_performance: "Q1_jan_mar:\n  themes: \"New Year resolutions, fresh starts, goal-setting\"\n  high_performing: \"\
+  Productivity, health, education content\"\n  avoid: \"Heavy sales pitches (post-holiday fatigue)\"\n  \nQ2_apr_jun:  \n\
+  \  themes: \"Growth, optimization, summer prep\"\n  high_performing: \"Business growth, lifestyle improvement\"\n  avoid:\
+  \ \"Nothing specific - solid performance quarter\"\n  \nQ3_jul_sep:\n  themes: \"Back-to-school, preparation, new projects\"\
+  \  \n  high_performing: \"Learning, skill development, career content\"\n  avoid: \"Heavy content during peak vacation times\"\
+  \n  \nQ4_oct_dec:\n  themes: \"Urgency, year-end goals, holiday promotions\"\n  high_performing: \"Limited-time offers,\
+  \ year-end planning\"\n  avoid: \"Long-term commitments during holiday season\""
+performance_improvement_insights: ''
+recent_optimizations_applied: "optimization_log:\n  - date: \"2026-04-01\"\n    change: \"Switched from generic CTAs to benefit-specific\"\
+  \  \n    result: \"+23% conversion rate increase\"\n    \n  - date: \"2026-03-15\"  \n    change: \"Added social proof numbers\
+  \ to headlines\"\n    result: \"+18% click-through rate improvement\"\n    \n  - date: \"2026-03-01\"\n    change: \"Simplified\
+  \ email subject lines (removed emoji)\"\n    result: \"+12% open rate for B2B segments\""
+next_testing_queue: "planned_tests:\n  - hypothesis: \"Video testimonials in email will outperform text\"\n    timeline: \"\
+  Next 2 weeks\"\n    success_metric: \"CTR improvement >15%\"\n    \n  - hypothesis: \"Question-based subject lines will\
+  \ improve B2C open rates\"  \n    timeline: \"Next month\"\n    success_metric: \"Open rate improvement >10%\"\n    \n \
+  \ - hypothesis: \"Mobile-first landing page design will improve mobile conversions\"\n    timeline: \"Next quarter\"  \n\
+  \    success_metric: \"Mobile CVR improvement >25%\""

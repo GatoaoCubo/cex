@@ -2023,6 +2023,12 @@ domains:
     feeds_kinds:
     - signal
     origin: ''
+  p01_kc_skill:
+    path: P01_knowledge\library\kind\kc_skill.md
+    title: Skill — Deep Knowledge for skill
+    feeds_kinds:
+    - skill
+    origin: ''
   p01_kc_smoke_eval:
     path: P01_knowledge\library\kind\kc_smoke_eval.md
     title: Smoke Eval — Deep Knowledge for smoke_eval
@@ -2758,6 +2764,8 @@ coverage:
   - p01_kc_signal
   - p01_kc_a2a_protocol
   - p01_kc_crewai_patterns
+  skill:
+  - p01_kc_skill
   smoke_eval:
   - p01_kc_smoke_eval
   - p01_kc_eval_testing

@@ -1,0 +1,125 @@
+kind: validation_schema
+pillar: P09
+title: A/B Testing Framework for Marketing Copy
+version: 1.0.0
+created: 2026-04-02
+author: n02_marketing
+domain: testing_optimization
+quality: null
+tags:
+- config
+- ab-testing
+- optimization
+- conversion
+- statistical-significance
+- N02
+tldr: Complete A/B testing framework for marketing copy — test design, statistical rigor, performance measurement, and optimization
+  workflows.
+test_types:
+- headline
+- cta
+- email_subject
+- landing_page
+- ad_copy
+1_testing_strategy_design: ''
+test_categories_by_impact: "high_impact_tests:\n  - headline: \"Primary value proposition statement\"\n  - cta_button: \"\
+  Call-to-action text and design\"\n  - hero_copy: \"Above-the-fold messaging\"\n  - email_subject: \"Subject line variations\"\
+  \n  - offer_positioning: \"How benefits are presented\"\n  \nmedium_impact_tests:\n  - social_proof: \"Testimonials vs stats\
+  \ vs logos\"\n  - urgency_elements: \"Scarcity vs time-limited vs none\"\n  - copy_length: \"Long-form vs short-form\"\n\
+  \  - personalization: \"Dynamic vs static content\"\n  - visual_hierarchy: \"Copy layout and emphasis\"\n  \nlow_impact_tests:\n\
+  \  - button_color: \"CTA button styling\"\n  - font_choice: \"Typography variations\"\n  - image_placement: \"Visual element\
+  \ positioning\"\n  - footer_copy: \"Supporting information\"\n  - micro_copy: \"Form labels and helper text\""
+test_design_framework: "test_structure:\n  hypothesis: \n    format: \"If we [CHANGE], then [METRIC] will [DIRECTION] because\
+  \ [REASONING]\"\n    example: \"If we change headline from feature-focused to benefit-focused, then conversion rate will\
+  \ increase because prospects care more about outcomes than capabilities\"\n    \n  variables:\n    independent: \"Element\
+  \ being tested (headline, CTA, etc.)\"\n    dependent: \"Metric being measured (CTR, CVR, etc.)\"\n    controlled: \"Everything\
+  \ else remains identical\"\n    \n  variants:\n    control: \"Current/original version\"\n    treatment: \"New version being\
+  \ tested\"\n    max_variants: 3  # Avoid multi-variant complexity\n\n---"
+2_statistical_requirements: ''
+sample_size_calculations: "statistical_power:\n  confidence_level: 95%  # Standard for marketing tests\n  statistical_power:\
+  \ 80%  # Probability of detecting true effect\n  minimum_effect_size: 10%  # Smallest improvement worth detecting\n  \n\
+  sample_size_minimums:\n  email_tests:\n    list_size_min: 1000\n    opens_needed: 200  # For subject line tests\n    clicks_needed:\
+  \ 50   # For CTA tests\n    \n  landing_page_tests:\n    visitors_min: 1000\n    conversions_needed: 50  # For meaningful\
+  \ results\n    \n  ad_tests:\n    impressions_min: 10000\n    clicks_needed: 100\n    conversions_needed: 20"
+test_duration_guidelines: "duration_requirements:\n  minimum_duration: 7_days  # Account for weekly patterns\n  maximum_duration:\
+  \ 30_days  # Avoid external factors\n  \n  factors_affecting_duration:\n    traffic_volume: \"Higher traffic = shorter duration\
+  \ needed\"\n    conversion_rate: \"Higher CVR = faster statistical significance\"\n    effect_size: \"Larger differences\
+  \ detected faster\"\n    day_of_week_patterns: \"Must include full week cycles\""
+statistical_significance_validation: "significance_checks:\n  primary_metric: \n    p_value_threshold: 0.05\n    confidence_interval:\
+  \ 95%\n    \n  secondary_metrics:\n    monitor_for: \"Unexpected negative impacts\"\n    significance_level: 0.10  # More\
+  \ lenient for secondary\n    \n  stopping_rules:\n    early_stop_positive: \"99% confidence + business impact\"\n    early_stop_negative:\
+  \ \"95% confidence + material harm\"\n    planned_analysis: \"Weekly significance checks\"\n\n---"
+3_testing_protocols_by_channel: ''
+email_a_b_testing: "email_testing:\n  subject_line_tests:\n    split_methodology: \"50/50 random split\"\n    winner_selection:\
+  \ \"Higher open rate + statistical significance\"\n    winner_deployment: \"Send to remaining 90% of list\"\n    \n    test_variables:\n\
+  \      - length: \"Short (25-35 chars) vs Long (45-55 chars)\"\n      - format: \"Question vs Statement vs Number\"\n  \
+  \    - personalization: \"Name vs Company vs None\"\n      - urgency: \"Deadline vs Scarcity vs None\"\n      - benefit:\
+  \ \"Specific outcome vs Generic value\"\n      \n  content_tests:\n    variables:\n      - copy_length: \"Brief vs Detailed\"\
+  \n      - cta_count: \"Single CTA vs Multiple CTAs\"\n      - social_proof: \"Testimonial vs Statistic vs Logo\"\n     \
+  \ - offer_presentation: \"Discount % vs $ Amount vs Bonus\"\n      \n  send_time_optimization:\n    test_periods: \"2-hour\
+  \ windows across week\"\n    segments: \"By timezone + industry\"\n    metric: \"Open rate + click rate combined\""
+landing_page_a_b_testing: "landing_page_testing:\n  headline_tests:\n    elements_to_test:\n      - value_proposition: \"\
+  Benefit vs Feature vs Outcome\"\n      - specificity: \"Vague vs Specific numbers/results\"\n      - audience_focus: \"\
+  You vs We vs Industry\"\n      - urgency: \"Immediate vs Timeline vs No urgency\"\n      \n  hero_section_tests:\n    -\
+  \ layout: \"Text-first vs Image-first\"\n    - cta_placement: \"Above fold vs Below fold\"\n    - form_length: \"Short (3\
+  \ fields) vs Long (7+ fields)\"\n    - trust_signals: \"Testimonials vs Logos vs Guarantees\"\n    \n  conversion_flow_tests:\n\
+  \    - step_count: \"Single page vs Multi-step\"\n    - progress_indicators: \"Show progress vs Hide progress\"\n    - field_labels:\
+  \ \"Above vs Inline vs Placeholder\"\n    - submit_button: \"Text vs Color vs Size variations\""
+ad_copy_a_b_testing: "ad_testing:\n  facebook_ads:\n    creative_elements:\n      - headline: \"Benefit vs Question vs Statement\"\
+  \n      - description: \"Feature list vs Story vs Social proof\"\n      - cta_button: \"Learn More vs Get Started vs Sign\
+  \ Up\"\n      \n  google_ads:\n    text_ads:\n      - headline_1: \"Brand name vs Benefit vs Question\"\n      - headline_2:\
+  \ \"Feature vs Outcome vs Urgency\"  \n      - description: \"CTA-focused vs Benefit-focused\"\n      \n  linkedin_ads:\n\
+  \    sponsored_content:\n      - hook: \"Industry stat vs Personal insight vs Question\"\n      - body_copy: \"Case study\
+  \ vs How-to vs Announcement\"\n      - cta: \"Download vs Register vs Learn More\"\n\n---"
+4_measurement_analysis: ''
+primary_metrics_by_test_type: "conversion_metrics:\n  email_tests:\n    primary: \"Click-to-open rate (CTOR)\"\n    secondary:\
+  \ [\"Open rate\", \"Total clicks\", \"Unsubscribe rate\"]\n    \n  landing_page_tests:\n    primary: \"Conversion rate\"\
+  \n    secondary: [\"Bounce rate\", \"Time on page\", \"Form completion rate\"]\n    \n  ad_tests:\n    primary: \"Cost per\
+  \ conversion\"\n    secondary: [\"CTR\", \"CPC\", \"Conversion rate\"]"
+performance_analysis_framework: "analysis_checklist:\n  statistical_validation:\n    - \"Sample size adequate?\"\n    - \"\
+  Statistical significance achieved?\"\n    - \"Confidence intervals calculated?\"\n    - \"Multiple comparison corrections\
+  \ applied?\"\n    \n  business_impact:\n    - \"Effect size meaningful for business?\"\n    - \"Cost-benefit analysis positive?\"\
+  \n    - \"Scalability considerations addressed?\"\n    - \"Implementation complexity acceptable?\"\n    \n  external_factors:\n\
+  \    - \"Seasonality effects controlled?\"\n    - \"Marketing campaigns concurrent?\"\n    - \"Technical issues during test\
+  \ period?\"\n    - \"Competitive activity impact?\""
+results_documentation: "test_report_template:\n  test_summary:\n    hypothesis: \"\"\n    variants_tested: []\n    duration:\
+  \ \"\"\n    sample_size: 0\n    \n  results:\n    winning_variant: \"\"\n    improvement_percentage: 0.0\n    statistical_significance:\
+  \ true/false\n    confidence_level: 0.95\n    \n  insights:\n    why_winner_performed_better: \"\"\n    audience_segments_responded_differently:\
+  \ []\n    unexpected_findings: []\n    \n  next_actions:\n    implement_winner: true/false\n    follow_up_tests: []\n  \
+  \  learnings_for_future_tests: []\n\n---"
+5_testing_tools_automation: ''
+testing_platform_requirements: "platform_capabilities:\n  traffic_splitting:\n    - \"True 50/50 random assignment\"\n   \
+  \ - \"Persistent user experience (no variant switching)\"\n    - \"Mobile/desktop traffic distribution\"\n    \n  statistical_engine:\n\
+  \    - \"Real-time significance calculations\"\n    - \"Confidence interval reporting\"\n    - \"Early stopping recommendations\"\
+  \n    \n  integration_requirements:\n    - \"Analytics platform connection\"\n    - \"Email marketing platform APIs\"\n\
+  \    - \"CRM system data flow\"\n    - \"Ad platform optimization\""
+automated_testing_workflows: "automation_triggers:\n  test_launch:\n    - \"Traffic allocation confirmed\"\n    - \"Tracking\
+  \ parameters verified\"\n    - \"Success metrics baseline established\"\n    \n  monitoring:\n    - \"Daily performance\
+  \ snapshots\"\n    - \"Weekly significance checks\"\n    - \"Anomaly detection alerts\"\n    \n  test_conclusion:\n    -\
+  \ \"Statistical significance achieved\"\n    - \"Winner implementation ready\"\n    - \"Results documentation generated\"\
+  \n\n---"
+6_testing_calendar_planning: ''
+testing_prioritization_matrix: "priority_scoring:\n  impact_potential:\n    high: 3  # Could improve primary metric >20%\n\
+  \    medium: 2  # Could improve primary metric 10-20%\n    low: 1  # Could improve primary metric 5-10%\n    \n  implementation_effort:\n\
+  \    low: 3  # Quick copy change\n    medium: 2  # Design/development needed  \n    high: 1  # Complex technical implementation\n\
+  \    \n  confidence_level:\n    high: 3  # Strong hypothesis + prior data\n    medium: 2  # Reasonable hypothesis\n    low:\
+  \ 1  # Experimental/exploratory\n    \n  total_score: \"impact × effort × confidence\"\n  priority_threshold: 18  # Minimum\
+  \ score for testing queue"
+testing_schedule_template: "monthly_testing_calendar:\n  week_1:\n    - test_type: \"Email subject line\"\n    - duration:\
+  \ \"7 days\"\n    - metric: \"Open rate\"\n    \n  week_2:\n    - test_type: \"Landing page headline\"  \n    - duration:\
+  \ \"14 days\"\n    - metric: \"Conversion rate\"\n    \n  week_3:\n    - test_type: \"Ad copy variation\"\n    - duration:\
+  \ \"7 days\" \n    - metric: \"CTR + CVR\"\n    \n  week_4:\n    - analysis_week: \"Review results, plan next month\"\n\
+  \    - documentation: \"Update testing insights database\"\n\n---"
+7_quality_assurance_best_practices: ''
+testing_hygiene_checklist: "pre_launch_qa:\n  technical:\n    - \"Variants display correctly across devices\"\n    - \"Tracking\
+  \ parameters firing properly\"  \n    - \"Fallback behavior defined\"\n    \n  statistical:\n    - \"Sample size calculations\
+  \ verified\"\n    - \"Success metrics clearly defined\"\n    - \"Baseline performance documented\"\n    \n  business:\n\
+  \    - \"Hypothesis clearly stated\"\n    - \"Expected business impact estimated\"\n    - \"Resource allocation confirmed\""
+common_testing_mistakes_to_avoid: "statistical_errors:\n  - \"Peeking too early at results\"\n  - \"Stopping test prematurely\
+  \ without significance\"\n  - \"Running multiple tests simultaneously without correction\"\n  - \"Confusing statistical\
+  \ vs practical significance\"\n  \ndesign_errors:\n  - \"Testing too many variables simultaneously\"\n  - \"Unequal traffic\
+  \ allocation without justification\"\n  - \"Testing during atypical periods (holidays, launches)\"\n  - \"Ignoring mobile\
+  \ vs desktop differences\"\n  \nimplementation_errors:\n  - \"Inconsistent user experience between variants\"\n  - \"Technical\
+  \ issues affecting one variant more\"\n  - \"External campaign interference\"\n  - \"Insufficient documentation of test\
+  \ conditions\"\n\nThis A/B testing framework ensures rigorous, statistically sound optimization of marketing copy while\
+  \ building institutional knowledge for compound improvement over time."

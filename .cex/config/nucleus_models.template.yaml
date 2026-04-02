@@ -1,0 +1,164 @@
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# CEX Nucleus Model Configuration — TEMPLATE
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#
+# Copy this to: .cex/config/nucleus_models.yaml
+# Then customize for your budget and subscriptions.
+#
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#
+# CLI options:
+#   claude  — Anthropic Claude Code CLI
+#   gemini  — Google Gemini CLI
+#   codex   — OpenAI Codex CLI
+#   pi      — PI coding agent (multi-provider)
+#   ollama  — Local models via Ollama
+#
+# PRESETS (uncomment one section, or mix and match):
+#
+# ━━━━ PRESET: PREMIUM (best quality, cloud APIs) ━━━━
+# ━━━━ PRESET: MID     (balanced cost/quality)    ━━━━
+# ━━━━ PRESET: LOCAL   (100% free, local models)  ━━━━
+#
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# ╔══════════════════════════════════════════════════╗
+# ║  PREMIUM — Best model per domain                ║
+# ╚══════════════════════════════════════════════════╝
+
+# n07:
+#   cli: pi
+#   model: anthropic/claude-opus-4-6
+#   thinking: xhigh
+#
+# n01:
+#   cli: gemini
+#   model: gemini-2.5-pro
+#   flags: "--yolo"
+#   fallback:
+#     cli: claude
+#     model: claude-opus-4-0
+#
+# n02:
+#   cli: claude
+#   model: claude-sonnet-4-20250514
+#
+# n03:
+#   cli: claude
+#   model: claude-opus-4-0
+#
+# n04:
+#   cli: codex
+#   model: o3
+#   flags: "--full-auto"
+#   fallback:
+#     cli: claude
+#     model: claude-sonnet-4-20250514
+#
+# n05:
+#   cli: codex
+#   model: o4-mini
+#   flags: "--full-auto"
+#
+# n06:
+#   cli: claude
+#   model: claude-sonnet-4-20250514
+
+# ╔══════════════════════════════════════════════════╗
+# ║  MID — Single provider, mixed tiers             ║
+# ╚══════════════════════════════════════════════════╝
+
+# n07:
+#   cli: claude
+#   model: claude-sonnet-4-20250514
+#
+# n01:
+#   cli: claude
+#   model: claude-sonnet-4-20250514
+#
+# n02:
+#   cli: claude
+#   model: claude-haiku-3-20250307
+#
+# n03:
+#   cli: claude
+#   model: claude-sonnet-4-20250514
+#
+# n04:
+#   cli: claude
+#   model: claude-haiku-3-20250307
+#
+# n05:
+#   cli: claude
+#   model: claude-haiku-3-20250307
+#
+# n06:
+#   cli: claude
+#   model: claude-haiku-3-20250307
+
+# ╔══════════════════════════════════════════════════╗
+# ║  LOCAL — 100% free, Ollama + local models       ║
+# ╚══════════════════════════════════════════════════╝
+
+# n07:
+#   cli: ollama
+#   model: qwen3:32b
+#
+# n01:
+#   cli: ollama
+#   model: qwen3:32b
+#
+# n02:
+#   cli: ollama
+#   model: qwen3:14b
+#
+# n03:
+#   cli: ollama
+#   model: qwen3:32b
+#
+# n04:
+#   cli: ollama
+#   model: qwen3:14b
+#
+# n05:
+#   cli: ollama
+#   model: qwen3:14b
+#
+# n06:
+#   cli: ollama
+#   model: qwen3:14b
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# YOUR CONFIG — uncomment and edit below
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+n07:
+  cli: pi
+  model: anthropic/claude-opus-4-6
+  thinking: xhigh
+
+n01:
+  cli: gemini
+  model: gemini-2.5-pro
+  flags: "--yolo"
+
+n02:
+  cli: claude
+  model: claude-sonnet-4-20250514
+
+n03:
+  cli: claude
+  model: claude-opus-4-0
+
+n04:
+  cli: gemini
+  model: gemini-2.5-pro
+  flags: "--yolo"
+
+n05:
+  cli: claude
+  model: claude-sonnet-4-20250514
+
+n06:
+  cli: claude
+  model: claude-sonnet-4-20250514

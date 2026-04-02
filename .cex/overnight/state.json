@@ -2,19 +2,12 @@
     "phase":  "bootstrap",
     "cycle":  1,
     "tokens_used":  0,
-    "artifacts_created":  0,
+    "artifacts_created":  1,
     "artifacts_evolved":  0,
-    "started_at":  "2026-04-02T12:45:00-03:00",
-    "last_checkpoint":  "2026-04-02T12:42:28.3926600-03:00",
+    "started_at":  "2026-04-02T13:20:00-03:00",
+    "last_checkpoint":  "2026-04-02T13:07:31.8792147-03:00",
     "bootstrap_done":  [
-                           "N03_agent",
-                           "N03_system_prompt",
-                           "N03_knowledge_card",
-                           "N03_agent_card",
-                           "N03_workflow",
-                           "N03_quality_gate",
-                           "N03_scoring_rubric",
-                           "N03_dispatch_rule"
+                           "N03_agent"
                        ],
     "evolve_queue":  [
 

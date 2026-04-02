@@ -1,0 +1,91 @@
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# CEX Nucleus Model Configuration
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#
+# Each nucleus reads its CLI + model from here.
+# Boot scripts and spawn_grid consume this file.
+#
+# CHANGE THESE to match your subscriptions/budget.
+# Low-budget? Use ollama + local models everywhere.
+# Premium? Use the best cloud model per domain.
+#
+# CLI options:  claude | gemini | codex | pi | ollama
+# Model: any model string your CLI supports
+#
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# --- N07: Orchestrator (this session — pi) ---
+n07:
+  cli: pi
+  model: anthropic/claude-opus-4-6
+  thinking: xhigh
+  flags: ""
+  context: 200000
+  domain: orchestration
+  notes: "Maestro. Needs best reasoning for dispatch decisions."
+
+# --- N01: Research & Intelligence ---
+n01:
+  cli: gemini
+  model: gemini-2.5-pro
+  flags: "--yolo"
+  context: 1000000
+  domain: research
+  fallback:
+    cli: claude
+    model: claude-opus-4-0
+    flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
+  notes: "1M context for large doc analysis. Fallback to opus if gemini crashes."
+
+# --- N02: Marketing & Copy ---
+n02:
+  cli: claude
+  model: claude-sonnet-4-20250514
+  flags: "--dangerously-skip-permissions --no-chrome"
+  context: 200000
+  domain: marketing
+  notes: "Fast creative copy. Sonnet is the sweet-spot for marketing."
+
+# --- N03: Engineering & Builder ---
+n03:
+  cli: claude
+  model: claude-opus-4-0
+  flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
+  context: 200000
+  domain: engineering
+  mcps: ".mcp-n03.json"
+  settings: ".claude/nucleus-settings/n03.json"
+  notes: "Complex construction, 8F pipeline. Needs best reasoning."
+
+# --- N04: Knowledge & RAG ---
+n04:
+  cli: codex
+  model: o3
+  flags: "--full-auto"
+  context: 200000
+  domain: knowledge
+  fallback:
+    cli: claude
+    model: claude-sonnet-4-20250514
+    flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
+  notes: "Structured reasoning for taxonomy, schemas, indexing. o3 excels here."
+
+# --- N05: Operations & DevOps ---
+n05:
+  cli: codex
+  model: o4-mini
+  flags: "--full-auto"
+  context: 200000
+  domain: operations
+  notes: "Code review, testing, CI/CD. Codex native domain."
+
+# --- N06: Commercial & Brand ---
+n06:
+  cli: claude
+  model: claude-sonnet-4-20250514
+  flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
+  context: 200000
+  domain: commercial
+  mcps: ".mcp-n06.json"
+  settings: ".claude/nucleus-settings/n06.json"
+  notes: "Pricing, funnels, monetization. Sonnet handles well."

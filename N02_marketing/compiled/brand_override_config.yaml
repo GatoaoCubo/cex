@@ -1,0 +1,58 @@
+kind: env_config
+pillar: P09
+title: Brand Override Config for N02 Marketing
+version: 1.0.0
+created: 2026-04-02
+author: n02_marketing
+domain: brand_configuration
+quality: null
+tags:
+- config
+- brand
+- marketing
+- tone
+- voice
+- N02
+tldr: Brand-specific overrides for marketing copy generation — tone, voice, terminology, and channel-specific adaptations.
+brand_voice_calibration: ''
+base_brand_settings: "brand:\n  name: \"{{BRAND_NAME}}\"\n  tone: \"{{BRAND_TONE}}\"  # professional | casual | technical\
+  \ | friendly\n  voice: \"{{BRAND_VOICE}}\" # confident | humble | authoritative | conversational\n  energy: \"{{BRAND_ENERGY}}\"\
+  \ # calm | energetic | bold | subtle\n  person: \"{{BRAND_PERSON}}\" # 1st | 2nd | 3rd"
+copy_formula_preferences: "copy_preferences:\n  primary_formula: \"{{BRAND_COPY_FORMULA | default: 'AIDA'}}\"  # AIDA | PAS\
+  \ | BAB | FAB\n  headline_style: \"{{BRAND_HEADLINE_STYLE | default: 'benefit-first'}}\"  # benefit-first | curiosity-gap\
+  \ | specific-result\n  cta_style: \"{{BRAND_CTA_STYLE | default: 'action-specific'}}\"  # action-specific | benefit-focused\
+  \ | urgency-driven\n  audience_address: \"{{BRAND_AUDIENCE_ADDRESS | default: 'you'}}\"  # you | we | customer-name"
+channel_adaptations: "channels:\n  email:\n    tone_adjustment: \"+5% formal\"  # relative to base tone\n    max_subject_length:\
+  \ 50\n    preview_text_required: true\n    \n  social_media:\n    tone_adjustment: \"+10% casual\"\n    hashtag_strategy:\
+  \ \"{{BRAND_HASHTAG_STRATEGY | default: 'minimal'}}\"  # minimal | moderate | extensive\n    emoji_usage: \"{{BRAND_EMOJI_USAGE\
+  \ | default: 'occasional'}}\"  # none | occasional | frequent\n    \n  ads:\n    tone_adjustment: \"0% (base)\"\n    hook_requirement:\
+  \ \"curiosity-gap + benefit\"\n    character_limits:\n      facebook: 125\n      google: 90\n      linkedin: 150\n     \
+  \ \n  landing_pages:\n    tone_adjustment: \"+5% confident\"\n    social_proof_requirement: true\n    urgency_level: \"\
+  {{BRAND_URGENCY_LEVEL | default: 'moderate'}}\"  # low | moderate | high"
+terminology_voice: "#### Approved Terms\npreferred_words:\n  - \"{{BRAND_PREFERRED_WORDS | default: ['solution', 'results',\
+  \ 'growth', 'success']}}\"\n  \npower_words:\n  - \"{{BRAND_POWER_WORDS | default: ['proven', 'effective', 'streamlined',\
+  \ 'optimized']}}\"\n  \nindustry_terms:\n  - \"{{BRAND_INDUSTRY_TERMS | default: []}}\"  # Brand-specific terminology\n\n\
+  #### Banned Terms\navoid_words:\n  - \"{{BRAND_AVOID_WORDS | default: ['amazing', 'incredible', 'revolutionary', 'game-changer']}}\"\
+  \n  \noverused_phrases:\n  - \"{{BRAND_OVERUSED_PHRASES | default: ['take your business to the next level', 'cutting-edge',\
+  \ 'world-class']}}\""
+quality_standards: "quality_gates:\n  readability:\n    flesch_kincaid_min: \"{{BRAND_READABILITY_MIN | default: 60}}\"  #\
+  \ B2C: 60-70, B2B: 40-60\n    max_sentence_length: \"{{BRAND_MAX_SENTENCE | default: 20}}\"  # words\n    \n  specificity:\n\
+  \    stats_preference: \"{{BRAND_STATS_PREFERENCE | default: 'specific-with-source'}}\"  # vague | specific | specific-with-source\n\
+  \    claim_substantiation: \"{{BRAND_CLAIM_SUBSTANTIATION | default: 'required'}}\"  # required | optional\n    \n  legal:\n\
+  \    disclaimer_requirement: \"{{BRAND_DISCLAIMER_REQUIRED | default: false}}\"\n    claim_approval_needed: \"{{BRAND_CLAIM_APPROVAL\
+  \ | default: false}}\""
+integration_settings: ''
+api_configurations: "integrations:\n  headliner_scorer:\n    enabled: true\n    scoring_weights:\n      curiosity: 0.3\n \
+  \     specificity: 0.4\n      urgency: 0.2\n      clarity: 0.1\n      \n  readability_analyzer:\n    enabled: true\n   \
+  \ target_score: \"{{BRAND_READABILITY_TARGET | default: 65}}\"\n    \n  sentiment_checker:\n    enabled: true\n    target_sentiment:\
+  \ \"{{BRAND_TARGET_SENTIMENT | default: 'positive_confident'}}\""
+cross_nucleus_handoffs: "handoffs:\n  from_n01_research:\n    format: \"research_brief_to_marketing_angles\"\n    required_fields:\
+  \ [\"audience_insights\", \"pain_points\", \"competitive_landscape\"]\n    \n  to_n05_deployment:\n    format: \"copy_deployment_package\"\
+  \ \n    deliverables: [\"final_copy\", \"a_b_variants\", \"performance_expectations\"]\n    \n  to_n06_commercial:\n   \
+  \ format: \"copy_commercial_alignment\"\n    coordination: [\"pricing_messaging\", \"value_proposition\", \"objection_handling\"\
+  ]"
+environment_overrides: ''
+development: "development:\n  ab_testing: false\n  approval_workflow: false\n  placeholder_content: true\n  \n### Staging\
+  \  \nstaging:\n  ab_testing: true\n  approval_workflow: true\n  real_content: true\n  performance_tracking: false\n  \n\
+  ### Production\nproduction:\n  ab_testing: true\n  approval_workflow: true\n  real_content: true\n  performance_tracking:\
+  \ true\n  legal_review: \"{{BRAND_LEGAL_REVIEW_REQUIRED | default: false}}\""

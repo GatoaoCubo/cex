@@ -1,0 +1,103 @@
+kind: handoff_protocol
+pillar: P12
+title: Cross-Nucleus Handoff Protocols for N02 Marketing
+version: 1.0.0
+created: 2026-04-02
+author: n02_marketing
+domain: nucleus_coordination
+quality: null
+tags:
+- handoff
+- coordination
+- N01
+- N02
+- N05
+- N06
+- cross-nucleus
+tldr: Defines handoff protocols between N02 Marketing and other nuclei for seamless research→copy→deployment→commercial workflows.
+handoff_types:
+- research_to_copy
+- copy_to_deployment
+- copy_to_commercial
+- feedback_loop
+1_n01_research_n02_marketing: ''
+handoff_research_insights_to_marketing_angles: "When: N01 completes market research, competitive analysis, or audience insights\
+  \  \nPurpose: Transform research findings into actionable marketing copy briefs  \nFormat: `research_to_copy_brief.md`\n\
+  \n#### Input from N01\nresearch_brief:\n  research_type: \"market_analysis | competitive_intel | audience_research | trend_analysis\"\
+  \n  target_audience:\n    primary_segment: \"\"\n    demographics: {}\n    psychographics: {}\n    pain_points: []\n   \
+  \ desires: []\n    \n  key_findings:\n    insights: []\n    opportunities: []\n    threats: []\n    gaps_in_market: []\n\
+  \    \n  competitive_landscape:\n    direct_competitors: []\n    messaging_analysis: {}\n    positioning_gaps: []\n    \n\
+  \  recommendations:\n    positioning_strategy: \"\"\n    messaging_priorities: []\n    channel_recommendations: []\n\n####\
+  \ N02 Processing\nmarketing_translation:\n  copy_angles:\n    primary_angle: \"\"  # Main value proposition\n    supporting_angles:\
+  \ []  # Secondary benefits\n    emotional_triggers: []  # Fear, desire, aspiration\n    \n  messaging_framework:\n    headline_directions:\
+  \ []\n    hook_concepts: []\n    benefit_stack: []\n    objection_handles: []\n    \n  channel_adaptations:\n    email:\
+  \ \"messaging_adaptation\"\n    social: \"messaging_adaptation\"  \n    ads: \"messaging_adaptation\"\n    landing_pages:\
+  \ \"messaging_adaptation\"\n    \n  copy_formula_selection:\n    primary_formula: \"AIDA | PAS | BAB | FAB\"\n    rationale:\
+  \ \"\"\n\n#### Output to Campaign\ncampaign_brief:\n  campaign_goal: \"\"\n  target_audience: \"\"  # From research\n  key_message:\
+  \ \"\"  # Core value prop\n  copy_strategy: \"\"  # Formula + approach\n  channel_mix: []  # Priority channels\n  success_metrics:\
+  \ []\n\n---"
+2_n02_marketing_n05_operations_deployment: ''
+handoff_copy_deployment_package: "When: N02 completes copy creation and needs technical deployment  \nPurpose: Provide N05\
+  \ with everything needed for copy deployment  \nFormat: `copy_deployment_package.md`\n\n#### Input from N02\ncopy_deliverables:\n\
+  \  final_copy:\n    headlines: []\n    body_copy: \"\"\n    cta_text: \"\"\n    meta_descriptions: []  # For web deployment\n\
+  \    \n  a_b_variants:\n    variant_a: {}\n    variant_b: {}\n    test_hypothesis: \"\"\n    success_metric: \"\"\n    \n\
+  \  technical_requirements:\n    deployment_channels: []  # email, web, social, ads\n    timing_requirements: \"\"\n    personalization_variables:\
+  \ []\n    tracking_parameters: []\n    \n  brand_assets_needed:\n    images: []\n    videos: []  \n    fonts: []\n    color_codes:\
+  \ []\n\n#### N05 Requirements\ndeployment_checklist:\n  technical_setup:\n    - \"Copy uploaded to platform\"\n    - \"\
+  A/B testing configured\"  \n    - \"Tracking pixels implemented\"\n    - \"Personalization tokens mapped\"\n    \n  quality_assurance:\n\
+  \    - \"Responsive display testing\"\n    - \"Cross-browser compatibility\"\n    - \"Mobile optimization verified\"\n \
+  \   - \"Link functionality confirmed\"\n    \n  go_live:\n    - \"Launch date confirmed\"\n    - \"Backup/rollback plan\
+  \ ready\"\n    - \"Performance monitoring activated\"\n\n#### Success Handoff Criteria\ndeployment_complete:\n  deliverables:\n\
+  \    - \"Live copy with tracking\"\n    - \"A/B test running\"  \n    - \"Performance dashboard active\"\n    - \"Issue\
+  \ escalation path defined\"\n    \n  performance_expectations:\n    baseline_metrics: {}\n    target_improvements: {}\n\
+  \    review_schedule: \"\"\n\n---"
+3_n02_marketing_n06_commercial: ''
+handoff_copy_commercial_alignment: "When: Copy involves pricing, offers, or sales messaging  \nPurpose: Ensure copy aligns\
+  \ with commercial strategy and pricing  \nFormat: `copy_commercial_alignment.md`\n\n#### N02 → N06: Copy with Commercial\
+  \ Implications\ncommercial_copy_brief:\n  copy_type: \"pricing_page | sales_email | offer_landing_page | upsell_sequence\"\
+  \n  \n  pricing_elements:\n    price_points_mentioned: []\n    value_propositions: []\n    comparison_frameworks: []  #\
+  \ vs competitors\n    \n  offer_structure:\n    primary_offer: \"\"\n    bonuses_mentioned: []\n    guarantees: []\n   \
+  \ scarcity_elements: []\n    \n  objection_handling:\n    price_objections: []\n    value_objections: []  \n    trust_objections:\
+  \ []\n\n#### N06 → N02: Commercial Strategy Input\ncommercial_guidance:\n  pricing_strategy:\n    price_positioning: \"\
+  premium | mid_market | value | penetration\"\n    messaging_priorities: []\n    avoid_comparisons: []\n    \n  offer_optimization:\n\
+  \    strongest_benefits: []  # Lead with these\n    proof_points: []  # Use for credibility\n    urgency_elements: []  #\
+  \ When appropriate\n    \n  sales_process_alignment:\n    funnel_stage: \"awareness | consideration | decision\"\n    next_step_goal:\
+  \ \"\"\n    handoff_to_sales: \"yes | no\"\n\n#### Coordinated Output\naligned_copy:\n  messaging: \"Commercial strategy\
+  \ + copy expertise\"\n  pricing_communication: \"Clear, confident, value-focused\"\n  sales_enablement: \"Copy supports\
+  \ sales process\"\n  performance_tracking: \"Commercial + marketing metrics\"\n\n---"
+4_performance_feedback_loops: ''
+n05_n02_performance_data_handoff: "When: Copy has been live for sufficient time to gather data  \nPurpose: Provide performance\
+  \ insights to improve future copy  \nFormat: `copy_performance_feedback.md`\n\n#### Performance Data from N05\nperformance_results:\n\
+  \  channel_performance:\n    email:\n      open_rate: 0.0\n      click_rate: 0.0\n      conversion_rate: 0.0\n      \n \
+  \   landing_pages:\n      traffic: 0\n      bounce_rate: 0.0\n      conversion_rate: 0.0\n      time_on_page: 0\n      \n\
+  \    ads:\n      impressions: 0  \n      ctr: 0.0\n      cpc: 0.0\n      conversion_rate: 0.0\n      \n  a_b_test_results:\n\
+  \    winning_variant: \"\"\n    performance_difference: \"\"\n    statistical_significance: true/false\n    \n  user_behavior:\n\
+  \    heat_maps: \"link_to_data\"\n    scroll_depth: {}\n    click_patterns: {}\n\n#### N02 Learning Integration\ncopy_insights:\n\
+  \  what_worked:\n    headlines: []\n    hooks: []\n    ctas: []\n    \n  what_failed:\n    low_performing_elements: []\n\
+  \    hypotheses_disproven: []\n    \n  optimization_opportunities:\n    immediate_fixes: []\n    test_ideas: []\n    strategic_pivots:\
+  \ []\n    \n  memory_updates:\n    pattern_additions: []\n    audience_insights: []\n    formula_effectiveness: {}\n\n---"
+5_handoff_workflow_process: ''
+standard_operating_procedure: "#### Step 1: Handoff Request\n# N02 requests handoff to another nucleus\n# Create handoff file\
+  \ in .cex/runtime/handoffs/\necho \"Creating handoff: N02 → N0X\"\ncp templates/handoff_template.md .cex/runtime/handoffs/N02_to_N0X_$(date\
+  \ +%Y%m%d).md\n\n#### Step 2: Receiving Nucleus Processing\n# Receiving nucleus processes handoff\n# Updates handoff file\
+  \ with acceptance + timeline\necho \"N0X accepting handoff from N02\"\n# Begin processing with full context\n\n#### Step\
+  \ 3: Completion & Feedback\n# Receiving nucleus completes work\n# Signals completion + provides feedback\npython _tools/signal_writer.py\
+  \ n0x complete 8.5 \"HANDOFF_N02_COMPLETE\"\n\n#### Step 4: Loop Closure  \n# N02 integrates feedback into memory\n# Updates\
+  \ performance tracking\n# Improves future handoff quality"
+emergency_handoff_protocol: "#### When Standard Handoff Fails\nescalation_path:\n  level_1: \"Retry with clarified requirements\"\
+  \n  level_2: \"N07 orchestrator mediation\"  \n  level_3: \"Manual coordination call\"\n  level_4: \"Task restructuring\"\
+  \n\n#### Quality Gates for Handoffs\nhandoff_quality_checks:\n  completeness: \"All required fields filled\"\n  clarity:\
+  \ \"Requirements unambiguous\"  \n  actionability: \"Receiving nucleus can execute immediately\"\n  trackability: \"Success\
+  \ metrics defined\""
+6_templates_checklists: ''
+research_marketing_brief_template: "# Research to Marketing Brief\n\n## Research Summary\n- Research Type: [type]\n- Key Finding:\
+  \ [most important insight]\n- Target Audience: [primary segment]\n\n## Marketing Translation\n- Core Message: [value proposition]\
+  \  \n- Emotional Hook: [primary trigger]\n- Copy Formula: [AIDA/PAS/BAB/FAB + rationale]\n- Channel Priority: [ranked list]\n\
+  \n## Success Metrics\n- Primary KPI: [main goal]\n- Supporting Metrics: [secondary measurements]\n- Review Timeline: [when\
+  \ to assess]"
+copy_deployment_checklist: "# Copy Deployment Checklist\n\n## Copy Assets Ready\n- [ ] Final headlines (3 variants)\n- [ ]\
+  \ Body copy (A/B versions)  \n- [ ] CTAs (2-3 options)\n- [ ] Meta data (titles, descriptions)\n\n## Technical Requirements\n\
+  - [ ] Deployment channels confirmed\n- [ ] Tracking parameters defined\n- [ ] Personalization variables mapped\n- [ ] A/B\
+  \ testing configured\n\n## Launch Coordination  \n- [ ] Go-live date confirmed\n- [ ] Performance monitoring ready\n- [\
+  \ ] Issue escalation path defined\n- [ ] Success criteria agreed upon\n\nThis handoff protocol ensures seamless coordination\
+  \ between N02 and other nuclei, preventing information loss and enabling compound effectiveness across the CEX system."
