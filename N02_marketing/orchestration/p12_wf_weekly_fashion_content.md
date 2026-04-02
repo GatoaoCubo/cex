@@ -75,6 +75,23 @@ Automates weekly fashion content production combining trend analysis with educat
 - **Signal**: content_published
 - **Depends on**: Step 5
 
+## Usage Guidelines
+
+**When to use:**
+- E-commerce fashion brands with 50+ SKUs and weekly inventory turnover
+- Content teams producing 15+ pieces per week across multiple channels
+- Brands targeting trend-conscious customers who need styling education
+
+**When NOT to use:**
+- Luxury brands focusing on timeless pieces over trends
+- Seasonal businesses with quarterly content cycles
+- Teams without real-time inventory data integration
+
+**Anti-patterns:**
+- Running without inventory API connection (produces broken product links)
+- Skipping educational content for pure trend-chasing (reduces conversion)
+- Publishing without visual assets (severely impacts engagement rates)
+
 ## Dependencies
 - Active fashion trend monitoring tools and data sources
 - E-commerce inventory API with real-time stock levels
