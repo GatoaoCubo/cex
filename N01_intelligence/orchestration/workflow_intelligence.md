@@ -52,6 +52,14 @@ BRIEF → SCOPE → SEARCH → TRIANGULATE → SYNTHESIZE → FORMAT → VALIDAT
 | Deliver without freshness check | Provides outdated intelligence | Validate recency in Step 7 quality gate |
 
 ## Decision Points
-- Step 2 scope too broad → narrow with user via GDP
-- Step 4 triangulation fails (<3 sources) → flag as "low confidence"
-- Step 7 freshness fail → re-search with date filters
+
+| Step | Scenario | Decision | Action |
+|------|----------|----------|--------|
+| 2 | Brief too vague ("research competitors") | Scope clarification needed | Use GDP to get specific verticals, regions, metrics |
+| 2 | Time constraint vs depth requested | L3 brief but 10min available | Negotiate down to L2 or extend timeline |
+| 3 | Paywall sources blocking research | Premium content inaccessible | Shift to academic papers, company reports, public filings |
+| 4 | <3 sources found for key claim | Triangulation impossible | Flag as "single-source claim" and note confidence level |
+| 4 | Sources contradict each other | Conflicting information | Present both views with source attribution |
+| 6 | Multiple output formats requested | Format selection unclear | Use research_brief template unless specifically requested |
+| 7 | Sources >6 months old | Freshness gate failure | Re-search with date filters or flag as historical analysis |
+| 8 | Handoff target unclear | Delivery ambiguity | Signal N07 and await routing instructions |
