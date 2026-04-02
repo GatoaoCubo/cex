@@ -25,6 +25,19 @@ density_score: 0.89
 | SQL joins | Direct (same DB) | Impossible | Impossible |
 | Hybrid search | BM25 + vector in 1 query | Vector only | Vector + BM25 separate |
 
+## Limitations & Anti-Patterns
+| Limitation | Threshold | Alternative |
+|------------|-----------|-------------|
+| Vector count | >1M vectors | Pinecone/Weaviate |
+| Query latency | >200ms p95 | Dedicated vector DB |
+| Memory usage | >50% of PG RAM | External vector store |
+| Complex filters | >5 metadata filters | Application-level filtering |
+
+**Anti-patterns:**
+- Storing high-dimensional vectors (>2048D) — kills performance
+- No connection pooling — exhausts PG connections
+- Embedding updates without VACUUM — index bloat
+
 ## Connection Config
 ```yaml
 rag_backend: supabase_pgvector
