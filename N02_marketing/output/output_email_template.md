@@ -3,6 +3,7 @@ id: p05_output_email_template
 kind: output_validator
 pillar: P05
 title: Responsive Email HTML Template with Outlook Compatibility
+tldr: Production-ready responsive email templates with Outlook compatibility, dark mode support, and mobile optimization
 version: 1.0.0
 created: 2026-04-01
 author: n02_visual_frontend
