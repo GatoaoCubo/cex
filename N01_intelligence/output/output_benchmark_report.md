@@ -38,3 +38,19 @@ density_score: 0.91
 ## Recommendation
 {{ACTIONABLE_RECOMMENDATION}}
 ```
+
+## Scoring Methodology
+
+**Star Rating Scale**: 1⭐ = Poor | 2⭐⭐ = Fair | 3⭐⭐⭐ = Good | 4⭐⭐⭐⭐ = Excellent | 5⭐⭐⭐⭐⭐ = Best-in-class
+
+**Weight Distribution**: Core features (40-50%) | Price (20-30%) | Performance (15-25%) | Support/UX (10-15%)
+
+## Common Criteria Examples
+
+| Category | Core Criteria | Weight Range |
+|----------|---------------|--------------|
+| **Software Tools** | Feature completeness, ease of use, integrations, pricing | 30%, 25%, 25%, 20% |
+| **SaaS Platforms** | Functionality, scalability, security, cost per user | 35%, 20%, 25%, 20% |
+| **Hardware** | Performance, build quality, price, warranty | 40%, 20%, 25%, 15% |
+
+**Anti-patterns**: Equal weights (dilutes decision), >7 criteria (analysis paralysis), subjective scoring without clear rubrics.
