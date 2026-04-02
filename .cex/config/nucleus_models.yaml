@@ -12,6 +12,7 @@
 # CLI options:  claude | gemini | codex | pi | ollama
 # Model: any model string your CLI supports
 #
+# Decision: 2026-04-02 — /guide session, user-confirmed
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 # --- N07: Orchestrator (this session — pi) ---
@@ -22,7 +23,10 @@ n07:
   flags: ""
   context: 200000
   domain: orchestration
-  notes: "Maestro. Needs best reasoning for dispatch decisions."
+  fallback:
+    cli: ollama
+    model: qwen3:32b
+  notes: "Maestro. Best reasoning for dispatch decisions."
 
 # --- N01: Research & Intelligence ---
 n01:
@@ -35,7 +39,10 @@ n01:
     cli: claude
     model: claude-opus-4-0
     flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
-  notes: "1M context for large doc analysis. Fallback to opus if gemini crashes."
+  fallback_local:
+    cli: ollama
+    model: qwen3:32b
+  notes: "1M context for large doc analysis. Gemini is king for research ingestion."
 
 # --- N02: Marketing & Copy ---
 n02:
@@ -44,7 +51,14 @@ n02:
   flags: "--dangerously-skip-permissions --no-chrome"
   context: 200000
   domain: marketing
-  notes: "Fast creative copy. Sonnet is the sweet-spot for marketing."
+  fallback:
+    cli: gemini
+    model: gemini-2.5-pro
+    flags: "--yolo"
+  fallback_local:
+    cli: ollama
+    model: qwen3:14b
+  notes: "Claude leads creative writing + tone control. Sonnet = speed × quality sweet-spot."
 
 # --- N03: Engineering & Builder ---
 n03:
@@ -55,29 +69,46 @@ n03:
   domain: engineering
   mcps: ".mcp-n03.json"
   settings: ".claude/nucleus-settings/n03.json"
-  notes: "Complex construction, 8F pipeline. Needs best reasoning."
+  fallback:
+    cli: codex
+    model: o3
+    flags: "--full-auto"
+  fallback_local:
+    cli: ollama
+    model: qwen3:32b
+  notes: "Most complex task. 13 ISOs + 8F pipeline. Needs deepest reasoning."
 
 # --- N04: Knowledge & RAG ---
 n04:
-  cli: codex
-  model: o3
-  flags: "--full-auto"
-  context: 200000
+  cli: gemini
+  model: gemini-2.5-pro
+  flags: "--yolo"
+  context: 1000000
   domain: knowledge
   fallback:
-    cli: claude
-    model: claude-sonnet-4-20250514
-    flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
-  notes: "Structured reasoning for taxonomy, schemas, indexing. o3 excels here."
+    cli: codex
+    model: o3
+    flags: "--full-auto"
+  fallback_local:
+    cli: ollama
+    model: qwen3:14b
+  notes: "CHANGED from codex/o3. 1M context lets N04 see entire knowledge library at once for taxonomy."
 
 # --- N05: Operations & DevOps ---
 n05:
   cli: codex
-  model: o4-mini
+  model: o3
   flags: "--full-auto"
   context: 200000
   domain: operations
-  notes: "Code review, testing, CI/CD. Codex native domain."
+  fallback:
+    cli: claude
+    model: claude-sonnet-4-20250514
+    flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
+  fallback_local:
+    cli: ollama
+    model: qwen3:14b
+  notes: "UPGRADED from o4-mini. o3 better quality for code/tests. Codex sandbox is native domain."
 
 # --- N06: Commercial & Brand ---
 n06:
@@ -88,4 +119,23 @@ n06:
   domain: commercial
   mcps: ".mcp-n06.json"
   settings: ".claude/nucleus-settings/n06.json"
-  notes: "Pricing, funnels, monetization. Sonnet handles well."
+  fallback:
+    cli: gemini
+    model: gemini-2.5-pro
+    flags: "--yolo"
+  fallback_local:
+    cli: ollama
+    model: qwen3:14b
+  notes: "Pricing, funnels, monetization. Sonnet handles well. Speed > depth for commercial."
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# GRID LOAD DISTRIBUTION (6 simultaneous during /grid):
+#
+#   Claude:  N02(sonnet) + N03(opus) + N06(sonnet) = 3
+#   Gemini:  N01 + N04                              = 2
+#   Codex:   N05                                    = 1
+#   N07 runs in pi (separate session, doesn't compete)
+#
+# Fallback principle: always cross-provider (never fallback to same)
+# Fallback local: qwen3:32b (heavy nuclei) / qwen3:14b (light nuclei)
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
