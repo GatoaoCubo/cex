@@ -40,6 +40,15 @@ density_score: 0.93
 | 0.70-0.84 | Relevant | Include if budget allows |
 | < 0.70 | Weak | Exclude |
 
+## Selection Criteria
+
+| Requirement | Model Choice | Chunking | Threshold |
+|-------------|--------------|----------|-----------|
+| Cost-sensitive prototype | gecko | fixed | 0.70 |
+| Production RAG system | text-embedding-3-large | semantic | 0.75 |
+| QA over docs | text-embedding-3-small | sentence-window | 0.80 |
+| Large knowledge base | embed-english-v3.0 | fixed | 0.70 |
+
 ## Default Config
 ```yaml
 model: text-embedding-3-small
