@@ -5054,3 +5054,4 @@ et
 2026-04-02 12:48:20	C:\Users\PC\AppData\Local\Temp\pytest-of-PC\pytest-2382\test_keep_on_improvement0\test_artifact.md	1	8.5	0.95	keep	added examples
 2026-04-02 12:48:20	C:\Users\PC\AppData\Local\Temp\pytest-of-PC\pytest-2382\test_discard_on_no_improvement0\test_artifact.md	1	6.5	0.95	discard	tried something
 2026-04-02 12:48:20	C:\Users\PC\AppData\Local\Temp\pytest-of-PC\pytest-2382\test_budget_stops_loop0\test_artifact.md	1	5.0	0.95	discard	small change
+2026-04-02 13:02:07	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\examples\p12_dispatch_rule_create_dispatch_rule_for_test.md	1	8.7	0.79	keep	added density_score: 0.79

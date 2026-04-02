@@ -46,13 +46,15 @@ from _tools.cex_hooks import validate_artifact
 
 # ── Config ──────────────────────────────────────────────────────────────────
 
+# Use short aliases (subscription auth) — NOT full model IDs (API credits).
+# "sonnet" / "opus" / "haiku" → subscription. "claude-sonnet-4-20250514" → API billing.
 EFFORT_TO_MODEL = {
-    "low": "claude-haiku-4-20250414",
-    "medium": "claude-sonnet-4-20250514",
-    "high": "claude-sonnet-4-20250514",
-    "max": "claude-sonnet-4-20250514",
+    "low": "haiku",
+    "medium": "sonnet",
+    "high": "sonnet",
+    "max": "opus",
 }
-DEFAULT_MODEL = "claude-sonnet-4-20250514"
+DEFAULT_MODEL = "sonnet"
 MAX_RETRIES = 2
 QUALITY_GATE = 8.0
 OUTPUT_DIR = ROOT / ".cex" / "runtime" / "outputs"

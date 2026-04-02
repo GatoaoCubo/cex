@@ -5,6 +5,10 @@ pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming conventions, file paths, size limits, operational constraints
 pattern: CONFIG restricts SCHEMA, never contradicts it
+effort: medium
+max_turns: 20
+disallowed_tools: []
+permission_scope: pillar
 ---
 
 # Config: skill Production Rules

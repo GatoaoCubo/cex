@@ -426,7 +426,7 @@ def main():
     builder_dirs = sorted(
         d
         for d in BUILDERS_DIR.iterdir()
-        if d.is_dir() and not d.name.startswith("_") and not d.name.startswith(".")
+        if d.is_dir() and not d.name.startswith("_") and not d.name.startswith(".") and d.name != "compiled"
     )
 
     if not builder_dirs:

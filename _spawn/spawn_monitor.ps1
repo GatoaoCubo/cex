@@ -1,6 +1,6 @@
 # CEX Spawn Monitor v1.0
 $root = Split-Path $PSScriptRoot -Parent
-$pidFile = "$root\.cex\temp\spawn_pids.txt"
+$pidFile = "$root\.cex\runtime\pids\spawn_pids.txt"
 $signalDir = "$root\.cex/runtime/signals"
 
 if (-not (Test-Path $pidFile)) { Write-Output "No active spawns."; exit 0 }

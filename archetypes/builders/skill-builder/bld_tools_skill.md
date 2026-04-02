@@ -26,3 +26,11 @@ F5: List tools above → ready for use
 F7: cex_compile.py {path} → validate
 F8: cex_compile.py + cex_doctor.py + signal_writer.py → ship
 ```
+
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |

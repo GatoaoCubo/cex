@@ -10,6 +10,10 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: builder
 tags: [kind-builder, skill, P04, specialist, phases, trigger, reusable]
+keywords: [skill, phases, trigger, reusable, capability, slash-command, workflow, lifecycle]
+triggers: ["create skill for", "build reusable capability", "define phases for", "add slash command"]
+geo_description: >
+  L1: Especialista em construir `skill` — habilidades reutilizaveis com fases estruturadas. L2: Analisar dominio da habilidade para decompor em fases executaveis com trigger definido. L3: When user needs to create, build, or scaffold a reusable skill.
 ---
 
 # skill-builder

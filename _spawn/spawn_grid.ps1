@@ -25,9 +25,9 @@ public class Win32Grid {
 $root = Split-Path $PSScriptRoot -Parent
 $handoffDir = "$root\.cex/runtime/handoffs"
 $signalDir = "$root\.cex/runtime/signals"
-$pidFile = "$root\.cex\temp\spawn_pids.txt"
+$pidFile = "$root\.cex\runtime\pids\spawn_pids.txt"
 
-New-Item -ItemType Directory -Force -Path $handoffDir,$signalDir,"$root\.cex\temp" | Out-Null
+New-Item -ItemType Directory -Force -Path $handoffDir,$signalDir,"$root\.cex\runtime\pids" | Out-Null
 
 $gridPos = @{
     n01 = @{x=0;    y=0};    n02 = @{x=640;  y=0}

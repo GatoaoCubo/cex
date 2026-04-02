@@ -1,7 +1,7 @@
 # CEX Spawn Solo v3.0 — clean launch, no nested quotes
 param(
     [Parameter(Mandatory=$true)]
-    [ValidateSet('n01','n02','n03','n04','n05','n06')]
+    [ValidateSet('n01','n02','n03','n04','n05','n06','n07')]
     [string]$nucleus,
     [string]$task = "",
     [switch]$interactive

@@ -1,6 +1,6 @@
 # CEX Spawn Stop v2.0 — Multi-CLI: claude + codex + gemini
 $root = Split-Path $PSScriptRoot -Parent
-$pidFile = "$root\.cex\temp\spawn_pids.txt"
+$pidFile = "$root\.cex\runtime\pids\spawn_pids.txt"
 $stopped = 0
 
 # Step 1: Kill CMDs by PID

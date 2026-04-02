@@ -22,8 +22,12 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 
 # ── Load .env ──────────────────────────────────────────────────────────────
+# Keys that should NOT be loaded into os.environ because they override
+# Claude CLI subscription auth with API billing (which may have no credits).
+_ENV_BLOCKLIST = {"ANTHROPIC_API_KEY", "CLAUDE_API_KEY"}
+
 def _load_env():
-    """Load .env file into os.environ."""
+    """Load .env file into os.environ (excluding blocklisted keys)."""
     env_path = ROOT / ".env"
     if env_path.exists():
         for line in env_path.read_text(encoding="utf-8").splitlines():
@@ -31,7 +35,10 @@ def _load_env():
             if not line or line.startswith("#") or "=" not in line:
                 continue
             key, _, value = line.partition("=")
-            os.environ.setdefault(key.strip(), value.strip())
+            key = key.strip()
+            if key in _ENV_BLOCKLIST:
+                continue
+            os.environ.setdefault(key, value.strip())
 
 _load_env()
 

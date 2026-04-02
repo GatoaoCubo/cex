@@ -1,13 +1,22 @@
-"""CEX Signal Writer v2.0 — writes to .cex/runtime/signals/"""
+"""CEX Signal Writer v2.1 — writes to .cex/runtime/signals/ with validation"""
 import json
-from datetime import datetime
+import re
+from datetime import datetime, timezone
 from pathlib import Path
 
 SIGNAL_DIR = Path(__file__).resolve().parent.parent / ".cex" / "runtime" / "signals"
+VALID_NUCLEI = {"n01", "n02", "n03", "n04", "n05", "n06", "n07"}
 
 def write_signal(nucleus, status="complete", quality_score=9.0, mission="", **extra):
+    nucleus = nucleus.lower()
+    if nucleus not in VALID_NUCLEI:
+        raise ValueError(f"Invalid nucleus '{nucleus}'. Must be one of: {sorted(VALID_NUCLEI)}")
+    if not isinstance(quality_score, (int, float)) or not (0 <= quality_score <= 10):
+        raise ValueError(f"quality_score must be 0-10, got {quality_score}")
+    if not re.match(r'^[a-z_]+$', status):
+        raise ValueError(f"Invalid status '{status}'. Must be lowercase alpha/underscore.")
     SIGNAL_DIR.mkdir(parents=True, exist_ok=True)
-    now = datetime.now()
+    now = datetime.now(timezone.utc)
     signal = {
         "nucleus": nucleus,
         "status": status,

@@ -52,7 +52,8 @@ BUILDER_DIR = CEX_ROOT / "archetypes" / "builders"
 BUILDER_MAX_BYTES = 30 * 1024  # 30KB total budget for builder spec injection
 DEFAULT_QUALITY_GATE = 7.0
 MAX_RETRIES = 2
-LLM_MODEL = "claude-sonnet-4-20250514"
+# Short alias = subscription auth. Full ID = API credits (may be depleted).
+LLM_MODEL = "sonnet"
 LLM_MAX_TOKENS = 8000
 FORK_OUTPUT_DIR = CEX_ROOT / ".cex" / "temp" / "fork_outputs"
 

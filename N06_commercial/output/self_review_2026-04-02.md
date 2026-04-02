@@ -10,149 +10,151 @@ author: n06_commercial
 
 # N06 Self-Review — 2026-04-02
 
+> **Contexto**: CEX é um PRODUTO em desenvolvimento. Este time são os devs que constroem o cérebro X para depois ser adotado por empresas clientes. O estado "brand não bootstrapped" é o estado correto do produto — o cérebro sai em branco, o cliente preenche via `/init`. Auditorias devem focar em qualidade dos builders, robustez das ferramentas, e experiência de onboarding do cliente.
+
+---
+
 ## Summary
 
 | Item | Value |
 |------|-------|
 | Total artifacts (N06_commercial/) | 40 .md source + 13 compiled .yaml = **53** |
-| Brand bootstrapped | **NO** ⚠️ CRITICAL |
-| `.cex/brand/brand_config.yaml` | **MISSING** |
-| Files with `{{BRAND_*}}` unresolved | **30** (system-wide) |
-| Brand tools functional | **2 / 5** (brand_inject, brand_ingest OK; 3 crash on Windows) |
-| Monetization templates (output/) | **9** — all awaiting brand_config |
-| content-monetization-builder ISOs | **13 / 13** — complete |
-| social-publisher-builder ISOs | **13 / 13** — complete, indirect N02 integration |
-| Bootstrap paths implemented | **3 / 3** — chat, CLI, auto-detect |
+| Brand bootstrapped | **NO** — correto para produto em dev |
+| `.cex/brand/brand_config.yaml` | Ausente — estado padrão do produto |
+| Files com `{{BRAND_*}}` | **30** — templates por design |
+| Brand tools funcionais | **2 / 5** (brand_inject, brand_ingest OK; 3 crasham no Windows) |
+| Output templates (output/) | **9** — completos, aguardam client bootstrap |
+| content-monetization-builder ISOs | **13 / 13** — completo |
+| social-publisher-builder ISOs | **13 / 13** — completo, integração N02 indireta |
+| Bootstrap paths implementados | **3 / 3** — chat, CLI, auto-detect |
 
 ---
 
 ## CRITICAL Gaps (must fix)
 
-### 1. Brand not bootstrapped — blocks ALL brand-dependent features
-`.cex/brand/brand_config.yaml` does not exist.
-- Every output template (Brand Book, Pricing Page, Voice Guide, Discovery Report, Visual Identity, One Pager, Competitive Map, Transformation Arc, Brand Config) stays as a stub
-- `brand_propagate.py` cannot push anything to any nucleus
-- `brand_audit.py` cannot score any consistency
-- N02 produces generic copy (no voice)
-- N03 produces artifacts without palette
-- N06 cannot produce any deliverable output until this file exists
-- **Fix**: Run `/init` conversational flow → cex_bootstrap.py → brand_config.yaml
+### 1. Três brand tools crasham no Windows — bug de produto
 
-### 2. Three brand tools crash on Windows (UnicodeEncodeError)
-`brand_validate.py`, `brand_propagate.py`, `brand_audit.py` all crash when printing the ❌ emoji on Windows console (cp1252 encoding).
+`brand_validate.py`, `brand_propagate.py`, `brand_audit.py` crasham com UnicodeEncodeError ao tentar imprimir o emoji ❌ no console Windows (cp1252).
 
-**Error**:
 ```
 UnicodeEncodeError: 'charmap' codec can't encode character '\u274c'
 ```
 
-The scripts detect the missing config correctly (exit code 1) but the Python traceback replaces the intended error message, causing confusion. Any Windows user running these tools gets a crash, not a clear "brand not found" message.
+**Impacto real**: O cliente que adota o CEX no Windows e executa qualquer brand tool pela primeira vez recebe um Python traceback em vez de uma mensagem de erro clara. É o pior momento para crashar — é o onboarding. Os scripts detectam o problema corretamente (exit code 1) mas a mensagem some.
 
-**Fix needed**: Replace emoji chars with ASCII alternatives (`[FAIL]`, `[OK]`, `[WARN]`) or add `PYTHONIOENCODING=utf-8` env var requirement, or use `sys.stdout.buffer.write()` with explicit UTF-8 encoding in those 3 files.
+**Fix**: Substituir `\u274c` / `\u2705` por `[FAIL]` / `[OK]` / `[WARN]` em todos os prints das 3 ferramentas. Alternativa: forçar `PYTHONIOENCODING=utf-8` como pré-requisito documentado no README de instalação.
+
+Arquivos afetados:
+- `_tools/brand_validate.py` — linha 155
+- `_tools/brand_propagate.py` — linha 151
+- `_tools/brand_audit.py` — linha 283
 
 ---
 
 ## WARN Gaps (should fix)
 
-### 3. No standalone funnel output templates
-`N06_commercial/output/` has 9 templates — but none for:
-- VSL (Video Sales Letter) — structure is documented in knowledge_card_commercial.md but no output template
-- Email sequence — documented conceptually, no template
-- Landing page (long-form sales page) — missing
-- Order bump / OTO scripts — missing
+### 2. Sem output templates de funil
 
-The `workflow_content_monetization.md` describes a 9-step pipeline (PARSE→PRICING→CREDITS→CHECKOUT→COURSES→ADS→EMAILS→VALIDATE→DEPLOY) but there are no output artifacts for the ADS and EMAILS stages.
+`N06_commercial/output/` tem 9 templates — nenhum para:
+- **VSL** (Video Sales Letter) — estrutura de 8 seções documentada em `knowledge_card_commercial.md`, mas sem template output
+- **Email sequence** — onboarding, upsell, churn prevention documentados nos ISOs do content-monetization-builder, sem template standalone
+- **Landing page** (long-form sales page) — ausente
+- **Order bump / OTO scripts** — ausente
 
-### 4. social-publisher-builder N02 integration is indirect
-`social-publisher-builder` collaboration specifies crews with knowledge-card-builder, prompt-template-builder, cli-tool-builder — but does **not** define a direct handoff to N02 for caption generation. The `bld_collaboration_social_publisher.md` lists `prompt-template-builder` as the caption writer, not N02_marketing.
+`workflow_content_monetization.md` descreve pipeline de 9 steps (PARSE→…→ADS→EMAILS→DEPLOY) mas os stages ADS e EMAILS não têm artefatos output correspondentes.
 
-For brand-aligned social content, the flow should be: social-publisher-builder → N02 (caption generation in brand voice). This coupling is undocumented.
+### 3. social-publisher-builder → N02 não documentado diretamente
 
-### 5. `N06_commercial/output/output_transformation_arc.md` — check content
-Filename suggests a Transformation Arc output template, but was not confirmed to have VSL-ready content. Needs review to ensure it covers the BEFORE/AFTER/THROUGH arc with pricing anchor logic.
+`bld_collaboration_social_publisher.md` define crews com knowledge-card-builder, prompt-template-builder, cli-tool-builder — mas **não** especifica handoff direto com N02_marketing para geração de captions em brand voice.
 
-### 6. No deployed pricing model exists
-`output_pricing_page.md` is an HTML template using `{{BRAND_*}}` variables. There is no filled-in, brand-specific pricing strategy document. The knowledge is present (`knowledge_card_commercial.md`, pricing frameworks excellent) but no artifact instantiates it for a real product.
+O fluxo correto para conteúdo social brand-aligned é: social-publisher-builder (pipeline + schedule) → N02 (captions no brand voice). Esse acoplamento está implícito mas não formalizado no bld_collaboration.
+
+### 4. `output_transformation_arc.md` — conteúdo não verificado
+
+O arquivo existe mas não foi confirmado se cobre o arco BEFORE/AFTER/THROUGH com âncora de pricing. Precisa de revisão para garantir alinhamento com a lógica de precificação por transformação do KC.
+
+### 5. `boot/cex.cmd` auto-detect não verificado
+
+O terceiro caminho de bootstrap (duplo-clique no boot/cex.cmd com auto-detect de estado) não foi testado nesta auditoria.
+
+### 6. `cex_bootstrap.py --from-file` não verificado
+
+O path de ingest via YAML (usado pelo PATH B do `/init`) não foi testado. É o caminho crítico quando o cliente tem materiais de marca existentes.
 
 ---
 
 ## Brand System Status
 
-| Tool | Status | Notes |
+| Tool | Status | Notas |
 |------|--------|-------|
-| `brand_validate.py` | PARTIAL — exits correctly (1), crashes on message | UnicodeEncodeError on Windows cp1252 with ❌ emoji |
-| `brand_propagate.py` | PARTIAL — exits correctly (1), crashes on message | Same UnicodeEncodeError |
-| `brand_audit.py` | PARTIAL — exits correctly (1), crashes on message | Same UnicodeEncodeError |
-| `brand_inject.py` | OK — help loads, `--check` flag works | Functional |
-| `brand_ingest.py` | OK — help loads, folder scan works | Functional |
-| `cex_bootstrap.py --check` | OK — prints "NOT BOOTSTRAPPED" cleanly | No emoji, works on Windows |
-| `.cex/brand/brand_config.yaml` | MISSING | Root cause of all brand gaps |
-| `.cex/brand/brand_config_template.yaml` | EXISTS | Template is ready to fill |
-| `.cex/brand/brand_config_schema.yaml` | EXISTS | Schema is ready to validate |
+| `brand_validate.py` | PARTIAL | Exit code correto (1), mas crash UnicodeEncodeError no Windows |
+| `brand_propagate.py` | PARTIAL | Idem |
+| `brand_audit.py` | PARTIAL | Idem |
+| `brand_inject.py` | OK | Help carrega, `--check` funciona |
+| `brand_ingest.py` | OK | Help carrega, folder scan disponível |
+| `cex_bootstrap.py --check` | OK | Imprime "NOT BOOTSTRAPPED" sem emoji — funciona no Windows |
+| `.cex/brand/brand_config_template.yaml` | EXISTS | Pronto para preencher |
+| `.cex/brand/brand_config_schema.yaml` | EXISTS | Pronto para validar |
 
 ---
 
-## Bootstrap Flow Status
+## Bootstrap Flow Status (produto entregue ao cliente)
 
-| Path | Status | Notes |
-|------|--------|-------|
-| `/init` (chat) | FUNCTIONAL | Fully documented in `.claude/commands/init.md` — 3 rounds of questions |
-| `init.cmd` (double-click) | FUNCTIONAL | Checks `.bootstrapped` marker, calls `cex_bootstrap.py` |
-| `boot/n06.cmd` | FUNCTIONAL | Loads 10 brand KCs, triggers N06 with brand discovery fallback |
-| `boot/cex.cmd` (auto-detect) | NOT VERIFIED | Was not checked in this audit |
-| `cex_bootstrap.py` (full run) | FUNCTIONAL | Interactive 13-question CLI, no emoji crashes |
-| `cex_bootstrap.py --from-file` | NOT VERIFIED | YAML ingest path not tested |
-| `brand_ingest.py` (folder scan) | FUNCTIONAL | Help verified, folder scan capability present |
+| Caminho | Status | Notas |
+|---------|--------|-------|
+| `/init` chat (conversacional) | FUNCTIONAL | Documentado em `.claude/commands/init.md` — 4 rounds, 3 modos |
+| `init.cmd` (double-click) | FUNCTIONAL | Verifica `.bootstrapped`, chama `cex_bootstrap.py` |
+| `boot/n06.cmd` (N06 direto) | FUNCTIONAL | Carrega 10 KCs de brand, ativa brand discovery fallback |
+| `boot/cex.cmd` (auto-detect) | NOT VERIFIED | Não testado nesta auditoria |
+| `cex_bootstrap.py` (CLI interativo) | FUNCTIONAL | 13 perguntas, sem crash no Windows |
+| `cex_bootstrap.py --from-file` | NOT VERIFIED | Path de YAML ingest não testado |
+| `brand_ingest.py` (folder scan) | FUNCTIONAL | Capability presente |
 
 ---
 
 ## Monetization Readiness
 
-| Area | Status | Evidence |
-|------|--------|---------|
-| Pricing frameworks | READY (knowledge) | `knowledge_card_commercial.md` — value-based, anchor, 3-tier, psychological pricing |
-| Pricing template | TEMPLATE ONLY | `output_pricing_page.md` — HTML awaiting brand_config |
-| Funnels (knowledge) | READY | VSL structure, funnel benchmarks in KC |
-| Funnel templates | MISSING | No VSL, email sequence, or landing page output templates |
-| Course structure | FRAMEWORK | content-monetization-builder has 9-stage pipeline |
-| Course templates | MISSING | No instantiated course outline template |
-| Social publishing | BUILDER READY | social-publisher-builder 13/13 ISOs |
-| Social → N02 integration | INDIRECT | Via crew compositions, no direct handoff spec |
-| Brazilian market | COVERED | Hotmart, Kiwify, PIX, BRL, parcelamento in KC |
-| Upsell architecture | KNOWLEDGE ONLY | Documented in KC, no template artifact |
+| Área | Status | Evidência |
+|------|--------|-----------|
+| Frameworks de pricing | PRONTO (conhecimento) | `knowledge_card_commercial.md` — value-based, anchor, 3-tier, psicológico |
+| Template pricing page | TEMPLATE | `output_pricing_page.md` — HTML com `{{BRAND_*}}`, aguarda cliente |
+| Funnels (conhecimento) | PRONTO | VSL structure, benchmarks no KC |
+| Templates de funil | AUSENTE | Sem VSL, email sequence, landing page |
+| Course structure | FRAMEWORK | content-monetization-builder — pipeline 9 stages |
+| Template de curso | AUSENTE | Sem course outline template standalone |
+| Social publishing | BUILDER PRONTO | social-publisher-builder 13/13 ISOs |
+| Social → N02 | INDIRETO | Via crew compositions, sem handoff spec direto |
+| Mercado brasileiro | COBERTO | Hotmart, Kiwify, PIX, BRL, parcelamento no KC |
+| Upsell architecture | CONHECIMENTO | Documentado no KC, sem template de artefato |
 
 ---
 
 ## Recommended Actions (priority order)
 
-1. **[CRITICAL] Run `/init`** — Bootstrap brand_config.yaml. Nothing else matters until this exists. Use chat path (conversational) or `init.cmd`. Takes 5 minutes. Unlocks the entire system.
+1. **[CRITICAL] Fix Unicode crash nas 3 brand tools** — Substituir emojis por ASCII nos prints de `brand_validate.py`, `brand_propagate.py`, `brand_audit.py`. Afeta todo cliente Windows no primeiro contato com o produto.
 
-2. **[HIGH] Fix Unicode crash in 3 brand tools** — `brand_validate.py`, `brand_propagate.py`, `brand_audit.py` crash on Windows with emoji. Replace `\u274c` / `\u2705` with ASCII `[FAIL]` / `[OK]`. Affects every Windows user on first run.
+2. **[HIGH] Criar template VSL** — `N06_commercial/output/output_vsl_template.md` com as 8 seções (hook, problem, revelation, proof, offer, CTA, guarantee, scarcity). Conhecimento existe no KC, falta o artefato output.
 
-3. **[MEDIUM] Create VSL output template** — `N06_commercial/output/output_vsl_template.md` with the 8-section VSL structure (hook, problem, revelation, proof, offer, CTA, guarantee, scarcity). Knowledge exists in KC; just needs a template artifact.
+3. **[HIGH] Criar template email sequence** — `N06_commercial/output/output_email_sequence.md` para onboarding, upsell, churn prevention. Coberto nos ISOs mas sem template standalone.
 
-4. **[MEDIUM] Create email sequence template** — `N06_commercial/output/output_email_sequence.md` for onboarding, upsell, churn prevention. Covered in content-monetization-builder ISOs but no standalone output template.
+4. **[MEDIUM] Formalizar handoff social-publisher → N02** — Adicionar N02_marketing como crew partner direto em `bld_collaboration_social_publisher.md` com protocolo explícito: social-publisher-builder produz schedule → N02 escreve captions no brand voice do cliente.
 
-5. **[MEDIUM] Document N02 handoff in social-publisher-builder** — Add N02_marketing as direct crew partner in `bld_collaboration_social_publisher.md`. Define explicit handoff: social-publisher-builder produces posting schedule → N02 writes captions in brand voice.
+5. **[MEDIUM] Verificar `boot/cex.cmd` auto-detect** — Confirmar que o terceiro caminho de bootstrap funciona conforme documentado no CLAUDE.md.
 
-6. **[LOW] Verify `boot/cex.cmd` auto-detect path** — Confirm the third bootstrap path works as documented in CLAUDE.md.
+6. **[MEDIUM] Verificar `cex_bootstrap.py --from-file`** — Testar com um YAML mínimo para garantir que o PATH B do `/init` (cliente com materiais existentes) funciona end-to-end.
 
-7. **[LOW] Verify `cex_bootstrap.py --from-file`** — Test YAML ingest path with a minimal brand YAML to ensure it creates brand_config.yaml correctly.
+7. **[LOW] Revisar `output_transformation_arc.md`** — Confirmar cobertura do arco BEFORE/AFTER/THROUGH com lógica de pricing anchor.
 
 ---
 
-## Impact Summary: Brand Empty → System Impact
+## O que está BEM
 
-```
-brand_config.yaml MISSING
-├── brand_propagate.py       → cannot inject → ALL nuclei run without brand context
-├── brand_audit.py           → cannot score → brand consistency unknown
-├── N06 output templates (9) → stub only   → no deliverables possible
-├── N01 output templates (3) → BRAND_* unresolved → generic intelligence
-├── N02 marketing artifacts  → generic copy → no voice match
-├── N03 builders             → no palette injection → generic visual
-└── CLAUDE.md check          → "Not yet bootstrapped" → correct warning shown
-```
-
-**Priority**: `/init` is the single action that unlocks the entire CEX system.
-Without it, every nucleus operates in generic mode regardless of pipeline quality.
+- **content-monetization-builder**: 13/13 ISOs completos — builder robusto
+- **social-publisher-builder**: 13/13 ISOs completos
+- **knowledge_card_commercial.md** (q=9.0): pricing frameworks, benchmarks, mercado BR — excelente
+- **workflow_content_monetization.md** (q=8.9): pipeline 9-step com retry e mock fallback
+- **agent_commercial.md** (q=8.9): dual-role bem definido — Brand Architect + Revenue Engineer
+- **Fluxo `/init`**: 3 modos (chat, ingest, reset), edge cases documentados, fluido
+- **`cex_bootstrap.py`**: funciona no Windows sem crash — base sólida para onboarding
+- **Templates de output (9)**: estrutura correta com `{{BRAND_*}}` — prontos para injeção
+- **Brand KCs (10)**: archetypes, voice systems, frameworks, ICP, positioning, tokens — base de conhecimento densa

@@ -5,6 +5,8 @@ pillar: P09
 llm_function: INJECT
 purpose: Persistent learnings for skill-builder across sessions
 pattern: what worked, what failed, key insights from building skills
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
 
 # Memory: skill-builder
