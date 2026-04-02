@@ -58,3 +58,12 @@ p01_kc_example,knowledge_card,P01,domain,Title,"tag1;tag2",0.92,null,350,2026-03
 - JSONL without instruction quality validation
 - SQL exports without proper escaping
 - CSV with unescaped commas in content fields
+
+## Validation
+
+| Format | Test Command | Expected Output |
+|--------|--------------|-----------------|
+| **YAML** | `python _tools/cex_compile.py --validate P01/` | "✅ 12 artifacts compiled" |
+| **JSONL** | `jq -c . export.jsonl \| head -1` | Valid JSON with instruction/input/output |
+| **SQL** | `psql -d test -f export.sql` | No syntax errors, rows inserted |
+| **CSV** | `python -c "import pandas as pd; pd.read_csv('export.csv')"` | No parsing errors |
