@@ -57,17 +57,6 @@ selection_criteria: '| Requirement | Model Choice | Chunking | Threshold |
   | QA over docs | text-embedding-3-small | sentence-window | 0.80 |
 
   | Large knowledge base | embed-english-v3.0 | fixed | 0.70 |'
-quality_validation: '| Metric | Good | Poor | Fix |
-
-  |--------|------|------|-----|
-
-  | Top-1 accuracy | >80% | <60% | Lower threshold or better model |
-
-  | Retrieval speed | <100ms | >500ms | Change index type or reduce dims |
-
-  | Context relevance | >85% meaningful | <70% | Adjust chunking strategy |
-
-  | Coverage gaps | <5% queries fail | >15% | Add more diverse training data |'
 default_config: 'model: text-embedding-3-small
 
   dimensions: 1536

@@ -15,20 +15,9 @@ tags:
 - shadcn
 tldr: 'shadcn/ui built on Radix primitives: unstyled components, variants, accessibility patterns'
 density_score: 0.88
-when_to_use_shadcn_ui_vs_radix_ui: '| Approach | Use When | Benefits | Trade-offs |
-
-  |----------|----------|----------|------------|
-
-  | shadcn/ui | Need styled components quickly | Pre-styled, copy-paste ready, Tailwind integration | Less customization flexibility
-  |
-
-  | Radix UI | Custom design system, full control | Complete styling freedom, smaller bundle | More setup time, styling from
-  scratch |
-
-
-  shadcn/ui: Copy-paste components built on Radix UI primitives + Tailwind CSS + class-variance-authority (cva).
-
-  Radix UI: Unstyled, accessible UI primitives with proper focus management, keyboard navigation, and ARIA attributes.'
+philosophy_composition_over_configuration: 'shadcn/ui: Copy-paste components built on Radix UI primitives + Tailwind CSS +
+  class-variance-authority (cva). Radix UI: Unstyled, accessible UI primitives with proper focus management, keyboard navigation,
+  and ARIA attributes.'
 class_variance_authority_cva_patterns: "import { cva, type VariantProps } from \"class-variance-authority\"\n\nconst buttonVariants\
   \ = cva(\n  \"inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors\",\n  {\n    variants:\
   \ {\n      variant: {\n        default: \"bg-primary text-primary-foreground hover:bg-primary/90\",\n        destructive:\

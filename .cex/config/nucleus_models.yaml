@@ -95,20 +95,22 @@ n04:
   notes: "CHANGED from codex/o3. 1M context lets N04 see entire knowledge library at once for taxonomy."
 
 # --- N05: Operations & DevOps ---
+# NOTE: Codex CLI + ChatGPT subscription only supports o4-mini (NOT o3).
+#       o3 requires API key. With sub-only, use o4-mini or fallback to claude.
 n05:
-  cli: codex
-  model: o3
-  flags: "--full-auto"
+  cli: claude
+  model: claude-sonnet-4-20250514
+  flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
   context: 200000
   domain: operations
   fallback:
-    cli: claude
-    model: claude-sonnet-4-20250514
-    flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
+    cli: codex
+    model: o4-mini
+    flags: "--full-auto"
   fallback_local:
     cli: ollama
     model: qwen3:14b
-  notes: "UPGRADED from o4-mini. o3 better quality for code/tests. Codex sandbox is native domain."
+  notes: "Codex/o3 unavailable on ChatGPT sub. Sonnet primary (excellent at code). Codex/o4-mini as fallback."
 
 # --- N06: Commercial & Brand ---
 n06:
@@ -131,9 +133,9 @@ n06:
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # GRID LOAD DISTRIBUTION (6 simultaneous during /grid):
 #
-#   Claude:  N02(sonnet) + N03(opus) + N06(sonnet) = 3
-#   Gemini:  N01 + N04                              = 2
-#   Codex:   N05                                    = 1
+#   Claude:  N02(sonnet) + N03(opus) + N05(sonnet) + N06(sonnet) = 4
+#   Gemini:  N01 + N04                                            = 2
+#   Codex:   (fallback only — o4-mini, ChatGPT sub doesn't support o3)
 #   N07 runs in pi (separate session, doesn't compete)
 #
 # Fallback principle: always cross-provider (never fallback to same)

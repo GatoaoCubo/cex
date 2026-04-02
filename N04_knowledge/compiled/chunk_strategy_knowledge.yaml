@@ -20,6 +20,7 @@ tags:
 - recursive
 tldr: Defines the content-aware, hierarchical chunking strategies for N04. Prioritizes semantic boundaries (headers, code
   blocks, paragraphs) to maximize context cohesion for RAG.
+density_score: 0.89
 1_overview: 'This document specifies the set of hierarchical, content-aware chunking strategies used by the N04 Knowledge
   Nucleus. The primary goal is to maximize Contextual Cohesion: ensuring that each chunk is as semantically complete and self-contained
   as possible. This is the most critical step for achieving high-quality RAG performance.'
@@ -99,21 +100,7 @@ h3_header: '4.  `
   modern embedding models. This is a target, not a hard limit. |
 
   | `chunk_overlap`| `200` | A significant overlap (in characters) to ensure context continuity between related chunks, especially
-  when a semantic split (like a paragraph break) occurs. |
-
-  | `min_chunk_size` | `100` | Minimum chunk size before abandoning further splits. Prevents creation of meaningless micro-chunks
-  that lack context. |
-
-  | `max_chunk_size` | `4096` | Hard upper limit to prevent embedding model token overflow. Chunks exceeding this are force-split
-  regardless of semantic boundaries. |
-
-  | `respect_code_blocks` | `true` | Never split within markdown code blocks (``` fenced) to preserve code integrity and syntax
-  highlighting. |
-
-  | `respect_tables` | `true` | Never split within markdown tables to maintain data relationships and table structure. |
-
-  | `balance_chunks` | `false` | When false, prioritizes semantic boundaries over uniform chunk sizes. When true, attempts
-  more even chunk distribution. |'
+  when a semantic split (like a paragraph break) occurs. |'
 5_advanced_strategies_future_state: ''
 5_1_propositional_chunking:
 - 'Description: A sophisticated technique where an LLM is used to extract every atomic statement (a "proposition") from a

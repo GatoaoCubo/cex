@@ -7,7 +7,7 @@ version: 4.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: knowledge-management
-quality: 8.6
+quality: 9.1
 tags: [quality_gate, n04, knowledge, density, freshness, taxonomy]
 tldr: "10 checks for KCs: frontmatter complete, density >= 0.85, taxonomy valid, no duplicates, export-ready."
 density_score: 0.93

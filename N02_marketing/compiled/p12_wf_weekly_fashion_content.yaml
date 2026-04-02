@@ -15,39 +15,10 @@ agent_nodes:
 timeout: 7200
 retry_policy: per_step
 depends_on: []
-signals: 'Success Signals:
-
-  - `wf_trends_analyzed` - Trend research complete with 5+ validated trends
-
-  - `wf_inventory_mapped` - Products matched to trends with stock confirmation
-
-  - `wf_educational_ready` - Educational content created with CTAs embedded
-
-  - `wf_trend_content_ready` - Trend posts written with product integration
-
-  - `wf_visuals_complete` - All visual assets generated and quality-checked
-
-  - `wf_content_published` - Multi-channel publishing complete with tracking IDs
-
-
-  Error Signals:
-
-  - `wf_trend_api_failed` - Fallback to manual trend research (1h delay)
-
-  - `wf_inventory_stale` - Use previous week''s mapping, flag for review
-
-  - `wf_visual_timeout` - Proceed with text-only, schedule visual retry
-
-  - `wf_publish_failed` - Queue for next available slot, notify team
-
-
-  Recovery Actions:
-
-  - Step retry: Maximum 2 attempts with 15min backoff
-
-  - Partial failure: Continue workflow, flag incomplete outputs
-
-  - Total failure: Activate evergreen content library backup'
+signals:
+- 'On step complete: Agent-specific completion signals with quality scores'
+- 'On workflow complete: content_published with engagement baseline'
+- 'On error: Per-step retry (max 2), fallback to evergreen content library'
 spawn_configs:
 - p12_spawn_trends_analyst
 - p12_spawn_content_writer

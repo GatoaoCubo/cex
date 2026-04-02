@@ -20,6 +20,7 @@ learning_types:
 - audience_behavior
 - copy_patterns
 - optimization_strategies
+density_score: 1.0
 1_high_performance_copy_patterns: ''
 headlines_that_convert: "proven_headline_patterns:\n  benefit_specific:\n    pattern: \"[SPECIFIC_OUTCOME] in [TIMEFRAME]\
   \ (without [COMMON_OBJECTION])\"\n    example: \"Generate 40% more leads in 30 days (without spending more on ads)\"\n \

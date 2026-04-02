@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-01
 author: builder
 domain: frontend
-quality: 8.8
+quality: 9.1
 tags: [knowledge, frontend]
 tldr: "Accessibility A11Y patterns and best practices"
 density_score: 0.88

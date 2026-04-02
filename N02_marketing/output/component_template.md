@@ -15,7 +15,7 @@ accessibility: wcag_aa_radix_primitives
 performance: lighthouse_90_plus
 reusability: high
 domain: visual_frontend_engineering
-quality: 8.8
+quality: 9.1
 tags: [output_template, component, shadcn_ui, tailwind, radix, accessibility, variants, N02]
 tldr: Reusable component template following shadcn/ui patterns — variant system, accessibility built-in, Tailwind utility classes, production ready.
 density_score: 0.96

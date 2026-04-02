@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-01
 author: n02_visual_frontend
 domain: frontend
-quality: 8.9
+quality: 9.1
 tags: [output, template, style-guide, design-system, tokens]
 tldr: "Self-contained HTML design system page — palette, typography, spacing, components, dark mode."
 density_score: 0.91

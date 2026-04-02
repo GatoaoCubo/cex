@@ -6,10 +6,11 @@ version: 1.0.0
 created: 2026-04-02
 author: n02_marketing
 domain: nucleus_coordination
-quality: null
+quality: 9.0
 tags: [handoff, coordination, N01, N02, N05, N06, cross-nucleus]
 tldr: Defines handoff protocols between N02 Marketing and other nuclei for seamless research→copy→deployment→commercial workflows.
 handoff_types: [research_to_copy, copy_to_deployment, copy_to_commercial, feedback_loop]
+density_score: 1.0
 ---
 
 # Cross-Nucleus Handoff Protocols — N02 Marketing

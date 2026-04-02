@@ -59,16 +59,8 @@ ingestion_pipeline: "[Source Document] → chunk (500 tokens, 50 overlap)\n    �
   \ INTO documents (content, metadata, embedding)\n    → HNSW index auto-updates"
 retrieval_pipeline: "[User Query] → embed query\n    → SELECT * FROM match_documents(query_embedding, 0.78, 10)\n    → RLS\
   \ filters by org_id automatically\n    → Return top-k chunks with similarity scores\n    → Inject into LLM context"
-multi_tenant_rag: "-- 1. Enable pgvector\nCREATE EXTENSION vector;\n\n-- 2. Documents table with org isolation\nCREATE TABLE\
-  \ documents (\n  id bigserial PRIMARY KEY,\n  content text,\n  metadata jsonb,\n  embedding vector(1536),\n  org_id uuid\
-  \ REFERENCES auth.organizations(id)\n);\n\n-- 3. RLS policy for org isolation\nCREATE POLICY \"org_rag\" ON documents\n\
-  \  FOR ALL USING (org_id = (auth.jwt()->'app_metadata'->>'org_id')::uuid);\n\n-- 4. HNSW index for fast similarity search\n\
-  CREATE INDEX documents_embedding_idx ON documents \n  USING hnsw (embedding vector_cosine_ops) WITH (m = 16, ef_construction\
-  \ = 64);\n\n-- 5. Similarity search function\nCREATE FUNCTION match_documents(query_embedding vector(1536), match_threshold\
-  \ float, match_count int)\nRETURNS TABLE(content text, metadata jsonb, similarity float)\nLANGUAGE plpgsql AS $$\nBEGIN\n\
-  \  RETURN QUERY\n  SELECT documents.content, documents.metadata, 1 - (documents.embedding <=> query_embedding) as similarity\n\
-  \  FROM documents\n  WHERE 1 - (documents.embedding <=> query_embedding) > match_threshold\n  ORDER BY documents.embedding\
-  \ <=> query_embedding\n  LIMIT match_count;\nEND;\n$$;"
+multi_tenant_rag: "-- Embeddings are org-scoped via RLS\nCREATE POLICY \"org_rag\" ON documents\n  FOR SELECT USING (\n  \
+  \  (metadata->>'org_id') = (auth.jwt()->'app_metadata'->>'org_id')\n  );\n-- Company A's RAG never sees Company B's documents"
 monitoring: '| Metric | Query | Target |
 
   |--------|-------|--------|

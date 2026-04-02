@@ -11,7 +11,7 @@ output_format: html_with_frontmatter
 validation_rules: [w3c_valid, lighthouse_90_plus, wcag_aa, responsive_mobile_first]
 required_frontmatter: [component, responsive, a11y_compliant, dark_mode, lighthouse_target]
 domain: visual_frontend_engineering
-quality: 8.9
+quality: 9.1
 tags: [input_schema, html, output, visual-frontend, tailwind, N02, P10]
 tldr: Schema definition for N02 HTML output — frontmatter + semantic HTML with Tailwind classes, WCAG AA compliance, Lighthouse 90+ target.
 density_score: 0.96

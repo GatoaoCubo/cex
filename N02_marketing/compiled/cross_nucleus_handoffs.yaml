@@ -20,6 +20,7 @@ handoff_types:
 - copy_to_deployment
 - copy_to_commercial
 - feedback_loop
+density_score: 1.0
 1_n01_research_n02_marketing: ''
 handoff_research_insights_to_marketing_angles: "When: N01 completes market research, competitive analysis, or audience insights\
   \  \nPurpose: Transform research findings into actionable marketing copy briefs  \nFormat: `research_to_copy_brief.md`\n\

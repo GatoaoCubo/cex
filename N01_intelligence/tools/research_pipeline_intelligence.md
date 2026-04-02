@@ -9,7 +9,7 @@ updated: 2026-03-31
 author: research-pipeline-builder
 domain: research_pipeline
 nucleus: N01
-quality: 8.9
+quality: 9.1
 tags: [cli-tool, research-pipeline, N01, intelligence, STORM, CRAG, CRITIC]
 tldr: "Market intelligence pipeline for N01. 7-stage STORM+CRAG+CRITIC with 30+ sources, multi-model routing, budget-aware."
 density_score: 0.92

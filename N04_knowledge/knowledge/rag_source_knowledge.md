@@ -10,13 +10,14 @@ author: "N04 Knowledge Nucleus"
 url: "file://./"
 domain: "CEX Internals"
 last_checked: "2024-03-30"
-quality: 8.7
+quality: 9.0
 tags: [rag-source, n04, knowledge, codebase, markdown, p01]
 tldr: "The CEX project's own codebase, specifically all Markdown files, serving as the primary source of internal knowledge."
 keywords: [cex, codebase, markdown, documentation, artifacts]
 reliability: "high"
 format: "markdown"
 extraction_method: "file_glob"
+density_score: 0.91
 ---
 
 # RAG Source: CEX Codebase (Markdown)

@@ -6,10 +6,11 @@ version: 1.0.0
 created: 2026-04-02
 author: n02_marketing
 domain: testing_optimization
-quality: null
+quality: 9.0
 tags: [config, ab-testing, optimization, conversion, statistical-significance, N02]
 tldr: Complete A/B testing framework for marketing copy — test design, statistical rigor, performance measurement, and optimization workflows.
 test_types: [headline, cta, email_subject, landing_page, ad_copy]
+density_score: 1.0
 ---
 
 # A/B Testing Framework — Marketing Copy

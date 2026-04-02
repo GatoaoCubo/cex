@@ -9,7 +9,7 @@ updated: 2026-03-31
 author: social-publisher-builder
 domain: social_publisher
 nucleus: N02
-quality: 8.9
+quality: 9.1
 tags: [knowledge-card, social-media, auto-publishing, N02, marketing, automation]
 tldr: "Everything N02 needs to know about automated social publishing: APIs, platforms, content strategy, scheduling, and quality control."
 density_score: 0.92

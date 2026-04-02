@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: knowledge-management
-quality: 8.8
+quality: 9.0
 tags: [schema, n04, taxonomy, classification, kind, pillar, domain]
 tldr: "Classification rules: kind (from kinds_meta.json) × pillar (P01-P12) × domain. Decision tree for ambiguous cases."
 density_score: 0.93

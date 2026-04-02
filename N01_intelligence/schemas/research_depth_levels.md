@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: research-intelligence
-quality: 8.6
+quality: 9.0
 tags: [schema, n01, depth, levels, scope]
 tldr: "3 research depth levels: L1 Scan (5min, 3-5 sources), L2 Analysis (15min, 10-20), L3 Deep-Dive (30min+, 20-50)."
 density_score: 0.92

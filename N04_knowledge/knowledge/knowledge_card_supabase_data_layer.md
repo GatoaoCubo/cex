@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n04_knowledge
 domain: data_platform
-quality: 8.9
+quality: 9.1
 tags: [knowledge-card, supabase, data-layer, N04, superintendent, master]
 tldr: "N04 superintends the entire Supabase data layer: defines schemas, RLS, policies for all nuclei. Single config YAML drives 12 modules."
 when_to_use: "When N04 needs to design, review, or modify any Supabase data layer configuration"

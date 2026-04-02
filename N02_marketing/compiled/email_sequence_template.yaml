@@ -21,6 +21,7 @@ sequence_types:
 - nurture
 - sales
 - reactivation
+density_score: 0.92
 1_welcome_sequence_5_email_series: ''
 email_1_welcome_expectation_setting: "Send: Immediately after signup  \nSubject: Welcome to [BRAND] - here's what happens\
   \ next  \n\nHi [FIRST_NAME],\n\nWelcome to [BRAND_NAME]! I'm [SENDER_NAME], and I'm excited to help you [MAIN_BENEFIT].\n\

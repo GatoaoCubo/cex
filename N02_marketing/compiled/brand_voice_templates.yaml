@@ -21,6 +21,7 @@ voice_dimensions:
 - personality
 - energy
 - perspective
+density_score: 1.0
 1_voice_dimension_framework: ''
 core_brand_voice_variables: "brand_voice_config:\n  tone:\n    scale: \"professional ←→ conversational ←→ casual\"\n    position:\
   \ \"{{BRAND_TONE_POSITION | default: '60% conversational'}}\"\n    \n  formality:\n    scale: \"formal ←→ semi-formal ←→\

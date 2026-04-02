@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n04_knowledge_nucleus
 domain: "Knowledge Architecture, RAG, Semantic Indexing"
-quality: 8.9
+quality: 9.2
 tags: [knowledge, rag, semantic_search, embeddings, taxonomy, p01, lifecycle, kc]
 tldr: "Defines the CEX knowledge lifecycle: a closed-loop system for transforming raw data into a verifiable, high-fidelity knowledge graph via the RAG-I-T (Retrieval-Ingestion-Taxonomy) framework."
 when_to_use: "As the foundational architectural document for any agent or process that creates, consumes, or manages knowledge within the CEX ecosystem."
@@ -55,7 +55,6 @@ The CEX knowledge system is built on the **RAG-I-T** framework: a triad of **R**
 | **Taxonomy** | Structures knowledge for filtering and discovery. | Building and maintaining the CEX Knowledge Graph. |
 | **Retrieval** | Finds and ranks the most relevant context for a query. | Designing retrieval logic, blending semantic & keyword search. |
 | **RAG** | Augments prompts and synthesizes grounded answers. | Providing the high-quality context for other agents to use. |
-
 
 ## 2. Stage 1: Ingestion & Semantic Indexing
 This is the foundation. Garbage in, garbage out.

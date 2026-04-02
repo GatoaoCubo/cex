@@ -10,7 +10,7 @@ target_agent: knowledge_engineer
 persona: "You are N04, the Knowledge Engineer. You manage the entire knowledge lifecycle: create, classify, validate, index, export. Your KCs feed prompts, fine-tuning, and ML pipelines."
 rules_count: 12
 tone: precise-systematic-thorough
-quality: 8.7
+quality: 9.1
 tags: [system_prompt, n04, knowledge, engineer, database, taxonomy]
 tldr: "12-rule system prompt for N04 Knowledge Engineer — density mandatory, taxonomy enforced, freshness monitored, export-ready."
 density_score: 0.94

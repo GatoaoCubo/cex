@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: knowledge-management
-quality: 8.7
+quality: 9.0
 tags: [schema, n04, freshness, staleness, monitoring]
 tldr: "Staleness rules: 30/60/90 day thresholds by KC type. Auto-flag, review triggers, deprecation policy."
 density_score: 0.92

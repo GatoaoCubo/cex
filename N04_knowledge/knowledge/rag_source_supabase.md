@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n04_knowledge
 domain: data_platform
-quality: 8.8
+quality: 9.1
 tags: [rag-source, supabase, pgvector, embeddings, semantic-search, N04]
 tldr: "pgvector in Supabase replaces external vector DBs — same PostgreSQL, RLS-scoped, HNSW indexed, multi-tenant RAG ready"
 density_score: 0.89

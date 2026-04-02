@@ -16,29 +16,11 @@ tags:
 - database
 tldr: Knowledge Engineer routing card — 12 capabilities, triple-export (CEX+fine-tune+SQL), inter-nucleus knowledge flows.
 density_score: 0.93
-routing: '- Priority: 7
-
-  - Keywords: knowledge, KC, taxonomy, classify, index, embed, database, supabase, fine-tune, ML, dataset, export, gap, freshness,
-  stale, RAG, search
-
-  - Dispatch: `bash _spawn/dispatch.sh solo n04 "task"`
-
-
-  | Task Type | Example Request | Route to N04? | Why |
-
-  |-----------|----------------|---------------|-----|
-
-  | Knowledge Cards | "Create KC for React patterns" | ✅ YES | Core N04 specialty |
-
-  | RAG Configuration | "Setup embedding for docs" | ✅ YES | Knowledge infrastructure |
-
-  | Gap Analysis | "Find missing KCs in domain X" | ✅ YES | Knowledge audit |
-
-  | Research Papers | "Analyze 50 ML papers" | ❌ NO → N01 | Research, not knowledge mgmt |
-
-  | Brand Guidelines | "Document brand voice" | ❌ NO → N06 | Commercial domain |
-
-  | Code Documentation | "Document API endpoints" | ✅ YES | If creating structured KCs |'
+routing:
+- 'Priority: 7'
+- 'Keywords: knowledge, KC, taxonomy, classify, index, embed, database, supabase, fine-tune, ML, dataset, export, gap, freshness,
+  stale, RAG, search'
+- 'Dispatch: `bash _spawn/dispatch.sh solo n04 "task"`'
 provider: '| Mode | Provider | When |
 
   |------|----------|------|

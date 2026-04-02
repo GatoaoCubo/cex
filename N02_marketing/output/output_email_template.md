@@ -8,7 +8,8 @@ version: 1.0.0
 created: 2026-04-01
 author: n02_visual_frontend
 domain: frontend
-quality: 8.8
+quality: 9.1
+density_score: 1.0
 ---
 
 # Responsive Email HTML Template

@@ -127,23 +127,30 @@ mandatory_checks: '| Rule | Description | Validation |
   | Spacing consistency | Use spacing scale only | Check against space-* classes |
 
   | Font stack adherence | Only use 3 approved fonts | Font family audit |'
-violations_corrections: '| ❌ VIOLATION | ✅ CORRECT | WHY |
+common_violations: '<!-- VIOLATIONS -->
 
-  |-------------|------------|-----|
+  ❌ style="color: #50C878"              <!-- Hardcoded hex -->
 
-  | `style="color: #50C878"` | `class="text-primary"` | Hardcoded hex breaks theming |
+  ❌ class="bg-green-500"                <!-- Direct color class -->
 
-  | `class="bg-green-500"` | `class="bg-accent"` | Direct color ignores semantic layer |
+  ❌ style="padding: 15px"               <!-- Off-scale spacing -->
 
-  | `style="padding: 15px"` | `class="p-4"` | Off-scale spacing breaks consistency |
+  ❌ style="font-family: Arial"          <!-- Non-approved font -->
 
-  | `style="font-family: Arial"` | `class="font-sans"` | Unapproved font breaks brand |
+  ❌ class="text-green-500"              <!-- No dark mode variant -->
 
-  | `class="text-green-500"` | `class="text-primary dark:text-primary-dark"` | Missing dark mode variant |
 
-  | `style="border-radius: 6px"` | `class="rounded-md"` | Off-scale radius breaks system |
+  <!-- CORRECT USAGE -->
 
-  | `style="margin-top: 18px"` | `class="mt-5"` | Off-scale margin breaks grid |'
+  ✅ class="text-primary"                <!-- Semantic token -->
+
+  ✅ class="bg-accent hover:bg-accent/90" <!-- Token + interaction -->
+
+  ✅ class="p-4"                         <!-- Scale-compliant spacing -->
+
+  ✅ class="font-sans"                   <!-- Approved font stack -->
+
+  ✅ class="text-primary dark:text-primary-dark" <!-- Dark mode ready -->'
 component_example_button_with_token_usage: "<!-- Button component using all 3 token layers -->\n<button class=\"\n  // Layer\
   \ 3: Component tokens via Tailwind classes\n  bg-primary text-primary-foreground \n  hover:bg-primary/90 \n  focus:ring-2\
   \ focus:ring-primary focus:ring-offset-2\n  \n  // Layer 2: Semantic spacing and typography\n  px-4 py-2 \n  text-sm font-medium\n\

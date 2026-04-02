@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: knowledge-management
-quality: 8.7
+quality: 9.0
 tags: [schema, n04, embedding, vector, chunking, rag, similarity]
 tldr: "Embedding config: model, dimensions, chunking strategy (fixed/semantic/sentence), similarity threshold, index type."
 density_score: 0.93

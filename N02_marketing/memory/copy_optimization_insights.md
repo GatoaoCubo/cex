@@ -6,10 +6,11 @@ version: 1.0.0
 created: 2026-04-02
 author: n02_marketing
 domain: copy_performance_learning
-quality: null
+quality: 9.0
 tags: [learning_record, optimization, insights, performance, copy_improvement, N02]
 tldr: Consolidated learning records from copy performance data, A/B testing results, and audience feedback to drive continuous improvement.
 learning_types: [performance_insights, audience_behavior, copy_patterns, optimization_strategies]
+density_score: 1.0
 ---
 
 # Copy Optimization Insights & Learning Records

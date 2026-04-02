@@ -6,10 +6,11 @@ version: 1.0.0
 created: 2026-04-02
 author: n02_marketing
 domain: brand_voice_copywriting
-quality: null
+quality: 9.0
 tags: [prompt_template, brand_voice, tone, messaging, audience, N02]
 tldr: Brand voice calibration templates for different audiences, channels, and funnel stages — ensures consistent brand personality across all marketing copy.
 voice_dimensions: [tone, formality, personality, energy, perspective]
+density_score: 1.0
 ---
 
 # Brand Voice Templates — Tone & Messaging Calibration

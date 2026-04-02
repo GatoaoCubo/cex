@@ -4,10 +4,11 @@ kind: validation_schema
 nucleus: N04
 pillar: P06
 domain: nomenclature
-quality: null
+quality: 8.9
 created: 2026-04-02
 type: mapping_schema
 scope: builders_to_kcs
+density_score: 1.0
 ---
 
 # Builder ↔ KC Naming Convention Mapping

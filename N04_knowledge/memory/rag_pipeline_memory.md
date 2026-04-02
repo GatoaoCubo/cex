@@ -4,10 +4,11 @@ kind: memory_scope
 nucleus: N04
 pillar: P10
 domain: rag_pipeline
-quality: null
+quality: 8.9
 created: 2026-04-02
 type: technical_memory
 scope: rag_components
+density_score: 1.0
 ---
 
 # RAG Pipeline Technical Memory

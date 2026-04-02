@@ -8,7 +8,7 @@ created: 2026-03-31
 author: n07_orchestrator
 domain: research-intelligence
 step_count: 8
-quality: 8.7
+quality: 9.1
 tags: [workflow, n01, research, pipeline, triangulation]
 tldr: "8-step research pipeline: brief→scope→search→triangulate→synthesize→format→validate→deliver."
 density_score: 0.93

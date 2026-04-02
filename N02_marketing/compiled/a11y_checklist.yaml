@@ -80,21 +80,6 @@ schema_purpose: Every HTML artifact produced by N02 MUST pass this checklist bef
 
 
   ---'
-quick_test_protocol: '| Step | Test | Tool/Method | Pass Threshold |
-
-  |------|------|-------------|----------------|
-
-  | 1 | HTML validation | W3C validator | 0 errors |
-
-  | 2 | Lighthouse audit | Chrome DevTools | Score >= 95 |
-
-  | 3 | Keyboard navigation | Tab through all elements | No traps, all reachable |
-
-  | 4 | Screen reader | NVDA/VoiceOver | All content announced |
-
-  | 5 | Contrast check | WebAIM tool | All text meets ratios |
-
-  | 6 | Mobile touch targets | Chrome mobile view | All >= 48px |'
 validation_command: "validation:\n  tool: lighthouse\n  flags: \"--only=accessibility\"\n  threshold: 95\n  fallback_manual:\n\
   \    - contrast_checker: \"https://webaim.org/resources/contrastchecker/\"\n    - html_validator: \"https://validator.w3.org/\"\
   \n    - screen_reader: \"NVDA or VoiceOver manual test\""

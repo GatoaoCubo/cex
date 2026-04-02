@@ -63,17 +63,3 @@ table_relationships: '| Query Pattern | Tables | SQL Example |
 
   | Chunk retrieval | `embeddings` | `SELECT chunk_text, chunk_index FROM embeddings WHERE kc_id = $kc_id ORDER BY chunk_index`
   |'
-security_access_control: '| Policy | Target | Rule | SQL |
-
-  |--------|--------|------|-----|
-
-  | Public read | `kcs` | Anyone can read | `CREATE POLICY read_kcs ON kcs FOR SELECT USING (true);` |
-
-  | Author write | `kcs` | Only author can modify | `CREATE POLICY write_kcs ON kcs FOR UPDATE USING (auth.uid()::text = author);`
-  |
-
-  | Admin audit | `audit_log` | Admin-only access | `CREATE POLICY admin_audit ON kc_audit_log USING (auth.jwt() ->> ''role''
-  = ''admin'');` |
-
-  | Vector privacy | `embeddings` | No direct access | `ALTER TABLE embeddings ENABLE ROW LEVEL SECURITY;` (no policies =
-  admin-only) |'

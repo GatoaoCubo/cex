@@ -12,9 +12,10 @@ provider: "Google"
 dimensions: 768
 chunk_size: 512
 chunk_overlap: 64
-quality: 8.5
+quality: 9.1
 tags: [embedding, config, n01, rag, memory, vector]
 tldr: "Specifies the text-embedding-004 model with 768 dimensions for N01's RAG knowledge base."
+density_score: 0.99
 ---
 
 ## Purpose

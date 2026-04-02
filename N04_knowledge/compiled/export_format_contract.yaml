@@ -6,7 +6,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: knowledge-management
-quality: 8.8
+quality: 8.6
 tags:
 - schema
 - n04
@@ -61,19 +61,6 @@ usage_guidelines: '| Format | When to Use | Implementation |
   - SQL exports without proper escaping
 
   - CSV with unescaped commas in content fields'
-common_issues: '| Problem | Symptoms | Fix |
-
-  |---------|----------|-----|
-
-  | Empty JSONL output | 0-byte file, no records | Check `tldr` field exists: `grep -L "tldr:" *.md` |
-
-  | SQL injection risk | Special chars in content | Enable escaping: `--escape=true` flag |
-
-  | CSV parsing errors | Broken rows in Excel | Quote mode: `--csv-quote=all` |
-
-  | YAML compile fails | Missing frontmatter | Validate: `cex_doctor.py --check-frontmatter` |
-
-  | Large export timeout | Process hangs >5min | Batch mode: `--batch-size=100` |'
 validation: '| Format | Test Command | Expected Output |
 
   |--------|--------------|-----------------|

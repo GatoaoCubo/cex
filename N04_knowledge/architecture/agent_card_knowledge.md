@@ -7,7 +7,7 @@ version: 4.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: knowledge-management
-quality: 8.8
+quality: 9.0
 tags: [agent_card, n04, knowledge, engineer, routing, database]
 tldr: "Knowledge Engineer routing card — 12 capabilities, triple-export (CEX+fine-tune+SQL), inter-nucleus knowledge flows."
 density_score: 0.93

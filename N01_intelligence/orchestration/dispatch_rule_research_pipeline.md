@@ -9,7 +9,7 @@ updated: 2026-03-31
 author: research-pipeline-builder
 domain: research_pipeline
 nucleus: N01
-quality: 8.9
+quality: 9.1
 tags: [dispatch-rule, research-pipeline, N01, routing, orchestration]
 tldr: "Routes research/intelligence tasks to N01. Triggers on pesquisar/research/mercado/concorrente/analise keywords."
 density_score: 0.88

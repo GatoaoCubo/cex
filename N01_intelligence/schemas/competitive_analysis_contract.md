@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: research-intelligence
-quality: 8.7
+quality: 9.0
 tags: [schema, n01, competitive, grid, analysis]
 tldr: "Competitor grid schema: N competitors × M dimensions. Required: name, positioning, pricing, strengths, weaknesses, market share estimate."
 density_score: 0.92

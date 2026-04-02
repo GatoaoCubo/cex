@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n04_knowledge
 domain: data_platform
-quality: 8.8
+quality: 9.1
 tags: [workflow, supabase, setup, data-layer, N04]
 tldr: "7-step workflow: config intake → schema design → RLS → modules → edge functions → deploy → verify. N04 superintends, N03 deploys."
 steps_count: 7

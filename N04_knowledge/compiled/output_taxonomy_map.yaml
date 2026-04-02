@@ -27,17 +27,6 @@ usage_guidelines: '| When to Use | When NOT to Use |
   | Strategic KC roadmapping | Tactical KC fixes |
 
   | Cross-domain coverage planning | Domain-specific deep dives |'
-success_metrics: '| Metric | Target | Calculation |
-
-  |--------|--------|-------------|
-
-  | Pillar coverage | 80%+ | (Pillars with KCs / Total pillars) × 100 |
-
-  | Kind coverage | 60%+ | (Kinds with KCs / Total kinds) × 100 |
-
-  | Domain balance | <40% max | Largest domain / Total KCs |
-
-  | Gap density | <20% | Empty cells / Total cells |'
 template: '# Taxonomy Map
 
   Date: {{DATE}} | Total Kinds: {{COUNT}} | Total KCs: {{COUNT}}

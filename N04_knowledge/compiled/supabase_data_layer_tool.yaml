@@ -18,9 +18,8 @@ tags:
 tldr: CLI tool para N04 provisionar data layer Supabase completo a partir de config YAML — schema, RLS, storage, realtime,
   vectors, edge functions
 density_score: 0.89
-purpose: Transform 50-line company config YAML → 8 migration files + edge functions + MCP server config. Reads `database.tables`,
-  `auth.providers`, `rls.policies` sections and generates production-ready SQL with foreign key constraints, RLS policies,
-  storage buckets, and vector search indexes.
+purpose: 'N04 uses this tool to transform a company config YAML into a complete Supabase data layer: migration SQL, RLS policies,
+  storage buckets, realtime channels, vector indexes, and edge function scaffolds.'
 usage: '# Generate migrations from config
 
   python _tools/supabase_data_layer.py generate --config path/to/config.yaml --output supabase/migrations/

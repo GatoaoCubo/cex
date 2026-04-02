@@ -9,7 +9,7 @@ updated: 2026-03-31
 author: social-publisher-builder
 domain: social_publisher
 nucleus: N02
-quality: 8.9
+quality: 9.1
 tags: [dispatch-rule, social-publisher, N02, routing, orchestration]
 tldr: "Routes social publishing tasks to N02 Marketing. Triggers on posting/publishing/social media keywords."
 density_score: 0.88

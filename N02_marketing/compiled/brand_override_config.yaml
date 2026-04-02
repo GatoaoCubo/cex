@@ -14,6 +14,7 @@ tags:
 - voice
 - N02
 tldr: Brand-specific overrides for marketing copy generation — tone, voice, terminology, and channel-specific adaptations.
+density_score: 1.0
 brand_voice_calibration: ''
 base_brand_settings: "brand:\n  name: \"{{BRAND_NAME}}\"\n  tone: \"{{BRAND_TONE}}\"  # professional | casual | technical\
   \ | friendly\n  voice: \"{{BRAND_VOICE}}\" # confident | humble | authoritative | conversational\n  energy: \"{{BRAND_ENERGY}}\"\

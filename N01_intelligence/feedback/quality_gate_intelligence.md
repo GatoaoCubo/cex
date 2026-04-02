@@ -7,7 +7,7 @@ version: 4.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: research-intelligence
-quality: 8.7
+quality: 9.0
 tags: [quality_gate, n01, research, triangulation, freshness]
 tldr: "10 checks for research output: source count, triangulation, freshness, citation format, confidence scoring, brand alignment."
 density_score: 0.93

@@ -17,27 +17,21 @@ tldr: Professional report HTML — cover, executive summary, tables, charts, pri
 density_score: 0.89
 purpose: 'Long-form professional report as styled HTML. Print-friendly with `@media print` rules. Typography: Geist headings,
   Inter body, JetBrains Mono code blocks. ---'
-structure: '| Section | Content | Styling | Purpose |
+structure: '1. Cover Page (title, date, logo, classification)
 
-  |---------|---------|---------|---------|
+  2. Table of Contents (auto-generated links)
 
-  | Cover Page | title, date, logo, classification | gradient bg, full-height, white text | professional first impression
-  |
+  3. Executive Summary (key findings, 3-5 bullets)
 
-  | Table of Contents | auto-generated links, page numbers | dotted borders, hover effects | navigation, print page refs |
+  4. Section 1..N (heading hierarchy, content, data)
 
-  | Executive Summary | key findings, 3-5 bullets, overview | highlight box, green accent | quick insights for stakeholders
-  |
+  5. Data Tables (styled, alternating rows)
 
-  | Section 1..N | heading hierarchy, content, data | max-w-4xl, print page-breaks | detailed analysis content |
+  6. Chart Placeholders (dimensions for Recharts/Chart.js)
 
-  | Data Tables | styled rows, alternating bg | avoid page-break-inside | structured data presentation |
+  7. Conclusions & Recommendations
 
-  | Chart Placeholders | 600×256px dimensions | dashed borders, centered text | Recharts/Chart.js integration |
-
-  | Conclusions | recommendations, next steps | standard prose layout | actionable outcomes |
-
-  | Appendix | raw data, methodology | code blocks, small text | technical details, references |'
+  8. Appendix (raw data, methodology)'
 complete_html_skeleton: "<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\"\
   \ content=\"width=device-width, initial-scale=1.0\">\n  <title>{{REPORT_TITLE}} — CODEXA</title>\n  <script src=\"https://cdn.tailwindcss.com\"\
   ></script>\n  <link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400&display=swap\"\

@@ -52,6 +52,7 @@ cli: claude
 priority: 8
 confidence_threshold: 0.7
 fallback: n07-orchestrator
+density_score: 1.0
 purpose: 'Routes dual-role tasks to N02 (Visual Frontend Engineer + Marketing Nucleus).
 
   N02 handles both:
@@ -62,79 +63,64 @@ purpose: 'Routes dual-role tasks to N02 (Visual Frontend Engineer + Marketing Nu
 
   - DUAL MODE: Integrated pages where copy and visual work together'
 trigger_conditions: ''
-visual_mode_triggers_route_to_n02_when_request_contains: '| Category | Keywords & Patterns | Portuguese Keywords |
+visual_mode_triggers_route_to_n02_when_request_contains: '| Category | English Keywords | Portuguese Keywords |
 
-  |----------|---------------------|---------------------|
+  |----------|-----------------|---------------------|
 
-  | HTML Generation | html, build page, create page, web page, html template, static site | html, página web, criar página,
-  template html |
+  | HTML Generation | html, build page, create page, web page | html, página web, criar página |
 
-  | Frontend Development | frontend, front-end, css, styling, ui components, user interface | frontend, front-end, estilização,
-  interface |
+  | Frontend Development | frontend, front-end, css, styling | frontend, front-end, estilização |
 
-  | Tailwind CSS | tailwind, utility classes, css framework, tw-, @apply, tailwind config | tailwind, classes utilitárias,
-  tw- |
+  | Tailwind CSS | tailwind, utility classes, css framework | tailwind, classes utilitárias |
 
-  | Components | component, button, form, card, navbar, modal, dropdown, sidebar | componente, botão, formulário, modal |
+  | Components | component, button, form, card, navbar | componente, botão, formulário |
 
-  | Layout & Design | layout, design, visual, grid, flexbox, container, section layout | layout, design, visual, grid, seção
-  |
+  | Layout & Design | layout, design, visual, grid, flexbox | layout, design, visual, grid |
 
-  | Responsive Design | responsive, mobile, breakpoints, mobile-first, sm:, md:, lg:, xl: | responsivo, mobile, dispositivos
-  móveis |
+  | Responsive Design | responsive, mobile, breakpoints, mobile-first | responsivo, mobile, dispositivos |
 
-  | Accessibility | accessibility, a11y, wcag, screen reader, aria-, role=, alt text | acessibilidade, a11y, texto alternativo
-  |
+  | Accessibility | accessibility, a11y, wcag, screen reader | acessibilidade, a11y |
 
-  | Landing Pages | landing page, hero section, above the fold, cta section, testimonials | página de destino, LP, hero, seção
-  cta |
+  | Landing Pages | landing page, hero section, above the fold | página de destino, LP, hero |
 
-  | Dark Mode | dark mode, light mode, theme toggle, dark:, toggle theme | modo escuro, modo claro, alternar tema |
+  | Dark Mode | dark mode, light mode, theme toggle | modo escuro, modo claro |
 
-  | Typography | typography, fonts, text styling, hierarchy, font-size, leading | tipografia, fontes, hierarquia de texto
-  |'
-copy_mode_triggers_route_to_n02_when_request_contains: '| Category | Keywords & Patterns | Portuguese Keywords |
+  | Typography | typography, fonts, text styling, hierarchy | tipografia, fontes, hierarquia |'
+copy_mode_triggers_route_to_n02_when_request_contains: '| Category | English Keywords | Portuguese Keywords |
 
-  |----------|---------------------|---------------------|
+  |----------|-----------------|---------------------|
 
-  | Copy writing | copy, copywriting, ad copy, write ad, sales copy, persuasive text | copy, redação, texto publicitário,
-  texto persuasivo |
+  | Copy writing | copy, copywriting, ad copy, write ad | copy, redação, texto publicitário |
 
-  | Advertising | ad, ads, advertisement, banner ad, display ad, facebook ad, google ad | anuncio, anúncio, publicidade, anúncio
-  do google |
+  | Advertising | ad, ads, advertisement, banner ad | anuncio, anúncio, publicidade |
 
-  | Headlines | headline, subject line, title, hook, attention grabber, headline test | titulo, manchete, assunto de email,
-  gancho |
+  | Headlines | headline, subject line, title, hook | titulo, manchete, assunto de email |
 
-  | CTAs | CTA, call to action, button text, action phrase, conversion copy | botão, chamada para ação, texto do botão |
+  | CTAs | CTA, call to action, button text | botão, chamada para ação |
 
-  | Campaigns | campaign, campaign brief, creative brief, ad campaign, email campaign | campanha, briefing criativo, campanha
-  publicitária |
+  | Campaigns | campaign, campaign brief, creative brief | campanha, briefing |
 
-  | Email | email sequence, nurture, cold email, email marketing, newsletter copy | sequência de email, email marketing, newsletter
-  |
+  | Email | email sequence, nurture, cold email | sequência de email, email marketing |
 
-  | Brand | brand voice, tone of voice, messaging, brand guidelines, voice & tone | voz da marca, tom de voz, diretrizes da
-  marca |
+  | Brand | brand voice, tone of voice, messaging | voz da marca, tom de voz |
 
-  | Social | social media post, caption, Instagram, linkedin post, twitter copy | post, legenda, redes sociais, post do instagram
-  |'
+  | Social | social media post, caption, Instagram | post, legenda, redes sociais |'
 dual_mode_triggers_route_to_n02_when_request_contains_both_visual_and_copy_keywords: ''
 do_not_route_to_n02: '| Task | Route To | Reason |
 
   |------|----------|--------|
 
-  | Backend development, APIs, databases, server logic | N05 | Server-side code and deployment |
+  | Backend development, APIs, databases | N05 | Server-side code and deployment |
 
-  | Statistical analysis, A/B test results, data science | N01 | Research and data analysis |
+  | Statistical analysis, A/B test results | N01 | Research and data analysis |
 
-  | Market research with large doc sets, competitor analysis | N01 | Document analysis and intelligence |
+  | Market research with large doc sets | N01 | Document analysis and intelligence |
 
-  | Sales pricing strategy, monetization, revenue models | N06 | Commercial strategy |
+  | Sales pricing strategy, monetization | N06 | Commercial strategy |
 
-  | Build tools, webpack, bundlers, deployment pipelines | N05 | Development infrastructure |
+  | Build tools, webpack, bundlers | N05 | Development infrastructure |
 
-  | Legal review of copy claims, compliance validation | Human | Compliance and legal validation |'
+  | Legal review of copy claims | Human | Compliance and legal validation |'
 mode_detection_logic: "def detect_mode(task_text):\n    visual_keywords = [\"html\", \"frontend\", \"tailwind\", \"component\"\
   , \"responsive\", \n                       \"design\", \"css\", \"layout\", \"visual\", \"a11y\", \"dark_mode\"]\n    copy_keywords\
   \ = [\"copy\", \"ad\", \"headline\", \"CTA\", \"email\", \"campaign\", \n                     \"brand_voice\", \"social\"\

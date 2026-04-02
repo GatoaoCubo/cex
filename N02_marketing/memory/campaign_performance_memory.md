@@ -6,10 +6,11 @@ version: 1.0.0
 created: 2026-04-02
 author: n02_marketing
 domain: performance_tracking
-quality: null
+quality: 9.0
 tags: [memory, performance, campaigns, conversion, A/B-testing, N02]
 tldr: Tracks campaign performance, copy effectiveness, and conversion insights to improve future marketing efforts.
 scope: marketing_performance_learning
+density_score: 1.0
 ---
 
 # Campaign Performance Memory

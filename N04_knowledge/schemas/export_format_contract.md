@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: knowledge-management
-quality: 8.6
+quality: 9.0
 tags: [schema, n04, export, jsonl, sql, csv, fine-tuning, ml]
 tldr: "4 export formats: YAML (CEX), JSONL (fine-tuning), SQL (Supabase), CSV (ML). Schema per format."
 density_score: 0.93

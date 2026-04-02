@@ -9,7 +9,7 @@ updated: 2026-03-31
 author: social-publisher-builder
 domain: social_publisher
 nucleus: N02
-quality: 8.9
+quality: 9.1
 tags: [cli-tool, social-publisher, N02, marketing, automation, social-media]
 tldr: "Config-driven social media auto-posting tool for N02 Marketing. 10-step pipeline: catalog → caption → publish → log. Any company fills 1 YAML config."
 density_score: 0.90

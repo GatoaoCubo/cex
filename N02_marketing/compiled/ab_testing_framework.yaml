@@ -21,6 +21,7 @@ test_types:
 - email_subject
 - landing_page
 - ad_copy
+density_score: 1.0
 1_testing_strategy_design: ''
 test_categories_by_impact: "high_impact_tests:\n  - headline: \"Primary value proposition statement\"\n  - cta_button: \"\
   Call-to-action text and design\"\n  - hero_copy: \"Above-the-fold messaging\"\n  - email_subject: \"Subject line variations\"\

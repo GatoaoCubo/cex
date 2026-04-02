@@ -15,8 +15,6 @@ tags:
 - tokens
 tldr: Self-contained HTML design system page — palette, typography, spacing, components, dark mode.
 density_score: 0.91
-when_to_use: Creating design system documentation, onboarding designers/developers, establishing visual consistency across
-  products, documenting brand tokens
 purpose: 'Single HTML file documenting the complete CODEXA design system. Self-contained: all CSS tokens inline, no external
   dependencies except fonts. Inspired by: Linear, Railway, Raycast, Stripe, Vercel design systems. ---'
 template_structure: "1. Header (logo + \"Design System v1.0\")\n2. Color Palette\n   ├── Primitives (background, foreground,\

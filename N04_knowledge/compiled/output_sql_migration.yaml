@@ -24,25 +24,25 @@ template: "-- Migration: {{NAME}}\n-- Generated: {{DATE}}\n-- KCs: {{COUNT}}\n\n
   \ '{{TITLE}}', '{{TLDR}}', '{{BODY}}', ARRAY[{{TAGS}}], {{DENSITY}}, {{QUALITY}})\nON CONFLICT (id) DO UPDATE SET\n  body\
   \ = EXCLUDED.body,\n  updated_at = now();\n\n-- 3. Create indexes\nCREATE INDEX IF NOT EXISTS idx_kcs_kind ON kcs(kind);\n\
   CREATE INDEX IF NOT EXISTS idx_kcs_pillar ON kcs(pillar);\nCREATE INDEX IF NOT EXISTS idx_kcs_domain ON kcs(domain);"
-usage: '| Variable | Source | Example | Notes |
+usage: '| Variable | Source | Example |
 
-  |----------|--------|---------|-------|
+  |----------|--------|---------|
 
-  | `{{NAME}}` | Migration purpose | `"kc_batch_2026_04_01"` | |
+  | `{{NAME}}` | Migration purpose | `"kc_batch_2026_04_01"` |
 
-  | `{{DATE}}` | Current timestamp | `"2026-04-01T14:30:00Z"` | |
+  | `{{DATE}}` | Current timestamp | `"2026-04-01T14:30:00Z"` |
 
-  | `{{COUNT}}` | Number of KCs | `"15"` | |
+  | `{{COUNT}}` | Number of KCs | `"15"` |
 
-  | `{{ID}}` | KC filename | `"kc_react_patterns"` | |
+  | `{{ID}}` | KC filename | `"kc_react_patterns"` |
 
-  | `{{KIND}}` | KC frontmatter | `"knowledge_card"` | |
+  | `{{KIND}}` | KC frontmatter | `"knowledge_card"` |
 
-  | `{{PILLAR}}` | KC directory | `"P01"` | |
+  | `{{PILLAR}}` | KC directory | `"P01"` |
 
-  | `{{BODY}}` | Escaped KC content | `''## Pattern\nHook pattern...''` | Must escape single quotes as '''' |
+  | `{{BODY}}` | Escaped KC content | `''## Pattern\nHook pattern...''` |
 
-  | `{{TAGS}}` | Comma-separated | `''react'',''patterns'',''hooks''` | |
+  | `{{TAGS}}` | Comma-separated | `''react'',''patterns'',''hooks''` |
 
 
   Generate from compiled KCs:

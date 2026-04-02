@@ -16,7 +16,7 @@ target_kinds:
 linked_artifacts:
   primary:
   - n04_sr_knowledge
-quality: 8.8
+quality: 8.9
 tags:
 - quality-gate
 - n04
@@ -25,6 +25,7 @@ tags:
 - p07
 tldr: Defines the 9 quality gates (5 Hard, 4 Soft) for all N04-domain knowledge artifacts, ensuring structural integrity,
   atomicity, and discoverability.
+density_score: 0.9
 1_overview: 'This document defines the official set of quality gates that all knowledge artifacts within the N04 domain must
   pass before they can be published and integrated into the CEX knowledge base. The system is divided into two distinct types
   of checks: Hard Gates and Soft Gates.
@@ -75,25 +76,7 @@ tldr: Defines the 9 quality gates (5 Hard, 4 Soft) for all N04-domain knowledge 
 
   | S4 | Clarity | Is the content''s language and structure precise, unambiguous, and easy to parse for another agent? (Weight:
   10%) | `n04_sr_knowledge` |'
-4_implementation_guidelines: '| Phase | Action | Command/Tool | Expected Result |
-
-  | :--- | :--- | :--- | :--- |
-
-  | Pre-commit | Check gates locally | `python _tools/cex_doctor.py --gate n04_qg_knowledge path/to/artifact.md` | All gates
-  pass or specific failures listed |
-
-  | Development | Validate frontmatter | `python _tools/cex_compile.py path/to/artifact.md` | YAML parses, required fields
-  present |
-
-  | Review | Score soft gates | `python _tools/cex_score.py --rubric n04_sr_knowledge path/to/artifact.md` | Score ≥ 7.5 for
-  commit approval |
-
-  | Integration | Update knowledge graph | Edit `linked_artifacts` field to reference related knowledge cards | Improved S2
-  (Connectivity) score |
-
-  | Maintenance | Monitor quality drift | `python _tools/cex_quality_monitor.py N04_knowledge/` | Track score trends over
-  time |'
-5_execution_enforcement:
+4_execution_enforcement:
 - 'Trigger: This quality gate is automatically triggered by a `git pre-commit` hook for any changes within the `N04_knowledge/`
   directory.'
 - 'Process:'

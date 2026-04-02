@@ -38,23 +38,6 @@ template: '# KC Audit Report
   | Missing (by kind) | {{N}} | 0 ideal | {{CRITICAL/MINOR}} |
 
 
-  ## Health Interpretation
-
-  | Scenario | Coverage | Staleness | Density | Priority Action |
-
-  |----------|----------|-----------|---------|-----------------|
-
-  | 🟢 Healthy | >80 KCs | <30% stale | >0.85 | Monitor + maintain cadence |
-
-  | 🟡 Quality Focus | >80 KCs | <30% stale | <0.85 | Update low-density KCs first |
-
-  | 🟡 Freshness Focus | >80 KCs | >30% stale | >0.85 | Refresh stale KCs by usage frequency |
-
-  | 🟠 Growth Phase | <80 KCs | <30% stale | >0.85 | Build missing KCs by impact score |
-
-  | 🔴 Crisis Mode | <60 KCs | >50% stale | <0.85 | Stop new builds, fix foundation |
-
-
   ## Staleness Distribution
 
   | State | Count | % | Action Required |

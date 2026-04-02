@@ -39,21 +39,17 @@ pipeline: 'INGEST → CLASSIFY → DISTILL → STRUCTURE → VALIDATE → INDEX 
   | 7 | Export | Indexed KC | YAML + JSONL + SQL | export_format_contract.md |
 
   | 8 | Monitor | All KCs | Freshness alerts, gap reports | freshness_contract.md |'
-export_formats: '| Format | Schema | Purpose | Consumer | Example |
+export_formats: '| Format | Purpose | Consumer |
 
-  |--------|--------|---------|----------|---------|
+  |--------|---------|----------|
 
-  | .yaml | CEX artifact schema (id, kind, pillar, body) | CEX compiled artifact | All nuclei (compose_prompt) | `kc_react_hooks.yaml`
-  |
+  | .yaml | CEX compiled artifact | All nuclei (compose_prompt) |
 
-  | .jsonl | `{"text": "...", "label": "domain"}` per line | Fine-tuning dataset | External LLM training | OpenAI GPT custom
-  models |
+  | .jsonl | Fine-tuning dataset | External LLM training |
 
-  | SQL | `CREATE TABLE knowledge_cards (id, vector, metadata)` | Database persistence | Supabase, vector search | pgvector
-  similarity search |
+  | SQL | Database persistence | Supabase, vector search |
 
-  | .csv | `id,title,domain,tags,created,body_length` | ML feature datasets | Analytics, dashboards | Power BI, Tableau ingestion
-  |'
+  | .csv | ML feature datasets | Analytics, dashboards |'
 usage_guidelines: 'When to use:
 
   - Converting messy research into structured knowledge cards

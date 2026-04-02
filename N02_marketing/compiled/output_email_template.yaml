@@ -8,6 +8,7 @@ created: 2026-04-01
 author: n02_visual_frontend
 domain: frontend
 quality: 8.8
+density_score: 1.0
 purpose: Provides production-ready responsive email templates with comprehensive Outlook compatibility, dark mode support,
   and web-safe typography. Ensures consistent rendering across all major email clients including Outlook 2007-2019, Gmail,
   Apple Mail, and mobile clients.
@@ -31,65 +32,153 @@ complete_html_example: ''
 welcome_email_template: "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\"\
   >\n<html xmlns=\"http://www.w3.org/1999/xhtml\">\n<head>\n    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"\
   \ />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n    <meta name=\"color-scheme\"\
-  \ content=\"light dark\" />\n    <title>Welcome to Our Platform</title>\n    \n    <!--[if gte mso 9]>\n    <xml>\n    \
-  \    <o:OfficeDocumentSettings>\n            <o:AllowPNG/>\n            <o:PixelsPerInch>96</o:PixelsPerInch>\n        </o:OfficeDocumentSettings>\n\
-  \    </xml>\n    <![endif]-->\n    \n    <style type=\"text/css\">\n        #outlook a { padding: 0; }\n        .ReadMsgBody\
-  \ { width: 100%; }\n        .ExternalClass { width: 100%; }\n        \n        @media (prefers-color-scheme: dark) {\n \
-  \           .dark-mode-bg { background-color: #1a1a1a !important; }\n            .dark-mode-text { color: #ffffff !important;\
-  \ }\n        }\n        \n        @media only screen and (max-width: 600px) {\n            .mobile-full { width: 100% !important;\
-  \ }\n            .mobile-center { text-align: center !important; }\n        }\n    </style>\n</head>\n\n<body style=\"margin:\
-  \ 0; padding: 0; background-color: #f5f5f5;\">\n    <table role=\"presentation\" width=\"100%\" style=\"background-color:\
-  \ #f5f5f5;\">\n        <tr>\n            <td align=\"center\" style=\"padding: 40px 0;\">\n                <table role=\"\
-  presentation\" width=\"600\" style=\"max-width: 600px; background-color: #ffffff;\">\n                    <tr>\n       \
-  \                 <td style=\"padding: 40px; text-align: center;\">\n                            <h1 style=\"color: #1f2937;\
-  \ font-size: 28px;\">Welcome!</h1>\n                            <p style=\"color: #374151; font-size: 16px;\">Thank you\
-  \ for joining us.</p>\n                            <a href=\"{{verification_link}}\" style=\"display: inline-block; padding:\
-  \ 15px 30px; background-color: #3b82f6; color: #ffffff; text-decoration: none;\">Verify Email</a>\n                    \
-  \    </td>\n                    </tr>\n                    <tr>\n                        <td style=\"padding: 30px; background-color:\
-  \ #f9fafb; text-align: center;\">\n                            <p style=\"color: #6b7280; font-size: 14px;\">© 2026 Company.\
-  \ <a href=\"{{unsubscribe_url}}\">Unsubscribe</a></p>\n                        </td>\n                    </tr>\n      \
-  \          </table>\n            </td>\n        </tr>\n    </table>\n</body>\n</html>"
-variants: '| Type | Purpose | Key Elements |
-
-  |------|---------|-------------|
-
-  | Welcome | New user onboarding | Email verification CTA, feature highlights |
-
-  | Transactional | Confirmations, receipts | Transaction details, support contact |
-
-  | Marketing | Promotions, announcements | Headlines, product showcases, strong CTAs |
-
-  | Cart Abandonment | Recover purchases | Product reminders, urgency, checkout links |'
-common_issues_solutions: '| Problem | Cause | Solution |
-
-  |---------|-------|----------|
-
-  | Buttons broken in Outlook | Missing VML markup | Add `<!--[if mso]>` VML button code |
-
-  | Images not loading | Blocked by default | Use alt text, test without images |
-
-  | Dark mode not working | Missing meta tags | Add `color-scheme` and `supported-color-schemes` |
-
-  | Mobile layout broken | No viewport meta | Add viewport meta tag and responsive CSS |
-
-  | Gmail clipping | Email over 102KB | Reduce HTML size, optimize images |
-
-  | Fonts not rendering | Web fonts unsupported | Use web-safe font stack with fallbacks |
-
-  | Spacing inconsistent | Margin/padding differences | Use table cell padding instead of margins |
-
-  | Links not tracking | Missing UTM parameters | Add campaign tracking to all links |'
-implementation_guidelines: ''
-setup_requirements:
+  \ content=\"light dark\" />\n    <meta name=\"supported-color-schemes\" content=\"light dark\" />\n    <title>Welcome to\
+  \ Our Platform</title>\n    \n    <!-- MSO Outlook Compatibility -->\n    <!--[if gte mso 9]>\n    <xml>\n        <o:OfficeDocumentSettings>\n\
+  \            <o:AllowPNG/>\n            <o:PixelsPerInch>96</o:PixelsPerInch>\n        </o:OfficeDocumentSettings>\n   \
+  \ </xml>\n    <![endif]-->\n    \n    <!-- Dark Mode Support -->\n    <style type=\"text/css\">\n        / Client-specific\
+  \ Styles /\n        #outlook a { padding: 0; }\n        .ReadMsgBody { width: 100%; }\n        .ExternalClass { width: 100%;\
+  \ }\n        .ExternalClass * { line-height: 100%; }\n        \n        / Dark Mode Styles /\n        @media (prefers-color-scheme:\
+  \ dark) {\n            .dark-mode-bg { background-color: #1a1a1a !important; }\n            .dark-mode-text { color: #ffffff\
+  \ !important; }\n            .dark-mode-secondary { color: #cccccc !important; }\n            .dark-mode-border { border-color:\
+  \ #333333 !important; }\n        }\n        \n        / Mobile Responsive /\n        @media only screen and (max-width:\
+  \ 600px) {\n            .mobile-full { width: 100% !important; }\n            .mobile-center { text-align: center !important;\
+  \ }\n            .mobile-padding { padding: 20px 15px !important; }\n            .mobile-hide { display: none !important;\
+  \ }\n        }\n    </style>\n</head>\n\n<body style=\"margin: 0; padding: 0; background-color: #f5f5f5; font-family: Arial,\
+  \ Helvetica, sans-serif;\">\n    <!-- Preheader Text (hidden but shows in inbox preview) -->\n    <div style=\"display:\
+  \ none; font-size: 1px; line-height: 1px; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all;\">\n\
+  \        Welcome! Get started with your new account and explore our features.\n    </div>\n    \n    <!-- Main Container\
+  \ Table -->\n    <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\" style=\"background-color:\
+  \ #f5f5f5;\" class=\"dark-mode-bg\">\n        <tr>\n            <td align=\"center\" style=\"padding: 40px 0;\">\n     \
+  \           \n                <!-- Email Container -->\n                <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"\
+  0\" border=\"0\" width=\"600\" style=\"max-width: 600px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px\
+  \ 8px rgba(0,0,0,0.1);\" class=\"mobile-full dark-mode-bg\">\n                    \n                    <!-- Header Section\
+  \ -->\n                    <tr>\n                        <td style=\"padding: 40px 40px 20px 40px; text-align: center; border-bottom:\
+  \ 1px solid #e5e5e5;\" class=\"mobile-padding dark-mode-border\">\n                            <!-- Logo -->\n         \
+  \                   <img src=\"https://example.com/logo.png\" alt=\"Company Logo\" width=\"120\" height=\"40\" style=\"\
+  display: block; margin: 0 auto 20px auto;\" />\n                            <h1 style=\"margin: 0; font-size: 28px; font-weight:\
+  \ 600; color: #1f2937; line-height: 1.2;\" class=\"dark-mode-text\">\n                                Welcome to Our Platform!\n\
+  \                            </h1>\n                        </td>\n                    </tr>\n                    \n   \
+  \                 <!-- Main Content Section -->\n                    <tr>\n                        <td style=\"padding:\
+  \ 40px;\" class=\"mobile-padding\">\n                            <p style=\"margin: 0 0 20px 0; font-size: 16px; line-height:\
+  \ 1.6; color: #374151;\" class=\"dark-mode-secondary\">\n                                Hi <strong>{{first_name}}</strong>,\n\
+  \                            </p>\n                            <p style=\"margin: 0 0 20px 0; font-size: 16px; line-height:\
+  \ 1.6; color: #374151;\" class=\"dark-mode-secondary\">\n                                Thank you for joining our platform!\
+  \ We're excited to have you on board and can't wait for you to explore all the amazing features we've built.\n         \
+  \                   </p>\n                            <p style=\"margin: 0 0 30px 0; font-size: 16px; line-height: 1.6;\
+  \ color: #374151;\" class=\"dark-mode-secondary\">\n                                To get started, please verify your email\
+  \ address by clicking the button below:\n                            </p>\n                            \n              \
+  \              <!-- CTA Button -->\n                            <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"\
+  0\" border=\"0\" align=\"center\">\n                                <tr>\n                                    <td style=\"\
+  border-radius: 6px; background-color: #3b82f6;\">\n                                        <!--[if mso]>\n             \
+  \                           <v:roundrect xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:w=\"urn:schemas-microsoft-com:office:word\"\
+  \ href=\"{{verification_link}}\" style=\"height: 50px; v-text-anchor: middle; width: 200px;\" arcsize=\"12%\" stroke=\"\
+  f\" fillcolor=\"#3b82f6\">\n                                            <w:anchorlock/>\n                              \
+  \              <center style=\"color: #ffffff; font-family: Arial, sans-serif; font-size: 16px; font-weight: 600;\">Verify\
+  \ Email Address</center>\n                                        </v:roundrect>\n                                     \
+  \   <![endif]-->\n                                        <!--[if !mso]><!-- -->\n                                     \
+  \   <a href=\"{{verification_link}}\" style=\"display: inline-block; padding: 15px 30px; background-color: #3b82f6; color:\
+  \ #ffffff; text-decoration: none; font-size: 16px; font-weight: 600; border-radius: 6px;\">\n                          \
+  \                  Verify Email Address\n                                        </a>\n                                \
+  \        <!--<![endif]-->\n                                    </td>\n                                </tr>\n          \
+  \                  </table>\n                            \n                            <p style=\"margin: 30px 0 0 0; font-size:\
+  \ 14px; line-height: 1.6; color: #6b7280;\" class=\"dark-mode-secondary\">\n                                If the button\
+  \ doesn't work, you can copy and paste this link into your browser:<br>\n                                <a href=\"{{verification_link}}\"\
+  \ style=\"color: #3b82f6; word-break: break-all;\">{{verification_link}}</a>\n                            </p>\n       \
+  \                 </td>\n                    </tr>\n                    \n                    <!-- Feature Highlights Section\
+  \ -->\n                    <tr>\n                        <td style=\"padding: 0 40px 40px 40px;\" class=\"mobile-padding\"\
+  >\n                            <h2 style=\"margin: 0 0 20px 0; font-size: 20px; font-weight: 600; color: #1f2937;\" class=\"\
+  dark-mode-text\">\n                                What's Next?\n                            </h2>\n                   \
+  \         \n                            <!-- Feature List -->\n                            <table role=\"presentation\"\
+  \ cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\">\n                                <tr>\n             \
+  \                       <td width=\"40\" style=\"padding-right: 15px; vertical-align: top;\">\n                        \
+  \                <div style=\"width: 30px; height: 30px; background-color: #dbeafe; border-radius: 6px; display: flex; align-items:\
+  \ center; justify-content: center;\">\n                                            <span style=\"color: #3b82f6; font-size:\
+  \ 16px;\">✓</span>\n                                        </div>\n                                    </td>\n        \
+  \                            <td>\n                                        <p style=\"margin: 0 0 15px 0; font-size: 16px;\
+  \ line-height: 1.6; color: #374151;\" class=\"dark-mode-secondary\">\n                                            <strong>Complete\
+  \ your profile</strong> to personalize your experience\n                                        </p>\n                 \
+  \                   </td>\n                                </tr>\n                                <tr>\n               \
+  \                     <td width=\"40\" style=\"padding-right: 15px; vertical-align: top;\">\n                          \
+  \              <div style=\"width: 30px; height: 30px; background-color: #dbeafe; border-radius: 6px; display: flex; align-items:\
+  \ center; justify-content: center;\">\n                                            <span style=\"color: #3b82f6; font-size:\
+  \ 16px;\">✓</span>\n                                        </div>\n                                    </td>\n        \
+  \                            <td>\n                                        <p style=\"margin: 0 0 15px 0; font-size: 16px;\
+  \ line-height: 1.6; color: #374151;\" class=\"dark-mode-secondary\">\n                                            <strong>Explore\
+  \ our dashboard</strong> and discover powerful tools\n                                        </p>\n                   \
+  \                 </td>\n                                </tr>\n                                <tr>\n                 \
+  \                   <td width=\"40\" style=\"padding-right: 15px; vertical-align: top;\">\n                            \
+  \            <div style=\"width: 30px; height: 30px; background-color: #dbeafe; border-radius: 6px; display: flex; align-items:\
+  \ center; justify-content: center;\">\n                                            <span style=\"color: #3b82f6; font-size:\
+  \ 16px;\">✓</span>\n                                        </div>\n                                    </td>\n        \
+  \                            <td>\n                                        <p style=\"margin: 0; font-size: 16px; line-height:\
+  \ 1.6; color: #374151;\" class=\"dark-mode-secondary\">\n                                            <strong>Join our community</strong>\
+  \ and connect with other users\n                                        </p>\n                                    </td>\n\
+  \                                </tr>\n                            </table>\n                        </td>\n          \
+  \          </tr>\n                    \n                    <!-- Footer Section -->\n                    <tr>\n        \
+  \                <td style=\"padding: 30px 40px; background-color: #f9fafb; border-top: 1px solid #e5e5e5;\" class=\"mobile-padding\
+  \ dark-mode-bg dark-mode-border\">\n                            <!-- Social Links -->\n                            <table\
+  \ role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" align=\"center\" style=\"margin-bottom: 20px;\"\
+  >\n                                <tr>\n                                    <td style=\"padding-right: 15px;\">\n     \
+  \                                   <a href=\"{{twitter_url}}\" style=\"text-decoration: none;\">\n                    \
+  \                        <img src=\"https://example.com/twitter-icon.png\" alt=\"Twitter\" width=\"24\" height=\"24\" />\n\
+  \                                        </a>\n                                    </td>\n                             \
+  \       <td style=\"padding-right: 15px;\">\n                                        <a href=\"{{linkedin_url}}\" style=\"\
+  text-decoration: none;\">\n                                            <img src=\"https://example.com/linkedin-icon.png\"\
+  \ alt=\"LinkedIn\" width=\"24\" height=\"24\" />\n                                        </a>\n                       \
+  \             </td>\n                                    <td>\n                                        <a href=\"{{facebook_url}}\"\
+  \ style=\"text-decoration: none;\">\n                                            <img src=\"https://example.com/facebook-icon.png\"\
+  \ alt=\"Facebook\" width=\"24\" height=\"24\" />\n                                        </a>\n                       \
+  \             </td>\n                                </tr>\n                            </table>\n                     \
+  \       \n                            <!-- Footer Text -->\n                            <p style=\"margin: 0 0 10px 0; font-size:\
+  \ 14px; line-height: 1.5; color: #6b7280; text-align: center;\" class=\"dark-mode-secondary\">\n                       \
+  \         © 2026 Your Company Name. All rights reserved.\n                            </p>\n                           \
+  \ <p style=\"margin: 0 0 10px 0; font-size: 14px; line-height: 1.5; color: #6b7280; text-align: center;\" class=\"dark-mode-secondary\"\
+  >\n                                123 Main Street, City, State 12345\n                            </p>\n              \
+  \              <p style=\"margin: 0; font-size: 14px; line-height: 1.5; color: #6b7280; text-align: center;\" class=\"dark-mode-secondary\"\
+  >\n                                <a href=\"{{unsubscribe_url}}\" style=\"color: #3b82f6; text-decoration: underline;\"\
+  >Unsubscribe</a> | \n                                <a href=\"{{preferences_url}}\" style=\"color: #3b82f6; text-decoration:\
+  \ underline;\">Email Preferences</a> |\n                                <a href=\"{{privacy_url}}\" style=\"color: #3b82f6;\
+  \ text-decoration: underline;\">Privacy Policy</a>\n                            </p>\n                        </td>\n  \
+  \                  </tr>\n                    \n                </table>\n                \n            </td>\n        </tr>\n\
+  \    </table>\n</body>\n</html>"
+variants: ''
+1_welcome_email:
+- 'Purpose: New user onboarding'
+- 'Key Elements: Email verification CTA, feature highlights, next steps'
+- 'Tone: Friendly, encouraging, informative'
+2_transactional_email:
+- 'Purpose: Order confirmations, receipts, notifications'
+- 'Key Elements: Clear subject line, transaction details, support contact'
+- 'Tone: Professional, clear, reassuring'
+3_marketing_email:
+- 'Purpose: Promotional campaigns, feature announcements'
+- 'Key Elements: Compelling headlines, product showcases, strong CTAs'
+- 'Tone: Persuasive, benefit-focused, action-oriented'
+4_cart_abandonment_email:
+- 'Purpose: Recover abandoned purchases'
+- 'Key Elements: Product reminders, urgency indicators, easy checkout links'
+- 'Tone: Helpful, non-pushy, value-focused'
+usage_notes: ''
+implementation_guidelines:
 - 'Variable Replacement: Use `{{variable_name}}` for dynamic content'
-- 'Image Hosting: Host on reliable CDN with HTTPS'
-- 'Testing Tools: Litmus or Email on Acid for client compatibility'
+- 'Image Hosting: Host images on reliable CDN with HTTPS'
+- 'Link Tracking: Implement UTM parameters for analytics'
+- 'Testing: Use tools like Litmus or Email on Acid for client testing'
 outlook_compatibility:
-- 'MSO Conditionals: Required for Outlook 2007-2019'
+- 'MSO Conditionals: Essential for Outlook 2007-2019'
+- 'VML Buttons: Required for proper button rendering'
 - 'Table Structure: Mandatory for consistent layout'
-- 'VML Buttons: Essential for proper CTA rendering'
-performance_optimization:
+dark_mode_support:
+- 'Color Scheme Meta: Enable automatic dark mode detection'
+- 'CSS Classes: Use conditional classes for dark mode styling'
+- 'Fallbacks: Ensure readability when dark mode isn''t supported'
+mobile_optimization:
+- 'Viewport Meta: Essential for mobile rendering'
+- 'Responsive Tables: Use width percentages and min-widths'
+- 'Touch Targets: Ensure buttons are at least 44px tall'
+- 'Font Sizes: Minimum 14px for body text on mobile'
+performance_considerations:
 - 'Inline CSS: Required for maximum compatibility'
-- 'HTML Size: Keep under 102KB for Gmail'
-- 'Image Compression: Use optimized formats'
-- 'Font Sizes: Minimum 14px for mobile readability'
+- 'Image Optimization: Use compressed, web-optimized formats'
+- 'HTML Size: Keep total email under 102KB for Gmail'
+- 'Load Times: Optimize for slow mobile connections'

@@ -9,7 +9,7 @@ updated: 2026-03-31
 author: research-pipeline-builder
 domain: research_pipeline
 nucleus: N01
-quality: 8.9
+quality: 9.2
 tags: [knowledge-card, STORM, CRAG, CRITIC, research-methods, N01, intelligence]
 tldr: "The three academic patterns powering CEX research: STORM (multi-perspective planning), CRAG (corrective retrieval gating), CRITIC (iterative verification)."
 density_score: 0.93

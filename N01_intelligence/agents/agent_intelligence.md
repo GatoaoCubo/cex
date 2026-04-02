@@ -33,7 +33,7 @@ provider:
   primary: gemini-2.5-pro
   fallback: claude
   strategy: "Gemini for search grounding + web. Claude for deep analysis + synthesis. Swap on rate limits."
-quality: 8.8
+quality: 9.1
 tags: [agent, n01, research, analyst, intelligence, gemini, hybrid]
 tldr: "The Research Analyst nucleus — inveja analítica. Researches markets, competitors, trends. Triangulates sources. Delivers actionable intelligence. Hybrid provider: Gemini (search) + Claude (analysis)."
 density_score: 0.94

@@ -17,23 +17,6 @@ tldr: Restricted palette contract — 60-30-10 rule, zero hardcoded hex, CODEXA 
 density_score: 0.93
 schema_purpose: Restricts all N02 output to design-system-approved colors only. Zero hardcoded hex values in component classes.
   All colors via CSS custom properties. ---
-implementation_workflow: ''
-step_by_step_application: '| Step | Action | Check |
-
-  |------|--------|-------|
-
-  | 1. Start | Begin with `bg-background` + `text-foreground` | Base 60% established |
-
-  | 2. Structure | Add `bg-secondary`, `border-border` for surfaces | 30% secondary colors |
-
-  | 3. Accent | Apply `bg-codexa-accent` to max 2 CTA elements | 10% accent limit |
-
-  | 4. Validate | Run forbidden pattern scan | 0 hardcoded hex found |
-
-  | 5. Dark test | Toggle `.dark` class, verify readability | All text contrasts pass |'
-pre_flight_checklist: "before_commit:\n  - [ ] No `bg-[#...]` or `text-[#...]` arbitrary values\n  - [ ] Accent colors on\
-  \ ≤ 2 elements per component\n  - [ ] All colors from approved tokens list\n  - [ ] Dark mode tested and readable\n  - [\
-  \ ] 60-30-10 ratio visually confirmed\n\n---"
 allowed_color_tokens: ''
 primitives_layer_1: ":root {\n  --background:    0 0% 100%;        / white /\n  --foreground:    240 10% 3.9%;     / near-black\
   \ /\n  --primary:       240 5.9% 10%;\n  --secondary:     240 4.8% 95.9%;\n  --muted:         240 4.8% 95.9%;\n  --accent:\

@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n04_knowledge_nucleus
 domain: "Knowledge Architecture, RAG, Semantic Indexing"
-quality: 8.8
+quality: 9.1
 tags: [dispatch, n04, knowledge, orchestration, p12, routing]
 tldr: "Routes tasks involving knowledge architecture, RAG, indexing, and semantic search to the N04 Knowledge Nucleus, based on a hybrid semantic and keyword match."
 scope: "CEX-wide knowledge retrieval and management tasks."

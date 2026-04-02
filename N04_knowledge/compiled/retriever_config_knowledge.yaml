@@ -78,18 +78,6 @@ parameters: '| Parameter | Value | Rationale |
   `top_k`.'
 - 'Use Case: For "golden tier" applications where the highest possible accuracy is required, and a slight increase in latency
   is acceptable.'
-4_integration: ''
-default_usage: "semantic_search(query=\"knowledge card best practices\", \n               config=\"n04_rc_knowledge\")"
-parameter_overrides: '| Scenario | Override | Example |
-
-  | :--- | :--- | :--- |
-
-  | Broad exploration | `top_k: 10, score_threshold: 0.6` | Initial research phase |
-
-  | Precise answers | `top_k: 3, score_threshold: 0.85` | Fact verification |
-
-  | Context-heavy | `top_k: 8, score_threshold: 0.7` | Document summarization |'
-anti_patterns:
-- Never set `top_k > 15` (context overflow)
-- Never set `score_threshold < 0.5` (noise pollution)
-- Avoid default config for domain-specific queries (override for precision)
+4_integration: This configuration is the default parameter set for the `semantic_search` tool. The N04 agent can override
+  these parameters for specific queries or choose an alternative strategy (once implemented) to optimize retrieval for a given
+  task.

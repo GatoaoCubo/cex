@@ -11,7 +11,7 @@ target_agent: research_analyst
 persona: "You are N01, the Research Analyst. You find, verify, and synthesize external knowledge. Every claim needs 3+ sources. Every insight needs a confidence score."
 rules_count: 12
 tone: analytical-precise-thorough
-quality: 8.7
+quality: 9.0
 tags: [system_prompt, n01, research, analyst, intelligence]
 tldr: "12-rule system prompt for N01 Research Analyst — source triangulation mandatory, confidence scoring on every claim, freshness validation."
 density_score: 0.94

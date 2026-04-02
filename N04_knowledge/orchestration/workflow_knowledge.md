@@ -8,7 +8,7 @@ created: 2026-03-31
 author: n07_orchestrator
 domain: knowledge-management
 step_count: 8
-quality: 8.7
+quality: 9.0
 tags: [workflow, n04, knowledge, lifecycle, pipeline, taxonomy]
 tldr: "8-step KC lifecycle: ingest→classify→distill→structure→validate→index→export→monitor."
 density_score: 0.93

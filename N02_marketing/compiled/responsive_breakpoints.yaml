@@ -56,25 +56,9 @@ fluid_typography: '/ Body text /
   font-size: clamp(1.125rem, 2.5vw, 1.5rem);    / 18px → 24px /'
 touch_targets: "touch_targets:\n  minimum_size: \"48px × 48px\"\n  minimum_spacing: \"8px between targets\"\n  applies_to:\
   \ [\"buttons\", \"links\", \"form inputs\", \"nav items\"]\n  breakpoint_scope: \"base through md (touch devices)\""
-spacing_scale_4px_base: '| Value | Size | Use Case |
-
-  |-------|------|----------|
-
-  | 0 | 0px | Reset margins, no spacing |
-
-  | 1-2 | 4-8px | Icon gaps, inline elements |
-
-  | 3-4 | 12-16px | Text line spacing, small components |
-
-  | 5-6 | 20-24px | Component internal padding |
-
-  | 8 | 32px | Component margins, section gaps |
-
-  | 10-12 | 40-48px | Large component spacing |
-
-  | 16-20 | 64-80px | Section dividers, hero spacing |
-
-  | 24 | 96px | Page-level spacing, major sections |'
+spacing_scale_4px_base: "spacing:\n  0: \"0px\"\n  1: \"4px\"     # 0.25rem\n  2: \"8px\"     # 0.5rem\n  3: \"12px\"    #\
+  \ 0.75rem\n  4: \"16px\"    # 1rem\n  5: \"20px\"    # 1.25rem\n  6: \"24px\"    # 1.5rem\n  8: \"32px\"    # 2rem\n  10:\
+  \ \"40px\"   # 2.5rem\n  12: \"48px\"   # 3rem\n  16: \"64px\"   # 4rem\n  20: \"80px\"   # 5rem\n  24: \"96px\"   # 6rem"
 responsive_images: "images:\n  strategy: \"srcset + sizes\"\n  formats: [\"webp\", \"avif\", \"jpg fallback\"]\n  lazy_loading:\
   \ \"loading='lazy' for below-fold\"\n  aspect_ratio: \"aspect-ratio CSS property, no CLS\"\n  max_width: \"100% on mobile,\
   \ constrained on desktop\""

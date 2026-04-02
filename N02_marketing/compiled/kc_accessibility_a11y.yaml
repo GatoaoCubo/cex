@@ -14,17 +14,11 @@ tldr: Accessibility A11Y patterns and best practices
 density_score: 0.88
 quick_reference: "wcag_level: \"AA (2.1)\"\nkey_attributes:\n  - \"aria-label: descriptive text for elements\"\n  - \"aria-describedby:\
   \ reference to detailed description\"\n  - \"aria-live: polite|assertive for dynamic content\"\n  - \"aria-expanded: true|false\
-  \ for collapsible content\"\n  - \"aria-hidden: true to hide decorative elements\"\n  - \"aria-current: page|step|location|date|time\"\
-  \n  - \"aria-pressed: true|false|mixed for toggle buttons\"\n  - \"aria-selected: true|false for selectable items\"\naria_roles:\n\
-  \  - \"dialog: modal overlays (with aria-modal='true')\"\n  - \"button: clickable elements (with Enter/Space handlers)\"\
-  \n  - \"tablist/tab/tabpanel: tab interface patterns\"\n  - \"listbox/option: custom select dropdowns\"\n  - \"grid/gridcell:\
-  \ data tables with interaction\"\n  - \"alert: error messages (aria-live='assertive')\"\n  - \"status: success messages\
-  \ (aria-live='polite')\"\nkeyboard_nav:\n  - \"Tab: forward navigation\"\n  - \"Shift+Tab: backward navigation\" \n  - \"\
-  Enter/Space: activation\"\n  - \"Escape: close/cancel\"\n  - \"Arrow keys: within composite widgets\"\nfocus_management:\n\
+  \ for collapsible content\"\n  - \"aria-hidden: true to hide decorative elements\"\nkeyboard_nav:\n  - \"Tab: forward navigation\"\
+  \n  - \"Shift+Tab: backward navigation\" \n  - \"Enter/Space: activation\"\n  - \"Escape: close/cancel\"\nfocus_management:\n\
   \  - \"focus-visible: keyboard focus indicator\"\n  - \"outline: 2px solid with offset-2\"\n  - \"tabindex: -1 (programmatic),\
-  \ 0 (natural order)\"\ncontrast_ratios:\n  - \"Normal text: 4.5:1 minimum\"\n  - \"Large text (18pt+): 3:1 minimum\"\n \
-  \ - \"UI components: 3:1 minimum\"\n  - \"Focus indicators: 3:1 against background\"\nsemantic_html: [nav, main, section,\
-  \ article, aside, header, footer]\ntesting_tools: [NVDA, VoiceOver, JAWS, axe-core, Lighthouse]"
+  \ 0 (natural order)\"\nsemantic_html: [nav, main, section, article, aside, header, footer]\ntesting_tools: [NVDA, VoiceOver,\
+  \ JAWS, axe-core, Lighthouse]"
 key_concepts: '| Concept | Requirements | Implementation | When to Use |
 
   |---------|-------------|----------------|-------------|

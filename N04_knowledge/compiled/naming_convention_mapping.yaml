@@ -1,0 +1,46 @@
+id: n04_naming_convention_mapping
+kind: validation_schema
+nucleus: N04
+pillar: P06
+domain: nomenclature
+quality: 8.9
+created: 2026-04-02
+type: mapping_schema
+scope: builders_to_kcs
+density_score: 1.0
+the_problem:
+- 'Builders: use hyphen format (`action-prompt-builder`)'
+- 'KCs: use underscore format (`kc_action_prompt.md`)'
+- 'Impact: Breaks automated cross-referencing and tooling'
+conversion_rules: ''
+builder_kc: "def builder_to_kc(builder_name):\n    # Remove -builder suffix\n    core_name = builder_name.replace('-builder',\
+  \ '')\n    # Convert hyphens to underscores  \n    kc_name = core_name.replace('-', '_')\n    # Add kc_ prefix and .md suffix\n\
+  \    return f\"kc_{kc_name}.md\"\n\n# Examples:\n# action-prompt-builder → kc_action_prompt.md\n# knowledge-card-builder\
+  \ → kc_knowledge_card.md"
+kc_builder: "def kc_to_builder(kc_filename):\n    # Remove kc_ prefix and .md suffix\n    core_name = kc_filename[3:-3]  #\
+  \ Strip 'kc_' and '.md'\n    # Convert underscores to hyphens\n    builder_name = core_name.replace('_', '-')  \n    # Add\
+  \ -builder suffix\n    return f\"{builder_name}-builder\"\n\n# Examples:\n# kc_action_prompt.md → action-prompt-builder\n\
+  # kc_knowledge_card.md → knowledge-card-builder  "
+special_cases: '| Builder | KC | Notes |
+
+  |---------|----|----- |
+
+  | `_builder` | None | Meta-builder, no KC needed |
+
+  | `skill-builder` | `kc_skill.md` | ✅ Exists |
+
+  | None | `kc_director.md` | ❌ Orphan KC, no builder |'
+validation_queries: "# Find builders without KCs\nfind archetypes/builders/ -name \"*-builder\" | while read b; do\n  builder=$(basename\
+  \ $b)\n  kc_name=\"kc_$(echo $builder | sed 's/-builder//' | sed 's/-/_/g').md\"\n  if [ ! -f \"P01_knowledge/library/kind/$kc_name\"\
+  \ ]; then\n    echo \"MISSING KC: $kc_name (for $builder)\"\n  fi\ndone\n\n# Find KCs without builders  \nfind P01_knowledge/library/kind/\
+  \ -name \"kc_*.md\" | while read k; do\n  kc_file=$(basename $k)\n  builder_name=\"$(echo $kc_file | sed 's/kc_//' | sed\
+  \ 's/.md//' | sed 's/_/-/g')-builder\"\n  if [ ! -d \"archetypes/builders/$builder_name\" ]; then\n    echo \"ORPHAN KC:\
+  \ $kc_file (no $builder_name)\"\n  fi\ndone"
+tool_integration: "This mapping should be used in:\n- `cex_retriever.py` - cross-reference lookups\n- `cex_8f_motor.py` -\
+  \ builder discovery  \n- `cex_compile.py` - KC validation\n- `cex_memory_select.py` - knowledge injection"
+recommended_fix:
+- Standardize on underscores system-wide
+- Create transition period with dual lookup
+- Update tooling to handle both formats
+- Migrate builders to underscore naming
+- Establish naming rule enforcement in validation

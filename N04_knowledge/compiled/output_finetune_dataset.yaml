@@ -26,12 +26,11 @@ format_jsonl: '{"instruction": "Explain chain-of-thought prompting for LLM agent
   {"instruction": "When should you use RAG vs fine-tuning?", "input": "I have 200 domain-specific documents", "output": "RAG
   for dynamic data that changes. Fine-tuning for stable patterns..."}'
 generation_rules:
-- 'instruction: Extract from KC `tldr` → convert to "What is..." or "How to..." question format (min 5, max 15 words)'
-- 'input: Optional context from `keywords` field when KC has specific use-case scenarios (max 50 tokens)'
-- 'output: Compressed KC body content using bullet points and technical terms (400-500 tokens optimal)'
-- 'Filter criteria: density >= 0.85 AND quality >= 8.0 AND body length >= 200 words'
-- 'Deduplication: Cosine similarity < 0.8 between output embeddings + manual review of instruction patterns'
-- 'Validation: Test on 10% holdout set for perplexity < 3.0 and factual accuracy > 95%'
+- 'instruction: derived from KC `tldr` or `when_to_use`, phrased as question'
+- 'input: optional context from `keywords`'
+- 'output: compressed body (max 500 tokens)'
+- 'Filter: only KCs with density >= 0.85 and quality >= 8.0'
+- 'Dedup: no two entries with >80% output overlap'
 usage_guidelines: '| When to use | When NOT to use |
 
   |-------------|-----------------|

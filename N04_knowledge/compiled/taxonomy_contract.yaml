@@ -52,16 +52,9 @@ pillar_quick_reference: '| Pillar | Name | Kinds |
   | P11 | Feedback | quality_gate |
 
   | P12 | Orchestration | workflow, dag, dispatch_rule |'
-ambiguity_resolution: '| If it... | Then classify as | Pillar | Reasoning |
-
-  |----------|------------------|--------|-----------|
-
-  | Teaches HOW | knowledge_card | P01 | Educational content |
-
-  | Validates WHAT | quality_gate | P11 | Evaluation criteria |
-
-  | Sequences STEPS | workflow | P12 | Process orchestration |
-
-  | Defines WHO | agent | P02 | Identity/role specification |
-
-  | Constrains FORMAT | schema | P06 | Structure definition |'
+ambiguity_rules:
+- If it teaches HOW → knowledge_card (P01)
+- If it validates WHAT → quality_gate (P11)
+- If it sequences STEPS → workflow (P12)
+- If it defines WHO → agent (P02)
+- If it constrains FORMAT → schema (P06)

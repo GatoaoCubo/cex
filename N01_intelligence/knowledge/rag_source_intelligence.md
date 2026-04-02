@@ -7,9 +7,10 @@ version: "1.0.0"
 created: "2026-03-31"
 updated: "2026-03-31"
 author: "N01_rebuild_8F"
-quality: 8.8
+quality: 9.1
 tags: [rag, source, knowledge, n01, research, ingestion]
 tldr: "Defines the tiered data sources, ingestion policies, and update frequencies for the N01 Research Nucleus RAG knowledge base."
+density_score: 0.97
 ---
 
 ## 1. PURPOSE

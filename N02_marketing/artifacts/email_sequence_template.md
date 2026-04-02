@@ -6,10 +6,11 @@ version: 1.0.0
 created: 2026-04-02
 author: n02_marketing
 domain: email_marketing
-quality: null
+quality: 9.0
 tags: [template, email, sequence, automation, nurture, N02]
 tldr: Complete email sequence templates for different campaign types — welcome series, product launch, re-engagement, and sales funnels.
 sequence_types: [welcome, launch, nurture, sales, reactivation]
+density_score: 0.92
 ---
 
 # Email Sequence Templates — Marketing Campaigns

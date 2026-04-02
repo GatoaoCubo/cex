@@ -43,18 +43,5 @@ anti_patterns: '| ❌ Don''t | ✅ Do Instead |
   | Blocking API calls | Use async/await for parallel embedding requests |
 
   | Missing error recovery | Retry failed embeddings with exponential backoff |'
-batch_metadata: '| Field | Purpose | Example |
-
-  |-------|---------|---------|
-
-  | Processing stats | Track completion rates | `"processed": 890, "failed": 12, "success_rate": 0.987` |
-
-  | Performance metrics | Monitor embedding speed | `"duration_seconds": 45, "chunks_per_second": 19.8` |
-
-  | Resource usage | Cost tracking | `"api_calls": 890, "tokens": 156789, "cost_usd": 2.34` |
-
-  | Quality indicators | Validate output integrity | `"avg_chunk_length": 176, "empty_chunks": 0` |
-
-
-  {"_meta": {"total_kcs": 243, "processed": 890, "failed": 12, "duration_seconds": 45, "model": "text-embedding-3-small",
-  "dimensions": 1536, "cost_usd": 2.34, "generated": "2026-03-31"}}'
+batch_metadata: '{"_meta": {"total_kcs": 243, "total_chunks": 890, "model": "text-embedding-3-small", "dimensions": 1536,
+  "generated": "2026-03-31"}}'

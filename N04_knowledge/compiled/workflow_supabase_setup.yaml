@@ -51,7 +51,6 @@ step_2_schema_design_n04:
 - 'Action: Generate CREATE TABLE + indexes for all tables'
 - 'Input: Validated config (database section)'
 - 'Output: `migrations/001_schema.sql`'
-- 'Patterns: `org_id UUID NOT NULL` on shared tables, `btree(org_id, created_at)` for time-series, `gin(metadata)` for JSONB'
 - 'Checks: org_id column on shared tables, indexes on FKs + sort columns'
 - 'Signal: schema_ready'
 step_3_rls_policies_n04:

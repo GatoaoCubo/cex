@@ -124,23 +124,17 @@ complete_html_example: "<!DOCTYPE html>\n<html lang=\"en\" class=\"dark\">\n<hea
   \            <td class=\"px-4 py-3\"><span class=\"px-2 py-1 rounded-full text-xs bg-amber-500/20 text-amber-400\">Pending</span></td>\n\
   \              <td class=\"px-4 py-3 text-[var(--codexa-text-secondary)]\">1 hour ago</td>\n            </tr>\n        \
   \  </tbody>\n        </table>\n      </div>\n    </main>\n  </div>\n\n</body>\n</html>"
-responsive_behavior: '| Breakpoint | Sidebar | Grid | Table | Mobile UX | Implementation |
+responsive_behavior: '| Breakpoint | Sidebar | Grid | Table |
 
-  |------------|---------|------|-------|-----------|----------------|
+  |------------|---------|------|-------|
 
-  | base (mobile) | hidden, hamburger toggle | 1 column | horizontal scroll | Touch targets 44px min, swipe gestures | `transform
-  -translate-x-full` |
+  | base (mobile) | hidden, hamburger toggle | 1 column | horizontal scroll |
 
-  | sm (640px) | hidden, hamburger toggle | 2 columns | horizontal scroll | Finger-friendly spacing | `lg:hidden` class triggers
-  |
+  | sm (640px) | hidden, hamburger toggle | 2 columns | horizontal scroll |
 
-  | lg (1024px) | fixed visible | 3 columns | full width | Desktop hover states | `lg:translate-x-0` shows sidebar |
+  | lg (1024px) | fixed visible | 3 columns | full width |
 
-  | xl (1280px) | fixed visible | 4 columns | full width | Full desktop features | `xl:grid-cols-4` for stat cards |
-
-
-  Mobile-First Patterns: sidebar slides from left with backdrop blur, stat cards stack vertically with larger touch targets,
-  table becomes horizontally scrollable with momentum scrolling enabled.'
+  | xl (1280px) | fixed visible | 4 columns | full width |'
 variants:
 - 'Analytics Dashboard: chart-heavy, Recharts placeholders, time-range selector'
 - 'Admin Panel: user management table, role badges, action buttons'

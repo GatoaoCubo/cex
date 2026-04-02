@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: research-intelligence
-quality: 8.6
+quality: 9.1
 tags: [output, n01, source, dossier, curation]
 tldr: "Curated source list with quality scores per source_quality_contract schema."
 density_score: 0.91
@@ -78,7 +78,7 @@ density_score: 0.91
 
 ### Quality Criteria
 - **Authority 5**: Government agencies, peer-reviewed journals
-- **Authority 4**: Industry leaders, established news outlets  
+- **Authority 4**: Industry leaders, established news outlets
 - **Authority 3**: Professional blogs, trade publications
 - **Authority 2**: General websites, unverified sources
 - **Authority 1**: Social media, anonymous posts

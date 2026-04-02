@@ -75,28 +75,12 @@ density_score: 0.88
   - Actions: `find`, `explain`, `distill`, `embed`, `chunk`, `consolidate`, `document`
 
   - Interrogatives: `what is`, `how does`, `explain` (signals a knowledge query)'
-3_2_mandatory_conditions: 'To be routed to N04, the request must satisfy a condition from both `intent` AND `domain` classifications.
-
-
-  | Type | Value | Definition | Example Request |
-
-  | :--- | :--- | :--- | :--- |
-
-  | Intent | `query` | User asking for information | "What is the RAG retrieval strategy?" |
-
-  | Intent | `architect` | User designing knowledge structure | "Design a taxonomy for product docs" |
-
-  | Intent | `manage`/`organize` | User structuring information | "Organize these knowledge cards" |
-
-  | Intent | `find` | Direct retrieval command | "Find documentation on embeddings" |
-
-  | Domain | `knowledge` | Core knowledge management | "Index these research papers" |
-
-  | Domain | `data`/`information` | Information processing | "Chunk this document for RAG" |
-
-  | Domain | `taxonomy` | Classification systems | "Create category hierarchy" |
-
-  | Domain | `retrieval` | Search and discovery | "Improve search accuracy" |'
+3_2_mandatory_conditions: "To be routed to N04, the request must satisfy a condition from both `intent` AND `domain` classifications.\n\
+  \n- Allowed Intents:\n  - `query`: The user is asking for information.\n  - `architect`: The user wants to design a knowledge\
+  \ structure.\n  - `manage`/`organize`: The user wants to modify or structure information.\n  - `find`: A direct command\
+  \ to retrieve something.\n- Allowed Domains:\n  - `knowledge`\n  - `data`/`information`\n  - `taxonomy`\n  - `retrieval`\n\
+  \nExample: \"Find the documentation on the RAG retrieval strategy\" passes because `find` is an allowed intent, `documentation`\
+  \ and `retrieval` are keywords, and the domain is `knowledge`."
 4_governance:
 - 'Priority: `10` (System Critical)'
 - 'Rationale: The integrity of the knowledge pipeline is foundational for all other CEX operations. Correctly routing these

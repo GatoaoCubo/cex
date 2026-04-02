@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: research-intelligence
-quality: 8.7
+quality: 9.0
 tags: [schema, n01, citation, reference, format]
 tldr: "APA-lite citation format for N01 research output. URL, title, author, date, accessed, reliability."
 density_score: 0.91

@@ -15,6 +15,7 @@ tags:
 - N02
 tldr: Tracks campaign performance, copy effectiveness, and conversion insights to improve future marketing efforts.
 scope: marketing_performance_learning
+density_score: 1.0
 campaign_history_log: ''
 template_entry: "campaign_id: \"YYYY-MM-DD_channel_goal\"\ndate: \"2026-MM-DD\"\nchannel: \"email | social | ads | landing_page\"\
   \ngoal: \"awareness | consideration | conversion\"\ncopy_formula: \"AIDA | PAS | BAB | FAB\"\naudience_segment: \"target_description\"\

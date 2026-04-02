@@ -7,7 +7,7 @@ version: 4.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: knowledge-management
-quality: 8.5
+quality: 9.0
 tags: [scoring_rubric, n04, knowledge, density, taxonomy]
 tldr: "5-dimension scoring for KCs: density, taxonomy, actionability, structure, freshness."
 density_score: 0.92
@@ -38,9 +38,9 @@ density_score: 0.92
 
 **When to apply**: Score every knowledge card before publication. Use during peer review cycles.
 
-**How to score**: 
+**How to score**:
 - Read entire KC first (no skimming)
-- Score each dimension independently 
+- Score each dimension independently
 - Weight final score: `(Density×0.25) + (Taxonomy×0.20) + (Actionability×0.25) + (Structure×0.15) + (Freshness×0.15)`
 - Threshold: Publish ≥8.0, Revise 6.0-7.9, Reject <6.0
 

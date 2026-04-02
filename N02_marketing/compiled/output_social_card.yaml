@@ -81,16 +81,3 @@ template_variables: '| Variable | Example | Used In |
   | `{{GRADIENT_FROM}}` | "hsl(240 10% 5%)" | Background |
 
   | `{{GRADIENT_TO}}` | "hsl(160 40% 10%)" | Background |'
-validation_checklist: '| Check | Command | Expected Result |
-
-  |-------|---------|-----------------|
-
-  | Dimensions correct | `identify card.png` | 1200x630, 1080x1080, etc. |
-
-  | Text readable | Visual inspection | Contrast ratio > 4.5:1 |
-
-  | Fonts loaded | Browser DevTools | No font fallback warnings |
-
-  | Variables replaced | `grep "{{" card.html` | No output (all replaced) |
-
-  | File size optimal | `ls -lh card.png` | < 500KB for web sharing |'

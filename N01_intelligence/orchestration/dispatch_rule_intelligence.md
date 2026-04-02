@@ -7,13 +7,14 @@ version: "1.0.0"
 created: "2026-03-31"
 updated: "2026-03-31"
 author: "N01_rebuild_8F"
-quality: 8.7
+quality: 9.1
 tags: [dispatch, routing, orchestration, n01, research]
 tldr: "Routes complex research, analysis, and synthesis tasks to the N01 Research & Intelligence Nucleus based on semantic intent, keywords, and trigger phrases."
 target_agent: "n01_agent_intelligence"
 priority: 10 # Highest priority for specialist tasks
 confidence_threshold: 0.85 # Requires a strong semantic match
 fallback_agent: "n04_knowledge"
+density_score: 0.95
 ---
 
 ## 1. PURPOSE

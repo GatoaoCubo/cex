@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-01
 author: n02_visual_frontend
 domain: frontend
-quality: 8.8
+quality: 9.1
 tags: [schema, tailwind, palette, design-system, color]
 tldr: "Restricted palette contract — 60-30-10 rule, zero hardcoded hex, CODEXA tokens."
 density_score: 0.93

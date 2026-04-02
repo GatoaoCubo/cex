@@ -83,13 +83,7 @@ pgvector_n04_s_rag_backend: 'N04 uses pgvector as the concrete backend for embed
 
   - HNSW indexes for fast semantic search
 
-  - Core functions: `match_documents(query_embedding, match_threshold, match_count)` returns ranked results
-
-  - Schema: `embeddings(id, content, embedding vector(1536), metadata jsonb, org_id)`
-
-  - Index: `CREATE INDEX ON embeddings USING hnsw (embedding vector_cosine_ops)`
-
-  - RLS: `CREATE POLICY org_isolation ON embeddings FOR ALL USING (org_id = auth.jwt() ->> ''org_id'')`'
+  - match_documents() function for N04''s RAG pipeline'
 escalation_rules:
 - Schema change request → N04 reviews → migration
 - RLS policy conflict → N04 resolves → new policy

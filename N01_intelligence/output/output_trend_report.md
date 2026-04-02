@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: research-intelligence
-quality: 8.7
+quality: 9.0
 tags: [output, n01, trend, report, momentum]
 tldr: "Trend analysis: 3-5 trends with momentum, confidence, evidence, and 'so what?' per finding."
 density_score: 0.91

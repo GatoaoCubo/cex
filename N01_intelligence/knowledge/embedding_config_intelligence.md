@@ -7,9 +7,10 @@ version: "1.0.0"
 created: "2026-03-31"
 updated: "2026-03-31"
 author: "N01_rebuild_8F"
-quality: 8.7
+quality: 9.0
 tags: [embedding, config, rag, n01, research, vector]
 tldr: "Specifies the advanced embedding and chunking strategy for the N01 RAG knowledge base, using a specialized model and semantic chunking for high-fidelity retrieval of research-grade content."
+density_score: 0.97
 ---
 
 ## 1. PURPOSE

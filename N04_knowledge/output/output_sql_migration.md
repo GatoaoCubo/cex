@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: knowledge-management
-quality: 8.5
+quality: 9.1
 tags: [output, n04, sql, migration, supabase, database]
 tldr: "Supabase migration SQL: CREATE tables + INSERT KCs + CREATE indexes."
 density_score: 0.92

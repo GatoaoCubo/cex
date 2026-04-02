@@ -19,23 +19,10 @@ tags:
 - google
 tldr: Specifies the embedding model configurations for N04, establishing 'google/text-embedding-004' as the primary model
   and 'jinaai/jina-embeddings-v2-base-en' as the secondary.
-1_model_selection_matrix: '| Scenario | Model | Reason | Context |
-
-  |----------|-------|--------|---------|
-
-  | Standard RAG ingestion | `google/text-embedding-004` | SOTA performance + native Gemini integration | Default for all
-  CEX workflows |
-
-  | Private data processing | `jinaai/jina-embeddings-v2-base-en` | Open-source + self-hosted | Data never leaves CEX environment
-  |
-
-  | Batch processing | `jinaai/jina-embeddings-v2-base-en` | Cost-effective + offline capable | Large-scale ingestion tasks
-  |
-
-  | Audit requirements | `jinaai/jina-embeddings-v2-base-en` | Apache 2.0 + fully auditable | Compliance contexts |
-
-
-  ---'
+density_score: 0.91
+1_overview: This document specifies the configurations for the embedding models used by the N04 Knowledge Nucleus. The choice
+  of embedding model is critical for the performance of semantic search and the overall RAG pipeline. This configuration defines
+  a primary, high-performance model from Google and a secondary, high-performance open-source model. ---
 2_primary_model_google_text_embedding_004: '- Provider: Google
 
   - Dimensions: `768`

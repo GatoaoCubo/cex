@@ -82,24 +82,6 @@ capabilities_12: '| # | Capability | Output |
   | 11 | Cross-Nucleus Injection | Deliver KC context to N01-N07 |
 
   | 12 | RAG Configuration | Pipeline tuning, retrieval optimization |'
-operational_procedures: '| Workflow | Steps | Tools | Output |
-
-  |----------|-------|-------|--------|
-
-  | KC Creation | 1. Analyze raw input → 2. Apply taxonomy → 3. Structure content → 4. Validate schema → 5. Compile YAML |
-  cex_compile.py, cex_schema_hydrate.py | Structured KC file |
-
-  | Database Sync | 1. Parse KC metadata → 2. Generate embeddings → 3. Insert Supabase → 4. Update search index | Supabase
-  MCP, cex_index.py | Updated vector DB |
-
-  | Fine-Tune Export | 1. Query KC corpus → 2. Format as instruction/response → 3. Export JSONL → 4. Validate format | cex_query.py,
-  custom export | Training dataset |
-
-  | Gap Analysis | 1. Map existing coverage → 2. Identify missing domains → 3. Score urgency → 4. Queue creation | cex_doctor.py,
-  cex_query.py | Coverage report |
-
-  | Freshness Audit | 1. Check timestamps → 2. Flag stale content → 3. Trigger updates → 4. Archive deprecated | Custom staleness
-  check | Maintenance queue |'
 usage_patterns: '| Trigger | Example | Action | Don''t Use For |
 
   |---------|---------|--------|---------------|

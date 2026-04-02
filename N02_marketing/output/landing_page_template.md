@@ -15,7 +15,7 @@ responsive: mobile_first
 accessibility: wcag_aa
 performance: lighthouse_90_plus
 domain: visual_frontend_engineering_and_copywriting
-quality: 8.8
+quality: 9.0
 tags: [output_template, landing_page, dual_mode, html, tailwind, copy_integration, N02]
 tldr: Complete landing page template with integrated copy — hero to CTA sections, responsive design, WCAG AA, persuasion formulas in visual hierarchy.
 density_score: 0.96

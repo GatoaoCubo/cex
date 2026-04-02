@@ -8,9 +8,10 @@ created: "2026-03-30"
 updated: "2026-03-30"
 author: "N01_rebuild_8F"
 domain: "intelligence, research, analysis, academic, financial"
-quality: 8.7
+quality: 9.1
 tags: [rag, source, n01, memory, knowledge, vector, ingestion]
 tldr: "Defines the primary academic and technical data sources for N01's RAG knowledge base, including arXiv, JSTOR, and SEC EDGAR."
+density_score: 1.0
 ---
 
 ## Purpose

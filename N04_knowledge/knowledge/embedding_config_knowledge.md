@@ -9,9 +9,10 @@ author: n04_knowledge_nucleus
 title: "N04 Embedding Model Configuration"
 models_count: 2
 default_model_id: google-text-embedding-004
-quality: 8.9
+quality: 9.1
 tags: [embedding, config, n04, knowledge, rag, p01, google]
 tldr: "Specifies the embedding model configurations for N04, establishing 'google/text-embedding-004' as the primary model and 'jinaai/jina-embeddings-v2-base-en' as the secondary."
+density_score: 0.91
 ---
 
 # N04 Embedding Model Configuration

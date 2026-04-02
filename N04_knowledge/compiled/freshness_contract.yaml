@@ -50,17 +50,4 @@ edge_cases:
 - 'Breaking changes: Reset threshold to 0 days regardless of type'
 - 'Seasonal content: Extend threshold by 50% for annual patterns'
 - 'Legacy systems: Use Infrastructure thresholds even for Platform KCs'
-calculation_scoring: '| Component | Formula | Usage |
-
-  |-----------|---------|-------|
-
-  | Base Score | `max(0, 1 - (days_since_update / threshold_stale))` | Primary freshness metric |
-
-  | Weight Factor | Score × KC_type_multiplier | Platform=1.5, Domain=1.0, Kind=0.8 |
-
-  | Final Score | Weighted score × usage_frequency | High-traffic KCs get priority |'
-interpretation_rules:
-- 'Score ≥ 0.8: Inject normally'
-- 'Score 0.5-0.79: Include with staleness warning'
-- 'Score < 0.5: Skip injection, flag for review'
-- 'Score = 0: Immediate deprecation candidate'
+freshness_score_formula: freshness = max(0, 1 - (days_since_update / threshold_stale))

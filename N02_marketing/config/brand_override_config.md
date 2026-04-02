@@ -6,9 +6,10 @@ version: 1.0.0
 created: 2026-04-02
 author: n02_marketing
 domain: brand_configuration
-quality: null
+quality: 9.0
 tags: [config, brand, marketing, tone, voice, N02]
 tldr: Brand-specific overrides for marketing copy generation — tone, voice, terminology, and channel-specific adaptations.
+density_score: 1.0
 ---
 
 # Brand Override Config — N02 Marketing

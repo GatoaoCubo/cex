@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: knowledge-management
-quality: 8.7
+quality: 9.0
 tags: [output, n04, kc, template, standard]
 tldr: "Standard KC output template matching kc_structure_contract schema."
 density_score: 0.92

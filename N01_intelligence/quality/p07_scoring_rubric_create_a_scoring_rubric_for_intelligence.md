@@ -16,7 +16,7 @@ threshold_publish: 8.0
 threshold_review: 7.0
 automation_status: "semi-automated"
 domain: "research"
-quality: 8.9
+quality: 9.1
 tags: [scoring-rubric, intelligence, research, analysis]
 tldr: "5D evaluation for intel research: methodology 25%, evidence 25%, analysis 20%, clarity 15%, novelty 15%"
 density_score: 0.88

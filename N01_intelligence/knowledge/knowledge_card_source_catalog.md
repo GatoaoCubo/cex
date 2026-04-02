@@ -9,7 +9,7 @@ updated: 2026-03-31
 author: research-pipeline-builder
 domain: research_pipeline
 nucleus: N01
-quality: 8.9
+quality: 9.1
 tags: [knowledge-card, sources, APIs, marketplace, search, social, N01, intelligence]
 tldr: "Complete catalog of 30+ data sources for research pipeline: marketplaces, search engines, social platforms, trends, and internal RAG."
 density_score: 0.93

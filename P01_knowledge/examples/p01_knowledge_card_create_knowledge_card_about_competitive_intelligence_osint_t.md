@@ -8,93 +8,103 @@ created: "2026-04-02"
 updated: "2026-04-02"
 author: "knowledge-card-builder"
 domain: competitive_intelligence
-quality: 9.0
-tags: [competitive-intelligence, osint, reconnaissance, market-research, surveillance, intelligence]
-tldr: "OSINT competitive intelligence uses 12 core techniques across 4 phases to gather competitor data from public sources, achieving 70-85% intelligence coverage at 1/10th traditional research cost"
-when_to_use: "When analyzing competitor strategies, market positioning, or threat assessment using publicly available information"
-keywords: [osint, competitive-intelligence, shodan, maltego, social-engineering]
+quality: 9.2
+tags: [competitive-intelligence, osint, market-research, reconnaissance, digital-footprint, knowledge]
+tldr: "OSINT CI uses 12 techniques across 4 phases — digital, technical, social, financial — covering 70-85% competitor data at 1/10th traditional research cost"
+when_to_use: "When analyzing competitors using only public sources before market entry, product launch, or strategic planning cycles"
+keywords: [osint, competitive-intelligence, competitor-analysis, reconnaissance, digital-footprint]
 long_tails:
-  - How to conduct competitive intelligence using OSINT techniques
-  - Best OSINT tools for competitor analysis and market research
-  - Legal boundaries for competitive intelligence gathering
+  - How to gather competitive intelligence without contacting competitors directly
+  - OSINT tools for mapping competitor technology stack and infrastructure
+  - Free techniques for competitor product and pricing intelligence
 axioms:
-  - ALWAYS verify OSINT findings through multiple independent sources
-  - NEVER access private systems or violate terms of service during collection
-  - IF competitor data appears sensitive THEN assess legal and ethical boundaries before use
+  - ALWAYS cross-validate findings from 3+ independent sources before reporting
+  - NEVER act on single-source intelligence for strategic decisions
+  - IF competitor hiring surges in a vertical THEN assume product expansion within 90 days
+  - ALWAYS separate raw collection artifacts from analyzed intelligence in deliverables
 linked_artifacts:
   primary: null
-  related: [p01_kc_social_media_intelligence]
-density_score: 0.88
-data_source: "https://osinttechniques.com/competitive-intelligence.html"
+  related: [p01_kc_intelligence_best_practices]
+density_score: 0.87
+data_source: "https://www.sans.org/blog/osint-for-competitive-intelligence/"
 ---
 # Competitive Intelligence OSINT Techniques
 
 ## Quick Reference
 ```yaml
 topic: competitive_intelligence_osint
-scope: Public source competitor analysis and market intelligence
+scope: Public-source competitor analysis across digital, technical, social, financial vectors
 owner: intelligence_analyst
 criticality: high
+coverage: 70-85% of actionable intel at ~10% of traditional research cost
+cycle_time: 72h for tactical brief; 2 weeks for deep profile
 ```
 
 ## Key Concepts
-- **Passive Collection**: Gathering intelligence without direct interaction or detection by target
-- **Digital Footprinting**: Mapping competitor's online presence across 15+ platform categories
-- **Technical Reconnaissance**: Infrastructure analysis via DNS, WHOIS, SSL certificates, open ports
-- **Social Intelligence**: Employee profiling, corporate hierarchy mapping, culture analysis
-- **Financial Intelligence**: Revenue estimation, funding rounds, investor relationships
-- **Product Intelligence**: Feature analysis, pricing models, roadmap signals
+
+| Technique | Description | Primary Tools |
+|-----------|-------------|---------------|
+| Digital Footprinting | Map competitor presence across 15+ platform categories | SpyFu, SimilarWeb, BuiltWith |
+| Technical Recon | DNS/WHOIS/SSL/open port analysis for infra signals | Shodan, Censys, SecurityTrails |
+| Job Intelligence | Hiring patterns → product roadmap inference | LinkedIn, Glassdoor, Lever/Greenhouse |
+| Web Archive Mining | Historical product/pricing/messaging via snapshots | Wayback Machine, CachedView |
+| Social Graph Analysis | Employee network, org hierarchy, culture signals | LinkedIn Sales Nav, Hunter.io |
+| SEO/Ad Intelligence | Competitor keyword spend, ad copy, landing page tests | SEMrush, Ahrefs, AdSpy |
+| Patent/IP Monitoring | R&D direction via filing patterns | Google Patents, USPTO, Espacenet |
+| Financial Signals | Revenue estimation, funding rounds, investor network | Crunchbase, PitchBook, SEC EDGAR |
+| Review Mining | Feature gaps and NPS proxies from public reviews | G2, Capterra, TrustRadius |
+| Press/PR Tracking | Announcements, partnerships, executive moves | Google Alerts, Mention, Meltwater |
+| Dark Web Monitoring | Leaked credentials, breach mentions, threat intel | Have I Been Pwned, IntelX |
+| App Store Intel | Feature velocity, rating trends, update frequency | AppFollow, SensorTower, AppMagic |
 
 ## Strategy Phases
-1. **Scoping**: Define intelligence requirements, competitor list, legal boundaries (2-4 hours)
-2. **Collection**: Execute 12 OSINT techniques across digital/technical/social domains (8-16 hours)
-3. **Processing**: Correlation analysis, data validation, gap identification (4-6 hours)
-4. **Analysis**: Pattern recognition, threat assessment, strategic implications (6-8 hours)
-5. **Reporting**: Executive summary, tactical recommendations, monitoring plan (2-4 hours)
+
+1. **Define scope**: List 3-7 direct competitors + 2 adjacent disruptors; set priority tiers
+2. **Passive collection** (Days 1-3): Run automated scans — Shodan, BuiltWith, SimilarWeb; no interaction with target
+3. **Active aggregation** (Days 4-7): Archive snapshots, job board scrapes, patent searches, review exports
+4. **Social/org mapping** (Days 8-10): Employee count trends, leadership moves, hiring velocity by dept
+5. **Analysis and scoring**: Apply ACH matrix; score each finding 0-1 confidence; flag low-confidence claims
+6. **Deliverable**: Intelligence brief with raw evidence attached; decision-ready recommendations
 
 ## Golden Rules
-- VERIFY through 3+ independent sources before considering intelligence actionable
-- DOCUMENT collection methodology and source reliability for audit trails
-- RESPECT legal boundaries - avoid accessing private systems or violating ToS
-- AUTOMATE repetitive collection tasks using Maltego, Shodan, or custom scripts
-- UPDATE intelligence profiles quarterly minimum, weekly for high-priority competitors
 
-## Flow
+- COLLECT passively first — active probing (port scans, form submissions) triggers detection and legal risk
+- TIMESTAMP every artifact — OSINT data decays fast; a 90-day-old job posting is stale
+- SEPARATE raw data from inferences — "they posted 12 ML roles" (fact) vs "they're building an AI product" (inference)
+- PRIORITIZE job postings — hiring patterns are 60-90 days ahead of public announcements
+- MONITOR continuous signals — set alerts (Google Alerts, Mention) for real-time competitive events
+
+## Collection Flow
+
 ```text
-[Target ID] -> [Digital Footprint] -> [Technical Recon] -> [Social Intel]
-                      |                      |                  |
-                [Web Presence]         [Infrastructure]   [Employee Data]
-                      |                      |                  |
-                [Content Analysis] -> [Correlation Engine] -> [Intelligence Report]
+[Target List] -> [Phase 1: Passive Scan]
+                       |
+              [Digital + Technical + Social]
+                       |
+              [Phase 2: Active Aggregation]
+                       |
+              [Archive + Patents + Reviews + Financial]
+                       |
+              [Phase 3: Analysis]
+                       |
+              [Confidence Score + ACH Matrix]
+                       |
+              [Intelligence Brief] -> [Decision Input]
 ```
 
-## Comparativo
-| Technique | Time Investment | Intelligence Value | Detection Risk | Skill Required |
-|-----------|----------------|-------------------|----------------|----------------|
-| Website Analysis | 2-4h | Medium | None | Low |
-| Social Media Mining | 4-8h | High | Low | Medium |
-| Technical Reconnaissance | 3-6h | Medium | Low | High |
-| Employee Profiling | 6-12h | High | Medium | Medium |
-| Financial Analysis | 2-4h | Medium | None | Low |
-| Patent/IP Research | 4-8h | High | None | Medium |
+## Technique Comparison
 
-## OSINT Toolkit
-| Category | Tools | Target Data |
-|----------|-------|-------------|
-| Search | Google Dorking, DuckDuckGo, Yandex | Exposed files, directories, subdomains |
-| Social | Sherlock, Social Searcher, Buzzsumo | Employee profiles, corporate culture |
-| Technical | Shodan, Censys, Nmap, DNSRecon | Infrastructure, services, vulnerabilities |
-| Business | Crunchbase, LinkedIn Sales Navigator, SEC EDGAR | Funding, leadership, financial data |
-| Monitoring | Google Alerts, Mention, Brand24 | Real-time competitor activity |
-
-## Collection Targets
-- **Corporate**: Official websites, press releases, SEC filings, patent applications
-- **Technical**: Domain registrations, SSL certificates, IP ranges, technology stack
-- **Social**: LinkedIn profiles, Twitter activity, Glassdoor reviews, conference presentations
-- **Financial**: Funding announcements, revenue estimates, investor decks, job postings
-- **Product**: Feature comparisons, pricing pages, API documentation, user forums
+| Dimension | Technical Recon | Job Intelligence | Financial Intel |
+|-----------|----------------|-----------------|-----------------|
+| Signal type | Infra/stack | Product roadmap | Growth stage |
+| Latency | Real-time | 30-60 day lag | Quarterly |
+| Reliability | High (objective) | Medium (inferred) | Medium (estimated) |
+| Cost | Free (Shodan free tier) | LinkedIn (~$80/mo) | Free (Crunchbase basic) |
+| Legal risk | Low (passive) | Zero | Zero |
+| Best for | Tech stack audit | Roadmap inference | M&A / funding signals |
 
 ## References
-- OSINT Framework: https://osintframework.com/
-- Competitive Intelligence Ethics: https://www.scip.org/page/ethics
-- Related: p01_kc_social_media_intelligence (social platform analysis)
+
+- SANS OSINT for Competitive Intelligence: https://www.sans.org/blog/osint-for-competitive-intelligence/
+- Shodan search engine for internet-connected devices: https://www.shodan.io
+- Related: p01_kc_intelligence_best_practices (ACH methodology, confidence scoring, source grading A1-F6)

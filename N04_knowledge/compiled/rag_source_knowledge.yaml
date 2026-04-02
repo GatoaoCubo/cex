@@ -27,21 +27,10 @@ keywords:
 reliability: high
 format: markdown
 extraction_method: file_glob
-1_source_description: '| Aspect | Details |
-
-  |--------|---------|
-
-  | Scope | Entire local CEX project directory |
-
-  | File Types | Markdown (`.md`) files exclusively |
-
-  | Content | CEX architecture, processes, artifacts, documentation |
-
-  | Authority | Primary source of truth for CEX internals |
-
-  | Nature | Living memory of the system |
-
-  | Update Model | Real-time reflection of current codebase state |'
+density_score: 0.91
+1_source_description: This RAG source encompasses the entire local CEX project directory, with a specific focus on Markdown
+  (`.md`) files. These files constitute the primary, most up-to-date source of truth for all CEX architecture, processes,
+  artifacts, and documentation. They are the living memory of the system.
 2_extraction_method_file_glob:
 - 'Description: The `document_loaders` MCP will use a file globbing mechanism to find all relevant files within the project
   directory specified by the `url`.'
