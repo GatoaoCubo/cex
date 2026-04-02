@@ -64,6 +64,15 @@ cross_nucleus_handoffs:
 - Config YAML structure and validation
 - Cross-nucleus data access rules
 
+## Anti-patterns (DON'T route to N04)
+| Intent | Route Instead | Why |
+|--------|--------------|-----|
+| "debug connection timeout" | N05 | Operational issue, not data design |
+| "write marketing copy about our DB" | N02 | Copy writing, not data layer |
+| "analyze user behavior from DB" | N01 | Research analysis, not schema |
+| "price our SaaS based on DB usage" | N06 | Commercial strategy, not data |
+| "deploy to production environment" | N03 | Infrastructure deployment |
+
 ## Examples
 | Intent | Routes To | Why |
 |--------|----------|-----|
