@@ -35,6 +35,15 @@ KCs → chunk (per embedding_contract) → embed (API call) → insert (Supabase
 | **RAG pipeline** | Retrieve chunks → rank by cosine similarity → inject into LLM context |
 | **Bulk index rebuild** | Process all KCs in batches of 50 → rate-limit API calls → upsert vectors |
 
+## Anti-Patterns
+
+| ❌ Don't | ✅ Do Instead |
+|---------|--------------|
+| **Single large batch** (500+ chunks) | Batch in groups of 50-100 to avoid timeouts |
+| **No duplicate detection** | Check existing chunks before embedding to avoid waste |
+| **Blocking API calls** | Use async/await for parallel embedding requests |
+| **Missing error recovery** | Retry failed embeddings with exponential backoff |
+
 ## Batch Metadata
 ```json
 {"_meta": {"total_kcs": 243, "total_chunks": 890, "model": "text-embedding-3-small", "dimensions": 1536, "generated": "2026-03-31"}}
