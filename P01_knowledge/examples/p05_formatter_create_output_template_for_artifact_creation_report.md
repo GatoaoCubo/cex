@@ -1,0 +1,94 @@
+---
+id: p05_fmt_artifact_creation_report
+kind: formatter
+pillar: P05
+version: "1.0.0"
+created: "2026-04-02"
+updated: "2026-04-02"
+author: "formatter-builder"
+target_format: "markdown"
+input_type: "structured_data"
+rule_count: 8
+domain: "artifact_reporting"
+quality: 8.9
+tags: [formatter, markdown, artifact, report, P05]
+tldr: "Formats artifact creation reports into structured Markdown with metadata, build info, and file details"
+template_engine: "string_format"
+pretty_print: true
+escaping: "none"
+encoding: "utf8"
+locale: "en-US"
+streaming: false
+keywords: [artifact-report, creation-report, markdown-formatter, build-summary]
+density_score: 0.88
+---
+# Artifact Creation Report Formatter
+
+## Formatting Rules
+| Name | Input Field | Transform | Pattern | Options |
+|------|-------------|-----------|---------|---------|
+| title_header | artifact_id | template | `# Artifact Creation Report: {value}` | none |
+| kind_pill | kind | template | `**Kind:** {value}` | none |
+| pillar_badge | pillar | template | `**Pillar:** {value}` | none |
+| builder_info | builder_used | template | `**Builder:** {value}` | none |
+| timestamp_format | build_timestamp | date_format | `**Created:** {value:%Y-%m-%d %H:%M:%S}` | none |
+| quality_badge | quality_score | number_format | `**Quality:** {value:.1f}/10.0` | none |
+| file_location | file_path | template | `**File:** \`{value}\`` | none |
+| size_format | file_size | number_format | `**Size:** {value:,} bytes` | locale: en-US |
+
+## Input Specification
+Type: structured_data
+Structure: Dictionary with artifact metadata and build information.
+Example:
+```json
+{
+  "artifact_id": "p02_agent_sales_assistant",
+  "kind": "agent",
+  "pillar": "P02",
+  "builder_used": "agent-builder",
+  "build_timestamp": "2026-04-02T10:31:36",
+  "quality_score": 9.2,
+  "file_path": "P02_agents/examples/p02_agent_sales_assistant.md",
+  "file_size": 3847
+}
+```
+
+## Output Specification
+Format: markdown
+Example:
+```markdown
+# Artifact Creation Report: p02_agent_sales_assistant
+
+**Kind:** agent
+**Pillar:** P02
+**Builder:** agent-builder
+**Created:** 2026-04-02 10:31:36
+**Quality:** 9.2/10.0
+**File:** `P02_agents/examples/p02_agent_sales_assistant.md`
+**Size:** 3,847 bytes
+```
+
+## Template
+Engine: string_format
+```text
+# Artifact Creation Report: {artifact_id}
+
+**Kind:** {kind}
+**Pillar:** {pillar}
+**Builder:** {builder_used}
+**Created:** {build_timestamp:%Y-%m-%d %H:%M:%S}
+**Quality:** {quality_score:.1f}/10.0
+**File:** `{file_path}`
+**Size:** {file_size:,} bytes
+```
+
+## Edge Cases
+- Null values: render as `N/A` for missing metadata fields
+- Empty strings: render as `N/A` placeholder
+- Special characters: backticks escaped as \` in file paths if needed
+- Overflow: file paths truncated at 80 chars with `...` if too long
+
+## References
+- Markdown specification for formatting consistency
+- Python string formatting for numeric and date display
+- CEX artifact metadata standard for input field definitions
