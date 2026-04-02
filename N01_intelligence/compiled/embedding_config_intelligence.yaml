@@ -16,6 +16,7 @@ tags:
 - vector
 tldr: Specifies the advanced embedding and chunking strategy for the N01 RAG knowledge base, using a specialized model and
   semantic chunking for high-fidelity retrieval of research-grade content.
+density_score: 0.97
 1_purpose: This document defines the vector embedding model and the intelligent chunking strategy for all documents ingested
   into the N01 Research & Intelligence Nucleus knowledge base. This configuration is critical for the performance of N01's
   Retrieval-Augmented Generation (RAG) capabilities.
@@ -84,12 +85,5 @@ level_3_metadata_enrichment: 'Each chunk vector is stored with a rich set of met
   - `keywords`: AI-generated keywords for the chunk''s specific content.'
 5_vector_database_configuration:
 - 'Development/Staging: `FAISS` (local, for rapid iteration)'
-- 'Index parameters: `nlist=4096`, `nprobe=128` for 100K+ vectors'
-- 'Memory requirement: ~500MB RAM per 100K 1024-dim vectors'
-- 'Query latency: <20ms for top-10 results'
 - 'Production: `Weaviate` or `Pinecone` (Managed, for scalability and hybrid search capabilities)'
-- 'HNSW parameters: `M=16`, `ef_construction=200`, `ef_search=100`'
-- 'Expected throughput: 50+ queries/second for 1M+ vector corpus'
-- 'Auto-scaling: Enable for traffic spikes during research periods'
-- 'Index Type: HNSW (Hierarchical Navigable Small World) for a balance of speed and recall accuracy'
-- 'Backup Strategy: Daily vector index snapshots, 30-day retention for disaster recovery'
+- 'Index Type: HNSW (Hierarchical Navigable Small World) for a balance of speed and recall accuracy.'

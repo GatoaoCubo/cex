@@ -87,18 +87,7 @@ automation: '| Dimension | Status | Tool |
   | Clarity & Communication | semi-automated | Readability tools + manual structure review |
 
   | Novelty & Contribution | manual | Expert assessment against existing knowledge base |'
-references_tools: '| Type | Tool/Resource | Purpose |
-
-  |------|---------------|---------|
-
-  | Methodology Checklist | Research Design Validation Checklist (IC-RDV-2024) | Score methodological rigor dimension |
-
-  | Source Verification | OSINT Source Credibility Matrix | Evaluate evidence quality systematically |
-
-  | Citation Tools | Zotero + IC Citation Standards Plugin | Verify citation completeness and format |
-
-  | Readability Metrics | Flesch-Kincaid + Executive Summary Scorecard | Assess clarity and communication quality |
-
-  | Novelty Assessment | Knowledge Gap Analysis Framework (KGAF) | Compare against existing intelligence base |
-
-  | Quality Gates | Intelligence Product Standards (IPS-2024) | Minimum quality thresholds per product type |'
+references:
+- Intelligence Community Research Standards (2024)
+- Academic Research Quality Assessment Framework
+- Strategic Intelligence Analysis Best Practices Guide

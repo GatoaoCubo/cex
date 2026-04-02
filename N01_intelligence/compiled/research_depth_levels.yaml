@@ -15,25 +15,6 @@ tags:
 - scope
 tldr: '3 research depth levels: L1 Scan (5min, 3-5 sources), L2 Analysis (15min, 10-20), L3 Deep-Dive (30min+, 20-50).'
 density_score: 0.92
-selection_guide: 'Choose L1 when:
-
-  - Deadline < 1 hour | Budget < $100 | Scope = "get the gist"
-
-  - Supporting another task | Initial feasibility check
-
-
-  Choose L2 when:
-
-  - Deadline < 1 day | Budget $100-500 | Scope = "make informed decision"
-
-  - Standard research deliverable | Client presentation
-
-
-  Choose L3 when:
-
-  - Deadline > 1 day | Budget $500+ | Scope = "strategic advantage"
-
-  - Market entry | Investment decision | Competitive positioning'
 l1_scan_spec:
 - 'Sources: web only (first page results)'
 - 'Output: 5-10 bullet points'

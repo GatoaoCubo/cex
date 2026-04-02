@@ -16,6 +16,7 @@ tags:
 - ingestion
 tldr: Defines the tiered data sources, ingestion policies, and update frequencies for the N01 Research Nucleus RAG knowledge
   base.
+density_score: 0.97
 1_purpose: This document specifies the authoritative data sources that form the knowledge base for the N01 agent's Retrieval-Augmented
   Generation (RAG) capabilities. The selection, tiering, and ingestion policies are designed to maximize the relevance, accuracy,
   and credibility of N01's analytical outputs.

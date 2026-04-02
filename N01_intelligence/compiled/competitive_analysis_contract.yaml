@@ -17,16 +17,7 @@ tldr: 'Competitor grid schema: N competitors × M dimensions. Required: name, po
   market share estimate.'
 density_score: 0.92
 when_to_use: Market entry, product positioning, pricing strategy, investment decisions, feature prioritization
-grid_structure: 'Format: Spreadsheet or table with competitors as rows, dimensions as columns
-
-
-  | name | positioning | pricing_model | price_range | strengths | weaknesses | market_share_est |
-
-  |------|-------------|---------------|-------------|-----------|------------|------------------|
-
-  | CompA | [position]  | subscription  | $10-50/mo   | [3 items] | [3 items]  | leader          |
-
-  | CompB | [position]  | freemium      | $0-20/mo    | [3 items] | [3 items]  | major           |'
+grid_structure: Competitors (rows) × Dimensions (columns) = Competitive Grid
 required_dimensions: '| Dimension | Type | Description |
 
   |-----------|------|-------------|

@@ -16,19 +16,6 @@ tags:
 - triangulation
 tldr: '8-step research pipeline: brief→scope→search→triangulate→synthesize→format→validate→deliver.'
 density_score: 0.93
-workflow_scope: '| Use This Pipeline When | Don''t Use When | Alternative |
-
-  |------------------------|----------------|-------------|
-
-  | Multi-source research needed | Single document analysis | Direct document processing |
-
-  | Claims need verification | Internal knowledge queries | Knowledge card lookup |
-
-  | Competitive intelligence | Academic literature review | Specialized research tools |
-
-  | Market trend analysis | Quick fact-checking | Search engine query |
-
-  | Unknown domain exploration | Domain expert consultation | Expert interview protocol |'
 pipeline: 'BRIEF → SCOPE → SEARCH → TRIANGULATE → SYNTHESIZE → FORMAT → VALIDATE → DELIVER
 
 

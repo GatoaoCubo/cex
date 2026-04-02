@@ -29,19 +29,19 @@ template: '# SWOT: {{BRAND_NAME}} in {{CATEGORY}}
 
   | Internal | Strengths | Weaknesses |
 
-  | | S1: {{QUANTIFIED_ADVANTAGE}} | W1: {{SPECIFIC_GAP_OR_LIMITATION}} |
+  | | S1: {{ITEM}} | W1: {{ITEM}} |
 
-  | | S2: {{UNIQUE_CAPABILITY}} | W2: {{RESOURCE_CONSTRAINT}} |
+  | | S2: {{ITEM}} | W2: {{ITEM}} |
 
-  | | S3: {{COMPETITIVE_EDGE}} | W3: {{PROCESS_INEFFICIENCY}} |
+  | | S3: {{ITEM}} | W3: {{ITEM}} |
 
   | External | Opportunities | Threats |
 
-  | | O1: {{MARKET_TREND_WITH_TIMING}} | T1: {{COMPETITIVE_RISK}} |
+  | | O1: {{ITEM}} | T1: {{ITEM}} |
 
-  | | O2: {{PARTNERSHIP_OR_EXPANSION}} | T2: {{EXTERNAL_DISRUPTION}} |
+  | | O2: {{ITEM}} | T2: {{ITEM}} |
 
-  | | O3: {{REGULATORY_OR_TECH_SHIFT}} | T3: {{MARKET_HEADWIND}} |
+  | | O3: {{ITEM}} | T3: {{ITEM}} |
 
 
   ## Strategic Implications
@@ -53,22 +53,33 @@ template: '# SWOT: {{BRAND_NAME}} in {{CATEGORY}}
   - ST (use strengths to counter threats): {{STRATEGY}}
 
   - WT (minimize weaknesses, avoid threats): {{STRATEGY}}'
-quality_criteria: '| Quadrant | Good Entry Has | Avoid |
+example_analysis: '| | Helpful | Harmful |
 
-  |----------|----------------|--------|
+  |---|---------|---------|
 
-  | Strengths | Numbers, proof points, competitive differentiators | Vague claims, opinions |
+  | Internal | Strengths | Weaknesses |
 
-  | Weaknesses | Specific gaps, measurable limitations | Everything that''s "not perfect" |
+  | | S1: 50K email subscribers | W1: No mobile app |
 
-  | Opportunities | Timing, market size, clear action path | Wishful thinking, unvalidated assumptions |
+  | | S2: 15 years domain expertise | W2: Limited social media presence |
 
-  | Threats | Probability, impact, timeline | Remote possibilities, paranoia |'
-example_analysis: "| | Helpful | Harmful |\n|---|---------|---------|\n| Internal | Strengths | Weaknesses |\n| | S1: 50K\
-  \ email subscribers | W1: No mobile app |\n| | S2: 15 years domain expertise | W2: Limited social media presence |\n| |\
-  \ S3: High customer retention (85%) | W3: Small dev team (3 people) |\n| External | Opportunities | Threats |\n| | O1: AI\
-  \ integration trend | T1: New funded competitor launched |\n| | O2: Remote work adoption | T2: Economic downturn affecting\
-  \ budgets |\n| | O3: Partnership with Platform X | T3: Regulatory changes in EU |\n\nStrategic Implications:\n- SO: Leverage\
-  \ email list to promote AI-powered features for remote teams\n- WO: Build mobile app to capture mobile-first opportunities\
-  \  \n- ST: Use retention rates as differentiator against new competitors\n- WT: Focus on core market, delay expansion until\
-  \ economy stabilizes"
+  | | S3: High customer retention (85%) | W3: Small dev team (3 people) |
+
+  | External | Opportunities | Threats |
+
+  | | O1: AI integration trend | T1: New funded competitor launched |
+
+  | | O2: Remote work adoption | T2: Economic downturn affecting budgets |
+
+  | | O3: Partnership with Platform X | T3: Regulatory changes in EU |
+
+
+  Strategic Implications:
+
+  - SO: Leverage email list to promote AI-powered features for remote teams
+
+  - WO: Build mobile app to capture mobile-first opportunities
+
+  - ST: Use retention rates as differentiator against new competitors
+
+  - WT: Focus on core market, delay expansion until economy stabilizes'

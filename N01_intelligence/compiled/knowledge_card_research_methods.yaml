@@ -24,12 +24,13 @@ storm_multi_perspective_query_planning: 'Origin: Stanford/UW (Shao et al., 2024)
   from Scratch"
 
 
-  Pattern: Generate questions from multiple expert perspectives. Each perspective reveals data others miss.
+  Core idea: Instead of one query, generate questions from multiple expert perspectives. Each perspective reveals data the
+  others miss.
 
 
   CEX implementation:
 
-  1. Define 5 expert perspectives relevant to niche
+  1. Define 5 expert perspectives relevant to niche (e.g., buyer, seller, analyst, marketer, consumer)
 
   2. Each perspective generates 5-7 atomic sub-questions
 
@@ -38,28 +39,24 @@ storm_multi_perspective_query_planning: 'Origin: Stanford/UW (Shao et al., 2024)
 
   Example — query "mercado de acessorios para gatos Brasil":
 
-  | Perspective | Specific Queries | Data Sources |
+  | Perspective | Sub-questions |
 
-  |-------------|------------------|--------------|
+  |-------------|--------------|
 
-  | Buyer | "coleira GPS gato preço médio 2026?", "ração premium marcas líderes?", "brinquedos interativos mais vendidos?"
-  | Mercado Livre, Amazon BR, reviews |
+  | Buyer | "quais acessorios mais vendidos?", "faixa de preco media?", "frete gratis a partir de quanto?" |
 
-  | Seller | "margem média pet shops 2025?", "top 10 dropshippers gatos?", "custo CPC Google Ads pet?" | SEMrush, similarweb,
-  forums |
+  | Seller | "quem sao os top 10 sellers?", "qual margem media?", "quanto investem em anuncios?" |
 
-  | Analyst | "crescimento mercado pet +12%?", "sazonalidade compras dezembro?", "penetração e-commerce vs físico?" | ABINPET,
-  IBR, relatórios setoriais |
+  | Analyst | "mercado cresceu quanto em 2025?", "sazonalidade?", "quais categorias em alta?" |
 
-  | Marketer | "keywords ''arranhador gato'' volume?", "influencers pet engagement rate?", "#gatosdobrasil trending?" | Keyword
-  Planner, Social Blade |
+  | Marketer | "keywords mais buscadas?", "gaps de conteudo?", "hashtags trending?" |
 
-  | Consumer | "reclamações Reclame Aqui pet?", "gaps produtos inexistentes?", "NPS médio pet shops?" | Reclame Aqui, surveys,
-  social listening |'
+  | Consumer | "reclamacoes mais comuns?", "o que falta no mercado?", "sentimento geral?" |'
 crag_corrective_retrieval_augmented_generation: 'Origin: Yan et al. (2024) — "Corrective Retrieval Augmented Generation"
 
 
-  Pattern: Score each result for quality BEFORE synthesis. Below threshold → trigger fallback or discard.
+  Core idea: Don''t blindly use retrieved data. Score each result for quality BEFORE including in synthesis. Below threshold
+  → trigger fallback or discard.
 
 
   CEX implementation:
@@ -84,8 +81,8 @@ crag_corrective_retrieval_augmented_generation: 'Origin: Yan et al. (2024) — "
 critic_self_correcting_verification: 'Origin: Gou et al. (2024) — "CRITIC: LLMs Can Self-Correct with Tool-Interactive Critiquing"
 
 
-  Pattern: After synthesis, verification model checks claims against source data. Catches hallucinations, numerical errors,
-  contradictions.
+  Core idea: After synthesis, a thinking model (o4-mini) verifies claims against source data. Catches hallucinations, numerical
+  errors, and contradictions.
 
 
   CEX implementation:

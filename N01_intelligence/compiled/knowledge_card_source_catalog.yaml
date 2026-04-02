@@ -85,20 +85,13 @@ rag_internal_knowledge: '| Source | Method | Data |
   | Local docs | Embedding + vector search | Company documents, past research |
 
   | Supabase pgvector | SQL + embedding | Structured internal knowledge |'
-fallback_chains: '| Pipeline | Primary → Secondary → Tertiary → Final | Timeout (sec) | Skip Condition |
+fallback_chains: 'Marketplace: API direct → Firecrawl scrape → Serper site:search → skip
 
-  |----------|----------------------------------------|---------------|----------------|
+  Search: Serper → Brave → Tavily → Exa → skip
 
-  | Marketplace | API direct (5s) → Firecrawl scrape (15s) → Serper site:search (10s) → skip | 30 total | 3 consecutive failures
-  |
+  Social: YouTube API → Serper site:youtube → skip
 
-  | Search | Serper (3s) → Brave (5s) → Tavily (8s) → Exa (10s) | 26 total | No results + 429 error |
-
-  | Social | YouTube API (5s) → Serper site:youtube (8s) → skip | 13 total | API quota exceeded |
-
-  | Trends | pytrends (10s) → Serper trends (8s) → skip | 18 total | Region not supported |
-
-  | Implementation: Try primary → if (timeout OR 4xx error OR empty) → next fallback → log failure reason'
+  Trends: pytrends → Serper trends → skip'
 cost_summary_typical_monthly: '| Source | Cost | Usage |
 
   |--------|------|-------|

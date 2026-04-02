@@ -27,32 +27,30 @@ core_rules_12: '| Category | Rule | Action | Outcome |
 
   |----------|------|--------|---------|
 
-  | Research | Triangulate sources | Cross-verify TechCrunch + Crunchbase + company SEC filings | Confidence scoring |
+  | Research | Triangulate sources | 3+ independent sources per claim | Confidence scoring |
 
   | Research | Score confidence | High (0.90+, 3+ sources), Med (0.70-0.89, 2 sources), Low (<0.70, single) | Risk assessment
   |
 
-  | Research | Cite sources | "TechCrunch, 2026-03-15, reliability: 4/5" format | Verifiability |
+  | Research | Cite sources | URL + date accessed + reliability (1-5) | Verifiability |
 
-  | Research | Label speculation | Prefix claims: "confirmed:" / "likely:" / "speculative:" | Clarity |
+  | Research | Label speculation | "confirmed" / "likely" / "speculative" | Clarity |
 
-  | Research | Validate freshness | Flag "⚠️ 2025 data" for anything >90 days old | Currency |
+  | Research | Validate freshness | Data >90 days gets ⚠️ warning | Currency |
 
-  | Research | Brand lens | Check brand_config.yaml → filter for {BRAND_INDUSTRY} relevance | Relevance |
+  | Research | Brand lens | Check brand_config.yaml first | Relevance |
 
-  | Analysis | Structure competition | "Competitor X: Feature A=Yes, Price=$X, Market Share=Y%" grids | Scannability |
+  | Analysis | Structure competition | Grids (competitors × dimensions), not prose | Scannability |
 
-  | Analysis | Market sizing | "$50B TAM (Gartner) → $5B SAM (our segment) → $500M SOM (reachable)" | Quantification |
+  | Analysis | Market sizing | Include TAM/SAM/SOM + methodology | Quantification |
 
-  | Analysis | Identify trends | "AI automation: rising (+40% mentions), Remote work: stable, NFTs: declining (-80%)" | Directionality
-  |
+  | Analysis | Identify trends | 3+ trends with momentum (rising/stable/declining) | Directionality |
 
-  | Analysis | Synthesize insights | End each finding with "→ Opportunity:" or "→ Threat:" or "→ Neutral:" | Actionability
-  |
+  | Analysis | Synthesize insights | "So what?" for each finding | Actionability |
 
-  | Output | Signal completion | `signal_writer.py(''n01'', ''research_complete'', confidence_avg)` | Notification |
+  | Output | Signal completion | Use signal_writer.py with confidence score | Notification |
 
-  | Output | Match templates | Use research_brief_contract.yaml structure, never freeform prose | Consistency |'
+  | Output | Match templates | Structured output, never free-form prose | Consistency |'
 provider_strategy:
 - 'Gemini: Web search and grounding (primary)'
 - 'Claude: Deep analysis and synthesis (fallback/complement)'

@@ -1,73 +1,65 @@
-id: p12_wf_orchestration_agent_setup
+id: p12_wf_create_orchestration_agent
 kind: workflow
 pillar: P12
 version: 1.0.0
 created: '2026-04-02'
 updated: '2026-04-02'
 author: workflow-builder
-title: Orchestration Agent Setup Workflow
-steps_count: 4
+title: Create Agent for Orchestration Nucleus
+steps_count: 3
 execution: mixed
 agent_nodes:
 - n03
 - n05
-- n07
-timeout: 3600
+timeout: 7200
 retry_policy: per_step
 depends_on: []
 signals:
-- 'On step complete: {agent}_complete signal emitted with quality score and artifact count'
-- 'On workflow complete: orchestration_agent_ready signal with validation results'
-- 'On error: {agent}_error signal, retry per step (max 1), escalate to human if critical components fail'
+- 'On step complete: `{nucleus}_complete` emitted by assigned agent (see signal-builder conventions)'
+- 'On workflow complete: `workflow_complete` with aggregate quality score from all steps'
+- 'On error: `{nucleus}_error` emitted; retry per step (max 2), then escalate to N07 orchestrator'
 spawn_configs:
 - p12_spawn_n03_solo_build
-- p12_spawn_n05_solo_ops
-- p12_spawn_n07_orchestrator
+- p12_spawn_n05_solo_validate
 domain: orchestration
-quality: 8.9
+quality: null
 tags:
 - workflow
 - orchestration
-- agent
-- setup
-- n07
-tldr: '4-step mixed workflow: build orchestration components, deploy agent, configure routing, validate end-to-end orchestration
-  capabilities'
-density_score: 0.89
-purpose: Establishes a complete orchestration agent for the N07 nucleus, enabling autonomous dispatch of tasks across nuclei,
-  signal coordination, and mission lifecycle management. Sets up the runtime environment, deploys the orchestration agent,
-  configures nucleus routing, and validates multi-step orchestration capabilities.
+- agent-creation
+tldr: '3-step mixed workflow: n03 builds orchestration agent artifact, n05 deploys to N07 runtime, n05 validates end-to-end
+  dispatch capabilities'
+density_score: 0.88
+purpose: Establishes a new agent artifact scoped to the N07 orchestration nucleus. Step 1 builds the agent YAML with nucleus
+  routing, dispatch protocol, and signal contracts via N03. Step 2 deploys the artifact and registers it in the N07 runtime
+  environment. Step 3 validates the agent can dispatch tasks, receive signals, and consolidate nucleus outputs correctly.
 steps: ''
-step_1_build_orchestration_components_n03:
+step_1_build_orchestration_agent_n03:
 - 'Agent: n03 (opus builder)'
-- 'Action: Create spawn configs, signal contracts, and handoff templates for orchestration'
-- 'Input: N07 orchestrator requirements and nucleus routing table'
-- 'Output: spawn_config artifacts for each nucleus, signal definitions, handoff templates'
-- 'Signal: components_built with artifact count'
-- 'Depends on: none'
-step_2_deploy_orchestration_environment_n05:
-- 'Agent: n05 (operations)'
-- 'Action: Set up runtime directories, process monitoring, and dispatch infrastructure'
-- 'Input: orchestration components from Step 1'
-- 'Output: configured .cex/runtime/, active spawn dispatch system, monitoring scripts'
-- 'Signal: environment_ready with health status'
-- 'Depends on: Step 1'
-step_3_configure_agent_routing_n03:
-- 'Agent: n03 (opus builder)'
-- 'Action: Build dispatch rules and routing configurations for nucleus selection'
-- 'Input: nucleus capabilities matrix, domain routing patterns'
-- 'Output: dispatch_rule artifacts, router configurations, nucleus assignment logic'
-- 'Signal: routing_configured with rule count'
-- 'Depends on: Step 1'
-step_4_validate_orchestration_capabilities_n07:
-- 'Agent: n07 (orchestrator)'
-- 'Action: Execute test mission across multiple nuclei, verify signal flow and completion'
-- 'Input: deployed environment from Step 2, routing configs from Step 3'
-- 'Output: validated orchestration system, test mission results, performance metrics'
-- 'Signal: orchestration_validated with success metrics'
-- 'Depends on: Steps 2, 3'
+- 'Action: Build agent artifact with N07 routing table, dispatch capabilities, and signal contracts'
+- 'Input: Orchestration intent, nucleus routing definitions from `.claude/rules/n07-orchestrator.md`'
+- 'Output: `p02_agent_orchestration_nucleus.yaml` committed to `P02_agents/`'
+- 'Signal: `n03_complete` with artifact quality score'
+- 'Depends on: none (wave 1)'
+step_2_deploy_and_configure_n05:
+- 'Agent: n05 (codex operations)'
+- 'Action: Register agent in N07 runtime, bind to spawn_configs, update dispatch routing table'
+- 'Input: Agent artifact from Step 1, `.cex/runtime/` configuration state'
+- 'Output: Updated dispatch routing; agent registered in `.cex/runtime/decisions/`'
+- 'Signal: `n05_deploy_complete` with deployment status'
+- 'Depends on: Step 1 (wave 2)'
+step_3_validate_orchestration_capabilities_n05:
+- 'Agent: n05 (codex operations)'
+- 'Action: Run system tests — dispatch smoke test, signal round-trip, consolidate check'
+- 'Input: Deployed agent artifact; test harness from `cex_system_test.py`'
+- 'Output: Validation report with pass/fail per capability'
+- 'Signal: `n05_validate_complete` with test results summary'
+- 'Depends on: Step 2 (wave 2, sequential after deploy)'
 dependencies:
-- N07 orchestrator rules must be loaded in .claude/rules/n07-orchestrator.md
-- Nucleus boot scripts must exist in boot/ directory for each target nucleus
-- Git repository must be initialized with .cex/ runtime structure
-- Brand configuration must be bootstrapped for nucleus context injection
+- 'N03 builder healthy: `python _tools/cex_doctor.py`'
+- '`spawn_configs` for n03 and n05 must exist before workflow starts'
+- '`.cex/runtime/` directory initialized and writable'
+references:
+- 'signal-builder: P12 signal emission conventions'
+- 'spawn-config-builder: `p12_spawn_n03_solo_build`, `p12_spawn_n05_solo_validate`'
+- 'N07 routing rules: `.claude/rules/n07-orchestrator.md`'

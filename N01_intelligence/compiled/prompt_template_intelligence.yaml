@@ -16,7 +16,10 @@ tags:
 tldr: 'Provides standardized, machine-readable prompt templates to trigger the N01 agent''s core research workflows: Literature
   Review, Comparative Analysis, and Trend Analysis.'
 variable_syntax: handlebars
-1_purpose: Machine-readable prompt templates for N01 workflows. Copy template → fill variables → submit to orchestration engine.
+density_score: 0.94
+1_purpose: This artifact provides standardized, structured prompt templates for initiating the core workflows of the N01 Research
+  & Intelligence Nucleus. Using these templates ensures that all necessary parameters are provided to the orchestration engine,
+  allowing it to reliably select the correct workflow and execute the task with high precision.
 2_template_variables: '| Variable               | Type         | Required | Description                                                                                             |
 
   |------------------------|--------------|----------|---------------------------------------------------------------------------------------------------------|

@@ -19,6 +19,7 @@ target_agent: n01_agent_intelligence
 priority: 10
 confidence_threshold: 0.85
 fallback_agent: n04_knowledge
+density_score: 0.95
 1_purpose: This rule identifies and routes tasks that require deep, analytical research and synthesis to the N01 Research
   & Intelligence Nucleus. The goal is to ensure that complex, long-running analytical jobs are handled by the appropriate
   specialist agent (Gemini 2.5-pro, 1M context) instead of a generalist agent.
@@ -96,31 +97,6 @@ fallback_agent: n04_knowledge
   | Single-source summary | "Summarize this one article" | N04 Knowledge |
 
   | Implementation tasks | "How do I configure X?" | N05 Operations |'
-6_fallback_logic: ''
-confidence_score_examples: 'Route to N01 when confidence ≥ 0.85:
-
-  - 0.95: "Conduct competitive analysis of fintech startups using market research data"
-
-  - 0.87: "Research emerging trends in AI safety from recent academic papers"
-
-  - 0.82: "Compare pricing strategies across SaaS competitors" → Routes to N04'
-fallback_conditions: 'Route to `n04_knowledge` fallback when:
-
-  - Low confidence: Semantic score < 0.85 (mixed signals, unclear intent)
-
-  - Agent unavailable: N01 offline or processing queue full (>3 concurrent tasks)
-
-  - Resource constraints: Task requires <10min completion (N01 optimized for deep analysis)
-
-  - Hybrid requests: Contains both research + implementation elements'
-fallback_decision_matrix: '| Condition | N01 Available | Confidence | Route To |
-
-  |-----------|---------------|------------|----------|
-
-  | Pure research task | Yes | ≥0.85 | N01 |
-
-  | Pure research task | No | ≥0.85 | N04 (queue for N01) |
-
-  | Mixed task | Yes | 0.70-0.84 | N04 |
-
-  | Quick lookup | Yes | Any | N04 |'
+6_fallback_logic: If the routing confidence score is below the `confidence_threshold` (0.85), or if the N01 agent is offline
+  or at capacity, the task MUST be routed to the `n04_knowledge` nucleus. N04 serves as the general-purpose knowledge agent
+  and can handle broader, less specialized queries, ensuring system resilience.

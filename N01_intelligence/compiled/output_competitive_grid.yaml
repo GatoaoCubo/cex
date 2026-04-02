@@ -15,17 +15,6 @@ tags:
 - analysis
 tldr: N competitors × M dimensions matrix with positioning, pricing, strengths, weaknesses.
 density_score: 0.92
-research_methodology: '| Step | Action | Sources |
-
-  |------|--------|---------|
-
-  | 1. Identify | Find 3-5 direct competitors | G2, Capterra, industry reports |
-
-  | 2. Gather | Collect pricing, features, positioning | Websites, demo calls, trial accounts |
-
-  | 3. Validate | Cross-reference claims | Customer reviews, case studies, forums |
-
-  | 4. Analyze | Score threat levels and gaps | Feature comparison, market share data |'
 template: '# Competitive Grid: {{CATEGORY}}
 
   Date: {{DATE}} | Depth: {{DEPTH}} | Sources: {{SOURCE_COUNT}}

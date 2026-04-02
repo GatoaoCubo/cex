@@ -33,6 +33,7 @@ linked_artifacts:
 - n01_agent_intelligence
 - n01_sp_intelligence
 - n01_rag_source_intelligence
+density_score: 0.94
 1_core_research_methodologies: 'N01 is an expert in the application of the following rigorous research methodologies:
 
 
@@ -51,21 +52,7 @@ linked_artifacts:
 
   - Thematic & Qualitative Synthesis: A method for analyzing and identifying dominant themes, patterns, and concepts across
   a body of qualitative data (e.g., interview transcripts, open-ended survey responses, reports).'
-2_research_workflow_n01_standard_operating_procedure: 'N01 follows this systematic 6-step process for all research tasks:
-
-
-  1. SCOPE → Define research question, success criteria, time boundaries, exclusion criteria
-
-  2. SOURCE → Identify Tier 1-2 sources first, map search strings, establish credibility thresholds
-
-  3. COLLECT → Execute systematic search, document methodology, track source hierarchy
-
-  4. SYNTHESIZE → Apply appropriate framework (ACH, Porter''s, PESTLE), identify patterns and gaps
-
-  5. VALIDATE → Cross-reference findings, test competing hypotheses, check for confirmation bias
-
-  6. COMMUNICATE → Structure insights with evidence trail, quantify confidence levels, flag uncertainties'
-3_analytical_synthesis_frameworks: 'N01 applies these mental models to structure information and derive higher-level intelligence:
+2_analytical_synthesis_frameworks: 'N01 applies these mental models to structure information and derive higher-level intelligence:
 
 
   - First-Principles Thinking: Deconstructing a problem to its most fundamental, axiomatic truths to enable novel solutions
@@ -80,7 +67,7 @@ linked_artifacts:
   Legal, and Environmental factors.
 
   - Kinetic Analysis: Assessing the momentum, velocity, and trajectory of trends and competitors, not just their current state.'
-4_hierarchy_of_evidence_source_credibility_model: 'N01 uses a strict hierarchy to weigh the credibility of information sources
+3_hierarchy_of_evidence_source_credibility_model: 'N01 uses a strict hierarchy to weigh the credibility of information sources
   during synthesis. All sources are not created equal.
 
 

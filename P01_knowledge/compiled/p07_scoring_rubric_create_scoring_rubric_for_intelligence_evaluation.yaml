@@ -1,17 +1,17 @@
-id: p07_sr_5d_intelligence
+id: p07_sr_intelligence_evaluation
 kind: scoring_rubric
 pillar: P07
-title: 'Rubric: 5D Intelligence Evaluation'
+title: 'Rubric: Intelligence Evaluation'
 version: 1.0.0
-created: '2026-04-01'
-updated: '2026-04-01'
+created: '2026-04-02'
+updated: '2026-04-02'
 author: scoring-rubric-builder
-framework: 5D Intelligence
+framework: 5D-Intel
 target_kinds:
-- intelligence_report
-- research_analysis
-- competitor_intel
-- market_research
+- research_pipeline
+- knowledge_card
+- agent_card
+- context_doc
 dimensions_count: 5
 total_weight: 100
 threshold_golden: 9.5
@@ -19,88 +19,86 @@ threshold_publish: 8.0
 threshold_review: 7.0
 automation_status: semi-automated
 domain: intelligence
-quality: 8.9
+quality: null
 tags:
 - scoring-rubric
-- 5d
 - intelligence
-- evaluation
 - research
-tldr: '5-dimension rubric for intelligence artifacts: research depth 25%, source quality 20%, analysis rigor 25%, insight
-  generation 20%, actionability 10%'
-density_score: 0.87
+- evaluation
+- 5d
+- n01
+tldr: '5D rubric for intelligence artifacts: methodology 25%, evidence 25%, analysis 20%, clarity 15%, actionability 15%'
+density_score: 0.91
 calibration_set:
 - p07_gt_intel_competitor_analysis
-- p07_gt_intel_market_trends
-inter_rater_agreement: 0.82
-appeals_process: Submit to N01-intelligence with supporting sources for re-evaluation within 48h
+- p07_gt_intel_market_brief
+inter_rater_agreement: 0.83
+appeals_process: Submit to N01 chief with counter-evidence; re-score within 48h
 linked_artifacts:
-  primary: intelligence-report-builder
+  primary: p11_qg_intelligence_artifacts
   related:
-  - p11_qg_intelligence
-  - p01_kc_research_methods
-  - n01_intelligence_workflow
-framework_overview: 5D Intelligence evaluates research and analysis artifacts across five orthogonal dimensions that capture
-  the full spectrum of intelligence quality. Designed for N01 Intelligence Nucleus outputs including competitor analysis,
-  market research, trend reports, and strategic briefings. This rubric measures both the rigor of research methodology and
-  the value of insights generated.
+  - p07_gt_intel_competitor_analysis
+  - p01_kc_intelligence_best_practices
+framework_overview: 'Evaluates intelligence artifacts (research pipelines, briefs, analyses, knowledge cards) produced by
+  N01 Intelligence Nucleus. Five orthogonal dimensions capture research rigor, evidence integrity, analytical depth, presentational
+  clarity, and decision-enabling actionability. Designed to complement `p11_qg_intelligence_artifacts` (HARD pass/fail gates)
+  with nuanced SOFT scoring. Primary consumers: N07 orchestrator reviewing N01 outputs, peer reviewers, and automated quality
+  pipelines.'
 dimensions: '| Dimension | Weight | Scale | Criteria | Example (10) | Example (5) |
 
   |-----------|--------|-------|----------|-------------|-------------|
 
-  | Research Depth | 25% | 0-10 | Comprehensiveness of information gathering, multiple angles explored | 15+ sources across
-  4 categories, exhaustive coverage, contradictory views addressed | 6-8 sources from 2 categories, basic coverage, some gaps
+  | Methodological Rigor | 25% | 0-10 | Research design validity, source triangulation, reproducible steps | Explicit method
+  section, 3+ triangulated source types, step-by-step reproducibility | Single method, implicit steps, partial triangulation
   |
 
-  | Source Quality | 20% | 0-10 | Credibility, recency, and relevance of information sources | Primary sources, peer-reviewed
-  papers, recent data (<6mo), industry authorities | Mix of primary/secondary, mostly credible, some older data (6-18mo) |
+  | Evidence Quality | 25% | 0-10 | Source credibility (tier-1 primary > secondary > tertiary), recency within 24 months,
+  citation completeness | 8+ tier-1 sources, all cited with dates, zero unverifiable claims | 3–5 mixed-tier sources, some
+  uncited, 1–2 stale claims |
 
-  | Analysis Rigor | 25% | 0-10 | Logical reasoning, methodology transparency, assumptions stated | Clear methodology, assumptions
-  explicit, logical flow, alternative scenarios considered | Basic methodology described, some assumptions stated, mostly
-  logical |
+  | Analytical Depth | 20% | 0-10 | Inference chain explicitness, competing hypotheses addressed, logical gap count | Full
+  reasoning chain, 2+ alternatives considered, zero unexplained leaps | Conclusions stated without chain, 1 alternative noted,
+  1–2 gaps |
 
-  | Insight Generation | 20% | 0-10 | Novel connections, non-obvious patterns identified, strategic implications | 3+ novel
-  insights, unexpected patterns, clear strategic implications with supporting evidence | 1-2 basic insights, obvious patterns,
-  limited strategic value |
+  | Clarity & Structure | 15% | 0-10 | Section hierarchy, executive summary present, density >= 0.80, no jargon without definition
+  | All required sections, TL;DR ≤ 160ch, density 0.88+, all terms defined | Most sections present, density 0.72, 2–3 undefined
+  terms |
 
-  | Actionability | 10% | 0-10 | Practical recommendations with clear next steps and measurable outcomes | Specific actions
-  with timelines, success metrics, risk mitigation, implementation guidance | General recommendations, vague timelines, limited
-  implementation detail |'
-thresholds: '| Tier | Score | Action |
+  | Strategic Actionability | 15% | 0-10 | Recommendations tied to evidence, quantified impact estimates, decision owner named
+  | 3+ specific recommendations, each with evidence link + owner + metric | 1–2 generic recommendations, no owners, no metrics
+  |'
+thresholds: '| Tier | Score Range | Action |
 
-  |------|-------|--------|
+  |------|-------------|--------|
 
-  | GOLDEN | >= 9.5 | Promote to intelligence archive as reference case, distribute to stakeholders |
+  | GOLDEN | >= 9.5 | Promote to calibration set; use as reference for future scoring |
 
-  | PUBLISH | >= 8.0 | Approve for distribution, add to knowledge base |
+  | PUBLISH | 8.0–9.4 | Merge to intelligence pool; signal N07 complete |
 
-  | REVIEW | >= 7.0 | Return with dimension-specific feedback, request targeted improvements |
+  | REVIEW | 7.0–7.9 | Return to N01 with per-dimension feedback; 1 revision cycle |
 
-  | REJECT | < 7.0 | Redo with new research scope, methodology review required |'
+  | REJECT | < 7.0 | Discard; re-research from scratch with new sources |'
 calibration:
-- 'GOLDEN (9.7): Comprehensive competitor analysis with 18 primary sources, novel market positioning insights, 6-month implementation
-  roadmap with KPIs'
-- 'PUBLISH (8.4): Market trend report with 12 quality sources, solid analysis, actionable recommendations for next quarter'
-- 'REVIEW (7.3): Basic competitor overview with 8 sources, surface-level insights, general recommendations lacking specificity'
-- 'REJECT (5.8): Superficial research with 4 secondary sources, no novel insights, recommendations too vague for implementation'
-automation: '| Dimension | Status | Tool | Notes |
+- 'GOLDEN (9.7): `p07_gt_intel_competitor_analysis` — explicit mixed-methods section, 12 tier-1 sources, full reasoning chain
+  with 3 alternatives, density 0.91, 4 recommendations each with owner + KPI'
+- 'PUBLISH (8.4): Market brief with 7 sources, 2 triangulated methods, clear structure, density 0.83, 2 recommendations with
+  metrics but no named owners'
+- 'REVIEW (7.3): Trend report with 5 sources, single method, conclusions stated without chain, density 0.76, 1 generic recommendation'
+- 'REJECT (5.1): Analysis with 2 secondary sources, no methodology, unsupported claims, density 0.51, no recommendations'
+automation: '| Dimension | Status | Tool |
 
-  |-----------|--------|------|-------|
+  |-----------|--------|------|
 
-  | Research Depth | semi-automated | source_counter.py + manual methodology review | Automated counting, human evaluation
-  of comprehensiveness |
+  | Methodological Rigor | semi-automated | cex_doctor.py (section presence) + manual method review |
 
-  | Source Quality | semi-automated | source_validator.py + credibility assessment | URL verification automated, credibility
-  requires human judgment |
+  | Evidence Quality | semi-automated | cex_hooks.py (citation count, date grep) + manual tier rating |
 
-  | Analysis Rigor | manual | Human expert review | Logical reasoning evaluation requires domain expertise |
+  | Analytical Depth | manual | Human reviewer checks inference chain |
 
-  | Insight Generation | manual | Human expert review | Novelty and strategic value require human assessment |
+  | Clarity & Structure | automated | cex_score.py (density ratio, section count, tldr length) |
 
-  | Actionability | semi-automated | action_parser.py + feasibility review | Action extraction automated, feasibility requires
-  context knowledge |'
+  | Strategic Actionability | semi-automated | Grep for recommendation patterns + manual quality check |'
 references:
-- Intelligence Community Assessment Standards (ODNI 2015)
-- Structured Analytic Techniques Reference Guide (CIA 2019)
-- source_validator.py v3.1 (CEX intelligence validation tools)
-- Research Quality Assessment Framework (Academic Intelligence Alliance 2024)
+- 'AAC&U VALUE Rubrics — Inquiry & Analysis: https://www.aacu.org/initiatives/value-initiative'
+- 'LLM-as-Judge evaluation framework (Zheng et al., 2023): MT-Bench multi-turn evaluation'
+- cex_score.py v2.1 — density and section validation reference implementation

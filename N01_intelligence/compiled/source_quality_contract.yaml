@@ -50,15 +50,6 @@ freshness_scoring: '| Age | Score |
   | 180-365 days | 0.3 |
 
   | >1 year | 0.1 ⚠️ |'
-bias_scoring: '| Bias Level | bias_inv Score |
-
-  |------------|----------------|
-
-  | low | 1.0 |
-
-  | medium | 0.5 |
-
-  | high | 0.0 |'
 implementation_guidelines: '| When to Use | When NOT to Use | Anti-patterns |
 
   |-------------|-----------------|---------------|

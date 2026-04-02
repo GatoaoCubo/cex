@@ -46,27 +46,6 @@ confidence_mapping: '| Evidence | Source Quality | Confidence |
   | 3-4 points | 2+ medium+ | 0.70-0.89 |
 
   | 1-2 points | any | < 0.70 |'
-so_what_guidelines: 'Strong business implications:
-
-  - Link trend to specific revenue/cost impact
-
-  - Identify required actions with timeframes
-
-  - Connect to existing business initiatives
-
-  - Suggest measurable next steps
-
-
-  Format: "Because [trend], we should [action] by [when] to [outcome]"
-
-
-  Examples:
-
-  - "Because AI code generation is rising (0.95 confidence), we should evaluate GitHub Copilot by Q2 to reduce development
-  costs 20%"
-
-  - "Because traditional retail expansion is declining (0.85 confidence), we should pivot marketing spend to digital channels
-  by Q3 to maintain customer acquisition"'
 usage_guidelines: 'When to use:
 
   - Tracking industry shifts that could affect business strategy

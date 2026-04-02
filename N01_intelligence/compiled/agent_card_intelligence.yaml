@@ -19,9 +19,6 @@ routing:
 - 'Priority: 8 (high — research often precedes other nuclei)'
 - 'Keywords: research, competitor, market, trend, analyze, benchmark, compare, investigate, SWOT, pricing, who, what''s happening,
   industry'
-- 'Negative Keywords: build, create, write copy, debug, deploy, course, pricing strategy'
-- 'Decision Criteria: If request contains "analyze", "research", "compare", or "investigate" → N01. If contains "build" or
-  "create" → N03.'
 - 'Dispatch: `bash _spawn/dispatch.sh solo n01 "task"`'
 provider: '| Mode | Provider | When |
 

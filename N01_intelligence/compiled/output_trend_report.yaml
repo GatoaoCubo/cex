@@ -17,7 +17,7 @@ tldr: 'Trend analysis: 3-5 trends with momentum, confidence, evidence, and ''so 
 density_score: 0.91
 template: '# Trend Report: {{DOMAIN}}
 
-  Period: {{Q1 2026|Jan-Mar 2026|Last 90 days}} | Sources: {{5-15}} | Date: {{YYYY-MM-DD}}
+  Period: {{TIMEFRAME}} | Sources: {{COUNT}} | Date: {{DATE}}
 
 
   ## Trends Detected
@@ -25,30 +25,28 @@ template: '# Trend Report: {{DOMAIN}}
 
   ### 1. {{TREND_NAME}} {{📈|📊|📉}}
 
-  - Momentum: {{rising|stable|declining}} ({{±X%}} over {{30|60|90}} days, min ±10% for significance)
+  - Momentum: {{rising|stable|declining}} ({{%_change}} over {{period}})
 
-  - Confidence: {{0.7-1.0 = high|0.4-0.6 = medium|0.1-0.3 = low}} ({{≥5}} data points, {{≥3}} independent sources)
+  - Confidence: {{0.1-1.0}} ({{evidence_count}} data points, {{source_diversity}} sources)
 
-  - Impact: {{high = >10M people|medium = 1-10M|low = <1M}} (affects {{size}} {{developers|consumers|companies}})
+  - Impact: {{high|medium|low}} (affects {{audience_size}} {{audience_type}})
 
-  - Evidence: {{2-3 quantified metrics: growth rates, adoption numbers, market size}} + {{1-2 qualitative signals: expert
-  opinions, case studies}}
+  - Evidence: {{quantified_metrics}} + {{qualitative_signals}}
 
-  - So what?: {{Invest in|Monitor|Pivot away from}} {{specific technology/strategy}} by {{Q2 2026}} or risk {{specific consequence}}
+  - So what?: {{specific_action}} by {{timeframe}} or {{risk/opportunity}}
 
 
   ### 2. {{TREND_NAME}} {{📈|📊|📉}}
 
-  - Momentum: {{rising|stable|declining}} ({{±X%}} over {{30|60|90}} days, min ±10% for significance)
+  - Momentum: {{rising|stable|declining}} ({{%_change}} over {{period}})
 
-  - Confidence: {{0.7-1.0 = high|0.4-0.6 = medium|0.1-0.3 = low}} ({{≥5}} data points, {{≥3}} independent sources)
+  - Confidence: {{0.1-1.0}} ({{evidence_count}} data points, {{source_diversity}} sources)
 
-  - Impact: {{high = >10M people|medium = 1-10M|low = <1M}} (affects {{size}} {{developers|consumers|companies}})
+  - Impact: {{high|medium|low}} (affects {{audience_size}} {{audience_type}})
 
-  - Evidence: {{2-3 quantified metrics: growth rates, adoption numbers, market size}} + {{1-2 qualitative signals: expert
-  opinions, case studies}}
+  - Evidence: {{quantified_metrics}} + {{qualitative_signals}}
 
-  - So what?: {{Invest in|Monitor|Pivot away from}} {{specific technology/strategy}} by {{Q2 2026}} or risk {{specific consequence}}
+  - So what?: {{specific_action}} by {{timeframe}} or {{risk/opportunity}}
 
 
   ## Trend Matrix
@@ -58,20 +56,20 @@ template: '# Trend Report: {{DOMAIN}}
 
   |-------|----------|-----------|--------|-----------------|
 
-  | {{NAME}} | 📈/📊/📉 {{±X%}} | {{0.X}} | H/M/L | {{Invest|Monitor|Pivot}} in {{area}} by {{MMM YYYY}} |
+  | {{NAME}} | 📈/📊/📉 {{%}} | {{0.1-1.0}} | H/M/L | {{verb}} {{target}} by {{date}} |
 
-  | {{NAME}} | 📈/📊/📉 {{±X%}} | {{0.X}} | H/M/L | {{Invest|Monitor|Pivot}} in {{area}} by {{MMM YYYY}} |
+  | {{NAME}} | 📈/📊/📉 {{%}} | {{0.1-1.0}} | H/M/L | {{verb}} {{target}} by {{date}} |
 
 
   ## Projections (6-12 months)
 
-  - {{trend_1}}: {{current adoption: X%}} → {{projected adoption: Y%}} ({{70-90}}% probability, based on {{growth rate pattern}})
+  - {{trend_1}}: {{current_state}} → {{projected_state}} ({{probability}}%)
 
-  - {{trend_2}}: {{current adoption: X%}} → {{projected adoption: Y%}} ({{70-90}}% probability, based on {{growth rate pattern}})
+  - {{trend_2}}: {{current_state}} → {{projected_state}} ({{probability}}%)
 
-  - Wildcards: {{<30% probability scenarios with >10x impact potential}}
+  - Wildcards: {{low_probability_high_impact_scenarios}}
 
 
   ## Sources
 
-  {{Author Last Name YYYY}}: {{Specific Report Title}} - {{survey|study|report}}, n={{sample_size}}, {{MMM YYYY}}'
+  {{CITATION_FORMAT}}: Title - {{data_type}}, {{sample_size}}, {{date}}'

@@ -53,12 +53,12 @@ reliability_scale: '| Score | Source Type | Examples |
 
   |-------|-------------|----------|
 
-  | 5/5 | Peer-reviewed, official | nature.com, sec.gov, company.com/investors |
+  | 5/5 | Peer-reviewed, official | Nature, .gov sites, company 10-Ks |
 
-  | 4/5 | Reputable media, analysts | mckinsey.com, techcrunch.com, bloomberg.com |
+  | 4/5 | Reputable media, analysts | McKinsey, TechCrunch, Bloomberg |
 
-  | 3/5 | Industry blogs, newsletters | a16z.com, stratechery.com, substack.com |
+  | 3/5 | Industry blogs, newsletters | a16z blog, Stratechery |
 
-  | 2/5 | Social media, forums | twitter.com, reddit.com, linkedin.com |
+  | 2/5 | Social media, forums | Twitter, Reddit, LinkedIn |
 
-  | 1/5 | Unverified, anonymous | medium.com/@random, blog comments |'
+  | 1/5 | Unverified, anonymous | Medium randos, comment sections |'

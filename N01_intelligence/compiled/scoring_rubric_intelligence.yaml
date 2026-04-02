@@ -14,19 +14,6 @@ tags:
 - quality
 tldr: '5-dimension scoring for research output: triangulation, freshness, actionability, structure, depth.'
 density_score: 0.92
-quick_assessment_checklist: '| Dimension | Quick Check (Y/N) |
-
-  |-----------|-------------------|
-
-  | Triangulation | ☐ Key claims cite 2+ sources? ☐ Sources are independent? ☐ Conflicts acknowledged? |
-
-  | Freshness | ☐ All data <90 days? ☐ Dates clearly stated? ☐ Trends vs point-in-time noted? |
-
-  | Actionability | ☐ "So what?" answered per finding? ☐ Confidence levels stated? ☐ Next steps clear? |
-
-  | Structure | ☐ Executive summary present? ☐ Tables/grids used? ☐ Scannable in 60 seconds? |
-
-  | Depth | ☐ Edge cases considered? ☐ Context provided? ☐ Projections included? |'
 scoring_examples: '| Dimension | Score 3 Example | Score 7 Example | Score 10 Example |
 
   |-----------|-----------------|-----------------|-------------------|

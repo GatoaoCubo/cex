@@ -28,15 +28,15 @@ optional_fields: '| Field | Type | Default | Description |
 
   |-------|------|---------|-------------|
 
-  | scope | string | null | Constraints: "Brazil 2024-2026", "B2B SaaS only", "startups <50 employees" |
+  | scope | string | null | Geographic, temporal, or domain constraints |
 
-  | competitors | list[string] | [] | Specific competitors: ["Notion", "Airtable", "ClickUp"] |
+  | competitors | list[string] | [] | Specific competitors to include |
 
-  | sources_preferred | list[string] | [] | Source types: ["web", "academic", "industry_reports", "govt_data", "social"] |
+  | sources_preferred | list[string] | [] | Preferred source types: web, academic, industry, govt |
 
-  | sources_excluded | list[string] | [] | Avoid: ["reddit", "wikipedia", "press_releases"] |
+  | sources_excluded | list[string] | [] | Sources to avoid |
 
-  | deadline | datetime | null | ISO format: "2026-04-15T18:00:00Z" |
+  | deadline | datetime | null | When results needed |
 
   | brand_context | boolean | true | Inject brand_config.yaml context |
 

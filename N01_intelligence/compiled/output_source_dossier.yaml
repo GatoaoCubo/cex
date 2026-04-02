@@ -94,19 +94,12 @@ when_to_use:
 - Academic research prep (rank papers and journals)
 - Due diligence investigations (score source credibility)
 - Content strategy research (evaluate topic authorities)
-authority_scoring: '| Score | Source Type | Examples |
-
-  |-------|-------------|----------|
-
-  | 5 | Primary/Official | Government agencies, peer-reviewed journals |
-
-  | 4 | Established | Industry leaders, major news outlets |
-
-  | 3 | Professional | Trade publications, expert blogs |
-
-  | 2 | General | Standard websites, unverified sources |
-
-  | 1 | Low-Trust | Social media, anonymous posts |'
+quality_criteria:
+- 'Authority 5: Government agencies, peer-reviewed journals'
+- 'Authority 4: Industry leaders, established news outlets'
+- 'Authority 3: Professional blogs, trade publications'
+- 'Authority 2: General websites, unverified sources'
+- 'Authority 1: Social media, anonymous posts'
 anti_patterns:
 - Including sources without reliability scores
 - Mixing different research topics in one dossier

@@ -28,17 +28,13 @@ template: '# Market Snapshot: {{CATEGORY}}
 
   |--------|-------|--------|-----------|
 
-  | TAM (Total Addressable) | ${{VALUE}}B | {{PRIMARY_SOURCE}} | High/Medium/Low |
+  | TAM | {{VALUE}} | {{SOURCE}} | {{SCORE}} |
 
-  | SAM (Serviceable Addressable) | ${{VALUE}}B | {{ANALYSIS_METHOD}} | High/Medium/Low |
+  | SAM | {{VALUE}} | {{SOURCE}} | {{SCORE}} |
 
-  | SOM (Serviceable Obtainable) | ${{VALUE}}M | {{MODEL_BASIS}} | High/Medium/Low |
+  | SOM | {{VALUE}} | {{SOURCE}} | {{SCORE}} |
 
-  | Growth Rate (3yr CAGR) | {{PERCENT}}% | {{RESEARCH_FIRM}} | High/Medium/Low |
-
-
-  Confidence Levels: High (multiple sources, recent data) | Medium (single source, extrapolated) | Low (estimates, limited
-  data)
+  | Growth Rate (CAGR) | {{PERCENT}}% | {{SOURCE}} | {{SCORE}} |
 
 
   ## Segments
@@ -47,23 +43,23 @@ template: '# Market Snapshot: {{CATEGORY}}
 
   |---------|------|--------|-------------|
 
-  | {{SEG1}} | ${{VALUE}}B | {{RATE}}% | Not present/Exploring/Targeting/Strong fit |
+  | {{SEG1}} | {{VALUE}} | {{RATE}} | {{POSITION}} |
 
 
   ## Key Metrics
 
-  - Active players: {{COUNT}}+ vendors
+  - Active players: {{COUNT}}
 
-  - Avg. ticket: ${{VALUE}}/{{UNIT}}/{{PERIOD}}
+  - Avg. ticket: {{VALUE}}
 
   - Dominant model: {{BUSINESS_MODEL}}
 
-  - Regulatory: {{STATUS}} (required/emerging/minimal)
+  - Regulatory: {{STATUS}}
 
 
   ## Sources
 
-  {{NUMBERED_CITATIONS}}'
+  {{CITATIONS}}'
 example_output: '# Market Snapshot: SaaS Project Management
 
   Geography: North America | Date: 2026-04-01 | Sources: 6
@@ -75,17 +71,13 @@ example_output: '# Market Snapshot: SaaS Project Management
 
   |--------|-------|--------|-----------|
 
-  | TAM (Total Addressable) | $47.2B | Gartner 2026 | High |
+  | TAM | $47.2B | Gartner 2026 | High |
 
-  | SAM (Serviceable Addressable) | $12.8B | Internal analysis | Medium |
+  | SAM | $12.8B | Internal analysis | Medium |
 
-  | SOM (Serviceable Obtainable) | $380M | Market model | Medium |
+  | SOM | $380M | Market model | Medium |
 
-  | Growth Rate (3yr CAGR) | 11.2% | IDC Research | High |
-
-
-  Confidence Levels: High (multiple sources, recent data) | Medium (single source, extrapolated) | Low (estimates, limited
-  data)
+  | Growth Rate (CAGR) | 11.2% | IDC Research | High |
 
 
   ## Segments
