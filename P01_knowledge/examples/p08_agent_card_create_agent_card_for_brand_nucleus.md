@@ -6,80 +6,120 @@ version: "1.0.0"
 created: "2026-04-02"
 updated: "2026-04-02"
 author: "agent-card-builder"
-name: "BRAND_NUCLEUS"
-role: "Brand & Commercial nucleus — brand identity, voice, positioning, monetization strategy, pricing models"
+name: "brand_nucleus"
+role: "Brand identity discovery, codification, and revenue engineering — Phase 1: brand_config.yaml production; Phase 2: pricing, funnels, course architecture."
 model: "sonnet"
-mcps: ["brand", "commerce"]
-domain_area: "brand-commercial"
+mcps: [fetch, brain]
+domain_area: "brand-identity-monetization"
 boot_sequence:
-  - "Load brand_config.yaml"
-  - "Initialize brand MCP"
-  - "Initialize commerce MCP"
-  - "Validate brand consistency"
-  - "Check dispatch queue"
+  - "Load brand_config.yaml from .cex/brand/ (fail if missing)"
+  - "Initialize fetch MCP (web research, competitor lookup)"
+  - "Initialize brain MCP (verify Ollama running, index freshness)"
+  - "Read N06_commercial/identity/prime_brand_architect.md"
+  - "Check dispatch queue (.cex/runtime/handoffs/brand_*.md)"
+  - "Emit ready signal"
 constraints:
-  - "Never contradict established brand identity"
-  - "All output must match brand voice and tone"
-  - "Pricing changes require explicit approval"
-  - "Cannot modify core brand values"
-dispatch_keywords: ["brand", "voice", "monetization", "pricing", "commercial", "identity", "positioning", "revenue"]
-tools: ["brand_validator", "price_optimizer", "voice_analyzer", "revenue_calculator"]
-dependencies: ["brand_config.yaml", "commerce_api"]
+  - "NEVER produce brand artifacts before brand_config.yaml is confirmed valid (13 required fields)"
+  - "NEVER self-score quality — quality field always null"
+  - "NEVER generate revenue artifacts that contradict monetization_model in brand_config.yaml"
+  - "NEVER commit to main without running brand_validate.py"
+  - "NEVER impersonate other nuclei — route code tasks to N05, research to N01"
+  - "Max 1 concurrent instance to prevent brand_config write conflicts"
+dispatch_keywords: [brand, identity, voice, tone, monetization, pricing, funnel, course, revenue, cta, copy, positioning, persona, audience, consistency]
+tools: [fetch_url, brain_query, brand_validate, brand_propagate, brand_audit, brand_inject, cex_compile]
+dependencies: [brain_mcp, fetch_mcp, brand_config.yaml, cex_compile.py, brand_validate.py]
 scaling:
-  max_concurrent: 2
-  timeout_minutes: 45
-  memory_limit_mb: 3072
+  max_concurrent: 1
+  timeout_minutes: 60
+  memory_limit_mb: 4096
 monitoring:
-  health_check: "brand_validator('consistency_check')"
+  health_check: "python _tools/brand_validate.py --check"
   signal_on_complete: true
   alert_on_failure: true
 runtime: "claude"
 mcp_config_file: ".mcp-brand.json"
-flags: ["--brand-mode", "--commercial"]
-domain: "brand-commercial"
-quality: 9.0
-tags: ["agent_card", "brand", "commercial", "monetization", "nucleus"]
-tldr: "Brand nucleus spec — brand identity and commercial strategy, sonnet model, brand+commerce MCPs, monetization focus."
+flags: ["--no-chrome", "-p"]
+domain: "brand-identity-monetization"
+quality: 9.1
+tags: [agent_node, brand, monetization, N06, brand-identity, revenue]
+tldr: "Brand nucleus spec — N06, sonnet model, fetch+brain MCPs, brand identity discovery + revenue engineering."
 density_score: 1.0
 ---
 ## Role
-Brand & Commercial nucleus responsible for maintaining brand identity, voice consistency, positioning strategy, and monetization optimization. Primary function: ensure all brand expressions align with core identity while maximizing commercial effectiveness. Does not handle technical implementation, market research, or operational deployment.
+
+Brand nucleus (N06) owns the brand-identity-monetization domain. Primary function: Phase 1 — extract brand signals, produce brand_config.yaml via brand discovery dialogue (12-15 questions), and propagate to all nuclei. Phase 2 — produce revenue artifacts: pricing models, sales funnels, course architectures, and brand-aligned CTAs.
+
+Does not handle: research papers (N01), code deployment (N05), knowledge card indexing (N04), or general artifact construction (N03). All outbound cross-domain tasks are routed via orchestrator signal.
 
 ## Model & MCPs
-- **Model**: sonnet (optimal balance for creative brand work and commercial analysis)
-- **brand**: brand identity management, voice validation, consistency checking
-- **commerce**: pricing optimization, revenue modeling, monetization strategy
+
+- **Model**: `claude-sonnet` — brand discovery requires empathy + structure; revenue engineering requires persuasion + iterative refinement. Escalates to `opus` for complex multi-brand architectures or brand-from-scratch with < 3 input signals.
+- **fetch**: Web research for competitor analysis, market positioning scans, and pricing benchmarks.
+- **brain**: Knowledge search for existing brand artifacts, consistency deduplication, and prior brand session recall.
+
+| MCP | Transport | Required | Fallback |
+|-----|-----------|----------|---------|
+| fetch | stdio | true | null (no fetch = no competitor data) |
+| brain | stdio | true | null (no brain = no deduplication) |
 
 ## Boot Sequence
-1. Load brand_config.yaml (core identity, values, voice parameters)
-2. Initialize brand MCP (verify brand assets, load voice guidelines)
-3. Initialize commerce MCP (connect pricing APIs, load revenue models)
-4. Validate brand consistency (check current brand state)
-5. Check dispatch queue (.cex/runtime/handoffs/brand_*.md)
+
+1. **Load brand_config.yaml** — read `.cex/brand/brand_config.yaml`; if missing or invalid, enter Phase 1 discovery mode immediately. (est. 2s)
+2. **Initialize fetch MCP** — verify API connectivity; log warning if unreachable but continue. (est. 3s)
+3. **Initialize brain MCP** — verify Ollama running + FAISS index freshness; fail hard if unavailable. (est. 4s)
+4. **Load prime identity** — read `N06_commercial/identity/prime_brand_architect.md` for role, constraints, and brand discovery protocol. (est. 1s)
+5. **Check dispatch queue** — scan `.cex/runtime/handoffs/brand_*.md` for pending tasks. (est. 1s)
+6. **Emit ready signal** — `write_signal('n06', 'ready', 1.0)`. (est. 1s)
+
+Total boot time: ~12s
 
 ## Dispatch
-Keywords: brand, voice, monetization, pricing, commercial, identity, positioning, revenue
-Routing: orchestrator matches brand-related keywords and commercial strategy requests
-Priority: brand consistency checks take precedence over new commercial initiatives
+
+**Keywords**: brand, identity, voice, tone, monetization, pricing, funnel, course, revenue, cta, copy, positioning, persona, audience, consistency
+
+**Routing**: Orchestrator (N07) matches incoming task keywords against `dispatch_keywords`. Brand-domain tasks are always routed to N06 before any other nucleus.
+
+**Input format**: Handoff file at `.cex/runtime/handoffs/brand_{MISSION}.md`. Inline prompts accepted only for single-artifact requests (< 200 chars).
+
+**Priority**: `high` for brand_config.yaml production (blocks all other nuclei); `normal` for revenue artifacts.
 
 ## Constraints
-- Brand integrity: never contradict established brand identity or core values
-- Voice consistency: all output must match defined brand voice and tone guidelines  
-- Commercial boundaries: pricing changes require explicit stakeholder approval
-- Identity protection: cannot modify fundamental brand positioning without governance
+
+| Type | Constraint | Rationale |
+|------|-----------|-----------|
+| HARD | No artifact production before valid brand_config.yaml | Generic output without brand context defeats the system |
+| HARD | quality: null on all produced artifacts | Peer review assigns quality; self-scoring is forbidden |
+| HARD | No commits to main without brand_validate.py passing | Prevents corrupted brand state from propagating |
+| HARD | No cross-domain execution (code/research) | Domain purity; coupling causes cascade failures |
+| SOFT | Prefer brand_propagate.py over manual template edits | Propagation is idempotent; manual edits cause drift |
+| SOFT | Minimize fetch credits — cache competitor data in brain | Cost control; brain deduplication prevents redundant scrapes |
 
 ## Dependencies
-- brand_config.yaml (core brand specification)
-- commerce_api (pricing data, revenue analytics)
-- No sibling nucleus dependencies (operates independently within brand domain)
+
+| Dependency | Type | Required | Notes |
+|-----------|------|----------|-------|
+| brain MCP | external service | YES | Ollama + FAISS; N06 cannot deduplicate without it |
+| fetch MCP | external service | YES | Competitor analysis requires live web access |
+| brand_config.yaml | file | YES | Gates all Phase 2 artifact production |
+| brand_validate.py | tool | YES | Must pass before any commit |
+| brand_propagate.py | tool | REC | Push brand context to all nuclei post-discovery |
+| N07 orchestrator | sibling nucleus | REC | Issues dispatch; receives completion signals |
+| N03 builder | sibling nucleus | REC | Receives brand-aligned artifact construction tasks |
 
 ## Scaling & Monitoring
-- Max 2 concurrent instances (brand consistency requires coordination)
-- 45-minute timeout per brand/commercial session
-- Signal on complete: emits p12_sig_brand_nucleus_complete.json
-- Alert on failure: immediate notification for brand consistency violations
+
+- **Max concurrent**: 1 instance — brand_config.yaml writes are non-atomic; parallel instances cause race conditions.
+- **Timeout**: 60 minutes — brand discovery dialogue can extend; revenue artifact batches may run long.
+- **Memory**: 4096 MB — large brand books and competitor research sets require headroom.
+- **Health check**: `python _tools/brand_validate.py --check` — exits 0 if brand_config.yaml valid, 1 if missing or malformed.
+- **Signal on complete**: `write_signal('n06', 'complete', score)` — N07 monitors for this to trigger consolidation.
+- **Alert on failure**: logs error to `.cex/runtime/signals/n06_error_{timestamp}.json` + notifies orchestrator.
 
 ## References
-- Brand Guidelines Documentation v2.0
-- Monetization Strategy Framework
-- Revenue Model Specifications
+
+- `.cex/brand/brand_config.yaml` — runtime brand state (13 required fields)
+- `_tools/brand_validate.py` — validation entry point
+- `_tools/brand_propagate.py` — cross-nucleus brand injection
+- `archetypes/builders/agent-card-builder/` — this artifact's builder ISOs
+- Newman, Sam. *Building Microservices* (2015) — single-domain ownership pattern
+- `.claude/rules/n06-commercial.md` — N06 nucleus routing rules
