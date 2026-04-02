@@ -3,65 +3,56 @@ id: p05_fmt_engineering_report
 kind: formatter
 pillar: P05
 version: "1.0.0"
-created: "2026-04-01"
-updated: "2026-04-01"
-author: "formatter-builder"
+created: "2026-04-02"
+updated: "2026-04-02"
+author: "builder_agent"
 target_format: "markdown"
 input_type: "structured_data"
-rule_count: 6
-domain: "engineering_reporting"
-quality: 8.9
-tags: [formatter, markdown, engineering, P05, report, status]
-tldr: "Formats engineering project data into structured Markdown report with status, metrics, timeline, and team sections"
+rule_count: 7
+domain: "engineering_reports"
+quality: 9.1
+tags: [formatter, engineering, report, markdown, P05]
+tldr: "Formats engineering report data into structured Markdown with metrics, test results, deployment status, and performance benchmarks"
 template_engine: "string_format"
 pretty_print: true
 escaping: "none"
 encoding: "utf8"
-locale: "pt-BR"
+locale: "en-US"
 streaming: false
-keywords: [engineering-report, status-formatter, markdown-formatter, project-display]
-density_score: 0.89
+keywords: [engineering-report, metrics, test-results, deployment-status, performance-benchmarks]
+density_score: 0.91
 ---
 # Engineering Report Formatter
 
 ## Formatting Rules
 | Name | Input Field | Transform | Pattern | Options |
 |------|-------------|-----------|---------|---------|
-| project_header | project_name, status | template | `# {project_name}\n**Status:** {status}` | uppercase_status: true |
-| metrics_table | metrics | tabulate | `\| Metric \| Value \| Target \|\n\|-----\|-----\|-----\|\n{rows}` | precision: 2, align: right |
-| timeline_section | milestones | template | `## Timeline\n{milestone_list}` | date_format: "dd/MM/yyyy" |
-| team_section | team_members | template | `## Team\n{member_list}` | role_display: true |
-| issues_list | current_issues | template | `## Current Issues\n{issue_bullets}` | priority_sort: true |
-| summary_section | summary_data | template | `## Summary\n**Progress:** {progress}%\n**Next Steps:** {next_steps}` | progress_bar: true |
+| metrics_table | project_metrics | tabulate | `| {metric} | {value} | {target} | {status} |` | headers: true, align: center |
+| test_summary | test_results | stringify | `**{passed}/{total}** tests passed ({percentage}%)` | precision: 1 |
+| build_status | build_info | stringify | `Build #{build_number}: {status} ({duration}s)` | uppercase_status: true |
+| deploy_status | deployment | stringify | `**{environment}**: {status} @ {timestamp}` | timestamp_format: ISO |
+| issues_count | issue_summary | stringify | `🐛 {bugs} bugs • ⚠️ {warnings} warnings • 📝 {tasks} tasks` | emoji: true |
+| perf_benchmarks | performance | tabulate | `| {test_name} | {baseline} | {current} | {delta} |` | delta_color: true |
+| velocity_data | sprint_metrics | stringify | `Sprint {number}: {completed}/{planned} stories ({velocity} pts)` | round_velocity: 0 |
 
 ## Input Specification
 Type: structured_data
-Structure: Engineering project object with name, status, metrics, milestones, team, issues, and summary fields.
+Structure: Engineering report object with metrics, test results, build info, deployment status, issues, performance data, and sprint metrics.
 Example:
 ```json
 {
-  "project_name": "Sistema de Autenticação",
-  "status": "em desenvolvimento",
-  "metrics": [
-    {"name": "Cobertura de Testes", "value": 87.5, "target": 90},
-    {"name": "Performance (ms)", "value": 245, "target": 200}
+  "project_metrics": [
+    {"metric": "Code Coverage", "value": "87.5%", "target": "85%", "status": "✅"},
+    {"metric": "Technical Debt", "value": "12h", "target": "<16h", "status": "✅"}
   ],
-  "milestones": [
-    {"name": "MVP", "date": "2026-04-15", "status": "em andamento"},
-    {"name": "Beta", "date": "2026-05-01", "status": "planejado"}
+  "test_results": {"passed": 847, "total": 852, "percentage": 99.4},
+  "build_info": {"build_number": 1247, "status": "success", "duration": 285},
+  "deployment": {"environment": "production", "status": "deployed", "timestamp": "2026-04-02T10:30:00Z"},
+  "issue_summary": {"bugs": 3, "warnings": 12, "tasks": 28},
+  "performance": [
+    {"test_name": "API Response", "baseline": "120ms", "current": "98ms", "delta": "-18%"}
   ],
-  "team_members": [
-    {"name": "Ana Silva", "role": "Tech Lead"},
-    {"name": "Carlos Santos", "role": "Backend Dev"}
-  ],
-  "current_issues": [
-    {"title": "Latência no banco", "priority": "alta"},
-    {"title": "Documentação API", "priority": "média"}
-  ],
-  "summary_data": {
-    "progress": 65,
-    "next_steps": "Implementar cache Redis"
-  }
+  "sprint_metrics": {"number": 42, "completed": 23, "planned": 25, "velocity": 89.2}
 }
 ```
 
@@ -69,67 +60,73 @@ Example:
 Format: markdown
 Example:
 ```markdown
-# Sistema de Autenticação
-**Status:** EM DESENVOLVIMENTO
+# Engineering Report
 
-## Metrics
-| Metric | Value | Target |
-|--------|-------|--------|
-| Cobertura de Testes | 87,50 | 90,00 |
-| Performance (ms) | 245,00 | 200,00 |
+## Project Metrics
+| Metric | Value | Target | Status |
+|--------|-------|--------|--------|
+| Code Coverage | 87.5% | 85% | ✅ |
+| Technical Debt | 12h | <16h | ✅ |
 
-## Timeline
-- **MVP** (15/04/2026) - em andamento
-- **Beta** (01/05/2026) - planejado
+## Test Results
+**847/852** tests passed (99.4%)
 
-## Team
-- Ana Silva (Tech Lead)
-- Carlos Santos (Backend Dev)
+## Build Status
+Build #1247: SUCCESS (285s)
 
-## Current Issues
-- 🔴 Latência no banco (alta)
-- 🟡 Documentação API (média)
+## Deployment Status
+**production**: deployed @ 2026-04-02T10:30:00Z
 
-## Summary
-**Progress:** 65% [████████████████████████████████████████████████████████████████░░░░░░░░░░░░░░░░░░░░]
-**Next Steps:** Implementar cache Redis
+## Issues Summary
+🐛 3 bugs • ⚠️ 12 warnings • 📝 28 tasks
+
+## Performance Benchmarks
+| Test Name | Baseline | Current | Delta |
+|-----------|----------|---------|-------|
+| API Response | 120ms | 98ms | -18% |
+
+## Sprint Velocity
+Sprint 42: 23/25 stories (89 pts)
 ```
 
 ## Template
 Engine: string_format
 ```markdown
-# {project_name}
-**Status:** {status_upper}
+# Engineering Report
 
-## Metrics
-| Metric | Value | Target |
-|--------|-------|--------|
-{metrics_rows}
+## Project Metrics
+{metrics_table}
 
-## Timeline
-{milestone_items}
+## Test Results
+{test_summary}
 
-## Team
-{team_items}
+## Build Status
+{build_status}
 
-## Current Issues
-{issue_items}
+## Deployment Status
+{deploy_status}
 
-## Summary
-**Progress:** {progress}% {progress_bar}
-**Next Steps:** {next_steps}
+## Issues Summary
+{issues_count}
+
+## Performance Benchmarks
+{perf_benchmarks}
+
+## Sprint Velocity
+{velocity_data}
 ```
 
 ## Edge Cases
-- Null values: render as `N/A` in tables and `-` in lists
-- Empty arrays: show section header with "Nenhum item" placeholder
-- Special characters: pipe `|` escaped as `\|` in table cells
-- Number formatting: Brazilian locale (87,50 not 87.5) for decimal values
-- Date overflow: truncate milestone names at 30 chars with ellipsis
-- Progress > 100%: cap at 100% and add warning icon
+- Null values: render as `N/A` placeholder in tables and `-` in summary strings
+- Empty arrays: render section as "No data available" 
+- Missing performance data: omit Performance Benchmarks section entirely
+- Zero values: display as `0` rather than empty string
+- Special characters: emoji preserved in issues summary, pipe `|` escaped as `\|` in table cells
+- Long metric names: truncate at 25 chars with ellipsis in tables
+- Negative deltas: prefix with `-` and color red if delta_color enabled
+- Timestamp formatting: ISO 8601 format with timezone, fallback to raw string if invalid
 
 ## References
-- Markdown table specification (CommonMark)
-- Brazilian number formatting (ABNT NBR ISO 80000-1)
-- Engineering metrics best practices (DORA metrics)
-- Status reporting templates (Agile/Scrum)
+- CommonMark table specification for Markdown table rendering
+- ISO 8601 timestamp format standard
+- Engineering metrics best practices (DORA metrics, code coverage standards)
