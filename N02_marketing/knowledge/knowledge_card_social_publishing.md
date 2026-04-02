@@ -53,12 +53,25 @@ Automated social publishing transforms manual posting into a config-driven pipel
 ### Rotation & Cooldown
 Without rotation, the algorithm shows the same product repeatedly → audience fatigue → unfollows. **Cooldown** = minimum days before same item can be re-posted.
 
-| Niche | Recommended Cooldown |
-|-------|---------------------|
-| Fashion | 4-7 days (seasonal variety) |
-| Food | 2-3 days (daily specials OK) |
-| SaaS | 7-14 days (evergreen content) |
-| Pet | 3-5 days (product + edu mix) |
+| Niche | Recommended Cooldown | Rotation Strategy | Implementation |
+|-------|---------------------|------------------|----------------|
+| Fashion | 4-7 days | Seasonal buckets | Group by season, rotate within bucket |
+| Food | 2-3 days | Meal-type rotation | Breakfast/lunch/dinner/snack cycles |
+| SaaS | 7-14 days | Feature highlighting | Rotate through product features |
+| Pet | 3-5 days | Product+lifestyle mix | Alternate products with care tips |
+
+**Platform-Specific Rules:**
+- **Instagram Stories**: 24h cooldown (disappears anyway)
+- **TikTok**: 3-5 day cooldown (fast-moving feed)
+- **LinkedIn**: 14+ day cooldown (professional audience notices repeats)
+- **Facebook**: 7-10 day cooldown (longer content lifespan)
+
+**Technical Implementation:**
+```
+last_posted_date + cooldown_days < current_date = eligible
+Track per item_id + platform_id combination
+Fallback: if no eligible content, extend search by 1 day
+```
 
 ### Caption Generation
 LLM generates captions from: product data + brand persona + tone + content type + platform constraints. Fallback to template if LLM fails.
