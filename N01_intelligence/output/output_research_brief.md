@@ -55,8 +55,12 @@ density_score: 0.91
 
 ## Example Requests
 
-**Good**: "Analyze SaaS pricing models in fintech (2022-2026) for Series A companies targeting SMBs"
-**Bad**: "Find the CEO of Stripe" (too simple, use Google)
+| Category | Good Example | Bad Example | Why |
+|----------|-------------|-------------|-----|
+| **Competitor Analysis** | "Analyze SaaS pricing models in fintech (2022-2026) for Series A companies targeting SMBs" | "Research competitors" | Specific scope vs vague |
+| **Market Research** | "US market size for AI coding tools, enterprise segment, with 3-year growth projections" | "How big is the AI market?" | Defined geography, segment, timeframe |
+| **Trend Analysis** | "Remote work adoption rates by industry (2020-2026) focusing on retention metrics" | "Research remote work trends" | Specific metrics and timeline |
+| **Quick Facts** | Use Google directly | "Find the CEO of Stripe" | Too simple for research brief |
 
 ## Anti-Patterns
 - Vague questions: "Research competitors" → Specify which aspects, geography, timeframe
