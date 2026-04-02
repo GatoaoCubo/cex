@@ -2,86 +2,108 @@
 id: p01_kc_orchestration_best_practices
 kind: knowledge_card
 pillar: P01
-title: "Container Orchestration Best Practices"
+title: "LLM Multi-Agent Orchestration Best Practices"
 version: "1.0.0"
-created: "2026-04-01"
-updated: "2026-04-01"
-author: "builder"
-domain: orchestration
-quality: 8.9
-tags: [orchestration, kubernetes, containers, devops, scalability, knowledge]
-tldr: "Container orchestration requires resource limits, health checks, rolling updates, and pod disruption budgets for production reliability"
-when_to_use: "When deploying containerized applications at scale requiring automated management"
-keywords: [orchestration, kubernetes, containers, scaling, deployment]
+created: "2026-04-02"
+updated: "2026-04-02"
+author: "builder_agent"
+domain: multi_agent_orchestration
+quality: 9.2
+tags: [orchestration, multi-agent, dispatch, handoff, nucleus, coordination, knowledge]
+tldr: "Orchestrators route, never build; dispatch via handoff files; GDP gates grid; Gemini nuclei require N07 consolidation for git."
+when_to_use: "Designing or debugging multi-nucleus dispatch pipelines and agent coordination protocols"
+keywords: [orchestration, dispatch, handoff, nucleus, consolidate, signal]
 long_tails:
-  - How to configure resource limits for Kubernetes pods
-  - Best practices for rolling deployments in container orchestration
-  - Container health check patterns for production workloads
+  - How to dispatch multiple agents in parallel without race conditions
+  - When to use solo dispatch vs grid dispatch in multi-agent systems
+  - How to consolidate Gemini nucleus output that cannot git commit
 axioms:
-  - ALWAYS set resource requests and limits on every container
-  - NEVER deploy without readiness and liveness probes
-  - IF scaling > 10 replicas THEN use horizontal pod autoscaler
+  - ALWAYS write handoff file before dispatch — never pass task as CLI arg
+  - NEVER build artifacts as orchestrator — route all construction to N03
+  - IF nucleus is Gemini THEN N07 must consolidate (git commit + signal) after completion
+  - ALWAYS run GDP before any grid dispatch — manifest before autonomous execution
 linked_artifacts:
-  primary: null
-  related: []
-density_score: 0.87
-data_source: "https://kubernetes.io/docs/concepts/configuration/overview/"
+  primary: p03_system_prompt_create_system_prompt_for_orchestration_nucleus
+  related: [p12_workflow_create_agent_for_orchestration_nucleus]
+density_score: 0.88
+data_source: "CEX .claude/rules/n07-orchestrator.md + _spawn/dispatch.sh protocol"
 ---
-# Container Orchestration Best Practices
+# LLM Multi-Agent Orchestration Best Practices
 
 ## Quick Reference
 ```yaml
-topic: container_orchestration
-scope: Production deployment patterns (Kubernetes, Docker Swarm, ECS)
-owner: devops_team
+topic: multi_agent_orchestration
+scope: N07 CEX orchestrator + general LLM agent coordination
+owner: builder_agent
 criticality: high
+dispatch_modes: [solo, grid, status, stop]
+coordination: handoff_files + signals + git_log
 ```
 
 ## Key Concepts
-- **Resource Management**: CPU/memory requests define scheduling; limits prevent overconsumption
-- **Health Monitoring**: Liveness probes restart unhealthy pods; readiness probes control traffic routing
-- **Update Strategy**: Rolling deployments maintain availability; blue-green eliminates downtime
-- **Pod Disruption**: PodDisruptionBudgets ensure minimum replicas during node maintenance
-- **Affinity Rules**: Node affinity controls placement; pod anti-affinity spreads replicas
+- **Orchestrator role**: Routes and monitors — never builds artifacts directly
+- **Handoff file**: `.cex/runtime/handoffs/{MISSION}_{nucleus}.md` — task contract
+- **GDP**: User decides WHAT before autonomous execution; manifest = source of truth
+- **Signal**: Nucleus emits `complete|retry|fail` to `.cex/runtime/signals/`
+- **Consolidation**: N07 post-dispatch verify + git commit (Gemini only) + archive
+- **Nucleus autonomy**: After dispatch with manifest, nucleus NEVER re-asks user
+
+## Dispatch Modes
+| Mode | Command | Use Case | Parallel |
+|------|---------|----------|---------|
+| solo | `dispatch.sh solo n03 "task"` | 1 nucleus, 1 task | No |
+| grid | `dispatch.sh grid MISSION` | Up to 6 nuclei | Yes |
+| status | `dispatch.sh status` | Monitor live nuclei | — |
+| stop | `dispatch.sh stop` | Kill all + clear PIDs | — |
+
+## Nucleus Capability Matrix
+| Nucleus | CLI | Can Git | Can Signal | Sub-Agents |
+|---------|-----|---------|-----------|-----------|
+| N03 | claude opus | YES | YES | 5 |
+| N02 | claude sonnet | YES | YES | 5 |
+| N06 | claude sonnet | YES | YES | 5 |
+| N01 | gemini 2.5-pro | NO | NO | — |
+| N04 | gemini 2.5-pro | NO | NO | — |
+| N05 | codex GPT | NO | NO | — |
 
 ## Strategy Phases
-1. **Design**: Define resource requirements, dependencies, and scaling triggers
-2. **Deploy**: Apply manifests with probes, limits, and disruption budgets
-3. **Monitor**: Track metrics via Prometheus; log aggregation via Fluentd/ELK
-4. **Scale**: Horizontal Pod Autoscaler based on CPU/memory/custom metrics
-5. **Update**: Rolling deployments with max surge/unavailable parameters
+1. **GDP gate**: Identify subjective decisions → present to user → write manifest
+2. **Handoff**: Write `.cex/runtime/handoffs/{MISSION}_{nucleus}.md` with decisions
+3. **Dispatch**: `bash _spawn/dispatch.sh solo|grid MISSION_NAME`
+4. **Monitor**: Check `git log` + `.cex/runtime/signals/` + `dispatch.sh status`
+5. **Consolidate**: Verify → stop → commit Gemini output → signal → archive
 
 ## Golden Rules
-- SET requests=limits for guaranteed QoS class on critical workloads
-- CONFIGURE readiness probe delay > application startup time
-- LIMIT blast radius with namespaces and network policies
-- BACKUP persistent volumes before major updates
-- MONITOR resource utilization at 70% triggers scaling events
-
-## Anti-Patterns
-- **No Resource Limits**: Containers consume all node memory causing OOMKilled cascades
-- **Missing Readiness Probes**: Traffic routed to starting pods causing 502 errors
-- **Recreate Strategy**: All pods killed simultaneously causing total downtime
-- **Single Replica**: No redundancy during node failures or updates
-- **Root Filesystem**: Containers run as root creating security vulnerabilities
+- ROUTE: build → N03, research → N01/N04, copy → N02, code → N05, sales → N06
+- HANDOFF: task as file content, NEVER as CLI arg (quote-hell on CMD)
+- MANIFEST: `decision_manifest.yaml` is single source of truth for all choices
+- GEMINI: N01/N04 produce output but cannot git/signal — N07 MUST consolidate
+- AUTONOMY: dispatched nucleus reads manifest, executes, signals — no questions
 
 ## Flow
 ```text
-[Manifest] -> [Scheduler] -> [Node Selection] -> [Pod Creation]
-                |                                     |
-           [Resource Check]                    [Health Probes]
-                |                                     |
-           [Placement Decision]                [Traffic Routing]
+[Goal] -> [GDP: user decides WHAT] -> [Write decision_manifest.yaml]
+       -> [Write handoff files per nucleus]
+       -> [dispatch.sh grid MISSION]
+              |-> [N03: build artifacts] -> [git commit] -> [signal: complete]
+              |-> [N01: research]        -> [output only] -> [N07 consolidates]
+              |-> [N05: code review]     -> [output only] -> [N07 consolidates]
+       -> [Monitor: signals + git log]
+       -> [Consolidate: verify + git + archive]
 ```
 
-## Comparativo
-| Platform | Orchestrator | Health Checks | Auto-scaling | Networking |
-|----------|-------------|---------------|-------------|------------|
-| Kubernetes | kube-scheduler | Liveness/Readiness | HPA/VPA | CNI plugins |
-| Docker Swarm | Swarm manager | HEALTHCHECK | Global/replicated | Overlay networks |
-| ECS | EC2/Fargate | Target group health | Auto Scaling | VPC/ALB |
-| Nomad | Nomad scheduler | Health checks | Horizontal scaling | Consul Connect |
+## Anti-Patterns
+| Anti-Pattern | Consequence |
+|-------------|-------------|
+| Orchestrator builds artifact | 8F bypassed; quality ungated |
+| Task passed as CLI arg | CMD quote-hell; nucleus starts without task |
+| Grid without manifest | Nuclei diverge; subjective choices unresolved |
+| Skip consolidation for Gemini | Work lost; no git history; no signals |
+| Nucleus re-asks user post-dispatch | GDP violated; autonomous loop breaks |
+| PIDs not tracked | `stop` misses orphan processes |
 
 ## References
-- Source: https://kubernetes.io/docs/concepts/configuration/overview/
-- Related: https://12factor.net/processes (stateless process patterns)
+- Source: https://docs.anthropic.com/en/docs/agents-and-tools/orchestration
+- Related: p03_system_prompt_create_system_prompt_for_orchestration_nucleus
+- Related: p12_workflow_create_agent_for_orchestration_nucleus
+- CEX rules: `.claude/rules/n07-orchestrator.md` + `.claude/rules/guided-decisions.md`
