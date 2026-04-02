@@ -60,3 +60,36 @@ density_score: 0.92
 ## Sources
 {{TOP_5_CITATIONS}}
 ```
+
+## Example
+
+```markdown
+# Executive Summary: AI Customer Service Implementation
+**For**: CEO & COO | **Date**: 2026-04-01 | **Research Depth**: L2
+
+## TL;DR
+AI chatbot can reduce support costs by 40% ($2M annually) while improving response time by 80%. Recommend 6-month phased rollout starting Q2.
+
+## Key Findings
+1. Current support costs $5M/year with 48hr avg response — confidence: HIGH
+2. AI handles 70% of tier-1 inquiries with 95% accuracy — confidence: HIGH  
+3. Customer satisfaction increases 15% with faster resolution — confidence: MED
+
+## Recommendations
+| Priority | Action | Expected Impact | Effort |
+|----------|--------|----------------|--------|
+| P1 | Deploy AI for tier-1 support | $2M cost savings | M |
+| P2 | Retrain 40% of support staff | Reduced attrition | L |
+
+## Risks
+- Customer pushback on AI: mitigation = hybrid human handoff
+- Integration complexity: mitigation = phased rollout with rollback plan
+
+## Next Steps
+1. Vendor selection (30 days)
+2. Pilot program Q2 (90 days)
+3. Full rollout Q3-Q4
+
+## Sources
+Salesforce State of Service 2026, Zendesk Benchmark 2025, Internal Support Analytics
+```
