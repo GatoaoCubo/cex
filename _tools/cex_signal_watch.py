@@ -111,7 +111,8 @@ def find_signals(expected: set, since: str) -> dict:
 def log(msg: str, quiet: bool = False):
     if not quiet:
         ts = datetime.now().strftime("%H:%M:%S")
-        print(f"[{ts}] [WATCH] {msg}", flush=True)
+        safe = str(msg).encode("ascii", "replace").decode("ascii")
+        print(f"[{ts}] [WATCH] {safe}", flush=True)
 
 
 def main():
@@ -187,20 +188,20 @@ def main():
         for nucleus in pending:
             pid = pids.get(nucleus)
             if pid and not is_pid_alive(pid):
-                log(f"⚠️  {nucleus.upper()} CRASHED (PID:{pid} dead, no signal)", args.quiet)
+                log(f"WARN: {nucleus.upper()} CRASHED (PID:{pid} dead, no signal)", args.quiet)
                 result["nuclei"][nucleus] = {"status": "crashed", "pid": pid, "alive": False}
 
         # All received?
         if received >= expected:
             result["status"] = "complete"
-            log(f"✅ All {len(expected)} nuclei signaled complete!", args.quiet)
+            log(f"ALL DONE: {len(expected)} nuclei signaled complete!", args.quiet)
             break
 
         # All pending are crashed?
         crashed = {n for n in pending if result.get("nuclei", {}).get(n, {}).get("status") == "crashed"}
         if crashed and crashed == pending:
             result["status"] = "all_pending_crashed"
-            log(f"❌ All pending nuclei crashed: {crashed}", args.quiet)
+            log(f"FATAL: All pending nuclei crashed: {crashed}", args.quiet)
             break
 
         # Sleep

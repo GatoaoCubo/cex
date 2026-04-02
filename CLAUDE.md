@@ -100,6 +100,8 @@ User decides WHAT → LLM builds HOW → verify together.
 | `cex_query.py` | TF-IDF builder discovery (361L) |
 | `cex_auto.py` | Self-healing flywheel (scan, plan, cycle) |
 | `cex_mission.py` | Goal → decomposed artifacts |
+| `cex_mission_runner.py` | **Autonomous orchestration**: waves → grid → poll → stop → gate → consolidate |
+| `cex_signal_watch.py` | **Blocking signal poll**: waits for nuclei completion, detects crashes |
 | `cex_batch.py` | Multi-intent processing from file |
 | `cex_compile.py` | .md → .yaml compilation (--all) |
 | `cex_doctor.py` | Builder health check (105 PASS) |

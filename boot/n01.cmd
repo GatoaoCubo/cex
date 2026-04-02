@@ -15,3 +15,9 @@ set GOOGLE_AI_API_KEY=
 
 :: ALWAYS interactive — task comes from handoff file, never CLI args
 gemini -m gemini-2.5-pro --yolo "Voce e N01 Research Nucleus do CEX. Dominio: research, analise, papers, competidores. SE EXISTIR .cex/runtime/handoffs/n01_task.md LEIA E EXECUTE IMEDIATAMENTE."
+
+:: Post-exit: auto-commit + signal (Gemini can't do these itself)
+echo [N01] CLI exited. Auto-committing and signaling...
+cd /d "%CEX_ROOT%"
+git add N01_intelligence/ 2>nul && git commit -m "[N01] auto-commit on CLI exit" --no-verify 2>nul
+python _tools/signal_writer.py n01 complete 9.0 "" 2>nul

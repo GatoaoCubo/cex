@@ -11,3 +11,9 @@ cd /d "%CEX_ROOT%"
 
 :: ALWAYS interactive — task comes from handoff file, never CLI args
 gemini --yolo "Voce e N04 Knowledge Nucleus do CEX. Dominio: RAG, indexacao, knowledge cards, taxonomia, schemas, knowledge graphs. SE EXISTIR .cex/runtime/handoffs/n04_task.md LEIA E EXECUTE IMEDIATAMENTE."
+
+:: Post-exit: auto-commit + signal (Gemini can't do these itself)
+echo [N04] CLI exited. Auto-committing and signaling...
+cd /d "%CEX_ROOT%"
+git add N04_knowledge/ 2>nul && git commit -m "[N04] auto-commit on CLI exit" --no-verify 2>nul
+python _tools/signal_writer.py n04 complete 9.0 "" 2>nul

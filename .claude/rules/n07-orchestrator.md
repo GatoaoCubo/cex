@@ -40,10 +40,35 @@ bash _spawn/dispatch.sh stop
 
 1. **DETECT**: Check `git log`, `.cex/runtime/signals/`, process alive?
 2. **VERIFY**: `python _tools/cex_doctor.py`
-3. **STOP**: `bash _spawn/dispatch.sh stop`
-4. **COMMIT** (if Gemini): `git add N0x_*/ && git commit -m "[N0x] ..."` (Gemini can't git)
-5. **SIGNAL** (if Gemini): `python -c "from _tools.signal_writer import write_signal; ..."`
-6. **REPORT**: Output consolidation summary
+3. **STOP**: `bash _spawn/dispatch.sh stop` (kills CMD + child tree recursively)
+4. **COMMIT** (if Gemini): `git add N0x_*/ && git commit -m "[N0x] ..."` (Gemini auto-signals on exit now via boot wrapper)
+5. **REPORT**: Output consolidation summary
+
+## Autonomous Mission Execution (NEW)
+
+For full end-to-end autonomous operation:
+
+```bash
+# After /guide decisions are locked and handoffs are written:
+python _tools/cex_mission_runner.py --plan .cex/runtime/plans/plan_X.md --mission NAME --timeout 3600
+
+# This does: dispatch grid → poll signals (BLOCKING) → stop processes → quality gate → consolidate
+# Multi-wave: automatically chains waves, no user intervention needed
+```
+
+### Signal Watch (blocking poll)
+```bash
+python _tools/cex_signal_watch.py --expect n01,n02,n03,n04,n05,n06 --timeout 3600 --poll 30
+# Blocks until all nuclei signal or timeout. Detects crashes via PID health check.
+```
+
+### Process Cleanup (v3.0 — recursive kill-tree)
+```bash
+powershell -File _spawn/spawn_stop.ps1           # kill everything
+powershell -File _spawn/spawn_stop.ps1 -DryRun   # preview
+# 3-step: PID file → window title fallback → orphan scan
+# Kills cmd + claude.exe + node.exe(gemini) + conhost + MCP servers
+```
 
 ## Boot Architecture
 

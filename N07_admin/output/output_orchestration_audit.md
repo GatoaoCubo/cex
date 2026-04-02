@@ -176,15 +176,15 @@ This works because when gemini CLI exits, the CMD continues to the next line.
 
 ## TECHNICAL DEBT SUMMARY
 
-| # | Gap | Severity | Fix | Effort |
+| # | Gap | Severity | Fix | Status |
 |---|-----|----------|-----|--------|
-| G1 | No signal polling | CRITICAL | `cex_signal_watch.py` | 3h |
-| G2 | No wave chaining | CRITICAL | `cex_mission_runner.py` | 6h |
-| G3 | No quality gate post-grid | MEDIUM | Add to consolidation flow | 2h |
-| G4 | No crash recovery in pi | MEDIUM | Timeout + PID check in signal_watch | 2h |
-| G5 | spawn_grid no report-back | LOW | grid_status.json output | 1h |
-| G6 | Gemini can't signal | LOW | Post-exit wrapper in boot scripts | 1h |
-| | **TOTAL** | | | **15h** |
+| G1 | No signal polling | CRITICAL | `cex_signal_watch.py` | DONE |
+| G2 | No wave chaining | CRITICAL | `cex_mission_runner.py` | DONE |
+| G3 | No quality gate post-grid | MEDIUM | Built into mission_runner | DONE |
+| G4 | No crash recovery in pi | MEDIUM | PID health check in signal_watch | DONE |
+| G5 | spawn_grid no report-back | LOW | grid_status.json written by stop+watch+runner | DONE |
+| G6 | Gemini can't signal | LOW | Post-exit wrapper in boot/n01.cmd, boot/n04.cmd | DONE |
+| | **ALL 6 GAPS** | | | **RESOLVED** |
 
 ---
 
