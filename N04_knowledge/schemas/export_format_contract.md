@@ -43,3 +43,18 @@ VALUES ('p01_kc_example', 'knowledge_card', 'P01', 'domain', 'Title', 'tldr', 'b
 id,kind,pillar,domain,title,tags,density,quality,word_count,created
 p01_kc_example,knowledge_card,P01,domain,Title,"tag1;tag2",0.92,null,350,2026-03-31
 ```
+
+## Usage Guidelines
+
+| Format | When to Use | Implementation |
+|--------|-------------|----------------|
+| **YAML** | Internal CEX compilation, artifact storage | `cex_compile.py --all` |
+| **JSONL** | LLM fine-tuning datasets, prompt-response pairs | `cex_export.py --format=jsonl --filter=kind:kc` |
+| **SQL** | Supabase sync, vector search, production DB | `cex_export.py --format=sql --table=kcs` |
+| **CSV** | ML analysis, Excel reports, data science | `cex_export.py --format=csv --fields=metadata` |
+
+**Anti-patterns:**
+- Using YAML for external integrations (not portable)
+- JSONL without instruction quality validation
+- SQL exports without proper escaping
+- CSV with unescaped commas in content fields
