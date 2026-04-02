@@ -40,17 +40,14 @@ testing_tools: [NVDA, VoiceOver, JAWS, axe-core, Lighthouse]
 
 ## Key Concepts
 
-**WCAG 2.1 Level AA Compliance**: Four principles (POUR) - Perceivable, Operable, Understandable, Robust. Level AA requires 1.4.3 contrast ratio 4.5:1 for normal text, 3:1 for large text, plus keyboard accessibility and time limits.
-
-**ARIA Labeling Strategy**: aria-label provides accessible name when visible text insufficient. aria-describedby references additional description elements. aria-labelledby references multiple label sources. Use sparingly - semantic HTML preferred.
-
-**Focus Management**: Programmatic focus control via ref.current.focus(). Focus trapping in modals using focus-trap or Radix Dialog. Skip-to-content link as first focusable element. Restore focus to trigger element on modal close.
-
-**Keyboard Navigation Patterns**: Tab order follows visual layout. Enter activates buttons/links. Space toggles checkboxes, activates buttons. Arrow keys navigate menus/tabs/grids. Escape closes overlays. Home/End navigate to boundaries.
-
-**Screen Reader Semantics**: Live regions (aria-live="polite") announce dynamic content. Landmark roles (banner, navigation, main, contentinfo) provide page structure. Heading hierarchy (h1-h6) creates outline. Lists (ul/ol) group related items.
-
-**Color Independence**: Never rely solely on color to convey information. Add icons, patterns, or text indicators. Use sufficient contrast ratios. Support high contrast mode. Provide pattern/texture alternatives to color coding.
+| Concept | Requirements | Implementation | When to Use |
+|---------|-------------|----------------|-------------|
+| **WCAG 2.1 AA** | 4.5:1 contrast normal text, 3:1 large text, keyboard access | Test with axe-core, manual keyboard nav | All production interfaces |
+| **ARIA Labels** | Descriptive names when HTML insufficient | `aria-label="Close dialog"`, `aria-describedby="help-text"` | Complex widgets, dynamic content |
+| **Focus Management** | Visible indicator, logical tab order | `ref.current.focus()`, focus-trap libs | Modals, SPAs, dynamic content |
+| **Keyboard Nav** | Tab/Shift+Tab, Enter/Space, Escape, arrows | Event handlers for all interactive elements | All user interfaces |
+| **Screen Readers** | Live regions, landmarks, heading hierarchy | `aria-live="polite"`, semantic HTML | Dynamic content, page structure |
+| **Color Independence** | Never color-only information | Icons + text, patterns, sufficient contrast | Data visualization, status indicators |
 
 ## Patterns
 
