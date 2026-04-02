@@ -1,19 +1,19 @@
 ---
-id: p09_rate_limit_config_create_knowledge_card_about_api_rate_limiting_and_retry_patt
+id: p01_kc_api_rate_limiting_retry_patterns
 kind: knowledge_card
-type: kind
+type: infrastructure
 pillar: P01
 title: "API Rate Limiting and Retry Patterns"
-version: 1.1.0
-created: "2026-04-02"
-updated: "2026-04-02"
-author: "rate-limit-config-builder"
+version: 1.0.0
+created: 2026-04-02
+updated: 2026-04-02
+author: rate-limit-config-builder
 domain: rate_limit_config
 quality: 9.1
-tags: [knowledge_card, rate_limit_config, rpm, tpm, retry, 429, provider, budget, backoff, api-limits, token-bucket, sliding-window]
-tldr: "RPM/TPM/RPD ceilings per provider tier; honour Retry-After on 429 with exponential backoff; budget_usd + alert_threshold: 0.8 prevents billing surprises."
-when_to_use: "When designing LLM API integrations, configuring rate_limit_config artifacts, or implementing retry/backoff strategies against provider 429 responses"
-keywords: [rate limit, rpm, tpm, rpd, budget, tier, retry, 429, backoff, anthropic, openai, litellm, token bucket, sliding window, concurrent, alert threshold]
+tags: [rate-limiting, retry-patterns, rpm, tpm, exponential-backoff, 429, anthropic, openai, litellm]
+tldr: "API rate limits enforce RPM/TPM/RPD ceilings via token bucket or sliding window; 429s require exponential backoff with jitter — declare limits in rate_limit_config, handle retries in runtime_rule."
+when_to_use: "When integrating LLM provider APIs, configuring retry logic for 429 responses, or building multi-provider rate-aware clients"
+keywords: [rate limit, rpm, tpm, rpd, concurrent, token bucket, sliding window, 429, exponential backoff, jitter, retry, anthropic, openai, litellm]
 density_score: 1.0
 ---
 # API Rate Limiting and Retry Patterns
@@ -26,71 +26,78 @@ Rate limits are provider-enforced ceilings on API consumption: **RPM** (requests
 
 ## Provider Limits by Tier
 
-| Provider | Tier | RPM | TPM | RPD | Concurrent | Retry-After |
-|----------|------|----:|----:|----:|----------:|------------|
-| Anthropic | Free | 5 | 20,000 | 50 | 5 | 60 s |
-| Anthropic | Build | 50 | 80,000 | 1,000 | 10 | 60 s |
-| Anthropic | Scale | 4,000 | 400,000 | 100,000 | 50 | 60 s |
-| OpenAI | Free | 3 | 40,000 | — | 3 | header |
-| OpenAI | Tier 1 | 500 | 200,000 | — | 20 | header |
-| OpenAI | Tier 2 | 5,000 | 2,000,000 | — | 50 | header |
-| OpenAI | Tier 5 | 10,000 | 10,000,000 | — | 100 | header |
-| LiteLLM | Proxy | configurable | configurable | configurable | configurable | passthrough |
+| Provider | Tier | RPM | TPM | RPD | Concurrent | retry_after |
+|----------|------|-----|-----|-----|------------|-------------|
+| Anthropic | Free | 5 | 20,000 | 50 | 5 | 60s |
+| Anthropic | Build | 50 | 80,000 | 1,000 | 10 | 60s |
+| Anthropic | Scale | 4,000 | 400,000 | 100,000 | 50 | 60s |
+| OpenAI | Free | 3 | 40,000 | — | 3 | varies |
+| OpenAI | Tier 1 | 500 | 200,000 | — | 50 | varies |
+| OpenAI | Tier 2 | 5,000 | 2,000,000 | — | 100 | varies |
+| OpenAI | Tier 5 | 10,000 | 10,000,000 | — | 500 | varies |
+| LiteLLM | Proxy | configurable | configurable | configurable | configurable | pass-through |
 
-Unlock gates: Anthropic Build after $5 spend; OpenAI Tier 1 after $5, Tier 2 after $50, Tier 5 after $1,000. Anthropic enforces RPD hard; OpenAI Tier 1+ does not.
+RPD: Anthropic enforces daily caps; OpenAI Tier 1+ does not. Verify against provider dashboard per model.
 
-## Retry Patterns on 429
+## Enforcement Algorithms
 
-**Priority order**: (1) read `Retry-After` response header, (2) exponential backoff with jitter, (3) fixed wait as last resort.
+**Token bucket (TPM):** Each token consumed removes from a bucket that refills at `tpm/60` per second. Burst allowed up to bucket cap. When bucket empties → 429.
 
-| Strategy | Formula | Base | Cap | Provider |
-|----------|---------|-----:|----:|----------|
-| Header-first | wait = `Retry-After` value | — | — | Anthropic (always 60 s) |
-| Exponential + jitter | `min(base × 2ⁿ, cap) + rand(0, base)` | 2 s | 64 s | OpenAI, no header |
-| Fixed | constant | 5 s | — | Low-volume, simple clients |
+**Sliding window (RPM):** Counts requests in the trailing 60 seconds. Exceeding RPM → 429 immediately, regardless of token state.
 
-Jitter prevents thundering herd when multiple callers hit the same rate window simultaneously. Max retries: 3–5. After max attempts, surface the error — never loop indefinitely on 429.
+Both run independently. A workflow can be RPM-compliant but TPM-blocked (large prompts per request) or TPM-compliant but RPM-blocked (many small requests). Profiling both axes is mandatory before production.
 
-**TPM 429 vs RPM 429**: TPM exhaustion clears as tokens refill (~1 s); RPM exhaustion requires waiting out the 60 s window. Distinguish by checking `error.type` in the provider response body.
+## Retry Patterns for 429
 
-## Budget Controls
-
-```yaml
-budget_usd: 200.0
-alert_threshold: 0.8    # alert at $160 — 20% reaction window before hard stop
-overage_policy: block   # requests blocked at $200; reset at billing cycle start
+**Exponential backoff with full jitter** (recommended):
 ```
+wait = min(cap, base * 2^attempt) * random(0, 1)
+```
+- `base`: 1s · `cap`: 60s (or provider `Retry-After` header) · `attempt`: 0-indexed · `random(0,1)`: uniform jitter
 
-`alert_threshold: 1.0` fires at 100% — no reaction window. `0.8` gives time to throttle parallel agents before the hard stop hits. One runaway parallel agent on Anthropic Scale tier can exhaust $200 in under 10 minutes without a budget cap.
+**Anthropic:** Returns `Retry-After: 60` on 429. Retrying sooner amplifies backoff — always honor the header.
 
-## When to Use / When NOT
+**OpenAI:** Returns `x-ratelimit-reset-requests` and `x-ratelimit-reset-tokens` with exact Unix timestamps. Use these for precision scheduling instead of blind backoff.
 
-**Use `rate_limit_config`** for: declaring provider quotas for a specific tier, communicating RPM/TPM to downstream callers, establishing cost guardrails.
+| Strategy | Use When | Risk |
+|----------|----------|------|
+| Exponential + full jitter | Default | None — best practice |
+| Retry-After header | Header present | Must parse correctly |
+| Circuit breaker | Sustained limits in prod | Prevents cascade failure |
+| Fixed delay (no jitter) | Never | Thundering herd on shared instances |
 
-**Route elsewhere**: retry logic and backoff strategies → `runtime_rule`; API keys and endpoints → `env_config`; execution timeouts and circuit breakers → `guardrail`.
+## Artifact Boundaries
+
+| Concern | CEX Kind | Contains |
+|---------|----------|----------|
+| Quota declaration | `rate_limit_config` | RPM, TPM, RPD, concurrent, budget_usd |
+| Retry/backoff logic | `runtime_rule` | Exponential backoff, circuit breaker, timeout |
+| Connection config | `env_config` | API keys, base URL, model selection |
+
+Mixing these causes drift: a `rate_limit_config` change must never force a `runtime_rule` redeploy.
 
 ## Anti-Patterns
 
-| Anti-Pattern | Failure Mode |
+| Anti-Pattern | Consequence |
 |-------------|-------------|
-| `rpm: 9999999` or `"unlimited"` | Runtime enforces wrong ceiling → unexpected 429 floods in production |
-| No `budget_usd` | Runaway parallel agents exhaust monthly budget before anyone notices |
-| `alert_threshold: 1.0` | Alert fires at 100% — invoice arrives before anyone acts |
-| No `retry_after` | Fixed 1 s retry creates 429 storms; amplifies backoff for all callers |
-| Retry logic inside rate_limit_config | Config change re-requires backoff testing; violates single-responsibility |
-| One config for all providers | Each provider has independent limit pools — shared config applies wrong ceilings |
-| Per-model overrides absent | GPT-4o and GPT-3.5 have different RPM pools; shared config mis-throttles cheaper model |
+| Fictional RPM/TPM values | 429 floods; false capacity ceiling — 5/8 prod integrations failed this way |
+| No `budget_usd` cap | Runaway agent exhausts monthly spend with no ceiling |
+| `alert_threshold: 1.0` | Alert fires at 100% — already over budget when triggered |
+| Fixed retry, no jitter | Thundering herd; 429 cascades amplify under load |
+| Ignoring `Retry-After` header | Repeated hammer → exponential provider penalty |
+| One config for all providers | Each provider has independent limit pools; sharing causes cross-contamination |
+| Retry logic inside `rate_limit_config` | Couples declaration and enforcement; breaks on config-only change |
 
 ## CEX Integration
 
-```yaml
-kind: rate_limit_config   # declares limits
-pillar: P09
-id: p09_rl_{provider}_{tier}
-```
+- **Declare quotas:** `rate_limit_config` → `P09_config/examples/p09_ratelimit_{provider}.md`
+- **Declare retries:** `runtime_rule` → `P09_config/examples/p09_rr_{provider}_retry.md`
+- **Runtime flow:** `agent` reads `rate_limit_config` at task start → `client` throttles against RPM/TPM → `guardrail` enforces `budget_usd` circuit breaker → `runtime_rule` handles 429 backoff
 
-**Consumed by**: `runtime_rule` (reads `retry_after` to size backoff windows), `client` (enforces RPM/TPM via request queue), `guardrail` (cost circuit breaker uses `budget_usd`), `agent` (parallel task throttling uses `concurrent`).
+Budget discipline: set `budget_usd` from actual monthly target, `alert_threshold: 0.8` (alert at 80%, hard stop at 100%), document overage policy (block vs. queue).
 
-**Built by**: `rate-limit-config-builder` via N03 nucleus (8F pipeline, F1→F8).
-
-**Dependency order**: `rate_limit_config` (layer 0, no deps) → `runtime_rule` → `client` → `agent`.
+## References
+- Anthropic rate limits: docs.anthropic.com/en/api/rate-limits
+- OpenAI rate limits: platform.openai.com/docs/guides/rate-limits
+- LiteLLM proxy: docs.litellm.ai/docs/proxy/rate_limit
+- Backoff strategy: AWS Architecture Blog — Exponential Backoff and Jitter
