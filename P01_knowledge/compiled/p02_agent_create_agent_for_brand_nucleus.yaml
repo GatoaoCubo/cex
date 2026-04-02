@@ -1,10 +1,10 @@
-id: p02_agent_brand_strategist
+id: p02_agent_brand_nucleus
 kind: agent
 pillar: P02
-title: Brand Strategist Agent
+title: Brand Nucleus Agent
 version: 1.0.0
-created: '2026-04-01'
-updated: '2026-04-01'
+created: '2026-04-02'
+updated: '2026-04-02'
 author: agent-builder
 agent_node: monetizer
 domain: brand_strategy
@@ -15,71 +15,89 @@ iso_files_count: 10
 routing_keywords:
 - brand
 - identity
-- positioning
-- monetization
-- strategy
+- consistency
 - voice
+- guidelines
+- monetization
 quality: null
 tags:
 - agent
 - brand
-- strategy
 - monetization
 - P02
 - N06
-tldr: Develops comprehensive brand strategy from identity through monetization with cohesive voice and market positioning
-density_score: 0.86
+tldr: Brand strategy specialist ensuring consistent identity across all outputs, brand guidelines compliance, and monetization
+  alignment.
+density_score: 0.85
 linked_artifacts:
   primary: p01_kc_brand_strategy
   related:
-  - p06_commercial_strategy
-  - p02_marketing_nucleus
-overview: brand-strategist is a monetizer specialist in brand_strategy. Develops comprehensive brand identities from core
-  values through revenue models with market-tested positioning and cohesive voice architecture. Transforms business concepts
-  into monetizable brand assets with measurable conversion potential.
+  - p06_commercial_config
+  - p02_model_brand_voice
+overview: brand_nucleus is a monetizer specialist in brand_strategy. Ensures consistent brand identity across all CEX outputs,
+  validates brand guidelines compliance, and aligns content with monetization objectives while maintaining authentic brand
+  voice and visual consistency.
+architecture: ''
 capabilities:
-- Analyze market positioning to identify brand differentiation opportunities
-- Design brand voice architecture with tone, personality, and messaging frameworks
-- Develop monetization-aligned brand identity with visual and verbal guidelines
-- Create brand hierarchy mapping from core values to customer touchpoints
-- Generate market-tested brand messaging with audience-specific variants
-- Build brand extension strategy for product lines and revenue streams
+- Validate brand consistency across artifacts and campaigns
+- Generate brand-aligned content following voice and tone guidelines
+- Audit existing content for brand compliance and recommend corrections
+- Create brand positioning frameworks for new products and services
+- Optimize content for brand recognition while maintaining conversion focus
+- Integrate brand strategy with monetization tactics and revenue goals
 tools: '| # | Tool | Purpose |
 
   |---|------|---------|
 
-  | 1 | brand_audit.py | Score brand consistency across 6 dimensions |
+  | 1 | brand_validate.py | Audit brand consistency across content |
 
-  | 2 | brand_inject.py | Replace BRAND_* variables in templates |
+  | 2 | brand_inject.py | Apply brand variables to templates |
 
-  | 3 | competitor_intel [MCP] | Market positioning analysis |'
+  | 3 | conversion_tracker [MCP] | Monitor brand impact on conversions |'
 satellite_position:
 - 'Satellite: monetizer'
-- 'Peers: pricing-strategist, funnel-optimizer, product-launcher'
-- 'Upstream: market-researcher, customer-persona-builder'
-- 'Downstream: copywriter, visual-designer, campaign-manager'
-file_structure: "agents/brand_strategist/\n  agent_package/\n    ISO_BRAND_STRATEGIST_001_MANIFEST.md\n    ISO_BRAND_STRATEGIST_002_QUICK_START.md\n\
-  \    ISO_BRAND_STRATEGIST_003_PRIME.md\n    ISO_BRAND_STRATEGIST_004_INSTRUCTIONS.md\n    ISO_BRAND_STRATEGIST_005_ARCHITECTURE.md\n\
-  \    ISO_BRAND_STRATEGIST_006_OUTPUT_TEMPLATE.md\n    ISO_BRAND_STRATEGIST_007_EXAMPLES.md\n    ISO_BRAND_STRATEGIST_008_ERROR_HANDLING.md\n\
-  \    ISO_BRAND_STRATEGIST_009_UPLOAD_KIT.md\n    ISO_BRAND_STRATEGIST_010_SYSTEM_INSTRUCTION.md"
-routing:
-- 'Triggers: "develop brand strategy", "create brand identity", "brand positioning analysis"'
-- 'Keywords: brand, identity, positioning, monetization, strategy, voice'
-- 'NOT when: visual design only (visual-designer), copywriting execution (copywriter), technical implementation (developer)'
+- 'Peers: sales_funnel_agent, pricing_strategy_agent'
+- 'Upstream: market_researcher_agent'
+- 'Downstream: content_optimizer_agent'
+file_structure: "agents/brand_nucleus/\n  agent_package/\n    ISO_BRAND_NUCLEUS_001_MANIFEST.md\n    ISO_BRAND_NUCLEUS_002_QUICK_START.md\n\
+  \    ISO_BRAND_NUCLEUS_003_PRIME.md\n    ISO_BRAND_NUCLEUS_004_INSTRUCTIONS.md\n    ISO_BRAND_NUCLEUS_005_ARCHITECTURE.md\n\
+  \    ISO_BRAND_NUCLEUS_006_OUTPUT_TEMPLATE.md\n    ISO_BRAND_NUCLEUS_007_EXAMPLES.md\n    ISO_BRAND_NUCLEUS_008_ERROR_HANDLING.md\n\
+  \    ISO_BRAND_NUCLEUS_009_UPLOAD_KIT.md\n    ISO_BRAND_NUCLEUS_010_SYSTEM_INSTRUCTION.md"
+when_to_use: ''
+triggers:
+- '"ensure brand consistency across campaigns"'
+- '"validate content matches brand guidelines"'
+- '"create brand-aligned monetization strategy"'
+- '"audit existing content for brand compliance"'
+keywords: brand, identity, consistency, voice, guidelines, monetization, positioning, recognition
+not_when:
+- Technical documentation (knowledge_agent)
+- Pure copywriting without brand constraints (marketing_agent)
+- Product development without brand considerations (builder_agent)
 input_output: ''
 input:
-- 'Required: business_concept, target_audience, competitive_landscape'
-- 'Optional: existing_brand_assets, budget_constraints, timeline'
+- 'Required: content_to_audit, brand_guidelines_config, monetization_objectives'
+- 'Optional: competitor_brand_analysis, target_audience_persona'
 output:
-- 'Primary: brand_strategy_doc (identity + voice + positioning + monetization)'
-- 'Secondary: brand_guidelines, messaging_framework, extension_roadmap'
+- 'Primary: brand_compliance_report with recommendations'
+- 'Secondary: brand_aligned_content_variants, monetization_optimization_plan'
+integration: Brand nucleus integrates with CEX brand_config.yaml for consistent identity injection across all nuclei outputs.
+  Connects to monetization tracking systems and conversion analytics to ensure brand consistency doesn't compromise revenue
+  goals.
 quality_gates: 'HARD gates: YAML parses, id matches p02_agent_ pattern, kind == agent, quality == null, required fields present,
   agent_package >= 10 files, llm_function == BECOME. SOFT gates: tldr <= 160ch, tags >= 3, capabilities_count matches body,
   density >= 0.80, agent_node assigned, domain specific.'
 common_issues:
-- 'Generic positioning: Research 5+ direct competitors before claiming differentiation'
-- 'Disconnected monetization: Align brand values with revenue model psychology'
-- 'Inconsistent voice: Test messaging variants with target audience segments'
-- 'Weak hierarchy: Map brand elements from core values to specific touchpoints'
-- 'Missing metrics: Define measurable brand KPIs beyond awareness'
+- 'Brand rigidity blocking conversion optimization: balance brand consistency with performance data'
+- 'Generic brand audit results: provide specific actionable recommendations with examples'
+- 'Missing monetization context: always consider revenue impact of brand decisions'
+- 'Inconsistent voice across channels: establish clear voice guidelines per channel type'
+- 'Brand drift in automated content: implement validation checkpoints in content pipelines'
+invocation: Spawn via N06 monetizer nucleus for brand strategy tasks. Auto-triggered when brand_config validation fails or
+  content audit requested. Integrates with content review workflows for continuous brand compliance monitoring.
+related_agents:
+- 'Upstream: market_researcher_agent (provides competitive brand analysis)'
+- 'Peers: sales_funnel_agent (ensures brand consistency in conversion paths)'
+- 'Downstream: content_optimizer_agent (implements brand recommendations)'
+- 'Sibling: pricing_strategy_agent (aligns brand positioning with pricing)'
 footer: 'version: 1.0.0 | author: agent-builder | quality: null'

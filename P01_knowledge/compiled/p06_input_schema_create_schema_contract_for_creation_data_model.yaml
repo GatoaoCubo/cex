@@ -1,63 +1,62 @@
-id: p06_is_creation_data_model
+id: p06_is_creation_data
 kind: input_schema
 pillar: P06
 version: 1.0.0
-created: '2026-04-01'
-updated: '2026-04-01'
+created: '2026-04-02'
+updated: '2026-04-02'
 author: input-schema-builder
-scope: creation operations requiring structured data model inputs
+scope: creation operations requiring structured data input across CEX system
 fields: '| # | Name | Type | Required | Default | Description |
 
   |---|------|------|----------|---------|-------------|
 
-  | 1 | artifact_type | string | YES | - | Type of artifact to create (agent, knowledge_card, etc.) |
+  | 1 | name | string | YES | - | Unique identifier or title for the creation target |
 
-  | 2 | content_description | string | YES | - | Natural language description of desired content |
+  | 2 | kind | string | YES | - | CEX artifact kind (agent, knowledge_card, prompt_template, etc.) |
 
-  | 3 | target_audience | string | NO | "general" | Intended audience for the created content |
+  | 3 | description | string | NO | "" | Human-readable description of creation purpose and scope |
 
-  | 4 | domain_context | string | NO | "generic" | Domain or specialization context |
+  | 4 | pillar | string | NO | "P01" | Target pillar (P01-P12) for artifact placement |
 
-  | 5 | quality_requirements | object | NO | {"min_score": 8.0, "density_target": 0.85} | Quality constraints and targets
-  |
+  | 5 | domain | string | NO | "generic" | Domain specialization for the created artifact |
 
-  | 6 | format_preferences | object | NO | {"style": "professional", "length": "standard"} | Formatting and style preferences
-  |
+  | 6 | config | object | NO | {} | Creation-specific configuration parameters and overrides |
 
-  | 7 | dependencies | list | NO | [] | List of existing artifacts or resources this depends on |
+  | 7 | tags | list | NO | [] | Categorization tags for searchability and organization |
 
-  | 8 | constraints | object | NO | {} | Additional constraints like length limits or content requirements |'
+  | 8 | quality_target | float | NO | 8.0 | Minimum quality score target (0.0-10.0) |'
 coercion:
 - from: string
-  to: object
-  rule: Parse JSON string to object for quality_requirements, format_preferences, constraints
-- from: string
   to: list
-  rule: Split comma-separated string to list for dependencies field
-examples: "{\n  \"artifact_type\": \"agent\",\n  \"content_description\": \"Build agent for automated code reviews\",\n  \"\
-  quality_requirements\": {\"min_score\": 9.0},\n  \"constraints\": {\"max_turns\": 20}\n}"
+  rule: Split comma-separated string into list for tags field
+- from: integer
+  to: float
+  rule: Convert integer quality target to float precision
+- from: string
+  to: float
+  rule: Parse numeric string to float for quality_target
+examples: "{\n  \"name\": \"api_knowledge_card\",\n  \"kind\": \"knowledge_card\",\n  \"pillar\": \"P01\",\n  \"tags\": [\"\
+  api\", \"integration\"]\n}"
 domain: creation-operations
 quality: null
 tags:
 - input-schema
 - creation
 - data-model
-- artifacts
-- P06
-tldr: 'Input contract for creation operations: requires artifact_type and content_description, with optional audience, quality,
-  and constraint parameters.'
-density_score: 0.87
-contract_definition: Creation operations receive structured requests from users or other agents to generate new artifacts,
-  content, or resources. This schema defines the required and optional data that creators need to produce high-quality outputs
-  that meet user specifications and quality standards.
+- cex-system
+tldr: 'Input contract for CEX creation operations: requires name and kind, optional pillar, domain, config, tags, and quality
+  target.'
+density_score: 0.89
 coercion_rules: '| From | To | Rule |
 
   |------|----|------|
 
-  | string | object | Parse JSON string to object for quality_requirements, format_preferences, constraints |
+  | string | list | Split comma-separated string into list for tags field |
 
-  | string | list | Split comma-separated string to list for dependencies field |'
+  | integer | float | Convert integer quality target to float precision |
+
+  | string | float | Parse numeric string to float for quality_target |'
 references:
-- 'CEX artifact type registry: `.cex/kinds_meta.json`'
-- 'Quality scoring system: P11 quality gates'
-- 'Domain contexts: P01 knowledge pillar taxonomy'
+- CEX artifact schema definitions (P{01-12}/_schema.yaml)
+- 8F pipeline creation workflow
+- Builder dispatch protocol for artifact generation

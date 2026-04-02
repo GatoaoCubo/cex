@@ -3,8 +3,8 @@ kind: agent
 pillar: P02
 title: Creation Nucleus Agent
 version: 1.0.0
-created: '2026-04-01'
-updated: '2026-04-01'
+created: '2026-04-02'
+updated: '2026-04-02'
 author: agent-builder
 agent_node: builder
 domain: artifact_creation
@@ -13,67 +13,81 @@ capabilities_count: 6
 tools_count: 3
 iso_files_count: 10
 routing_keywords:
-- creation
+- create
 - build
-- generate
 - scaffold
+- generate
 - artifact
-- nucleus
+- construction
+- N03
 quality: null
 tags:
 - agent
 - creation
 - builder
-- P02
-- nucleus
-tldr: Specialized agent for artifact creation and scaffolding within the CEX builder nucleus ecosystem
-density_score: 0.85
+- N03
+- artifact-construction
+tldr: N03 creation specialist that builds CEX artifacts via 8F pipeline with template-first construction and quality gates.
+density_score: 0.92
 linked_artifacts:
-  primary: p01_kc_agent
+  primary: p01_kc_artifact_creation
   related:
-  - p02_agent_package_builder
-  - p03_system_prompt_creation
-overview: creation_nucleus is a builder specialist in artifact_creation. Orchestrates the complete creation pipeline from
-  intent to deployed artifact, specializing in scaffolding new CEX artifacts across all 99 kinds and 12 pillars with quality
-  enforcement.
+  - p02_mental_model_8f_pipeline
+  - p03_system_prompt_creation_nucleus
+overview: creation_nucleus is a builder specialist in artifact_creation. Executes the 8F pipeline to construct CEX artifacts
+  from user intents, applying template-first methodology and enforcing quality gates across all 114 artifact kinds.
 capabilities:
-- Scaffold new CEX artifacts following 8F pipeline enforcement
-- Generate complete frontmatter with pillar-appropriate field validation
-- Produce dense content bodies meeting density targets >= 0.80
-- Validate artifacts against quality gates and 12LP checklist
-- Route creation tasks to appropriate specialized builders
-- Coordinate multi-artifact creation workflows across pillars
+- Execute complete 8F pipeline (F1 CONSTRAIN through F8 COLLABORATE)
+- Apply template-first construction with hybrid fallback for novel artifacts
+- Enforce HARD and SOFT quality gates before publication
+- Route creation tasks to specialized builders via kind classification
+- Inject domain knowledge from P01 knowledge cards and examples
+- Generate frontmatter-compliant artifacts with proper pillar assignment
 tools: '| # | Tool | Purpose |
 
   |---|------|---------|
 
-  | 1 | cex_8f_runner.py | Execute full 8F pipeline with quality validation |
+  | 1 | cex_8f_runner.py | Execute complete 8F pipeline with kind-specific routing |
 
-  | 2 | cex_compile.py | Convert .md artifacts to .yaml compiled format |
+  | 2 | cex_compile.py | Convert .md artifacts to .yaml for system integration |
 
-  | 3 | cex_doctor.py | Health check and validation for created artifacts |'
+  | 3 | cex_doctor.py | Validate artifacts against quality gates and schema compliance |'
 satellite_position:
 - 'Satellite: builder'
-- 'Peers: agent-package-builder, instruction-builder, system-prompt-builder'
-- 'Upstream: orchestrator-agent (task routing)'
-- 'Downstream: quality-gate-validator, compiler-agent'
+- 'Peers: code-builder, document-builder, config-builder'
+- 'Upstream: orchestrator (N07 task dispatch)'
+- 'Downstream: quality-validator, artifact-compiler'
 file_structure: "agents/creation_nucleus/\n  agent_package/\n    SPEC_CREATION_NUCLEUS_001_MANIFEST.md\n    SPEC_CREATION_NUCLEUS_002_QUICK_START.md\n\
   \    SPEC_CREATION_NUCLEUS_003_PRIME.md\n    SPEC_CREATION_NUCLEUS_004_INSTRUCTIONS.md\n    SPEC_CREATION_NUCLEUS_005_ARCHITECTURE.md\n\
   \    SPEC_CREATION_NUCLEUS_006_OUTPUT_TEMPLATE.md\n    SPEC_CREATION_NUCLEUS_007_EXAMPLES.md\n    SPEC_CREATION_NUCLEUS_008_ERROR_HANDLING.md\n\
   \    SPEC_CREATION_NUCLEUS_009_UPLOAD_KIT.md\n    SPEC_CREATION_NUCLEUS_010_SYSTEM_INSTRUCTION.md"
 routing:
-- 'Triggers: "create new artifact", "scaffold CEX component", "build from template"'
-- 'Keywords: creation, build, generate, scaffold, artifact, nucleus'
-- 'NOT when: specific domain expertise needed (route to domain specialists), pure research tasks (route to N01), marketing
-  copy (route to N02)'
+- 'Triggers: "create artifact", "build knowledge card", "scaffold agent definition"'
+- 'Keywords: create, build, scaffold, generate, construct, produce, make'
+- 'NOT when: research analysis (N01), marketing copy (N02), deploy operations (N05)'
 input_output: ''
 input:
-- 'Required: artifact_kind, target_pillar, creation_intent'
-- 'Optional: template_reference, quality_target, domain_context'
+- 'Required: intent_description, target_kind, domain_context'
+- 'Optional: template_preference, quality_threshold, pillar_constraint'
 output:
-- 'Primary: complete CEX artifact with frontmatter and validated body'
-- 'Secondary: compilation report, quality score, validation status'
-quality_gates: 'HARD gates: YAML parses, id matches p02_agent_ pattern, kind == agent, quality == null, required fields present,
-  agent_package >= 10 files, llm_function == BECOME. SOFT gates: tldr <= 160ch, tags >= 3, capabilities_count matches body,
-  density >= 0.80, agent_node assigned, domain specific.'
+- 'Primary: completed CEX artifact with frontmatter and compiled .yaml'
+- 'Secondary: quality_report, construction_trace, similarity_matches'
+integration: Receives dispatch from N07 orchestrator via handoff files in `.cex/runtime/handoffs/`. Produces artifacts to
+  appropriate pillar directories (P01-P12) with git commit and signal emission. Integrates with cex_retriever for template
+  matching and cex_memory for construction patterns.
+quality_gates: 'HARD gates: YAML parses, id matches pillar pattern, kind validation, quality null enforcement, required frontmatter
+  fields, body structure compliance, byte limits, naming conventions. SOFT gates: density >= 0.80, tldr conciseness, tag completeness,
+  template similarity, domain specificity, anti-pattern avoidance, link validation, examples presence.'
+common_issues:
+- 'Template mismatch: Use hybrid construction when similarity < 60%'
+- 'Quality gate failure: Apply iterative refinement with specific gate feedback'
+- 'Kind misclassification: Re-route to correct specialized builder'
+- 'Density shortfall: Compress prose, eliminate filler, increase fact density'
+- 'Schema violation: Validate frontmatter against pillar-specific requirements'
+invocation: 'Spawn via: `bash _spawn/dispatch.sh solo n03 "create {kind} for {domain}"` Direct: `/build {intent}` triggers
+  8F pipeline execution Crew mode: Receives handoff from orchestrator with decision manifest'
+related_agents:
+- 'Upstream: orchestrator (task decomposition and routing)'
+- 'Peers: researcher (domain analysis), marketer (copy creation)'
+- 'Downstream: validator (quality assurance), indexer (artifact registration)'
 footer: 'version: 1.0.0 | author: agent-builder | quality: null'

@@ -2,56 +2,51 @@ id: p12_dr_engineering
 kind: dispatch_rule
 pillar: P12
 version: 1.0.0
-created: 2026-04-01
-updated: 2026-04-01
+created: 2026-04-02
+updated: 2026-04-02
 author: dispatch-rule-builder
 domain: engineering
 quality: null
 tags:
 - dispatch
 - engineering
-- executor
-- code
+- builder
+- coding
 - development
-tldr: Route engineering, coding, and development tasks to executor agent with opus model for technical implementation
+tldr: Route engineering, development and coding tasks to builder agent_node with opus model
 scope: engineering
 keywords:
-- engineering
 - engenharia
+- engineering
+- codigo
 - code
-- código
-- develop
 - desenvolver
-- implement
-- implementar
+- develop
+- programar
+- program
 - build
 - construir
-- deploy
-- implantar
-- test
-- testar
-- debug
-- debugar
-- programa
-- program
-agent_node: executor
+- implementar
+- implement
+- software
+- app
+agent_node: builder
 model: opus
 priority: 8
 confidence_threshold: 0.75
-fallback: builder
+fallback: executor
 conditions:
   exclude_domains:
-  - research
-  - marketing
-  - knowledge_indexing
+  - research_papers
+  - marketing_copy
 routing_strategy: hybrid
-purpose: Routes engineering, software development, coding, testing, and deployment tasks to the executor agent. The executor
-  specializes in technical implementation, code review, debugging, testing pipelines, and deployment automation with access
-  to development tools and technical expertise.
-keyword_rationale: Bilingual PT/EN coverage captures both Portuguese operator commands and English technical documentation.
-  Keywords span the full engineering lifecycle from development (`desenvolver`/`develop`) through deployment (`implantar`/`deploy`)
-  and maintenance (`debug`/`debugar`). Includes both high-level terms (`engineering`/`engenharia`) and specific technical
-  actions (`code`/`código`, `test`/`testar`).
-fallback_logic: Builder agent handles general construction tasks when executor is unavailable. While executor focuses on code-specific
-  engineering, builder can handle broader technical implementation tasks without specialized development tooling. Provides
-  graceful degradation for engineering requests when primary technical agent is overloaded.
+density_score: 0.79
+purpose: Routes software engineering, development, and coding tasks to the builder agent_node. The builder specializes in
+  artifact creation, code implementation, and technical scaffolding with access to opus model for complex engineering reasoning
+  and multi-step development tasks.
+keyword_rationale: Bilingual PT/EN coverage captures both Portuguese operator commands ("desenvolver app") and English technical
+  descriptions ("implement authentication"). Keywords span the full engineering lifecycle from high-level "engenharia" to
+  specific actions like "programar" and "implementar". Generic terms like "software" and "app" catch domain-adjacent requests.
+fallback_logic: Routes to executor when builder is unavailable. Executor handles operational aspects of engineering like testing,
+  deployment, and code review, providing complementary engineering capabilities when primary builder agent_node cannot accept
+  the task.

@@ -1,0 +1,172 @@
+﻿[2026-04-02 10:40:27] [INFO] ============================================================
+[2026-04-02 10:40:27] [INFO]   CEX OVERNIGHT FLYWHEEL
+[2026-04-02 10:40:27] [INFO] ============================================================
+[2026-04-02 10:40:27] [INFO] Started: 2026-04-02T10:40:27.6945933-03:00
+[2026-04-02 10:40:27] [INFO] Budget:  2147483647 tokens
+[2026-04-02 10:40:27] [INFO] Target:  9
+[2026-04-02 10:40:27] [INFO] Thresh:  9
+[2026-04-02 10:40:27] [INFO] Cycles:  max 2147483647
+[2026-04-02 10:40:27] [INFO] Phase:   farm
+[2026-04-02 10:40:27] [INFO] DryRun:  False
+[2026-04-02 10:40:27] [INFO] Log:     C:\Users\PC\Documents\GitHub\cex\.cex\overnight\overnight_20260402_104027.log
+[2026-04-02 10:40:27] [INFO] 
+[2026-04-02 10:40:27] [INFO] ============================================================
+[2026-04-02 10:40:27] [INFO]   FLYWHEEL CYCLE 1 / 2147483647
+[2026-04-02 10:40:27] [INFO] ============================================================
+[2026-04-02 10:40:27] [INFO] Budget remaining: 2147483647 tokens
+[2026-04-02 10:40:27] [INFO] ============================================================
+[2026-04-02 10:40:27] [INFO]   PHASE 1: BOOTSTRAP
+[2026-04-02 10:40:27] [INFO] ============================================================
+[2026-04-02 10:40:27] [INFO] N03 (Builder Architect): 0 artifacts. Bootstrapping...
+[2026-04-02 10:40:27] [INFO]   Building: N03/agent -- create agent for creation nucleus
+[2026-04-02 10:42:01] [METRIC] Tokens: +2000 (total: 2000/2147483647)
+[2026-04-02 10:42:01] [OK]   OK Created N03/agent -> P01_knowledge\examples\p02_agent_create_agent_for_creation_nucleus.md
+[2026-04-02 10:42:03] [INFO]   Building: N03/system_prompt -- create system prompt for creation nucleus
+[2026-04-02 10:42:57] [METRIC] Tokens: +2000 (total: 4000/2147483647)
+[2026-04-02 10:42:57] [OK]   OK Created N03/system_prompt -> P01_knowledge\examples\p03_system_prompt_create_system_prompt_for_creation_nucleus.md
+[2026-04-02 10:42:59] [INFO]   Building: N03/knowledge_card -- create knowledge card about creation best practices
+[2026-04-02 10:44:05] [METRIC] Tokens: +2000 (total: 6000/2147483647)
+[2026-04-02 10:44:05] [OK]   OK Created N03/knowledge_card -> P01_knowledge\examples\p01_knowledge_card_create_knowledge_card_about_creation_best_practices.md
+[2026-04-02 10:44:07] [INFO]   Building: N03/agent_card -- create agent card for creation nucleus
+[2026-04-02 10:45:02] [METRIC] Tokens: +2000 (total: 8000/2147483647)
+[2026-04-02 10:45:02] [OK]   OK Created N03/agent_card -> P01_knowledge\examples\p02_agent_create_agent_card_for_creation_nucleus.md
+[2026-04-02 10:45:04] [INFO]   Building: N03/workflow -- create workflow for creation pipeline
+[2026-04-02 10:45:54] [METRIC] Tokens: +2000 (total: 10000/2147483647)
+[2026-04-02 10:45:54] [OK]   OK Created N03/workflow -> P01_knowledge\examples\p12_workflow_create_workflow_for_creation_pipeline.md
+[2026-04-02 10:45:56] [INFO]   Building: N03/quality_gate -- create quality gate for creation artifacts
+[2026-04-02 10:46:53] [METRIC] Tokens: +2000 (total: 12000/2147483647)
+[2026-04-02 10:46:53] [OK]   OK Created N03/quality_gate -> P01_knowledge\examples\p11_quality_gate_create_quality_gate_for_creation_artifacts.md
+[2026-04-02 10:46:55] [INFO]   Building: N03/scoring_rubric -- create scoring rubric for creation evaluation
+[2026-04-02 10:47:51] [METRIC] Tokens: +2000 (total: 14000/2147483647)
+[2026-04-02 10:47:51] [OK]   OK Created N03/scoring_rubric -> P01_knowledge\examples\p07_scoring_rubric_create_scoring_rubric_for_creation_evaluation.md
+[2026-04-02 10:47:54] [INFO]   Building: N03/dispatch_rule -- create dispatch rule for creation routing
+[2026-04-02 10:48:37] [METRIC] Tokens: +2000 (total: 16000/2147483647)
+[2026-04-02 10:48:37] [OK]   OK Created N03/dispatch_rule -> P01_knowledge\examples\p12_dispatch_rule_create_dispatch_rule_for_creation_routing.md
+[2026-04-02 10:48:39] [INFO]   Building: N03/schema -- create schema contract for creation data model
+[2026-04-02 10:49:48] [METRIC] Tokens: +2000 (total: 18000/2147483647)
+[2026-04-02 10:49:48] [OK]   OK Created N03/schema -> P01_knowledge\examples\p06_input_schema_create_schema_contract_for_creation_data_model.md
+[2026-04-02 10:49:50] [INFO]   Building: N03/output_template -- create output template for creation reports
+[2026-04-02 10:51:25] [METRIC] Tokens: +2000 (total: 20000/2147483647)
+[2026-04-02 10:51:25] [WARN]   WARN Created N03/output_template -> P01_knowledge\examples\p05_formatter_create_output_template_for_creation_reports.md (gate unknown)
+[2026-04-02 10:51:27] [INFO]   Building: N03/prompt_template -- create prompt template for creation tasks
+[2026-04-02 10:52:38] [METRIC] Tokens: +2000 (total: 22000/2147483647)
+[2026-04-02 10:52:38] [OK]   OK Created N03/prompt_template -> P01_knowledge\examples\p03_prompt_template_create_prompt_template_for_creation_tasks.md
+[2026-04-02 10:52:40] [INFO] N05 (DevOps Engineer): 0 artifacts. Bootstrapping...
+[2026-04-02 10:52:40] [INFO]   Building: N05/agent -- create agent for engineering nucleus
+[2026-04-02 10:54:13] [METRIC] Tokens: +2000 (total: 24000/2147483647)
+[2026-04-02 10:54:13] [OK]   OK Created N05/agent -> P01_knowledge\examples\p01_bld_sp_manifest_software_project_create_agent_for_engineering_nucleus.md
+[2026-04-02 10:54:15] [INFO]   Building: N05/system_prompt -- create system prompt for engineering nucleus
+[2026-04-02 10:55:06] [METRIC] Tokens: +2000 (total: 26000/2147483647)
+[2026-04-02 10:55:06] [OK]   OK Created N05/system_prompt -> P01_knowledge\examples\p03_system_prompt_create_system_prompt_for_engineering_nucleus.md
+[2026-04-02 10:55:08] [INFO]   Building: N05/knowledge_card -- create knowledge card about engineering best practices
+[2026-04-02 10:55:56] [METRIC] Tokens: +2000 (total: 28000/2147483647)
+[2026-04-02 10:55:56] [OK]   OK Created N05/knowledge_card -> P01_knowledge\examples\p01_knowledge_card_create_knowledge_card_about_engineering_best_practices.md
+[2026-04-02 10:55:58] [INFO]   Building: N05/agent_card -- create agent card for engineering nucleus
+[2026-04-02 10:56:47] [METRIC] Tokens: +2000 (total: 30000/2147483647)
+[2026-04-02 10:56:47] [OK]   OK Created N05/agent_card -> P01_knowledge\examples\p01_bld_sp_manifest_software_project_create_agent_card_for_engineering_nucleus.md
+[2026-04-02 10:56:49] [INFO]   Building: N05/workflow -- create workflow for engineering pipeline
+[2026-04-02 10:57:33] [METRIC] Tokens: +2000 (total: 32000/2147483647)
+[2026-04-02 10:57:33] [OK]   OK Created N05/workflow -> P01_knowledge\examples\p12_workflow_create_workflow_for_engineering_pipeline.md
+[2026-04-02 10:57:35] [INFO]   Building: N05/quality_gate -- create quality gate for engineering artifacts
+[2026-04-02 10:58:27] [METRIC] Tokens: +2000 (total: 34000/2147483647)
+[2026-04-02 10:58:27] [OK]   OK Created N05/quality_gate -> P01_knowledge\examples\p11_quality_gate_create_quality_gate_for_engineering_artifacts.md
+[2026-04-02 10:58:29] [INFO]   Building: N05/scoring_rubric -- create scoring rubric for engineering evaluation
+[2026-04-02 10:59:27] [METRIC] Tokens: +2000 (total: 36000/2147483647)
+[2026-04-02 10:59:27] [OK]   OK Created N05/scoring_rubric -> P01_knowledge\examples\p07_scoring_rubric_create_scoring_rubric_for_engineering_evaluation.md
+[2026-04-02 10:59:29] [INFO]   Building: N05/dispatch_rule -- create dispatch rule for engineering routing
+[2026-04-02 11:00:17] [METRIC] Tokens: +2000 (total: 38000/2147483647)
+[2026-04-02 11:00:17] [OK]   OK Created N05/dispatch_rule -> P01_knowledge\examples\p12_dispatch_rule_create_dispatch_rule_for_engineering_routing.md
+[2026-04-02 11:00:19] [INFO]   Building: N05/schema -- create schema contract for engineering data model
+[2026-04-02 11:01:08] [METRIC] Tokens: +2000 (total: 40000/2147483647)
+[2026-04-02 11:01:08] [OK]   OK Created N05/schema -> P01_knowledge\examples\p06_input_schema_create_schema_contract_for_engineering_data_model.md
+[2026-04-02 11:01:10] [INFO]   Building: N05/output_template -- create output template for engineering reports
+[2026-04-02 11:02:18] [METRIC] Tokens: +2000 (total: 42000/2147483647)
+[2026-04-02 11:02:18] [OK]   OK Created N05/output_template -> P01_knowledge\examples\p05_formatter_create_output_template_for_engineering_reports.md
+[2026-04-02 11:02:20] [INFO]   Building: N05/prompt_template -- create prompt template for engineering tasks
+[2026-04-02 11:03:31] [METRIC] Tokens: +2000 (total: 44000/2147483647)
+[2026-04-02 11:03:31] [OK]   OK Created N05/prompt_template -> P01_knowledge\examples\p03_prompt_template_create_prompt_template_for_engineering_tasks.md
+[2026-04-02 11:03:33] [INFO] N06 (Brand Architect): 0 artifacts. Bootstrapping...
+[2026-04-02 11:03:33] [INFO]   Building: N06/agent -- create agent for brand nucleus
+[2026-04-02 11:05:05] [METRIC] Tokens: +2000 (total: 46000/2147483647)
+[2026-04-02 11:05:05] [OK]   OK Created N06/agent -> P01_knowledge\examples\p02_agent_create_agent_for_brand_nucleus.md
+[2026-04-02 11:05:07] [INFO]   Building: N06/system_prompt -- create system prompt for brand nucleus
+[2026-04-02 11:06:07] [METRIC] Tokens: +2000 (total: 48000/2147483647)
+[2026-04-02 11:06:07] [OK]   OK Created N06/system_prompt -> P01_knowledge\examples\p03_system_prompt_create_system_prompt_for_brand_nucleus.md
+[2026-04-02 11:06:09] [INFO]   Building: N06/knowledge_card -- create knowledge card about brand best practices
+[2026-04-02 11:07:09] [METRIC] Tokens: +2000 (total: 50000/2147483647)
+[2026-04-02 11:07:09] [OK]   OK Created N06/knowledge_card -> P01_knowledge\examples\p01_knowledge_card_create_knowledge_card_about_brand_best_practices.md
+[2026-04-02 11:07:12] [INFO]   Building: N06/agent_card -- create agent card for brand nucleus
+[2026-04-02 11:08:16] [METRIC] Tokens: +2000 (total: 52000/2147483647)
+[2026-04-02 11:08:16] [OK]   OK Created N06/agent_card -> P01_knowledge\examples\p08_agent_card_create_agent_card_for_brand_nucleus.md
+[2026-04-02 11:08:18] [INFO]   Building: N06/workflow -- create workflow for brand pipeline
+[2026-04-02 11:09:18] [METRIC] Tokens: +2000 (total: 54000/2147483647)
+[2026-04-02 11:09:18] [OK]   OK Created N06/workflow -> P01_knowledge\examples\p12_workflow_create_workflow_for_brand_pipeline.md
+[2026-04-02 11:09:20] [INFO]   Building: N06/quality_gate -- create quality gate for brand artifacts
+[2026-04-02 11:10:13] [METRIC] Tokens: +2000 (total: 56000/2147483647)
+[2026-04-02 11:10:13] [OK]   OK Created N06/quality_gate -> P01_knowledge\examples\p11_quality_gate_create_quality_gate_for_brand_artifacts.md
+[2026-04-02 11:10:15] [INFO]   Building: N06/scoring_rubric -- create scoring rubric for brand evaluation
+[2026-04-02 11:11:18] [METRIC] Tokens: +2000 (total: 58000/2147483647)
+[2026-04-02 11:11:18] [OK]   OK Created N06/scoring_rubric -> P01_knowledge\examples\p07_scoring_rubric_create_scoring_rubric_for_brand_evaluation.md
+[2026-04-02 11:11:21] [INFO]   Building: N06/dispatch_rule -- create dispatch rule for brand routing
+[2026-04-02 11:12:04] [METRIC] Tokens: +2000 (total: 60000/2147483647)
+[2026-04-02 11:12:04] [OK]   OK Created N06/dispatch_rule -> P01_knowledge\examples\p12_dispatch_rule_create_dispatch_rule_for_brand_routing.md
+[2026-04-02 11:12:06] [INFO]   Building: N06/schema -- create schema contract for brand data model
+[2026-04-02 11:13:02] [METRIC] Tokens: +2000 (total: 62000/2147483647)
+[2026-04-02 11:13:02] [OK]   OK Created N06/schema -> P01_knowledge\examples\p06_input_schema_create_schema_contract_for_brand_data_model.md
+[2026-04-02 11:13:04] [INFO]   Building: N06/output_template -- create output template for brand reports
+[2026-04-02 11:14:23] [METRIC] Tokens: +2000 (total: 64000/2147483647)
+[2026-04-02 11:14:23] [OK]   OK Created N06/output_template -> P01_knowledge\examples\p05_formatter_create_output_template_for_brand_reports.md
+[2026-04-02 11:14:25] [INFO]   Building: N06/prompt_template -- create prompt template for brand tasks
+[2026-04-02 11:15:50] [METRIC] Tokens: +2000 (total: 66000/2147483647)
+[2026-04-02 11:15:50] [OK]   OK Created N06/prompt_template -> P01_knowledge\examples\p03_prompt_template_create_prompt_template_for_brand_tasks.md
+[2026-04-02 11:15:52] [INFO] N07 (Mission Control): 0 artifacts. Bootstrapping...
+[2026-04-02 11:15:52] [INFO]   Building: N07/agent -- create agent for orchestration nucleus
+[2026-04-02 11:17:31] [METRIC] Tokens: +2000 (total: 68000/2147483647)
+[2026-04-02 11:17:32] [OK]   OK Created N07/agent -> P01_knowledge\examples\p12_workflow_create_agent_for_orchestration_nucleus.md
+[2026-04-02 11:17:34] [INFO]   Building: N07/system_prompt -- create system prompt for orchestration nucleus
+[2026-04-02 11:18:07] [ERROR]   FAIL N07/system_prompt -- no artifact saved
+[2026-04-02 11:18:07] [DEBUG]   OUTPUT: 
+============================================================
+  CEX Run: "create system prompt for orchestration nucleus"
+============================================================
+
+[1/7] Discovering builders...
+  ÔåÆ system-prompt-builder (score=1.481)
+  ÔåÆ action-prompt-builder (score=0.
+[2026-04-02 11:18:09] [INFO]   Building: N07/knowledge_card -- create knowledge card about orchestration best practices
+[2026-04-02 11:18:28] [ERROR]   FAIL N07/knowledge_card -- no artifact saved
+[2026-04-02 11:18:28] [DEBUG]   OUTPUT: python.exe : [KC Search] Error: {'message': 'Could not find the function public.search_kcs(match_count, 
+query_embedding) in the schema cache', 'code': 'PGRST202', 'hint': None, 'details': 'Searched for the function 
+public.search_kcs with parameters match_count, query_embedding or with a single u
+[2026-04-02 11:18:30] [INFO]   Building: N07/agent_card -- create agent card for orchestration nucleus
+[2026-04-02 11:18:50] [ERROR]   FAIL N07/agent_card -- no artifact saved
+[2026-04-02 11:18:50] [DEBUG]   OUTPUT: python.exe : [KC Search] Error: {'message': 'Could not find the function public.search_kcs(match_count, 
+query_embedding) in the schema cache', 'code': 'PGRST202', 'hint': None, 'details': 'Searched for the function 
+public.search_kcs with parameters match_count, query_embedding or with a single u
+[2026-04-02 11:18:52] [INFO]   Building: N07/workflow -- create workflow for orchestration pipeline
+[2026-04-02 11:19:12] [ERROR]   FAIL N07/workflow -- no artifact saved
+[2026-04-02 11:19:12] [DEBUG]   OUTPUT: python.exe : [KC Search] Error: {'message': 'Could not find the function public.search_kcs(match_count, 
+query_embedding) in the schema cache', 'code': 'PGRST202', 'hint': None, 'details': 'Searched for the function 
+public.search_kcs with parameters match_count, query_embedding or with a single u
+[2026-04-02 11:19:14] [INFO]   Building: N07/quality_gate -- create quality gate for orchestration artifacts
+[2026-04-02 11:19:34] [ERROR]   FAIL N07/quality_gate -- no artifact saved
+[2026-04-02 11:19:34] [DEBUG]   OUTPUT: python.exe : [KC Search] Error: {'message': 'Could not find the function public.search_kcs(match_count, 
+query_embedding) in the schema cache', 'code': 'PGRST202', 'hint': None, 'details': 'Searched for the function 
+public.search_kcs with parameters match_count, query_embedding or with a single u
+[2026-04-02 11:19:36] [INFO]   Building: N07/scoring_rubric -- create scoring rubric for orchestration evaluation
+[2026-04-02 11:19:56] [ERROR]   FAIL N07/scoring_rubric -- no artifact saved
+[2026-04-02 11:19:56] [DEBUG]   OUTPUT: python.exe : [KC Search] Error: {'message': 'Could not find the function public.search_kcs(match_count, 
+query_embedding) in the schema cache', 'code': 'PGRST202', 'hint': None, 'details': 'Searched for the function 
+public.search_kcs with parameters match_count, query_embedding or with a single u
+[2026-04-02 11:19:58] [INFO]   Building: N07/dispatch_rule -- create dispatch rule for orchestration routing
+[2026-04-02 11:20:19] [ERROR]   FAIL N07/dispatch_rule -- no artifact saved
+[2026-04-02 11:20:19] [DEBUG]   OUTPUT: python.exe : [KC Search] Error: {'message': 'Could not find the function public.search_kcs(match_count, 
+query_embedding) in the schema cache', 'code': 'PGRST202', 'hint': None, 'details': 'Searched for the function 
+public.search_kcs with parameters match_count, query_embedding or with a single u
+[2026-04-02 11:20:21] [INFO]   Building: N07/schema -- create schema contract for orchestration data model
+[2026-04-02 11:20:40] [ERROR]   FAIL N07/schema -- no artifact saved
+[2026-04-02 11:20:40] [DEBUG]   OUTPUT: python.exe : [KC Search] Error: {'message': 'Could not find the function public.search_kcs(match_count, 
+query_embedding) in the schema cache', 'code': 'PGRST202', 'hint': None, 'details': 'Searched for the function 
+public.search_kcs with parameters match_count, query_embedding or with a single u
+[2026-04-02 11:20:42] [INFO]   Building: N07/output_template -- create output template for orchestration reports
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           

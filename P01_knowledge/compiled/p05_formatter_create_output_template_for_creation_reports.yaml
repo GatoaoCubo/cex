@@ -1,25 +1,23 @@
-id: p05_fmt_creation_report
+id: p05_fmt_creation_reports
 kind: formatter
 pillar: P05
+title: Creation Reports Formatter
 version: 1.0.0
-created: '2026-04-01'
-updated: '2026-04-01'
-author: formatter-builder
+created: '2026-04-02'
+updated: '2026-04-02'
+author: builder_agent
 target_format: markdown
 input_type: structured_data
-rule_count: 6
+rule_count: 8
 domain: creation_reporting
 quality: null
 tags:
 - formatter
 - creation
-- report
+- reports
 - markdown
 - P05
-- activity
-title: Creation Report Formatter
-tldr: Formats creation activity data into structured Markdown reports with quality scores, artifact status, and execution
-  metrics
+tldr: Formats creation activity data into structured Markdown reports with metrics, timelines, and status summaries
 template_engine: string_format
 pretty_print: true
 escaping: none
@@ -27,85 +25,82 @@ encoding: utf8
 locale: pt-BR
 streaming: false
 keywords:
-- creation-report
-- activity-summary
-- quality-dashboard
-- artifact-status
+- creation-reports
+- activity-formatter
+- markdown-reports
+- creation-metrics
 density_score: 0.89
 formatting_rules: '| Name | Input Field | Transform | Pattern | Options |
 
   |------|-------------|-----------|---------|---------|
 
-  | activity_header | activity_name | stringify | `# {value}` | uppercase: false |
+  | title_format | project_title | stringify | `# {value}` | max_length: 80, case: title |
 
-  | quality_badge | quality_score | number_format | `Quality: {value:.1f}/10.0` | color_threshold: 8.0 |
+  | date_format | creation_date | date_format | `Criado: {value:%d/%m/%Y às %H:%M}` | locale: pt-BR, timezone: America/Sao_Paulo
+  |
 
-  | status_indicator | status | stringify | `Status: {value}` | uppercase: true, color_map: true |
+  | status_format | status | stringify | `Status: {value}` | uppercase: true, badge: true |
 
-  | artifact_list | artifacts | tabulate | `- {name} — {description}` | bullet_style: dash |
+  | count_format | artifact_count | number_format | `Artefatos: {value} criados` | locale: pt-BR, unit: items |
 
-  | timestamp_format | created_at | date_format | `Created: {value:%Y-%m-%d %H:%M}` | locale: pt-BR, timezone: UTC |
+  | quality_format | avg_quality | number_format | `Qualidade Média: {value:.1f}/10.0` | precision: 1, range: 0-10 |
 
-  | metrics_table | execution_metrics | tabulate | `| {metric} | {value} | {unit} |` | headers: true, align: right |'
-input_specification: "Type: structured_data\nStructure: creation activity object with name, quality score, status, artifacts\
-  \ list, timestamps, and execution metrics.\nExample:\n{\n  \"activity_name\": \"Build Knowledge Card for React Patterns\"\
-  ,\n  \"quality_score\": 8.7,\n  \"status\": \"complete\",\n  \"artifacts\": [\n    {\"name\": \"kc_react_patterns\", \"\
-  path\": \"P01_knowledge/kc_react_patterns.md\", \"description\": \"React component patterns and best practices\"}\n  ],\n\
-  \  \"created_at\": \"2026-04-01T20:05:38Z\",\n  \"execution_metrics\": [\n    {\"metric\": \"Duration\", \"value\": 12.3,\
-  \ \"unit\": \"minutes\"},\n    {\"metric\": \"Token Count\", \"value\": 4567, \"unit\": \"tokens\"}\n  ]\n}"
+  | duration_format | elapsed_time | stringify | `Duração: {value}` | unit: auto, round: minutes |
+
+  | creator_format | creator_name | stringify | `Criador: {value}` | link: true, max_length: 50 |
+
+  | progress_format | completion_pct | number_format | `Progresso: {value:.0f}%` | format: percentage, bar: true |'
+input_specification: "Type: structured_data\nStructure: creation activity object with project metadata, timing, quality metrics,\
+  \ and progress tracking.\nExample:\n{\n  \"project_title\": \"Sistema de Conhecimento CEX\",\n  \"creation_date\": \"2026-04-02T10:30:00\"\
+  ,\n  \"status\": \"em_progresso\",\n  \"artifact_count\": 42,\n  \"avg_quality\": 8.7,\n  \"elapsed_time\": \"2h 30m\",\n\
+  \  \"creator_name\": \"N03 Builder\",\n  \"completion_pct\": 75.5\n}"
 output_specification: 'Format: markdown
 
   Example:
 
-  # Build Knowledge Card for React Patterns
+  # Sistema de Conhecimento CEX
 
 
-  Quality: 8.7/10.0 | Status: COMPLETE
+  Criado: 02/04/2026 às 10:30
 
+  Status: EM_PROGRESSO
 
-  ## Artifacts
+  Artefatos: 42 criados
 
-  - kc_react_patterns — React component patterns and best practices
+  Qualidade Média: 8.7/10.0
 
+  Duração: 2h 30m
 
-  ## Execution Metrics
+  Criador: N03 Builder
 
-  | Metric | Value | Unit |
-
-  |--------|--------|------|
-
-  | Duration | 12.3 | minutes |
-
-  | Token Count | 4567 | tokens |
-
-
-  Created: 2026-04-01 20:05'
+  Progresso: 76%'
 template: 'Engine: string_format
 
-  # {activity_name}
+  {title}
 
 
-  {quality_badge} | {status_indicator}
+  {date}
 
+  {status}
 
-  ## Artifacts
+  {count}
 
-  {artifact_list}
+  {quality}
 
+  {duration}
 
-  ## Execution Metrics
+  {creator}
 
-  {metrics_table}
-
-
-  {timestamp_format}'
+  {progress}'
 edge_cases:
-- 'Null quality_score: render as `Quality: N/A`'
-- 'Empty artifacts array: render as `No artifacts generated`'
-- 'Missing execution_metrics: omit entire Execution Metrics section'
-- 'Special characters in artifact names: escape brackets `[]` as `\[\]` in Markdown links'
-- 'Long activity names: truncate at 80 characters with ellipsis'
+- 'Null values: render as `Campo: Não informado`'
+- 'Empty strings: render as `Campo: -`'
+- 'Special characters: pipe `|` escaped as `\|` in table contexts'
+- 'Overflow: truncate title at 80 chars with `...`, creator at 50 chars'
+- 'Invalid dates: render as `Criado: Data inválida`'
+- 'Quality out of range: clamp to 0.0-10.0 range'
+- 'Negative duration: render as `Duração: Calculando...`'
 references:
-- 'Markdown specification: CommonMark 0.30'
-- ISO 8601 date formatting for timestamps
-- CEX quality scoring system (0-10 scale)
+- Markdown CommonMark specification for formatting
+- ISO 8601 date formatting standards
+- Brazilian Portuguese locale formatting (ABNT NBR 14724)

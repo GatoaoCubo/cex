@@ -1,113 +1,132 @@
-id: p03_pt_engineering_task_executor
+id: p03_pt_engineering_task_specification
 kind: prompt_template
 pillar: P03
-title: Engineering Task Executor Template
+title: Engineering Task Specification Template
 version: 1.0.0
-created: '2026-04-01'
-updated: '2026-04-01'
+created: '2026-04-02'
+updated: '2026-04-02'
 author: prompt-template-builder
 variables:
 - name: task_type
   type: string
   required: true
   default: null
-  description: Type of engineering task (code_review, debugging, system_design, refactoring, testing, documentation)
+  description: The type of engineering task (code_review, debugging, architecture_design, feature_implementation, testing,
+    deployment)
 - name: technology_stack
   type: list
   required: true
   default: null
-  description: Technologies, frameworks, and tools involved in the task
+  description: Technologies, frameworks, and languages involved in the task
 - name: complexity_level
   type: string
   required: false
-  default: intermediate
-  description: Task complexity level (beginner, intermediate, advanced, expert)
-- name: deliverable_format
+  default: medium
+  description: Task complexity level (low, medium, high, critical)
+- name: deliverables
+  type: list
+  required: true
+  default: null
+  description: Expected outputs or artifacts from the engineering task
+- name: timeline
   type: string
   required: false
-  default: structured_report
-  description: Expected output format (code, documentation, report, checklist, diagram)
-- name: context_description
+  default: standard
+  description: Time constraint or urgency level for task completion
+- name: context
   type: string
   required: true
   default: null
-  description: Background context and specific details about the engineering task
-- name: success_criteria
-  type: list
-  required: false
-  default:
-  - functional_correctness
-  - code_quality
-  - performance
-  description: Criteria that define successful task completion
+  description: Background information, system context, or business requirements
 - name: constraints
   type: list
   required: false
   default: []
-  description: Technical constraints, limitations, or requirements to consider
+  description: Technical constraints, limitations, or requirements that must be respected
+- name: success_criteria
+  type: list
+  required: true
+  default: null
+  description: Measurable criteria that define successful task completion
 variable_syntax: mustache
 composable: true
 domain: engineering
 quality: null
 tags:
+- prompt-template
 - engineering
-- task-execution
-- code
+- task-specification
 - development
-- structured
-tldr: Executes engineering tasks with specified technology stack, complexity, and deliverables.
+- reusable
+tldr: Generates structured engineering task specifications with clear scope, deliverables, and success criteria.
 keywords:
 - engineering
-- development
-- code
 - task
-- execution
+- specification
+- development
 - technical
-density_score: null
-purpose: This template produces structured engineering task execution prompts for various software development activities.
-  Reuse scope encompasses code reviews, debugging sessions, system design, refactoring, testing, and technical documentation
-  tasks. Invoke once per engineering task by varying the task type, technology stack, and specific requirements to generate
-  focused, actionable prompts.
+- requirements
+density_score: 0.91
+purpose: 'Produces a comprehensive engineering task specification that clearly defines scope, requirements, deliverables,
+  and success criteria. Reuse scope: any engineering work requiring structured planning and execution - from feature development
+  to system debugging. Invoke once per task; vary task parameters to generate distinct specifications from the same template
+  structure.'
 variables_table: '| Name | Type | Required | Default | Description |
 
-  |---|---|---|---|---|
+  |------|------|----------|---------|-------------|
 
-  | task_type | string | true | null | Type of engineering task (code_review, debugging, system_design, refactoring, testing,
-  documentation) |
+  | task_type | string | true | null | The type of engineering task (code_review, debugging, architecture_design, feature_implementation,
+  testing, deployment) |
 
-  | technology_stack | list | true | null | Technologies, frameworks, and tools involved in the task |
+  | technology_stack | list | true | null | Technologies, frameworks, and languages involved in the task |
 
-  | complexity_level | string | false | "intermediate" | Task complexity level (beginner, intermediate, advanced, expert)
-  |
+  | complexity_level | string | false | "medium" | Task complexity level (low, medium, high, critical) |
 
-  | deliverable_format | string | false | "structured_report" | Expected output format (code, documentation, report, checklist,
-  diagram) |
+  | deliverables | list | true | null | Expected outputs or artifacts from the engineering task |
 
-  | context_description | string | true | null | Background context and specific details about the engineering task |
+  | timeline | string | false | "standard" | Time constraint or urgency level for task completion |
 
-  | success_criteria | list | false | ["functional_correctness", "code_quality", "performance"] | Criteria that define successful
-  task completion |
+  | context | string | true | null | Background information, system context, or business requirements |
 
-  | constraints | list | false | [] | Technical constraints, limitations, or requirements to consider |'
-template_body: 'You are an expert software engineer with deep expertise in {{technology_stack}}. Execute the following engineering
-  task with precision and attention to detail.
+  | constraints | list | false | [] | Technical constraints, limitations, or requirements that must be respected |
+
+  | success_criteria | list | true | null | Measurable criteria that define successful task completion |'
+template_body: '# Engineering Task Specification
 
 
-  Task Type: {{task_type}}
+  ## Task Overview
 
-  Complexity Level: {{complexity_level}}
+  Type: {{task_type}}
 
-  Technology Stack: {{technology_stack}}
+  Complexity: {{complexity_level}}
 
-  Deliverable Format: {{deliverable_format}}
-
-
-  Context & Background:
-
-  {{context_description}}
+  Timeline: {{timeline}}
 
 
-  Success Criteria:
+  ## Context & Background
+
+  {{context}}
+
+
+  ## Technology Stack
+
+  {{#technology_stack}}
+
+  - {{.}}
+
+  {{/technology_stack}}
+
+
+  ## Deliverables
+
+  {{#deliverables}}
+
+  - {{.}}
+
+  {{/deliverables}}
+
+
+  ## Success Criteria
 
   {{#success_criteria}}
 
@@ -118,7 +137,7 @@ template_body: 'You are an expert software engineer with deep expertise in {{tec
 
   {{#constraints}}
 
-  Technical Constraints:
+  ## Constraints & Requirements
 
   {{#constraints}}
 
@@ -129,115 +148,156 @@ template_body: 'You are an expert software engineer with deep expertise in {{tec
   {{/constraints}}
 
 
-  Instructions:
+  ## Execution Guidelines
 
-  1. Analyze the task requirements thoroughly
+  1. Planning Phase: Review context and constraints before implementation
 
-  2. Consider the technology stack limitations and best practices
+  2. Development Phase: Follow technology stack best practices and coding standards
 
-  3. Apply engineering principles appropriate for {{complexity_level}} level
+  3. Validation Phase: Verify all success criteria are met
 
-  4. Structure your response as a {{deliverable_format}}
-
-  5. Ensure all success criteria are addressed
-
-  6. Document any assumptions or decisions made
-
-  7. Provide actionable recommendations where applicable
+  4. Documentation Phase: Document decisions, trade-offs, and implementation details
 
 
-  Output Requirements:
+  ## Quality Standards
 
-  - Clear, technical language appropriate for {{complexity_level}} audience
+  - Code must pass existing test suite
 
-  - Include code examples, diagrams, or specifications as needed
+  - New functionality requires comprehensive test coverage
 
-  - Follow best practices for {{technology_stack}}
+  - All changes must be peer-reviewed
 
-  - Highlight potential risks or trade-offs
+  - Documentation updated for any API or interface changes
 
-  - Suggest next steps or follow-up actions
+  - Performance impact assessed for {{complexity_level}} complexity tasks
 
 
-  Execute this task systematically and provide a comprehensive response.'
+  Please proceed with the {{task_type}} task following this specification.'
 quality_gates: '| Gate | Status | Notes |
 
-  |---|---|---|
+  |------|--------|--------|
 
   | H01 | PASS | Frontmatter parses as valid YAML |
 
-  | H02 | PASS | `id` matches `^p03_pt_[a-z][a-z0-9_]+$` pattern |
+  | H02 | PASS | ID `p03_pt_engineering_task_specification` matches `^p03_pt_[a-z][a-z0-9_]+$` |
 
-  | H03 | PASS | `id` equals filename stem |
+  | H03 | PASS | ID matches filename stem |
 
-  | H04 | PASS | `kind` equals literal `prompt_template` |
+  | H04 | PASS | Kind equals literal `prompt_template` |
 
-  | H05 | PASS | `quality` is null at authoring time |
+  | H05 | PASS | Quality is null at authoring time |
 
-  | H06 | PASS | All required frontmatter fields present |
+  | H06 | PASS | All required frontmatter fields present and non-empty |
 
-  | H07 | PASS | Body contains `{{variable}}` placeholders |
+  | H07 | PASS | Body contains {{variable}} placeholders |
 
-  | H08 | PASS | All body variables declared in Variables section |
-
-  | H09 | PASS | Template is composable for embedding in larger workflows |'
+  | H08 | PASS | All body variables declared in Variables section |'
 examples: ''
-example_1_code_review_task: 'Variables:
+example_1_api_feature_implementation: 'Variables:
 
-  task_type: "code_review"
+  task_type: "feature_implementation"
 
-  technology_stack: ["Python", "FastAPI", "PostgreSQL", "Docker"]
+  technology_stack: ["Node.js", "Express.js", "PostgreSQL", "Redis"]
 
-  complexity_level: "advanced"
+  complexity_level: "medium"
 
-  deliverable_format: "checklist"
+  deliverables: ["REST API endpoints", "Database schema updates", "Unit tests", "API documentation"]
 
-  context_description: "Review a REST API implementation for a user authentication service with JWT tokens, database integration,
-  and containerization"
+  timeline: "2 weeks"
 
-  success_criteria: ["security_compliance", "code_quality", "performance_optimization", "maintainability"]
+  context: "Implement user authentication system for SaaS platform. Current system lacks proper session management and password
+  reset functionality."
 
-  constraints: ["PCI_DSS_compliance", "sub_200ms_response_time", "horizontal_scaling_support"]
+  constraints: ["Must maintain backward compatibility", "GDPR compliance required", "Zero downtime deployment"]
+
+  success_criteria: ["All endpoints return proper HTTP status codes", "Password reset flow completes in <2 minutes", "Session
+  timeout configurable", "100% test coverage on auth module"]
 
 
   Rendered Output:
 
-  You are an expert software engineer with deep expertise in Python, FastAPI, PostgreSQL, Docker. Execute the following engineering
-  task with precision and attention to detail.
+  # Engineering Task Specification
 
 
-  Task Type: code_review
+  ## Task Overview
 
-  Complexity Level: advanced
+  Type: feature_implementation
 
-  Technology Stack: Python, FastAPI, PostgreSQL, Docker
+  Complexity: medium
 
-  Deliverable Format: checklist
-
-
-  Context & Background:
-
-  Review a REST API implementation for a user authentication service with JWT tokens, database integration, and containerization
+  Timeline: 2 weeks
 
 
-  Success Criteria:
+  ## Context & Background
 
-  - security_compliance
-
-  - code_quality
-
-  - performance_optimization
-
-  - maintainability
+  Implement user authentication system for SaaS platform. Current system lacks proper session management and password reset
+  functionality.
 
 
-  Technical Constraints:
+  ## Technology Stack
 
-  - PCI_DSS_compliance
+  - Node.js
 
-  - sub_200ms_response_time
+  - Express.js
 
-  - horizontal_scaling_support
+  - PostgreSQL
+
+  - Redis
 
 
-  [Rest of rendered template...]'
+  ## Deliverables
+
+  - REST API endpoints
+
+  - Database schema updates
+
+  - Unit tests
+
+  - API documentation
+
+
+  ## Success Criteria
+
+  - All endpoints return proper HTTP status codes
+
+  - Password reset flow completes in <2 minutes
+
+  - Session timeout configurable
+
+  - 100% test coverage on auth module
+
+
+  ## Constraints & Requirements
+
+  - Must maintain backward compatibility
+
+  - GDPR compliance required
+
+  - Zero downtime deployment
+
+
+  ## Execution Guidelines
+
+  1. Planning Phase: Review context and constraints before implementation
+
+  2. Development Phase: Follow technology stack best practices and coding standards
+
+  3. Validation Phase: Verify all success criteria are met
+
+  4. Documentation Phase: Document decisions, trade-offs, and implementation details
+
+
+  ## Quality Standards
+
+  - Code must pass existing test suite
+
+  - New functionality requires comprehensive test coverage
+
+  - All changes must be peer-reviewed
+
+  - Documentation updated for any API or interface changes
+
+  - Performance impact assessed for medium complexity tasks
+
+
+  Please proceed with the feature_implementation task following this specification.'

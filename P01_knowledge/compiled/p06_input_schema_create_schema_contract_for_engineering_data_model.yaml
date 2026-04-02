@@ -2,74 +2,63 @@ id: p06_is_engineering_data_model
 kind: input_schema
 pillar: P06
 version: 1.0.0
-created: '2026-04-01'
-updated: '2026-04-01'
+created: '2026-04-02'
+updated: '2026-04-02'
 author: input-schema-builder
-scope: engineering system data model creation and validation
+scope: engineering data model creation and validation operations
 fields: '| # | Name | Type | Required | Default | Description |
 
   |---|------|------|----------|---------|-------------|
 
-  | 1 | project_name | string | YES | - | Name of the engineering project or system |
+  | 1 | project_name | string | YES | - | Name of the engineering project requiring the data model |
 
-  | 2 | engineering_domain | string | YES | - | Primary engineering domain (software, mechanical, electrical, civil, aerospace)
+  | 2 | engineering_domain | string | YES | - | Engineering discipline: software, mechanical, electrical, civil, chemical
   |
 
-  | 3 | requirements | list | NO | [] | List of functional and non-functional requirements |
+  | 3 | data_model_type | string | YES | - | Data model architecture: relational, graph, document, time-series, hybrid |
 
-  | 4 | specifications | object | NO | {} | Technical specifications including performance metrics, constraints, and standards
-  |
+  | 4 | requirements | list | YES | - | List of functional and non-functional requirements for the data model |
 
-  | 5 | team_size | integer | NO | 1 | Number of engineers working on the project |
+  | 5 | constraints | list | NO | [] | Technical constraints: performance, storage, compliance, integration limits |
 
-  | 6 | timeline_months | integer | NO | 6 | Project timeline in months |
+  | 6 | quality_metrics | object | NO | {"accuracy": 0.95, "completeness": 0.90, "consistency": 0.98} | Quality standards:
+  accuracy, completeness, consistency thresholds |
 
-  | 7 | budget | float | NO | null | Project budget in currency units |
+  | 7 | validation_rules | list | NO | [] | Business rules and validation constraints to enforce |
 
-  | 8 | quality_standards | list | NO | ["ISO9001"] | Quality standards and frameworks to be followed |
+  | 8 | data_sources | list | NO | [] | External data sources to integrate: APIs, databases, files, sensors |
 
-  | 9 | compliance_requirements | list | NO | [] | Regulatory and compliance requirements |
-
-  | 10 | technology_stack | object | NO | {} | Technologies, tools, and platforms to be used |'
+  | 9 | scale_parameters | object | NO | {"records": 100000, "concurrent_users": 100, "transactions_per_second": 1000} | Expected
+  scale: record count, user load, transaction volume |'
 coercion:
 - from: string
-  to: integer
-  rule: Parse team_size and timeline_months from string if numeric
-- from: string
-  to: float
-  rule: Parse budget from string if numeric
-- from: string
   to: list
-  rule: Split comma-separated strings into lists for requirements and quality_standards
-examples: "{\n  \"project_name\": \"Web API Gateway\", \n  \"engineering_domain\": \"software\",\n  \"team_size\": 3,\n  \"\
-  timeline_months\": 8,\n  \"requirements\": [\"rate limiting\", \"authentication\", \"load balancing\"],\n  \"technology_stack\"\
-  : {\"backend\": \"Node.js\", \"database\": \"PostgreSQL\", \"cache\": \"Redis\"}\n}"
-domain: engineering-systems
+  rule: Convert comma-separated string to list by splitting on commas
+- from: string
+  to: object
+  rule: Parse JSON string to object for quality_metrics and scale_parameters
+examples: "{\n  \"project_name\": \"CAD Component Library\",\n  \"engineering_domain\": \"mechanical\",\n  \"data_model_type\"\
+  : \"graph\",\n  \"requirements\": [\"Part relationship modeling\", \"Version control\", \"Material properties\"],\n  \"\
+  scale_parameters\": {\"records\": 1000000, \"concurrent_users\": 50}\n}"
+domain: engineering-data-modeling
 quality: null
 tags:
 - input-schema
 - engineering
 - data-model
-- systems
-- specifications
-tldr: 'Input contract for engineering data models: requires project name and domain, optional requirements, specs, team size,
-  timeline, budget, and standards.'
+- schema-contract
+- P06
+tldr: 'Input contract for engineering data model operations: requires project name, domain, model type, and requirements list
+  with optional constraints and metrics.'
 density_score: 0.92
-contract_definition: Engineering systems and projects require structured data models to capture requirements, specifications,
-  team composition, timelines, and compliance needs. This input schema defines the contract for any system that processes
-  engineering project data, ensuring consistent data structure across different engineering domains while maintaining flexibility
-  for domain-specific requirements.
 coercion_rules: '| From | To | Rule |
 
   |------|----|------|
 
-  | string | integer | Parse team_size and timeline_months from string if numeric |
+  | string | list | Convert comma-separated string to list by splitting on commas |
 
-  | string | float | Parse budget from string if numeric |
-
-  | string | list | Split comma-separated strings into lists for requirements and quality_standards |'
+  | string | object | Parse JSON string to object for quality_metrics and scale_parameters |'
 references:
-- 'ISO 15288: Systems and software engineering life cycle processes'
-- 'IEEE 1220: Standard for Application and Management of the Systems Engineering Process'
-- 'PMBOK Guide: Project Management Body of Knowledge'
-- Engineering domain standards (IEEE, ASME, ACM, etc.)
+- ISO 10303 (STEP) for engineering data exchange standards
+- IEC 61970 (CIM) for electrical power system data modeling
+- NIST Engineering Data Management standards

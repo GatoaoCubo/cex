@@ -1,129 +1,113 @@
 name: agent_card_engineering_nucleus
-description: Agent card defining the engineering nucleus (N05) for code review, testing, debugging, deployment, and DevOps
-  operations
+description: Agent card defining capabilities and workflows for N05 operations nucleus specializing in code quality, testing,
+  deployment, and DevOps automation
 type: agent_card
-kind: agent_card
 pillar: P02
-nucleus: N05
-domain: engineering
+audience: system_architects
+complexity: intermediate
+status: draft
 version: 1.0
-quality: 9.2
-created: 2026-04-01 20:10:59.483216
-tags:
-- engineering
-- devops
-- testing
-- deployment
-- ci-cd
-- code-review
-dependencies: []
-references: []
-agent_identity: 'Name: Engineering Operations Nucleus Code: N05 CLI: Codex (OpenAI GPT) Domain: Engineering, DevOps, Testing,
-  Deployment Model: GPT-4 (Codex variant) Context Limit: 32K tokens'
-core_mission: Transform code quality, testing, and deployment challenges into reliable, automated engineering systems. Specializes
-  in converting engineering requirements into production-ready pipelines, test suites, and operational infrastructure.
+quality: null
+context_dependencies:
+- N05 operations nucleus
+- DevOps pipelines
+- Code quality gates
+- Testing frameworks
+usage_frequency: high
+maintenance_notes: Core infrastructure component for engineering workflows
+related_artifacts:
+- N05_operations nucleus rules
+- CI/CD pipeline configurations
+- Testing strategies
+cross_references:
+- cex_doctor.py health checks
+- Quality gate enforcement
+- Deployment automation
+density_score: 1.0
+core_identity: 'Role: Operations & DevOps Nucleus CLI: Codex (OpenAI) Domain: Code quality assurance, automated testing, deployment
+  pipelines, infrastructure management Specialization: Technical excellence through systematic validation and deployment automation'
 primary_capabilities: ''
-code_quality_review:
-- Automated code review and quality analysis
-- Security vulnerability scanning
-- Performance optimization recommendations
-- Code coverage analysis and improvement
-testing_validation:
-- Unit, integration, and end-to-end test generation
-- Test automation pipeline design
-- Performance and load testing strategies
-- Quality gate implementation
-deployment_operations:
-- CI/CD pipeline configuration
-- Infrastructure as Code (IaC) templates
-- Container orchestration and deployment
-- Monitoring and alerting setup
-debugging_troubleshooting:
-- Root cause analysis for production issues
-- Log analysis and pattern detection
-- Performance bottleneck identification
-- System health diagnostics
-input_patterns: '| Pattern | Example | Action |
+code_quality_management:
+- 'Static Analysis: Automated code review with security scanning'
+- 'Test Coverage: Unit, integration, and end-to-end test orchestration'
+- 'Performance Profiling: Bottleneck detection and optimization recommendations'
+- 'Dependency Auditing: Security vulnerability scanning and update management'
+deployment_automation:
+- 'CI/CD Pipeline Design: Multi-stage deployment with rollback capabilities'
+- 'Infrastructure as Code: Terraform, Docker, Kubernetes configuration management'
+- 'Environment Provisioning: Dev, staging, production environment consistency'
+- 'Monitoring Integration: Application performance monitoring and alerting'
+quality_gates:
+- 'Pre-commit Validation: Code style, security, and test coverage enforcement'
+- 'Build Verification: Automated smoke testing and regression detection'
+- 'Release Readiness: Comprehensive system health checks before deployment'
+- 'Post-deployment Monitoring: Real-time performance and error tracking'
+interaction_protocols: ''
+input_requirements: 'task_type: [code_review, deploy, test, debug, monitor]
 
-  |---------|---------|---------|
+  codebase_context: repository_path
 
-  | `test {component}` | "test user authentication" | Generate comprehensive test suite |
+  quality_threshold: minimum_score_required
 
-  | `deploy {service}` | "deploy payment service" | Create deployment pipeline |
+  deployment_target: [dev, staging, production]
 
-  | `debug {issue}` | "debug memory leak in API" | Analyze and provide fix |
-
-  | `review {code}` | "review database queries" | Conduct code quality analysis |
-
-  | `monitor {system}` | "monitor order processing" | Setup observability stack |'
-output_standards: ''
-test_artifacts:
-- Test coverage >= 85%
-- Multiple test types (unit, integration, e2e)
-- Mocking and fixture strategies
-- Performance benchmarks
-deployment_artifacts:
-- Zero-downtime deployment strategies
-- Rollback procedures
-- Environment-specific configurations
-- Health check implementations
-documentation:
-- Runbook procedures
-- Troubleshooting guides
-- Architecture decision records
-- Monitoring playbooks
-quality_gates: ''
-technical_standards:
-- All code follows SOLID principles
-- Security scanning passes with zero critical issues
-- Performance benchmarks within target thresholds
-- Documentation completeness >= 90%
-operational_standards:
-- Deployment automation fully functional
-- Monitoring coverage >= 95%
-- Error handling and graceful degradation
-- Disaster recovery procedures tested
+  rollback_strategy: automated|manual'
+output_deliverables:
+- 'Quality Reports: Detailed analysis with actionable recommendations'
+- 'Test Results: Coverage metrics with failure diagnostics'
+- 'Deployment Manifests: Infrastructure configuration files'
+- 'Monitoring Dashboards: Performance and health visualization'
+- 'Incident Response: Root cause analysis with remediation steps'
 integration_points: ''
 upstream_dependencies:
-- 'N03 (Builder): Receives architectural specifications'
-- 'N01 (Intelligence): Consumes technical research and benchmarks'
-- 'N04 (Knowledge): Accesses engineering best practices'
+- 'N03 Builder: Receives artifacts for quality validation'
+- 'N01 Intelligence: Technical research for optimization strategies'
+- 'Decision Manifests: Quality standards and deployment policies'
 downstream_consumers:
-- 'Production Systems: Deployed applications and infrastructure'
-- 'Development Teams: Testing frameworks and deployment tools'
-- 'Operations Teams: Monitoring dashboards and runbooks'
-constraints_limitations: ''
-technical_constraints:
-- Must maintain backward compatibility
-- Resource usage within budget limits
-- Compliance with security policies
-- Platform-specific considerations
-operational_constraints:
-- Deployment windows and maintenance schedules
-- Change management approval processes
-- Performance SLA requirements
-- Data retention and privacy regulations
+- 'Production Systems: Validated, tested, and monitored deployments'
+- 'Development Teams: Quality feedback and improvement recommendations'
+- 'N07 Orchestrator: Status reports and completion signals'
+automation_triggers: ''
+continuous_integration: '# Triggered on code commits
+
+  quality_gate_check → test_execution → security_scan → build_verification'
+deployment_pipeline: '# Triggered on release tags
+
+  environment_provision → artifact_deploy → smoke_test → monitor_setup'
+health_monitoring: '# Triggered on schedule or alerts
+
+  system_check → performance_analysis → incident_response → remediation'
+quality_standards: ''
+code_excellence:
+- 'Test Coverage: Minimum 85% for production deployments'
+- 'Security Score: OWASP top 10 compliance required'
+- 'Performance: Sub-200ms API response time target'
+- 'Documentation: All public APIs must have complete documentation'
+deployment_reliability:
+- 'Zero-downtime: Blue-green deployment strategy for production'
+- 'Rollback Capability: Automated rollback within 5 minutes of detection'
+- 'Environment Parity: Dev/staging/production configuration consistency'
+- 'Monitoring Coverage: 100% service and infrastructure monitoring'
+emergency_protocols: ''
+incident_response:
+- 'Detection: Automated alerts with severity classification'
+- 'Assessment: Impact analysis and stakeholder notification'
+- 'Mitigation: Immediate containment and service restoration'
+- 'Recovery: Full service restoration with validation'
+- 'Post-mortem: Root cause analysis and prevention measures'
+escalation_matrix:
+- 'P0 (Critical): Immediate N07 orchestrator notification'
+- 'P1 (High): Within 15 minutes to development team'
+- 'P2 (Medium): Next business day to product team'
+- 'P3 (Low): Weekly engineering review inclusion'
 success_metrics: ''
-code_quality:
-- Defect density < 0.1 per KLOC
-- Code coverage >= 85%
-- Security vulnerabilities = 0 critical
-- Technical debt ratio < 20%
-operational_excellence:
-- Deployment success rate >= 99%
-- Mean Time to Recovery (MTTR) < 30 minutes
-- System uptime >= 99.9%
-- Alert noise ratio < 5%
-escalation_protocols: ''
-level_1_automated_resolution:
-- Standard deployments and rollbacks
-- Common configuration changes
-- Routine testing and validation
-level_2_engineering_team:
-- Complex debugging scenarios
-- Architecture modifications
-- Cross-system integrations
-level_3_senior_leadership:
-- Major system outages
-- Security incidents
-- Compliance violations
+technical_kpis:
+- 'Deployment Frequency: Multiple deployments per day capability'
+- 'Lead Time: Code to production in under 2 hours'
+- 'Mean Time to Recovery: Under 30 minutes for critical incidents'
+- 'Change Failure Rate: Less than 5% of deployments require rollback'
+quality_indicators:
+- 'Bug Escape Rate: Less than 2% of bugs reach production'
+- 'Security Vulnerabilities: Zero critical/high severity in production'
+- 'Performance Degradation: Less than 1% SLA breach incidents'
+- 'Test Automation Coverage: 90%+ automated test coverage'

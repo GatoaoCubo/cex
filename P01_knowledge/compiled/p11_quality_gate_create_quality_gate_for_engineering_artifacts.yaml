@@ -3,98 +3,108 @@ kind: quality_gate
 pillar: P11
 title: 'Gate: Engineering Artifacts'
 version: 1.0.0
-created: '2026-04-01'
-updated: '2026-04-01'
+created: '2026-04-02'
+updated: '2026-04-02'
 author: quality-gate-builder
 domain: engineering
 quality: null
 tags:
 - quality-gate
 - engineering
+- technical-artifacts
 - code-quality
-- technical-review
-tldr: 'Quality gate for engineering artifacts: code quality, testing, docs, security, and deployment readiness with 8.0+ threshold.'
-density_score: 0.87
+- system-design
+tldr: 'Quality gate for engineering artifacts: validates technical correctness, completeness, and maintainability with 8.5
+  score threshold.'
+density_score: 0.92
 definition: '| Property | Value |
 
   |----------|-------|
 
   | Metric | engineering_quality_score |
 
-  | Threshold | 8.0 |
+  | Threshold | 8.5 |
 
   | Operator | >= |
 
-  | Scope | All engineering artifacts including code modules, APIs, configs, and technical documentation |'
-hard_gates: 'Failure on any single gate results in immediate rejection regardless of soft score.
+  | Scope | All engineering artifacts including code, system designs, technical specs, and architecture documents |'
+hard_gates_all_must_pass: 'Failure on any gate results in immediate rejection regardless of soft score.
 
 
-  | ID | Criterion | Failure Action |
+  | ID  | Criterion | Failure Action |
 
-  |----|-----------|----------------|
+  |-----|-----------|---------------|
 
   | H01 | YAML frontmatter parses without syntax errors | block |
 
-  | H02 | ID follows namespace pattern `p11_qg_*` | block |
+  | H02 | ID follows namespace pattern for artifact kind | block |
 
-  | H03 | ID field matches filename stem exactly | block |
+  | H03 | ID matches filename stem exactly | block |
 
-  | H04 | Kind field equals literal `quality_gate` | block |
+  | H04 | Kind field contains valid artifact type literal | block |
 
-  | H05 | Quality field is null at authoring time | block |
+  | H05 | Quality field is null at creation time | block |
 
   | H06 | All required frontmatter fields present and non-empty | block |
 
-  | H07 | Code passes linting without critical violations | block |
+  | H07 | Technical correctness: no logical errors, valid syntax for code artifacts | block |
 
-  | H08 | Security scan shows no high/critical vulnerabilities | block |
+  | H08 | Security review: no obvious vulnerabilities, follows secure coding practices | block |
 
-  | H09 | All public interfaces have documentation | block |
+  | H09 | Completeness: all specified requirements addressed, no incomplete sections | block |
 
-  | H10 | Deployment configuration is valid and complete | block |'
-soft_gates: 'Weighted scoring contributing to aggregate quality score.
-
-
-  | ID | Criterion | Weight | Scoring Method |
-
-  |----|-----------|--------|----------------|
-
-  | S01 | Code coverage >= 80% for unit tests | 20% | graduated |
-
-  | S02 | Technical documentation completeness score | 20% | graduated |
-
-  | S03 | Code maintainability index >= 70 | 20% | graduated |
-
-  | S04 | Performance benchmarks within acceptable limits | 15% | binary |
-
-  | S05 | Security best practices compliance score | 15% | graduated |
-
-  | S06 | Deployment readiness checklist completion | 10% | graduated |'
-scoring_formula: "aggregate_score = (\n  (S01_score * 0.20) +\n  (S02_score * 0.20) +\n  (S03_score * 0.20) +\n  (S04_score\
-  \ * 0.15) +\n  (S05_score * 0.15) +\n  (S06_score * 0.10)\n) * 10\n\nPASS condition: all HARD gates pass AND aggregate_score\
-  \ >= 8.0"
-actions: '| Outcome | Consequence |
-
-  |---------|-------------|
-
-  | GOLDEN (>= 9.5) | Artifact promoted to production pool as reference implementation |
-
-  | PUBLISH (>= 8.0) | Artifact approved for production deployment |
-
-  | REVIEW (>= 7.0) | Artifact returned with scored feedback, one revision cycle allowed |
-
-  | REJECT (< 7.0) | Artifact blocked, requires significant rework before resubmission |'
-bypass_policy: '| Field | Value |
-
-  |-------|-------|
-
-  | Conditions | Critical production hotfix with time-sensitive deployment requirements |
-
-  | Approver | Engineering lead + security officer dual approval required |
-
-  | Audit Requirements | Record in engineering audit log with justification, risk assessment, and remediation timeline |
-
-  | Expiry | 72 hours maximum, full compliance required before permanent deployment |
+  | H10 | Standards compliance: follows established engineering patterns and conventions | block |'
+soft_scoring_weighted_dimensions: 'Each dimension scored 0.0-1.0, multiplied by weight, summed for final score.
 
 
-  Note: HARD gates H01-H05 are never bypassable as they ensure basic artifact integrity.'
+  | ID  | Dimension | Weight | Scoring Method |
+
+  |-----|-----------|--------|----------------|
+
+  | S01 | Code quality and maintainability | 20% | graduated (0.0-1.0 based on readability, modularity, documentation) |
+
+  | S02 | Test coverage and validation | 15% | graduated (0.0-1.0 based on test completeness and coverage metrics) |
+
+  | S03 | Performance considerations | 15% | binary (1.0 if performance analyzed, 0.0 if ignored) |
+
+  | S04 | Documentation completeness | 15% | graduated (0.0-1.0 based on inline comments, external docs, examples) |
+
+  | S05 | Error handling and robustness | 10% | graduated (0.0-1.0 based on exception handling, edge case coverage) |
+
+  | S06 | Scalability and extensibility | 10% | binary (1.0 if future growth considered, 0.0 if not) |
+
+  | S07 | Code reusability and modularity | 10% | graduated (0.0-1.0 based on DRY principles, abstraction quality) |
+
+  | S08 | Deployment and operational readiness | 5% | binary (1.0 if deployment considerations included, 0.0 if missing) |
+
+
+  Scoring Formula: `aggregate_score = SUM(dimension_score  weight)  10`
+
+  PASS Condition: All HARD gates pass AND aggregate_score >= 8.5'
+actions: '| Outcome | Score Range | Consequence |
+
+  |---------|-------------|-------------|
+
+  | GOLDEN | >= 9.5 | Artifact promoted to golden reference; used for training and templates |
+
+  | PUBLISH | >= 8.5 | Artifact approved for production deployment and team consumption |
+
+  | REVIEW | >= 7.0 | Artifact returned with detailed feedback; one revision cycle required |
+
+  | REJECT | < 7.0 | Artifact blocked from pipeline; substantial rework required before resubmission |'
+bypass_policy: '| Field | Specification |
+
+  |-------|--------------|
+
+  | Conditions | Critical production hotfix with time constraints < 4 hours; experimental prototype for proof-of-concept only;
+  legacy system maintenance where full compliance impossible |
+
+  | Approver | Technical lead or engineering manager with written justification |
+
+  | Audit Trail | Record in `.cex/runtime/audits/engineering_bypasses.log` with timestamp, approver signature, artifact ID,
+  business justification, and remediation plan |
+
+  | Expiry | 7 days for hotfixes, 30 days for prototypes; full compliance required before expiry |
+
+  | Non-bypassable | H01 (YAML syntax), H05 (quality null), H08 (security review) - these gates have no override mechanism
+  |'

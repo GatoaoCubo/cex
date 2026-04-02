@@ -1,18 +1,17 @@
 id: p07_sr_brand_evaluation
 kind: scoring_rubric
 pillar: P07
-title: 'Rubric: Brand Evaluation Framework'
+title: 'Rubric: Brand Evaluation'
 version: 1.0.0
-created: '2026-04-01'
-updated: '2026-04-01'
+created: '2026-04-02'
+updated: '2026-04-02'
 author: scoring-rubric-builder
-framework: Brand5D
+framework: 5D Brand
 target_kinds:
 - brand_config
-- brand_card
-- brand_guidelines
-- brand_identity
-- brand_voice
+- agent_card
+- marketing_copy
+- system_prompt
 dimensions_count: 5
 total_weight: 100
 threshold_golden: 9.5
@@ -20,82 +19,82 @@ threshold_publish: 8.0
 threshold_review: 7.0
 automation_status: semi-automated
 domain: brand
-quality: 8.9
+quality: null
 tags:
 - scoring-rubric
 - brand
 - evaluation
+- marketing
 - identity
-- consistency
-tldr: '5-dimension brand rubric: consistency 30%, authenticity 25%, differentiation 20%, clarity 15%, completeness 10%'
-density_score: 0.87
+tldr: '5-dimension brand rubric: consistency 25%, clarity 25%, differentiation 20%, authenticity 15%, memorability 15%'
+density_score: 0.91
 calibration_set:
 - p07_gt_brand_tech_startup
-- p07_gt_brand_ecommerce
+- p07_gt_brand_creative_agency
 inter_rater_agreement: 0.82
-appeals_process: Submit to N06 commercial nucleus with brand rationale for re-evaluation
+appeals_process: Submit to N06 commercial nucleus with brand audit evidence for re-evaluation
 linked_artifacts:
   primary: brand-config-builder
   related:
   - p11_qg_brand_config
-  - p06_brand_identity_schema
-framework_overview: Brand5D evaluates brand artifacts across 5 orthogonal dimensions measuring how well a brand identity translates
-  into consistent, authentic, and differentiated market presence. Designed for brand_config, brand_card, brand_guidelines,
-  brand_identity, and brand_voice artifacts within the CEX ecosystem. Each dimension captures a distinct aspect of brand effectiveness
-  from internal coherence to external market positioning.
+  - p06_brand_validate
+  - brand_audit
+framework_overview: 5D Brand evaluates brand artifacts across 5 orthogonal dimensions that determine brand effectiveness and
+  market impact. Designed for brand_config files, agent personalities, marketing copy, and any artifact that carries brand
+  identity. Complements brand quality gates (P11) by providing nuanced scoring for brand strength beyond pass/fail validation.
 dimensions: '| Dimension | Weight | Scale | Criteria | Example (10) | Example (5) |
 
   |-----------|--------|-------|----------|-------------|-------------|
 
-  | Consistency | 30% | 0-10 | Brand elements align across all touchpoints, no contradictions | All colors, fonts, tone match
-  exactly; zero conflicts | Some alignment issues; 2-3 minor inconsistencies |
+  | Consistency | 25% | 0-10 | Visual/verbal elements align across touchpoints, no contradictions | Same tone/colors/voice
+  across 10+ artifacts, zero conflicts | Some variation in tone, 2-3 minor inconsistencies |
 
-  | Authenticity | 25% | 0-10 | Brand voice matches company values and founder personality | Voice perfectly reflects actual
-  company culture and values | Generic voice that could apply to any company |
+  | Clarity | 25% | 0-10 | Brand positioning, value prop, audience clearly defined and understood | One-sentence value prop,
+  specific target audience, clear category | Vague positioning, broad "everyone" audience |
 
-  | Differentiation | 20% | 0-10 | Brand clearly distinguishes from competitors in specific market | Unique positioning with
-  3+ distinct competitive advantages | Some differentiation but overlaps with 2+ competitors |
+  | Differentiation | 20% | 0-10 | Distinct from competitors, unique positioning, clear competitive advantage | Proprietary
+  methodology, unique angle, stands apart from 5+ competitors | Some unique elements, partially distinct from competition
+  |
 
-  | Clarity | 15% | 0-10 | Brand message is instantly understandable to target audience | Target audience immediately grasps
-  value proposition | Message requires explanation or multiple readings |
+  | Authenticity | 15% | 0-10 | Genuine to stated values, believable claims, consistent with actions | Values demonstrated
+  through actions, credible expertise, honest limitations | Some value alignment, mostly credible but generic |
 
-  | Completeness | 10% | 0-10 | All brand elements defined: colors, fonts, voice, values, positioning | 15+ brand elements
-  fully specified with examples | 8-10 elements defined; some gaps in specification |'
+  | Memorability | 15% | 0-10 | Distinctive elements that stick in memory, recognizable brand assets | Unique visual/verbal
+  hooks, immediate recognition, quotable phrases | Some memorable elements, partially recognizable |'
 thresholds: '| Tier | Score | Action |
 
   |------|-------|--------|
 
-  | GOLDEN | >= 9.5 | Promote to brand calibration library, reference for N06 nucleus |
+  | GOLDEN | >= 9.5 | Use as brand template, showcase in portfolio, reference standard |
 
-  | PUBLISH | >= 8.0 | Deploy to brand_config.yaml, propagate to all nuclei |
+  | PUBLISH | >= 8.0 | Deploy to production, approved for public use |
 
-  | REVIEW | >= 7.0 | Return with specific dimension feedback for improvement |
+  | REVIEW | >= 7.0 | Return with dimension-specific feedback, iterate specific elements |
 
-  | REJECT | < 7.0 | Restart brand discovery process with fresh research |'
+  | REJECT | < 7.0 | Restart brand discovery process, fundamental positioning issues |'
 calibration:
-- 'GOLDEN (9.7): p07_gt_brand_tech_startup — consistency 10.0, authenticity 9.5, differentiation 9.8, clarity 9.2, completeness
-  10.0. Perfect voice alignment with founder personality, unique technical positioning.'
-- 'PUBLISH (8.4): Standard enterprise brand with strong consistency (9.0), good authenticity (8.5), moderate differentiation
-  (8.0), clear messaging (8.0), complete elements (8.5).'
-- 'REVIEW (7.3): Functional brand with consistency gaps (7.5), adequate authenticity (7.0), weak differentiation (6.5), unclear
-  messaging (7.0), incomplete elements (8.5).'
-- 'REJECT (4.2): Inconsistent brand with major conflicts (4.0), generic voice (3.5), no differentiation (3.0), confusing message
-  (5.0), missing core elements (5.5).'
+- 'GOLDEN (9.7): p07_gt_brand_tech_startup — proprietary "AI-first architecture", targets CTOs at Series A startups, consistent
+  orange/navy across 12 touchpoints, memorable "Code Less, Ship More" tagline'
+- 'PUBLISH (8.4): Solid SaaS brand with clear B2B positioning, consistent design system, adequate differentiation from 3 competitors,
+  professional but not memorable'
+- 'REVIEW (7.1): Generic consulting brand with vague "we help businesses grow" positioning, inconsistent colors, some authentic
+  case studies but forgettable'
+- 'REJECT (4.2): No clear audience, contradictory messages across materials, generic stock photos, indistinguishable from
+  dozens of competitors'
 automation: '| Dimension | Status | Tool |
 
   |-----------|--------|------|
 
-  | Consistency | semi-automated | brand_validate.py (cross-reference checking) |
+  | Consistency | semi-automated | brand_audit.py (color/font/tone analysis) + manual review |
 
-  | Authenticity | manual | Human review against company culture documentation |
+  | Clarity | manual | Human assessment of positioning clarity and audience specificity |
 
-  | Differentiation | semi-automated | Competitor analysis + manual positioning review |
+  | Differentiation | semi-automated | Competitor analysis via web search + manual competitive assessment |
 
-  | Clarity | manual | Target audience comprehension testing |
+  | Authenticity | manual | Values alignment check against actions and claims |
 
-  | Completeness | automated | brand_audit.py (element counting and coverage) |'
+  | Memorability | manual | Human evaluation of distinctive elements and recall factors |'
 references:
-- Brand Strategy Canvas (Brand Strategist's Guide 2024)
-- Aaker's Brand Identity Model (Strategic Brand Management)
-- brand_validate.py v1.2 (CEX Brand5D implementation)
-- Competitive Positioning Framework (Harvard Business Review)
+- Brand Audit Framework (Aaker & Joachimsthaler, 2000)
+- Distinctive Brand Assets (Romaniuk & Sharp, 2016)
+- brand_audit.py v3.1 (CEX brand consistency checker)
