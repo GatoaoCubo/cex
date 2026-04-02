@@ -1,110 +1,99 @@
 ---
-id: p05_fmt_brand_reports
+id: p05_fmt_brand_report
 kind: formatter
 pillar: P05
 version: "1.0.0"
 created: "2026-04-02"
 updated: "2026-04-02"
-author: "builder_agent"
+author: "formatter-builder"
 target_format: "markdown"
 input_type: "structured_data"
-rule_count: 8
+rule_count: 7
 domain: "brand_reporting"
 quality: 9.1
-tags: [formatter, brand, reports, markdown, P05, metrics, identity]
-tldr: "Formats brand performance and identity data into structured Markdown reports with metrics tables, value hierarchies, and visual elements"
+tags: [formatter, markdown, brand, P05, report, metrics]
+tldr: "Formats brand performance and identity data into structured Markdown reports with header, metrics table, values list, color palette, and KPI summaries"
 template_engine: "string_format"
 pretty_print: true
 escaping: "none"
 encoding: "utf8"
 locale: "pt-BR"
 streaming: false
-keywords: [brand-reports, identity-formatter, metrics-display, brand-dashboard]
-density_score: 0.89
+keywords: [brand-report, brand-metrics, markdown-formatter, brand-identity, performance-report]
+density_score: 0.87
 ---
-# Brand Reports Formatter
-
 ## Formatting Rules
+
 | Name | Input Field | Transform | Pattern | Options |
 |------|-------------|-----------|---------|---------|
-| header_block | brand_name | template | `# {value} - Brand Report\n\n**Report Date:** {date}\n**Period:** {period}` | title_case: true |
-| metrics_table | brand_metrics | tabulate | `\| Metric \| Value \| Target \| Status \|\n\|-----\|-----\|-----\|-----\|\n{rows}` | status_icons: true |
-| values_list | brand_values | stringify | `- **{name}**: {description}` | max_description: 120 |
-| color_palette | brand_colors | template | `**{name}**: \`{hex_code}\` {color_sample}` | include_sample: true |
-| performance_summary | performance_data | number_format | `**{metric}**: {value:+.1%} vs target` | locale: pt-BR, show_trend: true |
-| guidelines_section | brand_guidelines | template | `## {category}\n\n{content}\n\n---` | markdown_safe: true |
-| asset_inventory | brand_assets | tabulate | `\| Asset \| Type \| Status \| Usage \|\n{asset_rows}` | max_rows: 50 |
-| contact_block | brand_contacts | template | `**{role}**: {name} ({email})` | obfuscate_email: false |
+| header_block | brand_name | template | `# {value} — Brand Report` | title_case: true, null: "Unnamed Brand" |
+| report_meta | report_date, period | template | `**Date:** {report_date}  ·  **Period:** {period}` | date_fmt: DD/MM/YYYY, null: omit_field |
+| metrics_table | brand_metrics | tabulate | `\| Metric \| Value \| Target \| Delta \|` | col_width: auto, null: `-` |
+| values_list | brand_values | stringify | `- **{name}**: {description}` | max_length: 120, truncate: ellipsis, null: omit |
+| color_swatch | brand_colors | template | `**{name}**: \`{hex_code}\`` | uppercase_hex: true, null: omit |
+| perf_kpi | performance_data | number_format | `**{metric}**: {value:+.1%} vs target` | locale: pt-BR, null: `—` |
+| recommendations | action_items | stringify | `{index}. {action}` | enumerate: 1-based, max_length: 200, null: omit |
 
 ## Input Specification
+
 Type: structured_data
-Structure: Brand report object containing identity, metrics, guidelines, and performance data.
+Structure: dict with brand_name (str), report_date (ISO date), period (str), brand_metrics (list[{metric, value, target, delta}]), brand_values (list[{name, description}]), brand_colors (list[{name, hex_code}]), performance_data (list[{metric, value}]), action_items (list[str]).
+
 Example:
 ```json
 {
-  "brand_name": "CODEXA Systems",
+  "brand_name": "Nexus Studio",
   "report_date": "2026-04-02",
   "period": "Q1 2026",
-  "brand_metrics": [
-    {"metric": "Brand Awareness", "value": 67, "target": 70, "status": "warning"},
-    {"metric": "Net Promoter Score", "value": 8.2, "target": 8.0, "status": "success"}
-  ],
-  "brand_values": [
-    {"name": "Innovation", "description": "Pushing boundaries in AI-assisted development"},
-    {"name": "Quality", "description": "Delivering robust, tested solutions"}
-  ],
-  "brand_colors": [
-    {"name": "Primary Blue", "hex_code": "#0066CC", "usage": "Headers, CTAs"},
-    {"name": "Accent Orange", "hex_code": "#FF6B35", "usage": "Highlights, alerts"}
-  ],
-  "performance_data": [
-    {"metric": "Conversion Rate", "value": 0.045, "target": 0.040},
-    {"metric": "Customer Satisfaction", "value": 0.89, "target": 0.85}
-  ]
+  "brand_metrics": [{"metric": "Awareness", "value": 0.42, "target": 0.50, "delta": -0.08}],
+  "brand_values": [{"name": "Clarity", "description": "Direct communication, no jargon"}],
+  "brand_colors": [{"name": "Primary Blue", "hex_code": "#1A73E8"}],
+  "performance_data": [{"metric": "Conversion", "value": 0.034}],
+  "action_items": ["Increase social posting frequency to 5x/week"]
 }
 ```
 
 ## Output Specification
+
 Format: markdown
 Example:
 ```markdown
-# CODEXA Systems - Brand Report
+# Nexus Studio — Brand Report
 
-**Report Date:** 2026-04-02
-**Period:** Q1 2026
+**Date:** 02/04/2026  ·  **Period:** Q1 2026
 
-## Performance Metrics
+## Metrics
 
-| Metric | Value | Target | Status |
-|--------|-------|--------|---------|
-| Brand Awareness | 67% | 70% | ⚠️ Warning |
-| Net Promoter Score | 8.2 | 8.0 | ✅ Success |
+| Metric | Value | Target | Delta |
+|--------|-------|--------|-------|
+| Awareness | 42% | 50% | -8pp |
 
 ## Brand Values
 
-- **Innovation**: Pushing boundaries in AI-assisted development
-- **Quality**: Delivering robust, tested solutions
+- **Clarity**: Direct communication, no jargon
 
 ## Color Palette
 
-**Primary Blue**: `#0066CC` 🔵 Headers, CTAs
-**Accent Orange**: `#FF6B35` 🟠 Highlights, alerts
+**Primary Blue**: `#1A73E8`
 
-## Performance Summary
+## Performance
 
-**Conversion Rate**: +12.5% vs target
-**Customer Satisfaction**: +4.7% vs target
+**Conversion**: +3,4% vs target
+
+## Recommendations
+
+1. Increase social posting frequency to 5x/week
 ```
 
 ## Template
+
 Engine: string_format
 ```text
-# {brand_name} - Brand Report
+{header_block}
 
-**Report Date:** {report_date}
-**Period:** {period}
+{report_meta}
 
-## Performance Metrics
+## Metrics
 
 {metrics_table}
 
@@ -114,35 +103,39 @@ Engine: string_format
 
 ## Color Palette
 
-{color_palette}
+{color_swatch}
 
-## Performance Summary
+## Performance
 
-{performance_summary}
+{perf_kpi}
 
-## Brand Guidelines
+## Recommendations
 
-{guidelines_section}
-
-## Asset Inventory
-
-{asset_inventory}
-
-## Team Contacts
-
-{contact_block}
+{recommendations}
 ```
 
 ## Edge Cases
-- Null values: render as `N/A` for missing metrics, `—` for missing targets
-- Empty strings: omit section entirely if no data (e.g., no guidelines provided)
-- Special characters: escape pipe `|` as `\|` in Markdown tables, preserve hex color codes
-- Overflow: truncate descriptions at max_length with `...`, limit asset inventory to 50 rows with "and X more" footer
-- Color codes: validate hex format `#RRGGBB`, fallback to `#000000` for invalid codes
-- Percentage formatting: display as `XX.X%` with one decimal for metrics, `+X.X%` vs target for performance
+
+- Null values: omit optional fields (report_meta, color_swatch, values_list, recommendations); render `—` for numeric KPIs; render `-` in table cells
+- Empty strings: treat as null — same omit/placeholder strategy applies per rule
+- Special characters: pipe `|` escaped as `\|` in Markdown table cells; backtick in hex codes is safe (no escaping needed)
+- Overflow: stringify rules truncate at max_length with ellipsis; table columns auto-width; template rules render as-is (no wrapping)
+
+## Locale
+
+Locale: pt-BR
+- Numbers: decimal `,` separator, thousands `.` (e.g., `1.234,56`)
+- Dates: DD/MM/YYYY (e.g., `02/04/2026`)
+- Percentages: `%` suffix, 1 decimal, comma separator (e.g., `42,3%`)
+- Currency: not in base template; extend perf_kpi with `R$ {value:,.2f}` when monetary metrics present
+
+## Boundary
+
+- NOT a parser: does not extract brand data from raw text — input must be pre-structured by parser or agent
+- NOT a response_format: does not constrain LLM decoder output schema — applies post-generation transformation only
 
 ## References
-- Markdown table specification: CommonMark 0.30
-- Brand identity standards: Corporate Visual Identity Guidelines
-- Performance metrics: Brand Health Tracking Framework
-- Color accessibility: WCAG 2.1 contrast requirements
+
+- CommonMark Markdown table specification: commonmark.org/spec
+- Python string format mini-language: docs.python.org/3/library/string.html#format-specification-mini-language
+- ISO 8601 date format standard: iso.org/iso-8601-date-and-time-format.html
