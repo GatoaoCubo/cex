@@ -46,7 +46,7 @@ variables:
 variable_syntax: "mustache"
 composable: false
 domain: intelligence
-quality: 8.9
+quality: 9.2
 tags: [intelligence, analysis, research, strategic, reusable]
 tldr: "Generates structured intelligence analysis for various targets with configurable scope and output format."
 keywords: [intelligence, analysis, research, competitive, market, strategic]
