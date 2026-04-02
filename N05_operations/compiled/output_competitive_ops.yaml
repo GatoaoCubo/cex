@@ -1,0 +1,92 @@
+id: n05_competitive_ops
+kind: competitive_analysis
+quality: null
+timestamp: 2026-04-02 15:30:00+00:00
+mission: COMPETITIVE_INTEL
+scope: multi-model_orchestration
+confidence: high
+executive_summary: CEX is architecturally lateral to mainstream frameworks (CrewAI, LangGraph, AutoGen). We solve heterogeneous
+  multi-CLI orchestration while competitors optimize single-process efficiency.
+1_orchestration_comparison_table: '| System | Process Model | IPC Method | Monitoring | Cleanup | Unique Advantage |
+
+  |--------|---------------|------------|------------|---------|------------------|
+
+  | CEX | 8 OS processes (CLIs) | Filesystem (.md/.json) | PID health + signal polling | Recursive kill-tree | Multi-vendor
+  CLI native |
+
+  | CrewAI | 1 Python process | In-memory objects | Exception handling | Garbage collection | Role-based agent design |
+
+  | LangGraph | 1 Python process | State dict through edges | Node execution tracking | Memory cleanup | DAG-based workflow
+  |
+
+  | AutoGen | 1 Python process | Message passing | Conversation tracking | Session cleanup | Multi-turn conversations |
+
+  | Prefect | Kubernetes pods | HTTP/gRPC | Pod status API | K8s resource cleanup | Enterprise orchestration |
+
+  | Modal | Serverless functions | HTTP requests | Function logs | Auto-scale down | Serverless AI deployment |'
+2_process_management_deep_dive: ''
+cex_s_approach:
+- 'Spawn: PowerShell Start-Process → 8 independent CMD windows'
+- 'Track: PID files + 30s polling via cex_signal_watch.py'
+- 'Monitor: Cross-platform PID health check (tasklist/kill signal 0)'
+- 'Cleanup: Recursive process tree kill (cmd+CLI+conhost+MCP)'
+unique_characteristics:
+- Multi-vendor CLI dispatch - Only system spawning Claude + Gemini + OpenAI as separate processes
+- Filesystem resilience - Can resume from last signal after crash/interruption
+- Quality-null rule - Enforced peer review (no self-assessment)
+- SCOPE FENCE - File isolation prevents cross-contamination
+3_ipc_analysis_filesystem_vs_alternatives: ''
+why_cex_uses_filesystem: ✅ Debuggability - Every state is readable .md/.json ✅ CLI-agnostic - Works with any executable ✅
+  Crash-resilient - Signals survive process death ✅ Git-integrated - Handoffs are versionable artifacts ❌ Latency - 30s polling
+  intervals vs millisecond API calls ❌ No streaming - No real-time coordination ❌ Scalability ceiling - ~8 concurrent processes
+  per machine
+industry_standard_in_memory:
+- 'CrewAI/LangGraph/AutoGen: Python objects, immediate execution'
+- 'Advantage: Millisecond latency, streaming coordination'
+- 'Disadvantage: Black-box state, crash = total failure'
+4_who_has_better_ops: ''
+more_robust_than_cex:
+- Kubernetes-based (Prefect, Ray) - Pod health checks, auto-restart, horizontal scaling
+- Serverless (Modal, Replicate) - Auto-scaling, managed infrastructure, global distribution
+- Enterprise platforms (Databricks, SageMaker) - Monitoring dashboards, SLA guarantees
+cex_s_operational_strengths:
+- Artifact type governance - 114 kinds with schema gates (no competitor matches)
+- Multi-model heterogeneity - Native support for 3+ providers simultaneously
+- Quality enforcement - 7-gate pipeline with mandatory peer review
+- Debuggability - Complete audit trail in readable files
+5_uniqueness_assessment: ''
+does_filesystem_ipc_cli_spawn_signal_polling_exist_elsewhere: 'NO. This exact combination is CEX-unique:
+
+
+  - Kubernetes orchestrates containers, not desktop CLIs
+
+  - Apache Airflow executes bash tasks but uses database for state
+
+  - Make/batch systems use exit codes, not structured JSON signals
+
+  - Process supervisors (systemd, PM2) restart services but don''t coordinate multi-model workflows'
+closest_analogs:
+- GitHub Actions - Filesystem artifacts between steps, but YAML-configured, not AI-orchestrated
+- Jenkins pipelines - Multi-stage with file passing, but build-focused
+- Scientific workflows (Snakemake, Nextflow) - File-based DAGs, but single-language
+6_recommendations: ''
+keep_current_architecture_if:
+- Debuggability > latency (research/analysis workloads)
+- Multi-vendor model mixing is core requirement
+- Quality governance (peer review) is non-negotiable
+- Team size < 10 (manageable complexity)
+consider_migration_if:
+- Latency becomes critical (< 30s response time needed)
+- Horizontal scaling required (> 8 concurrent agents)
+- Cloud-native deployment mandatory
+- Real-time agent coordination needed
+hybrid_strategy: "Recommended: Keep CEX for high-quality artifact production, add API gateway for low-latency queries:\n\n\
+  [Client Request]\n    │\n    ├─ Fast path: Single LLM API call (< 5s)\n    └─ Quality path: CEX multi-model orchestration\
+  \ (5-60min)"
+7_strategic_positioning: 'CEX occupies a unique niche: multi-vendor AI orchestration with artifact governance. Not competing
+  with CrewAI/LangGraph on latency, but on outcome quality and model diversity. Market position: "Premium AI orchestration
+  for quality-critical workflows"'
+competitive_moat: "The combination of:\n1. Typed artifacts (114 kinds)\n2. Multi-CLI dispatch (heterogeneous models)  \n3.\
+  \ Filesystem resilience (debuggable, resumable)\n\nNo competitor has all three. Moat defensibility: high.\n\n---\n\nBottom\
+  \ Line: CEX's filesystem+CLI approach is unique and defensible. Don't migrate - double down on quality governance and multi-model\
+  \ orchestration as differentiators."
