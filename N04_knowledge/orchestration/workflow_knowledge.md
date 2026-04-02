@@ -40,3 +40,17 @@ INGEST → CLASSIFY → DISTILL → STRUCTURE → VALIDATE → INDEX → EXPORT 
 | .jsonl | Fine-tuning dataset | External LLM training |
 | SQL | Database persistence | Supabase, vector search |
 | .csv | ML feature datasets | Analytics, dashboards |
+
+## Usage Guidelines
+
+**When to use:**
+- Converting messy research into structured knowledge cards
+- Building systematic knowledge base for team/organization
+- Preparing training data for fine-tuning models
+- Creating searchable documentation from scattered sources
+
+**Anti-patterns:**
+- Skipping classification step (leads to wrong pillar placement)
+- Accepting density < 0.85 (low information content)
+- Manual indexing instead of using cex_index.py
+- Creating KCs without monitoring freshness (stale knowledge)
