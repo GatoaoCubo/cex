@@ -187,13 +187,48 @@ def watch_signals(nuclei: list, timeout: int, poll: int, dry_run: bool = False) 
     ]
     log(f"Watching signals: {expected} (timeout={timeout}s, poll={poll}s)")
 
+    # Run signal_watch — progress goes to stderr (printed live), JSON to stdout
     result = subprocess.run(cmd, capture_output=True, text=True, cwd=str(ROOT))
 
+    # Print stderr progress lines to our log
+    if result.stderr:
+        for line in result.stderr.strip().splitlines():
+            log(f"  [WATCH] {line}")
+
+    # Extract JSON from stdout (between markers)
+    stdout = result.stdout
     try:
-        return json.loads(result.stdout)
-    except json.JSONDecodeError:
-        log(f"Signal watch output parse error: {result.stdout[:500]}", "ERROR")
-        return {"status": "error", "nuclei": {}}
+        if "---JSON_START---" in stdout:
+            json_str = stdout.split("---JSON_START---")[1].split("---JSON_END---")[0].strip()
+            return json.loads(json_str)
+        else:
+            return json.loads(stdout)
+    except (json.JSONDecodeError, IndexError):
+        log(f"Signal watch parse error. Exit code: {result.returncode}", "ERROR")
+        # Fallback: scan signal dir ourselves
+        signals = find_signals_fallback(nuclei)
+        return {"status": "fallback", "nuclei": signals}
+
+
+def find_signals_fallback(nuclei: list) -> dict:
+    """Fallback: read signals directly from disk if watch parsing fails."""
+    result = {}
+    if SIGNAL_DIR.exists():
+        for ninfo in nuclei:
+            nuc = ninfo["nucleus"]
+            sigs = sorted(SIGNAL_DIR.glob(f"signal_{nuc}_*.json"), key=lambda f: f.stat().st_mtime, reverse=True)
+            if sigs:
+                try:
+                    data = json.loads(sigs[0].read_text(encoding="utf-8"))
+                    result[nuc] = {
+                        "status": data.get("status", "complete"),
+                        "quality": data.get("quality_score", 0),
+                    }
+                except Exception:
+                    result[nuc] = {"status": "unknown", "quality": 0}
+            else:
+                result[nuc] = {"status": "no_signal", "quality": 0}
+    return result
 
 
 def stop_processes(dry_run: bool = False):

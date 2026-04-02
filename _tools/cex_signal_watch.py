@@ -112,7 +112,8 @@ def log(msg: str, quiet: bool = False):
     if not quiet:
         ts = datetime.now().strftime("%H:%M:%S")
         safe = str(msg).encode("ascii", "replace").decode("ascii")
-        print(f"[{ts}] [WATCH] {safe}", flush=True)
+        # Progress goes to stderr so stdout stays clean for JSON
+        print(f"[{ts}] [WATCH] {safe}", file=sys.stderr, flush=True)
 
 
 def main():
@@ -216,8 +217,11 @@ def main():
     summary_path.parent.mkdir(parents=True, exist_ok=True)
     summary_path.write_text(json.dumps(result, indent=2), encoding="utf-8")
 
-    # Output JSON
+    # Output JSON to stdout (logs went to stderr via log())
+    # Marker so mission_runner can find the JSON block
+    print("---JSON_START---")
     print(json.dumps(result, indent=2))
+    print("---JSON_END---")
 
     # Exit code
     if result["status"] == "complete":
