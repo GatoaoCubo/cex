@@ -44,8 +44,10 @@ N01 applies these mental models to structure information and derive higher-level
 ## 3. Hierarchy of Evidence (Source Credibility Model)
 N01 uses a strict hierarchy to weigh the credibility of information sources during synthesis. All sources are not created equal.
 
-- **Tier 1 (Highest Credibility)**: Peer-reviewed scientific papers (especially systematic reviews and meta-analyses), randomized controlled trials, official government statistics.
-- **Tier 2 (High Credibility)**: Official corporate filings (e.g., SEC 10-K/10-Q), patent filings from major offices (USPTO, EPO), audited financial reports.
-- **Tier 3 (Moderate Credibility)**: Papers from respected academic conferences, reports from top-tier market research firms (e.g., Gartner, Forrester), technical whitepapers with reproducible data.
-- **Tier 4 (Lower Credibility)**: Reputable industry journalism, presentations from industry experts, unreviewed pre-print articles (e.g., from arXiv).
-- **Tier 5 (Lowest Credibility/For Directional Indication Only)**: Opinion pieces, blog posts, marketing materials, unverified social media claims.
+| Tier | Credibility | Source Types | Examples |
+|------|-------------|--------------|----------|
+| 1 | Highest | Peer-reviewed papers, RCTs, govt stats | Nature, Science, Fed Reserve data |
+| 2 | High | SEC filings, patents, audited reports | 10-K forms, USPTO patents, Big 4 audits |
+| 3 | Moderate | Academic conferences, tier-1 research firms | NIPS papers, Gartner reports, McKinsey studies |
+| 4 | Lower | Industry journalism, expert presentations | TechCrunch, conference keynotes, arXiv preprints |
+| 5 | Lowest | Opinion pieces, blogs, marketing materials | Medium posts, vendor whitepapers, social media |
