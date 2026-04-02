@@ -69,3 +69,12 @@ CREATE INDEX IF NOT EXISTS idx_kcs_domain ON kcs(domain);
 python _tools/cex_compile.py --all
 python _tools/sql_export.py > migration.sql
 ```
+
+## Validation
+
+| Check | SQL Query | Expected |
+|-------|-----------|----------|
+| Table exists | `SELECT to_regclass('kcs');` | `'kcs'` |
+| Row count | `SELECT COUNT(*) FROM kcs;` | `{{COUNT}}` |
+| Index coverage | `SELECT indexname FROM pg_indexes WHERE tablename='kcs';` | 4 indexes |
+| Recent data | `SELECT MAX(updated_at) FROM kcs;` | Today's timestamp |
