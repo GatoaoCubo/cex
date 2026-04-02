@@ -38,6 +38,17 @@ density_score: 0.93
 | 180-365 days | 0.3 |
 | >1 year | 0.1 ⚠️ |
 
+## Implementation Guidelines
+
+| When to Use | When NOT to Use | Anti-patterns |
+|-------------|-----------------|---------------|
+| Research briefs | Internal memos | Scoring opinion as fact |
+| Competitive analysis | Quick status updates | Ignoring publication date |
+| Market reports | Brainstorm sessions | Missing bias assessment |
+| Citation validation | Creative writing | Over-weighting blog posts |
+
+**Workflow**: Score during research → filter <0.4 reliability → flag bias conflicts → archive with metadata
+
 ## Usage Examples
 
 | Source | Authority | Freshness | Bias | Reliability | Notes |
