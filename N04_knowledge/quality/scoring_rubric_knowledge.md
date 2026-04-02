@@ -37,3 +37,13 @@ density_score: 0.92
 - Inflating scores for "effort" (score output, not input)
 - Averaging all dimensions equally (use weights)
 - Scoring outdated content as "fresh" if recently edited
+
+## Scoring Examples
+
+**Density 10**: "Use Redis for session storage. TTL=3600s. Keys: `user:{id}:session`" vs **Density 4**: "Redis is a popular in-memory database that many developers use for various caching scenarios including session management which can improve application performance."
+
+**Taxonomy 10**: `kind: rag_source, pillar: P04, domain: vector-search` with cross-refs vs **Taxonomy 4**: `kind: document, pillar: P01, domain: general`
+
+**Actionability 10**: "Use when: >10K docs, complex queries. Don't use when: <100 docs, simple search. Anti-pattern: Vector search for exact matches" vs **Actionability 4**: "Vector search is useful for finding similar documents"
+
+**Structure 10**: Complete frontmatter + `## When`, `## How`, `## Examples` + tables vs **Structure 4**: Paragraph text with minimal headers
