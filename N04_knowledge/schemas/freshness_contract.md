@@ -33,6 +33,19 @@ density_score: 0.92
 | Stale | ⚠️ | Flag in output, prioritize refresh |
 | Deprecated | ❌ | Archive, remove from active injection |
 
+## Implementation Guide
+
+| Step | Check | Action |
+|------|-------|--------|
+| Daily | `git log --since="30 days"` on Platform KCs | Flag aging items |
+| Weekly | Scan aging KCs | Queue for expert review |
+| Monthly | Run freshness audit | Update stale items or deprecate |
+
+### Edge Cases
+- **Breaking changes**: Reset threshold to 0 days regardless of type
+- **Seasonal content**: Extend threshold by 50% for annual patterns
+- **Legacy systems**: Use Infrastructure thresholds even for Platform KCs
+
 ## Freshness Score Formula
 ```
 freshness = max(0, 1 - (days_since_update / threshold_stale))
