@@ -36,6 +36,24 @@ density_score: 0.93
 | language | enum | pt-BR | Output language |
 | max_sources | int | 20 | Cap on sources to analyze |
 
+## Usage Guidelines
+
+**Use this contract when:**
+- Dispatching research to N01 nucleus
+- Need structured intelligence output
+- Research has multiple constraints/preferences
+- Want consistent research deliverables
+
+**Don't use when:**
+- Quick factual lookup (use direct query)
+- Research is exploratory without clear question
+- Output format is flexible/undefined
+
+**Anti-patterns:**
+- Vague questions ("research AI trends")
+- Contradictory constraints (L1 depth + 50 sources)
+- Missing output_format specification
+
 ## Example
 ```yaml
 question: "Who are the top 5 competitors in AI agent frameworks for SMBs in Brazil?"
