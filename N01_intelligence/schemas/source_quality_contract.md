@@ -37,3 +37,13 @@ density_score: 0.93
 | 90-180 days | 0.5 |
 | 180-365 days | 0.3 |
 | >1 year | 0.1 ⚠️ |
+
+## Usage Examples
+
+| Source | Authority | Freshness | Bias | Reliability | Notes |
+|--------|-----------|-----------|------|-------------|-------|
+| Federal Reserve paper | 5 | 0.8 (60 days) | low | 0.86 | Primary government source |
+| TechCrunch article | 2 | 1.0 (15 days) | medium | 0.50 | News with commercial bias |
+| Personal blog | 1 | 0.3 (200 days) | high | 0.22 | Low authority + stale |
+| MIT research paper | 4 | 0.5 (120 days) | low | 0.74 | Academic authority |
+| Company press release | 3 | 1.0 (5 days) | high | 0.52 | Fresh but high bias |
