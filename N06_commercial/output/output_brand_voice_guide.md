@@ -1,44 +1,47 @@
 ---
 id: n06_output_brand_voice_guide
-kind: output_template
-pillar: P05
-title: "Brand Voice Guide — Tone Matrix & Channel Calibration"
+kind: brand_voice_guide
+pillar: P06
+title: "Guia de Voz GATO³ — Radar 5D + Calibração por Canal"
 version: 1.0.0
-created: 2026-04-01
+created: 2026-04-02
 author: n06_commercial
 domain: brand-voice
-quality: 8.9
-tags: [output, brand, voice, tone, guide, n06]
-tldr: "Voice guide with 5D radar, tone matrix per channel, We Are X Not Y attributes, do/don't lists, 10 calibration phrases, and LLM injection snippet."
+quality: null
+tags: [brand, voice, tone, gato3, ro, n06]
+tldr: "Guia completo de voz GATO³ com radar 5D, matriz de tom por canal, atributos We Are/Not, listas do/don't, frases de calibração e snippet LLM."
 density_score: 0.93
 ---
 
-# Voice Guide — {{BRAND_NAME}}
+# Voice Guide — GATO³
 
 ## 5D Voice Radar
 
 ```
          Formality
-            {{BRAND_VOICE_FORMALITY}}
-           /   \
-Authority /     \ Enthusiasm
-  {{BRAND_VOICE_AUTHORITY}}       {{BRAND_VOICE_ENTHUSIASM}}
-         |       |
-  Warmth  \     / Humor
-   {{BRAND_VOICE_WARMTH}}    {{BRAND_VOICE_HUMOR}}
+            3
+           / \
+Authority /   \ Enthusiasm
+    3           3
+         |   |
+  Warmth  \ / Humor
+     4     2
 ```
 
-**Overall Tone**: {{BRAND_VOICE_TONE}}
+**Overall Tone**: Sofisticado-acolhedor, informativo sem ser técnico demais, minimalista e direto
 
 ## We Are / We Are Not
 
 | We Are | We Are NOT |
 |--------|------------|
-| {{WE_ARE_1}} | {{WE_ARE_NOT_1}} |
-| {{WE_ARE_2}} | {{WE_ARE_NOT_2}} |
-| {{WE_ARE_3}} | {{WE_ARE_NOT_3}} |
-| {{WE_ARE_4}} | {{WE_ARE_NOT_4}} |
-| {{WE_ARE_5}} | {{WE_ARE_NOT_5}} |
+| Sofisticados mas acessíveis | Elitistas ou esnobres |
+| Acolhedores e empáticos | Condescendentes ou paternais |
+| Cientificamente embasados | Academicamente herméticos |
+| Diretos e práticos | Simplistas ou superficiais |
+| Minimalistas e intencionais | Frios ou desinteressados |
+| Especializados em felinos | Generalistas pet |
+| Educadores gentis | Professores autoritários |
+| Guias confiáveis | Vendedores insistentes |
 
 ## Channel Tone Matrix
 
@@ -46,43 +49,50 @@ Base scores adjusted per channel (±1 tolerance):
 
 | Channel | Formality | Enthusiasm | Humor | Warmth | Authority |
 |---------|-----------|------------|-------|--------|-----------|
-| Social media | {{F_SOCIAL}} | {{E_SOCIAL}} | {{H_SOCIAL}} | {{W_SOCIAL}} | {{A_SOCIAL}} |
-| Blog/articles | {{F_BLOG}} | {{E_BLOG}} | {{H_BLOG}} | {{W_BLOG}} | {{A_BLOG}} |
-| Documentation | {{F_DOCS}} | {{E_DOCS}} | {{H_DOCS}} | {{W_DOCS}} | {{A_DOCS}} |
-| Email marketing | {{F_EMAIL}} | {{E_EMAIL}} | {{H_EMAIL}} | {{W_EMAIL}} | {{A_EMAIL}} |
-| Sales pages | {{F_SALES}} | {{E_SALES}} | {{H_SALES}} | {{W_SALES}} | {{A_SALES}} |
-| Customer support | {{F_SUPPORT}} | {{E_SUPPORT}} | {{H_SUPPORT}} | {{W_SUPPORT}} | {{A_SUPPORT}} |
+| Instagram | 2 | 4 | 3 | 4 | 2 |
+| Mercado Livre | 3 | 3 | 1 | 3 | 4 |
+| Shopee | 2 | 4 | 2 | 4 | 3 |
+| WhatsApp B2B | 4 | 2 | 1 | 3 | 4 |
+| Site próprio | 3 | 3 | 2 | 4 | 3 |
+| Email marketing | 3 | 3 | 2 | 4 | 3 |
+
+**Persona Ro (conteúdo educacional)**:
+- Formality: 2 (mais casual que institucional)
+- Enthusiasm: 3 (equilibrado)
+- Humor: 2 (sutil)
+- Warmth: 5 (máximo acolhimento)
+- Authority: 4 (expertise baseada em experiência)
 
 ## Voice Do's
 
-1. {{VOICE_DO_1}}
-2. {{VOICE_DO_2}}
-3. {{VOICE_DO_3}}
-4. {{VOICE_DO_4}}
-5. {{VOICE_DO_5}}
+1. Usar frases curtas e parágrafos enxutos
+2. Explicar o porquê — ciência acessível, nunca jargão
+3. Dar passos práticos e acionáveis (protocolos da Ro)
+4. Tratar o tutor como parceiro, nunca como ignorante
+5. Contextualizar produto como meio, não como fim
 
 ## Voice Don'ts
 
-1. {{VOICE_DONT_1}}
-2. {{VOICE_DONT_2}}
-3. {{VOICE_DONT_3}}
-4. {{VOICE_DONT_4}}
-5. {{VOICE_DONT_5}}
+1. Prometer milagres ou resultados garantidos
+2. Usar gíria, infantilizar ou falar como pet shop genérico
+3. Medicalizar sem respaldo veterinário
+4. Usar CAPS LOCK, excesso de emojis ou tom de vendedor
+5. Comparar diretamente com concorrentes pelo nome
 
 ## Calibration Phrases
 
-Read these before writing ANY brand content. They define how {{BRAND_NAME}} sounds:
+Read these before writing ANY brand content. They define how GATO³ sounds:
 
-1. {{PHRASE_1}}
-2. {{PHRASE_2}}
-3. {{PHRASE_3}}
-4. {{PHRASE_4}}
-5. {{PHRASE_5}}
-6. {{PHRASE_6}}
-7. {{PHRASE_7}}
-8. {{PHRASE_8}}
-9. {{PHRASE_9}}
-10. {{PHRASE_10}}
+1. "O ronronar não é só carinho — é sinal de bem-estar."
+2. "Cada gato é único. Aqui você encontra o que funciona para o seu."
+3. "Design que não briga com sua decoração."
+4. "A Ro ensina, você aplica, seu gato aproveita."
+5. "Produtos testados por veterinários comportamentalistas."
+6. "Casa elegante, gato feliz — as duas coisas são possíveis."
+7. "Sem truques, sem milagres. Só o que funciona de verdade."
+8. "Curadoria inteligente para tutores exigentes."
+9. "Educação que acalma, soluções que funcionam."
+10. "O ³ no nome não é decoração — é compromisso."
 
 ## LLM Injection Snippet
 
@@ -90,22 +100,22 @@ Copy this block into any LLM prompt to calibrate voice:
 
 ```
 ## Brand Voice Context
-Brand: {{BRAND_NAME}}
-Archetype: {{BRAND_ARCHETYPE}}
-Tone: {{BRAND_VOICE_TONE}}
-Formality: {{BRAND_VOICE_FORMALITY}}/5
-Enthusiasm: {{BRAND_VOICE_ENTHUSIASM}}/5
-Humor: {{BRAND_VOICE_HUMOR}}/5
-Warmth: {{BRAND_VOICE_WARMTH}}/5
-Authority: {{BRAND_VOICE_AUTHORITY}}/5
+Brand: GATO³
+Archetype: Caregiver (Cuidadora + Sábia + Criadora)
+Tone: Sofisticado-acolhedor, informativo sem ser técnico demais, minimalista e direto
+Formality: 3/5
+Enthusiasm: 3/5
+Humor: 2/5
+Warmth: 4/5
+Authority: 3/5
 
-ALWAYS: {{BRAND_VOICE_DO}}
-NEVER: {{BRAND_VOICE_DONT}}
+ALWAYS: Usar frases curtas e parágrafos enxutos, explicar o porquê com ciência acessível, dar passos práticos (protocolos da Ro), tratar tutor como parceiro, contextualizar produto como meio
+NEVER: Prometer milagres, usar gíria ou infantilizar, medicalizar sem respaldo veterinário, usar CAPS LOCK ou excesso de emojis, comparar diretamente com concorrentes
 
 Example phrases (calibration):
-{{PHRASE_1}}
-{{PHRASE_2}}
-{{PHRASE_3}}
+"O ronronar não é só carinho — é sinal de bem-estar."
+"Cada gato é único. Aqui você encontra o que funciona para o seu."
+"Design que não briga com sua decoração."
 ```
 
 ---
