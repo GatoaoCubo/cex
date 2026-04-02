@@ -39,6 +39,16 @@ density_score: 0.93
 | Benchmark | products + criteria | output_benchmark_report.md |
 | Executive Summary | any research output | output_executive_summary.md |
 
+## Anti-Patterns (Route AWAY)
+
+| Don't Use For | Route To Instead | Why |
+|---------------|------------------|-----|
+| "Write marketing copy for X" | N02 | Creative writing, not research |
+| "Build me a landing page" | N03 | Artifact creation, not analysis |
+| "Debug this code" | N05 | Technical operations |
+| "Create a knowledge card" | N04 | Knowledge management |
+| "Set up pricing for course" | N06 | Commercial strategy |
+
 ## Inter-Nucleus Handoffs
 
 | From | To N01 | What |
