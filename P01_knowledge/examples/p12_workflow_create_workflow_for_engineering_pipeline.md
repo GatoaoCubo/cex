@@ -3,76 +3,69 @@ id: p12_wf_engineering_pipeline
 kind: workflow
 pillar: P12
 version: "1.0.0"
-created: "2026-04-01"
-updated: "2026-04-01"
+created: "2026-04-02"
+updated: "2026-04-02"
 author: "workflow-builder"
 title: "Engineering Pipeline Workflow"
-steps_count: 5
-execution: sequential
-agent_nodes: [reviewer, tester, builder, deployer, monitor]
+steps_count: 4
+execution: mixed
+agent_nodes: [edison, tesla, shaka]
 timeout: 3600
 retry_policy: per_step
 depends_on: []
-signals: [complete, error, pipeline_complete]
-spawn_configs: [p12_spawn_reviewer_solo, p12_spawn_tester_solo, p12_spawn_builder_solo, p12_spawn_deployer_solo, p12_spawn_monitor_solo]
+signals: [complete, error, review_required]
+spawn_configs: [p12_spawn_edison_solo_build, p12_spawn_tesla_solo_test, p12_spawn_shaka_solo_review]
 domain: "engineering"
-quality: 8.7
-tags: [workflow, engineering, pipeline, sequential, ci-cd]
-tldr: "5-step sequential engineering pipeline: code review → testing → build → deploy → monitor with per-step retry and completion signals"
+quality: 8.9
+tags: [workflow, engineering, pipeline, code, testing]
+tldr: "4-step engineering pipeline: build code, run tests, review changes, deploy to production with quality gates"
 density_score: 0.88
 ---
 ## Purpose
-Orchestrates a complete engineering pipeline from code review through production deployment and monitoring. Each step must complete successfully before the next begins, ensuring quality gates are met at every stage. Failed steps trigger per-step retry with escalation to orchestrator on repeated failure.
+Orchestrates a complete software engineering pipeline from code development through production deployment. Ensures code quality through automated testing and peer review before release. Steps 1-2 run in parallel (build and test preparation), followed by sequential review and deployment phases.
 
 ## Steps
 
-### Step 1: Code Review [reviewer]
-- **Agent**: reviewer (sonnet)
-- **Action**: Review code changes for quality, security, and engineering best practices
-- **Input**: git diff from feature branch, coding standards checklist
-- **Output**: review report with pass/fail decision, feedback comments
-- **Signal**: review_complete with quality score
-- **Depends on**: none (first step)
+### Step 1: Code Build [edison]
+- **Agent**: edison (opus)
+- **Action**: Compile source code, generate artifacts, and prepare build package
+- **Input**: source code from git repository, build configuration
+- **Output**: compiled artifacts, build logs, package manifest
+- **Signal**: edison_build_complete with build status
+- **Depends on**: none (parallel with Step 2)
 
-### Step 2: Unit Testing [tester]
-- **Agent**: tester (opus)
-- **Action**: Execute unit test suite and generate coverage report
-- **Input**: reviewed code from Step 1, existing test suite
-- **Output**: test results with pass/fail status, coverage metrics
-- **Signal**: tests_complete with coverage percentage
-- **Depends on**: Step 1
+### Step 2: Test Preparation [tesla]
+- **Agent**: tesla (sonnet)
+- **Action**: Set up test environment and execute test suite
+- **Input**: test specifications, environment config, test data
+- **Output**: test results, coverage report, environment status
+- **Signal**: tesla_test_complete with test results
+- **Depends on**: none (parallel with Step 1)
 
-### Step 3: Build [builder]
-- **Agent**: builder (opus)
-- **Action**: Compile code, generate artifacts, run static analysis
-- **Input**: tested code from Step 2, build configuration
-- **Output**: compiled artifacts, build logs, static analysis report
-- **Signal**: build_complete with artifact checksums
-- **Depends on**: Step 2
+### Step 3: Code Review [shaka]
+- **Agent**: shaka (sonnet)
+- **Action**: Review code changes, validate against standards, approve or request changes
+- **Input**: build artifacts from Step 1, test results from Step 2, diff from git
+- **Output**: review approval or change requests, quality assessment
+- **Signal**: shaka_review_complete with approval status
+- **Depends on**: Steps 1, 2
 
-### Step 4: Deploy [deployer]
-- **Agent**: deployer (codex)
-- **Action**: Deploy artifacts to target environment with rollback capability
-- **Input**: built artifacts from Step 3, deployment configuration
-- **Output**: deployment status, environment health check results
-- **Signal**: deploy_complete with deployment URL
+### Step 4: Deployment [edison]
+- **Agent**: edison (opus)
+- **Action**: Deploy approved changes to production environment
+- **Input**: approved build package from Step 3, deployment config
+- **Output**: deployment confirmation, production status, rollback plan
+- **Signal**: edison_deploy_complete with deployment status
 - **Depends on**: Step 3
 
-### Step 5: Monitor [monitor]
-- **Agent**: monitor (sonnet)
-- **Action**: Verify deployment health and establish monitoring baselines
-- **Input**: deployed application from Step 4, monitoring configuration
-- **Output**: health dashboard, alert configuration, baseline metrics
-- **Signal**: pipeline_complete with monitoring URLs
-- **Depends on**: Step 4
-
 ## Dependencies
-- Feature branch must exist with committed changes ready for review
-- Target deployment environment must be accessible and configured
-- Test suite must exist with minimum coverage thresholds defined
-- Build configuration and deployment scripts must be present in repository
+- Git repository with source code and build configuration must be accessible
+- Test environment and test data must be prepared and available
+- Deployment infrastructure and access credentials must be configured
+- Quality gates and review standards must be defined
 
 ## Signals
-- **On step complete**: {agent}_complete signal emitted with step-specific metrics (see signal-builder)
-- **On workflow complete**: pipeline_complete signal with aggregate quality score and deployment URLs
-- **On error**: {agent}_error signal with failure details, per-step retry (max 1), escalate to orchestrator on repeated failure
+- **On step complete**: {agent}_complete signal emitted with step-specific status data
+- **On workflow complete**: engineering_pipeline_complete with aggregate quality score
+- **On error**: {agent}_error signal, retry per step (max 1), then escalate to orchestrator
+- **On review rejection**: review_required signal triggers manual intervention
