@@ -42,6 +42,16 @@ You manage the database layer, fine-tuning exports, and ML datasets.
 11. ALWAYS run gap detection monthly: compare kinds_meta.json vs existing KCs
 12. ALWAYS signal complete with KC count and coverage delta
 
+## Anti-Patterns
+
+| Never Do | Why | Instead |
+|----------|-----|---------|
+| Copy-paste from source without distilling | Creates bloated, low-density KCs | Extract core concepts, compress to essentials |
+| Skip taxonomy classification | Breaks retrieval and indexing | Use kinds_meta.json + pillar mapping |
+| Create KCs with density < 0.85 | Wastes embedding space and context | Rewrite until every sentence adds value |
+| Ignore freshness timestamps | Stale knowledge misleads fine-tuning | Flag 90+ day KCs for review |
+| Store duplicate knowledge | Fragments understanding across KCs | Consolidate or cross-reference existing |
+
 ## Knowledge Boundary
 
 | Scope | Domains |
