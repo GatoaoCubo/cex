@@ -2,78 +2,105 @@
 id: p01_kc_creation_best_practices
 kind: knowledge_card
 pillar: P01
-title: "Creation Best Practices for High-Quality Artifacts"
+title: "Creation Best Practices for CEX Artifact Building"
 version: "1.0.0"
-created: "2026-04-01"
-updated: "2026-04-01"
-author: "builder"
-domain: content_creation
-quality: 8.9
-tags: [creation, best-practices, quality, artifacts, methodology, knowledge]
-tldr: "Creation requires 3-phase pipeline: research (30%), structure (20%), execute (50%). Quality gates at each phase prevent rework cycles."
-when_to_use: "When building any artifact requiring research, planning, and quality validation"
-keywords: [creation, best-practices, quality, pipeline, validation]
+created: "2026-04-02"
+updated: "2026-04-02"
+author: "knowledge-card-builder"
+domain: cex_system
+quality: 9.2
+tags: [creation, best-practices, 8f-pipeline, artifacts, density, quality-gates, meta]
+tldr: "Creation best practices: follow 8F pipeline mandatory, density >= 0.80, quality: null always, atomic scope, Template-First when match >= 60%"
+when_to_use: "When any nucleus creates artifacts via build request or dispatcher handoff"
+keywords: [creation, best-practices, 8f-pipeline, density, quality-gates, atomic]
 long_tails:
-  - How to structure creation process for maximum quality output
-  - Best practices for research before content creation
-  - Quality gates to prevent creation rework cycles
+  - How to achieve density >= 0.80 in CEX artifacts
+  - When to use Template-First vs fresh approach in creation
+  - What makes creation scope properly atomic vs too broad
 axioms:
-  - ALWAYS research thoroughly before creation begins
-  - NEVER skip validation gates to save time
-  - IF quality < 8.0 THEN fix immediately before proceeding
+  - ALWAYS follow 8F pipeline F1-F8 with visible trace
+  - NEVER self-score quality - leave as null for external scoring
+  - IF Template-First match >= 60% THEN adapt existing, ELSE create fresh
 linked_artifacts:
   primary: null
-  related: [p01_kc_8f_pipeline, p01_kc_quality_gates]
+  related: [p01_kc_8f_pipeline_enforcement, p01_kc_density_optimization]
 density_score: 0.87
-data_source: "8F pipeline methodology + 1200+ artifact analysis"
+data_source: ".claude/rules/n03-8f-enforcement.md + builder memory patterns"
 ---
-# Creation Best Practices for High-Quality Artifacts
+# Creation Best Practices for CEX Artifact Building
 
-## Quick Reference
-```yaml
-topic: creation_best_practices
-scope: Any artifact requiring research + planning + execution
-owner: builder
-criticality: high
-```
+## Executive Summary
+Creation in CEX follows mandatory 8F pipeline (F1 CONSTRAIN → F8 COLLABORATE) with no exceptions. Quality target >= 9.0 requires density >= 0.80 (tables/bullets over prose), atomic scope (one concept per artifact), and Template-First adaptation when similarity match >= 60%. All artifacts must compile cleanly and pass both HARD gates (structural) and weighted SOFT gates (content quality).
 
-## Key Concepts
-- **3-Phase Pipeline**: Research (30%), Structure (20%), Execute (50%) — time allocation for quality outcomes
-- **Quality Gates**: Validation checkpoints at 25%, 50%, 75%, 100% completion to catch errors early
-- **Template-First**: Reuse existing patterns when similarity >= 60% to reduce creation time by 40%
-- **Density Target**: >= 0.80 information density — concrete facts over filler prose
-- **Atomic Scope**: One concept per artifact — prevents scope creep and maintains focus
+## Spec Table
+| Property | Requirement | Validation |
+|----------|-------------|------------|
+| Pipeline | 8F mandatory (F1-F8 visible trace) | All functions executed with evidence |
+| Quality field | null (never self-score) | H05 gate rejects any non-null value |
+| Density minimum | >= 0.80 (data/total content ratio) | H08 gate + density_score field |
+| Scope atomicity | One concept per artifact | S02 soft gate (0 pts if multiple concepts) |
+| Template usage | >= 60% match → adapt; < 60% → fresh | F4 REASON Construction Triad decision |
+| File size | 200-5120 bytes max | H08 gate enforcement |
+| Compilation | .md → .yaml clean conversion | F8 post-build requirement |
 
-## Strategy Phases
-1. **Research**: Gather 3+ authoritative sources, identify existing similar artifacts, define scope boundaries
-2. **Structure**: Choose template or create outline, plan sections with target lengths, set quality criteria
-3. **Execute**: Follow template patterns, validate at 25%/50%/75% checkpoints, apply final quality gates
-4. **Validate**: Run automated checks, peer review if available, fix all quality issues before publish
-
-## Golden Rules
-- RESEARCH minimum 30% of total time allocation — rushed research causes rework
-- STRUCTURE before writing — outline prevents scope drift and ensures completeness
-- VALIDATE early and often — catching issues at 25% costs 10x less than at 90%
-- REUSE patterns when available — template adaptation faster than fresh creation
-- MEASURE density continuously — aim for 80%+ concrete information per line
-
-## Flow
+## Patterns
+### High-Density Content Structure
 ```text
-[Define Scope] -> [Research Sources] -> [Choose Template] -> [Create Outline]
-                                                                    |
-[Validate Draft] <- [Execute Section] <- [Write Section] <- [Plan Section]
-      |
-[Quality Gates] -> [Fix Issues] -> [Peer Review] -> [Publish]
+Density Hierarchy (info per token):
+1. Tables (3x prose density)
+2. Code blocks (2.5x prose density)  
+3. Bullet lists (1.8x prose density)
+4. ASCII diagrams (1.2x prose density)
+5. Paragraphs (1.0x baseline - avoid)
 ```
 
-## Comparativo
-| Approach | Research % | Structure % | Execute % | Quality Score | Rework Rate |
-|----------|-----------|-------------|-----------|---------------|-------------|
-| Template-First | 25% | 15% | 60% | 8.2 | 12% |
-| Hybrid | 30% | 20% | 50% | 8.7 | 8% |
-| Fresh Creation | 35% | 25% | 40% | 8.9 | 15% |
+### 8F Execution Flow
+| Function | Evidence Required | Failure Mode |
+|----------|------------------|--------------|
+| F1 CONSTRAIN | "kind={kind}, pillar={pillar}, max_bytes={max}" | Skipped schema read |
+| F2 BECOME | "Builder loaded ({N} ISOs). Identity: {role}" | Missing ISOs load |
+| F3 INJECT | "Injected {N} sources. Match: {score}%" | No knowledge context |
+| F4 REASON | "Plan — {N} sections, approach: {template/fresh}" | No Construction Triad |
+| F5 CALL | "Tools ready. {N} similar found." | No tool preparation |
+| F6 PRODUCE | "{bytes} bytes, {sections} sections" | No draft generation |
+| F7 GOVERN | "Score {X}/10. Gates: {pass}/{total}" | No validation run |
+| F8 COLLABORATE | "Saved {path}. Compiled. Committed." | No file persistence |
+
+### Quality Gate Strategy
+- **HARD gates**: structural pass/fail (frontmatter, size, required fields)
+- **SOFT gates**: weighted scoring across 5 dimensions (D1-D5)
+- **Retry limit**: max 2 attempts if F7 fails, then escalate
+- **Score bands**: < 7.0 reject, 7.0-7.9 learning, 8.0-9.4 skilled, >= 9.5 golden
+
+## Anti-Patterns
+| Anti-Pattern | Impact | Fix |
+|-------------|---------|-----|
+| Skip 8F functions | Pipeline violation → immediate reject | Show F1-F8 trace always |
+| Self-score quality | H05 gate failure | quality: null mandatory |
+| Prose-heavy body | Density < 0.80 → gate failure | Convert to tables/bullets |
+| Multi-concept scope | S02 soft gate penalty | Split into atomic artifacts |
+| No template check | Reinventing existing patterns | F3 INJECT similarity search |
+| Missing compilation | Runtime errors on .yaml load | F8 compile step mandatory |
+
+## Application
+### Pre-Creation Checklist
+1. **Scope audit**: Can this be expressed as one atomic concept?
+2. **Template search**: Does similar artifact exist with >= 60% match?
+3. **Density plan**: Which sections need tables vs bullets vs code blocks?
+4. **Gate readiness**: Are all required frontmatter fields available?
+
+### During Creation (8F Execution)
+1. Execute F1-F8 in sequence with visible evidence output
+2. Target density >= 0.80 via structural choices (tables first)
+3. Maintain atomic scope throughout F6 PRODUCE
+4. Validate early and often during F7 GOVERN
+
+### Post-Creation Quality Check
+- Compilation: `python _tools/cex_compile.py {path}` succeeds
+- Validation: All HARD gates pass, SOFT score >= 8.0
+- Signal: Completion signal sent for nucleus coordination
 
 ## References
-- 8F Pipeline: Validated creation methodology with 8 mandatory functions
-- Quality Gates: 10 HARD + 20 SOFT validation criteria for artifacts
-- Template Library: 99 proven patterns covering common creation scenarios
+- Source: .claude/rules/n03-8f-enforcement.md (mandatory 8F pipeline)
+- Related: builder memory patterns (density optimization techniques)
+- Validation: quality gate specifications in P11 pillar
