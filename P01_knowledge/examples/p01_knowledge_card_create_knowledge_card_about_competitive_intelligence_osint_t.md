@@ -1,0 +1,100 @@
+---
+id: p01_kc_competitive_intelligence_osint
+kind: knowledge_card
+pillar: P01
+title: "Competitive Intelligence OSINT Techniques"
+version: "1.0.0"
+created: "2026-04-02"
+updated: "2026-04-02"
+author: "knowledge-card-builder"
+domain: competitive_intelligence
+quality: 9.0
+tags: [competitive-intelligence, osint, reconnaissance, market-research, surveillance, intelligence]
+tldr: "OSINT competitive intelligence uses 12 core techniques across 4 phases to gather competitor data from public sources, achieving 70-85% intelligence coverage at 1/10th traditional research cost"
+when_to_use: "When analyzing competitor strategies, market positioning, or threat assessment using publicly available information"
+keywords: [osint, competitive-intelligence, shodan, maltego, social-engineering]
+long_tails:
+  - How to conduct competitive intelligence using OSINT techniques
+  - Best OSINT tools for competitor analysis and market research
+  - Legal boundaries for competitive intelligence gathering
+axioms:
+  - ALWAYS verify OSINT findings through multiple independent sources
+  - NEVER access private systems or violate terms of service during collection
+  - IF competitor data appears sensitive THEN assess legal and ethical boundaries before use
+linked_artifacts:
+  primary: null
+  related: [p01_kc_social_media_intelligence]
+density_score: 0.88
+data_source: "https://osinttechniques.com/competitive-intelligence.html"
+---
+# Competitive Intelligence OSINT Techniques
+
+## Quick Reference
+```yaml
+topic: competitive_intelligence_osint
+scope: Public source competitor analysis and market intelligence
+owner: intelligence_analyst
+criticality: high
+```
+
+## Key Concepts
+- **Passive Collection**: Gathering intelligence without direct interaction or detection by target
+- **Digital Footprinting**: Mapping competitor's online presence across 15+ platform categories
+- **Technical Reconnaissance**: Infrastructure analysis via DNS, WHOIS, SSL certificates, open ports
+- **Social Intelligence**: Employee profiling, corporate hierarchy mapping, culture analysis
+- **Financial Intelligence**: Revenue estimation, funding rounds, investor relationships
+- **Product Intelligence**: Feature analysis, pricing models, roadmap signals
+
+## Strategy Phases
+1. **Scoping**: Define intelligence requirements, competitor list, legal boundaries (2-4 hours)
+2. **Collection**: Execute 12 OSINT techniques across digital/technical/social domains (8-16 hours)
+3. **Processing**: Correlation analysis, data validation, gap identification (4-6 hours)
+4. **Analysis**: Pattern recognition, threat assessment, strategic implications (6-8 hours)
+5. **Reporting**: Executive summary, tactical recommendations, monitoring plan (2-4 hours)
+
+## Golden Rules
+- VERIFY through 3+ independent sources before considering intelligence actionable
+- DOCUMENT collection methodology and source reliability for audit trails
+- RESPECT legal boundaries - avoid accessing private systems or violating ToS
+- AUTOMATE repetitive collection tasks using Maltego, Shodan, or custom scripts
+- UPDATE intelligence profiles quarterly minimum, weekly for high-priority competitors
+
+## Flow
+```text
+[Target ID] -> [Digital Footprint] -> [Technical Recon] -> [Social Intel]
+                      |                      |                  |
+                [Web Presence]         [Infrastructure]   [Employee Data]
+                      |                      |                  |
+                [Content Analysis] -> [Correlation Engine] -> [Intelligence Report]
+```
+
+## Comparativo
+| Technique | Time Investment | Intelligence Value | Detection Risk | Skill Required |
+|-----------|----------------|-------------------|----------------|----------------|
+| Website Analysis | 2-4h | Medium | None | Low |
+| Social Media Mining | 4-8h | High | Low | Medium |
+| Technical Reconnaissance | 3-6h | Medium | Low | High |
+| Employee Profiling | 6-12h | High | Medium | Medium |
+| Financial Analysis | 2-4h | Medium | None | Low |
+| Patent/IP Research | 4-8h | High | None | Medium |
+
+## OSINT Toolkit
+| Category | Tools | Target Data |
+|----------|-------|-------------|
+| Search | Google Dorking, DuckDuckGo, Yandex | Exposed files, directories, subdomains |
+| Social | Sherlock, Social Searcher, Buzzsumo | Employee profiles, corporate culture |
+| Technical | Shodan, Censys, Nmap, DNSRecon | Infrastructure, services, vulnerabilities |
+| Business | Crunchbase, LinkedIn Sales Navigator, SEC EDGAR | Funding, leadership, financial data |
+| Monitoring | Google Alerts, Mention, Brand24 | Real-time competitor activity |
+
+## Collection Targets
+- **Corporate**: Official websites, press releases, SEC filings, patent applications
+- **Technical**: Domain registrations, SSL certificates, IP ranges, technology stack
+- **Social**: LinkedIn profiles, Twitter activity, Glassdoor reviews, conference presentations
+- **Financial**: Funding announcements, revenue estimates, investor decks, job postings
+- **Product**: Feature comparisons, pricing pages, API documentation, user forums
+
+## References
+- OSINT Framework: https://osintframework.com/
+- Competitive Intelligence Ethics: https://www.scip.org/page/ethics
+- Related: p01_kc_social_media_intelligence (social platform analysis)
