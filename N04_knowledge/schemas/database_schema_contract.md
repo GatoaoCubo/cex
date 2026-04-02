@@ -68,3 +68,12 @@ CREATE TABLE kc_audit_log (
   created_at TIMESTAMPTZ DEFAULT now()
 );
 ```
+
+## Table Relationships
+
+| Query Pattern | Tables | SQL Example |
+|---------------|--------|-------------|
+| Semantic search | `kcs` + `embeddings` | `SELECT k.* FROM kcs k JOIN embeddings e ON k.id = e.kc_id ORDER BY e.embedding <=> $vector LIMIT 10` |
+| Full-text search | `kcs` | `SELECT * FROM kcs WHERE to_tsvector('english', title || ' ' || body) @@ plainto_tsquery('search term')` |
+| Change tracking | `kcs` + `audit_log` | `SELECT a.* FROM kc_audit_log a WHERE a.kc_id = $kc_id ORDER BY created_at DESC` |
+| Chunk retrieval | `embeddings` | `SELECT chunk_text, chunk_index FROM embeddings WHERE kc_id = $kc_id ORDER BY chunk_index` |
