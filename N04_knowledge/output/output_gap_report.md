@@ -15,6 +15,24 @@ density_score: 0.91
 
 # Output: Gap Report
 
+## Usage Guidelines
+
+**When to use:**
+- Before major knowledge expansion initiatives
+- During quarterly knowledge audits
+- When onboarding shows knowledge gaps
+- Before nucleus capability assessments
+
+**When NOT to use:**
+- For individual artifact quality issues (use quality gates)
+- For real-time knowledge needs (use retriever)
+- For content updates vs missing content
+
+**Anti-patterns:**
+- Tracking gaps but never filling them
+- Equal priority for all gaps (no impact weighting)
+- Outdated reports driving current decisions
+
 ## Template
 ```markdown
 # Knowledge Gap Report
