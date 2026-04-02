@@ -21,9 +21,15 @@ tldr: "Specifies the text-embedding-004 model with 768 dimensions for N01's RAG 
 This document defines the standard vector embedding model and chunking strategy for all documents ingested into the **N01 Intelligence Nucleus** knowledge base. This configuration is critical for the performance and accuracy of its Retrieval-Augmented Generation (RAG) capabilities.
 
 ## Model Rationale
-- **Model**: `text-embedding-004`
-- **Provider**: Google
-- **Reasoning**: As of its release, `text-embedding-004` is a state-of-the-art model offering top-tier performance on the MTEB (Massive Text Embedding Benchmark). Its 768 dimensions provide a rich semantic representation while remaining efficient for large-scale vector search operations. Native integration with the `gemini-2.5-pro` model ensures optimal compatibility and performance.
+
+| Attribute | Value | Justification |
+|-----------|-------|---------------|
+| **Model** | `text-embedding-004` | State-of-the-art on MTEB benchmark |
+| **Provider** | Google | Native integration with `gemini-2.5-pro` |
+| **Dimensions** | 768 | Rich semantic representation, efficient search |
+| **Context Length** | 8,192 tokens | Handles long documents without truncation |
+| **Performance** | Top 3 on MTEB | Proven accuracy on diverse text types |
+| **Compatibility** | Gemini ecosystem | Reduces API latency, shared tokenization |
 
 ## Chunking Strategy
 - **Chunk Size**: `512 tokens`
