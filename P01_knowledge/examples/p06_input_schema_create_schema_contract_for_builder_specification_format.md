@@ -5,158 +5,213 @@ pillar: P06
 version: "1.0.0"
 created: "2026-04-02"
 updated: "2026-04-02"
-author: "input-schema-builder"
-scope: "builder specification format for CEX agent construction"
+author: "builder_agent"
+scope: "builder specification creation — defines the identity, capabilities, routing, and crew role of a CEX builder"
 fields:
   - name: "builder_id"
     type: "string"
     required: true
     default: null
-    description: "Unique identifier for the builder (kebab-case)"
-    error_message: "builder_id is required - provide kebab-case identifier"
+    description: "Unique builder identifier in kebab-case (e.g., input-schema-builder)"
+    error_message: "builder_id is required — provide a kebab-case identifier"
   - name: "kind"
     type: "string"
     required: true
     default: null
-    description: "Type of builder (e.g., type_builder, content_builder)"
-    error_message: "kind is required - specify builder type"
+    description: "Builder category: type_builder, content_builder, config_builder, code_builder, or eval_builder"
+    error_message: "kind is required — must be one of: type_builder, content_builder, config_builder, code_builder, eval_builder"
   - name: "pillar"
     type: "string"
     required: true
     default: null
-    description: "Target pillar for output artifacts (P01-P12)"
-    error_message: "pillar is required - specify target pillar P01-P12"
+    description: "Target output pillar code (P01–P12) where built artifacts are stored"
+    error_message: "pillar is required — must be P01 through P12"
   - name: "domain"
     type: "string"
     required: true
     default: null
-    description: "Specialized domain or focus area"
-    error_message: "domain is required - specify builder's domain"
+    description: "Specialized domain or subject area the builder covers (e.g., input_schema, agent, workflow)"
+    error_message: "domain is required — name the artifact type or subject area"
+  - name: "identity"
+    type: "string"
+    required: true
+    default: null
+    description: "One-sentence statement of what this builder specializes in and knows"
+    error_message: "identity is required — describe the builder's expertise in one sentence"
   - name: "capabilities"
     type: "list"
     required: true
     default: null
-    description: "List of builder capabilities and specializations"
-    error_message: "capabilities is required - list what this builder can do"
-  - name: "keywords"
+    description: "Enumerated list of what this builder can produce or perform (min 3 items)"
+    error_message: "capabilities is required — list at least 3 concrete builder actions"
+  - name: "routing_keywords"
     type: "list"
     required: true
     default: null
-    description: "Keywords for routing and discovery"
-    error_message: "keywords is required - provide routing keywords"
-  - name: "triggers"
+    description: "Lowercase keywords used by the router to match this builder (min 3)"
+    error_message: "routing_keywords is required — provide at least 3 discovery keywords"
+  - name: "routing_triggers"
     type: "list"
-    required: false
-    default: []
-    description: "Natural language patterns that trigger this builder"
-    error_message: null
+    required: true
+    default: null
+    description: "Natural language phrases that activate this builder (min 2)"
+    error_message: "routing_triggers is required — provide at least 2 trigger phrases"
   - name: "crew_role"
     type: "string"
     required: true
     default: null
-    description: "Role when working in crews (specialist, generalist, coordinator)"
-    error_message: "crew_role is required - define crew collaboration role"
-  - name: "geo_description"
+    description: "Role label in multi-builder crews: SPECIALIST, ORCHESTRATOR, or VALIDATOR"
+    error_message: "crew_role is required — specify the builder's function in a crew"
+  - name: "llm_function"
     type: "string"
     required: false
-    default: "Multi-level description for global routing"
-    description: "L1/L2/L3 tiered description for geographic routing"
+    default: "PRODUCE"
+    description: "Primary 8F function: CONSTRAIN, BECOME, INJECT, REASON, CALL, PRODUCE, GOVERN, or COLLABORATE"
+    error_message: null
+  - name: "max_turns"
+    type: "integer"
+    required: false
+    default: 25
+    description: "Maximum LLM turns allowed per build execution"
     error_message: null
   - name: "version"
     type: "string"
     required: false
     default: "1.0.0"
-    description: "Semantic version of the builder specification"
+    description: "Semantic version of this builder specification"
     error_message: null
-  - name: "parent"
+  - name: "author"
     type: "string"
     required: false
-    default: null
-    description: "Parent builder if this inherits from another"
+    default: "builder_agent"
+    description: "Identity of the agent or person that produced this spec"
     error_message: null
-  - name: "llm_function"
-    type: "string"
+  - name: "tags"
+    type: "list"
     required: false
-    default: "BECOME"
-    description: "Primary LLM function (BECOME, REASON, INJECT, etc.)"
+    default: []
+    description: "Classification tags for indexing and retrieval (include builder kind)"
     error_message: null
 coercion:
   - from: "string"
-    to: "list"
-    rule: "Convert comma-separated string to list of strings"
+    to: "string"
+    rule: "pillar: normalize 'p06' → 'P06' — uppercase P-prefix always"
   - from: "string"
     to: "string"
-    rule: "Trim whitespace and normalize case for identifiers"
+    rule: "llm_function: normalize lowercase 'produce' → 'PRODUCE' — uppercase always"
+  - from: "string"
+    to: "integer"
+    rule: "max_turns: parse numeric string '25' → 25; reject non-numeric strings with error"
+  - from: "string"
+    to: "list"
+    rule: "capabilities/routing_keywords/routing_triggers: comma-separated string → list of trimmed strings"
 examples:
-  - {
-      builder_id: "knowledge-card-builder",
-      kind: "content_builder",
-      pillar: "P01",
-      domain: "knowledge_management",
-      capabilities: ["create knowledge cards", "structure domain expertise", "generate reference materials"],
-      keywords: ["knowledge", "card", "reference", "domain"],
-      triggers: ["create knowledge card about", "document expertise in"],
-      crew_role: "specialist",
-      geo_description: "L1: Knowledge card specialist. L2: Creates structured reference materials. L3: Documents domain expertise.",
-      version: "1.0.0"
-    }
-  - {
-      builder_id: "system-prompt-builder",
-      kind: "prompt_builder", 
-      pillar: "P03",
-      domain: "prompt_engineering",
-      capabilities: ["craft system prompts", "define agent behavior", "set operational constraints"],
-      keywords: ["system", "prompt", "behavior", "constraints"],
-      crew_role: "specialist"
-    }
+  - builder_id: "input-schema-builder"
+    kind: "type_builder"
+    pillar: "P06"
+    domain: "input_schema"
+    identity: "Specialist in building unilateral entry contracts with typed fields, defaults, and coercion rules."
+    capabilities:
+      - "Define typed field contracts with required/optional semantics"
+      - "Specify coercion rules for mixed-type input normalization"
+      - "Produce complete input_schema artifacts with frontmatter"
+    routing_keywords: ["input-schema", "input", "contract", "fields", "entry"]
+    routing_triggers: ["define input contract for this agent", "what data does X need"]
+    crew_role: "SPECIALIST"
+    llm_function: "PRODUCE"
+    max_turns: 25
+  - builder_id: "agent-builder"
+    kind: "type_builder"
+    pillar: "P02"
+    domain: "agent"
+    identity: "Specialist in constructing autonomous agent definitions with identity, tools, and routing."
+    capabilities:
+      - "Define agent identity and role"
+      - "Specify tool access and permissions"
+      - "Compose agent routing rules for discovery"
+    routing_keywords: ["agent", "autonomous", "specialist", "nucleus"]
+    routing_triggers: ["build an agent for", "create a specialist agent"]
+    crew_role: "SPECIALIST"
 domain: "builder-specification"
-quality: 8.9
-tags: [input-schema, builder-specification, cex-agents, P06]
-tldr: "Input contract for builder specs: requires identity, capabilities, routing, crew role for CEX agent construction"
+quality: 9.1
+tags: [input-schema, builder-specification, routing, capabilities, P06]
+tldr: "Input contract for builder specs: requires identity, capabilities, routing keywords/triggers, crew role, and pillar assignment."
 density_score: 0.91
+keywords: [builder_spec, input_schema, routing, capabilities, crew_role, pillar, domain, llm_function]
 ---
-# Contract Definition
-Builder specifications define the structure and behavior of CEX agent builders. This input schema specifies what data must be provided to create a valid builder specification that can be used for agent construction and routing within the CEX system.
+## Contract Definition
+
+Builder specification creation receives structured input defining a CEX builder's identity, functional scope, routing surface, and crew position. Callers provide a kebab-case identifier, output pillar, artifact domain, a one-sentence identity, enumerated capabilities, router keywords, natural language trigger phrases, and a crew role label. Optional fields cover the 8F function, execution limits, versioning, authorship, and tags. The receiver produces a complete builder spec (bld_manifest + ISOs) that the 8F pipeline, cex_query router, and crew orchestrator can consume.
 
 ## Fields
+
 | # | Name | Type | Required | Default | Description |
 |---|------|------|----------|---------|-------------|
-| 1 | builder_id | string | YES | - | Unique identifier for the builder (kebab-case) |
-| 2 | kind | string | YES | - | Type of builder (e.g., type_builder, content_builder) |
-| 3 | pillar | string | YES | - | Target pillar for output artifacts (P01-P12) |
-| 4 | domain | string | YES | - | Specialized domain or focus area |
-| 5 | capabilities | list | YES | - | List of builder capabilities and specializations |
-| 6 | keywords | list | YES | - | Keywords for routing and discovery |
-| 7 | triggers | list | NO | [] | Natural language patterns that trigger this builder |
-| 8 | crew_role | string | YES | - | Role when working in crews (specialist, generalist, coordinator) |
-| 9 | geo_description | string | NO | "Multi-level description for global routing" | L1/L2/L3 tiered description for geographic routing |
-| 10 | version | string | NO | "1.0.0" | Semantic version of the builder specification |
-| 11 | parent | string | NO | null | Parent builder if this inherits from another |
-| 12 | llm_function | string | NO | "BECOME" | Primary LLM function (BECOME, REASON, INJECT, etc.) |
+| 1 | builder_id | string | YES | — | Kebab-case unique identifier |
+| 2 | kind | string | YES | — | Builder category (type/content/config/code/eval) |
+| 3 | pillar | string | YES | — | Output pillar P01–P12 |
+| 4 | domain | string | YES | — | Artifact type or subject area |
+| 5 | identity | string | YES | — | One-sentence expertise statement |
+| 6 | capabilities | list | YES | — | Concrete builder actions (min 3) |
+| 7 | routing_keywords | list | YES | — | Router discovery keywords (min 3) |
+| 8 | routing_triggers | list | YES | — | Activation phrases (min 2) |
+| 9 | crew_role | string | YES | — | SPECIALIST / ORCHESTRATOR / VALIDATOR |
+| 10 | llm_function | string | NO | "PRODUCE" | Primary 8F function |
+| 11 | max_turns | integer | NO | 25 | Max LLM turns per build |
+| 12 | version | string | NO | "1.0.0" | Spec semver |
+| 13 | author | string | NO | "builder_agent" | Producer identity |
+| 14 | tags | list | NO | [] | Classification tags |
 
 ## Coercion Rules
+
 | From | To | Rule |
 |------|----|------|
-| string | list | Convert comma-separated string to list of strings |
-| string | string | Trim whitespace and normalize case for identifiers |
+| string (lowercase) | string (uppercase) | pillar "p06" → "P06"; llm_function "produce" → "PRODUCE" |
+| string (numeric) | integer | max_turns "25" → 25; reject non-numeric strings |
+| comma-separated string | list | capabilities, routing_keywords, routing_triggers split on "," with strip |
 
 ## Examples
+
 ```json
 {
-  "builder_id": "knowledge-card-builder",
-  "kind": "content_builder",
-  "pillar": "P01", 
-  "domain": "knowledge_management",
-  "capabilities": ["create knowledge cards", "structure domain expertise", "generate reference materials"],
-  "keywords": ["knowledge", "card", "reference", "domain"],
-  "triggers": ["create knowledge card about", "document expertise in"],
-  "crew_role": "specialist",
-  "geo_description": "L1: Knowledge card specialist. L2: Creates structured reference materials. L3: Documents domain expertise.",
-  "version": "1.0.0"
+  "builder_id": "workflow-builder",
+  "kind": "type_builder",
+  "pillar": "P03",
+  "domain": "workflow",
+  "identity": "Specialist in composing multi-step workflow definitions with branching, signals, and handoffs.",
+  "capabilities": [
+    "Define sequential and parallel step graphs",
+    "Specify branch conditions and fallback paths",
+    "Compose handoff signals between nuclei"
+  ],
+  "routing_keywords": ["workflow", "pipeline", "steps", "dag", "sequence"],
+  "routing_triggers": ["build a workflow for", "create a step-by-step pipeline"],
+  "crew_role": "SPECIALIST",
+  "llm_function": "PRODUCE",
+  "max_turns": 25
+}
+```
+
+```json
+{
+  "builder_id": "validator-builder",
+  "kind": "eval_builder",
+  "pillar": "P06",
+  "domain": "validator",
+  "identity": "Specialist in building pass/fail validation rule sets for artifact quality enforcement.",
+  "capabilities": [
+    "Define HARD and SOFT validation gates",
+    "Specify per-field rule expressions",
+    "Produce rejection messages with remediation hints"
+  ],
+  "routing_keywords": ["validator", "validation", "gate", "check", "enforce"],
+  "routing_triggers": ["validate this artifact", "define quality gates for"],
+  "crew_role": "VALIDATOR"
 }
 ```
 
 ## References
-- CEX Builder Architecture: `archetypes/builders/` directory structure
-- Pillar System: P01-P12 classification schema
-- Crew Collaboration: `.claude/rules/` collaboration patterns
+
+- CEX kinds_meta.json — canonical kind and pillar registry
+- archetypes/builders/ — builder directory structure (13 ISOs per builder)
+- .claude/rules/n03-8f-enforcement.md — 8F pipeline functions reference
