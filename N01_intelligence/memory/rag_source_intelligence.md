@@ -17,8 +17,14 @@ tldr: "Defines the primary academic and technical data sources for N01's RAG kno
 This document lists and configures the external data sources that are to be ingested, indexed, and made available for retrieval by the **N01 Intelligence Nucleus** RAG system. This forms the foundation of N01's world knowledge.
 
 ## Ingestion & Retrieval Strategy
-- **Ingestion**: Sources are checked for updates based on their `update_frequency`. New documents are downloaded, chunked according to `n01_emb_text_embedding_4`, and vectorized.
-- **Retrieval**: The primary retrieval method is a hybrid search, combining dense vector similarity search (for semantic relevance) with keyword filtering (for precision on specific terms). The retriever is configured by `p01_retr_cfg.md`.
+
+| Component | Method | Configuration | Purpose |
+|-----------|--------|---------------|---------|
+| **Source Monitoring** | Scheduled checks per `update_frequency` | Cron jobs + webhooks | Track new documents |
+| **Document Ingestion** | Bulk download → chunk → vectorize | Uses `n01_emb_text_embedding_4` | Convert to searchable format |
+| **Vector Storage** | Dense embeddings + metadata | Pinecone/Weaviate indexes | Enable semantic search |
+| **Retrieval** | Hybrid search (vector + keyword) | Configured by `p01_retr_cfg.md` | Balance relevance + precision |
+| **Freshness** | Delta updates only | Compare timestamps/hashes | Avoid duplicate processing |
 
 ---
 ## Primary Sources
