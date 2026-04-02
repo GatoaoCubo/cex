@@ -80,13 +80,23 @@ semantic:
   info:     "#3b82f6"  # blue-500
 ```
 
-## 60-30-10 Rule
+## 60-30-10 Rule Implementation
+
+| Allocation | Colors | Classes | Measurement |
+|------------|--------|---------|-------------|
+| **60% (Dominant)** | `--background`, `--codexa-surface-*` | `bg-background`, `bg-codexa-surface-800` | Count `bg-` classes in component |
+| **30% (Secondary)** | `--foreground`, `--muted`, `--secondary` | `text-foreground`, `bg-secondary` | Count `text-`, `border-` classes |
+| **10% (Accent)** | `--codexa-accent`, `--primary`, `--destructive` | `bg-codexa-accent`, `text-primary` | Count accent/CTA classes |
+
+### Enforcement Criteria
 
 ```yaml
-distribution:
-  60_percent: "background / surface colors (--background, --codexa-surface-*)"
-  30_percent: "secondary / muted / text (--secondary, --muted, --foreground)"
-  10_percent: "accent / CTA / highlights (--codexa-accent, --primary)"
+per_component_audit:
+  background_ratio: ">= 60% of visual area"
+  text_secondary_ratio: "~ 30% of visual elements"
+  accent_ratio: "<= 10% (CTAs, highlights only)"
+  measurement: "DOM element count per color category"
+  threshold: "Accent colors on max 2 elements per screen"
 ```
 
 ## Forbidden Patterns
