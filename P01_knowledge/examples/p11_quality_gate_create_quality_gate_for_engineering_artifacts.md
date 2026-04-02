@@ -3,70 +3,81 @@ id: p11_qg_engineering_artifacts
 kind: quality_gate
 pillar: P11
 title: "Gate: Engineering Artifacts"
-version: "1.0.0"
+version: "1.1.0"
 created: "2026-04-02"
 updated: "2026-04-02"
 author: "quality-gate-builder"
 domain: "engineering"
-quality: 9.1
-tags: [quality-gate, engineering, technical-artifacts, code-quality, system-design]
-tldr: "Quality gate for engineering artifacts: validates technical correctness, completeness, and maintainability with 8.5 score threshold."
-density_score: 0.92
+quality: 9.0
+tags: [quality-gate, engineering, technical, architecture, code, p11]
+tldr: "Quality gate for engineering artifacts: 10 HARD gates + 5-dimension scoring >= 8.5 before pool acceptance"
+density_score: 0.91
 ---
 ## Definition
+
 | Property | Value |
 |----------|-------|
 | Metric | engineering_quality_score |
 | Threshold | 8.5 |
 | Operator | >= |
-| Scope | All engineering artifacts including code, system designs, technical specs, and architecture documents |
+| Scope | All engineering artifacts (code, system designs, technical specs, architecture docs, API definitions) before pool merge |
 
-## HARD Gates (ALL must pass)
-Failure on any gate results in immediate rejection regardless of soft score.
+## HARD Gates
+
+Failure on any single gate sets final score to 0 and blocks pool merge immediately.
 
 | ID  | Criterion | Failure Action |
-|-----|-----------|---------------|
-| H01 | YAML frontmatter parses without syntax errors | block |
-| H02 | ID follows namespace pattern for artifact kind | block |
-| H03 | ID matches filename stem exactly | block |
-| H04 | Kind field contains valid artifact type literal | block |
-| H05 | Quality field is null at creation time | block |
+|-----|-----------|----------------|
+| H01 | Frontmatter block parses as valid YAML without errors | block |
+| H02 | `id` matches required namespace pattern for the artifact kind | block |
+| H03 | `id` value equals filename stem exactly (case-sensitive) | block |
+| H04 | `kind` field matches literal artifact type registered in `kinds_meta.json` | block |
+| H05 | `quality` field is null at authoring time (self-scoring forbidden) | block |
 | H06 | All required frontmatter fields present and non-empty | block |
-| H07 | Technical correctness: no logical errors, valid syntax for code artifacts | block |
-| H08 | Security review: no obvious vulnerabilities, follows secure coding practices | block |
-| H09 | Completeness: all specified requirements addressed, no incomplete sections | block |
-| H10 | Standards compliance: follows established engineering patterns and conventions | block |
+| H07 | Artifact includes at least one concrete, runnable implementation example or code snippet | block |
+| H08 | No security anti-patterns present (hardcoded credentials, injection vectors, plaintext secrets) | block |
+| H09 | Testability criteria or acceptance conditions are explicitly stated | block |
+| H10 | Body size does not exceed kind-specific max_bytes limit | block |
 
-## SOFT Scoring (weighted dimensions)
-Each dimension scored 0.0-1.0, multiplied by weight, summed for final score.
+## SOFT Scoring
 
-| ID  | Dimension | Weight | Scoring Method |
-|-----|-----------|--------|----------------|
-| S01 | Code quality and maintainability | 20% | graduated (0.0-1.0 based on readability, modularity, documentation) |
-| S02 | Test coverage and validation | 15% | graduated (0.0-1.0 based on test completeness and coverage metrics) |
-| S03 | Performance considerations | 15% | binary (1.0 if performance analyzed, 0.0 if ignored) |
-| S04 | Documentation completeness | 15% | graduated (0.0-1.0 based on inline comments, external docs, examples) |
-| S05 | Error handling and robustness | 10% | graduated (0.0-1.0 based on exception handling, edge case coverage) |
-| S06 | Scalability and extensibility | 10% | binary (1.0 if future growth considered, 0.0 if not) |
-| S07 | Code reusability and modularity | 10% | graduated (0.0-1.0 based on DRY principles, abstraction quality) |
-| S08 | Deployment and operational readiness | 5% | binary (1.0 if deployment considerations included, 0.0 if missing) |
+Score each dimension 0–1 (graduated or binary per scoring method). Weights sum to 100%.
 
-**Scoring Formula**: `aggregate_score = SUM(dimension_score * weight) * 10`
-**PASS Condition**: All HARD gates pass AND aggregate_score >= 8.5
+| ID  | Dimension | Weight | Scoring Method | Criteria |
+|-----|-----------|--------|----------------|----------|
+| S01 | Technical Depth | 25% | graduated | Covers edge cases, failure modes, and performance characteristics |
+| S02 | Completeness | 25% | graduated | All required sections present; no placeholder content (`TODO`, `TBD`, `...`) |
+| S03 | Maintainability | 20% | graduated | Modular structure; dependencies explicit; upgrade path documented |
+| S04 | Security Posture | 15% | binary | Threat model addressed or explicitly out-of-scope with justification |
+| S05 | Documentation Quality | 15% | graduated | Examples are executable; terminology consistent with CEX glossary |
+
+## Scoring Formula
+
+```
+hard_pass = ALL(H01..H10 pass)
+soft_score = S01*0.25 + S02*0.25 + S03*0.20 + S04*0.15 + S05*0.15
+engineering_quality_score = hard_pass ? (soft_score * 10) : 0
+PASS = hard_pass AND engineering_quality_score >= 8.5
+```
+
+Weights verified: 0.25 + 0.25 + 0.20 + 0.15 + 0.15 = 1.00
 
 ## Actions
-| Outcome | Score Range | Consequence |
-|---------|-------------|-------------|
-| GOLDEN | >= 9.5 | Artifact promoted to golden reference; used for training and templates |
-| PUBLISH | >= 8.5 | Artifact approved for production deployment and team consumption |
-| REVIEW | >= 7.0 | Artifact returned with detailed feedback; one revision cycle required |
-| REJECT | < 7.0 | Artifact blocked from pipeline; substantial rework required before resubmission |
 
-## Bypass Policy
-| Field | Specification |
-|-------|--------------|
-| Conditions | Critical production hotfix with time constraints < 4 hours; experimental prototype for proof-of-concept only; legacy system maintenance where full compliance impossible |
-| Approver | Technical lead or engineering manager with written justification |
-| Audit Trail | Record in `.cex/runtime/audits/engineering_bypasses.log` with timestamp, approver signature, artifact ID, business justification, and remediation plan |
-| Expiry | 7 days for hotfixes, 30 days for prototypes; full compliance required before expiry |
-| Non-bypassable | H01 (YAML syntax), H05 (quality null), H08 (security review) - these gates have no override mechanism |
+| Tier | Threshold | Action |
+|------|-----------|--------|
+| GOLDEN | >= 9.5 | Publish to pool as reference; flag for engineering nucleus onboarding |
+| PUBLISH | >= 8.5 | Merge to pool; mark production-ready |
+| REVIEW | >= 7.0 | Return to author with per-dimension failure report; one revision cycle |
+| REJECT | < 7.0 | Block from pool; full rewrite required before re-evaluation |
+
+## Bypass
+
+| Field | Value |
+|-------|-------|
+| condition | Prototype artifact in active design iteration (schema not yet stable); SOFT-only failure with score 8.0–8.4 |
+| approver | Pillar owner (N05 or N03 lead) must approve in writing before bypass activates |
+| audit_log | Record in `records/pool/audits/bypasses.md`: date, approver, gate IDs bypassed, rationale |
+| expiry | 14 days from grant; artifact must reach full compliance before expiry or is auto-rejected |
+
+**Non-bypassable gates**: H01 (frontmatter parse) and H05 (quality null) cannot be bypassed under any condition.
