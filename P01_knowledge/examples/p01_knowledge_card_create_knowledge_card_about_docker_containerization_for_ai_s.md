@@ -8,7 +8,7 @@ created: "2026-04-02"
 updated: "2026-04-02"
 author: "builder"
 domain: ai_infrastructure
-quality: 8.9
+quality: 9.1
 tags: [docker, containerization, ai-services, gpu, model-serving, inference, knowledge]
 tldr: "Docker AI containers require GPU runtime, multi-stage builds for 10-100GB models, shared volumes for weights, and memory limits 2-4x model size"
 when_to_use: "When deploying ML models as scalable services with GPU acceleration and resource isolation"
