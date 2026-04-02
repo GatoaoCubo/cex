@@ -36,13 +36,14 @@ This document defines the vector embedding model and the intelligent chunking st
 - Using this config for non-English content → Model optimized for English research
 
 ## 3. EMBEDDING MODEL SPECIFICATION
-The model is chosen for its state-of-the-art performance on technical and academic corpora.
 
-- **Model Provider**: `Google`
-- **Model Name**: `text-embedding-005-research` (A hypothetical model tuned for scientific and technical documents)
-- **Vector Dimensions**: `1024` (To capture the nuance of complex, dense information)
-- **Distance Metric**: `Cosine Similarity` (Standard for normalized, high-dimensional vectors)
-- **Normalization**: `Required (L2 Norm)`
+| Parameter | Value | Rationale |
+|-----------|-------|-----------|
+| Provider | Google | Leading performance on technical corpora |
+| Model | text-embedding-005-research | Tuned for scientific/technical documents |
+| Dimensions | 1024 | Captures nuance of complex, dense information |
+| Distance Metric | Cosine Similarity | Standard for normalized, high-dimensional vectors |
+| Normalization | L2 Norm (Required) | Ensures consistent similarity calculations |
 
 ## 4. CHUNKING STRATEGY: HIERARCHICAL & SEMANTIC
 A static chunk size is suboptimal for the varied documents N01 processes. We employ a hierarchical, content-aware chunking strategy.
