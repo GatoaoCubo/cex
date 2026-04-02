@@ -31,12 +31,13 @@ data_source: "https://docs.scipy.org/doc/scipy/reference/stats.html#trend-tests"
 # Trend Detection Algorithms for Time Series Analysis
 
 ## Quick Reference
-```yaml
-topic: trend_detection_time_series
-scope: Statistical methods for identifying directional patterns in temporal data
-owner: data_science_team
-criticality: high
-```
+| Parameter | Method | Typical Value | Decision Rule |
+|-----------|---------|---------------|---------------|
+| **p-value** | Mann-Kendall | < 0.05 | Significant trend exists |
+| **ADF statistic** | Stationarity | < -3.45 (1%) | Series is stationary |
+| **Window size** | Moving Average | 20-50 periods | Shorter = more sensitive |
+| **λ (lambda)** | HP Filter | 1600 (quarterly), 14400 (annual) | Higher = smoother trend |
+| **|t-statistic|** | Linear Regression | > 2.0 | Slope significantly ≠ 0 |
 
 ## Key Concepts
 - **Mann-Kendall Test**: Non-parametric test for monotonic trend; H0: no trend, p<0.05 rejects null
