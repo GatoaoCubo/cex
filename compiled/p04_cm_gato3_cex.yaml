@@ -1,0 +1,139 @@
+id: p04_cm_gato3_cex
+kind: content_monetization
+pillar: P04
+title: GATO³ × CEX — Hybrid Monetization Pipeline
+version: 1.0.0
+created: 2026-04-02
+updated: 2026-04-02
+author: n06_commercial
+domain: content_monetization
+quality: null
+tags:
+- content-monetization
+- gato3
+- cex
+- hybrid
+- b2c
+- b2b
+- cat-wellness
+- brazil
+tldr: Híbrido B2C (curadoria de produtos felinos) + B2B (licensing CEX para outras marcas) via MercadoPago/PIX + checkout
+  multi-tier com courses de bem-estar felino
+geo_constraint: brazil_abc_paulista
+expansion_rings:
+- abc_paulista
+- grande_sp
+- estado_sp
+- brasil
+cex_integration: true
+parse_content_asset_inventory: ''
+cex_system_assets:
+- 114 kinds typados com builders completos
+- 8F pipeline de produção de artifacts
+- 8 nuclei N00-N07 com especializações
+- SDK runtime cex_sdk (4504 linhas Python)
+- Brand injection system via brand_config.yaml
+- Autonomous orchestration via N07
+gato_brand_assets:
+- Curadoria de produtos validados por veterinários comportamentalistas
+- Ro persona — guia acolhedora com protocolos práticos
+- Conteúdo educacional — ciência felina acessível
+- Design PB minimalista (Allrounder + Kenao)
+- Base instalada — ABC Paulista, classe B-C+, tutores 25-45 anos
+monetizable_combined_assets:
+- CEX-as-a-Service para outras marcas pet implementarem agent systems
+- GATO³ Academy — courses de bem-estar felino via CEX-generated content
+- Brand Builder — CEX configurado para brands de nicho
+- Curadoria Premium — produtos + conteúdo + CEX automation
+pricing_hybrid_revenue_strategy: ''
+b2c_gato_core_revenue: "tiers:\n  casa_harmoniosa:\n    monthly_price_brl_centavos: 4900    # R$ 49,00/mês\n    annual_price_brl_centavos:\
+  \ 49000    # R$ 490,00/ano (2 meses grátis)\n    credits_included: 2000\n    features: [curadoria_produtos, consultas_ro,\
+  \ dicas_semanais]\n    \n  tutor_expert:\n    monthly_price_brl_centavos: 9900    # R$ 99,00/mês  \n    annual_price_brl_centavos:\
+  \ 99000    # R$ 990,00/ano\n    credits_included: 5000\n    features: [all_casa + veterinario_comportamental, curso_completo,\
+  \ kit_emergencia]\n    \n  criador_felino:                        # B2B pet professionals\n    monthly_price_brl_centavos:\
+  \ 19900   # R$ 199,00/mês\n    annual_price_brl_centavos: 199000   # R$ 1.990,00/ano\n    credits_included: 10000\n    features:\
+  \ [all_expert + revenda_produtos, cex_light_license, marca_branca]"
+b2b_cex_licensing_scale_revenue: "cex_licensing_tiers:\n  cex_starter:\n    setup_fee_brl_centavos: 500000     # R$ 5.000\
+  \ setup\n    monthly_price_brl_centavos: 149900  # R$ 1.499/mês\n    features: [3_nuclei, 50_kinds, basic_support, brand_injection]\n\
+  \    \n  cex_professional:  \n    setup_fee_brl_centavos: 1000000    # R$ 10.000 setup\n    monthly_price_brl_centavos:\
+  \ 299900  # R$ 2.999/mês\n    features: [6_nuclei, 114_kinds, priority_support, custom_builders]\n    \n  cex_enterprise:\n\
+  \    setup_fee_brl_centavos: 2500000    # R$ 25.000 setup\n    monthly_price_brl_centavos: 999900  # R$ 9.999/mês  \n  \
+  \  features: [all_nuclei, unlimited_kinds, dedicated_support, source_license]"
+credits_pipeline_cost_mapping: ''
+gato_operations: "pipeline_costs:\n  CURADORIA_PRODUTO: 150              # R$ 1,50 - análise veterinária + recomendação\n\
+  \  CONSULTA_RO: 100                    # R$ 1,00 - resposta personalizada da Ro\n  DICA_SEMANAL: 50                    #\
+  \ R$ 0,50 - conteúdo educacional semanal\n  PLANO_EMERGENCIA: 200               # R$ 2,00 - kit personalizado emergência\
+  \ felina\n  CURSO_MODULO: 300                   # R$ 3,00 - módulo completo curso bem-estar\n  ANALISE_COMPORTAMENTAL: 400\
+  \         # R$ 4,00 - análise + plano comportamental"
+cex_operations: "cex_pipeline_costs:\n  BUILDER_EXECUTION: 50               # R$ 0,50 - run 8F pipeline\n  NUCLEUS_DISPATCH:\
+  \ 25                # R$ 0,25 - dispatch task to nucleus  \n  BRAND_INJECTION: 10                 # R$ 0,10 - inject brand\
+  \ context\n  QUALITY_VALIDATION: 30              # R$ 0,30 - 8F validation + scoring\n  COMPILATION: 15                \
+  \     # R$ 0,15 - .md → .yaml compilation\n  AUTONOMOUS_ORCHESTRATION: 100       # R$ 1,00 - full /mission execution"
+checkout_multi_provider_brazilian_strategy: ''
+primary_provider_mercadopago: "mercadopago:\n  env_vars: [MERCADOPAGO_ACCESS_TOKEN, MERCADOPAGO_WEBHOOK_SECRET]\n  payment_methods:\
+  \ [pix, credit_card, boleto, parcelamento]\n  pix_discount_pct: 10                # 10% desconto PIX\n  installments_max:\
+  \ 12                # 12x sem juros cartão\n  webhook_endpoint: /webhooks/mercadopago\n  idempotency_field: preference_id\n\
+  \  retry_policy: exponential_3x\n  mock_mode: true"
+b2b_provider_stripe_international: "stripe_b2b:\n  env_vars: [STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET]\n  payment_methods:\
+  \ [card, bank_transfer, wire]\n  currencies: [BRL, USD, EUR]\n  subscription_billing: usage_based    # CEX operations billed\
+  \ monthly\n  webhook_endpoint: /webhooks/stripe\n  idempotency_field: idempotency_key"
+courses_gato_academy_structure: ''
+curso_bem_estar_felino_360: "modules:\n  - title: \"Chegada do Gato — Primeiros 30 dias\"\n    lessons: 5\n    duration_minutes:\
+  \ 180\n    drip_days: 0\n    \n  - title: \"Territorialidade e Enriquecimento Ambiental\"  \n    lessons: 6\n    duration_minutes:\
+  \ 240\n    drip_days: 7\n    \n  - title: \"Sinais de Stress e Intervenção Precoce\"\n    lessons: 4  \n    duration_minutes:\
+  \ 160\n    drip_days: 14\n    \n  - title: \"Convivência Multi-gatos\"\n    lessons: 5\n    duration_minutes: 200  \n  \
+  \  drip_days: 21\n    \ncompletion_threshold: 0.80\ncertification: \"Tutor Consciente GATO³\""
+curso_cex_implementation_for_brands: "modules:\n  - title: \"CEX Architecture Overview\" \n    lessons: 4\n    duration_minutes:\
+  \ 120\n    drip_days: 0\n    \n  - title: \"Brand Configuration & Injection\"\n    lessons: 3\n    duration_minutes: 90\
+  \  \n    drip_days: 3\n    \n  - title: \"Nucleus Setup & Dispatch\"\n    lessons: 5\n    duration_minutes: 180\n    drip_days:\
+  \ 7\n    \ncertification: \"CEX Certified Implementor\""
+ads_multi_platform_strategy: ''
+meta_ads_b2c_gato: "meta_ads:\n  target_audience: \"tutores_gatos_25_45_classe_b\"\n  budget_monthly_brl_centavos: 300000\
+  \  # R$ 3.000/mês\n  campaigns:\n    - name: awareness_bem_estar_felino\n      objective: reach\n      budget_pct: 30\n\
+  \    - name: conversion_casa_harmoniosa\n      objective: conversions  \n      budget_pct: 70\n  creative_hooks: [gato_estressado,\
+  \ casa_elegante, ro_dicas]\n  pixel_env: META_PIXEL_ID"
+linkedin_ads_b2b_cex: "linkedin_ads:\n  target_audience: \"decision_makers_tech_startups_brazil\"\n  budget_monthly_brl_centavos:\
+  \ 150000  # R$ 1.500/mês\n  campaigns:\n    - name: cex_system_awareness\n      objective: brand_awareness\n      budget_pct:\
+  \ 40\n    - name: cex_demo_requests  \n      objective: lead_generation\n      budget_pct: 60"
+emails_behavioral_trigger_sequences: ''
+gato_onboarding_via_ro: "sequences:\n  gato3_onboarding:\n    - day: 0\n      subject: \"Ro aqui! Seu kit de boas-vindas chegou\
+  \ \U0001F431\"\n      template: welcome_ro_intro\n      cta: primeiro_questionario\n      \n    - day: 3  \n      subject:\
+  \ \"Como está a adaptação? 3 sinais para observar\"\n      template: adaptacao_checklist\n      cta: consulta_ro\n     \
+  \ \n    - day: 7\n      subject: \"Primeira semana: conquistas e próximos passos\"\n      template: weekly_progress\n  \
+  \    cta: produto_recomendado"
+cex_demo_sequence_b2b: "sequences:\n  cex_demo:\n    - day: 0\n      subject: \"Your CEX system demo is ready\"\n      template:\
+  \ demo_access_b2b\n      cta: demo_environment_url\n      \n    - day: 1\n      subject: \"Try the 8F pipeline with your\
+  \ brand\"  \n      template: hands_on_tutorial\n      cta: brand_config_tool\n      \n    - day: 5\n      subject: \"Implementation\
+  \ timeline & pricing discussion\"\n      template: sales_conversation\n      cta: calendar_booking"
+validate_pre_launch_quality_gates: ''
+margin_validation: "margin_checks:\n  gato3_casa_harmoniosa:\n    monthly_price: 4900               # R$ 49,00\n    monthly_cost:\
+  \ 1200                # R$ 12,00 (credits + overhead)\n    margin_pct: 75.5                  # PASS (>30%)\n    \n  cex_professional:\
+  \  \n    monthly_price: 299900             # R$ 2.999,00\n    monthly_cost: 75000               # R$ 750,00 (infrastructure\
+  \ + support)\n    margin_pct: 75.0                  # PASS (>30%)"
+webhook_testing: "webhook_tests:\n  mercadopago:\n    test_events: [payment.approved, payment.cancelled, payment.refunded]\n\
+  \    idempotency_test: duplicate_webhook_handling\n    signature_test: hmac_sha256_verification\n    \n  stripe:\n    test_events:\
+  \ [invoice.payment_succeeded, customer.subscription.updated]\n    idempotency_test: idempotency_key_dedup\n    signature_test:\
+  \ stripe_signature_verification"
+end_to_end_pipeline_test: "e2e_scenarios:\n  gato3_signup_flow:\n    steps: [signup, payment_pix, ro_onboarding, first_curadoria,\
+  \ product_recommendation]\n    expected_duration: 300_seconds\n    \n  cex_licensing_flow:\n    steps: [demo_request, demo_completion,\
+  \ pricing_discussion, contract, setup]  \n    expected_duration: 14_days"
+deploy_go_live_strategy: ''
+phase_1_gato_soft_launch_abc_paulista: "launch_config:\n  audience: existing_gato3_customers\n  tier_availability: [casa_harmoniosa]\
+  \  # single tier initially\n  payment_methods: [pix, boleto]        # Brazilian-only\n  mock_mode: false\n  rollout_percentage:\
+  \ 25                # 25% of traffic"
+phase_2_full_b2c_grande_sp: "expansion_config:\n  audience: organic_meta_ads\n  tier_availability: [casa_harmoniosa, tutor_expert]\n\
+  \  payment_methods: [pix, credit_card, boleto]\n  rollout_percentage: 100"
+phase_3_b2b_cex_launch: "b2b_launch:\n  audience: tech_startups_brazil\n  channels: [linkedin_ads, content_marketing, partnerships]\n\
+  \  tier_availability: [cex_starter, cex_professional]\n  pilot_customers: 5                    # limited pilot\n  success_metric:\
+  \ 1_paying_customer_per_tier"
+revenue_projections_12_meses: ''
+b2c_gato_revenue:
+- 'Casa Harmoniosa: 500 clientes × R$ 49 × 12 = R$ 294.000'
+- 'Tutor Expert: 100 clientes × R$ 99 × 12 = R$ 118.800'
+- 'Subtotal B2C: R$ 412.800'
+b2b_cex_revenue:
+- 'CEX Starter: 3 clientes × R$ 1.499 × 12 = R$ 53.964'
+- 'CEX Professional: 2 clientes × R$ 2.999 × 12 = R$ 71.976'
+- 'Setup fees: 5 × R$ 15.000 média = R$ 75.000'
+- 'Subtotal B2B: R$ 200.940'
+total_arr_r_613_740: 'Margem agregada: 72% (custos de pipeline + infraestrutura)'
