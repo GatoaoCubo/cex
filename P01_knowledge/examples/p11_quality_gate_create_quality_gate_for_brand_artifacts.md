@@ -8,61 +8,72 @@ created: "2026-04-02"
 updated: "2026-04-02"
 author: "quality-gate-builder"
 domain: "brand"
-quality: 8.9
-tags: [quality-gate, brand, identity, messaging, conversion]
-tldr: "Pre-publish gate for brand artifacts: structural validation + 5-dimension brand quality scoring >= 8.5"
-density_score: 0.92
+quality: 9.1
+tags: [quality-gate, brand, p11, governance, identity]
+tldr: "Pre-publish gate for brand artifacts: 8 HARD checks + 5-dimension weighted scoring >= 8.5 before pool merge"
+density_score: 0.91
 ---
 ## Definition
+
 | Property | Value |
 |----------|-------|
 | Metric | brand_quality_score |
 | Threshold | 8.5 |
 | Operator | >= |
-| Scope | All brand artifacts before pool merge or publication |
+| Scope | All brand artifacts before pool merge or publication via N06 or any nucleus |
 
 ## HARD Gates
-ALL must pass or artifact is rejected regardless of SOFT score.
+
+Failure on any single gate sets final score to 0 and blocks pool merge immediately.
 
 | ID  | Criterion | Failure Action |
 |-----|-----------|----------------|
 | H01 | YAML frontmatter parses without syntax errors | block |
-| H02 | ID follows pattern `p{pillar}_{kind}_{slug}` format | block |
-| H03 | ID equals filename stem exactly | block |
-| H04 | Kind field matches declared artifact type | block |
-| H05 | Quality field is null at authoring time | block |
-| H06 | All required frontmatter fields present and non-empty | block |
-| H07 | Brand config references resolve to valid values | block |
-| H08 | No placeholder values ({{var}}, TBD, TODO) in final output | block |
-| H09 | Target audience specified and non-generic | block |
-| H10 | Brand voice indicators present (tone, personality traits) | block |
+| H02 | `id` matches pattern `p{nn}_{kind}_{slug}` (no uppercase, no spaces) | block |
+| H03 | `id` value equals filename stem exactly (case-sensitive) | block |
+| H04 | `kind` field matches a literal registered in `kinds_meta.json` | block |
+| H05 | `quality` field is null at authoring time (self-scoring forbidden) | block |
+| H06 | All required frontmatter fields present and non-empty: id, kind, pillar, title, version, created, updated, author, domain, tags, tldr | block |
+| H07 | No unresolved `{{BRAND_*}}` placeholder tokens remain in body or frontmatter | block |
+| H08 | Brand config references (colors, voice, values) resolve to entries in `.cex/brand/brand_config.yaml` | block |
 
 ## SOFT Scoring
-Score each dimension 0.0-1.0. Final score = weighted average * 10.
 
-| ID | Dimension | Weight | Scoring Method |
-|----|-----------|--------|----------------|
-| S01 | Brand Voice Consistency | 25% | Voice matches brand personality traits and tone guidelines |
-| S02 | Visual Identity Compliance | 20% | Colors, fonts, logos follow brand style guide |
-| S03 | Message Clarity | 20% | Core value proposition clear and compelling |
-| S04 | Target Audience Alignment | 20% | Content resonates with specified customer segments |
-| S05 | Conversion Optimization | 15% | Clear call-to-action and path to desired outcome |
+Score each dimension 0.0 (absent or fails) to 1.0 (fully present and passes). Partial credit allowed where noted.
 
-**Scoring Formula**: `final_score = (S01*0.25 + S02*0.20 + S03*0.20 + S04*0.20 + S05*0.15) * 10`
+| ID  | Dimension | Weight | Criteria | Scoring Method |
+|-----|-----------|--------|----------|----------------|
+| S01 | Structural validity | 20% | All schema-required sections present; body within max_bytes for the artifact kind | binary |
+| S02 | Brand alignment | 25% | Voice, tone, and values demonstrably match `brand_config.yaml` identity fields; no generic filler language | graduated |
+| S03 | Content density | 20% | `density_score` >= 0.85; no padding, no restated headings, each paragraph carries unique information | graduated |
+| S04 | Voice consistency | 20% | Personality markers (formal/casual, technical/friendly) are consistent throughout; no tonal shifts between sections | graduated |
+| S05 | Documentation completeness | 15% | `tldr` <= 160 chars; at least one concrete example or use case present; tags are domain-accurate | graduated |
+
+**Scoring Formula**
+
+```
+brand_quality_score = (S01*0.20 + S02*0.25 + S03*0.20 + S04*0.20 + S05*0.15) * 10
+```
+
+Weight total: 1.00 (100%). Score range: 0.0–10.0.
+HARD gate failure overrides formula: `final = hard_pass ? brand_quality_score : 0`.
 
 ## Actions
-| Result | Threshold | Action |
-|--------|-----------|--------|
-| GOLDEN | >= 9.5 | Publish to pool as reference example; feature in brand showcase |
-| PUBLISH | >= 8.5 | Approved for publication and external use |
-| REVIEW | >= 7.0 | Return for brand alignment review; one revision cycle |
-| REJECT | < 7.0 | Block from publication; requires complete brand redesign |
+
+| Tier | Threshold | Action |
+|------|-----------|--------|
+| GOLDEN | >= 9.5 | Publish to brand pool as reference; flag for brand style guide inclusion |
+| PUBLISH | >= 8.5 | Publish to brand pool; mark production-ready for N06 consumption |
+| REVIEW | >= 7.0 | Return to author with per-dimension scores and specific revision notes; one revision cycle |
+| REJECT | < 7.0 | Block from pool; full rewrite required; raise signal to N07 with failure summary |
 
 ## Bypass
+
 | Field | Value |
 |-------|-------|
-| Condition | Emergency brand crisis response or time-sensitive launch requirement |
-| Approver | Brand Director or CMO written approval required |
-| Audit Trail | Log in `.cex/runtime/audits/brand_bypasses.md` with timestamp, approver, reason, and review date |
-| Expiry | 7 days maximum; must achieve full compliance before expiry or be withdrawn |
-| Never Bypass | H01 (YAML parsing), H05 (quality null), H07 (brand config validity) |
+| condition | Brand config is actively being revised (bootstrap or rebrand in progress) and artifact uses provisional values pending final brand decisions |
+| approver | Brand owner or N07 orchestrator must approve in writing before bypass takes effect |
+| audit_log | Record in `.cex/runtime/decisions/bypass_log.md` with: date, artifact id, approver, specific gates bypassed, and reason |
+| expiry | 7 days from grant; artifact must reach full compliance or be removed from pool before expiry |
+
+**Non-bypassable gates**: H01 (YAML parse) and H05 (quality null) can never be bypassed under any conditions.
