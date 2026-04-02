@@ -3,8 +3,8 @@ id: p12_wf_intelligence_pipeline
 kind: workflow
 pillar: P12
 version: "1.0.0"
-created: "2026-04-01"
-updated: "2026-04-01"
+created: "2026-04-02"
+updated: "2026-04-02"
 author: "workflow-builder"
 title: "Intelligence Pipeline"
 steps_count: 3
@@ -13,55 +13,62 @@ agent_nodes: [n01, n04, n07]
 timeout: 7200
 retry_policy: per_step
 depends_on: []
-signals: [complete, error, intelligence_ready]
-spawn_configs: [p12_spawn_n01_research, p12_spawn_n04_analysis, p12_spawn_n07_consolidate]
+signals: [n01_research_complete, n04_analysis_complete, workflow_complete, workflow_error]
+spawn_configs: [p12_spawn_n01_solo_research, p12_spawn_n04_solo_analysis]
 domain: "intelligence"
-quality: 8.8
-tags: [workflow, intelligence, research, analysis, sequential]
-tldr: "3-step sequential intelligence pipeline: research data collection, analysis processing, and consolidated reporting"
+quality: 9.0
+tags: [workflow, intelligence, research, sequential, P12]
+tldr: "3-step sequential pipeline: N01 collects intelligence, N04 processes into knowledge artifacts, N07 consolidates into actionable brief"
 density_score: 0.91
 ---
 ## Purpose
-Orchestrates end-to-end intelligence gathering and analysis mission where N01 collects raw intelligence data, N04 processes findings into structured knowledge artifacts, and N07 consolidates results into actionable intelligence brief. Each step builds on previous outputs in strict sequential order to ensure data quality and analytical rigor.
+Orchestrates end-to-end intelligence gathering and analysis. N01 (Gemini 2.5-pro, 1M ctx) collects raw data from multiple sources; N04 processes findings into structured knowledge cards and embedding-ready artifacts; N07 consolidates into a final intelligence brief and archives all handoffs. Each step gates the next — no parallel execution — to preserve analytical rigor and data provenance.
 
 ## Steps
 
 ### Step 1: Intelligence Collection [n01]
 - **Agent**: n01 (gemini-2.5-pro)
-- **Action**: Gather intelligence data from multiple sources and produce research artifacts
-- **Input**: intelligence targets and collection requirements from handoff file
-- **Output**: research artifacts committed to N01_intelligence/ with source citations
-- **Signal**: n01_research_complete with data quality score
+- **Action**: Gather raw intelligence from designated sources; produce research artifacts with source citations
+- **Input**: Collection targets and scope from `.cex/runtime/handoffs/{MISSION}_n01.md`
+- **Output**: Research artifacts committed to `N01_intelligence/` with quality score
+- **Signal**: `n01_research_complete` (emitted after commit; includes `data_quality_score`)
 - **Depends on**: none (initial step)
+- **On failure**: retry (max 1), then emit `n01_error` → escalate to N07
 
-### Step 2: Analysis Processing [n04]
+### Step 2: Knowledge Analysis [n04]
 - **Agent**: n04 (gemini-2.5-pro)
-- **Action**: Process raw intelligence into structured knowledge cards and analytical products
-- **Input**: research artifacts from Step 1, analysis framework requirements
-- **Output**: knowledge cards and analysis reports committed to N04_knowledge/
-- **Signal**: n04_analysis_complete with analytical confidence score
-- **Depends on**: Step 1
+- **Action**: Process N01 research artifacts into structured knowledge cards, embedding configs, and retrieval-ready chunks
+- **Input**: Research artifacts from `N01_intelligence/` produced in Step 1
+- **Output**: Knowledge cards and embedding configs committed to `N04_knowledge/`
+- **Signal**: `n04_analysis_complete` (emitted after commit; includes `artifacts_count`)
+- **Depends on**: Step 1 (`n01_research_complete`)
+- **On failure**: retry (max 1), then emit `n04_error` → escalate to N07
 
-### Step 3: Intelligence Brief [n07]
-- **Agent**: n07 (opus)
-- **Action**: Consolidate analysis into executive intelligence brief with recommendations
-- **Input**: knowledge cards and analysis from Step 2, briefing requirements
-- **Output**: consolidated intelligence brief with actionable recommendations
-- **Signal**: intelligence_ready with final assessment score
-- **Depends on**: Steps 1, 2
+### Step 3: Consolidation [n07]
+- **Agent**: n07 (claude-opus)
+- **Action**: Review N01 + N04 outputs; compose final intelligence brief; archive handoffs; push consolidated commit
+- **Input**: Signals `n01_research_complete` + `n04_analysis_complete`; git log; artifacts in N01 and N04 directories
+- **Output**: Intelligence brief at `N07_orchestration/briefs/{MISSION}_brief.md`; archived handoffs; consolidated git commit
+- **Signal**: `workflow_complete` (includes aggregate quality, step scores, artifact count)
+- **Depends on**: Steps 1 and 2
+- **On failure**: abort; emit `workflow_error` with last known state
 
 ## Dependencies
-- Intelligence collection targets must be defined in handoff file before workflow start
-- Analysis framework and briefing requirements must be specified
-- spawn_configs for N01, N04, and N07 must exist and be valid
+- Handoff file must exist at `.cex/runtime/handoffs/{MISSION}_n01.md` before workflow starts
+- `spawn_configs` referenced must be valid: `p12_spawn_n01_solo_research`, `p12_spawn_n04_solo_analysis`
+- N01 and N04 cannot git commit — N07 consolidates their output (see n07-orchestrator.md)
+- `.cex/runtime/signals/` directory must be writable for signal emission
 
 ## Signals
-- **On step complete**: {nucleus}_complete signal emitted with quality scores (see signal-builder)
-- **On workflow complete**: intelligence_ready signal with consolidated assessment
-- **On error**: {nucleus}_error signal, retry per step (max 1), then escalate to orchestrator
+- **`n01_research_complete`**: emitted by N07 on N01's behalf after consolidating N01 output; carries `data_quality_score`
+- **`n04_analysis_complete`**: emitted by N07 on N04's behalf after consolidating N04 output; carries `artifacts_count`
+- **`workflow_complete`**: emitted by N07 after brief is committed and handoffs archived; carries `aggregate_quality` and `step_scores` map
+- **`workflow_error`**: emitted on unrecoverable failure; carries `failed_step` and `last_known_state`
+- Signal schema: see `signal-builder` conventions; all signals written to `.cex/runtime/signals/`
 
 ## References
-- signal-builder for completion signal specifications
-- spawn-config-builder for nucleus launch configurations
-- N01 intelligence nucleus for research capabilities
-- N04 knowledge nucleus for analysis processing
+- N01 rules: `.claude/rules/n01-intelligence.md`
+- N04 rules: `.claude/rules/n04-knowledge.md`
+- N07 consolidate protocol: `.claude/rules/n07-orchestrator.md` § Consolidate Protocol
+- Signal conventions: `signal-builder` (P12)
+- Spawn configs: `spawn-config-builder` (P12)
