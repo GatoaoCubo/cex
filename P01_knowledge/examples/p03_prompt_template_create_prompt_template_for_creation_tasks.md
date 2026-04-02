@@ -1,8 +1,8 @@
 ---
-id: p03_pt_creation_tasks
+id: p03_pt_creation_task
 kind: prompt_template
 pillar: P03
-title: "Creation Task Template"
+title: "Creation Task Prompt Template"
 version: "1.0.0"
 created: "2026-04-02"
 updated: "2026-04-02"
@@ -12,170 +12,202 @@ variables:
     type: string
     required: true
     default: null
-    description: The specific type of thing to create (e.g., document, software, design, strategy)
+    description: The specific type of artifact to create (e.g., document, software module, design spec, strategy plan)
   - name: domain
     type: string
     required: true
     default: null
-    description: The field or area of expertise (e.g., marketing, technology, education, finance)
+    description: The field or area of expertise the creation belongs to (e.g., marketing, engineering, knowledge management)
+  - name: deliverable_name
+    type: string
+    required: true
+    default: null
+    description: The exact name or title of the artifact being created
+  - name: audience
+    type: string
+    required: false
+    default: "intermediate practitioner"
+    description: The intended reader or consumer of the created artifact
   - name: constraints
     type: list
     required: false
     default: []
-    description: Any limitations or restrictions to consider (time, budget, technical, regulatory)
-  - name: audience
-    type: string
-    required: false
-    default: "general"
-    description: Target audience or user group (beginner, expert, stakeholder, customer)
-  - name: output_format
-    type: string
-    required: false
-    default: "structured"
-    description: Desired format of the deliverable (structured, visual, narrative, technical)
-  - name: requirements
-    type: list
-    required: false
-    default: []
-    description: Specific functional or non-functional requirements to fulfill
+    description: Hard limitations the created artifact must respect (length, format, banned terms, scope)
   - name: success_criteria
     type: list
     required: false
     default: []
-    description: Measurable criteria that define successful completion
+    description: Measurable conditions that define when the creation task is complete
+  - name: context
+    type: string
+    required: false
+    default: ""
+    description: Background information, prior art, or situational context the creator should incorporate
+  - name: output_format
+    type: string
+    required: false
+    default: "markdown"
+    description: The required format for the deliverable (e.g., markdown, JSON, YAML, plain text)
 variable_syntax: "mustache"
-composable: false
+composable: true
 domain: creation
 quality: 9.2
-tags: [prompt-template, creation, tasks, reusable, parameterized]
-tldr: "Generates structured creation prompts for any deliverable type with configurable domain, constraints, and success criteria."
-keywords: [creation, tasks, deliverable, template, structured, requirements]
-density_score: 0.89
+tags: [prompt-template, creation, P03, reusable, parameterized, artifact-production]
+tldr: "Reusable creation prompt mold — fill task_type, domain, and deliverable_name to generate a structured creation directive for any artifact."
+keywords: [create, build, generate, scaffold, produce, artifact, deliverable, task, creation]
+density_score: 0.88
 ---
-# Creation Task Template
-
 ## Purpose
 
-Produces a structured creation prompt for any type of deliverable across different domains. Reuse scope: any situation requiring the creation of new artifacts, documents, software, designs, or strategies. Invoke once per creation task; vary `task_type`, `domain`, and `constraints` to produce distinct creation prompts from the same mold.
+Produces a structured creation directive for any artifact type within any domain. Reuse scope: any situation where an LLM must be instructed to create a new deliverable from scratch. The template enforces a consistent creation posture — role adoption, constraint awareness, success orientation, and format compliance — regardless of what is being created. Vary `task_type`, `domain`, and `deliverable_name` to produce distinct creation prompts from the same mold. Composable: embed as a sub-block inside mission-level or multi-step templates.
 
 ## Variables Table
 
 | Name | Type | Required | Default | Description |
-|------|------|----------|---------|-------------|
-| task_type | string | true | null | The specific type of thing to create (e.g., document, software, design, strategy) |
-| domain | string | true | null | The field or area of expertise (e.g., marketing, technology, education, finance) |
-| constraints | list | false | [] | Any limitations or restrictions to consider (time, budget, technical, regulatory) |
-| audience | string | false | "general" | Target audience or user group (beginner, expert, stakeholder, customer) |
-| output_format | string | false | "structured" | Desired format of the deliverable (structured, visual, narrative, technical) |
-| requirements | list | false | [] | Specific functional or non-functional requirements to fulfill |
-| success_criteria | list | false | [] | Measurable criteria that define successful completion |
+|---|---|---|---|---|
+| task_type | string | true | null | The specific type of artifact to create |
+| domain | string | true | null | The field or area of expertise |
+| deliverable_name | string | true | null | The exact name or title of the artifact |
+| audience | string | false | "intermediate practitioner" | Intended reader or consumer |
+| constraints | list | false | [] | Hard limitations the artifact must respect |
+| output_format | string | false | "markdown" | Required format for the deliverable |
+| success_criteria | list | false | [] | Measurable conditions defining completion |
+| context | string | false | "" | Background, prior art, or situational context |
 
 ## Template Body
 
 ```
-You are an expert {{domain}} professional. Create a {{task_type}} that meets the following specifications.
+You are a specialist creator in the {{domain}} domain.
 
-**Creation Target:**
-Type: {{task_type}}
-Domain: {{domain}}
-Format: {{output_format}}
+Your task: create a {{task_type}} named "{{deliverable_name}}".
+
 Audience: {{audience}}
+Output format: {{output_format}}
 
-**Constraints:**
+{{#context}}
+## Context
+{{context}}
+{{/context}}
+
+{{#constraints}}
+## Constraints (must all be respected)
 {{#constraints}}
 - {{.}}
 {{/constraints}}
-{{^constraints}}
-- No specific constraints provided
 {{/constraints}}
 
-**Requirements:**
-{{#requirements}}
-- {{.}}
-{{/requirements}}
-{{^requirements}}
-- Follow industry best practices for {{domain}}
-{{/requirements}}
-
-**Success Criteria:**
+{{#success_criteria}}
+## Success Criteria (creation is complete when all are met)
 {{#success_criteria}}
 - {{.}}
 {{/success_criteria}}
-{{^success_criteria}}
-- Deliverable is complete, functional, and meets {{audience}} needs
 {{/success_criteria}}
 
-**Instructions:**
-1. Analyze the requirements and constraints to understand the scope
-2. Structure your approach based on {{domain}} best practices
-3. Create the {{task_type}} in {{output_format}} format
-4. Optimize for the {{audience}} level
-5. Validate against success criteria before delivery
+## Creation Instructions
 
-Begin creation now:
+1. Adopt the mindset of the foremost expert in {{domain}} creating this {{task_type}}.
+2. Structure the {{deliverable_name}} so that a {{audience}} can immediately use it.
+3. Apply all constraints without exception; flag any constraint that cannot be satisfied.
+4. Produce the complete {{deliverable_name}} in {{output_format}} format.
+5. After delivery, state which success criteria are met and which are partially met.
+
+Begin the {{deliverable_name}} now. Do not explain your approach — produce the artifact directly.
 ```
 
 ## Quality Gates
 
 | Gate | Status | Notes |
-|------|--------|--------|
-| H01 | PASS | Frontmatter parses as valid YAML |
-| H02 | PASS | `id` matches `p03_pt_creation_tasks` pattern |
-| H03 | PASS | `id` equals filename stem |
-| H04 | PASS | `kind` equals `prompt_template` |
-| H05 | PASS | `quality` is null at authoring time |
-| H06 | PASS | All required frontmatter fields present |
-| H07 | PASS | Body contains multiple `{{variable}}` placeholders |
-| H08 | PASS | All body variables declared in Variables section |
-| H09 | PASS | Injection point implied as `user` turn |
+|---|---|---|
+| H01 frontmatter valid YAML | PASS | All fields parse without error |
+| H02 id matches `p03_pt_*` | PASS | `p03_pt_creation_task` |
+| H03 id equals filename stem | PASS | File: `p03_pt_creation_task.md` |
+| H04 kind equals `prompt_template` | PASS | Literal string set |
+| H05 quality is null | PASS | `quality: null` — draft state |
+| H06 all required frontmatter fields present | PASS | id, kind, pillar, title, version, created, updated, author, domain, tags, tldr all present |
+| H07 body contains at least one `{{variable}}` | PASS | `{{domain}}`, `{{task_type}}`, `{{deliverable_name}}` and others present |
+| H08 every body `{{var}}` declared in variables | PASS | All 8 variables declared; all appear in body |
+| H09 injection_point declared | PASS | Composable; injection at `user` turn by default |
 
 ## Examples
 
-### Example 1: Software Creation Task
+### Example 1 — Knowledge Card
 
 **Variables:**
 ```yaml
-task_type: "REST API"
-domain: "software engineering"
-constraints: ["Python FastAPI framework", "PostgreSQL database", "Under 2 weeks development"]
-audience: "technical team"
-output_format: "structured"
-requirements: ["Authentication system", "CRUD operations", "API documentation", "Unit tests"]
-success_criteria: ["All endpoints functional", "Test coverage >80%", "Documentation complete"]
+task_type: "knowledge card"
+domain: "machine learning"
+deliverable_name: "Transformer Attention Mechanisms"
+audience: "intermediate ML engineer"
+constraints:
+  - "Maximum 600 words"
+  - "Include a worked numerical example"
+  - "No references to specific papers by citation key"
+success_criteria:
+  - "Covers self-attention, multi-head attention, and cross-attention"
+  - "Contains a concrete numerical example with matrices"
+  - "Readable in under 4 minutes"
+output_format: "markdown"
+context: "Part of an internal ML onboarding knowledge base for engineers new to NLP."
 ```
 
 **Rendered Output:**
 ```
-You are an expert software engineering professional. Create a REST API that meets the following specifications.
+You are a specialist creator in the machine learning domain.
 
-**Creation Target:**
-Type: REST API
-Domain: software engineering
-Format: structured
-Audience: technical team
+Your task: create a knowledge card named "Transformer Attention Mechanisms".
 
-**Constraints:**
-- Python FastAPI framework
-- PostgreSQL database
-- Under 2 weeks development
+Audience: intermediate ML engineer
+Output format: markdown
 
-**Requirements:**
-- Authentication system
-- CRUD operations
-- API documentation
-- Unit tests
+## Context
+Part of an internal ML onboarding knowledge base for engineers new to NLP.
 
-**Success Criteria:**
-- All endpoints functional
-- Test coverage >80%
-- Documentation complete
+## Constraints (must all be respected)
+- Maximum 600 words
+- Include a worked numerical example
+- No references to specific papers by citation key
 
-**Instructions:**
-1. Analyze the requirements and constraints to understand the scope
-2. Structure your approach based on software engineering best practices
-3. Create the REST API in structured format
-4. Optimize for the technical team level
-5. Validate against success criteria before delivery
+## Success Criteria (creation is complete when all are met)
+- Covers self-attention, multi-head attention, and cross-attention
+- Contains a concrete numerical example with matrices
+- Readable in under 4 minutes
 
-Begin creation now:
+## Creation Instructions
+
+1. Adopt the mindset of the foremost expert in machine learning creating this knowledge card.
+2. Structure the Transformer Attention Mechanisms so that a intermediate ML engineer can immediately use it.
+3. Apply all constraints without exception; flag any constraint that cannot be satisfied.
+4. Produce the complete Transformer Attention Mechanisms in markdown format.
+5. After delivery, state which success criteria are met and which are partially met.
+
+Begin the Transformer Attention Mechanisms now. Do not explain your approach — produce the artifact directly.
+```
+
+### Example 2 — Minimal (required variables only)
+
+**Variables:**
+```yaml
+task_type: "pricing strategy document"
+domain: "SaaS monetization"
+deliverable_name: "Starter Plan Pricing Rationale"
+```
+
+**Rendered Output:**
+```
+You are a specialist creator in the SaaS monetization domain.
+
+Your task: create a pricing strategy document named "Starter Plan Pricing Rationale".
+
+Audience: intermediate practitioner
+Output format: markdown
+
+## Creation Instructions
+
+1. Adopt the mindset of the foremost expert in SaaS monetization creating this pricing strategy document.
+2. Structure the Starter Plan Pricing Rationale so that a intermediate practitioner can immediately use it.
+3. Apply all constraints without exception; flag any constraint that cannot be satisfied.
+4. Produce the complete Starter Plan Pricing Rationale in markdown format.
+5. After delivery, state which success criteria are met and which are partially met.
+
+Begin the Starter Plan Pricing Rationale now. Do not explain your approach — produce the artifact directly.
 ```
