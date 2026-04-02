@@ -52,12 +52,19 @@ Presence of these keywords strongly suggests N01 is the correct agent:
 - `findings`
 
 ## 5. EXCLUSION CRITERIA (ANTI-PATTERNS)
-Even if keywords match, **DO NOT** route to N01 if the query is:
-- A simple, factual question ("What is X?").
-- A request to write code ("Write a Python script for...").
-- A request for creative content ("Write a poem about...").
-- A request for operational action ("Restart the server.").
-- A request for real-time information ("What's the weather?").
+Even if keywords match, **DO NOT** route to N01:
+
+| Query Type | Example | Route Instead |
+|------------|---------|---------------|
+| Simple factual questions | "What is React?" | N04 Knowledge |
+| Code writing requests | "Write a Python script for data parsing" | N05 Operations |
+| Creative content | "Write a poem about AI" | N02 Marketing |
+| Operational actions | "Restart the server", "Deploy to prod" | N05 Operations |
+| Real-time info | "What's the weather?", "Latest stock price" | External API |
+| Quick definitions | "Define machine learning" | N04 Knowledge |
+| Build requests | "Create a new component", "Generate docs" | N03 Builder |
+| Single-source summary | "Summarize this one article" | N04 Knowledge |
+| Implementation tasks | "How do I configure X?" | N05 Operations |
 
 ## 6. FALLBACK LOGIC
 If the routing confidence score is below the `confidence_threshold` (0.85), or if the N01 agent is offline or at capacity, the task MUST be routed to the `n04_knowledge` nucleus. N04 serves as the general-purpose knowledge agent and can handle broader, less specialized queries, ensuring system resilience.
