@@ -183,6 +183,87 @@ def _load_builder_memories(builder_id: str, intent: str) -> str:
         return ""
 
 
+def _load_relevant_kcs(intent: str, parsed: dict) -> str:
+    """Search Supabase pgvector for KCs relevant to the current intent.
+
+    Uses two strategies:
+    1. feeds_kinds: find KCs that explicitly feed the target kind
+    2. semantic search: find KCs similar to the intent text
+
+    Returns formatted injection block or empty string.
+    """
+    try:
+        from cex_kc_index import search_kcs_by_text, search_kcs_by_kind
+    except ImportError:
+        return ""
+
+    kcs = []
+
+    # Strategy 1: KCs that feed this kind (explicit link)
+    target_kind = ""
+    if isinstance(parsed.get("object"), list):
+        target_kind = parsed["object"][0] if parsed["object"] else ""
+    elif isinstance(parsed.get("object"), str):
+        target_kind = parsed["object"]
+    target_kind = target_kind.replace("-", "_")
+
+    if target_kind:
+        try:
+            kind_kcs = search_kcs_by_kind(target_kind, top_k=3)
+            for kc in kind_kcs:
+                kcs.append(kc)
+        except Exception:
+            pass
+
+    # Strategy 2: Semantic search by intent
+    try:
+        sem_kcs = search_kcs_by_text(intent, top_k=3)
+        seen_ids = {kc["id"] for kc in kcs}
+        for kc in sem_kcs:
+            if kc["id"] not in seen_ids:
+                kcs.append(kc)
+    except Exception:
+        pass
+
+    if not kcs:
+        return ""
+
+    # Format injection block (cap at 5 KCs, ~2K tokens total)
+    parts = ["## Relevant Knowledge Cards (auto-retrieved from pgvector)"]
+    parts.append("Use these as domain context. Cite specific facts when relevant.\n")
+
+    for kc in kcs[:5]:
+        title = kc.get("title", kc.get("id", "?"))
+        tldr = kc.get("tldr", "")
+        domain = kc.get("domain", "")
+        sim = kc.get("similarity", 0)
+        path = kc.get("file_path", "")
+        sim_str = f" (sim={sim:.2f})" if sim else ""
+
+        parts.append(f"### KC: {title}{sim_str}")
+        if domain:
+            parts.append(f"Domain: {domain}")
+        if tldr:
+            parts.append(f"TLDR: {tldr}")
+
+        # Load actual KC body (truncated) for rich context
+        try:
+            full_path = Path(__file__).resolve().parent.parent / path
+            if full_path.exists():
+                content = full_path.read_text(encoding="utf-8")
+                # Extract body after frontmatter
+                fm_end = content.find("---", 3)
+                if fm_end > 0:
+                    body = content[fm_end + 3:].strip()[:800]
+                    parts.append(body)
+        except Exception:
+            pass
+
+        parts.append("")
+
+    return "\n".join(parts)
+
+
 def compose_prompt(
     builder_id: str,
     function_name: str,
@@ -253,6 +334,11 @@ def compose_prompt(
                     parts.append("")
         except ImportError:
             pass  # brand_inject not available, skip silently
+
+    # --- Knowledge Card Injection (semantic search via Supabase pgvector) ---
+    kc_block = _load_relevant_kcs(intent, parsed)
+    if kc_block:
+        parts.append(kc_block)
 
     # --- Builder Memory (per-builder, not shared) ---
     memory_block = _load_builder_memories(builder_id, intent)
