@@ -16,6 +16,18 @@ tldr: "Defines the primary academic and technical data sources for N01's RAG kno
 ## Purpose
 This document lists and configures the external data sources that are to be ingested, indexed, and made available for retrieval by the **N01 Intelligence Nucleus** RAG system. This forms the foundation of N01's world knowledge.
 
+## Configuration Parameters
+
+| Parameter | Value | Purpose |
+|-----------|--------|---------|
+| `chunk_size` | 1024 tokens | Optimal for academic papers with complex context |
+| `chunk_overlap` | 128 tokens | Preserve cross-sentence relationships |
+| `embedding_model` | `text-embedding-4` | Latest OpenAI model for technical content |
+| `index_dimensions` | 3072 | Match embedding model output |
+| `batch_size` | 100 documents | Balance memory usage vs throughput |
+| `retry_limit` | 3 attempts | Handle API rate limits gracefully |
+| `metadata_fields` | `[author, date, journal, doi, category]` | Enable filtered search |
+
 ## Ingestion & Retrieval Strategy
 
 | Component | Method | Configuration | Purpose |
