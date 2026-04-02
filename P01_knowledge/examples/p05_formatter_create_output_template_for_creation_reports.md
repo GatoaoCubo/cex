@@ -1,57 +1,61 @@
 ---
-id: p05_fmt_creation_report
+id: p05_fmt_creation_reports
 kind: formatter
 pillar: P05
 version: "1.0.0"
-created: "2026-04-01"
-updated: "2026-04-01"
+created: "2026-04-02"
+updated: "2026-04-02"
 author: "formatter-builder"
 target_format: "markdown"
 input_type: "structured_data"
 rule_count: 6
 domain: "creation_reporting"
-quality: 8.9
-tags: [formatter, creation, report, markdown, P05, activity]
-title: "Creation Report Formatter"
-tldr: "Formats creation activity data into structured Markdown reports with quality scores, artifact status, and execution metrics"
+quality: 9.1
+tags: [formatter, markdown, creation, reports, P05, artifacts]
+tldr: "Formats creation activity data into structured Markdown reports with artifact summaries, quality metrics, and progress tracking"
 template_engine: "string_format"
 pretty_print: true
 escaping: "none"
 encoding: "utf8"
 locale: "pt-BR"
 streaming: false
-keywords: [creation-report, activity-summary, quality-dashboard, artifact-status]
-density_score: 0.89
+keywords: [creation-reports, artifact-summary, quality-metrics, progress-formatter]
+density_score: 0.86
 ---
-# Creation Report Formatter
+# Creation Reports Formatter
 
 ## Formatting Rules
 | Name | Input Field | Transform | Pattern | Options |
 |------|-------------|-----------|---------|---------|
-| activity_header | activity_name | stringify | `# {value}` | uppercase: false |
-| quality_badge | quality_score | number_format | `**Quality: {value:.1f}/10.0**` | color_threshold: 8.0 |
-| status_indicator | status | stringify | `**Status:** {value}` | uppercase: true, color_map: true |
-| artifact_list | artifacts | tabulate | `- [{name}]({path}) — {description}` | bullet_style: dash |
-| timestamp_format | created_at | date_format | `*Created: {value:%Y-%m-%d %H:%M}*` | locale: pt-BR, timezone: UTC |
-| metrics_table | execution_metrics | tabulate | `| {metric} | {value} | {unit} |` | headers: true, align: right |
+| artifact_name | artifact_id | stringify | `**{value}**` | max_length: 60, truncate: ellipsis |
+| quality_badge | quality_score | number_format | `🎯 {value:.1f}/10` | color_threshold: 8.0 |
+| status_icon | status | stringify | `{icon} {value}` | icon_map: completed=✅, progress=🔄, failed=❌ |
+| creation_date | created | date_format | `📅 {value:%d/%m/%Y}` | locale: pt-BR |
+| author_info | author | stringify | `👤 {value}` | max_length: 20, truncate: ellipsis |
+| pillar_tag | pillar | stringify | `📂 {value}` | uppercase: true |
 
 ## Input Specification
 Type: structured_data
-Structure: creation activity object with name, quality score, status, artifacts list, timestamps, and execution metrics.
+Structure: List of creation activity objects containing artifact metadata, quality scores, timestamps, and authorship information.
 Example:
 ```json
 {
-  "activity_name": "Build Knowledge Card for React Patterns",
-  "quality_score": 8.7,
-  "status": "complete",
   "artifacts": [
-    {"name": "kc_react_patterns", "path": "P01_knowledge/kc_react_patterns.md", "description": "React component patterns and best practices"}
+    {
+      "artifact_id": "p01_kc_react_patterns",
+      "quality_score": 8.7,
+      "status": "completed",
+      "created": "2026-04-02T10:30:00",
+      "author": "knowledge-builder",
+      "pillar": "P01",
+      "domain": "frontend_development"
+    }
   ],
-  "created_at": "2026-04-01T20:05:38Z",
-  "execution_metrics": [
-    {"metric": "Duration", "value": 12.3, "unit": "minutes"},
-    {"metric": "Token Count", "value": 4567, "unit": "tokens"}
-  ]
+  "summary": {
+    "total_artifacts": 5,
+    "avg_quality": 8.4,
+    "completion_rate": 0.8
+  }
 }
 ```
 
@@ -59,46 +63,44 @@ Example:
 Format: markdown
 Example:
 ```markdown
-# Build Knowledge Card for React Patterns
+# Creation Report - 2026-04-02
 
-**Quality: 8.7/10.0** | **Status: COMPLETE**
+## Summary
+- **Total Artifacts**: 5
+- **Average Quality**: 8.4/10
+- **Completion Rate**: 80%
 
-## Artifacts
-- [kc_react_patterns](P01_knowledge/kc_react_patterns.md) — React component patterns and best practices
+## Artifacts Created
 
-## Execution Metrics
-| Metric | Value | Unit |
-|--------|--------|------|
-| Duration | 12.3 | minutes |
-| Token Count | 4567 | tokens |
+### **p01_kc_react_patterns**
+🎯 8.7/10 | ✅ completed | 📅 02/04/2026 | 👤 knowledge-builder | 📂 P01
 
-*Created: 2026-04-01 20:05*
+### **p02_agent_content_creator**  
+🎯 9.2/10 | ✅ completed | 📅 02/04/2026 | 👤 agent-builder | 📂 P02
 ```
 
 ## Template
 Engine: string_format
 ```text
-# {activity_name}
+# Creation Report - {date}
 
-{quality_badge} | {status_indicator}
+## Summary
+- **Total Artifacts**: {total_artifacts}
+- **Average Quality**: {avg_quality:.1f}/10
+- **Completion Rate**: {completion_rate:.0%}
 
-## Artifacts
-{artifact_list}
+## Artifacts Created
 
-## Execution Metrics
-{metrics_table}
-
-{timestamp_format}
+{artifact_rows}
 ```
 
 ## Edge Cases
-- Null quality_score: render as `**Quality: N/A**`
-- Empty artifacts array: render as `*No artifacts generated*`
-- Missing execution_metrics: omit entire Execution Metrics section
-- Special characters in artifact names: escape brackets `[]` as `\[\]` in Markdown links
-- Long activity names: truncate at 80 characters with ellipsis
+- Null quality scores: render as `⚪ N/A` instead of numeric badge
+- Empty author field: render as `👤 System` placeholder
+- Status not in icon map: render as `❓ {status}` with unknown icon
+- Date parsing errors: render as `📅 Invalid Date` fallback
 
 ## References
 - Markdown specification: CommonMark 0.30
-- ISO 8601 date formatting for timestamps
-- CEX quality scoring system (0-10 scale)
+- Date formatting: Python strftime patterns
+- Unicode icons: GitHub emoji shortcodes standard
