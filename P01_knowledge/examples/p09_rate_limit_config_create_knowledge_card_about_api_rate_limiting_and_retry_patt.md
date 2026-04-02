@@ -1,55 +1,53 @@
 ---
-id: p09_rl_anthropic_build
+id: p09_rl_anthropic_scale
 kind: rate_limit_config
 pillar: P09
 version: "1.0.0"
 created: "2026-04-02"
 updated: "2026-04-02"
-author: "rate-limit-config-builder"
-name: "Anthropic Build Tier Rate Limits"
+author: "builder_agent"
+name: "Anthropic Scale Tier Rate Limits and Retry Patterns"
 provider: "anthropic"
-rpm: 50
-tpm: 80000
-quality: 8.7
-tags: [rate_limit_config, anthropic, build-tier, api-patterns, retry-patterns]
-tldr: "Anthropic Build tier: 50 RPM, 80K TPM, 1K RPD with retry patterns and budget controls"
-description: "Rate limits for Anthropic API Build tier demonstrating standard API rate limiting and retry patterns"
-budget_usd: 200.0
-tier: "build"
-rpd: 1000
-concurrent: 10
+rpm: 4000
+tpm: 400000
+quality: 8.8
+tags: [rate_limit_config, anthropic, scale-tier, retry-patterns, 429]
+tldr: "Anthropic Scale: 4K RPM, 400K TPM, 100K RPD, 50 concurrent — 60s retry-after, $500/mo cap at 80% alert"
+description: "Rate limits and retry patterns for Anthropic API Scale tier — custom agreement, high-volume production"
+budget_usd: 500.0
+tier: "scale"
+rpd: 100000
+concurrent: 50
 retry_after: 60
 alert_threshold: 0.8
 model_overrides:
   claude-3-5-sonnet-20241022:
-    rpm: 50
-    tpm: 80000
-  claude-3-haiku-20240307:
-    rpm: 50
-    tpm: 100000
-density_score: 0.98
+    rpm: 4000
+    tpm: 400000
+  claude-3-5-haiku-20241022:
+    rpm: 4000
+    tpm: 400000
+density_score: 1.0
 ---
 ## Overview
 
-Defines rate limits and retry patterns for the Anthropic API Build tier, demonstrating standard practices for API rate limiting configuration. This tier activates after $5 cumulative spend and provides production-ready quotas suitable for most applications requiring reliable Claude API access with predictable cost controls.
+Scale tier rate limits for Anthropic API — 80× Build throughput via custom sales agreement. Designed for parallel agent workloads and batch pipelines exceeding Build tier capacity. Callers must read `Retry-After` header on all 429 responses and implement exponential backoff with jitter.
 
 ## Limits
 
-| Dimension | Limit | Pattern |
-|-----------|-------|---------|
-| RPM | 50 | Token bucket: 50 requests/minute with burst tolerance |
-| TPM | 80,000 | Token bucket: 80K tokens/minute across all models |
-| RPD | 1,000 | Daily hard cap: 1K requests/day regardless of RPM |
-| Concurrent | 10 | Max parallel in-flight requests at any instant |
-| Retry After | 60s | Wait time after 429 response per Retry-After header |
+| Dimension | Limit | Notes |
+|-----------|-------|-------|
+| RPM | 4,000 | All models combined |
+| TPM | 400,000 | All models combined |
+| RPD | 100,000 | Daily hard cap |
+| Concurrent | 50 | Max parallel in-flight |
+| Retry After | 60s | Per 429 `Retry-After` header |
 
 ## Tier
 
-**Tier**: build  
-Standard production tier requiring $5 cumulative API spend to activate. Includes access to all Claude models with production-grade rate limits. Upgrade path to Scale tier (4K RPM, 400K TPM) requires custom agreement. Typical retry pattern: exponential backoff with 60s base delay on 429 responses.
+**Tier**: scale — requires custom agreement with Anthropic sales. Activates when Build tier (50 RPM) is consistently saturated. Next: Enterprise tier via negotiated SLA and dedicated capacity allocation.
 
 ## Budget
 
-Monthly cap: $200.00  
-Alert threshold: 80% — notification triggered at $160 spend  
-Overage policy: Hard stop at budget_usd with requests blocked until next billing cycle. Alert enables proactive scaling or usage optimization before hitting the cap.
+Cap: $500/mo. Alert at 80% ($400 spend triggers notification). Blocked at 100%; resets at billing cycle start.
+Retry policy: HTTP 429 → honor `Retry-After: 60` → exponential backoff with jitter; max 3 retries before circuit open. Retry logic lives in `runtime_rule`, not here.
