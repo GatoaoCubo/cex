@@ -1,4 +1,5 @@
 ---
+id: n04_naming_convention_mapping
 kind: validation_schema
 nucleus: N04
 pillar: P06

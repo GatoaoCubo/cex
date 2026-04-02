@@ -1,4 +1,5 @@
 ---
+id: n04_knowledge_memory_index
 kind: memory_summary
 nucleus: N04
 pillar: P10

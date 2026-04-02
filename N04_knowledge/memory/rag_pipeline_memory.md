@@ -1,4 +1,5 @@
 ---
+id: n04_rag_pipeline_memory
 kind: memory_scope  
 nucleus: N04
 pillar: P10
