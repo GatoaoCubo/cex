@@ -23,6 +23,17 @@ density_score: 0.92
 | Structure | 15% | Prose paragraphs | Some tables | Grids + tables + sections | Visual hierarchy, scannable, executive summary |
 | Depth | 15% | Surface scan only | Key facts covered | Analysis with context | Deep-dive with projections and edge cases |
 
+## Usage Guidelines
+
+**When to use**: Research briefs, competitor analysis, market reports, intelligence summaries
+**When NOT to use**: Code documentation, marketing copy, instructional content
+
+**Anti-patterns**:
+- Scoring before research is complete
+- Conflating data volume with quality depth
+- Ignoring source bias in triangulation scoring
+- Accepting outdated data without temporal context
+
 ## Score Thresholds
 - **Publish**: >= 8.0
 - **Revise**: 6.0-7.9 (specify which dimensions to improve)
