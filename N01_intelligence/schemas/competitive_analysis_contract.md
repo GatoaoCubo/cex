@@ -11,6 +11,7 @@ quality: 8.7
 tags: [schema, n01, competitive, grid, analysis]
 tldr: "Competitor grid schema: N competitors × M dimensions. Required: name, positioning, pricing, strengths, weaknesses, market share estimate."
 density_score: 0.92
+when_to_use: "Market entry, product positioning, pricing strategy, investment decisions, feature prioritization"
 ---
 
 # Competitive Analysis Contract
@@ -42,3 +43,23 @@ Competitors (rows) × Dimensions (columns) = Competitive Grid
 | key_features | list[string] |
 | differentiator | string |
 | threat_level | enum: high\|medium\|low |
+
+## Usage Guidelines
+
+**When to use:**
+- Market entry planning: validate market size and competitive landscape
+- Product positioning: identify differentiation opportunities
+- Pricing strategy: benchmark against competitor pricing models
+- Investment decisions: assess competitive threats and market dynamics
+- Feature prioritization: analyze competitor strengths/weaknesses for roadmap planning
+
+**When NOT to use:**
+- Internal strategy discussions (use strategy_canvas instead)
+- Customer research (use user_research_report)
+- Technical architecture decisions (use tech_stack_comparison)
+
+**Anti-patterns:**
+- ❌ Including 20+ competitors (focus on top 5-8 direct competitors)
+- ❌ Outdated data (refresh every 6 months minimum)
+- ❌ Missing pricing intel (critical for positioning decisions)
+- ❌ Subjective strength/weakness assessments (use customer feedback data)
