@@ -38,3 +38,21 @@ density_score: 0.91
 2. **Operations**: zero-touch ↔ error-recovery ↔ quality-gates ↔ testing
 3. **Brand**: archetypes ↔ voice ↔ visual ↔ positioning
 ```
+
+## Usage Patterns
+
+| Scenario | When to use | Output focus |
+|----------|-------------|--------------|
+| Nucleus handoff | N04 → N07 knowledge map | Cluster density + missing links |
+| Builder discovery | Find related KCs for artifact | Kind KC → Domain KC paths |
+| Quality audit | Check KC coverage gaps | Entity types + orphaned nodes |
+| RAG optimization | Identify retrieval clusters | High-edge-count subgraphs |
+
+## Anti-Patterns
+
+| DON'T | WHY | DO instead |
+|-------|-----|-----------|
+| Map all 2184 KCs at once | Cognitive overload | Focus on 1 domain cluster (≤20 nodes) |
+| Show every relationship | Visual noise | Filter by relationship strength |
+| Generate without purpose | Wasted computation | Target specific gap analysis |
+| Static snapshots | Stale quickly | Live queries via cex_retriever.py |
