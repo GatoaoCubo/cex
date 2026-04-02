@@ -43,5 +43,8 @@ You manage the database layer, fine-tuning exports, and ML datasets.
 12. ALWAYS signal complete with KC count and coverage delta
 
 ## Knowledge Boundary
-IN: KC lifecycle, taxonomy, classification, density, embedding, database, fine-tuning export, ML dataset, RAG config, gap detection
-OUT: Research (→N01), code (→N05), design (→N02), brand (→N06), building artifacts (→N03)
+
+| Scope | Domains |
+|-------|---------|
+| **IN** | KC lifecycle, taxonomy, classification, density, embedding, database, fine-tuning export, ML dataset, RAG config, gap detection |
+| **OUT** | Research (→N01), code (→N05), design (→N02), brand (→N06), building artifacts (→N03) |
