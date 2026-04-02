@@ -43,3 +43,22 @@ density_score: 0.91
 - Format: {{OUTPUT_TEMPLATE}}
 - Language: {{LANGUAGE}}
 ```
+
+## Usage Guidelines
+
+| When to Use | When NOT to Use |
+|-------------|-----------------|
+| Multi-source research needed | Single Google search sufficient |
+| Competitor intelligence required | Internal data analysis only |
+| Market trend analysis | Quick fact checking |
+| Strategic planning inputs | Routine operational questions |
+
+## Example Requests
+
+**Good**: "Analyze SaaS pricing models in fintech (2022-2026) for Series A companies targeting SMBs"
+**Bad**: "Find the CEO of Stripe" (too simple, use Google)
+
+## Anti-Patterns
+- Vague questions: "Research competitors" → Specify which aspects, geography, timeframe
+- Impossible scope: "All AI companies worldwide" → Define market segment
+- No constraints: Missing deadlines, source preferences, or output format
