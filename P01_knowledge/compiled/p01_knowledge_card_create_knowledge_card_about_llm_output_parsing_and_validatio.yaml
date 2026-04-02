@@ -7,7 +7,7 @@ created: '2026-04-02'
 updated: '2026-04-02'
 author: knowledge-card-builder
 domain: llm_engineering
-quality: null
+quality: 9.0
 tags:
 - llm-parsing
 - output-validation

@@ -24,7 +24,7 @@ spawn_configs:
 - p12_spawn_n05_solo_ops
 - p12_spawn_n07_orchestrator
 domain: orchestration
-quality: null
+quality: 8.9
 tags:
 - workflow
 - orchestration

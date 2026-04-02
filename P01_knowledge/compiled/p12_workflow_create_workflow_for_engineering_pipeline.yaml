@@ -25,7 +25,7 @@ spawn_configs:
 - p12_spawn_tesla_solo_test
 - p12_spawn_shaka_solo_review
 domain: engineering
-quality: null
+quality: 8.9
 tags:
 - workflow
 - engineering

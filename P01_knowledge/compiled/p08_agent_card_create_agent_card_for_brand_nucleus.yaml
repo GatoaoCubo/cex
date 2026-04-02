@@ -57,7 +57,7 @@ flags:
 - --brand-mode
 - --commercial
 domain: brand-commercial
-quality: null
+quality: 9.0
 tags:
 - agent_card
 - brand

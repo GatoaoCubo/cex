@@ -7,7 +7,7 @@ audience: system_architects
 complexity: intermediate
 status: draft
 version: 1.0
-quality: null
+quality: 8.8
 context_dependencies:
 - N05 operations nucleus
 - DevOps pipelines

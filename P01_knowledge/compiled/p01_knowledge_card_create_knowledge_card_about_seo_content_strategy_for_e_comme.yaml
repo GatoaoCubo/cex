@@ -7,7 +7,7 @@ created: '2026-04-02'
 updated: '2026-04-02'
 author: builder
 domain: digital_marketing
-quality: null
+quality: 8.9
 tags:
 - seo
 - ecommerce
@@ -49,16 +49,11 @@ key_concepts:
 - 'Content Hierarchy: Homepage → Category → Subcategory → Product (max 3 clicks from home)'
 - 'Faceted Navigation: SEO-friendly filters without duplicate content or infinite URL parameters'
 strategy_phases:
-- 'Audit (Week 1): Technical SEO crawl via Screaming Frog, identify 404s, thin content <150 words, duplicate meta tags. Target:
-  fix 80% critical issues'
-- 'Research (Week 2): Map 50-100 commercial keywords per product category using Ahrefs/SEMrush. Focus on difficulty <30, volume
-  >500/month'
-- 'Create (Weeks 3-8): Write 200+ word unique product descriptions, category pages with 500+ words, buying guides targeting
-  TOFU keywords'
-- 'Optimize (Week 9): Implement title tags <60 chars, meta descriptions 150-160 chars, internal links 3-5 per page, Core Web
-  Vitals <2.5s LCP'
-- 'Monitor (Ongoing): Track organic traffic growth 15-25% MoM, conversion rate 8-12%, average order value from organic vs
-  paid channels'
+- 'Audit: Identify commercial keyword gaps, technical issues, content thin pages'
+- 'Research: Map buyer journey keywords (awareness → consideration → purchase)'
+- 'Create: Product descriptions, category content, buying guides, comparison pages'
+- 'Optimize: Title tags, meta descriptions, internal linking, page speed <3s'
+- 'Monitor: Track organic traffic, conversion rate, average order value from SEO'
 golden_rules:
 - TARGET long-tail product keywords (3+ words, lower competition, higher intent)
 - STRUCTURE URLs as /category/subcategory/product-name (breadcrumb hierarchy)

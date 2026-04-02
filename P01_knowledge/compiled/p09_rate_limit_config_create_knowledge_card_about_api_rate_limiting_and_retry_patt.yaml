@@ -9,7 +9,7 @@ name: Anthropic Build Tier Rate Limits
 provider: anthropic
 rpm: 50
 tpm: 80000
-quality: null
+quality: 8.7
 tags:
 - rate_limit_config
 - anthropic

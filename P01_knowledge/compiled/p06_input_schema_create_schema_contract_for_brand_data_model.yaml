@@ -41,7 +41,7 @@ examples: "{\n  \"brand_name\": \"TechFlow Solutions\",\n  \"description\": \"We
   \ but approachable\",\n  \"target_audience\": \"B2B startup founders\",\n  \"revenue_model\": \"subscription\",\n  \"industry\"\
   : \"SaaS\",\n  \"tone_keywords\": [\"clear\", \"confident\", \"technical\"]\n}"
 domain: brand-configuration
-quality: null
+quality: 9.1
 tags:
 - input-schema
 - brand-data

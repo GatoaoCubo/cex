@@ -38,7 +38,7 @@ coercion:
 examples: "{\n  \"name\": \"api_knowledge_card\",\n  \"kind\": \"knowledge_card\",\n  \"pillar\": \"P01\",\n  \"tags\": [\"\
   api\", \"integration\"]\n}"
 domain: creation-operations
-quality: null
+quality: 9.1
 tags:
 - input-schema
 - creation

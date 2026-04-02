@@ -1,7 +1,6 @@
 id: p12_dr_intelligence
 kind: dispatch_rule
 pillar: P12
-title: Intelligence Research Dispatch Rule
 version: 1.0.0
 created: 2026-04-01
 updated: 2026-04-01

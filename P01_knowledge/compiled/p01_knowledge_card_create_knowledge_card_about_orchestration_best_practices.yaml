@@ -68,10 +68,9 @@ anti_patterns:
 - 'Recreate Strategy: All pods killed simultaneously causing total downtime'
 - 'Single Replica: No redundancy during node failures or updates'
 - 'Root Filesystem: Containers run as root creating security vulnerabilities'
-command_workflow: "# Deploy with resource limits and probes\nkubectl apply -f deployment.yaml\n\n# Check pod readiness and\
-  \ resource usage  \nkubectl get pods -o wide\nkubectl top pods\n\n# Scale based on load\nkubectl scale deployment myapp\
-  \ --replicas=5\nkubectl autoscale deployment myapp --cpu-percent=70 --min=2 --max=10\n\n# Rolling update with zero downtime\n\
-  kubectl rollout restart deployment/myapp\nkubectl rollout status deployment/myapp"
+flow: "[Manifest] -> [Scheduler] -> [Node Selection] -> [Pod Creation]\n                |                                \
+  \     |\n           [Resource Check]                    [Health Probes]\n                |                             \
+  \        |\n           [Placement Decision]                [Traffic Routing]"
 comparativo: '| Platform | Orchestrator | Health Checks | Auto-scaling | Networking |
 
   |----------|-------------|---------------|-------------|------------|

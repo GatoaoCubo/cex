@@ -19,7 +19,7 @@ threshold_publish: 8.0
 threshold_review: 7.0
 automation_status: semi-automated
 domain: brand
-quality: null
+quality: 9.1
 tags:
 - scoring-rubric
 - brand

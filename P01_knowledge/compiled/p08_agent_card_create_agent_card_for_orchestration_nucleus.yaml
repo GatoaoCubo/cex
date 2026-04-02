@@ -67,7 +67,7 @@ flags:
 - --high-priority
 - --max-context
 domain: orchestration
-quality: null
+quality: 8.8
 tags:
 - agent_card
 - orchestration

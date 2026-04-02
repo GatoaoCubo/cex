@@ -9,7 +9,7 @@ target_format: markdown
 input_type: structured_data
 rule_count: 7
 domain: engineering_reports
-quality: null
+quality: 9.1
 tags:
 - formatter
 - engineering

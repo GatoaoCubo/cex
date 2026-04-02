@@ -33,7 +33,7 @@ coercion:
 examples: '{"benchmark_name": "response_latency", "baseline_metric": 150.5, "comparison_metric": 142.8, "metric_type": "latency_ms",
   "threshold": 5.0, "metadata": {"dataset": "eval_v2", "model": "gpt-4"}}'
 domain: benchmark-analysis
-quality: null
+quality: 8.9
 tags:
 - input-schema
 - benchmark-comparison

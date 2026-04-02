@@ -19,7 +19,7 @@ threshold_publish: 8.0
 threshold_review: 7.0
 automation_status: semi-automated
 domain: intelligence
-quality: null
+quality: 8.9
 tags:
 - scoring-rubric
 - 5d

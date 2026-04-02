@@ -5036,3 +5036,9 @@ et
 2026-04-02 11:14:22	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\examples\p05_formatter_create_output_template_for_brand_reports.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
 2026-04-02 11:15:50	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\examples\p03_prompt_template_create_prompt_template_for_brand_tasks.md	1	9.2	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
 2026-04-02 11:17:31	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\examples\p12_workflow_create_agent_for_orchestration_nucleus.md	1	8.9	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-02 12:38:39	C:\Users\PC\AppData\Local\Temp\pytest-of-PC\pytest-2378\test_already_at_target0\scored.md	0	9.2	1.00	skip	already at target
+2026-04-02 12:38:40	C:\Users\PC\AppData\Local\Temp\pytest-of-PC\pytest-2378\test_returns_dict0\test_artifact.md	1	8.7	0.97	keep	polished formatting (whitespace cleanup)
+2026-04-02 12:38:40	C:\Users\PC\AppData\Local\Temp\pytest-of-PC\pytest-2378\test_skips_already_at_target0\test_artifact.md	0	9.5	0.97	skip	already at target
+2026-04-02 12:38:40	C:\Users\PC\AppData\Local\Temp\pytest-of-PC\pytest-2378\test_keep_on_improvement0\test_artifact.md	1	8.5	0.95	keep	added examples
+2026-04-02 12:38:40	C:\Users\PC\AppData\Local\Temp\pytest-of-PC\pytest-2378\test_discard_on_no_improvement0\test_artifact.md	1	6.5	0.95	discard	tried something
+2026-04-02 12:38:40	C:\Users\PC\AppData\Local\Temp\pytest-of-PC\pytest-2378\test_budget_stops_loop0\test_artifact.md	1	5.0	0.95	discard	small change

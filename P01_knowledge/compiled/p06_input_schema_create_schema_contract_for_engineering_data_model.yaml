@@ -41,7 +41,7 @@ examples: "{\n  \"project_name\": \"CAD Component Library\",\n  \"engineering_do
   : \"graph\",\n  \"requirements\": [\"Part relationship modeling\", \"Version control\", \"Material properties\"],\n  \"\
   scale_parameters\": {\"records\": 1000000, \"concurrent_users\": 50}\n}"
 domain: engineering-data-modeling
-quality: null
+quality: 9.1
 tags:
 - input-schema
 - engineering

@@ -5,10 +5,7 @@ version: 1.0.0
 created: '2026-04-01'
 updated: '2026-04-01'
 author: input-schema-builder
-title: CEX Orchestration Input Schema
 scope: CEX orchestration system input contract for mission execution
-when_to_use: When building CEX orchestration interfaces, mission dispatchers, or nucleus routing systems that need to validate
-  and process mission requests
 fields: '| # | Name | Type | Required | Default | Description |
 
   |---|------|------|----------|---------|-------------|

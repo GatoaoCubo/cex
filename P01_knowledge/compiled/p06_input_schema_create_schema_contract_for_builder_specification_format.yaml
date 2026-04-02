@@ -48,7 +48,7 @@ examples: "{\n  \"builder_id\": \"knowledge-card-builder\",\n  \"kind\": \"conte
   : \"L1: Knowledge card specialist. L2: Creates structured reference materials. L3: Documents domain expertise.\",\n  \"\
   version\": \"1.0.0\"\n}"
 domain: builder-specification
-quality: null
+quality: 8.9
 tags:
 - input-schema
 - builder-specification

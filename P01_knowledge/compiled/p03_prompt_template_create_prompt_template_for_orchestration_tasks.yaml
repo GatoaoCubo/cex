@@ -24,7 +24,7 @@ variables: 'task_goal: "Create comprehensive brand identity system for new produ
 variable_syntax: mustache
 composable: false
 domain: orchestration
-quality: null
+quality: 9.0
 tags:
 - orchestration
 - task-dispatch

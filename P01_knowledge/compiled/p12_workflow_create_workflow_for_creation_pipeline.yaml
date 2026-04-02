@@ -25,7 +25,7 @@ spawn_configs:
 - p12_spawn_builder_solo
 - p12_spawn_validator_solo
 domain: orchestration
-quality: null
+quality: 8.9
 tags:
 - workflow
 - creation

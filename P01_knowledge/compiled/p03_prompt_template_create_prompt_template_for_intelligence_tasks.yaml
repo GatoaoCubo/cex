@@ -47,7 +47,7 @@ variables:
 variable_syntax: mustache
 composable: false
 domain: intelligence
-quality: null
+quality: 8.9
 tags:
 - intelligence
 - analysis

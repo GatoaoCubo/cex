@@ -27,7 +27,7 @@ spawn_configs:
 - p12_spawn_maya_brand_assets
 - p12_spawn_stella_orchestrator
 domain: brand
-quality: null
+quality: 8.9
 tags:
 - workflow
 - brand

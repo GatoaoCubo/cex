@@ -45,7 +45,7 @@ variables:
 variable_syntax: mustache
 composable: false
 domain: creation
-quality: null
+quality: 9.2
 tags:
 - prompt-template
 - creation

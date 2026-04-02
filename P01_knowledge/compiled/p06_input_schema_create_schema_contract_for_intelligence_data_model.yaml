@@ -38,7 +38,7 @@ coercion:
 examples: "{\n  \"query\": \"Competitor analysis for enterprise RAG solutions\",\n  \"analysis_depth\": \"medium\", \n  \"\
   geographic_scope\": [\"North America\", \"Europe\"],\n  \"temporal_scope\": {\"relative_period\": \"last_6_months\"}\n}"
 domain: intelligence-analysis
-quality: null
+quality: 8.9
 tags:
 - input-schema
 - intelligence

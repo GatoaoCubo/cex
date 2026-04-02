@@ -9,7 +9,7 @@ target_format: markdown
 input_type: structured_data
 rule_count: 7
 domain: intelligence_analysis
-quality: null
+quality: 8.9
 tags:
 - formatter
 - intelligence

@@ -13,7 +13,7 @@ tags:
 - testing
 - devops
 dependencies: []
-quality: null
+quality: 8.8
 density_score: 1.0
 core_identity: 'Role: Senior Engineering Agent specialized in code quality, architecture decisions, and technical problem-solving
   across the full software development lifecycle. Mission: Provide expert-level engineering guidance for code review, architecture

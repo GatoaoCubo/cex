@@ -124,7 +124,16 @@ function Write-Banner {
 
 function Load-State {
     if (Test-Path $STATE_FILE) {
-        return Get-Content $STATE_FILE -Raw | ConvertFrom-Json
+        try {
+            $raw = [System.IO.File]::ReadAllText($STATE_FILE, [System.Text.Encoding]::UTF8)
+            # Guard against null-byte corruption
+            if ($raw -and $raw[0] -ne "`0" -and $raw.Trim().Length -gt 2) {
+                return $raw | ConvertFrom-Json
+            }
+            Write-Log "state.json corrupted (null bytes). Resetting." "WARN"
+        } catch {
+            Write-Log "state.json parse error: $($_.Exception.Message). Resetting." "WARN"
+        }
     }
     return @{
         phase = "bootstrap"
@@ -142,7 +151,8 @@ function Load-State {
 function Save-State {
     param($State)
     $State.last_checkpoint = (Get-Date -Format o)
-    $State | ConvertTo-Json -Depth 5 | Set-Content $STATE_FILE -Encoding UTF8
+    $json = $State | ConvertTo-Json -Depth 5
+    [System.IO.File]::WriteAllText($STATE_FILE, $json, [System.Text.Encoding]::UTF8)
 }
 
 # ============================================================

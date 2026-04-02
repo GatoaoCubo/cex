@@ -29,7 +29,7 @@ dimensions:
 - operational
 - density
 - completeness
-quality: null
+quality: 9.1
 tags:
 - quality-gate
 - creation

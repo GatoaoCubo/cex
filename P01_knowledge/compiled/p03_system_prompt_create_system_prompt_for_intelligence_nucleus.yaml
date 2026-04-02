@@ -16,7 +16,7 @@ safety_level: standard
 tools_listed: true
 output_format_type: structured
 domain: research and intelligence
-quality: null
+quality: 8.8
 tags:
 - system_prompt
 - intelligence

@@ -24,7 +24,7 @@ spawn_configs:
 - p12_spawn_n04_analysis
 - p12_spawn_n07_consolidate
 domain: intelligence
-quality: null
+quality: 8.8
 tags:
 - workflow
 - intelligence
