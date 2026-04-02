@@ -52,7 +52,7 @@ voice:
 audience:
   BRAND_ICP: "Tutores de gatos (25-45 anos) urbanos que valorizam segurança, design funcional e estética minimalista — buscam soluções práticas e elegantes para harmonizar a convivência com seus felinos sem comprometer a decoração"
   BRAND_ICP_AGE: "25-45"
-  BRAND_ICP_LOCATION: "Brasil — capitais e regiões metropolitanas"
+  BRAND_ICP_LOCATION: "Raio inicial: ABC Paulista (São Caetano do Sul, Santo André, São Bernardo) → Grande SP → Estado de SP → Brasil"
   BRAND_ICP_INCOME: "Classe B-C+ (renda familiar R$ 5-15k)"
   BRAND_ICP_VALUES:
     - "Bem-estar animal acima de estética"
@@ -104,6 +104,7 @@ monetization:
   BRAND_PRICE_ANCHOR: "R$ 30-80 (camas, tapetes gelados, brinquedos interativos)"
   BRAND_TIERS:
     - "b2c-direto"
+    - "b2c-local"
     - "b2b-revenda"
     - "marketplace-ml"
     - "marketplace-shopee"
@@ -111,3 +112,18 @@ monetization:
     - "shopify"
     - "mercadopago"
     - "pix"
+
+location:
+  BRAND_HQ: "Av. Antônio da Fonseca Martins, 419 - São José, São Caetano do Sul - SP, 09581-030"
+  BRAND_REGION: "ABC Paulista"
+  BRAND_EXPANSION_STRATEGY: "local-first"
+  BRAND_EXPANSION_RINGS:
+    - "ring_1: ABC Paulista (São Caetano, Santo André, São Bernardo, Diadema, Mauá, Ribeirão Pires, Rio Grande da Serra)"
+    - "ring_2: Grande São Paulo (Capital + ABCDMRR + Guarulhos, Osasco, Barueri)"
+    - "ring_3: Estado de São Paulo (Campinas, Santos, Sorocaba, Ribeirão Preto)"
+    - "ring_4: Brasil (capitais + regiões metropolitanas via e-commerce)"
+  BRAND_CHANNELS:
+    - "e-commerce próprio (gato3.com.br)"
+    - "marketplaces (Mercado Livre, Shopee)"
+    - "B2B revenda (pet shops, clínicas, arquitetos pet-friendly)"
+    - "B2C local (entrega rápida ABC, eventos pet, feiras)"

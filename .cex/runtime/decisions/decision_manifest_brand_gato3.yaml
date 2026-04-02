@@ -1,0 +1,92 @@
+# Decision Manifest — GATO³ Brand Discovery + Docs
+# GDP Phase completed — all subjective decisions locked
+
+mission: "N06 Brand Discovery completo GATO³ — gerar 6 docs de branding hidratados com dados reais"
+decided_by: user
+decided_at: "2026-04-02T18:15:00-03:00"
+session_id: "gato-ao-cubo-init-20260402"
+
+brand:
+  config: .cex/brand/brand_config.yaml
+  overrides:
+    location_added: true
+    expansion_strategy: "local-first from ABC Paulista"
+    b2b_b2c_dual: true
+
+decisions:
+
+  scope:
+    choice: "completo — 6 docs"
+    dp_number: 1
+    alternatives: ["essencial (3 docs)", "completo (6 docs)", "full suite (9 docs)"]
+    recommended: "completo (6 docs)"
+    user_said: "1"
+    reason: "6 docs cobrem tudo que importa — brand book, voice guide, visual identity, discovery report, one pager, transformation arc"
+
+  persona_ro:
+    choice: "sim — Ro é parte central da marca, incluir no brand book"
+    dp_number: 2
+    alternatives: ["sim — guidelines da Ro no brand book", "não — Ro só no content strategy"]
+    recommended: "sim"
+    user_said: "1"
+    reason: "Ro é a persona-guia que diferencia GATO³ — precisa de guidelines de voz, protocolos e personalidade"
+
+  data_sources:
+    choice: "usar tudo — SEO, pricing, B2B, competidores"
+    dp_number: 3
+    alternatives: ["usar tudo (discovery completo)", "só branding (identidade/voz/visual)"]
+    recommended: "usar tudo"
+    user_said: "1"
+    reason: "repo gato-cubo-commerce tem pesquisa SEO, tabela B2B 22 SKUs, benchmark preços, content strategy — desperdício não usar"
+
+  location_strategy:
+    choice: "local-first ABC Paulista → expandir em anéis concêntricos"
+    dp_number: 4
+    alternatives: ["brasil inteiro desde o dia 1", "local-first expandindo", "só e-commerce sem local"]
+    recommended: "local-first expandindo"
+    user_said: "pense que estamos no abc... vamos comecar desse raio e expandindo"
+    reason: "sede em São Caetano do Sul — vantagem logística no ABC, entrega rápida, presença B2B local em pet shops/clínicas"
+
+  channel_strategy:
+    choice: "omnichannel — e-commerce + B2B + B2C local + marketplaces"
+    dp_number: 5
+    alternatives: ["só e-commerce", "e-commerce + marketplaces", "omnichannel completo"]
+    recommended: "omnichannel completo"
+    user_said: "alem de vender no e-commerce vender b2b e b2c"
+    reason: "usuário quer expansão em todos os canais — e-commerce próprio, ML, Shopee, B2B revenda, B2C local"
+
+per_nucleus:
+  n06:
+    docs_to_generate:
+      - "brand_book_32blocks.md — Brand Book completo com 32 blocos hidratados"
+      - "brand_voice_guide.md — Voice Guide com radar 5D + persona Ro + calibração por canal"
+      - "visual_identity.md — Identidade Visual (paleta PB, tipografia, guidelines)"
+      - "discovery_report.md — Discovery Report (mercado pet BR, ABC Paulista, competidores, keywords)"
+      - "brand_one_pager.md — One Pager executivo para parceiros B2B"
+      - "transformation_arc.md — Arco de transformação do ICP (tutor inseguro → confiante)"
+    data_sources:
+      - ".cex/brand/brand_config.yaml"
+      - "C:/Users/PC/Documents/GitHub/gato-cubo-commerce/lovable/theme/brand.json"
+      - "C:/Users/PC/Documents/GitHub/gato-cubo-commerce/content/CONTENT_STRATEGY.md"
+      - "C:/Users/PC/Documents/GitHub/gato-cubo-commerce/docs/REVISAO_COPY_B2C_FASE3.md"
+      - "C:/Users/PC/Documents/GitHub/gato-cubo-commerce/docs/PESQUISA_SEO_KEYWORDS.md"
+      - "C:/Users/PC/Documents/GitHub/gato-cubo-commerce/docs/TABELA_PRODUTOS_B2B.csv"
+      - "C:/Users/PC/Documents/GitHub/gato-cubo-commerce/docs/PLANO_B2B_MELHORIAS.md"
+      - "C:/Users/PC/Documents/GitHub/gato-cubo-commerce/scripts/ESCALABILIDADE_STRATEGY.md"
+      - "C:/Users/PC/Documents/GitHub/gato-cubo-commerce/content/content_seed.json"
+
+constraints:
+  language: pt-BR
+  currency: BRL
+  quality_floor: 8.5
+  max_budget: null
+  deadline: null
+  platform: null
+
+auto_filled:
+  - "persona_ro scope (★ recommended = sim)"
+
+status: locked
+total_dps: 5
+answered_dps: 5
+skipped_dps: 0
