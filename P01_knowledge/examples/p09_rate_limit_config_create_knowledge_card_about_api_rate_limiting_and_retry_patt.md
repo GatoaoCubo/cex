@@ -1,52 +1,55 @@
 ---
-id: p09_rl_openai_tier1
+id: p09_rl_anthropic_build
 kind: rate_limit_config
 pillar: P09
 version: "1.0.0"
 created: "2026-04-02"
 updated: "2026-04-02"
 author: "rate-limit-config-builder"
-name: "OpenAI Tier 1 Rate Limits"
-provider: "openai"
-rpm: 500
-tpm: 200000
-quality: 8.6
-tags: [rate_limit_config, openai, tier1, production]
-tldr: "OpenAI Tier 1: 500 RPM, 200K TPM, $100/mo cap at 80% alert"
-description: "Rate limits for OpenAI API Tier 1 — production tier activated after $5 cumulative spend"
-budget_usd: 100.0
-tier: "tier1"
+name: "Anthropic Build Tier Rate Limits"
+provider: "anthropic"
+rpm: 50
+tpm: 80000
+quality: 8.7
+tags: [rate_limit_config, anthropic, build-tier, api-patterns, retry-patterns]
+tldr: "Anthropic Build tier: 50 RPM, 80K TPM, 1K RPD with retry patterns and budget controls"
+description: "Rate limits for Anthropic API Build tier demonstrating standard API rate limiting and retry patterns"
+budget_usd: 200.0
+tier: "build"
+rpd: 1000
 concurrent: 10
-retry_after: 20
+retry_after: 60
 alert_threshold: 0.8
 model_overrides:
-  gpt-4o:
-    rpm: 500
-    tpm: 30000
-  gpt-4o-mini:
-    rpm: 500
-    tpm: 200000
-  gpt-3.5-turbo:
-    rpm: 500
-    tpm: 200000
-density_score: 1.0
+  claude-3-5-sonnet-20241022:
+    rpm: 50
+    tpm: 80000
+  claude-3-haiku-20240307:
+    rpm: 50
+    tpm: 100000
+density_score: 0.98
 ---
 ## Overview
-Declares rate limits for OpenAI API Tier 1 — the standard production tier activated after $5 cumulative spend. Supports all GPT models with tier-wide limits and per-model token quotas.
+
+Defines rate limits and retry patterns for the Anthropic API Build tier, demonstrating standard practices for API rate limiting configuration. This tier activates after $5 cumulative spend and provides production-ready quotas suitable for most applications requiring reliable Claude API access with predictable cost controls.
 
 ## Limits
-| Dimension | Limit | Notes |
-|-----------|-------|-------|
-| RPM | 500 | Requests per minute, all models |
-| TPM | 200,000 | Tokens per minute, varies by model |
-| Concurrent | 10 | Max parallel in-flight requests |
-| Retry After | 20 | Seconds to wait after 429 response |
+
+| Dimension | Limit | Pattern |
+|-----------|-------|---------|
+| RPM | 50 | Token bucket: 50 requests/minute with burst tolerance |
+| TPM | 80,000 | Token bucket: 80K tokens/minute across all models |
+| RPD | 1,000 | Daily hard cap: 1K requests/day regardless of RPM |
+| Concurrent | 10 | Max parallel in-flight requests at any instant |
+| Retry After | 60s | Wait time after 429 response per Retry-After header |
 
 ## Tier
-**Tier**: tier1  
-Production tier requiring $5 cumulative API spend to activate. Includes access to GPT-4o, GPT-4o-mini, and GPT-3.5-turbo. Upgrade to Tier 2 requires $50 cumulative spend for higher limits.
+
+**Tier**: build  
+Standard production tier requiring $5 cumulative API spend to activate. Includes access to all Claude models with production-grade rate limits. Upgrade path to Scale tier (4K RPM, 400K TPM) requires custom agreement. Typical retry pattern: exponential backoff with 60s base delay on 429 responses.
 
 ## Budget
-Monthly cap: $100.00  
-Alert threshold: 80% — trigger notification at $80 spend  
-Overage policy: Requests continue but billing alerts fire; set hard stops via OpenAI dashboard if needed.
+
+Monthly cap: $200.00  
+Alert threshold: 80% — notification triggered at $160 spend  
+Overage policy: Hard stop at budget_usd with requests blocked until next billing cycle. Alert enables proactive scaling or usage optimization before hitting the cap.
