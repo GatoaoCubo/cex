@@ -274,249 +274,35 @@ variants: 6
         </div>
       </div>
       
-      <!-- Usage Examples -->
-      <div class="space-y-4">
-        <h2 class="text-xl font-semibold text-gray-900">Usage Examples</h2>
-        
-        <div class="grid gap-4 md:grid-cols-2">
-          <!-- Form Actions -->
-          <div class="bg-gray-50 rounded-lg p-4">
-            <h3 class="font-medium text-gray-900 mb-3">Form Actions</h3>
-            <div class="flex gap-2">
-              <button class="bg-primary text-primary-foreground hover:bg-primary/90 focus:ring-2 focus:ring-ring focus:ring-offset-2 h-10 px-4 py-2 rounded-md text-sm font-medium transition-colors">
-                Save Changes
-              </button>
-              <button class="border border-input bg-background hover:bg-accent hover:text-accent-foreground focus:ring-2 focus:ring-ring focus:ring-offset-2 h-10 px-4 py-2 rounded-md text-sm font-medium transition-colors">
-                Cancel
-              </button>
-            </div>
-          </div>
-          
-          <!-- Call to Action -->
-          <div class="bg-gray-50 rounded-lg p-4">
-            <h3 class="font-medium text-gray-900 mb-3">Call to Action</h3>
-            <div class="space-y-2">
-              <button class="bg-primary text-primary-foreground hover:bg-primary/90 focus:ring-2 focus:ring-ring focus:ring-offset-2 h-11 px-8 rounded-md text-sm font-medium transition-colors w-full sm:w-auto">
-                Get Started Today
-              </button>
-              <p class="text-xs text-gray-500">No credit card required</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Accessibility Features -->
-      <div class="space-y-4">
-        <h2 class="text-xl font-semibold text-gray-900">Accessibility Features</h2>
-        <div class="bg-gray-50 rounded-lg p-4">
-          <ul class="space-y-2 text-sm text-gray-600">
-            <li>✓ <strong>Keyboard Navigation:</strong> Full support for Tab, Enter, and Space keys</li>
-            <li>✓ <strong>Focus Indicators:</strong> Clear focus ring for keyboard users</li>
-            <li>✓ <strong>Screen Readers:</strong> Semantic button elements with proper roles</li>
-            <li>✓ <strong>Touch Targets:</strong> Minimum 44px height for mobile accessibility</li>
-            <li>✓ <strong>Color Contrast:</strong> All variants meet WCAG AA standards (4.5:1)</li>
-            <li>✓ <strong>Disabled States:</strong> Clear visual and functional disabled state</li>
-            <li>✓ <strong>ARIA Support:</strong> Compatible with aria-label and aria-describedby</li>
-          </ul>
-        </div>
-      </div>
-      
-      <!-- CSS Classes Reference -->
-      <div class="space-y-4">
-        <h2 class="text-xl font-semibold text-gray-900">CSS Classes Reference</h2>
-        <div class="bg-gray-50 rounded-lg p-4 overflow-x-auto">
-          <pre class="text-sm text-gray-800"><code>/* Base button classes */
-.btn-base {
-  @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors;
-  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
-  @apply disabled:pointer-events-none disabled:opacity-50;
-}
-
-/* Size variants */
-.btn-sm { @apply h-9 rounded-md px-3; }
-.btn-default { @apply h-10 px-4 py-2; }
-.btn-lg { @apply h-11 rounded-md px-8; }
-
-/* Style variants */
-.btn-primary { @apply bg-primary text-primary-foreground hover:bg-primary/90; }
-.btn-secondary { @apply bg-secondary text-secondary-foreground hover:bg-secondary/80; }
-.btn-destructive { @apply bg-destructive text-destructive-foreground hover:bg-destructive/90; }
-.btn-outline { @apply border border-input bg-background hover:bg-accent hover:text-accent-foreground; }
-.btn-ghost { @apply hover:bg-accent hover:text-accent-foreground; }
-.btn-link { @apply text-primary underline-offset-4 hover:underline; }</code></pre>
-        </div>
-      </div>
     </div>
     
   </body>
 </html>
 ```
 
-### Card Component Template
+## Anti-Patterns
 
-```html
----
-component: card_component
-responsive: true
-a11y_compliant: true
-dark_mode: true
-lighthouse_target: 90
-component_type: card
-variants: 4
----
+### What NOT to Do
 
-<div class="max-w-4xl mx-auto space-y-8">
-  
-  <!-- Header -->
-  <div class="space-y-2">
-    <h1 class="text-3xl font-bold text-gray-900">Card Component</h1>
-    <p class="text-gray-600">Flexible container component for content organization.</p>
-  </div>
-  
-  <!-- Card Variants -->
-  <div class="grid gap-6 md:grid-cols-2">
-    
-    <!-- Basic Card -->
-    <div class="bg-card text-card-foreground rounded-lg border border-border shadow-sm p-6">
-      <h3 class="text-lg font-semibold mb-2">Basic Card</h3>
-      <p class="text-muted-foreground">This is a basic card with title and description. Perfect for content organization.</p>
-    </div>
-    
-    <!-- Card with Header -->
-    <div class="bg-card text-card-foreground rounded-lg border border-border shadow-sm">
-      <div class="p-6 pb-4">
-        <div class="flex items-center justify-between">
-          <h3 class="text-lg font-semibold">Card with Header</h3>
-          <button class="hover:bg-accent hover:text-accent-foreground p-2 rounded-md text-sm">
-            ⋯
-          </button>
-        </div>
-      </div>
-      <div class="px-6 pb-6">
-        <p class="text-muted-foreground">This card includes a header with actions. Great for interactive content.</p>
-      </div>
-    </div>
-    
-    <!-- Card with Footer -->
-    <div class="bg-card text-card-foreground rounded-lg border border-border shadow-sm">
-      <div class="p-6 pb-4">
-        <h3 class="text-lg font-semibold mb-2">Card with Footer</h3>
-        <p class="text-muted-foreground">This card includes footer actions for user interactions.</p>
-      </div>
-      <div class="px-6 pb-6">
-        <div class="flex gap-2">
-          <button class="bg-primary text-primary-foreground hover:bg-primary/90 focus:ring-2 focus:ring-ring focus:ring-offset-2 px-4 py-2 rounded-md text-sm font-medium transition-colors">
-            Accept
-          </button>
-          <button class="border border-input bg-background hover:bg-accent hover:text-accent-foreground focus:ring-2 focus:ring-ring focus:ring-offset-2 px-4 py-2 rounded-md text-sm font-medium transition-colors">
-            Decline
-          </button>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Interactive Card -->
-    <div class="bg-card text-card-foreground rounded-lg border border-border shadow-sm hover:shadow-md transition-shadow cursor-pointer p-6">
-      <div class="flex items-start space-x-4">
-        <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
-          <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-          </svg>
-        </div>
-        <div class="flex-1">
-          <h3 class="text-lg font-semibold mb-1">Interactive Card</h3>
-          <p class="text-muted-foreground text-sm">This card responds to hover and click interactions.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <!-- Usage Examples -->
-  <div class="space-y-4">
-    <h2 class="text-xl font-semibold text-gray-900">Usage Examples</h2>
-    
-    <!-- Feature Grid -->
-    <div class="grid gap-6 md:grid-cols-3">
-      <div class="bg-card text-card-foreground rounded-lg border border-border p-6">
-        <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-          <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-        </div>
-        <h3 class="font-semibold mb-2">Feature Title</h3>
-        <p class="text-sm text-muted-foreground">Feature description explaining the benefit and value proposition.</p>
-      </div>
-      
-      <div class="bg-card text-card-foreground rounded-lg border border-border p-6">
-        <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-          <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-          </svg>
-        </div>
-        <h3 class="font-semibold mb-2">Feature Title</h3>
-        <p class="text-sm text-muted-foreground">Feature description explaining the benefit and value proposition.</p>
-      </div>
-      
-      <div class="bg-card text-card-foreground rounded-lg border border-border p-6">
-        <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-          <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path>
-          </svg>
-        </div>
-        <h3 class="font-semibold mb-2">Feature Title</h3>
-        <p class="text-sm text-muted-foreground">Feature description explaining the benefit and value proposition.</p>
-      </div>
-    </div>
-  </div>
-</div>
-```
+| ❌ Anti-Pattern | ✅ Correct Approach | Why |
+|----------------|-------------------|-----|
+| `<div onclick="">` buttons | `<button type="button">` | Screen readers need semantic button elements |
+| Custom CSS animations | `transition-colors` utility | Hardware acceleration + consistency |
+| Fixed pixel heights `h-[32px]` | Relative heights `h-10` | Better scaling across screen sizes |
+| Hardcoded colors `bg-blue-500` | Design tokens `bg-primary` | Brand consistency + dark mode support |
+| Missing focus styles | `focus:ring-2` classes | Keyboard accessibility requirement |
+| Single size components | Multiple size variants | Different contexts need different scales |
+| Inline styles `style=""` | Utility classes | Better performance + maintainability |
+| Generic onClick handlers | Specific semantic actions | Better UX + screen reader context |
 
-## Component Patterns Reference
+### Implementation Mistakes
 
-### Input Component Template
-
-```html
-<!-- Input variants -->
-<div class="space-y-4">
-  <!-- Default Input -->
-  <div class="space-y-2">
-    <label for="email" class="text-sm font-medium text-foreground">Email</label>
-    <input 
-      type="email" 
-      id="email" 
-      placeholder="Enter your email"
-      class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-    >
-  </div>
-  
-  <!-- Input with error -->
-  <div class="space-y-2">
-    <label for="password" class="text-sm font-medium text-foreground">Password</label>
-    <input 
-      type="password" 
-      id="password"
-      placeholder="Enter your password"
-      aria-describedby="password-error"
-      class="flex h-10 w-full rounded-md border border-destructive bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-destructive focus-visible:ring-offset-2"
-    >
-    <p id="password-error" class="text-sm text-destructive" role="alert">
-      Password must be at least 8 characters
-    </p>
-  </div>
-  
-  <!-- Disabled Input -->
-  <div class="space-y-2">
-    <label for="disabled-input" class="text-sm font-medium text-muted-foreground">Disabled Input</label>
-    <input 
-      type="text" 
-      id="disabled-input"
-      value="This field is disabled"
-      disabled
-      class="flex h-10 w-full rounded-md border border-input bg-muted px-3 py-2 text-sm text-muted-foreground cursor-not-allowed opacity-50"
-    >
-  </div>
-</div>
-```
+- **Missing aria-labels on icon-only buttons** → Always provide accessible text
+- **Using divs for interactive elements** → Use semantic HTML (button, input, select)
+- **Skipping disabled states** → Every interactive component needs disabled styling
+- **Ignoring touch targets** → Minimum 44px height for mobile accessibility
+- **Breaking keyboard navigation** → Test Tab, Enter, Space, Arrow keys
+- **Hardcoding brand colors** → Use design tokens for theme consistency
 
 ## Accessibility Standards
 
@@ -549,34 +335,6 @@ Every component must include:
 
 <!-- 7. Color contrast compliance -->
 <!-- All text must have 4.5:1 contrast ratio minimum -->
-```
-
-### Dark Mode Implementation
-
-```html
-<!-- Component with dark mode variants -->
-<div class="bg-background text-foreground border border-border dark:bg-gray-900 dark:text-gray-100 dark:border-gray-700">
-  <!-- Content automatically adapts -->
-</div>
-
-<!-- Using CSS variables for automatic adaptation -->
-<style>
-  :root {
-    --background: #ffffff;
-    --foreground: #111827;
-    --border: #e5e7eb;
-  }
-  
-  .dark {
-    --background: #111827;
-    --foreground: #f9fafb;
-    --border: #374151;
-  }
-  
-  .bg-background { background-color: var(--background); }
-  .text-foreground { color: var(--foreground); }
-  .border-border { border-color: var(--border); }
-</style>
 ```
 
 ## Performance Optimization
