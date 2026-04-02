@@ -43,7 +43,7 @@ runtime: "gemini"
 mcp_config_file: ".mcp-intelligence.json"
 flags: ["--context=1m", "--research-mode"]
 domain: "research_intelligence"
-quality: 8.9
+quality: 9.0
 tags: [agent_card, intelligence, research, gemini, market-analysis, competitor-intel]
 tldr: "Intelligence nucleus spec — research domain, Gemini 2.5-pro, 1M context, brain+firecrawl+arxiv MCPs, market & competitor intelligence."
 density_score: 1.0
