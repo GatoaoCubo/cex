@@ -29,6 +29,21 @@ density_score: 0.92
 - Filter: only KCs with density >= 0.85 and quality >= 8.0
 - Dedup: no two entries with >80% output overlap
 
+## Usage Guidelines
+
+| When to use | When NOT to use |
+|-------------|-----------------|
+| Stable domain knowledge (patterns don't change) | Dynamic/frequently updated information |
+| Need consistent formatting/style across responses | Small datasets (<100 examples) |
+| Target model will be used repeatedly | One-off tasks |
+| Have 500+ high-quality KC examples | Factual Q&A (use RAG instead) |
+
+**Anti-patterns:**
+- Including low-quality KCs (quality <8.0) dilutes training signal
+- Duplicate instructions with minor variations (confuses model)
+- Overly long outputs (>500 tokens) → truncation issues
+- Missing instruction diversity → overfitting to question patterns
+
 ## Metadata Header
 ```json
 {"_meta": {"source": "CEX P01_knowledge", "kc_count": 243, "generated": "2026-03-31", "avg_quality": 8.9}}
