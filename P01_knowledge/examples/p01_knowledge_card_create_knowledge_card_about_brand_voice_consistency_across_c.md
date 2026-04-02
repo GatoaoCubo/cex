@@ -8,7 +8,7 @@ created: "2026-04-02"
 updated: "2026-04-02"
 author: "knowledge-card-builder"
 domain: brand_management
-quality: 8.9
+quality: 9.1
 tags: [brand-voice, consistency, channels, marketing, communication, brand-management, knowledge]
 tldr: "Brand voice consistency requires 75% shared elements across channels with channel-specific adaptations for platform constraints and audience expectations"
 when_to_use: "When establishing brand guidelines or auditing voice consistency across multiple communication channels"
