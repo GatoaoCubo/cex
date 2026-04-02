@@ -1,0 +1,309 @@
+id: n05_output_monetization_infra
+kind: output_validator
+pillar: P05
+title: CEX Monetization Infrastructure Plan
+version: 1.0.0
+created: 2026-04-02
+author: n05_operations
+domain: monetization
+quality: null
+tags:
+- monetization
+- infra
+- ci-cd
+- lemon-squeezy
+- distribution
+- automation
+tldr: Complete infrastructure automation plan for CEX monetization via Lemon Squeezy + GGUF model distribution + course delivery.
+density_score: null
+executive_summary: 'Infrastructure automation for CEX monetization via public repo + paid course model:
+
+  - Repo: MIT license on GitHub with CI/CD automation
+
+  - Payments: Lemon Squeezy (5% fee) handling tiers: Explorer R$0 / Builder R$497 / Master R$997
+
+  - Model: cex-brain:14b GGUF (~10GB) exclusive to paid tiers
+
+  - Course: Hybrid format with video + text + exercises
+
+
+  ---'
+1_public_repo_devops_prep: ''
+github_actions_workflow: "# .github/workflows/cex-ci.yml\nname: CEX CI/CD Pipeline\non:\n  push:\n    branches: [main, dev]\n\
+  \  pull_request:\n    branches: [main]\n\njobs:\n  validate:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n\
+  \      - name: Setup Python\n        uses: actions/setup-python@v4\n        with:\n          python-version: '3.11'\n  \
+  \    \n      - name: Install dependencies\n        run: |\n          pip install -r requirements.txt\n          pip install\
+  \ yamllint\n          \n      - name: Validate YAML frontmatter\n        run: |\n          find . -name \"*.md\" -exec python\
+  \ _tools/cex_validate_frontmatter.py {} \\;\n          \n      - name: Run CEX Doctor\n        run: python _tools/cex_doctor.py\
+  \ --ci\n        \n      - name: Test Suite\n        run: python -m pytest _tools/test_suite.py -v"
+branch_strategy: '| Branch | Purpose | Protection |
+
+  |--------|---------|------------|
+
+  | `main` | Stable releases, tagged versions | Required PR review, status checks |
+
+  | `dev` | Work-in-progress, continuous integration | Status checks only |
+
+  | `release/v*` | Release preparation | Auto-created from main on tag |'
+release_automation: "# .github/workflows/release.yml\nname: Auto Release\non:\n  push:\n    tags: ['v*']\n\njobs:\n  release:\n\
+  \    steps:\n      - name: Generate Changelog\n        run: python _tools/cex_changelog.py ${{ github.ref_name }}\n    \
+  \    \n      - name: Create GitHub Release\n        uses: softprops/action-gh-release@v1\n        with:\n          generate_release_notes:\
+  \ true\n          files: |\n            CHANGELOG.md\n            \n      - name: Notify Lemon Squeezy\n        run: |\n\
+  \          curl -X POST \"${{ secrets.LEMON_SQUEEZY_WEBHOOK_URL }}\" \\\n            -H \"Content-Type: application/json\"\
+  \ \\\n            -d '{\"event\":\"release\", \"version\":\"${{ github.ref_name }}\"}'"
+pre_commit_hooks_audit: 'Existing hooks in `.git/hooks/`:
+
+  - `pre-commit`: Runs `cex_doctor.py --pre-commit`
+
+  - `post-commit`: Updates `_tools/cex_index.py`
+
+  - ENHANCEMENT: Add YAML linting and frontmatter validation
+
+
+  ---'
+2_lemon_squeezy_integration: ''
+webhook_setup: "# _tools/cex_webhook_handler.py\nfrom fastapi import FastAPI, Request, HTTPException\nimport hmac\nimport\
+  \ hashlib\nimport os\nfrom datetime import datetime\n\napp = FastAPI()\n\n@app.post(\"/webhook/lemon-squeezy\")\nasync def\
+  \ handle_purchase(request: Request):\n    \"\"\"Handle Lemon Squeezy purchase webhooks.\"\"\"\n    payload = await request.body()\n\
+  \    signature = request.headers.get(\"X-Signature\")\n    \n    # Verify webhook signature\n    secret = os.getenv(\"LEMON_SQUEEZY_WEBHOOK_SECRET\"\
+  )\n    expected = hmac.new(secret.encode(), payload, hashlib.sha256).hexdigest()\n    \n    if not hmac.compare_digest(signature,\
+  \ expected):\n        raise HTTPException(status_code=401, detail=\"Invalid signature\")\n    \n    data = await request.json()\n\
+  \    \n    # Process purchase\n    if data[\"meta\"][\"event_name\"] == \"order_created\":\n        await grant_download_access(data[\"\
+  data\"])\n    \n    return {\"status\": \"ok\"}\n\nasync def grant_download_access(order_data):\n    \"\"\"Grant model download\
+  \ access for paid tiers.\"\"\"\n    email = order_data[\"attributes\"][\"user_email\"]\n    variant_name = order_data[\"\
+  attributes\"][\"variant_name\"]\n    \n    # Generate license key\n    license_key = generate_license_key()\n    \n    #\
+  \ Store in customer database\n    await store_customer_data(email, license_key, variant_name)\n    \n    # Send license\
+  \ key via email\n    await send_license_email(email, license_key, variant_name)"
+license_key_validation: "# _tools/cex_license.py\nimport click\nimport requests\nimport os\nfrom pathlib import Path\n\n@click.command()\n\
+  @click.option('--activate', help='License key to activate')\n@click.option('--verify', is_flag=True, help='Verify existing\
+  \ license')\ndef main(activate, verify):\n    \"\"\"CEX License Manager - Model Download & Activation.\"\"\"\n    \n   \
+  \ if activate:\n        activate_license(activate)\n    elif verify:\n        verify_license()\n    else:\n        click.echo(\"\
+  Use --activate KEY or --verify\")\n\ndef activate_license(key: str):\n    \"\"\"Validate key and download cex-brain model.\"\
+  \"\"\n    \n    # Verify key with Lemon Squeezy API\n    response = requests.post(\n        \"https://api.lemonsqueezy.com/v1/licenses/validate\"\
+  ,\n        headers={\"Authorization\": f\"Bearer {os.getenv('LEMON_SQUEEZY_API_KEY')}\"},\n        json={\"license_key\"\
+  : key}\n    )\n    \n    if response.status_code != 200:\n        click.echo(f\"❌ Invalid license key\")\n        return\n\
+  \    \n    data = response.json()\n    tier = data[\"meta\"][\"variant_name\"]  # Builder/Master\n    \n    if tier in [\"\
+  Builder\", \"Master\"]:\n        click.echo(f\"✅ License valid for {tier} tier\")\n        download_model(tier, key)\n \
+  \       install_ollama_model()\n    else:\n        click.echo(f\"❌ {tier} tier doesn't include model access\")\n\ndef download_model(tier:\
+  \ str, key: str):\n    \"\"\"Download cex-brain GGUF from secure endpoint.\"\"\"\n    download_url = f\"https://models.cex.ai/cex-brain-14b.gguf?key={key}\"\
+  \n    \n    model_path = Path.home() / \".cex\" / \"models\" / \"cex-brain-14b.gguf\"\n    model_path.parent.mkdir(exist_ok=True)\n\
+  \    \n    click.echo(\"\U0001F4E5 Downloading cex-brain:14b (~10GB)...\")\n    \n    with requests.get(download_url, stream=True)\
+  \ as r:\n        r.raise_for_status()\n        with open(model_path, 'wb') as f:\n            for chunk in r.iter_content(chunk_size=8192):\n\
+  \                f.write(chunk)\n    \n    click.echo(f\"✅ Model downloaded to {model_path}\")\n\ndef install_ollama_model():\n\
+  \    \"\"\"Create Ollama model from GGUF.\"\"\"\n    os.system(\"ollama create cex-brain -f ~/.cex/models/Modelfile\")\n\
+  \    click.echo(\"✅ cex-brain model installed in Ollama\")\n\nif name == 'main':\n    main()"
+customer_data_storage_lgpd_compliant: "# customer_schema.json - Minimal data retention\n{\n  \"email\": \"user@example.com\"\
+  ,          # Required for license delivery\n  \"license_key\": \"CEX-XXXXX-XXXXX\",     # Required for validation\n  \"\
+  tier\": \"Builder\",                    # Required for feature access\n  \"created_at\": \"2026-04-02T10:00:00Z\", # Required\
+  \ for audit\n  \"last_download\": \"2026-04-02T10:30:00Z\" # Optional for analytics\n}\n\nLGPD Compliance:\n- Data minimization:\
+  \ Only email, key, tier stored\n- Retention: 2 years after license expiry\n- Right to deletion: Automated via `cex_license.py\
+  \ --delete-account`\n- Data portability: JSON export available\n\n---"
+3_model_distribution_pipeline: ''
+training_pipeline: "# _tools/cex_train_brain.py\nimport subprocess\nfrom pathlib import Path\n\ndef export_dataset():\n  \
+  \  \"\"\"Export CEX artifacts to training dataset.\"\"\"\n    subprocess.run([\n        \"python\", \"_tools/cex_export_dataset.py\"\
+  ,\n        \"--output\", \"cex_brain_dataset.jsonl\",\n        \"--format\", \"instruction_following\",\n        \"--filter\"\
+  , \"quality>=8.0\"\n    ])\n\ndef train_qlora():\n    \"\"\"Train QLoRA adapter on CEX dataset.\"\"\"\n    subprocess.run([\n\
+  \        \"python\", \"-m\", \"axolotl.cli.train\",\n        \"configs/cex_brain_qlora.yml\"\n    ])\n\ndef merge_and_quantize():\n\
+  \    \"\"\"Merge QLoRA + quantize to GGUF.\"\"\"\n    # Merge adapter\n    subprocess.run([\n        \"python\", \"-m\"\
+  , \"axolotl.cli.merge_lora\",\n        \"configs/cex_brain_qlora.yml\",\n        \"--lora-model-dir\", \"outputs/cex-brain\"\
+  \n    ])\n    \n    # Quantize to GGUF\n    subprocess.run([\n        \"python\", \"llama.cpp/convert.py\", \n        \"\
+  merged_model/\",\n        \"--outfile\", \"cex-brain-14b.gguf\",\n        \"--outtype\", \"q4_k_m\"\n    ])\n\nif name ==\
+  \ \"main\":\n    export_dataset()\n    train_qlora() \n    merge_and_quantize()\n    print(\"✅ cex-brain:14b GGUF ready\
+  \ for distribution\")"
+hosting_options: '| Option | Cost | Bandwidth | CDN | Gated Access |
+
+  |--------|------|-----------|-----|--------------|
+
+  | HuggingFace Hub | Free | 1TB/month | Global | ✅ Gated repo |
+
+  | AWS S3 + CloudFront | $23/month | Pay-per-GB | Global | ✅ Signed URLs |
+
+  | Bunny.net CDN | $5/month + usage | $0.01/GB | Global | ✅ Token auth |
+
+
+  Recommendation: HuggingFace Hub for simplicity, S3+CloudFront for scale.'
+download_version_management: "# _tools/cex_model_version.py\ndef check_model_updates():\n    \"\"\"Check for cex-brain model\
+  \ updates.\"\"\"\n    current_version = get_local_model_version()\n    latest_version = get_remote_model_version()\n   \
+  \ \n    if latest_version > current_version:\n        print(f\"\U0001F504 cex-brain update available: {latest_version}\"\
+  )\n        print(\"Run: cex_license.py --update\")\n        return True\n    return False\n\ndef update_model():\n    \"\
+  \"\"Download latest model without breaking existing installs.\"\"\"\n    # Download to temp location\n    download_model_version(get_remote_model_version(),\
+  \ temp=True)\n    \n    # Backup current model\n    backup_current_model()\n    \n    # Atomic swap\n    os.rename(\"~/.cex/models/cex-brain-14b.gguf.new\"\
+  , \n              \"~/.cex/models/cex-brain-14b.gguf\")\n    \n    # Update Ollama\n    os.system(\"ollama rm cex-brain\
+  \ && ollama create cex-brain -f ~/.cex/models/Modelfile\")"
+cost_estimates: "10GB GGUF × Download Volume:\n- 10 downloads/month: ~$2/month bandwidth\n- 50 downloads/month: ~$8/month\
+  \ bandwidth  \n- 100 downloads/month: ~$15/month bandwidth\n\nHuggingFace: Free up to 1TB/month (100 downloads)\n\n---"
+4_course_delivery_infrastructure: ''
+video_hosting_options: '| Platform | Cost | Bandwidth | Analytics | DRM |
+
+  |----------|------|-----------|-----------|-----|
+
+  | YouTube Unlisted | Free | Unlimited | Basic | ❌ |
+
+  | Vimeo Pro | $20/month | 1TB/year | Advanced | ✅ |
+
+  | Bunny.net Stream | $5/month + $1/100GB | Pay-per-view | Custom | ✅ |
+
+
+  Recommendation: YouTube Unlisted for MVP, Vimeo Pro for production.'
+content_delivery: '| Component | Solution | Access Control |
+
+  |-----------|----------|----------------|
+
+  | Videos | YouTube unlisted playlists | Link-based access |
+
+  | Text | GitHub private repo | Collaborator access |
+
+  | Exercises | CEX tasks in repo | Student runs locally |'
+student_access_management: "# _tools/cex_course_access.py\ndef grant_course_access(email: str, tier: str):\n    \"\"\"Grant\
+  \ GitHub repo access for course content.\"\"\"\n    \n    # Builder/Master tiers get course access\n    if tier in [\"Builder\"\
+  , \"Master\"]:\n        # Add to GitHub repo collaborators\n        subprocess.run([\n            \"gh\", \"api\", \"/repos/cex/course-content/collaborators\"\
+  ,\n            \"-X\", \"PUT\",\n            \"-f\", f\"username={get_github_username(email)}\",\n            \"-f\", \"\
+  permission=read\"\n        ])\n        \n        # Send course welcome email\n        send_course_welcome_email(email, tier)\n\
+  \ndef verify_course_completion(student_email: str, module: str):\n    \"\"\"Verify student completed module exercises.\"\
+  \"\"\n    \n    # Student runs: cex_doctor.py --course-check module_01\n    # This creates: ~/.cex/course/completion_module_01.json\n\
+  \    # We check for file existence + valid schema\n    \n    completion_file = Path.home() / \".cex\" / \"course\" / f\"\
+  completion_{module}.json\"\n    \n    if completion_file.exists():\n        with open(completion_file) as f:\n         \
+  \   data = json.load(f)\n            return data.get(\"status\") == \"completed\"\n    \n    return False"
+exercise_verification_system: "# Student runs this after each module\npython _tools/cex_doctor.py --course-check module_01\n\
+  \n# Creates completion proof:\n# ~/.cex/course/completion_module_01.json\n{\n  \"module\": \"module_01\",\n  \"completed_at\"\
+  : \"2026-04-02T10:00:00Z\",\n  \"exercises_passed\": 5,\n  \"cex_doctor_score\": 9.2,\n  \"artifacts_created\": [\"agent_personal.md\"\
+  , \"knowledge_card_react.md\"]\n}\n\n---"
+5_monitoring_analytics: ''
+github_metrics_free: "# _tools/cex_analytics.py\nimport requests\n\ndef get_github_metrics():\n    \"\"\"Fetch GitHub repo\
+  \ analytics.\"\"\"\n    \n    response = requests.get(\n        \"https://api.github.com/repos/cex-org/cex\",\n        headers={\"\
+  Authorization\": f\"token {os.getenv('GITHUB_TOKEN')}\"}\n    )\n    \n    data = response.json()\n    return {\n      \
+  \  \"stars\": data[\"stargazers_count\"],\n        \"forks\": data[\"forks_count\"],\n        \"clones\": get_clone_stats(),\n\
+  \        \"traffic\": get_traffic_stats()\n    }"
+lemon_squeezy_dashboard_native:
+- 'Revenue: Monthly recurring, one-time sales'
+- 'Churn: Subscription cancellations'
+- 'LTV: Customer lifetime value'
+- 'Conversion: Visitor-to-customer funnel'
+course_completion_tracking: "# _tools/cex_course_analytics.py\ndef get_completion_rates():\n    \"\"\"Analyze course completion\
+  \ by module.\"\"\"\n    \n    students = get_all_students()\n    completion_data = {}\n    \n    for module in [\"01_foundations\"\
+  , \"02_builders\", \"03_advanced\"]:\n        completed = 0\n        for student in students:\n            if verify_course_completion(student[\"\
+  email\"], module):\n                completed += 1\n        \n        completion_data[module] = {\n            \"completion_rate\"\
+  : completed / len(students),\n            \"avg_time_to_complete\": get_avg_completion_time(module)\n        }\n    \n \
+  \   return completion_data"
+alert_configuration: "# alerts.yml\nalerts:\n  - name: \"Model download failures\"\n    condition: \"error_rate > 5%\"\n \
+  \   notification: \"slack_webhook\"\n    \n  - name: \"License validation failures\" \n    condition: \"validation_failures\
+  \ > 10/hour\"\n    notification: \"email\"\n    \n  - name: \"Course completion drop\"\n    condition: \"completion_rate\
+  \ < 60%\"\n    notification: \"dashboard_alert\"\n\n---"
+6_cost_analysis: ''
+fixed_costs_monthly: '| Service | Cost | Purpose |
+
+  |---------|------|---------|
+
+  | Lemon Squeezy | 5% of sales | Payment processing |
+
+  | Domain + SSL | $10 | cex.ai domain |
+
+  | HuggingFace Pro | $9 | Private model hosting |
+
+  | GitHub Pro | $4 | Private course repo |
+
+  | Email service | $5 | Transactional emails |
+
+  | Monitoring | $5 | Uptime + alerts |
+
+  | TOTAL | $33 + 5% sales | Base infrastructure |'
+variable_costs_per_student: '| Tier | Revenue | Variable Cost | Margin |
+
+  |------|---------|---------------|--------|
+
+  | Explorer | R$0 | $0 | N/A (lead gen) |
+
+  | Builder | R$497 (~$90) | $4.50 (5%) | $85.50 (95%) |
+
+  | Master | R$997 (~$180) | $9.00 (5%) | $171.00 (95%) |'
+breakeven_analysis: 'Fixed costs: $33/month = $396/year
+
+
+  Breakeven scenarios:
+
+  - 4 Builder students/year: 4 × $85.50 = $342 (near breakeven)
+
+  - 2 Master students/year: 2 × $171 = $342 (near breakeven)
+
+  - Mixed (2 Builder + 1 Master/year): $171 + $171 = $342 (near breakeven)'
+growth_projections: '| Students/Month | Monthly Revenue | Monthly Profit | Annual Profit |
+
+  |----------------|-----------------|----------------|---------------|
+
+  | 10 Builder | $855 | $822 | $9,864 |
+
+  | 50 Builder | $4,275 | $4,242 | $50,904 |
+
+  | 100 Builder | $8,550 | $8,517 | $102,204 |
+
+
+  Conservative estimate: 10 students/month = $9,864/year profit
+
+
+  ---'
+7_critical_automation_scripts: ''
+p0_scripts_launch_blockers: "#### cex_license.py\n# PRIORITY: P0 - Core monetization\n# FUNCTIONALITY: License validation\
+  \ + model download\n# DEPENDENCIES: requests, click, ollama\n# ESTIMATED EFFORT: 8 hours\n\n#### cex_setup.py  \n# PRIORITY:\
+  \ P0 - First-run installer\n# FUNCTIONALITY: Install deps, ollama, validate environment\n# DEPENDENCIES: subprocess, pathlib\n\
+  # ESTIMATED EFFORT: 6 hours\n\ndef install_dependencies():\n    \"\"\"Install Python dependencies + Ollama.\"\"\"\n    subprocess.run([\"\
+  pip\", \"install\", \"-r\", \"requirements.txt\"])\n    \n    # Install Ollama (cross-platform)\n    if platform.system()\
+  \ == \"Windows\":\n        subprocess.run([\"winget\", \"install\", \"Ollama.Ollama\"])\n    else:\n        subprocess.run([\"\
+  curl\", \"-fsSL\", \"https://ollama.ai/install.sh\", \"|\", \"sh\"])\n\ndef verify_setup():\n    \"\"\"Verify CEX environment\
+  \ health.\"\"\"\n    subprocess.run([\"python\", \"_tools/cex_doctor.py\", \"--setup-check\"])\n\n#### GitHub Action: Release\n\
+  # PRIORITY: P0 - Release automation\n# FUNCTIONALITY: Tag → changelog → GitHub release\n# ESTIMATED EFFORT: 4 hours\n\n\
+  #### Webhook Handler\n# PRIORITY: P0 - Payment processing\n# FUNCTIONALITY: Lemon Squeezy → grant access\n# DEPENDENCIES:\
+  \ fastapi, hmac, requests\n# ESTIMATED EFFORT: 10 hours"
+p1_scripts_quality_of_life: '| Script | Effort | Purpose |
+
+  |--------|--------|---------|
+
+  | `cex_course_check.py` | 4h | Verify module completion |
+
+  | `GitHub Action: doctor` | 2h | PR validation |
+
+  | `cex_analytics.py` | 6h | Usage metrics collection |
+
+
+  ---'
+implementation_timeline: ''
+week_1_foundation:
+- '[ ] Setup Lemon Squeezy account + webhook endpoint'
+- '[ ] Create GitHub Actions for CI/CD'
+- '[ ] Implement `cex_license.py` core validation'
+week_2_distribution:
+- '[ ] Setup HuggingFace Hub model hosting'
+- '[ ] Implement model download + Ollama integration'
+- '[ ] Test end-to-end license → download → install flow'
+week_3_course_infrastructure:
+- '[ ] Setup GitHub private repo for course content'
+- '[ ] Implement student access automation'
+- '[ ] Create exercise verification system'
+week_4_launch_prep: '- [ ] Full system testing with real Lemon Squeezy payments
+
+  - [ ] Monitoring & alerts configuration
+
+  - [ ] Documentation + troubleshooting guides
+
+
+  ---'
+success_metrics: ''
+technical_kpis:
+- 'License activation success rate: >95%'
+- 'Model download completion rate: >90%'
+- 'Course completion rate: >60%'
+- 'System uptime: >99.5%'
+business_kpis:
+- 'Conversion rate (visitor → paid): >2%'
+- 'Monthly recurring students: 10+ (conservative)'
+- 'Customer satisfaction: >4.5/5 (course ratings)'
+- 'Support ticket volume: <5/month'
+risk_mitigation: '- Payment failure: Lemon Squeezy 99.9% uptime SLA
+
+  - Model hosting: HuggingFace + S3 backup
+
+  - Course access: GitHub Enterprise backup plan
+
+  - License validation: Local caching + offline mode
+
+
+  Infrastructure ready for 10x growth from day one.'
