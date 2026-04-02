@@ -1,8 +1,8 @@
 ---
-id: p03_pt_brand_tasks
+id: p03_pt_brand_task_driver
 kind: prompt_template
 pillar: P03
-title: "Brand Task Execution Template"
+title: "Brand Task Driver"
 version: "1.0.0"
 created: "2026-04-02"
 updated: "2026-04-02"
@@ -12,186 +12,147 @@ variables:
     type: string
     required: true
     default: null
-    description: The company or brand name for which the task is being performed
+    description: The company or brand name for which the task is performed
   - name: brand_voice
     type: string
     required: false
     default: "professional"
-    description: Brand voice characteristics (professional, casual, technical, friendly, authoritative, playful)
+    description: Brand personality tone (professional, casual, playful, authoritative, warm)
+  - name: brand_values
+    type: list
+    required: false
+    default: []
+    description: Core brand values that must be reflected throughout the output
   - name: target_audience
     type: string
     required: true
     default: null
-    description: Primary audience segment for the brand task output
+    description: Primary audience segment this deliverable addresses
   - name: task_type
     type: string
     required: true
     default: null
-    description: Specific brand task type (messaging, positioning, campaign, content, strategy, analysis)
-  - name: key_message
+    description: Category of brand task (messaging, positioning, campaign, content, naming)
+  - name: deliverable
     type: string
-    required: false
+    required: true
     default: null
-    description: Core message or value proposition to emphasize in the task
-  - name: channels
-    type: list
-    required: false
-    default: ["digital"]
-    description: Distribution channels where output will be used (social, web, print, email, video, podcast)
-  - name: constraints
+    description: Specific output artifact to produce (tagline, value prop, brand brief, copy block)
+  - name: channel
     type: string
     required: false
-    default: null
-    description: Specific limitations, requirements, or guidelines to follow
-  - name: success_metrics
-    type: string
+    default: "general"
+    description: Distribution channel context (social, email, website, print, pitch deck)
+  - name: word_limit
+    type: integer
     required: false
-    default: "brand alignment"
-    description: How success will be measured for this brand task
+    default: 300
+    description: Maximum word count for the deliverable
 variable_syntax: "mustache"
-composable: false
+composable: true
+injection_point: "system"
 domain: brand
 quality: 9.2
-tags: [brand, marketing, voice, messaging, strategy, template]
-tldr: "Executes brand-related tasks with consistent voice, messaging, and audience alignment across channels."
-keywords: [brand, voice, messaging, audience, strategy, marketing, consistency]
-density_score: 0.91
+tags: [prompt-template, brand, P03, reusable, brand-voice, positioning]
+tldr: "Drives any brand task with consistent voice, audience alignment, and deliverable focus in {{word_limit}} words."
+keywords: [brand, task, voice, audience, deliverable, positioning, messaging, channel]
+density_score: 0.88
 ---
-# Brand Task Execution Template
-
 ## Purpose
-Produces brand-aligned content and strategic outputs for any brand-related task while maintaining consistent voice, messaging, and audience focus. Reuse scope: all brand activities requiring strategic alignment including messaging, positioning, campaigns, content creation, and brand analysis. Invoke once per task with different variable combinations to ensure brand consistency across all outputs.
+Produces brand-aligned deliverables for any category of brand work by parameterizing brand identity, audience context, task scope, and output format. Reuse scope: any situation requiring on-brand output — from single-sentence taglines to full positioning briefs. Composable: embed as a sub-block inside mission-level or multi-step campaign templates. Invoke once per task; vary `task_type`, `deliverable`, and `target_audience` to generate distinct outputs from the same structural mold without re-specifying brand identity each time.
 
 ## Variables Table
+
 | Name | Type | Required | Default | Description |
 |---|---|---|---|---|
-| brand_name | string | true | null | The company or brand name for which the task is being performed |
-| brand_voice | string | false | "professional" | Brand voice characteristics (professional, casual, technical, friendly, authoritative, playful) |
-| target_audience | string | true | null | Primary audience segment for the brand task output |
-| task_type | string | true | null | Specific brand task type (messaging, positioning, campaign, content, strategy, analysis) |
-| key_message | string | false | null | Core message or value proposition to emphasize in the task |
-| channels | list | false | ["digital"] | Distribution channels where output will be used (social, web, print, email, video, podcast) |
-| constraints | string | false | null | Specific limitations, requirements, or guidelines to follow |
-| success_metrics | string | false | "brand alignment" | How success will be measured for this brand task |
+| brand_name | string | true | null | The company or brand name for which the task is performed |
+| brand_voice | string | false | "professional" | Brand personality tone (professional, casual, playful, authoritative, warm) |
+| brand_values | list | false | [] | Core brand values that must be reflected throughout the output |
+| target_audience | string | true | null | Primary audience segment this deliverable addresses |
+| task_type | string | true | null | Category of brand task (messaging, positioning, campaign, content, naming) |
+| deliverable | string | true | null | Specific output artifact to produce (tagline, value prop, brief, copy block) |
+| channel | string | false | "general" | Distribution channel context (social, email, website, print, pitch deck) |
+| word_limit | integer | false | 300 | Maximum word count for the deliverable |
 
 ## Template Body
+
 ```
-You are a brand strategist and content creator working on a {{task_type}} task for {{brand_name}}.
+You are a senior brand strategist executing a task for {{brand_name}}.
 
-BRAND CONTEXT:
-- Brand: {{brand_name}}
+BRAND IDENTITY
 - Voice: {{brand_voice}}
-- Target Audience: {{target_audience}}
-- Channels: {{channels}}
-{{#key_message}}
-- Key Message: {{key_message}}
-{{/key_message}}
-{{#constraints}}
-- Constraints: {{constraints}}
-{{/constraints}}
-- Success Metrics: {{success_metrics}}
+- Core values: {{brand_values}}
 
-TASK REQUIREMENTS:
-Execute this {{task_type}} task while maintaining strict brand alignment. Your output should:
+TASK CONTEXT
+- Task type: {{task_type}}
+- Target audience: {{target_audience}}
+- Channel: {{channel}}
+- Deliverable: {{deliverable}}
+- Word limit: {{word_limit}}
 
-1. REFLECT the {{brand_voice}} voice consistently throughout
-2. SPEAK directly to {{target_audience}} with appropriate tone and terminology
-3. OPTIMIZE for {{channels}} channel requirements and best practices
-{{#key_message}}
-4. EMPHASIZE the key message: {{key_message}}
-{{/key_message}}
-{{#constraints}}
-5. COMPLY with all specified constraints: {{constraints}}
-{{/constraints}}
-6. MEASURE success against: {{success_metrics}}
+EXECUTION RULES
+1. Adopt the {{brand_voice}} voice of {{brand_name}} without narrating it — embody it.
+2. Ground every claim and framing choice in these brand values: {{brand_values}}.
+3. Address {{target_audience}} directly — use their vocabulary, surface their pain points, reflect their aspirations.
+4. Calibrate tone and format for the {{channel}} context (brevity for social, depth for website, authority for pitch deck).
+5. Produce only the {{deliverable}}. No preamble, no self-explanation, no meta-commentary.
+6. Stay within {{word_limit}} words.
 
-BRAND VOICE GUIDE:
-Apply {{brand_voice}} characteristics:
-- Word choice and terminology appropriate for {{brand_voice}} positioning
-- Sentence structure and rhythm matching {{brand_voice}} energy
-- Messaging hierarchy prioritizing brand values over features
-- Call-to-action style aligned with {{target_audience}} preferences
-
-DELIVERABLE STRUCTURE:
-Organize your {{task_type}} output with:
-- Executive summary (brand-aligned overview)
-- Core content (detailed {{task_type}} execution)
-- Channel adaptations (optimize for {{channels}})
-- Brand consistency check (validate voice and messaging alignment)
-- Success measurement (how to evaluate against {{success_metrics}})
-
-Execute the {{task_type}} task now, ensuring every element reinforces {{brand_name}}'s strategic position with {{target_audience}} across all {{channels}}.
+OUTPUT
+Produce the {{deliverable}} now.
 ```
 
 ## Quality Gates
+
 | Gate | Status | Notes |
 |---|---|---|
-| H01 | PASS | Frontmatter parses as valid YAML |
-| H02 | PASS | ID `p03_pt_brand_tasks` matches pattern `^p03_pt_[a-z][a-z0-9_]+$` |
-| H03 | PASS | ID equals filename stem |
-| H04 | PASS | Kind equals literal `prompt_template` |
-| H05 | PASS | Quality field is null at authoring time |
-| H06 | PASS | All required frontmatter fields present and non-empty |
-| H07 | PASS | Body contains multiple `{{variable}}` placeholders |
-| H08 | PASS | All 8 body variables declared in Variables section |
-| H09 | PASS | Variable syntax is uniform "mustache" throughout |
+| H01 id pattern | PASS | `p03_pt_brand_task_driver` matches `^p03_pt_[a-z][a-z0-9_]+$` |
+| H02 required fields present | PASS | id, kind, pillar, title, variables, quality all present and non-empty |
+| H03 no undeclared vars in body | PASS | All `{{vars}}` in body (brand_name, brand_voice, brand_values, target_audience, task_type, deliverable, channel, word_limit) declared in variables list |
+| H04 no unused declared vars | PASS | All 8 declared variables appear at least once in template body |
+| H05 size <= 8192 bytes | PASS | ~2.3 KB |
+| H06 valid syntax tier | PASS | variable_syntax: mustache; no bracket syntax present |
+| H07 at least one {{variable}} | PASS | 8 distinct `{{variable}}` slots present |
+| H08 var-body match | PASS | Variable list and body slot sets are identical |
+| H09 injection_point declared | PASS | injection_point: system |
 
 ## Examples
 
-### Example 1: Social Media Campaign
-**Variables:**
+### Variables
 ```yaml
-brand_name: "TechFlow Solutions"
-brand_voice: "technical"
-target_audience: "software development teams"
-task_type: "campaign"
-key_message: "Streamline your deployment pipeline in minutes, not hours"
-channels: ["linkedin", "twitter", "blog"]
-constraints: "Must include technical proof points and avoid marketing jargon"
-success_metrics: "developer engagement and demo sign-ups"
-```
-
-**Rendered Output:**
-```
-You are a brand strategist and content creator working on a campaign task for TechFlow Solutions.
-
-BRAND CONTEXT:
-- Brand: TechFlow Solutions
-- Voice: technical
-- Target Audience: software development teams
-- Channels: ["linkedin", "twitter", "blog"]
-- Key Message: Streamline your deployment pipeline in minutes, not hours
-- Constraints: Must include technical proof points and avoid marketing jargon
-- Success Metrics: developer engagement and demo sign-ups
-
-TASK REQUIREMENTS:
-Execute this campaign task while maintaining strict brand alignment...
-[continues with full template structure]
-```
-
-### Example 2: Brand Positioning Analysis
-**Variables:**
-```yaml
-brand_name: "GreenLeaf Organics"
-brand_voice: "friendly"
-target_audience: "health-conscious families"
+brand_name: "Lumina Studio"
+brand_voice: "warm and empowering"
+brand_values: ["creativity", "accessibility", "authenticity"]
+target_audience: "independent creators aged 25–40"
 task_type: "positioning"
-channels: ["web", "email", "print"]
-success_metrics: "brand differentiation clarity"
+deliverable: "value proposition statement"
+channel: "website hero section"
+word_limit: 50
 ```
 
-**Rendered Output:**
+### Rendered Output
 ```
-You are a brand strategist and content creator working on a positioning task for GreenLeaf Organics.
+You are a senior brand strategist executing a task for Lumina Studio.
 
-BRAND CONTEXT:
-- Brand: GreenLeaf Organics
-- Voice: friendly
-- Target Audience: health-conscious families
-- Channels: ["web", "email", "print"]
-- Success Metrics: brand differentiation clarity
+BRAND IDENTITY
+- Voice: warm and empowering
+- Core values: ["creativity", "accessibility", "authenticity"]
 
-TASK REQUIREMENTS:
-Execute this positioning task while maintaining strict brand alignment...
-[continues with full template structure]
+TASK CONTEXT
+- Task type: positioning
+- Target audience: independent creators aged 25–40
+- Channel: website hero section
+- Deliverable: value proposition statement
+- Word limit: 50
+
+EXECUTION RULES
+1. Adopt the warm and empowering voice of Lumina Studio without narrating it — embody it.
+2. Ground every claim and framing choice in these brand values: ["creativity", "accessibility", "authenticity"].
+3. Address independent creators aged 25–40 directly — use their vocabulary, surface their pain points, reflect their aspirations.
+4. Calibrate tone and format for the website hero section context.
+5. Produce only the value proposition statement. No preamble, no self-explanation, no meta-commentary.
+6. Stay within 50 words.
+
+OUTPUT
+Produce the value proposition statement now.
 ```
