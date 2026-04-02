@@ -1,71 +1,70 @@
 ---
-id: p12_wf_create_orchestration_agent
+id: p12_wf_orchestration_agent_setup
 kind: workflow
 pillar: P12
 version: "1.0.0"
-created: "2026-04-01"
-updated: "2026-04-01"
+created: "2026-04-02"
+updated: "2026-04-02"
 author: "workflow-builder"
-title: "Create Agent for Orchestration Nucleus"
+title: "Orchestration Agent Setup Workflow"
 steps_count: 4
-execution: sequential
-agent_nodes: [planner, builder, validator, deployer]
-timeout: 7200
+execution: mixed
+agent_nodes: [n03, n05, n07]
+timeout: 3600
 retry_policy: per_step
 depends_on: []
 signals: [complete, error, agent_ready]
-spawn_configs: [p12_spawn_planner_requirements, p12_spawn_builder_agent, p12_spawn_validator_test, p12_spawn_deployer_activate]
+spawn_configs: [p12_spawn_n03_solo_build, p12_spawn_n05_solo_ops, p12_spawn_n07_orchestrator]
 domain: "orchestration"
-quality: 8.7
-tags: [workflow, orchestration, agent-creation, nucleus]
-tldr: "4-step sequential workflow to create, validate, and deploy a specialized agent for N07 orchestration nucleus operations"
-density_score: 0.92
+quality: 8.9
+tags: [workflow, orchestration, agent, setup, n07]
+tldr: "4-step mixed workflow: build orchestration components, deploy agent, configure routing, validate end-to-end orchestration capabilities"
+density_score: 0.89
 ---
 ## Purpose
-Orchestrates the complete lifecycle of creating a specialized agent for the N07 orchestration nucleus. The workflow ensures the agent meets orchestration requirements, integrates with CEX dispatch patterns, and can handle multi-nucleus coordination tasks. Each step validates outputs before proceeding to prevent deployment of incomplete agents.
+Establishes a complete orchestration agent for the N07 nucleus, enabling autonomous dispatch of tasks across nuclei, signal coordination, and mission lifecycle management. Sets up the runtime environment, deploys the orchestration agent, configures nucleus routing, and validates multi-step orchestration capabilities.
 
 ## Steps
 
-### Step 1: Requirements Analysis [planner]
-- **Agent**: planner (sonnet)
-- **Action**: Analyze orchestration requirements and define agent specification
-- **Input**: orchestration use cases, nucleus routing patterns, dispatch protocols
-- **Output**: agent requirements document with capabilities, constraints, and integration points
-- **Signal**: requirements_complete with specification quality score
-- **Depends on**: none (first step)
+### Step 1: Build Orchestration Components [n03]
+- **Agent**: n03 (opus builder)
+- **Action**: Create spawn configs, signal contracts, and handoff templates for orchestration
+- **Input**: N07 orchestrator requirements and nucleus routing table
+- **Output**: spawn_config artifacts for each nucleus, signal definitions, handoff templates
+- **Signal**: components_built with artifact count
+- **Depends on**: none
 
-### Step 2: Agent Construction [builder]
-- **Agent**: builder (opus)
-- **Action**: Build agent artifact following 8F pipeline with orchestration-specific capabilities
-- **Input**: requirements document from Step 1, existing agent patterns, CEX nucleus protocols
-- **Output**: complete agent artifact with frontmatter, system prompt, and orchestration instructions
-- **Signal**: agent_built with build quality score
+### Step 2: Deploy Orchestration Environment [n05]
+- **Agent**: n05 (operations)
+- **Action**: Set up runtime directories, process monitoring, and dispatch infrastructure
+- **Input**: orchestration components from Step 1
+- **Output**: configured .cex/runtime/, active spawn dispatch system, monitoring scripts
+- **Signal**: environment_ready with health status
 - **Depends on**: Step 1
 
-### Step 3: Validation Testing [validator]
-- **Agent**: validator (sonnet)
-- **Action**: Test agent against orchestration scenarios and validate dispatch integration
-- **Input**: agent artifact from Step 2, test scenarios, dispatch protocol compliance checks
-- **Output**: validation report with test results and integration confirmation
-- **Signal**: validation_complete with test pass rate
-- **Depends on**: Step 2
+### Step 3: Configure Agent Routing [n03]
+- **Agent**: n03 (opus builder)
+- **Action**: Build dispatch rules and routing configurations for nucleus selection
+- **Input**: nucleus capabilities matrix, domain routing patterns
+- **Output**: dispatch_rule artifacts, router configurations, nucleus assignment logic
+- **Signal**: routing_configured with rule count
+- **Depends on**: Step 1
 
-### Step 4: Deployment Activation [deployer]
-- **Agent**: deployer (opus)
-- **Action**: Deploy agent to N07 nucleus and register with dispatch system
-- **Input**: validated agent from Step 3, deployment configuration, nucleus routing tables
-- **Output**: active agent registered in nucleus, updated routing configuration
-- **Signal**: agent_ready with deployment confirmation
-- **Depends on**: Step 3
+### Step 4: Validate Orchestration Capabilities [n07]
+- **Agent**: n07 (orchestrator)
+- **Action**: Execute test mission across multiple nuclei, verify signal flow and completion
+- **Input**: deployed environment from Step 2, routing configs from Step 3
+- **Output**: validated orchestration system, test mission results, performance metrics
+- **Signal**: orchestration_validated with success metrics
+- **Depends on**: Steps 2, 3
 
 ## Dependencies
-- N07 orchestration nucleus must be active and responsive
-- CEX dispatch system must be operational with valid spawn configurations
-- Agent-builder patterns must be available in archetypes/builders/
-- Quality gates and validation frameworks must be functional
+- N07 orchestrator rules must be loaded in .claude/rules/n07-orchestrator.md
+- Nucleus boot scripts must exist in boot/ directory for each target nucleus
+- Git repository must be initialized with .cex/ runtime structure
+- Brand configuration must be bootstrapped for nucleus context injection
 
 ## Signals
-- **On step complete**: {step}_complete signal emitted by responsible agent with quality metrics
-- **On workflow complete**: agent_ready signal with full deployment confirmation and integration status
-- **On error**: {step}_error signal with failure details, retry per step (max 1), escalate to orchestrator if retry fails
-- **Final success**: orchestration_agent_deployed signal indicating agent is live and ready for nucleus tasks
+- **On step complete**: {agent}_complete signal emitted with quality score and artifact count
+- **On workflow complete**: orchestration_agent_ready signal with validation results
+- **On error**: {agent}_error signal, retry per step (max 1), escalate to human if critical components fail
