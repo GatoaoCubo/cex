@@ -2,105 +2,135 @@
 id: p01_kc_creation_best_practices
 kind: knowledge_card
 pillar: P01
-title: "Creation Best Practices for CEX Artifact Building"
+title: "Creation Best Practices for LLM Artifact Engineering"
 version: "1.0.0"
 created: "2026-04-02"
 updated: "2026-04-02"
 author: "knowledge-card-builder"
-domain: cex_system
-quality: 9.2
-tags: [creation, best-practices, 8f-pipeline, artifacts, density, quality-gates, meta]
-tldr: "Creation best practices: follow 8F pipeline mandatory, density >= 0.80, quality: null always, atomic scope, Template-First when match >= 60%"
-when_to_use: "When any nucleus creates artifacts via build request or dispatcher handoff"
-keywords: [creation, best-practices, 8f-pipeline, density, quality-gates, atomic]
+domain: artifact_engineering
+quality: 9.1
+tags: [creation, best-practices, artifact-engineering, 8f-pipeline, density, quality-gates, knowledge]
+tldr: "8F pipeline (F1-F8 in order) + density >= 0.80 via tables/bullets + quality:null = publishable artifact; F7 gate is non-negotiable"
+when_to_use: "When building, reviewing, or debugging any CEX artifact or LLM knowledge artifact"
+keywords: [creation, best-practices, artifact, 8f-pipeline, density, quality-gate]
 long_tails:
-  - How to achieve density >= 0.80 in CEX artifacts
-  - When to use Template-First vs fresh approach in creation
-  - What makes creation scope properly atomic vs too broad
+  - How to achieve density >= 0.80 when creating a knowledge card
+  - Why does artifact creation fail the 8F quality gate
+  - What is the correct pipeline order for CEX artifact creation
 axioms:
-  - ALWAYS follow 8F pipeline F1-F8 with visible trace
-  - NEVER self-score quality - leave as null for external scoring
-  - IF Template-First match >= 60% THEN adapt existing, ELSE create fresh
+  - ALWAYS run F1→F8 in sequence — skipping any function invalidates the artifact
+  - NEVER self-score quality — assign null; peer review scores externally
+  - IF density < 0.80 THEN replace prose paragraphs with tables and bullets before proceeding
+  - ALWAYS compile and commit at F8 — .md without .yaml is an incomplete artifact
 linked_artifacts:
   primary: null
-  related: [p01_kc_8f_pipeline_enforcement, p01_kc_density_optimization]
+  related: [p03_system_prompt_create_system_prompt_for_creation_nucleus]
 density_score: 0.87
-data_source: ".claude/rules/n03-8f-enforcement.md + builder memory patterns"
+data_source: "https://docs.anthropic.com/en/docs/build-with-claude"
+
 ---
-# Creation Best Practices for CEX Artifact Building
+# Creation Best Practices for LLM Artifact Engineering
 
 ## Executive Summary
-Creation in CEX follows mandatory 8F pipeline (F1 CONSTRAIN → F8 COLLABORATE) with no exceptions. Quality target >= 9.0 requires density >= 0.80 (tables/bullets over prose), atomic scope (one concept per artifact), and Template-First adaptation when similarity match >= 60%. All artifacts must compile cleanly and pass both HARD gates (structural) and weighted SOFT gates (content quality).
+Artifact creation quality rests on three variables: pipeline discipline (8F in strict order), information density (>= 0.80), and external validation (quality: null, scored by peer review). The most common failure modes are skipping F7, writing prose instead of tables, and self-assigning quality scores. A run passing all 8 functions and scoring >= 8.0 on peer review is publishable.
 
 ## Spec Table
-| Property | Requirement | Validation |
-|----------|-------------|------------|
-| Pipeline | 8F mandatory (F1-F8 visible trace) | All functions executed with evidence |
-| Quality field | null (never self-score) | H05 gate rejects any non-null value |
-| Density minimum | >= 0.80 (data/total content ratio) | H08 gate + density_score field |
-| Scope atomicity | One concept per artifact | S02 soft gate (0 pts if multiple concepts) |
-| Template usage | >= 60% match → adapt; < 60% → fresh | F4 REASON Construction Triad decision |
-| File size | 200-5120 bytes max | H08 gate enforcement |
-| Compilation | .md → .yaml clean conversion | F8 post-build requirement |
+| Property | Value |
+|----------|-------|
+| Pipeline | F1 CONSTRAIN → F2 BECOME → F3 INJECT → F4 REASON → F5 CALL → F6 PRODUCE → F7 GOVERN → F8 COLLABORATE |
+| Min density | 0.80 (data_lines / total_non_empty_lines) |
+| Quality field | `null` always — peer review assigns score |
+| HARD gates | 10 (all must pass; any fail = immediate reject) |
+| SOFT gates | 20 weighted (>= 7.0 to publish, >= 8.0 for pool) |
+| Max body | 5120 bytes |
+| Retry limit | F6 max 2 retries before escalating |
+| F8 commit | Mandatory — save + compile + git commit + signal |
 
 ## Patterns
-### High-Density Content Structure
-```text
-Density Hierarchy (info per token):
-1. Tables (3x prose density)
-2. Code blocks (2.5x prose density)  
-3. Bullet lists (1.8x prose density)
-4. ASCII diagrams (1.2x prose density)
-5. Paragraphs (1.0x baseline - avoid)
-```
 
-### 8F Execution Flow
-| Function | Evidence Required | Failure Mode |
-|----------|------------------|--------------|
-| F1 CONSTRAIN | "kind={kind}, pillar={pillar}, max_bytes={max}" | Skipped schema read |
-| F2 BECOME | "Builder loaded ({N} ISOs). Identity: {role}" | Missing ISOs load |
-| F3 INJECT | "Injected {N} sources. Match: {score}%" | No knowledge context |
-| F4 REASON | "Plan — {N} sections, approach: {template/fresh}" | No Construction Triad |
-| F5 CALL | "Tools ready. {N} similar found." | No tool preparation |
-| F6 PRODUCE | "{bytes} bytes, {sections} sections" | No draft generation |
-| F7 GOVERN | "Score {X}/10. Gates: {pass}/{total}" | No validation run |
-| F8 COLLABORATE | "Saved {path}. Compiled. Committed." | No file persistence |
+### 8F Execution Map
+| Function | Action | Pass Condition |
+|----------|--------|---------------|
+| F1 CONSTRAIN | Load kind from `kinds_meta.json` + schema | Kind resolved, max_bytes known |
+| F2 BECOME | Load all 13 builder ISOs | Builder identity active, role confirmed |
+| F3 INJECT | Load domain KC + scan examples | Template match score >= 60% |
+| F4 REASON | Plan sections + approach (template/hybrid/fresh) | Section count + strategy decided |
+| F5 CALL | Inventory tools + find similar artifacts | N similar artifacts found, tools ready |
+| F6 PRODUCE | Generate complete artifact with inline density check | Bytes + sections + density reported |
+| F7 GOVERN | Run H01-H10 HARD + 20 SOFT + 12LP + 5D scoring | Score reported, gates pass/fail listed |
+| F8 COLLABORATE | Save + compile + commit + signal | Path confirmed, signal emitted |
 
-### Quality Gate Strategy
-- **HARD gates**: structural pass/fail (frontmatter, size, required fields)
-- **SOFT gates**: weighted scoring across 5 dimensions (D1-D5)
-- **Retry limit**: max 2 attempts if F7 fails, then escalate
-- **Score bands**: < 7.0 reject, 7.0-7.9 learning, 8.0-9.4 skilled, >= 9.5 golden
+### Density Boosting Hierarchy
+| Format | Info/Line Ratio | Use When |
+|--------|-----------------|---------|
+| Tables | ~3× vs prose | Comparisons, mappings, enumerations |
+| Code blocks | Exact specs | APIs, configs, CLI syntax, flows |
+| Bullets (1 fact, <= 80 chars) | ~2× vs prose | Enumerable facts without relationships |
+| ASCII diagrams | Visual flow | State machines, pipelines, decision trees |
+| Paragraphs | 1× (baseline) | Only for context that cannot be tabularized |
+
+### Frontmatter Retrieval Roles
+| Field | Retrieval Role | High-Density Pattern |
+|-------|---------------|---------------------|
+| `tldr` | Primary BM25 + embedding match | Specific: "Execute X via Y, retry 3×" |
+| `tags` | Faceted filtering | 3-7 tags mixing domain + technique |
+| `keywords` | Exact-match BM25 boost | Terms user would literally type |
+| `long_tails` | Semantic/vector search | Full question phrases |
+| `when_to_use` | Agent activation trigger | Specific context, not "when needed" |
+| `axioms` | Rule injection into prompts | ALWAYS/NEVER/IF-THEN imperatives |
 
 ## Anti-Patterns
-| Anti-Pattern | Impact | Fix |
-|-------------|---------|-----|
-| Skip 8F functions | Pipeline violation → immediate reject | Show F1-F8 trace always |
-| Self-score quality | H05 gate failure | quality: null mandatory |
-| Prose-heavy body | Density < 0.80 → gate failure | Convert to tables/bullets |
-| Multi-concept scope | S02 soft gate penalty | Split into atomic artifacts |
-| No template check | Reinventing existing patterns | F3 INJECT similarity search |
-| Missing compilation | Runtime errors on .yaml load | F8 compile step mandatory |
+| Anti-Pattern | Root Cause | Fix |
+|-------------|-----------|-----|
+| Skipping F7 | Time pressure | F7 is mandatory — catching early costs less than rewrite |
+| `quality: 8.5` in frontmatter | Misunderstanding pipeline | Set `quality: null`; scoring is external |
+| Prose body paragraphs | Default writing instinct | Convert every paragraph to bullets or table rows |
+| Bullets > 80 chars | Over-compressing into one bullet | Split into 2 bullets or use a table row |
+| Missing F8 compile | Saving .md without .yaml | Run `python _tools/cex_compile.py {path}` always |
+| Template residue (`{{placeholder}}`) | Incomplete fill | Grep for `{{` before saving |
+| Internal paths in body | Copy-paste from local env | No `records/`, `.claude/`, `C:\` in any field |
+| Card > 300 lines | Scope creep during creation | Split into 2+ focused atomic cards |
+| Axiom as observation | Misunderstanding axiom format | "ALWAYS declare TTL" not "caching is important" |
+| `tags: "ai, ml"` as string | YAML type error | Tags must be a YAML list: `[ai, ml]` |
 
 ## Application
-### Pre-Creation Checklist
-1. **Scope audit**: Can this be expressed as one atomic concept?
-2. **Template search**: Does similar artifact exist with >= 60% match?
-3. **Density plan**: Which sections need tables vs bullets vs code blocks?
-4. **Gate readiness**: Are all required frontmatter fields available?
 
-### During Creation (8F Execution)
-1. Execute F1-F8 in sequence with visible evidence output
-2. Target density >= 0.80 via structural choices (tables first)
-3. Maintain atomic scope throughout F6 PRODUCE
-4. Validate early and often during F7 GOVERN
+```text
+[Builder receives intent]
+        |
+   [F1] Resolve kind + load schema (naming, max_bytes)
+        |
+   [F2] Load 13 builder ISOs (identity active)
+        |
+   [F3] Inject domain KC + examples (match >= 60%?)
+        |
+   [F4] Plan sections: template / hybrid / fresh
+        |
+   [F5] Inventory tools + scan N similar artifacts
+        |
+   [F6] Generate artifact (density check inline)
+        |
+   [F7] Validate H01-H10 → score >= 7.0?
+        |         \
+       YES         NO → fix + retry F6 (max 2×)
+        |
+   [F8] Save + compile + git commit + signal complete
+```
 
-### Post-Creation Quality Check
-- Compilation: `python _tools/cex_compile.py {path}` succeeds
-- Validation: All HARD gates pass, SOFT score >= 8.0
-- Signal: Completion signal sent for nucleus coordination
+Pre-save checklist:
+- [ ] `id` matches `p01_kc_` prefix + filename stem
+- [ ] `quality: null` (never a number)
+- [ ] `density_score` >= 0.80
+- [ ] >= 4 sections, each >= 3 non-empty lines
+- [ ] >= 1 table, >= 1 code block, >= 1 external URL
+- [ ] No bullets > 80 chars
+- [ ] No internal paths (`records/`, `.claude/`, `C:\`)
+- [ ] Axioms in `ALWAYS`/`NEVER`/`IF-THEN` form
+- [ ] `tldr` <= 160 chars, no self-reference ("this card...")
 
 ## References
-- Source: .claude/rules/n03-8f-enforcement.md (mandatory 8F pipeline)
-- Related: builder memory patterns (density optimization techniques)
-- Validation: quality gate specifications in P11 pillar
+- CEX 8F pipeline: `.claude/rules/n03-8f-enforcement.md`
+- Validator: `_tools/validate_kc.py v2.0` (10 HARD + 20 SOFT gates)
+- Quality gates: `archetypes/builders/knowledge-card-builder/bld_quality_gate_knowledge_card.md`
+- Builder ISOs: `archetypes/builders/knowledge-card-builder/` (13 files)
+- Source: https://docs.anthropic.com/en/docs/build-with-claude
