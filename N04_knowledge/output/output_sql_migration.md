@@ -70,6 +70,21 @@ python _tools/cex_compile.py --all
 python _tools/sql_export.py > migration.sql
 ```
 
+### Example Output
+```sql
+-- Migration: kc_batch_2026_04_01
+-- Generated: 2026-04-01T14:30:00Z
+-- KCs: 2
+
+INSERT INTO kcs (id, kind, pillar, domain, title, tldr, body, tags, density_score, quality)
+VALUES
+  ('kc_react_patterns', 'knowledge_card', 'P01', 'frontend', 'React Patterns', 'Common React patterns for components', '## Hook Pattern\nUseState for local state...', ARRAY['react','patterns','hooks'], 0.89, 8.5),
+  ('kc_sql_indexing', 'knowledge_card', 'P04', 'database', 'SQL Indexing', 'Database index optimization strategies', '## Index Types\nB-tree for equality...', ARRAY['sql','indexing','performance'], 0.91, 8.7)
+ON CONFLICT (id) DO UPDATE SET
+  body = EXCLUDED.body,
+  updated_at = now();
+```
+
 ## Validation
 
 | Check | SQL Query | Expected |
