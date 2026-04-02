@@ -50,3 +50,22 @@ CREATE INDEX IF NOT EXISTS idx_kcs_kind ON kcs(kind);
 CREATE INDEX IF NOT EXISTS idx_kcs_pillar ON kcs(pillar);
 CREATE INDEX IF NOT EXISTS idx_kcs_domain ON kcs(domain);
 ```
+
+## Usage
+
+| Variable | Source | Example |
+|----------|--------|---------|
+| `{{NAME}}` | Migration purpose | `"kc_batch_2026_04_01"` |
+| `{{DATE}}` | Current timestamp | `"2026-04-01T14:30:00Z"` |
+| `{{COUNT}}` | Number of KCs | `"15"` |
+| `{{ID}}` | KC filename | `"kc_react_patterns"` |
+| `{{KIND}}` | KC frontmatter | `"knowledge_card"` |
+| `{{PILLAR}}` | KC directory | `"P01"` |
+| `{{BODY}}` | Escaped KC content | `'## Pattern\nHook pattern...'` |
+| `{{TAGS}}` | Comma-separated | `'react','patterns','hooks'` |
+
+**Generate from compiled KCs:**
+```bash
+python _tools/cex_compile.py --all
+python _tools/sql_export.py > migration.sql
+```
