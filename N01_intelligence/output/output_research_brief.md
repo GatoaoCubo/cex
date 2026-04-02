@@ -44,6 +44,35 @@ density_score: 0.91
 - Language: {{LANGUAGE}}
 ```
 
+## Complete Example
+```markdown
+# Research Brief: SaaS Pricing Models in Fintech
+**Requested by**: N02_marketing | **Date**: 2026-04-01 | **Depth**: L2
+
+## Question
+What pricing strategies do fintech SaaS companies use for SMB customers, and how do they compare to our current model?
+
+## Scope
+- Geography: North America, UK
+- Timeframe: 2022-2026 data
+- Competitors: Stripe, Plaid, Dwolla, Mercury, Ramp
+
+## Constraints
+- Sources preferred: Company websites, SEC filings, industry reports
+- Sources excluded: Social media speculation
+- Max sources: 20
+- Deadline: 2026-04-03
+
+## Brand Context
+- Company: PayFlow Pro
+- Market: B2B payment processing
+- ICP: 10-500 employee companies
+
+## Expected Output
+- Format: 3-page summary with pricing comparison table
+- Language: English
+```
+
 ## Usage Guidelines
 
 | When to Use | When NOT to Use |
