@@ -39,3 +39,21 @@ density_score: 0.91
 | url | Yes | Full URL |
 | accessed | Yes | When we accessed it |
 | reliability | Yes | 1-5 scale (from source_quality_contract) |
+
+## Usage Guidelines
+
+| Use When | Don't Use When |
+|----------|----------------|
+| N01 research briefs | Academic papers (use APA) |
+| Competitive analysis | Internal docs (use file paths) |
+| Market research | Code repos (use commit refs) |
+| Trend reports | Books (use ISBN format) |
+
+## Reliability Scale
+| Score | Source Type | Examples |
+|-------|-------------|----------|
+| 5/5 | Peer-reviewed, official | Nature, .gov sites, company 10-Ks |
+| 4/5 | Reputable media, analysts | McKinsey, TechCrunch, Bloomberg |
+| 3/5 | Industry blogs, newsletters | a16z blog, Stratechery |
+| 2/5 | Social media, forums | Twitter, Reddit, LinkedIn |
+| 1/5 | Unverified, anonymous | Medium randos, comment sections |
