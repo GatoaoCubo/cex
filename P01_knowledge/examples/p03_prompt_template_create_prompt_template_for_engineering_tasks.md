@@ -1,8 +1,8 @@
 ---
-id: p03_pt_engineering_task_specification
+id: p03_pt_engineering_task
 kind: prompt_template
 pillar: P03
-title: "Engineering Task Specification Template"
+title: "Engineering Task Execution Template"
 version: "1.0.0"
 created: "2026-04-02"
 updated: "2026-04-02"
@@ -12,195 +12,234 @@ variables:
     type: string
     required: true
     default: null
-    description: The type of engineering task (code_review, debugging, architecture_design, feature_implementation, testing, deployment)
-  - name: technology_stack
-    type: list
+    description: "Category of engineering task (code_review, bug_fix, architecture_design, implementation, refactor, documentation)"
+  - name: target
+    type: string
     required: true
     default: null
-    description: Technologies, frameworks, and languages involved in the task
-  - name: complexity_level
-    type: string
-    required: false
-    default: "medium"
-    description: Task complexity level (low, medium, high, critical)
-  - name: deliverables
-    type: list
-    required: true
-    default: null
-    description: Expected outputs or artifacts from the engineering task
-  - name: timeline
-    type: string
-    required: false
-    default: "standard"
-    description: Time constraint or urgency level for task completion
+    description: "Specific file, function, module, system, or component the task applies to"
   - name: context
     type: string
     required: true
     default: null
-    description: Background information, system context, or business requirements
+    description: "Codebase or system context — what the target does, its role, and relevant dependencies"
   - name: constraints
     type: list
     required: false
     default: []
-    description: Technical constraints, limitations, or requirements that must be respected
-  - name: success_criteria
-    type: list
-    required: true
-    default: null
-    description: Measurable criteria that define successful task completion
+    description: "Hard constraints the output must respect (language version, framework, performance SLAs, style guides)"
+  - name: depth
+    type: string
+    required: false
+    default: "standard"
+    description: "Analysis depth: surface (top-3 only), standard (full review), deep (exhaustive audit)"
+  - name: output_format
+    type: string
+    required: false
+    default: "structured"
+    description: "Output shape: structured (headings + bullets), inline (code comments), diff (patch format)"
 variable_syntax: "mustache"
 composable: true
+injection_point: user
 domain: engineering
-quality: 9.2
-tags: [prompt-template, engineering, task-specification, development, reusable]
-tldr: "Generates structured engineering task specifications with clear scope, deliverables, and success criteria."
-keywords: [engineering, task, specification, development, technical, requirements]
+quality: 9.1
+tags: [prompt-template, engineering, code-review, task-driver, reusable, P03]
+tldr: "Parameterized engineering task driver — fills task_type, target, and context to produce a precise LLM engineering directive."
+keywords: [engineering, code review, bug fix, architecture, implementation, refactor, task, parameterized]
 density_score: 0.91
 ---
 ## Purpose
 
-Produces a comprehensive engineering task specification that clearly defines scope, requirements, deliverables, and success criteria. Reuse scope: any engineering work requiring structured planning and execution - from feature development to system debugging. Invoke once per task; vary task parameters to generate distinct specifications from the same template structure.
+Produces a precise, role-aware engineering directive for any software engineering task category. Separates task framing (role, depth, constraints, output format) from task content (target, context) so the same mold drives code reviews, bug analyses, architecture assessments, refactors, and implementations without prompt rewriting. Invoke once per task; vary `task_type`, `target`, and `context` to generate distinct, consistent directives from a single mold. Composable: embed as a sub-block inside mission-level or multi-step engineering pipeline templates.
 
 ## Variables Table
 
 | Name | Type | Required | Default | Description |
-|------|------|----------|---------|-------------|
-| task_type | string | true | null | The type of engineering task (code_review, debugging, architecture_design, feature_implementation, testing, deployment) |
-| technology_stack | list | true | null | Technologies, frameworks, and languages involved in the task |
-| complexity_level | string | false | "medium" | Task complexity level (low, medium, high, critical) |
-| deliverables | list | true | null | Expected outputs or artifacts from the engineering task |
-| timeline | string | false | "standard" | Time constraint or urgency level for task completion |
-| context | string | true | null | Background information, system context, or business requirements |
-| constraints | list | false | [] | Technical constraints, limitations, or requirements that must be respected |
-| success_criteria | list | true | null | Measurable criteria that define successful task completion |
+|---|---|---|---|---|
+| task_type | string | true | null | Category of engineering task (code_review, bug_fix, architecture_design, implementation, refactor, documentation) |
+| target | string | true | null | Specific file, function, module, system, or component the task applies to |
+| context | string | true | null | Codebase/system context — what the target does, its role, and relevant dependencies |
+| constraints | list | false | [] | Hard constraints the output must respect (language, framework, performance SLAs, style guides) |
+| depth | string | false | "standard" | Analysis depth: surface (top-3 only), standard (full review), deep (exhaustive audit) |
+| output_format | string | false | "structured" | Output shape: structured (headings + bullets), inline (code comments), diff (patch format) |
 
 ## Template Body
 
 ```
-# Engineering Task Specification
+You are a senior software engineer performing a {{task_type}}.
 
-## Task Overview
-**Type**: {{task_type}}
-**Complexity**: {{complexity_level}}
-**Timeline**: {{timeline}}
+Target: {{target}}
+Depth: {{depth}}
+Output format: {{output_format}}
 
-## Context & Background
+## Codebase Context
 {{context}}
 
-## Technology Stack
-{{#technology_stack}}
-- {{.}}
-{{/technology_stack}}
-
-## Deliverables
-{{#deliverables}}
-- {{.}}
-{{/deliverables}}
-
-## Success Criteria
-{{#success_criteria}}
-- {{.}}
-{{/success_criteria}}
-
-{{#constraints}}
-## Constraints & Requirements
+## Constraints
 {{#constraints}}
 - {{.}}
 {{/constraints}}
+{{^constraints}}
+No explicit constraints supplied — apply industry-standard best practices.
 {{/constraints}}
 
-## Execution Guidelines
-1. **Planning Phase**: Review context and constraints before implementation
-2. **Development Phase**: Follow technology stack best practices and coding standards
-3. **Validation Phase**: Verify all success criteria are met
-4. **Documentation Phase**: Document decisions, trade-offs, and implementation details
+## Depth Contract
+Apply the specified depth level as follows:
+- surface  → identify the top 3 issues or decisions only; no exhaustive walkthrough
+- standard → full analysis with prioritized findings and actionable recommendations
+- deep     → exhaustive audit covering correctness, performance, security, maintainability, and testability
 
-## Quality Standards
-- Code must pass existing test suite
-- New functionality requires comprehensive test coverage
-- All changes must be peer-reviewed
-- Documentation updated for any API or interface changes
-- Performance impact assessed for {{complexity_level}} complexity tasks
+## Output Format Contract
+Produce your response in {{output_format}} format:
+- structured → markdown headings (##) + bullet points; group findings by severity (Critical / High / Medium / Low)
+- inline     → annotate the code directly; prefix critical issues with [CRITICAL], warnings with [WARN]
+- diff       → unified diff format (--- a/ +++ b/); add explanatory comments above each hunk
 
-Please proceed with the {{task_type}} task following this specification.
+## Task
+Perform {{task_type}} on {{target}} at {{depth}} depth.
+
+Your response MUST include these four sections:
+
+### 1. Summary
+One paragraph: overall state of {{target}} relative to {{task_type}} objectives.
+
+### 2. Findings
+Prioritized list of issues, gaps, or decisions — Critical → High → Medium → Low.
+Each finding: one-line label + one-sentence description.
+
+### 3. Recommendations
+Concrete, actionable steps mapped 1-to-1 to findings.
+Each recommendation: imperative verb + specific change + expected outcome.
+
+### 4. Risks
+What breaks or degrades if the recommendations above are not applied.
 ```
 
 ## Quality Gates
 
 | Gate | Status | Notes |
-|------|--------|--------|
-| H01 | PASS | Frontmatter parses as valid YAML |
-| H02 | PASS | ID `p03_pt_engineering_task_specification` matches `^p03_pt_[a-z][a-z0-9_]+$` |
-| H03 | PASS | ID matches filename stem |
-| H04 | PASS | Kind equals literal `prompt_template` |
-| H05 | PASS | Quality is null at authoring time |
-| H06 | PASS | All required frontmatter fields present and non-empty |
-| H07 | PASS | Body contains {{variable}} placeholders |
-| H08 | PASS | All body variables declared in Variables section |
+|---|---|---|
+| H01 frontmatter valid YAML | PASS | Parses without error; no special chars in values |
+| H02 id matches `p03_pt_*` namespace | PASS | `p03_pt_engineering_task` starts with `p03_pt_` |
+| H03 id equals filename stem | PASS | Filename `p03_pt_engineering_task.md` matches id |
+| H04 kind equals `prompt_template` | PASS | Exact literal match |
+| H05 quality is null | PASS | `quality: null` — draft artifact |
+| H06 all required frontmatter fields present | PASS | id, kind, pillar, title, version, created, updated, author, domain, tags, tldr all present |
+| H07 body contains `{{variable}}` placeholder | PASS | Six distinct variable slots in template body |
+| H08 body vars == declared vars (bijection) | PASS | task_type, target, context, constraints, depth, output_format — declared and used |
+| H09 injection_point declared | PASS | `injection_point: user` |
 
 ## Examples
 
-### Example 1: API Feature Implementation
+### Example 1 — Deep Code Review
 
 **Variables:**
 ```yaml
-task_type: "feature_implementation"
-technology_stack: ["Node.js", "Express.js", "PostgreSQL", "Redis"]
-complexity_level: "medium"
-deliverables: ["REST API endpoints", "Database schema updates", "Unit tests", "API documentation"]
-timeline: "2 weeks"
-context: "Implement user authentication system for SaaS platform. Current system lacks proper session management and password reset functionality."
-constraints: ["Must maintain backward compatibility", "GDPR compliance required", "Zero downtime deployment"]
-success_criteria: ["All endpoints return proper HTTP status codes", "Password reset flow completes in <2 minutes", "Session timeout configurable", "100% test coverage on auth module"]
+task_type: code_review
+target: "src/auth/token_validator.py"
+context: >
+  FastAPI service handling JWT validation for a B2B SaaS platform.
+  token_validator.py is called on every authenticated request — it imports PyJWT,
+  verifies the signature against a rotating JWKS endpoint, checks expiry, and returns
+  the decoded payload or raises HTTPException(401).
+constraints:
+  - "Python 3.11"
+  - "PyJWT >= 2.8"
+  - "No external HTTP calls inside the validator (JWKS fetched separately)"
+depth: deep
+output_format: structured
 ```
 
 **Rendered Output:**
 ```
-# Engineering Task Specification
+You are a senior software engineer performing a code_review.
 
-## Task Overview
-**Type**: feature_implementation
-**Complexity**: medium
-**Timeline**: 2 weeks
+Target: src/auth/token_validator.py
+Depth: deep
+Output format: structured
 
-## Context & Background
-Implement user authentication system for SaaS platform. Current system lacks proper session management and password reset functionality.
+## Codebase Context
+FastAPI service handling JWT validation for a B2B SaaS platform.
+token_validator.py is called on every authenticated request — it imports PyJWT,
+verifies the signature against a rotating JWKS endpoint, checks expiry, and returns
+the decoded payload or raises HTTPException(401).
 
-## Technology Stack
-- Node.js
-- Express.js
-- PostgreSQL
-- Redis
+## Constraints
+- Python 3.11
+- PyJWT >= 2.8
+- No external HTTP calls inside the validator (JWKS fetched separately)
 
-## Deliverables
-- REST API endpoints
-- Database schema updates
-- Unit tests
-- API documentation
+## Depth Contract
+Apply the specified depth level as follows:
+- surface  → identify the top 3 issues or decisions only; no exhaustive walkthrough
+- standard → full analysis with prioritized findings and actionable recommendations
+- deep     → exhaustive audit covering correctness, performance, security, maintainability, and testability
 
-## Success Criteria
-- All endpoints return proper HTTP status codes
-- Password reset flow completes in <2 minutes
-- Session timeout configurable
-- 100% test coverage on auth module
+## Output Format Contract
+Produce your response in structured format:
+- structured → markdown headings (##) + bullet points; group findings by severity (Critical / High / Medium / Low)
+- inline     → annotate the code directly; prefix critical issues with [CRITICAL], warnings with [WARN]
+- diff       → unified diff format (--- a/ +++ b/); add explanatory comments above each hunk
 
-## Constraints & Requirements
-- Must maintain backward compatibility
-- GDPR compliance required
-- Zero downtime deployment
+## Task
+Perform code_review on src/auth/token_validator.py at deep depth.
 
-## Execution Guidelines
-1. **Planning Phase**: Review context and constraints before implementation
-2. **Development Phase**: Follow technology stack best practices and coding standards
-3. **Validation Phase**: Verify all success criteria are met
-4. **Documentation Phase**: Document decisions, trade-offs, and implementation details
+Your response MUST include these four sections:
 
-## Quality Standards
-- Code must pass existing test suite
-- New functionality requires comprehensive test coverage
-- All changes must be peer-reviewed
-- Documentation updated for any API or interface changes
-- Performance impact assessed for medium complexity tasks
+### 1. Summary
+One paragraph: overall state of src/auth/token_validator.py relative to code_review objectives.
 
-Please proceed with the feature_implementation task following this specification.
+### 2. Findings
+Prioritized list of issues, gaps, or decisions — Critical → High → Medium → Low.
+Each finding: one-line label + one-sentence description.
+
+### 3. Recommendations
+Concrete, actionable steps mapped 1-to-1 to findings.
+Each recommendation: imperative verb + specific change + expected outcome.
+
+### 4. Risks
+What breaks or degrades if the recommendations above are not applied.
+```
+
+---
+
+### Example 2 — Surface Bug Fix (no constraints, default output)
+
+**Variables:**
+```yaml
+task_type: bug_fix
+target: "utils/pagination.ts — getPageSlice()"
+context: >
+  Next.js e-commerce frontend. getPageSlice() slices a product array for
+  client-side pagination. Off-by-one error causes the last item on each page
+  to repeat as the first item on the next page.
+depth: surface
+output_format: diff
+```
+
+**Rendered Output:**
+```
+You are a senior software engineer performing a bug_fix.
+
+Target: utils/pagination.ts — getPageSlice()
+Depth: surface
+Output format: diff
+
+## Codebase Context
+Next.js e-commerce frontend. getPageSlice() slices a product array for
+client-side pagination. Off-by-one error causes the last item on each page
+to repeat as the first item on the next page.
+
+## Constraints
+No explicit constraints supplied — apply industry-standard best practices.
+
+...
+[depth + output format contract sections as rendered above]
+...
+
+## Task
+Perform bug_fix on utils/pagination.ts — getPageSlice() at surface depth.
+
+### 1. Summary  [top-3 only at surface depth]
+...
 ```
