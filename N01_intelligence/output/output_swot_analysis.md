@@ -39,3 +39,22 @@ density_score: 0.91
 - **ST** (use strengths to counter threats): {{STRATEGY}}
 - **WT** (minimize weaknesses, avoid threats): {{STRATEGY}}
 ```
+
+## Example Analysis
+
+| | Helpful | Harmful |
+|---|---------|---------|
+| **Internal** | **Strengths** | **Weaknesses** |
+| | S1: 50K email subscribers | W1: No mobile app |
+| | S2: 15 years domain expertise | W2: Limited social media presence |
+| | S3: High customer retention (85%) | W3: Small dev team (3 people) |
+| **External** | **Opportunities** | **Threats** |
+| | O1: AI integration trend | T1: New funded competitor launched |
+| | O2: Remote work adoption | T2: Economic downturn affecting budgets |
+| | O3: Partnership with Platform X | T3: Regulatory changes in EU |
+
+**Strategic Implications**:
+- **SO**: Leverage email list to promote AI-powered features for remote teams
+- **WO**: Build mobile app to capture mobile-first opportunities  
+- **ST**: Use retention rates as differentiator against new competitors
+- **WT**: Focus on core market, delay expansion until economy stabilizes
