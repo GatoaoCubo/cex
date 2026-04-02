@@ -1,4 +1,5 @@
 ---
+id: email_sequence_template
 kind: prompt_template
 pillar: P05
 title: Email Sequence Templates — Marketing Campaigns

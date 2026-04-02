@@ -1,4 +1,5 @@
 ---
+id: campaign_performance_memory
 kind: memory_summary
 pillar: P10
 title: Campaign Performance Memory

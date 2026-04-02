@@ -1,4 +1,5 @@
 ---
+id: n02_self_review_2026-04-02
 kind: context_doc
 nucleus: N02
 pillar: P09

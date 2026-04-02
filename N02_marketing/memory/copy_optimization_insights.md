@@ -1,4 +1,5 @@
 ---
+id: copy_optimization_insights
 kind: learning_record
 pillar: P10
 title: Copy Optimization Insights & Learning Records

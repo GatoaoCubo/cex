@@ -1,4 +1,5 @@
 ---
+id: ab_testing_framework
 kind: validation_schema
 pillar: P09
 title: A/B Testing Framework for Marketing Copy

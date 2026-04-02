@@ -1,4 +1,5 @@
 ---
+id: brand_voice_templates
 kind: prompt_template
 pillar: P03
 title: Brand Voice Templates — Tone & Messaging Calibration
