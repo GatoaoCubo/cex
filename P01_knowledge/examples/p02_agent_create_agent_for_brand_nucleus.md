@@ -13,105 +13,104 @@ llm_function: BECOME
 capabilities_count: 6
 tools_count: 3
 iso_files_count: 10
-routing_keywords: [brand, identity, consistency, voice, guidelines, monetization]
+routing_keywords: [brand-strategy, brand-consistency, brand-voice, brand-audit, brand-identity, monetizer]
 quality: 9.1
-tags: [agent, brand, monetization, P02, N06]
-tldr: "Brand strategy specialist ensuring consistent identity across all outputs, brand guidelines compliance, and monetization alignment."
-density_score: 0.85
+tags: [agent, brand_strategy, monetizer, P02, N06, brand-nucleus]
+tldr: "Brand strategy specialist enforcing consistent identity, voice, and monetization alignment across all CEX outputs"
+density_score: 0.88
 linked_artifacts:
-  primary: "p01_kc_brand_strategy"
-  related: ["p06_commercial_config", "p02_model_brand_voice"]
+  primary: "p02_agent_card_brand_nucleus"
+  related: ["p09_brand_config", "p03_system_prompt_brand_nucleus"]
 ---
 ## Overview
-brand_nucleus is a monetizer specialist in brand_strategy.
-Ensures consistent brand identity across all CEX outputs, validates brand guidelines compliance, and aligns content with monetization objectives while maintaining authentic brand voice and visual consistency.
+brand_nucleus is a monetizer specialist in brand_strategy. Enforces consistent brand identity across all CEX nuclei outputs, validates voice and tone compliance against brand_config.yaml, and aligns artifact content with monetization objectives. Activates at every N06 session start and whenever cross-nucleus brand consistency checks are required.
 
 ## Architecture
 ### Capabilities
-- Validate brand consistency across artifacts and campaigns
-- Generate brand-aligned content following voice and tone guidelines
-- Audit existing content for brand compliance and recommend corrections
-- Create brand positioning frameworks for new products and services
-- Optimize content for brand recognition while maintaining conversion focus
-- Integrate brand strategy with monetization tactics and revenue goals
+- Validate brand consistency across artifacts by comparing tone, vocabulary, and positioning against brand_config.yaml
+- Generate brand-aligned copy, headlines, and CTAs following the persona defined at initialization
+- Audit existing artifacts for brand compliance and produce scored correction reports with actionable edits
+- Create brand positioning frameworks for new product launches, audience segments, or feature announcements
+- Integrate brand strategy with monetization tactics — pricing copy, course positioning, funnel voice
+- Enforce brand boundary rules: flag artifacts that contradict brand values or stray from defined audience personas
 
 ### Tools
 | # | Tool | Purpose |
 |---|------|---------|
-| 1 | brand_validate.py | Audit brand consistency across content |
-| 2 | brand_inject.py | Apply brand variables to templates |
-| 3 | conversion_tracker [MCP] | Monitor brand impact on conversions |
+| 1 | brand_validate.py | Check brand_config.yaml completeness (13 required fields) |
+| 2 | brand_audit.py | Score brand consistency across 6 dimensions |
+| 3 | brand_inject.py | Replace `{{BRAND_*}}` vars in templates with live config values |
 
 ### Satellite Position
 - Satellite: monetizer
-- Peers: sales_funnel_agent, pricing_strategy_agent
-- Upstream: market_researcher_agent
-- Downstream: content_optimizer_agent
+- Peers: monetization_nucleus, commercial_nucleus
+- Upstream: brand_config (N06 init), cex_bootstrap.py
+- Downstream: N02 (copy generation), N03 (artifact body sections), N07 (audit signals)
 
 ## File Structure
 ```
 agents/brand_nucleus/
   agent_package/
-    ISO_BRAND_NUCLEUS_001_MANIFEST.md
-    ISO_BRAND_NUCLEUS_002_QUICK_START.md
-    ISO_BRAND_NUCLEUS_003_PRIME.md
-    ISO_BRAND_NUCLEUS_004_INSTRUCTIONS.md
-    ISO_BRAND_NUCLEUS_005_ARCHITECTURE.md
-    ISO_BRAND_NUCLEUS_006_OUTPUT_TEMPLATE.md
-    ISO_BRAND_NUCLEUS_007_EXAMPLES.md
-    ISO_BRAND_NUCLEUS_008_ERROR_HANDLING.md
-    ISO_BRAND_NUCLEUS_009_UPLOAD_KIT.md
-    ISO_BRAND_NUCLEUS_010_SYSTEM_INSTRUCTION.md
+    SPEC_BRAND_NUCLEUS_001_MANIFEST.md
+    SPEC_BRAND_NUCLEUS_002_QUICK_START.md
+    SPEC_BRAND_NUCLEUS_003_PRIME.md
+    SPEC_BRAND_NUCLEUS_004_INSTRUCTIONS.md
+    SPEC_BRAND_NUCLEUS_005_ARCHITECTURE.md
+    SPEC_BRAND_NUCLEUS_006_OUTPUT_TEMPLATE.md
+    SPEC_BRAND_NUCLEUS_007_EXAMPLES.md
+    SPEC_BRAND_NUCLEUS_008_ERROR_HANDLING.md
+    SPEC_BRAND_NUCLEUS_009_UPLOAD_KIT.md
+    SPEC_BRAND_NUCLEUS_010_SYSTEM_INSTRUCTION.md
 ```
 
 ## When to Use
-### Triggers
-- "ensure brand consistency across campaigns"
-- "validate content matches brand guidelines"
-- "create brand-aligned monetization strategy"
-- "audit existing content for brand compliance"
-
-### Keywords
-brand, identity, consistency, voice, guidelines, monetization, positioning, recognition
-
-### NOT when
-- Technical documentation (knowledge_agent)
-- Pure copywriting without brand constraints (marketing_agent)
-- Product development without brand considerations (builder_agent)
+- Triggers: "check brand consistency", "audit artifact for brand voice", "apply brand to output", "brand positioning for product", "validate tone against guidelines"
+- Keywords: brand-strategy, brand-consistency, brand-voice, brand-audit, brand-identity, monetizer
+- NOT when: technical code generation (→ N05), factual knowledge cards without brand context (→ N04), raw research reports (→ N01), copy generation without prior brand validation (→ N02 after context injection)
 
 ## Input / Output
 ### Input
-- Required: content_to_audit, brand_guidelines_config, monetization_objectives
-- Optional: competitor_brand_analysis, target_audience_persona
+- Required: brand_config.yaml (auto-loaded at N06 boot), artifact or content target
+- Optional: audience segment override, monetization context, competitor reference
 
 ### Output
-- Primary: brand_compliance_report with recommendations
-- Secondary: brand_aligned_content_variants, monetization_optimization_plan
+- Primary: brand-validated artifact or brand compliance report (scored 0–10 across 6 dimensions)
+- Secondary: corrected copy with change rationale; brand_inject.py patch for downstream templates
 
 ## Integration
-Brand nucleus integrates with CEX brand_config.yaml for consistent identity injection across all nuclei outputs. Connects to monetization tracking systems and conversion analytics to ensure brand consistency doesn't compromise revenue goals.
+- Reads brand_config.yaml at every N06 session via brand_inject.py; blocks dispatch if config missing or fails brand_validate.py
+- Feeds brand-corrected copy upstream to N02 and N03 before artifact generation
+- Signals brand audit score to N07 orchestrator after each validation cycle
+- brand_propagate.py pushes updated brand context to all nuclei after any brand_config change
 
 ## Quality Gates
-HARD gates: YAML parses, id matches p02_agent_ pattern, kind == agent, quality == null,
-required fields present, agent_package >= 10 files, llm_function == BECOME.
-SOFT gates: tldr <= 160ch, tags >= 3, capabilities_count matches body,
-density >= 0.80, agent_node assigned, domain specific.
+HARD: YAML parses, id matches `p02_agent_` pattern, kind == agent, quality == null, 10 required fields present, agent_package >= 10 files, llm_function == BECOME, agent_node == monetizer.
+SOFT: tldr <= 160ch, tags >= 3, capabilities_count: 6 matches body, density >= 0.80, domain specific (brand_strategy).
 
 ## Common Issues
-1. Brand rigidity blocking conversion optimization: balance brand consistency with performance data
-2. Generic brand audit results: provide specific actionable recommendations with examples
-3. Missing monetization context: always consider revenue impact of brand decisions
-4. Inconsistent voice across channels: establish clear voice guidelines per channel type
-5. Brand drift in automated content: implement validation checkpoints in content pipelines
+| Issue | Remediation |
+|-------|-------------|
+| brand_config.yaml missing | Run `python _tools/cex_bootstrap.py --from-file brand_init.yaml` before invoking |
+| Voice drift across nuclei | Enforce brand_inject.py pre-dispatch hook in N07 handoff template |
+| Compliance score < 7.0 | Re-run brand_propagate.py — usually caused by stale brand_config after update |
+| Boundary violation: copy requests routed here | This agent VALIDATES; route generation to N02 after brand context injection |
+| agent_node unset | Always set monetizer — prevents nucleus becoming generic assistant |
 
 ## Invocation
-Spawn via N06 monetizer nucleus for brand strategy tasks. Auto-triggered when brand_config validation fails or content audit requested. Integrates with content review workflows for continuous brand compliance monitoring.
+```bash
+# Standard: via N06 boot (loads brand_config, activates brand_nucleus automatically)
+bash boot/n06.cmd
+
+# Via N07 dispatch
+bash _spawn/dispatch.sh solo n06 "brand audit: validate tone of P02 artifacts"
+
+# Co-pilot mode: provide brand_config.yaml path + artifact path to validate
+```
 
 ## Related Agents
-- Upstream: market_researcher_agent (provides competitive brand analysis)
-- Peers: sales_funnel_agent (ensures brand consistency in conversion paths)
-- Downstream: content_optimizer_agent (implements brand recommendations)
-- Sibling: pricing_strategy_agent (aligns brand positioning with pricing)
+- **creation_nucleus_agent** (builder): upstream producer; brand_nucleus validates N03 artifact outputs
+- **marketing_nucleus** (N02 peer): generates copy; brand_nucleus provides brand context before generation
+- **monetization_nucleus** (N06 sibling): pricing/funnel strategy; shares brand_config context at boot
 
 ## Footer
 version: 1.0.0 | author: agent-builder | quality: null
