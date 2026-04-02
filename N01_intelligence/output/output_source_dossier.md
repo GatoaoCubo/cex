@@ -35,6 +35,28 @@ density_score: 0.91
 - Low (1-2): {{N}} sources (use with caution)
 ```
 
+## Example Output
+```markdown
+# Source Dossier: AI Safety Research
+**Curated**: 2026-03-31 | **Total Sources**: 8 | **Avg Reliability**: 4.1/5
+
+## Top Sources
+
+| # | Source | Type | Authority | Freshness | Reliability | URL |
+|---|--------|------|-----------|-----------|-------------|-----|
+| 1 | OpenAI Research | Industry | 5 | 2026-03-15 | 4.8 | research.openai.com |
+| 2 | Nature AI Ethics | Academic | 5 | 2026-02-28 | 4.9 | nature.com/ai-ethics |
+| 3 | AI Now Institute | Industry | 4 | 2026-03-10 | 4.2 | ainowinstitute.org |
+
+## Source Distribution
+- Web: 2 | Academic: 3 | Industry: 2 | Government: 1 | Social: 0
+
+## Reliability Summary
+- High (4-5): 6 sources
+- Medium (3): 2 sources
+- Low (1-2): 0 sources
+```
+
 ## Validation Checklist
 
 | Check | Criteria | Pass/Fail |
