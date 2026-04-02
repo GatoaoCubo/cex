@@ -547,8 +547,20 @@ def evolve_agent(filepath: Path, budget_tokens: int = 50000,
         print(f"[ERROR] Cannot import execute_prompt: {e}")
         return {"status": "error", "quality": 0, "rounds": 0, "tokens_used": 0}
 
-    # Baseline
-    baseline_quality = score_artifact(fp) or 0.0
+    # Baseline — use hybrid scoring for dimension breakdown
+    try:
+        from cex_score import score_hybrid
+        hybrid_result = score_hybrid(str(fp), use_cache=False, force_semantic=True, verbose=verbose)
+        baseline_quality = hybrid_result.get("score", 0.0)
+        dimension_breakdown = hybrid_result.get("dimensions", {})
+        weakest_dim = hybrid_result.get("weakest", "")
+        dim_suggestion = hybrid_result.get("suggestion", "")
+    except Exception:
+        baseline_quality = score_artifact(fp) or 0.0
+        dimension_breakdown = {}
+        weakest_dim = ""
+        dim_suggestion = ""
+
     baseline_density = compute_density(fp)
     strategy_hints = _load_strategy_hints()
     tokens_used = 0
@@ -562,12 +574,15 @@ def evolve_agent(filepath: Path, budget_tokens: int = 50000,
 
     if verbose:
         print(f"\n{'='*60}")
-        print(f"[AGENT MODE via SDK] AutoResearch")
+        print(f"[AGENT MODE via SDK] AutoResearch + Hybrid Scoring")
         print(f"  Target:   {fp}")
         print(f"  Baseline: {baseline_quality}")
         print(f"  Target:   {target}")
         print(f"  Budget:   {budget_tokens:,} tokens")
         print(f"  Rounds:   max {max_rounds}")
+        if weakest_dim:
+            print(f"  Weakest:  {weakest_dim}")
+            print(f"  Fix hint: {dim_suggestion[:80]}")
         print(f"{'='*60}")
 
     rounds_run = 0
@@ -593,11 +608,26 @@ def evolve_agent(filepath: Path, budget_tokens: int = 50000,
             history_lines = [f"  R{e['round']}: {e['status']} ({e['description']})" for e in recent]
             history_summary = f"\n\nExperiment history (don't repeat failed ideas):\n" + "\n".join(history_lines)
 
+        # Build dimension breakdown section (GDP D04)
+        dim_section = ""
+        if dimension_breakdown:
+            dim_lines = []
+            for dim_id, dim_info in sorted(dimension_breakdown.items()):
+                desc = dim_info.get("description", dim_id) if isinstance(dim_info, dict) else dim_id
+                h_score = dim_info.get("heuristic", "?") if isinstance(dim_info, dict) else "?"
+                s_score = dim_info.get("semantic", "?") if isinstance(dim_info, dict) else dim_info
+                marker = " ← FIX THIS" if str(dim_id) == str(weakest_dim) else ""
+                dim_lines.append(f"  {dim_id}: {h_score}/10 (heuristic) | {s_score}/10 (semantic) — {desc}{marker}")
+            dim_section = "\n## Dimension Scores (focus on lowest)\n" + "\n".join(dim_lines)
+            if dim_suggestion:
+                dim_section += f"\n\nPRIORITY FIX: {dim_suggestion}"
+
         prompt = f"""You are an autonomous researcher improving a markdown artifact.
 Your job: suggest ONE specific improvement and return the COMPLETE modified file.
 
 ## Current artifact ({fp.name})
 Score: {best_quality}/10 | Density: {density} | Target: {target}
+{dim_section}
 
 ```markdown
 {content}
@@ -612,10 +642,10 @@ Score: {best_quality}/10 | Density: {density} | Target: {target}
 3. Keep all YAML frontmatter fields (don't remove any)
 4. The `kind:` field must NOT change
 5. Stay between 800-4096 bytes for the total file
-6. Focus on: density (tables > prose), structure (## headings), actionability (examples, anti-patterns)
+6. Focus on the WEAKEST dimension shown above. If none shown, focus on: density (tables > prose), actionability (examples, anti-patterns), insight depth (non-obvious knowledge)
 
 ## Your response format
-First line: HYPOTHESIS: <one-line description of what you're changing>
+First line: HYPOTHESIS: <one-line description of what you're changing and which dimension it targets>
 Then a blank line, then the COMPLETE file content (including --- frontmatter ---).
 Nothing else."""
 
@@ -665,12 +695,23 @@ Nothing else."""
             experiment_log.append({"round": round_num, "status": "crash", "description": hypothesis})
             continue
 
-        # Score (immutable metric)
+        # Score (hybrid: structural + rubric + semantic)
         new_density = compute_density(fp)
-        new_quality = score_artifact(fp) or best_quality
+        try:
+            from cex_score import score_hybrid
+            hr = score_hybrid(str(fp), use_cache=False, verbose=False)
+            new_quality = hr.get("score", 0.0)
+            # Update dimension breakdown for next round's prompt
+            dimension_breakdown = hr.get("dimensions", dimension_breakdown)
+            weakest_dim = hr.get("weakest", weakest_dim)
+            dim_suggestion = hr.get("suggestion", dim_suggestion)
+        except Exception:
+            new_quality = score_artifact(fp) or best_quality
 
         if verbose:
             print(f"  Result: quality={new_quality}, density={new_density}")
+            if weakest_dim:
+                print(f"  Weakest: {weakest_dim} | {dim_suggestion[:60]}")
 
         # Keep or discard
         if new_quality > best_quality:

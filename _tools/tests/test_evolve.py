@@ -399,7 +399,14 @@ class TestEvolveAgent:
     def test_skips_already_at_target(self, mock_score, mock_get_ep, sample_artifact):
         """Agent mode skips files already at target score."""
         mock_get_ep.return_value = MagicMock()  # import succeeds but never called
-        result = evolve_agent(sample_artifact, target=9.0, verbose=False)
+        # Mock score_hybrid to return a proper dict (imported inside evolve_agent)
+        hybrid_result = {
+            "score": 9.5, "structural": 9.5, "rubric": 9.5, "semantic": 9.5,
+            "dimensions": {}, "weakest": "", "suggestion": "", "mode": "full",
+            "cached": False, "notes": []
+        }
+        with patch.dict("sys.modules", {"cex_score": MagicMock(score_hybrid=MagicMock(return_value=hybrid_result))}):
+            result = evolve_agent(sample_artifact, target=9.0, verbose=False)
         assert result["status"] == "skip"
         assert result["tokens_used"] == 0
         # execute_prompt itself should never be called (the returned function)
@@ -412,12 +419,16 @@ class TestEvolveAgent:
     def test_keep_on_improvement(self, mock_get_ep, mock_score, mock_validate,
                                   mock_commit, sample_artifact):
         """Agent mode keeps changes that improve score."""
-        mock_score.side_effect = [7.0, 8.5]  # baseline=7, after=8.5
+        # score_artifact called for: hybrid fallback baseline + post-round scoring
+        mock_score.side_effect = [7.0, 8.5, 8.5, 8.5, 8.5]
         mock_ep = MagicMock(return_value="HYPOTHESIS: added examples\n\n---\nid: test\nkind: schema\n---\n# Better")
         mock_get_ep.return_value = mock_ep
 
-        result = evolve_agent(sample_artifact, target=9.0, max_rounds=1,
-                              budget_tokens=100000, verbose=False)
+        # Block score_hybrid import so it falls back to score_artifact
+        import cex_score
+        with patch.object(cex_score, 'score_hybrid', side_effect=ImportError("test")):
+            result = evolve_agent(sample_artifact, target=9.0, max_rounds=1,
+                                  budget_tokens=100000, verbose=False)
         assert result["quality"] == 8.5
         assert result["tokens_used"] > 0
         mock_commit.assert_called_once()
@@ -429,12 +440,14 @@ class TestEvolveAgent:
     def test_discard_on_no_improvement(self, mock_get_ep, mock_score, mock_validate,
                                        mock_restore, sample_artifact):
         """Agent mode discards changes that don't improve score."""
-        mock_score.side_effect = [7.0, 6.5]  # baseline=7, after=6.5 (worse)
+        mock_score.side_effect = [7.0, 6.5, 6.5, 6.5]
         mock_ep = MagicMock(return_value="HYPOTHESIS: tried something\n\n---\nid: test\n---\n# Worse")
         mock_get_ep.return_value = mock_ep
 
-        result = evolve_agent(sample_artifact, target=9.0, max_rounds=1,
-                              budget_tokens=100000, verbose=False)
+        import cex_score
+        with patch.object(cex_score, 'score_hybrid', side_effect=ImportError("test")):
+            result = evolve_agent(sample_artifact, target=9.0, max_rounds=1,
+                                  budget_tokens=100000, verbose=False)
         assert result["quality"] == 7.0  # stays at baseline
         mock_restore.assert_called()
 
@@ -443,13 +456,13 @@ class TestEvolveAgent:
     @patch("cex_evolve._get_execute_prompt")
     def test_budget_stops_loop(self, mock_get_ep, mock_score, mock_validate, sample_artifact):
         """Agent mode stops when budget is exhausted."""
-        # Response is ~50 chars → estimated ~12 tokens. Prompt is ~1000 chars → ~250 tokens.
-        # Total per round ≈ 262 tokens. Budget=100 → first round uses budget, second check stops.
         mock_ep = MagicMock(return_value="HYPOTHESIS: small change\n\n---\nid: x\n---\n# X")
         mock_get_ep.return_value = mock_ep
 
-        result = evolve_agent(sample_artifact, target=9.0, max_rounds=100,
-                              budget_tokens=100, verbose=False)
+        import cex_score
+        with patch.object(cex_score, 'score_hybrid', side_effect=ImportError("test")):
+            result = evolve_agent(sample_artifact, target=9.0, max_rounds=100,
+                                  budget_tokens=100, verbose=False)
         # Should stop very quickly (1-2 rounds max before budget exhausted)
         assert result["rounds"] <= 2
 
