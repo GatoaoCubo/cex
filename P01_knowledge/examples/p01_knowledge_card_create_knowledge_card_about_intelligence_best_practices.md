@@ -8,7 +8,7 @@ created: "2026-04-01"
 updated: "2026-04-01"
 author: "builder"
 domain: intelligence_research
-quality: 0.0
+quality: 9.1
 tags: [intelligence, research, analysis, osint, investigation, methodology, knowledge]
 tldr: "Intelligence gathering requires 5-source minimum, 72-hour collection cycles, structured analysis with ACH methodology, and confidence scoring 0.0-1.0"
 when_to_use: "When conducting research requiring verified facts, competitive analysis, or evidence-based decision making"
