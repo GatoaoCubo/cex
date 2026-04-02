@@ -38,3 +38,30 @@ density_score: 0.90
 - BRAND_VOICE_HUMOR: 2
 - BRAND_VOICE_TONE: sofisticado-acolhedor, informativo sem ser técnico demais, minimalista e direto
 - BRAND_VOICE_WARMTH: 4
+
+## Strategic Voice Application Guidelines
+
+### When to Emphasize WARMTH (4/5)
+- **New customer onboarding**: Lead with empathy and understanding
+- **Problem-solving content**: Address tutor concerns with care
+- **Community building**: Foster connection and belonging
+- **Educational content**: Create safe learning environment
+
+### When to Emphasize AUTHORITY (3/5)
+- **Product benefits**: Demonstrate expertise without being cold
+- **Scientific backing**: Present research-based solutions
+- **Protocol instructions**: Clear, confident guidance (Ro's protocols)
+- **Trust building**: Establish credibility with balanced confidence
+
+### Customer Segment Voice Mix
+| Segment | Warmth Focus | Authority Focus | Scenario |
+|---------|--------------|-----------------|----------|
+| New cat owners | High (4-5) | Moderate (3) | Overwhelmed, need reassurance |
+| Experienced tutors | Moderate (3-4) | Higher (3-4) | Want expertise, less hand-holding |
+| Problem solving | High (4) | High (3-4) | Stressed, need both comfort + solutions |
+| Purchase decisions | Moderate (3) | High (3-4) | Need confidence in quality |
+
+### Voice Balance Anti-Patterns
+- **Too warm + low authority**: Sounds unprofessional, undermines trust
+- **Too formal + low warmth**: Cold pet store vibe, contradicts caregiver archetype
+- **High enthusiasm**: Overpowers sophistication, sounds like generic pet marketing
