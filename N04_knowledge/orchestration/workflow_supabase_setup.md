@@ -23,6 +23,15 @@ density_score: 0.90
 ## Purpose
 End-to-end workflow for N04 to set up a complete Supabase data layer from a company config YAML. Produces migration SQL, RLS policies, and module configs.
 
+## Anti-patterns (When NOT to Use)
+| Scenario | Why Not | Use Instead |
+|----------|---------|-------------|
+| Existing Supabase project with data | Risk data loss from schema conflicts | Manual migration workflow |
+| Single-tenant app (no org_id) | RLS adds unnecessary complexity | Simple schema without RLS |
+| Prototype/MVP with <10 tables | Overhead exceeds benefit | Direct Supabase dashboard setup |
+| Non-standard auth (not JWT) | RLS policies assume JWT claims | Custom auth + manual policies |
+| Serverless-only (no edge functions) | Scaffolds unused functions | Skip steps 5-6, use API only |
+
 ## Steps
 
 ### Step 1: Config Intake [N04]
