@@ -1,0 +1,84 @@
+---
+id: p01_kc_source_credibility_scoring_frameworks
+kind: knowledge_card
+pillar: P01
+title: "Source Credibility Scoring Frameworks for Information Verification"
+version: "1.0.0"
+created: "2026-04-02"
+updated: "2026-04-02"
+author: "knowledge-card-builder"
+domain: information_verification
+quality: 0.0
+tags: [credibility, source-evaluation, misinformation, fact-checking, trust-score, information-quality]
+tldr: "Quantitative frameworks for scoring source reliability using authority metrics, bias indicators, accuracy history, and transparency factors"
+when_to_use: "When evaluating information sources for research, journalism, or automated content curation systems"
+keywords: [credibility-score, source-reliability, fact-checking, misinformation-detection]
+long_tails:
+  - How to calculate source authority score for news websites
+  - Automated credibility scoring using domain expertise metrics
+  - Trust indicators for social media information verification
+axioms:
+  - ALWAYS weight recent accuracy performance higher than historical reputation
+  - NEVER rely on single credibility metric without cross-validation
+  - IF source lacks transparency indicators THEN apply 30% credibility penalty
+linked_artifacts:
+  primary: null
+  related: [p01_kc_misinformation_detection, p01_kc_fact_checking_automation]
+density_score: 0.87
+data_source: "https://www.poynter.org/ifcn-fact-checkers-code-of-principles/"
+---
+
+# Source Credibility Scoring Frameworks for Information Verification
+
+## Quick Reference
+```yaml
+topic: source_credibility_scoring
+scope: Information verification systems and fact-checking platforms
+owner: knowledge-card-builder
+criticality: high
+```
+
+## Key Concepts
+- **Authority Score**: Domain expertise + publication track record (0-100 scale)
+- **Transparency Index**: Editorial policies + funding disclosure + correction practices (0-1.0 scale)
+- **Accuracy Rate**: Verified claims / total assessable claims over 12-month window
+- **Bias Coefficient**: Left-right political lean (-1.0 to +1.0) + sensationalism factor (0-1.0)
+- **Source Triangulation**: Cross-validation with 3+ independent high-credibility sources
+- **Temporal Decay**: Recent performance weighted 3x higher than 2+ year old data
+
+## Strategy Phases
+1. **Baseline Assessment**: Domain authority + publication history + editorial standards (40% weight)
+2. **Performance Tracking**: Accuracy rate over rolling 12-month window (35% weight)
+3. **Transparency Audit**: Funding disclosure + correction policy + bias declaration (15% weight)
+4. **Cross-Validation**: Source consensus + expert review + fact-checker alignment (10% weight)
+5. **Dynamic Adjustment**: Real-time updates based on new accuracy data + community feedback
+
+## Golden Rules
+- WEIGHT recent accuracy (6 months) 3x higher than historical performance
+- PENALIZE sources without transparent funding disclosure by 30%
+- REQUIRE minimum 20 fact-checkable claims before establishing baseline score
+- CROSS-VALIDATE disputed claims with 3+ independent authoritative sources
+- UPDATE scores monthly for active sources, quarterly for dormant sources
+
+## Flow
+```text
+[Source Claim] -> [Authority Check] -> [Accuracy History] -> [Bias Analysis]
+                                                                   |
+[Transparency Audit] -> [Cross-Validation] -> [Score Calculation] -> [Credibility Rating]
+                                                   |
+                               [0-30: Low | 31-70: Medium | 71-100: High]
+```
+
+## Comparison
+| Framework | Authority Weight | Accuracy Weight | Transparency Weight | Update Frequency |
+|-----------|------------------|------------------|---------------------|------------------|
+| IFCN Code | 25% | 40% | 25% | Manual review |
+| NewsGuard | 30% | 35% | 20% | Monthly |
+| AllSides | 20% | 30% | 15% | Quarterly |
+| Media Bias/Fact Check | 35% | 45% | 10% | Bi-weekly |
+| Academic CRAAP | 40% | 30% | 20% | Static |
+
+## References
+- IFCN Fact-Checkers' Code of Principles: https://www.poynter.org/ifcn-fact-checkers-code-of-principles/
+- NewsGuard Credibility Scoring: https://www.newsguardtech.com/ratings/rating-process-criteria/
+- Related: p01_kc_misinformation_detection (automated detection patterns)
