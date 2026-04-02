@@ -32,3 +32,27 @@ This document defines the standard vector embedding model and chunking strategy 
     1.  **Contextual Richness**: Chunks must be large enough to contain complete semantic units (paragraphs, concepts).
     2.  **Vector Specificity**: Chunks must be small enough so that the resulting vector accurately represents a specific piece of information.
 - The 64-token overlap ensures that semantic context is not lost at the boundaries between chunks, improving the retriever's ability to find relevant passages that span across chunk divisions.
+
+## Usage Guidelines
+
+**When to Use:**
+- Research papers and academic documents (optimal for technical content)
+- Market intelligence reports (handles domain-specific terminology)
+- Competitor analysis documents (preserves comparative context)
+- Long-form industry whitepapers (maintains semantic coherence)
+
+**When NOT to Use:**
+- Real-time data feeds (embedding latency unsuitable)
+- Documents under 200 tokens (overhead exceeds benefit)
+- Highly structured data like spreadsheets (use database indexing instead)
+- Code repositories (use specialized code embeddings)
+
+**Implementation Example:**
+```python
+config = {
+    "model": "text-embedding-004",
+    "chunk_size": 512,
+    "chunk_overlap": 64,
+    "max_retries": 3
+}
+```
