@@ -8,7 +8,7 @@ created: "2026-04-01"
 updated: "2026-04-01"
 author: "builder"
 domain: brand_management
-quality: 0.0
+quality: 9.1
 tags: [brand-management, consistency, identity, voice, visual-design, knowledge]
 tldr: "Brand consistency requires 90%+ visual compliance, 3-second brand recognition, unified voice across 12+ touchpoints, and quarterly brand health scoring."
 when_to_use: "When establishing brand guidelines, ensuring consistency across teams, or measuring brand effectiveness"
