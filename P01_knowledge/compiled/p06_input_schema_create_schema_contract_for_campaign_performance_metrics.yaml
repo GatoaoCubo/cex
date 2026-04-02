@@ -33,7 +33,7 @@ coercion:
 examples: '{"campaign_id": "camp_002", "metric_name": "conversion_rate", "time_period": {"start_date": "2026-03-15", "end_date":
   "2026-03-31"}, "metric_value": 4.2, "filters": {"channel": "email", "audience_segment": "premium"}}'
 domain: marketing-analytics
-quality: 8.9
+quality: 9.1
 tags:
 - input-schema
 - campaign-metrics

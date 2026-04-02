@@ -49,7 +49,7 @@ examples: "Full input:\n{\n  \"brand_name\": \"Acme Labs\",\n  \"tagline\": \"Bu
   \ fields only):\n{\n  \"brand_name\": \"FlowCo\",\n  \"tagline\": \"Your growth, automated\",\n  \"mission\": \"Automate\
   \ marketing workflows so founders focus on product.\",\n  \"values\": [\"clarity\", \"growth\", \"automation\"]\n}"
 domain: brand-configuration
-quality: null
+quality: 9.1
 tags:
 - input-schema
 - brand-configuration

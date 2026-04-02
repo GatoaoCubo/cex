@@ -17,7 +17,7 @@ safety_level: standard
 tools_listed: true
 output_format_type: markdown
 domain: software_engineering
-quality: null
+quality: 9.0
 tags:
 - system_prompt
 - engineering

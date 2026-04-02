@@ -16,7 +16,7 @@ safety_level: standard
 tools_listed: false
 output_format_type: markdown
 domain: marketing
-quality: null
+quality: 9.0
 tags:
 - system_prompt
 - marketing

@@ -19,7 +19,7 @@ routing_keywords:
 - kind-production
 - creation-nucleus
 - build
-quality: null
+quality: 9.2
 tags:
 - agent
 - artifact_creation

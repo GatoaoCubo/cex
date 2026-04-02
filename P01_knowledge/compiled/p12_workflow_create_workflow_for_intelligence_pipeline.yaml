@@ -26,7 +26,7 @@ spawn_configs:
 - p12_spawn_n01_solo_research
 - p12_spawn_n04_solo_analysis
 domain: intelligence
-quality: null
+quality: 9.0
 tags:
 - workflow
 - intelligence

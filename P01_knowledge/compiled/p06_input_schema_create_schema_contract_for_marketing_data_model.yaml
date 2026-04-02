@@ -49,7 +49,7 @@ examples: "{\n  \"campaign_name\": \"brand_awareness_q2\",\n  \"brand_name\": \"
   ],\n  \"budget\": null,\n  \"tone\": \"casual\",\n  \"start_date\": null,\n  \"end_date\": null,\n  \"kpis\": [],\n  \"\
   content_formats\": [\"text\"],\n  \"geo_targets\": []\n}"
 domain: marketing
-quality: null
+quality: 9.1
 tags:
 - input-schema
 - marketing

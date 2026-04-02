@@ -5,7 +5,7 @@ pillar: P02
 nucleus: N03
 version: 1.0.0
 status: active
-quality: null
+quality: 9.0
 tags:
 - agent_card
 - engineering

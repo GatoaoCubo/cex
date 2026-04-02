@@ -27,7 +27,7 @@ spawn_configs:
 - p12_spawn_n02_marketing
 - p12_spawn_stella_consolidate
 domain: marketing
-quality: null
+quality: 9.0
 tags:
 - workflow
 - marketing

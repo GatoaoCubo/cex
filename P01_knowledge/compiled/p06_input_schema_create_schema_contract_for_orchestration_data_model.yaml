@@ -43,7 +43,7 @@ examples: "{\n  \"mission\": \"Full brand launch — research + copy + artifacts
   \ 60, \"allow_retry\": true},\n  \"decision_manifest_path\": \".cex/runtime/decisions/decision_manifest.yaml\",\n  \"signal_on_complete\"\
   : true,\n  \"dry_run\": false\n}"
 domain: orchestration
-quality: null
+quality: 9.1
 tags:
 - input-schema
 - orchestration

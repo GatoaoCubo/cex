@@ -43,7 +43,7 @@ coercion:
 examples: "{\n  \"model_name\": \"brand_voice_guidelines\",\n  \"domain\": \"marketing\",\n  \"kind\": \"knowledge_card\"\
   ,\n  \"description\": \"Brand voice and tone guidelines for written communication across channels\"\n}"
 domain: knowledge-management
-quality: null
+quality: 9.1
 tags:
 - input-schema
 - knowledge-data-model

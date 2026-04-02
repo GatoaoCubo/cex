@@ -44,7 +44,7 @@ examples: "{\n  \"model_name\": \"ai_trends_2026\",\n  \"domain\": \"trend_analy
   technique\", \"organization\"],\n  \"time_horizon\": \"historical\",\n  \"confidence_threshold\": 0.6,\n  \"output_format\"\
   : \"hybrid\"\n}"
 domain: intelligence-data-modeling
-quality: null
+quality: 9.1
 tags:
 - input-schema
 - intelligence

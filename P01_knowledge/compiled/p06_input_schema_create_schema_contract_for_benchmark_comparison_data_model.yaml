@@ -49,7 +49,7 @@ examples: "{\n  \"benchmark_name\": \"mmlu_5shot\",\n  \"baseline_metric\": 0.71
   : 0.88\n}\nFailures: `baseline_metric` coercion fails (non-numeric string); `metric_type` missing → error: \"metric_type\
   \ is required\"."
 domain: benchmark-analysis
-quality: null
+quality: 9.1
 tags:
 - input-schema
 - benchmark-comparison

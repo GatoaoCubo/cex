@@ -41,7 +41,7 @@ variable_syntax: mustache
 composable: true
 injection_point: user
 domain: engineering
-quality: null
+quality: 9.1
 tags:
 - prompt-template
 - engineering

@@ -16,7 +16,7 @@ safety_level: standard
 tools_listed: false
 output_format_type: markdown
 domain: brand_management
-quality: null
+quality: 9.0
 tags:
 - system_prompt
 - brand_management

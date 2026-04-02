@@ -80,7 +80,7 @@ flags:
 - --context=1m
 - --research-mode
 domain: research_intelligence
-quality: 8.9
+quality: 9.0
 tags:
 - agent_card
 - intelligence

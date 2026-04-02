@@ -27,7 +27,7 @@ spawn_configs:
 - p12_spawn_reviewer_solo_review
 - p12_spawn_deployer_solo_deploy
 domain: engineering
-quality: null
+quality: 9.0
 tags:
 - workflow
 - engineering
