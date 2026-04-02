@@ -15,6 +15,20 @@ density_score: 0.92
 
 # Output: Executive Summary
 
+## Usage Guidelines
+
+| Do | Don't | Why |
+|---|---|---|
+| Lead with TL;DR impact | Start with background | Executives read top-down |
+| Quantify findings (%, $, time) | Use vague terms ("significant") | Numbers drive decisions |
+| Limit to 3 key findings | List 5+ findings | Cognitive overload kills action |
+| Include confidence levels | Present everything as certain | Risk assessment matters |
+| Use effort sizing (S/M/L) | Skip implementation reality | Resource allocation critical |
+
+**When to use**: Post-analysis synthesis for C-level, board presentations, funding requests
+**Length target**: 1 page (500-800 words max)
+**Timing**: After research complete, before stakeholder meetings
+
 ## Template
 ```markdown
 # Executive Summary: {{TOPIC}}
