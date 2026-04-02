@@ -55,3 +55,17 @@ density_score: {{0.85-1.0}}
 ## CEX Integration
 - {{how this KC connects to the system}}
 ```
+
+## Template Population Guide
+
+| Field | Rules | Examples |
+|-------|-------|----------|
+| `type` | kind\|domain\|platform\|infrastructure | `react`, `authentication`, `aws`, `database` |
+| `domain` | Business area, lowercase | `web-development`, `data-science`, `devops` |
+| `tldr` | 20-200 chars, actionable | `React hooks for state management` |
+| `when_to_use` | Specific context triggers | `Complex state logic beyond useState` |
+| `keywords` | 3-5 searchable terms | `[react, hooks, state, useReducer]` |
+| Core Concept | 1-3 paragraphs max | Focus on what/why, not how-to |
+| Key Data | Always use tables | Commands, APIs, configs, metrics |
+| Anti-Patterns | Common mistakes + why wrong | `Don't useEffect for derived state` |
+| CEX Integration | Link to other artifacts | `See agent_react_helper.md` |
