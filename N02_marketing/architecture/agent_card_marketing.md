@@ -48,6 +48,7 @@ domain: visual_frontend_engineering_and_copywriting
 quality: 8.9
 tags: [agent_card, visual-frontend, marketing, N02, tailwind, html, copywriting, sonnet]
 tldr: N02 deployment spec — claude-sonnet-4-6 (+opus fallback) on Anthropic Max, browser MCP, specializes in HTML/CSS generation AND conversion copy.
+density_score: 1.0
 ---
 
 ## Role
