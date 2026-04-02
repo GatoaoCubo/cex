@@ -72,3 +72,15 @@ Manage the Supabase database: KC tables, embedding vectors, metadata, search ind
 | 10 | Freshness Monitor | Staleness alerts (30/60/90 day) |
 | 11 | Cross-Nucleus Injection | Deliver KC context to N01-N07 |
 | 12 | RAG Configuration | Pipeline tuning, retrieval optimization |
+
+## Usage Patterns
+
+| Trigger | Example | Action | Don't Use For |
+|---------|---------|--------|---------------|
+| "Create KC for..." | "KC for React hooks" | Generate structured KC with examples | One-off questions |
+| "Export training data" | "JSONL for fine-tuning GPT on CEX" | Format KCs as instruction/output pairs | Real-time inference |
+| "Update embeddings" | "Re-index after 50 new KCs" | Regenerate vector database | Single KC changes |
+| "Find knowledge gaps" | "Missing mobile dev coverage" | Analyze corpus for missing domains | Content creation |
+| "Archive stale KCs" | "Remove deprecated React patterns" | Lifecycle management with timestamps | Active learning content |
+
+**Anti-patterns**: Don't route content creation (N02), artifact building (N03), or real-time questions (N07) to N04. Route database queries, KC management, and ML dataset prep only.
