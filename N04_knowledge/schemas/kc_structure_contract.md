@@ -45,3 +45,13 @@ density_score: 0.94
 - Tables over prose when data is structured
 - Maximum 2KB for focused KCs, 4KB for comprehensive
 - Every sentence must pass: "if I delete this, does the KC lose value?"
+
+## Anti-Patterns
+
+| ❌ Wrong | ✅ Correct | Why |
+|----------|------------|-----|
+| `quality: 8.5` | `quality: null` | Never self-score on creation |
+| Missing `tldr` field | Required 20-200 char summary | Index generation needs it |
+| `title: "This KC explains..."` | `title: "Chain-of-Thought"` | Direct naming, not meta |
+| 3 intro paragraphs | 1 focused paragraph | Density rule violation |
+| Prose list of 8 items | Table with 8 rows | Structured data needs tables |
