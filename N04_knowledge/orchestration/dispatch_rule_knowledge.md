@@ -21,6 +21,7 @@ conditions:
   - "intent in ['query', 'architect', 'manage', 'organize', 'find']"
   - "domain in ['knowledge', 'data', 'information', 'taxonomy', 'retrieval']"
 routing_strategy: "semantic_keyword_match"
+density_score: 0.88
 ---
 
 # N04 Knowledge Nucleus Dispatch Rule
