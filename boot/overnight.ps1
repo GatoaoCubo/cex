@@ -54,6 +54,9 @@ if ($Farm) {
     $MaxTokens = [int]::MaxValue
     $MaxCycles = [int]::MaxValue
     $Phase = "farm"
+    # In farm mode, threshold = target so agent mode activates on ALL below-target artifacts
+    # This is the key: heuristic can't push 8.8 -> 9.0, only LLM can
+    $Threshold = $TargetScore
 }
 
 # ============================================================
@@ -364,11 +367,25 @@ function Invoke-Evolve {
     $evolved = 0
     $improved = 0
 
+    # Track failed evolves this cycle to avoid retrying same artifacts
+    if (-not $State.PSObject.Properties['evolve_tried']) {
+        $State | Add-Member -NotePropertyName 'evolve_tried' -NotePropertyValue @{} -Force
+    }
+
     foreach ($item in $toEvolve) {
         if (!(Test-Budget)) { break }
 
         $rel = $item.relative
         $score = $item.score
+
+        # Skip if already tried this cycle and didn't improve
+        $triedKey = $rel
+        if ($State.evolve_tried.ContainsKey($triedKey)) {
+            $lastScore = $State.evolve_tried[$triedKey]
+            if ($lastScore -eq $score) {
+                continue  # silently skip — already tried, same score
+            }
+        }
 
         Write-Log "  Evolving: $rel (current: $score)"
 
@@ -409,9 +426,12 @@ function Invoke-Evolve {
 
             $evolved++
             $State.artifacts_evolved++
+            # Track what we tried so we don't re-try failures
+            $State.evolve_tried[$triedKey] = $score
 
         } catch {
             Write-Log "  [FAIL] Error evolving $rel -- $($_.Exception.Message)" "ERROR"
+            $State.evolve_tried[$triedKey] = $score
         }
 
         Save-State $State
