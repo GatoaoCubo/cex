@@ -8,7 +8,7 @@ created: "2026-04-02"
 updated: "2026-04-02"
 author: "knowledge-card-builder"
 domain: prompt_engineering
-quality: 8.9
+quality: 9.1
 tags: [prompt-engineering, llm-optimization, few-shot, chain-of-thought, knowledge]
 tldr: "Structured prompt engineering increases LLM accuracy by 40-60% using few-shot examples, chain-of-thought reasoning, and role-based system prompts"
 when_to_use: "When designing LLM interactions requiring consistent, high-quality outputs with measurable performance improvements"
