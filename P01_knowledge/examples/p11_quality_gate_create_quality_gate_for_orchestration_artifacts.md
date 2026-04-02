@@ -4,80 +4,74 @@ kind: quality_gate
 pillar: P11
 title: "Gate: Orchestration Artifacts"
 version: "1.0.0"
-created: "2026-04-01"
-updated: "2026-04-01"
+created: "2026-04-02"
+updated: "2026-04-02"
 author: "quality-gate-builder"
 domain: "orchestration"
-quality: 8.9
-tags: [quality-gate, orchestration, n07, coordination, dispatch]
-tldr: "Quality gate for orchestration artifacts: validates nucleus routing, handoff structure, and signal protocols >= 8.0"
-density_score: 0.88
+quality: 9.1
+tags: [quality-gate, orchestration, nucleus-routing, handoff, signal, dispatch, workflow]
+tldr: "Pre-pool gate for orchestration artifacts: 8 HARD checks + 8-dimension scoring >= 8.0"
+density_score: 0.91
 ---
 ## Definition
+
 | Property | Value |
 |----------|-------|
 | Metric | orchestration_score |
 | Threshold | 8.0 |
 | Operator | >= |
-| Scope | All orchestration artifacts (workflows, handoffs, dispatch_rules, coordination patterns) |
+| Scope | All orchestration artifacts (workflows, handoffs, dispatch_rules, signals, coordination patterns) before pool merge |
 
 ## HARD Gates
-Failure on any gate blocks artifact regardless of soft score.
 
-| ID  | Criterion | Failure Action |
-|-----|-----------|----------------|
-| H01 | Frontmatter parses as valid YAML without errors | block |
-| H02 | `id` matches pillar namespace pattern | block |
-| H03 | `id` equals filename stem exactly | block |
-| H04 | `kind` field matches expected orchestration artifact type | block |
-| H05 | `quality` field is null (no self-scoring) | block |
-| H06 | All required frontmatter fields present and non-empty | block |
-| H07 | Nucleus routing table present with valid N01-N07 mappings | block |
-| H08 | Handoff protocol defined with clear input/output specifications | block |
-| H09 | Signal emission points documented for coordination events | block |
-| H10 | Dispatch logic is deterministic (no ambiguous routing rules) | block |
+Failure on any single gate sets final score to 0 and blocks pool merge immediately.
 
-## SOFT Gates
-Weighted dimensions contributing to quality score.
+| ID | Criterion | Failure Action |
+|----|-----------|----------------|
+| H01 | Frontmatter block parses as valid YAML without errors | block |
+| H02 | `id` matches the required namespace pattern for the artifact kind | block |
+| H03 | `id` value equals the filename stem exactly (case-sensitive) | block |
+| H04 | `kind` field matches a registered orchestration artifact type in `kinds_meta.json` | block |
+| H05 | `quality` field is null at authoring time (no self-scoring) | block |
+| H06 | All required frontmatter fields present and non-empty (id, kind, pillar, title, version, created, updated, author, domain, tags, tldr) | block |
+| H07 | Nucleus routing reference present: artifact identifies which nucleus executes or is targeted | block |
+| H08 | No build operations performed directly — all artifact construction delegated to appropriate nucleus via `dispatch.sh` | block |
 
-| ID  | Criterion | Weight | Scoring Method |
-|-----|-----------|--------|----------------|
-| S01 | Nucleus assignment accuracy (correct domain-to-nucleus mapping) | 20% | graduated |
-| S02 | Handoff completeness (all required data flows specified) | 20% | binary |
-| S03 | Signal protocol adherence (proper event emission and handling) | 15% | graduated |
-| S04 | Coordination efficiency (minimal nucleus hops for task completion) | 15% | graduated |
-| S05 | Error handling coverage (failure modes and recovery paths defined) | 10% | binary |
-| S06 | Documentation clarity (orchestration flow is comprehensible) | 10% | graduated |
-| S07 | Dependency management (prerequisites and order dependencies explicit) | 10% | binary |
+## SOFT Scoring
 
-## Scoring Formula
-```
-aggregate_score = (
-  S01_score * 0.20 +
-  S02_score * 0.20 + 
-  S03_score * 0.15 +
-  S04_score * 0.15 +
-  S05_score * 0.10 +
-  S06_score * 0.10 +
-  S07_score * 0.10
-) * 10
-```
+Score each dimension 0 (absent or fails) to 1 (present and passes). Weights sum to 100%.
 
-**Pass condition**: All HARD gates pass AND aggregate_score >= 8.0
+| Dimension | Weight | Criteria |
+|-----------|--------|----------|
+| Routing completeness | 20% | Nucleus routing table or routing reference covers all artifact kinds handled by the artifact |
+| Handoff structure | 20% | Handoff includes mission, nucleus, task, and decisions fields; references `decision_manifest.yaml` |
+| Signal protocol | 15% | `complete`, `retry`, and `cancel` signals defined and mapped to concrete outcomes |
+| GDP compliance | 15% | Subjective decisions documented in manifest before dispatch, or manifest reference explicitly present |
+| Dispatch validity | 10% | Dispatch uses `bash _spawn/dispatch.sh` exclusively — no raw `start cmd`, no inline powershell |
+| Consolidation protocol | 10% | Post-dispatch steps defined: detect → verify → stop → commit (Gemini) → signal |
+| Anti-pattern absence | 5% | No task passed as CLI arg to boot scripts; no nested-quote dispatch patterns present |
+| Density | 5% | `density_score` field present and >= 0.80 |
+
+**Scoring formula**: `final_score = SUM(score_i × weight_i) × 10` where weights are decimal fractions (20% = 0.20)
+
+**PASS condition**: All HARD gates pass AND `final_score >= 8.0`
 
 ## Actions
-| Outcome | Consequence |
-|---------|-------------|
-| GOLDEN (>= 9.5) | Promote to reference orchestration pattern; use as template for new patterns |
-| PUBLISH (>= 8.0) | Deploy to production orchestration pool; mark as coordination-ready |
-| REVIEW (>= 7.0) | Return to author with dimensional feedback; single revision cycle allowed |
-| REJECT (< 7.0) | Block from pool; requires fundamental restructure before re-evaluation |
 
-## Bypass Policy
+| Tier | Threshold | Action |
+|------|-----------|--------|
+| GOLDEN | >= 9.5 | Publish to pool as reference; use as template for new orchestration artifact authors |
+| PUBLISH | >= 8.0 | Publish to pool; mark production-ready |
+| REVIEW | >= 7.0 | Return to author with scored dimension feedback; one revision cycle permitted |
+| REJECT | < 7.0 | Block from pool; full rewrite required before re-evaluation |
+
+## Bypass
+
 | Field | Value |
 |-------|-------|
-| Conditions | Experimental orchestration pattern with unstable nucleus architecture OR emergency coordination fix |
-| Approver | N07 chief orchestrator must authorize in writing |
-| Audit requirement | Log in `.cex/runtime/decisions/bypasses.md` with date, approver, justification, and expiry |
-| Expiry | 7 days for emergency fixes, 21 days for experimental patterns |
-| Non-bypassable | H01 (YAML validity), H05 (quality null), H07 (nucleus routing) |
+| condition | Experimental nucleus in active design with unstable schema not yet registered in `kinds_meta.json` |
+| approver | N07 Orchestrator (pillar owner) must approve in writing before bypass takes effect |
+| audit_log | Record in `.cex/runtime/decisions/bypass_log.md` with date, approver, artifact id, and justification |
+| expiry | 14 days from bypass grant; artifact must reach full gate compliance before expiry or is rejected |
+
+**H01 (YAML parse) and H05 (quality null) are never bypassable under any condition.**
