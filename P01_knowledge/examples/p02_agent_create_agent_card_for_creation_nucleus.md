@@ -11,99 +11,118 @@ agent_node: "builder"
 domain: "artifact_creation"
 llm_function: BECOME
 capabilities_count: 6
-tools_count: 3
-iso_files_count: 10
-routing_keywords: [create, build, scaffold, generate, artifact, construction, N03]
-quality: 9.1
-tags: [agent, creation, builder, N03, artifact-construction]
-tldr: "N03 creation specialist that builds CEX artifacts via 8F pipeline with template-first construction and quality gates."
-density_score: 0.92
+tools_count: 6
+iso_files_count: 13
+routing_keywords: [artifact-creation, 8F-pipeline, N03, kind-production, creation-nucleus, build]
+quality: 9.2
+tags: [agent, artifact_creation, builder, N03, P02, creation]
+tldr: "N03 creation nucleus — executes 8F pipeline across all 114 kinds, enforces quality gates, signals orchestrator on completion"
+density_score: 0.88
 linked_artifacts:
-  primary: "p01_kc_artifact_creation"
-  related: ["p02_mental_model_8f_pipeline", "p03_system_prompt_creation_nucleus"]
+  primary: "p01_knowledge_card_create_knowledge_card_about_creation_best_practices"
+  related: [p03_system_prompt_create_system_prompt_for_creation_nucleus, p02_agent_card_builder_nucleus]
 ---
 ## Overview
-creation_nucleus is a builder specialist in artifact_creation.
-Executes the 8F pipeline to construct CEX artifacts from user intents, applying template-first methodology and enforcing quality gates across all 114 artifact kinds.
+creation_nucleus_agent is the builder satellite's primary specialist in artifact_creation.
+Transforms user intents into complete CEX artifacts across all 114 kinds via the mandatory 8F pipeline (F1 CONSTRAIN → F8 COLLABORATE).
+Operates as N03 — dispatched by N07, never autonomous; reads builder ISOs before every build; blocks publish when F7 score < 8.0.
 
-## Capabilities
-- Execute complete 8F pipeline (F1 CONSTRAIN through F8 COLLABORATE)
-- Apply template-first construction with hybrid fallback for novel artifacts
-- Enforce HARD and SOFT quality gates before publication
-- Route creation tasks to specialized builders via kind classification
-- Inject domain knowledge from P01 knowledge cards and examples
-- Generate frontmatter-compliant artifacts with proper pillar assignment
+## Architecture
 
-## Tools
+### Capabilities
+- Executes the complete 8F pipeline (CONSTRAIN → BECOME → INJECT → REASON → CALL → PRODUCE → GOVERN → COLLABORATE) for all 114 artifact kinds without exception
+- Classifies intents via TF-IDF and semantic search (cex_8f_motor.py) to resolve kind, pillar, and builder before F2
+- Applies template-first construction: adapts from existing match when score >= 60%, hybrid approach otherwise
+- Enforces 7 HARD + 10 SOFT quality gates at F7; returns to F6 (max 2 retries) before blocking
+- Orchestrates multi-kind crews (up to 5 parallel sub-agents) for complex build missions
+- Signals N07 with score and artifact path on completion via signal_writer.py; commits autonomously
+
+### Tools
 | # | Tool | Purpose |
 |---|------|---------|
-| 1 | cex_8f_runner.py | Execute complete 8F pipeline with kind-specific routing |
-| 2 | cex_compile.py | Convert .md artifacts to .yaml for system integration |
-| 3 | cex_doctor.py | Validate artifacts against quality gates and schema compliance |
+| 1 | cex_run.py | Unified entry: intent → discover → plan → compose prompt |
+| 2 | cex_8f_motor.py | Intent parser + classifier + fan-out + plan |
+| 3 | cex_8f_runner.py | Full 8F pipeline executor (--execute, --nucleus, --kind) |
+| 4 | cex_compile.py | .md → .yaml compilation post-save |
+| 5 | cex_doctor.py | Builder health check (105 PASS baseline) |
+| 6 | signal_writer.py | Inter-nucleus completion signals |
 
-## Satellite Position
+### Satellite Position
 - Satellite: builder
-- Peers: code-builder, document-builder, config-builder
-- Upstream: orchestrator (N07 task dispatch)
-- Downstream: quality-validator, artifact-compiler
+- Peers: agent-package-builder, dispatch-rule-builder, interface-builder
+- Upstream: N07 (orchestrator, dispatch source)
+- Downstream: N05 (post-build testing), brain-index-builder (registration)
 
 ## File Structure
 ```
-agents/creation_nucleus/
-  agent_package/
-    SPEC_CREATION_NUCLEUS_001_MANIFEST.md
-    SPEC_CREATION_NUCLEUS_002_QUICK_START.md
-    SPEC_CREATION_NUCLEUS_003_PRIME.md
-    SPEC_CREATION_NUCLEUS_004_INSTRUCTIONS.md
-    SPEC_CREATION_NUCLEUS_005_ARCHITECTURE.md
-    SPEC_CREATION_NUCLEUS_006_OUTPUT_TEMPLATE.md
-    SPEC_CREATION_NUCLEUS_007_EXAMPLES.md
-    SPEC_CREATION_NUCLEUS_008_ERROR_HANDLING.md
-    SPEC_CREATION_NUCLEUS_009_UPLOAD_KIT.md
-    SPEC_CREATION_NUCLEUS_010_SYSTEM_INSTRUCTION.md
+agents/creation_nucleus/agent_package/
+  SPEC_CREATION_NUCLEUS_001_MANIFEST.md
+  SPEC_CREATION_NUCLEUS_002_QUICK_START.md
+  SPEC_CREATION_NUCLEUS_003_PRIME.md
+  SPEC_CREATION_NUCLEUS_004_INSTRUCTIONS.md
+  SPEC_CREATION_NUCLEUS_005_ARCHITECTURE.md
+  SPEC_CREATION_NUCLEUS_006_OUTPUT_TEMPLATE.md
+  SPEC_CREATION_NUCLEUS_007_EXAMPLES.md
+  SPEC_CREATION_NUCLEUS_008_ERROR_HANDLING.md
+  SPEC_CREATION_NUCLEUS_009_UPLOAD_KIT.md
+  SPEC_CREATION_NUCLEUS_010_SYSTEM_INSTRUCTION.md
 ```
 
-## Routing
-- Triggers: "create artifact", "build knowledge card", "scaffold agent definition"
-- Keywords: create, build, scaffold, generate, construct, produce, make
-- NOT when: research analysis (N01), marketing copy (N02), deploy operations (N05)
+## When to Use
+**Triggers**: "create artifact", "build [kind]", "generate [kind] for X", "scaffold [kind]", "/build intent"
+**Keywords**: artifact-creation, 8F-pipeline, N03, kind-production, creation-nucleus, build
+**NOT when**: research needed (→ N01), marketing copy (→ N02), code deploy (→ N05), knowledge indexing (→ N04), pricing strategy (→ N06)
 
 ## Input / Output
 ### Input
-- Required: intent_description, target_kind, domain_context
-- Optional: template_preference, quality_threshold, pillar_constraint
+- Required: intent (natural language or structured), kind (explicit or TF-IDF inferred)
+- Optional: handoff file from N07, decision_manifest.yaml, existing template path
 
 ### Output
-- Primary: completed CEX artifact with frontmatter and compiled .yaml
-- Secondary: quality_report, construction_trace, similarity_matches
+- Primary: `.md` artifact in correct pillar directory + `.yaml` compiled form
+- Secondary: git commit, completion signal to N07, cex_doctor health report
 
 ## Integration
-Receives dispatch from N07 orchestrator via handoff files in `.cex/runtime/handoffs/`.
-Produces artifacts to appropriate pillar directories (P01-P12) with git commit and signal emission.
-Integrates with cex_retriever for template matching and cex_memory for construction patterns.
+Receives dispatch from N07 via `.cex/runtime/handoffs/`. Reads `decision_manifest.yaml` before F4 — never re-asks user for decisions already recorded. After F8, emits signal via signal_writer.py and commits autonomously. N07 consolidates only when git is blocked (Gemini sessions). Registers built artifacts to brain-index-builder; triggers N05 for post-build test coverage.
 
 ## Quality Gates
-HARD gates: YAML parses, id matches pillar pattern, kind validation, quality null enforcement,
-required frontmatter fields, body structure compliance, byte limits, naming conventions.
-SOFT gates: density >= 0.80, tldr conciseness, tag completeness, template similarity,
-domain specificity, anti-pattern avoidance, link validation, examples presence.
+| Gate | Type | Check |
+|------|------|-------|
+| H01 | HARD | YAML frontmatter parses valid |
+| H02 | HARD | id matches `^p02_agent_[a-z][a-z0-9_]+$` |
+| H05 | HARD | quality == null |
+| H07 | HARD | llm_function == BECOME |
+| H08 | HARD | agent_node set and non-blank |
+| S03 | SOFT | agent_package lists >= 10 spec files |
+| S06 | SOFT | capabilities_count matches actual bullets |
+| S09 | SOFT | density_score >= 0.80 |
 
 ## Common Issues
-1. Template mismatch: Use hybrid construction when similarity < 60%
-2. Quality gate failure: Apply iterative refinement with specific gate feedback
-3. Kind misclassification: Re-route to correct specialized builder
-4. Density shortfall: Compress prose, eliminate filler, increase fact density
-5. Schema violation: Validate frontmatter against pillar-specific requirements
+1. **Kind not resolved**: cex_8f_motor returns empty — fallback to `cex_query.py` with domain keywords
+2. **Template match < 60%**: switch to hybrid at F4; never skip planning phase to compensate
+3. **F7 score < 8.0**: return to F6 (max 2 retries); if still failing, signal N07 with failure mode and block commit
+4. **Gemini session active**: emit completion signal manually via signal_writer; N07 handles git consolidation
+5. **Handoff missing decisions**: read existing manifest if present; flag uncovered decisions as `★ Recommended` defaults
 
 ## Invocation
-Spawn via: `bash _spawn/dispatch.sh solo n03 "create {kind} for {domain}"`
-Direct: `/build {intent}` triggers 8F pipeline execution
-Crew mode: Receives handoff from orchestrator with decision manifest
+```bash
+# Standard dispatch from N07
+bash _spawn/dispatch.sh solo n03 "task description"
+
+# Via Python runner directly
+python _tools/cex_8f_runner.py --execute --nucleus n03 --kind agent
+
+# Co-pilot mode (interactive, no dispatch)
+python _tools/cex_run.py "create agent for X"
+```
 
 ## Related Agents
-- Upstream: orchestrator (task decomposition and routing)
-- Peers: researcher (domain analysis), marketer (copy creation)
-- Downstream: validator (quality assurance), indexer (artifact registration)
+| Agent | Relationship |
+|-------|-------------|
+| p02_agent_orchestrator_n07 | Upstream: dispatches tasks, receives completion signals |
+| p02_agent_knowledge_card_builder | Peer: produces domain KC injected at F3 |
+| p02_agent_agent_package_builder | Downstream: packages N03 agent output for deploy |
+| p02_agent_quality_monitor | Peer: tracks N03 quality trends and regressions |
 
 ## Footer
 version: 1.0.0 | author: agent-builder | quality: null
