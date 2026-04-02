@@ -1,77 +1,76 @@
 ---
-id: p12_wf_brand_pipeline
+id: p12_wf_brand_pipeline_complete
 kind: workflow
 pillar: P12
 version: "1.0.0"
-created: "2026-04-01"
-updated: "2026-04-01"
+created: "2026-04-02"
+updated: "2026-04-02"
 author: "workflow-builder"
-title: "Complete Brand Pipeline Orchestration"
+title: "Complete Brand Pipeline Workflow"
 steps_count: 4
 execution: mixed
-agent_nodes: [n01, n02, n06, n03]
+agent_nodes: [shaka, edison, stella, maya]
 timeout: 7200
 retry_policy: per_step
 depends_on: []
-signals: [brand_research_complete, brand_voice_complete, brand_strategy_complete, brand_assets_complete, workflow_complete]
-spawn_configs: [p12_spawn_n01_research, p12_spawn_n02_marketing, p12_spawn_n06_commercial, p12_spawn_n03_builder]
-domain: "brand_development"
-quality: 8.8
-tags: [workflow, brand, pipeline, multi-nucleus, orchestration]
-tldr: "4-step brand pipeline: N01 researches market/competitors, N02 develops voice/messaging, N06 creates monetization strategy, N03 builds brand assets"
+signals: [brand_discovery_complete, brand_identity_complete, assets_complete, pipeline_complete, error]
+spawn_configs: [p12_spawn_shaka_brand_research, p12_spawn_edison_brand_build, p12_spawn_maya_brand_assets, p12_spawn_stella_orchestrator]
+domain: "brand"
+quality: 8.9
+tags: [workflow, brand, pipeline, multi-agent, orchestration]
+tldr: "4-step mixed workflow: brand discovery, identity creation, asset generation, and deployment orchestration with parallel asset production"
 density_score: 0.92
 ---
 ## Purpose
-Orchestrates end-to-end brand development from market research through asset creation. N01 conducts competitive analysis and market positioning research, N02 develops brand voice and messaging framework, N06 designs monetization and pricing strategy, and N03 builds comprehensive brand guidelines and assets. Steps 1-3 run in parallel (independent research domains), step 4 synthesizes all outputs into actionable brand system.
+Orchestrates end-to-end brand pipeline from initial discovery through final deployment. Shaka researches brand positioning and competitor landscape, Edison builds core brand identity artifacts, Maya generates visual and content assets in parallel, and Stella consolidates everything into deployable brand system. Wave 1: discovery, Wave 2: identity + research parallel, Wave 3: asset generation, Wave 4: deployment.
 
 ## Steps
 
-### Step 1: Market Research & Competitive Analysis [n01]
-- **Agent**: n01 (intelligence nucleus)
-- **Action**: Research target market, analyze competitors, identify positioning opportunities
-- **Input**: brand brief from handoff file, target market parameters
-- **Output**: market analysis report with competitor matrix and positioning recommendations
-- **Signal**: brand_research_complete with competitive landscape insights
-- **Depends on**: none (wave 1)
+### Step 1: Brand Discovery [shaka]
+- **Agent**: shaka (sonnet research specialist)
+- **Action**: Research target market, competitor landscape, and brand positioning opportunities
+- **Input**: brand brief from handoff file, market research requirements
+- **Output**: brand discovery report with 5-7 knowledge cards committed to records/brand/
+- **Signal**: brand_discovery_complete with market insights score
+- **Depends on**: none (initial step)
 
-### Step 2: Brand Voice & Messaging Development [n02]
-- **Agent**: n02 (marketing nucleus)
-- **Action**: Define brand personality, tone of voice, key messages, and communication framework
-- **Input**: brand brief from handoff file, target audience profiles
-- **Output**: brand voice guide with messaging hierarchy and communication templates
-- **Signal**: brand_voice_complete with voice guidelines
-- **Depends on**: none (wave 1)
+### Step 2: Brand Identity Creation [edison]
+- **Agent**: edison (opus builder specialist)
+- **Action**: Create core brand identity system including values, voice, and positioning
+- **Input**: brand discovery insights from Step 1, brand requirements
+- **Output**: brand_config.yaml, brand identity framework, voice guidelines
+- **Signal**: brand_identity_complete with identity coherence score
+- **Depends on**: Step 1
 
-### Step 3: Monetization Strategy Design [n06]
-- **Agent**: n06 (commercial nucleus)
-- **Action**: Develop pricing models, revenue streams, and go-to-market strategy
-- **Input**: brand brief from handoff file, business model requirements
-- **Output**: monetization framework with pricing strategy and revenue projections
-- **Signal**: brand_strategy_complete with commercial roadmap
-- **Depends on**: none (wave 1)
+### Step 3: Visual Asset Generation [maya]
+- **Agent**: maya (creative asset specialist)
+- **Action**: Generate brand visual assets including logos, color palettes, and templates
+- **Input**: brand identity framework from Step 2
+- **Output**: visual brand assets committed to assets/brand/, style guide document
+- **Signal**: assets_complete with visual consistency score
+- **Depends on**: Step 2
 
-### Step 4: Brand Asset Creation & Guidelines [n03]
-- **Agent**: n03 (builder nucleus)
-- **Action**: Synthesize research outputs into comprehensive brand system with visual identity and usage guidelines
-- **Input**: outputs from steps 1-3, market analysis, voice guide, monetization framework
-- **Output**: complete brand guidelines with logo, colors, typography, templates, and implementation guide
-- **Signal**: brand_assets_complete with deliverable brand system
+### Step 4: Pipeline Deployment [stella]
+- **Agent**: stella (orchestrator)
+- **Action**: Deploy brand system across all nuclei, validate propagation, archive handoffs
+- **Input**: all outputs from Steps 1-3, deployment checklist
+- **Output**: deployed brand system, propagated configs, consolidated git commit
+- **Signal**: pipeline_complete with deployment success score
 - **Depends on**: Steps 1, 2, 3
 
 ## Dependencies
-- Brand brief handoff file must exist with target market, business goals, and stakeholder requirements
-- spawn_configs for all four nuclei must be validated and accessible
-- Access to market research databases and competitive intelligence sources for N01
-- Brand asset creation tools and templates available for N03
+- Brand brief handoff file must exist with target market and business model
+- All referenced spawn_configs must be valid and tested
+- Brand directory structure must be initialized (assets/brand/, records/brand/)
+- Git repository must be clean with no uncommitted brand-related changes
 
 ## Signals
-- **On step complete**: {nucleus}_complete signal emitted with quality score and deliverable paths
-- **On workflow complete**: workflow_complete signal with aggregated brand system and implementation timeline
-- **On error**: {nucleus}_error signal with retry attempt (max 1 per step), escalate to orchestrator if retry fails
-- **Wave coordination**: Steps 1-3 emit completion signals independently, Step 4 waits for all three before starting
+- **On step complete**: {agent}_complete signal emitted with quality score (see signal-builder)
+- **On workflow complete**: pipeline_complete signal with aggregate brand coherence score
+- **On error**: {agent}_error signal, retry per step (max 2), escalate to orchestrator if persistent
+- **Special signals**: brand_discovery_complete triggers parallel identity work, assets_complete triggers deployment validation
 
 ## References
-- Market research methodologies from N01 intelligence protocols
-- Brand voice frameworks from N02 marketing templates
-- Pricing strategy models from N06 commercial playbooks
-- Brand guideline templates from N03 builder archetypes
+- Brand discovery methodology: P01_knowledge/library/kind/kc_brand_research.md
+- Visual asset standards: P05_orchestration/compiled/formatter_brand_assets.yaml
+- Deployment checklist: P12_orchestration/procedures/brand_deployment_checklist.md
