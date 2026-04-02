@@ -7,28 +7,42 @@ created: 2026-04-02
 updated: 2026-04-02
 author: dispatch-rule-builder
 domain: creation
-quality: 8.7
-tags: [dispatch, creation, build, atlas, routing]
-tldr: Route artifact creation and building tasks to atlas builder agent_node with opus model
+quality: 8.8
+tags: [dispatch, creation, build, builder, artifact, scaffold, P12]
+tldr: Route artifact creation and build tasks to builder nucleus via keyword and intent matching
 scope: creation
-keywords: [criar, create, construir, build, gerar, generate, scaffold, implementar, implement, produzir, produce, desenvolver, develop]
-agent_node: atlas
+keywords: [create, build, construct, scaffold, generate, implement, criar, construir, gerar, montar, produzir, implementar]
+agent_node: builder
 model: opus
 priority: 8
 confidence_threshold: 0.75
-fallback: pytha
+fallback: executor
 conditions:
-  exclude_domains: [research, marketing, documentation]
+  exclude_domains: [research, marketing, deploy, monetization, knowledge_indexing]
+load_balance: false
 routing_strategy: hybrid
-density_score: 0.79
+density_score: 0.78
 ---
 # creation Dispatch Rule
 
 ## Purpose
-Routes artifact creation, building, and scaffolding tasks to the atlas builder agent_node. Atlas specializes in the 8F pipeline and artifact construction across all CEX kinds, ensuring proper frontmatter, schema compliance, and quality gates. This rule captures the core "build something" intent that drives most CEX workflows.
+Routes all artifact creation, build, and scaffolding tasks to the builder nucleus (N03).
+Builder carries the full 8F pipeline, 114 builder archetypes, and CEX construction toolkit.
+Any task requesting a new artifact, schema, template, component, or structured output routes here.
+N03 is the authoritative executor for `create`, `build`, and `scaffold` intent signals.
 
 ## Keyword Rationale
-Bilingual PT/EN coverage captures both Portuguese operator commands and English task descriptions. Core verbs (criar/create, construir/build) anchor the primary intent, while implementation terms (scaffold, implementar, produzir) catch adjacent construction tasks. The hybrid strategy combines keyword matching with semantic understanding for nuanced creation requests.
+Bilingual PT/EN coverage fires on both Portuguese operator commands and English task descriptions.
+Verb forms (`create`, `build`, `construct`) capture direct construction intent.
+`scaffold` and `generate` catch code-generation and template-instantiation sub-tasks.
+PT variants (`criar`, `construir`, `gerar`, `montar`, `produzir`, `implementar`) ensure
+multi-language operator commands route without fallback degradation.
+Generic query verbs (`get`, `fetch`, `run`) deliberately excluded to avoid false matches
+on read, query, or execution tasks that belong to executor or knowledge-engine.
 
 ## Fallback Logic
-Routes to pytha (knowledge agent) when atlas is unavailable, as knowledge agents can scaffold basic artifacts and understand CEX patterns, though without the specialized 8F pipeline optimization that atlas provides.
+`executor` handles tasks at the intersection of build and run phases (e.g., code generation
+followed by immediate execution, or artifact instantiation from existing templates).
+Below 0.75 confidence, the router evaluates adjacent rules before activating fallback.
+`executor` is preferred over `knowledge-engine` because partially-built artifacts need
+execution capability, not indexing or retrieval.
