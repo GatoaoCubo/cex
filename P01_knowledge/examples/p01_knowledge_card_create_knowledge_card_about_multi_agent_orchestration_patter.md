@@ -8,7 +8,7 @@ created: "2026-04-02"
 updated: "2026-04-02"
 author: "builder"
 domain: multi_agent_systems
-quality: 8.9
+quality: 9.1
 tags: [multi-agent, orchestration, coordination, distributed-systems, knowledge]
 tldr: "Multi-agent orchestration uses 4 core patterns: hierarchical (coordinator-worker), peer-to-peer (consensus), pipeline (sequential), and marketplace (auction-based)"
 when_to_use: "When designing systems with multiple autonomous AI agents that need coordination"
