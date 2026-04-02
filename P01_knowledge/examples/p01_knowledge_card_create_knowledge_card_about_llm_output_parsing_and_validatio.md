@@ -8,7 +8,7 @@ created: "2026-04-02"
 updated: "2026-04-02"
 author: "knowledge-card-builder"
 domain: llm_engineering
-quality: 9.0
+quality: 9.2
 tags: [llm-parsing, output-validation, structured-generation, json-schema, pydantic, error-handling]
 tldr: "LLM output validation uses JSON Schema + retry logic, achieving 95%+ parse success with Pydantic v2, exponential backoff, and format-specific prompting"
 when_to_use: "When LLM generates structured data requiring programmatic consumption and validation"
