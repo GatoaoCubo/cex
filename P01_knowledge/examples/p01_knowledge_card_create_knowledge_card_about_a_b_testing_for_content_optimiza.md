@@ -8,7 +8,7 @@ created: "2026-04-02"
 updated: "2026-04-02"
 author: "builder"
 domain: content_optimization
-quality: 9.0
+quality: 9.2
 tags: [ab-testing, content-optimization, conversion, statistical-significance, knowledge]
 tldr: "A/B testing content requires 95% confidence, minimum 100 conversions per variant, and 1-2 week test duration for statistical validity"
 when_to_use: "When optimizing headlines, CTAs, copy, or layouts with measurable conversion goals"
