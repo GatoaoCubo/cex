@@ -2,87 +2,79 @@
 id: p01_kc_engineering_best_practices
 kind: knowledge_card
 pillar: P01
-title: "Software Engineering Best Practices for Production Systems"
+title: "Software Engineering Best Practices for Quality and Maintainability"
 version: "1.0.0"
-created: "2026-04-01"
-updated: "2026-04-01"
+created: "2026-04-02"
+updated: "2026-04-02"
 author: "builder"
 domain: software_engineering
-quality: 8.9
-tags: [engineering, best-practices, production, code-quality, testing, knowledge]
-tldr: "Production engineering requires 80% test coverage, sub-200ms API response, automated CI/CD, and infrastructure-as-code for maintainable systems"
-when_to_use: "When establishing engineering standards for production software development teams"
-keywords: [engineering-practices, code-quality, testing, deployment, monitoring]
+quality: 9.1
+tags: [software-engineering, best-practices, code-quality, maintainability, testing, knowledge]
+tldr: "Core engineering practices: automated testing >80% coverage, code review before merge, CI/CD pipelines, semantic versioning, documentation-as-code"
+when_to_use: "When establishing development standards for new projects or improving existing codebase quality and team productivity"
+keywords: [engineering-practices, code-review, testing, ci-cd, documentation]
 long_tails:
-  - How to implement comprehensive testing strategy for production systems
-  - What are the essential code review criteria for engineering teams
-  - Best practices for production deployment and monitoring
+  - How to implement automated testing strategy with 80% coverage minimum
+  - What code review checklist ensures consistent quality standards
+  - When to use semantic versioning for API stability
 axioms:
-  - ALWAYS require code review before merge to main branch
-  - NEVER deploy to production without automated tests passing
-  - IF system handles user data THEN implement comprehensive logging and monitoring
+  - ALWAYS require code review before merging to main branch
+  - NEVER deploy without automated tests passing
+  - IF bug found in production THEN add regression test immediately
 linked_artifacts:
   primary: null
-  related: []
+  related: [p01_kc_git_workflow_patterns, p01_kc_testing_strategies]
 density_score: 0.87
-data_source: "https://12factor.net/, Google SRE Book, Microsoft Engineering Playbook"
+data_source: "Industry standards from Google SRE, GitHub flow, Martin Fowler patterns"
 ---
-# Software Engineering Best Practices for Production Systems
+# Software Engineering Best Practices for Quality and Maintainability
 
 ## Quick Reference
 ```yaml
-topic: engineering_best_practices
-scope: Production software development (web apps, APIs, microservices)
-owner: engineering_team
+topic: software_engineering_practices
+scope: Team development standards and code quality gates
+owner: engineering_lead
 criticality: high
 ```
 
 ## Key Concepts
-- **Test Coverage**: Minimum 80% line coverage, 90% for critical paths
-- **Code Review**: All changes peer-reviewed, max 400 lines per review
-- **CI/CD Pipeline**: Automated build, test, deploy in <15 minutes
-- **Monitoring**: 99.9% uptime SLA with <200ms P95 response time
-- **Infrastructure as Code**: All resources version-controlled, reproducible
-- **Security**: OWASP Top 10 protection, dependency scanning, secrets management
+- **Code Review**: Pre-merge validation requiring 1+ approvers, automated checks, 24h max turnaround
+- **Test Pyramid**: 70% unit, 20% integration, 10% E2E with >80% total coverage
+- **CI/CD Pipeline**: Automated build → test → security scan → deploy with rollback capability
+- **Semantic Versioning**: MAJOR.MINOR.PATCH format for API compatibility contracts
+- **Documentation-as-Code**: README, API docs, ADRs maintained in repository with code changes
 
 ## Strategy Phases
-1. **Foundation**: Version control (Git), branching strategy, code style guide
-2. **Quality Gates**: Unit tests, integration tests, static analysis, security scans
-3. **Automation**: CI/CD pipelines, automated deployments, rollback procedures
-4. **Monitoring**: Logging, metrics, alerting, health checks, dashboards
-5. **Documentation**: API docs, runbooks, architecture decision records
-6. **Optimization**: Performance profiling, load testing, capacity planning
+1. **Foundation**: Establish git workflow, branch protection, automated testing framework
+2. **Quality Gates**: Implement code review process, coverage thresholds, linting rules
+3. **Automation**: Set up CI/CD pipelines, automated deployment, monitoring alerts
+4. **Optimization**: Measure DORA metrics, reduce cycle time, improve developer experience
+5. **Culture**: Regular retrospectives, knowledge sharing, incident post-mortems
 
 ## Golden Rules
-- WRITE tests before code (TDD), aim for >80% coverage
-- REVIEW all code changes, no direct commits to main
-- AUTOMATE deployment pipeline, manual deploys only for emergencies
-- MONITOR everything: response times, error rates, resource usage
-- DOCUMENT API contracts, deployment procedures, incident responses
-- SECURE by default: input validation, output encoding, principle of least privilege
+- Test first: write failing test before implementation code
+- Small commits: each commit addresses single logical change
+- Fail fast: catch errors early in development cycle, not production
+- Document decisions: record architectural choices and trade-offs
+- Monitor everything: logs, metrics, alerts for production systems
 
 ## Flow
 ```text
-[Code] -> [Tests] -> [Review] -> [CI Pipeline] -> [Deploy] -> [Monitor]
-   |         |          |            |             |          |
-   |         |          |            |             |          +-> Alerts
-   |         |          |            |             +-> Rollback
-   |         |          |            +-> Security Scan
-   |         |          +-> Approval Required
-   |         +-> Coverage Check
-   +-> Static Analysis
+[Feature Request] -> [Branch] -> [TDD] -> [Code Review] -> [CI/CD] -> [Deploy] -> [Monitor]
+                                   |
+                              GATES: tests pass, coverage >80%, security scan clean
 ```
 
 ## Comparativo
-| Practice | Traditional | Modern DevOps | Cloud-Native |
-|----------|------------|---------------|--------------|
-| Testing | Manual QA | Automated CI | Shift-left testing |
-| Deploy | Monthly releases | Weekly releases | Multiple daily deploys |
-| Monitor | Reactive alerts | Proactive metrics | Observability tracing |
-| Infrastructure | Manual setup | Configuration management | Container orchestration |
-| Security | Perimeter defense | DevSecOps | Zero-trust architecture |
+| Practice | Time Investment | Quality Impact | Maintenance Cost |
+|----------|----------------|----------------|------------------|
+| Code Review | 2-4 hours/week | High (defect reduction 60%) | Low |
+| Automated Testing | 20-30% dev time | Very High (regression prevention) | Medium |
+| CI/CD Pipeline | 1-2 weeks setup | Medium (deployment reliability) | Low |
+| Documentation | 10-15% dev time | Medium (onboarding speed 3x) | Low |
 
 ## References
-- Source: https://12factor.net/ (12-factor app methodology)
-- Guide: https://sre.google/sre-book/ (Site Reliability Engineering)
-- Standards: https://github.com/Microsoft/code-with-engineering-playbook
+- Google SRE Book: https://sre.google/sre-book/
+- GitHub Flow: https://docs.github.com/en/get-started/quickstart/github-flow
+- Martin Fowler on CI: https://martinfowler.com/articles/continuousIntegration.html
+- DORA Metrics: https://cloud.google.com/blog/products/devops-sre/using-the-four-keys-to-measure-your-devops-performance
