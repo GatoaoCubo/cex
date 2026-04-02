@@ -114,3 +114,9 @@ when a task touches multiple domains. Stemming is applied for bilingual matching
 - If multiple rules match: highest priority wins
 - If equal priority: prefer the rule with more keyword hits
 - If N07 cannot classify: log to `.cex/runtime/signals/` as `dispatch_ambiguous` and wait
+
+## References
+
+- Workflow: N07_admin/orchestration/workflow_admin.md
+- Spawn config: N07_admin/orchestration/spawn_config_admin.md
+- Grid ops (fallbacks, recovery): N07_admin/memory/grid_orchestration_mastery.md

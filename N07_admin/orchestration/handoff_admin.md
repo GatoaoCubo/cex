@@ -126,3 +126,4 @@ python -c "from _tools.signal_writer import write_signal; write_signal('n03', 'c
 
 - Dispatch rules: N07_admin/orchestration/dispatch_rule_admin.md
 - Signal protocol: N07_admin/orchestration/signal_admin.md
+- Grid ops (recovery, fallbacks): N07_admin/memory/grid_orchestration_mastery.md

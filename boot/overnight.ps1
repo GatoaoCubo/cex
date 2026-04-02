@@ -161,12 +161,28 @@ function Save-State {
 
 $script:TokensUsed = 0
 
+$script:CreditsDepleted = $false
+
 function Test-Budget {
+    if ($script:CreditsDepleted) {
+        Write-Log "CREDITS DEPLETED — stopping all LLM calls" "FATAL"
+        return $false
+    }
     if ($script:TokensUsed -ge $MaxTokens) {
         Write-Log "BUDGET EXHAUSTED: $($script:TokensUsed)/$MaxTokens tokens" "WARN"
         return $false
     }
     return $true
+}
+
+function Test-CreditError {
+    param([string]$Output)
+    if ($Output -match 'Credit balance is too low|credits?.*exhaust|billing.*limit|payment.*required') {
+        Write-Log "CREDIT ERROR DETECTED: $($Matches[0])" "FATAL"
+        $script:CreditsDepleted = $true
+        return $true
+    }
+    return $false
 }
 
 function Add-Tokens {
@@ -238,6 +254,9 @@ function Invoke-Bootstrap {
             try {
                 $result = & $PYTHON "$CEX_ROOT\_tools\cex_run.py" $intent --execute 2>&1 | Out-String
 
+                # Check for credit/billing errors before anything else
+                if (Test-CreditError $result) { return $State }
+
                 # cex_run.py saves to its own path and reports it
                 $savedRx = 'Saved:\s*(\S+\.md)'
                 $artifactRx = 'Artifact created:\s*(\S+\.md)'
@@ -256,7 +275,7 @@ function Invoke-Bootstrap {
                     $State.artifacts_created++
                 } else {
                     Write-Log "  FAIL ${nKey}/${kind} -- no artifact saved" "ERROR"
-                    Write-Log "  OUTPUT: $($result.Substring(0, [math]::Min(300, $result.Length)))" "DEBUG"
+                    Write-Log "  OUTPUT: $($result.Substring(0, [math]::Min(500, $result.Length)))" "DEBUG"
                 }
 
                 $State.bootstrap_done += $doneKey
@@ -601,6 +620,9 @@ function Invoke-Farm {
                 $sw = [System.Diagnostics.Stopwatch]::StartNew()
                 $result = & $PYTHON "$CEX_ROOT\_tools\cex_run.py" $intent --execute 2>&1 | Out-String
                 $sw.Stop()
+
+                # Detect credit depletion (fatal — stop entirely)
+                if (Test-CreditError $result) { return $State }
 
                 # Detect rate limit (Claude returns error)
                 if ($result -match 'rate.?limit|429|too many|overloaded|capacity') {

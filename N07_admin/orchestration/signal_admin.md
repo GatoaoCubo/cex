@@ -137,3 +137,4 @@ N07 reads signals to:
 - Signal writer: _tools/signal_writer.py
 - Handoff protocol: N07_admin/orchestration/handoff_admin.md
 - Quality gate: N07_admin/feedback/quality_gate_admin.md
+- Grid ops (diagnostics, crash detection): N07_admin/memory/grid_orchestration_mastery.md

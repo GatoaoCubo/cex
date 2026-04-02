@@ -1,0 +1,107 @@
+﻿[2026-04-02 12:39:43] [INFO] ============================================================
+[2026-04-02 12:39:43] [INFO]   CEX OVERNIGHT FLYWHEEL
+[2026-04-02 12:39:43] [INFO] ============================================================
+[2026-04-02 12:39:43] [INFO] Started: 2026-04-02T12:39:43.6568277-03:00
+[2026-04-02 12:39:43] [INFO] Budget:  2147483647 tokens
+[2026-04-02 12:39:43] [INFO] Target:  9
+[2026-04-02 12:39:43] [INFO] Thresh:  9
+[2026-04-02 12:39:43] [INFO] Cycles:  max 2147483647
+[2026-04-02 12:39:43] [INFO] Phase:   farm
+[2026-04-02 12:39:43] [INFO] DryRun:  False
+[2026-04-02 12:39:43] [INFO] Log:     C:\Users\PC\Documents\GitHub\cex\.cex\overnight\overnight_20260402_123943.log
+[2026-04-02 12:39:43] [INFO] 
+[2026-04-02 12:39:43] [INFO] ============================================================
+[2026-04-02 12:39:43] [INFO]   FLYWHEEL CYCLE 1 / 2147483647
+[2026-04-02 12:39:43] [INFO] ============================================================
+[2026-04-02 12:39:43] [INFO] Budget remaining: 2147483647 tokens
+[2026-04-02 12:39:43] [INFO] ============================================================
+[2026-04-02 12:39:43] [INFO]   PHASE 1: BOOTSTRAP
+[2026-04-02 12:39:43] [INFO] ============================================================
+[2026-04-02 12:39:43] [INFO] N03 (Builder Architect): 0 artifacts. Bootstrapping...
+[2026-04-02 12:39:43] [INFO]   Building: N03/agent -- create agent for creation nucleus
+[2026-04-02 12:40:01] [ERROR]   FAIL N03/agent -- no artifact saved
+[2026-04-02 12:40:01] [DEBUG]   OUTPUT: 
+============================================================
+  CEX Run: "create agent for creation nucleus"
+============================================================
+
+[1/7] Discovering builders...
+  ÔåÆ agent-builder (score=1.321)
+  ÔåÆ agent-builder (score=1.321)
+  ÔåÆ system-prompt-bui
+[2026-04-02 12:40:03] [INFO]   Building: N03/system_prompt -- create system prompt for creation nucleus
+[2026-04-02 12:40:31] [ERROR]   FAIL N03/system_prompt -- no artifact saved
+[2026-04-02 12:40:31] [DEBUG]   OUTPUT: 
+============================================================
+  CEX Run: "create system prompt for creation nucleus"
+============================================================
+
+[1/7] Discovering builders...
+  ÔåÆ system-prompt-builder (score=1.983)
+  ÔåÆ action-prompt-builder (score=0.571)
+[2026-04-02 12:40:33] [INFO]   Building: N03/knowledge_card -- create knowledge card about creation best practices
+[2026-04-02 12:40:51] [ERROR]   FAIL N03/knowledge_card -- no artifact saved
+[2026-04-02 12:40:51] [DEBUG]   OUTPUT: 
+============================================================
+  CEX Run: "create knowledge card about creation best practices"
+============================================================
+
+[1/7] Discovering builders...
+  ÔåÆ knowledge-card-builder (score=1.015)
+  ÔåÆ knowledge-card-builder (s
+[2026-04-02 12:40:53] [INFO]   Building: N03/agent_card -- create agent card for creation nucleus
+[2026-04-02 12:41:10] [ERROR]   FAIL N03/agent_card -- no artifact saved
+[2026-04-02 12:41:10] [DEBUG]   OUTPUT: 
+============================================================
+  CEX Run: "create agent card for creation nucleus"
+============================================================
+
+[1/7] Discovering builders...
+  ÔåÆ agent-builder (score=0.991)
+  ÔåÆ agent-builder (score=0.991)
+  ÔåÆ system-promp
+[2026-04-02 12:41:12] [INFO]   Building: N03/workflow -- create workflow for creation pipeline
+[2026-04-02 12:41:30] [ERROR]   FAIL N03/workflow -- no artifact saved
+[2026-04-02 12:41:30] [DEBUG]   OUTPUT: 
+============================================================
+  CEX Run: "create workflow for creation pipeline"
+============================================================
+
+[1/7] Discovering builders...
+  ÔåÆ workflow-builder (score=1.441)
+  ÔåÆ director-builder (score=1.147)
+  ÔåÆ agent-b
+[2026-04-02 12:41:32] [INFO]   Building: N03/quality_gate -- create quality gate for creation artifacts
+[2026-04-02 12:41:49] [ERROR]   FAIL N03/quality_gate -- no artifact saved
+[2026-04-02 12:41:49] [DEBUG]   OUTPUT: 
+============================================================
+  CEX Run: "create quality gate for creation artifacts"
+============================================================
+
+[1/7] Discovering builders...
+  ÔåÆ quality-gate-builder (score=1.481)
+  ÔåÆ quality-gate-builder (score=1.481)
+
+[2026-04-02 12:41:51] [INFO]   Building: N03/scoring_rubric -- create scoring rubric for creation evaluation
+[2026-04-02 12:42:09] [ERROR]   FAIL N03/scoring_rubric -- no artifact saved
+[2026-04-02 12:42:09] [DEBUG]   OUTPUT: 
+============================================================
+  CEX Run: "create scoring rubric for creation evaluation"
+============================================================
+
+[1/7] Discovering builders...
+  ÔåÆ scoring-rubric-builder (score=2.166)
+  ÔåÆ agent-builder (score=0.502)
+  
+[2026-04-02 12:42:11] [INFO]   Building: N03/dispatch_rule -- create dispatch rule for creation routing
+[2026-04-02 12:42:28] [ERROR]   FAIL N03/dispatch_rule -- no artifact saved
+[2026-04-02 12:42:28] [DEBUG]   OUTPUT: 
+============================================================
+  CEX Run: "create dispatch rule for creation routing"
+============================================================
+
+[1/7] Discovering builders...
+  ÔåÆ dispatch-rule-builder (score=1.393)
+  ÔåÆ router-builder (score=1.173)
+  ÔåÆ 
+[2026-04-02 12:42:30] [INFO]   Building: N03/schema -- create schema contract for creation data model

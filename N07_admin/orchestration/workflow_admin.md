@@ -135,3 +135,4 @@ python _tools/cex_doctor.py
 
 - DAG definition: N07_admin/orchestration/dag_admin.md
 - Spawn config: N07_admin/orchestration/spawn_config_admin.md
+- Grid ops (positions, recovery, crashes): N07_admin/memory/grid_orchestration_mastery.md

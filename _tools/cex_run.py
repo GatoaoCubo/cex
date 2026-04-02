@@ -188,7 +188,8 @@ Just output the artifact content directly. START WITH --- NOW:
             encoding="utf-8",
         )
         if result.returncode != 0:
-            return f"[CLI-ERROR] Exit code {result.returncode}: {result.stderr[:500]}", False
+            error_msg = result.stderr[:500] or result.stdout[:500]
+            return f"[CLI-ERROR] Exit code {result.returncode}: {error_msg}", False
         return result.stdout, True
     except subprocess.TimeoutExpired:
         return f"[TIMEOUT] claude -p exceeded {timeout}s", False
