@@ -35,3 +35,22 @@ density_score: 0.92
 | 5+ points | 3+ high authority | >= 0.90 |
 | 3-4 points | 2+ medium+ | 0.70-0.89 |
 | 1-2 points | any | < 0.70 |
+
+## Usage Guidelines
+
+**When to use:**
+- Tracking industry shifts that could affect business strategy
+- Monitoring competitive landscape changes
+- Identifying emerging technologies or market opportunities
+- Quarterly business review trend analysis
+
+**Anti-patterns:**
+- Single-source trend identification (confidence < 0.70)
+- Mixing different timeframes in one analysis
+- Treating declining trends as automatically negative
+- Ignoring regulatory trends for compliance-heavy industries
+
+**Examples:**
+- Rising: "AI code generation" (tech, 0.95 confidence, 8 sources)
+- Stable: "Remote work adoption" (market, 0.80 confidence, 5 sources)
+- Declining: "Traditional retail expansion" (market, 0.85 confidence, 6 sources)
