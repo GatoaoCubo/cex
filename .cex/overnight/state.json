@@ -2,10 +2,10 @@
     "phase":  "bootstrap",
     "cycle":  1,
     "tokens_used":  0,
-    "artifacts_created":  78,
+    "artifacts_created":  81,
     "artifacts_evolved":  103,
     "started_at":  "2026-04-02T13:20:00-03:00",
-    "last_checkpoint":  "2026-04-02T15:42:16.7696867-03:00",
+    "last_checkpoint":  "2026-04-02T15:47:00.6573785-03:00",
     "bootstrap_done":  [
                            "N03_agent",
                            "N03_system_prompt",
@@ -195,7 +195,10 @@
                      },
     "farmed":  [
                    "N01_-2079411551",
-                   "N01_2041160421"
+                   "N01_2041160421",
+                   "N01_-1804203593",
+                   "N01_-1508415638",
+                   "N01_-525765855"
                ],
     "rate_limited_at":  null,
     "farm_cycle":  1
