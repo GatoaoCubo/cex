@@ -15,6 +15,15 @@ density_score: 0.91
 
 # Output: Taxonomy Map
 
+## Usage Guidelines
+
+| When to Use | When NOT to Use |
+|-------------|-----------------|
+| Knowledge audit across pillars | Single pillar analysis |
+| Gap identification for new KCs | Quality assessment of existing KCs |
+| Strategic KC roadmapping | Tactical KC fixes |
+| Cross-domain coverage planning | Domain-specific deep dives |
+
 ## Template
 ```markdown
 # Taxonomy Map
@@ -37,3 +46,12 @@ density_score: 0.91
 ## Gaps (empty cells above)
 - {{KIND}} × {{PILLAR}}: no KC exists
 ```
+
+## Interpretation Guide
+
+| Coverage Pattern | Action Required |
+|------------------|-----------------|
+| 0-25% coverage | Create foundational KCs |
+| 25-75% coverage | Fill critical gaps |
+| 75%+ coverage | Quality improvement focus |
+| Scattered coverage | Consolidate related KCs |
