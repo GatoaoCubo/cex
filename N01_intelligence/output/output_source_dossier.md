@@ -34,3 +34,23 @@ density_score: 0.91
 - Medium (3): {{N}} sources
 - Low (1-2): {{N}} sources (use with caution)
 ```
+
+## Usage Guidelines
+
+### When to Use
+- Competitive intelligence gathering (curate industry sources)
+- Academic research prep (rank papers and journals)
+- Due diligence investigations (score source credibility)
+- Content strategy research (evaluate topic authorities)
+
+### Quality Criteria
+- **Authority 5**: Government agencies, peer-reviewed journals
+- **Authority 4**: Industry leaders, established news outlets  
+- **Authority 3**: Professional blogs, trade publications
+- **Authority 2**: General websites, unverified sources
+- **Authority 1**: Social media, anonymous posts
+
+### Anti-Patterns
+- Including sources without reliability scores
+- Mixing different research topics in one dossier
+- Over-weighting quantity vs quality (prefer 10 great sources over 50 mediocre)
