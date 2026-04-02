@@ -1,0 +1,113 @@
+# .cex/brand/brand_config.yaml
+# Generated from gato-cubo-commerce repo sources
+# Brand: GATO³ (Gato ao Cubo)
+# Run: python _tools/brand_validate.py to check validity
+# Run: python _tools/brand_propagate.py to push to all nuclei
+
+identity:
+  BRAND_NAME: "GATO³"
+  BRAND_TAGLINE: "Educação que acalma, soluções que funcionam, casa que continua elegante."
+  BRAND_SLOGAN: "Cuidado em três dimensões."
+  BRAND_MISSION: "Harmonizar casa e rotina para que gatos vivam melhor e tutores vivam mais leves — unindo curadoria veterinária, educação acolhedora e design que desaparece no ambiente."
+  BRAND_VISION: "Ser a referência nacional em bem-estar felino, onde cada produto, conteúdo e interação eleva a convivência entre gatos, tutores e lares."
+  BRAND_VALUES:
+    - "Amor aos felinos"
+    - "Educação acolhedora"
+    - "Qualidade impecável"
+    - "Inovação com propósito"
+    - "Comunidade"
+  BRAND_STORY: "GATO³ nasceu da percepção de que o mercado pet tratava gatos como cães menores — produtos genéricos, sem curadoria, sem design. Três dimensões definem tudo que fazemos: o bem-estar do gato, a tranquilidade do tutor e a harmonia da casa. O ³ no nome não é decoração — é compromisso. Cada produto passa por veterinários comportamentalistas antes de entrar no catálogo. Cada conteúdo é guiado pela Ro, nossa persona que traduz ciência felina em passos práticos. Cada decisão visual segue uma estética PB minimalista que prova: produtos para gatos podem ser bonitos. De tapetes gelados a camas de janela, de arranhadores a kits Gatitude — tudo existe para que o tutor viva mais leve e o gato viva melhor. Vendemos no site próprio (gato3.com.br), Mercado Livre e Shopee, e atendemos tanto tutores (B2C) quanto revendedores (B2B) que compartilham nossa visão de curadoria premium acessível."
+
+archetype:
+  BRAND_ARCHETYPE: "caregiver"
+  BRAND_ARCHETYPE_SHADOW: "Mártir — sacrificar qualidade por crescimento rápido ou diluir curadoria para ter mais SKUs"
+  BRAND_PERSONALITY:
+    - "sofisticada"
+    - "acolhedora"
+    - "informativa"
+    - "minimalista"
+    - "inspiradora"
+
+voice:
+  BRAND_VOICE_TONE: "sofisticado-acolhedor, informativo sem ser técnico demais, minimalista e direto"
+  BRAND_VOICE_FORMALITY: 3
+  BRAND_VOICE_ENTHUSIASM: 3
+  BRAND_VOICE_HUMOR: 2
+  BRAND_VOICE_WARMTH: 4
+  BRAND_VOICE_AUTHORITY: 3
+  BRAND_VOICE_DO:
+    - "Usar frases curtas e parágrafos enxutos"
+    - "Explicar o porquê — ciência acessível, nunca jargão"
+    - "Dar passos práticos e acionáveis (protocolos da Ro)"
+    - "Tratar o tutor como parceiro, nunca como ignorante"
+    - "Contextualizar produto como meio, não como fim"
+  BRAND_VOICE_DONT:
+    - "Prometer milagres ou resultados garantidos"
+    - "Usar gíria, infantilizar ou falar como pet shop genérico"
+    - "Medicalizar sem respaldo veterinário"
+    - "Usar CAPS LOCK, excesso de emojis ou tom de vendedor"
+    - "Comparar diretamente com concorrentes pelo nome"
+  BRAND_LANGUAGE: "pt-BR"
+
+audience:
+  BRAND_ICP: "Tutores de gatos (25-45 anos) urbanos que valorizam segurança, design funcional e estética minimalista — buscam soluções práticas e elegantes para harmonizar a convivência com seus felinos sem comprometer a decoração"
+  BRAND_ICP_AGE: "25-45"
+  BRAND_ICP_LOCATION: "Brasil — capitais e regiões metropolitanas"
+  BRAND_ICP_INCOME: "Classe B-C+ (renda familiar R$ 5-15k)"
+  BRAND_ICP_VALUES:
+    - "Bem-estar animal acima de estética"
+    - "Design funcional que não agride o ambiente"
+    - "Educação antes de compra impulsiva"
+  BRAND_ICP_FEARS:
+    - "Gato estressado, ansioso ou destruindo a casa"
+    - "Produtos feios que destoam da decoração"
+    - "Não saber se está fazendo a coisa certa como tutor"
+  BRAND_ICP_ASPIRATIONS:
+    - "Lar harmonioso onde gato, tutor e casa coexistem em paz"
+    - "Ser reconhecido(a) como tutor(a) cuidadoso(a) e bem informado(a)"
+  BRAND_TRANSFORMATION: "From tutor inseguro com gato estressado em casa bagunçada to tutor confiante com felino feliz em lar elegante through educação acolhedora da Ro + curadoria de produtos premium validados por veterinários"
+
+visual:
+  BRAND_COLORS:
+    primary: "#000000"
+    secondary: "#1F1F1F"
+    accent: "#7A7A7A"
+    background: "#FFFFFF"
+    foreground: "#000000"
+    surface: "#D1D1D1"
+  BRAND_FONTS:
+    heading: "Allrounder"
+    body: "Kenao"
+    mono: "JetBrains Mono"
+  BRAND_LOGO_URL: "https://gato3.com.br/logo.svg"
+  BRAND_FAVICON_URL: "https://gato3.com.br/favicon.ico"
+  BRAND_STYLE: "minimal-pb"
+
+positioning:
+  BRAND_CATEGORY: "Curadoria de bem-estar felino + casa multi-espécie harmonizada"
+  BRAND_UVP: "Para tutores de gatos que buscam elegância e funcionalidade, GATO³ é a curadoria de bem-estar felino que harmoniza gato, tutor e casa porque cada produto é validado por veterinários comportamentalistas e desenhado para desaparecer no ambiente."
+  BRAND_DIFFERENTIATOR: "Somos a única curadoria de produtos felinos que une validação veterinária comportamental + estética PB minimalista + educação acolhedora via persona-guia (Ro)"
+  BRAND_COMPETITORS:
+    - "CatMyPet"
+    - "Chalesco"
+    - "Zee.Dog (linha gatos)"
+    - "Petlove (marketplace)"
+  BRAND_CONTENT_PILLARS:
+    - "Produtos em destaque (40%) — curadoria contextualizada"
+    - "Educacional (30%) — ciência felina acessível via 'Você sabia?'"
+    - "Dicas da Ro (20%) — passos práticos e acolhedores"
+    - "Tendências (10%) — mercado pet e design felino"
+
+monetization:
+  BRAND_PRICING_MODEL: "hybrid"
+  BRAND_CURRENCY: "BRL"
+  BRAND_PRICE_ANCHOR: "R$ 30-80 (camas, tapetes gelados, brinquedos interativos)"
+  BRAND_TIERS:
+    - "b2c-direto"
+    - "b2b-revenda"
+    - "marketplace-ml"
+    - "marketplace-shopee"
+  BRAND_PAYMENT_PROVIDERS:
+    - "shopify"
+    - "mercadopago"
+    - "pix"

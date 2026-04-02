@@ -4,13 +4,21 @@
 
 ## Brand Identity
 
-> **Not yet bootstrapped.** Type `/init` or the user just needs to answer a few questions.
+> **✅ Bootstrapped: GATO³** — Curadoria de bem-estar felino + casa harmonizada
 
-The X in CEX is a variable. Once bootstrapped, this section shows WHO this brain belongs to.
+| Field | Value |
+|-------|-------|
+| **Brand** | GATO³ (Gato ao Cubo) |
+| **Tagline** | Educação que acalma, soluções que funcionam, casa que continua elegante. |
+| **Archetype** | Caregiver (Cuidadora + Sábia + Criadora) |
+| **Voice** | Sofisticado-acolhedor, informativo, minimalista |
+| **Visual** | PB minimalista (Allrounder + Kenao) |
+| **ICP** | Tutores de gatos 25-45, urbanos, classe B-C+ |
+| **Model** | Hybrid (B2C direto + B2B revenda + marketplaces) |
+| **Persona** | Ro — guia acolhedora com protocolos práticos |
+| **Site** | gato3.com.br |
+
 Every nucleus reads `.cex/brand/brand_config.yaml` and auto-injects brand context into prompts.
-
-**If this section says "Not yet bootstrapped" — ASK THE USER before doing anything else.**
-See `.claude/rules/brand-bootstrap.md` for the auto-detection protocol.
 
 | How | For whom |
 |-----|----------|
