@@ -1,0 +1,96 @@
+id: p11_qg_brand_artifacts
+kind: quality_gate
+pillar: P11
+title: 'Gate: Brand Artifacts'
+version: 1.0.0
+created: '2026-04-01'
+updated: '2026-04-01'
+author: quality-gate-builder
+domain: brand
+quality: 0.0
+tags:
+- quality-gate
+- brand
+- identity
+- consistency
+- compliance
+tldr: 'Quality gate for brand artifacts: ensures brand consistency, legal compliance, and implementation clarity >= 8.5'
+density_score: 0.88
+when_to_use: Apply before publishing any brand_config, style_guide, logo_spec, voice_guide, or visual_identity artifact to
+  ensure brand pool compliance
+definition: '| Property | Value |
+
+  |----------|-------|
+
+  | Metric | brand_quality_score |
+
+  | Threshold | 8.5 |
+
+  | Operator | >= |
+
+  | Scope | All brand-related artifacts (brand_config, style_guide, logo_spec, voice_guide, visual_identity) |'
+hard_gates_all_must_pass: '| ID | Criterion | Failure Action |
+
+  |----|-----------|----------------|
+
+  | H01 | YAML frontmatter parses without error | block |
+
+  | H02 | ID matches pattern `p06_brand_*` or contains `brand` in domain | block |
+
+  | H03 | ID equals filename stem exactly | block |
+
+  | H04 | Kind field matches expected brand artifact type | block |
+
+  | H05 | Quality field is null at authoring time | block |
+
+  | H06 | Required fields present: id, kind, title, domain, tags, tldr, when_to_use | block |
+
+  | H07 | Brand colors defined with hex codes and accessibility ratings | block |
+
+  | H08 | Brand voice/tone documented with specific examples | block |
+
+  | H09 | Legal disclaimer and trademark usage guidelines present | block |
+
+  | H10 | Implementation instructions provided for each brand element | block |'
+soft_scoring_weighted_dimensions: '| ID | Dimension | Weight | Scoring Method |
+
+  |----|-----------|--------|----------------|
+
+  | S01 | Brand consistency across all elements | 25% | graduated |
+
+  | S02 | Implementation clarity and actionability | 20% | graduated |
+
+  | S03 | Visual coherence and design system integrity | 20% | graduated |
+
+  | S04 | Legal compliance and trademark protection | 15% | binary |
+
+  | S05 | Accessibility standards (WCAG 2.1 AA minimum) | 10% | graduated |
+
+  | S06 | Documentation quality and completeness | 10% | graduated |
+
+
+  Scoring Formula: `aggregate_score = SUM(gate_score * weight for each SOFT gate)`
+
+  PASS condition: all HARD gates pass AND aggregate_score >= 8.5'
+actions: '| Outcome | Consequence |
+
+  |---------|-------------|
+
+  | PASS (>= 8.5) | Artifact proceeds to brand pool; becomes enforceable brand standard |
+
+  | REVIEW (7.0-8.4) | Return to brand team with specific dimension feedback; one revision cycle |
+
+  | FAIL (< 7.0) | Block from brand pool; full brand audit and rewrite required |
+
+  | BYPASS | Requires CMO approval and temporary 30-day exemption with audit trail |'
+bypass_policy: '| Field | Value |
+
+  |-------|-------|
+
+  | Who may override | Chief Marketing Officer or Brand Director only |
+
+  | Conditions | Emergency rebrand, legal requirement change, or acquisition integration within 30 days |
+
+  | Audit requirement | Log in `.cex/runtime/brand_bypasses.md` with date, approver, reason, and expiry |
+
+  | Non-bypassable | H05 (quality null), H07 (brand colors), H09 (legal compliance) |'

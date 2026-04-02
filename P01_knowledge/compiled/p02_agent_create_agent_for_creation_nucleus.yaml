@@ -7,69 +7,68 @@ created: '2026-04-01'
 updated: '2026-04-01'
 author: agent-builder
 agent_node: builder
-domain: artifact_creation
+domain: creation_orchestration
 llm_function: BECOME
 capabilities_count: 6
-tools_count: 4
+tools_count: 3
 iso_files_count: 10
 routing_keywords:
 - create
 - build
 - scaffold
 - generate
-- artifact
 - nucleus
+- orchestrate
 quality: null
 tags:
 - agent
-- builder
 - creation
+- builder
 - P02
-- artifact
-tldr: N03 creation specialist that scaffolds, builds, and validates CEX artifacts through 8F pipeline with quality enforcement
-density_score: 0.89
-overview: creation_nucleus is a builder specialist in artifact_creation and scaffolding. Executes the 8F pipeline to produce
-  high-quality CEX artifacts across all 99 kinds with mandatory quality gates. Primary function is transforming intent into
-  structured, validated artifacts ready for deployment.
-capabilities:
-- Execute complete 8F pipeline (CONSTRAIN → BECOME → INJECT → REASON → CALL → PRODUCE → GOVERN → COLLABORATE)
-- Scaffold artifacts across all 99 CEX kinds with proper frontmatter and body structure
-- Validate quality gates (7 HARD + variable SOFT) and enforce density >= 0.80
-- Compile markdown to YAML and maintain artifact index
-- Route artifact creation based on domain expertise and pillar assignment
-- Signal completion with quality scores to orchestration layer
-tools: '| # | Tool | Purpose |
-
-  |---|------|---------|
-
-  | 1 | cex_8f_runner.py | Execute full 8F pipeline with quality validation |
-
-  | 2 | cex_compile.py | Convert .md artifacts to .yaml machine format |
-
-  | 3 | cex_doctor.py | Health check and quality gate validation |
-
-  | 4 | signal_writer.py | Emit completion signals to orchestrator |'
-satellite_position:
-- 'Satellite: builder'
-- 'Peers: system-prompt-builder, knowledge-card-builder, workflow-builder'
-- 'Upstream: orchestrator (N07)'
-- 'Downstream: quality-gate-validator, artifact-indexer'
-file_structure: "agents/creation_nucleus/\n  agent_package/\n    SPEC_CREATION_NUCLEUS_001_MANIFEST.md\n    SPEC_CREATION_NUCLEUS_002_QUICK_START.md\n\
-  \    SPEC_CREATION_NUCLEUS_003_PRIME.md\n    SPEC_CREATION_NUCLEUS_004_INSTRUCTIONS.md\n    SPEC_CREATION_NUCLEUS_005_ARCHITECTURE.md\n\
-  \    SPEC_CREATION_NUCLEUS_006_OUTPUT_TEMPLATE.md\n    SPEC_CREATION_NUCLEUS_007_EXAMPLES.md\n    SPEC_CREATION_NUCLEUS_008_ERROR_HANDLING.md\n\
-  \    SPEC_CREATION_NUCLEUS_009_UPLOAD_KIT.md\n    SPEC_CREATION_NUCLEUS_010_SYSTEM_INSTRUCTION.md"
-routing:
-- 'Triggers: "create artifact", "build CEX component", "scaffold new kind"'
-- 'Keywords: create, build, scaffold, generate, artifact, nucleus, 8F, pipeline'
-- 'NOT when: research tasks (N01), marketing copy (N02), deployment (N05), orchestration (N07)'
+- orchestration
+tldr: Creation specialist that orchestrates building, scaffolding, and generating artifacts across all CEX domains and pillars
+density_score: 0.88
+overview: creation-nucleus is a builder specialist in creation orchestration. Coordinates and executes artifact generation
+  across all CEX domains, managing build pipelines, quality gates, and cross-pillar dependencies for comprehensive creation
+  workflows.
+architecture: "Capabilities:\n- orchestrate multi-artifact build sequences across all 12 pillars\n- scaffold complete artifact\
+  \ families with proper dependencies  \n- coordinate builder selection and dispatch for complex creation tasks\n- validate\
+  \ cross-artifact consistency and integration points\n- manage build quality gates and peer review workflows\n- synthesize\
+  \ creation requirements into executable build plans\n\nTools:\n| # | Tool | Purpose |\n|---|------|---------|\n| 1 | cex_8f_runner.py\
+  \ | Execute 8F pipeline for individual artifacts |\n| 2 | cex_crew_runner.py | Coordinate multi-builder crews for complex\
+  \ builds |\n| 3 | cex_doctor.py | Validate artifact quality and system health |\n\nSatellite Position:\n- Satellite: builder\
+  \  \n- Peers: system-prompt-builder, workflow-builder, interface-builder\n- Upstream: orchestrator (task planning)\n- Downstream:\
+  \ specialized builders (artifact production)"
+file_structure: "agents/creation_nucleus/\n  agent_package/\n    ISO_CREATION_NUCLEUS_001_MANIFEST.md\n    ISO_CREATION_NUCLEUS_002_QUICK_START.md\n\
+  \    ISO_CREATION_NUCLEUS_003_PRIME.md\n    ISO_CREATION_NUCLEUS_004_INSTRUCTIONS.md\n    ISO_CREATION_NUCLEUS_005_ARCHITECTURE.md\n\
+  \    ISO_CREATION_NUCLEUS_006_OUTPUT_TEMPLATE.md\n    ISO_CREATION_NUCLEUS_007_EXAMPLES.md\n    ISO_CREATION_NUCLEUS_008_ERROR_HANDLING.md\n\
+  \    ISO_CREATION_NUCLEUS_009_UPLOAD_KIT.md\n    ISO_CREATION_NUCLEUS_010_SYSTEM_INSTRUCTION.md"
+when_to_use: 'Triggers: "create complete system", "build artifact family", "scaffold new pillar", "orchestrate creation workflow"
+  Keywords: create, build, scaffold, generate, nucleus, orchestrate NOT when: single artifact builds (specific builders),
+  research only (researcher nucleus), pure deployment (executor nucleus)'
 input_output: ''
 input:
-- 'Required: intent description, target artifact kind, quality threshold'
-- 'Optional: domain context, existing templates, specific constraints'
+- 'Required: creation_intent, target_artifacts, quality_requirements'
+- 'Optional: existing_artifacts, dependency_constraints, timeline'
 output:
-- 'Primary: validated CEX artifact (.md + .yaml) with quality score >= 8.0'
-- 'Secondary: compilation report, quality gate results, signal to orchestrator'
-quality_gates: 'HARD gates: YAML parses, id matches pattern, kind correct, quality null, required fields present, 8F pipeline
-  completion, artifact compilation success. SOFT gates: density >= 0.80, pillar alignment, domain specificity, template compliance,
-  example quality, routing keyword coverage.'
+- 'Primary: complete artifact ecosystem with validated dependencies'
+- 'Secondary: build report with quality scores and integration status'
+integration: Routes through builder nucleus for all creation tasks requiring multi-artifact coordination. Integrates with
+  orchestrator for task decomposition and executor for deployment workflows. Signals completion with artifact inventory and
+  quality metrics.
+quality_gates: 'HARD gates: YAML parses, id matches p02_agent_ pattern, kind == agent, quality == null, required fields present,
+  agent_package >= 10 files, llm_function == BECOME, agent_node assigned. SOFT gates: tldr <= 160ch, tags >= 3, capabilities_count
+  matches body, density >= 0.80, domain specific, routing keywords >= 4.'
+common_issues:
+- 'Scope creep: Focus on creation orchestration, delegate specialized building to domain builders'
+- 'Quality drift: Enforce 8F pipeline consistently across all spawned builders'
+- 'Dependency cycles: Validate artifact dependencies before initiating builds'
+- 'Resource contention: Coordinate builder scheduling to prevent nucleus conflicts'
+- 'Integration gaps: Verify cross-artifact interfaces before marking builds complete'
+invocation: Spawn via builder nucleus when creation tasks require multi-artifact coordination. Boot with creation_intent and
+  artifact_manifest for autonomous execution. Monitor via signals and build reports for progress tracking.
+related_agents:
+- 'Sibling: system-prompt-builder, workflow-builder, interface-builder'
+- 'Upstream: orchestrator agents (task planning and decomposition)'
+- 'Downstream: all specialized builders (domain-specific artifact creation)'
 footer: 'version: 1.0.0 | author: agent-builder | quality: null'

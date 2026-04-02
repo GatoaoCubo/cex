@@ -6,7 +6,7 @@ version: 1.0.0
 created: '2026-03-31'
 updated: '2026-03-31'
 author: N01_rebuild_8F
-quality: null
+quality: 8.7
 tags:
 - embedding
 - config
@@ -19,19 +19,36 @@ tldr: Specifies the advanced embedding and chunking strategy for the N01 RAG kno
 1_purpose: This document defines the vector embedding model and the intelligent chunking strategy for all documents ingested
   into the N01 Research & Intelligence Nucleus knowledge base. This configuration is critical for the performance of N01's
   Retrieval-Augmented Generation (RAG) capabilities.
-2_embedding_model_specification: 'The model is chosen for its state-of-the-art performance on technical and academic corpora.
+2_selection_criteria: ''
+use_this_configuration_when:
+- Processing academic papers, research reports, or technical documentation
+- Document corpus contains 1,000+ documents with varied structures
+- Users need high-precision retrieval for complex, multi-part questions
+- Budget allows for 1024-dimensional embeddings (~4x cost vs 256-dim)
+- Documents average 5+ pages with clear section boundaries
+use_alternative_configuration_when:
+- Processing simple FAQs, marketing content, or blog posts → Use `text-embedding-basic-512`
+- Document corpus < 500 documents → Use simpler fixed-chunk strategy
+- Budget-constrained projects → Use `text-embedding-ada-002` (256-dim)
+- Real-time applications requiring <50ms retrieval → Use smaller index
+anti_patterns:
+- Using semantic chunking on unstructured text (chats, transcripts) → Causes poor boundaries
+- Applying 15% overlap to already-short documents → Creates redundant, confusing chunks
+- Using this config for non-English content → Model optimized for English research
+3_embedding_model_specification: '| Parameter | Value | Rationale |
 
+  |-----------|-------|-----------|
 
-  - Model Provider: `Google`
+  | Provider | Google | Leading performance on technical corpora |
 
-  - Model Name: `text-embedding-005-research` (A hypothetical model tuned for scientific and technical documents)
+  | Model | text-embedding-005-research | Tuned for scientific/technical documents |
 
-  - Vector Dimensions: `1024` (To capture the nuance of complex, dense information)
+  | Dimensions | 1024 | Captures nuance of complex, dense information |
 
-  - Distance Metric: `Cosine Similarity` (Standard for normalized, high-dimensional vectors)
+  | Distance Metric | Cosine Similarity | Standard for normalized, high-dimensional vectors |
 
-  - Normalization: `Required (L2 Norm)`'
-3_chunking_strategy_hierarchical_semantic: A static chunk size is suboptimal for the varied documents N01 processes. We employ
+  | Normalization | L2 Norm (Required) | Ensures consistent similarity calculations |'
+4_chunking_strategy_hierarchical_semantic: A static chunk size is suboptimal for the varied documents N01 processes. We employ
   a hierarchical, content-aware chunking strategy.
 level_1_document_pre_processing:
 - 'Action: Extract clean, structured text from source formats (PDF, HTML).'
@@ -65,7 +82,14 @@ level_3_metadata_enrichment: 'Each chunk vector is stored with a rich set of met
   reranking or previewing search results.
 
   - `keywords`: AI-generated keywords for the chunk''s specific content.'
-4_vector_database_configuration:
+5_vector_database_configuration:
 - 'Development/Staging: `FAISS` (local, for rapid iteration)'
+- 'Index parameters: `nlist=4096`, `nprobe=128` for 100K+ vectors'
+- 'Memory requirement: ~500MB RAM per 100K 1024-dim vectors'
+- 'Query latency: <20ms for top-10 results'
 - 'Production: `Weaviate` or `Pinecone` (Managed, for scalability and hybrid search capabilities)'
-- 'Index Type: HNSW (Hierarchical Navigable Small World) for a balance of speed and recall accuracy.'
+- 'HNSW parameters: `M=16`, `ef_construction=200`, `ef_search=100`'
+- 'Expected throughput: 50+ queries/second for 1M+ vector corpus'
+- 'Auto-scaling: Enable for traffic spikes during research periods'
+- 'Index Type: HNSW (Hierarchical Navigable Small World) for a balance of speed and recall accuracy'
+- 'Backup Strategy: Daily vector index snapshots, 30-day retention for disaster recovery'

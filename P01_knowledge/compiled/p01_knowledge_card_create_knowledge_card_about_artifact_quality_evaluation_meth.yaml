@@ -1,0 +1,104 @@
+id: p01_kc_artifact_quality_evaluation_methods
+kind: knowledge_card
+pillar: P01
+title: Artifact Quality Evaluation Methods
+version: 1.0.0
+created: '2026-04-02'
+updated: '2026-04-02'
+author: builder
+domain: quality_assurance
+quality: 0.0
+tags:
+- quality-evaluation
+- validation
+- scoring
+- peer-review
+- gates
+- quality-assurance
+- knowledge
+tldr: Quality evaluation combines automated gates (HARD/SOFT), multi-dimensional scoring (D1-D5), and peer review to assess
+  artifact fitness across technical, content, and usability dimensions
+when_to_use: When establishing quality standards for artifacts, documents, code, or knowledge products requiring systematic
+  evaluation
+keywords:
+- quality-gates
+- scoring-rubric
+- peer-review
+- validation
+- artifact-quality
+long_tails:
+- How to design HARD and SOFT quality gates for artifacts
+- Multi-dimensional scoring systems for content quality evaluation
+- Automated vs manual quality assessment trade-offs
+axioms:
+- ALWAYS separate HARD gates (binary pass/fail) from SOFT scoring (gradual quality)
+- NEVER allow self-scoring in peer review systems
+- IF quality score < threshold THEN block publication regardless of other factors
+linked_artifacts:
+  primary: null
+  related:
+  - p11_qg_knowledge_card
+  - p11_scoring_rubric_intelligence
+density_score: 0.89
+data_source: ISO 25010 software quality model, IEEE 1061 quality metrics standard
+quick_reference: 'topic: quality_evaluation_methods
+
+  scope: Artifact assessment frameworks (documents, code, knowledge products)
+
+  owner: quality_assurance
+
+  criticality: high'
+key_concepts: '| Concept | Definition | Purpose |
+
+  |---------|------------|---------|
+
+  | HARD Gates | Binary pass/fail checks | Block artifacts with syntax/compliance failures |
+
+  | SOFT Scoring | 1-10 scale across dimensions | Gradual quality assessment with weighted averages |
+
+  | Quality Dimensions | D1-D5 evaluation areas | Structure, Content, Usability, Accuracy, Compliance |
+
+  | Peer Review | External qualified reviewers | Prevent self-assessment bias |
+
+  | Threshold Systems | Minimum publication scores | 7.0 use, 8.0 pool, 9.5 golden standard |
+
+  | Validation Pipeline | Multi-stage workflow | Automated → manual → scoring → decision |'
+strategy_phases: '| Phase | Action | Output | Tools/Methods |
+
+  |-------|--------|---------|---------------|
+
+  | Define Gates | Establish HARD requirements | Binary pass/fail checklist | Syntax validators, compliance scanners |
+
+  | Design Rubric | Create SOFT scoring dimensions | Multi-dimensional scoring matrix | 10/5/0 point scales, weighted criteria
+  |
+
+  | Set Thresholds | Define minimum acceptable scores | Publication standards | 7.0 internal, 8.0 public, 9.5 golden |
+
+  | Implement Validation | Build automated + manual workflows | Validation pipeline | CI/CD integration, reviewer assignment
+  |
+
+  | Measure Consistency | Track inter-rater reliability | Calibration feedback | Statistical variance analysis |'
+golden_rules:
+- SEPARATE binary gates from gradual scoring — different evaluation modes
+- WEIGHT dimensions by artifact type (accuracy 2x for knowledge, usability 2x for UX)
+- CALIBRATE reviewers with golden examples before live evaluation
+- TRACK score distribution to detect grade inflation or reviewer bias
+flow: "[Artifact] → [HARD Gates] → [SOFT Scoring] → [Threshold Check] → [Accept/Reject]\n              ↓ FAIL            \
+  \  ↓ Multi-dim       ↓ < 7.0\n         [Immediate Reject]   [Weighted Score]  [Return w/Feedback]"
+comparativo: '| Method | Speed | Accuracy | Scalability | Bias Risk | Cost |
+
+  |--------|-------|----------|-------------|-----------|------|
+
+  | Automated Gates | Fast | High (syntax) | Unlimited | Low | Low |
+
+  | Peer Review | Slow | High (content) | Limited | Medium | High |
+
+  | Self-Assessment | Fast | Low | High | Very High | Low |
+
+  | Hybrid (Gates+Review) | Medium | Highest | Medium | Low | Medium |
+
+  | ML-Assisted | Fast | Medium | High | Medium | Medium |'
+references:
+- ISO/IEC 25010:2011 Software Quality Model (5 characteristics, 31 sub-characteristics)
+- IEEE 1061-1998 Software Quality Metrics Methodology
+- 'Related: p11_qg_knowledge_card (HARD/SOFT gate implementation)'

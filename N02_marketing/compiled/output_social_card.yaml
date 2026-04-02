@@ -1,0 +1,96 @@
+id: p05_output_social_card
+kind: output_validator
+pillar: P05
+title: Social Media Card Templates
+version: 1.0.0
+created: 2026-04-01
+author: n02_visual_frontend
+domain: frontend
+quality: 8.9
+tags:
+- output
+- template
+- social
+- og-image
+- tailwind
+tldr: HTML/CSS card templates for og:image, Instagram, LinkedIn, Twitter — screenshot-renderable.
+density_score: 0.88
+purpose: Generate social sharing cards as styled HTML, renderable to image via browser-mcp screenshot. Each format has fixed
+  dimensions matching platform requirements. ---
+format_specifications: '| Platform | Dimensions | Aspect Ratio | File |
+
+  |----------|-----------|--------------|------|
+
+  | Open Graph (og:image) | 1200 × 630 | 1.91:1 | og-card.html |
+
+  | Instagram Post | 1080 × 1080 | 1:1 | ig-card.html |
+
+  | LinkedIn Share | 1200 × 627 | 1.91:1 | li-card.html |
+
+  | Twitter/X Card | 1200 × 675 | 16:9 | tw-card.html |'
+og_image_template_1200_630: "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <style>\n    * { margin:\
+  \ 0; padding: 0; box-sizing: border-box; }\n    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');\n\
+  \n    .card {\n      width: 1200px;\n      height: 630px;\n      background: linear-gradient(135deg, hsl(240 10% 5%) 0%,\
+  \ hsl(240 8% 15%) 100%);\n      display: flex;\n      flex-direction: column;\n      justify-content: center;\n      padding:\
+  \ 80px;\n      font-family: 'Inter', sans-serif;\n      color: hsl(0 0% 95%);\n      position: relative;\n      overflow:\
+  \ hidden;\n    }\n\n    / Accent glow /\n    .card::before {\n      content: '';\n      position: absolute;\n      top:\
+  \ -100px;\n      right: -100px;\n      width: 400px;\n      height: 400px;\n      background: radial-gradient(circle, rgba(80,\
+  \ 200, 120, 0.15) 0%, transparent 70%);\n      border-radius: 50%;\n    }\n\n    .badge {\n      display: inline-block;\n\
+  \      padding: 6px 16px;\n      border-radius: 20px;\n      font-size: 14px;\n      font-weight: 600;\n      background:\
+  \ rgba(80, 200, 120, 0.15);\n      color: #50C878;\n      border: 1px solid rgba(80, 200, 120, 0.3);\n      margin-bottom:\
+  \ 24px;\n    }\n\n    h1 {\n      font-size: 56px;\n      font-weight: 800;\n      line-height: 1.1;\n      margin-bottom:\
+  \ 20px;\n      max-width: 800px;\n    }\n\n    .subtitle {\n      font-size: 22px;\n      color: hsl(0 0% 60%);\n      max-width:\
+  \ 600px;\n      line-height: 1.5;\n    }\n\n    .logo {\n      position: absolute;\n      bottom: 60px;\n      right: 80px;\n\
+  \      display: flex;\n      align-items: center;\n      gap: 12px;\n    }\n\n    .logo-mark {\n      width: 40px;\n   \
+  \   height: 40px;\n      background: #50C878;\n      border-radius: 8px;\n      display: flex;\n      align-items: center;\n\
+  \      justify-content: center;\n      font-weight: 800;\n      font-size: 20px;\n      color: #000;\n    }\n\n    .logo-text\
+  \ {\n      font-size: 24px;\n      font-weight: 700;\n      letter-spacing: -0.02em;\n    }\n  </style>\n</head>\n<body>\n\
+  \  <div class=\"card\">\n    <span class=\"badge\">{{BADGE_TEXT}}</span>\n    <h1>{{HEADLINE}}</h1>\n    <p class=\"subtitle\"\
+  >{{SUBTITLE}}</p>\n    <div class=\"logo\">\n      <div class=\"logo-mark\">C</div>\n      <span class=\"logo-text\">CODEXA</span>\n\
+  \    </div>\n  </div>\n</body>\n</html>"
+instagram_square_1080_1080: "<style>\n  .card {\n    width: 1080px;\n    height: 1080px;\n    background: linear-gradient(180deg,\
+  \ hsl(240 10% 5%) 0%, hsl(160 40% 10%) 100%);\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n\
+  \    align-items: center;\n    text-align: center;\n    padding: 100px;\n  }\n  h1 { font-size: 64px; margin-bottom: 32px;\
+  \ }\n  .subtitle { font-size: 24px; }\n  .logo { position: absolute; bottom: 80px; }\n</style>"
+rendering_to_image: '# Via browser-mcp (Puppeteer)
+
+  # 1. Open HTML file in headless browser
+
+  # 2. Set viewport to exact dimensions
+
+  # 3. Screenshot as PNG
+
+  # 4. Optimize with sharp/squoosh
+
+
+  # Via CLI
+
+  npx puppeteer screenshot og-card.html --viewport 1200x630 --output og-card.png'
+template_variables: '| Variable | Example | Used In |
+
+  |----------|---------|---------|
+
+  | `{{BADGE_TEXT}}` | "New Feature" | All formats |
+
+  | `{{HEADLINE}}` | "Automate Your E-commerce" | All formats |
+
+  | `{{SUBTITLE}}` | "AI-powered product listing..." | og, LinkedIn, Twitter |
+
+  | `{{LOGO_URL}}` | "/assets/logo.svg" | All formats |
+
+  | `{{GRADIENT_FROM}}` | "hsl(240 10% 5%)" | Background |
+
+  | `{{GRADIENT_TO}}` | "hsl(160 40% 10%)" | Background |'
+validation_checklist: '| Check | Command | Expected Result |
+
+  |-------|---------|-----------------|
+
+  | Dimensions correct | `identify card.png` | 1200x630, 1080x1080, etc. |
+
+  | Text readable | Visual inspection | Contrast ratio > 4.5:1 |
+
+  | Fonts loaded | Browser DevTools | No font fallback warnings |
+
+  | Variables replaced | `grep "{{" card.html` | No output (all replaced) |
+
+  | File size optimal | `ls -lh card.png` | < 500KB for web sharing |'

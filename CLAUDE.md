@@ -1,6 +1,6 @@
 # CEX — Typed Knowledge System for LLM Agents
 
-> 99 kinds · 99 builders · 12 pillars · 7 nuclei · 8F pipeline · 101 sub-agents
+> 114 kinds · 107 builders · 12 pillars · 8 nuclei (N00-N07) · 8F pipeline · cex_sdk runtime
 
 ## Brand Identity
 
@@ -33,10 +33,12 @@ Check `CEX_NUCLEUS`. N07 = Orchestrator. N03 = Builder. Not set = read and decid
 | **Commands** | `.claude/commands/` → /build, /validate, /dispatch, /status, /doctor, /mission |
 | **Builders (source of truth)** | `archetypes/builders/{kind}-builder/` (13 ISOs each) |
 | **Sub-agents** | `.claude/agents/{kind}-builder.md` (101 files) |
+| **N00 Genesis (mold)** | `N00_genesis/` + `P{01-12}_*/` + `archetypes/` |
 | **Pillar schemas** | `P{01-12}_*/_schema.yaml` |
-| **Kind KCs** | `P01_knowledge/library/kind/kc_{kind}.md` (99 files) |
-| **Kind registry** | `.cex/kinds_meta.json` (99 kinds) |
-| **Nucleus fractals** | `N{01-07}_*/` (13 subdirs each, mirrors 12 pillars) |
+| **Kind KCs** | `P01_knowledge/library/kind/kc_{kind}.md` (114 files) |
+| **Kind registry** | `.cex/kinds_meta.json` (114 kinds) |
+| **Nucleus fractals** | `N{01-07}_*/` (13 subdirs each, mirrors N00's 12 pillars) |
+| **SDK runtime** | `cex_sdk/` (78 .py, 4504 lines) |
 | **Boot scripts** | `boot/cex.cmd` (N07) · `boot/n0{1-6}.cmd` |
 | **Decision manifest** | `.cex/runtime/decisions/decision_manifest.yaml` |
 | **GDP skill** | `archetypes/builders/_shared/skill_guided_decisions.md` |

@@ -1,0 +1,75 @@
+id: p06_is_engineering_data_model
+kind: input_schema
+pillar: P06
+version: 1.0.0
+created: '2026-04-01'
+updated: '2026-04-01'
+author: input-schema-builder
+scope: engineering system data model creation and validation
+fields: '| # | Name | Type | Required | Default | Description |
+
+  |---|------|------|----------|---------|-------------|
+
+  | 1 | project_name | string | YES | - | Name of the engineering project or system |
+
+  | 2 | engineering_domain | string | YES | - | Primary engineering domain (software, mechanical, electrical, civil, aerospace)
+  |
+
+  | 3 | requirements | list | NO | [] | List of functional and non-functional requirements |
+
+  | 4 | specifications | object | NO | {} | Technical specifications including performance metrics, constraints, and standards
+  |
+
+  | 5 | team_size | integer | NO | 1 | Number of engineers working on the project |
+
+  | 6 | timeline_months | integer | NO | 6 | Project timeline in months |
+
+  | 7 | budget | float | NO | null | Project budget in currency units |
+
+  | 8 | quality_standards | list | NO | ["ISO9001"] | Quality standards and frameworks to be followed |
+
+  | 9 | compliance_requirements | list | NO | [] | Regulatory and compliance requirements |
+
+  | 10 | technology_stack | object | NO | {} | Technologies, tools, and platforms to be used |'
+coercion:
+- from: string
+  to: integer
+  rule: Parse team_size and timeline_months from string if numeric
+- from: string
+  to: float
+  rule: Parse budget from string if numeric
+- from: string
+  to: list
+  rule: Split comma-separated strings into lists for requirements and quality_standards
+examples: "{\n  \"project_name\": \"Web API Gateway\", \n  \"engineering_domain\": \"software\",\n  \"team_size\": 3,\n  \"\
+  timeline_months\": 8,\n  \"requirements\": [\"rate limiting\", \"authentication\", \"load balancing\"],\n  \"technology_stack\"\
+  : {\"backend\": \"Node.js\", \"database\": \"PostgreSQL\", \"cache\": \"Redis\"}\n}"
+domain: engineering-systems
+quality: null
+tags:
+- input-schema
+- engineering
+- data-model
+- systems
+- specifications
+tldr: 'Input contract for engineering data models: requires project name and domain, optional requirements, specs, team size,
+  timeline, budget, and standards.'
+density_score: 0.92
+contract_definition: Engineering systems and projects require structured data models to capture requirements, specifications,
+  team composition, timelines, and compliance needs. This input schema defines the contract for any system that processes
+  engineering project data, ensuring consistent data structure across different engineering domains while maintaining flexibility
+  for domain-specific requirements.
+coercion_rules: '| From | To | Rule |
+
+  |------|----|------|
+
+  | string | integer | Parse team_size and timeline_months from string if numeric |
+
+  | string | float | Parse budget from string if numeric |
+
+  | string | list | Split comma-separated strings into lists for requirements and quality_standards |'
+references:
+- 'ISO 15288: Systems and software engineering life cycle processes'
+- 'IEEE 1220: Standard for Application and Management of the Systems Engineering Process'
+- 'PMBOK Guide: Project Management Body of Knowledge'
+- Engineering domain standards (IEEE, ASME, ACM, etc.)

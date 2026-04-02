@@ -57,9 +57,19 @@ supported_platforms: '| Platform | API Options | Caption Limit | Hashtag Rec |
   | LinkedIn | Ayrshare, Postiz | 3000 chars | 3-5 |
 
   | Twitter/X | Ayrshare, Postiz | 280 chars | 2-3 |'
-config_reference: 'Company-specific config lives in `_instances/{company}/N02_marketing/social_publisher_config.yaml`. See
-  `P04_tools/templates/tpl_social_publisher.md` for full schema. Required sections: `identity`, `platforms`, `schedule`, `content_mix`,
-  `catalog`, `publisher`, `hashtags`.'
+config_structure: 'identity: {company, voice, audience}
+
+  platforms: {instagram: {api_key: ENV_VAR, enabled: true}}
+
+  schedule: {timezone: America/New_York, optimal_times: []}
+
+  content_mix: {product: 40%, tips: 30%, behind_scenes: 30%}
+
+  catalog: {source: api|file, endpoint: url}
+
+  publisher: {retry: {attempts: 3}, cooldown_days: 2}
+
+  hashtags: {product: [#fashion], tips: [#styling]}'
 quality_gates:
 - 'Config completeness: all 7 required sections ✓'
 - 'Zero plaintext secrets: all API keys via ENV_VAR ✓'

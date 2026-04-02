@@ -1,0 +1,67 @@
+id: p06_is_intelligence_data_model
+kind: input_schema
+pillar: P06
+version: 1.0.0
+created: '2026-04-01'
+updated: '2026-04-01'
+author: builder_agent
+scope: Intelligence analysis operations requiring structured data input
+fields: '| # | Name | Type | Required | Default | Description |
+
+  |---|------|------|----------|---------|-------------|
+
+  | 1 | query | string | YES | - | Research question or intelligence topic to analyze |
+
+  | 2 | data_sources | list | NO | ["papers", "web", "internal_knowledge"] | Data sources to search |
+
+  | 3 | analysis_depth | string | NO | "medium" | Analysis depth level (shallow/medium/deep/comprehensive) |
+
+  | 4 | time_constraint_hours | integer | NO | 24 | Maximum time allowed for analysis |
+
+  | 5 | min_confidence_threshold | float | NO | 0.7 | Minimum confidence score for findings (0.0-1.0) |
+
+  | 6 | output_format | string | NO | "structured_report" | Desired output format type |
+
+  | 7 | geographic_scope | list | NO | null | Geographic regions to focus analysis |
+
+  | 8 | temporal_scope | object | NO | null | Time period constraints for data collection |'
+coercion:
+- from: string
+  to: integer
+  rule: Parse time_constraint_hours from string if numeric
+- from: string
+  to: float
+  rule: Parse min_confidence_threshold from string if numeric between 0.0-1.0
+- from: string
+  to: list
+  rule: Split comma-separated data_sources string into list
+examples: "{\n  \"query\": \"Competitor analysis for enterprise RAG solutions\",\n  \"analysis_depth\": \"medium\", \n  \"\
+  geographic_scope\": [\"North America\", \"Europe\"],\n  \"temporal_scope\": {\"relative_period\": \"last_6_months\"}\n}"
+domain: intelligence-analysis
+quality: null
+tags:
+- input-schema
+- intelligence
+- data-model
+- analysis
+- research
+tldr: 'Input contract for intelligence analysis: requires query, optional sources/depth/format/constraints for structured
+  research operations.'
+density_score: 0.92
+contract_definition: Intelligence analysis operations receive research requests from agents, users, or automated systems.
+  Callers provide a research query and optional parameters for data sources, analysis depth, time constraints, confidence
+  thresholds, and output formatting. The system uses these inputs to scope and execute structured intelligence gathering and
+  analysis.
+coercion_rules: '| From | To | Rule |
+
+  |------|----|------|
+
+  | string | integer | Parse time_constraint_hours from numeric string |
+
+  | string | float | Parse min_confidence_threshold from numeric string (0.0-1.0) |
+
+  | string | list | Split comma-separated data_sources into list |'
+references:
+- N01 Intelligence Nucleus data requirements
+- RAG source configuration patterns
+- Intelligence analysis workflow standards

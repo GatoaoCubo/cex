@@ -1,0 +1,46 @@
+id: p10_out_gap_report
+kind: output
+pillar: P10
+title: 'Output: Gap Report'
+version: 1.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: knowledge-management
+quality: 8.7
+tags:
+- output
+- n04
+- gap
+- report
+- coverage
+- missing
+tldr: Missing KC analysis by kind, domain, and nucleus. Prioritized gap list.
+density_score: 0.91
+usage_guidelines: 'When to use:
+
+  - Before major knowledge expansion initiatives
+
+  - During quarterly knowledge audits
+
+  - When onboarding shows knowledge gaps
+
+  - Before nucleus capability assessments
+
+
+  When NOT to use:
+
+  - For individual artifact quality issues (use quality gates)
+
+  - For real-time knowledge needs (use retriever)
+
+  - For content updates vs missing content
+
+
+  Anti-patterns:
+
+  - Tracking gaps but never filling them
+
+  - Equal priority for all gaps (no impact weighting)
+
+  - Outdated reports driving current decisions'
+template: ''

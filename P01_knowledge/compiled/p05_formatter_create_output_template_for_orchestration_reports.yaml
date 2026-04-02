@@ -1,0 +1,123 @@
+id: p05_fmt_orchestration_reports
+kind: formatter
+pillar: P05
+version: 1.0.0
+created: '2026-04-01'
+updated: '2026-04-01'
+author: builder_agent
+target_format: markdown
+input_type: structured_data
+rule_count: 6
+domain: orchestration_monitoring
+quality: null
+tags:
+- formatter
+- orchestration
+- reports
+- markdown
+- P05
+- system-monitoring
+tldr: Formats orchestration system reports into structured Markdown with mission status, nucleus activity, quality metrics,
+  and resource utilization tables
+template_engine: string_format
+pretty_print: true
+escaping: none
+encoding: utf8
+locale: en-US
+streaming: false
+keywords:
+- orchestration-reports
+- system-status
+- mission-tracking
+- nucleus-monitoring
+density_score: 0.89
+formatting_rules: '| Name | Input Field | Transform | Pattern | Options |
+
+  |------|-------------|-----------|---------|---------|
+
+  | mission_header | mission_name | template | `## Mission: {value}` | uppercase_first: true |
+
+  | status_badge | mission_status | stringify | `Status: {value}` | status_colors: true |
+
+  | quality_score | quality_metrics | number_format | `{value:.1f}/10.0` | precision: 1, min_width: 5 |
+
+  | timestamp_format | completed_at | date_format | `{value:%Y-%m-%d %H:%M}` | timezone: UTC, fallback: "In Progress" |
+
+  | nucleus_table | nucleus_activity | tabulate | `| {nucleus} | {tasks} | {completion}% | {quality} |` | headers: true, align:
+  left |
+
+  | resource_percent | resource_usage | number_format | `{value:.1%}` | percent_style: true, precision: 1 |'
+input_specification: "Type: structured_data\nStructure: orchestration report object containing mission metadata, nucleus activity\
+  \ logs, quality metrics, timing data, and resource utilization stats.\nExample:\n{\n  \"mission_name\": \"BRAND_LAUNCH_Q2\"\
+  ,\n  \"mission_status\": \"completed\",\n  \"quality_metrics\": {\"overall\": 8.7, \"avg_nucleus\": 8.4},\n  \"completed_at\"\
+  : \"2026-04-01T20:30:00Z\",\n  \"nucleus_activity\": [\n    {\"nucleus\": \"N03\", \"tasks\": 12, \"completion\": 100, \"\
+  quality\": 8.9},\n    {\"nucleus\": \"N02\", \"tasks\": 8, \"completion\": 100, \"quality\": 8.2}\n  ],\n  \"resource_usage\"\
+  : {\"cpu\": 0.67, \"memory\": 0.45, \"dispatch_slots\": 0.83}\n}"
+output_specification: 'Format: markdown
+
+  Example:
+
+  ## Mission: BRAND_LAUNCH_Q2
+
+  Status: completed
+
+  Completed: 2026-04-01 20:30
+
+  Overall Quality: 8.7/10.0
+
+
+  ### Nucleus Activity
+
+  | Nucleus | Tasks | Completion | Quality |
+
+  |---------|-------|------------|---------|
+
+  | N03 | 12 | 100% | 8.9/10.0 |
+
+  | N02 | 8 | 100% | 8.2/10.0 |
+
+
+  ### Resource Utilization
+
+  - CPU: 67.0%
+
+  - Memory: 45.0%
+
+  - Dispatch Slots: 83.0%'
+template: 'Engine: string_format
+
+  ## Mission: {mission_name}
+
+  Status: {mission_status}
+
+  Completed: {completed_at}
+
+  Overall Quality: {overall_quality}/10.0
+
+
+  ### Nucleus Activity
+
+  | Nucleus | Tasks | Completion | Quality |
+
+  |---------|-------|------------|---------|
+
+  {nucleus_rows}
+
+
+  ### Resource Utilization
+
+  - CPU: {cpu_usage}
+
+  - Memory: {memory_usage}
+
+  - Dispatch Slots: {dispatch_usage}'
+edge_cases:
+- 'Null timestamps: render as "In Progress" for ongoing missions'
+- 'Empty nucleus activity: render "No nucleus activity recorded" message'
+- 'Quality scores outside 0-10 range: clamp to bounds and flag with asterisk'
+- 'Missing resource data: render as "Not Available" with consistent spacing'
+- 'Special characters in mission names: pipe `|` escaped as `\|` in table headers'
+references:
+- CEX Orchestration System Documentation
+- Markdown CommonMark Specification (tables)
+- ISO 8601 DateTime Format Standard

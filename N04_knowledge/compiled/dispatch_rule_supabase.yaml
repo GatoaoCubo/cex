@@ -50,13 +50,34 @@ routing_rules: "primary_nucleus: N04\nconfidence_threshold: 0.80\nfallback_nucle
   \n    handoff_to: N02\n    reason: \"N02 handles content stored in Supabase\"\n  - condition: \"intent contains 'monitor'\
   \ or 'backup' or 'alert'\"\n    handoff_to: N05\n    reason: \"N05 handles operational monitoring\"\n  - condition: \"intent\
   \ contains 'crm' or 'lead' or 'sales'\"\n    handoff_to: N06\n    reason: \"N06 handles commercial data\""
-n04_always_owns:
-- Schema design (CREATE TABLE, ALTER TABLE)
-- RLS policy creation/modification
-- Extension management (CREATE EXTENSION)
-- pgvector configuration (embeddings, indexes)
-- Config YAML structure and validation
-- Cross-nucleus data access rules
+n04_always_owns: '| Data Layer Concern | Example Task | Reasoning |
+
+  |-------------------|--------------|-----------|
+
+  | Schema design | CREATE TABLE users, ALTER TABLE add column | Core data structure decisions |
+
+  | RLS policy creation | CREATE POLICY tenant_isolation | Security and access control |
+
+  | Extension management | CREATE EXTENSION pgvector | Database capability configuration |
+
+  | pgvector configuration | CREATE INDEX USING ivfflat | Vector search optimization |
+
+  | Config YAML structure | supabase_config.yaml validation | Data layer configuration standards |
+
+  | Cross-nucleus data access | Inter-nucleus query patterns | Data access orchestration |'
+anti_patterns_don_t_route_to_n04: '| Intent | Route Instead | Why |
+
+  |--------|--------------|-----|
+
+  | "debug connection timeout" | N05 | Operational issue, not data design |
+
+  | "write marketing copy about our DB" | N02 | Copy writing, not data layer |
+
+  | "analyze user behavior from DB" | N01 | Research analysis, not schema |
+
+  | "price our SaaS based on DB usage" | N06 | Commercial strategy, not data |
+
+  | "deploy to production environment" | N03 | Infrastructure deployment |'
 examples: '| Intent | Routes To | Why |
 
   |--------|----------|-----|

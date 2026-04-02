@@ -1,0 +1,57 @@
+id: p10_out_finetune_dataset
+kind: output
+pillar: P10
+title: 'Output: Fine-Tune Dataset'
+version: 1.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: knowledge-management
+quality: 8.6
+tags:
+- output
+- n04
+- fine-tuning
+- jsonl
+- ml
+- dataset
+- training
+tldr: 'JSONL export for LLM fine-tuning: instruction/input/output triples from KCs.'
+density_score: 0.92
+format_jsonl: '{"instruction": "Explain chain-of-thought prompting for LLM agents", "input": "", "output": "Chain-of-Thought
+  (CoT) elicits intermediate reasoning steps from LLMs..."}
+
+  {"instruction": "What is the self-healing pattern in agent systems?", "input": "", "output": "Self-healing: generate → validate
+  → [fail] → diagnose → fix → retry..."}
+
+  {"instruction": "When should you use RAG vs fine-tuning?", "input": "I have 200 domain-specific documents", "output": "RAG
+  for dynamic data that changes. Fine-tuning for stable patterns..."}'
+generation_rules:
+- 'instruction: Extract from KC `tldr` → convert to "What is..." or "How to..." question format (min 5, max 15 words)'
+- 'input: Optional context from `keywords` field when KC has specific use-case scenarios (max 50 tokens)'
+- 'output: Compressed KC body content using bullet points and technical terms (400-500 tokens optimal)'
+- 'Filter criteria: density >= 0.85 AND quality >= 8.0 AND body length >= 200 words'
+- 'Deduplication: Cosine similarity < 0.8 between output embeddings + manual review of instruction patterns'
+- 'Validation: Test on 10% holdout set for perplexity < 3.0 and factual accuracy > 95%'
+usage_guidelines: '| When to use | When NOT to use |
+
+  |-------------|-----------------|
+
+  | Stable domain knowledge (patterns don''t change) | Dynamic/frequently updated information |
+
+  | Need consistent formatting/style across responses | Small datasets (<100 examples) |
+
+  | Target model will be used repeatedly | One-off tasks |
+
+  | Have 500+ high-quality KC examples | Factual Q&A (use RAG instead) |
+
+
+  Anti-patterns:
+
+  - Including low-quality KCs (quality <8.0) dilutes training signal
+
+  - Duplicate instructions with minor variations (confuses model)
+
+  - Overly long outputs (>500 tokens) → truncation issues
+
+  - Missing instruction diversity → overfitting to question patterns'
+metadata_header: '{"_meta": {"source": "CEX P01_knowledge", "kc_count": 243, "generated": "2026-03-31", "avg_quality": 8.9}}'

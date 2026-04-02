@@ -1,0 +1,106 @@
+id: p07_sr_5d_intelligence
+kind: scoring_rubric
+pillar: P07
+title: 'Rubric: 5D Intelligence Evaluation'
+version: 1.0.0
+created: '2026-04-01'
+updated: '2026-04-01'
+author: scoring-rubric-builder
+framework: 5D Intelligence
+target_kinds:
+- intelligence_report
+- research_analysis
+- competitor_intel
+- market_research
+dimensions_count: 5
+total_weight: 100
+threshold_golden: 9.5
+threshold_publish: 8.0
+threshold_review: 7.0
+automation_status: semi-automated
+domain: intelligence
+quality: null
+tags:
+- scoring-rubric
+- 5d
+- intelligence
+- evaluation
+- research
+tldr: '5-dimension rubric for intelligence artifacts: research depth 25%, source quality 20%, analysis rigor 25%, insight
+  generation 20%, actionability 10%'
+density_score: 0.87
+calibration_set:
+- p07_gt_intel_competitor_analysis
+- p07_gt_intel_market_trends
+inter_rater_agreement: 0.82
+appeals_process: Submit to N01-intelligence with supporting sources for re-evaluation within 48h
+linked_artifacts:
+  primary: intelligence-report-builder
+  related:
+  - p11_qg_intelligence
+  - p01_kc_research_methods
+  - n01_intelligence_workflow
+framework_overview: 5D Intelligence evaluates research and analysis artifacts across five orthogonal dimensions that capture
+  the full spectrum of intelligence quality. Designed for N01 Intelligence Nucleus outputs including competitor analysis,
+  market research, trend reports, and strategic briefings. This rubric measures both the rigor of research methodology and
+  the value of insights generated.
+dimensions: '| Dimension | Weight | Scale | Criteria | Example (10) | Example (5) |
+
+  |-----------|--------|-------|----------|-------------|-------------|
+
+  | Research Depth | 25% | 0-10 | Comprehensiveness of information gathering, multiple angles explored | 15+ sources across
+  4 categories, exhaustive coverage, contradictory views addressed | 6-8 sources from 2 categories, basic coverage, some gaps
+  |
+
+  | Source Quality | 20% | 0-10 | Credibility, recency, and relevance of information sources | Primary sources, peer-reviewed
+  papers, recent data (<6mo), industry authorities | Mix of primary/secondary, mostly credible, some older data (6-18mo) |
+
+  | Analysis Rigor | 25% | 0-10 | Logical reasoning, methodology transparency, assumptions stated | Clear methodology, assumptions
+  explicit, logical flow, alternative scenarios considered | Basic methodology described, some assumptions stated, mostly
+  logical |
+
+  | Insight Generation | 20% | 0-10 | Novel connections, non-obvious patterns identified, strategic implications | 3+ novel
+  insights, unexpected patterns, clear strategic implications with supporting evidence | 1-2 basic insights, obvious patterns,
+  limited strategic value |
+
+  | Actionability | 10% | 0-10 | Practical recommendations with clear next steps and measurable outcomes | Specific actions
+  with timelines, success metrics, risk mitigation, implementation guidance | General recommendations, vague timelines, limited
+  implementation detail |'
+thresholds: '| Tier | Score | Action |
+
+  |------|-------|--------|
+
+  | GOLDEN | >= 9.5 | Promote to intelligence archive as reference case, distribute to stakeholders |
+
+  | PUBLISH | >= 8.0 | Approve for distribution, add to knowledge base |
+
+  | REVIEW | >= 7.0 | Return with dimension-specific feedback, request targeted improvements |
+
+  | REJECT | < 7.0 | Redo with new research scope, methodology review required |'
+calibration:
+- 'GOLDEN (9.7): Comprehensive competitor analysis with 18 primary sources, novel market positioning insights, 6-month implementation
+  roadmap with KPIs'
+- 'PUBLISH (8.4): Market trend report with 12 quality sources, solid analysis, actionable recommendations for next quarter'
+- 'REVIEW (7.3): Basic competitor overview with 8 sources, surface-level insights, general recommendations lacking specificity'
+- 'REJECT (5.8): Superficial research with 4 secondary sources, no novel insights, recommendations too vague for implementation'
+automation: '| Dimension | Status | Tool | Notes |
+
+  |-----------|--------|------|-------|
+
+  | Research Depth | semi-automated | source_counter.py + manual methodology review | Automated counting, human evaluation
+  of comprehensiveness |
+
+  | Source Quality | semi-automated | source_validator.py + credibility assessment | URL verification automated, credibility
+  requires human judgment |
+
+  | Analysis Rigor | manual | Human expert review | Logical reasoning evaluation requires domain expertise |
+
+  | Insight Generation | manual | Human expert review | Novelty and strategic value require human assessment |
+
+  | Actionability | semi-automated | action_parser.py + feasibility review | Action extraction automated, feasibility requires
+  context knowledge |'
+references:
+- Intelligence Community Assessment Standards (ODNI 2015)
+- Structured Analytic Techniques Reference Guide (CIA 2019)
+- source_validator.py v3.1 (CEX intelligence validation tools)
+- Research Quality Assessment Framework (Academic Intelligence Alliance 2024)

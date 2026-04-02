@@ -1,0 +1,47 @@
+id: p12_dr_brand
+kind: dispatch_rule
+pillar: P12
+version: 1.0.0
+created: 2026-04-01
+updated: 2026-04-01
+author: dispatch-rule-builder
+domain: brand
+quality: 8.5
+tags:
+- dispatch
+- brand
+- atlas
+- marketing
+- identity
+tldr: Route brand identity, voice, and positioning tasks to marketing specialist agent
+scope: brand
+keywords:
+- brand
+- marca
+- branding
+- identity
+- identidade
+- voice
+- voz
+- positioning
+- posicionamento
+- style
+- estilo
+- guidelines
+- diretrizes
+agent_node: atlas
+model: sonnet
+priority: 7
+confidence_threshold: 0.75
+fallback: monetizer
+routing_strategy: hybrid
+density_score: 0.8
+purpose: Routes brand identity, voice, positioning, and style guide tasks to the marketing specialist agent. The atlas agent
+  is optimized for brand development with expertise in visual identity, messaging frameworks, and brand consistency across
+  touchpoints.
+keyword_rationale: Bilingual PT/EN coverage captures both Portuguese operator commands ("marca", "identidade") and English
+  task descriptions ("brand", "identity"). Includes core brand concepts like voice, positioning, style, and guidelines that
+  span brand strategy and execution. Hybrid strategy handles both exact keyword matches and semantic similarity for brand-adjacent
+  terms.
+fallback_logic: Monetizer agent handles brand monetization and commercial positioning when atlas is unavailable. Can address
+  brand value propositions, pricing psychology, and revenue-focused brand messaging without full brand strategy capabilities.

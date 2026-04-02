@@ -7,7 +7,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n04_knowledge_nucleus
 domain: Knowledge Architecture, RAG, Semantic Indexing
-quality: null
+quality: 8.9
 tags:
 - knowledge
 - rag
@@ -47,26 +47,17 @@ linked_artifacts:
   - n04_retriever_config_knowledge
 density_score: 0.96
 data_source: Distilled from first principles of information theory, data architecture, and the N04 mandate.
-quick_reference: '---
-
-  yaml
-
-  topic: The CEX Knowledge Lifecycle
+quick_reference: 'topic: The CEX Knowledge Lifecycle
 
   scope: The architectural framework for transforming raw information into a high-fidelity, queryable knowledge graph for
   AI agents.
 
   owner: N04 Knowledge Nucleus
 
-  criticality: Foundational
-
-  ```
-
-
-  ## 1. The Core Architecture: RAG-I-T
-
-  The CEX knowledge system is built on the RAG-I-T framework: a triad of Retrieval-Augmented Generation, Ingestion, and Taxonomy.
-  This is not just a pipeline, but a closed-loop system where each component continuously reinforces the others.
+  criticality: Foundational'
+1_the_core_architecture_rag_i_t: 'The CEX knowledge system is built on the RAG-I-T framework: a triad of Retrieval-Augmented
+  Generation, Ingestion, and Taxonomy. This is not just a pipeline, but a closed-loop system where each component continuously
+  reinforces the others.
 
 
   Flow:
@@ -87,56 +78,31 @@ quick_reference: '---
   search. |
 
   | RAG | Augments prompts and synthesizes grounded answers. | Providing the high-quality context for other agents to use.
-  |
-
-
-
-  ## 2. Stage 1: Ingestion & Semantic Indexing
-
-  This is the foundation. Garbage in, garbage out.
-
-
-  ### A. Content-Aware Chunking
-
-  The process of breaking down large documents into optimally-sized, semantically coherent fragments. This is the single most
-  important factor for retrieval quality.
+  |'
+2_stage_1_ingestion_semantic_indexing: This is the foundation. Garbage in, garbage out.
+a_content_aware_chunking: 'The process of breaking down large documents into optimally-sized, semantically coherent fragments.
+  This is the single most important factor for retrieval quality.
 
   - Strategy: Varies by content type. Code is chunked by function/class, markdown by section, prose by paragraph.
 
   - Enrichment: Each chunk is enriched with metadata from the source document (e.g., title, author, original path, taxonomy
-  tags).
-
-
-  ### B. Vectorization
-
-  A high-dimensional vector embedding is generated for each chunk using a centrally managed embedding model. This vector represents
-  the chunk''s "meaning."
+  tags).'
+b_vectorization: 'A high-dimensional vector embedding is generated for each chunk using a centrally managed embedding model.
+  This vector represents the chunk''s "meaning."
 
   - Principle: Chunks with similar meanings have vectors that are close in the vector space (measured by cosine similarity).
 
-  - Storage: Vectors and their corresponding content/metadata are stored in a dedicated vector database.
-
-
-  ## 3. Stage 2: Structuring & Retrieval
-
-  Finding the needle in the haystack, instantly.
-
-
-  ### A. The CEX Knowledge Graph & Taxonomy
-
-  While vector search finds relevance, the Knowledge Graph provides structure and relationships.
+  - Storage: Vectors and their corresponding content/metadata are stored in a dedicated vector database.'
+3_stage_2_structuring_retrieval: Finding the needle in the haystack, instantly.
+a_the_cex_knowledge_graph_taxonomy: 'While vector search finds relevance, the Knowledge Graph provides structure and relationships.
 
   - Nodes: Canonical Knowledge Cards (KCs), representing validated concepts.
 
   - Edges: The explicit relationships between them (e.g., `is_a`, `depends_on`, `authored_by`).
 
   - Taxonomy: A strict, hierarchical classification system used to tag all nodes. It acts as the "address system" for all
-  knowledge.
-
-
-  ### B. Hybrid Retrieval Strategy
-
-  The most robust approach combines multiple techniques:
+  knowledge.'
+b_hybrid_retrieval_strategy: 'The most robust approach combines multiple techniques:
 
   1.  Pre-Filtering: The query is first used to narrow the search space using the Taxonomy. (e.g., filter for all knowledge
   in the `N03_engineering` branch).
@@ -148,17 +114,24 @@ quick_reference: '---
   that semantic search might miss.
 
   4.  Re-Ranking: A final model re-ranks the combined results for maximal relevance to the original query before they are
-  passed to the LLM.
+  passed to the LLM.'
+4_architectural_mandates:
+- 'CHUNK FOR COHESION: Optimize chunking to ensure each chunk is a self-contained, logical unit of meaning.'
+- 'EMBED FOR MEANING: The embedding model is the heart of the system. It must be chosen and managed as a critical piece of
+  infrastructure.'
+- 'STRUCTURE FOR DISCOVERY: Build the taxonomy and knowledge graph relentlessly. An unstructured vector store is a liability.'
+- 'ITERATE ON RETRIEVAL: The quality of the entire RAG system is a direct function of retrieval performance. This must be
+  continuously evaluated, measured, and improved. The loop must close.'
+5_anti_patterns_what_not_to_do: '| Anti-Pattern | Why It Fails | Better Approach |
 
+  | :--- | :--- | :--- |
 
-  ## 4. Architectural Mandates
+  | Uniform chunking | Fixed-size chunks break semantic boundaries | Content-aware chunking by logical units |
 
-  1.  CHUNK FOR COHESION: Optimize chunking to ensure each chunk is a self-contained, logical unit of meaning.
+  | Embedding model drift | Changing models breaks vector consistency | Version lock embeddings, migrate systematically |
 
-  2.  EMBED FOR MEANING: The embedding model is the heart of the system. It must be chosen and managed as a critical piece
-  of infrastructure.
+  | Pure keyword search | Misses semantic similarity, brittle to wording | Hybrid semantic + keyword retrieval |
 
-  3.  STRUCTURE FOR DISCOVERY: Build the taxonomy and knowledge graph relentlessly. An unstructured vector store is a liability.
+  | No taxonomy structure | Vector search without filtering = noise | Build hierarchical taxonomy first |
 
-  4.  ITERATE ON RETRIEVAL: The quality of the entire RAG system is a direct function of retrieval performance. This must
-  be continuously evaluated, measured, and improved. The loop must close.'
+  | One-shot ingestion | Knowledge becomes stale, no feedback loop | Continuous ingestion with quality monitoring |'

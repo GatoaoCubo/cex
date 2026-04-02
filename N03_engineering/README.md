@@ -25,3 +25,5 @@
 - Architecture: [[CEX_ARCHITECTURE_MAP]]
 - Entry: [[CLAUDE]]
 - Pipeline: [[LLM_PIPELINE]]
+
+Source mold: [[N00_genesis]]

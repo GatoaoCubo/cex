@@ -20,6 +20,17 @@ tldr: 'pgvector embedding config: VECTOR(1536) default, HNSW index, cosine dista
 density_score: 0.91
 default_configuration: "extension: pgvector\nversion: \"0.7+\"\ncolumn_type: \"VECTOR(1536)\"\nindex_type: hnsw\nindex_params:\n\
   \  m: 16\n  ef_construction: 64\ndistance_function: cosine\noperator: \"<=> (vector_cosine_ops)\""
+quick_start: '| Step | Action | Command |
+
+  |------|--------|---------|
+
+  | 1. Enable | Add extension | `CREATE EXTENSION vector;` |
+
+  | 2. Create | Table + embedding column | `ALTER TABLE docs ADD embedding VECTOR(1536);` |
+
+  | 3. Index | Add HNSW index | `CREATE INDEX ON docs USING hnsw(embedding vector_cosine_ops);` |
+
+  | 4. Query | Search function | `SELECT * FROM match_documents(''[0.1,0.2...]''::vector, 0.78, 10);` |'
 model_dimension_mapping: '| Model | Dimensions | Column | Index Ops |
 
   |-------|-----------|--------|-----------|

@@ -1,126 +1,98 @@
-id: n01_wf_intelligence
+id: p12_wf_intelligence
 kind: workflow
 pillar: P12
-title: N01 Standard Operating Workflows for Intelligence Analysis
-version: 1.0.0
-created: '2026-03-31'
-updated: '2026-03-31'
-author: N01_rebuild_8F
-quality: null
+title: N01 Workflow — Research Pipeline
+version: 4.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: research-intelligence
+step_count: 8
+quality: 8.7
 tags:
 - workflow
-- orchestration
 - n01
 - research
-- analysis
-tldr: Defines the structured, multi-step workflows for the N01 agent, covering literature reviews, comparative analysis, and
-  trend analysis.
-agent_node: n01_intelligence
-timeout_seconds: 7200
-max_retries: 2
-1_workflow_overview: 'This document defines the primary operational workflows for the N01 Research & Intelligence Nucleus.
-  These are not linear scripts but conditional paths that adapt based on the `research_type` of the user''s request.
+- pipeline
+- triangulation
+tldr: '8-step research pipeline: brief→scope→search→triangulate→synthesize→format→validate→deliver.'
+density_score: 0.93
+workflow_scope: '| Use This Pipeline When | Don''t Use When | Alternative |
+
+  |------------------------|----------------|-------------|
+
+  | Multi-source research needed | Single document analysis | Direct document processing |
+
+  | Claims need verification | Internal knowledge queries | Knowledge card lookup |
+
+  | Competitive intelligence | Academic literature review | Specialized research tools |
+
+  | Market trend analysis | Quick fact-checking | Search engine query |
+
+  | Unknown domain exploration | Domain expert consultation | Expert interview protocol |'
+pipeline: 'BRIEF → SCOPE → SEARCH → TRIANGULATE → SYNTHESIZE → FORMAT → VALIDATE → DELIVER
 
 
-  Supported `research_type` values:
+  | Step | Action | Input | Output | Tool |
 
-  - `LITERATURE_REVIEW`: Synthesizing knowledge from a body of academic or technical documents.
+  |------|--------|-------|--------|------|
 
-  - `COMPARATIVE_ANALYSIS`: Benchmarking two or more subjects (products, companies, etc.) against a set of criteria.
+  | 1 | Receive research brief | User/nucleus request | Classified brief | cex_intent.py |
 
-  - `TREND_ANALYSIS`: Identifying and analyzing patterns, momentum, and trajectories in data over time.
+  | 2 | Scope research | Brief + brand context | Depth level (L1/L2/L3), source plan | research_depth_levels.md |
 
+  | 3 | Search sources | Scope + queries | Raw findings (10-50 sources) | fetch MCP, markitdown MCP |
 
-  ---'
-2_meta_workflow_all_types: ''
-step_0_deconstruct_plan:
-- 'Description: The initial, mandatory step for all research tasks. The agent interprets the user''s goal, identifies the
-  correct workflow path, and creates a detailed execution plan.'
-- 'Input: `User_Query`'
-- 'Action:'
-- Identify `research_type` (`LITERATURE_REVIEW`, `COMPARATIVE_ANALYSIS`, or `TREND_ANALYSIS`).
-- Extract key entities, research questions, and constraints.
-- Formulate a step-by-step `Research_Plan.json`.
-- 'Output: `Research_Plan.json`, `Selected_Workflow_Path`'
-final_step_synthesize_report: "- Description: The final, mandatory step. The agent takes the structured output from the specific\
-  \ workflow path and synthesizes it into the final deliverable.\n- Input: `Structured_Analysis_Output` (from a completed\
-  \ workflow path)\n- Action:\n    1.  Validate the structured output against quality gates.\n    2.  Draft the `Intelligence_Brief.md`\
-  \ per the system prompt's format.\n    3.  Populate Executive Summary, Detailed Analysis, Gaps, and Appendix.\n- Output:\
-  \ `Final_Report.md` (the Intelligence Brief)\n\n---"
-3_workflow_paths: ''
-path_a_literature_review: '#### Step A1: Source Aggregation
+  | 4 | Triangulate | Raw findings | Verified claims (3+ sources each) | source_quality_contract.md |
 
-  - Depends On: Step 0
+  | 5 | Synthesize | Verified claims | Structured analysis | System prompt rules 7-10 |
 
-  - Input: `Research_Plan.json`
+  | 6 | Format | Analysis | Output template filled | output_*.md templates |
 
-  - Action: Execute queries against RAG sources and future MCPs (e.g., ArXiv, Scholar) to gather all relevant documents.
+  | 7 | Validate | Formatted output | Quality check (freshness, citations) | quality_gate_intelligence.md |
 
-  - Output: `Corpus.zip` (A collection of source documents)
+  | 8 | Deliver | Validated output | Signal + handoff | signal_writer.py |'
+research_depth_levels: '| Level | Time | Sources | Output |
 
+  |-------|------|---------|--------|
 
-  #### Step A2: Thematic Synthesis
+  | L1 Scan | 5 min | 3-5 web | Quick snapshot, bullet points |
 
-  - Depends On: Step A1
+  | L2 Analysis | 15 min | 10-20 mixed | Structured report with grids |
 
-  - Input: `Corpus.zip`
+  | L3 Deep-Dive | 30+ min | 20-50 multi-type | Full dossier with projections |'
+anti_patterns: '| Never Do | Why | Instead |
 
-  - Action: Ingest and analyze the entire corpus. Identify, tag, and cluster core themes, arguments, evidence, and contradictions
-  across all sources.
+  |----------|-----|---------|
 
-  - Output: `Structured_Analysis_Output.json` (A map of themes to supporting evidence and citations)'
-path_b_comparative_analysis: '#### Step B1: Establish Benchmarking Matrix
+  | Search before scoping | Wastes time on irrelevant sources | Always classify brief depth (L1/L2/L3) first |
 
-  - Depends On: Step 0
+  | Single-source claims | Creates unverified intelligence | Require 3+ sources per claim minimum |
 
-  - Input: `Research_Plan.json`
+  | Skip triangulation | Amplifies misinformation | Cross-verify every finding before synthesis |
 
-  - Action: Define a precise, objective, and justifiable set of comparison criteria. Create a blank `Comparison_Matrix.json`
-  template.
+  | Mix raw data with analysis | Confuses facts with interpretation | Separate findings (Step 4) from synthesis (Step 5) |
 
-  - Output: `Comparison_Matrix_Template.json`
+  | Deliver without freshness check | Provides outdated intelligence | Validate recency in Step 7 quality gate |'
+decision_points: '| Step | Scenario | Decision | Action |
 
+  |------|----------|----------|--------|
 
-  #### Step B2: Data Extraction per Subject
+  | 2 | Brief too vague ("research competitors") | Scope clarification needed | Use GDP to get specific verticals, regions,
+  metrics |
 
-  - Depends On: Step B1
+  | 2 | Time constraint vs depth requested | L3 brief but 10min available | Negotiate down to L2 or extend timeline |
 
-  - Input: `Research_Plan.json`, `Comparison_Matrix_Template.json`
+  | 3 | Paywall sources blocking research | Premium content inaccessible | Shift to academic papers, company reports, public
+  filings |
 
-  - Action: For each subject being compared, systematically extract the required data points from sources to fill a copy of
-  the matrix. This step can be parallelized.
+  | 4 | <3 sources found for key claim | Triangulation impossible | Flag as "single-source claim" and note confidence level
+  |
 
-  - Output: `Filled_Matrices.json[]` (An array of filled matrices, one for each subject)
+  | 4 | Sources contradict each other | Conflicting information | Present both views with source attribution |
 
+  | 6 | Multiple output formats requested | Format selection unclear | Use research_brief template unless specifically requested
+  |
 
-  #### Step B3: Normalize & Compare
+  | 7 | Sources >6 months old | Freshness gate failure | Re-search with date filters or flag as historical analysis |
 
-  - Depends On: Step B2
-
-  - Input: `Filled_Matrices.json[]`
-
-  - Action: Consolidate the filled matrices. Normalize data where necessary (e.g., currency, units). Generate a comparative
-  summary with key differences and insights.
-
-  - Output: `Structured_Analysis_Output.json` (Contains the final comparison table and summary insights)'
-path_c_trend_analysis: '#### Step C1: Time-Series Data Extraction
-
-  - Depends On: Step 0
-
-  - Input: `Research_Plan.json`
-
-  - Action: Extract time-stamped data points, events, and metrics from the source material.
-
-  - Output: `Time_Series_Data.json`
-
-
-  #### Step C2: Signal & Vector Analysis
-
-  - Depends On: Step C1
-
-  - Input: `Time_Series_Data.json`
-
-  - Action: Analyze the time-series data to identify key vectors (direction, velocity, acceleration) of change. Identify leading
-  and lagging indicators.
-
-  - Output: `Structured_Analysis_Output.json` (A summary of key trends, their momentum, and a forecast with confidence intervals)'
+  | 8 | Handoff target unclear | Delivery ambiguity | Signal N07 and await routing instructions |'

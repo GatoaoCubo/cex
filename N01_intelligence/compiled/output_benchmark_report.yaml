@@ -1,0 +1,76 @@
+id: p10_out_benchmark_report
+kind: output
+pillar: P10
+title: 'Output: Benchmark Report'
+version: 1.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: research-intelligence
+quality: 8.7
+tags:
+- output
+- n01
+- benchmark
+- comparison
+- features
+tldr: Feature/price/performance comparison grid across N products.
+density_score: 0.91
+template: '# Benchmark: {{CATEGORY}}
+
+  Date: {{DATE}} | Products: {{COUNT}} | Criteria: {{COUNT}}
+
+
+  ## Comparison Grid
+
+
+  | Criteria | Weight | {{PRODUCT_A}} | {{PRODUCT_B}} | {{PRODUCT_C}} |
+
+  |----------|--------|-------------|-------------|-------------|
+
+  | {{FEAT_1}} | {{W}}% | ⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐⭐ |
+
+  | {{FEAT_2}} | {{W}}% | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ |
+
+  | Price | {{W}}% | {{VALUE}} | {{VALUE}} | {{VALUE}} |
+
+  | Weighted Score | 100% | {{SCORE}} | {{SCORE}} | {{SCORE}} |
+
+
+  ## Winner per Dimension
+
+  - Best features: {{PRODUCT}}
+
+  - Best price: {{PRODUCT}}
+
+  - Best performance: {{PRODUCT}}
+
+  - Best overall: {{PRODUCT}}
+
+
+  ## Recommendation
+
+  {{ACTIONABLE_RECOMMENDATION}}'
+scoring_methodology: 'Star Rating Scale: 1⭐ = Poor | 2⭐⭐ = Fair | 3⭐⭐⭐ = Good | 4⭐⭐⭐⭐ = Excellent | 5⭐⭐⭐⭐⭐ = Best-in-class
+
+
+  Weight Distribution: Core features (40-50%) | Price (20-30%) | Performance (15-25%) | Support/UX (10-15%)'
+common_criteria_examples: '| Category | Core Criteria | Weight Range |
+
+  |----------|---------------|--------------|
+
+  | Software Tools | Feature completeness, ease of use, integrations, pricing | 30%, 25%, 25%, 20% |
+
+  | SaaS Platforms | Functionality, scalability, security, cost per user | 35%, 20%, 25%, 20% |
+
+  | Hardware | Performance, build quality, price, warranty | 40%, 20%, 25%, 15% |
+
+  | Cloud Services | Uptime, latency, storage limits, pricing model | 35%, 25%, 20%, 20% |
+
+  | Marketing Tools | Campaign features, analytics depth, integrations, cost per lead | 40%, 25%, 20%, 15% |
+
+  | E-commerce | Transaction fees, checkout flow, mobile support, payment options | 30%, 25%, 25%, 20% |
+
+  | CRM Systems | Contact management, automation, reporting, user seats cost | 35%, 25%, 20%, 20% |
+
+
+  Anti-patterns: Equal weights (dilutes decision), >7 criteria (analysis paralysis), subjective scoring without clear rubrics.'

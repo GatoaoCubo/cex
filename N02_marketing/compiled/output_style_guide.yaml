@@ -1,0 +1,104 @@
+id: p05_output_style_guide
+kind: output_validator
+pillar: P05
+title: Design System Style Guide — Self-Contained HTML
+version: 1.0.0
+created: 2026-04-01
+author: n02_visual_frontend
+domain: frontend
+quality: 8.9
+tags:
+- output
+- template
+- style-guide
+- design-system
+- tokens
+tldr: Self-contained HTML design system page — palette, typography, spacing, components, dark mode.
+density_score: 0.91
+when_to_use: Creating design system documentation, onboarding designers/developers, establishing visual consistency across
+  products, documenting brand tokens
+purpose: 'Single HTML file documenting the complete CODEXA design system. Self-contained: all CSS tokens inline, no external
+  dependencies except fonts. Inspired by: Linear, Railway, Raycast, Stripe, Vercel design systems. ---'
+template_structure: "1. Header (logo + \"Design System v1.0\")\n2. Color Palette\n   ├── Primitives (background, foreground,\
+  \ primary, secondary, muted, accent, destructive)\n   ├── CODEXA Semantic (surface-900→500, text tiers, borders, accent)\n\
+  \   ├── Functional (success, warning, error, info)\n   └── Dark mode comparison (side-by-side swatches)\n3. Typography\n\
+  \   ├── Font stack (Geist Variable, Inter, JetBrains Mono)\n   ├── Type scale specimens (h1→h6, body, small, caption)\n\
+  \   ├── Line height + letter spacing\n   └── Font weight range\n4. Spacing\n   ├── Scale visualization (4px base: 0→96px)\n\
+  \   └── Common patterns (padding, margin, gap)\n5. Components\n   ├── Buttons (primary, secondary, ghost, destructive)\n\
+  \   ├── Cards (default, elevated, interactive)\n   ├── Inputs (text, search, select)\n   ├── Badges (status variants)\n\
+  \   └── Tables (striped, hoverable)\n6. Icons + Illustrations\n7. Dark / Light mode toggle demo"
+complete_html: "<!DOCTYPE html>\n<html lang=\"en\" class=\"dark\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\"\
+  \ content=\"width=device-width, initial-scale=1.0\">\n  <title>CODEXA Design System</title>\n  <script src=\"https://cdn.tailwindcss.com\"\
+  ></script>\n  <link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap\"\
+  \ rel=\"stylesheet\">\n  <style>\n    :root {\n      --background: 0 0% 100%;\n      --foreground: 240 10% 3.9%;\n     \
+  \ --primary: 240 5.9% 10%;\n      --secondary: 240 4.8% 95.9%;\n      --muted: 240 4.8% 95.9%;\n      --accent: 240 4.8%\
+  \ 95.9%;\n      --destructive: 0 84.2% 60.2%;\n      --border: 240 5.9% 90%;\n\n      --codexa-accent: #50C878;\n      --codexa-surface-900:\
+  \ hsl(240 10% 5%);\n      --codexa-surface-800: hsl(240 8% 12%);\n      --codexa-surface-700: hsl(240 6% 20%);\n      --codexa-surface-600:\
+  \ hsl(240 5% 30%);\n      --codexa-surface-500: hsl(240 4% 40%);\n      --codexa-text-primary: hsl(0 0% 95%);\n      --codexa-text-secondary:\
+  \ hsl(0 0% 70%);\n      --codexa-text-tertiary: hsl(0 0% 50%);\n      --codexa-border-default: hsl(240 5% 25%);\n    }\n\
+  \    body { font-family: 'Inter', sans-serif; }\n    .font-mono { font-family: 'JetBrains Mono', monospace; }\n    .swatch\
+  \ { width: 80px; height: 80px; border-radius: 12px; border: 1px solid var(--codexa-border-default); }\n    .section { margin-bottom:\
+  \ 64px; }\n    .section-title { font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color:\
+  \ var(--codexa-text-tertiary); margin-bottom: 24px; }\n  </style>\n</head>\n<body class=\"bg-[var(--codexa-surface-900)]\
+  \ text-[var(--codexa-text-primary)] max-w-5xl mx-auto px-8 py-16\">\n\n  <!-- Header -->\n  <header class=\"mb-16\">\n \
+  \   <div class=\"flex items-center gap-3 mb-4\">\n      <div class=\"w-10 h-10 rounded-lg flex items-center justify-center\
+  \ font-bold text-black\" style=\"background: var(--codexa-accent)\">C</div>\n      <span class=\"text-2xl font-bold\">CODEXA</span>\n\
+  \    </div>\n    <h1 class=\"text-4xl font-bold mb-2\">Design System</h1>\n    <p class=\"text-[var(--codexa-text-secondary)]\"\
+  >v1.0.0 — Tokens, Typography, Components</p>\n  </header>\n\n  <!-- COLOR PALETTE -->\n  <section class=\"section\">\n \
+  \   <p class=\"section-title\">Color Palette</p>\n    <h2 class=\"text-2xl font-bold mb-6\">CODEXA Semantic Colors</h2>\n\
+  \    <div class=\"grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-4 mb-8\">\n      <div>\n        <div class=\"swatch\"\
+  \ style=\"background: var(--codexa-surface-900)\"></div>\n        <p class=\"text-sm mt-2 font-mono\">surface-900</p>\n\
+  \      </div>\n      <div>\n        <div class=\"swatch\" style=\"background: var(--codexa-surface-800)\"></div>\n     \
+  \   <p class=\"text-sm mt-2 font-mono\">surface-800</p>\n      </div>\n      <div>\n        <div class=\"swatch\" style=\"\
+  background: var(--codexa-surface-700)\"></div>\n        <p class=\"text-sm mt-2 font-mono\">surface-700</p>\n      </div>\n\
+  \      <div>\n        <div class=\"swatch\" style=\"background: var(--codexa-surface-600)\"></div>\n        <p class=\"\
+  text-sm mt-2 font-mono\">surface-600</p>\n      </div>\n      <div>\n        <div class=\"swatch\" style=\"background: var(--codexa-surface-500)\"\
+  ></div>\n        <p class=\"text-sm mt-2 font-mono\">surface-500</p>\n      </div>\n      <div>\n        <div class=\"swatch\"\
+  \ style=\"background: var(--codexa-accent)\"></div>\n        <p class=\"text-sm mt-2 font-mono\">accent</p>\n        <p\
+  \ class=\"text-xs text-[var(--codexa-text-tertiary)]\">#50C878</p>\n      </div>\n    </div>\n    <h3 class=\"text-lg font-semibold\
+  \ mb-4\">Functional Colors</h3>\n    <div class=\"grid grid-cols-4 gap-4\">\n      <div><div class=\"swatch\" style=\"background:\
+  \ #22c55e\"></div><p class=\"text-sm mt-2 font-mono\">success</p></div>\n      <div><div class=\"swatch\" style=\"background:\
+  \ #f59e0b\"></div><p class=\"text-sm mt-2 font-mono\">warning</p></div>\n      <div><div class=\"swatch\" style=\"background:\
+  \ #ef4444\"></div><p class=\"text-sm mt-2 font-mono\">error</p></div>\n      <div><div class=\"swatch\" style=\"background:\
+  \ #3b82f6\"></div><p class=\"text-sm mt-2 font-mono\">info</p></div>\n    </div>\n  </section>\n\n  <!-- TYPOGRAPHY -->\n\
+  \  <section class=\"section\">\n    <p class=\"section-title\">Typography</p>\n    <h2 class=\"text-2xl font-bold mb-6\"\
+  >Type Scale (1.25 ratio)</h2>\n    <div class=\"space-y-6\">\n      <div class=\"flex items-baseline gap-4\">\n        <span\
+  \ class=\"text-xs text-[var(--codexa-text-tertiary)] w-16\">48px</span>\n        <span class=\"text-5xl font-bold\" style=\"\
+  line-height: 1.1\">Heading 1</span>\n      </div>\n      <div class=\"flex items-baseline gap-4\">\n        <span class=\"\
+  text-xs text-[var(--codexa-text-tertiary)] w-16\">36px</span>\n        <span class=\"text-4xl font-bold\" style=\"line-height:\
+  \ 1.2\">Heading 2</span>\n      </div>\n      <div class=\"flex items-baseline gap-4\">\n        <span class=\"text-xs text-[var(--codexa-text-tertiary)]\
+  \ w-16\">24px</span>\n        <span class=\"text-2xl font-semibold\">Heading 3</span>\n      </div>\n      <div class=\"\
+  flex items-baseline gap-4\">\n        <span class=\"text-xs text-[var(--codexa-text-tertiary)] w-16\">16px</span>\n    \
+  \    <span class=\"text-base\">Body text — Inter Regular 400, line-height 1.5</span>\n      </div>\n      <div class=\"\
+  flex items-baseline gap-4\">\n        <span class=\"text-xs text-[var(--codexa-text-tertiary)] w-16\">14px</span>\n    \
+  \    <span class=\"text-sm font-mono\">Code — JetBrains Mono 400</span>\n      </div>\n    </div>\n  </section>\n\n  <!--\
+  \ SPACING -->\n  <section class=\"section\">\n    <p class=\"section-title\">Spacing</p>\n    <h2 class=\"text-2xl font-bold\
+  \ mb-6\">4px Base Scale</h2>\n    <div class=\"space-y-2\">\n      <div class=\"flex items-center gap-4\"><span class=\"\
+  text-xs w-8 text-right\">4</span><div class=\"h-4 rounded\" style=\"width: 16px; background: var(--codexa-accent)\"></div></div>\n\
+  \      <div class=\"flex items-center gap-4\"><span class=\"text-xs w-8 text-right\">8</span><div class=\"h-4 rounded\"\
+  \ style=\"width: 32px; background: var(--codexa-accent)\"></div></div>\n      <div class=\"flex items-center gap-4\"><span\
+  \ class=\"text-xs w-8 text-right\">16</span><div class=\"h-4 rounded\" style=\"width: 64px; background: var(--codexa-accent)\"\
+  ></div></div>\n      <div class=\"flex items-center gap-4\"><span class=\"text-xs w-8 text-right\">24</span><div class=\"\
+  h-4 rounded\" style=\"width: 96px; background: var(--codexa-accent)\"></div></div>\n      <div class=\"flex items-center\
+  \ gap-4\"><span class=\"text-xs w-8 text-right\">32</span><div class=\"h-4 rounded\" style=\"width: 128px; background: var(--codexa-accent)\"\
+  ></div></div>\n      <div class=\"flex items-center gap-4\"><span class=\"text-xs w-8 text-right\">48</span><div class=\"\
+  h-4 rounded\" style=\"width: 192px; background: var(--codexa-accent)\"></div></div>\n      <div class=\"flex items-center\
+  \ gap-4\"><span class=\"text-xs w-8 text-right\">64</span><div class=\"h-4 rounded\" style=\"width: 256px; background: var(--codexa-accent)\"\
+  ></div></div>\n    </div>\n  </section>\n\n  <!-- COMPONENTS -->\n  <section class=\"section\">\n    <p class=\"section-title\"\
+  >Components</p>\n    <h2 class=\"text-2xl font-bold mb-6\">Buttons</h2>\n    <div class=\"flex flex-wrap gap-4 mb-8\">\n\
+  \      <button class=\"px-4 py-2 rounded-lg font-medium text-black\" style=\"background: var(--codexa-accent)\">Primary</button>\n\
+  \      <button class=\"px-4 py-2 rounded-lg font-medium border\" style=\"border-color: var(--codexa-border-default); color:\
+  \ var(--codexa-text-primary)\">Secondary</button>\n      <button class=\"px-4 py-2 rounded-lg font-medium text-[var(--codexa-text-secondary)]\
+  \ hover:text-[var(--codexa-text-primary)]\">Ghost</button>\n      <button class=\"px-4 py-2 rounded-lg font-medium bg-red-500/20\
+  \ text-red-400\">Destructive</button>\n    </div>\n    <h2 class=\"text-2xl font-bold mb-6\">Badges</h2>\n    <div class=\"\
+  flex flex-wrap gap-3\">\n      <span class=\"px-2.5 py-1 rounded-full text-xs font-medium bg-green-500/20 text-green-400\"\
+  >Active</span>\n      <span class=\"px-2.5 py-1 rounded-full text-xs font-medium bg-amber-500/20 text-amber-400\">Pending</span>\n\
+  \      <span class=\"px-2.5 py-1 rounded-full text-xs font-medium bg-red-500/20 text-red-400\">Error</span>\n      <span\
+  \ class=\"px-2.5 py-1 rounded-full text-xs font-medium bg-blue-500/20 text-blue-400\">Info</span>\n    </div>\n  </section>\n\
+  \n</body>\n</html>"
+usage:
+- Copy HTML to local file
+- Customize token values in `:root`
+- Replace CODEXA branding with target brand
+- Screenshot sections for documentation
+- Deploy as static page for team reference

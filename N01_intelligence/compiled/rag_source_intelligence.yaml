@@ -6,7 +6,7 @@ version: 1.0.0
 created: '2026-03-31'
 updated: '2026-03-31'
 author: N01_rebuild_8F
-quality: null
+quality: 8.8
 tags:
 - rag
 - source
@@ -53,7 +53,26 @@ tier_4_high_quality_web_content_future:
 - 'Potential Sources:'
 - '`Reputable Technical Blogs`: (e.g., AI-centric blogs from major tech companies).'
 - '`Select Industry News Outlets`: (e.g., Reuters, Bloomberg for tech/finance news).'
-4_freshness_retention_policy:
+4_source_validation: '| Validation Criteria | Tier 1 | Tier 2 | Tier 3 | Tier 4 |
+
+  |---------------------|--------|--------|--------|--------|
+
+  | Citation Count Threshold | >50 (for papers) | N/A | >10 (for reports) | >5 (for articles) |
+
+  | Publication Recency | <5 years preferred | <1 year required | <2 years preferred | <30 days required |
+
+  | Author Credibility Check | PhD + institution | Official entity | Industry analyst | Verified expert |
+
+  | Content Quality Score | >0.85 (automated) | >0.90 (automated) | >0.80 (automated) | >0.75 (automated) |
+
+  | Duplicate Detection | Semantic similarity <0.8 | Exact match check | Semantic similarity <0.85 | URL + content hash |
+
+  | Language Quality | Native/fluent only | Official English | Professional only | Editorial standard |
+
+
+  Rejection Thresholds: Sources failing >2 criteria are automatically flagged for human review. Sources failing >3 criteria
+  are rejected from ingestion.'
+5_freshness_retention_policy:
 - 'Staleness Check: The ingestion pipeline continuously monitors sources based on their defined update frequency.'
 - 'Alerting: If a source fails to update for more than 2x its frequency period, an alert is sent to the N05 Operations Nucleus.'
 - 'Retention: All versions of documents are retained. Vectors are tagged with the ingestion date to allow for time-bound queries

@@ -1,0 +1,74 @@
+id: p12_wf_create_orchestration_agent
+kind: workflow
+pillar: P12
+version: 1.0.0
+created: '2026-04-01'
+updated: '2026-04-01'
+author: workflow-builder
+title: Create Agent for Orchestration Nucleus
+steps_count: 4
+execution: sequential
+agent_nodes:
+- planner
+- builder
+- validator
+- deployer
+timeout: 7200
+retry_policy: per_step
+depends_on: []
+signals:
+- 'On step complete: {step}_complete signal emitted by responsible agent with quality metrics'
+- 'On workflow complete: agent_ready signal with full deployment confirmation and integration status'
+- 'On error: {step}_error signal with failure details, retry per step (max 1), escalate to orchestrator if retry fails'
+- 'Final success: orchestration_agent_deployed signal indicating agent is live and ready for nucleus tasks'
+spawn_configs:
+- p12_spawn_planner_requirements
+- p12_spawn_builder_agent
+- p12_spawn_validator_test
+- p12_spawn_deployer_activate
+domain: orchestration
+quality: null
+tags:
+- workflow
+- orchestration
+- agent-creation
+- nucleus
+tldr: 4-step sequential workflow to create, validate, and deploy a specialized agent for N07 orchestration nucleus operations
+density_score: 0.92
+purpose: Orchestrates the complete lifecycle of creating a specialized agent for the N07 orchestration nucleus. The workflow
+  ensures the agent meets orchestration requirements, integrates with CEX dispatch patterns, and can handle multi-nucleus
+  coordination tasks. Each step validates outputs before proceeding to prevent deployment of incomplete agents.
+steps: ''
+step_1_requirements_analysis_planner:
+- 'Agent: planner (sonnet)'
+- 'Action: Analyze orchestration requirements and define agent specification'
+- 'Input: orchestration use cases, nucleus routing patterns, dispatch protocols'
+- 'Output: agent requirements document with capabilities, constraints, and integration points'
+- 'Signal: requirements_complete with specification quality score'
+- 'Depends on: none (first step)'
+step_2_agent_construction_builder:
+- 'Agent: builder (opus)'
+- 'Action: Build agent artifact following 8F pipeline with orchestration-specific capabilities'
+- 'Input: requirements document from Step 1, existing agent patterns, CEX nucleus protocols'
+- 'Output: complete agent artifact with frontmatter, system prompt, and orchestration instructions'
+- 'Signal: agent_built with build quality score'
+- 'Depends on: Step 1'
+step_3_validation_testing_validator:
+- 'Agent: validator (sonnet)'
+- 'Action: Test agent against orchestration scenarios and validate dispatch integration'
+- 'Input: agent artifact from Step 2, test scenarios, dispatch protocol compliance checks'
+- 'Output: validation report with test results and integration confirmation'
+- 'Signal: validation_complete with test pass rate'
+- 'Depends on: Step 2'
+step_4_deployment_activation_deployer:
+- 'Agent: deployer (opus)'
+- 'Action: Deploy agent to N07 nucleus and register with dispatch system'
+- 'Input: validated agent from Step 3, deployment configuration, nucleus routing tables'
+- 'Output: active agent registered in nucleus, updated routing configuration'
+- 'Signal: agent_ready with deployment confirmation'
+- 'Depends on: Step 3'
+dependencies:
+- N07 orchestration nucleus must be active and responsive
+- CEX dispatch system must be operational with valid spawn configurations
+- Agent-builder patterns must be available in archetypes/builders/
+- Quality gates and validation frameworks must be functional

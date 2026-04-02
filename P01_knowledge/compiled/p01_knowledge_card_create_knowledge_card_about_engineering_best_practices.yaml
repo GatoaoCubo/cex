@@ -1,0 +1,88 @@
+id: p01_kc_engineering_best_practices
+kind: knowledge_card
+pillar: P01
+title: Software Engineering Best Practices for Production Systems
+version: 1.0.0
+created: '2026-04-01'
+updated: '2026-04-01'
+author: builder
+domain: software_engineering
+quality: 8.9
+tags:
+- engineering
+- best-practices
+- production
+- code-quality
+- testing
+- knowledge
+tldr: Production engineering requires 80% test coverage, sub-200ms API response, automated CI/CD, and infrastructure-as-code
+  for maintainable systems
+when_to_use: When establishing engineering standards for production software development teams
+keywords:
+- engineering-practices
+- code-quality
+- testing
+- deployment
+- monitoring
+long_tails:
+- How to implement comprehensive testing strategy for production systems
+- What are the essential code review criteria for engineering teams
+- Best practices for production deployment and monitoring
+axioms:
+- ALWAYS require code review before merge to main branch
+- NEVER deploy to production without automated tests passing
+- IF system handles user data THEN implement comprehensive logging and monitoring
+linked_artifacts:
+  primary: null
+  related: []
+density_score: 0.87
+data_source: https://12factor.net/, Google SRE Book, Microsoft Engineering Playbook
+quick_reference: 'topic: engineering_best_practices
+
+  scope: Production software development (web apps, APIs, microservices)
+
+  owner: engineering_team
+
+  criticality: high'
+key_concepts:
+- 'Test Coverage: Minimum 80% line coverage, 90% for critical paths'
+- 'Code Review: All changes peer-reviewed, max 400 lines per review'
+- 'CI/CD Pipeline: Automated build, test, deploy in <15 minutes'
+- 'Monitoring: 99.9% uptime SLA with <200ms P95 response time'
+- 'Infrastructure as Code: All resources version-controlled, reproducible'
+- 'Security: OWASP Top 10 protection, dependency scanning, secrets management'
+strategy_phases:
+- 'Foundation: Version control (Git), branching strategy, code style guide'
+- 'Quality Gates: Unit tests, integration tests, static analysis, security scans'
+- 'Automation: CI/CD pipelines, automated deployments, rollback procedures'
+- 'Monitoring: Logging, metrics, alerting, health checks, dashboards'
+- 'Documentation: API docs, runbooks, architecture decision records'
+- 'Optimization: Performance profiling, load testing, capacity planning'
+golden_rules:
+- WRITE tests before code (TDD), aim for >80% coverage
+- REVIEW all code changes, no direct commits to main
+- AUTOMATE deployment pipeline, manual deploys only for emergencies
+- 'MONITOR everything: response times, error rates, resource usage'
+- DOCUMENT API contracts, deployment procedures, incident responses
+- 'SECURE by default: input validation, output encoding, principle of least privilege'
+flow: "[Code] -> [Tests] -> [Review] -> [CI Pipeline] -> [Deploy] -> [Monitor]\n   |         |          |            |   \
+  \          |          |\n   |         |          |            |             |          +-> Alerts\n   |         |      \
+  \    |            |             +-> Rollback\n   |         |          |            +-> Security Scan\n   |         |   \
+  \       +-> Approval Required\n   |         +-> Coverage Check\n   +-> Static Analysis"
+comparativo: '| Practice | Traditional | Modern DevOps | Cloud-Native |
+
+  |----------|------------|---------------|--------------|
+
+  | Testing | Manual QA | Automated CI | Shift-left testing |
+
+  | Deploy | Monthly releases | Weekly releases | Multiple daily deploys |
+
+  | Monitor | Reactive alerts | Proactive metrics | Observability tracing |
+
+  | Infrastructure | Manual setup | Configuration management | Container orchestration |
+
+  | Security | Perimeter defense | DevSecOps | Zero-trust architecture |'
+references:
+- 'Source: https://12factor.net/ (12-factor app methodology)'
+- 'Guide: https://sre.google/sre-book/ (Site Reliability Engineering)'
+- 'Standards: https://github.com/Microsoft/code-with-engineering-playbook'

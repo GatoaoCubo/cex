@@ -1,0 +1,125 @@
+id: p05_output_visual_report
+kind: output_validator
+pillar: P05
+title: Visual Report Template — Professional Long-Form
+version: 1.0.0
+created: 2026-04-01
+author: n02_visual_frontend
+domain: frontend
+quality: 8.9
+tags:
+- output
+- template
+- report
+- print
+- tailwind
+tldr: Professional report HTML — cover, executive summary, tables, charts, print-friendly.
+density_score: 0.89
+purpose: 'Long-form professional report as styled HTML. Print-friendly with `@media print` rules. Typography: Geist headings,
+  Inter body, JetBrains Mono code blocks. ---'
+structure: '| Section | Content | Styling | Purpose |
+
+  |---------|---------|---------|---------|
+
+  | Cover Page | title, date, logo, classification | gradient bg, full-height, white text | professional first impression
+  |
+
+  | Table of Contents | auto-generated links, page numbers | dotted borders, hover effects | navigation, print page refs |
+
+  | Executive Summary | key findings, 3-5 bullets, overview | highlight box, green accent | quick insights for stakeholders
+  |
+
+  | Section 1..N | heading hierarchy, content, data | max-w-4xl, print page-breaks | detailed analysis content |
+
+  | Data Tables | styled rows, alternating bg | avoid page-break-inside | structured data presentation |
+
+  | Chart Placeholders | 600×256px dimensions | dashed borders, centered text | Recharts/Chart.js integration |
+
+  | Conclusions | recommendations, next steps | standard prose layout | actionable outcomes |
+
+  | Appendix | raw data, methodology | code blocks, small text | technical details, references |'
+complete_html_skeleton: "<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\"\
+  \ content=\"width=device-width, initial-scale=1.0\">\n  <title>{{REPORT_TITLE}} — CODEXA</title>\n  <script src=\"https://cdn.tailwindcss.com\"\
+  ></script>\n  <link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400&display=swap\"\
+  \ rel=\"stylesheet\">\n  <style>\n    body { font-family: 'Inter', sans-serif; color: #1a1a2e; }\n    h1, h2, h3, h4 { font-family:\
+  \ 'Inter', sans-serif; font-weight: 700; }\n    code, pre { font-family: 'JetBrains Mono', monospace; }\n\n    / Print styles\
+  \ /\n    @media print {\n      body { font-size: 11pt; color: #000; }\n      .no-print { display: none !important; }\n \
+  \     .page-break { page-break-before: always; }\n      a { color: #000; text-decoration: none; }\n      table { page-break-inside:\
+  \ avoid; }\n      h2, h3 { page-break-after: avoid; }\n    }\n\n    / Cover page /\n    .cover {\n      min-height: 100vh;\n\
+  \      display: flex;\n      flex-direction: column;\n      justify-content: center;\n      background: linear-gradient(135deg,\
+  \ #1a1a2e 0%, #16213e 50%, #0f3460 100%);\n      color: white;\n      padding: 80px;\n    }\n  </style>\n</head>\n<body\
+  \ class=\"bg-white\">\n\n  <!-- COVER PAGE -->\n  <section class=\"cover page-break\">\n    <div class=\"mb-auto flex items-center\
+  \ gap-3 pt-8\">\n      <div class=\"w-10 h-10 rounded-lg flex items-center justify-center font-bold text-black bg-[#50C878]\"\
+  >C</div>\n      <span class=\"text-xl font-bold\">CODEXA</span>\n    </div>\n    <div>\n      <p class=\"text-sm uppercase\
+  \ tracking-widest text-gray-400 mb-4\">{{REPORT_TYPE}}</p>\n      <h1 class=\"text-5xl font-bold mb-6 leading-tight\">{{REPORT_TITLE}}</h1>\n\
+  \      <p class=\"text-xl text-gray-300 max-w-2xl\">{{REPORT_SUBTITLE}}</p>\n    </div>\n    <div class=\"mt-auto pb-8 flex\
+  \ gap-8 text-sm text-gray-400\">\n      <span>{{DATE}}</span>\n      <span>{{AUTHOR}}</span>\n      <span>{{CLASSIFICATION}}</span>\n\
+  \    </div>\n  </section>\n\n  <!-- TABLE OF CONTENTS -->\n  <section class=\"max-w-4xl mx-auto px-8 py-16 page-break\"\
+  >\n    <h2 class=\"text-2xl font-bold mb-8 text-gray-900\">Table of Contents</h2>\n    <nav class=\"space-y-3\">\n     \
+  \ <a href=\"#summary\" class=\"flex justify-between text-gray-700 hover:text-[#50C878] border-b border-dotted border-gray-300\
+  \ pb-1\">\n        <span>1. Executive Summary</span><span class=\"text-gray-400\">3</span>\n      </a>\n      <a href=\"\
+  #analysis\" class=\"flex justify-between text-gray-700 hover:text-[#50C878] border-b border-dotted border-gray-300 pb-1\"\
+  >\n        <span>2. Analysis</span><span class=\"text-gray-400\">5</span>\n      </a>\n      <a href=\"#data\" class=\"\
+  flex justify-between text-gray-700 hover:text-[#50C878] border-b border-dotted border-gray-300 pb-1\">\n        <span>3.\
+  \ Data & Findings</span><span class=\"text-gray-400\">8</span>\n      </a>\n      <a href=\"#conclusions\" class=\"flex\
+  \ justify-between text-gray-700 hover:text-[#50C878] border-b border-dotted border-gray-300 pb-1\">\n        <span>4. Conclusions</span><span\
+  \ class=\"text-gray-400\">12</span>\n      </a>\n      <a href=\"#appendix\" class=\"flex justify-between text-gray-700\
+  \ hover:text-[#50C878] border-b border-dotted border-gray-300 pb-1\">\n        <span>Appendix</span><span class=\"text-gray-400\"\
+  >14</span>\n      </a>\n    </nav>\n  </section>\n\n  <!-- EXECUTIVE SUMMARY -->\n  <section id=\"summary\" class=\"max-w-4xl\
+  \ mx-auto px-8 py-12 page-break\">\n    <h2 class=\"text-3xl font-bold mb-6 text-gray-900\">1. Executive Summary</h2>\n\
+  \    <div class=\"bg-gray-50 rounded-xl p-6 mb-8 border-l-4 border-[#50C878]\">\n      <p class=\"text-gray-700 leading-relaxed\"\
+  >{{EXECUTIVE_SUMMARY}}</p>\n    </div>\n    <h3 class=\"text-xl font-semibold mb-4\">Key Findings</h3>\n    <ul class=\"\
+  space-y-3\">\n      <li class=\"flex gap-3\"><span class=\"text-[#50C878] font-bold\">01</span><span>{{FINDING_1}}</span></li>\n\
+  \      <li class=\"flex gap-3\"><span class=\"text-[#50C878] font-bold\">02</span><span>{{FINDING_2}}</span></li>\n    \
+  \  <li class=\"flex gap-3\"><span class=\"text-[#50C878] font-bold\">03</span><span>{{FINDING_3}}</span></li>\n    </ul>\n\
+  \  </section>\n\n  <!-- DATA TABLE EXAMPLE -->\n  <section id=\"data\" class=\"max-w-4xl mx-auto px-8 py-12 page-break\"\
+  >\n    <h2 class=\"text-3xl font-bold mb-6 text-gray-900\">3. Data & Findings</h2>\n    <div class=\"overflow-x-auto\">\n\
+  \      <table class=\"w-full text-sm\">\n        <thead>\n          <tr class=\"bg-gray-100 text-left\">\n            <th\
+  \ class=\"px-4 py-3 font-semibold text-gray-700\">Metric</th>\n            <th class=\"px-4 py-3 font-semibold text-gray-700\"\
+  >Baseline</th>\n            <th class=\"px-4 py-3 font-semibold text-gray-700\">Current</th>\n            <th class=\"px-4\
+  \ py-3 font-semibold text-gray-700\">Change</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr class=\"\
+  border-b border-gray-200\">\n            <td class=\"px-4 py-3\">{{METRIC_1}}</td>\n            <td class=\"px-4 py-3\"\
+  >{{BASELINE_1}}</td>\n            <td class=\"px-4 py-3 font-semibold\">{{CURRENT_1}}</td>\n            <td class=\"px-4\
+  \ py-3 text-green-600\">{{CHANGE_1}}</td>\n          </tr>\n          <tr class=\"border-b border-gray-200 bg-gray-50\"\
+  >\n            <td class=\"px-4 py-3\">{{METRIC_2}}</td>\n            <td class=\"px-4 py-3\">{{BASELINE_2}}</td>\n    \
+  \        <td class=\"px-4 py-3 font-semibold\">{{CURRENT_2}}</td>\n            <td class=\"px-4 py-3 text-green-600\">{{CHANGE_2}}</td>\n\
+  \          </tr>\n        </tbody>\n      </table>\n    </div>\n\n    <!-- Chart Placeholder -->\n    <div class=\"mt-8\
+  \ h-64 bg-gray-100 rounded-xl flex items-center justify-center text-gray-400 border-2 border-dashed border-gray-300\">\n\
+  \      <p>Chart: {{CHART_TITLE}} (600×256px — Recharts / Chart.js)</p>\n    </div>\n  </section>\n\n  <!-- CONCLUSIONS -->\n\
+  \  <section id=\"conclusions\" class=\"max-w-4xl mx-auto px-8 py-12 page-break\">\n    <h2 class=\"text-3xl font-bold mb-6\
+  \ text-gray-900\">4. Conclusions & Recommendations</h2>\n    <div class=\"space-y-4 text-gray-700 leading-relaxed\">\n \
+  \     <p>{{CONCLUSION_TEXT}}</p>\n    </div>\n  </section>\n\n  <!-- APPENDIX -->\n  <section id=\"appendix\" class=\"max-w-4xl\
+  \ mx-auto px-8 py-12 page-break\">\n    <h2 class=\"text-3xl font-bold mb-6 text-gray-900\">Appendix</h2>\n    <h3 class=\"\
+  text-lg font-semibold mb-3\">Methodology</h3>\n    <p class=\"text-gray-600 text-sm mb-6\">{{METHODOLOGY}}</p>\n    <h3\
+  \ class=\"text-lg font-semibold mb-3\">Raw Data</h3>\n    <pre class=\"bg-gray-900 text-gray-100 p-4 rounded-lg text-xs\
+  \ overflow-x-auto\"><code>{{RAW_DATA}}</code></pre>\n  </section>\n\n  <!-- Footer (print) -->\n  <footer class=\"max-w-4xl\
+  \ mx-auto px-8 py-8 text-center text-xs text-gray-400 border-t border-gray-200\">\n    <p>CODEXA — Confidential — {{DATE}}</p>\n\
+  \  </footer>\n\n</body>\n</html>"
+template_variables: '| Variable | Description |
+
+  |----------|-------------|
+
+  | `{{REPORT_TITLE}}` | Main title on cover |
+
+  | `{{REPORT_SUBTITLE}}` | Subtitle / description |
+
+  | `{{REPORT_TYPE}}` | "Technical Report", "Quarterly Review", etc. |
+
+  | `{{DATE}}` | ISO date or localized |
+
+  | `{{AUTHOR}}` | Author name / team |
+
+  | `{{CLASSIFICATION}}` | "Internal", "Confidential", "Public" |
+
+  | `{{EXECUTIVE_SUMMARY}}` | 2-3 paragraph summary |
+
+  | `{{FINDING_N}}` | Key findings (numbered) |
+
+  | `{{METRIC_N}}` / `{{BASELINE_N}}` / `{{CURRENT_N}}` / `{{CHANGE_N}}` | Table data |
+
+  | `{{CHART_TITLE}}` | Chart placeholder label |'
+print_output:
+- '`Ctrl+P` or `window.print()` generates clean PDF'
+- Cover page on page 1, ToC on page 2
+- Tables avoid page breaks
+- Headers avoid orphaning

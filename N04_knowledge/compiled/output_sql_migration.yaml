@@ -1,0 +1,69 @@
+id: p10_out_sql_migration
+kind: output
+pillar: P10
+title: 'Output: SQL Migration'
+version: 1.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: knowledge-management
+quality: 8.5
+tags:
+- output
+- n04
+- sql
+- migration
+- supabase
+- database
+tldr: 'Supabase migration SQL: CREATE tables + INSERT KCs + CREATE indexes.'
+density_score: 0.92
+template: "-- Migration: {{NAME}}\n-- Generated: {{DATE}}\n-- KCs: {{COUNT}}\n\n-- 1. Create tables (if not exist)\nCREATE\
+  \ TABLE IF NOT EXISTS kcs (\n  id TEXT PRIMARY KEY,\n  kind TEXT NOT NULL,\n  pillar TEXT NOT NULL,\n  domain TEXT,\n  title\
+  \ TEXT NOT NULL,\n  tldr TEXT,\n  body TEXT NOT NULL,\n  tags TEXT[],\n  density_score FLOAT,\n  quality FLOAT,\n  created_at\
+  \ TIMESTAMPTZ DEFAULT now(),\n  updated_at TIMESTAMPTZ DEFAULT now()\n);\n\n-- 2. Insert KCs\nINSERT INTO kcs (id, kind,\
+  \ pillar, domain, title, tldr, body, tags, density_score, quality)\nVALUES\n  ('{{ID}}', '{{KIND}}', '{{PILLAR}}', '{{DOMAIN}}',\
+  \ '{{TITLE}}', '{{TLDR}}', '{{BODY}}', ARRAY[{{TAGS}}], {{DENSITY}}, {{QUALITY}})\nON CONFLICT (id) DO UPDATE SET\n  body\
+  \ = EXCLUDED.body,\n  updated_at = now();\n\n-- 3. Create indexes\nCREATE INDEX IF NOT EXISTS idx_kcs_kind ON kcs(kind);\n\
+  CREATE INDEX IF NOT EXISTS idx_kcs_pillar ON kcs(pillar);\nCREATE INDEX IF NOT EXISTS idx_kcs_domain ON kcs(domain);"
+usage: '| Variable | Source | Example | Notes |
+
+  |----------|--------|---------|-------|
+
+  | `{{NAME}}` | Migration purpose | `"kc_batch_2026_04_01"` | |
+
+  | `{{DATE}}` | Current timestamp | `"2026-04-01T14:30:00Z"` | |
+
+  | `{{COUNT}}` | Number of KCs | `"15"` | |
+
+  | `{{ID}}` | KC filename | `"kc_react_patterns"` | |
+
+  | `{{KIND}}` | KC frontmatter | `"knowledge_card"` | |
+
+  | `{{PILLAR}}` | KC directory | `"P01"` | |
+
+  | `{{BODY}}` | Escaped KC content | `''## Pattern\nHook pattern...''` | Must escape single quotes as '''' |
+
+  | `{{TAGS}}` | Comma-separated | `''react'',''patterns'',''hooks''` | |
+
+
+  Generate from compiled KCs:
+
+  python _tools/cex_compile.py --all
+
+  python _tools/sql_export.py > migration.sql'
+example_output: "-- Migration: kc_batch_2026_04_01\n-- Generated: 2026-04-01T14:30:00Z\n-- KCs: 2\n\nINSERT INTO kcs (id,\
+  \ kind, pillar, domain, title, tldr, body, tags, density_score, quality)\nVALUES\n  ('kc_react_patterns', 'knowledge_card',\
+  \ 'P01', 'frontend', 'React Patterns', 'Common React patterns for components', '## Hook Pattern\\nUseState for local state...',\
+  \ ARRAY['react','patterns','hooks'], 0.89, 8.5),\n  ('kc_sql_indexing', 'knowledge_card', 'P04', 'database', 'SQL Indexing',\
+  \ 'Database index optimization strategies', '## Index Types\\nB-tree for equality...', ARRAY['sql','indexing','performance'],\
+  \ 0.91, 8.7)\nON CONFLICT (id) DO UPDATE SET\n  body = EXCLUDED.body,\n  updated_at = now();"
+validation: '| Check | SQL Query | Expected |
+
+  |-------|-----------|----------|
+
+  | Table exists | `SELECT to_regclass(''kcs'');` | `''kcs''` |
+
+  | Row count | `SELECT COUNT(*) FROM kcs;` | `{{COUNT}}` |
+
+  | Index coverage | `SELECT indexname FROM pg_indexes WHERE tablename=''kcs'';` | 4 indexes |
+
+  | Recent data | `SELECT MAX(updated_at) FROM kcs;` | Today''s timestamp |'

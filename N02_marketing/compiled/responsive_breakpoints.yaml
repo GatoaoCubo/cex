@@ -1,0 +1,83 @@
+id: p06_schema_responsive_breakpoints
+kind: input_schema
+pillar: P06
+title: Responsive Breakpoints Contract
+version: 1.0.0
+created: 2026-04-01
+author: n02_visual_frontend
+domain: frontend
+quality: 8.9
+tags:
+- schema
+- responsive
+- breakpoints
+- tailwind
+- mobile-first
+tldr: Mobile-first breakpoint contract — Tailwind defaults, fluid typography, grid rules.
+density_score: 0.91
+schema_purpose: 'Enforces consistent responsive behavior across all N02 HTML output. Mobile-first: base styles = mobile, breakpoints
+  add complexity upward. ---'
+breakpoint_definitions_tailwind_defaults: "breakpoints:\n  base:  { min: 0,    max: 639,  label: \"mobile\",     columns:\
+  \ 1 }\n  sm:    { min: 640,  max: 767,  label: \"small\",      columns: 1 }\n  md:    { min: 768,  max: 1023, label: \"\
+  tablet\",     columns: 2 }\n  lg:    { min: 1024, max: 1279, label: \"desktop\",    columns: 3 }\n  xl:    { min: 1280,\
+  \ max: 1535, label: \"wide\",       columns: 4 }\n  2xl:   { min: 1536, max: null, label: \"ultrawide\",  columns: 4 }"
+layout_rules: '| Rule | Specification | Enforced |
+
+  |------|---------------|----------|
+
+  | Max content width | `max-w-7xl` (1280px) | yes |
+
+  | Container padding | `px-4` mobile, `px-6` md+, `px-8` lg+ | yes |
+
+  | Grid columns | 1→2→3→4 per breakpoint table | yes |
+
+  | Sidebar | hidden mobile, drawer md, fixed lg+ | yes |
+
+  | Navigation | hamburger mobile, horizontal lg+ | yes |
+
+  | Hero image | full-width mobile, 50/50 lg+ | recommended |'
+fluid_typography: '/ Body text /
+
+  font-size: clamp(1rem, 2.5vw, 1.25rem);      / 16px → 20px /
+
+
+  / H1 /
+
+  font-size: clamp(1.5rem, 4vw, 3rem);          / 24px → 48px /
+
+
+  / H2 /
+
+  font-size: clamp(1.25rem, 3vw, 2.25rem);      / 20px → 36px /
+
+
+  / H3 /
+
+  font-size: clamp(1.125rem, 2.5vw, 1.5rem);    / 18px → 24px /'
+touch_targets: "touch_targets:\n  minimum_size: \"48px × 48px\"\n  minimum_spacing: \"8px between targets\"\n  applies_to:\
+  \ [\"buttons\", \"links\", \"form inputs\", \"nav items\"]\n  breakpoint_scope: \"base through md (touch devices)\""
+spacing_scale_4px_base: '| Value | Size | Use Case |
+
+  |-------|------|----------|
+
+  | 0 | 0px | Reset margins, no spacing |
+
+  | 1-2 | 4-8px | Icon gaps, inline elements |
+
+  | 3-4 | 12-16px | Text line spacing, small components |
+
+  | 5-6 | 20-24px | Component internal padding |
+
+  | 8 | 32px | Component margins, section gaps |
+
+  | 10-12 | 40-48px | Large component spacing |
+
+  | 16-20 | 64-80px | Section dividers, hero spacing |
+
+  | 24 | 96px | Page-level spacing, major sections |'
+responsive_images: "images:\n  strategy: \"srcset + sizes\"\n  formats: [\"webp\", \"avif\", \"jpg fallback\"]\n  lazy_loading:\
+  \ \"loading='lazy' for below-fold\"\n  aspect_ratio: \"aspect-ratio CSS property, no CLS\"\n  max_width: \"100% on mobile,\
+  \ constrained on desktop\""
+validation: "validation:\n  must_render_clean:\n    - 320px   # smallest mobile\n    - 375px   # iPhone SE\n    - 768px  \
+  \ # iPad portrait\n    - 1024px  # iPad landscape / small laptop\n    - 1280px  # standard desktop\n    - 1536px  # wide\
+  \ monitor\n  no_horizontal_scroll: true\n  no_overlapping_elements: true\n  no_text_truncation: true"

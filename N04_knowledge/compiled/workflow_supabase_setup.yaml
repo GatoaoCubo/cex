@@ -27,6 +27,19 @@ signals:
 density_score: 0.9
 purpose: End-to-end workflow for N04 to set up a complete Supabase data layer from a company config YAML. Produces migration
   SQL, RLS policies, and module configs.
+anti_patterns_when_not_to_use: '| Scenario | Why Not | Use Instead |
+
+  |----------|---------|-------------|
+
+  | Existing Supabase project with data | Risk data loss from schema conflicts | Manual migration workflow |
+
+  | Single-tenant app (no org_id) | RLS adds unnecessary complexity | Simple schema without RLS |
+
+  | Prototype/MVP with <10 tables | Overhead exceeds benefit | Direct Supabase dashboard setup |
+
+  | Non-standard auth (not JWT) | RLS policies assume JWT claims | Custom auth + manual policies |
+
+  | Serverless-only (no edge functions) | Scaffolds unused functions | Skip steps 5-6, use API only |'
 steps: ''
 step_1_config_intake_n04:
 - 'Action: Load and validate company config YAML'
@@ -38,6 +51,7 @@ step_2_schema_design_n04:
 - 'Action: Generate CREATE TABLE + indexes for all tables'
 - 'Input: Validated config (database section)'
 - 'Output: `migrations/001_schema.sql`'
+- 'Patterns: `org_id UUID NOT NULL` on shared tables, `btree(org_id, created_at)` for time-series, `gin(metadata)` for JSONB'
 - 'Checks: org_id column on shared tables, indexes on FKs + sort columns'
 - 'Signal: schema_ready'
 step_3_rls_policies_n04:

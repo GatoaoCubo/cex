@@ -1,0 +1,141 @@
+id: p03_pt_brand_tasks
+kind: prompt_template
+pillar: P03
+title: Brand Tasks Execution Template
+version: 1.0.0
+created: '2026-04-01'
+updated: '2026-04-01'
+author: prompt-template-builder
+variables:
+- name: brand_name
+  type: string
+  required: true
+  default: null
+  description: The name of the brand being worked on
+- name: task_type
+  type: string
+  required: true
+  default: null
+  description: Specific brand task type (positioning, voice_guide, messaging, audit, strategy)
+- name: target_audience
+  type: string
+  required: true
+  default: null
+  description: Primary target audience for the brand
+- name: industry
+  type: string
+  required: true
+  default: null
+  description: Industry sector or market vertical
+- name: brand_values
+  type: list
+  required: false
+  default: []
+  description: Core brand values and principles
+- name: tone_preference
+  type: string
+  required: false
+  default: professional
+  description: Desired brand voice and personality tone
+- name: deliverable_format
+  type: string
+  required: false
+  default: structured_document
+  description: Output format (structured_document, guidelines, checklist, framework)
+- name: context_notes
+  type: string
+  required: false
+  default: ''
+  description: Additional context or specific requirements
+variable_syntax: mustache
+composable: true
+domain: brand
+quality: null
+tags:
+- prompt-template
+- brand
+- marketing
+- positioning
+- voice
+- guidelines
+tldr: Reusable template for executing various brand-related tasks with consistent structure and brand-aware outputs.
+keywords:
+- brand
+- marketing
+- positioning
+- voice
+- guidelines
+- strategy
+- messaging
+density_score: 0.89
+purpose: 'Produces structured brand deliverables across multiple task types while maintaining brand consistency and strategic
+  alignment. Reuse scope: any brand-related work including positioning, voice development, messaging frameworks, brand audits,
+  and strategic guidelines. Invoke once per task; vary task_type and brand parameters to produce distinct brand artifacts
+  from the same strategic mold.'
+variables_table: '| Name | Type | Required | Default | Description |
+
+  |------|------|----------|---------|-------------|
+
+  | brand_name | string | true | null | The name of the brand being worked on |
+
+  | task_type | string | true | null | Specific brand task type (positioning, voice_guide, messaging, audit, strategy) |
+
+  | target_audience | string | true | null | Primary target audience for the brand |
+
+  | industry | string | true | null | Industry sector or market vertical |
+
+  | brand_values | list | false | [] | Core brand values and principles |
+
+  | tone_preference | string | false | "professional" | Desired brand voice and personality tone |
+
+  | deliverable_format | string | false | "structured_document" | Output format (structured_document, guidelines, checklist,
+  framework) |
+
+  | context_notes | string | false | "" | Additional context or specific requirements |'
+template_body: "You are a strategic brand consultant with expertise in {{industry}} markets. Execute a {{task_type}} task\
+  \ for {{brand_name}}.\n\nBrand Context:\n- Brand: {{brand_name}}\n- Industry: {{industry}}  \n- Target Audience: {{target_audience}}\n\
+  - Brand Values: {{brand_values}}\n- Preferred Tone: {{tone_preference}}\n- Output Format: {{deliverable_format}}\n\n{{#context_notes}}\n\
+  Additional Context:\n{{context_notes}}\n{{/context_notes}}\n\nTask Execution Guidelines:\n\n1. Strategic Foundation: Begin\
+  \ with {{brand_name}}'s market position within {{industry}} and relationship to {{target_audience}}\n\n2. Task-Specific\
+  \ Delivery: Execute {{task_type}} with the following focus:\n   - If positioning: Define unique value proposition, competitive\
+  \ differentiation, and market positioning statement\n   - If voice_guide: Develop tone guidelines, language patterns, and\
+  \ communication principles  \n   - If messaging: Create key messages, taglines, and messaging hierarchy\n   - If audit:\
+  \ Assess current brand assets, consistency gaps, and improvement recommendations\n   - If strategy: Develop comprehensive\
+  \ brand strategy with tactics and implementation roadmap\n\n3. Brand Alignment: Ensure all outputs reflect {{tone_preference}}\
+  \ tone and incorporate {{brand_values}} throughout\n\n4. Audience Calibration: Tailor language, examples, and recommendations\
+  \ specifically for {{target_audience}} within {{industry}} context\n\n5. Deliverable Structure: Format output as {{deliverable_format}}\
+  \ with clear sections, actionable insights, and implementation guidance\n\nQuality Standards:\n- Strategic depth appropriate\
+  \ for {{industry}} complexity\n- Audience relevance calibrated for {{target_audience}}\n- Brand voice consistency with {{tone_preference}}\
+  \ \n- Actionable recommendations with clear next steps\n- Professional presentation suitable for stakeholder review\n\n\
+  Execute the {{task_type}} task now, maintaining strategic rigor and brand authenticity throughout."
+quality_gates: '| Gate | Status | Notes |
+
+  |------|--------|-------|
+
+  | H01 | PASS | Frontmatter parses as valid YAML |
+
+  | H02 | PASS | ID `p03_pt_brand_tasks` matches namespace pattern |
+
+  | H03 | PASS | ID equals filename stem |
+
+  | H04 | PASS | Kind equals literal `prompt_template` |
+
+  | H05 | PASS | Quality field is null |
+
+  | H06 | PASS | All required frontmatter fields present |
+
+  | H07 | PASS | Body contains 8 variable placeholders |
+
+  | H08 | PASS | All template variables declared in Variables section |'
+examples: "Variables:\nbrand_name: \"TechFlow Solutions\"\ntask_type: \"positioning\"\ntarget_audience: \"mid-market manufacturing\
+  \ executives\"\nindustry: \"industrial automation software\"\nbrand_values: [\"innovation\", \"reliability\", \"efficiency\"\
+  ]\ntone_preference: \"authoritative yet approachable\"\ndeliverable_format: \"strategic_framework\"\ncontext_notes: \"Positioning\
+  \ against legacy ERP providers and emerging AI-first competitors\"\n\nRendered Output:\nYou are a strategic brand consultant\
+  \ with expertise in industrial automation software markets. Execute a positioning task for TechFlow Solutions.\n\nBrand\
+  \ Context:\n- Brand: TechFlow Solutions\n- Industry: industrial automation software\n- Target Audience: mid-market manufacturing\
+  \ executives\n- Brand Values: innovation, reliability, efficiency\n- Preferred Tone: authoritative yet approachable\n- Output\
+  \ Format: strategic_framework\n\nAdditional Context:\nPositioning against legacy ERP providers and emerging AI-first competitors\n\
+  \nTask Execution Guidelines:\n\n1. Strategic Foundation: Begin with TechFlow Solutions's market position within industrial\
+  \ automation software and relationship to mid-market manufacturing executives\n\n2. Task-Specific Delivery: Execute positioning\
+  \ with the following focus:\n   - If positioning: Define unique value proposition, competitive differentiation, and market\
+  \ positioning statement\n   [continues with full rendered template...]"

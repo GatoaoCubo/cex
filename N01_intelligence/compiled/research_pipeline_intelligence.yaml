@@ -28,6 +28,23 @@ pipeline: "QUERY ─► S1 INTENT (classify domain, route)\n           │\n    
   \ ▼\n         S4 RESOLVE (entity dedup cross-source)\n           │\n           ▼\n         S5 SCORE (Gartner 7-dim)\n  \
   \         │\n           ▼\n         S6 SYNTHESIZE/GoT (domain models)\n           │\n           ▼\n         S7 VERIFY/CRITIC\
   \ (thinking model, max 3 iter)\n           │\n     ┌─────┼─────┐\n     ▼     ▼     ▼\n   HTML  PPTX  JSON"
+model_routing: '| Stage | Model | Parameters | Purpose |
+
+  |-------|--------|------------|---------|
+
+  | S1 Intent | gemini-2.5-pro | temp=0.1, max=512 | Domain classification, routing decisions |
+
+  | S2 STORM | gemini-2.5-pro | temp=0.3, max=2048 | Multi-perspective query planning |
+
+  | S3 CRAG | gemini-2.5-flash | temp=0.2, max=1024 | Retrieval quality scoring, filtering |
+
+  | S4 Resolve | gemini-2.5-pro | temp=0.1, max=1024 | Entity deduplication, cross-referencing |
+
+  | S5 Score | gemini-2.5-pro | temp=0.2, max=512 | 7-dimension Gartner scoring |
+
+  | S6 Synthesize | gemini-2.5-pro | temp=0.4, max=4096 | Research synthesis, GoT reasoning |
+
+  | S7 CRITIC | gemini-2.5-pro | temp=0.1, max=2048 | Verification, error detection |'
 usage: '# Full research from config
 
   python research_pipeline.py --config config.yaml --query "mercado de acessorios para gatos"

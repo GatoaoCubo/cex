@@ -1,0 +1,69 @@
+id: p12_wf_intelligence_pipeline
+kind: workflow
+pillar: P12
+version: 1.0.0
+created: '2026-04-01'
+updated: '2026-04-01'
+author: workflow-builder
+title: Intelligence Pipeline
+steps_count: 3
+execution: sequential
+agent_nodes:
+- n01
+- n04
+- n07
+timeout: 7200
+retry_policy: per_step
+depends_on: []
+signals:
+- 'On step complete: {nucleus}_complete signal emitted with quality scores (see signal-builder)'
+- 'On workflow complete: intelligence_ready signal with consolidated assessment'
+- 'On error: {nucleus}_error signal, retry per step (max 1), then escalate to orchestrator'
+spawn_configs:
+- p12_spawn_n01_research
+- p12_spawn_n04_analysis
+- p12_spawn_n07_consolidate
+domain: intelligence
+quality: null
+tags:
+- workflow
+- intelligence
+- research
+- analysis
+- sequential
+tldr: '3-step sequential intelligence pipeline: research data collection, analysis processing, and consolidated reporting'
+density_score: 0.91
+purpose: Orchestrates end-to-end intelligence gathering and analysis mission where N01 collects raw intelligence data, N04
+  processes findings into structured knowledge artifacts, and N07 consolidates results into actionable intelligence brief.
+  Each step builds on previous outputs in strict sequential order to ensure data quality and analytical rigor.
+steps: ''
+step_1_intelligence_collection_n01:
+- 'Agent: n01 (gemini-2.5-pro)'
+- 'Action: Gather intelligence data from multiple sources and produce research artifacts'
+- 'Input: intelligence targets and collection requirements from handoff file'
+- 'Output: research artifacts committed to N01_intelligence/ with source citations'
+- 'Signal: n01_research_complete with data quality score'
+- 'Depends on: none (initial step)'
+step_2_analysis_processing_n04:
+- 'Agent: n04 (gemini-2.5-pro)'
+- 'Action: Process raw intelligence into structured knowledge cards and analytical products'
+- 'Input: research artifacts from Step 1, analysis framework requirements'
+- 'Output: knowledge cards and analysis reports committed to N04_knowledge/'
+- 'Signal: n04_analysis_complete with analytical confidence score'
+- 'Depends on: Step 1'
+step_3_intelligence_brief_n07:
+- 'Agent: n07 (opus)'
+- 'Action: Consolidate analysis into executive intelligence brief with recommendations'
+- 'Input: knowledge cards and analysis from Step 2, briefing requirements'
+- 'Output: consolidated intelligence brief with actionable recommendations'
+- 'Signal: intelligence_ready with final assessment score'
+- 'Depends on: Steps 1, 2'
+dependencies:
+- Intelligence collection targets must be defined in handoff file before workflow start
+- Analysis framework and briefing requirements must be specified
+- spawn_configs for N01, N04, and N07 must exist and be valid
+references:
+- signal-builder for completion signal specifications
+- spawn-config-builder for nucleus launch configurations
+- N01 intelligence nucleus for research capabilities
+- N04 knowledge nucleus for analysis processing

@@ -199,3 +199,12 @@
 em Invoke-Evolve, C:\Users\PC\Documents\GitHub\cex\boot\overnight.ps1: linha 409
 em Main, C:\Users\PC\Documents\GitHub\cex\boot\overnight.ps1: linha 517
 em <ScriptBlock>, C:\Users\PC\Documents\GitHub\cex\boot\overnight.ps1: linha 592
+[2026-04-01 19:55:26] [INFO] ============================================================
+[2026-04-01 19:55:26] [INFO]   OVERNIGHT COMPLETE
+[2026-04-01 19:55:26] [INFO] ============================================================
+[2026-04-01 19:55:26] [INFO] Cycles:    1
+[2026-04-01 19:55:26] [INFO] Created:   77
+[2026-04-01 19:55:26] [INFO] Evolved:   321
+[2026-04-01 19:55:26] [INFO] Tokens:    0 / 500000
+[2026-04-01 19:55:26] [INFO] Duration:  0.7h
+[2026-04-01 19:55:26] [INFO] Log:       C:\Users\PC\Documents\GitHub\cex\.cex\overnight\overnight_20260401_195505.log

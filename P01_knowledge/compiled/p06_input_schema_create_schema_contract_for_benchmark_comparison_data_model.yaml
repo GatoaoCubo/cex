@@ -1,0 +1,64 @@
+id: p06_is_benchmark_comparison
+kind: input_schema
+pillar: P06
+version: 1.0.0
+created: '2026-04-02'
+updated: '2026-04-02'
+author: input-schema-builder
+scope: benchmark comparison analysis operation
+fields: '| # | Name | Type | Required | Default | Description |
+
+  |---|------|------|----------|---------|-------------|
+
+  | 1 | benchmark_name | string | YES | - | Name of the benchmark being evaluated |
+
+  | 2 | baseline_metric | float | YES | - | Baseline performance metric value for comparison |
+
+  | 3 | comparison_metric | float | YES | - | New performance metric value to compare against baseline |
+
+  | 4 | metric_type | string | YES | - | Type of metric being compared (accuracy, latency, throughput, f1_score, etc.) |
+
+  | 5 | comparison_type | string | NO | "relative" | Type of comparison analysis (relative, absolute, percentage) |
+
+  | 6 | threshold | float | NO | 0.05 | Threshold for determining statistically significant difference |
+
+  | 7 | metadata | object | NO | null | Additional context: dataset, model_version, test_conditions, etc. |'
+coercion:
+- from: string
+  to: float
+  rule: Parse numeric strings to float for baseline_metric and comparison_metric
+- from: integer
+  to: float
+  rule: Convert integer metrics to float for consistent processing
+examples: '{"benchmark_name": "response_latency", "baseline_metric": 150.5, "comparison_metric": 142.8, "metric_type": "latency_ms",
+  "threshold": 5.0, "metadata": {"dataset": "eval_v2", "model": "gpt-4"}}'
+domain: benchmark-analysis
+quality: null
+tags:
+- input-schema
+- benchmark-comparison
+- performance-analysis
+- P06
+tldr: 'Input contract for benchmark comparison: requires benchmark name, baseline/comparison metrics, metric type, with optional
+  analysis parameters.'
+density_score: 0.88
+contract_definition: This input schema defines the data contract for benchmark comparison analysis operations. The receiving
+  system analyzes performance differences between baseline and new metric values, determining statistical significance and
+  generating comparison reports. Used by performance evaluation agents and model assessment pipelines.
+coercion_rules: '| From | To | Rule |
+
+  |------|----|------|
+
+  | string | float | Parse numeric strings to float for baseline_metric and comparison_metric |
+
+  | integer | float | Convert integer metrics to float for consistent processing |'
+validation_constraints:
+- 'benchmark_name: non-empty string, alphanumeric with underscores'
+- 'baseline_metric, comparison_metric: positive numbers for most metrics, negative allowed for error rates'
+- 'metric_type: constrained to performance measurement types (accuracy, precision, recall, f1_score, latency_ms, throughput_ops,
+  error_rate, memory_mb)'
+- 'comparison_type: enum values (relative, absolute, percentage, z_score)'
+- 'threshold: positive float between 0.001 and 1.0'
+- 'metadata: flat object, max 10 keys, values must be strings or numbers'
+error_handling: Required field errors specify which field is missing and expected type. Type coercion failures indicate source
+  value and expected target type. Validation constraint violations provide acceptable range or format requirements.

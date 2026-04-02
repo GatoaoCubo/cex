@@ -1860,3 +1860,444 @@ TypeError: unsupported operand type(s) for +: 'NoneType' and 'str'
 [2026-04-01 19:55:26] [METRIC] Tokens: +0 (total: 117481/500000)
 [2026-04-01 19:55:26] [SKIP]   SKIP N04_knowledge\orchestration\dispatch_rule_supabase.md: no improvement (8.8)
 [2026-04-01 19:55:26] [METRIC]   Mode: heuristic
+[2026-04-01 19:55:26] [INFO]   Evolving: N04_knowledge\orchestration\workflow_supabase_setup.md (current: 8.8)
+[2026-04-01 19:55:26] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:55:26] [SKIP]   SKIP N04_knowledge\orchestration\workflow_supabase_setup.md: no improvement (8.8)
+[2026-04-01 19:55:26] [METRIC]   Mode: heuristic
+[2026-04-01 19:55:27] [INFO]   Evolving: N04_knowledge\output\output_kc_audit_report.md (current: 8.8)
+[2026-04-01 19:55:27] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:55:27] [SKIP]   SKIP N04_knowledge\output\output_kc_audit_report.md: no improvement (8.8)
+[2026-04-01 19:55:27] [METRIC]   Mode: heuristic
+[2026-04-01 19:55:27] [INFO]   Evolving: N02_marketing\output\landing_page_template.md (current: 8.8)
+[2026-04-01 19:55:28] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:55:28] [SKIP]   SKIP N02_marketing\output\landing_page_template.md: no improvement (8.8)
+[2026-04-01 19:55:28] [METRIC]   Mode: heuristic
+[2026-04-01 19:55:28] [INFO]   Evolving: N01_intelligence\knowledge\rag_source_intelligence.md (current: 8.8)
+[2026-04-01 19:55:28] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:55:28] [SKIP]   SKIP N01_intelligence\knowledge\rag_source_intelligence.md: no improvement (8.8)
+[2026-04-01 19:55:28] [METRIC]   Mode: heuristic
+[2026-04-01 19:55:29] [INFO]   Evolving: N01_intelligence\output\output_competitive_grid.md (current: 8.8)
+[2026-04-01 19:55:29] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:55:29] [SKIP]   SKIP N01_intelligence\output\output_competitive_grid.md: no improvement (8.8)
+[2026-04-01 19:55:29] [METRIC]   Mode: heuristic
+[2026-04-01 19:55:29] [INFO]   Evolving: N02_marketing\output\output_email_template.md (current: 8.8)
+[2026-04-01 19:55:29] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:55:29] [SKIP]   SKIP N02_marketing\output\output_email_template.md: no improvement (8.8)
+[2026-04-01 19:55:29] [METRIC]   Mode: heuristic
+[2026-04-01 19:55:30] [INFO]   Evolving: N02_marketing\knowledge\kc_accessibility_a11y.md (current: 8.8)
+[2026-04-01 19:55:30] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:55:30] [SKIP]   SKIP N02_marketing\knowledge\kc_accessibility_a11y.md: no improvement (8.8)
+[2026-04-01 19:55:30] [METRIC]   Mode: heuristic
+[2026-04-01 19:55:31] [INFO]   Evolving: N01_intelligence\knowledge\knowledge_card_intelligence.md (current: 8.8)
+[2026-04-01 19:55:31] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:55:31] [SKIP]   SKIP N01_intelligence\knowledge\knowledge_card_intelligence.md: no improvement (8.8)
+[2026-04-01 19:55:31] [METRIC]   Mode: heuristic
+[2026-04-01 19:55:31] [INFO]   Evolving: N01_intelligence\agents\agent_intelligence.md (current: 8.8)
+[2026-04-01 19:55:31] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:55:31] [SKIP]   SKIP N01_intelligence\agents\agent_intelligence.md: no improvement (8.8)
+[2026-04-01 19:55:31] [METRIC]   Mode: heuristic
+[2026-04-01 19:55:32] [INFO]   Evolving: N02_marketing\output\component_template.md (current: 8.8)
+[2026-04-01 19:55:32] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:55:32] [SKIP]   SKIP N02_marketing\output\component_template.md: no improvement (8.8)
+[2026-04-01 19:55:32] [METRIC]   Mode: heuristic
+[2026-04-01 19:55:32] [INFO]   Evolving: N02_marketing\knowledge\kc_html_component_library.md (current: 8.8)
+[2026-04-01 19:55:33] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:55:33] [SKIP]   SKIP N02_marketing\knowledge\kc_html_component_library.md: no improvement (8.8)
+[2026-04-01 19:55:33] [METRIC]   Mode: heuristic
+[2026-04-01 19:55:33] [INFO]   Evolving: N02_marketing\architecture\agent_card_marketing.md (current: 8.9)
+[2026-04-01 19:55:33] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:55:33] [SKIP]   SKIP N02_marketing\architecture\agent_card_marketing.md: no improvement (8.9)
+[2026-04-01 19:55:33] [METRIC]   Mode: heuristic
+[2026-04-01 19:55:34] [INFO]   Evolving: N02_marketing\feedback\quality_gate_marketing.md (current: 8.9)
+[2026-04-01 19:55:34] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:55:34] [SKIP]   SKIP N02_marketing\feedback\quality_gate_marketing.md: no improvement (8.9)
+[2026-04-01 19:55:34] [METRIC]   Mode: heuristic
+[2026-04-01 19:55:34] [INFO]   Evolving: N02_marketing\knowledge\knowledge_card_social_publishing.md (current: 8.9)
+[2026-04-01 19:55:34] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:55:34] [SKIP]   SKIP N02_marketing\knowledge\knowledge_card_social_publishing.md: no improvement (8.9)
+[2026-04-01 19:55:34] [METRIC]   Mode: heuristic
+[2026-04-01 19:55:35] [INFO]   Evolving: N01_intelligence\knowledge\knowledge_card_source_catalog.md (current: 8.9)
+[2026-04-01 19:55:35] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:55:35] [SKIP]   SKIP N01_intelligence\knowledge\knowledge_card_source_catalog.md: no improvement (8.9)
+[2026-04-01 19:55:35] [METRIC]   Mode: heuristic
+[2026-04-01 19:55:36] [INFO]   Evolving: N01_intelligence\orchestration\dispatch_rule_research_pipeline.md (current: 8.9)
+[2026-04-01 19:55:36] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:55:36] [SKIP]   SKIP N01_intelligence\orchestration\dispatch_rule_research_pipeline.md: no improvement (8.9)
+[2026-04-01 19:55:36] [METRIC]   Mode: heuristic
+[2026-04-01 19:55:36] [INFO]   Evolving: N02_marketing\schemas\html_output_schema.md (current: 8.9)
+[2026-04-01 19:55:36] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:55:36] [SKIP]   SKIP N02_marketing\schemas\html_output_schema.md: no improvement (8.9)
+[2026-04-01 19:55:36] [METRIC]   Mode: heuristic
+[2026-04-01 19:55:37] [INFO]   Evolving: N01_intelligence\knowledge\knowledge_card_research_methods.md (current: 8.9)
+[2026-04-01 19:55:37] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:55:37] [SKIP]   SKIP N01_intelligence\knowledge\knowledge_card_research_methods.md: no improvement (8.9)
+[2026-04-01 19:55:37] [METRIC]   Mode: heuristic
+[2026-04-01 19:55:37] [INFO]   Evolving: N01_intelligence\tools\research_pipeline_intelligence.md (current: 8.9)
+[2026-04-01 19:55:38] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:55:38] [SKIP]   SKIP N01_intelligence\tools\research_pipeline_intelligence.md: no improvement (8.9)
+[2026-04-01 19:55:38] [METRIC]   Mode: heuristic
+[2026-04-01 19:55:38] [INFO]   Evolving: N02_marketing\agents\agent_marketing.md (current: 8.9)
+[2026-04-01 19:55:38] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:55:38] [SKIP]   SKIP N02_marketing\agents\agent_marketing.md: no improvement (8.9)
+[2026-04-01 19:55:38] [METRIC]   Mode: heuristic
+[2026-04-01 19:55:39] [INFO]   Evolving: N01_intelligence\prompts\prompt_template_intelligence.md (current: 8.9)
+[2026-04-01 19:55:39] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:55:39] [SKIP]   SKIP N01_intelligence\prompts\prompt_template_intelligence.md: no improvement (8.9)
+[2026-04-01 19:55:39] [METRIC]   Mode: heuristic
+[2026-04-01 19:55:39] [INFO]   Evolving: N01_intelligence\quality\p07_scoring_rubric_create_a_scoring_rubric_for_intelligence.md (current: 8.9)
+[2026-04-01 19:55:40] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:55:40] [SKIP]   SKIP N01_intelligence\quality\p07_scoring_rubric_create_a_scoring_rubric_for_intelligence.md: no improvement (8.9)
+[2026-04-01 19:55:40] [METRIC]   Mode: heuristic
+[2026-04-01 19:55:40] [INFO]   Evolving: N02_marketing\orchestration\dispatch_rule_marketing.md (current: 8.9)
+[2026-04-01 19:55:40] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:55:40] [SKIP]   SKIP N02_marketing\orchestration\dispatch_rule_marketing.md: no improvement (8.9)
+[2026-04-01 19:55:40] [METRIC]   Mode: heuristic
+[2026-04-01 19:55:41] [INFO]   Evolving: N02_marketing\output\output_visual_report.md (current: 8.9)
+[2026-04-01 19:55:41] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:55:41] [SKIP]   SKIP N02_marketing\output\output_visual_report.md: no improvement (8.9)
+[2026-04-01 19:55:41] [METRIC]   Mode: heuristic
+[2026-04-01 19:55:41] [INFO]   Evolving: N02_marketing\prompts\action_prompt_marketing.md (current: 8.9)
+[2026-04-01 19:55:41] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:55:41] [SKIP]   SKIP N02_marketing\prompts\action_prompt_marketing.md: no improvement (8.9)
+[2026-04-01 19:55:41] [METRIC]   Mode: heuristic
+[2026-04-01 19:55:42] [INFO]   Evolving: N04_knowledge\knowledge\embedding_config_knowledge.md (current: 8.9)
+[2026-04-01 19:55:42] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:55:42] [SKIP]   SKIP N04_knowledge\knowledge\embedding_config_knowledge.md: no improvement (8.9)
+[2026-04-01 19:55:42] [METRIC]   Mode: heuristic
+[2026-04-01 19:55:43] [INFO]   Evolving: N04_knowledge\knowledge\chunk_strategy_knowledge.md (current: 8.9)
+[2026-04-01 19:55:43] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:55:43] [SKIP]   SKIP N04_knowledge\knowledge\chunk_strategy_knowledge.md: no improvement (8.9)
+[2026-04-01 19:55:43] [METRIC]   Mode: heuristic
+[2026-04-01 19:55:43] [INFO]   Evolving: N02_marketing\schemas\design_token_contract.md (current: 8.9)
+[2026-04-01 19:55:43] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:55:43] [SKIP]   SKIP N02_marketing\schemas\design_token_contract.md: no improvement (8.9)
+[2026-04-01 19:55:43] [METRIC]   Mode: heuristic
+[2026-04-01 19:55:44] [INFO]   Evolving: N02_marketing\schemas\responsive_breakpoints.md (current: 8.9)
+[2026-04-01 19:55:44] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:55:44] [SKIP]   SKIP N02_marketing\schemas\responsive_breakpoints.md: no improvement (8.9)
+[2026-04-01 19:55:44] [METRIC]   Mode: heuristic
+[2026-04-01 19:55:44] [INFO]   Evolving: N02_marketing\schemas\a11y_checklist.md (current: 8.9)
+[2026-04-01 19:55:45] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:55:45] [SKIP]   SKIP N02_marketing\schemas\a11y_checklist.md: no improvement (8.9)
+[2026-04-01 19:55:45] [METRIC]   Mode: heuristic
+[2026-04-01 19:55:45] [INFO]   Evolving: N02_marketing\tools\social_publisher_marketing.md (current: 8.9)
+[2026-04-01 19:55:45] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:55:45] [SKIP]   SKIP N02_marketing\tools\social_publisher_marketing.md: no improvement (8.9)
+[2026-04-01 19:55:45] [METRIC]   Mode: heuristic
+[2026-04-01 19:55:46] [INFO]   Evolving: N02_marketing\output\output_dashboard_ui.md (current: 8.9)
+[2026-04-01 19:55:46] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:55:46] [SKIP]   SKIP N02_marketing\output\output_dashboard_ui.md: no improvement (8.9)
+[2026-04-01 19:55:46] [METRIC]   Mode: heuristic
+[2026-04-01 19:55:46] [INFO]   Evolving: N02_marketing\output\output_social_card.md (current: 8.9)
+[2026-04-01 19:55:46] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:55:46] [SKIP]   SKIP N02_marketing\output\output_social_card.md: no improvement (8.9)
+[2026-04-01 19:55:46] [METRIC]   Mode: heuristic
+[2026-04-01 19:55:47] [INFO]   Evolving: N02_marketing\orchestration\dispatch_rule_social_publisher.md (current: 8.9)
+[2026-04-01 19:55:47] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:55:47] [SKIP]   SKIP N02_marketing\orchestration\dispatch_rule_social_publisher.md: no improvement (8.9)
+[2026-04-01 19:55:47] [METRIC]   Mode: heuristic
+[2026-04-01 19:55:48] [INFO]   Evolving: N02_marketing\orchestration\workflow_marketing.md (current: 8.9)
+[2026-04-01 19:55:48] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:55:48] [SKIP]   SKIP N02_marketing\orchestration\workflow_marketing.md: no improvement (8.9)
+[2026-04-01 19:55:48] [METRIC]   Mode: heuristic
+[2026-04-01 19:55:48] [INFO]   Evolving: N04_knowledge\knowledge\knowledge_card_knowledge.md (current: 8.9)
+[2026-04-01 19:55:48] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:55:48] [SKIP]   SKIP N04_knowledge\knowledge\knowledge_card_knowledge.md: no improvement (8.9)
+[2026-04-01 19:55:48] [METRIC]   Mode: heuristic
+[2026-04-01 19:55:49] [INFO]   Evolving: N04_knowledge\knowledge\embedding_config_supabase.md (current: 8.9)
+[2026-04-01 19:55:49] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:55:49] [SKIP]   SKIP N04_knowledge\knowledge\embedding_config_supabase.md: no improvement (8.9)
+[2026-04-01 19:55:49] [METRIC]   Mode: heuristic
+[2026-04-01 19:55:49] [INFO]   Evolving: N02_marketing\output\output_style_guide.md (current: 8.9)
+[2026-04-01 19:55:50] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:55:50] [SKIP]   SKIP N02_marketing\output\output_style_guide.md: no improvement (8.9)
+[2026-04-01 19:55:50] [METRIC]   Mode: heuristic
+[2026-04-01 19:55:50] [INFO]   Evolving: N04_knowledge\knowledge\knowledge_card_supabase_data_layer.md (current: 8.9)
+[2026-04-01 19:55:50] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:55:50] [SKIP]   SKIP N04_knowledge\knowledge\knowledge_card_supabase_data_layer.md: no improvement (8.9)
+[2026-04-01 19:55:50] [METRIC]   Mode: heuristic
+[2026-04-01 19:55:51] [INFO] Evolve complete. 90 processed, 0 improved.
+[2026-04-01 19:55:51] [INFO] ============================================================
+[2026-04-01 19:55:51] [INFO]   PHASE 3: AUTO CYCLE
+[2026-04-01 19:55:51] [INFO] ============================================================
+[2026-04-01 19:55:51] [INFO] Running cex_auto.py cycle (max 77 actions)
+[2026-04-01 19:55:55] [INFO] python.exe : Exception in thread Thread-5 (_readerthread):
+No C:\Users\PC\Documents\GitHub\cex\boot\overnight.ps1:440 caractere:19
++ ...   $result = & $PYTHON "$CEX_ROOT\_tools\cex_auto.py" cycle --max $max ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Exception in th..._readerthread)::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Traceback (most recent call last):
+  File "C:\Users\PC\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Users\PC\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\PC\AppData\Local\Programs\Python\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "C:\Users\PC\AppData\Local\Programs\Python\Python312\Lib\encodings\cp1252.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x9d in position 3: character maps to <undefined>
+
+============================================================
+  CEX AUTO CYCLE ÔÇö EXECUTE
+============================================================
+
+­ƒôí Scanning system...
+Traceback (most recent call last):
+  File "C:\Users\PC\Documents\GitHub\cex\_tools\cex_auto.py", line 387, in <module>
+    main()
+  File "C:\Users\PC\Documents\GitHub\cex\_tools\cex_auto.py", line 383, in main
+    run_cycle(max_actions=args.max, dry_run=args.dry_run)
+  File "C:\Users\PC\Documents\GitHub\cex\_tools\cex_auto.py", line 280, in run_cycle
+    scan = scan_system()
+           ^^^^^^^^^^^^^
+  File "C:\Users\PC\Documents\GitHub\cex\_tools\cex_auto.py", line 77, in scan_system
+    full = r.stdout + r.stderr
+           ~~~~~~~~~^~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'NoneType' and 'str'
+
+[2026-04-01 19:55:56] [INFO] Artifacts still below target: 158
+[2026-04-01 19:55:56] [INFO] 
+[2026-04-01 19:56:01] [INFO] ============================================================
+[2026-04-01 19:56:01] [INFO]   FLYWHEEL CYCLE 5 / 50
+[2026-04-01 19:56:01] [INFO] ============================================================
+[2026-04-01 19:56:01] [INFO] Budget remaining: 382519 tokens
+[2026-04-01 19:56:01] [INFO] ============================================================
+[2026-04-01 19:56:01] [INFO]   PHASE 1: BOOTSTRAP
+[2026-04-01 19:56:01] [INFO] ============================================================
+[2026-04-01 19:56:01] [INFO] N03 (Builder Architect): 0 artifacts. Bootstrapping...
+[2026-04-01 19:56:01] [SKIP]   N03/agent: done in previous run. Skip.
+[2026-04-01 19:56:01] [SKIP]   N03/system_prompt: done in previous run. Skip.
+[2026-04-01 19:56:01] [SKIP]   N03/knowledge_card: done in previous run. Skip.
+[2026-04-01 19:56:01] [SKIP]   N03/agent_card: done in previous run. Skip.
+[2026-04-01 19:56:01] [SKIP]   N03/workflow: done in previous run. Skip.
+[2026-04-01 19:56:01] [SKIP]   N03/quality_gate: done in previous run. Skip.
+[2026-04-01 19:56:01] [SKIP]   N03/scoring_rubric: done in previous run. Skip.
+[2026-04-01 19:56:01] [SKIP]   N03/dispatch_rule: done in previous run. Skip.
+[2026-04-01 19:56:01] [SKIP]   N03/schema: done in previous run. Skip.
+[2026-04-01 19:56:01] [SKIP]   N03/output_template: done in previous run. Skip.
+[2026-04-01 19:56:01] [SKIP]   N03/prompt_template: done in previous run. Skip.
+[2026-04-01 19:56:01] [INFO] N05 (DevOps Engineer): 0 artifacts. Bootstrapping...
+[2026-04-01 19:56:01] [SKIP]   N05/agent: done in previous run. Skip.
+[2026-04-01 19:56:01] [SKIP]   N05/system_prompt: done in previous run. Skip.
+[2026-04-01 19:56:01] [SKIP]   N05/knowledge_card: done in previous run. Skip.
+[2026-04-01 19:56:01] [SKIP]   N05/agent_card: done in previous run. Skip.
+[2026-04-01 19:56:01] [SKIP]   N05/workflow: done in previous run. Skip.
+[2026-04-01 19:56:01] [SKIP]   N05/quality_gate: done in previous run. Skip.
+[2026-04-01 19:56:01] [SKIP]   N05/scoring_rubric: done in previous run. Skip.
+[2026-04-01 19:56:01] [SKIP]   N05/dispatch_rule: done in previous run. Skip.
+[2026-04-01 19:56:01] [SKIP]   N05/schema: done in previous run. Skip.
+[2026-04-01 19:56:01] [SKIP]   N05/output_template: done in previous run. Skip.
+[2026-04-01 19:56:01] [SKIP]   N05/prompt_template: done in previous run. Skip.
+[2026-04-01 19:56:01] [INFO] N06 (Brand Architect): 0 artifacts. Bootstrapping...
+[2026-04-01 19:56:01] [SKIP]   N06/agent: done in previous run. Skip.
+[2026-04-01 19:56:01] [SKIP]   N06/system_prompt: done in previous run. Skip.
+[2026-04-01 19:56:01] [SKIP]   N06/knowledge_card: done in previous run. Skip.
+[2026-04-01 19:56:01] [SKIP]   N06/agent_card: done in previous run. Skip.
+[2026-04-01 19:56:01] [SKIP]   N06/workflow: done in previous run. Skip.
+[2026-04-01 19:56:01] [SKIP]   N06/quality_gate: done in previous run. Skip.
+[2026-04-01 19:56:01] [SKIP]   N06/scoring_rubric: done in previous run. Skip.
+[2026-04-01 19:56:01] [SKIP]   N06/dispatch_rule: done in previous run. Skip.
+[2026-04-01 19:56:01] [SKIP]   N06/schema: done in previous run. Skip.
+[2026-04-01 19:56:01] [SKIP]   N06/output_template: done in previous run. Skip.
+[2026-04-01 19:56:01] [SKIP]   N06/prompt_template: done in previous run. Skip.
+[2026-04-01 19:56:01] [INFO] N07 (Mission Control): 0 artifacts. Bootstrapping...
+[2026-04-01 19:56:01] [SKIP]   N07/agent: done in previous run. Skip.
+[2026-04-01 19:56:01] [SKIP]   N07/system_prompt: done in previous run. Skip.
+[2026-04-01 19:56:01] [SKIP]   N07/knowledge_card: done in previous run. Skip.
+[2026-04-01 19:56:01] [SKIP]   N07/agent_card: done in previous run. Skip.
+[2026-04-01 19:56:01] [SKIP]   N07/workflow: done in previous run. Skip.
+[2026-04-01 19:56:01] [SKIP]   N07/quality_gate: done in previous run. Skip.
+[2026-04-01 19:56:01] [SKIP]   N07/scoring_rubric: done in previous run. Skip.
+[2026-04-01 19:56:01] [SKIP]   N07/dispatch_rule: done in previous run. Skip.
+[2026-04-01 19:56:01] [SKIP]   N07/schema: done in previous run. Skip.
+[2026-04-01 19:56:01] [SKIP]   N07/output_template: done in previous run. Skip.
+[2026-04-01 19:56:01] [SKIP]   N07/prompt_template: done in previous run. Skip.
+[2026-04-01 19:56:01] [INFO] Bootstrap complete. 77 artifacts created.
+[2026-04-01 19:56:01] [INFO] ============================================================
+[2026-04-01 19:56:01] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-01 19:56:01] [INFO] ============================================================
+[2026-04-01 19:56:01] [INFO] Found 90 artifacts below target 9
+[2026-04-01 19:56:01] [INFO]   Evolving: N04_knowledge\quality\scoring_rubric_knowledge.md (current: 8.5)
+[2026-04-01 19:56:01] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:01] [SKIP]   SKIP N04_knowledge\quality\scoring_rubric_knowledge.md: no improvement (8.5)
+[2026-04-01 19:56:01] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:02] [INFO]   Evolving: N04_knowledge\output\output_sql_migration.md (current: 8.5)
+[2026-04-01 19:56:02] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:02] [SKIP]   SKIP N04_knowledge\output\output_sql_migration.md: no improvement (8.5)
+[2026-04-01 19:56:02] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:02] [INFO]   Evolving: N04_knowledge\output\output_embedding_batch.md (current: 8.5)
+[2026-04-01 19:56:02] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:02] [SKIP]   SKIP N04_knowledge\output\output_embedding_batch.md: no improvement (8.5)
+[2026-04-01 19:56:02] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:03] [INFO]   Evolving: N01_intelligence\memory\embedding_config_intelligence.md (current: 8.5)
+[2026-04-01 19:56:03] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:03] [SKIP]   SKIP N01_intelligence\memory\embedding_config_intelligence.md: no improvement (8.5)
+[2026-04-01 19:56:03] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:03] [INFO]   Evolving: N01_intelligence\output\output_source_dossier.md (current: 8.6)
+[2026-04-01 19:56:04] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:04] [SKIP]   SKIP N01_intelligence\output\output_source_dossier.md: no improvement (8.6)
+[2026-04-01 19:56:04] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:04] [INFO]   Evolving: N04_knowledge\schemas\database_schema_contract.md (current: 8.6)
+[2026-04-01 19:56:04] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:04] [SKIP]   SKIP N04_knowledge\schemas\database_schema_contract.md: no improvement (8.6)
+[2026-04-01 19:56:04] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:05] [INFO]   Evolving: N01_intelligence\output\output_research_brief.md (current: 8.6)
+[2026-04-01 19:56:05] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:05] [SKIP]   SKIP N01_intelligence\output\output_research_brief.md: no improvement (8.6)
+[2026-04-01 19:56:05] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:05] [INFO]   Evolving: N01_intelligence\schemas\source_quality_contract.md (current: 8.6)
+[2026-04-01 19:56:05] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:05] [SKIP]   SKIP N01_intelligence\schemas\source_quality_contract.md: no improvement (8.6)
+[2026-04-01 19:56:05] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:06] [INFO]   Evolving: N01_intelligence\schemas\trend_detection_contract.md (current: 8.6)
+[2026-04-01 19:56:06] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:06] [SKIP]   SKIP N01_intelligence\schemas\trend_detection_contract.md: no improvement (8.6)
+[2026-04-01 19:56:06] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:07] [INFO]   Evolving: N04_knowledge\feedback\quality_gate_knowledge.md (current: 8.6)
+[2026-04-01 19:56:07] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:07] [SKIP]   SKIP N04_knowledge\feedback\quality_gate_knowledge.md: no improvement (8.6)
+[2026-04-01 19:56:07] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:07] [INFO]   Evolving: N04_knowledge\output\output_finetune_dataset.md (current: 8.6)
+[2026-04-01 19:56:07] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:07] [SKIP]   SKIP N04_knowledge\output\output_finetune_dataset.md: no improvement (8.6)
+[2026-04-01 19:56:07] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:08] [INFO]   Evolving: N01_intelligence\quality\scoring_rubric_intelligence.md (current: 8.6)
+[2026-04-01 19:56:08] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:08] [SKIP]   SKIP N01_intelligence\quality\scoring_rubric_intelligence.md: no improvement (8.6)
+[2026-04-01 19:56:08] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:09] [INFO]   Evolving: N01_intelligence\schemas\research_depth_levels.md (current: 8.6)
+[2026-04-01 19:56:09] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:09] [SKIP]   SKIP N01_intelligence\schemas\research_depth_levels.md: no improvement (8.6)
+[2026-04-01 19:56:09] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:09] [INFO]   Evolving: N04_knowledge\schemas\export_format_contract.md (current: 8.6)
+[2026-04-01 19:56:09] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:09] [SKIP]   SKIP N04_knowledge\schemas\export_format_contract.md: no improvement (8.6)
+[2026-04-01 19:56:09] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:10] [INFO]   Evolving: N01_intelligence\quality\quality_gate_intelligence.md (current: 8.7)
+[2026-04-01 19:56:10] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:10] [SKIP]   SKIP N01_intelligence\quality\quality_gate_intelligence.md: no improvement (8.7)
+[2026-04-01 19:56:10] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:10] [INFO]   Evolving: N01_intelligence\schemas\research_brief_contract.md (current: 8.7)
+[2026-04-01 19:56:11] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:11] [SKIP]   SKIP N01_intelligence\schemas\research_brief_contract.md: no improvement (8.7)
+[2026-04-01 19:56:11] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:11] [INFO]   Evolving: N01_intelligence\schemas\competitive_analysis_contract.md (current: 8.7)
+[2026-04-01 19:56:11] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:11] [SKIP]   SKIP N01_intelligence\schemas\competitive_analysis_contract.md: no improvement (8.7)
+[2026-04-01 19:56:11] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:12] [INFO]   Evolving: N04_knowledge\output\output_gap_report.md (current: 8.7)
+[2026-04-01 19:56:12] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:12] [SKIP]   SKIP N04_knowledge\output\output_gap_report.md: no improvement (8.7)
+[2026-04-01 19:56:12] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:12] [INFO]   Evolving: N02_marketing\orchestration\p12_wf_weekly_fashion_content.md (current: 8.7)
+[2026-04-01 19:56:12] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:12] [SKIP]   SKIP N02_marketing\orchestration\p12_wf_weekly_fashion_content.md: no improvement (8.7)
+[2026-04-01 19:56:12] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:13] [INFO]   Evolving: N04_knowledge\orchestration\workflow_knowledge.md (current: 8.7)
+[2026-04-01 19:56:13] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:13] [SKIP]   SKIP N04_knowledge\orchestration\workflow_knowledge.md: no improvement (8.7)
+[2026-04-01 19:56:13] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:14] [INFO]   Evolving: N04_knowledge\knowledge\rag_source_knowledge.md (current: 8.7)
+[2026-04-01 19:56:14] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:14] [SKIP]   SKIP N04_knowledge\knowledge\rag_source_knowledge.md: no improvement (8.7)
+[2026-04-01 19:56:14] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:14] [INFO]   Evolving: N04_knowledge\prompts\system_prompt_knowledge.md (current: 8.7)
+[2026-04-01 19:56:14] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:14] [SKIP]   SKIP N04_knowledge\prompts\system_prompt_knowledge.md: no improvement (8.7)
+[2026-04-01 19:56:14] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:15] [INFO]   Evolving: N04_knowledge\output\output_taxonomy_map.md (current: 8.7)
+[2026-04-01 19:56:15] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:15] [SKIP]   SKIP N04_knowledge\output\output_taxonomy_map.md: no improvement (8.7)
+[2026-04-01 19:56:15] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:15] [INFO]   Evolving: N04_knowledge\output\output_knowledge_card.md (current: 8.7)
+[2026-04-01 19:56:16] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:16] [SKIP]   SKIP N04_knowledge\output\output_knowledge_card.md: no improvement (8.7)
+[2026-04-01 19:56:16] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:16] [INFO]   Evolving: N01_intelligence\memory\rag_source_intelligence.md (current: 8.7)
+[2026-04-01 19:56:16] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:16] [SKIP]   SKIP N01_intelligence\memory\rag_source_intelligence.md: no improvement (8.7)
+[2026-04-01 19:56:16] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:17] [INFO]   Evolving: N04_knowledge\schemas\freshness_contract.md (current: 8.7)
+[2026-04-01 19:56:17] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:17] [SKIP]   SKIP N04_knowledge\schemas\freshness_contract.md: no improvement (8.7)
+[2026-04-01 19:56:17] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:17] [INFO]   Evolving: N04_knowledge\schemas\embedding_contract.md (current: 8.7)
+[2026-04-01 19:56:17] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:17] [SKIP]   SKIP N04_knowledge\schemas\embedding_contract.md: no improvement (8.7)
+[2026-04-01 19:56:17] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:18] [INFO]   Evolving: N01_intelligence\schemas\citation_format_contract.md (current: 8.7)
+[2026-04-01 19:56:18] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:18] [SKIP]   SKIP N01_intelligence\schemas\citation_format_contract.md: no improvement (8.7)
+[2026-04-01 19:56:18] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:19] [INFO]   Evolving: N01_intelligence\feedback\quality_gate_intelligence.md (current: 8.7)
+[2026-04-01 19:56:19] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:19] [SKIP]   SKIP N01_intelligence\feedback\quality_gate_intelligence.md: no improvement (8.7)
+[2026-04-01 19:56:19] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:19] [INFO]   Evolving: N01_intelligence\architecture\agent_card_intelligence.md (current: 8.7)
+[2026-04-01 19:56:19] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:19] [SKIP]   SKIP N01_intelligence\architecture\agent_card_intelligence.md: no improvement (8.7)
+[2026-04-01 19:56:19] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:20] [INFO]   Evolving: N04_knowledge\schemas\kc_structure_contract.md (current: 8.7)
+[2026-04-01 19:56:20] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:20] [SKIP]   SKIP N04_knowledge\schemas\kc_structure_contract.md: no improvement (8.7)
+[2026-04-01 19:56:20] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:20] [INFO]   Evolving: N01_intelligence\knowledge\embedding_config_intelligence.md (current: 8.7)
+[2026-04-01 19:56:21] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:21] [SKIP]   SKIP N01_intelligence\knowledge\embedding_config_intelligence.md: no improvement (8.7)
+[2026-04-01 19:56:21] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:21] [INFO]   Evolving: N01_intelligence\orchestration\workflow_intelligence.md (current: 8.7)
+[2026-04-01 19:56:21] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:21] [SKIP]   SKIP N01_intelligence\orchestration\workflow_intelligence.md: no improvement (8.7)
+[2026-04-01 19:56:21] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:22] [INFO]   Evolving: N01_intelligence\output\output_trend_report.md (current: 8.7)
+[2026-04-01 19:56:22] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:22] [SKIP]   SKIP N01_intelligence\output\output_trend_report.md: no improvement (8.7)
+[2026-04-01 19:56:22] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:22] [INFO]   Evolving: N01_intelligence\prompts\system_prompt_intelligence.md (current: 8.7)
+[2026-04-01 19:56:23] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:23] [SKIP]   SKIP N01_intelligence\prompts\system_prompt_intelligence.md: no improvement (8.7)
+[2026-04-01 19:56:23] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:23] [INFO]   Evolving: N01_intelligence\orchestration\dispatch_rule_intelligence.md (current: 8.7)
+[2026-04-01 19:56:23] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:23] [SKIP]   SKIP N01_intelligence\orchestration\dispatch_rule_intelligence.md: no improvement (8.7)
+[2026-04-01 19:56:23] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:24] [INFO]   Evolving: N01_intelligence\output\output_swot_analysis.md (current: 8.7)
+[2026-04-01 19:56:24] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:24] [SKIP]   SKIP N01_intelligence\output\output_swot_analysis.md: no improvement (8.7)
+[2026-04-01 19:56:24] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:25] [INFO]   Evolving: N01_intelligence\output\output_benchmark_report.md (current: 8.7)
+[2026-04-01 19:56:25] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:25] [SKIP]   SKIP N01_intelligence\output\output_benchmark_report.md: no improvement (8.7)
+[2026-04-01 19:56:25] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:25] [INFO]   Evolving: N01_intelligence\output\output_executive_summary.md (current: 8.7)
+[2026-04-01 19:56:25] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:25] [SKIP]   SKIP N01_intelligence\output\output_executive_summary.md: no improvement (8.7)
+[2026-04-01 19:56:25] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:26] [INFO]   Evolving: N01_intelligence\output\output_market_snapshot.md (current: 8.7)
+[2026-04-01 19:56:26] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:26] [SKIP]   SKIP N01_intelligence\output\output_market_snapshot.md: no improvement (8.7)
+[2026-04-01 19:56:26] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:27] [INFO]   Evolving: N04_knowledge\knowledge\retriever_config_knowledge.md (current: 8.8)
+[2026-04-01 19:56:27] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:27] [SKIP]   SKIP N04_knowledge\knowledge\retriever_config_knowledge.md: no improvement (8.8)
+[2026-04-01 19:56:27] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:27] [INFO]   Evolving: N04_knowledge\knowledge\rag_source_supabase.md (current: 8.8)
+[2026-04-01 19:56:27] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:27] [SKIP]   SKIP N04_knowledge\knowledge\rag_source_supabase.md: no improvement (8.8)
+[2026-04-01 19:56:27] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:28] [INFO]   Evolving: N04_knowledge\architecture\agent_card_knowledge.md (current: 8.8)
+[2026-04-01 19:56:28] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:28] [SKIP]   SKIP N04_knowledge\architecture\agent_card_knowledge.md: no improvement (8.8)
+[2026-04-01 19:56:28] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:29] [INFO]   Evolving: N04_knowledge\agents\agent_knowledge.md (current: 8.8)
+[2026-04-01 19:56:29] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:29] [SKIP]   SKIP N04_knowledge\agents\agent_knowledge.md: no improvement (8.8)
+[2026-04-01 19:56:29] [METRIC]   Mode: heuristic
+[2026-04-01 19:56:29] [INFO]   Evolving: N02_marketing\schemas\tailwind_palette_contract.md (current: 8.8)
+[2026-04-01 19:56:29] [METRIC] Tokens: +0 (total: 117481/500000)
+[2026-04-01 19:56:29] [SKIP]   SKIP N02_marketing\schemas\tailwind_palette_contract.md: no improvement (8.8)
+[2026-04-01 19:56:29] [METRIC]   Mode: heuristic

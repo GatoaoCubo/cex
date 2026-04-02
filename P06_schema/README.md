@@ -22,3 +22,5 @@
 - Entry: [[CLAUDE]]
 - Pipeline: [[LLM_PIPELINE]]
 - Map: [[CEX_ARCHITECTURE_MAP]]
+
+Part of: [[N00_genesis]]

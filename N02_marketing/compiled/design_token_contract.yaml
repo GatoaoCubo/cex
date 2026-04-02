@@ -1,0 +1,175 @@
+id: p10_dtc_design_token_contract
+kind: input_schema
+pillar: P10
+title: Design Token Contract — 3-Layer Architecture
+version: 1.0.0
+created: 2026-04-01
+author: n02_visual_frontend_marketing
+target_artifact: design_system
+token_layers:
+- primitives
+- semantic_codexa
+- component_level
+color_palette: codexa_green_accent
+font_stack:
+- geist_variable
+- inter
+- jetbrains_mono
+validation_rules: ''
+domain: visual_frontend_engineering
+quality: 8.9
+tags:
+- input_schema
+- design_tokens
+- codexa
+- visual-system
+- color
+- typography
+- spacing
+- N02
+tldr: 3-layer design token contract — primitives (:root), semantic (CODEXA), component — zero hardcoded hex colors, consistent
+  spacing,
+density_score: 0.96
+purpose: Defines the mandatory 3-layer design token architecture for all N02 visual output. Ensures consistent styling, maintainable
+  code, and zero hardcoded values across components and pages.
+3_layer_token_architecture: ''
+layer_1_primitives_root_level: "Base tokens that define the foundation. Never reference these directly in components.\n\n\
+  :root {\n  / Color Primitives /\n  --white: #ffffff;\n  --black: #000000;\n  --gray-50: #f9fafb;\n  --gray-100: #f3f4f6;\n\
+  \  --gray-200: #e5e7eb;\n  --gray-300: #d1d5db;\n  --gray-400: #9ca3af;\n  --gray-500: #6b7280;\n  --gray-600: #4b5563;\n\
+  \  --gray-700: #374151;\n  --gray-800: #1f2937;\n  --gray-900: #111827;\n  --gray-950: #030712;\n  \n  / CODEXA Brand Primitives\
+  \ /\n  --codexa-green-50: #f0fdf4;\n  --codexa-green-100: #dcfce7;\n  --codexa-green-200: #bbf7d0;\n  --codexa-green-300:\
+  \ #86efac;\n  --codexa-green-400: #4ade80;\n  --codexa-green-500: #50C878; / Primary accent /\n  --codexa-green-600: #16a34a;\n\
+  \  --codexa-green-700: #15803d;\n  --codexa-green-800: #166534;\n  --codexa-green-900: #14532d;\n  \n  / Spacing Primitives\
+  \ /\n  --space-1: 0.25rem;  / 4px /\n  --space-2: 0.5rem;   / 8px /\n  --space-3: 0.75rem;  / 12px /\n  --space-4: 1rem;\
+  \     / 16px /\n  --space-6: 1.5rem;   / 24px /\n  --space-8: 2rem;     / 32px /\n  --space-12: 3rem;    / 48px /\n  --space-16:\
+  \ 4rem;    / 64px /\n  --space-20: 5rem;    / 80px /\n  --space-24: 6rem;    / 96px /\n  \n  / Typography Primitives /\n\
+  \  --font-size-xs: 0.75rem;   / 12px /\n  --font-size-sm: 0.875rem;  / 14px /\n  --font-size-base: 1rem;    / 16px /\n \
+  \ --font-size-lg: 1.125rem;  / 18px /\n  --font-size-xl: 1.25rem;   / 20px /\n  --font-size-2xl: 1.5rem;   / 24px /\n  --font-size-3xl:\
+  \ 1.875rem; / 30px /\n  --font-size-4xl: 2.25rem;  / 36px /\n  --font-size-5xl: 3rem;     / 48px /\n  --font-size-6xl: 3.75rem;\
+  \  / 60px /\n  \n  / Border Radius Primitives /\n  --radius-sm: 0.125rem;  / 2px /\n  --radius: 0.25rem;      / 4px /\n\
+  \  --radius-md: 0.375rem;  / 6px /\n  --radius-lg: 0.5rem;    / 8px /\n  --radius-xl: 0.75rem;   / 12px /\n  --radius-2xl:\
+  \ 1rem;     / 16px /\n  --radius-full: 9999px;\n}"
+layer_2_semantic_codexa_tokens: "Business-meaningful tokens that reference primitives. Reference these in components.\n\n\
+  .codexa-theme {\n  / Surface Colors /\n  --codexa-surface-50: var(--gray-50);\n  --codexa-surface-100: var(--gray-100);\n\
+  \  --codexa-surface-200: var(--gray-200);\n  --codexa-surface-500: var(--gray-500);\n  --codexa-surface-800: var(--gray-800);\n\
+  \  --codexa-surface-900: var(--gray-900);\n  \n  / Text Hierarchy /\n  --codexa-text-primary: var(--gray-900);\n  --codexa-text-secondary:\
+  \ var(--gray-600);\n  --codexa-text-tertiary: var(--gray-500);\n  --codexa-text-inverse: var(--white);\n  \n  / Interactive\
+  \ Elements /\n  --codexa-accent: var(--codexa-green-500);      / #50C878 /\n  --codexa-accent-hover: var(--codexa-green-600);\n\
+  \  --codexa-accent-active: var(--codexa-green-700);\n  --codexa-accent-subtle: var(--codexa-green-50);\n  \n  / Border &\
+  \ Outline /\n  --codexa-border-default: var(--gray-200);\n  --codexa-border-subtle: var(--gray-100);\n  --codexa-border-emphasis:\
+  \ var(--gray-300);\n  \n  / Status Colors /\n  --codexa-success: var(--codexa-green-500);\n  --codexa-success-bg: var(--codexa-green-50);\n\
+  \  --codexa-warning: #f59e0b;\n  --codexa-warning-bg: #fef3c7;\n  --codexa-error: #ef4444;\n  --codexa-error-bg: #fef2f2;\n\
+  }\n\n/ Dark Mode Semantic Overrides /\n.dark .codexa-theme {\n  --codexa-surface-50: var(--gray-950);\n  --codexa-surface-100:\
+  \ var(--gray-900);\n  --codexa-surface-200: var(--gray-800);\n  --codexa-surface-500: var(--gray-400);\n  --codexa-surface-800:\
+  \ var(--gray-200);\n  --codexa-surface-900: var(--gray-100);\n  \n  --codexa-text-primary: var(--gray-100);\n  --codexa-text-secondary:\
+  \ var(--gray-400);\n  --codexa-text-tertiary: var(--gray-500);\n  --codexa-text-inverse: var(--gray-900);\n  \n  --codexa-border-default:\
+  \ var(--gray-700);\n  --codexa-border-subtle: var(--gray-800);\n  --codexa-border-emphasis: var(--gray-600);\n}"
+layer_3_component_level_tokens: "Component-specific tokens that reference semantic layer. Use for reusable patterns.\n\n/\
+  \ Button Component Tokens /\n.button-tokens {\n  --button-primary-bg: var(--codexa-accent);\n  --button-primary-text: var(--white);\n\
+  \  --button-primary-hover: var(--codexa-accent-hover);\n  --button-primary-active: var(--codexa-accent-active);\n  \n  --button-secondary-bg:\
+  \ var(--codexa-surface-100);\n  --button-secondary-text: var(--codexa-text-primary);\n  --button-secondary-hover: var(--codexa-surface-200);\n\
+  \  \n  --button-padding-sm: var(--space-2) var(--space-3);\n  --button-padding-md: var(--space-3) var(--space-4);\n  --button-padding-lg:\
+  \ var(--space-4) var(--space-6);\n  \n  --button-radius: var(--radius);\n}\n\n/ Card Component Tokens /\n.card-tokens {\n\
+  \  --card-bg: var(--white);\n  --card-border: var(--codexa-border-default);\n  --card-text: var(--codexa-text-primary);\n\
+  \  --card-text-muted: var(--codexa-text-secondary);\n  --card-padding: var(--space-6);\n  --card-radius: var(--radius-lg);\n\
+  \  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);\n}\n\n.dark .card-tokens {\n  --card-bg: var(--gray-900);\n  --card-shadow:\
+  \ 0 1px 3px rgba(0, 0, 0, 0.3);\n}\n\n/ Form Component Tokens /\n.form-tokens {\n  --form-input-bg: var(--white);\n  --form-input-border:\
+  \ var(--codexa-border-default);\n  --form-input-border-focus: var(--codexa-accent);\n  --form-input-text: var(--codexa-text-primary);\n\
+  \  --form-input-placeholder: var(--codexa-text-tertiary);\n  --form-input-radius: var(--radius);\n  --form-input-padding:\
+  \ var(--space-3);\n  \n  --form-label-text: var(--codexa-text-secondary);\n  --form-label-size: var(--font-size-sm);\n \
+  \ --form-label-weight: 500;\n}\n\n/ Navigation Component Tokens /\n.nav-tokens {\n  --nav-bg: var(--white);\n  --nav-border:\
+  \ var(--codexa-border-subtle);\n  --nav-text: var(--codexa-text-primary);\n  --nav-text-hover: var(--codexa-accent);\n \
+  \ --nav-text-active: var(--codexa-accent);\n  --nav-padding: var(--space-4) var(--space-6);\n}"
+tailwind_css_integration: ''
+custom_tailwind_config: "// tailwind.config.js\nmodule.exports = {\n  theme: {\n    extend: {\n      colors: {\n        //\
+  \ Map to semantic tokens\n        background: 'var(--codexa-surface-50)',\n        foreground: 'var(--codexa-text-primary)',\n\
+  \        \n        primary: {\n          DEFAULT: 'var(--codexa-accent)',\n          foreground: 'var(--white)',\n     \
+  \     hover: 'var(--codexa-accent-hover)',\n        },\n        \n        secondary: {\n          DEFAULT: 'var(--codexa-surface-200)',\n\
+  \          foreground: 'var(--codexa-text-primary)',\n        },\n        \n        muted: {\n          DEFAULT: 'var(--codexa-surface-100)',\n\
+  \          foreground: 'var(--codexa-text-secondary)',\n        },\n        \n        accent: {\n          DEFAULT: 'var(--codexa-accent)',\n\
+  \          foreground: 'var(--white)',\n        },\n        \n        border: 'var(--codexa-border-default)',\n        ring:\
+  \ 'var(--codexa-accent)',\n      },\n      \n      fontFamily: {\n        sans: ['Geist Variable', 'Inter', 'system-ui',\
+  \ 'sans-serif'],\n        mono: ['JetBrains Mono', 'Monaco', 'Consolas', 'monospace'],\n      },\n      \n      spacing:\
+  \ {\n        // Map to spacing primitives\n        '18': 'var(--space-18)', // 4.5rem / 72px\n        '88': 'var(--space-88)',\
+  \ // 22rem / 352px\n      },\n      \n      borderRadius: {\n        // Map to radius primitives\n        'lg': 'var(--radius-lg)',\n\
+  \        'xl': 'var(--radius-xl)',\n      }\n    }\n  },\n  \n  darkMode: 'class', // Enable dark mode via .dark class\n\
+  }"
+usage_in_html: "<!-- CORRECT: Using Tailwind classes that map to tokens -->\n<div class=\"bg-background text-foreground border\
+  \ border-border rounded-lg p-6\">\n  <h2 class=\"text-lg font-medium text-foreground\">Card Title</h2>\n  <p class=\"text-muted-foreground\
+  \ mt-2\">Card description content</p>\n  \n  <button class=\"bg-primary text-primary-foreground hover:bg-primary/90 focus:ring-2\
+  \ focus:ring-primary focus:ring-offset-2 mt-4 px-4 py-2 rounded-md\">\n    Action Button\n  </button>\n</div>\n\n<!-- INCORRECT:\
+  \ Hardcoded values -->\n<div style=\"background: #ffffff; color: #111827; border: 1px solid #e5e7eb;\">\n  <!-- This breaks\
+  \ the design system -->\n</div>\n\n<!-- INCORRECT: No dark mode consideration -->\n<div class=\"bg-white text-gray-900\"\
+  >\n  <!-- Missing dark: variants -->\n</div>"
+font_stack_implementation: ''
+3_font_system: "@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');\n@import\
+  \ url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');\n\n.font-tokens {\n  / Headings:\
+  \ Geist Variable /\n  --font-heading: 'Geist Variable', 'Inter', system-ui, sans-serif;\n  \n  / Body text: Inter /\n  --font-body:\
+  \ 'Inter', system-ui, sans-serif;\n  \n  / Code/monospace: JetBrains Mono /\n  --font-mono: 'JetBrains Mono', 'Monaco',\
+  \ 'Consolas', monospace;\n  \n  / Font weights /\n  --font-weight-normal: 400;\n  --font-weight-medium: 500;\n  --font-weight-semibold:\
+  \ 600;\n  --font-weight-bold: 700;\n}"
+typography_scale_usage: "<!-- Heading hierarchy with proper font usage -->\n<h1 class=\"font-sans text-4xl font-bold tracking-tight\"\
+  >\n  Main headline (Geist Variable via font-sans)\n</h1>\n\n<h2 class=\"font-sans text-2xl font-semibold\">\n  Section heading\n\
+  </h2>\n\n<p class=\"font-sans text-base text-muted-foreground\">\n  Body paragraph text (Inter via font-sans)\n</p>\n\n\
+  <code class=\"font-mono text-sm bg-muted px-2 py-1 rounded\">\n  Code snippet (JetBrains Mono)\n</code>"
+mandatory_checks: '| Rule | Description | Validation |
+
+  |------|-------------|------------|
+
+  | Zero hardcoded hex | No #HEXCODE values in code | Automated scan for # colors |
+
+  | Token reference only | Only use defined token names | Verify against token list |
+
+  | Dark mode coverage | Every color has dark variant | Visual dark mode test |
+
+  | Contrast compliance | All combinations >= 4.5:1 | Contrast ratio calculator |
+
+  | Spacing consistency | Use spacing scale only | Check against space-* classes |
+
+  | Font stack adherence | Only use 3 approved fonts | Font family audit |'
+violations_corrections: '| ❌ VIOLATION | ✅ CORRECT | WHY |
+
+  |-------------|------------|-----|
+
+  | `style="color: #50C878"` | `class="text-primary"` | Hardcoded hex breaks theming |
+
+  | `class="bg-green-500"` | `class="bg-accent"` | Direct color ignores semantic layer |
+
+  | `style="padding: 15px"` | `class="p-4"` | Off-scale spacing breaks consistency |
+
+  | `style="font-family: Arial"` | `class="font-sans"` | Unapproved font breaks brand |
+
+  | `class="text-green-500"` | `class="text-primary dark:text-primary-dark"` | Missing dark mode variant |
+
+  | `style="border-radius: 6px"` | `class="rounded-md"` | Off-scale radius breaks system |
+
+  | `style="margin-top: 18px"` | `class="mt-5"` | Off-scale margin breaks grid |'
+component_example_button_with_token_usage: "<!-- Button component using all 3 token layers -->\n<button class=\"\n  // Layer\
+  \ 3: Component tokens via Tailwind classes\n  bg-primary text-primary-foreground \n  hover:bg-primary/90 \n  focus:ring-2\
+  \ focus:ring-primary focus:ring-offset-2\n  \n  // Layer 2: Semantic spacing and typography\n  px-4 py-2 \n  text-sm font-medium\n\
+  \  \n  // Layer 1: Primitive radius\n  rounded-md\n  \n  // Interaction states\n  transition-colors\n  disabled:opacity-50\
+  \ disabled:cursor-not-allowed\n  \n  // Dark mode (automatic via token system)\n  dark:ring-offset-background\n\">\n  Button\
+  \ Text\n</button>\n\nThis button automatically adapts to:\n- Light/dark themes (via token system)\n- Brand color changes\
+  \ (modify --codexa-accent)\n- Spacing scale updates (modify space tokens)\n- Typography changes (modify font tokens)"
+integration_with_cex_quality_gates: 'N02 output validation includes token compliance:
+
+
+  # Automated token validation
+
+  python _tools/validate_tokens.py component.html
+
+  # Checks: hardcoded colors, off-scale spacing, unapproved fonts
+
+
+  # Visual validation
+
+  lighthouse component.html --only=accessibility
+
+  # Checks: contrast ratios, color combinations
+
+
+  # Design system audit
+
+  python _tools/design_system_audit.py N02_marketing/
+
+  # Checks: token usage consistency across all components'

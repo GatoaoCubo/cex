@@ -1,61 +1,84 @@
-id: n01_ac_intelligence
+id: p02_card_intelligence
 kind: agent_card
-pillar: P08
-title: 'Agent Card: N01 Research & Intelligence Nucleus'
-version: 1.0.0
-created: '2026-03-31'
-updated: '2026-03-31'
-author: N01_rebuild_8F
-quality: null
+pillar: P02
+title: N01 Research Analyst — Agent Card
+version: 4.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: research-intelligence
+quality: 8.7
 tags:
 - agent_card
-- deployment
-- architecture
 - n01
 - research
-- gemini-2.5-pro
-tldr: Deployment and configuration specification for the N01 Research & Intelligence Nucleus agent, defining its model, runtime
-  parameters, linked artifacts, and boot sequence.
-1_agent_identity:
-- 'Agent ID: `n01_agent_intelligence`'
-- 'Name: N01 Research & Intelligence Nucleus'
-- 'Domain: `research, market analysis, competitor intelligence, papers, benchmarks`'
-- 'Role: `Expert Researcher and Intelligence Analyst`'
-2_model_configuration:
-- 'Model Provider: `Google`'
-- 'Model Name: `gemini-2.5-pro`'
-- 'Context Window: `1,048,576 tokens`'
-- 'Optimal Temperature: `0.25` (tuned for high-fidelity, evidence-based reasoning and synthesis)'
-- 'Subscription Tier: `CEX Enterprise Account`'
-3_runtime_artifacts: 'This agent is a composition of the following artifacts which MUST be loaded at runtime:
+- analyst
+- routing
+tldr: Research Analyst routing card — 12 capabilities, hybrid provider, input/output contracts, inter-nucleus handoffs.
+density_score: 0.93
+routing:
+- 'Priority: 8 (high — research often precedes other nuclei)'
+- 'Keywords: research, competitor, market, trend, analyze, benchmark, compare, investigate, SWOT, pricing, who, what''s happening,
+  industry'
+- 'Negative Keywords: build, create, write copy, debug, deploy, course, pricing strategy'
+- 'Decision Criteria: If request contains "analyze", "research", "compare", or "investigate" → N01. If contains "build" or
+  "create" → N03.'
+- 'Dispatch: `bash _spawn/dispatch.sh solo n01 "task"`'
+provider: '| Mode | Provider | When |
 
-  - Agent Definition: `n01_agent_intelligence`
+  |------|----------|------|
 
-  - System Prompt: `n01_sp_intelligence`
+  | Search | Gemini 2.5 Pro | Web grounding, large docs |
 
-  - Domain Knowledge: `n01_kc_intelligence_domain`
+  | Analysis | Claude | Deep synthesis, nuance |
 
-  - Dispatch Rule: `n01_dispatch_rule_intelligence`
+  | Fallback | Either | Rate limit on primary |'
+capabilities_map: '| Capability | Input | Output Template |
 
-  - RAG Configuration: `n01_rag_source_intelligence`'
-4_future_toolchain_mcps_functions: "The following tools are designed for N01 but are pending implementation:\n- MCP Servers:\n\
-  \  - `google_scholar_mcp`: For searching and retrieving academic papers.\n  - `arxiv_mcp`: For accessing pre-print scientific\
-  \ articles.\n  - `sec_edgar_mcp`: For fetching corporate financial filings.\n  - `high_quality_web_search_mcp`: For targeted\
-  \ searches on reputable news and industry sites.\n- Local Functions:\n  - `semantic_search`: To run vector search against\
-  \ the RAG knowledge base.\n  - `citation_graph`: To analyze citation networks between papers.\n  - `advanced_summarizer`:\
-  \ To create summaries of various lengths and complexities."
-5_boot_sequence:
-- 'Instantiate Agent: Create an instance of `n01_agent_intelligence`.'
-- 'Load Persona: Inject the `n01_sp_intelligence` system prompt to establish identity and operational rules.'
-- 'Load Knowledge: Inject the `n01_kc_intelligence_domain` knowledge card to provide domain context and methodologies.'
-- 'Mount Vectorstore: Connect to the RAG vector database specified in `n01_rag_source_intelligence`.'
-- 'Arm Dispatch: Activate the agent to listen for incoming requests that match the criteria in `n01_dispatch_rule_intelligence`.'
-6_operational_constraints_guarantees:
-- 'Hard Constraints:'
-- The agent MUST NOT respond to requests outside the defined `knowledge_boundary`.
-- All analytical claims MUST have a verifiable source citation.
-- The output MUST conform to the structured `Intelligence Brief` format.
-- 'Guarantees:'
-- High-fidelity analysis based on provided sources.
-- Explicitly states confidence levels for judgments.
-- Identifies and lists information gaps.
+  |-----------|-------|-----------------|
+
+  | Competitive Grid | competitors list + dimensions | output_competitive_grid.md |
+
+  | Market Snapshot | category + geography | output_market_snapshot.md |
+
+  | Trend Report | domain + timeframe | output_trend_report.md |
+
+  | Source Dossier | topic + depth level | output_source_dossier.md |
+
+  | SWOT | company/product | output_swot_analysis.md |
+
+  | Benchmark | products + criteria | output_benchmark_report.md |
+
+  | Executive Summary | any research output | output_executive_summary.md |'
+anti_patterns_route_away: '| Don''t Use For | Route To Instead | Why |
+
+  |---------------|------------------|-----|
+
+  | "Write marketing copy for X" | N02 | Creative writing, not research |
+
+  | "Build me a landing page" | N03 | Artifact creation, not analysis |
+
+  | "Debug this code" | N05 | Technical operations |
+
+  | "Create a knowledge card" | N04 | Knowledge management |
+
+  | "Set up pricing for course" | N06 | Commercial strategy |'
+inter_nucleus_handoffs: '| From | To N01 | What |
+
+  |------|--------|------|
+
+  | N06 | Competitor research request | "Research these 5 competitors" |
+
+  | N07 | Mission decomposition | "Research phase of /plan" |
+
+  | N02 | Design benchmark | "Find UI patterns in category X" |
+
+
+  | From N01 | To | What |
+
+  |----------|-----|------|
+
+  | Research complete | N06 | Competitive positioning data |
+
+  | Trend report | N04 | New KC material |
+
+  | Benchmark | N02 | Design reference data |'

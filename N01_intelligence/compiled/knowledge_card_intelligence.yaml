@@ -7,7 +7,7 @@ created: '2026-03-31'
 updated: '2026-03-31'
 author: N01_rebuild_8F
 domain: research, analysis, intelligence, synthesis, competitors, papers, benchmarks
-quality: null
+quality: 8.8
 tags:
 - knowledge
 - n01
@@ -51,7 +51,21 @@ linked_artifacts:
 
   - Thematic & Qualitative Synthesis: A method for analyzing and identifying dominant themes, patterns, and concepts across
   a body of qualitative data (e.g., interview transcripts, open-ended survey responses, reports).'
-2_analytical_synthesis_frameworks: 'N01 applies these mental models to structure information and derive higher-level intelligence:
+2_research_workflow_n01_standard_operating_procedure: 'N01 follows this systematic 6-step process for all research tasks:
+
+
+  1. SCOPE → Define research question, success criteria, time boundaries, exclusion criteria
+
+  2. SOURCE → Identify Tier 1-2 sources first, map search strings, establish credibility thresholds
+
+  3. COLLECT → Execute systematic search, document methodology, track source hierarchy
+
+  4. SYNTHESIZE → Apply appropriate framework (ACH, Porter''s, PESTLE), identify patterns and gaps
+
+  5. VALIDATE → Cross-reference findings, test competing hypotheses, check for confirmation bias
+
+  6. COMMUNICATE → Structure insights with evidence trail, quantify confidence levels, flag uncertainties'
+3_analytical_synthesis_frameworks: 'N01 applies these mental models to structure information and derive higher-level intelligence:
 
 
   - First-Principles Thinking: Deconstructing a problem to its most fundamental, axiomatic truths to enable novel solutions
@@ -66,21 +80,20 @@ linked_artifacts:
   Legal, and Environmental factors.
 
   - Kinetic Analysis: Assessing the momentum, velocity, and trajectory of trends and competitors, not just their current state.'
-3_hierarchy_of_evidence_source_credibility_model: 'N01 uses a strict hierarchy to weigh the credibility of information sources
+4_hierarchy_of_evidence_source_credibility_model: 'N01 uses a strict hierarchy to weigh the credibility of information sources
   during synthesis. All sources are not created equal.
 
 
-  - Tier 1 (Highest Credibility): Peer-reviewed scientific papers (especially systematic reviews and meta-analyses), randomized
-  controlled trials, official government statistics.
+  | Tier | Credibility | Source Types | Examples |
 
-  - Tier 2 (High Credibility): Official corporate filings (e.g., SEC 10-K/10-Q), patent filings from major offices (USPTO,
-  EPO), audited financial reports.
+  |------|-------------|--------------|----------|
 
-  - Tier 3 (Moderate Credibility): Papers from respected academic conferences, reports from top-tier market research firms
-  (e.g., Gartner, Forrester), technical whitepapers with reproducible data.
+  | 1 | Highest | Peer-reviewed papers, RCTs, govt stats | Nature, Science, Fed Reserve data |
 
-  - Tier 4 (Lower Credibility): Reputable industry journalism, presentations from industry experts, unreviewed pre-print articles
-  (e.g., from arXiv).
+  | 2 | High | SEC filings, patents, audited reports | 10-K forms, USPTO patents, Big 4 audits |
 
-  - Tier 5 (Lowest Credibility/For Directional Indication Only): Opinion pieces, blog posts, marketing materials, unverified
-  social media claims.'
+  | 3 | Moderate | Academic conferences, tier-1 research firms | NIPS papers, Gartner reports, McKinsey studies |
+
+  | 4 | Lower | Industry journalism, expert presentations | TechCrunch, conference keynotes, arXiv preprints |
+
+  | 5 | Lowest | Opinion pieces, blogs, marketing materials | Medium posts, vendor whitepapers, social media |'

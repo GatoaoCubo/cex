@@ -1,0 +1,80 @@
+id: p10_out_knowledge_graph
+kind: output
+pillar: P10
+title: 'Output: Knowledge Graph'
+version: 1.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: knowledge-management
+quality: 8.8
+tags:
+- output
+- n04
+- knowledge-graph
+- entity
+- relationship
+- visualization
+tldr: 'Entity-relationship map of KCs: nodes (KCs) + edges (feeds_kinds, linked_artifacts).'
+density_score: 0.91
+template: '# Knowledge Graph: N04_Knowledge
+
+  Nodes: 147 | Edges: 312 | Date: 2026-04-01
+
+
+  ## Entity Types
+
+  | Type | Count | Example |
+
+  |------|-------|---------|
+
+  | Kind KC | 99 | kc_agent, kc_workflow, kc_prompt_template |
+
+  | Domain KC | 34 | kc_chain_of_thought, kc_rag_patterns |
+
+  | Platform KC | 14 | kc_supabase, kc_openai_api, kc_anthropic_sdk |
+
+
+  ## Key Relationships
+
+  | From | → | To | Relationship |
+
+  |------|---|-----|-------------|
+
+  | kc_agent | feeds_kinds | agent-builder | Kind KC → Builder ISO |
+
+  | kc_tool_use | linked_artifacts | kc_mcp_server | Cross-domain reference |
+
+  | kc_embedding_config | part_of | rag_source_supabase | Component dependency |
+
+  | kc_quality_gates | feeds_kinds | scoring_rubric-builder | Validation chain |
+
+
+  ## Clusters (densely connected groups)
+
+  1. LLM Patterns: kc_chain_of_thought ↔ kc_self_healing ↔ kc_autonomy (8 edges)
+
+  2. Operations: kc_zero_touch ↔ kc_error_recovery ↔ kc_testing (12 edges)
+
+  3. Brand: kc_brand_archetypes ↔ kc_voice_guidelines ↔ kc_visual_identity (6 edges)'
+usage_patterns: '| Scenario | When to use | Output focus |
+
+  |----------|-------------|--------------|
+
+  | Nucleus handoff | N04 → N07 knowledge map | Cluster density + missing links |
+
+  | Builder discovery | Find related KCs for artifact | Kind KC → Domain KC paths |
+
+  | Quality audit | Check KC coverage gaps | Entity types + orphaned nodes |
+
+  | RAG optimization | Identify retrieval clusters | High-edge-count subgraphs |'
+anti_patterns: '| DON''T | WHY | DO instead |
+
+  |-------|-----|-----------|
+
+  | Map all 2184 KCs at once | Cognitive overload | Focus on 1 domain cluster (≤20 nodes) |
+
+  | Show every relationship | Visual noise | Filter by relationship strength |
+
+  | Generate without purpose | Wasted computation | Target specific gap analysis |
+
+  | Static snapshots | Stale quickly | Live queries via cex_retriever.py |'

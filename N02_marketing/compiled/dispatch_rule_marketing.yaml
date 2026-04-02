@@ -1,91 +1,176 @@
-id: p12_dr_marketing
+id: p12_dr_visual_frontend_marketing
+title: Dispatch Rule Marketing
 kind: dispatch_rule
 pillar: P12
-version: 3.0.0
+version: 4.0.0
 created: 2026-03-30
-updated: 2026-03-31
-author: n02_marketing
-domain: copywriting_and_campaigns
-quality: null
+updated: 2026-04-01
+author: n02_visual_frontend_marketing
+domain: visual_frontend_engineering_and_copywriting
+quality: 8.9
 tags:
 - dispatch_rule
+- visual-frontend
 - marketing
 - N02
+- html
+- tailwind
 - routing
-tldr: Route to N02 when the task requires copy, ads, headlines, CTAs, email sequences, landing pages, or brand voice.
-scope: marketing_and_creative
+tldr: Route to N02 for HTML/CSS generation with Tailwind + shadcn/ui AND copywriting tasks — dual-role visual frontend engineer
+  + copywriter.
+scope: visual_frontend_and_marketing_creative
 keywords:
+- html
+- frontend
+- landing
+- visual
+- design
+- tailwind
+- component
+- css
+- responsive
+- a11y
+- dark_mode
+- typography
 - copy
 - copywriting
 - ad
 - ads
 - headline
 - CTA
-- call_to_action
 - campaign
-- landing_page
-- email_sequence
+- email
 - brand_voice
 - social_media
 - anuncio
 - campanha
-- copy
 - redacao
-- texto_publicitario
-- slogan
-agent_node: n02-marketing-hub
+agent_node: n02-visual-marketing-hub
 model: claude-sonnet-4-6
+model_fallback: claude-opus-4-6
 cli: claude
-priority: 7
+priority: 8
 confidence_threshold: 0.7
 fallback: n07-orchestrator
-purpose: Routes copywriting and creative marketing tasks to N02 (Marketing & Creative Nucleus). N02 is the only nucleus that
-  writes persuasive content — ads, emails, landing pages, brand voice, social media copy, and campaign briefs.
+purpose: 'Routes dual-role tasks to N02 (Visual Frontend Engineer + Marketing Nucleus).
+
+  N02 handles both:
+
+  - VISUAL MODE: HTML/CSS generation with Tailwind CSS, shadcn/ui components, responsive design, accessibility
+
+  - COPY MODE: Persuasive content — ads, emails, headlines, brand voice, social media
+
+  - DUAL MODE: Integrated pages where copy and visual work together'
 trigger_conditions: ''
-route_to_n02_when_request_contains: '| Category | English Keywords | Portuguese Keywords |
+visual_mode_triggers_route_to_n02_when_request_contains: '| Category | Keywords & Patterns | Portuguese Keywords |
 
-  |----------|-----------------|---------------------|
+  |----------|---------------------|---------------------|
 
-  | Copy writing | copy, copywriting, ad copy, write ad | copy, redação, texto publicitário |
+  | HTML Generation | html, build page, create page, web page, html template, static site | html, página web, criar página,
+  template html |
 
-  | Advertising | ad, ads, advertisement, banner ad | anuncio, anúncio, publicidade |
+  | Frontend Development | frontend, front-end, css, styling, ui components, user interface | frontend, front-end, estilização,
+  interface |
 
-  | Headlines | headline, subject line, title, hook | titulo, manchete, assunto de email |
+  | Tailwind CSS | tailwind, utility classes, css framework, tw-, @apply, tailwind config | tailwind, classes utilitárias,
+  tw- |
 
-  | CTAs | CTA, call to action, button text | botão, chamada para ação |
+  | Components | component, button, form, card, navbar, modal, dropdown, sidebar | componente, botão, formulário, modal |
 
-  | Campaigns | campaign, campaign brief, creative brief | campanha, briefing |
+  | Layout & Design | layout, design, visual, grid, flexbox, container, section layout | layout, design, visual, grid, seção
+  |
 
-  | Email | email sequence, nurture, cold email, welcome email | sequência de email, email marketing |
+  | Responsive Design | responsive, mobile, breakpoints, mobile-first, sm:, md:, lg:, xl: | responsivo, mobile, dispositivos
+  móveis |
 
-  | Landing Pages | landing page, hero section, above the fold | página de destino, LP |
+  | Accessibility | accessibility, a11y, wcag, screen reader, aria-, role=, alt text | acessibilidade, a11y, texto alternativo
+  |
 
-  | Brand | brand voice, tone of voice, messaging | voz da marca, tom de voz |
+  | Landing Pages | landing page, hero section, above the fold, cta section, testimonials | página de destino, LP, hero, seção
+  cta |
 
-  | Social | social media post, caption, Instagram, LinkedIn | post, legenda, redes sociais |
+  | Dark Mode | dark mode, light mode, theme toggle, dark:, toggle theme | modo escuro, modo claro, alternar tema |
 
-  | Strategy | creative strategy, messaging strategy | estratégia criativa |'
-do_not_route_to_n02: '| Task | Route To |
+  | Typography | typography, fonts, text styling, hierarchy, font-size, leading | tipografia, fontes, hierarquia de texto
+  |'
+copy_mode_triggers_route_to_n02_when_request_contains: '| Category | Keywords & Patterns | Portuguese Keywords |
 
-  |------|----------|
+  |----------|---------------------|---------------------|
 
-  | A/B test statistical analysis | N04 |
+  | Copy writing | copy, copywriting, ad copy, write ad, sales copy, persuasive text | copy, redação, texto publicitário,
+  texto persuasivo |
 
-  | Ad platform setup (Meta, Google) | N05 |
+  | Advertising | ad, ads, advertisement, banner ad, display ad, facebook ad, google ad | anuncio, anúncio, publicidade, anúncio
+  do google |
 
-  | Market research with large doc sets | N01 |
+  | Headlines | headline, subject line, title, hook, attention grabber, headline test | titulo, manchete, assunto de email,
+  gancho |
 
-  | Sales pricing strategy | N06 |
+  | CTAs | CTA, call to action, button text, action phrase, conversion copy | botão, chamada para ação, texto do botão |
 
-  | Code for tracking or analytics | N05 |
+  | Campaigns | campaign, campaign brief, creative brief, ad campaign, email campaign | campanha, briefing criativo, campanha
+  publicitária |
 
-  | Legal review of copy claims | Human |'
-keyword_rationale: 'Keywords cover: direct copy requests, channel-specific writing (email/social/ads), structural elements
-  (headline/CTA/hook), and strategic inputs (brief/brand voice). Portuguese variants included for bilingual CEX operation.'
-routing_logic: "IF task.keywords ∩ dispatch_keywords != ∅ AND confidence >= 0.70:\n    route → n02-marketing-hub (claude,\
-  \ sonnet, anthropic_max)\nELIF confidence < 0.70:\n    request clarification → ask \"is this a copy/creative task?\"\nELIF\
-  \ n02-marketing-hub unavailable:\n    escalate → n07-orchestrator"
-confidence_calibration: '| Signal | Confidence Boost |
+  | Email | email sequence, nurture, cold email, email marketing, newsletter copy | sequência de email, email marketing, newsletter
+  |
+
+  | Brand | brand voice, tone of voice, messaging, brand guidelines, voice & tone | voz da marca, tom de voz, diretrizes da
+  marca |
+
+  | Social | social media post, caption, Instagram, linkedin post, twitter copy | post, legenda, redes sociais, post do instagram
+  |'
+dual_mode_triggers_route_to_n02_when_request_contains_both_visual_and_copy_keywords: ''
+do_not_route_to_n02: '| Task | Route To | Reason |
+
+  |------|----------|--------|
+
+  | Backend development, APIs, databases, server logic | N05 | Server-side code and deployment |
+
+  | Statistical analysis, A/B test results, data science | N01 | Research and data analysis |
+
+  | Market research with large doc sets, competitor analysis | N01 | Document analysis and intelligence |
+
+  | Sales pricing strategy, monetization, revenue models | N06 | Commercial strategy |
+
+  | Build tools, webpack, bundlers, deployment pipelines | N05 | Development infrastructure |
+
+  | Legal review of copy claims, compliance validation | Human | Compliance and legal validation |'
+mode_detection_logic: "def detect_mode(task_text):\n    visual_keywords = [\"html\", \"frontend\", \"tailwind\", \"component\"\
+  , \"responsive\", \n                       \"design\", \"css\", \"layout\", \"visual\", \"a11y\", \"dark_mode\"]\n    copy_keywords\
+  \ = [\"copy\", \"ad\", \"headline\", \"CTA\", \"email\", \"campaign\", \n                     \"brand_voice\", \"social\"\
+  , \"copywriting\"]\n    \n    has_visual = any(kw in task_text.lower() for kw in visual_keywords)\n    has_copy = any(kw\
+  \ in task_text.lower() for kw in copy_keywords)\n    \n    if has_visual and has_copy:\n        return \"DUAL\"\n    elif\
+  \ has_visual:\n        return \"VISUAL\"\n    elif has_copy:\n        return \"COPY\"\n    else:\n        return \"UNCLEAR\""
+routing_logic: "mode = detect_mode(task.text)\n\nIF mode in [\"VISUAL\", \"COPY\", \"DUAL\"] AND confidence >= 0.70:\n   \
+  \ route → n02-visual-marketing-hub (claude, sonnet+opus, anthropic_max)\n    handoff_note: mode={mode}\nELIF mode == \"\
+  UNCLEAR\" AND confidence < 0.70:\n    request clarification → ask \"is this a visual/frontend task, copy task, or both?\"\
+  \nELIF n02-visual-marketing-hub unavailable:\n    escalate → n07-orchestrator"
+keyword_rationale: 'Keywords cover:
+
+  - Visual: HTML generation, Tailwind CSS, component creation, responsive design, accessibility
+
+  - Copy: Direct copy requests, channel-specific writing (email/social/ads), structural elements (headline/CTA/hook)
+
+  - Dual: Tasks requiring both visual implementation and persuasive copy
+
+  - Multilingual: Portuguese variants for bilingual CEX operation'
+confidence_calibration: ''
+visual_mode_signals: '| Signal | Confidence Boost |
+
+  |--------|----------------|
+
+  | User says "build/create HTML page/component" | +0.35 |
+
+  | Mentions Tailwind CSS or utility classes | +0.30 |
+
+  | Requests responsive design or mobile-first | +0.25 |
+
+  | Mentions accessibility (a11y, WCAG) | +0.20 |
+
+  | Asks for dark mode implementation | +0.20 |
+
+  | References shadcn/ui or specific components | +0.25 |'
+copy_mode_signals: '| Signal | Confidence Boost |
 
   |--------|----------------|
 
@@ -97,11 +182,52 @@ confidence_calibration: '| Signal | Confidence Boost |
 
   | Portuguese copy keywords (anuncio, campanha, redação) | +0.25 |
 
-  | Task is statistical/analytical in nature | −0.50 (route N04) |'
-fallback_policy: 'If `n02-marketing-hub` is unavailable: escalate to `n07-orchestrator` with task description. N07 will either
-  retry N02 or provide manual handoff instructions.'
-dispatch_command: 'bash _spawn/dispatch.sh solo n02 "task description"
+  | Requests A/B variants or headlines | +0.20 |'
+dual_mode_signals: '| Signal | Confidence Boost |
 
-  # or for batch:
+  |--------|----------------|
 
-  bash _spawn/dispatch.sh grid MISSION_NAME'
+  | "Build landing page with copy" or "integrated page" | +0.40 |
+
+  | Mentions both design AND copy elements | +0.35 |
+
+  | Requests "visual + persuasive" or "designed copy" | +0.30 |'
+negative_signals_route_elsewhere: '| Signal | Confidence Penalty | Route To |
+
+  |--------|-------------------|----------|
+
+  | Task is statistical/analytical | −0.50 | N01/N04 |
+
+  | Mentions backend, API, database | −0.60 | N05 |
+
+  | Requests pricing strategy or monetization | −0.40 | N06 |
+
+  | Legal compliance or claim review | −0.70 | Human |'
+fallback_policy: 'If `n02-visual-marketing-hub` is unavailable: escalate to `n07-orchestrator` with task description. N07
+  will either retry N02 or provide manual handoff instructions. For Opus fallback (HTML-heavy tasks): N02 automatically escalates
+  to claude-opus-4-6 when task complexity exceeds Sonnet capabilities.'
+dispatch_command: "# Solo dispatch with mode detection\nbash _spawn/dispatch.sh solo n02 \"build responsive landing page with\
+  \ persuasive copy\"\n\n# Grid batch processing\nbash _spawn/dispatch.sh grid MISSION_NAME\n\n# Mode-specific examples:\n\
+  # VISUAL: \"create tailwind component with dark mode\"\n# COPY: \"write email sequence for new product launch\"  \n# DUAL:\
+  \ \"build landing page with integrated AIDA copy structure\""
+handoff_template: '# N02 Task — [MODE] [Brief Description]
+
+  Mode: [VISUAL | COPY | DUAL]
+
+  Detected keywords: [list matched keywords]
+
+  Confidence: [0.70-1.00]
+
+
+  ## Task Description
+
+  [Original user request]
+
+
+  ## Mode Context
+
+  [For VISUAL: component requirements, responsive needs, accessibility level]
+
+  [For COPY: audience, funnel stage, copy formula preference]
+
+  [For DUAL: integration requirements, visual hierarchy needs]'

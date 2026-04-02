@@ -1,68 +1,76 @@
-id: n04_wf_knowledge
+id: p12_wf_knowledge
 kind: workflow
-pillar: P12_orchestration
-version: 3.0.0
+pillar: P12
+title: N04 Workflow — Knowledge Lifecycle Pipeline
+version: 4.0.0
 created: 2026-03-31
-updated: 2026-03-31
-author: n04_knowledge_nucleus
-title: N04 Core Knowledge Workflows
-workflows_count: 3
-agent_nodes:
-- N04_knowledge
-timeout_seconds: 3600
-retry_policy: fixed_backoff
-depends_on:
-- n04_chunk_strategy_knowledge
-- n04_embedding_config_knowledge
-- n04_rag_source_knowledge
-signals:
-- ingestion_complete
-- indexing_complete
-- authoring_complete
-- taxonomy_updated
-- error
-quality: null
+author: n07_orchestrator
+domain: knowledge-management
+step_count: 8
+quality: 8.7
 tags:
 - workflow
 - n04
 - knowledge
-- orchestration
-- p12
-- ingestion
-- authoring
+- lifecycle
+- pipeline
 - taxonomy
-tldr: 'Defines the 3 core, repeatable workflows for the N04 Nucleus: (1) RAG Ingestion & Indexing, (2) Knowledge Card Authoring,
-  and (3) Taxonomy Governance.'
-purpose: This document specifies the three primary, repeatable workflows orchestrated by the N04 Knowledge Nucleus. These
-  are the core operational processes for building, integrating, and maintaining the CEX knowledge base. ---
-1_workflow_rag_ingestion_indexing: "The process for adding new, unstructured information to the CEX knowledge base and making\
-  \ it retrievable.\n\n- Trigger: A new data source is registered in `n04_rag_source_knowledge` or a manual run is initiated.\n\
-  - Goal: To transform raw data into queryable, vectorized chunks.\n\ngraph TD\n    subgraph WF-01: Ingestion\n        A[Start:\
-  \ Source URI] --> B{1. Load};\n        B --> C{2. Chunk};\n        C --> D{3. Embed};\n        D --> E{4. Store};\n    end\n\
-  \    E --> F[End: Indexed];\n\n| Step | Action | Description | Dependencies | Signal |\n| :--- | :--- | :--- |:--- | :---\
-  \ |\n| 1. Load | Use `document_loader` MCP. | Load the raw text and metadata from the source URI (e.g., git repo, URL).\
-  \ | `n04_rag_source_knowledge` | - |\n| 2. Chunk | Apply chunking strategy. | Segment the raw text into semantically coherent\
-  \ chunks based on content type. | `n04_chunk_strategy_knowledge` | - |\n| 3. Embed| Call `embedding_apis` MCP. | Generate\
-  \ a vector embedding for each chunk to capture its semantic meaning. | `n04_embedding_config_knowledge` | - |\n| 4. Store\
-  \ | Write to `vector_db` MCP. | Store chunks, embeddings, and metadata in the vector database for retrieval. | - | `indexing_complete`\
-  \ |\n\n---"
-2_workflow_knowledge_card_kc_lifecycle: "The process for creating, validating, and integrating a canonical Knowledge Card\
-  \ into the CEX ecosystem.\n\n- Trigger: A new Markdown file with `kind: knowledge_card` is committed.\n- Goal: To validate,\
-  \ index, and link a new KC into the Knowledge Graph.\n\ngraph TD\n    subgraph WF-02: KC Lifecycle\n        A[Start: KC\
-  \ committed] --> B{1. Validate};\n        B --> C{2. Index};\n        C --> D{3. Link};\n    end\n    D --> E[End: Integrated];\n\
-  \n| Step | Action | Description | Dependencies | Signal |\n| :--- | :--- | :--- |:--- | :--- |\n| 1. Validate| Run `cex_compile.py`.\
-  \ | Validate the KC's frontmatter against the `knowledge_card` schema. A failure here halts the workflow and raises an error.\
-  \ | `P06_schema/knowledge_card.yaml` | `error` (on fail) |\n| 2. Index | Execute WF-01. | Run the RAG Ingestion & Indexing\
-  \ workflow on the KC itself. KCs must be searchable content. | WF-01 | - |\n| 3. Link | Update graph database. | Parse the\
-  \ compiled KC. Add the KC as a node and its `linked_artifacts` as edges in the CEX Knowledge Graph. | - | `authoring_complete`\
-  \ |\n\n---"
-3_workflow_taxonomy_governance: "The process for maintaining the integrity of the knowledge base when the master taxonomy\
-  \ changes.\n\n- Trigger: A commit is made to `archetypes/TAXONOMY_LAYERS.yaml`.\n- Goal: To ensure all knowledge artifacts\
-  \ align with the updated taxonomy.\n\ngraph TD\n    subgraph WF-03: Taxonomy Governance\n        A[Start: Taxonomy updated]\
-  \ --> B{1. Identify Affected};\n        B --> C{2. Propose Changes};\n        C --> D{3. Audit Graph};\n    end\n    D -->\
-  \ E[End: Aligned];\n\n| Step | Action | Description | Dependencies | Signal |\n| :--- | :--- | :--- |:--- | :--- |\n| 1.\
-  \ Identify Affected| Scan all KCs. | Scan all artifacts in the knowledge base and identify any with tags or paths that are\
-  \ now invalid under the new taxonomy. | `TAXONOMY_LAYERS.yaml` | - |\n| 2. Propose Changes| Create update plan. | Generate\
-  \ a plan of proposed changes, such as tag migrations or KC refactoring, to align artifacts with the new structure. | - |\
-  \ - |\n| 3. Audit Graph | Validate graph edges. | Re-validate all edges in the Knowledge Graph to ensure they still conform\
-  \ to the hierarchical rules of the new taxonomy. | - | `taxonomy_updated`|"
+tldr: '8-step KC lifecycle: ingest→classify→distill→structure→validate→index→export→monitor.'
+density_score: 0.93
+pipeline: 'INGEST → CLASSIFY → DISTILL → STRUCTURE → VALIDATE → INDEX → EXPORT → MONITOR
+
+
+  | Step | Action | Input | Output | Tool |
+
+  |------|--------|-------|--------|------|
+
+  | 1 | Ingest raw material | Docs, research, code, conversations | Raw text | markitdown MCP, manual |
+
+  | 2 | Classify | Raw text | kind × pillar × domain | kinds_meta.json, taxonomy_contract.md |
+
+  | 3 | Distill | Classified raw | Signal extracted, noise removed | kc_knowledge_distillation pattern |
+
+  | 4 | Structure | Distilled content | KC with frontmatter + sections | kc_structure_contract.md |
+
+  | 5 | Validate | Structured KC | Compile pass + density check | cex_compile.py, density >= 0.85 |
+
+  | 6 | Index | Validated KC | Search index updated | cex_index.py |
+
+  | 7 | Export | Indexed KC | YAML + JSONL + SQL | export_format_contract.md |
+
+  | 8 | Monitor | All KCs | Freshness alerts, gap reports | freshness_contract.md |'
+export_formats: '| Format | Schema | Purpose | Consumer | Example |
+
+  |--------|--------|---------|----------|---------|
+
+  | .yaml | CEX artifact schema (id, kind, pillar, body) | CEX compiled artifact | All nuclei (compose_prompt) | `kc_react_hooks.yaml`
+  |
+
+  | .jsonl | `{"text": "...", "label": "domain"}` per line | Fine-tuning dataset | External LLM training | OpenAI GPT custom
+  models |
+
+  | SQL | `CREATE TABLE knowledge_cards (id, vector, metadata)` | Database persistence | Supabase, vector search | pgvector
+  similarity search |
+
+  | .csv | `id,title,domain,tags,created,body_length` | ML feature datasets | Analytics, dashboards | Power BI, Tableau ingestion
+  |'
+usage_guidelines: 'When to use:
+
+  - Converting messy research into structured knowledge cards
+
+  - Building systematic knowledge base for team/organization
+
+  - Preparing training data for fine-tuning models
+
+  - Creating searchable documentation from scattered sources
+
+
+  Anti-patterns:
+
+  - Skipping classification step (leads to wrong pillar placement)
+
+  - Accepting density < 0.85 (low information content)
+
+  - Manual indexing instead of using cex_index.py
+
+  - Creating KCs without monitoring freshness (stale knowledge)'

@@ -1,0 +1,78 @@
+id: p06_schema_tailwind_palette
+kind: input_schema
+pillar: P06
+title: Tailwind Palette Contract
+version: 1.0.0
+created: 2026-04-01
+author: n02_visual_frontend
+domain: frontend
+quality: 8.8
+tags:
+- schema
+- tailwind
+- palette
+- design-system
+- color
+tldr: Restricted palette contract — 60-30-10 rule, zero hardcoded hex, CODEXA tokens.
+density_score: 0.93
+schema_purpose: Restricts all N02 output to design-system-approved colors only. Zero hardcoded hex values in component classes.
+  All colors via CSS custom properties. ---
+implementation_workflow: ''
+step_by_step_application: '| Step | Action | Check |
+
+  |------|--------|-------|
+
+  | 1. Start | Begin with `bg-background` + `text-foreground` | Base 60% established |
+
+  | 2. Structure | Add `bg-secondary`, `border-border` for surfaces | 30% secondary colors |
+
+  | 3. Accent | Apply `bg-codexa-accent` to max 2 CTA elements | 10% accent limit |
+
+  | 4. Validate | Run forbidden pattern scan | 0 hardcoded hex found |
+
+  | 5. Dark test | Toggle `.dark` class, verify readability | All text contrasts pass |'
+pre_flight_checklist: "before_commit:\n  - [ ] No `bg-[#...]` or `text-[#...]` arbitrary values\n  - [ ] Accent colors on\
+  \ ≤ 2 elements per component\n  - [ ] All colors from approved tokens list\n  - [ ] Dark mode tested and readable\n  - [\
+  \ ] 60-30-10 ratio visually confirmed\n\n---"
+allowed_color_tokens: ''
+primitives_layer_1: ":root {\n  --background:    0 0% 100%;        / white /\n  --foreground:    240 10% 3.9%;     / near-black\
+  \ /\n  --primary:       240 5.9% 10%;\n  --secondary:     240 4.8% 95.9%;\n  --muted:         240 4.8% 95.9%;\n  --accent:\
+  \        240 4.8% 95.9%;\n  --destructive:   0 84.2% 60.2%;\n  --border:        240 5.9% 90%;\n  --radius:        0.5rem;\n\
+  }\n\n.dark {\n  --background:    240 10% 3.9%;     / near-black /\n  --foreground:    0 0% 98%;         / near-white /\n\
+  \  --primary:       0 0% 98%;\n  --secondary:     240 3.7% 15.9%;\n  --muted:         240 3.7% 15.9%;\n  --accent:     \
+  \   240 3.7% 15.9%;\n  --destructive:   0 62.8% 30.6%;\n  --border:        240 3.7% 15.9%;\n}"
+codexa_semantic_layer_2: ":root {\n  --codexa-accent:          #50C878;\n  --codexa-accent-hover:    #45b56b;\n  --codexa-accent-active:\
+  \   #3da25f;\n  --codexa-surface-900:     hsl(240 10% 5%);\n  --codexa-surface-800:     hsl(240 8% 12%);\n  --codexa-surface-700:\
+  \     hsl(240 6% 20%);\n  --codexa-surface-600:     hsl(240 5% 30%);\n  --codexa-surface-500:     hsl(240 4% 40%);\n  --codexa-text-primary:\
+  \    hsl(0 0% 95%);\n  --codexa-text-secondary:  hsl(0 0% 70%);\n  --codexa-text-tertiary:   hsl(0 0% 50%);\n  --codexa-border-default:\
+  \  hsl(240 5% 25%);\n  --codexa-border-subtle:   hsl(240 5% 15%);\n}"
+semantic_colors_functional: "semantic:\n  success:  \"#22c55e\"  # green-500\n  warning:  \"#f59e0b\"  # amber-500\n  error:\
+  \    \"#ef4444\"  # red-500\n  info:     \"#3b82f6\"  # blue-500"
+60_30_10_rule_implementation: '| Allocation | Colors | Classes | Measurement |
+
+  |------------|--------|---------|-------------|
+
+  | 60% (Dominant) | `--background`, `--codexa-surface-*` | `bg-background`, `bg-codexa-surface-800` | Count `bg-` classes
+  in component |
+
+  | 30% (Secondary) | `--foreground`, `--muted`, `--secondary` | `text-foreground`, `bg-secondary` | Count `text-`, `border-`
+  classes |
+
+  | 10% (Accent) | `--codexa-accent`, `--primary`, `--destructive` | `bg-codexa-accent`, `text-primary` | Count accent/CTA
+  classes |'
+enforcement_criteria: "per_component_audit:\n  background_ratio: \">= 60% of visual area\"\n  text_secondary_ratio: \"~ 30%\
+  \ of visual elements\"\n  accent_ratio: \"<= 10% (CTAs, highlights only)\"\n  measurement: \"DOM element count per color\
+  \ category\"\n  threshold: \"Accent colors on max 2 elements per screen\""
+forbidden_patterns: "forbidden:\n  - pattern: \"bg-[#...]\"\n    reason: \"Arbitrary hex in Tailwind class\"\n  - pattern:\
+  \ \"text-[#...]\"\n    reason: \"Arbitrary hex in Tailwind class\"\n  - pattern: \"border-[#...]\"\n    reason: \"Arbitrary\
+  \ hex in Tailwind class\"\n  - pattern: 'style=\"color:.*#'\n    reason: \"Inline hex color\"\n  - pattern: 'style=\"background:.*#'\n\
+  \    reason: \"Inline hex background\""
+allowed_tailwind_color_classes: "allowed_classes:\n  backgrounds: [bg-background, bg-primary, bg-secondary, bg-muted, bg-accent,\
+  \ bg-destructive]\n  text: [text-foreground, text-primary, text-secondary, text-muted-foreground]\n  borders: [border-border,\
+  \ border-primary, border-destructive]\n  codexa: [bg-codexa-accent, text-codexa-text-primary, border-codexa-border-default]\n\
+  \  semantic: [text-green-500, text-amber-500, text-red-500, text-blue-500]"
+dark_mode: "dark_mode:\n  strategy: \"class-based (.dark on <html>)\"\n  rule: \"Invert lightness, preserve hue\"\n  toggle:\
+  \ \"JS class toggle on documentElement\"\n  test: \"All text readable, all contrast ratios maintained\""
+validation: "validation:\n  scan_for: \"hardcoded hex in className or style attributes\"\n  expected: 0\n  tool: \"grep -rn\
+  \ '#[0-9a-fA-F]{3,8}' --include='*.html'\"\n  exceptions: [\"meta theme-color\", \"SVG fill/stroke in design tokens file\
+  \ only\"]"

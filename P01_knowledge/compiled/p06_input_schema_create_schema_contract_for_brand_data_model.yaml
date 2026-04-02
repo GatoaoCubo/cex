@@ -1,0 +1,68 @@
+id: p06_is_brand_data_model
+kind: input_schema
+pillar: P06
+version: 1.0.0
+created: '2026-04-01'
+updated: '2026-04-01'
+author: input-schema-builder
+scope: brand configuration and identity data model setup
+fields: '| # | Name | Type | Required | Default | Description |
+
+  |---|------|------|----------|---------|-------------|
+
+  | 1 | brand_name | string | YES | - | Official brand or company name |
+
+  | 2 | brand_description | string | NO | "" | One-sentence description of what the brand does |
+
+  | 3 | core_values | list | YES | - | List of 3-5 core brand values or principles |
+
+  | 4 | brand_personality | string | NO | "professional" | Brand personality: formal, casual, technical, friendly, authoritative
+  |
+
+  | 5 | target_customer | string | NO | "business professionals" | Primary target customer or audience description |
+
+  | 6 | revenue_model | string | NO | "services" | How the brand makes money: subscription, one-time, courses, services, products
+  |
+
+  | 7 | brand_colors | object | NO | {"primary": "#000000", "secondary": "#FFFFFF"} | Brand color palette with primary and
+  secondary colors |
+
+  | 8 | logo_url | string | NO | null | URL or path to brand logo image |
+
+  | 9 | website_url | string | NO | null | Official brand website URL |
+
+  | 10 | industry | string | NO | "technology" | Primary industry or business sector |'
+coercion:
+- from: string
+  to: list
+  rule: Split comma-separated core_values string into list
+- from: string
+  to: object
+  rule: Parse JSON string for brand_colors if provided as string
+examples: "{\n  \"brand_name\": \"Creative Studio Plus\",\n  \"core_values\": [\"creativity\", \"quality\", \"collaboration\"\
+  ],\n  \"brand_colors\": {\"primary\": \"#FF6B35\", \"secondary\": \"#F7F7F7\"},\n  \"website_url\": \"https://creativestudioplus.com\"\
+  \n}"
+domain: brand-configuration
+quality: null
+tags:
+- input-schema
+- brand-data-model
+- configuration
+- identity
+tldr: 'Input contract for brand data model configuration: requires brand_name and core_values, optional personality, colors,
+  and business details.'
+density_score: 0.87
+contract_definition: Brand data model input schema defines the required and optional data for configuring brand identity within
+  the CEX system. Used by brand configuration tools, bootstrap processes, and brand validation systems to ensure consistent
+  brand data structure.
+coercion_rules: '| From | To | Rule |
+
+  |------|----|------|
+
+  | string | list | Split comma-separated core_values string into list |
+
+  | string | object | Parse JSON string for brand_colors if provided as string |'
+references:
+- CEX brand_config.yaml specification
+- Brand bootstrap protocol (.claude/rules/brand-bootstrap.md)
+- Brand validation requirements (brand_validate.py)

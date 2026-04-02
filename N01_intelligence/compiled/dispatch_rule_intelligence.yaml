@@ -6,7 +6,7 @@ version: 1.0.0
 created: '2026-03-31'
 updated: '2026-03-31'
 author: N01_rebuild_8F
-quality: null
+quality: 8.7
 tags:
 - dispatch
 - routing
@@ -72,17 +72,55 @@ fallback_agent: n04_knowledge
   - `synthesis`
 
   - `findings`'
-5_exclusion_criteria_anti_patterns: 'Even if keywords match, DO NOT route to N01 if the query is:
+5_exclusion_criteria_anti_patterns: 'Even if keywords match, DO NOT route to N01:
 
-  - A simple, factual question ("What is X?").
 
-  - A request to write code ("Write a Python script for...").
+  | Query Type | Example | Route Instead |
 
-  - A request for creative content ("Write a poem about...").
+  |------------|---------|---------------|
 
-  - A request for operational action ("Restart the server.").
+  | Simple factual questions | "What is React?" | N04 Knowledge |
 
-  - A request for real-time information ("What''s the weather?").'
-6_fallback_logic: If the routing confidence score is below the `confidence_threshold` (0.85), or if the N01 agent is offline
-  or at capacity, the task MUST be routed to the `n04_knowledge` nucleus. N04 serves as the general-purpose knowledge agent
-  and can handle broader, less specialized queries, ensuring system resilience.
+  | Code writing requests | "Write a Python script for data parsing" | N05 Operations |
+
+  | Creative content | "Write a poem about AI" | N02 Marketing |
+
+  | Operational actions | "Restart the server", "Deploy to prod" | N05 Operations |
+
+  | Real-time info | "What''s the weather?", "Latest stock price" | External API |
+
+  | Quick definitions | "Define machine learning" | N04 Knowledge |
+
+  | Build requests | "Create a new component", "Generate docs" | N03 Builder |
+
+  | Single-source summary | "Summarize this one article" | N04 Knowledge |
+
+  | Implementation tasks | "How do I configure X?" | N05 Operations |'
+6_fallback_logic: ''
+confidence_score_examples: 'Route to N01 when confidence ≥ 0.85:
+
+  - 0.95: "Conduct competitive analysis of fintech startups using market research data"
+
+  - 0.87: "Research emerging trends in AI safety from recent academic papers"
+
+  - 0.82: "Compare pricing strategies across SaaS competitors" → Routes to N04'
+fallback_conditions: 'Route to `n04_knowledge` fallback when:
+
+  - Low confidence: Semantic score < 0.85 (mixed signals, unclear intent)
+
+  - Agent unavailable: N01 offline or processing queue full (>3 concurrent tasks)
+
+  - Resource constraints: Task requires <10min completion (N01 optimized for deep analysis)
+
+  - Hybrid requests: Contains both research + implementation elements'
+fallback_decision_matrix: '| Condition | N01 Available | Confidence | Route To |
+
+  |-----------|---------------|------------|----------|
+
+  | Pure research task | Yes | ≥0.85 | N01 |
+
+  | Pure research task | No | ≥0.85 | N04 (queue for N01) |
+
+  | Mixed task | Yes | 0.70-0.84 | N04 |
+
+  | Quick lookup | Yes | Any | N04 |'

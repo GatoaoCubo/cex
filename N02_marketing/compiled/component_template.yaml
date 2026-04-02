@@ -1,0 +1,184 @@
+id: p09_ct_component_template
+kind: output_validator
+pillar: P09
+title: Component Template — shadcn/ui Style Patterns
+version: 1.0.0
+created: 2026-04-01
+author: n02_visual_frontend_marketing
+template_type: component
+output_format: html_component_with_variants
+component_patterns:
+- button
+- card
+- form
+- input
+- dialog
+- dropdown
+- navigation
+- table
+styling_approach: utility_first_tailwind
+variant_system: compound_variants
+accessibility: wcag_aa_radix_primitives
+performance: lighthouse_90_plus
+reusability: high
+domain: visual_frontend_engineering
+quality: 8.8
+tags:
+- output_template
+- component
+- shadcn_ui
+- tailwind
+- radix
+- accessibility
+- variants
+- N02
+tldr: Reusable component template following shadcn/ui patterns — variant system, accessibility built-in, Tailwind utility
+  classes, production ready.
+density_score: 0.96
+purpose: Template for generating reusable, accessible components following shadcn/ui design patterns. Each component includes
+  multiple variants, built-in accessibility, and consistent styling via design tokens.
+base_component_template: ''
+universal_component_structure: "---\ncomponent: {component_name}\nresponsive: true\na11y_compliant: true\ndark_mode: true\n\
+  lighthouse_target: 90\ncomponent_type: {button|card|form|input|dialog|dropdown|navigation|table}\nvariants: {variant_count}\n\
+  ---\n\n<!DOCTYPE html>\n<html lang=\"en\" class=\"h-full\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\"\
+  \ content=\"width=device-width, initial-scale=1.0\">\n    <title>{Component Name} - Component Library</title>\n    \n  \
+  \  <!-- Tailwind CSS -->\n    <script src=\"https://cdn.tailwindcss.com\"></script>\n    <script>\n      tailwind.config\
+  \ = {\n        theme: {\n          extend: {\n            colors: {\n              border: '#e5e7eb',\n              input:\
+  \ '#e5e7eb',\n              ring: '#50C878',\n              background: '#ffffff',\n              foreground: '#111827',\n\
+  \              primary: {\n                DEFAULT: '#50C878',\n                foreground: '#ffffff',\n              },\n\
+  \              secondary: {\n                DEFAULT: '#f3f4f6',\n                foreground: '#111827',\n             \
+  \ },\n              destructive: {\n                DEFAULT: '#ef4444',\n                foreground: '#ffffff',\n      \
+  \        },\n              muted: {\n                DEFAULT: '#f3f4f6',\n                foreground: '#6b7280',\n     \
+  \         },\n              accent: {\n                DEFAULT: '#f3f4f6',\n                foreground: '#111827',\n   \
+  \           },\n              popover: {\n                DEFAULT: '#ffffff',\n                foreground: '#111827',\n\
+  \              },\n              card: {\n                DEFAULT: '#ffffff',\n                foreground: '#111827',\n\
+  \              },\n            },\n            borderRadius: {\n              lg: '0.5rem',\n              md: '0.375rem',\n\
+  \              sm: '0.125rem',\n            },\n          }\n        },\n        darkMode: 'class',\n      }\n    </script>\n\
+  \  </head>\n  \n  <body class=\"min-h-screen bg-background p-8\">\n    \n    <!-- Component Showcase -->\n    <div class=\"\
+  max-w-4xl mx-auto space-y-8\">\n      \n      <!-- Header -->\n      <div class=\"space-y-2\">\n        <h1 class=\"text-3xl\
+  \ font-bold text-foreground\">{Component Name}</h1>\n        <p class=\"text-muted-foreground\">{component_description}</p>\n\
+  \      </div>\n      \n      <!-- Variants Showcase -->\n      <div class=\"grid gap-8\">\n        {component_variants}\n\
+  \      </div>\n      \n      <!-- Usage Examples -->\n      <div class=\"space-y-4\">\n        <h2 class=\"text-xl font-semibold\
+  \ text-foreground\">Usage Examples</h2>\n        <div class=\"grid gap-4 md:grid-cols-2\">\n          {usage_examples}\n\
+  \        </div>\n      </div>\n      \n      <!-- Accessibility Features -->\n      <div class=\"space-y-4\">\n        <h2\
+  \ class=\"text-xl font-semibold text-foreground\">Accessibility Features</h2>\n        <div class=\"bg-muted rounded-lg\
+  \ p-4\">\n          <ul class=\"space-y-2 text-sm text-muted-foreground\">\n            {accessibility_features}\n     \
+  \     </ul>\n        </div>\n      </div>\n      \n    </div>\n    \n  </body>\n</html>"
+component_pattern_examples: ''
+button_component_template: "---\ncomponent: button_component\nresponsive: true\na11y_compliant: true\ndark_mode: true\nlighthouse_target:\
+  \ 90\ncomponent_type: button\nvariants: 6\n---\n\n<!DOCTYPE html>\n<html lang=\"en\" class=\"h-full\">\n  <head>\n    <meta\
+  \ charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Button\
+  \ Component - CODEXA Design System</title>\n    <script src=\"https://cdn.tailwindcss.com\"></script>\n    <script>\n  \
+  \    tailwind.config = {\n        theme: {\n          extend: {\n            colors: {\n              primary: { DEFAULT:\
+  \ '#50C878', foreground: '#ffffff' },\n              secondary: { DEFAULT: '#f3f4f6', foreground: '#111827' },\n       \
+  \       destructive: { DEFAULT: '#ef4444', foreground: '#ffffff' },\n              outline: { DEFAULT: 'transparent', foreground:\
+  \ '#111827' },\n              ghost: { DEFAULT: 'transparent', foreground: '#111827' },\n              link: { DEFAULT:\
+  \ 'transparent', foreground: '#50C878' },\n              border: '#e5e7eb',\n              ring: '#50C878',\n          \
+  \  }\n          }\n        },\n        darkMode: 'class',\n      }\n    </script>\n  </head>\n  \n  <body class=\"min-h-screen\
+  \ bg-white p-8\">\n    \n    <div class=\"max-w-4xl mx-auto space-y-8\">\n      \n      <!-- Header -->\n      <div class=\"\
+  space-y-2\">\n        <h1 class=\"text-3xl font-bold text-gray-900\">Button Component</h1>\n        <p class=\"text-gray-600\"\
+  >Accessible button component with multiple variants and sizes.</p>\n      </div>\n      \n      <!-- Button Variants -->\n\
+  \      <div class=\"space-y-6\">\n        \n        <!-- Default Variant -->\n        <div class=\"space-y-3\">\n      \
+  \    <h3 class=\"text-lg font-medium text-gray-900\">Default (Primary)</h3>\n          <div class=\"flex items-center gap-4\
+  \ flex-wrap\">\n            <button class=\"bg-primary text-primary-foreground hover:bg-primary/90 focus:ring-2 focus:ring-ring\
+  \ focus:ring-offset-2 h-9 px-3 rounded-md text-sm font-medium transition-colors disabled:opacity-50 disabled:pointer-events-none\"\
+  >\n              Small\n            </button>\n            <button class=\"bg-primary text-primary-foreground hover:bg-primary/90\
+  \ focus:ring-2 focus:ring-ring focus:ring-offset-2 h-10 px-4 py-2 rounded-md text-sm font-medium transition-colors disabled:opacity-50\
+  \ disabled:pointer-events-none\">\n              Default\n            </button>\n            <button class=\"bg-primary\
+  \ text-primary-foreground hover:bg-primary/90 focus:ring-2 focus:ring-ring focus:ring-offset-2 h-11 px-8 rounded-md text-sm\
+  \ font-medium transition-colors disabled:opacity-50 disabled:pointer-events-none\">\n              Large\n            </button>\n\
+  \          </div>\n        </div>\n        \n        <!-- Secondary Variant -->\n        <div class=\"space-y-3\">\n   \
+  \       <h3 class=\"text-lg font-medium text-gray-900\">Secondary</h3>\n          <div class=\"flex items-center gap-4 flex-wrap\"\
+  >\n            <button class=\"bg-secondary text-secondary-foreground hover:bg-secondary/80 focus:ring-2 focus:ring-ring\
+  \ focus:ring-offset-2 h-9 px-3 rounded-md text-sm font-medium transition-colors disabled:opacity-50 disabled:pointer-events-none\"\
+  >\n              Small\n            </button>\n            <button class=\"bg-secondary text-secondary-foreground hover:bg-secondary/80\
+  \ focus:ring-2 focus:ring-ring focus:ring-offset-2 h-10 px-4 py-2 rounded-md text-sm font-medium transition-colors disabled:opacity-50\
+  \ disabled:pointer-events-none\">\n              Default\n            </button>\n            <button class=\"bg-secondary\
+  \ text-secondary-foreground hover:bg-secondary/80 focus:ring-2 focus:ring-ring focus:ring-offset-2 h-11 px-8 rounded-md\
+  \ text-sm font-medium transition-colors disabled:opacity-50 disabled:pointer-events-none\">\n              Large\n     \
+  \       </button>\n          </div>\n        </div>\n        \n        <!-- Destructive Variant -->\n        <div class=\"\
+  space-y-3\">\n          <h3 class=\"text-lg font-medium text-gray-900\">Destructive</h3>\n          <div class=\"flex items-center\
+  \ gap-4 flex-wrap\">\n            <button class=\"bg-destructive text-destructive-foreground hover:bg-destructive/90 focus:ring-2\
+  \ focus:ring-ring focus:ring-offset-2 h-10 px-4 py-2 rounded-md text-sm font-medium transition-colors disabled:opacity-50\
+  \ disabled:pointer-events-none\">\n              Delete Account\n            </button>\n            <button class=\"bg-destructive\
+  \ text-destructive-foreground hover:bg-destructive/90 focus:ring-2 focus:ring-ring focus:ring-offset-2 h-10 px-4 py-2 rounded-md\
+  \ text-sm font-medium transition-colors disabled:opacity-50 disabled:pointer-events-none\" disabled>\n              Disabled\n\
+  \            </button>\n          </div>\n        </div>\n        \n        <!-- Outline Variant -->\n        <div class=\"\
+  space-y-3\">\n          <h3 class=\"text-lg font-medium text-gray-900\">Outline</h3>\n          <div class=\"flex items-center\
+  \ gap-4 flex-wrap\">\n            <button class=\"border border-input bg-background hover:bg-accent hover:text-accent-foreground\
+  \ focus:ring-2 focus:ring-ring focus:ring-offset-2 h-10 px-4 py-2 rounded-md text-sm font-medium transition-colors disabled:opacity-50\
+  \ disabled:pointer-events-none\">\n              Outline Button\n            </button>\n          </div>\n        </div>\n\
+  \        \n        <!-- Ghost Variant -->\n        <div class=\"space-y-3\">\n          <h3 class=\"text-lg font-medium\
+  \ text-gray-900\">Ghost</h3>\n          <div class=\"flex items-center gap-4 flex-wrap\">\n            <button class=\"\
+  hover:bg-accent hover:text-accent-foreground focus:ring-2 focus:ring-ring focus:ring-offset-2 h-10 px-4 py-2 rounded-md\
+  \ text-sm font-medium transition-colors disabled:opacity-50 disabled:pointer-events-none\">\n              Ghost Button\n\
+  \            </button>\n          </div>\n        </div>\n        \n        <!-- Link Variant -->\n        <div class=\"\
+  space-y-3\">\n          <h3 class=\"text-lg font-medium text-gray-900\">Link</h3>\n          <div class=\"flex items-center\
+  \ gap-4 flex-wrap\">\n            <button class=\"text-primary underline-offset-4 hover:underline focus:ring-2 focus:ring-ring\
+  \ focus:ring-offset-2 h-10 px-4 py-2 text-sm font-medium transition-colors disabled:opacity-50 disabled:pointer-events-none\"\
+  >\n              Link Button\n            </button>\n          </div>\n        </div>\n      </div>\n      \n    </div>\n\
+  \    \n  </body>\n</html>"
+anti_patterns: ''
+what_not_to_do: '| ❌ Anti-Pattern | ✅ Correct Approach | Why |
+
+  |----------------|-------------------|-----|
+
+  | `<div onclick="">` buttons | `<button type="button">` | Screen readers need semantic button elements |
+
+  | Custom CSS animations | `transition-colors` utility | Hardware acceleration + consistency |
+
+  | Fixed pixel heights `h-[32px]` | Relative heights `h-10` | Better scaling across screen sizes |
+
+  | Hardcoded colors `bg-blue-500` | Design tokens `bg-primary` | Brand consistency + dark mode support |
+
+  | Missing focus styles | `focus:ring-2` classes | Keyboard accessibility requirement |
+
+  | Single size components | Multiple size variants | Different contexts need different scales |
+
+  | Inline styles `style=""` | Utility classes | Better performance + maintainability |
+
+  | Generic onClick handlers | Specific semantic actions | Better UX + screen reader context |'
+implementation_mistakes:
+- Missing aria-labels on icon-only buttons → Always provide accessible text
+- Using divs for interactive elements → Use semantic HTML (button, input, select)
+- Skipping disabled states → Every interactive component needs disabled styling
+- Ignoring touch targets → Minimum 44px height for mobile accessibility
+- Breaking keyboard navigation → Test Tab, Enter, Space, Arrow keys
+- Hardcoding brand colors → Use design tokens for theme consistency
+accessibility_standards: ''
+universal_a11y_requirements: "Every component must include:\n\n<!-- 1. Proper semantic markup -->\n<button type=\"button\"\
+  \ role=\"button\">Click me</button>\n\n<!-- 2. Focus management -->\n<button class=\"focus:ring-2 focus:ring-ring focus:ring-offset-2\"\
+  >Focusable</button>\n\n<!-- 3. ARIA labels when needed -->\n<button aria-label=\"Close dialog\">×</button>\n\n<!-- 4. Form\
+  \ associations -->\n<label for=\"username\">Username</label>\n<input id=\"username\" aria-describedby=\"username-help\"\
+  >\n<div id=\"username-help\">Enter your username</div>\n\n<!-- 5. Error announcements -->\n<div role=\"alert\" aria-live=\"\
+  polite\">\n  Error message here\n</div>\n\n<!-- 6. Touch targets (44px minimum) -->\n<button class=\"h-11 px-4\">Touch-friendly</button>\n\
+  \n<!-- 7. Color contrast compliance -->\n<!-- All text must have 4.5:1 contrast ratio minimum -->"
+performance_optimization: ''
+optimized_component_loading: "<!-- Minimal DOM for fast rendering -->\n<button class=\"btn-primary\">\n  <!-- Simple structure\
+  \ -->\n</button>\n\n<!-- CSS-only animations -->\n<button class=\"transition-colors hover:bg-primary/90\">\n  <!-- Hardware-accelerated\
+  \ transitions -->\n</button>\n\n<!-- Efficient class composition -->\n<div class=\"flex items-center space-x-2\">\n  <!--\
+  \ Utility classes for minimal CSS -->\n</div>"
+component_validation_workflow: '| Stage | Tool | Command | Pass Criteria | Output |
+
+  |-------|------|---------|---------------|---------|
+
+  | Performance | Lighthouse | `lighthouse component.html --only=performance` | Score ≥ 90 | Performance audit |
+
+  | Accessibility | Lighthouse | `lighthouse component.html --only=accessibility` | Score ≥ 95 | A11y audit |
+
+  | HTML Validation | W3C | `w3c-validator component.html` | 0 errors | Markup validation |
+
+  | Component Tests | Jest/Vitest | `npm run test:component` | All tests pass | Unit test results |
+
+  | CEX Compilation | CEX | `python _tools/cex_compile.py component.md` | Successful compile | YAML output |
+
+  | CEX Health Check | CEX | `python _tools/cex_doctor.py --component` | All checks pass | Health report |
+
+  | Integration Test | Playwright | `npx playwright test component.spec.js` | Visual + functional pass | E2E test results
+  |
+
+  | Bundle Analysis | Bundler | `npm run analyze` | Bundle size ≤ 10kb | Size optimization |
+
+
+  This template ensures every component generated by N02 is production-ready, accessible, and follows modern design system
+  patterns.'

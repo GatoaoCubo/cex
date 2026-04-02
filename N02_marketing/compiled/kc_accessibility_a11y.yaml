@@ -1,0 +1,69 @@
+id: n02_kc_accessibility_a11y
+kind: knowledge_card
+pillar: P01
+title: Accessibility A11Y
+version: 1.0.0
+created: 2026-04-01
+author: builder
+domain: frontend
+quality: 8.8
+tags:
+- knowledge
+- frontend
+tldr: Accessibility A11Y patterns and best practices
+density_score: 0.88
+quick_reference: "wcag_level: \"AA (2.1)\"\nkey_attributes:\n  - \"aria-label: descriptive text for elements\"\n  - \"aria-describedby:\
+  \ reference to detailed description\"\n  - \"aria-live: polite|assertive for dynamic content\"\n  - \"aria-expanded: true|false\
+  \ for collapsible content\"\n  - \"aria-hidden: true to hide decorative elements\"\n  - \"aria-current: page|step|location|date|time\"\
+  \n  - \"aria-pressed: true|false|mixed for toggle buttons\"\n  - \"aria-selected: true|false for selectable items\"\naria_roles:\n\
+  \  - \"dialog: modal overlays (with aria-modal='true')\"\n  - \"button: clickable elements (with Enter/Space handlers)\"\
+  \n  - \"tablist/tab/tabpanel: tab interface patterns\"\n  - \"listbox/option: custom select dropdowns\"\n  - \"grid/gridcell:\
+  \ data tables with interaction\"\n  - \"alert: error messages (aria-live='assertive')\"\n  - \"status: success messages\
+  \ (aria-live='polite')\"\nkeyboard_nav:\n  - \"Tab: forward navigation\"\n  - \"Shift+Tab: backward navigation\" \n  - \"\
+  Enter/Space: activation\"\n  - \"Escape: close/cancel\"\n  - \"Arrow keys: within composite widgets\"\nfocus_management:\n\
+  \  - \"focus-visible: keyboard focus indicator\"\n  - \"outline: 2px solid with offset-2\"\n  - \"tabindex: -1 (programmatic),\
+  \ 0 (natural order)\"\ncontrast_ratios:\n  - \"Normal text: 4.5:1 minimum\"\n  - \"Large text (18pt+): 3:1 minimum\"\n \
+  \ - \"UI components: 3:1 minimum\"\n  - \"Focus indicators: 3:1 against background\"\nsemantic_html: [nav, main, section,\
+  \ article, aside, header, footer]\ntesting_tools: [NVDA, VoiceOver, JAWS, axe-core, Lighthouse]"
+key_concepts: '| Concept | Requirements | Implementation | When to Use |
+
+  |---------|-------------|----------------|-------------|
+
+  | WCAG 2.1 AA | 4.5:1 contrast normal text, 3:1 large text, keyboard access | Test with axe-core, manual keyboard nav |
+  All production interfaces |
+
+  | ARIA Labels | Descriptive names when HTML insufficient | `aria-label="Close dialog"`, `aria-describedby="help-text"` |
+  Complex widgets, dynamic content |
+
+  | Focus Management | Visible indicator, logical tab order | `ref.current.focus()`, focus-trap libs | Modals, SPAs, dynamic
+  content |
+
+  | Keyboard Nav | Tab/Shift+Tab, Enter/Space, Escape, arrows | Event handlers for all interactive elements | All user interfaces
+  |
+
+  | Screen Readers | Live regions, landmarks, heading hierarchy | `aria-live="polite"`, semantic HTML | Dynamic content, page
+  structure |
+
+  | Color Independence | Never color-only information | Icons + text, patterns, sufficient contrast | Data visualization,
+  status indicators |'
+patterns: "Modal Dialog A11Y:\n// Focus trap + ARIA\n<div role=\"dialog\" aria-modal=\"true\" aria-labelledby=\"title\">\n\
+  \  <h2 id=\"title\">Confirm Delete</h2>\n  <p id=\"desc\">This action cannot be undone.</p>\n  <button onClick={confirm}>Delete</button>\n\
+  \  <button onClick={cancel} ref={cancelRef}>Cancel</button>\n</div>\n// Focus cancelRef on mount, restore to trigger on\
+  \ unmount\n\nForm Field Pattern:\n// Semantic association + error handling\n<div>\n  <label htmlFor=\"email\">Email Address</label>\n\
+  \  <input \n    id=\"email\" \n    type=\"email\"\n    aria-describedby={error ? \"email-error\" : undefined}\n    aria-invalid={error\
+  \ ? \"true\" : \"false\"}\n  />\n  {error && <div id=\"email-error\" role=\"alert\">{error}</div>}\n</div>\n\nData Table\
+  \ Accessibility:\n// Headers association + caption\n<table role=\"table\">\n  <caption>Sales Data Q4 2025</caption>\n  <thead>\n\
+  \    <tr><th scope=\"col\">Product</th><th scope=\"col\">Revenue</th></tr>\n  </thead>\n  <tbody>\n    <tr><th scope=\"\
+  row\">Widget A</th><td>$50K</td></tr>\n  </tbody>\n</table>"
+golden_rules: 'Semantic First, ARIA Second: Use proper HTML elements (button, input, nav) before adding ARIA. Screen readers
+  understand semantic HTML natively. ARIA repairs broken semantics but native HTML is more reliable and performant. Test With
+  Real Users: Automated tools catch ~30% of issues. Manual keyboard testing reveals navigation problems. Screen reader testing
+  uncovers announcement issues. User testing with disabled users provides authentic feedback. Progressive Enhancement: Ensure
+  core functionality works without JavaScript. Add interactive enhancements that degrade gracefully. Support reduced motion
+  preferences via prefers-reduced-motion media query. Provide text alternatives for all media.'
+references:
+- WCAG 2.1 Guidelines
+- ARIA Authoring Practices
+- Radix Primitives - Built-in accessibility
+- axe-core Testing
+- WebAIM Screen Reader Survey

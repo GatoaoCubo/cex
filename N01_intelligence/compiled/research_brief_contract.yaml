@@ -28,21 +28,48 @@ optional_fields: '| Field | Type | Default | Description |
 
   |-------|------|---------|-------------|
 
-  | scope | string | null | Geographic, temporal, or domain constraints |
+  | scope | string | null | Constraints: "Brazil 2024-2026", "B2B SaaS only", "startups <50 employees" |
 
-  | competitors | list[string] | [] | Specific competitors to include |
+  | competitors | list[string] | [] | Specific competitors: ["Notion", "Airtable", "ClickUp"] |
 
-  | sources_preferred | list[string] | [] | Preferred source types: web, academic, industry, govt |
+  | sources_preferred | list[string] | [] | Source types: ["web", "academic", "industry_reports", "govt_data", "social"] |
 
-  | sources_excluded | list[string] | [] | Sources to avoid |
+  | sources_excluded | list[string] | [] | Avoid: ["reddit", "wikipedia", "press_releases"] |
 
-  | deadline | datetime | null | When results needed |
+  | deadline | datetime | null | ISO format: "2026-04-15T18:00:00Z" |
 
   | brand_context | boolean | true | Inject brand_config.yaml context |
 
   | language | enum | pt-BR | Output language |
 
   | max_sources | int | 20 | Cap on sources to analyze |'
+usage_guidelines: 'Use this contract when:
+
+  - Dispatching research to N01 nucleus
+
+  - Need structured intelligence output
+
+  - Research has multiple constraints/preferences
+
+  - Want consistent research deliverables
+
+
+  Don''t use when:
+
+  - Quick factual lookup (use direct query)
+
+  - Research is exploratory without clear question
+
+  - Output format is flexible/undefined
+
+
+  Anti-patterns:
+
+  - Vague questions ("research AI trends")
+
+  - Contradictory constraints (L1 depth + 50 sources)
+
+  - Missing output_format specification'
 example: 'question: "Who are the top 5 competitors in AI agent frameworks for SMBs in Brazil?"
 
   depth: L2

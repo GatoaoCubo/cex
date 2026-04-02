@@ -1,80 +1,68 @@
-id: n01_qg_intelligence
+id: p11_qg_intelligence
 kind: quality_gate
 pillar: P11
-title: 'Quality Gate: N01 Research & Intelligence Output'
-version: 1.0.0
-created: '2026-03-31'
-updated: '2026-03-31'
-author: N01_rebuild_8F
-quality: null
+title: N01 Quality Gate — Research Output Validation
+version: 4.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: research-intelligence
+quality: 8.7
 tags:
-- quality
-- validation
-- gate
+- quality_gate
 - n01
 - research
-- intelligence
-tldr: Defines the rigorous, two-stage (pass/fail and scored) quality gates for all analytical outputs produced by the N01
-  Research & Intelligence Nucleus.
-target_artifact_type: IntelligenceBrief
-pass_threshold: 8.0
-1_purpose: This document specifies the quality assurance gates that all analytical outputs from the N01 agent must pass before
-  being considered complete. The primary goal is to guarantee that every `IntelligenceBrief` is rigorous, evidence-based,
-  structured, and actionable. ---
-2_stage_1_hard_gates_automated_pass_fail_checks: 'A failure in any Hard Gate results in an immediate `REJECT` status and a
-  mandatory correction loop. These are checked automatically.
+- triangulation
+- freshness
+tldr: '10 checks for research output: source count, triangulation, freshness, citation format, confidence scoring, brand alignment.'
+density_score: 0.93
+hard_gates_fail_reject: '| ID | Check | Rationale |
 
+  |----|-------|-----------|
 
-  | Gate ID | Criterion                 | Validation Logic                                                                                                                              |
+  | H01 | Minimum 3 sources cited per major claim | Triangulation is mandatory |
 
-  |---------|---------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
+  | H02 | Every source has URL + access date | Unverifiable sources are worthless |
 
-  | `H01`   | Schema Conformance    | The output document MUST contain the mandatory markdown sections: `## Executive Summary`,
-  `## Detailed Analysis`, and `## Source Appendix`.       |
+  | H03 | Confidence score on every key finding | Reader must know certainty level |
 
-  | `H02`   | Universal Citation    | Every paragraph or bullet point within `## Detailed Analysis` that makes a factual claim
-  MUST end with a valid citation, e.g., `[source, id]`. |
+  | H04 | No data older than 90 days without ⚠️ warning | Stale data misleads |
 
-  | `H03`   | Appendix Integrity    | Every citation in the text MUST have a corresponding, non-empty entry in the `## Source
-  Appendix`.                                           |
+  | H05 | Output follows assigned template | Consistency across deliverables |'
+soft_scoring: '| # | Dimension | Weight | 1 (Poor) | 10 (Excellent) |
 
-  | `H04`   | No Information Gaps   | The document MUST NOT contain placeholder text (e.g., "TODO", "TBD", "[add analysis
-  here]"). If information is unknown, it must be in `## Information Gaps`. |
+  |---|-----------|--------|----------|----------------|
 
-  | `H05`   | Confidence Declaration| If the brief contains predictive statements or forecasts, a `Confidence Level` (High,
-  Medium, Low) and its rationale MUST be present.     |
+  | 1 | Source diversity (web + academic + industry) | 1.0 | All from 1 type | 3+ source types |
 
-  | `H06`   | Bounded by Sources    | A random sample of 3 claims will be checked to ensure they are directly supported by
-  the content of their cited source.                        |
+  | 2 | Actionable insights (not just data) | 1.0 | Raw data dump | Every finding has "so what?" |
 
+  | 3 | Competitive grid completeness | 0.8 | Missing competitors | All major players + dimensions |
 
-  ---'
-3_stage_2_soft_gates_automated_scoring: 'After passing all Hard Gates, the artifact is scored. A score below the `pass_threshold`
-  of 8.0 is flagged for human review.
+  | 4 | Visual structure (tables, grids) | 0.6 | Wall of text | Structured with tables |
 
+  | 5 | Brand context alignment | 0.6 | Generic research | Through lens of user''s market |'
+application_guide: '| Stage | Action | Example |
 
-  | Gate ID | Criterion                  | Weight | Scoring Rubric (0-10)                                                                                                                            |
+  |-------|--------|---------|
 
-  |---------|----------------------------|--------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+  | Pre-research | Define confidence thresholds | "High confidence" = 3+ sources agree |
 
-  | `S01`   | Depth of Synthesis     | 35%    | 0-4: Simple summary. 5-7: Connects some facts. 8-10: Creates novel, non-obvious
-  insights by synthesizing multiple disparate sources.      |
+  | During research | Track source types in real-time | Academic: 2, Industry: 1, Web: 3 |
 
-  | `S02`   | Evidence Quality       | 25%    | 0-4: Relies on low-tier sources. 5-7: Mix of sources. 8-10: Over 75% of sources
-  are Tier 1-2 (Peer-reviewed, SEC filings, etc.).   |
+  | Post-research | Validate each claim against H01-H05 | "Market size $50B" → 3 sources + confidence score |
 
-  | `S03`   | Actionability & "So What?" | 20%    | 0-4: Purely descriptive. 5-7: Implies some consequences. 8-10: Executive
-  Summary clearly states strategic implications & "so what". |
+  | Before delivery | Run final gate check | All hard gates PASS, soft score ≥7.0 |'
+anti_patterns: '| Pattern | Problem | Fix |
 
-  | `S04`   | Clarity and Precision  | 10%    | 0-4: Vague, jargon-filled. 5-7: Clear but verbose. 8-10: Precise, unambiguous,
-  and concise language.                                  |
+  |---------|---------|-----|
 
-  | `S05`   | Objectivity            | 10%    | 0-4: Uses biased language. 5-7: Mostly neutral. 8-10: Completely objective
-  and dispassionate tone.                                      |
+  | Single source syndrome | One great source ≠ validated claim | Always triangulate with 2+ additional sources |
+
+  | Stale data masquerading | 2023 data presented as current without warning | Add ⚠️ date warnings for data >90 days old
+  |
+
+  | Confidence inflation | "High confidence" without multi-source backing | Use confidence scores based on source agreement
+  |
 
 
   ---'
-4_outcomes:
-- '`REJECT` (Hard Gate Fail): Artifact is returned to N01 with the failed Gate ID and a directive to fix it.'
-- '`FLAG_FOR_REVIEW` (Soft Gate Score < 8.0): Artifact is accepted but flagged in the system for human oversight.'
-- '`ACCEPT` (Soft Gate Score >= 8.0): Artifact is accepted and a `validation_complete` signal is propagated.'

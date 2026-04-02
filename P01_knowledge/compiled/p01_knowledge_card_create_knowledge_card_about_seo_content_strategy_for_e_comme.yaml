@@ -1,0 +1,85 @@
+id: p01_kc_seo_content_strategy_ecommerce
+kind: knowledge_card
+pillar: P01
+title: SEO Content Strategy for E-commerce Sites
+version: 1.0.0
+created: '2026-04-02'
+updated: '2026-04-02'
+author: builder
+domain: digital_marketing
+quality: null
+tags:
+- seo
+- ecommerce
+- content-strategy
+- product-optimization
+- conversion
+- knowledge
+tldr: E-commerce SEO requires product-focused keyword clusters, structured data markup, and content hierarchy targeting commercial
+  intent with 3-5 content types per customer journey stage
+when_to_use: When optimizing online store content for organic search visibility and conversion
+keywords:
+- ecommerce-seo
+- product-optimization
+- commercial-keywords
+- structured-data
+long_tails:
+- How to optimize product category pages for SEO
+- E-commerce keyword research for high purchase intent
+- Content strategy for online store organic traffic
+axioms:
+- ALWAYS target commercial intent keywords over informational for product pages
+- NEVER duplicate product descriptions across similar items without unique value
+- IF product has variants THEN create separate optimized pages for high-volume variants
+linked_artifacts:
+  primary: null
+  related: []
+density_score: 0.87
+data_source: https://developers.google.com/search/docs/advanced/ecommerce
+quick_reference: 'topic: ecommerce_seo_content
+
+  scope: Online retail organic search optimization
+
+  owner: digital_marketing
+
+  criticality: high'
+key_concepts:
+- 'Commercial Keywords: Buy/purchase intent terms with CPC >$2, conversion rate 3-8%'
+- 'Product Schema: Structured data for price, availability, reviews (rich snippets boost CTR 20-30%)'
+- 'Content Hierarchy: Homepage → Category → Subcategory → Product (max 3 clicks from home)'
+- 'Faceted Navigation: SEO-friendly filters without duplicate content or infinite URL parameters'
+strategy_phases:
+- 'Audit (Week 1): Technical SEO crawl via Screaming Frog, identify 404s, thin content <150 words, duplicate meta tags. Target:
+  fix 80% critical issues'
+- 'Research (Week 2): Map 50-100 commercial keywords per product category using Ahrefs/SEMrush. Focus on difficulty <30, volume
+  >500/month'
+- 'Create (Weeks 3-8): Write 200+ word unique product descriptions, category pages with 500+ words, buying guides targeting
+  TOFU keywords'
+- 'Optimize (Week 9): Implement title tags <60 chars, meta descriptions 150-160 chars, internal links 3-5 per page, Core Web
+  Vitals <2.5s LCP'
+- 'Monitor (Ongoing): Track organic traffic growth 15-25% MoM, conversion rate 8-12%, average order value from organic vs
+  paid channels'
+golden_rules:
+- TARGET long-tail product keywords (3+ words, lower competition, higher intent)
+- STRUCTURE URLs as /category/subcategory/product-name (breadcrumb hierarchy)
+- WRITE unique descriptions >150 words per product (avoid manufacturer copy)
+- IMPLEMENT review schema and FAQ markup for enhanced SERP features
+- OPTIMIZE for mobile-first indexing with responsive design and fast loading
+flow: "[Keyword Research] → [Content Mapping] → [Page Creation] → [Technical SEO]\n        ↓                    ↓        \
+  \       ↓              ↓\n   Commercial Intent    Buyer Journey    Product Pages   Schema Markup\n        ↓            \
+  \        ↓               ↓              ↓\n   [Internal Linking] → [Performance Monitor] → [Conversion Track] → [Iterate]"
+comparativo: '| Content Type | Search Volume | Intent | Conversion Rate | Pages Needed |
+
+  |--------------|---------------|---------|-----------------|--------------|
+
+  | Product Pages | Low-Medium | Commercial | 8-15% | 1 per SKU |
+
+  | Category Pages | Medium-High | Commercial | 3-8% | 1 per category |
+
+  | Buying Guides | Medium | Informational | 1-3% | 5-10 pillar |
+
+  | Comparison Posts | Low | Consideration | 5-12% | 3-5 key comparisons |'
+references:
+- 'Google E-commerce SEO Guide: https://developers.google.com/search/docs/advanced/ecommerce'
+- 'Schema.org Product Markup: https://schema.org/Product'
+- 'Core Web Vitals for E-commerce: https://web.dev/vitals/'

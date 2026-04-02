@@ -1,0 +1,66 @@
+id: p06_schema_freshness
+kind: schema
+pillar: P06
+title: Freshness Contract
+version: 1.0.0
+created: 2026-03-31
+author: n07_orchestrator
+domain: knowledge-management
+quality: 8.7
+tags:
+- schema
+- n04
+- freshness
+- staleness
+- monitoring
+tldr: 'Staleness rules: 30/60/90 day thresholds by KC type. Auto-flag, review triggers, deprecation policy.'
+density_score: 0.92
+thresholds_by_kc_type: '| KC Type | Fresh | Aging | Stale | Deprecated |
+
+  |---------|-------|-------|-------|------------|
+
+  | Platform (API, tools) | <30d | 30-60d | 60-90d | >90d |
+
+  | Domain (patterns, methods) | <90d | 90-180d | 180-365d | >1y |
+
+  | Kind (CEX structural) | <180d | 180-365d | >1y | >2y |
+
+  | Infrastructure | <60d | 60-120d | 120-180d | >180d |'
+actions_per_state: '| State | Icon | Action |
+
+  |-------|------|--------|
+
+  | Fresh | ✅ | No action needed |
+
+  | Aging | 🟡 | Schedule review |
+
+  | Stale | ⚠️ | Flag in output, prioritize refresh |
+
+  | Deprecated | ❌ | Archive, remove from active injection |'
+implementation_guide: '| Step | Check | Action |
+
+  |------|-------|--------|
+
+  | Daily | `git log --since="30 days"` on Platform KCs | Flag aging items |
+
+  | Weekly | Scan aging KCs | Queue for expert review |
+
+  | Monthly | Run freshness audit | Update stale items or deprecate |'
+edge_cases:
+- 'Breaking changes: Reset threshold to 0 days regardless of type'
+- 'Seasonal content: Extend threshold by 50% for annual patterns'
+- 'Legacy systems: Use Infrastructure thresholds even for Platform KCs'
+calculation_scoring: '| Component | Formula | Usage |
+
+  |-----------|---------|-------|
+
+  | Base Score | `max(0, 1 - (days_since_update / threshold_stale))` | Primary freshness metric |
+
+  | Weight Factor | Score × KC_type_multiplier | Platform=1.5, Domain=1.0, Kind=0.8 |
+
+  | Final Score | Weighted score × usage_frequency | High-traffic KCs get priority |'
+interpretation_rules:
+- 'Score ≥ 0.8: Inject normally'
+- 'Score 0.5-0.79: Include with staleness warning'
+- 'Score < 0.5: Skip injection, flag for review'
+- 'Score = 0: Immediate deprecation candidate'

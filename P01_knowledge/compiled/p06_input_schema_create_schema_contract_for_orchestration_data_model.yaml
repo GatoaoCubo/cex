@@ -1,0 +1,63 @@
+id: p06_is_orchestration_data_model
+kind: input_schema
+pillar: P06
+version: 1.0.0
+created: '2026-04-01'
+updated: '2026-04-01'
+author: input-schema-builder
+title: CEX Orchestration Input Schema
+scope: CEX orchestration system input contract for mission execution
+when_to_use: When building CEX orchestration interfaces, mission dispatchers, or nucleus routing systems that need to validate
+  and process mission requests
+fields: '| # | Name | Type | Required | Default | Description |
+
+  |---|------|------|----------|---------|-------------|
+
+  | 1 | mission | string | YES | - | High-level goal or objective for orchestration |
+
+  | 2 | nuclei | list | YES | - | Nucleus identifiers (n01-n07) to involve |
+
+  | 3 | priority | string | NO | "normal" | Execution priority: low, normal, high, urgent |
+
+  | 4 | dependencies | list | NO | [] | Prerequisite tasks or artifacts |
+
+  | 5 | constraints | object | NO | {"max_parallel": 6, "timeout_minutes": 60} | Execution limits and timeouts |
+
+  | 6 | context | string | NO | null | Additional background information |
+
+  | 7 | output_format | string | NO | "summary" | Response format: summary, detailed, artifacts_only |'
+coercion:
+- from: string
+  to: list
+  rule: Split comma-separated nucleus list into array
+- from: string
+  to: integer
+  rule: Parse numeric strings for timeout and parallel limits
+examples: "{\n  \"mission\": \"Research competitive landscape for AI tools\",\n  \"nuclei\": [\"n01\"],\n  \"priority\": \"\
+  normal\",\n  \"dependencies\": [\"brand_config_complete\"],\n  \"context\": \"Focus on productivity and automation tools\"\
+  ,\n  \"output_format\": \"detailed\"\n}"
+domain: orchestration
+quality: 8.9
+tags:
+- input-schema
+- orchestration
+- mission
+- nuclei
+- cex
+tldr: 'Input contract for CEX orchestration: requires mission description and nuclei list, optional priority, dependencies,
+  and execution constraints.'
+density_score: 0.87
+contract_definition: The CEX orchestration system (N07) receives mission requests from users and other agents. Callers provide
+  a mission description, specify which nuclei to involve, and optionally set priority, dependencies, and execution constraints.
+  This schema ensures consistent orchestration input across all CEX operations.
+coercion_rules: '| From | To | Rule |
+
+  |------|----|------|
+
+  | string | list | Split comma-separated nucleus list ("n02,n06" → ["n02", "n06"]) |
+
+  | string | integer | Parse numeric strings for timeout and parallel limits |'
+references:
+- 'CEX Orchestration Rules: `.claude/rules/n07-orchestrator.md`'
+- 'Nucleus Routing Table: `CLAUDE.md`'
+- 'Mission Command: `.claude/commands/mission.md`'

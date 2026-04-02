@@ -18,8 +18,9 @@ tags:
 tldr: CLI tool para N04 provisionar data layer Supabase completo a partir de config YAML — schema, RLS, storage, realtime,
   vectors, edge functions
 density_score: 0.89
-purpose: 'N04 uses this tool to transform a company config YAML into a complete Supabase data layer: migration SQL, RLS policies,
-  storage buckets, realtime channels, vector indexes, and edge function scaffolds.'
+purpose: Transform 50-line company config YAML → 8 migration files + edge functions + MCP server config. Reads `database.tables`,
+  `auth.providers`, `rls.policies` sections and generates production-ready SQL with foreign key constraints, RLS policies,
+  storage buckets, and vector search indexes.
 usage: '# Generate migrations from config
 
   python _tools/supabase_data_layer.py generate --config path/to/config.yaml --output supabase/migrations/
@@ -33,10 +34,29 @@ usage: '# Generate migrations from config
   # Dry-run: show what would be created
 
   python _tools/supabase_data_layer.py plan --config path/to/config.yaml'
-pipeline: "[Config YAML] → validate → plan → generate migrations\n                                 → generate RLS policies\n\
-  \                                 → generate storage config\n                                 → generate realtime config\n\
-  \                                 → generate edge function scaffolds\n                                 → generate MCP config\n\
-  \                                 → output summary"
+pipeline_stages: '| Stage | Input | Output | Validation | Size |
+
+  |-------|-------|--------|------------|------|
+
+  | validate | config.yaml | schema check | JSON schema + required fields | — |
+
+  | plan | validated config | preview report | SQL syntax + naming | ~2KB |
+
+  | schema | database section | CREATE TABLE + indexes | foreign key integrity | ~5KB |
+
+  | auth | auth section | provider config | OAuth redirect URLs | ~1KB |
+
+  | rls | rls section | CREATE POLICY | policy syntax + roles | ~3KB |
+
+  | storage | storage section | bucket creation + policies | bucket names + MIME types | ~2KB |
+
+  | realtime | realtime section | ALTER PUBLICATION | table exists check | ~500B |
+
+  | vectors | vectors section | extension + match function | vector dimensions | ~4KB |
+
+  | edge_functions | edge_functions section | TypeScript scaffolds | function names + imports | ~8KB |
+
+  | mcp | integracao_cex section | MCP server config | port conflicts | ~1KB |'
 config_sections_processed: '| Section | Output | File |
 
   |---------|--------|------|

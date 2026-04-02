@@ -1,0 +1,95 @@
+id: p05_output_email_template
+kind: output_validator
+pillar: P05
+title: Responsive Email HTML Template with Outlook Compatibility
+tldr: Production-ready responsive email templates with Outlook compatibility, dark mode support, and mobile optimization
+version: 1.0.0
+created: 2026-04-01
+author: n02_visual_frontend
+domain: frontend
+quality: 8.8
+purpose: Provides production-ready responsive email templates with comprehensive Outlook compatibility, dark mode support,
+  and web-safe typography. Ensures consistent rendering across all major email clients including Outlook 2007-2019, Gmail,
+  Apple Mail, and mobile clients.
+template_structure: ''
+core_architecture:
+- 'Table-based layout: Ensures Outlook 2007+ compatibility'
+- 'Max-width 600px: Standard email client viewport'
+- 'Inline CSS: Required for email client parsing'
+- 'MSO conditionals: Outlook-specific styling'
+- 'Dark mode media queries: Modern email client support'
+- 'Web-safe font stack: Fallback typography system'
+required_components:
+- DOCTYPE and MSO compatibility headers
+- Container table with max-width constraint
+- Header section with logo and navigation
+- Content sections with responsive spacing
+- Footer with unsubscribe and social links
+- Dark mode color schemes
+- Mobile breakpoint optimizations
+complete_html_example: ''
+welcome_email_template: "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\"\
+  >\n<html xmlns=\"http://www.w3.org/1999/xhtml\">\n<head>\n    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"\
+  \ />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n    <meta name=\"color-scheme\"\
+  \ content=\"light dark\" />\n    <title>Welcome to Our Platform</title>\n    \n    <!--[if gte mso 9]>\n    <xml>\n    \
+  \    <o:OfficeDocumentSettings>\n            <o:AllowPNG/>\n            <o:PixelsPerInch>96</o:PixelsPerInch>\n        </o:OfficeDocumentSettings>\n\
+  \    </xml>\n    <![endif]-->\n    \n    <style type=\"text/css\">\n        #outlook a { padding: 0; }\n        .ReadMsgBody\
+  \ { width: 100%; }\n        .ExternalClass { width: 100%; }\n        \n        @media (prefers-color-scheme: dark) {\n \
+  \           .dark-mode-bg { background-color: #1a1a1a !important; }\n            .dark-mode-text { color: #ffffff !important;\
+  \ }\n        }\n        \n        @media only screen and (max-width: 600px) {\n            .mobile-full { width: 100% !important;\
+  \ }\n            .mobile-center { text-align: center !important; }\n        }\n    </style>\n</head>\n\n<body style=\"margin:\
+  \ 0; padding: 0; background-color: #f5f5f5;\">\n    <table role=\"presentation\" width=\"100%\" style=\"background-color:\
+  \ #f5f5f5;\">\n        <tr>\n            <td align=\"center\" style=\"padding: 40px 0;\">\n                <table role=\"\
+  presentation\" width=\"600\" style=\"max-width: 600px; background-color: #ffffff;\">\n                    <tr>\n       \
+  \                 <td style=\"padding: 40px; text-align: center;\">\n                            <h1 style=\"color: #1f2937;\
+  \ font-size: 28px;\">Welcome!</h1>\n                            <p style=\"color: #374151; font-size: 16px;\">Thank you\
+  \ for joining us.</p>\n                            <a href=\"{{verification_link}}\" style=\"display: inline-block; padding:\
+  \ 15px 30px; background-color: #3b82f6; color: #ffffff; text-decoration: none;\">Verify Email</a>\n                    \
+  \    </td>\n                    </tr>\n                    <tr>\n                        <td style=\"padding: 30px; background-color:\
+  \ #f9fafb; text-align: center;\">\n                            <p style=\"color: #6b7280; font-size: 14px;\">© 2026 Company.\
+  \ <a href=\"{{unsubscribe_url}}\">Unsubscribe</a></p>\n                        </td>\n                    </tr>\n      \
+  \          </table>\n            </td>\n        </tr>\n    </table>\n</body>\n</html>"
+variants: '| Type | Purpose | Key Elements |
+
+  |------|---------|-------------|
+
+  | Welcome | New user onboarding | Email verification CTA, feature highlights |
+
+  | Transactional | Confirmations, receipts | Transaction details, support contact |
+
+  | Marketing | Promotions, announcements | Headlines, product showcases, strong CTAs |
+
+  | Cart Abandonment | Recover purchases | Product reminders, urgency, checkout links |'
+common_issues_solutions: '| Problem | Cause | Solution |
+
+  |---------|-------|----------|
+
+  | Buttons broken in Outlook | Missing VML markup | Add `<!--[if mso]>` VML button code |
+
+  | Images not loading | Blocked by default | Use alt text, test without images |
+
+  | Dark mode not working | Missing meta tags | Add `color-scheme` and `supported-color-schemes` |
+
+  | Mobile layout broken | No viewport meta | Add viewport meta tag and responsive CSS |
+
+  | Gmail clipping | Email over 102KB | Reduce HTML size, optimize images |
+
+  | Fonts not rendering | Web fonts unsupported | Use web-safe font stack with fallbacks |
+
+  | Spacing inconsistent | Margin/padding differences | Use table cell padding instead of margins |
+
+  | Links not tracking | Missing UTM parameters | Add campaign tracking to all links |'
+implementation_guidelines: ''
+setup_requirements:
+- 'Variable Replacement: Use `{{variable_name}}` for dynamic content'
+- 'Image Hosting: Host on reliable CDN with HTTPS'
+- 'Testing Tools: Litmus or Email on Acid for client compatibility'
+outlook_compatibility:
+- 'MSO Conditionals: Required for Outlook 2007-2019'
+- 'Table Structure: Mandatory for consistent layout'
+- 'VML Buttons: Essential for proper CTA rendering'
+performance_optimization:
+- 'Inline CSS: Required for maximum compatibility'
+- 'HTML Size: Keep under 102KB for Gmail'
+- 'Image Compression: Use optimized formats'
+- 'Font Sizes: Minimum 14px for mobile readability'

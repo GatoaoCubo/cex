@@ -1,0 +1,189 @@
+id: p10_hos_html_output_visual_frontend
+kind: input_schema
+pillar: P10
+title: HTML Output Schema for Visual Frontend Engineering
+version: 1.0.0
+created: 2026-04-01
+author: n02_visual_frontend_marketing
+target_artifact: html_component
+output_format: html_with_frontmatter
+validation_rules: ''
+required_frontmatter:
+- component
+- responsive
+- a11y_compliant
+- dark_mode
+- lighthouse_target
+domain: visual_frontend_engineering
+quality: 8.9
+tags:
+- input_schema
+- html
+- output
+- visual-frontend
+- tailwind
+- N02
+- P10
+tldr: Schema definition for N02 HTML output — frontmatter + semantic HTML with Tailwind classes, WCAG AA compliance, Lighthouse
+  90+ target.
+density_score: 0.96
+purpose: Defines the required structure for all HTML output from N02 Visual Frontend Engineer. Ensures consistency, validation,
+  and quality across all generated components, pages, and layouts.
+schema_structure: ''
+frontmatter_required_yaml: "---\ncomponent: string # Component name or page type (required)\nresponsive: boolean # Must be\
+  \ true (required)\na11y_compliant: boolean # Must be true for WCAG AA (required) \ndark_mode: boolean # Dark mode support\
+  \ included (required)\nlighthouse_target: number # Performance target, minimum 90 (required)\npage_type: string # landing_page\
+  \ | component | email | form (optional)\nbreakpoints: array # [sm, md, lg, xl, 2xl] used (optional)\ncolor_scheme: string\
+  \ # codexa | neutral | brand (optional)\nanimation_level: string # none | subtle | moderate | rich (optional)\nfont_stack:\
+  \ array # [geist, inter, jetbrains-mono] (optional)\ntailwind_version: string # Version compatibility (optional)\nbrowser_support:\
+  \ array # Minimum browser versions (optional)\n---"
+html_structure_required_elements: "<!DOCTYPE html>\n<html lang=\"en\" class=\"h-full\">\n  <head>\n    <meta charset=\"UTF-8\"\
+  >\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title><!-- Descriptive title --></title>\n\
+  \    <meta name=\"description\" content=\"<!-- SEO description -->\">\n    <!-- Tailwind CSS CDN or custom build -->\n \
+  \   <script src=\"https://cdn.tailwindcss.com\"></script>\n    <!-- Custom Tailwind config if needed -->\n  </head>\n  <body\
+  \ class=\"min-h-screen bg-background text-foreground\">\n    <!-- Semantic HTML5 structure required -->\n    <main>\n  \
+  \    <!-- Component/page content -->\n    </main>\n  </body>\n</html>"
+hard_requirements_must_pass: '| Rule | Description | Validation Method |
+
+  |------|-------------|------------------|
+
+  | W3C Valid | Zero HTML validation errors | W3C HTML validator |
+
+  | Lighthouse >= 90 | Performance score minimum | `lighthouse --only=performance` |
+
+  | WCAG AA | Accessibility compliance | `lighthouse --only=accessibility` |
+
+  | Mobile Responsive | Works on all device sizes | Browser dev tools testing |
+
+  | Semantic HTML5 | Proper element usage | HTML5 semantic validation |
+
+  | Zero Hardcoded Hex | No #HEXCODE colors | Automated hex color scan |
+
+  | Dark Mode Ready | Dark variants present | Visual dark mode test |'
+tailwind_class_requirements: '<!-- Background and text colors -->
+
+  ✅ class="bg-background text-foreground"
+
+  ❌ style="background: white; color: black;"
+
+
+  <!-- Dark mode variants -->
+
+  ✅ class="bg-white dark:bg-gray-900"
+
+  ❌ class="bg-white" (no dark variant)
+
+
+  <!-- Responsive classes -->
+
+  ✅ class="grid gap-4 sm:gap-6 lg:grid-cols-2"
+
+  ❌ class="grid gap-4" (not responsive)
+
+
+  <!-- Accessibility focus states -->
+
+  ✅ class="focus:ring-2 focus:ring-primary focus:ring-offset-2"
+
+  ❌ class="focus:outline-none" (no alternative focus indicator)'
+accessibility_requirements: ''
+aria_labels_required: "<!-- Interactive elements need labels -->\n<button aria-label=\"Close dialog\">×</button>\n\n<!-- Form\
+  \ inputs need proper association -->\n<label for=\"email\">Email Address</label>\n<input id=\"email\" type=\"email\" aria-describedby=\"\
+  email-error\">\n<div id=\"email-error\" role=\"alert\" aria-live=\"polite\">\n  <!-- Error messages -->\n</div>\n\n<!--\
+  \ Navigation landmarks -->\n<nav aria-label=\"Main navigation\">\n  <!-- Navigation items -->\n</nav>"
+color_contrast_4_5_1_minimum: '/ Compliant examples /
+
+  .text-gray-900 { color: #111827; } / on white: 16.9:1 ratio /
+
+  .text-blue-600 { color: #2563eb; } / on white: 8.6:1 ratio /
+
+
+  / Non-compliant (avoid) /
+
+  .text-gray-400 { color: #9ca3af; } / on white: 2.8:1 ratio /'
+component_output_templates: ''
+basic_component_template: "---\ncomponent: button_primary\nresponsive: true\na11y_compliant: true\ndark_mode: true\nlighthouse_target:\
+  \ 90\n---\n\n<!DOCTYPE html>\n<html lang=\"en\" class=\"h-full\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"\
+  viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Primary Button Component</title>\n    <script\
+  \ src=\"https://cdn.tailwindcss.com\"></script>\n  </head>\n  <body class=\"min-h-screen bg-background p-8\">\n    \n  \
+  \  <div class=\"space-y-4\">\n      <!-- Component variants -->\n      <button class=\"bg-primary text-primary-foreground\
+  \ hover:bg-primary/90 focus:ring-2 focus:ring-primary focus:ring-offset-2 px-4 py-2 rounded-md font-medium transition-colors\"\
+  >\n        Primary Button\n      </button>\n      \n      <button class=\"bg-secondary text-secondary-foreground hover:bg-secondary/90\
+  \ focus:ring-2 focus:ring-secondary focus:ring-offset-2 px-4 py-2 rounded-md font-medium transition-colors\">\n        Secondary\
+  \ Button\n      </button>\n      \n      <button class=\"bg-destructive text-destructive-foreground hover:bg-destructive/90\
+  \ focus:ring-2 focus:ring-destructive focus:ring-offset-2 px-4 py-2 rounded-md font-medium transition-colors\">\n      \
+  \  Destructive Button\n      </button>\n    </div>\n    \n  </body>\n</html>"
+landing_page_template: "---\ncomponent: landing_page_hero\nresponsive: true\na11y_compliant: true\ndark_mode: true\nlighthouse_target:\
+  \ 90\npage_type: landing_page\nbreakpoints: [sm, md, lg, xl]\n---\n\n<!DOCTYPE html>\n<html lang=\"en\" class=\"h-full\"\
+  >\n  <head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"\
+  >\n    <title>Product Landing Page</title>\n    <meta name=\"description\" content=\"Convert more visitors with our proven\
+  \ solution\">\n    <script src=\"https://cdn.tailwindcss.com\"></script>\n  </head>\n  <body class=\"min-h-screen bg-background\
+  \ text-foreground\">\n    \n    <!-- Hero Section -->\n    <main>\n      <section class=\"container mx-auto px-4 py-16 sm:px-6\
+  \ lg:px-8\">\n        <div class=\"grid gap-8 lg:grid-cols-2 lg:gap-16\">\n          \n          <!-- Content Column -->\n\
+  \          <div class=\"space-y-6 lg:space-y-8\">\n            <h1 class=\"text-4xl font-bold tracking-tight text-foreground\
+  \ sm:text-5xl lg:text-6xl\">\n              <!-- Headline goes here -->\n            </h1>\n            \n            <p\
+  \ class=\"text-xl text-muted-foreground sm:text-2xl\">\n              <!-- Subheadline goes here -->\n            </p>\n\
+  \            \n            <div class=\"flex flex-col gap-4 sm:flex-row\">\n              <button class=\"bg-primary text-primary-foreground\
+  \ hover:bg-primary/90 focus:ring-2 focus:ring-primary focus:ring-offset-2 px-6 py-3 rounded-lg text-lg font-medium transition-colors\"\
+  >\n                Get Started Today\n              </button>\n              \n              <button class=\"border border-input\
+  \ hover:bg-accent hover:text-accent-foreground focus:ring-2 focus:ring-ring focus:ring-offset-2 px-6 py-3 rounded-lg text-lg\
+  \ font-medium transition-colors\">\n                Learn More\n              </button>\n            </div>\n          </div>\n\
+  \          \n          <!-- Visual Column -->\n          <div class=\"lg:order-first\">\n            <!-- Hero image or\
+  \ visual element -->\n            <div class=\"aspect-video rounded-lg bg-muted\"></div>\n          </div>\n          \n\
+  \        </div>\n      </section>\n    </main>\n    \n  </body>\n</html>"
+error_prevention: ''
+common_mistakes_to_avoid: '| Mistake | Problem | Correct Approach |
+
+  |---------|---------|-----------------|
+
+  | Missing semantic tags | Poor accessibility | Use header, main, section, article |
+
+  | Hardcoded colors | Design system breaks | Use Tailwind color tokens |
+
+  | No dark mode | Poor UX | Include dark: variants |
+
+  | Fixed pixel widths | Not responsive | Use responsive units (rem, %, vw) |
+
+  | Missing focus states | Keyboard users excluded | Add focus:ring-* classes |
+
+  | No alt attributes | Screen readers blocked | Add descriptive alt text |
+
+  | Generic button text | Poor accessibility | Use descriptive aria-label |'
+quality_assurance_checklist: 'Before Output Delivery:
+
+  - [ ] Frontmatter complete with all required fields
+
+  - [ ] W3C HTML validation passes (0 errors)
+
+  - [ ] Lighthouse performance >= 90
+
+  - [ ] Lighthouse accessibility >= 95
+
+  - [ ] Color contrast >= 4.5:1 for all text
+
+  - [ ] Mobile responsive behavior tested
+
+  - [ ] Dark mode variants working
+
+  - [ ] Keyboard navigation functional
+
+  - [ ] Zero hardcoded hex colors
+
+  - [ ] Semantic HTML5 structure used
+
+  - [ ] All interactive elements have focus states
+
+  - [ ] Images have descriptive alt attributes'
+integration_with_cex_system: ''
+compilation: '# After HTML generation, compile to YAML for CEX system
+
+  python _tools/cex_compile.py N02_marketing/output/component_name.md
+
+
+  # Validation pipeline
+
+  python _tools/cex_doctor.py  # Health check
+
+  lighthouse component_name.html --only=performance,accessibility'
+handoff_to_n05: "For deployment, N02 hands off validated HTML to N05 (Operations) with:\n- Lighthouse audit results\n- Browser\
+  \ compatibility notes  \n- Responsive breakpoint validation\n- Accessibility compliance certificate"
