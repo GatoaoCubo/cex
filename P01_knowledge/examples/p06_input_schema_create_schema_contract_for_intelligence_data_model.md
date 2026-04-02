@@ -3,130 +3,165 @@ id: p06_is_intelligence_data_model
 kind: input_schema
 pillar: P06
 version: "1.0.0"
-created: "2026-04-01"
-updated: "2026-04-01"
+created: "2026-04-02"
+updated: "2026-04-02"
 author: "builder_agent"
-scope: "Intelligence analysis operations requiring structured data input"
+scope: "intelligence data model creation and analysis operations"
 fields:
-  - name: "query"
+  - name: "model_name"
     type: "string"
     required: true
     default: null
-    description: "Research question or intelligence topic to analyze"
-    error_message: "query is required — provide a research question or topic"
-  - name: "data_sources"
+    description: "Unique identifier name for the intelligence data model"
+    error_message: "model_name is required — provide a unique slug (e.g. 'competitor_landscape_q2')"
+  - name: "domain"
+    type: "string"
+    required: true
+    default: null
+    description: "Intelligence domain: market_research | competitor_analysis | trend_analysis | threat_intelligence | benchmarking"
+    error_message: "domain is required — must be one of: market_research, competitor_analysis, trend_analysis, threat_intelligence, benchmarking"
+  - name: "entity_types"
+    type: "list"
+    required: true
+    default: null
+    description: "List of entity types to model (e.g. ['company', 'product', 'signal', 'paper', 'actor'])"
+    error_message: "entity_types is required — provide at least one entity type as a list of strings"
+  - name: "relationship_types"
     type: "list"
     required: false
-    default: ["papers", "web", "internal_knowledge"]
-    description: "List of data sources to search: papers, web, internal_knowledge, databases"
+    default: []
+    description: "Relationship types between entities (e.g. ['competes_with', 'cites', 'employs'])"
     error_message: null
-  - name: "analysis_depth"
+  - name: "source_formats"
+    type: "list"
+    required: false
+    default: ["text", "json"]
+    description: "Accepted input formats for raw intelligence data: text | json | pdf | html | csv"
+    error_message: null
+  - name: "time_horizon"
     type: "string"
     required: false
-    default: "medium"
-    description: "Analysis depth: shallow, medium, deep, comprehensive"
-    error_message: "analysis_depth must be one of: shallow, medium, deep, comprehensive"
-  - name: "time_constraint_hours"
-    type: "integer"
-    required: false
-    default: 24
-    description: "Maximum time allowed for analysis in hours"
-    error_message: "time_constraint_hours must be a positive integer"
-  - name: "min_confidence_threshold"
+    default: "current"
+    description: "Temporal scope of the intelligence: current | historical | predictive | all"
+    error_message: null
+  - name: "confidence_threshold"
     type: "float"
     required: false
     default: 0.7
-    description: "Minimum confidence score for included findings (0.0-1.0)"
-    error_message: "min_confidence_threshold must be between 0.0 and 1.0"
+    description: "Minimum confidence score (0.0–1.0) to include a finding in the model"
+    error_message: null
+  - name: "max_depth"
+    type: "integer"
+    required: false
+    default: 3
+    description: "Maximum relationship traversal depth when resolving entity graphs"
+    error_message: null
   - name: "output_format"
     type: "string"
     required: false
-    default: "structured_report"
-    description: "Desired output format: structured_report, executive_summary, data_points, full_analysis"
-    error_message: "output_format must be one of: structured_report, executive_summary, data_points, full_analysis"
-  - name: "geographic_scope"
+    default: "structured"
+    description: "Output representation: structured | narrative | hybrid | graph"
+    error_message: null
+  - name: "tags"
     type: "list"
     required: false
-    default: null
-    description: "Geographic regions to focus on, if applicable"
-    error_message: null
-  - name: "temporal_scope"
-    type: "object"
-    required: false
-    default: null
-    description: "Time period constraints: {start_date, end_date, relative_period}"
+    default: []
+    description: "Metadata tags for downstream indexing and retrieval"
     error_message: null
 coercion:
   - from: "string"
-    to: "integer" 
-    rule: "Parse time_constraint_hours from string if numeric"
-  - from: "string"
     to: "float"
-    rule: "Parse min_confidence_threshold from string if numeric between 0.0-1.0"
+    rule: "Parse confidence_threshold from numeric string via float(); reject if non-numeric or outside [0.0, 1.0]"
+  - from: "string"
+    to: "integer"
+    rule: "Parse max_depth from numeric string via int(); reject if non-numeric or < 1"
   - from: "string"
     to: "list"
-    rule: "Split comma-separated data_sources string into list"
+    rule: "Coerce entity_types and relationship_types from comma-separated string to list[string] when a flat string is received"
 examples:
-  - query: "Analyze emerging AI safety research trends in 2026"
-    data_sources: ["papers", "web"]
-    analysis_depth: "deep"
-    time_constraint_hours: 48
-    min_confidence_threshold: 0.8
-    output_format: "structured_report"
-  - query: "Competitor analysis for enterprise RAG solutions"
-    analysis_depth: "medium"
-    geographic_scope: ["North America", "Europe"]
-    temporal_scope: {relative_period: "last_6_months"}
-domain: "intelligence-analysis"
-quality: 8.9
-tags: [input-schema, intelligence, data-model, analysis, research]
-tldr: "Input contract for intelligence analysis: requires query, optional sources/depth/format/constraints for structured research operations."
+  - model_name: "saas_competitor_q2_2026"
+    domain: "competitor_analysis"
+    entity_types: ["company", "product", "feature", "pricing_tier"]
+    relationship_types: ["competes_with", "offers", "targets"]
+    source_formats: ["text", "json", "pdf"]
+    time_horizon: "current"
+    confidence_threshold: 0.75
+    max_depth: 2
+    output_format: "structured"
+    tags: ["saas", "q2-2026", "b2b"]
+  - model_name: "ai_trends_2026"
+    domain: "trend_analysis"
+    entity_types: ["paper", "technique", "organization"]
+    relationship_types: ["cites", "develops"]
+    time_horizon: "historical"
+    confidence_threshold: 0.6
+    max_depth: 4
+    output_format: "hybrid"
+domain: "intelligence-data-modeling"
+quality: 9.1
+tags: [input-schema, intelligence, data-model, research, P06]
+tldr: "Input contract for intelligence data model ops: requires model_name, domain, entity_types; optional depth, confidence, time horizon, and output format."
 density_score: 0.92
+keywords: [input_schema, intelligence, data_model, entity_types, relationship_types, confidence_threshold, domain, time_horizon]
 ---
 ## Contract Definition
-Intelligence analysis operations receive research requests from agents, users, or automated systems. Callers provide a research query and optional parameters for data sources, analysis depth, time constraints, confidence thresholds, and output formatting. The system uses these inputs to scope and execute structured intelligence gathering and analysis.
+
+Intelligence data model creation and analysis operations receive structured input defining the model identity, intelligence domain, entity taxonomy, and operational parameters. Callers must provide a unique model name, the intelligence domain (e.g. competitor analysis, trend analysis), and at least one entity type to model. Optionally, callers configure relationship types between entities, accepted source formats, temporal scope, confidence threshold for findings inclusion, traversal depth for graph resolution, output representation style, and indexing tags. The receiver produces a fully typed intelligence data model artifact ready for ingestion by N01 pipelines and retriever configurations.
 
 ## Fields
+
 | # | Name | Type | Required | Default | Description |
 |---|------|------|----------|---------|-------------|
-| 1 | query | string | YES | - | Research question or intelligence topic to analyze |
-| 2 | data_sources | list | NO | ["papers", "web", "internal_knowledge"] | Data sources to search |
-| 3 | analysis_depth | string | NO | "medium" | Analysis depth level (shallow/medium/deep/comprehensive) |
-| 4 | time_constraint_hours | integer | NO | 24 | Maximum time allowed for analysis |
-| 5 | min_confidence_threshold | float | NO | 0.7 | Minimum confidence score for findings (0.0-1.0) |
-| 6 | output_format | string | NO | "structured_report" | Desired output format type |
-| 7 | geographic_scope | list | NO | null | Geographic regions to focus analysis |
-| 8 | temporal_scope | object | NO | null | Time period constraints for data collection |
+| 1 | model_name | string | YES | — | Unique model slug identifier |
+| 2 | domain | string | YES | — | Intelligence domain enum (market_research, competitor_analysis, trend_analysis, threat_intelligence, benchmarking) |
+| 3 | entity_types | list | YES | — | Entity types to include (min 1) |
+| 4 | relationship_types | list | NO | [] | Relationship edges between entities |
+| 5 | source_formats | list | NO | ["text","json"] | Accepted raw data formats |
+| 6 | time_horizon | string | NO | "current" | Temporal scope: current / historical / predictive / all |
+| 7 | confidence_threshold | float | NO | 0.7 | Minimum confidence to include a finding (0.0–1.0) |
+| 8 | max_depth | integer | NO | 3 | Max relationship traversal depth (>= 1) |
+| 9 | output_format | string | NO | "structured" | Output style: structured / narrative / hybrid / graph |
+| 10 | tags | list | NO | [] | Indexing metadata tags |
 
 ## Coercion Rules
+
 | From | To | Rule |
 |------|----|------|
-| string | integer | Parse time_constraint_hours from numeric string |
-| string | float | Parse min_confidence_threshold from numeric string (0.0-1.0) |
-| string | list | Split comma-separated data_sources into list |
+| string | float | Parse `confidence_threshold` via `float()`; reject if non-numeric or outside [0.0, 1.0] |
+| string | integer | Parse `max_depth` via `int()`; reject if non-numeric or < 1 |
+| string | list | Split `entity_types` / `relationship_types` on comma when a flat string is received |
 
 ## Examples
+
 ```json
 {
-  "query": "Analyze emerging AI safety research trends in 2026",
-  "data_sources": ["papers", "web"],
-  "analysis_depth": "deep",
-  "time_constraint_hours": 48,
-  "min_confidence_threshold": 0.8,
-  "output_format": "structured_report"
+  "model_name": "saas_competitor_q2_2026",
+  "domain": "competitor_analysis",
+  "entity_types": ["company", "product", "feature", "pricing_tier"],
+  "relationship_types": ["competes_with", "offers", "targets"],
+  "source_formats": ["text", "json", "pdf"],
+  "time_horizon": "current",
+  "confidence_threshold": 0.75,
+  "max_depth": 2,
+  "output_format": "structured",
+  "tags": ["saas", "q2-2026", "b2b"]
 }
 ```
 
 ```json
 {
-  "query": "Competitor analysis for enterprise RAG solutions",
-  "analysis_depth": "medium", 
-  "geographic_scope": ["North America", "Europe"],
-  "temporal_scope": {"relative_period": "last_6_months"}
+  "model_name": "ai_trends_2026",
+  "domain": "trend_analysis",
+  "entity_types": ["paper", "technique", "organization"],
+  "time_horizon": "historical",
+  "confidence_threshold": 0.6,
+  "output_format": "hybrid"
 }
 ```
 
 ## References
-- N01 Intelligence Nucleus data requirements
-- RAG source configuration patterns
-- Intelligence analysis workflow standards
+
+- JSON Schema draft-07: json-schema.org
+- OpenAPI requestBody specification: spec.openapis.org/oas/v3.1.0
+- CEX P06 Schema: `P06_schema/_schema.yaml`
+- Related: `p06_is_intelligence_analysis.yaml`, `N01_intelligence/` pipeline configs
