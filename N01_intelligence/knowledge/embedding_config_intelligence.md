@@ -15,7 +15,27 @@ tldr: "Specifies the advanced embedding and chunking strategy for the N01 RAG kn
 ## 1. PURPOSE
 This document defines the vector embedding model and the intelligent chunking strategy for all documents ingested into the **N01 Research & Intelligence Nucleus** knowledge base. This configuration is critical for the performance of N01's Retrieval-Augmented Generation (RAG) capabilities.
 
-## 2. EMBEDDING MODEL SPECIFICATION
+## 2. SELECTION CRITERIA
+
+### **Use This Configuration When:**
+- Processing academic papers, research reports, or technical documentation
+- Document corpus contains 1,000+ documents with varied structures
+- Users need high-precision retrieval for complex, multi-part questions
+- Budget allows for 1024-dimensional embeddings (~4x cost vs 256-dim)
+- Documents average 5+ pages with clear section boundaries
+
+### **Use Alternative Configuration When:**
+- Processing simple FAQs, marketing content, or blog posts → Use `text-embedding-basic-512`
+- Document corpus < 500 documents → Use simpler fixed-chunk strategy
+- Budget-constrained projects → Use `text-embedding-ada-002` (256-dim)
+- Real-time applications requiring <50ms retrieval → Use smaller index
+
+### **Anti-Patterns:**
+- Using semantic chunking on unstructured text (chats, transcripts) → Causes poor boundaries
+- Applying 15% overlap to already-short documents → Creates redundant, confusing chunks
+- Using this config for non-English content → Model optimized for English research
+
+## 3. EMBEDDING MODEL SPECIFICATION
 The model is chosen for its state-of-the-art performance on technical and academic corpora.
 
 - **Model Provider**: `Google`
@@ -24,7 +44,7 @@ The model is chosen for its state-of-the-art performance on technical and academ
 - **Distance Metric**: `Cosine Similarity` (Standard for normalized, high-dimensional vectors)
 - **Normalization**: `Required (L2 Norm)`
 
-## 3. CHUNKING STRATEGY: HIERARCHICAL & SEMANTIC
+## 4. CHUNKING STRATEGY: HIERARCHICAL & SEMANTIC
 A static chunk size is suboptimal for the varied documents N01 processes. We employ a hierarchical, content-aware chunking strategy.
 
 ### **Level 1: Document Pre-processing**
@@ -55,7 +75,7 @@ Each chunk vector is stored with a rich set of metadata to enable powerful hybri
 - **`chunk_summary`**: A concise, AI-generated summary of the chunk's content (approx. 1-2 sentences). This can be used for reranking or previewing search results.
 - **`keywords`**: AI-generated keywords for the chunk's specific content.
 
-## 4. VECTOR DATABASE CONFIGURATION
+## 5. VECTOR DATABASE CONFIGURATION
 - **Development/Staging**: `FAISS` (local, for rapid iteration)
 - **Production**: `Weaviate` or `Pinecone` (Managed, for scalability and hybrid search capabilities)
 - **Index Type**: HNSW (Hierarchical Navigable Small World) for a balance of speed and recall accuracy.
