@@ -1,76 +1,101 @@
 ---
-id: p12_wf_brand_pipeline_complete
+id: p12_wf_brand_pipeline
 kind: workflow
 pillar: P12
 version: "1.0.0"
 created: "2026-04-02"
 updated: "2026-04-02"
 author: "workflow-builder"
-title: "Complete Brand Pipeline Workflow"
-steps_count: 4
+title: "Brand Pipeline Workflow"
+steps_count: 5
 execution: mixed
-agent_nodes: [shaka, edison, stella, maya]
+agent_nodes: [shaka, edison, maya, n02_marketing, stella]
 timeout: 7200
 retry_policy: per_step
 depends_on: []
-signals: [brand_discovery_complete, brand_identity_complete, assets_complete, pipeline_complete, error]
-spawn_configs: [p12_spawn_shaka_brand_research, p12_spawn_edison_brand_build, p12_spawn_maya_brand_assets, p12_spawn_stella_orchestrator]
+signals: [complete, error]
+spawn_configs: [p12_spawn_shaka_brand_discovery, p12_spawn_edison_identity, p12_spawn_maya_assets, p12_spawn_n02_content, p12_spawn_stella_deploy]
 domain: "brand"
-quality: 8.9
-tags: [workflow, brand, pipeline, multi-agent, orchestration]
-tldr: "4-step mixed workflow: brand discovery, identity creation, asset generation, and deployment orchestration with parallel asset production"
-density_score: 0.92
+quality: 9.0
+tags: [workflow, brand, pipeline, multi-agent]
+tldr: "5-step mixed workflow: shaka discovers brand, edison builds identity, maya+n02 generate assets+content in parallel, stella consolidates and deploys"
+density_score: 0.91
 ---
 ## Purpose
-Orchestrates end-to-end brand pipeline from initial discovery through final deployment. Shaka researches brand positioning and competitor landscape, Edison builds core brand identity artifacts, Maya generates visual and content assets in parallel, and Stella consolidates everything into deployable brand system. Wave 1: discovery, Wave 2: identity + research parallel, Wave 3: asset generation, Wave 4: deployment.
+Orchestrates end-to-end brand pipeline from discovery through deployment. Wave 1: shaka conducts brand discovery and market research. Wave 2: edison builds core brand identity artifacts from discovery outputs. Wave 3: maya generates visual assets and n02_marketing produces copy in parallel (both depend on Wave 2, independent of each other). Wave 4: stella consolidates all brand outputs, validates consistency, and deploys.
 
 ## Steps
 
 ### Step 1: Brand Discovery [shaka]
 - **Agent**: shaka (sonnet research specialist)
-- **Action**: Research target market, competitor landscape, and brand positioning opportunities
-- **Input**: brand brief from handoff file, market research requirements
-- **Output**: brand discovery report with 5-7 knowledge cards committed to records/brand/
-- **Signal**: brand_discovery_complete with market insights score
-- **Depends on**: none (initial step)
+- **Action**: Research target market, competitive landscape, and brand positioning opportunities
+- **Input**: brand brief from handoff file, discovery questionnaire responses
+- **Output**: brand discovery report with 5–7 knowledge cards committed to `records/brand/`
+- **Signal**: shaka_complete
+- **Depends on**: none (Wave 1)
+- **On failure**: retry (max 2), then abort
+- **Timeout**: 1800s
 
-### Step 2: Brand Identity Creation [edison]
-- **Agent**: edison (opus builder specialist)
-- **Action**: Create core brand identity system including values, voice, and positioning
-- **Input**: brand discovery insights from Step 1, brand requirements
-- **Output**: brand_config.yaml, brand identity framework, voice guidelines
-- **Signal**: brand_identity_complete with identity coherence score
-- **Depends on**: Step 1
+### Step 2: Identity Creation [edison]
+- **Agent**: edison (opus builder)
+- **Action**: Build core brand identity artifacts — brand_config.yaml, archetype selection, voice guide
+- **Input**: discovery report and knowledge cards from Step 1
+- **Output**: `brand_config.yaml`, `brand_book.md`, `voice_guide.md` committed to `records/brand/`
+- **Signal**: edison_complete
+- **Depends on**: Step 1 (Wave 2)
+- **On failure**: retry (max 2), then abort
+- **Timeout**: 1800s
 
 ### Step 3: Visual Asset Generation [maya]
-- **Agent**: maya (creative asset specialist)
-- **Action**: Generate brand visual assets including logos, color palettes, and templates
-- **Input**: brand identity framework from Step 2
-- **Output**: visual brand assets committed to assets/brand/, style guide document
-- **Signal**: assets_complete with visual consistency score
-- **Depends on**: Step 2
+- **Agent**: maya (asset specialist)
+- **Action**: Generate visual assets — logo concepts, color palette, typography system, design tokens
+- **Input**: `brand_config.yaml` and `brand_book.md` from Step 2
+- **Output**: visual asset manifest and design tokens committed to `records/brand/assets/`
+- **Signal**: maya_complete
+- **Depends on**: Step 2 (Wave 3 — parallel with Step 4)
+- **On failure**: skip, flag for manual review
+- **Timeout**: 1800s
 
-### Step 4: Pipeline Deployment [stella]
+### Step 4: Content Creation [n02_marketing]
+- **Agent**: n02_marketing (sonnet copywriter)
+- **Action**: Produce brand copy — tagline, hero text, CTAs, email sequence starters
+- **Input**: `brand_config.yaml` and `voice_guide.md` from Step 2
+- **Output**: `copy_kit.md` with tagline, headlines, and CTAs committed to `records/brand/copy/`
+- **Signal**: n02_complete
+- **Depends on**: Step 2 (Wave 3 — parallel with Step 3)
+- **On failure**: retry (max 1), then skip
+- **Timeout**: 1200s
+
+### Step 5: Deployment Consolidation [stella]
 - **Agent**: stella (orchestrator)
-- **Action**: Deploy brand system across all nuclei, validate propagation, archive handoffs
-- **Input**: all outputs from Steps 1-3, deployment checklist
-- **Output**: deployed brand system, propagated configs, consolidated git commit
-- **Signal**: pipeline_complete with deployment success score
-- **Depends on**: Steps 1, 2, 3
+- **Action**: Review all brand outputs, validate brand_config consistency, archive handoffs, push release tag
+- **Input**: maya_complete + n02_complete signals, git log, all brand artifacts
+- **Output**: consolidated brand release commit with version tag in `records/brand/`
+- **Signal**: workflow_complete
+- **Depends on**: Steps 3, 4 (Wave 4)
+- **On failure**: abort, emit workflow_error
+- **Timeout**: 600s
 
 ## Dependencies
-- Brand brief handoff file must exist with target market and business model
-- All referenced spawn_configs must be valid and tested
-- Brand directory structure must be initialized (assets/brand/, records/brand/)
-- Git repository must be clean with no uncommitted brand-related changes
+- Brand brief or completed discovery questionnaire must exist before dispatch
+- spawn_configs for all 5 agents must be valid: `p12_spawn_shaka_brand_discovery`, `p12_spawn_edison_identity`, `p12_spawn_maya_assets`, `p12_spawn_n02_content`, `p12_spawn_stella_deploy`
+- `brand_config.yaml` schema must be present in `_tools/` for Step 2 validation
+- `records/brand/` directory must exist and be writable
 
 ## Signals
-- **On step complete**: {agent}_complete signal emitted with quality score (see signal-builder)
-- **On workflow complete**: pipeline_complete signal with aggregate brand coherence score
-- **On error**: {agent}_error signal, retry per step (max 2), escalate to orchestrator if persistent
-- **Special signals**: brand_discovery_complete triggers parallel identity work, assets_complete triggers deployment validation
+- **shaka_complete**: emitted after discovery report and knowledge cards are committed (Step 1 exit)
+- **edison_complete**: emitted after brand_config.yaml, brand_book.md, and voice_guide.md are committed (Step 2 exit)
+- **maya_complete**: emitted after visual asset manifest is committed (Step 3 exit)
+- **n02_complete**: emitted after copy_kit.md is committed (Step 4 exit)
+- **workflow_complete**: emitted by stella after release tag is pushed; includes aggregate quality score
+- **workflow_error**: emitted if Step 5 aborts or if two or more steps fail; triggers N07 escalation
+
+## Rollback
+- Steps 1–4: delete committed artifacts from `records/brand/` and revert commits
+- Step 5: delete release tag (`git tag -d`), revert consolidation commit
+- Full rollback order: 5 → 4+3 (parallel revert) → 2 → 1
 
 ## References
-- Brand discovery methodology: P01_knowledge/library/kind/kc_brand_research.md
-- Visual asset standards: P05_orchestration/compiled/formatter_brand_assets.yaml
-- Deployment checklist: P12_orchestration/procedures/brand_deployment_checklist.md
+- signal-builder: naming conventions and emission protocol for all signals listed above
+- spawn-config-builder: agent launch parameters referenced in `spawn_configs`
+- `brand_config.yaml`: schema for brand identity extraction (Step 2 primary output)
