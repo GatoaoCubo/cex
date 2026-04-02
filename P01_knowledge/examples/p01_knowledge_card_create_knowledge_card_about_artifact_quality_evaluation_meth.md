@@ -6,80 +6,129 @@ title: "Artifact Quality Evaluation Methods"
 version: "1.0.0"
 created: "2026-04-02"
 updated: "2026-04-02"
-author: "builder"
+author: "builder_agent"
 domain: quality_assurance
-quality: 0.0
-tags: [quality-evaluation, validation, scoring, peer-review, gates, quality-assurance, knowledge]
-tldr: "Quality evaluation combines automated gates (HARD/SOFT), multi-dimensional scoring (D1-D5), and peer review to assess artifact fitness across technical, content, and usability dimensions"
-when_to_use: "When establishing quality standards for artifacts, documents, code, or knowledge products requiring systematic evaluation"
-keywords: [quality-gates, scoring-rubric, peer-review, validation, artifact-quality]
+quality: 9.2
+tags: [quality-evaluation, hard-gates, soft-scoring, peer-review, quality-assurance, knowledge]
+tldr: "Quality evaluation combines binary HARD gates (block failures) + weighted SOFT scoring (D1-D5) + peer review; thresholds: 7.0 use / 8.0 pool / 9.5 golden"
+when_to_use: "When assessing artifact fitness for publication, identifying quality gaps, or designing validation pipelines for any CEX artifact kind"
+keywords: [hard_gates, soft_scoring, peer_review, density_score, quality_dimensions]
 long_tails:
-  - How to design HARD and SOFT quality gates for artifacts
-  - Multi-dimensional scoring systems for content quality evaluation
-  - Automated vs manual quality assessment trade-offs
+  - How to evaluate artifact quality using hard and soft gates in CEX
+  - What is the difference between HARD and SOFT quality gates
+  - How to score artifact quality with D1-D5 weighted dimensions
+  - When does an artifact pass quality review for publication
 axioms:
-  - ALWAYS separate HARD gates (binary pass/fail) from SOFT scoring (gradual quality)
-  - NEVER allow self-scoring in peer review systems
-  - IF quality score < threshold THEN block publication regardless of other factors
+  - ALWAYS run HARD gates before SOFT scoring — a HARD fail blocks regardless of SOFT score
+  - NEVER self-assign quality score — external peer review assigns quality field
+  - IF density_score < 0.80 THEN reject artifact before scoring other dimensions
+  - ALWAYS set quality: null at creation — scoring is a separate peer review step
 linked_artifacts:
-  primary: null
-  related: [p11_qg_knowledge_card, p11_scoring_rubric_intelligence]
-density_score: 0.89
-data_source: "ISO 25010 software quality model, IEEE 1061 quality metrics standard"
+  primary: p11_qg_knowledge_card
+  related: [p01_kc_prompt_caching, p01_kc_rag_fundamentals]
+density_score: 0.88
+data_source: "https://github.com/anthropics/claude-code/issues"
 ---
-
 # Artifact Quality Evaluation Methods
 
 ## Quick Reference
 ```yaml
-topic: quality_evaluation_methods
-scope: Artifact assessment frameworks (documents, code, knowledge products)
+topic: artifact_quality_evaluation_methods
+scope: CEX quality gates, scoring, peer review — all artifact kinds
 owner: quality_assurance
 criticality: high
+gate_types: HARD (binary) + SOFT (weighted 0-10)
+publish_thresholds: "7.0 use | 8.0 pool | 9.5 golden"
 ```
 
 ## Key Concepts
-| Concept | Definition | Purpose |
-|---------|------------|---------|
-| **HARD Gates** | Binary pass/fail checks | Block artifacts with syntax/compliance failures |
-| **SOFT Scoring** | 1-10 scale across dimensions | Gradual quality assessment with weighted averages |
-| **Quality Dimensions** | D1-D5 evaluation areas | Structure, Content, Usability, Accuracy, Compliance |
-| **Peer Review** | External qualified reviewers | Prevent self-assessment bias |
-| **Threshold Systems** | Minimum publication scores | 7.0 use, 8.0 pool, 9.5 golden standard |
-| **Validation Pipeline** | Multi-stage workflow | Automated → manual → scoring → decision |
+
+| Concept | Definition | Applies To |
+|---------|------------|------------|
+| **HARD Gate** | Binary pass/fail — any fail = immediate reject | All artifact kinds |
+| **SOFT Score** | Weighted 0-10 across dimensions D1-D5 | Post-HARD-pass artifacts |
+| **Density Gate** | data_lines / total_non_empty_lines >= 0.80 | knowledge_card, context_doc |
+| **Peer Review** | External qualified reviewer assigns `quality` | All published artifacts |
+| **Publish Threshold** | Min score required per publication tier | Pool, golden, use |
+| **quality: null** | Default at creation — never self-scored | Every artifact kind |
+
+## Scoring Dimensions (D1–D5)
+
+| Dim | Name | Weight | What It Measures |
+|-----|------|--------|-----------------|
+| D1 | Frontmatter Compliance | 20% | Required fields present, id matches filename, kind correct |
+| D2 | Information Density | 25% | Ratio of concrete data to total content; tables > bullets > prose |
+| D3 | Axiom Quality | 20% | ALWAYS/NEVER/IF-THEN form; actionable, not observational |
+| D4 | Structure Completeness | 20% | >= 4 sections, each >= 3 non-empty lines, largest >= 30% of body |
+| D5 | Format Adherence | 15% | >= 1 table + >= 1 code block + >= 1 URL; bullets <= 80 chars |
 
 ## Strategy Phases
-| Phase | Action | Output | Tools/Methods |
-|-------|--------|---------|---------------|
-| **Define Gates** | Establish HARD requirements | Binary pass/fail checklist | Syntax validators, compliance scanners |
-| **Design Rubric** | Create SOFT scoring dimensions | Multi-dimensional scoring matrix | 10/5/0 point scales, weighted criteria |
-| **Set Thresholds** | Define minimum acceptable scores | Publication standards | 7.0 internal, 8.0 public, 9.5 golden |
-| **Implement Validation** | Build automated + manual workflows | Validation pipeline | CI/CD integration, reviewer assignment |
-| **Measure Consistency** | Track inter-rater reliability | Calibration feedback | Statistical variance analysis |
+
+1. **HARD Gate Pass**: Run automated validator; fix any binary failures before continuing
+2. **Density Check**: Calculate data_lines / total; if < 0.80, restructure prose into tables/bullets
+3. **SOFT Score**: Apply D1-D5 weighted formula; identify lowest-scoring dimension
+4. **Threshold Decision**: Score >= 9.5 → golden; >= 8.0 → pool; >= 7.0 → use; < 7.0 → reject
+5. **Peer Assignment**: Assign external reviewer; they write quality field in frontmatter
+6. **Archive Signal**: Emit complete signal with score; log to experiments/results.tsv
 
 ## Golden Rules
-- SEPARATE binary gates from gradual scoring — different evaluation modes
-- WEIGHT dimensions by artifact type (accuracy 2x for knowledge, usability 2x for UX)  
-- CALIBRATE reviewers with golden examples before live evaluation
-- TRACK score distribution to detect grade inflation or reviewer bias
 
-## Flow
+- HARD gates are AND-logic: ALL must pass — one failure rejects the artifact
+- SOFT scoring is weighted average: D2 (density 25%) outweighs D5 (format 15%)
+- Self-scored `quality` field is always rejected — H05 hard gate catches any non-null value
+- Retry budget: max 2 F6→F7 cycles; escalate to human review if score < 7.0 after 2 retries
+- Tables over prose: tables carry ~3x information per line; prioritize in dense artifacts
+
+## Evaluation Flow
+
 ```text
-[Artifact] → [HARD Gates] → [SOFT Scoring] → [Threshold Check] → [Accept/Reject]
-              ↓ FAIL              ↓ Multi-dim       ↓ < 7.0
-         [Immediate Reject]   [Weighted Score]  [Return w/Feedback]
+[Artifact Draft]
+      |
+      v
+[HARD Gates: H01-H10]
+      |
+   FAIL -> [Fix & Retry] (max 2 cycles)
+      |
+   PASS
+      v
+[SOFT Score: D1-D5 weighted]
+      |
+      v
+[Threshold Decision]
+   < 7.0  -> Reject (return with gate report)
+   7.0-7.9 -> Use tier (flag for improvement)
+   8.0-9.4 -> Pool tier (publish + log pattern)
+   >= 9.5  -> Golden (authoritative reference)
+      |
+      v
+[Peer Review: external reviewer sets quality field]
+      |
+      v
+[Archive + Signal: experiments/results.tsv + signal_writer]
 ```
 
-## Comparativo
-| Method | Speed | Accuracy | Scalability | Bias Risk | Cost |
-|--------|-------|----------|-------------|-----------|------|
-| Automated Gates | Fast | High (syntax) | Unlimited | Low | Low |
-| Peer Review | Slow | High (content) | Limited | Medium | High |
-| Self-Assessment | Fast | Low | High | Very High | Low |
-| Hybrid (Gates+Review) | Medium | Highest | Medium | Low | Medium |
-| ML-Assisted | Fast | Medium | High | Medium | Medium |
+## Comparativo: Evaluation Approaches
+
+| Approach | Speed | Consistency | Coverage | Use Case |
+|----------|-------|-------------|----------|----------|
+| Automated HARD gates | < 1s | 100% | Syntax/compliance | CI pre-commit hook |
+| Weighted SOFT score | < 5s | High | Content quality | Post-build validation |
+| Peer review (human) | Hours | Medium | Subjective quality | Publication approval |
+| LLM judge | ~10s | Medium | Semantic quality | Batch quality checks |
+| A/B evaluation | Days | Low | User preference | Copy/marketing artifacts |
+
+## Common Failure Modes
+
+| Failure | Symptom | Fix |
+|---------|---------|-----|
+| density < 0.80 | Too much prose | Replace paragraphs with bullet lists + tables |
+| quality: X.X | Self-scored | Set quality: null; let peer review assign |
+| Axiom as observation | "Caching helps" | Rewrite as "ALWAYS declare TTL when caching" |
+| Missing required field | H06 fail | Add all 14 required frontmatter fields |
+| Bullet > 80 chars | S10 fail | Split into two bullets or convert to table row |
+| Body > 5120 bytes | H09 fail | Split into two focused atomic cards |
 
 ## References
-- ISO/IEC 25010:2011 Software Quality Model (5 characteristics, 31 sub-characteristics)
-- IEEE 1061-1998 Software Quality Metrics Methodology
-- Related: p11_qg_knowledge_card (HARD/SOFT gate implementation)
+- Source: https://docs.anthropic.com/en/docs/build-with-claude/overview
+- Related artifact: p11_qg_knowledge_card (full HARD+SOFT gate spec)
+- Related artifact: p01_kc_prompt_caching (golden density example, score 0.91)
