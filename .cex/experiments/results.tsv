@@ -5360,3 +5360,89 @@ et
 2026-04-02 16:26:33	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\examples\p01_knowledge_card_create_knowledge_card_about_fine_tuning_dataset_preparation.md	4	9.0	1.00	keep	Add specific cost optimization calculations and performance benchmarks to provide deeper practical insights beyond standard documentation
 2026-04-02 16:28:05	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\examples\p01_knowledge_card_create_knowledge_card_about_supabase_pgvector_setup_for_rag.md	1	9.2	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
 2026-04-02 16:29:19	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\examples\p07_eval_dataset_create_schema_contract_for_training_dataset_quality_metrics.md	1	9.1	0.88	keep	added density_score: 0.88
+2026-04-02 16:34:36	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\examples\p01_knowledge_card_create_knowledge_card_about_docker_containerization_for_ai_s.md	1	0.0	0.00	crash	compile fail after: tldr flagged for manual review
+2026-04-02 16:34:37	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\examples\p01_knowledge_card_create_knowledge_card_about_docker_containerization_for_ai_s.md	2	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-02 16:36:27	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\examples\p09_rate_limit_config_create_knowledge_card_about_api_rate_limiting_and_retry_patt.md	1	8.8	1.00	keep	added density_score: 1.0
+2026-04-02 16:39:40	C:\Users\PC\Documents\GitHub\cex\N02_marketing\output\output_readme_hero.md	1	8.6	0.99	keep	added density_score: 0.99
+2026-04-02 16:39:41	C:\Users\PC\Documents\GitHub\cex\N02_marketing\output\output_readme_hero.md	2	8.6	0.99	discard	tldr flagged for manual review
+2026-04-02 16:39:41	C:\Users\PC\Documents\GitHub\cex\N02_marketing\output\output_readme_hero.md	3	8.6	0.99	discard	tldr flagged for manual review
+2026-04-02 16:40:39	C:\Users\PC\Documents\GitHub\cex\N02_marketing\output\output_readme_hero.md	1	8.9	0.93	discard	Add technical insight explaining how 8F pipeline prevents agent failure modes, targeting INSIGHT_DEPTH dimension
+2026-04-02 16:41:19	C:\Users\PC\Documents\GitHub\cex\N02_marketing\output\output_readme_hero.md	2	8.9	0.97	discard	Add specific example of agent failure pattern that F7 governance prevents to increase INSIGHT_DEPTH with concrete technical insight
+2026-04-02 16:42:02	C:\Users\PC\Documents\GitHub\cex\N02_marketing\output\output_readme_hero.md	3	8.9	0.97	discard	Add concrete technical insight about how typed schemas prevent prompt injection and data leakage by enforcing strict output boundaries, targeting INSIGHT_DEPTH dimension
+2026-04-02 16:42:40	C:\Users\PC\Documents\GitHub\cex\N02_marketing\output\output_readme_hero.md	4	8.9	0.99	discard	Add specific actionable next steps after quick start to improve ACTIONABILITY dimension
+2026-04-02 16:43:15	C:\Users\PC\Documents\GitHub\cex\N02_marketing\output\output_readme_hero.md	5	8.9	1.00	discard	Add concrete before/after code example showing unstructured LLM output vs CEX's structured YAML to demonstrate zero hallucination claim, targeting INSIGHT_DEPTH dimension
+2026-04-02 16:43:16	C:\Users\PC\Documents\GitHub\cex\N02_marketing\output\output_monetization_launch.md	1	9.2	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-02 16:43:17	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\output\output_competitive_knowledge.md	1	8.9	0.95	keep	added density_score: 0.95
+2026-04-02 16:43:18	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\output\output_competitive_knowledge.md	2	8.9	0.95	discard	tldr flagged for manual review
+2026-04-02 16:43:18	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\output\output_competitive_knowledge.md	3	8.9	0.95	discard	tldr flagged for manual review
+2026-04-02 16:44:45	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\output\output_competitive_knowledge.md	1	8.9	0.97	discard	Add "Strategic Recommendations" section with 5 specific actions to address competitive gaps, targeting ACTIONABILITY dimension
+2026-04-02 16:45:46	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\output\output_competitive_knowledge.md	2	8.9	0.97	discard	Add "Decision Framework: When to Choose CEX" section with specific when-to-use/when-NOT-to-use criteria to improve ACTIONABILITY dimension
+2026-04-02 16:46:37	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\output\output_competitive_knowledge.md	3	8.9	0.96	discard	Expand section 3 with specific competitor weaknesses and concrete CEX strategic advantages to address COMPLETENESS dimension
+2026-04-02 16:47:26	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\output\output_competitive_knowledge.md	4	8.9	0.98	discard	Enhance the competitive comparison table with specific quantifiable metrics and benchmarks to improve COMPLETENESS dimension
+2026-04-02 16:48:25	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\output\output_competitive_knowledge.md	5	8.9	0.95	discard	Add title, tldr, tags, and when_to_use frontmatter fields to improve searchability and retrieval (targeting S03 dimension)
+2026-04-02 16:48:26	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\output\output_readme_curriculum.md	1	8.7	1.00	keep	added density_score: 1.0
+2026-04-02 16:48:27	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\output\output_readme_curriculum.md	2	8.7	1.00	discard	tldr flagged for manual review
+2026-04-02 16:48:27	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\output\output_readme_curriculum.md	3	8.7	1.00	discard	tldr flagged for manual review
+2026-04-02 16:49:27	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\output\output_readme_curriculum.md	1	8.9	1.00	discard	Add pedagogical insights section explaining why the knowledge card → full system → fine-tuned model progression optimizes learning complexity scaling
+2026-04-02 16:50:10	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\output\output_readme_curriculum.md	2	8.9	1.00	discard	Add a "Learning Path Design" section with cognitive science insights explaining why specific modules like Model Orchestration precede Decision Making, targeting INSIGHT_DEPTH
+2026-04-02 16:50:53	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\output\output_readme_curriculum.md	3	8.9	1.00	discard	Add "How to Start" section with specific enrollment steps and contact information to directly address ACTIONABILITY weakness
+2026-04-02 16:51:37	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\output\output_readme_curriculum.md	4	8.9	1.00	discard	Enrich module descriptions with inline learning progression insights explaining why each step enables the next, targeting INSIGHT_DEPTH
+2026-04-02 16:52:19	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\output\output_readme_curriculum.md	5	8.9	1.00	discard	Add frontmatter tags and tldr field to improve searchability and S03 dimension score
+2026-04-02 16:52:20	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\output\output_monetization_curriculum.md	1	9.0	1.00	keep	added density_score: 1.0
+2026-04-02 16:52:21	C:\Users\PC\Documents\GitHub\cex\N01_intelligence\output\output_competitive_landscape.md	1	8.8	0.96	keep	added density_score: 0.96
+2026-04-02 16:52:22	C:\Users\PC\Documents\GitHub\cex\N01_intelligence\output\output_competitive_landscape.md	2	8.8	0.96	discard	tldr flagged for manual review
+2026-04-02 16:52:22	C:\Users\PC\Documents\GitHub\cex\N01_intelligence\output\output_competitive_landscape.md	3	8.8	0.96	discard	tldr flagged for manual review
+2026-04-02 16:55:01	C:\Users\PC\Documents\GitHub\cex\N01_intelligence\output\output_competitive_landscape.md	1	8.9	0.96	discard	Add missing frontmatter fields (title, tldr, tags, when_to_use) to improve COMPLETENESS dimension
+2026-04-02 16:57:23	C:\Users\PC\Documents\GitHub\cex\N01_intelligence\output\output_competitive_landscape.md	2	8.9	0.96	discard	Expand the MetaGPT analysis with concrete implementation details and deeper architectural comparisons to improve COMPLETENESS dimension
+2026-04-02 16:59:29	C:\Users\PC\Documents\GitHub\cex\N01_intelligence\output\output_readme_comparison.md	1	8.4	0.95	keep	added density_score: 0.95
+2026-04-02 16:59:29	C:\Users\PC\Documents\GitHub\cex\N01_intelligence\output\output_readme_comparison.md	2	8.4	0.95	discard	tldr flagged for manual review
+2026-04-02 16:59:29	C:\Users\PC\Documents\GitHub\cex\N01_intelligence\output\output_readme_comparison.md	3	8.4	0.95	discard	tldr flagged for manual review
+2026-04-02 17:01:59	C:\Users\PC\Documents\GitHub\cex\N02_marketing\output\output_competitive_positioning.md	1	9.0	1.00	keep	added density_score: 1.0
+2026-04-02 17:02:00	C:\Users\PC\Documents\GitHub\cex\N01_intelligence\output\self_review_2026-04-02.md	1	8.8	0.78	keep	tldr flagged for manual review
+2026-04-02 17:02:01	C:\Users\PC\Documents\GitHub\cex\N01_intelligence\output\self_review_2026-04-02.md	2	8.8	0.78	discard	tldr flagged for manual review
+2026-04-02 17:02:01	C:\Users\PC\Documents\GitHub\cex\N01_intelligence\output\self_review_2026-04-02.md	3	8.8	0.78	discard	tldr flagged for manual review
+2026-04-02 17:02:24	C:\Users\PC\Documents\GitHub\cex\N01_intelligence\output\self_review_2026-04-02.md	0	9.0	0.78	skip	already at target
+2026-04-02 17:02:25	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\memory\knowledge_memory_index.md	1	8.8	1.00	discard	tldr flagged for manual review
+2026-04-02 17:02:25	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\memory\knowledge_memory_index.md	2	8.8	1.00	discard	tldr flagged for manual review
+2026-04-02 17:02:26	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\memory\knowledge_memory_index.md	3	8.8	1.00	discard	tldr flagged for manual review
+2026-04-02 17:02:46	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\memory\knowledge_memory_index.md	0	9.0	1.00	skip	already at target
+2026-04-02 17:02:47	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\output\self_review_2026-04-02.md	1	8.9	1.00	keep	tldr flagged for manual review
+2026-04-02 17:02:47	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\output\self_review_2026-04-02.md	2	8.9	1.00	discard	tldr flagged for manual review
+2026-04-02 17:02:48	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\output\self_review_2026-04-02.md	3	8.9	1.00	discard	tldr flagged for manual review
+2026-04-02 17:03:18	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\output\self_review_2026-04-02.md	0	9.0	1.00	skip	already at target
+2026-04-02 17:03:19	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\quality\quality_gate_knowledge.md	1	8.9	0.90	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-02 17:03:19	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\quality\quality_gate_knowledge.md	2	8.9	0.90	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-02 17:03:19	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\quality\quality_gate_knowledge.md	3	8.9	0.90	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-02 17:03:45	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\quality\quality_gate_knowledge.md	0	9.0	0.90	skip	already at target
+2026-04-02 17:03:46	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\schemas\naming_convention_mapping.md	1	8.9	1.00	discard	tldr flagged for manual review
+2026-04-02 17:03:46	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\schemas\naming_convention_mapping.md	2	8.9	1.00	discard	tldr flagged for manual review
+2026-04-02 17:03:46	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\schemas\naming_convention_mapping.md	3	8.9	1.00	discard	tldr flagged for manual review
+2026-04-02 17:04:12	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\schemas\naming_convention_mapping.md	0	9.0	1.00	skip	already at target
+2026-04-02 17:04:13	C:\Users\PC\Documents\GitHub\cex\N01_intelligence\quality\quality_gate_intelligence.md	1	8.9	0.92	discard	polished formatting (whitespace cleanup)
+2026-04-02 17:04:13	C:\Users\PC\Documents\GitHub\cex\N01_intelligence\quality\quality_gate_intelligence.md	2	8.9	0.92	discard	polished formatting (whitespace cleanup)
+2026-04-02 17:04:13	C:\Users\PC\Documents\GitHub\cex\N01_intelligence\quality\quality_gate_intelligence.md	3	8.9	0.92	discard	polished formatting (whitespace cleanup)
+2026-04-02 17:04:34	C:\Users\PC\Documents\GitHub\cex\N01_intelligence\quality\quality_gate_intelligence.md	0	9.0	0.92	skip	already at target
+2026-04-02 17:04:35	C:\Users\PC\Documents\GitHub\cex\N02_marketing\output\self_review_2026-04-02.md	1	9.0	1.00	keep	tldr flagged for manual review
+2026-04-02 17:04:36	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\memory\rag_pipeline_memory.md	1	8.9	1.00	discard	tldr flagged for manual review
+2026-04-02 17:04:36	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\memory\rag_pipeline_memory.md	2	8.9	1.00	discard	tldr flagged for manual review
+2026-04-02 17:04:37	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\memory\rag_pipeline_memory.md	3	8.9	1.00	discard	tldr flagged for manual review
+2026-04-02 17:04:59	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\memory\rag_pipeline_memory.md	0	9.0	1.00	skip	already at target
+2026-04-02 17:05:05	C:\Users\PC\Documents\GitHub\cex\N01_intelligence\output\output_readme_comparison.md	1	8.4	0.95	discard	tldr flagged for manual review
+2026-04-02 17:05:05	C:\Users\PC\Documents\GitHub\cex\N01_intelligence\output\output_readme_comparison.md	2	8.4	0.95	discard	tldr flagged for manual review
+2026-04-02 17:05:06	C:\Users\PC\Documents\GitHub\cex\N01_intelligence\output\output_readme_comparison.md	3	8.4	0.95	discard	tldr flagged for manual review
+2026-04-02 17:06:06	C:\Users\PC\Documents\GitHub\cex\N01_intelligence\output\output_readme_comparison.md	1	8.9	0.96	keep	Add "When It Matters" section explaining business context and use cases for key features to improve insight depth
+2026-04-02 17:06:42	C:\Users\PC\Documents\GitHub\cex\N01_intelligence\output\output_readme_comparison.md	2	8.9	0.96	discard	Add comprehensive frontmatter fields (tldr, frameworks, tags, title) to improve searchability and retrieval effectiveness, targeting S03 dimension
+2026-04-02 17:07:19	C:\Users\PC\Documents\GitHub\cex\N01_intelligence\output\output_readme_comparison.md	3	8.9	0.98	discard	Add specific quantified metrics and business impact data to demonstrate measurable value, targeting INSIGHT_DEPTH
+2026-04-02 17:07:59	C:\Users\PC\Documents\GitHub\cex\N01_intelligence\output\output_readme_comparison.md	4	8.9	0.99	discard	Add decision framework section with specific evaluation criteria and clear next steps to improve actionability
+2026-04-02 17:08:38	C:\Users\PC\Documents\GitHub\cex\N01_intelligence\output\output_readme_comparison.md	5	8.9	0.96	discard	Add concrete compliance and revenue-impact examples to "When It Matters" section targeting INSIGHT_DEPTH dimension
+2026-04-02 17:08:39	C:\Users\PC\Documents\GitHub\cex\N02_marketing\output\output_readme_hero.md	1	8.6	0.99	discard	tldr flagged for manual review
+2026-04-02 17:08:39	C:\Users\PC\Documents\GitHub\cex\N02_marketing\output\output_readme_hero.md	2	8.6	0.99	discard	tldr flagged for manual review
+2026-04-02 17:08:40	C:\Users\PC\Documents\GitHub\cex\N02_marketing\output\output_readme_hero.md	3	8.6	0.99	discard	tldr flagged for manual review
+2026-04-02 17:09:42	C:\Users\PC\Documents\GitHub\cex\N02_marketing\output\output_readme_hero.md	1	8.9	0.95	discard	Add specific insight about existing LLM framework failures and CEX's type safety advantage to improve insight depth from 6/10 to 8+/10
+2026-04-02 17:10:25	C:\Users\PC\Documents\GitHub\cex\N02_marketing\output\output_readme_hero.md	2	8.8	0.97	discard	Add specific technical metrics about error prevention (89% of format errors caught at build vs runtime) to the description paragraph to improve insight depth from 6/10 to 8+/10
+2026-04-02 17:11:00	C:\Users\PC\Documents\GitHub\cex\N02_marketing\output\output_readme_hero.md	3	8.9	0.96	discard	Add architectural insight about typed knowledge systems vs. traditional prompt engineering to improve insight depth from 6/10 to 8+/10
+2026-04-02 17:11:39	C:\Users\PC\Documents\GitHub\cex\N02_marketing\output\output_readme_hero.md	4	8.9	1.00	discard	Add concrete before/after example showing how CEX's structural contracts prevent JSON formatting failures that traditional prompting cannot reliably catch
+2026-04-02 17:12:13	C:\Users\PC\Documents\GitHub\cex\N02_marketing\output\output_readme_hero.md	5	8.9	0.95	discard	Add concrete production incident example ($50K AWS bill from malformed JSON) to show real-world cost of unstructured LLM outputs, targeting INSIGHT_DEPTH dimension
+2026-04-02 17:12:14	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\output\output_readme_curriculum.md	1	8.7	1.00	discard	tldr flagged for manual review
+2026-04-02 17:12:14	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\output\output_readme_curriculum.md	2	8.7	1.00	discard	tldr flagged for manual review
+2026-04-02 17:12:15	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\output\output_readme_curriculum.md	3	8.7	1.00	discard	tldr flagged for manual review

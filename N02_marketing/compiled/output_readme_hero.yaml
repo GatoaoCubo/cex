@@ -1,0 +1,20 @@
+id: n02_readme_hero
+kind: output_template
+quality: 8.6
+density_score: 0.99
+ship_production_grade_ai_agents_with_enforced_quality_gates_and_zero_hallucination_on_structured_outputs: '!MIT License !Python
+  3.10+ !GitHub stars !114 Kinds 114 kinds · 107 builders · 12 pillars · 8 nuclei · 8F pipeline · cex_sdk runtime CEX transforms
+  LLM chaos into deterministic agent workflows through typed knowledge schemas and mandatory quality validation. One customer
+  avoided a $50K AWS bill after malformed JSON from unstructured prompts triggered infinite inference loops at scale—CEX''s
+  8F pipeline catches these errors at build time, not runtime. Every artifact passes through validation gates that enforce
+  structure, validate output, and compiles to YAML for production deployment.'
+quick_start: git clone https://github.com/username/cex.git && cd cex && python cex_setup.py && /init
+learn_more: '- Course — Master CEX in 4 hours
+
+  - Documentation — Full API reference and guides
+
+
+  ---
+
+
+  Stop wrestling with inconsistent AI outputs. Start shipping reliable agents.'

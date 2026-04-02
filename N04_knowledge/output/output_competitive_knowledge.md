@@ -1,7 +1,8 @@
 ---
 id: n04_competitive_knowledge
 kind: competitive_analysis
-quality: null
+quality: 8.9
+density_score: 0.95
 ---
 
 # Competitive Intel: CEX Typed Knowledge vs. Market Frameworks

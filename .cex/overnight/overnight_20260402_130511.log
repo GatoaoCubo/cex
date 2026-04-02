@@ -781,3 +781,151 @@ TypeError: unsupported operand type(s) for +: 'NoneType' and 'str'
 [2026-04-02 16:29:22] [INFO]   FARM N05: create knowledge card about CI/CD pipeline for LLM applicati...
 [2026-04-02 16:30:37] [ERROR]   FAIL Farm failed: no artifact saved
 [2026-04-02 16:30:39] [INFO]   FARM N05: create knowledge card about Python testing strategies for AI...
+[2026-04-02 16:33:22] [ERROR]   FAIL Farm failed: no artifact saved
+[2026-04-02 16:33:24] [INFO]   FARM N05: create knowledge card about Docker containerization for AI s...
+[2026-04-02 16:34:37] [OK]   OK Farmed -> P01_knowledge\examples\p01_knowledge_card_create_knowledge_card_about_docker_containerization_for_ai_s.md (73s)
+[2026-04-02 16:34:39] [INFO]   FARM N05: create knowledge card about API rate limiting and retry patt...
+[2026-04-02 16:36:27] [WARN]   RATE LIMITED. Backing off 60s...
+[2026-04-02 16:39:40] [WARN]   Still rate-limited. Switching to heuristic work...
+[2026-04-02 16:39:40] [INFO]   Rate-limited. Running free heuristic evolve while waiting...
+[2026-04-02 16:39:40] [INFO] ============================================================
+[2026-04-02 16:39:40] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-02 16:39:40] [INFO] ============================================================
+[2026-04-02 16:39:40] [INFO] Found 16 artifacts below target 9
+[2026-04-02 16:39:40] [INFO]   Evolving: N02_marketing\output\output_readme_hero.md (current: 0)
+[2026-04-02 16:43:15] [METRIC] Tokens: +7488 (total: 175503/2147483647)
+[2026-04-02 16:43:15] [OK]   OK N02_marketing\output\output_readme_hero.md: 0 -> 8.9 (+8.9)
+[2026-04-02 16:43:15] [METRIC]   Mode: agent
+[2026-04-02 16:43:15] [INFO]   Evolving: N02_marketing\output\output_monetization_launch.md (current: 0)
+[2026-04-02 16:43:16] [METRIC] Tokens: +0 (total: 175503/2147483647)
+[2026-04-02 16:43:16] [OK]   OK N02_marketing\output\output_monetization_launch.md: 0 -> 9.2 (+9.2)
+[2026-04-02 16:43:16] [METRIC]   Mode: heuristic
+[2026-04-02 16:43:17] [INFO]   Evolving: N04_knowledge\output\output_competitive_knowledge.md (current: 0)
+[2026-04-02 16:48:25] [METRIC] Tokens: +14154 (total: 189657/2147483647)
+[2026-04-02 16:48:25] [OK]   OK N04_knowledge\output\output_competitive_knowledge.md: 0 -> 8.9 (+8.9)
+[2026-04-02 16:48:25] [METRIC]   Mode: agent
+[2026-04-02 16:48:26] [INFO]   Evolving: N04_knowledge\output\output_readme_curriculum.md (current: 0)
+[2026-04-02 16:52:19] [METRIC] Tokens: +8400 (total: 198057/2147483647)
+[2026-04-02 16:52:19] [OK]   OK N04_knowledge\output\output_readme_curriculum.md: 0 -> 8.9 (+8.9)
+[2026-04-02 16:52:19] [METRIC]   Mode: agent
+[2026-04-02 16:52:19] [INFO]   Evolving: N04_knowledge\output\output_monetization_curriculum.md (current: 0)
+[2026-04-02 16:52:20] [METRIC] Tokens: +0 (total: 198057/2147483647)
+[2026-04-02 16:52:20] [OK]   OK N04_knowledge\output\output_monetization_curriculum.md: 0 -> 9 (+9)
+[2026-04-02 16:52:20] [METRIC]   Mode: heuristic
+[2026-04-02 16:52:21] [INFO]   Evolving: N01_intelligence\output\output_competitive_landscape.md (current: 0)
+[2026-04-02 16:59:28] [METRIC] Tokens: +14282 (total: 212339/2147483647)
+[2026-04-02 16:59:28] [OK]   OK N01_intelligence\output\output_competitive_landscape.md: 0 -> 8.9 (+8.9)
+[2026-04-02 16:59:28] [METRIC]   Mode: agent
+[2026-04-02 16:59:28] [INFO]   Evolving: N01_intelligence\output\output_readme_comparison.md (current: 0)
+[2026-04-02 17:01:58] [METRIC] Tokens: +0 (total: 212339/2147483647)
+[2026-04-02 17:01:58] [OK]   OK N01_intelligence\output\output_readme_comparison.md: 0 -> 8.7 (+8.7)
+[2026-04-02 17:01:58] [METRIC]   Mode: heuristic
+[2026-04-02 17:01:58] [INFO]   Evolving: N02_marketing\output\output_competitive_positioning.md (current: 0)
+[2026-04-02 17:01:59] [METRIC] Tokens: +0 (total: 212339/2147483647)
+[2026-04-02 17:01:59] [OK]   OK N02_marketing\output\output_competitive_positioning.md: 0 -> 9 (+9)
+[2026-04-02 17:01:59] [METRIC]   Mode: heuristic
+[2026-04-02 17:02:00] [INFO]   Evolving: N01_intelligence\output\self_review_2026-04-02.md (current: 8.7)
+[2026-04-02 17:02:24] [METRIC] Tokens: +0 (total: 212339/2147483647)
+[2026-04-02 17:02:24] [OK]   OK N01_intelligence\output\self_review_2026-04-02.md: 8.7 -> 9 (+0.3)
+[2026-04-02 17:02:24] [METRIC]   Mode: heuristic
+[2026-04-02 17:02:25] [INFO]   Evolving: N04_knowledge\memory\knowledge_memory_index.md (current: 8.8)
+[2026-04-02 17:02:46] [METRIC] Tokens: +0 (total: 212339/2147483647)
+[2026-04-02 17:02:46] [OK]   OK N04_knowledge\memory\knowledge_memory_index.md: 8.8 -> 9 (+0.2)
+[2026-04-02 17:02:46] [METRIC]   Mode: heuristic
+[2026-04-02 17:02:46] [INFO]   Evolving: N04_knowledge\output\self_review_2026-04-02.md (current: 8.8)
+[2026-04-02 17:03:18] [METRIC] Tokens: +0 (total: 212339/2147483647)
+[2026-04-02 17:03:18] [OK]   OK N04_knowledge\output\self_review_2026-04-02.md: 8.8 -> 9 (+0.2)
+[2026-04-02 17:03:18] [METRIC]   Mode: heuristic
+[2026-04-02 17:03:18] [INFO]   Evolving: N04_knowledge\quality\quality_gate_knowledge.md (current: 8.9)
+[2026-04-02 17:03:45] [METRIC] Tokens: +0 (total: 212339/2147483647)
+[2026-04-02 17:03:45] [OK]   OK N04_knowledge\quality\quality_gate_knowledge.md: 8.9 -> 9 (+0.1)
+[2026-04-02 17:03:45] [METRIC]   Mode: heuristic
+[2026-04-02 17:03:45] [INFO]   Evolving: N04_knowledge\schemas\naming_convention_mapping.md (current: 8.9)
+[2026-04-02 17:04:12] [METRIC] Tokens: +0 (total: 212339/2147483647)
+[2026-04-02 17:04:12] [OK]   OK N04_knowledge\schemas\naming_convention_mapping.md: 8.9 -> 9 (+0.1)
+[2026-04-02 17:04:12] [METRIC]   Mode: heuristic
+[2026-04-02 17:04:12] [INFO]   Evolving: N01_intelligence\quality\quality_gate_intelligence.md (current: 8.9)
+[2026-04-02 17:04:34] [METRIC] Tokens: +0 (total: 212339/2147483647)
+[2026-04-02 17:04:34] [OK]   OK N01_intelligence\quality\quality_gate_intelligence.md: 8.9 -> 9 (+0.1)
+[2026-04-02 17:04:34] [METRIC]   Mode: heuristic
+[2026-04-02 17:04:34] [INFO]   Evolving: N02_marketing\output\self_review_2026-04-02.md (current: 8.9)
+[2026-04-02 17:04:35] [METRIC] Tokens: +0 (total: 212339/2147483647)
+[2026-04-02 17:04:35] [OK]   OK N02_marketing\output\self_review_2026-04-02.md: 8.9 -> 9 (+0.1)
+[2026-04-02 17:04:35] [METRIC]   Mode: heuristic
+[2026-04-02 17:04:36] [INFO]   Evolving: N04_knowledge\memory\rag_pipeline_memory.md (current: 8.9)
+[2026-04-02 17:04:59] [METRIC] Tokens: +0 (total: 212339/2147483647)
+[2026-04-02 17:04:59] [OK]   OK N04_knowledge\memory\rag_pipeline_memory.md: 8.9 -> 9 (+0.1)
+[2026-04-02 17:04:59] [METRIC]   Mode: heuristic
+[2026-04-02 17:04:59] [INFO] Evolve complete. 16 processed, 16 improved.
+[2026-04-02 17:04:59] [INFO] Farm cycle 1 complete. 24 new artifacts mined.
+[2026-04-02 17:04:59] [INFO] Artifacts still below target: 89
+[2026-04-02 17:04:59] [INFO] 
+[2026-04-02 17:05:04] [INFO] ============================================================
+[2026-04-02 17:05:04] [INFO]   FLYWHEEL CYCLE 2 / 2147483647
+[2026-04-02 17:05:04] [INFO] ============================================================
+[2026-04-02 17:05:04] [INFO] Budget remaining: 2147271308 tokens
+[2026-04-02 17:05:04] [INFO] ============================================================
+[2026-04-02 17:05:04] [INFO]   PHASE 1: BOOTSTRAP
+[2026-04-02 17:05:04] [INFO] ============================================================
+[2026-04-02 17:05:04] [INFO] N03 (Builder Architect): 0 artifacts. Bootstrapping...
+[2026-04-02 17:05:04] [SKIP]   N03/agent: done in previous run. Skip.
+[2026-04-02 17:05:04] [SKIP]   N03/system_prompt: done in previous run. Skip.
+[2026-04-02 17:05:04] [SKIP]   N03/knowledge_card: done in previous run. Skip.
+[2026-04-02 17:05:04] [SKIP]   N03/agent_card: done in previous run. Skip.
+[2026-04-02 17:05:04] [SKIP]   N03/workflow: done in previous run. Skip.
+[2026-04-02 17:05:04] [SKIP]   N03/quality_gate: done in previous run. Skip.
+[2026-04-02 17:05:04] [SKIP]   N03/scoring_rubric: done in previous run. Skip.
+[2026-04-02 17:05:05] [SKIP]   N03/dispatch_rule: done in previous run. Skip.
+[2026-04-02 17:05:05] [SKIP]   N03/schema: done in previous run. Skip.
+[2026-04-02 17:05:05] [SKIP]   N03/output_template: done in previous run. Skip.
+[2026-04-02 17:05:05] [SKIP]   N03/prompt_template: done in previous run. Skip.
+[2026-04-02 17:05:05] [INFO] N05 (DevOps Engineer): 0 artifacts. Bootstrapping...
+[2026-04-02 17:05:05] [SKIP]   N05/agent: done in previous run. Skip.
+[2026-04-02 17:05:05] [SKIP]   N05/system_prompt: done in previous run. Skip.
+[2026-04-02 17:05:05] [SKIP]   N05/knowledge_card: done in previous run. Skip.
+[2026-04-02 17:05:05] [SKIP]   N05/agent_card: done in previous run. Skip.
+[2026-04-02 17:05:05] [SKIP]   N05/workflow: done in previous run. Skip.
+[2026-04-02 17:05:05] [SKIP]   N05/quality_gate: done in previous run. Skip.
+[2026-04-02 17:05:05] [SKIP]   N05/scoring_rubric: done in previous run. Skip.
+[2026-04-02 17:05:05] [SKIP]   N05/dispatch_rule: done in previous run. Skip.
+[2026-04-02 17:05:05] [SKIP]   N05/schema: done in previous run. Skip.
+[2026-04-02 17:05:05] [SKIP]   N05/output_template: done in previous run. Skip.
+[2026-04-02 17:05:05] [SKIP]   N05/prompt_template: done in previous run. Skip.
+[2026-04-02 17:05:05] [INFO] N06 (Brand Architect): 0 artifacts. Bootstrapping...
+[2026-04-02 17:05:05] [SKIP]   N06/agent: done in previous run. Skip.
+[2026-04-02 17:05:05] [SKIP]   N06/system_prompt: done in previous run. Skip.
+[2026-04-02 17:05:05] [SKIP]   N06/knowledge_card: done in previous run. Skip.
+[2026-04-02 17:05:05] [SKIP]   N06/agent_card: done in previous run. Skip.
+[2026-04-02 17:05:05] [SKIP]   N06/workflow: done in previous run. Skip.
+[2026-04-02 17:05:05] [SKIP]   N06/quality_gate: done in previous run. Skip.
+[2026-04-02 17:05:05] [SKIP]   N06/scoring_rubric: done in previous run. Skip.
+[2026-04-02 17:05:05] [SKIP]   N06/dispatch_rule: done in previous run. Skip.
+[2026-04-02 17:05:05] [SKIP]   N06/schema: done in previous run. Skip.
+[2026-04-02 17:05:05] [SKIP]   N06/output_template: done in previous run. Skip.
+[2026-04-02 17:05:05] [SKIP]   N06/prompt_template: done in previous run. Skip.
+[2026-04-02 17:05:05] [INFO] N07 (Mission Control): 0 artifacts. Bootstrapping...
+[2026-04-02 17:05:05] [SKIP]   N07/agent: done in previous run. Skip.
+[2026-04-02 17:05:05] [SKIP]   N07/system_prompt: done in previous run. Skip.
+[2026-04-02 17:05:05] [SKIP]   N07/knowledge_card: done in previous run. Skip.
+[2026-04-02 17:05:05] [SKIP]   N07/agent_card: done in previous run. Skip.
+[2026-04-02 17:05:05] [SKIP]   N07/workflow: done in previous run. Skip.
+[2026-04-02 17:05:05] [SKIP]   N07/quality_gate: done in previous run. Skip.
+[2026-04-02 17:05:05] [SKIP]   N07/scoring_rubric: done in previous run. Skip.
+[2026-04-02 17:05:05] [SKIP]   N07/dispatch_rule: done in previous run. Skip.
+[2026-04-02 17:05:05] [SKIP]   N07/schema: done in previous run. Skip.
+[2026-04-02 17:05:05] [SKIP]   N07/output_template: done in previous run. Skip.
+[2026-04-02 17:05:05] [SKIP]   N07/prompt_template: done in previous run. Skip.
+[2026-04-02 17:05:05] [INFO] Bootstrap complete. 100 artifacts created.
+[2026-04-02 17:05:05] [INFO] ============================================================
+[2026-04-02 17:05:05] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-02 17:05:05] [INFO] ============================================================
+[2026-04-02 17:05:05] [INFO] Found 12 artifacts below target 9
+[2026-04-02 17:05:05] [INFO]   Evolving: N01_intelligence\output\output_readme_comparison.md (current: 8.4)
+[2026-04-02 17:08:38] [METRIC] Tokens: +8761 (total: 221100/2147483647)
+[2026-04-02 17:08:38] [OK]   OK N01_intelligence\output\output_readme_comparison.md: 8.4 -> 8.9 (+0.5)
+[2026-04-02 17:08:38] [METRIC]   Mode: agent
+[2026-04-02 17:08:39] [INFO]   Evolving: N02_marketing\output\output_readme_hero.md (current: 8.6)
+[2026-04-02 17:12:13] [METRIC] Tokens: +7483 (total: 228583/2147483647)
+[2026-04-02 17:12:13] [OK]   OK N02_marketing\output\output_readme_hero.md: 8.6 -> 8.9 (+0.3)
+[2026-04-02 17:12:13] [METRIC]   Mode: agent
+[2026-04-02 17:12:14] [INFO]   Evolving: N04_knowledge\output\output_readme_curriculum.md (current: 8.7)

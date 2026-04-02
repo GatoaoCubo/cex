@@ -1,7 +1,8 @@
 ---
 id: n04_readme_curriculum
 kind: output_template
-quality: null
+quality: 8.7
+density_score: 1.0
 ---
 
 # What You'll Learn

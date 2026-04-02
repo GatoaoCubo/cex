@@ -1,7 +1,8 @@
 ---
 id: n02_readme_hero
 kind: output_template
-quality: null
+quality: 8.6
+density_score: 0.99
 ---
 
 # CEX — Typed Knowledge System for LLM Agents

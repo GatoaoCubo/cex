@@ -1,7 +1,8 @@
 ---
 id: n01_competitive_landscape
 kind: competitive_analysis
-quality: null
+quality: 8.8
+density_score: 0.96
 ---
 
 # Mapa Competitivo: CEX vs. O Ecossistema de IA

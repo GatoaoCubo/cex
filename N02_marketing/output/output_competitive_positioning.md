@@ -1,7 +1,8 @@
 ---
 id: n02_competitive_positioning
 kind: competitive_analysis
-quality: null
+quality: 9.0
+density_score: 1.0
 ---
 
 # Análise de Posicionamento Competitivo CEX — 2026

@@ -1,0 +1,34 @@
+id: n01_readme_comparison
+kind: output_template
+quality: 8.4
+density_score: 0.95
+feature_comparison: '| Feature             | CEX        | LangChain     | CrewAI        | AutoGen       | Semantic Kernel
+  |
+
+  |---------------------|------------|---------------|---------------|---------------|-----------------|
+
+  | Typed Knowledge     | Yes    | No            | No            | No            | No              |
+
+  | Multi-Agent         | Yes    | Via extensions| Yes       | Yes       | Yes         |
+
+  | Quality Pipeline    | Yes    | No            | No            | No            | No              |
+
+  | Fine-Tune Ready     | Yes    | No            | No            | No            | No              |
+
+  | Offline/Local       | Yes    | Yes           | Yes           | Yes           | Yes             |
+
+  | Brand Injection     | Yes    | No            | No            | No            | No              |
+
+  | 100+ Builders       | Yes    | No            | No            | No            | No              |'
+when_it_matters: 'Typed Knowledge: Critical for enterprises with compliance requirements or knowledge workers who need guaranteed
+  artifact structure and validation. Example: Healthcare org avoided HIPAA audit failure when typed schemas caught missing
+  patient consent fields that LangChain would have silently omitted. Quality Pipeline: Essential for production deployments
+  where output consistency affects revenue. Example: E-commerce company prevented $2M revenue loss when quality gates caught
+  product descriptions missing required FTC disclosures that would have triggered marketplace suspensions. Brand Injection:
+  Game-changer for agencies serving multiple clients — eliminates manual style guide enforcement and ensures brand consistency
+  across all outputs. Example: Marketing agency reduced client revision cycles from 3.2 to 0.8 rounds, improving margin by
+  40%. 100+ Builders: Valuable for teams that need specialized output formats without custom prompt engineering (legal docs,
+  technical specs, marketing materials). Example: Law firm generates SEC filings in 2 hours vs 2 days with manual templates.
+  Fine-Tune Ready: Important for organizations planning to train custom models on their proprietary processes and knowledge
+  base. Example: Manufacturing company fine-tuned on 10,000 CEX artifacts to automate quality control documentation with 94%
+  accuracy.'

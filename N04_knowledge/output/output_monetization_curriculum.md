@@ -3,8 +3,9 @@ id: n04_output_monetization_curriculum
 kind: output_template
 pillar: P05
 domain: knowledge
-quality: null
+quality: 9.0
 tags: [monetization, curriculum, learning-design, modules, assessment]
+density_score: 1.0
 ---
 
 # CEX Mastery: Design Instrucional do CurrÃ­culo de MonetizaÃ§Ã£o
