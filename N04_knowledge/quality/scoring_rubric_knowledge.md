@@ -22,3 +22,18 @@ density_score: 0.92
 | Actionability | 25% | Theory only | Some when-to-use guidance | Clear when/when-not + examples | Decision-ready with anti-patterns |
 | Structure | 15% | Unformatted prose | Headers + some sections | Full frontmatter + tables + sections | Template-perfect, triple-export ready |
 | Freshness | 15% | >1 year, no context | <6 months | <90 days, versioned | Current + trend context + update plan |
+
+## Usage Guidelines
+
+**When to apply**: Score every knowledge card before publication. Use during peer review cycles.
+
+**How to score**: 
+- Read entire KC first (no skimming)
+- Score each dimension independently 
+- Weight final score: `(Density×0.25) + (Taxonomy×0.20) + (Actionability×0.25) + (Structure×0.15) + (Freshness×0.15)`
+- Threshold: Publish ≥8.0, Revise 6.0-7.9, Reject <6.0
+
+**Common scoring errors**:
+- Inflating scores for "effort" (score output, not input)
+- Averaging all dimensions equally (use weights)
+- Scoring outdated content as "fresh" if recently edited
