@@ -21,31 +21,39 @@ density_score: 0.91
 **Date**: {{DATE}} | **Total KCs**: {{COUNT}} | **Health**: {{GOOD|AGING|STALE}}
 
 ## Summary
-| Metric | Value |
-|--------|-------|
-| Total KCs | {{N}} |
-| Avg Density | {{SCORE}} |
-| Fresh (<90d) | {{N}} ({{%}}) |
-| Stale (>90d) | {{N}} ({{%}}) |
-| Missing (by kind) | {{N}} |
+| Metric | Value | Threshold | Status |
+|--------|-------|-----------|---------|
+| Total KCs | {{N}} | 99 target | {{PROGRESS}} |
+| Avg Density | {{SCORE}} | >0.85 | {{PASS/FAIL}} |
+| Fresh (<90d) | {{N}} ({{%}}) | >60% | {{HEALTHY/CONCERN}} |
+| Stale (>90d) | {{N}} ({{%}}) | <40% | {{ACCEPTABLE/ACTION}} |
+| Missing (by kind) | {{N}} | 0 ideal | {{CRITICAL/MINOR}} |
 
 ## Staleness Distribution
-| State | Count | % |
-|-------|-------|---|
-| ✅ Fresh | {{N}} | {{%}} |
-| 🟡 Aging | {{N}} | {{%}} |
-| ⚠️ Stale | {{N}} | {{%}} |
-| ❌ Deprecated | {{N}} | {{%}} |
+| State | Count | % | Action Required |
+|-------|-------|---|-----------------|
+| ✅ Fresh (<90d) | {{N}} | {{%}} | Monitor |
+| 🟡 Aging (90-180d) | {{N}} | {{%}} | Review queue |
+| ⚠️ Stale (180-365d) | {{N}} | {{%}} | Update priority |
+| ❌ Deprecated (>365d) | {{N}} | {{%}} | Archive or rewrite |
 
-## Top 5 Gaps
-1. {{KIND}}: no KC exists ({{IMPACT}})
-2. ...
+## Top 5 Critical Gaps
+1. **{{KIND}}**: no KC exists → {{IMPACT_SCORE}}/10 impact → build in {{SPRINT}}
+2. **{{KIND}}**: no KC exists → {{IMPACT_SCORE}}/10 impact → build in {{SPRINT}}
+3. **{{KIND}}**: no KC exists → {{IMPACT_SCORE}}/10 impact → build in {{SPRINT}}
+4. **{{KIND}}**: no KC exists → {{IMPACT_SCORE}}/10 impact → build in {{SPRINT}}
+5. **{{KIND}}**: no KC exists → {{IMPACT_SCORE}}/10 impact → build in {{SPRINT}}
 
-## Top 5 Stalest KCs
-1. {{KC_ID}}: last updated {{DATE}} ({{DAYS}} days ago)
-2. ...
+## Top 5 Stalest KCs (Update Priority)
+1. **{{KC_ID}}**: {{DAYS}} days old → density {{SCORE}} → {{HIGH/MED/LOW}} priority
+2. **{{KC_ID}}**: {{DAYS}} days old → density {{SCORE}} → {{HIGH/MED/LOW}} priority
+3. **{{KC_ID}}**: {{DAYS}} days old → density {{SCORE}} → {{HIGH/MED/LOW}} priority
+4. **{{KC_ID}}**: {{DAYS}} days old → density {{SCORE}} → {{HIGH/MED/LOW}} priority
+5. **{{KC_ID}}**: {{DAYS}} days old → density {{SCORE}} → {{HIGH/MED/LOW}} priority
 
-## Recommendations
-- {{ACTION_1}}
-- {{ACTION_2}}
+## Action Items (This Sprint)
+- **Build**: {{N}} missing KCs ({{ESTIMATED_HOURS}}h total)
+- **Update**: {{N}} stale KCs ({{ESTIMATED_HOURS}}h total)
+- **Archive**: {{N}} deprecated KCs ({{ESTIMATED_HOURS}}h total)
+- **Next audit**: {{DATE}} (30 days)
 ```
