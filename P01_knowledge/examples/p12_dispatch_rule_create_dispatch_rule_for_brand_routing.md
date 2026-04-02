@@ -3,30 +3,32 @@ id: p12_dr_brand
 kind: dispatch_rule
 pillar: P12
 version: 1.0.0
-created: 2026-04-01
-updated: 2026-04-01
+created: 2026-04-02
+updated: 2026-04-02
 author: dispatch-rule-builder
 domain: brand
-quality: 8.5
-tags: [dispatch, brand, atlas, marketing, identity]
-tldr: Route brand identity, voice, and positioning tasks to marketing specialist agent
+quality: 8.7
+tags: [dispatch, brand, identity, visual, monetization, atlas]
+tldr: Route brand identity, visual design, and monetization strategy tasks to brand specialist agent
 scope: brand
-keywords: [brand, marca, branding, identity, identidade, voice, voz, positioning, posicionamento, style, estilo, guidelines, diretrizes]
+keywords: [brand, marca, identity, identidade, logo, logotipo, visual, voice, voz, tone, tom, style, estilo, color, cor, monetize, monetizar, pricing, preço]
 agent_node: atlas
 model: sonnet
-priority: 7
+priority: 8
 confidence_threshold: 0.75
-fallback: monetizer
+fallback: edison
+conditions:
+  exclude_domains: [technical_research, code_deployment]
 routing_strategy: hybrid
-density_score: 0.8
+density_score: 0.82
 ---
 # brand Dispatch Rule
 
 ## Purpose
-Routes brand identity, voice, positioning, and style guide tasks to the marketing specialist agent. The atlas agent is optimized for brand development with expertise in visual identity, messaging frameworks, and brand consistency across touchpoints.
+Routes brand identity, visual design, voice definition, and monetization strategy tasks to the brand specialist. The atlas agent specializes in brand consistency, visual identity systems, and commercial strategy optimization.
 
 ## Keyword Rationale
-Bilingual PT/EN coverage captures both Portuguese operator commands ("marca", "identidade") and English task descriptions ("brand", "identity"). Includes core brand concepts like voice, positioning, style, and guidelines that span brand strategy and execution. Hybrid strategy handles both exact keyword matches and semantic similarity for brand-adjacent terms.
+Bilingual PT/EN coverage captures both Portuguese brand commands ("marca", "identidade", "monetizar") and English task descriptions ("brand", "identity", "monetize"). Visual terms ("logo", "color", "style") and voice terms ("tone", "voice") cover the full brand development spectrum from identity to implementation.
 
 ## Fallback Logic
-Monetizer agent handles brand monetization and commercial positioning when atlas is unavailable. Can address brand value propositions, pricing psychology, and revenue-focused brand messaging without full brand strategy capabilities.
+edison (creative/marketing specialist) handles brand-adjacent tasks when atlas is unavailable, providing continuity for brand voice and creative direction without the specialized monetization expertise.
