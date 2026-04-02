@@ -35,6 +35,17 @@ density_score: 0.91
 - Low (1-2): {{N}} sources (use with caution)
 ```
 
+## Validation Checklist
+
+| Check | Criteria | Pass/Fail |
+|-------|----------|-----------|
+| **Authority Verification** | Each source has documented authority level (1-5) | ☐ |
+| **Freshness Dating** | All sources include publication/update dates | ☐ |
+| **URL Validation** | All links are live and accessible | ☐ |
+| **Distribution Balance** | No single source type exceeds 70% of total | ☐ |
+| **Quality Threshold** | Average reliability ≥ 3.0/5 across all sources | ☐ |
+| **Scope Focus** | All sources relate to single research topic | ☐ |
+
 ## Usage Guidelines
 
 ### When to Use
