@@ -173,6 +173,16 @@ import * as DropdownMenu from "@radix-ui/react-dropdown-menu"
 // Click outside closes (configurable)
 ```
 
+## Anti-Patterns
+
+| Don't Do | Why | Do Instead |
+|----------|-----|------------|
+| Mix Radix with Material-UI/Chakra | Style conflicts, bundle bloat | Stick to one system |
+| Style Radix primitives directly | Loses unstyled benefits | Use shadcn/ui or custom wrapper |
+| Forget `asChild` prop | Breaks composition, creates extra DOM | Always use `asChild` for triggers |
+| Override focus management | Breaks accessibility | Trust Radix defaults |
+| Use Radix for simple cases | Overkill for basic buttons | Use plain HTML/CSS first |
+
 ## shadcn/ui Installation & Usage
 
 ```bash
