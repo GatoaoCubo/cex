@@ -11,9 +11,9 @@
         "FIRECRAWL_API_KEY": "fc-4d0c587df3c44038bbf9f39e175fffd0"
       }
     },
-    "markitdown": {
-      "command": "cmd",
-      "args": ["/c", "npx", "-y", "markitdown-mcp"]
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp", "--headless"]
     }
   }
 }

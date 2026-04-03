@@ -9,8 +9,8 @@ set CEX_NUCLEUS=N02
 set CEX_ROOT=C:\Users\PC\Documents\GitHub\cex
 cd /d "%CEX_ROOT%"
 
-set MODEL=--model claude-sonnet-4-20250514
-set FLAGS=--dangerously-skip-permissions --chrome --fast
+set MODEL=--model claude-opus-4-20250514
+set FLAGS=--dangerously-skip-permissions --no-chrome
 set MCP=--mcp-config %CEX_ROOT%\.mcp-n02.json
 set SETTINGS=--settings %CEX_ROOT%\.claude\nucleus-settings\n02.json
 
