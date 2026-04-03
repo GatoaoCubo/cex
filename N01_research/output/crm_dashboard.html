@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GATO³ CRM Analytics Dashboard</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f5f6fa; color: #2c3e50; padding: 20px; }
+  .container { max-width: 1200px; margin: 0 auto; }
+  h1 { font-size: 28px; margin-bottom: 5px; }
+  .subtitle { color: #7f8c8d; margin-bottom: 20px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-bottom: 25px; }
+  .card { background: white; border-radius: 10px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+  .card h3 { font-size: 14px; color: #7f8c8d; text-transform: uppercase; margin-bottom: 8px; }
+  .card .value { font-size: 32px; font-weight: 700; }
+  .card .detail { font-size: 13px; color: #95a5a6; margin-top: 4px; }
+  .section { background: white; border-radius: 10px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 20px; }
+  .section h2 { font-size: 18px; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 2px solid #ecf0f1; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th { text-align: left; padding: 8px 12px; background: #f8f9fa; border-bottom: 2px solid #ecf0f1; font-weight: 600; }
+  td { padding: 8px 12px; border-bottom: 1px solid #ecf0f1; }
+  tr:hover td { background: #f8f9fa; }
+  .badge { padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+  .badge.high { background: #fee2e2; color: #991b1b; }
+  .badge.medium { background: #fef3c7; color: #92400e; }
+  .badge.low { background: #d1fae5; color: #065f46; }
+  .badge.felino { background: #ede9fe; color: #5b21b6; }
+  .footer { text-align: center; color: #bdc3c7; font-size: 12px; margin-top: 30px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>GATO³ CRM Analytics</h1>
+  <p class="subtitle">ABC Paulista Pet Market Intelligence — 03/04/2026 12:18</p>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Total Businesses</h3>
+      <div class="value">578</div>
+      <div class="detail">578 across 11 cities</div>
+    </div>
+    <div class="card">
+      <h3>Felino Specialists</h3>
+      <div class="value" style="color:#5b21b6">10</div>
+      <div class="detail">1.7% of total market</div>
+    </div>
+    <div class="card">
+      <h3>Actionable Leads</h3>
+      <div class="value" style="color:#2563eb">13</div>
+      <div class="detail">S+ through Tier 2</div>
+    </div>
+    <div class="card">
+      <h3>High Priority</h3>
+      <div class="value" style="color:#dc2626">3</div>
+      <div class="detail">S+ through Tier 1</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Lead Funnel</h2>
+    <table>
+      <tr><th>Tier</th><th>Count</th><th>%</th><th>Distribution</th></tr>
+      
+        <tr>
+            <td><strong>S+</strong></td>
+            <td>0</td>
+            <td>0.0%</td>
+            <td><div style="background:#e74c3c;width:0.0px;height:20px;border-radius:3px"></div></td>
+        </tr>
+        <tr>
+            <td><strong>S</strong></td>
+            <td>1</td>
+            <td>0.2%</td>
+            <td><div style="background:#e67e22;width:0.6000000000000001px;height:20px;border-radius:3px"></div></td>
+        </tr>
+        <tr>
+            <td><strong>Tier 1</strong></td>
+            <td>2</td>
+            <td>0.3%</td>
+            <td><div style="background:#f1c40f;width:0.8999999999999999px;height:20px;border-radius:3px"></div></td>
+        </tr>
+        <tr>
+            <td><strong>Tier 2</strong></td>
+            <td>10</td>
+            <td>1.7%</td>
+            <td><div style="background:#3498db;width:5.1px;height:20px;border-radius:3px"></div></td>
+        </tr>
+        <tr>
+            <td><strong>Tier 3</strong></td>
+            <td>86</td>
+            <td>14.9%</td>
+            <td><div style="background:#95a5a6;width:44.7px;height:20px;border-radius:3px"></div></td>
+        </tr>
+        <tr>
+            <td><strong>Unqualified</strong></td>
+            <td>479</td>
+            <td>82.9%</td>
+            <td><div style="background:#bdc3c7;width:248.70000000000002px;height:20px;border-radius:3px"></div></td>
+        </tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Market by City</h2>
+    <table>
+      <tr><th>City</th><th>Total</th><th>Avg Score</th><th>Felino</th><th>High Priority</th><th>Density</th></tr>
+      
+        <tr>
+            <td>São Bernardo do Campo</td>
+            <td>201</td>
+            <td>42.3</td>
+            <td>2</td>
+            <td>0</td>
+            <td><span class="badge high">high</span></td>
+        </tr>
+        <tr>
+            <td>Santo André</td>
+            <td>196</td>
+            <td>42.6</td>
+            <td>4</td>
+            <td>0</td>
+            <td><span class="badge high">high</span></td>
+        </tr>
+        <tr>
+            <td>São Caetano do Sul</td>
+            <td>166</td>
+            <td>46.0</td>
+            <td>2</td>
+            <td>3</td>
+            <td><span class="badge high">high</span></td>
+        </tr>
+        <tr>
+            <td>ABC Paulista</td>
+            <td>5</td>
+            <td>33.0</td>
+            <td>2</td>
+            <td>0</td>
+            <td><span class="badge low">low</span></td>
+        </tr>
+        <tr>
+            <td>Diadema</td>
+            <td>2</td>
+            <td>34.5</td>
+            <td>0</td>
+            <td>0</td>
+            <td><span class="badge low">low</span></td>
+        </tr>
+        <tr>
+            <td>Guarulhos</td>
+            <td>2</td>
+            <td>29.0</td>
+            <td>0</td>
+            <td>0</td>
+            <td><span class="badge low">low</span></td>
+        </tr>
+        <tr>
+            <td>Osasco</td>
+            <td>2</td>
+            <td>27.5</td>
+            <td>0</td>
+            <td>0</td>
+            <td><span class="badge low">low</span></td>
+        </tr>
+        <tr>
+            <td>Mauá</td>
+            <td>1</td>
+            <td>33.0</td>
+            <td>0</td>
+            <td>0</td>
+            <td><span class="badge low">low</span></td>
+        </tr>
+        <tr>
+            <td>Ribeirão Pires</td>
+            <td>1</td>
+            <td>33.0</td>
+            <td>0</td>
+            <td>0</td>
+            <td><span class="badge low">low</span></td>
+        </tr>
+        <tr>
+            <td>a_validar</td>
+            <td>1</td>
+            <td>33.0</td>
+            <td>0</td>
+            <td>0</td>
+            <td><span class="badge low">low</span></td>
+        </tr>
+        <tr>
+            <td>Barueri</td>
+            <td>1</td>
+            <td>31.0</td>
+            <td>0</td>
+            <td>0</td>
+            <td><span class="badge low">low</span></td>
+        </tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Segment Distribution</h2>
+    <table>
+      <tr><th>Segment</th><th>Count</th><th>%</th><th>Felino</th></tr>
+      
+        <tr>
+            <td>Pet Shop</td>
+            <td>102</td>
+            <td>17.6%</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>Hospital Veterinario</td>
+            <td>84</td>
+            <td>14.5%</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>Veterinaria</td>
+            <td>84</td>
+            <td>14.5%</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>Banho E Tosa</td>
+            <td>84</td>
+            <td>14.5%</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>Clinica Veterinaria</td>
+            <td>84</td>
+            <td>14.5%</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>pet_shop</td>
+            <td>46</td>
+            <td>8.0%</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>clinica_vet</td>
+            <td>28</td>
+            <td>4.8%</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td>banho_tosa</td>
+            <td>26</td>
+            <td>4.5%</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>Clinica Vet</td>
+            <td>18</td>
+            <td>3.1%</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>Banho Tosa</td>
+            <td>15</td>
+            <td>2.6%</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>ong</td>
+            <td>4</td>
+            <td>0.7%</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>distribuidor</td>
+            <td>3</td>
+            <td>0.5%</td>
+            <td>0</td>
+        </tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Top 25 Leads</h2>
+    <table>
+      <tr><th>Score</th><th>Tier</th><th>Business</th><th>City</th><th>Segment</th><th>Rating</th><th>Reviews</th></tr>
+      
+        <tr>
+            <td>85</td>
+            <td><strong>S</strong></td>
+            <td>Pets House <span class="badge felino">FELINO</span></td>
+            <td>São Caetano do Sul</td>
+            <td>clinica_vet</td>
+            <td>4.9</td>
+            <td>130</td>
+        </tr>
+        <tr>
+            <td>70</td>
+            <td><strong>Tier 1</strong></td>
+            <td>Pet Para Pets </td>
+            <td>São Caetano do Sul</td>
+            <td>pet_shop</td>
+            <td>4.6</td>
+            <td>1100</td>
+        </tr>
+        <tr>
+            <td>70</td>
+            <td><strong>Tier 1</strong></td>
+            <td>AnimaPets </td>
+            <td>São Caetano do Sul</td>
+            <td>pet_shop</td>
+            <td>4.9</td>
+            <td>1100</td>
+        </tr>
+        <tr>
+            <td>67</td>
+            <td><strong>Tier 2</strong></td>
+            <td>Boutique Pet <span class="badge felino">FELINO</span></td>
+            <td>Santo André</td>
+            <td>banho_tosa</td>
+            <td>0.0</td>
+            <td>1788</td>
+        </tr>
+        <tr>
+            <td>63</td>
+            <td><strong>Tier 2</strong></td>
+            <td>PET LOVERS Pet Shop <span class="badge felino">FELINO</span></td>
+            <td>São Bernardo do Campo</td>
+            <td>pet_shop</td>
+            <td>0.0</td>
+            <td>2096</td>
+        </tr>
+        <tr>
+            <td>63</td>
+            <td><strong>Tier 2</strong></td>
+            <td>SofistCão <span class="badge felino">FELINO</span></td>
+            <td>Santo André</td>
+            <td>banho_tosa</td>
+            <td>0.0</td>
+            <td>2370</td>
+        </tr>
+        <tr>
+            <td>62</td>
+            <td><strong>Tier 2</strong></td>
+            <td>Cobasi </td>
+            <td>São Caetano do Sul</td>
+            <td>pet_shop</td>
+            <td>4.5</td>
+            <td>500</td>
+        </tr>
+        <tr>
+            <td>61</td>
+            <td><strong>Tier 2</strong></td>
+            <td>Pet Business Centro 13 </td>
+            <td>São Caetano do Sul</td>
+            <td>Pet Shop</td>
+            <td>4.7</td>
+            <td>46</td>
+        </tr>
+        <tr>
+            <td>61</td>
+            <td><strong>Tier 2</strong></td>
+            <td>Pet Shop São Caetano do Sul 13 </td>
+            <td>São Caetano do Sul</td>
+            <td>Pet Shop</td>
+            <td>4.8</td>
+            <td>29</td>
+        </tr>
+        <tr>
+            <td>61</td>
+            <td><strong>Tier 2</strong></td>
+            <td>Pet Shop São Caetano do Sul 25 </td>
+            <td>São Caetano do Sul</td>
+            <td>Pet Shop</td>
+            <td>4.5</td>
+            <td>53</td>
+        </tr>
+        <tr>
+            <td>61</td>
+            <td><strong>Tier 2</strong></td>
+            <td>Hospital Veterinario São Caetano do Sul 13 </td>
+            <td>São Caetano do Sul</td>
+            <td>Hospital Veterinario</td>
+            <td>4.8</td>
+            <td>29</td>
+        </tr>
+        <tr>
+            <td>61</td>
+            <td><strong>Tier 2</strong></td>
+            <td>Hospital Veterinario São Caetano do Sul 25 </td>
+            <td>São Caetano do Sul</td>
+            <td>Hospital Veterinario</td>
+            <td>4.5</td>
+            <td>53</td>
+        </tr>
+        <tr>
+            <td>60</td>
+            <td><strong>Tier 2</strong></td>
+            <td>Pet Business Centro 16 </td>
+            <td>São Caetano do Sul</td>
+            <td>Pet Shop</td>
+            <td>5.0</td>
+            <td>55</td>
+        </tr>
+        <tr>
+            <td>59</td>
+            <td><strong>Tier 3</strong></td>
+            <td>Pet Business Centro 13 </td>
+            <td>São Bernardo do Campo</td>
+            <td>Pet Shop</td>
+            <td>4.7</td>
+            <td>46</td>
+        </tr>
+        <tr>
+            <td>59</td>
+            <td><strong>Tier 3</strong></td>
+            <td>Pet Shop São Bernardo do Campo 13 </td>
+            <td>São Bernardo do Campo</td>
+            <td>Pet Shop</td>
+            <td>4.8</td>
+            <td>29</td>
+        </tr>
+        <tr>
+            <td>59</td>
+            <td><strong>Tier 3</strong></td>
+            <td>Pet Shop São Bernardo do Campo 25 </td>
+            <td>São Bernardo do Campo</td>
+            <td>Pet Shop</td>
+            <td>4.5</td>
+            <td>53</td>
+        </tr>
+        <tr>
+            <td>59</td>
+            <td><strong>Tier 3</strong></td>
+            <td>Hospital Veterinario São Bernardo do Campo 13 </td>
+            <td>São Bernardo do Campo</td>
+            <td>Hospital Veterinario</td>
+            <td>4.8</td>
+            <td>29</td>
+        </tr>
+        <tr>
+            <td>59</td>
+            <td><strong>Tier 3</strong></td>
+            <td>Hospital Veterinario São Bernardo do Campo 25 </td>
+            <td>São Bernardo do Campo</td>
+            <td>Hospital Veterinario</td>
+            <td>4.5</td>
+            <td>53</td>
+        </tr>
+        <tr>
+            <td>59</td>
+            <td><strong>Tier 3</strong></td>
+            <td>Pet Business Centro 13 </td>
+            <td>Santo André</td>
+            <td>Pet Shop</td>
+            <td>4.7</td>
+            <td>46</td>
+        </tr>
+        <tr>
+            <td>59</td>
+            <td><strong>Tier 3</strong></td>
+            <td>Pet Shop Santo André 13 </td>
+            <td>Santo André</td>
+            <td>Pet Shop</td>
+            <td>4.8</td>
+            <td>29</td>
+        </tr>
+        <tr>
+            <td>59</td>
+            <td><strong>Tier 3</strong></td>
+            <td>Pet Shop Santo André 25 </td>
+            <td>Santo André</td>
+            <td>Pet Shop</td>
+            <td>4.5</td>
+            <td>53</td>
+        </tr>
+        <tr>
+            <td>59</td>
+            <td><strong>Tier 3</strong></td>
+            <td>Hospital Veterinario Santo André 13 </td>
+            <td>Santo André</td>
+            <td>Hospital Veterinario</td>
+            <td>4.8</td>
+            <td>29</td>
+        </tr>
+        <tr>
+            <td>59</td>
+            <td><strong>Tier 3</strong></td>
+            <td>Hospital Veterinario Santo André 25 </td>
+            <td>Santo André</td>
+            <td>Hospital Veterinario</td>
+            <td>4.5</td>
+            <td>53</td>
+        </tr>
+        <tr>
+            <td>58</td>
+            <td><strong>Tier 3</strong></td>
+            <td>Pet Business Centro 16 </td>
+            <td>São Bernardo do Campo</td>
+            <td>Pet Shop</td>
+            <td>5.0</td>
+            <td>55</td>
+        </tr>
+        <tr>
+            <td>58</td>
+            <td><strong>Tier 3</strong></td>
+            <td>Pet Business Centro 16 </td>
+            <td>Santo André</td>
+            <td>Pet Shop</td>
+            <td>5.0</td>
+            <td>55</td>
+        </tr>
+    </table>
+  </div>
+
+  <p class="footer">Generated by CEX N03 Builder — GATO³ CRM Automation Suite</p>
+</div>
+</body>
+</html>

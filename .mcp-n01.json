@@ -1,22 +1,33 @@
 {
   "mcpServers": {
-    "firecrawl": {
-      "command": "npx",
-      "args": ["-y", "firecrawl-mcp"],
-      "env": { "FIRECRAWL_API_KEY": "${FIRECRAWL_API_KEY}" }
-    },
     "fetch": {
       "command": "uvx",
       "args": ["mcp-server-fetch", "--ignore-robots-txt"]
     },
-    "markitdown": {
+    "firecrawl": {
       "command": "npx",
-      "args": ["-y", "markitdown-mcp"]
+      "args": ["-y", "firecrawl-mcp"],
+      "env": {
+        "FIRECRAWL_API_KEY": "fc-4d0c587df3c44038bbf9f39e175fffd0"
+      }
     },
-    "brave-search": {
+    "exa": {
       "command": "npx",
-      "args": ["-y", "@anthropic/mcp-server-brave-search"],
-      "env": { "BRAVE_API_KEY": "${BRAVE_API_KEY}" }
+      "args": ["-y", "exa-mcp-server"],
+      "env": {
+        "EXA_API_KEY": "d97b2cc5-ce40-4409-94ab-898ed05ca7a8"
+      }
+    },
+    "google-search": {
+      "command": "npx",
+      "args": ["-y", "serper-search-mcp"],
+      "env": {
+        "SERPER_API_KEY": "0a673b2e955a91f677fbee43f9c716ecdd315c25"
+      }
+    },
+    "markitdown": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "markitdown-mcp"]
     }
   }
 }

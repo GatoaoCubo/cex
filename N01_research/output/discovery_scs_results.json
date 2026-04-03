@@ -1,0 +1,31 @@
+{
+  "city": "São Caetano do Sul",
+  "execution_time": 0.08371162414550781,
+  "summary": {
+    "total_discovered": 477,
+    "after_dedup": 0,
+    "validated": 477,
+    "final_count": 0,
+    "execution_time_s": 0.0,
+    "miners_used": [
+      "cep_geography",
+      "google_maps",
+      "facebook_business",
+      "yellow_pages",
+      "marketplace",
+      "waze",
+      "delivery_apps"
+    ],
+    "agents_used": [
+      "validator",
+      "deduplicator",
+      "enricher"
+    ]
+  },
+  "businesses": [],
+  "context": {
+    "region": "abc_metropolitano",
+    "niche": "pet_ecosystem",
+    "execution_mode": "premium_deep"
+  }
+}
