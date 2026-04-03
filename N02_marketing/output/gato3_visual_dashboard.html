@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GATO³ — Dashboard de Gestão Felina</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ═══════════════════════════════════════
+           GATO³ Design Tokens — PB Minimalista
+           ═══════════════════════════════════════ */
+        :root {
+            --g3-black: #000000;
+            --g3-charcoal: #1F1F1F;
+            --g3-steel: #7A7A7A;
+            --g3-silver: #D1D1D1;
+            --g3-white: #FFFFFF;
+            --g3-snow: #FAFAFA;
+            --g3-bone: #F5F5F5;
+
+            --bg: var(--g3-white);
+            --bg-sidebar: var(--g3-charcoal);
+            --bg-card: var(--g3-white);
+            --bg-hover: var(--g3-bone);
+            --text-1: var(--g3-black);
+            --text-2: var(--g3-steel);
+            --text-3: var(--g3-silver);
+            --text-inv: var(--g3-white);
+            --border: #E5E5E5;
+            --border-strong: var(--g3-silver);
+            --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-card-hover: 0 4px 12px rgba(0,0,0,0.08);
+            --radius: 12px;
+            --radius-sm: 8px;
+            --transition: 200ms ease;
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+            --green: #16A34A;
+            --green-bg: #F0FDF4;
+            --orange: #EA580C;
+            --orange-bg: #FFF7ED;
+            --blue: #2563EB;
+            --blue-bg: #EFF6FF;
+            --red: #DC2626;
+            --red-bg: #FEF2F2;
+        }
+
+        [data-theme="dark"] {
+            --bg: #0A0A0A;
+            --bg-sidebar: #111111;
+            --bg-card: var(--g3-charcoal);
+            --bg-hover: #2A2A2A;
+            --text-1: var(--g3-white);
+            --text-2: var(--g3-silver);
+            --text-3: var(--g3-steel);
+            --text-inv: var(--g3-black);
+            --border: #333333;
+            --border-strong: #555555;
+            --shadow-card: 0 1px 3px rgba(0,0,0,0.3);
+            --shadow-card-hover: 0 4px 12px rgba(0,0,0,0.4);
+            --green-bg: #052E16;
+            --orange-bg: #431407;
+            --blue-bg: #172554;
+            --red-bg: #450A0A;
+        }
+
+        /* ═══════════════════════════════════════
+           Reset & Base
+           ═══════════════════════════════════════ */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text-1);
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+
+        /* ═══════════════════════════════════════
+           Sidebar
+           ═══════════════════════════════════════ */
+        .sidebar {
+            position: fixed;
+            top: 0; left: 0; bottom: 0;
+            width: 260px;
+            background: var(--bg-sidebar);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+            transition: transform var(--transition);
+        }
+
+        .sidebar-brand {
+            padding: 24px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            display: flex;
+            align-items: baseline;
+            gap: 2px;
+        }
+
+        .sidebar-brand h1 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--g3-white);
+            letter-spacing: -0.02em;
+        }
+
+        .sidebar-brand sup {
+            font-size: 0.75rem;
+            color: var(--g3-steel);
+            vertical-align: super;
+        }
+
+        .sidebar-brand .tagline {
+            display: block;
+            font-size: 0.7rem;
+            color: var(--g3-steel);
+            margin-top: 4px;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .sidebar-nav {
+            padding: 12px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .sidebar-section {
+            margin-bottom: 20px;
+        }
+
+        .sidebar-section-label {
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: var(--g3-steel);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 0 8px;
+            margin-bottom: 4px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            border-radius: var(--radius-sm);
+            color: rgba(255,255,255,0.55);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all var(--transition);
+            cursor: pointer;
+        }
+
+        .nav-item:hover {
+            background: rgba(255,255,255,0.06);
+            color: rgba(255,255,255,0.85);
+        }
+
+        .nav-item.active {
+            background: rgba(255,255,255,0.1);
+            color: var(--g3-white);
+        }
+
+        .nav-item svg {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+            opacity: 0.7;
+        }
+
+        .nav-item.active svg { opacity: 1; }
+
+        .sidebar-footer {
+            padding: 16px 20px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .sidebar-footer .status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75rem;
+            color: var(--g3-steel);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--green);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* ═══════════════════════════════════════
+           Main Content
+           ═══════════════════════════════════════ */
+        .main {
+            margin-left: 260px;
+            min-height: 100vh;
+        }
+
+        /* Top Bar */
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+            padding: 0 32px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(8px);
+        }
+
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .topbar-title {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .topbar-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-2);
+        }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all var(--transition);
+            color: var(--text-2);
+        }
+
+        .btn-icon:hover {
+            border-color: var(--text-1);
+            color: var(--text-1);
+        }
+
+        .btn-icon svg { width: 18px; height: 18px; }
+
+        .menu-toggle {
+            display: none;
+            width: 36px; height: 36px;
+            border: none; background: none;
+            cursor: pointer; color: var(--text-1);
+        }
+
+        .menu-toggle svg { width: 24px; height: 24px; }
+
+        /* Content Area */
+        .content {
+            padding: 28px 32px;
+            max-width: 1400px;
+        }
+
+        /* Period Selector */
+        .period-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+
+        .period-tabs {
+            display: flex;
+            gap: 2px;
+            background: var(--bg-hover);
+            padding: 3px;
+            border-radius: var(--radius-sm);
+        }
+
+        .period-tab {
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-2);
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            transition: all var(--transition);
+        }
+
+        .period-tab:hover { color: var(--text-1); }
+
+        .period-tab.active {
+            background: var(--bg-card);
+            color: var(--text-1);
+            box-shadow: var(--shadow-card);
+        }
+
+        .period-date {
+            font-size: 0.8rem;
+            color: var(--text-2);
+        }
+
+        /* ═══════════════════════════════════════
+           KPI Cards
+           ═══════════════════════════════════════ */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .kpi-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+            transition: all var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .kpi-card:hover {
+            box-shadow: var(--shadow-card-hover);
+            border-color: var(--border-strong);
+        }
+
+        .kpi-label {
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: var(--text-2);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .kpi-label svg { width: 14px; height: 14px; }
+
+        .kpi-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            margin-bottom: 8px;
+        }
+
+        .kpi-change {
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            padding: 2px 8px;
+            border-radius: 20px;
+        }
+
+        .kpi-change.up { color: var(--green); background: var(--green-bg); }
+        .kpi-change.down { color: var(--red); background: var(--red-bg); }
+        .kpi-change.neutral { color: var(--orange); background: var(--orange-bg); }
+
+        .kpi-spark {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100px;
+            height: 40px;
+            opacity: 0.15;
+        }
+
+        /* ═══════════════════════════════════════
+           Charts Section
+           ═══════════════════════════════════════ */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: all var(--transition);
+        }
+
+        .card:hover { box-shadow: var(--shadow-card-hover); }
+
+        .card-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .card-badge {
+            font-size: 0.7rem;
+            font-weight: 500;
+            padding: 3px 10px;
+            border-radius: 20px;
+            background: var(--bg-hover);
+            color: var(--text-2);
+        }
+
+        .card-body { padding: 20px; }
+
+        /* Bar Chart */
+        .bar-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .bar-row {
+            display: grid;
+            grid-template-columns: 140px 1fr 60px;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .bar-label {
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--text-1);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .bar-track {
+            height: 28px;
+            background: var(--bg-hover);
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: var(--g3-charcoal);
+            border-radius: 6px;
+            transition: width 1s ease;
+            position: relative;
+        }
+
+        [data-theme="dark"] .bar-fill {
+            background: var(--g3-silver);
+        }
+
+        .bar-value {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-1);
+            text-align: right;
+        }
+
+        /* Donut Chart */
+        .donut-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            padding: 8px 0;
+        }
+
+        .donut-svg {
+            width: 160px;
+            height: 160px;
+            transform: rotate(-90deg);
+        }
+
+        .donut-segment {
+            fill: none;
+            stroke-width: 28;
+            transition: stroke-dashoffset 1s ease;
+        }
+
+        .donut-center-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(0deg);
+            text-align: center;
+        }
+
+        .donut-wrapper {
+            position: relative;
+            width: 160px;
+            height: 160px;
+        }
+
+        .donut-total {
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .donut-total-label {
+            font-size: 0.7rem;
+            color: var(--text-2);
+        }
+
+        .donut-legend {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+        }
+
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 3px;
+            flex-shrink: 0;
+        }
+
+        .legend-label { color: var(--text-2); }
+        .legend-value { font-weight: 600; margin-left: auto; }
+
+        /* ═══════════════════════════════════════
+           Tables
+           ═══════════════════════════════════════ */
+        .table-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead th {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--text-2);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding: 10px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tbody td {
+            padding: 12px 16px;
+            font-size: 0.85rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tbody tr:last-child td { border-bottom: none; }
+
+        tbody tr {
+            transition: background var(--transition);
+        }
+
+        tbody tr:hover { background: var(--bg-hover); }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.72rem;
+            font-weight: 600;
+        }
+
+        .badge-green { color: var(--green); background: var(--green-bg); }
+        .badge-orange { color: var(--orange); background: var(--orange-bg); }
+        .badge-blue { color: var(--blue); background: var(--blue-bg); }
+        .badge-red { color: var(--red); background: var(--red-bg); }
+
+        .region-rank {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--bg-hover);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--text-2);
+            margin-right: 8px;
+        }
+
+        .font-medium { font-weight: 500; }
+        .font-semibold { font-weight: 600; }
+        .text-secondary { color: var(--text-2); }
+
+        /* ═══════════════════════════════════════
+           Activity Feed
+           ═══════════════════════════════════════ */
+        .activity-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--border);
+            transition: background var(--transition);
+        }
+
+        .activity-item:last-child { border-bottom: none; }
+        .activity-item:hover { background: var(--bg-hover); }
+
+        .activity-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--bg-hover);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-2);
+            flex-shrink: 0;
+        }
+
+        .activity-content { flex: 1; }
+
+        .activity-text {
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .activity-text strong { font-weight: 600; }
+
+        .activity-time {
+            font-size: 0.72rem;
+            color: var(--text-3);
+            margin-top: 2px;
+        }
+
+        /* ═══════════════════════════════════════
+           Responsive
+           ═══════════════════════════════════════ */
+        @media (max-width: 1024px) {
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.open { transform: translateX(0); }
+            .main { margin-left: 0; }
+            .menu-toggle { display: block; }
+            .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+            .charts-grid { grid-template-columns: 1fr; }
+            .table-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 640px) {
+            .kpi-grid { grid-template-columns: 1fr; }
+            .content { padding: 20px 16px; }
+            .topbar { padding: 0 16px; }
+            .bar-row { grid-template-columns: 100px 1fr 50px; }
+            .donut-container { flex-direction: column; }
+        }
+
+        /* Sidebar Overlay */
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 90;
+        }
+
+        @media (max-width: 1024px) {
+            .sidebar.open ~ .sidebar-overlay { display: block; }
+        }
+
+        /* ═══════════════════════════════════════
+           Animations
+           ═══════════════════════════════════════ */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.4s ease forwards;
+            opacity: 0;
+        }
+
+        .delay-1 { animation-delay: 0.05s; }
+        .delay-2 { animation-delay: 0.1s; }
+        .delay-3 { animation-delay: 0.15s; }
+        .delay-4 { animation-delay: 0.2s; }
+        .delay-5 { animation-delay: 0.25s; }
+        .delay-6 { animation-delay: 0.3s; }
+        .delay-7 { animation-delay: 0.35s; }
+        .delay-8 { animation-delay: 0.4s; }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-3);
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     SIDEBAR
+     ═══════════════════════════════════════ -->
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+        <div>
+            <h1>GATO<sup>3</sup></h1>
+            <span class="tagline">Curadoria felina</span>
+        </div>
+    </div>
+
+    <nav class="sidebar-nav">
+        <div class="sidebar-section">
+            <div class="sidebar-section-label">Principal</div>
+            <a class="nav-item active" href="#">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
+                    <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+                </svg>
+                Dashboard
+            </a>
+            <a class="nav-item" href="#">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/>
+                    <line x1="7" y1="7" x2="7.01" y2="7"/>
+                </svg>
+                Produtos Curados
+            </a>
+            <a class="nav-item" href="#">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 00-3-3.87"/>
+                    <path d="M16 3.13a4 4 0 010 7.75"/>
+                </svg>
+                Tutores
+            </a>
+            <a class="nav-item" href="#">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+                </svg>
+                Avaliações
+            </a>
+        </div>
+
+        <div class="sidebar-section">
+            <div class="sidebar-section-label">Canais</div>
+            <a class="nav-item" href="#">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="2" y1="12" x2="22" y2="12"/>
+                    <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
+                </svg>
+                gato3.com.br
+            </a>
+            <a class="nav-item" href="#">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+                </svg>
+                Mercado Livre
+            </a>
+            <a class="nav-item" href="#">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <path d="M16 10a4 4 0 01-8 0"/>
+                </svg>
+                Shopee
+            </a>
+        </div>
+
+        <div class="sidebar-section">
+            <div class="sidebar-section-label">Gestão</div>
+            <a class="nav-item" href="#">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/>
+                    <line x1="6" y1="20" x2="6" y2="14"/>
+                </svg>
+                Relatórios
+            </a>
+            <a class="nav-item" href="#">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
+                </svg>
+                Configurações
+            </a>
+        </div>
+    </nav>
+
+    <div class="sidebar-footer">
+        <div class="status">
+            <span class="status-dot"></span>
+            Sistema online — ABC Paulista
+        </div>
+    </div>
+</aside>
+
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+<!-- ═══════════════════════════════════════
+     MAIN CONTENT
+     ═══════════════════════════════════════ -->
+<div class="main">
+    <!-- Top Bar -->
+    <header class="topbar">
+        <div class="topbar-left">
+            <button class="menu-toggle" onclick="toggleSidebar()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <line x1="3" y1="12" x2="21" y2="12"/>
+                    <line x1="3" y1="18" x2="21" y2="18"/>
+                </svg>
+            </button>
+            <div>
+                <div class="topbar-title">Dashboard de Bem-Estar Felino</div>
+                <div class="topbar-subtitle">Educação que acalma, soluções que funcionam.</div>
+            </div>
+        </div>
+        <div class="topbar-right">
+            <button class="btn-icon" onclick="toggleTheme()" title="Alternar tema">
+                <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"/>
+                    <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                    <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
+            </button>
+            <button class="btn-icon" title="Notificações">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                    <path d="M13.73 21a2 2 0 01-3.46 0"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Content -->
+    <div class="content">
+        <!-- Period Bar -->
+        <div class="period-bar animate-in delay-1">
+            <div class="period-tabs">
+                <button class="period-tab">7 dias</button>
+                <button class="period-tab active">30 dias</button>
+                <button class="period-tab">90 dias</button>
+                <button class="period-tab">12 meses</button>
+            </div>
+            <div class="period-date">01 Mar — 31 Mar 2026</div>
+        </div>
+
+        <!-- KPI Cards -->
+        <div class="kpi-grid">
+            <div class="kpi-card animate-in delay-2">
+                <div class="kpi-label">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+                    Receita Total
+                </div>
+                <div class="kpi-value">R$ 45.231</div>
+                <span class="kpi-change up">
+                    <svg width="12" height="12" viewBox="0 0 12 12"><path d="M6 2L10 7H2L6 2Z" fill="currentColor"/></svg>
+                    +15,3% vs mês anterior
+                </span>
+            </div>
+
+            <div class="kpi-card animate-in delay-3">
+                <div class="kpi-label">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+                    Tutores Ativos
+                </div>
+                <div class="kpi-value">1.847</div>
+                <span class="kpi-change up">
+                    <svg width="12" height="12" viewBox="0 0 12 12"><path d="M6 2L10 7H2L6 2Z" fill="currentColor"/></svg>
+                    +42 esta semana
+                </span>
+            </div>
+
+            <div class="kpi-card animate-in delay-4">
+                <div class="kpi-label">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                    Produtos Vendidos
+                </div>
+                <div class="kpi-value">3.429</div>
+                <span class="kpi-change neutral">
+                    <svg width="12" height="12" viewBox="0 0 12 12"><rect x="2" y="5" width="8" height="2" fill="currentColor" rx="1"/></svg>
+                    Tapetes gelados em alta
+                </span>
+            </div>
+
+            <div class="kpi-card animate-in delay-5">
+                <div class="kpi-label">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    Satisfação (NPS)
+                </div>
+                <div class="kpi-value">94,2%</div>
+                <span class="kpi-change up">
+                    <svg width="12" height="12" viewBox="0 0 12 12"><path d="M6 2L10 7H2L6 2Z" fill="currentColor"/></svg>
+                    Zona de Excelência
+                </span>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="charts-grid">
+            <!-- Vendas por Categoria (Bar Chart) -->
+            <div class="card animate-in delay-6">
+                <div class="card-header">
+                    <span class="card-title">Vendas por Categoria</span>
+                    <span class="card-badge">Mar 2026</span>
+                </div>
+                <div class="card-body">
+                    <div class="bar-chart">
+                        <div class="bar-row">
+                            <span class="bar-label">Tapetes Gelados</span>
+                            <div class="bar-track"><div class="bar-fill" style="width: 82%"></div></div>
+                            <span class="bar-value">R$ 18,4k</span>
+                        </div>
+                        <div class="bar-row">
+                            <span class="bar-label">Camas de Janela</span>
+                            <div class="bar-track"><div class="bar-fill" style="width: 57%"></div></div>
+                            <span class="bar-value">R$ 12,8k</span>
+                        </div>
+                        <div class="bar-row">
+                            <span class="bar-label">Arranhadores</span>
+                            <div class="bar-track"><div class="bar-fill" style="width: 42%"></div></div>
+                            <span class="bar-value">R$ 9,4k</span>
+                        </div>
+                        <div class="bar-row">
+                            <span class="bar-label">Kits Gatitude</span>
+                            <div class="bar-track"><div class="bar-fill" style="width: 28%"></div></div>
+                            <span class="bar-value">R$ 6,2k</span>
+                        </div>
+                        <div class="bar-row">
+                            <span class="bar-label">Brinquedos</span>
+                            <div class="bar-track"><div class="bar-fill" style="width: 18%"></div></div>
+                            <span class="bar-value">R$ 4,1k</span>
+                        </div>
+                        <div class="bar-row">
+                            <span class="bar-label">Acessórios</span>
+                            <div class="bar-track"><div class="bar-fill" style="width: 12%"></div></div>
+                            <span class="bar-value">R$ 2,7k</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Distribuição de Canais (Donut) -->
+            <div class="card animate-in delay-7">
+                <div class="card-header">
+                    <span class="card-title">Canais de Venda</span>
+                    <span class="card-badge">Distribuição</span>
+                </div>
+                <div class="card-body">
+                    <div class="donut-container">
+                        <div class="donut-wrapper">
+                            <svg class="donut-svg" viewBox="0 0 160 160">
+                                <!-- Total circumference = 2 * PI * 52 = 326.73 -->
+                                <!-- gato3.com.br: 45% = 147.03 -->
+                                <circle class="donut-segment" cx="80" cy="80" r="52"
+                                    stroke="#000000" stroke-dasharray="147.03 326.73" stroke-dashoffset="0"/>
+                                <!-- Mercado Livre: 30% = 98.02, offset = -147.03 -->
+                                <circle class="donut-segment" cx="80" cy="80" r="52"
+                                    stroke="#7A7A7A" stroke-dasharray="98.02 326.73" stroke-dashoffset="-147.03"/>
+                                <!-- Shopee: 15% = 49.01, offset = -245.05 -->
+                                <circle class="donut-segment" cx="80" cy="80" r="52"
+                                    stroke="#D1D1D1" stroke-dasharray="49.01 326.73" stroke-dashoffset="-245.05"/>
+                                <!-- B2B Revenda: 10% = 32.67, offset = -294.06 -->
+                                <circle class="donut-segment" cx="80" cy="80" r="52"
+                                    stroke="#1F1F1F" stroke-dasharray="32.67 326.73" stroke-dashoffset="-294.06"
+                                    stroke-dasharray="32.67 326.73"/>
+                            </svg>
+                            <div class="donut-center-text">
+                                <div class="donut-total">3.429</div>
+                                <div class="donut-total-label">pedidos</div>
+                            </div>
+                        </div>
+                        <div class="donut-legend">
+                            <div class="legend-item">
+                                <span class="legend-dot" style="background:#000000"></span>
+                                <span class="legend-label">gato3.com.br</span>
+                                <span class="legend-value">45%</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-dot" style="background:#7A7A7A"></span>
+                                <span class="legend-label">Mercado Livre</span>
+                                <span class="legend-value">30%</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-dot" style="background:#D1D1D1"></span>
+                                <span class="legend-label">Shopee</span>
+                                <span class="legend-value">15%</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-dot" style="background:#1F1F1F"></span>
+                                <span class="legend-label">B2B Revenda</span>
+                                <span class="legend-value">10%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tables: Expansão Regional + Conteúdo -->
+        <div class="table-grid">
+            <!-- Expansão Regional -->
+            <div class="card animate-in delay-8">
+                <div class="card-header">
+                    <span class="card-title">Expansão Regional</span>
+                    <span class="card-badge">Local-first</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Região</th>
+                            <th>Pedidos</th>
+                            <th>Receita</th>
+                            <th>Crescimento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <span class="region-rank">1</span>
+                                <span class="font-medium">ABC Paulista</span>
+                            </td>
+                            <td class="font-semibold">1.543</td>
+                            <td class="font-semibold">R$ 24.180</td>
+                            <td><span class="badge badge-green">+22%</span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="region-rank">2</span>
+                                <span class="font-medium">Grande São Paulo</span>
+                            </td>
+                            <td class="font-semibold">892</td>
+                            <td class="font-semibold">R$ 12.640</td>
+                            <td><span class="badge badge-green">+18%</span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="region-rank">3</span>
+                                <span class="font-medium">Interior SP</span>
+                            </td>
+                            <td class="font-semibold">487</td>
+                            <td class="font-semibold">R$ 5.890</td>
+                            <td><span class="badge badge-blue">+8%</span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="region-rank">4</span>
+                                <span class="font-medium">Outras capitais</span>
+                            </td>
+                            <td class="font-semibold">328</td>
+                            <td class="font-semibold">R$ 3.920</td>
+                            <td><span class="badge badge-orange">+5%</span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="region-rank">5</span>
+                                <span class="font-medium">Demais regiões</span>
+                            </td>
+                            <td class="font-semibold">179</td>
+                            <td class="font-semibold">R$ 1.601</td>
+                            <td><span class="badge badge-blue">Novo</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pilares de Conteúdo -->
+            <div class="card animate-in delay-8">
+                <div class="card-header">
+                    <span class="card-title">Pilares de Conteúdo</span>
+                    <span class="card-badge">Performance</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Pilar</th>
+                            <th>Posts</th>
+                            <th>Engajamento</th>
+                            <th>CTR</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="font-medium">Produtos em Destaque</td>
+                            <td>24</td>
+                            <td><span class="badge badge-green">4,8%</span></td>
+                            <td class="font-semibold">3,2%</td>
+                        </tr>
+                        <tr>
+                            <td class="font-medium">Educacional</td>
+                            <td>18</td>
+                            <td><span class="badge badge-green">6,1%</span></td>
+                            <td class="font-semibold">2,4%</td>
+                        </tr>
+                        <tr>
+                            <td class="font-medium">Dicas da Ro</td>
+                            <td>12</td>
+                            <td><span class="badge badge-green">7,3%</span></td>
+                            <td class="font-semibold">4,1%</td>
+                        </tr>
+                        <tr>
+                            <td class="font-medium">Tendências</td>
+                            <td>6</td>
+                            <td><span class="badge badge-orange">3,2%</span></td>
+                            <td class="font-semibold">1,8%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Activity Feed -->
+        <div class="card animate-in delay-8">
+            <div class="card-header">
+                <span class="card-title">Atividade Recente</span>
+                <span class="card-badge">Tempo real</span>
+            </div>
+            <div class="activity-list">
+                <div class="activity-item">
+                    <div class="activity-avatar">CM</div>
+                    <div class="activity-content">
+                        <div class="activity-text"><strong>Carla M.</strong> comprou <strong>Tapete Gelado Premium</strong> + <strong>Kit Gatitude Verão</strong></div>
+                        <div class="activity-time">Há 12 minutos — gato3.com.br — São Caetano do Sul</div>
+                    </div>
+                    <span class="badge badge-green">R$ 189</span>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-avatar">RF</div>
+                    <div class="activity-content">
+                        <div class="activity-text"><strong>Ricardo F.</strong> avaliou <strong>Cama de Janela Panorâmica</strong> — 5 estrelas</div>
+                        <div class="activity-time">Há 28 minutos — Mercado Livre — Santo André</div>
+                    </div>
+                    <span class="badge badge-blue">Avaliação</span>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-avatar">PV</div>
+                    <div class="activity-content">
+                        <div class="activity-text"><strong>Pet Vida ABC</strong> fez pedido B2B — <strong>12x Arranhador Vertical</strong> + <strong>8x Tapete Gelado</strong></div>
+                        <div class="activity-time">Há 1 hora — B2B Revenda — São Bernardo do Campo</div>
+                    </div>
+                    <span class="badge badge-green">R$ 2.460</span>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-avatar">AL</div>
+                    <div class="activity-content">
+                        <div class="activity-text"><strong>Ana Luísa</strong> seguiu a <strong>Dica da Ro #47</strong> — "Como apresentar arranhador novo"</div>
+                        <div class="activity-time">Há 2 horas — Instagram — Diadema</div>
+                    </div>
+                    <span class="badge badge-orange">Conteúdo</span>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-avatar">MG</div>
+                    <div class="activity-content">
+                        <div class="activity-text"><strong>Marcos G.</strong> comprou <strong>Kit Primeiro Gato</strong> para adoção</div>
+                        <div class="activity-time">Há 3 horas — Shopee — Guarulhos</div>
+                    </div>
+                    <span class="badge badge-green">R$ 247</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Theme Toggle
+    function toggleTheme() {
+        const html = document.documentElement;
+        const current = html.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+
+        const icon = document.getElementById('theme-icon');
+        if (next === 'dark') {
+            icon.innerHTML = '<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>';
+        } else {
+            icon.innerHTML = '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
+        }
+    }
+
+    // Sidebar Toggle (mobile)
+    function toggleSidebar() {
+        document.getElementById('sidebar').classList.toggle('open');
+    }
+
+    document.getElementById('sidebar-overlay').addEventListener('click', function() {
+        document.getElementById('sidebar').classList.remove('open');
+    });
+
+    // Period Tab switching
+    document.querySelectorAll('.period-tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+            document.querySelectorAll('.period-tab').forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+
+    // Nav item switching
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+
+    // Animated counters on load
+    function animateValue(el, start, end, duration, prefix, suffix) {
+        const startTime = performance.now();
+        function update(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const current = Math.floor(start + (end - start) * eased);
+            el.textContent = prefix + current.toLocaleString('pt-BR') + suffix;
+            if (progress < 1) requestAnimationFrame(update);
+        }
+        requestAnimationFrame(update);
+    }
+
+    // Trigger counter animations
+    window.addEventListener('load', function() {
+        const kpis = document.querySelectorAll('.kpi-value');
+        if (kpis[0]) animateValue(kpis[0], 0, 45231, 1200, 'R$ ', '');
+        if (kpis[1]) animateValue(kpis[1], 0, 1847, 1000, '', '');
+        if (kpis[2]) animateValue(kpis[2], 0, 3429, 1100, '', '');
+        if (kpis[3]) {
+            const startTime = performance.now();
+            function updatePercent(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / 1000, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                const current = (94.2 * eased).toFixed(1).replace('.', ',');
+                kpis[3].textContent = current + '%';
+                if (progress < 1) requestAnimationFrame(updatePercent);
+            }
+            requestAnimationFrame(updatePercent);
+        }
+    });
+</script>
+
+</body>
+</html>
