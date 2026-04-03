@@ -1,0 +1,53 @@
+id: p04_retr_multi_source_business_intel
+kind: retriever
+pillar: P04
+title: Multi-Source Business Intelligence Retriever
+version: 1.0.0
+created: 2026-04-03
+updated: 2026-04-03
+author: builder_agent
+domain: crm-research
+store_type: multi_backend
+embedding_model: null
+similarity_metric: null
+search_type: hybrid
+top_k: 50
+score_threshold: null
+reranker: null
+llm_function: INJECT
+tags:
+- retriever
+- multi-source
+- crm
+- business-intel
+- aggregation
+- GATO3
+tldr: Agregador multi-fonte que orquestra coleta de dados business pet de 6 backends simultaneos — SERPER, FIRECRAWL, EXA,
+  FETCH, social, delivery.
+quality: null
+density_score: null
+overview: Retriever multi-backend para pipeline CRM pet. Nao usa embedding store tradicional — agrega resultados de 6 fontes
+  externas em formato unificado. Cada fonte tem adapter proprio com dedup cruzada por telefone+endereco. Resultados consolidados
+  alimentam o validator e response_format downstream.
+sources_adapters: "sources:\n  serper:\n    type: api\n    tool: mcpgoogle-searchsearch_web\n    output: [title, url, snippet]\n\
+  \    rate: 2500/mo\n    priority: 1\n    use_for: [pet_shop, veterinario, banho_tosa, distribuidor]\n\n  firecrawl_directories:\n\
+  \    type: scraper\n    tool: mcpfirecrawlfirecrawl_scrape\n    targets: [\"telelistas.net/{cidade}/pet\", \"guiamais.com.br\"\
+  ]\n    output: [nome, telefone, endereco, segmento]\n    rate: 500/mo\n    priority: 2\n\n  firecrawl_social:\n    type:\
+  \ scraper\n    tool: mcpfirecrawlfirecrawl_scrape\n    targets: [\"instagram.com/explore/tags/{cidade}pet\", \"facebook.com/search\"\
+  ]\n    output: [nome, url_perfil, telefone_bio]\n    rate: shared_with_directories\n    priority: 4\n\n  exa_semantic:\n\
+  \    type: api\n    tool: exa_search\n    output: [title, url, snippet, score]\n    rate: 1000/mo\n    priority: 3\n   \
+  \ use_for: [long_tail, nichos_especificos]\n\n  fetch_delivery:\n    type: http\n    tool: mcpfetchfetch\n    targets: [\"\
+  ifood.com.br/delivery/{cidade}/pet\", \"rappi.com.br\"]\n    output: [nome, endereco, categoria, rating]\n    rate: unlimited\n\
+  \    priority: 5\n\n  fetch_cnpj:\n    type: http\n    tool: mcpfetchfetch\n    targets: [\"receitaws.com.br/v1/cnpj/{cnpj}\"\
+  ]\n    output: [razao_social, cnpj, situacao, endereco_fiscal]\n    rate: unlimited\n    priority: 6"
+dedup_strategy: "dedup:\n  primary_key: telefone\n  secondary_key: endereco_normalizado\n  merge_policy: \"Manter registro\
+  \ mais completo, agregar fontes_cruzadas\"\n  conflict_resolution: \"Dado mais recente prevalece, flaggar conflito\""
+orchestration_flow: "[City Config] -> [Parallel: SERPER + FIRECRAWL + EXA]\n                      |\n              [Merge\
+  \ + Dedup Round 1]\n                      |\n              [Sequential: Social + Delivery]\n                      |\n  \
+  \            [Merge + Dedup Round 2]\n                      |\n              [Optional: CNPJ enrichment for potencial A]\n\
+  \                      |\n              [Unified Business List]"
+integration:
+- 'Upstream: agent_crm_research_orchestrator (dispatch)'
+- 'Downstream: validator_business_contact_quality, response_format_crm_output_standard'
+- 'Dependencies: search_tool_pet_business_discovery (query terms)'
+footer: 'Store: multi_backend (6 sources) | Quality: null | Domain: crm-research'

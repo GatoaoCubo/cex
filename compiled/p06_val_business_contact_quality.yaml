@@ -1,0 +1,55 @@
+id: p06_val_business_contact_quality
+kind: validator
+pillar: P06
+title: Business Contact Quality Validator
+version: 1.0.0
+created: 2026-04-03
+updated: 2026-04-03
+author: builder_agent
+domain: crm-research
+rule_name: validate-business-contact-quality
+target_kind: response_format
+scope: post_generation
+severity: warning
+auto_fix: false
+llm_function: GOVERN
+tags:
+- validator
+- crm
+- contact
+- phone
+- cnpj
+- email
+- website
+- GATO3
+tldr: Valida qualidade de contatos business descobertos — telefone BR, CNPJ algoritmico, email formato+dominio, website SSL+200.
+quality: null
+density_score: null
+overview: 'Regra de validacao para contatos de businesses pet descobertos pela pipeline CRM. Verifica 4 dimensoes de qualidade:
+  telefone, CNPJ, email e website. Cada dimensao produz pass/fail independente; o contato recebe um completeness_score baseado
+  em quantas dimensoes passam.'
+conditions: ''
+c1_telefone_br_valido: "field: business.telefone\noperator: matches\nvalue: \"^\\\\+?55\\\\d{2}[2-9]\\\\d{7,8}$\"\non_fail:\
+  \ warning\nremediation: \"Normalizar para formato +55XX9XXXXXXXX. Remover espacos, parenteses, hifens.\"\nnotes: |\n  -\
+  \ Celular: 11 digitos (com 9 inicial)\n  - Fixo: 10 digitos\n  - DDD obrigatorio (2 digitos)\n  - Aceita com ou sem +55"
+c2_cnpj_algoritmico: "field: business.cnpj\noperator: matches\nvalue: \"^\\\\d{14}$\"\non_fail: info\nremediation: \"Verificar\
+  \ digitos verificadores (mod 11). Consultar ReceitaWS se disponivel.\"\nnotes: |\n  - 14 digitos sem formatacao\n  - Digitos\
+  \ verificadores: posicoes 13 e 14\n  - Algoritmo: multiplicar por pesos [5,4,3,2,9,8,7,6,5,4,3,2], mod 11\n  - Campo opcional\
+  \ — muitos pequenos negocios nao divulgam"
+c3_email_formato_dominio: "field: business.email\noperator: matches\nvalue: \"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,}$\"\
+  \non_fail: warning\nremediation: \"Verificar formato RFC 5322 basico. Checar MX record do dominio se possivel.\"\nnotes:\
+  \ |\n  - Rejeitar emails genericos sem dominio corporativo (gmail, hotmail) com flag\n  - Verificar se dominio resolve (DNS\
+  \ MX lookup)\n  - Flag dominios expirados ou parked"
+c4_website_ssl_response_200: "field: business.website\noperator: matches\nvalue: \"^https?://[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,}\"\
+  \non_fail: info\nremediation: \"Verificar URL com HEAD request. Aceitar 200, 301, 302. Rejeitar 404, 5xx, timeout.\"\nnotes:\
+  \ |\n  - Preferir HTTPS (flag HTTP-only)\n  - Timeout: 10s max\n  - Aceitar redirects (301/302) como validos\n  - Rejeitar\
+  \ paginas de parking/domain-for-sale"
+scoring: "completeness_score:\n  4/4: \"A — contato completo, pronto para outreach\"\n  3/4: \"B — contato parcial, util para\
+  \ campanha\"\n  2/4: \"C — contato basico, requer enriquecimento\"\n  1/4: \"D — contato minimo, apenas referencia\"\n \
+  \ 0/4: \"F — sem dados de contato, descartavel para CRM ativo\"\nminimum_viable: 2  # Minimo 2 campos validados para entrar\
+  \ no CRM"
+error_message: "\"Contact validation: {passed}/{total} checks passed. \n Failed: {failed_fields}. Score: {completeness_score}.\""
+bypass_policy: 'allowed: false
+
+  reason: "Contatos nao-validados poluem CRM e desperdicam budget de outreach"'
+footer: 'Rule: validate-business-contact-quality | Quality: null | Domain: crm-research'

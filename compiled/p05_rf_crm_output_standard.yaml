@@ -1,0 +1,59 @@
+id: p05_rf_crm_output_standard
+kind: response_format
+pillar: P05
+title: CRM Output Standard Response Format
+version: 1.0.0
+created: 2026-04-03
+updated: 2026-04-03
+author: builder_agent
+domain: crm-research
+task: Padronizar output de research CRM multi-cidade para pipeline pet business
+format_type: yaml
+injection_point: system_prompt
+target_kind: agent
+sections: ''
+sections_count: 3
+llm_function: CONSTRAIN
+tags:
+- response_format
+- crm
+- output
+- multi-city
+- pet
+- pipeline
+- GATO3
+tldr: Schema padrao de output CRM multi-cidade — estrutura cidade + lista businesses + estatisticas, replicavel cross-city.
+quality: null
+density_score: null
+format_overview: 'Define a estrutura de output padronizada para toda pipeline CRM de descoberta pet. O LLM DEVE seguir este
+  formato estritamente ao gerar resultados de research por cidade. Output e YAML com 3 secoes: metadados da cidade, lista
+  de businesses, e estatisticas resumo. Modo strict: sim.'
+s1_cidade_required: "cidade:\n  nome: string          # Nome completo (ex: \"Sao Bernardo do Campo\")\n  uf: string      \
+  \      # Sigla estado (ex: \"SP\")\n  ring: int             # Ring geografico 1|2|3|4\n  populacao_estimada: int  # Populacao\
+  \ IBGE estimada\n  densidade_estimada: float  # Businesses pet / 10k habitantes\n  data_research: string    # Data ISO da\
+  \ pesquisa (YYYY-MM-DD)\n  fontes_usadas: list      # [\"serper\", \"firecrawl\", \"exa\", \"fetch\"]\n  budget_consumido:\n\
+  \    serper: int          # Queries gastas\n    firecrawl: int       # Scrapes gastos"
+s2_businesses_repeated_min_1: "businesses:\n  - nome: string              # Nome comercial\n    cnpj: string | null      \
+  \ # 14 digitos sem formatacao\n    telefone: string | null   # +55XXXXXXXXXXX\n    whatsapp: string | null   # +55XXXXXXXXXXX\
+  \ (pode ser = telefone)\n    email: string | null      # email comercial\n    website: string | null    # URL com protocolo\n\
+  \    endereco: string          # Endereco completo\n    bairro: string | null     # Bairro\n    segmento: enum         \
+  \   # pet_shop|banho_tosa|veterinario|distribuidor|hotel_pet|adestramento|alimentacao|acessorios|daycare|farmacia_vet|estetica|funeraria\n\
+  \    potencial: enum           # A|B|C\n    completeness_score: int   # 0-4 (campos de contato validados)\n    fonte_descoberta:\
+  \ string  # Fonte primaria de descoberta\n    fontes_cruzadas: list     # Todas as fontes que confirmaram\n    data_discovery:\
+  \ string    # ISO date\n    notas: string | null      # Observacoes livres"
+s3_summary_stats_required: "summary:\n  total_businesses: int\n  por_segmento:              # Contagem por vertical\n    pet_shop:\
+  \ int\n    banho_tosa: int\n    veterinario: int\n    distribuidor: int\n    hotel_pet: int\n    outros: int\n  por_potencial:\n\
+  \    A: int\n    B: int\n    C: int\n  taxa_contato_direto: float   # % com telefone ou whatsapp\n  taxa_email: float  \
+  \          # % com email\n  taxa_website: float          # % com website\n  completeness_media: float    # Media do completeness_score\n\
+  \  tempo_execucao: string       # \"1h23m\""
+example_output: "cidade:\n  nome: \"Sao Bernardo do Campo\"\n  uf: \"SP\"\n  ring: 1\n  populacao_estimada: 844483\n  densidade_estimada:\
+  \ 1.8\n  data_research: \"2026-04-03\"\n  fontes_usadas: [\"serper\", \"firecrawl\", \"fetch\"]\n  budget_consumido:\n \
+  \   serper: 42\n    firecrawl: 15\n\nbusinesses:\n  - nome: \"Pet House SBC\"\n    cnpj: \"12345678000190\"\n    telefone:\
+  \ \"+5511999887766\"\n    whatsapp: \"+5511999887766\"\n    email: \"contato@pethouse.com.br\"\n    website: \"https://pethouse.com.br\"\
+  \n    endereco: \"Rua Marechal Deodoro 500, Centro\"\n    bairro: \"Centro\"\n    segmento: \"pet_shop\"\n    potencial:\
+  \ \"A\"\n    completeness_score: 4\n    fonte_descoberta: \"serper\"\n    fontes_cruzadas: [\"serper\", \"firecrawl\", \"\
+  fetch\"]\n    data_discovery: \"2026-04-03\"\n    notas: \"Loja grande, aceita revenda\"\n\nsummary:\n  total_businesses:\
+  \ 48\n  por_segmento:\n    pet_shop: 15\n    banho_tosa: 12\n    veterinario: 10\n    distribuidor: 3\n    hotel_pet: 5\n\
+  \    outros: 3\n  por_potencial:\n    A: 12\n    B: 20\n    C: 16\n  taxa_contato_direto: 0.73\n  taxa_email: 0.52\n  taxa_website:\
+  \ 0.44\n  completeness_media: 2.8\n  tempo_execucao: \"1h47m\""
+footer: 'Format: crm_output_standard | Quality: null | Domain: crm-research'
