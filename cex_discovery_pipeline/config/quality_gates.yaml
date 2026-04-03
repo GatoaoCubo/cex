@@ -1,0 +1,103 @@
+# Config 4: Quality Gates
+# Validation rules for phone, address, CNPJ, email, website.
+# Confidence thresholds per data type.
+
+thresholds:
+  phone_confidence: 0.85       # Min confidence to accept phone
+  address_confidence: 0.80     # Min confidence to accept address
+  similarity: 0.75             # Dedup similarity threshold
+  existence: 0.70              # Min confidence to include business
+
+# Phone validation rules
+phone:
+  format_br_mobile: "^\\(?\\d{2}\\)?\\s?9\\d{4}-?\\d{4}$"
+  format_br_landline: "^\\(?\\d{2}\\)?\\s?\\d{4}-?\\d{4}$"
+  min_digits: 10
+  max_digits: 11
+  valid_ddds_sp:
+    - "11"  # São Paulo capital
+    - "12"  # Vale do Paraíba
+    - "13"  # Baixada Santista
+    - "14"  # Bauru
+    - "15"  # Sorocaba
+    - "16"  # Ribeirão Preto
+    - "17"  # São José do Rio Preto
+    - "18"  # Presidente Prudente
+    - "19"  # Campinas
+
+# Address validation rules
+address:
+  required_components:
+    - "street_type"   # Rua, Av., Al., etc.
+    - "number"        # Street number
+  preferred_components:
+    - "neighborhood"  # Bairro
+    - "cep"           # CEP code
+    - "city"          # City name
+  street_types:
+    - "rua"
+    - "avenida"
+    - "av."
+    - "alameda"
+    - "al."
+    - "travessa"
+    - "tv."
+    - "praça"
+    - "pç."
+    - "rodovia"
+    - "estrada"
+
+# CEP validation
+cep:
+  format: "^\\d{5}-?\\d{3}$"
+  sp_ranges:
+    - start: "01000"
+      end: "19999"
+      description: "Estado de São Paulo"
+
+# CNPJ validation
+cnpj:
+  format: "^\\d{2}\\.?\\d{3}\\.?\\d{3}/?\\d{4}-?\\d{2}$"
+  check_digit_algorithm: true
+  reject_known_invalid:
+    - "00000000000000"
+    - "11111111111111"
+    - "22222222222222"
+
+# Email validation
+email:
+  format: "^[\\w.+-]+@[\\w-]+\\.[\\w.]+$"
+  reject_disposable: true
+
+# Website validation
+website:
+  require_ssl: false          # Don't require HTTPS for small businesses
+  check_status: false         # Don't HTTP check (too slow for bulk)
+  valid_tlds:
+    - ".com.br"
+    - ".com"
+    - ".net"
+    - ".org"
+
+# Deduplication thresholds
+deduplication:
+  phone_weight: 0.8           # Strongest dedup signal
+  address_weight: 0.6
+  name_weight: 0.4
+  duplicate_threshold: 0.75   # Above = same business
+  max_acceptable_rate: 0.05   # <5% final duplicate rate
+
+# Source reliability scores (used by ValidatorAgent)
+source_reliability:
+  google_maps: 0.95
+  facebook_business: 0.90
+  yellow_pages_apontador: 0.85
+  yellow_pages_telelistas: 0.85
+  yellow_pages_guiamais: 0.80
+  yellow_pages_encontrasp: 0.80
+  cep_geography: 0.85
+  delivery_ifood: 0.90
+  delivery_rappi: 0.85
+  marketplace_mercadolivre: 0.75
+  marketplace_olx: 0.70
+  waze_directory: 0.85

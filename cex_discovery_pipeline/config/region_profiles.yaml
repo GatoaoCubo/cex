@@ -1,0 +1,199 @@
+# Config 2: Regional Profiles
+# Geographic configurations for pipeline optimization.
+# Each profile defines type, population, business density, and optimal techniques.
+
+profiles:
+  # ── ABC Paulista (Ring 1 — GATO3 home territory) ──────────
+  sao_caetano_sul:
+    type: "urban_dense"
+    display_name: "São Caetano do Sul"
+    state: "SP"
+    population: 165000
+    area_km2: 15.3
+    business_density: "high"
+    market_maturity: "established"
+    data_availability: "rich"
+    optimal_techniques:
+      - "google_maps"
+      - "facebook_business"
+      - "yellow_pages"
+      - "cep_geography"
+    cities:
+      - "sao_caetano_sul"
+    cep_prefix: "095"
+    notes: "HQ GATO3 — densest coverage, epicenter"
+
+  sao_bernardo_campo:
+    type: "urban_dense"
+    display_name: "São Bernardo do Campo"
+    state: "SP"
+    population: 833000
+    area_km2: 409.5
+    business_density: "high"
+    market_maturity: "established"
+    data_availability: "rich"
+    optimal_techniques:
+      - "google_maps"
+      - "facebook_business"
+      - "cep_geography"
+      - "yellow_pages"
+      - "delivery_apps"
+    cities:
+      - "sao_bernardo_campo"
+    cep_prefix: "097"
+    notes: "Largest ABC city, major industrial base"
+
+  santo_andre:
+    type: "urban_dense"
+    display_name: "Santo André"
+    state: "SP"
+    population: 721000
+    area_km2: 175.8
+    business_density: "high"
+    market_maturity: "established"
+    data_availability: "rich"
+    optimal_techniques:
+      - "google_maps"
+      - "facebook_business"
+      - "yellow_pages"
+      - "cep_geography"
+    cities:
+      - "santo_andre"
+    cep_prefix: "091"
+
+  diadema:
+    type: "urban_dense"
+    display_name: "Diadema"
+    state: "SP"
+    population: 426000
+    area_km2: 30.7
+    business_density: "medium"
+    market_maturity: "established"
+    data_availability: "moderate"
+    optimal_techniques:
+      - "google_maps"
+      - "yellow_pages"
+      - "cep_geography"
+    cities:
+      - "diadema"
+    cep_prefix: "099"
+
+  maua:
+    type: "suburban_spread"
+    display_name: "Mauá"
+    state: "SP"
+    population: 477000
+    area_km2: 61.9
+    business_density: "medium"
+    market_maturity: "emerging"
+    data_availability: "moderate"
+    optimal_techniques:
+      - "google_maps"
+      - "cep_geography"
+      - "yellow_pages"
+    cities:
+      - "maua"
+
+  ribeiro_pires:
+    type: "suburban_spread"
+    display_name: "Ribeirão Pires"
+    state: "SP"
+    population: 124000
+    area_km2: 99.1
+    business_density: "low"
+    market_maturity: "emerging"
+    data_availability: "sparse"
+    optimal_techniques:
+      - "google_maps"
+      - "cep_geography"
+    cities:
+      - "ribeiro_pires"
+
+  rio_grande_serra:
+    type: "suburban_spread"
+    display_name: "Rio Grande da Serra"
+    state: "SP"
+    population: 50000
+    area_km2: 36.3
+    business_density: "low"
+    market_maturity: "emerging"
+    data_availability: "sparse"
+    optimal_techniques:
+      - "google_maps"
+      - "cep_geography"
+    cities:
+      - "rio_grande_serra"
+
+  # ── Aggregate Regions ──────────────────────────────────────
+  abc_metropolitano:
+    type: "metropolitan"
+    display_name: "ABC Paulista (Metropolitano)"
+    state: "SP"
+    population: 2800000
+    area_km2: 828.0
+    business_density: "high"
+    market_maturity: "established"
+    data_availability: "rich"
+    optimal_techniques:
+      - "google_maps"
+      - "facebook_business"
+      - "yellow_pages"
+      - "cep_geography"
+      - "delivery_apps"
+      - "marketplace"
+      - "waze"
+    cities:
+      - "sao_caetano_sul"
+      - "sao_bernardo_campo"
+      - "santo_andre"
+      - "diadema"
+      - "maua"
+      - "ribeiro_pires"
+      - "rio_grande_serra"
+    execution_strategy: "multi_city_parallel"
+
+  # ── Ring 2 — Grande São Paulo ──────────────────────────────
+  sao_paulo:
+    type: "urban_dense"
+    display_name: "São Paulo Capital"
+    state: "SP"
+    population: 12400000
+    area_km2: 1521.0
+    business_density: "high"
+    market_maturity: "saturated"
+    data_availability: "rich"
+    optimal_techniques:
+      - "google_maps"
+      - "facebook_business"
+      - "delivery_apps"
+      - "yellow_pages"
+      - "marketplace"
+    cities:
+      - "sao_paulo"
+
+  grande_sao_paulo:
+    type: "metropolitan"
+    display_name: "Grande São Paulo"
+    state: "SP"
+    population: 22000000
+    area_km2: 7946.0
+    business_density: "high"
+    market_maturity: "established"
+    data_availability: "rich"
+    optimal_techniques:
+      - "google_maps"
+      - "facebook_business"
+      - "yellow_pages"
+      - "delivery_apps"
+      - "marketplace"
+      - "waze"
+      - "cep_geography"
+    cities:
+      - "sao_paulo"
+      - "guarulhos"
+      - "osasco"
+      - "barueri"
+      - "sao_bernardo_campo"
+      - "santo_andre"
+      - "sao_caetano_sul"
+    execution_strategy: "multi_city_parallel"

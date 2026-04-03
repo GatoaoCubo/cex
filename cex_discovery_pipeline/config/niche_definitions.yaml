@@ -1,0 +1,134 @@
+# Config 1: Extensible Niche Definitions
+# Add new niches without code changes — just add a YAML block.
+# Template: each niche has core_types, specialized_types, micro_niches, search_patterns.
+
+niches:
+  pet_ecosystem:
+    display_name: "Ecossistema Pet"
+    core_types:
+      - "pet_shop"
+      - "clinica_vet"
+      - "banho_tosa"
+      - "hospital_vet"
+      - "farmacia_vet"
+      - "agropecuaria"
+    specialized_types:
+      - "hotel_cachorro"
+      - "hotel_gato"
+      - "cat_cafe"
+      - "day_care_pet"
+      - "adestramento"
+      - "taxi_pet"
+      - "crematorio_pet"
+      - "fotografia_pet"
+    micro_niches:
+      - "maine_coon_breeder"
+      - "reptile_specialist"
+      - "aquarismo"
+      - "comportamentalista_felino"
+      - "acupuntura_vet"
+      - "fisioterapia_vet"
+      - "nutricionista_pet"
+    search_patterns:
+      primary_keywords:
+        - "pet"
+        - "animal"
+        - "veterinário"
+        - "veterinária"
+        - "pet shop"
+        - "gato"
+        - "cachorro"
+      secondary_keywords:
+        - "banho"
+        - "tosa"
+        - "ração"
+        - "vacina"
+        - "castração"
+        - "consulta"
+        - "exame"
+        - "cirurgia"
+        - "felino"
+        - "canino"
+      negative_keywords:
+        - "selvagem"
+        - "zoológico"
+        - "fazenda"
+    segments:
+      - name: "Clínicas e Hospitais"
+        types: ["clinica_vet", "hospital_vet"]
+        priority: 1
+      - name: "Varejo Pet"
+        types: ["pet_shop", "agropecuaria"]
+        priority: 2
+      - name: "Serviços de Estética"
+        types: ["banho_tosa"]
+        priority: 3
+      - name: "Hospedagem"
+        types: ["hotel_cachorro", "hotel_gato", "day_care_pet"]
+        priority: 4
+      - name: "Especialidades"
+        types: ["comportamentalista_felino", "acupuntura_vet", "fisioterapia_vet"]
+        priority: 5
+
+  restaurant:
+    display_name: "Gastronomia"
+    core_types:
+      - "restaurante"
+      - "lanchonete"
+      - "pizzaria"
+      - "padaria"
+      - "bar"
+      - "cafeteria"
+    specialized_types:
+      - "sushi"
+      - "churrascaria"
+      - "vegetariano"
+      - "food_truck"
+    micro_niches:
+      - "comida_arabe"
+      - "comida_japonesa"
+      - "confeitaria_artesanal"
+    search_patterns:
+      primary_keywords:
+        - "restaurante"
+        - "comida"
+        - "alimentação"
+        - "refeição"
+      secondary_keywords:
+        - "delivery"
+        - "almoço"
+        - "jantar"
+        - "cardápio"
+
+  beauty:
+    display_name: "Beleza e Estética"
+    core_types:
+      - "salao_beleza"
+      - "barbearia"
+      - "manicure"
+      - "estetica"
+    specialized_types:
+      - "spa"
+      - "clinica_estetica"
+      - "micropigmentacao"
+    search_patterns:
+      primary_keywords:
+        - "salão"
+        - "beleza"
+        - "cabelo"
+        - "barbearia"
+      secondary_keywords:
+        - "corte"
+        - "coloração"
+        - "manicure"
+        - "pedicure"
+
+# Template for adding new niches:
+# my_new_niche:
+#   display_name: "Display Name"
+#   core_types: [...]
+#   specialized_types: [...]
+#   micro_niches: [...]
+#   search_patterns:
+#     primary_keywords: [...]
+#     secondary_keywords: [...]

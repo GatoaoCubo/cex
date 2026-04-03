@@ -1,0 +1,129 @@
+# Config 3: Dynamic Technique Weights
+# Prioritization rules per miner, adapted by region type and niche level.
+# base_weight + region_modifier + niche_modifier = final priority.
+# Updated by AnalyticsEngine based on historical performance.
+
+techniques:
+  google_maps:
+    display_name: "Google Maps Advanced"
+    tier: 1
+    validated_efficacy: 0.95
+    base_weight: 0.95
+    region_modifiers:
+      urban_dense: 0.05        # Best in dense areas
+      suburban_spread: 0.0
+      rural_sparse: -0.10      # Less complete in rural
+      metropolitan: 0.03
+    niche_modifiers:
+      broad_ecosystem: 0.0
+      focused_specialty: 0.05  # Good for specific searches
+      ultra_niche: -0.05       # May miss ultra-niche
+    avg_cost_per_query: 0.01   # FIRECRAWL credits
+    rate_limit: "500/month"
+
+  facebook_business:
+    display_name: "Facebook Business Intelligence"
+    tier: 1
+    validated_efficacy: 0.95
+    base_weight: 0.90
+    region_modifiers:
+      urban_dense: 0.05
+      suburban_spread: 0.03
+      rural_sparse: -0.05
+      metropolitan: 0.05
+    niche_modifiers:
+      broad_ecosystem: 0.05    # Great for broad discovery
+      focused_specialty: 0.0
+      ultra_niche: -0.10       # Few ultra-niche on FB
+    avg_cost_per_query: 0.004  # SERPER credits
+    rate_limit: "2500/month"
+
+  yellow_pages:
+    display_name: "Yellow Pages Fusion"
+    tier: 1
+    validated_efficacy: 0.90
+    base_weight: 0.85
+    region_modifiers:
+      urban_dense: 0.05
+      suburban_spread: 0.0
+      rural_sparse: 0.05       # Directories strong in rural
+      metropolitan: 0.03
+    niche_modifiers:
+      broad_ecosystem: 0.05
+      focused_specialty: 0.0
+      ultra_niche: -0.15       # Directories don't list ultra-niche
+    avg_cost_per_query: 0.004
+    rate_limit: "2500/month"
+
+  cep_geography:
+    display_name: "CEP Micro-Geography"
+    tier: 1
+    validated_efficacy: 0.90
+    base_weight: 0.85
+    region_modifiers:
+      urban_dense: 0.10        # Excellent in dense areas
+      suburban_spread: 0.05
+      rural_sparse: -0.20      # Too many CEPs, low yield
+      metropolitan: 0.05
+    niche_modifiers:
+      broad_ecosystem: 0.0
+      focused_specialty: 0.05
+      ultra_niche: 0.10        # Finds hidden ultra-niche!
+    avg_cost_per_query: 0.004
+    rate_limit: "2500/month"
+
+  delivery_apps:
+    display_name: "Delivery Apps (iFood/Rappi)"
+    tier: 2
+    validated_efficacy: 0.85
+    base_weight: 0.70
+    region_modifiers:
+      urban_dense: 0.10
+      suburban_spread: 0.0
+      rural_sparse: -0.30      # No delivery in rural
+      metropolitan: 0.05
+    niche_modifiers:
+      broad_ecosystem: 0.0
+      focused_specialty: -0.10  # Limited categories on delivery
+      ultra_niche: -0.30       # Almost no ultra-niche on delivery
+    avg_cost_per_query: 0.004
+    rate_limit: "2500/month"
+
+  marketplace:
+    display_name: "Marketplace Reverse (ML/OLX)"
+    tier: 2
+    validated_efficacy: 0.80
+    base_weight: 0.65
+    region_modifiers:
+      urban_dense: 0.05
+      suburban_spread: 0.0
+      rural_sparse: -0.10
+      metropolitan: 0.05
+    niche_modifiers:
+      broad_ecosystem: 0.05
+      focused_specialty: 0.10   # Good for finding suppliers
+      ultra_niche: 0.05        # Sellers reveal niche businesses
+    avg_cost_per_query: 0.004
+    rate_limit: "2500/month"
+
+  waze:
+    display_name: "Waze Directory"
+    tier: 2
+    validated_efficacy: 0.85
+    base_weight: 0.65
+    region_modifiers:
+      urban_dense: 0.05
+      suburban_spread: 0.10    # GPS strong in suburban
+      rural_sparse: 0.05
+      metropolitan: 0.05
+    niche_modifiers:
+      broad_ecosystem: 0.0
+      focused_specialty: 0.0
+      ultra_niche: -0.10
+    avg_cost_per_query: 0.004
+    rate_limit: "2500/month"
+
+# Learning: weights updated by AnalyticsEngine after each run.
+# Format: analytics_overrides.{technique_name} = new_weight
+analytics_overrides: {}
+last_updated: null
