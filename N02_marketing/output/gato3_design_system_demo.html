@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GATO³ Design System Demo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ========== DESIGN TOKENS ========== */
+        :root {
+            /* GATO³ Brand Colors */
+            --color-black: #000000;
+            --color-dark-gray: #1F1F1F;
+            --color-medium-gray: #7A7A7A;
+            --color-white: #FFFFFF;
+            --color-light-gray: #D1D1D1;
+
+            /* Semantic Tokens */
+            --brand-primary: var(--color-black);
+            --brand-secondary: var(--color-dark-gray);
+            --brand-accent: var(--color-medium-gray);
+            --text-primary: var(--color-black);
+            --text-secondary: var(--color-medium-gray);
+            --text-hint: var(--color-light-gray);
+            --surface-base: var(--color-white);
+            --surface-elevated: #FAFAFA;
+            --surface-sunken: #F5F5F5;
+
+            /* Typography - Using Inter as Allrounder/Kenao substitute */
+            --font-heading: 'Inter', -apple-system, sans-serif;
+            --font-body: 'Inter', -apple-system, sans-serif;
+            --font-mono: 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
+
+            /* Spacing - 4px grid */
+            --space-1: 4px;
+            --space-2: 8px;
+            --space-3: 12px;
+            --space-4: 16px;
+            --space-6: 24px;
+            --space-8: 32px;
+            --space-12: 48px;
+            --space-16: 64px;
+
+            /* Component Tokens */
+            --card-padding: var(--space-6);
+            --button-radius: 8px;
+            --product-image-ratio: 1;
+            --hero-height: 60vh;
+        }
+
+        /* ========== RESET & BASE ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-primary);
+            background: var(--surface-base);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ========== TYPOGRAPHY ========== */
+        h1 {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: var(--space-6);
+        }
+
+        h2 {
+            font-family: var(--font-heading);
+            font-size: 1.75rem;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: var(--space-4);
+        }
+
+        h3 {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: var(--space-3);
+        }
+
+        p {
+            margin-bottom: var(--space-4);
+            color: var(--text-secondary);
+        }
+
+        .text-small {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        /* ========== LAYOUT ========== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-6);
+        }
+
+        .grid {
+            display: grid;
+            gap: var(--space-6);
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .grid-4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        @media (max-width: 768px) {
+            .grid-2,
+            .grid-3,
+            .grid-4 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ========== COMPONENTS ========== */
+
+        /* Header */
+        .header {
+            background: var(--surface-base);
+            border-bottom: 1px solid var(--color-light-gray);
+            padding: var(--space-4) 0;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--brand-primary);
+            text-decoration: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: var(--hero-height);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--surface-elevated);
+            text-align: center;
+            padding: var(--space-16) 0;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .tagline {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-8);
+        }
+
+        /* ProductCard Component */
+        .product-card {
+            background: var(--surface-base);
+            border: 1px solid var(--color-light-gray);
+            border-radius: var(--button-radius);
+            padding: var(--card-padding);
+            transition: all 0.2s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-image {
+            width: 100%;
+            aspect-ratio: var(--product-image-ratio);
+            background: var(--surface-sunken);
+            border-radius: var(--button-radius);
+            margin-bottom: var(--space-4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+        }
+
+        .product-title {
+            font-weight: 600;
+            margin-bottom: var(--space-2);
+        }
+
+        .product-benefit {
+            background: var(--surface-elevated);
+            padding: var(--space-2) var(--space-3);
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            display: inline-block;
+            margin-bottom: var(--space-3);
+        }
+
+        .product-price {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--brand-primary);
+        }
+
+        /* EducationalBlock Component */
+        .educational-block {
+            background: var(--surface-sunken);
+            padding: var(--space-6);
+            border-radius: var(--button-radius);
+            border-left: 4px solid var(--brand-primary);
+        }
+
+        .edu-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--brand-primary);
+            margin-bottom: var(--space-3);
+        }
+
+        /* PersonaQuote Component */
+        .persona-quote {
+            background: var(--surface-base);
+            border: 1px solid var(--color-light-gray);
+            padding: var(--space-6);
+            border-radius: var(--button-radius);
+            position: relative;
+        }
+
+        .persona-quote::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: var(--space-6);
+            font-size: 3rem;
+            color: var(--brand-accent);
+            line-height: 1;
+        }
+
+        .persona-author {
+            margin-top: var(--space-4);
+            font-weight: 600;
+            color: var(--brand-primary);
+        }
+
+        /* TrustSignals Component */
+        .trust-signals {
+            display: flex;
+            gap: var(--space-4);
+            align-items: center;
+            margin: var(--space-6) 0;
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            background: var(--surface-elevated);
+            padding: var(--space-2) var(--space-3);
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .trust-icon {
+            width: 16px;
+            height: 16px;
+            background: var(--brand-primary);
+            border-radius: 50%;
+        }
+
+        /* Sections */
+        .section {
+            padding: var(--space-16) 0;
+        }
+
+        .section:nth-child(even) {
+            background: var(--surface-elevated);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--brand-primary);
+            color: var(--surface-base);
+            padding: var(--space-8) 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="#" class="logo">GATO³</a>
+                <div class="trust-signals">
+                    <div class="trust-badge">
+                        <div class="trust-icon"></div>
+                        <span>Validação Veterinária</span>
+                    </div>
+                    <div class="trust-badge">
+                        <div class="trust-icon"></div>
+                        <span>Design Premium</span>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>GATO³</h1>
+            <p class="tagline">Educação que acalma, soluções que funcionam, casa que continua elegante.</p>
+            <p>Curadoria de bem-estar felino que harmoniza gato, tutor e lar em três dimensões perfeitas.</p>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="section">
+        <div class="container">
+            <h2>Produtos em Destaque</h2>
+            <div class="grid grid-3">
+                <!-- ProductCard 1 -->
+                <article class="product-card">
+                    <div class="product-image">Cama Janela Premium</div>
+                    <div class="product-benefit">✓ Validado por veterinários</div>
+                    <h3 class="product-title">Cama de Janela Ergonômica</h3>
+                    <p>Design minimalista que se integra à decoração enquanto oferece conforto térmico ideal para seu felino.</p>
+                    <div class="product-price">R$ 89,90</div>
+                </article>
+
+                <!-- ProductCard 2 -->
+                <article class="product-card">
+                    <div class="product-image">Arranhador Vertical</div>
+                    <div class="product-benefit">✓ Design invisível</div>
+                    <h3 class="product-title">Arranhador Integrado</h3>
+                    <p>Solução elegante que protege móveis sem comprometer a estética do ambiente.</p>
+                    <div class="product-price">R$ 156,90</div>
+                </article>
+
+                <!-- ProductCard 3 -->
+                <article class="product-card">
+                    <div class="product-image">Kit Gatitude</div>
+                    <div class="product-benefit">✓ Sistema completo</div>
+                    <h3 class="product-title">Kit Gatitude Starter</h3>
+                    <p>Conjunto curado com essenciais para novos tutores. Educação + produtos em harmonia.</p>
+                    <div class="product-price">R$ 287,90</div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Educational Section -->
+    <section class="section">
+        <div class="container">
+            <h2>Educação & Insights</h2>
+            <div class="grid grid-2">
+                <!-- EducationalBlock -->
+                <div class="educational-block">
+                    <div class="edu-label">VOCÊ SABIA?</div>
+                    <h3>Gatos precisam arranhar para manter saúde emocional</h3>
+                    <p>Arranhar não é comportamento destrutivo — é necessidade fisiológica. Nossos arranhadores são posicionados estrategicamente para atender essa necessidade sem comprometer sua decoração.</p>
+                </div>
+
+                <!-- PersonaQuote -->
+                <div class="persona-quote">
+                    <p>Sempre oriento meus clientes: o ideal é criar um ambiente onde o gato se sinta seguro sem que a casa perca elegância. É possível ter os dois.</p>
+                    <div class="persona-author">— Ro, Consultora Comportamental GATO³</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section">
+        <div class="container">
+            <div class="grid grid-2">
+                <div>
+                    <h2>Nossa Curadoria</h2>
+                    <p>Cada produto GATO³ passa por três filtros rigorosos:</p>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: var(--space-3); padding-left: var(--space-6); position: relative;">
+                            <span style="position: absolute; left: 0; font-weight: 600;">1.</span>
+                            <strong>Validação Veterinária</strong> — Aprovação comportamental
+                        </li>
+                        <li style="margin-bottom: var(--space-3); padding-left: var(--space-6); position: relative;">
+                            <span style="position: absolute; left: 0; font-weight: 600;">2.</span>
+                            <strong>Design Integrado</strong> — Harmonia com decoração
+                        </li>
+                        <li style="margin-bottom: var(--space-3); padding-left: var(--space-6); position: relative;">
+                            <span style="position: absolute; left: 0; font-weight: 600;">3.</span>
+                            <strong>Educação Inclusiva</strong> — Guias práticos da Ro
+                        </li>
+                    </ul>
+                </div>
+                <div class="educational-block">
+                    <div class="edu-label">PROTOCOLO RO</div>
+                    <h3>Como apresentar novo arranhador</h3>
+                    <p><strong>Dia 1-3:</strong> Posicione próximo ao local atual de arranhada inadequada</p>
+                    <p><strong>Dia 4-7:</strong> Use atrativo natural (valeriana) 2x ao dia</p>
+                    <p><strong>Semana 2:</strong> Reforce positivamente cada uso correto</p>
+                    <p class="text-small">Sucesso em 89% dos casos com esse protocolo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 GATO³. Cuidado em três dimensões.</p>
+            <p class="text-small">gato3.com.br • São Caetano do Sul, ABC Paulista</p>
+        </div>
+    </footer>
+</body>
+</html>

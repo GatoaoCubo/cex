@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GATO³ — Brandbook & Design System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ========== DESIGN TOKENS ========== */
+        :root {
+            /* Core Brand Colors */
+            --gato-black: #000000;
+            --gato-charcoal: #1F1F1F;
+            --gato-steel: #7A7A7A;
+            --gato-white: #FFFFFF;
+            --gato-silver: #D1D1D1;
+
+            /* Semantic Colors */
+            --color-primary: var(--gato-black);
+            --color-secondary: var(--gato-charcoal);
+            --color-accent: var(--gato-steel);
+            --color-surface: var(--gato-white);
+            --color-surface-elevated: #FAFAFA;
+            --color-surface-sunken: #F5F5F5;
+            --color-border: var(--gato-silver);
+            --color-text-primary: var(--gato-black);
+            --color-text-secondary: var(--gato-steel);
+            --color-text-hint: var(--gato-silver);
+
+            /* Typography */
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Inter', -apple-system, sans-serif;
+
+            /* Spacing Scale */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-5: 1.25rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-10: 2.5rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-20: 5rem;
+            --space-24: 6rem;
+
+            /* Shadows */
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+            /* Transitions */
+            --transition-fast: 150ms ease;
+            --transition-normal: 250ms ease;
+            --transition-slow: 350ms ease;
+        }
+
+        /* Dark Mode */
+        [data-theme="dark"] {
+            --color-primary: var(--gato-white);
+            --color-secondary: var(--gato-silver);
+            --color-accent: var(--gato-steel);
+            --color-surface: var(--gato-charcoal);
+            --color-surface-elevated: #2A2A2A;
+            --color-surface-sunken: #1A1A1A;
+            --color-border: #404040;
+            --color-text-primary: var(--gato-white);
+            --color-text-secondary: var(--gato-silver);
+            --color-text-hint: var(--gato-steel);
+        }
+
+        /* ========== RESET & BASE ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--color-text-primary);
+            background: var(--color-surface);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            transition: all var(--transition-normal);
+        }
+
+        /* ========== TYPOGRAPHY SYSTEM ========== */
+        .text-display-xl {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 800;
+            line-height: 0.9;
+            letter-spacing: -0.03em;
+        }
+
+        .text-display-lg {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        .text-display-md {
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 600;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+        }
+
+        .text-heading-xl {
+            font-family: var(--font-display);
+            font-size: 2.25rem;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .text-heading-lg {
+            font-family: var(--font-display);
+            font-size: 1.875rem;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .text-heading-md {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .text-body-lg {
+            font-size: 1.125rem;
+            line-height: 1.7;
+            font-weight: 400;
+        }
+
+        .text-body {
+            font-size: 1rem;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        .text-body-sm {
+            font-size: 0.875rem;
+            line-height: 1.5;
+            font-weight: 400;
+        }
+
+        .text-caption {
+            font-size: 0.75rem;
+            line-height: 1.4;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* ========== LAYOUT SYSTEM ========== */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 var(--space-6);
+        }
+
+        .section {
+            padding: var(--space-24) 0;
+        }
+
+        .section-tight {
+            padding: var(--space-16) 0;
+        }
+
+        /* ========== NAVIGATION ========== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--color-border);
+            transition: all var(--transition-normal);
+        }
+
+        [data-theme="dark"] .nav {
+            background: rgba(31, 31, 31, 0.9);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-4) var(--space-6);
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo::after {
+            content: '³';
+            position: absolute;
+            top: -0.2em;
+            right: -0.1em;
+            font-size: 0.7em;
+            opacity: 0.6;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-3px); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--space-6);
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: color var(--transition-fast);
+        }
+
+        .nav-link:hover {
+            color: var(--color-text-primary);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--color-primary);
+            transition: width var(--transition-normal);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--color-border);
+            border-radius: 50px;
+            padding: var(--space-2) var(--space-3);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            font-size: 1.2rem;
+        }
+
+        .theme-toggle:hover {
+            background: var(--color-surface-elevated);
+            transform: scale(1.05);
+        }
+
+        /* ========== HERO SECTION ========== */
+        .hero {
+            padding-top: 120px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-surface-elevated) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                radial-gradient(circle at 20% 80%, rgba(0, 0, 0, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 0, 0, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero-subtitle {
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-6);
+            opacity: 0;
+            animation: slideUp 0.8s ease 0.2s forwards;
+        }
+
+        .hero-title {
+            margin-bottom: var(--space-6);
+            opacity: 0;
+            animation: slideUp 0.8s ease 0.4s forwards;
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            color: var(--color-text-secondary);
+            max-width: 600px;
+            margin-bottom: var(--space-8);
+            opacity: 0;
+            animation: slideUp 0.8s ease 0.6s forwards;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ========== COLOR PALETTE ========== */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-6);
+        }
+
+        .color-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            padding: var(--space-6);
+            transition: all var(--transition-normal);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .color-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .color-swatch {
+            width: 100%;
+            height: 120px;
+            border-radius: 8px;
+            margin-bottom: var(--space-4);
+            transition: all var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .color-card:hover .color-swatch {
+            border-radius: 12px;
+            transform: scale(1.02);
+        }
+
+        .color-name {
+            font-family: var(--font-display);
+            font-weight: 600;
+            margin-bottom: var(--space-2);
+        }
+
+        .color-hex {
+            font-family: monospace;
+            color: var(--color-text-secondary);
+            font-size: 0.875rem;
+        }
+
+        /* ========== TYPOGRAPHY SHOWCASE ========== */
+        .typography-grid {
+            display: grid;
+            gap: var(--space-8);
+        }
+
+        .type-specimen {
+            padding: var(--space-6);
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            transition: all var(--transition-normal);
+        }
+
+        .type-specimen:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .type-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-4);
+            padding-bottom: var(--space-3);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .type-label {
+            font-weight: 600;
+            color: var(--color-text-secondary);
+        }
+
+        .type-specs {
+            font-family: monospace;
+            font-size: 0.75rem;
+            color: var(--color-text-hint);
+        }
+
+        /* ========== COMPONENT SHOWCASE ========== */
+        .component-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-8);
+        }
+
+        .component-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all var(--transition-normal);
+        }
+
+        .component-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .component-preview {
+            padding: var(--space-8);
+            background: var(--color-surface-elevated);
+            border-bottom: 1px solid var(--color-border);
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .component-info {
+            padding: var(--space-6);
+        }
+
+        /* ========== PRODUCT CARD COMPONENT ========== */
+        .product-card-demo {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: var(--space-5);
+            max-width: 280px;
+            transition: all var(--transition-normal);
+        }
+
+        .product-card-demo:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .product-image-demo {
+            width: 100%;
+            height: 160px;
+            background: var(--color-surface-sunken);
+            border-radius: 8px;
+            margin-bottom: var(--space-4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-text-secondary);
+            font-style: italic;
+        }
+
+        .product-benefit-badge {
+            background: var(--color-surface-elevated);
+            padding: var(--space-1) var(--space-3);
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            display: inline-block;
+            margin-bottom: var(--space-3);
+        }
+
+        .product-title-demo {
+            font-weight: 600;
+            margin-bottom: var(--space-2);
+        }
+
+        .product-description-demo {
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-4);
+            font-size: 0.875rem;
+        }
+
+        .product-price-demo {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        /* ========== EDUCATIONAL BLOCK ========== */
+        .educational-block-demo {
+            background: var(--color-surface-sunken);
+            padding: var(--space-6);
+            border-radius: 8px;
+            border-left: 4px solid var(--color-primary);
+            max-width: 400px;
+        }
+
+        .edu-label {
+            color: var(--color-primary);
+            font-weight: 600;
+            font-size: 0.875rem;
+            margin-bottom: var(--space-3);
+            letter-spacing: 0.1em;
+        }
+
+        /* ========== BENTO GRID ========== */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 200px;
+            gap: var(--space-6);
+        }
+
+        .bento-item {
+            background: linear-gradient(135deg, var(--color-surface-elevated), var(--color-surface));
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            padding: var(--space-6);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bento-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .bento-item--large {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .bento-item--wide {
+            grid-column: span 2;
+        }
+
+        .bento-item--tall {
+            grid-row: span 2;
+        }
+
+        @media (max-width: 1024px) {
+            .bento-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-auto-rows: 160px;
+            }
+
+            .bento-item--large,
+            .bento-item--wide {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+                grid-auto-rows: 140px;
+            }
+        }
+
+        /* ========== VOICE & TONE ========== */
+        .voice-examples {
+            display: grid;
+            gap: var(--space-8);
+        }
+
+        .voice-example {
+            padding: var(--space-8);
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            position: relative;
+        }
+
+        .voice-example::before {
+            content: '"';
+            position: absolute;
+            top: var(--space-4);
+            left: var(--space-6);
+            font-family: var(--font-display);
+            font-size: 4rem;
+            color: var(--color-text-hint);
+            line-height: 1;
+        }
+
+        .voice-content {
+            padding-left: var(--space-12);
+        }
+
+        .voice-text {
+            font-size: 1.125rem;
+            line-height: 1.7;
+            margin-bottom: var(--space-4);
+        }
+
+        .voice-context {
+            color: var(--color-text-secondary);
+            font-style: italic;
+        }
+
+        /* ========== UTILITY CLASSES ========== */
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        .fade-in-delay-1 { animation-delay: 0.1s; }
+        .fade-in-delay-2 { animation-delay: 0.2s; }
+        .fade-in-delay-3 { animation-delay: 0.3s; }
+        .fade-in-delay-4 { animation-delay: 0.4s; }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .text-center { text-align: center; }
+        .text-gradient {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .container {
+                padding: 0 var(--space-4);
+            }
+
+            .section {
+                padding: var(--space-16) 0;
+            }
+
+            .hero {
+                padding-top: 100px;
+            }
+
+            .color-grid,
+            .component-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ========== SCROLL REVEAL ========== */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="#" class="logo">GATO</a>
+            <ul class="nav-links">
+                <li><a href="#colors" class="nav-link">Cores</a></li>
+                <li><a href="#typography" class="nav-link">Tipografia</a></li>
+                <li><a href="#components" class="nav-link">Componentes</a></li>
+                <li><a href="#voice" class="nav-link">Voz & Tom</a></li>
+                <li><a href="#applications" class="nav-link">Aplicações</a></li>
+            </ul>
+            <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <p class="hero-subtitle text-caption">BRANDBOOK & DESIGN SYSTEM</p>
+                <h1 class="hero-title text-display-xl text-gradient">GATO³</h1>
+                <p class="hero-description">
+                    Educação que acalma, soluções que funcionam, casa que continua elegante.
+                    Este brandbook documenta nossa identidade visual e sistema de design para
+                    criar experiências consistentes e sofisticadas.
+                </p>
+                <div class="trust-signals fade-in fade-in-delay-4">
+                    <div style="display: flex; gap: var(--space-4); flex-wrap: wrap;">
+                        <span class="text-caption">✓ Validação Veterinária</span>
+                        <span class="text-caption">✓ Design Premium</span>
+                        <span class="text-caption">✓ ABC Paulista</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Color System -->
+    <section id="colors" class="section">
+        <div class="container">
+            <div class="scroll-reveal">
+                <h2 class="text-display-md text-center" style="margin-bottom: var(--space-16);">Sistema de Cores</h2>
+                <div class="color-grid">
+                    <div class="color-card" onclick="copyToClipboard('#000000')">
+                        <div class="color-swatch" style="background: #000000;"></div>
+                        <h3 class="color-name">Gato Black</h3>
+                        <p class="color-hex">#000000</p>
+                        <p class="text-body-sm" style="margin-top: var(--space-2); color: var(--color-text-secondary);">Texto primário, logotipo, elementos de alto contraste</p>
+                    </div>
+
+                    <div class="color-card" onclick="copyToClipboard('#1F1F1F')">
+                        <div class="color-swatch" style="background: #1F1F1F;"></div>
+                        <h3 class="color-name">Gato Charcoal</h3>
+                        <p class="color-hex">#1F1F1F</p>
+                        <p class="text-body-sm" style="margin-top: var(--space-2); color: var(--color-text-secondary);">Texto secundário, fundos elevados</p>
+                    </div>
+
+                    <div class="color-card" onclick="copyToClipboard('#7A7A7A')">
+                        <div class="color-swatch" style="background: #7A7A7A;"></div>
+                        <h3 class="color-name">Gato Steel</h3>
+                        <p class="color-hex">#7A7A7A</p>
+                        <p class="text-body-sm" style="margin-top: var(--space-2); color: var(--color-text-secondary);">Texto hint, bordas, elementos sutis</p>
+                    </div>
+
+                    <div class="color-card" onclick="copyToClipboard('#FFFFFF')">
+                        <div class="color-swatch" style="background: #FFFFFF; border: 1px solid var(--color-border);"></div>
+                        <h3 class="color-name">Gato White</h3>
+                        <p class="color-hex">#FFFFFF</p>
+                        <p class="text-body-sm" style="margin-top: var(--space-2); color: var(--color-text-secondary);">Fundo principal, texto sobre dark</p>
+                    </div>
+
+                    <div class="color-card" onclick="copyToClipboard('#D1D1D1')">
+                        <div class="color-swatch" style="background: #D1D1D1;"></div>
+                        <h3 class="color-name">Gato Silver</h3>
+                        <p class="color-hex">#D1D1D1</p>
+                        <p class="text-body-sm" style="margin-top: var(--space-2); color: var(--color-text-secondary);">Bordas, divisores, fundos sutis</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Typography System -->
+    <section id="typography" class="section" style="background: var(--color-surface-elevated);">
+        <div class="container">
+            <div class="scroll-reveal">
+                <h2 class="text-display-md text-center" style="margin-bottom: var(--space-16);">Sistema Tipográfico</h2>
+                <div class="typography-grid">
+                    <div class="type-specimen">
+                        <div class="type-meta">
+                            <span class="type-label">Display XL</span>
+                            <span class="type-specs">Playfair Display • 800 • -3%</span>
+                        </div>
+                        <div class="text-display-xl">GATO³ transforma lares</div>
+                    </div>
+
+                    <div class="type-specimen">
+                        <div class="type-meta">
+                            <span class="type-label">Display Large</span>
+                            <span class="type-specs">Playfair Display • 700 • -2%</span>
+                        </div>
+                        <div class="text-display-lg">Curadoria premium para felinos urbanos</div>
+                    </div>
+
+                    <div class="type-specimen">
+                        <div class="type-meta">
+                            <span class="type-label">Heading XL</span>
+                            <span class="type-specs">Playfair Display • 600 • normal</span>
+                        </div>
+                        <div class="text-heading-xl">Produtos que harmonizam casa e bem-estar</div>
+                    </div>
+
+                    <div class="type-specimen">
+                        <div class="type-meta">
+                            <span class="type-label">Body Large</span>
+                            <span class="type-specs">Inter • 400 • normal</span>
+                        </div>
+                        <div class="text-body-lg">Cada produto GATO³ passa por três filtros rigorosos: validação veterinária comportamental, design integrado que harmoniza com a decoração, e educação inclusiva através dos protocolos práticos da Ro.</div>
+                    </div>
+
+                    <div class="type-specimen">
+                        <div class="type-meta">
+                            <span class="type-label">Body Regular</span>
+                            <span class="type-specs">Inter • 400 • normal</span>
+                        </div>
+                        <div class="text-body">Nossa curadoria une ciência veterinária e design sofisticado para criar produtos que atendem às necessidades felinas sem comprometer a elegância do ambiente.</div>
+                    </div>
+
+                    <div class="type-specimen">
+                        <div class="type-meta">
+                            <span class="type-label">Caption</span>
+                            <span class="type-specs">Inter • 500 • 10%</span>
+                        </div>
+                        <div class="text-caption">VALIDADO POR VETERINÁRIOS COMPORTAMENTALISTAS</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Component Library -->
+    <section id="components" class="section">
+        <div class="container">
+            <div class="scroll-reveal">
+                <h2 class="text-display-md text-center" style="margin-bottom: var(--space-16);">Biblioteca de Componentes</h2>
+                <div class="component-grid">
+                    <div class="component-card">
+                        <div class="component-preview">
+                            <div class="product-card-demo">
+                                <div class="product-image-demo">Cama Janela Premium</div>
+                                <div class="product-benefit-badge">✓ Validado por veterinários</div>
+                                <h3 class="product-title-demo">Cama de Janela Ergonômica</h3>
+                                <p class="product-description-demo">Design minimalista que se integra à decoração.</p>
+                                <div class="product-price-demo">R$ 89,90</div>
+                            </div>
+                        </div>
+                        <div class="component-info">
+                            <h3 class="text-heading-md">ProductCard</h3>
+                            <p class="text-body-sm">Showcase de produtos com benefit badges, descrição contextual e preços elegantes.</p>
+                        </div>
+                    </div>
+
+                    <div class="component-card">
+                        <div class="component-preview">
+                            <div class="educational-block-demo">
+                                <div class="edu-label">VOCÊ SABIA?</div>
+                                <h3 class="text-heading-md" style="margin-bottom: var(--space-3);">Gatos precisam arranhar</h3>
+                                <p class="text-body">Arranhar não é comportamento destrutivo — é necessidade fisiológica para manter saúde emocional.</p>
+                            </div>
+                        </div>
+                        <div class="component-info">
+                            <h3 class="text-heading-md">EducationalBlock</h3>
+                            <p class="text-body-sm">Conteúdo educacional formato "Você sabia?" para engajar e educar tutores.</p>
+                        </div>
+                    </div>
+
+                    <div class="component-card">
+                        <div class="component-preview" style="background: var(--color-surface);">
+                            <div class="persona-quote" style="max-width: 300px; background: var(--color-surface-elevated); border: 1px solid var(--color-border); padding: var(--space-5); border-radius: 8px; position: relative;">
+                                <div style="position: absolute; top: -8px; left: var(--space-5); font-family: var(--font-display); font-size: 2rem; color: var(--color-text-hint);">"</div>
+                                <p class="text-body">Sempre oriento: o ideal é criar um ambiente onde o gato se sinta seguro sem que a casa perca elegância.</p>
+                                <div style="margin-top: var(--space-4); font-weight: 600; color: var(--color-primary);">— Ro, Consultora GATO³</div>
+                            </div>
+                        </div>
+                        <div class="component-info">
+                            <h3 class="text-heading-md">PersonaQuote</h3>
+                            <p class="text-body-sm">Citações da Ro com orientações práticas e acolhedoras para tutores.</p>
+                        </div>
+                    </div>
+
+                    <div class="component-card">
+                        <div class="component-preview">
+                            <div style="display: flex; gap: var(--space-4); align-items: center; flex-wrap: wrap;">
+                                <div style="display: flex; align-items: center; gap: var(--space-2); background: var(--color-surface-elevated); padding: var(--space-2) var(--space-3); border-radius: 4px;">
+                                    <div style="width: 12px; height: 12px; background: var(--color-primary); border-radius: 50%;"></div>
+                                    <span class="text-body-sm" style="font-weight: 500;">Validação Veterinária</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: var(--space-2); background: var(--color-surface-elevated); padding: var(--space-2) var(--space-3); border-radius: 4px;">
+                                    <div style="width: 12px; height: 12px; background: var(--color-primary); border-radius: 50%;"></div>
+                                    <span class="text-body-sm" style="font-weight: 500;">Design Premium</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="component-info">
+                            <h3 class="text-heading-md">TrustSignals</h3>
+                            <p class="text-body-sm">Badges de confiança que reforçam credibilidade e qualidade premium.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Voice & Tone -->
+    <section id="voice" class="section" style="background: var(--color-surface-elevated);">
+        <div class="container">
+            <div class="scroll-reveal">
+                <h2 class="text-display-md text-center" style="margin-bottom: var(--space-16);">Voz & Tom</h2>
+                <div class="voice-examples">
+                    <div class="voice-example">
+                        <div class="voice-content">
+                            <div class="voice-text">
+                                Nossa curadoria une ciência veterinária e design sofisticado. Cada produto é validado por especialistas em comportamento felino e desenhado para harmonizar com ambientes elegantes.
+                            </div>
+                            <div class="voice-context">Exemplo: Descrição de produto — tom sofisticado, informativo sem ser técnico</div>
+                        </div>
+                    </div>
+
+                    <div class="voice-example">
+                        <div class="voice-content">
+                            <div class="voice-text">
+                                <strong>Protocolo Ro:</strong> Dias 1-3, posicione próximo ao local atual de arranhada. Dias 4-7, use atrativo natural 2x ao dia. Semana 2, reforce positivamente cada uso correto.
+                            </div>
+                            <div class="voice-context">Exemplo: Orientação educacional — prático, acolhedor, baseado em evidência</div>
+                        </div>
+                    </div>
+
+                    <div class="voice-example">
+                        <div class="voice-content">
+                            <div class="voice-text">
+                                Você sabia que gatos preferem camas elevadas porque oferecem sensação de segurança? Nossa linha de camas de janela atende essa necessidade natural enquanto cria um ponto focal elegante no ambiente.
+                            </div>
+                            <div class="voice-context">Exemplo: Conteúdo educacional — curioso, informativo, conecta ciência com produto</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: var(--space-12); padding: var(--space-8); background: var(--color-surface); border-radius: 16px; border: 1px solid var(--color-border);">
+                    <h3 class="text-heading-lg" style="margin-bottom: var(--space-6);">Diretrizes de Voz</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--space-6);">
+                        <div>
+                            <h4 class="text-heading-md" style="color: #22C55E; margin-bottom: var(--space-3);">✓ FAZER</h4>
+                            <ul style="list-style: none; padding: 0; color: var(--color-text-secondary);">
+                                <li style="margin-bottom: var(--space-2);">• Explicar o porquê científico</li>
+                                <li style="margin-bottom: var(--space-2);">• Dar passos práticos</li>
+                                <li style="margin-bottom: var(--space-2);">• Tratar como parceiro inteligente</li>
+                                <li style="margin-bottom: var(--space-2);">• Contextualizar produto como meio</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-heading-md" style="color: #EF4444; margin-bottom: var(--space-3);">✗ EVITAR</h4>
+                            <ul style="list-style: none; padding: 0; color: var(--color-text-secondary);">
+                                <li style="margin-bottom: var(--space-2);">• Promessas milagrosas</li>
+                                <li style="margin-bottom: var(--space-2);">• Gírias ou infantilização</li>
+                                <li style="margin-bottom: var(--space-2);">• Medicalizar sem respaldo</li>
+                                <li style="margin-bottom: var(--space-2);">• Tom de vendedor agressivo</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Applications -->
+    <section id="applications" class="section">
+        <div class="container">
+            <div class="scroll-reveal">
+                <h2 class="text-display-md text-center" style="margin-bottom: var(--space-16);">Aplicações da Marca</h2>
+                <div class="bento-grid">
+                    <div class="bento-item bento-item--large">
+                        <div>
+                            <h3 class="text-heading-lg">gato3.com.br</h3>
+                            <p class="text-body">E-commerce principal com implementação completa do design system, grid responsivo e componentes interativos.</p>
+                        </div>
+                        <div class="text-caption">WEB • DESKTOP & MOBILE</div>
+                    </div>
+
+                    <div class="bento-item">
+                        <div>
+                            <h4 class="text-heading-md">Mercado Livre</h4>
+                            <p class="text-body-sm">Headers adaptados, fotografia consistente.</p>
+                        </div>
+                        <div class="text-caption">MARKETPLACE</div>
+                    </div>
+
+                    <div class="bento-item">
+                        <div>
+                            <h4 class="text-heading-md">Shopee</h4>
+                            <p class="text-body-sm">Banners e descrições padronizadas.</p>
+                        </div>
+                        <div class="text-caption">MARKETPLACE</div>
+                    </div>
+
+                    <div class="bento-item bento-item--wide">
+                        <div>
+                            <h4 class="text-heading-md">Instagram Stories</h4>
+                            <p class="text-body-sm">"Dicas da Ro" com templates que mantêm hierarquia visual e cores da marca.</p>
+                        </div>
+                        <div class="text-caption">SOCIAL MEDIA</div>
+                    </div>
+
+                    <div class="bento-item">
+                        <div>
+                            <h4 class="text-heading-md">Catálogo B2B</h4>
+                            <p class="text-body-sm">Versão impressa com mesma tipografia.</p>
+                        </div>
+                        <div class="text-caption">PRINT</div>
+                    </div>
+
+                    <div class="bento-item">
+                        <div>
+                            <h4 class="text-heading-md">Packaging</h4>
+                            <p class="text-body-sm">Aplicação minimalista PB.</p>
+                        </div>
+                        <div class="text-caption">FÍSICO</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="section" style="background: var(--color-primary); color: var(--color-surface);">
+        <div class="container text-center">
+            <div class="logo" style="color: var(--color-surface); margin-bottom: var(--space-6); font-size: 2.5rem;">GATO³</div>
+            <p class="text-body-lg" style="margin-bottom: var(--space-4); color: rgba(255, 255, 255, 0.8);">
+                Educação que acalma, soluções que funcionam, casa que continua elegante.
+            </p>
+            <p class="text-caption" style="color: rgba(255, 255, 255, 0.6);">
+                São Caetano do Sul, ABC Paulista • 2026
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme toggle functionality
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.body.setAttribute('data-theme', savedTheme);
+
+        // Copy color to clipboard
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                // Show toast or feedback
+                const toast = document.createElement('div');
+                toast.textContent = `Copiado: ${text}`;
+                toast.style.cssText = `
+                    position: fixed;
+                    bottom: 20px;
+                    right: 20px;
+                    background: var(--color-primary);
+                    color: var(--color-surface);
+                    padding: 12px 20px;
+                    border-radius: 8px;
+                    font-weight: 500;
+                    z-index: 1000;
+                    animation: slideIn 0.3s ease;
+                `;
+                document.body.appendChild(toast);
+
+                setTimeout(() => {
+                    toast.remove();
+                }, 2000);
+            });
+        }
+
+        // Scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all scroll reveal elements
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add loading animation keyframes
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from {
+                    opacity: 0;
+                    transform: translateX(100px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
