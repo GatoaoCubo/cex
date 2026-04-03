@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Read", "Write", "Edit", "Bash", "Glob", "Grep",
-      "mcp__markitdown__*", "mcp__fetch__*"
+      "mcp__markitdown__*", "mcp__fetch__*", "mcp__firecrawl__*",
+      "mcp__claude_in_chrome__*"
     ],
     "deny": []
   }
