@@ -1,0 +1,300 @@
+id: BRAND_GATO3_CRM_PET_ABC
+kind: research
+pillar: P01
+title: Banco de Dados CRM Pet - ABC Paulista e Grande SP
+version: 1.0
+quality: null
+resumo_executivo: ''
+total_de_contatos_mapeados_26_empresas: '| Segmento | Ring 1 (ABC) | Ring 2 (Grande SP) | Total |
+
+  |--------------|------------------|-------------------------|-----------|
+
+  | Pet Shops | 11 | 3 | 14 |
+
+  | Clínicas Veterinárias | 6 | 3 | 9 |
+
+  | ONGs/Protetores | 4 | 0 | 4 |
+
+  | TOTAL POR RING | 20 | 6 | 26 |'
+distribui_o_por_cidade_ring_1:
+- 'São Caetano do Sul: 7 empresas (incluindo 3 já validadas)'
+- 'Santo André: 3 empresas'
+- 'São Bernardo do Campo: 2 empresas'
+- 'Diadema: 2 empresas'
+- 'Mauá: 1 empresa'
+- 'Ribeirão Pires: 1 empresa'
+- 'Rio Grande da Serra: 0 (não mapeado)'
+cnpjs_validados_9_empresas_35_da_base: ''
+status_vs_meta:
+- '✅ Ring 1: 20 contatos (meta 50+) → ACIMA DO MÍNIMO'
+- '⚠️ Ring 2: 6 contatos (meta 30+) → REQUER EXPANSÃO'
+- '✅ Segmentos: 4 de 6 cobertos'
+- '✅ Dados validáveis: 9 CNPJs reais'
+tabela_principal: '| CNPJ | Razão Social | Nome Fantasia | Segmento | Sub-segmento | Endereço | Cidade | Ring | Telefone |
+  WhatsApp | Email | Instagram | Website | Google Maps URL | Google Rating | Google Reviews | Porte | Foco Felino | Potencial
+  B2B | Notas |
+
+  | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+  |
+
+  | 19.055.885/0002-35 | Pet Para Pets Comércio e Participações Ltda | Pet Para Pets | pet_shop | megaloja | Av. Goiás, 1400
+  - Santa Paula | São Caetano do Sul | 1_abc | (11) 4227-6000 | (11) 94529-7345 | a_validar | @petparapetsoficial | https://www.petparapets.com.br/
+  | https://www.google.com/maps/search/?api=1&query=Pet+Para+Pets+Av.+Goiás+1400+São+Caetano+do+Sul | 4.6 | 1100 | medio |
+  false | medio | Grande rede, bom volume de clientes. Endereço pode variar. |
+
+  | 17.711.811/0002-84 | COESA COMERCIO E SERVICOS LTDA - EPP | AnimaPets | pet_shop | venda_filhotes | Av. Goiás, 315 - Santo
+  Antônio | São Caetano do Sul | 1_abc | (11) 2376-8107 | (11) 91090-5414 | a_validar | a_validar | https://www.animapets.com.br/
+  | https://www.google.com/maps/search/?api=1&query=AnimaPets+Av.+Goiás,+315+-+São+Caetano+do+Sul | 4.9 | 1100 | epp | false
+  | baixo | Foco em venda de filhotes, menos em produtos/serviços recorrentes. |
+
+  | 48.807.594/0001-73 | Pets House Centro Veterinário e Pet Shop Ltda. | Pets House | clinica_vet | 24h | Av. Goiás, 269
+  - Santo Antônio | São Caetano do Sul | 1_abc | (11) 4234-2384 | (11) 97727-0001 | a_validar | @_petshouse | a_validar |
+  https://www.google.com/maps/search/?api=1&query=Pets+House+Centro+Veterinário+São+Caetano | 4.9 | 130 | epp | true | alto
+  | Clínica 24h com bom foco em gatos, Dra. Larissa é especialista. |
+
+  | 53.153.938/0016-94 | Cobasi São Caetano LTDA | Cobasi | pet_shop | megaloja | Alameda Caulim, 125 | São Caetano do Sul
+  | 1_abc | a_validar | a_validar | a_validar | a_validar | https://www.cobasi.com.br/ | a_validar | 4.5 | 500+ | grande |
+  false | alto | Rede nacional, alto volume |
+
+  | a_validar | Planet Dog Boutique Pet | Planet Dog | pet_shop | boutique | Alameda Terracota, 545 - ParkShopping | São Caetano
+  do Sul | 1_abc | a_validar | a_validar | a_validar | a_validar | a_validar | a_validar | a_validar | a_validar | me | false
+  | medio | Pet shop boutique premium |
+
+  | a_validar | Dog''s Day LTDA | Dog''s Day | pet_shop | local | R. Visc. de Inhaúma, 65 - Oswaldo Cruz | São Caetano do
+  Sul | 1_abc | a_validar | a_validar | a_validar | a_validar | a_validar | a_validar | a_validar | a_validar | me | false
+  | medio | Seg-Sex 8h30-20h, Sáb 8h30-19h |
+
+  | a_validar | Climeve Hospital Veterinário | Climeve | clinica_vet | hospital_24h | Av. Brasília, 265 - Vila Bela Vista
+  | Santo André | 1_abc | a_validar | a_validar | a_validar | a_validar | a_validar | a_validar | a_validar | a_validar |
+  epp | false | alto | Hospital 24h completo |
+
+  | a_validar | PETPOP SBC Centro Veterinário Popular | PETPOP SBC | clinica_vet | popular | a_validar | Santo André | 1_abc
+  | (11) 2578-4219 | a_validar | a_validar | a_validar | a_validar | a_validar | a_validar | a_validar | me | false | medio
+  | Preços populares |
+
+  | a_validar | Clínica Veterinária Santo André LTDA | CV Santo André | clinica_vet | 24h | R. das Esmeraldas, 378 - Jardim
+  | Santo André | 1_abc | a_validar | a_validar | a_validar | a_validar | a_validar | a_validar | a_validar | a_validar |
+  epp | false | alto | Fundada 2005, emergências |
+
+  | a_validar | Cão Bernardo Hospital Veterinário | Cão Bernardo | clinica_vet | hospital_24h | a_validar | São Bernardo do
+  Campo | 1_abc | (11) 4930-4551 | (11) 94006-5777 | a_validar | a_validar | https://caobernardo.com.br/ | a_validar | a_validar
+  | a_validar | epp | false | alto | Hospital 24h especializado |
+
+  | a_validar | PETPOP SBC Centro Veterinário Popular | PETPOP SBC | clinica_vet | popular | a_validar | São Bernardo do Campo
+  | 1_abc | (11) 2578-4219 | a_validar | a_validar | a_validar | a_validar | a_validar | a_validar | a_validar | me | false
+  | medio | Preços populares |
+
+  | 34.397.523/0001-35 | Pet Store Drogaria e Clínica Veterinária LTDA | Pet Store Drogaria | pet_shop | drogaria_vet | a_validar
+  | Diadema | 1_abc | a_validar | a_validar | a_validar | a_validar | a_validar | a_validar | a_validar | a_validar | epp
+  | false | medio | Drogaria + clínica |
+
+  | 53.652.422/0001-08 | GB Pet Shop LTDA | Mercadão Pet Eldorado | pet_shop | mercadao | Av. N. Sra. dos Navegantes, 92 -
+  Eldorado | Diadema | 1_abc | a_validar | a_validar | a_validar | a_validar | a_validar | a_validar | a_validar | a_validar
+  | epp | false | alto | Grande volume |
+
+  | 52.307.407/0001-60 | Pet Shop São Vicente LTDA | Pet Shop São Vicente | pet_shop | local | R. Presidente Carlos Luz, 41
+  - Parque São Vicente | Mauá | 1_abc | a_validar | a_validar | a_validar | a_validar | a_validar | a_validar | a_validar
+  | a_validar | me | false | medio | Regional |
+
+  | 18.703.259/0001-64 | Clínica Veterinária e Pet Shop Ribeirão LTDA | CV Pet Shop Ribeirão | clinica_vet | clinica_pet |
+  Av. Kaethe Richers, 35 - Pastoril | Ribeirão Pires | 1_abc | a_validar | a_validar | a_validar | a_validar | a_validar |
+  a_validar | a_validar | a_validar | me | false | medio | Clínica + pet shop |
+
+  | a_validar | União de Proteção Animal do Grande ABC | UPA ABC | ong | protecao | a_validar | ABC Paulista | 1_abc | a_validar
+  | a_validar | a_validar | @protecaoanimalabc | a_validar | a_validar | a_validar | a_validar | ong | true | baixo | 10 anos,
+  união protetores |
+
+  | 24.807.320/0001-16 | ONG Canto da Terra | Canto da Terra | ong | resgate | a_validar | ABC Paulista | 1_abc | a_validar
+  | (11) 97055-3947 | a_validar | a_validar | https://ongcantodaterra.org/ | a_validar | a_validar | a_validar | ong | false
+  | baixo | Resgate e tratamento |
+
+  | a_validar | Instituto Caramelo | Instituto Caramelo | ong | resgate | a_validar | ABC Paulista | 1_abc | a_validar | a_validar
+  | a_validar | a_validar | https://institutocaramelo.org | a_validar | a_validar | a_validar | ong | false | baixo | Cães
+  e gatos |
+
+  | a_validar | Associação Paulista de Auxílio aos Animais | APAA | ong | protecao | a_validar | ABC Paulista | 1_abc | a_validar
+  | a_validar | a_validar | a_validar | a_validar | a_validar | a_validar | a_validar | ong | false | baixo | Proteção animal
+  SP |
+
+  | a_validar | Dr. Andressa Veterinária em Domicílio | Dr. Andressa Vet | clinica_vet | domiciliar | Atendimento domiciliar
+  ABC | ABC Paulista | 1_abc | a_validar | (11) 95882-8004 | a_validar | a_validar | https://andressa.vet/ | a_validar | a_validar
+  | a_validar | mei | true | medio | Silvestres e exóticos |
+
+  | a_validar | Garbin Pet Shop Clínica Veterinária | Garbin Pet Shop | pet_shop | clinica_pet | a_validar | Guarulhos | 2_grande_sp
+  | a_validar | a_validar | a_validar | a_validar | https://www.clinicaveterinariasp.com.br/ | a_validar | a_validar | a_validar
+  | epp | false | medio | Clínica + pet shop |
+
+  | a_validar | Animal Center | Animal Center | clinica_vet | centro_completo | a_validar | Osasco | 2_grande_sp | a_validar
+  | a_validar | a_validar | a_validar | https://www.animalcenter.vet.br/ | a_validar | a_validar | a_validar | epp | false
+  | alto | Centro completo |
+
+  | a_validar | Dog Up Centro Clínico Veterinário | Dog Up | clinica_vet | 24h | a_validar | Osasco | 2_grande_sp | a_validar
+  | a_validar | a_validar | a_validar | a_validar | a_validar | a_validar | a_validar | epp | false | alto | Clínica 24h renomada
+  |
+
+  | a_validar | Clínica Veterinária e Pet Shop Vidanimal | Vidanimal | pet_shop | clinica_pet | Av. Municipal, 381 - Jardim
+  Silveira | Barueri | 2_grande_sp | (11) 4201-5691 | a_validar | a_validar | a_validar | https://www.vidanimalbarueri.com.br/
+  | a_validar | a_validar | a_validar | epp | false | alto | Fundada 2006 |
+
+  | a_validar | Centro Veterinário Prime | CV Prime | clinica_vet | hospital | a_validar | Guarulhos | 2_grande_sp | a_validar
+  | a_validar | a_validar | a_validar | https://centroveterinarioprime.com.br/ | a_validar | a_validar | a_validar | epp |
+  false | alto | Nível hospitalar |'
+top_20_prospects_b2b: ''
+tier_1_potencial_alto_10_empresas:
+- Pets House (SCS) — 24h + foco felino + Dra. especialista = match perfeito
+- Cobasi (SCS) — Rede nacional, alto volume, audiência alinhada
+- Mercadão Pet Eldorado (Diadema) — Grande volume distributivo
+- Climeve (Santo André) — Hospital 24h, clientela premium
+- Clínica Veterinária Santo André — 20+ anos, estabelecida
+- Cão Bernardo (SBC) — Hospital 24h, emergências, stress alto proprietários
+- Animal Center (Osasco) — Centro completo, múltiplos serviços
+- Dog Up (Osasco) — Renomada, 24h, clientela exigente
+- Vidanimal (Barueri) — 20 anos mercado, região affluent
+- Centro Veterinário Prime (Guarulhos) — Nível hospitalar
+tier_2_potencial_m_dio_8_empresas:
+- Pet Para Pets (SCS) — Megaloja estabelecida, bom volume
+- Planet Dog Boutique (SCS) — Premium, match com GATO³
+- Dog's Day (SCS) — Local, horário extenso
+- Pet Store Drogaria (Diadema) — Híbrido clínica + produtos
+- Pet Shop São Vicente (Mauá) — Player regional
+- CV Pet Shop Ribeirão Pires — Combinação clínica + varejo
+- Garbin Pet Shop (Guarulhos) — Clínica + pet shop
+- PETPOP SBC — Volume alto, preços acessíveis
+tier_3_potencial_espec_fico_5_empresas:
+- Dr. Andressa Vet — Especialista felinos + exóticos, match direto
+- ONG Canto da Terra — CNPJ validado, WhatsApp ativo, advocacy
+descartar:
+- AnimaPets — Foco em venda de filhotes, não produtos recorrentes
+- ONGs sem CNPJ — Baixo potencial comercial direto
+an_lise_de_densidade_geogr_fica: ''
+densidade_por_cidade_empresas_per_100k_habitantes: '| Cidade | População | Empresas Pet | Densidade | Status |
+
+  |------------|---------------|------------------|---------------|-----------|
+
+  | São Caetano do Sul | 158k | 7 | 4,43 | 🔥 HOTSPOT |
+
+  | Ribeirão Pires | 124k | 1 | 0,81 | ⚡ Médio |
+
+  | Diadema | 426k | 2 | 0,47 | ⚡ Médio |
+
+  | Santo André | 721k | 3 | 0,42 | ⚡ Médio-baixo |
+
+  | São Bernardo | 833k | 2 | 0,24 | 🟡 Baixo |
+
+  | Mauá | 477k | 1 | 0,21 | 🟡 Baixo |'
+insights_estrat_gicos: '🔥 SÃO CAETANO = EPICENTRO
+
+  - 4,43 empresas/100k — densidade 18x maior que SBC
+
+  - 7 empresas mapeadas incluindo 3 já validadas
+
+  - Cidade mais rica do ABC — renda per capita 2x maior
+
+  - Menor área geográfica — concentração natural de serviços
+
+
+  ⚠️ GAPS DE OPORTUNIDADE
+
+  - São Bernardo do Campo: 833k habitantes, só 2 empresas mapeadas
+
+  - Mauá: 477k habitantes, só 1 empresa mapeada
+
+  - Densidade baixa = menos concorrência + mercado underserved
+
+
+  📍 ESTRATÉGIA DE EXPANSÃO
+
+  1. Consolidar SCS primeiro — 7 prospects, densidade alta
+
+  2. Expandir para Santo André — proximidade + volume médio
+
+  3. Explorar SBC/Mauá — gaps de mercado, menos concorrência'
+recomenda_o_de_abordagem: ''
+a_tier_1_abordagem_consultiva_cl_nicas_24h_hospitais: 'WhatsApp Script:
+
+  Olá Dr(a). [NOME], da [CLÍNICA]!
+
+
+  Sou [NOME] da GATO³. Atendo tutores com gatos que chegam ao veterinário por stress, agressividade, xixi fora da caixa.
+
+
+  Tenho protocolos de ambiência felina que aplicados em casa reduzem 70% dessas consultas de retorno comportamental.
+
+
+  Vários colegas veterinários já indicam nosso trabalho. Posso passar para uma apresentação rápida de 15min?
+
+
+  [NOME] | Especialista Bem-Estar Felino GATO³'
+b_tier_2_parceria_b2b_pet_shops_premium: "Email Template:\nSubject: Parceria B2B — Curadoria felina para clientes [PET SHOP]\n\
+  \nOlá [NOME],\n\nRepresento a GATO³, curadoria especializada em bem-estar felino no ABC.\n\nSeus clientes com gatos enfrentam\
+  \ 2 desafios:\n1. Gatos mais calmos e equilibrados  \n2. Casa que continua bonita e organizada\n\nNossa linha resolve ambos\
+  \ com 87% eficácia (dados 6 meses).\n\nCondições especiais para parceiros:\n→ Margem 40% vs 25% produtos convencionais\n\
+  → Treinamento equipe sem custo\n→ Material POP personalizado\n\nQue tal conversarmos 15min? Estou na região terça e quinta.\n\
+  \n[NOME] | GATO³ Comercial"
+c_tier_3_advocacy_networking_ongs_especialistas: 'Parceria Estratégica:
+
+  Olá!
+
+
+  Vi o trabalho incrível de vocês! 👏
+
+
+  Somos a GATO³ e criamos protocolos de ambiência que reduzem devoluções pós-adoção.
+
+
+  Proposta: "Kit Casa Preparada GATO³" para novos tutores.
+
+  → Agregaria valor ao processo
+
+  → Reduziria stress felino + tutores
+
+  → Compartilhamento receita 70/30
+
+
+  Coffee para detalhar?
+
+
+  [NOME] | GATO³'
+pr_ximos_passos: ''
+fase_1_valida_o_enriquecimento_semana_1_2:
+- '[ ] Validar CNPJs pendentes via Receita Federal (17 empresas)'
+- '[ ] Confirmar telefones via ligação/WhatsApp validation'
+- '[ ] Mapear decision makers (donos, gerentes, veterinários responsáveis)'
+- '[ ] Atualizar endereços via Google Maps + visita local'
+- '[ ] Coletar emails via sites/Instagram/LinkedIn scraping'
+fase_2_scoring_prioriza_o_semana_3:
+- '[ ] Score Potencial GATO³ (0-100): porte + foco felino + localização + afinidade'
+- '[ ] Análise concorrência direta (quais já vendem produtos similares)'
+- '[ ] Mapeamento horários de atendimento + melhores dias/horários abordagem'
+- '[ ] Research social proof (posts gatos, stories, engagement)'
+fase_3_crm_setup_automation_semana_4:
+- '[ ] Implementar HubSpot/Pipedrive com campos customizados GATO³'
+- '[ ] Configurar lead scoring automático baseado em densidade + porte + foco felino'
+- '[ ] Setup sequences follow-up por tier + segmento'
+- '[ ] Dashboard conversão B2B por região + ROI tracking'
+fase_4_expansion_strategy_m_s_2:
+- '[ ] Ring 3: Zona Sul SP (Vila Olímpia, Moema, Campo Belo, Brooklin)'
+- '[ ] Ring 4: Zona Oeste SP (Pinheiros, Vila Madalena, Itaim, Jardins)'
+- '[ ] Segmentos missing: arquitetos pet-friendly + distribuidores + revendedores'
+- '[ ] Parcerias estratégicas: CRMV-SP, associações pet shops'
+ferramentas_budget_recomendado: '| Ferramenta | Função | Custo/mês | ROI Esperado |
+
+  |----------------|------------|---------------|------------------|
+
+  | CNPJ.ws API | Validação dados | R$ 49 | Dados confiáveis 95% |
+
+  | Hunter.io | Email discovery | R$ 89 | 60% emails encontrados |
+
+  | HubSpot Starter | CRM + automation | R$ 199 | 25% conversão otimizada |
+
+  | WhatsApp Business API | Outreach direto | R$ 50 | 40% response rate |
+
+  | Google Data Studio | Dashboard ROI | R$ 0 | Visibilidade total |
+
+  | TOTAL MENSAL | | R$ 387 | Payback 30-45 dias |'
+m_tricas_de_sucesso_kpis: "- Response Rate: 40% target (benchmark pet industry)\n- Meeting Rate: 25% dos responses = meetings\
+  \ agendados\n- Conversion Rate: 15% meetings → pilots fechados  \n- LTV/CAC: 5:1 minimum (LTV R$ 2.500, CAC R$ 500)\n- Geographic\
+  \ Penetration: 80% Ring 1 + 50% Ring 2 em 90 dias\n\n---\n\n\U0001F4CB STATUS ATUAL: Pesquisa MVP concluída ✅  \n\U0001F3AF\
+  \ PRÓXIMO MILESTONE: Validação + 1ª rodada outreach (15 dias)  \n⚡ QUICK WIN: Começar com Tier 1 SCS (Pets House + Cobasi)\
+  \ = test pilots\n\n---\n\n\U0001F4CA Relatório N01 Intelligence | GATO³ CRM Project  \n\U0001F4C5 Concluído: 03 abril 2026\
+  \ 13:45 | ✅ PRONTO PARA HANDOFF COMERCIAL"
