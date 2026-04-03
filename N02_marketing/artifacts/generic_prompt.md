@@ -1,56 +1,71 @@
 ---
-id: tagline_creator_guide
-kind: generic
-pillar: P01
-title: Tagline Creation Framework
-tldr: Strategic framework for creating memorable brand taglines that convert
-tags: [copywriting, branding, taglines, messaging, conversion]
-when_to_use: When creating brand taglines, product slogans, or campaign headlines that need to stick
+
+# KNOWLEDGE
+
+## Domain Context
+
+Nucleus: N02 (N02_marketing). Domain: copywriting, ads, campaigns, social media. All content must be specific to this nucleus domain.
+
+## Build Memory (past performance)
+
+No build history for kind 'generic'. First build — follow instruction closely.
+
+## Similar Artifacts (semantic retrieval)
+
+- **Tagline Creation Framework** (kind=generic, score=0.204): Strategic framework for creating memorable brand taglines that convert
+- **p06_input_schema_create_schema_contract_for_brand_data_model** (kind=input_schema, score=0.140): Input contract for CEX brand bootstrap: 4 required fields (name, tagline, mission, values); 8 optional with sane defaults.
+- **Agente Estrategista de Catalogo Mercado Livre** (kind=agent, score=0.119): Especialista em estrategia de catalogo ML - analise, aquecimento, criacao proprio, migracao ranking, defesa contra invasores
+
 ---
 
-# Tagline Creation Framework
+# PLAN
 
-## Core Elements
+You are planning what artifact to produce. Think step-by-step.
 
-| Element | Purpose | Example |
-|---------|---------|---------|
-| **Promise** | What value you deliver | "Just Do It" (empowerment) |
-| **Proof** | Why you can deliver | "Melts in your mouth, not in your hands" |
-| **Personality** | Your brand voice | "Think Different" (rebellious) |
+## Intent
+criar tagline
 
-## Construction Formula
+## Kind
+generic (pillar: P01)
 
-### 3-Word Power Structure
-1. **Action** + **Benefit** + **Emotion**
-   - "Unlock Creative Potential" (Adobe)
-   - "Accelerate Business Growth" (Salesforce)
-   - "Simplify Complex Decisions" (consulting)
+## Task
+Plan the artifact. List:
+1. Which frontmatter fields to include and their values
+2. Key decisions and tradeoffs
+3. Body structure outline
+Be concise (under 500 words).
 
-### 5-Word Brand Statement
-1. **Brand** + **Verb** + **Object** + **Qualifier** + **Outcome**
-   - "Tesla Accelerates Sustainable Transportation Adoption"
-   - "Shopify Simplifies Online Commerce Creation"
-   - "Slack Transforms Team Communication Efficiency"
+---
 
-## Testing Framework
+# OPTIMIZER HINTS
 
-| Test | Question | Pass/Fail |
-|------|----------|-----------|
-| **Clarity** | 8-year-old understands? | ✓/✗ |
-| **Memory** | Sticks after 1 hearing? | ✓/✗ |
-| **Differentiation** | Could competitor use it? | ✗/✓ |
-| **Emotion** | Triggers feeling? | ✓/✗ |
+Based on past builds, pay attention to:
+- Builder not found for kind 'generic'
 
-## Anti-Patterns
+---
 
-- Generic benefits ("Quality products")
-- Industry jargon ("Synergistic solutions")  
-- Feature lists ("Fast, reliable, secure")
-- Weak verbs ("We help", "We provide")
+# TASK
 
-## When NOT to Use
+**Intent**: criar tagline
+**Kind**: generic
+**Pillar**: P01
+**Verb**: criar (create)
+**Quality**: set quality: null (NEVER self-score)
 
-- Complex B2B products requiring explanation
-- Temporary campaigns (use headlines instead)
-- Technical documentation
-- Legal/compliance messaging
+## CRITICAL OUTPUT RULES
+1. Output ONLY the artifact. NO preamble, NO explanation, NO tool calls.
+2. Start your response with exactly `---` on the first line.
+3. Then YAML frontmatter fields (id, kind, pillar, title, etc).
+4. Then `---` to close frontmatter.
+5. Then Markdown body with ## sections.
+6. Do NOT wrap in code fences (no ```yaml or ```markdown).
+7. Do NOT include any text before the opening `---`.
+
+---
+
+# RETRY FEEDBACK
+
+Your previous output FAILED validation. Fix these issues:
+
+HARD GATE FAILURES:
+- H01: Frontmatter missing or invalid YAML

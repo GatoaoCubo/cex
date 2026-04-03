@@ -1,36 +1,40 @@
 ---
-id: n01_self_review_2026-04-02
 kind: context-doc
 nucleus: N01
 pillar: P09
-quality: 8.8
+quality: null
 date: 2026-04-02
 type: self-review
-density_score: 0.81
 ---
 # N01 Self-Review — 2026-04-02
 
 ## Summary
 - Total artifacts: ~70
-- Domain-specific: High (~95%)
-- Generic/placeholder: Low (~5%)
-- Missing: 1 (Config directory)
+- Domain-specific: ~90%
+- Generic/placeholder: 4 files
+- Missing: 3 kinds
 - Broken references: 0
 
 ## CRITICAL Gaps (must fix)
-1.  **Pillar P09 (Config) is Empty**: The `N01_intelligence/config/` directory contains no artifacts. A nucleus's config pillar is essential for holding runtime rules, feature flags, and other configurations. This violates the established fractal architecture pattern and must be remediated by creating a default config artifact.
+1.  **Placeholders in Output Templates**: Several output templates (`output_research_brief.md`, `output_swot_analysis.md`, `output_competitive_grid.md`) contain `{{BRAND_*}}` placeholders, making them unusable without manual replacement.
+2.  **Empty Config Directory**: The `N01_intelligence/config` directory is empty, indicating a missing configuration for the nucleus.
+3.  **Missing Kind Definitions**: The `kind` definitions for `research-pipeline`, `benchmark`, and `eval-dataset` are missing, preventing the system from recognizing these types of artifacts.
+4.  **Placeholder in RAG Source**: The `knowledge/rag_source_intelligence.md` file contains a placeholder for licensed reports, indicating an incomplete data source.
 
 ## WARN Gaps (should fix)
-1.  **Ambiguous `P10_memory` Directory Content**: The files in `N01_intelligence/memory/` define the RAG *system configuration* (ingestion sources and embedding models), not "learning records" or runtime memories. While the content itself is high-quality, the pillar's purpose could be misinterpreted. It's unclear where runtime learning records for N01 are stored. This should be clarified in the documentation to avoid confusion.
+1.  **Inconsistent Frontmatter**: Some files are missing the `nucleus` field in their frontmatter, leading to inconsistency.
+2.  **Descriptive Schema Validation**: Schemas in `N01_intelligence/schemas/` use descriptive validation (guidelines and anti-patterns) instead of programmatic, machine-readable rules.
 
 ## Improvement Opportunities
-1.  **Create a dedicated `eval-dataset` Schema**: The system has excellent schemas for benchmarks and scoring rubrics. To further improve the evaluation framework (`P07_evals`), a dedicated `eval-dataset` schema could be created to formalize the structure of golden datasets used for testing and validation.
-2.  **Full Content Audit**: This review was conducted by sampling key artifacts. While the quality of sampled files was consistently high, a full audit of all ~70 artifacts is recommended to guarantee no other placeholder or generic content exists within the nucleus.
+1.  **Full Content Audit**: This review was conducted by sampling key artifacts. A full audit of all ~70 artifacts is recommended to guarantee no other placeholder or generic content exists within the nucleus.
+2.  **Programmatic Schema Validation**: Implement programmatic validation in all schemas to enforce data integrity automatically.
 
-## Systemic Patterns
-The P09 config gap and P10 memory ambiguity reveal a **fractal architecture drift** where nuclei deviate from the established 12-pillar pattern without triggering auto-healing mechanisms. This suggests the `cex_auto.py` self-healing system may lack adequate **structural validators** that enforce pillar completeness across all nuclei. The pattern indicates that while content quality remains high (95% domain-specific), **architectural consistency** is not being automatically maintained. This creates a vulnerability where nuclei can silently drift from the canonical fractal structure, potentially leading to integration failures during cross-nucleus handoffs. The auto-healing flywheel appears optimized for content quality but under-engineered for structural integrity validation.
+## Cross-Nucleus Issues
+1.  **Output Consumability**: Handoff protocols are well-defined in `agent_card_intelligence.yaml`, but the placeholder issue in output templates directly impacts the consumability of research outputs by other nuclei.
 
 ## Recommended Actions (priority order)
-1.  **[High]** Create a default configuration artifact (e.g., `config.md`) inside `N01_intelligence/config/` with baseline settings for the nucleus.
-2.  **[Medium]** Add a `README.md` to the `N01_intelligence/memory/` directory explaining that it contains the configuration for the memory system, not the memory state itself.
-3.  **[Low]** Investigate the feasibility of creating a new `eval-dataset` schema and artifact type within the `P06_schema` and `P07_evals` pillars.
+1.  **Resolve Placeholders**: Replace all `{{BRAND_*}}` and other placeholders in the output and knowledge files with a proper mechanism for dynamic content.
+2.  **Populate Config Directory**: Create the necessary configuration file(s) in the `N01_intelligence/config` directory.
+3.  **Define Missing Kinds**: Create the `kind` definitions for `research-pipeline`, `benchmark`, and `eval-dataset`.
+4.  **Standardize Frontmatter**: Add the `nucleus` field to all relevant files.
+5.  **Enhance Schema Validation**: Augment descriptive validation with programmatic rules.

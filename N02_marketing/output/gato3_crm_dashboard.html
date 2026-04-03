@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GATO³ — CRM Orgânico | Pipeline B2B ABC Paulista</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+    --g3-black:#000;--g3-charcoal:#1F1F1F;--g3-steel:#7A7A7A;--g3-silver:#D1D1D1;--g3-white:#FFF;
+    --bg:var(--g3-white);--bg-side:var(--g3-charcoal);--bg-card:var(--g3-white);--bg-hover:#F5F5F5;
+    --text-1:var(--g3-black);--text-2:var(--g3-steel);--text-3:var(--g3-silver);
+    --border:#E5E5E5;--border-s:var(--g3-silver);
+    --shadow:0 1px 3px rgba(0,0,0,.06);--shadow-h:0 4px 12px rgba(0,0,0,.08);
+    --r:12px;--rs:8px;--t:200ms ease;--font:'Inter',-apple-system,sans-serif;
+    --green:#16A34A;--green-bg:#F0FDF4;--orange:#EA580C;--orange-bg:#FFF7ED;
+    --blue:#2563EB;--blue-bg:#EFF6FF;--red:#DC2626;--red-bg:#FEF2F2;
+    --purple:#7C3AED;--purple-bg:#F5F3FF;
+}
+[data-theme="dark"]{
+    --bg:#0A0A0A;--bg-side:#111;--bg-card:var(--g3-charcoal);--bg-hover:#2A2A2A;
+    --text-1:var(--g3-white);--text-2:var(--g3-silver);--text-3:var(--g3-steel);
+    --border:#333;--border-s:#555;--shadow:0 1px 3px rgba(0,0,0,.3);
+    --green-bg:#052E16;--orange-bg:#431407;--blue-bg:#172554;--red-bg:#450A0A;--purple-bg:#2E1065;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;-webkit-font-smoothing:antialiased}
+body{font-family:var(--font);background:var(--bg);color:var(--text-1);line-height:1.5;min-height:100vh}
+
+.app{display:flex;min-height:100vh}
+.sidebar{width:260px;background:var(--bg-side);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;bottom:0;z-index:100}
+.main{margin-left:260px;flex:1;min-height:100vh}
+
+.sb-brand{padding:20px;border-bottom:1px solid rgba(255,255,255,.08)}
+.sb-brand h1{font-size:1.4rem;font-weight:800;color:#fff;letter-spacing:-.02em}
+.sb-brand sup{font-size:.7rem;color:var(--g3-steel)}
+.sb-brand .tag{display:block;font-size:.65rem;color:var(--g3-steel);text-transform:uppercase;letter-spacing:.06em;margin-top:4px}
+.sb-stats{padding:16px 20px;border-bottom:1px solid rgba(255,255,255,.08)}
+.sb-stat{display:flex;justify-content:space-between;padding:6px 0;font-size:.78rem}
+.sb-stat .l{color:rgba(255,255,255,.5)}
+.sb-stat .v{color:#fff;font-weight:600}
+.sb-filters{padding:16px 20px;flex:1;overflow-y:auto}
+.sb-section{margin-bottom:16px}
+.sb-section-label{font-size:.65rem;font-weight:600;color:var(--g3-steel);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.filter-btn{display:block;width:100%;text-align:left;padding:7px 10px;border-radius:var(--rs);border:none;background:transparent;color:rgba(255,255,255,.55);font-size:.8rem;font-family:var(--font);cursor:pointer;transition:all var(--t)}
+.filter-btn:hover{background:rgba(255,255,255,.06);color:rgba(255,255,255,.85)}
+.filter-btn.active{background:rgba(255,255,255,.1);color:#fff}
+.filter-btn .count{float:right;font-size:.7rem;opacity:.6}
+.sb-footer{padding:12px 20px;border-top:1px solid rgba(255,255,255,.08)}
+.sb-footer .dot{width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block;margin-right:6px;animation:pulse 2s infinite}
+.sb-footer span{font-size:.72rem;color:var(--g3-steel)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+
+.topbar{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--border);padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(8px)}
+.topbar-left{display:flex;align-items:center;gap:14px}
+.topbar-title{font-size:.95rem;font-weight:600}
+.topbar-sub{font-size:.78rem;color:var(--text-2)}
+.search-box{display:flex;align-items:center;gap:8px;background:var(--bg-hover);border:1px solid var(--border);border-radius:var(--rs);padding:7px 12px;min-width:280px;transition:border var(--t)}
+.search-box:focus-within{border-color:var(--text-1)}
+.search-box svg{width:16px;height:16px;color:var(--text-2);flex-shrink:0}
+.search-box input{border:none;background:transparent;outline:none;font-size:.82rem;font-family:var(--font);color:var(--text-1);width:100%}
+.btn-icon{width:34px;height:34px;border-radius:var(--rs);border:1px solid var(--border);background:var(--bg-card);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-2);transition:all var(--t)}
+.btn-icon:hover{border-color:var(--text-1);color:var(--text-1)}
+.btn-icon svg{width:16px;height:16px}
+.topbar-right{display:flex;align-items:center;gap:8px}
+
+.content{padding:24px 28px}
+
+.kpi-row{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:20px}
+.kpi{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:16px;transition:all var(--t)}
+.kpi:hover{box-shadow:var(--shadow-h)}
+.kpi .label{font-size:.72rem;font-weight:500;color:var(--text-2);margin-bottom:4px}
+.kpi .val{font-size:1.4rem;font-weight:700;letter-spacing:-.02em}
+.kpi .sub{font-size:.7rem;color:var(--text-2);margin-top:2px}
+
+.pipeline{display:flex;gap:8px;margin-bottom:20px;padding:4px;background:var(--bg-hover);border-radius:var(--rs);overflow-x:auto}
+.pipe-seg{flex:1;text-align:center;padding:8px 12px;border-radius:6px;font-size:.78rem;font-weight:500;cursor:pointer;transition:all var(--t);min-width:80px;white-space:nowrap}
+.pipe-seg:hover{background:var(--bg-card)}
+.pipe-seg.active{background:var(--bg-card);box-shadow:var(--shadow);font-weight:600}
+.pipe-seg .n{font-size:1.1rem;font-weight:700;display:block;line-height:1}
+
+.table-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.table-header{padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.table-header h2{font-size:.9rem;font-weight:600}
+.table-header .count-label{font-size:.78rem;color:var(--text-2)}
+.tbl-wrap{overflow-x:auto;max-height:calc(100vh - 340px);overflow-y:auto}
+table{width:100%;border-collapse:collapse;font-size:.82rem}
+thead th{padding:10px 14px;text-align:left;font-size:.7rem;font-weight:600;color:var(--text-2);text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid var(--border);white-space:nowrap;position:sticky;top:0;background:var(--bg-card);z-index:1}
+tbody td{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:middle}
+tbody tr{transition:background var(--t);cursor:pointer}
+tbody tr:hover{background:var(--bg-hover)}
+tbody tr:last-child td{border-bottom:none}
+
+.badge{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:16px;font-size:.68rem;font-weight:600;white-space:nowrap}
+.b-green{color:var(--green);background:var(--green-bg)}
+.b-orange{color:var(--orange);background:var(--orange-bg)}
+.b-blue{color:var(--blue);background:var(--blue-bg)}
+.b-red{color:var(--red);background:var(--red-bg)}
+.b-purple{color:var(--purple);background:var(--purple-bg)}
+.b-gray{color:var(--text-2);background:var(--bg-hover)}
+.b-dark{color:#fff;background:var(--g3-charcoal)}
+
+.contacts{display:flex;gap:4px;align-items:center}
+.c-icon{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;text-decoration:none;transition:all var(--t);border:1px solid var(--border)}
+.c-icon:hover{transform:scale(1.1);box-shadow:var(--shadow-h)}
+.c-wpp{color:#25D366;border-color:#25D366}
+.c-wpp:hover{background:#25D366;color:#fff}
+.c-tel{color:var(--blue);border-color:var(--blue)}
+.c-tel:hover{background:var(--blue);color:#fff}
+.c-ig{color:#E4405F;border-color:#E4405F}
+.c-ig:hover{background:#E4405F;color:#fff}
+.c-web{color:var(--g3-charcoal);border-color:var(--g3-charcoal)}
+.c-web:hover{background:var(--g3-charcoal);color:#fff}
+.c-map{color:var(--orange);border-color:var(--orange)}
+.c-map:hover{background:var(--orange);color:#fff}
+.c-email{color:var(--purple);border-color:var(--purple)}
+.c-email:hover{background:var(--purple);color:#fff}
+
+.status-sel{font-size:.72rem;padding:3px 6px;border-radius:var(--rs);border:1px solid var(--border);background:var(--bg-card);font-family:var(--font);cursor:pointer;color:var(--text-1)}
+
+.biz-name{font-weight:600;font-size:.84rem}
+.biz-sub{font-size:.7rem;color:var(--text-2)}
+.felino-star{color:var(--purple);font-size:.8rem;margin-left:4px}
+
+.detail-panel{position:fixed;top:0;right:0;bottom:0;width:420px;background:var(--bg-card);border-left:1px solid var(--border);z-index:200;transform:translateX(100%);transition:transform .25s ease;overflow-y:auto;box-shadow:-4px 0 20px rgba(0,0,0,.1)}
+.detail-panel.open{transform:translateX(0)}
+.detail-overlay{position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:190;display:none}
+.detail-overlay.open{display:block}
+.dp-header{padding:20px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between}
+.dp-header h2{font-size:1.1rem;font-weight:700}
+.dp-close{width:32px;height:32px;border-radius:50%;border:1px solid var(--border);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text-2);font-size:1rem;transition:all var(--t)}
+.dp-close:hover{background:var(--bg-hover);color:var(--text-1)}
+.dp-body{padding:20px}
+.dp-field{margin-bottom:14px}
+.dp-field .lbl{font-size:.7rem;font-weight:600;color:var(--text-2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}
+.dp-field .val{font-size:.85rem}
+.dp-contacts{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+.dp-contact-btn{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:var(--rs);border:1px solid var(--border);background:var(--bg-card);font-size:.78rem;font-family:var(--font);cursor:pointer;text-decoration:none;color:var(--text-1);transition:all var(--t)}
+.dp-contact-btn:hover{background:var(--bg-hover);border-color:var(--text-1)}
+
+@media(max-width:1024px){
+    .sidebar{display:none}
+    .main{margin-left:0}
+    .kpi-row{grid-template-columns:repeat(3,1fr)}
+    .detail-panel{width:100%}
+}
+@media(max-width:640px){
+    .kpi-row{grid-template-columns:repeat(2,1fr)}
+    .content{padding:16px}
+    .search-box{min-width:auto;flex:1}
+}
+
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{animation:fadeIn .3s ease forwards}
+</style>
+</head>
+<body>
+<div class="app">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+    <div class="sb-brand">
+        <h1>GATO<sup>3</sup></h1>
+        <span class="tag">CRM Organico — Pipeline B2B</span>
+    </div>
+    <div class="sb-stats" id="sb-stats"></div>
+    <div class="sb-filters">
+        <div class="sb-section">
+            <div class="sb-section-label">Potencial B2B</div>
+            <div id="filter-pot"></div>
+        </div>
+        <div class="sb-section">
+            <div class="sb-section-label">Segmento</div>
+            <div id="filter-seg"></div>
+        </div>
+        <div class="sb-section">
+            <div class="sb-section-label">Cidade</div>
+            <div id="filter-city"></div>
+        </div>
+    </div>
+    <div class="sb-footer">
+        <span class="dot"></span>
+        <span>Dados reais — ABC Paulista</span>
+    </div>
+</aside>
+
+<!-- MAIN -->
+<div class="main">
+    <header class="topbar">
+        <div class="topbar-left">
+            <div>
+                <div class="topbar-title">Pipeline de Prospecção B2B</div>
+                <div class="topbar-sub">141 negócios reais do CRM — ABC Paulista + Grande SP</div>
+            </div>
+        </div>
+        <div class="search-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="search" placeholder="Buscar nome, CNPJ, cidade, segmento..." oninput="applyFilters()">
+        </div>
+        <div class="topbar-right">
+            <button class="btn-icon" onclick="toggleTheme()" title="Alternar tema">
+                <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+            </button>
+            <button class="btn-icon" onclick="exportCSV()" title="Exportar CSV filtrado">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            </button>
+        </div>
+    </header>
+
+    <div class="content">
+        <div class="kpi-row" id="kpis"></div>
+        <div class="pipeline" id="pipeline"></div>
+        <div class="table-card fade-in">
+            <div class="table-header">
+                <h2>Negocios</h2>
+                <span class="count-label" id="count-label"></span>
+            </div>
+            <div class="tbl-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Negocio</th>
+                            <th>Cidade</th>
+                            <th>Potencial</th>
+                            <th>Segmento</th>
+                            <th>Porte</th>
+                            <th>Rating</th>
+                            <th>Contatos</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- Detail Panel -->
+<div class="detail-overlay" id="detail-overlay" onclick="closeDetail()"></div>
+<div class="detail-panel" id="detail-panel">
+    <div class="dp-header">
+        <h2 id="dp-name"></h2>
+        <button class="dp-close" onclick="closeDetail()">&#x2715;</button>
+    </div>
+    <div class="dp-body" id="dp-body"></div>
+</div>
+
+<script>
+const CRM_DATA = [{"cnpj":"19.055.885/0002-35","nome":"Pet Para Pets","seg":"pet_shop","sub":"megaloja","end":"Av. Goiás, 1400 - Santa Paula","cid":"São Caetano do Sul","ring":"1_abc","tel":"(11) 4227-6000","wpp":"(11) 94529-7345","email":"","ig":"@petparapetsoficial","web":"https://www.petparapets.com.br/","maps":"https://www.google.com/maps/search/?api=1&query=Pet+Para+Pets+Av.+Goiás+1400+São+Caetano+do+Sul","rat":"4.6","rev":"1100","porte":"medio","felino":"false","pot":"medio","notas":"Grande rede, bom volume de clientes. Endereço pode variar.","lat":-23.620885,"lng":-46.5688},{"cnpj":"17.711.811/0002-84","nome":"AnimaPets","seg":"pet_shop","sub":"venda_filhotes","end":"Av. Goiás, 315 - Santo Antônio","cid":"São Caetano do Sul","ring":"1_abc","tel":"(11) 2376-8107","wpp":"(11) 91090-5414","email":"","ig":"","web":"https://www.animapets.com.br/","maps":"https://www.google.com/maps/search/?api=1&query=AnimaPets+Av.+Goiás,+315+-+São+Caetano+do+Sul","rat":"4.9","rev":"1100","porte":"epp","felino":"false","pot":"baixo","notas":"Foco em venda de filhotes, menos em produtos/serviços recorrentes.","lat":-23.6288,"lng":-46.569214},{"cnpj":"48.807.594/0001-73","nome":"Pets House","seg":"clinica_vet","sub":"24h","end":"Av. Goiás, 269 - Santo Antônio","cid":"São Caetano do Sul","ring":"1_abc","tel":"(11) 4234-2384","wpp":"(11) 97727-0001","email":"","ig":"@_petshouse","web":"","maps":"https://www.google.com/maps/search/?api=1&query=Pets+House+Centro+Veterinário+São+Caetano","rat":"4.9","rev":"130","porte":"epp","felino":"true","pot":"alto","notas":"Clínica 24h com bom foco em gatos, Dra. Larissa é especialista.","lat":-23.625108,"lng":-46.565586},{"cnpj":"53.153.938/0016-94","nome":"Cobasi","seg":"pet_shop","sub":"megaloja","end":"Alameda Caulim, 125","cid":"São Caetano do Sul","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"https://www.cobasi.com.br/","maps":"","rat":"4.5","rev":"500+","porte":"grande","felino":"false","pot":"alto","notas":"Rede nacional, alto volume","lat":-23.620163,"lng":-46.568604},{"cnpj":"","nome":"Planet Dog","seg":"pet_shop","sub":"boutique","end":"Alameda Terracota, 545 - ParkShopping","cid":"São Caetano do Sul","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"medio","notas":"Pet shop boutique premium","lat":-23.623925,"lng":-46.569062},{"cnpj":"","nome":"Dog's Day","seg":"pet_shop","sub":"local","end":"R. Visc. de Inhaúma, 65 - Oswaldo Cruz","cid":"São Caetano do Sul","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"medio","notas":"Seg-Sex 8h30-20h, Sáb 8h30-19h","lat":-23.621251,"lng":-46.571957},{"cnpj":"","nome":"Climeve","seg":"clinica_vet","sub":"hospital_24h","end":"Av. Brasília, 265 - Vila Bela Vista","cid":"Santo André","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"","maps":"","rat":"","rev":"","porte":"epp","felino":"false","pot":"alto","notas":"Hospital 24h completo","lat":-23.677488,"lng":-46.545609},{"cnpj":"","nome":"PETPOP SBC","seg":"clinica_vet","sub":"popular","end":"","cid":"Santo André","ring":"1_abc","tel":"(11) 2578-4219","wpp":"","email":"","ig":"","web":"","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"medio","notas":"Preços populares","lat":-23.672501,"lng":-46.54284},{"cnpj":"","nome":"CV Santo André","seg":"clinica_vet","sub":"24h","end":"R. das Esmeraldas, 378 - Jardim","cid":"Santo André","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"","maps":"","rat":"","rev":"","porte":"epp","felino":"false","pot":"alto","notas":"Fundada 2005, emergências","lat":-23.675936,"lng":-46.542486},{"cnpj":"","nome":"Cão Bernardo","seg":"clinica_vet","sub":"hospital_24h","end":"","cid":"São Bernardo do Campo","ring":"1_abc","tel":"(11) 4930-4551","wpp":"(11) 94006-5777","email":"","ig":"","web":"https://caobernardo.com.br/","maps":"","rat":"","rev":"","porte":"epp","felino":"false","pot":"alto","notas":"Hospital 24h especializado","lat":-23.688925,"lng":-46.568648},{"cnpj":"34.397.523/0001-35","nome":"Pet Store Drogaria","seg":"pet_shop","sub":"drogaria_vet","end":"","cid":"Diadema","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"","maps":"","rat":"","rev":"","porte":"epp","felino":"false","pot":"medio","notas":"Drogaria + clínica","lat":-23.679153,"lng":-46.621015},{"cnpj":"53.652.422/0001-08","nome":"Mercadão Pet Eldorado","seg":"pet_shop","sub":"mercadao","end":"Av. N. Sra. dos Navegantes, 92 - Eldorado","cid":"Diadema","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"","maps":"","rat":"","rev":"","porte":"epp","felino":"false","pot":"alto","notas":"Grande volume","lat":-23.682878,"lng":-46.625356},{"cnpj":"52.307.407/0001-60","nome":"Pet Shop São Vicente","seg":"pet_shop","sub":"local","end":"R. Presidente Carlos Luz, 41 - Parque São Vicente","cid":"Mauá","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"medio","notas":"Regional","lat":-23.664042,"lng":-46.462607},{"cnpj":"18.703.259/0001-64","nome":"CV Pet Shop Ribeirão","seg":"clinica_vet","sub":"clinica_pet","end":"Av. Kaethe Richers, 35 - Pastoril","cid":"Ribeirão Pires","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"medio","notas":"Clínica + pet shop","lat":-23.714458,"lng":-46.415026},{"cnpj":"","nome":"UPA ABC","seg":"ong","sub":"protecao","end":"","cid":"ABC Paulista","ring":"1_abc","tel":"","wpp":"","email":"","ig":"@protecaoanimalabc","web":"","maps":"","rat":"","rev":"","porte":"ong","felino":"true","pot":"baixo","notas":"10 anos, união protetores","lat":-23.64722,"lng":-46.54917},{"cnpj":"24.807.320/0001-16","nome":"Canto da Terra","seg":"ong","sub":"resgate","end":"","cid":"ABC Paulista","ring":"1_abc","tel":"","wpp":"(11) 97055-3947","email":"","ig":"","web":"https://ongcantodaterra.org/","maps":"","rat":"","rev":"","porte":"ong","felino":"false","pot":"baixo","notas":"Resgate e tratamento","lat":-23.647543,"lng":-46.548162},{"cnpj":"","nome":"Instituto Caramelo","seg":"ong","sub":"resgate","end":"","cid":"ABC Paulista","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"https://institutocaramelo.org","maps":"","rat":"","rev":"","porte":"ong","felino":"false","pot":"baixo","notas":"Cães e gatos","lat":-23.64971,"lng":-46.546215},{"cnpj":"","nome":"APAA","seg":"ong","sub":"protecao","end":"","cid":"ABC Paulista","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"","maps":"","rat":"","rev":"","porte":"ong","felino":"false","pot":"baixo","notas":"Proteção animal SP","lat":-23.650972,"lng":-46.549584},{"cnpj":"","nome":"Dr. Andressa Vet","seg":"clinica_vet","sub":"domiciliar","end":"Atendimento domiciliar ABC","cid":"ABC Paulista","ring":"1_abc","tel":"","wpp":"(11) 95882-8004","email":"","ig":"","web":"https://andressa.vet/","maps":"","rat":"","rev":"","porte":"mei","felino":"true","pot":"medio","notas":"Silvestres e exóticos","lat":-23.647365,"lng":-46.549052},{"cnpj":"","nome":"Garbin Pet Shop","seg":"pet_shop","sub":"clinica_pet","end":"","cid":"Guarulhos","ring":"2_grande_sp","tel":"","wpp":"","email":"","ig":"","web":"https://www.clinicaveterinariasp.com.br/","maps":"","rat":"","rev":"","porte":"epp","felino":"false","pot":"medio","notas":"Clínica + pet shop","lat":-23.459906,"lng":-46.532581},{"cnpj":"","nome":"Animal Center","seg":"clinica_vet","sub":"centro_completo","end":"","cid":"Osasco","ring":"2_grande_sp","tel":"","wpp":"","email":"","ig":"","web":"https://www.animalcenter.vet.br/","maps":"","rat":"","rev":"","porte":"epp","felino":"false","pot":"alto","notas":"Centro completo","lat":-23.660363,"lng":-46.534633},{"cnpj":"","nome":"Dog Up","seg":"clinica_vet","sub":"24h","end":"","cid":"Osasco","ring":"2_grande_sp","tel":"","wpp":"","email":"","ig":"","web":"","maps":"","rat":"","rev":"","porte":"epp","felino":"false","pot":"alto","notas":"Clínica 24h renomada","lat":-23.534677,"lng":-46.793385},{"cnpj":"","nome":"Vidanimal","seg":"pet_shop","sub":"clinica_pet","end":"Av. Municipal, 381 - Jardim Silveira","cid":"Barueri","ring":"2_grande_sp","tel":"(11) 4201-5691","wpp":"","email":"","ig":"","web":"https://www.vidanimalbarueri.com.br/","maps":"","rat":"","rev":"","porte":"epp","felino":"false","pot":"alto","notas":"Fundada 2006","lat":-23.513962,"lng":-46.878038},{"cnpj":"","nome":"CV Prime","seg":"clinica_vet","sub":"hospital","end":"","cid":"Guarulhos","ring":"2_grande_sp","tel":"","wpp":"","email":"","ig":"","web":"https://centroveterinarioprime.com.br/","maps":"","rat":"","rev":"","porte":"epp","felino":"false","pot":"alto","notas":"Nível hospitalar","lat":-23.465992,"lng":-46.534976},{"cnpj":"18.135.968/0001-90","nome":"Banho e Tosa Bella","seg":"banho_tosa","sub":"local","end":"","cid":"São Bernardo do Campo","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"","maps":"","rat":"","rev":"","porte":"mei","felino":"false","pot":"medio","notas":"Round 2 — PME local","lat":-23.690315,"lng":-46.565781},{"cnpj":"24.429.498/0001-70","nome":"Banho e Tosa Cao Carinho","seg":"banho_tosa","sub":"local","end":"Rua Japao 18 - Taboao","cid":"São Bernardo do Campo","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"medio","notas":"Round 2 — Fundada 2016, dados validados","lat":-23.692439,"lng":-46.567024},{"cnpj":"12.946.452/0001-40","nome":"Santa Cachorrada","seg":"banho_tosa","sub":"local","end":"","cid":"São Bernardo do Campo","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"medio","notas":"Round 2 — PME estabelecida","lat":-23.693264,"lng":-46.561207},{"cnpj":"17.698.845/0001-03","nome":"Priscila Banho e Tosa","seg":"banho_tosa","sub":"local","end":"","cid":"São Bernardo do Campo","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"","maps":"","rat":"","rev":"","porte":"mei","felino":"false","pot":"medio","notas":"Round 2 — Empreendedora individual","lat":-23.690216,"lng":-46.563827},{"cnpj":"","nome":"Sofystpet","seg":"banho_tosa","sub":"local","end":"Rua M M D C, 363 - Paulicéia","cid":"São Bernardo do Campo","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"medio","notas":"Round 2 — 6+ anos ativa","lat":-23.694031,"lng":-46.562867},{"cnpj":"","nome":"Pet Shop Sk","seg":"banho_tosa","sub":"pet_shop","end":"Av. Jurubatuba 646, Loja 2","cid":"São Bernardo do Campo","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"alto","notas":"Round 2 — Híbrido banho+produtos","lat":-23.694093,"lng":-46.565664},{"cnpj":"30.100.835/0001-84","nome":"Show de Banho Pet Truck","seg":"banho_tosa","sub":"mobile","end":"","cid":"São Bernardo do Campo","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"alto","notas":"Round 2 — Pet truck móvel, inovador","lat":-23.687484,"lng":-46.56358},{"cnpj":"08.159.407/0001-78","nome":"Meu Bicho","seg":"banho_tosa","sub":"pet_shop","end":"Rua Sergio Milliet 581 - Jordanópolis","cid":"São Bernardo do Campo","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"alto","notas":"Round 2 — Híbrido banho+loja","lat":-23.704544,"lng":-46.563523},{"cnpj":"52.425.223/0001-02","nome":"Banho e Tosa Abc","seg":"banho_tosa","sub":"local","end":"","cid":"Santo André","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"medio","notas":"Round 2 — Nome regional ABC","lat":-23.670957,"lng":-46.540992},{"cnpj":"56.210.739/0001-82","nome":"Banho e Tosa Arco Iris","seg":"banho_tosa","sub":"local","end":"","cid":"Santo André","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"medio","notas":"Round 2 — Marca colorida","lat":-23.675868,"lng":-46.546943},{"cnpj":"56.927.149/0001-75","nome":"Kimcao","seg":"banho_tosa","sub":"pet_shop","end":"","cid":"Santo André","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"","maps":"","rat":"","rev":"","porte":"epp","felino":"false","pot":"alto","notas":"Round 2 — EPP, híbrido banho+loja","lat":-23.675176,"lng":-46.545058},{"cnpj":"57.410.727/0001-64","nome":"Pv Banho e Tosa","seg":"banho_tosa","sub":"local","end":"","cid":"Santo André","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"medio","notas":"Round 2 — Fundada set/2024, nova","lat":-23.676012,"lng":-46.539657},{"cnpj":"49.251.337/0001-60","nome":"Banho e Tosa Scooby","seg":"banho_tosa","sub":"local","end":"","cid":"Santo André","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"medio","notas":"Round 2 — Empreendedora jovem","lat":-23.670689,"lng":-46.544683},{"cnpj":"25.113.175/0001-36","nome":"Pet Shop São Paulo","seg":"banho_tosa","sub":"pet_shop","end":"","cid":"Santo André","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"alto","notas":"Round 2 — 9+ anos, híbrido","lat":-23.672456,"lng":-46.544035},{"cnpj":"46.465.165/0001-30","nome":"Roptcare","seg":"banho_tosa","sub":"local","end":"","cid":"Santo André","ring":"1_abc","tel":"(11) 4991-1983","wpp":"","email":"","ig":"","web":"","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"medio","notas":"Round 2 — Telefone validado","lat":-23.670384,"lng":-46.543529},{"cnpj":"","nome":"Pet Speciale","seg":"pet_shop","sub":"local","end":"","cid":"São Caetano do Sul","ring":"1_abc","tel":"","wpp":"","email":"","ig":"@petspeciale","web":"","maps":"https://www.facebook.com/petspeciale","rat":"","rev":"56","porte":"me","felino":"true","pot":"alto","notas":"Round 2 — Banho+alimentação, foco felino","lat":-23.625181,"lng":-46.567327},{"cnpj":"","nome":"For Pet","seg":"pet_shop","sub":"local","end":"Alameda São Caetano, 2423","cid":"São Caetano do Sul","ring":"1_abc","tel":"","wpp":"","email":"","ig":"@forpetsaocaetano","web":"forpetsaocaetano.com.br","maps":"https://www.facebook.com/forpetsaocaetano","rat":"","rev":"","porte":"me","felino":"false","pot":"medio","notas":"Round 2 — Local estabelecido","lat":-23.622809,"lng":-46.567198},{"cnpj":"","nome":"Pet Sauro","seg":"pet_shop","sub":"local","end":"","cid":"São Caetano do Sul","ring":"1_abc","tel":"(11) 99419-9000","wpp":"(11) 99419-9000","email":"","ig":"@petsauro","web":"","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"medio","notas":"Round 2 — WhatsApp ativo","lat":-23.622623,"lng":-46.562117},{"cnpj":"","nome":"Galerinha Animal","seg":"pet_shop","sub":"local","end":"","cid":"?","ring":"1_abc","tel":"","wpp":"","email":"","ig":"@petstoregalerinhaanimal","web":"","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"medio","notas":"Round 2 — Nome família-friendly","lat":-23.650805,"lng":-46.552245},{"cnpj":"","nome":"Pet Shop Pedroso","seg":"pet_shop","sub":"local","end":"","cid":"Santo André","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"https://www.petshoppedroso.com.br/","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"alto","notas":"Round 2 — Site próprio, estabelecido","lat":-23.66972,"lng":-46.543124},{"cnpj":"","nome":"Local Pet","seg":"pet_shop","sub":"local","end":"","cid":"São Bernardo do Campo","ring":"1_abc","tel":"","wpp":"","email":"","ig":"@localpet_","web":"","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"medio","notas":"Round 2 — Ofertas ativas no Instagram","lat":-23.694673,"lng":-46.568323},{"cnpj":"","nome":"Mundo Animal","seg":"distribuidor","sub":"atacado","end":"Rua Matilde, 238","cid":"Santo André","ring":"1_abc","tel":"(11) 4461-4189","wpp":"(11) 96316-8005","email":"contato@distribuidoramundoanimal.com.br","ig":"@mundoanimaldistribuidora","web":"https://www.distribuidoramundoanimal.com.br/","maps":"","rat":"","rev":"","porte":"epp","felino":"false","pot":"muito_alto","notas":"Round 2 — Fundada 1993, distribuidor estabelecido","lat":-23.676823,"lng":-46.54218},{"cnpj":"19.055.885/0002-35","nome":"Pet Para Pets SBC","seg":"pet_shop","sub":"megaloja","end":"Av. Brigadeiro Faria Lima, 1760","cid":"São Bernardo do Campo","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"https://www.cobasi.com.br/","maps":"","rat":"","rev":"","porte":"grande","felino":"false","pot":"alto","notas":"Round 3 — Megaloja SBC, volume alto","lat":-23.689063,"lng":-46.565323},{"cnpj":"","nome":"PET LOVERS Pet Shop","seg":"pet_shop","sub":"local","end":"","cid":"São Bernardo do Campo","ring":"1_abc","tel":"","wpp":"","email":"","ig":"@petloverspetshop","web":"https://www.facebook.com/petloverspetshop/","maps":"","rat":"","rev":"2096","porte":"me","felino":"true","pot":"alto","notas":"Round 3 — 2k+ likes, foco amor pets","lat":-23.694892,"lng":-46.565647},{"cnpj":"","nome":"Pet Shop Bom Cão","seg":"pet_shop","sub":"local","end":"R. Maria Nicolina Bellucce Piatto, 336","cid":"São Bernardo do Campo","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"medio","notas":"Round 3 — Endereço confirmado","lat":-23.687431,"lng":-46.564467},{"cnpj":"","nome":"BEST PET SHOP","seg":"pet_shop","sub":"completo","end":"Rua Marabá, 107 - Rudge Ramos","cid":"São Bernardo do Campo","ring":"1_abc","tel":"","wpp":"","email":"","ig":"@bestpet.sbc","web":"","maps":"","rat":"5.0","rev":"362","porte":"epp","felino":"false","pot":"muito_alto","notas":"Round 3 — Completo: hotel+vet+creche+banho","lat":-23.664231,"lng":-46.564114},{"cnpj":"","nome":"Dogfish PETSHOP","seg":"pet_shop","sub":"estetica","end":"","cid":"São Bernardo do Campo","ring":"1_abc","tel":"","wpp":"","email":"","ig":"@novadogfishpetshop","web":"","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"medio","notas":"Round 3 — Estética animal especializada","lat":-23.695308,"lng":-46.562934},{"cnpj":"","nome":"4 Patas e Cia","seg":"pet_shop","sub":"completo","end":"MMDC, 270 – Loja 1 e 2 - Paulicéia","cid":"São Bernardo do Campo","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"https://institucional.4patasecia.com.br/","maps":"","rat":"","rev":"","porte":"epp","felino":"false","pot":"alto","notas":"Round 3 — Desde 1998, completo","lat":-23.689946,"lng":-46.564404},{"cnpj":"","nome":"Pet Shop Dom Pet","seg":"pet_shop","sub":"local","end":"","cid":"São Bernardo do Campo","ring":"1_abc","tel":"","wpp":"","email":"","ig":"@DomPetBarbosa","web":"https://www.facebook.com/DomPetBarbosa/","maps":"","rat":"","rev":"1750","porte":"me","felino":"false","pot":"alto","notas":"Round 3 — 1750 likes, \"tudo que o pet precisa\"","lat":-23.693265,"lng":-46.563572},{"cnpj":"","nome":"Pet Shop Rudge","seg":"pet_shop","sub":"local","end":"Rudge Ramos","cid":"São Bernardo do Campo","ring":"1_abc","tel":"(11) 2381-5689","wpp":"(11) 2381-5689","email":"","ig":"@petshop_rudge","web":"","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"alto","notas":"Round 3 — Tel validado, Rudge Ramos","lat":-23.671108,"lng":-46.567522},{"cnpj":"","nome":"Pet Mais Rudge Ramos","seg":"pet_shop","sub":"completo","end":"Rua Alfeu Tavares, 254 - Rudge Ramos","cid":"São Bernardo do Campo","ring":"1_abc","tel":"","wpp":"","email":"","ig":"@petmais.rudge","web":"https://www.facebook.com/petmais.rudge/","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"alto","notas":"Round 3 — Endereço validado, variedade","lat":-23.66837,"lng":-46.563369},{"cnpj":"","nome":"Pet Shop São José","seg":"pet_shop","sub":"local","end":"","cid":"São Bernardo do Campo","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"medio","notas":"Round 3 — Rudge Ramos Raiz","lat":-23.664993,"lng":-46.568893},{"cnpj":"","nome":"Stillo Animal","seg":"banho_tosa","sub":"estetica","end":"","cid":"São Bernardo do Campo","ring":"1_abc","tel":"","wpp":"","email":"","ig":"@stilloanimaloficiall","web":"https://www.facebook.com/stilloanimaloficiall/","maps":"","rat":"","rev":"521","porte":"me","felino":"false","pot":"medio","notas":"Round 3 — 521 likes, estética animal","lat":-23.691395,"lng":-46.567271},{"cnpj":"","nome":"Convivência Animal","seg":"pet_shop","sub":"local","end":"Av. Luiz Pequini, 902","cid":"São Bernardo do Campo","ring":"1_abc","tel":"(11) 4345-2028","wpp":"","email":"","ig":"","web":"","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"alto","notas":"Round 3 — Tel validado, endereço confirmado","lat":-23.688099,"lng":-46.561736},{"cnpj":"","nome":"Internacional Pets","seg":"pet_shop","sub":"shopping","end":"São Bernardo Plaza Shopping","cid":"São Bernardo do Campo","ring":"1_abc","tel":"","wpp":"","email":"","ig":"@internacionalpetssbc","web":"","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"alto","notas":"Round 3 — Shopping, variedade produtos","lat":-23.693012,"lng":-46.563588},{"cnpj":"53.153.938/0016-94","nome":"Petz São Bernardo","seg":"pet_shop","sub":"megaloja","end":"Av. Rotary, 825 - Centro","cid":"São Bernardo do Campo","ring":"1_abc","tel":"(11) 2181-7420","wpp":"","email":"","ig":"","web":"https://www.petz.com.br/loja/petz-sao-bernardo","maps":"","rat":"","rev":"","porte":"grande","felino":"false","pot":"muito_alto","notas":"Round 3 — Rede nacional, Center Castilho","lat":-23.661128,"lng":-46.533777},{"cnpj":"","nome":"Dogs & Cats","seg":"pet_shop","sub":"local","end":"Av. Armando Italo Setti, 626 - Baeta Neves","cid":"São Bernardo do Campo","ring":"1_abc","tel":"(11) 95852-7218","wpp":"(11) 95852-7218","email":"nivealeandro@hotmail.com","ig":"@PetshopDogsCats","web":"https://www.facebook.com/PetshopDogsCats/","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"alto","notas":"Round 3 — Contatos completos validados","lat":-23.6779,"lng":-46.557685},{"cnpj":"","nome":"A Casa dos Pet","seg":"pet_shop","sub":"local","end":"Av. Winston Churchill, 713","cid":"São Bernardo do Campo","ring":"1_abc","tel":"","wpp":"","email":"","ig":"@acasadospet","web":"","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"medio","notas":"Round 3 — Inauguração recente","lat":-23.689171,"lng":-46.564457},{"cnpj":"","nome":"Vip Care","seg":"clinica_vet","sub":"clinica_pet","end":"","cid":"São Bernardo do Campo","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"https://www.petshopvipcare.com.br/","maps":"","rat":"","rev":"","porte":"epp","felino":"false","pot":"alto","notas":"Round 3 — 15 anos, clínica+pet shop","lat":-23.695395,"lng":-46.566107},{"cnpj":"","nome":"100% Pet","seg":"pet_shop","sub":"local","end":"Av. Kennedy, 990 - Jardim do Mar","cid":"São Bernardo do Campo","ring":"1_abc","tel":"(11) 4317-5300","wpp":"","email":"","ig":"@CemPorCentoPetSBC","web":"cemporcentopet.com.br","maps":"","rat":"","rev":"","porte":"epp","felino":"false","pot":"alto","notas":"Round 3 — Tel validado, website","lat":-23.695244,"lng":-46.561267},{"cnpj":"","nome":"LM Bichinho","seg":"clinica_vet","sub":"clinica_pet","end":"Rua Aura, 54 - Rudge Ramos","cid":"São Bernardo do Campo","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"https://lmbichinho.com.br/","maps":"","rat":"","rev":"","porte":"epp","felino":"false","pot":"alto","notas":"Round 3 — Clínica+Pet shop, 2 endereços","lat":-23.66497,"lng":-46.564347},{"cnpj":"","nome":"Amity Pet","seg":"banho_tosa","sub":"clinica_pet","end":"","cid":"São Bernardo do Campo","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"https://amitypet.com.br/","maps":"","rat":"","rev":"","porte":"epp","felino":"false","pot":"alto","notas":"Round 3 — Segurança, conforto, bem-estar","lat":-23.69294,"lng":-46.568237},{"cnpj":"","nome":"Pet Flor de Maio","seg":"banho_tosa","sub":"local","end":"Rua Flor de maio, 63","cid":"São Bernardo do Campo","ring":"1_abc","tel":"","wpp":"","email":"","ig":"@Petflordemaio","web":"https://www.facebook.com/Petflordemaio/","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"medio","notas":"Round 3 — Endereço validado","lat":-23.688376,"lng":-46.561124},{"cnpj":"","nome":"Banho e Tosa SBC","seg":"banho_tosa","sub":"clinica_pet","end":"Alameda Princesa Isabel, 329","cid":"São Bernardo do Campo","ring":"1_abc","tel":"(11) 2374-6905","wpp":"","email":"","ig":"@guardiaoclinicaveterinaria","web":"","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"alto","notas":"Round 3 — Tel+endereço validados","lat":-23.694715,"lng":-46.564812},{"cnpj":"","nome":"Atmos","seg":"clinica_vet","sub":"centro_completo","end":"","cid":"São Bernardo do Campo","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"https://atmosveterinario.com/","maps":"","rat":"","rev":"","porte":"epp","felino":"false","pot":"muito_alto","notas":"Round 3 — Centro integral saúde animal","lat":-23.665446,"lng":-46.528915},{"cnpj":"","nome":"EcoPet","seg":"clinica_vet","sub":"24h","end":"","cid":"São Bernardo do Campo","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"https://ecopetonline.com.br/","maps":"","rat":"","rev":"","porte":"epp","felino":"true","pot":"muito_alto","notas":"Round 3 — 24h, silvestres, especialista felinos","lat":-23.689273,"lng":-46.567673},{"cnpj":"","nome":"Animale Hospital","seg":"clinica_vet","sub":"hospital_24h","end":"","cid":"São Bernardo do Campo","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"https://www.veterinariapets.com.br/","maps":"","rat":"","rev":"","porte":"epp","felino":"false","pot":"muito_alto","notas":"Round 3 — Hospital 24h emergenciais","lat":-23.691598,"lng":-46.564302},{"cnpj":"","nome":"Vet Live","seg":"clinica_vet","sub":"24h","end":"","cid":"São Bernardo do Campo","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"https://www.vetlivecv.com.br/","maps":"","rat":"","rev":"","porte":"epp","felino":"false","pot":"muito_alto","notas":"Round 3 — Centro Veterinário 24h","lat":-23.66388,"lng":-46.528021},{"cnpj":"","nome":"Vetplace SBC","seg":"clinica_vet","sub":"especializada","end":"","cid":"São Bernardo do Campo","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"https://vetplacesbc.com.br/","maps":"","rat":"","rev":"","porte":"epp","felino":"false","pot":"alto","notas":"Round 3 — Especialidades veterinárias","lat":-23.692015,"lng":-46.567006},{"cnpj":"","nome":"Árbol Hospital","seg":"clinica_vet","sub":"hospital","end":"","cid":"São Bernardo do Campo","ring":"1_abc","tel":"","wpp":"","email":"","ig":"@arbolvet","web":"https://www.facebook.com/arbolvet/","maps":"","rat":"","rev":"215","porte":"epp","felino":"false","pot":"alto","notas":"Round 3 — Hospital completo","lat":-23.691086,"lng":-46.562861},{"cnpj":"","nome":"Canarinho Pet Shop","seg":"pet_shop","sub":"local","end":"","cid":"São Bernardo do Campo","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"https://canarinhopetshop.negocio.site/","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"medio","notas":"Round 3 — Pet shop independente","lat":-23.693791,"lng":-46.566206},{"cnpj":"","nome":"Bicho do Mato","seg":"pet_shop","sub":"local","end":"","cid":"São Bernardo do Campo","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"https://domato.vitrinevirtual.net/","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"medio","notas":"Round 3 — Pet shop independente","lat":-23.687439,"lng":-46.563501},{"cnpj":"","nome":"E.B. Clínica Veterinária","seg":"clinica_vet","sub":"clinica_pet","end":"","cid":"São Bernardo do Campo","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"https://ebclinicaveterinaria.com.br/","maps":"","rat":"","rev":"","porte":"epp","felino":"false","pot":"alto","notas":"Round 3 — Desde 2003, veterinários+banho+tosa","lat":-23.691895,"lng":-46.564559},{"cnpj":"","nome":"CEC PET","seg":"distribuidor","sub":"atacado","end":"","cid":"São Bernardo do Campo","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"https://www.cecpet.com.br/","maps":"","rat":"","rev":"","porte":"epp","felino":"false","pot":"muito_alto","notas":"Round 3 — Distribuidor produtos pet SP","lat":-23.694432,"lng":-46.566902},{"cnpj":"","nome":"Focinhos Club","seg":"distribuidor","sub":"comercio_distribuicao","end":"","cid":"São Bernardo do Campo","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"alto","notas":"Round 3 — CNPJ 64.526.701/0001-41","lat":-23.692695,"lng":-46.563994},{"cnpj":"","nome":"Skub Pet Shop","seg":"pet_shop","sub":"completo","end":"","cid":"Santo André","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"https://www.skubpetshop.com.br/","maps":"","rat":"4.8","rev":"150+","porte":"epp","felino":"false","pot":"muito_alto","notas":"Round 3 — Banho+tosa+clínica+ração premium","lat":-23.675859,"lng":-46.545438},{"cnpj":"","nome":"Golden Premier","seg":"banho_tosa","sub":"premium","end":"","cid":"Santo André","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"https://goldenpremiervet.com/petshop","maps":"","rat":"","rev":"","porte":"epp","felino":"false","pot":"muito_alto","notas":"Round 3 — Pet shop luxo, spa pets","lat":-23.677132,"lng":-46.542151},{"cnpj":"","nome":"Laras Avicultura","seg":"pet_shop","sub":"avicultura","end":"","cid":"Santo André","ring":"1_abc","tel":"","wpp":"","email":"","ig":"@petshopeaviculturalaras","web":"https://www.facebook.com/petshopeaviculturalaras/","maps":"","rat":"","rev":"480","porte":"me","felino":"false","pot":"medio","notas":"Round 3 — Banho+tosa+alimentos, 480 likes","lat":-23.675868,"lng":-46.539957},{"cnpj":"","nome":"Pet Amazônia","seg":"pet_shop","sub":"local","end":"","cid":"Santo André","ring":"1_abc","tel":"","wpp":"","email":"","ig":"@pet_amazonia","web":"","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"medio","notas":"Round 3 — Saudações 2026, ativo","lat":-23.670823,"lng":-46.546633},{"cnpj":"","nome":"Pet Center Dom Pedro","seg":"pet_shop","sub":"centro_completo","end":"","cid":"Santo André","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"https://www.linkbr.in/petcenterdompedro","maps":"","rat":"","rev":"","porte":"epp","felino":"false","pot":"muito_alto","notas":"Round 3 — Centro completo veterinário+banho+tosa","lat":-23.664096,"lng":-46.529648},{"cnpj":"18.432.894/0001-54","nome":"Pet Shop Vila Pires","seg":"pet_shop","sub":"local","end":"Av. Dom Pedro I, 834 - Vila Pires","cid":"Santo André","ring":"1_abc","tel":"","wpp":"","email":"","ig":"@petshopVilaPires","web":"https://petshopvilapires.com.br","maps":"","rat":"","rev":"1654","porte":"me","felino":"false","pot":"alto","notas":"Round 3 — 12+ anos, Vila Pires, 1654 likes","lat":-23.657286,"lng":-46.540942},{"cnpj":"","nome":"CãoArt","seg":"pet_shop","sub":"completo","end":"","cid":"Santo André","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"http://caoartpetshop.com.br/","maps":"","rat":"","rev":"","porte":"epp","felino":"false","pot":"muito_alto","notas":"Round 3 — Banho+tosa+vet+hotel+taxi dog","lat":-23.670216,"lng":-46.542632},{"cnpj":"","nome":"Animal House","seg":"clinica_vet","sub":"completa","end":"","cid":"Santo André","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"https://www.animalhouse.com.br/","maps":"","rat":"","rev":"","porte":"epp","felino":"false","pot":"muito_alto","notas":"Round 3 — Clínica completa+banho+day care","lat":-23.673919,"lng":-46.540923},{"cnpj":"","nome":"House Pet","seg":"banho_tosa","sub":"premium","end":"","cid":"Santo André","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"https://www.figueirahousepet.com.br/","maps":"","rat":"","rev":"","porte":"epp","felino":"false","pot":"alto","notas":"Round 3 — Banho ozônio, espaço amplo","lat":-23.67124,"lng":-46.545677},{"cnpj":"","nome":"EurekaPet","seg":"clinica_vet","sub":"local","end":"","cid":"Santo André","ring":"1_abc","tel":"(11) 94713-3883","wpp":"(11) 94713-3883","email":"","ig":"@eurekapetsp","web":"","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"alto","notas":"Round 3 — 8 anos, WhatsApp validado","lat":-23.676925,"lng":-46.543752},{"cnpj":"","nome":"Nos Amis","seg":"clinica_vet","sub":"centro_completo","end":"","cid":"Santo André","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"https://nosamis.com.br/","maps":"","rat":"","rev":"","porte":"epp","felino":"false","pot":"muito_alto","notas":"Round 3 — Clínica+cirurgias+internação+lab","lat":-23.674311,"lng":-46.543464},{"cnpj":"","nome":"VitalVet ABC","seg":"clinica_vet","sub":"centro_medico","end":"","cid":"Santo André","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"https://www.vitalvetabc.com.br/","maps":"","rat":"","rev":"","porte":"epp","felino":"false","pot":"muito_alto","notas":"Round 3 — Centro médico veterinário ABC","lat":-23.660167,"lng":-46.529613},{"cnpj":"","nome":"Vet Selvagem","seg":"clinica_vet","sub":"especializada","end":"","cid":"Santo André","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"","maps":"","rat":"","rev":"","porte":"epp","felino":"true","pot":"muito_alto","notas":"Round 3 — Nova, foco silvestres+felinos","lat":-23.669827,"lng":-46.546413},{"cnpj":"","nome":"Buticão","seg":"clinica_vet","sub":"completo","end":"Bairro Campestre","cid":"Santo André","ring":"1_abc","tel":"(11) 4991-3324","wpp":"","email":"","ig":"@clinicabuticao","web":"https://www.facebook.com/petshopboticao/","maps":"","rat":"","rev":"","porte":"epp","felino":"false","pot":"muito_alto","notas":"Round 3 — Desde 1981, completo+hospedagem","lat":-23.660779,"lng":-46.546286},{"cnpj":"","nome":"Boutique Pet","seg":"banho_tosa","sub":"boutique","end":"","cid":"Santo André","ring":"1_abc","tel":"","wpp":"","email":"","ig":"@boutiquepetespa","web":"https://boutiqupetspa.com.br/","maps":"","rat":"","rev":"1788","porte":"epp","felino":"true","pot":"muito_alto","notas":"Round 3 — Especialista Spitz, sem gaiola, 1788 followers","lat":-23.670807,"lng":-46.545211},{"cnpj":"","nome":"SofistCão","seg":"banho_tosa","sub":"especializada","end":"","cid":"Santo André","ring":"1_abc","tel":"","wpp":"","email":"","ig":"@sofist_cao","web":"","maps":"","rat":"","rev":"2370","porte":"epp","felino":"true","pot":"muito_alto","notas":"Round 3 — 2370 followers, especialista tosa bebê+Spitz","lat":-23.676178,"lng":-46.543611},{"cnpj":"","nome":"The Pet Club","seg":"banho_tosa","sub":"local","end":"Vila Assunção","cid":"Santo André","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"https://www.linkbr.in/thepetclub","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"alto","notas":"Round 3 — Parceiro confiável Vila Assunção","lat":-23.686625,"lng":-46.556772},{"cnpj":"","nome":"Cão Carinho","seg":"banho_tosa","sub":"pet_shop","end":"R. Balaclava, 553","cid":"Santo André","ring":"1_abc","tel":"(11) 4975-4130","wpp":"","email":"","ig":"","web":"","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"alto","notas":"Round 3 — Tel validado, endereço confirmado","lat":-23.675702,"lng":-46.539814},{"cnpj":"","nome":"Nações Veterinária","seg":"clinica_vet","sub":"banho_tosa","end":"","cid":"Santo André","ring":"1_abc","tel":"","wpp":"","email":"","ig":"@banhoetosanacoes","web":"https://petshopnacoes.com.br/","maps":"","rat":"","rev":"","porte":"epp","felino":"false","pot":"alto","notas":"Round 3 — Clínica+banho+tosa+vacinas","lat":-23.674155,"lng":-46.540309},{"cnpj":"","nome":"Michele Cats","seg":"banho_tosa","sub":"cat_groomer","end":"São Paulo/ABC","cid":"Santo André","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"https://www.michelecats.com.br/","maps":"","rat":"","rev":"","porte":"mei","felino":"true","pot":"MÁXIMO","notas":"Round 3 — 🎯 CAT GROOMER ESPECIALISTA FELINOS+COELHOS! PERFECT FIT GATO³","lat":-23.673297,"lng":-46.546795},{"cnpj":"53.153.938/0016-85","nome":"Cobasi P. Barreto","seg":"pet_shop","sub":"megaloja","end":"","cid":"Santo André","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"https://www.cobasi.com.br/lojas/cobasi-santo-andre-pereira-barreto","maps":"","rat":"","rev":"","porte":"grande","felino":"false","pot":"muito_alto","notas":"Round 3 — Banho+tosa+clínica","lat":-23.669706,"lng":-46.540512},{"cnpj":"53.153.938/0016-86","nome":"Cobasi Av. Estados","seg":"pet_shop","sub":"megaloja","end":"Avenida dos Estados, 5745","cid":"Santo André","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"https://www.cobasi.com.br/lojas/cobasi-santo-andre-pq-jacatuba","maps":"","rat":"","rev":"","porte":"grande","felino":"false","pot":"muito_alto","notas":"Round 3 — Loja completa jardinagem+consultas vet+banho","lat":-23.669948,"lng":-46.539789},{"cnpj":"","nome":"Dr. Hato SA","seg":"clinica_vet","sub":"hospital_pet","end":"Vila Alto","cid":"Santo André","ring":"1_abc","tel":"","wpp":"","email":"","ig":"","web":"https://drhato.com.br/","maps":"","rat":"","rev":"","porte":"epp","felino":"false","pot":"muito_alto","notas":"Round 3 — Hospital+pet shop funcionando normalmente","lat":-23.67091,"lng":-46.54587},{"cnpj":"","nome":"Pedroso Avicultura","seg":"pet_shop","sub":"completo","end":"","cid":"Santo André","ring":"1_abc","tel":"","wpp":"","email":"","ig":"@PetShopAvilculturaPedroso","web":"https://www.facebook.com/PetShopAvilculturaPedroso/","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"alto","notas":"Round 3 — Rotina completa: banho+ração+brinquedos","lat":-23.673815,"lng":-46.54549},{"cnpj":"","nome":"Mini Pet Store","seg":"pet_shop","sub":"local","end":"","cid":"Santo André","ring":"1_abc","tel":"","wpp":"","email":"","ig":"@minipetstore_santoandre","web":"","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"medio","notas":"Round 3 — Cidade Viva, catálogo WhatsApp","lat":-23.674492,"lng":-46.546731},{"cnpj":"","nome":"Mini Pet Store SG","seg":"pet_shop","sub":"shopping","end":"Square Garden","cid":"Santo André","ring":"1_abc","tel":"","wpp":"","email":"","ig":"@minipetstore_santoandre","web":"","maps":"","rat":"","rev":"","porte":"me","felino":"false","pot":"medio","notas":"Round 3 — Shopping Square Garden","lat":-23.674668,"lng":-46.539318}];
+
+
+// State
+let activeFilters = {pot:'all', seg:'all', city:'all', status:null};
+let outreachStatus = JSON.parse(localStorage.getItem('gato3_crm_status')||'{}');
+
+const SEG_LABELS = {
+    pet_shop:'Pet Shop', clinica_vet:'Clinica Vet', banho_tosa:'Banho & Tosa',
+    hotel_pet:'Hotel Pet', creche_pet:'Creche Pet', distribuidor:'Distribuidor', ong:'ONG'
+};
+const POT_LABELS = {'MAXIMO':'S+', muito_alto:'S', alto:'Tier 1', medio:'Tier 2', baixo:'Tier 3'};
+const POT_ORDER = ['MAXIMO','muito_alto','alto','medio','baixo'];
+const POT_BADGE = {'MAXIMO':'b-red', muito_alto:'b-purple', alto:'b-green', medio:'b-blue', baixo:'b-gray'};
+const STATUS_OPTIONS = ['Novo','Contatar','Contatado','Negociando','Fechado','Descartado'];
+
+function init() {
+    renderKPIs();
+    renderSidebarStats();
+    renderSidebarFilters();
+    renderPipeline();
+    renderTable();
+}
+
+function renderKPIs() {
+    const total = CRM_DATA.length;
+    const felino = CRM_DATA.filter(d => d.felino==='true'||d.felino===true).length;
+    const wpp = CRM_DATA.filter(d => d.wpp).length;
+    const ig = CRM_DATA.filter(d => d.ig).length;
+    const alto = CRM_DATA.filter(d => ['alto','muito_alto','MAXIMO'].includes(d.pot)).length;
+    const cities = new Set(CRM_DATA.map(d => d.cid)).size;
+    document.getElementById('kpis').innerHTML =
+        '<div class="kpi"><div class="label">Total Negocios</div><div class="val">'+total+'</div><div class="sub">ABC Paulista + Grande SP</div></div>'+
+        '<div class="kpi"><div class="label">Alta Prioridade</div><div class="val" style="color:var(--green)">'+alto+'</div><div class="sub">Tier 1 + S + S+</div></div>'+
+        '<div class="kpi"><div class="label">Foco Felino</div><div class="val" style="color:var(--purple)">'+felino+'</div><div class="sub">'+(felino/total*100).toFixed(1)+'% do mercado</div></div>'+
+        '<div class="kpi"><div class="label">Com WhatsApp</div><div class="val">'+wpp+'</div><div class="sub">Canal direto</div></div>'+
+        '<div class="kpi"><div class="label">Com Instagram</div><div class="val">'+ig+'</div><div class="sub">Presenca digital</div></div>'+
+        '<div class="kpi"><div class="label">Cidades</div><div class="val">'+cities+'</div><div class="sub">Ring 1 + Ring 2</div></div>';
+}
+
+function renderSidebarStats() {
+    var contacted = 0, closed = 0;
+    for (var k in outreachStatus) {
+        if (outreachStatus[k] !== 'Novo') contacted++;
+        if (outreachStatus[k] === 'Fechado') closed++;
+    }
+    document.getElementById('sb-stats').innerHTML =
+        '<div class="sb-stat"><span class="l">Total leads</span><span class="v">'+CRM_DATA.length+'</span></div>'+
+        '<div class="sb-stat"><span class="l">Contatados</span><span class="v">'+contacted+'</span></div>'+
+        '<div class="sb-stat"><span class="l">Fechados</span><span class="v">'+closed+'</span></div>'+
+        '<div class="sb-stat"><span class="l">Conversao</span><span class="v">'+(contacted ? ((closed/contacted*100).toFixed(1)+'%') : '—')+'</span></div>';
+}
+
+function renderSidebarFilters() {
+    var pots = {}, segs = {}, cities = {};
+    CRM_DATA.forEach(function(d) {
+        pots[d.pot] = (pots[d.pot]||0) + 1;
+        segs[d.seg] = (segs[d.seg]||0) + 1;
+        if (d.cid) cities[d.cid] = (cities[d.cid]||0) + 1;
+    });
+
+    var html = '<button class="filter-btn active" onclick="setFilter(\'pot\',\'all\',this)">Todos<span class="count">'+CRM_DATA.length+'</span></button>';
+    POT_ORDER.forEach(function(p) {
+        if (pots[p]) html += '<button class="filter-btn" onclick="setFilter(\'pot\',\''+p+'\',this)">'+(POT_LABELS[p]||p)+'<span class="count">'+pots[p]+'</span></button>';
+    });
+    document.getElementById('filter-pot').innerHTML = html;
+
+    html = '<button class="filter-btn active" onclick="setFilter(\'seg\',\'all\',this)">Todos<span class="count">'+CRM_DATA.length+'</span></button>';
+    Object.keys(segs).sort(function(a,b){return segs[b]-segs[a]}).forEach(function(s) {
+        html += '<button class="filter-btn" onclick="setFilter(\'seg\',\''+s+'\',this)">'+(SEG_LABELS[s]||s)+'<span class="count">'+segs[s]+'</span></button>';
+    });
+    document.getElementById('filter-seg').innerHTML = html;
+
+    html = '<button class="filter-btn active" onclick="setFilter(\'city\',\'all\',this)">Todas<span class="count">'+CRM_DATA.length+'</span></button>';
+    Object.keys(cities).sort(function(a,b){return cities[b]-cities[a]}).forEach(function(c) {
+        html += '<button class="filter-btn" onclick="setFilter(\'city\',\''+c+'\',this)">'+c+'<span class="count">'+cities[c]+'</span></button>';
+    });
+    document.getElementById('filter-city').innerHTML = html;
+}
+
+function renderPipeline() {
+    var pipe = {};
+    STATUS_OPTIONS.forEach(function(s){pipe[s]=0});
+    CRM_DATA.forEach(function(d) {
+        var s = outreachStatus[d.nome] || 'Novo';
+        pipe[s] = (pipe[s]||0) + 1;
+    });
+    var html = '';
+    STATUS_OPTIONS.forEach(function(s) {
+        html += '<div class="pipe-seg'+(activeFilters.status===s?' active':'')+'" onclick="togglePipeFilter(\''+s+'\')"><span class="n">'+(pipe[s]||0)+'</span>'+s+'</div>';
+    });
+    document.getElementById('pipeline').innerHTML = html;
+}
+
+function setFilter(type, val, btn) {
+    activeFilters[type] = val;
+    var parent = btn.parentElement;
+    var btns = parent.querySelectorAll('.filter-btn');
+    for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+    btn.classList.add('active');
+    applyFilters();
+}
+
+function togglePipeFilter(status) {
+    activeFilters.status = activeFilters.status === status ? null : status;
+    renderPipeline();
+    applyFilters();
+}
+
+function getFiltered() {
+    var q = (document.getElementById('search').value || '').toLowerCase();
+    return CRM_DATA.filter(function(d) {
+        if (activeFilters.pot !== 'all' && d.pot !== activeFilters.pot) return false;
+        if (activeFilters.seg !== 'all' && d.seg !== activeFilters.seg) return false;
+        if (activeFilters.city !== 'all' && d.cid !== activeFilters.city) return false;
+        if (activeFilters.status) {
+            var s = outreachStatus[d.nome] || 'Novo';
+            if (s !== activeFilters.status) return false;
+        }
+        if (q) {
+            var hay = (d.nome+' '+d.cnpj+' '+d.cid+' '+d.seg+' '+d.notas+' '+d.ig).toLowerCase();
+            if (hay.indexOf(q) === -1) return false;
+        }
+        return true;
+    });
+}
+
+function applyFilters() {
+    renderTable();
+    renderPipeline();
+}
+
+function renderTable() {
+    var filtered = getFiltered();
+    filtered.sort(function(a,b) {
+        var ia = POT_ORDER.indexOf(a.pot), ib = POT_ORDER.indexOf(b.pot);
+        return (ia===-1?99:ia) - (ib===-1?99:ib);
+    });
+    document.getElementById('count-label').textContent = filtered.length + ' de ' + CRM_DATA.length + ' negocios';
+    var tbody = document.getElementById('tbody');
+    var rows = [];
+    for (var i = 0; i < filtered.length; i++) {
+        var d = filtered[i];
+        var potLabel = POT_LABELS[d.pot] || d.pot;
+        var potBadge = POT_BADGE[d.pot] || 'b-gray';
+        var segLabel = SEG_LABELS[d.seg] || d.seg;
+        var isFelino = d.felino === 'true' || d.felino === true;
+        var status = outreachStatus[d.nome] || 'Novo';
+        var contacts = '';
+        if (d.wpp) contacts += '<a class="c-icon c-wpp" href="https://wa.me/55'+d.wpp.replace(/\D/g,'')+'" target="_blank" title="WhatsApp" onclick="event.stopPropagation()">W</a>';
+        if (d.tel) contacts += '<a class="c-icon c-tel" href="tel:'+d.tel+'" title="Telefone" onclick="event.stopPropagation()">T</a>';
+        if (d.ig) contacts += '<a class="c-icon c-ig" href="https://instagram.com/'+d.ig.replace('@','')+'" target="_blank" title="Instagram" onclick="event.stopPropagation()">I</a>';
+        if (d.web) contacts += '<a class="c-icon c-web" href="'+d.web+'" target="_blank" title="Site" onclick="event.stopPropagation()">S</a>';
+        if (d.maps) contacts += '<a class="c-icon c-map" href="'+d.maps+'" target="_blank" title="Maps" onclick="event.stopPropagation()">M</a>';
+        if (d.email) contacts += '<a class="c-icon c-email" href="mailto:'+d.email+'" title="Email" onclick="event.stopPropagation()">@</a>';
+        var rating = d.rat ? d.rat + (d.rev ? ' ('+d.rev+')' : '') : '—';
+        var opts = '';
+        for (var j = 0; j < STATUS_OPTIONS.length; j++) {
+            opts += '<option'+(STATUS_OPTIONS[j]===status?' selected':'')+'>'+STATUS_OPTIONS[j]+'</option>';
+        }
+        rows.push('<tr onclick="openDetail('+i+')">'+
+            '<td><div class="biz-name">'+esc(d.nome)+(isFelino?'<span class="felino-star" title="Foco Felino">&#9733;</span>':'')+'</div><div class="biz-sub">'+esc(d.sub||'')+'</div></td>'+
+            '<td>'+esc(d.cid)+'</td>'+
+            '<td><span class="badge '+potBadge+'">'+potLabel+'</span></td>'+
+            '<td>'+segLabel+'</td>'+
+            '<td>'+(d.porte||'—')+'</td>'+
+            '<td>'+rating+'</td>'+
+            '<td><div class="contacts">'+(contacts||'—')+'</div></td>'+
+            '<td><select class="status-sel" onclick="event.stopPropagation()" onchange="setStatus(\''+esc(d.nome).replace(/'/g,"\\'")+'\',this.value)">'+opts+'</select></td>'+
+            '</tr>');
+    }
+    tbody.innerHTML = rows.join('');
+    // Store filtered for detail panel
+    window._filtered = filtered;
+}
+
+function esc(s) { return s ? s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;') : ''; }
+
+function setStatus(name, status) {
+    outreachStatus[name] = status;
+    localStorage.setItem('gato3_crm_status', JSON.stringify(outreachStatus));
+    renderSidebarStats();
+    renderPipeline();
+}
+
+function openDetail(idx) {
+    var d = window._filtered[idx];
+    if (!d) return;
+    document.getElementById('dp-name').textContent = d.nome;
+    var isFelino = d.felino==='true' || d.felino===true;
+    var body = '';
+    if (d.cnpj) body += '<div class="dp-field"><div class="lbl">CNPJ</div><div class="val">'+d.cnpj+'</div></div>';
+    body += '<div class="dp-field"><div class="lbl">Segmento</div><div class="val">'+(SEG_LABELS[d.seg]||d.seg)+' — '+(d.sub||'—')+'</div></div>';
+    body += '<div class="dp-field"><div class="lbl">Potencial B2B</div><div class="val"><span class="badge '+(POT_BADGE[d.pot]||'b-gray')+'">'+(POT_LABELS[d.pot]||d.pot)+'</span>'+(isFelino?' <span class="badge b-purple">Foco Felino</span>':'')+'</div></div>';
+    if (d.end) body += '<div class="dp-field"><div class="lbl">Endereco</div><div class="val">'+d.end+', '+d.cid+'</div></div>';
+    else body += '<div class="dp-field"><div class="lbl">Cidade</div><div class="val">'+d.cid+'</div></div>';
+    body += '<div class="dp-field"><div class="lbl">Ring</div><div class="val">'+(d.ring==='1_abc'?'Ring 1 — ABC Paulista':'Ring 2 — Grande SP')+'</div></div>';
+    body += '<div class="dp-field"><div class="lbl">Porte</div><div class="val">'+(d.porte||'—')+'</div></div>';
+    if (d.rat) body += '<div class="dp-field"><div class="lbl">Google Rating</div><div class="val">'+d.rat+(d.rev?' ('+d.rev+' avaliacoes)':'')+'</div></div>';
+    if (d.notas) body += '<div class="dp-field"><div class="lbl">Notas</div><div class="val">'+d.notas+'</div></div>';
+    body += '<div class="dp-contacts">';
+    if (d.wpp) body += '<a class="dp-contact-btn" href="https://wa.me/55'+d.wpp.replace(/\D/g,'')+'" target="_blank">WhatsApp: '+d.wpp+'</a>';
+    if (d.tel) body += '<a class="dp-contact-btn" href="tel:'+d.tel+'">Tel: '+d.tel+'</a>';
+    if (d.ig) body += '<a class="dp-contact-btn" href="https://instagram.com/'+d.ig.replace('@','')+'" target="_blank">IG: '+d.ig+'</a>';
+    if (d.web) body += '<a class="dp-contact-btn" href="'+d.web+'" target="_blank">Site</a>';
+    if (d.email) body += '<a class="dp-contact-btn" href="mailto:'+d.email+'">Email: '+d.email+'</a>';
+    if (d.maps) body += '<a class="dp-contact-btn" href="'+d.maps+'" target="_blank">Ver no Maps</a>';
+    body += '</div>';
+    document.getElementById('dp-body').innerHTML = body;
+    document.getElementById('detail-panel').classList.add('open');
+    document.getElementById('detail-overlay').classList.add('open');
+}
+
+function closeDetail() {
+    document.getElementById('detail-panel').classList.remove('open');
+    document.getElementById('detail-overlay').classList.remove('open');
+}
+
+function toggleTheme() {
+    var h = document.documentElement;
+    h.setAttribute('data-theme', h.getAttribute('data-theme')==='dark'?'light':'dark');
+}
+
+function exportCSV() {
+    var filtered = getFiltered();
+    var csv = 'Nome,CNPJ,Segmento,Cidade,Potencial,Telefone,WhatsApp,Instagram,Website,Status\n';
+    filtered.forEach(function(d) {
+        var status = outreachStatus[d.nome] || 'Novo';
+        csv += [d.nome,d.cnpj,d.seg,d.cid,d.pot,d.tel,d.wpp,d.ig,d.web,status].map(function(v){return '"'+(v||'').replace(/"/g,'""')+'"'}).join(',') + '\n';
+    });
+    var blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'gato3_crm_export_'+new Date().toISOString().slice(0,10)+'.csv';
+    a.click();
+}
+
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeDetail();
+    if (e.key === '/' && !e.ctrlKey && document.activeElement.tagName !== 'INPUT') {
+        e.preventDefault();
+        document.getElementById('search').focus();
+    }
+});
+
+init();
+</script>
+</body>
+</html>

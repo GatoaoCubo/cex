@@ -9,7 +9,7 @@ target_format: markdown
 input_type: structured_data
 rule_count: 11
 domain: artifact_reporting
-quality: null
+quality: 8.6
 tags:
 - formatter
 - markdown

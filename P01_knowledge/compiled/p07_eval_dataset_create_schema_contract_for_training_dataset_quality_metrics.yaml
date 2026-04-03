@@ -27,7 +27,7 @@ schema_fields:
 - input
 - expected_output
 - metadata
-quality: null
+quality: 9.1
 tags:
 - eval_dataset
 - training-data-quality
