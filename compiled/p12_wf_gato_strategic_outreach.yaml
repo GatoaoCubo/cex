@@ -1,0 +1,71 @@
+id: p12_wf_gato_strategic_outreach
+kind: workflow
+pillar: P12
+version: 1.0.0
+mission_name: gato_strategic_outreach
+goal: Convert 471 ABC Paulista pet business prospects into GATO³ brand partners via multi-channel outreach
+execution_mode: mixed
+steps_count: 8
+timeout_ms: 7200000
+error_recovery: retry
+quality: null
+tags:
+- workflow
+- outreach
+- lead-nurturing
+- gato
+steps: ''
+wave_1_content_parallel: "Step 1: Copy Suite\n- Agent: n02_marketing\n- Action: Create segment-specific outreach templates\
+  \ (4 segments: vets, pet shops, groomers, 24h hospitals)\n- Input: handoff segments + GATO³ brand voice\n- Output: outreach_copy_gato.md\n\
+  - Signal: copy_complete\n- Depends_on: []\n- On_failure: retry\n\nStep 2: Social Strategy  \n- Agent: n02_marketing\n- Action:\
+  \ Develop relationship building tactics for Instagram/Facebook/LinkedIn\n- Input: segment profiles\n- Output: social_strategy_gato.md\n\
+  - Signal: social_complete\n- Depends_on: []\n- On_failure: retry\n\nStep 3: Conversion Assets\n- Agent: n02_marketing\n\
+  - Action: Build case studies, ROI calculator, partnership guide\n- Input: GATO³ business impact framework\n- Output: conversion_assets_gato.md\n\
+  - Signal: assets_complete\n- Depends_on: []\n- On_failure: retry"
+wave_2_automation: "Step 4: Nurturing Sequence\n- Agent: n02_marketing  \n- Action: Design 5-touch email automation with educational\
+  \ content\n- Input: copy suite + conversion assets\n- Output: nurturing_automation_gato.md\n- Signal: automation_complete\n\
+  - Depends_on: [copy_complete, assets_complete]\n- On_failure: retry"
+wave_3_execution_sequential_by_priority: "Step 5: Veterinary Outreach\n- Agent: n02_marketing\n- Action: Deploy professional\
+  \ partnership messaging to clinics (highest priority)\n- Input: copy suite + clinic prospect list\n- Output: vet_campaign_gato.md\n\
+  - Signal: vet_complete\n- Depends_on: [copy_complete, social_complete]\n- On_failure: retry\n\nStep 6: Pet Shops + Specialized\n\
+  - Agent: n02_marketing\n- Action: Deploy volume messaging to pet shops, groomers, hospitals\n- Input: copy suite + remaining\
+  \ prospect lists\n- Output: volume_campaign_gato.md  \n- Signal: volume_complete\n- Depends_on: [copy_complete]\n- On_failure:\
+  \ retry"
+wave_4_optimization: 'Step 7: Nurturing Activation
+
+  - Agent: n02_marketing
+
+  - Action: Activate automated sequences for engaged prospects
+
+  - Input: automation + engagement data
+
+  - Output: nurturing_activation_gato.md
+
+  - Signal: nurturing_active
+
+  - Depends_on: [automation_complete, vet_complete, volume_complete]
+
+  - On_failure: retry
+
+
+  Step 8: Conversion & Optimization
+
+  - Agent: n02_marketing
+
+  - Action: Deploy partnership proposals + A/B test optimization
+
+  - Input: conversion assets + qualified leads
+
+  - Output: conversion_campaign_gato.md
+
+  - Signal: campaign_complete
+
+  - Depends_on: [nurturing_active]
+
+  - On_failure: retry'
+waves:
+- 'Wave 1: [1,2,3] parallel content'
+- 'Wave 2: [4] automation'
+- 'Wave 3: [5,6] outreach'
+- 'Wave 4: [7,8] conversion'
+success_targets: 'Open: 35%+ | Response: 15%+ | Meetings: 8%+ | Partnerships: 25%+'
