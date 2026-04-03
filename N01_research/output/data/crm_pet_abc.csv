@@ -1,153 +1,153 @@
-﻿nome_fantasia,segmento,sub_segmento,endereco,cidade,ring,telefone,whatsapp,email,instagram,website,porte,foco_felino,potencial_b2b,notas,cnpj
-Pet Para Pets,pet_shop,megaloja,"Av. Goiás, 1400 - Santa Paula",São Caetano do Sul,1_abc,(11) 4227-6000,(11) 94529-7345,,@petparapetsoficial,https://www.petparapets.com.br/,medio,false,medio,"Grande rede, bom volume de clientes. Endereço pode variar.",19.055.885/0002-35
-AnimaPets,pet_shop,venda_filhotes,"Av. Goiás, 315 - Santo Antônio",São Caetano do Sul,1_abc,(11) 2376-8107,(11) 91090-5414,,,https://www.animapets.com.br/,epp,false,baixo,"Foco em venda de filhotes, menos em produtos/serviços recorrentes.",17.711.811/0002-84
-Pets House,clinica_vet,24h,"Av. Goiás, 269 - Santo Antônio",São Caetano do Sul,1_abc,(11) 4234-2384,(11) 97727-0001,,@_petshouse,,epp,true,alto,"Clínica 24h com bom foco em gatos, Dra. Larissa é especialista.",48.807.594/0001-73
-Cobasi,pet_shop,megaloja,"Alameda Caulim, 125",São Caetano do Sul,1_abc,(11) 4233-8202,,,,https://www.cobasi.com.br/,grande,false,alto,"Rede nacional, alto volume",53.153.938/0016-94
-Planet Dog,pet_shop,boutique,"Alameda Terracota, 545 - ParkShopping",São Caetano do Sul,1_abc,,,,,,me,false,medio,Pet shop boutique premium,
-Dog's Day,pet_shop,local,"R. Visc. de Inhaúma, 65 - Oswaldo Cruz",São Caetano do Sul,1_abc,,,,,,me,false,medio,"Seg-Sex 8h30-20h, Sáb 8h30-19h",
-Climeve,clinica_vet,hospital_24h,"Av. Brasília, 265 - Vila Bela Vista",Santo André,1_abc,,,,,,epp,false,alto,Hospital 24h completo,
-PETPOP SBC,clinica_vet,popular,"R. Helena Jacquey, 294 - Rudge Ramos",São Bernardo do Campo,1_abc,(11) 2578-4219,,falecom@petpopsbc.com.br,,https://www.petpopsbc.com.br/,me,false,medio,Preços populares,
-CV Santo André,clinica_vet,24h,"R. das Esmeraldas, 378 - Jardim",Santo André,1_abc,,,,,,epp,false,alto,"Fundada 2005, emergências",
-Cão Bernardo,clinica_vet,hospital_24h,,São Bernardo do Campo,1_abc,(11) 4930-4551,(11) 94006-5777,,,https://caobernardo.com.br/,epp,false,alto,Hospital 24h especializado,
-Pet Store Drogaria,pet_shop,drogaria_vet,,Diadema,1_abc,,,,,,epp,false,medio,Drogaria + clínica,34.397.523/0001-35
-Mercadão Pet Eldorado,pet_shop,mercadao,"Av. N. Sra. dos Navegantes, 92 - Eldorado",Diadema,1_abc,,,,,,epp,false,alto,Grande volume,53.652.422/0001-08
-Pet Shop São Vicente,pet_shop,local,"R. Presidente Carlos Luz, 41 - Parque São Vicente",Mauá,1_abc,,,,,,me,false,medio,Regional,52.307.407/0001-60
-CV Pet Shop Ribeirão,clinica_vet,clinica_pet,"Av. Kaethe Richers, 35 - Pastoril",Ribeirão Pires,1_abc,,,,,,me,false,medio,Clínica + pet shop,18.703.259/0001-64
-UPA ABC,ong,protecao,,ABC Paulista,1_abc,,,,@protecaoanimalabc,,ong,true,baixo,"10 anos, união protetores",
-Canto da Terra,ong,resgate,,ABC Paulista,1_abc,,(11) 97055-3947,,,https://ongcantodaterra.org/,ong,false,baixo,Resgate e tratamento,24.807.320/0001-16
-Instituto Caramelo,ong,resgate,,ABC Paulista,1_abc,,,,,https://institutocaramelo.org,ong,false,baixo,Cães e gatos,
-APAA,ong,protecao,,ABC Paulista,1_abc,,,,,,ong,false,baixo,Proteção animal SP,
-Dr. Andressa Vet,clinica_vet,domiciliar,Atendimento domiciliar ABC,ABC Paulista,1_abc,,(11) 95882-8004,,,https://andressa.vet/,mei,true,medio,Silvestres e exóticos,
-Garbin Pet Shop,pet_shop,clinica_pet,,Guarulhos,2_grande_sp,,,,,https://www.clinicaveterinariasp.com.br/,epp,false,medio,Clínica + pet shop,
-Animal Center,clinica_vet,centro_completo,,Osasco,2_grande_sp,,,,,https://www.animalcenter.vet.br/,epp,false,alto,Centro completo,
-Dog Up,clinica_vet,24h,,Osasco,2_grande_sp,,,,,,epp,false,alto,Clínica 24h renomada,
-Vidanimal,pet_shop,clinica_pet,"Av. Municipal, 381 - Jardim Silveira",Barueri,2_grande_sp,(11) 4201-5691,,,,https://www.vidanimalbarueri.com.br/,epp,false,alto,Fundada 2006,
-CV Prime,clinica_vet,hospital,,Guarulhos,2_grande_sp,,,,,https://centroveterinarioprime.com.br/,epp,false,alto,Nível hospitalar,
-Banho e Tosa Bella,banho_tosa,local,,São Bernardo do Campo,1_abc,,,,,,mei,false,medio,Round 2 — PME local,18.135.968/0001-90
-Banho e Tosa Cao Carinho,banho_tosa,local,Rua Japao 18 - Taboao,São Bernardo do Campo,1_abc,,,,,,me,false,medio,"Round 2 — Fundada 2016, dados validados",24.429.498/0001-70
-Santa Cachorrada,banho_tosa,local,,São Bernardo do Campo,1_abc,,,,,,me,false,medio,Round 2 — PME estabelecida,12.946.452/0001-40
-Priscila Banho e Tosa,banho_tosa,local,,São Bernardo do Campo,1_abc,,,,,,mei,false,medio,Round 2 — Empreendedora individual,17.698.845/0001-03
-Sofystpet,banho_tosa,local,"Rua M M D C, 363 - Paulicéia",São Bernardo do Campo,1_abc,,,,,,me,false,medio,Round 2 — 6+ anos ativa,
-Pet Shop Sk,banho_tosa,pet_shop,"Av. Jurubatuba 646, Loja 2",São Bernardo do Campo,1_abc,,,,,,me,false,alto,Round 2 — Híbrido banho+produtos,
-Show de Banho Pet Truck,banho_tosa,mobile,,São Bernardo do Campo,1_abc,,,,,,me,false,alto,"Round 2 — Pet truck móvel, inovador",30.100.835/0001-84
-Meu Bicho,banho_tosa,pet_shop,Rua Sergio Milliet 581 - Jordanópolis,São Bernardo do Campo,1_abc,,,,,,me,false,alto,Round 2 — Híbrido banho+loja,08.159.407/0001-78
-Banho e Tosa Abc,banho_tosa,local,,Santo André,1_abc,,,,,,me,false,medio,Round 2 — Nome regional ABC,52.425.223/0001-02
-Banho e Tosa Arco Iris,banho_tosa,local,,Santo André,1_abc,,,,,,me,false,medio,Round 2 — Marca colorida,56.210.739/0001-82
-Kimcao,banho_tosa,pet_shop,,Santo André,1_abc,,,,,,epp,false,alto,"Round 2 — EPP, híbrido banho+loja",56.927.149/0001-75
-Pv Banho e Tosa,banho_tosa,local,,Santo André,1_abc,,,,,,me,false,medio,"Round 2 — Fundada set/2024, nova",57.410.727/0001-64
-Banho e Tosa Scooby,banho_tosa,local,,Santo André,1_abc,,,,,,me,false,medio,Round 2 — Empreendedora jovem,49.251.337/0001-60
-Pet Shop São Paulo,banho_tosa,pet_shop,,Santo André,1_abc,,,,,,me,false,alto,"Round 2 — 9+ anos, híbrido",25.113.175/0001-36
-Roptcare,banho_tosa,local,,Santo André,1_abc,(11) 4991-1983,,,,,me,false,medio,Round 2 — Telefone validado,46.465.165/0001-30
-Pet Speciale,pet_shop,local,,São Caetano do Sul,1_abc,,,,@petspeciale,,me,true,alto,"Round 2 — Banho+alimentação, foco felino",
-For Pet,pet_shop,local,"Alameda São Caetano, 2423",São Caetano do Sul,1_abc,(11) 99419-9000,(11) 2786-5759,,@forpetsaocaetano,forpetsaocaetano.com.br,me,false,medio,Round 2 — Local estabelecido,
-Pet Sauro,pet_shop,local,,São Caetano do Sul,1_abc,(11) 99419-9000,(11) 99419-9000,,@petsauro,,me,false,medio,Round 2 — WhatsApp ativo,
-Galerinha Animal,pet_shop,local,,?,1_abc,,,,@petstoregalerinhaanimal,,me,false,medio,Round 2 — Nome família-friendly,
-Pet Shop Pedroso,pet_shop,local,"Estrada do Pedroso, 943",Santo André,1_abc,(11) 94702-4713,(11) 94702-4713,,@espacopet.sa,https://www.petshoppedroso.com.br/,me,false,alto,"Round 2 — Site próprio, estabelecido",
-Local Pet,pet_shop,local,,São Bernardo do Campo,1_abc,,,,@localpet_,,me,false,medio,Round 2 — Ofertas ativas no Instagram,
-Mundo Animal,distribuidor,atacado,"Rua Matilde, 238",Santo André,1_abc,(11) 4461-4189,(11) 96316-8005,contato@distribuidoramundoanimal.com.br,@mundoanimaldistribuidora,https://www.distribuidoramundoanimal.com.br/,epp,false,muito_alto,"Round 2 — Fundada 1993, distribuidor estabelecido",
-Pet Para Pets SBC,pet_shop,megaloja,"Av. Brigadeiro Faria Lima, 1760",São Bernardo do Campo,1_abc,,,,,https://www.cobasi.com.br/,grande,false,alto,"Round 3 — Megaloja SBC, volume alto",19.055.885/0002-35
-PET LOVERS Pet Shop,pet_shop,local,,São Bernardo do Campo,1_abc,,,,@petloverspetshop,https://www.facebook.com/petloverspetshop/,me,true,alto,"Round 3 — 2k+ likes, foco amor pets",
-Pet Shop Bom Cão,pet_shop,local,"R. Maria Nicolina Bellucce Piatto, 336",São Bernardo do Campo,1_abc,,,,,,me,false,medio,Round 3 — Endereço confirmado,
-BEST PET SHOP,pet_shop,completo,"Rua Marabá, 107 - Rudge Ramos",São Bernardo do Campo,1_abc,,,,@bestpet.sbc,,epp,false,muito_alto,Round 3 — Completo: hotel+vet+creche+banho,
-Dogfish PETSHOP,pet_shop,estetica,,São Bernardo do Campo,1_abc,,,,@novadogfishpetshop,,me,false,medio,Round 3 — Estética animal especializada,
-4 Patas e Cia,pet_shop,completo,"MMDC, 270 – Loja 1 e 2 - Paulicéia",São Bernardo do Campo,1_abc,,,,,https://institucional.4patasecia.com.br/,epp,false,alto,"Round 3 — Desde 1998, completo",
-Pet Shop Dom Pet,pet_shop,local,,São Bernardo do Campo,1_abc,,,,@DomPetBarbosa,https://www.facebook.com/DomPetBarbosa/,me,false,alto,"Round 3 — 1750 likes, ""tudo que o pet precisa""",
-Pet Shop Rudge,pet_shop,local,Rudge Ramos,São Bernardo do Campo,1_abc,(11) 2381-5689,(11) 2381-5689,,@petshop_rudge,,me,false,alto,"Round 3 — Tel validado, Rudge Ramos",
-Pet Mais Rudge Ramos,pet_shop,completo,"Rua Alfeu Tavares, 254 - Rudge Ramos",São Bernardo do Campo,1_abc,,,,@petmais.rudge,https://www.facebook.com/petmais.rudge/,me,false,alto,"Round 3 — Endereço validado, variedade",
-Pet Shop São José,pet_shop,local,,São Bernardo do Campo,1_abc,,,,,,me,false,medio,Round 3 — Rudge Ramos Raiz,
-Stillo Animal,banho_tosa,estetica,,São Bernardo do Campo,1_abc,,,,@stilloanimaloficiall,https://www.facebook.com/stilloanimaloficiall/,me,false,medio,"Round 3 — 521 likes, estética animal",
-Convivência Animal,pet_shop,local,"Av. Luiz Pequini, 902",São Bernardo do Campo,1_abc,(11) 4345-2028,,,,,me,false,alto,"Round 3 — Tel validado, endereço confirmado",
-Internacional Pets,pet_shop,shopping,São Bernardo Plaza Shopping,São Bernardo do Campo,1_abc,,,,@internacionalpetssbc,,me,false,alto,"Round 3 — Shopping, variedade produtos",
-Petz São Bernardo,pet_shop,megaloja,"Av. Rotary, 825 - Centro",São Bernardo do Campo,1_abc,(11) 2181-7420,,,,https://www.petz.com.br/loja/petz-sao-bernardo,grande,false,muito_alto,"Round 3 — Rede nacional, Center Castilho",53.153.938/0016-94
-Dogs & Cats,pet_shop,local,"Av. Armando Italo Setti, 626 - Baeta Neves",São Bernardo do Campo,1_abc,(11) 95852-7218,(11) 95852-7218,nivealeandro@hotmail.com,@PetshopDogsCats,https://www.facebook.com/PetshopDogsCats/,me,false,alto,Round 3 — Contatos completos validados,
-A Casa dos Pet,pet_shop,local,"Av. Winston Churchill, 713",São Bernardo do Campo,1_abc,,,,@acasadospet,,me,false,medio,Round 3 — Inauguração recente,
-Vip Care,clinica_vet,clinica_pet,,São Bernardo do Campo,1_abc,,,,,https://www.petshopvipcare.com.br/,epp,false,alto,"Round 3 — 15 anos, clínica+pet shop",
-100% Pet,pet_shop,local,"Av. Kennedy, 990 - Jardim do Mar",São Bernardo do Campo,1_abc,(11) 4317-5300,,,@CemPorCentoPetSBC,cemporcentopet.com.br,epp,false,alto,"Round 3 — Tel validado, website",
-LM Bichinho,clinica_vet,clinica_pet,"Rua Aura, 54 - Rudge Ramos",São Bernardo do Campo,1_abc,,,,,https://lmbichinho.com.br/,epp,false,alto,"Round 3 — Clínica+Pet shop, 2 endereços",
-Amity Pet,banho_tosa,clinica_pet,,São Bernardo do Campo,1_abc,,,,,https://amitypet.com.br/,epp,false,alto,"Round 3 — Segurança, conforto, bem-estar",
-Pet Flor de Maio,banho_tosa,local,"Rua Flor de maio, 63",São Bernardo do Campo,1_abc,,,,@Petflordemaio,https://www.facebook.com/Petflordemaio/,me,false,medio,Round 3 — Endereço validado,
-Banho e Tosa SBC,banho_tosa,clinica_pet,"Alameda Princesa Isabel, 329",São Bernardo do Campo,1_abc,(11) 2374-6905,,,@guardiaoclinicaveterinaria,,me,false,alto,Round 3 — Tel+endereço validados,
-Atmos,clinica_vet,centro_completo,,São Bernardo do Campo,1_abc,,,,,https://atmosveterinario.com/,epp,false,muito_alto,Round 3 — Centro integral saúde animal,
-EcoPet,clinica_vet,24h,,São Bernardo do Campo,1_abc,,,,@ecopetcentrovet,https://ecopetonline.com.br/,epp,true,muito_alto,"Round 3 — 24h, silvestres, especialista felinos",
-Animale Hospital,clinica_vet,hospital_24h,,São Bernardo do Campo,1_abc,,,,,https://www.veterinariapets.com.br/,epp,false,muito_alto,Round 3 — Hospital 24h emergenciais,
-Vet Live,clinica_vet,24h,,São Bernardo do Campo,1_abc,,,,,https://www.vetlivecv.com.br/,epp,false,muito_alto,Round 3 — Centro Veterinário 24h,
-Vetplace SBC,clinica_vet,especializada,,São Bernardo do Campo,1_abc,,,,,https://vetplacesbc.com.br/,epp,false,alto,Round 3 — Especialidades veterinárias,
-Árbol Hospital,clinica_vet,hospital,,São Bernardo do Campo,1_abc,,,,@arbolvet,https://www.facebook.com/arbolvet/,epp,false,alto,Round 3 — Hospital completo,
-Canarinho Pet Shop,pet_shop,local,,São Bernardo do Campo,1_abc,,,,,https://canarinhopetshop.negocio.site/,me,false,medio,Round 3 — Pet shop independente,
-Bicho do Mato,pet_shop,local,,São Bernardo do Campo,1_abc,,,,,https://domato.vitrinevirtual.net/,me,false,medio,Round 3 — Pet shop independente,
-E.B. Clínica Veterinária,clinica_vet,clinica_pet,,São Bernardo do Campo,1_abc,,,,,https://ebclinicaveterinaria.com.br/,epp,false,alto,"Round 3 — Desde 2003, veterinários+banho+tosa",
-CEC PET,distribuidor,atacado,,São Bernardo do Campo,1_abc,,,,,https://www.cecpet.com.br/,epp,false,muito_alto,Round 3 — Distribuidor produtos pet SP,
-Focinhos Club,distribuidor,comercio_distribuicao,,São Bernardo do Campo,1_abc,,,,,,me,false,alto,Round 3 — CNPJ 64.526.701/0001-41,
-Skub Pet Shop,pet_shop,completo,,Santo André,1_abc,,,,,https://www.skubpetshop.com.br/,epp,false,muito_alto,Round 3 — Banho+tosa+clínica+ração premium,
-Golden Premier,banho_tosa,premium,,Santo André,1_abc,,,,,https://goldenpremiervet.com/petshop,epp,false,muito_alto,"Round 3 — Pet shop luxo, spa pets",
-Laras Avicultura,pet_shop,avicultura,,Santo André,1_abc,,,,@petshopeaviculturalaras,https://www.facebook.com/petshopeaviculturalaras/,me,false,medio,"Round 3 — Banho+tosa+alimentos, 480 likes",
-Pet Amazônia,pet_shop,local,,Santo André,1_abc,,,,@pet_amazonia,,me,false,medio,"Round 3 — Saudações 2026, ativo",
-Pet Center Dom Pedro,pet_shop,centro_completo,,Santo André,1_abc,,,,,https://www.linkbr.in/petcenterdompedro,epp,false,muito_alto,Round 3 — Centro completo veterinário+banho+tosa,
-Pet Shop Vila Pires,pet_shop,local,"Av. Dom Pedro I, 834 - Vila Pires",Santo André,1_abc,,,,@petshopVilaPires,https://petshopvilapires.com.br,me,false,alto,"Round 3 — 12+ anos, Vila Pires, 1654 likes",18.432.894/0001-54
-CãoArt,pet_shop,completo,,Santo André,1_abc,,,,,http://caoartpetshop.com.br/,epp,false,muito_alto,Round 3 — Banho+tosa+vet+hotel+taxi dog,
-Animal House,clinica_vet,completa,,Santo André,1_abc,,,,,https://www.animalhouse.com.br/,epp,false,muito_alto,Round 3 — Clínica completa+banho+day care,
-House Pet,banho_tosa,premium,,Santo André,1_abc,,,,,https://www.figueirahousepet.com.br/,epp,false,alto,"Round 3 — Banho ozônio, espaço amplo",
-EurekaPet,clinica_vet,local,,Santo André,1_abc,(11) 94713-3883,(11) 94713-3883,,@eurekapetsp,,me,false,alto,"Round 3 — 8 anos, WhatsApp validado",
-Nos Amis,clinica_vet,centro_completo,,Santo André,1_abc,,,,,https://nosamis.com.br/,epp,false,muito_alto,Round 3 — Clínica+cirurgias+internação+lab,
-VitalVet ABC,clinica_vet,centro_medico,,Santo André,1_abc,(11) 4438-4655,,,,https://www.vitalvetabc.com.br/,epp,false,muito_alto,Round 3 — Centro médico veterinário ABC,
-Vet Selvagem,clinica_vet,especializada,,Santo André,1_abc,,,,,,epp,true,muito_alto,"Round 3 — Nova, foco silvestres+felinos",
-Buticão,clinica_vet,completo,Bairro Campestre,Santo André,1_abc,(11) 4991-3324,,,@clinicabuticao,https://www.facebook.com/petshopboticao/,epp,false,muito_alto,"Round 3 — Desde 1981, completo+hospedagem",
-Boutique Pet,banho_tosa,boutique,,Santo André,1_abc,,,,@boutiquepetespa,https://boutiqupetspa.com.br/,epp,true,muito_alto,"Round 3 — Especialista Spitz, sem gaiola, 1788 followers",
-SofistCão,banho_tosa,especializada,,Santo André,1_abc,,,,@sofist_cao,,epp,true,muito_alto,"Round 3 — 2370 followers, especialista tosa bebê+Spitz",
-The Pet Club,banho_tosa,local,Vila Assunção,Santo André,1_abc,,,,,https://www.linkbr.in/thepetclub,me,false,alto,Round 3 — Parceiro confiável Vila Assunção,
-Cão Carinho,banho_tosa,pet_shop,"R. Balaclava, 553",Santo André,1_abc,(11) 4975-4130,,,,,me,false,alto,"Round 3 — Tel validado, endereço confirmado",
-Nações Veterinária,clinica_vet,banho_tosa,,Santo André,1_abc,,,,@banhoetosanacoes,https://petshopnacoes.com.br/,epp,false,alto,Round 3 — Clínica+banho+tosa+vacinas,
-Michele Cats,banho_tosa,cat_groomer,São Paulo/ABC,Santo André,1_abc,,,,,https://www.michelecats.com.br/,mei,true,MÁXIMO,Round 3 — 🎯 CAT GROOMER ESPECIALISTA FELINOS+COELHOS! PERFECT FIT GATO³,
-Cobasi P. Barreto,pet_shop,megaloja,,Santo André,1_abc,,,,,https://www.cobasi.com.br/lojas/cobasi-santo-andre-pereira-barreto,grande,false,muito_alto,Round 3 — Banho+tosa+clínica,53.153.938/0016-85
-Cobasi Av. Estados,pet_shop,megaloja,"Avenida dos Estados, 5745",Santo André,1_abc,(11) 5039-9549,,,,https://www.cobasi.com.br/lojas/cobasi-santo-andre-pq-jacatuba,grande,false,muito_alto,Round 3 — Loja completa jardinagem+consultas vet+banho,53.153.938/0016-86
-Dr. Hato SA,clinica_vet,hospital_pet,Vila Alto,Santo André,1_abc,,,,,https://drhato.com.br/,epp,false,muito_alto,Round 3 — Hospital+pet shop funcionando normalmente,
-Pedroso Avicultura,pet_shop,completo,,Santo André,1_abc,,,,@PetShopAvilculturaPedroso,https://www.facebook.com/PetShopAvilculturaPedroso/,me,false,alto,Round 3 — Rotina completa: banho+ração+brinquedos,
-Mini Pet Store,pet_shop,local,,Santo André,1_abc,,,,@minipetstore_santoandre,,me,false,medio,"Round 3 — Cidade Viva, catálogo WhatsApp",
-Mini Pet Store SG,pet_shop,shopping,Square Garden,Santo André,1_abc,,,,@minipetstore_santoandre,,me,false,medio,Round 3 — Shopping Square Garden,
-Petlife Sao Caetano,clinica_vet,24h,"R. Amazonas, 1159 - Oswaldo Cruz",São Caetano do Sul,1_abc,(11) 4225-1899,(11) 95028-9537,petlifesaocaetano@gmail.com,@petlife.saocaetano,https://petlifesaocaetano.com.br/,epp,false,alto,"Vet 24h. Consultas, emergencias, cirurgias, oncologia, internacao.",
-Ethicus Hospital Veterinario,clinica_vet,hospital_24h,"Estrada das Lagrimas, 1843 - Bairro Maua",São Caetano do Sul,1_abc,(11) 4238-8505,(11) 97445-5545,ethicus@ethicus.com.br,@ethicushospital24h,https://ethicus.com.br/,medio,true,alto,"Hospital 24h. Medicina Felina, Neurologia, Oncologia, Ortopedia. Referencia ABC.",
-Oriente Clinica Veterinaria,clinica_vet,especialidades,"R. Oriente, 941 - Barcelona",São Caetano do Sul,1_abc,(11) 4221-6880,(11) 97277-2255,,@oriente.vet,https://orientevet.com/,epp,true,alto,"ESPECIALISTA EM FELINOS. Seg-Sex 9h-19h, Sab 9h-16h. Cardiologia, Oncologia, Nefrologia. MATCH GATO3.",
-Hypolittus Vet,clinica_vet,especialidades,"Av. Vital Brasil Filho, 623 - Osvaldo Cruz",São Caetano do Sul,1_abc,,(11) 97090-2518,contato@hypolittusvet.com.br,@hypolittus.vet,https://hypolittusvet.com.br/,epp,false,alto,"Ortopedia, Fisioterapia, Oncologia, Acupuntura. Seg-Sex 9h-18h, Sab 9h-14h.",
-Clinical Pets,clinica_vet,clinica_pet,"R. Herculano de Freitas, 417 - Fundacao",São Caetano do Sul,1_abc,(11) 4225-1378,(11) 99661-7999,,,https://www.clinicalpets.com/,epp,true,alto,Clinica + Farmacia + Banho e Tosa + Ozonioterapia.,
-Clinica Veterinaria Sao Caetano,clinica_vet,clinica,Sao Caetano do Sul,São Caetano do Sul,1_abc,,(11) 93354-5454,,@clinvetsaocaetano,https://clinvetsaocaetano.com.br/,me,false,medio,"Somente agendamento via WhatsApp. Exames, Vacinas, Banho e Tosa.",
-WeVets Sao Caetano,clinica_vet,hospital,Sao Caetano do Sul,São Caetano do Sul,1_abc,,,,,https://wevets.com.br/unidade-sao-caetano/,medio,false,alto,Rede de clinicas veterinarias. Unidade ABC.,
-Pet e Co.,pet_shop,banho_tosa,"R. Oswaldo Cruz, 1580 - Santa Paula",São Caetano do Sul,1_abc,,(11) 97630-4312,,@petco.sp,,me,false,medio,Pet shop + banho e tosa.,
-Sao Caetano Pet Shop,pet_shop,local,"R. Nossa Senhora de Fatima, 619",São Caetano do Sul,1_abc,(11) 4227-4637,,,,,me,false,medio,Pet shop local tradicional.,
-Petz Sao Caetano,pet_shop,megaloja,Fundacao,São Caetano do Sul,1_abc,,,,,https://www.petz.com.br/loja/petz-carrefour-sao-caetano,grande,false,alto,"Rede Petz, loja Carrefour Sao Caetano.",
-S2 Pets,pet_shop,creche_pet,"Rua Amazonas, 720",São Caetano do Sul,1_abc,,,,@s2petss,,me,false,medio,Pet shop + creche.,
-Sao Francisco Pet Center,hotel_pet,hotel_daycare,Sao Caetano do Sul,São Caetano do Sul,1_abc,,,,@saofrancisco980,,me,false,medio,"Hotel, DayCare, Pet Walk, Banho e Tosa. +1000m2.",
-Woofy Pet Store,banho_tosa,premium,Sao Caetano do Sul,São Caetano do Sul,1_abc,,,,@woofypetstore,,me,false,medio,Sem gaiolas. Trimming e tosas especializadas.,
-Entre Patas Day Care,hotel_pet,daycare,"Av. Presidente Kennedy, 1435",São Caetano do Sul,1_abc,(11) 4318-3233,(11) 99379-9852,,,https://entrepatasdaycare.com.br/,me,false,medio,"Daycare, Banho e Tosa, Vet, Pet Shop, Natacao. 320m2.",
-Mon Petit Cantinho do Banho,banho_tosa,local,"R. Maceio, 811 - Barcelona",São Caetano do Sul,1_abc,(11) 4226-1396,(11) 96596-9858,,,,me,false,medio,"Banho e tosa local, bairro Barcelona.",
-Pet Family ABC,hotel_pet,creche_hotel,"R. Marina, 1490 - Santa Maria",São Caetano do Sul,1_abc,(11) 99519-6375,,,,https://petfamilyabc.com.br/,me,false,medio,"Creche seg-sex 6:30-18:30, Hotel todos os dias. Vet incluido.",
-Pepetos,hotel_pet,creche_hotel,"Estrada das Lagrimas, 1170 - Jardim Sao Caetano",São Caetano do Sul,1_abc,(11) 4238-3096,(11) 95578-3240,,,https://pepetos.com.br/,me,false,medio,"Creche, Hotel, Banho e Tosa, Natacao, Adestramento. Seg-Sex 7h-19h.",
-Cao a Cao,hotel_pet,creche_hotel,Sao Caetano do Sul,São Caetano do Sul,1_abc,,,,@crechecaoacao,https://www.caoacao.com.br/,me,false,medio,"Creche, Hotelzinho, Dogwalker, Banho e Tosa.",
-Fuco Pet Care,hotel_pet,creche_hotel,Bairro Santa Maria,São Caetano do Sul,1_abc,,(11) 94082-6070,,@fucopetcare,,me,false,medio,"Creche, Hotel, Banho e Tosa, Vacinas. Ambiente natureza.",
-Regia Tinas Care,banho_tosa,grooming,Sao Caetano do Sul,São Caetano do Sul,1_abc,,,,,https://www.banhonopet.com.br/,me,false,medio,Groomers especializados em todas as racas.,
-Pronto Socorro Animal,clinica_vet,24h,"R. Secondo Modolin, 420 - Jardim Maria Cecilia",São Bernardo do Campo,1_abc,(11) 4338-3222,(11) 99285-3194,,,https://prontosocorroanimal.com.br/,epp,false,alto,Pronto Socorro Animal 24h.,
-Clinica Veterinaria Sao Bernardo,clinica_vet,clinica,Sao Bernardo do Campo,São Bernardo do Campo,1_abc,(11) 4127-1839,(11) 4127-1839,,@vetsaobernardo,,epp,false,alto,Clinica vet. Tambem: (11) 99646-0668.,
-Sao Bernardo Saude Animal,clinica_vet,clinica,Sao Bernardo do Campo,São Bernardo do Campo,1_abc,(11) 3380-4421,(11) 99191-9001,,@clinica_saobernardo,,epp,false,medio,"WhatsApp 99191-9001, Ligacao 99266-4390.",
-Pet ABC,pet_shop,local,Sao Bernardo do Campo,São Bernardo do Campo,1_abc,,(11) 98765-2947,,@racoesabc,,me,false,medio,Pet shop + banho e tosa.,
-Petland Rudge Ramos,pet_shop,franquia,"Av. Caminho do Mar, 2227 - Rudge Ramos",São Bernardo do Campo,1_abc,,,,@petlandsbc_rudgeramos,,medio,false,alto,Franquia Petland premium.,
-Cobasi SBC Faria Lima,pet_shop,megaloja,"Av. Brigadeiro Faria Lima, 1760",São Bernardo do Campo,1_abc,(11) 4853-2220,,,,https://www.cobasi.com.br/lojas/cobasi-sbc-faria-lima,grande,false,alto,Rede Cobasi.,
-Betpet Shop,pet_shop,local,"R. Ernesta Pelosini, 92",São Bernardo do Campo,1_abc,(11) 4124-7057,,,,,me,false,medio,Pet shop local.,
-Bichinho Chic,banho_tosa,local,"R. Isaac Aizemberg, 307",São Bernardo do Campo,1_abc,(11) 4392-1313,,,,,me,false,medio,Banho e tosa.,
-Best Pet SBC,banho_tosa,hotel,Sao Bernardo do Campo,São Bernardo do Campo,1_abc,,(11) 93029-2183,,@bestpet.sbc,,me,false,medio,"Banho, Tosa e Hotel.",
-Hovet Dr. Vet,clinica_vet,24h,"Av. Portugal, 1680 - Jardim Bela Vista",Santo André,1_abc,(11) 3969-7979,(11) 94142-5536,,@drvethovet,,epp,false,alto,Hospital 24h todos os dias. Tel: 3969-7979/3969-5525.,
-Paco e Sua Turminha,clinica_vet,clinica,"Alameda Campestre, 590 - Campestre",Santo André,1_abc,(11) 4421-6467,(11) 98819-2753,contato@pacoesuaturminha.com.br,@pacoesuaturminha,https://pacoesuaturminha.com.br/,epp,false,alto,Fundada 2007. Seg-Sab 8h-18h.,
-Pet Shop Nemo,pet_shop,vet_pet,"Av. Queiros Filho, 553",Santo André,1_abc,(11) 2896-7211,,,,,me,false,medio,Pet shop e veterinaria.,
-Petz Santo Andre,pet_shop,megaloja,"Av. Ramiro Colleoni, 355 - Vila Assuncao",Santo André,1_abc,(11) 2181-7370,,,,https://www.petz.com.br/loja/petz-santo-andre,grande,false,alto,Rede Petz.,
-Pet Shop Mister Dog,pet_shop,local,"Estrada do Pedroso, 299",Santo André,1_abc,,,,,,me,false,medio,Pet shop local.,
-Hospital Veterinario Rivelles,clinica_vet,hospital_24h,"Av. Alda, 384 - Parque Sete de Setembro",Diadema,1_abc,(11) 4343-4126,(11) 98944-9077,,@hospitalrivelles,https://rivelles.com.br/,medio,false,alto,Hospital vet 24h. Desde 1985.,
-Gran Pet Diadema,pet_shop,clinica_pet,"Av. Senador Vitorino Freire, 421 - Centro",Diadema,1_abc,(11) 4043-2727,(11) 98666-4655,,@granpetdiadema,,epp,false,alto,Clinica + Pet Shop.,
-Mundo Rural Pet Diadema,pet_shop,clinica_pet,"Praca Bom Jesus Piraporinha, 122 - Piraporinha",Diadema,1_abc,(11) 4066-1302,(11) 97286-5803,,,https://www.mundoruralpet.com.br/,epp,false,medio,Pet shop + clinica. Clinica: (11) 94138-5172.,
-Cobasi Diadema,pet_shop,megaloja,"Av. Presidente Kennedy, 480",Diadema,1_abc,,,,,https://www.cobasi.com.br/lojas/cobasi-diadema,grande,false,alto,Rede Cobasi.,
-Petz Diadema,pet_shop,megaloja,"Av. Fabio Eduardo Ramos Esquivel, 1100 - Centro",Diadema,1_abc,(11) 2181-7352,,,,https://www.petz.com.br/loja/petz-diadema,grande,false,alto,Rede Petz.,
-PetConsulta Diadema,clinica_vet,clinica_pet,Campanario,Diadema,1_abc,,,,,https://www.petconsultadiadema.com.br/,me,false,medio,Clinica + banho e tosa.,
-Animavet Pet Shop,pet_shop,clinica_pet,"Av. Jose Bonifacio, 705 - Conceicao",Diadema,1_abc,(11) 4056-2157,,,,,me,false,medio,Pet shop e veterinaria.,
-Animal Mania Maua,clinica_vet,clinica,"R. Porto Feliz, 757 - Jardim Haydee",Mauá,1_abc,(11) 2312-8236,(11) 95585-9443,atendimento@animalmaniaveterinaria.com.br,@clinvet_animalmaniaspmaua,https://animalmaniaveterinaria.com.br/,epp,false,medio,"Ter-Sex 9h-18h, Sab 9h-17h.",
-Animale Hospital Maua,clinica_vet,hospital_24h,"R. Almirante Barroso, 114 - Vila Bocaina",Mauá,1_abc,(11) 4515-5535,(11) 94669-4122,,@hovetanimale,https://hovetanimale.com.br/,epp,false,alto,Hospital 24h. Clinico + Emergencial + Exames + Raio X.,
-Pet Shop Central Maua,pet_shop,local,"R. Luis Lacava, 300",Mauá,1_abc,(11) 3421-9807,,,,,me,false,medio,Pet shop central.,
-Petz Shopping Maua,pet_shop,megaloja,"Av. Gov. Mario Covas Junior, 01 - Centro",Mauá,1_abc,(11) 2181-7329,,,,https://www.petz.com.br/loja/petz-shopping-maua,grande,false,alto,Rede Petz.,
-Tico Tico Vet Maua,clinica_vet,clinica_pet,"R. Alziro Vidoto, 3 - Jardim Maringa",Mauá,1_abc,,(11) 93407-5752,,,,me,false,medio,Clinica vet e pet shop.,
-Pet Patas e Pelos,pet_shop,local,"Av. Presidente Castelo Branco, 1510 - Jardim Zaira",Mauá,1_abc,(11) 98717-3735,,,,,me,false,medio,Pet shop local.,
+﻿cnpj;razao_social;nome_fantasia;segmento;sub_segmento;endereco;cidade;ring;telefone;whatsapp;email;instagram;website;google_maps_url;google_rating;google_reviews;porte;foco_felino;potencial_b2b;notas;lat;lng
+19.055.885/0002-35;Pet Para Pets Comércio e Participações Ltda;Pet Para Pets;pet_shop;megaloja;Av. Goiás, 1400 - Santa Paula;São Caetano do Sul;1_abc;(11) 4227-6000;(11) 94529-7345;;@petparapetsoficial;https://www.petparapets.com.br/;https://www.google.com/maps/search/?api=1&query=Pet+Para+Pets+Av.+Goiás+1400+São+Caetano+do+Sul;4.6;1100;medio;false;medio;Grande rede, bom volume de clientes. Endereço pode variar.;-23.620885;-46.5688
+17.711.811/0002-84;COESA COMERCIO E SERVICOS LTDA - EPP;AnimaPets;pet_shop;venda_filhotes;Av. Goiás, 315 - Santo Antônio;São Caetano do Sul;1_abc;(11) 2376-8107;(11) 91090-5414;;;https://www.animapets.com.br/;https://www.google.com/maps/search/?api=1&query=AnimaPets+Av.+Goiás,+315+-+São+Caetano+do+Sul;4.9;1100;epp;false;baixo;Foco em venda de filhotes, menos em produtos/serviços recorrentes.;-23.6288;-46.569214
+48.807.594/0001-73;Pets House Centro Veterinário e Pet Shop Ltda.;Pets House;clinica_vet;24h;Av. Goiás, 269 - Santo Antônio;São Caetano do Sul;1_abc;(11) 4234-2384;(11) 97727-0001;;@_petshouse;;https://www.google.com/maps/search/?api=1&query=Pets+House+Centro+Veterinário+São+Caetano;4.9;130;epp;true;alto;Clínica 24h com bom foco em gatos, Dra. Larissa é especialista.;-23.625108;-46.565586
+53.153.938/0016-94;Cobasi São Caetano LTDA;Cobasi;pet_shop;megaloja;Alameda Caulim, 125;São Caetano do Sul;1_abc;(11) 4233-8202;;;;https://www.cobasi.com.br/;;4.5;500+;grande;false;alto;Rede nacional, alto volume;-23.620163;-46.568604
+;Planet Dog Boutique Pet;Planet Dog;pet_shop;boutique;Alameda Terracota, 545 - ParkShopping;São Caetano do Sul;1_abc;;;;;;;;;me;false;medio;Pet shop boutique premium;-23.623925;-46.569062
+;Dog's Day LTDA;Dog's Day;pet_shop;local;R. Visc. de Inhaúma, 65 - Oswaldo Cruz;São Caetano do Sul;1_abc;;;;;;;;;me;false;medio;Seg-Sex 8h30-20h, Sáb 8h30-19h;-23.621251;-46.571957
+;Climeve Hospital Veterinário;Climeve;clinica_vet;hospital_24h;Av. Brasília, 265 - Vila Bela Vista;Santo André;1_abc;;;;;;;;;epp;false;alto;Hospital 24h completo;-23.677488;-46.545609
+;PETPOP SBC Centro Veterinário Popular;PETPOP SBC;clinica_vet;popular;R. Helena Jacquey, 294 - Rudge Ramos;São Bernardo do Campo;1_abc;(11) 2578-4219;;falecom@petpopsbc.com.br;;https://www.petpopsbc.com.br/;;;;me;false;medio;Preços populares;-23.672501;-46.54284
+;Clínica Veterinária Santo André LTDA;CV Santo André;clinica_vet;24h;R. das Esmeraldas, 378 - Jardim;Santo André;1_abc;;;;;;;;;epp;false;alto;Fundada 2005, emergências;-23.675936;-46.542486
+;Cão Bernardo Hospital Veterinário;Cão Bernardo;clinica_vet;hospital_24h;;São Bernardo do Campo;1_abc;(11) 4930-4551;(11) 94006-5777;;;https://caobernardo.com.br/;;;;epp;false;alto;Hospital 24h especializado;-23.688925;-46.568648
+34.397.523/0001-35;Pet Store Drogaria e Clínica Veterinária LTDA;Pet Store Drogaria;pet_shop;drogaria_vet;;Diadema;1_abc;;;;;;;;;epp;false;medio;Drogaria + clínica;-23.679153;-46.621015
+53.652.422/0001-08;GB Pet Shop LTDA;Mercadão Pet Eldorado;pet_shop;mercadao;Av. N. Sra. dos Navegantes, 92 - Eldorado;Diadema;1_abc;;;;;;;;;epp;false;alto;Grande volume;-23.682878;-46.625356
+52.307.407/0001-60;Pet Shop São Vicente LTDA;Pet Shop São Vicente;pet_shop;local;R. Presidente Carlos Luz, 41 - Parque São Vicente;Mauá;1_abc;;;;;;;;;me;false;medio;Regional;-23.664042;-46.462607
+18.703.259/0001-64;Clínica Veterinária e Pet Shop Ribeirão LTDA;CV Pet Shop Ribeirão;clinica_vet;clinica_pet;Av. Kaethe Richers, 35 - Pastoril;Ribeirão Pires;1_abc;;;;;;;;;me;false;medio;Clínica + pet shop;-23.714458;-46.415026
+;União de Proteção Animal do Grande ABC;UPA ABC;ong;protecao;;ABC Paulista;1_abc;;;;@protecaoanimalabc;;;;;ong;true;baixo;10 anos, união protetores;-23.64722;-46.54917
+24.807.320/0001-16;ONG Canto da Terra;Canto da Terra;ong;resgate;;ABC Paulista;1_abc;;(11) 97055-3947;;;https://ongcantodaterra.org/;;;;ong;false;baixo;Resgate e tratamento;-23.647543;-46.548162
+;Instituto Caramelo;Instituto Caramelo;ong;resgate;;ABC Paulista;1_abc;;;;;https://institutocaramelo.org;;;;ong;false;baixo;Cães e gatos;-23.64971;-46.546215
+;Associação Paulista de Auxílio aos Animais;APAA;ong;protecao;;ABC Paulista;1_abc;;;;;;;;;ong;false;baixo;Proteção animal SP;-23.650972;-46.549584
+;Dr. Andressa Veterinária em Domicílio;Dr. Andressa Vet;clinica_vet;domiciliar;Atendimento domiciliar ABC;ABC Paulista;1_abc;;(11) 95882-8004;;;https://andressa.vet/;;;;mei;true;medio;Silvestres e exóticos;-23.647365;-46.549052
+;Garbin Pet Shop Clínica Veterinária;Garbin Pet Shop;pet_shop;clinica_pet;;Guarulhos;2_grande_sp;;;;;https://www.clinicaveterinariasp.com.br/;;;;epp;false;medio;Clínica + pet shop;-23.459906;-46.532581
+;Animal Center;Animal Center;clinica_vet;centro_completo;;Osasco;2_grande_sp;;;;;https://www.animalcenter.vet.br/;;;;epp;false;alto;Centro completo;-23.660363;-46.534633
+;Dog Up Centro Clínico Veterinário;Dog Up;clinica_vet;24h;;Osasco;2_grande_sp;;;;;;;;;epp;false;alto;Clínica 24h renomada;-23.534677;-46.793385
+;Clínica Veterinária e Pet Shop Vidanimal;Vidanimal;pet_shop;clinica_pet;Av. Municipal, 381 - Jardim Silveira;Barueri;2_grande_sp;(11) 4201-5691;;;;https://www.vidanimalbarueri.com.br/;;;;epp;false;alto;Fundada 2006;-23.513962;-46.878038
+;Centro Veterinário Prime;CV Prime;clinica_vet;hospital;;Guarulhos;2_grande_sp;;;;;https://centroveterinarioprime.com.br/;;;;epp;false;alto;Nível hospitalar;-23.465992;-46.534976
+18.135.968/0001-90;Bella Cristina Paula de Almeida Silva;Banho e Tosa Bella;banho_tosa;local;;São Bernardo do Campo;1_abc;;;;;;;;;mei;false;medio;Round 2 — PME local;-23.690315;-46.565781
+24.429.498/0001-70;Marli Rocha Menezes;Banho e Tosa Cao Carinho;banho_tosa;local;Rua Japao 18 - Taboao;São Bernardo do Campo;1_abc;;;;;;;;;me;false;medio;Round 2 — Fundada 2016, dados validados;-23.692439;-46.567024
+12.946.452/0001-40;Santa Cachorrada Banho e Tosa Ltda ME;Santa Cachorrada;banho_tosa;local;;São Bernardo do Campo;1_abc;;;;;;;;;me;false;medio;Round 2 — PME estabelecida;-23.693264;-46.561207
+17.698.845/0001-03;Priscila de Oliveira Silva;Priscila Banho e Tosa;banho_tosa;local;;São Bernardo do Campo;1_abc;;;;;;;;;mei;false;medio;Round 2 — Empreendedora individual;-23.690216;-46.563827
+;Sofystpet Banho E Tosa;Sofystpet;banho_tosa;local;Rua M M D C, 363 - Paulicéia;São Bernardo do Campo;1_abc;;;;;;;;;me;false;medio;Round 2 — 6+ anos ativa;-23.694031;-46.562867
+;Pet Shop Sk Banho e Tosa Ltda;Pet Shop Sk;banho_tosa;pet_shop;Av. Jurubatuba 646, Loja 2;São Bernardo do Campo;1_abc;;;;;;;;;me;false;alto;Round 2 — Híbrido banho+produtos;-23.694093;-46.565664
+30.100.835/0001-84;Banho e Tosa Ltda ME;Show de Banho Pet Truck;banho_tosa;mobile;;São Bernardo do Campo;1_abc;;;;;;;;;me;false;alto;Round 2 — Pet truck móvel, inovador;-23.687484;-46.56358
+08.159.407/0001-78;Meu Bicho Pet Shop Banho e Tosa Ltda;Meu Bicho;banho_tosa;pet_shop;Rua Sergio Milliet 581 - Jordanópolis;São Bernardo do Campo;1_abc;;;;;;;;;me;false;alto;Round 2 — Híbrido banho+loja;-23.704544;-46.563523
+52.425.223/0001-02;Watson Miclote Martins Barbosa;Banho e Tosa Abc;banho_tosa;local;;Santo André;1_abc;;;;;;;;;me;false;medio;Round 2 — Nome regional ABC;-23.670957;-46.540992
+56.210.739/0001-82;Banho e Tosa Arco Iris Ltda;Banho e Tosa Arco Iris;banho_tosa;local;;Santo André;1_abc;;;;;;;;;me;false;medio;Round 2 — Marca colorida;-23.675868;-46.546943
+56.927.149/0001-75;Kimcao Banho e Tosa - Petshop Ltda EPP;Kimcao;banho_tosa;pet_shop;;Santo André;1_abc;;;;;;;;;epp;false;alto;Round 2 — EPP, híbrido banho+loja;-23.675176;-46.545058
+57.410.727/0001-64;Pv Banho e Tosa Ltda;Pv Banho e Tosa;banho_tosa;local;;Santo André;1_abc;;;;;;;;;me;false;medio;Round 2 — Fundada set/2024, nova;-23.676012;-46.539657
+49.251.337/0001-60;Graziele Bruna dos Santos;Banho e Tosa Scooby;banho_tosa;local;;Santo André;1_abc;;;;;;;;;me;false;medio;Round 2 — Empreendedora jovem;-23.670689;-46.544683
+25.113.175/0001-36;Pet Shop São Paulo Banho e Tosa Ltda ME;Pet Shop São Paulo;banho_tosa;pet_shop;;Santo André;1_abc;;;;;;;;;me;false;alto;Round 2 — 9+ anos, híbrido;-23.672456;-46.544035
+46.465.165/0001-30;Roptcare Banho e Tosa;Roptcare;banho_tosa;local;;Santo André;1_abc;(11) 4991-1983;;;;;;;;me;false;medio;Round 2 — Telefone validado;-23.670384;-46.543529
+;Pet Speciale;Pet Speciale;pet_shop;local;;São Caetano do Sul;1_abc;;;;@petspeciale;;https://www.facebook.com/petspeciale;;56;me;true;alto;Round 2 — Banho+alimentação, foco felino;-23.625181;-46.567327
+;For Pet São Caetano;For Pet;pet_shop;local;Alameda São Caetano, 2423;São Caetano do Sul;1_abc;(11) 99419-9000;(11) 2786-5759;;@forpetsaocaetano;forpetsaocaetano.com.br;https://www.facebook.com/forpetsaocaetano;;;me;false;medio;Round 2 — Local estabelecido;-23.622809;-46.567198
+;Pet Sauro Pet Shop;Pet Sauro;pet_shop;local;;São Caetano do Sul;1_abc;(11) 99419-9000;(11) 99419-9000;;@petsauro;;;;;me;false;medio;Round 2 — WhatsApp ativo;-23.622623;-46.562117
+;Pet Store Galerinha Animal;Galerinha Animal;pet_shop;local;;?;1_abc;;;;@petstoregalerinhaanimal;;;;;me;false;medio;Round 2 — Nome família-friendly;-23.650805;-46.552245
+;Pet Shop Pedroso;Pet Shop Pedroso;pet_shop;local;Estrada do Pedroso, 943;Santo André;1_abc;(11) 94702-4713;(11) 94702-4713;;@espacopet.sa;https://www.petshoppedroso.com.br/;;;;me;false;alto;Round 2 — Site próprio, estabelecido;-23.66972;-46.543124
+;Local Pet;Local Pet;pet_shop;local;;São Bernardo do Campo;1_abc;;;;@localpet_;;;;;me;false;medio;Round 2 — Ofertas ativas no Instagram;-23.694673;-46.568323
+;Mundo Animal Distribuidora;Mundo Animal;distribuidor;atacado;Rua Matilde, 238;Santo André;1_abc;(11) 4461-4189;(11) 96316-8005;contato@distribuidoramundoanimal.com.br;@mundoanimaldistribuidora;https://www.distribuidoramundoanimal.com.br/;;;;epp;false;muito_alto;Round 2 — Fundada 1993, distribuidor estabelecido;-23.676823;-46.54218
+19.055.885/0002-35;Pet Para Pets Comércio e Participações Ltda;Pet Para Pets SBC;pet_shop;megaloja;Av. Brigadeiro Faria Lima, 1760;São Bernardo do Campo;1_abc;;;;;https://www.cobasi.com.br/;;;;grande;false;alto;Round 3 — Megaloja SBC, volume alto;-23.689063;-46.565323
+;PET LOVERS Pet Shop Ltda;PET LOVERS Pet Shop;pet_shop;local;;São Bernardo do Campo;1_abc;;;;@petloverspetshop;https://www.facebook.com/petloverspetshop/;;;2096;me;true;alto;Round 3 — 2k+ likes, foco amor pets;-23.694892;-46.565647
+;Bom Cão Comércio de Artigos Ltda;Pet Shop Bom Cão;pet_shop;local;R. Maria Nicolina Bellucce Piatto, 336;São Bernardo do Campo;1_abc;;;;;;;;;me;false;medio;Round 3 — Endereço confirmado;-23.687431;-46.564467
+;Best Pet Shop Hotel Vet Creche Ltda;BEST PET SHOP;pet_shop;completo;Rua Marabá, 107 - Rudge Ramos;São Bernardo do Campo;1_abc;;;;@bestpet.sbc;;;5.0;362;epp;false;muito_alto;Round 3 — Completo: hotel+vet+creche+banho;-23.664231;-46.564114
+;Dogfish PETSHOP Estética Animal;Dogfish PETSHOP;pet_shop;estetica;;São Bernardo do Campo;1_abc;;;;@novadogfishpetshop;;;;;me;false;medio;Round 3 — Estética animal especializada;-23.695308;-46.562934
+;4 Patas e Cia Pet Shop;4 Patas e Cia;pet_shop;completo;MMDC, 270 – Loja 1 e 2 - Paulicéia;São Bernardo do Campo;1_abc;;;;;https://institucional.4patasecia.com.br/;;;;epp;false;alto;Round 3 — Desde 1998, completo;-23.689946;-46.564404
+;Dom Pet Ltda;Pet Shop Dom Pet;pet_shop;local;;São Bernardo do Campo;1_abc;;;;@DomPetBarbosa;https://www.facebook.com/DomPetBarbosa/;;;1750;me;false;alto;"Round 3 — 1750 likes, ""tudo que o pet precisa""";-23.693265;-46.563572
+;Pet Shop Rudge Ltda;Pet Shop Rudge;pet_shop;local;Rudge Ramos;São Bernardo do Campo;1_abc;(11) 2381-5689;(11) 2381-5689;;@petshop_rudge;;;;;me;false;alto;Round 3 — Tel validado, Rudge Ramos;-23.671108;-46.567522
+;PetMais Rudge Ramos Ltda;Pet Mais Rudge Ramos;pet_shop;completo;Rua Alfeu Tavares, 254 - Rudge Ramos;São Bernardo do Campo;1_abc;;;;@petmais.rudge;https://www.facebook.com/petmais.rudge/;;;;me;false;alto;Round 3 — Endereço validado, variedade;-23.66837;-46.563369
+;Pet Shop São José Ltda;Pet Shop São José;pet_shop;local;;São Bernardo do Campo;1_abc;;;;;;;;;me;false;medio;Round 3 — Rudge Ramos Raiz;-23.664993;-46.568893
+;Stillo Animal Pet Shop;Stillo Animal;banho_tosa;estetica;;São Bernardo do Campo;1_abc;;;;@stilloanimaloficiall;https://www.facebook.com/stilloanimaloficiall/;;;521;me;false;medio;Round 3 — 521 likes, estética animal;-23.691395;-46.567271
+;Pet Shop Convivência Animal;Convivência Animal;pet_shop;local;Av. Luiz Pequini, 902;São Bernardo do Campo;1_abc;(11) 4345-2028;;;;;;;;me;false;alto;Round 3 — Tel validado, endereço confirmado;-23.688099;-46.561736
+;Internacional Pets SBC;Internacional Pets;pet_shop;shopping;São Bernardo Plaza Shopping;São Bernardo do Campo;1_abc;;;;@internacionalpetssbc;;;;;me;false;alto;Round 3 — Shopping, variedade produtos;-23.693012;-46.563588
+53.153.938/0016-94;Petz São Bernardo LTDA;Petz São Bernardo;pet_shop;megaloja;Av. Rotary, 825 - Centro;São Bernardo do Campo;1_abc;(11) 2181-7420;;;;https://www.petz.com.br/loja/petz-sao-bernardo;;;;grande;false;muito_alto;Round 3 — Rede nacional, Center Castilho;-23.661128;-46.533777
+;Petshop Dogs & Cats;Dogs & Cats;pet_shop;local;Av. Armando Italo Setti, 626 - Baeta Neves;São Bernardo do Campo;1_abc;(11) 95852-7218;(11) 95852-7218;nivealeandro@hotmail.com;@PetshopDogsCats;https://www.facebook.com/PetshopDogsCats/;;;;me;false;alto;Round 3 — Contatos completos validados;-23.6779;-46.557685
+;ACasaDosPet Ltda;A Casa dos Pet;pet_shop;local;Av. Winston Churchill, 713;São Bernardo do Campo;1_abc;;;;@acasadospet;;;;;me;false;medio;Round 3 — Inauguração recente;-23.689171;-46.564457
+;Petshop VipCare;Vip Care;clinica_vet;clinica_pet;;São Bernardo do Campo;1_abc;;;;;https://www.petshopvipcare.com.br/;;;;epp;false;alto;Round 3 — 15 anos, clínica+pet shop;-23.695395;-46.566107
+;100% Pet Ltda;100% Pet;pet_shop;local;Av. Kennedy, 990 - Jardim do Mar;São Bernardo do Campo;1_abc;(11) 4317-5300;;;@CemPorCentoPetSBC;cemporcentopet.com.br;;;;epp;false;alto;Round 3 — Tel validado, website;-23.695244;-46.561267
+;LM Bichinho Clínica Veterinária;LM Bichinho;clinica_vet;clinica_pet;Rua Aura, 54 - Rudge Ramos;São Bernardo do Campo;1_abc;;;;;https://lmbichinho.com.br/;;;;epp;false;alto;Round 3 — Clínica+Pet shop, 2 endereços;-23.66497;-46.564347
+;Amity Pet Centro Veterinário;Amity Pet;banho_tosa;clinica_pet;;São Bernardo do Campo;1_abc;;;;;https://amitypet.com.br/;;;;epp;false;alto;Round 3 — Segurança, conforto, bem-estar;-23.69294;-46.568237
+;Pet Flor de Maio;Pet Flor de Maio;banho_tosa;local;Rua Flor de maio, 63;São Bernardo do Campo;1_abc;;;;@Petflordemaio;https://www.facebook.com/Petflordemaio/;;;;me;false;medio;Round 3 — Endereço validado;-23.688376;-46.561124
+;Guardião Clínica Veterinária;Banho e Tosa SBC;banho_tosa;clinica_pet;Alameda Princesa Isabel, 329;São Bernardo do Campo;1_abc;(11) 2374-6905;;;@guardiaoclinicaveterinaria;;;;;me;false;alto;Round 3 — Tel+endereço validados;-23.694715;-46.564812
+;Atmos Centro Veterinário;Atmos;clinica_vet;centro_completo;;São Bernardo do Campo;1_abc;;;;;https://atmosveterinario.com/;;;;epp;false;muito_alto;Round 3 — Centro integral saúde animal;-23.665446;-46.528915
+;EcoPet Centro Veterinário;EcoPet;clinica_vet;24h;;São Bernardo do Campo;1_abc;;;;@ecopetcentrovet;https://ecopetonline.com.br/;;;;epp;true;muito_alto;Round 3 — 24h, silvestres, especialista felinos;-23.689273;-46.567673
+;Animale Hospital Veterinário;Animale Hospital;clinica_vet;hospital_24h;;São Bernardo do Campo;1_abc;;;;;https://www.veterinariapets.com.br/;;;;epp;false;muito_alto;Round 3 — Hospital 24h emergenciais;-23.691598;-46.564302
+;Vet Live Centro Veterinário;Vet Live;clinica_vet;24h;;São Bernardo do Campo;1_abc;;;;;https://www.vetlivecv.com.br/;;;;epp;false;muito_alto;Round 3 — Centro Veterinário 24h;-23.66388;-46.528021
+;Vetplace SBC Clínica Veterinária;Vetplace SBC;clinica_vet;especializada;;São Bernardo do Campo;1_abc;;;;;https://vetplacesbc.com.br/;;;;epp;false;alto;Round 3 — Especialidades veterinárias;-23.692015;-46.567006
+;Árbol Hospital Veterinário;Árbol Hospital;clinica_vet;hospital;;São Bernardo do Campo;1_abc;;;;@arbolvet;https://www.facebook.com/arbolvet/;;;215;epp;false;alto;Round 3 — Hospital completo;-23.691086;-46.562861
+;Canarinho Pet Shop;Canarinho Pet Shop;pet_shop;local;;São Bernardo do Campo;1_abc;;;;;https://canarinhopetshop.negocio.site/;;;;me;false;medio;Round 3 — Pet shop independente;-23.693791;-46.566206
+;Pet Shop Bicho do Mato;Bicho do Mato;pet_shop;local;;São Bernardo do Campo;1_abc;;;;;https://domato.vitrinevirtual.net/;;;;me;false;medio;Round 3 — Pet shop independente;-23.687439;-46.563501
+;Eliane Breda Clínica Veterinária;E.B. Clínica Veterinária;clinica_vet;clinica_pet;;São Bernardo do Campo;1_abc;;;;;https://ebclinicaveterinaria.com.br/;;;;epp;false;alto;Round 3 — Desde 2003, veterinários+banho+tosa;-23.691895;-46.564559
+;CEC PET Distribuidora;CEC PET;distribuidor;atacado;;São Bernardo do Campo;1_abc;;;;;https://www.cecpet.com.br/;;;;epp;false;muito_alto;Round 3 — Distribuidor produtos pet SP;-23.694432;-46.566902
+;Focinhos Club Distribuição;Focinhos Club;distribuidor;comercio_distribuicao;;São Bernardo do Campo;1_abc;;;;;;;;;me;false;alto;Round 3 — CNPJ 64.526.701/0001-41;-23.692695;-46.563994
+;Skub Pet Shop Santo André;Skub Pet Shop;pet_shop;completo;;Santo André;1_abc;;;;;https://www.skubpetshop.com.br/;;4.8;150+;epp;false;muito_alto;Round 3 — Banho+tosa+clínica+ração premium;-23.675859;-46.545438
+;Pet Shop Golden Premier;Golden Premier;banho_tosa;premium;;Santo André;1_abc;;;;;https://goldenpremiervet.com/petshop;;;;epp;false;muito_alto;Round 3 — Pet shop luxo, spa pets;-23.677132;-46.542151
+;Pet Shop E Avicultura Laras;Laras Avicultura;pet_shop;avicultura;;Santo André;1_abc;;;;@petshopeaviculturalaras;https://www.facebook.com/petshopeaviculturalaras/;;;480;me;false;medio;Round 3 — Banho+tosa+alimentos, 480 likes;-23.675868;-46.539957
+;Pet Shop Amazônia;Pet Amazônia;pet_shop;local;;Santo André;1_abc;;;;@pet_amazonia;;;;;me;false;medio;Round 3 — Saudações 2026, ativo;-23.670823;-46.546633
+;Pet Center Dom Pedro;Pet Center Dom Pedro;pet_shop;centro_completo;;Santo André;1_abc;;;;;https://www.linkbr.in/petcenterdompedro;;;;epp;false;muito_alto;Round 3 — Centro completo veterinário+banho+tosa;-23.664096;-46.529648
+18.432.894/0001-54;Luiz Alexandre Tita Moggia;Pet Shop Vila Pires;pet_shop;local;Av. Dom Pedro I, 834 - Vila Pires;Santo André;1_abc;;;;@petshopVilaPires;https://petshopvilapires.com.br;;;1654;me;false;alto;Round 3 — 12+ anos, Vila Pires, 1654 likes;-23.657286;-46.540942
+;CãoArt Pet Shop;CãoArt;pet_shop;completo;;Santo André;1_abc;;;;;http://caoartpetshop.com.br/;;;;epp;false;muito_alto;Round 3 — Banho+tosa+vet+hotel+taxi dog;-23.670216;-46.542632
+;Animal House Clínica;Animal House;clinica_vet;completa;;Santo André;1_abc;;;;;https://www.animalhouse.com.br/;;;;epp;false;muito_alto;Round 3 — Clínica completa+banho+day care;-23.673919;-46.540923
+;House Pet Centro;House Pet;banho_tosa;premium;;Santo André;1_abc;;;;;https://www.figueirahousepet.com.br/;;;;epp;false;alto;Round 3 — Banho ozônio, espaço amplo;-23.67124;-46.545677
+;EurekaPet Clínica Veterinária;EurekaPet;clinica_vet;local;;Santo André;1_abc;(11) 94713-3883;(11) 94713-3883;;@eurekapetsp;;;;;me;false;alto;Round 3 — 8 anos, WhatsApp validado;-23.676925;-46.543752
+;Nos Amis Centro Veterinário;Nos Amis;clinica_vet;centro_completo;;Santo André;1_abc;;;;;https://nosamis.com.br/;;;;epp;false;muito_alto;Round 3 — Clínica+cirurgias+internação+lab;-23.674311;-46.543464
+;VitalVet ABC Centro Médico;VitalVet ABC;clinica_vet;centro_medico;;Santo André;1_abc;(11) 4438-4655;;;;https://www.vitalvetabc.com.br/;;;;epp;false;muito_alto;Round 3 — Centro médico veterinário ABC;-23.660167;-46.529613
+;Vet Selvagem Clínica;Vet Selvagem;clinica_vet;especializada;;Santo André;1_abc;;;;;;;;;epp;true;muito_alto;Round 3 — Nova, foco silvestres+felinos;-23.669827;-46.546413
+;Buticão Veterinário Hotel;Buticão;clinica_vet;completo;Bairro Campestre;Santo André;1_abc;(11) 4991-3324;;;@clinicabuticao;https://www.facebook.com/petshopboticao/;;;;epp;false;muito_alto;Round 3 — Desde 1981, completo+hospedagem;-23.660779;-46.546286
+;Boutique Pet & Spa;Boutique Pet;banho_tosa;boutique;;Santo André;1_abc;;;;@boutiquepetespa;https://boutiqupetspa.com.br/;;;1788;epp;true;muito_alto;Round 3 — Especialista Spitz, sem gaiola, 1788 followers;-23.670807;-46.545211
+;SofistCão Banho e Tosa;SofistCão;banho_tosa;especializada;;Santo André;1_abc;;;;@sofist_cao;;;;2370;epp;true;muito_alto;Round 3 — 2370 followers, especialista tosa bebê+Spitz;-23.676178;-46.543611
+;The Pet Club Vila Assunção;The Pet Club;banho_tosa;local;Vila Assunção;Santo André;1_abc;;;;;https://www.linkbr.in/thepetclub;;;;me;false;alto;Round 3 — Parceiro confiável Vila Assunção;-23.686625;-46.556772
+;Cão Carinho Pet Shop;Cão Carinho;banho_tosa;pet_shop;R. Balaclava, 553;Santo André;1_abc;(11) 4975-4130;;;;;;;;me;false;alto;Round 3 — Tel validado, endereço confirmado;-23.675702;-46.539814
+;Banho e Tosa Nações;Nações Veterinária;clinica_vet;banho_tosa;;Santo André;1_abc;;;;@banhoetosanacoes;https://petshopnacoes.com.br/;;;;epp;false;alto;Round 3 — Clínica+banho+tosa+vacinas;-23.674155;-46.540309
+;Michele Cats Especialista;Michele Cats;banho_tosa;cat_groomer;São Paulo/ABC;Santo André;1_abc;;;;;https://www.michelecats.com.br/;;;;mei;true;MÁXIMO;Round 3 — 🎯 CAT GROOMER ESPECIALISTA FELINOS+COELHOS! PERFECT FIT GATO³;-23.673297;-46.546795
+53.153.938/0016-85;Cobasi Santo André P. Barreto;Cobasi P. Barreto;pet_shop;megaloja;;Santo André;1_abc;;;;;https://www.cobasi.com.br/lojas/cobasi-santo-andre-pereira-barreto;;;;grande;false;muito_alto;Round 3 — Banho+tosa+clínica;-23.669706;-46.540512
+53.153.938/0016-86;Cobasi Santo André Av. Estados;Cobasi Av. Estados;pet_shop;megaloja;Avenida dos Estados, 5745;Santo André;1_abc;(11) 5039-9549;;;;https://www.cobasi.com.br/lojas/cobasi-santo-andre-pq-jacatuba;;;;grande;false;muito_alto;Round 3 — Loja completa jardinagem+consultas vet+banho;-23.669948;-46.539789
+;Dr. Hato Vila Alto;Dr. Hato SA;clinica_vet;hospital_pet;Vila Alto;Santo André;1_abc;;;;;https://drhato.com.br/;;;;epp;false;muito_alto;Round 3 — Hospital+pet shop funcionando normalmente;-23.67091;-46.54587
+;Pet Shop Avicultura Pedroso;Pedroso Avicultura;pet_shop;completo;;Santo André;1_abc;;;;@PetShopAvilculturaPedroso;https://www.facebook.com/PetShopAvilculturaPedroso/;;;;me;false;alto;Round 3 — Rotina completa: banho+ração+brinquedos;-23.673815;-46.54549
+;Mini Pet Store Cidade Viva;Mini Pet Store;pet_shop;local;;Santo André;1_abc;;;;@minipetstore_santoandre;;;;;me;false;medio;Round 3 — Cidade Viva, catálogo WhatsApp;-23.674492;-46.546731
+;Mini Pet Store Square Garden;Mini Pet Store SG;pet_shop;shopping;Square Garden;Santo André;1_abc;;;;@minipetstore_santoandre;;;;;me;false;medio;Round 3 — Shopping Square Garden;-23.674668;-46.539318
+;Petlife Sao Caetano;Petlife Sao Caetano;clinica_vet;24h;R. Amazonas, 1159 - Oswaldo Cruz;São Caetano do Sul;1_abc;(11) 4225-1899;(11) 95028-9537;petlifesaocaetano@gmail.com;@petlife.saocaetano;https://petlifesaocaetano.com.br/;;;;epp;false;alto;Vet 24h. Consultas, emergencias, cirurgias, oncologia, internacao.;;
+;Ethicus Hospital Veterinario;Ethicus Hospital Veterinario;clinica_vet;hospital_24h;Estrada das Lagrimas, 1843 - Bairro Maua;São Caetano do Sul;1_abc;(11) 4238-8505;(11) 97445-5545;ethicus@ethicus.com.br;@ethicushospital24h;https://ethicus.com.br/;;;;medio;true;alto;Hospital 24h. Medicina Felina, Neurologia, Oncologia, Ortopedia. Referencia ABC.;;
+;Oriente Clinica Veterinaria;Oriente Clinica Veterinaria;clinica_vet;especialidades;R. Oriente, 941 - Barcelona;São Caetano do Sul;1_abc;(11) 4221-6880;(11) 97277-2255;;@oriente.vet;https://orientevet.com/;;;;epp;true;alto;ESPECIALISTA EM FELINOS. Seg-Sex 9h-19h, Sab 9h-16h. Cardiologia, Oncologia, Nefrologia. MATCH GATO3.;;
+;Hypolittus Vet;Hypolittus Vet;clinica_vet;especialidades;Av. Vital Brasil Filho, 623 - Osvaldo Cruz;São Caetano do Sul;1_abc;;(11) 97090-2518;contato@hypolittusvet.com.br;@hypolittus.vet;https://hypolittusvet.com.br/;;;;epp;false;alto;Ortopedia, Fisioterapia, Oncologia, Acupuntura. Seg-Sex 9h-18h, Sab 9h-14h.;;
+;Clinical Pets;Clinical Pets;clinica_vet;clinica_pet;R. Herculano de Freitas, 417 - Fundacao;São Caetano do Sul;1_abc;(11) 4225-1378;(11) 99661-7999;;;https://www.clinicalpets.com/;;;;epp;true;alto;Clinica + Farmacia + Banho e Tosa + Ozonioterapia.;;
+;Clinica Veterinaria Sao Caetano;Clinica Veterinaria Sao Caetano;clinica_vet;clinica;Sao Caetano do Sul;São Caetano do Sul;1_abc;;(11) 93354-5454;;@clinvetsaocaetano;https://clinvetsaocaetano.com.br/;;;;me;false;medio;Somente agendamento via WhatsApp. Exames, Vacinas, Banho e Tosa.;;
+;WeVets Sao Caetano;WeVets Sao Caetano;clinica_vet;hospital;Sao Caetano do Sul;São Caetano do Sul;1_abc;;;;;https://wevets.com.br/unidade-sao-caetano/;;;;medio;false;alto;Rede de clinicas veterinarias. Unidade ABC.;;
+;Pet e Co.;Pet e Co.;pet_shop;banho_tosa;R. Oswaldo Cruz, 1580 - Santa Paula;São Caetano do Sul;1_abc;;(11) 97630-4312;;@petco.sp;;;;;me;false;medio;Pet shop + banho e tosa.;;
+;Sao Caetano Pet Shop;Sao Caetano Pet Shop;pet_shop;local;R. Nossa Senhora de Fatima, 619;São Caetano do Sul;1_abc;(11) 4227-4637;;;;;;;;me;false;medio;Pet shop local tradicional.;;
+;Petz Sao Caetano;Petz Sao Caetano;pet_shop;megaloja;Fundacao;São Caetano do Sul;1_abc;;;;;https://www.petz.com.br/loja/petz-carrefour-sao-caetano;;;;grande;false;alto;Rede Petz, loja Carrefour Sao Caetano.;;
+;S2 Pets;S2 Pets;pet_shop;creche_pet;Rua Amazonas, 720;São Caetano do Sul;1_abc;;;;@s2petss;;;;;me;false;medio;Pet shop + creche.;;
+;Sao Francisco Pet Center;Sao Francisco Pet Center;hotel_pet;hotel_daycare;Sao Caetano do Sul;São Caetano do Sul;1_abc;;;;@saofrancisco980;;;;;me;false;medio;Hotel, DayCare, Pet Walk, Banho e Tosa. +1000m2.;;
+;Woofy Pet Store;Woofy Pet Store;banho_tosa;premium;Sao Caetano do Sul;São Caetano do Sul;1_abc;;;;@woofypetstore;;;;;me;false;medio;Sem gaiolas. Trimming e tosas especializadas.;;
+;Entre Patas Day Care;Entre Patas Day Care;hotel_pet;daycare;Av. Presidente Kennedy, 1435;São Caetano do Sul;1_abc;(11) 4318-3233;(11) 99379-9852;;;https://entrepatasdaycare.com.br/;;;;me;false;medio;Daycare, Banho e Tosa, Vet, Pet Shop, Natacao. 320m2.;;
+;Mon Petit Cantinho do Banho;Mon Petit Cantinho do Banho;banho_tosa;local;R. Maceio, 811 - Barcelona;São Caetano do Sul;1_abc;(11) 4226-1396;(11) 96596-9858;;;;;;;me;false;medio;Banho e tosa local, bairro Barcelona.;;
+;Pet Family ABC;Pet Family ABC;hotel_pet;creche_hotel;R. Marina, 1490 - Santa Maria;São Caetano do Sul;1_abc;(11) 99519-6375;;;;https://petfamilyabc.com.br/;;;;me;false;medio;Creche seg-sex 6:30-18:30, Hotel todos os dias. Vet incluido.;;
+;Pepetos;Pepetos;hotel_pet;creche_hotel;Estrada das Lagrimas, 1170 - Jardim Sao Caetano;São Caetano do Sul;1_abc;(11) 4238-3096;(11) 95578-3240;;;https://pepetos.com.br/;;;;me;false;medio;Creche, Hotel, Banho e Tosa, Natacao, Adestramento. Seg-Sex 7h-19h.;;
+;Cao a Cao;Cao a Cao;hotel_pet;creche_hotel;Sao Caetano do Sul;São Caetano do Sul;1_abc;;;;@crechecaoacao;https://www.caoacao.com.br/;;;;me;false;medio;Creche, Hotelzinho, Dogwalker, Banho e Tosa.;;
+;Fuco Pet Care;Fuco Pet Care;hotel_pet;creche_hotel;Bairro Santa Maria;São Caetano do Sul;1_abc;;(11) 94082-6070;;@fucopetcare;;;;;me;false;medio;Creche, Hotel, Banho e Tosa, Vacinas. Ambiente natureza.;;
+;Regia Tinas Care;Regia Tinas Care;banho_tosa;grooming;Sao Caetano do Sul;São Caetano do Sul;1_abc;;;;;https://www.banhonopet.com.br/;;;;me;false;medio;Groomers especializados em todas as racas.;;
+;Pronto Socorro Animal;Pronto Socorro Animal;clinica_vet;24h;R. Secondo Modolin, 420 - Jardim Maria Cecilia;São Bernardo do Campo;1_abc;(11) 4338-3222;(11) 99285-3194;;;https://prontosocorroanimal.com.br/;;;;epp;false;alto;Pronto Socorro Animal 24h.;;
+;Clinica Veterinaria Sao Bernardo;Clinica Veterinaria Sao Bernardo;clinica_vet;clinica;Sao Bernardo do Campo;São Bernardo do Campo;1_abc;(11) 4127-1839;(11) 4127-1839;;@vetsaobernardo;;;;;epp;false;alto;Clinica vet. Tambem: (11) 99646-0668.;;
+;Sao Bernardo Saude Animal;Sao Bernardo Saude Animal;clinica_vet;clinica;Sao Bernardo do Campo;São Bernardo do Campo;1_abc;(11) 3380-4421;(11) 99191-9001;;@clinica_saobernardo;;;;;epp;false;medio;WhatsApp 99191-9001, Ligacao 99266-4390.;;
+;Pet ABC;Pet ABC;pet_shop;local;Sao Bernardo do Campo;São Bernardo do Campo;1_abc;;(11) 98765-2947;;@racoesabc;;;;;me;false;medio;Pet shop + banho e tosa.;;
+;Petland Rudge Ramos;Petland Rudge Ramos;pet_shop;franquia;Av. Caminho do Mar, 2227 - Rudge Ramos;São Bernardo do Campo;1_abc;;;;@petlandsbc_rudgeramos;;;;;medio;false;alto;Franquia Petland premium.;;
+;Cobasi SBC Faria Lima;Cobasi SBC Faria Lima;pet_shop;megaloja;Av. Brigadeiro Faria Lima, 1760;São Bernardo do Campo;1_abc;(11) 4853-2220;;;;https://www.cobasi.com.br/lojas/cobasi-sbc-faria-lima;;;;grande;false;alto;Rede Cobasi.;;
+;Betpet Shop;Betpet Shop;pet_shop;local;R. Ernesta Pelosini, 92;São Bernardo do Campo;1_abc;(11) 4124-7057;;;;;;;;me;false;medio;Pet shop local.;;
+;Bichinho Chic;Bichinho Chic;banho_tosa;local;R. Isaac Aizemberg, 307;São Bernardo do Campo;1_abc;(11) 4392-1313;;;;;;;;me;false;medio;Banho e tosa.;;
+;Best Pet SBC;Best Pet SBC;banho_tosa;hotel;Sao Bernardo do Campo;São Bernardo do Campo;1_abc;;(11) 93029-2183;;@bestpet.sbc;;;;;me;false;medio;Banho, Tosa e Hotel.;;
+;Hovet Dr. Vet;Hovet Dr. Vet;clinica_vet;24h;Av. Portugal, 1680 - Jardim Bela Vista;Santo André;1_abc;(11) 3969-7979;(11) 94142-5536;;@drvethovet;;;;;epp;false;alto;Hospital 24h todos os dias. Tel: 3969-7979/3969-5525.;;
+;Paco e Sua Turminha;Paco e Sua Turminha;clinica_vet;clinica;Alameda Campestre, 590 - Campestre;Santo André;1_abc;(11) 4421-6467;(11) 98819-2753;contato@pacoesuaturminha.com.br;@pacoesuaturminha;https://pacoesuaturminha.com.br/;;;;epp;false;alto;Fundada 2007. Seg-Sab 8h-18h.;;
+;Pet Shop Nemo;Pet Shop Nemo;pet_shop;vet_pet;Av. Queiros Filho, 553;Santo André;1_abc;(11) 2896-7211;;;;;;;;me;false;medio;Pet shop e veterinaria.;;
+;Petz Santo Andre;Petz Santo Andre;pet_shop;megaloja;Av. Ramiro Colleoni, 355 - Vila Assuncao;Santo André;1_abc;(11) 2181-7370;;;;https://www.petz.com.br/loja/petz-santo-andre;;;;grande;false;alto;Rede Petz.;;
+;Pet Shop Mister Dog;Pet Shop Mister Dog;pet_shop;local;Estrada do Pedroso, 299;Santo André;1_abc;;;;;;;;;me;false;medio;Pet shop local.;;
+;Hospital Veterinario Rivelles;Hospital Veterinario Rivelles;clinica_vet;hospital_24h;Av. Alda, 384 - Parque Sete de Setembro;Diadema;1_abc;(11) 4343-4126;(11) 98944-9077;;@hospitalrivelles;https://rivelles.com.br/;;;;medio;false;alto;Hospital vet 24h. Desde 1985.;;
+;Gran Pet Diadema;Gran Pet Diadema;pet_shop;clinica_pet;Av. Senador Vitorino Freire, 421 - Centro;Diadema;1_abc;(11) 4043-2727;(11) 98666-4655;;@granpetdiadema;;;;;epp;false;alto;Clinica + Pet Shop.;;
+;Mundo Rural Pet Diadema;Mundo Rural Pet Diadema;pet_shop;clinica_pet;Praca Bom Jesus Piraporinha, 122 - Piraporinha;Diadema;1_abc;(11) 4066-1302;(11) 97286-5803;;;https://www.mundoruralpet.com.br/;;;;epp;false;medio;Pet shop + clinica. Clinica: (11) 94138-5172.;;
+;Cobasi Diadema;Cobasi Diadema;pet_shop;megaloja;Av. Presidente Kennedy, 480;Diadema;1_abc;;;;;https://www.cobasi.com.br/lojas/cobasi-diadema;;;;grande;false;alto;Rede Cobasi.;;
+;Petz Diadema;Petz Diadema;pet_shop;megaloja;Av. Fabio Eduardo Ramos Esquivel, 1100 - Centro;Diadema;1_abc;(11) 2181-7352;;;;https://www.petz.com.br/loja/petz-diadema;;;;grande;false;alto;Rede Petz.;;
+;PetConsulta Diadema;PetConsulta Diadema;clinica_vet;clinica_pet;Campanario;Diadema;1_abc;;;;;https://www.petconsultadiadema.com.br/;;;;me;false;medio;Clinica + banho e tosa.;;
+;Animavet Pet Shop;Animavet Pet Shop;pet_shop;clinica_pet;Av. Jose Bonifacio, 705 - Conceicao;Diadema;1_abc;(11) 4056-2157;;;;;;;;me;false;medio;Pet shop e veterinaria.;;
+;Animal Mania Maua;Animal Mania Maua;clinica_vet;clinica;R. Porto Feliz, 757 - Jardim Haydee;Mauá;1_abc;(11) 2312-8236;(11) 95585-9443;atendimento@animalmaniaveterinaria.com.br;@clinvet_animalmaniaspmaua;https://animalmaniaveterinaria.com.br/;;;;epp;false;medio;Ter-Sex 9h-18h, Sab 9h-17h.;;
+;Animale Hospital Maua;Animale Hospital Maua;clinica_vet;hospital_24h;R. Almirante Barroso, 114 - Vila Bocaina;Mauá;1_abc;(11) 4515-5535;(11) 94669-4122;;@hovetanimale;https://hovetanimale.com.br/;;;;epp;false;alto;Hospital 24h. Clinico + Emergencial + Exames + Raio X.;;
+;Pet Shop Central Maua;Pet Shop Central Maua;pet_shop;local;R. Luis Lacava, 300;Mauá;1_abc;(11) 3421-9807;;;;;;;;me;false;medio;Pet shop central.;;
+;Petz Shopping Maua;Petz Shopping Maua;pet_shop;megaloja;Av. Gov. Mario Covas Junior, 01 - Centro;Mauá;1_abc;(11) 2181-7329;;;;https://www.petz.com.br/loja/petz-shopping-maua;;;;grande;false;alto;Rede Petz.;;
+;Tico Tico Vet Maua;Tico Tico Vet Maua;clinica_vet;clinica_pet;R. Alziro Vidoto, 3 - Jardim Maringa;Mauá;1_abc;;(11) 93407-5752;;;;;;;me;false;medio;Clinica vet e pet shop.;;
+;Pet Patas e Pelos;Pet Patas e Pelos;pet_shop;local;Av. Presidente Castelo Branco, 1510 - Jardim Zaira;Mauá;1_abc;(11) 98717-3735;;;;;;;;me;false;medio;Pet shop local.;;
