@@ -1,0 +1,63 @@
+id: p08_pat_gato3_design_system
+kind: pattern
+pillar: P08
+version: 1.0.0
+created: '2026-04-03'
+updated: '2026-04-03'
+author: n02-marketing
+domain: brand_visual_system
+quality: null
+tags:
+- pattern
+- design_system
+- brand
+- gato3
+- pb_minimal
+- pet_curadoria
+- visual_identity
+tldr: Design system PB minimalista para curadoria pet premium — tokens, componentes, aplicação multicanal.
+name: GATO³ Design System
+problem: 'Marcas de curadoria pet premium precisam equilibrar sofisticação visual com funcionalidade pet-specific. Tutores
+  urbanos (25-45, classe B-C+) rejeitam design genérico de pet shop e excesso de "fofura". Recorre em: e-commerce, marketplaces,
+  materiais B2B, social media.'
+solution: 'Tokens: PB cores + Allrounder/Kenao + 4px grid Components: ProductCard, EducationalBlock, PersonaQuote, TrustSignals
+  Application: E-commerce (curation), Marketplaces (adapted), B2B, Social'
+context: 'Marcas pet que vendem curadoria, competindo contra genéricos. Toda produção visual. Identidade inconsistente = perda
+  de positioning premium. Aplicável: e-commerce, Mercado Livre, Shopee, B2B.'
+forces:
+- 'Sofisticação vs Acessibilidade: premium sem intimidar tutores iniciantes'
+- 'Minimalismo vs Informatividade: clean mas comunicativo sobre benefícios'
+- 'Consistência vs Flexibilidade: coeso mas adaptável para múltiplos canais'
+- 'Premium vs Pet-Friendly: elevado esteticamente mas funcionalmente óbvio'
+consequences: ''
+related_patterns:
+- 'Brand Token System: design token architecture foundation'
+- 'Multicanal Consistency: identity across diverse platforms'
+- 'Premium Pet Positioning: elevated pet brand communication'
+anti_patterns:
+- 'Rainbow Pet Chaos: Multiple bright colors dilute premium positioning'
+- 'Generic Marketplace Look: Standard templates lose curated differentiation'
+- 'Component Proliferation: Unique components per use case create maintenance chaos'
+applicability: 'Use: Pet curadoria brands, urban tutors 25-45, multi-channel premium positioning NOT: Mass-market price competition,
+  single products, price-sensitive segments, vet services'
+keywords:
+- design_system
+- brand_identity
+- pet_premium
+- pb_minimal
+- tokens
+- curadoria
+- gato3
+benefits:
+- 95% brand recognition across touchpoints
+- 70% faster design production
+- Premium differentiation from generic marketplace
+liabilities:
+- May stifle seasonal campaign creativity
+- Requires partner training and maintenance
+- Some platforms resist custom implementation
+examples:
+- 'gato3.com.br: Full implementation, responsive grid'
+- 'Mercado Livre: Adapted headers, consistent photography'
+- 'B2B Catalog: Print with same typography'
+- 'Instagram: "Dicas da Ro" templates'

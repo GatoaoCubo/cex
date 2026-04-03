@@ -1,12 +1,19 @@
 {
   "mcpServers": {
+    "fetch": {
+      "command": "uvx",
+      "args": ["mcp-server-fetch", "--ignore-robots-txt"]
+    },
+    "firecrawl": {
+      "command": "npx",
+      "args": ["-y", "firecrawl-mcp"],
+      "env": {
+        "FIRECRAWL_API_KEY": "fc-4d0c587df3c44038bbf9f39e175fffd0"
+      }
+    },
     "markitdown": {
       "command": "cmd",
       "args": ["/c", "npx", "-y", "markitdown-mcp"]
-    },
-    "browser": {
-      "command": "cmd",
-      "args": ["/c", "npx", "-y", "@anthropic-ai/mcp-server-puppeteer"]
     }
   }
 }

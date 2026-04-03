@@ -11,8 +11,8 @@ cd /d "%CEX_ROOT%"
 
 set MODEL=--model claude-sonnet-4-20250514
 set FLAGS=--dangerously-skip-permissions --no-chrome
-set MCP=
-set SETTINGS=
+set MCP=--mcp-config %CEX_ROOT%\.mcp-n02.json
+set SETTINGS=--settings %CEX_ROOT%\.claude\nucleus-settings\n02.json
 
 :: ALWAYS interactive — task comes from handoff file, never CLI args
 claude %FLAGS% %MODEL% %MCP% %SETTINGS% "Voce e N02 Marketing Nucleus do CEX. Dominio: copy, ads, campanhas, brand voice. SE EXISTIR .cex/runtime/handoffs/n02_task.md LEIA E EXECUTE IMEDIATAMENTE."

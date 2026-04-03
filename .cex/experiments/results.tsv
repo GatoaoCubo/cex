@@ -5446,3 +5446,24 @@ et
 2026-04-02 17:12:14	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\output\output_readme_curriculum.md	1	8.7	1.00	discard	tldr flagged for manual review
 2026-04-02 17:12:14	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\output\output_readme_curriculum.md	2	8.7	1.00	discard	tldr flagged for manual review
 2026-04-02 17:12:15	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\output\output_readme_curriculum.md	3	8.7	1.00	discard	tldr flagged for manual review
+2026-04-02 18:12:58	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\examples\p09_rate_limit_config_create_knowledge_card_about_api_rate_limiting_and_retry_patt.md	1	8.9	1.00	keep	added density_score: 1.0
+2026-04-02 18:16:12	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\examples\p09_rate_limit_config_create_knowledge_card_about_api_rate_limiting_and_retry_patt.md	1	9.1	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-02 18:18:05	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\examples\p09_rate_limit_config_create_knowledge_card_about_api_rate_limiting_and_retry_patt.md	1	9.1	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-02 18:20:32	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\examples\p09_rate_limit_config_create_knowledge_card_about_api_rate_limiting_and_retry_patt.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-02 18:20:33	C:\Users\PC\Documents\GitHub\cex\N02_marketing\config\brand_context.md	1	8.6	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-02 18:20:34	C:\Users\PC\Documents\GitHub\cex\N02_marketing\config\brand_context.md	2	8.6	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-02 18:20:34	C:\Users\PC\Documents\GitHub\cex\N02_marketing\config\brand_context.md	3	8.6	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-02 18:21:52	C:\Users\PC\Documents\GitHub\cex\N02_marketing\config\brand_context.md	1	9.0	1.00	keep	Add strategic voice application guidelines explaining when to emphasize different voice characteristics based on marketing scenarios and customer segments to improve INSIGHT_DEPTH
+2026-04-02 18:21:53	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\config\brand_context.md	1	8.5	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-02 18:21:53	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\config\brand_context.md	2	8.5	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-02 18:21:54	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\config\brand_context.md	3	8.5	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-02 18:23:01	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\config\brand_context.md	1	9.0	1.00	keep	Add specific N04 guidance section with actionable knowledge card creation and documentation style rules based on brand pillars and Portuguese cat owner audience to improve INSIGHT_DEPTH
+2026-04-02 18:23:08	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\config\brand_context.md	1	8.9	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-02 18:23:08	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\config\brand_context.md	2	8.9	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-02 18:23:09	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\config\brand_context.md	3	8.9	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-02 18:23:26	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\config\brand_context.md	0	9.0	1.00	skip	already at target
+2026-04-02 18:23:27	C:\Users\PC\Documents\GitHub\cex\N02_marketing\config\brand_context.md	1	8.9	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-02 18:23:28	C:\Users\PC\Documents\GitHub\cex\N02_marketing\config\brand_context.md	2	8.9	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-02 18:23:28	C:\Users\PC\Documents\GitHub\cex\N02_marketing\config\brand_context.md	3	8.9	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-02 18:23:52	C:\Users\PC\Documents\GitHub\cex\N02_marketing\config\brand_context.md	0	9.0	1.00	skip	already at target
+2026-04-02 18:25:41	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\examples\p09_rate_limit_config_create_knowledge_card_about_api_rate_limiting_and_retry_patt.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists

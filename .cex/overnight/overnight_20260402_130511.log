@@ -929,3 +929,256 @@ TypeError: unsupported operand type(s) for +: 'NoneType' and 'str'
 [2026-04-02 17:12:13] [OK]   OK N02_marketing\output\output_readme_hero.md: 8.6 -> 8.9 (+0.3)
 [2026-04-02 17:12:13] [METRIC]   Mode: agent
 [2026-04-02 17:12:14] [INFO]   Evolving: N04_knowledge\output\output_readme_curriculum.md (current: 8.7)
+[2026-04-02 18:12:59] [WARN]   RATE LIMITED. Backing off 60s...
+[2026-04-02 18:16:12] [WARN]   Still rate-limited. Switching to heuristic work...
+[2026-04-02 18:16:12] [INFO]   Rate-limited. Running free heuristic evolve while waiting...
+[2026-04-02 18:16:12] [INFO] ============================================================
+[2026-04-02 18:16:12] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-02 18:16:12] [INFO] ============================================================
+[2026-04-02 18:16:12] [INFO] Found 12 artifacts below target 9
+[2026-04-02 18:16:12] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-02 18:16:12] [INFO] Farm cycle 10 complete. 0 new artifacts mined.
+[2026-04-02 18:16:12] [INFO] Artifacts still below target: 89
+[2026-04-02 18:16:12] [INFO] 
+[2026-04-02 18:16:17] [INFO] ============================================================
+[2026-04-02 18:16:17] [INFO]   FLYWHEEL CYCLE 11 / 2147483647
+[2026-04-02 18:16:17] [INFO] ============================================================
+[2026-04-02 18:16:17] [INFO] Budget remaining: 2147232168 tokens
+[2026-04-02 18:16:17] [INFO] ============================================================
+[2026-04-02 18:16:17] [INFO]   PHASE 1: BOOTSTRAP
+[2026-04-02 18:16:17] [INFO] ============================================================
+[2026-04-02 18:16:17] [INFO] N03 (Builder Architect): 0 artifacts. Bootstrapping...
+[2026-04-02 18:16:17] [SKIP]   N03/agent: done in previous run. Skip.
+[2026-04-02 18:16:17] [SKIP]   N03/system_prompt: done in previous run. Skip.
+[2026-04-02 18:16:17] [SKIP]   N03/knowledge_card: done in previous run. Skip.
+[2026-04-02 18:16:17] [SKIP]   N03/agent_card: done in previous run. Skip.
+[2026-04-02 18:16:17] [SKIP]   N03/workflow: done in previous run. Skip.
+[2026-04-02 18:16:17] [SKIP]   N03/quality_gate: done in previous run. Skip.
+[2026-04-02 18:16:17] [SKIP]   N03/scoring_rubric: done in previous run. Skip.
+[2026-04-02 18:16:17] [SKIP]   N03/dispatch_rule: done in previous run. Skip.
+[2026-04-02 18:16:17] [SKIP]   N03/schema: done in previous run. Skip.
+[2026-04-02 18:16:17] [SKIP]   N03/output_template: done in previous run. Skip.
+[2026-04-02 18:16:17] [SKIP]   N03/prompt_template: done in previous run. Skip.
+[2026-04-02 18:16:17] [INFO] N05 (DevOps Engineer): 0 artifacts. Bootstrapping...
+[2026-04-02 18:16:17] [SKIP]   N05/agent: done in previous run. Skip.
+[2026-04-02 18:16:17] [SKIP]   N05/system_prompt: done in previous run. Skip.
+[2026-04-02 18:16:17] [SKIP]   N05/knowledge_card: done in previous run. Skip.
+[2026-04-02 18:16:17] [SKIP]   N05/agent_card: done in previous run. Skip.
+[2026-04-02 18:16:17] [SKIP]   N05/workflow: done in previous run. Skip.
+[2026-04-02 18:16:17] [SKIP]   N05/quality_gate: done in previous run. Skip.
+[2026-04-02 18:16:17] [SKIP]   N05/scoring_rubric: done in previous run. Skip.
+[2026-04-02 18:16:17] [SKIP]   N05/dispatch_rule: done in previous run. Skip.
+[2026-04-02 18:16:17] [SKIP]   N05/schema: done in previous run. Skip.
+[2026-04-02 18:16:17] [SKIP]   N05/output_template: done in previous run. Skip.
+[2026-04-02 18:16:17] [SKIP]   N05/prompt_template: done in previous run. Skip.
+[2026-04-02 18:16:17] [INFO] N06 (Brand Architect): 0 artifacts. Bootstrapping...
+[2026-04-02 18:16:17] [SKIP]   N06/agent: done in previous run. Skip.
+[2026-04-02 18:16:17] [SKIP]   N06/system_prompt: done in previous run. Skip.
+[2026-04-02 18:16:17] [SKIP]   N06/knowledge_card: done in previous run. Skip.
+[2026-04-02 18:16:17] [SKIP]   N06/agent_card: done in previous run. Skip.
+[2026-04-02 18:16:18] [SKIP]   N06/workflow: done in previous run. Skip.
+[2026-04-02 18:16:18] [SKIP]   N06/quality_gate: done in previous run. Skip.
+[2026-04-02 18:16:18] [SKIP]   N06/scoring_rubric: done in previous run. Skip.
+[2026-04-02 18:16:18] [SKIP]   N06/dispatch_rule: done in previous run. Skip.
+[2026-04-02 18:16:18] [SKIP]   N06/schema: done in previous run. Skip.
+[2026-04-02 18:16:18] [SKIP]   N06/output_template: done in previous run. Skip.
+[2026-04-02 18:16:18] [SKIP]   N06/prompt_template: done in previous run. Skip.
+[2026-04-02 18:16:18] [INFO] N07 (Mission Control): 0 artifacts. Bootstrapping...
+[2026-04-02 18:16:18] [SKIP]   N07/agent: done in previous run. Skip.
+[2026-04-02 18:16:18] [SKIP]   N07/system_prompt: done in previous run. Skip.
+[2026-04-02 18:16:18] [SKIP]   N07/knowledge_card: done in previous run. Skip.
+[2026-04-02 18:16:18] [SKIP]   N07/agent_card: done in previous run. Skip.
+[2026-04-02 18:16:18] [SKIP]   N07/workflow: done in previous run. Skip.
+[2026-04-02 18:16:18] [SKIP]   N07/quality_gate: done in previous run. Skip.
+[2026-04-02 18:16:18] [SKIP]   N07/scoring_rubric: done in previous run. Skip.
+[2026-04-02 18:16:18] [SKIP]   N07/dispatch_rule: done in previous run. Skip.
+[2026-04-02 18:16:18] [SKIP]   N07/schema: done in previous run. Skip.
+[2026-04-02 18:16:18] [SKIP]   N07/output_template: done in previous run. Skip.
+[2026-04-02 18:16:18] [SKIP]   N07/prompt_template: done in previous run. Skip.
+[2026-04-02 18:16:18] [INFO] Bootstrap complete. 103 artifacts created.
+[2026-04-02 18:16:18] [INFO] ============================================================
+[2026-04-02 18:16:18] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-02 18:16:18] [INFO] ============================================================
+[2026-04-02 18:16:18] [INFO] Found 12 artifacts below target 9
+[2026-04-02 18:16:18] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-02 18:16:18] [INFO] ============================================================
+[2026-04-02 18:16:18] [INFO]   PHASE 3: AUTO CYCLE
+[2026-04-02 18:16:18] [INFO] ============================================================
+[2026-04-02 18:16:18] [INFO] Running cex_auto.py cycle (max 429446 actions)
+[2026-04-02 18:16:24] [INFO] python.exe : Exception in thread Thread-5 (_readerthread):
+No C:\Users\PC\Documents\GitHub\cex\boot\overnight.ps1:499 caractere:19
++ ...   $result = & $PYTHON "$CEX_ROOT\_tools\cex_auto.py" cycle --max $max ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Exception in th..._readerthread)::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Traceback (most recent call last):
+  File "C:\Users\PC\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Users\PC\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\PC\AppData\Local\Programs\Python\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "C:\Users\PC\AppData\Local\Programs\Python\Python312\Lib\encodings\cp1252.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x9d in position 3: character maps to <undefined>
+
+============================================================
+  CEX AUTO CYCLE ÔÇö EXECUTE
+============================================================
+
+­ƒôí Scanning system...
+Traceback (most recent call last):
+  File "C:\Users\PC\Documents\GitHub\cex\_tools\cex_auto.py", line 387, in <module>
+    main()
+  File "C:\Users\PC\Documents\GitHub\cex\_tools\cex_auto.py", line 383, in main
+    run_cycle(max_actions=args.max, dry_run=args.dry_run)
+  File "C:\Users\PC\Documents\GitHub\cex\_tools\cex_auto.py", line 280, in run_cycle
+    scan = scan_system()
+           ^^^^^^^^^^^^^
+  File "C:\Users\PC\Documents\GitHub\cex\_tools\cex_auto.py", line 77, in scan_system
+    full = r.stdout + r.stderr
+           ~~~~~~~~~^~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'NoneType' and 'str'
+
+[2026-04-02 18:16:24] [INFO] ============================================================
+[2026-04-02 18:16:24] [INFO]   PHASE 4: FARM (mining knowledge until rate-limited)
+[2026-04-02 18:16:24] [INFO] ============================================================
+[2026-04-02 18:16:24] [INFO]   FARM N05: create knowledge card about API rate limiting and retry patt...
+[2026-04-02 18:18:05] [WARN]   RATE LIMITED. Backing off 60s...
+[2026-04-02 18:20:32] [WARN]   Still rate-limited. Switching to heuristic work...
+[2026-04-02 18:20:32] [INFO]   Rate-limited. Running free heuristic evolve while waiting...
+[2026-04-02 18:20:32] [INFO] ============================================================
+[2026-04-02 18:20:32] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-02 18:20:32] [INFO] ============================================================
+[2026-04-02 18:20:33] [INFO] Found 14 artifacts below target 9
+[2026-04-02 18:20:33] [INFO]   Evolving: N02_marketing\config\brand_context.md (current: 0)
+[2026-04-02 18:21:52] [METRIC] Tokens: +1852 (total: 253331/2147483647)
+[2026-04-02 18:21:52] [OK]   OK N02_marketing\config\brand_context.md: 0 -> 9 (+9)
+[2026-04-02 18:21:52] [METRIC]   Mode: agent
+[2026-04-02 18:21:52] [INFO]   Evolving: N04_knowledge\config\brand_context.md (current: 0)
+[2026-04-02 18:23:01] [METRIC] Tokens: +1391 (total: 254722/2147483647)
+[2026-04-02 18:23:01] [OK]   OK N04_knowledge\config\brand_context.md: 0 -> 9 (+9)
+[2026-04-02 18:23:01] [METRIC]   Mode: agent
+[2026-04-02 18:23:02] [INFO] Evolve complete. 2 processed, 2 improved.
+[2026-04-02 18:23:02] [INFO] Farm cycle 11 complete. 0 new artifacts mined.
+[2026-04-02 18:23:02] [INFO] Artifacts still below target: 91
+[2026-04-02 18:23:02] [INFO] 
+[2026-04-02 18:23:07] [INFO] ============================================================
+[2026-04-02 18:23:07] [INFO]   FLYWHEEL CYCLE 12 / 2147483647
+[2026-04-02 18:23:07] [INFO] ============================================================
+[2026-04-02 18:23:07] [INFO] Budget remaining: 2147228925 tokens
+[2026-04-02 18:23:07] [INFO] ============================================================
+[2026-04-02 18:23:07] [INFO]   PHASE 1: BOOTSTRAP
+[2026-04-02 18:23:07] [INFO] ============================================================
+[2026-04-02 18:23:07] [INFO] N03 (Builder Architect): 0 artifacts. Bootstrapping...
+[2026-04-02 18:23:07] [SKIP]   N03/agent: done in previous run. Skip.
+[2026-04-02 18:23:07] [SKIP]   N03/system_prompt: done in previous run. Skip.
+[2026-04-02 18:23:07] [SKIP]   N03/knowledge_card: done in previous run. Skip.
+[2026-04-02 18:23:07] [SKIP]   N03/agent_card: done in previous run. Skip.
+[2026-04-02 18:23:07] [SKIP]   N03/workflow: done in previous run. Skip.
+[2026-04-02 18:23:07] [SKIP]   N03/quality_gate: done in previous run. Skip.
+[2026-04-02 18:23:07] [SKIP]   N03/scoring_rubric: done in previous run. Skip.
+[2026-04-02 18:23:07] [SKIP]   N03/dispatch_rule: done in previous run. Skip.
+[2026-04-02 18:23:07] [SKIP]   N03/schema: done in previous run. Skip.
+[2026-04-02 18:23:07] [SKIP]   N03/output_template: done in previous run. Skip.
+[2026-04-02 18:23:07] [SKIP]   N03/prompt_template: done in previous run. Skip.
+[2026-04-02 18:23:07] [INFO] N05 (DevOps Engineer): 0 artifacts. Bootstrapping...
+[2026-04-02 18:23:07] [SKIP]   N05/agent: done in previous run. Skip.
+[2026-04-02 18:23:07] [SKIP]   N05/system_prompt: done in previous run. Skip.
+[2026-04-02 18:23:07] [SKIP]   N05/knowledge_card: done in previous run. Skip.
+[2026-04-02 18:23:07] [SKIP]   N05/agent_card: done in previous run. Skip.
+[2026-04-02 18:23:07] [SKIP]   N05/workflow: done in previous run. Skip.
+[2026-04-02 18:23:07] [SKIP]   N05/quality_gate: done in previous run. Skip.
+[2026-04-02 18:23:07] [SKIP]   N05/scoring_rubric: done in previous run. Skip.
+[2026-04-02 18:23:07] [SKIP]   N05/dispatch_rule: done in previous run. Skip.
+[2026-04-02 18:23:07] [SKIP]   N05/schema: done in previous run. Skip.
+[2026-04-02 18:23:07] [SKIP]   N05/output_template: done in previous run. Skip.
+[2026-04-02 18:23:07] [SKIP]   N05/prompt_template: done in previous run. Skip.
+[2026-04-02 18:23:07] [INFO] N06 (Brand Architect): 0 artifacts. Bootstrapping...
+[2026-04-02 18:23:07] [SKIP]   N06/agent: done in previous run. Skip.
+[2026-04-02 18:23:07] [SKIP]   N06/system_prompt: done in previous run. Skip.
+[2026-04-02 18:23:07] [SKIP]   N06/knowledge_card: done in previous run. Skip.
+[2026-04-02 18:23:07] [SKIP]   N06/agent_card: done in previous run. Skip.
+[2026-04-02 18:23:07] [SKIP]   N06/workflow: done in previous run. Skip.
+[2026-04-02 18:23:07] [SKIP]   N06/quality_gate: done in previous run. Skip.
+[2026-04-02 18:23:07] [SKIP]   N06/scoring_rubric: done in previous run. Skip.
+[2026-04-02 18:23:07] [SKIP]   N06/dispatch_rule: done in previous run. Skip.
+[2026-04-02 18:23:07] [SKIP]   N06/schema: done in previous run. Skip.
+[2026-04-02 18:23:07] [SKIP]   N06/output_template: done in previous run. Skip.
+[2026-04-02 18:23:07] [SKIP]   N06/prompt_template: done in previous run. Skip.
+[2026-04-02 18:23:07] [INFO] N07 (Mission Control): 0 artifacts. Bootstrapping...
+[2026-04-02 18:23:07] [SKIP]   N07/agent: done in previous run. Skip.
+[2026-04-02 18:23:07] [SKIP]   N07/system_prompt: done in previous run. Skip.
+[2026-04-02 18:23:07] [SKIP]   N07/knowledge_card: done in previous run. Skip.
+[2026-04-02 18:23:07] [SKIP]   N07/agent_card: done in previous run. Skip.
+[2026-04-02 18:23:07] [SKIP]   N07/workflow: done in previous run. Skip.
+[2026-04-02 18:23:07] [SKIP]   N07/quality_gate: done in previous run. Skip.
+[2026-04-02 18:23:07] [SKIP]   N07/scoring_rubric: done in previous run. Skip.
+[2026-04-02 18:23:07] [SKIP]   N07/dispatch_rule: done in previous run. Skip.
+[2026-04-02 18:23:07] [SKIP]   N07/schema: done in previous run. Skip.
+[2026-04-02 18:23:07] [SKIP]   N07/output_template: done in previous run. Skip.
+[2026-04-02 18:23:07] [SKIP]   N07/prompt_template: done in previous run. Skip.
+[2026-04-02 18:23:07] [INFO] Bootstrap complete. 103 artifacts created.
+[2026-04-02 18:23:07] [INFO] ============================================================
+[2026-04-02 18:23:07] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-02 18:23:07] [INFO] ============================================================
+[2026-04-02 18:23:07] [INFO] Found 14 artifacts below target 9
+[2026-04-02 18:23:07] [INFO]   Evolving: N04_knowledge\config\brand_context.md (current: 8.5)
+[2026-04-02 18:23:26] [METRIC] Tokens: +0 (total: 254722/2147483647)
+[2026-04-02 18:23:26] [OK]   OK N04_knowledge\config\brand_context.md: 8.5 -> 9 (+0.5)
+[2026-04-02 18:23:26] [METRIC]   Mode: heuristic
+[2026-04-02 18:23:27] [INFO]   Evolving: N02_marketing\config\brand_context.md (current: 8.6)
+[2026-04-02 18:23:52] [METRIC] Tokens: +0 (total: 254722/2147483647)
+[2026-04-02 18:23:52] [OK]   OK N02_marketing\config\brand_context.md: 8.6 -> 9 (+0.4)
+[2026-04-02 18:23:52] [METRIC]   Mode: heuristic
+[2026-04-02 18:23:53] [INFO] Evolve complete. 2 processed, 2 improved.
+[2026-04-02 18:23:53] [INFO] ============================================================
+[2026-04-02 18:23:53] [INFO]   PHASE 3: AUTO CYCLE
+[2026-04-02 18:23:53] [INFO] ============================================================
+[2026-04-02 18:23:53] [INFO] Running cex_auto.py cycle (max 429446 actions)
+[2026-04-02 18:24:00] [INFO] python.exe : Exception in thread Thread-5 (_readerthread):
+No C:\Users\PC\Documents\GitHub\cex\boot\overnight.ps1:499 caractere:19
++ ...   $result = & $PYTHON "$CEX_ROOT\_tools\cex_auto.py" cycle --max $max ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Exception in th..._readerthread)::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Traceback (most recent call last):
+  File "C:\Users\PC\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Users\PC\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\PC\AppData\Local\Programs\Python\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "C:\Users\PC\AppData\Local\Programs\Python\Python312\Lib\encodings\cp1252.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x9d in position 3: character maps to <undefined>
+
+============================================================
+  CEX AUTO CYCLE ÔÇö EXECUTE
+============================================================
+
+­ƒôí Scanning system...
+Traceback (most recent call last):
+  File "C:\Users\PC\Documents\GitHub\cex\_tools\cex_auto.py", line 387, in <module>
+    main()
+  File "C:\Users\PC\Documents\GitHub\cex\_tools\cex_auto.py", line 383, in main
+    run_cycle(max_actions=args.max, dry_run=args.dry_run)
+  File "C:\Users\PC\Documents\GitHub\cex\_tools\cex_auto.py", line 280, in run_cycle
+    scan = scan_system()
+           ^^^^^^^^^^^^^
+  File "C:\Users\PC\Documents\GitHub\cex\_tools\cex_auto.py", line 77, in scan_system
+    full = r.stdout + r.stderr
+           ~~~~~~~~~^~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'NoneType' and 'str'
+
+[2026-04-02 18:24:00] [INFO] ============================================================
+[2026-04-02 18:24:00] [INFO]   PHASE 4: FARM (mining knowledge until rate-limited)
+[2026-04-02 18:24:00] [INFO] ============================================================
+[2026-04-02 18:24:00] [INFO]   FARM N05: create knowledge card about API rate limiting and retry patt...
+[2026-04-02 18:25:41] [WARN]   RATE LIMITED. Backing off 60s...

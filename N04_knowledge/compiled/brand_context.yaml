@@ -1,0 +1,43 @@
+id: brand_context_n04
+kind: config
+pillar: P09
+title: Brand Context for N04
+version: 1.0.0
+created: 2026-04-01
+author: n06_commercial
+quality: 8.9
+tags:
+- brand
+- context
+- n04
+tldr: Auto-generated brand context for N04 from brand_config.yaml
+density_score: 0.9
+brand_context_injected_by_brand_propagate_py: ''
+source_cex_brand_brand_config_yaml:
+- 'BRAND_CATEGORY: Curadoria de bem-estar felino + casa multi-espécie harmonizada'
+- 'BRAND_CONTENT_PILLARS: Produtos em destaque (40%) — curadoria contextualizada, Educacional (30%) — ciência felina acessível
+  via ''Você sabia?'', Dicas da Ro (20%) — passos práticos e acolhedores, Tendências (10%) — mercado pet e design felino'
+- 'BRAND_LANGUAGE: pt-BR'
+- 'BRAND_NAME: GATO³'
+n04_knowledge_creation_guidelines: ''
+content_pillar_distribution_follow_these_percentages: '| Pillar | Weight | N04 Application |
+
+  |--------|--------|----------------|
+
+  | Produtos (40%) | Dominant | Focus knowledge cards on product selection criteria, compatibility guides |
+
+  | Educacional (30%) | Strong | Include "Você sabia?" sections with feline science facts |
+
+  | Dicas da Ro (20%) | Supporting | Add step-by-step implementation guides, troubleshooting |
+
+  | Tendências (10%) | Minimal | Reference market trends only when directly relevant |'
+documentation_style_for_portuguese_cat_owners:
+- 'Tone: Sofisticado-acolhedor — blend expertise with warmth'
+- 'Structure: Lead with practical benefits, support with science'
+- 'Language patterns: Use "seu gato" (familiar), avoid clinical veterinary terms'
+- 'Examples: Always use Brazilian household contexts (apartamentos, varandas)'
+knowledge_card_adaptation_rules:
+- 'Title format: "Como [action] para [benefit] do seu gato"'
+- 'Opening: Start with cat owner pain point, not product features'
+- 'Chunking: Break complex topics into "Você sabia?" callouts'
+- 'Validation: Include Ro''s voice for reassurance ("Lembre-se...")'
