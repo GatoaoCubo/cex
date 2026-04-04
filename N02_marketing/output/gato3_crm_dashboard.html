@@ -259,7 +259,8 @@ const CRM_DATA = [{"cnpj":"19.055.885/0002-35","nome":"Pet Para Pets","seg":"pet
 
 // State
 let activeFilters = {pot:'all', seg:'all', city:'all', status:null};
-let outreachStatus = JSON.parse(localStorage.getItem('gato3_crm_status')||'{}');
+let outreachStatus = {};
+try { outreachStatus = JSON.parse(localStorage.getItem('gato3_crm_status')||'{}'); } catch(e) {}
 
 const SEG_LABELS = {
     pet_shop:'Pet Shop', clinica_vet:'Clinica Vet', banho_tosa:'Banho & Tosa',
@@ -434,7 +435,7 @@ function esc(s) { return s ? s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replac
 
 function setStatus(name, status) {
     outreachStatus[name] = status;
-    localStorage.setItem('gato3_crm_status', JSON.stringify(outreachStatus));
+    try { localStorage.setItem('gato3_crm_status', JSON.stringify(outreachStatus)); } catch(e) {}
     renderSidebarStats();
     renderPipeline();
 }
