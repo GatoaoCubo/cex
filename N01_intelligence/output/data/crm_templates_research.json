@@ -1,0 +1,651 @@
+{
+  "meta": {
+    "mission": "CRM Dashboard & Contacts Table Template Research",
+    "nucleus": "N01",
+    "brand": "GATO3",
+    "target_stack": "React + Shadcn/UI + Supabase + Tailwind CSS + TanStack Table",
+    "date": "2026-04-04",
+    "total_templates": 10,
+    "recommendation": "atomic-crm",
+    "recommendation_reason": "Only open-source CRM that matches ALL 5 stack requirements (React, Shadcn, Supabase, Tailwind, contacts+pipeline+dashboard). Fork and adapt."
+  },
+  "templates": [
+    {
+      "id": "atomic-crm",
+      "name": "Atomic CRM",
+      "url": "https://github.com/marmelab/atomic-crm",
+      "demo_url": "https://marmelab.com/atomic-crm-demo",
+      "docs_url": "https://marmelab.com/atomic-crm/doc/",
+      "stars": 905,
+      "license": "MIT",
+      "last_release": "v1.5.0 (2026-03-10)",
+      "screenshot_desc": "Full CRM with sidebar navigation, contacts list with search/filter, deals kanban pipeline, activity timeline, dashboard with metrics cards. Clean Shadcn aesthetic with light/dark mode.",
+      "tech_stack": {
+        "framework": "React 19 + Vite",
+        "ui": "Shadcn Admin Kit (shadcn/ui)",
+        "styling": "Tailwind CSS",
+        "backend": "Supabase (PostgreSQL + REST API + Edge Functions)",
+        "state": "React Query",
+        "forms": "React Hook Form",
+        "routing": "React Router",
+        "testing": "Vitest + Playwright",
+        "language": "TypeScript (93.9%)",
+        "auth": "Google, Azure, Keycloak, Auth0 via Supabase"
+      },
+      "crm_features": {
+        "contacts_table": true,
+        "contacts_filters": true,
+        "contacts_detail_panel": true,
+        "deals_pipeline_kanban": true,
+        "dashboard_metrics": true,
+        "tasks_reminders": true,
+        "notes": true,
+        "activity_history": true,
+        "companies": true,
+        "import_export": true,
+        "custom_fields": true,
+        "role_based_access": true,
+        "email_capture": true
+      },
+      "database_schema": {
+        "tables": ["contacts", "companies", "deals", "tasks", "notes"],
+        "views": ["contacts_summary"],
+        "filter_convention": "ra-data-postgrest (field@operator pattern)",
+        "sample_data": "500 contacts, 55 companies included"
+      },
+      "compatibility": {
+        "shadcn": 10,
+        "supabase": 10,
+        "tailwind": 10,
+        "tanstack_table": 6,
+        "overall_stack_match": 9.5
+      },
+      "pros": [
+        "EXACT stack match: React + Shadcn + Supabase + Tailwind",
+        "Full CRM out of the box (contacts, deals, tasks, notes, companies)",
+        "Kanban pipeline for deals/sales visualization",
+        "Sample dataset (500 contacts) for immediate testing",
+        "Shadcn Registry integration (shadcn add to update components)",
+        "Built by Marmelab (creators of react-admin) — production-grade quality",
+        "Database views (contacts_summary) simplify queries",
+        "Custom fields via SQL migrations",
+        "MIT license, self-hostable, static SPA frontend",
+        "Active development (v1.5.0 March 2026)"
+      ],
+      "cons": [
+        "Uses react-admin internally (opinionated data layer)",
+        "905 stars (smaller community vs generic dashboards)",
+        "TanStack Table not used directly (react-admin has its own data grid)",
+        "May need refactoring to extract CRM components without react-admin",
+        "Contacts filter uses ra-data-postgrest convention (may differ from direct Supabase queries)"
+      ],
+      "effort_to_adapt": {
+        "score": "LOW-MEDIUM",
+        "hours": "8-16h",
+        "notes": "Fork → adapt Supabase schema to GATO3 contacts (cidade, segmento, potencial) → customize dashboard cards → rebrand. If react-admin is too opinionated, extract Shadcn components and Supabase schema separately."
+      }
+    },
+    {
+      "id": "nextcrm",
+      "name": "NextCRM",
+      "url": "https://github.com/pdovhomilja/nextcrm-app",
+      "demo_url": null,
+      "stars": 568,
+      "license": "MIT",
+      "last_release": null,
+      "screenshot_desc": "Enterprise CRM with sidebar, accounts/contacts/leads/opportunities modules, dashboard with Tremor charts, unified search, AI enrichment features.",
+      "tech_stack": {
+        "framework": "Next.js 16 + React 19",
+        "ui": "Shadcn/UI",
+        "styling": "Tailwind CSS v4",
+        "backend": "PostgreSQL 17+ with Prisma 7 ORM",
+        "state": "TanStack React Query",
+        "tables": "TanStack React Table",
+        "charts": "Tremor",
+        "ai": "OpenAI embeddings + Claude Sonnet 4.6 + E2B sandbox",
+        "email": "Resend + React Email + IMAP/SMTP",
+        "jobs": "Inngest",
+        "language": "TypeScript"
+      },
+      "crm_features": {
+        "contacts_table": true,
+        "contacts_filters": true,
+        "contacts_detail_panel": true,
+        "deals_pipeline_kanban": false,
+        "dashboard_metrics": true,
+        "tasks_reminders": true,
+        "notes": true,
+        "activity_history": true,
+        "companies": true,
+        "import_export": false,
+        "custom_fields": false,
+        "ai_enrichment": true,
+        "vector_search": true,
+        "email_client": true,
+        "mcp_server": true
+      },
+      "compatibility": {
+        "shadcn": 10,
+        "supabase": 3,
+        "tailwind": 10,
+        "tanstack_table": 10,
+        "overall_stack_match": 7.0
+      },
+      "pros": [
+        "Full CRM with 5 modules (accounts, contacts, leads, opportunities, contracts)",
+        "TanStack Table with server-side filtering",
+        "AI enrichment (contact research via E2B sandbox)",
+        "Vector search with pgvector for semantic similarity",
+        "Tremor charts for dashboard",
+        "MCP Server (25 tools across 5 CRM modules)",
+        "Email client integration (IMAP/SMTP)",
+        "Modern stack (Next.js 16, React 19, TS)"
+      ],
+      "cons": [
+        "NO Supabase — uses PostgreSQL + Prisma (would need migration)",
+        "Heavier stack (Inngest, E2B, Resend, pgvector)",
+        "568 stars (smaller community)",
+        "More complex setup than needed for simple CRM",
+        "Overkill AI features for GATO3 use case"
+      ],
+      "effort_to_adapt": {
+        "score": "HIGH",
+        "hours": "24-40h",
+        "notes": "Would need to replace Prisma with Supabase client, migrate schema, strip unnecessary AI features. Better to use as reference for TanStack Table patterns + Tremor dashboard layouts than as a direct fork."
+      }
+    },
+    {
+      "id": "shadcn-admin",
+      "name": "Shadcn Admin",
+      "url": "https://github.com/satnaing/shadcn-admin",
+      "demo_url": "https://shadcn-admin.netlify.app/",
+      "stars": 11600,
+      "license": "MIT",
+      "screenshot_desc": "Clean admin dashboard with collapsible sidebar, data tables with search/sort, charts area, settings pages. Light/dark mode, RTL support. No CRM-specific views but excellent component library.",
+      "tech_stack": {
+        "framework": "React + Vite",
+        "ui": "Shadcn/UI (with RTL customizations)",
+        "styling": "Tailwind CSS",
+        "routing": "TanStack Router",
+        "auth": "Clerk",
+        "icons": "Lucide + Tabler",
+        "language": "TypeScript (98%)"
+      },
+      "crm_features": {
+        "contacts_table": false,
+        "contacts_filters": false,
+        "contacts_detail_panel": false,
+        "deals_pipeline_kanban": false,
+        "dashboard_metrics": true,
+        "tasks_reminders": false,
+        "generic_data_tables": true,
+        "global_search": true,
+        "settings_pages": true
+      },
+      "compatibility": {
+        "shadcn": 10,
+        "supabase": 0,
+        "tailwind": 10,
+        "tanstack_table": 7,
+        "overall_stack_match": 6.5
+      },
+      "pros": [
+        "Most popular shadcn dashboard (11.6k stars)",
+        "Excellent component quality and RTL support",
+        "10+ pre-built pages",
+        "Global search (Cmd+K)",
+        "Light/dark mode + 6 themes",
+        "Great sidebar component",
+        "Clean, minimal aesthetic matches GATO3 brand"
+      ],
+      "cons": [
+        "NOT a CRM — generic admin dashboard",
+        "No Supabase integration",
+        "No contacts management",
+        "No pipeline/kanban",
+        "Would need to build CRM features from scratch",
+        "Uses TanStack Router (not React Router or Next.js)"
+      ],
+      "effort_to_adapt": {
+        "score": "MEDIUM-HIGH",
+        "hours": "20-32h",
+        "notes": "Best used as LAYOUT reference — steal sidebar, theme system, and page structure. Build CRM features on top using Atomic CRM patterns + tablecn for data tables."
+      }
+    },
+    {
+      "id": "next-shadcn-dashboard-starter",
+      "name": "Next Shadcn Dashboard Starter",
+      "url": "https://github.com/Kiranism/next-shadcn-dashboard-starter",
+      "demo_url": null,
+      "stars": 6200,
+      "license": "MIT",
+      "screenshot_desc": "Dashboard with analytics overview, Recharts graphs, metric cards, data tables with server-side search/filter/pagination via TanStack Table. Sidebar with multi-tenant workspace selector.",
+      "tech_stack": {
+        "framework": "Next.js 16 + React 19",
+        "ui": "Shadcn/UI",
+        "styling": "Tailwind CSS v4",
+        "tables": "TanStack Data Tables + Dice Table",
+        "state": "TanStack React Query + Zustand + nuqs (URL state)",
+        "forms": "TanStack Form + Zod",
+        "charts": "Recharts + Evil Charts",
+        "auth": "Clerk (multi-tenant RBAC)",
+        "monitoring": "Sentry",
+        "language": "TypeScript"
+      },
+      "crm_features": {
+        "contacts_table": false,
+        "contacts_filters": false,
+        "contacts_detail_panel": false,
+        "deals_pipeline_kanban": false,
+        "dashboard_metrics": true,
+        "generic_data_tables": true,
+        "server_side_filtering": true,
+        "url_state_persistence": true,
+        "multi_tenant": true
+      },
+      "compatibility": {
+        "shadcn": 10,
+        "supabase": 0,
+        "tailwind": 10,
+        "tanstack_table": 10,
+        "overall_stack_match": 7.0
+      },
+      "pros": [
+        "6.2k stars — very popular and maintained",
+        "TanStack Table with server-side search/filter/pagination",
+        "URL state via nuqs (shareable filtered views)",
+        "Recharts for analytics dashboard",
+        "Multi-tenant RBAC via Clerk",
+        "Excellent reference for dashboard + data table patterns",
+        "Next.js 16 + React 19 (latest stack)"
+      ],
+      "cons": [
+        "NOT a CRM — generic dashboard starter",
+        "No Supabase integration",
+        "No contacts management",
+        "Clerk auth (would need to replace with Supabase Auth)",
+        "More starter than template — needs building on top"
+      ],
+      "effort_to_adapt": {
+        "score": "MEDIUM",
+        "hours": "16-24h",
+        "notes": "Excellent base for dashboard layout + TanStack Table patterns. Add Supabase integration, build contacts table on the existing data table infrastructure, add CRM-specific pages."
+      }
+    },
+    {
+      "id": "tablecn",
+      "name": "tablecn (sadmann7)",
+      "url": "https://github.com/sadmann7/tablecn",
+      "demo_url": null,
+      "stars": 6000,
+      "license": "MIT",
+      "screenshot_desc": "Advanced data table with Notion/Airtable-like filtering, Linear-style command palette filter menu, dynamic toolbar with search/faceted filters, row selection with action bar. Server-side sorting/filtering/pagination.",
+      "tech_stack": {
+        "framework": "Next.js",
+        "ui": "Shadcn/UI",
+        "styling": "Tailwind CSS",
+        "tables": "TanStack/react-table",
+        "database": "PlanetScale",
+        "orm": "Drizzle ORM",
+        "validation": "Zod",
+        "language": "TypeScript (99.2%)"
+      },
+      "crm_features": {
+        "contacts_table": false,
+        "contacts_filters": false,
+        "contacts_detail_panel": false,
+        "advanced_filtering": true,
+        "faceted_filters": true,
+        "command_palette_filters": true,
+        "server_side_sorting": true,
+        "server_side_filtering": true,
+        "server_side_pagination": true,
+        "row_selection": true,
+        "batch_actions": true,
+        "auto_generated_filters": true,
+        "dynamic_toolbar": true
+      },
+      "compatibility": {
+        "shadcn": 10,
+        "supabase": 5,
+        "tailwind": 10,
+        "tanstack_table": 10,
+        "overall_stack_match": 8.0
+      },
+      "pros": [
+        "6k stars — most popular shadcn data table",
+        "Notion/Airtable-like advanced filtering (EXACTLY what CRM needs)",
+        "Linear-style command palette for filter menu",
+        "Auto-generated filters from column definitions",
+        "Server-side sorting, filtering, pagination",
+        "Row selection with batch action bar",
+        "Dynamic toolbar adapts to data",
+        "Drop-in component for any shadcn project"
+      ],
+      "cons": [
+        "TABLE ONLY — no dashboard, no CRM, no layout",
+        "Uses PlanetScale + Drizzle (not Supabase directly)",
+        "Would need to swap data layer to Supabase",
+        "Focused component, not full template"
+      ],
+      "effort_to_adapt": {
+        "score": "LOW",
+        "hours": "4-8h",
+        "notes": "BEST contacts table component. Extract table component, swap PlanetScale for Supabase, define columns for contacts (nome, cidade, segmento, potencial, telefone, whatsapp). Combine with Atomic CRM for full app or shadcn-admin for layout."
+      }
+    },
+    {
+      "id": "data-table-filters",
+      "name": "OpenStatus Data Table Filters",
+      "url": "https://github.com/openstatusHQ/data-table-filters",
+      "demo_url": "https://data-table.openstatus.dev/",
+      "stars": 1900,
+      "license": "MIT",
+      "screenshot_desc": "Minimalist data table with schema-based filters, URL state persistence via nuqs, infinite scroll option, faceted filtering. Clean shadcn aesthetic with muted colors and monospace typography.",
+      "tech_stack": {
+        "framework": "Next.js + React",
+        "ui": "Shadcn/UI + Primer",
+        "styling": "Tailwind CSS",
+        "tables": "TanStack Table",
+        "state": "TanStack Query + Zustand + nuqs",
+        "database": "Drizzle ORM (with Supabase PostgreSQL)",
+        "validation": "Zod",
+        "language": "TypeScript (91.2%)"
+      },
+      "crm_features": {
+        "contacts_table": false,
+        "schema_based_columns": true,
+        "faceted_search": true,
+        "url_state_persistence": true,
+        "infinite_scroll": true,
+        "server_side_filtering": true,
+        "pre_built_cell_renderers": true,
+        "multiple_state_adapters": true
+      },
+      "compatibility": {
+        "shadcn": 10,
+        "supabase": 8,
+        "tailwind": 10,
+        "tanstack_table": 10,
+        "overall_stack_match": 8.5
+      },
+      "pros": [
+        "Schema-based approach (define columns once, get filters auto-generated)",
+        "BYOS (Bring Your Own Store) — works with nuqs, zustand, or custom",
+        "Already uses Drizzle + Supabase PostgreSQL in examples",
+        "8 pre-built cell renderers (badges, codes, timestamps)",
+        "Infinite scroll + traditional pagination",
+        "URL state persistence (shareable filtered views)",
+        "Claude Code AI agent skill included",
+        "Playbook approach: copy patterns, not install library"
+      ],
+      "cons": [
+        "TABLE ONLY — no dashboard or CRM layout",
+        "1.9k stars (newer project)",
+        "Schema patterns are opinionated (logLevel, httpStatus presets)",
+        "Would need to define CRM-specific filter presets",
+        "More complex setup than tablecn for simple use cases"
+      ],
+      "effort_to_adapt": {
+        "score": "LOW-MEDIUM",
+        "hours": "6-12h",
+        "notes": "Schema-based approach is excellent for CRM: define contacts schema with cidade/segmento/potencial columns, get filters auto-generated. Already has Supabase example. Best combined with a dashboard template."
+      }
+    },
+    {
+      "id": "tremor-dashboard-oss",
+      "name": "Tremor Dashboard OSS",
+      "url": "https://github.com/tremorlabs/template-dashboard-oss",
+      "demo_url": null,
+      "stars": 504,
+      "license": "Apache-2.0",
+      "screenshot_desc": "Clean SaaS dashboard with KPI metric cards, line/bar/area charts, data visualization panels. Professional design with dark/light mode. No data tables.",
+      "tech_stack": {
+        "framework": "Next.js",
+        "ui": "Tremor Raw (Radix UI based)",
+        "styling": "Tailwind CSS",
+        "charts": "Recharts",
+        "language": "TypeScript (98.7%)"
+      },
+      "crm_features": {
+        "contacts_table": false,
+        "dashboard_metrics": true,
+        "kpi_cards": true,
+        "charts": true,
+        "area_charts": true,
+        "bar_charts": true,
+        "donut_charts": true,
+        "sparklines": true
+      },
+      "compatibility": {
+        "shadcn": 4,
+        "supabase": 0,
+        "tailwind": 10,
+        "tanstack_table": 0,
+        "overall_stack_match": 4.0
+      },
+      "pros": [
+        "Best chart/metric components for dashboards",
+        "250+ blocks and templates for visualization",
+        "Copy-paste approach (like shadcn)",
+        "Built on Radix UI (compatible with shadcn ecosystem)",
+        "Beautiful KPI cards, sparklines, area charts",
+        "Apache-2.0 license"
+      ],
+      "cons": [
+        "NOT shadcn — uses Tremor Raw (different component system)",
+        "CHARTS ONLY — no tables, no CRM features",
+        "No Supabase integration",
+        "Would need to integrate into shadcn project separately",
+        "504 stars (smaller community)"
+      ],
+      "effort_to_adapt": {
+        "score": "LOW (as addon)",
+        "hours": "2-4h",
+        "notes": "USE FOR CHARTS ONLY. Copy Tremor chart components into shadcn project for dashboard metrics (total contatos, por cidade, pipeline). Tremor charts work alongside shadcn components since both use Tailwind + Radix."
+      }
+    },
+    {
+      "id": "refine-crm",
+      "name": "Refine CRM",
+      "url": "https://github.com/refinedev/refine",
+      "demo_url": "https://refine.dev/templates/",
+      "stars": 34400,
+      "license": "MIT",
+      "screenshot_desc": "Enterprise CRM with dashboard charts, sales kanban board, contacts/companies CRUD, calendar, audit logs. Multiple UI framework options (Ant Design, MUI, Mantine).",
+      "tech_stack": {
+        "framework": "React meta-framework",
+        "ui": "Ant Design / MUI / Mantine / Chakra / Custom Tailwind",
+        "backend": "15+ connectors including Supabase via @refinedev/supabase",
+        "tables": "Built-in data grid with CRUD",
+        "language": "TypeScript"
+      },
+      "crm_features": {
+        "contacts_table": true,
+        "contacts_filters": true,
+        "contacts_detail_panel": true,
+        "deals_pipeline_kanban": true,
+        "dashboard_metrics": true,
+        "tasks_reminders": true,
+        "calendar": true,
+        "audit_logs": true,
+        "full_crud": true,
+        "authentication": true
+      },
+      "compatibility": {
+        "shadcn": 3,
+        "supabase": 9,
+        "tailwind": 7,
+        "tanstack_table": 5,
+        "overall_stack_match": 5.5
+      },
+      "pros": [
+        "34.4k stars — largest community by far",
+        "Full CRM template with 10+ CRUD interfaces",
+        "Native Supabase connector (@refinedev/supabase)",
+        "Headless approach — can work with any UI",
+        "Scaffolding via refine.new (15 seconds to CRUD app)",
+        "Enterprise-grade with audit logs, RBAC",
+        "Extremely well documented"
+      ],
+      "cons": [
+        "NO native Shadcn support (Ant Design/MUI focused)",
+        "Heavy framework — opinionated routing, data, auth",
+        "CRM template uses GraphQL + Ant Design (not Supabase + Shadcn)",
+        "Steep learning curve for Refine's abstractions",
+        "Overkill for simple contacts CRM",
+        "Would need custom UI integration for Shadcn"
+      ],
+      "effort_to_adapt": {
+        "score": "HIGH",
+        "hours": "30-50h",
+        "notes": "Great Supabase connector but wrong UI layer. Would need to build shadcn integration from scratch. Better to use as REFERENCE for CRM data patterns and Supabase queries than as base template."
+      }
+    },
+    {
+      "id": "tailadmin-react",
+      "name": "TailAdmin React",
+      "url": "https://github.com/TailAdmin/free-react-tailwind-admin-dashboard",
+      "demo_url": "https://tailadmin.com/react",
+      "stars": 1100,
+      "license": "MIT",
+      "screenshot_desc": "Admin dashboard with 35+ components, charts (ApexCharts), data tables with sorting/filtering, sidebar navigation, calendar, chat interface. CRM dashboard available in pro version.",
+      "tech_stack": {
+        "framework": "React 19 + Vite",
+        "ui": "Custom components",
+        "styling": "Tailwind CSS v4",
+        "charts": "ApexCharts",
+        "language": "TypeScript"
+      },
+      "crm_features": {
+        "contacts_table": false,
+        "dashboard_metrics": true,
+        "charts": true,
+        "tables_with_sorting": true,
+        "calendar": true,
+        "chat": true,
+        "crm_dashboard_pro_only": true
+      },
+      "compatibility": {
+        "shadcn": 2,
+        "supabase": 0,
+        "tailwind": 10,
+        "tanstack_table": 0,
+        "overall_stack_match": 3.5
+      },
+      "pros": [
+        "35+ free components",
+        "Good chart variety (ApexCharts)",
+        "Calendar with drag-and-drop",
+        "Dark mode support",
+        "Clean Tailwind-based design"
+      ],
+      "cons": [
+        "NOT Shadcn (custom components)",
+        "CRM features are PRO only",
+        "No Supabase integration",
+        "No TanStack Table",
+        "Would need heavy rework to match target stack"
+      ],
+      "effort_to_adapt": {
+        "score": "HIGH",
+        "hours": "30-40h",
+        "notes": "Wrong stack entirely. Only useful as visual reference for dashboard layout. Do not use as base."
+      }
+    },
+    {
+      "id": "shadcn-data-table",
+      "name": "Shadcn/UI Official Data Table",
+      "url": "https://ui.shadcn.com/docs/components/radix/data-table",
+      "demo_url": "https://ui.shadcn.com/examples/dashboard",
+      "stars": null,
+      "license": "MIT (shadcn/ui)",
+      "screenshot_desc": "Official shadcn data table documentation showing TanStack Table integration with column filtering, sorting, pagination. Minimal but correct implementation pattern.",
+      "tech_stack": {
+        "framework": "React",
+        "ui": "Shadcn/UI",
+        "styling": "Tailwind CSS",
+        "tables": "TanStack/react-table",
+        "language": "TypeScript"
+      },
+      "crm_features": {
+        "basic_table": true,
+        "column_filtering": true,
+        "sorting": true,
+        "pagination": true,
+        "column_visibility": true,
+        "row_selection": true
+      },
+      "compatibility": {
+        "shadcn": 10,
+        "supabase": 0,
+        "tailwind": 10,
+        "tanstack_table": 10,
+        "overall_stack_match": 7.0
+      },
+      "pros": [
+        "OFFICIAL shadcn implementation — guaranteed compatibility",
+        "Clean TanStack Table integration pattern",
+        "Column filtering, sorting, pagination, row selection",
+        "Minimal code — easy to understand and extend",
+        "Best starting point for custom data table"
+      ],
+      "cons": [
+        "Very basic — no advanced filtering, no faceted search",
+        "Client-side only (no server-side patterns)",
+        "Just documentation, not a template",
+        "No CRM features",
+        "Needs significant building on top"
+      ],
+      "effort_to_adapt": {
+        "score": "MEDIUM",
+        "hours": "12-20h",
+        "notes": "Start here if building from scratch. Use as foundation, add tablecn patterns for advanced filtering, add Supabase data layer. Good learning path but slower than forking Atomic CRM."
+      }
+    }
+  ],
+  "strategy_recommendation": {
+    "approach": "HYBRID — Fork Atomic CRM + Enhance with tablecn",
+    "primary_base": "atomic-crm",
+    "table_component": "tablecn",
+    "chart_addon": "tremor-dashboard-oss",
+    "filter_patterns": "data-table-filters",
+    "steps": [
+      "1. Fork marmelab/atomic-crm — already React+Shadcn+Supabase",
+      "2. Adapt Supabase schema: add cidade, segmento, potencial, telefone, whatsapp columns to contacts table",
+      "3. Replace contacts list with tablecn component (Notion-like filters for cidade/segmento/potencial)",
+      "4. Add Tremor chart components to dashboard (total contatos, por cidade, pipeline status)",
+      "5. Customize detail panel for GATO3 contact fields",
+      "6. Rebrand: GATO3 colors, fonts, logo",
+      "7. Deploy: Supabase (backend) + Vercel/GitHub Pages (frontend)"
+    ],
+    "estimated_total_hours": "16-24h",
+    "alternative_approach": {
+      "name": "Build from scratch with next-shadcn-dashboard-starter",
+      "when": "If react-admin dependency in Atomic CRM is too opinionated",
+      "steps": [
+        "1. Clone Kiranism/next-shadcn-dashboard-starter",
+        "2. Add Supabase client + schema",
+        "3. Add tablecn for contacts table",
+        "4. Add Tremor/Recharts for dashboard",
+        "5. Build CRM pages from scratch"
+      ],
+      "estimated_hours": "30-40h"
+    }
+  },
+  "sources": [
+    "https://github.com/marmelab/atomic-crm",
+    "https://github.com/pdovhomilja/nextcrm-app",
+    "https://github.com/satnaing/shadcn-admin",
+    "https://github.com/Kiranism/next-shadcn-dashboard-starter",
+    "https://github.com/sadmann7/tablecn",
+    "https://github.com/openstatusHQ/data-table-filters",
+    "https://github.com/tremorlabs/template-dashboard-oss",
+    "https://github.com/refinedev/refine",
+    "https://github.com/TailAdmin/free-react-tailwind-admin-dashboard",
+    "https://ui.shadcn.com/docs/components/radix/data-table",
+    "https://data-table.openstatus.dev/",
+    "https://marmelab.com/atomic-crm/doc/",
+    "https://supabase.com/partners/integrations/atomic_crm"
+  ]
+}
