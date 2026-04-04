@@ -1,0 +1,647 @@
+[
+  {
+    "nome": "Climeve",
+    "cidade": "Santo André",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "CV Santo André",
+    "cidade": "Santo André",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Pet Shop São Vicente",
+    "cidade": "Mauá",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "UPA ABC",
+    "cidade": "ABC Paulista",
+    "segmento": "ong"
+  },
+  {
+    "nome": "Instituto Caramelo",
+    "cidade": "ABC Paulista",
+    "segmento": "ong"
+  },
+  {
+    "nome": "APAA",
+    "cidade": "ABC Paulista",
+    "segmento": "ong"
+  },
+  {
+    "nome": "Garbin Pet Shop",
+    "cidade": "Guarulhos",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Animal Center",
+    "cidade": "Osasco",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Dog Up",
+    "cidade": "Osasco",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "CV Prime",
+    "cidade": "Guarulhos",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Banho e Tosa Abc",
+    "cidade": "Santo André",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Banho e Tosa Arco Iris",
+    "cidade": "Santo André",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Kimcao",
+    "cidade": "Santo André",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Pv Banho e Tosa",
+    "cidade": "Santo André",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Banho e Tosa Scooby",
+    "cidade": "Santo André",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Pet Shop São Paulo",
+    "cidade": "Santo André",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Galerinha Animal",
+    "cidade": "?",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Skub Pet Shop",
+    "cidade": "Santo André",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Golden Premier",
+    "cidade": "Santo André",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Laras Avicultura",
+    "cidade": "Santo André",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Pet Amazônia",
+    "cidade": "Santo André",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Pet Center Dom Pedro",
+    "cidade": "Santo André",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Pet Shop Vila Pires",
+    "cidade": "Santo André",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "CãoArt",
+    "cidade": "Santo André",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Animal House",
+    "cidade": "Santo André",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "House Pet",
+    "cidade": "Santo André",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Nos Amis",
+    "cidade": "Santo André",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Vet Selvagem",
+    "cidade": "Santo André",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Boutique Pet",
+    "cidade": "Santo André",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "SofistCão",
+    "cidade": "Santo André",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "The Pet Club",
+    "cidade": "Santo André",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Nações Veterinária",
+    "cidade": "Santo André",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Michele Cats",
+    "cidade": "Santo André",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Cobasi P. Barreto",
+    "cidade": "Santo André",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Dr. Hato SA",
+    "cidade": "Santo André",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Pedroso Avicultura",
+    "cidade": "Santo André",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Mini Pet Store",
+    "cidade": "Santo André",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Mini Pet Store SG",
+    "cidade": "Santo André",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Pet Shop Mister Dog",
+    "cidade": "Santo André",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Animal Rei",
+    "cidade": "Santo André",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Clube do Pelo",
+    "cidade": "Santo André",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Pet Life Santo Andre",
+    "cidade": "Santo André",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Vip Cães Banho e Tosa",
+    "cidade": "Mauá",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Clínica Veterinária Paraíso",
+    "cidade": "Mauá",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Luccas Dener Adestramento",
+    "cidade": "Santo André",
+    "segmento": "adestramento"
+  },
+  {
+    "nome": "Adestramento de A a Z",
+    "cidade": "Santo André",
+    "segmento": "adestramento"
+  },
+  {
+    "nome": "O Bicho Esperto - Fernando Adestrador",
+    "cidade": "ABC Paulista",
+    "segmento": "adestramento"
+  },
+  {
+    "nome": "Vander Adestrador",
+    "cidade": "ABC Paulista",
+    "segmento": "adestramento"
+  },
+  {
+    "nome": "Guilherme Adestrador - Fidel",
+    "cidade": "Santo André",
+    "segmento": "adestramento"
+  },
+  {
+    "nome": "Creche e Hotel Pet da Nati",
+    "cidade": "Santo André",
+    "segmento": "creche_pet"
+  },
+  {
+    "nome": "Taxi Dog ABCDM",
+    "cidade": "Santo André",
+    "segmento": "taxi_dog"
+  },
+  {
+    "nome": "Levo e Espero Pet",
+    "cidade": "Santo André",
+    "segmento": "taxi_dog"
+  },
+  {
+    "nome": "Gatologa - Tati Cat Sitter",
+    "cidade": "Santo André",
+    "segmento": "cat_sitter"
+  },
+  {
+    "nome": "Petyard",
+    "cidade": "Santo André",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Avicultura São Judas",
+    "cidade": "Santo André",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Pet Shop Vitória SA",
+    "cidade": "Santo André",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Gil's Clinica Veterinaria",
+    "cidade": "Santo André",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Dogzone Pet Shop",
+    "cidade": "Santo André",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Pet Shop Lucy Dog",
+    "cidade": "Santo André",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Garden Pet Shop",
+    "cidade": "Santo André",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Dra Sah Clinica Veterinaria",
+    "cidade": "Santo André",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Adelaide Avicultura",
+    "cidade": "Mauá",
+    "segmento": "agropecuaria"
+  },
+  {
+    "nome": "Avicultura Tomba Lata",
+    "cidade": "Mauá",
+    "segmento": "agropecuaria"
+  },
+  {
+    "nome": "Avicultura e Floricultura Schers",
+    "cidade": "Mauá",
+    "segmento": "agropecuaria"
+  },
+  {
+    "nome": "Bom Pra Cachorro Equip. Banho e Tosa",
+    "cidade": "Mauá",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Caomida Comercio de Racoes",
+    "cidade": "Mauá",
+    "segmento": "agropecuaria"
+  },
+  {
+    "nome": "Casa de Racao 4 Patas",
+    "cidade": "Mauá",
+    "segmento": "agropecuaria"
+  },
+  {
+    "nome": "Casa de Racao Sao Francisco",
+    "cidade": "Mauá",
+    "segmento": "agropecuaria"
+  },
+  {
+    "nome": "Casa de Racoes Cat & Dog",
+    "cidade": "Mauá",
+    "segmento": "agropecuaria"
+  },
+  {
+    "nome": "Casa de Racoes Cristal",
+    "cidade": "Mauá",
+    "segmento": "agropecuaria"
+  },
+  {
+    "nome": "Casa de Racoes Tico-Tico",
+    "cidade": "Mauá",
+    "segmento": "agropecuaria"
+  },
+  {
+    "nome": "Cla Animal Pet Shop",
+    "cidade": "Mauá",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Comercial Agroito",
+    "cidade": "Mauá",
+    "segmento": "agropecuaria"
+  },
+  {
+    "nome": "Nutri Maua Comercial",
+    "cidade": "Mauá",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Racoes e Avicultura Primavera",
+    "cidade": "Mauá",
+    "segmento": "agropecuaria"
+  },
+  {
+    "nome": "Vip Pet Shop Maua",
+    "cidade": "Mauá",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Amor Animal",
+    "cidade": "Mauá",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Animale Maua",
+    "cidade": "Mauá",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Casa do Cao e Gato",
+    "cidade": "Mauá",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Centro de Saude Animal Paraiso",
+    "cidade": "Mauá",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Clinica Veterinaria Animal Mania",
+    "cidade": "Mauá",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Clinica Veterinaria Bicho Amigo",
+    "cidade": "Mauá",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Flocos de Mell",
+    "cidade": "Mauá",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Gato Q Ri",
+    "cidade": "Mauá",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Maua Saude Animal",
+    "cidade": "Mauá",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Rock Vet Centro Medico Veterinario",
+    "cidade": "Mauá",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Sao Francisco de Assis Banho e Tosa",
+    "cidade": "Mauá",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Smart Pet",
+    "cidade": "Mauá",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "The Animals Home",
+    "cidade": "Mauá",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Verum Diagnostico Veterinario",
+    "cidade": "Mauá",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Vet Space",
+    "cidade": "Mauá",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "VetNasa Maua",
+    "cidade": "Mauá",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Bicho Mania SA",
+    "cidade": "Santo André",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Clinica Veterinaria e Pet Shop Columbia",
+    "cidade": "Santo André",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "KF Dogs",
+    "cidade": "Santo André",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Pet Shop Utinga",
+    "cidade": "Santo André",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Pet Shop e Veterinario Vira Lata",
+    "cidade": "Santo André",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "SC Pet Shop e Veterinaria",
+    "cidade": "Santo André",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Village Pet Clinica Veterinaria",
+    "cidade": "Santo André",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Veterinária Zambicão",
+    "cidade": "Rio Grande da Serra",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Bichó Pet Shop",
+    "cidade": "Rio Grande da Serra",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Casa de Rações São Francisco de Assis",
+    "cidade": "Rio Grande da Serra",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Meu Cheirinho Pet Shop",
+    "cidade": "Rio Grande da Serra",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Portal do Pet",
+    "cidade": "Rio Grande da Serra",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Veterinária Suelen",
+    "cidade": "Rio Grande da Serra",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Andreia Courel Clínica Veterinária",
+    "cidade": "Mauá",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Patativa Pet Shop",
+    "cidade": "Mauá",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "D2Vets",
+    "cidade": "Mauá",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Veterinaria Popular Zaira",
+    "cidade": "Mauá",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Clinica Veterinaria Au Q Mia",
+    "cidade": "Mauá",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Clinica Vet Cat Dog",
+    "cidade": "Mauá",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Avicultura Patativa",
+    "cidade": "Mauá",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Pet Shop Feital",
+    "cidade": "Mauá",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Doutora Bichos",
+    "cidade": "Mauá",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Espaço Doguna",
+    "cidade": "Mauá",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Soy Pet",
+    "cidade": "Mauá",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Toca do Focinho",
+    "cidade": "Mauá",
+    "segmento": "hotel_pet"
+  },
+  {
+    "nome": "São Francisco de Assis Banho e Tosa",
+    "cidade": "Mauá",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Clinica Veterinaria Rio Grande",
+    "cidade": "Rio Grande da Serra",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Zambicão",
+    "cidade": "Rio Grande da Serra",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Cuidado Animal Dra Jordana",
+    "cidade": "Rio Grande da Serra",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Tutti Frutti Pet Shop",
+    "cidade": "Santo André",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "A Toca Clinica Veterinaria",
+    "cidade": "Santo André",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Albivet Clinica Veterinaria",
+    "cidade": "Santo André",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Veterinaria ABC",
+    "cidade": "Santo André",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Clinica Vet Pilar",
+    "cidade": "Santo André",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Proteção Cães e Gatos",
+    "cidade": "Santo André",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Banho & Tosa Lu",
+    "cidade": "Santo André",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Diverticão",
+    "cidade": "Santo André",
+    "segmento": "pet_shop"
+  }
+]

@@ -1,0 +1,652 @@
+[
+  {
+    "nome": "Planet Dog",
+    "cidade": "São Caetano do Sul",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Dog's Day",
+    "cidade": "São Caetano do Sul",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Pet Store Drogaria",
+    "cidade": "Diadema",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Mercadão Pet Eldorado",
+    "cidade": "Diadema",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Pet Speciale",
+    "cidade": "São Caetano do Sul",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "WeVets Sao Caetano",
+    "cidade": "São Caetano do Sul",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Petz Sao Caetano",
+    "cidade": "São Caetano do Sul",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "S2 Pets",
+    "cidade": "São Caetano do Sul",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Sao Francisco Pet Center",
+    "cidade": "São Caetano do Sul",
+    "segmento": "hotel_pet"
+  },
+  {
+    "nome": "Woofy Pet Store",
+    "cidade": "São Caetano do Sul",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Cao a Cao",
+    "cidade": "São Caetano do Sul",
+    "segmento": "hotel_pet"
+  },
+  {
+    "nome": "Regia Tinas Care",
+    "cidade": "São Caetano do Sul",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Cobasi Diadema",
+    "cidade": "Diadema",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "PetConsulta Diadema",
+    "cidade": "Diadema",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Don Ruiz Petshop",
+    "cidade": "São Caetano do Sul",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Mundi Pet Shop",
+    "cidade": "São Caetano do Sul",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "ACF Pet Shop Veterinario",
+    "cidade": "São Caetano do Sul",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Tia Su Pet Shop",
+    "cidade": "São Caetano do Sul",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "My Pet Style",
+    "cidade": "São Caetano do Sul",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Hospeda Pet",
+    "cidade": "São Caetano do Sul",
+    "segmento": "hotel_pet"
+  },
+  {
+    "nome": "Petstar Estrela",
+    "cidade": "São Caetano do Sul",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Pet Shop Amigo Fiel",
+    "cidade": "São Caetano do Sul",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Vet Help Clínica Veterinária e Pet Shop",
+    "cidade": "São Caetano do Sul",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Clínica Veterinária Santa Marta",
+    "cidade": "Diadema",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Med Pet Diadema",
+    "cidade": "Diadema",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Mimos Pet Clínica Veterinária",
+    "cidade": "Diadema",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Anne Pets",
+    "cidade": "São Caetano do Sul",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Pet Móvel Alend' Alegria",
+    "cidade": "São Caetano do Sul",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "ABC Campus Dog",
+    "cidade": "São Caetano do Sul",
+    "segmento": "creche_pet"
+  },
+  {
+    "nome": "Caroline Yamaguti Adestramento",
+    "cidade": "São Caetano do Sul",
+    "segmento": "adestramento"
+  },
+  {
+    "nome": "Creche Pet Life Up",
+    "cidade": "São Caetano do Sul",
+    "segmento": "creche_pet"
+  },
+  {
+    "nome": "Táxi Dog & Cat São Caetano",
+    "cidade": "São Caetano do Sul",
+    "segmento": "taxi_dog"
+  },
+  {
+    "nome": "Crematório Pet São Caetano",
+    "cidade": "São Caetano do Sul",
+    "segmento": "cremacao_pet"
+  },
+  {
+    "nome": "Pet.shopper SCS",
+    "cidade": "São Caetano do Sul",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Pet Shop Dog Reis",
+    "cidade": "São Caetano do Sul",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Vet Help Clinica Veterinaria",
+    "cidade": "São Caetano do Sul",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Rafael Jung Clinica Veterinaria",
+    "cidade": "São Caetano do Sul",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Clinica Veterinaria V3",
+    "cidade": "São Caetano do Sul",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "A.S. Martins Veterinaria e Pet Shop",
+    "cidade": "São Caetano do Sul",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Pet Shop Gabi Adonay",
+    "cidade": "São Caetano do Sul",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Amicao Pet Shop",
+    "cidade": "Diadema",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Asa Branca Racao Pet e Acessorios",
+    "cidade": "Diadema",
+    "segmento": "agropecuaria"
+  },
+  {
+    "nome": "Atlantis Avicultura e Pet Shop",
+    "cidade": "Diadema",
+    "segmento": "agropecuaria"
+  },
+  {
+    "nome": "Avicultura Eucaliptos",
+    "cidade": "Diadema",
+    "segmento": "agropecuaria"
+  },
+  {
+    "nome": "Avicultura Vila Nova Conquista",
+    "cidade": "Diadema",
+    "segmento": "agropecuaria"
+  },
+  {
+    "nome": "Avicultura e Pet Shop Lumieri",
+    "cidade": "Diadema",
+    "segmento": "agropecuaria"
+  },
+  {
+    "nome": "Bello Dogs",
+    "cidade": "Diadema",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Bem-Vindo Pet",
+    "cidade": "Diadema",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Bichocracia",
+    "cidade": "Diadema",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Bichos e Caprichos",
+    "cidade": "Diadema",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "CR Pet Nova Conquista",
+    "cidade": "Diadema",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Caobeleireiro Diadema",
+    "cidade": "Diadema",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Caobeleireiro Tosa Para Mim",
+    "cidade": "Diadema",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Carol Bichos & Cia Pet Shop",
+    "cidade": "Diadema",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Casa dos Pets Diadema",
+    "cidade": "Diadema",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Casa du Pet",
+    "cidade": "Diadema",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Clinica Vet Banho e Tosa Juarez",
+    "cidade": "Diadema",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Coprodi",
+    "cidade": "Diadema",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Enimal Pet",
+    "cidade": "Diadema",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Mundo Magico dos Pets",
+    "cidade": "Diadema",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Pet Center Diadema Banho e Tosa",
+    "cidade": "Diadema",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Pet Shop Dog & Cat Diadema",
+    "cidade": "Diadema",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Pet Shop Meu Amigao Cao & Gato",
+    "cidade": "Diadema",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Raca e Racao Avicultura",
+    "cidade": "Diadema",
+    "segmento": "agropecuaria"
+  },
+  {
+    "nome": "Thami Vet",
+    "cidade": "Diadema",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Amigo Vet Unidade II",
+    "cidade": "Diadema",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Clinica Veterinaria Canin & Cat",
+    "cidade": "Diadema",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Clinica Veterinaria Mundo Rural",
+    "cidade": "Diadema",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Clinica Veterinaria Projeto Jerri",
+    "cidade": "Diadema",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Clinica Veterinaria Santa Marta",
+    "cidade": "Diadema",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Deixa Que Eu Cuido",
+    "cidade": "Diadema",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Espaco Pet Feliz",
+    "cidade": "Diadema",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Hospital Veterinario Diadema",
+    "cidade": "Diadema",
+    "segmento": "hospital_24h"
+  },
+  {
+    "nome": "Mundo das Patas Servicos Veterinarios",
+    "cidade": "Diadema",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Shopping Animal",
+    "cidade": "Diadema",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "UPA Vet Diadema",
+    "cidade": "Diadema",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Veterinaria Nosso Lar",
+    "cidade": "Diadema",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Agroshop ABC",
+    "cidade": "São Caetano do Sul",
+    "segmento": "agropecuaria"
+  },
+  {
+    "nome": "Micas Pet Shop",
+    "cidade": "São Caetano do Sul",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Pet Shop Falcao",
+    "cidade": "São Caetano do Sul",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Pet Shop Palace Dog",
+    "cidade": "São Caetano do Sul",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Petit Cao Pet Shop",
+    "cidade": "São Caetano do Sul",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Recanto Animal Pet Shop e Veterinario",
+    "cidade": "São Caetano do Sul",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Shower Dog Pet Store",
+    "cidade": "São Caetano do Sul",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Amanimal Pet Care",
+    "cidade": "São Caetano do Sul",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Amigo Bicho",
+    "cidade": "São Caetano do Sul",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Animal Care",
+    "cidade": "São Caetano do Sul",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Animalis",
+    "cidade": "São Caetano do Sul",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Avicultura Santa Maria",
+    "cidade": "São Caetano do Sul",
+    "segmento": "agropecuaria"
+  },
+  {
+    "nome": "Cara do Bicho Veterinaria & Pet Shop",
+    "cidade": "São Caetano do Sul",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Clinica Veterinaria Perez",
+    "cidade": "São Caetano do Sul",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "De Olho no Bicho",
+    "cidade": "São Caetano do Sul",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Dog Reis",
+    "cidade": "São Caetano do Sul",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Emporion Animal Humanizado",
+    "cidade": "São Caetano do Sul",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Galerinha Animal Pet Shop",
+    "cidade": "São Caetano do Sul",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "M.G.S. Hospital Veterinario",
+    "cidade": "São Caetano do Sul",
+    "segmento": "hospital_24h"
+  },
+  {
+    "nome": "Macaw Clinica Veterinaria",
+    "cidade": "São Caetano do Sul",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "ONG SOS Cidadania Animal",
+    "cidade": "São Caetano do Sul",
+    "segmento": "ong"
+  },
+  {
+    "nome": "Pegada do Bicho",
+    "cidade": "São Caetano do Sul",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Pesca e Bichos Comercial",
+    "cidade": "São Caetano do Sul",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Pet & Vet",
+    "cidade": "São Caetano do Sul",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Pet Center",
+    "cidade": "São Caetano do Sul",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Pet Friend Banho & Tosa",
+    "cidade": "São Caetano do Sul",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Pet Shop Sao Jose",
+    "cidade": "São Caetano do Sul",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Pet Stop",
+    "cidade": "São Caetano do Sul",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Santarelli Clinica Veterinaria",
+    "cidade": "São Caetano do Sul",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Star Pets",
+    "cidade": "São Caetano do Sul",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Toca dos Bichos Servicos Veterinarios",
+    "cidade": "São Caetano do Sul",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Vet Planet",
+    "cidade": "São Caetano do Sul",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "VetNasa Sao Caetano do Sul",
+    "cidade": "São Caetano do Sul",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Vetz For Pets",
+    "cidade": "São Caetano do Sul",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Vida de Cao & Cia",
+    "cidade": "São Caetano do Sul",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Hotelzinho dos Pets",
+    "cidade": "Diadema",
+    "segmento": "hotel_pet"
+  },
+  {
+    "nome": "Pet Shop Dog & Cat",
+    "cidade": "Diadema",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Pet Shop Araroza",
+    "cidade": "Diadema",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Esquina dos Bichos",
+    "cidade": "Diadema",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Paradinha Animal",
+    "cidade": "Diadema",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Pet Center Diadema",
+    "cidade": "Diadema",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Amigo Vet",
+    "cidade": "Diadema",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Toca dos Bichos",
+    "cidade": "São Caetano do Sul",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Doug Pet Care",
+    "cidade": "São Caetano do Sul",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Leju Pet",
+    "cidade": "São Caetano do Sul",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Pet Center São Caetano",
+    "cidade": "São Caetano do Sul",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Pet Stop Club",
+    "cidade": "São Caetano do Sul",
+    "segmento": "hotel_pet"
+  },
+  {
+    "nome": "Pet Shop King's",
+    "cidade": "Diadema",
+    "segmento": "farmacia_vet"
+  },
+  {
+    "nome": "Super Pets House",
+    "cidade": "Diadema",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Pet Shop Capel",
+    "cidade": "Diadema",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Pet Shop Meu Amigão Cão & Gato",
+    "cidade": "Diadema",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Pupcão Pets",
+    "cidade": "Diadema",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Muvucão Pet Shop",
+    "cidade": "Diadema",
+    "segmento": "pet_shop"
+  }
+]

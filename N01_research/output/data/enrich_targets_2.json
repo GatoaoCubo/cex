@@ -1,0 +1,587 @@
+[
+  {
+    "nome": "CV Pet Shop Ribeirão",
+    "cidade": "Ribeirão Pires",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Banho e Tosa Bella",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Banho e Tosa Cao Carinho",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Santa Cachorrada",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Priscila Banho e Tosa",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Sofystpet",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Pet Shop Sk",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Show de Banho Pet Truck",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Meu Bicho",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Local Pet",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Pet Para Pets SBC",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "PET LOVERS Pet Shop",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Pet Shop Bom Cão",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "BEST PET SHOP",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Dogfish PETSHOP",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "4 Patas e Cia",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Pet Shop Dom Pet",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Pet Mais Rudge Ramos",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Pet Shop São José",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Stillo Animal",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Internacional Pets",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "A Casa dos Pet",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Vip Care",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "LM Bichinho",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Amity Pet",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Pet Flor de Maio",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Atmos",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "EcoPet",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Animale Hospital",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Vet Live",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Vetplace SBC",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Árbol Hospital",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Canarinho Pet Shop",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Bicho do Mato",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "E.B. Clínica Veterinária",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "CEC PET",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "distribuidor"
+  },
+  {
+    "nome": "Focinhos Club",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "distribuidor"
+  },
+  {
+    "nome": "Petland Rudge Ramos",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Sao Bernardo Pet Center",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Instinto Animal",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Savet Pet Shop",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Cão Barão Pet Shop",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Trakinagem Pet Shop",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Pet Shop Família Zoo",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Petutinho Pet Shop",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Clínica Veterinária Ribeirão Pires",
+    "cidade": "Ribeirão Pires",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Banho e Tosa Vila Aurora",
+    "cidade": "Ribeirão Pires",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Pet Móvel São Bernardo",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "PRH Adestramento e Cinoterapia",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "adestramento"
+  },
+  {
+    "nome": "Pet Focinhos e Cia",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "L Cat Sitter",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "cat_sitter"
+  },
+  {
+    "nome": "Freedom Pet Sitter e Dog Walker",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_sitter"
+  },
+  {
+    "nome": "Pet.shopper SBC",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Patamiga",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Unqui Clinica Veterinaria e Pet Shop",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Pet Shop & Cia",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Vila Pet",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Tropical Pet Shop",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Acacias Servicos Veterinarios",
+    "cidade": "Ribeirão Pires",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Clinica Veterinaria Alianca",
+    "cidade": "Ribeirão Pires",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Clinica Veterinaria Ferreira",
+    "cidade": "Ribeirão Pires",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Clinica Veterinaria Nipon",
+    "cidade": "Ribeirão Pires",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Clinica Veterinaria e Pet Shop Ribeirao",
+    "cidade": "Ribeirão Pires",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "KJS Clinica Veterinaria",
+    "cidade": "Ribeirão Pires",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Kite Veterinaria",
+    "cidade": "Ribeirão Pires",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Moreirao LVet",
+    "cidade": "Ribeirão Pires",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Ouro Vet",
+    "cidade": "Ribeirão Pires",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Patinhas e Rodas",
+    "cidade": "Ribeirão Pires",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Pet Shopping House",
+    "cidade": "Ribeirão Pires",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Quiron Clinica Veterinaria & Pet Spa",
+    "cidade": "Ribeirão Pires",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Vet House",
+    "cidade": "Ribeirão Pires",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Vet Pantaneiro",
+    "cidade": "Ribeirão Pires",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "VetClinic Saude Animal",
+    "cidade": "Ribeirão Pires",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Veterinaria Lulucao",
+    "cidade": "Ribeirão Pires",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Vivas Veterinaria",
+    "cidade": "Ribeirão Pires",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Banho e Tosa Se-Cao",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Canil Golden Lions",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Caobeleireiro Studio Pet Shop",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Eco Pet Clinica Veterinaria e Pet Shop",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "O Meu Bichinho Espaco Pet",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Pet Shop Melhor Amigo",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Pets Brasil Estetica Animal",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Avicultura Entre Amigos",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "agropecuaria"
+  },
+  {
+    "nome": "Avicultura Recanto dos Animais",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "agropecuaria"
+  },
+  {
+    "nome": "Avicultura e Pet Shop da Tay",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "agropecuaria"
+  },
+  {
+    "nome": "Baby Dog",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Bom Cao",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Cao-Fraria",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Dog Show",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Dogs Day SBC",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Entre Bichos",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Escova Cao",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "J.H. da Silva Avicultura",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "agropecuaria"
+  },
+  {
+    "nome": "L.E. Bichos Pet Shop",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Nautilus",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Pet Fanaticos",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Pet Shop Amigao",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Pet Shop Dr. Hato",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Pet Shop Quirino",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Petiscao & Cia Pet Shop",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Racoes Rancho Fundo",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "agropecuaria"
+  },
+  {
+    "nome": "Villa Pet",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Terraço Pet Hotel",
+    "cidade": "Ribeirão Pires",
+    "segmento": "hotel_pet"
+  },
+  {
+    "nome": "Nipon Pet 01 RP",
+    "cidade": "Ribeirão Pires",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Petshop Flo-Kinho",
+    "cidade": "Ribeirão Pires",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Paiol Pet",
+    "cidade": "Ribeirão Pires",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Estancia Pet Shop",
+    "cidade": "Ribeirão Pires",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Veterinário Aurora",
+    "cidade": "Ribeirão Pires",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Clinica Vet Lulucão",
+    "cidade": "Ribeirão Pires",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "KJS Clinica Vet",
+    "cidade": "Ribeirão Pires",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Clinica Vet Aliança",
+    "cidade": "Ribeirão Pires",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Patynhas Pet Shop",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "pet_shop"
+  },
+  {
+    "nome": "Clinica Valvet",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Mania Animal",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "clinica_vet"
+  },
+  {
+    "nome": "Nova Pet ABC",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Vida Animal",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "banho_tosa"
+  },
+  {
+    "nome": "Cantinho da Tosa",
+    "cidade": "São Bernardo do Campo",
+    "segmento": "banho_tosa"
+  }
+]
