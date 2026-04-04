@@ -11,12 +11,11 @@ quality: null
 
 # CRM_FULL_HARVEST — Pipeline Evidence
 
-## 1. Mission Status (04/Abr/2026 12:50)
+## 1. Mission Status (04/Abr/2026 13:30) — ✅ COMPLETE
 
 ```
-BASE ATUAL: 244 contatos reais | 0 fakes
-Meta:       500+ contatos
-Gap:        256 contatos (~3 batches pendentes)
+BASE FINAL: 509 contatos reais | 0 fakes
+Meta:       500+ contatos ✅ ATINGIDA
 ```
 
 | Wave | Batch | Status | +Novos | Fontes | Output |
@@ -24,44 +23,33 @@ Gap:        256 contatos (~3 batches pendentes)
 | 2 | **C** Social | ✅ DONE + MERGED | +53 | Instagram hashtags, Facebook Pages | `crm_batch_c_social.json` |
 | 2 | **D** Marketplaces | ✅ DONE + MERGED | +12 | iFood, Rappi, ML, Shopee | `crm_batch_d_marketplaces.json` |
 | 3 | **E** Reputação | ✅ DONE + MERGED | +15 | Econodata, CRMV-SP, Petlove | `crm_batch_e_reputation.json` |
-| 1 | **A** Diretórios Pet | ❌ PENDENTE | — | Petlove, DogHero, PetAnjo, TeleListas, GuiaMais | `crm_batch_a_diretorios.json` |
-| 1 | **B** Google Maps | ❌ PENDENTE | — | Serper Google Maps, 9 categorias × 7 cidades | `crm_batch_b_gmaps.json` |
-| 3 | **F** CNAE Deep | ❌ PENDENTE | — | Casa dos Dados, CNPJ.biz, ReceitaWS, CNPJá | `crm_batch_f_cnae.json` |
+| 1 | **A** Diretórios Pet | ✅ DONE + MERGED | +159 | Petlove, DogHero, PetAnjo, TeleListas, GuiaMais | `crm_batch_a_diretorios.json` |
+| 1 | **B** Google Maps | ✅ DONE + MERGED | +59 | Serper Google Maps, 9 categorias × 7 cidades | `crm_batch_b_gmaps.json` |
+| 3 | **F** CNAE Deep | ✅ DONE + MERGED | +55 | Casa dos Dados, CNPJ.biz, ReceitaWS, CNPJá | `crm_batch_f_cnae.json` |
 
 ---
 
-## 2. Current CRM Stats
+## 2. Final CRM Stats
 
 ```
-Total:          244
-Com telefone:    85 (34%)   → meta 60%
-Com endereço:   138 (56%)   → meta 85%
-Com web/IG:     155 (63%)   → meta 65% ✅
-Com CNPJ:        56 (22%)   → meta 40%
+Total:          509
+Com telefone:   133 (26%)   → meta 60% (gap: enrichment needed)
+Com endereço:   284 (55%)   → meta 85% (gap: enrichment needed)
+Com web/IG:     179 (35%)   → meta 65% (gap: enrichment needed)
+Com CNPJ:       103 (20%)   → meta 40% (gap: enrichment needed)
 Fakes:            0         → meta 0 ✅
 ```
 
 ### Distribuição por Cidade
-| Cidade | Qtd | Meta |
-|--------|:---:|:----:|
-| São Bernardo do Campo | 78 | — |
-| Santo André | 68 | — |
-| São Caetano do Sul | 56 | 60+ |
-| Diadema | 13 | 40+ |
-| Mauá | 11 | 30+ |
-| Ribeirão Pires | 3 | 10+ |
-| Rio Grande da Serra | 0 | 5+ |
-
-### Distribuição por Segmento
-| Segmento | Qtd |
-|----------|:---:|
-| pet_shop | 85 |
-| clinica_vet | 63 |
-| banho_tosa | 49 |
-| adestramento | 9 |
-| hotel_pet | 7 |
-| creche_pet | 7 |
-| outros | 24 |
+| Cidade | Qtd | Meta | Status |
+|--------|:---:|:----:|:------:|
+| São Bernardo do Campo | 111 | — | ✅ |
+| São Caetano do Sul | 97 | 60+ | ✅ |
+| Santo André | 86 | — | ✅ |
+| Mauá | 72 | 30+ | ✅ |
+| Diadema | 69 | 40+ | ✅ |
+| Ribeirão Pires | 46 | 10+ | ✅ |
+| Rio Grande da Serra | 13 | 5+ | ✅ |
 
 ---
 
