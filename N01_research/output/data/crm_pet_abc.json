@@ -21,7 +21,8 @@
     "potencial_b2b": "medio",
     "notas": "Grande rede, bom volume de clientes. Endereço pode variar.",
     "lat": -23.620885,
-    "lng": -46.5688
+    "lng": -46.5688,
+    "completeness_score": 5
   },
   {
     "cnpj": "17.711.811/0002-84",
@@ -45,7 +46,8 @@
     "potencial_b2b": "baixo",
     "notas": "Foco em venda de filhotes, menos em produtos/serviços recorrentes.",
     "lat": -23.6288,
-    "lng": -46.569214
+    "lng": -46.569214,
+    "completeness_score": 5
   },
   {
     "cnpj": "48.807.594/0001-73",
@@ -69,7 +71,8 @@
     "potencial_b2b": "alto",
     "notas": "Clínica 24h com bom foco em gatos, Dra. Larissa é especialista.",
     "lat": -23.625108,
-    "lng": -46.565586
+    "lng": -46.565586,
+    "completeness_score": 4
   },
   {
     "cnpj": "53.153.938/0016-94",
@@ -93,7 +96,8 @@
     "potencial_b2b": "alto",
     "notas": "Rede nacional, alto volume",
     "lat": -23.620163,
-    "lng": -46.568604
+    "lng": -46.568604,
+    "completeness_score": 5
   },
   {
     "cnpj": "",
@@ -117,7 +121,8 @@
     "potencial_b2b": "medio",
     "notas": "Pet shop boutique premium",
     "lat": -23.623925,
-    "lng": -46.569062
+    "lng": -46.569062,
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -141,7 +146,8 @@
     "potencial_b2b": "medio",
     "notas": "Seg-Sex 8h30-20h, Sáb 8h30-19h",
     "lat": -23.621251,
-    "lng": -46.571957
+    "lng": -46.571957,
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -165,7 +171,8 @@
     "potencial_b2b": "alto",
     "notas": "Hospital 24h completo",
     "lat": -23.677488,
-    "lng": -46.545609
+    "lng": -46.545609,
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -189,7 +196,8 @@
     "potencial_b2b": "medio",
     "notas": "Preços populares",
     "lat": -23.672501,
-    "lng": -46.54284
+    "lng": -46.54284,
+    "completeness_score": 4
   },
   {
     "cnpj": "",
@@ -213,7 +221,8 @@
     "potencial_b2b": "alto",
     "notas": "Fundada 2005, emergências",
     "lat": -23.675936,
-    "lng": -46.542486
+    "lng": -46.542486,
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -237,7 +246,8 @@
     "potencial_b2b": "alto",
     "notas": "Hospital 24h especializado",
     "lat": -23.688925,
-    "lng": -46.568648
+    "lng": -46.568648,
+    "completeness_score": 3
   },
   {
     "cnpj": "34.397.523/0001-35",
@@ -261,7 +271,8 @@
     "potencial_b2b": "medio",
     "notas": "Drogaria + clínica",
     "lat": -23.679153,
-    "lng": -46.621015
+    "lng": -46.621015,
+    "completeness_score": 2
   },
   {
     "cnpj": "53.652.422/0001-08",
@@ -285,7 +296,8 @@
     "potencial_b2b": "alto",
     "notas": "Grande volume",
     "lat": -23.682878,
-    "lng": -46.625356
+    "lng": -46.625356,
+    "completeness_score": 3
   },
   {
     "cnpj": "52.307.407/0001-60",
@@ -309,7 +321,8 @@
     "potencial_b2b": "medio",
     "notas": "Regional",
     "lat": -23.664042,
-    "lng": -46.462607
+    "lng": -46.462607,
+    "completeness_score": 3
   },
   {
     "cnpj": "18.703.259/0001-64",
@@ -333,7 +346,8 @@
     "potencial_b2b": "medio",
     "notas": "Clínica + pet shop",
     "lat": -23.714458,
-    "lng": -46.415026
+    "lng": -46.415026,
+    "completeness_score": 3
   },
   {
     "cnpj": "",
@@ -357,7 +371,8 @@
     "potencial_b2b": "baixo",
     "notas": "10 anos, união protetores",
     "lat": -23.64722,
-    "lng": -46.54917
+    "lng": -46.54917,
+    "completeness_score": 1
   },
   {
     "cnpj": "24.807.320/0001-16",
@@ -381,7 +396,8 @@
     "potencial_b2b": "baixo",
     "notas": "Resgate e tratamento",
     "lat": -23.647543,
-    "lng": -46.548162
+    "lng": -46.548162,
+    "completeness_score": 4
   },
   {
     "cnpj": "",
@@ -405,7 +421,8 @@
     "potencial_b2b": "baixo",
     "notas": "Cães e gatos",
     "lat": -23.64971,
-    "lng": -46.546215
+    "lng": -46.546215,
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -429,7 +446,8 @@
     "potencial_b2b": "baixo",
     "notas": "Proteção animal SP",
     "lat": -23.650972,
-    "lng": -46.549584
+    "lng": -46.549584,
+    "completeness_score": 1
   },
   {
     "cnpj": "",
@@ -453,7 +471,8 @@
     "potencial_b2b": "medio",
     "notas": "Silvestres e exóticos",
     "lat": -23.647365,
-    "lng": -46.549052
+    "lng": -46.549052,
+    "completeness_score": 4
   },
   {
     "cnpj": "",
@@ -477,7 +496,8 @@
     "potencial_b2b": "medio",
     "notas": "Clínica + pet shop",
     "lat": -23.459906,
-    "lng": -46.532581
+    "lng": -46.532581,
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -501,7 +521,8 @@
     "potencial_b2b": "alto",
     "notas": "Centro completo",
     "lat": -23.660363,
-    "lng": -46.534633
+    "lng": -46.534633,
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -525,7 +546,8 @@
     "potencial_b2b": "alto",
     "notas": "Clínica 24h renomada",
     "lat": -23.534677,
-    "lng": -46.793385
+    "lng": -46.793385,
+    "completeness_score": 1
   },
   {
     "cnpj": "",
@@ -549,7 +571,8 @@
     "potencial_b2b": "alto",
     "notas": "Fundada 2006",
     "lat": -23.513962,
-    "lng": -46.878038
+    "lng": -46.878038,
+    "completeness_score": 4
   },
   {
     "cnpj": "",
@@ -573,7 +596,8 @@
     "potencial_b2b": "alto",
     "notas": "Nível hospitalar",
     "lat": -23.465992,
-    "lng": -46.534976
+    "lng": -46.534976,
+    "completeness_score": 2
   },
   {
     "cnpj": "18.135.968/0001-90",
@@ -597,7 +621,8 @@
     "potencial_b2b": "medio",
     "notas": "Round 2 — PME local",
     "lat": -23.690315,
-    "lng": -46.565781
+    "lng": -46.565781,
+    "completeness_score": 2
   },
   {
     "cnpj": "24.429.498/0001-70",
@@ -621,7 +646,8 @@
     "potencial_b2b": "medio",
     "notas": "Round 2 — Fundada 2016, dados validados",
     "lat": -23.692439,
-    "lng": -46.567024
+    "lng": -46.567024,
+    "completeness_score": 3
   },
   {
     "cnpj": "12.946.452/0001-40",
@@ -645,7 +671,8 @@
     "potencial_b2b": "medio",
     "notas": "Round 2 — PME estabelecida",
     "lat": -23.693264,
-    "lng": -46.561207
+    "lng": -46.561207,
+    "completeness_score": 2
   },
   {
     "cnpj": "17.698.845/0001-03",
@@ -669,7 +696,8 @@
     "potencial_b2b": "medio",
     "notas": "Round 2 — Empreendedora individual",
     "lat": -23.690216,
-    "lng": -46.563827
+    "lng": -46.563827,
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -693,7 +721,8 @@
     "potencial_b2b": "medio",
     "notas": "Round 2 — 6+ anos ativa",
     "lat": -23.694031,
-    "lng": -46.562867
+    "lng": -46.562867,
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -717,7 +746,8 @@
     "potencial_b2b": "alto",
     "notas": "Round 2 — Híbrido banho+produtos",
     "lat": -23.694093,
-    "lng": -46.565664
+    "lng": -46.565664,
+    "completeness_score": 2
   },
   {
     "cnpj": "30.100.835/0001-84",
@@ -741,7 +771,8 @@
     "potencial_b2b": "alto",
     "notas": "Round 2 — Pet truck móvel, inovador",
     "lat": -23.687484,
-    "lng": -46.56358
+    "lng": -46.56358,
+    "completeness_score": 2
   },
   {
     "cnpj": "08.159.407/0001-78",
@@ -765,7 +796,8 @@
     "potencial_b2b": "alto",
     "notas": "Round 2 — Híbrido banho+loja",
     "lat": -23.704544,
-    "lng": -46.563523
+    "lng": -46.563523,
+    "completeness_score": 3
   },
   {
     "cnpj": "52.425.223/0001-02",
@@ -789,7 +821,8 @@
     "potencial_b2b": "medio",
     "notas": "Round 2 — Nome regional ABC",
     "lat": -23.670957,
-    "lng": -46.540992
+    "lng": -46.540992,
+    "completeness_score": 2
   },
   {
     "cnpj": "56.210.739/0001-82",
@@ -813,7 +846,8 @@
     "potencial_b2b": "medio",
     "notas": "Round 2 — Marca colorida",
     "lat": -23.675868,
-    "lng": -46.546943
+    "lng": -46.546943,
+    "completeness_score": 2
   },
   {
     "cnpj": "56.927.149/0001-75",
@@ -837,7 +871,8 @@
     "potencial_b2b": "alto",
     "notas": "Round 2 — EPP, híbrido banho+loja",
     "lat": -23.675176,
-    "lng": -46.545058
+    "lng": -46.545058,
+    "completeness_score": 2
   },
   {
     "cnpj": "57.410.727/0001-64",
@@ -861,7 +896,8 @@
     "potencial_b2b": "medio",
     "notas": "Round 2 — Fundada set/2024, nova",
     "lat": -23.676012,
-    "lng": -46.539657
+    "lng": -46.539657,
+    "completeness_score": 2
   },
   {
     "cnpj": "49.251.337/0001-60",
@@ -885,7 +921,8 @@
     "potencial_b2b": "medio",
     "notas": "Round 2 — Empreendedora jovem",
     "lat": -23.670689,
-    "lng": -46.544683
+    "lng": -46.544683,
+    "completeness_score": 2
   },
   {
     "cnpj": "25.113.175/0001-36",
@@ -909,7 +946,8 @@
     "potencial_b2b": "alto",
     "notas": "Round 2 — 9+ anos, híbrido",
     "lat": -23.672456,
-    "lng": -46.544035
+    "lng": -46.544035,
+    "completeness_score": 2
   },
   {
     "cnpj": "46.465.165/0001-30",
@@ -933,7 +971,8 @@
     "potencial_b2b": "medio",
     "notas": "Round 2 — Telefone validado",
     "lat": -23.670384,
-    "lng": -46.543529
+    "lng": -46.543529,
+    "completeness_score": 3
   },
   {
     "cnpj": "",
@@ -957,7 +996,8 @@
     "potencial_b2b": "alto",
     "notas": "Round 2 — Banho+alimentação, foco felino",
     "lat": -23.625181,
-    "lng": -46.567327
+    "lng": -46.567327,
+    "completeness_score": 1
   },
   {
     "cnpj": "",
@@ -981,7 +1021,8 @@
     "potencial_b2b": "medio",
     "notas": "Round 2 — Local estabelecido",
     "lat": -23.622809,
-    "lng": -46.567198
+    "lng": -46.567198,
+    "completeness_score": 4
   },
   {
     "cnpj": "",
@@ -1005,7 +1046,8 @@
     "potencial_b2b": "medio",
     "notas": "Round 2 — WhatsApp ativo",
     "lat": -23.622623,
-    "lng": -46.562117
+    "lng": -46.562117,
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -1029,7 +1071,8 @@
     "potencial_b2b": "medio",
     "notas": "Round 2 — Nome família-friendly",
     "lat": -23.650805,
-    "lng": -46.552245
+    "lng": -46.552245,
+    "completeness_score": 1
   },
   {
     "cnpj": "",
@@ -1053,7 +1096,8 @@
     "potencial_b2b": "alto",
     "notas": "Round 2 — Site próprio, estabelecido",
     "lat": -23.66972,
-    "lng": -46.543124
+    "lng": -46.543124,
+    "completeness_score": 4
   },
   {
     "cnpj": "",
@@ -1077,7 +1121,8 @@
     "potencial_b2b": "medio",
     "notas": "Round 2 — Ofertas ativas no Instagram",
     "lat": -23.694673,
-    "lng": -46.568323
+    "lng": -46.568323,
+    "completeness_score": 1
   },
   {
     "cnpj": "",
@@ -1101,7 +1146,8 @@
     "potencial_b2b": "muito_alto",
     "notas": "Round 2 — Fundada 1993, distribuidor estabelecido",
     "lat": -23.676823,
-    "lng": -46.54218
+    "lng": -46.54218,
+    "completeness_score": 4
   },
   {
     "cnpj": "19.055.885/0002-35",
@@ -1125,7 +1171,8 @@
     "potencial_b2b": "alto",
     "notas": "Round 3 — Megaloja SBC, volume alto",
     "lat": -23.689063,
-    "lng": -46.565323
+    "lng": -46.565323,
+    "completeness_score": 4
   },
   {
     "cnpj": "",
@@ -1149,7 +1196,8 @@
     "potencial_b2b": "alto",
     "notas": "Round 3 — 2k+ likes, foco amor pets",
     "lat": -23.694892,
-    "lng": -46.565647
+    "lng": -46.565647,
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -1173,7 +1221,8 @@
     "potencial_b2b": "medio",
     "notas": "Round 3 — Endereço confirmado",
     "lat": -23.687431,
-    "lng": -46.564467
+    "lng": -46.564467,
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -1197,7 +1246,8 @@
     "potencial_b2b": "muito_alto",
     "notas": "Round 3 — Completo: hotel+vet+creche+banho",
     "lat": -23.664231,
-    "lng": -46.564114
+    "lng": -46.564114,
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -1221,7 +1271,8 @@
     "potencial_b2b": "medio",
     "notas": "Round 3 — Estética animal especializada",
     "lat": -23.695308,
-    "lng": -46.562934
+    "lng": -46.562934,
+    "completeness_score": 1
   },
   {
     "cnpj": "",
@@ -1245,7 +1296,8 @@
     "potencial_b2b": "alto",
     "notas": "Round 3 — Desde 1998, completo",
     "lat": -23.689946,
-    "lng": -46.564404
+    "lng": -46.564404,
+    "completeness_score": 3
   },
   {
     "cnpj": "",
@@ -1269,7 +1321,8 @@
     "potencial_b2b": "alto",
     "notas": "Round 3 — 1750 likes, \"tudo que o pet precisa\"",
     "lat": -23.693265,
-    "lng": -46.563572
+    "lng": -46.563572,
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -1293,7 +1346,8 @@
     "potencial_b2b": "alto",
     "notas": "Round 3 — Tel validado, Rudge Ramos",
     "lat": -23.671108,
-    "lng": -46.567522
+    "lng": -46.567522,
+    "completeness_score": 3
   },
   {
     "cnpj": "",
@@ -1317,7 +1371,8 @@
     "potencial_b2b": "alto",
     "notas": "Round 3 — Endereço validado, variedade",
     "lat": -23.66837,
-    "lng": -46.563369
+    "lng": -46.563369,
+    "completeness_score": 3
   },
   {
     "cnpj": "",
@@ -1341,7 +1396,8 @@
     "potencial_b2b": "medio",
     "notas": "Round 3 — Rudge Ramos Raiz",
     "lat": -23.664993,
-    "lng": -46.568893
+    "lng": -46.568893,
+    "completeness_score": 1
   },
   {
     "cnpj": "",
@@ -1365,7 +1421,8 @@
     "potencial_b2b": "medio",
     "notas": "Round 3 — 521 likes, estética animal",
     "lat": -23.691395,
-    "lng": -46.567271
+    "lng": -46.567271,
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -1389,7 +1446,8 @@
     "potencial_b2b": "alto",
     "notas": "Round 3 — Tel validado, endereço confirmado",
     "lat": -23.688099,
-    "lng": -46.561736
+    "lng": -46.561736,
+    "completeness_score": 3
   },
   {
     "cnpj": "",
@@ -1413,7 +1471,8 @@
     "potencial_b2b": "alto",
     "notas": "Round 3 — Shopping, variedade produtos",
     "lat": -23.693012,
-    "lng": -46.563588
+    "lng": -46.563588,
+    "completeness_score": 2
   },
   {
     "cnpj": "53.153.938/0016-94",
@@ -1437,7 +1496,8 @@
     "potencial_b2b": "muito_alto",
     "notas": "Round 3 — Rede nacional, Center Castilho",
     "lat": -23.661128,
-    "lng": -46.533777
+    "lng": -46.533777,
+    "completeness_score": 5
   },
   {
     "cnpj": "",
@@ -1461,7 +1521,8 @@
     "potencial_b2b": "alto",
     "notas": "Round 3 — Contatos completos validados",
     "lat": -23.6779,
-    "lng": -46.557685
+    "lng": -46.557685,
+    "completeness_score": 4
   },
   {
     "cnpj": "",
@@ -1485,7 +1546,8 @@
     "potencial_b2b": "medio",
     "notas": "Round 3 — Inauguração recente",
     "lat": -23.689171,
-    "lng": -46.564457
+    "lng": -46.564457,
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -1509,7 +1571,8 @@
     "potencial_b2b": "alto",
     "notas": "Round 3 — 15 anos, clínica+pet shop",
     "lat": -23.695395,
-    "lng": -46.566107
+    "lng": -46.566107,
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -1533,7 +1596,8 @@
     "potencial_b2b": "alto",
     "notas": "Round 3 — Tel validado, website",
     "lat": -23.695244,
-    "lng": -46.561267
+    "lng": -46.561267,
+    "completeness_score": 4
   },
   {
     "cnpj": "",
@@ -1557,7 +1621,8 @@
     "potencial_b2b": "alto",
     "notas": "Round 3 — Clínica+Pet shop, 2 endereços",
     "lat": -23.66497,
-    "lng": -46.564347
+    "lng": -46.564347,
+    "completeness_score": 3
   },
   {
     "cnpj": "",
@@ -1581,7 +1646,8 @@
     "potencial_b2b": "alto",
     "notas": "Round 3 — Segurança, conforto, bem-estar",
     "lat": -23.69294,
-    "lng": -46.568237
+    "lng": -46.568237,
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -1605,7 +1671,8 @@
     "potencial_b2b": "medio",
     "notas": "Round 3 — Endereço validado",
     "lat": -23.688376,
-    "lng": -46.561124
+    "lng": -46.561124,
+    "completeness_score": 3
   },
   {
     "cnpj": "",
@@ -1629,7 +1696,8 @@
     "potencial_b2b": "alto",
     "notas": "Round 3 — Tel+endereço validados",
     "lat": -23.694715,
-    "lng": -46.564812
+    "lng": -46.564812,
+    "completeness_score": 3
   },
   {
     "cnpj": "",
@@ -1653,7 +1721,8 @@
     "potencial_b2b": "muito_alto",
     "notas": "Round 3 — Centro integral saúde animal",
     "lat": -23.665446,
-    "lng": -46.528915
+    "lng": -46.528915,
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -1677,7 +1746,8 @@
     "potencial_b2b": "muito_alto",
     "notas": "Round 3 — 24h, silvestres, especialista felinos",
     "lat": -23.689273,
-    "lng": -46.567673
+    "lng": -46.567673,
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -1701,7 +1771,8 @@
     "potencial_b2b": "muito_alto",
     "notas": "Round 3 — Hospital 24h emergenciais",
     "lat": -23.691598,
-    "lng": -46.564302
+    "lng": -46.564302,
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -1725,7 +1796,8 @@
     "potencial_b2b": "muito_alto",
     "notas": "Round 3 — Centro Veterinário 24h",
     "lat": -23.66388,
-    "lng": -46.528021
+    "lng": -46.528021,
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -1749,7 +1821,8 @@
     "potencial_b2b": "alto",
     "notas": "Round 3 — Especialidades veterinárias",
     "lat": -23.692015,
-    "lng": -46.567006
+    "lng": -46.567006,
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -1773,7 +1846,8 @@
     "potencial_b2b": "alto",
     "notas": "Round 3 — Hospital completo",
     "lat": -23.691086,
-    "lng": -46.562861
+    "lng": -46.562861,
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -1797,7 +1871,8 @@
     "potencial_b2b": "medio",
     "notas": "Round 3 — Pet shop independente",
     "lat": -23.693791,
-    "lng": -46.566206
+    "lng": -46.566206,
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -1821,7 +1896,8 @@
     "potencial_b2b": "medio",
     "notas": "Round 3 — Pet shop independente",
     "lat": -23.687439,
-    "lng": -46.563501
+    "lng": -46.563501,
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -1845,7 +1921,8 @@
     "potencial_b2b": "alto",
     "notas": "Round 3 — Desde 2003, veterinários+banho+tosa",
     "lat": -23.691895,
-    "lng": -46.564559
+    "lng": -46.564559,
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -1869,7 +1946,8 @@
     "potencial_b2b": "muito_alto",
     "notas": "Round 3 — Distribuidor produtos pet SP",
     "lat": -23.694432,
-    "lng": -46.566902
+    "lng": -46.566902,
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -1893,7 +1971,8 @@
     "potencial_b2b": "alto",
     "notas": "Round 3 — CNPJ 64.526.701/0001-41",
     "lat": -23.692695,
-    "lng": -46.563994
+    "lng": -46.563994,
+    "completeness_score": 1
   },
   {
     "cnpj": "",
@@ -1917,7 +1996,8 @@
     "potencial_b2b": "muito_alto",
     "notas": "Round 3 — Banho+tosa+clínica+ração premium",
     "lat": -23.675859,
-    "lng": -46.545438
+    "lng": -46.545438,
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -1941,7 +2021,8 @@
     "potencial_b2b": "muito_alto",
     "notas": "Round 3 — Pet shop luxo, spa pets",
     "lat": -23.677132,
-    "lng": -46.542151
+    "lng": -46.542151,
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -1965,7 +2046,8 @@
     "potencial_b2b": "medio",
     "notas": "Round 3 — Banho+tosa+alimentos, 480 likes",
     "lat": -23.675868,
-    "lng": -46.539957
+    "lng": -46.539957,
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -1989,7 +2071,8 @@
     "potencial_b2b": "medio",
     "notas": "Round 3 — Saudações 2026, ativo",
     "lat": -23.670823,
-    "lng": -46.546633
+    "lng": -46.546633,
+    "completeness_score": 1
   },
   {
     "cnpj": "",
@@ -2013,7 +2096,8 @@
     "potencial_b2b": "muito_alto",
     "notas": "Round 3 — Centro completo veterinário+banho+tosa",
     "lat": -23.664096,
-    "lng": -46.529648
+    "lng": -46.529648,
+    "completeness_score": 2
   },
   {
     "cnpj": "18.432.894/0001-54",
@@ -2037,7 +2121,8 @@
     "potencial_b2b": "alto",
     "notas": "Round 3 — 12+ anos, Vila Pires, 1654 likes",
     "lat": -23.657286,
-    "lng": -46.540942
+    "lng": -46.540942,
+    "completeness_score": 4
   },
   {
     "cnpj": "",
@@ -2061,7 +2146,8 @@
     "potencial_b2b": "muito_alto",
     "notas": "Round 3 — Banho+tosa+vet+hotel+taxi dog",
     "lat": -23.670216,
-    "lng": -46.542632
+    "lng": -46.542632,
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -2085,7 +2171,8 @@
     "potencial_b2b": "muito_alto",
     "notas": "Round 3 — Clínica completa+banho+day care",
     "lat": -23.673919,
-    "lng": -46.540923
+    "lng": -46.540923,
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -2109,7 +2196,8 @@
     "potencial_b2b": "alto",
     "notas": "Round 3 — Banho ozônio, espaço amplo",
     "lat": -23.67124,
-    "lng": -46.545677
+    "lng": -46.545677,
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -2133,7 +2221,8 @@
     "potencial_b2b": "alto",
     "notas": "Round 3 — 8 anos, WhatsApp validado",
     "lat": -23.676925,
-    "lng": -46.543752
+    "lng": -46.543752,
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -2157,7 +2246,8 @@
     "potencial_b2b": "muito_alto",
     "notas": "Round 3 — Clínica+cirurgias+internação+lab",
     "lat": -23.674311,
-    "lng": -46.543464
+    "lng": -46.543464,
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -2181,7 +2271,8 @@
     "potencial_b2b": "muito_alto",
     "notas": "Round 3 — Centro médico veterinário ABC",
     "lat": -23.660167,
-    "lng": -46.529613
+    "lng": -46.529613,
+    "completeness_score": 3
   },
   {
     "cnpj": "",
@@ -2205,7 +2296,8 @@
     "potencial_b2b": "muito_alto",
     "notas": "Round 3 — Nova, foco silvestres+felinos",
     "lat": -23.669827,
-    "lng": -46.546413
+    "lng": -46.546413,
+    "completeness_score": 1
   },
   {
     "cnpj": "",
@@ -2229,7 +2321,8 @@
     "potencial_b2b": "muito_alto",
     "notas": "Round 3 — Desde 1981, completo+hospedagem",
     "lat": -23.660779,
-    "lng": -46.546286
+    "lng": -46.546286,
+    "completeness_score": 4
   },
   {
     "cnpj": "",
@@ -2253,7 +2346,8 @@
     "potencial_b2b": "muito_alto",
     "notas": "Round 3 — Especialista Spitz, sem gaiola, 1788 followers",
     "lat": -23.670807,
-    "lng": -46.545211
+    "lng": -46.545211,
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -2277,7 +2371,8 @@
     "potencial_b2b": "muito_alto",
     "notas": "Round 3 — 2370 followers, especialista tosa bebê+Spitz",
     "lat": -23.676178,
-    "lng": -46.543611
+    "lng": -46.543611,
+    "completeness_score": 1
   },
   {
     "cnpj": "",
@@ -2301,7 +2396,8 @@
     "potencial_b2b": "alto",
     "notas": "Round 3 — Parceiro confiável Vila Assunção",
     "lat": -23.686625,
-    "lng": -46.556772
+    "lng": -46.556772,
+    "completeness_score": 3
   },
   {
     "cnpj": "",
@@ -2325,7 +2421,8 @@
     "potencial_b2b": "alto",
     "notas": "Round 3 — Tel validado, endereço confirmado",
     "lat": -23.675702,
-    "lng": -46.539814
+    "lng": -46.539814,
+    "completeness_score": 3
   },
   {
     "cnpj": "",
@@ -2349,7 +2446,8 @@
     "potencial_b2b": "alto",
     "notas": "Round 3 — Clínica+banho+tosa+vacinas",
     "lat": -23.674155,
-    "lng": -46.540309
+    "lng": -46.540309,
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -2373,7 +2471,8 @@
     "potencial_b2b": "MÁXIMO",
     "notas": "Round 3 — 🎯 CAT GROOMER ESPECIALISTA FELINOS+COELHOS! PERFECT FIT GATO³",
     "lat": -23.673297,
-    "lng": -46.546795
+    "lng": -46.546795,
+    "completeness_score": 3
   },
   {
     "cnpj": "53.153.938/0016-85",
@@ -2397,7 +2496,8 @@
     "potencial_b2b": "muito_alto",
     "notas": "Round 3 — Banho+tosa+clínica",
     "lat": -23.669706,
-    "lng": -46.540512
+    "lng": -46.540512,
+    "completeness_score": 3
   },
   {
     "cnpj": "53.153.938/0016-86",
@@ -2421,7 +2521,8 @@
     "potencial_b2b": "muito_alto",
     "notas": "Round 3 — Loja completa jardinagem+consultas vet+banho",
     "lat": -23.669948,
-    "lng": -46.539789
+    "lng": -46.539789,
+    "completeness_score": 5
   },
   {
     "cnpj": "",
@@ -2445,7 +2546,8 @@
     "potencial_b2b": "muito_alto",
     "notas": "Round 3 — Hospital+pet shop funcionando normalmente",
     "lat": -23.67091,
-    "lng": -46.54587
+    "lng": -46.54587,
+    "completeness_score": 3
   },
   {
     "cnpj": "",
@@ -2469,7 +2571,8 @@
     "potencial_b2b": "alto",
     "notas": "Round 3 — Rotina completa: banho+ração+brinquedos",
     "lat": -23.673815,
-    "lng": -46.54549
+    "lng": -46.54549,
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -2493,7 +2596,8 @@
     "potencial_b2b": "medio",
     "notas": "Round 3 — Cidade Viva, catálogo WhatsApp",
     "lat": -23.674492,
-    "lng": -46.546731
+    "lng": -46.546731,
+    "completeness_score": 1
   },
   {
     "cnpj": "",
@@ -2517,7 +2621,8 @@
     "potencial_b2b": "medio",
     "notas": "Round 3 — Shopping Square Garden",
     "lat": -23.674668,
-    "lng": -46.539318
+    "lng": -46.539318,
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -2539,7 +2644,8 @@
     "porte": "epp",
     "foco_felino": "false",
     "potencial_b2b": "alto",
-    "notas": "Vet 24h. Consultas, emergencias, cirurgias, oncologia, internacao."
+    "notas": "Vet 24h. Consultas, emergencias, cirurgias, oncologia, internacao.",
+    "completeness_score": 4
   },
   {
     "cnpj": "",
@@ -2561,7 +2667,8 @@
     "porte": "medio",
     "foco_felino": "true",
     "potencial_b2b": "alto",
-    "notas": "Hospital 24h. Medicina Felina, Neurologia, Oncologia, Ortopedia. Referencia ABC."
+    "notas": "Hospital 24h. Medicina Felina, Neurologia, Oncologia, Ortopedia. Referencia ABC.",
+    "completeness_score": 4
   },
   {
     "cnpj": "",
@@ -2583,7 +2690,8 @@
     "porte": "epp",
     "foco_felino": "true",
     "potencial_b2b": "alto",
-    "notas": "ESPECIALISTA EM FELINOS. Seg-Sex 9h-19h, Sab 9h-16h. Cardiologia, Oncologia, Nefrologia. MATCH GATO3."
+    "notas": "ESPECIALISTA EM FELINOS. Seg-Sex 9h-19h, Sab 9h-16h. Cardiologia, Oncologia, Nefrologia. MATCH GATO3.",
+    "completeness_score": 4
   },
   {
     "cnpj": "",
@@ -2605,7 +2713,8 @@
     "porte": "epp",
     "foco_felino": "false",
     "potencial_b2b": "alto",
-    "notas": "Ortopedia, Fisioterapia, Oncologia, Acupuntura. Seg-Sex 9h-18h, Sab 9h-14h."
+    "notas": "Ortopedia, Fisioterapia, Oncologia, Acupuntura. Seg-Sex 9h-18h, Sab 9h-14h.",
+    "completeness_score": 4
   },
   {
     "cnpj": "",
@@ -2627,7 +2736,8 @@
     "porte": "epp",
     "foco_felino": "true",
     "potencial_b2b": "alto",
-    "notas": "Clinica + Farmacia + Banho e Tosa + Ozonioterapia."
+    "notas": "Clinica + Farmacia + Banho e Tosa + Ozonioterapia.",
+    "completeness_score": 4
   },
   {
     "cnpj": "",
@@ -2649,7 +2759,8 @@
     "porte": "me",
     "foco_felino": "false",
     "potencial_b2b": "medio",
-    "notas": "Somente agendamento via WhatsApp. Exames, Vacinas, Banho e Tosa."
+    "notas": "Somente agendamento via WhatsApp. Exames, Vacinas, Banho e Tosa.",
+    "completeness_score": 4
   },
   {
     "cnpj": "",
@@ -2671,7 +2782,8 @@
     "porte": "medio",
     "foco_felino": "false",
     "potencial_b2b": "alto",
-    "notas": "Rede de clinicas veterinarias. Unidade ABC."
+    "notas": "Rede de clinicas veterinarias. Unidade ABC.",
+    "completeness_score": 3
   },
   {
     "cnpj": "",
@@ -2693,7 +2805,8 @@
     "porte": "me",
     "foco_felino": "false",
     "potencial_b2b": "medio",
-    "notas": "Pet shop + banho e tosa."
+    "notas": "Pet shop + banho e tosa.",
+    "completeness_score": 3
   },
   {
     "cnpj": "",
@@ -2715,7 +2828,8 @@
     "porte": "me",
     "foco_felino": "false",
     "potencial_b2b": "medio",
-    "notas": "Pet shop local tradicional."
+    "notas": "Pet shop local tradicional.",
+    "completeness_score": 3
   },
   {
     "cnpj": "",
@@ -2737,7 +2851,8 @@
     "porte": "grande",
     "foco_felino": "false",
     "potencial_b2b": "alto",
-    "notas": "Rede Petz, loja Carrefour Sao Caetano."
+    "notas": "Rede Petz, loja Carrefour Sao Caetano.",
+    "completeness_score": 3
   },
   {
     "cnpj": "",
@@ -2759,7 +2874,8 @@
     "porte": "me",
     "foco_felino": "false",
     "potencial_b2b": "medio",
-    "notas": "Pet shop + creche."
+    "notas": "Pet shop + creche.",
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -2781,7 +2897,8 @@
     "porte": "me",
     "foco_felino": "false",
     "potencial_b2b": "medio",
-    "notas": "Hotel, DayCare, Pet Walk, Banho e Tosa. +1000m2."
+    "notas": "Hotel, DayCare, Pet Walk, Banho e Tosa. +1000m2.",
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -2803,7 +2920,8 @@
     "porte": "me",
     "foco_felino": "false",
     "potencial_b2b": "medio",
-    "notas": "Sem gaiolas. Trimming e tosas especializadas."
+    "notas": "Sem gaiolas. Trimming e tosas especializadas.",
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -2825,7 +2943,8 @@
     "porte": "me",
     "foco_felino": "false",
     "potencial_b2b": "medio",
-    "notas": "Daycare, Banho e Tosa, Vet, Pet Shop, Natacao. 320m2."
+    "notas": "Daycare, Banho e Tosa, Vet, Pet Shop, Natacao. 320m2.",
+    "completeness_score": 4
   },
   {
     "cnpj": "",
@@ -2847,7 +2966,8 @@
     "porte": "me",
     "foco_felino": "false",
     "potencial_b2b": "medio",
-    "notas": "Banho e tosa local, bairro Barcelona."
+    "notas": "Banho e tosa local, bairro Barcelona.",
+    "completeness_score": 3
   },
   {
     "cnpj": "",
@@ -2869,7 +2989,8 @@
     "porte": "me",
     "foco_felino": "false",
     "potencial_b2b": "medio",
-    "notas": "Creche seg-sex 6:30-18:30, Hotel todos os dias. Vet incluido."
+    "notas": "Creche seg-sex 6:30-18:30, Hotel todos os dias. Vet incluido.",
+    "completeness_score": 4
   },
   {
     "cnpj": "",
@@ -2891,7 +3012,8 @@
     "porte": "me",
     "foco_felino": "false",
     "potencial_b2b": "medio",
-    "notas": "Creche, Hotel, Banho e Tosa, Natacao, Adestramento. Seg-Sex 7h-19h."
+    "notas": "Creche, Hotel, Banho e Tosa, Natacao, Adestramento. Seg-Sex 7h-19h.",
+    "completeness_score": 4
   },
   {
     "cnpj": "",
@@ -2913,7 +3035,8 @@
     "porte": "me",
     "foco_felino": "false",
     "potencial_b2b": "medio",
-    "notas": "Creche, Hotelzinho, Dogwalker, Banho e Tosa."
+    "notas": "Creche, Hotelzinho, Dogwalker, Banho e Tosa.",
+    "completeness_score": 3
   },
   {
     "cnpj": "",
@@ -2935,7 +3058,8 @@
     "porte": "me",
     "foco_felino": "false",
     "potencial_b2b": "medio",
-    "notas": "Creche, Hotel, Banho e Tosa, Vacinas. Ambiente natureza."
+    "notas": "Creche, Hotel, Banho e Tosa, Vacinas. Ambiente natureza.",
+    "completeness_score": 3
   },
   {
     "cnpj": "",
@@ -2957,7 +3081,8 @@
     "porte": "me",
     "foco_felino": "false",
     "potencial_b2b": "medio",
-    "notas": "Groomers especializados em todas as racas."
+    "notas": "Groomers especializados em todas as racas.",
+    "completeness_score": 3
   },
   {
     "cnpj": "",
@@ -2979,7 +3104,8 @@
     "porte": "epp",
     "foco_felino": "false",
     "potencial_b2b": "alto",
-    "notas": "Pronto Socorro Animal 24h."
+    "notas": "Pronto Socorro Animal 24h.",
+    "completeness_score": 4
   },
   {
     "cnpj": "",
@@ -3001,7 +3127,8 @@
     "porte": "epp",
     "foco_felino": "false",
     "potencial_b2b": "alto",
-    "notas": "Clinica vet. Tambem: (11) 99646-0668."
+    "notas": "Clinica vet. Tambem: (11) 99646-0668.",
+    "completeness_score": 3
   },
   {
     "cnpj": "",
@@ -3023,7 +3150,8 @@
     "porte": "epp",
     "foco_felino": "false",
     "potencial_b2b": "medio",
-    "notas": "WhatsApp 99191-9001, Ligacao 99266-4390."
+    "notas": "WhatsApp 99191-9001, Ligacao 99266-4390.",
+    "completeness_score": 3
   },
   {
     "cnpj": "",
@@ -3045,7 +3173,8 @@
     "porte": "me",
     "foco_felino": "false",
     "potencial_b2b": "medio",
-    "notas": "Pet shop + banho e tosa."
+    "notas": "Pet shop + banho e tosa.",
+    "completeness_score": 3
   },
   {
     "cnpj": "",
@@ -3067,7 +3196,8 @@
     "porte": "medio",
     "foco_felino": "false",
     "potencial_b2b": "alto",
-    "notas": "Franquia Petland premium."
+    "notas": "Franquia Petland premium.",
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -3089,7 +3219,8 @@
     "porte": "grande",
     "foco_felino": "false",
     "potencial_b2b": "alto",
-    "notas": "Rede Cobasi."
+    "notas": "Rede Cobasi.",
+    "completeness_score": 4
   },
   {
     "cnpj": "",
@@ -3111,7 +3242,8 @@
     "porte": "me",
     "foco_felino": "false",
     "potencial_b2b": "medio",
-    "notas": "Pet shop local."
+    "notas": "Pet shop local.",
+    "completeness_score": 3
   },
   {
     "cnpj": "",
@@ -3133,7 +3265,8 @@
     "porte": "me",
     "foco_felino": "false",
     "potencial_b2b": "medio",
-    "notas": "Banho e tosa."
+    "notas": "Banho e tosa.",
+    "completeness_score": 3
   },
   {
     "cnpj": "",
@@ -3155,7 +3288,8 @@
     "porte": "me",
     "foco_felino": "false",
     "potencial_b2b": "medio",
-    "notas": "Banho, Tosa e Hotel."
+    "notas": "Banho, Tosa e Hotel.",
+    "completeness_score": 3
   },
   {
     "cnpj": "",
@@ -3177,7 +3311,8 @@
     "porte": "epp",
     "foco_felino": "false",
     "potencial_b2b": "alto",
-    "notas": "Hospital 24h todos os dias. Tel: 3969-7979/3969-5525."
+    "notas": "Hospital 24h todos os dias. Tel: 3969-7979/3969-5525.",
+    "completeness_score": 3
   },
   {
     "cnpj": "",
@@ -3199,7 +3334,8 @@
     "porte": "epp",
     "foco_felino": "false",
     "potencial_b2b": "alto",
-    "notas": "Fundada 2007. Seg-Sab 8h-18h."
+    "notas": "Fundada 2007. Seg-Sab 8h-18h.",
+    "completeness_score": 4
   },
   {
     "cnpj": "",
@@ -3221,7 +3357,8 @@
     "porte": "me",
     "foco_felino": "false",
     "potencial_b2b": "medio",
-    "notas": "Pet shop e veterinaria."
+    "notas": "Pet shop e veterinaria.",
+    "completeness_score": 3
   },
   {
     "cnpj": "",
@@ -3243,7 +3380,8 @@
     "porte": "grande",
     "foco_felino": "false",
     "potencial_b2b": "alto",
-    "notas": "Rede Petz."
+    "notas": "Rede Petz.",
+    "completeness_score": 4
   },
   {
     "cnpj": "",
@@ -3265,7 +3403,8 @@
     "porte": "me",
     "foco_felino": "false",
     "potencial_b2b": "medio",
-    "notas": "Pet shop local."
+    "notas": "Pet shop local.",
+    "completeness_score": 2
   },
   {
     "cnpj": "",
@@ -3287,7 +3426,8 @@
     "porte": "medio",
     "foco_felino": "false",
     "potencial_b2b": "alto",
-    "notas": "Hospital vet 24h. Desde 1985."
+    "notas": "Hospital vet 24h. Desde 1985.",
+    "completeness_score": 4
   },
   {
     "cnpj": "",
@@ -3309,7 +3449,8 @@
     "porte": "epp",
     "foco_felino": "false",
     "potencial_b2b": "alto",
-    "notas": "Clinica + Pet Shop."
+    "notas": "Clinica + Pet Shop.",
+    "completeness_score": 3
   },
   {
     "cnpj": "",
@@ -3331,7 +3472,8 @@
     "porte": "epp",
     "foco_felino": "false",
     "potencial_b2b": "medio",
-    "notas": "Pet shop + clinica. Clinica: (11) 94138-5172."
+    "notas": "Pet shop + clinica. Clinica: (11) 94138-5172.",
+    "completeness_score": 4
   },
   {
     "cnpj": "",
@@ -3353,7 +3495,8 @@
     "porte": "grande",
     "foco_felino": "false",
     "potencial_b2b": "alto",
-    "notas": "Rede Cobasi."
+    "notas": "Rede Cobasi.",
+    "completeness_score": 3
   },
   {
     "cnpj": "",
@@ -3375,7 +3518,8 @@
     "porte": "grande",
     "foco_felino": "false",
     "potencial_b2b": "alto",
-    "notas": "Rede Petz."
+    "notas": "Rede Petz.",
+    "completeness_score": 4
   },
   {
     "cnpj": "",
@@ -3397,7 +3541,8 @@
     "porte": "me",
     "foco_felino": "false",
     "potencial_b2b": "medio",
-    "notas": "Clinica + banho e tosa."
+    "notas": "Clinica + banho e tosa.",
+    "completeness_score": 3
   },
   {
     "cnpj": "",
@@ -3419,7 +3564,8 @@
     "porte": "me",
     "foco_felino": "false",
     "potencial_b2b": "medio",
-    "notas": "Pet shop e veterinaria."
+    "notas": "Pet shop e veterinaria.",
+    "completeness_score": 3
   },
   {
     "cnpj": "",
@@ -3441,7 +3587,8 @@
     "porte": "epp",
     "foco_felino": "false",
     "potencial_b2b": "medio",
-    "notas": "Ter-Sex 9h-18h, Sab 9h-17h."
+    "notas": "Ter-Sex 9h-18h, Sab 9h-17h.",
+    "completeness_score": 4
   },
   {
     "cnpj": "",
@@ -3463,7 +3610,8 @@
     "porte": "epp",
     "foco_felino": "false",
     "potencial_b2b": "alto",
-    "notas": "Hospital 24h. Clinico + Emergencial + Exames + Raio X."
+    "notas": "Hospital 24h. Clinico + Emergencial + Exames + Raio X.",
+    "completeness_score": 4
   },
   {
     "cnpj": "",
@@ -3485,7 +3633,8 @@
     "porte": "me",
     "foco_felino": "false",
     "potencial_b2b": "medio",
-    "notas": "Pet shop central."
+    "notas": "Pet shop central.",
+    "completeness_score": 3
   },
   {
     "cnpj": "",
@@ -3507,7 +3656,8 @@
     "porte": "grande",
     "foco_felino": "false",
     "potencial_b2b": "alto",
-    "notas": "Rede Petz."
+    "notas": "Rede Petz.",
+    "completeness_score": 4
   },
   {
     "cnpj": "",
@@ -3529,7 +3679,8 @@
     "porte": "me",
     "foco_felino": "false",
     "potencial_b2b": "medio",
-    "notas": "Clinica vet e pet shop."
+    "notas": "Clinica vet e pet shop.",
+    "completeness_score": 3
   },
   {
     "cnpj": "",
@@ -3551,7 +3702,8 @@
     "porte": "me",
     "foco_felino": "false",
     "potencial_b2b": "medio",
-    "notas": "Pet shop local."
+    "notas": "Pet shop local.",
+    "completeness_score": 3
   },
   {
     "cnpj": "21.082.319/0001-83",
@@ -3573,7 +3725,8 @@
     "porte": "me",
     "foco_felino": "false",
     "potencial_b2b": "medio",
-    "notas": "Receita Federal. Banho e tosa + pet shop. Simples Nacional. Fundada 2014."
+    "notas": "Receita Federal. Banho e tosa + pet shop. Simples Nacional. Fundada 2014.",
+    "completeness_score": 3
   },
   {
     "cnpj": "33.523.239/0001-03",
@@ -3595,7 +3748,8 @@
     "porte": "me",
     "foco_felino": "false",
     "potencial_b2b": "medio",
-    "notas": "Receita Federal. Banho e tosa + pet shop. Simples Nacional. Fundada 2019."
+    "notas": "Receita Federal. Banho e tosa + pet shop. Simples Nacional. Fundada 2019.",
+    "completeness_score": 3
   },
   {
     "cnpj": "41.775.117/0001-24",
@@ -3617,7 +3771,8 @@
     "porte": "me",
     "foco_felino": "false",
     "potencial_b2b": "alto",
-    "notas": "Receita Federal. Vet + pet shop. Capital R$50k. Simples. Fundada 2021."
+    "notas": "Receita Federal. Vet + pet shop. Capital R$50k. Simples. Fundada 2021.",
+    "completeness_score": 3
   },
   {
     "cnpj": "53.031.350/0001-81",
@@ -3639,7 +3794,8 @@
     "porte": "me",
     "foco_felino": "false",
     "potencial_b2b": "medio",
-    "notas": "Receita Federal. Banho e tosa + pet shop. Simples. Fundada nov/2023."
+    "notas": "Receita Federal. Banho e tosa + pet shop. Simples. Fundada nov/2023.",
+    "completeness_score": 3
   },
   {
     "cnpj": "35.491.209/0001-80",
@@ -3661,7 +3817,8 @@
     "porte": "me",
     "foco_felino": "false",
     "potencial_b2b": "medio",
-    "notas": "Receita Federal. Estetica animal. Fundada 2019."
+    "notas": "Receita Federal. Estetica animal. Fundada 2019.",
+    "completeness_score": 3
   },
   {
     "cnpj": "65.800.241/0001-60",
@@ -3683,7 +3840,8 @@
     "porte": "me",
     "foco_felino": "false",
     "potencial_b2b": "medio",
-    "notas": "Receita Federal. Hotel pet + pet shop. Capital R$30k. NOVA mar/2026."
+    "notas": "Receita Federal. Hotel pet + pet shop. Capital R$30k. NOVA mar/2026.",
+    "completeness_score": 3
   },
   {
     "cnpj": "47.348.535/0001-11",
@@ -3705,7 +3863,8 @@
     "porte": "me",
     "foco_felino": "false",
     "potencial_b2b": "alto",
-    "notas": "Receita Federal. Pet shop. Capital R$150k. Simples. Fundada 2022."
+    "notas": "Receita Federal. Pet shop. Capital R$150k. Simples. Fundada 2022.",
+    "completeness_score": 3
   },
   {
     "cnpj": "54.311.567/0001-08",
@@ -3727,7 +3886,8 @@
     "porte": "epp",
     "foco_felino": "false",
     "potencial_b2b": "alto",
-    "notas": "Receita Federal. Banho e tosa + pet shop. EPP Capital R$200k. Fundada 2024."
+    "notas": "Receita Federal. Banho e tosa + pet shop. EPP Capital R$200k. Fundada 2024.",
+    "completeness_score": 3
   },
   {
     "cnpj": "08.911.762/0001-51",
@@ -3749,7 +3909,8 @@
     "porte": "me",
     "foco_felino": "false",
     "potencial_b2b": "alto",
-    "notas": "Receita Federal. Vet + pet shop. Rudge Ramos. Fundada 2007 (18 anos!)."
+    "notas": "Receita Federal. Vet + pet shop. Rudge Ramos. Fundada 2007 (18 anos!).",
+    "completeness_score": 3
   },
   {
     "cnpj": "40.835.319/0001-51",
@@ -3771,7 +3932,8 @@
     "porte": "me",
     "foco_felino": "false",
     "potencial_b2b": "medio",
-    "notas": "Receita Federal. Vet + pet shop. Simples. Fundada 2021."
+    "notas": "Receita Federal. Vet + pet shop. Simples. Fundada 2021.",
+    "completeness_score": 3
   },
   {
     "cnpj": "40.956.796/0001-75",
@@ -3793,7 +3955,8 @@
     "porte": "me",
     "foco_felino": "false",
     "potencial_b2b": "alto",
-    "notas": "Receita Federal. Vet + pet shop. Capital R$150k. Vila Bastos. Fundada 2021."
+    "notas": "Receita Federal. Vet + pet shop. Capital R$150k. Vila Bastos. Fundada 2021.",
+    "completeness_score": 3
   },
   {
     "cnpj": "60.828.888/0001-87",
@@ -3815,7 +3978,8 @@
     "porte": "me",
     "foco_felino": "false",
     "potencial_b2b": "alto",
-    "notas": "Receita Federal. Clinica vet. Capital R$50k. Campestre. NOVA mai/2025."
+    "notas": "Receita Federal. Clinica vet. Capital R$50k. Campestre. NOVA mai/2025.",
+    "completeness_score": 3
   },
   {
     "nome_fantasia": "Petstar Estrela",
@@ -3833,7 +3997,7 @@
     "porte": "mei",
     "notas": "Banho & Tosa em SCS. Especialistas em cuidado e acabamento. Atendimento personalizado. Bairro Barcelona. Agendamentos via WhatsApp.",
     "fonte_descoberta": "firecrawl:instagram:pet shop são caetano banho tosa",
-    "completeness_score": 2,
+    "completeness_score": 1,
     "data_discovery": "2026-04-03"
   },
   {
@@ -3890,7 +4054,7 @@
     "porte": "mei",
     "notas": "Pet Shop + Curso de Banho e Tosa Profissional. 1.836 curtidas no Facebook. Também oferece formação para groomers.",
     "fonte_descoberta": "firecrawl:instagram:pet shop são caetano banho tosa + firecrawl:facebook:pet shop são caetano",
-    "completeness_score": 3,
+    "completeness_score": 2,
     "data_discovery": "2026-04-03"
   },
   {
@@ -3909,7 +4073,7 @@
     "porte": "epp",
     "notas": "CNPJ 37.579.593/0001-00. Pet Shop com banho & tosa a partir de R$40. Produtos essenciais + cuidado profissional. Confirmado via cnpj.biz.",
     "fonte_descoberta": "firecrawl:instagram:pet shop são bernardo banho tosa + serper:cnpj.biz",
-    "completeness_score": 4,
+    "completeness_score": 3,
     "data_discovery": "2026-04-03"
   },
   {
@@ -3947,7 +4111,7 @@
     "porte": "epp",
     "notas": "Um novo conceito em cuidados pet. Centro de Estética + Loja + Ozônio + Veterinário. 9.2K seguidores Instagram. Alto engajamento.",
     "fonte_descoberta": "firecrawl:instagram:pet shop são bernardo banho tosa",
-    "completeness_score": 3,
+    "completeness_score": 2,
     "data_discovery": "2026-04-03"
   },
   {
@@ -3966,7 +4130,7 @@
     "porte": "epp",
     "notas": "CNPJ 57.453.787/0001-64. Pet Shop + Banho & Tosa + Veterinário. Rações, petiscos, acessórios. Banho de ozônio. CEP 09760-000. Website ativo.",
     "fonte_descoberta": "firecrawl:instagram:pet shop são bernardo + serper:cuidado cia são bernardo",
-    "completeness_score": 5,
+    "completeness_score": 4,
     "data_discovery": "2026-04-03"
   },
   {
@@ -3985,7 +4149,7 @@
     "porte": "mei",
     "notas": "Salão de estética canina. Especialista em tosa bebê e Shih Tzu. Tratamento especial para idosos e filhotes. Cuida de animais resgatados.",
     "fonte_descoberta": "firecrawl:instagram:pet shop santo andré banho tosa + serper:love for pet santo andré",
-    "completeness_score": 4,
+    "completeness_score": 3,
     "data_discovery": "2026-04-03"
   },
   {
@@ -4004,7 +4168,7 @@
     "porte": "mei",
     "notas": "Pet Shop + Banho e Tosa + Consultório Veterinário + Taxi Dog. 543 curtidas, 58 check-ins. Negócio local estabelecido.",
     "fonte_descoberta": "firecrawl:facebook:pet shop são bernardo santo andré",
-    "completeness_score": 2,
+    "completeness_score": 1,
     "data_discovery": "2026-04-03"
   },
   {
@@ -4023,7 +4187,7 @@
     "porte": "epp",
     "notas": "CNPJ 07.608.773/0001-02 (Kunikosita LTDA). Pet Shop + Clínica Veterinária. 467 curtidas, 91 check-ins no Facebook.",
     "fonte_descoberta": "firecrawl:facebook:pet shop santo andré + serper:kakazu santo andré",
-    "completeness_score": 4,
+    "completeness_score": 3,
     "data_discovery": "2026-04-03"
   },
   {
@@ -4042,7 +4206,7 @@
     "porte": "mei",
     "notas": "751 curtidas, 137 check-ins. Os melhores profissionais para atender e acolher seu pet com carinho.",
     "fonte_descoberta": "firecrawl:facebook:pet shop são bernardo santo andré",
-    "completeness_score": 2,
+    "completeness_score": 1,
     "data_discovery": "2026-04-03"
   },
   {
@@ -4061,7 +4225,7 @@
     "porte": "mei",
     "notas": "Atendimento veterinário + Pet Shop + serviços de estética. 322 curtidas, 76 check-ins no Facebook.",
     "fonte_descoberta": "firecrawl:facebook:pet shop são caetano são bernardo",
-    "completeness_score": 2,
+    "completeness_score": 1,
     "data_discovery": "2026-04-03"
   },
   {
@@ -4080,7 +4244,7 @@
     "porte": "epp",
     "notas": "Clínica Veterinária Pimenta Dogs III. Vet + Pet Shop. CEP 09695-000. Múltiplas unidades (I, II, III). Confirmado via topabiz e guiafacil.",
     "fonte_descoberta": "firecrawl:facebook:pet shop são bernardo + serper:pimenta dogs são bernardo",
-    "completeness_score": 4,
+    "completeness_score": 3,
     "data_discovery": "2026-04-03"
   },
   {
@@ -4099,7 +4263,7 @@
     "porte": "mei",
     "notas": "Estética, Acessórios, Moda Pet. 26 curtidas, 25 check-ins. Negócio pequeno/informal.",
     "fonte_descoberta": "firecrawl:facebook:pet shop são bernardo santo andré",
-    "completeness_score": 2,
+    "completeness_score": 1,
     "data_discovery": "2026-04-03"
   },
   {
@@ -4118,7 +4282,7 @@
     "porte": "epp",
     "notas": "Clínica Veterinária + centro de estética e embelezamento pet. 908 curtidas, 28 check-ins.",
     "fonte_descoberta": "firecrawl:facebook:banho tosa clínica veterinária diadema mauá",
-    "completeness_score": 2,
+    "completeness_score": 1,
     "data_discovery": "2026-04-03"
   },
   {
@@ -4137,7 +4301,7 @@
     "porte": "mei",
     "notas": "686 curtidas, 10 check-ins. Melhor lugar para garantir cuidados com seu pet. CEP 09341-135.",
     "fonte_descoberta": "firecrawl:facebook:banho tosa clínica veterinária diadema mauá",
-    "completeness_score": 3,
+    "completeness_score": 2,
     "data_discovery": "2026-04-03"
   },
   {
@@ -4156,7 +4320,7 @@
     "porte": "mei",
     "notas": "Equipe especializada em estética animal. 703 curtidas, 90 check-ins. 2 páginas no Facebook.",
     "fonte_descoberta": "firecrawl:facebook:banho tosa clínica veterinária diadema mauá",
-    "completeness_score": 4,
+    "completeness_score": 3,
     "data_discovery": "2026-04-03"
   },
   {
@@ -4175,7 +4339,7 @@
     "porte": "epp",
     "notas": "Clínica veterinária com banho e tosa. Atendimento com carinho. Página ativa no Facebook.",
     "fonte_descoberta": "firecrawl:facebook:banho tosa clínica veterinária diadema mauá ribeirão pires",
-    "completeness_score": 2,
+    "completeness_score": 1,
     "data_discovery": "2026-04-03"
   },
   {
@@ -4194,7 +4358,7 @@
     "porte": "epp",
     "notas": "Clínica Vet + Banho e Tosa + Exames + Acupuntura + Cirurgias + Pet Shop + Táxi Dog. 1678 curtidas, 357 check-ins. Serviço completo.",
     "fonte_descoberta": "firecrawl:facebook:banho tosa clínica veterinária diadema mauá",
-    "completeness_score": 2,
+    "completeness_score": 1,
     "data_discovery": "2026-04-03"
   },
   {
@@ -4213,7 +4377,7 @@
     "porte": "mei",
     "notas": "Higiene e Bem-Estar Animal para cães e gatos. 287 curtidas, 75 check-ins. Rua Victório... (endereço parcial no Facebook).",
     "fonte_descoberta": "firecrawl:facebook:banho tosa clínica veterinária diadema mauá ribeirão pires",
-    "completeness_score": 2,
+    "completeness_score": 1,
     "data_discovery": "2026-04-03"
   },
   {
@@ -4232,7 +4396,7 @@
     "porte": "epp",
     "notas": "Clínica Veterinária Paraíso - Cirurgias + Banho e Tosa. 554 check-ins no Facebook. Negócio estabelecido.",
     "fonte_descoberta": "firecrawl:facebook:banho tosa clínica veterinária diadema mauá",
-    "completeness_score": 2,
+    "completeness_score": 1,
     "data_discovery": "2026-04-03"
   },
   {
@@ -4251,7 +4415,7 @@
     "porte": "mei",
     "notas": "Clínica veterinária + banho e tosa + pet shop. 543 curtidas, 76 check-ins.",
     "fonte_descoberta": "firecrawl:facebook:banho tosa clínica veterinária diadema mauá",
-    "completeness_score": 2,
+    "completeness_score": 1,
     "data_discovery": "2026-04-03"
   },
   {
@@ -4270,7 +4434,7 @@
     "porte": "mei",
     "notas": "Banho e Tosa à Domicílio. Conforto e qualidade para você e seu pet. 2.646 seguidores, 578 seguindo. Pet móvel (van/trailer).",
     "fonte_descoberta": "serper:banho tosa domicílio são bernardo são caetano santo andré",
-    "completeness_score": 2,
+    "completeness_score": 1,
     "data_discovery": "2026-04-03"
   },
   {
@@ -4289,7 +4453,7 @@
     "porte": "mei",
     "notas": "Tosadora. Banho e tosa a domicílio: conforto pra você, tranquilidade pro seu pet. 688 curtidas, 8 falando sobre. Profissional autônoma.",
     "fonte_descoberta": "serper:banho tosa domicílio são caetano são bernardo",
-    "completeness_score": 2,
+    "completeness_score": 1,
     "data_discovery": "2026-04-03"
   },
   {
@@ -4308,7 +4472,7 @@
     "porte": "mei",
     "notas": "Pet Móvel - Banho e tosa a domicílio. 657 curtidas. Trazendo alegria por onde passa. Van equipada.",
     "fonte_descoberta": "serper:banho tosa domicílio são caetano são bernardo",
-    "completeness_score": 2,
+    "completeness_score": 1,
     "data_discovery": "2026-04-03"
   },
   {
@@ -4327,7 +4491,7 @@
     "porte": "mei",
     "notas": "Escola de Adestramento e Reabilitação. 1.890 seguidores. Adestrador comportamental. Atende região ABC, base em Campestre.",
     "fonte_descoberta": "serper:adestrador adestramento são caetano são bernardo santo andré ABC site:instagram.com",
-    "completeness_score": 2,
+    "completeness_score": 1,
     "data_discovery": "2026-04-03"
   },
   {
@@ -4346,7 +4510,7 @@
     "porte": "mei",
     "notas": "André Dias - Adestrador. Atende Santo André e São Bernardo do Campo. Perfil focado em treinamento comportamental.",
     "fonte_descoberta": "serper:adestrador adestramento santo andré são bernardo site:instagram.com",
-    "completeness_score": 2,
+    "completeness_score": 1,
     "data_discovery": "2026-04-03"
   },
   {
@@ -4384,7 +4548,7 @@
     "porte": "mei",
     "notas": "Adestrador positivo no ABC + Pet Sitter. 4K+ seguidores, 535 posts. Brincar enquanto treina. Também oferece serviço de pet sitter.",
     "fonte_descoberta": "serper:adestrador adestramento ABC site:instagram.com",
-    "completeness_score": 2,
+    "completeness_score": 1,
     "data_discovery": "2026-04-03"
   },
   {
@@ -4460,7 +4624,7 @@
     "porte": "epp",
     "notas": "Creche educativa + Hotel + Consultoria para creches. PersonAU Pet individualizado. Especialista em comportamento canino. 2.8K seguidores FB. Website completo.",
     "fonte_descoberta": "serper:adestrador adestramento são caetano ABC site:instagram.com + exa:abc campus dog",
-    "completeness_score": 4,
+    "completeness_score": 3,
     "data_discovery": "2026-04-03"
   },
   {
@@ -4498,7 +4662,7 @@
     "porte": "mei",
     "notas": "Adestramento + Cinoterapia (terapia assistida por animais). Parceria com estabelecimentos da região. Endereço confirmado em post.",
     "fonte_descoberta": "serper:adestrador adestramento são bernardo ABC site:instagram.com",
-    "completeness_score": 3,
+    "completeness_score": 2,
     "data_discovery": "2026-04-03"
   },
   {
@@ -4536,7 +4700,7 @@
     "porte": "mei",
     "notas": "Creche e Hotel para cães. Apaixonados por pets. Carinho, cuidado e atenção. Página recente no Facebook.",
     "fonte_descoberta": "serper:creche pet hotel pet são caetano são bernardo",
-    "completeness_score": 2,
+    "completeness_score": 1,
     "data_discovery": "2026-04-03"
   },
   {
@@ -4555,7 +4719,7 @@
     "porte": "mei",
     "notas": "Bióloga. Creche e hotel para pets + Hospedagem. 2.779 seguidores. Vila Scarpelli, Santo André.",
     "fonte_descoberta": "serper:creche pet hotel pet santo andré são caetano",
-    "completeness_score": 2,
+    "completeness_score": 1,
     "data_discovery": "2026-04-03"
   },
   {
@@ -4593,7 +4757,7 @@
     "porte": "epp",
     "notas": "CNPJ 24.915.359/0001-57. Creche + Hotel + Banho e Tosa. Fundada 01/06/2016. Endereço confirmado: R José Benedetti 234. Serviço premium.",
     "fonte_descoberta": "serper:chanelle pet boutique são caetano santo antônio",
-    "completeness_score": 5,
+    "completeness_score": 3,
     "data_discovery": "2026-04-03"
   },
   {
@@ -4612,7 +4776,7 @@
     "porte": "mei",
     "notas": "Táxi Dog atendendo ABCDM. Transporte para hospitais, veterinários, passeios. Luiz e Paula. Atende SCS e região.",
     "fonte_descoberta": "serper:táxi dog transporte pet ABC são caetano são bernardo santo andré",
-    "completeness_score": 2,
+    "completeness_score": 1,
     "data_discovery": "2026-04-03"
   },
   {
@@ -4631,7 +4795,7 @@
     "porte": "mei",
     "notas": "Táxi Dog & Cat. 184 curtidas. Transporte de cães E gatos. Fabíola Ferraz. São Caetano do Sul e região.",
     "fonte_descoberta": "serper:táxi dog transporte pet são caetano são bernardo",
-    "completeness_score": 2,
+    "completeness_score": 1,
     "data_discovery": "2026-04-03"
   },
   {
@@ -4669,7 +4833,7 @@
     "porte": "epp",
     "notas": "Clínica Veterinária + Vacinas + Day Care + Táxi Dog + Banho e Tosa + Produtos. Website ativo. Bairro Assunção SBC.",
     "fonte_descoberta": "serper:táxi dog transporte pet são bernardo",
-    "completeness_score": 3,
+    "completeness_score": 2,
     "data_discovery": "2026-04-03"
   },
   {
@@ -4688,7 +4852,7 @@
     "porte": "mei",
     "notas": "Bióloga + Cat Sitter Certificada. Cuida com amor e ciência no conforto do lar. ABC Paulista/Santo André. Threads ativo. 287 seguidores Threads. FOCO FELINO.",
     "fonte_descoberta": "serper:cat sitter cuidador de gatos ABC são caetano são bernardo santo andré",
-    "completeness_score": 3,
+    "completeness_score": 2,
     "data_discovery": "2026-04-03"
   },
   {
@@ -4707,7 +4871,7 @@
     "porte": "mei",
     "notas": "Cat Sitter domiciliar. Atende Rudge Ramos, Vila Caminho do Mar em SBC. Também Santo André e bairros de SP. FOCO FELINO.",
     "fonte_descoberta": "serper:cat sitter cuidador de gatos ABC são bernardo",
-    "completeness_score": 3,
+    "completeness_score": 2,
     "data_discovery": "2026-04-03"
   },
   {
@@ -4783,7 +4947,7 @@
     "porte": "epp",
     "notas": "+1000 famílias atendidas. Creche + Hospedagem + Escola de Adestramento. Atende dogs especiais. CEP 09210-300. Website Canva ativo.",
     "fonte_descoberta": "exa:abc campus dog creche educativa + serper:matilha abc creche hotel santo andré",
-    "completeness_score": 5,
+    "completeness_score": 4,
     "data_discovery": "2026-04-03"
   },
   {
@@ -4821,7 +4985,7 @@
     "porte": "mei",
     "notas": "Cuidadora de animais à domicílio. Não hospeda. Passeadora de cães. 981 curtidas no Facebook.",
     "fonte_descoberta": "serper:pet sitter dog walker cuidador de gatos ABC são bernardo",
-    "completeness_score": 2,
+    "completeness_score": 1,
     "data_discovery": "2026-04-03"
   },
   {
@@ -4854,7 +5018,7 @@
     "notas": "Pet shop com loja física em Diadema + e-commerce Shopify (unicpetshop.com.br) + iFood delivery. Vende ração, acessórios, farmácia vet, peixes, pássaros. Banho & Tosa bem avaliado. CNPJ confirmado via Serasa. Forte presença digital.",
     "fonte_descoberta": "serper:site:ifood.com.br+'pet shop'+'diadema'",
     "fonte_enriquecimento": "firecrawl:ifood+serper:instagram+firecrawl:unicpetshop.com.br+serper:serasa_cnpj",
-    "completeness_score": 4,
+    "completeness_score": 5,
     "data_discovery": "2026-04-03"
   },
   {
@@ -4887,7 +5051,7 @@
     "notas": "Loja física do marketplace proprietário da Mars (dona da Royal Canin, Pedigree, Whiskas). iFood rating 4.9. Pedido mínimo R$30. Loja conceito digital-first. Excelente candidato B2B pela relação com Mars e operação omnichannel.",
     "fonte_descoberta": "serper:site:ifood.com.br+'pet shop'+'santo andré'",
     "fonte_enriquecimento": "firecrawl:ifood+exa:petyard+serper:blog_semeupetfalasse",
-    "completeness_score": 2,
+    "completeness_score": 3,
     "data_discovery": "2026-04-03"
   },
   {
@@ -4920,7 +5084,7 @@
     "notas": "Pet shop delivery via iFood em SBC. Vende Cães, Gatos, Peixes, Acessórios, Higiene. Operação digital-native (sem dados de loja física encontrados). Possivelmente dark store ou operação home-based iFood.",
     "fonte_descoberta": "serper:site:ifood.com.br+'pet'+'são bernardo do campo'",
     "fonte_enriquecimento": "firecrawl:ifood_page",
-    "completeness_score": 2,
+    "completeness_score": 3,
     "data_discovery": "2026-04-03"
   },
   {
@@ -4953,7 +5117,7 @@
     "notas": "Novidade no iFood (badge 'Novidade'). Delivery de pets em SCS. Mesmo operador que Pet.shopper SBC — rede expandindo no ABC. Pedido mínimo R$150. Operação digital-native.",
     "fonte_descoberta": "serper:site:ifood.com.br+'pet'+'são caetano do sul'",
     "fonte_enriquecimento": "firecrawl:ifood_page+exa:petshopper",
-    "completeness_score": 2,
+    "completeness_score": 3,
     "data_discovery": "2026-04-03"
   },
   {
@@ -4986,7 +5150,7 @@
     "notas": "Especialista em ração a granel via iFood. Rating 5.0. Atende cães, gatos, pássaros, roedores. Também vende farmácia vet e acessórios. Bom candidato para revenda granel GATO³.",
     "fonte_descoberta": "exa:'pet shop delivery santo andré iFood'",
     "fonte_enriquecimento": "firecrawl:ifood_page",
-    "completeness_score": 2,
+    "completeness_score": 3,
     "data_discovery": "2026-04-03"
   },
   {
@@ -5085,7 +5249,7 @@
     "notas": "Pequeno pet shop em SCS com delivery próprio (frete grátis SCS acima R$75). Instagram com 45 seguidores. Operação micro/artesanal. Facebook ativo com 557 seguidores.",
     "fonte_descoberta": "exa:'pet shop delivery São Caetano do Sul'",
     "fonte_enriquecimento": "serper:instagram_petshopdogreis",
-    "completeness_score": 3,
+    "completeness_score": 2,
     "data_discovery": "2026-04-03"
   },
   {
@@ -5151,7 +5315,7 @@
     "notas": "Pet shop em Santo André recém-entrado no iFood (post Jan 2026). Vende ração, petiscos. Instagram ativo com posts regulares. Parceiro Petniva. Está crescendo digitalmente.",
     "fonte_descoberta": "serper:'pet shop delivery iFood santo andré'",
     "fonte_enriquecimento": "serper:instagram_petshopvitoria",
-    "completeness_score": 2,
+    "completeness_score": 1,
     "data_discovery": "2026-04-03"
   },
   {
@@ -5184,7 +5348,7 @@
     "notas": "Começou como casa de ração, evoluiu para pet shop completo em SBC. iFood delivery. Instagram ativo. Vende ração cães/gatos, acessórios, higiene, pássaros. Bairro Alvarenga. Candidato B2B em expansão.",
     "fonte_descoberta": "serper:'pet shop iFood são bernardo do campo'",
     "fonte_enriquecimento": "firecrawl:ifood+serper:instagram_patamiga",
-    "completeness_score": 2,
+    "completeness_score": 3,
     "data_discovery": "2026-04-03"
   },
   {
@@ -5217,7 +5381,370 @@
     "notas": "Fabricante e varejista de tapetes higiênicos em Santo André. 5.099 seguidores Instagram. Vende na Shopee + loja física com retirada. Telefone atacado separado do varejo. Site próprio. Interessante como parceiro B2B — fabricante local com canal digital forte.",
     "fonte_descoberta": "serper:shopee+'pet'+'santo andré'",
     "fonte_enriquecimento": "serper:instagram_animatrix+firecrawl:animatrixpet.com.br",
-    "completeness_score": 5,
+    "completeness_score": 4,
     "data_discovery": "2026-04-03"
+  },
+  {
+    "nome_fantasia": "Vet Help Clinica Veterinaria",
+    "razao_social": "Vet Help Clinica Veterinaria Ltda",
+    "cnpj": "38.404.676/0001-13",
+    "segmento": "clinica_vet",
+    "endereco": "Av. Tijucussu, 626 - Olímpico",
+    "bairro": "Olímpico",
+    "cidade": "São Caetano do Sul",
+    "ring": "1_abc",
+    "telefone": "",
+    "whatsapp": "",
+    "email": "",
+    "instagram": "",
+    "website": "",
+    "porte": "epp",
+    "foco_felino": "false",
+    "potencial_b2b": "medio",
+    "notas": "Clínica vet ativa em SCS, credenciada Petlove. Endereço alternativo encontrado: Av. Vital Brasil Filho, 623. CNAE M-7500-1/00.",
+    "fonte_descoberta": "econodata:cnpj/38404676000113+serper:petlove-rede-credenciada",
+    "fonte_enriquecimento": "econodata+listamais+petlove",
+    "completeness_score": 3,
+    "data_discovery": "2026-04-03",
+    "batch_source": "batch_e"
+  },
+  {
+    "nome_fantasia": "Rafael Jung Clinica Veterinaria",
+    "razao_social": "Rafael Jung Clinica Veterinaria Ltda",
+    "cnpj": "54.331.358/0001-26",
+    "segmento": "clinica_vet",
+    "endereco": "Rua Julieta Soares, 68 - Olímpico",
+    "bairro": "Olímpico",
+    "cidade": "São Caetano do Sul",
+    "ring": "1_abc",
+    "telefone": "",
+    "whatsapp": "",
+    "email": "",
+    "instagram": "",
+    "website": "",
+    "porte": "medio",
+    "foco_felino": "false",
+    "potencial_b2b": "medio",
+    "notas": "Clínica vet ativa em SCS bairro Olímpico. Porte médio na Econodata (faturamento estimado ~R$50k). CNAE M-7500-1/00.",
+    "fonte_descoberta": "econodata:cnpj/54331358000126",
+    "fonte_enriquecimento": "econodata",
+    "completeness_score": 3,
+    "data_discovery": "2026-04-03",
+    "batch_source": "batch_e"
+  },
+  {
+    "nome_fantasia": "Clinica Veterinaria V3",
+    "razao_social": "Clinica Veterinaria V3 Ltda",
+    "cnpj": "32.469.527/0001-56",
+    "segmento": "clinica_vet",
+    "endereco": "Rua Prates, 219 - Oswaldo Cruz",
+    "bairro": "Oswaldo Cruz",
+    "cidade": "São Caetano do Sul",
+    "ring": "1_abc",
+    "telefone": "",
+    "whatsapp": "",
+    "email": "",
+    "instagram": "",
+    "website": "",
+    "porte": "epp",
+    "foco_felino": "false",
+    "potencial_b2b": "medio",
+    "notas": "Clínica vet ativa em SCS, Oswaldo Cruz. Faturamento estimado ~R$20k. Mencionada no benditoguia e saocaetanodosul.net.br. CNAE M-7500-1/00.",
+    "fonte_descoberta": "econodata:cnpj/32469527000156+serper:saocaetanodosul.net.br",
+    "fonte_enriquecimento": "econodata+cnpj.biz",
+    "completeness_score": 3,
+    "data_discovery": "2026-04-03",
+    "batch_source": "batch_e"
+  },
+  {
+    "nome_fantasia": "A.S. Martins Veterinaria e Pet Shop",
+    "razao_social": "A. S. Martins Veterinaria e Pet Shop",
+    "cnpj": "17.372.125/0001-45",
+    "segmento": "pet_shop",
+    "sub_segmento": "vet_integrado",
+    "endereco": "Rua São Paulo, 2144 - Santa Paula",
+    "bairro": "Santa Paula",
+    "cidade": "São Caetano do Sul",
+    "ring": "1_abc",
+    "telefone": "",
+    "whatsapp": "",
+    "email": "",
+    "instagram": "",
+    "website": "",
+    "porte": "me",
+    "foco_felino": "false",
+    "potencial_b2b": "medio",
+    "notas": "Pet shop com serviço veterinário integrado em SCS. CNAE G-4789-0/04 (comércio varejista de animais e artigos). ME ativa.",
+    "fonte_descoberta": "econodata:cnpj/17372125000145",
+    "fonte_enriquecimento": "econodata",
+    "completeness_score": 3,
+    "data_discovery": "2026-04-03",
+    "batch_source": "batch_e"
+  },
+  {
+    "nome_fantasia": "Gil's Clinica Veterinaria",
+    "razao_social": "Gil's Clinica Veterinaria Ltda",
+    "cnpj": "21.382.046/0001-92",
+    "segmento": "clinica_vet",
+    "endereco": "Avenida Portugal, 1680 - Centro",
+    "bairro": "Centro",
+    "cidade": "Santo André",
+    "ring": "1_abc",
+    "telefone": "",
+    "whatsapp": "",
+    "email": "",
+    "instagram": "",
+    "website": "",
+    "porte": "me",
+    "foco_felino": "false",
+    "potencial_b2b": "medio",
+    "notas": "Clínica vet ativa em Santo André Centro desde 2014. Av. Portugal é zona comercial forte. CNAE M-7500-1/00.",
+    "fonte_descoberta": "econodata:cnpj/21382046000192+cnpj.biz:fundada-2014",
+    "fonte_enriquecimento": "econodata+cnpj.biz",
+    "completeness_score": 3,
+    "data_discovery": "2026-04-03",
+    "batch_source": "batch_e"
+  },
+  {
+    "nome_fantasia": "Unqui Clinica Veterinaria e Pet Shop",
+    "razao_social": "Unqui Clinica Veterinaria e Pet Shop Ltda",
+    "cnpj": "17.900.973/0001-80",
+    "segmento": "clinica_vet",
+    "sub_segmento": "pet_shop_integrado",
+    "endereco": "Rua Continental, 101 - Jardim do Mar",
+    "bairro": "Jardim do Mar",
+    "cidade": "São Bernardo do Campo",
+    "ring": "1_abc",
+    "telefone": "",
+    "whatsapp": "",
+    "email": "",
+    "instagram": "",
+    "website": "",
+    "porte": "medio",
+    "foco_felino": "false",
+    "potencial_b2b": "medio",
+    "notas": "Clínica vet + pet shop ativa em SBC desde 2013 (12+ anos). Porte médio. Encontrada em clinica.net.br, Serasa e Econodata. CNAE M-7500-1/00.",
+    "fonte_descoberta": "econodata:cnpj/17900973000180+serper:clinica.net.br",
+    "fonte_enriquecimento": "econodata+serasaexperian+jusbrasil",
+    "completeness_score": 3,
+    "data_discovery": "2026-04-03",
+    "batch_source": "batch_e"
+  },
+  {
+    "nome_fantasia": "Animus Vet 24h",
+    "razao_social": "Animus Vet Medicina Veterinaria LTDA",
+    "cnpj": "49.132.437/0001-78",
+    "segmento": "clinica_vet",
+    "sub_segmento": "hospital_24h",
+    "endereco": "",
+    "bairro": "",
+    "cidade": "Santo André",
+    "ring": "1_abc",
+    "telefone": "(11) 9 3926-3706",
+    "whatsapp": "(11) 93926-3706",
+    "email": "",
+    "instagram": "@animusvet",
+    "website": "https://animusvet.com.br/",
+    "porte": "epp",
+    "foco_felino": "false",
+    "potencial_b2b": "alto",
+    "notas": "Hospital veterinário 24h em Santo André. Fundada 01/2023. Oferece exames de imagem, laboratoriais, internação 24h, cirurgias eletivas. Credenciada Petlove. Instagram ativo. Potencial alto por ser 24h no ABC.",
+    "fonte_descoberta": "exa:animusvet.com.br+serper:cnpj.biz/49132437000178",
+    "fonte_enriquecimento": "exa+serper:petlove+serper:instagram",
+    "completeness_score": 4,
+    "data_discovery": "2026-04-03",
+    "batch_source": "batch_e"
+  },
+  {
+    "nome_fantasia": "Dogzone Pet Shop",
+    "razao_social": "Dogzone Pet Shop Ltda",
+    "cnpj": "45.441.663/0001-80",
+    "segmento": "pet_shop",
+    "endereco": "Alameda São Caetano, 519 - Jardim",
+    "bairro": "Jardim",
+    "cidade": "Santo André",
+    "ring": "1_abc",
+    "telefone": "",
+    "whatsapp": "",
+    "email": "",
+    "instagram": "",
+    "website": "",
+    "porte": "epp",
+    "foco_felino": "false",
+    "potencial_b2b": "baixo",
+    "notas": "Pet shop ativo em Santo André desde 02/2022. Listado como 'Premium' na Econodata (top ranking). Al. São Caetano é zona comercial.",
+    "fonte_descoberta": "econodata:sp-santo-andre/busca-pet-shop",
+    "fonte_enriquecimento": "econodata+cnpj.biz",
+    "completeness_score": 3,
+    "data_discovery": "2026-04-03",
+    "batch_source": "batch_e"
+  },
+  {
+    "nome_fantasia": "Pet Shop Lucy Dog",
+    "razao_social": "Pet Shop Lucy Dog Ltda",
+    "cnpj": "06.026.377/0001-04",
+    "segmento": "pet_shop",
+    "endereco": "Rua Marina, 118 - Campestre",
+    "bairro": "Campestre",
+    "cidade": "Santo André",
+    "ring": "1_abc",
+    "telefone": "",
+    "whatsapp": "",
+    "email": "",
+    "instagram": "",
+    "website": "",
+    "porte": "epp",
+    "foco_felino": "false",
+    "potencial_b2b": "baixo",
+    "notas": "Pet shop ativo em SA, bairro Campestre. Listado top 3 na Econodata para SA. CNAE pet shop.",
+    "fonte_descoberta": "econodata:sp-santo-andre/busca-pet-shop",
+    "fonte_enriquecimento": "econodata",
+    "completeness_score": 3,
+    "data_discovery": "2026-04-03",
+    "batch_source": "batch_e"
+  },
+  {
+    "nome_fantasia": "Garden Pet Shop",
+    "razao_social": "Garden Pet Shop Ltda",
+    "cnpj": "53.624.990/0001-03",
+    "segmento": "pet_shop",
+    "endereco": "Rua das Paineiras, 272 - Jardim",
+    "bairro": "Jardim",
+    "cidade": "Santo André",
+    "ring": "1_abc",
+    "telefone": "",
+    "whatsapp": "",
+    "email": "",
+    "instagram": "",
+    "website": "",
+    "porte": "epp",
+    "foco_felino": "false",
+    "potencial_b2b": "baixo",
+    "notas": "Pet shop ativo em SA, bairro Jardim. Listado top 5 Econodata. CNAE pet shop.",
+    "fonte_descoberta": "econodata:sp-santo-andre/busca-pet-shop",
+    "fonte_enriquecimento": "econodata",
+    "completeness_score": 3,
+    "data_discovery": "2026-04-03",
+    "batch_source": "batch_e"
+  },
+  {
+    "nome_fantasia": "Pet Shop Gabi Adonay",
+    "razao_social": "Paulo Victor Silva dos Santos Ltda",
+    "cnpj": "56.879.306/0001-14",
+    "segmento": "pet_shop",
+    "endereco": "Rua Manoel Augusto Ferreirinha, 386 - Nova Gerti",
+    "bairro": "Nova Gerti",
+    "cidade": "São Caetano do Sul",
+    "ring": "1_abc",
+    "telefone": "",
+    "whatsapp": "",
+    "email": "",
+    "instagram": "",
+    "website": "",
+    "porte": "epp",
+    "foco_felino": "false",
+    "potencial_b2b": "baixo",
+    "notas": "Pet shop ativo em SCS, Nova Gerti. CNAE G-4789-0/04. EPP ativa.",
+    "fonte_descoberta": "econodata:cnpj/56879306000114",
+    "fonte_enriquecimento": "econodata",
+    "completeness_score": 3,
+    "data_discovery": "2026-04-03",
+    "batch_source": "batch_e"
+  },
+  {
+    "nome_fantasia": "Dra Sah Clinica Veterinaria",
+    "razao_social": "Sabrina Vilani Clinica Veterinaria Ltda",
+    "cnpj": "57.237.920/0001-45",
+    "segmento": "clinica_vet",
+    "endereco": "",
+    "bairro": "",
+    "cidade": "Santo André",
+    "ring": "1_abc",
+    "telefone": "",
+    "whatsapp": "",
+    "email": "",
+    "instagram": "",
+    "website": "",
+    "porte": "me",
+    "foco_felino": "false",
+    "potencial_b2b": "baixo",
+    "notas": "Clínica vet ativa em Santo André. Nome fantasia 'Dra Sah'. CNAE M-7500-1/00. Endereço não disponível publicamente.",
+    "fonte_descoberta": "econodata:cnpj/57237920000145",
+    "fonte_enriquecimento": "econodata",
+    "completeness_score": 2,
+    "data_discovery": "2026-04-03",
+    "batch_source": "batch_e"
+  },
+  {
+    "nome_fantasia": "Pet Shop & Cia",
+    "razao_social": "JC Vieira Pet Shop",
+    "cnpj": "57.366.177/0001-23",
+    "segmento": "pet_shop",
+    "endereco": "Avenida São João Batista, 298 - Rudge Ramos",
+    "bairro": "Rudge Ramos",
+    "cidade": "São Bernardo do Campo",
+    "ring": "1_abc",
+    "telefone": "",
+    "whatsapp": "",
+    "email": "",
+    "instagram": "",
+    "website": "",
+    "porte": "me",
+    "foco_felino": "false",
+    "potencial_b2b": "baixo",
+    "notas": "Pet shop ativo em SBC, Rudge Ramos. Zona comercial forte (mesma avenida de outros pet shops do CRM).",
+    "fonte_descoberta": "econodata:cnpj/57366177000123",
+    "fonte_enriquecimento": "econodata",
+    "completeness_score": 3,
+    "data_discovery": "2026-04-03",
+    "batch_source": "batch_e"
+  },
+  {
+    "nome_fantasia": "Vila Pet",
+    "razao_social": "Tayna Treice Pet Shop Ltda",
+    "cnpj": "33.954.742/0001-05",
+    "segmento": "pet_shop",
+    "endereco": "",
+    "bairro": "",
+    "cidade": "São Bernardo do Campo",
+    "ring": "1_abc",
+    "telefone": "",
+    "whatsapp": "",
+    "email": "",
+    "instagram": "",
+    "website": "",
+    "porte": "me",
+    "foco_felino": "false",
+    "potencial_b2b": "baixo",
+    "notas": "Pet shop ativo em SBC. CNAE comércio varejista de artigos e animais de estimação.",
+    "fonte_descoberta": "econodata:cnpj/33954742000105",
+    "fonte_enriquecimento": "econodata",
+    "completeness_score": 2,
+    "data_discovery": "2026-04-03",
+    "batch_source": "batch_e"
+  },
+  {
+    "nome_fantasia": "Tropical Pet Shop",
+    "razao_social": "Tropical Pet Comercio de Produtos Veterinarios Ltda",
+    "cnpj": "67.730.960/0001-88",
+    "segmento": "pet_shop",
+    "endereco": "",
+    "bairro": "",
+    "cidade": "São Bernardo do Campo",
+    "ring": "1_abc",
+    "telefone": "",
+    "whatsapp": "",
+    "email": "",
+    "instagram": "",
+    "website": "",
+    "porte": "me",
+    "foco_felino": "false",
+    "potencial_b2b": "baixo",
+    "notas": "Pet shop ativo em SBC. CNAE comércio varejista de medicamentos veterinários. Razão social indica foco em produtos veterinários — possível distribuidor local.",
+    "fonte_descoberta": "econodata:cnpj/67730960000188",
+    "fonte_enriquecimento": "econodata",
+    "completeness_score": 2,
+    "data_discovery": "2026-04-03",
+    "batch_source": "batch_e"
   }
 ]

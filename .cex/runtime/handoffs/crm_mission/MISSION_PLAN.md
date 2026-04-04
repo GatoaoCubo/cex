@@ -1,82 +1,68 @@
-# Mission: CRM_FULL_HARVEST — Plano de Continuous Batching
+# Mission: CRM_FULL_HARVEST — Status Atualizado
 
-## Status atual
-- **Base**: 164 contatos reais (0 fakes)
-- **Fonte 1 (CNAE) ✅**: Rodou, produziu 152→164
-
----
-
-## Waves (2 slots N01 Opus paralelos por wave)
-
-### Wave 1 — Diretórios + Google Maps
-| Slot | Batch | Fontes | Output |
-|:---:|-------|--------|--------|
-| A | `batch_a_diretorios_pet` | Petlove, DogHero, PetAnjo, TeleListas, GuiaMais, Apontador, ListaMais | `crm_batch_a_diretorios.json` |
-| B | `batch_b_google_maps` | Google Maps, Google Business Profile (9 categorias × 7 cidades) | `crm_batch_b_gmaps.json` |
-
-### Wave 2 — Social + Marketplaces
-| Slot | Batch | Fontes | Output |
-|:---:|-------|--------|--------|
-| C | `batch_c_social_discovery` | Instagram hashtags, Instagram location, Facebook Pages | `crm_batch_c_social.json` |
-| D | `batch_d_marketplaces` | iFood, Rappi, Mercado Livre, Shopee | `crm_batch_d_marketplaces.json` |
-
-### Wave 3 — Reputação + CNAE Deep
-| Slot | Batch | Fontes | Output |
-|:---:|-------|--------|--------|
-| E | `batch_e_reputation` | Reclame Aqui, CRMV-SP, Econodata, Yelp | `crm_batch_e_reputation.json` + `crm_enrichment_reputation.json` |
-| F | `batch_f_cnae_deep` | Casa dos Dados, CNPJ.biz, ReceitaWS, CNPJá | `crm_batch_f_cnae.json` |
+## Status (04/Abr/2026 12:50)
+- **Base**: 244 contatos reais (0 fakes)
+- **Batches completos**: C (social +53), D (marketplaces +12), E (reputation +15)
+- **Batches pendentes**: A (diretórios), B (Google Maps), F (CNAE deep)
+- **Meta**: 500+ contatos
 
 ---
 
-## Pós-Mission: Merge + Dedup + Dashboard
+## Waves Executadas
 
+### Wave 2 ✅ — Social + Marketplaces (03/Abr)
+| Slot | Batch | Status | +Novos |
+|:---:|-------|:------:|:------:|
+| C | `batch_c_social_discovery` | ✅ MERGED | +53 |
+| D | `batch_d_marketplaces` | ✅ MERGED | +12 |
+
+### Wave 3 (parcial) ✅ — Reputação (03/Abr)
+| Slot | Batch | Status | +Novos |
+|:---:|-------|:------:|:------:|
+| E | `batch_e_reputation` | ✅ MERGED (04/Abr) | +15 |
+
+---
+
+## Wave FINAL — A executar agora
+
+| Slot | Batch | Fontes | Output | ROI estimado |
+|:---:|-------|--------|--------|:---:|
+| A | `batch_a_diretorios_pet` | Petlove, DogHero, PetAnjo, TeleListas, GuiaMais, Apontador | `crm_batch_a_diretorios.json` | +40-80 |
+| B | `batch_b_google_maps` | Serper Google Maps, 9 categorias × 7 cidades | `crm_batch_b_gmaps.json` | +60-120 |
+| F | `batch_f_cnae_deep` | Casa dos Dados, CNPJ.biz, ReceitaWS, CNPJá | `crm_batch_f_cnae.json` | +30-50 |
+
+### Dispatch
 ```bash
-# N07 faz o merge final:
-# 1. Carregar crm_pet_abc.json (base: 164)
-# 2. Merge batch_a → dedup → append novos
-# 3. Merge batch_b → dedup → append novos
-# 4. Merge batch_c → dedup → append novos
-# 5. Merge batch_d → dedup → append novos
-# 6. Merge batch_e → novos + enriquecimento
-# 7. Merge batch_f → dedup → append novos
-# 8. Recalcular completeness_score
-# 9. Atualizar CSV + Dashboard HTML
-# 10. Commit final
+# 3 slots paralelos — cada um roda em terminal separado
+powershell -ExecutionPolicy Bypass -File _spawn/spawn_solo.ps1 -nucleus n01 -task "BATCH_A_DIRETORIOS"
+powershell -ExecutionPolicy Bypass -File _spawn/spawn_solo.ps1 -nucleus n01 -task "BATCH_B_GMAPS"
+powershell -ExecutionPolicy Bypass -File _spawn/spawn_solo.ps1 -nucleus n01 -task "BATCH_F_CNAE"
 ```
 
 ---
 
-## Como executar
+## Pós-Grid: Merge + Consolidate
 
 ```bash
-# Wave 1 (diretórios + Google Maps):
-powershell -ExecutionPolicy Bypass -File _spawn/mission_crm_harvest.ps1 -wave 1
+# 1. Dry-run check
+python N01_research/output/data/merge_batches.py --all --dry-run
 
-# Quando wave 1 completar → Wave 2:
-powershell -ExecutionPolicy Bypass -File _spawn/mission_crm_harvest.ps1 -wave 2
+# 2. Merge
+python N01_research/output/data/merge_batches.py --all
 
-# Quando wave 2 completar → Wave 3:
-powershell -ExecutionPolicy Bypass -File _spawn/mission_crm_harvest.ps1 -wave 3
-
-# Monitor:
-bash _spawn/dispatch.sh status
-
-# Merge final (N07):
-python N01_research/output/data/merge_batches.py
+# 3. Commit
+git add N01_research/output/data/ && git commit -m "[N07] merge batches A+B+F → {N} contatos"
 ```
 
 ---
 
-## Meta final
+## Meta Final
 
-| Métrica | Atual | Meta |
-|---------|:---:|:---:|
-| Total contatos | 164 | **500+** |
-| Com telefone | 37% | **60%+** |
-| Com endereço | 62% | **85%+** |
-| Com email/web | 50% | **65%+** |
-| Com CNPJ | ~10% | **40%+** |
-| SCS | 35 | **60+** |
-| Diadema | 9 | **40+** |
-| Mauá | 7 | **30+** |
-| Fakes | 0 | **0** |
+| Métrica | Antes (164) | Agora (244) | Projeção (+A+B+F) | Meta |
+|---------|:-----------:|:-----------:|:------------------:|:----:|
+| Total contatos | 164 | 244 | ~414 | **500+** |
+| Com telefone | 37% | 34% | ~50% | 60% |
+| Com endereço | 62% | 56% | ~72% | 85% |
+| Com email/web | 50% | 63% | ~65% | ✅ 65% |
+| Com CNPJ | ~10% | 22% | ~32% | 40% |
+| Fakes | 0 | 0 | 0 | ✅ 0 |

@@ -7,7 +7,7 @@
 ## LEIA PRIMEIRO
 1. `P05_output/p05_rf_crm_output_standard.md` — formato JSON
 2. `P06_schema/p06_val_business_contact_quality.md` — anti-fake
-3. `N01_research/output/data/crm_pet_abc.json` — 164 contatos (dedup)
+3. `N01_research/output/data/crm_pet_abc.json` — 244 contatos (dedup)
 
 ---
 
