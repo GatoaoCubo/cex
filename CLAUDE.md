@@ -1,6 +1,6 @@
 # CEX — Typed Knowledge System for LLM Agents
 
-> 114 kinds · 107 builders · 12 pillars · 8 nuclei (N00-N07) · 8F pipeline · cex_sdk runtime
+> 115 kinds · 108 builders · 12 pillars · 8 nuclei (N00-N07) · 8F pipeline · cex_sdk runtime · 50 tools
 
 ## Brand Identity
 
@@ -125,6 +125,16 @@ User decides WHAT → LLM builds HOW → verify together.
 | `brand_audit.py` | Score brand consistency (6 dimensions) |
 | `brand_ingest.py` | Scan user's messy folder → extract brand signals |
 | `cex_evolve.py` | **AutoResearch loop**: evolve artifacts autonomously (keep/discard) |
+| `cex_prompt_layers.py` | Compiled artifact scanner: loads 15+ pillar artifacts into prompts |
+| `cex_skill_loader.py` | Builder ISO loader: 13 ISOs per kind, shared skills, conditionals |
+| `cex_router.py` | Multi-provider routing: 4 providers x 7 nuclei + fallback chains |
+| `cex_gdp.py` | GDP enforcement: manifest I/O, NeedsUserDecision gate at F4 |
+| `cex_memory_types.py` | 4-type memory taxonomy: correction/preference/convention/context |
+| `cex_memory_age.py` | Freshness caveats, age labels, linear decay over 365d |
+| `cex_agent_spawn.py` | Agent config validation + spawn pre-flight checks |
+| `cex_coordinator.py` | Synthesis gates between mission waves + workflow orchestration |
+| `cex_compile.py --target` | **Reverse compiler**: CEX artifacts -> claude-md, cursorrules, customgpt |
+| `cex_flywheel_audit.py` | **Doc vs Practice**: 109 checks across 7 layers + 7 wires + 7 cascades |
 
 ## Quick Dispatch
 

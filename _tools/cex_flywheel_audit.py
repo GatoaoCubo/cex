@@ -132,7 +132,7 @@ def audit_L3():
     print("\n=== L3: Archetypes ===")
     builders_dir = CEX_ROOT / "archetypes" / "builders"
     bdirs = [d for d in builders_dir.iterdir() if d.is_dir() and d.name.endswith("-builder")]
-    record("L3", "builder_count", "WIRED" if len(bdirs) >= 100 else "BROKEN", f"{len(bdirs)} builders")
+    record("L3", "builder_count", "WIRED" if len(bdirs) >= 107 else "BROKEN", f"{len(bdirs)} builders")
 
     for bd in bdirs[:5]:
         isos = list(bd.glob("bld_*.md"))
@@ -252,6 +252,35 @@ def audit_wires():
     for _ in range(5):
         m = check_memory_extract_needed()
     record("WIRE", "W7_memory_extract", "WIRED" if m["needed"] else "BROKEN", f"counter={m['counter']}")
+
+    # Check SDK modules are CALLED (not just importable)
+    crew_src = (CEX_ROOT / "_tools" / "cex_crew_runner.py").read_text(encoding="utf-8")
+    record("WIRE", "T01_skill_loader_wired",
+           "WIRED" if "SkillLoader" in crew_src else "BROKEN", "SkillLoader in crew_runner")
+    record("WIRE", "T02_router_wired",
+           "WIRED" if "CexRouter" in crew_src else "BROKEN", "CexRouter in crew_runner")
+
+    runner_src = (CEX_ROOT / "_tools" / "cex_8f_runner.py").read_text(encoding="utf-8")
+    record("WIRE", "T03_gdp_wired",
+           "WIRED" if "GDPEnforcer" in runner_src else "BROKEN", "GDP in 8f_runner")
+    record("WIRE", "T04_budget_wired",
+           "WIRED" if "TokenBudget" in runner_src else "BROKEN", "TokenBudget in 8f_runner")
+
+    mem_update = (CEX_ROOT / "_tools" / "cex_memory_update.py").read_text(encoding="utf-8")
+    record("WIRE", "T05_memtype_wired",
+           "WIRED" if "cex_memory_types" in mem_update else "BROKEN", "MemoryType in update")
+
+    mem_select = (CEX_ROOT / "_tools" / "cex_memory_select.py").read_text(encoding="utf-8")
+    record("WIRE", "T06_memage_wired",
+           "WIRED" if "cex_memory_age" in mem_select else "BROKEN", "MemoryAge in select")
+
+    mission_src = (CEX_ROOT / "_tools" / "cex_mission_runner.py").read_text(encoding="utf-8")
+    record("WIRE", "T08_coordinator_wired",
+           "WIRED" if "CexCoordinator" in mission_src else "BROKEN", "Coordinator in mission_runner")
+
+    compile_src = (CEX_ROOT / "_tools" / "cex_compile.py").read_text(encoding="utf-8")
+    record("WIRE", "T10_reverse_compiler",
+           "WIRED" if "render_claude_md" in compile_src else "BROKEN", "Reverse compiler exists")
 
     aids = ["p03_sp_cex_core_identity", "p03_sp_verification_agent",
             "p03_ins_doing_tasks", "p03_ins_action_protocol",
