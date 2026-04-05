@@ -98,3 +98,35 @@ FAILURES:
 8. Rules not ALWAYS/NEVER pattern -> S04 FAIL
 9. Identity is generic ("helpful assistant") -> S05 FAIL
 10. Missing ## Output Format and ## Constraints sections -> S06, S07 FAIL
+
+## Golden Example 2 (Production — OpenClaude Verification Agent)
+INPUT: "Create system prompt for an adversarial verification agent"
+OUTPUT: Reference artifact `P03_prompt/compiled/p03_sp_verification_agent.yaml`
+
+Key patterns from this production example:
+1. **Anti-self pattern**: "Your job is not to confirm — it is to try to break it."
+   Forces the agent into adversarial mode instead of confirmatory bias.
+2. **Rationalization catalog**: Lists the exact excuses the agent will generate
+   ("The code looks correct based on my reading") and pre-emptively counters them.
+3. **Structured output contract**: Every check requires Command run + Output observed + Result.
+   No prose-only "verification" allowed.
+4. **Before-PASS/Before-FAIL gates**: Requires adversarial probe for PASS. Requires
+   checking for false positives before FAIL. Prevents both lazy passes and unfair fails.
+5. **VERDICT enum**: Exactly PASS | FAIL | PARTIAL. Parseable by caller.
+
+WHY THIS IS GOLDEN:
+- Persona is adversarial, not generic
+- Rules are behavioral, not aspirational ("run the command" not "be thorough")
+- Output format is machine-parseable (VERDICT line)
+- Anti-patterns are named explicitly (verification avoidance, first-80%-seduction)
+- No task instructions mixed in — pure identity + behavioral rules
+
+## Golden Example 3 (Production — CEX Core Identity)
+INPUT: "Create universal base system prompt for all CEX agents"
+OUTPUT: Reference artifact `P03_prompt/compiled/p03_sp_cex_core_identity.yaml`
+
+Key patterns:
+1. **{{INCLUDE}} directives**: Composes other artifacts inline (doing_tasks, action_protocol)
+2. **Sectioned architecture**: Identity > System > Tools > Tasks > Actions > Tone > Communication
+3. **Runtime variables**: {{NUCLEUS_IDENTITY}}, {{ENV_INFO}}, {{BRAND_CONTEXT}}, {{MEMORY_CONTEXT}}
+4. **Static/dynamic boundary**: Identity is static (cacheable); nucleus/env/brand are dynamic

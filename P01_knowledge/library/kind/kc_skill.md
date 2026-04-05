@@ -111,3 +111,38 @@ phases: [detect, lint, test, notify]
 - **Memory**: Skills can persist state between phases via memory_scope
 
 Skills enable modular, reusable workflow definition that bridges the gap between simple prompts and complex multi-agent systems.
+## Production Reference: OpenClaude Bundled Skills
+OpenClaude ships ~18 bundled skills as battle-tested implementations:
+
+| Skill | Trigger | Pattern | CEX Equivalent |
+|-------|---------|---------|----------------|
+| /simplify | slash_command | 3-parallel-agent review | p04_skill_simplify |
+| /verify | slash_command | adversarial verification | p04_skill_verify |
+| /compact | agent_invoked | 9-section summarization | p04_skill_compact |
+| /loop | slash_command | recurring cron schedule | p04_skill_loop (future) |
+| /stuck | slash_command | diagnostic investigation | n/a (Anthropic-specific) |
+
+**Key architectural insight**: Skills are defined as prompt text with frontmatter,
+not as code. The skill body IS the prompt injected when the skill triggers. This
+maps directly to CEX's skill-as-artifact model.
+
+**Parallel dispatch pattern** (from /simplify):
+- Phase 1: Identify changes (git diff)
+- Phase 2: Dispatch 3 agents concurrently, each with the full diff + specialized focus
+- Phase 3: Aggregate findings and fix issues directly
+This pattern generalizes: any skill can dispatch parallel sub-agents with typed foci.
+
+**Analysis scratchpad pattern** (from /compact):
+- <analysis> tags create a private drafting space
+- Forces structured thinking before output
+- Scratchpad is stripped from final result
+- Improves quality without consuming permanent context
+
+## New Skill Patterns Discovered
+| Pattern | Description | Example |
+|---------|-------------|---------|
+| Adversarial skill | Agent explicitly tries to BREAK the implementation | p04_skill_verify |
+| Parallel review | Multiple focused agents analyze same diff concurrently | p04_skill_simplify |
+| Scratchpad skill | <analysis> block for private reasoning, stripped from output | p04_skill_compact |
+| Background extract | Runs silently after N turns, extracts persistent memories | p04_skill_memory_extract |
+| Rationalization counter | Lists excuses the agent will generate, pre-emptively counters | p04_skill_verify |

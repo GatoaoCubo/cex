@@ -83,3 +83,32 @@ A guardrail is a declarative constraint that wraps agent outputs or inputs with 
 - GOOD: Has scope, violation_types, detection_method, on_failure action, escalation path
 - GREAT: Layered detection (fast pattern + LLM judge); violation_types are specific; tested against known cases
 - FAIL: No on_failure action; violation_types too broad; no escalation path; blocks without logging
+
+## Production Reference: OpenClaude Guardrails
+OpenClaude's guardrail architecture spans two levels:
+
+**Level 1 — System prompt behavioral rules** (getActionsSection):
+- Binary blast-radius checklist: reversible? local? visible? destructive? authorized?
+- Scope-limited authorization: approval once != approval always
+- Root cause over shortcut: do not bypass safety checks
+- CEX equivalent: p11_gr_action_reversibility
+
+**Level 2 — Dedicated safety instruction** (cyberRiskInstruction.ts):
+- 3 concise rules covering assist/refuse/dual-use boundaries
+- Enforcement: warn (not block) for security context nuance
+- Bypass: only with clear authorization context
+- CEX equivalent: p11_gr_cyber_risk
+
+**Key architectural insight**: OpenClaude separates behavioral guardrails (in the system
+prompt, always loaded) from safety guardrails (separate instruction, conditionally loaded).
+CEX mirrors this: p03_ins_action_protocol (behavioral, in identity) vs p11_gr_* (safety,
+injected for CALL/PRODUCE/COLLABORATE functions).
+
+## New Guardrail Patterns Discovered
+| Pattern | Description | Example |
+|---------|-------------|---------|
+| Binary checklist | Yes/no questions, any "no" triggers enforcement | Blast radius checklist |
+| Scope-limited auth | Approval is per-instance, not permanent | Action reversibility |
+| Dual-use handling | Same tool can be offensive or defensive, needs context | Cyber risk |
+| Warn vs block | Security needs nuance (warn); destruction is absolute (block) | Two enforcement levels |
+| Root cause mandate | "Fix the issue, don't bypass the check" | --no-verify anti-pattern |

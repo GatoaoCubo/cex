@@ -103,3 +103,35 @@ FAILURES:
 3. quality: self-scored 8.0 instead of null -> H06 FAIL
 4. severity: "important" not valid enum (must be critical/high/medium/low) -> H07 FAIL
 5. enforcement: "stop" not valid enum (must be block/warn/log) -> H09 FAIL
+
+## Golden Example 2 (Production — OpenClaude Action Reversibility)
+INPUT: "Create guardrail that blocks irreversible actions without authorization"
+OUTPUT: Reference artifact `P11_feedback/compiled/p11_gr_action_reversibility.yaml`
+
+Key patterns:
+1. **5-point blast radius checklist**: reversible? local? visible? destructive? authorized?
+   Binary checklist — any "no" triggers block. No subjective judgment needed.
+2. **Scope-limited authorization**: "Approving once does NOT authorize in all contexts."
+   Prevents authorization creep.
+3. **Root cause over shortcut**: "Do not use destructive actions as shortcuts. Fix root causes."
+   Prevents agents from rm -rf'ing their way out of build errors.
+4. **Enforcement: block** (not warn): Irreversible actions are blocked entirely, not just flagged.
+5. **GDP integration**: Routes blocked actions to USER-scope decision in decision_manifest.yaml.
+
+WHY THIS IS GOLDEN:
+- Checklist is binary (yes/no), not subjective
+- Severity is justified (HIGH because irreversible)
+- Enforcement is the strongest available (block)
+- Violations are concrete (rm -rf, force-push, DROP TABLE)
+- Bypass policy requires explicit authorization + audit trail
+
+## Golden Example 3 (Production — OpenClaude Cyber Risk)
+INPUT: "Create guardrail for security boundary on tool-using agents"
+OUTPUT: Reference artifact `P11_feedback/compiled/p11_gr_cyber_risk.yaml`
+
+Key patterns:
+1. **Dual-use tool handling**: Explicitly addresses tools that are both offensive and defensive
+   (C2 frameworks, credential testing). Requires "clear authorization context."
+2. **Enforcement: warn** (not block): Security context often needs nuance. Warn + request
+   clarification rather than hard blocking legitimate pentesting.
+3. **Short and dense**: Only 3 rules. Each covers a broad category. No redundancy.

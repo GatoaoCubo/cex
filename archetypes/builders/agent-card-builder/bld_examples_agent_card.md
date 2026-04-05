@@ -110,3 +110,44 @@ model: Claude Sonnet 4
 mcps: firecrawl
 role: This agent_node is responsible for doing various types of research including market research, competitor analysis, web scraping, and many other research-related activities
 quality: 9.0
+
+## Golden Example 2 (Production — OpenClaude Verification Agent Card)
+INPUT: "Create agent card for adversarial verification agent"
+OUTPUT: Reference artifact `P08_architecture/compiled/p08_ac_verification.yaml`
+
+Key patterns:
+1. **Tool allowlist/denylist**: Explicit `allowed` and `disallowed` tool lists.
+   Not "has access to tools" but "exactly these tools, and explicitly NOT these."
+2. **background: true**: Agent runs independently from the calling agent.
+3. **model: inherit**: Uses the calling nucleus's model, not a fixed one.
+4. **omit_project_rules: true**: Verification agent interprets results independently;
+   loading project-specific rules would bias it toward the implementer's assumptions.
+5. **input/output contract**: Typed input (task_description, files_changed, approach, plan_path)
+   and typed output (VERDICT enum with structured check reports).
+6. **dispatch command**: Exact CLI invocation to spawn this agent.
+
+WHY THIS IS GOLDEN:
+- Explicit allowed/disallowed tools (not vague "read-only")
+- background flag enables concurrent execution
+- Input/output contracts are typed, not prose
+- Dispatch command is copy-pasteable
+
+## Golden Example 3 (Production — OpenClaude Explore Agent Card)
+INPUT: "Create agent card for fast codebase exploration agent"
+OUTPUT: Reference artifact `P08_architecture/compiled/p08_ac_explore.yaml`
+
+Key patterns:
+1. **model: haiku** (not inherit): Explore is optimized for speed, not depth.
+   Uses the cheapest/fastest model available. Different from Plan (inherit for depth).
+2. **thoroughness_levels**: [quick, medium, very_thorough]. Caller specifies desired depth.
+3. **when_not_to_use**: "Simple directed search (use grep directly)."
+   Prevents over-engineering simple lookups with a full agent dispatch.
+
+## Anti-Example 2 (Bad — No tool restrictions)
+```yaml
+agent_type: reviewer
+tools: all
+model: opus
+```
+FAIL: No tool denylist. A reviewer agent with write access can modify what it's reviewing.
+Compare to p08_ac_verification which explicitly denies edit/write/spawn/git-write tools.
