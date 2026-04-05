@@ -207,14 +207,39 @@ def _iso_sort_key(filepath: Path) -> int:
 def load_builder_context(builder_id: str, builder_dir: Path = BUILDER_DIR) -> str:
     """Load builder spec files (bld_*.md) for a builder.
 
-    Scans archetypes/builders/{builder-id}/ for .md files.
-    Budget: 30KB max. Files loaded in priority order.
+    Strategy: Try SkillLoader first (handles sort, shared skills, conditionals).
+    Fallback: manual glob (original behavior).
+    Budget: 30KB max.
     """
+    # --- T01: SkillLoader path (preferred) ---
+    try:
+        from cex_skill_loader import SkillLoader
+        sl = SkillLoader()
+        kind = builder_id.replace("-builder", "")
+        isos = sl.load_builder(kind)
+        if isos:
+            sections = []
+            total_bytes = 0
+            for iso in isos:
+                block = iso.get_prompt()
+                block_bytes = len(block.encode("utf-8"))
+                if total_bytes + block_bytes > BUILDER_MAX_BYTES:
+                    sections.append(f"\n[... truncated at {BUILDER_MAX_BYTES // 1024}KB budget ...]")
+                    break
+                sections.append(f"### {iso.name}")
+                sections.append(block.strip())
+                sections.append("")
+                total_bytes += block_bytes
+            if sections:
+                return "\n".join(sections)
+    except Exception:
+        pass  # D1: graceful fallback
+
+    # --- Fallback: manual glob (original) ---
     builder_path = builder_dir / builder_id
     if not builder_path.exists():
         return f"[Builder '{builder_id}' not found at {builder_path}]"
 
-    # Collect .md files (try bld_* pattern first, then any .md)
     md_files = sorted(builder_path.glob("bld_*.md"), key=_iso_sort_key)
     if not md_files:
         md_files = sorted(builder_path.glob("*.md"), key=_iso_sort_key)
@@ -250,7 +275,10 @@ def load_builder_context(builder_id: str, builder_dir: Path = BUILDER_DIR) -> st
 
 
 def _load_builder_memories(builder_id: str, intent: str) -> str:
-    """Load relevant memories for a builder. Returns formatted injection or empty string."""
+    """Load relevant memories for a builder.
+
+    T07: Enriched with memory type labels + freshness caveats.
+    """
     try:
         from cex_memory_select import select_relevant_memories, format_memory_injection
         from cex_memory import scan_builder_memories
@@ -269,7 +297,32 @@ def _load_builder_memories(builder_id: str, intent: str) -> str:
         if not selected:
             return ""
 
-        return format_memory_injection(selected, total_observations=len(headers))
+        base = format_memory_injection(selected, total_observations=len(headers))
+
+        # --- T07: Enrich with type + freshness ---
+        try:
+            from cex_memory_age import memory_freshness_tag
+            from cex_memory_types import parse_memory_type
+            enrichments = []
+            for s in selected:
+                tags = []
+                if hasattr(s, "type") and s.type:
+                    tags.append(f"type={s.type}")
+                if hasattr(s, "path") and s.path:
+                    import os
+                    try:
+                        tag = memory_freshness_tag(os.path.getmtime(s.path))
+                        tags.append(tag)
+                    except Exception:
+                        pass
+                if tags:
+                    enrichments.append(f"  [{', '.join(tags)}]")
+            if enrichments:
+                base += "\n" + "\n".join(enrichments)
+        except Exception:
+            pass  # enrichment is optional
+
+        return base
     except Exception:
         return ""
 
@@ -564,10 +617,22 @@ class CrewRunner:
         return "inline"  # default to inline
 
     def _resolve_model(self, builder: dict) -> tuple[str, int]:
-        """Resolve LLM model and max_tokens from builder effort config.
+        """Resolve LLM model and max_tokens via Router, then builder config, then env.
 
         Returns: (model_id, max_tokens)
         """
+        # --- T02: Router path (preferred) ---
+        try:
+            from cex_router import CexRouter
+            router = CexRouter()
+            nucleus = os.environ.get("CEX_NUCLEUS", "n03")
+            resolved = router.resolve_nucleus(nucleus)
+            if resolved and resolved.get("model"):
+                return resolved["model"], resolved.get("max_tokens", LLM_MAX_TOKENS)
+        except Exception:
+            pass  # D1: graceful fallback
+
+        # --- Fallback: builder config / env var ---
         model = builder.get("model", LLM_MODEL)
         max_tokens = builder.get("model_max_tokens", LLM_MAX_TOKENS)
         return model, max_tokens

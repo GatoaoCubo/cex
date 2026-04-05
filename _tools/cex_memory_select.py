@@ -15,6 +15,7 @@ Usage:
 import argparse
 import hashlib
 import json
+import os
 import re
 import subprocess
 import sys
@@ -30,6 +31,13 @@ if hasattr(sys.stderr, "reconfigure"):
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from cex_memory import MemoryHeader, scan_all_memories, scan_builder_memories
 from cex_shared import parse_frontmatter
+
+# --- T06: Memory age integration ---
+try:
+    from cex_memory_age import memory_age_days, memory_freshness_caveat, format_recalled_memory
+    _HAS_MEMORY_AGE = True
+except ImportError:
+    _HAS_MEMORY_AGE = False
 
 CEX_ROOT = Path(__file__).resolve().parent.parent
 CACHE_DIR = CEX_ROOT / ".cex" / "temp" / "memory_cache"
@@ -186,6 +194,14 @@ def _select_via_keywords(
         if overlap > 0:
             # Score = overlap count * confidence
             score = overlap * h.confidence
+            # --- T06: Age penalty (D3: linear decay over 1yr) ---
+            if _HAS_MEMORY_AGE and hasattr(h, "path") and h.path:
+                try:
+                    age = memory_age_days(os.path.getmtime(h.path))
+                    age_penalty = max(0.5, 1.0 - (age / 365))
+                    score *= age_penalty
+                except Exception:
+                    pass
             scored.append((i, score))
 
     scored.sort(key=lambda x: -x[1])

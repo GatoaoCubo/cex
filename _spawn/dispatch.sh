@@ -11,6 +11,13 @@ case "$MODE" in
         NUCLEUS="${1:-n03}"
         TASK="$2"
         echo "[DISPATCH] Solo: $NUCLEUS -> $TASK"
+        # --- T09: Agent spawn pre-flight validation ---
+        if command -v python &>/dev/null; then
+            python _tools/cex_agent_spawn.py --validate --nucleus "$NUCLEUS" 2>/dev/null
+            if [ $? -ne 0 ]; then
+                echo "[DISPATCH] WARN: Agent validation failed for $NUCLEUS (proceeding anyway)"
+            fi
+        fi
         powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_solo.ps1 -nucleus "$NUCLEUS" -task "$TASK" -interactive
         ;;
     grid)

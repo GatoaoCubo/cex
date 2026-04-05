@@ -386,9 +386,32 @@ def run_mission(args):
         log(f"Signal watch returned: {watch_status}")
 
         if watch_status == "timeout":
-            log("TIMEOUT — some nuclei didn't complete", "WARN")
+            log("TIMEOUT -- some nuclei didn't complete", "WARN")
         elif watch_status in ("crashed", "all_pending_crashed"):
-            log("CRASH — nuclei died without signaling", "ERROR")
+            log("CRASH -- nuclei died without signaling", "ERROR")
+
+        # --- T08: Coordinator synthesis gate ---
+        try:
+            from cex_coordinator import CexCoordinator
+            coord = CexCoordinator(mission_id=mission)
+            nuc_results = []
+            for ninfo in nuclei:
+                nuc = ninfo["nucleus"]
+                sig = watch_result.get("nuclei", {}).get(nuc, {})
+                nuc_results.append({
+                    "nucleus": nuc, "status": sig.get("status", watch_status),
+                    "quality": sig.get("quality", 0.0),
+                    "output_path": sig.get("output", ""),
+                })
+            synthesis = coord.synthesize(nuc_results)
+            if synthesis.passed:
+                log(f"Synthesis gate PASSED (score={synthesis.score:.1f})")
+            else:
+                log(f"Synthesis gate ISSUES: {synthesis.issues}", "WARN")
+        except ImportError:
+            pass
+        except Exception as e:
+            log(f"Synthesis gate skipped: {e}", "WARN")
 
         # Step 5: Stop all processes
         if not args.skip_stop:

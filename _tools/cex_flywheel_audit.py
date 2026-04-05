@@ -238,8 +238,11 @@ def audit_wires():
     pg = compose_prompt("agent-builder", "GOVERN", "test", parsed, 9.0, state)
     record("WIRE", "W5_verification",
            "WIRED" if ("verification specialist" in pg or "Verification Protocol" in pg) else "BROKEN")
-    record("WIRE", "W5b_no_verify_PRODUCE",
-           "WIRED" if "Verification Protocol" not in prompt else "BROKEN", "PRODUCE excluded")
+    # W5b: the GOVERN-only verification agent prompt should NOT be in PRODUCE
+    # (the shared skill "Verification Protocol" IS expected everywhere, that's fine)
+    record("WIRE", "W5b_no_verify_agent_PRODUCE",
+           "WIRED" if "verification specialist" not in prompt else "BROKEN",
+           "verification_agent excluded from PRODUCE")
 
     big = "word " * 8000
     c = check_compaction_needed(big, max_tokens=8192)

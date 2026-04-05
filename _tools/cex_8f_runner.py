@@ -318,7 +318,19 @@ class EightFRunner:
     # -- F1 CONSTRAIN -------------------------------------------------------
 
     def f1_constrain(self) -> None:
-        """Load _schema.yaml + bld_schema + bld_config -> state.constraints."""
+        """Load _schema.yaml + bld_schema + bld_config -> state.constraints.
+
+        T04: Token budget allocation at pipeline start.
+        """
+        # --- T04: Token budget ---
+        try:
+            from cex_token_budget import count_tokens, TokenBudget
+            budget = TokenBudget()
+            self.state.token_budget = budget
+            self._log("F1", f"token budget: input={budget.input_limit} output={budget.output_limit}")
+        except Exception:
+            self.state.token_budget = None
+
         bdir = self.state.builder_dir
         kind = self.state.kind
         pillar = self.state.pillar
@@ -502,7 +514,27 @@ class EightFRunner:
     # -- F4 REASON ----------------------------------------------------------
 
     def f4_reason(self) -> None:
-        """LLM plans the artifact: fields, decisions, tradeoffs -> state.reasoning."""
+        """LLM plans the artifact: fields, decisions, tradeoffs -> state.reasoning.
+
+        T03: GDP gate -- if unresolved USER-scope decisions exist for this kind,
+        raises NeedsUserDecision instead of proceeding (D2: raise = halt pipeline).
+        """
+        # --- T03: GDP gate ---
+        try:
+            from cex_gdp import GDPEnforcer, NeedsUserDecision
+            gdp = GDPEnforcer()
+            pending = gdp.get_pending()
+            for d in pending:
+                if d.kind == self.state.kind or d.scope.value == "GLOBAL":
+                    self._log("F4", f"GDP BLOCKED: unresolved decision '{d.id}' ({d.scope.value})")
+                    raise NeedsUserDecision(d)
+        except ImportError:
+            pass  # GDP module not available
+        except Exception as e:
+            if "NeedsUserDecision" in type(e).__name__:
+                raise
+            self._log("F4", f"GDP check skipped: {e}")
+
         # Compose reasoning prompt from accumulated state
         parts = []
         parts.append("You are planning what artifact to produce. Think step-by-step.")
@@ -763,6 +795,16 @@ class EightFRunner:
             response = execute_prompt(prompt)
             self.state.artifact = response
             self._log("F6", f"LLM response received ({len(response)} chars)")
+
+            # --- T04b: Token budget output check ---
+            if getattr(self.state, "token_budget", None):
+                try:
+                    out_tokens = count_tokens(response) if _TOKEN_BUDGET_AVAILABLE else len(response.split())
+                    limit = self.state.token_budget.output_limit
+                    if limit and out_tokens > limit:
+                        self._log("F6", f"WARN: output {out_tokens} tokens exceeds budget {limit}")
+                except Exception:
+                    pass
 
     # -- helpers: clean LLM output ------------------------------------------
 

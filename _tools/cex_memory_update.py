@@ -39,12 +39,24 @@ from cex_shared import parse_frontmatter
 CEX_ROOT = Path(__file__).resolve().parent.parent
 BUILDER_DIR = CEX_ROOT / "archetypes" / "builders"
 
+# --- T05: MemoryType integration ---
+try:
+    from cex_memory_types import MemoryType, should_save, parse_memory_type
+    _HAS_MEMORY_TYPES = True
+except ImportError:
+    _HAS_MEMORY_TYPES = False
+
 # Decay rates per observation type (applied per update cycle)
+# T05: aligned with MemoryType enum decay rates
 DECAY_RATES = {
-    "feedback": 0.00,   # permanent
+    "feedback": 0.00,   # permanent (= MemoryType.CORRECTION)
+    "correction": 0.00, # T05: alias
     "user": 0.02,
+    "preference": 0.01, # T05: from MemoryType
     "reference": 0.03,
+    "convention": 0.02, # T05: from MemoryType
     "project": 0.05,
+    "context": 0.05,    # T05: from MemoryType
 }
 
 # Thresholds
@@ -116,8 +128,18 @@ def append_observation(
 ) -> tuple[str, dict]:
     """Append a new observation to the memory file.
 
-    Updates frontmatter metadata and appends to body.
+    T05: Uses MemoryType classifier to auto-categorize and filter duplicates.
     """
+    # --- T05: Auto-classify + dedup ---
+    if _HAS_MEMORY_TYPES:
+        try:
+            save_ok, classified = should_save(observation, content)
+            if not save_ok:
+                return content, fm  # skip trivial/duplicate
+            if not obs_type or obs_type == "project":
+                obs_type = classified  # auto-classified type
+        except Exception:
+            pass  # fallback to raw obs_type
     timestamp = time.strftime("%Y-%m-%dT%H:%M:%S")
 
     # Update frontmatter metadata
