@@ -32,6 +32,7 @@ if hasattr(sys.stdout, "reconfigure"): sys.stdout.reconfigure(encoding="utf-8")
 if hasattr(sys.stderr, "reconfigure"): sys.stderr.reconfigure(encoding="utf-8")
 
 import json
+import re
 import argparse
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -48,6 +49,7 @@ except ImportError:
 # ---------------------------------------------------------------------------
 
 CEX_ROOT = Path(__file__).resolve().parent.parent
+ROOT = CEX_ROOT  # alias used by fork/inline execution paths
 BUILDER_DIR = CEX_ROOT / "archetypes" / "builders"
 BUILDER_MAX_BYTES = 30 * 1024  # 30KB total budget for builder spec injection
 DEFAULT_QUALITY_GATE = 7.0
@@ -56,6 +58,94 @@ MAX_RETRIES = 2
 LLM_MODEL = "sonnet"
 LLM_MAX_TOKENS = 8000
 FORK_OUTPUT_DIR = CEX_ROOT / ".cex" / "temp" / "fork_outputs"
+
+# ---------------------------------------------------------------------------
+# Prompt Layers (compiled artifacts from pillar directories)
+# ---------------------------------------------------------------------------
+_prompt_layers = None
+
+
+def _get_prompt_layers():
+    """Get PromptLayers singleton (lazy import)."""
+    global _prompt_layers
+    if _prompt_layers is None:
+        try:
+            from cex_prompt_layers import get_layers
+            _prompt_layers = get_layers()
+        except ImportError:
+            _prompt_layers = None
+    return _prompt_layers
+
+
+# 8F functions that receive guardrails (write-capable phases)
+_GUARDRAIL_FUNCTIONS = {"CALL", "PRODUCE", "COLLABORATE"}
+# 8F functions that receive verification protocol (quality gate)
+_VERIFICATION_FUNCTIONS = {"GOVERN"}
+
+# Compaction and memory extract thresholds
+COMPACT_TRIGGER_RATIO = 0.85  # trigger compaction at 85% context budget
+MEMORY_EXTRACT_INTERVAL = 5   # extract memories every N builder executions
+_execution_counter = 0
+
+
+# ---------------------------------------------------------------------------
+# Wire 6: Context Compaction Trigger
+# ---------------------------------------------------------------------------
+
+
+def check_compaction_needed(prompt_text: str, max_tokens: int = 8192) -> dict:
+    """Check if context compaction should be triggered.
+
+    Returns: {"needed": bool, "usage_ratio": float, "skill_body": str}
+    The caller decides whether to compact; this just checks and provides the skill.
+    """
+    try:
+        from cex_token_budget import count_tokens
+        current_tokens = count_tokens(prompt_text)
+    except ImportError:
+        # Fallback: ~1.3 tokens per word
+        current_tokens = int(len(prompt_text.split()) * 1.3)
+
+    ratio = current_tokens / max_tokens if max_tokens > 0 else 0
+
+    result = {"needed": False, "usage_ratio": ratio, "skill_body": ""}
+
+    if ratio >= COMPACT_TRIGGER_RATIO:
+        result["needed"] = True
+        layers = _get_prompt_layers()
+        if layers:
+            result["skill_body"] = layers.get("p04_skill_compact")
+
+    return result
+
+
+# ---------------------------------------------------------------------------
+# Wire 7: Memory Extract Trigger
+# ---------------------------------------------------------------------------
+
+
+def check_memory_extract_needed() -> dict:
+    """Check if background memory extraction should run.
+
+    Returns: {"needed": bool, "skill_body": str, "counter": int}
+    Called after each builder execution. Triggers every N executions.
+    """
+    global _execution_counter
+    _execution_counter += 1
+
+    result = {
+        "needed": False,
+        "skill_body": "",
+        "counter": _execution_counter,
+    }
+
+    if _execution_counter % MEMORY_EXTRACT_INTERVAL == 0:
+        result["needed"] = True
+        layers = _get_prompt_layers()
+        if layers:
+            result["skill_body"] = layers.get("p04_skill_memory_extract")
+
+    return result
 
 
 # ---------------------------------------------------------------------------
@@ -285,6 +375,54 @@ def compose_prompt(
     5. Execution instructions
     """
     parts = []
+
+    # --- Prompt Layers (Wire 1-4: identity + behavioral + action + guardrails) ---
+    layers = _get_prompt_layers()
+    if layers:
+        # Wire 1: Core identity (loaded FIRST, before everything)
+        identity_body = layers.get("p03_sp_cex_core_identity")
+        if identity_body:
+            # Resolve {{INCLUDE}} directives
+            for inc_id in ["p03_ins_doing_tasks", "p03_ins_action_protocol"]:
+                inc_body = layers.get(inc_id)
+                if inc_body:
+                    identity_body = identity_body.replace(
+                        "{{INCLUDE " + inc_id + "}}", inc_body
+                    )
+            # Strip remaining unresolved {{...}} placeholders
+            identity_body = re.sub(r"\{\{[A-Z_]+\}\}", "[runtime]", identity_body)
+            parts.append("## CEX Agent Identity")
+            parts.append(identity_body)
+            parts.append("")
+
+        # Wire 4: Guardrails (for write-capable functions)
+        if function_name.upper() in _GUARDRAIL_FUNCTIONS:
+            guardrail_ids = layers.by_kind("guardrail")
+            if guardrail_ids:
+                parts.append("## Safety Guardrails (auto-injected)")
+                for gid in guardrail_ids:
+                    g_body = layers.get(gid)
+                    g_meta = layers.get_meta(gid)
+                    if g_body:
+                        title = g_meta.get("title", gid)
+                        severity = g_meta.get("severity", "?")
+                        enforcement = g_meta.get("enforcement", "?")
+                        parts.append(f"### {title} [severity={severity}, enforcement={enforcement}]")
+                        parts.append(g_body)
+                        parts.append("")
+
+        # Wire 5: Verification protocol (for GOVERN function)
+        if function_name.upper() in _VERIFICATION_FUNCTIONS:
+            verify_body = layers.get("p03_sp_verification_agent")
+            if verify_body:
+                parts.append("## Verification Protocol (F7 GOVERN)")
+                parts.append(verify_body)
+                parts.append("")
+            verify_skill = layers.get("p04_skill_verify")
+            if verify_skill:
+                parts.append("## Verification Skill")
+                parts.append(verify_skill)
+                parts.append("")
 
     # --- Header ---
     parts.append(f"# CEX Crew Runner -- Builder Execution")
@@ -749,6 +887,26 @@ class CrewRunner:
                     f"  [{fn_name}] {bid} -> {fname} "
                     f"(score: {out.quality_score:.1f}, "
                     f"status: {out.status})"
+                )
+
+            # Wire 6: Check if context compaction is needed
+            prompt_so_far = " ".join(
+                o.content for o in state.outputs.values()
+                if o.content and not o.content.startswith("[")
+            )
+            compact_check = check_compaction_needed(prompt_so_far)
+            if compact_check["needed"]:
+                state.warnings.append(
+                    f"[COMPACT] Context at {compact_check['usage_ratio']:.0%} capacity. "
+                    f"Compaction skill available: p04_skill_compact"
+                )
+
+            # Wire 7: Check if memory extraction should run
+            mem_check = check_memory_extract_needed()
+            if mem_check["needed"]:
+                state.warnings.append(
+                    f"[MEMORY] Extraction trigger at execution #{mem_check['counter']}. "
+                    f"Memory skill available: p04_skill_memory_extract"
                 )
 
             results.append(out)
