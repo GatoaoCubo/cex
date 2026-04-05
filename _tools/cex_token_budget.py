@@ -200,6 +200,166 @@ def truncate_to_tokens(text: str, max_tokens: int, model: str = "claude-sonnet-4
 
 
 # ---------------------------------------------------------------------------
+# Budget Tracker — Continuation-aware token governor
+# Pattern: OpenClaude BudgetTracker (tokenBudget.ts)
+# ---------------------------------------------------------------------------
+
+from dataclasses import dataclass, field
+from time import time as _time
+
+COMPLETION_THRESHOLD = 0.90     # Stop at 90% budget consumed
+DIMINISHING_THRESHOLD = 500     # If producing < this per cycle, stop
+
+
+@dataclass
+class BudgetTracker:
+    """Track token consumption with continuation + diminishing returns detection.
+
+    Usage:
+        tracker = BudgetTracker()
+        for section in sections:
+            decision = check_token_budget(tracker, max_tokens, current_tokens)
+            if decision.action == "stop":
+                break
+            # ... produce section ...
+    """
+    continuation_count: int = 0
+    last_delta_tokens: int = 0
+    last_global_tokens: int = 0
+    started_at: float = field(default_factory=_time)
+
+    @property
+    def duration_ms(self) -> int:
+        return int((_time() - self.started_at) * 1000)
+
+
+@dataclass
+class BudgetDecision:
+    """Result of a budget check: continue producing or stop."""
+    action: str                     # "continue" | "stop"
+    pct: int = 0                    # % of budget consumed
+    turn_tokens: int = 0
+    budget: int = 0
+    nudge_message: str = ""
+    diminishing_returns: bool = False
+    continuation_count: int = 0
+    duration_ms: int = 0
+
+
+def check_token_budget(
+    tracker: BudgetTracker,
+    budget: int,
+    current_tokens: int,
+) -> BudgetDecision:
+    """Check whether to continue producing or stop.
+
+    Call between F6 sections to gate production.
+    Returns CONTINUE with nudge, or STOP with completion stats.
+
+    Logic:
+      - Under 90% budget AND not diminishing → CONTINUE
+      - 3+ continuations with <500 new tokens each → STOP (diminishing)
+      - Over 90% → STOP (budget exhausted)
+    """
+    if budget <= 0:
+        return BudgetDecision(action="stop")
+
+    pct = round((current_tokens / budget) * 100)
+    delta = current_tokens - tracker.last_global_tokens
+
+    # Diminishing returns: 3+ continuations producing <500 tokens each
+    is_diminishing = (
+        tracker.continuation_count >= 3
+        and delta < DIMINISHING_THRESHOLD
+        and tracker.last_delta_tokens < DIMINISHING_THRESHOLD
+    )
+
+    if not is_diminishing and current_tokens < budget * COMPLETION_THRESHOLD:
+        tracker.continuation_count += 1
+        tracker.last_delta_tokens = delta
+        tracker.last_global_tokens = current_tokens
+
+        remaining = budget - current_tokens
+        nudge = (
+            f"[Budget: {pct}% used ({current_tokens:,}/{budget:,} tokens). "
+            f"{remaining:,} remaining. Continue producing.]"
+        )
+        return BudgetDecision(
+            action="continue",
+            pct=pct,
+            turn_tokens=current_tokens,
+            budget=budget,
+            nudge_message=nudge,
+            continuation_count=tracker.continuation_count,
+        )
+
+    if is_diminishing or tracker.continuation_count > 0:
+        return BudgetDecision(
+            action="stop",
+            pct=pct,
+            turn_tokens=current_tokens,
+            budget=budget,
+            diminishing_returns=is_diminishing,
+            continuation_count=tracker.continuation_count,
+            duration_ms=tracker.duration_ms,
+        )
+
+    return BudgetDecision(action="stop")
+
+
+def budget_aware_produce(
+    sections: list[dict],
+    max_tokens: int,
+    model: str = "claude-sonnet-4-20250514",
+) -> tuple[list[str], BudgetDecision]:
+    """Produce artifact sections with budget governance.
+
+    Each section is produced in order. After each, we check the budget.
+    Stops early on diminishing returns or budget exhaustion.
+
+    Args:
+        sections: [{"name": str, "content": str}, ...]
+        max_tokens: Total token budget for production
+        model: Model for token counting
+
+    Returns:
+        (produced_texts, final_decision)
+    """
+    tracker = BudgetTracker()
+    produced = []
+    total_tokens = 0
+    last_decision = BudgetDecision(action="stop")
+
+    for section in sections:
+        decision = check_token_budget(tracker, max_tokens, total_tokens)
+        last_decision = decision
+
+        if decision.action == "stop":
+            if decision.diminishing_returns:
+                produced.append(
+                    f"<!-- Budget: stopped at {decision.pct}% (diminishing returns) -->"
+                )
+            elif decision.pct >= 90:
+                produced.append(
+                    f"<!-- Budget: stopped at {decision.pct}% (budget exhausted) -->"
+                )
+            break
+
+        content = section.get("content", "")
+        remaining_budget = max_tokens - total_tokens
+        section_tokens = count_tokens(content, model)
+
+        if section_tokens > remaining_budget:
+            content = truncate_to_tokens(content, remaining_budget, model)
+            section_tokens = count_tokens(content, model)
+
+        produced.append(content)
+        total_tokens += section_tokens
+
+    return produced, last_decision
+
+
+# ---------------------------------------------------------------------------
 # Prompt Analysis
 # ---------------------------------------------------------------------------
 
