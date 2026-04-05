@@ -57,7 +57,7 @@ examples: "{\n  \"builder_id\": \"validator-builder\",\n  \"kind\": \"eval_build
   , \"gate\", \"check\", \"enforce\"],\n  \"routing_triggers\": [\"validate this artifact\", \"define quality gates for\"\
   ],\n  \"crew_role\": \"VALIDATOR\"\n}"
 domain: builder-specification
-quality: null
+quality: 9.1
 tags:
 - input-schema
 - builder-specification

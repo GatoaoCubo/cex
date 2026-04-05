@@ -1,0 +1,39 @@
+---
+kind: schema
+id: bld_schema_memory_type
+pillar: P10
+llm_function: CONSTRAIN
+purpose: Formal schema for memory_type artifacts
+pattern: TEMPLATE derives from this. CONFIG restricts this.
+---
+
+# Schema: memory_type
+## Frontmatter Fields
+| Field | Type | Required | Default | Notes |
+|-------|------|----------|---------|-------|
+| id | string (p10_mt_{slug}) | YES | - | Namespace |
+| kind | literal "memory_type" | YES | - | Type integrity |
+| pillar | literal "P10" | YES | - | Pillar assignment |
+| version | semver | YES | "1.0.0" | Versioning |
+| created | date | YES | - | Creation date |
+| updated | date | YES | - | Last update |
+| author | string | YES | - | Producer |
+| type_name | enum: correction, preference, convention, context | YES | - | Memory category |
+| decay_rate | float 0.0-1.0 | YES | - | Confidence decay per cycle |
+| preserve_on_compact | boolean | YES | - | Survive context compression |
+| quality | null | YES | null | Never self-score |
+| tags | list[string] | YES | - | Must include "memory_type" |
+| tldr | string <= 160ch | YES | - | Dense summary |
+## ID Pattern
+Regex: `^p10_mt_[a-z][a-z0-9_]+$`
+## Body Structure
+1. `## Definition` -- what this memory type captures
+2. `## Decay Policy` -- how confidence decays over time
+3. `## Storage Rules` -- where and how stored
+4. `## Examples` -- concrete examples of this type
+## Constraints
+- max_bytes: 2048
+- naming: p10_mt_{type}.md
+- machine_format: yaml
+- type_name MUST be one of 4 enum values
+- decay_rate 0.0 = permanent, 0.05 = fast decay

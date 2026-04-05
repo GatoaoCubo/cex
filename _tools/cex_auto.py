@@ -57,8 +57,9 @@ def scan_system() -> dict:
                          "action": f"Evolve+score: python _tools/cex_evolve.py single {f} --target 8.5"})
 
     # 2. Check doctor
-    r = subprocess.run([sys.executable, "_tools/cex_doctor.py"], capture_output=True, text=True, timeout=30)
-    full = r.stdout + r.stderr
+    r = subprocess.run([sys.executable, "_tools/cex_doctor.py"], capture_output=True, text=True, timeout=30,
+                       encoding="utf-8", errors="replace")
+    full = (r.stdout or "") + (r.stderr or "")
     m = re.search(r"(\d+) PASS \| (\d+) WARN \| (\d+) FAIL", full)
     if m:
         stats["doctor_pass"] = int(m.group(1))
@@ -73,8 +74,9 @@ def scan_system() -> dict:
 
     # 3. Check hooks validation
     r = subprocess.run([sys.executable, "_tools/cex_hooks.py", "validate-all"],
-                       capture_output=True, text=True, timeout=30)
-    full = r.stdout + r.stderr
+                       capture_output=True, text=True, timeout=30,
+                       encoding="utf-8", errors="replace")
+    full = (r.stdout or "") + (r.stderr or "")
     m = re.search(r"Errors:\s+(\d+)", full)
     hook_errors = int(m.group(1)) if m else 0
     stats["hook_errors"] = hook_errors
@@ -118,8 +120,9 @@ def scan_system() -> dict:
 
     # 6. Check compile
     r = subprocess.run([sys.executable, "_tools/cex_compile.py", "--all"],
-                       capture_output=True, text=True, timeout=60)
-    full = r.stdout + r.stderr
+                       capture_output=True, text=True, timeout=60,
+                       encoding="utf-8", errors="replace")
+    full = (r.stdout or "") + (r.stderr or "")
     m = re.search(r"(\d+)/(\d+) compiled", full)
     if m:
         stats["compile_ok"] = int(m.group(1))
@@ -219,7 +222,7 @@ def execute_step(step: dict, dry_run: bool = False) -> dict:
             capture_output=True, text=True, timeout=60
         )
         result["success"] = r.returncode == 0
-        result["output"] = (r.stdout + r.stderr).strip()[-200:]
+        result["output"] = ((r.stdout or "") + (r.stderr or "")).strip()[-200:]
 
     elif step["type"] == "low_quality" and step.get("path"):
         # AutoResearch: evolve the artifact until it improves
@@ -228,7 +231,7 @@ def execute_step(step: dict, dry_run: bool = False) -> dict:
              "--target", "8.5", "--max-rounds", "3"],
             capture_output=True, text=True, timeout=60
         )
-        result["output"] = (r.stdout + r.stderr).strip()[-200:]
+        result["output"] = ((r.stdout or "") + (r.stderr or "")).strip()[-200:]
         result["success"] = "KEEP" in r.stdout or "Target" in r.stdout
         result["note"] = f"Evolved: {step['path']}" if result["success"] else f"Could not improve: {step['path']}"
 
@@ -244,7 +247,7 @@ def execute_step(step: dict, dry_run: bool = False) -> dict:
             ]
             try:
                 r = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
-                full = r.stdout + r.stderr
+                full = (r.stdout or "") + (r.stderr or "")
                 result["success"] = "PASS" in full
                 result["output"] = full[-200:]
                 result["note"] = f"Built {kind} for {nucleus}" if result["success"] else f"FAIL: {kind} for {nucleus}"
