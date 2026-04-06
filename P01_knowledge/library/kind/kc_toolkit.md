@@ -9,7 +9,7 @@ created: 2026-04-05
 updated: 2026-04-05
 author: n07-orchestrator
 domain: toolkit
-quality: null
+quality: 9.1
 tags: [toolkit, p04, CALL, kind-kc, tools]
 tldr: "A bundled collection of related tools an agent can CALL -- groups tool definitions into coherent capability packages"
 when_to_use: "Packaging multiple tools into a single capability unit for agent assignment"

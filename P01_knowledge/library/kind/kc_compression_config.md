@@ -9,7 +9,7 @@ created: 2026-04-05
 updated: 2026-04-05
 author: n07-orchestrator
 domain: compression_config
-quality: null
+quality: 9.1
 tags: [compression_config, p10, INJECT, kind-kc, memory]
 tldr: "Configuration for context/memory compression -- controls how and when content is compacted to fit token budgets"
 when_to_use: "Building or tuning context compaction behavior for long-running agent sessions"

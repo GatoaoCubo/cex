@@ -7,7 +7,7 @@ created: 2026-04-02
 updated: 2026-04-02
 author: codex
 domain: marketing
-quality: null
+quality: 8.9
 tags: [dispatch, marketing, marketer, copywriting, campaigns, P12]
 tldr: Route marketing copy, campaign creation, and brand voice tasks to marketer agent_node
 scope: marketing

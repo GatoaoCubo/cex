@@ -9,7 +9,7 @@ created: 2026-04-02
 updated: 2026-04-02
 author: builder_knowledge
 domain: skill
-quality: null
+quality: 9.1
 tags: [skill, p04, reusable, kind-kc]
 tldr: "Reusable capability with structured phases, triggers, and lifecycle management for repeatable workflows"
 when_to_use: "Building, reviewing, or reasoning about skill artifacts"

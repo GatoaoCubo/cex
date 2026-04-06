@@ -5,7 +5,7 @@ title: "SPEC_06: Multi-Provider Router → Nucleus Routing"
 version: 1.0.0
 status: active
 created: 2026-04-05
-quality: null
+quality: 9.0
 depends_on: [SPEC_03]
 target_files:
   - _tools/cex_router.py (NEW)

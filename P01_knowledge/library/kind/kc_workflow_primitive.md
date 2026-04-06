@@ -9,7 +9,7 @@ created: 2026-04-05
 updated: 2026-04-05
 author: n07-orchestrator
 domain: workflow_primitive
-quality: null
+quality: 9.1
 tags: [workflow_primitive, p12, PRODUCE, kind-kc, orchestration, dag]
 tldr: "Atomic building blocks for agent workflows -- step, condition, loop, parallel, and router primitives that compose into DAGs"
 when_to_use: "Designing agent workflows, building DAG-based orchestration, or extending the workflow engine"

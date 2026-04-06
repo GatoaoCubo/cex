@@ -7,7 +7,7 @@ created: 2026-04-05
 updated: 2026-04-05
 author: n07-orchestrator
 title: "CEX System Map: Full Fractal Architecture Census"
-quality: null
+quality: 9.1
 tags: [system-map, architecture, fractal, census, meta]
 tldr: "Complete map of CEX 7-layer fractal architecture: 4740+ files, 115 kinds, 12 pillars, 8 nuclei, 50 tools"
 input_taxonomy: "symbiosis_audit_v1 -- full-repo cascade verification with wiring and collaboration mapping"

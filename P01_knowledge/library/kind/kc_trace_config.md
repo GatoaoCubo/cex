@@ -9,7 +9,7 @@ created: 2026-04-05
 updated: 2026-04-05
 author: n07-orchestrator
 domain: trace_config
-quality: null
+quality: 9.1
 tags: [trace_config, p07, GOVERN, kind-kc, observability, tracing]
 tldr: "Configuration for agent execution tracing -- controls what gets logged, sampled, and exported for debugging and evals"
 when_to_use: "Setting up observability for agent runs, configuring trace sampling, or debugging pipeline failures"

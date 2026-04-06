@@ -5,7 +5,7 @@ title: "SPEC_05: Skills Runtime → Builder ISO Loading"
 version: 1.0.0
 status: active
 created: 2026-04-05
-quality: null
+quality: 9.0
 depends_on: [SPEC_04]
 target_files:
   - _tools/cex_crew_runner.py

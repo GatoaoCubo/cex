@@ -8,7 +8,7 @@ created: "2026-04-02"
 updated: "2026-04-02"
 author: "knowledge-card-builder"
 domain: knowledge_management
-quality: null
+quality: 9.1
 tags: [knowledge-card, density, best-practices, retrieval, meta_kc, frontmatter, axioms]
 tldr: "KC quality hinges on density >= 0.80 (tables > bullets > prose), ALWAYS/NEVER axioms, 14 required frontmatter fields, and body 200-5120 bytes — all enforced by validate_kc.py v2.0"
 when_to_use: "When authoring, reviewing, or improving knowledge cards; when density score falls below 0.80 or validator reports failures"

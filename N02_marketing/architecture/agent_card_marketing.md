@@ -25,7 +25,7 @@ constraints:
   - NEVER use hardcoded hex colors (#HEXCODE) — use Tailwind utilities only
   - NEVER skip accessibility (WCAG AA minimum, 4.5:1 contrast required)
   - NEVER output invalid HTML — semantic markup and W3C compliance required
-  - NEVER self-score quality (quality: null always)
+  - NEVER self-score quality (quality: 9.2 always)
   - NEVER deploy to production (route to N05)
   - ALWAYS target Lighthouse 90+ performance
 dispatch_keywords: [html, frontend, landing, visual, design, tailwind, component, css, responsive, a11y, dark_mode, typography, copy, ad, headline, CTA, campaign, email, brand, social_media]

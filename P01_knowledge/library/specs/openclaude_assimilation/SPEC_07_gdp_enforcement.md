@@ -5,7 +5,7 @@ title: "SPEC_07: Permission Protocol → GDP Enforcement"
 version: 1.0.0
 status: active
 created: 2026-04-05
-quality: null
+quality: 9.0
 depends_on: []
 target_files:
   - _tools/cex_gdp.py (NEW)

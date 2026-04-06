@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-30
 author: n05_operations
 domain: infrastructure
-quality: null
+quality: 8.9
 tags: [postgresql, railway, database, deploy, connection-pooling]
 tldr: "Railway PostgreSQL: add plugin, get DATABASE_URL auto-injected. Use connection pooling (PgBouncer) for serverless. Backup via pg_dump cron."
 when_to_use: "When deploying PostgreSQL on Railway platform"

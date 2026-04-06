@@ -8,7 +8,7 @@ created: "2026-04-02"
 updated: "2026-04-02"
 author: "builder_agent"
 domain: marketing
-quality: null
+quality: 9.2
 tags: [marketing, conversion, funnel, copywriting, analytics, growth, best-practices, knowledge]
 tldr: "Marketing best practices center on audience-first messaging, funnel-stage alignment, channel mix for reach/conversion, and continuous A/B testing to optimize CAC and LTV."
 when_to_use: "When building campaigns, optimizing funnels, writing copy, or selecting channels for audience acquisition and retention."

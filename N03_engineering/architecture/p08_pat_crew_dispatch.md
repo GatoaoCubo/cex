@@ -7,12 +7,12 @@ created: "2026-03-30"
 updated: "2026-03-30"
 author: "pattern-builder"
 domain: "orchestration"
-quality: 8.9
+quality: 9.1
 tags: [pattern, crew, dispatch, orchestration, quality-assurance, multi-agent]
 tldr: "Spawn builder+validator sub-agents in sequence per artifact; orchestrator accepts, revises, or rebuilds based on validator result."
 name: "Crew Dispatch"
 problem: "Whenever a single agent both produces and validates an artifact, production and quality-assurance are conflated, producing no independent check on gate compliance."
-solution: "Orchestrator writes handoff, spawns kind-builder (8F, quality: null), then spawns validator; validator score drives accept/revise/rebuild."
+solution: "Orchestrator writes handoff, spawns kind-builder (8F, quality: 9.1), then spawns validator; validator score drives accept/revise/rebuild."
 context: "Multi-agent orchestration where artifact quality must be verified by an independent agent before acceptance."
 forces: ["production speed vs quality independence", "autonomy vs coordination overhead", "sequential crew dependency vs parallel grid throughput"]
 consequences: ["independent gate catches builder blind spots", "two spawn cycles per artifact", "auditable validator signal", "parallel crews scale throughput at RAM cost"]

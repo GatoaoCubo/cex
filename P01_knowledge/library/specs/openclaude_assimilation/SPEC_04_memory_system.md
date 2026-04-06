@@ -5,7 +5,7 @@ title: "SPEC_04: Memory Aging/Relevance → cex_memory"
 version: 1.0.0
 status: active
 created: 2026-04-05
-quality: null
+quality: 9.0
 depends_on: []
 target_files:
   - _tools/cex_memory_select.py

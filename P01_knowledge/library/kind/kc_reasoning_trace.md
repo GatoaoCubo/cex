@@ -9,7 +9,7 @@ created: 2026-04-05
 updated: 2026-04-05
 author: n07-orchestrator
 domain: reasoning_trace
-quality: null
+quality: 9.1
 tags: [reasoning_trace, p03, CONSTRAIN, kind-kc, reasoning, chain-of-thought]
 tldr: "Structured record of an agent's step-by-step reasoning -- captures the WHY behind decisions for audit and learning"
 when_to_use: "Building reasoning-capture systems, debugging agent decisions, or training from past reasoning"

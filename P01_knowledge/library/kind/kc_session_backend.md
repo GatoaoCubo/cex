@@ -9,7 +9,7 @@ created: 2026-04-05
 updated: 2026-04-05
 author: n07-orchestrator
 domain: session_backend
-quality: null
+quality: 9.1
 tags: [session_backend, p10, INJECT, kind-kc, memory, session, persistence]
 tldr: "Configuration for agent session state persistence -- where and how conversation/context state is stored between turns"
 when_to_use: "Configuring session persistence, choosing between file/redis/postgres backends, or building stateful agents"

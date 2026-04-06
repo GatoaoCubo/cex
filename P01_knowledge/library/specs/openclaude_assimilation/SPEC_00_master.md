@@ -5,7 +5,7 @@ title: "OpenClaude→CEX Assimilation Master Spec"
 version: 1.0.0
 status: active
 created: 2026-04-05
-quality: null
+quality: 9.0
 dependencies: [SPEC_01, SPEC_02, SPEC_03, SPEC_04, SPEC_05, SPEC_06, SPEC_07]
 ---
 

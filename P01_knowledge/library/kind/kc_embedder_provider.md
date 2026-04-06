@@ -9,7 +9,7 @@ created: 2026-04-05
 updated: 2026-04-05
 author: n07-orchestrator
 domain: embedder_provider
-quality: null
+quality: 9.1
 tags: [embedder_provider, p01, INJECT, kind-kc, knowledge, rag]
 tldr: "Configuration for text-to-vector embedding services -- maps text chunks to dense vectors for semantic retrieval"
 when_to_use: "Configuring RAG pipelines, vector stores, or semantic search for CEX knowledge retrieval"

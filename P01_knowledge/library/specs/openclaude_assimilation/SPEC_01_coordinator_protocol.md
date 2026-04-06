@@ -5,7 +5,7 @@ title: "SPEC_01: Coordinator Protocol → N07 Orchestrator"
 version: 1.0.0
 status: active
 created: 2026-04-05
-quality: null
+quality: 9.0
 depends_on: [SPEC_02, SPEC_05, SPEC_06]
 target_files:
   - _tools/cex_mission_runner.py

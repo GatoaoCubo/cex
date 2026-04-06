@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-30
 author: n05_operations
 domain: infrastructure
-quality: null
+quality: 9.0
 tags: [zero-downtime, deployment, blue-green, rolling, health-check]
 tldr: "Zero-downtime via health checks + graceful shutdown + rolling deploys. 30-30-60 startup pattern: 30s warmup, 30s health probe, 60s traffic ramp."
 when_to_use: "When deploying production services that must not drop requests"

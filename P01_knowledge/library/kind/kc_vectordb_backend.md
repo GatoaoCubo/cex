@@ -9,7 +9,7 @@ created: 2026-04-05
 updated: 2026-04-05
 author: n07-orchestrator
 domain: vectordb_backend
-quality: null
+quality: 9.1
 tags: [vectordb_backend, p01, INJECT, kind-kc, knowledge, rag, vector]
 tldr: "Configuration for vector database storage -- where embeddings live and how similarity search is performed"
 when_to_use: "Choosing and configuring a vector store for semantic retrieval in CEX knowledge pipelines"

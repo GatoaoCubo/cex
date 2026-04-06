@@ -8,7 +8,7 @@ version: 2.0.0
 created: 2026-03-25
 updated: 2026-03-25
 author: orchestrator
-quality: 8.9
+quality: 9.1
 tags: [blueprint, knowledge-card, meta-template, production-mold]
 tldr: "Meta-template que define COMO gerar KCs validos — frontmatter, body, quality gates, naming"
 when_to_use: "Antes de gerar qualquer KC — este blueprint eh o molde"

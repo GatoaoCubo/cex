@@ -6,7 +6,7 @@ version: 1.0.0
 created: 2026-04-05
 author: n07-orchestrator
 title: "OpenClaude to CEX Ingestion Pipeline"
-quality: null
+quality: 9.0
 tags: [pipeline, ingestion, openclaude, taxonomy, universal]
 tldr: "How OpenClaude battle-tested prompts become universal CEX artifacts"
 ---

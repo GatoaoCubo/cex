@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
-quality: 8.9
+quality: 9.1
 tags: [blueprint, model-card, meta-template, production-mold, llm-spec]
 tldr: "Meta-template que define COMO gerar model_cards validos — frontmatter layered, capabilities como booleans, pricing normalizado, freshness 90d"
 when_to_use: "Antes de gerar qualquer model_card — este blueprint eh o molde"

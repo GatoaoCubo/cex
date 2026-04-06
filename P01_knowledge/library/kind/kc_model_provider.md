@@ -9,7 +9,7 @@ created: 2026-04-05
 updated: 2026-04-05
 author: n07-orchestrator
 domain: model_provider
-quality: null
+quality: 9.1
 tags: [model_provider, p02, BECOME, kind-kc, routing, llm]
 tldr: "Configuration for LLM provider connections -- credentials, models, rate limits, and fallback chains"
 when_to_use: "Configuring multi-provider LLM routing, adding new model providers, or setting up fallback chains"

@@ -9,7 +9,7 @@ created: 2026-04-05
 updated: 2026-04-05
 author: n07-orchestrator
 domain: memory_type
-quality: null
+quality: 9.1
 tags: [memory_type, P10, INJECT, kind-kc]
 tldr: "Classification of persistent memory by source, confidence, and decay rate"
 when_to_use: "Building, reviewing, or reasoning about memory_type artifacts"

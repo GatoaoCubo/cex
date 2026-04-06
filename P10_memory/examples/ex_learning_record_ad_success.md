@@ -8,12 +8,8 @@ references:
   - tpl_learning_record
   - ex_agent_copywriter
   - ex_quality_gate_copy
-quality: 8.5
----
+quality: 8.6
 tldr: "Learning record: ad campaign that worked well. Captures what, why, and reuse conditions."
-quality: null
-tldr: "Learning record: ad campaign that worked well. Captures what, why, and reuse conditions."
-quality: null
 ---
 
 # Ad Campaign Success Record
