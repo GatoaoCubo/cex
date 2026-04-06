@@ -32,6 +32,7 @@ if hasattr(sys.stdout, "reconfigure"): sys.stdout.reconfigure(encoding="utf-8")
 if hasattr(sys.stderr, "reconfigure"): sys.stderr.reconfigure(encoding="utf-8")
 
 import json
+import os
 import re
 import argparse
 from dataclasses import dataclass, field
@@ -426,8 +427,21 @@ def compose_prompt(
     3. Relevant prior outputs (from earlier pipeline steps)
     4. Retry feedback (if retrying after quality gate failure)
     5. Execution instructions
+    6. Sin lens injection (identity lens from nucleus_sins.yaml)
     """
     parts = []
+
+    # --- Sin Lens Injection (from nucleus_sins.yaml) ---
+    try:
+        from cex_theme import get_prompt_injection
+        nucleus = os.environ.get("CEX_NUCLEUS", "n03").lower()
+        sin_injection = get_prompt_injection(nucleus)
+        if sin_injection:
+            parts.append("## Your Identity Lens")
+            parts.append(sin_injection)
+            parts.append("")
+    except Exception:
+        pass  # sin injection is additive, never blocks
 
     # --- Prompt Layers (Wire 1-4: identity + behavioral + action + guardrails) ---
     layers = _get_prompt_layers()

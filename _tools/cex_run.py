@@ -21,6 +21,7 @@ Usage:
 
 import argparse
 import json
+import os
 import re
 import subprocess
 import sys
@@ -459,6 +460,19 @@ def run(intent: str, quality: float = 9.0, dry_run: bool = False,
         effort = "medium"
 
     model = EFFORT_TO_MODEL.get(effort, DEFAULT_MODEL)
+
+    # Auto-discover best available provider
+    try:
+        from _tools.cex_provider_discovery import discover_providers, get_best_provider
+        providers = discover_providers()
+        nucleus = os.environ.get("CEX_NUCLEUS", "n03").lower()
+        best = get_best_provider(nucleus, providers)
+        if best and best != model:
+            if verbose:
+                print(f"  Auto-routed to {best} (discovery override)")
+            model = best
+    except Exception:
+        pass  # discovery failure = use configured default
 
     # Step 5: Execute
     if verbose:

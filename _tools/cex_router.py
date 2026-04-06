@@ -343,6 +343,98 @@ def resolve_default_model(fallback: str = "claude-sonnet-4-6") -> str:
 
 
 # ---------------------------------------------------------------------------
+# Provider Discovery Integration
+# ---------------------------------------------------------------------------
+
+
+def discover_and_route(nucleus: str) -> dict:
+    """Auto-discover providers and route nucleus to best available.
+
+    Combines provider health check with nucleus model resolution.
+    Falls back gracefully if primary is offline.
+
+    Args:
+        nucleus: Nucleus id (n01..n07, N03_builder, etc.)
+
+    Returns:
+        {"provider": name, "model": model, "status": "ok"|"fallback"|"offline",
+         "message": str}
+    """
+    nuc_key = nucleus.lower()[:3]
+
+    try:
+        from cex_provider_discovery import discover_providers, get_best_provider
+        providers = discover_providers()
+    except ImportError:
+        # Discovery not available — use static config
+        model = resolve_model_for(nuc_key)
+        return {
+            "provider": "anthropic",
+            "model": model,
+            "status": "ok",
+            "message": f"{nuc_key.upper()}: static config -> {model} (discovery unavailable)",
+        }
+
+    # Get the configured primary model
+    primary_model = resolve_model_for(nuc_key)
+
+    # Infer primary provider
+    model_lower = primary_model.lower()
+    if "claude" in model_lower or "opus" in model_lower or "sonnet" in model_lower:
+        primary_provider = "anthropic"
+    elif "gemini" in model_lower:
+        primary_provider = "google"
+    elif "gpt" in model_lower:
+        primary_provider = "openai"
+    else:
+        primary_provider = "anthropic"
+
+    # Check if primary is alive
+    primary_status = providers.get(primary_provider, {})
+    if primary_status.get("status") == "OK":
+        logger.info(f"{nuc_key.upper()}: {primary_provider} OK -> {primary_model}")
+        return {
+            "provider": primary_provider,
+            "model": primary_model,
+            "status": "ok",
+            "message": f"{nuc_key.upper()}: {primary_provider} OK -> {primary_model}",
+        }
+
+    # Primary offline — try fallback via discovery
+    best = get_best_provider(nuc_key, providers)
+    if best:
+        # Infer provider for the fallback model
+        fb_lower = best.lower()
+        if "claude" in fb_lower or "opus" in fb_lower or "sonnet" in fb_lower:
+            fb_provider = "anthropic"
+        elif "gemini" in fb_lower:
+            fb_provider = "google"
+        elif "gpt" in fb_lower:
+            fb_provider = "openai"
+        else:
+            fb_provider = "ollama"
+
+        logger.warning(
+            f"{nuc_key.upper()}: {primary_provider} FAIL -> {fb_provider}/{best} (fallback)"
+        )
+        return {
+            "provider": fb_provider,
+            "model": best,
+            "status": "fallback",
+            "message": f"{nuc_key.upper()}: {primary_provider} FAIL -> {fb_provider}/{best} (fallback)",
+        }
+
+    # All offline
+    logger.error(f"{nuc_key.upper()}: ALL providers offline")
+    return {
+        "provider": "none",
+        "model": primary_model,
+        "status": "offline",
+        "message": f"{nuc_key.upper()}: ALL providers offline. Using configured default: {primary_model}",
+    }
+
+
+# ---------------------------------------------------------------------------
 # Singleton
 # ---------------------------------------------------------------------------
 

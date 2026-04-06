@@ -69,10 +69,24 @@ function Launch-Nucleus($handoff) {
     $pos = $gridPos[$nucleus]
     if (-not $pos) { $pos = @{x=0; y=0} }
 
-    $bootScript = "$root\boot\$nucleus.cmd"
-    if (-not (Test-Path $bootScript)) {
+    # Prefer PS1 (sin-aware UX) over CMD (legacy)
+    $bootPs1 = "$root\boot\$nucleus.ps1"
+    $bootCmd = "$root\boot\$nucleus.cmd"
+    if (Test-Path $bootPs1) {
+        $bootScript = $bootPs1
+        $bootType = "ps1"
+    } elseif (Test-Path $bootCmd) {
+        $bootScript = $bootCmd
+        $bootType = "cmd"
+    } else {
         Write-Output "[$upper] SKIP: no boot script"
         return $null
+    }
+
+    # Sin identity log (read from sins.yaml if available)
+    $sinFile = "$root\.cex\config\nucleus_sins.yaml"
+    if (Test-Path $sinFile) {
+        Write-Output "[$upper] Sin-aware boot ($bootType)"
     }
 
     # Write per-nucleus handoff pointer so boot script picks it up
@@ -80,7 +94,11 @@ function Launch-Nucleus($handoff) {
     Copy-Item $handoff.FullName -Destination $nucleusHandoff -Force
 
     # ALWAYS boot interactive — task comes from handoff, never CLI args (avoids nested-quote hell)
-    $proc = Start-Process cmd -ArgumentList "/k `"$bootScript`"" -WorkingDirectory $root -PassThru
+    if ($bootType -eq "ps1") {
+        $proc = Start-Process powershell -ArgumentList "-ExecutionPolicy Bypass -File `"$bootScript`"" -WorkingDirectory $root -PassThru
+    } else {
+        $proc = Start-Process cmd -ArgumentList "/k `"$bootScript`"" -WorkingDirectory $root -PassThru
+    }
     Start-Sleep -Seconds 3
 
     if ($proc) {
