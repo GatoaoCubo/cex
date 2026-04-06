@@ -109,7 +109,7 @@ flags:
 - claude-sonnet-4-6
 - -p
 domain: marketing
-quality: null
+quality: 9.1
 tags:
 - agent_node
 - marketing
