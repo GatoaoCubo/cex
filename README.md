@@ -163,7 +163,9 @@ This means CEX is the **source of truth** for your AI knowledge. Edit once in CE
 bash _spawn/dispatch.sh solo n03 "build agent card for sales"   # Single nucleus
 bash _spawn/dispatch.sh grid MISSION_NAME                       # Up to 6 parallel
 bash _spawn/dispatch.sh status                                  # Monitor all
-bash _spawn/dispatch.sh stop                                    # Kill all
+bash _spawn/dispatch.sh stop                                    # Stop MY session only
+bash _spawn/dispatch.sh stop n03                                # Stop specific nucleus
+bash _spawn/dispatch.sh stop --all                              # Stop ALL (DANGEROUS)
 ```
 
 ---

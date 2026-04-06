@@ -79,7 +79,7 @@ directly — it coordinates the work of N01-N06.
 | Solo | `bash _spawn/dispatch.sh solo {nucleus} "task"` | Single task, one nucleus |
 | Grid | `bash _spawn/dispatch.sh grid {mission}` | Parallel tasks, multiple nuclei |
 | Status | `bash _spawn/dispatch.sh status` | Check active builders |
-| Stop | `bash _spawn/dispatch.sh stop` | Terminate all builders |
+| Stop | `bash _spawn/dispatch.sh stop` | Stop MY session's builders (session-aware v4.0) |
 
 ## Constraints
 

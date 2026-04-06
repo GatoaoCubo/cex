@@ -125,7 +125,7 @@ Start-Sleep -Seconds 3
 [Win32Move]::MoveWindow($proc.MainWindowHandle, {x}, {y}, 640, 520, $true)
 
 # 5. Update PID tracking
-"{new_pid} n0x" | Add-Content .cex/temp/spawn_pids.txt
+"{new_pid} n0x claude {session_id} {timestamp}" | Add-Content .cex/runtime/pids/spawn_pids.txt
 ```
 
 ---
@@ -146,7 +146,7 @@ Start-Sleep -Seconds 3
 
 ### P3: PID file noise
 - **Symptom**: `dispatch.sh status` shows CRASHED from old sessions
-- **Fix pre-grid**: `> .cex/temp/spawn_pids.txt` (truncate)
+- **Fix pre-grid**: `> .cex/runtime/pids/spawn_pids.txt` (truncate)
 
 ### P4: Handoff not copied to n0X_task.md
 - **Symptom**: Nucleus boots but has no task
@@ -190,7 +190,7 @@ bash _spawn/dispatch.sh status
 □ Mission name defined (UPPERCASE)
 □ Handoffs written: .cex/runtime/handoffs/{MISSION}_n0{1-6}.md
 □ Old signals cleared: rm -f .cex/runtime/signals/*
-□ PID file clean (optional): > .cex/temp/spawn_pids.txt
+□ PID file clean (optional): > .cex/runtime/pids/spawn_pids.txt
 □ Doctor baseline: python _tools/cex_doctor.py
 □ Git clean: no uncommitted changes
 ```

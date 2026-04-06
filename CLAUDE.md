@@ -144,8 +144,14 @@ User decides WHAT → LLM builds HOW → verify together.
 bash _spawn/dispatch.sh solo n03 "task"   # 1 builder
 bash _spawn/dispatch.sh grid MISSION      # up to 6 parallel
 bash _spawn/dispatch.sh status            # monitor
-bash _spawn/dispatch.sh stop              # kill all
+bash _spawn/dispatch.sh stop              # stop MY session's nuclei only
+bash _spawn/dispatch.sh stop n03          # stop only N03 (surgical)
+bash _spawn/dispatch.sh stop --all        # stop ALL nuclei (DANGEROUS)
+bash _spawn/dispatch.sh stop --dry-run    # preview what would die
 ```
+
+> **Session-aware (v4.0)**: Multiple N07 orchestrators can run simultaneously.
+> `stop` only kills YOUR nuclei. Use `--all` explicitly to kill everything.
 
 ## Nucleus Routing
 

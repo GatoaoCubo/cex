@@ -376,7 +376,7 @@ git log --oneline -20
 | `_spawn/spawn_solo.ps1` | PowerShell: spawn 1 nucleus + position |
 | `_spawn/spawn_grid.ps1` | PowerShell: spawn grid + continuous batching |
 | `_spawn/spawn_monitor.ps1` | PowerShell: signal + stuck detection |
-| `_spawn/spawn_stop.ps1` | PowerShell: kill all CLIs |
+| `_spawn/spawn_stop.ps1` | PowerShell: session-aware stop (v4.0 — only YOUR nuclei by default) |
 | `_tools/signal_writer.py` | Python: nuclei write completion signals |
 | `boot/{nucleus}.cmd` | CMD: boot script per nucleus |
 | `.cex/runtime/` | Runtime workspace (handoffs, signals, pids) |

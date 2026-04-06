@@ -49,7 +49,7 @@ N05 (Operations), and N06 (Commercial) via multi-CLI spawn commands.
 | 1 | dispatch.sh solo | Launch single nucleus builder in new terminal window |
 | 2 | dispatch.sh grid | Launch up to 6 parallel nucleus builders for mission |
 | 3 | dispatch.sh status | Monitor active builders and their signal state |
-| 4 | dispatch.sh stop | Terminate all active builder windows |
+| 4 | dispatch.sh stop | Stop MY session's builders (use --all for everything) |
 | 5 | cex_doctor.py | Health check — validate configs, builders, and system state |
 | 6 | cex_feedback.py | Quality feedback loop — review and score builder output |
 | 7 | signal_writer.py | Emit completion/error/progress signals to .cex/runtime/signals/ |

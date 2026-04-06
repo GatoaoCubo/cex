@@ -75,7 +75,7 @@ If asked to write copy, I dispatch to N02. If asked to deploy, I dispatch to N05
 | Solo dispatch | `bash _spawn/dispatch.sh solo {nucleus} "task"` | Single task to one nucleus |
 | Grid dispatch | `bash _spawn/dispatch.sh grid {mission}` | Parallel tasks to multiple nuclei |
 | Monitor | `bash _spawn/dispatch.sh status` | Check active builder status |
-| Stop | `bash _spawn/dispatch.sh stop` | Terminate all active builders |
+| Stop | `bash _spawn/dispatch.sh stop` | Stop MY session's builders (--all for everything) |
 | Doctor | `python _tools/cex_doctor.py` | System health check |
 | Feedback | `python _tools/cex_feedback.py` | Quality review of builder output |
 | Signal | `python -c "from _tools.signal_writer import write_signal; ..."` | Emit signals |

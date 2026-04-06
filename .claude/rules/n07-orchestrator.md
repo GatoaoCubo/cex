@@ -25,13 +25,37 @@ bash _spawn/dispatch.sh grid MISSION_NAME
 # Monitor
 bash _spawn/dispatch.sh status
 
-# Stop all
+# Stop MY session's nuclei only (safe — other N07s untouched)
 bash _spawn/dispatch.sh stop
+
+# Stop specific nucleus (surgical)
+bash _spawn/dispatch.sh stop n03
+
+# Stop ALL nuclei (DANGEROUS — kills other N07's processes too)
+bash _spawn/dispatch.sh stop --all
+
+# Preview what would be killed (always safe)
+bash _spawn/dispatch.sh stop --dry-run
 ```
+
+## Session-Aware Process Management (v4.0)
+
+Multiple N07 orchestrators can run simultaneously on the same machine.
+Each spawn records a **session ID** in the PID file:
+```
+{cmd_pid} {nucleus} {cli} {session_id} {timestamp}
+```
+
+**Rules:**
+- `stop` = kills only MY session's nuclei (default, safe)
+- `stop n03` = kills only that nucleus regardless of session (surgical)
+- `stop --all` = kills everything including other N07's nuclei (explicit, dangerous)
+- **NEVER** use `Get-Process claude | Stop-Process` — kills ALL claude processes globally
 
 ## Dispatch Workflow
 
 1. Write handoff to `.cex/runtime/handoffs/{MISSION}_{nucleus}.md`
+   **AND** copy to `n0X_task.md` (boot scripts read this file)
 2. Dispatch: `bash _spawn/dispatch.sh solo|grid`
 3. Monitor: `bash _spawn/dispatch.sh status` + `git log` + check signals
 4. Consolidate: verify → stop → commit (for Gemini nuclei) → archive
@@ -40,7 +64,7 @@ bash _spawn/dispatch.sh stop
 
 1. **DETECT**: Check `git log`, `.cex/runtime/signals/`, process alive?
 2. **VERIFY**: `python _tools/cex_doctor.py`
-3. **STOP**: `bash _spawn/dispatch.sh stop` (kills CMD + child tree recursively)
+3. **STOP**: `bash _spawn/dispatch.sh stop` (kills MY session's CMD + child tree only)
 4. **COMMIT** (if Gemini): `git add N0x_*/ && git commit -m "[N0x] ..."` (Gemini auto-signals on exit now via boot wrapper)
 5. **REPORT**: Output consolidation summary
 
@@ -62,12 +86,14 @@ python _tools/cex_signal_watch.py --expect n01,n02,n03,n04,n05,n06 --timeout 360
 # Blocks until all nuclei signal or timeout. Detects crashes via PID health check.
 ```
 
-### Process Cleanup (v3.0 — recursive kill-tree)
+### Process Cleanup (v4.0 — session-aware recursive kill-tree)
 ```bash
-powershell -File _spawn/spawn_stop.ps1           # kill everything
-powershell -File _spawn/spawn_stop.ps1 -DryRun   # preview
-# 3-step: PID file → window title fallback → orphan scan
-# Kills cmd + claude.exe + node.exe(gemini) + conhost + MCP servers
+bash _spawn/dispatch.sh stop              # MY session only (safe)
+bash _spawn/dispatch.sh stop n03          # specific nucleus (surgical)
+bash _spawn/dispatch.sh stop --all        # everything (dangerous, explicit)
+bash _spawn/dispatch.sh stop --dry-run    # preview
+# Kill-Tree: cmd → claude.exe → node.exe(MCP) → uvx → uv → mcp-server → python
+# Session-tracked: PID file has {pid} {nucleus} {cli} {session_id} {timestamp}
 ```
 
 ## Boot Architecture
@@ -77,19 +103,19 @@ This avoids nested-quote hell that kills CMD.
 
 | Nucleus | CLI | Model | Auth | Sub-agents? |
 |---------|-----|-------|------|-------------|
-| **N07** | pi | opus xhigh | Anthropic Max | — (orchestrator) |
-| N03 | claude | opus | Anthropic Max | ✅ 5 parallel |
-| N02 | claude | sonnet | Anthropic Max | ✅ 5 parallel |
-| N06 | claude | sonnet | Anthropic Max | ✅ 5 parallel |
-| N01 | gemini | 2.5-pro | Google One | ❌ (1M ctx) |
-| N04 | gemini | 2.5-pro | Google One | ❌ (1M ctx) |
-| N05 | codex | GPT | OpenAI Plus | ❌ (sequential) |
+| **N07** | pi | opus-4-6 1M | Anthropic Max | — (orchestrator) |
+| N01 | claude | opus-4-6 1M | Anthropic Max | ✅ 5 parallel |
+| N02 | claude | opus-4-6 1M | Anthropic Max | ✅ 5 parallel |
+| N03 | claude | opus-4-6 1M | Anthropic Max | ✅ 5 parallel |
+| N04 | claude | opus-4-6 1M | Anthropic Max | ✅ 5 parallel |
+| N05 | claude | opus-4-6 1M | Anthropic Max | ✅ 5 parallel |
+| N06 | claude | opus-4-6 1M | Anthropic Max | ✅ 5 parallel |
 
 ## Known Behaviors
 
-- **Gemini (N01, N04)**: Completes work but CANNOT git commit or emit signals. N07 MUST consolidate.
-- **Claude/Codex (N02, N03, N05, N06)**: Fully autonomous — commits and signals on their own.
-- **PID tracking**: `bash _spawn/dispatch.sh stop` clears pids. If needed, re-record: `echo "PID nucleus cli" > .cex/temp/spawn_pids.txt`
+- **All nuclei are Claude/Opus**: Fully autonomous — commit and signal on their own.
+- **PID tracking**: Session-tagged. Format: `{pid} {nucleus} {cli} {session_id} {timestamp}`. File: `.cex/runtime/pids/spawn_pids.txt`
+- **Multi-N07 safe**: `stop` only kills YOUR session. Other N07 orchestrators are untouched.
 
 ## Routing
 

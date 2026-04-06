@@ -37,7 +37,11 @@ python _tools/cex_evolve.py report
 
 ### Step 3: STOP processes
 ```bash
+# Stop only MY session's nuclei (safe — other N07s untouched)
 bash _spawn/dispatch.sh stop
+
+# Or stop specific nucleus: bash _spawn/dispatch.sh stop n03
+# Or preview first: bash _spawn/dispatch.sh stop --dry-run
 ```
 
 ### Step 4: CONSOLIDATE
