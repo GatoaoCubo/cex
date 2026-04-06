@@ -1,11 +1,13 @@
 ---
 id: n04_output_cf_integration_kcs
 kind: output
+pillar: P01
 nucleus: N04
 mission: MISSION_content_factory_wave2
 task: build_integration_knowledge_cards
 created: 2026-04-06
 author: n04_knowledge
+quality: null
 ---
 
 # N04 Output: Content Factory Integration Knowledge Cards
