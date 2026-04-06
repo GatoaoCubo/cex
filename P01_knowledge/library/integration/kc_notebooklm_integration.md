@@ -4,7 +4,7 @@ kind: knowledge_card
 type: domain
 pillar: P01
 title: "NotebookLM Integration — AI-Powered Content Transformation"
-version: 1.0.0
+version: 2.0.0
 created: 2026-04-06
 updated: 2026-04-06
 author: n04_knowledge
@@ -183,7 +183,104 @@ NotebookLM Notebook
 
 For Content Factory: Google One AI Premium is required for Video Overviews and higher rate limits.
 
+## Fase 1 Architecture — CEX Pipeline (validated 2026-04-06)
+
+### Data Flow
+
+```
+KC .md file (N04 produces)
+    │
+    ▼
+cex_notebooklm.py --upload <kc_path>
+    │  Reads KC, resolves domain, loads cookies
+    ▼
+Playwright (headless=false)
+    │  Navigates to notebook, clicks "Texto copiado", pastes content
+    ▼
+NotebookLM indexes source (30s–5min)
+    │
+    ▼
+cex_notebooklm.py --studio <notebook_id> --outputs flashcards,audio_summary,quiz
+    │  Clicks Estúdio output buttons
+    ▼
+Gemini generates: Flashcards (20-75) + Audio (5-30min) + Quiz (10-20 questions)
+```
+
+### Tool: `cex_notebooklm.py`
+
+| Subcommand | What it does |
+|-----------|-------------|
+| `--upload <kc_path>` | Paste KC as source into domain notebook |
+| `--studio <id> --outputs X` | Activate Estúdio outputs |
+| `--status <id>` | Check notebook sources + outputs |
+| `--list` | Show domain → notebook mapping |
+| `--reauth` | Re-authenticate Google session |
+
+Spec: `_docs/specs/spec_notebooklm_pipeline.md`
+
+### Config: `notebooklm_notebooks.yaml`
+
+```yaml
+# .cex/config/notebooklm_notebooks.yaml
+version: 1
+google_account: financeiro@gatoaocubo3.com
+publish_mode: auto
+browser_engine: chrome_local
+default_outputs: [flashcards, audio_summary, quiz]
+
+domains:
+  meta:
+    notebook_id: "940fd258-847f-47c1-b7e6-caca7b730681"
+    name: "CEX Meta Knowledge"
+    sources: [{path: "kc_8f_pipeline.md", uploaded: 2026-04-06}]
+    source_count: 2
+    last_sync: 2026-04-06
+    status: active
+  brand:
+    notebook_id: null   # created on first upload
+    status: pending
+  integration:
+    notebook_id: null
+    status: pending
+  kind:
+    notebook_id: null   # may need split (115 KCs > 50 source limit)
+    status: pending
+```
+
+### Integration Hooks
+
+- **F8 COLLABORATE**: After KC commit, auto-uploads to NotebookLM if `publish_mode: auto`
+- **N04 workflow**: Every KC N04 builds is auto-published to domain notebook
+- **N02 downstream**: Audio → podcast, Flashcards → social carousel, Quiz → course module
+
+## Troubleshooting
+
+Problems encountered during PoC (2026-04-06) and their solutions:
+
+| Problem | Cause | Solution |
+|---------|-------|---------|
+| NotebookLM has no REST API | Google hasn't launched one | Browser automation: Playwright for deterministic actions, Chrome MCP for AI-driven navigation |
+| Auth expires between sessions | Google session cookies (~14d TTL) | Pre-flight auth check + `--reauth` subcommand + MCP `re_auth` tool |
+| Playwright can't use system Chrome profile | Profile lock when Chrome is running | Extract cookies from MCP `state.json`, inject into Playwright's own Chromium |
+| `mcp__claude-in-chrome__*` tools missing | Session started without `--chrome` flag | Spawn clone: `claude --chrome --dangerously-skip-permissions -p "task"` |
+| Clone hangs asking permission | `-p` is non-interactive | Add `--allow-dangerously-skip-permissions --dangerously-skip-permissions` |
+| Material overlay blocks Playwright click | Angular CDK overlay pane intercepts events | Use `force=True` on Playwright clicks or target `.cdk-overlay-pane` selectors |
+| UI in Portuguese | Google account locale is PT-BR | Selectors use PT-BR labels: "Criar novo", "Texto copiado", "Inserir", "Estúdio" |
+| Source limit 50 per notebook | NotebookLM hard limit | Monitor count, warn at 45, create spillover notebook for `kind` domain |
+| Audio generation slow (2-10 min) | Gemini processing time | Async polling every 30s, 15-minute timeout |
+| Generated content non-deterministic | LLM nature | Save good outputs immediately; regenerate with custom instructions if quality is low |
+
+### Cookie Path
+
+```
+%LOCALAPPDATA%\notebooklm-mcp\Data\browser_state\state.json
+```
+
+Essential Google cookies: `SID`, `HSID`, `SSID`, `APISID`, `SAPISID`. If any are expired or missing, re-auth is required.
+
 ## Docs
 - Product page: https://notebooklm.google.com
 - Help center: https://support.google.com/notebooklm
 - MCP server: configured in `.mcp-*.json` as `notebooklm-mcp`
+- CEX Spec: `_docs/specs/spec_notebooklm_pipeline.md`
+- Prototypes: `_tools/notebooklm_create.py`, `_tools/notebooklm_paste.py`
