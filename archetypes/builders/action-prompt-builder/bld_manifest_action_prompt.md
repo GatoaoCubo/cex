@@ -9,9 +9,9 @@ version: 1.0.0
 created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
-tags: [kind-builder, action-prompt, P03, specialist, task, execution]
-keywords: [action-prompt, task-prompt, execution-prompt, input-output, user-prompt, task-focused]
-triggers: ["create action prompt for task", "build task prompt with defined I/O", "write execution prompt"]
+tags: [kind-builder, action-prompt, P03, specialist, task, execution, marketing, copy]
+keywords: [action-prompt, task-prompt, execution-prompt, input-output, user-prompt, task-focused, copy, copywriting, marketing-prompt, campaign-prompt, ad-copy, email-copy, cta, call-to-action]
+triggers: ["create action prompt for task", "build task prompt with defined I/O", "write execution prompt", "write marketing copy prompt", "create ad copy"]
 geo_description: >
   L1: Especialista em construir action_prompts — prompts de acao task-focused com inpu. L2: Definir prompts de acao com input/output contracts claros. L3: When user needs to create, build, or scaffold action prompt.
 ---

@@ -3,10 +3,12 @@ id: n02_self_review_2026-04-02
 kind: context_doc
 nucleus: N02
 pillar: P09
+title: "N02 Marketing Self-Review — 2026-04-02"
 quality: 9.0
 date: 2026-04-02
 type: self_review
 density_score: 1.0
+tags: [self-review, audit, marketing, n02]
 ---
 
 # N02 Self-Review — 2026-04-02

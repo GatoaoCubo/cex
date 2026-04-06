@@ -9,9 +9,9 @@ version: 1.0.0
 created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
-tags: [kind-builder, content-monetization, P04, billing, checkout, courses, pricing, credits]
-keywords: [monetizar, billing, checkout, curso, pricing, credits, payment, stripe]
-triggers: ["monetization config", "pricing strategy", "credit system", "checkout flow"]
+tags: [kind-builder, content-monetization, P04, billing, checkout, courses, pricing, credits, marketing, funnel]
+keywords: [monetizar, billing, checkout, curso, pricing, credits, payment, stripe, hotmart, kiwify, funnel, sales-funnel, launch, infoproduct, marketing, brand-monetization, upsell, downsell]
+triggers: ["monetization config", "pricing strategy", "credit system", "checkout flow", "sales funnel", "launch strategy"]
 geo_description: >
   L1: Especialista em construir configs de monetização de conteúdo: pricing, billing, . L2: Projetar pipeline 9-stage: PARSE→PRICING→CREDITS→CHECKOUT→COURSES→ADS→EMAILS→VAL. L3: When user needs to create, build, or scaffold content monetization.
 ---

@@ -152,14 +152,14 @@ def main():
 
     config_path = Path(args.config)
     if not config_path.exists():
-        print(f"❌ brand_config not found: {config_path}")
+        print(f"[FAIL] brand_config not found: {config_path}")
         sys.exit(1)
 
     with open(config_path, "r", encoding="utf-8") as f:
         config = yaml.safe_load(f) or {}
 
     if args.check:
-        print(f"✅ brand_config exists: {config_path}")
+        print(f"[OK] brand_config exists: {config_path}")
         sys.exit(0)
 
     result = validate(config, strict=args.strict)
@@ -168,15 +168,15 @@ def main():
         import json
         print(json.dumps(result, indent=2))
     else:
-        status = "✅ VALID" if result["valid"] else "❌ INVALID"
+        status = "[OK] VALID" if result["valid"] else "[FAIL] INVALID"
         print(f"{status} — {result['required_fields_filled']}/13 required fields")
         print(f"Sections: {', '.join(result['sections_present'])}")
         if result["errors"]:
-            print(f"\n❌ Errors ({len(result['errors'])}):")
+            print(f"\n[FAIL] Errors ({len(result['errors'])}):")
             for e in result["errors"]:
                 print(f"  - {e}")
         if result["warnings"]:
-            print(f"\n⚠️  Warnings ({len(result['warnings'])}):")
+            print(f"\n[WARN] Warnings ({len(result['warnings'])}):")
             for w in result["warnings"]:
                 print(f"  - {w}")
 

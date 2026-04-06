@@ -148,7 +148,7 @@ def main():
 
     config = load_brand_config(Path(args.config))
     if not config:
-        print(f"❌ No brand_config at {args.config}")
+        print(f"[FAIL] No brand_config at {args.config}")
         sys.exit(1)
 
     targets = [args.nucleus.upper()] if args.nucleus else None
@@ -163,12 +163,12 @@ def main():
         for nucleus, info in results.items():
             status = info["status"]
             if status == "propagated":
-                print(f"  ✅ {nucleus}: {info['vars_count']} vars → {info['path']}")
+                print(f"  [OK] {nucleus}: {info['vars_count']} vars -> {info['path']}")
             elif status == "dry-run":
-                print(f"  🔍 {nucleus}: would write {info['vars_count']} vars → {info['would_write']}")
+                print(f"  [DRY] {nucleus}: would write {info['vars_count']} vars -> {info['would_write']}")
                 print(f"       vars: {', '.join(info['vars'])}")
             else:
-                print(f"  ⏭️  {nucleus}: {info.get('reason', 'skipped')}")
+                print(f"  [SKIP] {nucleus}: {info.get('reason', 'skipped')}")
 
 
 if __name__ == "__main__":

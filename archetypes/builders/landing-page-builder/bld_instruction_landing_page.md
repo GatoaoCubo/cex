@@ -1,0 +1,49 @@
+---
+id: bld_instruction_landing_page
+kind: instruction
+pillar: P03
+builder: landing-page-builder
+version: 1.0.0
+---
+# Instruction: Landing Page Construction Pipeline
+
+## Steps
+1. **BRIEF** — Gather: brand_config OR user input (product, audience, goal, tone, stack preference)
+2. **STRUCTURE** — Choose section order based on goal:
+   - SaaS product: HERO > FEATURES > SOCIAL-PROOF > PRICING > FAQ > CTA
+   - Service/Agency: HERO > PROBLEM > SOLUTION > HOW-IT-WORKS > TESTIMONIALS > CTA
+   - Course/Infoproduct: HERO > PROBLEM > TRANSFORMATION > MODULES > PRICING > FAQ > CTA > GUARANTEE
+   - Portfolio: HERO > WORK > ABOUT > TESTIMONIALS > CONTACT
+3. **DESIGN TOKENS** — Extract from brand_config or define:
+   - Colors: primary, secondary, accent, bg, text, muted
+   - Fonts: heading (display), body (sans), mono
+   - Spacing: section padding, component gaps
+   - Border radius, shadow depth
+4. **BUILD** — Generate each section as a self-contained block:
+   - Each section has: id, aria-label, responsive classes, CTA or interaction
+   - Use Tailwind utility classes (no custom CSS unless unavoidable)
+   - shadcn/ui components for interactive elements (accordion, dialog, tabs)
+5. **ASSEMBLE** — Combine into single file with:
+   - DOCTYPE, html lang, head (meta, fonts, Tailwind CDN), body
+   - Smooth scroll, scroll-margin for anchored nav
+   - JS: mobile menu toggle, FAQ accordion, scroll animations (IntersectionObserver)
+6. **OPTIMIZE** — Add:
+   - Open Graph meta tags (title, description, image, url)
+   - JSON-LD structured data (Organization or Product)
+   - GTM/GA4 data attributes on CTAs
+   - Lazy loading on below-fold images
+   - Print stylesheet basics
+7. **VALIDATE** — Check:
+   - All 12 sections present (or justified omission)
+   - Mobile responsive (no horizontal scroll)
+   - All CTAs have href or onclick
+   - All images have alt text
+   - Color contrast passes WCAG AA
+
+## Stack Options
+| Stack | When | Output |
+|-------|------|--------|
+| HTML + Tailwind CDN | Default, zero build | Single .html file |
+| React + Tailwind | User has React project | .tsx component |
+| Next.js App Router | User has Next.js | page.tsx + layout.tsx |
+| Astro | User wants static | .astro page |

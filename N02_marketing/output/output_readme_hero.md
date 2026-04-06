@@ -2,8 +2,10 @@
 id: n02_readme_hero
 kind: output_template
 pillar: P02
+title: "CEX README Hero Section — Landing Copy"
 quality: 8.6
 density_score: 0.99
+tags: [readme, hero, landing-copy, marketing, n02]
 ---
 
 # CEX — Typed Knowledge System for LLM Agents
