@@ -82,18 +82,25 @@ python -c "from _tools.signal_writer import write_signal; write_signal('$nucleus
     Write-Output "[$upper] Handoff: $handoffPath"
 }
 
-# Boot script
-$bootScript = "$root\boot\$nucleus.cmd"
-if (-not (Test-Path $bootScript)) {
-    Write-Output "[$upper] ERROR: $bootScript not found"; exit 1
+# Boot script — prefer .ps1 (rich UX), fall back to .cmd (legacy)
+$bootPs1 = "$root\boot\$nucleus.ps1"
+$bootCmd = "$root\boot\$nucleus.cmd"
+
+if (Test-Path $bootPs1) {
+    # PowerShell boot — rich UX (colors, sizing, Unicode)
+    Write-Output "[$upper] Boot: PowerShell (rich UX)"
+    $proc = Start-Process powershell -ArgumentList @(
+        "-NoProfile", "-NoExit", "-ExecutionPolicy", "Bypass",
+        "-File", $bootPs1
+    ) -WorkingDirectory $root -PassThru
+} elseif (Test-Path $bootCmd) {
+    # Legacy CMD boot
+    Write-Output "[$upper] Boot: CMD (legacy)"
+    $proc = Start-Process cmd -ArgumentList "/k `"$bootCmd`"" -WorkingDirectory $root -PassThru
+} else {
+    Write-Output "[$upper] ERROR: no boot script at $bootPs1 or $bootCmd"; exit 1
 }
 
-# ALWAYS boot interactive -- task is in the handoff file, never in args
-# This avoids nested-quote hell that kills CMD
-$bootArgs = "/k `"$bootScript`""
-
-# Spawn CMD window
-$proc = Start-Process cmd -ArgumentList $bootArgs -WorkingDirectory $root -PassThru
 Start-Sleep -Seconds 3
 
 # Position window in grid

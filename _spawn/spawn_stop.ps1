@@ -123,7 +123,8 @@ if (Test-Path $pidFile) {
 Log ""
 Log "  STEP 2: Window title scan"
 if ($All) {
-    $wins = @(Get-Process cmd -EA SilentlyContinue |
+    # Nuclei can run in CMD (.cmd boot) or PowerShell (.ps1 boot)
+    $wins = @(Get-Process cmd, powershell -EA SilentlyContinue |
         Where-Object { $PSItem.MainWindowTitle -match 'CEX-N0[1-7]|N0[1-6]\s' })
     foreach ($w in $wins) {
         if ($w.Id -notin $killedPids) {
