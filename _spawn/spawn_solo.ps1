@@ -1,4 +1,4 @@
-# CEX Spawn Solo v4.0 -- reads nucleus_models.yaml (single source of truth)
+﻿# CEX Spawn Solo v4.0 -- reads nucleus_models.yaml (single source of truth)
 param(
     [Parameter(Mandatory=$true)]
     [ValidateSet('n01','n02','n03','n04','n05','n06','n07')]
@@ -82,12 +82,12 @@ python -c "from _tools.signal_writer import write_signal; write_signal('$nucleus
     Write-Output "[$upper] Handoff: $handoffPath"
 }
 
-# Boot script — prefer .ps1 (rich UX), fall back to .cmd (legacy)
+# Boot script -- prefer .ps1 (rich UX), fall back to .cmd (legacy)
 $bootPs1 = "$root\boot\$nucleus.ps1"
 $bootCmd = "$root\boot\$nucleus.cmd"
 
 if (Test-Path $bootPs1) {
-    # PowerShell boot — rich UX (colors, sizing, Unicode)
+    # PowerShell boot -- rich UX (colors, sizing, Unicode)
     Write-Output "[$upper] Boot: PowerShell (rich UX)"
     $proc = Start-Process powershell -ArgumentList @(
         "-NoProfile", "-NoExit", "-ExecutionPolicy", "Bypass",

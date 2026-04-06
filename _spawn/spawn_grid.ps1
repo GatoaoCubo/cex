@@ -1,4 +1,4 @@
-# CEX Spawn Grid v1.0 — Launch multiple nucleus builders
+﻿# CEX Spawn Grid v1.0 -- Launch multiple nucleus builders
 # Usage:
 #   powershell -File _spawn/spawn_grid.ps1 -mission NAME -interactive
 #   powershell -File _spawn/spawn_grid.ps1 -mission NAME -mode continuous
@@ -93,7 +93,7 @@ function Launch-Nucleus($handoff) {
     $nucleusHandoff = "$handoffDir\${nucleus}_task.md"
     Copy-Item $handoff.FullName -Destination $nucleusHandoff -Force
 
-    # ALWAYS boot interactive — task comes from handoff, never CLI args (avoids nested-quote hell)
+    # ALWAYS boot interactive -- task comes from handoff, never CLI args (avoids nested-quote hell)
     if ($bootType -eq "ps1") {
         $proc = Start-Process powershell -ArgumentList "-ExecutionPolicy Bypass -File `"$bootScript`"" -WorkingDirectory $root -PassThru
     } else {
