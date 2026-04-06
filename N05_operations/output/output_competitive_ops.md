@@ -1,6 +1,7 @@
 ---
 id: n05_competitive_ops
 kind: competitive_analysis
+pillar: P05
 quality: null
 timestamp: 2026-04-02T15:30:00Z
 mission: COMPETITIVE_INTEL

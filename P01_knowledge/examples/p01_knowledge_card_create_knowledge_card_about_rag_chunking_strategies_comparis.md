@@ -26,6 +26,7 @@ linked_artifacts:
   related: [p01_kc_embedding_strategies, p01_kc_vector_search_optimization]
 density_score: 0.92
 data_source: "https://docs.llamaindex.ai/en/stable/module_guides/loading/node_parsers/"
+---
 
 # RAG Chunking Strategies Comparison and Selection Guide
 

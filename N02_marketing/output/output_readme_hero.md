@@ -1,6 +1,7 @@
 ---
 id: n02_readme_hero
 kind: output_template
+pillar: P02
 quality: 8.6
 density_score: 0.99
 ---

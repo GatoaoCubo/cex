@@ -1,6 +1,7 @@
 ---
 id: n01_competitive_landscape
 kind: competitive_analysis
+pillar: P01
 quality: 8.8
 density_score: 0.96
 ---

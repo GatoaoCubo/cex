@@ -30,6 +30,7 @@ linked_artifacts:
   related: [p01_kc_prompt_caching, p01_kc_rag_fundamentals]
 density_score: 0.87
 data_source: "validate_kc.py v2.0 — 10 HARD + 20 SOFT gates; _schema.yaml v4.0"
+---
 
 # Knowledge Card Best Practices: Density, Structure, and Retrieval
 

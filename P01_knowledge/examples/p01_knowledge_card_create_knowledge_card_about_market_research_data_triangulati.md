@@ -26,6 +26,7 @@ linked_artifacts:
   related: []
 density_score: 0.89
 data_source: "https://www.marketresearchsociety.org/resources/guidelines/triangulation"
+---
 
 # Market Research Data Triangulation for Insight Validation
 

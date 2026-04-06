@@ -1,6 +1,7 @@
 ---
 id: n02_competitive_positioning
 kind: competitive_analysis
+pillar: P02
 quality: 9.0
 density_score: 1.0
 ---

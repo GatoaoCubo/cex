@@ -1,7 +1,7 @@
 ---
 id: n03_competitive_architecture
 kind: competitive_analysis
-pillar: N03
+pillar: P08
 version: 1.0.0
 created: 2026-04-02
 author: n03_engineering

@@ -1,6 +1,7 @@
 ---
 id: n04_competitive_knowledge
 kind: competitive_analysis
+pillar: P01
 quality: 8.9
 density_score: 0.95
 ---

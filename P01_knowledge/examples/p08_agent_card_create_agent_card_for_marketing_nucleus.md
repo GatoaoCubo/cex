@@ -45,6 +45,7 @@ domain: "marketing"
 quality: null
 tags: [agent_node, marketing, n02, copywriting, brand-voice]
 tldr: "N02 Marketing Nucleus — sonnet model, brand-voice-first copy, A/B variants, CTAs, campaigns, fetch+brain MCPs."
+---
 
 ## Role
 

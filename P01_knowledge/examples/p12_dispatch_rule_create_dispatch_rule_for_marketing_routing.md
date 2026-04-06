@@ -21,6 +21,7 @@ conditions:
   exclude_domains: [knowledge_indexing, research_analysis, code_deploy]
 load_balance: false
 routing_strategy: hybrid
+---
 
 # marketing Dispatch Rule
 

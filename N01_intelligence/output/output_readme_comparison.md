@@ -1,6 +1,7 @@
 ---
 id: n01_readme_comparison
 kind: output_template
+pillar: P01
 quality: 8.4
 density_score: 0.95
 ---
