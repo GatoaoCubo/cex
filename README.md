@@ -1,80 +1,36 @@
 <p align="center">
   <h1 align="center">CEX</h1>
-  <p align="center"><strong>A relational model for AI knowledge.</strong></p>
-  <p align="center">Organize, compile, and govern everything your LLM needs to know.</p>
+  <p align="center"><strong>The typed knowledge system for LLM agents.</strong></p>
+  <p align="center">Organize, compile, govern, and deploy everything your AI needs to know.</p>
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-v5.0.0-blue" alt="Version">
+  <img src="https://img.shields.io/badge/version-v10.0.0-blue" alt="Version">
   <img src="https://img.shields.io/badge/python-3.10+-3776AB?logo=python&logoColor=white" alt="Python">
   <img src="https://img.shields.io/badge/license-MIT-green" alt="License">
-  <img src="https://img.shields.io/badge/LLMs-Claude%20%7C%20GPT%20%7C%20Gemini%20%7C%20Local-8A2BE2" alt="LLMs">
+  <img src="https://img.shields.io/badge/LLMs-Claude%20%7C%20GPT%20%7C%20Gemini%20%7C%20Ollama-8A2BE2" alt="LLMs">
   <img src="https://img.shields.io/badge/pillars-12-orange" alt="Pillars">
-  <img src="https://img.shields.io/badge/artifact%20types-99-red" alt="Types">
+  <img src="https://img.shields.io/badge/artifact%20kinds-115-red" alt="Kinds">
+  <img src="https://img.shields.io/badge/tools-52-brightgreen" alt="Tools">
 </p>
 
 ---
 
 ## What is CEX
 
-CEX is a typed taxonomy and compilation pipeline for AI knowledge. It does for LLM artifacts what SQL did for data: structures them into discoverable, validated, governed types that any model can consume.
+CEX is a typed taxonomy, compilation pipeline, and governance system for AI knowledge. It does for LLM artifacts what SQL did for data: structures them into discoverable, validated, governed types that any model can consume.
 
-You describe **intent** in 8 tokens. CEX compiles it into a **1,200-token governed prompt** with 100% dimensional coverage. 150:1 amplification ratio.
+You describe **intent** in 8 tokens. CEX compiles it into a **governed prompt** with 100% dimensional coverage. It also **reverse-compiles** your knowledge base into any format: CLAUDE.md, .cursorrules, CustomGPT instructions, or MCP servers.
 
----
+### Key capabilities
 
-## The Problem
-
-- **92% of context is missing.** A human saying "write me an ad" provides ~8% of what an LLM needs. Identity, knowledge, reasoning method, output format, constraints, quality bar -- all absent.
-- **Knowledge is unstructured.** Prompts live in flat files, Notion pages, or buried in code. No types, no validation, no discovery index.
-- **No governance at rest.** Frameworks validate at runtime. Nobody validates the knowledge *before* it reaches the model.
-
-## The Solution
-
-- **8 typed dimensions.** Every LLM interaction decomposes into 8 orthogonal functions (BECOME, INJECT, REASON, CALL, PRODUCE, CONSTRAIN, GOVERN, COLLABORATE). CEX fills what the human didn't provide.
-- **99 artifact types across 12 pillars.** Knowledge cards, agents, prompts, schemas, evals -- each with frontmatter, naming conventions, and validation rules. Like `CREATE TABLE` for AI.
-- **Compilation pipeline.** Intent → Capture → Decompose → Hydrate → Compile → Envelope. 80% deterministic, 90% cheaper than full-LLM approaches.
-
----
-
-## Architecture
-
-```
-                           CEX Architecture (5 Layers)
-
-  +------------------------------------------------------------------+
-  |  L0  BUILDERS        13 ISO files per type = factory for artifacts |
-  |       archetypes/builders/{type}-builder/                         |
-  +------------------------------------------------------------------+
-  |  L1  PILLARS         12 pillars x 99 types = the taxonomy         |
-  |       P01_knowledge/ ... P12_orchestration/                       |
-  +------------------------------------------------------------------+
-  |  L2  NUCLEI          7 business domains that consume artifacts    |
-  |       N01_intelligence/ ... N07_admin/                            |
-  +------------------------------------------------------------------+
-  |  L3  PIPELINE        8 functions: BECOME > INJECT > REASON >      |
-  |       CALL > PRODUCE > CONSTRAIN > GOVERN > COLLABORATE           |
-  +------------------------------------------------------------------+
-  |  L4  GOVERNANCE      Pre-commit hooks + cex doctor + quality gates |
-  |       Naming rules, schema validation, density checks             |
-  +------------------------------------------------------------------+
-
-
-  Compilation Flow:
-
-  Human Intent (8 tok)
-       |
-       v
-  [ CAPTURE ] --> [ DECOMPOSE ] --> [ HYDRATE ] --> [ COMPILE ] --> [ ENVELOPE ]
-    raw input    8 dimensions     fill from repo   assemble layers   wrap protocol
-    (Python)     (LLM micro)      (Python+SQLite)  (Python+Jinja2)   (Python)
-       |              |                |                 |                |
-    0 cost        ~$0.001           0 cost            0 cost          0 cost
-                                                                        |
-                                                                        v
-                                                              Governed Prompt (1200 tok)
-                                                              Coverage: 8/8 dimensions
-```
+- **115 artifact kinds** across 12 pillars, each with typed frontmatter and validation
+- **8-function pipeline** (8F): CONSTRAIN > BECOME > INJECT > REASON > CALL > PRODUCE > GOVERN > COLLABORATE
+- **109 builder factories**, each with 13 ISO files (schema, prompt, examples, quality gate, ...)
+- **Multi-provider routing**: Claude, GPT, Gemini, Ollama -- with health checks and automatic fallback
+- **Reverse compiler**: export your knowledge base to CLAUDE.md, .cursorrules, CustomGPT JSON
+- **Self-healing**: model updater detects stale versions, flywheel audits doc-vs-practice integrity
+- **7 business nuclei**: independent AI agents that build, research, market, deploy, and govern
 
 ---
 
@@ -84,145 +40,190 @@ You describe **intent** in 8 tokens. CEX compiles it into a **1,200-token govern
 # 1. Clone
 git clone https://github.com/user/cex.git && cd cex
 
-# 2. Initialize a new CEX repo for your company
-python _tools/cex_init.py
-# Answer 5 questions: name, domain, product, audience, tone
-# Generates: 70 builders, 3 knowledge cards, 2 agents, full governance
+# 2. Install dependencies
+pip install -r requirements.txt             # Core (pyyaml, tiktoken)
+pip install -r requirements-llm.txt         # LLM providers (optional)
 
-# 3. Create an artifact
-python _tools/cex_forge.py knowledge_card --topic "product pricing"
-# Creates typed .md with frontmatter, placed in correct pillar/nucleus
+# 3. Bootstrap your brand
+python _tools/cex_bootstrap.py              # Answer ~6 questions about your company
+# Or: just type /init in any Claude session with CEX loaded
 
-# 4. Compile intent into a governed prompt
-python _tools/cex_compile.py "write an ad for my Python course"
-# Decomposes -> hydrates from repo -> assembles 8 layers -> outputs envelope
+# 4. Build your first artifact
+python _tools/cex_8f_runner.py "create knowledge card about product pricing" --kind knowledge_card --execute
 
-# 5. Validate repo health
-python _tools/cex_doctor.py
-# Checks: naming, frontmatter, orphans, density, schemas, duplicates
+# 5. Validate system health
+python _tools/cex_doctor.py                 # Builder integrity (109 builders)
+python _tools/cex_hooks.py validate-all     # Frontmatter validation
+python _tools/cex_flywheel_audit.py audit   # Full system audit (109 checks)
+```
+
+See [QUICKSTART.md](QUICKSTART.md) for a detailed 5-minute walkthrough.
+
+---
+
+## The 8 Functions (8F Pipeline)
+
+Every LLM interaction decomposes into 8 orthogonal functions:
+
+| # | Function | What it does | Pipeline step |
+|---|----------|-------------|---------------|
+| F1 | **CONSTRAIN** | Load schema, limits, naming rules | `bld_schema` + `bld_config` |
+| F2 | **BECOME** | Set identity, persona, boundaries | `bld_system_prompt` + `bld_manifest` |
+| F3 | **INJECT** | Load knowledge, examples, memory | `bld_knowledge_card` + `bld_examples` + `bld_memory` |
+| F4 | **REASON** | Plan approach, check GDP decisions | LLM reasoning + `cex_gdp.py` |
+| F5 | **CALL** | Discover tools, check existing work | `bld_tools` + `cex_retriever.py` |
+| F6 | **PRODUCE** | Generate artifact with full context | LLM call with token budget |
+| F7 | **GOVERN** | Validate output against hard gates | Frontmatter, size, naming, schema |
+| F8 | **COLLABORATE** | Save, signal, hand off | `signal_writer.py` + git commit |
+
+```bash
+# Run the full pipeline
+python _tools/cex_8f_runner.py "your intent" --kind <kind> --execute
+
+# Dry run (no LLM calls, shows what would happen)
+python _tools/cex_8f_runner.py "your intent" --kind <kind> --dry-run --verbose
 ```
 
 ---
 
-## The 8 Functions
+## Architecture
 
-Every LLM interaction -- from a single prompt to a multi-agent pipeline -- executes these 8 functions in order:
-
-| # | Function | Question it answers | SQL Equivalent |
-|---|----------|-------------------|----------------|
-| 1 | **BECOME** | Who am I? (identity, persona) | `CREATE TABLE` |
-| 2 | **INJECT** | What do I know? (context, knowledge) | `INSERT` |
-| 3 | **REASON** | How do I think? (CoT, method) | `WHERE` clause |
-| 4 | **CALL** | What tools can I use? | Stored procedure |
-| 5 | **PRODUCE** | What do I output? (format, structure) | `SELECT` result |
-| 6 | **CONSTRAIN** | What are the rules? (limits, schemas) | `CHECK` + `FK` |
-| 7 | **GOVERN** | Is this good enough? (quality, evals) | `EXPLAIN` + audit |
-| 8 | **COLLABORATE** | Who is next? (routing, handoff) | `JOIN` + federate |
-
-Empirically validated: 337 artifacts across 12 major frameworks (LangChain, CrewAI, DSPy, AutoGen, etc.) map to these 8 functions with **94.7% coverage**. Zero unmapped AI functions in the remaining 5.3%.
-
----
+```
+Layer 0 — BUILDERS       109 factories x 13 ISOs = artifact construction
+Layer 1 — PILLARS        12 pillars x 115 kinds = the taxonomy
+Layer 2 — NUCLEI         7 business domains (N01-N07) = the organization
+Layer 3 — PIPELINE       8F functions = the assembly line
+Layer 4 — GOVERNANCE     hooks + doctor + quality gates = the quality bar
+Layer 5 — TOOLS          52 Python CLI tools = the runtime
+Layer 6 — WIRING         SDK modules + flywheel = the nervous system
+```
 
 ## 12 Pillars
 
-| Pillar | Name | Types | Purpose |
-|--------|------|-------|---------|
-| P01 | Knowledge | 6 | Knowledge cards, RAG sources, glossaries, embeddings |
-| P02 | Model | 9 | Agents, lenses, boot configs, mental models, routers |
-| P03 | Prompt | 10 | System prompts, templates, chains, CoT, meta-prompts |
-| P04 | Tools | 10 | Skills, MCP servers, hooks, plugins, scrapers, connectors |
-| P05 | Output | 4 | Response formats, parsers, formatters, naming rules |
-| P06 | Schema | 7 | Input schemas, type definitions, validators, interfaces |
-| P07 | Evals | 6 | Unit evals, smoke tests, benchmarks, golden tests, rubrics |
-| P08 | Architecture | 5 | Satellite specs, patterns, laws, diagrams, component maps |
-| P09 | Config | 5 | Env configs, paths, permissions, feature flags, runtime rules |
-| P10 | Memory | 4 | Runtime state, brain indexes, learning records, sessions |
-| P11 | Feedback | 5 | Quality gates, bugloops, lifecycle rules, guardrails |
-| P12 | Orchestration | 7 | Workflows, DAGs, spawn configs, signals, handoffs, crews |
-
-Every artifact has typed frontmatter (`id`, `kind`, `pillar`, `title`), lives at a semantic path, and follows the naming grammar: `{layer}_{kind}_{topic}.{ext}`.
+| Pillar | Name | Purpose |
+|--------|------|---------|
+| P01 | Knowledge | Knowledge cards, RAG sources, glossaries |
+| P02 | Model | Agents, lenses, boot configs, mental models |
+| P03 | Prompt | System prompts, templates, chains, CoT |
+| P04 | Tools | Skills, MCP servers, hooks, plugins |
+| P05 | Output | Response formats, parsers, naming rules |
+| P06 | Schema | Input schemas, validators, interfaces |
+| P07 | Evals | Benchmarks, smoke tests, rubrics |
+| P08 | Architecture | Specs, patterns, diagrams |
+| P09 | Config | Env configs, feature flags, runtime rules |
+| P10 | Memory | Learning records, sessions, brain indexes |
+| P11 | Feedback | Quality gates, guardrails, lifecycle rules |
+| P12 | Orchestration | Workflows, DAGs, signals, handoffs |
 
 ---
 
-## Tools
+## Multi-Provider Routing
 
-| Tool | Usage | Purpose |
-|------|-------|---------|
-| `cex_init.py` | `python _tools/cex_init.py` | Bootstrap a new CEX repo (5 questions, 30 seconds) |
-| `cex_forge.py` | `python _tools/cex_forge.py <kind> --topic <t>` | Create a new typed artifact with frontmatter |
-| `cex_compile.py` | `python _tools/cex_compile.py "<intent>"` | Compile human intent into governed LLM prompt |
-| `cex_pipeline.py` | `python _tools/cex_pipeline.py` | Run the full 8-function pipeline |
-| `cex_doctor.py` | `python _tools/cex_doctor.py` | Diagnose repo health (naming, schemas, orphans) |
-| `cex_feedback.py` | `python _tools/cex_feedback.py` | Process user feedback into knowledge updates |
-| `cex_index.py` | `python _tools/cex_index.py` | Regenerate INDEX.md from repo contents |
-| `distill.py` | `python _tools/distill.py` | Compile .md artifacts to .yaml/.json |
-| `validate_builder.py` | `python _tools/validate_builder.py <builder>` | Validate builder ISO files (13-file checklist) |
-| `validate_schema.py` | `python _tools/validate_schema.py` | Validate all _schema.yaml files |
-| `bootstrap.py` | `python _tools/bootstrap.py` | Full scaffold: nuclei + pillars + types |
-| `bump_version.py` | `python _tools/bump_version.py` | Semantic version bump across repo |
-| `setup_hooks.sh` | `bash _tools/setup_hooks.sh` | Install pre-commit governance hooks |
+CEX routes each nucleus to the best LLM for its job:
+
+| Nucleus | Domain | Default Provider | Context |
+|---------|--------|-----------------|---------|
+| N01 | Research | Gemini 2.5 Pro | 1M tokens |
+| N02 | Marketing | Claude Sonnet 4.6 | 1M tokens |
+| N03 | Engineering | Claude Opus 4.6 | 1M tokens |
+| N04 | Knowledge | Gemini 2.5 Pro | 1M tokens |
+| N05 | Operations | Claude Sonnet 4.6 | 1M tokens |
+| N06 | Commercial | Claude Sonnet 4.6 | 1M tokens |
+| N07 | Orchestrator | Claude Opus 4.6 | 1M tokens |
+
+Configuration lives in `.cex/config/nucleus_models.yaml` (single source of truth). All boot scripts, routing, and tools read from it.
+
+```bash
+# Check model health
+python _tools/cex_model_updater.py --check
+
+# Auto-discover and update when new models release
+python _tools/cex_model_updater.py --full
+```
 
 ---
 
-## CEX vs Alternatives
+## Reverse Compiler
 
-| Capability | Manual Prompting | Agent Frameworks | Knowledge Tools | **CEX** |
-|-----------|-----------------|------------------|-----------------|---------|
-| Structured types | No | No | Partial | **99 types, 12 pillars** |
-| Discovery index | No | No | Tag-based | **Semantic naming = O(1) lookup** |
-| Dimensional coverage | ~8% | ~30% | ~20% | **100% (8/8 functions)** |
-| Compilation pipeline | No | Runtime only | No | **5-phase, 80% deterministic** |
-| Governance at rest | No | No | No | **Pre-commit + doctor + gates** |
-| Schema validation | No | Runtime | Partial | **Frontmatter + _schema.yaml** |
-| Self-improving | No | No | Manual | **Feedback loop (few-shot, constraints)** |
-| Model-agnostic | N/A | Framework-locked | N/A | **Claude, GPT, Gemini, local** |
-| Cost per compilation | Full LLM | Full LLM | N/A | **90% cheaper (hybrid engine)** |
+CEX artifacts compile **down** to any format an LLM consumes:
+
+```bash
+python _tools/cex_compile.py --target claude-md      # -> CLAUDE.md (system prompt)
+python _tools/cex_compile.py --target cursorrules     # -> .cursorrules
+python _tools/cex_compile.py --target customgpt       # -> CustomGPT instructions JSON
+```
+
+This means CEX is the **source of truth** for your AI knowledge. Edit once in CEX, deploy everywhere.
 
 ---
 
-## How It Works (End to End)
+## Dispatch & Multi-Nucleus
 
+```bash
+bash _spawn/dispatch.sh solo n03 "build agent card for sales"   # Single nucleus
+bash _spawn/dispatch.sh grid MISSION_NAME                       # Up to 6 parallel
+bash _spawn/dispatch.sh status                                  # Monitor all
+bash _spawn/dispatch.sh stop                                    # Kill all
 ```
-Human: "write an ad for my Python course"      <- 8 tokens, 5.6% coverage
-
-CEX:   CAPTURE   -> 8 tokens captured
-       DECOMPOSE -> 8 dimensions scored (BECOME: 0%, INJECT: 20%, ...)
-       HYDRATE   -> fills from repo:
-                    BECOME:    bld_system_prompt_copywriter.md
-                    INJECT:    knowledge_card_python_course.md + 3 few_shots
-                    REASON:    AIDA framework (Attention-Interest-Desire-Action)
-                    PRODUCE:   tpl_response_format_ad.md
-                    CONSTRAIN: max 2200 chars, casual tone, emoji max 3
-                    GOVERN:    clarity >= 8, persuasion >= 9
-       COMPILE   -> 8 layers assembled in function order
-       ENVELOPE  -> system prompt + context + user prompt + routing metadata
-
-Output: 1,200-token governed prompt             <- 100% coverage, 150:1 amplification
-```
-
-The brain learns from every interaction. Successful outputs become few-shot examples. Negative feedback updates constraints. Quality scores improve routing. Day 1: functional. Day 30: expert.
 
 ---
 
-## Repo Structure
+## Tools (51 total)
 
-```
-cex/
-  _docs/               Whitepaper, architecture, quickstart
-  _tools/              CLI tools (init, forge, compile, doctor, ...)
-  archetypes/          Builder templates (13 ISO files per type)
-  packages/            Distributable packages
-  P01_knowledge/       Pillar: knowledge cards, RAG, glossaries
-  ...
-  P12_orchestration/   Pillar: workflows, DAGs, signals
-  N01_intelligence/    Nucleus: research domain
-  ...
-  N07_admin/           Nucleus: administration domain
-  INDEX.md             Auto-generated artifact index
-  LLM_PIPELINE.md     8 functions specification
-  CLAUDE.md            LLM entry point (Claude)
-  CONTRIBUTING.md      Contributor guide
-```
+### Core Pipeline
+| Tool | Purpose |
+|------|---------|
+| `cex_8f_runner.py` | Full 8F pipeline (--execute, --dry-run, --verbose) |
+| `cex_8f_motor.py` | Intent parser + classifier + plan |
+| `cex_crew_runner.py` | Prompt composer: ISOs + memory + context |
+| `cex_run.py` | Unified entry: intent -> discover -> plan -> prompt |
+| `cex_compile.py` | .md -> .yaml compilation + reverse compiler |
+
+### Discovery & Routing
+| Tool | Purpose |
+|------|---------|
+| `cex_router.py` | Multi-provider routing with health + fallback |
+| `cex_skill_loader.py` | Load builder ISOs in correct order |
+| `cex_query.py` | TF-IDF builder discovery |
+| `cex_retriever.py` | Semantic artifact similarity |
+| `cex_model_updater.py` | Self-healing model version management |
+
+### Memory & Knowledge
+| Tool | Purpose |
+|------|---------|
+| `cex_memory_select.py` | Relevant memory injection (keyword + LLM) |
+| `cex_memory_update.py` | Memory decay + append + prune |
+| `cex_memory_types.py` | Memory classification (4 types) |
+| `cex_memory_age.py` | Age-weighted ranking (linear decay) |
+| `cex_token_budget.py` | Token counting + budget allocation |
+
+### Quality & Governance
+| Tool | Purpose |
+|------|---------|
+| `cex_doctor.py` | Builder health check (109 builders) |
+| `cex_hooks.py` | Pre/post validation + git hooks |
+| `cex_score.py` | Peer review scoring (--apply) |
+| `cex_flywheel_audit.py` | Full system audit (109 checks) |
+| `cex_gdp.py` | Guided Decision Protocol enforcement |
+
+### Automation
+| Tool | Purpose |
+|------|---------|
+| `cex_auto.py` | Self-healing flywheel (scan, plan, cycle) |
+| `cex_evolve.py` | Autonomous artifact improvement loop |
+| `cex_mission.py` | Goal -> decomposed artifacts |
+| `cex_mission_runner.py` | Autonomous orchestration (waves -> grid) |
+| `cex_flywheel_worker.py` | Nucleus gap analysis + 8F builds |
+
+### Setup & Brand
+| Tool | Purpose |
+|------|---------|
+| `cex_bootstrap.py` | First-run brand setup |
+| `cex_init.py` | Initialize new CEX repo |
+| `cex_forge.py` | Create typed artifact from template |
+| `brand_inject.py` | Replace brand placeholders |
+| `brand_validate.py` | Validate brand config |
+| `brand_propagate.py` | Push brand context to all nuclei |
 
 ---
 
@@ -230,39 +231,58 @@ cex/
 
 | Metric | Count |
 |--------|-------|
+| Artifact kinds | 115 |
+| Builders (factories) | 109 |
+| Builder ISO files | 13 per kind |
+| Sub-agents | 110 |
+| Knowledge cards | 117 |
+| CLI tools | 52 |
+| Compiled artifacts | 898 |
+| Examples | 369 |
 | Pillars | 12 |
-| Artifact types | 99 |
 | Business nuclei | 7 |
-| LLM functions | 8 |
-| Builder ISO files | 13 per type |
-| Examples | 245 |
-| Templates | 100 |
-| Compiled artifacts | 232 |
-| Active builders | 98 / 99 |
-| CLI tools | 13 |
+| 8F functions | 8 |
+| Flywheel checks | 109 (100% WIRED) |
+
+---
+
+## Repo Structure
+
+```
+cex/
+  .cex/                  Runtime config, brand, router, cache
+    config/              nucleus_models.yaml, router_config.yaml
+    brand/               Brand config + templates
+    runtime/             Handoffs, signals, decisions, plans
+    quality/             Audit reports, overnight logs
+  _tools/                52 Python CLI tools (cex_*.py)
+  _spawn/                Dispatch scripts (solo, grid, monitor)
+  _docs/                 Whitepaper, architecture docs
+  archetypes/            Builder templates (109 builders x 13 ISOs)
+    builders/            One directory per kind
+    _shared/             Shared skills across all builders
+  boot/                  Boot scripts per nucleus (auto-generated)
+  cex_sdk/               SDK runtime (providers, models, memory)
+  P01_knowledge/ ...     12 pillar directories
+  P12_orchestration/
+  N01_intelligence/ ...  7 nucleus directories
+  N07_admin/
+  N00_genesis/           Genesis mold (template for nuclei)
+  CLAUDE.md              LLM entry point
+  QUICKSTART.md          5-minute getting started
+  CONTRIBUTING.md        Contributor guide
+```
 
 ---
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on artifact creation, builder development, and quality gates.
+See [CONTRIBUTING.md](CONTRIBUTING.md). Every contribution must pass:
 
-Every contribution must pass:
 - Naming convention (`{layer}_{kind}_{topic}.{ext}`)
-- Frontmatter validation (`id`, `kind`, `pillar`, `title`)
-- Density check (>= 0.80)
-- Quality gate (>= 7.0 for experimental, >= 8.0 for published)
-
----
-
-## Documentation
-
-| Document | Description |
-|----------|-------------|
-| [Whitepaper](/_docs/WHITEPAPER_CEX.md) | Full thesis: the SQL analogy, proofs, market gap |
-| [Architecture](/_docs/ARCHITECTURE.md) | 5-layer structure, schemas, governance rules |
-| [LLM Pipeline](LLM_PIPELINE.md) | 8 functions specification |
-| [Index](INDEX.md) | Complete artifact inventory |
+- Frontmatter validation (`id`, `kind`, `pillar`, `title`, `quality`)
+- Quality gate (>= 8.0 for published artifacts)
+- Pre-commit hooks (`python _tools/cex_hooks.py validate-all`)
 
 ---
 

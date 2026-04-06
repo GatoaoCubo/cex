@@ -1,6 +1,6 @@
 # CEX — Typed Knowledge System for LLM Agents
 
-> 115 kinds · 108 builders · 12 pillars · 8 nuclei (N00-N07) · 8F pipeline · cex_sdk runtime · 50 tools
+> 115 kinds · 109 builders · 12 pillars · 8 nuclei (N00-N07) · 8F pipeline · cex_sdk runtime · 52 tools
 
 ## Brand Identity
 
@@ -125,6 +125,8 @@ User decides WHAT → LLM builds HOW → verify together.
 | `brand_audit.py` | Score brand consistency (6 dimensions) |
 | `brand_ingest.py` | Scan user's messy folder → extract brand signals |
 | `cex_evolve.py` | **AutoResearch loop**: evolve artifacts autonomously (keep/discard) |
+| `cex_model_updater.py` | **Self-heal**: discover/check/apply/propagate model version updates |
+| `cex_release_check.py` | **Release gate**: validates README, deps, CI, versions for public release |
 | `cex_prompt_layers.py` | Compiled artifact scanner: loads 15+ pillar artifacts into prompts |
 | `cex_skill_loader.py` | Builder ISO loader: 13 ISOs per kind, shared skills, conditionals |
 | `cex_router.py` | Multi-provider routing: 4 providers x 7 nuclei + fallback chains |

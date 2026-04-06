@@ -1,4 +1,4 @@
-# CEX Spawn Solo v3.0 — clean launch, no nested quotes
+# CEX Spawn Solo v4.0 -- reads nucleus_models.yaml (single source of truth)
 param(
     [Parameter(Mandatory=$true)]
     [ValidateSet('n01','n02','n03','n04','n05','n06','n07')]
@@ -22,18 +22,28 @@ $grid = @{
     n05 = @{x=640;  y=520};  n06 = @{x=1280; y=520}
 }
 
-$cliMap = @{
-    n01 = 'claude'; n02 = 'claude'; n03 = 'claude'
-    n04 = 'claude'; n05 = 'claude'; n06 = 'claude'
-}
-
 $root = Split-Path $PSScriptRoot -Parent
 $pos = $grid[$nucleus]
-$cli = $cliMap[$nucleus]
 $upper = $nucleus.ToUpper()
 $runtimeDir = "$root\.cex\runtime"
 
 New-Item -ItemType Directory -Force -Path "$runtimeDir\handoffs","$runtimeDir\signals","$runtimeDir\pids" | Out-Null
+
+# -- Read CLI from nucleus_models.yaml (single source of truth) --
+$cli = "claude"  # fallback
+$modelsFile = "$root\.cex\config\nucleus_models.yaml"
+if (Test-Path $modelsFile) {
+    $inNucleus = $false
+    foreach ($line in Get-Content $modelsFile) {
+        if ($line -match "^${nucleus}:") { $inNucleus = $true; continue }
+        if ($inNucleus -and $line -match "^\w" -and $line -notmatch "^\s") { break }
+        if ($inNucleus -and $line -match "^\s+cli:\s*(.+)") {
+            $cli = $matches[1].Trim()
+            break
+        }
+    }
+}
+Write-Output "[$upper] CLI from nucleus_models: $cli"
 
 # Write handoff if task provided
 if ($task) {
@@ -44,26 +54,27 @@ if ($task) {
     if (Test-Path $manifestPath) {
         $manifestBlock = @"
 
-## DECISIONS (from user — DO NOT re-ask)
+## DECISIONS (from user -- DO NOT re-ask)
 Read: .cex/runtime/decisions/decision_manifest.yaml
 All subjective decisions were already made with the user.
 Execute using those decisions. Do NOT override them.
-If a decision is missing, use recommended default and flag it.
 "@
     }
 
     @"
-# $upper Task
-**Autonomia Total** | **Quality 9.0+**
-**REGRA: Commit e signal ANTES de qualquer pausa.**
+---
+nucleus: $upper
+task: dispatch
+created: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
+---
+# Task for $upper
 
-## TAREFA
 $task
 $manifestBlock
 
-## COMMIT
-git add -A
-git commit -m "[$upper] task complete"
+## ON COMPLETION
+1. Commit your work: git add -A && git commit -m "[$upper] <description>"
+2. Signal complete:
 
 ## SIGNAL
 python -c "from _tools.signal_writer import write_signal; write_signal('$nucleus', 'complete', 9.0)"
@@ -77,7 +88,7 @@ if (-not (Test-Path $bootScript)) {
     Write-Output "[$upper] ERROR: $bootScript not found"; exit 1
 }
 
-# ALWAYS boot interactive — task is in the handoff file, never in args
+# ALWAYS boot interactive -- task is in the handoff file, never in args
 # This avoids nested-quote hell that kills CMD
 $bootArgs = "/k `"$bootScript`""
 
