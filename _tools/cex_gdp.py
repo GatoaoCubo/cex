@@ -63,6 +63,7 @@ class Decision:
     decided_by: str = ""       # "user", "n07", "auto"
     decided_at: float = 0.0
     nucleus: str = ""          # Which nucleus this applies to ("" = global)
+    kind: str = ""             # Which artifact kind this applies to ("" = any)
     propagate: bool = True     # Inherit to child nuclei
 
     @property
