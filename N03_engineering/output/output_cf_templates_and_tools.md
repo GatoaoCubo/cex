@@ -1,10 +1,19 @@
 ---
+id: n03_output_cf_templates_and_tools
+kind: context_doc
+pillar: P01
 mission: MISSION_content_factory_wave2
 nucleus: N03
 task: build_prompt_templates_and_tools
 status: COMPLETE
 artifacts_created: 14
+version: 1.0.0
 created: 2026-04-06
+updated: 2026-04-06
+author: builder_agent
+quality: null
+tags: [output, content_factory, wave2, N03]
+tldr: "Build report for Content Factory wave2 — 14 artifacts (7 prompt_templates + 7 function_defs)"
 ---
 
 # Output: Content Factory — Prompt Templates + Production Tools
