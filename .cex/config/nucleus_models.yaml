@@ -30,27 +30,31 @@ n07:
 
 # --- N01: Research & Intelligence ---
 n01:
-  cli: gemini
-  model: gemini-2.5-pro
-  flags: "--yolo"
+  cli: claude
+  model: claude-opus-4-6
+  flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
   context: 1000000
   domain: research
+  mcps: ".mcp-n01.json"
+  settings: ".claude/nucleus-settings/n01.json"
   fallback:
-    cli: claude
-    model: claude-opus-4-6
-    flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
+    cli: gemini
+    model: gemini-2.5-pro
+    flags: "--yolo"
   fallback_local:
     cli: ollama
     model: qwen3:32b
-  notes: "1M context for large doc analysis. Gemini is king for research ingestion."
+  notes: "UPGRADED 2026-04-06: gemini→opus. 1M context + deepest reasoning for research."
 
 # --- N02: Marketing & Copy ---
 n02:
   cli: claude
-  model: claude-sonnet-4-6
-  flags: "--dangerously-skip-permissions --no-chrome"
+  model: claude-opus-4-6
+  flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
   context: 1000000
   domain: marketing
+  mcps: ".mcp-n02.json"
+  settings: ".claude/nucleus-settings/n02.json"
   fallback:
     cli: gemini
     model: gemini-2.5-pro
@@ -58,7 +62,7 @@ n02:
   fallback_local:
     cli: ollama
     model: qwen3:14b
-  notes: "Claude leads creative writing + tone control. Sonnet = speed × quality sweet-spot."
+  notes: "UPGRADED 2026-04-06: sonnet→opus. Full reasoning for brand strategy + creative."
 
 # --- N03: Engineering & Builder ---
 n03:
@@ -70,52 +74,54 @@ n03:
   mcps: ".mcp-n03.json"
   settings: ".claude/nucleus-settings/n03.json"
   fallback:
-    cli: codex
-    model: o3
-    flags: "--full-auto"
+    cli: gemini
+    model: gemini-2.5-pro
+    flags: "--yolo"
   fallback_local:
     cli: ollama
     model: qwen3:32b
-  notes: "Most complex task. 13 ISOs + 8F pipeline. Needs deepest reasoning."
+  notes: "Already opus. 13 ISOs + 8F pipeline. Deepest reasoning."
 
 # --- N04: Knowledge & RAG ---
 n04:
-  cli: gemini
-  model: gemini-2.5-pro
-  flags: "--yolo"
+  cli: claude
+  model: claude-opus-4-6
+  flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
   context: 1000000
   domain: knowledge
+  mcps: ".mcp-n04.json"
+  settings: ".claude/nucleus-settings/n04.json"
   fallback:
-    cli: codex
-    model: o3
-    flags: "--full-auto"
+    cli: gemini
+    model: gemini-2.5-pro
+    flags: "--yolo"
   fallback_local:
     cli: ollama
     model: qwen3:14b
-  notes: "CHANGED from codex/o3. 1M context lets N04 see entire knowledge library at once for taxonomy."
+  notes: "UPGRADED 2026-04-06: gemini→opus. 1M context for full knowledge library + taxonomy."
 
 # --- N05: Operations & DevOps ---
-# NOTE: Codex CLI + ChatGPT subscription only supports o4-mini (NOT o3).
-#       o3 requires API key. With sub-only, use o4-mini or fallback to claude.
 n05:
   cli: claude
-  model: claude-sonnet-4-6
+  model: claude-opus-4-6
   flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
   context: 1000000
   domain: operations
+  mcps: ".mcp-n05.json"
+  settings: ".claude/nucleus-settings/n05.json"
   fallback:
-    cli: codex
-    model: o4-mini
-    flags: "--full-auto"
+    cli: gemini
+    model: gemini-2.5-pro
+    flags: "--yolo"
   fallback_local:
     cli: ollama
     model: qwen3:14b
-  notes: "Codex/o3 unavailable on ChatGPT sub. Sonnet primary (excellent at code). Codex/o4-mini as fallback."
+  notes: "UPGRADED 2026-04-06: sonnet→opus. Full reasoning for code review + CI/CD."
 
 # --- N06: Commercial & Brand ---
 n06:
   cli: claude
-  model: claude-sonnet-4-6
+  model: claude-opus-4-6
   flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
   context: 1000000
   domain: commercial
@@ -128,16 +134,15 @@ n06:
   fallback_local:
     cli: ollama
     model: qwen3:14b
-  notes: "Pricing, funnels, monetization. Sonnet handles well. Speed > depth for commercial."
+  notes: "UPGRADED 2026-04-06: sonnet→opus. Full reasoning for pricing + monetization."
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # GRID LOAD DISTRIBUTION (6 simultaneous during /grid):
 #
-#   Claude:  N02(sonnet) + N03(opus) + N05(sonnet) + N06(sonnet) = 4
-#   Gemini:  N01 + N04                                            = 2
-#   Codex:   (fallback only — o4-mini, ChatGPT sub doesn't support o3)
+#   Claude/Opus: N01 + N02 + N03 + N04 + N05 + N06  = 6 (all opus-4-6, 1M ctx)
 #   N07 runs in pi (separate session, doesn't compete)
 #
-# Fallback principle: always cross-provider (never fallback to same)
-# Fallback local: qwen3:32b (heavy nuclei) / qwen3:14b (light nuclei)
+# UPGRADED 2026-04-06: All nuclei → opus-4-6 for maximum reasoning + 1M context
+# Fallback principle: always cross-provider (claude → gemini → ollama)
+# Fallback local: qwen3:32b (heavy: N01,N03) / qwen3:14b (light: N02,N04,N05,N06)
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

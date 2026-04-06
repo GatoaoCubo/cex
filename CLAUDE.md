@@ -149,15 +149,17 @@ bash _spawn/dispatch.sh stop              # kill all
 
 ## Nucleus Routing
 
-| Domain | Nucleus | CLI | Model |
-|--------|---------|-----|-------|
-| Build/create | N03 | claude | opus |
-| Research/analysis | N01 | gemini | 2.5-pro |
-| Marketing/copy | N02 | claude | sonnet |
-| Knowledge/docs | N04 | gemini | 2.5-pro |
-| Code/test/deploy | N05 | codex | GPT |
-| Brand/monetization | N06 | claude | sonnet |
-| Orchestration | N07 | pi | opus |
+> All nuclei upgraded to Opus 1M context (2026-04-06). Config: `.cex/config/nucleus_models.yaml`
+
+| Domain | Nucleus | CLI | Model | Context |
+|--------|---------|-----|-------|---------|
+| Research/analysis | N01 | claude | opus-4-6 | 1M |
+| Marketing/copy | N02 | claude | opus-4-6 | 1M |
+| Build/create | N03 | claude | opus-4-6 | 1M |
+| Knowledge/docs | N04 | claude | opus-4-6 | 1M |
+| Code/test/deploy | N05 | claude | opus-4-6 | 1M |
+| Brand/monetization | N06 | claude | opus-4-6 | 1M |
+| Orchestration | N07 | pi | opus-4-6 | 1M |
 
 ## Constraints
 

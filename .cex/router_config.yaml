@@ -45,16 +45,17 @@ providers:
       small: llama3:8b
 
 # Nucleus → Provider mapping
+# UPGRADED 2026-04-06: All nuclei → anthropic/opus (1M context, deepest reasoning)
 # Each nucleus has a primary provider + fallback chain
 nucleus_routing:
   N01_intelligence:
-    primary: google
-    model_tier: large
-    fallback: [anthropic, openai]
+    primary: anthropic
+    model_tier: opus
+    fallback: [google, openai]
 
   N02_content:
     primary: anthropic
-    model_tier: sonnet
+    model_tier: opus
     fallback: [google]
 
   N03_builder:
@@ -63,18 +64,18 @@ nucleus_routing:
     fallback: [google]
 
   N04_knowledge:
-    primary: google
-    model_tier: large
-    fallback: [anthropic]
+    primary: anthropic
+    model_tier: opus
+    fallback: [google]
 
   N05_operations:
-    primary: openai
-    model_tier: large
-    fallback: [anthropic]
+    primary: anthropic
+    model_tier: opus
+    fallback: [google, openai]
 
   N06_commercial:
     primary: anthropic
-    model_tier: sonnet
+    model_tier: opus
     fallback: [google]
 
   N07_orchestrator:
