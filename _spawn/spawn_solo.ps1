@@ -101,7 +101,16 @@ if ($proc -and $pos) {
     [Win32]::MoveWindow($proc.MainWindowHandle, $pos.x, $pos.y, 640, 520, $true) | Out-Null
 }
 
-# Record PID
+# Record PID with session tracking
+# Session ID = PID of the PowerShell/pi that called us (our parent orchestrator)
+$sessionId = $env:CEX_SESSION_ID
+if (-not $sessionId) {
+    # Auto-detect: use parent process PID as session identifier
+    $myPid = $PID
+    $parentPid = (Get-CimInstance Win32_Process -Filter "ProcessId=$myPid" -EA SilentlyContinue).ParentProcessId
+    $sessionId = "s$parentPid"
+}
+$timestamp = Get-Date -Format "yyyy-MM-dd_HH:mm:ss"
 $pidFile = "$runtimeDir\pids\spawn_pids.txt"
-"$($proc.Id) $nucleus $cli" | Add-Content $pidFile
-Write-Output "[$upper] Spawned PID:$($proc.Id) CLI:$cli at ($($pos.x),$($pos.y))"
+"$($proc.Id) $nucleus $cli $sessionId $timestamp" | Add-Content $pidFile
+Write-Output "[$upper] Spawned PID:$($proc.Id) CLI:$cli Session:$sessionId at ($($pos.x),$($pos.y))"
