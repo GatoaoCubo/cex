@@ -1,0 +1,52 @@
+---
+kind: architecture
+id: bld_architecture_embedder_provider
+pillar: P08
+llm_function: CONSTRAIN
+purpose: Component map of embedder_provider — inventory, dependencies, and architectural position
+---
+
+# Architecture: embedder_provider in the CEX
+## Component Inventory
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| frontmatter block | 20+ field metadata header (id, kind, provider, model, dimensions, etc.) | embedder-provider-builder | active |
+| provider_config | API endpoint, authentication, and rate limit settings | author | active |
+| dimension_spec | Native dimensions, matryoshka support, reduction options | author | active |
+| normalization_config | L2 normalization flag, distance metric recommendation | author | active |
+| batch_config | Batch size limits, max tokens per request, truncation behavior | author | active |
+| pricing_block | Cost per million tokens for embedding requests | author | active |
+| benchmark_reference | MTEB scores for retrieval, clustering, classification tasks | author | active |
+## Dependency Graph
+```
+provider_docs  --produces-->  embedder_provider  --consumed_by-->  vectordb_backend
+embedder_provider  --consumed_by-->  retriever     --referenced_by-> rag_pipeline
+embedder_provider  --signals-->      dimension_contract
+chunker_config     --constrains-->   embedder_provider (max_tokens)
+```
+| From | To | Type | Data |
+|------|----|------|------|
+| provider_docs (external) | embedder_provider | data_flow | official model specs, dimensions, pricing |
+| embedder_provider | vectordb_backend (P01) | consumes | dimension count for index creation |
+| embedder_provider | retriever (P01) | data_flow | model ID and normalization for query embedding |
+| embedder_provider | rag_pipeline | produces | configured embedding function for document ingestion |
+| chunker_config (P01) | embedder_provider | dependency | chunk size must not exceed max_tokens |
+| embedder_provider | cex_retriever.py | data_flow | embedding function for TF-IDF upgrade path |
+## Boundary Table
+| embedder_provider IS | embedder_provider IS NOT |
+|----------------------|--------------------------|
+| A connection spec for an embedding model API | A vector database configuration (vectordb_backend P01) |
+| Dimension and normalization contract for vectors | An LLM routing configuration (model_provider P02) |
+| Batch size and rate limit constraints | A retrieval pipeline definition (retriever P01) |
+| Provider-specific with API key environment variable | A chunking strategy (chunker_config P01) |
+| Updated when provider releases new embedding models | A static document — must track model deprecations |
+| Scoped to one embedding model from one provider | A comparison of multiple embedding models |
+## Layer Map
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Source | provider_docs, MTEB benchmarks | Official documentation and benchmark results |
+| Connection | provider_config, api_key_env | API endpoint and authentication |
+| Contract | dimension_spec, normalization_config | Vector space agreement with downstream consumers |
+| Limits | batch_config, max_tokens | Operational constraints for ingestion pipelines |
+| Cost | pricing_block | Budget planning for embedding operations |
+| Consumers | vectordb_backend, retriever, rag_pipeline | Systems that embed documents and queries |

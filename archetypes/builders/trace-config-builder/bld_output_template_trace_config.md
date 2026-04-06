@@ -1,0 +1,69 @@
+---
+kind: output_template
+id: bld_output_template_trace_config
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with {{vars}} that the LLM fills to produce a trace_config artifact
+pattern: every field here exists in SCHEMA.md — template derives, never invents
+---
+
+# Output Template: trace_config
+```yaml
+id: p07_tc_{{name}}
+kind: trace_config
+pillar: P07
+version: "1.0.0"
+created: "{{YYYY-MM-DD}}"
+updated: "{{YYYY-MM-DD}}"
+author: "{{who_produced}}"
+enabled: {{true|false}}
+sample_rate: {{0.0_to_1.0}}
+export_format: {{otlp|langsmith|console|json_file}}
+export_path: "{{endpoint_url_or_filesystem_path}}"
+capture_prompts: {{true|false}}
+capture_responses: {{true|false}}
+span_attributes:
+  - cex.nucleus
+  - cex.kind
+  - cex.8f.function
+  - {{custom_attribute_1}}
+  - {{custom_attribute_2}}
+retention_days: {{positive_integer}}
+quality: null
+tags: [trace_config, {{tag_2}}, {{tag_3}}]
+tldr: "{{dense_summary_max_160ch}}"
+description: "{{what_config_covers_max_200ch}}"
+scope: "{{agent_or_system_scope}}"
+environment: {{development|staging|production|evaluation}}
+error_classification:
+  transient: "{{transient_error_types}}"
+  permanent: "{{permanent_error_types}}"
+```
+## Tracing Specification
+{{enabled_state_and_sample_rate_rationale}}
+Export via {{export_format}} to {{export_path}}.
+{{why_this_configuration_fits_the_environment}}
+## Capture Rules
+| Category | Captured | Rationale |
+|----------|----------|-----------|
+| {{category_1}} | {{YES|NO}} | {{rationale}} |
+| {{category_2}} | {{YES|NO}} | {{rationale}} |
+| {{category_3}} | {{YES|NO}} | {{rationale}} |
+## Span Attributes
+| Span | Attributes | 8F Mapping |
+|------|-----------|-----------|
+| `cex.pipeline` | {{root_attributes}} | Root span |
+| `cex.8f.{{function}}` | {{function_attributes}} | {{F1-F8}} |
+| `cex.llm.call` | {{llm_attributes}} | LLM invocation |
+## Retention Policy
+| Tier | Days | Storage | Cleanup |
+|------|------|---------|---------|
+| Hot | {{days}} | {{storage_type}} | {{cleanup_strategy}} |
+| Warm | {{days}} | {{storage_type}} | {{cleanup_strategy}} |
+| Cold | {{days}} | {{storage_type}} | {{cleanup_strategy}} |
+## Privacy Controls
+{{pii_redaction_rules}}
+{{prompt_capture_policy}}
+## References
+- {{reference_1}}
+- {{reference_2}}
