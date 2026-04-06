@@ -13,8 +13,8 @@ on:
       - 'N02_marketing/**'
       - 'N03_engineering/**'
       - 'N04_knowledge/**'
-      - 'N05_code/**'
-      - 'N06_brand/**'
+      - 'N05_operations/**'
+      - 'N06_commercial/**'
       - 'archetypes/**'
       - '_tools/**'
   workflow_dispatch:
