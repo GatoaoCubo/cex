@@ -1228,12 +1228,43 @@ class EightFRunner:
                 except Exception as e:
                     self._log("F8", f"quality monitor skipped: {e}")
 
+            # NotebookLM auto-upload for knowledge_card artifacts
+            notebooklm_uploaded = False
+            if committed and self.state.kind == "knowledge_card":
+                try:
+                    nlm_config_path = CEX_ROOT / ".cex" / "config" / "notebooklm_notebooks.yaml"
+                    if nlm_config_path.exists():
+                        import yaml as _nlm_yaml
+                        nlm_cfg = _nlm_yaml.safe_load(
+                            nlm_config_path.read_text(encoding="utf-8")
+                        ) or {}
+                        if nlm_cfg.get("publish_mode") == "auto":
+                            nlm_tool = CEX_ROOT / "_tools" / "cex_notebooklm.py"
+                            if nlm_tool.exists():
+                                nlm_result = subprocess.run(
+                                    [sys.executable, str(nlm_tool),
+                                     "--upload", str(out_path)],
+                                    capture_output=True, text=True, timeout=120,
+                                )
+                                if nlm_result.returncode == 0:
+                                    notebooklm_uploaded = True
+                                    self._log("F8", "NotebookLM auto-upload OK")
+                                else:
+                                    self._log(
+                                        "F8",
+                                        "NotebookLM upload failed: "
+                                        + nlm_result.stderr[:200],
+                                    )
+                except Exception as e:
+                    self._log("F8", f"NotebookLM upload skipped: {e}")
+
             self.state.result = {
                 "path": str(out_path),
                 "compiled": compiled,
                 "indexed": indexed,
                 "committed": committed,
                 "monitored": monitored,
+                "notebooklm": notebooklm_uploaded,
                 "mode": "execute",
             }
 
