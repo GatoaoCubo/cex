@@ -1,6 +1,6 @@
 # CEX — Typed Knowledge System for LLM Agents
 
-> 115 kinds · 109 builders · 12 pillars · 8 nuclei (N00-N07) · 8F pipeline · cex_sdk runtime · 52 tools
+> 115 kinds · 111 builders · 12 pillars · 8 nuclei (N00-N07) · 8F pipeline · cex_sdk runtime · 52 tools
 
 ## Brand Identity
 

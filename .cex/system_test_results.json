@@ -1,10 +1,10 @@
 {
-  "timestamp": "2026-04-06T12:54:50.091705",
-  "pass": 51,
-  "fail": 1,
+  "timestamp": "2026-04-06T14:08:48.760671",
+  "pass": 50,
+  "fail": 2,
   "skip": 1,
   "total": 53,
-  "elapsed_s": 19.5,
+  "elapsed_s": 20.5,
   "tests": [
     {
       "name": "tool:cex_8f_motor.py",
@@ -64,12 +64,12 @@
     {
       "name": "doctor:pass_count",
       "status": "PASS",
-      "detail": "107/98+ PASS"
+      "detail": "108/98+ PASS"
     },
     {
       "name": "doctor:zero_warn",
-      "status": "PASS",
-      "detail": "0 WARN"
+      "status": "FAIL",
+      "detail": "1 WARN"
     },
     {
       "name": "doctor:zero_fail",
@@ -84,7 +84,7 @@
     {
       "name": "builders:count",
       "status": "PASS",
-      "detail": "108 builders"
+      "detail": "110 builders"
     },
     {
       "name": "builders:13_isos",
@@ -94,7 +94,7 @@
     {
       "name": "nucleus:N01_intelligence",
       "status": "PASS",
-      "detail": "39 artifacts (min 11)"
+      "detail": "40 artifacts (min 11)"
     },
     {
       "name": "nucleus:N02_marketing",
@@ -109,7 +109,7 @@
     {
       "name": "nucleus:N04_knowledge",
       "status": "PASS",
-      "detail": "41 artifacts (min 12)"
+      "detail": "42 artifacts (min 12)"
     },
     {
       "name": "nucleus:N05_operations",
@@ -129,7 +129,7 @@
     {
       "name": "quality:zero_null",
       "status": "PASS",
-      "detail": "6 quality:null (awaiting peer review)"
+      "detail": "8 quality:null (awaiting peer review)"
     },
     {
       "name": "quality:scored",
@@ -139,7 +139,7 @@
     {
       "name": "subagents:count",
       "status": "PASS",
-      "detail": "110 sub-agents"
+      "detail": "112 sub-agents"
     },
     {
       "name": "subagents:materializer",
@@ -229,7 +229,7 @@
     {
       "name": "registry:kinds_meta",
       "status": "PASS",
-      "detail": "115 kinds registered"
+      "detail": "117 kinds registered"
     },
     {
       "name": "runner:dryrun_runs",
@@ -259,17 +259,17 @@
     {
       "name": "kc:count",
       "status": "PASS",
-      "detail": "117/98 kind KCs"
+      "detail": "119/98 kind KCs"
     },
     {
       "name": "git:clean",
       "status": "FAIL",
-      "detail": "8 dirty files"
+      "detail": "7 dirty files"
     },
     {
       "name": "git:has_commits",
       "status": "PASS",
-      "detail": "afb2c18 [N02] SDK_VALIDATION: self-audit complete â€” 89 fil"
+      "detail": "30a6639 [N04] Content Factory internal audit v2 â€” 74 asset"
     }
   ]
 }

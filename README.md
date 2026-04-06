@@ -26,7 +26,7 @@ You describe **intent** in 8 tokens. CEX compiles it into a **governed prompt** 
 
 - **115 artifact kinds** across 12 pillars, each with typed frontmatter and validation
 - **8-function pipeline** (8F): CONSTRAIN > BECOME > INJECT > REASON > CALL > PRODUCE > GOVERN > COLLABORATE
-- **109 builder factories**, each with 13 ISO files (schema, prompt, examples, quality gate, ...)
+- **111 builder factories**, each with 13 ISO files (schema, prompt, examples, quality gate, ...)
 - **Multi-provider routing**: Claude, GPT, Gemini, Ollama -- with health checks and automatic fallback
 - **Reverse compiler**: export your knowledge base to CLAUDE.md, .cursorrules, CustomGPT JSON
 - **Self-healing**: model updater detects stale versions, flywheel audits doc-vs-practice integrity
@@ -52,7 +52,7 @@ python _tools/cex_bootstrap.py              # Answer ~6 questions about your com
 python _tools/cex_8f_runner.py "create knowledge card about product pricing" --kind knowledge_card --execute
 
 # 5. Validate system health
-python _tools/cex_doctor.py                 # Builder integrity (109 builders)
+python _tools/cex_doctor.py                 # Builder integrity (111 builders)
 python _tools/cex_hooks.py validate-all     # Frontmatter validation
 python _tools/cex_flywheel_audit.py audit   # Full system audit (109 checks)
 ```
@@ -89,7 +89,7 @@ python _tools/cex_8f_runner.py "your intent" --kind <kind> --dry-run --verbose
 ## Architecture
 
 ```
-Layer 0 — BUILDERS       109 factories x 13 ISOs = artifact construction
+Layer 0 — BUILDERS       111 factories x 13 ISOs = artifact construction
 Layer 1 — PILLARS        12 pillars x 115 kinds = the taxonomy
 Layer 2 — NUCLEI         7 business domains (N01-N07) = the organization
 Layer 3 — PIPELINE       8F functions = the assembly line
@@ -200,7 +200,7 @@ bash _spawn/dispatch.sh stop                                    # Kill all
 ### Quality & Governance
 | Tool | Purpose |
 |------|---------|
-| `cex_doctor.py` | Builder health check (109 builders) |
+| `cex_doctor.py` | Builder health check (111 builders) |
 | `cex_hooks.py` | Pre/post validation + git hooks |
 | `cex_score.py` | Peer review scoring (--apply) |
 | `cex_flywheel_audit.py` | Full system audit (109 checks) |
@@ -232,7 +232,7 @@ bash _spawn/dispatch.sh stop                                    # Kill all
 | Metric | Count |
 |--------|-------|
 | Artifact kinds | 115 |
-| Builders (factories) | 109 |
+| Builders (factories) | 111 |
 | Builder ISO files | 13 per kind |
 | Sub-agents | 110 |
 | Knowledge cards | 117 |
@@ -258,7 +258,7 @@ cex/
   _tools/                52 Python CLI tools (cex_*.py)
   _spawn/                Dispatch scripts (solo, grid, monitor)
   _docs/                 Whitepaper, architecture docs
-  archetypes/            Builder templates (109 builders x 13 ISOs)
+  archetypes/            Builder templates (111 builders x 13 ISOs)
     builders/            One directory per kind
     _shared/             Shared skills across all builders
   boot/                  Boot scripts per nucleus (auto-generated)
