@@ -644,6 +644,16 @@ def write_task_notification(
 _spawner: Optional[AgentSpawner] = None
 
 
+def validate_agent_config(nucleus: str, task_spec: str) -> bool:
+    """Validate that a nucleus + task_spec pair is valid for spawning."""
+    nucleus = nucleus.lower()
+    if nucleus not in VALID_NUCLEI:
+        raise ValueError(f"Invalid nucleus '{nucleus}'. Must be one of: {sorted(VALID_NUCLEI)}")
+    if not task_spec or not task_spec.strip():
+        raise ValueError("task_spec cannot be empty")
+    return True
+
+
 def get_spawner() -> AgentSpawner:
     """Get the singleton spawner."""
     global _spawner

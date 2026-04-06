@@ -86,7 +86,7 @@ def test_doctor():
     """Run cex_doctor and check results."""
     print("\n=== DOCTOR ===")
     rc, out, err = run_cmd([sys.executable, "_tools/cex_doctor.py"])
-    full = out + err
+    full = (out or "") + (err or "")
 
     # Extract result line
     m = re.search(r"(\d+) PASS \| (\d+) WARN \| (\d+) FAIL", full)
@@ -103,7 +103,7 @@ def test_compile():
     """Test compilation works."""
     print("\n=== COMPILE ===")
     rc, out, err = run_cmd([sys.executable, "_tools/cex_compile.py", "--all"], timeout=60)
-    full = out + err
+    full = (out or "") + (err or "")
     m = re.search(r"(\d+)/(\d+) compiled", full)
     if m:
         ok, total = int(m.group(1)), int(m.group(2))
@@ -181,7 +181,7 @@ def test_hooks():
     print("\n=== HOOKS ===")
     # validate-all
     rc, out, err = run_cmd([sys.executable, "_tools/cex_hooks.py", "validate-all"])
-    full = out + err
+    full = (out or "") + (err or "")
     m = re.search(r"Errors:\s+(\d+)", full)
     errors = int(m.group(1)) if m else -1
     test("hooks:validate_all", errors == 0, f"{errors} errors")
@@ -231,7 +231,7 @@ def test_runner_dryrun():
         "create a knowledge card about testing", "--kind", "knowledge_card",
         "--dry-run", "--verbose"
     ])
-    full = out + err
+    full = (out or "") + (err or "")
     test("runner:dryrun_runs", rc == 0, f"exit={rc}")
     test("runner:has_f1", "CONSTRAIN" in full, "F1 CONSTRAIN found" if "CONSTRAIN" in full else "")
     test("runner:has_f6", "PRODUCE" in full, "F6 PRODUCE found" if "PRODUCE" in full else "")
@@ -250,7 +250,7 @@ def test_runner_execute(quick: bool = False):
         "create a knowledge card about system testing patterns",
         "--kind", "knowledge_card", "--execute", "--verbose"
     ], timeout=120)
-    full = out + err
+    full = (out or "") + (err or "")
     passed = "PASS" in full and "Verdict" in full
     test("runner:execute_pass", passed,
          "PASS" if passed else full[-200:])

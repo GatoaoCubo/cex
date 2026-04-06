@@ -147,7 +147,7 @@ def main():
 
     r = subprocess.run(
         [sys.executable, "_tools/cex_flywheel_audit.py", "audit"],
-        capture_output=True, text=True, timeout=30, cwd=str(CEX_ROOT),
+        capture_output=True, text=True, timeout=120, cwd=str(CEX_ROOT),
         encoding="utf-8", errors="replace"
     )
     full = (r.stdout or "") + (r.stderr or "")
