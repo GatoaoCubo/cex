@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-cex_schema_hydrate.py — Hydrate builder specs with universal schema fields.
+cex_schema_hydrate.py -- Hydrate builder specs with universal schema fields.
 
 Adds 8 universal patterns to all builders:
   - bld_manifest: keywords, triggers, geo_description (frontmatter)

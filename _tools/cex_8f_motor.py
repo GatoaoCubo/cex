@@ -33,7 +33,7 @@ _memory_scanner = None
 
 
 # ---------------------------------------------------------------------------
-# Turn Counter — Runtime Evolution Phase 3C
+# Turn Counter -- Runtime Evolution Phase 3C
 # ---------------------------------------------------------------------------
 
 
@@ -340,7 +340,7 @@ OBJECT_TO_KINDS = {
     "vision_tool": [("vision_tool", "P04", "CALL")],
     "webhook": [("webhook", "P04", "CALL")],
     "workflow": [("workflow", "P12", "COLLABORATE")],
-    # agent_card (P08) — deployment spec for autonomous agent
+    # agent_card (P08) -- deployment spec for autonomous agent
     "agent_card": [("agent_card", "P08", "BECOME")],
     "agent-card": [("agent_card", "P08", "BECOME")],
     "agentcard": [("agent_card", "P08", "BECOME")],
@@ -414,7 +414,7 @@ META_BUILDERS = frozenset(["_builder-builder"])
 
 
 # ---------------------------------------------------------------------------
-# Effort-Aware Dispatch (Phase 2A — Runtime Evolution)
+# Effort-Aware Dispatch (Phase 2A -- Runtime Evolution)
 # ---------------------------------------------------------------------------
 
 def _load_effort_models() -> dict:
@@ -468,7 +468,7 @@ def resolve_effort_model(effort: str, crew_override: str | None = None) -> dict:
 
 
 # ---------------------------------------------------------------------------
-# Permission Scope Enforcement (Phase 2D — Runtime Evolution)
+# Permission Scope Enforcement (Phase 2D -- Runtime Evolution)
 # ---------------------------------------------------------------------------
 
 
@@ -524,7 +524,7 @@ def check_permission_scope(
 
 
 # ---------------------------------------------------------------------------
-# Tool Deny-List Enforcement (Phase 2B — Runtime Evolution)
+# Tool Deny-List Enforcement (Phase 2B -- Runtime Evolution)
 # ---------------------------------------------------------------------------
 
 
@@ -557,7 +557,7 @@ def estimate_tokens(builder_id: str) -> int:
 
 
 # ---------------------------------------------------------------------------
-# Step 1: PARSE — extract verb, objects, domain, quality from intent
+# Step 1: PARSE -- extract verb, objects, domain, quality from intent
 # ---------------------------------------------------------------------------
 
 
@@ -726,7 +726,7 @@ def parse_intent(intent: str, quality_override: float | None = None) -> dict:
 
 
 # ---------------------------------------------------------------------------
-# Step 2: CLASSIFY — map objects to CEX kinds
+# Step 2: CLASSIFY -- map objects to CEX kinds
 # ---------------------------------------------------------------------------
 
 
@@ -762,7 +762,7 @@ def classify_objects(objects: list[str]) -> list[dict]:
                 )
                 seen_kinds.add(kind)
 
-    # A4: fallback — use cex_query.py keyword search when OBJECT_TO_KINDS has no match
+    # A4: fallback -- use cex_query.py keyword search when OBJECT_TO_KINDS has no match
     if not classified:
         try:
             from cex_query import query_builders
@@ -798,7 +798,7 @@ def classify_objects(objects: list[str]) -> list[dict]:
 
 
 # ---------------------------------------------------------------------------
-# KC Library — load domain KCs and match by feeds_kinds
+# KC Library -- load domain KCs and match by feeds_kinds
 # ---------------------------------------------------------------------------
 
 
@@ -881,7 +881,7 @@ def rebuild_kc_index():
 
 
 # ---------------------------------------------------------------------------
-# Step 3: FAN-OUT — select builders per function
+# Step 3: FAN-OUT -- select builders per function
 # ---------------------------------------------------------------------------
 
 
@@ -938,7 +938,7 @@ def _load_builder_tools_denied(builder_id: str) -> set:
         match = re.search(r'\|\s*DENIED\s*\|\s*([^|]+)\s*\|', content)
         if match:
             denied_text = match.group(1).strip()
-            if denied_text.lower() in ("(none)", "none", "—", "-", ""):
+            if denied_text.lower() in ("(none)", "none", "--", "-", ""):
                 return set()
             return {t.strip() for t in denied_text.split(",") if t.strip()}
     except Exception:
@@ -1148,7 +1148,7 @@ def fan_out(
 
 
 # ---------------------------------------------------------------------------
-# Step 4: PLAN — order functions by pipeline position
+# Step 4: PLAN -- order functions by pipeline position
 # ---------------------------------------------------------------------------
 
 
@@ -1158,7 +1158,7 @@ def order_plan(functions: list[dict]) -> list[dict]:
 
 
 # ---------------------------------------------------------------------------
-# Step 5: OUTPUT — assemble final JSON
+# Step 5: OUTPUT -- assemble final JSON
 # ---------------------------------------------------------------------------
 
 
@@ -1180,11 +1180,11 @@ def generate_output(
 
     if parsed["domain"] == "generic":
         warnings.append(
-            "domain nao identificado — plan pode ser generico. Especifique o artefato alvo."
+            "domain nao identificado -- plan pode ser generico. Especifique o artefato alvo."
         )
 
     if any(c.get("meta") for c in classified):
-        warnings.append("intent meta detectado — ativando _builder-builder. Pipeline de 13 files.")
+        warnings.append("intent meta detectado -- ativando _builder-builder. Pipeline de 13 files.")
 
     # Parsed output (spec format: object is string or array)
     parsed_output = {

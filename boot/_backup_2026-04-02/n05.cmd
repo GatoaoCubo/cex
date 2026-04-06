@@ -1,5 +1,5 @@
 @echo off
-:: CEX N05 — Railway Backend Superintendent
+:: CEX N05 -- Railway Backend Superintendent
 title CEX-N05-RAILWAY
 set CLAUDECODE=
 set CEX_NUCLEUS=N05

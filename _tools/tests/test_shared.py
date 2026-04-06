@@ -1,4 +1,4 @@
-"""Tests for cex_shared.py — the shared library."""
+"""Tests for cex_shared.py -- the shared library."""
 
 import json
 

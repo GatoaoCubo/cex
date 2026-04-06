@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-CEX Provider Discovery — detect available LLM providers
+CEX Provider Discovery -- detect available LLM providers
 
 Usage:
   python _tools/cex_provider_discovery.py --status     # check all providers
@@ -210,7 +210,7 @@ def get_best_provider(nucleus: str, providers: dict = None) -> str | None:
 
     # Load nucleus config for primary/fallback
     if yaml is None or not NUCLEUS_MODELS.exists():
-        # No config — use first available provider
+        # No config -- use first available provider
         for name, info in providers.items():
             if info.get("status") == "OK":
                 models = info.get("models", [])

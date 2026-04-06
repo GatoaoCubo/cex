@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""CEX Init v1.0 — Scaffold a new CEX project in 5 questions.
+"""CEX Init v1.0 -- Scaffold a new CEX project in 5 questions.
 
 Interactive:
   python _tools/cex_init.py
@@ -140,7 +140,7 @@ def interactive_flow() -> dict:
     """Run 5-question interactive scaffold wizard."""
     print()
     print("=" * 60)
-    print("  CEX Init — Scaffold a new CEX project")
+    print("  CEX Init -- Scaffold a new CEX project")
     print("=" * 60)
     print()
 
@@ -511,7 +511,7 @@ def generate_pre_commit(dest: Path) -> None:
     hooks_dir = dest / ".githooks"
     hooks_dir.mkdir(parents=True, exist_ok=True)
     content = """#!/usr/bin/env bash
-# CEX pre-commit hook — runs governance checks before commit.
+# CEX pre-commit hook -- runs governance checks before commit.
 # Install: git config core.hooksPath .githooks
 
 set -euo pipefail
@@ -655,7 +655,7 @@ def scaffold(cfg: dict) -> None:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="CEX Init v1.0 — scaffold a new CEX project in 5 questions",
+        description="CEX Init v1.0 -- scaffold a new CEX project in 5 questions",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=(
             "Examples:\n"

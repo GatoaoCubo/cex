@@ -1,5 +1,5 @@
 @echo off
-:: CEX N02 — Visual Frontend Engineer
+:: CEX N02 -- Visual Frontend Engineer
 title CEX-N02-FRONTEND
 set CLAUDECODE=
 set CEX_NUCLEUS=N02

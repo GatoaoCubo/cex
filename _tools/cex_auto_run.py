@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-CEX Autonomous Runner — system-level orchestration + health + missions
+CEX Autonomous Runner -- system-level orchestration + health + missions
 
 For single-artifact production, prefer cex_run.py or cex_8f_runner.py.
 This module handles system introspection and multi-nucleus coordination.
@@ -212,7 +212,7 @@ def show_status():
         for line in lines:
             parts = line.split()
             if len(parts) >= 3:
-                print(f"    PID {parts[0]} — {parts[1]} ({parts[2]})")
+                print(f"    PID {parts[0]} -- {parts[1]} ({parts[2]})")
     else:
         print("  Active nuclei: none")
 
@@ -275,7 +275,7 @@ def build_single(intent: str, verbose: bool = True) -> dict:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="CEX Autonomous Runner — fully autonomous pipeline orchestrator",
+        description="CEX Autonomous Runner -- fully autonomous pipeline orchestrator",
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     parser.add_argument("intent", nargs="?", help="Natural language intent for single build")

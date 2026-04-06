@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""CEX Smart Router — Config-driven, health-checked provider routing.
+"""CEX Smart Router -- Config-driven, health-checked provider routing.
 
 Pattern: OpenClaude SmartRouter (smart_router.py)
 Adapted for CEX nucleus routing with YAML config.
@@ -15,7 +15,7 @@ Usage:
     from cex_router import get_router
     router = get_router()
     route = router.resolve_nucleus("N03_builder")
-    # → {"provider": "anthropic", "model": "claude-opus-4-6", "api_key": "sk-..."}
+    # -> {"provider": "anthropic", "model": "claude-opus-4-6", "api_key": "sk-..."}
 
 CLI:
     python cex_router.py --status
@@ -139,7 +139,7 @@ class CexRouter:
         try:
             import httpx
         except ImportError:
-            # httpx not available — mark as healthy if configured (assume OK)
+            # httpx not available -- mark as healthy if configured (assume OK)
             provider.healthy = provider.is_configured
             provider.avg_latency_ms = 500.0  # Assumed
             return
@@ -167,7 +167,7 @@ class CexRouter:
                     )
         except Exception as e:
             provider.healthy = False
-            logger.warning(f"CexRouter: {provider.name} unreachable — {e}")
+            logger.warning(f"CexRouter: {provider.name} unreachable -- {e}")
 
     def resolve_nucleus(self, nucleus: str) -> dict:
         """Resolve nucleus to provider + model + key.
@@ -216,7 +216,7 @@ class CexRouter:
                 fb = self.providers.get(fb_name)
                 if fb and fb.healthy and fb.is_configured:
                     model = self._resolve_model(fb, model_tier)
-                    logger.warning(f"Fallback: {nucleus} → {fb.name}/{model}")
+                    logger.warning(f"Fallback: {nucleus} -> {fb.name}/{model}")
                     return {
                         "provider": fb.name,
                         "model": model,
@@ -277,14 +277,14 @@ class CexRouter:
 
 
 # ---------------------------------------------------------------------------
-# Nucleus Models — Single source of truth
+# Nucleus Models -- Single source of truth
 # ---------------------------------------------------------------------------
 
 _nucleus_models: Optional[dict] = None
 
 
 def load_nucleus_models(path: Path = NUCLEUS_MODELS_PATH) -> dict:
-    """Load nucleus_models.yaml — the single source of truth for model assignments.
+    """Load nucleus_models.yaml -- the single source of truth for model assignments.
 
     Returns dict keyed by nucleus id (n01..n07) with cli, model, flags, fallback, etc.
     Cached after first load.
@@ -366,7 +366,7 @@ def discover_and_route(nucleus: str) -> dict:
         from cex_provider_discovery import discover_providers, get_best_provider
         providers = discover_providers()
     except ImportError:
-        # Discovery not available — use static config
+        # Discovery not available -- use static config
         model = resolve_model_for(nuc_key)
         return {
             "provider": "anthropic",
@@ -400,7 +400,7 @@ def discover_and_route(nucleus: str) -> dict:
             "message": f"{nuc_key.upper()}: {primary_provider} OK -> {primary_model}",
         }
 
-    # Primary offline — try fallback via discovery
+    # Primary offline -- try fallback via discovery
     best = get_best_provider(nuc_key, providers)
     if best:
         # Infer provider for the fallback model

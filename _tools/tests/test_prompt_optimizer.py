@@ -1,4 +1,4 @@
-"""Tests for cex_prompt_optimizer.py — builder instruction analysis."""
+"""Tests for cex_prompt_optimizer.py -- builder instruction analysis."""
 
 import json
 import sys

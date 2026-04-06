@@ -1,4 +1,4 @@
-"""Runtime Evolution smoke tests — 11 tests covering all Phase 1-3 features.
+"""Runtime Evolution smoke tests -- 11 tests covering all Phase 1-3 features.
 
 Tests:
   1. Memory scanner returns correct headers

@@ -9,6 +9,6 @@ set CEX_NUCLEUS=N07
 set CEX_ROOT=C:\Users\PC\Documents\GitHub\cex
 cd /d "%CEX_ROOT%"
 
-:: ALWAYS interactive — N07 orchestrates, never receives task args
+:: ALWAYS interactive -- N07 orchestrates, never receives task args
 :: Reads handoff from .cex/runtime/handoffs/n07_task.md if present
 pi --model anthropic/claude-opus-4-6 --thinking xhigh

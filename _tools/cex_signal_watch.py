@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""CEX Signal Watcher v1.0 — Blocks until all expected nuclei signal or timeout.
+"""CEX Signal Watcher v1.0 -- Blocks until all expected nuclei signal or timeout.
 
 Usage:
     python _tools/cex_signal_watch.py --expect n01,n02,n03,n04,n05,n06 --timeout 3600
@@ -40,7 +40,7 @@ def parse_args():
 
 
 def load_pids(pid_file: str) -> dict:
-    """Load nucleus→PID mapping from spawn_pids.txt."""
+    """Load nucleus->PID mapping from spawn_pids.txt."""
     pids = {}
     path = Path(pid_file)
     if not path.exists():
@@ -179,8 +179,8 @@ def main():
         # Report progress
         log(
             f"{len(received)}/{len(expected)} signals | "
-            f"Done: {', '.join(sorted(received)) or '—'} | "
-            f"Pending: {', '.join(sorted(pending)) or '—'} | "
+            f"Done: {', '.join(sorted(received)) or '--'} | "
+            f"Pending: {', '.join(sorted(pending)) or '--'} | "
             f"{int(elapsed)}s elapsed",
             args.quiet
         )

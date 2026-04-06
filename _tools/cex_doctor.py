@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""CEX Doctor v2.0 — Naming v2.0 + Density + 13-file completeness.
+"""CEX Doctor v2.0 -- Naming v2.0 + Density + 13-file completeness.
 
 Usage:
   python _tools/cex_doctor.py          # diagnose only
@@ -416,7 +416,7 @@ def check_kc_library():
 
 def main():
     print("=" * 72)
-    print("CEX Doctor v2.0 — Naming v2.0 + Density + 13-File Completeness")
+    print("CEX Doctor v2.0 -- Naming v2.0 + Density + 13-File Completeness")
     print(f"Root: {ROOT}")
     print(f"Mode: {'DIAGNOSE + FIX' if FIX_MODE else 'DIAGNOSE ONLY'}")
     print("=" * 72)

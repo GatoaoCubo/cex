@@ -1,4 +1,4 @@
-"""brand_validate.py — Validate brand_config.yaml against schema.
+"""brand_validate.py -- Validate brand_config.yaml against schema.
 
 Checks required fields, enum values, format constraints (HEX, language code),
 and value quality (non-placeholder, non-empty).
@@ -169,7 +169,7 @@ def main():
         print(json.dumps(result, indent=2))
     else:
         status = "[OK] VALID" if result["valid"] else "[FAIL] INVALID"
-        print(f"{status} — {result['required_fields_filled']}/13 required fields")
+        print(f"{status} -- {result['required_fields_filled']}/13 required fields")
         print(f"Sections: {', '.join(result['sections_present'])}")
         if result["errors"]:
             print(f"\n[FAIL] Errors ({len(result['errors'])}):")

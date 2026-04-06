@@ -1,4 +1,4 @@
-"""brand_inject.py — Replace {{BRAND_*}} mustache variables in templates.
+"""brand_inject.py -- Replace {{BRAND_*}} mustache variables in templates.
 
 Reads .cex/brand/brand_config.yaml, flattens nested keys, and replaces
 all {{BRAND_*}} occurrences in input text or files.
@@ -105,10 +105,10 @@ def main():
         if brand:
             flat = flatten(brand)
             real = {k: v for k, v in flat.items() if not v.startswith("{{") and v}
-            print(f"✅ brand_config found: {config_path}")
+            print(f"[OK] brand_config found: {config_path}")
             print(f"   {len(real)} resolved variables, {len(flat) - len(real)} placeholders")
         else:
-            print(f"❌ brand_config NOT found at {config_path}")
+            print(f"[FAIL] brand_config NOT found at {config_path}")
             print("   Run Brand Discovery first (N06)")
         sys.exit(0 if brand else 1)
 
@@ -125,12 +125,12 @@ def main():
 
     if args.output:
         Path(args.output).write_text(result, encoding="utf-8")
-        print(f"✅ Injected → {args.output}")
+        print(f"[OK] Injected -> {args.output}")
     else:
         print(result)
 
     if unresolved:
-        print(f"\n⚠️  {len(unresolved)} unresolved variables: {', '.join(unresolved[:10])}", file=sys.stderr)
+        print(f"\n[WARN]  {len(unresolved)} unresolved variables: {', '.join(unresolved[:10])}", file=sys.stderr)
 
 
 if __name__ == "__main__":

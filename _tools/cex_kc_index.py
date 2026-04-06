@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-CEX KC Indexer — Embed all Knowledge Cards into Supabase pgvector.
+CEX KC Indexer -- Embed all Knowledge Cards into Supabase pgvector.
 
 Reads all KCs from filesystem, generates embeddings via OpenAI,
 and upserts into kc_embeddings table. Skips unchanged files (by content hash).
@@ -21,7 +21,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 
-# ── Load .env ──────────────────────────────────────────────────────────────
+# -- Load .env --------------------------------------------------------------
 # Keys that should NOT be loaded into os.environ because they override
 # Claude CLI subscription auth with API billing (which may have no credits).
 _ENV_BLOCKLIST = {"ANTHROPIC_API_KEY", "CLAUDE_API_KEY"}
@@ -49,7 +49,7 @@ SUPABASE_KEY = os.environ.get("SUPABASE_SERVICE_ROLE_KEY", "")
 EMBEDDING_MODEL = "text-embedding-3-small"  # 1536 dimensions, $0.02/1M tokens
 
 
-# ── Embedding ──────────────────────────────────────────────────────────────
+# -- Embedding --------------------------------------------------------------
 
 def get_embedding(text: str) -> list[float]:
     """Get embedding vector from OpenAI API."""
@@ -83,7 +83,7 @@ def get_embeddings_batch(texts: list[str], batch_size: int = 50) -> list[list[fl
     return all_embeddings
 
 
-# ── Supabase ───────────────────────────────────────────────────────────────
+# -- Supabase ---------------------------------------------------------------
 
 def get_supabase():
     """Get Supabase client."""
@@ -100,7 +100,7 @@ def get_indexed_hashes(client) -> dict[str, str]:
         return {}
 
 
-# ── KC Discovery ───────────────────────────────────────────────────────────
+# -- KC Discovery -----------------------------------------------------------
 
 def _parse_frontmatter(content: str) -> dict:
     """Extract YAML frontmatter as dict."""
@@ -183,7 +183,7 @@ def discover_kcs() -> list[dict]:
     return kcs
 
 
-# ── Index ──────────────────────────────────────────────────────────────────
+# -- Index ------------------------------------------------------------------
 
 def index_kcs(force: bool = False, dry_run: bool = False) -> dict:
     """Index all KCs into Supabase pgvector. Returns stats."""
@@ -274,7 +274,7 @@ def index_kcs(force: bool = False, dry_run: bool = False) -> dict:
     return stats
 
 
-# ── Search (used by crew_runner) ───────────────────────────────────────────
+# -- Search (used by crew_runner) -------------------------------------------
 
 def search_kcs_by_text(query: str, top_k: int = 5, filter_kind: str = None) -> list[dict]:
     """Search KCs by semantic similarity. Returns list of matches with file_path + similarity."""
@@ -313,7 +313,7 @@ def search_kcs_by_kind(kind: str, top_k: int = 5) -> list[dict]:
         return []
 
 
-# ── CLI ────────────────────────────────────────────────────────────────────
+# -- CLI --------------------------------------------------------------------
 
 def main():
     import argparse

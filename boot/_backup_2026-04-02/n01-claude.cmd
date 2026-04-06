@@ -1,5 +1,5 @@
 @echo off
-:: CEX N01 — Research Nucleus (CLAUDE OVERRIDE)
+:: CEX N01 -- Research Nucleus (CLAUDE OVERRIDE)
 title CEX-N01-RESEARCH
 set CLAUDECODE=
 set CEX_NUCLEUS=N01

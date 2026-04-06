@@ -1,5 +1,5 @@
 #!/bin/bash
-# CEX Dispatch — bash wrapper for pi/N07
+# CEX Dispatch -- bash wrapper for pi/N07
 #
 # Usage:
 #   bash _spawn/dispatch.sh solo n03 "task"    # dispatch 1 nucleus

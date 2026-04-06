@@ -1,4 +1,4 @@
-"""Tests for cex_memory_update.py — builder memory management."""
+"""Tests for cex_memory_update.py -- builder memory management."""
 import sys
 from pathlib import Path
 import pytest

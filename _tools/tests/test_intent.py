@@ -1,4 +1,4 @@
-"""Tests for cex_intent.py — intent classification and prompt composition."""
+"""Tests for cex_intent.py -- intent classification and prompt composition."""
 import sys
 from pathlib import Path
 import pytest

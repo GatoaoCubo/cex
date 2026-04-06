@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
-"""CEX Skill Loader — Multi-source, cached, dedup'd builder ISO registry.
+"""CEX Skill Loader -- Multi-source, cached, dedup'd builder ISO registry.
 
 Pattern: OpenClaude loadSkillsDir.ts + bundledSkills.ts
 Adapted for CEX builder ISOs with 5 priority-ordered sources.
 
 Source priority (lower = overridden by higher):
-  0. genesis   — N00_genesis/archetypes/ (base templates)
-  1. shared    — archetypes/builders/_shared/ (cross-builder skills)
-  2. builder   — archetypes/builders/{kind}-builder/ (kind-specific)
-  3. nucleus   — N{xx}_*/builders/ (nucleus-specific overrides)
-  4. brand     — .cex/brand/overrides/ (brand-specific customization)
+  0. genesis   -- N00_genesis/archetypes/ (base templates)
+  1. shared    -- archetypes/builders/_shared/ (cross-builder skills)
+  2. builder   -- archetypes/builders/{kind}-builder/ (kind-specific)
+  3. nucleus   -- N{xx}_*/builders/ (nucleus-specific overrides)
+  4. brand     -- .cex/brand/overrides/ (brand-specific customization)
 
 Usage:
     from cex_skill_loader import get_skill_loader
@@ -170,7 +170,7 @@ class SkillLoader:
         if shared_dir.exists():
             sources["shared"] = list(shared_dir.glob("skill_*.md"))
 
-        # Builder (kind-specific — primary source)
+        # Builder (kind-specific -- primary source)
         builder_dir = CEX_ROOT / "archetypes" / "builders" / f"{kind}-builder"
         if builder_dir.exists():
             sources["builder"] = list(builder_dir.glob("bld_*.md"))
@@ -305,7 +305,7 @@ def get_skill_loader() -> SkillLoader:
 if __name__ == "__main__":
     import argparse
 
-    parser = argparse.ArgumentParser(description="CEX Skill Loader — Builder ISO registry")
+    parser = argparse.ArgumentParser(description="CEX Skill Loader -- Builder ISO registry")
     parser.add_argument("--list", action="store_true", help="List all builder kinds")
     parser.add_argument("--load", metavar="KIND", help="Load ISOs for a builder kind")
     parser.add_argument("--stats", action="store_true", help="Show loader statistics")

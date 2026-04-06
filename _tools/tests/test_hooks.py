@@ -1,4 +1,4 @@
-"""Tests for cex_hooks.py — Pre-commit validation."""
+"""Tests for cex_hooks.py -- Pre-commit validation."""
 
 import sys
 from pathlib import Path

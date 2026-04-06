@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""CEX GDP (Guided Decision Protocol) — Runtime enforcement layer.
+"""CEX GDP (Guided Decision Protocol) -- Runtime enforcement layer.
 
 Pattern: OpenClaude permission protocol (tools/*/permissions + coordinatorMode)
 Adapted for CEX's domain: ensures subjective decisions go through proper gates.
 
 Decision scopes:
-  USER        — Always ask the human (tone, audience, style, brand voice)
-  COORDINATOR — N07 decides (task routing, priority, wave ordering)
-  AUTO        — System decides (file naming, directory structure)
+  USER        -- Always ask the human (tone, audience, style, brand voice)
+  COORDINATOR -- N07 decides (task routing, priority, wave ordering)
+  AUTO        -- System decides (file naming, directory structure)
 
 Usage:
     from cex_gdp import get_gdp, NeedsUserDecision
@@ -86,12 +86,12 @@ class Decision:
         }
 
 
-# Category → Default scope mapping
+# Category -> Default scope mapping
 # USER = subjective (human must decide)
 # COORDINATOR = tactical (N07 can decide)
 # AUTO = deterministic (system decides)
 DECISION_CATEGORIES = {
-    # USER scope — always ask human
+    # USER scope -- always ask human
     "tone": DecisionScope.USER,
     "audience": DecisionScope.USER,
     "style": DecisionScope.USER,
@@ -99,13 +99,13 @@ DECISION_CATEGORIES = {
     "visual_direction": DecisionScope.USER,
     "content_depth": DecisionScope.USER,
 
-    # COORDINATOR scope — N07 decides
+    # COORDINATOR scope -- N07 decides
     "task_routing": DecisionScope.COORDINATOR,
     "priority": DecisionScope.COORDINATOR,
     "wave_ordering": DecisionScope.COORDINATOR,
     "nucleus_assignment": DecisionScope.COORDINATOR,
 
-    # AUTO scope — system decides
+    # AUTO scope -- system decides
     "file_naming": DecisionScope.AUTO,
     "directory_structure": DecisionScope.AUTO,
     "frontmatter_schema": DecisionScope.AUTO,
@@ -127,12 +127,12 @@ class NeedsUserDecision(Exception):
 
 
 class GDPEnforcer:
-    """Runtime GDP enforcement — gates subjective decisions in the 8F pipeline.
+    """Runtime GDP enforcement -- gates subjective decisions in the 8F pipeline.
 
     Integration points:
-      F4 REASON  — require_decision() gates plan on unresolved subjective choices
-      /guide     — surfaces NeedsUserDecision to the user
-      /grid      — workers inherit resolved decisions from coordinator
+      F4 REASON  -- require_decision() gates plan on unresolved subjective choices
+      /guide     -- surfaces NeedsUserDecision to the user
+      /grid      -- workers inherit resolved decisions from coordinator
     """
 
     def __init__(self):
@@ -162,7 +162,7 @@ class GDPEnforcer:
                     propagate=ddata.get("propagate", True),
                 )
         except Exception:
-            pass  # Corrupt manifest → start fresh
+            pass  # Corrupt manifest -> start fresh
 
     def require_decision(
         self,
@@ -173,10 +173,10 @@ class GDPEnforcer:
     ) -> Decision:
         """Gate: require a decision before proceeding.
 
-        If already resolved (manifest or session) → return it.
-        If AUTO scope → auto-resolve immediately.
-        If COORDINATOR scope → return pending (N07 will resolve).
-        If USER scope → raise NeedsUserDecision.
+        If already resolved (manifest or session) -> return it.
+        If AUTO scope -> auto-resolve immediately.
+        If COORDINATOR scope -> return pending (N07 will resolve).
+        If USER scope -> raise NeedsUserDecision.
         """
         did = self._decision_id(question, category, nucleus)
         options = options or []
@@ -209,9 +209,9 @@ class GDPEnforcer:
         if scope == DecisionScope.COORDINATOR:
             decision.decided_by = "coordinator"
             self.session_decisions[did] = decision
-            return decision  # Pending — coordinator resolves later
+            return decision  # Pending -- coordinator resolves later
 
-        # USER scope — must be resolved by human
+        # USER scope -- must be resolved by human
         self.session_decisions[did] = decision
         raise NeedsUserDecision(decision)
 
@@ -351,7 +351,7 @@ if __name__ == "__main__":
     import argparse
     import json
 
-    parser = argparse.ArgumentParser(description="CEX GDP — Guided Decision Protocol")
+    parser = argparse.ArgumentParser(description="CEX GDP -- Guided Decision Protocol")
     parser.add_argument("--status", action="store_true", help="Show decision status")
     parser.add_argument("--pending", action="store_true", help="Show pending decisions")
     parser.add_argument("--resolve", nargs=2, metavar=("ID", "CHOSEN"), help="Resolve a decision")
@@ -383,7 +383,7 @@ if __name__ == "__main__":
     elif args.resolve:
         did, chosen = args.resolve
         d = gdp.resolve(did, chosen, rationale=args.rationale)
-        print(f"✅ Resolved: {d.question} → '{d.chosen}'")
+        print(f"[OK] Resolved: {d.question} -> '{d.chosen}'")
 
     else:
         parser.print_help()

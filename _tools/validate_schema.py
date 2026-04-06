@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""CEX Schema Validator — validates each P*/_schema.yaml for structural integrity."""
+"""CEX Schema Validator -- validates each P*/_schema.yaml for structural integrity."""
 
 import sys
 if hasattr(sys.stdout, "reconfigure"): sys.stdout.reconfigure(encoding="utf-8")

@@ -1,5 +1,5 @@
 @echo off
-:: CEX N04 — CEX-N04-KNOWLEDGE (FALLBACK 1: codex/o3)
+:: CEX N04 -- CEX-N04-KNOWLEDGE (FALLBACK 1: codex/o3)
 :: When gemini crashes (Node v24 bug, etc.)
 :: Generated 2026-04-02
 

@@ -56,7 +56,7 @@ def main():
         print(f"  Homepage: {page.title()} | URL: {page.url}")
 
         if "accounts.google" in page.url:
-            print("[FAIL] Cookies expired — need to re-auth via NotebookLM MCP setup_auth")
+            print("[FAIL] Cookies expired -- need to re-auth via NotebookLM MCP setup_auth")
             browser.close()
             return
 
@@ -155,7 +155,7 @@ def main():
             except Exception:
                 continue
 
-        # 5. Fill the textarea (THE KEY STEP — use force click to bypass overlay)
+        # 5. Fill the textarea (THE KEY STEP -- use force click to bypass overlay)
         print("\n[STEP 5] Pasting content into textarea...")
         pasted = False
 

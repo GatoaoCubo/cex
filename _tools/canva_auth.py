@@ -129,7 +129,7 @@ if not auth_code:
     print("\nERROR: No authorization code received (timeout or error)")
     sys.exit(1)
 
-print(f"\n✅ Authorization code received!")
+print(f"\n[OK] Authorization code received!")
 print(f"Exchanging for access token...")
 
 # Exchange code for token
@@ -156,7 +156,7 @@ token_data = token_response.json()
 TOKEN_FILE.parent.mkdir(parents=True, exist_ok=True)
 TOKEN_FILE.write_text(json.dumps(token_data, indent=2))
 
-print(f"\n✅ Access token obtained!")
+print(f"\n[OK] Access token obtained!")
 print(f"   Token saved to: {TOKEN_FILE}")
 print(f"   Expires in: {token_data.get('expires_in', '?')} seconds")
 print(f"   Scopes: {token_data.get('scope', '?')}")
@@ -170,5 +170,5 @@ with open(env_path, 'a') as f:
     if refresh_token:
         f.write(f"CANVA_REFRESH_TOKEN={refresh_token}\n")
 
-print(f"\n✅ Tokens added to .env")
+print(f"\n[OK] Tokens added to .env")
 print(f"   Canva Connect API is ready!")

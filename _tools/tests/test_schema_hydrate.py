@@ -1,4 +1,4 @@
-"""Tests for cex_schema_hydrate.py — frontmatter hydration."""
+"""Tests for cex_schema_hydrate.py -- frontmatter hydration."""
 import sys
 from pathlib import Path
 import pytest

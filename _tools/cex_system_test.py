@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-cex_system_test.py — Full system validation for CEX bootstrap.
+cex_system_test.py -- Full system validation for CEX bootstrap.
 
 Tests all components: tools, builders, artifacts, hooks, runner, infra.
 Run after bootstrap to confirm system health.
@@ -39,10 +39,10 @@ def test(name: str, passed: bool, detail: str = ""):
     else:
         FAIL += 1
     RESULTS.append({"name": name, "status": status, "detail": detail})
-    symbol = "✅" if passed else "❌"
+    symbol = "[OK]" if passed else "[FAIL]"
     msg = f"  {symbol} {name}"
     if detail:
-        msg += f" — {detail}"
+        msg += f" -- {detail}"
     print(msg)
 
 
@@ -51,7 +51,7 @@ def skip(name: str, reason: str = ""):
     global SKIP
     SKIP += 1
     RESULTS.append({"name": name, "status": "SKIP", "detail": reason})
-    print(f"  ⏭️  {name} — {reason}")
+    print(f"  >>  {name} -- {reason}")
 
 
 def run_cmd(cmd: list, timeout: int = 30) -> tuple[int, str, str]:
@@ -302,7 +302,7 @@ def main():
     args = parser.parse_args()
 
     print("=" * 60)
-    print("  CEX SYSTEM TEST — Full Bootstrap Validation")
+    print("  CEX SYSTEM TEST -- Full Bootstrap Validation")
     print("=" * 60)
 
     t0 = time.time()
@@ -334,7 +334,7 @@ def main():
         print("\n  FAILURES:")
         for r in RESULTS:
             if r["status"] == "FAIL":
-                print(f"    ❌ {r['name']}: {r['detail']}")
+                print(f"    [FAIL] {r['name']}: {r['detail']}")
 
     # Write results
     results_path = CEX_ROOT / ".cex" / "system_test_results.json"

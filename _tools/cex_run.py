@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
-"""CEX Run — Full autonomous pipeline: intent → artifact on disk.
+"""CEX Run -- Full autonomous pipeline: intent -> artifact on disk.
 
 This is the PRIMARY entry point for artifact production.
 For system-level operations (health, providers, missions), see cex_auto_run.py.
 
 Chains:
-  1. cex_query.py       → discover best builder
-  2. cex_8f_motor.py    → parse intent + classify + plan
-  3. cex_crew_runner    → compose full prompt with specs + memory
-  4. claude CLI (-p)    → execute via subscription (no API key needed)
-  5. cex_hooks.py       → validate artifact
-  6. cex_compile.py     → .md → .yaml
-  7. cex_memory_update  → record observation
-  8. cex_score.py       → peer-review score
+  1. cex_query.py       -> discover best builder
+  2. cex_8f_motor.py    -> parse intent + classify + plan
+  3. cex_crew_runner    -> compose full prompt with specs + memory
+  4. claude CLI (-p)    -> execute via subscription (no API key needed)
+  5. cex_hooks.py       -> validate artifact
+  6. cex_compile.py     -> .md -> .yaml
+  7. cex_memory_update  -> record observation
+  8. cex_score.py       -> peer-review score
 
 Usage:
   python _tools/cex_run.py "create a knowledge card about RAG patterns"
@@ -22,8 +22,8 @@ Usage:
   python _tools/cex_run.py --status
 
 See also:
-  cex_auto_run.py  — system health, provider discovery, multi-nucleus missions
-  cex_8f_runner.py — low-level 8F pipeline with F1-F8 step control
+  cex_auto_run.py  -- system health, provider discovery, multi-nucleus missions
+  cex_8f_runner.py -- low-level 8F pipeline with F1-F8 step control
 """
 
 import argparse
@@ -52,10 +52,10 @@ from _tools.cex_compile import compile_file
 from _tools.cex_hooks import validate_artifact
 
 
-# ── Config ──────────────────────────────────────────────────────────────────
+# -- Config ------------------------------------------------------------------
 
-# Use short aliases (subscription auth) — NOT full model IDs (API credits).
-# "sonnet" / "opus" / "haiku" → subscription. "claude-sonnet-4-6" → API billing.
+# Use short aliases (subscription auth) -- NOT full model IDs (API credits).
+# "sonnet" / "opus" / "haiku" -> subscription. "claude-sonnet-4-6" -> API billing.
 EFFORT_TO_MODEL = {
     "low": "haiku",
     "medium": "sonnet",
@@ -68,24 +68,24 @@ QUALITY_GATE = 8.0
 OUTPUT_DIR = ROOT / ".cex" / "runtime" / "outputs"
 
 
-# ── Status ──────────────────────────────────────────────────────────────────
+# -- Status ------------------------------------------------------------------
 
 def show_status():
     """Show system status summary."""
-    print("╔══════════════════════════════════════╗")
-    print("║        CEX System Status             ║")
-    print("╠══════════════════════════════════════╣")
+    print("+======================================+")
+    print("|        CEX System Status             |")
+    print("+======================================+")
 
     builder_dir = ROOT / "archetypes" / "builders"
     builders = [d for d in builder_dir.iterdir()
                 if d.is_dir() and not d.name.startswith(("_", "."))]
-    print(f"║  Builders:    {len(builders):>4}                  ║")
+    print(f"|  Builders:    {len(builders):>4}                  |")
 
     kinds_file = ROOT / ".cex" / "kinds_meta.json"
     if kinds_file.exists():
         with open(kinds_file, encoding="utf-8") as f:
             kinds = json.load(f)
-        print(f"║  Kinds:       {len(kinds):>4}                  ║")
+        print(f"|  Kinds:       {len(kinds):>4}                  |")
 
     total_nuc = 0
     for n in range(1, 8):
@@ -93,33 +93,33 @@ def show_status():
         if ndir:
             count = len(list(ndir[0].rglob("*.md"))) - len(list(ndir[0].rglob("*/compiled/*.md")))
             total_nuc += count
-    print(f"║  Nucleus .md: {total_nuc:>4}                  ║")
+    print(f"|  Nucleus .md: {total_nuc:>4}                  |")
 
     compiled = len(list(ROOT.rglob("compiled/*.yaml"))) + len(list(ROOT.rglob("compiled/*.json")))
-    print(f"║  Compiled:    {compiled:>4}                  ║")
+    print(f"|  Compiled:    {compiled:>4}                  |")
 
     try:
         r = subprocess.run(["git", "log", "--oneline", "-1"],
                           capture_output=True, text=True, cwd=ROOT)
         last_commit = r.stdout.strip()[:50]
-        print(f"║  Last: {last_commit:<29}║")
+        print(f"|  Last: {last_commit:<29}|")
     except Exception:
         pass
 
-    print("╚══════════════════════════════════════╝")
+    print("+======================================+")
 
 
-# ── Step 1: Discovery ──────────────────────────────────────────────────────
+# -- Step 1: Discovery ------------------------------------------------------
 
 def discover(intent: str, top_k: int = 5) -> list[dict]:
     """Find best builders for intent via TF-IDF."""
     return query_builders(intent, top_k=top_k)
 
 
-# ── Step 2: Plan ────────────────────────────────────────────────────────────
+# -- Step 2: Plan ------------------------------------------------------------
 
 def plan(intent: str, quality: float = 9.0) -> dict:
-    """Parse intent → execution plan."""
+    """Parse intent -> execution plan."""
     builder_map = load_builder_map()
     kc_library = load_kc_library()
     rebuild_kc_index()
@@ -136,7 +136,7 @@ def plan(intent: str, quality: float = 9.0) -> dict:
     return generate_output(intent, parsed, classified, functions)
 
 
-# ── Step 3: Compose ─────────────────────────────────────────────────────────
+# -- Step 3: Compose ---------------------------------------------------------
 
 def compose(intent: str, builder_id: str, quality: float = 9.0) -> str:
     """Compose full prompt with builder specs + memory + context."""
@@ -157,7 +157,7 @@ def compose(intent: str, builder_id: str, quality: float = 9.0) -> str:
     )
 
 
-# ── Step 4: Execute via claude CLI ──────────────────────────────────────────
+# -- Step 4: Execute via claude CLI ------------------------------------------
 
 def execute_via_cli(prompt: str, model: str = DEFAULT_MODEL,
                     timeout: int = 120) -> tuple[str, bool]:
@@ -209,7 +209,7 @@ Just output the artifact content directly. START WITH --- NOW:
         return f"[ERROR] {e}", False
 
 
-# ── Step 5: Extract artifact from LLM response ─────────────────────────────
+# -- Step 5: Extract artifact from LLM response -----------------------------
 
 def extract_artifact(response: str, kind: str, intent: str) -> tuple[str, dict]:
     """Extract the markdown artifact from LLM response.
@@ -237,7 +237,7 @@ def extract_artifact(response: str, kind: str, intent: str) -> tuple[str, dict]:
     return response.strip(), {"extraction": "fallback_raw"}
 
 
-# ── Step 6: Determine output path ──────────────────────────────────────────
+# -- Step 6: Determine output path ------------------------------------------
 
 def resolve_output_path(kind: str, domain: str, intent: str) -> Path:
     """Determine where to save the artifact based on kind + pillar."""
@@ -273,7 +273,7 @@ def resolve_output_path(kind: str, domain: str, intent: str) -> Path:
     return output_path
 
 
-# ── Step 7: Validate + Compile + Memory ─────────────────────────────────────
+# -- Step 7: Validate + Compile + Memory -------------------------------------
 
 def post_process(artifact_path: Path, builder_id: str, intent: str,
                  quality_score: float, verbose: bool = False) -> dict:
@@ -287,7 +287,7 @@ def post_process(artifact_path: Path, builder_id: str, intent: str,
         "details": [i.get("message", str(i)) for i in issues[:5]],
     }
     if verbose:
-        status = "✅ PASS" if not issues else f"⚠ {len(issues)} issue(s)"
+        status = "[OK] PASS" if not issues else f"[WARN] {len(issues)} issue(s)"
         print(f"  Validate: {status}")
 
     # Compile
@@ -295,11 +295,11 @@ def post_process(artifact_path: Path, builder_id: str, intent: str,
         ok = compile_file(Path(artifact_path))
         results["compiled"] = ok
         if verbose:
-            print(f"  Compile:  {'✅' if ok else '❌'}")
+            print(f"  Compile:  {'[OK]' if ok else '[FAIL]'}")
     except Exception as e:
         results["compiled"] = False
         if verbose:
-            print(f"  Compile:  ❌ {e}")
+            print(f"  Compile:  [FAIL] {e}")
 
     # Evolve (AutoResearch: heuristic free + agent via SDK if score < threshold)
     try:
@@ -327,7 +327,7 @@ def post_process(artifact_path: Path, builder_id: str, intent: str,
             score_file(str(artifact_path), apply=True)
             results["scored"] = True
             if verbose:
-                print(f"  Score:    ✅ applied (evolve fallback)")
+                print(f"  Score:    [OK] applied (evolve fallback)")
         except Exception:
             results["scored"] = False
 
@@ -336,23 +336,23 @@ def post_process(artifact_path: Path, builder_id: str, intent: str,
         from _tools.cex_memory_update import update_builder_memory
         update_builder_memory(
             builder_id=builder_id,
-            observation=f"Built '{intent}' → {artifact_path.name} (q={quality_score:.1f})",
+            observation=f"Built '{intent}' -> {artifact_path.name} (q={quality_score:.1f})",
             confidence=0.8 if quality_score >= QUALITY_GATE else 0.5,
         )
         results["memory_updated"] = True
         if verbose:
-            print(f"  Memory:   ✅ observation recorded")
+            print(f"  Memory:   [OK] observation recorded")
     except Exception:
         results["memory_updated"] = False
 
     return results
 
 
-# ── Full Run ────────────────────────────────────────────────────────────────
+# -- Full Run ----------------------------------------------------------------
 
 def run(intent: str, quality: float = 9.0, dry_run: bool = False,
         execute: bool = False, verbose: bool = False) -> dict:
-    """Full pipeline: intent → discover → plan → compose → [execute → save]."""
+    """Full pipeline: intent -> discover -> plan -> compose -> [execute -> save]."""
     t0 = time.time()
     result = {"intent": intent, "quality_target": quality, "steps": []}
 
@@ -369,7 +369,7 @@ def run(intent: str, quality: float = 9.0, dry_run: bool = False,
     })
     if verbose:
         for b in builders[:3]:
-            print(f"  → {b['builder_id']} (score={b['score']:.3f})")
+            print(f"  -> {b['builder_id']} (score={b['score']:.3f})")
 
     if not builders:
         result["error"] = "No builders found for intent"
@@ -392,7 +392,7 @@ def run(intent: str, quality: float = 9.0, dry_run: bool = False,
         "warnings": execution_plan.get("warnings", []),
     })
     if verbose:
-        print(f"  → {execution_plan['total_builders']} builder(s), "
+        print(f"  -> {execution_plan['total_builders']} builder(s), "
               f"~{execution_plan['estimated_tokens']:,} tokens")
 
     # Step 3: Compose prompt
@@ -406,7 +406,7 @@ def run(intent: str, quality: float = 9.0, dry_run: bool = False,
         "prompt_tokens_est": len(prompt) // 4,
     })
     if verbose:
-        print(f"  → {len(prompt):,} chars (~{len(prompt)//4:,} tokens)")
+        print(f"  -> {len(prompt):,} chars (~{len(prompt)//4:,} tokens)")
 
     # Step 4: Dedup check
     if verbose:
@@ -423,11 +423,11 @@ def run(intent: str, quality: float = 9.0, dry_run: bool = False,
         })
         if verbose:
             if dupes:
-                print(f"  ⚠ {len(dupes)} similar artifact(s):")
+                print(f"  [WARN] {len(dupes)} similar artifact(s):")
                 for s in dupes:
                     print(f"    {s['score']:.3f} {s['path']}")
             else:
-                print(f"  ✅ No duplicates")
+                print(f"  [OK] No duplicates")
     except Exception as e:
         result["steps"].append({"step": "dedup_check", "error": str(e)})
 
@@ -448,7 +448,7 @@ def run(intent: str, quality: float = 9.0, dry_run: bool = False,
             print(f"{'='*60}")
         return result
 
-    # ── EXECUTE MODE: Steps 5-7 ─────────────────────────────────────────
+    # -- EXECUTE MODE: Steps 5-7 -----------------------------------------
 
     # Resolve model from builder effort config
     try:
@@ -498,7 +498,7 @@ def run(intent: str, quality: float = 9.0, dry_run: bool = False,
         "model": model,
     })
     if verbose:
-        print(f"  → {len(response):,} chars response")
+        print(f"  -> {len(response):,} chars response")
 
     # Extract artifact
     kind = primary_builder.replace("-builder", "").replace("-", "_")
@@ -514,7 +514,7 @@ def run(intent: str, quality: float = 9.0, dry_run: bool = False,
     output_path.write_text(artifact_content, encoding="utf-8")
 
     if verbose:
-        print(f"  → Saved: {output_path.relative_to(ROOT)}")
+        print(f"  -> Saved: {output_path.relative_to(ROOT)}")
 
     # Step 6-7: Post-process (validate + compile + score + memory)
     if verbose:
@@ -522,7 +522,7 @@ def run(intent: str, quality: float = 9.0, dry_run: bool = False,
     pp_result = post_process(output_path, primary_builder, intent, quality, verbose)
     result["steps"].append({"step": "post_process", **pp_result})
 
-    # Quality check — retry if below gate
+    # Quality check -- retry if below gate
     quality_score = quality  # placeholder until we parse from artifact
     fm_match = re.search(r'quality:\s*([\d.]+)', artifact_content)
     if fm_match:
@@ -530,7 +530,7 @@ def run(intent: str, quality: float = 9.0, dry_run: bool = False,
 
     if quality_score < QUALITY_GATE and not dry_run:
         if verbose:
-            print(f"\n[7/7] Quality {quality_score:.1f} < {QUALITY_GATE} — retrying...")
+            print(f"\n[7/7] Quality {quality_score:.1f} < {QUALITY_GATE} -- retrying...")
         retry_prompt = (
             prompt + f"\n\n## RETRY FEEDBACK\n"
             f"Previous attempt scored {quality_score:.1f}, below gate {QUALITY_GATE}.\n"
@@ -545,7 +545,7 @@ def run(intent: str, quality: float = 9.0, dry_run: bool = False,
             result["retried"] = True
     else:
         if verbose:
-            print(f"\n[7/7] Quality gate: ✅ PASS")
+            print(f"\n[7/7] Quality gate: [OK] PASS")
 
     result["elapsed_seconds"] = round(time.time() - t0, 2)
     result["primary_builder"] = primary_builder
@@ -553,7 +553,7 @@ def run(intent: str, quality: float = 9.0, dry_run: bool = False,
 
     if verbose:
         print(f"\n{'='*60}")
-        print(f"  ✅ Artifact created: {output_path.relative_to(ROOT)}")
+        print(f"  [OK] Artifact created: {output_path.relative_to(ROOT)}")
         print(f"  Builder: {primary_builder}")
         print(f"  Elapsed: {result['elapsed_seconds']}s")
         print(f"{'='*60}")
@@ -561,18 +561,18 @@ def run(intent: str, quality: float = 9.0, dry_run: bool = False,
     return result
 
 
-# ── CLI ─────────────────────────────────────────────────────────────────────
+# -- CLI ---------------------------------------------------------------------
 
 def main():
     parser = argparse.ArgumentParser(
-        description="CEX Run — Full pipeline: intent → artifact on disk",
+        description="CEX Run -- Full pipeline: intent -> artifact on disk",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
   # Discover + plan + compose prompt (no execution):
   python _tools/cex_run.py "create a knowledge card about RAG patterns"
 
-  # Full autonomous: compose → claude CLI → validate → compile → save:
+  # Full autonomous: compose -> claude CLI -> validate -> compile -> save:
   python _tools/cex_run.py "create a knowledge card about RAG" --execute
 
   # Dry run (plan only):

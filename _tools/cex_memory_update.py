@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-"""CEX Memory Update — Dynamic builder memory with decay, prune, and append.
+"""CEX Memory Update -- Dynamic builder memory with decay, prune, and append.
 
 Called AFTER builder execution to record new observations and maintain
 memory hygiene (decay old observations, prune low-confidence entries).
 
 Decay rates by type:
-  feedback:  0.00 (permanent — corrective knowledge)
+  feedback:  0.00 (permanent -- corrective knowledge)
   user:      0.02 (slow decay)
   reference: 0.03 (moderate decay)
-  project:   0.05 (fast decay — project context changes)
+  project:   0.05 (fast decay -- project context changes)
 
 Usage:
     python cex_memory_update.py \
@@ -296,7 +296,7 @@ def update_builder_memory(
 
 
 def main():
-    parser = argparse.ArgumentParser(description="CEX Memory Update — dynamic builder memory")
+    parser = argparse.ArgumentParser(description="CEX Memory Update -- dynamic builder memory")
     parser.add_argument("--builder", "-b", required=True, help="Builder ID (e.g. agent-builder)")
     parser.add_argument("--type", "-t", required=True,
                         choices=["feedback", "user", "reference", "project"],

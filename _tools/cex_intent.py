@@ -148,12 +148,12 @@ def compose_prompt(
     """Compose a GOVERNED PROMPT from builder specs + KC-Domain + intent.
 
     Order:
-      1. bld_system_prompt  — identity and role
-      2. bld_instruction    — step-by-step production process
-      3. KC-Domain content  — domain knowledge injection
-      4. bld_schema         — output schema/contract
-      5. bld_output_template — expected output format
-      6. User intent        — the actual request
+      1. bld_system_prompt  -- identity and role
+      2. bld_instruction    -- step-by-step production process
+      3. KC-Domain content  -- domain knowledge injection
+      4. bld_schema         -- output schema/contract
+      5. bld_output_template -- expected output format
+      6. User intent        -- the actual request
     """
     sections = []
 
@@ -258,11 +258,11 @@ def execute_prompt(prompt: str) -> str:
     Priority: SUBSCRIPTION > LOCAL > API (pay-per-token is LAST resort).
 
     Tries (in order):
-      1. Claude CLI  — uses Max/Pro subscription, zero extra cost
-      2. Ollama SDK  — local, free
-      3. Ollama HTTP — local fallback, free
-      4. Anthropic API — only if CEX_USE_API=1, pay-per-token
-      5. OpenAI API   — only if CEX_USE_API=1, pay-per-token
+      1. Claude CLI  -- uses Max/Pro subscription, zero extra cost
+      2. Ollama SDK  -- local, free
+      3. Ollama HTTP -- local fallback, free
+      4. Anthropic API -- only if CEX_USE_API=1, pay-per-token
+      5. OpenAI API   -- only if CEX_USE_API=1, pay-per-token
 
     Set CEX_USE_API=1 to allow paid API calls as last resort.
     Returns the LLM response text.
@@ -270,7 +270,7 @@ def execute_prompt(prompt: str) -> str:
     errors = {}
     allow_paid_api = os.environ.get("CEX_USE_API", "0") == "1"
 
-    # --- [1] Claude CLI (subscription — included in Max/Pro plan) ---
+    # --- [1] Claude CLI (subscription -- included in Max/Pro plan) ---
     try:
         import subprocess
         result = subprocess.run(
@@ -383,7 +383,7 @@ def run_intent(
 ) -> dict:
     """Full pipeline: intent -> Motor 8F -> builder specs -> governed prompt."""
 
-    # Step 1: Motor 8F — parse + classify
+    # Step 1: Motor 8F -- parse + classify
     parsed = parse_intent(intent, quality_override=quality)
 
     if kind_override:

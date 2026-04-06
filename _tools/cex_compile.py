@@ -63,7 +63,7 @@ def load_schema(lp_dir: Path) -> dict:
 
 
 def strip_markdown_decoration(text: str) -> str:
-    """Remove bold, italic, links — keep the text content."""
+    """Remove bold, italic, links -- keep the text content."""
     # Links: [text](url) -> text
     text = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", text)
     # Bold+italic: ***text*** or ___text___
@@ -100,7 +100,7 @@ def parse_body_sections(body: str) -> dict:
     for line in body.split("\n"):
         stripped = line.strip()
 
-        # Track code blocks — don't parse headers inside them
+        # Track code blocks -- don't parse headers inside them
         if stripped.startswith("```"):
             in_code_block = not in_code_block
             current_lines.append(line)
@@ -134,7 +134,7 @@ def parse_body_sections(body: str) -> dict:
 
 
 def process_section_content(content: str) -> object:
-    """Process a section's content — detect lists, code blocks, or plain text."""
+    """Process a section's content -- detect lists, code blocks, or plain text."""
     content = content.strip()
     if not content:
         return ""
@@ -164,11 +164,11 @@ def process_section_content(content: str) -> object:
             continue
 
         if re.match(r"^[-*]\s+", stripped):
-            # Bullet list item — strip the marker
+            # Bullet list item -- strip the marker
             item = re.sub(r"^[-*]\s+", "", stripped)
             list_lines.append(item)
         elif re.match(r"^\d+\.\s+", stripped):
-            # Numbered list item — strip the number
+            # Numbered list item -- strip the number
             item = re.sub(r"^\d+\.\s+", "", stripped)
             list_lines.append(item)
         elif stripped:
@@ -204,7 +204,7 @@ def process_section_content(content: str) -> object:
         # Return everything as multiline
         return content
 
-    # Plain text — join into single string if short
+    # Plain text -- join into single string if short
     text = " ".join(non_list_lines)
     return text
 

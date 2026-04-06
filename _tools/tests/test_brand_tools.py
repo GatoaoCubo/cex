@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parent.parent.parent
 TEMPLATE_PATH = ROOT / ".cex" / "brand" / "brand_config_template.yaml"
 
 
-# ── brand_inject.py ──
+# -- brand_inject.py --
 
 class TestFlatten:
     def test_flat_dict(self):
@@ -56,7 +56,7 @@ class TestInjectBrand:
         config = {
             "identity": {"BRAND_NAME": "Codexa", "BRAND_TAGLINE": "Build with AI"},
         }
-        template = "{{BRAND_NAME}} — {{BRAND_TAGLINE}}"
+        template = "{{BRAND_NAME}} -- {{BRAND_TAGLINE}}"
         result = inject_brand(template, config)
         assert "Codexa" in result
         assert "Build with AI" in result
@@ -85,7 +85,7 @@ class TestLoadBrandConfig:
         assert config == {}
 
 
-# ── brand_validate.py ──
+# -- brand_validate.py --
 
 class TestIsPlaceholder:
     def test_mustache_var(self):
@@ -145,7 +145,7 @@ class TestValidate:
             assert len(result["warnings"]) > 0 or len(result["errors"]) > 0
 
 
-# ── brand_propagate.py ──
+# -- brand_propagate.py --
 
 class TestExtractVars:
     def test_extracts_from_nested(self):
@@ -181,7 +181,7 @@ class TestNucleusVars:
             assert len(NUCLEUS_VARS[n]) > 0
 
 
-# ── brand_audit.py ──
+# -- brand_audit.py --
 
 class TestScoreConfigCompleteness:
     def test_full_config(self):

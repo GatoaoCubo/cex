@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""CEX changelog generator — reads git log, groups by LP, formats entry."""
+"""CEX changelog generator -- reads git log, groups by LP, formats entry."""
 
 import sys
 if hasattr(sys.stdout, "reconfigure"): sys.stdout.reconfigure(encoding="utf-8")

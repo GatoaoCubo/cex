@@ -443,7 +443,7 @@ class EightFRunner:
                 knowledge["kc_builder"] = strip_frontmatter(kc_text)
                 self._log("F3", "bld_knowledge_card loaded")
 
-        # 2. Dedicated kind KC (primary — 1:1 per kind)
+        # 2. Dedicated kind KC (primary -- 1:1 per kind)
         kind_kc_path = CEX_ROOT / "P01_knowledge" / "library" / "kind" / f"kc_{self.kind_slug}.md"
         if kind_kc_path.exists():
             text = kind_kc_path.read_text(encoding="utf-8")
@@ -755,7 +755,7 @@ class EightFRunner:
                     for item in output[:3]:
                         lines.append(
                             f"- **{item.get('id', '?')}** ({item.get('kind', '?')}) "
-                            f"score={item.get('score', 0):.2f} — {item.get('tldr', '')[:120]}"
+                            f"score={item.get('score', 0):.2f} -- {item.get('tldr', '')[:120]}"
                         )
                     enrichments.append("\n".join(lines))
                 elif tool_name == "query" and isinstance(output, list):
@@ -1045,7 +1045,7 @@ class EightFRunner:
             _gate("H06", "body <= max_bytes", body_size <= int(max_bytes) if max_bytes else True,
                   f"H06: Body {body_size} bytes > max {max_bytes} bytes")
 
-            # Output formatter validation (jsonschema-based, soft — non-blocking)
+            # Output formatter validation (jsonschema-based, soft -- non-blocking)
             soft_warnings: list[str] = []
             if _FORMATTER_AVAILABLE and fm:
                 try:
@@ -1151,7 +1151,7 @@ class EightFRunner:
                 filename = f"{self.state.pillar.lower()}_{self.state.kind}_{slug}.md"
             out_path = out_dir / filename
 
-            # Clean code fences from LLM output (safety net — F7 already cleans)
+            # Clean code fences from LLM output (safety net -- F7 already cleans)
             art = self._clean_llm_output(self.state.artifact)
             self.state.artifact = art
             out_path.write_text(art, encoding="utf-8")

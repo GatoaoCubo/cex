@@ -1,4 +1,4 @@
-"""Tests for brand_ingest.py — messy file ingestion into brand signals."""
+"""Tests for brand_ingest.py -- messy file ingestion into brand signals."""
 import sys
 import json
 from pathlib import Path
@@ -56,12 +56,12 @@ class TestExtractSignals:
         assert len(sig["urls"]) >= 2
 
     def test_finds_prices_brl(self):
-        text = "Plano Pro: R$ 97/mês. Plano Enterprise: R$ 297/mês."
+        text = "Plano Pro: R$ 97/mes. Plano Enterprise: R$ 297/mes."
         sig = extract_signals_from_text(text)
         assert len(sig["prices_brl"]) == 2
 
     def test_detects_portuguese(self):
-        text = "Nossa empresa cria produtos para clientes que valorizam qualidade e preço justo."
+        text = "Nossa empresa cria produtos para clientes que valorizam qualidade e preco justo."
         sig = extract_signals_from_text(text)
         assert sig["likely_language"] == "pt-BR"
 
@@ -81,7 +81,7 @@ class TestExtractSignals:
         assert len(sig["social_handles"]) >= 2
 
     def test_finds_mission(self):
-        text = "Missão: Democratizar o acesso a inteligência artificial para pequenas empresas."
+        text = "Missao: Democratizar o acesso a inteligencia artificial para pequenas empresas."
         sig = extract_signals_from_text(text)
         assert "potential_mission" in sig
         assert "Democratizar" in sig["potential_mission"]
@@ -113,8 +113,8 @@ class TestMergeSignals:
 class TestIngest:
     def test_full_ingest(self, tmp_path):
         (tmp_path / "brand.md").write_text(
-            "# Codexa Brand\nMissão: Construir agentes AI.\nColors: #50C878 #1A1A2E\n"
-            "font-family: 'Inter'\nR$ 97/mês",
+            "# Codexa Brand\nMissao: Construir agentes AI.\nColors: #50C878 #1A1A2E\n"
+            "font-family: 'Inter'\nR$ 97/mes",
             encoding="utf-8",
         )
         (tmp_path / "style.css").write_text(
@@ -131,7 +131,7 @@ class TestIngest:
 class TestFormatForLlm:
     def test_produces_readable_output(self, tmp_path):
         (tmp_path / "info.txt").write_text(
-            "Codexa - Build AI Agents\nMissão: simplificar AI\n#50C878",
+            "Codexa - Build AI Agents\nMissao: simplificar AI\n#50C878",
             encoding="utf-8",
         )
         signals = ingest(tmp_path)

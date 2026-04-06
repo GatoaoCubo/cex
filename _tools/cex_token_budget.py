@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""CEX Token Budget — accurate token counting + prompt budget allocation.
+"""CEX Token Budget -- accurate token counting + prompt budget allocation.
 
 Uses tiktoken for real token counts. Allocates budget across F6 PRODUCE
 prompt sections to prevent context overflow.
@@ -129,7 +129,7 @@ def allocate_budget(
             if text
         }
 
-    # Need to truncate — allocate by priority
+    # Need to truncate -- allocate by priority
     result = {}
     remaining = budget
 
@@ -201,7 +201,7 @@ def truncate_to_tokens(text: str, max_tokens: int, model: str = "claude-sonnet-4
 
 
 # ---------------------------------------------------------------------------
-# Budget Tracker — Continuation-aware token governor
+# Budget Tracker -- Continuation-aware token governor
 # Pattern: OpenClaude BudgetTracker (tokenBudget.ts)
 # ---------------------------------------------------------------------------
 
@@ -258,9 +258,9 @@ def check_token_budget(
     Returns CONTINUE with nudge, or STOP with completion stats.
 
     Logic:
-      - Under 90% budget AND not diminishing → CONTINUE
-      - 3+ continuations with <500 new tokens each → STOP (diminishing)
-      - Over 90% → STOP (budget exhausted)
+      - Under 90% budget AND not diminishing -> CONTINUE
+      - 3+ continuations with <500 new tokens each -> STOP (diminishing)
+      - Over 90% -> STOP (budget exhausted)
     """
     if budget <= 0:
         return BudgetDecision(action="stop")
@@ -404,7 +404,7 @@ def analyze_prompt(prompt: str, model: str = "claude-sonnet-4-6") -> dict:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="CEX Token Budget — token counting + allocation")
+    parser = argparse.ArgumentParser(description="CEX Token Budget -- token counting + allocation")
     parser.add_argument("--count", nargs="?", const="", help="Count tokens in text (or use --file)")
     parser.add_argument("--file", "-f", help="Count tokens in a file")
     parser.add_argument("--budget", action="store_true", help="Show budget allocation for a model")

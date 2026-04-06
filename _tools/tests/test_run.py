@@ -1,4 +1,4 @@
-"""Tests for cex_run.py — unified E2E entry point."""
+"""Tests for cex_run.py -- unified E2E entry point."""
 import sys
 from pathlib import Path
 import pytest

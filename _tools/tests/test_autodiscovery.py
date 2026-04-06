@@ -28,7 +28,7 @@ sys.path.insert(0, str(TOOLS))
 def require_index():
     """Skip all tests if index.db is missing."""
     if not DB_PATH.exists():
-        pytest.skip("index.db not found — run cex_index.py first")
+        pytest.skip("index.db not found -- run cex_index.py first")
 
 
 class TestCexQuery:

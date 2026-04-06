@@ -1,4 +1,4 @@
-"""Tests for cex_token_budget.py — token counting + budget allocation."""
+"""Tests for cex_token_budget.py -- token counting + budget allocation."""
 
 import sys
 from pathlib import Path

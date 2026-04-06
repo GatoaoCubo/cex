@@ -1,5 +1,5 @@
 """
-Tests for cex_evolve.py — Autonomous Experiment Loop
+Tests for cex_evolve.py -- Autonomous Experiment Loop
 """
 import os
 import sys
@@ -385,7 +385,7 @@ id: improved
 
 
 # ============================================================
-# Agent mode tests (mocked SDK — no real LLM calls)
+# Agent mode tests (mocked SDK -- no real LLM calls)
 # ============================================================
 
 class TestEvolveAgent:

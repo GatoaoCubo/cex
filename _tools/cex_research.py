@@ -6,7 +6,7 @@ if hasattr(sys.stdout, "reconfigure"):
 if hasattr(sys.stderr, "reconfigure"):
     sys.stderr.reconfigure(encoding="utf-8")
 """
-CEX Research — Generate structured research prompts that produce KC-Sources.
+CEX Research -- Generate structured research prompts that produce KC-Sources.
 
 A KC-Source is a raw taxonomy table scraped/researched from official docs.
 It feeds distill.py which transforms sources into domain Knowledge Cards.
@@ -65,7 +65,7 @@ do topico "{topic}" usando as fontes listadas abaixo.
             P10(Memory) P11(Feedback) P12(Orchestration)
 7. Minimo 15 termos por fonte. Se a fonte tem mais, inclua mais.
 8. Ordene por Source, depois Category, depois Term
-9. NAO invente termos — apenas termos que existem na documentacao oficial
+9. NAO invente termos -- apenas termos que existem na documentacao oficial
 10. Inclua version/date de quando a doc foi consultada
 
 ### OUTPUT FORMAT:

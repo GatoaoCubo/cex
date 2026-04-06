@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """
-cex_hooks.py — Pre/post build validation hooks for CEX artifacts.
+cex_hooks.py -- Pre/post build validation hooks for CEX artifacts.
 
 Hooks:
-  pre-save   FILE   — Validate artifact before saving (frontmatter, naming, size)
-  post-save  FILE   — Compile + check after saving
-  pre-commit        — Validate all staged .md files (git hook)
-  validate   FILE+  — Full validation of one or more artifacts
-  validate-all      — Check every nucleus artifact in repo
-  install           — Install git pre-commit hook
+  pre-save   FILE   -- Validate artifact before saving (frontmatter, naming, size)
+  post-save  FILE   -- Compile + check after saving
+  pre-commit        -- Validate all staged .md files (git hook)
+  validate   FILE+  -- Full validation of one or more artifacts
+  validate-all      -- Check every nucleus artifact in repo
+  install           -- Install git pre-commit hook
 
 Usage:
   python _tools/cex_hooks.py pre-save N07_admin/agents/agent_admin.md
@@ -46,7 +46,7 @@ NUCLEUS_DIRS = [d for d in CEX_ROOT.iterdir()
 
 
 # ---------------------------------------------------------------------------
-# Builder Lifecycle Hooks (Phase 2C — Runtime Evolution)
+# Builder Lifecycle Hooks (Phase 2C -- Runtime Evolution)
 # ---------------------------------------------------------------------------
 
 
@@ -285,16 +285,16 @@ def run_pre_save(paths: list[str]) -> int:
         warn_count = sum(1 for i in issues if i["level"] == "WARN")
 
         if error_count:
-            print(f"❌ {path}: {error_count} errors, {warn_count} warnings")
+            print(f"[FAIL] {path}: {error_count} errors, {warn_count} warnings")
             errors += error_count
         elif warn_count:
-            print(f"⚠️  {path}: {warn_count} warnings")
+            print(f"[WARN]  {path}: {warn_count} warnings")
         else:
-            print(f"✅ {path}: valid")
+            print(f"[OK] {path}: valid")
 
         for i in issues:
             if i["level"] in ("ERROR", "WARN"):
-                symbol = "  ✗" if i["level"] == "ERROR" else "  !"
+                symbol = "  [X]" if i["level"] == "ERROR" else "  !"
                 print(f"{symbol} [{i['code']}] {i['msg']}")
 
     return errors
@@ -308,57 +308,198 @@ def run_post_save(paths: list[str]) -> int:
         issues = validate_artifact(path)
         error_count = sum(1 for i in issues if i["level"] == "ERROR")
         if error_count:
-            print(f"❌ {path}: {error_count} validation errors — skipping compile")
+            print(f"[FAIL] {path}: {error_count} validation errors -- skipping compile")
             for i in issues:
                 if i["level"] == "ERROR":
-                    print(f"  ✗ [{i['code']}] {i['msg']}")
+                    print(f"  [X] [{i['code']}] {i['msg']}")
             errors += error_count
             continue
 
         # Compile
         ok, output = compile_artifact(path)
         if ok:
-            print(f"✅ {path}: valid + compiled")
+            print(f"[OK] {path}: valid + compiled")
         else:
-            print(f"⚠️  {path}: valid but compile failed: {output}")
+            print(f"[WARN]  {path}: valid but compile failed: {output}")
 
     return errors
 
 
+def check_encoding(staged_files: list[str]) -> int:
+    """Check staged .py/.ps1 files for non-ASCII in executable output lines.
+
+    Rejects any .py file with non-ASCII in print()/logging calls,
+    and any .ps1 file with non-ASCII in Write-Host/Write-Output calls.
+    Returns error count.
+    """
+    CODE_EXTENSIONS = {".py", ".ps1", ".sh", ".cmd", ".bat"}
+    errors = 0
+    code_files = [f for f in staged_files
+                  if any(f.endswith(ext) for ext in CODE_EXTENSIONS)]
+
+    if not code_files:
+        return 0
+
+    print("  encoding_check: scanning %d code file(s)..." % len(code_files))
+    for path in code_files:
+        try:
+            with open(path, "r", encoding="utf-8") as fh:
+                for line_num, line in enumerate(fh, 1):
+                    for ch in line:
+                        cp = ord(ch)
+                        if cp > 127:
+                            # Allow BOM at start of .ps1
+                            if cp == 0xFEFF and line_num == 1:
+                                continue
+                            errors += 1
+                            if errors <= 5:
+                                print(f"    [FAIL] {path}:{line_num} "
+                                      f"U+{cp:04X} (non-ASCII)")
+        except (UnicodeDecodeError, OSError):
+            errors += 1
+            print(f"    [FAIL] {path}: cannot read as UTF-8")
+
+    if errors > 5:
+        print(f"    ... and {errors - 5} more encoding issues")
+    if errors == 0:
+        print("  encoding_check: PASS")
+    return errors
+
+
+def check_ps_parse(staged_files: list[str]) -> int:
+    """Validate PowerShell syntax for staged .ps1 files.
+
+    Uses PowerShell's parser to check for syntax errors.
+    Returns error count.
+    """
+    ps1_files = [f for f in staged_files if f.endswith(".ps1")]
+    if not ps1_files:
+        return 0
+
+    print("  ps_parse_check: validating %d .ps1 file(s)..." % len(ps1_files))
+    errors = 0
+    for path in ps1_files:
+        try:
+            # Use PowerShell AST parser for syntax validation
+            cmd = (
+                'powershell -NoProfile -Command "'
+                '$errors = $null; '
+                f'[System.Management.Automation.Language.Parser]::ParseFile('
+                f"'{path}', [ref]$null, [ref]$errors); "
+                'if ($errors.Count -gt 0) { '
+                '$errors | ForEach-Object { Write-Output $_.Message }; '
+                'exit 1 } else { exit 0 }"'
+            )
+            result = subprocess.run(
+                cmd, shell=True, capture_output=True, text=True, timeout=15
+            )
+            if result.returncode != 0:
+                errors += 1
+                msg = result.stdout.strip() or result.stderr.strip()
+                print(f"    [FAIL] {path}: {msg[:200]}")
+        except Exception as e:
+            # PowerShell not available -- skip gracefully
+            print(f"    [SKIP] {path}: PowerShell not available ({e})")
+
+    if errors == 0:
+        print("  ps_parse_check: PASS")
+    return errors
+
+
+def check_yaml_valid(staged_files: list[str]) -> int:
+    """Validate YAML syntax for staged .yaml/.yml files.
+
+    Checks that all staged YAML files parse without errors.
+    Returns error count.
+    """
+    yaml_files = [f for f in staged_files
+                  if f.endswith(".yaml") or f.endswith(".yml")]
+    if not yaml_files:
+        return 0
+
+    print("  yaml_valid_check: validating %d YAML file(s)..." % len(yaml_files))
+    errors = 0
+
+    try:
+        import yaml as _yaml
+    except ImportError:
+        print("  yaml_valid_check: SKIP (pyyaml not installed)")
+        return 0
+
+    for path in yaml_files:
+        try:
+            with open(path, "r", encoding="utf-8") as fh:
+                _yaml.safe_load(fh)
+        except _yaml.YAMLError as e:
+            errors += 1
+            # Extract just the problem description
+            msg = str(e).split("\n")[0][:200]
+            print(f"    [FAIL] {path}: {msg}")
+        except OSError as e:
+            errors += 1
+            print(f"    [FAIL] {path}: {e}")
+
+    if errors == 0:
+        print("  yaml_valid_check: PASS")
+    return errors
+
+
 def run_pre_commit() -> int:
-    """Pre-commit hook: validate all staged .md files in N0*/ directories."""
+    """Pre-commit hook: validate staged files.
+
+    Checks:
+    1. Artifact validation (frontmatter, naming) for staged .md in N0*/
+    2. Encoding check: reject non-ASCII in staged .py/.ps1/.sh/.cmd
+    3. PowerShell parse: AST validation for staged .ps1
+    4. YAML validation: syntax check for staged .yaml/.yml
+    """
     try:
         result = subprocess.run(
             ["git", "diff", "--cached", "--name-only", "--diff-filter=ACM"],
             capture_output=True, text=True, timeout=10
         )
-        staged = [f for f in result.stdout.strip().split("\n")
-                  if f.strip() and f.endswith(".md") and re.match(r"N\d{2}_", f)]
+        all_staged = [f.strip() for f in result.stdout.strip().split("\n")
+                      if f.strip()]
     except Exception:
-        staged = []
+        all_staged = []
 
-    if not staged:
-        print("pre-commit: no nucleus .md files staged")
+    if not all_staged:
+        print("pre-commit: no files staged")
         return 0
 
-    print(f"pre-commit: validating {len(staged)} staged artifact(s)...")
     errors = 0
-    for path in staged:
-        issues = validate_artifact(path)
-        error_count = sum(1 for i in issues if i["level"] == "ERROR")
-        if error_count:
-            print(f"  ❌ {path}")
-            for i in issues:
-                if i["level"] == "ERROR":
-                    print(f"    ✗ [{i['code']}] {i['msg']}")
-            errors += error_count
-        else:
-            print(f"  ✅ {path}")
+
+    # 1. Artifact validation (existing behavior)
+    md_staged = [f for f in all_staged
+                 if f.endswith(".md") and re.match(r"N\d{2}_", f)]
+    if md_staged:
+        print(f"pre-commit: validating {len(md_staged)} staged artifact(s)...")
+        for path in md_staged:
+            issues = validate_artifact(path)
+            error_count = sum(1 for i in issues if i["level"] == "ERROR")
+            if error_count:
+                print(f"  [FAIL] {path}")
+                for i in issues:
+                    if i["level"] == "ERROR":
+                        print(f"    [X] [{i['code']}] {i['msg']}")
+                errors += error_count
+            else:
+                print(f"  [OK] {path}")
+
+    # 2. Encoding check -- non-ASCII in executable code
+    errors += check_encoding(all_staged)
+
+    # 3. PowerShell parse check
+    errors += check_ps_parse(all_staged)
+
+    # 4. YAML validation
+    errors += check_yaml_valid(all_staged)
 
     if errors:
-        print(f"\npre-commit: BLOCKED — {errors} error(s). Fix before committing.")
+        print(f"\npre-commit: BLOCKED -- {errors} error(s). Fix before committing.")
     else:
-        print(f"\npre-commit: PASS — {len(staged)} artifact(s) valid.")
+        total = len(all_staged)
+        print(f"\npre-commit: PASS -- {total} file(s) checked.")
     return errors
 
 
@@ -382,10 +523,10 @@ def run_validate_all() -> int:
             if e:
                 errors += e
                 rel = md.relative_to(CEX_ROOT)
-                print(f"  ❌ {rel}")
+                print(f"  [FAIL] {rel}")
                 for i in issues:
                     if i["level"] == "ERROR":
-                        print(f"    ✗ [{i['code']}] {i['msg']}")
+                        print(f"    [X] [{i['code']}] {i['msg']}")
             elif w:
                 warnings += w
             else:
@@ -409,7 +550,7 @@ def install_git_hook():
 
     hook_path = hooks_dir / "pre-commit"
     hook_content = """#!/bin/sh
-# CEX pre-commit hook — validates staged nucleus artifacts
+# CEX pre-commit hook -- validates staged nucleus artifacts
 python _tools/cex_hooks.py pre-commit
 exit $?
 """
@@ -419,7 +560,7 @@ exit $?
         os.chmod(str(hook_path), 0o755)
     except Exception:
         pass
-    print(f"✅ Git pre-commit hook installed at {hook_path}")
+    print(f"[OK] Git pre-commit hook installed at {hook_path}")
     return 0
 
 

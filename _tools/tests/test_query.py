@@ -1,4 +1,4 @@
-"""Tests for cex_query.py — builder discovery by keyword."""
+"""Tests for cex_query.py -- builder discovery by keyword."""
 import sys
 from pathlib import Path
 import pytest

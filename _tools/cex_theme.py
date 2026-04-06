@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-CEX Theme System — reads nucleus_sins.yaml, outputs color schemes
+CEX Theme System -- reads nucleus_sins.yaml, outputs color schemes
 
 Usage:
   python _tools/cex_theme.py --show                    # table of all nuclei + colors
@@ -137,7 +137,7 @@ def render_all_banners(use_ansi: bool = True) -> str:
             parts.append(render_banner(nuc, use_ansi=use_ansi))
             parts.append("")
         except (KeyError, FileNotFoundError):
-            parts.append(f"  [?] {nuc.upper()} — sin not configured")
+            parts.append(f"  [?] {nuc.upper()} -- sin not configured")
             parts.append("")
     return "\n".join(parts)
 
@@ -148,7 +148,7 @@ def format_ps1(nucleus: str) -> str:
     color = sin.get("color", {})
     nuc = nucleus.lower()[:3]
     lines = [
-        f'# {nuc.upper()} — {sin.get("virtue", "?")}',
+        f'# {nuc.upper()} -- {sin.get("virtue", "?")}',
         f'$Host.UI.RawUI.BackgroundColor = "{color.get("ps_bg", "Black")}"',
         f'$Host.UI.RawUI.ForegroundColor = "{color.get("ps_fg", "White")}"',
         f'# Accent: {color.get("ps_accent", "White")}',
@@ -162,7 +162,7 @@ def format_ansi(nucleus: str) -> str:
     color = sin.get("color", {})
     nuc = nucleus.lower()[:3]
     lines = [
-        f'# {nuc.upper()} — {sin.get("virtue", "?")}',
+        f'# {nuc.upper()} -- {sin.get("virtue", "?")}',
         f'BG="{color.get("ansi_bg", "")}"',
         f'FG="{color.get("ansi_fg", "")}"',
         f'RESET="\\033[0m"',

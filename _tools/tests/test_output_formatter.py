@@ -1,4 +1,4 @@
-"""Tests for cex_output_formatter.py — validate and fix LLM output."""
+"""Tests for cex_output_formatter.py -- validate and fix LLM output."""
 
 import sys
 from pathlib import Path

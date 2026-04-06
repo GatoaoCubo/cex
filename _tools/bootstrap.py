@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""CEX Bootstrap — creates a new CEX project from selected Leverage Points."""
+"""CEX Bootstrap -- creates a new CEX project from selected Leverage Points."""
 
 import sys
 if hasattr(sys.stdout, "reconfigure"): sys.stdout.reconfigure(encoding="utf-8")
@@ -105,7 +105,7 @@ def generate_codex(dest: Path, project_name: str, lp_names: list[str]) -> None:
         desc = LP_DESCRIPTIONS.get(code, "")
         lp_table.append(f"| {code} | {lp.split('_', 1)[1].title()} | {desc} |")
 
-    content = f"""# {project_name} — CODEX
+    content = f"""# {project_name} -- CODEX
 ## Gerado via CEX Bootstrap | LIVING
 
 ---
@@ -151,7 +151,7 @@ Regras: lowercase, snake_case, ASCII, max 50 chars
 
 def generate_roadmap(dest: Path, project_name: str, lp_names: list[str]) -> None:
     """Generate a project-specific ROADMAP.md in archetypes/."""
-    content = f"""# {project_name} — ROADMAP
+    content = f"""# {project_name} -- ROADMAP
 
 ---
 
@@ -241,7 +241,7 @@ cp P01_knowledge/templates/tpl_knowledge_card_domain.md meu_kc.md
 
 def main():
     parser = argparse.ArgumentParser(
-        description="CEX Bootstrap — create a new CEX project",
+        description="CEX Bootstrap -- create a new CEX project",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="Examples:\n"
         "  python bootstrap.py --name MeuProjeto\n"

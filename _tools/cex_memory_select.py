@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""CEX Memory Selector — LLM-powered relevant memory retrieval.
+"""CEX Memory Selector -- LLM-powered relevant memory retrieval.
 
 Selects top-K most relevant builder memories for a given query using
 an LLM (sonnet) as selector. Falls back to keyword matching when LLM
@@ -43,7 +43,7 @@ CEX_ROOT = Path(__file__).resolve().parent.parent
 CACHE_DIR = CEX_ROOT / ".cex" / "temp" / "memory_cache"
 CACHE_TTL_SECONDS = 300  # 5 minutes
 
-# LLM selector model — sonnet is sufficient, 4x cheaper than opus
+# LLM selector model -- sonnet is sufficient, 4x cheaper than opus
 LLM_MODEL = "claude-sonnet-4-6"
 LLM_MAX_TOKENS = 1024
 
@@ -327,7 +327,7 @@ def format_memory_injection(memories: list[SelectedMemory], total_observations: 
 
 
 def main():
-    parser = argparse.ArgumentParser(description="CEX Memory Selector — LLM-powered retrieval")
+    parser = argparse.ArgumentParser(description="CEX Memory Selector -- LLM-powered retrieval")
     parser.add_argument("--query", "-q", required=True, help="Query/intent to match memories against")
     parser.add_argument("--builder", "-b", help="Specific builder ID (default: search all)")
     parser.add_argument("--all", action="store_true", help="Search all builder memories")

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""CEX Coordinator Protocol — N07 orchestration runtime.
+"""CEX Coordinator Protocol -- N07 orchestration runtime.
 
 Pattern: OpenClaude Coordinator Mode (coordinatorMode.ts, Section 1-6 protocol)
 Adapted for CEX: N07 NEVER builds, only orchestrates.
@@ -10,7 +10,7 @@ The Coordinator Protocol:
   3. Workers execute autonomously with full tool access.
   4. Workflow: Research -> SYNTHESIS GATE -> Implement -> VERIFY GATE
   5. Synthesis = prove understanding before dispatching next phase.
-  6. "Never delegate understanding" — no "based on your findings" prompts.
+  6. "Never delegate understanding" -- no "based on your findings" prompts.
 
 Integration:
   - Uses cex_agent_spawn.py for worker lifecycle
@@ -146,7 +146,7 @@ class SynthesisResult:
 # ---------------------------------------------------------------------------
 
 class CexCoordinator:
-    """N07 Coordinator Protocol — never builds, only orchestrates.
+    """N07 Coordinator Protocol -- never builds, only orchestrates.
 
     Implements the 4-phase workflow:
       Research (parallel) -> SYNTHESIS GATE -> Implement (sequential) -> Verify (fresh)
@@ -173,7 +173,7 @@ class CexCoordinator:
     ) -> List[TaskNotification]:
         """Spawn parallel research workers and wait for all results.
 
-        Research tasks are read-only — workers investigate, don't modify.
+        Research tasks are read-only -- workers investigate, don't modify.
         Launch all at once for maximum parallelism.
 
         Args:
@@ -377,7 +377,7 @@ class CexCoordinator:
     ) -> List[TaskNotification]:
         """Verify implementation with FRESH workers.
 
-        Fresh workers verify independently — no implementation bias.
+        Fresh workers verify independently -- no implementation bias.
         They should PROVE the code works, not just confirm it exists.
 
         Args:

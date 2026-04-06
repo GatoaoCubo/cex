@@ -1,4 +1,4 @@
-"""Tests for cex_retriever.py — TF-IDF semantic search over CEX artifacts."""
+"""Tests for cex_retriever.py -- TF-IDF semantic search over CEX artifacts."""
 
 import sys
 from pathlib import Path

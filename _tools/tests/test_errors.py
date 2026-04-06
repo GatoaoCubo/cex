@@ -1,4 +1,4 @@
-"""Tests for cex_errors.py — Error hierarchy."""
+"""Tests for cex_errors.py -- Error hierarchy."""
 
 import pytest
 from cex_errors import (

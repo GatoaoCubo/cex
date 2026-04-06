@@ -1,4 +1,4 @@
-"""CEX Signal Writer v2.1 — writes to .cex/runtime/signals/ with validation"""
+"""CEX Signal Writer v2.1 -- writes to .cex/runtime/signals/ with validation"""
 import json
 import re
 from datetime import datetime, timezone

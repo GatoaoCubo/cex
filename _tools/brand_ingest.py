@@ -1,4 +1,4 @@
-"""brand_ingest.py — Ingest messy user files into structured brand signals.
+"""brand_ingest.py -- Ingest messy user files into structured brand signals.
 
 Reads a folder of mixed files (PDF, DOCX, TXT, MD, images, HTML, PPTX)
 and extracts brand-relevant signals: names, colors, values, tone, audience.
@@ -103,8 +103,8 @@ def extract_signals_from_text(text: str) -> dict:
     }
 
     # Detect language
-    pt_markers = ["empresa", "marca", "produto", "cliente", "valor", "missão",
-                  "visão", "preço", "curso", "venda"]
+    pt_markers = ["empresa", "marca", "produto", "cliente", "valor", "miss\u00e3o",
+                  "vis\u00e3o", "pre\u00e7o", "curso", "venda"]
     en_markers = ["company", "brand", "product", "customer", "value", "mission",
                   "vision", "price", "course", "sale"]
 
@@ -136,8 +136,8 @@ def extract_signals_from_text(text: str) -> dict:
 
     # Detect potential mission/vision
     mission_pats = [
-        r"(?:miss[aã]o|mission)[\s:]+(.+?)(?:\n|$)",
-        r"(?:vis[aã]o|vision)[\s:]+(.+?)(?:\n|$)",
+        "(?:miss[a\u00e3]o|mission)[\\s:]+(.+?)(?:\\n|$)",
+        "(?:vis[a\u00e3]o|vision)[\\s:]+(.+?)(?:\\n|$)",
     ]
     for pat in mission_pats:
         matches = re.findall(pat, text, re.IGNORECASE)
@@ -199,7 +199,7 @@ def merge_signals(all_signals: list[dict]) -> dict:
 
 
 def ingest(folder: Path) -> dict:
-    """Full ingest pipeline: scan → read → extract → merge."""
+    """Full ingest pipeline: scan -> read -> extract -> merge."""
     inventory = scan_folder(folder)
     all_signals = []
     source_texts = []

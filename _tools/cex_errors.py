@@ -1,5 +1,5 @@
 """
-cex_errors.py — CEX Error Hierarchy
+cex_errors.py -- CEX Error Hierarchy
 
 Typed exceptions for the entire CEX toolchain.
 Every tool should raise specific error types instead of bare Exception.
@@ -37,7 +37,7 @@ class CEXError(Exception):
 
 
 class BuildError(CEXError):
-    """8F pipeline build failure — artifact could not be produced."""
+    """8F pipeline build failure -- artifact could not be produced."""
 
     def __init__(self, message: str, stage: str = "", **ctx: object):
         super().__init__(message, code="BUILD_ERROR", context={"stage": stage, **ctx})
@@ -45,7 +45,7 @@ class BuildError(CEXError):
 
 
 class ValidationError(CEXError):
-    """Artifact validation failure — frontmatter, schema, or quality gate."""
+    """Artifact validation failure -- frontmatter, schema, or quality gate."""
 
     def __init__(self, message: str, path: str = "", gate: str = "", **ctx: object):
         super().__init__(message, code="VALIDATION_ERROR", context={"path": path, "gate": gate, **ctx})
@@ -54,7 +54,7 @@ class ValidationError(CEXError):
 
 
 class CompileError(CEXError):
-    """Compilation failure — .md to .yaml conversion failed."""
+    """Compilation failure -- .md to .yaml conversion failed."""
 
     def __init__(self, message: str, path: str = "", **ctx: object):
         super().__init__(message, code="COMPILE_ERROR", context={"path": path, **ctx})
@@ -62,7 +62,7 @@ class CompileError(CEXError):
 
 
 class IntentError(CEXError):
-    """Intent parsing failure — could not resolve kind/pillar from input."""
+    """Intent parsing failure -- could not resolve kind/pillar from input."""
 
     def __init__(self, message: str, intent: str = "", **ctx: object):
         super().__init__(message, code="INTENT_ERROR", context={"intent": intent, **ctx})
@@ -70,7 +70,7 @@ class IntentError(CEXError):
 
 
 class LLMError(CEXError):
-    """LLM API call failure — timeout, rate limit, or API error."""
+    """LLM API call failure -- timeout, rate limit, or API error."""
 
     def __init__(self, message: str, model: str = "", **ctx: object):
         super().__init__(message, code="LLM_ERROR", context={"model": model, **ctx})
@@ -78,7 +78,7 @@ class LLMError(CEXError):
 
 
 class ConfigError(CEXError):
-    """Configuration error — missing env var, invalid config, bad path."""
+    """Configuration error -- missing env var, invalid config, bad path."""
 
     def __init__(self, message: str, key: str = "", **ctx: object):
         super().__init__(message, code="CONFIG_ERROR", context={"key": key, **ctx})
@@ -86,7 +86,7 @@ class ConfigError(CEXError):
 
 
 class KindError(CEXError):
-    """Kind resolution failure — unknown kind or missing builder."""
+    """Kind resolution failure -- unknown kind or missing builder."""
 
     def __init__(self, message: str, kind: str = "", **ctx: object):
         super().__init__(message, code="KIND_ERROR", context={"kind": kind, **ctx})

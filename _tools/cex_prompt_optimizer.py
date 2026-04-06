@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""CEX Prompt Optimizer — score, rank, and improve builder instructions.
+"""CEX Prompt Optimizer -- score, rank, and improve builder instructions.
 
 Analyzes bld_instruction specs against build outcomes (learning records),
 identifies weak performers, and generates improvement suggestions.
@@ -218,7 +218,7 @@ def suggest_improvements(kind: str) -> list[str]:
     # Check instruction quality
     instr = load_iso(bdir, "bld_instruction", kind_slug)
     if not instr:
-        suggestions.append("CRITICAL: Missing bld_instruction spec — builder has no production guide")
+        suggestions.append("CRITICAL: Missing bld_instruction spec -- builder has no production guide")
     else:
         body = _strip_fm(instr)
         if len(body) < 500:
@@ -234,17 +234,17 @@ def suggest_improvements(kind: str) -> list[str]:
     # Check examples
     examples = load_iso(bdir, "bld_examples", kind_slug)
     if not examples:
-        suggestions.append("Missing bld_examples — no few-shot guidance for LLM")
+        suggestions.append("Missing bld_examples -- no few-shot guidance for LLM")
     else:
         body = _strip_fm(examples)
         example_count = body.count("## Example") + body.count("### Example")
         if example_count < 2:
-            suggestions.append(f"Only {example_count} example(s) found — add 2-3 diverse examples")
+            suggestions.append(f"Only {example_count} example(s) found -- add 2-3 diverse examples")
 
     # Check schema
     schema = load_iso(bdir, "bld_schema", kind_slug)
     if not schema:
-        suggestions.append("Missing bld_schema — no structural contract for validation")
+        suggestions.append("Missing bld_schema -- no structural contract for validation")
     else:
         body = _strip_fm(schema)
         if "required" not in body.lower():
@@ -255,12 +255,12 @@ def suggest_improvements(kind: str) -> list[str]:
     # Check quality gate
     qg = load_iso(bdir, "bld_quality_gate", kind_slug)
     if not qg:
-        suggestions.append("Missing bld_quality_gate — no kind-specific quality criteria")
+        suggestions.append("Missing bld_quality_gate -- no kind-specific quality criteria")
 
     # Check memory
     memory = load_iso(bdir, "bld_memory", kind_slug)
     if not memory:
-        suggestions.append("No bld_memory — builder has no persistent learning. Consider creating one.")
+        suggestions.append("No bld_memory -- builder has no persistent learning. Consider creating one.")
 
     # Check learning records
     records = load_learning_records()
@@ -290,7 +290,7 @@ def suggest_improvements(kind: str) -> list[str]:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="CEX Prompt Optimizer — builder analysis & improvement")
+    parser = argparse.ArgumentParser(description="CEX Prompt Optimizer -- builder analysis & improvement")
     parser.add_argument("--scan", action="store_true", help="Score all builders")
     parser.add_argument("--analyze", "-a", help="Analyze specific builder (kind name)")
     parser.add_argument("--suggest", "-s", help="Suggest improvements for a builder")

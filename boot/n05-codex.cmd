@@ -1,5 +1,5 @@
 @echo off
-:: CEX N05 — CEX-N05-OPERATIONS (FALLBACK: codex/o4-mini)
+:: CEX N05 -- CEX-N05-OPERATIONS (FALLBACK: codex/o4-mini)
 :: Only model available on ChatGPT subscription
 :: Generated 2026-04-02
 

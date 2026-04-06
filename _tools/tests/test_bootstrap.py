@@ -1,4 +1,4 @@
-"""Tests for cex_bootstrap.py — first-run brand setup."""
+"""Tests for cex_bootstrap.py -- first-run brand setup."""
 import sys
 import shutil
 from pathlib import Path

@@ -1,4 +1,4 @@
-"""Tests for cex_8f_runner.py — 8F Stateful Artifact Pipeline."""
+"""Tests for cex_8f_runner.py -- 8F Stateful Artifact Pipeline."""
 
 import sys
 from pathlib import Path
@@ -118,7 +118,7 @@ class TestHelpers:
 
 
 # =============================================================================
-# EightFRunner — Initialization
+# EightFRunner -- Initialization
 # =============================================================================
 
 class TestRunnerInit:
@@ -148,7 +148,7 @@ class TestRunnerInit:
 
 
 # =============================================================================
-# EightFRunner — F1 CONSTRAIN
+# EightFRunner -- F1 CONSTRAIN
 # =============================================================================
 
 class TestF1Constrain:
@@ -170,7 +170,7 @@ class TestF1Constrain:
 
 
 # =============================================================================
-# EightFRunner — F2 BECOME
+# EightFRunner -- F2 BECOME
 # =============================================================================
 
 class TestF2Become:
@@ -193,7 +193,7 @@ class TestF2Become:
 
 
 # =============================================================================
-# EightFRunner — F3 INJECT
+# EightFRunner -- F3 INJECT
 # =============================================================================
 
 class TestF3Inject:
@@ -220,7 +220,7 @@ class TestF3Inject:
 
 
 # =============================================================================
-# EightFRunner — _clean_llm_output
+# EightFRunner -- _clean_llm_output
 # =============================================================================
 
 class TestCleanLLMOutput:
@@ -254,7 +254,7 @@ class TestCleanLLMOutput:
 
 
 # =============================================================================
-# EightFRunner — _state_summary
+# EightFRunner -- _state_summary
 # =============================================================================
 
 class TestStateSummary:
@@ -281,7 +281,7 @@ class TestStateSummary:
 
 
 # =============================================================================
-# EightFRunner — F7 GOVERN (gate validation)
+# EightFRunner -- F7 GOVERN (gate validation)
 # =============================================================================
 
 class TestF7Govern:
@@ -331,7 +331,7 @@ class TestF7Govern:
 
 
 # =============================================================================
-# EightFRunner — Dry-Run Pipeline
+# EightFRunner -- Dry-Run Pipeline
 # =============================================================================
 
 class TestDryRunPipeline:

@@ -40,7 +40,7 @@ from pathlib import Path
 from datetime import datetime
 
 try:
-    import yaml  # noqa: F401 — optional, for future config loading
+    import yaml  # noqa: F401 -- optional, for future config loading
 except ImportError:
     yaml = None
 
@@ -569,7 +569,7 @@ def compose_prompt(
     if prior:
         parts.append("## Prior Builder Outputs")
         parts.append("These outputs were produced by earlier pipeline steps.")
-        parts.append("Use them as context — do not repeat their work.")
+        parts.append("Use them as context -- do not repeat their work.")
         parts.append("")
         for bid, out in prior.items():
             parts.append(f"### {bid} (score: {out.quality_score:.1f})")
@@ -753,7 +753,7 @@ class CrewRunner:
                 status="complete",
             )
         except FileNotFoundError:
-            # claude CLI not in PATH — dry-run fallback
+            # claude CLI not in PATH -- dry-run fallback
             fork_file.write_text(f"[FORK-DRY-RUN] {bid}\n{prompt[:500]}", encoding="utf-8")
             return BuilderOutput(
                 builder_id=bid,

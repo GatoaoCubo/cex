@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-cex_pipeline.py — 5-Stage CEX Build Engine
+cex_pipeline.py -- 5-Stage CEX Build Engine
 CAPTURE -> DECOMPOSE -> HYDRATE -> COMPILE -> ENVELOPE
 
 Transforms user input into complete CEX artifacts with dual output (.md + compiled/).
@@ -129,7 +129,7 @@ TYPE_ABBREV = {
 OUTPUT_PREFIXES = {"example": "ex", "template": "tpl", "builder": "bld"}
 
 
-# ── Utilities ───────────────────────────────────────────────────────
+# -- Utilities -------------------------------------------------------
 
 
 def load_yaml_file(path: Path) -> dict:
@@ -167,7 +167,7 @@ def find_pillar_for_type(type_name: str) -> str | None:
     return None
 
 
-# ── STAGE 1: CAPTURE ────────────────────────────────────────────────
+# -- STAGE 1: CAPTURE ------------------------------------------------
 
 
 def capture_cli(args) -> dict:
@@ -260,7 +260,7 @@ def capture_from_file(filepath: str) -> dict:
     }
 
 
-# ── STAGE 2: DECOMPOSE ─────────────────────────────────────────────
+# -- STAGE 2: DECOMPOSE ---------------------------------------------
 
 
 def decompose(input_data: dict) -> dict:
@@ -303,7 +303,7 @@ def decompose(input_data: dict) -> dict:
     }
 
 
-# ── STAGE 3: HYDRATE ────────────────────────────────────────────────
+# -- STAGE 3: HYDRATE ------------------------------------------------
 
 
 def hydrate(data: dict) -> dict:
@@ -463,7 +463,7 @@ def _build_body(data: dict, template: str | None, knowledge: str | None) -> str:
     return "\n".join(lines)
 
 
-# ── STAGE 4: COMPILE ────────────────────────────────────────────────
+# -- STAGE 4: COMPILE ------------------------------------------------
 
 
 def compile_artifact(data: dict) -> dict:
@@ -542,7 +542,7 @@ def _render_md(frontmatter: dict, body: str) -> str:
     return f"---\n{fm_str}---\n\n{body}\n"
 
 
-# ── STAGE 5: ENVELOPE ──────────────────────────────────────────────
+# -- STAGE 5: ENVELOPE ----------------------------------------------
 
 
 def envelope(data: dict, dry_run: bool = False) -> dict:
@@ -678,7 +678,7 @@ def _section_value(content: str):
     return content
 
 
-# ── MAIN ────────────────────────────────────────────────────────────
+# -- MAIN ------------------------------------------------------------
 
 
 def run_pipeline(input_data: dict, dry_run: bool = False) -> dict:

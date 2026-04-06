@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""CEX Agent Spawn — Fork/Spawn dual-mode dispatch for nuclei.
+"""CEX Agent Spawn -- Fork/Spawn dual-mode dispatch for nuclei.
 
 Pattern: OpenClaude AgentTool (forkSubagent.ts, runAgent.ts)
 Adapted for CEX nucleus dispatch with structured lifecycle management.
 
 Modes:
-  SPAWN  — Fresh context. Worker starts cold, needs full briefing.
-  FORK   — Inherited context. Worker continues from parent's state (directive only).
+  SPAWN  -- Fresh context. Worker starts cold, needs full briefing.
+  FORK   -- Inherited context. Worker continues from parent's state (directive only).
 
 Lifecycle:
   spawn/fork -> running -> completed | failed | stopped
@@ -274,7 +274,7 @@ created_at: {time.strftime('%Y-%m-%dT%H:%M:%S')}
     def send_message(self, worker_id: str, message: str):
         """Continue an existing worker with follow-up instruction.
 
-        Pattern: OpenClaude SendMessage — worker resumes with full context preserved.
+        Pattern: OpenClaude SendMessage -- worker resumes with full context preserved.
         Use this when the worker's context overlaps with the next task.
         """
         state = self.workers.get(worker_id)

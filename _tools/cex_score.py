@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
 """
-CEX Hybrid Scorer — 3-layer scoring: structural + rubric + semantic (LLM).
+CEX Hybrid Scorer -- 3-layer scoring: structural + rubric + semantic (LLM).
 
-Layer 1: STRUCTURAL (free, instant) — bytes, headings, tables, frontmatter
-Layer 2: RUBRIC (free, instant) — builder's quality_gate hard/soft checks
-Layer 3: SEMANTIC (1 LLM call, ~2K tokens) — only if layers 1+2 >= 8.5
+Layer 1: STRUCTURAL (free, instant) -- bytes, headings, tables, frontmatter
+Layer 2: RUBRIC (free, instant) -- builder's quality_gate hard/soft checks
+Layer 3: SEMANTIC (1 LLM call, ~2K tokens) -- only if layers 1+2 >= 8.5
 
 Weights (GDP D01): structural 30% + rubric 30% + semantic 40%
-Cache (GDP D03): by content hash — re-score only if file changed
+Cache (GDP D03): by content hash -- re-score only if file changed
 Evolve sees dimension breakdown (GDP D04) for targeted improvements.
 
 Score ranges:
-  9.0-9.3: Excellent — semantically rich, domain-specific, well-structured
-  8.5-8.9: Good — solid structure, may lack semantic depth
-  8.0-8.4: Acceptable — adequate but thin
+  9.0-9.3: Excellent -- semantically rich, domain-specific, well-structured
+  8.5-8.9: Good -- solid structure, may lack semantic depth
+  8.0-8.4: Acceptable -- adequate but thin
   <8.0: Needs rebuild
 """
 
@@ -188,12 +188,12 @@ def score_rubric(path: str) -> tuple[float, list[dict], list[str]]:
     # Find quality gate
     gate_path = _find_quality_gate(kind)
     if not gate_path:
-        # No rubric available — return neutral score
+        # No rubric available -- return neutral score
         return (7.5, [], [f"no quality gate for kind={kind}"])
 
     gate_content = open(gate_path, 'r', encoding='utf-8').read()
 
-    # Hard gates — binary pass/fail
+    # Hard gates -- binary pass/fail
     hard_gates = _parse_hard_gates(gate_content)
     hard_pass = 0
     for gate in hard_gates:
@@ -232,7 +232,7 @@ def score_rubric(path: str) -> tuple[float, list[dict], list[str]]:
 
     hard_ratio = hard_pass / max(len(hard_gates), 1)
 
-    # Soft dimensions — pattern-based scoring
+    # Soft dimensions -- pattern-based scoring
     soft_dims = _parse_soft_dimensions(gate_content)
     dim_scores = []
     total_weight = sum(d["weight"] for d in soft_dims) or 1.0
@@ -338,12 +338,12 @@ def score_semantic(path: str, structural: float, rubric_dims: list[dict]) -> tup
             for d in rubric_dims
         )
     else:
-        dim_list = """  S01: Factual concreteness — specific values, numbers, verifiable facts
-  S02: Atomicity — covers one concept without scope creep
-  S03: Searchability — tags and tldr enable retrieval
-  S04: Actionability — reader knows what to DO after reading
-  S05: Density — no filler, no padding, every sentence earns its place
-  S06: Domain expertise — shows deep knowledge, not surface-level"""
+        dim_list = """  S01: Factual concreteness -- specific values, numbers, verifiable facts
+  S02: Atomicity -- covers one concept without scope creep
+  S03: Searchability -- tags and tldr enable retrieval
+  S04: Actionability -- reader knows what to DO after reading
+  S05: Density -- no filler, no padding, every sentence earns its place
+  S06: Domain expertise -- shows deep knowledge, not surface-level"""
 
     prompt = f"""You are a quality reviewer scoring a knowledge artifact (kind: {kind}).
 
@@ -406,7 +406,7 @@ Return ONLY valid JSON (no markdown, no explanation):
 
 
 # ================================================================
-# CACHE — by content hash (GDP D03)
+# CACHE -- by content hash (GDP D03)
 # ================================================================
 
 def _content_hash(path: str) -> str:
@@ -432,7 +432,7 @@ def _save_cache(cache: dict):
 
 
 # ================================================================
-# HYBRID SCORER — combines all 3 layers
+# HYBRID SCORER -- combines all 3 layers
 # ================================================================
 
 def score_hybrid(path: str, use_cache: bool = True, force_semantic: bool = False,
@@ -527,7 +527,7 @@ def score_hybrid(path: str, use_cache: bool = True, force_semantic: bool = False
         final = structural * 0.3 + rubric * 0.3 + semantic * 0.4
         mode = "full"
     else:
-        # No semantic layer — blend structural + rubric only
+        # No semantic layer -- blend structural + rubric only
         final = structural * 0.5 + rubric * 0.5
         mode = "structural_only" if not rubric_dims else "hybrid"
         if verbose:
@@ -570,7 +570,7 @@ def score_hybrid(path: str, use_cache: bool = True, force_semantic: bool = False
 
 
 # ================================================================
-# BACKWARD COMPAT — score_artifact() still works everywhere
+# BACKWARD COMPAT -- score_artifact() still works everywhere
 # ================================================================
 
 def score_artifact(path, hybrid: bool = False) -> tuple[float, str]:
@@ -649,7 +649,7 @@ def main():
         return
 
     if args.hybrid:
-        # Hybrid mode — full 3-layer scoring
+        # Hybrid mode -- full 3-layer scoring
         print(f"{'Score':>5} | {'Str':>4} | {'Rub':>4} | {'Sem':>4} | {'Mode':<10} | {'Weakest':<20} | Path")
         print("-" * 110)
 
@@ -676,7 +676,7 @@ def main():
         print(f"<8.5: {sum(1 for s in all_scores if s < 8.5)}")
 
     else:
-        # Classic mode — structural only (fast)
+        # Classic mode -- structural only (fast)
         print(f"{'Score':>5} | {'Size':>6} | {'Notes':<40} | Path")
         print("-" * 100)
 

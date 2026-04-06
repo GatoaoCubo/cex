@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-cex_forge.py — O Forjador Universal CEX
+cex_forge.py -- O Forjador Universal CEX
 Gera prompts prontos para LLM que produzem artefatos CEX validos.
 
 Fluxo:
@@ -201,7 +201,7 @@ def build_prompt(
     sections = []
 
     # Header
-    sections.append(f"# CEX FORGE — Gere um artefato `{type_name}` (LP: {lp})")
+    sections.append(f"# CEX FORGE -- Gere um artefato `{type_name}` (LP: {lp})")
     sections.append("")
 
     # Role
@@ -397,7 +397,7 @@ def list_all_types(filter_lp: str | None = None) -> list[dict]:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="CEX Forge — Gerador Universal de Prompts para Artefatos CEX",
+        description="CEX Forge -- Gerador Universal de Prompts para Artefatos CEX",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Exemplos:

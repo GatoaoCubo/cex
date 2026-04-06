@@ -1,25 +1,25 @@
 #!/usr/bin/env python3
 """
-cex_evolve.py — Autonomous Experiment Loop (Karpathy AutoResearch pattern)
+cex_evolve.py -- Autonomous Experiment Loop (Karpathy AutoResearch pattern)
 
 Three modes:
-  agent   — TRUE AutoResearch via SDK: Python controls the loop, LLM
+  agent   -- TRUE AutoResearch via SDK: Python controls the loop, LLM
             generates creative hypotheses via execute_prompt(). Budget-
             tracked, provider-agnostic, no subprocess spawning.
             This is the Karpathy pattern done right.
 
-  auto    — Hybrid post-hook: heuristic pass (free) + agent mode only
+  auto    -- Hybrid post-hook: heuristic pass (free) + agent mode only
             if score < threshold. Designed to be called automatically
             after every artifact creation. Smart budget usage.
 
-  heuristic — Fast fallback: Python heuristics (no LLM) do mechanical
+  heuristic -- Fast fallback: Python heuristics (no LLM) do mechanical
               fixes (frontmatter, whitespace, filler). Useful for batch
               scoring when LLM budget is limited.
 
 3-file architecture (Karpathy original):
-  program.md  → strategy hints for the LLM (human-written, read-only)
-  target file → the ONE artifact the LLM improves per round
-  cex_score.py + cex_compile.py → immutable metric (never touched)
+  program.md  -> strategy hints for the LLM (human-written, read-only)
+  target file -> the ONE artifact the LLM improves per round
+  cex_score.py + cex_compile.py -> immutable metric (never touched)
 
 Usage:
   # True AutoResearch via SDK (budget-tracked):
@@ -96,7 +96,7 @@ def score_artifact(filepath: Path) -> Optional[float]:
     )
     # Parse score from output
     for line in result.stdout.split("\n"):
-        if "score:" in line.lower() or "→" in line:
+        if "score:" in line.lower() or "->" in line:
             match = re.search(r"(\d+\.\d+)", line)
             if match:
                 return float(match.group(1))
@@ -308,7 +308,7 @@ def apply_improvement(filepath: Path, suggestion: str) -> str:
             return f"removed {changes} filler phrases"
 
     if "improve_tldr" in suggestion or "shorten_tldr" in suggestion:
-        # Just flag it — needs LLM for good tldr rewrite
+        # Just flag it -- needs LLM for good tldr rewrite
         return "tldr flagged for manual review"
 
     if "polish" in suggestion:
@@ -345,7 +345,7 @@ def evolve_single(filepath: Path, target: float = 9.0, max_rounds: int = 5,
 
     if baseline_quality and baseline_quality >= target:
         if verbose:
-            print(f"  ✅ Already at {baseline_quality} (>= {target}). Skipping.")
+            print(f"  [OK] Already at {baseline_quality} (>= {target}). Skipping.")
         log_result(str(fp), 0, baseline_quality, baseline_density, "skip", "already at target")
         return {"status": "skip", "quality": baseline_quality, "rounds": 0}
 
@@ -378,7 +378,7 @@ def evolve_single(filepath: Path, target: float = 9.0, max_rounds: int = 5,
         # Validate
         if not validate_artifact(fp):
             if verbose:
-                print(f"  ❌ Compile failed. Reverting.")
+                print(f"  [FAIL] Compile failed. Reverting.")
             git_restore(fp)
             log_result(str(fp), round_num, 0, 0, "crash", f"compile fail after: {description}")
             continue
@@ -399,18 +399,18 @@ def evolve_single(filepath: Path, target: float = 9.0, max_rounds: int = 5,
             git_commit_keep(fp, f"[evolve] {fp.name}: {description} (q={new_quality})")
             log_result(str(fp), round_num, new_quality, new_density, "keep", description)
             if verbose:
-                print(f"  ✅ KEEP (improved to {new_quality})")
+                print(f"  [OK] KEEP (improved to {new_quality})")
 
             if new_quality >= target:
                 if verbose:
-                    print(f"  🎯 Target {target} reached!")
+                    print(f"  [>>] Target {target} reached!")
                 break
         else:
             # DISCARD
             git_restore(fp)
             log_result(str(fp), round_num, new_quality, new_density, "discard", description)
             if verbose:
-                print(f"  ↩️  DISCARD (no improvement: {new_quality} <= {best_quality})")
+                print(f"  <-  DISCARD (no improvement: {new_quality} <= {best_quality})")
 
     return {"status": "complete", "quality": best_quality, "rounds": rounds_run}
 
@@ -485,7 +485,7 @@ def show_report():
 
 
 # ============================================================
-# AGENT MODE — True AutoResearch via SDK (Python controls, LLM thinks)
+# AGENT MODE -- True AutoResearch via SDK (Python controls, LLM thinks)
 # ============================================================
 
 def _get_execute_prompt():
@@ -521,7 +521,7 @@ def evolve_agent(filepath: Path, budget_tokens: int = 50000,
                  target: float = 9.0, max_rounds: int = 10,
                  verbose: bool = True) -> dict:
     """
-    TRUE AutoResearch via SDK — Python controls the loop, LLM generates hypotheses.
+    TRUE AutoResearch via SDK -- Python controls the loop, LLM generates hypotheses.
 
     Architecture:
     - Python reads the artifact, sends it to LLM via execute_prompt()
@@ -530,7 +530,7 @@ def evolve_agent(filepath: Path, budget_tokens: int = 50000,
     - Budget tracked via cumulative token count from SDK metrics
     - Loop stops when: target reached, budget exhausted, or max_rounds hit
 
-    Goes through execute_prompt() → SDK cascade → tracked, budget-aware.
+    Goes through execute_prompt() -> SDK cascade -> tracked, budget-aware.
     No subprocess spawning. No CLI dependency. Works with any configured provider.
 
     Returns dict with: status, quality, rounds, tokens_used
@@ -547,7 +547,7 @@ def evolve_agent(filepath: Path, budget_tokens: int = 50000,
         print(f"[ERROR] Cannot import execute_prompt: {e}")
         return {"status": "error", "quality": 0, "rounds": 0, "tokens_used": 0}
 
-    # Baseline — use hybrid scoring for dimension breakdown
+    # Baseline -- use hybrid scoring for dimension breakdown
     try:
         from cex_score import score_hybrid
         hybrid_result = score_hybrid(str(fp), use_cache=False, force_semantic=True, verbose=verbose)
@@ -568,7 +568,7 @@ def evolve_agent(filepath: Path, budget_tokens: int = 50000,
 
     if baseline_quality >= target:
         if verbose:
-            print(f"  ✅ Already at {baseline_quality} (>= {target}). Skipping.")
+            print(f"  [OK] Already at {baseline_quality} (>= {target}). Skipping.")
         log_result(str(fp), 0, baseline_quality, baseline_density, "skip", "already at target")
         return {"status": "skip", "quality": baseline_quality, "rounds": 0, "tokens_used": 0}
 
@@ -594,14 +594,14 @@ def evolve_agent(filepath: Path, budget_tokens: int = 50000,
         # Budget check BEFORE calling LLM
         if tokens_used >= budget_tokens:
             if verbose:
-                print(f"\n  💰 Budget exhausted ({tokens_used:,}/{budget_tokens:,} tokens)")
+                print(f"\n  [$] Budget exhausted ({tokens_used:,}/{budget_tokens:,} tokens)")
             break
 
         remaining_budget = budget_tokens - tokens_used
         content = fp.read_text(encoding="utf-8")
         density = compute_density(fp)
 
-        # Build prompt — LLM sees artifact + history + strategy
+        # Build prompt -- LLM sees artifact + history + strategy
         history_summary = ""
         if experiment_log:
             recent = experiment_log[-5:]  # last 5 experiments
@@ -616,8 +616,8 @@ def evolve_agent(filepath: Path, budget_tokens: int = 50000,
                 desc = dim_info.get("description", dim_id) if isinstance(dim_info, dict) else dim_id
                 h_score = dim_info.get("heuristic", "?") if isinstance(dim_info, dict) else "?"
                 s_score = dim_info.get("semantic", "?") if isinstance(dim_info, dict) else dim_info
-                marker = " ← FIX THIS" if str(dim_id) == str(weakest_dim) else ""
-                dim_lines.append(f"  {dim_id}: {h_score}/10 (heuristic) | {s_score}/10 (semantic) — {desc}{marker}")
+                marker = " <- FIX THIS" if str(dim_id) == str(weakest_dim) else ""
+                dim_lines.append(f"  {dim_id}: {h_score}/10 (heuristic) | {s_score}/10 (semantic) -- {desc}{marker}")
             dim_section = "\n## Dimension Scores (focus on lowest)\n" + "\n".join(dim_lines)
             if dim_suggestion:
                 dim_section += f"\n\nPRIORITY FIX: {dim_suggestion}"
@@ -657,15 +657,15 @@ Nothing else."""
             response_text = execute_prompt(prompt)
         except SystemExit:
             if verbose:
-                print(f"  ❌ No LLM provider available. Stopping.")
+                print(f"  [FAIL] No LLM provider available. Stopping.")
             break
         except Exception as e:
             if verbose:
-                print(f"  ❌ LLM error: {e}")
+                print(f"  [FAIL] LLM error: {e}")
             log_result(str(fp), round_num, best_quality, density, "crash", f"llm_error: {e}")
             continue
 
-        # Track tokens (best effort — depends on SDK metrics being printed to stderr)
+        # Track tokens (best effort -- depends on SDK metrics being printed to stderr)
         # Conservative estimate if SDK doesn't report: ~4 chars per token
         estimated_tokens = (len(prompt) + len(response_text)) // 4
         tokens_used += estimated_tokens
@@ -675,7 +675,7 @@ Nothing else."""
 
         if not new_content:
             if verbose:
-                print(f"  ⚠️  Could not parse response. Skipping round.")
+                print(f"  [WARN]  Could not parse response. Skipping round.")
             log_result(str(fp), round_num, best_quality, density, "crash", "unparseable response")
             experiment_log.append({"round": round_num, "status": "crash", "description": "unparseable"})
             continue
@@ -689,7 +689,7 @@ Nothing else."""
         # Validate (compile check)
         if not validate_artifact(fp):
             if verbose:
-                print(f"  ❌ Compile failed. Reverting.")
+                print(f"  [FAIL] Compile failed. Reverting.")
             git_restore(fp)
             log_result(str(fp), round_num, 0, 0, "crash", f"compile fail: {hypothesis}")
             experiment_log.append({"round": round_num, "status": "crash", "description": hypothesis})
@@ -720,17 +720,17 @@ Nothing else."""
             log_result(str(fp), round_num, new_quality, new_density, "keep", hypothesis)
             experiment_log.append({"round": round_num, "status": "keep", "description": hypothesis})
             if verbose:
-                print(f"  ✅ KEEP ({new_quality})")
+                print(f"  [OK] KEEP ({new_quality})")
             if new_quality >= target:
                 if verbose:
-                    print(f"  🎯 Target {target} reached!")
+                    print(f"  [>>] Target {target} reached!")
                 break
         else:
             git_restore(fp)
             log_result(str(fp), round_num, new_quality, new_density, "discard", hypothesis)
             experiment_log.append({"round": round_num, "status": "discard", "description": hypothesis})
             if verbose:
-                print(f"  ↩️  DISCARD ({new_quality} <= {best_quality})")
+                print(f"  <-  DISCARD ({new_quality} <= {best_quality})")
 
     result = {
         "status": "complete",
@@ -744,7 +744,7 @@ Nothing else."""
     if verbose:
         print(f"\n{'='*60}")
         print(f"[AGENT COMPLETE]")
-        print(f"  Quality: {baseline_quality} → {best_quality} (Δ{result['delta']:+.1f})")
+        print(f"  Quality: {baseline_quality} -> {best_quality} (delta{result['delta']:+.1f})")
         print(f"  Rounds:  {rounds_run}/{max_rounds}")
         print(f"  Tokens:  {tokens_used:,}/{budget_tokens:,}")
         print(f"{'='*60}")
@@ -801,7 +801,7 @@ def _parse_agent_response(response: str) -> tuple[str, str]:
 
 
 # ============================================================
-# AUTO MODE — Hybrid post-hook (heuristic + agent if needed)
+# AUTO MODE -- Hybrid post-hook (heuristic + agent if needed)
 # ============================================================
 
 def evolve_auto(filepath: Path, threshold: float = 8.5,
@@ -812,12 +812,12 @@ def evolve_auto(filepath: Path, threshold: float = 8.5,
 
     Designed to be called automatically after every artifact creation.
     Flow:
-      1. Heuristic pass (Python-only, 0 tokens) — frontmatter, whitespace, filler
+      1. Heuristic pass (Python-only, 0 tokens) -- frontmatter, whitespace, filler
       2. Score via cex_score.py
-      3. If score >= threshold → done (zero LLM cost)
-      4. If score < threshold → spawn agent mode via SDK (budget-capped)
+      3. If score >= threshold -> done (zero LLM cost)
+      4. If score < threshold -> spawn agent mode via SDK (budget-capped)
 
-    This is the "Hybrid F" strategy — smart budget, automatic trigger.
+    This is the "Hybrid F" strategy -- smart budget, automatic trigger.
 
     Returns dict with: status, quality, mode_used, tokens_used
     """
@@ -838,7 +838,7 @@ def evolve_auto(filepath: Path, threshold: float = 8.5,
     # Step 2: Check if good enough
     if post_heuristic_quality >= threshold:
         if verbose:
-            print(f"  ✅ Above threshold ({threshold}). No LLM needed.")
+            print(f"  [OK] Above threshold ({threshold}). No LLM needed.")
         return {
             "status": "complete",
             "quality": post_heuristic_quality,
@@ -848,7 +848,7 @@ def evolve_auto(filepath: Path, threshold: float = 8.5,
 
     # Step 3: Agent mode via SDK (budget-capped)
     if verbose:
-        print(f"  ⚡ Score {post_heuristic_quality} < {threshold}. Spawning agent mode...")
+        print(f"  [!] Score {post_heuristic_quality} < {threshold}. Spawning agent mode...")
 
     agent_result = evolve_agent(
         fp,
@@ -893,7 +893,7 @@ def main():
     mode = sys.argv[1]
 
     if mode == "agent":
-        # TRUE AutoResearch via SDK — Python controls, LLM thinks
+        # TRUE AutoResearch via SDK -- Python controls, LLM thinks
         if len(sys.argv) < 3:
             print("Usage: cex_evolve.py agent <file> [--budget N] [--target N] [--max-rounds N]")
             return
@@ -923,7 +923,7 @@ def main():
         print(f"\n  Result: {json.dumps(result, indent=2)}")
 
     elif mode == "single":
-        # Heuristic fallback — no LLM
+        # Heuristic fallback -- no LLM
         if len(sys.argv) < 3:
             print("Usage: cex_evolve.py single <file> [--target N] [--max-rounds N]")
             return
@@ -936,7 +936,7 @@ def main():
         )
 
     elif mode == "sweep":
-        # Heuristic batch — no LLM
+        # Heuristic batch -- no LLM
         args = _parse_cli_args(sys.argv, start=2)
         evolve_sweep(
             target=float(args.get("target", 8.5)),

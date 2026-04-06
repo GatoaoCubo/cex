@@ -1,5 +1,5 @@
 """
-test_schema_evolution.py — 15 tests validating Schema Evolution v1.0.
+test_schema_evolution.py -- 15 tests validating Schema Evolution v1.0.
 
 Validates that all builder ISOs were correctly hydrated with the 8 universal
 patterns: keywords, triggers, geo_description, memory_scope, observation_types,

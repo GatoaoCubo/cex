@@ -1,4 +1,4 @@
-"""brand_audit.py — Score brand consistency across CEX artifacts.
+"""brand_audit.py -- Score brand consistency across CEX artifacts.
 
 Scans all artifacts referencing brand variables and scores consistency
 across 6 dimensions. Uses brand_config.yaml as reference.
@@ -293,15 +293,15 @@ def main():
         print(json.dumps(result, indent=2))
     else:
         print(f"[AUDIT] Brand Audit: {result['brand']}")
-        print(f"   Overall: {result['overall_score']:.3f} — {result['rating']}")
+        print(f"   Overall: {result['overall_score']:.3f} -- {result['rating']}")
         print()
         for dim, info in result["dimensions"].items():
             w = WEIGHTS[dim]
             emoji = "[OK]" if info["score"] >= 0.85 else ("[WARN]" if info["score"] >= 0.5 else "[FAIL]")
-            print(f"  {emoji} {dim} (×{w}): {info['score']:.2f}")
+            print(f"  {emoji} {dim} (x{w}): {info['score']:.2f}")
             if args.verbose and info["issues"]:
                 for issue in info["issues"]:
-                    print(f"     → {issue}")
+                    print(f"     -> {issue}")
 
         refs = result.get("references", {})
         if refs:

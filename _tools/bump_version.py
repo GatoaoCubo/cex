@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""CEX version bumper — increments LP or global version in VERSION.yaml."""
+"""CEX version bumper -- increments LP or global version in VERSION.yaml."""
 
 import sys
 if hasattr(sys.stdout, "reconfigure"): sys.stdout.reconfigure(encoding="utf-8")

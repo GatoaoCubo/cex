@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """
-cex_auto.py — Autonomous CEX Flywheel
+cex_auto.py -- Autonomous CEX Flywheel
 
-The self-driving loop: diagnose → plan → execute → validate → learn → repeat.
+The self-driving loop: diagnose -> plan -> execute -> validate -> learn -> repeat.
 
 Modes:
-  scan     — Diagnose system, find gaps, suggest actions (read-only)
-  plan     — Generate an execution plan from gaps
-  execute  — Run the plan (build artifacts, fix issues)
-  cycle    — Full loop: scan → plan → execute → validate (autonomous)
+  scan     -- Diagnose system, find gaps, suggest actions (read-only)
+  plan     -- Generate an execution plan from gaps
+  execute  -- Run the plan (build artifacts, fix issues)
+  cycle    -- Full loop: scan -> plan -> execute -> validate (autonomous)
 
 Usage:
   python _tools/cex_auto.py scan              # what needs work?
@@ -35,7 +35,7 @@ os.chdir(str(CEX_ROOT))
 
 
 # ============================================================
-# SCAN — Diagnose gaps
+# SCAN -- Diagnose gaps
 # ============================================================
 
 def scan_system() -> dict:
@@ -192,7 +192,7 @@ def scan_system() -> dict:
 
 
 # ============================================================
-# PLAN — Generate actions from gaps
+# PLAN -- Generate actions from gaps
 # ============================================================
 
 def generate_plan(scan_result: dict) -> list[dict]:
@@ -217,7 +217,7 @@ def generate_plan(scan_result: dict) -> list[dict]:
 
 
 # ============================================================
-# EXECUTE — Run plan steps
+# EXECUTE -- Run plan steps
 # ============================================================
 
 def execute_step(step: dict, dry_run: bool = False) -> dict:
@@ -284,36 +284,36 @@ def execute_step(step: dict, dry_run: bool = False) -> dict:
 
 
 # ============================================================
-# CYCLE — Full autonomous loop
+# CYCLE -- Full autonomous loop
 # ============================================================
 
 def run_cycle(max_actions: int = 10, dry_run: bool = False) -> dict:
-    """Full autonomous cycle: scan → plan → execute → validate."""
+    """Full autonomous cycle: scan -> plan -> execute -> validate."""
     print(f"\n{'='*60}")
-    print(f"  CEX AUTO CYCLE — {'DRY-RUN' if dry_run else 'EXECUTE'}")
+    print(f"  CEX AUTO CYCLE -- {'DRY-RUN' if dry_run else 'EXECUTE'}")
     print(f"{'='*60}\n")
 
     # SCAN
-    print("📡 Scanning system...")
+    print("[>>] Scanning system...")
     scan = scan_system()
     stats = scan["stats"]
     print(f"   Stats: {json.dumps(stats, indent=2)}")
     print(f"   Gaps found: {len(scan['gaps'])}")
 
     if not scan["gaps"]:
-        print("\n✅ System is healthy. No gaps found.")
+        print("\n[OK] System is healthy. No gaps found.")
         return {"status": "healthy", "actions": 0, "scan": scan}
 
     # PLAN
-    print("\n📋 Generating plan...")
+    print("\n[>>] Generating plan...")
     plan = generate_plan(scan)
     plan = plan[:max_actions]
     for step in plan:
-        symbol = {"critical": "🔴", "high": "🟠", "medium": "🟡", "low": "🟢"}.get(step["priority"], "⚪")
+        symbol = {"critical": "[!!]", "high": "[!!]", "medium": "[..]", "low": "[OK]"}.get(step["priority"], "[--]")
         print(f"   {symbol} [{step['step']}] {step['action'][:80]}")
 
     # EXECUTE
-    print(f"\n🚀 Executing {len(plan)} actions...")
+    print(f"\n[>>] Executing {len(plan)} actions...")
     results = []
     passed = 0
     for step in plan:
@@ -321,17 +321,17 @@ def run_cycle(max_actions: int = 10, dry_run: bool = False) -> dict:
         results.append(r)
         if r["success"]:
             passed += 1
-            print(f"   ✅ [{step['step']}] {r.get('note', 'done')[:60]}")
+            print(f"   [OK] [{step['step']}] {r.get('note', 'done')[:60]}")
         else:
-            print(f"   ❌ [{step['step']}] {r.get('note', r.get('output', 'failed'))[:60]}")
+            print(f"   [FAIL] [{step['step']}] {r.get('note', r.get('output', 'failed'))[:60]}")
 
     # VALIDATE
-    print("\n🔍 Post-cycle validation...")
+    print("\n[?] Post-cycle validation...")
     post_scan = scan_system()
     post_gaps = len(post_scan["gaps"])
     pre_gaps = len(scan["gaps"])
     delta = pre_gaps - post_gaps
-    print(f"   Gaps: {pre_gaps} → {post_gaps} (Δ{delta:+d})")
+    print(f"   Gaps: {pre_gaps} -> {post_gaps} (delta{delta:+d})")
 
     # COMMIT
     if not dry_run and passed > 0:
@@ -340,12 +340,12 @@ def run_cycle(max_actions: int = 10, dry_run: bool = False) -> dict:
             ["git", "commit", "-m", f"[AUTO] cycle: {passed}/{len(plan)} actions, {post_gaps} gaps remaining"],
             capture_output=True
         )
-        print("   📦 Changes committed")
+        print("   [>>] Changes committed")
 
     # Summary
     print(f"\n{'='*60}")
     print(f"  CYCLE COMPLETE: {passed}/{len(plan)} actions succeeded")
-    print(f"  Gaps: {pre_gaps} → {post_gaps}")
+    print(f"  Gaps: {pre_gaps} -> {post_gaps}")
     print(f"{'='*60}")
 
     cycle_result = {
@@ -394,7 +394,7 @@ def main():
         plan = json.loads(Path(args.plan_file).read_text(encoding="utf-8"))
         for step in plan:
             r = execute_step(step, args.dry_run)
-            status = "✅" if r["success"] else "❌"
+            status = "[OK]" if r["success"] else "[FAIL]"
             print(f"{status} [{step['step']}] {r.get('note', '')[:80]}")
 
     elif args.mode == "cycle":

@@ -1,4 +1,4 @@
-"""Integration test for N06 brand pipeline: inject → validate → propagate → audit.
+"""Integration test for N06 brand pipeline: inject -> validate -> propagate -> audit.
 
 Tests the full brand tool chain with a real brand_config.yaml (test fixture).
 """
@@ -19,7 +19,7 @@ from brand_audit import audit, score_config_completeness, score_archetype_alignm
 ROOT = Path(__file__).resolve().parent.parent.parent
 
 
-# ── Fixture: realistic brand_config ──
+# -- Fixture: realistic brand_config --
 
 BRAND_CONFIG_REAL = {
     "identity": {
@@ -29,7 +29,7 @@ BRAND_CONFIG_REAL = {
         "BRAND_MISSION": "We exist to make AI agent development systematic, reproducible, and accessible to every builder.",
         "BRAND_VISION": "A world where every software team has a fleet of specialized AI agents built on proven architectural patterns.",
         "BRAND_VALUES": ["systematic-rigor", "builder-empathy", "radical-transparency", "ship-daily", "quality-over-quantity"],
-        "BRAND_STORY": "Codexa started when a solo developer realized that every AI agent project repeated the same mistakes: vague prompts, no quality gates, no memory, no coordination. After building 50+ agents the hard way, the patterns crystallized into a system. 12 pillars. 8 functions. 99 kinds. CEX was born — not as a framework, but as a knowledge architecture that makes agents reliable. What took months now takes hours. What failed silently now fails loudly. What was artisanal is now systematic.",
+        "BRAND_STORY": "Codexa started when a solo developer realized that every AI agent project repeated the same mistakes: vague prompts, no quality gates, no memory, no coordination. After building 50+ agents the hard way, the patterns crystallized into a system. 12 pillars. 8 functions. 99 kinds. CEX was born -- not as a framework, but as a knowledge architecture that makes agents reliable. What took months now takes hours. What failed silently now fails loudly. What was artisanal is now systematic.",
     },
     "archetype": {
         "BRAND_ARCHETYPE": "sage",
@@ -43,7 +43,7 @@ BRAND_CONFIG_REAL = {
         "BRAND_VOICE_HUMOR": 2,
         "BRAND_VOICE_WARMTH": 3,
         "BRAND_VOICE_AUTHORITY": 5,
-        "BRAND_VOICE_DO": ["Use precise technical terms", "Show real code examples", "Be direct — say the thing"],
+        "BRAND_VOICE_DO": ["Use precise technical terms", "Show real code examples", "Be direct -- say the thing"],
         "BRAND_VOICE_DONT": ["Never use buzzwords without definition", "Never promise magic", "Never hide complexity"],
         "BRAND_LANGUAGE": "pt-BR",
     },
@@ -88,10 +88,10 @@ BRAND_CONFIG_REAL = {
 }
 
 
-# ── Test: Full Pipeline ──
+# -- Test: Full Pipeline --
 
 class TestBrandPipelineE2E:
-    """Integration test: validate → inject → propagate → audit."""
+    """Integration test: validate -> inject -> propagate -> audit."""
 
     def test_step1_validate_real_config(self):
         """Step 1: brand_config must pass validation with zero errors."""
@@ -193,13 +193,13 @@ class TestBrandPipelineE2E:
         assert score == 1.0, f"Archetype score {score}, issues: {issues}"
 
     def test_full_pipeline_sequence(self):
-        """Full E2E: validate → inject → propagate(dry) → audit."""
+        """Full E2E: validate -> inject -> propagate(dry) -> audit."""
         # 1. Validate
         v = validate(BRAND_CONFIG_REAL)
         assert v["valid"]
 
         # 2. Inject into template
-        tpl = "# {{BRAND_NAME}} — {{BRAND_TAGLINE}}\nArchetype: {{BRAND_ARCHETYPE}}"
+        tpl = "# {{BRAND_NAME}} -- {{BRAND_TAGLINE}}\nArchetype: {{BRAND_ARCHETYPE}}"
         injected = inject_brand(tpl, BRAND_CONFIG_REAL)
         assert "{{" not in injected
 

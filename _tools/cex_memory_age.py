@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""CEX Memory Aging — human-readable freshness + staleness caveats.
+"""CEX Memory Aging -- human-readable freshness + staleness caveats.
 
 Pattern: OpenClaude memdir/memoryAge.ts
 Adapted for CEX builder memory recall.
 
-Key insight from OpenClaude: "Models are poor at date arithmetic —
+Key insight from OpenClaude: "Models are poor at date arithmetic --
 a raw ISO timestamp doesn't trigger staleness reasoning the way
 '47 days ago' does."
 
@@ -12,7 +12,7 @@ Usage:
     from cex_memory_age import memory_age_label, memory_freshness_caveat
     
     label = memory_age_label(mtime)           # "47 days ago"
-    caveat = memory_freshness_caveat(mtime)   # "⚠ This memory is..."
+    caveat = memory_freshness_caveat(mtime)   # "[WARN] This memory is..."
 """
 
 import time
@@ -45,7 +45,7 @@ def memory_freshness_caveat(mtime: float) -> str:
     """Staleness warning for memories >1 day old. Empty string for fresh.
     
     Motivated by user reports of stale code-state memories being asserted
-    as fact — the citation makes stale claims sound authoritative, not less.
+    as fact -- the citation makes stale claims sound authoritative, not less.
     
     Returns empty string for today/yesterday (warning = noise for fresh).
     """

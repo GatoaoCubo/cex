@@ -1,5 +1,5 @@
 @echo off
-:: CEX N01 — CEX-N01-RESEARCH (Claude + Search APIs)
+:: CEX N01 -- CEX-N01-RESEARCH (Claude + Search APIs)
 :: MCP: fetch + firecrawl + exa + serper + markitdown
 
 title CEX-N01-RESEARCH

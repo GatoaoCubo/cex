@@ -1,8 +1,8 @@
-"""cex_bootstrap.py — First-run brand setup for CEX instances.
+"""cex_bootstrap.py -- First-run brand setup for CEX instances.
 
 When a user first clones/installs CEX, this script:
 1. Detects if .cex/brand/brand_config.yaml has real values (not template)
-2. If not → launches interactive Brand Discovery (N06)
+2. If not -> launches interactive Brand Discovery (N06)
 3. Validates the filled config
 4. Propagates brand to all nuclei
 5. Generates branded CLAUDE.md header
@@ -141,9 +141,9 @@ def update_boot_titles(config: dict) -> None:
 
 
 def bootstrap_interactive(config: dict) -> dict:
-    """Interactive brand setup — minimal questions for quick bootstrap."""
+    """Interactive brand setup -- minimal questions for quick bootstrap."""
     print("\n" + "=" * 60)
-    print("  CEX BOOTSTRAP — The X is YOUR brand")
+    print("  CEX BOOTSTRAP -- The X is YOUR brand")
     print("=" * 60)
     print()
     print("  CEX is a generic AI brain. This bootstrap makes it YOURS.")
@@ -168,7 +168,7 @@ def bootstrap_interactive(config: dict) -> dict:
                 return answer
             if not required:
                 return current
-            print("    (required — please enter a value)")
+            print("    (required -- please enter a value)")
 
     # Phase 1: Identity (required)
     print("--- IDENTITY ---")
@@ -284,7 +284,7 @@ def run_bootstrap(config: dict, interactive: bool = True) -> bool:
 
 def main():
     import argparse
-    parser = argparse.ArgumentParser(description="CEX Bootstrap — fill the X with YOUR brand")
+    parser = argparse.ArgumentParser(description="CEX Bootstrap -- fill the X with YOUR brand")
     parser.add_argument("--check", action="store_true", help="Check if bootstrapped")
     parser.add_argument("--from-file", help="Non-interactive: load brand values from YAML file")
     parser.add_argument("--reset", action="store_true", help="Clear brand and re-bootstrap")

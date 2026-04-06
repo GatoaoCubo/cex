@@ -1,5 +1,5 @@
 @echo off
-:: CEX N05 — CEX-N05-OPERATIONS (FALLBACK: claude/sonnet)
+:: CEX N05 -- CEX-N05-OPERATIONS (FALLBACK: claude/sonnet)
 :: When codex/o3 is unavailable
 :: Generated 2026-04-02
 

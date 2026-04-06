@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """
-cex_mission.py — Mission Executor: high-level goal → decomposed tasks → artifacts.
+cex_mission.py -- Mission Executor: high-level goal -> decomposed tasks -> artifacts.
 
 The capstone of CEX autonomy. Takes a mission description, decomposes it into
 concrete artifact-building tasks, and executes them via 8F Runner.
 
 Modes:
-  decompose  — Break mission into artifact intents (read-only)
-  execute    — Decompose + build all artifacts
-  status     — Check progress of running mission
+  decompose  -- Break mission into artifact intents (read-only)
+  execute    -- Decompose + build all artifacts
+  status     -- Check progress of running mission
 
 Usage:
   python _tools/cex_mission.py decompose "build analytics dashboard system"
@@ -51,7 +51,7 @@ EXTENDED_KINDS = [
     {"kind": "dag", "desc": "dependency graph"},
 ]
 
-# Mission complexity → how many kinds to generate
+# Mission complexity -> how many kinds to generate
 COMPLEXITY = {
     "minimal": SYSTEM_TEMPLATE[:4],          # agent, system_prompt, KC, agent_card
     "standard": SYSTEM_TEMPLATE,             # 7 core kinds
@@ -66,7 +66,7 @@ def decompose_mission(mission: str, nucleus: str = None,
     tasks = []
 
     for i, k in enumerate(kinds, 1):
-        intent = f"create {k['kind']} for {mission} — {k['desc']}"
+        intent = f"create {k['kind']} for {mission} -- {k['desc']}"
         task = {
             "step": i,
             "kind": k["kind"],
@@ -123,23 +123,23 @@ def execute_task(task: dict, dry_run: bool = False) -> dict:
 
 def run_mission(mission: str, nucleus: str = None, complexity: str = "standard",
                 dry_run: bool = False) -> dict:
-    """Full mission execution: decompose → execute → validate → commit."""
+    """Full mission execution: decompose -> execute -> validate -> commit."""
     print(f"\n{'='*60}")
-    print(f"  CEX MISSION EXECUTOR — {'DRY-RUN' if dry_run else 'EXECUTE'}")
+    print(f"  CEX MISSION EXECUTOR -- {'DRY-RUN' if dry_run else 'EXECUTE'}")
     print(f"{'='*60}")
     print(f"  Mission: {mission}")
     print(f"  Nucleus: {nucleus or 'auto'}")
     print(f"  Complexity: {complexity}")
 
     # DECOMPOSE
-    print(f"\n📋 Decomposing mission...")
+    print(f"\n[>>] Decomposing mission...")
     tasks = decompose_mission(mission, nucleus, complexity)
     print(f"   Generated {len(tasks)} tasks:")
     for t in tasks:
-        print(f"   [{t['step']}] {t['kind']:20s} — {t['intent'][:50]}...")
+        print(f"   [{t['step']}] {t['kind']:20s} -- {t['intent'][:50]}...")
 
     # EXECUTE
-    print(f"\n🚀 Executing tasks...")
+    print(f"\n[>>] Executing tasks...")
     results = []
     passed = 0
     failed = 0
@@ -152,15 +152,15 @@ def run_mission(mission: str, nucleus: str = None, complexity: str = "standard",
         if result["passed"]:
             passed += 1
             path = result.get("path", "N/A")
-            print(f"   ✅ PASS ({result['elapsed_s']}s) → {path}")
+            print(f"   [OK] PASS ({result['elapsed_s']}s) -> {path}")
         else:
             failed += 1
             err = result.get("error", "gates failed")
-            print(f"   ❌ FAIL ({result['elapsed_s']}s) — {err}")
+            print(f"   [FAIL] FAIL ({result['elapsed_s']}s) -- {err}")
 
     # VALIDATE
     if not dry_run and passed > 0:
-        print(f"\n🔍 Post-mission validation...")
+        print(f"\n[?] Post-mission validation...")
         r = subprocess.run(
             [sys.executable, "_tools/cex_hooks.py", "validate-all"],
             capture_output=True, text=True, timeout=30
@@ -174,10 +174,10 @@ def run_mission(mission: str, nucleus: str = None, complexity: str = "standard",
         subprocess.run(["git", "add", "-A"], capture_output=True)
         subprocess.run(
             ["git", "commit", "-m",
-             f"[MISSION] {mission[:50]} — {passed}/{len(tasks)} artifacts built"],
+             f"[MISSION] {mission[:50]} -- {passed}/{len(tasks)} artifacts built"],
             capture_output=True
         )
-        print("   📦 Mission committed to git")
+        print("   [>>] Mission committed to git")
 
     # SUMMARY
     total_time = sum(r["elapsed_s"] for r in results)
@@ -228,7 +228,7 @@ def show_status():
 
     for rp in reports[:5]:
         data = json.loads(rp.read_text(encoding="utf-8"))
-        status = "✅" if data["failed"] == 0 else "⚠️"
+        status = "[OK]" if data["failed"] == 0 else "[WARN]"
         print(f"  {status} {data['timestamp'][:16]}")
         print(f"     Mission: {data['mission'][:50]}")
         print(f"     Results: {data['passed']}/{data['total']} PASS | {data['elapsed_s']}s")

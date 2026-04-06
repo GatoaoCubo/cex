@@ -1,4 +1,4 @@
-"""Tests for cex_doctor.py — Health check."""
+"""Tests for cex_doctor.py -- Health check."""
 
 import sys
 from pathlib import Path

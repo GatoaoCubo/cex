@@ -1,5 +1,5 @@
 @echo off
-:: CEX N04 — Knowledge Nucleus (CLAUDE OVERRIDE)
+:: CEX N04 -- Knowledge Nucleus (CLAUDE OVERRIDE)
 title CEX-N04-KNOWLEDGE
 set CLAUDECODE=
 set CEX_NUCLEUS=N04

@@ -114,7 +114,7 @@ def main():
         page.screenshot(path=str(SS_DIR / "nlm_ss_02.png"))
         print(f"  URL after create: {page.url}")
 
-        # 3. Look for source upload dialog — click "Texto copiado" / "Copied text"
+        # 3. Look for source upload dialog -- click "Texto copiado" / "Copied text"
         print("\n[STEP 3] Looking for 'Texto copiado' source option...")
         time.sleep(2)
 

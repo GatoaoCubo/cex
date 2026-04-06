@@ -1,4 +1,4 @@
-"""brand_propagate.py — Push brand context to all nuclei prompts.
+"""brand_propagate.py -- Push brand context to all nuclei prompts.
 
 Reads .cex/brand/brand_config.yaml and injects relevant variables into
 each nucleus's system prompt, agent card, and boot file.

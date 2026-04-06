@@ -1,4 +1,4 @@
-"""Tests for cex_score.py — Artifact quality scoring."""
+"""Tests for cex_score.py -- Artifact quality scoring."""
 
 import sys
 from pathlib import Path
