@@ -3,6 +3,11 @@
     "postgres": {
       "command": "cmd",
       "args": ["/c", "npx", "-y", "@anthropic-ai/mcp-server-postgres"]
+    },
+    "github": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@anthropic/mcp-server-github"],
+      "env": { "GITHUB_TOKEN": "${GITHUB_TOKEN}" }
     }
   }
 }

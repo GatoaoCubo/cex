@@ -1,17 +1,22 @@
 ---
 glob: "**"
 alwaysApply: true
-description: "8F Pipeline enforcement — every artifact build MUST follow 8 functions"
+description: "8F Universal Reasoning Protocol — every nucleus, every task, every time"
 ---
 
-# 8F Pipeline Enforcement
+# 8F Universal Reasoning Protocol
 
-**MANDATORY on every build request. No exceptions. No shortcuts.**
+**MANDATORY for ALL nuclei (N01-N07). Every task. No exceptions.**
+
+8F is not a "build checklist" — it's how CEX THINKS. Whether you're researching,
+writing copy, building code, organizing knowledge, deploying, pricing, or orchestrating
+— you follow the same 8 reasoning steps. This is what makes a 5-word user input
+produce professional output: the 8F pipeline does the work the user can't.
 
 ## Detection
 
-When user asks to CREATE, BUILD, GENERATE, SCAFFOLD, or PRODUCE any artifact:
-THIS RULE ACTIVATES. Execute all 8 functions in order.
+ANY task activates 8F. Not just "build" — also research, analyze, write, plan,
+deploy, price, orchestrate. If a nucleus receives work, 8F runs.
 
 ## The 8 Functions (execute in sequence, show evidence)
 
@@ -96,9 +101,34 @@ F8 COLLABORATE: saved P02/agent_x.md. Compiled. Committed.
 ===================
 ```
 
+## Why 8F Matters (The Leverage Principle)
+
+The user will ALWAYS have a knowledge gap. Their input will be vague, incomplete,
+non-technical. CEX compensates by running 8F on every input:
+
+```
+User: "make me a landing page"  (5 words, zero spec)
+                │
+  F1 CONSTRAIN  │→ kind=landing_page, pillar=P05, schema loaded, constraints set
+  F2 BECOME     │→ landing-page-builder loaded (13 ISOs), sin lens injected
+  F3 INJECT     │→ 10 context sources: KC, examples, memory, brand, similar artifacts
+  F4 REASON     │→ plan: 12 sections, mobile-first, Tailwind, conversion-optimized
+  F5 CALL       │→ tools executed, references fetched, sub-agents if needed
+  F6 PRODUCE    │→ complete HTML page (responsive, dark mode, SEO, a11y)
+  F7 GOVERN     │→ quality gate: 7 HARD gates, retry if < 8.0
+  F8 COLLABORATE│→ saved, compiled, committed, signaled
+                │
+                ▼
+Output: production-ready landing page (5 words in → professional artifact out)
+```
+
+This IS the product. The 8F pipeline is the force multiplier that makes CEX
+outperform raw LLM calls. Every nucleus uses it. Every time.
+
 ## Anti-Patterns (BLOCKED)
 
-- Generating artifacts without showing F1-F8 trace
+- Processing a task without 8F trace — ANY task, not just builds
 - Skipping F7 validation
 - Saving without F8 (compile + commit + signal)
-- "I'll just write a quick..." — NO. Every build goes through 8F.
+- "I'll just do a quick..." — NO. Every task goes through 8F.
+- N07 dispatching without F1 (constraining scope) and F4 (planning approach)

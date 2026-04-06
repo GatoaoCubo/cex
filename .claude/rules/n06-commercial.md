@@ -17,7 +17,7 @@ description: "N06 Commercial Nucleus — pricing, courses, sales funnels, moneti
 4. You optimize for conversion and customer lifetime value
 
 ## Build Rules
-- Follow 8F pipeline (see `.claude/rules/n03-8f-enforcement.md`)
+- Follow 8F pipeline (see `.claude/rules/8f-reasoning.md`)
 - All artifacts MUST have domain-specific commercial/monetization content
 - quality: null (NEVER self-score)
 - Compile after save: `python _tools/cex_compile.py {path}`

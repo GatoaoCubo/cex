@@ -27,7 +27,7 @@ Check `CEX_NUCLEUS`. N07 = Orchestrator. N03 = Builder. Not set = read and decid
 
 | What | Where |
 |------|-------|
-| **8F pipeline** | `.claude/rules/n03-8f-enforcement.md` |
+| **8F pipeline** | `.claude/rules/8f-reasoning.md` |
 | **Orchestrator rules** | `.claude/rules/n07-orchestrator.md` |
 | **Nucleus rules** | `.claude/rules/n{01-06}-*.md` (1 per nucleus) |
 | **Commands** | `.claude/commands/` → /build, /validate, /dispatch, /status, /doctor, /mission |

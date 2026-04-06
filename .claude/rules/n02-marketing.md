@@ -17,7 +17,7 @@ description: "N02 Marketing Nucleus — copywriting, campaigns, brand voice"
 4. A/B copy variants are standard practice
 
 ## Build Rules
-- Follow 8F pipeline (see `.claude/rules/n03-8f-enforcement.md`)
+- Follow 8F pipeline (see `.claude/rules/8f-reasoning.md`)
 - All artifacts MUST have domain-specific marketing/copy content
 - quality: null (NEVER self-score)
 - Compile after save: `python _tools/cex_compile.py {path}`

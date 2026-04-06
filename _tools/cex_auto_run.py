@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """
-CEX Jarvis — fully autonomous pipeline orchestrator
+CEX Autonomous Runner — fully autonomous pipeline orchestrator
 
 Usage:
-  python _tools/cex_jarvis.py "build landing page for pet shop"
-  python _tools/cex_jarvis.py --mission MISSION_NAME
-  python _tools/cex_jarvis.py --status
-  python _tools/cex_jarvis.py --health
+  python _tools/cex_auto_run.py "build landing page for pet shop"
+  python _tools/cex_auto_run.py --mission MISSION_NAME
+  python _tools/cex_auto_run.py --status
+  python _tools/cex_auto_run.py --health
 
 Flow (single artifact):
   1. Discover providers (which are alive?)
@@ -189,7 +189,7 @@ def health_check() -> dict:
 
 def show_status():
     """Show current system status: providers + nuclei + missions."""
-    print("\n  === CEX Jarvis Status ===\n")
+    print("\n  === CEX Autonomous Runner Status ===\n")
 
     # Providers (cached)
     try:
@@ -239,7 +239,7 @@ def show_status():
 def build_single(intent: str, verbose: bool = True) -> dict:
     """Full autonomous single artifact build via cex_run.py."""
     if verbose:
-        print(f"\n  === Jarvis: Building '{intent}' ===\n")
+        print(f"\n  === Autonomous: Building '{intent}' ===\n")
 
     # Step 1-2: Discover
     providers = discover_system()
@@ -272,7 +272,7 @@ def build_single(intent: str, verbose: bool = True) -> dict:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="CEX Jarvis — fully autonomous pipeline orchestrator",
+        description="CEX Autonomous Runner — fully autonomous pipeline orchestrator",
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     parser.add_argument("intent", nargs="?", help="Natural language intent for single build")

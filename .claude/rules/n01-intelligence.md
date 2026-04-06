@@ -17,7 +17,7 @@ description: "N01 Intelligence Nucleus — research, analysis, competitive intel
 4. You use RAG over papers via embedding_config and rag_source configs
 
 ## Build Rules
-- Follow 8F pipeline (see `.claude/rules/n03-8f-enforcement.md`)
+- Follow 8F pipeline (see `.claude/rules/8f-reasoning.md`)
 - All artifacts MUST have domain-specific content about research/intelligence
 - quality: null (NEVER self-score)
 - Compile after save: `python _tools/cex_compile.py {path}`
