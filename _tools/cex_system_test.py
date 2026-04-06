@@ -279,6 +279,45 @@ def test_kc_library():
         test("kc:dir", False, "library/kind/ not found")
 
 
+def test_e2e(quick: bool = True):
+    """Test E2E stress scenarios via cex_e2e_test.py."""
+    print("\n=== E2E STRESS TESTS ===")
+    e2e_script = CEX_ROOT / "_tools" / "cex_e2e_test.py"
+    if not e2e_script.exists():
+        test("e2e:script_exists", False, "cex_e2e_test.py MISSING")
+        return
+
+    test("e2e:script_exists", True)
+
+    # Config exists
+    e2e_config = CEX_ROOT / "_docs" / "tests" / "e2e_config.yaml"
+    test("e2e:config_exists", e2e_config.exists())
+
+    if not e2e_config.exists():
+        return
+
+    # Run in quick (dry-run) mode -- no LLM calls
+    mode_args = ["--all", "--quick"] if quick else ["--all", "--full"]
+    rc, out, err = run_cmd(
+        [sys.executable, str(e2e_script)] + mode_args,
+        timeout=180,
+    )
+    full = (out or "") + (err or "")
+
+    # Parse summary line: "E2E: N/M passed"
+    m = re.search(r"E2E:\s+(\d+)/(\d+)\s+passed", full)
+    if m:
+        passed, total = int(m.group(1)), int(m.group(2))
+        test("e2e:scenarios_pass", passed == total,
+             f"{passed}/{total} scenarios passed")
+    else:
+        test("e2e:runs", rc == 0, f"exit={rc}, output={full[:150]}")
+
+    # Check JSON report was written
+    results_file = CEX_ROOT / "_docs" / "tests" / "e2e_results.json"
+    test("e2e:report_written", results_file.exists())
+
+
 def test_git():
     """Test git state."""
     print("\n=== GIT ===")
@@ -318,6 +357,7 @@ def main():
     test_infra()
     test_runner_dryrun()
     test_runner_execute(quick=args.quick)
+    test_e2e(quick=args.quick)
     test_kc_library()
     test_git()
 

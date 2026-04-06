@@ -1,0 +1,441 @@
+{
+  "timestamp": "2026-04-06T21:53:08.121282+00:00",
+  "version": "1.0.0",
+  "summary": {
+    "total": 3,
+    "passed": 3,
+    "failed": 0,
+    "avg_quality": null
+  },
+  "scenarios": [
+    {
+      "name": "petshop",
+      "input": "faz um CRM pra pet shop",
+      "mode": "quick",
+      "status": "PASS",
+      "checks": [],
+      "kinds_tested": [
+        {
+          "kind": "landing_page",
+          "checks": [
+            {
+              "check": "runner_exits_clean",
+              "passed": true,
+              "detail": "exit=0"
+            },
+            {
+              "check": "f1_constrain_fires",
+              "passed": true,
+              "detail": "functions=['F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8']"
+            },
+            {
+              "check": "f2_become_fires",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "check": "f3_inject_fires",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "check": "artifact_produced",
+              "passed": true,
+              "detail": "words=1862, has_prompt=True"
+            },
+            {
+              "check": "prompt_structure",
+              "passed": true,
+              "detail": "identity=False, constraints=True, instruction=True, task=True"
+            }
+          ],
+          "score": null,
+          "trace": {
+            "functions_fired": [
+              "F1",
+              "F2",
+              "F3",
+              "F4",
+              "F5",
+              "F6",
+              "F7",
+              "F8"
+            ],
+            "kind": "landing_page",
+            "pillar": "P05",
+            "verdict": "UNKNOWN",
+            "gates_passed": 0,
+            "gates_total": 0,
+            "retries": 0,
+            "artifact_words": 1862,
+            "output_path": "",
+            "has_prompt": true
+          }
+        },
+        {
+          "kind": "content_monetization",
+          "checks": [
+            {
+              "check": "runner_exits_clean",
+              "passed": true,
+              "detail": "exit=0"
+            },
+            {
+              "check": "f1_constrain_fires",
+              "passed": true,
+              "detail": "functions=['F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8']"
+            },
+            {
+              "check": "f2_become_fires",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "check": "f3_inject_fires",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "check": "artifact_produced",
+              "passed": true,
+              "detail": "words=4004, has_prompt=True"
+            },
+            {
+              "check": "prompt_structure",
+              "passed": true,
+              "detail": "identity=False, constraints=True, instruction=True, task=True"
+            }
+          ],
+          "score": null,
+          "trace": {
+            "functions_fired": [
+              "F1",
+              "F2",
+              "F3",
+              "F4",
+              "F5",
+              "F6",
+              "F7",
+              "F8"
+            ],
+            "kind": "content_monetization",
+            "pillar": "P04",
+            "verdict": "UNKNOWN",
+            "gates_passed": 0,
+            "gates_total": 0,
+            "retries": 0,
+            "artifact_words": 4004,
+            "output_path": "",
+            "has_prompt": true
+          }
+        },
+        {
+          "kind": "agent",
+          "checks": [
+            {
+              "check": "runner_exits_clean",
+              "passed": true,
+              "detail": "exit=0"
+            },
+            {
+              "check": "f1_constrain_fires",
+              "passed": true,
+              "detail": "functions=['F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8']"
+            },
+            {
+              "check": "f2_become_fires",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "check": "f3_inject_fires",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "check": "artifact_produced",
+              "passed": true,
+              "detail": "words=4243, has_prompt=True"
+            },
+            {
+              "check": "prompt_structure",
+              "passed": true,
+              "detail": "identity=False, constraints=True, instruction=True, task=True"
+            }
+          ],
+          "score": null,
+          "trace": {
+            "functions_fired": [
+              "F1",
+              "F2",
+              "F3",
+              "F4",
+              "F5",
+              "F6",
+              "F7",
+              "F8"
+            ],
+            "kind": "agent",
+            "pillar": "P02",
+            "verdict": "FAIL",
+            "gates_passed": 2,
+            "gates_total": 6,
+            "retries": 3,
+            "artifact_words": 4243,
+            "output_path": "p01_kc_{slug}.md + density report.",
+            "has_prompt": true
+          }
+        }
+      ],
+      "total_elapsed_ms": 19902
+    },
+    {
+      "name": "instagram",
+      "input": "preciso de conteudo pro instagram",
+      "mode": "quick",
+      "status": "PASS",
+      "checks": [],
+      "kinds_tested": [
+        {
+          "kind": "prompt_template",
+          "checks": [
+            {
+              "check": "runner_exits_clean",
+              "passed": true,
+              "detail": "exit=0"
+            },
+            {
+              "check": "f1_constrain_fires",
+              "passed": true,
+              "detail": "functions=['F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8']"
+            },
+            {
+              "check": "f2_become_fires",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "check": "f3_inject_fires",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "check": "artifact_produced",
+              "passed": true,
+              "detail": "words=4698, has_prompt=True"
+            },
+            {
+              "check": "prompt_structure",
+              "passed": true,
+              "detail": "identity=False, constraints=True, instruction=True, task=True"
+            }
+          ],
+          "score": null,
+          "trace": {
+            "functions_fired": [
+              "F1",
+              "F2",
+              "F3",
+              "F4",
+              "F5",
+              "F6",
+              "F7",
+              "F8"
+            ],
+            "kind": "prompt_template",
+            "pillar": "P03",
+            "verdict": "UNKNOWN",
+            "gates_passed": 0,
+            "gates_total": 0,
+            "retries": 0,
+            "artifact_words": 4698,
+            "output_path": "",
+            "has_prompt": true
+          }
+        },
+        {
+          "kind": "schedule",
+          "checks": [
+            {
+              "check": "runner_exits_clean",
+              "passed": true,
+              "detail": "exit=0"
+            },
+            {
+              "check": "f1_constrain_fires",
+              "passed": true,
+              "detail": "functions=['F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8']"
+            },
+            {
+              "check": "f2_become_fires",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "check": "f3_inject_fires",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "check": "artifact_produced",
+              "passed": true,
+              "detail": "words=4185, has_prompt=True"
+            },
+            {
+              "check": "prompt_structure",
+              "passed": true,
+              "detail": "identity=False, constraints=True, instruction=True, task=True"
+            }
+          ],
+          "score": null,
+          "trace": {
+            "functions_fired": [
+              "F1",
+              "F2",
+              "F3",
+              "F4",
+              "F5",
+              "F6",
+              "F7",
+              "F8"
+            ],
+            "kind": "schedule",
+            "pillar": "P12",
+            "verdict": "FAIL",
+            "gates_passed": 2,
+            "gates_total": 6,
+            "retries": 3,
+            "artifact_words": 4185,
+            "output_path": "",
+            "has_prompt": true
+          }
+        }
+      ],
+      "total_elapsed_ms": 8338
+    },
+    {
+      "name": "docs",
+      "input": "documenta esse projeto",
+      "mode": "quick",
+      "status": "PASS",
+      "checks": [],
+      "kinds_tested": [
+        {
+          "kind": "knowledge_card",
+          "checks": [
+            {
+              "check": "runner_exits_clean",
+              "passed": true,
+              "detail": "exit=0"
+            },
+            {
+              "check": "f1_constrain_fires",
+              "passed": true,
+              "detail": "functions=['F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8']"
+            },
+            {
+              "check": "f2_become_fires",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "check": "f3_inject_fires",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "check": "artifact_produced",
+              "passed": true,
+              "detail": "words=4495, has_prompt=True"
+            },
+            {
+              "check": "prompt_structure",
+              "passed": true,
+              "detail": "identity=False, constraints=True, instruction=True, task=True"
+            }
+          ],
+          "score": null,
+          "trace": {
+            "functions_fired": [
+              "F1",
+              "F2",
+              "F3",
+              "F4",
+              "F5",
+              "F6",
+              "F7",
+              "F8"
+            ],
+            "kind": "knowledge_card",
+            "pillar": "P01",
+            "verdict": "FAIL",
+            "gates_passed": 2,
+            "gates_total": 6,
+            "retries": 3,
+            "artifact_words": 4495,
+            "output_path": "",
+            "has_prompt": true
+          }
+        },
+        {
+          "kind": "context_doc",
+          "checks": [
+            {
+              "check": "runner_exits_clean",
+              "passed": true,
+              "detail": "exit=0"
+            },
+            {
+              "check": "f1_constrain_fires",
+              "passed": true,
+              "detail": "functions=['F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8']"
+            },
+            {
+              "check": "f2_become_fires",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "check": "f3_inject_fires",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "check": "artifact_produced",
+              "passed": true,
+              "detail": "words=4355, has_prompt=True"
+            },
+            {
+              "check": "prompt_structure",
+              "passed": true,
+              "detail": "identity=False, constraints=True, instruction=True, task=True"
+            }
+          ],
+          "score": null,
+          "trace": {
+            "functions_fired": [
+              "F1",
+              "F2",
+              "F3",
+              "F4",
+              "F5",
+              "F6",
+              "F7",
+              "F8"
+            ],
+            "kind": "context_doc",
+            "pillar": "P01",
+            "verdict": "FAIL",
+            "gates_passed": 2,
+            "gates_total": 6,
+            "retries": 3,
+            "artifact_words": 4355,
+            "output_path": "",
+            "has_prompt": true
+          }
+        }
+      ],
+      "total_elapsed_ms": 6623
+    }
+  ]
+}
