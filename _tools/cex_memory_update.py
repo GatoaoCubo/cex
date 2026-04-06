@@ -134,9 +134,10 @@ def append_observation(
     if _HAS_MEMORY_TYPES:
         try:
             save_ok, classified = should_save(observation, content)
-            if not save_ok:
-                return content, fm  # skip trivial/duplicate
-            if not obs_type or obs_type == "project":
+            if not save_ok and "duplicate" in classified.lower():
+                return content, fm  # skip only true duplicates
+            # Auto-classify type if not explicitly set
+            if save_ok and (not obs_type or obs_type == "project"):
                 obs_type = classified  # auto-classified type
         except Exception:
             pass  # fallback to raw obs_type

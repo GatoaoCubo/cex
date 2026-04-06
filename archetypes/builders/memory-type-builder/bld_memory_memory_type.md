@@ -10,6 +10,7 @@ pattern: "New kind creation follows: KC first, then builder ISOs, then doctor va
 evidence: "kc_memory_type.md created before builder; density gates caught low-density ISOs"
 outcome: "successful"
 memory_scope: "project"
+observation_types: [user, feedback, project, reference]
 ---
 
 # Memory: memory-type-builder

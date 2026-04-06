@@ -1573,6 +1573,12 @@ domains:
     feeds_kinds:
     - component_map
     origin: ''
+  p01_kc_compression_config:
+    path: P01_knowledge\library\kind\kc_compression_config.md
+    title: Compression Config -- Deep Knowledge for compression_config
+    feeds_kinds:
+    - compression_config
+    origin: ''
   p01_kc_computer_use:
     path: P01_knowledge\library\kind\kc_computer_use.md
     title: Computer Use — Deep Knowledge for computer_use
@@ -1656,6 +1662,12 @@ domains:
     title: Effort Profile — Deep Knowledge for effort_profile
     feeds_kinds:
     - effort_profile
+    origin: ''
+  p01_kc_embedder_provider:
+    path: P01_knowledge\library\kind\kc_embedder_provider.md
+    title: Embedder Provider -- Deep Knowledge for embedder_provider
+    feeds_kinds:
+    - embedder_provider
     origin: ''
   p01_kc_embedding_config:
     path: P01_knowledge\library\kind\kc_embedding_config.md
@@ -1831,6 +1843,15 @@ domains:
     feeds_kinds:
     - memory_summary
     origin: ''
+  p01_kc_memory_type:
+    path: P01_knowledge\library\kind\kc_memory_type.md
+    title: Memory Type -- Deep Knowledge for memory_type
+    feeds_kinds:
+    - memory_type
+    - entity_memory
+    - memory_scope
+    - memory_summary
+    origin: ''
   p01_kc_mental_model:
     path: P01_knowledge\library\kind\kc_mental_model.md
     title: Mental Model — Deep Knowledge for mental_model
@@ -1842,6 +1863,12 @@ domains:
     title: Model Card — Deep Knowledge for model_card
     feeds_kinds:
     - model_card
+    origin: ''
+  p01_kc_model_provider:
+    path: P01_knowledge\library\kind\kc_model_provider.md
+    title: Model Provider -- Deep Knowledge for model_provider
+    feeds_kinds:
+    - model_provider
     origin: ''
   p01_kc_naming_rule:
     path: P01_knowledge\library\kind\kc_naming_rule.md
@@ -1927,6 +1954,12 @@ domains:
     feeds_kinds:
     - rate_limit_config
     origin: ''
+  p01_kc_reasoning_trace:
+    path: P01_knowledge\library\kind\kc_reasoning_trace.md
+    title: Reasoning Trace -- Deep Knowledge for reasoning_trace
+    feeds_kinds:
+    - reasoning_trace
+    origin: ''
   p01_kc_red_team_eval:
     path: P01_knowledge\library\kind\kc_red_team_eval.md
     title: Red Team Eval — Deep Knowledge for red_team_eval
@@ -2011,6 +2044,12 @@ domains:
     feeds_kinds:
     - secret_config
     origin: ''
+  p01_kc_session_backend:
+    path: P01_knowledge\library\kind\kc_session_backend.md
+    title: Session Backend -- Deep Knowledge for session_backend
+    feeds_kinds:
+    - session_backend
+    origin: ''
   p01_kc_session_state:
     path: P01_knowledge\library\kind\kc_session_state.md
     title: Session State — Deep Knowledge for session_state
@@ -2065,6 +2104,18 @@ domains:
     feeds_kinds:
     - system_prompt
     origin: ''
+  p01_kc_toolkit:
+    path: P01_knowledge\library\kind\kc_toolkit.md
+    title: Toolkit -- Deep Knowledge for toolkit
+    feeds_kinds:
+    - toolkit
+    origin: ''
+  p01_kc_trace_config:
+    path: P01_knowledge\library\kind\kc_trace_config.md
+    title: Trace Config -- Deep Knowledge for trace_config
+    feeds_kinds:
+    - trace_config
+    origin: ''
   p01_kc_type_def:
     path: P01_knowledge\library\kind\kc_type_def.md
     title: Type Def — Deep Knowledge for type_def
@@ -2089,6 +2140,12 @@ domains:
     feeds_kinds:
     - validator
     origin: ''
+  p01_kc_vectordb_backend:
+    path: P01_knowledge\library\kind\kc_vectordb_backend.md
+    title: VectorDB Backend -- Deep Knowledge for vectordb_backend
+    feeds_kinds:
+    - vectordb_backend
+    origin: ''
   p01_kc_vision_tool:
     path: P01_knowledge\library\kind\kc_vision_tool.md
     title: Vision Tool — Deep Knowledge for vision_tool
@@ -2106,6 +2163,12 @@ domains:
     title: Workflow — Deep Knowledge for workflow
     feeds_kinds:
     - workflow
+    origin: ''
+  p01_kc_workflow_primitive:
+    path: P01_knowledge\library\kind\kc_workflow_primitive.md
+    title: Workflow Primitive -- Deep Knowledge for workflow_primitive
+    feeds_kinds:
+    - workflow_primitive
     origin: ''
   p01_kc_a2a_protocol:
     path: P01_knowledge\library\domain\_reference\kc_a2a_protocol.md
@@ -2493,6 +2556,8 @@ coverage:
   component_map:
   - p01_kc_component_map
   - p01_kc_governance_patterns
+  compression_config:
+  - p01_kc_compression_config
   computer_use:
   - p01_kc_computer_use
   - p01_kc_anthropic_api_patterns
@@ -2539,6 +2604,8 @@ coverage:
   - p01_kc_eval_testing
   effort_profile:
   - p01_kc_effort_profile
+  embedder_provider:
+  - p01_kc_embedder_provider
   embedding_config:
   - p01_kc_embedding_config
   - p01_kc_academic_rag_patterns
@@ -2547,6 +2614,7 @@ coverage:
   - p01_kc_llamaindex_patterns
   entity_memory:
   - p01_kc_entity_memory
+  - p01_kc_memory_type
   - p01_kc_memory_persistence
   enum_def:
   - p01_kc_enum_def
@@ -2645,17 +2713,23 @@ coverage:
   - p01_kc_mcp_protocol
   memory_scope:
   - p01_kc_memory_scope
+  - p01_kc_memory_type
   - p01_kc_crewai_patterns
   - p01_kc_langchain_patterns
   memory_summary:
   - p01_kc_memory_summary
+  - p01_kc_memory_type
   - p01_kc_memory_persistence
+  memory_type:
+  - p01_kc_memory_type
   mental_model:
   - p01_kc_mental_model
   - p01_kc_agent_identity
   model_card:
   - p01_kc_model_card
   - p01_kc_agent_identity
+  model_provider:
+  - p01_kc_model_provider
   naming_rule:
   - p01_kc_naming_rule
   - p01_kc_output_formatting
@@ -2703,6 +2777,8 @@ coverage:
   rate_limit_config:
   - p01_kc_rate_limit_config
   - p01_kc_infra_config
+  reasoning_trace:
+  - p01_kc_reasoning_trace
   red_team_eval:
   - p01_kc_red_team_eval
   - p01_kc_eval_testing
@@ -2757,6 +2833,8 @@ coverage:
   secret_config:
   - p01_kc_secret_config
   - p01_kc_infra_config
+  session_backend:
+  - p01_kc_session_backend
   session_state:
   - p01_kc_session_state
   - p01_kc_memory_persistence
@@ -2784,6 +2862,10 @@ coverage:
   - p01_kc_anthropic_api_patterns
   - p01_kc_google_ai_patterns
   - p01_kc_openai_api_patterns
+  toolkit:
+  - p01_kc_toolkit
+  trace_config:
+  - p01_kc_trace_config
   type_def:
   - p01_kc_type_def
   - p01_kc_schema_validation
@@ -2796,6 +2878,8 @@ coverage:
   validator:
   - p01_kc_validator
   - p01_kc_schema_validation
+  vectordb_backend:
+  - p01_kc_vectordb_backend
   vision_tool:
   - p01_kc_vision_tool
   - p01_kc_openai_api_patterns
@@ -2810,3 +2894,5 @@ coverage:
   - p01_kc_haystack_patterns
   - p01_kc_langchain_patterns
   - p01_kc_llamaindex_patterns
+  workflow_primitive:
+  - p01_kc_workflow_primitive

@@ -1,10 +1,10 @@
 {
-  "timestamp": "2026-04-06T10:52:02.012229",
-  "pass": 51,
+  "timestamp": "2026-04-06T11:15:59.287813",
+  "pass": 53,
   "fail": 1,
-  "skip": 1,
-  "total": 53,
-  "elapsed_s": 18.8,
+  "skip": 0,
+  "total": 54,
+  "elapsed_s": 30.1,
   "tests": [
     {
       "name": "tool:cex_8f_motor.py",
@@ -79,7 +79,7 @@
     {
       "name": "compile:all",
       "status": "PASS",
-      "detail": "369/369"
+      "detail": "367/367"
     },
     {
       "name": "builders:count",
@@ -252,9 +252,14 @@
       "detail": ""
     },
     {
-      "name": "runner:execute",
-      "status": "SKIP",
-      "detail": "skipped in --quick mode"
+      "name": "runner:execute_pass",
+      "status": "FAIL",
+      "detail": "g plan...\nERRO: Nenhum LLM provider disponivel.\n  CLI-Claude: exit 1: \n  SDK-Ollama: pip install ollama\n  HTTP-Ollama: HTTP Error 404: Not Found\n  API: Paid APIs disabled (set CEX_USE_API=1 to allow)\n"
+    },
+    {
+      "name": "runner:learning_record",
+      "status": "PASS",
+      "detail": "22 records"
     },
     {
       "name": "kc:count",
@@ -263,13 +268,13 @@
     },
     {
       "name": "git:clean",
-      "status": "FAIL",
-      "detail": "5 dirty files"
+      "status": "PASS",
+      "detail": "4 dirty files"
     },
     {
       "name": "git:has_commits",
       "status": "PASS",
-      "detail": "c764f30 W2-W4: README rewrite + QUICKSTART + requirements + "
+      "detail": "fb4d64b chore: overnight quality log update"
     }
   ]
 }
