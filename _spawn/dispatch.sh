@@ -10,6 +10,22 @@
 #   bash _spawn/dispatch.sh stop --all         # stop ALL CEX nuclei (DANGEROUS)
 #   bash _spawn/dispatch.sh stop --dry-run     # preview what would be killed
 
+# --- Session ID: stable identifier for this orchestrator ---
+# Each pi/N07 session sets CEX_SESSION_ID once. All dispatch calls inherit it.
+# If not set, generate from timestamp (stable within same second).
+# IMPORTANT: For multi-N07, set CEX_SESSION_ID before first dispatch.
+if [ -z "$CEX_SESSION_ID" ]; then
+    SESSION_FILE=".cex/runtime/pids/.my_session"
+    if [ -f "$SESSION_FILE" ]; then
+        export CEX_SESSION_ID=$(cat "$SESSION_FILE")
+    else
+        mkdir -p .cex/runtime/pids
+        export CEX_SESSION_ID="s$(date +%s)"
+        echo "$CEX_SESSION_ID" > "$SESSION_FILE"
+    fi
+fi
+export CEX_SESSION_ID
+
 MODE="${1:-solo}"
 shift
 
