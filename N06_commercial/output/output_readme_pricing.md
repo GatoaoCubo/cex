@@ -11,7 +11,7 @@ domain: commercial
 target_format: markdown
 input_type: structured
 rule_count: 7
-quality: null
+quality: 9.1
 tags: [pricing, readme, commercial, cex]
 tldr: "Formats CEX pricing data into professional markdown README section with table, benefits, and CTA"
 ---

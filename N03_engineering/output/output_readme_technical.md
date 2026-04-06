@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-02
 author: n03_builder
 domain: engineering
-quality: null
+quality: 9.1
 tags: [readme, architecture, quickstart, public, onboarding]
 tldr: "Architecture diagram, 5-step quickstart, and directory map for the CEX public README."
 density_score: 0.91

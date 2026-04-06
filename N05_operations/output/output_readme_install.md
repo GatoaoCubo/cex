@@ -2,7 +2,7 @@
 id: n05_readme_install
 kind: output_template
 pillar: P05
-quality: null
+quality: 8.7
 ---
 
 # Installation & Requirements

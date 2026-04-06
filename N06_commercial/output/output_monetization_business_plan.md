@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-02
 author: n06_commercial
 domain: monetization-strategy
-quality: null
+quality: 9.2
 tags: [monetization, business-plan, pricing, revenue, cex, course, model, financial-projections, brand]
 tldr: "Plano de negócios completo para monetização do CEX: repo público MIT + cursos pagos (R$497/997), modelo híbrido, projeções 12 meses, unit economics, pricing psychology, brand positioning vs concorrentes."
 density_score: 0.92

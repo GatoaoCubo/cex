@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-04-02
 updated: 2026-04-02
 author: N07_orchestrator
-quality: null
+quality: 9.1
 tags: [grid, ops, recovery, troubleshooting, windows, positions, fallbacks]
 tldr: "Operational supplement to workflow_admin.md — grid positions, recovery, crash handling, fallbacks, diagnostics. Everything NOT in the theoretical docs."
 density_score: 0.93

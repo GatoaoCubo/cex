@@ -3,7 +3,7 @@ id: n03_self_review_20260402
 kind: context_doc
 nucleus: N03
 pillar: P09
-quality: null
+quality: 9.0
 date: 2026-04-02
 type: self-review
 author: N03

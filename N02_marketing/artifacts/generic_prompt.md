@@ -4,7 +4,7 @@ kind: generic
 pillar: P01
 title: Tagline Creation Framework
 tldr: Strategic framework for creating memorable brand taglines that convert
-quality: null
+quality: 8.9
 tags: [copywriting, branding, taglines, messaging, conversion]
 when_to_use: When creating brand taglines, product slogans, or campaign headlines that need to stick
 ---

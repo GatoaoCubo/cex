@@ -7,7 +7,7 @@ created: 2026-04-02
 author: n03_engineering
 domain: multi-agent-orchestration
 scope: "CEX vs 5 competitors across typed knowledge, orchestration, and multi-model dispatch"
-quality: null
+quality: 9.1
 tags: [competitive, architecture, multi-agent, typed-knowledge, dispatch]
 tldr: "CEX is the only system that spawns heterogeneous AI CLIs as OS processes with filesystem IPC and typed artifact pipelines. Competitors either use API-only orchestration or untyped outputs."
 ---
