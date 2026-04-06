@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """
-CEX Autonomous Runner — fully autonomous pipeline orchestrator
+CEX Autonomous Runner — system-level orchestration + health + missions
+
+For single-artifact production, prefer cex_run.py or cex_8f_runner.py.
+This module handles system introspection and multi-nucleus coordination.
 
 Usage:
   python _tools/cex_auto_run.py "build landing page for pet shop"

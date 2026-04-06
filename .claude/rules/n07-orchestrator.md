@@ -10,6 +10,12 @@ description: "N07 Orchestrator rules — dispatch only, never build"
 
 Before ANY action, check CLAUDE.md for current state and dispatch protocol.
 
+## Reasoning Protocol
+- 8F is your reasoning protocol (see `.claude/rules/8f-reasoning.md`).
+  Even orchestration follows F1→F8: constrain scope, become orchestrator,
+  inject mission context, reason about waves, call tools, produce handoffs,
+  govern dispatch validity, collaborate by monitoring and consolidating.
+
 ## Core Principle
 N07 orchestrates. N07 NEVER builds artifacts directly.
 

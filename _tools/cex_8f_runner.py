@@ -103,6 +103,24 @@ try:
 except ImportError:
     _MONITOR_AVAILABLE = False
 
+try:
+    from cex_query import query_builders as _query_builders
+    _QUERY_AVAILABLE = True
+except ImportError:
+    _QUERY_AVAILABLE = False
+
+try:
+    from cex_provider_discovery import discover_providers as _discover_providers
+    _PROVIDER_AVAILABLE = True
+except ImportError:
+    _PROVIDER_AVAILABLE = False
+
+try:
+    from cex_theme import get_sin as _get_sin
+    _THEME_AVAILABLE = True
+except ImportError:
+    _THEME_AVAILABLE = False
+
 # Load .env for API keys
 for _ep in [CEX_ROOT / ".env", CEX_ROOT.parent / "organization-core" / ".env"]:
     if _ep.exists():
@@ -288,7 +306,7 @@ class EightFRunner:
             "F2": lambda: f"identity: {len(s.identity)} keys ({', '.join(list(s.identity)[:3])})",
             "F3": lambda: f"ISOs: {sum(1 for x in k.values() if x)}, KCs injected: {len(k.get('kc_domains', []))}",
             "F4": lambda: f"plan: {len(s.reasoning.get('plan', '').split())} words (model={s.reasoning.get('model_used', '?')})",
-            "F5": lambda: f"tools: {len(s.tool_results.get('tools_available', []))}, existing: {len(s.tool_results.get('existing_artifacts', []))}",
+            "F5": lambda: f"tools: {len(s.tool_results.get('tools_available', []))}, existing: {len(s.tool_results.get('existing_artifacts', []))}, executed: {len(s.tool_results.get('tool_outputs', {}))}",
             "F6": lambda: f"artifact: {len(s.artifact.split()) if s.artifact else 0} words",
             "F7": lambda: (f"gates: {sum(1 for g in v.get('hard_gates', []) if g.get('passed'))}/{len(v.get('hard_gates', []))}, retries: {v.get('retries', 0)}" if v else "pending"),
             "F8": lambda: f"mode: {s.result.get('mode', '?')}, path: {s.result.get('path', 'none')}",
@@ -592,16 +610,20 @@ class EightFRunner:
     # -- F5 CALL ------------------------------------------------------------
 
     def f5_call(self) -> None:
-        """Load bld_tools spec, scan existing artifacts -> state.tool_results."""
+        """Load bld_tools spec, scan existing artifacts, EXECUTE active tools -> state.tool_results."""
         bdir = self.state.builder_dir
-        tool_results = {"existing_artifacts": [], "tools_available": []}
+        tool_results = {
+            "existing_artifacts": [],
+            "tools_available": [],
+            "tool_outputs": {},
+            "enrichment_text": "",
+        }
 
-        # 1. Load bld_tools spec and parse tools table
+        # --- Phase 1: Parse bld_tools spec (backwards compat) ---
         if bdir:
             tools_text = load_iso(bdir, "bld_tools", self.kind_slug)
             if tools_text:
                 body = strip_frontmatter(tools_text)
-                # Parse markdown table rows for tool entries
                 for line in body.split("\n"):
                     line = line.strip()
                     if (
@@ -624,7 +646,7 @@ class EightFRunner:
                     f"bld_tools loaded, {len(tool_results['tools_available'])} tools parsed",
                 )
 
-        # 2. Scan existing artifacts in pillar examples dir
+        # --- Phase 2: Scan existing artifacts in pillar examples dir ---
         pillar_dir_name = PILLAR_DIRS.get(self.state.pillar)
         if pillar_dir_name:
             examples_dir = CEX_ROOT / pillar_dir_name / "examples"
@@ -633,18 +655,149 @@ class EightFRunner:
                 for f in sorted(examples_dir.glob(f"ex_{kind_slug}*.md")):
                     tool_results["existing_artifacts"].append(f.name)
 
-        # 3. Warn on similar artifacts in verbose
         existing = tool_results["existing_artifacts"]
         if existing:
             self._log(
                 "F5",
-                f"WARNING: {len(existing)} similar artifact(s) exist: " + ", ".join(existing[:5]),
+                f"WARNING: {len(existing)} similar artifact(s) exist: "
+                + ", ".join(existing[:5]),
             )
+
+        # --- Phase 3: Auto-execute tools for context enrichment ---
+        intent = self.state.intent
+        executed = 0
+
+        # 3a. Retriever: find similar artifacts by TF-IDF
+        if _RETRIEVER_AVAILABLE:
+            try:
+                idx = load_retriever_index()
+                if idx:
+                    from cex_retriever import find_similar
+                    results = find_similar(intent, index=idx, top_k=3)
+                    if results:
+                        tool_results["tool_outputs"]["retriever"] = results
+                        executed += 1
+                        self._log("F5", f"retriever: {len(results)} similar artifacts found")
+            except Exception as e:
+                self._log("F5", f"retriever failed: {e} (non-blocking)")
+
+        # 3b. Query: discover related builders by TF-IDF
+        if _QUERY_AVAILABLE:
+            try:
+                builders = _query_builders(intent, top_k=3)
+                if builders:
+                    tool_results["tool_outputs"]["query"] = builders
+                    executed += 1
+                    self._log("F5", f"query: {len(builders)} related builders discovered")
+            except Exception as e:
+                self._log("F5", f"query failed: {e} (non-blocking)")
+
+        # 3c. Memory: recall relevant build memories
+        if _MEMORY_AVAILABLE:
+            try:
+                kind = self.state.kind
+                memory_ctx = _memory_inject(kind)
+                if memory_ctx and memory_ctx.strip():
+                    tool_results["tool_outputs"]["memory"] = memory_ctx
+                    executed += 1
+                    self._log("F5", f"memory: context loaded for kind={kind}")
+            except Exception as e:
+                self._log("F5", f"memory failed: {e} (non-blocking)")
+
+        # 3d. Provider discovery: check health
+        if _PROVIDER_AVAILABLE:
+            try:
+                providers = _discover_providers(use_cache=True)
+                if providers:
+                    alive = sum(1 for p in providers.values() if p.get("status") == "OK")
+                    tool_results["tool_outputs"]["providers"] = {
+                        "alive": alive,
+                        "total": len(providers),
+                        "detail": {k: v.get("status", "?") for k, v in providers.items()},
+                    }
+                    executed += 1
+                    self._log("F5", f"providers: {alive}/{len(providers)} alive")
+            except Exception as e:
+                self._log("F5", f"provider discovery failed: {e} (non-blocking)")
+
+        # 3e. Brand config: inject brand context
+        brand_path = CEX_ROOT / ".cex" / "brand" / "brand_config.yaml"
+        if brand_path.exists():
+            try:
+                import yaml
+                with open(brand_path, encoding="utf-8") as bf:
+                    brand = yaml.safe_load(bf)
+                if brand:
+                    tool_results["tool_outputs"]["brand"] = brand
+                    executed += 1
+                    self._log("F5", "brand config loaded")
+            except Exception as e:
+                self._log("F5", f"brand config failed: {e} (non-blocking)")
+
+        # 3f. Sin lens: load nucleus identity
+        if _THEME_AVAILABLE:
+            try:
+                nucleus = os.environ.get("CEX_NUCLEUS", "n03").lower()
+                sin = _get_sin(nucleus)
+                if sin:
+                    tool_results["tool_outputs"]["sin"] = sin
+                    executed += 1
+                    self._log("F5", f"sin lens: {sin.get('virtue', '?')}")
+            except Exception as e:
+                self._log("F5", f"sin lens failed: {e} (non-blocking)")
+
+        # --- Phase 4: Build enrichment text for F6 injection ---
+        if tool_results["tool_outputs"]:
+            enrichments = []
+            for tool_name, output in tool_results["tool_outputs"].items():
+                if tool_name == "retriever" and isinstance(output, list):
+                    lines = [f"### Similar Artifacts ({len(output)} matches)"]
+                    for item in output[:3]:
+                        lines.append(
+                            f"- **{item.get('id', '?')}** ({item.get('kind', '?')}) "
+                            f"score={item.get('score', 0):.2f} — {item.get('tldr', '')[:120]}"
+                        )
+                    enrichments.append("\n".join(lines))
+                elif tool_name == "query" and isinstance(output, list):
+                    lines = [f"### Related Builders ({len(output)} discovered)"]
+                    for item in output[:3]:
+                        lines.append(
+                            f"- **{item.get('builder_id', item.get('id', '?'))}** "
+                            f"score={item.get('score', 0):.2f}"
+                        )
+                    enrichments.append("\n".join(lines))
+                elif tool_name == "memory" and isinstance(output, str):
+                    enrichments.append(f"### Build Memory\n{output[:2000]}")
+                elif tool_name == "providers" and isinstance(output, dict):
+                    enrichments.append(
+                        f"### Provider Health\n"
+                        f"{output.get('alive', 0)}/{output.get('total', 0)} providers alive"
+                    )
+                elif tool_name == "brand" and isinstance(output, dict):
+                    brand_name = output.get("identity", {}).get("name", "?")
+                    enrichments.append(f"### Brand Context\nBrand: {brand_name}")
+                elif tool_name == "sin" and isinstance(output, dict):
+                    enrichments.append(
+                        f"### Sin Lens\n"
+                        f"Virtue: {output.get('virtue', '?')} | "
+                        f"Tagline: {output.get('tagline', '?')}"
+                    )
+                else:
+                    # Generic fallback
+                    import json as _json
+                    enrichments.append(
+                        f"### {tool_name}\n{_json.dumps(output, indent=2, default=str)[:2000]}"
+                    )
+
+            tool_results["enrichment_text"] = "\n\n".join(enrichments)
 
         self.state.tool_results = tool_results
         self._log(
             "F5",
-            f"tools: {len(tool_results['tools_available'])}, existing: {len(existing)}",
+            f"tools: {len(tool_results['tools_available'])}, "
+            f"existing: {len(existing)}, "
+            f"executed: {executed}, "
+            f"enrichments: {len(tool_results['tool_outputs'])}",
         )
 
     # -- F6 PRODUCE ---------------------------------------------------------
@@ -728,6 +881,11 @@ class EightFRunner:
                     "distinct and adds value."
                 )
             sections.append("# TOOLS\n\n" + "\n".join(tool_lines))
+
+        # 5b-extra. F5 AUTO-RETRIEVED CONTEXT (tool execution outputs)
+        enrichment = tr.get("enrichment_text", "")
+        if enrichment:
+            sections.append("# AUTO-RETRIEVED CONTEXT (F5 CALL)\n\n" + enrichment)
 
         # 5c. OPTIMIZER HINTS (from F2 prompt_optimizer)
         hints = self.state.identity.get("optimizer_hints", [])

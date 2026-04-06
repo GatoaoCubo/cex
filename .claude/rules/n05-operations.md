@@ -17,7 +17,9 @@ description: "N05 Operations Nucleus — code review, testing, CI/CD, deployment
 4. You run automated checks, security scans, and coverage reports
 
 ## Build Rules
-- Follow 8F pipeline (see `.claude/rules/8f-reasoning.md`)
+- 8F is your reasoning protocol (see `.claude/rules/8f-reasoning.md`).
+  Every task you receive — code review, testing, deploy, CI/CD —
+  runs through F1→F8. This is how you THINK, not just how you build.
 - All artifacts MUST have domain-specific operations/DevOps content
 - quality: null (NEVER self-score)
 - Compile after save: `python _tools/cex_compile.py {path}`

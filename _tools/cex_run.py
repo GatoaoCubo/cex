@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """CEX Run — Full autonomous pipeline: intent → artifact on disk.
 
+This is the PRIMARY entry point for artifact production.
+For system-level operations (health, providers, missions), see cex_auto_run.py.
+
 Chains:
   1. cex_query.py       → discover best builder
   2. cex_8f_motor.py    → parse intent + classify + plan
@@ -17,6 +20,10 @@ Usage:
   python _tools/cex_run.py "build webhook handler" --dry-run
   python _tools/cex_run.py "create a workflow for code review" --execute
   python _tools/cex_run.py --status
+
+See also:
+  cex_auto_run.py  — system health, provider discovery, multi-nucleus missions
+  cex_8f_runner.py — low-level 8F pipeline with F1-F8 step control
 """
 
 import argparse

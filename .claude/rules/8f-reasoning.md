@@ -125,6 +125,58 @@ Output: production-ready landing page (5 words in → professional artifact out)
 This IS the product. The 8F pipeline is the force multiplier that makes CEX
 outperform raw LLM calls. Every nucleus uses it. Every time.
 
+## 8F by Nucleus
+
+8F is the SAME protocol — the content changes per domain.
+
+### N07 Orchestrator — "/mission build CRM"
+```
+F1 CONSTRAIN → scope: what kind of CRM? what nuclei needed? what wave structure?
+F2 BECOME    → Ira Construtiva lens: ruthless quality, precise dispatch
+F3 INJECT    → load mission plans, decision manifest, signal history
+F4 REASON    → plan: 3 waves, 5 nuclei, dependency graph
+F5 CALL      → provider discovery, agent spawn validation, PID tracking
+F6 PRODUCE   → write handoffs + mission plan + wave schedule
+F7 GOVERN    → validate: all handoffs have frontmatter? all nuclei have boot scripts?
+F8 COLLABORATE → dispatch grid, monitor signals, consolidate on completion
+```
+
+### N01 Intelligence — "research competitor pricing in EdTech"
+```
+F1 CONSTRAIN → kind=knowledge_card, pillar=P01, domain=edtech pricing
+F2 BECOME    → Avareza Investigativa lens: insatiable data hunger
+F3 INJECT    → load KCs on pricing, EdTech market, existing competitor intel
+F4 REASON    → plan: 6 competitors, 3 pricing dimensions, source map
+F5 CALL      → retriever finds existing pricing KCs, query discovers related builders
+F6 PRODUCE   → structured intelligence brief with pricing tables + sources
+F7 GOVERN    → validate: sources cited? data density >= 0.85? no speculation?
+F8 COLLABORATE → save to N01_intelligence/, compile, signal N07
+```
+
+### N02 Marketing — "write ad copy for Black Friday campaign"
+```
+F1 CONSTRAIN → kind=prompt_template, pillar=P03, domain=ad copy
+F2 BECOME    → Luxúria Criativa lens: seductive, irresistible prose
+F3 INJECT    → load brand voice, audience persona, past campaign KCs
+F4 REASON    → plan: 3 ad variants (urgency, FOMO, value), A/B structure
+F5 CALL      → brand config loaded, memory recalls past conversion data
+F6 PRODUCE   → 3 ad copy variants with hooks, CTAs, and character limits
+F7 GOVERN    → validate: brand voice match? CTA present? length within platform limits?
+F8 COLLABORATE → save to N02_marketing/, compile, signal N07
+```
+
+### N06 Commercial — "design pricing tiers for SaaS product"
+```
+F1 CONSTRAIN → kind=content_monetization, pillar=P11, domain=SaaS pricing
+F2 BECOME    → Gula Monetizadora lens: maximize every revenue stream
+F3 INJECT    → load competitor pricing KC, market research, customer segments
+F4 REASON    → plan: 3 tiers (free/pro/enterprise), feature gating, annual discount
+F5 CALL      → retriever finds existing monetization artifacts, brand config loaded
+F6 PRODUCE   → pricing model with tier table, feature matrix, revenue projections
+F7 GOVERN    → validate: tiers differentiated? no cannibalization? margins positive?
+F8 COLLABORATE → save to N06_commercial/, compile, signal N07
+```
+
 ## Anti-Patterns (BLOCKED)
 
 - Processing a task without 8F trace — ANY task, not just builds

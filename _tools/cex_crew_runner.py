@@ -551,6 +551,12 @@ def compose_prompt(
     if memory_block:
         parts.append(memory_block)
 
+    # --- F5 Auto-Retrieved Context (tool execution outputs) ---
+    if hasattr(state, "tool_results") and state.tool_results.get("enrichment_text"):
+        parts.append("## Auto-Retrieved Context (F5 CALL)")
+        parts.append(state.tool_results["enrichment_text"])
+        parts.append("")
+
     # --- Prior Outputs ---
     # Only inject outputs from completed earlier steps (not current function)
     prior = {
