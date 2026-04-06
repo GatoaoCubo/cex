@@ -36,7 +36,12 @@ function Kill-Tree {
     $p = Get-Process -Id $TargetPid -EA SilentlyContinue
     if ($p) {
         if ($DryRun) { Log "  (DRY) Would kill PID:$TargetPid $($p.ProcessName) $Tag" }
-        else         { Stop-Process -Id $TargetPid -Force -EA SilentlyContinue; Log "  Killed PID:$TargetPid $($p.ProcessName) $Tag" }
+        else {
+            # taskkill /F /T = force + tree-kill (kills all child processes)
+            # Stop-Process does NOT tree-kill -- orphans claude.exe + node.exe
+            $tkResult = taskkill /F /PID $TargetPid /T 2>&1
+            Log "  Killed PID:$TargetPid $($p.ProcessName) $Tag (tree-kill)"
+        }
         $script:stopped++
         [void]$script:killedPids.Add($TargetPid)
     }
