@@ -6,8 +6,8 @@
 # --- UX: Window appearance ---
 $Host.UI.RawUI.WindowTitle = "CEX-N06-COMMERCIAL [claude-opus-4-6]"
 try {
-    $Host.UI.RawUI.BackgroundColor = "DarkRed"
-    $Host.UI.RawUI.ForegroundColor = "White"
+    $Host.UI.RawUI.BackgroundColor = "DarkYellow"
+    $Host.UI.RawUI.ForegroundColor = "Black"
     $bufSize = $Host.UI.RawUI.BufferSize
     $bufSize.Width = 160; $bufSize.Height = 9999
     $Host.UI.RawUI.BufferSize = $bufSize
@@ -19,7 +19,7 @@ try {
 } catch {}
 
 Write-Host ""
-Write-Host "  $ N06 Avareza Estrategica - Strategic Greed" -ForegroundColor Red
+Write-Host "  $ N06 Avareza Estrategica - Strategic Greed" -ForegroundColor Yellow
 Write-Host "  ==================================================" -ForegroundColor DarkGray
 Write-Host "  Quanto RENDE cada decisao?" -ForegroundColor DarkGray
 Write-Host "  claude-opus-4-6  |  1000K context  |  8F pipeline" -ForegroundColor DarkGray

@@ -6,7 +6,7 @@
 # --- UX: Window appearance ---
 $Host.UI.RawUI.WindowTitle = "CEX-N04-KNOWLEDGE [claude-opus-4-6]"
 try {
-    $Host.UI.RawUI.BackgroundColor = "DarkYellow"
+    $Host.UI.RawUI.BackgroundColor = "DarkCyan"
     $Host.UI.RawUI.ForegroundColor = "White"
     $bufSize = $Host.UI.RawUI.BufferSize
     $bufSize.Width = 160; $bufSize.Height = 9999
@@ -19,7 +19,7 @@ try {
 } catch {}
 
 Write-Host ""
-Write-Host "  ◉ N04 Gula por Conhecimento - Knowledge Gluttony" -ForegroundColor Yellow
+Write-Host "  ◉ N04 Gula por Conhecimento - Knowledge Gluttony" -ForegroundColor Cyan
 Write-Host "  ==================================================" -ForegroundColor DarkGray
 Write-Host "  Tem MAIS dados pra ingerir?" -ForegroundColor DarkGray
 Write-Host "  claude-opus-4-6  |  1000K context  |  8F pipeline" -ForegroundColor DarkGray
