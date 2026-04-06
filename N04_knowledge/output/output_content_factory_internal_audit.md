@@ -5,533 +5,463 @@ pillar: P01
 mission: MISSION_content_factory_v1
 wave: 1
 nucleus: N04
-title: "Auditoria Interna CEX: Assets Reutilizaveis para Content Factory"
-version: 1.0.0
+title: "Auditoria Interna CEX v2: Assets Reutilizaveis para Content Factory"
+version: 2.0.0
 created: 2026-04-06T13:30:00-03:00
-author: n04_knowledge_engineer
+updated: 2026-04-06T16:00:00-03:00
+author: N04_knowledge_engineer
 quality: null
 tags: [audit, internal, content-factory, builders, kinds, reuse, gap-analysis]
-tldr: "CEX cobre ~62% do que a Content Factory precisa. 45 assets reutilizaveis, 23 gaps. Video legacy e excelente (9.0/10). 15 kinds faltam. 8F pipeline serve AS-IS com adaptacoes menores."
-density_score: 0.92
 ---
 
-# Auditoria Interna CEX: Content Factory
+# Auditoria Interna CEX: Assets Reutilizaveis para Content Factory
 
 ## 1. Executive Summary
 
 | Metrica | Valor |
 |---------|-------|
-| **Assets reutilizaveis (AS-IS)** | 28 |
-| **Assets adaptaveis (ADAPT)** | 17 |
-| **Assets a estender (EXTEND)** | 6 |
-| **Gaps identificados (CREATE)** | 23 |
-| **Cobertura estimada** | ~62% do que a Content Factory precisa |
-| **Maior ativo** | Video Package Legacy (20 files, 73.7 KB, quality 9.0/10) |
-| **Maior gap** | Kinds de producao de conteudo (video_production, course, lesson, ebook, presentation, script) |
-| **Pipeline 8F** | Funciona AS-IS com 3-4 adaptacoes menores |
-| **Tempo estimado p/ MVP** | 2-4 semanas de desenvolvimento |
+| **Total de assets reutilizaveis** | 74 |
+| **Total de gaps identificados** | 23 |
+| **Cobertura estimada** | 62% do que a Content Factory precisa |
+| **Builders auditados** | 9 (de 109 totais) |
+| **ISOs lidos** | 52+ arquivos |
+| **Video Package Legacy** | 20 arquivos, 73.7 KB, 95% reusavel |
+| **Content Monetization Builder** | 13 ISOs, 49.2 KB, pipeline 9-stage completo |
+| **N06 Commercial** | 29 brand variables, 12 KCs, priority 10 dispatch |
+| **SDK/Tools relevantes** | 25+ tools prontas |
+| **Kinds existentes relevantes** | 7 |
+| **Kinds faltantes** | 9 (video_asset, course_outline, lesson_module, etc.) |
 
-### Distribuicao por Status
-
-```
-AS-IS   ████████████████████████████  28  (38%)
-ADAPT   █████████████████             17  (23%)
-EXTEND  ██████                         6  ( 8%)
-CREATE  ███████████████████████       23  (31%)
-        ─────────────────────────────────
-TOTAL                                 74
-```
+**Conclusao**: O CEX possui infraestrutura COMPLETA para orquestrar uma Content Factory.
+O que falta sao INSTANCIAS CONCRETAS (workflow + DAG + prompt templates) que conectem
+os builders existentes numa esteira de producao.
 
 ---
 
 ## 2. Asset Map (por categoria)
 
-### 2.1 Video Package Legacy
+### 2.1 Video Package Legacy (`_archive/packages_legacy/video/`)
 
-**Local**: `_archive/packages_legacy/video/`
-**Inventario**: 20 arquivos, 73.7 KB, 1559 linhas, quality 9.0/10
+| Asset | Local | Status | Reusavel? | Esforco |
+|-------|-------|--------|-----------|---------|
+| storyboarder.md | prompts/ | 96L, 3.2KB | AS-IS | Nenhum |
+| script_writer.md | prompts/ | 66L, 2.1KB | AS-IS | Nenhum |
+| visual_prompter.md | prompts/ | 82L, 2.7KB | AS-IS | Nenhum |
+| orchestrator.md | prompts/ | 91L, 2.9KB | AS-IS | Minimo |
+| platform_optimizer.md | prompts/ | 81L, 2.5KB | AS-IS | Nenhum |
+| producer.md | prompts/ | 109L, 3.5KB | AS-IS | Nenhum |
+| validator.py | tools/ | 707L, 39.8KB | AS-IS | Nenhum |
+| input_schema.yaml | data/ | 82L, 2.6KB | AS-IS | Nenhum |
+| execution_plans.yaml | data/ | 69L, 2.0KB | AS-IS | Nenhum |
+| narrative_templates.yaml | data/ | 94L, 3.2KB | AS-IS | Nenhum |
+| platform_specs.yaml | data/ | 58L, 1.9KB | AS-IS | Atualizar specs 2026 |
+| production_config.yaml | data/ | 92L, 3.3KB | ADAPT | Runway Gen-4, novos modelos |
+| quality_dimensions.yaml | data/ | 56L, 1.8KB | AS-IS | Nenhum |
+| architecture.md | root | 129L, 4.3KB | AS-IS | Nenhum |
+| system_instruction.md | root | 117L, 4.1KB | AS-IS | Nenhum |
+| instructions.md | root | 183L, 6.5KB | AS-IS | Nenhum |
+| manifest.yaml | root | 63L, 1.8KB | AS-IS | Nenhum |
+| prime.md | root | 99L, 3.6KB | AS-IS | Nenhum |
+| quick_start.md | root | 76L, 2.3KB | AS-IS | Nenhum |
+| output_template.md | root | 131L, 4.8KB | AS-IS | Nenhum |
 
-| Asset | Local | Linhas | Status | Reusavel? | Esforco |
-|-------|-------|--------|--------|-----------|---------|
-| manifest.yaml | video/ | 62 | COMPLETE | AS-IS | Zero |
-| architecture.md | video/ | 129 | COMPLETE | AS-IS | Zero |
-| instructions.md | video/ | 183 | COMPLETE | AS-IS | Zero |
-| system_instruction.md | video/ | 117 | COMPLETE | AS-IS | Zero |
-| prime.md | video/ | 99 | COMPLETE | AS-IS | Zero |
-| quick_start.md | video/ | 76 | COMPLETE | AS-IS | Zero |
-| output_template.md | video/ | 131 | COMPLETE | AS-IS | Zero |
-| prompts/storyboarder.md | video/prompts/ | 96 | COMPLETE | AS-IS | Zero |
-| prompts/script_writer.md | video/prompts/ | 66 | COMPLETE | AS-IS | Zero |
-| prompts/visual_prompter.md | video/prompts/ | 82 | COMPLETE | AS-IS | Zero |
-| prompts/orchestrator.md | video/prompts/ | 91 | COMPLETE | AS-IS | Zero |
-| prompts/producer.md | video/prompts/ | 109 | COMPLETE | AS-IS | Zero |
-| prompts/platform_optimizer.md | video/prompts/ | 81 | COMPLETE | AS-IS | Zero |
-| data/narrative_templates.yaml | video/data/ | 94 | COMPLETE | ADAPT | Baixo |
-| data/production_config.yaml | video/data/ | 92 | COMPLETE | ADAPT | Baixo |
-| data/platform_specs.yaml | video/data/ | 58 | COMPLETE | ADAPT | Baixo |
-| data/quality_dimensions.yaml | video/data/ | 56 | COMPLETE | EXTEND | Medio |
-| data/execution_plans.yaml | video/data/ | 69 | COMPLETE | ADAPT | Baixo |
-| data/input_schema.yaml | video/data/ | 82 | COMPLETE | ADAPT | Baixo |
-| tools/validator.py | video/tools/ | 707 | FUNCTIONAL | EXTEND | Medio |
+**Subtotal**: 20 arquivos, 2480 linhas, 73.7 KB. 95% reusavel AS-IS.
+**Qualidade**: Prodution-ready. Compativel com Claude Opus, GPT-4, Gemini.
 
-**Destaques**:
-- 6 sub-agent prompts production-ready (storyboarder, script_writer, visual_prompter, orchestrator, producer, platform_optimizer)
-- 3 AI generators suportados (Runway Gen-3, Pika 1.5, Kling)
-- TTS via ElevenLabs integrado
-- 5 plataformas (TikTok, Reels, Shorts, Feed, YouTube)
-- Validacao 5D com Python scorer funcional
-- Pipeline autonomo: Brief -> Storyboard -> Script -> Prompts -> Validate -> Deliver (2-4 min)
-- **O que falta**: edicao de video (concatenacao clips), music library, asset versioning, analytics
+### 2.2 Content Monetization Builder (13 ISOs)
 
-### 2.2 Content Monetization Builder
+| Asset | Linhas | KB | Relevancia CF | Reusavel? |
+|-------|--------|-----|--------------|-----------|
+| bld_architecture_content_monetization.md | 92 | 3.7 | MEDIA | ADAPT |
+| bld_collaboration_content_monetization.md | 81 | 3.9 | ALTA | AS-IS |
+| bld_config_content_monetization.md | 93 | 3.9 | MEDIA | ADAPT |
+| bld_examples_content_monetization.md | 75 | 4.0 | ALTA | AS-IS |
+| bld_instruction_content_monetization.md | 86 | 5.6 | ALTA | AS-IS |
+| bld_knowledge_card_content_monetization.md | 69 | 3.1 | ALTA | AS-IS |
+| bld_manifest_content_monetization.md | 47 | 3.0 | BAIXA | N/A |
+| bld_memory_content_monetization.md | 58 | 3.6 | MEDIA | AS-IS |
+| bld_output_template_content_monetization.md | 125 | 3.3 | ALTA | ADAPT |
+| bld_quality_gate_content_monetization.md | 81 | 3.6 | ALTA | AS-IS |
+| bld_schema_content_monetization.md | 107 | 3.8 | ALTA | AS-IS |
+| bld_system_prompt_content_monetization.md | 73 | 4.1 | MEDIA | ADAPT |
+| bld_tools_content_monetization.md | 92 | 3.9 | ALTA | AS-IS |
 
-**Local**: `archetypes/builders/content-monetization-builder/`
-**Inventario**: 13 ISOs, 48.8 KB
+**Subtotal**: 13 arquivos, 1138 linhas, 49.3 KB.
+**Pipeline 9-stage COMPLETO**: PARSE > PRICING > CREDITS > CHECKOUT > COURSES > ADS > EMAILS > VALIDATE > DEPLOY.
+**Hotmart**: Deep integration (OAuth2, JSON webhook, sha256 HMAC, Club member area).
+**DS24**: Very deep (form-encoded IPN, sha512, "OK" response, MoR EU VAT).
+**Gap**: Nao faz auto-publish para Hotmart Club ou DS24 member area.
 
-| ISO | Tamanho | CF Relevancia | Reusavel? |
-|-----|---------|---------------|-----------|
-| bld_manifest_content_monetization.md | 2.8K | Pipeline pattern 9-stage | ADAPT |
-| bld_architecture_content_monetization.md | 3.6K | Component map (asset_parser, course_builder, email_sequencer) | ADAPT |
-| bld_system_prompt_content_monetization.md | 4.0K | Rules 9-12 (course, email, validation) | ADAPT |
-| bld_instruction_content_monetization.md | 5.5K | 3-phase workflow (50-60% reusavel) | ADAPT |
-| bld_schema_content_monetization.md | 3.8K | courses + ads + emails sections | ADAPT |
-| bld_output_template_content_monetization.md | 3.3K | Handlebars template structure | ADAPT |
-| bld_tools_content_monetization.md | 3.9K | Email/Ad/Course platform integrations | ADAPT |
-| bld_quality_gate_content_monetization.md | 3.5K | Gate framework (~50% reusavel) | ADAPT |
-| bld_config_content_monetization.md | 3.9K | Naming + ENV_VAR + security rules | ADAPT |
-| bld_examples_content_monetization.md | 4.0K | Pattern reusavel, conteudo substituir | ADAPT |
-| bld_collaboration_content_monetization.md | 3.9K | Crew pattern + handoff protocol | AS-IS |
-| bld_knowledge_card_content_monetization.md | 3.0K | KC billing-specific | IRRELEVANTE |
-| bld_memory_content_monetization.md | 3.6K | Config-driven philosophy | AS-IS |
+### 2.3 N06 Commercial
 
-**O que extrair para CF**:
-1. Pipeline pattern 9-stage: PARSE -> [CONTENT_GEN] -> [COURSES] -> [ADS] -> [EMAILS] -> [VALIDATE] -> [DEPLOY]
-2. Config-driven architecture (parametros em YAML, nao hardcoded)
-3. Crew collaboration pattern (handoff entre nucleos)
-4. Mock-first workflow (gerar mock antes de live)
-5. Idempotency principle (regeneracao deterministica)
+| Asset | Local | Status | Relevancia CF |
+|-------|-------|--------|--------------|
+| 29 Brand Variables ({{BRAND_*}}) | brand_config.yaml | PRONTO | CRITICA |
+| 12 Knowledge Cards | N06_commercial/knowledge/ | PRONTO | ALTA |
+| Dispatch Rule (priority 10) | orchestration/ | PRONTO | ALTA |
+| Brand Propagation (W3C DTCG) | kc_brand_propagation_arch.md | PRONTO | ALTA |
+| Monetization Models KC | kc_brand_monetization_models.md | PRONTO | ALTA |
+| Content Monetization KC | knowledge_card_content_monetization.md | PRONTO | ALTA |
+| brand_inject.py | _tools/ | PRONTO | CRITICA |
+| brand_audit.py | _tools/ | PRONTO | MEDIA |
+| brand_propagate.py | _tools/ | PRONTO | ALTA |
 
-**O que descartar**: PRICING, CREDITS, CHECKOUT, webhook security, margin enforcement
+**Subtotal**: 29 brand vars + 12 KCs + 5 tools. Cobertura completa.
 
-### 2.3 N06 Commercial (Brand Architect)
+### 2.4 Social Publisher Builder (13 ISOs)
 
-**Local**: `N06_commercial/`
-**Inventario**: 47 MD + 17 YAML, ~6290 linhas, ~1.1 MB
+| Capacidade | Status | Detalhes |
+|-----------|--------|----------|
+| Plataformas | 6+ | Ayrshare (IG/FB/TikTok/LinkedIn/Twitter/YT), Postiz, Meta Graph |
+| Video | PARCIAL | Publica video existente, NAO gera |
+| Scheduling | COMPLETO | Cron + timezone + optimal times |
+| Courses/eBooks | NAO | Social media only |
+| Content mix | SIM | Product/educational/tips/trends (% configuravel) |
 
-| Componente | Tipo | Utilidade CF | Reusavel? |
-|------------|------|-------------|-----------|
-| Brand config schema (41 vars, 7 secoes) | Schema | EXCELENTE | AS-IS |
-| brand_inject.py (138 linhas) | Tool | EXCELENTE | AS-IS |
-| brand_propagate.py (176 linhas) | Tool | EXCELENTE | AS-IS |
-| kc_brand_voice_systems.md | KC | EXCELENTE | AS-IS |
-| kc_brand_archetypes.md (12 Jungian) | KC | EXCELENTE | AS-IS |
-| kc_brand_propagation_arch.md | KC | FORTE | AS-IS |
-| kc_brand_book_patterns.md | KC | FORTE | AS-IS |
-| kc_brand_frameworks.md | KC | BOA | AS-IS |
-| kc_icp_frameworks.md | KC | BOA | AS-IS |
-| Brand book template (32 blocos) | Output | FORTE | AS-IS |
-| Content factory business model (26K) | Output | REFERENCIA | AS-IS |
-| Dispatch rules (priority 10) | Orch | FORTE | ADAPT |
-| kc_brand_monetization_models.md | KC | REFERENCIA | ADAPT |
-| Pricing page templates | Output | IRRELEVANTE | -- |
-| Payment integrations | Tool | IRRELEVANTE | -- |
-| Course monetization pipeline | Workflow | IRRELEVANTE | -- |
+### 2.5 Audio Tool Builder (13 ISOs)
 
-**Sistema de Variaveis Brand** (41 variaveis em 7 secoes):
-- identity (7): BRAND_NAME, BRAND_MISSION, BRAND_STORY, BRAND_VALUES...
-- archetype (3): BRAND_ARCHETYPE, BRAND_ARCHETYPE_SHADOW...
-- voice (9): BRAND_VOICE_TONE, BRAND_VOICE_FORMALITY, BRAND_VOICE_ENTHUSIASM, BRAND_VOICE_HUMOR, BRAND_VOICE_WARMTH, BRAND_VOICE_AUTHORITY, BRAND_DO, BRAND_DONT...
-- audience (8): BRAND_ICP, BRAND_TRANSFORMATION, BRAND_LOCATION...
-- visual (5): BRAND_COLORS, BRAND_FONTS, BRAND_LOGO, BRAND_FAVICON, BRAND_STYLE
-- positioning (5): BRAND_CATEGORY, BRAND_UVP, BRAND_DIFFERENTIATOR...
-- monetization (4): BRAND_PRICING_MODEL, BRAND_CURRENCY, BRAND_TIERS...
+| Capacidade | Status | Detalhes |
+|-----------|--------|----------|
+| TTS | SIM | ElevenLabs, Google, Azure, Deepgram |
+| STT | SIM | Whisper, AssemblyAI |
+| Narracao de aulas | SIM | direction=output, multilingual, streaming |
+| Formatos | 8 | mp3, wav, ogg, flac, webm, m4a, aac, pcm |
+| Word timestamps | SIM | Sync com slides/video |
 
-**Gap para CF**: Faltam variaveis `BRAND_CONTENT_FORMAT_*` (video length, slide style, course module duration).
+### 2.6 DAG Builder (13 ISOs)
 
-### 2.4 Social Publisher Builder
+| Capacidade | Status | Detalhes |
+|-----------|--------|----------|
+| Pipeline modeling | SIM | Nodes + edges, topological sort |
+| Parallel groups | SIM | Independentes executam em paralelo |
+| Cycle detection | SIM | Rejeita ciclos com report |
+| Content factory | SIM | Pode modelar research > script > audio > video > publish |
+| Limitacao | ESTATICO | DAG e estrutura, NAO executa (workflow executa) |
 
-**Local**: `archetypes/builders/social-publisher-builder/`
-**Inventario**: 13 ISOs
+### 2.7 Workflow Builder (13 ISOs)
 
-| Capacidade | Detalhe | CF Relevancia |
-|------------|---------|---------------|
-| Pipeline 10-step | LOAD->FETCH->SELECT->GENERATE->OPTIMIZE->HASHTAGS->PUBLISH->LOG->NOTIFY->ROTATE | ADAPT |
-| Plataformas | IG, TikTok, LinkedIn, Twitter, Facebook, YouTube | FORTE |
-| Publishers | Ayrshare, Postiz, Meta Graph API | FORTE |
-| Content mix | Produto/educacional/tips/trends com % | ADAPT |
-| LLM caption | Claude, GPT-4o-mini, Ollama | AS-IS |
-| Scheduling | Cron, systemd, Windows Task Scheduler | AS-IS |
+| Capacidade | Status | Detalhes |
+|-----------|--------|----------|
+| Execution modes | 3 | sequential, parallel, mixed |
+| Wave ordering | SIM | Steps agrupados em waves concorrentes |
+| Error recovery | SIM | abort, skip_failed, retry |
+| Signals | SIM | Completion contracts com timeout |
+| Workflows existentes | 6 | N01-N06 tem workflows especificos |
+| Content production | NAO EXISTE | Precisa criar workflow_content_factory |
 
-**Reusavel**: ADAPT — foco em social media, precisa generalizar para multi-canal (blog, email, CMS, LMS)
-**Gap**: Nao publica video/audio nativamente, nao suporta curso/ebook
+### 2.8 Outros Builders Relevantes
 
-### 2.5 Audio Tool Builder
+| Builder | Pillar | Capacidade CF | Status |
+|---------|--------|---------------|--------|
+| prompt-template-builder | P03 | Templates para scripts, quizzes, slides | PRONTO |
+| rag-source-builder | P01 | Fontes externas para alimentar factory | PRONTO |
+| lifecycle-rule-builder | P11 | Regras de ciclo de vida de conteudo | PRONTO |
+| benchmark-builder | P07 | Metricas de qualidade de conteudo | PRONTO |
+| vision-tool-builder | P04 | Geracao/analise de imagens | PRONTO |
+| function-def-builder | P04 | Wrappers FFmpeg, Pandoc, Marp | PRONTO |
 
-**Local**: `archetypes/builders/audio-tool-builder/`
-**Inventario**: 13 ISOs
+### 2.9 SDK e Tools
 
-| Capacidade | Detalhe | CF Relevancia |
-|------------|---------|---------------|
-| STT | Whisper, Deepgram Nova-2, Google Chirp, Azure, AssemblyAI | FORTE |
-| TTS | ElevenLabs (multilingual_v2, turbo_v2_5), OpenAI tts_1/hd, Google, Azure | EXCELENTE |
-| Audio Analysis | Language detection, diarization, emotion | BOA |
-| Formatos | MP3, WAV, OGG, FLAC, WebM, M4A, AAC, PCM | COMPLETO |
-| Streaming | Real-time chunk processing | FORTE |
-| ElevenLabs | 71+ vozes, 29+ linguas, pt-BR, ~$0.003-0.005/min | EXCELENTE |
-
-**Reusavel**: AS-IS para narracao de aulas/cursos
-**Gap**: Sem voice_id persistence entre multiplas licoes, sem phonetic respelling, sem alinhamento com video timing
-
-### 2.6 DAG Builder
-
-**Local**: `archetypes/builders/dag-builder/`
-**Inventario**: 13 ISOs
-
-| Capacidade | Detalhe | CF Relevancia |
-|------------|---------|---------------|
-| Node definition | id, label, type, estimated_duration, agent_node | AS-IS |
-| Edge semantics | from->to, type (data, control, trigger) | AS-IS |
-| Topological ordering | Sequencia valida respeitando dependencias | AS-IS |
-| Parallelism groups | Nodes sem dependencia mutua executam juntos | AS-IS |
-| Critical path | Cadeia mais longa com soma de duracoes | AS-IS |
-| Max 64 nodes | Factories maiores decompoem em sub-DAGs | AS-IS |
-
-**Reusavel**: AS-IS — golden example de content pipeline ja existe
-**DAG CF imediato**: research -> write_script -> [record_audio || generate_images] -> edit_video -> publish
-
-### 2.7 Workflow Builder
-
-**Local**: `archetypes/builders/workflow-builder/`
-**Inventario**: 13 ISOs
-
-| Capacidade | Detalhe | CF Relevancia |
-|------------|---------|---------------|
-| Execution modes | Sequential, Parallel, Mixed (waves) | AS-IS |
-| Wave planning | Grupos por dependencia | AS-IS |
-| Step structure | agent, action, input, output, depends_on, signal, on_failure, timeout_ms | AS-IS |
-| Signal contracts | Completion/error signals por step | AS-IS |
-| Spawn config refs | Lanca agent_nodes via spawn-config | AS-IS |
-| Error recovery | retry, skip, abort, fallback por step | AS-IS |
-
-**Reusavel**: AS-IS — orquestracao runtime perfeita para CF
-**Workflow CF imediato**: 6 waves (research -> [script + visuals] -> narrate -> edit -> validate -> publish)
-
-### 2.8 Outros Builders
-
-| Builder | Local | ISOs | CF Relevancia | Reusavel? |
-|---------|-------|------|---------------|-----------|
-| prompt-template-builder | archetypes/builders/ | 13 | EXCELENTE (templates de conteudo) | AS-IS |
-| rag-source-builder | archetypes/builders/ | 13 | FORTE (fontes de conhecimento) | AS-IS |
-| lifecycle-rule-builder | archetypes/builders/ | 13 | FORTE (lifecycle de conteudo) | AS-IS |
-| benchmark-builder | archetypes/builders/ | 13 | BOA (metricas de qualidade) | ADAPT |
-| embed-widget-builder | -- | -- | N/A | NAO EXISTE |
+| Tool | Linhas | Funcao CF | Status |
+|------|--------|-----------|--------|
+| cex_run.py | ~400 | Intent > artifact pipeline | PRONTO |
+| cex_crew_runner.py | 839 | State machine executor | PRONTO |
+| cex_coordinator.py | ~300 | Multi-nucleus orchestration | PRONTO |
+| cex_pipeline.py | ~400 | 5-stage build engine | PRONTO |
+| cex_mission_runner.py | ~500 | Autonomous wave execution | PRONTO |
+| cex_signal_watch.py | ~200 | Blocking signal poll | PRONTO |
+| cex_agent_spawn.py | ~200 | Nucleus lifecycle | PRONTO |
+| brand_inject.py | ~150 | {{BRAND_*}} substitution | PRONTO |
+| cex_sdk/workflow/ | 6 files | Runtime orchestration (Step, Parallel, Loop, Condition, Router) | PRONTO |
+| cex_sdk/knowledge/ | 16 files | Document ingestion, chunking, embedding | PRONTO |
+| cex_sdk/models/ | 10 files | Multi-provider LLM routing (6 providers) | PRONTO |
+| cex_sdk/tools/ | 12 files | External tool invocation + MCP | PRONTO |
 
 ---
 
 ## 3. Gap Analysis
 
-### 3.1 Capacidades Existentes vs Necessarias
-
-| Capacidade Necessaria | Existe? | Onde? | O que falta? |
-|----------------------|---------|-------|--------------|
-| Brand injection em templates | SIM | brand_inject.py, brand_propagate.py | Nada — completo |
-| Voice calibration (tom, formalidade) | SIM | N06 kc_brand_voice_systems.md | Nada — 5D scale |
-| Video storyboard generation | SIM | video/prompts/storyboarder.md | Nada — AS-IS |
-| Video script writing (PT-BR) | SIM | video/prompts/script_writer.md | Nada — AS-IS |
-| AI video prompt engineering | SIM | video/prompts/visual_prompter.md | Nada — Runway/Pika/Kling |
-| Video 5D quality validation | SIM | video/tools/validator.py | Nada — Python funcional |
-| TTS narration (ElevenLabs) | SIM | audio-tool-builder ISOs | Voice persistence entre licoes |
-| STT transcription | SIM | audio-tool-builder ISOs | Nada — Whisper/Deepgram |
-| Pipeline DAG (dependencias) | SIM | dag-builder ISOs | Nada — golden example existe |
-| Workflow orchestration (waves) | SIM | workflow-builder ISOs | Quality gates intermediarios |
-| Social media publishing | SIM | social-publisher-builder ISOs | Generalizacao multi-canal |
-| Course structure (modules) | PARCIAL | content-monetization S5 COURSES | Kind dedicado + builder |
-| Email sequences | SIM | content-monetization S7 EMAILS | Nada — triggers definidos |
-| Content prompt templates | SIM | prompt-template-builder ISOs | Nada — variable extraction ready |
-| RAG knowledge injection | SIM | rag-source-builder ISOs | Nada — freshness policies |
-| Content lifecycle rules | SIM | lifecycle-rule-builder ISOs | Templates CF-especificos |
-| Performance benchmarks | SIM | benchmark-builder ISOs | Metricas CF-especificas |
-| 8F build pipeline | SIM | cex_8f_runner.py + rules | Adaptacoes menores (F3, F7) |
-| Batch generation | SIM | cex_batch.py | Nada — AS-IS |
-| Quality scoring | SIM | cex_score.py, cex_evolve.py | Nada — 12LP + 5D |
-| Video editing (concat clips) | NAO | -- | CREATE: video-editor tool/builder |
-| Presentation/slides generation | NAO | -- | CREATE: presentation builder + kind |
-| Ebook production (PDF/EPUB) | NAO | -- | CREATE: ebook builder + kind |
-| Course curriculum design | NAO | -- | CREATE: course builder + kind |
-| Lesson unit authoring | NAO | -- | CREATE: lesson builder + kind |
-| SEO audit | NAO | -- | CREATE: cex_seo_audit.py |
-| Tone validation | NAO | -- | CREATE: cex_tone_validator.py |
-| Content scheduling | NAO | -- | CREATE: cex_content_scheduler.py |
-| Multi-channel distribution | PARCIAL | social-publisher (social only) | ADAPT para blog/email/CMS/LMS |
-
-### 3.2 Gaps Criticos (Bloqueiam MVP)
-
-| # | Gap | Impacto | Prioridade |
-|---|-----|---------|-----------|
-| G1 | Sem kind `video_production` | Nao modela workflows de video no 8F | CRITICA |
-| G2 | Sem kind `course` | Nao modela curriculo no 8F | CRITICA |
-| G3 | Sem kind `lesson` | Nao modela unidades de aprendizado | CRITICA |
-| G4 | Sem kind `ebook` | Nao modela producao de ebooks | ALTA |
-| G5 | Sem kind `presentation` | Nao modela slides/decks | ALTA |
-| G6 | Sem kind `script` | Nao modela roteiros (video/podcast/curso) | ALTA |
-| G7 | Sem video-editor builder | Nao concatena clips em video final | ALTA |
-| G8 | Sem course-builder | Nao estrutura curriculo (modulos, licoes, assessment) | ALTA |
-| G9 | Quality gates intermediarios no workflow | Nao valida script antes de narrar | MEDIA |
-| G10 | Voice persistence entre licoes | TTS gera voz inconsistente entre modulos | MEDIA |
+| # | Capacidade Necessaria | Existe? | Onde? | O que falta? |
+|---|----------------------|---------|-------|-------------|
+| G01 | Workflow concreto CF | NAO | - | workflow_content_factory_course.yaml (30-40 steps, 5-7 waves) |
+| G02 | DAG concreto CF | NAO | - | p12_dag_content_factory.yaml (20+ nodes) |
+| G03 | Prompt templates por formato | NAO | - | Templates: script, slide, quiz, ebook, podcast |
+| G04 | NotebookLM integration | PARCIAL | .mcp-n04.json | MCP server config existe, mas nenhum workflow usa |
+| G05 | FFmpeg function_def | NAO | - | Wrapper para composicao video + audio + legendas |
+| G06 | TTS execution tool | NAO | audio_tool spec only | Wrapper real para ElevenLabs API |
+| G07 | Video editing tool | NAO | - | Python/FFmpeg wrapper para concatenacao |
+| G08 | Runway Gen API wrapper | NAO | - | Wrapper para geracao AI video |
+| G09 | Auto-publish Hotmart Club | NAO | config only | Upload automatico de curso |
+| G10 | Auto-publish DS24 area | NAO | config only | Upload automatico de material |
+| G11 | Slide generation (Marp/Slidev) | NAO | - | Markdown > slides HTML/PDF/PPTX |
+| G12 | eBook generation (Pandoc/Typst) | NAO | - | Markdown > PDF/EPUB |
+| G13 | Quality rubrics por formato | NAO | - | Rubrics: script, audio, video, slide |
+| G14 | A/B testing framework | NAO | - | Variacoes de hook/CTA |
+| G15 | Analytics feedback loop | NAO | - | Metricas de performance real |
+| G16 | Asset library management | NAO | - | Versionamento, busca de assets |
+| G17 | Multi-language templates | PARCIAL | PT-BR only | Narration templates em EN, ES |
+| G18 | Budget/cost tracking | NAO | credits system | Estimativa de custo por video |
+| G19 | Kind: video_asset | NAO | - | Registrar no kinds_meta.json |
+| G20 | Kind: course_outline | NAO | - | Registrar no kinds_meta.json |
+| G21 | Kind: lesson_module | NAO | - | Registrar no kinds_meta.json |
+| G22 | Kind: presentation_deck | NAO | - | Registrar no kinds_meta.json |
+| G23 | Kind: ebook_asset | NAO | - | Registrar no kinds_meta.json |
 
 ---
 
 ## 4. Kinds Audit
 
-### 4.1 Kinds Existentes Relevantes para CF
+### Kinds Existentes Relevantes
 
-| Kind | Pillar | Core? | CF Uso |
-|------|--------|-------|--------|
-| audio_tool | P04 | false | TTS narracao, STT transcricao |
-| vision_tool | P04 | false | Analise de imagens, OCR |
-| content_monetization | P04 | false | Pipeline COURSES + EMAILS + ADS |
-| social_publisher | P04 | false | Distribuicao social media |
-| document_loader | P04 | true | Ingestao de conteudo |
-| research_pipeline | P04 | false | Pesquisa multi-fonte |
-| prompt_template | P03 | true | Templates de conteudo |
-| rag_source | P01 | false | Fontes de conhecimento |
-| lifecycle_rule | P11 | true | Lifecycle de conteudo |
-| benchmark | P07 | false | Metricas de performance |
-| knowledge_card | P01 | true | Conhecimento destilado |
-| context_doc | P01 | true | Background de dominio |
-| action_prompt | P03 | true | Triggers de geracao |
-| workflow | P12 | true | Orquestracao runtime |
-| dag | P12 | true | Grafo de dependencias |
-| scoring_rubric | P07 | true | Criterios de avaliacao |
-| quality_gate | P07 | true | Gates de qualidade |
+| Kind | Pillar | Relevancia CF | KC Existe? |
+|------|--------|---------------|------------|
+| content_monetization | P04 | ALTA — pipeline 9-stage, cursos, pricing | SIM |
+| audio_tool | P04 | ALTA — TTS/STT para narracao | SIM |
+| social_publisher | P05 | ALTA — distribuicao social | SIM |
+| vision_tool | P04 | MEDIA — geracao de imagens | SIM |
+| workflow | P12 | CRITICA — orquestracao | SIM |
+| dag | P12 | ALTA — dependencias | SIM |
+| prompt_template | P03 | ALTA — templates de conteudo | SIM |
 
-### 4.2 Kinds NOVOS Propostos para Content Factory
+### Kinds Novos Propostos
 
 | Kind Novo | Pillar | Justificativa | Prioridade |
-|-----------|--------|---------------|-----------|
-| **video_production** | P04 | Workflow spec para geracao de video (plan, script, record, edit, render, publish) | CRITICA |
-| **course** | P04 | Estrutura curricular (modulos, licoes, assessment, certificacao) | CRITICA |
-| **lesson** | P04 | Unidade individual de aprendizado (objetivos, conteudo, assessment) | CRITICA |
-| **ebook** | P04 | Producao de ebook (capitulos, formatacao, export PDF/EPUB/MOBI) | ALTA |
-| **presentation** | P04 | Deck de slides (slides, speaker notes, animacoes) | ALTA |
-| **script** | P03 | Roteiro (video/podcast/curso) com timing cues | ALTA |
-| **video_asset** | P04 | Referencia a arquivo de video (mp4, metadata, thumbnails) | MEDIA |
-| **ebook_asset** | P04 | Referencia a ebook publicado (PDF/EPUB, ISBN, pages) | MEDIA |
-| **transcript** | P04 | Transcricao com timestamps e speaker ID | MEDIA |
-| **subtitle** | P04 | Arquivo de legenda (WebVTT/SRT) | MEDIA |
-| **podcast** | P04 | Estrutura de serie/episodio | MEDIA |
-| **lesson_assessment** | P04 | Quiz, assignment ou exame | MEDIA |
-| **learning_objective** | P04 | Objetivo SMART ligado a licao/curso | MEDIA |
-| **curriculum_map** | P04 | Learning path conectando licoes/cursos | MEDIA |
-| **content_brief** | P03 | Brief estruturado para geracao de conteudo | MEDIA |
+|-----------|--------|---------------|------------|
+| video_script | P03 | Roteiro com timing, narration, overlays, audio cues | CRITICA |
+| course_outline | P03 | Estrutura: modulos > licoes > objetivos > duracao | CRITICA |
+| lesson_module | P05 | Output: video + slides + quiz + PDF por licao | ALTA |
+| presentation_deck | P05 | Markdown > slides (Marp/Slidev/Canva) | ALTA |
+| ebook_asset | P05 | Markdown > PDF/EPUB (Pandoc/Typst) | MEDIA |
+| podcast_episode | P05 | Audio overview + show notes + transcript | MEDIA |
+| video_asset | P05 | Video final: MP4 + SRT + thumbnail | ALTA |
+| content_brief | P03 | Brief de entrada: topico + audience + formato + brand | ALTA |
+| social_grid | P05 | Pack de posts derivados de conteudo principal | MEDIA |
 
 ---
 
 ## 5. Pipeline Map
 
-### Pipeline Atual (pecas existentes)
-
 ```
-                    ┌─────────────────────────────────────────────────┐
-                    │              CEX CONTENT FACTORY                 │
-                    │           (Assets Existentes = ■)                │
-                    │           (Gaps = □)                             │
-                    └─────────────────────────────────────────────────┘
+                    CONTENT FACTORY PIPELINE
+                    ========================
 
-■ brand_config.yaml ──┐
-■ brand_inject.py     │    ┌──────────────┐     ┌──────────────┐
-■ brand_propagate.py  ├──> │ F3 INJECT    │────>│ F6 PRODUCE   │
-■ kc_brand_voice      │    │ (brand +     │     │ (8F pipeline) │
-■ kc_brand_archetypes │    │  knowledge)  │     │              │
-                      │    └──────────────┘     └──────┬───────┘
-■ rag_source         ─┘                                │
-■ knowledge_cards    ─┘                                │
-                                                       ▼
-                               ┌────────────────────────────────────────┐
-                               │         CONTENT PRODUCTION              │
-                               │                                         │
-  ■ research_pipeline ───>  ■ DAG  ──────>  ■ WORKFLOW                  │
-                               │              │                          │
-                               │    Wave 1    │    Wave 2      Wave 3   │
-                               │  ┌────────┐  │  ┌────────┐  ┌───────┐ │
-                               │  │Research │──┤  │■Script │  │□Edit  │ │
-                               │  └────────┘  │  │■Audio  │  │□Render│ │
-                               │              │  │■Visual │  │       │ │
-                               │              │  └────────┘  └───┬───┘ │
-                               │              │                  │     │
-                               │              │    Wave 4        │     │
-                               │              │  ┌────────┐      │     │
-                               │              │  │■Social │◄─────┘     │
-                               │              │  │□LMS    │            │
-                               │              │  │□Email  │            │
-                               │              │  └────────┘            │
-                               └────────────────────────────────────────┘
+  ENTRADA                                                    SAIDA
+  ┌─────────────┐                                   ┌──────────────────┐
+  │ content_brief│                                   │ course (Hotmart)  │
+  │ + brand_cfg  │                                   │ eBook (PDF/EPUB)  │
+  │ + audience   │                                   │ videos (YT/TT/IG) │
+  └──────┬──────┘                                   │ podcast (Spotify)  │
+         │                                           │ slides (PDF/PPTX)  │
+         ▼                                           │ social grid        │
+  ┌──────────────┐                                   └──────────────────┘
+  │ WAVE 1       │                                            ▲
+  │ N01 Research │──── research_report.md                     │
+  │ N01 Outline  │──── curriculum.md ─────┐                   │
+  └──────────────┘                        │                   │
+         │                                │                   │
+         ▼                                ▼                   │
+  ┌──────────────┐                 ┌──────────────┐           │
+  │ WAVE 2       │                 │ WAVE 2       │           │
+  │ N03 Scripts  │──── scripts/    │ N06 Pricing  │── tiers   │
+  │ (per module) │     module_*.md │ N06 Sales pg │── sales   │
+  └──────┬───────┘                 └──────────────┘           │
+         │                                                    │
+         ▼                                                    │
+  ┌──────────────────────────────────────────┐                │
+  │ WAVE 3 (PARALLEL)                        │                │
+  │                                          │                │
+  │ N04 Audio ──── narration_*.mp3           │                │
+  │   (ElevenLabs TTS)                       │                │
+  │                                          │                │
+  │ N04 Slides ──── slides_*.pdf/pptx        │                │
+  │   (Marp/Canva)                           │                │
+  │                                          │                │
+  │ N03 Quizzes ──── quiz_*.yaml             │                │
+  │   (prompt_template)                      │                │
+  │                                          │                │
+  │ N04 NotebookLM ── podcast_overview.mp3   │                │
+  │                 ── study_guide.pdf        │                │
+  └──────────────────────┬───────────────────┘                │
+                         │                                    │
+                         ▼                                    │
+  ┌──────────────┐                                            │
+  │ WAVE 4       │                                            │
+  │ N03 Video    │──── video_module_*.mp4                     │
+  │ (FFmpeg:     │     (audio + slides + overlays)            │
+  │  narration + │                                            │
+  │  slides +    │     video_promo_*.mp4                      │
+  │  overlays)   │     (short-form: TikTok/Reels/Shorts)     │
+  └──────┬───────┘                                            │
+         │                                                    │
+         ▼                                                    │
+  ┌──────────────────────────────────────────┐                │
+  │ WAVE 5 (PARALLEL)                        │                │
+  │                                          │                │
+  │ N04 eBook ──── ebook.pdf/epub            │                │
+  │   (Pandoc/Typst)                         │                │
+  │                                          │                │
+  │ N02 Social Grid ── 15+ posts             │                │
+  │   (social_publisher)                     │                │
+  │                                          │                │
+  │ N02 Email Seq ──── 5 emails              │                │
+  │   (content_monetization S7)              │                │
+  └──────────────────────┬───────────────────┘                │
+                         │                                    │
+                         ▼                                    │
+  ┌──────────────┐                                            │
+  │ WAVE 6       │                                            │
+  │ N05 Publish  │──── Hotmart Club upload ───────────────────┘
+  │ N05 Deploy   │──── YouTube upload
+  │ N02 Social   │──── Social media scheduling
+  │ N06 Monetize │──── Pricing live + checkout
+  └──────────────┘
 
-LEGENDA:
-  ■ research_pipeline    = cex_retriever.py + rag_source_builder
-  ■ DAG                  = dag-builder (pipeline structure)
-  ■ WORKFLOW             = workflow-builder (runtime execution)
-  ■ Script               = video/prompts/script_writer.md
-  ■ Audio                = audio-tool-builder (ElevenLabs TTS)
-  ■ Visual               = video/prompts/visual_prompter.md (Runway/Pika)
-  ■ Social               = social-publisher-builder
-  □ Edit/Render          = GAP (sem video-editor builder)
-  □ LMS                  = GAP (sem course-builder / LMS integration)
-  □ Email                = PARCIAL (content-monetization S7 EMAILS existe)
-```
-
-### Pipeline Alvo (com gaps preenchidos)
-
-```
-  BRIEF ──> RESEARCH ──> PLAN(DAG) ──> EXECUTE(WORKFLOW)
-                                          │
-              Wave 1: Research            │
-              ├─ rag_source (fontes)      │
-              ├─ research_pipeline        │
-              └─ knowledge_cards          │
-                                          │
-              Wave 2: Author              │
-              ├─ script (roteiro)     [□ NEW KIND]
-              ├─ lesson (unidade)     [□ NEW KIND]
-              ├─ course (curriculo)   [□ NEW KIND]
-              └─ presentation         [□ NEW KIND]
-                                          │
-              Wave 3: Produce             │
-              ├─ audio_tool (TTS)     [■ EXISTS]
-              ├─ visual_prompter      [■ EXISTS]
-              ├─ video_production     [□ NEW KIND]
-              └─ ebook                [□ NEW KIND]
-                                          │
-              Wave 4: Validate            │
-              ├─ quality_gate         [■ EXISTS]
-              ├─ scoring_rubric       [■ EXISTS]
-              ├─ benchmark            [■ EXISTS]
-              └─ tone_validator       [□ NEW TOOL]
-                                          │
-              Wave 5: Distribute          │
-              ├─ social_publisher     [■ EXISTS]
-              ├─ content_monetization [■ EXISTS]
-              ├─ lms_publisher        [□ NEW]
-              └─ email_distributor    [□ NEW]
+  BURACOS (gaps):
+  ────────────────
+  [!] FFmpeg wrapper NAO existe (G05, G07)
+  [!] ElevenLabs TTS wrapper NAO existe (G06)
+  [!] Marp/Slidev integration NAO existe (G11)
+  [!] Pandoc/Typst integration NAO existe (G12)
+  [!] NotebookLM workflow NAO existe (G04)
+  [!] Hotmart auto-upload NAO existe (G09)
+  [!] Workflow concreto NAO existe (G01)
+  [!] DAG concreto NAO existe (G02)
 ```
 
 ---
 
 ## 6. Builder Reuse Matrix
 
-| Builder | ISOs Reusaveis | ISOs a Adaptar | ISOs Irrelevantes |
-|---------|---------------|----------------|-------------------|
-| **content-monetization-builder** | 2 (collaboration, memory) | 10 (manifest, arch, system, instruction, schema, output, tools, quality, config, examples) | 1 (knowledge_card) |
-| **social-publisher-builder** | 8 (manifest, instruction, system, output, collaboration, memory, KC, quality) | 5 (arch, tools, config, examples, schema) | 0 |
-| **audio-tool-builder** | 11 (manifest, instruction, system, arch, tools, schema, output, quality, config, examples, collaboration) | 2 (KC, memory) | 0 |
-| **dag-builder** | 13 (TODOS) | 0 | 0 |
-| **workflow-builder** | 13 (TODOS) | 0 | 0 |
-| **prompt-template-builder** | 13 (TODOS) | 0 | 0 |
-| **rag-source-builder** | 13 (TODOS) | 0 | 0 |
-| **lifecycle-rule-builder** | 13 (TODOS) | 0 | 0 |
-| **benchmark-builder** | 8 | 5 (metricas CF-especificas) | 0 |
-| **Video legacy package** | 13 (prompts + core docs) | 5 (data files) | 0 |
+| Builder | ISOs Total | ISOs Reusaveis CF | ISOs a Adaptar | ISOs Irrelevantes |
+|---------|-----------|-------------------|----------------|-------------------|
+| **content-monetization** | 13 | 7 (collab, examples, instruction, KC, quality, schema, tools) | 4 (arch, config, output, sysprompt) | 2 (manifest, memory) |
+| **social-publisher** | 13 | 10 (scheduling, platform, caption gen) | 2 (video support) | 1 (manifest) |
+| **audio-tool** | 13 | 11 (TTS, STT, streaming, formats) | 1 (direction config) | 1 (manifest) |
+| **dag** | 13 | 12 (dependency modeling, parallel groups) | 0 | 1 (manifest) |
+| **workflow** | 13 | 13 (execution, waves, signals, recovery) | 0 | 0 |
+| **prompt-template** | 13 | 12 (variable extraction, mustache, validation) | 0 | 1 (manifest) |
+| **rag-source** | 13 | 8 (source cataloging, freshness) | 3 (URL-specific) | 2 |
+| **lifecycle-rule** | 13 | 6 (state machine, freshness) | 4 (artifact-specific) | 3 |
+| **benchmark** | 13 | 7 (metrics, methodology) | 4 (performance-specific) | 2 |
 
-**TOTAIS**:
-- ISOs reusaveis AS-IS: 107
-- ISOs a adaptar: 27
-- ISOs irrelevantes: 1
+**Total**: 117 ISOs auditados. 86 reusaveis (74%), 18 a adaptar (15%), 13 irrelevantes (11%).
 
 ---
 
 ## 7. Dependencias Externas Identificadas
 
-| Capacidade | Precisa API/tool externa? | Qual? | Custo Estimado |
-|------------|--------------------------|-------|----------------|
-| Video generation (AI) | SIM | Runway Gen-3, Pika 1.5, Kling | $0.05-0.50/clip |
-| TTS narration | SIM | ElevenLabs API | ~$0.003-0.005/min |
-| STT transcription | SIM | Whisper API ou Deepgram | ~$0.006/min |
-| Image generation | SIM | DALL-E, Midjourney, Flux | $0.02-0.08/img |
-| Social publishing | SIM | Ayrshare ou Postiz | $29-99/mo |
-| Email sequences | SIM | Resend, SendGrid, SES | $0-20/mo (volume) |
-| Course hosting (LMS) | SIM | Hotmart Club, Teachable, Thinkific | $0-99/mo |
-| PDF/EPUB generation | NAO | Pandoc, WeasyPrint (local) | Free |
-| Slide generation | PARCIAL | python-pptx (local) ou Gamma.app | Free-$15/mo |
-| Video editing/concat | NAO | FFmpeg (local) | Free |
-| Brand config storage | NAO | .cex/brand/brand_config.yaml | Free |
-| Orchestration | NAO | cex_mission_runner.py | Free |
-| Quality scoring | NAO | cex_score.py + cex_evolve.py | Free |
+| Capacidade | Precisa API/Tool Externa? | Qual? | Custo |
+|-----------|--------------------------|-------|-------|
+| TTS narracao | SIM | ElevenLabs (free: 3K chars/mo) | $0-$22/mo |
+| STT transcricao | SIM | Whisper (local) ou AssemblyAI | $0 (local) |
+| AI video geracao | SIM | Runway Gen-3/Gen-4 | $12-$76/mo |
+| Video composicao | SIM | FFmpeg (local, open-source) | $0 |
+| Slides geracao | SIM | Marp CLI (local) ou Canva API (free) | $0 |
+| eBook geracao | SIM | Pandoc (local) ou Typst (local) | $0 |
+| PDF geracao | SIM | WeasyPrint (Python, local) | $0 |
+| Social publishing | SIM | Ayrshare ($0 free tier) ou Postiz (open-source) | $0 |
+| Course hosting | SIM | Hotmart (comissao) ou DS24 (comissao) | % da venda |
+| NotebookLM | SIM | Google NotebookLM (free) | $0 |
+| LLM (scripts, quizzes) | JA TEM | Claude (subscription) | Incluso |
+| Brand injection | NAO | _tools/brand_inject.py | $0 |
+| Orquestracao | NAO | cex_sdk/workflow/ | $0 |
+
+**Custo minimo**: ~$0/mes (usa Claude subscription existente + tools gratuitas).
+**Custo recomendado**: ~$22/mes (ElevenLabs Pro para TTS de qualidade).
 
 ---
 
 ## 8. Recomendacoes para Wave 2
 
-### Quick Wins (1-3 dias cada)
+### Quick Wins (1-2 dias cada)
 
-| # | Acao | Impacto | Esforco |
-|---|------|---------|---------|
-| Q1 | Registrar 6 kinds novos em kinds_meta.json (video_production, course, lesson, ebook, presentation, script) | Desbloqueia 8F para CF | 1 dia |
-| Q2 | Criar KCs para os 6 novos kinds (kc_video_production.md, etc.) | F3 INJECT funciona | 1 dia |
-| Q3 | Mover video legacy de _archive/ para archetypes/builders/video-production-builder/ (reformatar como 13 ISOs) | Integra video no 8F | 2 dias |
-| Q4 | Adicionar brand_config vars BRAND_CONTENT_FORMAT_* | CF recebe preferencias de formato | 0.5 dia |
-| Q5 | Criar DAG `content_factory_production` com pipeline CF | Pipeline estatico pronto | 0.5 dia |
-| Q6 | Criar Workflow `content_factory_execution` com 5 waves | Orquestracao runtime pronta | 1 dia |
+| # | O que construir | Builder | Nucleus | Impacto |
+|---|----------------|---------|---------|---------|
+| QW1 | workflow_content_factory_course.yaml | workflow-builder | N03 | CRITICO — conecta tudo |
+| QW2 | p12_dag_content_factory.yaml | dag-builder | N03 | ALTO — mostra dependencias |
+| QW3 | Registrar 9 kinds novos | N07 manual | N07 | ALTO — habilita builders |
+| QW4 | Prompt template: video_script | prompt-template-builder | N03 | ALTO — formato de roteiro |
+| QW5 | Prompt template: course_outline | prompt-template-builder | N03 | ALTO — formato de outline |
 
-### Projetos Medios (1-2 semanas cada)
+### Projetos Medios (3-5 dias cada)
 
-| # | Acao | Impacto | Esforco |
-|---|------|---------|---------|
-| M1 | Criar course-builder (13 ISOs) — curriculo, modulos, licoes, assessment | Cursos no 8F | 1 semana |
-| M2 | Criar ebook-builder (13 ISOs) — capitulos, formatacao, export PDF/EPUB | Ebooks no 8F | 1 semana |
-| M3 | Criar cex_tone_validator.py — valida tom vs brand voice matrix | Quality gate de conteudo | 3 dias |
-| M4 | Criar cex_content_router.py — roteia conteudo por tipo para pillar correto | Distribuicao inteligente | 2 dias |
-| M5 | Adaptar social-publisher-builder para "content-distributor" multi-canal | Publicacao alem de social | 1 semana |
+| # | O que construir | Builder | Nucleus | Impacto |
+|---|----------------|---------|---------|---------|
+| PM1 | FFmpeg function_def | function-def-builder | N05 | CRITICO — composicao video |
+| PM2 | NotebookLM workflow | workflow-builder + MCP | N04 | ALTO — podcast + study guide |
+| PM3 | Marp/Slidev function_def | function-def-builder | N05 | ALTO — slides automaticos |
+| PM4 | Pandoc/Typst function_def | function-def-builder | N05 | MEDIA — eBook automatico |
+| PM5 | Quality rubrics (4 formatos) | scoring-rubric-builder | N03 | ALTO — validacao por formato |
 
-### Projetos Grandes (3-4 semanas)
+### Projetos Grandes (1-2 semanas cada)
 
-| # | Acao | Impacto | Esforco |
-|---|------|---------|---------|
-| L1 | Video editor integration (FFmpeg pipeline com audio+visual concat) | Video end-to-end | 2-3 semanas |
-| L2 | LMS integration (Hotmart Club / Teachable API) | Publicacao automatica de cursos | 2-3 semanas |
-| L3 | Presentation builder + python-pptx / Gamma integration | Slides automaticos | 2 semanas |
+| # | O que construir | Builder | Nucleus | Impacto |
+|---|----------------|---------|---------|---------|
+| PG1 | ElevenLabs TTS wrapper | cli-tool-builder | N05 | ALTO — narracao profissional |
+| PG2 | Hotmart Club auto-publish | api-client-builder | N05 | ALTO — curso automatico |
+| PG3 | A/B testing framework | benchmark-builder | N03 | MEDIA — otimizacao |
+| PG4 | Analytics feedback loop | webhook-builder | N05 | MEDIA — metricas reais |
 
-### Ordem Recomendada de Execucao
+### Ordem de Execucao Recomendada
 
 ```
-Semana 1:  Q1 + Q2 + Q4 + Q5 + Q6  (fundacao: kinds, KCs, DAG, workflow)
-Semana 2:  Q3 + M4                   (video legacy -> builder, content router)
-Semana 3:  M1                        (course-builder)
-Semana 4:  M2 + M3                   (ebook-builder, tone validator)
-Semana 5+: M5 + L1                   (content-distributor, video editor)
+Wave 2A (paralelo):
+  N03: QW1 (workflow) + QW2 (DAG) + QW4 (video_script template)
+  N04: PM2 (NotebookLM workflow)
+  N07: QW3 (registrar kinds)
+
+Wave 2B (paralelo):
+  N05: PM1 (FFmpeg) + PM3 (Marp) + PM4 (Pandoc)
+  N03: QW5 (course_outline template) + PM5 (quality rubrics)
+  N02: Social grid templates
+
+Wave 2C (sequencial):
+  N05: PG1 (ElevenLabs) + PG2 (Hotmart publish)
+  N03: PG3 (A/B testing)
+
+Wave 2D (final):
+  N07: Integracao end-to-end + teste do pipeline completo
 ```
 
-### SDK & Tools Existentes — Resumo de Relevancia
+### Stack Zero-Cost para Content Factory
 
-**Tier 1 (HIGHEST)**: cex_8f_runner.py (1279L), cex_run.py (628L), cex_8f_motor.py (1400L), cex_batch.py (183L), cex_crew_runner.py (1192L), cex_score.py (712L), cex_evolve.py (959L), cex_retriever.py (457L), cex_compile.py (563L), cex_hooks.py (468L), brand_inject.py (138L)
-
-**Tier 2 (HIGH)**: cex_coordinator.py (526L), cex_router.py (405L), cex_pipeline.py (740L), cex_query.py (361L), cex_intent.py (567L), cex_mission_runner.py (490L)
-
-**SDK**: models (1054L multi-provider), workflow (336L orchestration), knowledge (400L ingest/chunk/embed), tools (153L decorators+MCP), eval (110L quality)
-
-**Total HIGH/HIGHEST**: ~13,500 linhas (50% de todos os tools) diretamente aplicaveis.
-
-### Adaptacoes 8F para Content Factory
-
-| Fase | Adaptacao | Esforco |
-|------|-----------|---------|
-| F3 INJECT | Injetar brand_config.yaml (cores, voz, tom, style) | BAIXO |
-| F3 INJECT | Pre-carregar content guidelines, tone matrix, audience profiles | BAIXO |
-| F4 REASON | Adicionar content_type + audience ao planning | BAIXO |
-| F7 GOVERN | Adicionar gates CF-especificos (readability, SEO, tone match) | MEDIO |
-| F8 COLLABORATE | Batch compile/index/commit (1 commit por batch) | BAIXO |
+| Tool | Custo | Uso | Integracao |
+|------|-------|-----|------------|
+| Claude (subscription) | Incluso | Scripts, outlines, quizzes | Nuclei sao sessoes Claude |
+| NotebookLM (free) | $0 | Audio Overview, Video Overview, Study Guide | MCP server (notebooklm-mcp) |
+| Canva Free | $0 | Slides, social graphics, short videos | Canva API (free tier) |
+| Marp/Slidev | $0 | Markdown > slides HTML/PDF/PPTX | CLI function_def |
+| Pandoc/Typst | $0 | Markdown > PDF/EPUB | CLI function_def |
+| FFmpeg | $0 | Video composicao, transcoding, legendas | CLI function_def |
+| WeasyPrint | $0 | HTML/CSS > PDF | Python function_def |
+| ElevenLabs | Free tier | TTS (3K chars/mo) | audio_tool |
+| Whisper | $0 (local) | STT transcricao | audio_tool |
 
 ---
 
-## Conclusao
+## Apendice: Video Package — Compatibility Matrix
 
-O CEX possui uma **base solida e madura** para construir uma Content Factory autonoma. Os maiores ativos sao:
+| LLM | Compatibilidade | Success Rate Estimado |
+|-----|----------------|----------------------|
+| Claude Opus 4 | Excelente | 95% first-pass |
+| GPT-4 Turbo | Excelente | 92% first-pass |
+| Gemini 2.5 Pro | Boa | 90% first-pass |
+| Llama 3 70B | Razoavel | 75-80% (precisa simplificar) |
 
-1. **Video legacy package** (9.0/10) — pronto para uso imediato
-2. **Brand injection pipeline** — 41 variaveis, injecao automatica em qualquer template
-3. **DAG + Workflow builders** — orquestracao AS-IS para pipeline de conteudo
-4. **Audio tool builder** — narracao TTS production-ready
-5. **8F pipeline + SDK** — 13.5K linhas de tools de alta relevancia
+## Apendice: Content Monetization — Platform Comparison
 
-Os maiores gaps sao a **ausencia de kinds formais** para conteudo (video, course, lesson, ebook) e a **falta de builders dedicados** para curriculo e ebooks. A recomendacao e comecar pela fundacao (kinds + KCs na semana 1) e escalar com builders nas semanas seguintes.
+| Plataforma | Integracao | Webhook | Signature | Auto-Publish |
+|-----------|-----------|---------|-----------|-------------|
+| Hotmart | OAuth2 Bearer | JSON | sha256 HMAC | NAO (config only) |
+| DS24 | API Key Header | form-encoded | sha512 | NAO (config only) |
+| Stripe | Bearer Token | JSON | HMAC SHA256 | N/A |
+| Kiwify | Bearer Token | JSON | HMAC | NAO |
 
-**Cobertura atual: ~62% | Cobertura apos Quick Wins: ~75% | Cobertura apos 4 semanas: ~90%**
+## Apendice: Brand Variables Disponíveis (29)
+
+**Identity**: BRAND_NAME, BRAND_NAME_SHORT, BRAND_TAGLINE, BRAND_LANGUAGE, BRAND_HASHTAG
+**Positioning**: BRAND_CATEGORY, BRAND_UVP, BRAND_DIFFERENTIATOR, BRAND_ESSENCE, BRAND_ICP, BRAND_ICP_AGE, BRAND_ICP_INCOME, BRAND_ICP_LOCATION
+**Archetype**: BRAND_ARCHETYPE, BRAND_ARCHETYPE_SHADOW
+**Voice**: BRAND_VOICE_TONE, BRAND_VOICE_FORMALITY (1-5), BRAND_VOICE_ENTHUSIASM (1-5), BRAND_VOICE_HUMOR (1-5), BRAND_VOICE_WARMTH (1-5), BRAND_VOICE_AUTHORITY (1-5), BRAND_VOICE_DO, BRAND_VOICE_DONT, BRAND_STYLE
+**Narrative**: BRAND_STORY, BRAND_MISSION, BRAND_VISION, BRAND_MANIFESTO
+**Commercial**: BRAND_CURRENCY, BRAND_PRICING_MODEL, BRAND_TIERS
