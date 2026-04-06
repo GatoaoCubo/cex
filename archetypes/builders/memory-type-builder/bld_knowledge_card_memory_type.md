@@ -50,3 +50,5 @@ if confidence_new < 0.1: prune()  # MIN_CONFIDENCE
 | cex_memory_update.py | decay_rate per type | bld_memory_*.md |
 | cex_memory_select.py | age + type for ranking | selection cache |
 | cex_crew_runner.py | type labels + freshness | prompt injection |
+| cex_memory_age.py | type-specific decay rate | freshness_score float |
+| cex_8f_runner.py | memory via F3 INJECT | enriched context |

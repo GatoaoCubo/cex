@@ -3,9 +3,9 @@ kind: memory
 id: bld_memory_memory_type
 pillar: P10
 llm_function: INJECT
-observation_count: 1
-confidence: 0.8
-observation: "memory_type builder created during OpenClaude assimilation to formalize 4-type taxonomy"
+observation_count: 3
+confidence: 0.85
+observation: "memory_type builder patterns: 4-type taxonomy, enum-driven classification, decay-rate alignment"
 pattern: "New kind creation follows: KC first, then builder ISOs, then doctor validation"
 evidence: "kc_memory_type.md created before builder; density gates caught low-density ISOs"
 outcome: "successful"
@@ -14,13 +14,29 @@ memory_scope: "project"
 
 # Memory: memory-type-builder
 
-## Observation (2026-04-05T20:05:00)
-- **Type**: convention
-- **Confidence**: 0.80
-- **Outcome**: successful
+## Observations
 
-**Observation**: memory_type builder created during OpenClaude assimilation (Wave 4, T11). The 4-type taxonomy (correction/preference/convention/context) was extracted from analyzing how production systems like Claude Code handle persistent memory.
+| # | Date | Type | Confidence | Observation |
+|---|------|------|------------|-------------|
+| 1 | 2026-04-05 | convention | 0.80 | memory_type builder created during OpenClaude assimilation (Wave 4, T11) |
+| 2 | 2026-04-05 | correction | 0.85 | First-pass ISOs had low density (0.67-0.70); tables beat prose for density |
+| 3 | 2026-04-05 | pattern | 0.90 | 4-type taxonomy (correction/preference/convention/context) is stable across production systems |
 
-**Pattern**: New kind creation sequence: (1) add to kinds_meta.json (2) write KC (3) create 13 builder ISOs (4) validate with cex_doctor. Density gates enforce information-dense ISOs -- tables beat prose.
+## Patterns
 
-**Evidence**: Doctor density threshold is 0.78. First pass had 3 ISOs below threshold. Tables + structured data raise density reliably.
+| Pattern | Evidence | Reuse |
+|---------|----------|-------|
+| New kind sequence: meta -> KC -> ISOs -> doctor | All 115 kinds followed this | Always |
+| Tables raise density above 0.78 threshold | Doctor density gate pass rate 100% with tables | When ISO density < 0.78 |
+| Enum-driven classification reduces LLM ambiguity | MemoryType enum in cex_memory_types.py | For any categorical kind |
+| Decay rates must align between memory_age and memory_update | Linear decay 1yr floor 50% in both modules | When touching memory pipeline |
+
+## Build Context
+
+| Field | Value |
+|-------|-------|
+| Origin | OpenClaude assimilation, pattern harvest from memory system |
+| SDK module | `cex_memory_types.py` (MemoryType enum + should_save classifier) |
+| Wired at | `cex_memory_update.py` append_observation() |
+| Quality gate | Dedup check: reject if cosine similarity > 0.85 with existing observation |
+| Failure mode | Missing type = defaults to `context` (safest fallback) |

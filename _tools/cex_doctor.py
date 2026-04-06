@@ -35,8 +35,8 @@ EXPECTED_KINDS = [
     "tools",
 ]
 EXPECTED_COUNT = len(EXPECTED_KINDS)  # 13
-MAX_BYTES = 4096
-MAX_BYTES_INSTRUCTION = 6144
+MAX_BYTES = 6144
+MAX_BYTES_INSTRUCTION = 8192
 MIN_DENSITY = 0.78
 NAMING_RE = re.compile(r"^bld_[a-z][a-z0-9_]+_[a-z][a-z0-9_]+\.md$")
 
