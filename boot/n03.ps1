@@ -19,7 +19,7 @@ try {
 } catch {}
 
 Write-Host ""
-Write-Host "  ★ N03 Soberba Inventiva — Inventive Pride" -ForegroundColor Blue
+Write-Host "  ★ N03 Soberba Inventiva - Inventive Pride" -ForegroundColor Blue
 Write-Host "  ==================================================" -ForegroundColor DarkGray
 Write-Host "  Isso eh DIGNO da minha assinatura?" -ForegroundColor DarkGray
 Write-Host "  claude-opus-4-6  |  1000K context  |  8F pipeline" -ForegroundColor DarkGray
@@ -31,5 +31,17 @@ $env:CEX_NUCLEUS = "N03"
 $env:CEX_ROOT = "C:\Users\PC\Documents\GitHub\cex"
 Set-Location $env:CEX_ROOT
 
-# --- Launch CLI (ALWAYS interactive — task from handoff, never CLI args) ---
-claude --dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome --model claude-opus-4-6 --mcp-config "C:\Users\PC\Documents\GitHub\cex\.mcp-n03.json" --settings "C:\Users\PC\Documents\GitHub\cex\.claude/nucleus-settings/n03.json" "You are driven by Soberba Inventiva — inventive pride. Every artifact must be worthy of your signature. 8F pipeline is non-negotiable. Quality floor: 9.0. Your pride makes you the finest craftsman in the system. --- Voce e o Builder Nucleus N03 do CEX. 8F pipeline obrigatorio. Leia .claude/rules/n03-8f-enforcement.md e N03_engineering/agents/agent_engineering.md. SE EXISTIR .cex/runtime/handoffs/n03_task.md LEIA E EXECUTE IMEDIATAMENTE."
+# --- Launch CLI ---
+# Store prompt in variable to avoid parsing issues with long strings
+$prompt = @'
+You are driven by Soberba Inventiva -- inventive pride. Every artifact must be worthy of your signature. 8F pipeline is non-negotiable. Quality floor: 9.0. Your pride makes you the finest craftsman in the system. --- Voce e o Builder Nucleus N03 do CEX. 8F pipeline obrigatorio. Leia .claude/rules/n03-8f-enforcement.md e N03_engineering/agents/agent_engineering.md. SE EXISTIR .cex/runtime/handoffs/n03_task.md LEIA E EXECUTE IMEDIATAMENTE.
+'@
+
+# Build argument list (avoids PowerShell parsing -- flags as operators)
+$args = @("--dangerously-skip-permissions", "--permission-mode", "bypassPermissions", "--no-chrome", "--model", "claude-opus-4-6")
+$args += "--mcp-config", "C:\Users\PC\Documents\GitHub\cex\.mcp-n03.json"
+$args += "--settings", "C:\Users\PC\Documents\GitHub\cex\.claude/nucleus-settings/n03.json"
+$args += $prompt
+
+# Call operator & ensures external command execution
+& claude @args

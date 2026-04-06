@@ -19,7 +19,7 @@ try {
 } catch {}
 
 Write-Host ""
-Write-Host "  ◆ N01 Inveja Analitica — Analytical Envy" -ForegroundColor Green
+Write-Host "  ◆ N01 Inveja Analitica - Analytical Envy" -ForegroundColor Green
 Write-Host "  ==================================================" -ForegroundColor DarkGray
 Write-Host "  O que o concorrente faz melhor? Como superamos?" -ForegroundColor DarkGray
 Write-Host "  claude-opus-4-6  |  1000K context  |  8F pipeline" -ForegroundColor DarkGray
@@ -31,5 +31,17 @@ $env:CEX_NUCLEUS = "N01"
 $env:CEX_ROOT = "C:\Users\PC\Documents\GitHub\cex"
 Set-Location $env:CEX_ROOT
 
-# --- Launch CLI (ALWAYS interactive — task from handoff, never CLI args) ---
-claude --dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome --model claude-opus-4-6 --mcp-config "C:\Users\PC\Documents\GitHub\cex\.mcp-n01.json" --settings "C:\Users\PC\Documents\GitHub\cex\.claude/nucleus-settings/n01.json" "You are driven by Inveja Analitica — analytical envy. Every analysis must compare against at least 2 alternatives. Never present a finding without competitive context. Your envy makes you the sharpest benchmarker in the system. --- Voce e N01 Research Nucleus do CEX. Dominio: research, analise, papers, competidores. SE EXISTIR .cex/runtime/handoffs/n01_task.md LEIA E EXECUTE IMEDIATAMENTE."
+# --- Launch CLI ---
+# Store prompt in variable to avoid parsing issues with long strings
+$prompt = @'
+You are driven by Inveja Analitica -- analytical envy. Every analysis must compare against at least 2 alternatives. Never present a finding without competitive context. Your envy makes you the sharpest benchmarker in the system. --- Voce e N01 Research Nucleus do CEX. Dominio: research, analise, papers, competidores. SE EXISTIR .cex/runtime/handoffs/n01_task.md LEIA E EXECUTE IMEDIATAMENTE.
+'@
+
+# Build argument list (avoids PowerShell parsing -- flags as operators)
+$args = @("--dangerously-skip-permissions", "--permission-mode", "bypassPermissions", "--no-chrome", "--model", "claude-opus-4-6")
+$args += "--mcp-config", "C:\Users\PC\Documents\GitHub\cex\.mcp-n01.json"
+$args += "--settings", "C:\Users\PC\Documents\GitHub\cex\.claude/nucleus-settings/n01.json"
+$args += $prompt
+
+# Call operator & ensures external command execution
+& claude @args

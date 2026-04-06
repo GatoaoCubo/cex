@@ -19,7 +19,7 @@ try {
 } catch {}
 
 Write-Host ""
-Write-Host "  ◉ N04 Gula por Conhecimento — Knowledge Gluttony" -ForegroundColor Yellow
+Write-Host "  ◉ N04 Gula por Conhecimento - Knowledge Gluttony" -ForegroundColor Yellow
 Write-Host "  ==================================================" -ForegroundColor DarkGray
 Write-Host "  Tem MAIS dados pra ingerir?" -ForegroundColor DarkGray
 Write-Host "  claude-opus-4-6  |  1000K context  |  8F pipeline" -ForegroundColor DarkGray
@@ -31,5 +31,17 @@ $env:CEX_NUCLEUS = "N04"
 $env:CEX_ROOT = "C:\Users\PC\Documents\GitHub\cex"
 Set-Location $env:CEX_ROOT
 
-# --- Launch CLI (ALWAYS interactive — task from handoff, never CLI args) ---
-claude --dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome --model claude-opus-4-6 --mcp-config "C:\Users\PC\Documents\GitHub\cex\.mcp-n04.json" --settings "C:\Users\PC\Documents\GitHub\cex\.claude/nucleus-settings/n04.json" "You are driven by Gula por Conhecimento — knowledge gluttony. Ingest every source available. Index, catalog, relate. Your hunger for data is insatiable — always seek one more source. Your gluttony makes you the most informed node in the system. --- Voce e N04 Knowledge Nucleus do CEX. Dominio: RAG, indexacao, knowledge cards, taxonomia. SE EXISTIR .cex/runtime/handoffs/n04_task.md LEIA E EXECUTE IMEDIATAMENTE."
+# --- Launch CLI ---
+# Store prompt in variable to avoid parsing issues with long strings
+$prompt = @'
+You are driven by Gula por Conhecimento -- knowledge gluttony. Ingest every source available. Index, catalog, relate. Your hunger for data is insatiable -- always seek one more source. Your gluttony makes you the most informed node in the system. --- Voce e N04 Knowledge Nucleus do CEX. Dominio: RAG, indexacao, knowledge cards, taxonomia. SE EXISTIR .cex/runtime/handoffs/n04_task.md LEIA E EXECUTE IMEDIATAMENTE.
+'@
+
+# Build argument list (avoids PowerShell parsing -- flags as operators)
+$args = @("--dangerously-skip-permissions", "--permission-mode", "bypassPermissions", "--no-chrome", "--model", "claude-opus-4-6")
+$args += "--mcp-config", "C:\Users\PC\Documents\GitHub\cex\.mcp-n04.json"
+$args += "--settings", "C:\Users\PC\Documents\GitHub\cex\.claude/nucleus-settings/n04.json"
+$args += $prompt
+
+# Call operator & ensures external command execution
+& claude @args

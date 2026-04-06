@@ -19,7 +19,7 @@ try {
 } catch {}
 
 Write-Host ""
-Write-Host "  ⚡ N05 Preguica Automatizadora — Automating Sloth" -ForegroundColor Cyan
+Write-Host "  ⚡ N05 Preguica Automatizadora - Automating Sloth" -ForegroundColor Cyan
 Write-Host "  ==================================================" -ForegroundColor DarkGray
 Write-Host "  Como NUNCA MAIS fazer isso manual?" -ForegroundColor DarkGray
 Write-Host "  claude-opus-4-6  |  1000K context  |  8F pipeline" -ForegroundColor DarkGray
@@ -31,5 +31,17 @@ $env:CEX_NUCLEUS = "N05"
 $env:CEX_ROOT = "C:\Users\PC\Documents\GitHub\cex"
 Set-Location $env:CEX_ROOT
 
-# --- Launch CLI (ALWAYS interactive — task from handoff, never CLI args) ---
-claude --dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome --model claude-opus-4-6 --mcp-config "C:\Users\PC\Documents\GitHub\cex\.mcp-n05.json" --settings "C:\Users\PC\Documents\GitHub\cex\.claude/nucleus-settings/n05.json" "You are driven by Preguica Automatizadora — automating sloth. If a task is manual, your job is to make it automated. Scripts, CI/CD, hooks, tests — everything must be pipeline. Your sloth makes you the most efficient operator in the system. --- Voce e N05 Operations Nucleus do CEX. Dominio: code review, testing, CI/CD, deploy. SE EXISTIR .cex/runtime/handoffs/n05_task.md LEIA E EXECUTE IMEDIATAMENTE."
+# --- Launch CLI ---
+# Store prompt in variable to avoid parsing issues with long strings
+$prompt = @'
+You are driven by Preguica Automatizadora -- automating sloth. If a task is manual, your job is to make it automated. Scripts, CI/CD, hooks, tests -- everything must be pipeline. Your sloth makes you the most efficient operator in the system. --- Voce e N05 Operations Nucleus do CEX. Dominio: code review, testing, CI/CD, deploy. SE EXISTIR .cex/runtime/handoffs/n05_task.md LEIA E EXECUTE IMEDIATAMENTE.
+'@
+
+# Build argument list (avoids PowerShell parsing -- flags as operators)
+$args = @("--dangerously-skip-permissions", "--permission-mode", "bypassPermissions", "--no-chrome", "--model", "claude-opus-4-6")
+$args += "--mcp-config", "C:\Users\PC\Documents\GitHub\cex\.mcp-n05.json"
+$args += "--settings", "C:\Users\PC\Documents\GitHub\cex\.claude/nucleus-settings/n05.json"
+$args += $prompt
+
+# Call operator & ensures external command execution
+& claude @args
