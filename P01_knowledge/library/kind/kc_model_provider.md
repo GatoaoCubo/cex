@@ -41,8 +41,8 @@ A model provider config defines how CEX connects to an LLM API. Each provider ha
 | provider | Service identifier | `anthropic`, `openai`, `google`, `local` |
 | api_key_env | Env var name | `ANTHROPIC_API_KEY` |
 | models.fast | Low-latency model | `claude-3-5-haiku-20241022` |
-| models.balanced | Default model | `claude-sonnet-4-20250514` |
-| models.quality | Best quality model | `claude-opus-4-20250514` |
+| models.balanced | Default model | `claude-sonnet-4-6` |
+| models.quality | Best quality model | `claude-opus-4-6` |
 | rate_limit_rpm | Requests per minute | `60` |
 | rate_limit_tpm | Tokens per minute | `100000` |
 | fallback | Next provider if this fails | `openai` |

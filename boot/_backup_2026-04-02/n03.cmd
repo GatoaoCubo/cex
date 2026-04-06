@@ -9,7 +9,7 @@ set CEX_NUCLEUS=N03
 set CEX_ROOT=C:\Users\PC\Documents\GitHub\cex
 cd /d "%CEX_ROOT%"
 
-set FLAGS=--dangerously-skip-permissions --permission-mode bypassPermissions --model claude-opus-4-0 --no-chrome
+set FLAGS=--dangerously-skip-permissions --permission-mode bypassPermissions --model claude-opus-4-6 --no-chrome
 set MCP=--mcp-config %CEX_ROOT%\.mcp-n03.json
 set SETTINGS=--settings %CEX_ROOT%\.claude\nucleus-settings\n03.json
 

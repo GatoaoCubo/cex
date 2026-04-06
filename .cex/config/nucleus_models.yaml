@@ -21,7 +21,7 @@ n07:
   model: anthropic/claude-opus-4-6
   thinking: xhigh
   flags: ""
-  context: 200000
+  context: 1000000
   domain: orchestration
   fallback:
     cli: ollama
@@ -37,7 +37,7 @@ n01:
   domain: research
   fallback:
     cli: claude
-    model: claude-opus-4-0
+    model: claude-opus-4-6
     flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
   fallback_local:
     cli: ollama
@@ -47,9 +47,9 @@ n01:
 # --- N02: Marketing & Copy ---
 n02:
   cli: claude
-  model: claude-sonnet-4-20250514
+  model: claude-sonnet-4-6
   flags: "--dangerously-skip-permissions --no-chrome"
-  context: 200000
+  context: 1000000
   domain: marketing
   fallback:
     cli: gemini
@@ -63,9 +63,9 @@ n02:
 # --- N03: Engineering & Builder ---
 n03:
   cli: claude
-  model: claude-opus-4-0
+  model: claude-opus-4-6
   flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
-  context: 200000
+  context: 1000000
   domain: engineering
   mcps: ".mcp-n03.json"
   settings: ".claude/nucleus-settings/n03.json"
@@ -99,9 +99,9 @@ n04:
 #       o3 requires API key. With sub-only, use o4-mini or fallback to claude.
 n05:
   cli: claude
-  model: claude-sonnet-4-20250514
+  model: claude-sonnet-4-6
   flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
-  context: 200000
+  context: 1000000
   domain: operations
   fallback:
     cli: codex
@@ -115,9 +115,9 @@ n05:
 # --- N06: Commercial & Brand ---
 n06:
   cli: claude
-  model: claude-sonnet-4-20250514
+  model: claude-sonnet-4-6
   flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
-  context: 200000
+  context: 1000000
   domain: commercial
   mcps: ".mcp-n06.json"
   settings: ".claude/nucleus-settings/n06.json"

@@ -274,7 +274,7 @@ def execute_prompt(prompt: str) -> str:
     try:
         import subprocess
         result = subprocess.run(
-            ["claude", "-p", "--model", "claude-sonnet-4-20250514", "--no-chrome"],
+            ["claude", "-p", "--model", "claude-sonnet-4-6", "--no-chrome"],
             input=prompt, capture_output=True, text=True,
             timeout=120, encoding="utf-8",
         )
@@ -331,7 +331,7 @@ def execute_prompt(prompt: str) -> str:
             # [4] Anthropic API
             try:
                 from cex_sdk.models.providers.anthropic import Claude
-                model = Claude(id="claude-sonnet-4-20250514", max_tokens=8000)
+                model = Claude(id="claude-sonnet-4-6", max_tokens=8000)
                 response = model.invoke([SDKMessage(role="user", content=prompt)])
                 if response.content:
                     _log_sdk_metrics(response, "Anthropic-API")

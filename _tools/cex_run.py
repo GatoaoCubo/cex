@@ -47,7 +47,7 @@ from _tools.cex_hooks import validate_artifact
 # ── Config ──────────────────────────────────────────────────────────────────
 
 # Use short aliases (subscription auth) — NOT full model IDs (API credits).
-# "sonnet" / "opus" / "haiku" → subscription. "claude-sonnet-4-20250514" → API billing.
+# "sonnet" / "opus" / "haiku" → subscription. "claude-sonnet-4-6" → API billing.
 EFFORT_TO_MODEL = {
     "low": "haiku",
     "medium": "sonnet",

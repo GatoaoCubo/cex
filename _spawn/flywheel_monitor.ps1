@@ -75,6 +75,22 @@ for ($round = 1; $round -le $MaxRounds; $round++) {
         Log "*** ALL CHECKS PASSED -- system healthy ***"
     }
 
+    # Model staleness check (every 4th round ~ every 2h)
+    if ($round % 4 -eq 1) {
+        Log "Checking model versions..."
+        $modelOutput = python _tools/cex_model_updater.py --check --json 2>&1 | Out-String
+        try {
+            $modelData = $modelOutput | ConvertFrom-Json
+            if ($modelData.count -gt 0) {
+                Log "!!! STALE MODELS: $($modelData.count) model(s) need update. Run: python _tools/cex_model_updater.py --full"
+            } else {
+                Log "Models: all current"
+            }
+        } catch {
+            Log "Model check: parse error (non-critical)"
+        }
+    }
+
     $PrevWired = $wired
     $PrevBroken = $broken
 

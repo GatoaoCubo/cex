@@ -271,7 +271,7 @@ def test_fork_execution_metadata():
     assert runner._resolve_fork_context({}) == "inline"
 
     # Test model resolution
-    model, tokens = runner._resolve_model({"model": "claude-opus-4-20250514", "model_max_tokens": 16000})
+    model, tokens = runner._resolve_model({"model": "claude-opus-4-6", "model_max_tokens": 16000})
     assert "opus" in model
     assert tokens == 16000
 

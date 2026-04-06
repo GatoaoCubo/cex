@@ -1,7 +1,7 @@
 @echo off
 :: CEX N05 — CEX-N05-OPERATIONS
 :: Generated from .cex/config/nucleus_models.yaml
-:: CLI: claude | Model: claude-sonnet-4-20250514
+:: CLI: claude | Model: claude-sonnet-4-6
 :: NOTE: Codex/o3 unavailable on ChatGPT sub. Sonnet is primary.
 
 title CEX-N05-OPERATIONS
@@ -10,7 +10,7 @@ set CEX_NUCLEUS=N05
 set CEX_ROOT=C:\Users\PC\Documents\GitHub\cex
 cd /d "%CEX_ROOT%"
 
-set MODEL=--model claude-sonnet-4-20250514
+set MODEL=--model claude-sonnet-4-6
 set FLAGS=--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome
 
 :: ALWAYS interactive — task comes from handoff file, never CLI args

@@ -2,7 +2,7 @@
 id: p02_mc_claude_opus_4
 kind: model_card
 pillar: P02
-model_name: claude-opus-4-0520
+model_name: claude-opus-4-6520
 provider: anthropic
 context_window: 200000
 pricing:
@@ -22,7 +22,7 @@ tags: [model-card, opus, anthropic, pricing, capabilities]
 ## Specifications
 | Spec | Value |
 |------|-------|
-| Model | claude-opus-4-0520 |
+| Model | claude-opus-4-6520 |
 | Provider | Anthropic |
 | Context Window | 200K tokens |
 | Max Output | 32K tokens |

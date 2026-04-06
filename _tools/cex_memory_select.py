@@ -44,7 +44,7 @@ CACHE_DIR = CEX_ROOT / ".cex" / "temp" / "memory_cache"
 CACHE_TTL_SECONDS = 300  # 5 minutes
 
 # LLM selector model — sonnet is sufficient, 4x cheaper than opus
-LLM_MODEL = "claude-sonnet-4-20250514"
+LLM_MODEL = "claude-sonnet-4-6"
 LLM_MAX_TOKENS = 1024
 
 

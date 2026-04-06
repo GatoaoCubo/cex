@@ -33,7 +33,7 @@ domain: "llm_inference"
 quality: null
 tags: [benchmark, ttft, latency, model-comparison, sonnet, haiku]
 tldr: "TTFT benchmark: Sonnet 4 (850ms baseline) vs Haiku 4.5 (target 400ms), 100 iterations, p50/p95/p99 on Railway PRO"
-comparison_subjects: [claude-sonnet-4-20250514, claude-haiku-4-5-20251001]
+comparison_subjects: [claude-sonnet-4-6, claude-haiku-4-5-20251001]
 statistical_test: "Mann-Whitney U"
 confidence_interval: 0.95
 density_score: 0.91

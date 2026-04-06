@@ -60,8 +60,8 @@ class TestErrorHierarchy:
 
     @pytest.mark.unit
     def test_llm_error(self):
-        e = LLMError("timeout", model="claude-opus-4-0")
-        assert e.model == "claude-opus-4-0"
+        e = LLMError("timeout", model="claude-opus-4-6")
+        assert e.model == "claude-opus-4-6"
 
     @pytest.mark.unit
     def test_config_error(self):

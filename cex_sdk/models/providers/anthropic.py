@@ -22,7 +22,7 @@ from cex_sdk.utils.timer import Timer
 class Claude(Model):
     """Anthropic Claude models."""
 
-    id: str = "claude-sonnet-4-20250514"
+    id: str = "claude-sonnet-4-6"
     provider: str = "Anthropic"
     max_tokens: int = 8192
     api_key: Optional[str] = None

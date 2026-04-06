@@ -54,7 +54,7 @@ class TestCountTokens:
 class TestGetEncoder:
     @pytest.mark.unit
     def test_claude_encoder(self):
-        enc = get_encoder("claude-sonnet-4-20250514")
+        enc = get_encoder("claude-sonnet-4-6")
         assert enc is not None
 
     @pytest.mark.unit

@@ -26,7 +26,7 @@ purpose: Tools and APIs available for social publisher production and runtime
 ## LLM for Caption Generation
 | Provider | Model | Usage | Cost |
 |----------|-------|-------|------|
-| Anthropic | claude-sonnet-4-20250514 | Caption + hashtag generation | ~$0.003/caption |
+| Anthropic | claude-sonnet-4-6 | Caption + hashtag generation | ~$0.003/caption |
 | OpenAI | gpt-4o-mini | Caption generation (budget) | ~$0.001/caption |
 | Ollama | llama3 | Local caption generation | Free |
 

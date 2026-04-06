@@ -70,4 +70,4 @@ python _tools/cex_crew_runner.py --plan /tmp/plan.json --output-dir /tmp/crew_ou
 ## Dependencies
 - Motor 8F plan JSON (from `cex_8f_motor.py`)
 - `archetypes/builders/` for builder ISO injection (30KB budget)
-- `anthropic` SDK (only for `--execute` mode, model: claude-sonnet-4-20250514)
+- `anthropic` SDK (only for `--execute` mode, model: claude-sonnet-4-6)

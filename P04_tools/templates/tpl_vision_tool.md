@@ -17,7 +17,7 @@ Enables agents to analyze images: screenshots, documents, diagrams, photos.
 ## Configuration
 ```yaml
 provider: [openai | anthropic | google]
-model: [gpt-4o | claude-sonnet-4-20250514 | gemini-pro-vision]
+model: [gpt-4o | claude-sonnet-4-6 | gemini-pro-vision]
 max_resolution: [low | auto | high]
 max_images_per_request: [1 | 5 | 20]
 output_format: [text | json | markdown]

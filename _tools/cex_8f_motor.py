@@ -417,12 +417,27 @@ META_BUILDERS = frozenset(["_builder-builder"])
 # Effort-Aware Dispatch (Phase 2A — Runtime Evolution)
 # ---------------------------------------------------------------------------
 
-EFFORT_TO_MODEL = {
-    "low": "claude-haiku-4-5-20251001",
-    "medium": "claude-sonnet-4-20250514",
-    "high": "claude-opus-4-20250514",
-    "max": "claude-opus-4-20250514",  # + extended thinking at runtime
-}
+def _load_effort_models() -> dict:
+    """Load effort-to-model mapping. Uses Router's nucleus_models if available."""
+    defaults = {
+        "low": "claude-haiku-4-5-20251001",
+        "medium": "claude-sonnet-4-6",
+        "high": "claude-opus-4-6",
+        "max": "claude-opus-4-6",
+    }
+    try:
+        from cex_router import load_nucleus_models
+        nm = load_nucleus_models()
+        if nm:
+            # Map effort tiers to nucleus model assignments
+            if "n02" in nm: defaults["medium"] = nm["n02"].get("model", defaults["medium"])
+            if "n03" in nm: defaults["high"] = nm["n03"].get("model", defaults["high"])
+            if "n03" in nm: defaults["max"] = nm["n03"].get("model", defaults["max"])
+    except Exception:
+        pass
+    return defaults
+
+EFFORT_TO_MODEL = _load_effort_models()
 
 EFFORT_TO_MAX_TOKENS = {
     "low": 4000,

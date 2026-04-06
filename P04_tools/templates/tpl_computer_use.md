@@ -17,7 +17,7 @@ quality: 8.8
 ## Configuration
 ```yaml
 provider: [anthropic | openai]
-model: [claude-sonnet-4-20250514 | gpt-4o]
+model: [claude-sonnet-4-6 | gpt-4o]
 viewport: { width: 1280, height: 800 }
 screenshot_interval: [before_each_action | on_change | manual]
 max_actions: [50]

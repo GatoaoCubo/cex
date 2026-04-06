@@ -173,6 +173,21 @@ def scan_system() -> dict:
     dirty = len([l for l in r.stdout.strip().split("\n") if l.strip()])
     stats["git_dirty"] = dirty
 
+    # 10. Model staleness check
+    try:
+        from cex_model_updater import check_staleness
+        stale = check_staleness()
+        stats["stale_models"] = len(stale)
+        if stale:
+            models_list = ", ".join(f"{s['nucleus']}={s['current']}" for s in stale)
+            gaps.append({
+                "type": "stale_models", "priority": "high",
+                "action": f"Update {len(stale)} stale model(s): {models_list}. "
+                          f"Run: python _tools/cex_model_updater.py --full"
+            })
+    except Exception:
+        stats["stale_models"] = -1  # updater not available
+
     return {"stats": stats, "gaps": gaps, "timestamp": datetime.datetime.now().isoformat()}
 
 

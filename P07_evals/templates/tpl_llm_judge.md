@@ -16,7 +16,7 @@ quality: 8.7
 
 ## Judge Configuration
 ```yaml
-model: [claude-sonnet-4-20250514 | gpt-4o]
+model: [claude-sonnet-4-6 | gpt-4o]
 temperature: 0.0          # Deterministic scoring
 max_tokens: 500           # Enough for scores + rationale
 cost_per_eval: ~$0.005    # Budget awareness

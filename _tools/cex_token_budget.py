@@ -8,7 +8,7 @@ Usage:
     python cex_token_budget.py --count "some text here"
     python cex_token_budget.py --count --file path/to/artifact.md
     python cex_token_budget.py --budget --max-tokens 8192
-    python cex_token_budget.py --budget --model claude-sonnet-4-20250514
+    python cex_token_budget.py --budget --model claude-sonnet-4-6
 """
 
 import argparse
@@ -22,8 +22,8 @@ from pathlib import Path
 # Model -> tiktoken encoding mapping
 MODEL_ENCODINGS = {
     # Anthropic (use cl100k_base as closest approximation)
-    "claude-sonnet-4-20250514": "cl100k_base",
-    "claude-opus-4-20250514": "cl100k_base",
+    "claude-sonnet-4-6": "cl100k_base",
+    "claude-opus-4-6": "cl100k_base",
     "claude-haiku-4-5-20251001": "cl100k_base",
     # OpenAI
     "gpt-4o": "o200k_base",
@@ -33,17 +33,18 @@ MODEL_ENCODINGS = {
 
 # Model -> max output tokens
 MODEL_MAX_TOKENS = {
-    "claude-sonnet-4-20250514": 8192,
-    "claude-opus-4-20250514": 8192,
-    "claude-haiku-4-5-20251001": 8192,
+    "claude-sonnet-4-6": 64000,
+    "claude-opus-4-6": 128000,
+    "claude-haiku-4-5-20251001": 64000,
     "gpt-4o": 16384,
-    "gpt-4": 8192,
+    "gpt-4.1": 32768,
+    "gpt-4.1-mini": 32768,
 }
 
 _encoder_cache: dict = {}
 
 
-def get_encoder(model: str = "claude-sonnet-4-20250514"):
+def get_encoder(model: str = "claude-sonnet-4-6"):
     """Get tiktoken encoder for model. Falls back to cl100k_base."""
     encoding_name = MODEL_ENCODINGS.get(model, "cl100k_base")
     if encoding_name not in _encoder_cache:
@@ -55,7 +56,7 @@ def get_encoder(model: str = "claude-sonnet-4-20250514"):
     return _encoder_cache.get(encoding_name)
 
 
-def count_tokens(text: str, model: str = "claude-sonnet-4-20250514") -> int:
+def count_tokens(text: str, model: str = "claude-sonnet-4-6") -> int:
     """Count tokens in text using tiktoken. Falls back to word-based estimate."""
     encoder = get_encoder(model)
     if encoder:
@@ -64,7 +65,7 @@ def count_tokens(text: str, model: str = "claude-sonnet-4-20250514") -> int:
     return int(len(text.split()) * 1.3)
 
 
-def count_tokens_by_section(sections: dict[str, str], model: str = "claude-sonnet-4-20250514") -> dict[str, int]:
+def count_tokens_by_section(sections: dict[str, str], model: str = "claude-sonnet-4-6") -> dict[str, int]:
     """Count tokens for each named section."""
     return {name: count_tokens(text, model) for name, text in sections.items() if text}
 
@@ -93,7 +94,7 @@ SECTION_BUDGET = {
 def allocate_budget(
     sections: dict[str, str],
     max_tokens: int = 8192,
-    model: str = "claude-sonnet-4-20250514",
+    model: str = "claude-sonnet-4-6",
     reserve_output: int = 4096,
 ) -> dict[str, dict]:
     """Allocate token budget across prompt sections.
@@ -175,7 +176,7 @@ def allocate_budget(
     return result
 
 
-def truncate_to_tokens(text: str, max_tokens: int, model: str = "claude-sonnet-4-20250514") -> str:
+def truncate_to_tokens(text: str, max_tokens: int, model: str = "claude-sonnet-4-6") -> str:
     """Truncate text to fit within max_tokens, preserving paragraph boundaries."""
     encoder = get_encoder(model)
     if not encoder:
@@ -310,7 +311,7 @@ def check_token_budget(
 def budget_aware_produce(
     sections: list[dict],
     max_tokens: int,
-    model: str = "claude-sonnet-4-20250514",
+    model: str = "claude-sonnet-4-6",
 ) -> tuple[list[str], BudgetDecision]:
     """Produce artifact sections with budget governance.
 
@@ -364,7 +365,7 @@ def budget_aware_produce(
 # ---------------------------------------------------------------------------
 
 
-def analyze_prompt(prompt: str, model: str = "claude-sonnet-4-20250514") -> dict:
+def analyze_prompt(prompt: str, model: str = "claude-sonnet-4-6") -> dict:
     """Analyze a composed prompt's token distribution by section."""
     # Split by section headers (# IDENTITY, # CONSTRAINTS, etc.)
     import re
@@ -408,7 +409,7 @@ def main():
     parser.add_argument("--file", "-f", help="Count tokens in a file")
     parser.add_argument("--budget", action="store_true", help="Show budget allocation for a model")
     parser.add_argument("--analyze", help="Analyze a prompt file's token distribution")
-    parser.add_argument("--model", "-m", default="claude-sonnet-4-20250514", help="Model for counting")
+    parser.add_argument("--model", "-m", default="claude-sonnet-4-6", help="Model for counting")
     parser.add_argument("--max-tokens", type=int, default=8192, help="Max input tokens")
     args = parser.parse_args()
 

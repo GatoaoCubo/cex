@@ -19,7 +19,7 @@ version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
 author: "builder_agent"
-model_name: "claude-sonnet-4-20250514"
+model_name: "claude-sonnet-4-6"
 provider: "anthropic"
 model_type: "text-generation"
 status: "active"
@@ -64,7 +64,7 @@ model_card NAO EH: boot_config, agent, benchmark.
 ## Specifications
 | Spec | Value | Source |
 |------|-------|--------|
-| Model | claude-sonnet-4-20250514 | https://docs.anthropic.com/en/docs/about-claude/models |
+| Model | claude-sonnet-4-6 | https://docs.anthropic.com/en/docs/about-claude/models |
 | Context | 200K tokens | https://docs.anthropic.com/en/docs/about-claude/models |
 | Max Output | 16K tokens | https://docs.anthropic.com/en/docs/about-claude/models |
 | Cutoff | Apr 2025 | https://docs.anthropic.com/en/docs/about-claude/models |

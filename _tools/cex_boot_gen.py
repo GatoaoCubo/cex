@@ -60,7 +60,7 @@ NUCLEUS_META = {
 
 # CLI-specific boot templates
 def build_claude_cmd(nucleus: str, cfg: dict, meta: dict) -> str:
-    model = cfg.get("model", "claude-sonnet-4-20250514")
+    model = cfg.get("model", "claude-sonnet-4-6")
     flags = cfg.get("flags", "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome")
     mcps = cfg.get("mcps", "")
     settings = cfg.get("settings", "")

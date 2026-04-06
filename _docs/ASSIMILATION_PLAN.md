@@ -246,7 +246,7 @@ TAREFAS:
 **Critério de aceite:**
 ```python
 from cex_sdk.models.providers.anthropic import Claude
-model = Claude(id="claude-sonnet-4-20250514")
+model = Claude(id="claude-sonnet-4-6")
 response = model.invoke([Message(role="user", content="Hello")])
 assert response.content  # Funciona sem subprocess
 ```

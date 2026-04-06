@@ -15,7 +15,7 @@ Usage:
     from cex_router import get_router
     router = get_router()
     route = router.resolve_nucleus("N03_builder")
-    # → {"provider": "anthropic", "model": "claude-opus-4-20250514", "api_key": "sk-..."}
+    # → {"provider": "anthropic", "model": "claude-opus-4-6", "api_key": "sk-..."}
 
 CLI:
     python cex_router.py --status
@@ -38,6 +38,7 @@ logger = logging.getLogger(__name__)
 
 CEX_ROOT = Path(__file__).resolve().parent.parent
 CONFIG_PATH = CEX_ROOT / ".cex" / "router_config.yaml"
+NUCLEUS_MODELS_PATH = CEX_ROOT / ".cex" / "config" / "nucleus_models.yaml"
 
 
 @dataclass
@@ -273,6 +274,72 @@ class CexRouter:
             }
             for p in self.providers.values()
         ]
+
+
+# ---------------------------------------------------------------------------
+# Nucleus Models — Single source of truth
+# ---------------------------------------------------------------------------
+
+_nucleus_models: Optional[dict] = None
+
+
+def load_nucleus_models(path: Path = NUCLEUS_MODELS_PATH) -> dict:
+    """Load nucleus_models.yaml — the single source of truth for model assignments.
+
+    Returns dict keyed by nucleus id (n01..n07) with cli, model, flags, fallback, etc.
+    Cached after first load.
+    """
+    global _nucleus_models
+    if _nucleus_models is not None:
+        return _nucleus_models
+
+    if not path.exists():
+        logger.warning(f"nucleus_models.yaml not found: {path}")
+        _nucleus_models = {}
+        return _nucleus_models
+
+    try:
+        raw = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+        # Filter only nucleus entries (n01..n07)
+        _nucleus_models = {
+            k: v for k, v in raw.items()
+            if isinstance(v, dict) and k.startswith("n0")
+        }
+        logger.debug(f"Loaded nucleus models: {list(_nucleus_models.keys())}")
+    except Exception as e:
+        logger.warning(f"Failed to load nucleus_models.yaml: {e}")
+        _nucleus_models = {}
+
+    return _nucleus_models
+
+
+def resolve_model_for(nucleus: str, fallback: str = "claude-sonnet-4-6") -> str:
+    """Resolve the primary model for a nucleus.
+
+    Args:
+        nucleus: Nucleus id (n01..n07, N01, N03_builder, etc.)
+        fallback: Default model if resolution fails.
+
+    Returns:
+        Model string (e.g. 'claude-opus-4-6', 'gemini-2.5-pro').
+    """
+    models = load_nucleus_models()
+    if not models:
+        return fallback
+
+    # Normalize: "N03_builder" -> "n03", "N01" -> "n01"
+    nuc_key = nucleus.lower()[:3]
+    if nuc_key not in models:
+        # Try full lowercase match
+        nuc_key = nucleus.lower().split("_")[0]
+
+    entry = models.get(nuc_key, {})
+    return entry.get("model", fallback)
+
+
+def resolve_default_model(fallback: str = "claude-sonnet-4-6") -> str:
+    """Resolve a sensible default model (N03 primary, as it's the builder nucleus)."""
+    return resolve_model_for("n03", fallback)
 
 
 # ---------------------------------------------------------------------------
