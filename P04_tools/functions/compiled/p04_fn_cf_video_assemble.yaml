@@ -1,0 +1,70 @@
+id: p04_fn_cf_video_assemble
+kind: function_def
+pillar: P04
+version: 1.0.0
+created: 2026-04-06
+updated: 2026-04-06
+author: builder_agent
+name: assemble_video
+description: Assemble a video from clips, audio narration, and subtitle tracks using FFmpeg. Call when the Content Factory
+  has generated all component assets (video clips, TTS audio, SRT captions) and needs them merged into a final deliverable.
+parameters: ''
+returns: 'Type: object with `output_path`, `duration_seconds`, `file_size_bytes`, `resolution`.'
+provider_compat:
+- openai
+- anthropic
+- gemini
+strict: false
+domain: content_factory
+quality: null
+tags:
+- function_def
+- ffmpeg
+- video
+- assemble
+- montage
+- content_factory
+tldr: LLM-callable function to assemble video from clips + audio + subtitles via FFmpeg
+examples: ''
+error_types:
+- file_not_found
+- ffmpeg_not_installed
+- codec_error
+- incompatible_resolution
+overview: Assembles a final video from component assets using FFmpeg. The LLM calls this as the final step in the Content
+  Factory video pipeline — after script generation, TTS narration, and clip creation. Concatenates video clips, mixes narration
+  with optional background music, and burns in subtitles.
+video_tracks: 'Type: array of objects | Required: yes
+
+  Ordered list of video clips. Each object has `path` (required), optional `start_time` and `duration` for trimming. Clips
+  are concatenated in order.'
+audio_track: 'Type: string | Required: no
+
+  Path to narration audio (from ElevenLabs TTS). Mixed as primary audio. If omitted, video clips'' original audio is kept.'
+subtitle_track: 'Type: string | Required: no
+
+  Path to SRT or VTT caption file. Burned into the video for platform compatibility (no separate track dependence).'
+output_path: 'Type: string | Required: yes
+
+  Destination for the final video file.'
+output_format: 'Type: string (enum) | Required: no | Default: mp4
+
+  Container format. `mp4` (H.264) for universal compatibility, `webm` (VP9) for web, `mov` for Apple ecosystems.'
+resolution: 'Type: string (enum) | Required: no | Default: 1920x1080
+
+  Output resolution. `1080x1920` for vertical (Reels/TikTok), `1080x1080` for square (Instagram feed).'
+background_music: 'Type: object | Required: no
+
+  Background music mixed under narration. `volume` 0.05-0.15 recommended for narration clarity.'
+subtitle_style: 'Type: string | Required: no
+
+  ASS style string for burned-in captions. Controls font, size, position, outline.'
+cli_command_generated: "ffmpeg -i clips/intro.mp4 -i clips/main.mp4 -i audio/narration.mp3 \\\n  -filter_complex \"[0:v][1:v]concat=n=2:v=1:a=0[v];[2:a]volume=1.0[a]\"\
+  \ \\\n  -map \"[v]\" -map \"[a]\" -vf \"subtitles=subs/captions.srt\" \\\n  -s 1920x1080 -c:v libx264 -preset medium output/final.mp4"
+example_1_course_lesson_with_narration_and_subtitles: "{\n  \"video_tracks\": [{\"path\": \"clips/lesson_intro.mp4\", \"duration\"\
+  : \"00:00:05\"}, {\"path\": \"clips/screencast.mp4\"}, {\"path\": \"clips/outro.mp4\"}],\n  \"audio_track\": \"audio/lesson_narration.mp3\"\
+  ,\n  \"subtitle_track\": \"subs/lesson.srt\",\n  \"output_path\": \"output/lesson_03.mp4\",\n  \"resolution\": \"1920x1080\"\
+  \n}"
+example_2_vertical_social_clip: "{\n  \"video_tracks\": [{\"path\": \"clips/hook.mp4\"}, {\"path\": \"clips/demo.mp4\"}],\n\
+  \  \"audio_track\": \"audio/hook_narration.mp3\",\n  \"output_path\": \"output/reel.mp4\",\n  \"output_format\": \"mp4\"\
+  ,\n  \"resolution\": \"1080x1920\",\n  \"background_music\": {\"path\": \"music/upbeat.mp3\", \"volume\": 0.08}\n}"

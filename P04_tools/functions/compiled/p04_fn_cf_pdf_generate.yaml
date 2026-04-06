@@ -1,0 +1,65 @@
+id: p04_fn_cf_pdf_generate
+kind: function_def
+pillar: P04
+version: 1.0.0
+created: 2026-04-06
+updated: 2026-04-06
+author: builder_agent
+name: generate_pdf
+description: Generate a styled PDF from Markdown or HTML input using Typst, Pandoc, or WeasyPrint. Call when the Content Factory
+  needs formatted PDF output — handouts, worksheets, reports, or printable materials.
+parameters: ''
+returns: 'Type: object with `output_path`, `page_count`, `file_size_bytes`, `engine_used`.'
+provider_compat:
+- openai
+- anthropic
+- gemini
+strict: false
+domain: content_factory
+quality: null
+tags:
+- function_def
+- pdf
+- typst
+- pandoc
+- generate
+- content_factory
+tldr: LLM-callable function to generate styled PDFs from Markdown/HTML via Typst, Pandoc, or WeasyPrint
+examples: ''
+error_types:
+- input_not_found
+- template_not_found
+- engine_not_installed
+- compilation_error
+overview: 'Generates a styled PDF from Markdown, HTML, or Typst source files. The LLM calls this when the Content Factory
+  pipeline needs printable output — ebook chapters, worksheets, handouts, or reports. Supports three engines with different
+  strengths: Typst (fast, modern), Pandoc (flexible, LaTeX), WeasyPrint (CSS-styled HTML).'
+input_path: 'Type: string | Required: yes
+
+  Path to the source file. Supported: `.md` (Markdown), `.html`, `.typ` (Typst). Relative to working directory.'
+engine: 'Type: string (enum) | Required: yes
+
+  - `typst`: Fast compilation, modern syntax, best for structured documents
+
+  - `pandoc`: Maximum format flexibility, LaTeX backend, best for academic/complex layouts
+
+  - `weasyprint`: CSS-styled HTML to PDF, best for web-like designs'
+output_path: 'Type: string | Required: yes
+
+  Destination path for the PDF. Parent directory must exist.'
+template: 'Type: string | Required: no
+
+  Path to a style template. Engine-specific: `.typ` for Typst, `.latex` for Pandoc, `.css` for WeasyPrint.'
+variables: 'Type: object | Required: no
+
+  Template variables injected at compile time. Common: `title`, `author`, `date`, `brand_name`.'
+page_size: 'Type: string (enum) | Required: no | Default: a4
+
+  Paper size. `custom` requires width/height in the template.'
+toc: 'Type: boolean | Required: no | Default: false
+
+  Generate table of contents from document headers.'
+example_1_ebook_chapter_via_typst: '{"input_path": "chapters/ch04_vectors.md", "engine": "typst", "output_path": "output/ch04.pdf",
+  "template": "templates/ebook.typ", "variables": {"title": "Storing Embeddings", "author": "DataCraft"}, "toc": true}'
+example_2_worksheet_via_weasyprint: '{"input_path": "worksheets/docker_basics.html", "engine": "weasyprint", "output_path":
+  "output/worksheet.pdf", "template": "templates/worksheet.css", "page_size": "a4"}'

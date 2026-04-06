@@ -1,0 +1,73 @@
+id: p04_fn_cf_ebook_compile
+kind: function_def
+pillar: P04
+version: 1.0.0
+created: 2026-04-06
+updated: 2026-04-06
+author: builder_agent
+name: compile_ebook
+description: Compile an ebook from Markdown chapters using Pandoc. Call when the Content Factory has generated all chapter
+  files and needs them merged into a single EPUB or PDF with cover, TOC, and metadata.
+parameters: ''
+returns: 'Type: object with `output_path`, `page_count`, `chapter_count`, `file_size_bytes`, `word_count`.'
+provider_compat:
+- openai
+- anthropic
+- gemini
+strict: false
+domain: content_factory
+quality: null
+tags:
+- function_def
+- pandoc
+- ebook
+- epub
+- pdf
+- compile
+- content_factory
+tldr: LLM-callable function to compile Markdown chapters into EPUB/PDF ebook via Pandoc
+examples: ''
+error_types:
+- chapter_not_found
+- pandoc_not_installed
+- invalid_metadata
+- cover_not_found
+- compilation_error
+overview: Compiles multiple Markdown chapter files into a single ebook using Pandoc. The LLM calls this as the final step
+  in the Content Factory ebook pipeline — after all chapters have been generated via `p03_pt_cf_ebook_chapter`. Handles cover
+  art, table of contents, metadata, and styling.
+chapters: 'Type: array of strings | Required: yes
+
+  Ordered list of chapter file paths. Each must be a valid Markdown file. Compiled in array order.'
+output_path: 'Type: string | Required: yes
+
+  Destination for the compiled ebook.'
+format: 'Type: string (enum) | Required: yes
+
+  - `epub`: Standard ebook format — Kindle, Apple Books, Kobo
+
+  - `pdf`: Print-ready via LaTeX backend — handouts, physical printing
+
+  - `html`: Single-page web version — online reading'
+metadata: 'Type: object | Required: yes
+
+  Book metadata. `title` and `author` required. Embedded in EPUB metadata and PDF title page.'
+cover_image: 'Type: string | Required: no
+
+  Path to cover image (JPG or PNG). Recommended 1600x2400px for EPUB stores.'
+stylesheet: 'Type: string | Required: no
+
+  CSS file for EPUB/HTML styling. Controls typography, margins, colors.'
+toc_toc_depth: 'Type: boolean / integer | Required: no | Default: true / 2
+
+  Table of contents generation. Depth 1 = chapter titles only, 2 = + sections, 3 = + subsections.'
+cli_command_generated: "pandoc ch01.md ch02.md ch03.md \\\n  --metadata title=\"RAG Guide\" --metadata author=\"DataCraft\"\
+  \ \\\n  --epub-cover-image=covers/rag_cover.jpg \\\n  --css=styles/ebook.css \\\n  --toc --toc-depth=2 \\\n  -o output/book.epub"
+example_1_full_epub_with_cover_and_styling: "{\n  \"chapters\": [\"chapters/ch01_intro.md\", \"chapters/ch02_embeddings.md\"\
+  , \"chapters/ch03_retrieval.md\", \"chapters/ch04_vectors.md\", \"chapters/ch05_production.md\"],\n  \"output_path\": \"\
+  output/rag_guide.epub\",\n  \"format\": \"epub\",\n  \"metadata\": {\"title\": \"Building RAG Systems\", \"subtitle\": \"\
+  A Practical Guide\", \"author\": \"DataCraft\", \"language\": \"en-US\", \"date\": \"2026\"},\n  \"cover_image\": \"covers/rag_cover.jpg\"\
+  ,\n  \"stylesheet\": \"styles/ebook.css\",\n  \"toc\": true,\n  \"toc_depth\": 2\n}"
+example_2_pdf_for_print: "{\n  \"chapters\": [\"chapters/ch01.md\", \"chapters/ch02.md\"],\n  \"output_path\": \"output/preview.pdf\"\
+  ,\n  \"format\": \"pdf\",\n  \"metadata\": {\"title\": \"Preview Chapters\", \"author\": \"DataCraft\"},\n  \"toc\": false\n\
+  }"

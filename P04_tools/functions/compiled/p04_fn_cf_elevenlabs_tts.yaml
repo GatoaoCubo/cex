@@ -1,0 +1,62 @@
+id: p04_fn_cf_elevenlabs_tts
+kind: function_def
+pillar: P04
+version: 1.0.0
+created: 2026-04-06
+updated: 2026-04-06
+author: builder_agent
+name: elevenlabs_text_to_speech
+description: Generate narration audio from text via ElevenLabs API. Call when the Content Factory needs voiceover for videos,
+  lessons, or podcasts. Supports PT-BR and EN voices with emotion control.
+parameters: ''
+returns: 'Type: object with `audio_url`, `duration_seconds`, `characters_used`, `format`.'
+provider_compat:
+- openai
+- anthropic
+- gemini
+strict: false
+domain: content_factory
+quality: null
+tags:
+- function_def
+- elevenlabs
+- tts
+- audio
+- narration
+- content_factory
+tldr: LLM-callable function to generate voiceover audio via ElevenLabs TTS — PT-BR/EN with emotion control
+examples: ''
+error_types:
+- text_too_long
+- voice_not_found
+- quota_exceeded
+- invalid_model
+- rate_limited
+overview: Generates natural-sounding narration audio from text using ElevenLabs API. The LLM calls this when the Content Factory
+  pipeline needs voiceover for video scripts, lesson narrations, or podcast intros. Supports multilingual output (PT-BR primary)
+  with fine-grained control over voice expressiveness.
+text: 'Type: string | Required: yes
+
+  The narration text. Max 5000 characters. Supports SSML: `<break time="500ms"/>` for pauses, `<emphasis>` for stress. Split
+  longer scripts into multiple calls.'
+voice_id: 'Type: string | Required: yes
+
+  ElevenLabs voice identifier. Common IDs: `pNInz6obpgDQGcFmaJgB` (Adam), `21m00Tcm4TlvDq8ikWAM` (Rachel). Use list_voices
+  endpoint to discover all.'
+language: 'Type: string (enum) | Required: no | Default: pt-BR
+
+  Target language. Model `eleven_multilingual_v2` required for non-English.'
+model_id: 'Type: string (enum) | Required: no | Default: eleven_multilingual_v2
+
+  TTS model. `eleven_multilingual_v2` for multi-language, `eleven_turbo_v2_5` for fast English.'
+stability_similarity_boost_style: 'Type: number (0.0-1.0) | Required: no
+
+  Voice control knobs. Recommended starting point: stability=0.5, similarity_boost=0.75, style=0.3.'
+output_format: 'Type: string (enum) | Required: no | Default: mp3_44100_128
+
+  Audio format. Use `pcm_44100` for video assembly (FFmpeg), `mp3_44100_192` for standalone distribution.'
+example_1_pt_br_lesson_narration: '{"text": "Neste modulo, voce vai aprender a construir agentes autonomos com ferramentas
+  e memoria.", "voice_id": "pNInz6obpgDQGcFmaJgB", "language": "pt-BR", "stability": 0.6, "similarity_boost": 0.8}'
+example_2_english_video_hook_with_dramatic_delivery: '{"text": "You''re losing 2 hours of focus every morning. And you don''t
+  even know it.", "voice_id": "21m00Tcm4TlvDq8ikWAM", "language": "en-US", "model_id": "eleven_turbo_v2_5", "style": 0.7,
+  "output_format": "pcm_44100"}'
